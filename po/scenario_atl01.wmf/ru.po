@@ -11,15 +11,15 @@
 # Yuriy Sokolov <lention@mail.ru>, 2015
 # Владимир Куряев <istercul@gmail.com>, 2016
 # Денис Шабанов <inactive+Dodolphin@transifex.com>, 2016
-# Олег Шевчеко <olegrock@gmail.com>, 2017
+# Олег Шевченко <olegrock@gmail.com>, 2017
 # Федор <Lunar-energy@ya.ru>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-02-14 20:31+0000\n"
-"PO-Revision-Date: 2017-02-15 05:18+0000\n"
-"Last-Translator: Олег Шевчеко <olegrock@gmail.com>\n"
+"POT-Creation-Date: 2017-02-19 19:34+0000\n"
+"PO-Revision-Date: 2017-02-21 08:34+0000\n"
+"Last-Translator: Олег Шевченко <olegrock@gmail.com>\n"
 "Language-Team: Russian (http://www.transifex.com/widelands/widelands/language/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -53,7 +53,7 @@ msgstr "Добывайте строительные материалы"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:35
 msgid "Supply basic building material for your economy:"
-msgstr "Организуйте производство основных строительных материалов для вашей экономики"
+msgstr "Организуйте производство основных строительных материалов:"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:36
 msgid "Build a quarry"
@@ -122,7 +122,7 @@ msgstr "Постройте ферму и козельцовую ферму"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:61
 msgid "Build a mill to make cornmeal and blackroot flour"
-msgstr "Постройте мельницу для производства кукурузной муки и козельцовой муки"
+msgstr "Постройте мельницу для производства кукурузной и козельцовой муки"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:62
 msgid "Build a well"
@@ -233,9 +233,9 @@ msgstr "Наймите новых солдат"
 msgid ""
 "Now that weapons are being forged, new soldiers can be recruited. For this, "
 "we need to deliver light tridents and tabards to the barracks. Recruits will"
-" arrive from the warehouse and receive one each and some basic training to "
-"become a soldier."
-msgstr "Теперь, когда оружие выковано, можно набрить новых солдат. Для этого нам нужно доставить легкие трезубцы и накидки в казармы. Новобранцы будут прибывать со склада в казармы, где им вручат и то, и другое - так они получат некоторую базовую подготовку и станут солдатами."
+" arrive from the warehouse and receive one of each and some basic training "
+"to become a soldier."
+msgstr "Теперь, когда оружие выковано, можно набрать новых солдат. Для этого нам нужно доставить легкие трезубцы и накидки в казармы. Новобранцы будут прибывать со склада в казармы, где им вручат и то, и другое - так они получат некоторую базовую подготовку и станут солдатами."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:109
 msgid "Build training sites for soldiers"
@@ -690,8 +690,8 @@ msgstr "Джандлина пишет письмо"
 msgid ""
 "I have received word that our mining industry started working. Now that we "
 "are forging weapons, I will send a letter to Sidolus informing him that it’s"
-" time to build a barracks and start training soldiers."
-msgstr "Я получила сообщение, что наша горнодобывающая промышленность начала работать. Теперь, когда мы можем ковать оружие, я направлю письмо Сидолюсу, информирующее его о том, что настало время построить казармы и начать тренировку солдат."
+" time to build a barracks and start recruiting soldiers."
+msgstr "Я получила сообщение, что наша горнодобывающая промышленность начала работать. Теперь, когда мы можем ковать оружие, я направлю письмо Сидолюсу, информирующее его о том, что настало время построить казармы и начать вербовку солдат."
 
 #. TRANSLATORS: Jundlina
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:330

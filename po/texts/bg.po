@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-01-28 21:57+0000\n"
-"PO-Revision-Date: 2017-01-30 07:39+0000\n"
+"POT-Creation-Date: 2017-02-19 19:34+0000\n"
+"PO-Revision-Date: 2017-02-20 07:18+0000\n"
 "Last-Translator: Любомир Василев\n"
 "Language-Team: Bulgarian (http://www.transifex.com/widelands/widelands/language/bg/)\n"
 "MIME-Version: 1.0\n"
@@ -505,8 +505,8 @@ msgstr "Наглеждайте рибарите си. След като рибн
 #: ../../data/txts/tips/barbarians.lua:8
 msgid ""
 "Always build a ranger’s and a gamekeeper’s hut, so you will not run out of "
-"logs."
-msgstr "Винаги стройте лесничейска и дивечовъдска хижи, за да не останете без дървени трупи."
+"logs or game."
+msgstr "Винаги стройте лесничейска и дивечовъдска хижи, за да не останете без дървени трупи или дивеч."
 
 #: ../../data/txts/tips/editor.lua:4
 msgid ""

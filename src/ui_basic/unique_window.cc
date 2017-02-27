@@ -36,6 +36,10 @@ UniqueWindow IMPLEMENTATION
 void UniqueWindow::Registry::create() {
 	if (!window) {
 		open_window();
+	} else {
+		if (window->is_minimal())
+			window->restore();
+		window->move_to_top();
 	}
 }
 

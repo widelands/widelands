@@ -8,14 +8,14 @@
 # GunChleoc, 2016
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
 # Yuriy Sokolov <lention@mail.ru>, 2015
-# Олег Шевчеко <olegrock@gmail.com>, 2017
+# Олег Шевченко <olegrock@gmail.com>, 2017
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-02-11 11:38+0000\n"
-"PO-Revision-Date: 2017-02-12 14:33+0000\n"
-"Last-Translator: Олег Шевчеко <olegrock@gmail.com>\n"
+"POT-Creation-Date: 2017-02-19 19:34+0000\n"
+"PO-Revision-Date: 2017-02-20 08:46+0000\n"
+"Last-Translator: Олег Шевченко <olegrock@gmail.com>\n"
 "Language-Team: Russian (http://www.transifex.com/widelands/widelands/language/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -95,7 +95,7 @@ msgstr[3] "%i артефактов"
 #. TRANSLATORS: e.g. Team 1 owns 5 artifacts.
 #: ../../data/scripting/win_conditions/artifacts.lua:156
 msgid "%1$s owns %2$s."
-msgstr "%1$s владеют %2$s."
+msgstr "%1$s владеет %2$s."
 
 #. TRANSLATORS: %1$i is the team's number; %2$s is a list of team members
 #. (e.g. "Steve, Robert, David"), %3$s is something like "x artifact(s)"
@@ -111,7 +111,7 @@ msgstr "Коллекционер"
 msgid ""
 "You get points for precious wares in your warehouses. The player with the "
 "highest number of wares at the end of 4 hours wins the game."
-msgstr "Вы получаете очки за ценные товары, находящиеся на ваших складах. Набравший большее количество очков по прошествии 4 часов игрок побеждает."
+msgstr "Вы получаете очки за ценные товары, находящиеся на ваших складах. Игрок, набравший наибольшее количество товаров, по прошествии 4 часов, побеждает."
 
 #: ../../data/scripting/win_conditions/collectors.lua:25
 msgid "Points"
@@ -120,12 +120,12 @@ msgstr "Очки"
 #: ../../data/scripting/win_conditions/collectors.lua:111
 #, lua-format
 msgid "Status for %s"
-msgstr "Статус %s"
+msgstr "Статус для %s"
 
 #. TRANSLATORS: For example: 'gold (3 P) x 4 = 12 P', P meaning 'Points'
 #: ../../data/scripting/win_conditions/collectors.lua:124
 msgid "%1$s (%2$i P) x %3$i = %4$i P"
-msgstr "%1$s (%2$i P) x %3$i = %4$i P"
+msgstr "%1$s (%2$i оч.) x %3$i = %4$i оч."
 
 #: ../../data/scripting/win_conditions/collectors.lua:128
 #, lua-format
@@ -194,7 +194,7 @@ msgstr "Тиран"
 
 #: ../../data/scripting/win_conditions/defeat_all.lua:17
 msgid "The tribe or team that can defeat all others wins the game!"
-msgstr "Выигрывает команда или племя разгромившие всех остальных."
+msgstr "Выигрывает команда или племя, разгромившие всех остальных."
 
 #: ../../data/scripting/win_conditions/endless_game.lua:15
 msgid "Endless Game"
@@ -202,7 +202,7 @@ msgstr "Свободная игра"
 
 #: ../../data/scripting/win_conditions/endless_game.lua:17
 msgid "This is an endless game without rules."
-msgstr "Игра без правил и ограничений."
+msgstr "Это бесконечная игра без правил и ограничений."
 
 #: ../../data/scripting/win_conditions/endless_game_fogless.lua:15
 msgid "Endless Game (no fog)"
@@ -270,7 +270,7 @@ msgid ""
 "winner will be the player or the team that is able to keep that area for at "
 "least 20 minutes, or the one with the most territory after 4 hours, "
 "whichever comes first."
-msgstr "Каждый игрок или команда пытается захватить более половины карты. Победителем станет тот, кому удастся удержать большую часть карты в течение 20 минут, или тот кто завладеет наибольшей территорией по истечении 4-х часов игры."
+msgstr "Каждый игрок или команда пытается захватить более половины карты. Победителем станет тот, кому удастся удержать большую часть карты в течение 20 минут, или тот кто владеет наибольшей территорией по истечении 4-х часов игры."
 
 #: ../../data/scripting/win_conditions/territorial_time.lua:29
 msgid "%1$s has %2$3.0f%% of the land (%3$i of %4$i)."
@@ -333,7 +333,7 @@ msgstr "Вы проиграли"
 
 #: ../../data/scripting/win_conditions/win_condition_texts.lua:20
 msgid "You’ve lost this game!"
-msgstr "Вы проигравший!"
+msgstr "Вы проиграли в этой игре!"
 
 #: ../../data/scripting/win_conditions/win_condition_texts.lua:24
 msgid "Status"
@@ -353,11 +353,11 @@ msgid ""
 "As wood gnome you like big forests, so your task is to have more trees on "
 "your territory than any other player. The game will end after 4 hours of "
 "playing. The one with the most trees at that point will win the game."
-msgstr "Вы — лесной гном, и обожаете большие леса. Поэтому, ваша цель — превзойти соперников по количеству деревьев, произрастающих на вашей земле. Игра закончится через 4 часа. Игрок, набравший к этому моменту наибольшее количество деревьев, выигрывает."
+msgstr "Вы, как лесной гном — обожаете большие леса, поэтому ваша задача — иметь количество деревьев на вашей земле, больше чем у вашего соперника. Игра закончится через 4 часа. Побеждает игрок, набравший к этому моменту наибольшее количество деревьев."
 
 #: ../../data/scripting/win_conditions/wood_gnome.lua:23
 msgid "Trees owned"
-msgstr "Собственник деревьев"
+msgstr "Принадлежит деревьев"
 
 #: ../../data/scripting/win_conditions/wood_gnome.lua:97
 #: ../../data/scripting/win_conditions/wood_gnome.lua:149

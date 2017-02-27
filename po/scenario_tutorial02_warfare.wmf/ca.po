@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-01-21 21:10+0000\n"
-"PO-Revision-Date: 2017-01-28 12:55+0000\n"
+"POT-Creation-Date: 2017-02-19 19:34+0000\n"
+"PO-Revision-Date: 2017-02-19 23:36+0000\n"
 "Last-Translator: Juanjo\n"
 "Language-Team: Catalan (http://www.transifex.com/widelands/widelands/language/ca/)\n"
 "MIME-Version: 1.0\n"
@@ -420,11 +420,11 @@ msgstr "Desmantelleu la guarda sentinella del nord-oest, al costat de la caserna
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:179
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:191
 msgid "Enhance Your Fortress"
-msgstr "Milloreu la fortalesa"
+msgstr "Amplieu la fortalesa"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:181
 msgid "Enhancing Buildings"
-msgstr "Millorant els edificis"
+msgstr "Ampliant els edificis"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:182
 msgid ""
@@ -444,7 +444,7 @@ msgid ""
 "Citadels can’t be built directly. Instead, you’ll have to construct a "
 "fortress first and then enhance it to a citadel. To do so, click on the "
 "fortress, then choose the ‘Enhance to Citadel’ button."
-msgstr "Les ciutadelles no es poden construir directament: s'ha de construir primer una fortalesa i després millorar-la a ciutadella. Per fer-ho, cliqueu la fortalesa i després escolliu el botó «Millora a ciutadella»."
+msgstr "Les ciutadelles no es poden construir directament: s'ha de construir primer una fortalesa i després ampliar-la a ciutadella. Per fer-ho, cliqueu la fortalesa i després escolliu el botó «Amplia a ciutadella»."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:185
 msgid ""
@@ -455,15 +455,15 @@ msgstr "Els vostres soldats abandonaran la fortalesa mentre es realitza l'obra. 
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:186
 msgid "Enhance your fortress to a citadel now."
-msgstr "Ara, milloreu la fortalesa a ciutadella."
+msgstr "Ara, amplieu la fortalesa a ciutadella."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:189
 msgid "Enhance your fortress to a citadel"
-msgstr "Milloreu la fortalesa a ciutadella."
+msgstr "Amplieu la fortalesa a ciutadella."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:193
 msgid "Enhance your fortress to a mighty citadel."
-msgstr "Milloreu la fortalesa a una imponent ciutadella."
+msgstr "Amplieu la fortalesa a una ciutadella imponent."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:194
 msgid ""
@@ -554,7 +554,7 @@ msgstr "Ja esteu preparats per jugar les campanyes. T'ensenyaran les economies d
 msgid "“%s”"
 msgstr "“%s”"
 
-#: ../../data/scripting/format_scenario.lua:96
+#: ../../data/scripting/format_scenario.lua:84
 msgid "New Objective"
 msgid_plural "New Objectives"
 msgstr[0] "Objectiu"

@@ -14,8 +14,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-02-14 20:31+0000\n"
-"PO-Revision-Date: 2017-02-15 08:19+0000\n"
+"POT-Creation-Date: 2017-02-19 19:34+0000\n"
+"PO-Revision-Date: 2017-02-20 08:57+0000\n"
 "Last-Translator: Elisabeth Jäger\n"
 "Language-Team: German (http://www.transifex.com/widelands/widelands/language/de/)\n"
 "MIME-Version: 1.0\n"
@@ -511,8 +511,8 @@ msgstr "Beobachte deine Fischer. Wenn die Fischbestände schwinden, werden die F
 #: ../../data/txts/tips/barbarians.lua:8
 msgid ""
 "Always build a ranger’s and a gamekeeper’s hut, so you will not run out of "
-"logs."
-msgstr "Baue immer eine Förster- und eine Wildhüterhütte, damit du nie ohne Holz und Nahrung da stehst."
+"logs or game."
+msgstr "Baue immer eine Förster- und eine Wildhüterhütte, damit du nie ohne Holz und Fleisch da stehst."
 
 #: ../../data/txts/tips/editor.lua:4
 msgid ""

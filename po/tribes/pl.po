@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-02-14 20:31+0000\n"
-"PO-Revision-Date: 2017-02-14 22:54+0000\n"
+"POT-Creation-Date: 2017-02-19 19:34+0000\n"
+"PO-Revision-Date: 2017-02-19 21:51+0000\n"
 "Last-Translator: Wesmania <ikk_pl@yahoo.co.uk>\n"
 "Language-Team: Polish (http://www.transifex.com/widelands/widelands/language/pl/)\n"
 "MIME-Version: 1.0\n"
@@ -481,8 +481,7 @@ msgstr "Piekarnia"
 
 #. TRANSLATORS: Completed/Skipped/Did not start baking bread because ...
 #: ../../data/tribes/buildings/productionsites/atlanteans/bakery/init.lua:55
-#: ../../data/tribes/buildings/productionsites/barbarians/bakery/init.lua:58
-#: ../../data/tribes/buildings/productionsites/empire/bakery/init.lua:58
+msgctxt "atlanteans_building"
 msgid "baking bread"
 msgstr "pieczenie chleba"
 
@@ -494,8 +493,7 @@ msgstr "Koszary"
 
 #. TRANSLATORS: Completed/Skipped/Did not start recruiting soldier because ...
 #: ../../data/tribes/buildings/productionsites/atlanteans/barracks/init.lua:58
-#: ../../data/tribes/buildings/productionsites/barbarians/barracks/init.lua:56
-#: ../../data/tribes/buildings/productionsites/empire/barracks/init.lua:59
+msgctxt "atlanteans_building"
 msgid "recruiting soldier"
 msgstr "zaciąg żołnierza"
 
@@ -786,6 +784,7 @@ msgstr "Stadnina"
 
 #. TRANSLATORS: Completed/Skipped/Did not start breeding horses because ...
 #: ../../data/tribes/buildings/productionsites/atlanteans/horsefarm/init.lua:52
+msgctxt "atlanteans_building"
 msgid "breeding horses"
 msgstr "hodowla koni"
 
@@ -1222,11 +1221,23 @@ msgctxt "barbarians_building"
 msgid "Bakery"
 msgstr "Piekarnia"
 
+#. TRANSLATORS: Completed/Skipped/Did not start baking bread because ...
+#: ../../data/tribes/buildings/productionsites/barbarians/bakery/init.lua:58
+msgctxt "barbarians_building"
+msgid "baking pitta bread"
+msgstr "pieczenie chleba pita"
+
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/barbarians/barracks/init.lua:7
 msgctxt "barbarians_building"
 msgid "Barracks"
 msgstr "Koszary"
+
+#. TRANSLATORS: Completed/Skipped/Did not start recruiting soldier because ...
+#: ../../data/tribes/buildings/productionsites/barbarians/barracks/init.lua:56
+msgctxt "barbarians_building"
+msgid "recruiting soldier"
+msgstr "zaciąg żołnierza"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/barbarians/big_inn/init.lua:7
@@ -1275,6 +1286,7 @@ msgstr "Farma bydła"
 
 #. TRANSLATORS: Completed/Skipped/Did not start rearing cattle because ...
 #: ../../data/tribes/buildings/productionsites/barbarians/cattlefarm/init.lua:52
+msgctxt "barbarians_building"
 msgid "rearing cattle"
 msgstr "hodowla bydła"
 
@@ -1718,11 +1730,23 @@ msgctxt "empire_building"
 msgid "Bakery"
 msgstr "Piekarnia"
 
+#. TRANSLATORS: Completed/Skipped/Did not start baking bread because ...
+#: ../../data/tribes/buildings/productionsites/empire/bakery/init.lua:58
+msgctxt "empire_building"
+msgid "baking bread"
+msgstr "pieczenie chleba"
+
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/empire/barracks/init.lua:7
 msgctxt "empire_building"
 msgid "Barracks"
 msgstr "Kwatera zaciężnika"
+
+#. TRANSLATORS: Completed/Skipped/Did not start recruiting soldier because ...
+#: ../../data/tribes/buildings/productionsites/empire/barracks/init.lua:59
+msgctxt "empire_building"
+msgid "recruiting soldier"
+msgstr "zaciąg żołnierza"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/empire/brewery/init.lua:7
@@ -1771,6 +1795,7 @@ msgstr "Ośla farma"
 
 #. TRANSLATORS: Completed/Skipped/Did not start rearing donkeys because ...
 #: ../../data/tribes/buildings/productionsites/empire/donkeyfarm/init.lua:52
+msgctxt "empire_building"
 msgid "rearing donkeys"
 msgstr "hodowla osłów"
 
@@ -2147,29 +2172,25 @@ msgstr "spanie"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../data/tribes/buildings/trainingsites/atlanteans/dungeon/init.lua:164
-#: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:110
-#: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:104
+msgctxt "atlanteans_building"
 msgid "upgrading soldier attack from level 0 to level 1"
 msgstr "szkolenie ataku żołnierza z poziomu 0 do poziomu 1"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../data/tribes/buildings/trainingsites/atlanteans/dungeon/init.lua:175
-#: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:121
-#: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:115
+msgctxt "atlanteans_building"
 msgid "upgrading soldier attack from level 1 to level 2"
 msgstr "szkolenie ataku żołnierza z poziomu 1 do poziomu 2"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../data/tribes/buildings/trainingsites/atlanteans/dungeon/init.lua:186
-#: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:132
-#: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:126
+msgctxt "atlanteans_building"
 msgid "upgrading soldier attack from level 2 to level 3"
 msgstr "szkolenie ataku żołnierza z poziomu 2 do poziomu 3"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../data/tribes/buildings/trainingsites/atlanteans/dungeon/init.lua:197
-#: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:143
-#: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:137
+msgctxt "atlanteans_building"
 msgid "upgrading soldier attack from level 3 to level 4"
 msgstr "szkolenie ataku żołnierza z poziomu 3 do poziomu 4"
 
@@ -2181,33 +2202,31 @@ msgstr "Labirynt"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../data/tribes/buildings/trainingsites/atlanteans/labyrinth/init.lua:102
+msgctxt "atlanteans_building"
 msgid "upgrading soldier defense from level 0 to level 1"
 msgstr "szkolenie obrony żołnierza z poziomu 0 do poziomu 1"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../data/tribes/buildings/trainingsites/atlanteans/labyrinth/init.lua:113
+msgctxt "atlanteans_building"
 msgid "upgrading soldier defense from level 1 to level 2"
 msgstr "szkolenie obrony żołnierza z poziomu 1 do poziomu 2"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../data/tribes/buildings/trainingsites/atlanteans/labyrinth/init.lua:124
-#: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:165
-#: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:148
+msgctxt "atlanteans_building"
 msgid "upgrading soldier health from level 0 to level 1"
 msgstr "szkolenie zdrowia żołnierza z poziomu 0 do poziomu 1"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../data/tribes/buildings/trainingsites/atlanteans/labyrinth/init.lua:135
-#: ../../data/tribes/buildings/trainingsites/barbarians/battlearena/init.lua:91
-#: ../../data/tribes/buildings/trainingsites/empire/arena/init.lua:81
-#: ../../data/tribes/buildings/trainingsites/empire/colosseum/init.lua:76
+msgctxt "atlanteans_building"
 msgid "upgrading soldier evade from level 0 to level 1"
 msgstr "szkolenie uniku żołnierza z poziomu 0 do poziomu 1"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../data/tribes/buildings/trainingsites/atlanteans/labyrinth/init.lua:146
-#: ../../data/tribes/buildings/trainingsites/barbarians/battlearena/init.lua:103
-#: ../../data/tribes/buildings/trainingsites/empire/colosseum/init.lua:87
+msgctxt "atlanteans_building"
 msgid "upgrading soldier evade from level 1 to level 2"
 msgstr "szkolenie uniku żołnierza z poziomu 1 do poziomu 2"
 
@@ -2217,6 +2236,18 @@ msgctxt "barbarians_building"
 msgid "Battle Arena"
 msgstr "Arena bitewna"
 
+#. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
+#: ../../data/tribes/buildings/trainingsites/barbarians/battlearena/init.lua:91
+msgctxt "barbarians_building"
+msgid "upgrading soldier evade from level 0 to level 1"
+msgstr "szkolenie uniku żołnierza z poziomu 0 do poziomu 1"
+
+#. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
+#: ../../data/tribes/buildings/trainingsites/barbarians/battlearena/init.lua:103
+msgctxt "barbarians_building"
+msgid "upgrading soldier evade from level 1 to level 2"
+msgstr "szkolenie uniku żołnierza z poziomu 1 do poziomu 2"
+
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:7
 msgctxt "barbarians_building"
@@ -2224,19 +2255,50 @@ msgid "Training Camp"
 msgstr "Obóz szkoleniowy"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
+#: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:110
+msgctxt "barbarians_building"
+msgid "upgrading soldier attack from level 0 to level 1"
+msgstr "szkolenie ataku żołnierza z poziomu 0 do poziomu 1"
+
+#. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
+#: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:121
+msgctxt "barbarians_building"
+msgid "upgrading soldier attack from level 1 to level 2"
+msgstr "szkolenie ataku żołnierza z poziomu 1 do poziomu 2"
+
+#. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
+#: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:132
+msgctxt "barbarians_building"
+msgid "upgrading soldier attack from level 2 to level 3"
+msgstr "szkolenie ataku żołnierza z poziomu 2 do poziomu 3"
+
+#. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
+#: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:143
+msgctxt "barbarians_building"
+msgid "upgrading soldier attack from level 3 to level 4"
+msgstr "szkolenie ataku żołnierza z poziomu 3 do poziomu 4"
+
+#. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:154
+msgctxt "barbarians_building"
 msgid "upgrading soldier attack from level 4 to level 5"
 msgstr "szkolenie ataku żołnierza z poziomu 4 do poziomu 5"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
+#: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:165
+msgctxt "barbarians_building"
+msgid "upgrading soldier health from level 0 to level 1"
+msgstr "szkolenie zdrowia żołnierza z poziomu 0 do poziomu 1"
+
+#. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:176
-#: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:159
+msgctxt "barbarians_building"
 msgid "upgrading soldier health from level 1 to level 2"
 msgstr "szkolenie zdrowia żołnierza z poziomu 1 do poziomu 2"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:187
-#: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:170
+msgctxt "barbarians_building"
 msgid "upgrading soldier health from level 2 to level 3"
 msgstr "szkolenie zdrowia żołnierza z poziomu 2 do poziomu 3"
 
@@ -2246,11 +2308,24 @@ msgctxt "empire_building"
 msgid "Arena"
 msgstr "Arena"
 
+#. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
+#: ../../data/tribes/buildings/trainingsites/empire/arena/init.lua:81
+#: ../../data/tribes/buildings/trainingsites/empire/colosseum/init.lua:76
+msgctxt "empire_building"
+msgid "upgrading soldier evade from level 0 to level 1"
+msgstr "szkolenie uniku żołnierza z poziomu 0 do poziomu 1"
+
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/trainingsites/empire/colosseum/init.lua:7
 msgctxt "empire_building"
 msgid "Colosseum"
 msgstr "Koloseum"
+
+#. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
+#: ../../data/tribes/buildings/trainingsites/empire/colosseum/init.lua:87
+msgctxt "empire_building"
+msgid "upgrading soldier evade from level 1 to level 2"
+msgstr "szkolenie uniku żołnierza z poziomu 1 do poziomu 2"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:7
@@ -2259,7 +2334,50 @@ msgid "Training Camp"
 msgstr "Obóz szkoleniowy"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
+#: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:104
+msgctxt "empire_building"
+msgid "upgrading soldier attack from level 0 to level 1"
+msgstr "szkolenie ataku żołnierza z poziomu 0 do poziomu 1"
+
+#. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
+#: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:115
+msgctxt "empire_building"
+msgid "upgrading soldier attack from level 1 to level 2"
+msgstr "szkolenie ataku żołnierza z poziomu 1 do poziomu 2"
+
+#. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
+#: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:126
+msgctxt "empire_building"
+msgid "upgrading soldier attack from level 2 to level 3"
+msgstr "szkolenie ataku żołnierza z poziomu 2 do poziomu 3"
+
+#. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
+#: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:137
+msgctxt "empire_building"
+msgid "upgrading soldier attack from level 3 to level 4"
+msgstr "szkolenie ataku żołnierza z poziomu 3 do poziomu 4"
+
+#. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
+#: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:148
+msgctxt "empire_building"
+msgid "upgrading soldier health from level 0 to level 1"
+msgstr "szkolenie zdrowia żołnierza z poziomu 0 do poziomu 1"
+
+#. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
+#: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:159
+msgctxt "empire_building"
+msgid "upgrading soldier health from level 1 to level 2"
+msgstr "szkolenie zdrowia żołnierza z poziomu 1 do poziomu 2"
+
+#. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
+#: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:170
+msgctxt "empire_building"
+msgid "upgrading soldier health from level 2 to level 3"
+msgstr "szkolenie zdrowia żołnierza z poziomu 2 do poziomu 3"
+
+#. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:181
+msgctxt "empire_building"
 msgid "upgrading soldier health from level 3 to level 4"
 msgstr "szkolenie zdrowia żołnierza z poziomu 3 do poziomu 4"
 

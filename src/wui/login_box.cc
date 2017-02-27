@@ -69,7 +69,9 @@ LoginBox::LoginBox(Panel& parent)
 	eb_nickname->focus();
 }
 
-/// called, if "login" is pressed
+/**
+ * called, if "login" is pressed.
+ */
 void LoginBox::clicked_ok() {
 	// Check if all needed input fields are valid
 	if (eb_nickname->text().empty()) {

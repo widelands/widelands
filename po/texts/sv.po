@@ -7,9 +7,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-01-31 07:09+0000\n"
-"PO-Revision-Date: 2017-02-02 14:19+0000\n"
-"Last-Translator: D M <hunter12@home.se>\n"
+"POT-Creation-Date: 2017-02-19 19:34+0000\n"
+"PO-Revision-Date: 2017-02-19 19:36+0000\n"
+"Last-Translator: GunChleoc\n"
 "Language-Team: Swedish (http://www.transifex.com/widelands/widelands/language/sv/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -504,8 +504,8 @@ msgstr "Håll ett öga på dina fiskare. När fisken tar slut i deras område sl
 #: ../../data/txts/tips/barbarians.lua:8
 msgid ""
 "Always build a ranger’s and a gamekeeper’s hut, so you will not run out of "
-"logs."
-msgstr "Bygg alltid en skogsvaktarkoja och en viltvårdarkoja för att säkerställa tillgången av stock och vilt."
+"logs or game."
+msgstr ""
 
 #: ../../data/txts/tips/editor.lua:4
 msgid ""

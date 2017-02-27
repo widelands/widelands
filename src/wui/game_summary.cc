@@ -47,60 +47,60 @@ GameSummaryScreen::GameSummaryScreen(InteractiveGameBase* parent, UI::UniqueWind
 	game_.game_controller()->set_desired_speed(0);
 	// Init boxes
 	UI::Box* vbox = new UI::Box(this, 0, 0, UI::Box::Vertical, 0, 0, PADDING);
-	title_area_ = new UI::Textarea(vbox, "", UI::Align::kHCenter);
-	vbox->add(title_area_, UI::Align::kHCenter);
+	title_area_ = new UI::Textarea(vbox, "", UI::Align::kCenter);
+	vbox->add(title_area_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 	vbox->add_space(PADDING);
 
 	UI::Box* hbox1 = new UI::Box(this, 0, 0, UI::Box::Horizontal);
 	players_table_ = new UI::Table<uintptr_t const>(hbox1, 0, 0, 0, 0);
 	players_table_->fit_height(game_.player_manager()->get_players_end_status().size());
 	hbox1->add_space(PADDING);
-	hbox1->add(players_table_, UI::Align::kTop);
+	hbox1->add(players_table_);
 	hbox1->add_space(PADDING);
 
 	UI::Box* info_box = new UI::Box(hbox1, 0, 0, UI::Box::Vertical, 0, 0);
 	info_area_label_ = new UI::Textarea(info_box, _("Player Info:"));
-	info_box->add(info_area_label_, UI::Align::kLeft);
+	info_box->add(info_area_label_);
 	info_area_ = new UI::MultilineTextarea(
 	   info_box, 0, 0, 130,
 	   std::max(130, players_table_->get_h() - info_area_label_->get_h() - PADDING), "");
-	info_box->add(info_area_, UI::Align::kLeft, true);
+	info_box->add(info_area_, UI::Box::Resizing::kFullSize);
 	info_box->add_space(PADDING);
-	hbox1->add(info_box, UI::Align::kTop);
+	hbox1->add(info_box);
 	hbox1->add_space(PADDING);
-	vbox->add(hbox1, UI::Align::kLeft);
+	vbox->add(hbox1);
 
 	UI::Box* bottom_box = new UI::Box(this, 0, 0, UI::Box::Horizontal);
 
 	bottom_box->add_space(PADDING);
 
 	gametime_label_ = new UI::Textarea(bottom_box, _("Elapsed time:"));
-	bottom_box->add(gametime_label_, UI::Align::kHCenter);
+	bottom_box->add(gametime_label_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 	bottom_box->add_space(PADDING);
 	gametime_value_ = new UI::Textarea(bottom_box, gametimestring(game_.get_gametime()));
-	bottom_box->add(gametime_value_, UI::Align::kHCenter);
+	bottom_box->add(gametime_value_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 
 	bottom_box->add_inf_space();
 
 	continue_button_ = new UI::Button(
 	   bottom_box, "continue_button", 0, 0, 35, 35, g_gr->images().get("images/ui_basic/but4.png"),
 	   g_gr->images().get("images/ui_basic/continue.png"), _("Continue playing"));
-	bottom_box->add(continue_button_, UI::Align::kHCenter);
+	bottom_box->add(continue_button_);
 	bottom_box->add_space(PADDING);
 	stop_button_ = new UI::Button(
 	   bottom_box, "stop_button", 0, 0, 35, 35, g_gr->images().get("images/ui_basic/but4.png"),
 	   g_gr->images().get("images/wui/menus/menu_exit_game.png"), _("Exit Game"));
-	bottom_box->add(stop_button_, UI::Align::kHCenter);
+	bottom_box->add(stop_button_);
 	bottom_box->add_space(PADDING);
 
-	vbox->add(bottom_box, UI::Align::kLeft, true);
+	vbox->add(bottom_box, UI::Box::Resizing::kFullSize);
 	vbox->add_space(PADDING);
 	set_center_panel(vbox);
 
 	// Prepare table
 	players_table_->add_column(150, _("Player"));
-	players_table_->add_column(80, _("Team"), "", UI::Align::kHCenter);
-	players_table_->add_column(100, _("Status"), "", UI::Align::kHCenter);
+	players_table_->add_column(80, _("Team"), "", UI::Align::kCenter);
+	players_table_->add_column(100, _("Status"), "", UI::Align::kCenter);
 	players_table_->add_column(0, _("Time"), "", UI::Align::kRight, UI::TableColumnType::kFlexible);
 
 	// Prepare Elements

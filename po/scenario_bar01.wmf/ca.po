@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-01-21 21:10+0000\n"
-"PO-Revision-Date: 2017-01-28 12:53+0000\n"
+"POT-Creation-Date: 2017-02-19 19:34+0000\n"
+"PO-Revision-Date: 2017-02-19 23:42+0000\n"
 "Last-Translator: Juanjo\n"
 "Language-Team: Catalan (http://www.transifex.com/widelands/widelands/language/ca/)\n"
 "MIME-Version: 1.0\n"
@@ -178,17 +178,17 @@ msgstr "El mineral de ferro que han extret els miners no es pot usar directament
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:90
 msgid "Enhance buildings and build a micro brewery"
-msgstr "Milloreu els edificis i construïu una cerveseria petita"
+msgstr "Amplieu els edificis i construïu una cerveseria petita"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:92
 msgid "Enhance a mine and the tavern, and build a micro brewery."
-msgstr "Milloreu una mina i la taverna i construïu una cerveseria petita."
+msgstr "Amplieu una mina i la taverna i construïu una cerveseria petita."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:93
 msgid ""
 "Enhance the coal mine or the iron mine to a deep mine, and enhance the "
 "tavern to an inn."
-msgstr "Milloreu la mina de carbó o la mina de ferro a mina profunda i millora la taverna a hostal."
+msgstr "Amplieu la mina de carbó o la mina de ferro a mina profunda i amplieu la taverna a hostal."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:94
 msgid "Also build a micro brewery."
@@ -200,7 +200,7 @@ msgid ""
 "beneath it; then it must be enhanced to a deep mine in order to keep it "
 "working properly. To enhance a building, choose it and then click the "
 "appropriate button in the appearing window."
-msgstr "Una mina normal només pot explotar un terç dels recursos que té. Llavors, cal millorar-la a una mina profunda per mantenir-ne la productivitat. Per millorar l'edifici, obriu la finestra de l'edifici i busqueu el botó corresponent."
+msgstr "Una mina normal només pot explotar un terç dels recursos que té. Llavors, cal ampliar-la per fer una mina profunda i això en manté la productivitat. Per ampliar l'edifici, obriu la finestra de l'edifici i busqueu el botó corresponent."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:96
 msgid ""
@@ -208,7 +208,7 @@ msgid ""
 "become more advanced workers, who are necessary to operate the enhanced "
 "buildings. Do not enhance a building before you have enough advanced workers"
 " to operate the advanced building!"
-msgstr "Els treballadors guanyen experiència quan treballen. Amb prou experiència, esdevenen treballadors avançats, que són necessaris per operar els edificis millorats. No milloreu l'edifici fins que tingueu prou treballadors avançats!"
+msgstr "Els treballadors guanyen experiència quan treballen. Amb prou experiència, esdevenen treballadors avançats, que són necessaris per operar els edificis ampliats. No amplieu l'edifici fins que tingueu prou treballadors avançats!"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:97
 msgid ""
@@ -216,14 +216,14 @@ msgid ""
 "building – for instance, deep mines need snacks instead of rations. You will"
 " have to enhance your tavern to an inn in order to produce snacks out of "
 "pitta bread AND a second kind of food (meat or fish) AND beer."
-msgstr "Aquests edificis tenen una demanda major que els bàsics. Per exemple, les mines profundes necessiten aperitius en lloc de racions. Haureu de millorar la taverna a un hostal. Llavors es podrà produir aperitius, que es fan de pita, cervesa i un tercer ingredient que pot ser carn o peix."
+msgstr "Aquests edificis tenen una demanda major que els bàsics. Per exemple, les mines profundes necessiten aperitius en lloc de racions. Haureu d'ampliar la taverna a un hostal. Llavors es podrà produir aperitius, que es fan de pita, cervesa i un tercer ingredient que pot ser carn o peix."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:98
 msgid ""
 "You may of course enhance all mines to deep mines instantly given you have "
 "the workers – bigger mines work a bit faster, smaller mines need cheaper "
 "food. It’s up to you which strategy you prefer."
-msgstr "També podeu millorar totes les mines instantàniament si teniu prou treballadors: les mines més grans treballen una mica més ràpid, però les mines més petites consumeixen aliments més fàcils de produir. Podeu escollir l'estratègia que preferiu."
+msgstr "També podeu ampliar totes les mines instantàniament si teniu prou treballadors: les mines més grans treballen una mica més ràpid, però les mines més petites consumeixen aliments més fàcils de produir. Podeu escollir l'estratègia que preferiu."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:103
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:105
@@ -294,7 +294,7 @@ msgid ""
 "The third material necessary for improved buildings is thatch reed, used to "
 "cover roofs. Thatch reed is planted by a gardener around his building, the "
 "reed yard."
-msgstr "El tercer material necessari per als edificis millorats és la fibra de junc, que s'empra per a fer teulades. El junc el planta el jardiner al voltant del seu edifici: el camp de juncs."
+msgstr "El tercer material necessari per als edificis ampliats és la fibra de junc, que s'empra per a fer teulades. El junc el planta el jardiner al voltant del seu edifici: el camp de juncs."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:140
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:142
@@ -1035,7 +1035,7 @@ msgstr "Però temen que la guerra al voltant de l'Al'thunran signifiqui la seva 
 msgid "“%s”"
 msgstr "“%s”"
 
-#: ../../data/scripting/format_scenario.lua:96
+#: ../../data/scripting/format_scenario.lua:84
 msgid "New Objective"
 msgid_plural "New Objectives"
 msgstr[0] "Objectiu"
