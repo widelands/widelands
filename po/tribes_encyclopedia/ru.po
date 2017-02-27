@@ -10,15 +10,15 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2014
 # CupIvan <mail@cupivan.ru>, 2015
 # Yuriy Sokolov <lention@mail.ru>, 2015
-# Олег Шевчеко <olegrock@gmail.com>, 2017
+# Олег Шевченко <olegrock@gmail.com>, 2017
 # Федор <Lunar-energy@ya.ru>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-02-18 09:49+0000\n"
-"PO-Revision-Date: 2017-02-19 10:25+0000\n"
-"Last-Translator: Олег Шевчеко <olegrock@gmail.com>\n"
+"POT-Creation-Date: 2017-02-19 19:34+0000\n"
+"PO-Revision-Date: 2017-02-22 12:58+0000\n"
+"Last-Translator: Олег Шевченко <olegrock@gmail.com>\n"
 "Language-Team: Russian (http://www.transifex.com/widelands/widelands/language/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -47,7 +47,7 @@ msgstr ""
 #: ../../data/tribes/buildings/militarysites/empire/tower/helptexts.lua:16
 msgctxt "building"
 msgid "Garrisons soldiers to expand your territory."
-msgstr "Используйте солдат, для того чтобы расширить вашу территорию."
+msgstr "Использует солдат, для того чтобы расширить вашу территорию."
 
 #. TRANSLATORS: Note helptext for a building
 #: ../../data/tribes/buildings/militarysites/atlanteans/castle/helptexts.lua:24
@@ -406,8 +406,8 @@ msgstr "Производит топоры, острые топоры и секи
 msgctxt "barbarians_building"
 msgid ""
 "The Barbarian ax workshop is the intermediate production site in a series of"
-" three buildings. It is an upgrade from the metal workshop but doesn’t "
-"require additional qualification for the worker."
+" three buildings. It is enhanced from the metal workshop but doesn’t require"
+" additional qualification for the worker."
 msgstr "Варварская топорная мастерская - промежуточное звено в производственной цепочке. Она улучшается из кузницы, но требует повышенной квалификации её работника."
 
 #: ../../data/tribes/buildings/productionsites/barbarians/ax_workshop/helptexts.lua:23
@@ -526,7 +526,7 @@ msgctxt "barbarians_building"
 msgid ""
 "This mine exploits only %s of the resource. From there on out, it will only "
 "have a 5%% chance of finding any coal."
-msgstr "Эта шахта разрабатывает только %s ресурса. Как следствие, шанс обнаружения дополнительного угля составит только 5%%."
+msgstr "Эта шахта вырабатывает только %s ресурса. Как следствие, шанс обнаружения дополнительного угля составит только 5%%."
 
 #. TRANSLATORS: Performance helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/coalmine/helptexts.lua:24
@@ -552,7 +552,7 @@ msgid ""
 "This mine exploits all of the resource down to the deepest level. But even "
 "after having done so, it will still have a %s chance of finding some more "
 "coal."
-msgstr "Эта шахта выработала весь ресурс до самого глубокого уровня. Но и после этого, всё ещё остается %s шанс найти еще немного угля."
+msgstr "Эта шахта вырабатывает весь ресурс до самого глубокого уровня. Но и после этого, всё ещё остается %s шанс найти еще немного угля."
 
 #. TRANSLATORS: Performance helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/coalmine_deeper/helptexts.lua:24
@@ -653,7 +653,7 @@ msgctxt "barbarians_building"
 msgid ""
 "This mine exploits only %s of the resource. From there on out, it will only "
 "have a 5%% chance of finding any gold ore."
-msgstr "Эта шахта разрабатывает только %s ресурса. Как следствие, шанс обнаружения дополнительной золотой руды составит только 5%%."
+msgstr "Эта шахта вырабатывает только %s ресурса. Как следствие, шанс обнаружения дополнительной золотой руды составит только 5%%."
 
 #. TRANSLATORS: Performance helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/goldmine/helptexts.lua:23
@@ -680,7 +680,7 @@ msgid ""
 "This mine exploits all of the resource down to the deepest level. But even "
 "after having done so, it will still have a %s chance of finding some more "
 "gold ore."
-msgstr "Эта шахта выработала весь ресурс до самого глубокого уровня. Но и после этого, всё ещё остается %s шанс найти еще немного золотой руды."
+msgstr "Эта шахта вырабатывает весь ресурс до самого глубокого уровня. Но и после этого, всё ещё остается %s шанс найти еще немного золотой руды."
 
 #. TRANSLATORS: Performance helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/goldmine_deeper/helptexts.lua:23
@@ -721,7 +721,7 @@ msgid ""
 "This mine exploits all of the resource down to the deepest level. But even "
 "after having done so, it will still have a %s chance of finding some more "
 "granite."
-msgstr "Эта шахта выработала весь ресурс до самого глубокого уровня. Но и после этого, всё ещё остается %s шанс найти еще немного гранита."
+msgstr "Эта шахта вырабатывает весь ресурс до самого глубокого уровня. Но и после этого, всё ещё остается %s шанс найти еще немного гранита."
 
 #. TRANSLATORS: 'It' is a mine
 #: ../../data/tribes/buildings/productionsites/barbarians/granitemine/helptexts.lua:21
@@ -807,7 +807,7 @@ msgctxt "barbarians_building"
 msgid ""
 "This mine exploits only %s of the resource. From there on out, it will only "
 "have a 5%% chance of finding any iron ore."
-msgstr "Эта шахта разрабатывает только %s ресурса. Как следствие, шанс обнаружения дополнительной железной руды составит только 5%%."
+msgstr "Эта шахта вырабатывает только %s ресурса. Как следствие, шанс обнаружения дополнительной железной руды составит только 5%%."
 
 #. TRANSLATORS: Performance helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/ironmine/helptexts.lua:23
@@ -834,7 +834,7 @@ msgid ""
 "This mine exploits all of the resource down to the deepest level. But even "
 "after having done so, it will still have a %s chance of finding some more "
 "iron ore."
-msgstr "Этот рудник выработал весь ресурс до самого глубокого уровня. Но и после этого, всё ещё остается %s шанс найти еще немного железной руды."
+msgstr "Этот рудник вырабатывает весь ресурс до самого глубокого уровня. Но и после этого, всё ещё остается %s шанс найти еще немного железной руды."
 
 #. TRANSLATORS: Performance helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/ironmine_deeper/helptexts.lua:23
@@ -1050,7 +1050,7 @@ msgctxt "barbarians_building"
 msgid ""
 "Thatch reed is the traditional material for roofing, and it is woven into "
 "the extremely durable cloth that they use for their ships’ sails."
-msgstr "Кровельный тростник - традиционный материал для покрытия крыш - он сплетается в очень прочное сукно, которое используется для их корабельных парусов."
+msgstr "Кровельный тростник - традиционный материал для покрытия крыш, также он сплетается в очень прочное сукно, которое используется для корабельных парусов."
 
 #. TRANSLATORS: Performance helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/reed_yard/helptexts.lua:23
@@ -1791,10 +1791,10 @@ msgstr "%s или выше"
 #: ../../data/tribes/scripting/help/building_help.lua:647
 msgid "Worker uses:"
 msgid_plural "Workers use:"
-msgstr[0] "Рабочий использует:"
-msgstr[1] "Рабочих используют:"
-msgstr[2] "Рабочих используют:"
-msgstr[3] "Рабочих используют:"
+msgstr[0] "Работник использует:"
+msgstr[1] "Работник использует:"
+msgstr[2] "Работник использует:"
+msgstr[3] "Работник использует:"
 
 #: ../../data/tribes/scripting/help/building_help.lua:653
 msgid "Experience levels:"
@@ -1967,154 +1967,163 @@ msgstr "Home"
 #. the key.
 #: ../../data/tribes/scripting/help/controls.lua:59
 msgctxt "hotkey"
-msgid "(Ctrl +) 1-9"
-msgstr "(Ctrl +) 1-9"
+msgid "Ctrl + 1-9"
+msgstr "Ctrl + 1-9"
 
 #: ../../data/tribes/scripting/help/controls.lua:59
-msgid "Remember and go to previously remembered locations"
-msgstr "Вспомнить и перейти к предыдущей запомненной локации"
+msgid "Remember current location"
+msgstr "Запомнить текущее расположение"
+
+#: ../../data/tribes/scripting/help/controls.lua:60
+msgctxt "hotkey"
+msgid "1-9"
+msgstr "1-9"
+
+#: ../../data/tribes/scripting/help/controls.lua:60
+msgid "Go to previously remembered location"
+msgstr "Перейти к предыдущему запомненному расположению"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
-#: ../../data/tribes/scripting/help/controls.lua:61
+#: ../../data/tribes/scripting/help/controls.lua:62
 msgctxt "hotkey"
-msgid "(Ctrl +) +"
-msgstr "(Ctrl +) +"
+msgid "Ctrl + +"
+msgstr "Ctrl + \"+\""
 
-#: ../../data/tribes/scripting/help/controls.lua:61
+#: ../../data/tribes/scripting/help/controls.lua:62
 msgid "Increase zoom"
 msgstr "Увеличить масштаб"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
-#: ../../data/tribes/scripting/help/controls.lua:63
+#: ../../data/tribes/scripting/help/controls.lua:64
 msgctxt "hotkey"
-msgid "(Ctrl +) -"
-msgstr "(Ctrl +) -"
+msgid "Ctrl + -"
+msgstr "Ctrl + \"-\""
 
-#: ../../data/tribes/scripting/help/controls.lua:63
+#: ../../data/tribes/scripting/help/controls.lua:64
 msgid "Decrease zoom"
 msgstr "Уменьшить масштаб"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
-#: ../../data/tribes/scripting/help/controls.lua:65
+#: ../../data/tribes/scripting/help/controls.lua:66
 msgctxt "hotkey"
-msgid "(Ctrl +) 0"
-msgstr "(Ctrl +) 0"
+msgid "Ctrl + 0"
+msgstr "Ctrl + 0"
 
-#: ../../data/tribes/scripting/help/controls.lua:65
+#: ../../data/tribes/scripting/help/controls.lua:66
 msgid "Reset zoom"
 msgstr "Сбросить масштаб"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
-#: ../../data/tribes/scripting/help/controls.lua:67
+#: ../../data/tribes/scripting/help/controls.lua:68
 msgctxt "hotkey"
 msgid "Ctrl + F11"
 msgstr "Ctrl + F11"
 
-#: ../../data/tribes/scripting/help/controls.lua:67
+#: ../../data/tribes/scripting/help/controls.lua:68
 msgid "Take a screenshot"
 msgstr "Сделать скриншот"
 
 #. TRANSLATORS: This is an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:70
+#: ../../data/tribes/scripting/help/controls.lua:71
 msgctxt "hotkey"
 msgid "Ctrl + F10"
 msgstr "Ctrl + F10"
 
-#: ../../data/tribes/scripting/help/controls.lua:70
+#: ../../data/tribes/scripting/help/controls.lua:71
 msgid "Quit the game immediately"
 msgstr "Незамедлительный выход из игры"
 
 #. TRANSLATORS: This is an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:72
+#: ../../data/tribes/scripting/help/controls.lua:73
 msgctxt "hotkey"
 msgid "F6"
 msgstr "F6"
 
-#: ../../data/tribes/scripting/help/controls.lua:72
+#: ../../data/tribes/scripting/help/controls.lua:73
 msgid "Show the debug console (only in debug-builds)"
 msgstr "Показать отладочную консоль (только в отладочных сборках)"
 
-#: ../../data/tribes/scripting/help/controls.lua:75
+#: ../../data/tribes/scripting/help/controls.lua:76
 msgid ""
 "In the message window, the following additional shortcuts are available:"
 msgstr "В окне сообщений доступны следующие дополнительные горячие клавиши:"
 
 #. TRANSLATORS: This is the helptext for an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:78
+#: ../../data/tribes/scripting/help/controls.lua:79
 msgctxt "hotkey"
 msgid "Alt + 0"
 msgstr "Alt + 0"
 
-#: ../../data/tribes/scripting/help/controls.lua:78
+#: ../../data/tribes/scripting/help/controls.lua:79
 msgid "Show all messages"
 msgstr "Показать все сообщения"
 
 #. TRANSLATORS: This is the helptext for an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:80
+#: ../../data/tribes/scripting/help/controls.lua:81
 msgctxt "hotkey"
 msgid "Alt + 1"
 msgstr "Alt + 1"
 
-#: ../../data/tribes/scripting/help/controls.lua:80
+#: ../../data/tribes/scripting/help/controls.lua:81
 msgid "Show geologists’ messages only"
 msgstr "Показать только сообщения геологов"
 
 #. TRANSLATORS: This is the helptext for an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:82
+#: ../../data/tribes/scripting/help/controls.lua:83
 msgctxt "hotkey"
 msgid "Alt + 2"
 msgstr "Alt + 2"
 
-#: ../../data/tribes/scripting/help/controls.lua:82
+#: ../../data/tribes/scripting/help/controls.lua:83
 msgid "Show economy messages only"
 msgstr "Показать только сообщения о состоянии экономики"
 
 #. TRANSLATORS: This is the helptext for an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:84
+#: ../../data/tribes/scripting/help/controls.lua:85
 msgctxt "hotkey"
 msgid "Alt + 3"
 msgstr "Alt + 3"
 
-#: ../../data/tribes/scripting/help/controls.lua:84
+#: ../../data/tribes/scripting/help/controls.lua:85
 msgid "Show seafaring messages only"
 msgstr "Показать только сообщения о мореплавании"
 
 #. TRANSLATORS: This is the helptext for an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:86
+#: ../../data/tribes/scripting/help/controls.lua:87
 msgctxt "hotkey"
 msgid "Alt + 4"
 msgstr "Alt + 4"
 
-#: ../../data/tribes/scripting/help/controls.lua:86
+#: ../../data/tribes/scripting/help/controls.lua:87
 msgid "Show warfare messages only"
 msgstr "Показать только военные сообщения"
 
 #. TRANSLATORS: This is the helptext for an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:88
+#: ../../data/tribes/scripting/help/controls.lua:89
 msgctxt "hotkey"
 msgid "Alt + 5"
 msgstr "Alt + 5"
 
-#: ../../data/tribes/scripting/help/controls.lua:88
+#: ../../data/tribes/scripting/help/controls.lua:89
 msgid "Show scenario messages only"
 msgstr "Показать только сообщения сценария"
 
 #. TRANSLATORS: This is the helptext for an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:90
+#: ../../data/tribes/scripting/help/controls.lua:91
 msgid "Jump to the location corresponding to the current message"
 msgstr "Переместиться в место, упомянутое в текущем сообщении"
 
-#: ../../data/tribes/scripting/help/controls.lua:92
+#: ../../data/tribes/scripting/help/controls.lua:93
 msgid "Archive/Restore the current message"
 msgstr "Архивировать или восстановить текущее сообщение"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
-#: ../../data/tribes/scripting/help/controls.lua:92
+#: ../../data/tribes/scripting/help/controls.lua:93
 msgctxt "hotkey"
 msgid "Delete"
 msgstr "Delete"
@@ -2231,10 +2240,10 @@ msgstr "Производитель"
 #: ../../data/tribes/scripting/help/ware_help.lua:97
 msgid "Ware produced:"
 msgid_plural "Wares produced:"
-msgstr[0] "Товара производиться:"
-msgstr[1] "Товар производиться:"
-msgstr[2] "Товаров производиться:"
-msgstr[3] "Товара производиться:"
+msgstr[0] "Товара производится:"
+msgstr[1] "Товар производится:"
+msgstr[2] "Товаров производится:"
+msgstr[3] "Товара производится:"
 
 #. TRANSLATORS: Ware Encyclopedia: A list of buildings and / or workers that
 #. consume a ware
@@ -2269,7 +2278,7 @@ msgstr[3] "Работает в"
 #. TRANSLATORS: Tribal Encyclopedia: Heading for which tool a worker uses
 #: ../../data/tribes/scripting/help/worker_help.lua:144
 msgid "Worker uses"
-msgstr "Работник используется"
+msgstr "Работник использует"
 
 #: ../../data/tribes/scripting/help/worker_help.lua:156
 msgid "Experience levels"
@@ -2530,7 +2539,7 @@ msgstr "Имперские пекари делают очень вкусный �
 #: ../../data/tribes/wares/bread_paddle/helptexts.lua:4
 msgctxt "ware"
 msgid "The bread paddle is the tool of the baker, each baker needs one."
-msgstr "Садник для выпечки - это инструмент пекаря, каждому пекарю нужно одному."
+msgstr "Садник для выпечки - это инструмент пекаря, каждому пекарю нужно по-одному."
 
 #. TRANSLATORS: Helptext for a ware: Bread Paddle
 #: ../../data/tribes/wares/bread_paddle/helptexts.lua:6
@@ -2967,7 +2976,7 @@ msgid ""
 "Be sure to have a metal workshop to produce this basic tool (but it ceases "
 "to be produced by the building if it is enhanced to an ax workshop and war "
 "mill)."
-msgstr "Как можно создать обеды, закуски или пайки, если нет кухонных инструментов? Убедитесь, что кузница производит эти основные инструменты (однако, производство прекращается, если кузница была усовершенствована на до топорной мастерской и военной фабрики)."
+msgstr "Как можно создать обеды, закуски или пайки, если нет кухонных инструментов? Убедитесь, что кузница производит эти основные инструменты (однако, производство прекратится, если кузница была усовершенствована до топорной мастерской и военной фабрики)."
 
 #. TRANSLATORS: Helptext for a ware: Kitchen Tools
 #: ../../data/tribes/wares/kitchen_tools/helptexts.lua:6
@@ -3002,7 +3011,7 @@ msgid ""
 "trees. Logs are also used in the metal workshop to build basic tools, and in"
 " the charcoal kiln for the production of coal. The wood hardener refines "
 "logs into blackwood by hardening them with fire."
-msgstr "Варварские дровосеки валят деревья; егери сохраняет деревья. Брёвна также используются в кузнице для  создания основных инструментов и в печи углежога для производства угля. Балочная мастерская улучшает бревна в балки путем обжига огнем."
+msgstr "Варварские дровосеки валят деревья; егери сохраняют деревья. Брёвна также используются в кузнице для  создания основных инструментов и в печи углежога для производства угля. Балочная мастерская улучшает бревна в балки путем обжига огнем."
 
 #. TRANSLATORS: Helptext for a ware: Log
 #: ../../data/tribes/wares/log/helptexts.lua:10
@@ -3594,7 +3603,7 @@ msgstr "Работает глубоко под землей, в шахтах, д
 #. TRANSLATORS: Helptext for a worker: Recruit
 #: ../../data/tribes/workers/atlanteans/recruit/helptexts.lua:3
 msgctxt "atlanteans_worker"
-msgid "Eager to become a soldier and defend your tribe!"
+msgid "Eager to become a soldier and defend his tribe!"
 msgstr "Жаждет стать солдатом и защищать свое племя!"
 
 #. TRANSLATORS: Helptext for a worker: Sawyer
@@ -3667,7 +3676,7 @@ msgstr "Производит оружие для солдат."
 #. TRANSLATORS: Helptext for a worker: Weaver
 #: ../../data/tribes/workers/atlanteans/weaver/helptexts.lua:3
 msgctxt "atlanteans_worker"
-msgid "Produces cloth for buildings, ships and soldiers."
+msgid "Produces spidercloth for buildings, ships and soldiers."
 msgstr "Производит шёлк для зданий, кораблей и солдат."
 
 #. TRANSLATORS: Helptext for a worker: Woodcutter
@@ -3815,7 +3824,7 @@ msgstr "Сажает деревья."
 #. TRANSLATORS: Helptext for a worker: Recruit
 #: ../../data/tribes/workers/barbarians/recruit/helptexts.lua:3
 msgctxt "barbarians_worker"
-msgid "Eager to become a soldier and defend your tribe!"
+msgid "Eager to become a soldier and defend his tribe!"
 msgstr "Жаждет стать солдатом и защищать свое племя!"
 
 #. TRANSLATORS: Helptext for a worker: Scout
@@ -3984,7 +3993,7 @@ msgstr "Разводит свиней."
 #. TRANSLATORS: Helptext for a worker: Recruit
 #: ../../data/tribes/workers/empire/recruit/helptexts.lua:3
 msgctxt "empire_worker"
-msgid "Eager to become a soldier and defend your tribe!"
+msgid "Eager to become a soldier and defend his tribe!"
 msgstr "Жаждет стать солдатом и защищать свое племя!"
 
 #. TRANSLATORS: Helptext for a worker: Scout

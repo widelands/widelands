@@ -138,21 +138,21 @@ SeafaringStatisticsMenu::SeafaringStatisticsMenu(InteractivePlayer& plr,
 	colony_icon_ = tribe.get_worker_descr(tribe.builder())->icon();
 
 	// Buttons for ship states
-	main_box_.add(&filter_box_, UI::Align::kLeft, true);
-	filter_box_.add(&idle_btn_, UI::Align::kLeft);
-	filter_box_.add(&shipping_btn_, UI::Align::kLeft);
-	filter_box_.add(&waiting_btn_, UI::Align::kLeft);
-	filter_box_.add(&scouting_btn_, UI::Align::kLeft);
-	filter_box_.add(&portspace_btn_, UI::Align::kLeft);
+	main_box_.add(&filter_box_, UI::Box::Resizing::kFullSize);
+	filter_box_.add(&idle_btn_);
+	filter_box_.add(&shipping_btn_);
+	filter_box_.add(&waiting_btn_);
+	filter_box_.add(&scouting_btn_);
+	filter_box_.add(&portspace_btn_);
 
-	main_box_.add(&table_, UI::Align::kLeft, true, true);
+	main_box_.add(&table_, UI::Box::Resizing::kExpandBoth);
 
 	// Navigation buttons
-	main_box_.add(&navigation_box_, UI::Align::kLeft, true);
-	navigation_box_.add(&watchbtn_, UI::Align::kLeft);
+	main_box_.add(&navigation_box_, UI::Box::Resizing::kFullSize);
+	navigation_box_.add(&watchbtn_);
 	navigation_box_.add_inf_space();
-	navigation_box_.add(&openwindowbtn_, UI::Align::kLeft);
-	navigation_box_.add(&centerviewbtn_, UI::Align::kLeft);
+	navigation_box_.add(&openwindowbtn_);
+	navigation_box_.add(&centerviewbtn_);
 	main_box_.set_size(get_inner_w() - 2 * kPadding, get_inner_h() - 2 * kPadding);
 
 	// Configure actions
