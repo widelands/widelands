@@ -2,7 +2,7 @@
 # Copyright (C) 2005-2017 Widelands Development Team
 # 
 # Translators:
-# Erdy, 2016
+# Erdoğan Şahin, 2016
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
 # Volkan Gezer <volkangezer@gmail.com>, 2015
 # Yusuf boy <ysf.fb.1999@hotmail.com>, 2015
@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-01-28 21:57+0000\n"
-"PO-Revision-Date: 2017-01-28 21:58+0000\n"
+"POT-Creation-Date: 2017-02-19 19:34+0000\n"
+"PO-Revision-Date: 2017-02-19 19:36+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Turkish (http://www.transifex.com/widelands/widelands/language/tr/)\n"
 "MIME-Version: 1.0\n"
@@ -507,7 +507,7 @@ msgstr ""
 #: ../../data/txts/tips/barbarians.lua:8
 msgid ""
 "Always build a ranger’s and a gamekeeper’s hut, so you will not run out of "
-"logs."
+"logs or game."
 msgstr ""
 
 #: ../../data/txts/tips/editor.lua:4

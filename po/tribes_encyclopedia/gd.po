@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-01-28 21:57+0000\n"
-"PO-Revision-Date: 2017-01-28 22:08+0000\n"
+"POT-Creation-Date: 2017-02-19 19:34+0000\n"
+"PO-Revision-Date: 2017-02-20 08:09+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Gaelic, Scottish (http://www.transifex.com/widelands/widelands/language/gd/)\n"
 "MIME-Version: 1.0\n"
@@ -400,8 +400,8 @@ msgstr "Nì e tuaghan, tuaghan geura ’s tuaghan mòra."
 msgctxt "barbarians_building"
 msgid ""
 "The Barbarian ax workshop is the intermediate production site in a series of"
-" three buildings. It is an upgrade from the metal workshop but doesn’t "
-"require additional qualification for the worker."
+" three buildings. It is enhanced from the metal workshop but doesn’t require"
+" additional qualification for the worker."
 msgstr "’S e an togalach air ìre meadhanach ann an sreath de thrì togalaichean a th’ ann an ceàrdach thuaghan nan Tùsanach. Thèid a leasachadh on cheàrdach meatailt ach chan eil eòlas sònraichte a dhìth air a’ ghobha."
 
 #: ../../data/tribes/buildings/productionsites/barbarians/ax_workshop/helptexts.lua:23
@@ -1961,154 +1961,163 @@ msgstr "Home"
 #. the key.
 #: ../../data/tribes/scripting/help/controls.lua:59
 msgctxt "hotkey"
-msgid "(Ctrl +) 1-9"
-msgstr "(Ctrl +) 1-9"
+msgid "Ctrl + 1-9"
+msgstr "Ctrl + 1-9"
 
 #: ../../data/tribes/scripting/help/controls.lua:59
-msgid "Remember and go to previously remembered locations"
-msgstr "Cuimhnich is rach dha na h-ionadan air an cuimhneachadh roimhe"
+msgid "Remember current location"
+msgstr "Cuimhnich an t-ionad làithreach"
+
+#: ../../data/tribes/scripting/help/controls.lua:60
+msgctxt "hotkey"
+msgid "1-9"
+msgstr "1-9"
+
+#: ../../data/tribes/scripting/help/controls.lua:60
+msgid "Go to previously remembered location"
+msgstr "Rach gu ionad a chaidh a chuimhneachadh roimhe"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
-#: ../../data/tribes/scripting/help/controls.lua:61
+#: ../../data/tribes/scripting/help/controls.lua:62
 msgctxt "hotkey"
-msgid "(Ctrl +) +"
-msgstr "(Ctrl +) +"
+msgid "Ctrl + +"
+msgstr "Ctrl + +"
 
-#: ../../data/tribes/scripting/help/controls.lua:61
+#: ../../data/tribes/scripting/help/controls.lua:62
 msgid "Increase zoom"
 msgstr "Meudaich an sùm"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
-#: ../../data/tribes/scripting/help/controls.lua:63
+#: ../../data/tribes/scripting/help/controls.lua:64
 msgctxt "hotkey"
-msgid "(Ctrl +) -"
-msgstr "(Ctrl +) -"
+msgid "Ctrl + -"
+msgstr "Ctrl + -"
 
-#: ../../data/tribes/scripting/help/controls.lua:63
+#: ../../data/tribes/scripting/help/controls.lua:64
 msgid "Decrease zoom"
 msgstr "Lùghdaich an sùm"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
-#: ../../data/tribes/scripting/help/controls.lua:65
+#: ../../data/tribes/scripting/help/controls.lua:66
 msgctxt "hotkey"
-msgid "(Ctrl +) 0"
-msgstr "(Ctrl +) 0"
+msgid "Ctrl + 0"
+msgstr "Ctrl + 0"
 
-#: ../../data/tribes/scripting/help/controls.lua:65
+#: ../../data/tribes/scripting/help/controls.lua:66
 msgid "Reset zoom"
 msgstr "Ath-shuidhich an sùm"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
-#: ../../data/tribes/scripting/help/controls.lua:67
+#: ../../data/tribes/scripting/help/controls.lua:68
 msgctxt "hotkey"
 msgid "Ctrl + F11"
 msgstr "Ctrl + F11"
 
-#: ../../data/tribes/scripting/help/controls.lua:67
+#: ../../data/tribes/scripting/help/controls.lua:68
 msgid "Take a screenshot"
 msgstr "Tog glacadh-sgrìn"
 
 #. TRANSLATORS: This is an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:70
+#: ../../data/tribes/scripting/help/controls.lua:71
 msgctxt "hotkey"
 msgid "Ctrl + F10"
 msgstr "Ctrl + F10"
 
-#: ../../data/tribes/scripting/help/controls.lua:70
+#: ../../data/tribes/scripting/help/controls.lua:71
 msgid "Quit the game immediately"
 msgstr "Fàg an geama sa bhad"
 
 #. TRANSLATORS: This is an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:72
+#: ../../data/tribes/scripting/help/controls.lua:73
 msgctxt "hotkey"
 msgid "F6"
 msgstr "F6"
 
-#: ../../data/tribes/scripting/help/controls.lua:72
+#: ../../data/tribes/scripting/help/controls.lua:73
 msgid "Show the debug console (only in debug-builds)"
 msgstr "Seall a’ chonsoil dhì-bhugachaidh (le togail dì-bhugachaidh a-mhàin)"
 
-#: ../../data/tribes/scripting/help/controls.lua:75
+#: ../../data/tribes/scripting/help/controls.lua:76
 msgid ""
 "In the message window, the following additional shortcuts are available:"
 msgstr "Tha na h-ath-ghoiridean a bharrachd seo ri fhaighinn ann an uinneag nan teachdaireachd:"
 
 #. TRANSLATORS: This is the helptext for an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:78
+#: ../../data/tribes/scripting/help/controls.lua:79
 msgctxt "hotkey"
 msgid "Alt + 0"
 msgstr "Alt + 0"
 
-#: ../../data/tribes/scripting/help/controls.lua:78
+#: ../../data/tribes/scripting/help/controls.lua:79
 msgid "Show all messages"
 msgstr "Seall a h-uile teachdaireachd"
 
 #. TRANSLATORS: This is the helptext for an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:80
+#: ../../data/tribes/scripting/help/controls.lua:81
 msgctxt "hotkey"
 msgid "Alt + 1"
 msgstr "Alt + 1"
 
-#: ../../data/tribes/scripting/help/controls.lua:80
+#: ../../data/tribes/scripting/help/controls.lua:81
 msgid "Show geologists’ messages only"
 msgstr "Na seall ach teachdaireachdan nan clach-eòlaichean"
 
 #. TRANSLATORS: This is the helptext for an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:82
+#: ../../data/tribes/scripting/help/controls.lua:83
 msgctxt "hotkey"
 msgid "Alt + 2"
 msgstr "Alt + 2"
 
-#: ../../data/tribes/scripting/help/controls.lua:82
+#: ../../data/tribes/scripting/help/controls.lua:83
 msgid "Show economy messages only"
 msgstr "Na seall ach teachdaireachdan na h-eaconamaidh"
 
 #. TRANSLATORS: This is the helptext for an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:84
+#: ../../data/tribes/scripting/help/controls.lua:85
 msgctxt "hotkey"
 msgid "Alt + 3"
 msgstr "Alt + 3"
 
-#: ../../data/tribes/scripting/help/controls.lua:84
+#: ../../data/tribes/scripting/help/controls.lua:85
 msgid "Show seafaring messages only"
 msgstr "Na seall ach teachdaireachdan na seòladaireachd"
 
 #. TRANSLATORS: This is the helptext for an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:86
+#: ../../data/tribes/scripting/help/controls.lua:87
 msgctxt "hotkey"
 msgid "Alt + 4"
 msgstr "Alt + 4"
 
-#: ../../data/tribes/scripting/help/controls.lua:86
+#: ../../data/tribes/scripting/help/controls.lua:87
 msgid "Show warfare messages only"
 msgstr "Na seall ach teachdaireachdan a’ chogaidh"
 
 #. TRANSLATORS: This is the helptext for an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:88
+#: ../../data/tribes/scripting/help/controls.lua:89
 msgctxt "hotkey"
 msgid "Alt + 5"
 msgstr "Alt + 5"
 
-#: ../../data/tribes/scripting/help/controls.lua:88
+#: ../../data/tribes/scripting/help/controls.lua:89
 msgid "Show scenario messages only"
 msgstr "Na seall ach teachdaireachdan a’ chnàmh-sgeòil"
 
 #. TRANSLATORS: This is the helptext for an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:90
+#: ../../data/tribes/scripting/help/controls.lua:91
 msgid "Jump to the location corresponding to the current message"
 msgstr "Gearr leum dhan ionad a tha co-cheangailte ris an teachdaireachd làithreach"
 
-#: ../../data/tribes/scripting/help/controls.lua:92
+#: ../../data/tribes/scripting/help/controls.lua:93
 msgid "Archive/Restore the current message"
 msgstr "Cuir an teachdaireachd làithreach dhan tasglann no aisig i"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
-#: ../../data/tribes/scripting/help/controls.lua:92
+#: ../../data/tribes/scripting/help/controls.lua:93
 msgctxt "hotkey"
 msgid "Delete"
 msgstr "Delete"
@@ -3588,8 +3597,8 @@ msgstr "Obraichidh e shìos sna mèinnean gus gual, iarann, òr no seudan fhaigh
 #. TRANSLATORS: Helptext for a worker: Recruit
 #: ../../data/tribes/workers/atlanteans/recruit/helptexts.lua:3
 msgctxt "atlanteans_worker"
-msgid "Eager to become a soldier and defend your tribe!"
-msgstr "Ann an sunnd cogaidh ach feumach air oideachadh fhathast gus dol ’na shaighdear is do threubh a dhìon!"
+msgid "Eager to become a soldier and defend his tribe!"
+msgstr "Ann an sunnd cogaidh ach feumach air oideachadh fhathast gus dol ’na shaighdear is a threubh a dhìon!"
 
 #. TRANSLATORS: Helptext for a worker: Sawyer
 #: ../../data/tribes/workers/atlanteans/sawyer/helptexts.lua:3
@@ -3661,7 +3670,7 @@ msgstr "Nì e airm airson nan saighdearan."
 #. TRANSLATORS: Helptext for a worker: Weaver
 #: ../../data/tribes/workers/atlanteans/weaver/helptexts.lua:3
 msgctxt "atlanteans_worker"
-msgid "Produces cloth for buildings, ships and soldiers."
+msgid "Produces spidercloth for buildings, ships and soldiers."
 msgstr "Nì e sìoda airson togalaichean, longan is saighdearan."
 
 #. TRANSLATORS: Helptext for a worker: Woodcutter
@@ -3809,8 +3818,8 @@ msgstr "Cuiridh e craobhan."
 #. TRANSLATORS: Helptext for a worker: Recruit
 #: ../../data/tribes/workers/barbarians/recruit/helptexts.lua:3
 msgctxt "barbarians_worker"
-msgid "Eager to become a soldier and defend your tribe!"
-msgstr "Ann an sunnd cogaidh ach feumach air oideachadh fhathast gus dol ’na shaighdear is do threubh a dhìon!"
+msgid "Eager to become a soldier and defend his tribe!"
+msgstr "Ann an sunnd cogaidh ach feumach air oideachadh fhathast gus dol ’na shaighdear is a threubh a dhìon!"
 
 #. TRANSLATORS: Helptext for a worker: Scout
 #: ../../data/tribes/workers/barbarians/scout/helptexts.lua:3
@@ -3978,8 +3987,8 @@ msgstr "Togaidh e mucan."
 #. TRANSLATORS: Helptext for a worker: Recruit
 #: ../../data/tribes/workers/empire/recruit/helptexts.lua:3
 msgctxt "empire_worker"
-msgid "Eager to become a soldier and defend your tribe!"
-msgstr "Ann an sunnd cogaidh ach feumach air oideachadh fhathast gus dol ’na shaighdear is do threubh a dhìon!"
+msgid "Eager to become a soldier and defend his tribe!"
+msgstr "Ann an sunnd cogaidh ach feumach air oideachadh fhathast gus dol ’na shaighdear is a threubh a dhìon!"
 
 #. TRANSLATORS: Helptext for a worker: Scout
 #: ../../data/tribes/workers/empire/scout/helptexts.lua:3

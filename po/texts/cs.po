@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-01-31 07:09+0000\n"
-"PO-Revision-Date: 2017-02-07 17:36+0000\n"
+"POT-Creation-Date: 2017-02-19 19:34+0000\n"
+"PO-Revision-Date: 2017-02-20 18:01+0000\n"
 "Last-Translator: Milan Fašina <matrix17@seznam.cz>\n"
 "Language-Team: Czech (http://www.transifex.com/widelands/widelands/language/cs/)\n"
 "MIME-Version: 1.0\n"
@@ -508,8 +508,8 @@ msgstr "Pozorně sleduj své rybáře. Když se vyčerpají zásoby ryb v jejich
 #: ../../data/txts/tips/barbarians.lua:8
 msgid ""
 "Always build a ranger’s and a gamekeeper’s hut, so you will not run out of "
-"logs."
-msgstr "Nikdy nezapomeň postavit chaty pro lesníka a hajného, aby ti nedošly kmeny."
+"logs or game."
+msgstr "Vždy postav chaty pro lesníka a hajného, aby ti nedošly kmeny nebo zvěřina."
 
 #: ../../data/txts/tips/editor.lua:4
 msgid ""

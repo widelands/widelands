@@ -383,7 +383,7 @@ void FieldActionWindow::add_buttons_attack() {
 	if (upcast(Widelands::Attackable, attackable, map_->get_immovable(node_))) {
 		if (player_ && player_->is_hostile(attackable->owner()) && attackable->can_attack()) {
 			attack_box_ = new AttackBox(&a_box, player_, &node_, 0, 0);
-			a_box.add(attack_box_, UI::Align::kTop);
+			a_box.add(attack_box_);
 
 			set_fastclick_panel(&add_button(
 			   &a_box, "attack", pic_attack, &FieldActionWindow::act_attack, _("Start attack")));
@@ -514,7 +514,7 @@ UI::Button& FieldActionWindow::add_button(UI::Box* const box,
 	                   g_gr->images().get(picname), tooltip_text);
 	button.sigclicked.connect(boost::bind(fn, this));
 	button.set_repeating(repeating);
-	box->add(&button, UI::Align::kTop);
+	box->add(&button);
 
 	return button;
 }

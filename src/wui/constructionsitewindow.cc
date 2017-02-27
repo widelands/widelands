@@ -44,14 +44,13 @@ void ConstructionSiteWindow::init(bool avoid_fastclick) {
 	progress_ = new UI::ProgressBar(&box, 0, 0, UI::ProgressBar::DefaultWidth,
 	                                UI::ProgressBar::DefaultHeight, UI::ProgressBar::Horizontal);
 	progress_->set_total(1 << 16);
-	box.add(progress_, UI::Align::kHCenter);
+	box.add(progress_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 
 	box.add_space(8);
 
 	// Add the wares queue
 	for (uint32_t i = 0; i < cs.get_nrwaresqueues(); ++i)
-		box.add(
-		   new InputQueueDisplay(&box, 0, 0, igbase(), cs, cs.get_waresqueue(i)), UI::Align::kLeft);
+		box.add(new InputQueueDisplay(&box, 0, 0, igbase(), cs, cs.get_waresqueue(i)));
 
 	get_tabs()->add("wares", g_gr->images().get(pic_tab_wares), &box, _("Building materials"));
 
