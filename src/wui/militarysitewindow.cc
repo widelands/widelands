@@ -41,6 +41,6 @@ void MilitarySiteWindow::create_capsbuttons(UI::Box* buttons) {
 void MilitarySiteWindow::init(bool avoid_fastclick) {
 	BuildingWindow::init(avoid_fastclick);
 	get_tabs()->add("soldiers", g_gr->images().get(pic_tab_military),
-	                create_soldier_list(*get_tabs(), igbase(), militarysite()), _("Soldiers"));
+	                create_soldier_list(*get_tabs(), *igbase(), militarysite()), _("Soldiers"));
 	think();
 }

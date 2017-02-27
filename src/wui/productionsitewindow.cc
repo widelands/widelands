@@ -68,7 +68,8 @@ void ProductionSiteWindow::init(bool avoid_fastclick) {
 		   get_tabs(), 0, 0, UI::Box::Vertical, g_gr->get_xres() - 80, g_gr->get_yres() - 80);
 
 		for (uint32_t i = 0; i < inputqueues.size(); ++i) {
-			prod_box->add(new InputQueueDisplay(prod_box, 0, 0, igbase(), productionsite(), inputqueues[i]));
+			prod_box->add(
+			   new InputQueueDisplay(prod_box, 0, 0, *igbase(), productionsite(), inputqueues[i]));
 		}
 
 		get_tabs()->add("wares", g_gr->images().get(pic_tab_wares), prod_box, _("Wares"));
@@ -92,7 +93,7 @@ void ProductionSiteWindow::init(bool avoid_fastclick) {
 		}
 		worker_table_->fit_height();
 
-		if (igbase().can_act(building().owner().player_number())) {
+		if (igbase()->can_act(building().owner().player_number())) {
 			worker_caps_->add_inf_space();
 			UI::Button* evict_button = new UI::Button(
 			   worker_caps_, "evict", 0, 0, 34, 34, g_gr->images().get("images/ui_basic/but4.png"),
@@ -178,7 +179,7 @@ void ProductionSiteWindow::evict_worker() {
 		Widelands::Worker* worker =
 		   productionsite().working_positions()[worker_table_->get_selected()].worker;
 		if (worker) {
-			igbase().game().send_player_evict_worker(*worker);
+			igbase()->game().send_player_evict_worker(*worker);
 		}
 	}
 }

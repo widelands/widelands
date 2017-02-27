@@ -40,7 +40,7 @@ TrainingSiteWindow::TrainingSiteWindow(InteractiveGameBase& parent,
 void TrainingSiteWindow::init(bool avoid_fastclick) {
 	ProductionSiteWindow::init(avoid_fastclick);
 	get_tabs()->add("soldiers", g_gr->images().get(pic_tab_military),
-	                create_soldier_list(*get_tabs(), igbase(), trainingsite()),
+	                create_soldier_list(*get_tabs(), *igbase(), trainingsite()),
 	                _("Soldiers in training"));
 	think();
 }

@@ -139,8 +139,8 @@ WarehouseWaresPanel::WarehouseWaresPanel(UI::Panel* parent,
 	b = new UI::Button(                                                                             \
 	   buttons, #policy, 0, 0, 34, 34, g_gr->images().get("images/ui_basic/but4.png"),              \
 	   g_gr->images().get("images/wui/buildings/stock_policy_button_" #policy ".png"), tooltip),    \
-	b->sigclicked.connect(                                                                          \
-	   boost::bind(&WarehouseWaresPanel::set_policy, this, Widelands::Warehouse::StockPolicy::k##policyname)), \
+	b->sigclicked.connect(boost::bind(                                                              \
+	   &WarehouseWaresPanel::set_policy, this, Widelands::Warehouse::StockPolicy::k##policyname)),  \
 	buttons->add(b);
 
 		ADD_POLICY_BUTTON(normal, Normal, _("Normal policy"))
@@ -184,11 +184,11 @@ void WarehouseWindow::init(bool avoid_fastclick) {
 	BuildingWindow::init(avoid_fastclick);
 	get_tabs()->add(
 	   "wares", g_gr->images().get(pic_tab_wares),
-	   new WarehouseWaresPanel(get_tabs(), Width, igbase(), warehouse(), Widelands::wwWARE),
+	   new WarehouseWaresPanel(get_tabs(), Width, *igbase(), warehouse(), Widelands::wwWARE),
 	   _("Wares"));
 	get_tabs()->add(
 	   "workers", g_gr->images().get(pic_tab_workers),
-	   new WarehouseWaresPanel(get_tabs(), Width, igbase(), warehouse(), Widelands::wwWORKER),
+	   new WarehouseWaresPanel(get_tabs(), Width, *igbase(), warehouse(), Widelands::wwWORKER),
 	   _("Workers"));
 
 	if (Widelands::PortDock* pd = warehouse().get_portdock()) {
@@ -200,7 +200,7 @@ void WarehouseWindow::init(bool avoid_fastclick) {
 		                _("Workers waiting to embark"));
 		if (pd->expedition_started()) {
 			get_tabs()->add("expedition_wares_queue", g_gr->images().get(pic_tab_expedition),
-			                create_portdock_expedition_display(get_tabs(), warehouse(), igbase()),
+			                create_portdock_expedition_display(get_tabs(), warehouse(), *igbase()),
 			                _("Expedition"));
 		}
 	}

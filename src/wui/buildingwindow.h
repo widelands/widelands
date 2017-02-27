@@ -55,8 +55,8 @@ struct BuildingWindow : public UI::UniqueWindow {
 		return building_;
 	}
 
-	InteractiveGameBase& igbase() const {
-		return dynamic_cast<InteractiveGameBase&>(*get_parent());
+	InteractiveGameBase* igbase() const {
+		return parent_;
 	}
 
 	void draw(RenderTarget&) override;
@@ -89,6 +89,7 @@ protected:
 	bool is_dying_;
 
 private:
+	InteractiveGameBase* parent_;
 	/// Actions performed when a NoteBuilding is received.
 	void on_building_note(const Widelands::NoteBuilding& note);
 	Widelands::Building& building_;
