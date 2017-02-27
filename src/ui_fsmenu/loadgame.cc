@@ -188,6 +188,7 @@ FullscreenMenuLoadGame::FullscreenMenuLoadGame(Widelands::Game& g,
 		ta_mapname_.set_tooltip(_("The map that this game is based on"));
 		delete_.set_tooltip(_("Delete this game"));
 	}
+	set_thinks(false);
 	minimap_icon_.set_visible(false);
 
 	back_.sigclicked.connect(boost::bind(&FullscreenMenuLoadGame::clicked_back, boost::ref(*this)));
@@ -240,6 +241,7 @@ FullscreenMenuLoadGame::FullscreenMenuLoadGame(Widelands::Game& g,
 
 void FullscreenMenuLoadGame::layout() {
 	// TODO(GunChleoc): Implement when we have box layout for the details.
+	table_.layout();
 }
 
 void FullscreenMenuLoadGame::think() {
