@@ -30,13 +30,10 @@
 #include <unistd.h>
 #endif
 
-#include "logic/widelands_geometry.h"
+
 #include "random/random.h"
 #include "sound/fxset.h"
 
-namespace Widelands {
-class EditorGameBase;
-}
 struct Songset;
 struct SDL_mutex;
 class FileRead;
@@ -184,9 +181,7 @@ public:
 	void load_fx_if_needed(const std::string& dir,
 	                       const std::string& basename,
 	                       const std::string& fx_name);
-	void play_fx(const std::string& fx_name,
-	             Widelands::Coords map_position,
-	             uint8_t priority = PRIO_ALLOW_MULTIPLE + PRIO_MEDIUM);
+
 	void play_fx(const std::string& fx_name,
 	             int32_t stereo_position,
 	             uint8_t priority = PRIO_ALLOW_MULTIPLE + PRIO_MEDIUM);
@@ -219,11 +214,6 @@ public:
 		return MIX_MAX_VOLUME;
 	}
 
-	/** The game logic where we can get a mapping from logical to screen
-	 * coordinates and vice vers
-	*/
-	Widelands::EditorGameBase* egbase_;
-
 	/** Only for buffering the command line option --nosound until real initialization is done.
 	 * \see SoundHandler::SoundHandler()
 	 * \see SoundHandler::init()
@@ -242,7 +232,6 @@ private:
 	void initialization_error(const std::string& msg);
 
 	void load_one_fx(const std::string& path, const std::string& fx_name);
-	int32_t stereo_position(Widelands::Coords position);
 	bool play_or_not(const std::string& fx_name, int32_t stereo_position, uint8_t priority);
 
 	/// Whether to disable background music

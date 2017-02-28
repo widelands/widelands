@@ -50,7 +50,7 @@
 #include "logic/map_objects/tribes/warehouse.h"
 #include "logic/playercommand.h"
 #include "scripting/lua_table.h"
-#include "sound/sound_handler.h"
+#include "sound/note_sound.h"
 #include "wui/interactive_player.h"
 
 namespace {
@@ -278,15 +278,14 @@ void Player::update_team_players() {
 void Player::play_message_sound(const Message::Type& msgtype) {
 #define MAYBE_PLAY(type, file)                                                                     \
 	if (msgtype == type) {                                                                          \
-		g_sound_handler.play_fx(file, 200, PRIO_ALWAYS_PLAY);                                        \
+		Notifications::publish(NoteSound(file, 200, PRIO_ALWAYS_PLAY)); \
 		return;                                                                                      \
 	}
 
 	if (g_options.pull_section("global").get_bool("sound_at_message", true)) {
 		MAYBE_PLAY(Message::Type::kEconomySiteOccupied, "military/site_occupied");
 		MAYBE_PLAY(Message::Type::kWarfareUnderAttack, "military/under_attack");
-
-		g_sound_handler.play_fx("message", 200, PRIO_ALWAYS_PLAY);
+		Notifications::publish(NoteSound("message", 200, PRIO_ALWAYS_PLAY));
 	}
 }
 

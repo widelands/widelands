@@ -254,6 +254,7 @@ wl_library(wui
     logic_game_settings
     logic_widelands_geometry
     network
+    note_sound
     notifications
     profile
     scripting_coroutine

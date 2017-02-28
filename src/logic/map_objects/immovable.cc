@@ -52,7 +52,7 @@
 #include "map_io/world_legacy_lookup_table.h"
 #include "notifications/notifications.h"
 #include "scripting/lua_table.h"
-#include "sound/sound_handler.h"
+#include "sound/note_sound.h"
 #include "wui/interactive_base.h"
 
 namespace Widelands {
@@ -805,7 +805,7 @@ ImmovableProgram::ActPlaySound::ActPlaySound(char* parameters, const ImmovableDe
  * Whether the effect actually gets played
  * is decided only by the sound server*/
 void ImmovableProgram::ActPlaySound::execute(Game& game, Immovable& immovable) const {
-	g_sound_handler.play_fx(name, immovable.get_position(), priority);
+	Notifications::publish(NoteSound(name, immovable.get_position(), priority));
 	immovable.program_step(game);
 }
 
