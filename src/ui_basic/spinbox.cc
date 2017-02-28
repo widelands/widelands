@@ -178,23 +178,24 @@ SpinBox::~SpinBox() {
 }
 
 void SpinBox::layout() {
-	// Only do the checks if we have a unit width, so we can have 0 in the constructor
-	// and set the dimensions later.
-	if (unit_width_ > 0) {
-		// 40 is an ad hoc width estimate for the MultilineTextarea scrollbar + a bit of text.
-		if (!sbi_->label->get_text().empty() && (get_w() + padding_) <= unit_width_ - 40) {
-			throw wexception("SpinBox: Overall width %d must be bigger than unit width %d + %d * %d + "
-			                 "40 for padding",
-			                 get_w(), unit_width_, number_of_paddings_, padding_);
-		}
+	// Do not layout if the size hasn't been set yet.
+	if (get_w() == 0 && get_h() == 0) {
+		return;
+	}
 
-		if (unit_width_ < (type_ == SpinBox::Type::kBig ? 7 * button_height_ : 3 * button_height_)) {
-			log("Not enough space to draw spinbox \"%s\".\n"
-			    "Width %d is smaller than required width %d."
-			    "Please report as a bug.\n",
-			    sbi_->label->get_text().c_str(), unit_width_,
-			    (type_ == SpinBox::Type::kBig ? 7 * button_height_ : 3 * button_height_));
-		}
+	// 40 is an ad hoc width estimate for the MultilineTextarea scrollbar + a bit of text.
+	if (!sbi_->label->get_text().empty() && (get_w() + padding_) <= unit_width_ - 40) {
+		throw wexception("SpinBox: Overall width %d must be bigger than unit width %d + %d * %d + "
+							  "40 for padding",
+							  get_w(), unit_width_, number_of_paddings_, padding_);
+	}
+
+	if (unit_width_ < (type_ == SpinBox::Type::kBig ? 7 * button_height_ : 3 * button_height_)) {
+		log("Not enough space to draw spinbox \"%s\".\n"
+			 "Width %d is smaller than required width %d."
+			 "Please report as a bug.\n",
+			 sbi_->label->get_text().c_str(), unit_width_,
+			 (type_ == SpinBox::Type::kBig ? 7 * button_height_ : 3 * button_height_));
 	}
 
 	// 10 is arbitrary, the actual height will be set by the Multilinetextarea itself
