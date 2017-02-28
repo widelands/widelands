@@ -27,12 +27,16 @@ wl_library(base_i18n
   SRCS
     i18n.h
     i18n.cc
-    utf8.h
   USES_INTL
   DEPENDS
     base_log
     base_macros
     third_party_gettext
+)
+
+wl_library(base_utf8
+  SRCS
+    utf8.h
 )
 
 wl_library(base_geometry

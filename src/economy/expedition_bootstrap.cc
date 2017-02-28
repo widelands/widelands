@@ -26,6 +26,7 @@
 #include "economy/portdock.h"
 #include "economy/wares_queue.h"
 #include "economy/workers_queue.h"
+#include "io/fileread.h"
 #include "io/filewrite.h"
 #include "logic/map_objects/tribes/warehouse.h"
 #include "logic/player.h"

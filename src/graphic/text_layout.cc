@@ -25,7 +25,6 @@
 #include <boost/algorithm/string.hpp>
 #include <boost/format.hpp>
 
-#include "base/utf8.h"
 #include "graphic/font_handler1.h"
 #include "graphic/image.h"
 #include "graphic/text/bidi.h"
@@ -159,95 +158,48 @@ const Image* autofit_ui_text(const std::string& text, int width, RGBColor color,
 
 namespace UI {
 
-/**
- * Prepare the TTF style settings for rendering in this style.
- */
-void TextStyle::setup() const {
-	int32_t font_style = TTF_STYLE_NORMAL;
-	if (bold)
-		font_style |= TTF_STYLE_BOLD;
-	if (italics)
-		font_style |= TTF_STYLE_ITALIC;
-	if (underline)
-		font_style |= TTF_STYLE_UNDERLINE;
-	TTF_SetFontStyle(font->get_ttf_font(), font_style);
-}
 
 /**
- * Get a width estimate for text wrapping.
+ * This mirrors the horizontal alignment for RTL languages.
+ *
+ * Do not store this value as it is based on the global font setting.
  */
-uint32_t TextStyle::calc_width_for_wrapping(const UChar& c) const {
-	int result = 0;
-	TTF_GlyphMetrics(font->get_ttf_font(), c, nullptr, nullptr, nullptr, nullptr, &result);
-	return result;
-}
-
-/**
- * Get a width estimate for text wrapping.
- */
-uint32_t TextStyle::calc_width_for_wrapping(const std::string& text) const {
-	int result = 0;
-	const icu::UnicodeString parseme(text.c_str(), "UTF-8");
-	for (int i = 0; i < parseme.length(); ++i) {
-		UChar c = parseme.charAt(i);
-		if (!i18n::is_diacritic(c)) {
-			result += calc_width_for_wrapping(c);
+Align mirror_alignment(Align alignment) {
+	if (UI::g_fh1->fontset()->is_rtl()) {
+		switch (alignment) {
+		case Align::kLeft:
+			alignment = Align::kRight;
+			break;
+		case Align::kRight:
+			alignment = Align::kLeft;
+			break;
+		case Align::kCenter:
+			break;
 		}
 	}
-	return result;
+	return alignment;
 }
 
 /**
- * Compute the bare width (without caret padding) of the given string.
- */
-uint32_t TextStyle::calc_bare_width(const std::string& text) const {
-	int w, h;
-	setup();
-
-	TTF_SizeUTF8(font->get_ttf_font(), text.c_str(), &w, &h);
-	return w;
-}
-
-/**
- * \note Please only use this function once you understand the definitions
- * of ascent/descent etc.
+ * Align pt horizontally to match align based on width w.
  *
- * Computes the actual line height we should use for rendering the given text.
- * This is heuristic, because it pre-initializes the miny and maxy values to
- * the ones that are typical for Latin scripts, so that lineskips should always
- * be the same for such scripts.
+ * When correcting for align, we never move from pixel boundaries to
+ * sub-pixels, because this might lead from pixel-perfect rendering to
+ * subsampled rendering - this can lead to blurry texts. That is why we
+ * never do float divisions in this function.
  */
-void TextStyle::calc_bare_height_heuristic(const std::string& text,
-                                           int32_t& miny,
-                                           int32_t& maxy) const {
-	miny = font->computed_typical_miny_;
-	maxy = font->computed_typical_maxy_;
+void correct_for_align(Align align, uint32_t w, Vector2f* pt) {
 
-	setup();
-	std::string::size_type pos = 0;
-	while (pos < text.size()) {
-		uint16_t ch = Utf8::utf8_to_unicode(text, pos);
-		int32_t glyphminy, glyphmaxy;
-		TTF_GlyphMetrics(font->get_ttf_font(), ch, nullptr, nullptr, &glyphminy, &glyphmaxy, nullptr);
-		miny = std::min(miny, glyphminy);
-		maxy = std::max(maxy, glyphmaxy);
-	}
+	if (align == Align::kCenter)
+		pt->x -= w / 2;
+	else if (align == Align::kRight)
+		pt->x -= w;
 }
 
-/*
-=============================
-
-Default styles
-
-=============================
-*/
-
-TextStyle::TextStyle()
-   : font(Font::get(UI::g_fh1->fontset()->sans(), UI_FONT_SIZE_SMALL)),
-     fg(UI_FONT_CLR_FG),
-     bold(true),
-     italics(false),
-     underline(false) {
+/**
+ * Adjust the y coordinate in 'point 'pt' to vertically center an element with height 'h'.
+ */
+void center_vertically(uint32_t h, Vector2f* pt) {
+	pt->y -= h / 2;
 }
-
 }  // namespace UI

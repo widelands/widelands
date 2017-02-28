@@ -33,6 +33,7 @@
 #include <string>
 
 #include <SDL_image.h>
+#include <SDL_ttf.h>
 #include <boost/algorithm/string/predicate.hpp>
 #include <boost/format.hpp>
 #include <boost/regex.hpp>
@@ -337,7 +338,7 @@ WLApplication::WLApplication(int const argc, char const* const* const argv)
 		throw wexception("True Type library did not initialize: %s\n", TTF_GetError());
 
 	UI::g_fh1 = UI::create_fonthandler(
-	   &g_gr->images());  // This will create the fontset, so loading it first.
+		&g_gr->images(), i18n::get_locale());  // This will create the fontset, so loading it first.
 	UI::g_fh = new UI::FontHandler();
 
 	g_gr->initialize(
@@ -798,6 +799,10 @@ void WLApplication::shutdown_settings() {
 }
 
 void WLApplication::shutdown_hardware() {
+	if (UI::g_fh) {
+		// TODO(unknown): this should really not be needed, but currently is :(
+		UI::g_fh->flush();
+	}
 	delete g_gr;
 	g_gr = nullptr;
 

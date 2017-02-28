@@ -21,8 +21,12 @@
 
 #include <map>
 
+#include <unicode/unistr.h>
+
+#include "base/i18n.h"
 #include "base/utf8.h"
 #include "graphic/font_handler1.h"  // We need the fontset for the size offset
+#include "graphic/text/bidi.h"
 #include "graphic/text/font_set.h"
 #include "graphic/text_constants.h"
 #include "io/filesystem/layered_filesystem.h"
@@ -152,6 +156,99 @@ void Font::shutdown() {
 		delete g_fontmap.begin()->second;
 		g_fontmap.erase(g_fontmap.begin());
 	}
+}
+
+
+
+/**
+ * Prepare the TTF style settings for rendering in this style.
+ */
+void TextStyle::setup() const {
+	int32_t font_style = TTF_STYLE_NORMAL;
+	if (bold)
+		font_style |= TTF_STYLE_BOLD;
+	if (italics)
+		font_style |= TTF_STYLE_ITALIC;
+	if (underline)
+		font_style |= TTF_STYLE_UNDERLINE;
+	TTF_SetFontStyle(font->get_ttf_font(), font_style);
+}
+
+/**
+ * Get a width estimate for text wrapping.
+ */
+uint32_t TextStyle::calc_width_for_wrapping(const UChar& c) const {
+	int result = 0;
+	TTF_GlyphMetrics(font->get_ttf_font(), c, nullptr, nullptr, nullptr, nullptr, &result);
+	return result;
+}
+
+/**
+ * Get a width estimate for text wrapping.
+ */
+uint32_t TextStyle::calc_width_for_wrapping(const std::string& text) const {
+	int result = 0;
+	const icu::UnicodeString parseme(text.c_str(), "UTF-8");
+	for (int i = 0; i < parseme.length(); ++i) {
+		UChar c = parseme.charAt(i);
+		if (!i18n::is_diacritic(c)) {
+			result += calc_width_for_wrapping(c);
+		}
+	}
+	return result;
+}
+
+/**
+ * Compute the bare width (without caret padding) of the given string.
+ */
+uint32_t TextStyle::calc_bare_width(const std::string& text) const {
+	int w, h;
+	setup();
+
+	TTF_SizeUTF8(font->get_ttf_font(), text.c_str(), &w, &h);
+	return w;
+}
+
+/**
+ * \note Please only use this function once you understand the definitions
+ * of ascent/descent etc.
+ *
+ * Computes the actual line height we should use for rendering the given text.
+ * This is heuristic, because it pre-initializes the miny and maxy values to
+ * the ones that are typical for Latin scripts, so that lineskips should always
+ * be the same for such scripts.
+ */
+void TextStyle::calc_bare_height_heuristic(const std::string& text,
+														 int32_t& miny,
+														 int32_t& maxy) const {
+	miny = font->computed_typical_miny_;
+	maxy = font->computed_typical_maxy_;
+
+	setup();
+	std::string::size_type pos = 0;
+	while (pos < text.size()) {
+		uint16_t ch = Utf8::utf8_to_unicode(text, pos);
+		int32_t glyphminy, glyphmaxy;
+		TTF_GlyphMetrics(font->get_ttf_font(), ch, nullptr, nullptr, &glyphminy, &glyphmaxy, nullptr);
+		miny = std::min(miny, glyphminy);
+		maxy = std::max(maxy, glyphmaxy);
+	}
+}
+
+/*
+=============================
+
+Default styles
+
+=============================
+*/
+
+TextStyle::TextStyle()
+	: font(Font::get(UI::g_fh1->fontset()->sans(), UI_FONT_SIZE_SMALL)),
+	  fg(UI_FONT_CLR_FG),
+	  bold(true),
+	  italics(false),
+	  underline(false) {
 }
 
 }  // namespace UI

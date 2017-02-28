@@ -33,28 +33,6 @@ struct Utf8 {
 		return (ch & 0xc0) == 0x80;
 	}
 
-	/**
-	 * Convert a unicode character into a multi-byte utf8 string.
-	 */
-	static std::string unicode_to_utf8(uint16_t unicode) {
-		unsigned char buf[4];
-
-		if (unicode < 0x80) {
-			buf[0] = unicode;
-			buf[1] = 0;
-		} else if (unicode < 0x800) {
-			buf[0] = ((unicode & 0x7c0) >> 6) | 0xc0;
-			buf[1] = (unicode & 0x3f) | 0x80;
-			buf[2] = 0;
-		} else {
-			buf[0] = ((unicode & 0xf000) >> 12) | 0xe0;
-			buf[1] = ((unicode & 0xfc0) >> 6) | 0x80;
-			buf[2] = (unicode & 0x3f) | 0x80;
-			buf[3] = 0;
-		}
-
-		return reinterpret_cast<char*>(buf);
-	}
 
 	/**
 	 * Decode the unicode character starting at \p pos and return it. Upon returning,

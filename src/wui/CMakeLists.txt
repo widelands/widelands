@@ -15,6 +15,7 @@ wl_library(wui_chat_ui
     chat
     graphic
     graphic_color
+    graphic_fonthandler
     graphic_text
     graphic_text_layout
     logic
@@ -85,8 +86,9 @@ wl_library(wui_common
     base_i18n
     base_log
     graphic
+    graphic_fonthandler
     graphic_playercolor
-    graphic_text_layout
+    graphic_text_constants
     io_filesystem
     logic
     logic_game_controller
@@ -131,6 +133,7 @@ wl_library(wui_waresdisplay
     base_exceptions
     base_i18n
     graphic
+    graphic_fonthandler
     graphic_text_layout
     logic
     ui_basic
@@ -240,11 +243,14 @@ wl_library(wui
     economy
     game_io
     graphic
+    graphic_align
     graphic_color
+    graphic_fonthandler
     graphic_minimap_renderer
     graphic_playercolor
     graphic_surface
     graphic_text
+    graphic_text_constants
     graphic_text_layout
     io_fileread
     io_filesystem
