@@ -280,7 +280,7 @@ void TextParser::parse_text_attributes(std::string format, TextBlock& element) {
 }
 
 Align TextParser::set_align(const std::string& align) {
-	return align == "right" ? UI::Align::kRight : align == "center" ? UI::Align::kHCenter :
+	return align == "right" ? UI::Align::kRight : align == "center" ? UI::Align::kCenter :
 	                                                                  UI::Align::kLeft;
 }
 }

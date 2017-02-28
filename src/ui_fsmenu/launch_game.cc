@@ -65,7 +65,7 @@ FullscreenMenuLaunchGame::FullscreenMenuLaunchGame(GameSettingsProvider* const s
            g_gr->images().get("images/ui_basic/but0.png"),
            _("Back")),
      // Text labels
-     title_(this, get_w() / 2, get_h() / 25, "", UI::Align::kHCenter),
+	  title_(this, get_w() / 2, get_h() / 25, "", UI::Align::kCenter),
      // Variables and objects used in the menu
      settings_(settings),
      ctrl_(ctrl),

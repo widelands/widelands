@@ -1,17 +1,17 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2016 Widelands Development Team
+# Copyright (C) 2005-2017 Widelands Development Team
 # 
 # Translators:
 # GunChleoc, 2016
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
 # GunChleoc, 2014
-# Jukka Pakarinen, 2016
+# Jukka Pakarinen, 2016-2017
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-12-18 17:02+0000\n"
-"PO-Revision-Date: 2016-12-24 15:23+0000\n"
+"POT-Creation-Date: 2017-02-19 19:34+0000\n"
+"PO-Revision-Date: 2017-02-23 18:19+0000\n"
 "Last-Translator: Jukka Pakarinen\n"
 "Language-Team: Finnish (http://www.transifex.com/widelands/widelands/language/fi/)\n"
 "MIME-Version: 1.0\n"
@@ -236,7 +236,7 @@ msgid ""
 "If you want things to go faster, simply use the Page Up key on your keyboard"
 " to increase the game speed. You can use Page Down to make the game slower "
 "again."
-msgstr "Jos haluat asioiden etenevän nopeammin, voit käyttää näppäimistön Page Up näppäintä vauhdittamaan pelin etenemistä. Käytämällä Page Down näppäintä pelin eteneminen palaa takaisin hitaammaksi."
+msgstr "Jos haluat asioiden etenevän nopeammin, voit käyttää näppäimistön Page Up näppäintä vauhdittamaan pelin etenemistä. Käyttämällä Page Down näppäintä pelin eteneminen palaa takaisin hitaammaksi."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:145
 msgid "Waiting for the Hut to be Finished"
@@ -387,7 +387,7 @@ msgid ""
 "The minimap shows the complete map in miniature. You can directly jump to "
 "any field by left-clicking on it. You can also toggle buildings, roads, "
 "flags and player indicators on and off inside the minimap."
-msgstr "Pienoiskartta näyttää koko kartan pienoiskoossa. Voit hypätä suoraan mihin tahansa kohtaa kartalla painamalla vasemmalla näppäimellä sen päällä. Voit myös kääntää rakennukset, tiet, liput ja pelaaja mittarit päälle ja pois päältä pienoiskartan sisällä."
+msgstr "Pienoiskartta näyttää koko kartan pienoiskoossa. Voit hypätä suoraan mihin tahansa kohtaan kartalla painamalla vasemmalla näppäimellä sen päällä. Voit myös kääntää rakennukset, tiet, liput ja pelaaja mittarit päälle ja pois päältä pienoiskartan sisällä."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:224
 msgid ""
@@ -528,7 +528,7 @@ msgstr "tienrakennuskuvake."
 msgid ""
 "If you decide you do not want to build a road at this time, you can cancel "
 "road building by clicking on the starting flag of the road and selecting"
-msgstr "Jos päätät ettet halua rakentaa ritä tällä kertaa, voit peruuttaa tien rakentamisen painamalla tien aloituslippua ja valitsemalla"
+msgstr "Jos päätät ettet halua rakentaa tietä tällä kertaa, voit peruuttaa tien rakentamisen painamalla tien aloituslippua ja valitsemalla"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:283
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:300
@@ -1024,7 +1024,7 @@ msgstr "Kiitos tämän opetuspelin pelaamisesta. Nauti Widelandsista ja muista v
 msgid "“%s”"
 msgstr "“%s”"
 
-#: ../../data/scripting/format_scenario.lua:96
+#: ../../data/scripting/format_scenario.lua:84
 msgid "New Objective"
 msgid_plural "New Objectives"
 msgstr[0] "Uudet tavoitteet"
