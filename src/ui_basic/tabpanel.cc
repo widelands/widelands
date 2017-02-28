@@ -155,7 +155,7 @@ void TabPanel::update_desired_size() {
 	// This is not redundant, because even if all this doesn't change our
 	// desired size, we were typically called because of a child window that
 	// changed, and we need to relayout that.
-	layout();
+	layout();  // NOCOM crash in About screen
 }
 
 /**
@@ -167,7 +167,7 @@ uint32_t TabPanel::add(const std::string& name,
                        const std::string& tooltip_text) {
 	const Image* pic = UI::g_fh1->render(as_uifont(title));
 	return add_tab(std::max(kTabPanelButtonHeight, pic->width() + 2 * kTabPanelTextMargin), name,
-	               title, pic, tooltip_text, panel);
+						title, pic, tooltip_text, panel);  // NOCOM crash in About screen
 }
 
 /**
@@ -204,7 +204,7 @@ uint32_t TabPanel::add_tab(int32_t width,
 	}
 
 	panel->set_visible(id == active_);
-	update_desired_size();
+	update_desired_size(); // NOCOM crash in About screen
 
 	return id;
 }

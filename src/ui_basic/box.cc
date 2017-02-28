@@ -126,7 +126,7 @@ void Box::update_desired_size() {
 	//  This is not redundant, because even if all this does not change our
 	//  desired size, we were typically called because of a child window that
 	//  changed, and we need to relayout that.
-	layout();
+	layout();  // NOCOM crash on dismantling a building
 }
 
 /**
@@ -209,7 +209,7 @@ void Box::layout() {
 		}
 
 	// Fourth pass: Update positions of all other items
-	update_positions();
+	update_positions();  // NOCOM crash on dismantling a building
 }
 
 void Box::update_positions() {
@@ -225,7 +225,7 @@ void Box::update_positions() {
 		get_item_size(idx, &depth, &breadth);
 
 		if (items_[idx].type == Item::ItemPanel) {
-			set_item_size(idx, depth, items_[idx].u.panel.fullsize ? totalbreadth : breadth);
+			set_item_size(idx, depth, items_[idx].u.panel.fullsize ? totalbreadth : breadth);  // NOCOM crash on dismantling a building
 			set_item_pos(idx, totaldepth - scrollpos);
 		}
 
@@ -285,7 +285,7 @@ void Box::add_space(uint32_t space) {
 
 	items_.push_back(it);
 
-	update_desired_size();
+	update_desired_size();  // NOCOM crash on dismantling a building
 }
 
 /**
@@ -353,7 +353,7 @@ void Box::set_item_size(uint32_t idx, int depth, int breadth) {
 
 	if (it.type == Item::ItemPanel) {
 		if (orientation_ == Horizontal)
-			it.u.panel.panel->set_size(depth, breadth);
+			it.u.panel.panel->set_size(depth, breadth); // NOCOM crash on dismantling a building
 		else
 			it.u.panel.panel->set_size(breadth, depth);
 	}

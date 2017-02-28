@@ -150,7 +150,7 @@ ActionConfirm::ActionConfirm(InteractivePlayer& parent,
 
 	button_box->add(
 	   UI::g_fh1->fontset()->is_rtl() ? okbtn : cancelbtn, UI::Box::Resizing::kFillSpace);
-	button_box->add_space(2 * padding);
+	button_box->add_space(2 * padding);  // NOCOM crash on dismantling a building
 	button_box->add(
 	   UI::g_fh1->fontset()->is_rtl() ? cancelbtn : okbtn, UI::Box::Resizing::kFillSpace);
 	main_box->add(textarea);
@@ -220,7 +220,7 @@ DismantleConfirm::DismantleConfirm(InteractivePlayer& parent, Widelands::Buildin
    : ActionConfirm(parent,
                    _("Dismantle building?"),
                    _("Do you really want to dismantle this building?"),
-                   building) {
+						 building) {  // NOCOM crash on dismantling a building
 	// Nothing special to do
 }
 
@@ -408,7 +408,7 @@ void show_bulldoze_confirm(InteractivePlayer& player,
  * \param building this is the building that the confirmation dialog displays.
  */
 void show_dismantle_confirm(InteractivePlayer& player, Widelands::Building& building) {
-	new DismantleConfirm(player, building);
+	new DismantleConfirm(player, building);  // NOCOM crash on dismantling a building
 }
 
 /**
