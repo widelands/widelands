@@ -40,6 +40,7 @@
 #include "logic/game_settings.h"
 #include "logic/replay.h"
 #include "ui_basic/messagebox.h"
+#include "wui/gamedetails.h"
 
 namespace {
 // This function concatenates the filename and localized map name for a savegame/replay.
@@ -79,7 +80,8 @@ LoadOrSaveGame::LoadOrSaveGame(UI::Panel* parent,
                                GameDetails::Style style,
                                bool localize_autosave)
 // NOCOM adjust table image depending on fsmenu/wui
-	: table_(parent, tablex, tabley, tablew, tableh, g_gr->images().get("images/ui_basic/but3.png"), false),
+// NOCOM Handle multiselect when selecting - we had this in trunk.
+	: table_(parent, tablex, tabley, tablew, tableh, g_gr->images().get("images/ui_basic/but3.png"), UI::TableRows::kMultiDescending),
      filetype_(filetype),
      localize_autosave_(localize_autosave),
      // Savegame description
@@ -133,6 +135,34 @@ LoadOrSaveGame::LoadOrSaveGame(UI::Panel* parent,
 	fill_table();
 }
 
+
+std::string LoadOrSaveGame::filename_list_string() {
+	std::set<uint32_t> selections = table_.selections();
+	boost::format message;
+	int counter = 0;
+	for (const uint32_t index : selections) {
+		++counter;
+		// TODO(GunChleoc): We can exceed the texture size for the font renderer,
+		// so we have to restrict this for now.
+		if (counter > 50) {
+			message = boost::format("%s\n%s") % message % "...";
+			break;
+		}
+		const SavegameData& gamedata = games_data_[table_.get(table_.get_record(index))];
+
+		if (gamedata.errormessage.empty()) {
+			message =
+			   boost::format("%s\n%s") % message %
+			   /** TRANSLATORS %1% = map name, %2% = save date. */
+			   (boost::format(_("%1%, saved on %2%")) % gamedata.mapname % gamedata.savedatestring);
+		} else {
+			message = boost::format("%s\n%s") % message % gamedata.filename;
+		}
+	}
+	return message.str();
+}
+
+
 // Reverse default sort order for save date column
 bool LoadOrSaveGame::compare_date_descending(uint32_t rowa, uint32_t rowb) {
 	const SavegameData& r1 = games_data_[table_[rowa]];
@@ -141,15 +171,22 @@ bool LoadOrSaveGame::compare_date_descending(uint32_t rowa, uint32_t rowb) {
 	return r1.savetimestamp < r2.savetimestamp;
 }
 
-const SavegameData* LoadOrSaveGame::entry_selected() {
-	if (has_selection()) {
-		const SavegameData& result = games_data_[table_.get_selected()];
-		game_details_.update(result);
-		return &result;
-	} else {
-		game_details_.clear();
-		return nullptr;
+SavegameData* LoadOrSaveGame::entry_selected() {
+	// NOCOM uinque_ptr?
+	SavegameData* result = new SavegameData();
+	size_t selections = table_.selections().size();
+	if (set_has_selection()) {
+		result = &games_data_[table_.get_selected()];
+	} else if (selections > 1) {
+		result->mapname =
+			(boost::format(ngettext("Selected %d file:", "Selected %d files:", selections)) %
+			 selections)
+				.str();
+		// NOCOM not an error
+		result->errormessage = filename_list_string();
 	}
+	game_details_.update(*result);
+	return result;
 }
 
 bool LoadOrSaveGame::has_selection() {
@@ -358,4 +395,5 @@ void LoadOrSaveGame::fill_table() {
 	if (table_.size()) {
 		table_.select(0);
 	}
+	set_has_selection();
 }

@@ -109,11 +109,11 @@ GameDetails::GameDetails(
 	name_label_.force_new_renderer();
 	descr_.force_new_renderer();
 
-	main_box_.add(&name_label_, UI::Align::kLeft);
+	main_box_.add(&name_label_);
 	main_box_.add_space(padding_);
-	main_box_.add(&descr_, UI::Align::kLeft);
+	main_box_.add(&descr_);
 	main_box_.add_space(padding_);
-	main_box_.add(&minimap_icon_, UI::Align::kLeft);
+	main_box_.add(&minimap_icon_);
 	main_box_.set_size(max_w, max_h);
 
 	minimap_icon_.set_visible(false);

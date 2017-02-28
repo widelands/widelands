@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-01-28 21:57+0000\n"
-"PO-Revision-Date: 2017-01-28 21:58+0000\n"
+"POT-Creation-Date: 2017-02-19 19:34+0000\n"
+"PO-Revision-Date: 2017-02-19 19:36+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: English (United Kingdom) (http://www.transifex.com/widelands/widelands/language/en_GB/)\n"
 "MIME-Version: 1.0\n"
@@ -399,9 +399,9 @@ msgstr "Produces axes, sharp axes and broad axes."
 msgctxt "barbarians_building"
 msgid ""
 "The Barbarian ax workshop is the intermediate production site in a series of"
-" three buildings. It is an upgrade from the metal workshop but doesn’t "
-"require additional qualification for the worker."
-msgstr "The Barbarian axe workshop is the intermediate production site in a series of three buildings. It is an upgrade from the metal workshop but doesn’t require additional qualification for the worker."
+" three buildings. It is enhanced from the metal workshop but doesn’t require"
+" additional qualification for the worker."
+msgstr ""
 
 #: ../../data/tribes/buildings/productionsites/barbarians/ax_workshop/helptexts.lua:23
 #: ../../data/tribes/buildings/productionsites/barbarians/bakery/helptexts.lua:26
@@ -1952,154 +1952,163 @@ msgstr "Home"
 #. the key.
 #: ../../data/tribes/scripting/help/controls.lua:59
 msgctxt "hotkey"
-msgid "(Ctrl +) 1-9"
-msgstr "(Ctrl +) 1-9"
+msgid "Ctrl + 1-9"
+msgstr ""
 
 #: ../../data/tribes/scripting/help/controls.lua:59
-msgid "Remember and go to previously remembered locations"
-msgstr "Remember and go to previously remembered locations"
+msgid "Remember current location"
+msgstr ""
+
+#: ../../data/tribes/scripting/help/controls.lua:60
+msgctxt "hotkey"
+msgid "1-9"
+msgstr ""
+
+#: ../../data/tribes/scripting/help/controls.lua:60
+msgid "Go to previously remembered location"
+msgstr ""
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
-#: ../../data/tribes/scripting/help/controls.lua:61
+#: ../../data/tribes/scripting/help/controls.lua:62
 msgctxt "hotkey"
-msgid "(Ctrl +) +"
-msgstr "(Ctrl +) +"
+msgid "Ctrl + +"
+msgstr ""
 
-#: ../../data/tribes/scripting/help/controls.lua:61
+#: ../../data/tribes/scripting/help/controls.lua:62
 msgid "Increase zoom"
 msgstr "Increase zoom"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
-#: ../../data/tribes/scripting/help/controls.lua:63
+#: ../../data/tribes/scripting/help/controls.lua:64
 msgctxt "hotkey"
-msgid "(Ctrl +) -"
-msgstr "(Ctrl +) -"
+msgid "Ctrl + -"
+msgstr ""
 
-#: ../../data/tribes/scripting/help/controls.lua:63
+#: ../../data/tribes/scripting/help/controls.lua:64
 msgid "Decrease zoom"
 msgstr "Decrease zoom"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
-#: ../../data/tribes/scripting/help/controls.lua:65
+#: ../../data/tribes/scripting/help/controls.lua:66
 msgctxt "hotkey"
-msgid "(Ctrl +) 0"
-msgstr "(Ctrl +) 0"
+msgid "Ctrl + 0"
+msgstr ""
 
-#: ../../data/tribes/scripting/help/controls.lua:65
+#: ../../data/tribes/scripting/help/controls.lua:66
 msgid "Reset zoom"
 msgstr "Reset zoom"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
-#: ../../data/tribes/scripting/help/controls.lua:67
+#: ../../data/tribes/scripting/help/controls.lua:68
 msgctxt "hotkey"
 msgid "Ctrl + F11"
 msgstr "Ctrl + F11"
 
-#: ../../data/tribes/scripting/help/controls.lua:67
+#: ../../data/tribes/scripting/help/controls.lua:68
 msgid "Take a screenshot"
 msgstr "Take a screenshot"
 
 #. TRANSLATORS: This is an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:70
+#: ../../data/tribes/scripting/help/controls.lua:71
 msgctxt "hotkey"
 msgid "Ctrl + F10"
 msgstr "Ctrl + F10"
 
-#: ../../data/tribes/scripting/help/controls.lua:70
+#: ../../data/tribes/scripting/help/controls.lua:71
 msgid "Quit the game immediately"
 msgstr "Quit the game immediately"
 
 #. TRANSLATORS: This is an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:72
+#: ../../data/tribes/scripting/help/controls.lua:73
 msgctxt "hotkey"
 msgid "F6"
 msgstr "F6"
 
-#: ../../data/tribes/scripting/help/controls.lua:72
+#: ../../data/tribes/scripting/help/controls.lua:73
 msgid "Show the debug console (only in debug-builds)"
 msgstr "Show the debug console (only in debug-builds)"
 
-#: ../../data/tribes/scripting/help/controls.lua:75
+#: ../../data/tribes/scripting/help/controls.lua:76
 msgid ""
 "In the message window, the following additional shortcuts are available:"
 msgstr "In the message window, the following additional shortcuts are available:"
 
 #. TRANSLATORS: This is the helptext for an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:78
+#: ../../data/tribes/scripting/help/controls.lua:79
 msgctxt "hotkey"
 msgid "Alt + 0"
 msgstr "Alt + 0"
 
-#: ../../data/tribes/scripting/help/controls.lua:78
+#: ../../data/tribes/scripting/help/controls.lua:79
 msgid "Show all messages"
 msgstr "Show all messages"
 
 #. TRANSLATORS: This is the helptext for an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:80
+#: ../../data/tribes/scripting/help/controls.lua:81
 msgctxt "hotkey"
 msgid "Alt + 1"
 msgstr "Alt + 1"
 
-#: ../../data/tribes/scripting/help/controls.lua:80
+#: ../../data/tribes/scripting/help/controls.lua:81
 msgid "Show geologists’ messages only"
 msgstr "Show geologists’ messages only"
 
 #. TRANSLATORS: This is the helptext for an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:82
+#: ../../data/tribes/scripting/help/controls.lua:83
 msgctxt "hotkey"
 msgid "Alt + 2"
 msgstr "Alt + 2"
 
-#: ../../data/tribes/scripting/help/controls.lua:82
+#: ../../data/tribes/scripting/help/controls.lua:83
 msgid "Show economy messages only"
 msgstr "Show economy messages only"
 
 #. TRANSLATORS: This is the helptext for an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:84
+#: ../../data/tribes/scripting/help/controls.lua:85
 msgctxt "hotkey"
 msgid "Alt + 3"
 msgstr "Alt + 3"
 
-#: ../../data/tribes/scripting/help/controls.lua:84
+#: ../../data/tribes/scripting/help/controls.lua:85
 msgid "Show seafaring messages only"
 msgstr "Show seafaring messages only"
 
 #. TRANSLATORS: This is the helptext for an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:86
+#: ../../data/tribes/scripting/help/controls.lua:87
 msgctxt "hotkey"
 msgid "Alt + 4"
 msgstr "Alt + 4"
 
-#: ../../data/tribes/scripting/help/controls.lua:86
+#: ../../data/tribes/scripting/help/controls.lua:87
 msgid "Show warfare messages only"
 msgstr "Show warfare messages only"
 
 #. TRANSLATORS: This is the helptext for an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:88
+#: ../../data/tribes/scripting/help/controls.lua:89
 msgctxt "hotkey"
 msgid "Alt + 5"
 msgstr "Alt + 5"
 
-#: ../../data/tribes/scripting/help/controls.lua:88
+#: ../../data/tribes/scripting/help/controls.lua:89
 msgid "Show scenario messages only"
 msgstr "Show scenario messages only"
 
 #. TRANSLATORS: This is the helptext for an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:90
+#: ../../data/tribes/scripting/help/controls.lua:91
 msgid "Jump to the location corresponding to the current message"
 msgstr "Jump to the location corresponding to the current message"
 
-#: ../../data/tribes/scripting/help/controls.lua:92
+#: ../../data/tribes/scripting/help/controls.lua:93
 msgid "Archive/Restore the current message"
 msgstr "Archive/Restore the current message"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
-#: ../../data/tribes/scripting/help/controls.lua:92
+#: ../../data/tribes/scripting/help/controls.lua:93
 msgctxt "hotkey"
 msgid "Delete"
 msgstr "Delete"
@@ -3567,8 +3576,8 @@ msgstr "Works deep in the mines to obtain coal, iron, gold or precious stones."
 #. TRANSLATORS: Helptext for a worker: Recruit
 #: ../../data/tribes/workers/atlanteans/recruit/helptexts.lua:3
 msgctxt "atlanteans_worker"
-msgid "Eager to become a soldier and defend your tribe!"
-msgstr "Eager to become a soldier and defend your tribe!"
+msgid "Eager to become a soldier and defend his tribe!"
+msgstr ""
 
 #. TRANSLATORS: Helptext for a worker: Sawyer
 #: ../../data/tribes/workers/atlanteans/sawyer/helptexts.lua:3
@@ -3640,8 +3649,8 @@ msgstr "Produces weapons for soldiers."
 #. TRANSLATORS: Helptext for a worker: Weaver
 #: ../../data/tribes/workers/atlanteans/weaver/helptexts.lua:3
 msgctxt "atlanteans_worker"
-msgid "Produces cloth for buildings, ships and soldiers."
-msgstr "Produces cloth for buildings, ships and soldiers."
+msgid "Produces spidercloth for buildings, ships and soldiers."
+msgstr ""
 
 #. TRANSLATORS: Helptext for a worker: Woodcutter
 #: ../../data/tribes/workers/atlanteans/woodcutter/helptexts.lua:3
@@ -3788,8 +3797,8 @@ msgstr "Plants trees."
 #. TRANSLATORS: Helptext for a worker: Recruit
 #: ../../data/tribes/workers/barbarians/recruit/helptexts.lua:3
 msgctxt "barbarians_worker"
-msgid "Eager to become a soldier and defend your tribe!"
-msgstr "Eager to become a soldier and defend your tribe!"
+msgid "Eager to become a soldier and defend his tribe!"
+msgstr ""
 
 #. TRANSLATORS: Helptext for a worker: Scout
 #: ../../data/tribes/workers/barbarians/scout/helptexts.lua:3
@@ -3957,8 +3966,8 @@ msgstr "Breeds pigs."
 #. TRANSLATORS: Helptext for a worker: Recruit
 #: ../../data/tribes/workers/empire/recruit/helptexts.lua:3
 msgctxt "empire_worker"
-msgid "Eager to become a soldier and defend your tribe!"
-msgstr "Eager to become a soldier and defend your tribe!"
+msgid "Eager to become a soldier and defend his tribe!"
+msgstr ""
 
 #. TRANSLATORS: Helptext for a worker: Scout
 #: ../../data/tribes/workers/empire/scout/helptexts.lua:3

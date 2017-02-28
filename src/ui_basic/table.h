@@ -21,6 +21,7 @@
 #define WL_UI_BASIC_TABLE_H
 
 #include <limits>
+#include <set>
 #include <vector>
 
 #include <boost/function.hpp>
@@ -35,6 +36,7 @@ namespace UI {
 struct Scrollbar;
 struct Button;
 
+enum class TableRows { kSingle, kMulti, kSingleDescending, kMultiDescending };
 enum class TableColumnType { kFixed, kFlexible };
 
 /** A table with columns and lines.
@@ -57,7 +59,7 @@ public:
 	      uint32_t w,
 	      uint32_t h,
 	      const Image* button_background = g_gr->images().get("images/ui_basic/but3.png"),
-	      bool descending = false);
+	      TableRows rowtype = TableRows::kSingle);
 	~Table();
 
 	boost::signals2::signal<void(uint32_t)> selected;
@@ -68,8 +70,7 @@ public:
 	                const std::string& title = std::string(),
 	                const std::string& tooltip = std::string(),
 	                Align = UI::Align::kLeft,
-	                TableColumnType column_type = TableColumnType::kFixed,
-	                bool is_checkbox_column = false);
+	                TableColumnType column_type = TableColumnType::kFixed);
 
 	void set_column_title(uint8_t col, const std::string& title);
 
@@ -78,7 +79,7 @@ public:
 	uint8_t get_sort_colum() const;
 	bool get_sort_descending() const;
 
-	void sort(uint32_t Begin = 0, uint32_t End = std::numeric_limits<uint32_t>::max());
+	void sort(uint32_t lower_bound = 0, uint32_t upper_bound = std::numeric_limits<uint32_t>::max());
 	void remove(uint32_t);
 
 	EntryRecord& add(void* const entry, const bool select_this = false);
@@ -89,11 +90,15 @@ public:
 	static uint32_t no_selection_index();
 	bool has_selection() const;
 	uint32_t selection_index() const;
+	std::set<uint32_t> selections() const;
+	void clear_selections();
 	EntryRecord& get_record(uint32_t) const;
 	static Entry get(const EntryRecord&);
 	EntryRecord* find(Entry) const;
 
 	void select(uint32_t);
+	void multiselect(uint32_t row);
+	uint32_t toggle_entry(uint32_t row);
 	void move_selection(int32_t offset);
 	struct NoSelection : public std::exception {
 		char const* what() const noexcept override {
@@ -139,10 +144,6 @@ public:
 			return clr;
 		}
 
-		void set_checked(uint8_t col, bool checked);
-		void toggle(uint8_t col);
-		bool is_checked(uint8_t col) const;
-
 	private:
 		friend class Table<void*>;
 		void* entry_;
@@ -151,10 +152,6 @@ public:
 		struct Data {
 			const Image* d_picture;
 			std::string d_string;
-			bool d_checked;
-
-			Data() : d_checked(false) {
-			}
 		};
 		std::vector<Data> data_;
 	};
@@ -172,7 +169,7 @@ public:
 	      uint32_t w,
 	      uint32_t h,
 	      const Image* button_background = g_gr->images().get("images/ui_basic/but3.png"),
-	      bool descending = false);
+	      TableRows rowtype = TableRows::kSingle);
 	~Table();
 
 	boost::signals2::signal<void(uint32_t)> selected;
@@ -182,8 +179,7 @@ public:
 	                const std::string& title = std::string(),
 	                const std::string& tooltip = std::string(),
 	                Align = UI::Align::kLeft,
-	                TableColumnType column_type = TableColumnType::kFixed,
-	                bool is_checkbox_column = false);
+	                TableColumnType column_type = TableColumnType::kFixed);
 
 	void set_column_title(uint8_t col, const std::string& title);
 	void set_column_compare(uint8_t col, const CompareFn& fn);
@@ -203,7 +199,7 @@ public:
 		sort_descending_ = descending;
 	}
 
-	void sort(uint32_t Begin = 0, uint32_t End = std::numeric_limits<uint32_t>::max());
+	void sort(uint32_t lower_bound = 0, uint32_t upper_bound = std::numeric_limits<uint32_t>::max());
 	void remove(uint32_t);
 
 	EntryRecord& add(void* entry = nullptr, bool select = false);
@@ -224,6 +220,12 @@ public:
 	bool has_selection() const {
 		return selection_ != no_selection_index();
 	}
+	/// The set of highlighted entries in multiselect mode
+	std::set<uint32_t> selections() const {
+		return multiselect_;
+	}
+	void clear_selections();
+
 	uint32_t selection_index() const {
 		return selection_;
 	}
@@ -237,6 +239,8 @@ public:
 	EntryRecord* find(const void* entry) const;
 
 	void select(uint32_t);
+	void multiselect(uint32_t row);
+	uint32_t toggle_entry(uint32_t row);
 	void move_selection(int32_t offset);
 	struct NoSelection : public std::exception {
 		char const* what() const noexcept override {
@@ -274,7 +278,6 @@ public:
 	bool handle_key(bool down, SDL_Keysym code) override;
 
 private:
-	bool default_compare_checkbox(uint32_t column, uint32_t a, uint32_t b);
 	bool default_compare_string(uint32_t column, uint32_t a, uint32_t b);
 	bool sort_helper(uint32_t a, uint32_t b);
 	void layout() override;
@@ -283,7 +286,6 @@ private:
 		Button* btn;
 		uint32_t width;
 		Align alignment;
-		bool is_checkbox_column;
 		CompareFn compare;
 	};
 	using Columns = std::vector<Column>;
@@ -300,12 +302,18 @@ private:
 	UI::Button* scrollbar_filler_button_;
 	int32_t scrollpos_;  //  in pixels
 	uint32_t selection_;
+	uint32_t last_multiselect_;  // Remembers last selected element in multiselect mode for keyboard
+	                             // navigation
+	std::set<uint32_t> multiselect_;
 	uint32_t last_click_time_;
 	uint32_t last_selection_;  // for double clicks
 	Columns::size_type sort_column_;
 	bool sort_descending_;
 	// This column will grow/shrink depending on the scrollbar being present
 	size_t flexible_column_;
+	bool is_multiselect_;
+	bool ctrl_down_;   // Whether the ctrl key is being pressed
+	bool shift_down_;  // Whether the shift key is being pressed
 
 	void header_button_clicked(Columns::size_type);
 	using EntryRecordVector = std::vector<EntryRecord*>;
@@ -322,8 +330,8 @@ public:
 	      uint32_t w,
 	      uint32_t h,
 	      const Image* button_background = g_gr->images().get("images/ui_basic/but3.png"),
-	      const bool descending = false)
-	   : Base(parent, x, y, w, h, button_background, descending) {
+	      TableRows rowtype = TableRows::kSingle)
+	   : Base(parent, x, y, w, h, button_background, rowtype) {
 	}
 
 	EntryRecord& add(Entry const* const entry = 0, bool const select_this = false) {
@@ -352,8 +360,8 @@ public:
 	      uint32_t w,
 	      uint32_t h,
 	      const Image* button_background = g_gr->images().get("images/ui_basic/but3.png"),
-	      const bool descending = false)
-	   : Base(parent, x, y, w, h, button_background, descending) {
+	      TableRows rowtype = TableRows::kSingle)
+	   : Base(parent, x, y, w, h, button_background, rowtype) {
 	}
 
 	EntryRecord& add(Entry* const entry = 0, bool const select_this = false) {
@@ -382,8 +390,8 @@ public:
 	      uint32_t w,
 	      uint32_t h,
 	      const Image* button_background = g_gr->images().get("images/ui_basic/but3.png"),
-	      const bool descending = false)
-	   : Base(parent, x, y, w, h, button_background, descending) {
+	      TableRows rowtype = TableRows::kSingle)
+	   : Base(parent, x, y, w, h, button_background, rowtype) {
 	}
 
 	EntryRecord& add(const Entry& entry, bool const select_this = false) {
@@ -416,8 +424,8 @@ public:
 	      uint32_t w,
 	      uint32_t h,
 	      const Image* button_background = g_gr->images().get("images/ui_basic/but3.png"),
-	      const bool descending = false)
-	   : Base(parent, x, y, w, h, button_background, descending) {
+	      TableRows rowtype = TableRows::kSingle)
+	   : Base(parent, x, y, w, h, button_background, rowtype) {
 	}
 
 	EntryRecord& add(Entry& entry, bool const select_this = false) {
@@ -452,8 +460,8 @@ public:
 	      uint32_t w,
 	      uint32_t h,
 	      const Image* button_background = g_gr->images().get("images/ui_basic/but3.png"),
-	      const bool descending = false)
-	   : Base(parent, x, y, w, h, button_background, descending) {
+	      TableRows rowtype = TableRows::kSingle)
+	   : Base(parent, x, y, w, h, button_background, rowtype) {
 	}
 
 	EntryRecord& add(uintptr_t const entry, bool const select_this = false) {
@@ -484,8 +492,8 @@ public:
 	      uint32_t w,
 	      uint32_t h,
 	      const Image* button_background = g_gr->images().get("images/ui_basic/but3.png"),
-	      const bool descending = false)
-	   : Base(parent, x, y, w, h, button_background, descending) {
+	      TableRows rowtype = TableRows::kSingle)
+	   : Base(parent, x, y, w, h, button_background, rowtype) {
 	}
 };
 }

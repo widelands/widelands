@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-01-21 14:22+0000\n"
-"PO-Revision-Date: 2017-01-21 17:58+0000\n"
+"POT-Creation-Date: 2017-02-19 19:34+0000\n"
+"PO-Revision-Date: 2017-02-19 23:42+0000\n"
 "Last-Translator: Juanjo\n"
 "Language-Team: Catalan (http://www.transifex.com/widelands/widelands/language/ca/)\n"
 "MIME-Version: 1.0\n"
@@ -160,7 +160,7 @@ msgid ""
 " the blacksmith reaches his next level (master blacksmith), you can even "
 "enhance the ax workshop to a war mill, which will produce additional "
 "weapons."
-msgstr "Milloreu el taller de metall a fàbrica de destrals per produir armes i construïu un altre taller de metall per assegurar la producció d'eines. Quan el forjador arribi al següent nivell (mestre forjador), llavors podeu millorar la fàbrica de destrals a taller de guerra, que produirà armes addicionals."
+msgstr "Amplieu el taller de metall a fàbrica de destrals per produir armes i construïu un altre taller de metall per assegurar la producció d'eines. Quan el forjador arribi al següent nivell (mestre forjador), llavors podeu ampliar la fàbrica de destrals a taller de guerra, que produirà armes addicionals."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:99
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:136
@@ -571,7 +571,7 @@ msgid ""
 "processing economy. But that’s still not everything – most of our soldiers "
 "are quite young and neither have a good weapon nor are they well trained. We"
 " should build up training sites to prepare them for their future tasks."
-msgstr "Els geòlegs han trobat més jaciments de carbó, de mineral de ferro i fins i tot d'or. Hem de millorar les mines que tenim tan aviat com els miners guanyin experiència. Caldrà construir noves mines, infraestructures per proveir més menjar i millorar les indústries de processat.  Però això no és tot: molts dels nostres soldats són joves i ni tenen bones armes ni estan ben entrenats. Hem de construir llocs d'entrenament per a preparar-los."
+msgstr "Els geòlegs han trobat més jaciments de carbó, de mineral de ferro i fins i tot d'or. Hem d'ampliar les mines que tenim tan aviat com els miners guanyin experiència. Caldrà construir noves mines, infraestructures per proveir més menjar i millorar les indústries de processat.  Però això no és tot: molts dels nostres soldats són joves i ni tenen bones armes ni estan ben entrenats. Hem de construir llocs d'entrenament per preparar-los."
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:332
@@ -650,7 +650,7 @@ msgstr "Cap, recordeu-vos-en dels pobres transportistes. Els nostres camins s'es
 msgid "“%s”"
 msgstr "“%s”"
 
-#: ../../data/scripting/format_scenario.lua:96
+#: ../../data/scripting/format_scenario.lua:84
 msgid "New Objective"
 msgid_plural "New Objectives"
 msgstr[0] "Objectiu"

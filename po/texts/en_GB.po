@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-01-28 21:57+0000\n"
-"PO-Revision-Date: 2017-01-28 21:58+0000\n"
+"POT-Creation-Date: 2017-02-19 19:34+0000\n"
+"PO-Revision-Date: 2017-02-19 19:36+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: English (United Kingdom) (http://www.transifex.com/widelands/widelands/language/en_GB/)\n"
 "MIME-Version: 1.0\n"
@@ -505,7 +505,7 @@ msgstr "Keep an eye on your fishers. After fish resources are exhausted in their
 #: ../../data/txts/tips/barbarians.lua:8
 msgid ""
 "Always build a ranger’s and a gamekeeper’s hut, so you will not run out of "
-"logs."
+"logs or game."
 msgstr ""
 
 #: ../../data/txts/tips/editor.lua:4

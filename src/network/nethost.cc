@@ -1718,7 +1718,7 @@ void NetHost::receive_client_time(uint32_t const number, int32_t const time) {
 	Client& client = d->clients.at(number);
 
 	if (time - client.time < 0)
-		throw DisconnectException("BACKWARTS_RUNNING_TIME");
+		throw DisconnectException("BACKWARDS_RUNNING_TIME");
 	if (d->committed_networktime - time < 0)
 		throw DisconnectException("SIMULATING_BEYOND_TIME");
 	if (d->syncreport_pending && !client.syncreport_arrived) {

@@ -55,7 +55,7 @@ tribes:new_productionsite_type {
    programs = {
       work = {
          -- TRANSLATORS: Completed/Skipped/Did not start baking bread because ...
-         descname = _"baking bread",
+         descname = pgettext("barbarians_building", "baking pitta bread"),
          actions = {
             "sleep=20000",
             "return=skipped unless economy needs barbarians_bread",

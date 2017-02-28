@@ -55,6 +55,7 @@ struct SavegameData {
 /**
  * Show a Panel with information about a map.
  */
+// NOCOM
 class GameDetails : public UI::Panel {
 public:
 	enum class Style { kFsMenu, kWui };
