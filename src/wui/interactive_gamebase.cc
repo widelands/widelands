@@ -72,8 +72,8 @@ InteractiveGameBase::InteractiveGameBase(Widelands::Game& g,
 				   // Check whether the window is wanted
 				   if (wanted_building_windows_.count(coords.hash()) == 1) {
 					   UI::UniqueWindow* building_window = show_building_window(coords, true);
-					   building_window->set_pos(std::get<1>(wanted_building_windows_.at(coords.hash())));
-					   if (std::get<2>(wanted_building_windows_.at(coords.hash()))) {
+					   building_window->set_pos(wanted_building_windows_.at(coords.hash()).first);
+					   if (wanted_building_windows_.at(coords.hash()).second) {
 						   building_window->minimize();
 					   }
 					   wanted_building_windows_.erase(coords.hash());
@@ -161,7 +161,7 @@ void InteractiveGameBase::add_wanted_building_window(const Widelands::Coords& co
                                                      const Vector2i point,
                                                      bool was_minimal) {
 	wanted_building_windows_.insert(
-	   std::make_pair(coords.hash(), std::make_tuple(coords, point, was_minimal)));
+		std::make_pair(coords.hash(), std::make_pair(point, was_minimal)));
 }
 
 UI::UniqueWindow* InteractiveGameBase::show_building_window(const Widelands::Coords& coord,

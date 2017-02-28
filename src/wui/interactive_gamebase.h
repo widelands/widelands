@@ -22,7 +22,6 @@
 
 #include <map>
 #include <memory>
-#include <tuple>
 
 #include "logic/game.h"
 #include "profile/profile.h"
@@ -104,7 +103,7 @@ protected:
 private:
 	void on_buildhelp_changed(const bool value) override;
 	// Building coordinates, window position, whether the window was minimized
-	std::map<uint32_t, std::tuple<const Widelands::Coords, const Vector2i, bool>>
+	std::map<uint32_t, std::pair<const Vector2i, bool>>
 	   wanted_building_windows_;
 	std::unique_ptr<Notifications::Subscriber<Widelands::NoteBuilding>> buildingnotes_subscriber_;
 };
