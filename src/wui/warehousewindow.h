@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2016 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,25 +17,30 @@
  *
  */
 
-#ifndef WL_WUI_MAPTABLE_H
-#define WL_WUI_MAPTABLE_H
+#ifndef WL_WUI_WAREHOUSEWINDOW_H
+#define WL_WUI_WAREHOUSEWINDOW_H
 
-#include <vector>
-
-#include "ui_basic/table.h"
-#include "wui/mapdata.h"
+#include "logic/map_objects/tribes/warehouse.h"
+#include "wui/buildingwindow.h"
 
 /**
- * A table listing all the available maps for saveloading.
- * This contains a UI model only; the callig classes have to define the data model
- * and bind the compare functions.
+ * Status window for warehouses
  */
-class MapTable : public UI::Table<uintptr_t> {
-public:
-	MapTable(UI::Panel* parent, int32_t x, int32_t y, uint32_t w, uint32_t h);
+struct WarehouseWindow : public BuildingWindow {
+	WarehouseWindow(InteractiveGameBase& parent,
+	                UI::UniqueWindow::Registry& reg,
+	                Widelands::Warehouse&,
+	                bool avoid_fastclick);
 
-	/// Fill the table with maps and directories.
-	void fill(const std::vector<MapData>& entries, MapData::DisplayType type);
+	Widelands::Warehouse& warehouse() {
+		return dynamic_cast<Widelands::Warehouse&>(building());
+	}
+
+protected:
+	void init(bool avoid_fastclick) override;
+
+private:
+	DISALLOW_COPY_AND_ASSIGN(WarehouseWindow);
 };
 
-#endif  // end of include guard: WL_WUI_MAPTABLE_H
+#endif  // end of include guard: WL_WUI_WAREHOUSEWINDOW_H
