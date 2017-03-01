@@ -65,12 +65,13 @@ tips = {
       seconds = 7
    },
    {
-      text = _"Press Ctrl+0 to reset the zoom.",
+      text = _"Zoom in/out with the mouse wheel or Ctrl+(+/-). Press Ctrl+0 to reset the zoom.",
       seconds = 3
    },
    {
-      text = _"Some upgraded buildings needs also an upgraded worker. Do not upgrade a building if you don't have a upgraded worker.",
+      text = _"If a building is destroyed, workers within will look for a close flag from which they will move by road to a warehouse. If there are no flags connected to a warehouses nearby, they will wander until eventually they die.",
       seconds = 7
    },
+
 }
 return tips

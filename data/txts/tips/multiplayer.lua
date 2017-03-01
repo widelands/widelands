@@ -12,5 +12,9 @@ tips = {
       text = _"Use ‘@name’ at the beginning of a chat message to send it to only one player.",
       seconds = 5
    },
+   {
+      text = _"If the game crashes, don't worry! A saved game is automatically generated, and you can reload the game afterwards.",
+      seconds = 7
+   },
 }
 return tips

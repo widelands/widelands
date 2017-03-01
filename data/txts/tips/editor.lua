@@ -26,7 +26,23 @@ tips = {
    },
    {
       text = _"Space key behaves like in normal game. It switches if building spaces are shown on or off.",
+      seconds = 4
+   },
+   {
+      text = _"When placing trees, you can look in the help to see which trees are more likely to survive on which terrain.",
       seconds = 6
+   },
+   {
+      text = _"If you do not set water and fish resources, a default amount will be used.",
+      seconds = 4
+   },
+   {
+      text = _"You can place a medium building on any corner where there is a slope no greater than one in the south-east direction and the height of all corners in a radius of 2 is within minus/plus 2 of the selected corner.",
+      seconds = 7
+   },
+   {
+      text = _"You can place a large building on any corner where you could place a medium building and there are no obstacles/unbuildable terrain in the west, northwest and northeast corners.",
+      seconds = 7
    },
 }
 return tips
