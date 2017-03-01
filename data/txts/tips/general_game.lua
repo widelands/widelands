@@ -37,7 +37,7 @@ tips = {
       seconds = 6
    },
    {
-      text = _"Press Ctrl+(0-9) to store important locations, then press 0-9 to recall them.",
+      text = _"Press Ctrl+(1-9) to store important locations, then press 1-9 to recall them.",
       seconds = 4
    },
    {
@@ -62,6 +62,14 @@ tips = {
    },
    {
       text = _"Some buildings, such as the farm, have a very small work area. If the building is surrounded with trees or roads, production will stop.",
+      seconds = 7
+   },
+   {
+      text = _"Press Ctrl+0 to reset the zoom.",
+      seconds = 3
+   },
+   {
+      text = _"Some upgraded buildings needs also an upgraded worker. Do not upgrade a building if you don't have a upgraded worker.",
       seconds = 7
    },
 }
