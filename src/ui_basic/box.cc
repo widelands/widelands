@@ -126,7 +126,7 @@ void Box::update_desired_size() {
 	//  This is not redundant, because even if all this does not change our
 	//  desired size, we were typically called because of a child window that
 	//  changed, and we need to relayout that.
-	layout();  // NOCOM crash on dismantling a building
+	layout();
 }
 
 /**
@@ -203,13 +203,13 @@ void Box::layout() {
 	for (size_t idx = 0; idx < items_.size(); ++idx)
 		if (items_[idx].fillspace) {
 			assert(infspace_count > 0);
-			items_[idx].assigned_var_depth = (max_depths - totaldepth) / infspace_count;
+			items_[idx].assigned_var_depth = std::max(0, (max_depths - totaldepth) / infspace_count);
 			totaldepth += items_[idx].assigned_var_depth;
 			infspace_count--;
 		}
 
 	// Fourth pass: Update positions of all other items
-	update_positions();  // NOCOM crash on dismantling a building
+	update_positions();
 }
 
 void Box::update_positions() {
@@ -217,15 +217,16 @@ void Box::update_positions() {
 
 	uint32_t totaldepth = 0;
 	uint32_t totalbreadth = orientation_ == Horizontal ? get_inner_h() : get_inner_w();
-	if (scrollbar_)
+	if (scrollbar_ && scrollbar_->is_enabled()) {
 		totalbreadth -= Scrollbar::kSize;
+	}
 
 	for (uint32_t idx = 0; idx < items_.size(); ++idx) {
 		int depth, breadth = 0;
 		get_item_size(idx, &depth, &breadth);
 
 		if (items_[idx].type == Item::ItemPanel) {
-			set_item_size(idx, depth, items_[idx].u.panel.fullsize ? totalbreadth : breadth);  // NOCOM crash on dismantling a building
+			set_item_size(idx, depth, items_[idx].u.panel.fullsize ? totalbreadth : breadth);
 			set_item_pos(idx, totaldepth - scrollpos);
 		}
 
@@ -285,7 +286,7 @@ void Box::add_space(uint32_t space) {
 
 	items_.push_back(it);
 
-	update_desired_size();  // NOCOM crash on dismantling a building
+	update_desired_size();
 }
 
 /**
@@ -353,7 +354,7 @@ void Box::set_item_size(uint32_t idx, int depth, int breadth) {
 
 	if (it.type == Item::ItemPanel) {
 		if (orientation_ == Horizontal)
-			it.u.panel.panel->set_size(depth, breadth); // NOCOM crash on dismantling a building
+			it.u.panel.panel->set_size(depth, breadth);
 		else
 			it.u.panel.panel->set_size(breadth, depth);
 	}

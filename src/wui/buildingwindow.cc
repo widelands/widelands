@@ -360,7 +360,7 @@ void BuildingWindow::act_dismantle() {
 		if (building_.get_playercaps() & Widelands::Building::PCap_Dismantle)
 			igbase()->game().send_player_dismantle(building_);
 	} else {
-		show_dismantle_confirm(dynamic_cast<InteractivePlayer&>(*igbase()), building_);  // NOCOM crash on dismantling a building
+		show_dismantle_confirm(dynamic_cast<InteractivePlayer&>(*igbase()), building_);
 	}
 }
 
