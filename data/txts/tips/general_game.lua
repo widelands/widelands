@@ -37,7 +37,7 @@ tips = {
       seconds = 6
    },
    {
-      text = _"Press Ctrl+(1-9) to store important locations, then press 1-9 to recall them.",
+      text = _"Press %1% to store important locations, then press %2% to recall them.":bformat(pgettext("hotkey", "Ctrl+(1-9)"), pgettext("hotkey", "1-9")),
       seconds = 4
    },
    {
@@ -65,7 +65,7 @@ tips = {
       seconds = 7
    },
    {
-      text = _"Zoom in/out with the mouse wheel or Ctrl+(+/-). Press Ctrl+0 to reset the zoom.",
+      text = _"Zoom in/out with the mouse wheel or %1%. Press %2% to reset the zoom.":bformat(pgettext("hotkey", "Ctrl+(+/-)"), pgettext("hotkey", "Ctrl+0")),
       seconds = 3
    },
    {
