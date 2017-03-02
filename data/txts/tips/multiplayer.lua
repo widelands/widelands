@@ -13,7 +13,7 @@ tips = {
       seconds = 5
    },
    {
-      text = _"If the game crashes, don't worry! A saved game is automatically generated, and you can reload the game afterwards.",
+      text = _"If the game should crash, don't worry! The game will be saved automatically so that you can reload it afterwards.",
       seconds = 7
    },
 }
