@@ -56,6 +56,5 @@ wl_library(economy
     logic_widelands_geometry
     map_io
     notifications
-    wui
 )
 add_subdirectory(test)
