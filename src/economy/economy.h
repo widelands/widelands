@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004, 2006-2013 by the Widelands Development Team
+ * Copyright (C) 2004-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -33,7 +33,8 @@
 #include "logic/map_objects/map_object.h"
 #include "logic/map_objects/tribes/warelist.h"
 #include "logic/map_objects/tribes/wareworker.h"
-#include "ui_basic/unique_window.h"
+#include "notifications/note_ids.h"
+#include "notifications/notifications.h"
 
 namespace Widelands {
 
@@ -47,6 +48,23 @@ class Request;
 struct Route;
 struct Router;
 struct Supply;
+
+struct NoteEconomy {
+	CAN_BE_SENT_AS_NOTE(NoteId::Economy)
+
+	// When 2 economies have been merged, this is the economy number that has
+	// been removed, while the other one is the number of the resulting economy.
+	// For all other messages old_economy == new_economy.
+	size_t old_economy;
+	size_t new_economy;
+
+	enum class Action { kMerged, kDeleted };
+	const Action action;
+
+	NoteEconomy(size_t init_old, size_t init_new, const Action& init_action)
+	   : old_economy(init_old), new_economy(init_new), action(init_action) {
+	}
+};
 
 /**
  * Each Economy represents all building and flags, which are connected over the same
@@ -173,9 +191,11 @@ public:
 		return worker_target_quantities_[i];
 	}
 
-	void show_options_window();
-	UI::UniqueWindow::Registry& optionswindow_registry() {
-		return optionswindow_registry_;
+	bool has_window() const {
+		return has_window_;
+	}
+	void set_has_window(bool yes) {
+		has_window_ = yes;
 	}
 
 	const WareList& get_wares() const {
@@ -259,7 +279,7 @@ private:
 	uint32_t request_timerid_;
 
 	static std::unique_ptr<Soldier> soldier_prototype_;
-	UI::UniqueWindow::Registry optionswindow_registry_;
+	bool has_window_;
 
 	// 'list' of unique providers
 	std::map<UniqueDistance, Supply*> available_supplies_;

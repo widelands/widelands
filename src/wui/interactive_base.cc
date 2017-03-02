@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2011, 2015 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -229,7 +229,7 @@ UI::Button* InteractiveBase::add_toolbar_button(const std::string& image_basenam
 	UI::Button* button = new UI::Button(
 	   &toolbar_, name, 0, 0, 34U, 34U, g_gr->images().get("images/ui_basic/but2.png"),
 	   g_gr->images().get("images/" + image_basename + ".png"), tooltip_text);
-	toolbar_.add(button, UI::Align::kLeft);
+	toolbar_.add(button);
 	if (window) {
 		window->assign_toggle_button(button);
 		registries_.push_back(*window);
@@ -352,7 +352,7 @@ void InteractiveBase::draw_overlay(RenderTarget& dst) {
 			const std::string gametime(gametimestring(egbase().get_gametime(), true));
 			const std::string gametime_text = as_condensed(gametime);
 			dst.blit(Vector2f(5, 5), UI::g_fh1->render(gametime_text), BlendMode::UseAlpha,
-			         UI::Align::kTopLeft);
+			         UI::Align::kLeft);
 
 			static boost::format node_format("(%i, %i)");
 			node_text = as_condensed((node_format % sel_.pos.node.x % sel_.pos.node.y).str());
@@ -362,8 +362,10 @@ void InteractiveBase::draw_overlay(RenderTarget& dst) {
 			node_text = as_condensed((node_format % sel_.pos.node.x % sel_.pos.node.y % height).str());
 		}
 
-		dst.blit(Vector2f(get_w() - 5, get_h() - 5), UI::g_fh1->render(node_text),
-		         BlendMode::UseAlpha, UI::Align::kBottomRight);
+		const Image* rendered_text = UI::g_fh1->render(node_text);
+
+		dst.blit(Vector2f(get_w() - 5, get_h() - rendered_text->height() - 5), rendered_text,
+		         BlendMode::UseAlpha, UI::Align::kRight);
 	}
 
 	// Blit FPS when playing a game in debug mode.

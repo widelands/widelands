@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2009 by the Widelands Development Team
+ * Copyright (C) 2009-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -112,7 +112,7 @@ SpinBox::SpinBox(Panel* const parent,
 	sbi_->label =
 	   new UI::MultilineTextarea(box_, 0, 0, 0, 0, label_text, UI::Align::kLeft, button_background,
 	                             UI::MultilineTextarea::ScrollMode::kNoScrolling);
-	box_->add(sbi_->label, UI::Align::kHCenter);
+	box_->add(sbi_->label);
 
 	sbi_->text = new UI::Textarea(box_, "", UI::Align::kCenter);
 
@@ -148,15 +148,15 @@ SpinBox::SpinBox(Panel* const parent,
 		buttons_.push_back(sbi_->button_ten_minus);
 		buttons_.push_back(sbi_->button_ten_plus);
 
-		box_->add(sbi_->button_ten_minus, UI::Align::kTop);
-		box_->add(sbi_->button_minus, UI::Align::kTop);
-		box_->add(sbi_->text, UI::Align::kTop);
-		box_->add(sbi_->button_plus, UI::Align::kTop);
-		box_->add(sbi_->button_ten_plus, UI::Align::kTop);
+		box_->add(sbi_->button_ten_minus);
+		box_->add(sbi_->button_minus);
+		box_->add(sbi_->text);
+		box_->add(sbi_->button_plus);
+		box_->add(sbi_->button_ten_plus);
 	} else {
-		box_->add(sbi_->button_minus, UI::Align::kHCenter);
-		box_->add(sbi_->text, UI::Align::kHCenter);
-		box_->add(sbi_->button_plus, UI::Align::kHCenter);
+		box_->add(sbi_->button_minus);
+		box_->add(sbi_->text);
+		box_->add(sbi_->button_plus);
 	}
 
 	sbi_->button_plus->sigclicked.connect(

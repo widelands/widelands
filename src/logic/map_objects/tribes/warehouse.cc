@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2013 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -742,17 +742,17 @@ bool Warehouse::fetch_from_flag(Game& game) {
  * requirements.
  */
 Quantity Warehouse::count_workers(const Game& /* game */,
-                                  DescriptionIndex ware,
+                                  DescriptionIndex worker_id,
                                   const Requirements& req,
                                   Match exact) {
 	Quantity sum = 0;
 
 	do {
-		sum += supply_->stock_workers(ware);
+		sum += supply_->stock_workers(worker_id);
 
 		// NOTE: This code lies about the TrainingAttributes of non-instantiated workers.
-		if (incorporated_workers_.count(ware)) {
-			for (Worker* worker : incorporated_workers_[ware]) {
+		if (incorporated_workers_.count(worker_id)) {
+			for (Worker* worker : incorporated_workers_[worker_id]) {
 				if (!req.check(*worker)) {
 					//  This is one of the workers in our sum.
 					//  But he is too stupid for this job
@@ -761,11 +761,11 @@ Quantity Warehouse::count_workers(const Game& /* game */,
 			}
 		}
 		if (exact == Match::kCompatible) {
-			ware = owner().tribe().get_worker_descr(ware)->becomes();
+			worker_id = owner().tribe().get_worker_descr(worker_id)->becomes();
 		} else {
-			ware = INVALID_INDEX;
+			worker_id = INVALID_INDEX;
 		}
-	} while (owner().tribe().has_ware(ware));
+	} while (owner().tribe().has_worker(worker_id));
 
 	return sum;
 }
@@ -1274,9 +1274,8 @@ void Warehouse::check_remove_stock(Game& game) {
 InputQueue& Warehouse::inputqueue(DescriptionIndex index, WareWorker type) {
 	assert(portdock_ != nullptr);
 	assert(portdock_->expedition_bootstrap() != nullptr);
-	assert(type == wwWARE);
 
-	return portdock_->expedition_bootstrap()->waresqueue(index);
+	return portdock_->expedition_bootstrap()->inputqueue(index, type);
 }
 
 /*

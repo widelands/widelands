@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2011 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -69,9 +69,9 @@ MainMenuSaveMapMakeDirectory::MainMenuSaveMapMakeDirectory(UI::Panel* const pare
                     g_gr->images().get("images/ui_basic/but1.png"),
                     _("Cancel")) {
 
-	vbox_.add(&label_, UI::Align::kLeft);
+	vbox_.add(&label_);
 	vbox_.add_space(padding_);
-	vbox_.add(&edit_, UI::Align::kLeft);
+	vbox_.add(&edit_);
 	vbox_.set_size(get_inner_w() - 2 * padding_, get_inner_h() - 3 * padding_ - buth_);
 
 	edit_.set_text(dirname_);

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2009 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -95,15 +95,15 @@ EditorToolNoiseHeightOptionsMenu::EditorToolNoiseHeightOptionsMenu(
 	UI::Textarea* label =
 	   new UI::Textarea(&box_, 0, 0, 0, 0, _("Random Height"), UI::Align::kCenter);
 	label->set_fixed_width(get_inner_w() - 2 * hmargin());
-	box_.add(label, UI::Align::kLeft);
-	box_.add(&upper_, UI::Align::kLeft);
-	box_.add(&lower_, UI::Align::kLeft);
+	box_.add(label);
+	box_.add(&upper_);
+	box_.add(&lower_);
 
 	box_.add_space(2 * vspacing());
 	label = new UI::Textarea(&box_, 0, 0, 0, 0, _("Fixed Height"), UI::Align::kCenter);
 	label->set_fixed_width(get_inner_w() - 2 * hmargin());
-	box_.add(label, UI::Align::kLeft);
-	box_.add(&set_to_, UI::Align::kLeft);
+	box_.add(label);
+	box_.add(&set_to_);
 
 	box_.set_size(get_inner_w() - 2 * hmargin(), upper_.get_h() + lower_.get_h() + set_to_.get_h() +
 	                                                2 * label->get_h() + 7 * vspacing());

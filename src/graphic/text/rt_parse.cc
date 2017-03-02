@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2012 by the Widelands Development Team
+ * Copyright (C) 2006-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -189,7 +189,7 @@ Parser::Parser() {
 		tc.allowed_children.insert("p");
 		tc.allowed_children.insert("vspace");
 		tc.allowed_children.insert("font");
-		tc.allowed_children.insert("sub");
+		tc.allowed_children.insert("div");
 		tc.text_allowed = false;
 		tc.has_closing_tag = true;
 		tag_constraints_["rt"] = tc;
@@ -223,7 +223,7 @@ Parser::Parser() {
 		tc.has_closing_tag = false;
 		tag_constraints_["space"] = tc;
 	}
-	{  // sub tag
+	{  // div tag
 		TagConstraint tc;
 		tc.allowed_attrs.insert("padding");
 		tc.allowed_attrs.insert("padding_r");
@@ -239,11 +239,11 @@ Parser::Parser() {
 		tc.allowed_children.insert("p");
 		tc.allowed_children.insert("vspace");
 		tc.allowed_children.insert("font");
-		tc.allowed_children.insert("sub");
+		tc.allowed_children.insert("div");
 
 		tc.text_allowed = false;
 		tc.has_closing_tag = true;
-		tag_constraints_["sub"] = tc;
+		tag_constraints_["div"] = tc;
 	}
 	{  // p tag
 		TagConstraint tc;
@@ -256,7 +256,7 @@ Parser::Parser() {
 		tc.allowed_children.insert("space");
 		tc.allowed_children.insert("br");
 		tc.allowed_children.insert("img");
-		tc.allowed_children.insert("sub");
+		tc.allowed_children.insert("div");
 		tc.text_allowed = true;
 		tc.has_closing_tag = true;
 		tag_constraints_["p"] = tc;
@@ -277,7 +277,7 @@ Parser::Parser() {
 		tc.allowed_children.insert("vspace");
 		tc.allowed_children.insert("p");
 		tc.allowed_children.insert("font");
-		tc.allowed_children.insert("sub");
+		tc.allowed_children.insert("div");
 		tc.text_allowed = true;
 		tc.has_closing_tag = true;
 		tag_constraints_["font"] = tc;

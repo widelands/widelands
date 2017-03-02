@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2012 by the Widelands Development Team
+ * Copyright (C) 2012-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -184,7 +184,7 @@ static const std::string IGPCMD_RELOGIN = "RELOGIN";
  *
  * \note all this is handled in InternetGaming::handle_packet. valid explanation codes can be found
  * there.
- * \note example for not connectable game: "ERROR" "GAME_OPEN" "GAME_NOT_CONNECTABLE"
+ * \note example for not connectable game: "ERROR" "GAME_OPEN"
  */
 static const std::string IGPCMD_ERROR = "ERROR";
 
@@ -310,8 +310,7 @@ static const std::string IGPCMD_CLIENTS = "CLIENTS";
  * list the new game, but set it as not connectable and recheck the connectability for
  * INTERNET_GAMING_TIMEOUT ms.
  * If the game gets connectable in time, the metaserver lists the game as connectable, else it
- * removes the
- * game from the list of games and sends a \ref IGPCMD_GAME_NOT_CONNECTABLE to the hosting client.
+ * removes the game from the list of games.
  */
 static const std::string IGPCMD_GAME_OPEN = "GAME_OPEN";
 

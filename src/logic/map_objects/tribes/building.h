@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2013, 2016 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -35,13 +35,10 @@
 #include "logic/map_objects/tribes/workarea_info.h"
 #include "logic/message.h"
 #include "logic/widelands.h"
+#include "notifications/notifications.h"
 #include "scripting/lua_table.h"
 
-namespace UI {
-class Window;
-}
 struct BuildingHints;
-class InteractiveGameBase;
 class Image;
 
 namespace Widelands {
@@ -191,6 +188,19 @@ private:
 	DISALLOW_COPY_AND_ASSIGN(BuildingDescr);
 };
 
+struct NoteBuilding {
+	CAN_BE_SENT_AS_NOTE(NoteId::Building)
+
+	Serial serial;
+
+	enum class Action { kChanged, kDeleted, kStartWarp, kFinishWarp, kWorkersChanged };
+	const Action action;
+
+	NoteBuilding(Serial init_serial, const Action& init_action)
+	   : serial(init_serial), action(init_action) {
+	}
+};
+
 class Building : public PlayerImmovable {
 	friend class BuildingDescr;
 	friend class MapBuildingdataPacket;
@@ -211,7 +221,6 @@ public:
 	enum class InfoStringFormat { kCensus, kStatistics, kTooltip };
 
 	Building(const BuildingDescr&);
-	virtual ~Building();
 
 	void load_finish(EditorGameBase&) override;
 
@@ -240,12 +249,6 @@ public:
 
 	virtual bool burn_on_destroy();
 	void destroy(EditorGameBase&) override;
-
-	void show_options(InteractiveGameBase&,
-	                  bool avoid_fastclick = false,
-	                  Vector2i pos = Vector2i(-1, -1));
-	void hide_options();
-	void refresh_options(InteractiveGameBase&);
 
 	virtual bool fetch_from_flag(Game&);
 	virtual bool get_building_work(Game&, Worker&, bool success);
@@ -289,7 +292,6 @@ public:
 
 	void add_worker(Worker&) override;
 	void remove_worker(Worker&) override;
-	mutable boost::signals2::signal<void()> workers_changed;
 
 	void send_message(Game& game,
 	                  const Message::Type msgtype,
@@ -321,11 +323,8 @@ protected:
 	void
 	draw_info(TextToDraw draw_text, const Vector2f& point_on_dst, float scale, RenderTarget* dst);
 
-	virtual void create_options_window(InteractiveGameBase&, UI::Window*& registry) = 0;
-
 	void set_seeing(bool see);
 
-	UI::Window* optionswindow_;
 	Coords position_;
 	Flag* flag_;
 
@@ -345,9 +344,6 @@ protected:
 
 	/// Whether we see our vision_range area based on workers in the building
 	bool seeing_;
-
-	// Signals connected for the option window
-	std::vector<boost::signals2::connection> options_window_connections;
 
 	// The former buildings names, with the current one in last position.
 	FormerBuildings old_buildings_;

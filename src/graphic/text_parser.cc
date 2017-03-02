@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2005, 2007-2011 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -280,7 +280,7 @@ void TextParser::parse_text_attributes(std::string format, TextBlock& element) {
 }
 
 Align TextParser::set_align(const std::string& align) {
-	return align == "right" ? UI::Align::kRight : align == "center" ? UI::Align::kHCenter :
+	return align == "right" ? UI::Align::kRight : align == "center" ? UI::Align::kCenter :
 	                                                                  UI::Align::kLeft;
 }
 }

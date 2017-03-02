@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2016 by the Widelands Development Team
+ * Copyright (C) 2008-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -179,7 +179,7 @@ struct HostGameSettingsProvider : public GameSettingsProvider {
 				do {
 					uint8_t random = (std::rand() % impls.size());  // Choose a random AI
 					it = impls.begin() + random;
-				} while ((*it)->name == "empty");
+				} while ((*it)->type == ComputerPlayer::Implementation::Type::kEmpty);
 				set_player_ai(number, (*it)->name, true);
 				newstate = PlayerSettings::stateComputer;
 				break;
@@ -590,7 +590,7 @@ NetHost::NetHost(const std::string& playername, bool internet)
 	d->syncreport_pending = false;
 	d->syncreport_time = 0;
 
-	d->settings.tribes = Widelands::Tribes::get_all_tribeinfos();
+	d->settings.tribes = Widelands::get_all_tribeinfos();
 	set_multiplayer_game_settings();
 	d->settings.playernum = UserSettings::none();
 	d->settings.usernum = 0;
@@ -1718,7 +1718,7 @@ void NetHost::receive_client_time(uint32_t const number, int32_t const time) {
 	Client& client = d->clients.at(number);
 
 	if (time - client.time < 0)
-		throw DisconnectException("BACKWARTS_RUNNING_TIME");
+		throw DisconnectException("BACKWARDS_RUNNING_TIME");
 	if (d->committed_networktime - time < 0)
 		throw DisconnectException("SIMULATING_BEYOND_TIME");
 	if (d->syncreport_pending && !client.syncreport_arrived) {

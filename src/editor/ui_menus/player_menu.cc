@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2011 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -61,7 +61,7 @@ EditorPlayerMenu::EditorPlayerMenu(EditorInteractive& parent, UI::UniqueWindow::
                          g_gr->images().get("images/ui_basic/but1.png"),
                          g_gr->images().get("images/ui_basic/scrollbar_down.png"),
                          _("Remove last player")),
-     tribenames_(eia().egbase().tribes().get_all_tribenames()) {
+     tribenames_(Widelands::get_all_tribenames()) {
 	add_player_.set_enabled(parent.egbase().map().get_nrplayers() < kMaxPlayers);
 	add_player_.sigclicked.connect(
 	   boost::bind(&EditorPlayerMenu::clicked_add_player, boost::ref(*this)));
@@ -169,7 +169,7 @@ void EditorPlayerMenu::update() {
 		}
 
 		plr_set_tribes_buts_[p - 1]->set_title(
-		   eia().egbase().tribes().tribeinfo(selected_tribes_[p - 1]).descname);
+		   Widelands::get_tribeinfo(selected_tribes_[p - 1]).descname);
 
 		// Set default AI and closeable to false (always default - should be changed by hand)
 		map.set_scenario_player_ai(p, "");
@@ -249,7 +249,7 @@ void EditorPlayerMenu::clicked_remove_last_player() {
 void EditorPlayerMenu::player_tribe_clicked(uint8_t n) {
 	EditorInteractive& menu = eia();
 	if (!menu.is_player_tribe_referenced(n + 1)) {
-		if (!Widelands::Tribes::tribe_exists(selected_tribes_[n])) {
+		if (!Widelands::tribe_exists(selected_tribes_[n])) {
 			throw wexception(
 			   "Map defines tribe %s, but it does not exist!", selected_tribes_[n].c_str());
 		}
@@ -330,7 +330,7 @@ void EditorPlayerMenu::make_infrastructure_clicked(uint8_t n) {
 		// place a hq and reference the tribe
 		// so that this tribe can not be changed
 		egbase.add_player(n, 0,  // TODO(SirVer): initialization index makes no sense here
-		                  eia().egbase().tribes().tribeinfo(selected_tribes_[n]).descname,
+		                  Widelands::get_tribeinfo(selected_tribes_[n]).descname,
 		                  plr_names_[n - 1]->text());
 
 		p = egbase.get_player(n);

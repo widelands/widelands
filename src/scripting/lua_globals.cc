@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2010 by the Widelands Development Team
+ * Copyright (C) 2006-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,7 +20,9 @@
 #include "scripting/lua_globals.h"
 
 #include <exception>
+#include <memory>
 
+#include <SDL.h>
 #include <boost/format.hpp>
 
 #include "base/i18n.h"
@@ -239,11 +241,22 @@ static int L_include(lua_State* L) {
 		lua_getfield(L, LUA_REGISTRYINDEX, "lua_interface");
 		LuaInterface* lua = static_cast<LuaInterface*>(lua_touserdata(L, -1));
 		lua_pop(L, 1);  // pop this userdata
-		lua->run_script(script);
+		std::unique_ptr<LuaTable> table(lua->run_script(script));
+		table->do_not_warn_about_unaccessed_keys();
 	} catch (std::exception& e) {
 		report_error(L, "%s", e.what());
 	}
 	return 0;
+}
+
+/* RST
+.. function:: ticks()
+
+	Returns an integer value representing the number of milliseconds since the SDL library initialized.
+*/
+static int L_ticks(lua_State* L) {
+	lua_pushinteger(L, SDL_GetTicks());
+	return 1;
 }
 
 /* RST
@@ -263,6 +276,7 @@ const static struct luaL_Reg globals[] = {{"_", &L__},
                                           {"ngettext", &L_ngettext},
                                           {"pgettext", &L_pgettext},
                                           {"set_textdomain", &L_set_textdomain},
+                                          {"ticks", &L_ticks},
                                           {nullptr, nullptr}};
 
 void luaopen_globals(lua_State* L) {

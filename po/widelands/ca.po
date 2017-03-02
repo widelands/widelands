@@ -4,15 +4,15 @@
 # Translators:
 # GunChleoc, 2016
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
-# Juanjo, 2015-2016
+# Juanjo, 2015-2017
 # Juanjo, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-01-21 14:22+0000\n"
-"PO-Revision-Date: 2017-01-21 14:25+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2017-02-19 19:34+0000\n"
+"PO-Revision-Date: 2017-02-25 18:12+0000\n"
+"Last-Translator: Juanjo\n"
 "Language-Team: Catalan (http://www.transifex.com/widelands/widelands/language/ca/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -25,7 +25,7 @@ msgstr ""
 msgid "“%s”"
 msgstr "«%s»"
 
-#: ../../data/scripting/format_scenario.lua:96
+#: ../../data/scripting/format_scenario.lua:84
 msgid "New Objective"
 msgid_plural "New Objectives"
 msgstr[0] "Objectiu nou"
@@ -64,18 +64,18 @@ msgid "%1$s and %2$s"
 msgstr "%1$s i %2$s"
 
 #. TRANSLATORS: Short for "Not enough space"
-#: ../../data/scripting/infrastructure.lua:157
+#: ../../data/scripting/infrastructure.lua:162
 msgid "No Space"
 msgstr "Sense espai"
 
-#: ../../data/scripting/infrastructure.lua:158
+#: ../../data/scripting/infrastructure.lua:163
 msgid ""
 "Some of your starting buildings didn’t have enough room and weren’t built. "
 "You are at a disadvantage with this; consider restarting this map with a "
 "fair starting condition."
 msgstr "No hi havia prou espai per als vostres edificis inicials i no s'han construït. Esteu en desavantatge per això; considereu tornar a començar el mapa amb unes condicions inicials més justes."
 
-#: ../../data/scripting/infrastructure.lua:159
+#: ../../data/scripting/infrastructure.lua:164
 msgid "Not enough space"
 msgstr "No hi ha prou espai"
 
@@ -85,12 +85,12 @@ msgid "No AI"
 msgstr "Sense IA"
 
 #. * TRANSLATORS: This is the name of an AI used in the game setup screens
-#: ../../src/ai/defaultai.h:104
+#: ../../src/ai/defaultai.h:102
 msgid "Normal AI"
 msgstr "IA normal"
 
 #. * TRANSLATORS: This is the name of an AI used in the game setup screens
-#: ../../src/ai/defaultai.h:117
+#: ../../src/ai/defaultai.h:116
 msgid "Weak AI"
 msgstr "IA dèbil"
 
@@ -261,7 +261,7 @@ msgid "Redo"
 msgstr "Refés"
 
 #: ../../src/editor/editorinteractive.cc:142
-#: ../../src/wui/buildingwindow.cc:299
+#: ../../src/wui/buildingwindow.cc:305
 msgid "Help"
 msgstr "Ajuda"
 
@@ -492,8 +492,8 @@ msgstr "Actual: %s"
 #: ../../src/editor/ui_menus/help.cc:42
 #: ../../src/editor/ui_menus/player_menu.cc:266
 #: ../../src/ui_fsmenu/multiplayer.cc:133
-#: ../../src/wui/encyclopedia_window.cc:146
-#: ../../src/wui/tribal_encyclopedia.cc:49
+#: ../../src/wui/encyclopedia_window.cc:145
+#: ../../src/wui/tribal_encyclopedia.cc:56
 msgid "Error!"
 msgstr "S'ha produït un error!"
 
@@ -553,7 +553,7 @@ msgstr "Directori actual: %s"
 #: ../../src/scripting/lua_game.cc:432 ../../src/ui_basic/messagebox.cc:87
 #: ../../src/ui_fsmenu/helpwindow.cc:52
 #: ../../src/ui_fsmenu/load_map_or_game.cc:45
-#: ../../src/ui_fsmenu/options.cc:132
+#: ../../src/ui_fsmenu/options.cc:118
 #: ../../src/wui/game_main_menu_save_game.cc:88
 msgid "OK"
 msgstr "D'acord"
@@ -564,7 +564,7 @@ msgstr "D'acord"
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:228
 #: ../../src/editor/ui_menus/main_menu_save_map_make_directory.cc:70
 #: ../../src/ui_basic/messagebox.cc:93 ../../src/ui_fsmenu/launch_mpg.cc:77
-#: ../../src/ui_fsmenu/options.cc:116
+#: ../../src/ui_fsmenu/options.cc:109
 #: ../../src/wui/game_main_menu_save_game.cc:93 ../../src/wui/login_box.cc:62
 msgid "Cancel"
 msgstr "Cancel·la"
@@ -720,7 +720,7 @@ msgstr "Muntanyes:"
 #. * TRANSLATORS: A spinbox unit
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:189
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:509
-#: ../../src/ui_basic/spinbox.cc:305
+#: ../../src/ui_basic/spinbox.cc:324
 #, c-format
 msgid "%i %%"
 msgstr "%i %%"
@@ -731,7 +731,7 @@ msgstr "Mode d'illes"
 
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:194
 msgid "Random Number:"
-msgstr "Número aleatori:"
+msgstr "Nombre aleatori:"
 
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:203
 msgid "Map ID:"
@@ -898,7 +898,7 @@ msgstr "Alçada aleatòria"
 
 #: ../../src/editor/ui_menus/tool_menu.cc:61
 #: ../../src/editor/ui_menus/tool_set_terrain_options_menu.cc:91
-#: ../../src/wui/minimap.cc:125
+#: ../../src/wui/minimap.cc:121
 msgid "Terrain"
 msgstr "Terreny"
 
@@ -920,7 +920,7 @@ msgstr "Defineix espais portuaris"
 msgid ""
 "Set the position that will have the coordinates (0, 0). This will be the "
 "top-left corner of a generated minimap."
-msgstr "Trieu la posició que tindrà coordenades (0, 0). Aquest lloc serà el punt de dalt a l'esquerra del minimapa."
+msgstr "Trieu la posició que tindrà coordenades (0,0). Aquest lloc serà el punt de dalt a l'esquerra del minimapa."
 
 #: ../../src/editor/ui_menus/tool_noise_height_options_menu.cc:39
 msgid "Random Height Options"
@@ -953,7 +953,7 @@ msgstr "Alçada fixada"
 #. * TRANSLATORS: %1% = terrain name, %2% = list of terrain types
 #. * TRANSLATORS: Label: Value.
 #: ../../src/editor/ui_menus/tool_set_terrain_options_menu.cc:77
-#: ../../src/ui_basic/dropdown.cc:157
+#: ../../src/ui_basic/dropdown.cc:179
 msgid "%1%: %2%"
 msgstr "%1%: %2%"
 
@@ -1088,7 +1088,7 @@ msgstr "T'estan atacant"
 #. * TRANSLATORS: e.g. Completed/Skipped/Did not start ... because the economy
 #. needs the ware
 #. * ‘%s’
-#: ../../src/logic/map_objects/tribes/production_program.cc:292
+#: ../../src/logic/map_objects/tribes/production_program.cc:309
 #, c-format
 msgid "the economy needs the ware ‘%s’"
 msgstr "necessitem %s"
@@ -1096,7 +1096,7 @@ msgstr "necessitem %s"
 #. * TRANSLATORS: e.g. Completed/Skipped/Did not start ... because the economy
 #. doesn’t need the
 #. * ware ‘%s’
-#: ../../src/logic/map_objects/tribes/production_program.cc:301
+#: ../../src/logic/map_objects/tribes/production_program.cc:318
 #, c-format
 msgid "the economy doesn’t need the ware ‘%s’"
 msgstr "no fa falta «%s»"
@@ -1104,14 +1104,14 @@ msgstr "no fa falta «%s»"
 #. * TRANSLATORS: e.g. Completed/Skipped/Did not start ... because the economy
 #. needs the worker
 #. * ‘%s’
-#: ../../src/logic/map_objects/tribes/production_program.cc:314
+#: ../../src/logic/map_objects/tribes/production_program.cc:331
 #, c-format
 msgid "the economy needs the worker ‘%s’"
 msgstr "necessitem el treballador %s"
 
 #. * TRANSLATORS: e.g. Completed/Skipped/Did not start ...
 #. * TRANSLATORS:      ... because the economy doesn’t need the worker ‘%s’
-#: ../../src/logic/map_objects/tribes/production_program.cc:324
+#: ../../src/logic/map_objects/tribes/production_program.cc:341
 #, c-format
 msgid "the economy doesn’t need the worker ‘%s’"
 msgstr "no necessitem %s"
@@ -1129,34 +1129,34 @@ msgstr "no necessitem %s"
 #. Ox":
 #. * TRANSLATORS:    %1$i = "2"
 #. * TRANSLATORS:    %2$s = "Ox"
-#: ../../src/logic/map_objects/tribes/production_program.cc:363
-#: ../../src/logic/map_objects/tribes/production_program.cc:385
-#: ../../src/logic/map_objects/tribes/production_program.cc:834
-#: ../../src/logic/map_objects/tribes/production_program.cc:937
-#: ../../src/logic/map_objects/tribes/production_program.cc:1019
+#: ../../src/logic/map_objects/tribes/production_program.cc:388
+#: ../../src/logic/map_objects/tribes/production_program.cc:414
+#: ../../src/logic/map_objects/tribes/production_program.cc:877
+#: ../../src/logic/map_objects/tribes/production_program.cc:983
+#: ../../src/logic/map_objects/tribes/production_program.cc:1065
 #, c-format
 msgid "%1$ix %2$s"
 msgstr "%1$i unitats de %2$s"
 
-#: ../../src/logic/map_objects/tribes/production_program.cc:369
+#: ../../src/logic/map_objects/tribes/production_program.cc:394
 #, c-format
 msgid "the building has the following wares: %s"
 msgstr "l'edifici té els següents béns: %s"
 
-#: ../../src/logic/map_objects/tribes/production_program.cc:391
+#: ../../src/logic/map_objects/tribes/production_program.cc:420
 #, c-format
 msgid "the building doesn’t have the following wares: %s"
 msgstr "l'edifici no té els següents béns: %s"
 
 #. * TRANSLATORS: 'Completed/Skipped/Did not start ... because a worker needs
 #. experience'.
-#: ../../src/logic/map_objects/tribes/production_program.cc:404
+#: ../../src/logic/map_objects/tribes/production_program.cc:433
 msgid "a worker needs experience"
 msgstr "un treballador necessita experiència"
 
 #. * TRANSLATORS: 'Completed/Skipped/Did not start ... because the workers
 #. need no experience'.
-#: ../../src/logic/map_objects/tribes/production_program.cc:410
+#: ../../src/logic/map_objects/tribes/production_program.cc:439
 msgid "the workers need no experience"
 msgstr "no els cal experiència als treballadors"
 
@@ -1173,25 +1173,25 @@ msgstr "no els cal experiència als treballadors"
 #. * TRANSLATORS: on a development build if you can, and let us know if there
 #. are any issues
 #. * TRANSLATORS: we need to address for your language.
-#: ../../src/logic/map_objects/tribes/production_program.cc:514
-#: ../../src/logic/map_objects/tribes/production_program.cc:858
+#: ../../src/logic/map_objects/tribes/production_program.cc:543
+#: ../../src/logic/map_objects/tribes/production_program.cc:901
 #, c-format
 msgid "Did not start %1$s because %2$s"
-msgstr "No pot %1$s ja que %2$s"
+msgstr "No pot %1$s, ja que %2$s"
 
 #. * TRANSLATORS: "Completed working because the economy needs the ware ‘%s’"
-#: ../../src/logic/map_objects/tribes/production_program.cc:519
+#: ../../src/logic/map_objects/tribes/production_program.cc:548
 #, c-format
 msgid "Completed %1$s because %2$s"
-msgstr "Ha completat %1$s ja que %2$s"
+msgstr "Ha completat %1$s, ja que %2$s"
 
 #. * TRANSLATORS: "Skipped working because the economy needs the ware ‘%s’"
-#: ../../src/logic/map_objects/tribes/production_program.cc:524
+#: ../../src/logic/map_objects/tribes/production_program.cc:553
 #, c-format
 msgid "Skipped %1$s because %2$s"
-msgstr "No cal %1$s ja que %2$s"
+msgstr "No cal %1$s, ja que %2$s"
 
-#: ../../src/logic/map_objects/tribes/production_program.cc:719
+#: ../../src/logic/map_objects/tribes/production_program.cc:748
 msgid "No use for ships on this map!"
 msgstr "Els vaixells no serveixen per res en aquest mapa."
 
@@ -1199,7 +1199,7 @@ msgstr "Els vaixells no serveixen per res en aquest mapa."
 #. are missing'
 #. * TRANSLATORS: e.g. 'Did not start working because fish, meat or pitta
 #. bread is missing'
-#: ../../src/logic/map_objects/tribes/production_program.cc:844
+#: ../../src/logic/map_objects/tribes/production_program.cc:887
 #, c-format
 msgid "%s is missing"
 msgid_plural "%s are missing"
@@ -1209,7 +1209,7 @@ msgstr[1] "fan falta «%s»"
 #. * TRANSLATORS: %s is a list of wares. String is fetched according to total
 #. amount of
 #. wares.
-#: ../../src/logic/map_objects/tribes/production_program.cc:948
+#: ../../src/logic/map_objects/tribes/production_program.cc:994
 #, c-format
 msgid "Produced %s"
 msgid_plural "Produced %s"
@@ -1219,45 +1219,45 @@ msgstr[1] "S'han produït %s"
 #. * TRANSLATORS: %s is a list of workers. String is fetched according to
 #. total amount of
 #. workers.
-#: ../../src/logic/map_objects/tribes/production_program.cc:1030
+#: ../../src/logic/map_objects/tribes/production_program.cc:1076
 #, c-format
 msgid "Recruited %s"
 msgid_plural "Recruited %s"
 msgstr[0] "S'ha contractat %s"
 msgstr[1] "S'han contractat %s"
 
-#: ../../src/logic/map_objects/tribes/production_program.cc:1236
+#: ../../src/logic/map_objects/tribes/production_program.cc:1282
 msgid "No soldier to train!"
 msgstr "Sense soldats per entrenar"
 
-#: ../../src/logic/map_objects/tribes/production_program.cc:1245
-#: ../../src/logic/map_objects/tribes/production_program.cc:1322
+#: ../../src/logic/map_objects/tribes/production_program.cc:1291
+#: ../../src/logic/map_objects/tribes/production_program.cc:1368
 msgid "No soldier found for this training level!"
 msgstr "No s'ha trobat cap soldat per entrenar aquest nivell."
 
-#: ../../src/logic/map_objects/tribes/productionsite.cc:247
+#: ../../src/logic/map_objects/tribes/productionsite.cc:270
 msgid "(not occupied)"
 msgstr "(no ocupat)"
 
-#: ../../src/logic/map_objects/tribes/productionsite.cc:254
+#: ../../src/logic/map_objects/tribes/productionsite.cc:277
 msgid "Worker missing"
 msgid_plural "Workers missing"
 msgstr[0] "Fa falta un treballador"
 msgstr[1] "Fan falta treballadors"
 
-#: ../../src/logic/map_objects/tribes/productionsite.cc:261
+#: ../../src/logic/map_objects/tribes/productionsite.cc:284
 msgid "(stopped)"
 msgstr "(parat)"
 
 #. * TRANSLATORS: Percent in building statistics window, e.g. 85%
 #. * TRANSLATORS: If you wish to add a space, translate as '%i %%'
-#: ../../src/logic/map_objects/tribes/productionsite.cc:360
+#: ../../src/logic/map_objects/tribes/productionsite.cc:383
 #: ../../src/wui/building_statistics_menu.cc:623
 #, c-format
 msgid "%i%%"
 msgstr "%i%%"
 
-#: ../../src/logic/map_objects/tribes/productionsite.cc:904
+#: ../../src/logic/map_objects/tribes/productionsite.cc:942
 msgid "Can’t find any more resources!"
 msgstr "No es troben més recursos!"
 
@@ -1302,54 +1302,54 @@ msgid ""
 "An expedition ship reached a coast and is waiting for further commands."
 msgstr "Un vaixell d'expedició ha arribat a la costa i espera ordres."
 
-#: ../../src/logic/map_objects/tribes/ship.cc:658
+#: ../../src/logic/map_objects/tribes/ship.cc:659
 msgid "New port construction site is gone"
 msgstr "La zona portuària nova s'ha esfumat"
 
-#: ../../src/logic/map_objects/tribes/ship.cc:658
+#: ../../src/logic/map_objects/tribes/ship.cc:659
 msgid "Port Lost!"
 msgstr "Hem perdut un port!"
 
-#: ../../src/logic/map_objects/tribes/ship.cc:659
+#: ../../src/logic/map_objects/tribes/ship.cc:660
 msgid "Unloading of wares failed, expedition is cancelled now."
 msgstr "La descàrrega de béns ha fallat. L'expedició s'ha cancel·lat."
 
 #. * TRANSLATORS: Ship expedition ready
-#: ../../src/logic/map_objects/tribes/ship.cc:834
+#: ../../src/logic/map_objects/tribes/ship.cc:835
 msgctxt "ship"
 msgid "Expedition"
 msgstr "Expedició"
 
-#: ../../src/logic/map_objects/tribes/ship.cc:834
+#: ../../src/logic/map_objects/tribes/ship.cc:835
 msgid "Expedition Ready"
 msgstr "Expedició preparada"
 
-#: ../../src/logic/map_objects/tribes/ship.cc:835
+#: ../../src/logic/map_objects/tribes/ship.cc:836
 msgid "An expedition ship is waiting for your commands."
 msgstr "Un vaixell espera l'ordre de començar l'expedició."
 
 #. * TRANSLATORS: This is a ship state
-#: ../../src/logic/map_objects/tribes/ship.cc:956
+#: ../../src/logic/map_objects/tribes/ship.cc:957
 msgctxt "ship_state"
 msgid "Shipping"
 msgstr "Està embarcant"
 
 #. * TRANSLATORS: This is a ship state. An expedition is waiting for your
 #. commands.
-#: ../../src/logic/map_objects/tribes/ship.cc:960
+#: ../../src/logic/map_objects/tribes/ship.cc:961
 msgctxt "ship_state"
 msgid "Waiting"
 msgstr "Està a l'espera"
 
 #. * TRANSLATORS: This is a ship state. An expedition is scouting for port
 #. spaces.
-#: ../../src/logic/map_objects/tribes/ship.cc:964
+#: ../../src/logic/map_objects/tribes/ship.cc:965
 msgctxt "ship_state"
 msgid "Scouting"
 msgstr "Està explorant"
 
 #. * TRANSLATORS: This is a ship state. An expedition has found a port space.
-#: ../../src/logic/map_objects/tribes/ship.cc:968
+#: ../../src/logic/map_objects/tribes/ship.cc:969
 msgctxt "ship_state"
 msgid "Port Space Found"
 msgstr "S'ha trobat una zona portuària"
@@ -1357,25 +1357,25 @@ msgstr "S'ha trobat una zona portuària"
 #. * TRANSLATORS: This is a ship state. An expedition is unloading
 #. wares/workers to build a
 #. * port.
-#: ../../src/logic/map_objects/tribes/ship.cc:973
+#: ../../src/logic/map_objects/tribes/ship.cc:974
 msgctxt "ship_state"
 msgid "Founding a Colony"
 msgstr "Fundació de colònies"
 
-#: ../../src/logic/map_objects/tribes/soldier.cc:1349
-#: ../../src/logic/map_objects/tribes/soldier.cc:1355
+#: ../../src/logic/map_objects/tribes/soldier.cc:1350
+#: ../../src/logic/map_objects/tribes/soldier.cc:1356
 msgid "Logic error"
 msgstr "Error lògic"
 
-#: ../../src/logic/map_objects/tribes/warehouse.cc:420
+#: ../../src/logic/map_objects/tribes/warehouse.cc:423
 msgid "A new port was added to your economy."
 msgstr "Teniu un nou port sota control."
 
-#: ../../src/logic/map_objects/tribes/warehouse.cc:423
+#: ../../src/logic/map_objects/tribes/warehouse.cc:426
 msgid "A new headquarters was added to your economy."
 msgstr "Teniu un nou quarter general sota control."
 
-#: ../../src/logic/map_objects/tribes/warehouse.cc:426
+#: ../../src/logic/map_objects/tribes/warehouse.cc:429
 msgid "A new warehouse was added to your economy."
 msgstr "Teniu un nou magatzem sota control."
 
@@ -1393,24 +1393,24 @@ msgid ""
 "compatible with world"
 msgstr "hauria de criar %s, que no existeix en aquest món; la cultura no és compatible amb aquest món"
 
-#: ../../src/logic/map_objects/tribes/worker.cc:856
+#: ../../src/logic/map_objects/tribes/worker.cc:885
 msgid "A geologist found resources."
 msgstr "Un geòleg ha trobat recursos."
 
-#: ../../src/logic/map_objects/tribes/worker.cc:1648
+#: ../../src/logic/map_objects/tribes/worker.cc:1677
 #, c-format
 msgid "Your %s can't find a way home and will likely die."
 msgstr "El vostre %s no pot trobar un camí a casa i és probable que mori."
 
-#: ../../src/logic/map_objects/tribes/worker.cc:1653
-#: ../../src/wui/productionsitewindow.cc:72
-#: ../../src/wui/productionsitewindow.cc:97
+#: ../../src/logic/map_objects/tribes/worker.cc:1682
+#: ../../src/wui/productionsitewindow.cc:74
+#: ../../src/wui/productionsitewindow.cc:99
 msgid "Worker"
 msgid_plural "Workers"
 msgstr[0] "Treballador"
 msgstr[1] "Treballadors"
 
-#: ../../src/logic/map_objects/tribes/worker.cc:1654
+#: ../../src/logic/map_objects/tribes/worker.cc:1683
 msgid "Worker got lost!"
 msgstr "El treballador s'ha perdut!"
 
@@ -1793,7 +1793,7 @@ msgstr "Ordre no vàlida. Escriviu /help per obtenir la llista d'ordres vàlides
 msgid "Computer %u"
 msgstr "IA %u"
 
-#: ../../src/network/nethost.cc:1621 ../../src/wui/game_summary.cc:97
+#: ../../src/network/nethost.cc:1621 ../../src/wui/game_summary.cc:101
 msgid "Player"
 msgstr "Jugador"
 
@@ -2039,35 +2039,35 @@ msgstr "off"
 msgid "%1% (%2%)"
 msgstr "%1% (%2%)"
 
-#: ../../src/ui_basic/dropdown.cc:62 ../../src/ui_basic/dropdown.cc:119
+#: ../../src/ui_basic/dropdown.cc:68 ../../src/ui_basic/dropdown.cc:141
 msgctxt "dropdown"
 msgid "Select Item"
 msgstr "Seleccioneu un element"
 
 #. * TRANSLATORS: Selection in Dropdown menus.
-#: ../../src/ui_basic/dropdown.cc:151
+#: ../../src/ui_basic/dropdown.cc:173
 msgctxt "dropdown"
 msgid "Not Selected"
 msgstr "No seleccionat"
 
-#: ../../src/ui_basic/spinbox.cc:140
+#: ../../src/ui_basic/spinbox.cc:125
 msgid "Decrease the value"
 msgstr "Redueix-ne el valor"
 
-#: ../../src/ui_basic/spinbox.cc:145
+#: ../../src/ui_basic/spinbox.cc:130
 msgid "Increase the value"
 msgstr "Augmenta'n el valor"
 
-#: ../../src/ui_basic/spinbox.cc:151
+#: ../../src/ui_basic/spinbox.cc:136
 msgid "Decrease the value by 10"
 msgstr "Redueix-ne el valor en 10"
 
-#: ../../src/ui_basic/spinbox.cc:155
+#: ../../src/ui_basic/spinbox.cc:140
 msgid "Increase the value by 10"
 msgstr "Augmenta'n el valor en 10"
 
 #. * TRANSLATORS: A spinbox unit
-#: ../../src/ui_basic/spinbox.cc:299
+#: ../../src/ui_basic/spinbox.cc:318
 #, c-format
 msgid "%d minute"
 msgid_plural "%d minutes"
@@ -2075,7 +2075,7 @@ msgstr[0] "%d minut"
 msgstr[1] "%d minuts"
 
 #. * TRANSLATORS: A spinbox unit
-#: ../../src/ui_basic/spinbox.cc:302
+#: ../../src/ui_basic/spinbox.cc:321
 #, c-format
 msgid "%d pixel"
 msgid_plural "%d pixels"
@@ -2232,7 +2232,7 @@ msgstr[1] "Obra de:"
 
 #: ../../src/ui_fsmenu/campaign_select.cc:445
 msgid "Pick a tutorial from the list, then hit \"OK\"."
-msgstr "Escolliu un tutorial de la llista i, després cliqueu «D'acord»."
+msgstr "Escolliu un tutorial de la llista i després cliqueu «D'acord»."
 
 #: ../../src/ui_fsmenu/campaign_select.cc:447
 msgid ""
@@ -2305,7 +2305,7 @@ msgid "Version"
 msgstr "Versió"
 
 #: ../../src/ui_fsmenu/internet_lobby.cc:139
-#: ../../src/ui_fsmenu/options.cc:268
+#: ../../src/ui_fsmenu/options.cc:250
 msgid "Game"
 msgstr "Partida"
 
@@ -2314,7 +2314,7 @@ msgid ""
 "Widelands was unable to get the IP address of the server in time.\n"
 "There seems to be a network problem, either on your side or on the side\n"
 "of the server.\n"
-msgstr "El Widelands no ha pogut obtenir l'adreça IP a temps.\nSembla que hi ha un problema a la teva xarxa o a la del servidor.\n"
+msgstr "El Widelands no ha pogut obtenir l'adreça IP a temps.\nSembla que hi ha un problema a la vostra xarxa o a la del servidor.\n"
 
 #: ../../src/ui_fsmenu/internet_lobby.cc:369
 msgid "Connection timed out"
@@ -2343,7 +2343,7 @@ msgid "Please select"
 msgstr "Per favor, seleccioneu"
 
 #: ../../src/ui_fsmenu/launch_mpg.cc:62 ../../src/ui_fsmenu/launch_mpg.cc:174
-#: ../../src/ui_fsmenu/netsetup_lan.cc:117 ../../src/wui/minimap.cc:114
+#: ../../src/ui_fsmenu/netsetup_lan.cc:117 ../../src/wui/minimap.cc:110
 msgid "Map"
 msgstr "Mapa"
 
@@ -2486,7 +2486,7 @@ msgstr "Nom del jugador"
 msgid "Player’s type"
 msgstr "Tipus de jugador"
 
-#: ../../src/ui_fsmenu/launch_spg.cc:103 ../../src/wui/game_summary.cc:98
+#: ../../src/ui_fsmenu/launch_spg.cc:103 ../../src/wui/game_summary.cc:102
 #: ../../src/wui/multiplayersetupgroup.cc:408
 msgid "Team"
 msgstr "Equip"
@@ -2641,7 +2641,7 @@ msgstr "El nom d'arxiu amb què es va desar la partida seguit del nom del mapa o
 
 #: ../../src/ui_fsmenu/loadgame.cc:284
 msgid "Save Date:"
-msgstr "Data de desat:"
+msgstr "Data de desada:"
 
 #: ../../src/ui_fsmenu/loadgame.cc:298
 msgid "Do you really want to delete this replay?"
@@ -2735,7 +2735,7 @@ msgstr "Mostra repeticions"
 msgid "Editor"
 msgstr "Editor"
 
-#: ../../src/ui_fsmenu/main.cc:73 ../../src/ui_fsmenu/options.cc:105
+#: ../../src/ui_fsmenu/main.cc:73 ../../src/ui_fsmenu/options.cc:98
 msgid "Options"
 msgstr "Opcions"
 
@@ -2839,122 +2839,122 @@ msgctxt "game_state"
 msgid "Unknown"
 msgstr "Desconegut"
 
-#: ../../src/ui_fsmenu/options.cc:124
+#: ../../src/ui_fsmenu/options.cc:117
 msgid "Apply"
 msgstr "Aplica"
 
-#: ../../src/ui_fsmenu/options.cc:154
+#: ../../src/ui_fsmenu/options.cc:141
 msgid "Language"
 msgstr "Idioma"
 
-#: ../../src/ui_fsmenu/options.cc:160
+#: ../../src/ui_fsmenu/options.cc:147
 msgid "In-game resolution"
 msgstr "Resolució:"
 
-#: ../../src/ui_fsmenu/options.cc:162
+#: ../../src/ui_fsmenu/options.cc:149
 msgid "Fullscreen"
 msgstr "Pantalla completa"
 
-#: ../../src/ui_fsmenu/options.cc:163
+#: ../../src/ui_fsmenu/options.cc:150
 msgid "Grab Input"
 msgstr "Captura el punter"
 
-#: ../../src/ui_fsmenu/options.cc:173
+#: ../../src/ui_fsmenu/options.cc:152
 msgid "Maximum FPS:"
 msgstr "Nombre màxim de FPS:"
 
-#: ../../src/ui_fsmenu/options.cc:177
+#: ../../src/ui_fsmenu/options.cc:156
 msgid "Snap windows only when overlapping"
 msgstr "Desplaça les finestres quan se superposin"
 
-#: ../../src/ui_fsmenu/options.cc:179
+#: ../../src/ui_fsmenu/options.cc:157
 msgid "Dock windows to edges"
 msgstr "Acobla les finestres als laterals"
 
-#: ../../src/ui_fsmenu/options.cc:189
+#: ../../src/ui_fsmenu/options.cc:167
 msgid "Distance for windows to snap to other panels:"
 msgstr "Distància de les finestres per adherir-se als plafons:"
 
-#: ../../src/ui_fsmenu/options.cc:200
+#: ../../src/ui_fsmenu/options.cc:178
 msgid "Distance for windows to snap to borders:"
 msgstr "Distància de les finestres per adherir-se a les vores:"
 
-#: ../../src/ui_fsmenu/options.cc:204
+#: ../../src/ui_fsmenu/options.cc:182
 #: ../../src/wui/game_options_sound_menu.cc:28
 msgid "Enable Music"
 msgstr "Activa la música"
 
-#: ../../src/ui_fsmenu/options.cc:205
+#: ../../src/ui_fsmenu/options.cc:183
 #: ../../src/wui/game_options_sound_menu.cc:31
 msgid "Enable Sound Effects"
 msgstr "Activa els efectes de so"
 
-#: ../../src/ui_fsmenu/options.cc:207
+#: ../../src/ui_fsmenu/options.cc:184
 msgid "Play a sound at message arrival"
 msgstr "Reprodueix un so quan arribi un missatge"
 
-#: ../../src/ui_fsmenu/options.cc:218
+#: ../../src/ui_fsmenu/options.cc:195
 msgid "Save game automatically every:"
 msgstr "Desa automàticament cada:"
 
-#: ../../src/ui_fsmenu/options.cc:231
+#: ../../src/ui_fsmenu/options.cc:208
 msgid "Maximum number of autosave files:"
 msgstr "Nombre màxim d'arxius de desades automàtiques:"
 
-#: ../../src/ui_fsmenu/options.cc:238
+#: ../../src/ui_fsmenu/options.cc:215
 msgid "Compress widelands data files (maps, replays and savegames)"
 msgstr "Comprimeix els arxius de dades del Widelands (mapes, repeticions i partides desades)"
 
-#: ../../src/ui_fsmenu/options.cc:243
+#: ../../src/ui_fsmenu/options.cc:220
 msgid "Write syncstreams in network games to debug desyncs"
 msgstr "Inclou els fluxos de sincronització en partides en xarxa per depurar possibles errors"
 
-#: ../../src/ui_fsmenu/options.cc:249
+#: ../../src/ui_fsmenu/options.cc:226
 msgid "Start building road after placing a flag"
 msgstr "Passa al mode de construcció de camins després de plantar una bandera"
 
-#: ../../src/ui_fsmenu/options.cc:250
+#: ../../src/ui_fsmenu/options.cc:227
 msgid "Show buildings area preview"
 msgstr "Mostra la previsualització de l'àrea de l'edifici"
 
-#: ../../src/ui_fsmenu/options.cc:253
+#: ../../src/ui_fsmenu/options.cc:229
 msgid "Show in-game chat with transparent background"
 msgstr "Mostra el xat de partida amb fons transparent"
 
 #. * TRANSLATORS: A watchwindow is a window where you keep watching an object
 #. or a map region,
 #. * TRANSLATORS: and it also lets you jump to it on the map.
-#: ../../src/ui_fsmenu/options.cc:259
+#: ../../src/ui_fsmenu/options.cc:233
 msgid "Use single watchwindow mode"
 msgstr "Empra el mode de vista única"
 
-#: ../../src/ui_fsmenu/options.cc:264
+#: ../../src/ui_fsmenu/options.cc:246
 msgid "Interface"
 msgstr "Interfície"
 
-#: ../../src/ui_fsmenu/options.cc:265
+#: ../../src/ui_fsmenu/options.cc:247
 msgid "Windows"
 msgstr "Finestres"
 
-#: ../../src/ui_fsmenu/options.cc:266
+#: ../../src/ui_fsmenu/options.cc:248
 msgid "Sound"
 msgstr "So"
 
-#: ../../src/ui_fsmenu/options.cc:267
+#: ../../src/ui_fsmenu/options.cc:249
 msgid "Saving"
 msgstr "Desades"
 
 #. * TRANSLATORS Options: Save game automatically every:
-#: ../../src/ui_fsmenu/options.cc:319
+#: ../../src/ui_fsmenu/options.cc:299
 msgid "Off"
 msgstr "Desactivat"
 
 #. * TRANSLATORS: Screen resolution, e.g. 800 x 600
-#: ../../src/ui_fsmenu/options.cc:345 ../../src/ui_fsmenu/options.cc:354
+#: ../../src/ui_fsmenu/options.cc:325 ../../src/ui_fsmenu/options.cc:334
 msgid "%1% x %2%"
 msgstr "%1% x %2%"
 
-#: ../../src/ui_fsmenu/options.cc:388
+#: ../../src/ui_fsmenu/options.cc:431
 msgid "Try system language"
 msgstr "Prova l'idioma del sistema"
 
@@ -3007,11 +3007,11 @@ msgstr "Voleu realment desmantellar aquest edifici?"
 
 #: ../../src/wui/actionconfirm.cc:267
 msgid "Enhance building?"
-msgstr "Millora l'edifici"
+msgstr "Amplia l'edifici"
 
 #: ../../src/wui/actionconfirm.cc:269 ../../src/wui/actionconfirm.cc:273
 msgid "Do you really want to enhance this building?"
-msgstr "Voleu realment millorar aquest edifici?"
+msgstr "Voleu realment ampliar aquest edifici?"
 
 #. * TRANSLATORS: Warning message when player wants to enhance a military
 #. building
@@ -3121,7 +3121,7 @@ msgstr "Mostra l'edifici posterior"
 #: ../../src/wui/building_statistics_menu.cc:653
 #: ../../src/wui/building_statistics_menu.cc:677
 #: ../../src/wui/building_statistics_menu.cc:679
-#: ../../src/wui/productionsitewindow.cc:148
+#: ../../src/wui/productionsitewindow.cc:150
 msgid "%1%/%2%"
 msgstr "%1%/%2%"
 
@@ -3131,58 +3131,58 @@ msgid "Lacking Soldiers:"
 msgstr "Falten soldats:"
 
 #. * TRANSLATORS: Stop/Continue toggle button for production sites.
-#: ../../src/wui/buildingwindow.cc:184
+#: ../../src/wui/buildingwindow.cc:190
 msgid "Continue"
 msgstr "Continua"
 
 #. * TRANSLATORS: Stop/Continue toggle button for production sites.
-#: ../../src/wui/buildingwindow.cc:186
+#: ../../src/wui/buildingwindow.cc:192
 msgid "Stop"
 msgstr "Atura"
 
-#: ../../src/wui/buildingwindow.cc:207
+#: ../../src/wui/buildingwindow.cc:213
 #, c-format
 msgid "Enhance to %s"
-msgstr "Millorar a %s"
+msgstr "Amplia a %s"
 
-#: ../../src/wui/buildingwindow.cc:208 ../../src/wui/fieldaction.cc:98
+#: ../../src/wui/buildingwindow.cc:214 ../../src/wui/fieldaction.cc:99
 msgid "Construction costs:"
 msgstr "Costos de construcció:"
 
-#: ../../src/wui/buildingwindow.cc:225
+#: ../../src/wui/buildingwindow.cc:231
 msgid "Destroy"
 msgstr "Destrueix"
 
-#: ../../src/wui/buildingwindow.cc:240
+#: ../../src/wui/buildingwindow.cc:246
 msgid "Dismantle"
 msgstr "Desmantella"
 
-#: ../../src/wui/buildingwindow.cc:240
+#: ../../src/wui/buildingwindow.cc:246
 msgid "Returns:"
 msgstr "Retorna:"
 
-#: ../../src/wui/buildingwindow.cc:268 ../../src/wui/buildingwindow.cc:434
+#: ../../src/wui/buildingwindow.cc:274 ../../src/wui/buildingwindow.cc:440
 msgid "Hide work area"
 msgstr "Amaga l'àrea de treball"
 
-#: ../../src/wui/buildingwindow.cc:280 ../../src/wui/fieldaction.cc:370
+#: ../../src/wui/buildingwindow.cc:286 ../../src/wui/fieldaction.cc:371
 #: ../../src/wui/shipwindow.cc:166
 msgid "Show Debug Window"
 msgstr "Mostra la finestra de depuració"
 
-#: ../../src/wui/buildingwindow.cc:287
+#: ../../src/wui/buildingwindow.cc:293
 msgid "Center view on this"
 msgstr "Centra la vista aquí"
 
-#: ../../src/wui/buildingwindow.cc:437
+#: ../../src/wui/buildingwindow.cc:443
 msgid "Show work area"
 msgstr "Mostra l'àrea de treball"
 
-#: ../../src/wui/buildingwindow.cc:470
+#: ../../src/wui/buildingwindow.cc:476
 msgid "Start an expedition"
 msgstr "Comença l'expedició"
 
-#: ../../src/wui/buildingwindow.cc:474
+#: ../../src/wui/buildingwindow.cc:480
 msgid "Cancel the expedition"
 msgstr "Cancel·la l'expedició"
 
@@ -3191,87 +3191,116 @@ msgstr "Cancel·la l'expedició"
 msgid "Building materials"
 msgstr "Materials de construcció"
 
-#: ../../src/wui/fieldaction.cc:218
+#: ../../src/wui/economy_options_window.cc:38
+msgid "Economy options"
+msgstr "Opcions de l'economia"
+
+#: ../../src/wui/economy_options_window.cc:48
+#: ../../src/wui/general_statistics_menu.cc:150
+#: ../../src/wui/productionsitewindow.cc:62
+#: ../../src/wui/warehousewindow.cc:190
+msgid "Wares"
+msgstr "Mercaderies"
+
+#: ../../src/wui/economy_options_window.cc:49
+#: ../../src/wui/general_statistics_menu.cc:141
+#: ../../src/wui/warehousewindow.cc:194
+msgid "Workers"
+msgstr "Treballadors"
+
+#: ../../src/wui/economy_options_window.cc:142
+msgid "Decrease target"
+msgstr "Redueix la quantitat desitjada"
+
+#: ../../src/wui/economy_options_window.cc:150
+msgid "Increase target"
+msgstr "Augmenta la quantitat desitjada"
+
+#: ../../src/wui/economy_options_window.cc:158
+msgid "Reset to default"
+msgstr "Restableix per defecte"
+
+#: ../../src/wui/fieldaction.cc:219
 msgid "Build large building"
 msgstr "Construeix edifici gran"
 
-#: ../../src/wui/fieldaction.cc:218
+#: ../../src/wui/fieldaction.cc:219
 msgid "Build medium building"
 msgstr "Construeix edifici mitjà"
 
-#: ../../src/wui/fieldaction.cc:218
+#: ../../src/wui/fieldaction.cc:219
 msgid "Build small building"
 msgstr "Construeix edifici petit"
 
-#: ../../src/wui/fieldaction.cc:219
+#: ../../src/wui/fieldaction.cc:220
 msgid "Build port building"
 msgstr "Construeix edifici portuari"
 
-#: ../../src/wui/fieldaction.cc:246
+#: ../../src/wui/fieldaction.cc:247
 msgid "Action"
 msgstr "Accions"
 
-#: ../../src/wui/fieldaction.cc:317 ../../src/wui/fieldaction.cc:374
+#: ../../src/wui/fieldaction.cc:318 ../../src/wui/fieldaction.cc:375
 msgid "Build road"
 msgstr "Construeix camí"
 
-#: ../../src/wui/fieldaction.cc:323
+#: ../../src/wui/fieldaction.cc:324
 msgid "Destroy this flag"
 msgstr "Destrueix aquesta bandera"
 
-#: ../../src/wui/fieldaction.cc:328
+#: ../../src/wui/fieldaction.cc:329
 msgid "Configure economy"
 msgstr "Configura l'economia"
 
-#: ../../src/wui/fieldaction.cc:331
+#: ../../src/wui/fieldaction.cc:332
 msgid "Send geologist to explore site"
 msgstr "Envia un geòleg a explorar la zona"
 
-#: ../../src/wui/fieldaction.cc:346
+#: ../../src/wui/fieldaction.cc:347
 msgid "Place a flag"
 msgstr "Planta una bandera"
 
-#: ../../src/wui/fieldaction.cc:350
+#: ../../src/wui/fieldaction.cc:351
 msgid "Destroy a road"
 msgstr "Destrueix el camí"
 
-#: ../../src/wui/fieldaction.cc:361
+#: ../../src/wui/fieldaction.cc:362
 msgid "Watch field in a separate window"
 msgstr "Observa aquesta zona en una finestra independent"
 
-#: ../../src/wui/fieldaction.cc:363
+#: ../../src/wui/fieldaction.cc:364
 msgid "Toggle building statistics display"
 msgstr "Commuta la finestra d'estadístiques d'edificis"
 
-#: ../../src/wui/fieldaction.cc:366
+#: ../../src/wui/fieldaction.cc:367
 msgid "Toggle building label display"
 msgstr "Mostrar o amagar els noms d'edificis"
 
-#: ../../src/wui/fieldaction.cc:376 ../../src/wui/watchwindow.cc:98
+#: ../../src/wui/fieldaction.cc:377 ../../src/wui/watchwindow.cc:98
 msgid "Watch"
 msgstr "Veure"
 
-#: ../../src/wui/fieldaction.cc:388
+#: ../../src/wui/fieldaction.cc:389
 msgid "Start attack"
 msgstr "Inicia atac"
 
-#: ../../src/wui/fieldaction.cc:393
+#: ../../src/wui/fieldaction.cc:394
 msgid "Attack"
 msgstr "Atac"
 
-#: ../../src/wui/fieldaction.cc:471
+#: ../../src/wui/fieldaction.cc:472
 msgid "Build mines"
 msgstr "Construeix la mina"
 
-#: ../../src/wui/fieldaction.cc:484
+#: ../../src/wui/fieldaction.cc:485
 msgid "Build flag"
 msgstr "Planta la bandera"
 
-#: ../../src/wui/fieldaction.cc:487
+#: ../../src/wui/fieldaction.cc:488
 msgid "Cancel road"
 msgstr "Cancel·la el camí"
 
-#: ../../src/wui/fieldaction.cc:490
+#: ../../src/wui/fieldaction.cc:491
 msgid "Build roads"
 msgstr "Construeix camí"
 
@@ -3348,7 +3377,7 @@ msgctxt "message"
 msgid "Type"
 msgstr "Tipus"
 
-#: ../../src/wui/game_message_menu.cc:70 ../../src/wui/game_summary.cc:99
+#: ../../src/wui/game_message_menu.cc:70 ../../src/wui/game_summary.cc:103
 msgid "Status"
 msgstr "Estat"
 
@@ -3501,7 +3530,7 @@ msgid "Set sound effect and music options"
 msgstr "Canvia les opcions d'efectes de so i música"
 
 #. * TRANSLATORS: Button tooltip
-#: ../../src/wui/game_options_menu.cc:99 ../../src/wui/game_summary.cc:88
+#: ../../src/wui/game_options_menu.cc:99 ../../src/wui/game_summary.cc:92
 msgid "Exit Game"
 msgstr "Surt del joc"
 
@@ -3532,73 +3561,73 @@ msgstr "Estadístiques de béns"
 msgid "Stock"
 msgstr "Estoc"
 
-#: ../../src/wui/game_summary.cc:43
+#: ../../src/wui/game_summary.cc:44
 msgid "Game over"
 msgstr "Fi de la partida"
 
-#: ../../src/wui/game_summary.cc:58
+#: ../../src/wui/game_summary.cc:62
 msgid "Player Info:"
 msgstr "Informació del jugador:"
 
-#: ../../src/wui/game_summary.cc:73
+#: ../../src/wui/game_summary.cc:77
 msgid "Elapsed time:"
 msgstr "Temps transcorregut:"
 
-#: ../../src/wui/game_summary.cc:83
+#: ../../src/wui/game_summary.cc:87
 msgid "Continue playing"
 msgstr "Continua la partida"
 
-#: ../../src/wui/game_summary.cc:100
+#: ../../src/wui/game_summary.cc:104
 msgid "Time"
 msgstr "Temps"
 
 #. * TRANSLATORS: This is shown in the game summary for the players who have
 #. lost.
-#: ../../src/wui/game_summary.cc:163
+#: ../../src/wui/game_summary.cc:167
 msgid "Lost"
 msgstr "Ha perdut."
 
 #. * TRANSLATORS: This is shown in the game summary for the players who have
 #. won.
-#: ../../src/wui/game_summary.cc:167
+#: ../../src/wui/game_summary.cc:171
 msgid "Won"
 msgstr "Ha guanyat."
 
 #. * TRANSLATORS: This is shown in the game summary for the players who have
 #. resigned.
-#: ../../src/wui/game_summary.cc:176
+#: ../../src/wui/game_summary.cc:180
 msgid "Resigned"
 msgstr "Ha abandonat."
 
 #. * TRANSLATORS: This is shown in the game summary when we don't know
 #. * TRANSLATORS: if the player has lost or won.
-#: ../../src/wui/game_summary.cc:181
+#: ../../src/wui/game_summary.cc:185
 msgctxt "player_won"
 msgid "Unknown"
 msgstr "Desconegut"
 
-#: ../../src/wui/game_summary.cc:191
+#: ../../src/wui/game_summary.cc:195
 msgid "You won!"
 msgstr "Has guanyat!"
 
-#: ../../src/wui/game_summary.cc:193
+#: ../../src/wui/game_summary.cc:197
 msgid "You lost."
 msgstr "Has perdut."
 
-#: ../../src/wui/game_summary.cc:198
+#: ../../src/wui/game_summary.cc:202
 #, c-format
 msgid "%s won!"
 msgstr "%s ha guanyat"
 
-#: ../../src/wui/game_summary.cc:201
+#: ../../src/wui/game_summary.cc:205
 msgid "Team %|1$u| won!"
 msgstr "L'equip %|1$u| ha guanyat!"
 
-#: ../../src/wui/game_summary.cc:244
+#: ../../src/wui/game_summary.cc:249
 msgid "Score"
 msgstr "Puntuació"
 
-#: ../../src/wui/game_summary.cc:246
+#: ../../src/wui/game_summary.cc:251
 msgid "Team Score"
 msgstr "Puntuació de l'equip"
 
@@ -3606,20 +3635,9 @@ msgstr "Puntuació de l'equip"
 msgid "Land"
 msgstr "Terreny"
 
-#: ../../src/wui/general_statistics_menu.cc:141
-#: ../../src/wui/transport_ui.cc:59 ../../src/wui/warehousewindow.cc:194
-msgid "Workers"
-msgstr "Treballadors"
-
-#: ../../src/wui/general_statistics_menu.cc:146 ../../src/wui/minimap.cc:169
+#: ../../src/wui/general_statistics_menu.cc:146 ../../src/wui/minimap.cc:165
 msgid "Buildings"
 msgstr "Edificis"
-
-#: ../../src/wui/general_statistics_menu.cc:150
-#: ../../src/wui/productionsitewindow.cc:60 ../../src/wui/transport_ui.cc:57
-#: ../../src/wui/warehousewindow.cc:190
-msgid "Wares"
-msgstr "Mercaderies"
 
 #: ../../src/wui/general_statistics_menu.cc:156
 msgid "Productivity"
@@ -3648,6 +3666,26 @@ msgstr "Edificis civils perduts"
 #: ../../src/wui/general_statistics_menu.cc:186
 msgid "Military"
 msgstr "Militar"
+
+#: ../../src/wui/inputqueuedisplay.cc:185
+msgid "Highest priority"
+msgstr "Prioritat màxima"
+
+#: ../../src/wui/inputqueuedisplay.cc:188
+msgid "Normal priority"
+msgstr "Prioritat normal"
+
+#: ../../src/wui/inputqueuedisplay.cc:191
+msgid "Lowest priority"
+msgstr "Prioritat mínima"
+
+#: ../../src/wui/inputqueuedisplay.cc:236
+msgid "Decrease the number of wares you want to be stored here."
+msgstr "Redueix el nombre de béns que vols emmagatzemar aquí."
+
+#: ../../src/wui/inputqueuedisplay.cc:245
+msgid "Increase the number of wares you want to be stored here."
+msgstr "Augmenta el nombre de béns que vols emmagatzemar aquí."
 
 #: ../../src/wui/interactive_gamebase.cc:45
 msgid "PAUSE"
@@ -3855,19 +3893,19 @@ msgstr "Nom del mapa"
 msgid "Soldiers"
 msgstr "Soldats"
 
-#: ../../src/wui/minimap.cc:136
+#: ../../src/wui/minimap.cc:132
 msgid "Owner"
 msgstr "Propietari"
 
-#: ../../src/wui/minimap.cc:147
+#: ../../src/wui/minimap.cc:143
 msgid "Flags"
 msgstr "Banderes"
 
-#: ../../src/wui/minimap.cc:158
+#: ../../src/wui/minimap.cc:154
 msgid "Roads"
 msgstr "Camins"
 
-#: ../../src/wui/minimap.cc:180
+#: ../../src/wui/minimap.cc:176
 msgid "Zoom"
 msgstr "Zoom"
 
@@ -3977,23 +4015,23 @@ msgstr "min"
 msgid "game"
 msgstr "tot"
 
-#: ../../src/wui/productionsitewindow.cc:73
+#: ../../src/wui/productionsitewindow.cc:75
 msgid "Exp"
 msgstr "Exp"
 
-#: ../../src/wui/productionsitewindow.cc:74
+#: ../../src/wui/productionsitewindow.cc:76
 msgid "Next Level"
 msgstr "Següent nivell"
 
-#: ../../src/wui/productionsitewindow.cc:86
+#: ../../src/wui/productionsitewindow.cc:88
 msgid "Terminate the employment of the selected worker"
 msgstr "Finalitzar l'assignació del treballador en aquest edifici."
 
-#: ../../src/wui/productionsitewindow.cc:161
+#: ../../src/wui/productionsitewindow.cc:163
 msgid "(coming)"
 msgstr "(en camí)"
 
-#: ../../src/wui/productionsitewindow.cc:161
+#: ../../src/wui/productionsitewindow.cc:163
 msgid "(vacant)"
 msgstr "(vacant)"
 
@@ -4049,15 +4087,15 @@ msgstr "Enfonsa el vaixell"
 msgid "Cancel the Expedition"
 msgstr "Cancel·la l'expedició"
 
-#: ../../src/wui/soldiercapacitycontrol.cc:70
+#: ../../src/wui/soldiercapacitycontrol.cc:72
 msgid "Decrease capacity"
 msgstr "Redueix la capacitat"
 
-#: ../../src/wui/soldiercapacitycontrol.cc:79
+#: ../../src/wui/soldiercapacitycontrol.cc:81
 msgid "Increase capacity"
 msgstr "Augmenta la capacitat"
 
-#: ../../src/wui/soldiercapacitycontrol.cc:86
+#: ../../src/wui/soldiercapacitycontrol.cc:88
 msgid "Capacity"
 msgstr "Capacitat"
 
@@ -4066,7 +4104,6 @@ msgstr "Capacitat"
 msgid "Click soldier to send away"
 msgstr "Cliqueu el soldat per acomiadar-lo"
 
-#. * TRANSLATORS: Health, Attack, Defense, Evade
 #: ../../src/wui/soldierlist.cc:389 ../../src/wui/soldierlist.cc:461
 #, c-format
 msgid "HP: %1$u/%2$u  AT: %3$u/%4$u  DE: %5$u/%6$u  EV: %7$u/%8$u"
@@ -4074,11 +4111,11 @@ msgstr "PS: %1$u/%2$u  AT: %3$u/%4$u  DE: %5$u/%6$u  EV: %7$u/%8$u"
 
 #: ../../src/wui/soldierlist.cc:403
 msgid "Prefer Rookies"
-msgstr "Preferible novells"
+msgstr "Demana preferiblement soldats novells"
 
 #: ../../src/wui/soldierlist.cc:406
 msgid "Prefer Heroes"
-msgstr "Preferible herois"
+msgstr "Demana preferiblement herois"
 
 #: ../../src/wui/stock_menu.cc:42
 msgid "Wares (total)"
@@ -4099,22 +4136,6 @@ msgstr "Treballadors esperant en magatzems"
 #: ../../src/wui/trainingsitewindow.cc:55
 msgid "Soldiers in training"
 msgstr "Soldats entrenant-se"
-
-#: ../../src/wui/transport_ui.cc:52
-msgid "Economy options"
-msgstr "Opcions de l'economia"
-
-#: ../../src/wui/transport_ui.cc:129 ../../src/wui/transport_ui.cc:202
-msgid "Decrease target"
-msgstr "Redueix la quantitat desitjada"
-
-#: ../../src/wui/transport_ui.cc:131 ../../src/wui/transport_ui.cc:204
-msgid "Increase target"
-msgstr "Augmenta la quantitat desitjada"
-
-#: ../../src/wui/transport_ui.cc:134 ../../src/wui/transport_ui.cc:207
-msgid "Reset to default"
-msgstr "Restableix per defecte"
 
 #: ../../src/wui/ware_statistics_menu.cc:130
 msgid "Production"
@@ -4155,26 +4176,6 @@ msgstr "Treballadors esperant per embarcar"
 #: ../../src/wui/warehousewindow.cc:206
 msgid "Expedition"
 msgstr "Expedició"
-
-#: ../../src/wui/waresqueuedisplay.cc:174
-msgid "Highest priority"
-msgstr "Prioritat màxima"
-
-#: ../../src/wui/waresqueuedisplay.cc:177
-msgid "Normal priority"
-msgstr "Prioritat normal"
-
-#: ../../src/wui/waresqueuedisplay.cc:180
-msgid "Lowest priority"
-msgstr "Prioritat mínima"
-
-#: ../../src/wui/waresqueuedisplay.cc:225
-msgid "Decrease the number of wares you want to be stored here."
-msgstr "Redueix el nombre de béns que vols emmagatzemar aquí."
-
-#: ../../src/wui/waresqueuedisplay.cc:234
-msgid "Increase the number of wares you want to be stored here."
-msgstr "Augmenta el nombre de béns que vols emmagatzemar aquí."
 
 #: ../../src/wui/watchwindow.cc:105
 msgid "Follow"

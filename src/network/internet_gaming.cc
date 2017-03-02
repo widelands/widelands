@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2016 by the Widelands Development Team
+ * Copyright (C) 2004-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -294,9 +294,7 @@ void InternetGaming::handle_metaserver_communication() {
 			}
 		}
 	} catch (const std::exception& e) {
-		std::string reason = _("Something went wrong: ");
-		reason += e.what();
-		logout(reason);
+		logout((boost::format(_("Something went wrong: %s")) % e.what()).str());
 		set_error();
 	}
 

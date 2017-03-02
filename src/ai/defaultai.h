@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2010, 2012 by the Widelands Development Team
+ * Copyright (C) 2008-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -103,6 +103,7 @@ struct DefaultAI : ComputerPlayer {
 			/** TRANSLATORS: This is the name of an AI used in the game setup screens */
 			descname = _("Normal AI");
 			icon_filename = "images/ai/ai_normal.png";
+			type = Implementation::Type::kDefault;
 		}
 		ComputerPlayer* instantiate(Widelands::Game& game,
 		                            Widelands::PlayerNumber const p) const override {
@@ -116,6 +117,7 @@ struct DefaultAI : ComputerPlayer {
 			/** TRANSLATORS: This is the name of an AI used in the game setup screens */
 			descname = _("Weak AI");
 			icon_filename = "images/ai/ai_weak.png";
+			type = Implementation::Type::kDefault;
 		}
 		ComputerPlayer* instantiate(Widelands::Game& game,
 		                            Widelands::PlayerNumber const p) const override {
@@ -129,6 +131,7 @@ struct DefaultAI : ComputerPlayer {
 			/** TRANSLATORS: This is the name of an AI used in the game setup screens */
 			descname = _("Very Weak AI");
 			icon_filename = "images/ai/ai_very_weak.png";
+			type = Implementation::Type::kDefault;
 		}
 		ComputerPlayer* instantiate(Widelands::Game& game,
 		                            Widelands::PlayerNumber const p) const override {

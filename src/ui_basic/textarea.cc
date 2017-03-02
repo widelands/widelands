@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2016 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -126,12 +126,8 @@ void Textarea::set_fixed_width(int w) {
 void Textarea::draw(RenderTarget& dst) {
 	if (!text_.empty()) {
 		// Blit on pixel boundary (not float), so that the text is blitted pixel perfect.
-		Vector2f anchor(static_cast<int>(align_ & UI::Align::kHCenter) ?
-		                   get_w() / 2 :
-		                   static_cast<int>(align_ & UI::Align::kRight) ? get_w() : 0,
-		                static_cast<int>(align_ & UI::Align::kVCenter) ?
-		                   get_h() / 2 :
-		                   static_cast<int>(align_ & UI::Align::kBottom) ? get_h() : 0);
+		Vector2f anchor(
+		   (align_ == Align::kCenter) ? get_w() / 2 : (align_ == UI::Align::kRight) ? get_w() : 0, 0);
 		dst.blit(anchor, rendered_text_, BlendMode::UseAlpha, align_);
 	}
 }
@@ -143,17 +139,17 @@ void Textarea::collapse() {
 	int32_t x = get_x();
 	int32_t y = get_y();
 	int32_t w = get_w();
-	int32_t h = get_h();
 
-	if (static_cast<int>(align_ & UI::Align::kHCenter))
+	switch (align_) {
+	case UI::Align::kCenter:
 		x += w >> 1;
-	else if (static_cast<int>(align_ & UI::Align::kRight))
+		break;
+	case UI::Align::kRight:
 		x += w;
-
-	if (static_cast<int>(align_ & UI::Align::kVCenter))
-		y += h >> 1;
-	else if (static_cast<int>(align_ & UI::Align::kBottom))
-		y += h;
+		break;
+	case UI::Align::kLeft:
+		break;
+	}
 
 	set_pos(Vector2i(x, y));
 	set_size(0, 0);
@@ -170,15 +166,16 @@ void Textarea::expand() {
 	int w, h;
 	get_desired_size(&w, &h);
 
-	if (static_cast<int>(align_ & UI::Align::kHCenter))
+	switch (align_) {
+	case UI::Align::kCenter:
 		x -= w >> 1;
-	else if (static_cast<int>(align_ & UI::Align::kRight))
+		break;
+	case UI::Align::kRight:
 		x -= w;
-
-	if (static_cast<int>(align_ & UI::Align::kVCenter))
-		y -= h >> 1;
-	else if (static_cast<int>(align_ & UI::Align::kBottom))
-		y -= h;
+		break;
+	case UI::Align::kLeft:
+		break;
+	}
 
 	set_pos(Vector2i(x, y));
 	set_size(w, h);
@@ -196,8 +193,8 @@ void Textarea::update_desired_size() {
 		h = rendered_text_->height();
 		// We want empty textareas to have height
 		if (text_.empty()) {
-			h = UI::g_fh1
-			       ->render(as_uifont(UI::g_fh1->fontset()->representative_character(), fontsize_))
+			h = UI::g_fh1->render(
+			                as_uifont(UI::g_fh1->fontset()->representative_character(), fontsize_))
 			       ->height();
 		}
 	}

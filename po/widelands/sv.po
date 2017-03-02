@@ -9,9 +9,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-01-21 14:22+0000\n"
-"PO-Revision-Date: 2017-01-21 14:25+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2017-01-21 21:10+0000\n"
+"PO-Revision-Date: 2017-01-26 20:28+0000\n"
+"Last-Translator: D M <hunter12@home.se>\n"
 "Language-Team: Swedish (http://www.transifex.com/widelands/widelands/language/sv/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -63,18 +63,18 @@ msgid "%1$s and %2$s"
 msgstr "%1$s och %2$s"
 
 #. TRANSLATORS: Short for "Not enough space"
-#: ../../data/scripting/infrastructure.lua:157
+#: ../../data/scripting/infrastructure.lua:162
 msgid "No Space"
 msgstr "Inget utrymme"
 
-#: ../../data/scripting/infrastructure.lua:158
+#: ../../data/scripting/infrastructure.lua:163
 msgid ""
 "Some of your starting buildings didn’t have enough room and weren’t built. "
 "You are at a disadvantage with this; consider restarting this map with a "
 "fair starting condition."
 msgstr "Några av dina startbyggnader fick inte plats och byggdes inte. Det ger dig en nackdel så överväg att starta om denna karta med rättvisa startförhållanden."
 
-#: ../../data/scripting/infrastructure.lua:159
+#: ../../data/scripting/infrastructure.lua:164
 msgid "Not enough space"
 msgstr "Inte tillräckligt utrymme"
 
@@ -904,7 +904,7 @@ msgstr "Terräng"
 #: ../../src/editor/ui_menus/tool_menu.cc:62
 #: ../../src/editor/ui_menus/tool_place_immovable_options_menu.cc:53
 msgid "Immovables"
-msgstr "Oflyttbara hinder"
+msgstr "Fasta hinder"
 
 #: ../../src/editor/ui_menus/tool_menu.cc:63
 #: ../../src/editor/ui_menus/tool_place_critter_options_menu.cc:52
@@ -1087,7 +1087,7 @@ msgstr "Du är under attack"
 #. * TRANSLATORS: e.g. Completed/Skipped/Did not start ... because the economy
 #. needs the ware
 #. * ‘%s’
-#: ../../src/logic/map_objects/tribes/production_program.cc:292
+#: ../../src/logic/map_objects/tribes/production_program.cc:310
 #, c-format
 msgid "the economy needs the ware ‘%s’"
 msgstr "Ekonomin behöver varan ‘%s’"
@@ -1095,7 +1095,7 @@ msgstr "Ekonomin behöver varan ‘%s’"
 #. * TRANSLATORS: e.g. Completed/Skipped/Did not start ... because the economy
 #. doesn’t need the
 #. * ware ‘%s’
-#: ../../src/logic/map_objects/tribes/production_program.cc:301
+#: ../../src/logic/map_objects/tribes/production_program.cc:319
 #, c-format
 msgid "the economy doesn’t need the ware ‘%s’"
 msgstr "Ekonomin behöver inte varan ‘%s’"
@@ -1103,14 +1103,14 @@ msgstr "Ekonomin behöver inte varan ‘%s’"
 #. * TRANSLATORS: e.g. Completed/Skipped/Did not start ... because the economy
 #. needs the worker
 #. * ‘%s’
-#: ../../src/logic/map_objects/tribes/production_program.cc:314
+#: ../../src/logic/map_objects/tribes/production_program.cc:332
 #, c-format
 msgid "the economy needs the worker ‘%s’"
 msgstr "Ekonomin behöver arbetaren ‘%s’"
 
 #. * TRANSLATORS: e.g. Completed/Skipped/Did not start ...
 #. * TRANSLATORS:      ... because the economy doesn’t need the worker ‘%s’
-#: ../../src/logic/map_objects/tribes/production_program.cc:324
+#: ../../src/logic/map_objects/tribes/production_program.cc:342
 #, c-format
 msgid "the economy doesn’t need the worker ‘%s’"
 msgstr "Ekonomin behöver inte arbetaren ‘%s’"
@@ -1128,34 +1128,34 @@ msgstr "Ekonomin behöver inte arbetaren ‘%s’"
 #. Ox":
 #. * TRANSLATORS:    %1$i = "2"
 #. * TRANSLATORS:    %2$s = "Ox"
-#: ../../src/logic/map_objects/tribes/production_program.cc:363
-#: ../../src/logic/map_objects/tribes/production_program.cc:385
-#: ../../src/logic/map_objects/tribes/production_program.cc:834
-#: ../../src/logic/map_objects/tribes/production_program.cc:937
-#: ../../src/logic/map_objects/tribes/production_program.cc:1019
+#: ../../src/logic/map_objects/tribes/production_program.cc:388
+#: ../../src/logic/map_objects/tribes/production_program.cc:414
+#: ../../src/logic/map_objects/tribes/production_program.cc:906
+#: ../../src/logic/map_objects/tribes/production_program.cc:1016
+#: ../../src/logic/map_objects/tribes/production_program.cc:1098
 #, c-format
 msgid "%1$ix %2$s"
 msgstr "%1$ix %2$s"
 
-#: ../../src/logic/map_objects/tribes/production_program.cc:369
+#: ../../src/logic/map_objects/tribes/production_program.cc:394
 #, c-format
 msgid "the building has the following wares: %s"
 msgstr "Byggnaden har följande varor: %s"
 
-#: ../../src/logic/map_objects/tribes/production_program.cc:391
+#: ../../src/logic/map_objects/tribes/production_program.cc:420
 #, c-format
 msgid "the building doesn’t have the following wares: %s"
 msgstr "Byggnaden har inte följande varor: %s"
 
 #. * TRANSLATORS: 'Completed/Skipped/Did not start ... because a worker needs
 #. experience'.
-#: ../../src/logic/map_objects/tribes/production_program.cc:404
+#: ../../src/logic/map_objects/tribes/production_program.cc:433
 msgid "a worker needs experience"
 msgstr "en arbetare behöver erfarenhet"
 
 #. * TRANSLATORS: 'Completed/Skipped/Did not start ... because the workers
 #. need no experience'.
-#: ../../src/logic/map_objects/tribes/production_program.cc:410
+#: ../../src/logic/map_objects/tribes/production_program.cc:439
 msgid "the workers need no experience"
 msgstr "arbetarna behöver ingen erfarenhet"
 
@@ -1172,25 +1172,25 @@ msgstr "arbetarna behöver ingen erfarenhet"
 #. * TRANSLATORS: on a development build if you can, and let us know if there
 #. are any issues
 #. * TRANSLATORS: we need to address for your language.
-#: ../../src/logic/map_objects/tribes/production_program.cc:514
-#: ../../src/logic/map_objects/tribes/production_program.cc:858
+#: ../../src/logic/map_objects/tribes/production_program.cc:543
+#: ../../src/logic/map_objects/tribes/production_program.cc:930
 #, c-format
 msgid "Did not start %1$s because %2$s"
 msgstr "Började inte %1$s för att %2$s"
 
 #. * TRANSLATORS: "Completed working because the economy needs the ware ‘%s’"
-#: ../../src/logic/map_objects/tribes/production_program.cc:519
+#: ../../src/logic/map_objects/tribes/production_program.cc:548
 #, c-format
 msgid "Completed %1$s because %2$s"
 msgstr "Valde att %1$s för att %2$s"
 
 #. * TRANSLATORS: "Skipped working because the economy needs the ware ‘%s’"
-#: ../../src/logic/map_objects/tribes/production_program.cc:524
+#: ../../src/logic/map_objects/tribes/production_program.cc:553
 #, c-format
 msgid "Skipped %1$s because %2$s"
 msgstr "Hoppade över att %1$s för att %2$s"
 
-#: ../../src/logic/map_objects/tribes/production_program.cc:719
+#: ../../src/logic/map_objects/tribes/production_program.cc:748
 msgid "No use for ships on this map!"
 msgstr "Ingen användning av skepp på denna kartan!"
 
@@ -1198,7 +1198,7 @@ msgstr "Ingen användning av skepp på denna kartan!"
 #. are missing'
 #. * TRANSLATORS: e.g. 'Did not start working because fish, meat or pitta
 #. bread is missing'
-#: ../../src/logic/map_objects/tribes/production_program.cc:844
+#: ../../src/logic/map_objects/tribes/production_program.cc:916
 #, c-format
 msgid "%s is missing"
 msgid_plural "%s are missing"
@@ -1208,7 +1208,7 @@ msgstr[1] "%s saknas"
 #. * TRANSLATORS: %s is a list of wares. String is fetched according to total
 #. amount of
 #. wares.
-#: ../../src/logic/map_objects/tribes/production_program.cc:948
+#: ../../src/logic/map_objects/tribes/production_program.cc:1027
 #, c-format
 msgid "Produced %s"
 msgid_plural "Produced %s"
@@ -1218,45 +1218,45 @@ msgstr[1] "Producerade %s"
 #. * TRANSLATORS: %s is a list of workers. String is fetched according to
 #. total amount of
 #. workers.
-#: ../../src/logic/map_objects/tribes/production_program.cc:1030
+#: ../../src/logic/map_objects/tribes/production_program.cc:1109
 #, c-format
 msgid "Recruited %s"
 msgid_plural "Recruited %s"
 msgstr[0] "Rekryterade %s"
 msgstr[1] "Rekryterade %s"
 
-#: ../../src/logic/map_objects/tribes/production_program.cc:1236
+#: ../../src/logic/map_objects/tribes/production_program.cc:1315
 msgid "No soldier to train!"
 msgstr "Ingen soldat att träna!"
 
-#: ../../src/logic/map_objects/tribes/production_program.cc:1245
-#: ../../src/logic/map_objects/tribes/production_program.cc:1322
+#: ../../src/logic/map_objects/tribes/production_program.cc:1324
+#: ../../src/logic/map_objects/tribes/production_program.cc:1401
 msgid "No soldier found for this training level!"
 msgstr "Ingen soldat hittades för denna träningsnivå!"
 
-#: ../../src/logic/map_objects/tribes/productionsite.cc:247
+#: ../../src/logic/map_objects/tribes/productionsite.cc:258
 msgid "(not occupied)"
 msgstr "(inte ockuperad)"
 
-#: ../../src/logic/map_objects/tribes/productionsite.cc:254
+#: ../../src/logic/map_objects/tribes/productionsite.cc:265
 msgid "Worker missing"
 msgid_plural "Workers missing"
 msgstr[0] "Arbetare saknas"
 msgstr[1] "Arbetare saknas"
 
-#: ../../src/logic/map_objects/tribes/productionsite.cc:261
+#: ../../src/logic/map_objects/tribes/productionsite.cc:272
 msgid "(stopped)"
 msgstr "(stoppad)"
 
 #. * TRANSLATORS: Percent in building statistics window, e.g. 85%
 #. * TRANSLATORS: If you wish to add a space, translate as '%i %%'
-#: ../../src/logic/map_objects/tribes/productionsite.cc:360
+#: ../../src/logic/map_objects/tribes/productionsite.cc:382
 #: ../../src/wui/building_statistics_menu.cc:623
 #, c-format
 msgid "%i%%"
 msgstr "%i%%"
 
-#: ../../src/logic/map_objects/tribes/productionsite.cc:904
+#: ../../src/logic/map_objects/tribes/productionsite.cc:945
 msgid "Can’t find any more resources!"
 msgstr "Kan inte hitta mer resurser!"
 
@@ -1361,20 +1361,20 @@ msgctxt "ship_state"
 msgid "Founding a Colony"
 msgstr "Grundar koloni"
 
-#: ../../src/logic/map_objects/tribes/soldier.cc:1349
-#: ../../src/logic/map_objects/tribes/soldier.cc:1355
+#: ../../src/logic/map_objects/tribes/soldier.cc:1350
+#: ../../src/logic/map_objects/tribes/soldier.cc:1356
 msgid "Logic error"
 msgstr "Logiskt fel"
 
-#: ../../src/logic/map_objects/tribes/warehouse.cc:420
+#: ../../src/logic/map_objects/tribes/warehouse.cc:423
 msgid "A new port was added to your economy."
 msgstr "Din ekonomi utökades med en ny hamn."
 
-#: ../../src/logic/map_objects/tribes/warehouse.cc:423
+#: ../../src/logic/map_objects/tribes/warehouse.cc:426
 msgid "A new headquarters was added to your economy."
 msgstr "Din ekonomi utökades med ett nytt högkvarter."
 
-#: ../../src/logic/map_objects/tribes/warehouse.cc:426
+#: ../../src/logic/map_objects/tribes/warehouse.cc:429
 msgid "A new warehouse was added to your economy."
 msgstr "Din ekonomi utökades med ett nytt magasin."
 
@@ -1402,8 +1402,8 @@ msgid "Your %s can't find a way home and will likely die."
 msgstr "Din %s kan inte hitta en väg hem och kommer troligtvis att dö."
 
 #: ../../src/logic/map_objects/tribes/worker.cc:1653
-#: ../../src/wui/productionsitewindow.cc:72
-#: ../../src/wui/productionsitewindow.cc:97
+#: ../../src/wui/productionsitewindow.cc:79
+#: ../../src/wui/productionsitewindow.cc:104
 msgid "Worker"
 msgid_plural "Workers"
 msgstr[0] "Arbetare"
@@ -3120,7 +3120,7 @@ msgstr "Visa nästa byggnad"
 #: ../../src/wui/building_statistics_menu.cc:653
 #: ../../src/wui/building_statistics_menu.cc:677
 #: ../../src/wui/building_statistics_menu.cc:679
-#: ../../src/wui/productionsitewindow.cc:148
+#: ../../src/wui/productionsitewindow.cc:155
 msgid "%1%/%2%"
 msgstr "%1%/%2%"
 
@@ -3615,7 +3615,7 @@ msgid "Buildings"
 msgstr "Byggnader"
 
 #: ../../src/wui/general_statistics_menu.cc:150
-#: ../../src/wui/productionsitewindow.cc:60 ../../src/wui/transport_ui.cc:57
+#: ../../src/wui/productionsitewindow.cc:67 ../../src/wui/transport_ui.cc:57
 #: ../../src/wui/warehousewindow.cc:190
 msgid "Wares"
 msgstr "Varor"
@@ -3647,6 +3647,26 @@ msgstr "Förlorade civila byggnader"
 #: ../../src/wui/general_statistics_menu.cc:186
 msgid "Military"
 msgstr "Militär"
+
+#: ../../src/wui/inputqueuedisplay.cc:185
+msgid "Highest priority"
+msgstr "Högsta prioritet"
+
+#: ../../src/wui/inputqueuedisplay.cc:188
+msgid "Normal priority"
+msgstr "Normal prioritet"
+
+#: ../../src/wui/inputqueuedisplay.cc:191
+msgid "Lowest priority"
+msgstr "Lägsta prioritet"
+
+#: ../../src/wui/inputqueuedisplay.cc:236
+msgid "Decrease the number of wares you want to be stored here."
+msgstr "Minska antalet varor du vill lagra här"
+
+#: ../../src/wui/inputqueuedisplay.cc:245
+msgid "Increase the number of wares you want to be stored here."
+msgstr "Öka antalet varor du vill lagra här"
 
 #: ../../src/wui/interactive_gamebase.cc:45
 msgid "PAUSE"
@@ -3689,7 +3709,7 @@ msgstr "Metaserverinloggning"
 
 #: ../../src/wui/login_box.cc:34
 msgid "Nickname:"
-msgstr "Smeknamn:"
+msgstr "Användarnamn:"
 
 #: ../../src/wui/login_box.cc:35
 msgid "Password:"
@@ -3748,7 +3768,7 @@ msgstr "Obalanserad"
 #. * TRANSLATORS: This is a map tag
 #: ../../src/wui/map_tags.cc:32
 msgid "Seafaring"
-msgstr "Sjöfarande"
+msgstr "Sjöfart"
 
 #. * TRANSLATORS: This is a map tag
 #: ../../src/wui/map_tags.cc:34
@@ -3976,23 +3996,23 @@ msgstr "minuter"
 msgid "game"
 msgstr "Speltid"
 
-#: ../../src/wui/productionsitewindow.cc:73
+#: ../../src/wui/productionsitewindow.cc:80
 msgid "Exp"
 msgstr "Erf"
 
-#: ../../src/wui/productionsitewindow.cc:74
+#: ../../src/wui/productionsitewindow.cc:81
 msgid "Next Level"
 msgstr "Nästa nivå"
 
-#: ../../src/wui/productionsitewindow.cc:86
+#: ../../src/wui/productionsitewindow.cc:93
 msgid "Terminate the employment of the selected worker"
 msgstr "Säg upp vald arbetares anställning"
 
-#: ../../src/wui/productionsitewindow.cc:161
+#: ../../src/wui/productionsitewindow.cc:168
 msgid "(coming)"
 msgstr "(på väg)"
 
-#: ../../src/wui/productionsitewindow.cc:161
+#: ../../src/wui/productionsitewindow.cc:168
 msgid "(vacant)"
 msgstr "(vakant)"
 
@@ -4048,15 +4068,15 @@ msgstr "Sänk skeppet"
 msgid "Cancel the Expedition"
 msgstr "Avbryt expeditionen"
 
-#: ../../src/wui/soldiercapacitycontrol.cc:70
+#: ../../src/wui/soldiercapacitycontrol.cc:72
 msgid "Decrease capacity"
 msgstr "Minskad kapacitet"
 
-#: ../../src/wui/soldiercapacitycontrol.cc:79
+#: ../../src/wui/soldiercapacitycontrol.cc:81
 msgid "Increase capacity"
 msgstr "Ökad kapacitet"
 
-#: ../../src/wui/soldiercapacitycontrol.cc:86
+#: ../../src/wui/soldiercapacitycontrol.cc:88
 msgid "Capacity"
 msgstr "Kapacitet"
 
@@ -4154,26 +4174,6 @@ msgstr "Arbetare som väntar på att gå ombord"
 #: ../../src/wui/warehousewindow.cc:206
 msgid "Expedition"
 msgstr "Expedition"
-
-#: ../../src/wui/waresqueuedisplay.cc:174
-msgid "Highest priority"
-msgstr "Högsta prioritet"
-
-#: ../../src/wui/waresqueuedisplay.cc:177
-msgid "Normal priority"
-msgstr "Normal prioritet"
-
-#: ../../src/wui/waresqueuedisplay.cc:180
-msgid "Lowest priority"
-msgstr "Lägsta prioritet"
-
-#: ../../src/wui/waresqueuedisplay.cc:225
-msgid "Decrease the number of wares you want to be stored here."
-msgstr "Minska antalet varor du vill lagra här"
-
-#: ../../src/wui/waresqueuedisplay.cc:234
-msgid "Increase the number of wares you want to be stored here."
-msgstr "Öka antalet varor du vill lagra här"
 
 #: ../../src/wui/watchwindow.cc:105
 msgid "Follow"

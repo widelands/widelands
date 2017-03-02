@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-01-06 13:06+0000\n"
-"PO-Revision-Date: 2017-01-10 19:42+0000\n"
+"POT-Creation-Date: 2017-01-31 07:09+0000\n"
+"PO-Revision-Date: 2017-02-02 14:12+0000\n"
 "Last-Translator: D M <hunter12@home.se>\n"
 "Language-Team: Swedish (http://www.transifex.com/widelands/widelands/language/sv/)\n"
 "MIME-Version: 1.0\n"
@@ -151,11 +151,16 @@ msgstr "Allmänt"
 msgid "Introduction"
 msgstr "Introduktion"
 
-#: ../../data/scripting/editor/editor_help.lua:74
+#: ../../data/scripting/editor/editor_help.lua:71
+#: ../../data/scripting/editor/tips.lua:16
+msgid "Tips"
+msgstr "Tips"
+
+#: ../../data/scripting/editor/editor_help.lua:81
 msgid "Terrains"
 msgstr "Terräng"
 
-#: ../../data/scripting/editor/editor_help.lua:81
+#: ../../data/scripting/editor/editor_help.lua:88
 msgid "Trees"
 msgstr "Träd"
 

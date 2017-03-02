@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2016 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -53,8 +53,8 @@ const uint32_t time_in_ms[] = {
 
 const char BG_PIC[] = "images/wui/plot_area_bg.png";
 const RGBColor kAxisLineColor(0, 0, 0);
-constexpr float kAxisLinesWidth = 2.0f;
-constexpr float kPlotLinesWidth = 3.f;
+constexpr int kAxisLinesWidth = 2;
+constexpr int kPlotLinesWidth = 3;
 const RGBColor kZeroLineColor(255, 255, 255);
 
 enum class Units {
@@ -68,7 +68,7 @@ enum class Units {
 
 string ytick_text_style(const string& text, const RGBColor& clr) {
 	static boost::format f(
-	   "<rt><p><font face=condensed size=13 color=%02x%02x%02x>%s</font></p></rt>");
+	   "<rt keep_spaces=1><p><font face=condensed size=13 color=%02x%02x%02x>%s</font></p></rt>");
 	f % int(clr.r) % int(clr.g) % int(clr.b);
 	f % text;
 	return f.str();
@@ -179,7 +179,9 @@ void draw_value(const string& value,
                 const Vector2f& pos,
                 RenderTarget& dst) {
 	const Image* pic = UI::g_fh1->render(ytick_text_style(value, color));
-	dst.blit(pos, pic, BlendMode::UseAlpha, UI::Align::kCenterRight);
+	Vector2f point(pos);  // Un-const this
+	UI::center_vertically(pic->height(), &point);
+	dst.blit(point, pic, BlendMode::UseAlpha, UI::Align::kRight);
 }
 
 /**
@@ -252,8 +254,9 @@ void draw_diagram(uint32_t time_ms,
 		// over the number, not to the left
 		const Image* xtick = UI::g_fh1->render(
 		   xtick_text_style((boost::format("-%u ") % (max_x / how_many_ticks * i)).str()));
-		dst.blit(Vector2f(posx, inner_h - kSpaceBottom + 10), xtick, BlendMode::UseAlpha,
-		         UI::Align::kCenter);
+		Vector2f pos(posx, inner_h - kSpaceBottom + 10);
+		UI::center_vertically(xtick->height(), &pos);
+		dst.blit(pos, xtick, BlendMode::UseAlpha, UI::Align::kCenter);
 
 		posx -= sub;
 	}
@@ -269,7 +272,9 @@ void draw_diagram(uint32_t time_ms,
 
 	//  print the used unit
 	const Image* xtick = UI::g_fh1->render(xtick_text_style(get_generic_unit_name(unit)));
-	dst.blit(Vector2f(2.f, kSpacing + 2), xtick, BlendMode::UseAlpha, UI::Align::kCenterLeft);
+	Vector2f pos(2, kSpacing + 2);
+	UI::center_vertically(xtick->height(), &pos);
+	dst.blit(pos, xtick, BlendMode::UseAlpha, UI::Align::kLeft);
 }
 
 }  // namespace
@@ -290,7 +295,7 @@ WuiPlotArea::WuiPlotArea(UI::Panel* const parent,
      yline_length_(get_inner_h() - kSpaceBottom - kSpacing),
      time_ms_(0),
      highest_scale_(0),
-     sub_(0.0f),
+     sub_(0),
      time_(TIME_GAME),
      game_time_id_(0) {
 	update();

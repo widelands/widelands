@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2010 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -85,10 +85,10 @@ SoldierCapacityControl::SoldierCapacityControl(UI::Panel* parent,
 	increase_.sigclicked.connect(
 	   boost::bind(&SoldierCapacityControl::click_increase, boost::ref(*this)));
 
-	add(new UI::Textarea(this, _("Capacity")), UI::Align::kHCenter);
-	add(&decrease_, UI::Align::kHCenter);
-	add(&value_, UI::Align::kHCenter);
-	add(&increase_, UI::Align::kHCenter);
+	add(new UI::Textarea(this, _("Capacity")), UI::Box::Resizing::kAlign, UI::Align::kCenter);
+	add(&decrease_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
+	add(&value_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
+	add(&increase_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 
 	decrease_.set_repeating(true);
 	increase_.set_repeating(true);

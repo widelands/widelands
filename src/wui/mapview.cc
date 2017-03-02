@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2013 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -41,8 +41,10 @@ namespace {
 // it also means more computational work to plan the animation.
 constexpr int kNumKeyFrames = 102;
 
-// The maximum zoom to use in moving animations.
-constexpr float kMaxAnimationZoom = 8.f;
+// Somewhat arbitrarily we limit the zoom to a reasonable value. This is for
+// performance and to avoid numeric glitches with more extreme values. This
+// value is used for automatic movements and for user controlled zoom.
+constexpr float kMaxZoom = 4.f;
 
 // The time used for panning automated map movement only.
 constexpr float kShortAnimationMs = 500.f;
@@ -175,8 +177,8 @@ std::deque<MapView::TimestampedView> plan_map_transition(const uint32_t start_ti
 
 	if (jumping_animation) {
 		// We jump higher if the distance is farther - but we never zoom in (i.e.
-		// negative jump) or jump higher than 'kMaxAnimationZoom'.
-		const float target_zoom = math::clamp(num_screens + start.zoom, end.zoom, kMaxAnimationZoom);
+		// negative jump) or jump higher than 'kMaxZoom'.
+		const float target_zoom = math::clamp(num_screens + start.zoom, end.zoom, kMaxZoom);
 		do_plan_map_transition(
 		   start_time, duration_ms, center_point_t,
 		   DoubleSmoothstepInterpolator<float>(start.zoom, target_zoom, end.zoom, duration_ms), width,
@@ -483,9 +485,11 @@ bool MapView::handle_mousepress(uint8_t const btn, int32_t const x, int32_t cons
 }
 
 bool MapView::handle_mouserelease(const uint8_t btn, int32_t, int32_t) {
-	if (btn == SDL_BUTTON_RIGHT && dragging_)
+	if (btn == SDL_BUTTON_RIGHT && dragging_) {
 		stop_dragging();
-	return true;
+		return true;
+	}
+	return false;
 }
 
 bool MapView::handle_mousemove(
@@ -524,9 +528,6 @@ bool MapView::handle_mousewheel(uint32_t which, int32_t /* x */, int32_t y) {
 void MapView::zoom_around(float new_zoom,
                           const Vector2f& panel_pixel,
                           const Transition& transition) {
-	// Somewhat arbitrarily we limit the zoom to a reasonable value. This is for
-	// performance and to avoid numeric glitches with more extreme values.
-	constexpr float kMaxZoom = 4.f;
 	new_zoom = math::clamp(new_zoom, 1.f / kMaxZoom, kMaxZoom);
 
 	const TimestampedView current = animation_target_view();

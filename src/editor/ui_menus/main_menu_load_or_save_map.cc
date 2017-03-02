@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2015 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -49,7 +49,7 @@ MainMenuLoadOrSaveMap::MainMenuLoadOrSaveMap(EditorInteractive& parent,
      right_column_x_(tablew_ + 2 * padding_),
      butw_((get_inner_w() - right_column_x_ - 2 * padding_) / 2),
 
-     table_(this, tablex_, tabley_, tablew_, tableh_, false),
+     table_(this, tablex_, tabley_, tablew_, tableh_),
      map_details_(this,
                   right_column_x_,
                   tabley_,
@@ -86,14 +86,14 @@ MainMenuLoadOrSaveMap::MainMenuLoadOrSaveMap(EditorInteractive& parent,
 	show_mapnames_ =
 	   new UI::Button(vbox, "show_mapnames", 0, 0, 2 * butw_, buth_,
 	                  g_gr->images().get("images/ui_basic/but1.png"), _("Show Map Names"));
-	vbox->add(show_mapnames_, UI::Align::kLeft, true);
+	vbox->add(show_mapnames_, UI::Box::Resizing::kFullSize);
 
 	/** TRANSLATORS: Checkbox title. If this checkbox is enabled, map names aren't translated. */
 	cb_dont_localize_mapnames_ =
 	   new UI::Checkbox(vbox, Vector2i(0, 0), _("Show original map names"));
 	cb_dont_localize_mapnames_->set_state(false);
 	vbox->add_space(2 * padding_);
-	vbox->add(cb_dont_localize_mapnames_, UI::Align::kLeft, true);
+	vbox->add(cb_dont_localize_mapnames_, UI::Box::Resizing::kFullSize);
 	vbox->set_size(get_inner_w(), buth_);
 
 	table_.set_column_compare(0, boost::bind(&MainMenuLoadOrSaveMap::compare_players, this, _1, _2));

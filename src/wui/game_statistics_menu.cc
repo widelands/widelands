@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2016 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -70,7 +70,7 @@ UI::Button* GameStatisticsMenu::add_button(const std::string& image_basename,
 	UI::Button* button =
 	   new UI::Button(&box_, name, 0, 0, 34U, 34U, g_gr->images().get("images/ui_basic/but4.png"),
 	                  g_gr->images().get("images/" + image_basename + ".png"), tooltip_text);
-	box_.add(button, UI::Align::kLeft);
+	box_.add(button);
 	if (window) {
 		if (!window->on_create) {
 			window->assign_toggle_button(button);

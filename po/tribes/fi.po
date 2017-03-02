@@ -1,10 +1,10 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2016 Widelands Development Team
+# Copyright (C) 2005-2017 Widelands Development Team
 # 
 # Translators:
 # GunChleoc, 2016
 # GunChleoc, 2014
-# Jukka Pakarinen, 2016
+# Jukka Pakarinen, 2016-2017
 # Markus Hällfors <markus@hallfors.com>, 2015
 # Max, 2015
 # Pekka Järvinen <pekka.jarvinen@gmail.com>, 2007
@@ -14,8 +14,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-12-18 17:02+0000\n"
-"PO-Revision-Date: 2016-12-24 14:29+0000\n"
+"POT-Creation-Date: 2017-02-18 09:49+0000\n"
+"PO-Revision-Date: 2017-02-19 14:09+0000\n"
 "Last-Translator: Jukka Pakarinen\n"
 "Language-Team: Finnish (http://www.transifex.com/widelands/widelands/language/fi/)\n"
 "MIME-Version: 1.0\n"
@@ -417,13 +417,13 @@ msgid "Dismantle Site"
 msgstr "Purkutyömaa"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
-#: ../../data/tribes/buildings/productionsites/atlanteans/armorsmithy/init.lua:89
+#: ../../data/tribes/buildings/productionsites/atlanteans/armorsmithy/init.lua:94
 msgctxt "atlanteans_building"
 msgid "Armor Smithy"
 msgstr "Haarniskapaja"
 
 #. TRANSLATORS: Completed/Skipped/Did not start working because ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/armorsmithy/init.lua:138
+#: ../../data/tribes/buildings/productionsites/atlanteans/armorsmithy/init.lua:143
 #: ../../data/tribes/buildings/productionsites/atlanteans/blackroot_farm/init.lua:47
 #: ../../data/tribes/buildings/productionsites/atlanteans/crystalmine/init.lua:60
 #: ../../data/tribes/buildings/productionsites/atlanteans/farm/init.lua:50
@@ -466,13 +466,13 @@ msgstr "työskentelee"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a steel shield because
 #. ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/armorsmithy/init.lua:147
+#: ../../data/tribes/buildings/productionsites/atlanteans/armorsmithy/init.lua:152
 msgid "forging a steel shield"
 msgstr "valmistaa kilven"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging an advanced shield
 #. because ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/armorsmithy/init.lua:159
+#: ../../data/tribes/buildings/productionsites/atlanteans/armorsmithy/init.lua:164
 msgid "forging an advanced shield"
 msgstr "tekee ritarikilpeä"
 
@@ -484,10 +484,9 @@ msgstr "Leipomo"
 
 #. TRANSLATORS: Completed/Skipped/Did not start baking bread because ...
 #: ../../data/tribes/buildings/productionsites/atlanteans/bakery/init.lua:55
-#: ../../data/tribes/buildings/productionsites/barbarians/bakery/init.lua:58
-#: ../../data/tribes/buildings/productionsites/empire/bakery/init.lua:58
+msgctxt "atlanteans_building"
 msgid "baking bread"
-msgstr "leipoo leipää"
+msgstr "leivän leipominen"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/atlanteans/barracks/init.lua:7
@@ -496,13 +495,10 @@ msgid "Barracks"
 msgstr "Kasarmi"
 
 #. TRANSLATORS: Completed/Skipped/Did not start recruiting soldier because ...
-#. TRANSLATORS: Completed/Skipped/Did not start recruiting soldier because ...
-#. TODO(GunChleoc): this should cost us a carrier as well, or maybe a recruit.
-#: ../../data/tribes/buildings/productionsites/atlanteans/barracks/init.lua:55
-#: ../../data/tribes/buildings/productionsites/barbarians/barracks/init.lua:52
-#: ../../data/tribes/buildings/productionsites/empire/barracks/init.lua:56
+#: ../../data/tribes/buildings/productionsites/atlanteans/barracks/init.lua:58
+msgctxt "atlanteans_building"
 msgid "recruiting soldier"
-msgstr "sotilaan palkkaaminen"
+msgstr "sotilaan palkkaus"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/atlanteans/blackroot_farm/init.lua:7
@@ -671,6 +667,32 @@ msgstr "Kalankasvattajan talo"
 msgid "breeding fish"
 msgstr "kasvattaa kaloja"
 
+#: ../../data/tribes/buildings/productionsites/atlanteans/fishbreeders_house/init.lua:52
+#: ../../data/tribes/buildings/productionsites/atlanteans/fishers_house/init.lua:53
+#: ../../data/tribes/buildings/productionsites/barbarians/fishers_hut/init.lua:59
+#: ../../data/tribes/buildings/productionsites/empire/fishers_house/init.lua:53
+msgid "No Fish"
+msgstr "Ei kalaa"
+
+#: ../../data/tribes/buildings/productionsites/atlanteans/fishbreeders_house/init.lua:53
+#: ../../data/tribes/buildings/productionsites/atlanteans/fishers_house/init.lua:54
+#: ../../data/tribes/buildings/productionsites/barbarians/fishers_hut/init.lua:60
+#: ../../data/tribes/buildings/productionsites/empire/fishers_house/init.lua:54
+msgid "Out of Fish"
+msgstr "Ei kalavesiä"
+
+#: ../../data/tribes/buildings/productionsites/atlanteans/fishbreeders_house/init.lua:54
+msgctxt "atlanteans_building"
+msgid ""
+"The fish breeder working out of this fish breeder’s house can’t find any "
+"fish in his work area. Remember that you can only regenerate your fish "
+"resources if there are some fish left to breed."
+msgstr "Kalankasvattaja ei onnistu saamaan kalaa kalankasvattajan mökin alueelta. Muista että voit elvyttää kalakannan vain jos kaloja on vielä jäljellä kasvatettavaksi."
+
+#: ../../data/tribes/buildings/productionsites/atlanteans/fishbreeders_house/init.lua:58
+msgid "The fishing grounds are full"
+msgstr "Kalavedet ovat kalaisia"
+
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/atlanteans/fishers_house/init.lua:7
 msgctxt "atlanteans_building"
@@ -684,18 +706,6 @@ msgstr "Kalastakjatorppa"
 msgid "fishing"
 msgstr "kalastaa"
 
-#: ../../data/tribes/buildings/productionsites/atlanteans/fishers_house/init.lua:53
-#: ../../data/tribes/buildings/productionsites/barbarians/fishers_hut/init.lua:59
-#: ../../data/tribes/buildings/productionsites/empire/fishers_house/init.lua:53
-msgid "No Fish"
-msgstr "Ei kalaa"
-
-#: ../../data/tribes/buildings/productionsites/atlanteans/fishers_house/init.lua:54
-#: ../../data/tribes/buildings/productionsites/barbarians/fishers_hut/init.lua:60
-#: ../../data/tribes/buildings/productionsites/empire/fishers_house/init.lua:54
-msgid "Out of Fish"
-msgstr "Ei kalavesiä"
-
 #: ../../data/tribes/buildings/productionsites/atlanteans/fishers_house/init.lua:55
 msgctxt "atlanteans_building"
 msgid ""
@@ -708,7 +718,7 @@ msgstr "Kalastaja ei löydä kalaa lähivesistään. Olisi kannattanut rakentaa 
 #: ../../data/tribes/buildings/productionsites/atlanteans/foresters_house/init.lua:7
 msgctxt "atlanteans_building"
 msgid "Forester’s House"
-msgstr "Taimitarha"
+msgstr "Metsänhoitajan Mökki"
 
 #. TRANSLATORS: Completed/Skipped/Did not start planting trees because ...
 #: ../../data/tribes/buildings/productionsites/atlanteans/foresters_house/init.lua:42
@@ -777,8 +787,9 @@ msgstr "Hevostila"
 
 #. TRANSLATORS: Completed/Skipped/Did not start breeding horses because ...
 #: ../../data/tribes/buildings/productionsites/atlanteans/horsefarm/init.lua:52
+msgctxt "atlanteans_building"
 msgid "breeding horses"
-msgstr "kasvattaa hevosia"
+msgstr "hevosten kasvatus"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/atlanteans/hunters_house/init.lua:7
@@ -1117,13 +1128,13 @@ msgid "weaving spidercloth"
 msgstr "kutoo hämähäkinsilkkiä"
 
 #. TRANSLATORS: Completed/Skipped/Did not start tailoring a tabard because ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/weaving_mill/init.lua:80
+#: ../../data/tribes/buildings/productionsites/atlanteans/weaving_mill/init.lua:82
 msgid "tailoring a tabard"
 msgstr "räätälöi asetakkia"
 
 #. TRANSLATORS: Completed/Skipped/Did not start tailoring a golden tabard
 #. because ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/weaving_mill/init.lua:92
+#: ../../data/tribes/buildings/productionsites/atlanteans/weaving_mill/init.lua:96
 msgid "tailoring a golden tabard"
 msgstr "räätälöi kultaista taisteluasua"
 
@@ -1181,7 +1192,7 @@ msgid ""
 "The woodcutter working at this woodcutter’s house can’t find any trees in "
 "his work area. You should consider dismantling or destroying the building or"
 " building a forester’s house."
-msgstr "Tämän mökin metsämies ei löydä puita kaadettavakseen. Pura mökki tai rakenna puutarhuri."
+msgstr "Tämän mökin metsämies ei löydä puita kaadettavakseen. Pura mökki tai rakenna metsänhoitajan mökki."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/barbarians/ax_workshop/init.lua:7
@@ -1213,11 +1224,23 @@ msgctxt "barbarians_building"
 msgid "Bakery"
 msgstr "Leipomo"
 
+#. TRANSLATORS: Completed/Skipped/Did not start baking bread because ...
+#: ../../data/tribes/buildings/productionsites/barbarians/bakery/init.lua:58
+msgctxt "barbarians_building"
+msgid "baking pitta bread"
+msgstr "pitaleivän leivonta"
+
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/barbarians/barracks/init.lua:7
 msgctxt "barbarians_building"
 msgid "Barracks"
 msgstr "Kasarmi"
+
+#. TRANSLATORS: Completed/Skipped/Did not start recruiting soldier because ...
+#: ../../data/tribes/buildings/productionsites/barbarians/barracks/init.lua:56
+msgctxt "barbarians_building"
+msgid "recruiting soldier"
+msgstr "sotilaan palkkaus"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/barbarians/big_inn/init.lua:7
@@ -1266,8 +1289,9 @@ msgstr "Karjatila"
 
 #. TRANSLATORS: Completed/Skipped/Did not start rearing cattle because ...
 #: ../../data/tribes/buildings/productionsites/barbarians/cattlefarm/init.lua:52
+msgctxt "barbarians_building"
 msgid "rearing cattle"
-msgstr "kasvattaa karjaa"
+msgstr "karjan kasvatus"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/barbarians/charcoal_kiln/init.lua:7
@@ -1709,11 +1733,23 @@ msgctxt "empire_building"
 msgid "Bakery"
 msgstr "Leipomo"
 
+#. TRANSLATORS: Completed/Skipped/Did not start baking bread because ...
+#: ../../data/tribes/buildings/productionsites/empire/bakery/init.lua:58
+msgctxt "empire_building"
+msgid "baking bread"
+msgstr "levän leipominen"
+
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/empire/barracks/init.lua:7
 msgctxt "empire_building"
 msgid "Barracks"
 msgstr "Kasarmi"
+
+#. TRANSLATORS: Completed/Skipped/Did not start recruiting soldier because ...
+#: ../../data/tribes/buildings/productionsites/empire/barracks/init.lua:59
+msgctxt "empire_building"
+msgid "recruiting soldier"
+msgstr "sotilaan palkkaus"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/empire/brewery/init.lua:7
@@ -1762,8 +1798,9 @@ msgstr "Aasitalli"
 
 #. TRANSLATORS: Completed/Skipped/Did not start rearing donkeys because ...
 #: ../../data/tribes/buildings/productionsites/empire/donkeyfarm/init.lua:52
+msgctxt "empire_building"
 msgid "rearing donkeys"
-msgstr "kasvattaa aaseja"
+msgstr "aasien kasvatus"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/empire/farm/init.lua:7
@@ -1794,7 +1831,7 @@ msgstr "Kalastaja ei löydä kalaa lähivesistään."
 #: ../../data/tribes/buildings/productionsites/empire/foresters_house/init.lua:7
 msgctxt "empire_building"
 msgid "Forester’s House"
-msgstr "Taimitarha"
+msgstr "Metsänhoitajan Mökki"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/empire/goldmine/init.lua:7
@@ -1882,7 +1919,7 @@ msgid ""
 "The lumberjack working at this lumberjack’s house can’t find any trees in "
 "his work area. You should consider dismantling or destroying the building or"
 " building a forester’s house."
-msgstr "Puunhakkaaja ei löydä puita lähistöltään. Pura mökki tai rakenna metsänvartijan maja lähistölle."
+msgstr "Puunhakkaaja ei löydä puita lähistöltään. Pura mökki tai rakenna metsänhoitajan maja lähistölle."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/empire/marblemine/init.lua:7
@@ -2138,31 +2175,27 @@ msgstr "tauolla"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../data/tribes/buildings/trainingsites/atlanteans/dungeon/init.lua:164
-#: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:110
-#: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:104
+msgctxt "atlanteans_building"
 msgid "upgrading soldier attack from level 0 to level 1"
-msgstr "parantaa sotilaan hyökkäystä tasolta 0 tasolle 1"
+msgstr "sotilaan hyökkäystaidon korotus tasolta 0 tasolle 1"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../data/tribes/buildings/trainingsites/atlanteans/dungeon/init.lua:175
-#: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:121
-#: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:115
+msgctxt "atlanteans_building"
 msgid "upgrading soldier attack from level 1 to level 2"
-msgstr "parantaa sotilaan hyökkäystä tasolta 1 tasolle 2"
+msgstr "sotilaan hyökkäystaidon korotus tasolta 1 tasolle 2"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../data/tribes/buildings/trainingsites/atlanteans/dungeon/init.lua:186
-#: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:132
-#: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:126
+msgctxt "atlanteans_building"
 msgid "upgrading soldier attack from level 2 to level 3"
-msgstr "parantaa sotilaan hyökkäystä tasolta 2 tasolle 3"
+msgstr "sotilaan hyökkäystaidon korotus tasolta 2 tasolle 3"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../data/tribes/buildings/trainingsites/atlanteans/dungeon/init.lua:197
-#: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:143
-#: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:137
+msgctxt "atlanteans_building"
 msgid "upgrading soldier attack from level 3 to level 4"
-msgstr "parantaa sotilaan hyökkäystä tasolta 3 tasolle 4"
+msgstr "sotilaan hyökkäystaidon korotus tasolta 3 tasolle 4"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/trainingsites/atlanteans/labyrinth/init.lua:7
@@ -2172,41 +2205,51 @@ msgstr "Labyrintti"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../data/tribes/buildings/trainingsites/atlanteans/labyrinth/init.lua:102
+msgctxt "atlanteans_building"
 msgid "upgrading soldier defense from level 0 to level 1"
-msgstr "parantaa sotilaan puolustusta tasolta 0 tasolle 1"
+msgstr "sotilaan puolustuskyvyn korotus tasolta 0 tasolle 1"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../data/tribes/buildings/trainingsites/atlanteans/labyrinth/init.lua:113
+msgctxt "atlanteans_building"
 msgid "upgrading soldier defense from level 1 to level 2"
-msgstr "parantaa sotilaan puolustusta tasolta 1 tasolle 2"
+msgstr "sotilaan puolustuskyvyn korotus tasolta 1 tasolle 2"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../data/tribes/buildings/trainingsites/atlanteans/labyrinth/init.lua:124
-#: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:165
-#: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:148
+msgctxt "atlanteans_building"
 msgid "upgrading soldier health from level 0 to level 1"
-msgstr "parantaa sotilaan terveyttä tasolta 0 tasolle 1"
+msgstr "sotilaan terveyden korotus tasolta 0 tasolle 1"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../data/tribes/buildings/trainingsites/atlanteans/labyrinth/init.lua:135
-#: ../../data/tribes/buildings/trainingsites/barbarians/battlearena/init.lua:91
-#: ../../data/tribes/buildings/trainingsites/empire/arena/init.lua:81
-#: ../../data/tribes/buildings/trainingsites/empire/colosseum/init.lua:76
+msgctxt "atlanteans_building"
 msgid "upgrading soldier evade from level 0 to level 1"
-msgstr "kouluttaa sotilaan väistötasolta 0 tasolle 1"
+msgstr "sotilaan väistelykyvyn korotus tasolta 0 tasolle 1"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../data/tribes/buildings/trainingsites/atlanteans/labyrinth/init.lua:146
-#: ../../data/tribes/buildings/trainingsites/barbarians/battlearena/init.lua:103
-#: ../../data/tribes/buildings/trainingsites/empire/colosseum/init.lua:87
+msgctxt "atlanteans_building"
 msgid "upgrading soldier evade from level 1 to level 2"
-msgstr "kouluttaa sotilaan väistötasolta 1 tasolle 2"
+msgstr "sotilaan väistelykyvyn korotus tasolta 1 tasolle 2"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/trainingsites/barbarians/battlearena/init.lua:7
 msgctxt "barbarians_building"
 msgid "Battle Arena"
 msgstr "Taisteluareena"
+
+#. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
+#: ../../data/tribes/buildings/trainingsites/barbarians/battlearena/init.lua:91
+msgctxt "barbarians_building"
+msgid "upgrading soldier evade from level 0 to level 1"
+msgstr "sotilaan väistelykyvyn korotus tasolta 0 tasolle 1"
+
+#. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
+#: ../../data/tribes/buildings/trainingsites/barbarians/battlearena/init.lua:103
+msgctxt "barbarians_building"
+msgid "upgrading soldier evade from level 1 to level 2"
+msgstr "sotilaan väistelykyvyn korotus tasolta 1 tasolle 2"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:7
@@ -2215,21 +2258,52 @@ msgid "Training Camp"
 msgstr "Harjoitusleiri"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
+#: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:110
+msgctxt "barbarians_building"
+msgid "upgrading soldier attack from level 0 to level 1"
+msgstr "sotilaan hyökkäystaidon korotus tasolta 0 tasolle 1"
+
+#. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
+#: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:121
+msgctxt "barbarians_building"
+msgid "upgrading soldier attack from level 1 to level 2"
+msgstr "sotilaan hyökkäystaidon korotus tasolta 1 tasolle 2"
+
+#. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
+#: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:132
+msgctxt "barbarians_building"
+msgid "upgrading soldier attack from level 2 to level 3"
+msgstr "sotilaan hyökkäystaidon korotus tasolta 2 tasolle 3"
+
+#. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
+#: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:143
+msgctxt "barbarians_building"
+msgid "upgrading soldier attack from level 3 to level 4"
+msgstr "sotilaan hyökkäystaidon korotus tasolta 3 tasolle 4"
+
+#. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:154
+msgctxt "barbarians_building"
 msgid "upgrading soldier attack from level 4 to level 5"
-msgstr "parantaa sotilaan hyökkäystä tasolta 4 tasolle 5"
+msgstr "sotilaan hyökkäystaidon korotus tasolta 4 tasolle 5"
+
+#. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
+#: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:165
+msgctxt "barbarians_building"
+msgid "upgrading soldier health from level 0 to level 1"
+msgstr "sotilaan terveyden korotus tasolta 0 tasolle 1"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:176
-#: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:159
+msgctxt "barbarians_building"
 msgid "upgrading soldier health from level 1 to level 2"
-msgstr "parantaa sotilaan terveyttä tasolta 1 tasolle 2"
+msgstr "sotilaan terveyden korotus tasolta 1 tasolle 2"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:187
-#: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:170
+msgctxt "barbarians_building"
 msgid "upgrading soldier health from level 2 to level 3"
-msgstr "parantaa sotilaan terveyttä tasolta 2 tasolle 3"
+msgstr "sotilaan terveyden korotus tasolta 2 tasolle 3"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/trainingsites/empire/arena/init.lua:7
@@ -2237,11 +2311,24 @@ msgctxt "empire_building"
 msgid "Arena"
 msgstr "Areena"
 
+#. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
+#: ../../data/tribes/buildings/trainingsites/empire/arena/init.lua:81
+#: ../../data/tribes/buildings/trainingsites/empire/colosseum/init.lua:76
+msgctxt "empire_building"
+msgid "upgrading soldier evade from level 0 to level 1"
+msgstr "sotilaan väistelykyvyn korotus tasolta 0 tasolle 1"
+
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/trainingsites/empire/colosseum/init.lua:7
 msgctxt "empire_building"
 msgid "Colosseum"
 msgstr "Kolosseumi"
+
+#. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
+#: ../../data/tribes/buildings/trainingsites/empire/colosseum/init.lua:87
+msgctxt "empire_building"
+msgid "upgrading soldier evade from level 1 to level 2"
+msgstr "sotilaan väistelykyvyn korotus tasolta 1 tasolle 2"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:7
@@ -2250,9 +2337,52 @@ msgid "Training Camp"
 msgstr "Harjoitusleiri"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
+#: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:104
+msgctxt "empire_building"
+msgid "upgrading soldier attack from level 0 to level 1"
+msgstr "sotilaan hyökkäystaidon korotus tasolta 0 tasolle 1"
+
+#. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
+#: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:115
+msgctxt "empire_building"
+msgid "upgrading soldier attack from level 1 to level 2"
+msgstr "sotilaan hyökkäystaidon korotus tasolta 1 tasolle 2"
+
+#. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
+#: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:126
+msgctxt "empire_building"
+msgid "upgrading soldier attack from level 2 to level 3"
+msgstr "sotilaan hyökkäystaidon korotus tasolta 2 tasolle 3"
+
+#. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
+#: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:137
+msgctxt "empire_building"
+msgid "upgrading soldier attack from level 3 to level 4"
+msgstr "sotilaan hyökkäystaidon korotus tasolta 3 tasolle 4"
+
+#. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
+#: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:148
+msgctxt "empire_building"
+msgid "upgrading soldier health from level 0 to level 1"
+msgstr "sotilaan terveyden korotus tasolta 0 tasolle 1"
+
+#. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
+#: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:159
+msgctxt "empire_building"
+msgid "upgrading soldier health from level 1 to level 2"
+msgstr "sotilaan terveyden korotus tasolta 1 tasolle 2"
+
+#. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
+#: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:170
+msgctxt "empire_building"
+msgid "upgrading soldier health from level 2 to level 3"
+msgstr "sotilaan terveyden korotus tasolta 2 tasolle 3"
+
+#. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:181
+msgctxt "empire_building"
 msgid "upgrading soldier health from level 3 to level 4"
-msgstr "parantaa sotilaan terveyttä tasolta 3 tasolle 4"
+msgstr "sotilaan terveyden korotus tasolta 3 tasolle 4"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/warehouses/atlanteans/headquarters/init.lua:47
@@ -2583,15 +2713,19 @@ msgstr "Esittely"
 msgid "Controls"
 msgstr "Hallinta"
 
-#: ../../data/tribes/scripting/help/init.lua:73
+#: ../../data/tribes/scripting/help/init.lua:70
+msgid "Tips"
+msgstr "Vinkit"
+
+#: ../../data/tribes/scripting/help/init.lua:79
 msgid "Wares"
 msgstr "Tarvikkeet"
 
-#: ../../data/tribes/scripting/help/init.lua:80
+#: ../../data/tribes/scripting/help/init.lua:86
 msgid "Workers"
 msgstr "Työläiset"
 
-#: ../../data/tribes/scripting/help/init.lua:87
+#: ../../data/tribes/scripting/help/init.lua:93
 msgid "Buildings"
 msgstr "Rakennukset"
 
@@ -3216,7 +3350,7 @@ msgstr "Kalastaja"
 #: ../../data/tribes/workers/atlanteans/forester/init.lua:32
 msgctxt "atlanteans_worker"
 msgid "Forester"
-msgstr "Puutarhuri"
+msgstr "Metsänhoitaja"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/atlanteans/geologist/init.lua:23
@@ -3253,6 +3387,12 @@ msgstr "Mylläri"
 msgctxt "atlanteans_worker"
 msgid "Miner"
 msgstr "Kaivostyöläinen"
+
+#. TRANSLATORS: This is a worker name used in lists of workers
+#: ../../data/tribes/workers/atlanteans/recruit/init.lua:16
+msgctxt "atlanteans_worker"
+msgid "Recruit"
+msgstr "Alokas"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/atlanteans/sawyer/init.lua:17
@@ -3477,6 +3617,12 @@ msgid "Ranger"
 msgstr "Metsänvartija"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
+#: ../../data/tribes/workers/barbarians/recruit/init.lua:17
+msgctxt "barbarians_worker"
+msgid "Recruit"
+msgstr "Alokas"
+
+#. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/barbarians/scout/init.lua:17
 msgctxt "barbarians_worker"
 msgid "Scout"
@@ -3588,7 +3734,7 @@ msgstr "Kalastaja"
 #: ../../data/tribes/workers/empire/forester/init.lua:32
 msgctxt "empire_worker"
 msgid "Forester"
-msgstr "Puutarhuri"
+msgstr "Metsänhoitaja"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/empire/geologist/init.lua:23
@@ -3637,6 +3783,12 @@ msgstr "Kaivosmestari"
 msgctxt "empire_worker"
 msgid "Pig Breeder"
 msgstr "Siankasvattaja"
+
+#. TRANSLATORS: This is a worker name used in lists of workers
+#: ../../data/tribes/workers/empire/recruit/init.lua:17
+msgctxt "empire_worker"
+msgid "Recruit"
+msgstr "Alokas"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/empire/scout/init.lua:17

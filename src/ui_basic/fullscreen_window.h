@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2016 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -56,6 +56,16 @@ public:
 		}
 	};
 
+	struct Alignment {
+		Alignment(UI::Align h, UI::Align v) : halign(h), valign(v) {
+		}
+		Alignment() : Alignment(UI::Align::kLeft, UI::Align::kTop) {
+		}
+
+		UI::Align halign;
+		UI::Align valign;
+	};
+
 	/// A full screen main menu outside of the game/editor itself.
 	FullscreenWindow();
 	virtual ~FullscreenWindow();
@@ -70,27 +80,27 @@ protected:
 	/// Sets the image for the given frame position.
 	void set_frame_image(FullscreenWindow::Frames id, const std::string& filename);
 	/// Add an overlay images to be blitted according to 'align'.
-	void add_overlay_image(const std::string& filename, UI::Align align);
+	void add_overlay_image(const std::string& filename, Alignment align);
 	/// Remove all overlay images
 	void clear_overlays();
 
 private:
 	/// Returns the image for the given frame position.
 	const Image* get_frame_image(FullscreenWindow::Frames id) const;
+
+	enum Tiling { kNone, kHorizontal, kVertical };
+
 	/**
 	 * Blit an image according to the given 'align'.
 	 * If 'tiling' is set to 'UI::Align::kVertical' or 'UI::Align::kHorizontal', the image will be
 	 * tiled.
 	 */
-	void blit_image(RenderTarget& dst,
-	                const Image* image,
-	                UI::Align align,
-	                UI::Align tiling = UI::Align::kLeft);
+	void blit_image(RenderTarget& dst, const Image* image, Alignment align, Tiling tiling = kNone);
 
 	const std::string background_image_;
 	/// These overlay images will be blitted in the order they were added and according to the given
 	/// align.
-	std::vector<std::pair<const Image*, UI::Align>> overlays_;
+	std::vector<std::pair<const Image*, Alignment>> overlays_;
 	/// Images for the edges. They will be blitted in top of the overlays_.
 	std::unordered_map<FullscreenWindow::Frames, const Image*, FullscreenWindow::FramesHash>
 	   frame_overlays_;

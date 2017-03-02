@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-20116 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -76,7 +76,6 @@ private:
 		void draw(RenderTarget&) override;
 
 		bool handle_mousepress(uint8_t btn, int32_t x, int32_t y) override;
-		bool handle_mouserelease(uint8_t btn, int32_t x, int32_t y) override;
 
 		void set_zoom(int32_t z);
 

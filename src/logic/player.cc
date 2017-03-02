@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2003, 2006-2013 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -453,8 +453,8 @@ Road& Player::force_road(const Path& path) {
 		log("Clearing for road at (%i, %i)\n", c.x, c.y);
 
 		//  Make sure that the player owns the area around.
-		dynamic_cast<Game&>(egbase()).conquer_area_no_building(
-		   PlayerArea<Area<FCoords>>(player_number(), Area<FCoords>(c, 1)));
+		dynamic_cast<Game&>(egbase())
+		   .conquer_area_no_building(PlayerArea<Area<FCoords>>(player_number(), Area<FCoords>(c, 1)));
 
 		if (BaseImmovable* const immovable = c.field->get_immovable()) {
 			assert(immovable != &start);
@@ -693,6 +693,8 @@ void Player::enhance_or_dismantle(Building* building,
 			workers = building->get_workers();
 		}
 
+		// Register whether the window was open
+		Notifications::publish(NoteBuilding(building->serial(), NoteBuilding::Action::kStartWarp));
 		building->remove(egbase());  //  no fire or stuff
 		//  Hereafter the old building does not exist and building is a dangling
 		//  pointer.
@@ -701,6 +703,10 @@ void Player::enhance_or_dismantle(Building* building,
 			   position, player_number_, index_of_new_building, false, former_buildings);
 		else
 			building = &egbase().warp_dismantlesite(position, player_number_, false, former_buildings);
+
+		// Open the new building window if needed
+		Notifications::publish(NoteBuilding(building->serial(), NoteBuilding::Action::kFinishWarp));
+
 		//  Hereafter building points to the new building.
 
 		// Reassign the workers and soldiers.
@@ -1221,6 +1227,8 @@ const std::string Player::pick_shipname() {
  * \param fr source stream
  */
 void Player::read_remaining_shipnames(FileRead& fr) {
+	// First get rid of default shipnames
+	remaining_shipnames_.clear();
 	const uint16_t count = fr.unsigned_16();
 	for (uint16_t i = 0; i < count; ++i) {
 		remaining_shipnames_.insert(fr.string());

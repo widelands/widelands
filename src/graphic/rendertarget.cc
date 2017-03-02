@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2010 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -147,7 +147,7 @@ void RenderTarget::blit(const Vector2f& dst,
                         BlendMode blend_mode,
                         UI::Align align) {
 	Vector2f destination_point(dst);
-	UI::correct_for_align(align, image->width(), image->height(), &destination_point);
+	UI::correct_for_align(align, image->width(), &destination_point);
 
 	Rectf source_rect(Vector2i(0, 0), image->width(), image->height());
 	Rectf destination_rect(destination_point.x, destination_point.y, source_rect.w, source_rect.h);
@@ -164,7 +164,7 @@ void RenderTarget::blit_monochrome(const Vector2f& dst,
                                    const RGBAColor& blend_mode,
                                    UI::Align align) {
 	Vector2f destination_point(dst);
-	UI::correct_for_align(align, image->width(), image->height(), &destination_point);
+	UI::correct_for_align(align, image->width(), &destination_point);
 
 	Rectf source_rect(Vector2i(0, 0), image->width(), image->height());
 	Rectf destination_rect(destination_point.x, destination_point.y, source_rect.w, source_rect.h);

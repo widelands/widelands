@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2016 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,8 +20,12 @@
 #ifndef WL_WUI_INTERACTIVE_GAMEBASE_H
 #define WL_WUI_INTERACTIVE_GAMEBASE_H
 
+#include <map>
+#include <memory>
+
 #include "logic/game.h"
 #include "profile/profile.h"
+#include "ui_basic/unique_window.h"
 #include "wui/general_statistics_menu.h"
 #include "wui/interactive_base.h"
 
@@ -69,6 +73,10 @@ public:
 		playertype_ = pt;
 	}
 
+	void add_wanted_building_window(const Widelands::Coords& coords,
+	                                const Vector2i point,
+	                                bool was_minimal);
+	UI::UniqueWindow* show_building_window(const Widelands::Coords& coords, bool avoid_fastclick);
 	bool try_show_ship_window();
 	bool is_multiplayer() {
 		return multiplayer_;
@@ -94,6 +102,9 @@ protected:
 
 private:
 	void on_buildhelp_changed(const bool value) override;
+	// Building coordinates, window position, whether the window was minimized
+	std::map<uint32_t, std::pair<const Vector2i, bool>> wanted_building_windows_;
+	std::unique_ptr<Notifications::Subscriber<Widelands::NoteBuilding>> buildingnotes_subscriber_;
 };
 
 #endif  // end of include guard: WL_WUI_INTERACTIVE_GAMEBASE_H

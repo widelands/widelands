@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006, 2008-2009 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -97,10 +97,10 @@ GameOptionsMenu::GameOptionsMenu(InteractiveGameBase& gb,
                 g_gr->images().get("images/wui/menus/menu_exit_game.png"),
                 /** TRANSLATORS: Button tooltip */
                 _("Exit Game")) {
-	box_.add(&sound_, UI::Align::kHCenter);
+	box_.add(&sound_);
 	box_.add_space(vgap);
-	box_.add(&save_game_, UI::Align::kHCenter);
-	box_.add(&exit_game_, UI::Align::kHCenter);
+	box_.add(&save_game_);
+	box_.add(&exit_game_);
 	box_.set_size(width, sound_.get_h() + 2 * save_game_.get_h() + vgap + 3 * vspacing);
 	set_inner_size(get_inner_w(), box_.get_h() + 2 * margin);
 

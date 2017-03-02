@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2011-2013 by the Widelands Development Team
+ * Copyright (C) 2011-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -38,7 +38,6 @@
 #include "logic/widelands_geometry_io.h"
 #include "map_io/map_object_loader.h"
 #include "map_io/map_object_saver.h"
-#include "wui/interactive_gamebase.h"
 
 namespace Widelands {
 

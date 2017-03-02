@@ -3,14 +3,14 @@
 # 
 # Translators:
 # Любомир Василев, 2015-2016
-# Любомир Василев, 2016
+# Любомир Василев, 2016-2017
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-01-21 14:22+0000\n"
-"PO-Revision-Date: 2017-01-21 14:24+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2017-01-21 21:10+0000\n"
+"PO-Revision-Date: 2017-01-23 09:51+0000\n"
+"Last-Translator: Любомир Василев\n"
 "Language-Team: Bulgarian (http://www.transifex.com/widelands/widelands/language/bg/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -144,7 +144,7 @@ msgstr "Разбийте варварското племе"
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:98
 msgid "Build a barracks to start training soldiers."
-msgstr ""
+msgstr "Постройте казарма, за да започнете да създавате войници."
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:99
 msgid ""

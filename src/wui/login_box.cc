@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2008, 2010 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -69,7 +69,9 @@ LoginBox::LoginBox(Panel& parent)
 	eb_nickname->focus();
 }
 
-/// called, if "login" is pressed
+/**
+ * called, if "login" is pressed.
+ */
 void LoginBox::clicked_ok() {
 	// Check if all needed input fields are valid
 	if (eb_nickname->text().empty()) {

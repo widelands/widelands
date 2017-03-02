@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2016 by the Widelands Development Team
+ * Copyright (C) 2004-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -70,7 +70,6 @@ struct Statebox : public Panel {
 
 	void handle_mousein(bool inside) override;
 	bool handle_mousepress(uint8_t btn, int32_t x, int32_t y) override;
-	bool handle_mouserelease(uint8_t btn, int32_t x, int32_t y) override;
 	bool handle_mousemove(uint8_t, int32_t, int32_t, int32_t, int32_t) override;
 
 private:
