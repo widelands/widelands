@@ -2466,27 +2466,26 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 
 					prio = bo.primary_priority;
 
-					prio += -20 + 200 / (bo.total_count() + 1);
-
 					if (bo.new_building == BuildingNecessity::kForced) {
-						prio *= 2;
-					} else if (management_data.f_neuron_pool[32].get_result(
-					              bf->trees_nearby > 25, bf->producers_nearby.at(bo.outputs.at(0)) >=
-					                                        bf->supporters_nearby.at(bo.outputs.at(0)),
-					              bo.total_count() >= 2, new_buildings_stop_, true)) {
-						continue;
+						prio += 200;
 					}
+					 //else if (management_data.f_neuron_pool[32].get_result(
+					              //bf->trees_nearby > 25, bf->producers_nearby.at(bo.outputs.at(0)) >=
+					                                        //bf->supporters_nearby.at(bo.outputs.at(0)),
+					              //bo.total_count() >= 2, new_buildings_stop_, true)) {
+						//continue;
+					//}
 
-					prio -= management_data.neuron_pool[57].get_result_safe(
-					           get_stocklevel(bo, gametime) / 2, kAbsValue) /
-					        10;
 
 					// consider cutters and rangers nearby
-					prio -= bf->producers_nearby.at(bo.outputs.at(0)) *
-					        std::abs(management_data.get_military_number_at(25) / 3);
-					prio += bf->supporters_nearby.at(bo.outputs.at(0)) * 5;
+					prio += bf->supporters_nearby.at(bo.outputs.at(0)) * std::abs(management_data.get_military_number_at(25));
+					prio += std::abs(management_data.get_military_number_at(26) / 10) * (bf->trees_nearby - 10);
+					
+					prio -= bf->producers_nearby.at(bo.outputs.at(0)) * 20;
+					        //std::abs(management_data.get_military_number_at(25) / 3);
+					//prio += bf->supporters_nearby.at(bo.outputs.at(0)) * 5;
 
-					prio += std::abs(management_data.get_military_number_at(26) / 10) * bf->trees_nearby;
+					//prio += std::abs(management_data.get_military_number_at(26) / 10) * bf->trees_nearby;
 
 				} else if (bo.need_rocks) {
 
@@ -2572,42 +2571,42 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 						// continue;
 						//}
 
-						if (management_data.f_neuron_pool[3].get_result(
-						       bf->trees_nearby > 25, bf->near_border,
-						       persistent_data->trees_around_cutters >= 50, new_buildings_stop_,
-						       bo.cnt_target > bo.total_count())) {
-							continue;
-						}
+						//if (management_data.f_neuron_pool[3].get_result(
+						       //bf->trees_nearby > 25, bf->near_border,
+						       //persistent_data->trees_around_cutters >= 50, new_buildings_stop_,
+						       //bo.cnt_target > bo.total_count())) {
+							//continue;
+						//}
 
 						prio = 0;
 
-						prio += std::abs(management_data.f_neuron_pool[2].get_result(
-						                    spots_<(4 * bo.total_count()), bo.total_count() <= 1,
-						                           get_stocklevel(bo, gametime) < 2, new_buildings_stop_,
-						                           persistent_data->trees_around_cutters> 40) *
-						                 std::abs(management_data.get_military_number_at(36)) / 2);
+						//prio += std::abs(management_data.f_neuron_pool[2].get_result(
+						                    //spots_<(4 * bo.total_count()), bo.total_count() <= 1,
+						                           //get_stocklevel(bo, gametime) < 2, new_buildings_stop_,
+						                           //persistent_data->trees_around_cutters> 40) *
+						                 //std::abs(management_data.get_military_number_at(36)) / 2);
 
-						prio +=
-						   std::abs(management_data.f_neuron_pool[1].get_result(
-						               gametime < 60 * 60 * 1000, get_stocklevel(bo, gametime) < 2,
-						               persistent_data->trees_around_cutters + 5 < bf->trees_nearby * 10,
-						               bf->near_border, persistent_data->trees_around_cutters) *
-						            management_data.get_military_number_at(37) / 4);
+						//prio +=
+						   //std::abs(management_data.f_neuron_pool[1].get_result(
+						               //gametime < 60 * 60 * 1000, get_stocklevel(bo, gametime) < 2,
+						               //persistent_data->trees_around_cutters + 5 < bf->trees_nearby * 10,
+						               //bf->near_border, persistent_data->trees_around_cutters) *
+						            //management_data.get_military_number_at(37) / 4);
 
 						if (bo.total_count() == 0) {
 							prio += 200;
 						} else {
 							prio +=
-							   std::abs(management_data.get_military_number_at(66) * 4) / bo.total_count();
+							   std::abs(management_data.get_military_number_at(66)) * (bo.cnt_target - bo.total_count());
 						}
-
+						//NOCOM
 						prio -= bf->water_nearby / 5;
 
 						prio += management_data.neuron_pool[67].get_result_safe(
-						           persistent_data->trees_around_cutters / 3, kAbsValue) /
+						           bf->producers_nearby.at(bo.production_hint) * 5, kAbsValue) /
 						        2;
 
-						prio -=
+						prio +=
 						   management_data.neuron_pool[49].get_result_safe(bf->trees_nearby, kAbsValue) /
 						   5;
 
@@ -2706,8 +2705,8 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 						// for now AI builds only one shipyard
 						assert(bo.total_count() == 0);
 						if (bf->open_water_nearby > 3 && seafaring_economy) {
-							printf(" Considering shipyard %d  %d  %d\n", bf->open_water_nearby,
-							       bo.total_count(), bo.unconnected_count);
+							//printf(" Considering shipyard %d  %d  %d\n", bf->open_water_nearby,
+							       //bo.total_count(), bo.unconnected_count);
 							prio += productionsites.size() * 5 + bf->open_water_nearby * 2;
 						} else {
 							continue;
@@ -3806,17 +3805,17 @@ bool DefaultAI::check_productionsites(uint32_t gametime) {
 				   *site.site, queue->get_index(), queue->get_type(), 2);
 			}
 		}
-		printf ("%2d: barracks here, %s, soldier status: %d [0-1-3-6]\n",
-			player_number(),
-			(site.site->is_stopped()) ? "stopped" : "working",
-			static_cast<uint8_t>(soldier_status_));
+		//printf ("%2d: barracks here, %s, soldier status: %d [0-1-3-6]\n",
+			//player_number(),
+			//(site.site->is_stopped()) ? "stopped" : "working",
+			//static_cast<uint8_t>(soldier_status_));
 		
 		// starting the site
 		if (site.site->is_stopped() && 
 			((soldier_status_ == SoldiersStatus::kBadShortage || soldier_status_ == SoldiersStatus::kShortage) ||
 			(soldier_status_ == SoldiersStatus::kEnough && persistent_data->last_soldier_trained < gametime &&
 				persistent_data->last_soldier_trained > gametime - 5 * 60 * 1000))) {
-			printf ("%2d: starting the barracks\n", player_number());
+			//printf ("%2d: starting the barracks\n", player_number());
 			game().send_player_start_stop_building(*site.site);	
 		}
 		//stopping the site
@@ -4257,7 +4256,7 @@ BuildingNecessity DefaultAI::check_warehouse_necessity(BuildingObserver& bo,
 	bo.primary_priority = 1 + (needed_count - numof_warehouses_in_const_ - numof_warehouses_) * std::abs(management_data.get_military_number_at(22) / 5);
 	bo.new_building_overdue += 1;
 	bo.primary_priority += bo.new_building_overdue / std::abs(management_data.get_military_number_at(16) + 1);
-	printf (" %2d %-20s (warehouses now: %d) needed %2d with primary priority %d, overdue %d\n", player_number(), bo.name, numof_warehouses_, needed_count, bo.primary_priority, bo.new_building_overdue);
+	//printf (" %2d %-20s (warehouses now: %d) needed %2d with primary priority %d, overdue %d\n", player_number(), bo.name, numof_warehouses_, needed_count, bo.primary_priority, bo.new_building_overdue);
 	return BuildingNecessity::kAllowed;
 }
 	
@@ -4454,28 +4453,33 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 			bo.max_needed_preciousness = bo.max_preciousness;
 
 			if (bo.total_count() < bo.cnt_target) {
+				bo.primary_priority += 25 - management_data.neuron_pool[57].get_result_safe(
+				       get_stocklevel(bo, gametime) / 3, kAbsValue);
+				bo.primary_priority += 200 / (bo.total_count() + 1);
 				return BuildingNecessity::kNeeded;
 			} else {
 				return BuildingNecessity::kAllowed;
 			}
-		} else if (bo.plants_trees) {
+		} else if (bo.plants_trees) {//NOCOM
 			int32_t value = management_data.neuron_pool[39].get_result_safe(
 			   mines_.size() + productionsites.size() / 2, kAbsValue);
 			value -= management_data.neuron_pool[40].get_result_safe(
 			   persistent_data->trees_around_cutters / 10, kAbsValue);
 			value -= management_data.neuron_pool[41].get_result_safe(
-			   get_stocklevel(bo, gametime) / 5, kAbsValue);
-			value -= management_data.neuron_pool[42].get_result_safe(bo.total_count(), kAbsValue) * 2;
-			value += management_data.neuron_pool[43].get_result_safe(spots_ / 3);
+			   get_stocklevel(bo, gametime) / 4, kAbsValue);
+			value -= management_data.neuron_pool[42].get_result_safe(bo.total_count(), kAbsValue);
+			//value += management_data.neuron_pool[43].get_result_safe(spots_ / 3);
 			value += management_data.get_military_number_at(13);
-			value /= 8;
+			value /= 5;
 			value = std::max(value, -3);
 
 			bo.cnt_target = 5 + value;
-			assert(bo.cnt_target > 1 && bo.cnt_target < 60);
+			assert(bo.cnt_target > 1 && bo.cnt_target < 100);
 
 			// adjusting/decreasing based on cnt_limit_by_aimode
 			bo.cnt_target = limit_cnt_target(bo.cnt_target, bo.cnt_limit_by_aimode);
+
+			//printf ("%2d: rangers now %2d, target: %2d\n", player_number(), bo.total_count(), bo.cnt_target);
 
 			if (wood_policy_ != WoodPolicy::kAllowRangers) {
 				return BuildingNecessity::kForbidden;
@@ -4551,7 +4555,7 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 				return BuildingNecessity::kNeeded;
 			}
 		} else if (bo.max_needed_preciousness > 0) {
-			//NOCOM
+
 			int16_t inputs[2 * f_neuron_bit_size] = {0};
 			inputs[0] = 2 * bo.total_count();
 			inputs[1] = -2 * bo.total_count();
@@ -4637,8 +4641,6 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 					tmp_score += inputs[i+f_neuron_bit_size];
 				}
 			}
-			//NOCOM
-			//printf (" %2d: tmp score: %3d, needed treshold: %3d\n", player_number(), tmp_score, std::abs(management_data.get_military_number_at(73) / 20));
 
 			if (tmp_score > std::abs(management_data.get_military_number_at(73) / 20)) {
 				//printf ("%2d: %-35s needed,  current count = %d, score: %d\n", player_number(), bo.name, bo.total_count(), tmp_score);

@@ -18,7 +18,7 @@
  */
 
 #include "ai/defaultai.h"
-#include "ai/tmp_constants.h" //Import decreasor should be removed
+//#include "ai/tmp_constants.h" //Import decreasor should be removed
 
 using namespace Widelands;
 
@@ -740,6 +740,9 @@ bool DefaultAI::check_militarysites(uint32_t gametime) {
 	usefullness_score -= static_cast<int16_t>(soldier_status_) * std::abs(management_data.get_military_number_at(84));
 	usefullness_score += ((bf.enemy_accessible_) ? (std::abs(management_data.get_military_number_at(91))) / 2 : 0);
 	
+	// Also size is consideration, bigger buildings are to be preffered
+	usefullness_score += (ms->get_size() - 2) * std::abs(management_data.get_military_number_at(77) / 2);
+	
 	const int32_t dism_treshold = 20 - management_data.get_military_number_at(89) * 2 / 3;
 	//const int32_t pref_treshold = dism_treshold + std::abs(management_data.get_military_number_at(90) * 3 / 2);
 	const int32_t pref_treshold_upper = dism_treshold + std::abs(management_data.get_military_number_at(90) * 35 / 20);
@@ -878,9 +881,9 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 	inputs[7] = (msites_in_constr() >  msites_built() / 3) ? -1 : 0;
 	inputs[8] = (soldier_status_ == SoldiersStatus::kBadShortage) ? -2 : 0;
 	inputs[9] = (soldier_status_ == SoldiersStatus::kShortage) ? -1 : 0;
-	inputs[10] = (scores[size - 1] > total_score ) ? -1 : 0;
-	inputs[11] = (scores[size - 1] > total_score / 2) ? -1 : 0;
-	inputs[12] = (scores[size - 1] > total_score / 3) ? -1 : 0;
+	inputs[10] = (scores[size - 1] > total_score ) ? -2 : 0;
+	inputs[11] = (scores[size - 1] > total_score / 2) ? -2 : 0;
+	inputs[12] = (scores[size - 1] > total_score / 3) ? -2 : 0;
 	inputs[13] = (player_statistics.get_enemies_max_land() < player_statistics.get_player_land(pn)) ? -1 : 0;
 	inputs[14] = (mines_per_type[iron_ore_id].total_count() == 0) ? +1 : 0;
 	inputs[15] = (spots_ < kSpotsTooLittle) ? +1 : 0;
@@ -891,9 +894,9 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 	inputs[20] = (scores[size - 1] > total_score / 2) ? -1 : 0;
 	inputs[21] = (msites_in_constr() >  msites_built() / 3) ? -1 : 0;
 	inputs[22] = (scores[size - 1] > total_score / 4) ? -1 : 0;	
-	inputs[23] = (msites_in_constr() < 1) ? +1 : 0;	
-	inputs[24] = (msites_in_constr() < 3) ? +1 : 0;	
-	inputs[25] = (msites_in_constr() < 5) ? +1 : 0;		
+	inputs[23] = (3 - size) * (msites_in_constr() < 1) ? +1 : 0;	
+	inputs[24] = (3 - size) * (msites_in_constr() < 3) ? +1 : 0;	
+	inputs[25] = (3 - size) * (msites_in_constr() < 5) ? +1 : 0;		
 	inputs[26] = (msites_in_constr() < 7) ? +1 : 0;	
 	inputs[27] = +5;
 	inputs[28] = -5;
@@ -907,7 +910,7 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 			final_score += inputs[i];
 		}
 	}
-	final_score += kdecreasor;
+	//final_score += kdecreasor;
 	final_score += std::abs(management_data.get_military_number_at(76) / 10);
 	if (final_score >0) {
 		bo.primary_priority = final_score * std::abs(management_data.get_military_number_at(79) / 2);
