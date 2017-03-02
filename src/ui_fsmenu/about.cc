@@ -36,7 +36,7 @@ FullscreenMenuAbout::FullscreenMenuAbout()
            g_gr->images().get("images/ui_basic/but1.png"),
            UI::TabPanel::Type::kBorder) {
 	title_.set_fontsize(UI_FONT_SIZE_BIG);
-	tabs_.add_tab("txts/README.lua"); // NOCOM crash in About screen
+	tabs_.add_tab("txts/README.lua");
 	tabs_.add_tab("txts/LICENSE.lua");
 	tabs_.add_tab("txts/AUTHORS.lua");
 	tabs_.add_tab("txts/TRANSLATORS.lua");

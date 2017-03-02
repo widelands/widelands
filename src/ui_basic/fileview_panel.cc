@@ -56,7 +56,7 @@ void FileViewPanel::add_tab(const std::string& lua_script) {
 
 	textviews_.push_back(std::unique_ptr<UI::MultilineTextarea>(
 	   new UI::MultilineTextarea(boxes_.at(index).get(), 0, 0, Scrollbar::kSize, 0, content)));
-	add((boost::format("about_%lu") % index).str(), title, boxes_.at(index).get(), "");  // NOCOM crash in About screen
+	add((boost::format("about_%lu") % index).str(), title, boxes_.at(index).get(), "");
 
 	assert(boxes_.size() == textviews_.size());
 	assert(tabs().size() == textviews_.size());
@@ -65,11 +65,14 @@ void FileViewPanel::add_tab(const std::string& lua_script) {
 
 void FileViewPanel::update_tab_size(size_t index) {
 	boxes_.at(index)->set_size(get_inner_w(), get_inner_h());
-	textviews_.at(index)->set_size(contents_width_, contents_height_); // NOCOM crash in About screen
+	textviews_.at(index)->set_size(contents_width_, contents_height_);
 }
 
 void FileViewPanel::layout() {
 	assert(boxes_.size() == textviews_.size());
+	if (get_inner_w() == 0 && get_inner_h() == 0) {
+		return;
+	}
 
 	// If there is a border, we have less space for the contents
 	contents_width_ =
@@ -80,7 +83,7 @@ void FileViewPanel::layout() {
 	                      get_inner_h() - 3 * padding_ - UI::kTabPanelButtonHeight;
 
 	for (size_t i = 0; i < boxes_.size(); ++i) {
-		update_tab_size(i); // NOCOM crash in About screen
+		update_tab_size(i);
 	}
 }
 
