@@ -9,11 +9,11 @@ tips = {
       seconds = 5
    },
    {
-      text = _"Most upgraded buildings needs also an upgraded worker. Do not upgrade a building if you don't have a upgraded worker.",
+      text = _"Most upgraded buildings also need an upgraded worker. Do not upgrade a building unless you have the upgraded workers available.",
       seconds = 7
    },
    {
-      text = _"Empire needs a lot of Marble. Keep looking for marble resources.",
+      text = _"Empire needs a lot of marble. Keep looking for marble resources.",
       seconds = 4
    },
 }

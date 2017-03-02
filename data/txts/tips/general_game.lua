@@ -69,7 +69,7 @@ tips = {
       seconds = 3
    },
    {
-      text = _"If a building is destroyed, workers within will look for a close flag from which they will move by road to a warehouse. If there are no flags connected to a warehouses nearby, they will wander until eventually they die.",
+      text = _"When a building is destroyed, its workers will start looking for a nearby flag from which they can move by road to a connected warehouse. If there are no such flags in the vicinity, they will keep wandering around and eventually die.",
       seconds = 7
    },
 

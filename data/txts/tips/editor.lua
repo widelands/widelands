@@ -29,7 +29,7 @@ tips = {
       seconds = 4
    },
    {
-      text = _"When placing trees, you can look in the help to see which trees are more likely to survive on which terrain.",
+      text = _"When placing trees, use the help button to see which trees are more likely to survive on which terrain.",
       seconds = 6
    },
    {
@@ -37,11 +37,11 @@ tips = {
       seconds = 4
    },
    {
-      text = _"You can place a medium building on any corner where there is a slope no greater than one in the south-east direction and the height of all corners in a radius of 2 is within minus/plus 2 of the selected corner.",
+      text = _"You can place a medium building on any node where there is a slope no greater than 1 in the south-east direction and its height difference to all nodes in a radius of 2 is no greater than 2.",
       seconds = 7
    },
    {
-      text = _"You can place a large building on any corner where you could place a medium building and there are no obstacles/unbuildable terrain in the west, northwest and northeast corners.",
+      text = _"You can place a large building on any node where you could place a medium building if there is no obstacle or unbuildable terrain towards the west, northwest and northeast.",
       seconds = 7
    },
 }
