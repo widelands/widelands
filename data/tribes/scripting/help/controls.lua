@@ -73,6 +73,17 @@ return {
                dl(help_format_hotkey(pgettext("hotkey", "F6")), _"Show the debug console (only in debug-builds)")
          ) ..
 
+         h2(_"Table Control") ..
+         h3(_"In tables that allow the selection of multiple entries, the following key combinations are available:") ..
+         p(
+               -- TRANSLATORS: This is an access key combination. Localize, but do not change the key.
+               dl(help_format_hotkey(pgettext("hotkey", "Ctrl + Click")), pgettext("table_control", "Select multiple entries")) ..
+               -- TRANSLATORS: This is an access key combination. Localize, but do not change the key.
+               dl(help_format_hotkey(pgettext("hotkey", "Shift + Click")), pgettext("table_control", "Select a range of entries")) ..
+               -- TRANSLATORS: This is an access key combination. Localize, but do not change the key.
+               dl(help_format_hotkey(pgettext("hotkey", "Ctrl + A")), pgettext("table_control", "Select all entries"))) ..
+
+         h2(_"Message Window") ..
          h3(_"In the message window, the following additional shortcuts are available:") ..
          p(
                -- TRANSLATORS: This is the helptext for an access key combination.

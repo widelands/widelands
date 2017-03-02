@@ -34,6 +34,7 @@
 #include "economy/request.h"
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
+#include "graphic/text_constants.h"
 #include "io/filesystem/filesystem.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "logic/game.h"
@@ -47,7 +48,6 @@
 #include "logic/map_objects/tribes/worker.h"
 #include "logic/player.h"
 #include "sound/sound_handler.h"
-#include "wui/interactive_player.h"
 
 namespace Widelands {
 
@@ -230,19 +230,12 @@ Implementation
 
 Building::Building(const BuildingDescr& building_descr)
    : PlayerImmovable(building_descr),
-     optionswindow_(nullptr),
      flag_(nullptr),
      anim_(0),
      animstart_(0),
      leave_time_(0),
      defeating_player_(0),
      seeing_(false) {
-}
-
-Building::~Building() {
-	if (optionswindow_) {
-		hide_options();
-	}
 }
 
 void Building::load_finish(EditorGameBase& egbase) {
@@ -395,9 +388,6 @@ void Building::cleanup(EditorGameBase& egbase) {
 	}
 
 	PlayerImmovable::cleanup(egbase);
-
-	for (boost::signals2::connection& c : options_window_connections)
-		c.disconnect();
 }
 
 /*
@@ -442,6 +432,7 @@ applicable.
 ===============
 */
 void Building::destroy(EditorGameBase& egbase) {
+	Notifications::publish(NoteBuilding(serial(), NoteBuilding::Action::kDeleted));
 	const bool fire = burn_on_destroy();
 	const Coords pos = position_;
 	Player* building_owner = get_owner();
@@ -477,7 +468,7 @@ std::string Building::info_string(const InfoStringFormat& format) {
 	return result;
 }
 
-InputQueue& Building::inputqueue(DescriptionIndex const wi, WareWorker const t) {
+InputQueue& Building::inputqueue(DescriptionIndex const wi, WareWorker const) {
 	throw wexception("%s (%u) has no InputQueue for %u", descr().name().c_str(), serial(), wi);
 }
 
@@ -690,14 +681,14 @@ void Building::add_worker(Worker& worker) {
 		}
 	}
 	PlayerImmovable::add_worker(worker);
-	workers_changed();
+	Notifications::publish(NoteBuilding(serial(), NoteBuilding::Action::kWorkersChanged));
 }
 
 void Building::remove_worker(Worker& worker) {
 	PlayerImmovable::remove_worker(worker);
 	if (!get_workers().size())
 		set_seeing(false);
-	workers_changed();
+	Notifications::publish(NoteBuilding(serial(), NoteBuilding::Action::kWorkersChanged));
 }
 
 /**

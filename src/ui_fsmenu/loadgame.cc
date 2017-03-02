@@ -91,7 +91,7 @@ FullscreenMenuLoadGame::FullscreenMenuLoadGame(Widelands::Game& g,
             tablew_,
             tableh_,
             g_gr->images().get("images/ui_basic/but3.png"),
-            true),
+            UI::TableRows::kMultiDescending),
 
      is_replay_(is_replay),
      // Main title
@@ -151,11 +151,11 @@ FullscreenMenuLoadGame::FullscreenMenuLoadGame(Widelands::Game& g,
              g_gr->images().get("images/ui_basic/but0.png"),
              _("Delete")),
 
-     ta_errormessage_(this,
-                      right_column_x_,
-                      get_y_from_preceding(ta_mapname_) + 2 * padding_,
-                      get_right_column_w(right_column_x_),
-                      delete_.get_y() - get_y_from_preceding(ta_mapname_) - 6 * padding_),
+     ta_long_generic_message_(this,
+                              right_column_x_,
+                              get_y_from_preceding(ta_mapname_) + 2 * padding_,
+                              get_right_column_w(right_column_x_),
+                              delete_.get_y() - get_y_from_preceding(ta_mapname_) - 6 * padding_),
 
      minimap_y_(get_y_from_preceding(ta_win_condition_) + 3 * padding_),
      minimap_w_(get_right_column_w(right_column_x_)),
@@ -271,52 +271,104 @@ void FullscreenMenuLoadGame::clicked_delete() {
 	if (!table_.has_selection()) {
 		return;
 	}
-	const SavegameData& gamedata = games_data_[table_.get_selected()];
+	std::set<uint32_t> selections = table_.selections();
+	size_t no_selections = selections.size();
+	std::string message;
+	if (no_selections > 1) {
+		if (is_replay_) {
+			message = (boost::format(ngettext("Do you really want to delete this %d replay?",
+			                                  "Do you really want to delete these %d replays?",
+			                                  no_selections)) %
+			           no_selections)
+			             .str();
+		} else {
+			message = (boost::format(ngettext("Do you really want to delete this %d game?",
+			                                  "Do you really want to delete these %d games?",
+			                                  no_selections)) %
+			           no_selections)
+			             .str();
+		}
+		message = (boost::format("%s\n%s") % message % filename_list_string()).str();
 
-	std::string message =
-	   (boost::format("%s %s\n") % label_mapname_.get_text() % gamedata.mapname).str();
-
-	message = (boost::format("%s %s %s\n") % message % label_win_condition_.get_text() %
-	           gamedata.wincondition)
-	             .str();
-
-	message =
-	   (boost::format("%s %s %s\n") % message % _("Save Date:") % gamedata.savedatestring).str();
-
-	message = (boost::format("%s %s %s\n") % message % label_gametime_.get_text() %
-	           gametimestring(gamedata.gametime))
-	             .str();
-
-	message =
-	   (boost::format("%s %s %s\n\n") % message % label_players_.get_text() % gamedata.nrplayers)
-	      .str();
-
-	message = (boost::format("%s %s %s\n") % message % _("Filename:") % gamedata.filename).str();
-
-	if (is_replay_) {
-		message =
-		   (boost::format("%s\n\n%s") % _("Do you really want to delete this replay?") % message)
-		      .str();
 	} else {
+		const SavegameData& gamedata = games_data_[table_.get_selected()];
+
+		message = (boost::format("%s %s\n") % label_mapname_.get_text() % gamedata.mapname).str();
+
+		message = (boost::format("%s %s %s\n") % message % label_win_condition_.get_text() %
+		           gamedata.wincondition)
+		             .str();
+
 		message =
-		   (boost::format("%s\n\n%s") % _("Do you really want to delete this game?") % message).str();
+		   (boost::format("%s %s %s\n") % message % _("Save Date:") % gamedata.savedatestring).str();
+
+		message = (boost::format("%s %s %s\n") % message % label_gametime_.get_text() %
+		           gametimestring(gamedata.gametime))
+		             .str();
+
+		message =
+		   (boost::format("%s %s %s\n\n") % message % label_players_.get_text() % gamedata.nrplayers)
+		      .str();
+
+		message = (boost::format("%s %s %s\n") % message % _("Filename:") % gamedata.filename).str();
+
+		if (is_replay_) {
+			message =
+			   (boost::format("%s\n\n%s") % _("Do you really want to delete this replay?") % message)
+			      .str();
+		} else {
+			message =
+			   (boost::format("%s\n\n%s") % _("Do you really want to delete this game?") % message)
+			      .str();
+		}
 	}
 
 	UI::WLMessageBox confirmationBox(
-	   this, _("Confirm deleting file"), message, UI::WLMessageBox::MBoxType::kOkCancel);
+	   this, ngettext("Confirm deleting file", "Confirm deleting files", no_selections), message,
+	   UI::WLMessageBox::MBoxType::kOkCancel);
+
 	if (confirmationBox.run<UI::Panel::Returncodes>() == UI::Panel::Returncodes::kOk) {
-		g_fs->fs_unlink(gamedata.filename);
-		if (is_replay_) {
-			g_fs->fs_unlink(gamedata.filename + WLGF_SUFFIX);
+		for (const uint32_t index : selections) {
+			const std::string& deleteme = games_data_[table_.get(table_.get_record(index))].filename;
+			g_fs->fs_unlink(deleteme);
+			if (is_replay_) {
+				g_fs->fs_unlink(deleteme + WLGF_SUFFIX);
+			}
 		}
 		fill_table();
 	}
 }
 
+std::string FullscreenMenuLoadGame::filename_list_string() {
+	std::set<uint32_t> selections = table_.selections();
+	boost::format message;
+	int counter = 0;
+	for (const uint32_t index : selections) {
+		++counter;
+		// TODO(GunChleoc): We can exceed the texture size for the font renderer,
+		// so we have to restrict this for now.
+		if (counter > 50) {
+			message = boost::format("%s\n%s") % message % "...";
+			break;
+		}
+		const SavegameData& gamedata = games_data_[table_.get(table_.get_record(index))];
+
+		if (gamedata.errormessage.empty()) {
+			message =
+			   boost::format("%s\n%s") % message %
+			   /** TRANSLATORS %1% = map name, %2% = save date. */
+			   (boost::format(_("%1%, saved on %2%")) % gamedata.mapname % gamedata.savedatestring);
+		} else {
+			message = boost::format("%s\n%s") % message % gamedata.filename;
+		}
+	}
+	return message.str();
+}
+
 bool FullscreenMenuLoadGame::set_has_selection() {
-	bool has_selection = table_.has_selection();
+	bool has_selection = table_.selections().size() < 2;
 	ok_.set_enabled(has_selection);
-	delete_.set_enabled(has_selection);
+	delete_.set_enabled(table_.has_selection());
 
 	if (!has_selection) {
 		label_mapname_.set_text(std::string());
@@ -344,13 +396,14 @@ bool FullscreenMenuLoadGame::set_has_selection() {
 }
 
 void FullscreenMenuLoadGame::entry_selected() {
+	size_t selections = table_.selections().size();
 	if (set_has_selection()) {
 
 		const SavegameData& gamedata = games_data_[table_.get_selected()];
-		ta_errormessage_.set_text(gamedata.errormessage);
+		ta_long_generic_message_.set_text(gamedata.errormessage);
 
 		if (gamedata.errormessage.empty()) {
-			ta_errormessage_.set_visible(false);
+			ta_long_generic_message_.set_visible(false);
 			ta_mapname_.set_text(gamedata.mapname);
 			ta_gametime_.set_text(gametimestring(gamedata.gametime));
 
@@ -439,9 +492,16 @@ void FullscreenMenuLoadGame::entry_selected() {
 			minimap_icon_.set_no_frame();
 			minimap_image_.reset();
 
-			ta_errormessage_.set_visible(true);
+			ta_long_generic_message_.set_visible(true);
 			ok_.set_enabled(false);
 		}
+	} else if (selections > 1) {
+		label_mapname_.set_text(
+		   (boost::format(ngettext("Selected %d file:", "Selected %d files:", selections)) %
+		    selections)
+		      .str());
+		ta_long_generic_message_.set_visible(true);
+		ta_long_generic_message_.set_text(filename_list_string());
 	}
 }
 
