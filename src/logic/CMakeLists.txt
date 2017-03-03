@@ -248,7 +248,6 @@ wl_library(logic
     scripting_lua_table
     sound
     ui_basic
-    widelands_ball_of_mud
     wui
     wui_mapview_pixelfunctions
 )

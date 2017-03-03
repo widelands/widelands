@@ -25,7 +25,6 @@
 #include "graphic/text_constants.h"
 #include "graphic/text_layout.h"
 #include "ui_basic/mouse_constants.h"
-#include "wlapplication.h"
 
 namespace UI {
 

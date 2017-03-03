@@ -45,7 +45,6 @@
 #include "logic/player.h"
 #include "profile/profile.h"
 #include "scripting/lua_interface.h"
-#include "wlapplication.h"
 #include "wui/edge_overlay_manager.h"
 #include "wui/field_overlay_manager.h"
 #include "wui/game_chat_menu.h"

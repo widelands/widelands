@@ -101,7 +101,6 @@ wl_library(wui_quicknavigation
     quicknavigation.h
   DEPENDS
     base_geometry
-    widelands_ball_of_mud
     wui_mapview
 )
 
@@ -265,7 +264,6 @@ wl_library(wui
     scripting_lua_table
     sound
     ui_basic
-    widelands_ball_of_mud
     wui_chat_ui
     wui_economy_options
     wui_edge_overlay_manager

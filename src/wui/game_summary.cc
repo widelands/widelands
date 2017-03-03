@@ -34,7 +34,6 @@
 #include "ui_basic/table.h"
 #include "ui_basic/textarea.h"
 #include "ui_basic/unique_window.h"
-#include "wlapplication.h"
 #include "wui/interactive_gamebase.h"
 #include "wui/interactive_player.h"
 

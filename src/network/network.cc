@@ -20,7 +20,6 @@
 #include "network/network.h"
 
 #include "base/log.h"
-#include "wlapplication.h"
 
 CmdNetCheckSync::CmdNetCheckSync(uint32_t const dt, SyncCallback* const cb)
    : Command(dt), callback_(cb) {
