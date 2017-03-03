@@ -97,6 +97,7 @@ wl_library(editor
     graphic_surface
     io_filesystem
     logic
+    logic_constants
     logic_widelands_geometry
     map_io
     map_io_map_loader
