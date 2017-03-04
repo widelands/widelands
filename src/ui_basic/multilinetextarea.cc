@@ -79,7 +79,7 @@ void MultilineTextarea::set_text(const std::string& text) {
  * and adjust scrollbar settings accordingly.
  */
 void MultilineTextarea::recompute() {
-	uint32_t height;
+	int height = 0;
 
 	// We wrap the text twice. We need to do this to account for the presence/absence of the
 	// scollbar.
