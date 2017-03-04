@@ -280,6 +280,7 @@ wl_library(graphic_fonthandler
 wl_library(graphic_text_constants
   SRCS
     text_constants.h
+    text_constants.cc
 )
 
 wl_library(graphic_text_layout

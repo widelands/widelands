@@ -37,6 +37,7 @@ wl_library(base_i18n
 wl_library(base_utf8
   SRCS
     utf8.h
+    utf8.cc
 )
 
 wl_library(base_geometry
