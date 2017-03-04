@@ -14,8 +14,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-01-28 21:57+0000\n"
-"PO-Revision-Date: 2017-01-30 13:06+0000\n"
+"POT-Creation-Date: 2017-02-26 10:10+0000\n"
+"PO-Revision-Date: 2017-02-26 12:33+0000\n"
 "Last-Translator: Renaud Bouchard\n"
 "Language-Team: French (http://www.transifex.com/widelands/widelands/language/fr/)\n"
 "MIME-Version: 1.0\n"
@@ -511,8 +511,8 @@ msgstr "Garder un œil sur vos pêcheurs. Lorsque les ressources de poissons son
 #: ../../data/txts/tips/barbarians.lua:8
 msgid ""
 "Always build a ranger’s and a gamekeeper’s hut, so you will not run out of "
-"logs."
-msgstr "Construisez toujours une maison de sylviculteur et de garde-chasse, ainsi vous ne tomberez pas à court de troncs."
+"logs or game."
+msgstr "Construisez toujours une cabane de sylviculteur et de garde-chasse, ainsi vous ne serez pas à cours de bois ou de gibier."
 
 #: ../../data/txts/tips/editor.lua:4
 msgid ""

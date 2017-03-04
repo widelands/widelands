@@ -2,7 +2,8 @@
 # Copyright (C) 2005-2017 Widelands Development Team
 # 
 # Translators:
-# Erdy, 2016
+# Erdoğan Şahin, 2017
+# Erdoğan Şahin, 2016
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
 # Volkan Gezer <volkangezer@gmail.com>, 2015
 # Yusuf boy <ysf.fb.1999@hotmail.com>, 2015
@@ -10,9 +11,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-01-28 21:57+0000\n"
-"PO-Revision-Date: 2017-01-28 21:58+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2017-02-26 10:10+0000\n"
+"PO-Revision-Date: 2017-02-27 15:39+0000\n"
+"Last-Translator: Erdoğan Şahin\n"
 "Language-Team: Turkish (http://www.transifex.com/widelands/widelands/language/tr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -90,7 +91,7 @@ msgstr ""
 
 #: ../../data/txts/README.lua:7
 msgid "Readme"
-msgstr ""
+msgstr "Beni Oku"
 
 #: ../../data/txts/README.lua:12
 msgid "an open source strategy game"
@@ -108,7 +109,7 @@ msgstr ""
 
 #: ../../data/txts/README.lua:18
 msgid "Status"
-msgstr ""
+msgstr "Durum"
 
 #: ../../data/txts/README.lua:19
 msgid ""
@@ -133,7 +134,7 @@ msgstr ""
 #. TRANSLATORS: This is a key on the keyboard
 #: ../../data/txts/README.lua:25
 msgid "F1"
-msgstr ""
+msgstr "F1"
 
 #: ../../data/txts/README.lua:28
 msgid "Reporting Bugs"
@@ -189,19 +190,19 @@ msgstr ""
 
 #: ../../data/txts/TRANSLATORS.lua:25
 msgid "Translators"
-msgstr ""
+msgstr "Tercümanlar"
 
 #: ../../data/txts/TRANSLATORS.lua:27
 msgid "Widelands Translators"
-msgstr ""
+msgstr "Widelands Tercümanları"
 
 #: ../../data/txts/developers.lua:3
 msgid "Atlantean"
-msgstr ""
+msgstr "Atlantisli"
 
 #: ../../data/txts/developers.lua:3
 msgid "Barbarian"
-msgstr ""
+msgstr "Barbar"
 
 #: ../../data/txts/developers.lua:3
 msgid "Campaign Story"
@@ -213,11 +214,11 @@ msgstr ""
 
 #: ../../data/txts/developers.lua:3
 msgid "Coders"
-msgstr ""
+msgstr "Kodlayıcılar"
 
 #: ../../data/txts/developers.lua:3
 msgid "Debian Linux"
-msgstr ""
+msgstr "Debian Linux"
 
 #: ../../data/txts/developers.lua:3
 msgid "Documentation, Help and Wiki"
@@ -233,7 +234,7 @@ msgstr ""
 
 #: ../../data/txts/developers.lua:3
 msgid "Fedora Linux"
-msgstr ""
+msgstr "Fedora Linux"
 
 #: ../../data/txts/developers.lua:3
 msgid "Former Elders"
@@ -241,7 +242,7 @@ msgstr ""
 
 #: ../../data/txts/developers.lua:3
 msgid "FreeBSD"
-msgstr ""
+msgstr "FreeBSD"
 
 #: ../../data/txts/developers.lua:3
 msgid "Graphicians"
@@ -249,7 +250,7 @@ msgstr ""
 
 #: ../../data/txts/developers.lua:3
 msgid "Graphics"
-msgstr ""
+msgstr "Grafikler"
 
 #: ../../data/txts/developers.lua:3
 msgid "Homepage"
@@ -261,11 +262,11 @@ msgstr ""
 
 #: ../../data/txts/developers.lua:3
 msgid "Mac OS X"
-msgstr ""
+msgstr "Mac OS X"
 
 #: ../../data/txts/developers.lua:3
 msgid "Mandriva Linux"
-msgstr ""
+msgstr "Mandriva Linux"
 
 #: ../../data/txts/developers.lua:3
 msgid "Maps and Missions"
@@ -273,11 +274,11 @@ msgstr ""
 
 #: ../../data/txts/developers.lua:3
 msgid "Musicians"
-msgstr ""
+msgstr "Müzisyenler"
 
 #: ../../data/txts/developers.lua:3
 msgid "Other"
-msgstr ""
+msgstr "Diğer"
 
 #: ../../data/txts/developers.lua:3
 msgid "Packagers"
@@ -285,31 +286,31 @@ msgstr ""
 
 #: ../../data/txts/developers.lua:3
 msgid "Sound"
-msgstr ""
+msgstr "Ses"
 
 #: ../../data/txts/developers.lua:3
 msgid "Sound Effects"
-msgstr ""
+msgstr "Ses Efektleri"
 
 #: ../../data/txts/developers.lua:3
 msgid "Tongues"
-msgstr ""
+msgstr "Diller"
 
 #: ../../data/txts/developers.lua:3
 msgid "Translation"
-msgstr ""
+msgstr "Tercüme"
 
 #: ../../data/txts/developers.lua:3
 msgid "Windows"
-msgstr ""
+msgstr "Windows"
 
 #: ../../data/txts/developers.lua:3
 msgid "ZetaOS"
-msgstr ""
+msgstr "ZetaOS"
 
 #: ../../data/txts/help/common_helptexts.lua:10
 msgid "Online Help"
-msgstr ""
+msgstr "Çevrimiçi Yardım"
 
 #: ../../data/txts/help/common_helptexts.lua:11
 #, lua-format
@@ -377,7 +378,7 @@ msgstr ""
 #, lua-format
 msgctxt "hotkey"
 msgid "%s:"
-msgstr ""
+msgstr "%s:"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
@@ -410,7 +411,7 @@ msgstr ""
 
 #: ../../data/txts/help/multiplayer_help.lua:13
 msgid "Client settings"
-msgstr ""
+msgstr "İstemci ayarları"
 
 #: ../../data/txts/help/multiplayer_help.lua:14
 msgid ""
@@ -432,7 +433,7 @@ msgstr ""
 
 #: ../../data/txts/help/multiplayer_help.lua:18
 msgid "Player settings"
-msgstr ""
+msgstr "Oyuncu ayarları"
 
 #: ../../data/txts/help/multiplayer_help.lua:19
 msgid ""
@@ -507,7 +508,7 @@ msgstr ""
 #: ../../data/txts/tips/barbarians.lua:8
 msgid ""
 "Always build a ranger’s and a gamekeeper’s hut, so you will not run out of "
-"logs."
+"logs or game."
 msgstr ""
 
 #: ../../data/txts/tips/editor.lua:4

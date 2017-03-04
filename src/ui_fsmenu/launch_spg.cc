@@ -84,12 +84,12 @@ FullscreenMenuLaunchSPG::FullscreenMenuLaunchSPG(GameSettingsProvider* const set
          _("Start game")),
 
      // Text labels
-     title_(this, get_w() / 2, get_h() / 10, _("Launch Game"), UI::Align::kHCenter),
+     title_(this, get_w() / 2, get_h() / 10, _("Launch Game"), UI::Align::kCenter),
      mapname_(this,
               get_w() * 7 / 10 + butw_ / 2,
               get_h() * 53 / 200 - 15,
               std::string(),
-              UI::Align::kHCenter),
+              UI::Align::kCenter),
      name_(this, get_w() * 1 / 25, get_h() * 53 / 200 - 15, _("Player’s name"), UI::Align::kLeft),
      type_(this,
            // (Element x) + (PlayerDescriptionGroup x)  + border
@@ -116,7 +116,7 @@ FullscreenMenuLaunchSPG::FullscreenMenuLaunchSPG(GameSettingsProvider* const set
                         get_w() * 7 / 10 + (butw_ / 2),
                         get_h() * 7 / 20 + buth_,
                         _("Type of game"),
-                        UI::Align::kHCenter),
+                        UI::Align::kCenter),
 
      // Variables and objects used in the menu
      settings_(settings),

@@ -8,5 +8,9 @@ tips = {
       text = _"Always build a ranger’s and a gamekeeper’s hut, so you will not run out of logs or game.",
       seconds = 5
    },
+   {
+      text = _"Most upgraded buildings also need an upgraded worker. Do not upgrade a building unless you have the upgraded workers available.",
+      seconds = 7
+   },
 }
 return tips

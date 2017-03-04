@@ -61,7 +61,7 @@
 #include "map_io/map_object_loader.h"
 #include "map_io/map_object_saver.h"
 #include "map_io/tribes_legacy_lookup_table.h"
-#include "sound/sound_handler.h"
+#include "sound/note_sound.h"
 
 namespace Widelands {
 
@@ -916,7 +916,7 @@ bool Worker::run_geologist_find(Game& game, State& state, const Action&) {
  * Whether the effect actually gets played is decided only by the sound server.
  */
 bool Worker::run_play_sound(Game& game, State& state, const Action& action) {
-	g_sound_handler.play_fx(action.sparam1, get_position(), action.iparam1);
+	Notifications::publish(NoteSound(action.sparam1, get_position(), action.iparam1));
 
 	++state.ivar1;
 	schedule_act(game, 10);

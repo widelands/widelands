@@ -27,16 +27,16 @@
 #include "logic/map_objects/walkingdir.h"
 #include "notifications/notifications.h"
 #include "ui_basic/button.h"
-#include "ui_basic/window.h"
+#include "ui_basic/unique_window.h"
 #include "wui/interactive_gamebase.h"
 #include "wui/itemwaresdisplay.h"
 
 /**
  * Display information about a ship.
  */
-class ShipWindow : public UI::Window {
+class ShipWindow : public UI::UniqueWindow {
 public:
-	ShipWindow(InteractiveGameBase& igb, Widelands::Ship& ship);
+	ShipWindow(InteractiveGameBase& igb, UI::UniqueWindow::Registry& reg, Widelands::Ship& ship);
 
 private:
 	// Resets the vbox_ and fills it with the currently needed buttons, then positions the window.

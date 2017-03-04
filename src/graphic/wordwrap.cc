@@ -311,15 +311,6 @@ void WordWrap::draw(RenderTarget& dst, Vector2i where, Align align, uint32_t car
 
 	calc_wrapped_pos(caret, caretline, caretpos);
 
-	if ((align & UI::Align::kVertical) != UI::Align::kTop) {
-		uint32_t h = height();
-
-		if ((align & UI::Align::kVertical) == UI::Align::kVCenter)
-			where.y -= (h + 1) / 2;
-		else
-			where.y -= h;
-	}
-
 	++where.y;
 
 	Align alignment = mirror_alignment(align);
@@ -331,13 +322,13 @@ void WordWrap::draw(RenderTarget& dst, Vector2i where, Align align, uint32_t car
 
 		Vector2f point(where.x, where.y);
 
-		if (static_cast<int>(alignment & UI::Align::kRight)) {
+		if (alignment == UI::Align::kRight) {
 			point.x += wrapwidth_ - LINE_MARGIN;
 		}
 
 		const Image* entry_text_im = UI::g_fh1->render(as_editorfont(
 		   lines_[line].text, style_.font->size() - UI::g_fh1->fontset()->size_offset(), style_.fg));
-		UI::correct_for_align(alignment, entry_text_im->width(), fontheight, &point);
+		UI::correct_for_align(alignment, entry_text_im->width(), &point);
 		dst.blit(point, entry_text_im);
 
 		if (draw_caret_ && line == caretline) {
