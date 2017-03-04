@@ -314,7 +314,7 @@ heavy_industry_story = {
 
 barracks_story = {
    {
-      title = _"Jundlina Writes a Letter",
+      title = _"Jundlina Received a Letter",
       body = jundlina(_"Jundlina",
          -- TRANSLATORS: Jundlina
          _([[I have received word that our mining industry started working. Now that we are forging weapons, I will send a letter to Sidolus informing him that it’s time to build a barracks and start recruiting soldiers.]]))
