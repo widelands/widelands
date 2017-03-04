@@ -245,7 +245,7 @@ private:
 	std::unique_ptr<EdgeOverlayManager> edge_overlay_manager_;
 
 	std::unique_ptr<Notifications::Subscriber<GraphicResolutionChanged>>
-		graphic_resolution_changed_subscriber_;
+	   graphic_resolution_changed_subscriber_;
 	std::unique_ptr<Notifications::Subscriber<NoteSound>> sound_subscriber_;
 	Widelands::EditorGameBase& egbase_;
 	uint32_t display_flags_;

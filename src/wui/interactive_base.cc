@@ -117,8 +117,7 @@ InteractiveBase::InteractiveBase(EditorGameBase& the_egbase, Section& global_s)
 	sound_subscriber_ = Notifications::subscribe<NoteSound>([this](const NoteSound& note) {
 		if (note.stereo_position != std::numeric_limits<uint32_t>::max()) {
 			g_sound_handler.play_fx(note.fx, note.stereo_position, note.priority);
-		}
-		else if (note.coords != Widelands::Coords(-1, -1)) {
+		} else if (note.coords != Widelands::Coords(-1, -1)) {
 			g_sound_handler.play_fx(note.fx, stereo_position(note.coords), note.priority);
 		}
 	});

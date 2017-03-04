@@ -65,7 +65,7 @@ SoundHandler g_sound_handler;
  * \sa SoundHandler::init()
 */
 SoundHandler::SoundHandler()
-	: nosound_(false),
+   : nosound_(false),
      lock_audio_disabling_(false),
      disable_music_(false),
      disable_fx_(false),
@@ -291,7 +291,6 @@ void SoundHandler::load_one_fx(const std::string& path, const std::string& fx_na
 		    "failed: %s\n",
 		    path.c_str(), fx_name.c_str(), Mix_GetError());
 }
-
 
 /** Find out whether to actually play a certain effect right now or rather not
  * (to avoid "sonic overload").

@@ -38,6 +38,7 @@ struct ProgressWindow;
 }
 struct FullscreenMenuLaunchGame;
 class InteractiveBase;
+class InteractiveGameBase;  // TODO(GunChleoc): Get rid
 
 namespace Widelands {
 

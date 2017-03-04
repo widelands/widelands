@@ -30,7 +30,6 @@
 #include <unistd.h>
 #endif
 
-
 #include "random/random.h"
 #include "sound/fxset.h"
 

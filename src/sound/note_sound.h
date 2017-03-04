@@ -34,10 +34,16 @@ struct NoteSound {
 	const uint32_t stereo_position;
 
 	NoteSound(const std::string& init_fx, Widelands::Coords init_coords, uint8_t init_priority)
-		: fx(init_fx), coords(init_coords), priority(init_priority), stereo_position(std::numeric_limits<uint32_t>::max()) {
+	   : fx(init_fx),
+	     coords(init_coords),
+	     priority(init_priority),
+	     stereo_position(std::numeric_limits<uint32_t>::max()) {
 	}
 	NoteSound(const std::string& init_fx, uint32_t init_stereo_position, uint8_t init_priority)
-		: fx(init_fx), coords(Widelands::Coords(-1, -1)), priority(init_priority), stereo_position(init_stereo_position) {
+	   : fx(init_fx),
+	     coords(Widelands::Coords(-1, -1)),
+	     priority(init_priority),
+	     stereo_position(init_stereo_position) {
 	}
 };
 
