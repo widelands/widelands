@@ -1,6 +1,7 @@
 wl_library(note_sound
   SRCS
     note_sound.h
+    note_sound.cc
   DEPENDS
     logic_widelands_geometry
     notifications

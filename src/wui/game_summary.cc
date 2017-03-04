@@ -208,6 +208,7 @@ void GameSummaryScreen::fill_data() {
 	if (!players_status.empty()) {
 		players_table_->select(current_player_position);
 	}
+	players_table_->layout();
 }
 
 void GameSummaryScreen::continue_clicked() {
