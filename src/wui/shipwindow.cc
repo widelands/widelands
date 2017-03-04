@@ -120,6 +120,7 @@ ShipWindow::ShipWindow(InteractiveGameBase& igb, UniqueWindow::Registry& reg, Sh
 	vbox_.add(&navigation_box_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 	navigation_box_height_ = navigation_box_.get_h();
 	navigation_box_.set_visible(false);
+	navigation_box_.set_desired_size(navigation_box_.get_w(), 0);
 
 	// Bottom buttons
 	UI::Box* buttons = new UI::Box(&vbox_, 0, 0, UI::Box::Horizontal);
@@ -169,8 +170,10 @@ ShipWindow::ShipWindow(InteractiveGameBase& igb, UniqueWindow::Registry& reg, Sh
 			   }
 		   }
 		});
-}
 
+		// Do the layout at once
+		think();
+}
 
 void ShipWindow::think() {
 	UI::Window::think();
