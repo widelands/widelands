@@ -76,4 +76,5 @@ void MapTable::fill(const std::vector<MapData>& entries, MapData::DisplayType ty
 		}
 	}
 	sort();
+	layout();
 }
