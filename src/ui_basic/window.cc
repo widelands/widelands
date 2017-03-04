@@ -128,7 +128,7 @@ void Window::set_center_panel(Panel* panel) {
  */
 void Window::update_desired_size() {
 	if (center_panel_ && !is_minimal_) {
-		int innerw, innerh;
+		int innerw, innerh = 0;
 		center_panel_->get_desired_size(&innerw, &innerh);
 		set_desired_size(
 		   innerw + get_lborder() + get_rborder(), innerh + get_tborder() + get_bborder());

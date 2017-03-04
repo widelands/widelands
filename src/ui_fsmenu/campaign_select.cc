@@ -358,6 +358,7 @@ FullscreenMenuCampaignMapSelect::FullscreenMenuCampaignMapSelect(bool is_tutoria
 
 void FullscreenMenuCampaignMapSelect::layout() {
 	// TODO(GunChleoc): Implement when we have box layout for the details.
+	table_.layout();
 }
 
 std::string FullscreenMenuCampaignMapSelect::get_map() {

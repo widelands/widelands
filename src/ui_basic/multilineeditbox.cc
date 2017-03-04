@@ -304,7 +304,7 @@ bool MultilineEditbox::handle_key(bool const down, SDL_Keysym const code) {
 			if (d_->cursor_pos < d_->text.size()) {
 				d_->refresh_ww();
 
-				uint32_t cursorline, cursorpos;
+				uint32_t cursorline, cursorpos = 0;
 				d_->ww.calc_wrapped_pos(d_->cursor_pos, cursorline, cursorpos);
 
 				if (cursorline + 1 < d_->ww.nrlines()) {
@@ -333,7 +333,7 @@ bool MultilineEditbox::handle_key(bool const down, SDL_Keysym const code) {
 			if (d_->cursor_pos > 0) {
 				d_->refresh_ww();
 
-				uint32_t cursorline, cursorpos;
+				uint32_t cursorline, cursorpos = 0;
 				d_->ww.calc_wrapped_pos(d_->cursor_pos, cursorline, cursorpos);
 
 				if (cursorline > 0) {
@@ -362,7 +362,7 @@ bool MultilineEditbox::handle_key(bool const down, SDL_Keysym const code) {
 			} else {
 				d_->refresh_ww();
 
-				uint32_t cursorline, cursorpos;
+				uint32_t cursorline, cursorpos = 0;
 				d_->ww.calc_wrapped_pos(d_->cursor_pos, cursorline, cursorpos);
 
 				d_->set_cursor_pos(d_->ww.line_offset(cursorline));
@@ -380,7 +380,7 @@ bool MultilineEditbox::handle_key(bool const down, SDL_Keysym const code) {
 			} else {
 				d_->refresh_ww();
 
-				uint32_t cursorline, cursorpos;
+				uint32_t cursorline, cursorpos = 0;
 				d_->ww.calc_wrapped_pos(d_->cursor_pos, cursorline, cursorpos);
 
 				if (cursorline + 1 < d_->ww.nrlines())
@@ -489,7 +489,7 @@ void MultilineEditbox::Data::set_cursor_pos(uint32_t newpos) {
 void MultilineEditbox::Data::scroll_cursor_into_view() {
 	refresh_ww();
 
-	uint32_t cursorline, cursorpos;
+	uint32_t cursorline, cursorpos = 0;
 	ww.calc_wrapped_pos(cursor_pos, cursorline, cursorpos);
 
 	int32_t top = cursorline * lineheight;
