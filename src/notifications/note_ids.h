@@ -39,7 +39,8 @@ enum class NoteId : uint32_t {
 	Building,
 	Economy,
 	GraphicResolutionChanged,
-	NoteExpeditionCanceled
+	NoteExpeditionCanceled,
+	Sound
 };
 
 #endif  // end of include guard: WL_NOTIFICATIONS_NOTE_IDS_H

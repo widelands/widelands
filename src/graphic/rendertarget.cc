@@ -330,12 +330,6 @@ void RenderTarget::do_blit_animation(const Vector2f& dst,
 			animation.blit(time, srcrc, dstrc, player_color, surface_);
 		}
 	}
-
-	// Look if there is a sound effect registered for this frame and trigger the
-	// effect (see SoundHandler::stereo_position).
-	// TODO(sirver): Playing a sound effect in here is rather silly. What if
-	// this animation is used in the menus?
-	animation.trigger_sound(time, 128);
 }
 
 /**

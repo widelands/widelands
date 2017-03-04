@@ -14,9 +14,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-02-19 19:34+0000\n"
-"PO-Revision-Date: 2017-02-19 19:36+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2017-02-26 10:10+0000\n"
+"PO-Revision-Date: 2017-02-26 12:33+0000\n"
+"Last-Translator: Renaud Bouchard\n"
 "Language-Team: French (http://www.transifex.com/widelands/widelands/language/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -406,7 +406,7 @@ msgid ""
 "The Barbarian ax workshop is the intermediate production site in a series of"
 " three buildings. It is enhanced from the metal workshop but doesn’t require"
 " additional qualification for the worker."
-msgstr ""
+msgstr "La fabrique de hache barbare est un site de production intermédiaire dans une série de trois constructions. C'est une amélioration de la forge mais ne demande aucune qualification additionnelle de l' ouvrier."
 
 #: ../../data/tribes/buildings/productionsites/barbarians/ax_workshop/helptexts.lua:23
 #: ../../data/tribes/buildings/productionsites/barbarians/bakery/helptexts.lua:26
@@ -1958,27 +1958,27 @@ msgstr "Foyer"
 #: ../../data/tribes/scripting/help/controls.lua:59
 msgctxt "hotkey"
 msgid "Ctrl + 1-9"
-msgstr ""
+msgstr "Ctrl + 1-9"
 
 #: ../../data/tribes/scripting/help/controls.lua:59
 msgid "Remember current location"
-msgstr ""
+msgstr "Se souvenir de l'endroit actuel"
 
 #: ../../data/tribes/scripting/help/controls.lua:60
 msgctxt "hotkey"
 msgid "1-9"
-msgstr ""
+msgstr "1-9"
 
 #: ../../data/tribes/scripting/help/controls.lua:60
 msgid "Go to previously remembered location"
-msgstr ""
+msgstr "Aller à l'emplacement mémorisé précédemment "
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
 #: ../../data/tribes/scripting/help/controls.lua:62
 msgctxt "hotkey"
 msgid "Ctrl + +"
-msgstr ""
+msgstr "Ctrl + +"
 
 #: ../../data/tribes/scripting/help/controls.lua:62
 msgid "Increase zoom"
@@ -1989,7 +1989,7 @@ msgstr "Augmenter le zoom"
 #: ../../data/tribes/scripting/help/controls.lua:64
 msgctxt "hotkey"
 msgid "Ctrl + -"
-msgstr ""
+msgstr "Ctrl + -"
 
 #: ../../data/tribes/scripting/help/controls.lua:64
 msgid "Decrease zoom"
@@ -2000,7 +2000,7 @@ msgstr "Réduire le zoom"
 #: ../../data/tribes/scripting/help/controls.lua:66
 msgctxt "hotkey"
 msgid "Ctrl + 0"
-msgstr ""
+msgstr "Ctrl + 0"
 
 #: ../../data/tribes/scripting/help/controls.lua:66
 msgid "Reset zoom"
@@ -3582,7 +3582,7 @@ msgstr "Travaille au plus profond des mines pour obtenir du charbon, du fer, de 
 #: ../../data/tribes/workers/atlanteans/recruit/helptexts.lua:3
 msgctxt "atlanteans_worker"
 msgid "Eager to become a soldier and defend his tribe!"
-msgstr ""
+msgstr "Impatient de devenir un soldat et défendre sa tribu !"
 
 #. TRANSLATORS: Helptext for a worker: Sawyer
 #: ../../data/tribes/workers/atlanteans/sawyer/helptexts.lua:3
@@ -3655,7 +3655,7 @@ msgstr "Produit des armes pour les soldats."
 #: ../../data/tribes/workers/atlanteans/weaver/helptexts.lua:3
 msgctxt "atlanteans_worker"
 msgid "Produces spidercloth for buildings, ships and soldiers."
-msgstr ""
+msgstr "Produit de l' étoffe de soie d'araignée pour les bâtiments, les bateaux et les soldats."
 
 #. TRANSLATORS: Helptext for a worker: Woodcutter
 #: ../../data/tribes/workers/atlanteans/woodcutter/helptexts.lua:3
@@ -3803,7 +3803,7 @@ msgstr "Plante des arbres."
 #: ../../data/tribes/workers/barbarians/recruit/helptexts.lua:3
 msgctxt "barbarians_worker"
 msgid "Eager to become a soldier and defend his tribe!"
-msgstr ""
+msgstr "Impatient de devenir un soldat et défendre sa tribu !"
 
 #. TRANSLATORS: Helptext for a worker: Scout
 #: ../../data/tribes/workers/barbarians/scout/helptexts.lua:3
@@ -3972,7 +3972,7 @@ msgstr "Élève des cochons."
 #: ../../data/tribes/workers/empire/recruit/helptexts.lua:3
 msgctxt "empire_worker"
 msgid "Eager to become a soldier and defend his tribe!"
-msgstr ""
+msgstr "Impatient de devenir un soldat et défendre sa tribu !"
 
 #. TRANSLATORS: Helptext for a worker: Scout
 #: ../../data/tribes/workers/empire/scout/helptexts.lua:3

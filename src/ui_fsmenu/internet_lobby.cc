@@ -153,6 +153,7 @@ FullscreenMenuInternetLobby::FullscreenMenuInternetLobby(char const* const nick,
 
 void FullscreenMenuInternetLobby::layout() {
 	// TODO(GunChleoc): Box layout and then implement
+	clientsonline_list_.layout();
 }
 
 /// think function of the UI (main loop)
