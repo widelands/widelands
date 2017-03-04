@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2012 by the Widelands Development Team
+ * Copyright (C) 2012-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -38,7 +38,8 @@ const std::string& InternetGamingMessages::get_message(const std::string& code) 
 /// locales
 /// are loaded.
 void InternetGamingMessages::fill_map() {
-	// messages from metaserver to client
+	// Messages from the metaserver (https://github.com/widelands/widelands_metaserver) to the
+	// clients.
 	igmessages["NO_SUCH_USER"] = _("There is no user with the name %s logged in!");
 	igmessages["WRONG_PASSWORD"] = _("The sent password was incorrect!");
 	igmessages["UNSUPPORTED_PROTOCOL"] = _("The protocol version you are using is not supported!");
@@ -46,12 +47,10 @@ void InternetGamingMessages::fill_map() {
 	igmessages["DEFICIENT_PERMISSION"] =
 	   _("You got disconnected, as you sent a superuser command without superuser permission. "
 	     "This incident will be logged and reported to the administrator.");
-	igmessages["RESTARTING"] = _("You got disconnected, as the metaserver is currently restarting.");
-	// messages from client to metaserver
+	// Messages from the clients to the metaserver
 	igmessages["CONNECTION_CLOSED"] = _("Connection was closed by the client normally.");
 	igmessages["CONNECTION_LOST"] = _("The connection to the metaserver was lost.");
 	igmessages["NO_ANSWER"] = _("Metaserver did not answer");
-	igmessages["GAME_NOT_CONNECTABLE"] = _("Your game can’t be connected to from the internet");
 	igmessages["CLIENT_TIMEOUT"] =
 	   _("You got disconnected from the metaserver, as you did not answer a PING request in time.");
 	igmessages["GAME_TIMEOUT"] =

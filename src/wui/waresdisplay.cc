@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2003-2016 by the Widelands Development Team
+ * Copyright (C) 2003-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -426,12 +426,12 @@ std::string waremap_to_richtext(const Widelands::TribeDescr& tribe,
 	for (i = order.begin(); i != order.end(); ++i)
 		for (j = i->begin(); j != i->end(); ++j)
 			if ((c = map.find(*j)) != map.end()) {
-				ret += "<sub width=30 padding=2><p align=center>"
-				       "<sub width=26 background=454545><p align=center><img src=\"" +
+				ret += "<div width=30 padding=2><p align=center>"
+				       "<div width=26 background=454545><p align=center><img src=\"" +
 				       tribe.get_ware_descr(c->first)->icon_filename() +
-				       "\"></p></sub><sub width=26 background=000000><p><font size=9>" +
+				       "\"></p></div><div width=26 background=000000><p><font size=9>" +
 				       boost::lexical_cast<std::string>(static_cast<int32_t>(c->second)) +
-				       "</font></p></sub></p></sub>";
+				       "</font></p></div></p></div>";
 			}
 	return ret;
 }

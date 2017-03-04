@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2013 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -65,13 +65,13 @@ public:
 	void blit(const Vector2f& dst,
 	          const Image* image,
 	          BlendMode blend_mode = BlendMode::UseAlpha,
-	          UI::Align = UI::Align::kTopLeft);
+	          UI::Align = UI::Align::kLeft);
 
 	// Like blit. See MonochromeBlitProgram for details.
 	void blit_monochrome(const Vector2f& dst,
 	                     const Image* image,
 	                     const RGBAColor& blend_mode,
-	                     UI::Align = UI::Align::kTopLeft);
+	                     UI::Align = UI::Align::kLeft);
 
 	void blitrect(const Vector2f& dst,
 	              const Image* image,

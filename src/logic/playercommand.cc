@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004, 2007-2011, 2013 by the Widelands Development Team
+ * Copyright (C) 2004-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -1309,7 +1309,7 @@ CmdSetWorkerTargetQuantity::CmdSetWorkerTargetQuantity(const uint32_t init_dueti
 
 void CmdSetWorkerTargetQuantity::execute(Game& game) {
 	Player& player = game.player(sender());
-	if (economy() < player.get_nr_economies() && game.tribes().ware_exists(ware_type())) {
+	if (economy() < player.get_nr_economies() && game.tribes().worker_exists(ware_type())) {
 		player.get_economy_by_number(economy())->set_worker_target_quantity(
 		   ware_type(), permanent_, duetime());
 	}

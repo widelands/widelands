@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2007-2009 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -133,8 +133,6 @@ public:
 
 protected:
 	void conquer_area(EditorGameBase&);
-
-	void create_options_window(InteractiveGameBase&, UI::Window*& registry) override;
 
 private:
 	void update_statistics_string(std::string*) override;

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2010, 2012 by Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -95,7 +95,7 @@ FullscreenMenuOptions::FullscreenMenuOptions(OptionsCtrl::OptionsStruct opt)
      padding_(10),
 
      // Title
-     title_(this, 0, 0, _("Options"), UI::Align::kHCenter),
+     title_(this, 0, 0, _("Options"), UI::Align::kCenter),
 
      // Buttons
      button_box_(this, 0, 0, UI::Box::Horizontal),
@@ -136,13 +136,13 @@ FullscreenMenuOptions::FullscreenMenuOptions(OptionsCtrl::OptionsStruct opt)
      language_dropdown_(&box_interface_,
                         0,
                         0,
-								100,  // 100 is arbitrary, will be resized in layout().
+                        100,  // 100 is arbitrary, will be resized in layout().
                         100,  // 100 is arbitrary, will be resized in layout().
                         _("Language")),
      resolution_dropdown_(&box_interface_,
                           0,
                           0,
-								  100,  // 100 is arbitrary, will be resized in layout().
+                          100,  // 100 is arbitrary, will be resized in layout().
                           100,  // 100 is arbitrary, will be resized in layout().
                           _("In-game resolution")),
 
@@ -236,11 +236,11 @@ FullscreenMenuOptions::FullscreenMenuOptions(OptionsCtrl::OptionsStruct opt)
 	title_.set_fontsize(UI_FONT_SIZE_BIG);
 
 	// Buttons
-	button_box_.add(UI::g_fh1->fontset()->is_rtl() ? &ok_ : &cancel_, UI::Align::kHCenter);
+	button_box_.add(UI::g_fh1->fontset()->is_rtl() ? &ok_ : &cancel_);
 	button_box_.add_inf_space();
-	button_box_.add(&apply_, UI::Align::kHCenter);
+	button_box_.add(&apply_);
 	button_box_.add_inf_space();
-	button_box_.add(UI::g_fh1->fontset()->is_rtl() ? &cancel_ : &ok_, UI::Align::kHCenter);
+	button_box_.add(UI::g_fh1->fontset()->is_rtl() ? &cancel_ : &ok_);
 
 	// Tabs
 	tabs_.add("options_interface", _("Interface"), &box_interface_, "");
@@ -261,34 +261,34 @@ FullscreenMenuOptions::FullscreenMenuOptions(OptionsCtrl::OptionsStruct opt)
 	box_game_.set_size(tabs_.get_inner_w(), tabs_.get_inner_h());
 
 	// Interface
-	box_interface_.add(&language_dropdown_, UI::Align::kLeft);
-	box_interface_.add(&resolution_dropdown_, UI::Align::kLeft);
-	box_interface_.add(&fullscreen_, UI::Align::kLeft);
-	box_interface_.add(&inputgrab_, UI::Align::kLeft);
-	box_interface_.add(&sb_maxfps_, UI::Align::kLeft);
+	box_interface_.add(&language_dropdown_);
+	box_interface_.add(&resolution_dropdown_);
+	box_interface_.add(&fullscreen_);
+	box_interface_.add(&inputgrab_);
+	box_interface_.add(&sb_maxfps_);
 
 	// Windows
-	box_windows_.add(&snap_win_overlap_only_, UI::Align::kLeft);
-	box_windows_.add(&dock_windows_to_edges_, UI::Align::kLeft);
-	box_windows_.add(&sb_dis_panel_, UI::Align::kLeft);
-	box_windows_.add(&sb_dis_border_, UI::Align::kLeft);
+	box_windows_.add(&snap_win_overlap_only_);
+	box_windows_.add(&dock_windows_to_edges_);
+	box_windows_.add(&sb_dis_panel_);
+	box_windows_.add(&sb_dis_border_);
 
 	// Sound
-	box_sound_.add(&music_, UI::Align::kLeft);
-	box_sound_.add(&fx_, UI::Align::kLeft);
-	box_sound_.add(&message_sound_, UI::Align::kLeft);
+	box_sound_.add(&music_);
+	box_sound_.add(&fx_);
+	box_sound_.add(&message_sound_);
 
 	// Saving
-	box_saving_.add(&sb_autosave_, UI::Align::kLeft);
-	box_saving_.add(&sb_rolling_autosave_, UI::Align::kLeft);
-	box_saving_.add(&zip_, UI::Align::kLeft);
-	box_saving_.add(&write_syncstreams_, UI::Align::kLeft);
+	box_saving_.add(&sb_autosave_);
+	box_saving_.add(&sb_rolling_autosave_);
+	box_saving_.add(&zip_);
+	box_saving_.add(&write_syncstreams_);
 
 	// Game
-	box_game_.add(&auto_roadbuild_mode_, UI::Align::kLeft);
-	box_game_.add(&show_workarea_preview_, UI::Align::kLeft);
-	box_game_.add(&transparent_chat_, UI::Align::kLeft);
-	box_game_.add(&single_watchwin_, UI::Align::kLeft);
+	box_game_.add(&auto_roadbuild_mode_);
+	box_game_.add(&show_workarea_preview_);
+	box_game_.add(&transparent_chat_);
+	box_game_.add(&single_watchwin_);
 
 	// Bind actions
 	cancel_.sigclicked.connect(boost::bind(&FullscreenMenuOptions::clicked_back, this));

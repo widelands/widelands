@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2016 by the Widelands Development Team
+ * Copyright (C) 2006-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -219,7 +219,7 @@ int LuaEditorGameBase::get_tribe_description(lua_State* L) {
 	}
 	EditorGameBase& egbase = get_egbase(L);
 	const std::string tribe_name = luaL_checkstring(L, 2);
-	if (!egbase.tribes().tribe_exists(tribe_name)) {
+	if (!Widelands::tribe_exists(tribe_name)) {
 		report_error(L, "Tribe %s does not exist", tribe_name.c_str());
 	}
 	const TribeDescr* descr =

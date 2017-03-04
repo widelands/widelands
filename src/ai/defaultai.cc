@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004, 2006-2010, 2012, 2016 by the Widelands Development Team
+ * Copyright (C) 2004-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -3222,7 +3222,8 @@ bool DefaultAI::check_productionsites(uint32_t gametime) {
 
 			// reducing input queues
 			for (auto& queue : site.site->inputqueues()) {
-				game().send_player_set_input_max_fill(*site.site, queue->get_index(), queue->get_type(), 0);
+				game().send_player_set_input_max_fill(
+				   *site.site, queue->get_index(), queue->get_type(), 0);
 			}
 			site.bo->construction_decision_time = gametime;
 			en_bo.construction_decision_time = gametime;

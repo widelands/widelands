@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2016 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -45,7 +45,7 @@ FullscreenMenuCampaignSelect::FullscreenMenuCampaignSelect()
      table_(this, tablex_, tabley_, tablew_, tableh_),
 
      // Main Title
-     title_(this, get_w() / 2, tabley_ / 3, _("Choose a campaign"), UI::Align::kHCenter),
+     title_(this, get_w() / 2, tabley_ / 3, _("Choose a campaign"), UI::Align::kCenter),
 
      // Campaign description
      label_campname_(this, right_column_x_, tabley_, "", UI::Align::kLeft),
@@ -267,7 +267,8 @@ bool FullscreenMenuCampaignSelect::compare_difficulty(uint32_t rowa, uint32_t ro
  */
 
 /**
- * CampaignMapSelect UI
+ * CampaignMapSelect UI.
+ *
  * Loads a list of all visible maps of selected campaign and let's the user
  * choose one.
  */
@@ -280,14 +281,14 @@ FullscreenMenuCampaignMapSelect::FullscreenMenuCampaignMapSelect(bool is_tutoria
             get_w() / 2,
             tabley_ / 3,
             is_tutorial ? _("Choose a tutorial") : _("Choose a scenario"),
-            UI::Align::kHCenter),
+            UI::Align::kCenter),
      subtitle_(this,
                get_w() / 6,
                get_y_from_preceding(title_) + 6 * padding_,
                get_w() * 2 / 3,
                4 * label_height_,
                "",
-               UI::Align::kHCenter),
+               UI::Align::kCenter),
 
      // Map description
      label_mapname_(this, right_column_x_, tabley_, "", UI::Align::kLeft),

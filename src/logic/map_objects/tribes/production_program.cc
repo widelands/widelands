@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2013 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -51,6 +51,7 @@
 #include "logic/mapregion.h"
 #include "logic/message_queue.h"
 #include "logic/player.h"
+#include "sound/note_sound.h"
 #include "sound/sound_handler.h"
 
 namespace Widelands {
@@ -357,7 +358,8 @@ bool ProductionProgram::ActReturn::SiteHas::evaluate(const ProductionSite& ps) c
 	uint8_t count = group.second;
 	for (InputQueue* ip_queue : ps.inputqueues()) {
 		for (const auto& input_type : group.first) {
-			if (input_type.first == ip_queue->get_index() && input_type.second == ip_queue->get_type()) {
+			if (input_type.first == ip_queue->get_index() &&
+			    input_type.second == ip_queue->get_type()) {
 				uint8_t const filled = ip_queue->get_filled();
 				if (count <= filled)
 					return true;
@@ -1429,7 +1431,7 @@ ProductionProgram::ActPlaySound::ActPlaySound(char* parameters) {
 }
 
 void ProductionProgram::ActPlaySound::execute(Game& game, ProductionSite& ps) const {
-	g_sound_handler.play_fx(name, ps.position_, priority);
+	Notifications::publish(NoteSound(name, ps.position_, priority));
 	return ps.program_step(game);
 }
 
@@ -1501,7 +1503,8 @@ void ProductionProgram::ActConstruct::execute(Game& game, ProductionSite& psite)
 	std::vector<Coords> fields;
 	Map& map = game.map();
 	FindNodeAnd fna;
-	fna.add(FindNodeShore());
+	// 10 is custom value to make sure the "water" is at least 10 nodes big
+	fna.add(FindNodeShore(10));
 	fna.add(FindNodeImmovableSize(FindNodeImmovableSize::sizeNone));
 	if (map.find_reachable_fields(area, &fields, cstep, fna)) {
 		// Testing received fields to get one with less immovables nearby

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2012, 2015 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -62,7 +62,6 @@
 #include "network/network.h"
 #include "scripting/logic.h"
 #include "scripting/lua_table.h"
-#include "sound/sound_handler.h"
 #include "ui_basic/progresswindow.h"
 #include "wlapplication.h"
 #include "wui/game_tips.h"

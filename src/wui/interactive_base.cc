@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2011, 2015 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -114,6 +114,13 @@ InteractiveBase::InteractiveBase(EditorGameBase& the_egbase, Section& global_s)
 		   resize_chat_overlay();
 		   adjust_toolbar_position();
 		});
+	sound_subscriber_ = Notifications::subscribe<NoteSound>([this](const NoteSound& note) {
+		if (note.stereo_position != std::numeric_limits<uint32_t>::max()) {
+			g_sound_handler.play_fx(note.fx, note.stereo_position, note.priority);
+		} else if (note.coords != Widelands::Coords(-1, -1)) {
+			g_sound_handler.play_fx(note.fx, stereo_position(note.coords), note.priority);
+		}
+	});
 
 	toolbar_.set_layout_toplevel(true);
 	changeview.connect([this] { mainview_move(); });
@@ -229,7 +236,7 @@ UI::Button* InteractiveBase::add_toolbar_button(const std::string& image_basenam
 	UI::Button* button = new UI::Button(
 	   &toolbar_, name, 0, 0, 34U, 34U, g_gr->images().get("images/ui_basic/but2.png"),
 	   g_gr->images().get("images/" + image_basename + ".png"), tooltip_text);
-	toolbar_.add(button, UI::Align::kLeft);
+	toolbar_.add(button);
 	if (window) {
 		window->assign_toggle_button(button);
 		registries_.push_back(*window);
@@ -352,7 +359,7 @@ void InteractiveBase::draw_overlay(RenderTarget& dst) {
 			const std::string gametime(gametimestring(egbase().get_gametime(), true));
 			const std::string gametime_text = as_condensed(gametime);
 			dst.blit(Vector2f(5, 5), UI::g_fh1->render(gametime_text), BlendMode::UseAlpha,
-			         UI::Align::kTopLeft);
+			         UI::Align::kLeft);
 
 			static boost::format node_format("(%i, %i)");
 			node_text = as_condensed((node_format % sel_.pos.node.x % sel_.pos.node.y).str());
@@ -362,8 +369,10 @@ void InteractiveBase::draw_overlay(RenderTarget& dst) {
 			node_text = as_condensed((node_format % sel_.pos.node.x % sel_.pos.node.y % height).str());
 		}
 
-		dst.blit(Vector2f(get_w() - 5, get_h() - 5), UI::g_fh1->render(node_text),
-		         BlendMode::UseAlpha, UI::Align::kBottomRight);
+		const Image* rendered_text = UI::g_fh1->render(node_text);
+
+		dst.blit(Vector2f(get_w() - 5, get_h() - rendered_text->height() - 5), rendered_text,
+		         BlendMode::UseAlpha, UI::Align::kRight);
 	}
 
 	// Blit FPS when playing a game in debug mode.
@@ -610,6 +619,27 @@ void InteractiveBase::log_message(const std::string& message) const {
 	lm.msg = message;
 	lm.time = time(nullptr);
 	Notifications::publish(lm);
+}
+
+/** Calculate  the position of an effect in relation to the visible part of the
+ * screen.
+ * \param position  where the event happened (map coordinates)
+ * \return position in widelands' game window: left=0, right=254, not in
+ * viewport = -1
+ * \note This function can also be used to check whether a logical coordinate is
+ * visible at all
+*/
+int32_t InteractiveBase::stereo_position(Widelands::Coords const position_map) {
+	assert(position_map);
+
+	// Viewpoint is the point of the map in pixel which is shown in the upper
+	// left corner of window or fullscreen
+	const MapView::ViewArea area = view_area();
+	if (!area.contains(position_map)) {
+		return -1;
+	}
+	const Vector2f position_pix = area.move_inside(position_map);
+	return static_cast<int>((position_pix.x - area.rect().x) * 254 / area.rect().w);
 }
 
 // Repositions the chat overlay

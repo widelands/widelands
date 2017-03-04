@@ -405,6 +405,7 @@ teaching_about_messages = {
    rt(
       p(_[[Once you have archived a message, another message will be selected automatically from the list.]]) ..
       paragraphdivider() ..
+      listitem_arrow(_[[You can also hold down the Ctrl or Shift key to select multiple messages, or press Ctrl + A to select them all.]]) ..
       listitem_bullet(_[[Archive all messages that you currently have in your inbox, including this one.]])
    ),
    obj_name = "archive_all_messages",
@@ -414,7 +415,8 @@ teaching_about_messages = {
       p(_[[The message window is central to fully controlling your tribe’s fortune. However, you will get a lot of messages in a real game. To keep your head straight, you should try to keep the inbox empty.]]) ..
       paragraphdivider() ..
       listitem_bullet(_[[Archive all your messages in your inbox now.]]) ..
-      listitem_arrow(_[[To do so, open the message window by pressing ‘n’ or clicking the second button from the right at the very bottom of the screen. The newest message will be marked for you automatically. Keep clicking the ‘Archive selected message’ button until all messages have been archived and the list is empty.]])
+      listitem_arrow(_[[To do so, open the message window by pressing ‘n’ or clicking the second button from the right at the very bottom of the screen. The newest message will be marked for you automatically. Keep clicking the ‘Archive selected message’ button until all messages have been archived and the list is empty.]]) ..
+      listitem_arrow(_[[You can also hold down the Ctrl or Shift key to select multiple messages, or press Ctrl + A to select them all.]])
    )
 }
 

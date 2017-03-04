@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2013 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -1524,15 +1524,21 @@ void Soldier::send_space_signals(Game& game) {
 	}
 
 	PlayerNumber const land_owner = get_position().field->get_owned_by();
+	// First check if the soldier is standing on someone else's territory
 	if (land_owner != owner().player_number()) {
+		// Let's collect all reachable attackable sites in vicinity (militarysites mainly)
 		std::vector<BaseImmovable*> attackables;
 		game.map().find_reachable_immovables_unique(
 		   Area<FCoords>(get_position(), MaxProtectionRadius), attackables,
 		   CheckStepWalkOn(descr().movecaps(), false), FindImmovableAttackable());
 
 		for (BaseImmovable* temp_attackable : attackables) {
-			if (dynamic_cast<const PlayerImmovable&>(*temp_attackable).get_owner()->player_number() ==
-			    land_owner) {
+			const Player* attackable_player =
+			   dynamic_cast<const PlayerImmovable&>(*temp_attackable).get_owner();
+			// Let's inform the site that this (=enemy) soldier is nearby and within the site's owner's
+			// territory
+			if (attackable_player->player_number() == land_owner &&
+			    attackable_player->is_hostile(*get_owner())) {
 				dynamic_cast<Attackable&>(*temp_attackable).aggressor(*this);
 			}
 		}

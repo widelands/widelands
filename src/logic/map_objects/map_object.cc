@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2011 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -482,7 +482,7 @@ void MapObject::do_draw_info(const TextToDraw& draw_text,
 		   round(census_pos + Vector2f(0, rendered_census_info->height() / 2.f + 10 * scale))
 		      .cast<float>();
 		dst->blit(statistics_pos,
-		          UI::g_fh1->render(as_condensed(statictics, UI::Align::kLeft, font_size)),
+		          UI::g_fh1->render(as_condensed(statictics, UI::Align::kCenter, font_size)),
 		          BlendMode::UseAlpha, UI::Align::kCenter);
 	}
 }

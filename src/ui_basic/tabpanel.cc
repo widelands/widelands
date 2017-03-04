@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2003, 2006-2010 by the Widelands Development Team
+ * Copyright (C) 2003-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -377,10 +377,6 @@ bool TabPanel::handle_mousepress(const uint8_t btn, int32_t x, int32_t y) {
 			return true;
 		}
 	}
-	return false;
-}
-
-bool TabPanel::handle_mouserelease(uint8_t, int32_t, int32_t) {
 	return false;
 }
 

@@ -57,7 +57,7 @@ animations = {
       fps = 20
    },
 }
-add_worker_animations(animations, "walk", dirname, "walk", {16, 31}, 10)
+add_walking_animations(animations, "walk", dirname, "walk", {16, 31}, 10)
 
 
 tribes:new_soldier_type {

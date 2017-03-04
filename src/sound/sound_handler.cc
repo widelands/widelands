@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2005-2009 by the Widelands Development Team
+ * Copyright (C) 2005-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -36,12 +36,8 @@
 #include "helper.h"
 #include "io/fileread.h"
 #include "io/filesystem/layered_filesystem.h"
-#include "logic/game.h"
-#include "logic/map.h"
+#include "profile/profile.h"
 #include "sound/songset.h"
-#include "wui/interactive_base.h"
-#include "wui/mapview.h"
-#include "wui/mapviewpixelfunctions.h"
 
 namespace {
 
@@ -69,8 +65,7 @@ SoundHandler g_sound_handler;
  * \sa SoundHandler::init()
 */
 SoundHandler::SoundHandler()
-   : egbase_(nullptr),
-     nosound_(false),
+   : nosound_(false),
      lock_audio_disabling_(false),
      disable_music_(false),
      disable_fx_(false),
@@ -297,31 +292,6 @@ void SoundHandler::load_one_fx(const std::string& path, const std::string& fx_na
 		    path.c_str(), fx_name.c_str(), Mix_GetError());
 }
 
-/** Calculate  the position of an effect in relation to the visible part of the
- * screen.
- * \param position  where the event happened (map coordinates)
- * \return position in widelands' game window: left=0, right=254, not in
- * viewport = -1
- * \note This function can also be used to check whether a logical coordinate is
- * visible at all
-*/
-int32_t SoundHandler::stereo_position(Widelands::Coords const position_map) {
-	if (nosound_)
-		return -1;
-
-	assert(egbase_);
-	assert(position_map);
-
-	// Viewpoint is the point of the map in pixel which is shown in the upper
-	// left corner of window or fullscreen
-	const MapView::ViewArea view_area = egbase_->get_ibase()->view_area();
-	if (!view_area.contains(position_map)) {
-		return -1;
-	}
-	const Vector2f position_pix = view_area.move_inside(position_map);
-	return static_cast<int>((position_pix.x - view_area.rect().x) * 254 / view_area.rect().w);
-}
-
 /** Find out whether to actually play a certain effect right now or rather not
  * (to avoid "sonic overload").
  */
@@ -401,21 +371,6 @@ bool SoundHandler::play_or_not(const std::string& fx_name,
 	// finally: the decision
 	// float division! not integer
 	return (rng_.rand() % 255) / 255.0f <= probability;
-}
-
-/** Play (one of multiple) sound effect(s) with the given name. The effect(s)
- * must have been loaded before with \ref load_fx.
- * \param fx_name  The identifying name of the sound effect, see \ref load_fx .
- * \param map_position  Map coordinates where the event takes place
- * \param priority      How important is it that this FX actually gets played?
- *         (see \ref FXset::priority_)
-*/
-void SoundHandler::play_fx(const std::string& fx_name,
-                           Widelands::Coords const map_position,
-                           uint8_t const priority) {
-	if (nosound_)
-		return;
-	play_fx(fx_name, stereo_position(map_position), priority);
 }
 
 /** \overload

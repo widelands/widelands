@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2016 by the Widelands Development Team
+ * Copyright (C) 2004-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -28,6 +28,7 @@ namespace Widelands {
 
 class Economy;
 class EditorGameBase;
+class ExpeditionBootstrap;
 class Game;
 class MapObjectLoader;
 struct MapObjectSaver;
@@ -60,6 +61,22 @@ public:
 	void set_filled(Quantity) override;
 
 	void set_max_fill(Quantity q) override;
+
+	/**
+	 * Extracts the first worker from the queue and returns it
+	 * without removing it from the game.
+	 * Used by ExpeditionBootstrap.
+	 * @return The first worker in stored in this list.
+	 */
+	Worker* extract_worker();
+
+	/**
+	 * Loads the state of this WorkersQueue.
+	 * This method should only be used by ExpeditionBootstrap as compatibility helper when loading
+	 * save games for build 19.
+	 * If we ever drop support for them, remove this method and rework ExpeditionBootstrap::load().
+	 */
+	void load_for_expedition(FileRead&, Game&, MapObjectLoader&, uint8_t);
 
 protected:
 	void read_child(FileRead&, Game&, MapObjectLoader&) override;

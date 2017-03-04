@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2009-2010 by the Widelands Development Team
+ * Copyright (C) 2009-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -479,7 +479,7 @@ bool DefaultAI::check_trainingsites(uint32_t gametime) {
 	// - for armours and weapons to 1
 	// - for others to 6
 	// - for others to 6
-	for (InputQueue *queue : tso.site->inputqueues()) {
+	for (InputQueue* queue : tso.site->inputqueues()) {
 
 		if (queue->get_type() != wwWARE) {
 			continue;
@@ -521,7 +521,7 @@ bool DefaultAI::check_trainingsites(uint32_t gametime) {
 		// minutes)
 		// we can accept also shortage up to 3
 		int32_t shortage = 0;
-		for (InputQueue *queue : tso.site->inputqueues()) {
+		for (InputQueue* queue : tso.site->inputqueues()) {
 			if (queue->get_type() != wwWARE) {
 				continue;
 			}
@@ -534,7 +534,7 @@ bool DefaultAI::check_trainingsites(uint32_t gametime) {
 		}
 
 		// checking non subsitutes
-		for (InputQueue *queue : tso.site->inputqueues()) {
+		for (InputQueue* queue : tso.site->inputqueues()) {
 			if (queue->get_type() != wwWARE) {
 				continue;
 			}
@@ -714,16 +714,14 @@ int32_t DefaultAI::calculate_strength(const std::vector<Widelands::Soldier*>& so
 
 	for (Soldier* soldier : soldiers) {
 		const SoldierDescr& descr = soldier->descr();
-		health = descr.get_base_health() +
-					 descr.get_health_incr_per_level() * soldier->get_health_level();
+		health =
+		   descr.get_base_health() + descr.get_health_incr_per_level() * soldier->get_health_level();
 		attack = (descr.get_base_max_attack() - descr.get_base_min_attack()) / 2.f +
-		          descr.get_base_min_attack() +
-					 descr.get_attack_incr_per_level() * soldier->get_attack_level();
-		defense =
-			100 - descr.get_base_defense() - 8 * soldier->get_defense_level();
-		evade =
-			100 - descr.get_base_evade() -
-									 descr.get_evade_incr_per_level() / 100.f * soldier->get_evade_level();
+		         descr.get_base_min_attack() +
+		         descr.get_attack_incr_per_level() * soldier->get_attack_level();
+		defense = 100 - descr.get_base_defense() - 8 * soldier->get_defense_level();
+		evade = 100 - descr.get_base_evade() -
+		        descr.get_evade_incr_per_level() / 100.f * soldier->get_evade_level();
 		final += (attack * health) / (defense * evade);
 	}
 

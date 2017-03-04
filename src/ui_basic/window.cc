@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2016 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -276,8 +276,9 @@ void Window::draw_border(RenderTarget& dst) {
 		   autofit_ui_text(richtext_escape(title_), get_inner_w(), UI_FONT_CLR_FG, 13);
 
 		// Blit on pixel boundary (not float), so that the text is blitted pixel perfect.
-		dst.blit(Vector2f(get_lborder() + get_inner_w() / 2, TP_B_PIXMAP_THICKNESS / 2), text,
-		         BlendMode::UseAlpha, UI::Align::kCenter);
+		Vector2f pos(get_lborder() + get_inner_w() / 2, TP_B_PIXMAP_THICKNESS / 2);
+		UI::center_vertically(text->height(), &pos);
+		dst.blit(pos, text, BlendMode::UseAlpha, UI::Align::kCenter);
 	}
 
 	if (!is_minimal_) {
@@ -388,7 +389,7 @@ bool Window::handle_mouserelease(const uint8_t btn, int32_t, int32_t) {
 		grab_mouse(false);
 		dragging_ = false;
 	}
-	return true;
+	return false;
 }
 
 // Always consume the tooltip event to prevent tooltips from

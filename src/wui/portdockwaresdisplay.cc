@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2011 by the Widelands Development Team
+ * Copyright (C) 2011-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -25,11 +25,10 @@
 #include "economy/portdock.h"
 #include "logic/player.h"
 #include "wui/inputqueuedisplay.h"
-#include "wui/waresdisplay.h"
 
 using Widelands::PortDock;
 using Widelands::Warehouse;
-using Widelands::WaresQueue;
+using Widelands::InputQueue;
 
 namespace {
 
@@ -75,17 +74,10 @@ UI::Box*
 create_portdock_expedition_display(UI::Panel* parent, Warehouse& wh, InteractiveGameBase& igb) {
 	UI::Box& box = *new UI::Box(parent, 0, 0, UI::Box::Vertical);
 
-	// Add the wares queues.
-	for (WaresQueue* wq : wh.get_portdock()->expedition_bootstrap()->wares()) {
-		box.add(new InputQueueDisplay(&box, 0, 0, igb, wh, wq, true), UI::Align::kLeft);
+	// Add the input queues.
+	for (InputQueue* wq : wh.get_portdock()->expedition_bootstrap()->queues()) {
+		box.add(new InputQueueDisplay(&box, 0, 0, igb, wh, wq, true));
 	}
-
-	// TODO(unknown): Implement UI for Builder + Soldiers
-	// UI::Box & workers = *new UI::Box(&box, 0, 0, UI::Box::Horizontal);
-	// box.add(&workers, UI::Align::kLeft);
-
-	// for (uint32_t i = 0; i < wh.get_expedition_workers().size(); ++i)
-	// workers.add(icon of worker, UI::Align::kLeft);
 
 	return &box;
 }

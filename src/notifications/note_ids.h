@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2015 by the Widelands Development Team
+ * Copyright (C) 2006-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -36,8 +36,11 @@ enum class NoteId : uint32_t {
 	TrainingSiteSoldierTrained,
 	ShipMessage,
 	ShipWindow,
+	Building,
+	Economy,
 	GraphicResolutionChanged,
-	NoteExpeditionCanceled
+	NoteExpeditionCanceled,
+	Sound
 };
 
 #endif  // end of include guard: WL_NOTIFICATIONS_NOTE_IDS_H

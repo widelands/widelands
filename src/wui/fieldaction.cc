@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2011, 2013 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -40,6 +40,7 @@
 #include "ui_basic/unique_window.h"
 #include "wui/actionconfirm.h"
 #include "wui/attack_box.h"
+#include "wui/economy_options_window.h"
 #include "wui/field_overlay_manager.h"
 #include "wui/game_debug_ui.h"
 #include "wui/interactive_player.h"
@@ -382,7 +383,7 @@ void FieldActionWindow::add_buttons_attack() {
 	if (upcast(Widelands::Attackable, attackable, map_->get_immovable(node_))) {
 		if (player_ && player_->is_hostile(attackable->owner()) && attackable->can_attack()) {
 			attack_box_ = new AttackBox(&a_box, player_, &node_, 0, 0);
-			a_box.add(attack_box_, UI::Align::kTop);
+			a_box.add(attack_box_);
 
 			set_fastclick_panel(&add_button(
 			   &a_box, "attack", pic_attack, &FieldActionWindow::act_attack, _("Start attack")));
@@ -513,7 +514,7 @@ UI::Button& FieldActionWindow::add_button(UI::Box* const box,
 	                   g_gr->images().get(picname), tooltip_text);
 	button.sigclicked.connect(boost::bind(fn, this));
 	button.set_repeating(repeating);
-	box->add(&button, UI::Align::kTop);
+	box->add(&button);
 
 	return button;
 }
@@ -589,8 +590,14 @@ void FieldActionWindow::act_buildflag() {
 }
 
 void FieldActionWindow::act_configure_economy() {
-	if (upcast(const Widelands::Flag, flag, node_.field->get_immovable()))
-		flag->get_economy()->show_options_window();
+	if (upcast(const Widelands::Flag, flag, node_.field->get_immovable())) {
+		Widelands::Economy* economy = flag->get_economy();
+		if (!economy->has_window()) {
+			bool can_act =
+			   dynamic_cast<InteractiveGameBase&>(ibase()).can_act(economy->owner().player_number());
+			new EconomyOptionsWindow(dynamic_cast<UI::Panel*>(&ibase()), economy, can_act);
+		}
+	}
 }
 
 /*

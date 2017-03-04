@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2011 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -212,7 +212,7 @@ void FontHandler::draw_text(RenderTarget& dst,
 	const LineCacheEntry& lce = d->get_line(style, copytext);
 
 	Vector2f dstpoint = dstpoint_i.cast<float>();
-	UI::correct_for_align(align, lce.width + 2 * LINE_MARGIN, lce.height, &dstpoint);
+	UI::correct_for_align(align, lce.width + 2 * LINE_MARGIN, &dstpoint);
 
 	if (lce.image)
 		dst.blit(Vector2f(dstpoint.x + LINE_MARGIN, dstpoint.y), lce.image.get());

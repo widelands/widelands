@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2011 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -198,7 +198,7 @@ public:
 
 	bool fetch_from_flag(Game&) override;
 
-	Quantity count_workers(const Game&, DescriptionIndex, const Requirements&, Match);
+	Quantity count_workers(const Game&, DescriptionIndex worker, const Requirements&, Match);
 	Worker& launch_worker(Game&, DescriptionIndex worker, const Requirements&);
 
 	// Adds the worker to the inventory. Takes ownership and might delete
@@ -253,8 +253,6 @@ public:
 protected:
 	/// Initializes the container sizes for the owner's tribe.
 	void init_containers(Player& owner);
-	/// Create the warehouse information window.
-	void create_options_window(InteractiveGameBase&, UI::Window*& registry) override;
 
 private:
 	void init_portdock(EditorGameBase& egbase);

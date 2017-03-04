@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2013 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -68,6 +68,7 @@ ProductionSiteDescr::ProductionSiteDescr(const std::string& init_descname,
      out_of_resource_title_(""),
      out_of_resource_heading_(""),
      out_of_resource_message_(""),
+     resource_not_needed_message_(""),
      out_of_resource_productivity_threshold_(100) {
 	i18n::Textdomain td("tribes");
 	std::unique_ptr<LuaTable> items_table;
@@ -81,6 +82,9 @@ ProductionSiteDescr::ProductionSiteDescr(const std::string& init_descname,
 		if (items_table->has_key("productivity_threshold")) {
 			out_of_resource_productivity_threshold_ = items_table->get_int("productivity_threshold");
 		}
+	}
+	if (table.has_key("resource_not_needed_message")) {
+		resource_not_needed_message_ = _(table.get_string("resource_not_needed_message"));
 	}
 
 	if (table.has_key("outputs")) {
@@ -178,9 +182,16 @@ ProductionSiteDescr::ProductionSiteDescr(const std::string& init_descname,
 				throw wexception("this program has already been declared");
 			}
 			std::unique_ptr<LuaTable> program_table = items_table->get_table(program_name);
-			programs_[program_name] = std::unique_ptr<ProductionProgram>(
-			   new ProductionProgram(program_name, _(program_table->get_string("descname")),
-			                         program_table->get_table("actions"), egbase, this));
+
+			// Allow use of both gettext and pgettext. This way, we can have a lower workload on
+			// translators and disambiguate at the same time.
+			const std::string program_descname_unlocalized = program_table->get_string("descname");
+			std::string program_descname = _(program_descname_unlocalized);
+			if (program_descname == program_descname_unlocalized) {
+				program_descname = pgettext_expr(msgctxt.c_str(), program_descname_unlocalized.c_str());
+			}
+			programs_[program_name] = std::unique_ptr<ProductionProgram>(new ProductionProgram(
+			   program_name, program_descname, program_table->get_table("actions"), egbase, this));
 		} catch (const std::exception& e) {
 			throw wexception("program %s: %s", program_name.c_str(), e.what());
 		}
@@ -412,7 +423,8 @@ void ProductionSite::init(EditorGameBase& egbase) {
 	}
 
 	for (WareRange i(input_workers); i; ++i) {
-		input_queues_[input_wares.size() + i.i] = new WorkersQueue(*this, i.current->first, i.current->second);
+		input_queues_[input_wares.size() + i.i] =
+		   new WorkersQueue(*this, i.current->first, i.current->second);
 	}
 
 	//  Request missing workers.
@@ -473,7 +485,7 @@ void ProductionSite::cleanup(EditorGameBase& egbase) {
 	}
 
 	// Cleanup the wares queues
-	for (InputQueue *iq : input_queues_) {
+	for (InputQueue* iq : input_queues_) {
 		iq->cleanup();
 		delete iq;
 	}
@@ -631,7 +643,7 @@ void ProductionSite::request_worker_callback(
 	// the last one we need to start working.
 	w->start_task_idle(game, 0, -1);
 	psite.try_start_working(game);
-	psite.workers_changed();
+	Notifications::publish(NoteBuilding(psite.serial(), NoteBuilding::Action::kWorkersChanged));
 }
 
 /**
@@ -711,6 +723,7 @@ void ProductionSite::log_general_info(const EditorGameBase& egbase) {
 void ProductionSite::set_stopped(bool const stopped) {
 	is_stopped_ = stopped;
 	get_economy()->rebalance_supply();
+	Notifications::publish(NoteBuilding(serial(), NoteBuilding::Action::kChanged));
 }
 
 /**
@@ -913,16 +926,23 @@ void ProductionSite::program_end(Game& game, ProgramResult const result) {
 void ProductionSite::train_workers(Game& game) {
 	for (uint32_t i = descr().nr_working_positions(); i;)
 		working_positions_[--i].worker->gain_experience(game);
-	Building::workers_changed();
+	Notifications::publish(NoteBuilding(serial(), NoteBuilding::Action::kWorkersChanged));
 }
 
-void ProductionSite::notify_player(Game& game, uint8_t minutes) {
+void ProductionSite::notify_player(Game& game, uint8_t minutes, FailNotificationType type) {
 	if (last_stat_percent_ == 0 ||
 	    (last_stat_percent_ <= descr().out_of_resource_productivity_threshold() &&
 	     trend_ == Trend::kFalling)) {
-		if (descr().out_of_resource_heading().empty()) {
+
+		if (type == FailNotificationType::kFull) {
+			// The building has nothing to do
+			assert(!descr().resource_not_needed_message().empty());
+			set_production_result(descr().resource_not_needed_message());
+		} else if (descr().out_of_resource_message().empty()) {
+			// We have no message body to send
 			set_production_result(_("Can’t find any more resources!"));
 		} else {
+			// Send full message
 			set_production_result(descr().out_of_resource_heading());
 
 			assert(!descr().out_of_resource_message().empty());
@@ -930,6 +950,7 @@ void ProductionSite::notify_player(Game& game, uint8_t minutes) {
 			             descr().icon_filename(), descr().out_of_resource_heading(),
 			             descr().out_of_resource_message(), true, minutes * 60000, 0);
 		}
+
 		// The following sends "out of resources" messages to be picked up by AI
 		// used as information for dismantling and upgrading buildings
 		if (descr().get_ismine()) {

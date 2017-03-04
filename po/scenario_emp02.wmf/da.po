@@ -2,15 +2,15 @@
 # Copyright (C) 2005-2017 Widelands Development Team
 # 
 # Translators:
-# Joe Hansen <joedalton2@yahoo.dk>, 2015-2016
+# Joe Hansen <joedalton2@yahoo.dk>, 2015-2017
 # Ole Laursen <ole.laursen@gmail.com>, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-01-21 14:22+0000\n"
-"PO-Revision-Date: 2017-01-21 14:24+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2017-01-21 21:10+0000\n"
+"PO-Revision-Date: 2017-01-27 22:17+0000\n"
+"Last-Translator: Joe Hansen <joedalton2@yahoo.dk>\n"
 "Language-Team: Danish (http://www.transifex.com/widelands/widelands/language/da/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -79,7 +79,7 @@ msgid ""
 "Build a stonemason’s house and then a complete mining and production "
 "infrastructure (coal mine and / or charcoal kiln, iron mine, toolsmithy, "
 "weapon smithy, armor smithy and smelting works)."
-msgstr ""
+msgstr "Byg et stenhuggeri og så en fuldstændig mine- og produktionsinfrastruktur (kulmine og/eller trækulsovn, jernmalmmine, værktøjssmedje, våbensmedje, rustningssmedje og smelteværker)."
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:73
 msgid "Provide your miners with food"
@@ -94,7 +94,7 @@ msgid ""
 "To produce some sustaining food for our miners, we could build up a tavern. "
 "To supply them with some good and strong drinks, we could build up a brewery"
 " and a winery."
-msgstr "For at tilberede mad til vores minearbejdere skal vi bruge et traktørsted. For at give dem gode og stærke drikkevarer kunne vi bygge et ølbryggeri og et vinbryggeri."
+msgstr "For at tilberede mad til vores minearbejdere skal vi bruge et værtshus. For at give dem gode og stærke drikkevarer kunne vi bygge et ølbryggeri og et vinbryggeri."
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:77
 msgid ""
@@ -114,7 +114,7 @@ msgid ""
 "It’s up to you what you want to build. But remember – coal and iron mines "
 "need beer, marble and gold mines need wine and all mines need at least "
 "rations, which are produced out of bread OR meat OR fish."
-msgstr ""
+msgstr "Det er op til dig hvad du ønsker at bygge. Men husk - kul- og jernmalmminer kræver øl, marmor- og guldminer kræver vin og alle miner kræver mindst fødevarer, som fremstilles fra brød ELLER kød ELLER fisk."
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:85
 msgid "Protect your eastern frontier"
@@ -128,7 +128,7 @@ msgstr "Beskyt din østlige grænse"
 msgid ""
 "Build up stronger military buildings, such as an outpost, a barrier or a "
 "tower, on the eastern frontier."
-msgstr "Byg stærkere militære bygninger, såsom en forpost, en barriere eller et tårn, på den østlige grænse."
+msgstr "Byg stærkere militære bygninger, såsom en forpost, et fort eller et tårn, på den østlige grænse."
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:89
 msgid "To watch deep inside the enemy territory, build a tower."
@@ -144,7 +144,7 @@ msgstr "Knus barbarernes stamme"
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:98
 msgid "Build a barracks to start training soldiers."
-msgstr ""
+msgstr "Byg en barak for at starte træningen af rekrutterne."
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:99
 msgid ""
@@ -337,7 +337,7 @@ msgid ""
 "of iron ore. I advise you to immediately build iron and coal mines (or at "
 "least charcoal kilns), smelting works, toolsmithies, armor and weapon "
 "smithies."
-msgstr ""
+msgstr "Ved guderne, dette er et usandsynligt held! Der er to yderligere bjerge og et af dem ser ud til at have en stor mængde kul og det andet jernmalm. Jeg råder til at du øjeblikkelig bygger jern- og kulminer (eller i det mindste trækulsovne), smelteværker, værktøjsmagere, rustningssmedjer og våbensmedjer."
 
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:197
@@ -383,7 +383,7 @@ msgstr "Hvad med at hjælpe dem? Jeg kan ikke præcis fortælle hvad vi skal bru
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:219
 msgid "Our New Tavern"
-msgstr "Vores nye traktørsted"
+msgstr "Vores nye værtshus"
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:220
 msgid "Amalea smiles"

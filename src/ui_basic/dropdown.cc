@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016 by the Widelands Development Team
+ * Copyright (C) 2016-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -73,8 +73,8 @@ BaseDropdown::BaseDropdown(UI::Panel* parent,
 	list_.set_visible(false);
 	list_.set_background(background);
 	display_button_.set_perm_pressed(true);
-	button_box_.add(&display_button_, UI::Align::kLeft);
-	button_box_.add(&push_button_, UI::Align::kLeft);
+	button_box_.add(&display_button_);
+	button_box_.add(&push_button_);
 	button_box_.set_size(w, get_h());
 
 	display_button_.sigclicked.connect(boost::bind(&BaseDropdown::toggle_list, this));

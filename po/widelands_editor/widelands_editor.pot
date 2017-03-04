@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-01-21 21:10+0000\n"
+"POT-Creation-Date: 2017-03-03 06:24+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -139,11 +139,16 @@ msgstr ""
 msgid "Introduction"
 msgstr ""
 
-#: ../../data/scripting/editor/editor_help.lua:74
-msgid "Terrains"
+#: ../../data/scripting/editor/editor_help.lua:71
+#: ../../data/scripting/editor/tips.lua:16
+msgid "Tips"
 msgstr ""
 
 #: ../../data/scripting/editor/editor_help.lua:81
+msgid "Terrains"
+msgstr ""
+
+#: ../../data/scripting/editor/editor_help.lua:88
 msgid "Trees"
 msgstr ""
 

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004, 2006-2011 by the Widelands Development Team
+ * Copyright (C) 2004-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -56,13 +56,13 @@ void WaresQueue::cleanup() {
 	index_ = INVALID_INDEX;
 }
 
-void WaresQueue::entered(DescriptionIndex index,
+void WaresQueue::entered(
 #ifndef NDEBUG
-                         Worker* worker
+   DescriptionIndex index, Worker* worker
 #else
-                         Worker*
+   DescriptionIndex, Worker*
 #endif
-                         ) {
+   ) {
 
 	assert(worker == nullptr);  // WaresQueue can't hold workers
 	assert(filled_ < max_size_);

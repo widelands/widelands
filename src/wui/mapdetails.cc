@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2016 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -89,9 +89,9 @@ MapDetails::MapDetails(Panel* parent, int32_t x, int32_t y, int32_t w, int32_t h
 	name_label_.force_new_renderer();
 	descr_.force_new_renderer();
 
-	main_box_.add(&name_label_, UI::Align::kLeft);
+	main_box_.add(&name_label_);
 	main_box_.add_space(padding_);
-	main_box_.add(&descr_, UI::Align::kLeft);
+	main_box_.add(&descr_);
 	layout();
 }
 

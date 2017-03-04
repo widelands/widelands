@@ -102,6 +102,7 @@ wl_library(map_io
     io_fileread
     io_filesystem
     logic
+    logic_constants
     logic_widelands_geometry
     profile
     scripting_logic
