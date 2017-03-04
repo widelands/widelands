@@ -59,7 +59,8 @@ struct NoteShipWindow {
 
 	Serial serial;
 
-	enum class Action { kRefresh, kClose };
+	// TODO(GunChleoc): We leave the 1 action for now, because notes will be merged in the shiplist branch.
+	enum class Action { kClose };
 	const Action action;
 
 	NoteShipWindow(Serial init_serial, const Action& init_action)

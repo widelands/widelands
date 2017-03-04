@@ -39,9 +39,6 @@ public:
 	ShipWindow(InteractiveGameBase& igb, UI::UniqueWindow::Registry& reg, Widelands::Ship& ship);
 
 private:
-	// Resets the vbox_ and fills it with the currently needed buttons, then positions the window.
-	void init(bool avoid_fastclick);
-
 	void think() override;
 
 	UI::Button* make_button(UI::Panel* parent,
@@ -62,7 +59,8 @@ private:
 	InteractiveGameBase& igbase_;
 	Widelands::Ship& ship_;
 
-	std::unique_ptr<UI::Box> vbox_;
+	UI::Box vbox_;
+	UI::Box navigation_box_;
 	UI::Button* btn_goto_;
 	UI::Button* btn_destination_;
 	UI::Button* btn_sink_;
@@ -74,6 +72,7 @@ private:
 	UI::Button* btn_scout_[Widelands::LAST_DIRECTION];
 	UI::Button* btn_construct_port_;
 	ItemWaresDisplay* display_;
+	int navigation_box_height_;
 	std::unique_ptr<Notifications::Subscriber<Widelands::NoteShipWindow>> shipnotes_subscriber_;
 	DISALLOW_COPY_AND_ASSIGN(ShipWindow);
 };

@@ -680,8 +680,6 @@ void Ship::ship_update_idle(Game& game, Bob::State& state) {
 			}
 
 			expedition_.reset(nullptr);
-
-			Notifications::publish(NoteShipWindow(serial(), NoteShipWindow::Action::kRefresh));
 			return start_task_idle(game, descr().main_animation(), 1500);
 		}
 	}
@@ -924,9 +922,6 @@ void Ship::exp_cancel(Game& game) {
 
 	// Delete the expedition and the economy it created.
 	expedition_.reset(nullptr);
-
-	// And finally update our ship window
-	Notifications::publish(NoteShipWindow(serial(), NoteShipWindow::Action::kRefresh));
 }
 
 /// Sinks the ship
