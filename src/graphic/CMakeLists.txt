@@ -108,7 +108,6 @@ wl_library(graphic_surface
     texture.h
     texture_cache.cc
     texture_cache.h
-  USES_OPENGL
   USES_SDL2
   DEPENDS
     base_exceptions
@@ -239,8 +238,7 @@ wl_library(graphic_fonthandler_legacy
     richtext.h
     text_parser.cc
     text_parser.h
-  USES_OPENGL
-  USES_SDL2
+  USES_ICU
   USES_SDL2_TTF
   DEPENDS
     base_exceptions
@@ -266,9 +264,6 @@ wl_library(graphic_fonthandler
   SRCS
     font_handler1.cc
     font_handler1.h
-  USES_OPENGL
-  USES_SDL2
-  USES_SDL2_TTF
   DEPENDS
     base_exceptions
     base_geometry
@@ -304,8 +299,7 @@ wl_library(graphic_wordwrap
   SRCS
     wordwrap.cc
     wordwrap.h
-  USES_OPENGL
-  USES_SDL2
+  USES_ICU
   USES_SDL2_TTF
   DEPENDS
     base_geometry
@@ -332,7 +326,6 @@ wl_library(graphic
     graphic.h
     rendertarget.cc
     rendertarget.h
-  USES_OPENGL
   USES_SDL2
   DEPENDS
     base_exceptions
