@@ -57,7 +57,7 @@ ShipWindow::ShipWindow(InteractiveGameBase& igb, UniqueWindow::Registry& reg, Sh
      igbase_(igb),
      ship_(ship),
      vbox_(this, 0, 0, UI::Box::Vertical),
-     navigation_box_(&vbox_, 0, 0, UI::Box::Vertical),
+	  navigation_box_(&vbox_, 0, 0, UI::Box::Vertical),
      navigation_box_height_(0) {
 	vbox_.set_inner_spacing(kPadding);
 	assert(ship_.get_owner());
