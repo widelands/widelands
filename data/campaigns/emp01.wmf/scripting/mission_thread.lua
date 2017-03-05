@@ -1,4 +1,5 @@
 include "scripting/messages.lua"
+include "map:scripting/helper_functions.lua"
 
 function mission_thread()
    sleep(1000)
@@ -26,6 +27,15 @@ function mission_thread()
 
    sleep(400)
 
+   -- Check for trees and remove them
+   local fields = {{12,0},          -- Buildspace
+                   {12,1},          -- Flag of building
+                   {12,2}, {11,2},  -- Roads ...
+                   {10,2}, {9,2},
+                   {8,2}, {7,1},
+                   {7,0},}
+   remove_trees(fields)
+
    campaign_message_box(saledus_1)
    p1:allow_buildings{"empire_blockhouse"}
    local o = add_campaign_objective(obj_build_blockhouse)
@@ -37,12 +47,7 @@ function mission_thread()
    local fields = {{6,3},           -- Buildspace
                    {7,4},           -- Flag of building
                    {7,3}, {7,2},}   -- Roads
-   for k, v in pairs(fields) do
-       local f = wl.Game().map:get_field(v[1],v[2])
-       if f.immovable then
-           f.immovable:remove()
-       end
-    end
+   remove_trees(fields)
 
    campaign_message_box(saledus_2)
    p1:allow_buildings{"empire_lumberjacks_house"}
