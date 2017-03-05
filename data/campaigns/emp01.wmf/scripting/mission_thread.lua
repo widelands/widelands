@@ -33,6 +33,17 @@ function mission_thread()
    set_objective_done(o)
 
    -- Blockhouse is completed now
+   -- Make sure no tree blocks the building space for Lumberjack
+   local fields = {{6,3},           -- Buildspace
+                   {7,4},           -- Flag of building
+                   {7,3}, {7,2},}   -- Roads
+   for k, v in pairs(fields) do
+       local f = wl.Game().map:get_field(v[1],v[2])
+       if f.immovable then
+           f.immovable:remove()
+       end
+    end
+
    campaign_message_box(saledus_2)
    p1:allow_buildings{"empire_lumberjacks_house"}
    o = add_campaign_objective(obj_build_lumberjack)
