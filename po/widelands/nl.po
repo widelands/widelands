@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-02-26 10:10+0000\n"
-"PO-Revision-Date: 2017-02-26 10:14+0000\n"
+"POT-Creation-Date: 2017-03-03 06:24+0000\n"
+"PO-Revision-Date: 2017-03-03 06:27+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Dutch (http://www.transifex.com/widelands/widelands/language/nl/)\n"
 "MIME-Version: 1.0\n"
@@ -261,7 +261,7 @@ msgid "Redo"
 msgstr "Opnieuw"
 
 #: ../../src/editor/editorinteractive.cc:142
-#: ../../src/wui/buildingwindow.cc:305
+#: ../../src/wui/buildingwindow.cc:324
 msgid "Help"
 msgstr "Help"
 
@@ -583,39 +583,39 @@ msgstr "Toon originele kaartnamen"
 msgid "Show Filenames"
 msgstr "Toon Bestandsnamen"
 
-#: ../../src/editor/ui_menus/main_menu_map_options.cc:112
-#: ../../src/ui_fsmenu/loadgame.cc:338
+#: ../../src/editor/ui_menus/main_menu_map_options.cc:111
+#: ../../src/ui_fsmenu/loadgame.cc:390
 #: ../../src/wui/game_main_menu_save_game.cc:75
 msgid "Map Name:"
 msgstr "Kaartnaam:"
 
-#: ../../src/editor/ui_menus/main_menu_map_options.cc:117
+#: ../../src/editor/ui_menus/main_menu_map_options.cc:115
 msgid "Authors:"
 msgstr "Auteurs:"
 
-#: ../../src/editor/ui_menus/main_menu_map_options.cc:122
+#: ../../src/editor/ui_menus/main_menu_map_options.cc:119
 #: ../../src/ui_fsmenu/campaign_select.cc:83
 #: ../../src/ui_fsmenu/campaign_select.cc:160
 #: ../../src/ui_fsmenu/campaign_select.cc:389 ../../src/wui/mapdetails.cc:174
 msgid "Description:"
 msgstr "Beschrijving:"
 
-#: ../../src/editor/ui_menus/main_menu_map_options.cc:127
+#: ../../src/editor/ui_menus/main_menu_map_options.cc:123
 msgid "Hint (optional):"
 msgstr "Hint (optie):"
 
-#: ../../src/editor/ui_menus/main_menu_map_options.cc:134
+#: ../../src/editor/ui_menus/main_menu_map_options.cc:130
 #: ../../src/wui/mapdetails.cc:168
 msgid "Tags:"
 msgstr "Labels:"
 
 #. * TRANSLATORS: Label for the list of suggested teams when choosing a map
-#: ../../src/editor/ui_menus/main_menu_map_options.cc:142
+#: ../../src/editor/ui_menus/main_menu_map_options.cc:138
 #: ../../src/wui/suggested_teams_box.cc:92
 msgid "Suggested Teams:"
 msgstr "Teamsuggestie:"
 
-#: ../../src/editor/ui_menus/main_menu_map_options.cc:152
+#: ../../src/editor/ui_menus/main_menu_map_options.cc:147
 #: ../../src/ui_fsmenu/launch_mpg.cc:642
 #: ../../src/wui/game_main_menu_save_game.cc:157
 #, c-format
@@ -624,19 +624,19 @@ msgid_plural "%u Players"
 msgstr[0] "%u Speler"
 msgstr[1] "%u Spelers"
 
-#: ../../src/editor/ui_menus/main_menu_map_options.cc:157
+#: ../../src/editor/ui_menus/main_menu_map_options.cc:152
 msgid "Main Options"
 msgstr "Hoofdopties"
 
-#: ../../src/editor/ui_menus/main_menu_map_options.cc:159
+#: ../../src/editor/ui_menus/main_menu_map_options.cc:154
 msgid "Tags"
 msgstr "Labels"
 
-#: ../../src/editor/ui_menus/main_menu_map_options.cc:161
+#: ../../src/editor/ui_menus/main_menu_map_options.cc:156
 msgid "Teams"
 msgstr "Teams"
 
-#: ../../src/editor/ui_menus/main_menu_map_options.cc:185
+#: ../../src/editor/ui_menus/main_menu_map_options.cc:180
 msgid "Size: %1% x %2%"
 msgstr "Grootte: %1% x %2%"
 
@@ -655,7 +655,7 @@ msgid "Create Map"
 msgstr "Maak kaart"
 
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:93
-#: ../../src/ui_fsmenu/loadgame.cc:340
+#: ../../src/ui_fsmenu/loadgame.cc:392
 msgid "Players:"
 msgstr "Spelers:"
 
@@ -771,7 +771,7 @@ msgid "Make Directory"
 msgstr "Maak Map"
 
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:75
-#: ../../src/ui_fsmenu/loadgame.cc:294 ../../src/ui_fsmenu/loadgame.cc:426
+#: ../../src/ui_fsmenu/loadgame.cc:313 ../../src/ui_fsmenu/loadgame.cc:479
 msgid "Filename:"
 msgstr "Bestandsnaam:"
 
@@ -1015,7 +1015,7 @@ msgid "No description defined"
 msgstr "Geen beschrijving gedefinieerd"
 
 #: ../../src/logic/map_objects/immovable.cc:511
-#: ../../src/logic/map_objects/tribes/constructionsite.cc:74
+#: ../../src/logic/map_objects/tribes/constructionsite.cc:73
 #, c-format
 msgid "%i%% built"
 msgstr "%i%% gebouwd"
@@ -1257,7 +1257,7 @@ msgstr "(gestopt)"
 msgid "%i%%"
 msgstr "%i%%"
 
-#: ../../src/logic/map_objects/tribes/productionsite.cc:942
+#: ../../src/logic/map_objects/tribes/productionsite.cc:943
 msgid "Can’t find any more resources!"
 msgstr "Kan geen grondstoffen meer vinden!"
 
@@ -1403,8 +1403,8 @@ msgid "Your %s can't find a way home and will likely die."
 msgstr "Je %s kan geen weg meer naar huis vinden en zal allicht sterven."
 
 #: ../../src/logic/map_objects/tribes/worker.cc:1682
-#: ../../src/wui/productionsitewindow.cc:73
-#: ../../src/wui/productionsitewindow.cc:98
+#: ../../src/wui/productionsitewindow.cc:87
+#: ../../src/wui/productionsitewindow.cc:112
 msgid "Worker"
 msgid_plural "Workers"
 msgstr[0] "Werker"
@@ -2608,43 +2608,71 @@ msgid ""
 "the map’s name followed by the last objective achieved."
 msgstr "Bestandsnaam waaronder het spel werd opgeslagen gevolgd door de naam van de kaart, of de naam van de kaart gevolgd door de laatst verwezenlijkte doelstelling."
 
-#: ../../src/ui_fsmenu/loadgame.cc:284
+#: ../../src/ui_fsmenu/loadgame.cc:279
+#, c-format
+msgid "Do you really want to delete this %d replay?"
+msgid_plural "Do you really want to delete these %d replays?"
+msgstr[0] ""
+msgstr[1] ""
+
+#: ../../src/ui_fsmenu/loadgame.cc:285
+#, c-format
+msgid "Do you really want to delete this %d game?"
+msgid_plural "Do you really want to delete these %d games?"
+msgstr[0] ""
+msgstr[1] ""
+
+#: ../../src/ui_fsmenu/loadgame.cc:303
 msgid "Save Date:"
 msgstr "Datum van opslaan:"
 
-#: ../../src/ui_fsmenu/loadgame.cc:298
+#: ../../src/ui_fsmenu/loadgame.cc:317
 msgid "Do you really want to delete this replay?"
 msgstr "Wil je deze herhaling echt verwijderen?"
 
-#: ../../src/ui_fsmenu/loadgame.cc:302
+#: ../../src/ui_fsmenu/loadgame.cc:321
 msgid "Do you really want to delete this game?"
 msgstr "Wil je dit spel echt verwijderen?"
 
-#: ../../src/ui_fsmenu/loadgame.cc:306
+#: ../../src/ui_fsmenu/loadgame.cc:327
 msgid "Confirm deleting file"
-msgstr "Bevestig verwijderen van bestand"
+msgid_plural "Confirm deleting files"
+msgstr[0] ""
+msgstr[1] ""
 
-#: ../../src/ui_fsmenu/loadgame.cc:339
+#. * TRANSLATORS %1% = map name, %2% = save date.
+#: ../../src/ui_fsmenu/loadgame.cc:360
+msgid "%1%, saved on %2%"
+msgstr ""
+
+#: ../../src/ui_fsmenu/loadgame.cc:391
 msgid "Gametime:"
 msgstr "Speeltijd:"
 
-#: ../../src/ui_fsmenu/loadgame.cc:341
+#: ../../src/ui_fsmenu/loadgame.cc:393
 msgid "Win Condition:"
 msgstr "Winconditie:"
 
-#: ../../src/ui_fsmenu/loadgame.cc:370
+#: ../../src/ui_fsmenu/loadgame.cc:423
 msgid "Widelands Version:"
 msgstr "Widelands Versie:"
 
-#: ../../src/ui_fsmenu/loadgame.cc:527
+#: ../../src/ui_fsmenu/loadgame.cc:500
+#, c-format
+msgid "Selected %d file:"
+msgid_plural "Selected %d files:"
+msgstr[0] ""
+msgstr[1] ""
+
+#: ../../src/ui_fsmenu/loadgame.cc:587
 msgid "Today, %1%:%2%"
 msgstr "Vandaag, %1%:%2%"
 
-#: ../../src/ui_fsmenu/loadgame.cc:540
+#: ../../src/ui_fsmenu/loadgame.cc:600
 msgid "Yesterday, %1%:%2%"
 msgstr "Gisteren, %1%:%2%"
 
-#: ../../src/ui_fsmenu/loadgame.cc:546
+#: ../../src/ui_fsmenu/loadgame.cc:606
 msgid "%2% %1%, %3%"
 msgstr "%1% %2% %3%"
 
@@ -2653,33 +2681,33 @@ msgstr "%1% %2% %3%"
 #. * TRANSLATORS: A tooltip will explain the abbreviation.
 #. * TRANSLATORS: Make sure that this translation is consistent with the
 #. tooltip.
-#: ../../src/ui_fsmenu/loadgame.cc:567
+#: ../../src/ui_fsmenu/loadgame.cc:627
 msgid "SP"
 msgstr "AS"
 
-#: ../../src/ui_fsmenu/loadgame.cc:576
+#: ../../src/ui_fsmenu/loadgame.cc:636
 msgid "H (%1%)"
 msgstr "H (%1%)"
 
-#: ../../src/ui_fsmenu/loadgame.cc:586
+#: ../../src/ui_fsmenu/loadgame.cc:646
 msgid "MP (%1%)"
 msgstr "MP (%1%)"
 
 #. * TRANSLATORS: Error message introduction for when an old savegame can't be
 #. loaded
-#: ../../src/ui_fsmenu/loadgame.cc:603
+#: ../../src/ui_fsmenu/loadgame.cc:663
 msgid ""
 "This file has the wrong format and can’t be loaded. Maybe it was created "
 "with an older version of Widelands."
 msgstr "Dit bestand heeft het verkeerde formaat en kan niet geladen worden.  Misschien is het aangemaakt met een oudere versie van Widelands."
 
 #. * TRANSLATORS: This text is on a separate line with an error message below
-#: ../../src/ui_fsmenu/loadgame.cc:606
+#: ../../src/ui_fsmenu/loadgame.cc:666
 msgid "Error message:"
 msgstr "Foutboodschap:"
 
 #. * TRANSLATORS: Prefix for incompatible files in load game screens
-#: ../../src/ui_fsmenu/loadgame.cc:619 ../../src/ui_fsmenu/loadgame.cc:621
+#: ../../src/ui_fsmenu/loadgame.cc:679 ../../src/ui_fsmenu/loadgame.cc:681
 #, c-format
 msgid "Incompatible: %s"
 msgstr "Incompatibel: %s"
@@ -3090,7 +3118,7 @@ msgstr "Toon volgend gebouw"
 #: ../../src/wui/building_statistics_menu.cc:656
 #: ../../src/wui/building_statistics_menu.cc:680
 #: ../../src/wui/building_statistics_menu.cc:682
-#: ../../src/wui/productionsitewindow.cc:149
+#: ../../src/wui/productionsitewindow.cc:153
 msgid "%1%/%2%"
 msgstr "%1%/%2%"
 
@@ -3100,63 +3128,63 @@ msgid "Lacking Soldiers:"
 msgstr "Zonder soldaten:"
 
 #. * TRANSLATORS: Stop/Continue toggle button for production sites.
-#: ../../src/wui/buildingwindow.cc:190
+#: ../../src/wui/buildingwindow.cc:209
 msgid "Continue"
 msgstr "Doorgaan"
 
 #. * TRANSLATORS: Stop/Continue toggle button for production sites.
-#: ../../src/wui/buildingwindow.cc:192
+#: ../../src/wui/buildingwindow.cc:211
 msgid "Stop"
 msgstr "Stop"
 
-#: ../../src/wui/buildingwindow.cc:213
+#: ../../src/wui/buildingwindow.cc:232
 #, c-format
 msgid "Enhance to %s"
 msgstr "Verbeter naar %s"
 
-#: ../../src/wui/buildingwindow.cc:214 ../../src/wui/fieldaction.cc:99
+#: ../../src/wui/buildingwindow.cc:233 ../../src/wui/fieldaction.cc:99
 msgid "Construction costs:"
 msgstr "Bouwkosten:"
 
-#: ../../src/wui/buildingwindow.cc:231
+#: ../../src/wui/buildingwindow.cc:250
 msgid "Destroy"
 msgstr "Vernietigen"
 
-#: ../../src/wui/buildingwindow.cc:246
+#: ../../src/wui/buildingwindow.cc:265
 msgid "Dismantle"
 msgstr "Ontmantelen"
 
-#: ../../src/wui/buildingwindow.cc:246
+#: ../../src/wui/buildingwindow.cc:265
 msgid "Returns:"
 msgstr "Levert op:"
 
-#: ../../src/wui/buildingwindow.cc:274 ../../src/wui/buildingwindow.cc:440
+#: ../../src/wui/buildingwindow.cc:293 ../../src/wui/buildingwindow.cc:458
 msgid "Hide work area"
 msgstr "Verberg werkgebied"
 
-#: ../../src/wui/buildingwindow.cc:286 ../../src/wui/fieldaction.cc:371
+#: ../../src/wui/buildingwindow.cc:305 ../../src/wui/fieldaction.cc:371
 #: ../../src/wui/shipwindow.cc:166
 msgid "Show Debug Window"
 msgstr "Toon Debugvenster"
 
-#: ../../src/wui/buildingwindow.cc:293
+#: ../../src/wui/buildingwindow.cc:312
 msgid "Center view on this"
 msgstr "Beeld centreren"
 
-#: ../../src/wui/buildingwindow.cc:443
+#: ../../src/wui/buildingwindow.cc:461
 msgid "Show work area"
 msgstr "Toon werkgebied"
 
-#: ../../src/wui/buildingwindow.cc:476
+#: ../../src/wui/buildingwindow.cc:494
 msgid "Start an expedition"
 msgstr "Begin een expeditie"
 
-#: ../../src/wui/buildingwindow.cc:480
+#: ../../src/wui/buildingwindow.cc:498
 msgid "Cancel the expedition"
 msgstr "Annuleer de expeditie"
 
-#: ../../src/wui/constructionsitewindow.cc:64
-#: ../../src/wui/dismantlesitewindow.cc:61
+#: ../../src/wui/constructionsitewindow.cc:55
+#: ../../src/wui/dismantlesitewindow.cc:52
 msgid "Building materials"
 msgstr "Bouwmaterialen"
 
@@ -3166,14 +3194,14 @@ msgstr "Economie opties"
 
 #: ../../src/wui/economy_options_window.cc:48
 #: ../../src/wui/general_statistics_menu.cc:150
-#: ../../src/wui/productionsitewindow.cc:61
-#: ../../src/wui/warehousewindow.cc:190
+#: ../../src/wui/productionsitewindow.cc:75
+#: ../../src/wui/warehousewindow.cc:188
 msgid "Wares"
 msgstr "Goederen"
 
 #: ../../src/wui/economy_options_window.cc:49
 #: ../../src/wui/general_statistics_menu.cc:141
-#: ../../src/wui/warehousewindow.cc:194
+#: ../../src/wui/warehousewindow.cc:192
 msgid "Workers"
 msgstr "Werkers"
 
@@ -3333,7 +3361,7 @@ msgid "Do you really want to delete the file %s?"
 msgstr "Wil je bestand %s echt verwijderen?"
 
 #: ../../src/wui/game_message_menu.cc:51
-#: ../../src/wui/game_message_menu.cc:603
+#: ../../src/wui/game_message_menu.cc:589
 msgid "Messages: Inbox"
 msgstr "Berichten: Postbus"
 
@@ -3361,118 +3389,129 @@ msgctxt "message"
 msgid "Sent"
 msgstr "Tijd"
 
-#. * TRANSLATORS: %s is a tooltip, Del is the corresponding hotkey
-#: ../../src/wui/game_message_menu.cc:123
-#: ../../src/wui/game_message_menu.cc:594
-#: ../../src/wui/game_message_menu.cc:606
-#, c-format
-msgid "Del: %s"
-msgstr "Del: %s"
-
-#. * TRANSLATORS: Tooltip in the messages window
-#: ../../src/wui/game_message_menu.cc:125
-#: ../../src/wui/game_message_menu.cc:608
-msgid "Archive selected message"
-msgstr "Archiveer geselecteerd bericht"
-
-#: ../../src/wui/game_message_menu.cc:133
-#: ../../src/wui/game_message_menu.cc:611
+#: ../../src/wui/game_message_menu.cc:129
+#: ../../src/wui/game_message_menu.cc:592
 msgid "Show Archive"
 msgstr "Toon Archief"
 
 #. * TRANSLATORS: %s is a tooltip, G is the corresponding hotkey
-#: ../../src/wui/game_message_menu.cc:142
+#: ../../src/wui/game_message_menu.cc:138
 #, c-format
 msgid "G: %s"
 msgstr "G: %s"
 
 #. * TRANSLATORS: Tooltip in the messages window
-#: ../../src/wui/game_message_menu.cc:144
+#: ../../src/wui/game_message_menu.cc:140
 msgid "Center main mapview on location"
 msgstr "Centreer de kaart op locatie"
 
 #. * TRANSLATORS: %1% is a tooltip, %2% is the corresponding hotkey
-#: ../../src/wui/game_message_menu.cc:519
+#: ../../src/wui/game_message_menu.cc:510
+#: ../../src/wui/game_message_menu.cc:521
+#: ../../src/wui/game_message_menu.cc:526
 #: ../../src/wui/game_message_menu.cc:530
-#: ../../src/wui/game_message_menu.cc:535
-#: ../../src/wui/game_message_menu.cc:539
-#: ../../src/wui/game_message_menu.cc:543
-#: ../../src/wui/game_message_menu.cc:547
+#: ../../src/wui/game_message_menu.cc:534
+#: ../../src/wui/game_message_menu.cc:538
 msgid "%1% (Hotkey: %2%)"
 msgstr "%1% (Sneltoets: %2%)"
 
-#: ../../src/wui/game_message_menu.cc:521
+#: ../../src/wui/game_message_menu.cc:512
 msgctxt "hotkey"
 msgid "Alt + 0"
 msgstr "Alt + 0"
 
 #. * TRANSLATORS: Tooltip in the messages window
-#: ../../src/wui/game_message_menu.cc:521
+#: ../../src/wui/game_message_menu.cc:512
 msgid "Show all messages"
 msgstr "Toon alle berichten"
 
 #. * TRANSLATORS: Tooltip in the messages window
-#: ../../src/wui/game_message_menu.cc:532
+#: ../../src/wui/game_message_menu.cc:523
 msgid "Show geologists' messages only"
 msgstr "Toon enkel berichten van de geologen"
 
-#: ../../src/wui/game_message_menu.cc:533
+#: ../../src/wui/game_message_menu.cc:524
 msgctxt "hotkey"
 msgid "Alt + 1"
 msgstr "Alt + 1"
 
-#: ../../src/wui/game_message_menu.cc:537
+#: ../../src/wui/game_message_menu.cc:528
 msgctxt "hotkey"
 msgid "Alt + 2"
 msgstr "Alt + 2"
 
 #. * TRANSLATORS: Tooltip in the messages window
-#: ../../src/wui/game_message_menu.cc:537
+#: ../../src/wui/game_message_menu.cc:528
 msgid "Show economy messages only"
 msgstr "Toon enkel berichten van de economie"
 
-#: ../../src/wui/game_message_menu.cc:541
+#: ../../src/wui/game_message_menu.cc:532
 msgctxt "hotkey"
 msgid "Alt + 3"
 msgstr "Alt + 3"
 
 #. * TRANSLATORS: Tooltip in the messages window
-#: ../../src/wui/game_message_menu.cc:541
+#: ../../src/wui/game_message_menu.cc:532
 msgid "Show seafaring messages only"
 msgstr "Toon enkel berichten van de zeevaart"
 
-#: ../../src/wui/game_message_menu.cc:545
+#: ../../src/wui/game_message_menu.cc:536
 msgctxt "hotkey"
 msgid "Alt + 4"
 msgstr "Alt + 4"
 
 #. * TRANSLATORS: Tooltip in the messages window
-#: ../../src/wui/game_message_menu.cc:545
+#: ../../src/wui/game_message_menu.cc:536
 msgid "Show warfare messages only"
 msgstr "Toon enkel berichten van de krijgskunst"
 
-#: ../../src/wui/game_message_menu.cc:549
+#: ../../src/wui/game_message_menu.cc:540
 msgctxt "hotkey"
 msgid "Alt + 5"
 msgstr "Alt + 5"
 
 #. * TRANSLATORS: Tooltip in the messages window
-#: ../../src/wui/game_message_menu.cc:549
+#: ../../src/wui/game_message_menu.cc:540
 msgid "Show scenario messages only"
 msgstr "Toon enkel berichten van het scenario"
 
-#: ../../src/wui/game_message_menu.cc:591
+#: ../../src/wui/game_message_menu.cc:582
 msgid "Messages: Archive"
 msgstr "Berichten: archief"
 
+#: ../../src/wui/game_message_menu.cc:585
+msgid "Show Inbox"
+msgstr "Toon Postbus"
+
+#: ../../src/wui/game_message_menu.cc:613
+#, c-format
+msgid "Restore the selected %d message"
+msgid_plural "Restore the selected %d messages"
+msgstr[0] ""
+msgstr[1] ""
+
 #. * TRANSLATORS: Tooltip in the messages window
-#: ../../src/wui/game_message_menu.cc:596
+#: ../../src/wui/game_message_menu.cc:619
 msgid "Restore selected message"
 msgstr "Plaats geselecteerd bericht terug in postbus"
 
-#: ../../src/wui/game_message_menu.cc:599
-msgid "Show Inbox"
-msgstr "Toon Postbus"
+#: ../../src/wui/game_message_menu.cc:627
+#, c-format
+msgid "Archive the selected %d message"
+msgid_plural "Archive the selected %d messages"
+msgstr[0] ""
+msgstr[1] ""
+
+#. * TRANSLATORS: Tooltip in the messages window
+#: ../../src/wui/game_message_menu.cc:633
+msgid "Archive selected message"
+msgstr "Archiveer geselecteerd bericht"
+
+#. * TRANSLATORS: %s is a tooltip, Del is the corresponding hotkey
+#: ../../src/wui/game_message_menu.cc:638
+#, c-format
+msgid "Del: %s"
+msgstr "Del: %s"
 
 #: ../../src/wui/game_objectives_menu.cc:42
 #: ../../src/wui/interactive_player.cc:103
@@ -3656,12 +3695,12 @@ msgstr "Verlaag het aantal waren dat je hier opgeslagen wilt hebben."
 msgid "Increase the number of wares you want to be stored here."
 msgstr "Verhoog het aantal waren dat je hier opgeslagen wilt hebben."
 
-#: ../../src/wui/interactive_gamebase.cc:46
+#: ../../src/wui/interactive_gamebase.cc:52
 msgid "PAUSE"
 msgstr "PAUZE"
 
 #. * TRANSLATORS: actual_speed (desired_speed)
-#: ../../src/wui/interactive_gamebase.cc:95
+#: ../../src/wui/interactive_gamebase.cc:123
 #, c-format
 msgid "%1$s (%2$s)"
 msgstr "%1$s (%2$s)"
@@ -3829,36 +3868,36 @@ msgstr "Naam van deze kaart in jouw taal: %s"
 msgid "Hint:"
 msgstr "Hint:"
 
-#: ../../src/wui/maptable.cc:35
+#: ../../src/wui/maptable.cc:33
 msgid "Number of players"
 msgstr "Het aantal spelers"
 
 #. * TRANSLATORS: Column title for number of players in map list
-#: ../../src/wui/maptable.cc:35
+#: ../../src/wui/maptable.cc:33
 msgid "Pl."
 msgstr "#S"
 
-#: ../../src/wui/maptable.cc:36 ../../src/wui/maptable.cc:65
+#: ../../src/wui/maptable.cc:34 ../../src/wui/maptable.cc:63
 msgid "Filename"
 msgstr "Bestandsnaam"
 
-#: ../../src/wui/maptable.cc:36
+#: ../../src/wui/maptable.cc:34
 msgid "The name of the map or scenario"
 msgstr "Naam van de kaart of het scenario"
 
-#: ../../src/wui/maptable.cc:38
+#: ../../src/wui/maptable.cc:36
 msgid "Size"
 msgstr "Grootte"
 
-#: ../../src/wui/maptable.cc:38
+#: ../../src/wui/maptable.cc:36
 msgid "The size of the map (Width x Height)"
 msgstr "De grootte van de kaart (breedte x hoogte)"
 
-#: ../../src/wui/maptable.cc:69
+#: ../../src/wui/maptable.cc:67
 msgid "Map Name"
 msgstr "Kaartnaam"
 
-#: ../../src/wui/militarysitewindow.cc:51
+#: ../../src/wui/militarysitewindow.cc:44
 msgid "Soldiers"
 msgstr "Soldaten"
 
@@ -3984,23 +4023,23 @@ msgstr "minuten"
 msgid "game"
 msgstr "spel"
 
-#: ../../src/wui/productionsitewindow.cc:74
+#: ../../src/wui/productionsitewindow.cc:88
 msgid "Exp"
 msgstr "Erv"
 
-#: ../../src/wui/productionsitewindow.cc:75
+#: ../../src/wui/productionsitewindow.cc:89
 msgid "Next Level"
 msgstr "Volgend Niveau"
 
-#: ../../src/wui/productionsitewindow.cc:87
+#: ../../src/wui/productionsitewindow.cc:101
 msgid "Terminate the employment of the selected worker"
 msgstr "Beëindig de inzet van de geselecteerde werker"
 
-#: ../../src/wui/productionsitewindow.cc:162
+#: ../../src/wui/productionsitewindow.cc:166
 msgid "(coming)"
 msgstr "(onderweg)"
 
-#: ../../src/wui/productionsitewindow.cc:162
+#: ../../src/wui/productionsitewindow.cc:166
 msgid "(vacant)"
 msgstr "(leeg)"
 
@@ -4069,11 +4108,11 @@ msgid "Capacity"
 msgstr "Capaciteit"
 
 #: ../../src/wui/soldierlist.cc:373 ../../src/wui/soldierlist.cc:394
-#: ../../src/wui/soldierlist.cc:456
+#: ../../src/wui/soldierlist.cc:455
 msgid "Click soldier to send away"
 msgstr "Klik op een solaat om hem weg te sturen"
 
-#: ../../src/wui/soldierlist.cc:389 ../../src/wui/soldierlist.cc:461
+#: ../../src/wui/soldierlist.cc:389 ../../src/wui/soldierlist.cc:460
 #, c-format
 msgid "HP: %1$u/%2$u  AT: %3$u/%4$u  DE: %5$u/%6$u  EV: %7$u/%8$u"
 msgstr "L: %1$u/%2$u A: %3$u/%4$u V: %5$u/%6$u O: %7$u/%8$u"
@@ -4102,7 +4141,7 @@ msgstr "Goederen in magazijnen"
 msgid "Workers in warehouses"
 msgstr "Werkers in magazijnen"
 
-#: ../../src/wui/trainingsitewindow.cc:55
+#: ../../src/wui/trainingsitewindow.cc:44
 msgid "Soldiers in training"
 msgstr "Soldaten in training"
 
@@ -4118,31 +4157,31 @@ msgstr "Consumptie"
 msgid "Economy Health"
 msgstr "Economische gezondheid"
 
-#: ../../src/wui/warehousewindow.cc:145
+#: ../../src/wui/warehousewindow.cc:146
 msgid "Normal policy"
 msgstr "Normaal beleid"
 
-#: ../../src/wui/warehousewindow.cc:146
+#: ../../src/wui/warehousewindow.cc:147
 msgid "Preferably store selected wares here"
 msgstr "Sla geselecteerde goederen het liefst hier op"
 
-#: ../../src/wui/warehousewindow.cc:147
+#: ../../src/wui/warehousewindow.cc:148
 msgid "Do not store selected wares here"
 msgstr "Sla geselecteerde goederen hier niet op"
 
-#: ../../src/wui/warehousewindow.cc:148
+#: ../../src/wui/warehousewindow.cc:149
 msgid "Remove selected wares from here"
 msgstr "Verwijder geselecteerde goederen van hier"
 
-#: ../../src/wui/warehousewindow.cc:199
+#: ../../src/wui/warehousewindow.cc:197
 msgid "Wares waiting to be shipped"
 msgstr "Goederen die wachten om verscheept te worden"
 
-#: ../../src/wui/warehousewindow.cc:202
+#: ../../src/wui/warehousewindow.cc:200
 msgid "Workers waiting to embark"
 msgstr "Werkers die wachten om aan boord te gaan"
 
-#: ../../src/wui/warehousewindow.cc:206
+#: ../../src/wui/warehousewindow.cc:204
 msgid "Expedition"
 msgstr "Expeditie"
 
