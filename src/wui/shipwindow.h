@@ -46,6 +46,7 @@ private:
 	                        const std::string& title,
 	                        const std::string& picname,
 	                        boost::function<void()> callback);
+	void set_button_visibility();
 
 	void act_goto();
 	void act_destination();

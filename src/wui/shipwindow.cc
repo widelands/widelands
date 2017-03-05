@@ -46,6 +46,8 @@ static const char pic_scout_e[] = "images/wui/ship/ship_scout_e.png";
 static const char pic_scout_sw[] = "images/wui/ship/ship_scout_sw.png";
 static const char pic_scout_se[] = "images/wui/ship/ship_scout_se.png";
 static const char pic_construct_port[] = "images/wui/editor/fsel_editor_set_port_space.png";
+
+constexpr int kPadding = 5;
 }  // namespace
 
 using namespace Widelands;
@@ -57,7 +59,7 @@ ShipWindow::ShipWindow(InteractiveGameBase& igb, UniqueWindow::Registry& reg, Sh
      vbox_(this, 0, 0, UI::Box::Vertical),
      navigation_box_(&vbox_, 0, 0, UI::Box::Vertical),
      navigation_box_height_(0) {
-	vbox_.set_inner_spacing(5);
+	vbox_.set_inner_spacing(kPadding);
 	assert(ship_.get_owner());
 
 	display_ = new ItemWaresDisplay(&vbox_, *ship_.get_owner());
@@ -117,9 +119,6 @@ ShipWindow::ShipWindow(InteractiveGameBase& igb, UniqueWindow::Registry& reg, Sh
 	exp_bot->add(btn_scout_[WALK_SE - 1]);
 
 	vbox_.add(&navigation_box_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
-	navigation_box_height_ = navigation_box_.get_h();
-	navigation_box_.set_visible(false);
-	navigation_box_.set_desired_size(navigation_box_.get_w(), 0);
 
 	// Bottom buttons
 	UI::Box* buttons = new UI::Box(&vbox_, 0, 0, UI::Box::Horizontal);
@@ -171,8 +170,24 @@ ShipWindow::ShipWindow(InteractiveGameBase& igb, UniqueWindow::Registry& reg, Sh
 		   }
 		});
 
-	// Do the layout at once
-	think();
+	// Init button visibility
+	navigation_box_height_ = navigation_box_.get_h();
+	navigation_box_.set_visible(false);
+	navigation_box_.set_desired_size(navigation_box_.get_w(), 0);
+	btn_cancel_expedition_->set_enabled(false);
+	set_button_visibility();
+}
+
+void ShipWindow::set_button_visibility() {
+	if (navigation_box_.is_visible() != ship_.state_is_expedition()) {
+		navigation_box_.set_visible(ship_.state_is_expedition());
+		navigation_box_.set_desired_size(
+			navigation_box_.get_w(), ship_.state_is_expedition() ? navigation_box_height_ : 0);
+		layout();
+	}
+	if (btn_cancel_expedition_->is_visible() != btn_cancel_expedition_->enabled()) {
+		btn_cancel_expedition_->set_visible(btn_cancel_expedition_->enabled());
+	}
 }
 
 void ShipWindow::think() {
@@ -200,16 +215,7 @@ void ShipWindow::think() {
 		}
 	}
 
-	// Expedition specific buttons
-	if (navigation_box_.is_visible() != ship_.state_is_expedition()) {
-		navigation_box_.set_visible(ship_.state_is_expedition());
-		navigation_box_.set_desired_size(
-		   navigation_box_.get_w(), ship_.state_is_expedition() ? navigation_box_height_ : 0);
-		btn_cancel_expedition_->set_visible(ship_.state_is_expedition());
-		btn_cancel_expedition_->set_enabled(ship_.state_is_expedition());
-		layout();
-	}
-
+	Ship::ShipStates state = ship_.get_ship_state();
 	if (ship_.state_is_expedition()) {
 		/* The following rules apply:
 		 * - The "construct port" button is only active, if the ship is waiting for commands and found
@@ -222,7 +228,6 @@ void ShipWindow::think() {
 		 * matter if
 		 *   in waiting or already expedition/scouting mode)
 		 */
-		Ship::ShipStates state = ship_.get_ship_state();
 		btn_construct_port_->set_enabled(can_act &&
 		                                 (state == Ship::ShipStates::kExpeditionPortspaceFound));
 		bool coast_nearby = false;
@@ -237,9 +242,11 @@ void ShipWindow::think() {
 		btn_explore_island_ccw_->set_enabled(can_act && coast_nearby &&
 		                                     (state != Ship::ShipStates::kExpeditionColonizing));
 		btn_sink_->set_enabled(can_act && (state != Ship::ShipStates::kExpeditionColonizing));
-		btn_cancel_expedition_->set_enabled(can_act &&
-		                                    (state != Ship::ShipStates::kExpeditionColonizing));
 	}
+	btn_cancel_expedition_->set_enabled(ship_.state_is_expedition() && can_act &&
+		                                    (state != Ship::ShipStates::kExpeditionColonizing));
+	// Expedition specific buttons
+	set_button_visibility();
 }
 
 UI::Button* ShipWindow::make_button(UI::Panel* parent,
