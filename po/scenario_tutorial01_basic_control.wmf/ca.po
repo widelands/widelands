@@ -7,9 +7,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-01-16 07:51+0000\n"
-"PO-Revision-Date: 2017-01-17 21:52+0000\n"
-"Last-Translator: Juanjo\n"
+"POT-Creation-Date: 2017-03-03 06:24+0000\n"
+"PO-Revision-Date: 2017-03-03 06:27+0000\n"
+"Last-Translator: GunChleoc\n"
 "Language-Team: Catalan (http://www.transifex.com/widelands/widelands/language/ca/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -756,31 +756,38 @@ msgid ""
 msgstr "Un cop heu arxivat un missatge, se'n seleccionarà un altre de la llista automàticament."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:408
+#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:419
+msgid ""
+"You can also hold down the Ctrl or Shift key to select multiple messages, or"
+" press Ctrl + A to select them all."
+msgstr ""
+
+#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:409
 msgid ""
 "Archive all messages that you currently have in your inbox, including this "
 "one."
 msgstr "Arxiveu tots els missatges que teniu actualment a la bústia d'entrada, incloent-hi aquest missatge."
 
-#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:411
+#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:412
 msgid "Archive all messages in your inbox"
 msgstr "Arxiveu tots els missatges de la bústia d'entrada"
 
-#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:413
+#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:414
 msgid "Archive Your Inbox Messages"
 msgstr "Arxivar els missatges de la bústia d'entrada"
 
-#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:414
+#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:415
 msgid ""
 "The message window is central to fully controlling your tribe’s fortune. "
 "However, you will get a lot of messages in a real game. To keep your head "
 "straight, you should try to keep the inbox empty."
 msgstr "La finestra de missatges és important per controlar el destí del vostre clan. No obstant això, en una partida real rebreu molts missatges. Per poder trobar els més importants, hauríeu de mantenir la bústia d'entrada el més endreçada possible."
 
-#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:416
+#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:417
 msgid "Archive all your messages in your inbox now."
 msgstr "Arxiveu tots els missatges de la bústia d'entrada."
 
-#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:417
+#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:418
 msgid ""
 "To do so, open the message window by pressing ‘n’ or clicking the second "
 "button from the right at the very bottom of the screen. The newest message "
@@ -788,44 +795,44 @@ msgid ""
 "message’ button until all messages have been archived and the list is empty."
 msgstr "Per fer-ho, obriu la finestra de missatges prement la tecla «N» o clicant el segon botó de la part inferior de la pantalla començant per la dreta. El missatge més nou se seleccionarà automàticament. Cliqueu el botó «Arxiva el missatge seleccionat» fins que tots els missatges s'hagin arxivat i la llista estigui buida."
 
-#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:424
-#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:445
+#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:426
+#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:447
 msgid "Closing Windows"
 msgstr "Tancament de les finestres"
 
-#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:426
+#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:428
 msgid ""
 "Excellent. Do you remember how to close windows? You simply have to right-"
 "click on them. This will work with all windows except for story message "
 "windows like this one. Go ahead and try it."
 msgstr "Excel·lent. Recordeu com tancar les finestres? Només cal fer-hi clic dret a sobre. Això funciona per totes les finestres excepte les de missatges de la missió, com ara aquesta. Proveu-ho."
 
-#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:428
+#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:430
 msgid ""
 "First, close this window by pressing the button below, then right-click into"
 " the messages window to close it."
 msgstr "Primer, tanqueu aquesta finestra amb el botó de més avall; després, cliqueu el botó dret a sobre de la finestra de missatges per tancar-la."
 
-#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:433
+#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:435
 msgid "Close the messages window"
 msgstr "Tanqueu la finestra de missatges"
 
-#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:435
+#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:437
 msgid "Close the Messages Window"
 msgstr "Tanqueu la finestra de missatges"
 
-#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:436
+#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:438
 msgid ""
 "All windows in Widelands can be closed by right-clicking into them. Some "
 "windows can also be toggled with the buttons at the very bottom of the "
 "screen."
 msgstr "Totes les finestres del Widelands es poden tancar amb un clic dret de ratolí. Algunes finestres poden ser obertes o tancades amb els botons de la part inferior de la pantalla."
 
-#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:438
+#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:440
 msgid "Close the messages window now by right-clicking into it."
 msgstr "Tanqueu la finestra de missatges ara, fent-hi clic dret a sobre."
 
-#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:447
+#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:449
 msgid ""
 "Well done! Let’s see how messages work in a real game, shall we? For this, "
 "I’ll take all rocks away from the poor stonemasons in the quarries. They "
@@ -833,11 +840,11 @@ msgid ""
 "the next time they try to do some work."
 msgstr "Ben fet! Vegem com funcionen els missatges en una partida real. Per a fer-ho, treure totes les roques de prop de les pedreres. Llavors, els pedrers hauran d'enviar un missatge dient que no poden trobar pedres a les seves àrees de treball quan hagin de treballar de nou."
 
-#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:455
+#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:457
 msgid "Messages Arrived!"
 msgstr "Han arribat missatges!"
 
-#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:457
+#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:459
 msgid ""
 "You received some messages. See how the button at the bottom of the screen "
 "has changed appearance? You can destroy the quarries now as they are no "
@@ -845,53 +852,53 @@ msgid ""
 "possibilities:"
 msgstr "Heu rebut alguns missatges. El botó de la part de baix ha canviat d'aparença perquè hi ha nous missatges que encara no heu llegit. Podeu ara destruir les pedreres, ja que no serveixen per res i estan ocupant lloc que ens pot ser útil per a altres usos. Per fer-ho, hi ha dues possibilitats:"
 
-#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:459
+#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:461
 msgid ""
 "Burning down the quarry: this is the fastest way of clearing the space. "
 "While the worker abandons the building, the wares are lost."
 msgstr "Cremar la pedrera: és la forma més ràpida d'alliberar l'espai. Mentre el treballador abandona l'edifici, es crema l'edifici i tot el material emprat per fer-lo es perd."
 
-#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:460
+#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:462
 msgid ""
 "Dismantling the quarry: a builder will walk from the headquarters to "
 "dismantle the quarry piece by piece. Thereby, you regain some of the "
 "resources you used for the construction."
 msgstr "Desmantellar la pedrera: un constructor vingut d'algun magatzem desmantellarà la pedrera peça a peça. Recuperareu part dels béns emprats quan vau construir l'edifici, però el procés és més lent que cremar-la."
 
-#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:464
+#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:466
 msgid "Destroy the two quarries"
 msgstr "Destrueix les dues pedreres."
 
-#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:466
+#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:468
 msgid ""
 "Since our quarries are useless now, you can destroy them and reuse the space"
 " later on."
 msgstr "Ja que ara les nostres pedreres són inútils, les podem destruir i reutilitzar l'espai més endavant."
 
-#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:468
+#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:470
 msgid ""
 "There are two different ways of destroying a building: burning down and "
 "dismantling. Try them both out on your quarries."
 msgstr "Hi ha dues formes diferents de destruir un edifici: cremar-lo o desmantellar-lo. Intenteu-ho amb les dues pedreres."
 
-#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:469
+#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:471
 msgid ""
 "Burning down the quarry: This is the fastest way of clearing the space. "
 "While the worker abandons the building, the wares are lost."
 msgstr "Cremar la pedrera: és la forma més ràpida d'alliberar l'espai. Mentre el treballador abandona l'edifici, es crema l'edifici i tot el material emprat per fer-lo es perd."
 
-#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:470
+#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:472
 msgid ""
 "Dismantling the quarry: A builder will walk from the headquarters to "
 "dismantle the quarry piece by piece. Thereby, you regain some of the "
 "resources you used for the construction."
 msgstr "Desmantellar la pedrera: un constructor vingut d'algun magatzem desmantellarà la pedrera peça a peça. Recuperareu part dels béns emprats quan vau construir l'edifici, però el procés és més lent que cremar-la."
 
-#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:475
+#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:477
 msgid "Expanding Your Territory!"
 msgstr "Expandint el vostre territori!"
 
-#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:477
+#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:479
 msgid ""
 "There is one more thing I’d like to teach you now: Expanding your territory."
 " The place that we started with around our headquarters is barely enough for"
@@ -900,7 +907,7 @@ msgid ""
 "territory."
 msgstr "Hi ha una altra cosa que m'agradaria ensenyar-vos: com expandir el territori. El territori del qual disposem ara mateix no és suficient per a tots els edificis que necessitem i, a més a més, també necessitem arribar a les muntanyes, que contenen minerals i carbó. Per això, hem d'expandir-lo."
 
-#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:478
+#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:480
 msgid ""
 "Expanding is as simple as building a military building at the edge of your "
 "territory. The Barbarians have a selection of different military buildings: "
@@ -911,46 +918,46 @@ msgid ""
 "farther than others."
 msgstr "Expandir-se és tan senzill com construir un edifici militar a la frontera del territori. Els bàrbars tenen una bona selecció de diferents edificis militars: guardes sentinella, casernes, torres, fortaleses i ciutadelles. Com major sigui la construcció, més recursos es necessiten per construir-lo, però més terreny conquerirà al seu voltant i més soldats podrà guarnir. Els diversos edificis també tenen diferents rangs de visió: els edificis amb torres poden veure més lluny que els que no en tenen."
 
-#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:479
+#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:481
 msgid ""
 "As soon as a military building is manned, it will extend your land. I will "
 "tell your more about military buildings in another tutorial."
 msgstr "Tan aviat com un edifici militar es guarneixi de personal, estendrà el vostre territori. Us explicaré més sobre els edificis militars en un altre tutorial."
 
-#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:481
+#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:483
 msgid "Let’s try it out now: build a military building on your border."
 msgstr "Proveu-ho: construïu un edifici militar en la vostra frontera."
 
-#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:482
+#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:484
 msgid ""
 "The sentry is the only military site that fits on a small building plot. If "
 "your lumberjack has cleared enough space, you can also build another "
 "military building."
 msgstr "La guarda sentinella és l'únic edifici militar que cap en una parcel·la d'edifici petit. Si el vostre llenyataire ha tallat prou arbres, podreu construir-hi ja un altre edifici militar."
 
-#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:485
+#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:487
 msgid "Expand your territory"
 msgstr "Expandiu el vostre territori"
 
-#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:487
+#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:489
 msgid "Make your territory grow"
 msgstr "Feu créixer el vostre territori"
 
-#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:488
+#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:490
 msgid ""
 "In Widelands, it is necessary to build many buildings, which take up a lot "
 "of space. To expand your territory, you have to build military buildings "
 "next to your border. Every tribe has several military buildings."
 msgstr "En el Widelands, és necessari construir molts edificis, que ocupen molt d'espai. Per expandir el vostre territori calen edificis militars prop de la frontera. Cada cultura té diversos edificis d'aquest tipus."
 
-#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:490
+#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:492
 msgid ""
 "The Barbarians have four different military buildings you can build: the "
 "sentry (small), the barrier and the tower (both medium) and the fortress "
 "(big). Just choose the one you like most."
 msgstr "Els bàrbars tenen quatre edificis militars diferents: la guarda sentinella (edifici petit), la caserna i la torre (ambdós edificis mitjans) i la fortalesa (edifici gran). Trieu el que més goig us faci."
 
-#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:491
+#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:493
 msgid ""
 "Remember that big buildings (green icon) cannot be built on small (red) or "
 "medium (yellow) building plots, but buildings can be built on a building "
@@ -958,59 +965,59 @@ msgid ""
 " mind when you search for a suitable place."
 msgstr "Recordeu que els edificis grans (símbol verd) no es poden construir on hi ha els símbols de casa roja o groga, però sí que es poden construir en els llocs on hi ha espai més que suficient. Haureu de recordar-ho quan planifiqueu la construcció d'edificis."
 
-#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:497
+#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:499
 msgid "Military Site Occupied"
 msgstr "S'ha ocupat un edifici militar"
 
-#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:499
+#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:501
 msgid "Your territory has just grown!"
 msgstr "El vostre territori acaba de créixer!"
 
-#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:500
+#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:502
 msgid ""
 "Great. Do you see how your territory has grown since your soldiers entered "
 "your new military building?"
 msgstr "Molt bé! Heu vist com el territori controlat ha crescut quan els soldats han ocupat el nou edifici militar?"
 
-#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:501
+#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:503
 msgid ""
 "Every military building has a certain conquer area – the more expensive the "
 "building, the more land it conquers."
 msgstr "Cada edifici militar té un cert radi de conquesta; els edificis més cars solen tenir radis de conquesta majors."
 
-#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:508
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:510
+#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:512
 msgid "Conclusion"
 msgstr "Conclusió"
 
-#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:511
+#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:513
 msgid ""
 "This concludes the first tutorial. In order to learn more about the game, I "
 "suggest to play one of the other tutorials. Each of them covers a different "
 "topic."
 msgstr "Això finalitza el primer tutorial. Per aprendre més del funcionament del joc, és recomanable jugar els altres tutorials. Cadascun d'ells cobreix una àrea diferent."
 
-#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:512
+#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:514
 msgid ""
 "However, since you now know how to control Widelands, you can also start a "
 "game (or continue this one) and discover more by yourself."
 msgstr "Tanmateix, ja que ara ja coneixeu els controls bàsics del Widelands, també podeu començar una partida (o continuar aquesta) i descobrir més pel vostre compte."
 
-#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:513
+#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:515
 msgid "To leave this game and return to the main menu, click on the"
 msgstr "Per abandonar aquesta partida i retornar al menú principal, cliqueu el"
 
-#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:515
+#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:517
 msgid ""
 "‘Main Menu’ button on the very left at the bottom of the screen. Then click "
 "the"
 msgstr "botó «Menú principal» a l'extrem esquerre de la part inferior de la pantalla. Llavors cliqueu"
 
-#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:516
+#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:518
 msgid "‘Exit Game’ button."
 msgstr "el botó «Sortir de la partida»."
 
-#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:517
+#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:519
 msgid ""
 "Thanks for playing this tutorial. Enjoy Widelands and remember to visit us "
 "at"
@@ -1021,7 +1028,7 @@ msgstr "Gràcies per jugar aquest tutorial. Gaudiu del Widelands i recordeu-vos-
 msgid "“%s”"
 msgstr "“%s”"
 
-#: ../../data/scripting/format_scenario.lua:96
+#: ../../data/scripting/format_scenario.lua:84
 msgid "New Objective"
 msgid_plural "New Objectives"
 msgstr[0] "Objectiu"
