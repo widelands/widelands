@@ -26,7 +26,7 @@
 
 namespace {
 
-constexpr int kMargin = 5;
+constexpr int kMargin = 4;
 static const uint32_t IWD_HBorder = 10;
 static const uint32_t IWD_VBorder = 10;
 static const uint32_t IWD_DefaultItemsPerRow = 9;
@@ -108,7 +108,7 @@ void ItemWaresDisplay::draw(RenderTarget& dst) {
 	//  bottom edge
 	dst.brighten_rect(Rectf(kMargin, height + 2, width, 2), 1.5 * BUTTON_EDGE_BRIGHT_FACTOR);
 	//  right edge
-	dst.brighten_rect(Rectf(kMargin + width - 2, kMargin, 2, height - 3), 1.5 * BUTTON_EDGE_BRIGHT_FACTOR);
+	dst.brighten_rect(Rectf(kMargin + width - 2, kMargin, 2, height - 2), 1.5 * BUTTON_EDGE_BRIGHT_FACTOR);
 	//  top edge
 	dst.fill_rect(Rectf(kMargin, kMargin, width - 1, 1), black);
 	dst.fill_rect(Rectf(kMargin, kMargin + 1, width - 2, 1), black);

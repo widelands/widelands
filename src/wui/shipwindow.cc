@@ -57,7 +57,7 @@ ShipWindow::ShipWindow(InteractiveGameBase& igb, UniqueWindow::Registry& reg, Sh
      igbase_(igb),
      ship_(ship),
      vbox_(this, 0, 0, UI::Box::Vertical),
-	  navigation_box_(&vbox_, 0, 0, UI::Box::Vertical),
+     navigation_box_(&vbox_, 0, 0, UI::Box::Vertical),
      navigation_box_height_(0) {
 	vbox_.set_inner_spacing(kPadding);
 	assert(ship_.get_owner());
@@ -122,15 +122,7 @@ ShipWindow::ShipWindow(InteractiveGameBase& igb, UniqueWindow::Registry& reg, Sh
 
 	// Bottom buttons
 	UI::Box* buttons = new UI::Box(&vbox_, 0, 0, UI::Box::Horizontal);
-	vbox_.add(buttons);
-
-	btn_goto_ = make_button(
-	   buttons, "goto", _("Go to ship"), pic_goto, boost::bind(&ShipWindow::act_goto, this));
-	buttons->add(btn_goto_);
-	btn_destination_ = make_button(buttons, "destination", _("Go to destination"), pic_destination,
-	                               boost::bind(&ShipWindow::act_destination, this));
-	btn_destination_->set_enabled(false);
-	buttons->add(btn_destination_);
+	vbox_.add(buttons, UI::Box::Resizing::kFullSize);
 
 	btn_sink_ = make_button(
 	   buttons, "sink", _("Sink the ship"), pic_sink, boost::bind(&ShipWindow::act_sink, this));
@@ -141,12 +133,24 @@ ShipWindow::ShipWindow(InteractiveGameBase& igb, UniqueWindow::Registry& reg, Sh
 	               boost::bind(&ShipWindow::act_cancel_expedition, this));
 	buttons->add(btn_cancel_expedition_);
 
+	buttons->add_inf_space();
+
 	if (igbase_.get_display_flag(InteractiveBase::dfDebug)) {
 		btn_debug_ = make_button(buttons, "debug", _("Show Debug Window"), pic_debug,
 		                         boost::bind(&ShipWindow::act_debug, this));
 		btn_debug_->set_enabled(true);
 		buttons->add(btn_debug_);
 	}
+
+	btn_destination_ = make_button(buttons, "destination", _("Go to destination"), pic_destination,
+	                               boost::bind(&ShipWindow::act_destination, this));
+	btn_destination_->set_enabled(false);
+	buttons->add(btn_destination_);
+
+	btn_goto_ = make_button(
+	   buttons, "goto", _("Go to ship"), pic_goto, boost::bind(&ShipWindow::act_goto, this));
+	buttons->add(btn_goto_);
+
 	set_center_panel(&vbox_);
 	set_thinks(true);
 	set_fastclick_panel(btn_goto_);
@@ -182,7 +186,7 @@ void ShipWindow::set_button_visibility() {
 	if (navigation_box_.is_visible() != ship_.state_is_expedition()) {
 		navigation_box_.set_visible(ship_.state_is_expedition());
 		navigation_box_.set_desired_size(
-			navigation_box_.get_w(), ship_.state_is_expedition() ? navigation_box_height_ : 0);
+		   navigation_box_.get_w(), ship_.state_is_expedition() ? navigation_box_height_ : 0);
 		layout();
 	}
 	if (btn_cancel_expedition_->is_visible() != btn_cancel_expedition_->enabled()) {
@@ -244,7 +248,7 @@ void ShipWindow::think() {
 		btn_sink_->set_enabled(can_act && (state != Ship::ShipStates::kExpeditionColonizing));
 	}
 	btn_cancel_expedition_->set_enabled(ship_.state_is_expedition() && can_act &&
-		                                    (state != Ship::ShipStates::kExpeditionColonizing));
+	                                    (state != Ship::ShipStates::kExpeditionColonizing));
 	// Expedition specific buttons
 	set_button_visibility();
 }
