@@ -2566,32 +2566,8 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 
 						assert(bo.new_building == BuildingNecessity::kNeeded);
 
-						// if there are too many trees nearby
-						// if (bf->trees_nearby > 25 && bo.total_count() >= 1) {
-						// continue;
-						//}
-
-						//if (management_data.f_neuron_pool[3].get_result(
-						       //bf->trees_nearby > 25, bf->near_border,
-						       //persistent_data->trees_around_cutters >= 50, new_buildings_stop_,
-						       //bo.cnt_target > bo.total_count())) {
-							//continue;
-						//}
-
 						prio = 0;
 
-						//prio += std::abs(management_data.f_neuron_pool[2].get_result(
-						                    //spots_<(4 * bo.total_count()), bo.total_count() <= 1,
-						                           //get_stocklevel(bo, gametime) < 2, new_buildings_stop_,
-						                           //persistent_data->trees_around_cutters> 40) *
-						                 //std::abs(management_data.get_military_number_at(36)) / 2);
-
-						//prio +=
-						   //std::abs(management_data.f_neuron_pool[1].get_result(
-						               //gametime < 60 * 60 * 1000, get_stocklevel(bo, gametime) < 2,
-						               //persistent_data->trees_around_cutters + 5 < bf->trees_nearby * 10,
-						               //bf->near_border, persistent_data->trees_around_cutters) *
-						            //management_data.get_military_number_at(37) / 4);
 
 						if (bo.total_count() == 0) {
 							prio += 200;
