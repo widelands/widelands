@@ -24,16 +24,11 @@
 #include "economy/input_queue.h"
 #include "economy/request.h"
 #include "graphic/graphic.h"
-#include "logic/map_objects/tribes/constructionsite.h"
-#include "logic/map_objects/tribes/militarysite.h"
-#include "logic/map_objects/tribes/trainingsite.h"
 #include "logic/map_objects/tribes/tribe_descr.h"
 #include "logic/map_objects/tribes/worker.h"
 #include "ui_basic/tabpanel.h"
 #include "ui_basic/textarea.h"
 #include "wui/inputqueuedisplay.h"
-
-using Widelands::ProductionSite;
 
 static char const* pic_tab_wares = "images/wui/buildings/menu_tab_wares.png";
 static char const* pic_tab_workers = "images/wui/buildings/menu_list_workers.png";
@@ -44,10 +39,28 @@ Create the window and its panels, add it to the registry.
 ===============
 */
 ProductionSiteWindow::ProductionSiteWindow(InteractiveGameBase& parent,
-                                           ProductionSite& ps,
-                                           UI::Window*& registry)
-   : BuildingWindow(parent, ps, registry) {
-	const std::vector<Widelands::InputQueue*>& inputqueues = ps.inputqueues();
+                                           UI::UniqueWindow::Registry& reg,
+                                           Widelands::ProductionSite& ps,
+                                           bool avoid_fastclick)
+   : BuildingWindow(parent, reg, ps, avoid_fastclick) {
+	productionsitenotes_subscriber_ = Notifications::subscribe<Widelands::NoteBuilding>(
+	   [this](const Widelands::NoteBuilding& note) {
+		   if (note.serial == building().serial() && !is_dying_) {
+			   switch (note.action) {
+			   case Widelands::NoteBuilding::Action::kWorkersChanged:
+				   update_worker_table();
+				   break;
+			   default:
+				   break;
+			   }
+		   }
+		});
+	init(avoid_fastclick);
+}
+
+void ProductionSiteWindow::init(bool avoid_fastclick) {
+	BuildingWindow::init(avoid_fastclick);
+	const std::vector<Widelands::InputQueue*>& inputqueues = productionsite().inputqueues();
 
 	if (inputqueues.size()) {
 		// Add the wares tab
@@ -55,7 +68,8 @@ ProductionSiteWindow::ProductionSiteWindow(InteractiveGameBase& parent,
 		   get_tabs(), 0, 0, UI::Box::Vertical, g_gr->get_xres() - 80, g_gr->get_yres() - 80);
 
 		for (uint32_t i = 0; i < inputqueues.size(); ++i) {
-			prod_box->add(new InputQueueDisplay(prod_box, 0, 0, igbase(), ps, inputqueues[i]));
+			prod_box->add(
+			   new InputQueueDisplay(prod_box, 0, 0, *igbase(), productionsite(), inputqueues[i]));
 		}
 
 		get_tabs()->add("wares", g_gr->images().get(pic_tab_wares), prod_box, _("Wares"));
@@ -79,7 +93,7 @@ ProductionSiteWindow::ProductionSiteWindow(InteractiveGameBase& parent,
 		}
 		worker_table_->fit_height();
 
-		if (igbase().can_act(building().owner().player_number())) {
+		if (igbase()->can_act(building().owner().player_number())) {
 			worker_caps_->add_inf_space();
 			UI::Button* evict_button = new UI::Button(
 			   worker_caps_, "evict", 0, 0, 34, 34, g_gr->images().get("images/ui_basic/but4.png"),
@@ -98,6 +112,7 @@ ProductionSiteWindow::ProductionSiteWindow(InteractiveGameBase& parent,
 		   (ngettext("Worker", "Workers", productionsite().descr().nr_working_positions())));
 		update_worker_table();
 	}
+	think();
 }
 
 void ProductionSiteWindow::think() {
@@ -111,17 +126,6 @@ void ProductionSiteWindow::think() {
 			break;
 		}
 	}
-}
-
-/*
-===============
-Create the production site information window.
-===============
-*/
-void ProductionSite::create_options_window(InteractiveGameBase& parent, UI::Window*& registry) {
-	ProductionSiteWindow* win = new ProductionSiteWindow(parent, *this, registry);
-	Building::options_window_connections.push_back(Building::workers_changed.connect(
-	   boost::bind(&ProductionSiteWindow::update_worker_table, boost::ref(*win))));
 }
 
 void ProductionSiteWindow::update_worker_table() {
@@ -175,7 +179,7 @@ void ProductionSiteWindow::evict_worker() {
 		Widelands::Worker* worker =
 		   productionsite().working_positions()[worker_table_->get_selected()].worker;
 		if (worker) {
-			igbase().game().send_player_evict_worker(*worker);
+			igbase()->game().send_player_evict_worker(*worker);
 		}
 	}
 }

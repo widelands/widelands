@@ -69,10 +69,9 @@ BaseListselect::BaseListselect(Panel* const parent,
 	scrollbar_.moved.connect(boost::bind(&BaseListselect::set_scrollpos, this, _1));
 
 	if (selection_mode_ == ListselectLayout::kShowCheck) {
-		int pic_h;
 		check_pic_ = g_gr->images().get("images/ui_basic/list_selected.png");
 		max_pic_width_ = check_pic_->width();
-		pic_h = check_pic_->height();
+		int pic_h = check_pic_->height();
 		if (pic_h > lineheight_)
 			lineheight_ = pic_h;
 	} else {

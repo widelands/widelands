@@ -126,6 +126,7 @@ FullscreenMenuNetSetupLAN::FullscreenMenuNetSetupLAN()
 
 void FullscreenMenuNetSetupLAN::layout() {
 	// TODO(GunChleoc): Box layout and then implement
+	opengames.layout();
 }
 
 void FullscreenMenuNetSetupLAN::think() {
