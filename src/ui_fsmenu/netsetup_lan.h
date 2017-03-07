@@ -25,16 +25,17 @@
 #include <string>
 
 #include "network/network_lan_promotion.h"
+#include "ui_basic/box.h"
 #include "ui_basic/button.h"
 #include "ui_basic/editbox.h"
 #include "ui_basic/table.h"
 #include "ui_basic/textarea.h"
-#include "ui_fsmenu/base.h"
+#include "ui_fsmenu/load_map_or_game.h"
 
 struct NetOpenGame;
 struct NetGameInfo;
 
-class FullscreenMenuNetSetupLAN : public FullscreenMenuBase {
+class FullscreenMenuNetSetupLAN : public FullscreenMenuLoadMapOrGame {
 public:
 	FullscreenMenuNetSetupLAN();
 
@@ -59,18 +60,6 @@ protected:
 private:
 	void layout() override;
 
-	uint32_t butx_;
-	uint32_t butw_;
-	uint32_t buth_;
-	uint32_t listw_;
-	UI::Textarea title, opengames_;
-	UI::Textarea playername_, hostname_;
-	UI::Button joingame, hostgame, back, loadlasthost;
-	UI::EditBox playername;
-	UI::EditBox hostname;
-	UI::Table<const NetOpenGame* const> opengames;
-	LanGameFinder discovery;
-
 	void game_selected(uint32_t);
 	void game_doubleclicked(uint32_t);
 
@@ -87,6 +76,29 @@ private:
 	void clicked_joingame();
 	void clicked_hostgame();
 	void clicked_lasthost();
+
+
+	const int labelh_;
+
+	UI::Textarea title_;
+
+	UI::Box left_column_, right_column_;
+
+	// Left Column
+	UI::Textarea label_opengames_;
+	UI::Table<const NetOpenGame* const> table_;
+
+	// Right Column
+	UI::Textarea label_playername_;
+	UI::EditBox playername_;
+	UI::Textarea label_hostname_;
+	UI::Box host_box_;
+	UI::EditBox hostname_;
+	UI::Button loadlasthost_;
+
+	UI::Button joingame_, hostgame_;
+
+	LanGameFinder discovery_;
 };
 
 #endif  // end of include guard: WL_UI_FSMENU_NETSETUP_LAN_H

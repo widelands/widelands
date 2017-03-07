@@ -23,124 +23,150 @@
 #include "base/macros.h"
 #include "graphic/graphic.h"
 #include "graphic/text_constants.h"
+#include "graphic/text_layout.h"
 #include "network/constants.h"
 #include "network/network.h"
 #include "profile/profile.h"
 
 FullscreenMenuNetSetupLAN::FullscreenMenuNetSetupLAN()
-   : FullscreenMenuBase(),
+   : FullscreenMenuLoadMapOrGame(),
+     labelh_(text_height(UI::g_fh1->fontset()->representative_character(), UI_FONT_SIZE_SMALL) + 8),
 
-     // Values for alignment and size
-     butx_(get_w() * 13 / 40),
-     butw_(get_w() / 4),
-     buth_(get_h() * 19 / 400),
-     listw_(get_w() * 9 / 16),
+     // Main title
+     title_(this, 0, 0, _("Begin Network Game"), UI::Align::kCenter),
 
-     // Text labels
-     title(this, get_w() / 2, get_h() / 10, _("Begin Network Game"), UI::Align::kCenter),
-     opengames_(
-        this, get_w() * 3 / 50, get_h() * 27 / 100, _("List of games in your local network:")),
-     playername_(this, get_w() * 16 / 25, get_h() * 27 / 100, _("Your nickname:")),
-     hostname_(this, get_w() * 16 / 25, get_h() * 17 / 40, _("Host to connect:")),
+     // Boxes
+     left_column_(this, 0, 0, UI::Box::Vertical),
+     right_column_(this, 0, 0, UI::Box::Vertical),
+
+     // Left column content
+     label_opengames_(&left_column_, 0, 0, _("List of games in your local network:")),
+     table_(&left_column_, 0, 0, 0, 0),
+
+     // Right column content
+     label_playername_(&right_column_, 0, 0, _("Your nickname:")),
+     playername_(
+        &right_column_, 0, 0, 0, labelh_, 2, g_gr->images().get("images/ui_basic/but2.png")),
+     label_hostname_(&right_column_, 0, 0, _("Host to connect:")),
+
+     host_box_(&right_column_, 0, 0, UI::Box::Horizontal),
+     hostname_(&host_box_, 0, 0, 0, labelh_, 2, g_gr->images().get("images/ui_basic/but2.png")),
+     loadlasthost_(&host_box_,
+                   "load_previous_host",
+                   0,
+                   0,
+                   labelh_,
+                   labelh_,
+                   g_gr->images().get("images/ui_basic/but1.png"),
+                   g_gr->images().get("images/ui_fsmenu/menu_load_game.png"),
+                   _("Load previous host")),
 
      // Buttons
-     joingame(this,
-              "join_game",
-              get_w() * 16 / 25,
-              get_h() * 5333 / 10000,
-              butw_,
-              buth_,
-              g_gr->images().get("images/ui_basic/but1.png"),
-              _("Join this game")),
-     hostgame(this,
-              "host_game",
-              get_w() * 16 / 25,
-              get_h() * 6083 / 10000,
-              butw_,
-              buth_,
-              g_gr->images().get("images/ui_basic/but1.png"),
-              _("Host a new game")),
-     back(this,
-          "back",
-          get_w() * 16 / 25,
-          get_h() * 8333 / 10000,
-          butw_,
-          buth_,
-          g_gr->images().get("images/ui_basic/but0.png"),
-          _("Back")),
-     loadlasthost(this,
-                  "load_previous_host",
-                  get_w() * 171 / 200,
-                  get_h() * 19 / 40,
-                  buth_,
-                  buth_,
-                  g_gr->images().get("images/ui_basic/but1.png"),
-                  g_gr->images().get("images/ui_fsmenu/menu_load_game.png"),
-                  _("Load previous host")),
+     joingame_(&right_column_,
+               "join_game",
+               0,
+               0,
+               0,
+               0,
+               g_gr->images().get("images/ui_basic/but1.png"),
+               _("Join this game")),
+     hostgame_(&right_column_,
+               "host_game",
+               0,
+               0,
+               0,
+               0,
+               g_gr->images().get("images/ui_basic/but1.png"),
+               _("Host a new game")) {
 
-     // Edit boxes
-     playername(this,
-                get_w() * 16 / 25,
-                get_h() * 3333 / 10000,
-                butw_,
-                buth_,
-                2,
-                g_gr->images().get("images/ui_basic/but2.png"),
-                fs_small()),
-     hostname(this,
-              get_w() * 16 / 25,
-              get_h() * 19 / 40,
-              get_w() * 17 / 80,
-              buth_,
-              2,
-              g_gr->images().get("images/ui_basic/but2.png"),
-              fs_small()),
+	ok_.set_visible(false);  // We have 2 starting buttons, so we need a different layout here.
 
-     // List
-     opengames(this, get_w() * 3 / 50, get_h() * 3333 / 10000, listw_, get_h() * 5433 / 10000) {
-	joingame.sigclicked.connect(
+	left_column_.add(&label_opengames_, UI::Box::Resizing::kFullSize);
+	left_column_.add_space(padding_);
+	left_column_.add(&table_, UI::Box::Resizing::kExpandBoth);
+
+	right_column_.set_inner_spacing(padding_);
+	right_column_.add(&label_playername_, UI::Box::Resizing::kFullSize);
+	right_column_.add(&playername_, UI::Box::Resizing::kFullSize);
+	right_column_.add_inf_space();
+	right_column_.add(&label_hostname_, UI::Box::Resizing::kFullSize);
+	right_column_.add(&host_box_, UI::Box::Resizing::kFullSize);
+	right_column_.add_space(0);
+	right_column_.add(&joingame_, UI::Box::Resizing::kFullSize);
+	right_column_.add_inf_space();
+	right_column_.add(&hostgame_, UI::Box::Resizing::kFullSize);
+	right_column_.add_inf_space();
+	right_column_.add_inf_space();
+	right_column_.add_inf_space();
+	right_column_.add_inf_space();
+
+	host_box_.add(&hostname_, UI::Box::Resizing::kFillSpace);
+	host_box_.add_space(padding_);
+	host_box_.add(&loadlasthost_);
+
+	joingame_.sigclicked.connect(
 	   boost::bind(&FullscreenMenuNetSetupLAN::clicked_joingame, boost::ref(*this)));
-	hostgame.sigclicked.connect(
+	hostgame_.sigclicked.connect(
 	   boost::bind(&FullscreenMenuNetSetupLAN::clicked_hostgame, boost::ref(*this)));
-	back.sigclicked.connect(
+	back_.sigclicked.connect(
 	   boost::bind(&FullscreenMenuNetSetupLAN::clicked_back, boost::ref(*this)));
-	loadlasthost.sigclicked.connect(
+	loadlasthost_.sigclicked.connect(
 	   boost::bind(&FullscreenMenuNetSetupLAN::clicked_lasthost, boost::ref(*this)));
 
 	Section& s = g_options.pull_section("global");  //  for playername
 
-	title.set_fontsize(UI_FONT_SIZE_BIG);
-	hostname.changed.connect(boost::bind(&FullscreenMenuNetSetupLAN::change_hostname, this));
-	playername.set_text(s.get_string("nickname", (_("nobody"))));
-	playername.changed.connect(boost::bind(&FullscreenMenuNetSetupLAN::change_playername, this));
-	opengames.add_column(listw_ * 2 / 5, _("Host"));
-	opengames.add_column(listw_ * 2 / 5, _("Map"));
-	opengames.add_column(listw_ / 5, _("State"));
-	opengames.selected.connect(boost::bind(&FullscreenMenuNetSetupLAN::game_selected, this, _1));
-	opengames.double_clicked.connect(
+	title_.set_fontsize(UI_FONT_SIZE_BIG);
+	hostname_.changed.connect(boost::bind(&FullscreenMenuNetSetupLAN::change_hostname, this));
+	playername_.set_text(s.get_string("nickname", (_("nobody"))));
+	playername_.changed.connect(boost::bind(&FullscreenMenuNetSetupLAN::change_playername, this));
+	table_.add_column(190, _("Host"));
+	table_.add_column(0, _("Map"), "", UI::Align::kLeft, UI::TableColumnType::kFlexible);
+	table_.add_column(90, _("State"));
+	table_.selected.connect(boost::bind(&FullscreenMenuNetSetupLAN::game_selected, this, _1));
+	table_.double_clicked.connect(
 	   boost::bind(&FullscreenMenuNetSetupLAN::game_doubleclicked, this, _1));
-	discovery.set_callback(discovery_callback, this);
+	discovery_.set_callback(discovery_callback, this);
 
-	joingame.set_enabled(false);
+	joingame_.set_enabled(false);
+	layout();
 }
 
 void FullscreenMenuNetSetupLAN::layout() {
-	// TODO(GunChleoc): Box layout and then implement
-	opengames.layout();
+	FullscreenMenuLoadMapOrGame::layout();
+
+	butw_ = get_w() - right_column_x_ - right_column_margin_;
+	const int colum_header_h = label_opengames_.get_h() + padding_;
+
+	title_.set_size(get_w(), title_.get_h());
+	title_.set_pos(Vector2i(0, (tabley_ - colum_header_h) / 3));
+
+	left_column_.set_size(tablew_, tableh_ + colum_header_h);
+	left_column_.set_pos(Vector2i(tablex_, tabley_ - colum_header_h));
+
+	right_column_.set_size(
+	   get_right_column_w(right_column_x_), tableh_ + colum_header_h - buth_ - 4 * padding_);
+	right_column_.set_pos(Vector2i(right_column_x_, tabley_ - colum_header_h));
+
+	// Buttons
+	joingame_.set_desired_size(butw_, buth_);
+	hostgame_.set_desired_size(butw_, buth_);
+
+	back_.set_size(butw_, buth_);
+	back_.set_pos(Vector2i(right_column_x_, buty_));
 }
 
 void FullscreenMenuNetSetupLAN::think() {
 	FullscreenMenuBase::think();
 
-	discovery.run();
+	discovery_.run();
 }
 
 bool FullscreenMenuNetSetupLAN::get_host_address(uint32_t& addr, uint16_t& port) {
-	const std::string& host = hostname.text();
+	const std::string& host = hostname_.text();
 
-	const uint32_t opengames_size = opengames.size();
+	const uint32_t opengames_size = table_.size();
 	for (uint32_t i = 0; i < opengames_size; ++i) {
-		const NetOpenGame& game = *opengames[i];
+		const NetOpenGame& game = *table_[i];
 
 		if (!strcmp(game.info.hostname, host.c_str())) {
 			addr = game.address;
@@ -160,11 +186,11 @@ bool FullscreenMenuNetSetupLAN::get_host_address(uint32_t& addr, uint16_t& port)
 }
 
 const std::string& FullscreenMenuNetSetupLAN::get_playername() {
-	return playername.text();
+	return playername_.text();
 }
 
 void FullscreenMenuNetSetupLAN::clicked_ok() {
-	if (hostname.text().empty()) {
+	if (hostname_.text().empty()) {
 		clicked_hostgame();
 	} else {
 		clicked_joingame();
@@ -172,10 +198,10 @@ void FullscreenMenuNetSetupLAN::clicked_ok() {
 }
 
 void FullscreenMenuNetSetupLAN::game_selected(uint32_t) {
-	if (opengames.has_selection()) {
-		if (const NetOpenGame* const game = opengames.get_selected()) {
-			hostname.set_text(game->info.hostname);
-			joingame.set_enabled(true);
+	if (table_.has_selection()) {
+		if (const NetOpenGame* const game = table_.get_selected()) {
+			hostname_.set_text(game->info.hostname);
+			joingame_.set_enabled(true);
 		}
 	}
 }
@@ -204,14 +230,14 @@ void FullscreenMenuNetSetupLAN::update_game_info(
 }
 
 void FullscreenMenuNetSetupLAN::game_opened(const NetOpenGame* game) {
-	update_game_info(opengames.add(game), game->info);
+	update_game_info(table_.add(game), game->info);
 }
 
 void FullscreenMenuNetSetupLAN::game_closed(const NetOpenGame*) {
 }
 
 void FullscreenMenuNetSetupLAN::game_updated(const NetOpenGame* game) {
-	if (UI::Table<const NetOpenGame* const>::EntryRecord* const er = opengames.find(game))
+	if (UI::Table<const NetOpenGame* const>::EntryRecord* const er = table_.find(game))
 		update_game_info(*er, game->info);
 }
 
@@ -235,17 +261,17 @@ void FullscreenMenuNetSetupLAN::discovery_callback(int32_t const type,
 
 void FullscreenMenuNetSetupLAN::change_hostname() {
 	// Allow user to enter a hostname manually
-	opengames.select(opengames.no_selection_index());
-	joingame.set_enabled(hostname.text().size());
+	table_.select(table_.no_selection_index());
+	joingame_.set_enabled(hostname_.text().size());
 }
 
 void FullscreenMenuNetSetupLAN::change_playername() {
-	g_options.pull_section("global").set_string("nickname", playername.text());
+	g_options.pull_section("global").set_string("nickname", playername_.text());
 }
 
 void FullscreenMenuNetSetupLAN::clicked_joingame() {
 	// Save selected host so users can reload it for reconnection.
-	g_options.pull_section("global").set_string("lasthost", hostname.text());
+	g_options.pull_section("global").set_string("lasthost", hostname_.text());
 
 	end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kJoingame);
 }
@@ -257,8 +283,8 @@ void FullscreenMenuNetSetupLAN::clicked_hostgame() {
 void FullscreenMenuNetSetupLAN::clicked_lasthost() {
 	Section& s = g_options.get_safe_section("global");
 	std::string const host = s.get_string("lasthost", "");
-	hostname.set_text(host);
+	hostname_.set_text(host);
 	if (host.size())
-		joingame.set_enabled(true);
-	opengames.select(opengames.no_selection_index());
+		joingame_.set_enabled(true);
+	table_.select(table_.no_selection_index());
 }
