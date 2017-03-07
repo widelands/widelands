@@ -128,8 +128,16 @@ buildtool="" #Use ninja by default, fall back to make if that is not available.
     rm  -f ../VERSION || true
     rm  -f ../widelands || true
 
+    rm  -f ../wl_map_object_info || true
+    rm  -f ../wl_map_info || true
+
     mv VERSION ../VERSION
     mv src/widelands ../widelands
+
+    if [ $BUILD_WEBSITE = "ON" ]; then
+        mv ../build/src/website/wl_map_object_info ../wl_map_object_info
+        mv ../build/src/website/wl_map_info ../wl_map_info
+    fi
     return 0
   }
 
