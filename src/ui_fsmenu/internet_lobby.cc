@@ -34,8 +34,8 @@
 #include "profile/profile.h"
 #include "ui_basic/messagebox.h"
 
-FullscreenMenuInternetLobby::FullscreenMenuInternetLobby(char const* const nick,
-                                                         char const* const pwd,
+FullscreenMenuInternetLobby::FullscreenMenuInternetLobby(std::string& nick,
+                                                         std::string& pwd,
                                                          bool registered)
    : FullscreenMenuLoadMapOrGame(),
 

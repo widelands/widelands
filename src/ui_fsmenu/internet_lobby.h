@@ -37,7 +37,7 @@
 
 class FullscreenMenuInternetLobby : public FullscreenMenuLoadMapOrGame {
 public:
-	FullscreenMenuInternetLobby(const char*, const char*, bool);
+	FullscreenMenuInternetLobby(std::string&, std::string&, bool);
 
 	void think() override;
 
@@ -85,8 +85,8 @@ private:
 	UI::Button hostgame_;
 
 	// Login information
-	const char* nickname_;
-	const char* password_;
+	const std::string nickname_;
+	const std::string password_;
 	bool is_registered_;
 };
 
