@@ -35,17 +35,23 @@ GameChatPanel::GameChatPanel(UI::Panel* parent,
                              ChatProvider& chat)
    : UI::Panel(parent, x, y, w, h),
      chat_(chat),
-     chatbox(this,
+     box_(this, 0, 0, UI::Box::Vertical),
+     chatbox(&box_,
              0,
              0,
-             w,
-             h - 25,
+             0,
+             0,
              "",
              UI::Align::kLeft,
              g_gr->images().get("images/ui_basic/but1.png"),
              UI::MultilineTextarea::ScrollMode::kScrollLogForced),
-     editbox(this, 0, h - 20, w, 20, 2),
+     editbox(&box_, 0, 0, 0, 20, 2),
      chat_message_counter(std::numeric_limits<uint32_t>::max()) {
+
+	box_.add(&chatbox, UI::Box::Resizing::kExpandBoth);
+	box_.add_space(4);
+	box_.add(&editbox, UI::Box::Resizing::kFullSize);
+
 	editbox.ok.connect(boost::bind(&GameChatPanel::key_enter, this));
 	editbox.cancel.connect(boost::bind(&GameChatPanel::key_escape, this));
 	editbox.activate_history(true);
@@ -56,6 +62,11 @@ GameChatPanel::GameChatPanel(UI::Panel* parent,
 	chat_message_subscriber_ =
 	   Notifications::subscribe<ChatMessage>([this](const ChatMessage&) { recalculate(); });
 	recalculate();
+	layout();
+}
+
+void GameChatPanel::layout() {
+	box_.set_size(get_inner_w(), get_inner_h());
 }
 
 /**

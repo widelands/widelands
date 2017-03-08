@@ -23,6 +23,7 @@
 #include <memory>
 
 #include "chat/chat.h"
+#include "ui_basic/box.h"
 #include "ui_basic/editbox.h"
 #include "ui_basic/multilinetextarea.h"
 
@@ -51,11 +52,13 @@ struct GameChatPanel : public UI::Panel {
 	void focus_edit();
 
 private:
+	void layout() override;
 	void recalculate();
 	void key_enter();
 	void key_escape();
 
 	ChatProvider& chat_;
+	UI::Box box_;
 	UI::MultilineTextarea chatbox;
 	UI::EditBox editbox;
 	uint32_t chat_message_counter;
