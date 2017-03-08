@@ -53,7 +53,7 @@ FullscreenMenuInternetLobby::FullscreenMenuInternetLobby(std::string& nick,
      // Left column content
      label_clients_online_(&left_column_, 0, 0, _("Clients online:")),
      clientsonline_table_(&left_column_, 0, 0, 0, 0),
-     chat_(&left_column_, 0, 0, 0, 0, InternetGaming::ref()),
+     chat_(&left_column_, 0, 0, 0, 0, InternetGaming::ref(), GameChatPanel::Style::kFsMenu),
 
      // Right column content
      label_opengames_(&right_column_, 0, 0, _("List of games:")),

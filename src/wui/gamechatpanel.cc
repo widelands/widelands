@@ -32,7 +32,8 @@ GameChatPanel::GameChatPanel(UI::Panel* parent,
                              int32_t const y,
                              uint32_t const w,
                              uint32_t const h,
-                             ChatProvider& chat)
+                             ChatProvider& chat,
+                             Style style)
    : UI::Panel(parent, x, y, w, h),
      chat_(chat),
      box_(this, 0, 0, UI::Box::Vertical),
@@ -43,9 +44,17 @@ GameChatPanel::GameChatPanel(UI::Panel* parent,
              0,
              "",
              UI::Align::kLeft,
-             g_gr->images().get("images/ui_basic/but1.png"),
+             style == Style::kFsMenu ? g_gr->images().get("images/ui_basic/but3.png") :
+                                       g_gr->images().get("images/ui_basic/but1.png"),
              UI::MultilineTextarea::ScrollMode::kScrollLogForced),
-     editbox(&box_, 0, 0, 0, 20, 2),
+     editbox(&box_,
+             0,
+             0,
+             0,
+             text_height(UI::g_fh1->fontset()->representative_character(), UI_FONT_SIZE_SMALL) + 4,
+             2,
+             style == Style::kFsMenu ? g_gr->images().get("images/ui_basic/but2.png") :
+                                       g_gr->images().get("images/ui_basic/but1.png")),
      chat_message_counter(std::numeric_limits<uint32_t>::max()) {
 
 	box_.add(&chatbox, UI::Box::Resizing::kExpandBoth);
