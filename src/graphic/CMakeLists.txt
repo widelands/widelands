@@ -133,6 +133,7 @@ wl_library(graphic_terrain_programs
     graphic_surface
     io_filesystem
     logic
+    logic_constants
     logic_widelands_geometry
 )
 
@@ -273,7 +274,8 @@ wl_library(graphic
     io_fileread
     io_filesystem
     io_stream
-    logic
+    logic_constants
+    note_sound
     notifications
     scripting_lua_table
     sound

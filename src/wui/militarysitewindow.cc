@@ -17,47 +17,30 @@
  *
  */
 
-#include "logic/map_objects/tribes/militarysite.h"
+#include "wui/militarysitewindow.h"
 
 #include "graphic/graphic.h"
 #include "ui_basic/tabpanel.h"
-#include "wui/buildingwindow.h"
 #include "wui/soldiercapacitycontrol.h"
 #include "wui/soldierlist.h"
 
-using Widelands::MilitarySite;
-
 static char const* pic_tab_military = "images/wui/buildings/menu_tab_military.png";
 
-/**
- * Status window for \ref MilitarySite
- */
-struct MilitarySiteWindow : public BuildingWindow {
-	MilitarySiteWindow(InteractiveGameBase& parent, MilitarySite&, UI::Window*& registry);
-
-	MilitarySite& militarysite() {
-		return dynamic_cast<MilitarySite&>(building());
-	}
-
-protected:
-	void create_capsbuttons(UI::Box* buttons) override;
-};
-
 MilitarySiteWindow::MilitarySiteWindow(InteractiveGameBase& parent,
-                                       MilitarySite& ms,
-                                       UI::Window*& registry)
-   : BuildingWindow(parent, ms, registry) {
-	get_tabs()->add("soldiers", g_gr->images().get(pic_tab_military),
-	                create_soldier_list(*get_tabs(), parent, militarysite()), _("Soldiers"));
+                                       UI::UniqueWindow::Registry& reg,
+                                       Widelands::MilitarySite& ms,
+                                       bool avoid_fastclick)
+   : BuildingWindow(parent, reg, ms, avoid_fastclick) {
+	init(avoid_fastclick);
 }
 
 void MilitarySiteWindow::create_capsbuttons(UI::Box* buttons) {
 	BuildingWindow::create_capsbuttons(buttons);
 }
 
-/**
- * Create the  military site information window.
- */
-void MilitarySite::create_options_window(InteractiveGameBase& plr, UI::Window*& registry) {
-	new MilitarySiteWindow(plr, *this, registry);
+void MilitarySiteWindow::init(bool avoid_fastclick) {
+	BuildingWindow::init(avoid_fastclick);
+	get_tabs()->add("soldiers", g_gr->images().get(pic_tab_military),
+	                create_soldier_list(*get_tabs(), *igbase(), militarysite()), _("Soldiers"));
+	think();
 }

@@ -184,6 +184,8 @@ public:
 	void set_column_title(uint8_t col, const std::string& title);
 	void set_column_compare(uint8_t col, const CompareFn& fn);
 
+	void layout() override;
+
 	void clear();
 	void set_sort_column(uint8_t const col) {
 		assert(col < columns_.size());
@@ -280,11 +282,10 @@ public:
 private:
 	bool default_compare_string(uint32_t column, uint32_t a, uint32_t b);
 	bool sort_helper(uint32_t a, uint32_t b);
-	void layout() override;
 
 	struct Column {
 		Button* btn;
-		uint32_t width;
+		int width;
 		Align alignment;
 		CompareFn compare;
 	};
@@ -293,8 +294,8 @@ private:
 	static const int32_t ms_darken_value = -20;
 
 	Columns columns_;
-	uint32_t total_width_;
-	uint32_t headerheight_;
+	int total_width_;
+	const uint32_t headerheight_;
 	int32_t lineheight_;
 	const Image* button_background_;
 	Scrollbar* scrollbar_;

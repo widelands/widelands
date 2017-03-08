@@ -90,10 +90,9 @@ LoadOrSaveGame::LoadOrSaveGame(UI::Panel* parent,
                    tabley,
                    parent->get_w() - tablex - tablew - 2 * padding,
                    tableh,
-                   style),
+						 style),
      game_(g) {
 	table_.add_column(130, _("Save Date"), _("The date this game was saved"), UI::Align::kLeft);
-	int used_width = 130;
 	if (filetype_ != FileType::kGameSinglePlayer) {
 		std::vector<std::string> modes;
 		if (filetype_ == FileType::kReplay) {
@@ -122,12 +121,11 @@ LoadOrSaveGame::LoadOrSaveGame(UI::Panel* parent,
 		   /** TRANSLATORS: A tooltip will explain if you need to use an abbreviation. */
 		   _("Mode"), (boost::format("%s %s") % mode_tooltip_1 % mode_tooltip_2).str(),
 		   UI::Align::kLeft);
-		used_width += 65;
 	}
-	table_.add_column(table_.get_w() - used_width, _("Description"),
+	table_.add_column(0, _("Description"),
 	                  _("The filename that the game was saved under followed by the map’s name, "
 	                    "or the map’s name followed by the last objective achieved."),
-	                  UI::Align::kLeft);
+							UI::Align::kLeft, UI::TableColumnType::kFlexible);
 	table_.set_column_compare(
 	   0, boost::bind(&LoadOrSaveGame::compare_date_descending, this, _1, _2));
 	table_.set_sort_column(0);

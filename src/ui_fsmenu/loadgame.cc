@@ -91,6 +91,7 @@ FullscreenMenuLoadGame::FullscreenMenuLoadGame(Widelands::Game& g,
 		ok_.set_tooltip(_("Load this game"));
 		delete_.set_tooltip(_("Delete this game"));
 	}
+	set_thinks(false);
 
 	back_.sigclicked.connect(boost::bind(&FullscreenMenuLoadGame::clicked_back, boost::ref(*this)));
 	ok_.sigclicked.connect(boost::bind(&FullscreenMenuLoadGame::clicked_ok, boost::ref(*this)));
@@ -106,6 +107,7 @@ FullscreenMenuLoadGame::FullscreenMenuLoadGame(Widelands::Game& g,
 
 void FullscreenMenuLoadGame::layout() {
 	// TODO(GunChleoc): Implement when we have box layout for the details.
+	load_or_save_.table().layout();
 }
 
 void FullscreenMenuLoadGame::think() {

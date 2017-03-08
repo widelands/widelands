@@ -8,5 +8,9 @@ tips = {
       text = _"Always build a forester’s and a woodcutter’s house, so you will not run out of logs.",
       seconds = 5
    },
+   {
+      text = _"Atlanteans need spidercloth for many buildings. Build the needed infrastructure early before you run out.",
+      seconds = 5
+   },
 }
 return tips

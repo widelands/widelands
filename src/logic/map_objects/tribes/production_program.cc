@@ -51,6 +51,7 @@
 #include "logic/mapregion.h"
 #include "logic/message_queue.h"
 #include "logic/player.h"
+#include "sound/note_sound.h"
 #include "sound/sound_handler.h"
 
 namespace Widelands {
@@ -1430,7 +1431,7 @@ ProductionProgram::ActPlaySound::ActPlaySound(char* parameters) {
 }
 
 void ProductionProgram::ActPlaySound::execute(Game& game, ProductionSite& ps) const {
-	g_sound_handler.play_fx(name, ps.position_, priority);
+	Notifications::publish(NoteSound(name, ps.position_, priority));
 	return ps.program_step(game);
 }
 

@@ -149,13 +149,14 @@ wl_library(wui
     attack_box.h
     building_statistics_menu.cc
     building_statistics_menu.h
-    building_ui.cc
     buildingwindow.cc
     buildingwindow.h
     constructionsitewindow.cc
+    constructionsitewindow.h
     debugconsole.cc
     debugconsole.h
     dismantlesitewindow.cc
+    dismantlesitewindow.h
     encyclopedia_window.cc
     encyclopedia_window.h
     fieldaction.cc
@@ -198,6 +199,7 @@ wl_library(wui
     login_box.h
     logmessage.h
     militarysitewindow.cc
+    militarysitewindow.h
     minimap.cc
     minimap.h
     multiplayersetupgroup.cc
@@ -221,6 +223,7 @@ wl_library(wui
     story_message_box.cc
     story_message_box.h
     trainingsitewindow.cc
+    trainingsitewindow.h
     transport_draw.cc
     tribal_encyclopedia.cc
     tribal_encyclopedia.h
@@ -229,6 +232,7 @@ wl_library(wui
     ware_statistics_menu.cc
     ware_statistics_menu.h
     warehousewindow.cc
+    warehousewindow.h
     watchwindow.cc
     watchwindow.h
   USES_SDL2
@@ -258,6 +262,7 @@ wl_library(wui
     logic_game_settings
     logic_widelands_geometry
     network
+    note_sound
     notifications
     profile
     scripting_coroutine
