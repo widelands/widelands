@@ -100,6 +100,12 @@ Window::Window(Panel* const parent,
 	   VT_B_PIXMAP_THICKNESS, VT_B_PIXMAP_THICKNESS, TP_B_PIXMAP_THICKNESS, BT_B_PIXMAP_THICKNESS);
 	set_top_on_click(true);
 	set_layout_toplevel(true);
+	layout();
+
+	graphic_resolution_changed_subscriber_ = Notifications::subscribe<GraphicResolutionChanged>(
+				[this](const GraphicResolutionChanged& note) {
+		on_resolution_changed_note(note);
+	});
 }
 
 /**
@@ -583,5 +589,31 @@ bool Window::handle_mousemove(const uint8_t, int32_t mx, int32_t my, int32_t, in
 		set_pos(Vector2i(new_left, new_top));
 	}
 	return true;
+}
+
+void Window::on_resolution_changed_note(const GraphicResolutionChanged& note) {
+	const int old_center_x = note.old_width / 2;
+	const int old_center_y = note.old_height / 2;
+	if (get_w() >= note.old_width && get_h() >= note.old_height) { // The window is sort-of fullscreen, e.g. help. So, we resize it.
+		set_size(note.new_width, note.new_height);
+		center_to_parent();
+	} else {
+		if (abs(old_center_x - get_x() - get_w() / 2) < 2) { // The window was centered horizontally. Keep it that way.
+			set_pos(Vector2i((note.new_width - get_w()) / 2, get_y()));
+		} else if (get_x() > old_center_x) { // The window was in the right half of the screen. Shift to maintain distance to right edge of the screen.
+			const int diff = note.old_width - get_x();
+			set_pos(Vector2i(note.new_width - diff, get_y()));
+		} else if (get_x() + get_w() > note.new_width) { // The window was in the left half of the screen, but doesn't fit any more. Shift to fit on screen.
+			set_pos(Vector2i(note.new_width - get_w() + get_rborder(), get_y()));
+		}
+		if (abs(old_center_y - get_y() - get_h() / 2) < 2) { // The window was centered vertically. Keep it that way.
+			set_pos(Vector2i(get_x(), (note.new_height - get_h()) / 2));
+		} else if (get_y() > old_center_y) { // The window was in the bottom half of the screen. Shift to maintain distance to bottom edge of the screen.
+			const int diff = note.old_height - get_y();
+			set_pos(Vector2i(get_x(), note.new_height - diff));
+		} else if (get_y() + get_h() > note.new_height) { // The window was in the upper half of the screen, but doesn't fit any more. Shift to fit on screen.
+			set_pos(Vector2i(get_x(), note.new_height - get_h() + get_bborder()));
+		}
+	}
 }
 }

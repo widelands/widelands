@@ -78,6 +78,7 @@ MainMenuLoadOrSaveMap::MainMenuLoadOrSaveMap(EditorInteractive& parent,
      basedir_(basedir),
      has_translated_mapname_(false),
      showing_mapames_(false) {
+	// NOCOM relayout on fullscreen switch
 	g_fs->ensure_directory_exists(basedir_);
 	curdir_ = basedir_;
 
