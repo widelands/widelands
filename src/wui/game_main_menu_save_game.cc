@@ -144,7 +144,6 @@ GameMainMenuSaveGame::GameMainMenuSaveGame(InteractiveGameBase& parent,
 	center_to_parent();
 	move_to_top();
 
-	editbox_.focus();
 	pause_game(true);
 	set_thinks(false);
 }
@@ -158,7 +157,7 @@ void GameMainMenuSaveGame::layout() {
  * called when a item is selected
  */
 void GameMainMenuSaveGame::entry_selected() {
-	// NOCOM multiselect now completely stopped working. We probably need a handle_key function.
+	// TODO(GunChleoc): When editbox is focused, multiselect is not possible, because it steals the key presses.
 	ok_.set_enabled(load_or_save_.table().selections().size() == 1);
 	delete_.set_enabled(load_or_save_.has_selection());
 	if (load_or_save_.has_selection()) {
