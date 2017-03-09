@@ -54,16 +54,16 @@ void Icon::draw(RenderTarget& dst) {
 	if (pic_) {
 		const float scale = std::min(1.f, std::min(static_cast<float>(get_w()) / pic_->width(),
 		                                           static_cast<float>(get_h()) / pic_->height()));
-
-		const float width = scale * get_w();
-		const float height = scale * get_h();
-		const float x = (get_w() - width) / 2.f;
-		const float y = (get_h() - height) / 2.f;
+		// We need to be pixel perfect, so we use ints.
+		const int width = scale * get_w();
+		const int height = scale * get_h();
+		const int x = (get_w() - width) / 2;
+		const int y = (get_h() - height) / 2;
 		dst.blitrect_scale(Rectf(x, y, width, height), pic_,
 		                   Recti(0, 0, pic_->width(), pic_->height()), 1., BlendMode::UseAlpha);
-	}
-	if (draw_frame_) {
-		dst.draw_rect(Rectf(0.f, 0.f, get_w(), get_h()), framecolor_);
-	}
+		if (draw_frame_) {
+			dst.draw_rect(Rectf(x, y, width, height), framecolor_);
+		}
+	}	
 }
 }
