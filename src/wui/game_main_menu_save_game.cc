@@ -47,64 +47,85 @@ GameMainMenuSaveGame::GameMainMenuSaveGame(InteractiveGameBase& parent,
                       _("Save Game")),
      // Values for alignment and size
      padding_(4),
-     buth_(20),
-     tablex_(padding_),
-     tabley_(padding_),
-     tablew_(get_inner_w() * 7 / 12),
-     tableh_(get_inner_h() - tabley_ - 3 * buth_ - 2 * padding_),
-     right_column_x_(tablew_ + 2 * padding_),
-     butw_((get_inner_w() - right_column_x_ - 2 * padding_) / 2),
-     editbox_label_(this,
-                    padding_,
-                    tabley_ + tableh_ + 3 * padding_,
-                    butw_,
-                    buth_,
-                    _("Filename:"),
-                    UI::Align::kLeft),
-     editbox_(this,
-              editbox_label_.get_w() + 2 * padding_,
-              tabley_ + tableh_ + 3 * padding_,
-              get_inner_w() - editbox_label_.get_w() - 3 * padding_,
-              buth_,
-              2,
-              g_gr->images().get("images/ui_basic/but1.png")),
-     load_or_save_(this,
+     butw_(150),
+
+     main_box_(this, 0, 0, UI::Box::Vertical),
+     info_box_(this, 0, 0, UI::Box::Horizontal),
+     filename_box_(this, 0, 0, UI::Box::Horizontal),
+     buttons_box_(this, 0, 0, UI::Box::Horizontal),
+
+     load_or_save_(&info_box_,
                    igbase().game(),
-                   tablex_,
-                   tabley_,
-                   tablew_,
-                   tableh_,
+                   0,
+                   0,
+                   0,
+                   0,
                    padding_,
                    LoadOrSaveGame::FileType::kGame,
                    GameDetails::Style::kWui,
                    false),
-     ok_(this,
-         "ok",
-         UI::g_fh1->fontset()->is_rtl() ? get_inner_w() / 2 - butw_ - padding_ :
-                                          get_inner_w() / 2 + padding_,
-         get_inner_h() - padding_ - buth_,
-         butw_,
-         buth_,
-         g_gr->images().get("images/ui_basic/but5.png"),
-         _("OK")),
-     cancel_(this,
-             "cancel",
-             UI::g_fh1->fontset()->is_rtl() ? get_inner_w() / 2 + padding_ :
-                                              get_inner_w() / 2 - butw_ - padding_,
-             get_inner_h() - padding_ - buth_,
-             butw_,
-             buth_,
-             g_gr->images().get("images/ui_basic/but1.png"),
-             _("Cancel")),
-     delete_(this,
+     delete_(load_or_save_.game_details(),
              "delete",
-             right_column_x_,
-             tabley_ + tableh_ - buth_,
-             get_inner_w() - right_column_x_ - padding_,
-             buth_,
+             0,
+             0,
+             0,
+             0,
              g_gr->images().get("images/ui_basic/but1.png"),
              _("Delete")),
+
+     editbox_label_(&filename_box_, 0, 0, 0, 0, _("Filename:"), UI::Align::kLeft),
+     editbox_(&filename_box_, 0, 0, 0, 0, 2, g_gr->images().get("images/ui_basic/but1.png")),
+
+     cancel_(&buttons_box_,
+             "cancel",
+             0,
+             0,
+             butw_,
+             0,
+             g_gr->images().get("images/ui_basic/but1.png"),
+             _("Cancel")),
+     ok_(&buttons_box_,
+         "ok",
+         0,
+         0,
+         butw_,
+         0,
+         g_gr->images().get("images/ui_basic/but5.png"),
+         _("OK")),
+
      curdir_(SaveHandler::get_base_dir()) {
+
+	main_box_.add_space(padding_);
+	main_box_.set_inner_spacing(padding_);
+	main_box_.add(&info_box_, UI::Box::Resizing::kExpandBoth);
+	main_box_.add_space(padding_);
+	main_box_.add(&filename_box_, UI::Box::Resizing::kFullSize);
+	main_box_.add_space(0);
+	main_box_.add(&buttons_box_, UI::Box::Resizing::kFullSize);
+
+	info_box_.set_inner_spacing(padding_);
+	info_box_.add_space(padding_);
+	info_box_.add(&load_or_save_.table(), UI::Box::Resizing::kFullSize);
+	info_box_.add(load_or_save_.game_details(), UI::Box::Resizing::kExpandBoth);
+	load_or_save_.game_details()->add(&delete_, UI::Box::Resizing::kFullSize);
+
+	filename_box_.set_inner_spacing(padding_);
+	filename_box_.add_space(padding_);
+	filename_box_.add(&editbox_label_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
+	filename_box_.add(&editbox_, UI::Box::Resizing::kFillSpace);
+
+	buttons_box_.set_inner_spacing(padding_);
+	buttons_box_.add_space(padding_);
+	buttons_box_.add_inf_space();
+	buttons_box_.add_inf_space();
+	buttons_box_.add(&cancel_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
+	buttons_box_.add_inf_space();
+	buttons_box_.add(&ok_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
+	buttons_box_.add_inf_space();
+	buttons_box_.add_inf_space();
+
+	layout();
+
 	ok_.set_enabled(false);
 	delete_.set_enabled(false);
 
@@ -115,10 +136,9 @@ GameMainMenuSaveGame::GameMainMenuSaveGame(InteractiveGameBase& parent,
 	cancel_.sigclicked.connect(boost::bind(&GameMainMenuSaveGame::die, this));
 	delete_.sigclicked.connect(boost::bind(&GameMainMenuSaveGame::delete_clicked, this));
 
-	load_or_save_.table().selected.connect(
-		boost::bind(&GameMainMenuSaveGame::entry_selected, this));
+	load_or_save_.table().selected.connect(boost::bind(&GameMainMenuSaveGame::entry_selected, this));
 	load_or_save_.table().double_clicked.connect(
-		boost::bind(&GameMainMenuSaveGame::double_clicked, this));
+	   boost::bind(&GameMainMenuSaveGame::double_clicked, this));
 
 	load_or_save_.fill_table(parent.game().save_handler().get_cur_filename());
 	center_to_parent();
@@ -126,13 +146,19 @@ GameMainMenuSaveGame::GameMainMenuSaveGame(InteractiveGameBase& parent,
 
 	editbox_.focus();
 	pause_game(true);
+	set_thinks(false);
+}
+
+void GameMainMenuSaveGame::layout() {
+	main_box_.set_size(get_inner_w() - 2 * padding_, get_inner_h() - 2 * padding_);
+	load_or_save_.table().set_desired_size(get_inner_w() * 7 / 12, load_or_save_.table().get_h());
 }
 
 /**
  * called when a item is selected
  */
 void GameMainMenuSaveGame::entry_selected() {
-	// NOCOM multiselect only works after the user has clicked the table without holding down a mofifier key.
+	// NOCOM multiselect now completely stopped working. We probably need a handle_key function.
 	ok_.set_enabled(load_or_save_.table().selections().size() == 1);
 	delete_.set_enabled(load_or_save_.has_selection());
 	if (load_or_save_.has_selection()) {
@@ -236,20 +262,20 @@ void GameMainMenuSaveGame::delete_clicked() {
 	std::set<uint32_t> selections = load_or_save_.table().selections();
 	const SavegameData& gamedata = *load_or_save_.entry_selected();
 	size_t no_selections = selections.size();
-	const std::string header = no_selections == 1 ?
-						_("Do you really want to delete this game?") :
-						(boost::format(ngettext("Do you really want to delete this %d game?",
-														"Do you really want to delete these %d games?",
-														no_selections)) %
-						 no_selections)
-							.str();
+	const std::string header =
+	   no_selections == 1 ?
+	      _("Do you really want to delete this game?") :
+	      (boost::format(ngettext("Do you really want to delete this %d game?",
+	                              "Do you really want to delete these %d games?", no_selections)) %
+	       no_selections)
+	         .str();
 
 	std::string message = no_selections > 1 ? gamedata.filename_list : gamedata.filename;
 	message = (boost::format("%s\n%s") % header % message).str();
 
 	UI::WLMessageBox confirmationBox(
-		this, ngettext("Confirm deleting file", "Confirm deleting files", no_selections), message,
-		UI::WLMessageBox::MBoxType::kOkCancel);
+	   this, ngettext("Confirm deleting file", "Confirm deleting files", no_selections), message,
+	   UI::WLMessageBox::MBoxType::kOkCancel);
 
 	if (confirmationBox.run<UI::Panel::Returncodes>() == UI::Panel::Returncodes::kOk) {
 		for (const uint32_t index : selections) {

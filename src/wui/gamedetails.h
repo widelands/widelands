@@ -56,7 +56,7 @@ struct SavegameData {
 /**
  * Show a Panel with information about a map.
  */
-class GameDetails : public UI::Panel {
+class GameDetails : public UI::Box {
 public:
 	enum class Style { kFsMenu, kWui };
 
@@ -69,7 +69,6 @@ private:
 	const Style style_;
 	const int padding_;
 
-	UI::Box main_box_;
 	UI::MultilineTextarea name_label_;
 	UI::MultilineTextarea descr_;
 	UI::Icon minimap_icon_;

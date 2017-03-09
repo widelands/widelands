@@ -84,41 +84,40 @@ void SavegameData::set_mapname(const std::string& input_mapname) {
 
 GameDetails::GameDetails(
    Panel* parent, int32_t x, int32_t y, int32_t max_w, int32_t max_h, Style style)
-   : UI::Panel(parent, x, y, max_w, max_h),
+   : UI::Box(parent, x, y, UI::Box::Vertical, max_w, max_h),
      style_(style),
      padding_(4),
-     main_box_(this, 0, 0, UI::Box::Vertical, max_w, max_h, 0),
      name_label_(
-        &main_box_,
+        this,
         0,
         0,
-        max_w - padding_,
+        max_w,
         20,
         "",
         UI::Align::kLeft,
         g_gr->images().get(style == GameDetails::Style::kFsMenu ? "images/ui_basic/but3.png" :
                                                                   "images/ui_basic/but1.png"),
         UI::MultilineTextarea::ScrollMode::kNoScrolling),
-     descr_(&main_box_,
+     descr_(this,
             0,
             0,
             max_w,
-            80,
+            0,
             "",
             UI::Align::kLeft,
             g_gr->images().get(style == GameDetails::Style::kFsMenu ? "images/ui_basic/but3.png" :
                                                                       "images/ui_basic/but1.png"),
             UI::MultilineTextarea::ScrollMode::kNoScrolling),
-     minimap_icon_(&main_box_, 0, 0, max_w - 2 * padding_, max_h - 2 * padding_, nullptr) {
+     minimap_icon_(this, 0, 0, max_w - 2 * padding_, max_h - 2 * padding_, nullptr) {
 	name_label_.force_new_renderer();
 	descr_.force_new_renderer();
 
-	main_box_.add(&name_label_);
-	main_box_.add_space(padding_);
-	main_box_.add(&descr_);
-	main_box_.add_space(padding_);
-	main_box_.add(&minimap_icon_);
-	main_box_.set_size(max_w, max_h);
+	add(&name_label_, UI::Box::Resizing::kFullSize);
+	add_space(padding_);
+	add(&descr_, UI::Box::Resizing::kExpandBoth);
+	add_space(padding_);
+	add(&minimap_icon_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
+	set_size(max_w, max_h);
 
 	minimap_icon_.set_visible(false);
 }
@@ -204,7 +203,7 @@ void GameDetails::update(const SavegameData& gamedata) {
 						ypos += (available_height - h) / 2;
 					}
 
-					minimap_icon_.set_size(w, h);
+					minimap_icon_.set_desired_size(w, h);
 					minimap_icon_.set_pos(Vector2i(xpos, ypos));
 					minimap_icon_.set_frame(UI_FONT_CLR_FG);
 					minimap_icon_.set_visible(true);

@@ -52,6 +52,11 @@ public:
 	UI::Table<uintptr_t const>& table() {
 		return table_;
 	}
+
+	GameDetails* game_details() {
+		return &game_details_;
+	}
+
 	const std::string get_filename(int index) const;
 
 private:

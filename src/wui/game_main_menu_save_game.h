@@ -21,6 +21,7 @@
 #define WL_WUI_GAME_MAIN_MENU_SAVE_GAME_H
 
 #include "base/i18n.h"
+#include "ui_basic/box.h"
 #include "ui_basic/button.h"
 #include "ui_basic/editbox.h"
 #include "ui_basic/messagebox.h"
@@ -39,6 +40,7 @@ protected:
 	void die() override;
 
 private:
+	void layout() override;
 	InteractiveGameBase& igbase();
 	void entry_selected();
 	void double_clicked();
@@ -51,15 +53,20 @@ private:
 
 	// UI coordinates and spacers
 	int32_t const padding_;  // Common padding between panels
-	int32_t const buth_;     // Button dimensions
-	int32_t const tablex_, tabley_, tablew_, tableh_;
-	int32_t const right_column_x_;
 	int32_t const butw_;  // Button dimensions
+
+	UI::Box main_box_;
+	UI::Box info_box_;
+	UI::Box filename_box_;
+	UI::Box buttons_box_;
+
+	LoadOrSaveGame load_or_save_;
+	UI::Button delete_;
 
 	UI::Textarea editbox_label_;
 	UI::EditBox editbox_;
-	LoadOrSaveGame load_or_save_;
-	UI::Button ok_, cancel_, delete_;
+
+	UI::Button cancel_, ok_;
 	std::string curdir_;
 	std::string parentdir_;
 	std::string filename_;
