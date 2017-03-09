@@ -33,6 +33,7 @@
  */
 struct SavegameData {
 	std::string filename;
+	std::string filename_list;
 	std::string mapname;
 	std::string wincondition;
 	std::string minimap_path;
@@ -55,7 +56,6 @@ struct SavegameData {
 /**
  * Show a Panel with information about a map.
  */
-// NOCOM
 class GameDetails : public UI::Panel {
 public:
 	enum class Style { kFsMenu, kWui };

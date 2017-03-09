@@ -35,15 +35,13 @@ struct GameMainMenuSaveGame : public UI::UniqueWindow {
 	friend struct SaveWarnMessageBox;
 	GameMainMenuSaveGame(InteractiveGameBase&, UI::UniqueWindow::Registry& registry);
 
-	void fill_table();
-
 protected:
 	void die() override;
 
 private:
 	InteractiveGameBase& igbase();
-	void entry_selected(uint32_t);
-	void double_clicked(uint32_t);
+	void entry_selected();
+	void double_clicked();
 	void edit_box_changed();
 	void ok();
 	void delete_clicked();
@@ -61,7 +59,6 @@ private:
 	UI::Textarea editbox_label_;
 	UI::EditBox editbox_;
 	LoadOrSaveGame load_or_save_;
-
 	UI::Button ok_, cancel_, delete_;
 	std::string curdir_;
 	std::string parentdir_;

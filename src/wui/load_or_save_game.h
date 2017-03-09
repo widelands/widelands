@@ -26,7 +26,7 @@
 #include "logic/game_settings.h"
 #include "ui_basic/table.h"
 #include "wui/gamedetails.h"
-// NOCOM
+
 /// Common functions for loading or saving a game or replay.
 class LoadOrSaveGame {
 public:
@@ -44,17 +44,18 @@ public:
 	               GameDetails::Style style,
 	               bool localize_autosave);
 
-	SavegameData* entry_selected();
+	const SavegameData* entry_selected();
 	bool has_selection();
-	bool set_has_selection();
+	void clear_selections();
 	void select_by_name(const std::string& name);
-	void fill_table();
+	void fill_table(const std::string& preselected_filename = "");
 	UI::Table<uintptr_t const>& table() {
 		return table_;
 	}
-protected:
-		std::string filename_list_string();
+	const std::string get_filename(int index) const;
+
 private:
+	const std::string filename_list_string() const;
 	bool compare_date_descending(uint32_t, uint32_t);
 
 	UI::Table<uintptr_t const> table_;

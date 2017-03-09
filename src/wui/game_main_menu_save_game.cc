@@ -105,6 +105,9 @@ GameMainMenuSaveGame::GameMainMenuSaveGame(InteractiveGameBase& parent,
              g_gr->images().get("images/ui_basic/but1.png"),
              _("Delete")),
      curdir_(SaveHandler::get_base_dir()) {
+	ok_.set_enabled(false);
+	delete_.set_enabled(false);
+
 	editbox_.changed.connect(boost::bind(&GameMainMenuSaveGame::edit_box_changed, this));
 	editbox_.ok.connect(boost::bind(&GameMainMenuSaveGame::ok, this));
 
@@ -113,18 +116,14 @@ GameMainMenuSaveGame::GameMainMenuSaveGame(InteractiveGameBase& parent,
 	delete_.sigclicked.connect(boost::bind(&GameMainMenuSaveGame::delete_clicked, this));
 
 	load_or_save_.table().selected.connect(
-	   boost::bind(&GameMainMenuSaveGame::entry_selected, this, _1));
+		boost::bind(&GameMainMenuSaveGame::entry_selected, this));
 	load_or_save_.table().double_clicked.connect(
-	   boost::bind(&GameMainMenuSaveGame::double_clicked, this, _1));
+		boost::bind(&GameMainMenuSaveGame::double_clicked, this));
 
-	fill_table();
+	load_or_save_.fill_table(parent.game().save_handler().get_cur_filename());
 	center_to_parent();
 	move_to_top();
 
-	std::string cur_filename = parent.game().save_handler().get_cur_filename();
-	if (!cur_filename.empty()) {
-		load_or_save_.select_by_name(cur_filename);
-	}
 	editbox_.focus();
 	pause_game(true);
 }
@@ -132,26 +131,21 @@ GameMainMenuSaveGame::GameMainMenuSaveGame(InteractiveGameBase& parent,
 /**
  * called when a item is selected
  */
-void GameMainMenuSaveGame::entry_selected(uint32_t) {
+void GameMainMenuSaveGame::entry_selected() {
+	// NOCOM multiselect only works after the user has clicked the table without holding down a mofifier key.
+	ok_.set_enabled(load_or_save_.table().selections().size() == 1);
+	delete_.set_enabled(load_or_save_.has_selection());
 	if (load_or_save_.has_selection()) {
 		const SavegameData& gamedata = *load_or_save_.entry_selected();
 		editbox_.set_text(FileSystem::filename_without_ext(gamedata.filename.c_str()));
-		ok_.set_enabled(true);
 	}
 }
 
 /**
  * An Item has been doubleclicked
  */
-void GameMainMenuSaveGame::double_clicked(uint32_t) {
+void GameMainMenuSaveGame::double_clicked() {
 	ok();
-}
-
-/*
- * fill the file list
- */
-void GameMainMenuSaveGame::fill_table() {
-	load_or_save_.fill_table();
 }
 
 /*
@@ -159,7 +153,10 @@ void GameMainMenuSaveGame::fill_table() {
  */
 void GameMainMenuSaveGame::edit_box_changed() {
 	// Prevent the user from creating nonsense directory names, like e.g. ".." or "...".
-	ok_.set_enabled(LayeredFileSystem::is_legal_filename(editbox_.text()));
+	const bool is_legal_filename = LayeredFileSystem::is_legal_filename(editbox_.text());
+	ok_.set_enabled(is_legal_filename);
+	delete_.set_enabled(false);
+	load_or_save_.clear_selections();
 }
 
 static void dosave(InteractiveGameBase& igbase, const std::string& complete_filename) {
@@ -229,40 +226,38 @@ void GameMainMenuSaveGame::die() {
 	UI::UniqueWindow::die();
 }
 
-struct DeletionMessageBox : public UI::WLMessageBox {
-	DeletionMessageBox(GameMainMenuSaveGame& parent, const std::string& filename)
-	   : UI::WLMessageBox(&parent,
-	                      _("File deletion"),
-	                      str(boost::format(_("Do you really want to delete the file %s?")) %
-	                          FileSystem::fs_filename(filename.c_str())),
-	                      MBoxType::kOkCancel),
-	     filename_(filename) {
-	}
-
-	void clicked_ok() override {
-		g_fs->fs_unlink(filename_);
-		dynamic_cast<GameMainMenuSaveGame&>(*get_parent()).fill_table();
-		die();
-	}
-
-	void clicked_back() override {
-		die();
-	}
-
-private:
-	std::string const filename_;
-};
-
 /**
  * Called when the delete button has been clicked
  */
 void GameMainMenuSaveGame::delete_clicked() {
-	std::string const complete_filename =
-	   igbase().game().save_handler().create_file_name(curdir_, editbox_.text());
+	if (!load_or_save_.has_selection()) {
+		return;
+	}
+	std::set<uint32_t> selections = load_or_save_.table().selections();
+	const SavegameData& gamedata = *load_or_save_.entry_selected();
+	size_t no_selections = selections.size();
+	const std::string header = no_selections == 1 ?
+						_("Do you really want to delete this game?") :
+						(boost::format(ngettext("Do you really want to delete this %d game?",
+														"Do you really want to delete these %d games?",
+														no_selections)) %
+						 no_selections)
+							.str();
 
-	//  Check if file exists. If it does, let the user confirm the deletion.
-	if (g_fs->file_exists(complete_filename))
-		new DeletionMessageBox(*this, complete_filename);
+	std::string message = no_selections > 1 ? gamedata.filename_list : gamedata.filename;
+	message = (boost::format("%s\n%s") % header % message).str();
+
+	UI::WLMessageBox confirmationBox(
+		this, ngettext("Confirm deleting file", "Confirm deleting files", no_selections), message,
+		UI::WLMessageBox::MBoxType::kOkCancel);
+
+	if (confirmationBox.run<UI::Panel::Returncodes>() == UI::Panel::Returncodes::kOk) {
+		for (const uint32_t index : selections) {
+			const std::string& deleteme = load_or_save_.get_filename(index);
+			g_fs->fs_unlink(deleteme);
+		}
+		load_or_save_.fill_table();
+	}
 }
 
 void GameMainMenuSaveGame::pause_game(bool paused) {

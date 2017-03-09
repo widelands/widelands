@@ -21,6 +21,7 @@
 
 #include <memory>
 
+#include <boost/algorithm/string/replace.hpp>
 #include <boost/format.hpp>
 
 #include "base/i18n.h"
@@ -87,15 +88,17 @@ GameDetails::GameDetails(
      style_(style),
      padding_(4),
      main_box_(this, 0, 0, UI::Box::Vertical, max_w, max_h, 0),
-     name_label_(&main_box_,
-                 0,
-                 0,
-                 max_w - padding_,
-                 20,
-                 "",
-                 UI::Align::kLeft,
-					  g_gr->images().get("images/ui_basic/but3.png"), // NOCOM adjust according to fsmenu/wui
-                 UI::MultilineTextarea::ScrollMode::kNoScrolling),
+     name_label_(
+        &main_box_,
+        0,
+        0,
+        max_w - padding_,
+        20,
+        "",
+        UI::Align::kLeft,
+        g_gr->images().get(style == GameDetails::Style::kFsMenu ? "images/ui_basic/but3.png" :
+                                                                  "images/ui_basic/but1.png"),
+        UI::MultilineTextarea::ScrollMode::kNoScrolling),
      descr_(&main_box_,
             0,
             0,
@@ -103,7 +106,8 @@ GameDetails::GameDetails(
             80,
             "",
             UI::Align::kLeft,
-				g_gr->images().get("images/ui_basic/but3.png"), // NOCOM adjust according to fsmenu/wui
+            g_gr->images().get(style == GameDetails::Style::kFsMenu ? "images/ui_basic/but3.png" :
+                                                                      "images/ui_basic/but1.png"),
             UI::MultilineTextarea::ScrollMode::kNoScrolling),
      minimap_icon_(&main_box_, 0, 0, max_w - 2 * padding_, max_h - 2 * padding_, nullptr) {
 	name_label_.force_new_renderer();
@@ -132,79 +136,94 @@ void GameDetails::update(const SavegameData& gamedata) {
 	clear();
 
 	if (gamedata.errormessage.empty()) {
-		name_label_.set_text((boost::format("<rt>%s</rt>") %
-		                      as_header_with_content(_("Map Name:"), gamedata.mapname, style_, true))
-		                        .str());
+		if (gamedata.filename_list.empty()) {
+			name_label_.set_text(
+			   (boost::format("<rt>%s</rt>") %
+			    as_header_with_content(_("Map Name:"), gamedata.mapname, style_, true))
+			      .str());
 
-		name_label_.set_tooltip(gamedata.gametype == GameController::GameType::REPLAY ?
-		                           _("The map that this replay is based on") :
-		                           _("The map that this game is based on"));
+			name_label_.set_tooltip(gamedata.gametype == GameController::GameType::REPLAY ?
+			                           _("The map that this replay is based on") :
+			                           _("The map that this game is based on"));
 
-		// Show game information
-		std::string description = as_header_with_content(_("Game Time:"), gamedata.gametime, style_);
+			// Show game information
+			std::string description =
+			   as_header_with_content(_("Game Time:"), gamedata.gametime, style_);
 
-		description = (boost::format("%s%s") % description %
-		               as_header_with_content(_("Players:"), gamedata.nrplayers, style_))
-		                 .str();
+			description = (boost::format("%s%s") % description %
+			               as_header_with_content(_("Players:"), gamedata.nrplayers, style_))
+			                 .str();
 
-		description = (boost::format("%s%s") % description %
-		               as_header_with_content(_("Widelands Version:"), gamedata.version, style_))
-		                 .str();
+			description = (boost::format("%s%s") % description %
+			               as_header_with_content(_("Widelands Version:"), gamedata.version, style_))
+			                 .str();
 
-		description = (boost::format("%s%s") % description %
-		               as_header_with_content(_("Win Condition:"), gamedata.wincondition, style_))
-		                 .str();
+			description = (boost::format("%s%s") % description %
+			               as_header_with_content(_("Win Condition:"), gamedata.wincondition, style_))
+			                 .str();
 
-		description = (boost::format("<rt>%s</rt>") % description).str();
-		descr_.set_text(description);
+			description = (boost::format("<rt>%s</rt>") % description).str();
+			descr_.set_text(description);
 
-		std::string minimap_path = gamedata.minimap_path;
-		// Delete former image
-		minimap_icon_.set_icon(nullptr);
-		minimap_icon_.set_visible(false);
-		minimap_icon_.set_no_frame();
-		minimap_image_.reset();
-		// Load the new one
-		if (!minimap_path.empty()) {
-			try {
-				// Load the image
-				minimap_image_ = load_image(
-				   minimap_path,
-				   std::unique_ptr<FileSystem>(g_fs->make_sub_file_system(gamedata.filename)).get());
+			std::string minimap_path = gamedata.minimap_path;
+			// Delete former image
+			minimap_icon_.set_icon(nullptr);
+			minimap_icon_.set_visible(false);
+			minimap_icon_.set_no_frame();
+			minimap_image_.reset();
+			// Load the new one
+			if (!minimap_path.empty()) {
+				try {
+					// Load the image
+					minimap_image_ = load_image(
+					   minimap_path,
+					   std::unique_ptr<FileSystem>(g_fs->make_sub_file_system(gamedata.filename)).get());
 
-				int available_width = get_w() - 4 * padding_;
-				int available_height = get_h() - name_label_.get_h() - descr_.get_h() - 4 * padding_;
+					int available_width = get_w() - 4 * padding_;
+					int available_height = get_h() - name_label_.get_h() - descr_.get_h() - 4 * padding_;
 
-				// Scale it
-				double scale = double(available_width) / minimap_image_->width();
-				double scaleY = double(available_height) / minimap_image_->height();
-				if (scaleY < scale) {
-					scale = scaleY;
+					// Scale it
+					double scale = double(available_width) / minimap_image_->width();
+					double scaleY = double(available_height) / minimap_image_->height();
+					if (scaleY < scale) {
+						scale = scaleY;
+					}
+					if (scale > 1.0)
+						scale = 1.0;  // Don't make the image too big; fuzziness will result
+					uint16_t w = scale * minimap_image_->width();
+					uint16_t h = scale * minimap_image_->height();
+
+					// Center the minimap in the available space
+					int32_t xpos = (get_w() - w) / 2;
+					int32_t ypos = name_label_.get_h() + descr_.get_h() + 2 * padding_;
+
+					// Set small minimaps higher up for a more harmonious look
+					if (h < available_height * 2 / 3) {
+						ypos += (available_height - h) / 3;
+					} else {
+						ypos += (available_height - h) / 2;
+					}
+
+					minimap_icon_.set_size(w, h);
+					minimap_icon_.set_pos(Vector2i(xpos, ypos));
+					minimap_icon_.set_frame(UI_FONT_CLR_FG);
+					minimap_icon_.set_visible(true);
+					minimap_icon_.set_icon(minimap_image_.get());
+				} catch (const std::exception& e) {
+					log("Failed to load the minimap image : %s\n", e.what());
 				}
-				if (scale > 1.0)
-					scale = 1.0;  // Don't make the image too big; fuzziness will result
-				uint16_t w = scale * minimap_image_->width();
-				uint16_t h = scale * minimap_image_->height();
-
-				// Center the minimap in the available space
-				int32_t xpos = (get_w() - w) / 2;
-				int32_t ypos = name_label_.get_h() + descr_.get_h() + 2 * padding_;
-
-				// Set small minimaps higher up for a more harmonious look
-				if (h < available_height * 2 / 3) {
-					ypos += (available_height - h) / 3;
-				} else {
-					ypos += (available_height - h) / 2;
-				}
-
-				minimap_icon_.set_size(w, h);
-				minimap_icon_.set_pos(Vector2i(xpos, ypos));
-				minimap_icon_.set_frame(UI_FONT_CLR_FG);
-				minimap_icon_.set_visible(true);
-				minimap_icon_.set_icon(minimap_image_.get());
-			} catch (const std::exception& e) {
-				log("Failed to load the minimap image : %s\n", e.what());
 			}
+		} else {
+			std::string filename_list = richtext_escape(gamedata.filename_list);
+			boost::replace_all(filename_list, "\n", "<br> • ");
+			name_label_.set_text((boost::format("<rt>%s</rt>") %
+			                      as_header_with_content(gamedata.mapname, "", style_, true))
+			                        .str());
+
+			descr_.set_text((boost::format("<rt>%s</rt>") %
+			                 as_header_with_content("", filename_list, style_, true, true))
+			                   .str());
+			minimap_icon_.set_visible(false);
 		}
 	} else {
 		name_label_.set_text(

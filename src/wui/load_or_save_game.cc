@@ -79,9 +79,7 @@ LoadOrSaveGame::LoadOrSaveGame(UI::Panel* parent,
                                FileType filetype,
                                GameDetails::Style style,
                                bool localize_autosave)
-// NOCOM adjust table image depending on fsmenu/wui
-// NOCOM Handle multiselect when selecting - we had this in trunk.
-	: table_(parent, tablex, tabley, tablew, tableh, g_gr->images().get("images/ui_basic/but3.png"), UI::TableRows::kMultiDescending),
+	: table_(parent, tablex, tabley, tablew, tableh, g_gr->images().get(style == GameDetails::Style::kFsMenu ? "images/ui_basic/but3.png" : "images/ui_basic/but1.png"), UI::TableRows::kMultiDescending),
      filetype_(filetype),
      localize_autosave_(localize_autosave),
      // Savegame description
@@ -119,13 +117,12 @@ LoadOrSaveGame::LoadOrSaveGame(UI::Panel* parent,
 		   /** TRANSLATORS: Game Mode table column when choosing a game/replay to load. */
 		   /** TRANSLATORS: Keep this to 5 letters maximum. */
 		   /** TRANSLATORS: A tooltip will explain if you need to use an abbreviation. */
-		   _("Mode"), (boost::format("%s %s") % mode_tooltip_1 % mode_tooltip_2).str(),
-		   UI::Align::kLeft);
+		   _("Mode"), (boost::format("%s %s") % mode_tooltip_1 % mode_tooltip_2).str());
 	}
 	table_.add_column(0, _("Description"),
 	                  _("The filename that the game was saved under followed by the map’s name, "
 	                    "or the map’s name followed by the last objective achieved."),
-							UI::Align::kLeft, UI::TableColumnType::kFlexible);
+	                  UI::Align::kLeft, UI::TableColumnType::kFlexible);
 	table_.set_column_compare(
 	   0, boost::bind(&LoadOrSaveGame::compare_date_descending, this, _1, _2));
 	table_.set_sort_column(0);
@@ -134,7 +131,7 @@ LoadOrSaveGame::LoadOrSaveGame(UI::Panel* parent,
 }
 
 
-std::string LoadOrSaveGame::filename_list_string() {
+const std::string LoadOrSaveGame::filename_list_string() const {
 	std::set<uint32_t> selections = table_.selections();
 	boost::format message;
 	int counter = 0;
@@ -150,16 +147,15 @@ std::string LoadOrSaveGame::filename_list_string() {
 
 		if (gamedata.errormessage.empty()) {
 			message =
-			   boost::format("%s\n%s") % message %
+				boost::format("%s\n%s") % message %
 			   /** TRANSLATORS %1% = map name, %2% = save date. */
-			   (boost::format(_("%1%, saved on %2%")) % gamedata.mapname % gamedata.savedatestring);
+				(boost::format(_("%1%, saved on %2%")) % richtext_escape(gamedata.mapname) % gamedata.savedatestring);
 		} else {
-			message = boost::format("%s\n%s") % message % gamedata.filename;
+			message = boost::format("%s\n%s") % message % richtext_escape(gamedata.filename);
 		}
 	}
 	return message.str();
 }
-
 
 // Reverse default sort order for save date column
 bool LoadOrSaveGame::compare_date_descending(uint32_t rowa, uint32_t rowb) {
@@ -169,19 +165,17 @@ bool LoadOrSaveGame::compare_date_descending(uint32_t rowa, uint32_t rowb) {
 	return r1.savetimestamp < r2.savetimestamp;
 }
 
-SavegameData* LoadOrSaveGame::entry_selected() {
-	// NOCOM uinque_ptr?
+const SavegameData* LoadOrSaveGame::entry_selected() {
 	SavegameData* result = new SavegameData();
 	size_t selections = table_.selections().size();
-	if (set_has_selection()) {
+	if (selections == 1) {
 		result = &games_data_[table_.get_selected()];
 	} else if (selections > 1) {
 		result->mapname =
 			(boost::format(ngettext("Selected %d file:", "Selected %d files:", selections)) %
 			 selections)
 				.str();
-		// NOCOM not an error
-		result->errormessage = filename_list_string();
+		result->filename_list = filename_list_string();
 	}
 	game_details_.update(*result);
 	return result;
@@ -191,7 +185,13 @@ bool LoadOrSaveGame::has_selection() {
 	return table_.has_selection();
 }
 
+void  LoadOrSaveGame::clear_selections() {
+	table_.clear_selections();
+	game_details_.clear();
+}
+
 void LoadOrSaveGame::select_by_name(const std::string& name) {
+	table_.clear_selections();
 	for (size_t idx = 0; idx < table_.size(); ++idx) {
 		const SavegameData& gamedata = games_data_[table_[idx]];
 		if (name == gamedata.filename) {
@@ -201,10 +201,14 @@ void LoadOrSaveGame::select_by_name(const std::string& name) {
 	}
 }
 
+const std::string LoadOrSaveGame::get_filename(int index) const {
+	return games_data_[table_.get(table_.get_record(index))].filename;
+}
+
 /**
  * Fill the file list
  */
-void LoadOrSaveGame::fill_table() {
+void LoadOrSaveGame::fill_table(const std::string& preselected_filename) {
 
 	games_data_.clear();
 	table_.clear();
@@ -391,7 +395,15 @@ void LoadOrSaveGame::fill_table() {
 	table_.sort();
 
 	if (table_.size()) {
+		if (!preselected_filename.empty()) {
+			for (size_t idx = 0; idx < table_.size(); ++idx) {
+				const SavegameData& gamedata = games_data_[table_[idx]];
+				if (preselected_filename == gamedata.filename) {
+					table_.select(idx);
+					return;
+				}
+			}
+		}
 		table_.select(0);
 	}
-	set_has_selection();
 }
