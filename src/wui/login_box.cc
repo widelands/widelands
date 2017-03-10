@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2008, 2010 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -38,9 +38,8 @@ LoginBox::LoginBox(Panel& parent)
 	eb_password =
 	   new UI::EditBox(this, 150, 40, 330, 20, 2, g_gr->images().get("images/ui_basic/but2.png"));
 
-	pwd_warning = new UI::MultilineTextarea(this, margin, 65, 505, 50,
-	                                        _("WARNING: Password will be shown and saved readable!"),
-	                                        UI::Align::kLeft);
+	pwd_warning = new UI::MultilineTextarea(
+	   this, margin, 65, 505, 50, _("WARNING: Password will be shown and saved readable!"));
 
 	cb_register = new UI::Checkbox(this, Vector2i(margin, 110), _("Log in to a registered account"),
 	                               "", get_inner_w() - 2 * margin);
@@ -69,7 +68,9 @@ LoginBox::LoginBox(Panel& parent)
 	eb_nickname->focus();
 }
 
-/// called, if "login" is pressed
+/**
+ * called, if "login" is pressed.
+ */
 void LoginBox::clicked_ok() {
 	// Check if all needed input fields are valid
 	if (eb_nickname->text().empty()) {

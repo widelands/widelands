@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2009 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -38,7 +38,7 @@ inline EditorInteractive& EditorToolsizeMenu::eia() {
 EditorToolsizeMenu::EditorToolsizeMenu(EditorInteractive& parent,
                                        UI::UniqueWindow::Registry& registry)
    : UI::UniqueWindow(&parent, "toolsize_menu", &registry, 250, 50, _("Tool Size")),
-     textarea_(this, 5, 10, 240, 10, std::string(), UI::Align::kBottomCenter),
+     textarea_(this, 5, 10, 240, 10, std::string(), UI::Align::kCenter),
      increase_(this,
                "incr",
                get_inner_w() / 2 - 10,

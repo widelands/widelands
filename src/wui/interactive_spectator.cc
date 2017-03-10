@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007-2016 by the Widelands Development Team
+ * Copyright (C) 2007-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -76,8 +76,9 @@ InteractiveSpectator::InteractiveSpectator(Widelands::Game& g,
 	toggle_buildhelp_->sigclicked.connect(boost::bind(&InteractiveBase::toggle_buildhelp, this));
 
 	reset_zoom_ = add_toolbar_button("wui/menus/menu_reset_zoom", "reset_zoom", _("Reset zoom"));
-	reset_zoom_->sigclicked.connect(
-	   [this] { zoom_around(1.f, Vector2f(get_w() / 2.f, get_h() / 2.f)); });
+	reset_zoom_->sigclicked.connect([this] {
+		zoom_around(1.f, Vector2f(get_w() / 2.f, get_h() / 2.f), MapView::Transition::Smooth);
+	});
 
 	toolbar_.add_space(15);
 
@@ -141,12 +142,15 @@ Widelands::PlayerNumber InteractiveSpectator::player_number() const {
  * Observer has clicked on the given node; bring up the context menu.
  */
 void InteractiveSpectator::node_action() {
-	if  //  special case for buildings
-	   (upcast(Widelands::Building, building, egbase().map().get_immovable(get_sel_pos().node)))
-		return building->show_options(*this);
-
-	if (try_show_ship_window())
+	// Special case for buildings
+	if (is_a(Widelands::Building, egbase().map().get_immovable(get_sel_pos().node))) {
+		show_building_window(get_sel_pos().node, false);
 		return;
+	}
+
+	if (try_show_ship_window()) {
+		return;
+	}
 
 	//  everything else can bring up the temporary dialog
 	show_field_action(this, nullptr, &fieldaction_);

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2010 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -40,8 +40,7 @@ FullscreenHelpWindow::FullscreenHelpWindow(Panel* const parent,
                                            uint32_t height)
    : Window(
         parent, "help_window", 0, 0, width, height, (boost::format(_("Help: %s")) % caption).str()),
-     textarea_(new MultilineTextarea(
-        this, 5, 5, width - 10, height - 30, std::string(), UI::Align::kLeft)) {
+     textarea_(new MultilineTextarea(this, 5, 5, width - 10, height - 30)) {
 	int margin = 5;
 
 	// Calculate sizes
@@ -81,12 +80,9 @@ bool FullscreenHelpWindow::handle_mousepress(const uint8_t btn, int32_t, int32_t
 	if (btn == SDL_BUTTON_RIGHT) {
 		play_click();
 		clicked_ok();
+		return true;
 	}
-	return true;
-}
-
-bool FullscreenHelpWindow::handle_mouserelease(const uint8_t, int32_t, int32_t) {
-	return true;
+	return false;
 }
 
 bool FullscreenHelpWindow::handle_key(bool down, SDL_Keysym code) {

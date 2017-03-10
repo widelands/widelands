@@ -1,16 +1,16 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2016 Widelands Development Team
+# Copyright (C) 2005-2017 Widelands Development Team
 # 
 # Translators:
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2011
-# Juanjo, 2015-2016
+# Juanjo, 2015-2017
 # Juanjo, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-12-15 15:23+0000\n"
-"PO-Revision-Date: 2016-12-15 19:56+0000\n"
+"POT-Creation-Date: 2017-02-19 19:34+0000\n"
+"PO-Revision-Date: 2017-02-25 18:12+0000\n"
 "Last-Translator: Juanjo\n"
 "Language-Team: Catalan (http://www.transifex.com/widelands/widelands/language/ca/)\n"
 "MIME-Version: 1.0\n"
@@ -211,7 +211,7 @@ msgstr "Economia"
 msgid ""
 "In this tutorial, you will learn what option Widelands offers to adjust your"
 " economy. Recommended for players with some experience."
-msgstr "En aquest tutorial, aprendreu quines opcions us ofereix el Widelands per controlar la teva economia. És recomanable per a jugadors amb una mica d'experiència."
+msgstr "En aquest tutorial, aprendreu quines opcions us ofereix el Widelands per controlar la vostra economia. És recomanable per a jugadors amb una mica d'experiència."
 
 #: ../../data/maps/Archipelago_Sea.wmf/elemental:8
 msgid "Archipelago Sea"
@@ -281,7 +281,7 @@ msgid ""
 "came from the sky and touched down in its center. Is this a sign of the "
 "Gods? You believe it is and you hope that your tribe will find the treasure "
 "of this island before other tribes will follow."
-msgstr "Unes milles davant de la costa de Gerion hi ha una petita illa sense nom. Fins ara, no hi havia motius per visitar-la, però ahir una gran bola de foc va caure-hi des del cel al bell mig de l'illa. És un senyal dels déus? Aneu a explorar l'illa amb la vostra tribu i descobriu els tresors d'aquesta illa abans que hi arribin altres competidors."
+msgstr "Unes milles davant de la costa de Gerion hi ha una petita illa sense nom. Fins ara, no hi havia motius per visitar-la, però ahir una gran bola de foc va caure-hi des del cel al bell mig de l'illa. És un senyal dels déus? Exploreu l'illa amb la vostra tribu i descobriu-ne els tresors abans que hi arribin altres competidors."
 
 #: ../../data/maps/Comet_Island_v2.wmf/elemental:11
 msgid ""
@@ -322,7 +322,7 @@ msgstr "Quatre tribus lluiten amb el seu veí més proper per ser el primer a ar
 
 #: ../../data/maps/Dolomites_v2.wmf/elemental:8
 msgid "Dolomites"
-msgstr "Els Dolomites"
+msgstr "Les Dolomites"
 
 #: ../../data/maps/Dolomites_v2.wmf/elemental:10
 msgid ""
@@ -331,7 +331,7 @@ msgid ""
 "reasonable reconstruction of the area delimited by Cortina d’Ampezzo in the "
 "north-east and Canazei in the south-west. If you have to be pitted in a duel"
 " to the death against your enemies, it may as well be in a beautiful place."
-msgstr "La joia dels Alps, la serralada dels Dolomites ha estat declarada Patrimoni de la Humanitat per la seva bellesa immaculada. Aquest mapa és una reconstrucció tan fidel com raonable de l'àrea delimitada per la Cortina d'Ampezzo al nord-est i Canazel al sud-oest. Si us heu d'enfrontar en un duel a mort amb els vostres enemics, podríeu fer-ho en aquest preciós lloc."
+msgstr "La joia dels Alps, la serralada de les Dolomites ha estat declarada Patrimoni de la Humanitat per la seva bellesa immaculada. Aquest mapa és una reconstrucció tan fidel com raonable de l'àrea delimitada per la Cortina d'Ampezzo al nord-est i Canazel al sud-oest. Si us heu d'enfrontar en un duel a mort amb els vostres enemics, podríeu fer-ho en aquest preciós lloc."
 
 #: ../../data/maps/Dolomites_v2.wmf/elemental:11
 msgid ""
@@ -587,7 +587,7 @@ msgid ""
 "Only a small hill in the centre of the map connects these four competing "
 "tribes. Lead your army to this hill right away and build a giant stronghold "
 "as a sign of your superiority!"
-msgstr "Només un petit turó al centre de l'illa connecta quatre tribus enfrentades. Dirigiu el vostre exèrcit cap al turó i construïu-hi una fortalesa com a signe de la vostra superioritat!"
+msgstr "Només un petit turó al centre de l'illa connecta quatre tribus enfrontades. Dirigiu el vostre exèrcit cap al turó i construïu-hi una fortalesa com a signe de la vostra superioritat!"
 
 #: ../../data/maps/Rendez-Vous.wmf/elemental:11
 msgid ""

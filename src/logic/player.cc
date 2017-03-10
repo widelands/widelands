@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2003, 2006-2013 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -50,7 +50,7 @@
 #include "logic/map_objects/tribes/warehouse.h"
 #include "logic/playercommand.h"
 #include "scripting/lua_table.h"
-#include "sound/sound_handler.h"
+#include "sound/note_sound.h"
 #include "wui/interactive_player.h"
 
 namespace {
@@ -200,7 +200,7 @@ void Player::create_default_infrastructure() {
 		table->do_not_warn_about_unaccessed_keys();
 		std::unique_ptr<LuaCoroutine> cr = table->get_coroutine("func");
 		cr->push_arg(this);
-		game.enqueue_command(new CmdLuaCoroutine(game.get_gametime(), cr.release()));
+		game.enqueue_command(new CmdLuaCoroutine(game.get_gametime(), std::move(cr)));
 
 		// Check if other starting positions are shared in and initialize them as well
 		for (uint8_t n = 0; n < further_shared_in_player_.size(); ++n) {
@@ -213,7 +213,7 @@ void Player::create_default_infrastructure() {
 			      ->get_coroutine("func");
 			ncr->push_arg(this);
 			ncr->push_arg(further_pos);
-			game.enqueue_command(new CmdLuaCoroutine(game.get_gametime(), ncr.release()));
+			game.enqueue_command(new CmdLuaCoroutine(game.get_gametime(), std::move(ncr)));
 		}
 	} else
 		throw WLWarning(_("Missing starting position"),
@@ -278,15 +278,14 @@ void Player::update_team_players() {
 void Player::play_message_sound(const Message::Type& msgtype) {
 #define MAYBE_PLAY(type, file)                                                                     \
 	if (msgtype == type) {                                                                          \
-		g_sound_handler.play_fx(file, 200, PRIO_ALWAYS_PLAY);                                        \
+		Notifications::publish(NoteSound(file, 200, PRIO_ALWAYS_PLAY));                              \
 		return;                                                                                      \
 	}
 
 	if (g_options.pull_section("global").get_bool("sound_at_message", true)) {
 		MAYBE_PLAY(Message::Type::kEconomySiteOccupied, "military/site_occupied");
 		MAYBE_PLAY(Message::Type::kWarfareUnderAttack, "military/under_attack");
-
-		g_sound_handler.play_fx("message", 200, PRIO_ALWAYS_PLAY);
+		Notifications::publish(NoteSound("message", 200, PRIO_ALWAYS_PLAY));
 	}
 }
 
@@ -453,8 +452,8 @@ Road& Player::force_road(const Path& path) {
 		log("Clearing for road at (%i, %i)\n", c.x, c.y);
 
 		//  Make sure that the player owns the area around.
-		dynamic_cast<Game&>(egbase()).conquer_area_no_building(
-		   PlayerArea<Area<FCoords>>(player_number(), Area<FCoords>(c, 1)));
+		dynamic_cast<Game&>(egbase())
+		   .conquer_area_no_building(PlayerArea<Area<FCoords>>(player_number(), Area<FCoords>(c, 1)));
 
 		if (BaseImmovable* const immovable = c.field->get_immovable()) {
 			assert(immovable != &start);
@@ -693,6 +692,8 @@ void Player::enhance_or_dismantle(Building* building,
 			workers = building->get_workers();
 		}
 
+		// Register whether the window was open
+		Notifications::publish(NoteBuilding(building->serial(), NoteBuilding::Action::kStartWarp));
 		building->remove(egbase());  //  no fire or stuff
 		//  Hereafter the old building does not exist and building is a dangling
 		//  pointer.
@@ -701,6 +702,10 @@ void Player::enhance_or_dismantle(Building* building,
 			   position, player_number_, index_of_new_building, false, former_buildings);
 		else
 			building = &egbase().warp_dismantlesite(position, player_number_, false, former_buildings);
+
+		// Open the new building window if needed
+		Notifications::publish(NoteBuilding(building->serial(), NoteBuilding::Action::kFinishWarp));
+
 		//  Hereafter building points to the new building.
 
 		// Reassign the workers and soldiers.
@@ -1080,8 +1085,21 @@ void Player::sample_statistics() {
 void Player::ware_produced(DescriptionIndex const wareid) {
 	assert(ware_productions_.size() == egbase().tribes().nrwares());
 	assert(egbase().tribes().ware_exists(wareid));
-
 	++current_produced_statistics_[wareid];
+}
+
+/**
+ * Return count of produced wares for ware index
+ */
+uint32_t Player::get_current_produced_statistics(uint8_t const wareid) {
+	assert(wareid < egbase().tribes().nrwares());
+	assert(wareid < ware_productions_.size());
+	assert(wareid < current_produced_statistics_.size());
+	uint32_t sum = current_produced_statistics_[wareid];
+	for (const auto stat : *get_ware_production_statistics(wareid)) {
+		sum += stat;
+	}
+	return sum;
 }
 
 /**
@@ -1208,6 +1226,8 @@ const std::string Player::pick_shipname() {
  * \param fr source stream
  */
 void Player::read_remaining_shipnames(FileRead& fr) {
+	// First get rid of default shipnames
+	remaining_shipnames_.clear();
 	const uint16_t count = fr.unsigned_16();
 	for (uint16_t i = 0; i < count; ++i) {
 		remaining_shipnames_.insert(fr.string());

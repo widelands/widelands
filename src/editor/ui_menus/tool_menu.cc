@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2009, 2011, 2013 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -27,14 +27,14 @@
 #include "editor/tools/increase_height_tool.h"
 #include "editor/tools/increase_resources_tool.h"
 #include "editor/tools/noise_height_tool.h"
-#include "editor/tools/place_bob_tool.h"
+#include "editor/tools/place_critter_tool.h"
 #include "editor/tools/place_immovable_tool.h"
 #include "editor/tools/set_port_space_tool.h"
 #include "editor/tools/set_terrain_tool.h"
 #include "editor/ui_menus/tool_change_height_options_menu.h"
 #include "editor/ui_menus/tool_change_resources_options_menu.h"
 #include "editor/ui_menus/tool_noise_height_options_menu.h"
-#include "editor/ui_menus/tool_place_bob_options_menu.h"
+#include "editor/ui_menus/tool_place_critter_options_menu.h"
 #include "editor/ui_menus/tool_place_immovable_options_menu.h"
 #include "editor/ui_menus/tool_set_terrain_options_menu.h"
 #include "graphic/graphic.h"
@@ -76,7 +76,7 @@ EditorToolMenu::EditorToolMenu(EditorInteractive& parent, UI::UniqueWindow::Regi
 		                          2 :
 		                          &current == &parent.tools()->place_immovable ?
 		                          3 :
-		                          &current == &parent.tools()->place_bob ?
+		                          &current == &parent.tools()->place_critter ?
 		                          4 :
 		                          &current == &parent.tools()->increase_resources ?
 		                          5 :
@@ -120,8 +120,8 @@ void EditorToolMenu::changed_to() {
 		current_registry_pointer = &parent.immovablemenu_;
 		break;
 	case 4:
-		current_tool_pointer = &parent.tools()->place_bob;
-		current_registry_pointer = &parent.bobmenu_;
+		current_tool_pointer = &parent.tools()->place_critter;
+		current_registry_pointer = &parent.crittermenu_;
 		break;
 	case 5:
 		current_tool_pointer = &parent.tools()->increase_resources;
@@ -174,8 +174,8 @@ void EditorToolMenu::changed_to() {
 				   parent, parent.tools()->place_immovable, *current_registry_pointer);
 				break;
 			case 4:
-				new EditorToolPlaceBobOptionsMenu(
-				   parent, parent.tools()->place_bob, *current_registry_pointer);
+				new EditorToolPlaceCritterOptionsMenu(
+				   parent, parent.tools()->place_critter, *current_registry_pointer);
 				break;
 			case 5:
 				new EditorToolChangeResourcesOptionsMenu(

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006, 2008-2011 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -32,8 +32,9 @@
 namespace UI {
 
 /**
- * Shows a standard messagebox. The message box can be used either as a modal
- * or as a non-modal dialog box.
+ * Shows a standard messagebox.
+ *
+ * The message box can be used either as a modal or as a non-modal dialog box.
  *
  * Using it as a modal dialog box is very straightforward:
  *     WLMessageBox mb(parent, "Title", "Text", MBoxType::kOK);

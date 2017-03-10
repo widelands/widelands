@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2009, 2011 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -89,7 +89,7 @@ public:
 		return info_;
 	}
 
-	WaresQueue& waresqueue(DescriptionIndex) override;
+	InputQueue& inputqueue(DescriptionIndex, WareWorker) override;
 
 	void set_building(const BuildingDescr&) override;
 	const BuildingDescr& building() const {
@@ -110,9 +110,8 @@ protected:
 	uint32_t build_step_time() const override {
 		return CONSTRUCTIONSITE_STEP_TIME;
 	}
-	void create_options_window(InteractiveGameBase&, UI::Window*& registry) override;
 
-	static void wares_queue_callback(Game&, WaresQueue*, DescriptionIndex, void* data);
+	static void wares_queue_callback(Game&, InputQueue*, DescriptionIndex, Worker*, void* data);
 
 	void draw(uint32_t gametime,
 	          TextToDraw draw_text,

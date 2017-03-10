@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2009, 2011 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -35,9 +35,7 @@
 #include "logic/game.h"
 #include "logic/map_objects/tribes/tribe_descr.h"
 #include "logic/map_objects/tribes/worker.h"
-#include "sound/sound_handler.h"
 #include "ui_basic/window.h"
-#include "wui/interactive_gamebase.h"
 
 namespace Widelands {
 
@@ -80,9 +78,15 @@ void ConstructionSite::update_statistics_string(std::string* s) {
 Access to the wares queues by id
 =======
 */
-WaresQueue& ConstructionSite::waresqueue(DescriptionIndex const wi) {
+InputQueue& ConstructionSite::inputqueue(DescriptionIndex const wi, WareWorker const type) {
+	// There are no worker queues here
+	// Hopefully, our construction sites are safe enough not to kill workers
+	if (type != wwWARE) {
+		throw wexception("%s (%u) (building %s) has no WorkersQueues", descr().name().c_str(),
+		                 serial(), building_->name().c_str());
+	}
 	for (WaresQueue* ware : wares_) {
-		if (ware->get_ware() == wi) {
+		if (ware->get_index() == wi) {
 			return *ware;
 		}
 	}
@@ -144,6 +148,8 @@ If construction was finished successfully, place the building at our position.
 ===============
 */
 void ConstructionSite::cleanup(EditorGameBase& egbase) {
+	// Register whether the window was open
+	Notifications::publish(NoteBuilding(serial(), NoteBuilding::Action::kStartWarp));
 	PartiallyFinishedBuilding::cleanup(egbase);
 
 	if (work_steps_ <= work_completed_) {
@@ -156,12 +162,7 @@ void ConstructionSite::cleanup(EditorGameBase& egbase) {
 			builder->set_location(&b);
 		}
 		// Open the new building window if needed
-		if (optionswindow_) {
-			Vector2i window_position = optionswindow_->get_pos();
-			hide_options();
-			InteractiveGameBase& igbase = dynamic_cast<InteractiveGameBase&>(*egbase.get_ibase());
-			b.show_options(igbase, false, window_position);
-		}
+		Notifications::publish(NoteBuilding(b.serial(), NoteBuilding::Action::kFinishWarp));
 	}
 }
 
@@ -240,8 +241,8 @@ bool ConstructionSite::get_building_work(Game& game, Worker& worker, bool) {
 		WaresQueue* queue = iqueue;
 		if (queue->get_filled() > queue->get_max_fill()) {
 			queue->set_filled(queue->get_filled() - 1);
-			const WareDescr& wd = *owner().tribe().get_ware_descr(queue->get_ware());
-			WareInstance& ware = *new WareInstance(queue->get_ware(), &wd);
+			const WareDescr& wd = *owner().tribe().get_ware_descr(queue->get_index());
+			WareInstance& ware = *new WareInstance(queue->get_index(), &wd);
 			ware.init(game);
 			worker.start_task_dropoff(game, ware);
 			return true;
@@ -260,7 +261,7 @@ bool ConstructionSite::get_building_work(Game& game, Worker& worker, bool) {
 			wq.set_max_size(wq.get_max_size() - 1);
 
 			// Update consumption statistic
-			owner().ware_consumed(wq.get_ware(), 1);
+			owner().ware_consumed(wq.get_index(), 1);
 
 			working_ = true;
 			work_steptime_ = game.get_gametime() + CONSTRUCTIONSITE_STEP_TIME;
@@ -282,13 +283,11 @@ bool ConstructionSite::get_building_work(Game& game, Worker& worker, bool) {
 
 /*
 ===============
-Called by WaresQueue code when an ware has arrived
+Called by InputQueue code when an ware has arrived
 ===============
 */
-void ConstructionSite::wares_queue_callback(Game& game,
-                                            WaresQueue*,
-                                            DescriptionIndex,
-                                            void* const data) {
+void ConstructionSite::wares_queue_callback(
+   Game& game, InputQueue*, DescriptionIndex, Worker*, void* const data) {
 	ConstructionSite& cs = *static_cast<ConstructionSite*>(data);
 
 	if (!cs.working_)

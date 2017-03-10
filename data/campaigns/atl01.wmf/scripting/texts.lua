@@ -94,6 +94,16 @@ obj_make_heavy_industry_and_mining = {
    )
 }
 
+obj_build_barracks = {
+   name = "obj_build_barracks",
+   title = _"Build a barracks",
+   number = 1,
+   body = objective_text(_"Recruiting new soldiers",
+      _[[Now that weapons are being forged, new soldiers can be recruited. For this, we need to deliver light tridents and tabards to the barracks. Recruits will arrive from the warehouse and receive one of each and some basic training to become a soldier.]] .. paragraphdivider() ..
+      listitem_bullet(_[[Build a barracks]])
+   )
+}
+
 obj_make_training_buildings = {
    name = "obj_make_training_buildings",
    title = _"Build training sites for soldiers",
@@ -302,6 +312,25 @@ heavy_industry_story = {
    },
 }
 
+barracks_story = {
+   {
+      title = _"Jundlina Writes a Letter",
+      body = jundlina(_"Jundlina",
+         -- TRANSLATORS: Jundlina
+         _([[I have received word that our mining industry started working. Now that we are forging weapons, I will send a letter to Sidolus informing him that it’s time to build a barracks and start recruiting soldiers.]]))
+         .. new_objectives(obj_build_barracks)
+   }
+}
+
+barracks_story_end = {
+   {
+      title = _"Jundlina is Satisfied",
+      body = jundlina(_"Jundlina",
+         -- TRANSLATORS: Jundlina
+         _([[Today I saw the first recruits gathering in front of the new barracks. If everything goes well, they should receive their training soon.]]))
+   }
+}
+
 training_story = {
    {
       title = _"Jundlina Summons Sidolus",
@@ -419,7 +448,7 @@ field_flooded_msg = {
       pre_func = function()
          local lake_field = map:get_field(75,80)
          p1:reveal_fields(lake_field:region(10))
-         scroll_smoothly_to(lake_field)
+         scroll_to_field(lake_field)
          sleep(200)
       end,
       body = ostur(

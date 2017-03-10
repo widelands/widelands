@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2016 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -84,39 +84,33 @@ FullscreenMenuLaunchSPG::FullscreenMenuLaunchSPG(GameSettingsProvider* const set
          _("Start game")),
 
      // Text labels
-     title_(this, get_w() / 2, get_h() / 10, _("Launch Game"), UI::Align::kHCenter),
+     title_(this, get_w() / 2, get_h() / 10, _("Launch Game"), UI::Align::kCenter),
      mapname_(this,
               get_w() * 7 / 10 + butw_ / 2,
               get_h() * 53 / 200 - 15,
               std::string(),
-              UI::Align::kHCenter),
-     name_(this, get_w() * 1 / 25, get_h() * 53 / 200 - 15, _("Player’s name"), UI::Align::kLeft),
+              UI::Align::kCenter),
+     name_(this, get_w() * 1 / 25, get_h() * 53 / 200 - 15, _("Player’s name")),
      type_(this,
            // (Element x) + (PlayerDescriptionGroup x)  + border
            ((get_w() * 16 / 25) * 35 / 125) + (get_w() / 25) + 2,
            get_h() * 53 / 200 - 15,
-           _("Player’s type"),
-           UI::Align::kLeft),
-     team_(this,
-           ((get_w() * 16 / 25) * 35 / 125) + (get_w() / 25) + 2,
-           get_h() * 53 / 200,
-           _("Team"),
-           UI::Align::kLeft),
+           _("Player’s type")),
+     team_(
+        this, ((get_w() * 16 / 25) * 35 / 125) + (get_w() / 25) + 2, get_h() * 53 / 200, _("Team")),
      tribe_(this,
             ((get_w() * 16 / 25) * 80 / 125) + (get_w() / 25) + 2,
             get_h() * 53 / 200 - 15,
-            _("Player’s tribe"),
-            UI::Align::kLeft),
+            _("Player’s tribe")),
      init_(this,
            ((get_w() * 16 / 25) * 55 / 125) + (get_w() / 25) + 2,
            get_h() * 53 / 200,
-           _("Start type"),
-           UI::Align::kLeft),
+           _("Start type")),
      wincondition_type_(this,
                         get_w() * 7 / 10 + (butw_ / 2),
                         get_h() * 7 / 20 + buth_,
                         _("Type of game"),
-                        UI::Align::kHCenter),
+                        UI::Align::kCenter),
 
      // Variables and objects used in the menu
      settings_(settings),

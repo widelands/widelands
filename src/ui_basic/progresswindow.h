@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007-2016 by the Widelands Development Team
+ * Copyright (C) 2007-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -63,9 +63,7 @@ struct ProgressWindow : public UI::FullscreenWindow {
 private:
 	using VisualizationArray = std::vector<IProgressVisualization*>;
 
-	// This is an integer vector to make sure that we blit at pixel boundaries
-	// to avoid Texture subsampling.
-	Vector2i label_center_;
+	Vector2f label_center_;
 	Rectf label_rectangle_;
 	VisualizationArray visualizations_;
 	std::string background_;

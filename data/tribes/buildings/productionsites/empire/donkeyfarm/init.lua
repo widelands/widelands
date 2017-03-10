@@ -49,7 +49,7 @@ tribes:new_productionsite_type {
    programs = {
       work = {
          -- TRANSLATORS: Completed/Skipped/Did not start rearing donkeys because ...
-         descname = _"rearing donkeys",
+         descname = pgettext("empire_building", "rearing donkeys"),
          actions = {
             "sleep=15000",
             "return=skipped unless economy needs empire_donkey",

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2011 by the Widelands Development Team
+ * Copyright (C) 2006-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -26,7 +26,7 @@
 #include "logic/map_objects/tribes/tribe_descr.h"
 #include "logic/map_objects/tribes/worker.h"
 #include "logic/player.h"
-#include "sound/sound_handler.h"
+#include "sound/note_sound.h"
 
 namespace Widelands {
 
@@ -72,7 +72,7 @@ void PartiallyFinishedBuilding::init(EditorGameBase& egbase) {
 	if (upcast(Game, game, &egbase))
 		request_builder(*game);
 
-	g_sound_handler.play_fx("create_construction_site", position_, 255);
+	Notifications::publish(NoteSound("create_construction_site", position_, 255));
 }
 
 /*

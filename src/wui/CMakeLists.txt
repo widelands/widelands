@@ -34,6 +34,20 @@ wl_library(wui_field_overlay_manager
     logic_widelands_geometry
 )
 
+wl_library(wui_economy_options
+  SRCS
+    economy_options_window.cc
+    economy_options_window.h
+  DEPENDS
+    economy
+    graphic
+    logic
+    notifications
+    ui_basic
+    wui_waresdisplay
+)
+
+
 wl_library(wui_edge_overlay_manager
   SRCS
     edge_overlay_manager.cc
@@ -87,10 +101,8 @@ wl_library(wui_quicknavigation
     quicknavigation.h
   DEPENDS
     base_geometry
-    logic
     widelands_ball_of_mud
     wui_mapview
-    wui_mapview_pixelfunctions
 )
 
 wl_library(wui_mapview
@@ -111,6 +123,20 @@ wl_library(wui_mapview
     wui_mapview_pixelfunctions
 )
 
+wl_library(wui_waresdisplay
+  SRCS
+    waresdisplay.cc
+    waresdisplay.h
+  DEPENDS
+    base_exceptions
+    base_i18n
+    graphic
+    graphic_text_layout
+    logic
+    ui_basic
+)
+
+
 wl_library(wui
   SRCS
     actionconfirm.cc
@@ -119,13 +145,14 @@ wl_library(wui
     attack_box.h
     building_statistics_menu.cc
     building_statistics_menu.h
-    building_ui.cc
     buildingwindow.cc
     buildingwindow.h
     constructionsitewindow.cc
+    constructionsitewindow.h
     debugconsole.cc
     debugconsole.h
     dismantlesitewindow.cc
+    dismantlesitewindow.h
     encyclopedia_window.cc
     encyclopedia_window.h
     fieldaction.cc
@@ -152,6 +179,8 @@ wl_library(wui
     general_statistics_menu.h
     helpwindow.cc
     helpwindow.h
+    inputqueuedisplay.cc
+    inputqueuedisplay.h
     interactive_base.cc
     interactive_base.h
     interactive_gamebase.cc
@@ -166,6 +195,7 @@ wl_library(wui
     login_box.h
     logmessage.h
     militarysitewindow.cc
+    militarysitewindow.h
     minimap.cc
     minimap.h
     multiplayersetupgroup.cc
@@ -189,8 +219,8 @@ wl_library(wui
     story_message_box.cc
     story_message_box.h
     trainingsitewindow.cc
+    trainingsitewindow.h
     transport_draw.cc
-    transport_ui.cc
     tribal_encyclopedia.cc
     tribal_encyclopedia.h
     unique_window_handler.cc
@@ -198,10 +228,7 @@ wl_library(wui
     ware_statistics_menu.cc
     ware_statistics_menu.h
     warehousewindow.cc
-    waresdisplay.cc
-    waresdisplay.h
-    waresqueuedisplay.cc
-    waresqueuedisplay.h
+    warehousewindow.h
     watchwindow.cc
     watchwindow.h
   USES_SDL2
@@ -231,6 +258,7 @@ wl_library(wui
     logic_game_settings
     logic_widelands_geometry
     network
+    note_sound
     notifications
     profile
     scripting_coroutine
@@ -240,9 +268,11 @@ wl_library(wui
     ui_basic
     widelands_ball_of_mud
     wui_chat_ui
+    wui_economy_options
     wui_edge_overlay_manager
     wui_field_overlay_manager
     wui_mapview
     wui_mapview_pixelfunctions
     wui_quicknavigation
+    wui_waresdisplay
 )

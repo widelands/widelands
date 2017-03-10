@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2016 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -180,14 +180,8 @@ public:
 		return bborder_;
 	}
 
-	int get_inner_w() const {
-		assert(lborder_ + rborder_ <= w_);
-		return w_ - (lborder_ + rborder_);
-	}
-	int get_inner_h() const {
-		assert(tborder_ + bborder_ <= h_);
-		return h_ - (tborder_ + bborder_);
-	}
+	int get_inner_w() const;
+	int get_inner_h() const;
 
 	const Panel* get_next_sibling() const {
 		return next_;

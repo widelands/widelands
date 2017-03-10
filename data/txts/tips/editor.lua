@@ -1,0 +1,48 @@
+set_textdomain("texts")
+tips = {
+   {
+      text = _"You can find general help for the editor as well as a short tutorial on our wiki at www.widelands.org",
+      seconds = 6
+   },
+   {
+      text = _"You can select multiple animal types if you hold down Ctrl during selection. If you then click on the map, an instance of one of the selected animal types will be placed.",
+      seconds = 7
+   },
+   {
+      text = _"Just like with animals, you can also select multiple immovables or ground textures with Ctrl + mouse click.",
+      seconds = 6
+   },
+   {
+      text = _"Holding down Shift switches the first alternative tool on. This tool is in most cases the complete opposite of the normal tool (for example deletion of an object instead of placing one).",
+      seconds = 7
+   },
+   {
+      text = _"Holding down Alt switches the second alternative tool on (if it exists).",
+      seconds = 6
+   },
+   {
+      text = _"The number keys (0 - 9) allow you to directly set the size of the selected area around your mouse cursor.",
+      seconds = 6
+   },
+   {
+      text = _"Space key behaves like in normal game. It switches if building spaces are shown on or off.",
+      seconds = 4
+   },
+   {
+      text = _"When placing trees, use the help button to see which trees are more likely to survive on which terrain.",
+      seconds = 6
+   },
+   {
+      text = _"If you do not set water and fish resources, a default amount will be used.",
+      seconds = 4
+   },
+   {
+      text = _"You can place a medium building on any node where there is a slope no greater than 1 in the south-east direction and its height difference to all nodes in a radius of 2 is no greater than 2.",
+      seconds = 7
+   },
+   {
+      text = _"You can place a large building on any node where you could place a medium building if there is no obstacle or non-arable terrain towards the west, northwest and northeast.",
+      seconds = 7
+   },
+}
+return tips

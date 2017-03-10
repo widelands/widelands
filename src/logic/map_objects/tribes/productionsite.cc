@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2013 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -27,9 +27,11 @@
 #include "base/macros.h"
 #include "base/wexception.h"
 #include "economy/economy.h"
+#include "economy/input_queue.h"
 #include "economy/request.h"
 #include "economy/ware_instance.h"
 #include "economy/wares_queue.h"
+#include "economy/workers_queue.h"
 #include "graphic/text_constants.h"
 #include "logic/editor_game_base.h"
 #include "logic/game.h"
@@ -66,6 +68,7 @@ ProductionSiteDescr::ProductionSiteDescr(const std::string& init_descname,
      out_of_resource_title_(""),
      out_of_resource_heading_(""),
      out_of_resource_message_(""),
+     resource_not_needed_message_(""),
      out_of_resource_productivity_threshold_(100) {
 	i18n::Textdomain td("tribes");
 	std::unique_ptr<LuaTable> items_table;
@@ -79,6 +82,9 @@ ProductionSiteDescr::ProductionSiteDescr(const std::string& init_descname,
 		if (items_table->has_key("productivity_threshold")) {
 			out_of_resource_productivity_threshold_ = items_table->get_int("productivity_threshold");
 		}
+	}
+	if (table.has_key("resource_not_needed_message")) {
+		resource_not_needed_message_ = _(table.get_string("resource_not_needed_message"));
 	}
 
 	if (table.has_key("outputs")) {
@@ -117,16 +123,26 @@ ProductionSiteDescr::ProductionSiteDescr(const std::string& init_descname,
 				if (amount < 1 || 255 < amount) {
 					throw wexception("amount is out of range 1 .. 255");
 				}
-				DescriptionIndex const idx = egbase.tribes().ware_index(ware_name);
+				DescriptionIndex idx = egbase.tribes().ware_index(ware_name);
 				if (egbase.tribes().ware_exists(idx)) {
-					for (const auto& temp_inputs : inputs()) {
+					for (const auto& temp_inputs : input_wares()) {
 						if (temp_inputs.first == idx) {
 							throw wexception("duplicated");
 						}
 					}
-					inputs_.push_back(WareAmount(idx, amount));
+					input_wares_.push_back(WareAmount(idx, amount));
 				} else {
-					throw wexception("tribes do not define a ware type with this name");
+					idx = egbase.tribes().worker_index(ware_name);
+					if (egbase.tribes().worker_exists(idx)) {
+						for (const auto& temp_inputs : input_workers()) {
+							if (temp_inputs.first == idx) {
+								throw wexception("duplicated");
+							}
+						}
+						input_workers_.push_back(WareAmount(idx, amount));
+					} else {
+						throw wexception("tribes do not define a ware or worker type with this name");
+					}
 				}
 			} catch (const WException& e) {
 				throw wexception("input \"%s=%d\": %s", ware_name.c_str(), amount, e.what());
@@ -166,9 +182,16 @@ ProductionSiteDescr::ProductionSiteDescr(const std::string& init_descname,
 				throw wexception("this program has already been declared");
 			}
 			std::unique_ptr<LuaTable> program_table = items_table->get_table(program_name);
-			programs_[program_name] = std::unique_ptr<ProductionProgram>(
-			   new ProductionProgram(program_name, _(program_table->get_string("descname")),
-			                         program_table->get_table("actions"), egbase, this));
+
+			// Allow use of both gettext and pgettext. This way, we can have a lower workload on
+			// translators and disambiguate at the same time.
+			const std::string program_descname_unlocalized = program_table->get_string("descname");
+			std::string program_descname = _(program_descname_unlocalized);
+			if (program_descname == program_descname_unlocalized) {
+				program_descname = pgettext_expr(msgctxt.c_str(), program_descname_unlocalized.c_str());
+			}
+			programs_[program_name] = std::unique_ptr<ProductionProgram>(new ProductionProgram(
+			   program_name, program_descname, program_table->get_table("actions"), egbase, this));
 		} catch (const std::exception& e) {
 			throw wexception("program %s: %s", program_name.c_str(), e.what());
 		}
@@ -315,13 +338,13 @@ bool ProductionSite::has_workers(DescriptionIndex targetSite, Game& /* game */) 
 	}
 }
 
-WaresQueue& ProductionSite::waresqueue(DescriptionIndex const wi) {
-	for (WaresQueue* ip_queue : input_queues_) {
-		if (ip_queue->get_ware() == wi) {
+InputQueue& ProductionSite::inputqueue(DescriptionIndex const wi, WareWorker const type) {
+	for (InputQueue* ip_queue : input_queues_) {
+		if (ip_queue->get_index() == wi && ip_queue->get_type() == type) {
 			return *ip_queue;
 		}
 	}
-	throw wexception("%s (%u) has no WaresQueue for %u", descr().name().c_str(), serial(), wi);
+	throw wexception("%s (%u) has no InputQueue for %u", descr().name().c_str(), serial(), wi);
 }
 
 /**
@@ -391,10 +414,18 @@ void ProductionSite::calc_statistics() {
 void ProductionSite::init(EditorGameBase& egbase) {
 	Building::init(egbase);
 
-	const BillOfMaterials& inputs = descr().inputs();
-	input_queues_.resize(inputs.size());
-	for (WareRange i(inputs); i; ++i)
+	const BillOfMaterials& input_wares = descr().input_wares();
+	const BillOfMaterials& input_workers = descr().input_workers();
+	input_queues_.resize(input_wares.size() + input_workers.size());
+
+	for (WareRange i(input_wares); i; ++i) {
 		input_queues_[i.i] = new WaresQueue(*this, i.current->first, i.current->second);
+	}
+
+	for (WareRange i(input_workers); i; ++i) {
+		input_queues_[input_wares.size() + i.i] =
+		   new WorkersQueue(*this, i.current->first, i.current->second);
+	}
 
 	//  Request missing workers.
 	WorkingPosition* wp = working_positions_;
@@ -418,7 +449,7 @@ void ProductionSite::init(EditorGameBase& egbase) {
  */
 void ProductionSite::set_economy(Economy* const e) {
 	if (Economy* const old = get_economy()) {
-		for (WaresQueue* ip_queue : input_queues_) {
+		for (InputQueue* ip_queue : input_queues_) {
 			ip_queue->remove_from_economy(*old);
 		}
 	}
@@ -429,7 +460,7 @@ void ProductionSite::set_economy(Economy* const e) {
 			r->set_economy(e);
 
 	if (e) {
-		for (WaresQueue* ip_queue : input_queues_) {
+		for (InputQueue* ip_queue : input_queues_) {
 			ip_queue->add_to_economy(*e);
 		}
 	}
@@ -454,9 +485,9 @@ void ProductionSite::cleanup(EditorGameBase& egbase) {
 	}
 
 	// Cleanup the wares queues
-	for (uint32_t i = 0; i < input_queues_.size(); ++i) {
-		input_queues_[i]->cleanup();
-		delete input_queues_[i];
+	for (InputQueue* iq : input_queues_) {
+		iq->cleanup();
+		delete iq;
 	}
 	input_queues_.clear();
 
@@ -612,7 +643,7 @@ void ProductionSite::request_worker_callback(
 	// the last one we need to start working.
 	w->start_task_idle(game, 0, -1);
 	psite.try_start_working(game);
-	psite.workers_changed();
+	Notifications::publish(NoteBuilding(psite.serial(), NoteBuilding::Action::kWorkersChanged));
 }
 
 /**
@@ -692,6 +723,7 @@ void ProductionSite::log_general_info(const EditorGameBase& egbase) {
 void ProductionSite::set_stopped(bool const stopped) {
 	is_stopped_ = stopped;
 	get_economy()->rebalance_supply();
+	Notifications::publish(NoteBuilding(serial(), NoteBuilding::Action::kChanged));
 }
 
 /**
@@ -786,11 +818,12 @@ bool ProductionSite::get_building_work(Game& game, Worker& worker, bool const su
 	}
 
 	// Drop all the wares that are too much out to the flag.
-	for (WaresQueue* queue : input_queues_) {
-		if (queue->get_filled() > queue->get_max_fill()) {
+	// Input-workers are coming out by themselves
+	for (InputQueue* queue : input_queues_) {
+		if (queue->get_type() == wwWARE && queue->get_filled() > queue->get_max_fill()) {
 			queue->set_filled(queue->get_filled() - 1);
-			const WareDescr& wd = *owner().tribe().get_ware_descr(queue->get_ware());
-			WareInstance& ware = *new WareInstance(queue->get_ware(), &wd);
+			const WareDescr& wd = *owner().tribe().get_ware_descr(queue->get_index());
+			WareInstance& ware = *new WareInstance(queue->get_index(), &wd);
 			ware.init(game);
 			worker.start_task_dropoff(game, ware);
 			return true;
@@ -893,16 +926,23 @@ void ProductionSite::program_end(Game& game, ProgramResult const result) {
 void ProductionSite::train_workers(Game& game) {
 	for (uint32_t i = descr().nr_working_positions(); i;)
 		working_positions_[--i].worker->gain_experience(game);
-	Building::workers_changed();
+	Notifications::publish(NoteBuilding(serial(), NoteBuilding::Action::kWorkersChanged));
 }
 
-void ProductionSite::notify_player(Game& game, uint8_t minutes) {
+void ProductionSite::notify_player(Game& game, uint8_t minutes, FailNotificationType type) {
 	if (last_stat_percent_ == 0 ||
 	    (last_stat_percent_ <= descr().out_of_resource_productivity_threshold() &&
 	     trend_ == Trend::kFalling)) {
-		if (descr().out_of_resource_heading().empty()) {
+
+		if (type == FailNotificationType::kFull) {
+			// The building has nothing to do
+			assert(!descr().resource_not_needed_message().empty());
+			set_production_result(descr().resource_not_needed_message());
+		} else if (descr().out_of_resource_message().empty()) {
+			// We have no message body to send
 			set_production_result(_("Can’t find any more resources!"));
 		} else {
+			// Send full message
 			set_production_result(descr().out_of_resource_heading());
 
 			assert(!descr().out_of_resource_message().empty());
@@ -910,6 +950,7 @@ void ProductionSite::notify_player(Game& game, uint8_t minutes) {
 			             descr().icon_filename(), descr().out_of_resource_heading(),
 			             descr().out_of_resource_message(), true, minutes * 60000, 0);
 		}
+
 		// The following sends "out of resources" messages to be picked up by AI
 		// used as information for dismantling and upgrading buildings
 		if (descr().get_ismine()) {

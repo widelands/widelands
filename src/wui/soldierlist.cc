@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2016 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -371,24 +371,24 @@ SoldierList::SoldierList(UI::Panel& parent, InteractiveGameBase& igb, Widelands:
      building_(building),
      soldierpanel_(*this, igb.egbase(), building),
      infotext_(this, _("Click soldier to send away")) {
-	add(&soldierpanel_, UI::Align::kHCenter);
+	add(&soldierpanel_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 
 	add_space(2);
 
-	add(&infotext_, UI::Align::kHCenter);
+	add(&infotext_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 
 	soldierpanel_.set_mouseover(boost::bind(&SoldierList::mouseover, this, _1));
 	soldierpanel_.set_click(boost::bind(&SoldierList::eject, this, _1));
 
 	// We don't want translators to translate this twice, so it's a bit involved.
 	int w =
-	   UI::g_fh1
-	      ->render(as_uifont(
-	         (boost::format("%s ")  // We need some extra space to fix bug 724169
-	          /** TRANSLATORS: Health, Attack, Defense, Evade */
-	          % (boost::format(_("HP: %1$u/%2$u  AT: %3$u/%4$u  DE: %5$u/%6$u  EV: %7$u/%8$u")) % 8 %
-	             8 % 8 % 8 % 8 % 8 % 8 % 8))
-	            .str()))
+	   UI::g_fh1->render(
+	               as_uifont((boost::format("%s ")  // We need some extra space to fix bug 724169
+	                          /** TRANSLATORS: Health, Attack, Defense, Evade */
+	                          % (boost::format(_(
+	                                "HP: %1$u/%2$u  AT: %3$u/%4$u  DE: %5$u/%6$u  EV: %7$u/%8$u")) %
+	                             8 % 8 % 8 % 8 % 8 % 8 % 8 % 8))
+	                            .str()))
 	      ->width();
 	uint32_t maxtextwidth =
 	   std::max(w, UI::g_fh1->render(as_uifont(_("Click soldier to send away")))->width());
@@ -406,7 +406,7 @@ SoldierList::SoldierList(UI::Panel& parent, InteractiveGameBase& igb, Widelands:
 		                               _("Prefer Heroes"));
 		UI::Radiobutton* button = soldier_preference_.get_first_button();
 		while (button) {
-			buttons->add(button, UI::Align::kLeft);
+			buttons->add(button);
 			button = button->next_button();
 		}
 
@@ -422,9 +422,8 @@ SoldierList::SoldierList(UI::Panel& parent, InteractiveGameBase& igb, Widelands:
 		}
 	}
 	buttons->add_inf_space();
-	buttons->add(create_soldier_capacity_control(*buttons, igb, building), UI::Align::kRight);
-
-	add(buttons, UI::Align::kHCenter, true);
+	buttons->add(create_soldier_capacity_control(*buttons, igb, building));
+	add(buttons, UI::Box::Resizing::kFullSize);
 }
 
 SoldierControl& SoldierList::soldiers() const {

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2012-2013 by the Widelands Development Team
+ * Copyright (C) 2012-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -123,8 +123,6 @@ void NetworkGamingMessages::fill_map() {
 	ngmessages["GAME_STARTED_AT_CONNECT"] =
 	   _("The game has started just after you tried to connect.");
 	ngmessages["SERVER_CRASHED"] = _("Server has crashed and performed an emergency save.");
-	ngmessages["CLIENT_TIMEOUTED"] =
-	   _("Connection to client timed out: no response for 10 minutes!");
 	ngmessages["CLIENT_DESYNCED"] = _("Client and host have become desynchronized.");
 	ngmessages["KICKED"] = _("Kicked by the host: %s");
 	ngmessages["MALFORMED_COMMANDS"] = _("Client sent malformed commands: %s");
@@ -142,7 +140,7 @@ void NetworkGamingMessages::fill_map() {
 	ngmessages["DIFFERENT_PROTOCOL_VERS"] = _("Server uses a different protocol version");
 	ngmessages["PROTOCOL_EXCEPTION"] = _("Received command number %s,"
 	                                     " which is not allowed in this state.");
-	ngmessages["BACKWARTS_RUNNING_TIME"] =
+	ngmessages["BACKWARDS_RUNNING_TIME"] =
 	   _("Client reports time to host that is running backwards.");
 	ngmessages["SIMULATING_BEYOND_TIME"] =
 	   _("Client simulates beyond the game time allowed by the host.");
@@ -150,8 +148,6 @@ void NetworkGamingMessages::fill_map() {
 	ngmessages["GAME_ALREADY_STARTED"] = _("The game has already started.");
 	ngmessages["NO_ACCESS_TO_PLAYER"] = _("Client has no access to other player’s settings.");
 	ngmessages["NO_ACCESS_TO_SERVER"] = _("Client has no access to server settings.");
-	ngmessages["START_SENT_NOT_READY"] =
-	   _("Client sent start command, although server is not yet ready.");
 	ngmessages["TIME_SENT_NOT_READY"] =
 	   _("Client sent TIME command even though game is not running.");
 	ngmessages["PLAYERCMD_FOR_OTHER"] = _("Client sent a PLAYERCOMMAND for another player.");
@@ -163,12 +159,9 @@ void NetworkGamingMessages::fill_map() {
 	ngmessages["DIFFERENT_WL_VERSION"] =
 	   _("WARNING: %1$s uses version: %2$s, while Host uses version: %3$s");
 	ngmessages["CLIENT_HAS_JOINED_GAME"] = _("%s has joined the game");
-	ngmessages["GAME_SAVED_AS"] = _("Game was saved as %s.");
 	ngmessages["STARTED_SENDING_FILE"] = _("Started to send file %1$s to %2$s!");
 	ngmessages["COMPLETED_FILE_TRANSFER"] = _("Completed transfer of file %1$s to %2$s");
 	ngmessages["SENDING_FILE_PART"] = _("Sending part %1$s of file %2$s to %3$s");
 	ngmessages["PLAYER_DEFEATED"] = _("The player ‘%s’ was defeated and became a spectator.");
 	ngmessages["CLIENT_HUNG"] = _("Client %1$s did not answer for more than %2$s.");
-	ngmessages["CLIENT_HUNG_AUTOKICK"] =
-	   _("Client %1$s will automatically be kicked, if no answer is received within %2$s.");
 }

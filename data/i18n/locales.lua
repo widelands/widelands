@@ -2,369 +2,375 @@
 -- The locale data is managed in Transifex.
 
 return {
-   -- Locales are identified by their ISO code.
-   en = {
-      -- Used to display the locale in the Options menu.
-      name = "English",
+	-- Locales are identified by their ISO code.
+ 	en = {
+		-- Used to display the locale in the Options menu.
+		name = "English",
 
-      -- Defines the language's position on the list in the Options menu.
-      sort_name = "English",
+		-- Defines the language's position on the list in the Options menu.
+		sort_name = "English",
 
-      -- The font set used, including the script's direction. See i18n/fonts.lua
-      font = "default"
-   },
+		-- The font set used, including the script's direction. See i18n/fonts.lua
+		font = "default"
+	},
 
-   ar = {
-      name = "العربية",
-      sort_name = "Al-ʿArabiyyah",
-      font = "arabic"
-   },
+	ar = {
+		name = "العربية",
+		sort_name = "Al-ʿArabiyyah",
+		font = "arabic"
+	},
 
-   ast = {
-      name = "Asturianu",
-      sort_name = "Asturianu",
-      font = "default"
-   },
+	ast = {
+		name = "Asturianu",
+		sort_name = "Asturianu",
+		font = "default"
+	},
 
-   bg = {
-      name = "Български",
-      sort_name = "Balgarski",
-      font = "default"
-   },
+	bg = {
+		name = "Български",
+		sort_name = "Balgarski",
+		font = "default"
+	},
 
-   br = {
-      name = "Brezhoneg",
-      sort_name = "Brezhoneg",
-      font = "default"
-   },
+	br = {
+		name = "Brezhoneg",
+		sort_name = "Brezhoneg",
+		font = "default"
+	},
 
-   ca = {
-      name = "Català",
-      sort_name = "Catala",
-      font = "default"
-   },
+	ca = {
+		name = "Català",
+		sort_name = "Catala",
+		font = "default"
+	},
 
-   cs = {
-      name = "Čeština",
-      sort_name = "Cestina",
-      font = "default"
-   },
+	cs = {
+		name = "Čeština",
+		sort_name = "Cestina",
+		font = "default"
+	},
 
-   da = {
-      name = "Dansk",
-      sort_name = "Dansk",
-      font = "default"
-   },
+	da = {
+		name = "Dansk",
+		sort_name = "Dansk",
+		font = "default"
+	},
 
-   de = {
-      name = "Deutsch",
-      sort_name = "Deutsch",
-      font = "default"
-   },
+	de = {
+		name = "Deutsch",
+		sort_name = "Deutsch",
+		font = "default"
+	},
 
-   el = {
-      name = "Ελληνικά",
-      sort_name = "Ellinika",
-      font = "default"
-   },
+	el = {
+		name = "Ελληνικά",
+		sort_name = "Ellinika",
+		font = "default"
+	},
 
-   en_CA = {
-      name = "Canadian English",
-      sort_name = "English (Canada)",
-      font = "default"
-   },
+	en_CA = {
+		name = "Canadian English",
+		sort_name = "English (Canada)",
+		font = "default"
+	},
 
-   en_GB = {
-      name = "British English",
-      sort_name = "English (Great Britain)",
-      font = "default"
-   },
+	en_GB = {
+		name = "British English",
+		sort_name = "English (Great Britain)",
+		font = "default"
+	},
 
-   en_US = {
-      name = "US American English",
-      sort_name = "English (USA)",
-      font = "default"
-   },
+	en_US = {
+		name = "US American English",
+		sort_name = "English (USA)",
+		font = "default"
+	},
 
-   eo = {
-      name = "Esperanto",
-      sort_name = "Esperanto",
-      font = "default"
-   },
+	eo = {
+		name = "Esperanto",
+		sort_name = "Esperanto",
+		font = "default"
+	},
 
-   es = {
-      name = "Español",
-      sort_name = "Espanol",
-      font = "default"
-   },
+	es = {
+		name = "Español",
+		sort_name = "Espanol",
+		font = "default"
+	},
 
-   et = {
-      name = "Eesti keel",
-      sort_name = "Eesti keel",
-      font = "default"
-   },
+	et = {
+		name = "Eesti keel",
+		sort_name = "Eesti keel",
+		font = "default"
+	},
 
-   eu = {
-      name = "Euskara",
-      sort_name = "Euskara",
-      font = "default"
-   },
+	eu = {
+		name = "Euskara",
+		sort_name = "Euskara",
+		font = "default"
+	},
 
-   fa = {
-      name = "فارسی",
-      sort_name = "Farsi",
-      font = "arabic"
-   },
+	fa = {
+		name = "فارسی",
+		sort_name = "Farsi",
+		font = "arabic"
+	},
 
-   fi = {
-      name = "Suomi",
-      sort_name = "Suomi",
-      font = "default"
-   },
+	fi = {
+		name = "Suomi",
+		sort_name = "Suomi",
+		font = "default"
+	},
 
-   fr = {
-      name = "Français",
-      sort_name = "Francais",
-      font = "default"
-   },
+	fr = {
+		name = "Français",
+		sort_name = "Francais",
+		font = "default"
+	},
 
-   gd = {
-      name = "Gàidhlig",
-      sort_name = "Gaidhlig",
-      font = "default"
-   },
+	ga = {
+		name = "Gaeilge",
+		sort_name = "Gaeilge",
+		font = "default"
+	},
 
-   gl = {
-      name = "Galego",
-      sort_name = "Galego",
-      font = "default"
-   },
+	gd = {
+		name = "Gàidhlig",
+		sort_name = "Gaidhlig",
+		font = "default"
+	},
 
-   he = {
-      name = "עברית",
-      sort_name = "Ivrit",
-      font = "hebrew"
-   },
+	gl = {
+		name = "Galego",
+		sort_name = "Galego",
+		font = "default"
+	},
 
-   hi = {
-      name = "हिन्दी",
-      sort_name = "Hindi",
-      font = "devanagari"
-   },
+	he = {
+		name = "עברית",
+		sort_name = "Ivrit",
+		font = "hebrew"
+	},
 
-   hr = {
-      name = "Hrvatski",
-      sort_name = "Hrvatski",
-      font = "default"
-   },
+	hi = {
+		name = "हिन्दी",
+		sort_name = "Hindi",
+		font = "devanagari"
+	},
 
-   hu = {
-      name = "Magyar",
-      sort_name = "Magyar",
-      font = "default"
-   },
+	hr = {
+		name = "Hrvatski",
+		sort_name = "Hrvatski",
+		font = "default"
+	},
 
-   ia = {
-      name = "Interlingua",
-      sort_name = "Interlingua",
-      font = "default"
-   },
+	hu = {
+		name = "Magyar",
+		sort_name = "Magyar",
+		font = "default"
+	},
 
-   id = {
-      name = "Bahasa Indonesia",
-      sort_name = "Indonesia",
-      font = "default"
-   },
+	ia = {
+		name = "Interlingua",
+		sort_name = "Interlingua",
+		font = "default"
+	},
 
-   it = {
-      name = "Italiano",
-      sort_name = "Italiano",
-      font = "default"
-   },
+	id = {
+		name = "Bahasa Indonesia",
+		sort_name = "Indonesia",
+		font = "default"
+	},
 
-   ja = {
-      name = "日本語",
-      sort_name = "Nihongo",
-      font = "cjk"
-   },
+	it = {
+		name = "Italiano",
+		sort_name = "Italiano",
+		font = "default"
+	},
 
-   jv = {
-      name = "Basa jawa",
-      sort_name = "Jawa",
-      font = "default"
-   },
+	ja = {
+		name = "日本語",
+		sort_name = "Nihongo",
+		font = "cjk"
+	},
 
-   ka = {
-      name = "ქართული",
-      sort_name = "Kartuli",
-      font = "default"
-   },
+	jv = {
+		name = "Basa jawa",
+		sort_name = "Jawa",
+		font = "default"
+	},
 
-   ko = {
-      name = "한국어",
-      sort_name = "Hangug-eo",
-      font = "cjk"
-   },
+	ka = {
+		name = "ქართული",
+		sort_name = "Kartuli",
+		font = "default"
+	},
 
-   krl = {
-      name = "Karjala",
-      sort_name = "Karjala",
-      font = "default"
-   },
+	ko = {
+		name = "한국어",
+		sort_name = "Hangug-eo",
+		font = "cjk"
+	},
 
-   la = {
-      name = "Lingua latīna",
-      sort_name = "Latina",
-      font = "default"
-   },
+	krl = {
+		name = "Karjala",
+		sort_name = "Karjala",
+		font = "default"
+	},
 
-   lt = {
-      name = "Lietuvių",
-      sort_name = "Lietuviu",
-      font = "default"
-   },
+	la = {
+		name = "Lingua latīna",
+		sort_name = "Latina",
+		font = "default"
+	},
 
-   mr = {
-      name = "मराठी",
-      sort_name = "Marathi",
-      font = "devanagari"
-   },
+	lt = {
+		name = "Lietuvių",
+		sort_name = "Lietuviu",
+		font = "default"
+	},
 
-   ms = {
-      name = "بهاس ملايو",
-      sort_name = "Melayu",
-      font = "arabic"
-   },
+	mr = {
+		name = "मराठी",
+		sort_name = "Marathi",
+		font = "devanagari"
+	},
 
-   my = {
-      name = "မြန်မာစ",
-      sort_name = "Myanma",
-      font = "myanmar"
-   },
+	ms = {
+		name = "بهاس ملايو",
+		sort_name = "Melayu",
+		font = "arabic"
+	},
 
-   nb = {
-      name = "Norsk (Bokmål)",
-      sort_name = "Norsk (Bokmal)",
-      font = "default"
-   },
+	my = {
+		name = "မြန်မာစ",
+		sort_name = "Myanma",
+		font = "myanmar"
+	},
 
-   nds = {
-      name = "Plattdütsch",
-      sort_name = "Plattdutsch",
-      font = "default"
-   },
+	nb = {
+		name = "Norsk (Bokmål)",
+		sort_name = "Norsk (Bokmal)",
+		font = "default"
+	},
 
-   nl = {
-      name = "Nederlands",
-      sort_name = "Nederlands",
-      font = "default"
-   },
+	nds = {
+		name = "Plattdütsch",
+		sort_name = "Plattdutsch",
+		font = "default"
+	},
 
-   nn = {
-      name = "Nynorsk",
-      sort_name = "Norsk (Nynorsk)",
-      font = "default"
-   },
+	nl = {
+		name = "Nederlands",
+		sort_name = "Nederlands",
+		font = "default"
+	},
 
-   oc = {
-      name = "Occitan",
-      sort_name = "Occitan",
-      font = "default"
-   },
+	nn = {
+		name = "Nynorsk",
+		sort_name = "Norsk (Nynorsk)",
+		font = "default"
+	},
 
-   pl = {
-      name = "Polski",
-      sort_name = "Polski",
-      font = "default"
-   },
+	oc = {
+		name = "Occitan",
+		sort_name = "Occitan",
+		font = "default"
+	},
 
-   pt = {
-      name = "Português",
-      sort_name = "Portugues",
-      font = "default"
-   },
+	pl = {
+		name = "Polski",
+		sort_name = "Polski",
+		font = "default"
+	},
 
-   pt_BR = {
-      name = "Português do Brasil",
-      sort_name = "Portugues (Brasil)",
-      font = "default"
-   },
+	pt = {
+		name = "Português",
+		sort_name = "Portugues",
+		font = "default"
+	},
 
-   ro = {
-      name = "Română",
-      sort_name = "Romana",
-      font = "default"
-   },
+	pt_BR = {
+		name = "Português do Brasil",
+		sort_name = "Portugues (Brasil)",
+		font = "default"
+	},
 
-   ru = {
-      name = "Русский",
-      sort_name = "Russky",
-      font = "default"
-   },
+	ro = {
+		name = "Română",
+		sort_name = "Romana",
+		font = "default"
+	},
 
-   rw = {
-      name = "Kinyarwanda",
-      sort_name = "Kinyarwanda",
-      font = "default"
-   },
+	ru = {
+		name = "Русский",
+		sort_name = "Russky",
+		font = "default"
+	},
 
-   si = {
-      name = "සිංහල",
-      sort_name = "Simhala",
-      font = "sinhala"
-   },
+	rw = {
+		name = "Kinyarwanda",
+		sort_name = "Kinyarwanda",
+		font = "default"
+	},
 
-   sk = {
-      name = "Slovenčina",
-      sort_name = "Slovencina",
-      font = "default"
-   },
+	si = {
+		name = "සිංහල",
+		sort_name = "Simhala",
+		font = "sinhala"
+	},
 
-   sl = {
-      name = "Slovenski jezik",
-      sort_name = "Slovenski",
-      font = "default"
-   },
+	sk = {
+		name = "Slovenčina",
+		sort_name = "Slovencina",
+		font = "default"
+	},
 
-   sr = {
-      name = "српски",
-      sort_name = "Srpski",
-      font = "default"
-   },
+	sl = {
+		name = "Slovenski jezik",
+		sort_name = "Slovenski",
+		font = "default"
+	},
 
-   sv = {
-      name = "Svenska",
-      sort_name = "Svenska",
-      font = "default"
-   },
+	sr = {
+		name = "српски",
+		sort_name = "Srpski",
+		font = "default"
+	},
 
-   tr = {
-      name = "Türkçe",
-      sort_name = "Turkce",
-      font = "default"
-   },
+	sv = {
+		name = "Svenska",
+		sort_name = "Svenska",
+		font = "default"
+	},
 
-   uk = {
-      name = "українська мова",
-      sort_name = "Ukrayinska",
-      font = "default"
-   },
+	tr = {
+		name = "Türkçe",
+		sort_name = "Turkce",
+		font = "default"
+	},
 
-   vi = {
-      name = "Tiếng Việt",
-      sort_name = "Viet",
-      font = "default"
-   },
+	uk = {
+		name = "українська мова",
+		sort_name = "Ukrayinska",
+		font = "default"
+	},
 
-   zh_CN = {
-      name = "简体中文",
-      sort_name = "Jianti Zhongwen",
-      font = "cjk"
-   },
+	vi = {
+		name = "Tiếng Việt",
+		sort_name = "Viet",
+		font = "default"
+	},
 
-   zh_TW = {
-      name = "繁體中文",
-      sort_name = "Fanti Zhongwen",
-      font = "cjk"
-   },
+	zh_CN = {
+		name = "简体中文",
+		sort_name = "Jianti Zhongwen",
+		font = "cjk"
+	},
+
+	zh_TW = {
+		name = "繁體中文",
+		sort_name = "Fanti Zhongwen",
+		font = "cjk"
+	},
 }

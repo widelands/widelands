@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2013 by the Widelands Development Team
+ * Copyright (C) 2006-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -24,56 +24,48 @@
 
 namespace UI {
 
-// This mirrors the horizontal alignment for RTL languages.
+/**
+ * This mirrors the horizontal alignment for RTL languages.
+ *
+ * Do not store this value as it is based on the global font setting.
+ */
 Align mirror_alignment(Align alignment) {
 	if (UI::g_fh1->fontset()->is_rtl()) {
 		switch (alignment) {
-		case Align::kBottomLeft:
-			alignment = Align::kBottomRight;
+		case Align::kLeft:
+			alignment = Align::kRight;
 			break;
-		case Align::kBottomRight:
-			alignment = Align::kBottomLeft;
+		case Align::kRight:
+			alignment = Align::kLeft;
 			break;
-		case Align::kCenterLeft:
-			alignment = Align::kCenterRight;
-			break;
-		case Align::kCenterRight:
-			alignment = Align::kCenterLeft;
-			break;
-		case Align::kTopLeft:
-			alignment = Align::kTopRight;
-			break;
-		case Align::kTopRight:
-			alignment = Align::kTopLeft;
-			break;
-		default:
+		case Align::kCenter:
 			break;
 		}
 	}
 	return alignment;
 }
 
-void correct_for_align(Align align, uint32_t w, uint32_t h, Vector2f* pt) {
-	// When correcting for align, we never move from pixel boundaries to
-	// sub-pixels, because this might lead from pixel-perfect rendering to
-	// subsampled rendering - this can lead to blurry texts. That is why we
-	// never do float divisions in this function.
+/**
+ * Align pt horizontally to match align based on width w.
+ *
+ * When correcting for align, we never move from pixel boundaries to
+ * sub-pixels, because this might lead from pixel-perfect rendering to
+ * subsampled rendering - this can lead to blurry texts. That is why we
+ * never do float divisions in this function.
+ */
+void correct_for_align(Align align, uint32_t w, Vector2f* pt) {
 
-	// Vertical Align
-	if (static_cast<int>(align & (Align::kVCenter | Align::kBottom))) {
-		if (static_cast<int>(align & Align::kVCenter))
-			pt->y -= h / 2;
-		else
-			pt->y -= h;
-	}
+	if (align == Align::kCenter)
+		pt->x -= w / 2;
+	else if (align == Align::kRight)
+		pt->x -= w;
+}
 
-	// Horizontal Align
-	if ((align & Align::kHorizontal) != Align::kLeft) {
-		if (static_cast<int>(align & Align::kHCenter))
-			pt->x -= w / 2;
-		else if (static_cast<int>(align & Align::kRight))
-			pt->x -= w;
-	}
+/**
+ * Adjust the y coordinate in 'point 'pt' to vertically center an element with height 'h'.
+ */
+void center_vertically(uint32_t h, Vector2f* pt) {
+	pt->y -= h / 2;
 }
 
 }  // namespace UI

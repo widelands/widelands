@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2016 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -30,7 +30,7 @@ FullscreenMenuMultiPlayer::FullscreenMenuMultiPlayer()
    : FullscreenMenuMainMenu(),
 
      // Title
-     title(this, 0, 0, _("Choose game type"), UI::Align::kHCenter),
+     title(this, 0, 0, _("Choose game type"), UI::Align::kCenter),
 
      // Buttons
      metaserver(&vbox_,
@@ -64,10 +64,10 @@ FullscreenMenuMultiPlayer::FullscreenMenuMultiPlayer()
 
 	title.set_fontsize(fs_big());
 
-	vbox_.add(&metaserver, UI::Align::kHCenter, true);
-	vbox_.add(&lan, UI::Align::kHCenter, true);
+	vbox_.add(&metaserver, UI::Box::Resizing::kFullSize);
+	vbox_.add(&lan, UI::Box::Resizing::kFullSize);
 	vbox_.add_inf_space();
-	vbox_.add(&back, UI::Align::kHCenter, true);
+	vbox_.add(&back, UI::Box::Resizing::kFullSize);
 
 	Section& s = g_options.pull_section("global");
 	auto_log_ = s.get_bool("auto_log", false);

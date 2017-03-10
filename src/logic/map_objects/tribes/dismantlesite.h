@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2009, 2011 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -86,8 +86,6 @@ protected:
 	uint32_t build_step_time() const override {
 		return DISMANTLESITE_STEP_TIME;
 	}
-
-	void create_options_window(InteractiveGameBase&, UI::Window*& registry) override;
 
 	void draw(uint32_t gametime,
 	          TextToDraw draw_text,

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2003-2016 by the Widelands Development Team
+ * Copyright (C) 2003-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -31,10 +31,12 @@ namespace UI {
 
 /**
  * A layouting panel that holds a number of child panels.
+ *
  * The Panels you add to the Box must be children of the Box.
  * The Box automatically resizes itself and positions the added children.
 */
 struct Box : public Panel {
+	// Determines whether the box' contents are layed out horizontally or vertically.
 	enum {
 		Horizontal = 0,
 		Vertical = 1,
@@ -54,7 +56,8 @@ struct Box : public Panel {
 		return items_.size();
 	}
 
-	void add(Panel* panel, UI::Align align, bool fullsize = false, bool fillspace = false);
+	enum class Resizing { kAlign, kFullSize, kFillSpace, kExpandBoth };
+	void add(Panel* panel, Resizing resizing = Resizing::kAlign, UI::Align align = UI::Align::kLeft);
 	void add_space(uint32_t space);
 	void add_inf_space();
 	bool is_snap_target() const override {

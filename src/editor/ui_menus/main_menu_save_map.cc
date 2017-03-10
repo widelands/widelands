@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2011 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -67,13 +67,8 @@ MainMenuSaveMap::MainMenuSaveMap(EditorInteractive& parent)
                    buth_,
                    g_gr->images().get("images/ui_basic/but5.png"),
                    _("Map Options")),
-     editbox_label_(this,
-                    padding_,
-                    tabley_ + tableh_ + 3 * padding_,
-                    butw_,
-                    buth_,
-                    _("Filename:"),
-                    UI::Align::kLeft) {
+     editbox_label_(
+        this, padding_, tabley_ + tableh_ + 3 * padding_, butw_, buth_, _("Filename:")) {
 	set_current_directory(curdir_);
 
 	// Make room for edit_options_ button

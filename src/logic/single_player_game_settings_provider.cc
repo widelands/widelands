@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2015 by the Widelands Development Team
+ * Copyright (C) 2015-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -26,7 +26,7 @@
 #include "logic/map_objects/tribes/tribes.h"
 
 SinglePlayerGameSettingsProvider::SinglePlayerGameSettingsProvider() {
-	s.tribes = Widelands::Tribes::get_all_tribeinfos();
+	s.tribes = Widelands::get_all_tribeinfos();
 	s.scenario = false;
 	s.multiplayer = false;
 	s.playernum = 0;
@@ -142,7 +142,7 @@ void SinglePlayerGameSettingsProvider::next_player_state(uint8_t const number) {
 			do {
 				uint8_t random = (std::rand() % impls.size());  // Choose a random AI
 				it = impls.begin() + random;
-			} while ((*it)->name == "empty");
+			} while ((*it)->type == ComputerPlayer::Implementation::Type::kEmpty);
 		}
 		s.players[number].ai = (*it)->name;
 	}

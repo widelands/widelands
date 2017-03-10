@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2016 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -38,6 +38,7 @@
 #include "graphic/texture.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "scripting/lua_table.h"
+#include "sound/note_sound.h"
 #include "sound/sound_handler.h"
 
 using namespace std;
@@ -253,7 +254,7 @@ void NonPackedAnimation::trigger_sound(uint32_t time, uint32_t stereo_position) 
 	const uint32_t framenumber = current_frame(time);
 
 	if (framenumber == 0) {
-		g_sound_handler.play_fx(sound_effect_, stereo_position, 1);
+		Notifications::publish(NoteSound(sound_effect_, stereo_position, 1));
 	}
 }
 
@@ -287,6 +288,8 @@ void NonPackedAnimation::blit(uint32_t time,
 		target->blit_blended(
 		   destination_rect, *frames_.at(idx), *pcmasks_.at(idx), source_rect, *clr);
 	}
+	// TODO(GunChleoc): Stereo position would be nice.
+	trigger_sound(time, 128);
 }
 
 }  // namespace

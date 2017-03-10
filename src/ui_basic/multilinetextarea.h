@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2016 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -78,6 +78,8 @@ struct MultilineTextarea : public Panel {
 	bool handle_mousewheel(uint32_t which, int32_t x, int32_t y) override;
 	void scroll_to_top();
 
+	void set_background(const Image* background);
+
 protected:
 	void layout() override;
 
@@ -93,7 +95,7 @@ private:
 
 	std::string text_;
 	RGBColor color_;
-	Align align_;
+	const Align align_;
 
 	bool force_new_renderer_;
 	bool use_old_renderer_;
@@ -101,6 +103,8 @@ private:
 
 	Scrollbar scrollbar_;
 	ScrollMode scrollmode_;
+
+	const Image* pic_background_;
 };
 }
 

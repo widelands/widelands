@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2016 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -130,7 +130,7 @@ void Scrollbar::set_scrollpos(int32_t pos) {
 }
 
 Scrollbar::Area Scrollbar::get_area_for_point(int32_t x, int32_t y) {
-	int32_t extent;
+	int32_t extent = 0;
 
 	// Out of panel
 	if (x < 0 || x >= static_cast<int32_t>(get_w()) || y < 0 || y >= static_cast<int32_t>(get_h()))

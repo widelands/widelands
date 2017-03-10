@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2011 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -42,6 +42,7 @@ rnrnrn * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #include "logic/map_objects/tribes/tribes.h"
 #include "logic/map_objects/tribes/ware_descr.h"
 #include "logic/map_objects/tribes/worker.h"
+#include "logic/map_objects/world/critter.h"
 #include "logic/map_objects/world/world.h"
 #include "logic/mapregion.h"
 #include "logic/player.h"
@@ -49,7 +50,6 @@ rnrnrn * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #include "logic/roadtype.h"
 #include "scripting/logic.h"
 #include "scripting/lua_table.h"
-#include "sound/sound_handler.h"
 #include "ui_basic/progresswindow.h"
 #include "wui/interactive_base.h"
 #include "wui/interactive_gamebase.h"
@@ -72,14 +72,11 @@ EditorGameBase::EditorGameBase(LuaInterface* lua_interface)
      lasttrackserial_(0) {
 	if (!lua_)  // TODO(SirVer): this is sooo ugly, I can't say
 		lua_.reset(new LuaEditorInterface(this));
-
-	g_sound_handler.egbase_ = this;
 }
 
 EditorGameBase::~EditorGameBase() {
 	delete map_;
 	delete player_manager_.release();
-	g_sound_handler.egbase_ = nullptr;
 }
 
 void EditorGameBase::think() {
@@ -302,11 +299,12 @@ Bob& EditorGameBase::create_bob(Coords c, const BobDescr& descr, Player* owner) 
 Bob& EditorGameBase::create_critter(const Coords& c,
                                     DescriptionIndex const bob_type_idx,
                                     Player* owner) {
-	return create_bob(c, *world().get_bob_descr(bob_type_idx), owner);
+	const BobDescr* descr = dynamic_cast<const BobDescr*>(world().get_critter_descr(bob_type_idx));
+	return create_bob(c, *descr, owner);
 }
 
 Bob& EditorGameBase::create_critter(const Coords& c, const std::string& name, Player* owner) {
-	const BobDescr* descr = world().get_bob_descr(name);
+	const BobDescr* descr = dynamic_cast<const BobDescr*>(world().get_critter_descr(name));
 	if (descr == nullptr)
 		throw GameDataError("create_critter(%i,%i,%s,%s): critter not found", c.x, c.y, name.c_str(),
 		                    owner->get_name().c_str());

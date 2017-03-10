@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016 by Widelands Development Team
+ * Copyright (C) 2016-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -70,6 +70,9 @@ void FileViewPanel::update_tab_size(size_t index) {
 
 void FileViewPanel::layout() {
 	assert(boxes_.size() == textviews_.size());
+	if (get_inner_w() == 0 && get_inner_h() == 0) {
+		return;
+	}
 
 	// If there is a border, we have less space for the contents
 	contents_width_ =

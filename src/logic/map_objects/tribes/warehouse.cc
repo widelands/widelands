@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2013 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -192,8 +192,11 @@ void WarehouseSupply::send_to_storage(Game&, Warehouse* /* wh */) {
 }
 
 uint32_t WarehouseSupply::nr_supplies(const Game& game, const Request& req) const {
-	if (req.get_type() == wwWORKER)
-		return warehouse_->count_workers(game, req.get_index(), req.get_requirements());
+	if (req.get_type() == wwWORKER) {
+		return warehouse_->count_workers(
+		   game, req.get_index(), req.get_requirements(),
+		   (req.get_exact_match() ? Warehouse::Match::kExact : Warehouse::Match::kCompatible));
+	}
 
 	//  Calculate how many wares can be sent out - it might be that we need them
 	// ourselves. E.g. for hiring new soldiers.
@@ -738,16 +741,18 @@ bool Warehouse::fetch_from_flag(Game& game) {
  * \return the number of workers that we can launch satisfying the given
  * requirements.
  */
-Quantity
-Warehouse::count_workers(const Game& /* game */, DescriptionIndex ware, const Requirements& req) {
+Quantity Warehouse::count_workers(const Game& /* game */,
+                                  DescriptionIndex worker_id,
+                                  const Requirements& req,
+                                  Match exact) {
 	Quantity sum = 0;
 
 	do {
-		sum += supply_->stock_workers(ware);
+		sum += supply_->stock_workers(worker_id);
 
 		// NOTE: This code lies about the TrainingAttributes of non-instantiated workers.
-		if (incorporated_workers_.count(ware)) {
-			for (Worker* worker : incorporated_workers_[ware]) {
+		if (incorporated_workers_.count(worker_id)) {
+			for (Worker* worker : incorporated_workers_[worker_id]) {
 				if (!req.check(*worker)) {
 					//  This is one of the workers in our sum.
 					//  But he is too stupid for this job
@@ -755,9 +760,12 @@ Warehouse::count_workers(const Game& /* game */, DescriptionIndex ware, const Re
 				}
 			}
 		}
-
-		ware = owner().tribe().get_worker_descr(ware)->becomes();
-	} while (owner().tribe().has_ware(ware));
+		if (exact == Match::kCompatible) {
+			worker_id = owner().tribe().get_worker_descr(worker_id)->becomes();
+		} else {
+			worker_id = INVALID_INDEX;
+		}
+	} while (owner().tribe().has_worker(worker_id));
 
 	return sum;
 }
@@ -1177,7 +1185,7 @@ void Warehouse::aggressor(Soldier& enemy) {
 	DescriptionIndex const soldier_index = owner().tribe().soldier();
 	Requirements noreq;
 
-	if (!count_workers(game, soldier_index, noreq))
+	if (!count_workers(game, soldier_index, noreq, Match::kCompatible))
 		return;
 
 	Soldier& defender = dynamic_cast<Soldier&>(launch_worker(game, soldier_index, noreq));
@@ -1189,7 +1197,7 @@ bool Warehouse::attack(Soldier& enemy) {
 	DescriptionIndex const soldier_index = owner().tribe().soldier();
 	Requirements noreq;
 
-	if (count_workers(game, soldier_index, noreq)) {
+	if (count_workers(game, soldier_index, noreq, Match::kCompatible)) {
 		Soldier& defender = dynamic_cast<Soldier&>(launch_worker(game, soldier_index, noreq));
 		defender.start_task_defense(game, true);
 		enemy.send_signal(game, "sleep");
@@ -1263,11 +1271,11 @@ void Warehouse::check_remove_stock(Game& game) {
 	}
 }
 
-WaresQueue& Warehouse::waresqueue(DescriptionIndex index) {
+InputQueue& Warehouse::inputqueue(DescriptionIndex index, WareWorker type) {
 	assert(portdock_ != nullptr);
 	assert(portdock_->expedition_bootstrap() != nullptr);
 
-	return portdock_->expedition_bootstrap()->waresqueue(index);
+	return portdock_->expedition_bootstrap()->inputqueue(index, type);
 }
 
 /*

@@ -33,6 +33,9 @@ tribes:new_productionsite_type {
    },
 
    aihints = {
+      forced_after = 1000,
+      very_weak_ai_limit = 1,
+      weak_ai_limit = 3
    },
 
    working_positions = {
@@ -40,7 +43,8 @@ tribes:new_productionsite_type {
    },
 
    inputs = {
-      { name = "ax", amount = 8 }
+      { name = "ax", amount = 8 },
+      { name = "barbarians_recruit", amount = 8 }
    },
    outputs = {
       "barbarians_soldier",
@@ -49,12 +53,11 @@ tribes:new_productionsite_type {
    programs = {
       work = {
          -- TRANSLATORS: Completed/Skipped/Did not start recruiting soldier because ...
-         descname = _"recruiting soldier",
-         -- TODO(GunChleoc): this should cost us a carrier as well, or maybe a recruit.
+         descname = pgettext("barbarians_building", "recruiting soldier"),
          actions = {
             "sleep=15000",
             "return=skipped unless economy needs barbarians_soldier",
-            "consume=ax",
+            "consume=ax barbarians_recruit",
             "animate=working 15000",
             "recruit=barbarians_soldier"
          }

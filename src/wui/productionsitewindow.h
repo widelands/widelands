@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2016 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,14 +20,17 @@
 #ifndef WL_WUI_PRODUCTIONSITEWINDOW_H
 #define WL_WUI_PRODUCTIONSITEWINDOW_H
 
+#include <memory>
+
 #include "logic/map_objects/tribes/productionsite.h"
 #include "ui_basic/table.h"
 #include "wui/buildingwindow.h"
 
 struct ProductionSiteWindow : public BuildingWindow {
 	ProductionSiteWindow(InteractiveGameBase& parent,
+	                     UI::UniqueWindow::Registry& reg,
 	                     Widelands::ProductionSite&,
-	                     UI::Window*& registry);
+	                     bool avoid_fastclick);
 
 	Widelands::ProductionSite& productionsite() {
 		return dynamic_cast<Widelands::ProductionSite&>(building());
@@ -35,12 +38,16 @@ struct ProductionSiteWindow : public BuildingWindow {
 	void update_worker_table();
 
 protected:
+	void init(bool avoid_fastclick) override;
 	void think() override;
 	void evict_worker();
 
 private:
 	UI::Table<uintptr_t>* worker_table_;
 	UI::Box* worker_caps_;
+	std::unique_ptr<Notifications::Subscriber<Widelands::NoteBuilding>>
+	   productionsitenotes_subscriber_;
+	DISALLOW_COPY_AND_ASSIGN(ProductionSiteWindow);
 };
 
 #endif  // end of include guard: WL_WUI_PRODUCTIONSITEWINDOW_H

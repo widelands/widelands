@@ -1,16 +1,16 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2016 Widelands Development Team
+# Copyright (C) 2005-2017 Widelands Development Team
 # 
 # Translators:
-# GunChleoc, 2015-2016
+# GunChleoc, 2015-2017
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2013
 # GunChleoc, 2013-2014
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-12-10 10:58+0000\n"
-"PO-Revision-Date: 2016-12-10 11:04+0000\n"
+"POT-Creation-Date: 2017-01-21 14:22+0000\n"
+"PO-Revision-Date: 2017-01-21 14:54+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Gaelic, Scottish (http://www.transifex.com/widelands/widelands/language/gd/)\n"
 "MIME-Version: 1.0\n"
@@ -49,11 +49,11 @@ msgstr "Comasan nan saighdearan"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:37
 msgid ""
-"A new soldier is created like a worker: when a military building needs a "
-"soldier, a carrier grabs the needed weapons and armor from a warehouse (or "
-"your headquarters) and walks up the road to your new building. Basic "
-"Barbarian soldiers do not use armor, they only need an ax."
-msgstr "Thèid saighdear ùr a chruthachadh san aon dòigh ’s a thèid neach-obrach: nuair a bhios togalach an airm feumach air saighdear, gabhaidh giùlanair greim air na h-airm ’s an armachd a dh’fheumas e ann an taigh-stòrais (no sa phrìomh-àras agad) agus bheir e rathad an togalaich ùir air. Cha chleachd saighdearan bunasach nan Tùsanach armachd agus cha bhi ach feum air tuagh aca."
+"New soldiers are created differently from normal workers: recruits will walk"
+" from a warehouse (or your headquarters) to the barracks where they will "
+"receive some basic training and become soldiers. Basic Barbarian soldiers do"
+" not use armor, they only need an ax."
+msgstr "Cha dèid saighdear ùr a chruthachadh san aon dòigh ’s a thèid neach-obrach: coisichidh glas-laoch on taigh-stòrais (no on phrìomh-àras agad) dhan taigh-fheachd far am faigh e oideachadh bunasach gus dol ’na shaighdear. Cha chleachd saighdearan bunasach nan Tùsanach armachd agus cha bhi ach feum air tuagh aca."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:38
 msgid ""
