@@ -24,7 +24,7 @@ override_dh_strip:
 override_dh_auto_install:
 	dh_auto_install --parallel
 	mkdir -p debian/tmp/usr/share/applications/
-	cp debian/widelands.desktop debian/tmp/usr/share/applications/
+	cp debian/org.widelands.widelands.desktop debian/tmp/usr/share/applications/
 	# Probably need to remove other duplicated license files in data/i18n/fonts
 	rm debian/tmp/usr/share/games/widelands/data/i18n/fonts/Widelands/LICENSE
 	# Do not include the GPL-2 license file again to keep lintian happy
