@@ -75,6 +75,7 @@ enum class SchedulerTaskId : uint8_t {
 	kCountMilitaryVacant,
 	kCheckEnemySites,
 	kManagementUpdate,
+	kUpdateStats,
 	kUnset
 };
 
@@ -84,7 +85,7 @@ const std::vector<std::vector<int8_t>> neuron_curves = {
    {0, 17, 25, 32, 38, 44, 49, 53, 58, 62, 66, 70, 74, 78, 81, 84, 88, 91, 94, 97, 100},
 };
 
-constexpr int magic_numbers_size = 100;
+constexpr int magic_numbers_size = 150;
 constexpr int neuron_pool_size = 80;
 constexpr int f_neuron_pool_size = 60;
 constexpr int f_neuron_bit_size = 32;
@@ -569,7 +570,7 @@ struct ManagementData {
 	Widelands::Player::AiPersistentState* pd;
 
 	void mutate(uint32_t, PlayerNumber = 0);
-	void review(uint32_t, PlayerNumber, uint32_t, uint32_t, uint16_t, uint32_t);
+	void review(uint32_t, PlayerNumber, uint32_t, uint32_t, uint32_t, uint16_t, uint32_t);
 	void dump_data();
 	void initialize(uint8_t, bool reinitializing = false);
 	uint16_t new_neuron_id() {

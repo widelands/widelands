@@ -159,6 +159,7 @@ private:
 	static constexpr bool kAbsValue = true;
 	static constexpr int32_t kSpotsTooLittle = 15;
 	static constexpr int kManagementUpdateInterval = 10 * 60 * 1000;
+	static constexpr int kStatUpdateInterval = 60 * 1000;
 
 	void late_initialization();
 
