@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-03-03 06:24+0000\n"
-"PO-Revision-Date: 2017-03-03 14:11+0000\n"
+"POT-Creation-Date: 2017-03-05 10:46+0000\n"
+"PO-Revision-Date: 2017-03-06 07:09+0000\n"
 "Last-Translator: Любомир Василев\n"
 "Language-Team: Bulgarian (http://www.transifex.com/widelands/widelands/language/bg/)\n"
 "MIME-Version: 1.0\n"
@@ -516,9 +516,9 @@ msgstr "Винаги стройте лесничейска и дивечовъд
 
 #: ../../data/txts/tips/barbarians.lua:12 ../../data/txts/tips/empire.lua:12
 msgid ""
-"Most upgraded buildings also need an upgraded worker. Do not upgrade a "
-"building unless you have the upgraded workers available."
-msgstr "След надграждането си, много от сградите се нуждаят от подобрен работник. Не надграждайте сграда, преди да сте подобрили работниците."
+"Most enhanced buildings need experienced workers. Do not enhance a building "
+"unless you have the necessary workers available."
+msgstr "След подобряването си, повечето от сградите се нуждаят от опитни работници. Не подобрявайте сграда, ако не разполагате с нужните работници."
 
 #: ../../data/txts/tips/editor.lua:4
 msgid ""
@@ -584,9 +584,9 @@ msgstr "Можете да поставяте средни сгради на въ
 #: ../../data/txts/tips/editor.lua:44
 msgid ""
 "You can place a large building on any node where you could place a medium "
-"building if there is no obstacle or unbuildable terrain towards the west, "
+"building if there is no obstacle or non-arable terrain towards the west, "
 "northwest and northeast."
-msgstr "Можете да поставяте големи сгради на възлите, на които мое да се поставят и средни сгради, ако няма препятствия или терен, неподходящ за застрояване, на запад, северозапад или североизток."
+msgstr "Можете да поставяте големи сгради на възлите, на които мое да се поставят и средни сгради, ако няма препятствия или необработваем терен на запад, северозапад или североизток."
 
 #: ../../data/txts/tips/empire.lua:8
 msgid "Always build a forester’s house so you will not run out of logs."

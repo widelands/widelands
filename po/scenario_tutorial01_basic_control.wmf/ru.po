@@ -8,13 +8,14 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
 # Yuriy Sokolov <lention@mail.ru>, 2015
 # Олег Шевченко <olegrock@gmail.com>, 2017
+# Олег Шевченко <olegrock@gmail.com>, 2017
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-03-03 06:24+0000\n"
-"PO-Revision-Date: 2017-03-03 06:27+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2017-03-05 10:46+0000\n"
+"PO-Revision-Date: 2017-03-06 05:21+0000\n"
+"Last-Translator: Олег Шевченко <olegrock@gmail.com>\n"
 "Language-Team: Russian (http://www.transifex.com/widelands/widelands/language/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -284,7 +285,7 @@ msgid ""
 msgstr "Чтобы закрыть окно, просто кликни ПКМ на нём. Таким путем могут быть закрыты все окна в «Widelands», кроме окон с инструкциями, вроде этого. Попробуйте!"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:169
-msgid "Lumberjack is Done"
+msgid "The Lumberjack’s Hut is Done"
 msgstr "Хижина лесоруба готова"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:172
@@ -765,7 +766,7 @@ msgstr "После архивирования сообщения, будет а�
 msgid ""
 "You can also hold down the Ctrl or Shift key to select multiple messages, or"
 " press Ctrl + A to select them all."
-msgstr ""
+msgstr "Вы также можете зажать Ctrl или Shift для выбора нескольких сообщений, или нажать Ctrl + A для выбора всех сразу."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:409
 msgid ""

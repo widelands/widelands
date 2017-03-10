@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-03-03 06:24+0000\n"
-"PO-Revision-Date: 2017-03-05 08:29+0000\n"
+"POT-Creation-Date: 2017-03-05 10:46+0000\n"
+"PO-Revision-Date: 2017-03-05 13:05+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Gaelic, Scottish (http://www.transifex.com/widelands/widelands/language/gd/)\n"
 "MIME-Version: 1.0\n"
@@ -517,9 +517,9 @@ msgstr "Tog bothan maoir-choille is bothan-geamair an-còmhnaidh ach nach ruith 
 
 #: ../../data/txts/tips/barbarians.lua:12 ../../data/txts/tips/empire.lua:12
 msgid ""
-"Most upgraded buildings also need an upgraded worker. Do not upgrade a "
-"building unless you have the upgraded workers available."
-msgstr ""
+"Most enhanced buildings need experienced workers. Do not enhance a building "
+"unless you have the necessary workers available."
+msgstr "Tha a’ mhòrchuid a thogalaichean leasaichte feumach air luchd-obrach eòlach. Na leasaich togalach mur eil an luchd-obrach a dh’fheumas iad ri fhaighinn."
 
 #: ../../data/txts/tips/editor.lua:4
 msgid ""
@@ -585,9 +585,9 @@ msgstr "’S urrainn dhut togalach meadhanach a chur air nòd mur eil an sliabh 
 #: ../../data/txts/tips/editor.lua:44
 msgid ""
 "You can place a large building on any node where you could place a medium "
-"building if there is no obstacle or unbuildable terrain towards the west, "
+"building if there is no obstacle or non-arable terrain towards the west, "
 "northwest and northeast."
-msgstr "’S urrainn ghut togalach mòr a chur air nòd sam bith far am b’ urrainn dhut togalach meadhanach a chur ann agus mur eil cnap-starra no tìr nach gabh togail air gu iar,  iar-thuath no ear-thuath air."
+msgstr "’S urrainn ghut togalach mòr a chur air nòd sam bith far am b’ urrainn dhut togalach meadhanach a chur ann agus mur eil cnap-starra no tìr nach eil ’na thalamh-àitich gu iar, iar-thuath no ear-thuath air."
 
 #: ../../data/txts/tips/empire.lua:8
 msgid "Always build a forester’s house so you will not run out of logs."

@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-03-03 06:24+0000\n"
-"PO-Revision-Date: 2017-03-03 18:50+0000\n"
+"POT-Creation-Date: 2017-03-05 10:46+0000\n"
+"PO-Revision-Date: 2017-03-07 18:35+0000\n"
 "Last-Translator: Milan Fašina <matrix17@seznam.cz>\n"
 "Language-Team: Czech (http://www.transifex.com/widelands/widelands/language/cs/)\n"
 "MIME-Version: 1.0\n"
@@ -2040,7 +2040,7 @@ msgstr "Zobrazit konzoli pro ladění (pouze v testovacím sestavení)"
 
 #: ../../data/tribes/scripting/help/controls.lua:76
 msgid "Table Control"
-msgstr ""
+msgstr "Ovládání tabulek"
 
 #: ../../data/tribes/scripting/help/controls.lua:77
 msgid ""

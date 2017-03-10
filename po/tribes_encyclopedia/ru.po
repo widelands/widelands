@@ -11,14 +11,15 @@
 # CupIvan <mail@cupivan.ru>, 2015
 # Yuriy Sokolov <lention@mail.ru>, 2015
 # Олег Шевченко <olegrock@gmail.com>, 2017
+# Олег Шевченко <olegrock@gmail.com>, 2017
 # Федор <Lunar-energy@ya.ru>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-03-03 06:24+0000\n"
-"PO-Revision-Date: 2017-03-03 06:26+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2017-03-05 10:46+0000\n"
+"PO-Revision-Date: 2017-03-06 06:16+0000\n"
+"Last-Translator: Олег Шевченко <olegrock@gmail.com>\n"
 "Language-Team: Russian (http://www.transifex.com/widelands/widelands/language/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -2049,53 +2050,53 @@ msgstr "Показать отладочную консоль (только в о
 
 #: ../../data/tribes/scripting/help/controls.lua:76
 msgid "Table Control"
-msgstr ""
+msgstr "Управление списками"
 
 #: ../../data/tribes/scripting/help/controls.lua:77
 msgid ""
 "In tables that allow the selection of multiple entries, the following key "
 "combinations are available:"
-msgstr ""
+msgstr "В списках, допускающих выбор нескольких значений, доступны следующие сочетания клавиш:"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
 #: ../../data/tribes/scripting/help/controls.lua:80
 msgctxt "hotkey"
 msgid "Ctrl + Click"
-msgstr ""
+msgstr "Ctrl + ЛКМ"
 
 #: ../../data/tribes/scripting/help/controls.lua:80
 msgctxt "table_control"
 msgid "Select multiple entries"
-msgstr ""
+msgstr "Выбрать несколько значений"
 
 #: ../../data/tribes/scripting/help/controls.lua:82
 msgctxt "table_control"
 msgid "Select a range of entries"
-msgstr ""
+msgstr "Выбрать диапазон значений"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
 #: ../../data/tribes/scripting/help/controls.lua:82
 msgctxt "hotkey"
 msgid "Shift + Click"
-msgstr ""
+msgstr "Shift + ЛКМ"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
 #: ../../data/tribes/scripting/help/controls.lua:84
 msgctxt "hotkey"
 msgid "Ctrl + A"
-msgstr ""
+msgstr "Ctrl + A"
 
 #: ../../data/tribes/scripting/help/controls.lua:84
 msgctxt "table_control"
 msgid "Select all entries"
-msgstr ""
+msgstr "Выбрать все значения"
 
 #: ../../data/tribes/scripting/help/controls.lua:86
 msgid "Message Window"
-msgstr ""
+msgstr "Окно сообщений"
 
 #: ../../data/tribes/scripting/help/controls.lua:87
 msgid ""
