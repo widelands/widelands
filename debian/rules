@@ -26,7 +26,7 @@ override_dh_strip:
 override_dh_auto_install:
 	dh_auto_install --parallel
 	mkdir -p debian/tmp/usr/share/applications/
-	cp debian/widelands.desktop debian/tmp/usr/share/applications/
+	cp debian/org.widelands.widelands.desktop debian/tmp/usr/share/applications/
 	# Take care of the fonts (use system-wide ones)
 	# Not doing so would violate the Debian Policy, preventing the package to enter the official repositories
 	# Skip this part for our packages, since we use the embedded fonts :/
