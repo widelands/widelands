@@ -88,6 +88,12 @@ void Box::set_inner_spacing(uint32_t size) {
 	inner_spacing_ = size;
 }
 
+void Box::set_max_size(int w, int h) {
+	max_x_ = w;
+	max_y_ = h;
+	set_desired_size(w, h);
+}
+
 /**
  * Compute the desired size based on our children. This assumes that the
  * infinite space is zero, and is later on also re-used to calculate the

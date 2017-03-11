@@ -107,7 +107,8 @@ GameDetails::GameDetails(Panel* parent, Style style)
             g_gr->images().get(style == GameDetails::Style::kFsMenu ? "images/ui_basic/but3.png" :
                                                                       "images/ui_basic/but1.png"),
             UI::MultilineTextarea::ScrollMode::kNoScrolling),
-     minimap_icon_(this, 0, 0, 0, 0, nullptr) {
+     minimap_icon_(this, 0, 0, 0, 0, nullptr),
+     button_box_(new UI::Box(this, 0, 0, UI::Box::Vertical)) {
 	name_label_.force_new_renderer();
 	descr_.force_new_renderer();
 
@@ -116,7 +117,8 @@ GameDetails::GameDetails(Panel* parent, Style style)
 	add(&descr_, UI::Box::Resizing::kExpandBoth);
 	add_space(padding_);
 	add(&minimap_icon_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
-	add_space(10 * padding_);
+	add_space(padding_);
+	add(button_box_, UI::Box::Resizing::kFullSize);
 
 	minimap_icon_.set_visible(false);
 	minimap_icon_.set_frame(UI_FONT_CLR_FG);
@@ -125,9 +127,9 @@ GameDetails::GameDetails(Panel* parent, Style style)
 void GameDetails::clear() {
 	name_label_.set_text("");
 	descr_.set_text("");
-	descr_.set_size(20, UI::Scrollbar::kSize);
 	minimap_icon_.set_icon(nullptr);
 	minimap_icon_.set_visible(false);
+	minimap_icon_.set_size(0, 0);
 	minimap_image_.reset();
 }
 
@@ -199,24 +201,45 @@ void GameDetails::update(const SavegameData& gamedata) {
 }
 
 void GameDetails::layout() {
-	UI::Box::layout();
 	if (get_w() == 0 && get_h() == 0) {
 		return;
 	}
+	UI::Box::layout();
 	if (minimap_icon_.icon() == nullptr) {
 		descr_.set_scrollmode(UI::MultilineTextarea::ScrollMode::kScrollNormal);
 		minimap_icon_.set_desired_size(0, 0);
 	} else {
 		descr_.set_scrollmode(UI::MultilineTextarea::ScrollMode::kNoScrolling);
 
-		// Scale the minimap image. Don't make the image bigger than the original; fuzziness will
-		// result
+		// Scale the minimap image.
 		const float available_width = get_w() - 4 * padding_;
-		const float available_height = get_h() - name_label_.get_h() - descr_.get_h() - 24 * padding_;
-		const int width = minimap_icon_.icon()->width();
-		const int height = minimap_icon_.icon()->height();
-		const float scale =
-		   std::min(std::min(1.f, available_width / width), available_height / height);
-		minimap_icon_.set_desired_size(scale * width, scale * height);
+		const float available_height =
+			get_h() - name_label_.get_h() - descr_.get_h() - button_box_->get_h() - 4 * padding_;
+
+		// Scale it
+		float scale = available_width / minimap_image_->width();
+		const float scale_y = available_height / minimap_image_->height();
+		if (scale_y < scale) {
+			scale = scale_y;
+		}
+		// Don't make the image too big; fuzziness will result
+		scale = std::min(1.f, scale);
+
+		const int w = scale * minimap_image_->width();
+		const int h = scale * minimap_image_->height();
+
+		// Center the minimap in the available space
+		const int xpos = (get_w() - w) / 2;
+		int ypos = name_label_.get_h() + descr_.get_h() + 2 * padding_;
+
+		// Set small minimaps higher up for a more harmonious look
+		if (h < available_height * 2 / 3) {
+			ypos += (available_height - h) / 3;
+		} else {
+			ypos += (available_height - h) / 2;
+		}
+
+		minimap_icon_.set_desired_size(w, h);
+		minimap_icon_.set_pos(Vector2i(xpos, ypos));
 	}
 }

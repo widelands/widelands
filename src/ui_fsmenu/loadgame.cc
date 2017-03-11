@@ -66,21 +66,13 @@ FullscreenMenuLoadGame::FullscreenMenuLoadGame(Widelands::Game& g,
                    GameDetails::Style::kFsMenu,
                    true),
 
-     delete_(load_or_save_.game_details(),
-             "delete",
-             0,
-             0,
-             0,
-             0,
-             g_gr->images().get("images/ui_basic/but0.png"),
-             _("Delete")),
-     button_spacer_(load_or_save_.game_details(), 0, 0, 0, 0),
      is_replay_(is_replay),
      game_(g),
      settings_(gsp),
      ctrl_(gc) {
 
-	layout(); // For the assertions
+	// Make sure that we have some space to work with.
+	main_box_.set_size(get_w(), get_w());
 
 	main_box_.add_space(padding_);
 	main_box_.add_inf_space();
@@ -94,28 +86,38 @@ FullscreenMenuLoadGame::FullscreenMenuLoadGame(Widelands::Game& g,
 	info_box_.add_space(right_column_margin_);
 	info_box_.add(load_or_save_.game_details(), UI::Box::Resizing::kFullSize);
 
-	load_or_save_.game_details()->add(&delete_, UI::Box::Resizing::kAlign, UI::Align::kLeft);
-	load_or_save_.game_details()->add(&button_spacer_);
+	delete_ = new UI::Button(load_or_save_.game_details()->button_box(),
+			  "delete",
+			  0,
+			  0,
+			  0,
+			  0,
+			  g_gr->images().get("images/ui_basic/but0.png"),
+			  _("Delete"));
+	button_spacer_ = new UI::Panel(load_or_save_.game_details()->button_box(), 0, 0, 0, 0);
 
-	layout(); // The actual layout
+	load_or_save_.game_details()->button_box()->add(delete_, UI::Box::Resizing::kAlign, UI::Align::kLeft);
+	load_or_save_.game_details()->button_box()->add(button_spacer_);
+
+	layout();
 
 	ok_.set_enabled(false);
-	delete_.set_enabled(false);
+	delete_->set_enabled(false);
 
 	if (is_replay_) {
 		back_.set_tooltip(_("Return to the main menu"));
 		ok_.set_tooltip(_("Load this replay"));
-		delete_.set_tooltip(_("Delete this replay"));
+		delete_->set_tooltip(_("Delete this replay"));
 	} else {
 		back_.set_tooltip(_("Return to the single player menu"));
 		ok_.set_tooltip(_("Load this game"));
-		delete_.set_tooltip(_("Delete this game"));
+		delete_->set_tooltip(_("Delete this game"));
 	}
 	set_thinks(false);
 
 	back_.sigclicked.connect(boost::bind(&FullscreenMenuLoadGame::clicked_back, boost::ref(*this)));
 	ok_.sigclicked.connect(boost::bind(&FullscreenMenuLoadGame::clicked_ok, boost::ref(*this)));
-	delete_.sigclicked.connect(
+	delete_->sigclicked.connect(
 	   boost::bind(&FullscreenMenuLoadGame::clicked_delete, boost::ref(*this)));
 	load_or_save_.table().selected.connect(
 	   boost::bind(&FullscreenMenuLoadGame::entry_selected, this));
@@ -127,14 +129,13 @@ FullscreenMenuLoadGame::FullscreenMenuLoadGame(Widelands::Game& g,
 
 void FullscreenMenuLoadGame::layout() {
 	FullscreenMenuLoadMapOrGame::layout();
-	// NOCOM minimap goes crazy
 	main_box_.set_size(get_w() - 2 * tablex_, tabley_ + tableh_ + padding_);
 	main_box_.set_pos(Vector2i(tablex_, 0));
 	title_.set_fontsize(fs_big());
+	delete_->set_desired_size(butw_, buth_);
+	button_spacer_->set_desired_size(butw_, buth_ + 2 * padding_);
 	load_or_save_.table().set_desired_size(tablew_, tableh_);
-	load_or_save_.game_details()->set_desired_size(main_box_.get_w() - tablew_ - right_column_margin_, tableh_);
-	delete_.set_desired_size(butw_, buth_);
-	button_spacer_.set_desired_size(butw_, buth_ + 2 * padding_);
+	load_or_save_.game_details()->set_max_size(main_box_.get_w() - tablew_ - right_column_margin_, tableh_);
 }
 
 void FullscreenMenuLoadGame::think() {
@@ -204,7 +205,7 @@ void FullscreenMenuLoadGame::clicked_delete() {
 
 void FullscreenMenuLoadGame::entry_selected() {
 	ok_.set_enabled(load_or_save_.table().selections().size() == 1);
-	delete_.set_enabled(load_or_save_.has_selection());
+	delete_->set_enabled(load_or_save_.has_selection());
 	if (load_or_save_.has_selection()) {
 		load_or_save_.entry_selected();
 	}

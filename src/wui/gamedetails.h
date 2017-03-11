@@ -64,6 +64,9 @@ public:
 
 	void clear();
 	void update(const SavegameData& gamedata);
+	UI::Box* button_box() {
+		return button_box_;
+	}
 
 private:
 	void layout() override;
@@ -75,6 +78,7 @@ private:
 	UI::MultilineTextarea descr_;
 	UI::Icon minimap_icon_;
 	std::unique_ptr<const Image> minimap_image_;
+	UI::Box* button_box_;
 };
 
 #endif  // end of include guard: WL_WUI_GAMEDETAILS_H
