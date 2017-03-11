@@ -61,7 +61,7 @@ private:
 	UI::Box buttons_box_;
 
 	LoadOrSaveGame load_or_save_;
-	UI::Button delete_;
+	UI::Button* delete_;
 
 	UI::Textarea editbox_label_;
 	UI::EditBox editbox_;

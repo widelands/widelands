@@ -59,14 +59,6 @@ GameMainMenuSaveGame::GameMainMenuSaveGame(InteractiveGameBase& parent,
                    LoadOrSaveGame::FileType::kGame,
                    GameDetails::Style::kWui,
                    false),
-     delete_(load_or_save_.game_details(),
-             "delete",
-             0,
-             0,
-             0,
-             0,
-             g_gr->images().get("images/ui_basic/but1.png"),
-             _("Delete")),
 
      editbox_label_(&filename_box_, 0, 0, 0, 0, _("Filename:"), UI::Align::kLeft),
      editbox_(&filename_box_, 0, 0, 0, 0, 2, g_gr->images().get("images/ui_basic/but1.png")),
@@ -104,7 +96,17 @@ GameMainMenuSaveGame::GameMainMenuSaveGame(InteractiveGameBase& parent,
 	info_box_.add_space(padding_);
 	info_box_.add(&load_or_save_.table(), UI::Box::Resizing::kFullSize);
 	info_box_.add(load_or_save_.game_details(), UI::Box::Resizing::kExpandBoth);
-	load_or_save_.game_details()->add(&delete_, UI::Box::Resizing::kFullSize);
+
+	delete_ = new UI::Button(load_or_save_.game_details()->button_box(),
+			  "delete",
+			  0,
+			  0,
+			  0,
+			  0,
+			  g_gr->images().get("images/ui_basic/but1.png"),
+			  _("Delete"));
+
+	load_or_save_.game_details()->button_box()->add(delete_, UI::Box::Resizing::kFullSize);
 
 	filename_box_.set_inner_spacing(padding_);
 	filename_box_.add_space(padding_);
@@ -122,14 +124,14 @@ GameMainMenuSaveGame::GameMainMenuSaveGame(InteractiveGameBase& parent,
 	buttons_box_.add_inf_space();
 
 	ok_.set_enabled(false);
-	delete_.set_enabled(false);
+	delete_->set_enabled(false);
 
 	editbox_.changed.connect(boost::bind(&GameMainMenuSaveGame::edit_box_changed, this));
 	editbox_.ok.connect(boost::bind(&GameMainMenuSaveGame::ok, this));
 
 	ok_.sigclicked.connect(boost::bind(&GameMainMenuSaveGame::ok, this));
 	cancel_.sigclicked.connect(boost::bind(&GameMainMenuSaveGame::die, this));
-	delete_.sigclicked.connect(boost::bind(&GameMainMenuSaveGame::delete_clicked, this));
+	delete_->sigclicked.connect(boost::bind(&GameMainMenuSaveGame::delete_clicked, this));
 
 	load_or_save_.table().selected.connect(boost::bind(&GameMainMenuSaveGame::entry_selected, this));
 	load_or_save_.table().double_clicked.connect(
@@ -155,7 +157,7 @@ void GameMainMenuSaveGame::entry_selected() {
 	// TODO(GunChleoc): When editbox is focused, multiselect is not possible, because it steals the
 	// key presses.
 	ok_.set_enabled(load_or_save_.table().selections().size() == 1);
-	delete_.set_enabled(load_or_save_.has_selection());
+	delete_->set_enabled(load_or_save_.has_selection());
 	if (load_or_save_.has_selection()) {
 		const SavegameData& gamedata = *load_or_save_.entry_selected();
 		editbox_.set_text(FileSystem::filename_without_ext(gamedata.filename.c_str()));
@@ -176,7 +178,7 @@ void GameMainMenuSaveGame::edit_box_changed() {
 	// Prevent the user from creating nonsense directory names, like e.g. ".." or "...".
 	const bool is_legal_filename = LayeredFileSystem::is_legal_filename(editbox_.text());
 	ok_.set_enabled(is_legal_filename);
-	delete_.set_enabled(false);
+	delete_->set_enabled(false);
 	load_or_save_.clear_selections();
 }
 
