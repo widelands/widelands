@@ -26,6 +26,7 @@
 
 #include "graphic/image.h"
 #include "logic/game_controller.h"
+#include "ui_basic/box.h"
 #include "ui_basic/button.h"
 #include "ui_basic/textarea.h"
 #include "ui_fsmenu/load_map_or_game.h"
@@ -60,14 +61,15 @@ private:
 	bool compare_date_descending(uint32_t, uint32_t);
 	void clicked_delete();
 
+	UI::Box main_box_;
+	UI::Box info_box_;
+	UI::Textarea title_;
 	LoadOrSaveGame load_or_save_;
 
-	bool is_replay_;
-
-	UI::Textarea title_;
 	UI::Button delete_;
 	std::string filename_;
 
+	bool is_replay_;
 	Widelands::Game& game_;
 	GameSettingsProvider* settings_;
 	GameController* ctrl_;

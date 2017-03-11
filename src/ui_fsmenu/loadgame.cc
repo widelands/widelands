@@ -47,10 +47,21 @@ FullscreenMenuLoadGame::FullscreenMenuLoadGame(Widelands::Game& g,
                                                GameController* gc,
                                                bool is_replay)
    : FullscreenMenuLoadMapOrGame(),
-     load_or_save_(this,
+
+     main_box_(this, 0, 0, UI::Box::Vertical),
+     info_box_(&main_box_, 0, 0, UI::Box::Horizontal),
+
+     // Main title
+     title_(&main_box_,
+            0,
+            0,
+            is_replay_ ? _("Choose a replay") : _("Choose a saved game"),
+            UI::Align::kCenter),
+
+     load_or_save_(&info_box_,
                    g,
-                   tablex_,
-                   tabley_,
+                   0,
+                   0,
                    tablew_,
                    tableh_,
                    padding_,
@@ -60,25 +71,36 @@ FullscreenMenuLoadGame::FullscreenMenuLoadGame(Widelands::Game& g,
                    GameDetails::Style::kFsMenu,
                    true),
 
-     is_replay_(is_replay),
-     // Main title
-     title_(this,
-            get_w() / 2,
-            tabley_ / 3,
-            is_replay_ ? _("Choose a replay") : _("Choose a saved game"),
-            UI::Align::kCenter),
-
-     delete_(this,
+     delete_(load_or_save_.game_details(),
              "delete",
-             right_column_x_,
-             buty_ - buth_ - 2 * padding_,
-             butw_,
-             buth_,
+             0,
+             0,
+             0,
+             0,
              g_gr->images().get("images/ui_basic/but0.png"),
              _("Delete")),
+     is_replay_(is_replay),
      game_(g),
      settings_(gsp),
      ctrl_(gc) {
+
+	main_box_.set_inner_spacing(padding_);
+	main_box_.add_space(padding_);
+	main_box_.add_inf_space();
+	main_box_.add(&title_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
+	main_box_.add_inf_space();
+	main_box_.add(&info_box_, UI::Box::Resizing::kExpandBoth);
+	main_box_.add_space(padding_);
+
+	info_box_.set_inner_spacing(padding_);
+	info_box_.add_space(padding_);
+	info_box_.add(&load_or_save_.table(), UI::Box::Resizing::kFullSize);
+	info_box_.add(load_or_save_.game_details(), UI::Box::Resizing::kExpandBoth);
+	load_or_save_.game_details()->add(&delete_, UI::Box::Resizing::kFullSize);
+	load_or_save_.game_details()->add_space(ok_.get_h());  // NOCOM make a proper button box.
+
+	layout();
+
 	title_.set_fontsize(UI_FONT_SIZE_BIG);
 	ok_.set_enabled(false);
 	delete_.set_enabled(false);
@@ -107,8 +129,9 @@ FullscreenMenuLoadGame::FullscreenMenuLoadGame(Widelands::Game& g,
 }
 
 void FullscreenMenuLoadGame::layout() {
-	// TODO(GunChleoc): Implement when we have box layout for the details.
-	load_or_save_.table().layout();
+	// NOCOM minimap goes crazy
+	main_box_.set_size(get_w(), tabley_ + tableh_ + padding_);
+	load_or_save_.table().set_desired_size(tablew_, tableh_);
 }
 
 void FullscreenMenuLoadGame::think() {
