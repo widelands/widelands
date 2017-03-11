@@ -60,7 +60,7 @@ class GameDetails : public UI::Box {
 public:
 	enum class Style { kFsMenu, kWui };
 
-	GameDetails(Panel* parent, int32_t x, int32_t y, int32_t max_w, int32_t max_h, Style style);
+	GameDetails(Panel* parent, Style style);
 
 	void clear();
 	void update(const SavegameData& gamedata);

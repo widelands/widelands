@@ -35,11 +35,6 @@ public:
 
 	LoadOrSaveGame(UI::Panel* parent,
 	               Widelands::Game& g,
-	               int tablex,
-	               int tabley,
-	               int tablew,
-	               int tableh,
-	               int padding,
 	               FileType filetype,
 	               GameDetails::Style style,
 	               bool localize_autosave);

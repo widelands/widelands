@@ -82,17 +82,16 @@ void SavegameData::set_mapname(const std::string& input_mapname) {
 	mapname = _(input_mapname);
 }
 
-GameDetails::GameDetails(
-   Panel* parent, int32_t x, int32_t y, int32_t max_w, int32_t max_h, Style style)
-   : UI::Box(parent, x, y, UI::Box::Vertical, max_w, max_h),
+GameDetails::GameDetails(Panel* parent, Style style)
+   : UI::Box(parent, 0, 0, UI::Box::Vertical),
      style_(style),
      padding_(4),
      name_label_(
         this,
         0,
         0,
-        max_w,
-        20,
+        0,
+        0,
         "",
         UI::Align::kLeft,
         g_gr->images().get(style == GameDetails::Style::kFsMenu ? "images/ui_basic/but3.png" :
@@ -101,14 +100,14 @@ GameDetails::GameDetails(
      descr_(this,
             0,
             0,
-            max_w,
+            0,
             0,
             "",
             UI::Align::kLeft,
             g_gr->images().get(style == GameDetails::Style::kFsMenu ? "images/ui_basic/but3.png" :
                                                                       "images/ui_basic/but1.png"),
             UI::MultilineTextarea::ScrollMode::kNoScrolling),
-     minimap_icon_(this, 0, 0, max_w - 2 * padding_, max_h - 2 * padding_, nullptr) {
+     minimap_icon_(this, 0, 0, 0, 0, nullptr) {
 	name_label_.force_new_renderer();
 	descr_.force_new_renderer();
 
@@ -117,8 +116,6 @@ GameDetails::GameDetails(
 	add(&descr_, UI::Box::Resizing::kExpandBoth);
 	add_space(padding_);
 	add(&minimap_icon_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
-	set_size(max_w, max_h);
-
 	minimap_icon_.set_visible(false);
 }
 
@@ -178,8 +175,9 @@ void GameDetails::update(const SavegameData& gamedata) {
 					   minimap_path,
 					   std::unique_ptr<FileSystem>(g_fs->make_sub_file_system(gamedata.filename)).get());
 
-					int available_width = get_w() - 4 * padding_;
-					int available_height = get_h() - name_label_.get_h() - descr_.get_h() - 4 * padding_;
+					int available_width = std::max(0, get_w() - 4 * padding_);
+					int available_height =
+					   std::max(0, get_h() - name_label_.get_h() - descr_.get_h() - 4 * padding_);
 
 					// Scale it
 					double scale = double(available_width) / minimap_image_->width();

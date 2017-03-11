@@ -68,27 +68,23 @@ map_filename(const std::string& filename, const std::string& mapname, bool local
 }
 
 }  // namespace
-
 LoadOrSaveGame::LoadOrSaveGame(UI::Panel* parent,
                                Widelands::Game& g,
-                               int tablex,
-                               int tabley,
-                               int tablew,
-                               int tableh,
-                               int padding,
                                FileType filetype,
                                GameDetails::Style style,
                                bool localize_autosave)
-	: table_(parent, tablex, tabley, tablew, tableh, g_gr->images().get(style == GameDetails::Style::kFsMenu ? "images/ui_basic/but3.png" : "images/ui_basic/but1.png"), UI::TableRows::kMultiDescending),
+   : table_(parent,
+            0,
+            0,
+            0,
+            0,
+            g_gr->images().get(style == GameDetails::Style::kFsMenu ? "images/ui_basic/but3.png" :
+                                                                      "images/ui_basic/but1.png"),
+            UI::TableRows::kMultiDescending),
      filetype_(filetype),
      localize_autosave_(localize_autosave),
      // Savegame description
-     game_details_(parent,
-                   tablex + tablew + padding,
-                   tabley,
-                   parent->get_w() - tablex - tablew - 2 * padding,
-                   tableh,
-						 style),
+     game_details_(parent, style),
      game_(g) {
 	table_.add_column(130, _("Save Date"), _("The date this game was saved"), UI::Align::kLeft);
 	if (filetype_ != FileType::kGameSinglePlayer) {
@@ -130,7 +126,6 @@ LoadOrSaveGame::LoadOrSaveGame(UI::Panel* parent,
 	fill_table();
 }
 
-
 const std::string LoadOrSaveGame::filename_list_string() const {
 	std::set<uint32_t> selections = table_.selections();
 	boost::format message;
@@ -146,10 +141,10 @@ const std::string LoadOrSaveGame::filename_list_string() const {
 		const SavegameData& gamedata = games_data_[table_.get(table_.get_record(index))];
 
 		if (gamedata.errormessage.empty()) {
-			message =
-				boost::format("%s\n%s") % message %
-			   /** TRANSLATORS %1% = map name, %2% = save date. */
-				(boost::format(_("%1%, saved on %2%")) % richtext_escape(gamedata.mapname) % gamedata.savedatestring);
+			message = boost::format("%s\n%s") % message %
+			          /** TRANSLATORS %1% = map name, %2% = save date. */
+			          (boost::format(_("%1%, saved on %2%")) % richtext_escape(gamedata.mapname) %
+			           gamedata.savedatestring);
 		} else {
 			message = boost::format("%s\n%s") % message % richtext_escape(gamedata.filename);
 		}
@@ -172,9 +167,9 @@ const SavegameData* LoadOrSaveGame::entry_selected() {
 		result = &games_data_[table_.get_selected()];
 	} else if (selections > 1) {
 		result->mapname =
-			(boost::format(ngettext("Selected %d file:", "Selected %d files:", selections)) %
-			 selections)
-				.str();
+		   (boost::format(ngettext("Selected %d file:", "Selected %d files:", selections)) %
+		    selections)
+		      .str();
 		result->filename_list = filename_list_string();
 	}
 	game_details_.update(*result);
@@ -185,7 +180,7 @@ bool LoadOrSaveGame::has_selection() {
 	return table_.has_selection();
 }
 
-void  LoadOrSaveGame::clear_selections() {
+void LoadOrSaveGame::clear_selections() {
 	table_.clear_selections();
 	game_details_.clear();
 }

@@ -50,17 +50,12 @@ GameMainMenuSaveGame::GameMainMenuSaveGame(InteractiveGameBase& parent,
      butw_(150),
 
      main_box_(this, 0, 0, UI::Box::Vertical),
-     info_box_(this, 0, 0, UI::Box::Horizontal),
-     filename_box_(this, 0, 0, UI::Box::Horizontal),
-     buttons_box_(this, 0, 0, UI::Box::Horizontal),
+     info_box_(&main_box_, 0, 0, UI::Box::Horizontal),
+     filename_box_(&main_box_, 0, 0, UI::Box::Horizontal),
+     buttons_box_(&main_box_, 0, 0, UI::Box::Horizontal),
 
      load_or_save_(&info_box_,
                    igbase().game(),
-                   0,
-                   0,
-                   0,
-                   0,
-                   padding_,
                    LoadOrSaveGame::FileType::kGame,
                    GameDetails::Style::kWui,
                    false),
@@ -95,6 +90,8 @@ GameMainMenuSaveGame::GameMainMenuSaveGame(InteractiveGameBase& parent,
 
      curdir_(SaveHandler::get_base_dir()) {
 
+	layout();
+
 	main_box_.add_space(padding_);
 	main_box_.set_inner_spacing(padding_);
 	main_box_.add(&info_box_, UI::Box::Resizing::kExpandBoth);
@@ -123,8 +120,6 @@ GameMainMenuSaveGame::GameMainMenuSaveGame(InteractiveGameBase& parent,
 	buttons_box_.add(&ok_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 	buttons_box_.add_inf_space();
 	buttons_box_.add_inf_space();
-
-	layout();
 
 	ok_.set_enabled(false);
 	delete_.set_enabled(false);
@@ -157,7 +152,8 @@ void GameMainMenuSaveGame::layout() {
  * called when a item is selected
  */
 void GameMainMenuSaveGame::entry_selected() {
-	// TODO(GunChleoc): When editbox is focused, multiselect is not possible, because it steals the key presses.
+	// TODO(GunChleoc): When editbox is focused, multiselect is not possible, because it steals the
+	// key presses.
 	ok_.set_enabled(load_or_save_.table().selections().size() == 1);
 	delete_.set_enabled(load_or_save_.has_selection());
 	if (load_or_save_.has_selection()) {

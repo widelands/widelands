@@ -60,11 +60,6 @@ FullscreenMenuLoadGame::FullscreenMenuLoadGame(Widelands::Game& g,
 
      load_or_save_(&info_box_,
                    g,
-                   0,
-                   0,
-                   tablew_,
-                   tableh_,
-                   padding_,
                    is_replay ? LoadOrSaveGame::FileType::kReplay : gsp->settings().multiplayer ?
                                LoadOrSaveGame::FileType::kGameMultiPlayer :
                                LoadOrSaveGame::FileType::kGameSinglePlayer,
@@ -84,6 +79,8 @@ FullscreenMenuLoadGame::FullscreenMenuLoadGame(Widelands::Game& g,
      settings_(gsp),
      ctrl_(gc) {
 
+	layout();
+
 	main_box_.set_inner_spacing(padding_);
 	main_box_.add_space(padding_);
 	main_box_.add_inf_space();
@@ -98,8 +95,6 @@ FullscreenMenuLoadGame::FullscreenMenuLoadGame(Widelands::Game& g,
 	info_box_.add(load_or_save_.game_details(), UI::Box::Resizing::kExpandBoth);
 	load_or_save_.game_details()->add(&delete_, UI::Box::Resizing::kFullSize);
 	load_or_save_.game_details()->add_space(ok_.get_h());  // NOCOM make a proper button box.
-
-	layout();
 
 	title_.set_fontsize(UI_FONT_SIZE_BIG);
 	ok_.set_enabled(false);
