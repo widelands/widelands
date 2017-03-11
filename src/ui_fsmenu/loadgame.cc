@@ -74,6 +74,7 @@ FullscreenMenuLoadGame::FullscreenMenuLoadGame(Widelands::Game& g,
              0,
              g_gr->images().get("images/ui_basic/but0.png"),
              _("Delete")),
+     button_spacer_(load_or_save_.game_details(), 0, 0, 0, 0),
      is_replay_(is_replay),
      game_(g),
      settings_(gsp),
@@ -81,22 +82,21 @@ FullscreenMenuLoadGame::FullscreenMenuLoadGame(Widelands::Game& g,
 
 	layout();
 
-	main_box_.set_inner_spacing(padding_);
 	main_box_.add_space(padding_);
 	main_box_.add_inf_space();
 	main_box_.add(&title_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 	main_box_.add_inf_space();
+	main_box_.add_inf_space();
 	main_box_.add(&info_box_, UI::Box::Resizing::kExpandBoth);
 	main_box_.add_space(padding_);
 
-	info_box_.set_inner_spacing(padding_);
-	info_box_.add_space(padding_);
 	info_box_.add(&load_or_save_.table(), UI::Box::Resizing::kFullSize);
+	info_box_.add_space(right_column_margin_);
 	info_box_.add(load_or_save_.game_details(), UI::Box::Resizing::kExpandBoth);
-	load_or_save_.game_details()->add(&delete_, UI::Box::Resizing::kFullSize);
-	load_or_save_.game_details()->add_space(ok_.get_h());  // NOCOM make a proper button box.
 
-	title_.set_fontsize(UI_FONT_SIZE_BIG);
+	load_or_save_.game_details()->add(&delete_, UI::Box::Resizing::kAlign, UI::Align::kLeft);
+	load_or_save_.game_details()->add(&button_spacer_);
+
 	ok_.set_enabled(false);
 	delete_.set_enabled(false);
 
@@ -126,8 +126,12 @@ FullscreenMenuLoadGame::FullscreenMenuLoadGame(Widelands::Game& g,
 void FullscreenMenuLoadGame::layout() {
 	FullscreenMenuLoadMapOrGame::layout();
 	// NOCOM minimap goes crazy
-	main_box_.set_size(get_w(), tabley_ + tableh_ + padding_);
+	main_box_.set_size(get_w() + 2 * tablex_, tabley_ + tableh_ + padding_);
+	main_box_.set_pos(Vector2i(tablex_, 0));
+	title_.set_fontsize(fs_big());
 	load_or_save_.table().set_desired_size(tablew_, tableh_);
+	delete_.set_desired_size(butw_, buth_);
+	button_spacer_.set_desired_size(butw_, buth_ + 2 * padding_);
 }
 
 void FullscreenMenuLoadGame::think() {

@@ -64,9 +64,12 @@ private:
 	UI::Box main_box_;
 	UI::Box info_box_;
 	UI::Textarea title_;
+
 	LoadOrSaveGame load_or_save_;
 
 	UI::Button delete_;
+	// TODO(GunChleoc): Get rid of this hack once everything is 100% box layout
+	UI::Panel button_spacer_;
 	std::string filename_;
 
 	bool is_replay_;
