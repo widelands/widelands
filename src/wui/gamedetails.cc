@@ -116,15 +116,18 @@ GameDetails::GameDetails(Panel* parent, Style style)
 	add(&descr_, UI::Box::Resizing::kExpandBoth);
 	add_space(padding_);
 	add(&minimap_icon_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
+	add_space(10 * padding_);
+
 	minimap_icon_.set_visible(false);
+	minimap_icon_.set_frame(UI_FONT_CLR_FG);
 }
 
 void GameDetails::clear() {
 	name_label_.set_text("");
 	descr_.set_text("");
+	descr_.set_size(20, UI::Scrollbar::kSize);
 	minimap_icon_.set_icon(nullptr);
 	minimap_icon_.set_visible(false);
-	minimap_icon_.set_no_frame();
 	minimap_image_.reset();
 }
 
@@ -162,48 +165,12 @@ void GameDetails::update(const SavegameData& gamedata) {
 			descr_.set_text(description);
 
 			std::string minimap_path = gamedata.minimap_path;
-			// Delete former image
-			minimap_icon_.set_icon(nullptr);
-			minimap_icon_.set_visible(false);
-			minimap_icon_.set_no_frame();
-			minimap_image_.reset();
-			// Load the new one
 			if (!minimap_path.empty()) {
 				try {
 					// Load the image
 					minimap_image_ = load_image(
 					   minimap_path,
 					   std::unique_ptr<FileSystem>(g_fs->make_sub_file_system(gamedata.filename)).get());
-
-					int available_width = std::max(0, get_w() - 4 * padding_);
-					int available_height =
-					   std::max(0, get_h() - name_label_.get_h() - descr_.get_h() - 4 * padding_);
-
-					// Scale it
-					double scale = double(available_width) / minimap_image_->width();
-					double scaleY = double(available_height) / minimap_image_->height();
-					if (scaleY < scale) {
-						scale = scaleY;
-					}
-					if (scale > 1.0)
-						scale = 1.0;  // Don't make the image too big; fuzziness will result
-					uint16_t w = scale * minimap_image_->width();
-					uint16_t h = scale * minimap_image_->height();
-
-					// Center the minimap in the available space
-					int32_t xpos = (get_w() - w) / 2;
-					int32_t ypos = name_label_.get_h() + descr_.get_h() + 2 * padding_;
-
-					// Set small minimaps higher up for a more harmonious look
-					if (h < available_height * 2 / 3) {
-						ypos += (available_height - h) / 3;
-					} else {
-						ypos += (available_height - h) / 2;
-					}
-
-					minimap_icon_.set_desired_size(w, h);
-					minimap_icon_.set_pos(Vector2i(xpos, ypos));
-					minimap_icon_.set_frame(UI_FONT_CLR_FG);
 					minimap_icon_.set_visible(true);
 					minimap_icon_.set_icon(minimap_image_.get());
 				} catch (const std::exception& e) {
@@ -227,5 +194,29 @@ void GameDetails::update(const SavegameData& gamedata) {
 		   (boost::format("<rt>%s</rt>") %
 		    as_header_with_content(_("Error:"), gamedata.errormessage, style_, true, true))
 		      .str());
+	}
+	layout();
+}
+
+void GameDetails::layout() {
+	UI::Box::layout();
+	if (get_w() == 0 && get_h() == 0) {
+		return;
+	}
+	if (minimap_icon_.icon() == nullptr) {
+		descr_.set_scrollmode(UI::MultilineTextarea::ScrollMode::kScrollNormal);
+		minimap_icon_.set_desired_size(0, 0);
+	} else {
+		descr_.set_scrollmode(UI::MultilineTextarea::ScrollMode::kNoScrolling);
+
+		// Scale the minimap image. Don't make the image bigger than the original; fuzziness will
+		// result
+		const float available_width = get_w() - 4 * padding_;
+		const float available_height = get_h() - name_label_.get_h() - descr_.get_h() - 24 * padding_;
+		const int width = minimap_icon_.icon()->width();
+		const int height = minimap_icon_.icon()->height();
+		const float scale =
+		   std::min(std::min(1.f, available_width / width), available_height / height);
+		minimap_icon_.set_desired_size(scale * width, scale * height);
 	}
 }

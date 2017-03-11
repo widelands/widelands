@@ -66,6 +66,8 @@ public:
 	void update(const SavegameData& gamedata);
 
 private:
+	void layout() override;
+
 	const Style style_;
 	const int padding_;
 

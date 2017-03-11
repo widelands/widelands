@@ -79,6 +79,7 @@ struct MultilineTextarea : public Panel {
 	void scroll_to_top();
 
 	void set_background(const Image* background);
+	void set_scrollmode(MultilineTextarea::ScrollMode scroll_mode);
 
 protected:
 	void layout() override;

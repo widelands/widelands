@@ -124,6 +124,7 @@ FullscreenMenuLoadGame::FullscreenMenuLoadGame(Widelands::Game& g,
 }
 
 void FullscreenMenuLoadGame::layout() {
+	FullscreenMenuLoadMapOrGame::layout();
 	// NOCOM minimap goes crazy
 	main_box_.set_size(get_w(), tabley_ + tableh_ + padding_);
 	load_or_save_.table().set_desired_size(tablew_, tableh_);

@@ -50,18 +50,16 @@ MultilineTextarea::MultilineTextarea(Panel* const parent,
      scrollmode_(scroll_mode),
      pic_background_(nullptr) {
 	assert(scrollmode_ == MultilineTextarea::ScrollMode::kNoScrolling || Scrollbar::kSize <= w);
+	set_scrollmode(scroll_mode);
 	set_thinks(false);
 
 	scrollbar_.moved.connect(boost::bind(&MultilineTextarea::scrollpos_changed, this, _1));
 
 	scrollbar_.set_singlestepsize(
-	   UI::g_fh1->render(
-	               as_uifont(UI::g_fh1->fontset()->representative_character(), UI_FONT_SIZE_SMALL))
+	   UI::g_fh1
+	      ->render(as_uifont(UI::g_fh1->fontset()->representative_character(), UI_FONT_SIZE_SMALL))
 	      ->height());
 	scrollbar_.set_steps(1);
-	scrollbar_.set_force_draw(scrollmode_ == ScrollMode::kScrollNormalForced ||
-	                          scrollmode_ == ScrollMode::kScrollLogForced);
-
 	layout();
 }
 
@@ -190,6 +188,12 @@ void MultilineTextarea::scroll_to_top() {
 
 void MultilineTextarea::set_background(const Image* background) {
 	pic_background_ = background;
+}
+void MultilineTextarea::set_scrollmode(MultilineTextarea::ScrollMode scroll_mode) {
+	scrollmode_ = scroll_mode;
+	scrollbar_.set_force_draw(scrollmode_ == ScrollMode::kScrollNormalForced ||
+	                          scrollmode_ == ScrollMode::kScrollLogForced);
+	layout();
 }
 
 std::string MultilineTextarea::make_richtext() {

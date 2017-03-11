@@ -33,6 +33,10 @@ struct Icon : public Panel {
 	Icon(Panel* parent, int32_t x, int32_t y, int32_t w, int32_t h, const Image* picture_id);
 
 	void set_icon(const Image* picture_id);
+	const Image* icon() const {
+		return pic_;
+	}
+
 	void set_frame(const RGBColor& color);
 	void set_no_frame();
 
