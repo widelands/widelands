@@ -32,30 +32,46 @@
  * Data about a savegame/replay that we're interested in.
  */
 struct SavegameData {
+	/// The filename of the currenty selected file
 	std::string filename;
+	/// List of filenames when lumtiple files have been selected
 	std::string filename_list;
+	/// The name of the map that the game is bases on
 	std::string mapname;
+	/// The win condition that was played
 	std::string wincondition;
+	/// Filename of the minimap or empty if none available
 	std::string minimap_path;
+	/// "saved on ..."
 	std::string savedatestring;
+	/// Verbose date and time
 	std::string savedonstring;
+	/// An error message or empty if no error occurred
 	std::string errormessage;
 
+	/// Compact gametime information
 	std::string gametime;
+	/// Number of players on the map
 	std::string nrplayers;
+	/// The version of Widelands that the game as played with
 	std::string version;
+	/// Gametime as time stamp. For games, it's the time the game ended. For replays, it's the time the game started.
 	time_t savetimestamp;
+	/// Single payer, nethost, netclient or replay
 	GameController::GameType gametype;
 
 	SavegameData();
 
+	/// Converts timestamp to UI string and assigns it to gametime
 	void set_gametime(uint32_t input_gametime);
+	/// Sets the number of players on the map as a string
 	void set_nrplayers(Widelands::PlayerNumber input_nrplayers);
+	/// Sets the mapname as a localized string
 	void set_mapname(const std::string& input_mapname);
 };
 
 /**
- * Show a Panel with information about a map.
+ * Show a Panel with information about a savegame/replay file
  */
 class GameDetails : public UI::Box {
 public:
@@ -63,13 +79,19 @@ public:
 
 	GameDetails(Panel* parent, Style style);
 
+	/// Reset the data
 	void clear();
+
+	/// Update the display from the 'gamedata'
 	void update(const SavegameData& gamedata);
+
+	/// Box on the bottom where extra buttons can be placed from the outside, e.g. a delete button.
 	UI::Box* button_box() {
 		return button_box_;
 	}
 
 private:
+	/// Layout the information on screen
 	void layout() override;
 
 	const Style style_;

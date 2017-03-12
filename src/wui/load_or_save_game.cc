@@ -61,8 +61,8 @@ map_filename(const std::string& filename, const std::string& mapname, bool local
 	}
 	return result;
 }
-
 }  // namespace
+
 LoadOrSaveGame::LoadOrSaveGame(UI::Panel* parent,
                                Widelands::Game& g,
                                FileType filetype,
@@ -164,7 +164,6 @@ const std::string LoadOrSaveGame::filename_list_string() const {
 	return message.str();
 }
 
-// Reverse default sort order for save date column
 bool LoadOrSaveGame::compare_date_descending(uint32_t rowa, uint32_t rowb) {
 	const SavegameData& r1 = games_data_[table_[rowa]];
 	const SavegameData& r2 = games_data_[table_[rowb]];
@@ -226,6 +225,7 @@ const std::string LoadOrSaveGame::get_filename(int index) const {
 	return games_data_[table_.get(table_.get_record(index))].filename;
 }
 
+// NOCOM skip confirmation if ctrl is down
 void LoadOrSaveGame::clicked_delete() {
 	if (!has_selection()) {
 		return;
@@ -272,10 +272,7 @@ void LoadOrSaveGame::clicked_delete() {
 	}
 }
 
-/**
- * Fill the file list
- */
-void LoadOrSaveGame::fill_table(const std::string& preselected_filename) {
+void LoadOrSaveGame::fill_table() {
 
 	games_data_.clear();
 	table_.clear();
@@ -474,17 +471,4 @@ void LoadOrSaveGame::fill_table(const std::string& preselected_filename) {
 		}
 	}
 	table_.sort();
-
-	if (table_.size()) {
-		if (!preselected_filename.empty()) {
-			for (size_t idx = 0; idx < table_.size(); ++idx) {
-				const SavegameData& gamedata = games_data_[table_[idx]];
-				if (preselected_filename == gamedata.filename) {
-					table_.select(idx);
-					return;
-				}
-			}
-		}
-		table_.select(0);
-	}
 }

@@ -30,7 +30,10 @@
 
 class InteractiveGameBase;
 
+/// Displays a warning if the filename to be saved to already esists
 struct SaveWarnMessageBox;
+
+/// A window that lets the user save the current game and delete savegames.
 struct GameMainMenuSaveGame : public UI::UniqueWindow {
 	friend struct SaveWarnMessageBox;
 	GameMainMenuSaveGame(InteractiveGameBase&, UI::UniqueWindow::Registry& registry);
@@ -41,12 +44,20 @@ protected:
 private:
 	void layout() override;
 	InteractiveGameBase& igbase();
+
+	/// Update button status and game details and prefill the edibox.
 	void entry_selected();
-	void double_clicked();
+
+	/// Update buttons and table selection state
 	void edit_box_changed();
+
+	/// Called when the OK button is clicked or the Return key pressed in the edit box.
 	void ok();
 
-	bool save_game(std::string);
+	/// Saves the current game to 'filename'
+	bool save_game(std::string filename);
+
+	/// Pause/unpause the game
 	void pause_game(bool paused);
 
 	// UI coordinates and spacers

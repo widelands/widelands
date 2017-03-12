@@ -91,6 +91,9 @@ FullscreenMenuLoadGame::FullscreenMenuLoadGame(Widelands::Game& g,
 	   boost::bind(&FullscreenMenuLoadGame::clicked_ok, boost::ref(*this)));
 
 	fill_table();
+	if (!load_or_save_.table().empty()) {
+		load_or_save_.table().select(0);
+	}
 }
 
 void FullscreenMenuLoadGame::layout() {
@@ -105,14 +108,8 @@ void FullscreenMenuLoadGame::layout() {
 	   main_box_.get_w() - tablew_ - right_column_margin_, tableh_);
 }
 
-void FullscreenMenuLoadGame::think() {
-	if (ctrl_) {
-		ctrl_->think();
-	}
-}
-
 void FullscreenMenuLoadGame::clicked_ok() {
-	if (!load_or_save_.has_selection()) {
+	if (load_or_save_.table().selections().size() != 1) {
 		return;
 	}
 
@@ -131,9 +128,6 @@ void FullscreenMenuLoadGame::entry_selected() {
 	}
 }
 
-/**
- * Fill the file list
- */
 void FullscreenMenuLoadGame::fill_table() {
 	load_or_save_.fill_table();
 }

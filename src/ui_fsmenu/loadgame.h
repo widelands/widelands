@@ -40,17 +40,21 @@ public:
 	                       GameController* gc = nullptr,
 	                       bool is_replay = false);
 
+	/// Ths currently selected filename
 	const std::string& filename() {
 		return filename_;
 	}
 
-	void think() override;
-
 	bool handle_key(bool down, SDL_Keysym code) override;
 
 protected:
+	/// Sets the current selected filename and ends the modal screen with 'Ok' status.
 	void clicked_ok() override;
+
+	/// Update button status and game details
 	void entry_selected() override;
+
+	/// Fill load_or_save_'s table
 	void fill_table() override;
 
 private:

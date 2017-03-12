@@ -27,38 +27,60 @@
 
 /// Common functions for loading or saving a game or replay.
 class LoadOrSaveGame {
-public:
-	// Choose wich type of files to show
+	friend class GameMainMenuSaveGame;
+	friend class FullscreenMenuLoadGame;
+
+protected:
+	/// Choose which type of files to show
 	enum class FileType { kReplay, kGame, kGameMultiPlayer, kGameSinglePlayer };
 
+	/// A table of savegame/replay files and a game details panel.
 	LoadOrSaveGame(UI::Panel* parent,
 	               Widelands::Game& g,
 	               FileType filetype,
 	               GameDetails::Style style,
 	               bool localize_autosave);
 
+	//// Update gamedetails and tooltips and return information about the current selection
 	const SavegameData* entry_selected();
+
+	/// Whether the table has a selection
 	bool has_selection();
+
+	/// Clear table selections and game data
 	void clear_selections();
+
+	/// Finds the given filename on the table and selects it
 	void select_by_name(const std::string& name);
-	void fill_table(const std::string& preselected_filename = "");
+
+	/// Read savegame/replay files and fill the table and games data.
+	void fill_table();
+
+	/// The table panel
 	UI::Table<uintptr_t const>& table() {
 		return table_;
 	}
 
+	/// The game details panel
 	GameDetails* game_details() {
 		return &game_details_;
 	}
 
+	/// Returns the filename for the table entry at 'index'
 	const std::string get_filename(int index) const;
 
+	/// The delete button shown on the bottom of the game details panel
 	UI::Button* delete_button() const {
 		return delete_;
 	}
+	/// Show confirmation window and delete the selected file(s)
 	void clicked_delete();
 
 private:
+	/// Formats the current table selection as a list of filenames with savedate information.
 	const std::string filename_list_string() const;
+
+	/// Reverse default sort order for save date column
 	bool compare_date_descending(uint32_t, uint32_t);
 
 	UI::Panel* parent_;

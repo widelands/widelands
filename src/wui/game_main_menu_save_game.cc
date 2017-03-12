@@ -122,9 +122,11 @@ GameMainMenuSaveGame::GameMainMenuSaveGame(InteractiveGameBase& parent,
 
 	load_or_save_.table().selected.connect(boost::bind(&GameMainMenuSaveGame::entry_selected, this));
 	load_or_save_.table().double_clicked.connect(
-	   boost::bind(&GameMainMenuSaveGame::double_clicked, this));
+		boost::bind(&GameMainMenuSaveGame::ok, this));
 
-	load_or_save_.fill_table(parent.game().save_handler().get_cur_filename());
+	load_or_save_.fill_table();
+	load_or_save_.select_by_name(parent.game().save_handler().get_cur_filename());
+
 	center_to_parent();
 	move_to_top();
 
@@ -137,9 +139,6 @@ void GameMainMenuSaveGame::layout() {
 	load_or_save_.table().set_desired_size(get_inner_w() * 7 / 12, load_or_save_.table().get_h());
 }
 
-/**
- * called when a item is selected
- */
 void GameMainMenuSaveGame::entry_selected() {
 	// TODO(GunChleoc): When editbox is focused, multiselect is not possible, because it steals the
 	// key presses.
@@ -151,16 +150,6 @@ void GameMainMenuSaveGame::entry_selected() {
 	}
 }
 
-/**
- * An Item has been doubleclicked
- */
-void GameMainMenuSaveGame::double_clicked() {
-	ok();
-}
-
-/*
- * The editbox was changed. Enable ok button
- */
 void GameMainMenuSaveGame::edit_box_changed() {
 	// Prevent the user from creating nonsense directory names, like e.g. ".." or "...".
 	const bool is_legal_filename = LayeredFileSystem::is_legal_filename(editbox_.text());
@@ -212,9 +201,6 @@ private:
 	std::string const filename_;
 };
 
-/**
- * Called when the Ok button is clicked or the Return key pressed in the edit box.
- */
 void GameMainMenuSaveGame::ok() {
 	if (editbox_.text().empty())
 		return;

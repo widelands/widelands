@@ -22,6 +22,7 @@
 #include <memory>
 
 #include <boost/algorithm/string/replace.hpp>
+#include <boost/lexical_cast.hpp>
 #include <boost/format.hpp>
 
 #include "base/i18n.h"
@@ -75,7 +76,7 @@ void SavegameData::set_gametime(uint32_t input_gametime) {
 	gametime = gametimestring(input_gametime);
 }
 void SavegameData::set_nrplayers(Widelands::PlayerNumber input_nrplayers) {
-	nrplayers = (boost::format("%u") % static_cast<unsigned int>(input_nrplayers)).str();
+	nrplayers = boost::lexical_cast<std::string>(static_cast<unsigned int>(input_nrplayers));
 }
 void SavegameData::set_mapname(const std::string& input_mapname) {
 	i18n::Textdomain td("maps");
