@@ -225,7 +225,6 @@ const std::string LoadOrSaveGame::get_filename(int index) const {
 	return games_data_[table_.get(table_.get_record(index))].filename;
 }
 
-// NOCOM skip confirmation if ctrl is down
 void LoadOrSaveGame::clicked_delete() {
 	if (!has_selection()) {
 		return;
@@ -256,11 +255,14 @@ void LoadOrSaveGame::clicked_delete() {
 	std::string message = no_selections > 1 ? gamedata.filename_list : gamedata.filename;
 	message = (boost::format("%s\n%s") % header % message).str();
 
-	UI::WLMessageBox confirmationBox(
-	   parent_, ngettext("Confirm deleting file", "Confirm deleting files", no_selections), message,
-	   UI::WLMessageBox::MBoxType::kOkCancel);
-
-	if (confirmationBox.run<UI::Panel::Returncodes>() == UI::Panel::Returncodes::kOk) {
+	bool do_delete = SDL_GetModState() & KMOD_CTRL;
+	if (!do_delete) {
+		UI::WLMessageBox confirmationBox(
+			parent_, ngettext("Confirm deleting file", "Confirm deleting files", no_selections), message,
+			UI::WLMessageBox::MBoxType::kOkCancel);
+		do_delete = confirmationBox.run<UI::Panel::Returncodes>() == UI::Panel::Returncodes::kOk;
+	}
+	if (do_delete) {
 		for (const uint32_t index : selections) {
 			const std::string& deleteme = get_filename(index);
 			g_fs->fs_unlink(deleteme);
