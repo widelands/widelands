@@ -19,27 +19,8 @@
 
 #include "ui_fsmenu/loadgame.h"
 
-#include <algorithm>
-#include <cstdio>
-#include <ctime>
-#include <memory>
-
-#include <boost/algorithm/string/predicate.hpp>
-#include <boost/algorithm/string/replace.hpp>
-#include <boost/format.hpp>
-
 #include "base/i18n.h"
-#include "base/log.h"
-#include "base/time_string.h"
-#include "game_io/game_loader.h"
-#include "game_io/game_preload_packet.h"
-#include "graphic/text_constants.h"
-#include "helper.h"
-#include "io/filesystem/layered_filesystem.h"
-#include "logic/game.h"
-#include "logic/game_controller.h"
-#include "logic/game_settings.h"
-#include "logic/replay.h"
+#include "wui/gamedetails.h"
 
 FullscreenMenuLoadGame::FullscreenMenuLoadGame(Widelands::Game& g,
                                                GameSettingsProvider* gsp,

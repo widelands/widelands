@@ -22,15 +22,14 @@
 
 #include "ui_fsmenu/base.h"
 
-#include <memory>
-
-#include "graphic/image.h"
+#include "logic/game.h"
 #include "logic/game_controller.h"
+#include "logic/game_settings.h"
 #include "ui_basic/box.h"
 #include "ui_basic/button.h"
+#include "ui_basic/panel.h"
 #include "ui_basic/textarea.h"
 #include "ui_fsmenu/load_map_or_game.h"
-#include "wui/gamedetails.h"
 #include "wui/load_or_save_game.h"
 
 /// Select a Saved Game in Fullscreen Mode. It's a modal fullscreen menu.

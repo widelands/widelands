@@ -24,7 +24,6 @@
 #include "ui_basic/box.h"
 #include "ui_basic/button.h"
 #include "ui_basic/editbox.h"
-#include "ui_basic/messagebox.h"
 #include "ui_basic/textarea.h"
 #include "ui_basic/unique_window.h"
 #include "wui/load_or_save_game.h"

@@ -19,10 +19,7 @@
 
 #include "wui/load_or_save_game.h"
 
-#include <algorithm>
-#include <cstdio>
 #include <ctime>
-#include <memory>
 
 #include <boost/algorithm/string.hpp>
 #include <boost/format.hpp>
@@ -32,7 +29,6 @@
 #include "base/time_string.h"
 #include "game_io/game_loader.h"
 #include "game_io/game_preload_packet.h"
-#include "graphic/text_constants.h"
 #include "helper.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "logic/game.h"
@@ -40,7 +36,6 @@
 #include "logic/game_settings.h"
 #include "logic/replay.h"
 #include "ui_basic/messagebox.h"
-#include "wui/gamedetails.h"
 
 namespace {
 // This function concatenates the filename and localized map name for a savegame/replay.

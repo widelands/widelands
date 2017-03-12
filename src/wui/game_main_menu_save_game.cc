@@ -22,7 +22,6 @@
 #include <boost/format.hpp>
 
 #include "base/i18n.h"
-#include "base/time_string.h"
 #include "game_io/game_loader.h"
 #include "game_io/game_preload_packet.h"
 #include "game_io/game_saver.h"
@@ -31,6 +30,7 @@
 #include "logic/game.h"
 #include "logic/game_controller.h"
 #include "logic/playersmanager.h"
+#include "ui_basic/messagebox.h"
 #include "wui/interactive_gamebase.h"
 
 InteractiveGameBase& GameMainMenuSaveGame::igbase() {
