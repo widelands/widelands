@@ -152,10 +152,11 @@ const std::string LoadOrSaveGame::filename_list_string() const {
 		const SavegameData& gamedata = games_data_[table_.get(table_.get_record(index))];
 
 		if (gamedata.errormessage.empty()) {
-			message = boost::format("%s\n%s") % message %
-			          /** TRANSLATORS %1% = map name, %2% = save date. */
-			          (boost::format(_("%1%, saved on %2%")) % richtext_escape(gamedata.mapname) %
-			           gamedata.savedatestring);
+			std::vector<std::string> listme;
+			listme.push_back(richtext_escape(gamedata.mapname));
+			listme.push_back(gamedata.savedonstring);
+			message = (boost::format("%s\n%s") % message %
+			           i18n::localize_list(listme, i18n::ConcatenateWith::COMMA));
 		} else {
 			message = boost::format("%s\n%s") % message % richtext_escape(gamedata.filename);
 		}
@@ -351,10 +352,14 @@ void LoadOrSaveGame::fill_table(const std::string& preselected_filename) {
 					// with it
 					const std::string minute = (boost::format("%02u") % savedate->tm_min).str();
 
-					/** TRANSLATORS: Display date for choosing a savegame/replay */
-					/** TRANSLATORS: hour:minute */
 					gamedata.savedatestring =
+					   /** TRANSLATORS: Display date for choosing a savegame/replay. Placeholders are:
+					      hour:minute */
 					   (boost::format(_("Today, %1%:%2%")) % savedate->tm_hour % minute).str();
+					gamedata.savedonstring =
+					   /** TRANSLATORS: Display date for choosing a savegame/replay. Placeholders are:
+					      hour:minute. This is part of a list. */
+					   (boost::format(_("saved today at %1%:%2%")) % savedate->tm_hour % minute).str();
 				} else if ((savedate->tm_year == current_year && savedate->tm_mon == current_month &&
 				            savedate->tm_mday == current_day - 1) ||
 				           (savedate->tm_year == current_year - 1 && savedate->tm_mon == 11 &&
@@ -364,16 +369,26 @@ void LoadOrSaveGame::fill_table(const std::string& preselected_filename) {
 					// with it
 					const std::string minute = (boost::format("%02u") % savedate->tm_min).str();
 
-					/** TRANSLATORS: Display date for choosing a savegame/replay */
-					/** TRANSLATORS: hour:minute */
 					gamedata.savedatestring =
+					   /** TRANSLATORS: Display date for choosing a savegame/replay. Placeholders are:
+					      hour:minute */
 					   (boost::format(_("Yesterday, %1%:%2%")) % savedate->tm_hour % minute).str();
+					gamedata.savedonstring =
+					   /** TRANSLATORS: Display date for choosing a savegame/replay. Placeholders are:
+					      hour:minute. This is part of a list. */
+					   (boost::format(_("saved yesterday at %1%:%2%")) % savedate->tm_hour % minute)
+					      .str();
 				} else {  // Older
-
-					/** TRANSLATORS: Display date for choosing a savegame/replay */
-					/** TRANSLATORS: month day, year */
 					gamedata.savedatestring =
+					   /** TRANSLATORS: Display date for choosing a savegame/replay. Placeholders are:
+					      month day, year */
 					   (boost::format(_("%2% %1%, %3%")) % savedate->tm_mday %
+					    localize_month(savedate->tm_mon) % (1900 + savedate->tm_year))
+					      .str();
+					gamedata.savedonstring =
+					   /** TRANSLATORS: Display date for choosing a savegame/replay. Placeholders are:
+					      month day, year. This is part of a list. */
+					   (boost::format(_("saved on %2% %1%, %3%")) % savedate->tm_mday %
 					    localize_month(savedate->tm_mon) % (1900 + savedate->tm_year))
 					      .str();
 				}

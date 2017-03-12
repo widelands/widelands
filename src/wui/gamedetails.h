@@ -38,6 +38,7 @@ struct SavegameData {
 	std::string wincondition;
 	std::string minimap_path;
 	std::string savedatestring;
+	std::string savedonstring;
 	std::string errormessage;
 
 	std::string gametime;
