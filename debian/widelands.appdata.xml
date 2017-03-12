@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Copyright 2016 The Widelands Development Team <widelands-dev_at_lists.launchpad.net> -->
-<component>
-  <id>org.widelands.widelands</id>
+<component type="desktop-application">
+  <id>org.widelands.widelands.desktop</id>
   <metadata_license>CC0-1.0</metadata_license>
   <project_license>GPL-2.0</project_license>
   <name>Widelands</name>
@@ -231,7 +231,7 @@
   <url type="donation">https://wl.widelands.org/wiki/The%20Widelands%20Project/</url>
   <url type="help">https://wl.widelands.org/wiki/Game%20Manual/</url>
   <developer_name>The Widelands Development Team</developer_name>
-  <content_rating type="oars-1.0">
+  <x-content_rating type="oars-1.0">
     <content_attribute id="violence-cartoon">moderate</content_attribute>
     <content_attribute id="violence-fantasy">none</content_attribute>
     <content_attribute id="violence-realistic">none</content_attribute>
@@ -252,5 +252,5 @@
     <content_attribute id="social-contacts">none</content_attribute>
     <content_attribute id="money-purchasing">none</content_attribute>
     <content_attribute id="money-gambling">none</content_attribute>
-  </content_rating>
+  </x-content_rating>
 </component>
