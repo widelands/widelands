@@ -97,9 +97,8 @@ FullscreenMenuLoadGame::FullscreenMenuLoadGame(Widelands::Game& g,
 		back_.set_tooltip(_("Return to the main menu"));
 		ok_.set_tooltip(_("Load this replay"));
 	} else {
-		back_.set_tooltip(gsp->settings().multiplayer ?
-		                     _("Return to the multiplayer game setup menu") :
-		                     _("Return to the single player menu"));
+		back_.set_tooltip(gsp->settings().multiplayer ? _("Return to the multiplayer game setup") :
+		                                                _("Return to the single player menu"));
 		ok_.set_tooltip(_("Load this game"));
 	}
 

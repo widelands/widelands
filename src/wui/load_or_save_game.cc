@@ -139,13 +139,6 @@ LoadOrSaveGame::LoadOrSaveGame(UI::Panel* parent,
 	                                            UI::Box::Resizing::kFullSize,
 	                                UI::Align::kLeft);
 	delete_->set_enabled(false);
-
-	if (filetype_ == FileType::kReplay) {
-		delete_->set_tooltip(_("Delete this replay"));
-	} else {
-		delete_->set_tooltip(_("Delete this game"));
-	}
-
 	delete_->sigclicked.connect(boost::bind(&LoadOrSaveGame::clicked_delete, boost::ref(*this)));
 }
 
@@ -187,13 +180,27 @@ const SavegameData* LoadOrSaveGame::entry_selected() {
 	SavegameData* result = new SavegameData();
 	size_t selections = table_.selections().size();
 	if (selections == 1) {
+		delete_->set_tooltip(
+		   filetype_ == FileType::kReplay ?
+		      /** TRANSLATORS: Tooltip for the delete button. The user has selected 1 file */
+		      _("Delete this replay") :
+		      /** TRANSLATORS: Tooltip for the delete button. The user has selected 1 file */
+		      _("Delete this game"));
 		result = &games_data_[table_.get_selected()];
 	} else if (selections > 1) {
+		delete_->set_tooltip(
+		   filetype_ == FileType::kReplay ?
+		      /** TRANSLATORS: Tooltip for the delete button. The user has selected multiple files */
+		      _("Delete these replays") :
+		      /** TRANSLATORS: Tooltip for the delete button. The user has selected multiple files */
+		      _("Delete these games"));
 		result->mapname =
 		   (boost::format(ngettext("Selected %d file:", "Selected %d files:", selections)) %
 		    selections)
 		      .str();
 		result->filename_list = filename_list_string();
+	} else {
+		delete_->set_tooltip("");
 	}
 	game_details_.update(*result);
 	return result;
