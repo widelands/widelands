@@ -97,17 +97,6 @@ GameMainMenuSaveGame::GameMainMenuSaveGame(InteractiveGameBase& parent,
 	info_box_.add(&load_or_save_.table(), UI::Box::Resizing::kFullSize);
 	info_box_.add(load_or_save_.game_details(), UI::Box::Resizing::kExpandBoth);
 
-	delete_ = new UI::Button(load_or_save_.game_details()->button_box(),
-			  "delete",
-			  0,
-			  0,
-			  0,
-			  0,
-			  g_gr->images().get("images/ui_basic/but1.png"),
-			  _("Delete"));
-
-	load_or_save_.game_details()->button_box()->add(delete_, UI::Box::Resizing::kFullSize);
-
 	filename_box_.set_inner_spacing(padding_);
 	filename_box_.add_space(padding_);
 	filename_box_.add(&editbox_label_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
@@ -124,14 +113,12 @@ GameMainMenuSaveGame::GameMainMenuSaveGame(InteractiveGameBase& parent,
 	buttons_box_.add_inf_space();
 
 	ok_.set_enabled(false);
-	delete_->set_enabled(false);
 
 	editbox_.changed.connect(boost::bind(&GameMainMenuSaveGame::edit_box_changed, this));
 	editbox_.ok.connect(boost::bind(&GameMainMenuSaveGame::ok, this));
 
 	ok_.sigclicked.connect(boost::bind(&GameMainMenuSaveGame::ok, this));
 	cancel_.sigclicked.connect(boost::bind(&GameMainMenuSaveGame::die, this));
-	delete_->sigclicked.connect(boost::bind(&GameMainMenuSaveGame::delete_clicked, this));
 
 	load_or_save_.table().selected.connect(boost::bind(&GameMainMenuSaveGame::entry_selected, this));
 	load_or_save_.table().double_clicked.connect(
@@ -157,7 +144,7 @@ void GameMainMenuSaveGame::entry_selected() {
 	// TODO(GunChleoc): When editbox is focused, multiselect is not possible, because it steals the
 	// key presses.
 	ok_.set_enabled(load_or_save_.table().selections().size() == 1);
-	delete_->set_enabled(load_or_save_.has_selection());
+	load_or_save_.delete_button()->set_enabled(load_or_save_.has_selection());
 	if (load_or_save_.has_selection()) {
 		const SavegameData& gamedata = *load_or_save_.entry_selected();
 		editbox_.set_text(FileSystem::filename_without_ext(gamedata.filename.c_str()));
@@ -178,7 +165,7 @@ void GameMainMenuSaveGame::edit_box_changed() {
 	// Prevent the user from creating nonsense directory names, like e.g. ".." or "...".
 	const bool is_legal_filename = LayeredFileSystem::is_legal_filename(editbox_.text());
 	ok_.set_enabled(is_legal_filename);
-	delete_->set_enabled(false);
+	load_or_save_.delete_button()->set_enabled(false);
 	load_or_save_.clear_selections();
 }
 
@@ -247,40 +234,6 @@ void GameMainMenuSaveGame::ok() {
 void GameMainMenuSaveGame::die() {
 	pause_game(false);
 	UI::UniqueWindow::die();
-}
-
-/**
- * Called when the delete button has been clicked
- */
-void GameMainMenuSaveGame::delete_clicked() {
-	if (!load_or_save_.has_selection()) {
-		return;
-	}
-	std::set<uint32_t> selections = load_or_save_.table().selections();
-	const SavegameData& gamedata = *load_or_save_.entry_selected();
-	size_t no_selections = selections.size();
-	const std::string header =
-	   no_selections == 1 ?
-	      _("Do you really want to delete this game?") :
-	      (boost::format(ngettext("Do you really want to delete this %d game?",
-	                              "Do you really want to delete these %d games?", no_selections)) %
-	       no_selections)
-	         .str();
-
-	std::string message = no_selections > 1 ? gamedata.filename_list : gamedata.filename;
-	message = (boost::format("%s\n%s") % header % message).str();
-
-	UI::WLMessageBox confirmationBox(
-	   this, ngettext("Confirm deleting file", "Confirm deleting files", no_selections), message,
-	   UI::WLMessageBox::MBoxType::kOkCancel);
-
-	if (confirmationBox.run<UI::Panel::Returncodes>() == UI::Panel::Returncodes::kOk) {
-		for (const uint32_t index : selections) {
-			const std::string& deleteme = load_or_save_.get_filename(index);
-			g_fs->fs_unlink(deleteme);
-		}
-		load_or_save_.fill_table();
-	}
 }
 
 void GameMainMenuSaveGame::pause_game(bool paused) {

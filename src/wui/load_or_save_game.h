@@ -54,15 +54,22 @@ public:
 
 	const std::string get_filename(int index) const;
 
+	UI::Button* delete_button() const {
+		return delete_;
+	}
+	void clicked_delete();
+
 private:
 	const std::string filename_list_string() const;
 	bool compare_date_descending(uint32_t, uint32_t);
 
+	UI::Panel* parent_;
 	UI::Table<uintptr_t const> table_;
 	FileType filetype_;
 	bool localize_autosave_;
 	std::vector<SavegameData> games_data_;
 	GameDetails game_details_;
+	UI::Button* delete_;
 
 	Widelands::Game& game_;
 };

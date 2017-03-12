@@ -59,7 +59,6 @@ private:
 
 	/// Updates buttons and text labels and returns whether a table entry is selected.
 	bool compare_date_descending(uint32_t, uint32_t);
-	void clicked_delete();
 
 	UI::Box main_box_;
 	UI::Box info_box_;

@@ -46,14 +46,13 @@ private:
 	void double_clicked();
 	void edit_box_changed();
 	void ok();
-	void delete_clicked();
 
 	bool save_game(std::string);
 	void pause_game(bool paused);
 
 	// UI coordinates and spacers
 	int32_t const padding_;  // Common padding between panels
-	int32_t const butw_;  // Button dimensions
+	int32_t const butw_;     // Button dimensions
 
 	UI::Box main_box_;
 	UI::Box info_box_;

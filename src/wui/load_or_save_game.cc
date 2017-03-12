@@ -73,7 +73,8 @@ LoadOrSaveGame::LoadOrSaveGame(UI::Panel* parent,
                                FileType filetype,
                                GameDetails::Style style,
                                bool localize_autosave)
-   : table_(parent,
+   : parent_(parent),
+     table_(parent,
             0,
             0,
             0,
@@ -85,6 +86,14 @@ LoadOrSaveGame::LoadOrSaveGame(UI::Panel* parent,
      localize_autosave_(localize_autosave),
      // Savegame description
      game_details_(parent, style),
+     delete_(new UI::Button(game_details()->button_box(),
+                            "delete",
+                            0,
+                            0,
+                            0,
+                            0,
+                            g_gr->images().get("images/ui_basic/but0.png"),
+                            _("Delete"))),
      game_(g) {
 	table_.add_column(130, _("Save Date"), _("The date this game was saved"), UI::Align::kLeft);
 	if (filetype_ != FileType::kGameSinglePlayer) {
@@ -124,6 +133,20 @@ LoadOrSaveGame::LoadOrSaveGame(UI::Panel* parent,
 	table_.set_sort_column(0);
 	table_.focus();
 	fill_table();
+
+	game_details_.button_box()->add(delete_, style == GameDetails::Style::kFsMenu ?
+	                                            UI::Box::Resizing::kAlign :
+	                                            UI::Box::Resizing::kFullSize,
+	                                UI::Align::kLeft);
+	delete_->set_enabled(false);
+
+	if (filetype_ == FileType::kReplay) {
+		delete_->set_tooltip(_("Delete this replay"));
+	} else {
+		delete_->set_tooltip(_("Delete this game"));
+	}
+
+	delete_->sigclicked.connect(boost::bind(&LoadOrSaveGame::clicked_delete, boost::ref(*this)));
 }
 
 const std::string LoadOrSaveGame::filename_list_string() const {
@@ -198,6 +221,52 @@ void LoadOrSaveGame::select_by_name(const std::string& name) {
 
 const std::string LoadOrSaveGame::get_filename(int index) const {
 	return games_data_[table_.get(table_.get_record(index))].filename;
+}
+
+void LoadOrSaveGame::clicked_delete() {
+	if (!has_selection()) {
+		return;
+	}
+	std::set<uint32_t> selections = table().selections();
+	const SavegameData& gamedata = *entry_selected();
+	size_t no_selections = selections.size();
+	std::string header = "";
+	if (filetype_ == FileType::kReplay) {
+		header = no_selections == 1 ?
+		            _("Do you really want to delete this replay?") :
+		            /** TRANSLATORS: Used with multiple replays, 1 replay has a separate string. */
+		            (boost::format(ngettext("Do you really want to delete this %d replay?",
+		                                    "Do you really want to delete these %d replays?",
+		                                    no_selections)) %
+		             no_selections)
+		               .str();
+	} else {
+		header = no_selections == 1 ?
+		            _("Do you really want to delete this game?") :
+		            /** TRANSLATORS: Used with multiple games, 1 game has a separate string. */
+		            (boost::format(ngettext("Do you really want to delete this %d game?",
+		                                    "Do you really want to delete these %d games?",
+		                                    no_selections)) %
+		             no_selections)
+		               .str();
+	}
+	std::string message = no_selections > 1 ? gamedata.filename_list : gamedata.filename;
+	message = (boost::format("%s\n%s") % header % message).str();
+
+	UI::WLMessageBox confirmationBox(
+	   parent_, ngettext("Confirm deleting file", "Confirm deleting files", no_selections), message,
+	   UI::WLMessageBox::MBoxType::kOkCancel);
+
+	if (confirmationBox.run<UI::Panel::Returncodes>() == UI::Panel::Returncodes::kOk) {
+		for (const uint32_t index : selections) {
+			const std::string& deleteme = get_filename(index);
+			g_fs->fs_unlink(deleteme);
+			if (filetype_ == FileType::kReplay) {
+				g_fs->fs_unlink(deleteme + WLGF_SUFFIX);
+			}
+		}
+		fill_table();
+	}
 }
 
 /**
