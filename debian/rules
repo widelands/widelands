@@ -31,7 +31,7 @@ override_dh_auto_install:
 	# Not doing so would violate the Debian Policy, preventing the package to enter the official repositories
 	# Skip this part for our packages, since we use the embedded fonts :/
 	# rm -r debian/tmp/usr/share/games/widelands/data/i18n/fonts/amiri
-	# ln -s /usr/share/fonts/opentype/fonts-hosny-amiri debian/tmp/usr/share/games/widelands/data/i18n/fonts
+	# ln -s /usr/share/fonts/opentype/fonts-hosny-amiri debian/tmp/usr/share/games/widelands/data/i18n/fonts/amiri
 	# rm -r debian/tmp/usr/share/games/widelands/data/i18n/fonts/DejaVu
 	# ln -s /usr/share/fonts/truetype/dejavu debian/tmp/usr/share/games/widelands/data/i18n/fonts/DejaVu
 	# rm -r debian/tmp/usr/share/games/widelands/data/i18n/fonts/MicroHei
@@ -68,8 +68,9 @@ override_dh_auto_install:
 	#  rm debian/tmp/usr/$${b} ;\
 	# done
 	# Move the main binary to the right location (no idea why it's misplaced)
-	# ... but we want to place them in the right location so that the .install files work
 	mkdir debian/tmp/usr/games
+	# ... but we want to place them in the right location so that the .install files work
+	# mv debian/tmp/usr/widelands debian/tmp/usr/games
 	for b in wl_map_info wl_map_object_info wl_render_richtext widelands ; do \
 	  mv debian/tmp/usr/$${b} debian/tmp/usr/games ;\
 	done
@@ -81,5 +82,5 @@ override_dh_install:
 	dh_install --fail-missing
 
 # Just build the current trunk, don't replace with any potentially newer versions.
-#get-orig-source:
+# get-orig-source:
 #	uscan --verbose --force-download
