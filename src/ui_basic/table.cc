@@ -71,9 +71,7 @@ Table<void*>::Table(Panel* const parent,
      sort_descending_(rowtype == TableRows::kSingleDescending ||
                       rowtype == TableRows::kMultiDescending),
      flexible_column_(std::numeric_limits<size_t>::max()),
-     is_multiselect_(rowtype == TableRows::kMulti || rowtype == TableRows::kMultiDescending),
-     ctrl_down_(false),
-     shift_down_(false) {
+	  is_multiselect_(rowtype == TableRows::kMulti || rowtype == TableRows::kMultiDescending) {
 	set_thinks(false);
 	set_can_focus(true);
 	scrollbar_filler_button_->set_visible(false);
@@ -350,24 +348,10 @@ void Table<void*>::draw(RenderTarget& dst) {
  * handle key presses
  */
 bool Table<void*>::handle_key(bool down, SDL_Keysym code) {
-	if (is_multiselect_) {
-		switch (code.sym) {
-		case SDLK_LSHIFT:
-		case SDLK_RSHIFT:
-			shift_down_ = down;
-			break;
-		case SDLK_LCTRL:
-		case SDLK_RCTRL:
-			ctrl_down_ = down;
-			break;
-		default:
-			break;
-		}
-	}
 	if (down) {
 		switch (code.sym) {
 		case SDLK_a:
-			if (is_multiselect_ && ctrl_down_ && !empty()) {
+			if (is_multiselect_ && (code.mod & KMOD_CTRL) && !empty()) {
 				multiselect_.clear();
 				for (uint32_t i = 0; i < size(); ++i) {
 					toggle_entry(i);
@@ -424,7 +408,7 @@ bool Table<void*>::handle_mousepress(uint8_t const btn, int32_t, int32_t const y
 		}
 
 		// Check if doubleclicked
-		if (!ctrl_down_ && !shift_down_ && time - real_last_click_time < DOUBLE_CLICK_INTERVAL &&
+		if (!(SDL_GetModState() & (KMOD_CTRL | KMOD_SHIFT)) && time - real_last_click_time < DOUBLE_CLICK_INTERVAL &&
 		    last_selection_ == selection_ && selection_ != no_selection_index()) {
 			double_clicked(selection_);
 		}
@@ -492,7 +476,7 @@ void Table<void*>::select(const uint32_t i) {
 void Table<void*>::multiselect(uint32_t row) {
 	if (is_multiselect_) {
 		// Ranged selection with Shift
-		if (shift_down_) {
+		if (SDL_GetModState() & KMOD_SHIFT) {
 			multiselect_.clear();
 			if (has_selection()) {
 				const uint32_t last_selected = selection_index();
@@ -507,7 +491,7 @@ void Table<void*>::multiselect(uint32_t row) {
 			}
 		} else {
 			// Single selection without Ctrl
-			if (!ctrl_down_) {
+			if (!(SDL_GetModState() & KMOD_CTRL)) {
 				multiselect_.clear();
 			}
 			select(toggle_entry(row));
