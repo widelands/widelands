@@ -486,6 +486,7 @@ void Table<void*>::multiselect(uint32_t row) {
 					toggle_entry(i);
 				}
 				select(last_selected);
+				selected(last_selected);
 			} else {
 				select(toggle_entry(row));
 			}
