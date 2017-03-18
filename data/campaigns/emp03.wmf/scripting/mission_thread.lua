@@ -270,30 +270,30 @@ function mission_thread()
    scroll_to_field(sea,5)
 
    campaign_message_box(diary_page_1)
-   sleep(400)
-
+   
    -- Show the sea
    p1:reveal_fields(sea:region(5))
    local ship = p1:place_ship(sea)
-   sleep(1000)
+   sleep(2000)
    campaign_message_box(diary_page_2)
-   -- Hide the sea after 5 seconds
-   run(function() sleep(5000) p1:hide_fields(sea:region(5)) end)
-
+   -- Hide the sea after 2 seconds
+   sleep(400)
+   ship:remove()
+   sleep(1000)
+   p1:hide_fields(sea:region(5))
+   sleep(500)
+   
    -- Back home
    include "map:scripting/starting_conditions.lua"
    scroll_to_field(sf)
    campaign_message_box(diary_page_3)
-   ship:remove()
-
    sleep(400)
-
-    campaign_message_box(saledus)
-	sleep(1000)
-    campaign_message_box(amalea)
-	sleep(1000)
-    campaign_message_box(saledus_1)
-    o = add_campaign_objective(obj_build_first_outpost)
+   campaign_message_box(saledus)
+   sleep(400)
+   campaign_message_box(amalea)
+   sleep(400)
+   campaign_message_box(saledus_1)
+   o = add_campaign_objective(obj_build_first_outpost)
 	
     while #p1:get_buildings("empire_outpost") < 1 do sleep(3249) end
     o.done = true
@@ -302,7 +302,7 @@ function mission_thread()
    campaign_message_box(saledus_2)
    o1 = add_campaign_objective(obj_build_quarry)
    campaign_message_box(amalea_1)
-   while #p1:get_buildings("empire_quarry") < 1 do sleep(2000) end
+   while #p1:get_buildings("empire_quarry") < 1 do sleep(3000) end
    o1.done = true
 
    -- quarry is now build but we need more basic infrastructure

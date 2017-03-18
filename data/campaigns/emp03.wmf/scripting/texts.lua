@@ -8,14 +8,14 @@ include "scripting/format_scenario.lua"
 function lutius(title, text)
    return speech("map:Lutius.png", "2F9131", title, text)
 end
-function saledus(title, text)
-   return speech("map:Saledus.png", "8F9131", title, text)
-end
 function saledus2(title, text)
    return speech("map:Saledus2.png", "8F9131", title, text)
 end
 function saledus3(title, text)
    return speech("map:Saledus3.png", "8F9131", title, text)
+end
+function saledus4(title, text)
+   return speech("map:Saledus.png", "8F9131", title, text)
 end
 function amalea1(title, text)
    return speech("map:Amalea.png", "AF7511", title, text)
@@ -213,7 +213,7 @@ diary_page_3 = {
 
 saledus = {
     title=_"No sight",
-    body= saledus(_"Saledus looks around nervously…",
+    body= saledus2(_"Saledus looks around nervously…",
        -- TRANSLATORS: Saledus
        _([[Sire, we do not know anything about the island. And I believe we are not safe as well. Probably it would be reasonable to build a tower to explore the island and add some military strength.]])),
  
@@ -500,13 +500,15 @@ saledus_7 = {
 
 saledus_8 = {
    title=_"Pleasing Neptune",
-   body= saledus3(_"Saledus is very sad and anxious…",
+   body= saledus4(_"Saledus is very sad and anxious…",
       -- TRANSLATORS: Saledus
       _([[Sire, we are making good progress to get home eventually. But there is one thing I need to talk about:]])
       .. paragraphdivider() ..
       _([[As we have seen the last time it is of great importance that the gods and especially Neptune are in a good mood to guard our journey.]])
       .. paragraphdivider() ..
-      _([[Unfortunately we lost our holy shrine of Neptune in the great storm, so we can't worship him well. I think we should search the whole region to see if we can recover the shrine with all its pieces.]]))
+      _([[Unfortunately we lost our holy shrine of Neptune in the great storm, so we can't worship him well. I think we should search the whole region to see if we can recover the shrine with all its 5 pieces.]])
+      .. paragraphdivider() ..
+      _([[To ease up the search I made some models of the pieces as you can see. You can give them to our soldiers and sailors to look for them.]]))
 	  .. new_objectives(obj_find_artifacts),
    posy=1,
 }
