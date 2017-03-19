@@ -570,7 +570,7 @@ struct ManagementData {
 	Widelands::Player::AiPersistentState* pd;
 
 	void mutate(uint32_t, PlayerNumber = 0);
-	void review(uint32_t, PlayerNumber, uint32_t, uint32_t, uint32_t, uint16_t, uint32_t);
+	void review(uint32_t, PlayerNumber, uint32_t, uint32_t, uint32_t, uint16_t, uint32_t, int16_t, int16_t);
 	void dump_data();
 	void initialize(uint8_t, bool reinitializing = false);
 	uint16_t new_neuron_id() {
@@ -701,7 +701,8 @@ private:
 		           uint32_t o60p,
 		           uint32_t cs,
 		           uint32_t land,
-		           uint32_t oland);
+		           uint32_t oland,
+		           uint32_t o60l);
 
 		Widelands::TeamNumber team_number;
 		bool is_enemy;
@@ -712,6 +713,7 @@ private:
 		uint32_t last_time_seen;
 		uint32_t players_land;
 		uint32_t old_players_land;
+		uint32_t old60_players_land;
 	};
 
 public:
@@ -725,7 +727,8 @@ public:
 	         uint32_t o60p,
 	         uint32_t cs,
 	         uint32_t land,
-	         uint32_t oland);
+	         uint32_t oland,
+	         uint32_t o60l);
 	void recalculate_team_power();
 
 	// This is strength of player plus third of strength of other members of his team
@@ -735,6 +738,7 @@ public:
 	uint32_t get_old60_player_power(Widelands::PlayerNumber pn);
 	uint32_t get_player_land(Widelands::PlayerNumber pn);
 	uint32_t get_old_player_land(Widelands::PlayerNumber pn);
+	uint32_t get_old60_player_land(Widelands::PlayerNumber pn);
 	uint32_t get_visible_enemies_power(uint32_t);
 	uint32_t get_enemies_average_power();
 	uint32_t get_enemies_average_land();

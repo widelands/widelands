@@ -37,17 +37,6 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 
 	update_player_stat();
 
-	// printf (" %d: strength: %3d -> %3d ->%3d\n",
-	// pn, player_statistics.get_old60_player_power(pn), player_statistics.get_old_player_power(pn),
-	// player_statistics.get_player_power(pn));
-
-	// printf ("%d : visible enemies (%d) power: %3d -> %3d, any seen at %u\n",
-	// pn,
-	// player_statistics.enemies_seen_lately_count(gametime),
-	// player_statistics.get_old_visible_enemies_power(gametime),
-	// player_statistics.get_visible_enemies_power(gametime),
-	// player_statistics.enemy_last_seen());
-
 	// defining treshold ratio of own_strength/enemy's strength
 	uint32_t treshold_ratio = 100;
 	if (type_ == DefaultAI::Type::kNormal) {
@@ -168,21 +157,6 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 			general_score = -1;
 		}
 	} 
-
-	//// Also we should have at least some training sites to be more willing to attack
-	//// Of course, very weak AI can have only one trainingsite so will be always penalized by this
-	//training_score += management_data.neuron_pool[23].get_result_safe(
-	                     //(ts_basic_count_ + ts_advanced_count_ - ts_without_trainers_) * 4) /
-	                  //10;
-
-	//// some black box magic related to growth
-	//training_score +=
-	   //management_data.f_neuron_pool[6].get_result(
-	      //player_statistics.get_player_power(pn) > player_statistics.get_old_player_power(pn),
-	      //player_statistics.get_visible_enemies_power(pn) >
-	         //player_statistics.get_old_visible_enemies_power(pn),
-	      //player_statistics.get_player_power(pn) - player_statistics.get_old_player_power(pn) > 0) *
-	   //std::abs(management_data.get_military_number_at(63)) / 10;
 
 	const bool strong_enough = player_statistics.strong_enough(pn);
 
@@ -331,6 +305,7 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 					inputs[28] = general_score * 3;
 					inputs[29] = general_score;
 					inputs[30] = ((mines_per_type[iron_ore_id].in_construction + mines_per_type[iron_ore_id].finished) > 0) ? 1 : -1;
+					inputs[31] = (player_statistics.get_player_power(pn) > player_statistics.get_old60_player_power(pn) + 5) ? 2 : -2;
 	
 					site->second.score = 0;
 					for (uint8_t j = 0; j < f_neuron_bit_size; j +=1) {
@@ -616,6 +591,17 @@ bool DefaultAI::check_trainingsites(uint32_t gametime) {
 			inputs[15] = -2;	
 			inputs[16] = (player_statistics.get_player_power(pn) < player_statistics.get_old60_player_power(pn)) ? 1 : 0;		
 			inputs[17] = (player_statistics.get_player_power(pn) < player_statistics.get_old_player_power(pn)) ? 1 : 0;
+			inputs[18] = (player_statistics.get_player_power(pn) < player_statistics.get_old60_player_power(pn) + 4) ? 1 : 0;		
+			inputs[19] = (player_statistics.get_player_power(pn) < player_statistics.get_old_player_power(pn) + 1) ? 1 : 0;
+			inputs[20] = (player_statistics.get_player_power(pn) < player_statistics.get_old60_player_power(pn) + 4) ? 0 : 1;		
+			inputs[21] = (player_statistics.get_player_power(pn) < player_statistics.get_old_player_power(pn) + 2) ? 0 : 1;
+			//NOCOM
+			if (player_statistics.any_enemy_seen_lately(gametime)) {
+				inputs[20] = (player_statistics.get_player_power(pn) < player_statistics.get_old60_player_power(pn) + 4) ? 0 : 1;		
+				inputs[21] = (player_statistics.get_player_power(pn) < player_statistics.get_old_player_power(pn) + 2) ? 0 : 1;
+				inputs[22] = (player_statistics.get_player_power(pn) < player_statistics.get_old60_player_power(pn) + 4) ? 1 : 0;		
+				inputs[23] = (player_statistics.get_player_power(pn) < player_statistics.get_old_player_power(pn) + 2) ? 1 : 0;
+			}
 			
 			int16_t tmp_score = 0;
 			for (uint8_t i = 0; i < f_neuron_bit_size; i +=1) {
@@ -932,54 +918,11 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 	inputs[74] = (gametime < 15 * 60 * 1000) ? (size - 1) * -3 : 0;
 	inputs[75] = (gametime < 30 * 60 * 1000) ? (size - 1) * -3 : 0;
 	inputs[76] = (gametime < 45 * 60 * 1000) ? (size - 1) * -3 : 0;
-					//(player_statistics.get_player_land(pn) < player_statistics.get_enemies_max_land() / 2) ? 3 : 0;
+	inputs[77] = (player_statistics.get_player_power(pn) < player_statistics.get_old60_player_power(pn) + 2) ? 1 : 0;
+	inputs[78] = (player_statistics.get_player_power(pn) > player_statistics.get_old60_player_power(pn) + 5) ? 1 : 0;
+	inputs[79] = (player_statistics.get_player_power(pn) < player_statistics.get_old60_player_power(pn) + 10) ? 1 : 0;
+	inputs[80] = (player_statistics.get_player_power(pn) > player_statistics.get_old60_player_power(pn) + 20) ? 1 : 0;
 
-	//inputs[68] = (!player_statistics.any_enemy_seen_lately(gametime)) *
-					//(player_statistics.get_player_land(pn) < player_statistics.get_old_player_land(pn) + 10) ? 3 : 0;
-	//inputs[69] = (!player_statistics.any_enemy_seen_lately(gametime)) *
-					//(player_statistics.get_player_land(pn) < player_statistics.get_old_player_land(pn) + 10) ? 2 : 0;
-
-	//inputs[70] = (player_statistics.get_player_power(pn) < player_statistics.get_old60_player_power(pn)) ? 2 : 0;
-	//inputs[71] = (player_statistics.get_player_power(pn) > player_statistics.get_old60_player_power(pn)) ? 2 : 0;
-	//inputs[72] = (!player_statistics.any_enemy_seen_lately(gametime)) *
-					//(player_statistics.get_player_power(pn) < player_statistics.get_old60_player_power(pn)) ? 2 : 0;
-	//inputs[73] = (!player_statistics.any_enemy_seen_lately(gametime)) *
-					//(player_statistics.get_player_power(pn) > player_statistics.get_old60_player_power(pn)) ? 2 : 0;
-
-	//inputs[74] = (player_statistics.get_player_land(pn) < player_statistics.get_enemies_average_land()) ? 3 : 0;
-	//inputs[75] = (player_statistics.get_player_land(pn) > player_statistics.get_enemies_average_land()) ? 3 : 0;
-
-	//inputs[76] = (!player_statistics.any_enemy_seen_lately(gametime)) *
-					//(player_statistics.get_player_land(pn) < player_statistics.get_enemies_average_land()) ? 2 : 0;
-	//inputs[77] = (!player_statistics.any_enemy_seen_lately(gametime)) *
-					//(player_statistics.get_player_land(pn) > player_statistics.get_enemies_average_land()) ? 2 : 0;
-
-	//inputs[78] = (soldier_status_ == SoldiersStatus::kBadShortage) ? -3 : 0;
-	//inputs[79] = (soldier_status_ == SoldiersStatus::kShortage) ? -2 : 0;
-
-	//inputs[80] = (!player_statistics.any_enemy_seen_lately(gametime)) *
-				//(player_statistics.get_player_land(pn) < player_statistics.get_old_player_land(pn) * 110 / 100) ? 1 : 0;
-	//inputs[81] = (!player_statistics.any_enemy_seen_lately(gametime)) *
-				//(player_statistics.get_player_land(pn) < player_statistics.get_old_player_land(pn) * 105 / 100) ? 2 : 0;
-
-	//inputs[82] = (player_statistics.get_player_land(pn) < player_statistics.get_enemies_max_land()) ? 1 : 0;
-	//inputs[83] = (player_statistics.get_player_land(pn) < player_statistics.get_enemies_max_land()) ? 3 : 0;
-	//inputs[84] = (player_statistics.get_player_land(pn) < player_statistics.get_enemies_max_land() * 2) ? 2 : 0;
-	//inputs[85] = (player_statistics.get_player_land(pn) < player_statistics.get_enemies_max_land() / 2) ? 2 : 0;
-	//inputs[86] = (!player_statistics.any_enemy_seen_lately(gametime)) * (spots_ < kSpotsTooLittle) ? +3 : 0;
-	//inputs[87] = (player_statistics.any_enemy_seen_lately(gametime)) * (spots_ < kSpotsTooLittle) ? +3 : 0;
-	//inputs[88] = ((mines_per_type[iron_ore_id].in_construction + mines_per_type[iron_ore_id].finished) == 0) ? +3 : 0;
-	//inputs[89] = ((mines_per_type[iron_ore_id].in_construction + mines_per_type[iron_ore_id].finished) == 0) ? +1 : 0;
-	//inputs[90] = (needs_boost_economy) ? -3 : 0;
-	//inputs[91] = (needs_boost_economy) ? -6 : 0;
-	//inputs[92] = (needs_boost_economy) ? -1 : 0;
-	//inputs[93] = (needs_boost_economy) ? -3 : 0;
-	//inputs[94] = (!player_statistics.any_enemy_seen_lately(gametime)) *
-				//(player_statistics.get_player_land(pn) < player_statistics.get_old_player_land(pn) * 110 / 100) ? 3 : 0;
-	//inputs[95] = (!player_statistics.any_enemy_seen_lately(gametime)) *
-				//(player_statistics.get_player_land(pn) < player_statistics.get_old_player_land(pn) * 105 / 100) ? 4 : 0;
-
-	
 	int32_t final_score = 0;
 	for (int i = 0; i < f_neuron_bit_size; i = i + 1) {
 		if (management_data.f_neuron_pool[56].get_position(i)) {
