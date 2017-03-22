@@ -71,7 +71,11 @@ void RoadProgram::add_road(const int renderbuffer_width,
 	// points for the quad that will make the road.
 	const float road_thickness_x = (-delta_y / vector_length) * kRoadThicknessInPixels * scale;
 	const float road_thickness_y = (delta_x / vector_length) * kRoadThicknessInPixels * scale;
-
+	log("Road start %d, %d\n", start.fcoords.x, start.fcoords.y);
+	log("Road end %d, %d\n", end.fcoords.x, end.fcoords.y);
+	if (start.owner == nullptr){
+		return;
+	}
 	assert(start.owner != nullptr || end.owner != nullptr);
 
 	Widelands::Player* visible_owner = start.owner;
