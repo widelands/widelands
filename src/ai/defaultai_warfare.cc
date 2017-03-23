@@ -693,7 +693,6 @@ bool DefaultAI::check_militarysites(uint32_t gametime) {
 	usefullness_score += (ms->get_size() - 2) * std::abs(management_data.get_military_number_at(77) / 2);
 	
 	const int32_t dism_treshold = 20 - management_data.get_military_number_at(89) * 2 / 3;
-	//const int32_t pref_treshold = dism_treshold + std::abs(management_data.get_military_number_at(90) * 3 / 2);
 	const int32_t pref_treshold_upper = dism_treshold + std::abs(management_data.get_military_number_at(90) * 35 / 20);
 	const int32_t pref_treshold_lower = dism_treshold + std::abs(management_data.get_military_number_at(90) * 25 / 20);
 	//printf ("pref tresholds %d  %d\n", pref_treshold_lower, pref_treshold_upper);
@@ -922,6 +921,20 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 	inputs[78] = (player_statistics.get_player_power(pn) > player_statistics.get_old60_player_power(pn) + 5) ? 1 : 0;
 	inputs[79] = (player_statistics.get_player_power(pn) < player_statistics.get_old60_player_power(pn) + 10) ? 1 : 0;
 	inputs[80] = (player_statistics.get_player_power(pn) > player_statistics.get_old60_player_power(pn) + 20) ? 1 : 0;
+	if(!player_statistics.any_enemy_seen_lately(gametime)){
+		inputs[81] = (player_statistics.get_player_land(pn) * 30 / player_statistics.get_old60_player_land(pn)) - 30;
+		inputs[82] = (player_statistics.get_old60_player_land(pn) * 30 / player_statistics.get_player_land(pn)) - 30;
+	} else {
+		inputs[83] = (player_statistics.get_player_land(pn) * 30 / player_statistics.get_old60_player_land(pn)) - 30;
+		inputs[84] = (player_statistics.get_old60_player_land(pn) * 30 / player_statistics.get_player_land(pn)) - 30;	
+	}
+	inputs[85] = -msites_in_constr();
+	inputs[86] = -msites_in_constr() / 2;
+	inputs[87] = -msites_in_constr() / 3;
+	inputs[88] = ((msites_in_constr() > 2) && (msites_in_constr() >  msites_built() / 2)) ? -1 : 0;
+	inputs[89] = ((msites_in_constr() > 2) && (msites_in_constr() >  msites_built() / 3)) ? -1 : 0;
+	inputs[90] = ((msites_in_constr() > 2) && (msites_in_constr() >  msites_built() / 4)) ? -1 : 0;
+	inputs[91] = -msites_in_constr() / 4;
 
 	int32_t final_score = 0;
 	for (int i = 0; i < f_neuron_bit_size; i = i + 1) {

@@ -1760,15 +1760,20 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 	inputs[79] = 25;
 	inputs[80] = std::max(inputs[10],  std::max(inputs[20], inputs[30]));
 	inputs[81] = std::max(inputs[5],  std::max(inputs[15], inputs[25]));	
-	inputs[82] = std::max(inputs[35],  std::max(inputs[40], inputs[45]));	
-	//inputs[83] = kdecreasor;	
-	//inputs[84] = kdecreasor;	
-	//inputs[85] = kdecreasor;
+	inputs[82] = std::max(inputs[35],  std::max(inputs[40], inputs[45]));
+
+	if (field.unowned_iron_mines_nearby && (mines_per_type[iron_ore_id].in_construction + mines_per_type[iron_ore_id].finished) == 0) {
+		inputs[84] = std::abs(management_data.get_military_number_at(132));
+	}
+	if (field.unowned_iron_mines_nearby && (mines_per_type[iron_ore_id].in_construction + mines_per_type[iron_ore_id].finished) <= 1) {
+		inputs[85] = std::abs(management_data.get_military_number_at(133));
+	}
+
 	inputs[86] = management_data.get_military_number_at(120);	
 	inputs[87] = management_data.get_military_number_at(121);	
-	inputs[88] = std::abs(management_data.get_military_number_at(122));	
-	//inputs[89] = -kdecreasor;	
-	//inputs[90] = -kdecreasor;	
+	//inputs[88] = (player_statistics.get_player_land(pn) < player_statistics.get_old60_player_land(pn) * 115 / 100) ? conts_value : 0;
+	//inputs[89] = (player_statistics.get_player_land(pn) < player_statistics.get_old60_player_land(pn) * 120 / 100) ? conts_value : 0;	
+	//inputs[90] = (player_statistics.get_player_land(pn) < player_statistics.get_old60_player_land(pn) * 115 / 100) ? -conts_value : conts_value;
 	// Fneurons per situation
 	uint8_t applyied_neuron[6] = {255, 255, 255};  // just defaults, latter three are common for all
 	uint8_t multiplicator;
@@ -2060,7 +2065,7 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 	const PlayerNumber pn = player_number();
 	// -------------------------------------- new section here
 	// Inputs
-	bool inputs[f_neuron_bit_size] = {0};
+	bool inputs[2 * f_neuron_bit_size] = {0};
 	inputs[0] = (pow(msites_in_constr(), 2) > militarysites.size() + 2);
 	inputs[1] = !(pow(msites_in_constr(), 2) > militarysites.size() + 2);
 	inputs[2] = (highest_nonmil_prio_ > 18 + management_data.get_military_number_at(29) / 10);
@@ -2099,8 +2104,24 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 	         std::abs(management_data.get_military_number_at(69)) / 100);		
 	inputs[28] = player_statistics.strong_enough(pn);	
 	inputs[29] = !player_statistics.strong_enough(pn);
-	inputs[30] = player_statistics.get_modified_player_power(pn) > player_statistics.get_visible_enemies_power(pn);	
-	inputs[31] = player_statistics.get_modified_player_power(pn) <= player_statistics.get_visible_enemies_power(pn);
+	inputs[30] = (player_statistics.get_modified_player_power(pn) > player_statistics.get_visible_enemies_power(pn));	
+	inputs[31] = (player_statistics.get_modified_player_power(pn) <= player_statistics.get_visible_enemies_power(pn));
+	inputs[32] = (player_statistics.get_player_land(pn) < 500);
+	inputs[33] = (player_statistics.get_player_land(pn) < 700);
+	inputs[34] = (player_statistics.get_player_land(pn) < 900);
+	inputs[35] = (player_statistics.get_player_land(pn) < 1100);
+	inputs[32] = (player_statistics.get_player_land(pn) > 500);
+	inputs[33] = (player_statistics.get_player_land(pn) > 700);
+	inputs[34] = (player_statistics.get_player_land(pn) > 900);
+	inputs[35] = (player_statistics.get_player_land(pn) > 1100);
+	inputs[36] = (has_enough_space);
+	inputs[37] = !(has_enough_space);
+	inputs[38] = (has_enough_space);
+	inputs[39] = !(has_enough_space);
+	inputs[40] = (mines_per_type[iron_ore_id].total_count() == 0);
+	inputs[41] = !(mines_per_type[iron_ore_id].total_count() == 0);	
+	inputs[42] = (mines_per_type[iron_ore_id].total_count() == 0);
+	inputs[43] = !(mines_per_type[iron_ore_id].total_count() == 0);	
 
 	int16_t needs_boost_economy_score = 0;
 	int16_t increase_score_limit_score = 0;
@@ -2115,6 +2136,15 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 			}
 		if (management_data.f_neuron_pool[53].get_position(i)){
 			new_buildings_stop_score += (inputs[i]) ? 1 : -1;
+			}
+		if (management_data.f_neuron_pool[21].get_position(i)){
+			needs_boost_economy_score += (inputs[f_neuron_bit_size + i]) ? 1 : -1;
+			}
+		if (management_data.f_neuron_pool[22].get_position(i)){
+			increase_score_limit_score += (inputs[f_neuron_bit_size + i]) ? 1 : -1;
+			}
+		if (management_data.f_neuron_pool[23].get_position(i)){
+			new_buildings_stop_score += (inputs[f_neuron_bit_size + i]) ? 1 : -1;
 			}
 	}
 	
