@@ -49,7 +49,7 @@ EditorUnsetPortSpaceTool::EditorUnsetPortSpaceTool() : EditorTool(*this, *this) 
 
 int32_t EditorSetPortSpaceTool::handle_click_impl(const Widelands::World& world,
                                                   const Widelands::NodeAndTriangle<>& center,
-                                                  EditorInteractive&,
+                                                  EditorInteractive& eia,
                                                   EditorActionArgs* args,
                                                   Map* map) {
 	assert(0 <= center.node.x);
@@ -64,7 +64,7 @@ int32_t EditorSetPortSpaceTool::handle_click_impl(const Widelands::World& world,
 	do {
 		//  check if field is valid
 		if (editor_Tool_set_port_space_callback(mr.location(), *map)) {
-			map->set_port_space(mr.location(), true);
+			map->set_port_space(mr.location(), eia.egbase(), true);
 			Area<FCoords> a(mr.location(), 0);
 			map->recalc_for_field_area(world, a);
 			++nr;
@@ -84,7 +84,7 @@ int32_t EditorSetPortSpaceTool::handle_undo_impl(const Widelands::World& world,
 
 int32_t EditorUnsetPortSpaceTool::handle_click_impl(const Widelands::World& world,
                                                     const Widelands::NodeAndTriangle<>& center,
-                                                    EditorInteractive&,
+                                                    EditorInteractive& eia,
                                                     EditorActionArgs* args,
                                                     Map* map) {
 	assert(0 <= center.node.x);
@@ -99,7 +99,7 @@ int32_t EditorUnsetPortSpaceTool::handle_click_impl(const Widelands::World& worl
 	do {
 		//  check if field is valid
 		if (editor_Tool_set_port_space_callback(mr.location(), *map)) {
-			map->set_port_space(mr.location(), false);
+			map->set_port_space(mr.location(), eia.egbase(), false);
 			Area<FCoords> a(mr.location(), 0);
 			map->recalc_for_field_area(world, a);
 			++nr;

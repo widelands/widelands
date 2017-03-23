@@ -84,6 +84,15 @@ print_loading_message("┗━ took", function()
       items_per_row = 8,
    }
 
+   -- Internal immovables not to be placed by map editors.
+   world:new_editor_immovable_category{
+      name = "immovables_none",
+      descname = "None",
+      picture = "images/novalue.png",
+      items_per_row = 8,
+   }
+
+
    world:new_editor_critter_category {
       name = "critters_herbivores",
       -- TRANSLATORS: A category in the editor for placing animals on the map.
@@ -233,6 +242,9 @@ print_loading_message("┗━ took", function()
       include "world/immovables/trees/twine/init.lua"
       include "world/immovables/trees/umbrella_green/init.lua"
       include "world/immovables/trees/umbrella_red/init.lua"
+
+      -- Internal
+      include "world/immovables/portspace_anchor/init.lua"
    end)
 
    print_loading_message("┃    Critters", function()

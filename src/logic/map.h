@@ -454,12 +454,12 @@ public:
 
 	/// Port space specific functions
 	bool is_port_space(const Coords& c) const;
-	void set_port_space(Coords c, bool allowed);
+	void set_port_space(Coords c, Widelands::EditorGameBase& egbase, bool allowed);
 	const PortSpacesSet& get_port_spaces() const {
 		return port_spaces_;
 	}
 	std::vector<Coords> find_portdock(const Widelands::Coords& c) const;
-	bool allows_seafaring();
+	bool allows_seafaring(Widelands::EditorGameBase& egbase);
 
 	/// Checks whether there are any artifacts on the map
 	bool has_artifacts();

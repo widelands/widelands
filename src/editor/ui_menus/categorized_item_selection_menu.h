@@ -100,6 +100,10 @@ CategorizedItemSelectionMenu<DescriptionType, ToolType>::CategorizedItemSelectio
 
 	for (uint32_t category_index = 0; category_index < categories.size(); ++category_index) {
 		const Widelands::EditorCategory& category = categories.get(category_index);
+		// Internal immovables not to be placed by map editors.
+		if (category.name() == "immovables_none") {
+			continue;
+		}
 
 		std::vector<int> item_indices;
 		for (size_t j = 0; j < descriptions_.size(); ++j) {

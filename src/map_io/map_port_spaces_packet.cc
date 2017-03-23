@@ -52,7 +52,8 @@ void MapPortSpacesPacket::read(FileSystem& fs, EditorGameBase& egbase, bool, Map
 			Section& s2 = prof.get_safe_section("port_spaces");
 			for (uint16_t i = 0; i < num; ++i) {
 				map.set_port_space(
-				   get_safe_coords(std::to_string(static_cast<unsigned int>(i)), ext, &s2), true);
+				   get_safe_coords(std::to_string(static_cast<unsigned int>(i)), ext, &s2), egbase,
+				   true);
 			}
 		} else {
 			throw UnhandledVersionError("MapPortSpacesPacket", packet_version, kCurrentPacketVersion);

@@ -1306,11 +1306,37 @@ bool Map::is_port_space(const Coords& c) const {
 }
 
 /// Set or unset a space as port space
-void Map::set_port_space(Coords c, bool allowed) {
+void Map::set_port_space(Coords c, Widelands::EditorGameBase& egbase, bool allowed) {
+	const FCoords portspace_coords = get_fcoords(c);
+	assert(portspace_coords.field != nullptr);
+
 	if (allowed) {
 		port_spaces_.insert(c);
+
+		// Nuke any base immovables, e.g. trees
+		Widelands::BaseImmovable* old_immovable = portspace_coords.field->get_immovable();
+		MapObjectType old_immovable_type = MapObjectType::MAPOBJECT;
+		if (old_immovable != nullptr && old_immovable->descr().type() < MapObjectType::FLAG) {
+			old_immovable_type = old_immovable->descr().type();
+			old_immovable->remove(egbase);
+		}
+
+		// Add port space anchor immovable if there are no flags, roads or buildings
+		if (old_immovable_type < MapObjectType::FLAG) {
+			const World& world = egbase.world();
+			const DescriptionIndex imm_idx = world.get_immovable_index("portspace_anchor");
+			if (imm_idx != Widelands::INVALID_INDEX) {
+				egbase.create_immovable(c, imm_idx, MapObjectDescr::OwnerType::kWorld, nullptr);
+			}
+		}
 	} else {
 		port_spaces_.erase(c);
+
+		// Nuke the immovable representing the port space
+		Widelands::BaseImmovable* portspace_anchor = portspace_coords.field->get_immovable();
+		if (portspace_anchor != nullptr && portspace_anchor->descr().name() == "portspace_anchor") {
+			portspace_anchor->remove(egbase);
+		}
 	}
 }
 
@@ -1964,7 +1990,7 @@ This function checks if there are two ports that are reachable
 for each other - then the map is seafaring.
 =============
 */
-bool Map::allows_seafaring() {
+bool Map::allows_seafaring(Widelands::EditorGameBase& egbase) {
 	Map::PortSpacesSet port_spaces = get_port_spaces();
 	std::vector<Coords> portdocks;
 	std::set<Coords, Coords::OrderingFunctor> swim_coords;
@@ -1977,7 +2003,7 @@ bool Map::allows_seafaring() {
 
 		/* remove the port space if it is not longer valid port space */
 		if ((fc.field->get_caps() & BUILDCAPS_SIZEMASK) != BUILDCAPS_BIG || portdocks.empty()) {
-			set_port_space(c, false);
+			set_port_space(c, egbase, false);
 			continue;
 		}
 

@@ -473,7 +473,7 @@ void S2MapLoader::load_s2mf(Widelands::EditorGameBase& egbase) {
 			uint8_t c = *pc;
 			// Harbour buildspace & textures - Information taken from:
 			if (c & 0x40)
-				map_.set_port_space(Widelands::Coords(x, y), true);
+				map_.set_port_space(Widelands::Coords(x, y), egbase, true);
 			f->set_terrain_d(terrain_converter.lookup(worldtype_, c & 0x1f));
 		}
 
@@ -490,7 +490,7 @@ void S2MapLoader::load_s2mf(Widelands::EditorGameBase& egbase) {
 			// Harbour buildspace & textures - Information taken from:
 			// http://bazaar.launchpad.net/~xaser/s25rttr/s25edit/view/head:/WLD_reference.txt
 			if (c & 0x40)
-				map_.set_port_space(Widelands::Coords(x, y), true);
+				map_.set_port_space(Widelands::Coords(x, y), egbase, true);
 			f->set_terrain_r(terrain_converter.lookup(worldtype_, c & 0x1f));
 		}
 
@@ -1058,7 +1058,7 @@ void S2MapLoader::postload_fix_conversion(Widelands::EditorGameBase& egbase) {
 		if ((nc & Widelands::BUILDCAPS_SIZEMASK) != Widelands::BUILDCAPS_BIG ||
 		    map_.find_portdock(fc).empty()) {
 			log("Invalid port build space: ");
-			map_.set_port_space(c, false);
+			map_.set_port_space(c, egbase, false);
 
 			bool fixed = false;
 			Widelands::MapRegion<Widelands::Area<Widelands::FCoords>> mr(
@@ -1069,7 +1069,7 @@ void S2MapLoader::postload_fix_conversion(Widelands::EditorGameBase& egbase) {
 				   map_.get_max_nodecaps(world, const_cast<Widelands::FCoords&>(mr.location()));
 				if ((nc2 & Widelands::BUILDCAPS_SIZEMASK) == Widelands::BUILDCAPS_BIG &&
 				    (!map_.find_portdock(mr.location()).empty())) {
-					map_.set_port_space(Widelands::Coords(mr.location().x, mr.location().y), true);
+					map_.set_port_space(mr.location(), egbase, true);
 					fixed = true;
 				}
 			} while (mr.advance(map_) && !fixed);
