@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2014 by the Widelands Development Team
+ * Copyright (C) 2006-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -99,12 +99,12 @@ public:
 		BlitData texture;
 		BlitData mask;
 		RGBAColor blend;
-		FloatRect destination_rect;
+		Rectf destination_rect;
 	};
 
 	struct RectArguments {
 		RGBAColor color;
-		FloatRect destination_rect;
+		Rectf destination_rect;
 	};
 
 	// TODO(sirver): these are really triangle arguments.
@@ -113,14 +113,16 @@ public:
 	};
 
 	struct TerrainArguments {
-		TerrainArguments() {}
+		TerrainArguments() {
+		}
 
 		int gametime;
 		int renderbuffer_width;
 		int renderbuffer_height;
 		const DescriptionMaintainer<Widelands::TerrainDescription>* terrains;
 		FieldsToDraw* fields_to_draw;
-		FloatRect destination_rect;
+		float scale;
+		Rectf destination_rect;
 	};
 
 	// The union of all possible program arguments represents an Item that is
@@ -185,6 +187,5 @@ private:
 
 	DISALLOW_COPY_AND_ASSIGN(RenderQueue);
 };
-
 
 #endif  // end of include guard: WL_GRAPHIC_RENDER_QUEUE_H

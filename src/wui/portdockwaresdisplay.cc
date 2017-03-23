@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2011 by the Widelands Development Team
+ * Copyright (C) 2011-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -24,12 +24,11 @@
 #include "economy/expedition_bootstrap.h"
 #include "economy/portdock.h"
 #include "logic/player.h"
-#include "wui/waresdisplay.h"
-#include "wui/waresqueuedisplay.h"
+#include "wui/inputqueuedisplay.h"
 
 using Widelands::PortDock;
 using Widelands::Warehouse;
-using Widelands::WaresQueue;
+using Widelands::InputQueue;
 
 namespace {
 
@@ -37,55 +36,48 @@ namespace {
  * Display wares or workers that are waiting to be shipped from a port.
  */
 struct PortDockWaresDisplay : AbstractWaresDisplay {
-	PortDockWaresDisplay(Panel * parent, uint32_t width, PortDock & pd, Widelands::WareWorker type);
+	PortDockWaresDisplay(Panel* parent, uint32_t width, PortDock& pd, Widelands::WareWorker type);
 
 	std::string info_for_ware(Widelands::DescriptionIndex ware) override;
 
 private:
-	PortDock & portdock_;
+	PortDock& portdock_;
 };
 
-PortDockWaresDisplay::PortDockWaresDisplay
-	(Panel * parent, uint32_t width, PortDock & pd, Widelands::WareWorker type) :
-	AbstractWaresDisplay(parent, 0, 0, pd.owner().tribe(), type, false),
-	portdock_(pd)
-{
+PortDockWaresDisplay::PortDockWaresDisplay(Panel* parent,
+                                           uint32_t width,
+                                           PortDock& pd,
+                                           Widelands::WareWorker type)
+   : AbstractWaresDisplay(parent, 0, 0, pd.owner().tribe(), type, false), portdock_(pd) {
 	set_inner_size(width, 0);
 }
 
-std::string PortDockWaresDisplay::info_for_ware(Widelands::DescriptionIndex ware)
-{
+std::string PortDockWaresDisplay::info_for_ware(Widelands::DescriptionIndex ware) {
 	uint32_t count = portdock_.count_waiting(get_type(), ware);
 	return boost::lexical_cast<std::string>(count);
 }
 
-} // anonymous namespace
+}  // anonymous namespace
 
 /**
  * Create a panel that displays the wares or workers that are waiting to be shipped from a port.
  */
-AbstractWaresDisplay * create_portdock_wares_display
-	(UI::Panel * parent, uint32_t width, PortDock & pd, Widelands::WareWorker type)
-{
+AbstractWaresDisplay* create_portdock_wares_display(UI::Panel* parent,
+                                                    uint32_t width,
+                                                    PortDock& pd,
+                                                    Widelands::WareWorker type) {
 	return new PortDockWaresDisplay(parent, width, pd, type);
 }
 
 /// Create a panel that displays the wares and the builder waiting for the expedition to start.
-UI::Box * create_portdock_expedition_display(UI::Panel * parent, Warehouse & wh, InteractiveGameBase & igb)
-{
-	UI::Box & box = *new UI::Box(parent, 0, 0, UI::Box::Vertical);
+UI::Box*
+create_portdock_expedition_display(UI::Panel* parent, Warehouse& wh, InteractiveGameBase& igb) {
+	UI::Box& box = *new UI::Box(parent, 0, 0, UI::Box::Vertical);
 
-	// Add the wares queues.
-	for (WaresQueue* wq : wh.get_portdock()->expedition_bootstrap()->wares()) {
-		box.add(new WaresQueueDisplay(&box, 0, 0, igb, wh, wq, true), UI::Align::kLeft);
+	// Add the input queues.
+	for (InputQueue* wq : wh.get_portdock()->expedition_bootstrap()->queues()) {
+		box.add(new InputQueueDisplay(&box, 0, 0, igb, wh, wq, true));
 	}
-
-// TODO(unknown): Implement UI for Builder + Soldiers
-// UI::Box & workers = *new UI::Box(&box, 0, 0, UI::Box::Horizontal);
-// box.add(&workers, UI::Align::kLeft);
-
-// for (uint32_t i = 0; i < wh.get_expedition_workers().size(); ++i)
-// workers.add(icon of worker, UI::Align::kLeft);
 
 	return &box;
 }

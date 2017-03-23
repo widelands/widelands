@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007-2008, 2010 by the Widelands Development Team
+ * Copyright (C) 2007-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -42,29 +42,27 @@ struct MapObjectSaver;
  */
 struct MapObjectPacket {
 	struct LoaderSorter {
-		bool operator()
-			(MapObject::Loader * const a, MapObject::Loader * const b) const
-		{
+		bool operator()(MapObject::Loader* const a, MapObject::Loader* const b) const {
 			assert(a->get_object()->serial() != b->get_object()->serial());
 			return a->get_object()->serial() < b->get_object()->serial();
 		}
 	};
 
-	using LoaderSet = std::set<MapObject::Loader *, LoaderSorter>;
+	using LoaderSet = std::set<MapObject::Loader*, LoaderSorter>;
 	LoaderSet loaders;
 
 	~MapObjectPacket();
 
-	void read
-		(FileSystem &, EditorGameBase &, MapObjectLoader &,
-		 const WorldLegacyLookupTable& world_lookup_table,
-		 const TribesLegacyLookupTable& tribe_lookup_table);
+	void read(FileSystem&,
+	          EditorGameBase&,
+	          MapObjectLoader&,
+	          const WorldLegacyLookupTable& world_lookup_table,
+	          const TribesLegacyLookupTable& tribe_lookup_table);
 
 	void load_finish();
 
-	void write(FileSystem &, EditorGameBase &, MapObjectSaver  &);
+	void write(FileSystem&, EditorGameBase&, MapObjectSaver&);
 };
-
 }
 
 #endif  // end of include guard: WL_MAP_IO_MAP_OBJECT_PACKET_H

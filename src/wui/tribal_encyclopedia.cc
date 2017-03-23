@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016 by the Widelands Development Team
+ * Copyright (C) 2016-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -24,6 +24,7 @@
 #include <boost/format.hpp>
 
 #include "base/i18n.h"
+#include "logic/game_controller.h"
 #include "logic/map_objects/tribes/tribe_descr.h"
 #include "logic/player.h"
 #include "scripting/lua_coroutine.h"
@@ -33,24 +34,28 @@
 #include "wui/interactive_player.h"
 
 TribalEncyclopedia::TribalEncyclopedia(InteractivePlayer& parent,
-													UI::UniqueWindow::Registry& registry,
-													LuaInterface* const lua)
-	: EncyclopediaWindow(parent, registry, lua)
-{
+                                       UI::UniqueWindow::Registry& registry,
+                                       LuaInterface* const lua)
+   : EncyclopediaWindow(parent, registry, lua) {
 	const Widelands::TribeDescr& tribe = parent.player().tribe();
 	try {
 		std::unique_ptr<LuaTable> table(lua_->run_script("tribes/scripting/help/init.lua"));
 		std::unique_ptr<LuaCoroutine> cr(table->get_coroutine("func"));
 		cr->push_arg(tribe.name());
+		upcast(Widelands::Game, game, &parent.egbase());
+		if (game->game_controller()->get_game_type() == GameController::GameType::SINGLEPLAYER) {
+			cr->push_arg("singleplayer");
+		} else {
+			cr->push_arg("multiplayer");
+		}
 		cr->resume();
 		init(parent, cr->pop_table());
 	} catch (LuaError& err) {
 		log("Error loading script for tribal encyclopedia:\n%s\n", err.what());
 		UI::WLMessageBox wmb(
-					&parent,
-					_("Error!"),
-					(boost::format("Error loading script for tribal encyclopedia:\n%s") % err.what()).str(),
-					UI::WLMessageBox::MBoxType::kOk);
+		   &parent, _("Error!"),
+		   (boost::format("Error loading script for tribal encyclopedia:\n%s") % err.what()).str(),
+		   UI::WLMessageBox::MBoxType::kOk);
 		wmb.run<UI::Panel::Returncodes>();
 	}
 }

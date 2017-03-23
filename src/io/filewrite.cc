@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2015 by the Widelands Development Team
+ * Copyright (C) 2006-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -50,7 +50,7 @@ FileWrite::Pos FileWrite::get_pos() const {
 	return filepos_;
 }
 
-void FileWrite::set_pos(const Pos pos) {
+void FileWrite::set_pos(const Pos& pos) {
 	filepos_ = pos;
 }
 

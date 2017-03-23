@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2013 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -25,8 +25,8 @@
 #include <SDL.h>
 
 #include "graphic/image_cache.h"
-#include "notifications/notifications.h"
 #include "notifications/note_ids.h"
+#include "notifications/notifications.h"
 
 class AnimationManager;
 class RenderTarget;
@@ -57,7 +57,7 @@ public:
 	// Initializes with the given resolution if fullscreen is false, otherwise a
 	// window that fills the screen. The 'trace_gl' parameter gets passed on to
 	// 'Gl::initialize'.
-	enum class TraceGl {kNo, kYes};
+	enum class TraceGl { kNo, kYes };
 	void
 	initialize(const TraceGl& trace_gl, int window_mode_w, int window_mode_height, bool fullscreen);
 
@@ -70,14 +70,22 @@ public:
 	bool fullscreen();
 	void set_fullscreen(bool);
 
-	RenderTarget * get_render_target();
+	RenderTarget* get_render_target();
 	void refresh();
-	SDL_Window* get_sdlwindow() {return sdl_window_;}
+	SDL_Window* get_sdlwindow() {
+		return sdl_window_;
+	}
 
-	int max_texture_size() const {return max_texture_size_;}
+	int max_texture_size() const {
+		return max_texture_size_;
+	}
 
-	ImageCache& images() const {return *image_cache_.get();}
-	AnimationManager& animations() const {return *animation_manager_.get();}
+	ImageCache& images() const {
+		return *image_cache_.get();
+	}
+	AnimationManager& animations() const {
+		return *animation_manager_.get();
+	}
 
 	// Requests a screenshot being taken on the next frame.
 	void screenshot(const std::string& fname);
@@ -118,6 +126,6 @@ private:
 	std::string screenshot_filename_;
 };
 
-extern Graphic * g_gr;
+extern Graphic* g_gr;
 
 #endif  // end of include guard: WL_GRAPHIC_GRAPHIC_H

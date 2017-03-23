@@ -4,6 +4,7 @@
 # Translators:
 # adrien vigneron <adrienvigneron@ml1.net>, 2015
 # Bouchard Renaud <renaud.bouchard@gmail.com>, 2014
+# GunChleoc, 2016
 # Jaypad <ju-ju@nataju.fr>, 2015-2016
 # Pierre Salagnac <pierre.salagnac@free.fr>, 2007
 # Renaud Bouchard, 2016
@@ -12,8 +13,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-04-09 07:23+0000\n"
-"PO-Revision-Date: 2016-04-12 07:49+0000\n"
+"POT-Creation-Date: 2016-12-15 15:23+0000\n"
+"PO-Revision-Date: 2016-12-15 20:57+0000\n"
 "Last-Translator: Renaud Bouchard\n"
 "Language-Team: French (http://www.transifex.com/widelands/widelands/language/fr/)\n"
 "MIME-Version: 1.0\n"
@@ -229,7 +230,7 @@ msgid ""
 "latitude; farming thrives, berries are abundant, and fish plentiful. The "
 "small human population of this place never knew famine. You warlording "
 "bastards just couldn’t leave this little paradise in peace, could you?"
-msgstr "Entre la Suisse et la Finlande réside la mer des archipels. Cet endroit d'une incroyable beauté n'est ni terre, ni mer, mais les deux. D'une centaine de kilomètres, il n'y a pas moins de 50,000 îles et îlots, dont certains ne font pas plus que quelques acres. Le climat est assez doux pour cette latitude; les fermes prospèrent, les baies sont abondantes, et le poisson foisonnent. La petite population humaine de cet endroit n'ont jamais connues la famine. Même en tant qu'ignoble seigneur de guerre, vous n'auriez pas pu laisser ce petit paradis en paix ?  "
+msgstr "Entre la Suisse et la Finlande réside la mer des archipels. Cet endroit d'une incroyable beauté n'est ni terre, ni mer, mais les deux. D'une centaine de kilomètres, il n'y a pas moins de 50,000 îles et îlots, dont certains ne font pas plus que quelques acres. Le climat est assez doux pour cette latitude; les fermes prospèrent, les baies sont abondantes, et le poisson foisonnent. La petite population humaine de cet endroit n'ont jamais connues la famine. Même en tant qu'ignoble seigneur de guerre, vous n'auriez pas pu laisser ce petit paradis en paix ?"
 
 #: ../../data/maps/Archipelago_Sea.wmf/elemental:11
 msgid ""
@@ -334,7 +335,7 @@ msgid ""
 "reasonable reconstruction of the area delimited by Cortina d’Ampezzo in the "
 "north-east and Canazei in the south-west. If you have to be pitted in a duel"
 " to the death against your enemies, it may as well be in a beautiful place."
-msgstr ""
+msgstr "Le joyau des Alpes, la chaine des montagnes Dolomites a été déclaré au patrimoine mondial de l'humanité pour sa beauté primaire. Cette carte est une reproduction aussi fidèle que possible de la région découverte par Cortina d’Ampezzo au nord-est et Canazel au sud-ouest. Si vous devez être jeté dans un duel à mort avec vos ennemis, autant que cela soit dans un cadre de rêve."
 
 #: ../../data/maps/Dolomites_v2.wmf/elemental:11
 msgid ""
@@ -342,7 +343,7 @@ msgid ""
 "vertical. Use the little building space that you have wisely. A fortress at "
 "the mouth of a narrow mountain pass can be a formidable obstacle to an enemy"
 " army. Use the terrain to your advantage."
-msgstr ""
+msgstr "Il y a beaucoup de plateaux dans ces montagnes. Malheureusement, la plupart sont des falaises verticales. Utilisez le peu d'espace disponible avec sagesse. Une forteresse à l'entrée d'un col de montagne resserré peut devenir un formidable obstacle pour une armée ennemie. Utilisez le terrain à votre avantage. "
 
 #: ../../data/maps/Elven_Forests.wmf/elemental:8
 msgid "Elven Forests"
@@ -524,16 +525,19 @@ msgstr "Un autre barbare - édité par king_of_nowhere"
 #: ../../data/maps/Last_Bastion_v2.wmf/elemental:10
 msgid ""
 "The whimsical Gods didn’t answer our prayers. Instead, the increasing "
-"sunlight heated up the Earth thousandfold and melted glaciers and people "
+"sunlight heated up the Earth a thousandfold and melted glaciers and people "
 "were plunged into the deep. But now – high in the majestic mountains, on the"
 " last scrap of land – two surviving tribes are sheltering. Even though the "
 "Gods showed mercy and the climate thus turned cooler again, the water is "
 "still rising and rising. Onto the last secure place – the highest mountain "
 "range where the amount of gold and the space to live merely suffice for one "
 "tribe – only two opposite paths lead. But remember, be careful… this last "
-"living space is also a hard and small place to live. Don’t forget to take "
-"care of your timber supplies, you’ll need them."
-msgstr "Les dieux capricieux n'ont pas répondus à nos prières. À la place, le soleil devint des milliers de fois plus chaud, réchauffa la Terre et fît fondre les glaciers, plongeant les peuples dans les profondeurs. Mais maintenant, haut dans les majestueuses montagnes, sur le dernier petit morceau de terre, deux tribus survivantes s'abritent. Bien que les Dieux montrèrent de la pitié et que le climat redevint plus frais, l'eau continua à monter et monter. Seuls deux chemins opposés conduisent au dernier endroit sûr, la plus haute chaîne de montagnes où la quantité d'or et la place pour vivre ne suffisent que pour une tribu. Mais souvenez-vous, faites attention... ce dernier endroit où vivre est aussi un endroit petit et dur à vivre. N'oubliez pas de prendre soin de votre approvisionnement en bois, vous en aurez besoin."
+"living space is also a hard and small place to live."
+msgstr "Les dieux capricieux n'ont pas répondus à nos prières. A la place, les rayonnement augmentant réchauffèrent la terre un centenaire, fondant glacier et plongeant les gens dans les profondeurs. Mais maintenant, haut dans ces majestueuses montagnes, sur ce dernier morceau de terre - deux tribu survivantes ont trouvé abri. Malgré la clémence des dieux et un refroidissement du climat, l'eau monte encore et encore. Vers le dernier endroit sûr, le territoire de la plus haute montagne où l' or et l'espace ne sont suffisant que pour faire vivre une tribu. Seuls deux chemins opposés y mènent. Mais rappelez vous, soyez prudent... Ce dernier endroit habitable est aussi petit que difficile à vivre."
+
+#: ../../data/maps/Last_Bastion_v2.wmf/elemental:11
+msgid "Don’t forget to take care of your timber supplies, you’ll need them."
+msgstr "N'oubliez pas de prendre soin de votre réserve de troncs, vous en aurez besoin."
 
 #: ../../data/maps/Last_Survivors.wmf/elemental:8
 msgid "Last Survivors"
@@ -585,11 +589,15 @@ msgstr "Rendez-Vous"
 #: ../../data/maps/Rendez-Vous.wmf/elemental:10
 msgid ""
 "Only a small hill in the centre of the map connects these four competing "
-"tribes. Lead your army right away to this hill and build a giant stronghold "
-"as a sign of your superiority! Hint: In the centre is only space for one "
-"stronghold. Water can be found everywhere, so there is no need to send out "
-"geologists."
-msgstr "Seule une petite colline au centre de la carte relie ces quatre tribus en compétition. Menez votre armée droit sur cette colline et bâtissez une énorme place forte comme signe de votre supériorité ! Indice : au centre, il n'y a de la place que pour une seule place forte. Il y a de l'eau partout, donc il n'y a pas besoin d'envoyer de géologues."
+"tribes. Lead your army to this hill right away and build a giant stronghold "
+"as a sign of your superiority!"
+msgstr "Seule une petite colline au centre de la carte connecte ces quatres tribus en compétition. Menez votre armée directement à cette colline et batissez une forteresse géante en signe de votre supériorité !"
+
+#: ../../data/maps/Rendez-Vous.wmf/elemental:11
+msgid ""
+"There is space for only one stronghold in the centre. Water can be found "
+"everywhere, so there is no need to send out geologists."
+msgstr "Il n'y a de place que pour une forteresse au centre. L'eau peut être trouvée partout, vous n'avez pas besoin d'envoyer de géologues."
 
 #: ../../data/maps/River_Explorers.wmf/elemental:8
 msgid "River Explorers"
@@ -806,7 +814,7 @@ msgid ""
 "desperately searching for more resources to support their endlessly ongoing "
 "wars, would end up in this forgotten place at the same time and for the same"
 " well-known reason."
-msgstr "Lorsque le vent s´éleva et que les premières dunes se formèrent sur ces lagons jumeaux abandonnés, personne n'aurait pu s'attendre à ce que deux tribus cherchant désespérément davantage de ressources pour soutenir leurs guerres interminables n' arrivent à cet endroit oublié en même temps et pour la même raison. "
+msgstr "Lorsque le vent s´éleva et que les premières dunes se formèrent sur ces lagons jumeaux abandonnés, personne n'aurait pu s'attendre à ce que deux tribus cherchant désespérément davantage de ressources pour soutenir leurs guerres interminables n' arrivent à cet endroit oublié en même temps et pour la même raison."
 
 #: ../../data/maps/Twin_Lagoons_v2.wmf/elemental:11
 msgid ""
@@ -873,4 +881,4 @@ msgid ""
 " 4 players’ map, with a black AI to add a complication to the expansion of "
 "the other players, or you can play as a challenge with the black player "
 "against the other 4 (VERY difficult)."
-msgstr ""
+msgstr "Le joueur noir est entouré au centre sans ressources, il y a alors trois manières différentes de jouer cette carte: sans le joueur noir pour un jeu normal à 4, avec une IA noire pour rajouter de la difficulté à l'expansion des autres joueurs, ou vous pouvez jouer pour un gros challenge avec le joueur noir contre les 4 autres (TRES difficile)."

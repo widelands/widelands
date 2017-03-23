@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2008, 2011 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -33,11 +33,11 @@ namespace Widelands {
 class Objective {
 public:
 	Objective(const std::string& init_name)
-		: name_(init_name),
-		  descname_(init_name),
-		  descr_(_("This objective has no description.")),
-		  visible_(true),
-		  done_(false) {
+	   : name_(init_name),
+	     descname_(init_name),
+	     descr_(_("This objective has no description.")),
+	     visible_(true),
+	     done_(false) {
 	}
 
 	// Unique internal name of the objective.

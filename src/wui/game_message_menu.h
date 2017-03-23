@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2016 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -36,22 +36,22 @@ class InteractivePlayer;
 
 ///  Shows the not already fulfilled objectives.
 struct GameMessageMenu : public UI::UniqueWindow {
-	GameMessageMenu(InteractivePlayer &, UI::UniqueWindow::Registry &);
+	GameMessageMenu(InteractivePlayer&, UI::UniqueWindow::Registry&);
 
 	/// Shows a newly created message. Assumes that the message is not yet in
 	/// the list (the message was added to the queue after the last time think()
 	/// was executed.
-	void show_new_message(Widelands::MessageId, const Widelands::Message &);
+	void show_new_message(Widelands::MessageId, const Widelands::Message&);
 
-	enum Mode {Inbox, Archive};
+	enum Mode { Inbox, Archive };
 	void think() override;
 	bool handle_key(bool down, SDL_Keysym code) override;
 
 private:
-	enum Cols {ColTitle, ColType, ColStatus, ColTimeSent};
-	enum class ReadUnread: uint8_t {allMessages, readMessages, newMessages};
+	enum Cols { ColTitle, ColType, ColStatus, ColTimeSent };
+	enum class ReadUnread : uint8_t { allMessages, readMessages, newMessages };
 
-	InteractivePlayer & iplayer() const;
+	InteractivePlayer& iplayer() const;
 	void selected(uint32_t);
 	void double_clicked(uint32_t);
 
@@ -59,27 +59,30 @@ private:
 	bool compare_status(uint32_t a, uint32_t b);
 	bool compare_type(uint32_t a, uint32_t b);
 	bool compare_time_sent(uint32_t a, uint32_t b);
+	bool should_be_hidden(const Widelands::Message& message);
+
 	void archive_or_restore();
 	void toggle_mode();
 	void center_view();
 	void filter_messages(Widelands::Message::Type);
-	void toggle_filter_messages_button(UI::Button &, Widelands::Message::Type);
+	void toggle_filter_messages_button(UI::Button&, Widelands::Message::Type);
 	void set_filter_messages_tooltips();
 	std::string display_message_type_icon(Widelands::Message);
-	void update_record(UI::Table<uintptr_t>::EntryRecord & er, const Widelands::Message &);
+	void update_record(UI::Table<uintptr_t>::EntryRecord& er, const Widelands::Message&);
+	void update_archive_button_tooltip();
 
-	UI::Table<uintptr_t> * list;
+	UI::Table<uintptr_t>* list;
 	UI::MultilineTextarea message_body;
-	UI::Button * archivebtn_;
-	UI::Button * togglemodebtn_;
-	UI::Button * centerviewbtn_;
+	UI::Button* archivebtn_;
+	UI::Button* togglemodebtn_;
+	UI::Button* centerviewbtn_;
 	Mode mode;
 	// Buttons for message types
-	UI::Button * geologistsbtn_;
-	UI::Button * economybtn_;
-	UI::Button * seafaringbtn_;
-	UI::Button * warfarebtn_;
-	UI::Button * scenariobtn_;
+	UI::Button* geologistsbtn_;
+	UI::Button* economybtn_;
+	UI::Button* seafaringbtn_;
+	UI::Button* warfarebtn_;
+	UI::Button* scenariobtn_;
 	Widelands::Message::Type message_filter_;
 };
 

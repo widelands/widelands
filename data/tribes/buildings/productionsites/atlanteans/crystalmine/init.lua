@@ -44,9 +44,9 @@ tribes:new_productionsite_type {
    },
 
    inputs = {
-      atlanteans_bread = 10,
-      smoked_fish = 10,
-      smoked_meat = 6
+      { name = "smoked_fish", amount = 10 },
+      { name = "smoked_meat", amount = 6 },
+      { name = "atlanteans_bread", amount = 10 }
    },
    outputs = {
       "diamond",
@@ -69,7 +69,7 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start mining granite because ...
          descname = _"mining granite",
          actions = {
-            "return=skipped unless economy needs granite or economy needs quartz or economy needs diamond",
+            "return=skipped unless economy needs granite or economy needs quartz",
             "sleep=45000",
             "consume=smoked_fish,smoked_meat:2 atlanteans_bread:2",
             "animate=working 20000",
@@ -90,7 +90,7 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start mining quartz because ...
          descname = _"mining quartz",
          actions = {
-            "return=skipped unless economy needs granite or economy needs quartz or economy needs diamond",
+            "return=skipped unless economy needs granite or economy needs quartz",
             "sleep=45000",
             "consume=smoked_fish,smoked_meat:2 atlanteans_bread:2",
             "animate=working 20000",
@@ -108,7 +108,7 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start mining diamonds because ...
          descname = _"mining diamonds",
          actions = {
-            "return=skipped unless economy needs granite or economy needs quartz or economy needs diamond",
+            "return=skipped unless economy needs granite or economy needs diamond",
             "sleep=45000",
             "consume=smoked_fish,smoked_meat:2 atlanteans_bread:2",
             "animate=working 20000",

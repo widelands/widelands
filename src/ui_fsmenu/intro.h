@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2016 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,8 +20,8 @@
 #ifndef WL_UI_FSMENU_INTRO_H
 #define WL_UI_FSMENU_INTRO_H
 
-#include "ui_fsmenu/base.h"
 #include "ui_basic/textarea.h"
+#include "ui_fsmenu/base.h"
 
 /**
  * Fullscreen Menu with Splash Screen (at the moment).
@@ -33,9 +33,9 @@ public:
 	FullscreenMenuIntro();
 
 protected:
-	bool handle_mousepress  (uint8_t btn, int32_t x, int32_t y) override;
-	bool handle_mouserelease(uint8_t btn, int32_t x, int32_t y) override;
+	bool handle_mousepress(uint8_t btn, int32_t x, int32_t y) override;
 	bool handle_key(bool down, SDL_Keysym) override;
+
 private:
 	UI::Textarea message_;
 };

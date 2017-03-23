@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007-2011 by the Widelands Development Team
+ * Copyright (C) 2007-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -40,13 +40,14 @@
  */
 class StreamWrite {
 public:
-	explicit StreamWrite() {}
+	explicit StreamWrite() {
+	}
 	virtual ~StreamWrite();
 
 	/**
 	 * Write a number of bytes to the stream.
 	 */
-	virtual void data(const void * const write_data, const size_t size) = 0;
+	virtual void data(const void* const write_data, const size_t size) = 0;
 
 	/**
 	 * Make sure all data submitted so far is written to disk.
@@ -57,11 +58,15 @@ public:
 	virtual void flush();
 
 	// TODO(unknown): implement an overloaded method that accepts fmt as std::string
-	void print_f(char const *, ...) __attribute__((format(printf, 2, 3)));
+	void print_f(char const*, ...) __attribute__((format(printf, 2, 3)));
 
-	void signed_8  (int8_t const x) {data(&x, 1);}
-	void unsigned_8(uint8_t const x) {data(&x, 1);}
-	void signed_16 (int16_t const x) {
+	void signed_8(int8_t const x) {
+		data(&x, 1);
+	}
+	void unsigned_8(uint8_t const x) {
+		data(&x, 1);
+	}
+	void signed_16(int16_t const x) {
 		int16_t const y = little_16(x);
 		data(&y, 2);
 	}
@@ -69,7 +74,7 @@ public:
 		uint16_t const y = little_16(x);
 		data(&y, 2);
 	}
-	void   signed_32(int32_t const x) {
+	void signed_32(int32_t const x) {
 		uint32_t const y = little_32(x);
 		data(&y, 4);
 	}
@@ -77,17 +82,31 @@ public:
 		uint32_t const y = little_32(x);
 		data(&y, 4);
 	}
-	void string(const std::string & str) {
+	void float_32(const float x) {
+		uint32_t y;
+		memcpy(&y, &x, 4);
+		y = little_32(y);
+		data(&y, 4);
+	}
+	void string(const std::string& str) {
 		data(str.c_str(), str.size() + 1);
 	}
 
 	//  Write strings with    null terminator.
-	void c_string(char        const * const x) {data(x,         strlen(x) + 1);}
-	void c_string(const std::string &       x) {data(x.c_str(), x.size()  + 1);}
+	void c_string(char const* const x) {
+		data(x, strlen(x) + 1);
+	}
+	void c_string(const std::string& x) {
+		data(x.c_str(), x.size() + 1);
+	}
 
 	//  Write strings without null terminator.
-	void text   (char        const * const x) {data(x,         strlen(x));}
-	void text   (const std::string &       x) {data(x.c_str(), x.size());}
+	void text(char const* const x) {
+		data(x, strlen(x));
+	}
+	void text(const std::string& x) {
+		data(x.c_str(), x.size());
+	}
 
 private:
 	DISALLOW_COPY_AND_ASSIGN(StreamWrite);

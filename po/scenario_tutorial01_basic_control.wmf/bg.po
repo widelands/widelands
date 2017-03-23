@@ -1,15 +1,15 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2016 Widelands Development Team
+# Copyright (C) 2005-2017 Widelands Development Team
 # 
 # Translators:
 # Любомир Василев, 2015-2016
-# Любомир Василев, 2016
+# Любомир Василев, 2016-2017
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-04-02 18:37+0000\n"
-"PO-Revision-Date: 2016-04-03 08:57+0000\n"
+"POT-Creation-Date: 2017-03-05 10:46+0000\n"
+"PO-Revision-Date: 2017-03-06 07:10+0000\n"
 "Last-Translator: Любомир Василев\n"
 "Language-Team: Bulgarian (http://www.transifex.com/widelands/widelands/language/bg/)\n"
 "MIME-Version: 1.0\n"
@@ -251,7 +251,7 @@ msgid ""
 "Now you have split the road in two parts with a carrier each. This means "
 "less work for him and higher efficiency for us. You should therefore always "
 "place as many flags as possible on your roads."
-msgstr "Сега пътят е разделен на две части, като по всяка се движи един носач. Това означава по-малко работа за него и по-добра ефективност за нас. Затова трябва винаги да поставяте колкото може повече флагове на пътищата си"
+msgstr "Сега пътят е разделен на две части, като по всяка се движи един носач. Това означава по-малко работа за него и по-добра ефективност за нас. Затова трябва винаги да поставяте колкото може повече флагове на пътищата си."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:150
 msgid "Now we only have to wait till the hut is finished."
@@ -280,8 +280,8 @@ msgid ""
 msgstr "За да затворите прозореца, просто щракнете с десния бутон. Всички прозорци в Widelands могат да бъдат затворени по този начин, с изключение на тези с инструкции, като този. Опитайте!"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:169
-msgid "Lumberjack is Done"
-msgstr "Дърварят е готов"
+msgid "The Lumberjack’s Hut is Done"
+msgstr "Дърварската хижа е готова"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:172
 msgid ""
@@ -313,8 +313,8 @@ msgid ""
 msgstr "Има три начина за преместване на изгледа. Първият е да използвате стрелките на клавиатурата. Опитайте го."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:185
-msgid "Click the ‘OK’ button and then move the view using the cursor keys"
-msgstr "Натиснете бутона „Добре“ и преместете изгледа, използвайки стрелките на клавиатурата"
+msgid "Click the ‘OK’ button and then move the view using the cursor keys."
+msgstr "Натиснете бутона „Добре“ и преместете изгледа, използвайки стрелките на клавиатурата."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:189
 msgid "Move your view with the cursor keys"
@@ -359,7 +359,7 @@ msgstr "Отлично. Има и по-бърз начин за преместв
 msgid ""
 "Simply right-click-and-hold anywhere on the map, then drag the mouse and "
 "instead of the cursor, the view will be moved. Try it."
-msgstr "Просто натиснете и задръжте десния бутон на мишката върху произволно място на картата. След това преместете мишката. Вместо показалеца, обаче, ще се премести изгледа. Опитайте"
+msgstr "Просто натиснете и задръжте десния бутон на мишката върху произволно място на картата. След това преместете мишката. Вместо показалеца, обаче, ще се премести изгледа. Опитайте."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:210
 msgid "Move your view with the mouse"
@@ -732,11 +732,11 @@ msgstr "Здравейте, пак съм аз! Този път Ви изпра�
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:401
 msgid ""
-"The message window can be toggled by the button on the very right at the "
-"bottom of the screen. This button will also change appearance whenever new "
+"The message window can be toggled by the second button from the right at the"
+" bottom of the screen. This button will also change appearance whenever new "
 "messages are available, but there is also a bell sound played whenever you "
 "receive a new message."
-msgstr "Прозорецът за съобщения може да бъде превключен чрез бутона, който е най-отдясно в долния край на екрана. Той ще смени облика си когато има нови съобщения, а също така ще чуете и иззвъняване, в момента на получаването на ново съобщение."
+msgstr "Прозорецът за съобщения може да бъде превключен чрез втория бутон от дясно наляво, в долния край на екрана. Той ще смени облика си когато има нови съобщения, а също така ще чуете и иззвъняване, в момента на получаването на ново съобщение."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:402
 msgid ""
@@ -752,81 +752,88 @@ msgstr "бутона „Архивиране на избраното съобщ�
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:406
 msgid ""
-"Once you have deleted a message, another message will be selected "
+"Once you have archived a message, another message will be selected "
 "automatically from the list."
-msgstr "След като изтриете едно съобщение, автоматично ще бъде избрано друго в списъка."
+msgstr "След като архивирате едно съобщение, автоматично ще бъде избрано друго в списъка."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:408
+#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:419
+msgid ""
+"You can also hold down the Ctrl or Shift key to select multiple messages, or"
+" press Ctrl + A to select them all."
+msgstr "Можете също така да задържите Контрол или Шифт, за да изберете повече от едно съобщение, или да натиснете Контрол + A, за да изберете всички."
+
+#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:409
 msgid ""
 "Archive all messages that you currently have in your inbox, including this "
 "one."
 msgstr "Архивирайте всички съобщения, които имате в кутията си, включително и това."
 
-#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:411
+#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:412
 msgid "Archive all messages in your inbox"
 msgstr "Архивирайте всички съобщения във входящата си кутия"
 
-#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:413
+#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:414
 msgid "Archive Your Inbox Messages"
 msgstr "Архивиране на съобщенията във входящата кутия"
 
-#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:414
+#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:415
 msgid ""
 "The message window is central to fully controlling your tribe’s fortune. "
 "However, you will get a lot of messages in a real game. To keep your head "
 "straight, you should try to keep the inbox empty."
 msgstr "Прозорецът със съобщения е отправна точка при управлението на богатствата на племето Ви. В една истинска игра Вие ще получавате много съобщения. За да не се объркате, старайте се да прочиствате входящата си кутия."
 
-#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:416
+#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:417
 msgid "Archive all your messages in your inbox now."
 msgstr "Архивирайте всички съобщения във входящата си кутия сега."
 
-#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:417
+#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:418
 msgid ""
-"To do so, open the message window by pressing ‘n’ or clicking the rightmost "
-"button at the very bottom of the screen. The newest message will be marked "
-"for you automatically. Keep clicking the ‘Archive selected message’ button "
-"until all messages have been archived and the list is empty."
-msgstr "За да направите това, отворете прозореца със съобщения, като натиснете клавиша „n“ или бутона, който е най-отдясно в долната част на екрана. Най-новото съобщение ще бъде отбелязано автоматично. Натискайте бутона „Архивиране на избраното съобщение“ докато не бъдат архивирани всички и списъкът не се изпразни."
+"To do so, open the message window by pressing ‘n’ or clicking the second "
+"button from the right at the very bottom of the screen. The newest message "
+"will be marked for you automatically. Keep clicking the ‘Archive selected "
+"message’ button until all messages have been archived and the list is empty."
+msgstr "За да направите това, отворете прозореца със съобщения, като натиснете клавиша „n“ или втория бутон от дясно наляво в долната част на екрана. Най-новото съобщение ще бъде отбелязано автоматично. Натискайте бутона „Архивиране на избраното съобщение“ докато не бъдат архивирани всички и списъкът не се изпразни."
 
-#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:424
-#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:445
+#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:426
+#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:447
 msgid "Closing Windows"
 msgstr "Затваряне на прозорци"
 
-#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:426
+#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:428
 msgid ""
 "Excellent. Do you remember how to close windows? You simply have to right-"
 "click on them. This will work with all windows except for story message "
 "windows like this one. Go ahead and try it."
 msgstr "Отлично. Помните ли как се затварят прозорците? Трябва само да щракнете върху тях с десния бутон на мишката. Това работи за всички прозорци, с изключение на тези, свързани с историята, като този. Опитайте."
 
-#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:428
+#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:430
 msgid ""
 "First, close this window by pressing the button below, then right-click into"
 " the messages window to close it."
 msgstr "Първо, затворете този прозорец като натиснете бутона по-долу, а след това щракнете с десен бутон върху прозореца със съобщения, за да го затворите."
 
-#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:433
+#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:435
 msgid "Close the messages window"
 msgstr "Затворете прозореца със съобщения"
 
-#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:435
+#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:437
 msgid "Close the Messages Window"
 msgstr "Затваряне на прозореца със съобщения"
 
-#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:436
+#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:438
 msgid ""
 "All windows in Widelands can be closed by right-clicking into them. Some "
 "windows can also be toggled with the buttons at the very bottom of the "
 "screen."
 msgstr "Всички прозорци в играта могат да бъдат затворени, като щракнете с десен бутон в тях. Някои прозорци могат да бъдат превключвани чрез бутоните в долната част на екрана."
 
-#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:438
+#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:440
 msgid "Close the messages window now by right-clicking into it."
 msgstr "Сега затворете прозореца със съобщения, като щракнете с десен бутон в него."
 
-#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:447
+#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:449
 msgid ""
 "Well done! Let’s see how messages work in a real game, shall we? For this, "
 "I’ll take all rocks away from the poor stonemasons in the quarries. They "
@@ -834,11 +841,11 @@ msgid ""
 "the next time they try to do some work."
 msgstr "Добра работа! Да видим ли как работят съобщенията в една истинска игра? Сега ще отнема всички скали от каменоделците в кариерите. След това всеки от тях ще изпрати съобщение за това, че не може да намери скали в работната си област, следващия път, когато се опита да работи."
 
-#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:455
+#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:457
 msgid "Messages Arrived!"
 msgstr "Пристигнаха съобщения!"
 
-#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:457
+#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:459
 msgid ""
 "You received some messages. See how the button at the bottom of the screen "
 "has changed appearance? You can destroy the quarries now as they are no "
@@ -846,13 +853,13 @@ msgid ""
 "possibilities:"
 msgstr "Вие получихте някакви съобщения. Виждате ли как бутонът в долната част на екрана смени облика си? Вече можете да разрушите кариерите, тъй като от тях вече няма полза и само заемат място. Има два начина да направите това:"
 
-#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:459
+#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:461
 msgid ""
 "Burning down the quarry: this is the fastest way of clearing the space. "
 "While the worker abandons the building, the wares are lost."
 msgstr "Да изгорите кариерата: това е най-бързият начин за освобождаване на място. Работникът напуска сградата, но стоките се губят."
 
-#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:460
+#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:462
 msgid ""
 "Dismantling the quarry: a builder will walk from the headquarters to "
 "dismantle the quarry piece by piece. Thereby, you regain some of the "
@@ -860,35 +867,39 @@ msgid ""
 msgstr "Да демонтирате кариерата: някой строител ще дойде от щаба и ще демонтира кариерата тухла по тухла. Така ще си върнете част от ресурсите, вложени при строежа."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:466
+msgid "Destroy the two quarries"
+msgstr "Разрушете двете кариери"
+
+#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:468
 msgid ""
 "Since our quarries are useless now, you can destroy them and reuse the space"
 " later on."
 msgstr "Тъй като кариерите ни вече са безполезни, можете да ги разрушите и по-късно да използвате мястото за нещо друго."
 
-#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:468
+#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:470
 msgid ""
 "There are two different ways of destroying a building: burning down and "
 "dismantling. Try them both out on your quarries."
 msgstr "Има два начина да разрушите една сграда: да я изгорите или да я демонтирате. Опитайте и двата с кариерите си."
 
-#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:469
+#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:471
 msgid ""
 "Burning down the quarry: This is the fastest way of clearing the space. "
 "While the worker abandons the building, the wares are lost."
 msgstr "Изгаряне на кариерата. Това е най-бързият начин за освобождаване на място. Работникът напуска сградата, но стоките се губят."
 
-#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:470
+#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:472
 msgid ""
 "Dismantling the quarry: A builder will walk from the headquarters to "
 "dismantle the quarry piece by piece. Thereby, you regain some of the "
 "resources you used for the construction."
 msgstr "Демонтиране на кариерата. Някой строител ще дойде от щаба и ще демонтира кариерата тухла по тухла. Така ще си върнете част от ресурсите, вложени при строежа."
 
-#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:475
+#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:477
 msgid "Expanding Your Territory!"
 msgstr "Разширяване на територията!"
 
-#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:477
+#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:479
 msgid ""
 "There is one more thing I’d like to teach you now: Expanding your territory."
 " The place that we started with around our headquarters is barely enough for"
@@ -897,7 +908,7 @@ msgid ""
 "territory."
 msgstr "Има още нещо, на което искам да Ви науча: Разширяването на територията. Мястото, с което започнахме около щаба си, едва стига за основните сгради, а и нямаме достъп до планини, които ни трябват, за да добиваме минерали и въглища. Следователно трябва да разширим територията си."
 
-#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:478
+#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:480
 msgid ""
 "Expanding is as simple as building a military building at the edge of your "
 "territory. The Barbarians have a selection of different military buildings: "
@@ -908,46 +919,46 @@ msgid ""
 "farther than others."
 msgstr "За разширяването е нужно просто да построите военна сграда на края на територията си. Варварите имат голям избор на военни сгради: караулни, прегради, кули, крепости и цитадели. Колкото по-голяма е сградата, толкова по-скъпа е за строеж, но и толкова повече територия ще завзема около себе си, както и ще може да събира повече войници. Сградите се различават и по обхвата си на видимост: сградите с кула имат по-голяма видимост от другите."
 
-#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:479
+#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:481
 msgid ""
 "As soon as a military building is manned, it will extend your land. I will "
 "tell your more about military buildings in another tutorial."
 msgstr "Веднага щом военната сграда бъде окупирана, тя ще разшири територията Ви. Ще Ви разкажа повече относно военните сгради в друго обучение."
 
-#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:481
+#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:483
 msgid "Let’s try it out now: build a military building on your border."
 msgstr "Да опитаме сега: постройте военна сграда на границата си."
 
-#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:482
+#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:484
 msgid ""
 "The sentry is the only military site that fits on a small building plot. If "
 "your lumberjack has cleared enough space, you can also build another "
 "military building."
 msgstr "Караулната е единствената военна сграда, която може да се побере на малък парцел. Ако дърварят Ви е освободил достатъчно място, можете да построите още една военна сграда."
 
-#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:485
+#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:487
 msgid "Expand your territory"
 msgstr "Разширете територията си"
 
-#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:487
+#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:489
 msgid "Make your territory grow"
 msgstr "Увеличете територията си"
 
-#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:488
+#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:490
 msgid ""
 "In Widelands, it is necessary to build many buildings, which take up a lot "
 "of space. To expand your territory, you have to build military buildings "
 "next to your border. Every tribe has several military buildings."
 msgstr "В Widelands често се налага да строите сгради, които заемат много място. За да разширите територията си, трябва да строите военни сгради до границата си. Всяко племе има няколко военни сгради."
 
-#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:490
+#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:492
 msgid ""
 "The Barbarians have four different military buildings you can build: the "
 "sentry (small), the barrier and the tower (both medium) and the fortress "
 "(big). Just choose the one you like most."
 msgstr "Варварите имат четири различни военни сгради, които можете да построите: караулна (малка), преграда и кула (и двете са средни) и крепост (голяма). Просто изберете коя от тях искате."
 
-#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:491
+#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:493
 msgid ""
 "Remember that big buildings (green icon) cannot be built on small (red) or "
 "medium (yellow) building plots, but buildings can be built on a building "
@@ -955,59 +966,59 @@ msgid ""
 " mind when you search for a suitable place."
 msgstr "Запомнете, че големите сгради (зелена иконка) не могат да бъдат построени върху малки (червена) или средни (жълта) парцели, но иначе сградите могат да бъдат построени върху парцел, който осигурява повече място, от колкото им е нужно. Помнете това, когато търсите подходящо място."
 
-#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:497
+#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:499
 msgid "Military Site Occupied"
 msgstr "Военното съоръжение е окупирано"
 
-#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:499
+#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:501
 msgid "Your territory has just grown!"
 msgstr "Територията Ви се разшири!"
 
-#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:500
+#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:502
 msgid ""
 "Great. Do you see how your territory has grown since your soldiers entered "
 "your new military building?"
 msgstr "Чудесно. Виждате ли как територията Ви се разшири щом войниците Ви влязоха в новата военна сграда?"
 
-#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:501
+#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:503
 msgid ""
 "Every military building has a certain conquer area – the more expensive the "
 "building, the more land it conquers."
 msgstr "Всяка военна сграда има определен обхват на завладяване – колкото по-скъпа е сградата, толкова повече земя ще владее."
 
-#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:508
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:510
+#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:512
 msgid "Conclusion"
 msgstr "Заключение"
 
-#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:511
+#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:513
 msgid ""
 "This concludes the first tutorial. In order to learn more about the game, I "
 "suggest to play one of the other tutorials. Each of them covers a different "
 "topic."
 msgstr "С това завършва първото обучение. За да научите повече за играта, предлагам да изиграете някое от останалите обучения. Всяко от тях покрива различна част от играта."
 
-#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:512
+#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:514
 msgid ""
 "However, since you now know how to control Widelands, you can also start a "
 "game (or continue this one) and discover more by yourself."
 msgstr "И все пак, тъй като вече знаете как да управлявате Widelands, можете да започнете нова игра (или да продължите тази) и да разучите повече сами."
 
-#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:513
+#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:515
 msgid "To leave this game and return to the main menu, click on the"
 msgstr "За да излезете от тази игра и да се върнете в главното меню, натиснете"
 
-#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:515
+#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:517
 msgid ""
 "‘Main Menu’ button on the very left at the bottom of the screen. Then click "
 "the"
 msgstr "бутона „Главно меню“, който се намира най-отляво в долната част на екрана. След това натиснете"
 
-#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:516
+#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:518
 msgid "‘Exit Game’ button."
 msgstr "бутона „Изход от играта“."
 
-#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:517
+#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:519
 msgid ""
 "Thanks for playing this tutorial. Enjoy Widelands and remember to visit us "
 "at"
@@ -1018,7 +1029,7 @@ msgstr "Благодарим Ви, че изиграхте това обучен
 msgid "“%s”"
 msgstr "„%s“"
 
-#: ../../data/scripting/format_scenario.lua:96
+#: ../../data/scripting/format_scenario.lua:84
 msgid "New Objective"
 msgid_plural "New Objectives"
 msgstr[0] "Нова задача"

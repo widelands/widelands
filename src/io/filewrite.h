@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008 by the Widelands Development Team
+ * Copyright (C) 2008-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -53,7 +53,7 @@ public:
 		Pos operator++() {
 			return ++pos;
 		}
-		Pos operator += (Pos const other) {
+		Pos operator+=(Pos const other) {
 			return pos += other.pos;
 		}
 
@@ -88,7 +88,7 @@ public:
 
 	/// Set the file pointer to a new location. The position can be beyond the
 	/// current end of file.
-	void set_pos(Pos pos);
+	void set_pos(const Pos& pos);
 
 	/// Write data at the given location.
 	void data(const void* src, size_t size, Pos pos);

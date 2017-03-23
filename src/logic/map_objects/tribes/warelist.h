@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2003, 2006-2009 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -35,18 +35,23 @@ namespace Widelands {
  * It is useful for warehouses and for economy-wide inventory.
  */
 struct WareList {
-	WareList() {}
+	WareList() {
+	}
 	~WareList();
 
-	void clear() {wares_.clear();} /// Clear the storage
+	void clear() {
+		wares_.clear();
+	}  /// Clear the storage
 
 	/// \return Highest possible ware id
-	DescriptionIndex get_nrwareids() const {return DescriptionIndex(wares_.size());}
+	DescriptionIndex get_nrwareids() const {
+		return DescriptionIndex(wares_.size());
+	}
 
-	void add   (DescriptionIndex, Quantity = 1);
-	void add(const WareList &);
+	void add(DescriptionIndex, Quantity = 1);
+	void add(const WareList&);
 	void remove(DescriptionIndex, Quantity = 1);
-	void remove(const WareList & wl);
+	void remove(const WareList& wl);
 	Quantity stock(DescriptionIndex) const;
 
 	void set_nrwares(DescriptionIndex const i) {
@@ -54,15 +59,16 @@ struct WareList {
 		wares_.resize(i, 0);
 	}
 
-	bool operator== (const WareList &)    const;
-	bool operator!= (const WareList & wl) const {return !(*this == wl);}
+	bool operator==(const WareList&) const;
+	bool operator!=(const WareList& wl) const {
+		return !(*this == wl);
+	}
 
-	mutable boost::signals2::signal<void ()> changed;
+	mutable boost::signals2::signal<void()> changed;
 
 private:
 	std::vector<Quantity> wares_;
 };
-
 }
 
 #endif  // end of include guard: WL_LOGIC_MAP_OBJECTS_TRIBES_WARELIST_H

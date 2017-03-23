@@ -1,6 +1,3 @@
-usr/widelands usr/games
-usr/wl_map_info usr/games
-usr/wl_map_object_info usr/games
-usr/wl_render_richtext usr/games
+usr/games
 usr/share/applications
 usr/share/icons

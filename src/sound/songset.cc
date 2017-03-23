@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006, 2008-2009 by the Widelands Development Team
+ * Copyright (C) 2006-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -27,11 +27,11 @@
 #include "sound/sound_handler.h"
 
 /// Prepare infrastructure for reading song files from disk
-Songset::Songset() : m_(nullptr), rwops_(nullptr) {}
+Songset::Songset() : m_(nullptr), rwops_(nullptr) {
+}
 
 /// Close and delete all songs to avoid memory leaks.
-Songset::~Songset()
-{
+Songset::~Songset() {
 	songs_.clear();
 
 	if (m_)
@@ -49,7 +49,7 @@ Songset::~Songset()
  * first song. If you do not want to disturb the (linear) playback order then
  * \ref register_song() all songs before you start playing
  */
-void Songset::add_song(const std::string & filename) {
+void Songset::add_song(const std::string& filename) {
 	songs_.push_back(filename);
 	current_song_ = songs_.begin();
 }
@@ -60,8 +60,7 @@ void Songset::add_song(const std::string & filename) {
  * \return  a pointer to the chosen song; 0 if none was found, music is disabled
  *          or an error occurred
  */
-Mix_Music * Songset::get_song()
-{
+Mix_Music* Songset::get_song() {
 	std::string filename;
 
 	if (g_sound_handler.get_disable_music() || songs_.empty())
@@ -94,8 +93,7 @@ Mix_Music * Songset::get_song()
 			fr_.close();  // fr_ should be Open iff rwops_ != 0
 			return nullptr;
 		}
-	}
-	else
+	} else
 		return nullptr;
 
 	if (rwops_)

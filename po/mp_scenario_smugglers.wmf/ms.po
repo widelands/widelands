@@ -1,14 +1,15 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2015 Widelands Development Team
+# Copyright (C) 2005-2016 Widelands Development Team
 # 
 # Translators:
 # abuyop <abuyop@gmail.com>, 2015
+# GunChleoc, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-12-03 09:55+0000\n"
-"PO-Revision-Date: 2015-12-03 09:56+0000\n"
+"POT-Creation-Date: 2016-10-15 08:42+0000\n"
+"PO-Revision-Date: 2016-09-14 20:15+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Malay (http://www.transifex.com/widelands/widelands/language/ms/)\n"
 "MIME-Version: 1.0\n"
@@ -17,78 +18,80 @@ msgstr ""
 "Language: ms\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: ../../maps/MP Scenarios/Smugglers.wmf/scripting/multiplayer_init.lua:44
-#: ../../maps/MP Scenarios/Smugglers.wmf/scripting/multiplayer_init.lua:46
-#: ../../maps/MP Scenarios/Smugglers.wmf/scripting/smuggling.lua:98
-#: ../../maps/MP Scenarios/Smugglers.wmf/scripting/smuggling.lua:101
-#: ../../maps/MP Scenarios/Smugglers.wmf/scripting/smuggling.lua:104
+#: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/multiplayer_init.lua:44
+#: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/multiplayer_init.lua:46
+#: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/smuggling.lua:98
+#: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/smuggling.lua:101
+#: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/smuggling.lua:104
 msgid "Status"
 msgstr ""
 
-#: ../../maps/MP Scenarios/Smugglers.wmf/scripting/multiplayer_init.lua:122
+#: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/multiplayer_init.lua:122
 msgid "Wares Smuggled"
 msgstr "Barangan Diseludup"
 
-#: ../../maps/MP Scenarios/Smugglers.wmf/scripting/multiplayer_init.lua:145
-#: ../../maps/MP Scenarios/Smugglers.wmf/scripting/multiplayer_init.lua:148
-#: ../../maps/MP Scenarios/Smugglers.wmf/scripting/smuggling.lua:33
-#: ../../maps/MP Scenarios/Smugglers.wmf/scripting/smuggling.lua:57
-#: ../../maps/MP Scenarios/Smugglers.wmf/scripting/smuggling.lua:92
+#: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/multiplayer_init.lua:145
+#: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/multiplayer_init.lua:148
+#: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/smuggling.lua:33
+#: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/smuggling.lua:57
+#: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/smuggling.lua:92
+#, lua-format
 msgid "%i point"
 msgid_plural "%i points"
 msgstr[0] "%i mata"
 
-#: ../../maps/MP Scenarios/Smugglers.wmf/scripting/multiplayer_init.lua:148
-#: ../../maps/MP Scenarios/Smugglers.wmf/scripting/texts.lua:8
+#: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/multiplayer_init.lua:148
+#: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/texts.lua:8
 msgid "Rules"
 msgstr "Peraturan"
 
-#: ../../maps/MP Scenarios/Smugglers.wmf/scripting/texts.lua:6
+#: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/texts.lua:6
 msgid "Smugglers"
 msgstr "Penyeludup"
 
-#: ../../maps/MP Scenarios/Smugglers.wmf/scripting/texts.lua:9
+#: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/texts.lua:9
 msgid ""
 "Smugglers is a fun map for 4 players. You and your partner start diagonally "
 "from each other on a point symmetric island. There are plenty of smuggling "
 "tunnels on this island, each consisting of a receiving and a sending end."
-msgstr "Penyeludup ialah peta yang menyeronokkan untuk 4 orang pemain. Anda dan rakan anda bermula secara bertentangan dikedua-dua penjuru pulau simetri. Terdapat banyak terowong penyeludupan di dalam pulau ini, setiap terowong tersebut mempunyai hujung penerimaan dan penghantaran. "
+msgstr "Penyeludup ialah peta yang menyeronokkan untuk 4 orang pemain. Anda dan rakan anda bermula secara bertentangan dikedua-dua penjuru pulau simetri. Terdapat banyak terowong penyeludupan di dalam pulau ini, setiap terowong tersebut mempunyai hujung penerimaan dan penghantaran."
 
-#: ../../maps/MP Scenarios/Smugglers.wmf/scripting/texts.lua:10
+#: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/texts.lua:10
 msgid ""
 "To establish a smuggling route, you need to build a warehouse on a "
 "sending/receiving spot while your team mate has to build one on the "
 "corresponding receiving/sending spot. A ware is then transported every 10 "
 "seconds."
-msgstr "Untuk membentuk laluan penyeludupan, anda perlu bina gudang pada tempat penghantaran/penerimaan manakala rakan pasukan anda juga membinanya pada tempat penghantaran/penerimaan berkaitan. Barangan akan diangkut setiap 10 saat. "
+msgstr "Untuk membentuk laluan penyeludupan, anda perlu bina gudang pada tempat penghantaran/penerimaan manakala rakan pasukan anda juga membinanya pada tempat penghantaran/penerimaan berkaitan. Barangan akan diangkut setiap 10 saat."
 
 #. TRANSLATORS: %s = '<number> points'
-#: ../../maps/MP Scenarios/Smugglers.wmf/scripting/texts.lua:12
+#: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/texts.lua:12
+#, lua-format
 msgid ""
 "For harder to defend smuggling routes, you get 2 or 3 points per ware "
 "smuggled. The first team to collect %s wins."
 msgstr "Semaik sukar mempertahankan laluan penyeludupan, anda dapat 2 atau 3 mata per barangan yang diseludup. Pasukan yang mula-mula mengutip %s dikira menang."
 
-#: ../../maps/MP Scenarios/Smugglers.wmf/scripting/texts.lua:13
+#: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/texts.lua:13
 msgid "A sending spot"
 msgstr "Tempat penghantaran"
 
-#: ../../maps/MP Scenarios/Smugglers.wmf/scripting/texts.lua:14
+#: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/texts.lua:14
 msgid "A receiving spot"
 msgstr "Tempat penerimaan"
 
-#: ../../maps/MP Scenarios/Smugglers.wmf/scripting/texts.lua:15
+#: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/texts.lua:15
 msgid "Notes"
 msgstr "Nota"
 
-#: ../../maps/MP Scenarios/Smugglers.wmf/scripting/texts.lua:16
+#: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/texts.lua:16
 msgid ""
 "Remember that the map has rotational symmetry. For example, when you have "
 "found a spot to the top-left of your headquarters, the corresponding spot "
 "will be to the bottom-right of the headquarters of your team mate."
 msgstr "Perlu ingat peta bersifat simetri terputar. Sebagai contoh, bila anda telah menemui tompok seludup di sebelah kiri-atas ibu pejabat anda, tompok berkenaan akan muncul di sebelah kanan-bawah ibu-pejabat rakan pasukan anda."
 
-#: ../../maps/MP Scenarios/Smugglers.wmf/scripting/texts.lua:17
+#: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/texts.lua:17
 msgid ""
 "You can see the number of wares traded at any time in the general statistics"
 " menu. Good luck!"
@@ -96,21 +99,23 @@ msgstr "Anda dapat sebilangan barangan yang diurusniaga pada bila-bila masa di d
 
 #. TRANSLATORS: the first 2 parameters are player names, the last parameter is
 #. '<number> points'
-#: ../../maps/MP Scenarios/Smugglers.wmf/scripting/texts.lua:22
+#: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/texts.lua:22
 msgid ""
 "A new smuggling route from %1$s to %2$s has been established! Every ware "
 "they smuggle there is worth %3$s."
 msgstr "Satu laluan penyeledupan baharu dari %1$s ke %2$s berjaya ditubuhkan! Setiap barangan yang telah diseludup di sini bernilai %3$s."
 
 #. TRANSLATORS: %s = '<number> points'
-#: ../../maps/MP Scenarios/Smugglers.wmf/scripting/texts.lua:27
+#: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/texts.lua:27
+#, lua-format
 msgid ""
 "Your team has established a new smuggling route. You have the sending "
 "warehouse. Every ware smuggled here is worth %s."
 msgstr "Pasukan anda telah berjaya menubuhkan laluan penyeludupan baharu. Anda memiliki gudang penghantaran. Setiap barangan yang diseludup di sini bernilai %s."
 
 #. TRANSLATORS: %s = '<number> points'
-#: ../../maps/MP Scenarios/Smugglers.wmf/scripting/texts.lua:32
+#: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/texts.lua:32
+#, lua-format
 msgid ""
 "Your team has established a new smuggling route. You have the receiving "
 "warehouse. Every ware smuggled here is worth %s."
@@ -118,17 +123,17 @@ msgstr "Pasukan anda telah berjaya menubuhkan satu laluan penyeledupan baharu. A
 
 #. TRANSLATORS: the first parameter is '<number> points', the last 2
 #. parameters are player names
-#: ../../maps/MP Scenarios/Smugglers.wmf/scripting/texts.lua:37
+#: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/texts.lua:37
 msgid "The smuggling route worth %1$s from %2$s to %3$s has been broken!"
 msgstr "Laluan penyeludupan yang bernilai %1$s dari %2$s ke %3$s telah musnah!"
 
-#: ../../maps/MP Scenarios/Smugglers.wmf/scripting/texts.lua:41
+#: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/texts.lua:41
 msgid "Game over!"
 msgstr "Permainan tamat!"
 
 #. TRANSLATORS: the first 4 parameters are player names, the last parameter is
 #. '<number> points'
-#: ../../maps/MP Scenarios/Smugglers.wmf/scripting/texts.lua:43
+#: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/texts.lua:43
 msgid ""
 "Game over! %1$s and %2$s have won the game! %3$s and %4$s only managed to "
 "collect %5$s."

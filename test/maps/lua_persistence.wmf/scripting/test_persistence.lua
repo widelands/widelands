@@ -35,7 +35,7 @@ function save_coroutine()
    worker_descr = game:get_worker_description("barbarians_lumberjack")
    immovable_descr = game:get_immovable_description("alder_summer_sapling")
    resource_descr = game:get_resource_description("coal")
-   terrain_descr = game:get_terrain_description("wiese1")
+   terrain_descr = game:get_terrain_description("summer_meadow1")
 
    corout = coroutine.create(function()
       local a = 100
@@ -61,8 +61,6 @@ function save_coroutine()
    }
 
    mapview = wl.ui.MapView()
-   mapview.viewpoint_x = 10
-   mapview.viewpoint_y = 40
    mapview.statistics = false
    mapview.census = true
 
@@ -106,7 +104,7 @@ function check_coroutine()
    assert_equal("barbarians_lumberjack", worker_descr.name)
    assert_equal("alder_summer_sapling", immovable_descr.name)
    assert_equal("coal", resource_descr.name)
-   assert_equal("wiese1", terrain_descr.name)
+   assert_equal("summer_meadow1", terrain_descr.name)
 
    assert_equal(global_value_1, false)
    assert_thread(corout)
@@ -143,8 +141,6 @@ function check_coroutine()
    assert_true(myset:contains(map:get_field(10,11)))
 
    mapview = wl.ui.MapView()
-   assert_equal(mapview.viewpoint_x, 10)
-   assert_equal(mapview.viewpoint_y, 40)
    assert_equal(false, mapview.statistics)
    assert_equal(true, mapview.census)
 

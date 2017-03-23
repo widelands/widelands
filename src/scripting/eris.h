@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2013 by the Widelands Development Team
+ * Copyright (C) 2006-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -24,6 +24,5 @@
 extern "C" {
 #include "third_party/eris/eris.h"
 }
-
 
 #endif  // end of include guard: WL_SCRIPTING_ERIS_H

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2009 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -29,41 +29,51 @@
 #include "graphic/graphic.h"
 #include "logic/widelands_geometry.h"
 
-EditorToolChangeHeightOptionsMenu::EditorToolChangeHeightOptionsMenu
-	(EditorInteractive          & parent,
-	 EditorIncreaseHeightTool & increase_tool,
-	 UI::UniqueWindow::Registry  & registry)
-	:
-	EditorToolOptionsMenu(parent, registry, 350, 100, _("Height Tools Options")),
-	increase_tool_(increase_tool),
-	box_(this, hmargin(), vmargin(), UI::Box::Vertical, 0, 0, vspacing()),
-	change_by_(&box_, 0, 0, get_inner_w() - 2 * hmargin(), 80,
-				  increase_tool_.get_change_by(), 1, MAX_FIELD_HEIGHT_DIFF,
-				  _("Increase/Decrease Value:"), UI::SpinBox::Units::kNone,
-				  g_gr->images().get("images/ui_basic/but1.png"),
-				  UI::SpinBox::Type::kSmall),
-	set_to_(&box_, 0, 0, get_inner_w() - 2 * hmargin(), 80,
-			  increase_tool_.set_tool().get_interval().min, 0, MAX_FIELD_HEIGHT,
-			  _("Set Value:"), UI::SpinBox::Units::kNone,
-			  g_gr->images().get("images/ui_basic/but1.png"),
-			  UI::SpinBox::Type::kSmall)
-{
+EditorToolChangeHeightOptionsMenu::EditorToolChangeHeightOptionsMenu(
+   EditorInteractive& parent,
+   EditorIncreaseHeightTool& increase_tool,
+   UI::UniqueWindow::Registry& registry)
+   : EditorToolOptionsMenu(parent, registry, 350, 100, _("Height Tools Options")),
+     increase_tool_(increase_tool),
+     box_(this, hmargin(), vmargin(), UI::Box::Vertical, 0, 0, vspacing()),
+     change_by_(&box_,
+                0,
+                0,
+                get_inner_w() - 2 * hmargin(),
+                80,
+                increase_tool_.get_change_by(),
+                1,
+                MAX_FIELD_HEIGHT_DIFF,
+                _("Increase/Decrease Value:"),
+                UI::SpinBox::Units::kNone,
+                g_gr->images().get("images/ui_basic/but1.png"),
+                UI::SpinBox::Type::kSmall),
+     set_to_(&box_,
+             0,
+             0,
+             get_inner_w() - 2 * hmargin(),
+             80,
+             increase_tool_.set_tool().get_interval().min,
+             0,
+             MAX_FIELD_HEIGHT,
+             _("Set Value:"),
+             UI::SpinBox::Units::kNone,
+             g_gr->images().get("images/ui_basic/but1.png"),
+             UI::SpinBox::Type::kSmall) {
 	change_by_.set_tooltip(
-				/** TRANSLATORS: Editor change height access keys. **/
-				_("Click on the map to increase, Shift + Click on the map to decrease terrain height"));
+	   /** TRANSLATORS: Editor change height access keys. **/
+	   _("Click on the map to increase, Shift + Click on the map to decrease terrain height"));
 	set_to_.set_tooltip(
-				/** TRANSLATORS: Editor set height access key. **/
-				_("Ctrl + Click on the map to set terrain height"));
+	   /** TRANSLATORS: Editor set height access key. **/
+	   _("Ctrl + Click on the map to set terrain height"));
 
-	change_by_.changed.connect
-		(boost::bind
-		 (&EditorToolChangeHeightOptionsMenu::update_change_by, boost::ref(*this)));
-	set_to_.changed.connect
-		(boost::bind
-		 (&EditorToolChangeHeightOptionsMenu::update_set_to, boost::ref(*this)));
+	change_by_.changed.connect(
+	   boost::bind(&EditorToolChangeHeightOptionsMenu::update_change_by, boost::ref(*this)));
+	set_to_.changed.connect(
+	   boost::bind(&EditorToolChangeHeightOptionsMenu::update_set_to, boost::ref(*this)));
 
-	box_.add(&change_by_, UI::Align::kLeft);
-	box_.add(&set_to_, UI::Align::kLeft);
+	box_.add(&change_by_);
+	box_.add(&set_to_);
 	box_.set_size(get_inner_w() - 2 * hmargin(), change_by_.get_h() + set_to_.get_h() + vspacing());
 	set_inner_size(box_.get_w() + 2 * hmargin(), box_.get_h() + 2 * vspacing());
 }
@@ -73,7 +83,7 @@ void EditorToolChangeHeightOptionsMenu::update_change_by() {
 	assert(change_by > 0);
 	assert(change_by <= MAX_FIELD_HEIGHT_DIFF);
 
-	increase_tool_                .set_change_by(change_by);
+	increase_tool_.set_change_by(change_by);
 	increase_tool_.decrease_tool().set_change_by(change_by);
 	select_correct_tool();
 }

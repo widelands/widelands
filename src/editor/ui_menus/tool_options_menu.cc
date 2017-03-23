@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2007 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -19,22 +19,18 @@
 
 #include "editor/ui_menus/tool_options_menu.h"
 
-EditorToolOptionsMenu::EditorToolOptionsMenu
-	(EditorInteractive         &       parent,
-	 UI::UniqueWindow::Registry &       registry,
-	 uint32_t const width, uint32_t const height,
-	 char                 const * const title)
-	:
-	UI::UniqueWindow
-		(&parent, "tool_options_menu", &registry, width, height, title),
-	current_pointer_(parent.tools()->current_pointer)
-{
+EditorToolOptionsMenu::EditorToolOptionsMenu(EditorInteractive& parent,
+                                             UI::UniqueWindow::Registry& registry,
+                                             uint32_t const width,
+                                             uint32_t const height,
+                                             char const* const title)
+   : UI::UniqueWindow(&parent, "tool_options_menu", &registry, width, height, title),
+     current_pointer_(parent.tools()->current_pointer) {
 	if (get_usedefaultpos())
 		center_to_parent();
 }
 
-
 void EditorToolOptionsMenu::select_correct_tool() {
 	dynamic_cast<EditorInteractive&>(*get_parent())
-		.select_tool(*current_pointer_, EditorTool::First);
+	   .select_tool(*current_pointer_, EditorTool::First);
 }

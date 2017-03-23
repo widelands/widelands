@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006, 2008, 2010 by the Widelands Development Team
+ * Copyright (C) 2006-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -32,11 +32,7 @@ namespace UI {
 // Contains font information for a locale
 struct FontSet {
 
-	enum class Face {
-		kSans,
-		kSerif,
-		kCondensed
-	};
+	enum class Face { kSans, kSerif, kCondensed };
 
 	static constexpr const char* kFallbackFont = "DejaVu/DejaVuSans.ttf";
 
@@ -75,9 +71,13 @@ private:
 	void set_fonts(const LuaTable& table, const std::string& fallback);
 
 	/// Helper function for set_fonts. key is "serif", "sans" or "condensed".
-	void set_font_group(const LuaTable& table, const std::string& key, const std::string& fallback,
-							  std::string* basic, std::string* bold,
-							  std::string* italic, std::string* bold_italic);
+	void set_font_group(const LuaTable& table,
+	                    const std::string& key,
+	                    const std::string& fallback,
+	                    std::string* basic,
+	                    std::string* bold,
+	                    std::string* italic,
+	                    std::string* bold_italic);
 
 	std::string name_;
 	std::string serif_;
@@ -93,7 +93,7 @@ private:
 	std::string condensed_italic_;
 	std::string condensed_bold_italic_;
 	std::string representative_character_;
-	uint16_t    size_offset_;
+	uint16_t size_offset_;
 	bool is_rtl_;
 	DISALLOW_COPY_AND_ASSIGN(FontSet);
 };
@@ -127,6 +127,6 @@ private:
 	DISALLOW_COPY_AND_ASSIGN(FontSets);
 };
 
-} // namespace UI
+}  // namespace UI
 
 #endif  // end of include guard: WL_GRAPHIC_TEXT_FONT_SET_H

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006, 2008 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -32,15 +32,15 @@ class InteractivePlayer;
 ///  Shows the not already fulfilled objectives.
 class GameObjectivesMenu : public UI::UniqueWindow {
 public:
-	GameObjectivesMenu(UI::Panel* parent, UI::UniqueWindow::Registry &);
+	GameObjectivesMenu(UI::Panel* parent, UI::UniqueWindow::Registry&);
 	void think() override;
 
 private:
-	InteractivePlayer & iplayer() const;
-	void                 selected(uint32_t);
+	InteractivePlayer& iplayer() const;
+	void selected(uint32_t);
 
 	using ListType = UI::Listselect<const Widelands::Objective&>;
-	ListType              list;
+	ListType list;
 	UI::MultilineTextarea objectivetext;
 };
 

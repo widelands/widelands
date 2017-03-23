@@ -47,20 +47,13 @@ std::unique_ptr<Texture> Screen::to_texture() const {
 	// Ownership of pixels is not taken here. But the Texture() transfers it to
 	// the GPU, frees the SDL surface and after that we are free to free
 	// 'pixels'.
-	SDL_Surface* surface = SDL_CreateRGBSurfaceFrom(pixels.get(),
-	                                                w_,
-	                                                h_,
-	                                                32,
-	                                                w_ * 4,
-	                                                0x000000ff,
-	                                                0x0000ff00,
-	                                                0x00ff0000,
-	                                                0xff000000);
+	SDL_Surface* surface = SDL_CreateRGBSurfaceFrom(
+	   pixels.get(), w_, h_, 32, w_ * 4, 0x000000ff, 0x0000ff00, 0x00ff0000, 0xff000000);
 
 	return std::unique_ptr<Texture>(new Texture(surface));
 }
 
-void Screen::do_blit(const FloatRect& dst_rect,
+void Screen::do_blit(const Rectf& dst_rect,
                      const BlitData& texture,
                      float opacity,
                      BlendMode blend_mode) {
@@ -75,7 +68,7 @@ void Screen::do_blit(const FloatRect& dst_rect,
 	RenderQueue::instance().enqueue(i);
 }
 
-void Screen::do_blit_blended(const FloatRect& dst_rect,
+void Screen::do_blit_blended(const Rectf& dst_rect,
                              const BlitData& texture,
                              const BlitData& mask,
                              const RGBColor& blend) {
@@ -90,7 +83,7 @@ void Screen::do_blit_blended(const FloatRect& dst_rect,
 	RenderQueue::instance().enqueue(i);
 }
 
-void Screen::do_blit_monochrome(const FloatRect& dst_rect,
+void Screen::do_blit_monochrome(const Rectf& dst_rect,
                                 const BlitData& texture,
                                 const RGBAColor& blend) {
 	RenderQueue::Item i;
@@ -112,7 +105,7 @@ void Screen::do_draw_line_strip(std::vector<DrawLineProgram::PerVertexData> vert
 	RenderQueue::instance().enqueue(i);
 }
 
-void Screen::do_fill_rect(const FloatRect& dst_rect, const RGBAColor& color, BlendMode blend_mode) {
+void Screen::do_fill_rect(const Rectf& dst_rect, const RGBAColor& color, BlendMode blend_mode) {
 	RenderQueue::Item i;
 	i.blend_mode = blend_mode;
 	i.program_id = RenderQueue::Program::kRect;

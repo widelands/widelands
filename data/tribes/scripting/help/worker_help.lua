@@ -1,15 +1,26 @@
-include "tribes/scripting/help/format_help.lua"
-
 -- RST
 -- worker_help.lua
 -- ---------------
+--
+-- This script returns a formatted entry for the ingame worker help.
+-- Pass the internal tribe name and worker name to the coroutine to select the
+-- worker type.
 
--- Functions used in the ingame worker help windows for formatting the text and pictures.
+include "tribes/scripting/help/format_help.lua"
 
 --  =======================================================
 --  ************* Main worker help functions *************
 --  =======================================================
 
+-- RST
+-- .. function:: worker_help_producers_string(worker_description)
+--
+--    Displays the buildings that can produce the worker
+--
+--    :arg tribe: the worker's tribe from C++.
+--    :arg worker_description: the worker_description from C++.
+--    :returns: Info about buildings that produce this worker
+--
 function worker_help_producers_string(tribe, worker_description)
    local result = ""
    for i, building in ipairs(tribe.buildings) do
@@ -61,7 +72,7 @@ function worker_help_producers_string(tribe, worker_description)
 
             -- Now collect the consumed wares for each filtered program and print the program info
             for j, program_name in ipairs(producing_programs) do
-               result = result .. help_consumed_wares(building, program_name)
+               result = result .. help_consumed_wares_workers(tribe, building, program_name)
                if (recruited_workers_counters[program_name] > 0) then
                   result = result
                      -- TRANSLATORS: Worker Encyclopedia: Workers recruited by a productionsite
@@ -77,7 +88,7 @@ end
 
 
 -- RST
--- .. function worker_help_employers_string(worker_description)
+-- .. function:: worker_help_employers_string(worker_description)
 --
 --    Displays the buildings where the worker can work
 --
@@ -101,14 +112,15 @@ end
 
 
 -- RST
--- .. function worker_help_string(worker_description)
+-- .. function:: worker_help_string(worker_description)
 --
 --    Displays the worker with a helptext, an image and the tool used
 --
 --    :arg tribe: The :class:`LuaTribeDescription` for the tribe
 --                that we are displaying this help for.
---
+
 --    :arg worker_description: the worker_description from C++.
+--
 --    :returns: Help string for the worker
 --
 function worker_help_string(tribe, worker_description)

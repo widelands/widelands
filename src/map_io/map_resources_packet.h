@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2008, 2010 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -31,7 +31,6 @@ public:
 	void read(FileSystem&, EditorGameBase&, const WorldLegacyLookupTable&);
 	void write(FileSystem&, EditorGameBase&);
 };
-
 }
 
 #endif  // end of include guard: WL_MAP_IO_MAP_RESOURCES_PACKET_H

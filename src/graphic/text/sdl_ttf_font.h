@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2012 by the Widelands Development Team
+ * Copyright (C) 2006-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -47,9 +47,10 @@ public:
 		UNDERLINE = 4,
 		SHADOW = 8,
 	};
-	virtual ~IFont() {}
+	virtual ~IFont() {
+	}
 
-	virtual void dimensions(const std::string&, int, uint16_t *, uint16_t *) = 0;
+	virtual void dimensions(const std::string&, int, uint16_t*, uint16_t*) = 0;
 	virtual const Texture& render(const std::string&, const RGBColor& clr, int, TextureCache*) = 0;
 
 	virtual uint16_t ascent(int) const = 0;
@@ -58,18 +59,17 @@ public:
 // Implementation of a Font object using SDL_ttf.
 class SdlTtfFont : public IFont {
 public:
-	SdlTtfFont
-		(TTF_Font* ttf, const std::string& face, int ptsize, std::string* ttf_memory_block);
+	SdlTtfFont(TTF_Font* ttf, const std::string& face, int ptsize, std::string* ttf_memory_block);
 	virtual ~SdlTtfFont();
 
-	void dimensions(const std::string&, int, uint16_t * w, uint16_t * h) override;
+	void dimensions(const std::string&, int, uint16_t* w, uint16_t* h) override;
 	const Texture& render(const std::string&, const RGBColor& clr, int, TextureCache*) override;
 	uint16_t ascent(int) const override;
 
 private:
 	void set_style(int);
 
-	TTF_Font * font_;
+	TTF_Font* font_;
 	int style_;
 	const std::string font_name_;
 	const int ptsize_;

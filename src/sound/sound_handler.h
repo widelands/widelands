@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2005-2008, 2011 by the Widelands Development Team
+ * Copyright (C) 2005-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -30,11 +30,9 @@
 #include <unistd.h>
 #endif
 
-#include "logic/widelands_geometry.h"
 #include "random/random.h"
 #include "sound/fxset.h"
 
-namespace Widelands {class EditorGameBase;}
 struct Songset;
 struct SDL_mutex;
 class FileRead;
@@ -165,13 +163,11 @@ extern class SoundHandler g_sound_handler;
 // TODO(unknown): accommodate sound activation if it was disabled at the beginning
 
 // This is used for SDL UserEvents to be handled in the main loop.
-enum {
-	CHANGE_MUSIC
-};
-class SoundHandler
-{
+enum { CHANGE_MUSIC };
+class SoundHandler {
 	friend struct Songset;
 	friend struct FXset;
+
 public:
 	SoundHandler();
 	~SoundHandler();
@@ -181,52 +177,41 @@ public:
 	void read_config();
 	void load_system_sounds();
 
-	void load_fx_if_needed
-		(const std::string & dir,
-		 const std::string & basename,
-		 const std::string & fx_name);
-	void play_fx
-		(const std::string & fx_name,
-		 Widelands::Coords   map_position,
-		 uint8_t             priority = PRIO_ALLOW_MULTIPLE + PRIO_MEDIUM);
-	void play_fx
-		(const std::string & fx_name,
-		 int32_t             stereo_position,
-		 uint8_t             priority = PRIO_ALLOW_MULTIPLE + PRIO_MEDIUM);
+	void load_fx_if_needed(const std::string& dir,
+	                       const std::string& basename,
+	                       const std::string& fx_name);
 
-	void register_song
-		(const std::string & dir,
-		 const std::string & basename);
-	void start_music(const std::string & songset_name, int32_t fadein_ms = 0);
+	void play_fx(const std::string& fx_name,
+	             int32_t stereo_position,
+	             uint8_t priority = PRIO_ALLOW_MULTIPLE + PRIO_MEDIUM);
+
+	void register_song(const std::string& dir, const std::string& basename);
+	void start_music(const std::string& songset_name, int32_t fadein_ms = 0);
 	void stop_music(int32_t fadeout_ms = 0);
-	void change_music
-		(const std::string & songset_name = std::string(),
-		 int32_t             fadeout_ms   = 0,
-		 int32_t             fadein_ms    = 0);
+	void change_music(const std::string& songset_name = std::string(),
+	                  int32_t fadeout_ms = 0,
+	                  int32_t fadein_ms = 0);
 
 	static void music_finished_callback();
 	static void fx_finished_callback(int32_t channel);
 	void handle_channel_finished(uint32_t channel);
 
 	bool get_disable_music() const;
-	bool get_disable_fx   () const;
-	int32_t  get_music_volume () const;
-	int32_t  get_fx_volume    () const;
+	bool get_disable_fx() const;
+	int32_t get_music_volume() const;
+	int32_t get_fx_volume() const;
 	void set_disable_music(bool disable);
-	void set_disable_fx   (bool disable);
-	void set_music_volume (int32_t volume);
-	void set_fx_volume    (int32_t volume);
+	void set_disable_fx(bool disable);
+	void set_music_volume(int32_t volume);
+	void set_fx_volume(int32_t volume);
 
 	/**
 	 * Return the max value for volume settings. We use a function to hide
 	 * SDL_mixer constants outside of sound_handler.
 	 */
-	int32_t get_max_volume() const {return MIX_MAX_VOLUME;}
-
-	/** The game logic where we can get a mapping from logical to screen
-	 * coordinates and vice vers
-	*/
-	Widelands::EditorGameBase * egbase_;
+	int32_t get_max_volume() const {
+		return MIX_MAX_VOLUME;
+	}
 
 	/** Only for buffering the command line option --nosound until real initialization is done.
 	 * \see SoundHandler::SoundHandler()
@@ -241,16 +226,12 @@ public:
 	*/
 	bool lock_audio_disabling_;
 
-protected:
+private:
 	// Prints an error and disables the sound system.
 	void initialization_error(const std::string& msg);
 
 	void load_one_fx(const std::string& path, const std::string& fx_name);
-	int32_t stereo_position(Widelands::Coords position);
-	bool play_or_not
-		(const std::string & fx_name,
-		 int32_t             stereo_position,
-		 uint8_t             priority);
+	bool play_or_not(const std::string& fx_name, int32_t stereo_position, uint8_t priority);
 
 	/// Whether to disable background music
 	bool disable_music_;
@@ -292,7 +273,7 @@ protected:
 	RNG rng_;
 
 	/// Protects access to active_fx_ between callbacks and main code.
-	SDL_mutex * fx_lock_;
+	SDL_mutex* fx_lock_;
 };
 
 #endif  // end of include guard: WL_SOUND_SOUND_HANDLER_H

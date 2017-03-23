@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2008, 2010 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -22,7 +22,6 @@
 #include "base/log.h"
 #include "io/fileread.h"
 #include "io/filewrite.h"
-#include "logic/constants.h"
 #include "logic/editor_game_base.h"
 #include "logic/game_data_error.h"
 #include "logic/map.h"
@@ -32,12 +31,10 @@ namespace Widelands {
 
 constexpr uint16_t kCurrentPacketVersion = 2;
 
-void MapExplorationPacket::read
-	(FileSystem            &       fs,
-	 EditorGameBase      &       egbase,
-	 bool                    const skip,
-	 MapObjectLoader &)
-{
+void MapExplorationPacket::read(FileSystem& fs,
+                                EditorGameBase& egbase,
+                                bool const skip,
+                                MapObjectLoader&) {
 	if (skip)
 		return;
 
@@ -52,8 +49,8 @@ void MapExplorationPacket::read
 		}
 	}
 
-	static_assert(MAX_PLAYERS < 32, "assert(MAX_PLAYERS < 32) failed.");
-	Map & map = egbase.map();
+	static_assert(kMaxPlayers < 32, "assert(MAX_PLAYERS < 32) failed.");
+	Map& map = egbase.map();
 	PlayerNumber const nr_players = map.get_nrplayers();
 	MapIndex const max_index = map.max_index();
 	try {
@@ -63,40 +60,36 @@ void MapExplorationPacket::read
 				uint32_t const data = fr.unsigned_32();
 				for (uint8_t j = 0; j < nr_players; ++j) {
 					bool see = data & (1 << j);
-					if (Player * const player = egbase.get_player(j + 1))
+					if (Player* const player = egbase.get_player(j + 1))
 						player->fields_[i].vision = see ? 1 : 0;
 					else if (see)
-					log
-						("MapExplorationPacket::read: WARNING: Player %u, "
-						 "which does not exist, sees field %u.\n",
-						 j + 1, i);
+						log("MapExplorationPacket::read: WARNING: Player %u, "
+						    "which does not exist, sees field %u.\n",
+						    j + 1, i);
 				}
 			}
 		} else {
 			throw UnhandledVersionError("MapExplorationPacket", packet_version, kCurrentPacketVersion);
 		}
-	} catch (const WException & e) {
+	} catch (const WException& e) {
 		throw GameDataError("seen: %s", e.what());
 	}
 }
 
-
-void MapExplorationPacket::write
-	(FileSystem & fs, EditorGameBase & egbase, MapObjectSaver &)
-{
+void MapExplorationPacket::write(FileSystem& fs, EditorGameBase& egbase, MapObjectSaver&) {
 	FileWrite fw;
 
 	fw.unsigned_16(kCurrentPacketVersion);
 
-	static_assert(MAX_PLAYERS < 32, "assert(MAX_PLAYERS < 32) failed.");
-	Map & map = egbase.map();
+	static_assert(kMaxPlayers < 32, "assert(MAX_PLAYERS < 32) failed.");
+	Map& map = egbase.map();
 	PlayerNumber const nr_players = map.get_nrplayers();
 	MapIndex const max_index = map.max_index();
 	for (MapIndex i = 0; i < max_index; ++i) {
 		uint32_t data = 0;
 		for (uint8_t j = 0; j < nr_players; ++j) {
 			uint8_t const player_index = j + 1;
-			if (Player const * const player = egbase.get_player(player_index))
+			if (Player const* const player = egbase.get_player(player_index))
 				data |= ((0 < player->vision(i)) << j);
 		}
 		fw.unsigned_32(data);
@@ -104,5 +97,4 @@ void MapExplorationPacket::write
 
 	fw.write(fs, "binary/exploration");
 }
-
 }

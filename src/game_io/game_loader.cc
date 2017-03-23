@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2016 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -39,10 +39,9 @@
 
 namespace Widelands {
 
-GameLoader::GameLoader(const std::string & path, Game & game) :
-	fs_(*g_fs->make_sub_file_system(path)), game_(game)
-{}
-
+GameLoader::GameLoader(const std::string& path, Game& game)
+   : fs_(*g_fs->make_sub_file_system(path)), game_(game) {
+}
 
 GameLoader::~GameLoader() {
 	delete &fs_;
@@ -51,7 +50,7 @@ GameLoader::~GameLoader() {
 /*
  * This function preloads a game
  */
-int32_t GameLoader::preload_game(GamePreloadPacket & mp) {
+int32_t GameLoader::preload_game(GamePreloadPacket& mp) {
 	// Load elemental data block
 	mp.read(fs_, game_, nullptr);
 
@@ -65,44 +64,63 @@ int32_t GameLoader::load_game(bool const multiplayer) {
 	ScopedTimer timer("GameLoader::load() took %ums");
 
 	log("Game: Reading Preload Data ... ");
-	{GamePreloadPacket                     p; p.read(fs_, game_);}
+	{
+		GamePreloadPacket p;
+		p.read(fs_, game_);
+	}
 	log("took %ums\n", timer.ms_since_last_query());
 
 	log("Game: Reading Game Class Data ... ");
-	{GameClassPacket                  p; p.read(fs_, game_);}
+	{
+		GameClassPacket p;
+		p.read(fs_, game_);
+	}
 	log("took %ums\n", timer.ms_since_last_query());
 
 	log("Game: Reading Map Data ... ");
-	GameMapPacket M;                          M.read(fs_, game_);
+	GameMapPacket M;
+	M.read(fs_, game_);
 	log("Game: Reading Map Data took %ums\n", timer.ms_since_last_query());
 
 	log("Game: Reading Player Info ... ");
-	{GamePlayerInfoPacket                 p; p.read(fs_, game_);}
+	{
+		GamePlayerInfoPacket p;
+		p.read(fs_, game_);
+	}
 	log("Game: Reading Player Info took %ums\n", timer.ms_since_last_query());
 
 	log("Game: Calling read_complete()\n");
 	M.read_complete(game_);
 	log("Game: read_complete took: %ums\n", timer.ms_since_last_query());
 
-	MapObjectLoader * const mol = M.get_map_object_loader();
+	MapObjectLoader* const mol = M.get_map_object_loader();
 
 	log("Game: Reading Player Economies Info ... ");
-	{GamePlayerEconomiesPacket            p; p.read(fs_, game_, mol);}
+	{
+		GamePlayerEconomiesPacket p;
+		p.read(fs_, game_, mol);
+	}
 	log("took %ums\n", timer.ms_since_last_query());
 
 	log("Game: Reading ai persistent data ... ");
-	{GamePlayerAiPersistentPacket           p; p.read(fs_, game_, mol);}
+	{
+		GamePlayerAiPersistentPacket p;
+		p.read(fs_, game_, mol);
+	}
 	log("took %ums\n", timer.ms_since_last_query());
 
 	log("Game: Reading Command Queue Data ... ");
-	{GameCmdQueuePacket                   p; p.read(fs_, game_, mol);}
+	{
+		GameCmdQueuePacket p;
+		p.read(fs_, game_, mol);
+	}
 	log("took %ums\n", timer.ms_since_last_query());
 
 	//  This must be after the command queue has been read.
 	log("Game: Parsing messages ... ");
 	PlayerNumber const nr_players = game_.map().get_nrplayers();
 	iterate_players_existing_const(p, nr_players, game_, player) {
-		const MessageQueue & messages = player->messages();
+		const MessageQueue& messages = player->messages();
 		for (const auto& temp_message : messages) {
 			Message* message = temp_message.second;
 			MessageId message_id = temp_message.first;
@@ -110,8 +128,7 @@ int32_t GameLoader::load_game(bool const multiplayer) {
 			// Renew MapObject connections
 			if (message->serial() > 0) {
 				MapObject* mo = game_.objects().get_object(message->serial());
-				mo->removed.connect
-					(boost::bind(&Player::message_object_removed, player, message_id));
+				mo->removed.connect(boost::bind(&Player::message_object_removed, player, message_id));
 			}
 		}
 	}
@@ -125,11 +142,13 @@ int32_t GameLoader::load_game(bool const multiplayer) {
 	// player.
 	if (!multiplayer) {
 		log("Game: Reading Interactive Player Data ... ");
-		{GameInteractivePlayerPacket       p; p.read(fs_, game_, mol);}
+		{
+			GameInteractivePlayerPacket p;
+			p.read(fs_, game_, mol);
+		}
 		log("took %ums\n", timer.ms_since_last_query());
 	}
 
 	return 0;
 }
-
 }

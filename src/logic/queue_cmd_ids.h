@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2008, 2010, 2012-2013 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -56,11 +56,11 @@ enum class QueueCommandTypes {
 	kSetWareTargetQuantity,
 	kResetWareTargetQuantity,
 	kSetWorkerTargetQuantity,
-	kResetWorkerTargetQuantity, // 16
+	kResetWorkerTargetQuantity,  // 16
 
 	// 17 was a command related to old events. removed
 
-	kSetWareMaxFill = 18,
+	kSetInputMaxFill = 18,
 
 	kMessageSetStatusRead = 21,
 	kMessageSetStatusArchived,
@@ -70,7 +70,7 @@ enum class QueueCommandTypes {
 
 	kEvictWorker,
 
-	kMilitarysiteSetSoldierPreference, // 26
+	kMilitarysiteSetSoldierPreference,  // 26
 
 	kSinkShip = 121,
 	kShipCancelExpedition,
@@ -80,22 +80,22 @@ enum class QueueCommandTypes {
 	kShipExplore,
 
 	kDestroyMapObject,
-	kAct, // 128
+	kAct,  // 128
 	// 129 was a command related to old events. removed
 	kIncorporate = 130,
 	kLuaScript,
 	kLuaCoroutine,
-	kCalculateStatistics, // 133
+	kCalculateStatistics,  // 133
 	kCallEconomyBalance = 200,
 
-	kDeleteMessage, // 201
+	kDeleteMessage,  // 201
 
 	kNetCheckSync = 250,
 	kReplaySyncWrite,
 	kReplaySyncRead,
-	kReplayEnd // 253
+	kReplayEnd  // 253
 };
 
-} // namespace Widelands
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_LOGIC_QUEUE_CMD_IDS_H

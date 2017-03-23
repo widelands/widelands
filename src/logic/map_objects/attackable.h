@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2009 by the Widelands Development Team
+ * Copyright (C) 2008-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -27,10 +27,10 @@ class Soldier;
 
 enum {
 	/**
-	 * This is the maximum radius that a military building can protect
-	 * in the sense that an enemy soldier that enters the player's territory
-	 * will call \ref Attackable::aggressor if it is that close.
-	 */
+    * This is the maximum radius that a military building can protect
+    * in the sense that an enemy soldier that enters the player's territory
+    * will call \ref Attackable::aggressor if it is that close.
+    */
 	MaxProtectionRadius = 25
 };
 
@@ -42,7 +42,7 @@ struct Attackable {
 	/**
 	 * Return the player that owns this attackable.
 	 */
-	virtual Player & owner() const = 0;
+	virtual Player& owner() const = 0;
 
 	/**
 	 * Determines whether this building can be attacked right now.
@@ -59,7 +59,7 @@ struct Attackable {
 	 * This allows the building to send protective forces to intercept
 	 * the soldier.
 	 */
-	virtual void aggressor(Soldier &) = 0;
+	virtual void aggressor(Soldier&) = 0;
 
 	/**
 	 * Called by a soldier who is standing on the building's flag
@@ -73,12 +73,12 @@ struct Attackable {
 	 * \return \c true if a soldier was launched in defense of the building,
 	 * or \c false if the building cannot defend itself any longer.
 	 */
-	virtual bool attack(Soldier &) = 0;
+	virtual bool attack(Soldier&) = 0;
 
 protected:
-	virtual ~Attackable() {}
+	virtual ~Attackable() {
+	}
 };
-
 }
 
 #endif  // end of include guard: WL_LOGIC_MAP_OBJECTS_ATTACKABLE_H

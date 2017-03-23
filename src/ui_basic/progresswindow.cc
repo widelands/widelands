@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007-2016 by the Widelands Development Team
+ * Copyright (C) 2007-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -34,49 +34,43 @@
 
 namespace {
 
-#define PROGRESS_FONT_COLOR_FG        RGBColor(128, 128, 255)
-#define PROGRESS_FONT_COLOR_BG        RGBColor(64, 64, 0)
-#define PROGRESS_STATUS_RECT_PADDING  2
-#define PROGRESS_STATUS_BORDER_X      2
-#define PROGRESS_STATUS_BORDER_Y      2
-#define PROGRESS_LABEL_POSITION_Y     90 /* in percents, from top */
+#define PROGRESS_FONT_COLOR_FG RGBColor(128, 128, 255)
+#define PROGRESS_FONT_COLOR_BG RGBColor(64, 64, 0)
+#define PROGRESS_STATUS_RECT_PADDING 2
+#define PROGRESS_STATUS_BORDER_X 2
+#define PROGRESS_STATUS_BORDER_Y 2
+#define PROGRESS_LABEL_POSITION_Y 90 /* in percents, from top */
 
-} // namespace
+}  // namespace
 
 namespace UI {
 
-ProgressWindow::ProgressWindow(const std::string& background) {
+ProgressWindow::ProgressWindow(const std::string& background) : UI::FullscreenWindow() {
 	set_background(background);
 	step(_("Loading…"));
 }
 
 ProgressWindow::~ProgressWindow() {
-	for (IProgressVisualization * visualization : visualizations_) {
-		visualization->stop(); //  inform visualizations
+	for (IProgressVisualization* visualization : visualizations_) {
+		visualization->stop();  //  inform visualizations
 	}
 }
 
-void ProgressWindow::draw_background
-	(RenderTarget & rt, const uint32_t xres, const uint32_t yres)
-{
-	label_center_.x = xres / 2;
-	label_center_.y = yres * PROGRESS_LABEL_POSITION_Y / 100;
-	Rect wnd_rect(Point(0, 0), xres, yres);
+void ProgressWindow::draw(RenderTarget& rt) {
+	FullscreenWindow::draw(rt);
+	// No float division to avoid Texture subsampling.
+	label_center_.x = get_w() / 2;
+	label_center_.y = get_h() * PROGRESS_LABEL_POSITION_Y / 100;
 
 	const uint32_t h =
-			UI::g_fh1->render(as_uifont(UI::g_fh1->fontset()->representative_character()))->height();
+	   UI::g_fh1->render(as_uifont(UI::g_fh1->fontset()->representative_character()))->height();
 
-	label_rectangle_.x = xres / 4;
-	label_rectangle_.w = xres / 2;
-	label_rectangle_.y =
-	label_center_.y - h / 2 - PROGRESS_STATUS_RECT_PADDING;
+	label_rectangle_.x = get_w() / 4;
+	label_rectangle_.w = get_w() / 2;
+	label_rectangle_.y = label_center_.y - h / 2 - PROGRESS_STATUS_RECT_PADDING;
 	label_rectangle_.h = h + 2 * PROGRESS_STATUS_RECT_PADDING;
 
-	const Image* bg = g_gr->images().get(background_);
-	rt.blitrect_scale(
-	   Rect(0, 0, xres, yres), bg, Rect(0, 0, bg->width(), bg->height()), 1., BlendMode::UseAlpha);
-
-	Rect border_rect = label_rectangle_;
+	Rectf border_rect = label_rectangle_;
 	border_rect.x -= PROGRESS_STATUS_BORDER_X;
 	border_rect.y -= PROGRESS_STATUS_BORDER_Y;
 	border_rect.w += 2 * PROGRESS_STATUS_BORDER_X;
@@ -86,65 +80,59 @@ void ProgressWindow::draw_background
 }
 
 /// Set a picture to render in the background
-void ProgressWindow::set_background(const std::string & file_name) {
-	RenderTarget & rt = *g_gr->get_render_target();
+void ProgressWindow::set_background(const std::string& file_name) {
+	clear_overlays();
 	if (!file_name.empty() && g_fs->file_exists(file_name)) {
-		background_ = file_name;
+		add_overlay_image(
+		   file_name, FullscreenWindow::Alignment(UI::Align::kCenter, UI::Align::kCenter));
 	} else {
-		background_ = "images/loadscreens/progress.png";
+		add_overlay_image("images/loadscreens/progress.png",
+		                  FullscreenWindow::Alignment(UI::Align::kLeft, UI::Align::kBottom));
 	}
-	draw_background(rt, g_gr->get_xres(), g_gr->get_yres());
+	draw(*g_gr->get_render_target());
 }
 
-void ProgressWindow::step(const std::string & description) {
-	RenderTarget & rt = *g_gr->get_render_target();
-
-	const uint32_t xres = g_gr->get_xres();
-	const uint32_t yres = g_gr->get_yres();
-
+void ProgressWindow::step(const std::string& description) {
+	RenderTarget& rt = *g_gr->get_render_target();
 	// always repaint the background first
-	draw_background(rt, xres, yres);
+	draw(rt);
 
 	rt.fill_rect(label_rectangle_, PROGRESS_FONT_COLOR_BG);
-	rt.blit(label_center_,
-			 UI::g_fh1->render(as_uifont(description, UI_FONT_SIZE_SMALL, PROGRESS_FONT_COLOR_FG)),
-			 BlendMode::UseAlpha,
-			 UI::Align::kCenter);
+	const Image* rendered_text =
+	   UI::g_fh1->render(as_uifont(description, UI_FONT_SIZE_SMALL, PROGRESS_FONT_COLOR_FG));
+	UI::center_vertically(rendered_text->height(), &label_center_);
+	rt.blit(label_center_, rendered_text, BlendMode::UseAlpha, UI::Align::kCenter);
 
 #ifdef _WIN32
-		// Pump events to prevent "not responding" on windows
-		SDL_PumpEvents();
+	// Pump events to prevent "not responding" on windows
+	SDL_PumpEvents();
 #endif
 	update(true);
 }
 
 void ProgressWindow::update(bool const repaint) {
-	for (IProgressVisualization * visualization : visualizations_) {
-		visualization->update(repaint); //  let visualizations do their work
+	for (IProgressVisualization* visualization : visualizations_) {
+		visualization->update(repaint);  //  let visualizations do their work
 	}
 	g_gr->refresh();
-
 }
 
 /// Register additional visualization (tips/hints, animation, etc)
-void ProgressWindow::add_visualization(IProgressVisualization * const instance)
-{
+void ProgressWindow::add_visualization(IProgressVisualization* const instance) {
 	// just add to collection
 	visualizations_.push_back(instance);
 }
 
-void ProgressWindow::remove_visualization(IProgressVisualization * instance) {
-	VisualizationArray & visualizations = visualizations_;
+void ProgressWindow::remove_visualization(IProgressVisualization* instance) {
+	VisualizationArray& visualizations = visualizations_;
 
 	for (VisualizationArray::iterator vis_iter = visualizations.begin();
-		  vis_iter != visualizations.end();
-		  ++vis_iter) {
+	     vis_iter != visualizations.end(); ++vis_iter) {
 
 		if (*vis_iter == instance) {
-			visualizations_.erase (vis_iter);
+			visualizations_.erase(vis_iter);
 			break;
 		}
 	}
 }
-
 }

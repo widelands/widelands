@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004, 2006-2009 by the Widelands Development Team
+ * Copyright (C) 2004-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -28,19 +28,16 @@ namespace Widelands {
 /**
  * Add a supply to the list.
 */
-void SupplyList::add_supply(Supply & supp)
-{
+void SupplyList::add_supply(Supply& supp) {
 	supplies_.push_back(&supp);
 }
 
 /**
  * Remove a supply from the list.
 */
-void SupplyList::remove_supply(Supply & supp)
-{
-	for (Supplies::iterator item_iter = supplies_.begin();
-		  item_iter != supplies_.end();
-		  ++item_iter) {
+void SupplyList::remove_supply(Supply& supp) {
+	for (Supplies::iterator item_iter = supplies_.begin(); item_iter != supplies_.end();
+	     ++item_iter) {
 
 		if (*item_iter == &supp) {
 			*item_iter = *(supplies_.end() - 1);
@@ -54,13 +51,11 @@ void SupplyList::remove_supply(Supply & supp)
  * Return whether there is at least one available
  * supply that can match the given request.
  */
-bool SupplyList::have_supplies(Game & game, const Request & req)
-{
+bool SupplyList::have_supplies(Game& game, const Request& req) {
 	for (size_t i = 0; i < supplies_.size(); ++i)
 		if (supplies_[i]->nr_supplies(game, req))
 			return true;
 
 	return false;
 }
-
 }

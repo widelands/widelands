@@ -92,7 +92,7 @@ explain_building_stat = {
       p(_[[This is enough explanation for now. Now try it out yourself. We want to know whether we still have taverns, so you have to choose the ‘Medium Buildings’ tab. Close the building statistics menu afterwards.]])
    ),
    obj_name = "check_taverns",
-   obj_title = _"Look up your number of taverns in the building statistics window.",
+   obj_title = _"Look up how many taverns you have.",
    obj_body = rt(
       listitem_bullet(_[[Choose the ‘Medium Buildings’ tab in the building statistics window.]]) ..
       listitem_bullet(_[[Look up how many taverns you have.]]) ..
@@ -409,7 +409,7 @@ economy_settings3 = {
       listitem_bullet(_[[Set the target quantity for marble columns to 20 and wait for your stonemason to produce them.]])
    ),
    obj_name = "produce_marble_columns",
-   obj_title = "Produce 20 marble columns.",
+   obj_title = _"Produce 20 marble columns.",
    obj_body = rt(
       p(_[[Sometimes, you will need many wares at the same time quickly – faster than they can be produced. In this case, it is good to have enough on reserve.]]) ..
       paragraphdivider() ..

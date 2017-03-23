@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2010 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -36,9 +36,9 @@ class Texture;
  */
 class Image {
 public:
-
 	Image() = default;
-	virtual ~Image() {}
+	virtual ~Image() {
+	}
 
 	// Dimensions of this Image in pixels.
 	virtual int width() const = 0;
@@ -52,6 +52,5 @@ public:
 private:
 	DISALLOW_COPY_AND_ASSIGN(Image);
 };
-
 
 #endif  // end of include guard: WL_GRAPHIC_IMAGE_H

@@ -46,12 +46,12 @@ tribes:new_trainingsite_type {
    },
 
    inputs = {
-      atlanteans_bread = 10,
-      smoked_fish = 6,
-      smoked_meat = 6,
-      shield_steel = 4,
-      shield_advanced = 4,
-      tabard_golden = 5
+      { name = "smoked_fish", amount = 6 },
+      { name = "smoked_meat", amount = 6 },
+      { name = "atlanteans_bread", amount = 10 },
+      { name = "tabard_golden", amount = 5 },
+      { name = "shield_steel", amount = 4 },
+      { name = "shield_advanced", amount = 4 },
    },
    outputs = {
       "atlanteans_soldier",
@@ -99,7 +99,7 @@ tribes:new_trainingsite_type {
       },
       upgrade_soldier_defense_0 = {
          -- TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-         descname = _"upgrading soldier defense from level 0 to level 1",
+         descname = pgettext("atlanteans_building", "upgrading soldier defense from level 0 to level 1"),
          actions = {
             "check_soldier=soldier defense 0", -- Fails when aren't any soldier of level 0 defense
             "sleep=30000",
@@ -110,7 +110,7 @@ tribes:new_trainingsite_type {
       },
       upgrade_soldier_defense_1 = {
          -- TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-         descname = _"upgrading soldier defense from level 1 to level 2",
+         descname = pgettext("atlanteans_building", "upgrading soldier defense from level 1 to level 2"),
          actions = {
             "check_soldier=soldier defense 1", -- Fails when aren't any soldier of level 1 defense
             "sleep=30000",
@@ -121,7 +121,7 @@ tribes:new_trainingsite_type {
       },
       upgrade_soldier_health_0 = {
          -- TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-         descname = _"upgrading soldier health from level 0 to level 1",
+         descname = pgettext("atlanteans_building", "upgrading soldier health from level 0 to level 1"),
          actions = {
             "check_soldier=soldier health 0", -- Fails when aren't any soldier of level 0 health
             "sleep=30000",
@@ -132,7 +132,7 @@ tribes:new_trainingsite_type {
       },
       upgrade_soldier_evade_0 = {
          -- TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-         descname = _"upgrading soldier evade from level 0 to level 1",
+         descname = pgettext("atlanteans_building", "upgrading soldier evade from level 0 to level 1"),
          actions = {
             "check_soldier=soldier evade 0", -- Fails when aren't any soldier of level 0 evade
             "sleep=30000",
@@ -143,7 +143,7 @@ tribes:new_trainingsite_type {
       },
       upgrade_soldier_evade_1 = {
          -- TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-         descname = _"upgrading soldier evade from level 1 to level 2",
+         descname = pgettext("atlanteans_building", "upgrading soldier evade from level 1 to level 2"),
          actions = {
             "check_soldier=soldier evade 1", -- Fails when aren't any soldier of level 1 evade
             "sleep=30000",

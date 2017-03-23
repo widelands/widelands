@@ -1,3 +1,5 @@
+-- The helptext documentation is located in /doc/sphinx/lua_tribes_buildings_rst.org
+
 -- This include can be removed when all help texts have been defined.
 include "tribes/scripting/help/global_helptexts.lua"
 
@@ -6,6 +8,7 @@ function building_helptext_lore()
    return no_lore_text_yet()
 end
 
+--    :returns: Localized lore author or empty string.
 function building_helptext_lore_author()
    -- TRANSLATORS#: Lore author helptext for a building
    return no_lore_author_text_yet()

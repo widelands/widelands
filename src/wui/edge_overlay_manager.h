@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2015 by the Widelands Development Team
+ * Copyright (C) 2006-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -39,8 +39,7 @@ public:
 
 	//  When a road overlay information is requested the same data as for a
 	//  field is returned (a uint8_t which needs to be ANDed).
-	void register_overlay
-		(Widelands::Coords, uint8_t where, OverlayId overlay_id = 0);
+	void register_overlay(Widelands::Coords, uint8_t where, OverlayId overlay_id = 0);
 	void remove_overlay(Widelands::Coords);
 	void remove_overlay(OverlayId overlay_id);
 	uint8_t get_overlay(Widelands::Coords c) const;
@@ -59,7 +58,5 @@ private:
 
 	DISALLOW_COPY_AND_ASSIGN(EdgeOverlayManager);
 };
-
-
 
 #endif  // end of include guard: WL_WUI_EDGE_OVERLAY_MANAGER_H

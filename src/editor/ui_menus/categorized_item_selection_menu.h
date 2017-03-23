@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2015 by the Widelands Development Team
+ * Copyright (C) 2006-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -27,6 +27,7 @@
 #include "boost/format.hpp"
 
 #include "base/i18n.h"
+#include "graphic/graphic.h"
 #include "graphic/image.h"
 #include "logic/description_maintainer.h"
 #include "logic/map_objects/world/editor_category.h"
@@ -49,7 +50,7 @@ public:
 	   UI::Panel* parent,
 	   const DescriptionMaintainer<Widelands::EditorCategory>& categories,
 	   const DescriptionMaintainer<DescriptionType>& descriptions,
-	   std::function<UI::Checkbox* (UI::Panel* parent, const DescriptionType& descr)> create_checkbox,
+	   std::function<UI::Checkbox*(UI::Panel* parent, const DescriptionType& descr)> create_checkbox,
 	   const std::function<void()> select_correct_tool,
 	   ToolType* const tool);
 
@@ -70,24 +71,32 @@ private:
 };
 
 template <typename DescriptionType, typename ToolType>
-CategorizedItemSelectionMenu<DescriptionType, ToolType>::CategorizedItemSelectionMenu
-	(UI::Panel* parent,
-	const DescriptionMaintainer<Widelands::EditorCategory>& categories,
-	const DescriptionMaintainer<DescriptionType>& descriptions,
-	const std::function<UI::Checkbox* (UI::Panel* parent, const DescriptionType& descr)>
-		create_checkbox,
-	const std::function<void()> select_correct_tool,
-	ToolType* const tool) :
-	UI::Box(parent, 0, 0, UI::Box::Vertical),
-	descriptions_(descriptions),
-	select_correct_tool_(select_correct_tool),
-	protect_against_recursive_select_(false),
-	tab_panel_(this, 0, 0, nullptr),
-	current_selection_names_(this, 0, 0, 20, 20, "", UI::Align::kCenter,
-									 UI::MultilineTextarea::ScrollMode::kNoScrolling),
-	tool_(tool)
-{
-	add(&tab_panel_, UI::Align::kCenter);
+CategorizedItemSelectionMenu<DescriptionType, ToolType>::CategorizedItemSelectionMenu(
+   UI::Panel* parent,
+   const DescriptionMaintainer<Widelands::EditorCategory>& categories,
+   const DescriptionMaintainer<DescriptionType>& descriptions,
+   const std::function<UI::Checkbox*(UI::Panel* parent, const DescriptionType& descr)>
+      create_checkbox,
+   const std::function<void()> select_correct_tool,
+   ToolType* const tool)
+   : UI::Box(parent, 0, 0, UI::Box::Vertical),
+     descriptions_(descriptions),
+     select_correct_tool_(select_correct_tool),
+     protect_against_recursive_select_(false),
+     tab_panel_(this, 0, 0, g_gr->images().get("images/wui/window_background_dark.png")),
+     current_selection_names_(this,
+                              0,
+                              0,
+                              20,
+                              20,
+                              "",
+                              UI::Align::kCenter,
+                              g_gr->images().get("images/ui_basic/but1.png"),
+                              UI::MultilineTextarea::ScrollMode::kNoScrolling),
+     tool_(tool) {
+	current_selection_names_.set_background(
+	   g_gr->images().get("images/wui/window_background_dark.png"));
+	add(&tab_panel_);
 
 	for (uint32_t category_index = 0; category_index < categories.size(); ++category_index) {
 		const Widelands::EditorCategory& category = categories.get(category_index);
@@ -104,16 +113,14 @@ CategorizedItemSelectionMenu<DescriptionType, ToolType>::CategorizedItemSelectio
 		const int kSpacing = 5;
 		vertical->add_space(kSpacing);
 
-		const uint32_t items_in_row =
-		   static_cast<uint32_t>(std::ceil(std::sqrt(static_cast<float>(item_indices.size()))));
 		int nitems_handled = 0;
 		UI::Box* horizontal = nullptr;
 		for (const int i : item_indices) {
-			if (nitems_handled % items_in_row == 0) {
+			if (nitems_handled % category.items_per_row() == 0) {
 				horizontal = new UI::Box(vertical, 0, 0, UI::Box::Horizontal);
 				horizontal->add_space(kSpacing);
 
-				vertical->add(horizontal, UI::Align::kLeft);
+				vertical->add(horizontal);
 				vertical->add_space(kSpacing);
 			}
 			assert(horizontal != nullptr);
@@ -122,13 +129,13 @@ CategorizedItemSelectionMenu<DescriptionType, ToolType>::CategorizedItemSelectio
 			cb->set_state(tool_->is_enabled(i));
 			cb->changedto.connect(boost::bind(&CategorizedItemSelectionMenu::selected, this, i, _1));
 			checkboxes_[i] = cb;
-			horizontal->add(cb, UI::Align::kLeft);
+			horizontal->add(cb);
 			horizontal->add_space(kSpacing);
 			++nitems_handled;
 		}
 		tab_panel_.add(category.name(), category.picture(), vertical, category.descname());
 	}
-	add(&current_selection_names_, UI::Align::kCenter, true);
+	add(&current_selection_names_, UI::Box::Resizing::kFullSize);
 	tab_panel_.sigclicked.connect(boost::bind(&CategorizedItemSelectionMenu::update_label, this));
 	update_label();
 }
@@ -142,7 +149,7 @@ void CategorizedItemSelectionMenu<DescriptionType, ToolType>::selected(const int
 	//  TODO(unknown): This code is erroneous. It checks the current key state. What it
 	//  needs is the key state at the time the mouse was clicked. See the
 	//  usage comment for get_key_state.
-	const bool multiselect = get_key_state(SDL_SCANCODE_LCTRL) | get_key_state(SDL_SCANCODE_RCTRL);
+	const bool multiselect = SDL_GetModState() & KMOD_CTRL;
 	if (!t && (!multiselect || tool_->get_nr_enabled() == 1))
 		checkboxes_[n]->set_state(true);
 	else {

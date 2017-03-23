@@ -2,17 +2,18 @@
 # Copyright (C) 2005-2016 Widelands Development Team
 # 
 # Translators:
+# Elisabeth Jäger, 2016
 # wl-zocker, 2014
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2011
-# Venatrix, 2015
+# Elisabeth Jäger, 2015
 # wl-zocker, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-03-02 08:54+0000\n"
-"PO-Revision-Date: 2016-03-02 09:51+0000\n"
-"Last-Translator: Venatrix\n"
+"POT-Creation-Date: 2016-12-04 07:02+0000\n"
+"PO-Revision-Date: 2016-12-08 09:28+0000\n"
+"Last-Translator: Elisabeth Jäger\n"
 "Language-Team: German (http://www.transifex.com/widelands/widelands/language/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -81,10 +82,10 @@ msgstr "Für alles, was du auf hoher See machst, brauchst du einen Hafen an der 
 msgid ""
 "Additionally, ports offer the possibility of transporting wares via ships. "
 "When you click on the port you already have, you will notice two additional "
-"tabs: wares and workers in the dock. They are waiting for a ship to "
-"transport them to another port. Currently, there are none because we have "
-"not yet built a second port. So let’s change this!"
-msgstr "Außerdem bieten Häfen die Möglichkeit, Waren mit Schiffen zu transportieren. Wenn du auf den Hafen klickst, den du schon hast, siehst du zwei zusätzliche Reiter: Waren und Arbeiter im Dock. Sie warten auf ein Schiff, das sie zu einem anderen Hafen bringen soll. Im Moment ist das Dock noch leer, weil wir noch keinen zweiten Hafen gebaut haben. Das wollen wir nun ändern!"
+"tabs: ‘Wares waiting to be shipped’ and ‘workers waiting to embark.’ They "
+"are waiting for a ship to transport them to another port. Currently, there "
+"are none because we have not yet built a second port. So let’s change this!"
+msgstr "Außerdem bieten Häfen die Möglichkeit, Waren mit Schiffen zu transportieren. Wenn du auf den Hafen klickst, den du schon hast, siehst du zwei zusätzliche Reiter: „Waren, die verladen werden sollen“ und „Arbeiter, die an Bord gehen wollen“. Sie warten auf ein Schiff, das sie zu einem anderen Hafen bringen soll. Im Moment ist das Dock noch leer, weil wir noch keinen zweiten Hafen gebaut haben. Das wollen wir nun ändern!"
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:55
 msgid "Building ports"
@@ -420,7 +421,7 @@ msgstr "Auf dieser Karte gibt es keinen Feind, den du fürchten müsstest. Wie i
 msgid "“%s”"
 msgstr "„%s“"
 
-#: ../../data/scripting/format_scenario.lua:146
+#: ../../data/scripting/format_scenario.lua:96
 msgid "New Objective"
 msgid_plural "New Objectives"
 msgstr[0] "Neues Ziel"

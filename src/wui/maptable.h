@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2006-2009, 2011, 2014-2015 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -25,7 +25,6 @@
 #include "ui_basic/table.h"
 #include "wui/mapdata.h"
 
-
 /**
  * A table listing all the available maps for saveloading.
  * This contains a UI model only; the callig classes have to define the data model
@@ -33,10 +32,7 @@
  */
 class MapTable : public UI::Table<uintptr_t> {
 public:
-
-	MapTable(UI::Panel * parent,
-				 int32_t x, int32_t y, uint32_t w, uint32_t h,
-				 const bool descending);
+	MapTable(UI::Panel* parent, int32_t x, int32_t y, uint32_t w, uint32_t h);
 
 	/// Fill the table with maps and directories.
 	void fill(const std::vector<MapData>& entries, MapData::DisplayType type);

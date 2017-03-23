@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2003, 2006-2011, 2013, 2015 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -38,6 +38,7 @@
 #include "editor/ui_menus/tool_menu.h"
 #include "editor/ui_menus/toolsize_menu.h"
 #include "graphic/graphic.h"
+#include "graphic/playercolor.h"
 #include "logic/map.h"
 #include "logic/map_objects/tribes/tribes.h"
 #include "logic/map_objects/world/resource_description.h"
@@ -55,19 +56,6 @@
 #include "wui/interactive_base.h"
 
 namespace {
-
-static char const * const player_pictures[] = {
-	"images/players/editor_player_01_starting_pos.png",
-	"images/players/editor_player_02_starting_pos.png",
-	"images/players/editor_player_03_starting_pos.png",
-	"images/players/editor_player_04_starting_pos.png",
-	"images/players/editor_player_05_starting_pos.png",
-	"images/players/editor_player_06_starting_pos.png",
-	"images/players/editor_player_07_starting_pos.png",
-	"images/players/editor_player_08_starting_pos.png"
-};
-
-
 using Widelands::Building;
 
 // Load all tribes from disk.
@@ -82,8 +70,7 @@ void update_resource_overlay(const Widelands::NoteFieldResourceChanged& note,
                              FieldOverlayManager* field_overlay_manager) {
 	//  Ok, we're doing something. First remove the current overlays.
 	if (note.old_resource != Widelands::kNoResource) {
-		const std::string str =
-		   world.get_resource(note.old_resource)->editor_image(note.old_amount);
+		const std::string str = world.get_resource(note.old_resource)->editor_image(note.old_amount);
 		const Image* pic = g_gr->images().get(str);
 		field_overlay_manager->remove_overlay(note.fc, pic);
 	}
@@ -100,68 +87,61 @@ void update_resource_overlay(const Widelands::NoteFieldResourceChanged& note,
 
 }  // namespace
 
-EditorInteractive::EditorInteractive(Widelands::EditorGameBase & e) :
-	InteractiveBase(e, g_options.pull_section("global")),
-	need_save_(false),
-	realtime_(SDL_GetTicks()),
-	is_painting_(false),
-	tools_(new Tools()),
-	history_(new EditorHistory(undo_, redo_)),
+EditorInteractive::EditorInteractive(Widelands::EditorGameBase& e)
+   : InteractiveBase(e, g_options.pull_section("global")),
+     need_save_(false),
+     realtime_(SDL_GetTicks()),
+     is_painting_(false),
+     undo_(nullptr),
+     redo_(nullptr),
+     tools_(new Tools()),
+     history_(new EditorHistory(*undo_, *redo_)) {
+	add_toolbar_button("wui/menus/menu_toggle_menu", "menu", _("Main Menu"), &mainmenu_, true);
+	mainmenu_.open_window = [this] { new EditorMainMenu(*this, mainmenu_); };
 
-#define INIT_BUTTON(image, name, tooltip)                                       \
-	TOOLBAR_BUTTON_COMMON_PARAMETERS(name),                                      \
-	g_gr->images().get(image),                                                   \
-	tooltip                                                                      \
+	add_toolbar_button(
+	   "wui/editor/editor_menu_toggle_tool_menu", "tools", _("Tools"), &toolmenu_, true);
+	toolmenu_.open_window = [this] { new EditorToolMenu(*this, toolmenu_); };
 
-	toggle_main_menu_
-	(INIT_BUTTON
-	 ("images/wui/menus/menu_toggle_menu.png", "menu", _("Main Menu"))),
-	toggle_tool_menu_
-	(INIT_BUTTON
-	 ("images/wui/editor/editor_menu_toggle_tool_menu.png", "tools", _("Tools"))),
-	toggle_toolsize_menu_
-	(INIT_BUTTON
-	 ("images/wui/editor/editor_menu_set_toolsize_menu.png", "toolsize",
-	  _("Tool Size"))),
-	toggle_minimap_
-	(INIT_BUTTON
-	 ("images/wui/menus/menu_toggle_minimap.png", "minimap", _("Minimap"))),
-	toggle_buildhelp_
-	(INIT_BUTTON
-	 ("images/wui/menus/menu_toggle_buildhelp.png", "buildhelp", _("Show Building Spaces (on/off)"))),
-	toggle_player_menu_
-	(INIT_BUTTON
-	 ("images/wui/editor/editor_menu_player_menu.png", "players", _("Players"))),
-	undo_
-	(INIT_BUTTON
-	 ("images/wui/editor/editor_undo.png", "undo", _("Undo"))),
-	redo_
-	(INIT_BUTTON
-	 ("images/wui/editor/editor_redo.png", "redo", _("Redo"))),
-	toggle_help_
-	(INIT_BUTTON
-	 ("images/ui_basic/menu_help.png", "help", _("Help")))
-{
-	toggle_main_menu_.sigclicked.connect(boost::bind(&EditorInteractive::toggle_mainmenu, this));
-	toggle_tool_menu_.sigclicked.connect(boost::bind(&EditorInteractive::tool_menu_btn, this));
-	toggle_toolsize_menu_.sigclicked.connect(boost::bind(&EditorInteractive::toolsize_menu_btn, this));
-	toggle_minimap_.sigclicked.connect(boost::bind(&EditorInteractive::toggle_minimap, this));
-	toggle_buildhelp_.sigclicked.connect(boost::bind(&EditorInteractive::toggle_buildhelp, this));
-	toggle_player_menu_.sigclicked.connect(boost::bind(&EditorInteractive::toggle_playermenu, this));
-	undo_.sigclicked.connect([this] {history_->undo_action(egbase().world());});
-	redo_.sigclicked.connect([this] {history_->redo_action(egbase().world());});
-	toggle_help_.sigclicked.connect(boost::bind(&EditorInteractive::toggle_help, this));
+	add_toolbar_button(
+	   "wui/editor/editor_menu_set_toolsize_menu", "toolsize", _("Tool Size"), &toolsizemenu_, true);
+	toolsizemenu_.open_window = [this] { new EditorToolsizeMenu(*this, toolsizemenu_); };
 
-	toolbar_.set_layout_toplevel(true);
-	toolbar_.add(&toggle_main_menu_,       UI::Align::kLeft);
-	toolbar_.add(&toggle_tool_menu_,       UI::Align::kLeft);
-	toolbar_.add(&toggle_toolsize_menu_,   UI::Align::kLeft);
-	toolbar_.add(&toggle_minimap_,         UI::Align::kLeft);
-	toolbar_.add(&toggle_buildhelp_,       UI::Align::kLeft);
-	toolbar_.add(&toggle_player_menu_,     UI::Align::kLeft);
-	toolbar_.add(&undo_,                   UI::Align::kLeft);
-	toolbar_.add(&redo_,                   UI::Align::kLeft);
-	toolbar_.add(&toggle_help_,            UI::Align::kLeft);
+	add_toolbar_button(
+	   "wui/editor/editor_menu_player_menu", "players", _("Players"), &playermenu_, true);
+	playermenu_.open_window = [this] {
+		select_tool(tools_->set_starting_pos, EditorTool::First);
+		new EditorPlayerMenu(*this, playermenu_);
+	};
+
+	toolbar_.add_space(15);
+
+	add_toolbar_button(
+	   "wui/menus/menu_toggle_minimap", "minimap", _("Minimap"), &minimap_registry(), true);
+	minimap_registry().open_window = [this] { toggle_minimap(); };
+
+	toggle_buildhelp_ = add_toolbar_button(
+	   "wui/menus/menu_toggle_buildhelp", "buildhelp", _("Show Building Spaces (on/off)"));
+	toggle_buildhelp_->sigclicked.connect(boost::bind(&EditorInteractive::toggle_buildhelp, this));
+
+	reset_zoom_ = add_toolbar_button("wui/menus/menu_reset_zoom", "reset_zoom", _("Reset zoom"));
+	reset_zoom_->sigclicked.connect([this] {
+		zoom_around(1.f, Vector2f(get_w() / 2.f, get_h() / 2.f), MapView::Transition::Smooth);
+	});
+
+	toolbar_.add_space(15);
+
+	undo_ = add_toolbar_button("wui/editor/editor_undo", "undo", _("Undo"));
+	undo_->sigclicked.connect([this] { history_->undo_action(egbase().world()); });
+
+	redo_ = add_toolbar_button("wui/editor/editor_redo", "redo", _("Redo"));
+	redo_->sigclicked.connect([this] { history_->redo_action(egbase().world()); });
+
+	toolbar_.add_space(15);
+
+	add_toolbar_button("ui_basic/menu_help", "help", _("Help"), &helpmenu_, true);
+	helpmenu_.open_window = [this] { new EditorHelp(*this, helpmenu_, &egbase().lua()); };
+
 	adjust_toolbar_position();
 
 #ifndef NDEBUG
@@ -178,20 +158,19 @@ EditorInteractive::EditorInteractive(Widelands::EditorGameBase & e) :
 	      [this](const Widelands::NoteFieldResourceChanged& note) {
 		      update_resource_overlay(note, egbase().world(), mutable_field_overlay_manager());
 		   });
+
+	minimap_registry().minimap_type = MiniMapType::kStaticMap;
 }
 
 void EditorInteractive::register_overlays() {
-	Widelands::Map & map = egbase().map();
+	Widelands::Map& map = egbase().map();
 
 	//  Starting locations
 	Widelands::PlayerNumber const nr_players = map.get_nrplayers();
-	assert(nr_players <= MAX_PLAYERS);
+	assert(nr_players <= kMaxPlayers);
 	iterate_player_numbers(p, nr_players) {
 		if (Widelands::Coords const sp = map.get_starting_pos(p)) {
-			const Image* player_image = g_gr->images().get(player_pictures[p - 1]);
-			assert(player_image);
-			mutable_field_overlay_manager()->register_overlay
-				(sp, player_image, 8, Point(player_image->width() / 2, STARTING_POS_HOTSPOT_Y));
+			tools_->set_starting_pos.set_starting_pos(*this, p, sp, &map);
 		}
 	}
 
@@ -208,20 +187,19 @@ void EditorInteractive::register_overlays() {
 	}
 }
 
-
-void EditorInteractive::load(const std::string & filename) {
+void EditorInteractive::load(const std::string& filename) {
 	assert(filename.size());
 
-	Widelands::Map & map = egbase().map();
+	Widelands::Map& map = egbase().map();
 
 	cleanup_for_load();
 
 	std::unique_ptr<Widelands::MapLoader> ml(map.get_correct_loader(filename));
 	if (!ml.get())
-		throw WLWarning
-			(_("Unsupported format"),
-			 _("Widelands could not load the file \"%s\". The file format seems to be incompatible."),
-			 filename.c_str());
+		throw WLWarning(
+		   _("Unsupported format"),
+		   _("Widelands could not load the file \"%s\". The file format seems to be incompatible."),
+		   filename.c_str());
 	ml->preload_map(true);
 
 	UI::ProgressWindow loader_ui("images/loadscreens/editor.jpg");
@@ -243,8 +221,7 @@ void EditorInteractive::load(const std::string & filename) {
 	map_changed(MapWas::kReplaced);
 }
 
-void EditorInteractive::cleanup_for_load()
-{
+void EditorInteractive::cleanup_for_load() {
 	// TODO(unknown): get rid of cleanup_for_load, it tends to be very messy
 	// Instead, delete and re-create the egbase.
 	egbase().cleanup_for_load();
@@ -253,18 +230,16 @@ void EditorInteractive::cleanup_for_load()
 	mutable_field_overlay_manager()->register_overlay_callback_function(nullptr);
 }
 
-
 /// Called just before the editor starts, after postload, init and gfxload.
 void EditorInteractive::start() {
 	// Run the editor initialization script, if any
 	try {
 		egbase().lua().run_script("map:scripting/editor_init.lua");
-	} catch (LuaScriptNotExistingError &) {
+	} catch (LuaScriptNotExistingError&) {
 		// do nothing.
 	}
 	map_changed(MapWas::kReplaced);
 }
-
 
 /**
  * Called every frame.
@@ -281,18 +256,14 @@ void EditorInteractive::think() {
 	egbase().get_gametime_pointer() += realtime_ - lasttime;
 }
 
-
-
 void EditorInteractive::exit() {
 	if (need_save_) {
-		if (get_key_state(SDL_SCANCODE_LCTRL) || get_key_state(SDL_SCANCODE_RCTRL)) {
+		if (SDL_GetModState() & KMOD_CTRL) {
 			end_modal<UI::Panel::Returncodes>(UI::Panel::Returncodes::kBack);
 		} else {
-			UI::WLMessageBox mmb
-			(this,
-			 _("Unsaved Map"),
-			 _("The map has not been saved, do you really want to quit?"),
-			 UI::WLMessageBox::MBoxType::kOkCancel);
+			UI::WLMessageBox mmb(this, _("Unsaved Map"),
+			                     _("The map has not been saved, do you really want to quit?"),
+			                     UI::WLMessageBox::MBoxType::kOkCancel);
 			if (mmb.run<UI::Panel::Returncodes>() == UI::Panel::Returncodes::kBack)
 				return;
 		}
@@ -300,16 +271,9 @@ void EditorInteractive::exit() {
 	end_modal<UI::Panel::Returncodes>(UI::Panel::Returncodes::kBack);
 }
 
-void EditorInteractive::toggle_mainmenu() {
-	if (mainmenu_.window)
-		delete mainmenu_.window;
-	else
-		new EditorMainMenu(*this, mainmenu_);
-}
-
 void EditorInteractive::map_clicked(bool should_draw) {
 	history_->do_action(tools_->current(), tools_->use_tool, egbase().map(), egbase().world(),
-	                     get_sel_pos(), *this, should_draw);
+	                    get_sel_pos(), *this, should_draw);
 	set_need_save(true);
 }
 
@@ -329,37 +293,12 @@ bool EditorInteractive::handle_mousepress(uint8_t btn, int32_t x, int32_t y) {
 
 /// Needed to get freehand painting tools (hold down mouse and move to edit).
 void EditorInteractive::set_sel_pos(Widelands::NodeAndTriangle<> const sel) {
-	bool const target_changed =
-	    tools_->current().operates_on_triangles() ?
-	    sel.triangle != get_sel_pos().triangle : sel.node != get_sel_pos().node;
+	bool const target_changed = tools_->current().operates_on_triangles() ?
+	                               sel.triangle != get_sel_pos().triangle :
+	                               sel.node != get_sel_pos().node;
 	InteractiveBase::set_sel_pos(sel);
 	if (target_changed && is_painting_)
 		map_clicked(true);
-}
-
-void EditorInteractive::tool_menu_btn() {
-	if (toolmenu_.window)
-		delete toolmenu_.window;
-	else
-		new EditorToolMenu(*this, toolmenu_);
-}
-
-
-void EditorInteractive::toggle_playermenu() {
-	if (playermenu_.window)
-		delete playermenu_.window;
-	else {
-		select_tool(tools_->set_starting_pos, EditorTool::First);
-		new EditorPlayerMenu(*this, playermenu_);
-	}
-
-}
-
-void EditorInteractive::toolsize_menu_btn() {
-	if (toolsizemenu_.window)
-		delete toolsizemenu_.window;
-	else
-		new EditorToolsizeMenu(*this, toolsizemenu_);
 }
 
 void EditorInteractive::set_sel_radius_and_update_menu(uint32_t const val) {
@@ -367,31 +306,24 @@ void EditorInteractive::set_sel_radius_and_update_menu(uint32_t const val) {
 		set_sel_radius(0);
 		return;
 	}
-	if (UI::UniqueWindow * const w = toolsizemenu_.window) {
+	if (UI::UniqueWindow* const w = toolsizemenu_.window) {
 		dynamic_cast<EditorToolsizeMenu&>(*w).update(val);
 	} else {
 		set_sel_radius(val);
 	}
 }
 
-void EditorInteractive::start_painting()
-{
+void EditorInteractive::start_painting() {
 	is_painting_ = true;
 }
 
-void EditorInteractive::stop_painting()
-{
+void EditorInteractive::stop_painting() {
 	is_painting_ = false;
 }
 
-void EditorInteractive::toggle_help() {
-	if (helpmenu_.window)
-		delete helpmenu_.window;
-	else
-		new EditorHelp(*this, helpmenu_, &egbase().lua());
+void EditorInteractive::on_buildhelp_changed(const bool value) {
+	toggle_buildhelp_->set_perm_pressed(value);
 }
-
-
 
 bool EditorInteractive::handle_key(bool const down, SDL_Keysym const code) {
 	bool handled = InteractiveBase::handle_key(down, code);
@@ -400,7 +332,7 @@ bool EditorInteractive::handle_key(bool const down, SDL_Keysym const code) {
 		// only on down events
 
 		switch (code.sym) {
-			// Sel radius
+		// Sel radius
 		case SDLK_1:
 			set_sel_radius_and_update_menu(0);
 			handled = true;
@@ -438,8 +370,10 @@ bool EditorInteractive::handle_key(bool const down, SDL_Keysym const code) {
 			handled = true;
 			break;
 		case SDLK_0:
-			set_sel_radius_and_update_menu(9);
-			handled = true;
+			if (!(code.mod & KMOD_CTRL)) {
+				set_sel_radius_and_update_menu(9);
+				handled = true;
+			}
 			break;
 
 		case SDLK_LSHIFT:
@@ -466,14 +400,13 @@ bool EditorInteractive::handle_key(bool const down, SDL_Keysym const code) {
 			break;
 
 		case SDLK_c:
-			set_display_flag
-			(InteractiveBase::dfShowCensus,
-			 !get_display_flag(InteractiveBase::dfShowCensus));
+			set_display_flag(
+			   InteractiveBase::dfShowCensus, !get_display_flag(InteractiveBase::dfShowCensus));
 			handled = true;
 			break;
 
 		case SDLK_h:
-			toggle_mainmenu();
+			mainmenu_.toggle();
 			handled = true;
 			break;
 
@@ -483,7 +416,7 @@ bool EditorInteractive::handle_key(bool const down, SDL_Keysym const code) {
 			break;
 
 		case SDLK_m:
-			toggle_minimap();
+			minimap_registry().toggle();
 			handled = true;
 			break;
 
@@ -494,7 +427,7 @@ bool EditorInteractive::handle_key(bool const down, SDL_Keysym const code) {
 			break;
 
 		case SDLK_p:
-			toggle_playermenu();
+			playermenu_.toggle();
 			handled = true;
 			break;
 
@@ -505,7 +438,7 @@ bool EditorInteractive::handle_key(bool const down, SDL_Keysym const code) {
 			break;
 
 		case SDLK_t:
-			tool_menu_btn();
+			toolmenu_.toggle();
 			handled = true;
 			break;
 
@@ -524,7 +457,7 @@ bool EditorInteractive::handle_key(bool const down, SDL_Keysym const code) {
 			break;
 
 		case SDLK_F1:
-			toggle_help();
+			helpmenu_.toggle();
 			handled = true;
 			break;
 
@@ -553,35 +486,34 @@ bool EditorInteractive::handle_key(bool const down, SDL_Keysym const code) {
 	return handled;
 }
 
-
-void EditorInteractive::select_tool
-(EditorTool & primary, EditorTool::ToolIndex const which) {
-	if (which == EditorTool::First && & primary != tools_->current_pointer) {
+void EditorInteractive::select_tool(EditorTool& primary, EditorTool::ToolIndex const which) {
+	if (which == EditorTool::First && &primary != tools_->current_pointer) {
 		if (primary.has_size_one()) {
 			set_sel_radius(0);
-			if (UI::UniqueWindow * const w = toolsizemenu_.window) {
+			if (UI::UniqueWindow* const w = toolsizemenu_.window) {
 				EditorToolsizeMenu& toolsize_menu = dynamic_cast<EditorToolsizeMenu&>(*w);
 				toolsize_menu.set_buttons_enabled(false);
 			}
 		} else {
-			if (UI::UniqueWindow * const w = toolsizemenu_.window) {
+			if (UI::UniqueWindow* const w = toolsizemenu_.window) {
 				EditorToolsizeMenu& toolsize_menu = dynamic_cast<EditorToolsizeMenu&>(*w);
 				toolsize_menu.update(toolsize_menu.value());
 			}
 		}
-		Widelands::Map & map = egbase().map();
+		Widelands::Map& map = egbase().map();
 		//  A new tool has been selected. Remove all registered overlay callback
 		//  functions.
 		mutable_field_overlay_manager()->register_overlay_callback_function(nullptr);
 		map.recalc_whole_map(egbase().world());
 	}
 	tools_->current_pointer = &primary;
-	tools_->use_tool        = which;
+	tools_->use_tool = which;
 
-	if (char const * const sel_pic = primary.get_sel(which))
+	if (const Image* sel_pic = primary.get_sel(which)) {
 		set_sel_picture(sel_pic);
-	else
+	} else {
 		unset_sel_picture();
+	}
 	set_sel_triangles(primary.operates_on_triangles());
 }
 
@@ -590,8 +522,8 @@ void EditorInteractive::select_tool
  *
  *  data is a pointer to a tribe (for buildings)
  */
-void EditorInteractive::reference_player_tribe
-(Widelands::PlayerNumber player, void const * const data) {
+void EditorInteractive::reference_player_tribe(Widelands::PlayerNumber player,
+                                               void const* const data) {
 	assert(0 < player);
 	assert(player <= egbase().map().get_nrplayers());
 
@@ -603,22 +535,21 @@ void EditorInteractive::reference_player_tribe
 }
 
 /// Unreference !once!, if referenced many times, this will leak a reference.
-void EditorInteractive::unreference_player_tribe
-(Widelands::PlayerNumber const player, void const * const data) {
+void EditorInteractive::unreference_player_tribe(Widelands::PlayerNumber const player,
+                                                 void const* const data) {
 	assert(player <= egbase().map().get_nrplayers());
 	assert(data);
 
-	std::vector<PlayerReferences> & references = player_tribe_references_;
+	std::vector<PlayerReferences>& references = player_tribe_references_;
 	std::vector<PlayerReferences>::iterator it = references.begin();
-	std::vector<PlayerReferences>::const_iterator references_end =
-	    references.end();
+	std::vector<PlayerReferences>::const_iterator references_end = references.end();
 	if (player) {
 		for (; it < references_end; ++it)
 			if (it->player == player && it->object == data) {
 				references.erase(it);
 				break;
 			}
-	} else //  Player is invalid. Remove all references from this object.
+	} else  //  Player is invalid. Remove all references from this object.
 		while (it < references_end)
 			if (it->object == data) {
 				it = references.erase(it);
@@ -627,8 +558,7 @@ void EditorInteractive::unreference_player_tribe
 				++it;
 }
 
-bool EditorInteractive::is_player_tribe_referenced
-(Widelands::PlayerNumber const  player) {
+bool EditorInteractive::is_player_tribe_referenced(Widelands::PlayerNumber const player) {
 	assert(0 < player);
 	assert(player <= egbase().map().get_nrplayers());
 
@@ -641,8 +571,8 @@ bool EditorInteractive::is_player_tribe_referenced
 
 void EditorInteractive::run_editor(const std::string& filename, const std::string& script_to_run) {
 	Widelands::EditorGameBase egbase(nullptr);
-	EditorInteractive & eia = *new EditorInteractive(egbase);
-	egbase.set_ibase(&eia); // TODO(unknown): get rid of this
+	EditorInteractive& eia = *new EditorInteractive(egbase);
+	egbase.set_ibase(&eia);  // TODO(unknown): get rid of this
 	{
 		UI::ProgressWindow loader_ui("images/loadscreens/editor.jpg");
 		std::vector<std::string> tipstext;
@@ -650,19 +580,16 @@ void EditorInteractive::run_editor(const std::string& filename, const std::strin
 		GameTips editortips(loader_ui, tipstext);
 
 		{
-			Widelands::Map & map = *new Widelands::Map;
+			Widelands::Map& map = *new Widelands::Map;
 			egbase.set_map(&map);
 			if (filename.empty()) {
 				loader_ui.step(_("Creating empty map…"));
-				map.create_empty_map(
-				   egbase.world(),
-				   64,
-				   64,
-					0,
-					/** TRANSLATORS: Default name for new map */
-				   _("No Name"),
-				         /** TRANSLATORS: Map author name when it hasn't been set yet */
-					g_options.pull_section("global").get_string("realname", pgettext("author_name", "Unknown")));
+				map.create_empty_map(egbase.world(), 64, 64, 0,
+				                     /** TRANSLATORS: Default name for new map */
+				                     _("No Name"),
+				                     /** TRANSLATORS: Map author name when it hasn't been set yet */
+				                     g_options.pull_section("global").get_string(
+				                        "realname", pgettext("author_name", "Unknown")));
 
 				load_all_tribes(&egbase, &loader_ui);
 
@@ -689,36 +616,34 @@ void EditorInteractive::run_editor(const std::string& filename, const std::strin
 
 void EditorInteractive::map_changed(const MapWas& action) {
 	switch (action) {
-		case MapWas::kReplaced:
-			history_.reset(new EditorHistory(undo_, redo_));
-			undo_.set_enabled(false);
-			redo_.set_enabled(false);
+	case MapWas::kReplaced:
+		history_.reset(new EditorHistory(*undo_, *redo_));
+		undo_->set_enabled(false);
+		redo_->set_enabled(false);
 
-			tools_.reset(new Tools());
-			select_tool(tools_->info, EditorTool::First);
-			set_sel_radius(0);
+		tools_.reset(new Tools());
+		select_tool(tools_->info, EditorTool::First);
+		set_sel_radius(0);
 
-			set_need_save(false);
-			show_buildhelp(true);
+		set_need_save(false);
+		show_buildhelp(true);
 
-			// Close all windows.
-			for (Panel* child = get_first_child(); child; child = child->get_next_sibling()) {
-				if (is_a(UI::Window, child)) {
-					child->die();
-				}
+		// Close all windows.
+		for (Panel* child = get_first_child(); child; child = child->get_next_sibling()) {
+			if (is_a(UI::Window, child)) {
+				child->die();
 			}
+		}
 
-			// Make sure that we will start at coordinates (0,0).
-			set_viewpoint(Point(0, 0), true);
-			set_sel_pos
-				(Widelands::NodeAndTriangle<>
-					(Widelands::Coords(0, 0),
-					 Widelands::TCoords<>
-						(Widelands::Coords(0, 0), Widelands::TCoords<>::D)));
-			break;
+		// Make sure that we will start at coordinates (0,0).
+		set_view(MapView::View{Vector2f(0, 0), 1.f}, Transition::Jump);
+		set_sel_pos(Widelands::NodeAndTriangle<>(
+		   Widelands::Coords(0, 0),
+		   Widelands::TCoords<>(Widelands::Coords(0, 0), Widelands::TCoords<>::D)));
+		break;
 
-		case MapWas::kGloballyMutated:
-			break;
+	case MapWas::kGloballyMutated:
+		break;
 	}
 
 	mutable_field_overlay_manager()->remove_all_overlays();

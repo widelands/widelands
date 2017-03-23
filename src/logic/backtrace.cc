@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2009 by the Widelands Development Team
+ * Copyright (C) 2008-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -33,10 +33,10 @@ std::string get_backtrace() {
 #ifndef __APPLE__
 #define BACKTRACE_STACKSIZE 24
 
-	void * stack[BACKTRACE_STACKSIZE];
+	void* stack[BACKTRACE_STACKSIZE];
 	size_t size = backtrace(stack, BACKTRACE_STACKSIZE);
-	char * * const list = backtrace_symbols(stack, size);
-	for (char * const * it = list; size; --size, ++it) {
+	char** const list = backtrace_symbols(stack, size);
+	for (char *const *it = list; size; --size, ++it) {
 		result += *it;
 		result += '\n';
 	}

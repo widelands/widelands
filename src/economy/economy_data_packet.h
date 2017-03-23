@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004, 2006-2010 by the Widelands Development Team
+ * Copyright (C) 2004-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -30,16 +30,16 @@ class MapObjectLoader;
 struct MapObjectSaver;
 
 class EconomyDataPacket {
-	public:
-		EconomyDataPacket(Economy * e) : eco_(e) {}
+public:
+	EconomyDataPacket(Economy* e) : eco_(e) {
+	}
 
-		void read(FileRead &);
-		void write(FileWrite &);
+	void read(FileRead&);
+	void write(FileWrite&);
 
-	private:
-		Economy * eco_;
+private:
+	Economy* eco_;
 };
-
 }
 
 #endif  // end of include guard: WL_ECONOMY_ECONOMY_DATA_PACKET_H

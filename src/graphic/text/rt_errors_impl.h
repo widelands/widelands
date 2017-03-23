@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2012 by the Widelands Development Team
+ * Copyright (C) 2006-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -27,14 +27,15 @@
 namespace RT {
 
 struct SyntaxErrorImpl : public SyntaxError {
-	SyntaxErrorImpl(size_t line, size_t col, std::string expected, std::string got, std::string next_chars)
-		: SyntaxError
-		  ((boost::format("Syntax error at %1%:%2%: expected %3%, got '%4%'. String continues with: '%5%'")
-					% line % col % expected % got % next_chars)
-			.str())
-	{}
+	SyntaxErrorImpl(
+	   size_t line, size_t col, std::string expected, std::string got, std::string next_chars)
+	   : SyntaxError(
+	        (boost::format(
+	            "Syntax error at %1%:%2%: expected %3%, got '%4%'. String continues with: '%5%'") %
+	         line % col % expected % got % next_chars)
+	           .str()) {
+	}
 };
-
 }
 
 #endif  // end of include guard: WL_GRAPHIC_TEXT_RT_ERRORS_IMPL_H

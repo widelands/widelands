@@ -13,6 +13,9 @@ include "scripting/format_scenario.lua"
 local tribe = wl.Game():get_tribe_description("barbarians")
 local soldier = wl.Game():get_worker_description(tribe.soldier)
 
+local empire_tribe = wl.Game():get_tribe_description("empire")
+local empire_soldier = wl.Game():get_worker_description(empire_tribe.soldier)
+
 -- =============
 -- Texts below
 -- =============
@@ -31,7 +34,7 @@ abilities = {
    position = "topright",
    title = _"Soldiers’ abilities",
    body = rt(
-      p(_[[A new soldier is created like a worker: when a military building needs a soldier, a carrier grabs the needed weapons and armor from a warehouse (or your headquarters) and walks up the road to your new building. Basic Barbarian soldiers do not use armor, they only need an ax.]]) ..
+      p(_[[New soldiers are created differently from normal workers: recruits will walk from a warehouse (or your headquarters) to the barracks where they will receive some basic training and become soldiers. Basic Barbarian soldiers do not use armor, they only need an ax.]]) ..
       p(_[[Take a look at the soldiers that are on their way to our military buildings. They look different from normal workers: they have a health bar over their head that displays their remaining health, and they have four symbols, which symbolize the individual soldier’s current levels in the four different categories: health, attack, defense and evade.]]) ..
       -- TRANSLATORS: the current stats are: 3 health, 5 attack, 0 defense, 2 evade.
       p((_[[If a Barbarian soldier is fully trained, he has level %1% health, level %2% attack, level %3% defense and level %4% evade. This is one fearsome warrior then! The individual abilities have the following meaning:]]):bformat(soldier.max_health_level, soldier.max_attack_level, soldier.max_defense_level, soldier.max_evade_level))
@@ -118,7 +121,7 @@ trainingcamp2 = {
       p(_[[Great, our training camp has now been finished, too. Now nothing will hinder us from getting the strongest warriors the world has ever seen.]]) ..
       p(_[[To train in the training camp, our soldiers need food like in the battle arena, but no strong beer. Instead, they need different axes for attack training and helmets for health training.]]) ..
       p(_[[This equipment is produced in smithies out of coal, iron, and sometimes gold. You will learn more about this in the second scenario of the Barbarian campaign.]]) ..
-      p(_[[You should also keep in mind that each of the three tribes in Widelands has its own way of training, so the buildings and wares are different. Also, the ability levels cannot be compared: an Imperial soldier with evade level 0 has a 30% chance of evading, while a Barbarian soldier at the same level only has a 25% chance.]])
+      p(_[[You should also keep in mind that each of the three tribes in Widelands has its own way of training, so the buildings and wares are different. Also, the ability levels cannot be compared: an Imperial soldier has a base attack of %1% at level 0, while a Barbarian soldier at the same level only has a base attack of %2%.]]:bformat(empire_soldier.base_min_attack, soldier.base_min_attack))
    )
 }
 
@@ -154,7 +157,7 @@ dismantle = {
    title = _"Dismantle your sentry",
    body = rt(
       h1(_"Dismantling military buildings") ..
-      p(_[[You can only reduce the number of soldiers to one. The last soldier of a building will never come out (unless this building is attacked). If you want to have your soldier elsewhere, you will have to dismantle the building (buildings of an alien tribe cannot be dismantled, only be burned down).]]) ..
+      p(_[[You can only reduce the number of soldiers to one. The last soldier of a building will never come out (unless this building is attacked). If you want to have your soldier elsewhere, you will have to dismantle or burn down the building.]]) ..
       p(_[[However, destroying a military building is always linked with a risk: the land is still yours, but it is no longer protected. Any enemy that builds his own military sites can take over that land without a fight, causing your buildings to burst into flames. Furthermore, some parts of the land can now be hidden under the fog of war. You should therefore only dismantle military buildings deep inside your territory where you are safe from enemies.]]) ..
       p(_[[Have you seen your sentry? Since it cannot contain many soldiers and is next to a stronger barrier, it is rather useless.]]) ..
       paragraphdivider() ..

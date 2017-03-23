@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004, 2006-2013 by the Widelands Development Team
+ * Copyright (C) 2004-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -33,8 +33,8 @@
 #include "logic/map_objects/map_object.h"
 #include "logic/map_objects/tribes/warelist.h"
 #include "logic/map_objects/tribes/wareworker.h"
-#include "ui_basic/unique_window.h"
-
+#include "notifications/note_ids.h"
+#include "notifications/notifications.h"
 
 namespace Widelands {
 
@@ -48,6 +48,23 @@ class Request;
 struct Route;
 struct Router;
 struct Supply;
+
+struct NoteEconomy {
+	CAN_BE_SENT_AS_NOTE(NoteId::Economy)
+
+	// When 2 economies have been merged, this is the economy number that has
+	// been removed, while the other one is the number of the resulting economy.
+	// For all other messages old_economy == new_economy.
+	size_t old_economy;
+	size_t new_economy;
+
+	enum class Action { kMerged, kDeleted };
+	const Action action;
+
+	NoteEconomy(size_t init_old, size_t init_new, const Action& init_action)
+	   : old_economy(init_old), new_economy(init_new), action(init_action) {
+	}
+};
 
 /**
  * Each Economy represents all building and flags, which are connected over the same
@@ -90,59 +107,62 @@ public:
 	/// be used for the merged economy.
 	struct TargetQuantity {
 		Quantity permanent;
-		Time     last_modified;
+		Time last_modified;
 	};
 
-	Economy(Player &);
+	Economy(Player&);
 	~Economy();
 
-	Player & owner() const {return owner_;}
+	Player& owner() const {
+		return owner_;
+	}
 
-	static void check_merge(Flag &, Flag &);
-	static void check_split(Flag &, Flag &);
+	static void check_merge(Flag&, Flag&);
+	static void check_split(Flag&, Flag&);
 
-	bool find_route
-		(Flag & start, Flag & end,
-		 Route * route,
-		 WareWorker type,
-		 int32_t cost_cutoff = -1);
+	bool find_route(Flag& start, Flag& end, Route* route, WareWorker type, int32_t cost_cutoff = -1);
 
-	using WarehouseAcceptFn = boost::function<bool (Warehouse &)>;
-	Warehouse * find_closest_warehouse
-		(Flag & start, WareWorker type = wwWORKER, Route * route = nullptr,
-		 uint32_t cost_cutoff = 0,
-		 const WarehouseAcceptFn & acceptfn = WarehouseAcceptFn());
+	using WarehouseAcceptFn = boost::function<bool(Warehouse&)>;
+	Warehouse* find_closest_warehouse(Flag& start,
+	                                  WareWorker type = wwWORKER,
+	                                  Route* route = nullptr,
+	                                  uint32_t cost_cutoff = 0,
+	                                  const WarehouseAcceptFn& acceptfn = WarehouseAcceptFn());
 
-	std::vector<Flag *>::size_type get_nrflags() const {return flags_.size();}
-	void    add_flag(Flag &);
-	void remove_flag(Flag &);
+	std::vector<Flag*>::size_type get_nrflags() const {
+		return flags_.size();
+	}
+	void add_flag(Flag&);
+	void remove_flag(Flag&);
 
 	// Returns an arbitrary flag or nullptr if this is an economy without flags
 	// (i.e. an Expedition ship).
 	Flag* get_arbitrary_flag();
 
-	void set_ware_target_quantity  (DescriptionIndex, Quantity, Time);
+	void set_ware_target_quantity(DescriptionIndex, Quantity, Time);
 	void set_worker_target_quantity(DescriptionIndex, Quantity, Time);
 
-	void    add_wares  (DescriptionIndex, Quantity count = 1);
-	void remove_wares  (DescriptionIndex, Quantity count = 1);
+	void add_wares(DescriptionIndex, Quantity count = 1);
+	void remove_wares(DescriptionIndex, Quantity count = 1);
 
-	void    add_workers(DescriptionIndex, Quantity count = 1);
+	void add_workers(DescriptionIndex, Quantity count = 1);
 	void remove_workers(DescriptionIndex, Quantity count = 1);
 
-	void    add_warehouse(Warehouse &);
-	void remove_warehouse(Warehouse &);
-	const std::vector<Warehouse *>& warehouses() const {return warehouses_;}
+	void add_warehouse(Warehouse&);
+	void remove_warehouse(Warehouse&);
+	const std::vector<Warehouse*>& warehouses() const {
+		return warehouses_;
+	}
 
-	void    add_request(Request &);
-	void remove_request(Request &);
+	void add_request(Request&);
+	void remove_request(Request&);
 
-	void    add_supply(Supply &);
-	void remove_supply(Supply &);
+	void add_supply(Supply&);
+	void remove_supply(Supply&);
 
 	/// information about this economy
-	Quantity stock_ware  (DescriptionIndex const i) {
-		return wares_  .stock(i);
+	Quantity stock_ware(DescriptionIndex const i) {
+		return wares_.stock(i);
 	}
 	Quantity stock_worker(DescriptionIndex const i) {
 		return workers_.stock(i);
@@ -158,42 +178,49 @@ public:
 	/// ware type by overproducing a worker type from it.
 	bool needs_worker(DescriptionIndex) const;
 
-	const TargetQuantity & ware_target_quantity  (DescriptionIndex const i) const {
+	const TargetQuantity& ware_target_quantity(DescriptionIndex const i) const {
 		return ware_target_quantities_[i];
 	}
-	TargetQuantity       & ware_target_quantity  (DescriptionIndex const i)       {
+	TargetQuantity& ware_target_quantity(DescriptionIndex const i) {
 		return ware_target_quantities_[i];
 	}
-	const TargetQuantity & worker_target_quantity(DescriptionIndex const i) const {
+	const TargetQuantity& worker_target_quantity(DescriptionIndex const i) const {
 		return worker_target_quantities_[i];
 	}
-	TargetQuantity       & worker_target_quantity(DescriptionIndex const i)       {
+	TargetQuantity& worker_target_quantity(DescriptionIndex const i) {
 		return worker_target_quantities_[i];
 	}
 
-	void show_options_window();
-	UI::UniqueWindow::Registry& optionswindow_registry() {
-		return optionswindow_registry_;
+	bool has_window() const {
+		return has_window_;
+	}
+	void set_has_window(bool yes) {
+		has_window_ = yes;
 	}
 
-	const WareList & get_wares  () const {return wares_;}
-	const WareList & get_workers() const {return workers_;}
+	const WareList& get_wares() const {
+		return wares_;
+	}
+	const WareList& get_workers() const {
+		return workers_;
+	}
 
 	///< called by \ref Cmd_Call_Economy_Balance
 	void balance(uint32_t timerid);
 
-	void rebalance_supply() {start_request_timer();}
+	void rebalance_supply() {
+		start_request_timer();
+	}
 
 private:
-
 	// This structs is to store distance from supply to request(or), but to allow unambiguous
-	// sorting if distances are the same, we use also serial number of provider and type of provider (flag,
+	// sorting if distances are the same, we use also serial number of provider and type of provider
+	// (flag,
 	// warehouse)
 	struct UniqueDistance {
 		bool operator<(const UniqueDistance& other) const {
-       		return std::forward_as_tuple(distance, serial, provider_type)
-				<
-				std::forward_as_tuple(other.distance, other.serial, other.provider_type);
+			return std::forward_as_tuple(distance, serial, provider_type) <
+			       std::forward_as_tuple(other.distance, other.serial, other.provider_type);
 		}
 
 		uint32_t distance;
@@ -201,46 +228,46 @@ private:
 		SupplyProviders provider_type;
 	};
 
-/*************/
-/* Functions */
-/*************/
-	void do_remove_flag(Flag &);
+	/*************/
+	/* Functions */
+	/*************/
+	void do_remove_flag(Flag&);
 	void reset_all_pathfinding_cycles();
 
-	void merge(Economy &);
+	void merge(Economy&);
 	void check_splits();
-	void split(const std::set<OPtr<Flag> > &);
+	void split(const std::set<OPtr<Flag>>&);
 
 	void start_request_timer(int32_t delta = 200);
 
-	Supply * find_best_supply(Game &, const Request &, int32_t & cost);
-	void process_requests(Game &, RSPairStruct &);
-	void balance_requestsupply(Game &);
-	void handle_active_supplies(Game &);
-	void create_requested_workers(Game &);
-	void create_requested_worker(Game &, DescriptionIndex);
+	Supply* find_best_supply(Game&, const Request&, int32_t& cost);
+	void process_requests(Game&, RSPairStruct* supply_pairs);
+	void balance_requestsupply(Game&);
+	void handle_active_supplies(Game&);
+	void create_requested_workers(Game&);
+	void create_requested_worker(Game&, DescriptionIndex);
 
-	bool has_request(Request &);
+	bool has_request(Request&);
 
-/*************/
-/* Variables */
-/*************/
-	using RequestList = std::vector<Request *>;
+	/*************/
+	/* Variables */
+	/*************/
+	using RequestList = std::vector<Request*>;
 
-	Player & owner_;
+	Player& owner_;
 
-	using Flags = std::vector<Flag *>;
+	using Flags = std::vector<Flag*>;
 	Flags flags_;
-	WareList wares_;     ///< virtual storage with all wares in this Economy
-	WareList workers_;   ///< virtual storage with all workers in this Economy
-	std::vector<Warehouse *> warehouses_;
+	WareList wares_;    ///< virtual storage with all wares in this Economy
+	WareList workers_;  ///< virtual storage with all workers in this Economy
+	std::vector<Warehouse*> warehouses_;
 
-	RequestList requests_; ///< requests
+	RequestList requests_;  ///< requests
 	SupplyList supplies_;
 
-	TargetQuantity        * ware_target_quantities_;
-	TargetQuantity        * worker_target_quantities_;
-	Router                 * router_;
+	TargetQuantity* ware_target_quantities_;
+	TargetQuantity* worker_target_quantities_;
+	Router* router_;
 
 	using SplitPair = std::pair<OPtr<Flag>, OPtr<Flag>>;
 	std::vector<SplitPair> split_checks_;
@@ -252,14 +279,13 @@ private:
 	uint32_t request_timerid_;
 
 	static std::unique_ptr<Soldier> soldier_prototype_;
-	UI::UniqueWindow::Registry optionswindow_registry_;
+	bool has_window_;
 
 	// 'list' of unique providers
 	std::map<UniqueDistance, Supply*> available_supplies_;
 
 	DISALLOW_COPY_AND_ASSIGN(Economy);
 };
-
 }
 
 #endif  // end of include guard: WL_ECONOMY_ECONOMY_H

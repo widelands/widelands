@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004, 2006-2011 by the Widelands Development Team
+ * Copyright (C) 2004-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -37,13 +37,17 @@ class Game;
  * \ref Implementation interface.
  */
 struct ComputerPlayer {
-	ComputerPlayer(Widelands::Game &, const Widelands::PlayerNumber);
+	ComputerPlayer(Widelands::Game&, const Widelands::PlayerNumber);
 	virtual ~ComputerPlayer();
 
-	virtual void think () = 0;
+	virtual void think() = 0;
 
-	Widelands::Game & game() const {return game_;}
-	Widelands::PlayerNumber player_number() {return player_number_;}
+	Widelands::Game& game() const {
+		return game_;
+	}
+	Widelands::PlayerNumber player_number() {
+		return player_number_;
+	}
 
 	/**
 	 * Interface to a concrete implementation, used to instantiate AIs.
@@ -51,27 +55,30 @@ struct ComputerPlayer {
 	 * \see get_implementations()
 	 */
 	struct Implementation {
+		enum class Type { kEmpty, kDefault };
+
 		std::string name;
 		std::string descname;
 		std::string icon_filename;
-		virtual ~Implementation() {}
-		virtual ComputerPlayer * instantiate
-			(Widelands::Game &, Widelands::PlayerNumber) const = 0;
+		Type type;
+		virtual ~Implementation() {
+		}
+		virtual ComputerPlayer* instantiate(Widelands::Game&, Widelands::PlayerNumber) const = 0;
 	};
-	using ImplementationVector = std::vector<ComputerPlayer::Implementation const *>;
+	using ImplementationVector = std::vector<ComputerPlayer::Implementation const*>;
 
 	/**
 	 * Get a list of available AI implementations.
 	 */
-	static const ImplementationVector & get_implementations();
+	static const ImplementationVector& get_implementations();
 
 	/**
 	 * Get the best matching implementation for this name.
 	 */
-	static const Implementation * get_implementation(const std::string & name);
+	static const Implementation* get_implementation(const std::string& name);
 
 private:
-	Widelands::Game & game_;
+	Widelands::Game& game_;
 	Widelands::PlayerNumber const player_number_;
 
 	DISALLOW_COPY_AND_ASSIGN(ComputerPlayer);

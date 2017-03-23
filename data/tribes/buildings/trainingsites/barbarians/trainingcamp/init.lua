@@ -51,17 +51,17 @@ tribes:new_trainingsite_type {
    },
 
    inputs = {
-      barbarians_bread = 10,
-      fish = 6,
-      meat = 6,
-      ax_sharp = 2,
-      ax_broad = 2,
-      ax_bronze = 2,
-      ax_battle = 2,
-      ax_warriors = 2,
-      helmet = 2,
-      helmet_mask = 2,
-      helmet_warhelm = 2
+      { name = "fish", amount = 6 },
+      { name = "meat", amount = 6 },
+      { name = "barbarians_bread", amount = 10 },
+      { name = "ax_sharp", amount = 2 },
+      { name = "ax_broad", amount = 2 },
+      { name = "ax_bronze", amount = 2 },
+      { name = "ax_battle", amount = 2 },
+      { name = "ax_warriors", amount = 2 },
+      { name = "helmet", amount = 2 },
+      { name = "helmet_mask", amount = 2 },
+      { name = "helmet_warhelm", amount = 2 }
    },
    outputs = {
       "barbarians_soldier",
@@ -107,7 +107,7 @@ tribes:new_trainingsite_type {
       },
       upgrade_soldier_attack_0 = {
          -- TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-         descname = _"upgrading soldier attack from level 0 to level 1",
+         descname = pgettext("barbarians_building", "upgrading soldier attack from level 0 to level 1"),
          actions = {
             "check_soldier=soldier attack 0", -- Fails when aren't any soldier of level 0 attack
             "sleep=30000",
@@ -118,7 +118,7 @@ tribes:new_trainingsite_type {
       },
       upgrade_soldier_attack_1 = {
          -- TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-         descname = _"upgrading soldier attack from level 1 to level 2",
+         descname = pgettext("barbarians_building", "upgrading soldier attack from level 1 to level 2"),
          actions = {
             "check_soldier=soldier attack 1",
             "sleep=30000",
@@ -129,7 +129,7 @@ tribes:new_trainingsite_type {
       },
       upgrade_soldier_attack_2 = {
          -- TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-         descname = _"upgrading soldier attack from level 2 to level 3",
+         descname = pgettext("barbarians_building", "upgrading soldier attack from level 2 to level 3"),
          actions = {
             "check_soldier=soldier attack 2",
             "sleep=30000",
@@ -140,7 +140,7 @@ tribes:new_trainingsite_type {
       },
       upgrade_soldier_attack_3 = {
          -- TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-         descname = _"upgrading soldier attack from level 3 to level 4",
+         descname = pgettext("barbarians_building", "upgrading soldier attack from level 3 to level 4"),
          actions = {
             "check_soldier=soldier attack 3",
             "sleep=30000",
@@ -151,7 +151,7 @@ tribes:new_trainingsite_type {
       },
       upgrade_soldier_attack_4 = {
          -- TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-         descname = _"upgrading soldier attack from level 4 to level 5",
+         descname = pgettext("barbarians_building", "upgrading soldier attack from level 4 to level 5"),
          actions = {
             "check_soldier=soldier attack 4",
             "sleep=30000",
@@ -162,7 +162,7 @@ tribes:new_trainingsite_type {
       },
       upgrade_soldier_health_0 = {
          -- TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-         descname = _"upgrading soldier health from level 0 to level 1",
+         descname = pgettext("barbarians_building", "upgrading soldier health from level 0 to level 1"),
          actions = {
             "check_soldier=soldier health 0",
             "sleep=30000",
@@ -173,7 +173,7 @@ tribes:new_trainingsite_type {
       },
       upgrade_soldier_health_1 = {
          -- TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-         descname = _"upgrading soldier health from level 1 to level 2",
+         descname = pgettext("barbarians_building", "upgrading soldier health from level 1 to level 2"),
          actions = {
             "check_soldier=soldier health 1",
             "sleep=30000",
@@ -184,7 +184,7 @@ tribes:new_trainingsite_type {
       },
       upgrade_soldier_health_2 = {
          -- TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-         descname = _"upgrading soldier health from level 2 to level 3",
+         descname = pgettext("barbarians_building", "upgrading soldier health from level 2 to level 3"),
          actions = {
             "check_soldier=soldier health 2",
             "sleep=30000",

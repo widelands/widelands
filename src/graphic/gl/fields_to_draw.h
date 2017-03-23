@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2015 by the Widelands Development Team
+ * Copyright (C) 2006-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -21,29 +21,64 @@
 #define WL_GRAPHIC_GL_FIELDS_TO_DRAW_H
 
 #include <cstddef>
+#include <limits>
 #include <string>
 #include <vector>
 
 #include <stdint.h>
 
+#include "base/vector.h"
 #include "logic/map_objects/tribes/road_textures.h"
+#include "logic/player.h"
+#include "logic/widelands.h"
+#include "logic/widelands_geometry.h"
 
 // Helper struct that contains the data needed for drawing all fields. All
 // methods are inlined for performance reasons.
 class FieldsToDraw {
 public:
+	static constexpr int kInvalidIndex = std::numeric_limits<int>::min();
+
 	struct Field {
-		int fx, fy;  // geometric coordinates (i.e. map coordinates that can be out of bounds).
-		float gl_x, gl_y;  // GL Position of this field.
-		float pixel_x, pixel_y;  // Pixel position relative to top left.
-		float texture_x, texture_y;  // Texture coordinates.
-		float brightness;            // brightness of the pixel
-		uint8_t ter_r, ter_d;        // Texture index of the right and down triangle.
+		Widelands::Coords geometric_coords;  // geometric coordinates (i.e. map coordinates that can
+		                                     // be out of bounds).
+		Widelands::FCoords fcoords;  // The normalized coords and the field this is refering to.
+		Vector2f gl_position;        // GL Position of this field.
+
+		// Surface pixel this will be plotted on.
+		Vector2f surface_pixel;
+
+		// Rendertarget pixel this will be plotted on. This is only different by
+		// the Rendertarget::get_rect().origin() of the view window.
+		Vector2f rendertarget_pixel;
+		Vector2f texture_coords;  // Texture coordinates.
+		float brightness;         // brightness of the pixel
+
+		// The next values are not necessarily the true data of this field, but
+		// what the player should see. For example in fog of war we always draw
+		// what we saw last.
 		uint8_t roads;  // Bitmask of roads to render, see logic/roadtype.h.
-		const RoadTextures* road_textures; // Road Textures to use for drawing.
+		bool is_border;
+		Widelands::Vision vision;
+		Widelands::Player* owner;  // can be nullptr.
+
+		// Index of neighbors in this 'FieldsToDraw'. kInvalidIndex if this
+		// neighbor is not contained.
+		int ln_index;
+		int rn_index;
+		int trn_index;
+		int bln_index;
+		int brn_index;
+
+		inline bool all_neighbors_valid() const {
+			return ln_index != kInvalidIndex && rn_index != kInvalidIndex &&
+			       trn_index != kInvalidIndex && bln_index != kInvalidIndex &&
+			       brn_index != kInvalidIndex;
+		}
 	};
 
-	FieldsToDraw() = default;
+	FieldsToDraw() {
+	}
 
 	// Resize this fields to draw for reuse.
 	void reset(int minfx, int maxfx, int minfy, int maxfy) {
@@ -60,15 +95,16 @@ public:
 	}
 
 	// Calculates the index of the given field with ('fx', 'fy') being geometric
-	// coordinates in the map. Returns -1 if this field is not in the fields_to_draw.
+	// coordinates in the map. Returns kInvalidIndex if this field is not in the
+	// fields_to_draw.
 	inline int calculate_index(int fx, int fy) const {
 		uint16_t xidx = fx - min_fx_;
 		if (xidx >= w_) {
-			return -1;
+			return kInvalidIndex;
 		}
 		uint16_t yidx = fy - min_fy_;
 		if (yidx >= h_) {
-			return -1;
+			return kInvalidIndex;
 		}
 		return yidx * w_ + xidx;
 	}
@@ -101,6 +137,5 @@ private:
 
 	std::vector<Field> fields_;
 };
-
 
 #endif  // end of include guard: WL_GRAPHIC_GL_FIELDS_TO_DRAW_H

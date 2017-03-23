@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2015 by the Widelands Development Team
+ * Copyright (C) 2006-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -21,17 +21,17 @@
 
 namespace Widelands {
 
-Coords::Coords() {}
+Coords::Coords() {
+}
 
-Coords::Coords(const int16_t nx, const int16_t ny)
-		: x(nx), y(ny)
-	{}
+Coords::Coords(const int16_t nx, const int16_t ny) : x(nx), y(ny) {
+}
 
-bool Coords::operator== (const Coords& other) const {
+bool Coords::operator==(const Coords& other) const {
 	return x == other.x && y == other.y;
 }
 
-bool Coords::operator!= (const Coords & other) const {
+bool Coords::operator!=(const Coords& other) const {
 	return !(*this == other);
 }
 
@@ -44,7 +44,7 @@ void Coords::reorigin(Coords new_origin, const Extent& extent) {
 		if (y < new_origin.y)
 			y += extent.h;
 		y -= new_origin.y;
-		if ((y & 1) && (new_origin.y & 1) && ++ new_origin.x == extent.w)
+		if ((y & 1) && (new_origin.y & 1) && ++new_origin.x == extent.w)
 			new_origin.x = 0;
 		if (x < new_origin.x)
 			x += extent.w;

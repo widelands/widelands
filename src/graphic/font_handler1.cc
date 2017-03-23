@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2011 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -39,7 +39,6 @@
 #include "graphic/texture_cache.h"
 #include "io/filesystem/filesystem.h"
 
-
 using namespace std;
 using namespace boost;
 
@@ -52,7 +51,7 @@ namespace {
 // 30 MB was enough to cache texts for many frames (> 1000), while it is
 // quickly overflowing in the map selection menu.
 // This might need reevaluation is the new font handler is used for more stuff.
-const uint32_t RICHTEXT_TEXTURE_CACHE = 30 << 20;   // shifting converts to MB
+const uint32_t RICHTEXT_TEXTURE_CACHE = 30 << 20;  // shifting converts to MB
 
 // An Image implementation that recreates a rich text texture when needed on
 // the fly. It is meant to be saved into the ImageCache.
@@ -60,20 +59,25 @@ class RTImage : public Image {
 public:
 	RTImage(const string& ghash,
 	        TextureCache* texture_cache,
-	        std::function<RT::Renderer* ()> get_renderer,
+	        std::function<RT::Renderer*()> get_renderer,
 	        const string& text,
 	        int gwidth)
 	   : hash_(ghash),
 	     text_(text),
 	     width_(gwidth),
-		  get_renderer_(get_renderer),
+	     get_renderer_(get_renderer),
 	     texture_cache_(texture_cache) {
 	}
-	virtual ~RTImage() {}
+	virtual ~RTImage() {
+	}
 
 	// Implements Image.
-	int width() const override {return texture()->width();}
-	int height() const override {return texture()->height();}
+	int width() const override {
+		return texture()->width();
+	}
+	int height() const override {
+		return texture()->height();
+	}
 
 	const BlitData& blit_data() const override {
 		return texture()->blit_data();
@@ -92,12 +96,11 @@ private:
 	const string hash_;
 	const string text_;
 	int width_;
-	std::function<RT::Renderer* ()> get_renderer_;
+	std::function<RT::Renderer*()> get_renderer_;
 
 	// Nothing owned.
 	TextureCache* const texture_cache_;
 };
-
 }
 
 namespace UI {
@@ -108,13 +111,14 @@ namespace UI {
 class FontHandler1 : public IFontHandler1 {
 public:
 	FontHandler1(ImageCache* image_cache)
-		: texture_cache_(new TextureCache(RICHTEXT_TEXTURE_CACHE)),
-		  fontsets_(),
-		  fontset_(fontsets_.get_fontset(i18n::get_locale())),
-		  rt_renderer_(new RT::Renderer(image_cache, texture_cache_.get(), fontsets_)),
-		  image_cache_(image_cache) {
+	   : texture_cache_(new TextureCache(RICHTEXT_TEXTURE_CACHE)),
+	     fontsets_(),
+	     fontset_(fontsets_.get_fontset(i18n::get_locale())),
+	     rt_renderer_(new RT::Renderer(image_cache, texture_cache_.get(), fontsets_)),
+	     image_cache_(image_cache) {
 	}
-	virtual ~FontHandler1() {}
+	virtual ~FontHandler1() {
+	}
 
 	const Image* render(const string& text, uint16_t w = 0) override {
 		const string hash = boost::lexical_cast<string>(w) + text;
@@ -123,13 +127,15 @@ public:
 			return image_cache_->get(hash);
 
 		std::unique_ptr<RTImage> image(
-		   new RTImage(hash, texture_cache_.get(), [this] {return rt_renderer_.get();}, text, w));
-		image->width(); // force the rich text to get rendered in case there is an exception thrown.
+		   new RTImage(hash, texture_cache_.get(), [this] { return rt_renderer_.get(); }, text, w));
+		image->width();  // force the rich text to get rendered in case there is an exception thrown.
 
 		return image_cache_->insert(hash, std::move(image));
 	}
 
-	UI::FontSet const * fontset() const override {return fontset_;}
+	UI::FontSet const* fontset() const override {
+		return fontset_;
+	}
 
 	void reinitialize_fontset() override {
 		fontset_ = fontsets_.get_fontset(i18n::get_locale());
@@ -139,16 +145,16 @@ public:
 
 private:
 	std::unique_ptr<TextureCache> texture_cache_;
-	UI::FontSets fontsets_; // All fontsets
-	UI::FontSet const * fontset_; // The currently active FontSet
+	UI::FontSets fontsets_;       // All fontsets
+	UI::FontSet const* fontset_;  // The currently active FontSet
 	std::unique_ptr<RT::Renderer> rt_renderer_;
 	ImageCache* const image_cache_;  // not owned
 };
 
-IFontHandler1 * create_fonthandler(ImageCache* image_cache) {
+IFontHandler1* create_fonthandler(ImageCache* image_cache) {
 	return new FontHandler1(image_cache);
 }
 
-IFontHandler1 * g_fh1 = nullptr;
+IFontHandler1* g_fh1 = nullptr;
 
-} // namespace UI
+}  // namespace UI

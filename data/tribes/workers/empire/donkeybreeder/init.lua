@@ -6,8 +6,8 @@ animations = {
       hotspot = { 19, 23 },
    }
 }
-add_worker_animations(animations, "walk", dirname, "walk", {28, 26}, 10)
-add_worker_animations(animations, "walkload", dirname, "walk", {28, 26}, 10)
+add_walking_animations(animations, "walk", dirname, "walk", {28, 26}, 10)
+add_walking_animations(animations, "walkload", dirname, "walk", {28, 26}, 10)
 
 
 tribes:new_worker_type {

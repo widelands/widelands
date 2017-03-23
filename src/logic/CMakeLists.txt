@@ -14,6 +14,7 @@ wl_library(logic_game_settings
     base_exceptions
     io_filesystem
     logic
+    logic_constants
     scripting_lua_interface
     scripting_lua_table
 )
@@ -28,6 +29,7 @@ wl_library(logic_game_controller
   DEPENDS
     ai
     logic
+    logic_constants
     profile
     ui_basic
     widelands_ball_of_mud
@@ -42,6 +44,15 @@ wl_library(logic_campaign_visibility
     base_exceptions
     io_filesystem
     profile
+)
+
+wl_library(logic_constants
+  SRCS
+    constants.h
+    constants.cc
+    widelands.h
+  DEPENDS
+    base_macros
 )
 
 wl_library(logic
@@ -60,7 +71,6 @@ wl_library(logic
     cmd_luascript.h
     cmd_queue.cc
     cmd_queue.h
-    constants.h
     cookie_priority_queue.h
     description_maintainer.h
     editor_game_base.cc
@@ -118,7 +128,7 @@ wl_library(logic
     save_handler.h
     widelands_geometry_io.cc
     widelands_geometry_io.h
-    widelands.h
+    map_objects/draw_text.h
     map_objects/attackable.h
     map_objects/bob.cc
     map_objects/bob.h
@@ -126,15 +136,13 @@ wl_library(logic
     map_objects/buildcost.h
     map_objects/checkstep.cc
     map_objects/checkstep.h
-    map_objects/immovable_program.h
     map_objects/immovable.cc
     map_objects/immovable.h
+    map_objects/immovable_program.h
     map_objects/map_object.cc
     map_objects/map_object.h
     map_objects/terrain_affinity.cc
     map_objects/terrain_affinity.h
-    map_objects/walkingdir.cc
-    map_objects/walkingdir.h
     map_objects/tribes/battle.cc
     map_objects/tribes/battle.h
     map_objects/tribes/bill_of_materials.h
@@ -181,15 +189,17 @@ wl_library(logic
     map_objects/tribes/warelist.h
     map_objects/tribes/wareworker.h
     map_objects/tribes/workarea_info.h
+    map_objects/tribes/worker.cc
+    map_objects/tribes/worker.h
     map_objects/tribes/worker_descr.cc
     map_objects/tribes/worker_descr.h
     map_objects/tribes/worker_program.cc
     map_objects/tribes/worker_program.h
-    map_objects/tribes/worker.cc
-    map_objects/tribes/worker.h
-    map_objects/world/critter_program.h
+    map_objects/walkingdir.cc
+    map_objects/walkingdir.h
     map_objects/world/critter.cc
     map_objects/world/critter.h
+    map_objects/world/critter_program.h
     map_objects/world/editor_category.cc
     map_objects/world/editor_category.h
     map_objects/world/map_gen.cc
@@ -209,6 +219,7 @@ wl_library(logic
     base_i18n
     base_log
     base_macros
+    base_math
     base_md5
     base_scoped_timer
     base_time_string
@@ -219,18 +230,21 @@ wl_library(logic
     graphic
     graphic_color
     graphic_image_io
+    graphic_playercolor
     graphic_surface
     graphic_text_layout
     helper
     io_fileread
     io_filesystem
     io_stream
+    logic_constants
     logic_game_controller
     logic_game_settings
     logic_widelands_geometry
     map_io
     map_io_map_loader
     network
+    note_sound
     notifications
     random
     scripting_coroutine

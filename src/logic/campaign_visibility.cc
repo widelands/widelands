@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007-2010 by the Widelands Development Team
+ * Copyright (C) 2007-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -31,11 +31,10 @@
 /**
  * Get the path of campaign visibility save-file
  */
-std::string CampaignVisibilitySave::get_path()
-{
+std::string CampaignVisibilitySave::get_path() {
 	std::string savepath = "save";
-	g_fs->ensure_directory_exists(savepath); // Make sure save directory exists
-	savepath += "/campvis"; // add the name of save-file
+	g_fs->ensure_directory_exists(savepath);  // Make sure save directory exists
+	savepath += "/campvis";                   // add the name of save-file
 
 	// check if campaigns visibility-save is available
 	if (!(g_fs->file_exists(savepath)))
@@ -48,9 +47,9 @@ std::string CampaignVisibilitySave::get_path()
 	if (!ca.get_section("global"))
 		update_campvis(savepath);
 	else {
-		Section & ca_s = ca.get_safe_section("global");
+		Section& ca_s = ca.get_safe_section("global");
 		Profile cc("campaigns/campaigns.conf");
-		Section & cc_s = cc.get_safe_section("global");
+		Section& cc_s = cc.get_safe_section("global");
 		if (cc_s.get_int("version") > ca_s.get_int("version"))
 			update_campvis(savepath);
 	}
@@ -58,12 +57,10 @@ std::string CampaignVisibilitySave::get_path()
 	return savepath;
 }
 
-
 /**
  * Create the campaign visibility save-file of the user
  */
-void CampaignVisibilitySave::make_campvis(const std::string & savepath)
-{
+void CampaignVisibilitySave::make_campvis(const std::string& savepath) {
 	// Only prepare campvis-file -> data will be written via update_campvis
 	Profile campvis(savepath.c_str());
 	campvis.pull_section("global");
@@ -74,12 +71,10 @@ void CampaignVisibilitySave::make_campvis(const std::string & savepath)
 	update_campvis(savepath);
 }
 
-
 /**
  * Update the campaign visibility save-file of the user
  */
-void CampaignVisibilitySave::update_campvis(const std::string & savepath)
-{
+void CampaignVisibilitySave::update_campvis(const std::string& savepath) {
 	// Variable declaration
 	int32_t i = 0;
 	int32_t imap = 0;
@@ -90,7 +85,7 @@ void CampaignVisibilitySave::update_campvis(const std::string & savepath)
 
 	// Prepare campaigns.conf and campvis
 	Profile cconfig("campaigns/campaigns.conf");
-	Section & cconf_s = cconfig.get_safe_section("global");
+	Section& cconf_s = cconfig.get_safe_section("global");
 	Profile campvisr(savepath.c_str());
 	Profile campvisw(savepath.c_str());
 
@@ -98,10 +93,10 @@ void CampaignVisibilitySave::update_campvis(const std::string & savepath)
 	campvisw.pull_section("global").set_int("version", cconf_s.get_int("version", 1));
 
 	// Write down visibility of campaigns
-	Section & campv_c = campvisr.get_safe_section("campaigns");
-	Section & campv_m = campvisr.get_safe_section("campmaps");
+	Section& campv_c = campvisr.get_safe_section("campaigns");
+	Section& campv_m = campvisr.get_safe_section("campmaps");
 	{
-		Section & vis = campvisw.pull_section("campaigns");
+		Section& vis = campvisw.pull_section("campaigns");
 		sprintf(csection, "campsect%i", i);
 		char cvisible[12];
 		char cnewvisi[12];
@@ -110,7 +105,7 @@ void CampaignVisibilitySave::update_campvis(const std::string & savepath)
 			sprintf(cnewvisi, "cnewvisi%i", i);
 			bool visible = cconf_s.get_bool(cvisible) || campv_c.get_bool(csection);
 			if (!visible) {
-				const char * newvisi = cconf_s.get_string(cnewvisi, "");
+				const char* newvisi = cconf_s.get_string(cnewvisi, "");
 				if (sizeof(newvisi) > 1) {
 					visible = campv_m.get_bool(newvisi, false) || campv_c.get_bool(newvisi, false);
 				}
@@ -122,7 +117,7 @@ void CampaignVisibilitySave::update_campvis(const std::string & savepath)
 	}
 
 	// Write down visibility of campaign maps
-	Section & vis = campvisw.pull_section("campmaps");
+	Section& vis = campvisw.pull_section("campmaps");
 	i = 0;
 
 	sprintf(csection, "campsect%i", i);
@@ -133,15 +128,15 @@ void CampaignVisibilitySave::update_campvis(const std::string & savepath)
 		sprintf(number, "%02i", imap);
 		cms += number;
 
-		while (Section * const s = cconfig.get_section(cms.c_str())) {
+		while (Section* const s = cconfig.get_section(cms.c_str())) {
 			bool visible = s->get_bool("visible") || campv_m.get_bool(cms.c_str());
 			if (!visible) {
-				const char * newvisi = s->get_string("newvisi", "");
+				const char* newvisi = s->get_string("newvisi", "");
 				if (sizeof(newvisi) > 1) {
 					visible = campv_m.get_bool(newvisi, false) || campv_c.get_bool(newvisi, false);
 				}
 			}
-			vis.set_bool (cms.c_str(), visible);
+			vis.set_bool(cms.c_str(), visible);
 
 			++imap;
 			cms = mapsection;
@@ -156,16 +151,13 @@ void CampaignVisibilitySave::update_campvis(const std::string & savepath)
 	campvisw.write(savepath.c_str(), true);
 }
 
-
 /**
  * Set an campaign entry in campvis visible or invisible.
  * If it doesn't exist, create it.
  * \param entry entry to be changed
  * \param visible should the map be visible?
  */
-void CampaignVisibilitySave::set_campaign_visibility
-	(const std::string & entry, bool visible)
-{
+void CampaignVisibilitySave::set_campaign_visibility(const std::string& entry, bool visible) {
 	std::string savepath = get_path();
 	Profile campvis(savepath.c_str());
 
@@ -174,16 +166,13 @@ void CampaignVisibilitySave::set_campaign_visibility
 	campvis.write(savepath.c_str(), false);
 }
 
-
 /**
  * Set an campaignmap entry in campvis visible or invisible.
  * If it doesn't exist, create it.
  * \param entry entry to be changed
  * \param visible should the map be visible?
  */
-void CampaignVisibilitySave::set_map_visibility
-	(const std::string & entry, bool visible)
-{
+void CampaignVisibilitySave::set_map_visibility(const std::string& entry, bool visible) {
 	std::string savepath = get_path();
 	Profile campvis(savepath.c_str());
 

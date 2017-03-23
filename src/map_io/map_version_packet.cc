@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2013 by the Widelands Development Team
+ * Copyright (C) 2013-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -31,35 +31,31 @@ namespace Widelands {
 
 constexpr uint16_t kCurrentPacketVersion = 1;
 
-void MapVersionPacket::read
-	(FileSystem            &       fs,
-	 EditorGameBase      &       egbase,
-	 bool                    const skip,
-	 MapObjectLoader &)
-{
+void MapVersionPacket::read(FileSystem& fs,
+                            EditorGameBase& egbase,
+                            bool const skip,
+                            MapObjectLoader&) {
 	if (skip)
 		return;
 
 	Profile prof;
-	try {prof.read("version", nullptr, fs);} catch (...)
-		{
-			Map & map = egbase.map();
-			map.map_version_.map_version_timestamp = 0;
-			map.map_version_.map_creator_version = "unknown";
-			return;
-		}
+	try {
+		prof.read("version", nullptr, fs);
+	} catch (...) {
+		Map& map = egbase.map();
+		map.map_version_.map_version_timestamp = 0;
+		map.map_version_.map_creator_version = "unknown";
+		return;
+	}
 
 	try {
-		Section & globv = prof.get_safe_section("global");
-		int32_t const packet_version =
-			globv.get_safe_int("packet_version");
-		int32_t const forward_compatibility =
-			globv.get_safe_int("packet_compatibility");
-		if
-		((packet_version == kCurrentPacketVersion)
-			|| (packet_version > kCurrentPacketVersion && forward_compatibility <= kCurrentPacketVersion))
-		{
-			Map & map = egbase.map();
+		Section& globv = prof.get_safe_section("global");
+		int32_t const packet_version = globv.get_safe_int("packet_version");
+		int32_t const forward_compatibility = globv.get_safe_int("packet_compatibility");
+		if ((packet_version == kCurrentPacketVersion) ||
+		    (packet_version > kCurrentPacketVersion &&
+		     forward_compatibility <= kCurrentPacketVersion)) {
+			Map& map = egbase.map();
 			map.map_version_.map_source_url = globv.get_safe_string("map_source_url");
 			map.map_version_.map_source_release = globv.get_safe_string("map_release");
 			map.map_version_.map_creator_version = globv.get_safe_string("map_creator_version");
@@ -70,17 +66,14 @@ void MapVersionPacket::read
 		} else {
 			throw UnhandledVersionError("MapVersionPacket", packet_version, kCurrentPacketVersion);
 		}
-	} catch (const WException & e) {
+	} catch (const WException& e) {
 		throw GameDataError("version: %s", e.what());
 	}
 }
 
-
-void MapVersionPacket::write
-	(FileSystem & fs, EditorGameBase & egbase, MapObjectSaver &)
-{
+void MapVersionPacket::write(FileSystem& fs, EditorGameBase& egbase, MapObjectSaver&) {
 	Profile prof;
-	Section & globs = prof.create_section("global");
+	Section& globs = prof.create_section("global");
 
 	// This writes the map revision information to savegame.
 	// revision information is put into a separate file, assuming that
@@ -115,7 +108,7 @@ void MapVersionPacket::write
 	// TODO(unknown): -- we could store the unix time in uint32, as a partial fix to 2038 problem.
 	// There seems to be a get_safe_natural method, but not corresponding setter.
 
-	Map & map = egbase.map();
+	Map& map = egbase.map();
 	globs.set_string("map_source_url", map.map_version_.map_source_url);
 	globs.set_string("map_release", map.map_version_.map_source_release);
 	globs.set_string("map_creator_version", map.map_version_.map_creator_version);
@@ -127,5 +120,4 @@ void MapVersionPacket::write
 
 	prof.write("version", false, fs);
 }
-
 }

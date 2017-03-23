@@ -1,15 +1,15 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2016 Widelands Development Team
+# Copyright (C) 2005-2017 Widelands Development Team
 # 
 # Translators:
 # Любомир Василев, 2015-2016
-# Любомир Василев, 2016
+# Любомир Василев, 2016-2017
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-04-02 18:37+0000\n"
-"PO-Revision-Date: 2016-04-03 08:44+0000\n"
+"POT-Creation-Date: 2017-03-05 10:46+0000\n"
+"PO-Revision-Date: 2017-03-06 07:09+0000\n"
 "Last-Translator: Любомир Василев\n"
 "Language-Team: Bulgarian (http://www.transifex.com/widelands/widelands/language/bg/)\n"
 "MIME-Version: 1.0\n"
@@ -36,7 +36,7 @@ msgstr "Информация за лиценза на Widelands"
 
 #: ../../data/txts/LICENSE.lua:23
 msgid "Copyright 2002 - 2016 by the Widelands Development Team."
-msgstr "© 2002-2016 от екипа по разработката на Widelands"
+msgstr "© 2002-2016 от екипа по разработката на Widelands."
 
 #: ../../data/txts/LICENSE.lua:24
 msgid ""
@@ -48,7 +48,7 @@ msgstr "Тази игра е безплатна и с отворен код (FOS
 #, lua-format
 msgid ""
 "You can find more information on FOSS and the GPL by visiting the following "
-"webpage:  %s"
+"webpage: %s"
 msgstr "Можете да намерите повече информация относно софтуера с отворен код и ОПЛ като посетите следната страница: %s"
 
 #: ../../data/txts/LICENSE.lua:27
@@ -206,8 +206,8 @@ msgid "Campaign Story"
 msgstr "Кампании и история"
 
 #: ../../data/txts/developers.lua:3
-msgid "Chieftain"
-msgstr "Вожд"
+msgid "Chieftains"
+msgstr "Вождове"
 
 #: ../../data/txts/developers.lua:3
 msgid "Coders"
@@ -420,13 +420,13 @@ msgstr "В лявата част има списък от всички клие�
 msgid ""
 "The player with the color of the flag. If more than one client selected the "
 "same color, these share control over the player (‘shared kingdom mode’)."
-msgstr "Играчът с цвета на флага. Ако повече от един клиент е избрал същия цвят, те ще имат споделен контрол над играча („режим на споделено царство“)"
+msgstr "Играчът с цвета на флага. Ако повече от един клиент е избрал същия цвят, те ще имат споделен контрол над играча („режим на споделено царство“)."
 
 #: ../../data/txts/help/multiplayer_help.lua:16
 msgid ""
 "Spectator mode, meaning you can see everything, but cannot control any "
-"player"
-msgstr "Режим на наблюдаване, което означава, че можете да виждате всичко, но не можете да управлявате нито един играч"
+"player."
+msgstr "Режим на наблюдаване, което означава, че можете да виждате всичко, но не можете да управлявате нито един играч."
 
 #: ../../data/txts/help/multiplayer_help.lua:18
 msgid "Player settings"
@@ -462,14 +462,14 @@ msgid ""
 "The latter three can only be set by the hosting client by left-clicking the "
 "‘type’ button of a player. Hosting players can also set the initialization "
 "of each player (the set of buildings, wares and workers the player starts "
-"with) and the tribe and team for computer players"
-msgstr "Последните три могат да бъдат зададени от клиента, играещ ролята на сървър, чрез щракване с ляв бутон върху бутона „тип“ на играча. Играчите, които са сървъри, могат да задават и началните настройки на всеки играч (наборът от сгради, стоки и работници, с които играчът започва) и племето и отбора за компютърните играчи"
+"with) and the tribe and team for computer players."
+msgstr "Последните три могат да бъдат зададени от клиента, играещ ролята на сървър, чрез щракване с ляв бутон върху бутона „тип“ на играча. Играчите, които са сървъри, могат да задават и началните настройки на всеки играч (наборът от сгради, стоки и работници, с които играчът започва) и племето и отбора за компютърните играчи."
 
 #: ../../data/txts/help/multiplayer_help.lua:25
 msgid ""
 "Every client connected to a player (who isn’t a spectator) can set the tribe"
-" and the team for that player"
-msgstr "Всеки клиент, свързан с играч (зададената роля е „играч“) може да избере племето и отбора на този играч"
+" and the team for that player."
+msgstr "Всеки клиент, свързан с играч (тоест не е наблюдател), може да избере племето и отбора на този играч."
 
 #: ../../data/txts/help/multiplayer_help.lua:27
 msgid "Map details"
@@ -481,192 +481,269 @@ msgid ""
 " side. A button next to the map name allows the host to change to a "
 "different map. Furthermore, the host is able to set a specific win "
 "condition, and finally can start the game as soon as all players are set up."
-msgstr "Можете да видите информация за избраната карта или запазена игра в дясната част. Бутон до името на картата позволява на сървъра да смени картата. Също така, сървърът може да зададе условието за победа, както и може да даде начало на играта, след като всички играчи станат готови"
+msgstr "Можете да видите информация за избраната карта или запазена игра в дясната част. Бутон до името на картата позволява на сървъра да смени картата. Също така, сървърът може да зададе условието за победа, както и може да даде начало на играта, след като всички играчи станат готови."
 
-#: ../../data/txts/tips/atlanteans.tip:2 ../../data/txts/tips/barbarians.tip:2
-#: ../../data/txts/tips/empire.tip:2
+#: ../../data/txts/tips/atlanteans.lua:4
 msgid ""
-"Some buildings, such as the farm, have a very small work area. If the "
-"building is surrounded with trees or roads, production will stop."
-msgstr "Някои сгради, като например фермата, имат много малка работната област. Ако сградата е заобиколена от дървета или пътища, производството ще спре."
+"Keep an eye on your fishers and build a fish breeder’s house. After fish "
+"resources are exhausted in their work area, the fish supply cannot be "
+"regenerated."
+msgstr "Наглеждайте рибарите си и постройте рибовъдска къща. След като рибните ресурси в работната им област се изчерпат, те не могат да бъдат възстановени."
 
-#: ../../data/txts/tips/atlanteans.tip:6
+#: ../../data/txts/tips/atlanteans.lua:8
 msgid ""
-"Always build a forester’s and a fish breeder’s house, so you will not run "
-"out of logs or food."
-msgstr "Винаги стройте лесничейска и рибовъдска къщи, за да не останете без дървени трупи или храна."
+"Always build a forester’s and a woodcutter’s house, so you will not run out "
+"of logs."
+msgstr "Винаги стройте лесничейска и дърварска къщи, за да не останете без дървени трупи."
 
-#: ../../data/txts/tips/barbarians.tip:6 ../../data/txts/tips/empire.tip:6
+#: ../../data/txts/tips/atlanteans.lua:12
+msgid ""
+"Atlanteans need spidercloth for many buildings. Build the needed "
+"infrastructure early before you run out."
+msgstr "Много от сградите на атландците се нуждаят от паяжинен плат. Изградете нужните условия за производството му по-рано, преди да Ви свършат запасите."
+
+#: ../../data/txts/tips/barbarians.lua:4 ../../data/txts/tips/empire.lua:4
 msgid ""
 "Keep an eye on your fishers. After fish resources are exhausted in their "
 "work area, they will stop fishing."
 msgstr "Наглеждайте рибарите си. След като рибните ресурси в работната им област се изчерпат, те ще спрат да работят."
 
-#: ../../data/txts/tips/barbarians.tip:10
+#: ../../data/txts/tips/barbarians.lua:8
 msgid ""
 "Always build a ranger’s and a gamekeeper’s hut, so you will not run out of "
-"logs or food."
-msgstr "Винаги стройте лесничейска и дивечовъдска хижи, за да не останете без дървени трупи или храна."
+"logs or game."
+msgstr "Винаги стройте лесничейска и дивечовъдска хижи, за да не останете без дървени трупи или дивеч."
 
-#: ../../data/txts/tips/editor.tip:2
+#: ../../data/txts/tips/barbarians.lua:12 ../../data/txts/tips/empire.lua:12
+msgid ""
+"Most enhanced buildings need experienced workers. Do not enhance a building "
+"unless you have the necessary workers available."
+msgstr "След подобряването си, повечето от сградите се нуждаят от опитни работници. Не подобрявайте сграда, ако не разполагате с нужните работници."
+
+#: ../../data/txts/tips/editor.lua:4
 msgid ""
 "You can find general help for the editor as well as a short tutorial on our "
 "wiki at www.widelands.org"
 msgstr "Ще откриете помощ за редактора, както и кратко обучение в уикито ни на www.widelands.org"
 
-#: ../../data/txts/tips/editor.tip:6
+#: ../../data/txts/tips/editor.lua:8
 msgid ""
 "You can select multiple animal types if you hold down Ctrl during selection."
 " If you then click on the map, an instance of one of the selected animal "
 "types will be placed."
 msgstr "Можете да изберете повече от един вид животни, ако задържите Контрол докато избирате. Ако след това щракнете върху картата, там ще бъде поставено животно от един от избраните видове."
 
-#: ../../data/txts/tips/editor.tip:10
+#: ../../data/txts/tips/editor.lua:12
 msgid ""
 "Just like with animals, you can also select multiple immovables or ground "
 "textures with Ctrl + mouse click."
 msgstr "Също както при животните, можете да избирате повече от един неподвижни обекти или теренни текстури чрез Контрол + щракване с ляв бутон."
 
-#: ../../data/txts/tips/editor.tip:14
+#: ../../data/txts/tips/editor.lua:16
 msgid ""
 "Holding down Shift switches the first alternative tool on. This tool is in "
 "most cases the complete opposite of the normal tool (for example deletion of"
 " an object instead of placing one)."
 msgstr "Задържането на Шифт включва първия алтернативен инструмент. В повечето случаи, това е този, който върши обратното действие (напр. изтриване на обект, вместо поставяне)."
 
-#: ../../data/txts/tips/editor.tip:18
+#: ../../data/txts/tips/editor.lua:20
 msgid ""
 "Holding down Alt switches the second alternative tool on (if it exists)."
 msgstr "Задържането на Алт включва втория алтернативен инструмент (ако има такъв)."
 
-#: ../../data/txts/tips/editor.tip:22
+#: ../../data/txts/tips/editor.lua:24
 msgid ""
-"The number keys (1 - 0) allow you to directly set the size of the selected "
+"The number keys (0 - 9) allow you to directly set the size of the selected "
 "area around your mouse cursor."
-msgstr "Клавишите с цифри (1 – 0) Ви позволяват да зададете конкретен размер на избраната област около курсора."
+msgstr "Клавишите с цифри (0 – 9) Ви позволяват да зададете конкретен размер на избраната област около курсора."
 
-#: ../../data/txts/tips/editor.tip:26
+#: ../../data/txts/tips/editor.lua:28
 msgid ""
 "Space key behaves like in normal game. It switches if building spaces are "
 "shown on or off."
 msgstr "Клавишът Интервал работи по същия начин, като в игра. Той превключва показването на местата за строеж."
 
-#: ../../data/txts/tips/empire.tip:10
+#: ../../data/txts/tips/editor.lua:32
+msgid ""
+"When placing trees, use the help button to see which trees are more likely "
+"to survive on which terrain."
+msgstr "Когато поставяте дървета, използвайте бутона за помощ, за да видите кои дървета имат по-добри шансове за оцеляване на съответния терен."
+
+#: ../../data/txts/tips/editor.lua:36
+msgid ""
+"If you do not set water and fish resources, a default amount will be used."
+msgstr "Ако не зададете стойности за водата и рибата, ще бъдат използвани количествата по подразбиране."
+
+#: ../../data/txts/tips/editor.lua:40
+msgid ""
+"You can place a medium building on any node where there is a slope no "
+"greater than 1 in the south-east direction and its height difference to all "
+"nodes in a radius of 2 is no greater than 2."
+msgstr "Можете да поставяте средни сгради на възлите, където наклонът не е повече от 1 в югоизточна посока и разликата във височините на всички възли в радиус 2 е не по-голяма от 2."
+
+#: ../../data/txts/tips/editor.lua:44
+msgid ""
+"You can place a large building on any node where you could place a medium "
+"building if there is no obstacle or non-arable terrain towards the west, "
+"northwest and northeast."
+msgstr "Можете да поставяте големи сгради на възлите, на които мое да се поставят и средни сгради, ако няма препятствия или необработваем терен на запад, северозапад или североизток."
+
+#: ../../data/txts/tips/empire.lua:8
 msgid "Always build a forester’s house so you will not run out of logs."
 msgstr "Винаги стройте лесничейска къща, за да не останете без дървени трупи."
 
-#: ../../data/txts/tips/general_game.tip:2
+#: ../../data/txts/tips/empire.lua:16
+msgid "Empire needs a lot of marble. Keep looking for marble resources."
+msgstr "Империята се нуждае от много мрамор. Търсете залежи на мрамор."
+
+#: ../../data/txts/tips/general_game.lua:4
 msgid ""
 "The building process will only start after a road is built to the "
 "construction site."
 msgstr "Строителният процес ще започне само след като до строителната площадка бъде построен път."
 
-#: ../../data/txts/tips/general_game.tip:6
+#: ../../data/txts/tips/general_game.lua:8
 msgid ""
 "Be sure to send a geologist to survey sites before building a well or a "
 "mine."
 msgstr "Преди да построите кладенец или мина, задължително изпратете геолог да проучи района."
 
-#: ../../data/txts/tips/general_game.tip:10
+#: ../../data/txts/tips/general_game.lua:12
 msgid ""
 "Your territory can be expanded by building various military buildings – "
 "Sentry, Fortress, Blockhouse, etc."
 msgstr "Територията Ви може да бъде разширена чрез построяване на различни военни сгради – караулна, крепост, блокпост и т.н."
 
-#: ../../data/txts/tips/general_game.tip:14
+#: ../../data/txts/tips/general_game.lua:16
 msgid "Miners will work only if supplied with food."
 msgstr "Миньорите работят само ако са снабдени с храна."
 
-#: ../../data/txts/tips/general_game.tip:18
+#: ../../data/txts/tips/general_game.lua:20
 msgid ""
 "Split your roads into shorter sections by planting some flags. This will "
 "speed up transportation of your wares."
 msgstr "Разделяйте пътищата си на по-къси отсечки, като поставяте флагове. Това ще ускори преноса на стоките Ви."
 
-#: ../../data/txts/tips/general_game.tip:22
+#: ../../data/txts/tips/general_game.lua:24
 msgid ""
 "Any further questions? Our FAQ, the wiki and of course our community forums "
 "can be found at www.widelands.org."
 msgstr "Имате още въпроси? Нашите ЧЗВ, уики и разбира се, обществените форуми, могат да бъдат намерени на www.widelands.org."
 
-#: ../../data/txts/tips/general_game.tip:26
+#: ../../data/txts/tips/general_game.lua:28
 msgid ""
 "Use the priority buttons in building windows to adjust delivery of a "
 "specific ware."
 msgstr "Използвайте бутоните за приоритет в прозорците на сградите, за да настроите доставките на различните стоки."
 
-#: ../../data/txts/tips/general_game.tip:30
+#: ../../data/txts/tips/general_game.lua:32
 msgid ""
 "Use the ‘configure economy’ menu to adjust the target quantity of wares. It "
 "can be accessed via the flag menu."
 msgstr "Използвайте менюто „Настройки на икономиката“, за да настроите целевите количества на стоките. Можете да го откриете в менютата на флаговете."
 
-#: ../../data/txts/tips/general_game.tip:34
+#: ../../data/txts/tips/general_game.lua:36
 msgid ""
 "Manage your messages more efficiently: press ‘N’ for News to access the "
 "messages window, then use ‘G’ for Go To, and the Delete key to archive "
 "messages."
 msgstr "Управлявайте съобщенията си по-ефективно: натиснете „N“, за да отворите прозореца със съобщения, а след това „G“ за превключване и DELETE за архивиране на съобщения."
 
-#: ../../data/txts/tips/general_game.tip:38
-msgid ""
-"Use the ‘,’ (comma) and ‘.’ (period) keys to go back and forth between "
-"recently visited places in the world."
-msgstr "Използвайте клавишите „,“ (запетая) и „.“ (точка), за да преминавате назад и напред между наскоро посетените места в света."
+#: ../../data/txts/tips/general_game.lua:40
+msgctxt "hotkey"
+msgid "1-9"
+msgstr "1-9"
 
-#: ../../data/txts/tips/general_game.tip:42
-msgid ""
-"Press Ctrl+(0-9) to store important locations, then press 0-9 to recall "
-"them."
-msgstr "Натиснете Контрол+(0-9), за да запазите важните местоположения, а след това 0-9, за да ги видите отново."
+#: ../../data/txts/tips/general_game.lua:40
+msgctxt "hotkey"
+msgid "Ctrl+(1-9)"
+msgstr "Контрол + (1-9)"
 
-#: ../../data/txts/tips/general_game.tip:46
+#: ../../data/txts/tips/general_game.lua:40
+msgid "Press %1% to store important locations, then press %2% to recall them."
+msgstr "Натиснете %1%, за да запазване на важни местоположения, и след това %2% за връщане към тях."
+
+#: ../../data/txts/tips/general_game.lua:44
 msgid ""
 "Removing a road while holding Ctrl lets you remove all flags up to the first"
 " junction."
 msgstr "Ако премахнете път, докато натискате Контрол, ще премахнете всички флагове до първото кръстовище."
 
-#: ../../data/txts/tips/general_game.tip:50
+#: ../../data/txts/tips/general_game.lua:48
 msgid ""
-"New soldiers are recruited in the headquarters or a warehouse if all needed "
-"tools are available. Training sites are for improving their abilities."
-msgstr "Новите войници се появяват в щаба или в някой склад, ако всички нужни инструменти са налични. Тренировъчните сгради служат за подобряване на уменията им."
+"New soldiers are recruited in a barracks. Their abilities can then be "
+"improved in training sites."
+msgstr "Новите войници се създават в казармата. След това уменията им могат да бъдат подобрени в тренировъчните сгради."
 
-#: ../../data/txts/tips/general_game.tip:54
+#: ../../data/txts/tips/general_game.lua:52
 msgid ""
 "If you like to live dangerously, pressing Ctrl while clicking the enhance, "
 "dismantle or destroy building buttons will skip the confirmation."
 msgstr "Ако обичате да живеете на ръба, можете да задържите Ctrl докато натискате бутоните за надграждане, демонтиране или разрушаване на сграда. Така ще пропуснете въпроса за потвърждение."
 
-#: ../../data/txts/tips/general_game.tip:58
+#: ../../data/txts/tips/general_game.lua:56
 msgid "Press I to quickly toggle the display of your stock inventory."
 msgstr "Натиснете I, за да превключите показването на инвентара на запасите си."
 
-#: ../../data/txts/tips/general_game.tip:62
+#: ../../data/txts/tips/general_game.lua:60
 msgid ""
 "An economy consists of all buildings and flags connected by roads. The "
 "supplies and demands of buildings are handled in its economy."
 msgstr "Икономиката се състои от сгради и флагове, свързани с пътища. Търсеното и предлаганото от сградите се управлява от икономиката."
 
-#: ../../data/txts/tips/multiplayer.tip:2
+#: ../../data/txts/tips/general_game.lua:64
+msgid ""
+"Some buildings, such as the farm, have a very small work area. If the "
+"building is surrounded with trees or roads, production will stop."
+msgstr "Някои сгради, като например фермата, имат много малка работната област. Ако сградата е заобиколена от дървета или пътища, производството ще спре."
+
+#: ../../data/txts/tips/general_game.lua:68
+msgctxt "hotkey"
+msgid "Ctrl+(+/-)"
+msgstr "Контрол + (+/-)"
+
+#: ../../data/txts/tips/general_game.lua:68
+msgctxt "hotkey"
+msgid "Ctrl+0"
+msgstr "Контрол + 0"
+
+#: ../../data/txts/tips/general_game.lua:68
+msgid "Zoom in/out with the mouse wheel or %1%. Press %2% to reset the zoom."
+msgstr "Приближаване/отдалечаване с колелото на мишката или %1%. Натиснете %2% за връщане на нормалния мащаб."
+
+#: ../../data/txts/tips/general_game.lua:72
+msgid ""
+"When a building is destroyed, its workers will start looking for a nearby "
+"flag from which they can move by road to a connected warehouse. If there are"
+" no such flags in the vicinity, they will keep wandering around and "
+"eventually die."
+msgstr "Когато сграда бъде унищожена, нейните работници ще потърсят най-близкия флаг, от който могат да се доберат до път, по който да стигнат до свързан с него склад. Ако няма такива флагове наоколо, те ще се лутат известно време и накрая ще умрат."
+
+#: ../../data/txts/tips/multiplayer.lua:4
 msgid ""
 "You can use the ’Page up’ and ‘Page down’ keys to adjust your desired speed "
 "– the real speed is then democratically set."
-msgstr "Можете да използвате клавишите „Page up“ и „Page down“, за да промените скоростта на играта – истинската скорост е избрана по демократичен начин."
+msgstr "Можете да използвате клавишите „Page up“ и „Page down“, за да промените скоростта на играта – истинската скорост ще бъде избрана по демократичен начин."
 
-#: ../../data/txts/tips/multiplayer.tip:6
+#: ../../data/txts/tips/multiplayer.lua:8
 msgid ""
 "You can use ‘/me’ at the beginning of a chatmessage: ‘/me is tired’ will be "
 "printed as ‘-> Nickname is tired’."
 msgstr "Можете да започнете чат съобщение с „/me“: „/me е уморен“. Така ще се изпише „-> Псевдоним е уморен“."
 
-#: ../../data/txts/tips/multiplayer.tip:10
+#: ../../data/txts/tips/multiplayer.lua:12
 msgid ""
 "Use ‘@name’ at the beginning of a chat message to send it to only one "
 "player."
 msgstr "Започнете чат съобщение с „@name“, за да го изпратите само на един играч."
 
-#: ../../data/txts/tips/singleplayer.tip:2
+#: ../../data/txts/tips/multiplayer.lua:16
+msgid ""
+"If the game should crash, don't worry! The game will be saved automatically "
+"so that you can reload it afterwards."
+msgstr "Ако играта претърпи срив, не се притеснявайте! Играта Ви се запазва автоматично, така че ще можете да я продължите."
+
+#: ../../data/txts/tips/singleplayer.lua:4
 msgid ""
 "Our computer players are too boring? Visit our website at www.widelands.org "
 "and meet other players to play online."

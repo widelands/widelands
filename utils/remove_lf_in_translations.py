@@ -14,22 +14,23 @@ The same can also be achieved by using make lang, but I had path problems with
 it, so I hacked this little script.
 """
 
-base_path = p.abspath(p.join(p.dirname(__file__),p.pardir))
+base_path = p.abspath(p.join(p.dirname(__file__), p.pardir))
+
 
 def fix_lf_in_translations(root_dname):
     for (dname, dnames, fnames) in os.walk(root_dname):
         for pfile in (f for f in fnames if p.splitext(f)[-1].lower() == '.po'):
-            fname = p.relpath(p.join(dname,pfile))
+            fname = p.relpath(p.join(dname, pfile))
 
             # open the .po file as binary to not mess with encoding (which should be utf-8, but
             # what do we care?).
-            content = open(fname, "rb").read()
+            content = open(fname, 'rb').read()
             new_content = content.replace(r"\r\n", r"\n")
 
             if new_content != content:
-                with open(fname, "wb") as f:
+                with open(fname, 'wb') as f:
                     f.write(new_content)
-                print "Fixed %s" % fname
+                print 'Fixed %s' % fname
 
 if __name__ == '__main__':
-    fix_lf_in_translations(p.join(base_path, "po"))
+    fix_lf_in_translations(p.join(base_path, 'po'))

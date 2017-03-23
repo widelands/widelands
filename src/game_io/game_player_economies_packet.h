@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2009 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -28,10 +28,9 @@ namespace Widelands {
  * how many and which economies does a player have?
  */
 struct GamePlayerEconomiesPacket : public GameDataPacket {
-	void read (FileSystem &, Game &, MapObjectLoader * = nullptr) override;
-	void write(FileSystem &, Game &, MapObjectSaver  * = nullptr) override;
+	void read(FileSystem&, Game&, MapObjectLoader* = nullptr) override;
+	void write(FileSystem&, Game&, MapObjectSaver* = nullptr) override;
 };
-
 }
 
 #endif  // end of include guard: WL_GAME_IO_GAME_PLAYER_ECONOMIES_PACKET_H

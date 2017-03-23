@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2013 by the Widelands Development Team
+ * Copyright (C) 2006-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -29,16 +29,16 @@ class SDLSurface;
 
 // A stand alone richtext renderer for tests and binaries.
 class StandaloneRenderer {
-	public:
-		StandaloneRenderer();
-		~StandaloneRenderer();
+public:
+	StandaloneRenderer();
+	~StandaloneRenderer();
 
-		RT::Renderer* renderer();
+	RT::Renderer* renderer();
 
-	private:
-		std::unique_ptr<TextureCache> texture_cache_;
-		std::unique_ptr<ImageCache> image_cache_;
-		std::unique_ptr<RT::Renderer> renderer_;
+private:
+	std::unique_ptr<TextureCache> texture_cache_;
+	std::unique_ptr<ImageCache> image_cache_;
+	std::unique_ptr<RT::Renderer> renderer_;
 };
 
 #endif  // end of include guard:

@@ -5,26 +5,29 @@ Maintainer: Debian Games Team <pkg-games-devel@lists.alioth.debian.org>
 Uploaders: 
   Martin Quinson <mquinson@debian.org>,
   Enrico Tassi <gareuselesinge@debian.org> 
-Standards-Version: 3.9.5
+Standards-Version: 3.9.8
 Build-Depends: debhelper (>= 9), 
+  cmake, 
+  doxygen, 
+  imagemagick,
+# This package isn't available in older Ubuntu releases.
+# As long as we support 14.04, we build using the embedded one.
+#  libminizip-dev,
+  libboost-dev, 
+  libboost-regex-dev, 
+  libboost-test-dev, 
+  libglew1.6-dev | libglew-dev,
+  libpng-dev, 
   libsdl2-dev, 
   libsdl2-image-dev, 
   libsdl2-mixer-dev, 
   libsdl2-net-dev, 
   libsdl2-ttf-dev, 
-  python, 
-  libboost1.48-dev | libboost-dev, 
-  libboost-regex1.48-dev | libboost-regex-dev, 
-  libboost-test1.48-dev | libboost-test-dev, 
-  doxygen, 
-  cmake, 
-  imagemagick,
-  libglew1.6-dev | libglew-dev,
-  libpng-dev, 
+  python,
   zlib1g-dev
-Vcs-Git: git://git.debian.org/git/pkg-games/widelands.git
-Vcs-Browser: http://anonscm.debian.org/gitweb/?p=pkg-games/widelands.git
-#Vcs-Svn: svn://svn.debian.org/svn/collab-maint/deb-maint/widelands/ <-- Old location of packaging
+Vcs-Git: https://anonscm.debian.org/git/pkg-games/widelands.git
+Vcs-Browser: https://anonscm.debian.org/gitweb/?p=pkg-games/widelands.git
+#Vcs-Svn: svn://svn.debian.org/svn/collab-maint/deb-maint/widelands/ <-- Location of old packaging
 Homepage: http://www.widelands.org/
 
 Package: widelands
@@ -32,6 +35,13 @@ Architecture: any
 Depends: widelands-data (= ${source:Version}), 
   ${shlibs:Depends}, 
   ${misc:Depends}, 
+  fonts-freefont-ttf,
+  fonts-dejavu-core,
+  fonts-dejavu-extra,
+  fonts-hosny-amiri,
+  fonts-lklug-sinhala,
+  fonts-nakula,
+  fonts-wqy-microhei,
 Description: fantasy real-time strategy game
  Widelands is a strategy game aiming for gameplay similar to Settlers II by
  BlueByte.
@@ -44,7 +54,8 @@ Description: fantasy real-time strategy game
 
 Package: widelands-data
 Architecture: all
-Depends: ${misc:Depends}
+Depends: fonts-freefont-ttf,
+  ${misc:Depends}
 Description: fantasy real-time strategy game (data files)
  This package contains the graphics and levels for Widelands.
  .

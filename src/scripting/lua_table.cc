@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2015 by the Widelands Development Team
+ * Copyright (C) 2006-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -28,7 +28,7 @@
 LuaTable::LuaTable(lua_State* L) : L_(L), warn_about_unaccessed_keys_(true) {
 	// S: <table>
 	lua_pushlightuserdata(L_, const_cast<LuaTable*>(this));  // S: this
-	lua_pushvalue(L, -2); // S: <table> this <table>
+	lua_pushvalue(L, -2);                                    // S: <table> this <table>
 	lua_rawset(L, LUA_REGISTRYINDEX);
 }
 
@@ -36,11 +36,8 @@ LuaTable::~LuaTable() {
 	if (warn_about_unaccessed_keys_) {
 		std::vector<std::string> unused_keys;
 		std::set<std::string> all_keys = keys<std::string>();
-		std::set_difference(all_keys.begin(),
-		                    all_keys.end(),
-		                    accessed_keys_.begin(),
-		                    accessed_keys_.end(),
-		                    std::back_inserter(unused_keys));
+		std::set_difference(all_keys.begin(), all_keys.end(), accessed_keys_.begin(),
+		                    accessed_keys_.end(), std::back_inserter(unused_keys));
 
 		for (const std::string& unused_key : unused_keys) {
 			// We must not throw in destructors as this can shadow other errors.
@@ -49,7 +46,7 @@ LuaTable::~LuaTable() {
 	}
 
 	lua_pushlightuserdata(L_, const_cast<LuaTable*>(this));  // S: this
-	lua_pushnil(L_); // S: this nil
+	lua_pushnil(L_);                                         // S: this nil
 	lua_rawset(L_, LUA_REGISTRYINDEX);
 }
 
@@ -71,12 +68,12 @@ void LuaTable::get_existing_table_value(const int key) const {
 void LuaTable::check_if_key_was_in_table(const std::string& key) const {
 	// S: key
 	lua_pushlightuserdata(L_, const_cast<LuaTable*>(this));  // S: this
-	lua_rawget(L_, LUA_REGISTRYINDEX); // S: key table
-	lua_pushvalue(L_, -2); // S: key table key
+	lua_rawget(L_, LUA_REGISTRYINDEX);                       // S: key table
+	lua_pushvalue(L_, -2);                                   // S: key table key
 
-	lua_rawget(L_, -2); // S: key table value
-	lua_remove(L_, -2); // S: key value
-	lua_remove(L_, -2); // S: value
+	lua_rawget(L_, -2);  // S: key table value
+	lua_remove(L_, -2);  // S: key value
+	lua_remove(L_, -2);  // S: value
 
 	if (lua_isnil(L_, -1)) {
 		lua_pop(L_, 1);
@@ -119,8 +116,8 @@ template <> int LuaTable::get_value() const {
 }
 
 const std::string get_string_with_default(const LuaTable& table,
-														const std::string& key,
-														const std::string& default_value) {
+                                          const std::string& key,
+                                          const std::string& default_value) {
 	if (table.has_key(key)) {
 		return table.get_string(key);
 	} else {

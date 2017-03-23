@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2015 by the Widelands Development Team
+ * Copyright (C) 2006-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -27,7 +27,7 @@
 #include <SDL.h>
 #include <SDL_ttf.h>
 
-#undef main // No, we do not want SDL_main
+#undef main  // No, we do not want SDL_main
 
 #include "base/log.h"
 #include "config.h"
@@ -69,14 +69,18 @@ std::string read_file(std::string fn) {
 	return txt;
 }
 
-int parse_arguments(
-   int argc, char** argv, int32_t* w, std::string& outname,
-	std::string& inname, std::set<std::string>& allowed_tags)
-{
+int parse_arguments(int argc,
+                    char** argv,
+                    int32_t* w,
+                    std::string& outname,
+                    std::string& inname,
+                    std::set<std::string>& allowed_tags) {
 	if (argc < 4) {
 		std::cout << "Usage: render <width in pixels> <outname> <inname> [allowed tag1] [allowed "
 		             "tags2] ... < "
-		             "input.txt" << std::endl << std::endl
+		             "input.txt"
+		          << std::endl
+		          << std::endl
 		          << "input.txt should contain a valid rich text formatting" << std::endl;
 		return 1;
 	}

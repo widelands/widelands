@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2015 by the Widelands Development Team
+ * Copyright (C) 2006-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -22,6 +22,6 @@
 
 #define WIDELANDS_LAN_DISCOVERY_PORT 7394
 #define WIDELANDS_LAN_PROMOTION_PORT 7395
-#define WIDELANDS_PORT               7396
+#define WIDELANDS_PORT 7396
 
 #endif  // end of include guard: WL_NETWORK_CONSTANTS_H

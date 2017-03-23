@@ -31,11 +31,13 @@ wl_library(network
     build_info
     chat
     game_io
+    graphic_playercolor
     helper
     io_fileread
     io_filesystem
     io_stream
     logic
+    logic_constants
     logic_game_controller
     logic_game_settings
     map_io_map_loader

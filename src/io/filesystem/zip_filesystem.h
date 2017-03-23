@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2005, 2007-2009, 2013 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -33,38 +33,38 @@
 
 class ZipFilesystem : public FileSystem {
 public:
-	explicit ZipFilesystem(const std::string &);
+	explicit ZipFilesystem(const std::string&);
 	virtual ~ZipFilesystem();
 
 	bool is_writable() const override;
 
 	std::set<std::string> list_directory(const std::string& path) override;
 
-	bool is_directory(const std::string & path) override;
-	bool file_exists (const std::string & path) override;
+	bool is_directory(const std::string& path) override;
+	bool file_exists(const std::string& path) override;
 
-	void * load(const std::string & fname, size_t & length) override;
+	void* load(const std::string& fname, size_t& length) override;
 
 	void write(const std::string& fname, void const* data, int32_t length) override;
-	void ensure_directory_exists(const std::string & fs_dirname) override;
-	void   make_directory      (const std::string & fs_dirname) override;
+	void ensure_directory_exists(const std::string& fs_dirname) override;
+	void make_directory(const std::string& fs_dirname) override;
 
 	StreamRead* open_stream_read(const std::string& fname) override;
 	StreamWrite* open_stream_write(const std::string& fname) override;
 
-	FileSystem * make_sub_file_system(const std::string & fs_dirname) override;
-	FileSystem * create_sub_file_system(const std::string & fs_dirname, Type) override;
-	void fs_unlink(const std::string & fs_filename) override;
-	void fs_rename(const std::string &, const std::string &) override;
+	FileSystem* make_sub_file_system(const std::string& fs_dirname) override;
+	FileSystem* create_sub_file_system(const std::string& fs_dirname, Type) override;
+	void fs_unlink(const std::string& fs_filename) override;
+	void fs_rename(const std::string&, const std::string&) override;
 
 	unsigned long long disk_space() override;
 
-	static FileSystem * create_from_directory(const std::string & directory);
+	static FileSystem* create_from_directory(const std::string& directory);
 
 	std::string get_basename() override;
 
 private:
-	enum class State {kIdle, kZipping, kUnzipping};
+	enum class State { kIdle, kZipping, kUnzipping };
 
 	// All zip filesystems that use the same zip file have a shared
 	// state, which is represented in this struct. This is usually
@@ -110,6 +110,11 @@ private:
 		// E.g. "filename.zip"
 		std::string basename_;
 
+		// All files in our zipfile start with this prefix. We remember this to deal
+		// with legacy Widelands files that used to keep files in sub directories
+		// that had the same name than the containing zip file.
+		std::string common_prefix_;
+
 		// File handles for zipping and unzipping.
 		zipFile write_handle_;
 		unzFile read_handle_;
@@ -120,6 +125,7 @@ private:
 		virtual ~ZipStreamRead();
 		size_t data(void* data, size_t bufsize) override;
 		bool end_of_file() const override;
+
 	private:
 		std::shared_ptr<ZipFile> zip_file_;
 	};
@@ -128,12 +134,14 @@ private:
 		explicit ZipStreamWrite(const std::shared_ptr<ZipFile>& shared_data);
 		virtual ~ZipStreamWrite();
 		void data(const void* const data, size_t size) override;
+
 	private:
 		std::shared_ptr<ZipFile> zip_file_;
 	};
 
 	// Used for creating sub filesystems.
-	ZipFilesystem(const std::shared_ptr<ZipFile>& shared_data, const std::string& basedir_in_zip_file);
+	ZipFilesystem(const std::shared_ptr<ZipFile>& shared_data,
+	              const std::string& basedir_in_zip_file);
 
 	// The data shared between all zip filesystems with the same
 	// underlying zip file.

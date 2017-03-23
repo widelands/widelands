@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004, 2008 by the Widelands Development Team
+ * Copyright (C) 2004-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -24,10 +24,12 @@
 #include "logic/widelands_geometry.h"
 
 class InteractiveBase;
-namespace Widelands {class MapObject;}
+namespace Widelands {
+class MapObject;
+}
 
 // Open debug window for the given coordinates
-void show_mapobject_debug(InteractiveBase & parent, Widelands::MapObject &);
-void show_field_debug(InteractiveBase & parent, Widelands::Coords coords);
+void show_mapobject_debug(InteractiveBase& parent, Widelands::MapObject&);
+void show_field_debug(InteractiveBase& parent, const Widelands::Coords& coords);
 
 #endif  // end of include guard: WL_WUI_GAME_DEBUG_UI_H

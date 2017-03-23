@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2009 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -28,38 +28,38 @@
 #include "editor/tools/tool.h"
 #include "graphic/graphic.h"
 
-inline EditorInteractive & EditorToolsizeMenu::eia() {
+inline EditorInteractive& EditorToolsizeMenu::eia() {
 	return dynamic_cast<EditorInteractive&>(*get_parent());
 }
-
 
 /**
  * Create all the buttons etc...
 */
-EditorToolsizeMenu::EditorToolsizeMenu
-	(EditorInteractive & parent, UI::UniqueWindow::Registry & registry)
-	:
-	UI::UniqueWindow
-		(&parent, "toolsize_menu", &registry, 250, 50, _("Tool Size")),
-	textarea_(this, 5, 10, 240, 10, std::string(), UI::Align::kBottomCenter),
-	increase_
-		(this, "incr",
-		 get_inner_w() / 2 - 10, 25, 20, 20,
-		 g_gr->images().get("images/ui_basic/but0.png"),
-		 g_gr->images().get("images/ui_basic/scrollbar_up.png"),
-		 std::string(),
-		 parent.get_sel_radius() < MAX_TOOL_AREA),
-	decrease_
-		(this, "decr",
-		 get_inner_w() / 2 + 10, 25, 20, 20,
-		 g_gr->images().get("images/ui_basic/but0.png"),
-		 g_gr->images().get("images/ui_basic/scrollbar_down.png"),
-		 std::string(),
-		 0 < parent.get_sel_radius()),
-	value_(0)
-{
-	increase_.sigclicked.connect(boost::bind(&EditorToolsizeMenu::increase_radius, boost::ref(*this)));
-	decrease_.sigclicked.connect(boost::bind(&EditorToolsizeMenu::decrease_radius, boost::ref(*this)));
+EditorToolsizeMenu::EditorToolsizeMenu(EditorInteractive& parent,
+                                       UI::UniqueWindow::Registry& registry)
+   : UI::UniqueWindow(&parent, "toolsize_menu", &registry, 250, 50, _("Tool Size")),
+     textarea_(this, 5, 10, 240, 10, std::string(), UI::Align::kCenter),
+     increase_(this,
+               "incr",
+               get_inner_w() / 2 - 10,
+               25,
+               20,
+               20,
+               g_gr->images().get("images/ui_basic/but0.png"),
+               g_gr->images().get("images/ui_basic/scrollbar_up.png")),
+     decrease_(this,
+               "decr",
+               get_inner_w() / 2 + 10,
+               25,
+               20,
+               20,
+               g_gr->images().get("images/ui_basic/but0.png"),
+               g_gr->images().get("images/ui_basic/scrollbar_down.png")),
+     value_(0) {
+	increase_.sigclicked.connect(
+	   boost::bind(&EditorToolsizeMenu::increase_radius, boost::ref(*this)));
+	decrease_.sigclicked.connect(
+	   boost::bind(&EditorToolsizeMenu::decrease_radius, boost::ref(*this)));
 
 	increase_.set_repeating(true);
 	decrease_.set_repeating(true);
@@ -73,7 +73,6 @@ EditorToolsizeMenu::EditorToolsizeMenu
 		center_to_parent();
 }
 
-
 void EditorToolsizeMenu::update(uint32_t const val) {
 	value_ = val;
 	eia().set_sel_radius(val);
@@ -85,7 +84,6 @@ void EditorToolsizeMenu::set_buttons_enabled(bool enable) {
 	decrease_.set_enabled(enable && 0 < value_);
 	increase_.set_enabled(enable && value_ < MAX_TOOL_AREA);
 }
-
 
 void EditorToolsizeMenu::decrease_radius() {
 	assert(0 < eia().get_sel_radius());

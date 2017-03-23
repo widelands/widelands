@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2016 by the Widelands Development Team
+ * Copyright (C) 2006-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -38,7 +38,7 @@ struct BlitData {
 	int parent_height;
 
 	// The subrect in the parent texture.
-	Rect rect;
+	Rectf rect;
 };
 
 #endif  // end of include guard: WL_GRAPHIC_GL_BLIT_DATA_H

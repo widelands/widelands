@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2009-2010 by the Widelands Development Team
+ * Copyright (C) 2009-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -41,40 +41,47 @@ namespace Widelands {
 class ProductionSite;
 class MilitarySite;
 
-enum class ExtendedBool : uint8_t {kUnset, kTrue, kFalse};
+enum class ExtendedBool : uint8_t { kUnset, kTrue, kFalse };
 
-enum class BuildingNecessity : uint8_t
-	{kForced, kNeeded, kNotNeeded, kUnset, kNotBuildable, kAllowed, kNeededPending, kForbidden};
+enum class BuildingNecessity : uint8_t {
+	kForced,
+	kNeeded,
+	kNotNeeded,
+	kUnset,
+	kNotBuildable,
+	kAllowed,
+	kNeededPending,
+	kForbidden
+};
 
-enum class AiModeBuildings : uint8_t
-	{kAnotherAllowed, kOnLimit, kLimitExceeded};
+enum class AiModeBuildings : uint8_t { kAnotherAllowed, kOnLimit, kLimitExceeded };
 
 enum class SchedulerTaskId : uint8_t {
-		kBbuildableFieldsCheck,
-		kMineableFieldsCheck,
-		kRoadCheck,
-		kUnbuildableFCheck,
-		kCheckEconomies,
-		kProductionsitesStats,
-		kConstructBuilding,
-		kCheckProductionsites,
-		kCheckShips,
-		KMarineDecisions,
-		kCheckMines,
-		kWareReview,
-		kPrintStats,
-		kCheckMilitarysites,
-		kCheckTrainingsites,
-		kCountMilitaryVacant,
-		kCheckEnemySites,
-		kUnset
-	};
+	kBbuildableFieldsCheck,
+	kMineableFieldsCheck,
+	kRoadCheck,
+	kUnbuildableFCheck,
+	kCheckEconomies,
+	kProductionsitesStats,
+	kConstructBuilding,
+	kCheckProductionsites,
+	kCheckShips,
+	KMarineDecisions,
+	kCheckMines,
+	kWareReview,
+	kPrintStats,
+	kCheckMilitarysites,
+	kCheckTrainingsites,
+	kCountMilitaryVacant,
+	kCheckEnemySites,
+	kUnset
+};
 
 struct CheckStepRoadAI {
 	CheckStepRoadAI(Player* const pl, uint8_t const mc, bool const oe);
 
 	bool allowed(Map&, FCoords start, FCoords end, int32_t dir, CheckStep::StepId) const;
-	bool reachable_dest(Map&, FCoords dest) const;
+	bool reachable_dest(const Map&, const FCoords& dest) const;
 
 	Player* player;
 	uint8_t movecaps;
@@ -176,7 +183,8 @@ private:
 // Open water is a field where all 6 adjacent triangles are water
 struct FindNodeOpenWater {
 	// 'world' is unused, but we need to fit the template.
-	FindNodeOpenWater(const World& /* world */) {}
+	FindNodeOpenWater(const World& /* world */) {
+	}
 
 	bool accept(const Map& /* map */, const FCoords& coord) const;
 };
@@ -208,8 +216,6 @@ struct NearFlag {
 	int32_t distance;
 };
 
-
-
 struct WalkableSpot {
 	Coords coords;
 	bool has_flag;
@@ -220,7 +226,6 @@ struct WalkableSpot {
 	int16_t from;
 	int16_t neighbours[6];
 };
-
 
 struct BuildableField {
 	BuildableField(const Widelands::FCoords& fc);
@@ -271,7 +276,8 @@ struct BuildableField {
 	// especially for new colonies
 	Widelands::ExtendedBool portspace_nearby;  // prefer military buildings closer to the portspace
 	int32_t max_buildcap_nearby;
-	// it is not necessary to check resources (stones, fish...) too frequently as they do not change fast
+	// it is not necessary to check resources (stones, fish...) too frequently as they do not change
+	// fast
 	// this stores time of last check
 	uint32_t last_resources_check_time;
 
@@ -329,7 +335,7 @@ struct BuildingObserver {
 	int32_t primary_priority;
 	bool is_buildable;
 	bool need_trees;   // lumberjack = true
-	bool need_rocks;  // quarry = true
+	bool need_rocks;   // quarry = true
 	bool mines_water;  // wells
 	bool need_water;   // fisher, fish_breeder = true
 	bool is_hunter;    // need to identify hunters
@@ -346,7 +352,7 @@ struct BuildingObserver {
 
 	uint16_t unconnected_count;  // to any warehouse (count of such buildings)
 
-	DescriptionIndex mines;           // type of resource it mines_
+	DescriptionIndex mines;  // type of resource it mines_
 	uint16_t mines_percent;  // % of res it can mine
 	uint32_t current_stats;
 
@@ -376,10 +382,10 @@ struct BuildingObserver {
 
 	int32_t cnt_built;
 	int32_t cnt_under_construction;
-	int32_t cnt_target;  // number of buildings as target
-	int32_t cnt_limit_by_aimode; // limit imposed by weak or normal AI mode
+	int32_t cnt_target;           // number of buildings as target
+	int32_t cnt_limit_by_aimode;  // limit imposed by weak or normal AI mode
 
-	int32_t cnt_upgrade_pending; // number of buildings that are to be upgraded
+	int32_t cnt_upgrade_pending;  // number of buildings that are to be upgraded
 
 	// used to track amount of wares produced by building
 	uint32_t stocklevel;
@@ -391,8 +397,6 @@ struct BuildingObserver {
 	uint32_t unoccupied_count;
 
 	bool build_material_shortage;
-
-
 };
 
 struct ProductionSiteObserver {
@@ -427,14 +431,13 @@ struct WarehouseSiteObserver {
 
 struct ShipObserver {
 	Widelands::Ship* ship;
-	Widelands::Coords expedition_start_point;
-	std::unordered_set<uint32_t> visited_spots;
-
-	// a ship circumvents all islands in the same direction, the value
-	// is assigned only once
-	Widelands::IslandExploreDirection island_circ_direction = Widelands::IslandExploreDirection::kClockwise;
 	bool waiting_for_command_ = false;
 	uint32_t last_command_time = 0;
+
+	// direction by which the ship circumvents an island
+	// this is the last circle-island command's direction
+	Widelands::IslandExploreDirection island_circ_direction =
+	   Widelands::IslandExploreDirection::kClockwise;
 };
 
 struct WareObserver {
@@ -484,7 +487,10 @@ struct MilitarySiteSizeObserver {
 
 // this represents a scheduler task
 struct SchedulerTask {
-	SchedulerTask(const uint32_t time, const Widelands::SchedulerTaskId t, const uint8_t p, const char* d);
+	SchedulerTask(const uint32_t time,
+	              const Widelands::SchedulerTaskId t,
+	              const uint8_t p,
+	              const char* d);
 
 	bool operator<(SchedulerTask other) const;
 
@@ -511,7 +517,8 @@ private:
 // list of candidate flags to build roads, with some additional logic
 struct FlagsForRoads {
 
-	FlagsForRoads(int32_t mr) : min_reduction(mr) {}
+	FlagsForRoads(int32_t mr) : min_reduction(mr) {
+	}
 
 	struct Candidate {
 		Candidate();
@@ -556,7 +563,8 @@ struct FlagsForRoads {
 	bool get_winner(uint32_t* winner_hash, uint32_t pos);
 };
 
-// This is a struct that stores strength of players, info on teams and provides some outputs from these data
+// This is a struct that stores strength of players, info on teams and provides some outputs from
+// these data
 struct PlayersStrengths {
 	struct PlayerStat {
 		PlayerStat();
@@ -581,6 +589,6 @@ struct PlayersStrengths {
 	// Number of team, sum of players' strength
 	std::map<Widelands::TeamNumber, uint32_t> team_powers;
 };
-} // namespace Widelands
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_AI_AI_HELP_STRUCTS_H

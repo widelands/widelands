@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2016 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -52,14 +52,18 @@ struct WuiPlotArea : public UI::Panel {
 	};
 
 	// sample_rate is in in milliseconds
-	WuiPlotArea
-		(UI::Panel * parent, int32_t x, int32_t y, int32_t w, int32_t h,
-		 uint32_t sample_rate, Plotmode plotmode);
+	WuiPlotArea(UI::Panel* parent,
+	            int32_t x,
+	            int32_t y,
+	            int32_t w,
+	            int32_t h,
+	            uint32_t sample_rate,
+	            Plotmode plotmode);
 
 	/// Calls update() if needed
 	void think() override;
 
-	void draw(RenderTarget &) override;
+	void draw(RenderTarget&) override;
 
 	void set_time(TIME id) {
 		time_ = id;
@@ -73,7 +77,9 @@ struct WuiPlotArea : public UI::Panel {
 			set_time(static_cast<TIME>(time));
 		needs_update_ = true;
 	}
-	TIME get_time() const {return static_cast<TIME>(time_); }
+	TIME get_time() const {
+		return static_cast<TIME>(time_);
+	}
 	int32_t get_time_id() const {
 		if (time_ == TIME_GAME)
 			return game_time_id_;
@@ -83,8 +89,7 @@ struct WuiPlotArea : public UI::Panel {
 
 	uint32_t get_game_time_id();
 
-	void register_plot_data
-		(uint32_t id, const std::vector<uint32_t> * data, RGBColor);
+	void register_plot_data(uint32_t id, const std::vector<uint32_t>* data, RGBColor);
 	void show_plot(uint32_t id, bool t);
 
 	void set_plotcolor(uint32_t id, RGBColor color);
@@ -92,11 +97,16 @@ struct WuiPlotArea : public UI::Panel {
 	std::vector<std::string> get_labels() const;
 
 protected:
-	void draw_plot(RenderTarget& dst, float yoffset, const std::string& yscale_label,
+	void draw_plot(RenderTarget& dst,
+	               float yoffset,
+	               const std::string& yscale_label,
 	               uint32_t highest_scale);
-	void draw_plot_line
-		(RenderTarget & dst, std::vector<uint32_t> const * dataset,
-		 uint32_t const highest_scale, float const sub, RGBColor const color, int32_t yoffset);
+	void draw_plot_line(RenderTarget& dst,
+	                    std::vector<uint32_t> const* dataset,
+	                    uint32_t const highest_scale,
+	                    float const sub,
+	                    const RGBColor& color,
+	                    int32_t yoffset);
 	uint32_t get_plot_time() const;
 	/// Recalculates the data
 	virtual void update();
@@ -105,15 +115,15 @@ protected:
 	int32_t initialize_update();
 
 	struct PlotData {
-		const std::vector<uint32_t> * absolute_data; // The absolute dataset
-		std::vector<uint32_t> * relative_data; // The relative dataset
-		bool                          showplot;
-		RGBColor                      plotcolor;
+		const std::vector<uint32_t>* absolute_data;  // The absolute dataset
+		std::vector<uint32_t>* relative_data;        // The relative dataset
+		bool showplot;
+		RGBColor plotcolor;
 	};
 	std::vector<PlotData> plotdata_;
 
-	Plotmode                plotmode_;
-	uint32_t                sample_rate_;
+	Plotmode plotmode_;
+	uint32_t sample_rate_;
 
 	/// Whether there has ben a data update since the last time that think() was executed
 	bool needs_update_;
@@ -130,8 +140,8 @@ protected:
 private:
 	uint32_t get_game_time() const;
 
-	TIME                    time_;  // How much do you want to list
-	uint32_t                game_time_id_; // what label is used for TIME_GAME
+	TIME time_;              // How much do you want to list
+	uint32_t game_time_id_;  // what label is used for TIME_GAME
 };
 
 /**
@@ -139,34 +149,37 @@ private:
  * setup.
  */
 struct WuiPlotAreaSlider : public UI::DiscreteSlider {
-	WuiPlotAreaSlider
-		(Panel * const parent,
-		 WuiPlotArea & plot_area,
-		 const int32_t x, const int32_t y, const uint32_t w, const uint32_t h,
-		 const Image* background_picture_id,
-		 const std::string & tooltip_text = std::string(),
-		 const uint32_t cursor_size = 20,
-		 const bool enabled = true)
-	: DiscreteSlider
-		(parent,
-		 x, y, w, h,
-		 plot_area.get_labels(),
-		 plot_area.get_time_id(),
-		 background_picture_id,
-		 tooltip_text,
-		 cursor_size,
-		 enabled),
-	  plot_area_(plot_area),
-	  last_game_time_id_(plot_area.get_game_time_id())
-	{
+	WuiPlotAreaSlider(Panel* const parent,
+	                  WuiPlotArea& plot_area,
+	                  const int32_t x,
+	                  const int32_t y,
+	                  const uint32_t w,
+	                  const uint32_t h,
+	                  const Image* background_picture_id,
+	                  const std::string& tooltip_text = std::string(),
+	                  const uint32_t cursor_size = 20,
+	                  const bool enabled = true)
+	   : DiscreteSlider(parent,
+	                    x,
+	                    y,
+	                    w,
+	                    h,
+	                    plot_area.get_labels(),
+	                    plot_area.get_time_id(),
+	                    background_picture_id,
+	                    tooltip_text,
+	                    cursor_size,
+	                    enabled),
+	     plot_area_(plot_area),
+	     last_game_time_id_(plot_area.get_game_time_id()) {
 		changedto.connect(boost::bind(&WuiPlotArea::set_time_id, &plot_area, _1));
 	}
 
 protected:
-	void draw(RenderTarget & dst) override;
+	void draw(RenderTarget& dst) override;
 
 private:
-	WuiPlotArea & plot_area_;
+	WuiPlotArea& plot_area_;
 	uint32_t last_game_time_id_;
 };
 
@@ -177,14 +190,17 @@ private:
  */
 struct DifferentialPlotArea : public WuiPlotArea {
 public:
-	DifferentialPlotArea
-		(UI::Panel * parent, int32_t x, int32_t y, int32_t w, int32_t h,
-		 uint32_t sample_rate, Plotmode plotmode);
+	DifferentialPlotArea(UI::Panel* parent,
+	                     int32_t x,
+	                     int32_t y,
+	                     int32_t w,
+	                     int32_t h,
+	                     uint32_t sample_rate,
+	                     Plotmode plotmode);
 
-	void draw(RenderTarget &) override;
+	void draw(RenderTarget&) override;
 
-	void register_negative_plot_data
-		(uint32_t id, const std::vector<uint32_t> * data);
+	void register_negative_plot_data(uint32_t id, const std::vector<uint32_t>* data);
 
 protected:
 	/// Recalculates the data
@@ -198,10 +214,9 @@ private:
 	 * normal plotdata
 	 */
 	struct ReducedPlotData {
-		const std::vector<uint32_t> * absolute_data;
+		const std::vector<uint32_t>* absolute_data;
 	};
-	std::vector<ReducedPlotData>  negative_plotdata_;
+	std::vector<ReducedPlotData> negative_plotdata_;
 };
-
 
 #endif  // end of include guard: WL_WUI_PLOT_AREA_H

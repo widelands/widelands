@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2016 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -52,42 +52,49 @@ namespace UI {
  */
 class Window : public NamedPanel {
 public:
-	/// Do not use richtext for the \param title.
-	Window
-		(Panel      * parent,
-		 const std::string& name,
-		 int32_t      x,
-		 int32_t      y,
-		 uint32_t     w,
-		 uint32_t     h,
-		 const std::string& title);
+	/// Do not use richtext for 'title'.
+	Window(Panel* parent,
+	       const std::string& name,
+	       int32_t x,
+	       int32_t y,
+	       uint32_t w,
+	       uint32_t h,
+	       const std::string& title);
 
-	/// This will set the window title. Do not use richtext for the \param text.
+	/// This will set the window title. Do not use richtext for 'text'.
 	void set_title(const std::string& text);
-	const std::string & get_title() const {return title_;}
+	const std::string& get_title() const {
+		return title_;
+	}
 
-	void set_center_panel(Panel * panel);
+	void set_center_panel(Panel* panel);
 	void move_out_of_the_way();
 	void move_inside_parent() override;
 	void center_to_parent();
 	void warp_mouse_to_fastclick_panel();
-	void set_fastclick_panel(Panel * p) {fastclick_panel_ = p;}
+	void set_fastclick_panel(Panel* p) {
+		fastclick_panel_ = p;
+	}
 
-	bool is_minimal() const {return is_minimal_;}
-	void restore ();
+	bool is_minimal() const {
+		return is_minimal_;
+	}
+	void restore();
 	void minimize();
-	bool is_snap_target() const override {return true;}
+	bool is_snap_target() const override {
+		return true;
+	}
 
 	// Drawing and event handlers
-	void draw(RenderTarget &) override;
-	void draw_border(RenderTarget &) override;
+	void draw(RenderTarget&) override;
+	void draw_border(RenderTarget&) override;
 
 	void think() override;
 
-	bool handle_mousepress  (uint8_t btn, int32_t mx, int32_t my) override;
+	bool handle_mousepress(uint8_t btn, int32_t mx, int32_t my) override;
 	bool handle_mouserelease(uint8_t btn, int32_t mx, int32_t my) override;
-	bool handle_mousemove
-		(uint8_t state, int32_t mx, int32_t my, int32_t xdiff, int32_t ydiff) override;
+	bool
+	handle_mousemove(uint8_t state, int32_t mx, int32_t my, int32_t xdiff, int32_t ydiff) override;
 	bool handle_tooltip() override;
 
 protected:
@@ -110,10 +117,9 @@ private:
 	const Image* pic_bottom_;
 	const Image* pic_background_;
 
-	Panel * center_panel_;
-	Panel * fastclick_panel_;
+	Panel* center_panel_;
+	Panel* fastclick_panel_;
 };
-
 }
 
 #endif  // end of include guard: WL_UI_BASIC_WINDOW_H

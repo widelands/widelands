@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2010-2016 by the Widelands Development Team
+ * Copyright (C) 2010-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -30,23 +30,19 @@ namespace UI {
  * bigger than the icon, the image will be scaled to fit.
 */
 struct Icon : public Panel {
-	Icon
-		(Panel * parent,
-		 int32_t x, int32_t y, int32_t w, int32_t h,
-		 const Image* picture_id);
+	Icon(Panel* parent, int32_t x, int32_t y, int32_t w, int32_t h, const Image* picture_id);
 
 	void set_icon(const Image* picture_id);
 	void set_frame(const RGBColor& color);
 	void set_no_frame();
 
-	void draw(RenderTarget &) override;
+	void draw(RenderTarget&) override;
 
 private:
 	const Image* pic_;
-	bool         draw_frame_;
-	RGBColor     framecolor_;
+	bool draw_frame_;
+	RGBColor framecolor_;
 };
-
 }
 
 #endif  // end of include guard: WL_UI_BASIC_ICON_H

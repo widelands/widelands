@@ -1,16 +1,17 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2016 Widelands Development Team
+# Copyright (C) 2005-2017 Widelands Development Team
 # 
 # Translators:
 # GunChleoc, 2014
 # Markus7cz <markus7cz@gmail.com>, 2008
+# Milan Fašina <matrix17@seznam.cz>, 2016-2017
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-05-06 09:44+0000\n"
-"PO-Revision-Date: 2016-05-06 09:45+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2017-01-21 21:10+0000\n"
+"PO-Revision-Date: 2017-01-27 19:57+0000\n"
+"Last-Translator: Milan Fašina <matrix17@seznam.cz>\n"
 "Language-Team: Czech (http://www.transifex.com/widelands/widelands/language/cs/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -21,90 +22,90 @@ msgstr ""
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:21
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:23
 msgid "Build up a basic economy"
-msgstr ""
+msgstr "Budování základního hospodářství"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:24
 msgid "Start collecting basic building materials, and fortify the camp."
-msgstr ""
+msgstr "Začni těžit základní stavební materiály a opevni tábor."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:26
 msgid "Build a lumberjack’s hut"
-msgstr ""
+msgstr "Postav chatu dřevorubce"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:27
 msgid "Build a ranger’s hut"
-msgstr ""
+msgstr "Postav chatu lesníka"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:28
 msgid "Build a quarry"
-msgstr ""
+msgstr "Postav lom"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:29
 msgid "Build a wood hardener"
-msgstr ""
+msgstr "Postav tesařství"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:30
 msgid "Build a sentry on the eastern border"
-msgstr ""
+msgstr "Postav strážnici na východní hranici"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:31
 msgid "You should eventually also build a reed yard and a lime kiln."
-msgstr ""
+msgstr "Měl by si postavit i rákosové pole a vápennou pec."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:36
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:38
 msgid "Build up a small food economy"
-msgstr "Vybuduj základní ekonomiku potravin"
+msgstr "Vybuduj základní potravinné hospodářství"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:39
 msgid "Build up a basic food economy to provide your people with food."
-msgstr ""
+msgstr "Postav základní hospodářství aby si mohl dodávat lidem jídlo."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:41
 msgid "Build a fisher’s hut"
-msgstr ""
+msgstr "Postav chatu rybáře"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:42
 msgid "Build a hunter’s hut"
-msgstr ""
+msgstr "Postav loveckou chatu"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:43
 msgid "Build a well"
-msgstr ""
+msgstr "Postav studnu"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:44
 msgid "Build a farm"
-msgstr ""
+msgstr "Postav obilné pole"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:45
 msgid "Build a bakery"
-msgstr ""
+msgstr "Postav pekárnu"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:50
 msgid "Build a cattle farm"
-msgstr "Postav dobytčí farmu,"
+msgstr "Postav statek"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:52
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:55
 msgid "Remember to build a cattle farm"
-msgstr "Postav dobytčí farmu"
+msgstr "Postav statek"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:53
 msgid ""
 "As your roads grow longer and your economy bigger, you should make good use "
 "of your oxen to help transport wares more quickly."
-msgstr ""
+msgstr "Jak se prodlužují tvé cesty a tvé hospodářství roste, měl by si zvážit využití volů aby ti pomohli přepravovat suroviny rychlejíi."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:61
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:63
 msgid "Build a tower"
-msgstr ""
+msgstr "Postav věž"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:64
 msgid ""
 "Build a tower at the north-east border of your territory to get greater "
 "visual range and to protect your people from sudden attacks by enemies."
-msgstr ""
+msgstr "Postav věž na severo východní hranici tvého území. Tím získáš větší přehled a ochráníš svůj lid před nenadálým útokem nepřítele."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:69
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:71
@@ -115,7 +116,7 @@ msgstr "Pokračuj v průzkumu"
 msgid ""
 "Build more military buildings to explore the area around the headquarters "
 "and to ensure the safety of your people."
-msgstr "Postav kolem své základny více vojenských budov, abys prozkoumal okolí a poskytl svým lidem bezpečí a ochranu."
+msgstr "Postav kolem své hlavní budovy více vojenských budov, abys prozkoumal okolí a poskytl svým lidem bezpečí a ochranu."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:77
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:79
@@ -127,7 +128,7 @@ msgid ""
 "Expand your territory to the mountains, send geologists to search for ore "
 "and coal and build a mining economy with mines, taverns, smelting works and "
 "metal workshop."
-msgstr ""
+msgstr "Rozšiř své území k horám, pošli geology hledat rudy, uhlí a postav těžební hospodářství tj. doly, hospody, slévárny a dílny na železo."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:85
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:87
@@ -141,112 +142,122 @@ msgstr "Postav pevnost na východ od hor."
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:93
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:95
 msgid "Build a training infrastructure"
-msgstr "Postav tréningovou infrastrukturu"
+msgstr "Postav výcvikovou infrastrukturu"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:96
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:116
+msgid "Build a barracks to train some basic soldiers."
+msgstr "Postav kasárna a vytrénuj pár vojáků."
+
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:97
 msgid "Build a battle arena and a training camp to the west of the mountains."
 msgstr "Postav bitevní arénu a výcvikový tábor na západ od hor."
 
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:97
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:127
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:98
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:128
 msgid ""
 "Enhance your metal workshop to an ax workshop in order to produce weapons, "
 "and build up a second metal workshop to ensure the production of tools. When"
 " the blacksmith reaches his next level (master blacksmith), you can even "
 "enhance the ax workshop to a war mill, which will produce additional "
 "weapons."
-msgstr ""
+msgstr "Vylepši svou dílnu na železo na dílnu na sekery, abys mohl začít vyrábět zbraně, a postav nové dílny na železo, které budou dál vyrábět nástroje. Až tvůj kovář dosáhne další úrovně (mistr kovář), můžeš dílnu na sekery dále vylepšit na válečnou akademii, která vyrábí další zbraně."
 
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:98
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:135
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:99
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:136
 msgid ""
 "Build a helm smithy to the west of the mountains to provide your soldiers "
 "with better armor."
-msgstr ""
+msgstr "Postav kovárnu na přilby na západ od hor aby tvoji vojáci měli lepší zbroj."
 
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:104
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:106
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:105
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:107
 msgid "Build a warehouse"
 msgstr "Postav skladiště"
 
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:107
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:108
 msgid "Build a warehouse to the west of the mountains."
 msgstr "Postav skladiště na západ od hor."
 
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:108
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:109
 msgid ""
 "Warehouses are similar to your headquarters, with the only difference that "
 "they aren’t defended by soldiers. It is often wise to build a warehouse when"
 " your territory is growing and the paths to your headquarters get longer and"
 " longer."
-msgstr "Sklad funguje stejně jako tvoje základna s tím rozdílem, že není bráněný vojáky. Jak se tvé území rozrůstá, cesta na základnu je delší a další. Často je pak rozumné ve vzdálené oblasti postavit sklad."
+msgstr "Skladiště funguje stejně jako tvá hlavní budova s tím rozdílem, že není bráněno vojáky. Jak se tvé území rozrůstá, cesta k hlavní budově je delší a delší. Často je pak rozumné ve vzdálené oblasti postavit skladiště."
 
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:113
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:115
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:114
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:116
 msgid "Build training sites"
 msgstr "Postav cvičiště"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:117
 msgid ""
-"Training sites like a training camp or a battle arena are used for training "
-"soldiers in their different attributes. These attributes are important in "
-"fights and the better a soldier is, the higher is the chance to win a fight."
-msgstr "Na cvičištích jako jsou výcvikový tábor nebo bitevní aréna se vojáci zlepšují v různých dovednostech. Tyto dovednosti a vlastnosti jsou důležité v boji, protože čím lépe je voják vycvičený, tím vyšší je jeho šance na vítězství v boji."
+"Build a barracks, a battle arena and a training camp to the west of the "
+"mountains."
+msgstr "Postav kasárna, bitevní arénu a výcvikový tábor na západ od hor."
 
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:119
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:118
+msgid ""
+"Barracks train basic soldiers while training sites like a training camp or a"
+" battle arena are used for training soldiers in their different attributes. "
+"These attributes are important in fights and the better a soldier is, the "
+"higher is the chance to win a fight."
+msgstr "V kasárnách se trénují základní vojáci, zatímco cvičiště jako je výcvikový tábor nebo bitevní aréna jsou určena pro výcvik vojáků v různých dovednostech. Tyto dovednosti jsou důležité v boji, protože čím lépe je voják vycvičený, tím vyšší je jeho šance na vítězství v boji."
+
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:120
 msgid "The attributes are: health, attack, defense and evade."
-msgstr ""
+msgstr "Atributy jsou: zdraví, útok, obrana a odražení."
 
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:124
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:126
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:125
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:127
 msgid "Build weapons production"
 msgstr "Vybuduj výrobu zbraní"
 
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:132
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:134
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:133
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:135
 msgid "Build a helm smithy"
-msgstr ""
+msgstr "Postav kovárnu přileb"
 
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:140
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:142
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:141
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:143
 msgid "Destroy Kalitath’s army"
 msgstr "Znič Kalitathovu armádu"
 
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:143
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:144
 msgid "Destroy Kalitath’s army and expand your territory to the east."
 msgstr "Znič Kalitathovu armádu a rozšiř své území dále na východ."
 
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:144
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:145
 msgid ""
 "To attack an enemy, you must click on the door of an adversary’s military "
 "building. A menu will pop up allowing you to select the number of soldiers "
 "that should attack. When you are ready with setting the number, click on the"
 " cross (‘Start Attack’)."
-msgstr "Abys zaútočil na nepřítele, klikni na dveře nepřátelské vojenské budovy. Objeví se okno, ve kterém zvolíš počet vojáků, kteří se zúčastní útoku. Až budeš mít počet vojáků nastavený, klikni na křížek ('zahájit útok')."
+msgstr "Abys zaútočil na nepřítele, klikni na dveře nepřátelské vojenské budovy. Objeví se okno, ve kterém zvolíš počet vojáků, kteří se zúčastní útoku. Až budeš mít počet vojáků nastavený, klikni na křížek (\"zahájit útok\")."
 
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:149
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:151
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:150
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:152
 msgid "Military assault on Al’thunran"
 msgstr "Vojenský útok na Al’thunran"
 
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:152
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:153
 msgid ""
 "Destroy all forces of Thron’s two brothers to liberate the throne-circle."
 msgstr "Znič všechna opevnění Thronových bratrů a osvoboď kruh s trůnem."
 
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:160
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:161
 msgid "Close to Home"
 msgstr "Blízko k domovu"
 
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:161
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:173
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:329
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:162
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:174
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:330
 msgid "Thron looks worried…"
-msgstr ""
+msgstr "Thron vypadá zasmušile…"
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:163
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:164
 msgid ""
 "These last days, we came closer to our capital. Many people have already "
 "joined us on our march and set their hopes on me. However, I fear that we "
@@ -254,20 +265,20 @@ msgid ""
 msgstr "V posledních dnech jsme se přiblížili k hlavnímu městu. Přidalo se k nám už mnoho lidí a vkládají ve mě své naděje. Přesto se obávám, že na bitvu s mými bratry ještě nejsme dostatečně silní."
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:166
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:167
 msgid ""
 "For now, we are resting at the borders of the old forest and preparing for "
 "the coming days."
 msgstr "Prozatím se utáboříme na hranici starého lesa a připravíme se na to, co nám přinesou budoucí dny."
 
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:172
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:196
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:328
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:173
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:197
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:329
 msgid "Another Cold Day"
 msgstr "Další studený den"
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:175
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:176
 msgid ""
 "The news that a patrol brought is not good to hear. Our spies tell us that "
 "the war tribes still rage in battle, but some of the elder soldiers and "
@@ -275,18 +286,18 @@ msgid ""
 " is the first war leader to leave Al’thunran, thus leaving his side weak and"
 " vulnerable. As my scouts report, he has set foot on the lower grounds "
 "around the capital, securing the outer fortification rings."
-msgstr "Hlídka přinesla zprávy, které se neposlouchají dobře. Naši vyzvědači vzkazují, že kmeny stále bojují v zuřivých bitvách, ale někteří ze starších vojáků a kmenoví náčelníci začínají být nesmyslnou válkou unaveni. Kalitath, syn Kuna je prvním velitelem, který opustil Al’thunran, a tím nechal svou stranu slabou a nechráněnou. Jak hlásí moji zvědové, stáhl se blíže k hlavnímu městu a snaží se zabezpečit vnější opevnění."
+msgstr "Hlídka přinesla zprávy, které se neposlouchají dobře. Naši zvědové vzkazují, že kmeny stále bojují v zuřivých bitvách, ale někteří ze starších vojáků a kmenoví náčelníci začínají být nesmyslnou válkou unaveni. Kalitath, syn Kuna je prvním velitelem, který opustil Al’thunran, a tím nechal svou stranu slabou a nechráněnou. Jak hlásí moji průzkumníci, stáhl se blíže k hlavnímu městu a snaží se zabezpečit vnější opevnění."
 
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:180
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:181
 msgid "Doubts"
 msgstr "Pochybnosti"
 
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:181
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:182
 msgid "Boldreth is shaking his head…"
-msgstr ""
+msgstr "Boldreth třese hlavou..."
 
 #. TRANSLATORS: Boldreth
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:183
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:184
 msgid ""
 "Thron seeks to believe that Kalitath is tired of fighting and would be "
 "willing to join us once we march to re-establish law and order in "
@@ -296,33 +307,33 @@ msgid ""
 "Chat’Karuth’s son to reclaim his heritage and the throne?"
 msgstr "Thron doufá, že Kalitath je unavený válkou a byl by ochotný se k nám přidat, jakmile se vydáme obnovit řád a pořádek v Al’thunran. Ale já si to nemyslím. Kalitath je synem jednoho z nejmocnějších kmenových generálů a jeho rodině nikdy nebylo po chuti sklonit se před bitevními prapory Chat’Karutha. Proč by měl nyní podporovat jeho syna, který se vrací ujmout svého dědictví a trůnu?"
 
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:188
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:204
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:189
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:205
 msgid "The Story Continues"
 msgstr "Příběh pokračuje"
 
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:189
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:237
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:262
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:271
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:317
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:190
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:238
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:263
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:272
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:318
 msgid "Boldreth says:"
 msgstr "Boldreth říká:"
 
 #. TRANSLATORS: Boldreth
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:191
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:192
 msgid ""
 "However, Thron is not willing to listen to my doubts. He seeks to expand our"
 " fortifications to the borders of Kalitath’s territory and to reunite with "
 "his forces. I have to keep an eye on everything that happens here."
 msgstr "Přesto se Thron zdráhá naslouchat mým pochybnostem. Plánuje rozšířit naše opevnění až ke hranicím Kalitathova území a spojit se s jeho jednotkami. Musím dávat dobrý pozor na vše, co se tu odehrává."
 
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:197
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:198
 msgid "Thron is speaking confidently."
 msgstr "Thron mluví důvěrně."
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:199
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:200
 msgid ""
 "The frontier line of my forces has expanded to the edge of the forests. We "
 "have a long and cold winter and so many miles behind us. The fortification "
@@ -330,20 +341,20 @@ msgid ""
 "goods, and once Al’thunran is in my hands, the two cities will be linked by "
 "a good and defensible infrastructure. Still, I hope I will not walk alone on"
 " this mission, I hope Kalitath son of Kun will follow my call."
-msgstr "Hranice mého území se rozšířila až k okraji lesů. Máme za sebou dlouhou a studenou zimu a urazili jsme už mnoho mil. Opevnění, která jsme zbudovali kolem Ondunu, nám zabezpečí rychlý přísun mužů a zboží a jakmile bude Al’thunran v mých rukou, obě města se propojí spolehlivými cestami a obrannými budovami. Přesto doufám, že při tomto tažení nezůstanu sám. Doufám, že Kalitath, syn Kunův, se přidá na mou stranu."
+msgstr "Hranice mého území se rozšířila až k okraji lesů. Máme za sebou dlouhou a studenou zimu a urazili jsme už mnoho mil. Opevnění, která jsme zbudovali kolem Ondunu, nám zabezpečí rychlý přísun mužů, surovin a jakmile bude Al’thunran v mých rukou, obě města se propojí spolehlivými cestami a obrannými budovami. Přesto doufám, že při tomto tažení nezůstanu sám. Doufám, že Kalitath, syn Kunův, se přidá na mou stranu."
 
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:205
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:223
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:254
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:292
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:300
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:309
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:342
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:206
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:224
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:255
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:293
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:301
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:310
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:343
 msgid "Thron says:"
 msgstr "Thron říká:"
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:207
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:208
 msgid ""
 "I have sent men to meet with Kalitath in his fortress. He has barricaded the"
 " former main entrance to the capital and is trying to set up a siege ring "
@@ -353,16 +364,16 @@ msgid ""
 "prepare for battle."
 msgstr "Vyslal jsem své muže do pevnosti na setkání s Kalitathem. Hlavní přístup do města nechal zabarikádovat a snaží se obléhat Al’thunran. Dokud blokáda trvá, nenechá nikoho vstoupit dovnitř nebo opustit město. Dosud na žádnou z mých zpráv neodpověděl. Ale čas strávený čekáním není promarněný. Připravujeme se na bitvu a moji vojáci se každým dnem zlepšují."
 
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:211
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:212
 msgid "Your Loyal Companion"
 msgstr "Věrný společník"
 
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:212
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:213
 msgid "Boldreth shouts out!"
 msgstr "Boldreth vykřikl!"
 
 #. TRANSLATORS: Boldreth
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:214
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:215
 msgid ""
 "The BASTARD! Only one man of our frontier patrol came back alive. He carried"
 " a message from Kalitath, telling us that he will punish every move of our "
@@ -370,12 +381,12 @@ msgid ""
 "there is war between Kalitath and us!"
 msgstr "Ten PARCHANT! Pouze jediný z mých můžu se vrátil zpět živý. Přinesl vzkaz od Kalitatha, že za každý pohyb našich jednotek budeme platit vlastní krví! Takové jednání nestrpím. Od teď jsme s Kalitathem ve válečném stavu!"
 
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:222
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:223
 msgid "Renegade Fortification"
 msgstr "Odpadlická opevnění"
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:225
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:226
 msgid ""
 "The traitor left his armies dying where they lay when he saw that he would "
 "not keep my forces back. Kalitath disappeared in the confusion of the war, "
@@ -385,7 +396,7 @@ msgid ""
 msgstr "Když zrádce Kalitath viděl, že moje jednotky nemůže zastavit, nechal své umírající muže tam, kde zrovna leželi, zbaběle využil zmatku a opustil svou armádu a zmizel. Ale o to se už nestarám. Pokud uteče a bude navždy zapomenut, není žádná škoda, že se nepokloní před dřevěným trůnem, který nyní patří mně."
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:228
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:229
 msgid ""
 "Furthermore, his flight brought us a great benefit: all year, Kalitath was "
 "so busy fighting that he did not even care to store enough food for all his "
@@ -395,20 +406,20 @@ msgid ""
 msgstr "Jeho útěk nám dokonce přišel vhod: Celý rok byl Kalitath tak zaneprázdněn boji a válkou, že nevěnoval pozornost zásobování a neměl pro své muže dostatek jídla. Když jejich velitel utekl, dohnal hlad některé z jeho mladších následovníků k dezerci. Tato skupina držela silné opevnění v hlavním obléhacím kruhu."
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:231
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:232
 msgid ""
 "But there is more news: My scouts have reported that the two raging tribes "
 "of my brothers are in chaos and have barely noticed the new danger that is "
 "about to strike them. However, they would not care if they noticed I guess, "
 "blinded by rage and hate, there is no sense left in them at all I believe."
-msgstr "A ještě jsou tu další novinky: Mí zvědové hlásí, že dva znesvářené kmeny mých bratrů rozpoutaly takový chaos, že si ani nevšimli nového nebezpečí, které se na ně chystá udeřit. A i kdyby si všimli, nedbali by. Jsou zaslepeni zuřivostí a nenávistí, která v nich zadusila poslední zbytky citu."
+msgstr "A ještě jsou tu další novinky: Moji průzkumníci hlásí, že dva znesvářené kmeny mých bratrů rozpoutaly takový chaos, že si ani nevšimli nového nebezpečí, které se na ně chystá udeřit. A i kdyby si všimli, nedbali by. Jsou zaslepeni zuřivostí a nenávistí, která v nich zadusila poslední zbytky citu."
 
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:236
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:237
 msgid "Winter Ahead"
 msgstr "Zima je před námi"
 
 #. TRANSLATORS: Boldreth
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:239
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:240
 msgid ""
 "This morning, I found Thron’s mind troubled. He returned from his patrol "
 "late last night and sat back against a tree, watching over the encampment. "
@@ -417,54 +428,54 @@ msgid ""
 "cold winter!"
 msgstr "Dnes ráno vypadá Thron ustaraně. Minulou noc se z hlídky vrátil velice pozdě, posadil se ke stromu a dlouho mlčky pozoroval naši osadu. Množství sporů a hádek začíná narůstat a zima je v plném proudu. Pokud máme přežít dlouhou studenou zimu, musíme si nějaké potraviny uschovat ve skladišti!"
 
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:244
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:245
 msgid "The Advisor"
 msgstr "Rádce"
 
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:245
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:246
 msgid "Khantrukh nods."
 msgstr "Khantrukh přikyvuje."
 
 #. TRANSLATORS: Khantrukh
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:247
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:248
 msgid ""
 "Boldreth is right! We don’t have enough food to survive a long, cold winter."
 " We should start building a well, a fisher’s and a hunter’s hut. And if we "
 "find enough space, we should as well build up a farm and a bakery! One of "
 "our farmers seems to be very clever – he already got some crops to grow in "
 "this cold soil."
-msgstr ""
+msgstr "Boldreth má pravdu! Nemáme dost jídla abychom přežili dlouhou a mrazivou zimu. Měli bychom začít stavět studny, chaty pro rybáře a lovce. Pokud najdeme dostatek místa, měli bychom postavit i obilné pole a pekárnu! Naši sedláci se zdají být velmi chytří - už se jim podařilo vypěstovat malou úrodu v této promrzlé půdě."
 
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:253
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:254
 msgid "Food Economy Completed"
-msgstr "Ekonomika potravin je dokončena"
+msgstr "Potravinné hospodářství je hotové"
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:256
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:257
 msgid ""
 "Khantrukh has just informed me that our basic food economy was built up "
 "successfully. Finally, none of us has to fear starvation anymore."
 msgstr "Khantrukh mě právě informoval, že se nám podařilo zabezpečit zásobování základními potravinami. Konečně se nikdo z nás nemusí obávat hladovění."
 
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:261
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:262
 msgid "Tracks"
 msgstr "Stopy"
 
 #. TRANSLATORS: Boldreth
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:264
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:265
 msgid ""
 "Thron told me that he discovered tracks in the snow to the northeast of our "
-"settlement. He has instructed us to build a tower,  to have a greater visual"
-" range over the area around our hall to protect our people from sudden "
+"settlement. He has instructed us to build a tower, to have a greater visual "
+"range over the area around our hall to protect our people from sudden "
 "attacks."
-msgstr ""
+msgstr "Thron mi řekl, abych prozkoumal stopy ve sněhu, vedoucí k naší severovýchodní osadě. Přikázal nám postavit věž, abychom měli větší přehled nad okolím a mohli lépe chránit náš lid před nenadálým útokem."
 
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:270
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:271
 msgid "Further Exploration"
 msgstr "Další průzkum"
 
 #. TRANSLATORS: Boldreth
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:273
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:274
 msgid ""
 "The first fortification Thron ordered has just been completed. At the "
 "moment, he seeks to bring trust and belief to those who live inside the "
@@ -473,49 +484,49 @@ msgid ""
 "his fears: the forests are deep, and the frontier to Al’thunran is near. I "
 "am sure that there are a thousand greater dangers out there than the unknown"
 " tracks."
-msgstr ""
+msgstr "První část opevnění, kterou Thron přikázal je hotova. V tuto chvíli se snaží obnovit důvěru a víru těch, kteří žijí obklopení těmto zdmi našeho nového příbytku jménem \"Ondun\", což znamená ve starém jazyce \"ti kdož čekají\". Thron ovšem ještě není spokojen - a já jeho obavy plně chápu: les je hluboký a frontová linie u Al’thunran je blízko. Jsem si jistý, že je tu tisíckrát větší nebezpečí než neznámé stopy."
 
 #. TRANSLATORS: Boldreth
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:276
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:277
 msgid ""
 "To overlook more of the area around our hall, we should explore further and "
 "set up more guards and scouts to observe the frontier and keep an eye on the"
 " raging wars on our doorstep. THEN we will be prepared once trouble seeks to"
 " capture our woods."
-msgstr "Kvůli obraně území kolem našeho sídla bychom měli prozkoumat okolí a vycvičit stráže a zvědy, kteří budou hlídat hranice a dávat pozor na válku zuřící před naším prahem. Teprve POTOM budeme připraveni na potíže, které sužují naše lesy."
+msgstr "Kvůli obraně území kolem našeho sídla bychom měli prozkoumat okolí a vycvičit stráže a průzkumníky, kteří budou hlídat hranice a dávat pozor na válku zuřící před naším prahem. Teprve POTOM budeme připraveni na potíže, které sužují naše lesy."
 
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:282
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:283
 msgid "Mountains Found"
 msgstr "Hory nalezeny"
 
 #. TRANSLATORS: Khantrukh
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:285
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:286
 msgid ""
 "I have just spoken to the leader of our patrol. He told me that they found "
 "some mountains to the north-east and east of our territory. With a bit of "
 "luck this will open up a new chance for rearming our men, because as far as "
 "I remember, most of the mountains west of Al’thunran hold coal and some "
 "metal ores."
-msgstr ""
+msgstr "Právě jsem mluvil s velitelem naší hlídky. Řekl mi, že objevil hory na severo-východní a východní části našeho území. S trochou štěstí nám toto otevře novou cestu k přezbrojení našich mužů, protože jak si pamatuji, většina hor západně od Al’thunranu je bohatá na uhlí a železnou rudu."
 
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:291
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:292
 msgid "Mining Economy Completed"
-msgstr "Těžební ekonomika je dokončena"
+msgstr "Těžební hospodářství je dokončeno"
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:294
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:295
 msgid ""
 "I just got informed that our mining economy has started its work. This news "
 "brought a smile to my face – even if the hardest part is still waiting to be"
 " done, now that our smiths will give their best to further ease our lives."
-msgstr "Právě mě informovali, že naši horníci začali těžit. Tahle novinka mě velice těší - přestože to nejtěžší nás stále teprve čeká, kováři nám do budoucna mohou velmi ulehčit život."
+msgstr "Právě mě informovali, že naši horníci začali těžit. Tahle novinka mě velice těší - přestože to nejtěžší nás teprve čeká, kováři nám do budoucna mohou velmi ulehčit život."
 
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:299
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:300
 msgid "Fortress Needed"
 msgstr "Potřebujeme pevnost"
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:302
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:303
 msgid ""
 "Boldreth and I just explored the area around the three mountains. One major "
 "strategic problem of that area seems to be that there are two bigger "
@@ -523,35 +534,35 @@ msgid ""
 "are quite hard to control, and so it seems to me like we have only one "
 "chance to secure the mountains from enemy hands: we must build a fortress to"
 " the east of the mountains!"
-msgstr ""
+msgstr "Boldreth a já jsme prozkoumali okolí tří hor. Jedním z hlavních strategických problémů je, že jsou tu dva větší průsmyky - jeden je severně a druhý jižně od hlavní hory. Tyto dva průsmyky bude velmi těžké ohlídat a proto se mi zdá, že máme pouze jedinou možnost, jak uchránit hory před nepřáteli: musíme postavit pevnost na východ od hor!"
 
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:308
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:309
 msgid "Fortress Completed"
 msgstr "Pevnost je dokončena"
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:311
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:312
 msgid ""
 "Finally! The fortress has just been completed, so the entrance to our "
 "settlement should be safe for now. For the future, we might think on "
 "building some more fortifications like barriers and towers at the passages, "
 "but for now we can take a deep breath."
-msgstr ""
+msgstr "Konečně! Pevnost je hotová, cesta do naší osady by měla být bezpečnější. V budoucnu bychom se měli zamyslet nad dalším opevněním v podobě hradeb a věží v průsmycích. Prozatím si ovšem můžeme vydechnout."
 
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:316
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:317
 msgid "Enhanced Economy and Training"
-msgstr "Pokročilá ekonomika a trénink"
+msgstr "Pokročilé hospodářství a trénink"
 
 #. TRANSLATORS: Boldreth
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:319
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:320
 msgid ""
 "Our mining economy seems to work fine, that is already good news! Anyway, "
 "there are still a lot of men and women waiting in our hall to get a task, so"
 " they can help our soldiers to prepare for the war to come."
-msgstr ""
+msgstr "Naše těžební hospodářství, zdá se, funguje skvěle, to jsou opravdu dobré zprávy! Nicméne zbývá spousta mužů a žen, kteří čekají na to, až dostanou práci, aby mohli pomoci našim vojákům, připravit se na válku, která přichází."
 
 #. TRANSLATORS: Boldreth
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:322
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:323
 msgid ""
 "Our geologists found a lot more deposits of iron ore, coal and even gold. We"
 " should enhance our current mines as soon as our miners are more "
@@ -560,10 +571,10 @@ msgid ""
 "processing economy. But that’s still not everything – most of our soldiers "
 "are quite young and neither have a good weapon nor are they well trained. We"
 " should build up training sites to prepare them for their future tasks."
-msgstr "Naši geologové objevili mnohem více nalezišť železné rudy, uhlí a dokonce zlata. Jakmile naši horníci získají potřebné zkušenosti, měli bychom vylepšit stávající doly. Taky bychom měli otevřít nové doly, zvětšit naši potravinářskou infrastrukturu aby zvládla všechny zásobovat jídlem, a rozvinout další zpracování surovin. A to pořád není všechno - většina našich vojáků je stále velmi mladá a nemají ani dobrou zbraň, ani dostatečný výcvik. Měli bychom postavit cvičiště, kde by se zocelili a připravili na své budoucí úkoly."
+msgstr "Naši geologové objevili mnohem více nalezišť železné rudy, uhlí a dokonce zlata. Jakmile naši horníci získají potřebné zkušenosti, měli bychom vylepšit stávající doly. Taky bychom měli postavit nové doly a posílit naši přípravu jídla, aby zvládla všechny zásobovat jídlem, a rozvinout další zpracování surovin. A to pořád není všechno - většina našich vojáků je stále velmi mladá a nemají dobrou zbraň ani dostatečný výcvik. Měli bychom postavit cvičiště, kde by se připravili na své budoucí úkoly."
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:331
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:332
 msgid ""
 "My brothers and their soldiers are dead and left fire and destruction "
 "behind. In none of all the ruins could I find any man or woman of the normal"
@@ -572,7 +583,7 @@ msgid ""
 msgstr "Mí bratři a jejich vojáci jsou mrtvi, zanechali za sebou pouze oheň a zkázu. V ruinách jsem naštěstí nenašel žádné civilisty, ani muže ani ženy, a tak doufám, že se před bitvou všichni stihli přesunout někam do bezpečí."
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:334
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:335
 msgid ""
 "Nothing is left of that beauty I remember, only ruins remain of the old "
 "capital. I am sorrowful but also relieved. I never hoped to see Al’thunran’s"
@@ -580,24 +591,24 @@ msgid ""
 "would ever be able to set my feet there again. Now the old town is back in "
 "my hands, and I will not hesitate to rebuild it with all the strength my "
 "people have. I can’t wait to see it again in its old beauty."
-msgstr ""
+msgstr "Nic z té nádhery, co si pamatuji, nezůstalo, pouze ruiny starého hlavního města. Jsem z toho smutný ale zároveň se mi ulevilo. Ani jsem nedoufal, že znovu uvidím Al’thunran v jeho dávné kráse. Je to jen pár měsíců, co jsem přemýšlel, zda sem ještě někdy vkročím. Nyní je staré město opět v mých rukách a bez zaváhání obnovím jeho zašlou slávu s pomocí svého lidu. Nemohu se dočkat, až opět uvidím jeho dřívější krásu."
 
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:335
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:336
 msgid "Victory"
 msgstr "Vítězství"
 
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:336
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:337
 msgid ""
 "You have completed the last mission of the Barbarian tutorial campaign. You "
 "may continue playing if you wish, otherwise move on to the next campaign."
-msgstr ""
+msgstr "Dokončil jsi poslední misi tutoriálové kampaně barbarů. Můžeš hrát dál, pokud chceš, v opačném případě se přesuň na další kampaň."
 
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:341
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:342
 msgid "Military Assault"
 msgstr "Vojenský útok"
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:344
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:345
 msgid ""
 "So be it, the generals are out and about arranging my troops, and Boldreth "
 "himself will lead the first strike. I will ride by his side, to free "
@@ -605,7 +616,7 @@ msgid ""
 msgstr "Budiž tedy, generálové šikují své jednotky a Boldreth osobně vyrazí v čele první úderné skupiny. Pojedu po jeho boku a společně osvobodíme Al’thunran od války a přineseme do našeho města opět mír."
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:347
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:348
 msgid ""
 "When the young sun rises above the trees tomorrow morning, I will order the "
 "assault. By dusk, I will celebrate my victory in the wooden halls of the "
@@ -614,20 +625,20 @@ msgid ""
 msgstr "Až zítra ráno slunce vystoupá nad vrcholky stromů, dám povel k útoku. A za soumraku oslavím naše vítězství v dřevěných síních válečníků a obětuji novorozené jehně na počest svého otce, který mě dnes bude sledovat."
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:350
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:351
 msgid "So be it!"
 msgstr "Budiž tedy!"
 
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:355
-msgid "Faster Transportation"
-msgstr ""
-
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:356
+msgid "Faster Transportation"
+msgstr "Rychlejší přeprava"
+
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:357
 msgid "Khantrukh says:"
 msgstr "Khantrukh hovoří:"
 
 #. TRANSLATORS: Khantrukh
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:358
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:359
 msgid ""
 "Chieftain, remember the poor carriers: Our roads get longer and longer and "
 "the burden on their shoulders never gets lighter. We should breed more oxen "

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2012 by the Widelands Development Team
+ * Copyright (C) 2006-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -28,11 +28,18 @@ namespace RT {
 
 class TextStream {
 public:
-	TextStream(std::string text) : text_(text), line_(1), col_(0), pos_(0), end_(text.size()) {}
+	TextStream(std::string text) : text_(text), line_(1), col_(0), pos_(0), end_(text.size()) {
+	}
 
-	size_t line() const {return line_;}
-	size_t col() const {return col_;}
-	size_t pos() const {return pos_;}
+	size_t line() const {
+		return line_;
+	}
+	size_t col() const {
+		return col_;
+	}
+	size_t pos() const {
+		return pos_;
+	}
 
 	std::string peek(size_t, size_t = -1) const;
 	void expect(std::string, bool = true);
@@ -41,7 +48,9 @@ public:
 	std::string till_any_or_end(std::string);
 	std::string parse_string();
 
-	void skip(size_t d) {pos_ += d;}
+	void skip(size_t d) {
+		pos_ += d;
+	}
 	void skip_ws();
 	void rskip_ws();
 
@@ -53,6 +62,5 @@ private:
 	uint32_t line_, col_;
 	size_t pos_, end_;
 };
-
 }
 #endif  // end of include guard: WL_GRAPHIC_TEXT_TEXTSTREAM_H

@@ -1,17 +1,20 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2016 Widelands Development Team
+# Copyright (C) 2005-2017 Widelands Development Team
 # 
 # Translators:
-# Balázs Meskó <meskobalazs@gmail.com>, 2016
+# Balázs Meskó <meskobalazs@gmail.com>, 2016-2017
+# GunChleoc, 2016
 # GunChleoc, 2014
 # Herczeg Attila <hnczy.public@gmail.com>, 2015
+# litoll <litoll@freemail.hu>, 2016
+# Szűcs Kornél Géza <sz.kornelgeza@gmail.com>, 2016
 # zone <z-one@freemail.hu>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-05-20 21:03+0000\n"
-"PO-Revision-Date: 2016-05-20 21:05+0000\n"
+"POT-Creation-Date: 2017-03-03 06:24+0000\n"
+"PO-Revision-Date: 2017-03-03 06:27+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Hungarian (http://www.transifex.com/widelands/widelands/language/hu/)\n"
 "MIME-Version: 1.0\n"
@@ -25,7 +28,7 @@ msgstr ""
 msgid "“%s”"
 msgstr "„%s”"
 
-#: ../../data/scripting/format_scenario.lua:96
+#: ../../data/scripting/format_scenario.lua:84
 msgid "New Objective"
 msgid_plural "New Objectives"
 msgstr[0] "Új cél"
@@ -33,14 +36,14 @@ msgstr[1] "Új célok"
 
 #. * TRANSLATORS: Concatenate the last 2 items on a list.
 #. * TRANSLATORS: RTL languages might want to change the word order here.
-#: ../../data/scripting/formatting.lua:31 ../../src/base/i18n.cc:335
+#: ../../data/scripting/formatting.lua:34 ../../src/base/i18n.cc:333
 #, c-format
 msgid "%1$s & %2$s"
-msgstr "%1$s és %2$s"
+msgstr "%1$s & %2$s"
 
 #. * TRANSLATORS: Join the last 2 items on a list with "or".
 #. * TRANSLATORS: RTL languages might want to change the word order here.
-#: ../../data/scripting/formatting.lua:33 ../../src/base/i18n.cc:339
+#: ../../data/scripting/formatting.lua:36 ../../src/base/i18n.cc:337
 #, c-format
 msgid "%1$s or %2$s"
 msgstr "%1$s vagy %2$s"
@@ -49,33 +52,33 @@ msgstr "%1$s vagy %2$s"
 #. * TRANSLATORS: RTL languages might want to change the word order here.
 #. * TRANSLATORS: Concatenate 2 items at in the middle of a list.
 #. * TRANSLATORS: RTL languages might want to change the word order here.
-#: ../../data/scripting/formatting.lua:35
-#: ../../data/scripting/formatting.lua:40 ../../src/base/i18n.cc:343
-#: ../../src/base/i18n.cc:353
+#: ../../data/scripting/formatting.lua:38
+#: ../../data/scripting/formatting.lua:43 ../../src/base/i18n.cc:341
+#: ../../src/base/i18n.cc:350
 #, c-format
 msgid "%1$s, %2$s"
 msgstr "%1$s, %2$s"
 
 #. * TRANSLATORS: Concatenate the last 2 items on a list.
 #. * TRANSLATORS: RTL languages might want to change the word order here.
-#: ../../data/scripting/formatting.lua:37 ../../src/base/i18n.cc:347
+#: ../../data/scripting/formatting.lua:40 ../../src/base/i18n.cc:345
 #, c-format
 msgid "%1$s and %2$s"
 msgstr "%1$s és %2$s"
 
 #. TRANSLATORS: Short for "Not enough space"
-#: ../../data/scripting/infrastructure.lua:157
+#: ../../data/scripting/infrastructure.lua:162
 msgid "No Space"
 msgstr "Nincs hely"
 
-#: ../../data/scripting/infrastructure.lua:158
+#: ../../data/scripting/infrastructure.lua:163
 msgid ""
 "Some of your starting buildings didn’t have enough room and weren’t built. "
 "You are at a disadvantage with this; consider restarting this map with a "
 "fair starting condition."
 msgstr "Néhány kezdőépületed nem fért el, és ezért nem lettek megépítve. Emiatt hátrányba kerültél; fontold meg a pálya újrakezdését az egyenlő esélyek érdekében."
 
-#: ../../data/scripting/infrastructure.lua:159
+#: ../../data/scripting/infrastructure.lua:164
 msgid "Not enough space"
 msgstr "Nincs elég hely"
 
@@ -90,12 +93,12 @@ msgid "Normal AI"
 msgstr "Átlagos MI"
 
 #. * TRANSLATORS: This is the name of an AI used in the game setup screens
-#: ../../src/ai/defaultai.h:115
+#: ../../src/ai/defaultai.h:116
 msgid "Weak AI"
 msgstr "Gyenge MI"
 
 #. * TRANSLATORS: This is the name of an AI used in the game setup screens
-#: ../../src/ai/defaultai.h:128
+#: ../../src/ai/defaultai.h:130
 msgid "Very Weak AI"
 msgstr "Nagyon gyenge MI"
 
@@ -104,7 +107,7 @@ msgstr "Nagyon gyenge MI"
 #. the CLDR
 #. * TRANSLATORS: definition if there is one for your language.
 #. * TRANSLATORS: http://www.unicode.org/cldr/charts/latest/summary/root.html
-#: ../../src/base/time_string.cc:95
+#: ../../src/base/time_string.cc:96
 msgid "Jan"
 msgstr "jan"
 
@@ -113,7 +116,7 @@ msgstr "jan"
 #. the CLDR
 #. * TRANSLATORS: definition if there is one for your language.
 #. * TRANSLATORS: http://www.unicode.org/cldr/charts/latest/summary/root.html
-#: ../../src/base/time_string.cc:101
+#: ../../src/base/time_string.cc:102
 msgid "Feb"
 msgstr "febr"
 
@@ -122,7 +125,7 @@ msgstr "febr"
 #. the CLDR
 #. * TRANSLATORS: definition if there is one for your language.
 #. * TRANSLATORS: http://www.unicode.org/cldr/charts/latest/summary/root.html
-#: ../../src/base/time_string.cc:107
+#: ../../src/base/time_string.cc:108
 msgid "Mar"
 msgstr "márc"
 
@@ -131,7 +134,7 @@ msgstr "márc"
 #. the CLDR
 #. * TRANSLATORS: definition if there is one for your language.
 #. * TRANSLATORS: http://www.unicode.org/cldr/charts/latest/summary/root.html
-#: ../../src/base/time_string.cc:113
+#: ../../src/base/time_string.cc:114
 msgid "Apr"
 msgstr "ápr"
 
@@ -140,7 +143,7 @@ msgstr "ápr"
 #. the CLDR
 #. * TRANSLATORS: definition if there is one for your language.
 #. * TRANSLATORS: http://www.unicode.org/cldr/charts/latest/summary/root.html
-#: ../../src/base/time_string.cc:119
+#: ../../src/base/time_string.cc:120
 msgid "May"
 msgstr "máj"
 
@@ -149,7 +152,7 @@ msgstr "máj"
 #. the CLDR
 #. * TRANSLATORS: definition if there is one for your language.
 #. * TRANSLATORS: http://www.unicode.org/cldr/charts/latest/summary/root.html
-#: ../../src/base/time_string.cc:125
+#: ../../src/base/time_string.cc:126
 msgid "Jun"
 msgstr "jún"
 
@@ -158,7 +161,7 @@ msgstr "jún"
 #. the CLDR
 #. * TRANSLATORS: definition if there is one for your language.
 #. * TRANSLATORS: http://www.unicode.org/cldr/charts/latest/summary/root.html
-#: ../../src/base/time_string.cc:131
+#: ../../src/base/time_string.cc:132
 msgid "Jul"
 msgstr "júl"
 
@@ -167,7 +170,7 @@ msgstr "júl"
 #. the CLDR
 #. * TRANSLATORS: definition if there is one for your language.
 #. * TRANSLATORS: http://www.unicode.org/cldr/charts/latest/summary/root.html
-#: ../../src/base/time_string.cc:137
+#: ../../src/base/time_string.cc:138
 msgid "Aug"
 msgstr "aug"
 
@@ -176,7 +179,7 @@ msgstr "aug"
 #. the CLDR
 #. * TRANSLATORS: definition if there is one for your language.
 #. * TRANSLATORS: http://www.unicode.org/cldr/charts/latest/summary/root.html
-#: ../../src/base/time_string.cc:143
+#: ../../src/base/time_string.cc:144
 msgid "Sep"
 msgstr "szept"
 
@@ -185,7 +188,7 @@ msgstr "szept"
 #. the CLDR
 #. * TRANSLATORS: definition if there is one for your language.
 #. * TRANSLATORS: http://www.unicode.org/cldr/charts/latest/summary/root.html
-#: ../../src/base/time_string.cc:149
+#: ../../src/base/time_string.cc:150
 msgid "Oct"
 msgstr "okt"
 
@@ -194,7 +197,7 @@ msgstr "okt"
 #. the CLDR
 #. * TRANSLATORS: definition if there is one for your language.
 #. * TRANSLATORS: http://www.unicode.org/cldr/charts/latest/summary/root.html
-#: ../../src/base/time_string.cc:155
+#: ../../src/base/time_string.cc:156
 msgid "Nov"
 msgstr "nov"
 
@@ -202,541 +205,553 @@ msgstr "nov"
 #. * TRANSLATORS: Use the "Months - abbreviated - Formatting" definition from
 #. the CLDR
 #. * TRANSLATORS: definition if there is one for your language.
-#: ../../src/base/time_string.cc:160
+#: ../../src/base/time_string.cc:161
 msgid "Dec"
 msgstr "dec"
 
-#: ../../src/editor/editorinteractive.cc:75 ../../src/logic/game.cc:227
-#: ../../src/logic/game.cc:287
+#: ../../src/editor/editorinteractive.cc:63 ../../src/logic/game.cc:213
+#: ../../src/logic/game.cc:263
 msgid "Loading tribes"
 msgstr "Törzsek betöltése"
 
-#: ../../src/editor/editorinteractive.cc:118
-#: ../../src/editor/ui_menus/main_menu.cc:45
-#: ../../src/wui/game_options_menu.cc:68
-#: ../../src/wui/interactive_player.cc:92
-#: ../../src/wui/interactive_spectator.cc:59
+#: ../../src/editor/editorinteractive.cc:99
+#: ../../src/editor/ui_menus/main_menu.cc:43
+#: ../../src/wui/game_options_menu.cc:66
+#: ../../src/wui/interactive_player.cc:69
+#: ../../src/wui/interactive_spectator.cc:48
 msgid "Main Menu"
 msgstr "Főmenü"
 
-#: ../../src/editor/editorinteractive.cc:121
-#: ../../src/editor/ui_menus/tool_menu.cc:47
+#: ../../src/editor/editorinteractive.cc:103
+#: ../../src/editor/ui_menus/tool_menu.cc:45
 msgid "Tools"
 msgstr "Szerszámok"
 
-#: ../../src/editor/editorinteractive.cc:125
-#: ../../src/editor/ui_menus/toolsize_menu.cc:43
+#: ../../src/editor/editorinteractive.cc:107
+#: ../../src/editor/ui_menus/toolsize_menu.cc:40
 msgid "Tool Size"
 msgstr "Eszköz méret"
 
-#: ../../src/editor/editorinteractive.cc:128
-#: ../../src/wui/interactive_player.cc:101
-#: ../../src/wui/interactive_spectator.cc:63
-msgid "Minimap"
-msgstr "Térkép"
-
-#: ../../src/editor/editorinteractive.cc:131
-#: ../../src/wui/interactive_gamebase.cc:65
-msgid "Show Building Spaces (on/off)"
-msgstr "Épület helyek mutatása (be/ki)"
-
-#: ../../src/editor/editorinteractive.cc:134
-#: ../../src/ui_fsmenu/launch_mpg.cc:170
+#: ../../src/editor/editorinteractive.cc:111
+#: ../../src/ui_fsmenu/launch_mpg.cc:172
 msgid "Players"
 msgstr "Játékosok"
 
-#: ../../src/editor/editorinteractive.cc:137
+#: ../../src/editor/editorinteractive.cc:120
+#: ../../src/wui/interactive_player.cc:81
+#: ../../src/wui/interactive_spectator.cc:71
+msgid "Minimap"
+msgstr "Térkép"
+
+#: ../../src/editor/editorinteractive.cc:124
+#: ../../src/wui/interactive_player.cc:85
+#: ../../src/wui/interactive_spectator.cc:75
+msgid "Show Building Spaces (on/off)"
+msgstr "Épület helyek mutatása (be/ki)"
+
+#: ../../src/editor/editorinteractive.cc:127
+#: ../../src/wui/interactive_player.cc:87
+#: ../../src/wui/interactive_spectator.cc:78
+msgid "Reset zoom"
+msgstr "Közelítés visszaállítása"
+
+#: ../../src/editor/editorinteractive.cc:134
 msgid "Undo"
 msgstr "Visszavonás"
 
-#: ../../src/editor/editorinteractive.cc:140
+#: ../../src/editor/editorinteractive.cc:137
 msgid "Redo"
 msgstr "Mégis"
 
-#: ../../src/editor/editorinteractive.cc:143
-#: ../../src/wui/buildingwindow.cc:355
+#: ../../src/editor/editorinteractive.cc:142
+#: ../../src/wui/buildingwindow.cc:324
 msgid "Help"
 msgstr "Súgó"
 
-#: ../../src/editor/editorinteractive.cc:222
+#: ../../src/editor/editorinteractive.cc:200
 msgid "Unsupported format"
 msgstr "Nem támogatott formátum"
 
-#: ../../src/editor/editorinteractive.cc:223
+#: ../../src/editor/editorinteractive.cc:201
 #, c-format
 msgid ""
 "Widelands could not load the file \"%s\". The file format seems to be "
 "incompatible."
-msgstr "Widelands nem tudja betölteni a \"%s\" fájl. Úgy tűnik a fájl nem kompatibilis ezzel a verzióval."
+msgstr "A Widelands nem tudja betölteni a \"%s\" fájlt. Úgy tűnik a fájl nem kompatibilis ezzel a verzióval."
 
-#: ../../src/editor/editorinteractive.cc:236 ../../src/logic/game.cc:231
-#: ../../src/logic/game.cc:294
+#: ../../src/editor/editorinteractive.cc:214 ../../src/logic/game.cc:217
+#: ../../src/logic/game.cc:270
 msgid "Creating players"
 msgstr "Játékosok létrehozása"
 
-#: ../../src/editor/editorinteractive.cc:293
+#: ../../src/editor/editorinteractive.cc:264
 msgid "Unsaved Map"
 msgstr "Nem mentett térkép"
 
-#: ../../src/editor/editorinteractive.cc:294
+#: ../../src/editor/editorinteractive.cc:265
 msgid "The map has not been saved, do you really want to quit?"
 msgstr "A térkép nincs elmentve, biztosan ki akarsz lépni?"
 
-#: ../../src/editor/editorinteractive.cc:656
-#: ../../src/editor/ui_menus/main_menu_new_map.cc:122
+#: ../../src/editor/editorinteractive.cc:586
+#: ../../src/editor/ui_menus/main_menu_new_map.cc:144
 msgid "Creating empty map…"
 msgstr "Üres térkép létrehozása…"
 
 #. * TRANSLATORS: Default name for new map
-#: ../../src/editor/editorinteractive.cc:663
-#: ../../src/editor/ui_menus/main_menu_new_map.cc:131
-#: ../../src/editor/ui_menus/main_menu_random_map.cc:466
+#: ../../src/editor/editorinteractive.cc:589
+#: ../../src/editor/ui_menus/main_menu_new_map.cc:151
+#: ../../src/editor/ui_menus/main_menu_random_map.cc:535
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:138
-#: ../../src/logic/map.h:180 ../../src/wui/mapdata.cc:33
+#: ../../src/logic/map.h:179 ../../src/wui/mapdata.cc:46
 msgid "No Name"
-msgstr "Névtelen"
+msgstr "Nincs név"
 
-#. * TRANSLATORS: Map author name when it hasn't been set yet
-#: ../../src/editor/editorinteractive.cc:665
-#: ../../src/editor/ui_menus/main_menu_new_map.cc:132
-#: ../../src/editor/ui_menus/main_menu_random_map.cc:467
-#: ../../src/logic/map.h:181
+#: ../../src/editor/editorinteractive.cc:592
+#: ../../src/editor/ui_menus/main_menu_new_map.cc:152
+#: ../../src/editor/ui_menus/main_menu_random_map.cc:536
+#: ../../src/logic/map.h:180
 msgctxt "author_name"
 msgid "Unknown"
 msgstr "Ismeretlen"
 
-#: ../../src/editor/editorinteractive.cc:672
+#: ../../src/editor/editorinteractive.cc:599
 #, c-format
 msgid "Loading map “%s”…"
 msgstr "A(z) „%s” térkép betöltése…"
 
-#: ../../src/editor/map_generator.cc:787
+#: ../../src/editor/map_generator.cc:715
 msgid "Random Player"
 msgstr "Véletlenszerű játékos"
 
-#: ../../src/editor/tools/info_tool.cc:47
+#: ../../src/editor/tools/info_tool.cc:45
 msgid "Field Information"
 msgstr "Mező információ"
 
-#: ../../src/editor/tools/info_tool.cc:55
+#: ../../src/editor/tools/info_tool.cc:52
 msgid "Node:"
 msgstr "Csomópont:"
 
-#: ../../src/editor/tools/info_tool.cc:57
+#: ../../src/editor/tools/info_tool.cc:55
 #, c-format
 msgid "Coordinates: (%1$i, %2$i)"
 msgstr "Koordináták: (%1$i, %2$i)"
 
-#. * TRANSLATORS: Editor terrain property: small building plot
-#: ../../src/editor/tools/info_tool.cc:65
+#: ../../src/editor/tools/info_tool.cc:63
 msgid "small"
 msgstr "kicsi"
 
-#. * TRANSLATORS: Editor terrain property: medium building plot
 #: ../../src/editor/tools/info_tool.cc:67
 msgid "medium"
 msgstr "közepes"
 
-#. * TRANSLATORS: Editor terrain property: big building plot
-#: ../../src/editor/tools/info_tool.cc:69
+#: ../../src/editor/tools/info_tool.cc:71
 msgid "big"
 msgstr "nagy"
 
-#. * TRANSLATORS: Editor terrain property: space for a flag
-#: ../../src/editor/tools/info_tool.cc:73
+#: ../../src/editor/tools/info_tool.cc:78
 msgid "flag"
 msgstr "zászló"
 
-#. * TRANSLATORS: Editor terrain property: mine building plot
-#: ../../src/editor/tools/info_tool.cc:75
+#: ../../src/editor/tools/info_tool.cc:81
 msgid "mine"
 msgstr "bánya"
 
-#. * TRANSLATORS: Editor terrain property: port space
-#: ../../src/editor/tools/info_tool.cc:77
+#: ../../src/editor/tools/info_tool.cc:84
 msgid "port"
 msgstr "kikötő"
 
-#. * TRANSLATORS: Editor terrain property: units can walk on this terrain
 #. * TRANSLATORS: This is a terrain type tooltip in the editor
-#: ../../src/editor/tools/info_tool.cc:79
-#: ../../src/logic/map_objects/world/terrain_description.cc:76
+#: ../../src/editor/tools/info_tool.cc:87
+#: ../../src/logic/map_objects/world/terrain_description.cc:75
 msgid "walkable"
 msgstr "járható"
 
-#. * TRANSLATORS: Editor terrain property: units can swim on this terrain
-#. (fish, ships)
-#: ../../src/editor/tools/info_tool.cc:81
+#: ../../src/editor/tools/info_tool.cc:90
 msgid "swimmable"
 msgstr "úszható"
 
-#: ../../src/editor/tools/info_tool.cc:84
+#: ../../src/editor/tools/info_tool.cc:93
 #, c-format
 msgid "Caps: %s"
-msgstr "Sisakok: %s"
+msgstr "Adottságok: %s"
 
-#: ../../src/editor/tools/info_tool.cc:90
+#: ../../src/editor/tools/info_tool.cc:100
 #, c-format
 msgid "Owned by: Player %u"
 msgstr "Birtokolja: %u. játékos"
 
-#: ../../src/editor/tools/info_tool.cc:93
+#: ../../src/editor/tools/info_tool.cc:104
 msgid "Owned by: —"
 msgstr "Birtokolja: —"
 
-#: ../../src/editor/tools/info_tool.cc:97
+#: ../../src/editor/tools/info_tool.cc:108
 msgid "Has immovable"
 msgstr "Van mozdíthatatlanja"
 
-#: ../../src/editor/tools/info_tool.cc:97
+#: ../../src/editor/tools/info_tool.cc:108
 msgid "No immovable"
-msgstr "nincs mozdíthatatlanja"
+msgstr "Nincs mozdíthatatlanja"
 
-#: ../../src/editor/tools/info_tool.cc:100
+#: ../../src/editor/tools/info_tool.cc:111
 msgid "Has animals"
 msgstr "Állatai vannak"
 
-#: ../../src/editor/tools/info_tool.cc:100
+#: ../../src/editor/tools/info_tool.cc:111
 msgid "No animals"
 msgstr "Nincsenek állatok"
 
-#: ../../src/editor/tools/info_tool.cc:104
-#: ../../src/editor/ui_menus/main_menu_new_map.cc:91
+#: ../../src/editor/tools/info_tool.cc:115
+#: ../../src/editor/ui_menus/main_menu_new_map.cc:115
 msgid "Terrain:"
 msgstr "Terep:"
 
-#: ../../src/editor/tools/info_tool.cc:110
+#: ../../src/editor/tools/info_tool.cc:122
 #, c-format
 msgctxt "terrain_name"
 msgid "Name: %s"
 msgstr "Név: %s"
 
-#. * TRANSLATORS: "Is" is a list of terrain properties, e.g. "arable",
-#. "unreachable and unwalkable"
-#. * TRANSLATORS: You can also translate this as "Category: %s" or "Property:
-#. %s"
-#: ../../src/editor/tools/info_tool.cc:118
+#: ../../src/editor/tools/info_tool.cc:132
 #, c-format
 msgid "Is: %s"
 msgstr "Tulajdonság: %s"
 
-#: ../../src/editor/tools/info_tool.cc:120
+#: ../../src/editor/tools/info_tool.cc:137
 #, c-format
 msgid "Editor Category: %s"
 msgstr "Szerkesztő kategória: %s"
 
-#: ../../src/editor/tools/info_tool.cc:123
-#: ../../src/editor/ui_menus/main_menu_random_map.cc:94
+#: ../../src/editor/tools/info_tool.cc:141
+#: ../../src/editor/ui_menus/main_menu_random_map.cc:121
 msgid "Resources:"
 msgstr "Erőforrások:"
 
-#: ../../src/editor/tools/info_tool.cc:130
+#: ../../src/editor/tools/info_tool.cc:149
 #, c-format
 msgid "Resource name: %s"
 msgstr "Erőforrás név: %s"
 
-#: ../../src/editor/tools/info_tool.cc:132
+#: ../../src/editor/tools/info_tool.cc:152
 #, c-format
 msgid "Resource amount: %i"
 msgstr "Erőforrás mennyiség: %i"
 
-#: ../../src/editor/tools/info_tool.cc:136
+#: ../../src/editor/tools/info_tool.cc:155
 msgid "No resources"
 msgstr "Nincsenek erőforrások"
 
-#: ../../src/editor/tools/info_tool.cc:140 ../../src/wui/mapdetails.cc:131
+#: ../../src/editor/tools/info_tool.cc:159 ../../src/wui/mapdetails.cc:133
 msgid "Map:"
 msgstr "Térkép:"
 
-#: ../../src/editor/tools/info_tool.cc:141
+#: ../../src/editor/tools/info_tool.cc:160
 #, c-format
 msgctxt "map_name"
 msgid "Name: %s"
 msgstr "Név: %s"
 
-#: ../../src/editor/tools/info_tool.cc:142
+#: ../../src/editor/tools/info_tool.cc:163
 #, c-format
 msgid "Size: %1$ix%2$i"
 msgstr "Méret: %1$ix%2$i"
 
-#: ../../src/editor/tools/info_tool.cc:147
+#: ../../src/editor/tools/info_tool.cc:168
 #, c-format
 msgid "Players: %u"
 msgstr "Játékosok: %u"
 
-#: ../../src/editor/tools/info_tool.cc:150
-msgid "Players: -"
-msgstr "Játékosok: -"
+#: ../../src/editor/tools/info_tool.cc:171
+msgid "Players: –"
+msgstr "Játékosok: –"
 
-#: ../../src/editor/tools/info_tool.cc:153
+#: ../../src/editor/tools/info_tool.cc:174
 #, c-format
 msgid "Author: %s"
 msgstr "Szerző: %s"
 
-#: ../../src/editor/tools/info_tool.cc:154
+#: ../../src/editor/tools/info_tool.cc:175
 #, c-format
 msgid "Descr: %s"
 msgstr "Leírás: %s"
 
 #. * TRANSLATORS: %s are the currently selected items in an editor tool
-#: ../../src/editor/ui_menus/categorized_item_selection_menu.h:185
+#: ../../src/editor/ui_menus/categorized_item_selection_menu.h:192
 #, c-format
 msgid "Current: %s …"
 msgstr "Jelenlegi: %s …"
 
 #. * TRANSLATORS: Help text in an editor tool
-#: ../../src/editor/ui_menus/categorized_item_selection_menu.h:188
+#: ../../src/editor/ui_menus/categorized_item_selection_menu.h:195
 msgid "Click to select an item. Use the Ctrl key to select multiple items."
 msgstr "Kattints egy elem kiválasztásához. Használd a Ctrl gombot több elem kiválasztásához."
 
 #. * TRANSLATORS: %s are the currently selected items in an editor tool
-#: ../../src/editor/ui_menus/categorized_item_selection_menu.h:191
-#: ../../src/editor/ui_menus/tool_change_resources_options_menu.cc:171
+#: ../../src/editor/ui_menus/categorized_item_selection_menu.h:198
+#: ../../src/editor/ui_menus/tool_change_resources_options_menu.cc:177
 #, c-format
 msgid "Current: %s"
 msgstr "Jelenlegi: %s"
 
-#: ../../src/editor/ui_menus/help.cc:45
-#: ../../src/editor/ui_menus/player_menu.cc:293
-#: ../../src/ui_fsmenu/multiplayer.cc:144
-#: ../../src/wui/encyclopedia_window.cc:156
-#: ../../src/wui/tribal_encyclopedia.cc:51
+#: ../../src/editor/ui_menus/help.cc:42
+#: ../../src/editor/ui_menus/player_menu.cc:266
+#: ../../src/ui_fsmenu/multiplayer.cc:133
+#: ../../src/wui/encyclopedia_window.cc:145
+#: ../../src/wui/tribal_encyclopedia.cc:56
 msgid "Error!"
 msgstr "Hiba!"
 
 #: ../../src/editor/ui_menus/main_menu.cc:52
-#: ../../src/editor/ui_menus/main_menu_new_map.cc:47
+#: ../../src/editor/ui_menus/main_menu_new_map.cc:46
 msgid "New Map"
 msgstr "Új térkép"
 
-#: ../../src/editor/ui_menus/main_menu.cc:57
-#: ../../src/editor/ui_menus/main_menu_random_map.cc:47
+#: ../../src/editor/ui_menus/main_menu.cc:60
+#: ../../src/editor/ui_menus/main_menu_random_map.cc:51
 msgid "New Random Map"
 msgstr "Új véletlen térkép"
 
-#: ../../src/editor/ui_menus/main_menu.cc:62
-#: ../../src/editor/ui_menus/main_menu_load_map.cc:33
+#: ../../src/editor/ui_menus/main_menu.cc:68
+#: ../../src/editor/ui_menus/main_menu_load_map.cc:36
 msgid "Load Map"
 msgstr "Térkép betöltése"
 
-#: ../../src/editor/ui_menus/main_menu.cc:67
+#: ../../src/editor/ui_menus/main_menu.cc:76
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:52
 msgid "Save Map"
 msgstr "Térkép mentése"
 
-#: ../../src/editor/ui_menus/main_menu.cc:72
-#: ../../src/editor/ui_menus/main_menu_map_options.cc:51
+#: ../../src/editor/ui_menus/main_menu.cc:84
+#: ../../src/editor/ui_menus/main_menu_map_options.cc:46
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:69
 msgid "Map Options"
 msgstr "Térkép beállításai"
 
-#: ../../src/editor/ui_menus/main_menu.cc:77
+#: ../../src/editor/ui_menus/main_menu.cc:92
 msgid "Exit Editor"
 msgstr "Vissza a főmenübe"
 
-#: ../../src/editor/ui_menus/main_menu_load_or_save_map.cc:60
-#: ../../src/editor/ui_menus/main_menu_map_options.cc:64
-#: ../../src/editor/ui_menus/main_menu_save_map_make_directory.cc:43
-#: ../../src/scripting/lua_game.cc:447 ../../src/ui_basic/messagebox.cc:91
-#: ../../src/ui_fsmenu/helpwindow.cc:53
-#: ../../src/ui_fsmenu/load_map_or_game.cc:63
-#: ../../src/ui_fsmenu/options.cc:134
-#: ../../src/wui/game_main_menu_save_game.cc:91
+#. * TRANSLATORS: Directory name for user maps in map selection
+#: ../../src/editor/ui_menus/main_menu_load_map.cc:69
+#: ../../src/editor/ui_menus/main_menu_save_map.cc:228
+#: ../../src/wui/mapdata.cc:164
+msgid "My Maps"
+msgstr "Az én térképeim"
+
+#. * TRANSLATORS: Directory name for MP Scenarios in map selection
+#: ../../src/editor/ui_menus/main_menu_load_map.cc:71
+#: ../../src/wui/mapdata.cc:161
+msgid "Multiplayer Scenarios"
+msgstr "Többjátékos küldetések"
+
+#. * TRANSLATORS: The folder that a file will be saved to.
+#: ../../src/editor/ui_menus/main_menu_load_map.cc:74
+#: ../../src/editor/ui_menus/main_menu_save_map.cc:228
+#, c-format
+msgid "Current Directory: %s"
+msgstr "Jelenlegi könyvtár: %s"
+
+#: ../../src/editor/ui_menus/main_menu_load_or_save_map.cc:69
+#: ../../src/editor/ui_menus/main_menu_map_options.cc:62
+#: ../../src/editor/ui_menus/main_menu_save_map_make_directory.cc:62
+#: ../../src/scripting/lua_game.cc:432 ../../src/ui_basic/messagebox.cc:87
+#: ../../src/ui_fsmenu/helpwindow.cc:52
+#: ../../src/ui_fsmenu/load_map_or_game.cc:45
+#: ../../src/ui_fsmenu/options.cc:118
+#: ../../src/wui/game_main_menu_save_game.cc:87
 msgid "OK"
 msgstr "OK"
 
-#: ../../src/editor/ui_menus/main_menu_load_or_save_map.cc:70
-#: ../../src/editor/ui_menus/main_menu_map_options.cc:71
-#: ../../src/editor/ui_menus/main_menu_new_map.cc:67
-#: ../../src/editor/ui_menus/main_menu_random_map.cc:146
-#: ../../src/editor/ui_menus/main_menu_save_map_make_directory.cc:50
-#: ../../src/ui_basic/messagebox.cc:103 ../../src/ui_fsmenu/launch_mpg.cc:88
-#: ../../src/ui_fsmenu/options.cc:120
-#: ../../src/wui/game_main_menu_save_game.cc:101 ../../src/wui/login_box.cc:74
+#: ../../src/editor/ui_menus/main_menu_load_or_save_map.cc:78
+#: ../../src/editor/ui_menus/main_menu_map_options.cc:70
+#: ../../src/editor/ui_menus/main_menu_new_map.cc:92
+#: ../../src/editor/ui_menus/main_menu_random_map.cc:228
+#: ../../src/editor/ui_menus/main_menu_save_map_make_directory.cc:70
+#: ../../src/ui_basic/messagebox.cc:93 ../../src/ui_fsmenu/launch_mpg.cc:77
+#: ../../src/ui_fsmenu/options.cc:109
+#: ../../src/wui/game_main_menu_save_game.cc:92 ../../src/wui/login_box.cc:62
 msgid "Cancel"
 msgstr "Mégsem"
 
-#: ../../src/editor/ui_menus/main_menu_load_or_save_map.cc:84
-#: ../../src/editor/ui_menus/main_menu_load_or_save_map.cc:135
+#: ../../src/editor/ui_menus/main_menu_load_or_save_map.cc:88
+#: ../../src/editor/ui_menus/main_menu_load_or_save_map.cc:133
 msgid "Show Map Names"
 msgstr "Térképnevek megjelenítése"
 
-#. * TRANSLATORS: Checkbox title. If this checkbox is enabled, map names
-#. aren't translated.
-#: ../../src/editor/ui_menus/main_menu_load_or_save_map.cc:88
-#: ../../src/ui_fsmenu/mapselect.cc:83
+#: ../../src/editor/ui_menus/main_menu_load_or_save_map.cc:93
+#: ../../src/ui_fsmenu/mapselect.cc:86
 msgid "Show original map names"
 msgstr "Eredeti térképnevek megjelenítése"
 
-#: ../../src/editor/ui_menus/main_menu_load_or_save_map.cc:137
+#: ../../src/editor/ui_menus/main_menu_load_or_save_map.cc:135
 msgid "Show Filenames"
 msgstr "Fájlnevek megjelenítése"
 
-#: ../../src/editor/ui_menus/main_menu_map_options.cc:104
-#: ../../src/ui_fsmenu/loadgame.cc:321
-#: ../../src/wui/game_main_menu_save_game.cc:68
+#: ../../src/editor/ui_menus/main_menu_map_options.cc:111
+#: ../../src/ui_fsmenu/loadgame.cc:390
+#: ../../src/wui/game_main_menu_save_game.cc:75
 msgid "Map Name:"
 msgstr "Térkép neve:"
 
-#: ../../src/editor/ui_menus/main_menu_map_options.cc:108
+#: ../../src/editor/ui_menus/main_menu_map_options.cc:115
 msgid "Authors:"
 msgstr "Készítők:"
 
-#: ../../src/editor/ui_menus/main_menu_map_options.cc:112
-#: ../../src/ui_fsmenu/campaign_select.cc:80
-#: ../../src/ui_fsmenu/campaign_select.cc:157
-#: ../../src/ui_fsmenu/campaign_select.cc:396 ../../src/wui/mapdetails.cc:168
+#: ../../src/editor/ui_menus/main_menu_map_options.cc:119
+#: ../../src/ui_fsmenu/campaign_select.cc:83
+#: ../../src/ui_fsmenu/campaign_select.cc:160
+#: ../../src/ui_fsmenu/campaign_select.cc:389 ../../src/wui/mapdetails.cc:174
 msgid "Description:"
 msgstr "Leírás:"
 
-#: ../../src/editor/ui_menus/main_menu_map_options.cc:116
+#: ../../src/editor/ui_menus/main_menu_map_options.cc:123
 msgid "Hint (optional):"
 msgstr "Tipp (nem kötelező):"
 
-#: ../../src/editor/ui_menus/main_menu_map_options.cc:125
-#: ../../src/wui/mapdetails.cc:162
+#: ../../src/editor/ui_menus/main_menu_map_options.cc:130
+#: ../../src/wui/mapdetails.cc:168
 msgid "Tags:"
 msgstr "Címkék:"
 
 #. * TRANSLATORS: Label for the list of suggested teams when choosing a map
-#: ../../src/editor/ui_menus/main_menu_map_options.cc:133
-#: ../../src/wui/suggested_teams_box.cc:96
+#: ../../src/editor/ui_menus/main_menu_map_options.cc:138
+#: ../../src/wui/suggested_teams_box.cc:92
 msgid "Suggested Teams:"
 msgstr "Javasolt csapatok:"
 
-#: ../../src/editor/ui_menus/main_menu_map_options.cc:142
-#: ../../src/ui_fsmenu/launch_mpg.cc:663
-#: ../../src/wui/game_main_menu_save_game.cc:172
+#: ../../src/editor/ui_menus/main_menu_map_options.cc:147
+#: ../../src/ui_fsmenu/launch_mpg.cc:642
+#: ../../src/wui/game_main_menu_save_game.cc:157
 #, c-format
 msgid "%u Player"
 msgid_plural "%u Players"
 msgstr[0] "%u játékos"
 msgstr[1] "%u játékos"
 
-#: ../../src/editor/ui_menus/main_menu_map_options.cc:147
+#: ../../src/editor/ui_menus/main_menu_map_options.cc:152
 msgid "Main Options"
 msgstr "Főbeállítások"
 
-#: ../../src/editor/ui_menus/main_menu_map_options.cc:148
+#: ../../src/editor/ui_menus/main_menu_map_options.cc:154
 msgid "Tags"
 msgstr "Címkék"
 
-#: ../../src/editor/ui_menus/main_menu_map_options.cc:150
+#: ../../src/editor/ui_menus/main_menu_map_options.cc:156
 msgid "Teams"
 msgstr "Csapatok"
 
-#: ../../src/editor/ui_menus/main_menu_map_options.cc:175
+#: ../../src/editor/ui_menus/main_menu_map_options.cc:180
 msgid "Size: %1% x %2%"
 msgstr "Méret: %1% x %2%"
 
-#: ../../src/editor/ui_menus/main_menu_new_map.cc:53
-#: ../../src/editor/ui_menus/main_menu_random_map.cc:57
+#: ../../src/editor/ui_menus/main_menu_new_map.cc:58
+#: ../../src/editor/ui_menus/main_menu_random_map.cc:68
 msgid "Width:"
 msgstr "Szélesség:"
 
-#: ../../src/editor/ui_menus/main_menu_new_map.cc:57
-#: ../../src/editor/ui_menus/main_menu_random_map.cc:61
+#: ../../src/editor/ui_menus/main_menu_new_map.cc:70
+#: ../../src/editor/ui_menus/main_menu_random_map.cc:80
 msgid "Height:"
 msgstr "Magasság:"
 
-#: ../../src/editor/ui_menus/main_menu_new_map.cc:64
+#: ../../src/editor/ui_menus/main_menu_new_map.cc:84
 msgid "Create Map"
 msgstr "Térkép létrehozása"
 
-#: ../../src/editor/ui_menus/main_menu_random_map.cc:66
-#: ../../src/ui_fsmenu/loadgame.cc:323
+#: ../../src/editor/ui_menus/main_menu_random_map.cc:93
+#: ../../src/ui_fsmenu/loadgame.cc:392
 msgid "Players:"
 msgstr "Játékosok:"
 
 #. * TRANSLATORS: A world name for the random map generator in the editor
-#: ../../src/editor/ui_menus/main_menu_random_map.cc:72
+#: ../../src/editor/ui_menus/main_menu_random_map.cc:100
 msgid "Summer"
 msgstr "Nyár"
 
 #. * TRANSLATORS: A world name for the random map generator in the editor
-#: ../../src/editor/ui_menus/main_menu_random_map.cc:74
+#: ../../src/editor/ui_menus/main_menu_random_map.cc:102
 msgid "Winter"
 msgstr "Tél"
 
 #. * TRANSLATORS: A world name for the random map generator in the editor
-#: ../../src/editor/ui_menus/main_menu_random_map.cc:76
+#: ../../src/editor/ui_menus/main_menu_random_map.cc:104
 msgid "Desert"
 msgstr "Sivatag"
 
 #. * TRANSLATORS: A world name for the random map generator in the editor
-#: ../../src/editor/ui_menus/main_menu_random_map.cc:78
+#: ../../src/editor/ui_menus/main_menu_random_map.cc:106
 msgid "Wasteland"
 msgstr "Pusztaság"
 
 #. * TRANSLATORS: Amount of resources in the random map generator in the
 #. editor
-#: ../../src/editor/ui_menus/main_menu_random_map.cc:84
+#: ../../src/editor/ui_menus/main_menu_random_map.cc:111
 msgid "Low"
 msgstr "Alacsony"
 
 #. * TRANSLATORS: Amount of resources in the random map generator in the
 #. editor
-#: ../../src/editor/ui_menus/main_menu_random_map.cc:86
+#: ../../src/editor/ui_menus/main_menu_random_map.cc:113
 msgid "Medium"
 msgstr "Közepes"
 
 #. * TRANSLATORS: Amount of resources in the random map generator in the
 #. editor
-#: ../../src/editor/ui_menus/main_menu_random_map.cc:88
+#: ../../src/editor/ui_menus/main_menu_random_map.cc:115
 msgid "High"
 msgstr "Magas"
 
-#: ../../src/editor/ui_menus/main_menu_random_map.cc:93
+#: ../../src/editor/ui_menus/main_menu_random_map.cc:120
 msgid "Climate:"
 msgstr "Éghajlat:"
 
-#: ../../src/editor/ui_menus/main_menu_random_map.cc:112
+#: ../../src/editor/ui_menus/main_menu_random_map.cc:151
 msgid "Water:"
 msgstr "Víz:"
 
-#: ../../src/editor/ui_menus/main_menu_random_map.cc:116
+#: ../../src/editor/ui_menus/main_menu_random_map.cc:164
 msgid "Land:"
 msgstr "Szárazföld:"
 
-#: ../../src/editor/ui_menus/main_menu_random_map.cc:120
+#: ../../src/editor/ui_menus/main_menu_random_map.cc:177
 msgid "Wasteland:"
 msgstr "Pusztaság:"
 
-#: ../../src/editor/ui_menus/main_menu_random_map.cc:123
+#: ../../src/editor/ui_menus/main_menu_random_map.cc:183
 msgid "Mountains:"
 msgstr "Hegyek:"
 
 #. * TRANSLATORS: A spinbox unit
-#: ../../src/editor/ui_menus/main_menu_random_map.cc:125
-#: ../../src/editor/ui_menus/main_menu_random_map.cc:434
-#: ../../src/ui_basic/spinbox.cc:335
+#: ../../src/editor/ui_menus/main_menu_random_map.cc:189
+#: ../../src/editor/ui_menus/main_menu_random_map.cc:509
+#: ../../src/ui_basic/spinbox.cc:324
 #, c-format
 msgid "%i %%"
 msgstr "%i %%"
 
-#: ../../src/editor/ui_menus/main_menu_random_map.cc:127
+#: ../../src/editor/ui_menus/main_menu_random_map.cc:191
 msgid "Island mode"
 msgstr "Sziget mód"
 
-#: ../../src/editor/ui_menus/main_menu_random_map.cc:130
+#: ../../src/editor/ui_menus/main_menu_random_map.cc:194
 msgid "Random Number:"
-msgstr "Véletlen szám"
+msgstr "Véletlen szám:"
 
-#: ../../src/editor/ui_menus/main_menu_random_map.cc:135
+#: ../../src/editor/ui_menus/main_menu_random_map.cc:203
 msgid "Map ID:"
 msgstr "Térkép AZ:"
 
-#: ../../src/editor/ui_menus/main_menu_random_map.cc:143
+#: ../../src/editor/ui_menus/main_menu_random_map.cc:220
 msgid "Generate Map"
 msgstr "Térkép generálása"
 
-#: ../../src/editor/ui_menus/main_menu_random_map.cc:469
+#: ../../src/editor/ui_menus/main_menu_random_map.cc:538
 msgid "Generating random map…"
 msgstr "Véletlenszerű térkép generálása…"
 
 #. * TRANSLATORS: Window title. This is shown after a random map has been
-#. created in the editor.
-#: ../../src/editor/ui_menus/main_menu_random_map.cc:507
+#. created in the
+#. editor.
+#: ../../src/editor/ui_menus/main_menu_random_map.cc:577
 msgid "Random Map"
 msgstr "Véletlenszerű térkép"
 
@@ -744,8 +759,9 @@ msgstr "Véletlenszerű térkép"
 #. editor.
 #. * TRANSLATORS: You don't need to be literal with your translation,
 #. * TRANSLATORS: as long as the user understands that he needs to check the
-#. player positions.
-#: ../../src/editor/ui_menus/main_menu_random_map.cc:511
+#. player
+#. positions.
+#: ../../src/editor/ui_menus/main_menu_random_map.cc:582
 msgid ""
 "The map has been generated. Please double-check the player starting "
 "positions to make sure that your carriers won’t drown, or be stuck on an "
@@ -753,39 +769,40 @@ msgid ""
 msgstr "A térkép generálva lett. Kérjük ellenőrizd a játékosok kezdőhelyeit, hogy biztosan ne fulladjanak meg, vagy ragadjanak egy szigeten vagy egy hegy tetején."
 
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:61
-#: ../../src/editor/ui_menus/main_menu_save_map_make_directory.cc:28
+#: ../../src/editor/ui_menus/main_menu_save_map_make_directory.cc:29
 msgid "Make Directory"
 msgstr "Könyvtár létrehozása"
 
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:75
-#: ../../src/ui_fsmenu/loadgame.cc:276 ../../src/ui_fsmenu/loadgame.cc:408
+#: ../../src/ui_fsmenu/loadgame.cc:313 ../../src/ui_fsmenu/loadgame.cc:479
 msgid "Filename:"
 msgstr "Fájlnév:"
 
-#: ../../src/editor/ui_menus/main_menu_save_map.cc:154
+#. * TRANSLATORS: A folder that hasn't been given a name yet
+#: ../../src/editor/ui_menus/main_menu_save_map.cc:155
 msgid "unnamed"
 msgstr "névtelen"
 
-#: ../../src/editor/ui_menus/main_menu_save_map.cc:239
-#: ../../src/wui/game_main_menu_save_game.cc:260
+#: ../../src/editor/ui_menus/main_menu_save_map.cc:256
+#: ../../src/wui/game_main_menu_save_game.cc:236
 #, c-format
 msgid "A file with the name ‘%s’ already exists. Overwrite?"
 msgstr "Egy fájl már létezik ezzel a névvel: „%s” Felülírod?"
 
-#: ../../src/editor/ui_menus/main_menu_save_map.cc:242
-#: ../../src/editor/ui_menus/main_menu_save_map.cc:255
-#: ../../src/editor/ui_menus/main_menu_save_map.cc:303
+#: ../../src/editor/ui_menus/main_menu_save_map.cc:260
+#: ../../src/editor/ui_menus/main_menu_save_map.cc:274
+#: ../../src/editor/ui_menus/main_menu_save_map.cc:319
 msgid "Error Saving Map!"
 msgstr "Térkép mentés hiba!"
 
-#: ../../src/editor/ui_menus/main_menu_save_map.cc:252
+#: ../../src/editor/ui_menus/main_menu_save_map.cc:271
 #, c-format
 msgid ""
 "A file with the name ‘%s.tmp’ already exists. You have to remove it "
 "manually."
-msgstr "Egy fájl már létezik ezzel a névvel: „%s.tmp”. Felülírod?"
+msgstr "Egy fájl már létezik ezzel a névvel: „%s.tmp”. Manuálisan kell eltávolítanod."
 
-#: ../../src/editor/ui_menus/main_menu_save_map.cc:299
+#: ../../src/editor/ui_menus/main_menu_save_map.cc:316
 msgid ""
 "Error Saving Map!\n"
 "Saved map file may be corrupt!\n"
@@ -793,244 +810,240 @@ msgid ""
 "Reason given:\n"
 msgstr "Térkép mentése közben hiba történt!\nAz elmentett térkép fájl sérült!\n\nIndoklás:\n"
 
-#: ../../src/editor/ui_menus/main_menu_save_map_make_directory.cc:35
-msgid "Enter Directory Name: "
-msgstr "Könyvtárnév megadása:"
+#: ../../src/editor/ui_menus/main_menu_save_map_make_directory.cc:46
+msgid "Enter Directory Name:"
+msgstr "Könyvtár neve: "
 
-#: ../../src/editor/ui_menus/player_menu.cc:72
+#: ../../src/editor/ui_menus/player_menu.cc:45
 msgid "Player Options"
 msgstr "Játékos beállításai"
 
-#: ../../src/editor/ui_menus/player_menu.cc:78
+#: ../../src/editor/ui_menus/player_menu.cc:54
 msgid "Add player"
 msgstr "Játékos hozzáadása"
 
-#: ../../src/editor/ui_menus/player_menu.cc:85
+#: ../../src/editor/ui_menus/player_menu.cc:63
 msgid "Remove last player"
 msgstr "Utolsó játékos eltávolítása"
 
-#: ../../src/editor/ui_menus/player_menu.cc:99
+#: ../../src/editor/ui_menus/player_menu.cc:77
 msgid "Number of Players"
-msgstr "Játékosok száma:"
+msgstr "Játékosok száma"
 
-#. * TRANSLATORS: Default player name, e.g. Player 1
-#: ../../src/editor/ui_menus/player_menu.cc:232 ../../src/logic/map.cc:315
+#: ../../src/editor/ui_menus/player_menu.cc:208 ../../src/logic/map.cc:309
 #: ../../src/logic/single_player_game_settings_provider.cc:88
-#: ../../src/map_io/map_player_names_and_tribes_packet.cc:105
-#: ../../src/network/nethost.cc:1705 ../../src/ui_fsmenu/launch_mpg.cc:581
-#: ../../src/wui/multiplayersetupgroup.cc:139
-#: ../../src/wui/multiplayersetupgroup.cc:301
+#: ../../src/map_io/map_player_names_and_tribes_packet.cc:94
+#: ../../src/network/nethost.cc:1627 ../../src/ui_fsmenu/launch_mpg.cc:558
+#: ../../src/wui/multiplayersetupgroup.cc:110
+#: ../../src/wui/multiplayersetupgroup.cc:262
 #, c-format
 msgid "Player %u"
 msgstr "%u. játékos"
 
-#: ../../src/editor/ui_menus/player_menu.cc:295
+#: ../../src/editor/ui_menus/player_menu.cc:267
 msgid ""
 "Cannot remove player. It is referenced someplace. Remove all buildings and "
 "animals that depend on this player and try again."
 msgstr "Nem lehet eltávolítani a játékost. Valahol hivatkozás van rá. Távolítsd el az összes épületet és állatot amik a játékoshoz tartoznak és próbáld újra."
 
-#: ../../src/editor/ui_menus/tool_change_height_options_menu.cc:37
+#: ../../src/editor/ui_menus/tool_change_height_options_menu.cc:36
 msgid "Height Tools Options"
 msgstr "Magasság szerkesztő"
 
-#: ../../src/editor/ui_menus/tool_change_height_options_menu.cc:42
-#: ../../src/editor/ui_menus/tool_change_resources_options_menu.cc:58
+#: ../../src/editor/ui_menus/tool_change_height_options_menu.cc:47
+#: ../../src/editor/ui_menus/tool_change_resources_options_menu.cc:61
 msgid "Increase/Decrease Value:"
 msgstr "Érték növelése/csökkentése:"
 
-#: ../../src/editor/ui_menus/tool_change_height_options_menu.cc:47
-#: ../../src/editor/ui_menus/tool_change_resources_options_menu.cc:63
-#: ../../src/editor/ui_menus/tool_noise_height_options_menu.cc:56
+#: ../../src/editor/ui_menus/tool_change_height_options_menu.cc:59
+#: ../../src/editor/ui_menus/tool_change_resources_options_menu.cc:73
+#: ../../src/editor/ui_menus/tool_noise_height_options_menu.cc:74
 msgid "Set Value:"
 msgstr "Érték beállítása:"
 
 #. * TRANSLATORS: Editor change height access keys. *
-#: ../../src/editor/ui_menus/tool_change_height_options_menu.cc:53
+#: ../../src/editor/ui_menus/tool_change_height_options_menu.cc:65
 msgid ""
 "Click on the map to increase, Shift + Click on the map to decrease terrain "
 "height"
 msgstr "Kattintás a térképre a talajszint növeléséhez, Shift + kattintás a csökkentéséhez"
 
 #. * TRANSLATORS: Editor set height access key. *
-#: ../../src/editor/ui_menus/tool_change_height_options_menu.cc:56
-#: ../../src/editor/ui_menus/tool_noise_height_options_menu.cc:68
+#: ../../src/editor/ui_menus/tool_change_height_options_menu.cc:68
+#: ../../src/editor/ui_menus/tool_noise_height_options_menu.cc:86
 msgid "Ctrl + Click on the map to set terrain height"
 msgstr "Ctrl + kattintás a térképre a talajszint beállításához"
 
-#: ../../src/editor/ui_menus/tool_change_resources_options_menu.cc:53
-#: ../../src/editor/ui_menus/tool_menu.cc:71
+#: ../../src/editor/ui_menus/tool_change_resources_options_menu.cc:50
+#: ../../src/editor/ui_menus/tool_menu.cc:64
 msgid "Resources"
 msgstr "Erőforrások"
 
 #. * TRANSLATORS: Editor change rseources access keys. *
-#: ../../src/editor/ui_menus/tool_change_resources_options_menu.cc:72
+#: ../../src/editor/ui_menus/tool_change_resources_options_menu.cc:82
 msgid ""
 "Click on the map to increase, Shift + Click on the map to decrease the "
 "amount of the selected resource"
 msgstr "Kattintás a térképre a kiválasztott nyersanyag mennyiségének növeléséhez, Shift + kattintás a csökkentéséhez"
 
 #. * TRANSLATORS: Editor set rseources access key. *
-#: ../../src/editor/ui_menus/tool_change_resources_options_menu.cc:76
+#: ../../src/editor/ui_menus/tool_change_resources_options_menu.cc:86
 msgid "Ctrl + Click on the map to set the amount of the selected resource"
 msgstr "Ctrl + kattintás a térképre a kiválasztott nyersanyag mennyiségének beállításához"
 
-#: ../../src/editor/ui_menus/tool_menu.cc:66
+#: ../../src/editor/ui_menus/tool_menu.cc:59
 msgid "Change height"
 msgstr "Magasság változtatása"
 
-#: ../../src/editor/ui_menus/tool_menu.cc:67
+#: ../../src/editor/ui_menus/tool_menu.cc:60
 msgid "Random height"
 msgstr "Véletlenszerű magasság"
 
-#: ../../src/editor/ui_menus/tool_menu.cc:68 ../../src/wui/minimap.cc:143
+#: ../../src/editor/ui_menus/tool_menu.cc:61
+#: ../../src/editor/ui_menus/tool_set_terrain_options_menu.cc:91
+#: ../../src/wui/minimap.cc:121
 msgid "Terrain"
 msgstr "Terep"
 
-#: ../../src/editor/ui_menus/tool_menu.cc:69
-#: ../../src/editor/ui_menus/tool_place_immovable_options_menu.cc:56
+#: ../../src/editor/ui_menus/tool_menu.cc:62
+#: ../../src/editor/ui_menus/tool_place_immovable_options_menu.cc:53
 msgid "Immovables"
 msgstr "Mozdíthatatlan"
 
-#: ../../src/editor/ui_menus/tool_menu.cc:70
-#: ../../src/editor/ui_menus/tool_place_bob_options_menu.cc:45
+#: ../../src/editor/ui_menus/tool_menu.cc:63
+#: ../../src/editor/ui_menus/tool_place_critter_options_menu.cc:52
 msgid "Animals"
 msgstr "Állatok"
 
-#: ../../src/editor/ui_menus/tool_menu.cc:72
+#: ../../src/editor/ui_menus/tool_menu.cc:65
 msgid "Set port space"
 msgstr "Kikőtőhely beállítása"
 
-#: ../../src/editor/ui_menus/tool_menu.cc:73
+#: ../../src/editor/ui_menus/tool_menu.cc:66
 msgid ""
 "Set the position that will have the coordinates (0, 0). This will be the "
 "top-left corner of a generated minimap."
 msgstr "Állítsd be a (0,0) koordináták helyét. Ez lesz a bal felső sarka a létrehozott mini-térképnek."
 
-#: ../../src/editor/ui_menus/tool_noise_height_options_menu.cc:41
+#: ../../src/editor/ui_menus/tool_noise_height_options_menu.cc:39
 msgid "Random Height Options"
 msgstr "Véletlenszerű magassági beállítások"
 
-#: ../../src/editor/ui_menus/tool_noise_height_options_menu.cc:46
+#: ../../src/editor/ui_menus/tool_noise_height_options_menu.cc:50
 msgid "Minimum Height:"
 msgstr "Legkisebb magasság:"
 
-#: ../../src/editor/ui_menus/tool_noise_height_options_menu.cc:51
+#: ../../src/editor/ui_menus/tool_noise_height_options_menu.cc:62
 msgid "Maximum Height:"
 msgstr "Legnagyobb magasság:"
 
 #. * TRANSLATORS: Editor random height access key. *
-#: ../../src/editor/ui_menus/tool_noise_height_options_menu.cc:62
-#: ../../src/editor/ui_menus/tool_noise_height_options_menu.cc:65
+#: ../../src/editor/ui_menus/tool_noise_height_options_menu.cc:80
+#: ../../src/editor/ui_menus/tool_noise_height_options_menu.cc:83
 msgid ""
 "Click on the map to set terrain height to a random value within the "
 "specified range"
 msgstr "Kattints a térképre a talajszint véletlenszerű értékre beállításához, a megadott tartományon belül"
 
-#: ../../src/editor/ui_menus/tool_noise_height_options_menu.cc:80
+#: ../../src/editor/ui_menus/tool_noise_height_options_menu.cc:96
 msgid "Random Height"
 msgstr "Véletlenszerű magasság"
 
-#: ../../src/editor/ui_menus/tool_noise_height_options_menu.cc:87
+#: ../../src/editor/ui_menus/tool_noise_height_options_menu.cc:103
 msgid "Fixed Height"
 msgstr "Állandó magasság"
 
 #. * TRANSLATORS: %1% = terrain name, %2% = list of terrain types
-#: ../../src/editor/ui_menus/tool_set_terrain_options_menu.cc:81
+#. * TRANSLATORS: Label: Value.
+#: ../../src/editor/ui_menus/tool_set_terrain_options_menu.cc:77
+#: ../../src/ui_basic/dropdown.cc:179
 msgid "%1%: %2%"
 msgstr "%1%: %2%"
 
-#: ../../src/editor/ui_menus/tool_set_terrain_options_menu.cc:95
-msgid "Terrain Select"
-msgstr "Terep választás"
-
-#: ../../src/editor/ui_menus/toolsize_menu.cc:81
+#: ../../src/editor/ui_menus/toolsize_menu.cc:80
 #, c-format
 msgid "Current Size: %u"
 msgstr "Jelenlegi méret: %u"
 
-#: ../../src/logic/editor_game_base.cc:252
+#: ../../src/logic/editor_game_base.cc:235
 msgid "Loading graphics"
 msgstr "Grafika betöltése"
 
 #. * TRANSLATORS: Win condition for this game has not been set.
-#: ../../src/logic/game.cc:131
+#: ../../src/logic/game.cc:130
 msgid "Not set"
 msgstr "Nincs beállítva"
 
-#: ../../src/logic/game.cc:219 ../../src/logic/game.cc:274
-#: ../../src/logic/game.cc:358 ../../src/logic/game.cc:388
+#: ../../src/logic/game.cc:205 ../../src/logic/game.cc:251
+#: ../../src/logic/game.cc:324 ../../src/logic/game.cc:354
 msgid "Preloading map"
 msgstr "Térkép előtöltése"
 
-#: ../../src/logic/game.cc:225 ../../src/logic/game.cc:284
+#: ../../src/logic/game.cc:211 ../../src/logic/game.cc:260
 msgid "Loading world"
 msgstr "Világ betöltése"
 
-#: ../../src/logic/game.cc:247 ../../src/logic/game.cc:327
+#: ../../src/logic/game.cc:227 ../../src/logic/game.cc:298
 msgid "Loading map…"
 msgstr "Térkép betöltése…"
 
-#: ../../src/logic/game.cc:373 ../../src/logic/game.cc:410
-#: ../../src/ui_basic/progresswindow.cc:50 ../../src/wlapplication.cc:1367
+#: ../../src/logic/game.cc:339 ../../src/logic/game.cc:374
+#: ../../src/ui_basic/progresswindow.cc:50 ../../src/wlapplication.cc:1341
 msgid "Loading…"
 msgstr "Betöltés…"
 
-#: ../../src/logic/game.cc:474
+#: ../../src/logic/game.cc:437
 msgid "Creating player infrastructure"
 msgstr "Infrastruktúra létrehozása"
 
-#: ../../src/logic/game.cc:486 ../../src/logic/player.cc:245
+#: ../../src/logic/game.cc:448 ../../src/logic/player.cc:219
 msgid "Missing starting position"
 msgstr "Hiányzó kezdőpont"
 
-#: ../../src/logic/game.cc:488 ../../src/logic/player.cc:247
+#: ../../src/logic/game.cc:449 ../../src/logic/player.cc:220
 #, c-format
 msgid ""
 "Widelands could not start the game, because player %u has no starting position.\n"
 "You can manually add a starting position with the Widelands Editor to fix this problem."
 msgstr "A Widelands nem tudja elindítani a játékot, mert a %u játékosnak nincs kezdő helye.\nA hiba javításához kézzel kell kijelölnöd a kezdő pozíciót ennek a játékosnak a szerkesztőben."
 
-#: ../../src/logic/game_data_error.cc:49
+#: ../../src/logic/game_data_error.cc:48
 msgid ""
 "This game was saved using an older version of Widelands and cannot be loaded"
 " anymore, or it's a new version that can't be handled yet."
 msgstr "Ez a játék a WIdelands egy régebbi verziójával lett elmentve és többé nem tölthető be vagy ez egy új verzió és még nem kezelhető."
 
-#: ../../src/logic/map.h:182
+#: ../../src/logic/map.h:181
 msgid "No description defined"
 msgstr "Nincs leírás megadva"
 
-#: ../../src/logic/map_objects/immovable.cc:529
-#: ../../src/logic/map_objects/tribes/constructionsite.cc:77
+#: ../../src/logic/map_objects/immovable.cc:511
+#: ../../src/logic/map_objects/tribes/constructionsite.cc:73
 #, c-format
 msgid "%i%% built"
 msgstr "%i%% megépítve"
 
-#: ../../src/logic/map_objects/tribes/dismantlesite.cc:98
+#: ../../src/logic/map_objects/tribes/dismantlesite.cc:101
 #, c-format
 msgid "%u%% dismantled"
 msgstr "%u%% lebontott"
 
 #. * TRANSLATORS: %1% is the number of soldiers the plural refers to
 #. * TRANSLATORS: %2% is the maximum number of soldier slots in the building
-#: ../../src/logic/map_objects/tribes/militarysite.cc:127
+#: ../../src/logic/map_objects/tribes/militarysite.cc:122
 msgid "%1% soldier (+%2%)"
 msgid_plural "%1% soldiers (+%2%)"
 msgstr[0] "%1% katona (+%2%)"
 msgstr[1] "%1% katona (+%2%)"
 
-#: ../../src/logic/map_objects/tribes/militarysite.cc:130
+#: ../../src/logic/map_objects/tribes/militarysite.cc:126
 #, c-format
 msgid "%u soldier"
 msgid_plural "%u soldiers"
 msgstr[0] "%u katona"
 msgstr[1] "%u katona"
 
-#. * TRANSLATORS: %1% is the number of soldiers the plural refers to
-#. * TRANSLATORS: %2% are currently open soldier slots in the building
-#. * TRANSLATORS: %3% is the maximum number of soldier slots in the building
-#: ../../src/logic/map_objects/tribes/militarysite.cc:138
+#: ../../src/logic/map_objects/tribes/militarysite.cc:134
 msgid "%1%(+%2%) soldier (+%3%)"
 msgid_plural "%1%(+%2%) soldiers (+%3%)"
 msgstr[0] "%1%(+%2%) katona (+%3%)"
@@ -1038,76 +1051,77 @@ msgstr[1] "%1%(+%2%) katona (+%3%)"
 
 #. * TRANSLATORS: %1% is the number of soldiers the plural refers to
 #. * TRANSLATORS: %2% are currently open soldier slots in the building
-#: ../../src/logic/map_objects/tribes/militarysite.cc:143
+#: ../../src/logic/map_objects/tribes/militarysite.cc:140
 msgid "%1%(+%2%) soldier"
 msgid_plural "%1%(+%2%) soldiers"
 msgstr[0] "%1%(+%2%) katona"
 msgstr[1] "%1%(+%2%) katona"
 
 #. * TRANSLATORS: Militarysite lost (taken/destroyed by enemy)
-#: ../../src/logic/map_objects/tribes/militarysite.cc:873
+#: ../../src/logic/map_objects/tribes/militarysite.cc:774
 msgctxt "building"
 msgid "Lost!"
 msgstr "Elveszett!"
 
-#: ../../src/logic/map_objects/tribes/militarysite.cc:875
+#: ../../src/logic/map_objects/tribes/militarysite.cc:775
 msgid "Militarysite lost!"
 msgstr "Támaszpont elveszett!"
 
 #. * TRANSLATORS: Message title.
 #. * TRANSLATORS: If you run out of space, you can also translate this as
 #. "Success!"
-#: ../../src/logic/map_objects/tribes/militarysite.cc:918
+#: ../../src/logic/map_objects/tribes/militarysite.cc:815
 msgid "Enemy Defeated!"
 msgstr "Ellenség legyőzve!"
 
-#: ../../src/logic/map_objects/tribes/militarysite.cc:920
+#: ../../src/logic/map_objects/tribes/militarysite.cc:815
 msgid "Enemy at site defeated!"
 msgstr "Ellenség legyőzve a támaszponton!"
 
 #. * TRANSLATORS: Militarysite is being attacked
-#: ../../src/logic/map_objects/tribes/militarysite.cc:971
+#: ../../src/logic/map_objects/tribes/militarysite.cc:857
 msgctxt "building"
 msgid "Attack!"
 msgstr "Támadás!"
 
-#: ../../src/logic/map_objects/tribes/militarysite.cc:973
+#: ../../src/logic/map_objects/tribes/militarysite.cc:857
 msgid "You are under attack"
-msgstr "Megtámadtak!"
+msgstr "Megtámadtak"
 
 #. * TRANSLATORS: e.g. Completed/Skipped/Did not start ... because the economy
-#. needs the ware ‘%s’
-#: ../../src/logic/map_objects/tribes/production_program.cc:332
+#. needs the ware
+#. * ‘%s’
+#: ../../src/logic/map_objects/tribes/production_program.cc:309
 #, c-format
 msgid "the economy needs the ware ‘%s’"
 msgstr "a gazdaságnak szüksége van „%s” árura"
 
 #. * TRANSLATORS: e.g. Completed/Skipped/Did not start ... because the economy
-#. doesn’t need the ware ‘%s’
-#: ../../src/logic/map_objects/tribes/production_program.cc:340
+#. doesn’t need the
+#. * ware ‘%s’
+#: ../../src/logic/map_objects/tribes/production_program.cc:318
 #, c-format
 msgid "the economy doesn’t need the ware ‘%s’"
 msgstr "a gazdaságnak nincs szüksége „%s” árura"
 
 #. * TRANSLATORS: e.g. Completed/Skipped/Did not start ... because the economy
-#. needs the worker ‘%s’
-#: ../../src/logic/map_objects/tribes/production_program.cc:354
+#. needs the worker
+#. * ‘%s’
+#: ../../src/logic/map_objects/tribes/production_program.cc:331
 #, c-format
 msgid "the economy needs the worker ‘%s’"
 msgstr "a gazdaságnak szüksége van „%s” munkásra"
 
 #. * TRANSLATORS: e.g. Completed/Skipped/Did not start ...
 #. * TRANSLATORS:      ... because the economy doesn’t need the worker ‘%s’
-#: ../../src/logic/map_objects/tribes/production_program.cc:364
+#: ../../src/logic/map_objects/tribes/production_program.cc:341
 #, c-format
 msgid "the economy doesn’t need the worker ‘%s’"
 msgstr "a gazdaságnak nincs szüksége „%s” munkásra"
 
-#. * TRANSLATORS: This is an item in a list of wares, e.g. "3x water":
-#. * TRANSLATORS:    %1$i = "3"
-#. * TRANSLATORS:    %2$s = "water"
 #. * TRANSLATORS: e.g. 'Did not start working because 3x water and 3x wheat
-#. are missing'
+#. are
+#. missing'
 #. * TRANSLATORS: For this example, this is what's in the place holders:
 #. * TRANSLATORS:    %1$i = "3"
 #. * TRANSLATORS:    %2$s = "water"
@@ -1118,36 +1132,34 @@ msgstr "a gazdaságnak nincs szüksége „%s” munkásra"
 #. Ox":
 #. * TRANSLATORS:    %1$i = "2"
 #. * TRANSLATORS:    %2$s = "Ox"
-#: ../../src/logic/map_objects/tribes/production_program.cc:408
-#: ../../src/logic/map_objects/tribes/production_program.cc:430
-#: ../../src/logic/map_objects/tribes/production_program.cc:940
-#: ../../src/logic/map_objects/tribes/production_program.cc:1056
-#: ../../src/logic/map_objects/tribes/production_program.cc:1151
+#: ../../src/logic/map_objects/tribes/production_program.cc:388
+#: ../../src/logic/map_objects/tribes/production_program.cc:414
+#: ../../src/logic/map_objects/tribes/production_program.cc:877
+#: ../../src/logic/map_objects/tribes/production_program.cc:983
+#: ../../src/logic/map_objects/tribes/production_program.cc:1065
 #, c-format
 msgid "%1$ix %2$s"
 msgstr "%1$ix %2$s"
 
-#. * TRANSLATORS: %s is a list of wares
-#: ../../src/logic/map_objects/tribes/production_program.cc:414
+#: ../../src/logic/map_objects/tribes/production_program.cc:394
 #, c-format
 msgid "the building has the following wares: %s"
 msgstr "az épületben a következő áruk vannak: %s"
 
-#. * TRANSLATORS: %s is a list of wares
-#: ../../src/logic/map_objects/tribes/production_program.cc:436
+#: ../../src/logic/map_objects/tribes/production_program.cc:420
 #, c-format
 msgid "the building doesn’t have the following wares: %s"
 msgstr "az épületben a következő áruk nincsenek: %s"
 
 #. * TRANSLATORS: 'Completed/Skipped/Did not start ... because a worker needs
 #. experience'.
-#: ../../src/logic/map_objects/tribes/production_program.cc:454
+#: ../../src/logic/map_objects/tribes/production_program.cc:433
 msgid "a worker needs experience"
 msgstr "a munkásnak több tapasztalatra van szüksége"
 
 #. * TRANSLATORS: 'Completed/Skipped/Did not start ... because the workers
 #. need no experience'.
-#: ../../src/logic/map_objects/tribes/production_program.cc:461
+#: ../../src/logic/map_objects/tribes/production_program.cc:439
 msgid "the workers need no experience"
 msgstr "a munkásnak nincs szüksége több tapasztalatra"
 
@@ -1159,29 +1171,30 @@ msgstr "a munkásnak nincs szüksége több tapasztalatra"
 #. * TRANSLATORS:    %1$s = "working"
 #. * TRANSLATORS:    %2$s = "3x water and 3x wheat are missing"
 #. * TRANSLATORS: This appears in the hover text on buildings. Please test
-#. these in context
+#. these in
+#. context
 #. * TRANSLATORS: on a development build if you can, and let us know if there
 #. are any issues
 #. * TRANSLATORS: we need to address for your language.
-#: ../../src/logic/map_objects/tribes/production_program.cc:575
-#: ../../src/logic/map_objects/tribes/production_program.cc:963
+#: ../../src/logic/map_objects/tribes/production_program.cc:543
+#: ../../src/logic/map_objects/tribes/production_program.cc:901
 #, c-format
 msgid "Did not start %1$s because %2$s"
 msgstr "Nem indult el %1$s, mert %2$s"
 
 #. * TRANSLATORS: "Completed working because the economy needs the ware ‘%s’"
-#: ../../src/logic/map_objects/tribes/production_program.cc:582
+#: ../../src/logic/map_objects/tribes/production_program.cc:548
 #, c-format
 msgid "Completed %1$s because %2$s"
 msgstr "Befejeződött %1$s, mert %2$s"
 
 #. * TRANSLATORS: "Skipped working because the economy needs the ware ‘%s’"
-#: ../../src/logic/map_objects/tribes/production_program.cc:589
+#: ../../src/logic/map_objects/tribes/production_program.cc:553
 #, c-format
 msgid "Skipped %1$s because %2$s"
 msgstr "Kihagyva %1$s, mert %2$s"
 
-#: ../../src/logic/map_objects/tribes/production_program.cc:814
+#: ../../src/logic/map_objects/tribes/production_program.cc:748
 msgid "No use for ships on this map!"
 msgstr "A hajóknak nincs értelme ezen a térképen!"
 
@@ -1189,7 +1202,7 @@ msgstr "A hajóknak nincs értelme ezen a térképen!"
 #. are missing'
 #. * TRANSLATORS: e.g. 'Did not start working because fish, meat or pitta
 #. bread is missing'
-#: ../../src/logic/map_objects/tribes/production_program.cc:951
+#: ../../src/logic/map_objects/tribes/production_program.cc:887
 #, c-format
 msgid "%s is missing"
 msgid_plural "%s are missing"
@@ -1197,8 +1210,9 @@ msgstr[0] "%s hiányzik"
 msgstr[1] "%s hiányzik"
 
 #. * TRANSLATORS: %s is a list of wares. String is fetched according to total
-#. amount of wares.
-#: ../../src/logic/map_objects/tribes/production_program.cc:1066
+#. amount of
+#. wares.
+#: ../../src/logic/map_objects/tribes/production_program.cc:994
 #, c-format
 msgid "Produced %s"
 msgid_plural "Produced %s"
@@ -1206,75 +1220,80 @@ msgstr[0] "Termelt: %s"
 msgstr[1] "Termelt: %s"
 
 #. * TRANSLATORS: %s is a list of workers. String is fetched according to
-#. total amount of workers.
-#: ../../src/logic/map_objects/tribes/production_program.cc:1161
+#. total amount of
+#. workers.
+#: ../../src/logic/map_objects/tribes/production_program.cc:1076
 #, c-format
 msgid "Recruited %s"
 msgid_plural "Recruited %s"
 msgstr[0] "Besorozva: %s"
 msgstr[1] "Besorozva: %s"
 
-#: ../../src/logic/map_objects/tribes/production_program.cc:1383
+#: ../../src/logic/map_objects/tribes/production_program.cc:1282
 msgid "No soldier to train!"
 msgstr "Nincs kiképezhető katona!"
 
-#: ../../src/logic/map_objects/tribes/production_program.cc:1393
-#: ../../src/logic/map_objects/tribes/production_program.cc:1480
+#: ../../src/logic/map_objects/tribes/production_program.cc:1291
+#: ../../src/logic/map_objects/tribes/production_program.cc:1368
 msgid "No soldier found for this training level!"
 msgstr "Nem található katona ehhez a képzési szinthez!"
 
-#: ../../src/logic/map_objects/tribes/productionsite.cc:269
+#: ../../src/logic/map_objects/tribes/productionsite.cc:270
 msgid "(not occupied)"
 msgstr "(nincs munkás)"
 
-#: ../../src/logic/map_objects/tribes/productionsite.cc:276
+#: ../../src/logic/map_objects/tribes/productionsite.cc:277
 msgid "Worker missing"
 msgid_plural "Workers missing"
 msgstr[0] "Munkás hiányzik"
 msgstr[1] "Munkások hiányoznak"
 
-#: ../../src/logic/map_objects/tribes/productionsite.cc:281
+#: ../../src/logic/map_objects/tribes/productionsite.cc:284
 msgid "(stopped)"
 msgstr "(megállítva)"
 
 #. * TRANSLATORS: Percent in building statistics window, e.g. 85%
 #. * TRANSLATORS: If you wish to add a space, translate as '%i %%'
 #: ../../src/logic/map_objects/tribes/productionsite.cc:383
-#: ../../src/wui/building_statistics_menu.cc:684
+#: ../../src/wui/building_statistics_menu.cc:626
 #, c-format
 msgid "%i%%"
 msgstr "%i%%"
 
-#: ../../src/logic/map_objects/tribes/productionsite.cc:981
+#: ../../src/logic/map_objects/tribes/productionsite.cc:943
 msgid "Can’t find any more resources!"
 msgstr "Nem található több nyersanyag!"
 
-#: ../../src/logic/map_objects/tribes/ship.cc:418
+#: ../../src/logic/map_objects/tribes/ship.cc:416
 msgid "Port Space"
 msgstr "Kikötőhely"
 
-#: ../../src/logic/map_objects/tribes/ship.cc:419
+#: ../../src/logic/map_objects/tribes/ship.cc:416
 msgid "Port Space Found"
 msgstr "Kikötőhely felfedezve"
 
-#: ../../src/logic/map_objects/tribes/ship.cc:420
+#: ../../src/logic/map_objects/tribes/ship.cc:417
 msgid "An expedition ship found a new port build space."
 msgstr "Az expedíciós hajó új kikötőhelyet fedezett fel."
 
-#. * TRANSLATORS: A ship has circumnavigated an island and is waiting for
-#. orders
-#: ../../src/logic/map_objects/tribes/ship.cc:539
+#: ../../src/logic/map_objects/tribes/ship.cc:538
+msgid "Island Circumnavigated"
+msgstr "Sziget körbehajózva"
+
+#. * TRANSLATORS: A ship has circumnavigated an island and is waiting
+#. for orders
+#: ../../src/logic/map_objects/tribes/ship.cc:538
 msgctxt "ship"
 msgid "Waiting"
 msgstr "Várakozás"
 
-#: ../../src/logic/map_objects/tribes/ship.cc:540
-msgid "Island Circumnavigated"
-msgstr "Sziget körbehajózva"
-
-#: ../../src/logic/map_objects/tribes/ship.cc:541
+#: ../../src/logic/map_objects/tribes/ship.cc:539
 msgid "An expedition ship sailed around its island without any events."
 msgstr "Egy expedíciós hajó esemény nélkül megkerülte a szigetet."
+
+#: ../../src/logic/map_objects/tribes/ship.cc:603
+msgid "Coast Reached"
+msgstr "Part elérve"
 
 #. * TRANSLATORS: A ship has discovered land
 #: ../../src/logic/map_objects/tribes/ship.cc:603
@@ -1282,147 +1301,144 @@ msgid "Land Ahoy!"
 msgstr "Szárazföld!"
 
 #: ../../src/logic/map_objects/tribes/ship.cc:604
-msgid "Coast Reached"
-msgstr "Part elérve"
-
-#: ../../src/logic/map_objects/tribes/ship.cc:605
 msgid ""
 "An expedition ship reached a coast and is waiting for further commands."
 msgstr "Egy expedíciós hajó partot ért és parancsra vár."
 
-#: ../../src/logic/map_objects/tribes/ship.cc:665
-msgid "Port Lost!"
-msgstr "Kikötő elveszett!"
-
-#: ../../src/logic/map_objects/tribes/ship.cc:666
+#: ../../src/logic/map_objects/tribes/ship.cc:659
 msgid "New port construction site is gone"
 msgstr "Új kikötő építési terület megszűnt"
 
-#: ../../src/logic/map_objects/tribes/ship.cc:667
+#: ../../src/logic/map_objects/tribes/ship.cc:659
+msgid "Port Lost!"
+msgstr "Kikötő elveszett!"
+
+#: ../../src/logic/map_objects/tribes/ship.cc:660
 msgid "Unloading of wares failed, expedition is cancelled now."
 msgstr "Az áruk kirakodása meghiúsult, expedíció törölve."
 
 #. * TRANSLATORS: Ship expedition ready
-#: ../../src/logic/map_objects/tribes/ship.cc:848
+#: ../../src/logic/map_objects/tribes/ship.cc:835
 msgctxt "ship"
 msgid "Expedition"
 msgstr "Expedíció"
 
-#: ../../src/logic/map_objects/tribes/ship.cc:849
+#: ../../src/logic/map_objects/tribes/ship.cc:835
 msgid "Expedition Ready"
 msgstr "Expedíció készen áll"
 
-#: ../../src/logic/map_objects/tribes/ship.cc:850
+#: ../../src/logic/map_objects/tribes/ship.cc:836
 msgid "An expedition ship is waiting for your commands."
 msgstr "Expedíciós hajó parancsra vár."
 
 #. * TRANSLATORS: This is a ship state
-#: ../../src/logic/map_objects/tribes/ship.cc:960
+#: ../../src/logic/map_objects/tribes/ship.cc:957
 msgctxt "ship_state"
 msgid "Shipping"
 msgstr "Hajózás"
 
 #. * TRANSLATORS: This is a ship state. An expedition is waiting for your
 #. commands.
-#: ../../src/logic/map_objects/tribes/ship.cc:964
+#: ../../src/logic/map_objects/tribes/ship.cc:961
 msgctxt "ship_state"
 msgid "Waiting"
 msgstr "Várakozás"
 
 #. * TRANSLATORS: This is a ship state. An expedition is scouting for port
 #. spaces.
-#: ../../src/logic/map_objects/tribes/ship.cc:968
+#: ../../src/logic/map_objects/tribes/ship.cc:965
 msgctxt "ship_state"
 msgid "Scouting"
 msgstr "Felderítés"
 
 #. * TRANSLATORS: This is a ship state. An expedition has found a port space.
-#: ../../src/logic/map_objects/tribes/ship.cc:972
+#: ../../src/logic/map_objects/tribes/ship.cc:969
 msgctxt "ship_state"
 msgid "Port Space Found"
 msgstr "Kikötőhely felfedezve"
 
 #. * TRANSLATORS: This is a ship state. An expedition is unloading
-#. wares/workers to build a port.
-#: ../../src/logic/map_objects/tribes/ship.cc:976
+#. wares/workers to build a
+#. * port.
+#: ../../src/logic/map_objects/tribes/ship.cc:974
 msgctxt "ship_state"
 msgid "Founding a Colony"
 msgstr "Kolónia alapítása"
 
-#: ../../src/logic/map_objects/tribes/soldier.cc:1485
-#: ../../src/logic/map_objects/tribes/soldier.cc:1496
+#: ../../src/logic/map_objects/tribes/soldier.cc:1350
+#: ../../src/logic/map_objects/tribes/soldier.cc:1356
 msgid "Logic error"
 msgstr "Logikai hiba"
 
-#: ../../src/logic/map_objects/tribes/warehouse.cc:459
+#: ../../src/logic/map_objects/tribes/warehouse.cc:423
 msgid "A new port was added to your economy."
 msgstr "Egy új kikötővel bővült a gazdaságod."
 
-#: ../../src/logic/map_objects/tribes/warehouse.cc:468
+#: ../../src/logic/map_objects/tribes/warehouse.cc:426
 msgid "A new headquarters was added to your economy."
 msgstr "Új parancsnoksággal bővült a gazdaságod."
 
-#: ../../src/logic/map_objects/tribes/warehouse.cc:477
+#: ../../src/logic/map_objects/tribes/warehouse.cc:429
 msgid "A new warehouse was added to your economy."
 msgstr "Új raktárral bővült a gazdaságod."
 
-#: ../../src/logic/map_objects/tribes/worker.cc:120
+#: ../../src/logic/map_objects/tribes/worker.cc:114
 #, c-format
 msgid ""
 "should mine resource %s, which does not exist in world; tribe is not "
 "compatible with world"
 msgstr "Ez a törzs nem kompatibilis ezzel a térképpel, mert itt nem bányázható %s, pedig szüksége lenne rá"
 
-#: ../../src/logic/map_objects/tribes/worker.cc:225
+#: ../../src/logic/map_objects/tribes/worker.cc:214
 #, c-format
 msgid ""
 "should breed resource type %s, which does not exist in world; tribe is not "
 "compatible with world"
 msgstr "Ez a törzs nem kompatibilis ezzel a térképpel, mert nem létezik a térképen %s erőforrás, pedig szüksége lenne rá"
 
-#: ../../src/logic/map_objects/tribes/worker.cc:930
+#: ../../src/logic/map_objects/tribes/worker.cc:885
 msgid "A geologist found resources."
 msgstr "Geológus ásványkincseket talált."
 
-#: ../../src/logic/map_objects/tribes/worker.cc:1836
+#: ../../src/logic/map_objects/tribes/worker.cc:1677
 #, c-format
 msgid "Your %s can't find a way home and will likely die."
 msgstr "A(z) %s nem talál hazautat és valószínűleg meghal."
 
-#: ../../src/logic/map_objects/tribes/worker.cc:1844
-#: ../../src/wui/productionsitewindow.cc:81
-#: ../../src/wui/productionsitewindow.cc:109
+#: ../../src/logic/map_objects/tribes/worker.cc:1682
+#: ../../src/wui/productionsitewindow.cc:87
+#: ../../src/wui/productionsitewindow.cc:112
 msgid "Worker"
 msgid_plural "Workers"
 msgstr[0] "Munkás"
 msgstr[1] "Munkások"
 
-#: ../../src/logic/map_objects/tribes/worker.cc:1846
+#: ../../src/logic/map_objects/tribes/worker.cc:1683
 msgid "Worker got lost!"
 msgstr "Eltűnt egy munkás!"
 
 #. * TRANSLATORS: This is a terrain type tooltip in the editor
-#: ../../src/logic/map_objects/world/terrain_description.cc:71
+#: ../../src/logic/map_objects/world/terrain_description.cc:70
 msgid "arable"
 msgstr "művelhető"
 
 #. * TRANSLATORS: This is a terrain type tooltip in the editor
-#: ../../src/logic/map_objects/world/terrain_description.cc:81
+#: ../../src/logic/map_objects/world/terrain_description.cc:80
 msgid "navigable"
 msgstr "hajózható"
 
 #. * TRANSLATORS: This is a terrain type tooltip in the editor
-#: ../../src/logic/map_objects/world/terrain_description.cc:86
+#: ../../src/logic/map_objects/world/terrain_description.cc:85
 msgid "unreachable"
 msgstr "elérhetetlen"
 
 #. * TRANSLATORS: This is a terrain type tooltip in the editor
-#: ../../src/logic/map_objects/world/terrain_description.cc:91
+#: ../../src/logic/map_objects/world/terrain_description.cc:90
 msgid "mineable"
 msgstr "bányászható"
 
 #. * TRANSLATORS: This is a terrain type tooltip in the editor
-#: ../../src/logic/map_objects/world/terrain_description.cc:96
+#: ../../src/logic/map_objects/world/terrain_description.cc:95
 msgid "unwalkable"
 msgstr "járhatatlan"
 
@@ -1430,11 +1446,11 @@ msgstr "járhatatlan"
 msgid "This objective has no description."
 msgstr "Ehhez a célkitűzéshez nincs leírás."
 
-#: ../../src/logic/replay_game_controller.cc:108
+#: ../../src/logic/replay_game_controller.cc:101
 msgid "End of replay"
 msgstr "Visszajátszás vége"
 
-#: ../../src/logic/replay_game_controller.cc:109
+#: ../../src/logic/replay_game_controller.cc:102
 msgid ""
 "The end of the replay has been reached and the game has been paused. You may"
 " unpause the game and continue watching if you want to."
@@ -1448,165 +1464,160 @@ msgstr "A mentés nem sikerült!"
 msgid "Game saved"
 msgstr "Játék elmentve"
 
-#: ../../src/logic/save_handler.cc:158
+#: ../../src/logic/save_handler.cc:157
 msgid "Saving game…"
 msgstr "Játék mentése…"
 
-#: ../../src/map_io/s2map.cc:405
+#: ../../src/map_io/s2map.cc:423
 msgid "Bluebyte Settlers II Map. No comment defined!"
 msgstr "Bluebyte Settlers II térkép, nem tartozik hozzá leírás!"
 
-#: ../../src/network/internet_gaming.cc:114
-#: ../../src/ui_fsmenu/internet_lobby.cc:423
+#: ../../src/network/internet_gaming.cc:108
+#: ../../src/ui_fsmenu/internet_lobby.cc:394
 msgid "Connection problem"
 msgstr "Kapcsolathiba"
 
-#: ../../src/network/internet_gaming.cc:114
+#: ../../src/network/internet_gaming.cc:108
 msgid "Widelands could not connect to the metaserver."
 msgstr "A Widelands nem tud csatlakozni a metakiszolgálóhoz."
 
-#: ../../src/network/internet_gaming.cc:120 ../../src/network/netclient.cc:108
+#: ../../src/network/internet_gaming.cc:113 ../../src/network/netclient.cc:103
 msgid "Could not establish connection to host"
 msgstr "Nem sikerült kapcsolatot létesíteni a gazdagéppel"
 
-#: ../../src/network/internet_gaming.cc:122
+#: ../../src/network/internet_gaming.cc:114
 msgid ""
 "Widelands could not establish a connection to the given address.\n"
 "Either there was no metaserver running at the supposed port or\n"
 "your network setup is broken."
 msgstr "A Widelands nem tud kapcsolatot létesíteni a megadott címmel.\nVagy nem fut metakiszolgáló a feltételezett porton, vagy\na hálózati beállítások hibásak."
 
-#: ../../src/network/internet_gaming.cc:169
+#: ../../src/network/internet_gaming.cc:163
 msgid "For hosting a game, please take a look at the notes at:"
 msgstr "A játék kiszolgálásához, kérlek nézd meg a jegyzeteket:"
 
-#: ../../src/network/internet_gaming.cc:309
-msgid "Something went wrong: "
-msgstr "Valami hiba történt: "
+#: ../../src/network/internet_gaming.cc:297
+#: ../../src/network/network_gaming_messages.cc:129
+#, c-format
+msgid "Something went wrong: %s"
+msgstr "Valami hiba történt: %s"
 
-#: ../../src/network/internet_gaming.cc:399
+#: ../../src/network/internet_gaming.cc:382
 msgid "Successfully reconnected to the metaserver!"
 msgstr "Sikeres újracsatlakozás a metakiszolgálóhoz!"
 
-#: ../../src/network/internet_gaming.cc:406
+#: ../../src/network/internet_gaming.cc:390
 msgid "Mixed up"
 msgstr "Kevert"
 
-#: ../../src/network/internet_gaming.cc:406
+#: ../../src/network/internet_gaming.cc:390
 msgid "The metaserver sent a strange ERROR during connection"
 msgstr "A metakiszolgáló egy furcsa HIBÁT észlelt a kapcsolatban"
 
-#: ../../src/network/internet_gaming.cc:417
+#: ../../src/network/internet_gaming.cc:401
 msgid "Unexpected packet"
 msgstr "Váratlan csomag"
 
-#: ../../src/network/internet_gaming.cc:419
+#: ../../src/network/internet_gaming.cc:402
 #, c-format
 msgid ""
 "Expected a LOGIN, RELOGIN or REJECTED packet from server, but received "
 "command %s. Maybe the metaserver is using a different protocol version ?"
 msgstr "BEJELENTKEZÉS, ÚJRA_BEJELENTKEZÉS vagy ELUTASÍTVA csomagot várt a kiszolgálótól, de %s parancsot kapott. Talán más protokoll verziót használ a metakiszolgáló ?"
 
-#: ../../src/network/internet_gaming.cc:432
+#: ../../src/network/internet_gaming.cc:415
 #, c-format
 msgid ""
 "WARNING: Received a %s command although we are not in CONNECTING state."
 msgstr "FIGYELMEZTETÉS: %s parancs érkezett bár nem vagyunk KAPCSOLATBAN állapotban."
 
-#: ../../src/network/internet_gaming.cc:442
+#: ../../src/network/internet_gaming.cc:426
 #, c-format
-msgid "InternetGaming: Server time offset is %u second."
-msgid_plural "InternetGaming: Server time offset is %u seconds."
-msgstr[0] "InternetJáték: Kiszolgáló időeltolódása %u másodperc."
-msgstr[1] "InternetJáték: Kiszolgáló időeltolódása %u másodperc."
+msgid "Server time offset is %d second."
+msgid_plural "Server time offset is %d seconds."
+msgstr[0] "Kiszolgáló időeltolódása %d másodperc."
+msgstr[1] "Kiszolgáló időeltolódása %d másodperc."
 
-#: ../../src/network/internet_gaming.cc:447
-#, c-format
-msgid "Server time offset is %u second."
-msgid_plural "Server time offset is %u seconds."
-msgstr[0] "Kiszolgáló időeltolódása %u másodperc."
-msgstr[1] "Kiszolgáló időeltolódása %u másodperc."
-
-#: ../../src/network/internet_gaming.cc:470
+#: ../../src/network/internet_gaming.cc:450
 #, c-format
 msgid "Invalid chat message type \"%s\"."
 msgstr "Érvénytelen csevegő üzenet típus „%s”."
 
-#: ../../src/network/internet_gaming.cc:470
+#: ../../src/network/internet_gaming.cc:450
 msgid "Invalid message type"
 msgstr "Érvénytelen üzenettípus"
 
-#: ../../src/network/internet_gaming.cc:506
+#: ../../src/network/internet_gaming.cc:487
 #, c-format
 msgid "The game %s is now available"
 msgstr "A játék %s elérhető"
 
-#: ../../src/network/internet_gaming.cc:515
+#: ../../src/network/internet_gaming.cc:497
 #, c-format
 msgid "The game %s has been closed"
 msgstr "A játék %s lezárva"
 
-#: ../../src/network/internet_gaming.cc:550
+#: ../../src/network/internet_gaming.cc:533
 #, c-format
 msgid "%s joined the lobby"
 msgstr "%s belépett a szobába"
 
-#: ../../src/network/internet_gaming.cc:559
+#: ../../src/network/internet_gaming.cc:542
 #, c-format
 msgid "%s left the lobby"
 msgstr "%s kilépett a szobából"
 
-#: ../../src/network/internet_gaming.cc:593
+#: ../../src/network/internet_gaming.cc:576
 msgid "Chat message could not be sent."
 msgstr "Csevegő üzenet nem lett elküldve."
 
-#: ../../src/network/internet_gaming.cc:609
+#: ../../src/network/internet_gaming.cc:590
 #, c-format
 msgid "ERROR: %s"
 msgstr "HIBA: %s"
 
-#: ../../src/network/internet_gaming.cc:619
+#: ../../src/network/internet_gaming.cc:600
 #, c-format
 msgid "Received an unknown command from the metaserver: %s"
 msgstr "Ismeretlen parancs érkezett a metakiszolgálótól: %s"
 
-#: ../../src/network/internet_gaming.cc:752
+#: ../../src/network/internet_gaming.cc:711
 msgid "Message could not be sent: You are not connected to the metaserver!"
 msgstr "Üzenet nem lett elküldve: Nem vagy kapcsolódva a metakiszolgálóhoz!"
 
-#: ../../src/network/internet_gaming.cc:764
+#: ../../src/network/internet_gaming.cc:724
 msgid "Message could not be sent: Was this supposed to be a private message?"
 msgstr "Üzenet nem lett elküldve: Ez egy személyes üzenet lett volna?"
 
-#: ../../src/network/internet_gaming.cc:838
+#: ../../src/network/internet_gaming.cc:798
 msgid "Conversion error"
 msgstr "Konverziós hiba"
 
 #. * TRANSLATORS: Geeky message from the metaserver
 #. * TRANSLATORS: This message is shown if %s isn't "true" or "false"
-#: ../../src/network/internet_gaming.cc:841
+#: ../../src/network/internet_gaming.cc:801
 #, c-format
 msgid "Unable to determine truth value for \"%s\""
 msgstr "Nem sikerült a(z) „%s” igazságértékének meghatározása"
 
-#: ../../src/network/internet_gaming.cc:857
+#: ../../src/network/internet_gaming.cc:818
 msgid "unknown"
 msgstr "ismeretlen"
 
-#: ../../src/network/internet_gaming_messages.cc:42
+#: ../../src/network/internet_gaming_messages.cc:43
 #, c-format
 msgid "There is no user with the name %s logged in!"
 msgstr "Nincs %s névvel bejelentkezett felhasználó!"
 
-#: ../../src/network/internet_gaming_messages.cc:43
+#: ../../src/network/internet_gaming_messages.cc:44
 msgid "The sent password was incorrect!"
 msgstr "Az elküldött jelszó helytelen!"
 
-#: ../../src/network/internet_gaming_messages.cc:44
+#: ../../src/network/internet_gaming_messages.cc:45
 msgid "The protocol version you are using is not supported!"
 msgstr "A protokoll verzió, amit te használsz, nem támogatott!"
 
-#: ../../src/network/internet_gaming_messages.cc:45
+#: ../../src/network/internet_gaming_messages.cc:46
 msgid "You are already logged in!"
 msgstr "Már be vagy jelentkezve!"
 
@@ -1616,33 +1627,25 @@ msgid ""
 "permission. This incident will be logged and reported to the administrator."
 msgstr "Kapcsolat megszakítva, mert superuser parancsot köldött, superuser jogosultság nélkül. Ez az esemény naplózva lett és jelntésre került az adminisztrátornak."
 
-#: ../../src/network/internet_gaming_messages.cc:50
-msgid "You got disconnected, as the metaserver is currently restarting."
-msgstr "Kapcsolat bontva, a metakiszolgáló újraindul."
-
-#: ../../src/network/internet_gaming_messages.cc:52
+#: ../../src/network/internet_gaming_messages.cc:51
 msgid "Connection was closed by the client normally."
 msgstr "A kapcsolatot az ügyfél normálisan lezárta."
 
-#: ../../src/network/internet_gaming_messages.cc:53
+#: ../../src/network/internet_gaming_messages.cc:52
 msgid "The connection to the metaserver was lost."
 msgstr "A kapcsolat a metakiszolgálóval elveszett."
 
-#: ../../src/network/internet_gaming_messages.cc:54
+#: ../../src/network/internet_gaming_messages.cc:53
 msgid "Metaserver did not answer"
 msgstr "A metakiszolgáló nem válaszolt"
 
 #: ../../src/network/internet_gaming_messages.cc:55
-msgid "Your game can’t be connected to from the internet"
-msgstr "A játékodhoz nem lehet az Interneten keresztül csatlakozni."
-
-#: ../../src/network/internet_gaming_messages.cc:57
 msgid ""
 "You got disconnected from the metaserver, as you did not answer a PING "
 "request in time."
 msgstr "Kapcsolat bontva a metakiszolgáló felől, mert nem válaszoltál időben a PING kérésre."
 
-#: ../../src/network/internet_gaming_messages.cc:60
+#: ../../src/network/internet_gaming_messages.cc:57
 msgid ""
 "The metaserver was unable to connect to your game. Most likely it can’t be "
 "connected to from the internet! Please take a look at "
@@ -1650,224 +1653,215 @@ msgid ""
 "internet connection for hosting a game online."
 msgstr "A metakiszolgáló nem tudodd csatlakozni a játékodhoz. A legvalószínűbb az hogy nem lehet hozzá kapcsolódni az Interneten keresztül. Kérlek vess egy pillantást a http://wl.widelands.org/wiki/InternetGaming oldalra, hogy megtanuld hogyan állítsd be az internetkapcsolatodat a játék kiszolgálásához."
 
-#: ../../src/network/internet_gaming_messages.cc:64
+#: ../../src/network/internet_gaming_messages.cc:63
 msgid ""
 "You tried to log back in, but the server has no knowledge of your previous "
 "state anymore."
 msgstr "Megpróbáltál újra bejelentkezni, de a kiszolgáló már nem ismeri az előző állapotodat."
 
-#: ../../src/network/netclient.cc:110
+#: ../../src/network/netclient.cc:104
 msgid ""
 "Widelands could not establish a connection to the given address.\n"
 "Either no Widelands server was running at the supposed port or\n"
 "the server shut down as you tried to connect."
 msgstr "A Widelands nem tud kapcsolatot létesíteni a megadott címmel.\nVagy nem fut Widelands szerver a feltételezett porton, vagy\na szerver leállt ahogy csatlakozni próbáltál."
 
-#: ../../src/network/netclient.cc:184 ../../src/network/nethost.cc:729
-#: ../../src/wlapplication.cc:1257
+#: ../../src/network/netclient.cc:176 ../../src/network/nethost.cc:701
+#: ../../src/wlapplication.cc:1234
 msgid "Preparing game"
 msgstr "Játék előtötése"
 
-#: ../../src/network/netclient.cc:740
+#: ../../src/network/netclient.cc:698
 msgid "/me 's file failed md5 checksumming."
 msgstr "/me fájljának nem sikerült az md5 ellenőrzése."
 
-#: ../../src/network/netclient.cc:770
+#: ../../src/network/netclient.cc:726
 msgid ""
 "/me checked the received file. Although md5 check summing succeeded, I can "
 "not handle the file."
 msgstr "/me ellenőrizte a kapott fájlt. Bár az md5 ellenőrzés sikeres volt, a fájl nem kezelhető."
 
 #. * TRANSLATORS: %s contains an error message.
-#: ../../src/network/netclient.cc:988
+#: ../../src/network/netclient.cc:936
 #, c-format
 msgid "%s An automatic savegame will be created."
-msgstr " %s Egy automatikus mentés lesz létrehozva."
+msgstr "%s Egy automatikus mentés lesz létrehozva."
 
-#: ../../src/network/netclient.cc:993
+#: ../../src/network/netclient.cc:940
 msgid "Disconnected from Host"
 msgstr "Szétkapcsolódva a gazdától"
 
-#: ../../src/network/nethost.cc:357
+#: ../../src/network/nethost.cc:343
 msgid "Available host commands are:"
 msgstr "Az elérhető gazda parancsok:"
 
 #. * TRANSLATORS: Available host command
-#: ../../src/network/nethost.cc:360
+#: ../../src/network/nethost.cc:345
 msgid "/help  -  Shows this help"
-msgstr " /help - Megjeleníti ezt a segítséget"
+msgstr "/help - Megjeleníti ezt a segítséget"
 
 #. * TRANSLATORS: Available host command
-#: ../../src/network/nethost.cc:363
+#: ../../src/network/nethost.cc:347
 msgid "/announce <msg>  -  Send a chatmessage as announcement (system chat)"
 msgstr "/announce <üzenet> - Egy csevegőüzenetet közleményként küld el (rendszerüzenet)"
 
 #. * TRANSLATORS: Available host command
-#: ../../src/network/nethost.cc:366
+#: ../../src/network/nethost.cc:349
 msgid "/warn <name> <reason>  -  Warn the user <name> because of <reason>"
 msgstr "/warn <név> <ok>  -  A <név> felhasználó figyelmeztetése az <ok> miatt"
 
 #. * TRANSLATORS: Available host command
-#: ../../src/network/nethost.cc:369
+#: ../../src/network/nethost.cc:351
 msgid "/kick <name> <reason>  -  Kick the user <name> because of <reason>"
 msgstr "/kick <név> <ok> - A <név> felhasználó kirúgása az <ok> miatt"
 
 #. * TRANSLATORS: Available host command
-#: ../../src/network/nethost.cc:372
+#: ../../src/network/nethost.cc:353
 msgid "/forcePause            -  Force the game to pause."
 msgstr "/forcePause - A játék megállításának kényszerítése"
 
 #. * TRANSLATORS: Available host command
-#: ../../src/network/nethost.cc:375
+#: ../../src/network/nethost.cc:355
 msgid "/endForcedPause        -  Return game to normal speed."
 msgstr "/endForcedPause - Visszatérés a játék normál sebességéhez."
 
-#: ../../src/network/nethost.cc:381
+#: ../../src/network/nethost.cc:362
 msgid "Wrong use, should be: /announce <message>"
 msgstr "Helytelen használat; helyes: /announce <üzenet>"
 
-#: ../../src/network/nethost.cc:392
+#: ../../src/network/nethost.cc:373
 msgid "Wrong use, should be: /warn <name> <reason>"
-msgstr "Helytelen használat; helyes: <név> <ok>"
+msgstr "Helytelen használat; helyes: /warn <név> <ok>"
 
-#: ../../src/network/nethost.cc:396 ../../src/network/nethost.cc:419
+#: ../../src/network/nethost.cc:377 ../../src/network/nethost.cc:400
 #, c-format
 msgid "The client %s could not be found."
 msgstr "A(z) %s ügyfél nem található."
 
-#: ../../src/network/nethost.cc:407
+#: ../../src/network/nethost.cc:388
 msgid "Wrong use, should be: /kick <name> <reason>"
 msgstr "Helytelen használat; helyes: /kick <név> <ok>"
 
-#: ../../src/network/nethost.cc:417
+#: ../../src/network/nethost.cc:398
 msgid "You can not kick yourself!"
 msgstr "Nem rúghatod ki saját magad!"
 
-#: ../../src/network/nethost.cc:423
+#: ../../src/network/nethost.cc:404
 #, c-format
 msgid "Are you sure you want to kick %s?"
 msgstr "Biztosan ki akarod rúgni: %s?"
 
-#: ../../src/network/nethost.cc:425
+#: ../../src/network/nethost.cc:406
 #, c-format
 msgid "The stated reason was: %s"
 msgstr "A megadott ok ez volt: %s"
 
-#: ../../src/network/nethost.cc:426
+#: ../../src/network/nethost.cc:407
 #, c-format
 msgid "If yes, type: /ack_kick %s"
 msgstr "Ha igen, írd be: /ack_kick %s"
 
-#: ../../src/network/nethost.cc:434
+#: ../../src/network/nethost.cc:415
 msgid "kick acknowledgement cancelled: No name given!"
 msgstr "kirúgási közlemény megszakítva: Nincs név megadva!"
 
-#: ../../src/network/nethost.cc:436
+#: ../../src/network/nethost.cc:417
 msgid "Wrong use, should be: /ack_kick <name>"
 msgstr "Helytelen használat; helyes: /ack_kick <név>"
 
-#: ../../src/network/nethost.cc:442
+#: ../../src/network/nethost.cc:423
 msgid "kick acknowledgement cancelled: Wrong name given!"
 msgstr "kirúgási közlemény megszakítva: Rossz név van megadva!"
 
-#: ../../src/network/nethost.cc:451
+#: ../../src/network/nethost.cc:432
 msgid "Pause was already forced - game should be paused."
 msgstr "A megállítás már kényszerítve lett - a játéknak állnia kellene."
 
-#: ../../src/network/nethost.cc:461
+#: ../../src/network/nethost.cc:442
 msgid "There is no forced pause - nothing to end."
 msgstr "Nincs kényszerített megállítás - nincs mit befejezni."
 
-#: ../../src/network/nethost.cc:470
+#: ../../src/network/nethost.cc:451
 msgid "Invalid command! Type /help for a list of commands."
 msgstr "Érvénytelen parancs! Gépeld a /help-et a parancsok listájáért."
 
-#: ../../src/network/nethost.cc:1639
+#: ../../src/network/nethost.cc:1564
 #, c-format
 msgid "Computer %u"
 msgstr "%u. számítógép"
 
-#: ../../src/network/nethost.cc:1699 ../../src/wui/game_summary.cc:119
+#: ../../src/network/nethost.cc:1621 ../../src/wui/game_summary.cc:101
 msgid "Player"
 msgstr "Játékos"
 
-#: ../../src/network/nethost.cc:1864
+#: ../../src/network/nethost.cc:1770
 #, c-format
 msgid "%li second"
 msgid_plural "%li seconds"
 msgstr[0] "%li másodperc"
 msgstr[1] "%li másodperc"
 
-#: ../../src/network/network_gaming_messages.cc:122
+#: ../../src/network/network_gaming_messages.cc:119
 msgid "Client has left the game."
 msgstr "Az ügyfél elhagyta a játékot."
 
-#: ../../src/network/network_gaming_messages.cc:123
+#: ../../src/network/network_gaming_messages.cc:120
 msgid "Client crashed and performed an emergency save."
 msgstr "Az ügyfél összeomlott és elmentette a játék állapotát."
 
-#: ../../src/network/network_gaming_messages.cc:124
+#: ../../src/network/network_gaming_messages.cc:121
 msgid "Connection was lost."
 msgstr "A kapcsolat megszakadt."
 
-#: ../../src/network/network_gaming_messages.cc:125
+#: ../../src/network/network_gaming_messages.cc:122
 msgid "Server has left the game."
 msgstr "A szerver elhagyta a játékot."
 
-#: ../../src/network/network_gaming_messages.cc:126
+#: ../../src/network/network_gaming_messages.cc:124
 msgid "The game has started just after you tried to connect."
 msgstr "A játék éppen azután kezdődött el, hogy csatlakozni próbáltál."
 
-#: ../../src/network/network_gaming_messages.cc:127
+#: ../../src/network/network_gaming_messages.cc:125
 msgid "Server has crashed and performed an emergency save."
 msgstr "A szerver összeomlott és elmentette a játék állapotát."
 
-#: ../../src/network/network_gaming_messages.cc:128
-msgid "Connection to client timed out: no response for 10 minutes!"
-msgstr "Időtúllépés az ügyfélhez kapcsolódáskor: nem volt válasz 10 percig!"
-
-#: ../../src/network/network_gaming_messages.cc:129
+#: ../../src/network/network_gaming_messages.cc:126
 msgid "Client and host have become desynchronized."
 msgstr "Az ügyfél és a gazda nincs többé szinkronban."
 
-#: ../../src/network/network_gaming_messages.cc:130
+#: ../../src/network/network_gaming_messages.cc:127
 #, c-format
 msgid "Kicked by the host: %s"
 msgstr "Kirúgva a kiszolgáló által: %s"
 
-#: ../../src/network/network_gaming_messages.cc:131
+#: ../../src/network/network_gaming_messages.cc:128
 #, c-format
 msgid "Client sent malformed commands: %s"
 msgstr "Az ügyfél rosszul formázott parancsot küldött: %s"
 
-#: ../../src/network/network_gaming_messages.cc:132
-#, c-format
-msgid "Something went wrong: %s"
-msgstr "Valami hiba történt: %s"
-
-#: ../../src/network/network_gaming_messages.cc:133
+#: ../../src/network/network_gaming_messages.cc:130
 #, c-format
 msgid "%1$s has left the game (%2$s)"
 msgstr "%1$s elhagyta a játékot (%2$s)"
 
-#: ../../src/network/network_gaming_messages.cc:134
+#: ../../src/network/network_gaming_messages.cc:131
 #, c-format
 msgid "Unknown user has left the game (%s)"
 msgstr "Ismeretlen játékos elhagyta a játékot (%s)"
 
-#: ../../src/network/network_gaming_messages.cc:135
+#: ../../src/network/network_gaming_messages.cc:133
 msgid "Server sent a SYNCREQUEST even though no game is running."
 msgstr "A szerver SYNCREQUEST csomagot küldött annak ellenére, hogy a játék nem is indult még el."
 
-#: ../../src/network/network_gaming_messages.cc:136
+#: ../../src/network/network_gaming_messages.cc:134
 msgid "Received a PLAYERCOMMAND even though no game is running."
 msgstr "PLAYERCOMMAND érkezett, de nincs futó játék."
 
-#: ../../src/network/network_gaming_messages.cc:137
+#: ../../src/network/network_gaming_messages.cc:135
 msgid "Unexpectedly received LAUNCH command from server."
 msgstr "Váratlanul LAUNCH parancs érkezett a szervertől."
 
-#: ../../src/network/network_gaming_messages.cc:138
+#: ../../src/network/network_gaming_messages.cc:137
 msgid "Server sent a player update for a player that does not exist."
 msgstr "A kiszolgáló játékos frissítést küldött egy olyan játékoshoz aki nem létezik."
 
@@ -1884,173 +1878,168 @@ msgstr "A szerver más verziójú protokollt használ"
 msgid "Received command number %s, which is not allowed in this state."
 msgstr "%s sorszámú parancs érkezett, amely nem engedélyezett ebben az állapotban."
 
-#: ../../src/network/network_gaming_messages.cc:143
+#: ../../src/network/network_gaming_messages.cc:144
 msgid "Client reports time to host that is running backwards."
 msgstr "Az ügyfél olyan időt jelent a gazda felé amely visszafelé telik."
 
-#: ../../src/network/network_gaming_messages.cc:144
+#: ../../src/network/network_gaming_messages.cc:146
 msgid "Client simulates beyond the game time allowed by the host."
 msgstr "Az ügyfél a gazda által megengedett jatákidőn kívül szimulál."
 
-#: ../../src/network/network_gaming_messages.cc:145
+#: ../../src/network/network_gaming_messages.cc:147
 msgid "Client did not submit sync report in time."
 msgstr "Az ügyfél nem adta fel időben a szinkronizációs jelentést."
 
-#: ../../src/network/network_gaming_messages.cc:146
+#: ../../src/network/network_gaming_messages.cc:148
 msgid "The game has already started."
 msgstr "A játék már elkezdődött."
 
-#: ../../src/network/network_gaming_messages.cc:147
+#: ../../src/network/network_gaming_messages.cc:149
 msgid "Client has no access to other player’s settings."
 msgstr "Az ügyfél nem fér hozzá más játékos beállításaihoz."
 
-#: ../../src/network/network_gaming_messages.cc:148
+#: ../../src/network/network_gaming_messages.cc:150
 msgid "Client has no access to server settings."
 msgstr "Az ügyfél nem fér hozzá a kiszolgáló beállításaihoz."
 
-#: ../../src/network/network_gaming_messages.cc:149
-msgid "Client sent start command, although server is not yet ready."
-msgstr "Az ügyfél kezdés parancsot küldött, de a kiszolgáló még nem áll készen."
-
-#: ../../src/network/network_gaming_messages.cc:150
+#: ../../src/network/network_gaming_messages.cc:152
 msgid "Client sent TIME command even though game is not running."
 msgstr "Az ügyfél TIME parancsot küldött annak ellenére, hogy a játék nem fut."
 
-#: ../../src/network/network_gaming_messages.cc:151
+#: ../../src/network/network_gaming_messages.cc:153
 msgid "Client sent a PLAYERCOMMAND for another player."
 msgstr "Az ügyfél PLAYERCOMMAND parancsot küldött egy másik játékosnak."
 
-#: ../../src/network/network_gaming_messages.cc:152
+#: ../../src/network/network_gaming_messages.cc:154
 msgid "Client sent unexpected synchronization report."
 msgstr "Az ügyfél váratlan szinkronizációs jelentést küldött."
 
-#: ../../src/network/network_gaming_messages.cc:153
+#: ../../src/network/network_gaming_messages.cc:156
 msgid "Client requests file although none is available to send."
 msgstr "Az ügyfél egy fájlt kér, de nincs elérhető elküldendő fájl."
 
-#: ../../src/network/network_gaming_messages.cc:154
+#: ../../src/network/network_gaming_messages.cc:157
 msgid "Client requests file part that does not exist."
 msgstr "Az ügyfél olyan fájl darabját kéri amely nem létezik."
 
-#: ../../src/network/network_gaming_messages.cc:155
+#: ../../src/network/network_gaming_messages.cc:158
 #, c-format
 msgid "Host sent player %s to the lobby!"
 msgstr "A gazda elküldte %s játékost a váróba!"
 
-#: ../../src/network/network_gaming_messages.cc:157
+#: ../../src/network/network_gaming_messages.cc:160
 #, c-format
 msgid "WARNING: %1$s uses version: %2$s, while Host uses version: %3$s"
 msgstr "FIGYELMEZTETÉS: %1$s ezt a verziót használja: %2$s, míg a gazda ezt a verziót: %3$s"
 
-#: ../../src/network/network_gaming_messages.cc:158
+#: ../../src/network/network_gaming_messages.cc:161
 #, c-format
 msgid "%s has joined the game"
 msgstr "%s csatlakozott a játékhoz"
 
-#: ../../src/network/network_gaming_messages.cc:159
-#, c-format
-msgid "Game was saved as %s."
-msgstr "Játék elmentve mint %s."
-
-#: ../../src/network/network_gaming_messages.cc:160
+#: ../../src/network/network_gaming_messages.cc:162
 #, c-format
 msgid "Started to send file %1$s to %2$s!"
 msgstr "A(z) %1$s fájl elküldése ide: %2$s!"
 
-#: ../../src/network/network_gaming_messages.cc:161
+#: ../../src/network/network_gaming_messages.cc:163
 #, c-format
 msgid "Completed transfer of file %1$s to %2$s"
 msgstr "A(z) %1$s fájl átvitele befejeződött ide: %2$s"
 
-#: ../../src/network/network_gaming_messages.cc:162
+#: ../../src/network/network_gaming_messages.cc:164
 #, c-format
 msgid "Sending part %1$s of file %2$s to %3$s"
 msgstr "A(z) %2$s fájl %1$s. részének elküldése ide: %3$s"
 
-#: ../../src/network/network_gaming_messages.cc:163
+#: ../../src/network/network_gaming_messages.cc:165
 #, c-format
 msgid "The player ‘%s’ was defeated and became a spectator."
 msgstr "A(z) „%s” játékost legyőzték és néző lett belőle."
 
-#: ../../src/network/network_gaming_messages.cc:164
+#: ../../src/network/network_gaming_messages.cc:166
 #, c-format
 msgid "Client %1$s did not answer for more than %2$s."
 msgstr "A(z) %1$s ügyfél nem válaszolt több mint ennyi ideig: %2$s."
 
-#: ../../src/network/network_gaming_messages.cc:166
-#, c-format
-msgid ""
-"Client %1$s will automatically be kicked, if no answer is received within "
-"%2$s."
-msgstr "A(z) %1$s automatikusan ki lesz rúgva ha nem érkezik válasz ennyi időn belül: %2$s."
-
 #. * TRANSLATORS: A variant of the commandline parameter "true" value
 #. * TRANSLATORS: Needs to be consistent with the translations in widelands-
 #. console
-#: ../../src/profile/profile.cc:47
+#: ../../src/profile/profile.cc:45
 msgid "true"
 msgstr "igaz"
 
 #. * TRANSLATORS: A variant of the commandline parameter "true" value
 #. * TRANSLATORS: Needs to be consistent with the translations in widelands-
 #. console
-#: ../../src/profile/profile.cc:51
+#: ../../src/profile/profile.cc:48
 msgid "yes"
 msgstr "igen"
 
 #. * TRANSLATORS: A variant of the commandline parameter "true" value
 #. * TRANSLATORS: Needs to be consistent with the translations in widelands-
 #. console
-#: ../../src/profile/profile.cc:55
+#: ../../src/profile/profile.cc:51
 msgid "on"
 msgstr "be"
 
 #. * TRANSLATORS: A variant of the commandline parameter "false" value
 #. * TRANSLATORS: Needs to be consistent with the translations in widelands-
 #. console
-#: ../../src/profile/profile.cc:65
+#: ../../src/profile/profile.cc:58
 msgid "false"
 msgstr "hamis"
 
 #. * TRANSLATORS: A variant of the commandline parameter "false" value
 #. * TRANSLATORS: Needs to be consistent with the translations in widelands-
 #. console
-#: ../../src/profile/profile.cc:69
+#: ../../src/profile/profile.cc:61
 msgid "no"
 msgstr "nem"
 
 #. * TRANSLATORS: A variant of the commandline parameter "false" value
 #. * TRANSLATORS: Needs to be consistent with the translations in widelands-
 #. console
-#: ../../src/profile/profile.cc:73
+#: ../../src/profile/profile.cc:64
 msgid "off"
 msgstr "ki"
 
 #. * TRANSLATORS: %1% is a filename, %2% a map's name.
 #. * TRANSLATORS: File name for saving objective achieved
 #. * TRANSLATORS: %1% = map name. %2% = achievement name
-#: ../../src/scripting/lua_game.cc:1081 ../../src/ui_fsmenu/loadgame.cc:74
+#: ../../src/scripting/lua_game.cc:1084 ../../src/ui_fsmenu/loadgame.cc:76
 msgid "%1% (%2%)"
 msgstr "%1% (%2%)"
 
-#: ../../src/ui_basic/spinbox.cc:144
+#: ../../src/ui_basic/dropdown.cc:68 ../../src/ui_basic/dropdown.cc:141
+msgctxt "dropdown"
+msgid "Select Item"
+msgstr "Tárgy kiválasztása"
+
+#. * TRANSLATORS: Selection in Dropdown menus.
+#: ../../src/ui_basic/dropdown.cc:173
+msgctxt "dropdown"
+msgid "Not Selected"
+msgstr "Nincs kiválasztva"
+
+#: ../../src/ui_basic/spinbox.cc:125
 msgid "Decrease the value"
 msgstr "Érték csökkentése"
 
-#: ../../src/ui_basic/spinbox.cc:153
+#: ../../src/ui_basic/spinbox.cc:130
 msgid "Increase the value"
 msgstr "Érték növelése"
 
-#: ../../src/ui_basic/spinbox.cc:162
+#: ../../src/ui_basic/spinbox.cc:136
 msgid "Decrease the value by 10"
 msgstr "Érték csökkentése tízzel"
 
-#: ../../src/ui_basic/spinbox.cc:169
+#: ../../src/ui_basic/spinbox.cc:140
 msgid "Increase the value by 10"
 msgstr "Érték növelése tízzel"
 
 #. * TRANSLATORS: A spinbox unit
-#: ../../src/ui_basic/spinbox.cc:329
+#: ../../src/ui_basic/spinbox.cc:318
 #, c-format
 msgid "%d minute"
 msgid_plural "%d minutes"
@@ -2058,357 +2047,358 @@ msgstr[0] "%d perc"
 msgstr[1] "%d perc"
 
 #. * TRANSLATORS: A spinbox unit
-#: ../../src/ui_basic/spinbox.cc:332
+#: ../../src/ui_basic/spinbox.cc:321
 #, c-format
 msgid "%d pixel"
 msgid_plural "%d pixels"
 msgstr[0] "%d képpont"
 msgstr[1] "%d képpont"
 
-#: ../../src/ui_fsmenu/about.cc:39 ../../src/ui_fsmenu/main.cc:55
+#: ../../src/ui_fsmenu/about.cc:29 ../../src/ui_fsmenu/main.cc:81
 msgid "About Widelands"
 msgstr "A Widelands névjegye"
 
-#: ../../src/ui_fsmenu/about.cc:47 ../../src/wui/watchwindow.cc:142
+#: ../../src/ui_fsmenu/about.cc:30 ../../src/wui/watchwindow.cc:123
 msgid "Close"
 msgstr "Bezárás"
 
-#: ../../src/ui_fsmenu/campaign_select.cc:50
+#: ../../src/ui_fsmenu/campaign_select.cc:48
 msgid "Choose a campaign"
 msgstr "Hadjárat kiválasztása"
 
-#: ../../src/ui_fsmenu/campaign_select.cc:90
-#: ../../src/ui_fsmenu/campaign_select.cc:329
-#: ../../src/ui_fsmenu/loadgame.cc:163
+#: ../../src/ui_fsmenu/campaign_select.cc:91
+#: ../../src/ui_fsmenu/campaign_select.cc:322
+#: ../../src/ui_fsmenu/loadgame.cc:181
 msgid "Return to the main menu"
 msgstr "Visszatérés a főmenübe"
 
-#: ../../src/ui_fsmenu/campaign_select.cc:91
+#: ../../src/ui_fsmenu/campaign_select.cc:92
 msgid "Play this campaign"
 msgstr "Hadjárat indítása"
 
-#: ../../src/ui_fsmenu/campaign_select.cc:92
+#: ../../src/ui_fsmenu/campaign_select.cc:93
 msgid "The name of this campaign"
 msgstr "A hadjárat neve"
 
-#: ../../src/ui_fsmenu/campaign_select.cc:93
+#: ../../src/ui_fsmenu/campaign_select.cc:94
 msgid "The tribe you will be playing"
 msgstr "A törzs amivel játszani fogsz"
 
-#: ../../src/ui_fsmenu/campaign_select.cc:94
+#: ../../src/ui_fsmenu/campaign_select.cc:95
 msgid "The difficulty of this campaign"
 msgstr "A hadjárat nehézsége"
 
 #. * TRANSLATORS: Campaign difficulty table header
-#: ../../src/ui_fsmenu/campaign_select.cc:102
+#: ../../src/ui_fsmenu/campaign_select.cc:106
 msgid "Diff."
 msgstr "Neh."
 
-#: ../../src/ui_fsmenu/campaign_select.cc:102
+#: ../../src/ui_fsmenu/campaign_select.cc:106
 msgid "Difficulty"
 msgstr "Nehézség"
 
-#: ../../src/ui_fsmenu/campaign_select.cc:103
-#: ../../src/wui/multiplayersetupgroup.cc:455
+#: ../../src/ui_fsmenu/campaign_select.cc:107
+#: ../../src/wui/multiplayersetupgroup.cc:399
 msgid "Tribe"
 msgstr "Törzs"
 
-#: ../../src/ui_fsmenu/campaign_select.cc:103
+#: ../../src/ui_fsmenu/campaign_select.cc:107
 msgid "Tribe Name"
 msgstr "Törzs neve"
 
-#: ../../src/ui_fsmenu/campaign_select.cc:104
+#: ../../src/ui_fsmenu/campaign_select.cc:109
 msgid "Campaign Name"
 msgstr "Hadjárat neve"
 
-#: ../../src/ui_fsmenu/campaign_select.cc:154
+#: ../../src/ui_fsmenu/campaign_select.cc:157
 msgid "Campaign Name:"
 msgstr "Hadjárat neve:"
 
-#: ../../src/ui_fsmenu/campaign_select.cc:155
+#: ../../src/ui_fsmenu/campaign_select.cc:158
 msgid "Tribe:"
 msgstr "Törzs:"
 
-#: ../../src/ui_fsmenu/campaign_select.cc:156
+#: ../../src/ui_fsmenu/campaign_select.cc:159
 msgid "Difficulty:"
 msgstr "Nehézség:"
 
-#: ../../src/ui_fsmenu/campaign_select.cc:289
+#: ../../src/ui_fsmenu/campaign_select.cc:283
 msgid "Choose a scenario"
 msgstr "Küldetés kiválasztása"
 
-#: ../../src/ui_fsmenu/campaign_select.cc:289
+#: ../../src/ui_fsmenu/campaign_select.cc:283
 msgid "Choose a tutorial"
 msgstr "Oktatójáték kiválasztása"
 
-#: ../../src/ui_fsmenu/campaign_select.cc:331
+#: ../../src/ui_fsmenu/campaign_select.cc:324
 msgid "Play this tutorial"
 msgstr "Oktatójáték indítása"
 
-#: ../../src/ui_fsmenu/campaign_select.cc:332
+#: ../../src/ui_fsmenu/campaign_select.cc:325
 msgid "The name of this tutorial"
 msgstr "A kiválaszott oktatójáték neve"
 
-#: ../../src/ui_fsmenu/campaign_select.cc:333
+#: ../../src/ui_fsmenu/campaign_select.cc:326
 msgid "What you will learn in this tutorial"
 msgstr "Amit megtanulsz ebben az oktatójátékban"
 
-#: ../../src/ui_fsmenu/campaign_select.cc:335
+#: ../../src/ui_fsmenu/campaign_select.cc:328
 msgid "Play this scenario"
 msgstr "Küldetés indítása"
 
-#: ../../src/ui_fsmenu/campaign_select.cc:336
+#: ../../src/ui_fsmenu/campaign_select.cc:329
 msgid "The name of this scenario"
 msgstr "A küldetés neve"
 
-#: ../../src/ui_fsmenu/campaign_select.cc:352
+#: ../../src/ui_fsmenu/campaign_select.cc:343
 msgid "The order in which the tutorials should be played"
 msgstr "Ebben a sorrendben érdemes végigjátszani az oktatójátékokat"
 
-#: ../../src/ui_fsmenu/campaign_select.cc:353
+#: ../../src/ui_fsmenu/campaign_select.cc:344
 msgid "Tutorial Name"
 msgstr "Oktatójáték neve"
 
-#: ../../src/ui_fsmenu/campaign_select.cc:355
+#: ../../src/ui_fsmenu/campaign_select.cc:346
 msgid "The number of this scenario in the campaign"
 msgstr "A küldetések száma ebben a hadjáratban"
 
-#: ../../src/ui_fsmenu/campaign_select.cc:356
+#: ../../src/ui_fsmenu/campaign_select.cc:347
 msgid "Scenario Name"
 msgstr "Küldetés neve"
 
 #. * TRANSLATORS: Campaign scenario number table header
-#: ../../src/ui_fsmenu/campaign_select.cc:360
+#: ../../src/ui_fsmenu/campaign_select.cc:351
 msgid "#"
 msgstr "#"
 
-#: ../../src/ui_fsmenu/campaign_select.cc:395 ../../src/wui/mapdetails.cc:131
-msgid "Scenario:"
-msgstr "Küldetés:"
-
-#: ../../src/ui_fsmenu/campaign_select.cc:395
+#: ../../src/ui_fsmenu/campaign_select.cc:387
 msgid "Tutorial:"
 msgstr "Oktatójáték:"
 
-#: ../../src/ui_fsmenu/campaign_select.cc:411
+#: ../../src/ui_fsmenu/campaign_select.cc:388 ../../src/wui/mapdetails.cc:133
+msgid "Scenario:"
+msgstr "Küldetés:"
+
+#: ../../src/ui_fsmenu/campaign_select.cc:402
 #, c-format
 msgid "Invalid path to file in campaigns.conf: %s"
 msgstr "Érvénytelen fájlútvonal a campaigns.conf fájlban: %s"
 
-#: ../../src/ui_fsmenu/campaign_select.cc:422
+#: ../../src/ui_fsmenu/campaign_select.cc:413
 msgid "The designer of this tutorial"
 msgid_plural "The designers of this tutorial"
 msgstr[0] "A kiválasztott oktatójáték készítője"
 msgstr[1] "A kiválasztott oktatójáték készítői"
 
-#: ../../src/ui_fsmenu/campaign_select.cc:425
+#: ../../src/ui_fsmenu/campaign_select.cc:416
 msgid "The designer of this scenario"
 msgid_plural "The designers of this scenario"
 msgstr[0] "A küldetés készítője"
 msgstr[1] "A küldetés készítői"
 
-#: ../../src/ui_fsmenu/campaign_select.cc:428 ../../src/wui/mapdetails.cc:152
+#: ../../src/ui_fsmenu/campaign_select.cc:419 ../../src/wui/mapdetails.cc:158
 msgid "Author:"
 msgid_plural "Authors:"
 msgstr[0] "Készítő:"
 msgstr[1] "Készítők:"
 
-#: ../../src/ui_fsmenu/campaign_select.cc:457
+#: ../../src/ui_fsmenu/campaign_select.cc:446
 msgid "Pick a tutorial from the list, then hit \"OK\"."
 msgstr "Válassz egy oktatójátékot a listáról, majd kattints az OK gombra."
 
-#: ../../src/ui_fsmenu/campaign_select.cc:459
+#: ../../src/ui_fsmenu/campaign_select.cc:448
 msgid ""
 "You can see a description of the currently selected tutorial on the right."
 msgstr "A megjelölt játékról a jobb oldalon találsz leírást."
 
-#: ../../src/ui_fsmenu/helpwindow.cc:42 ../../src/wui/helpwindow.cc:44
+#: ../../src/ui_fsmenu/helpwindow.cc:42 ../../src/wui/helpwindow.cc:46
 #, c-format
 msgid "Help: %s"
 msgstr "Súgó: %s"
 
-#: ../../src/ui_fsmenu/internet_lobby.cc:54
+#: ../../src/ui_fsmenu/internet_lobby.cc:51
 msgid "Metaserver Lobby"
 msgstr "Metakiszolgáló előszoba"
 
-#: ../../src/ui_fsmenu/internet_lobby.cc:58
+#: ../../src/ui_fsmenu/internet_lobby.cc:52
 msgid "Clients online:"
 msgstr "Elérhető ügyfelek:"
 
-#: ../../src/ui_fsmenu/internet_lobby.cc:62
+#: ../../src/ui_fsmenu/internet_lobby.cc:53
 msgid "List of games:"
 msgstr "Játékok listája:"
 
-#: ../../src/ui_fsmenu/internet_lobby.cc:66
+#: ../../src/ui_fsmenu/internet_lobby.cc:54
 msgid "Name of your server:"
 msgstr "A kiszolgáló neve:"
 
-#: ../../src/ui_fsmenu/internet_lobby.cc:73
-#: ../../src/ui_fsmenu/netsetup_lan.cc:62
+#: ../../src/ui_fsmenu/internet_lobby.cc:64
+#: ../../src/ui_fsmenu/netsetup_lan.cc:54
 msgid "Join this game"
 msgstr "Csatlakozás a játékhoz"
 
-#: ../../src/ui_fsmenu/internet_lobby.cc:78
+#: ../../src/ui_fsmenu/internet_lobby.cc:72
 msgid "Open a new game"
 msgstr "Új játék indítása"
 
-#: ../../src/ui_fsmenu/internet_lobby.cc:83
-#: ../../src/ui_fsmenu/launch_mpg.cc:140 ../../src/ui_fsmenu/launch_spg.cc:85
-#: ../../src/ui_fsmenu/load_map_or_game.cc:58
-#: ../../src/ui_fsmenu/multiplayer.cc:49
-#: ../../src/ui_fsmenu/netsetup_lan.cc:72
-#: ../../src/ui_fsmenu/singleplayer.cc:49
+#: ../../src/ui_fsmenu/internet_lobby.cc:80
+#: ../../src/ui_fsmenu/launch_mpg.cc:137 ../../src/ui_fsmenu/launch_spg.cc:76
+#: ../../src/ui_fsmenu/load_map_or_game.cc:44
+#: ../../src/ui_fsmenu/multiplayer.cc:53
+#: ../../src/ui_fsmenu/netsetup_lan.cc:70
+#: ../../src/ui_fsmenu/singleplayer.cc:57
 msgid "Back"
 msgstr "Vissza"
 
-#: ../../src/ui_fsmenu/internet_lobby.cc:133
+#: ../../src/ui_fsmenu/internet_lobby.cc:129
 msgid "User Status"
 msgstr "Játékos állapota"
 
-#: ../../src/ui_fsmenu/internet_lobby.cc:136
+#: ../../src/ui_fsmenu/internet_lobby.cc:130
 msgid "Registered"
 msgstr "Regisztrált"
 
-#: ../../src/ui_fsmenu/internet_lobby.cc:138
+#: ../../src/ui_fsmenu/internet_lobby.cc:131
 msgid "Administrator"
 msgstr "Adminisztrátor"
 
-#: ../../src/ui_fsmenu/internet_lobby.cc:140
+#: ../../src/ui_fsmenu/internet_lobby.cc:132
 msgid "Unregistered"
 msgstr "Nem regisztrált"
 
 #. * TRANSLATORS: Player Name
-#: ../../src/ui_fsmenu/internet_lobby.cc:144
+#: ../../src/ui_fsmenu/internet_lobby.cc:136
 msgctxt "player"
 msgid "Name"
 msgstr "Név"
 
-#: ../../src/ui_fsmenu/internet_lobby.cc:145
+#: ../../src/ui_fsmenu/internet_lobby.cc:137
 msgid "Version"
-msgstr ""
+msgstr "Verzió"
 
-#: ../../src/ui_fsmenu/internet_lobby.cc:146
-#: ../../src/ui_fsmenu/options.cc:226
+#: ../../src/ui_fsmenu/internet_lobby.cc:139
+#: ../../src/ui_fsmenu/options.cc:250
 msgid "Game"
 msgstr "Játék"
 
-#: ../../src/ui_fsmenu/internet_lobby.cc:392
+#: ../../src/ui_fsmenu/internet_lobby.cc:366
 msgid ""
 "Widelands was unable to get the IP address of the server in time.\n"
 "There seems to be a network problem, either on your side or on the side\n"
 "of the server.\n"
 msgstr "A Widelands nem volt képes időben lekérni a kiszolgáló IP-címét.\nEz hálózati problémának tűnik, vagy a te oldaladon vagy a \nkiszolgáló oldalán.\n"
 
-#: ../../src/ui_fsmenu/internet_lobby.cc:396
+#: ../../src/ui_fsmenu/internet_lobby.cc:369
 msgid "Connection timed out"
 msgstr "A kapcsolat időtúllépés miatt megszakadt"
 
-#: ../../src/ui_fsmenu/internet_lobby.cc:424
+#: ../../src/ui_fsmenu/internet_lobby.cc:395
 msgid "Widelands was unable to connect to the host."
 msgstr "A Widelands nem tudott csatlakozni a gazdához."
 
 #. * TRANSLATORS: This is shown for multiplayer games when no host
 #. * TRANSLATORS: server to connect to has been specified yet.
-#: ../../src/ui_fsmenu/internet_lobby.cc:446
+#: ../../src/ui_fsmenu/internet_lobby.cc:416
 msgctxt "server_name"
 msgid "unnamed"
 msgstr "névtelen"
 
-#: ../../src/ui_fsmenu/intro.cc:32
+#: ../../src/ui_fsmenu/intro.cc:31
 msgid "Press any key or click to continue…"
 msgstr "Nyomd meg bármelyik billentyűt vagy kattints a folytatáshoz…"
 
 #. * TRANSLATORS: Dialog box title for selecting between map or saved game for
-#. new multiplayer game
-#: ../../src/ui_fsmenu/launch_mpg.cc:54
+#. new
+#. multiplayer game
+#: ../../src/ui_fsmenu/launch_mpg.cc:53
 msgid "Please select"
 msgstr "Kérlek válassz"
 
-#: ../../src/ui_fsmenu/launch_mpg.cc:67 ../../src/ui_fsmenu/launch_mpg.cc:174
-#: ../../src/ui_fsmenu/netsetup_lan.cc:115 ../../src/wui/minimap.cc:135
+#: ../../src/ui_fsmenu/launch_mpg.cc:62 ../../src/ui_fsmenu/launch_mpg.cc:174
+#: ../../src/ui_fsmenu/netsetup_lan.cc:117 ../../src/wui/minimap.cc:110
 msgid "Map"
 msgstr "Térkép"
 
-#: ../../src/ui_fsmenu/launch_mpg.cc:67
+#: ../../src/ui_fsmenu/launch_mpg.cc:63
 msgid "Select a map"
 msgstr "Válassz térképet"
 
-#: ../../src/ui_fsmenu/launch_mpg.cc:78 ../../src/ui_fsmenu/launch_mpg.cc:297
-#: ../../src/wui/multiplayersetupgroup.cc:371
+#: ../../src/ui_fsmenu/launch_mpg.cc:71 ../../src/ui_fsmenu/launch_mpg.cc:286
+#: ../../src/wui/multiplayersetupgroup.cc:332
 msgid "Saved Game"
 msgstr "Mentett játék"
 
-#: ../../src/ui_fsmenu/launch_mpg.cc:78
+#: ../../src/ui_fsmenu/launch_mpg.cc:71
 msgid "Select a saved game"
 msgstr "Válassz egy mentett játékot"
 
-#: ../../src/ui_fsmenu/launch_mpg.cc:88
+#: ../../src/ui_fsmenu/launch_mpg.cc:78
 msgid "Cancel selection"
 msgstr "Kijelölés megszüntetése"
 
-#: ../../src/ui_fsmenu/launch_mpg.cc:130
+#: ../../src/ui_fsmenu/launch_mpg.cc:121
 msgid "Change map or saved game"
 msgstr "Térkép vagy mentett játék módosítása"
 
-#: ../../src/ui_fsmenu/launch_mpg.cc:135 ../../src/ui_fsmenu/launch_spg.cc:90
+#: ../../src/ui_fsmenu/launch_mpg.cc:129 ../../src/ui_fsmenu/launch_spg.cc:84
 msgid "Start game"
 msgstr "Játék indítása"
 
-#: ../../src/ui_fsmenu/launch_mpg.cc:151
+#: ../../src/ui_fsmenu/launch_mpg.cc:154
 msgid "Show the help window"
 msgstr "Súgóablak megjelenítése"
 
 #. * TRANSLATORS: This is a heading for a help window
-#: ../../src/ui_fsmenu/launch_mpg.cc:157 ../../src/ui_fsmenu/launch_mpg.cc:689
+#: ../../src/ui_fsmenu/launch_mpg.cc:157 ../../src/ui_fsmenu/launch_mpg.cc:668
 msgid "Multiplayer Game Setup"
 msgstr "Többjátékos beállítások"
 
-#: ../../src/ui_fsmenu/launch_mpg.cc:166
+#: ../../src/ui_fsmenu/launch_mpg.cc:165
 msgid "Clients"
 msgstr "Ügyfelek"
 
-#: ../../src/ui_fsmenu/launch_mpg.cc:178 ../../src/ui_fsmenu/launch_spg.cc:125
+#: ../../src/ui_fsmenu/launch_mpg.cc:178 ../../src/ui_fsmenu/launch_spg.cc:118
 msgid "Type of game"
 msgstr "Játék típusa"
 
-#: ../../src/ui_fsmenu/launch_mpg.cc:216 ../../src/ui_fsmenu/launch_spg.cc:327
+#: ../../src/ui_fsmenu/launch_mpg.cc:213 ../../src/ui_fsmenu/launch_spg.cc:346
 msgid "(no map)"
 msgstr "(nincs térkép)"
 
-#: ../../src/ui_fsmenu/launch_mpg.cc:217
+#: ../../src/ui_fsmenu/launch_mpg.cc:214
 msgid "The host has not yet selected a map or saved game."
 msgstr "A gazda még nem választott térképet vagy mentett játékot."
 
 #. * TRANSLATORS: This is a map tag
-#: ../../src/ui_fsmenu/launch_mpg.cc:292 ../../src/ui_fsmenu/launch_spg.cc:240
-#: ../../src/wui/map_tags.cc:36 ../../src/wui/multiplayersetupgroup.cc:368
+#: ../../src/ui_fsmenu/launch_mpg.cc:282 ../../src/ui_fsmenu/launch_spg.cc:209
+#: ../../src/wui/map_tags.cc:36 ../../src/wui/multiplayersetupgroup.cc:329
 msgid "Scenario"
 msgstr "Küldetés"
 
-#: ../../src/ui_fsmenu/launch_mpg.cc:294 ../../src/ui_fsmenu/launch_spg.cc:242
+#: ../../src/ui_fsmenu/launch_mpg.cc:283 ../../src/ui_fsmenu/launch_spg.cc:210
 msgid "Win condition is set through the scenario"
 msgstr "A játék célját a küldetés határozza meg"
 
-#: ../../src/ui_fsmenu/launch_mpg.cc:299
+#: ../../src/ui_fsmenu/launch_mpg.cc:287
 msgid "The game is a saved game – the win condition was set before."
 msgstr "Ez egy mentett játék - a játék célja hamarabb lett beállítva."
 
-#: ../../src/ui_fsmenu/launch_mpg.cc:428
+#: ../../src/ui_fsmenu/launch_mpg.cc:416
 msgid "Saved game is directory"
 msgstr "A mentett játék egy könyvtár"
 
-#: ../../src/ui_fsmenu/launch_mpg.cc:430
+#: ../../src/ui_fsmenu/launch_mpg.cc:417
 msgid ""
 "WARNING:\n"
 "The saved game you selected is a directory. This happens if you set the option ‘nozip’ to true or manually unzipped the saved game.\n"
 "Widelands is not able to transfer directory structures to the clients, please select another saved game or zip the directories’ content."
 msgstr "FIGYELMEZTETÉS:\nA mentett játék amit kiválasztottál egy könyvtár. Ez akkor történik ha igazra állítod a „nozip” beállítást vagy kézzel kicsomagolod a mentett játékot.\nA Widelands nem képes közvetlenül könyvtárakat átküldeni az ügyfeleknek, kérlek válassz egy másik mentett játékot vagy csomagold be a könyvtár tartalmát."
 
-#: ../../src/ui_fsmenu/launch_mpg.cc:449 ../../src/ui_fsmenu/launch_spg.cc:297
+#: ../../src/ui_fsmenu/launch_mpg.cc:434 ../../src/ui_fsmenu/launch_spg.cc:318
 msgid "File not found"
 msgstr "A fájl nem található"
 
-#: ../../src/ui_fsmenu/launch_mpg.cc:451 ../../src/ui_fsmenu/launch_spg.cc:299
+#: ../../src/ui_fsmenu/launch_mpg.cc:435 ../../src/ui_fsmenu/launch_spg.cc:319
 #, c-format
 msgid ""
 "Widelands tried to start a game with a file that could not be found at the given path.\n"
@@ -2416,74 +2406,85 @@ msgid ""
 "If this happens in a network game, the host might have selected a file that you do not own. Normally, such a file should be sent from the host to you, but perhaps the transfer was not yet finished!?!"
 msgstr "A Widelands megpróbált elindítani egy játékot egy olyan fájlból amely nem található a megadott útvonalon.\nA fájl ez volt: %s\nHa ez történik egy hálózati játékban, akkor a gazda lehet hogy olyan fájlt választott amit nem birtokolsz. Alapesetben az ilyen fájlokat a gazdának kell elküldenie neked, de lehet hogy még nem végzett az átvitel!?!"
 
-#: ../../src/ui_fsmenu/launch_mpg.cc:476
+#: ../../src/ui_fsmenu/launch_mpg.cc:458
 msgid ""
 "The selected file can not be found. If it is not automatically transferred "
 "to you, please write to the host about this problem."
 msgstr "A kiválasztott fájl nem található. Ha nem kerül automatikus átküldésre, akkor kérlek írj a gazdának erről a problémáról."
 
-#: ../../src/ui_fsmenu/launch_mpg.cc:507
+#: ../../src/ui_fsmenu/launch_mpg.cc:489
 #, c-format
 msgid "You are Player %i."
 msgstr "Te vagy a(z) %i. játékos."
 
-#: ../../src/ui_fsmenu/launch_mpg.cc:508
+#: ../../src/ui_fsmenu/launch_mpg.cc:490
 msgid "You are a spectator."
 msgstr "Te egy néző vagy."
 
-#: ../../src/ui_fsmenu/launch_mpg.cc:567
+#: ../../src/ui_fsmenu/launch_mpg.cc:544
 msgid "Saved players are:"
 msgstr "Mentett játékosok:"
 
-#: ../../src/ui_fsmenu/launch_mpg.cc:584
+#: ../../src/ui_fsmenu/launch_mpg.cc:560
 msgid "closed"
 msgstr "lezárt"
 
-#: ../../src/ui_fsmenu/launch_mpg.cc:660
+#: ../../src/ui_fsmenu/launch_mpg.cc:636
 msgid "Map details:"
 msgstr "Térkép adatai:"
 
-#: ../../src/ui_fsmenu/launch_mpg.cc:661
+#: ../../src/ui_fsmenu/launch_mpg.cc:638
 #, c-format
 msgid "Size: %1$u x %2$u"
 msgstr "Méret: %1$u x %2$u"
 
-#: ../../src/ui_fsmenu/launch_mpg.cc:666
+#: ../../src/ui_fsmenu/launch_mpg.cc:644
 msgid "Scenario mode selected"
 msgstr "Küldetés mód kiválasztva"
 
-#: ../../src/ui_fsmenu/launch_spg.cc:75
+#: ../../src/ui_fsmenu/launch_spg.cc:62
 msgid "Select map"
 msgstr "Pálya kiválasztása"
 
-#: ../../src/ui_fsmenu/launch_spg.cc:96
+#: ../../src/ui_fsmenu/launch_spg.cc:87
 msgid "Launch Game"
 msgstr "Játék indítása"
 
-#: ../../src/ui_fsmenu/launch_spg.cc:104
+#: ../../src/ui_fsmenu/launch_spg.cc:93
 msgid "Player’s name"
 msgstr "Játékos neve"
 
-#: ../../src/ui_fsmenu/launch_spg.cc:109
+#: ../../src/ui_fsmenu/launch_spg.cc:98
 msgid "Player’s type"
 msgstr "Játékos típusa"
 
-#: ../../src/ui_fsmenu/launch_spg.cc:113 ../../src/wui/game_summary.cc:120
-#: ../../src/wui/multiplayersetupgroup.cc:467
+#: ../../src/ui_fsmenu/launch_spg.cc:103 ../../src/wui/game_summary.cc:102
+#: ../../src/wui/multiplayersetupgroup.cc:408
 msgid "Team"
 msgstr "Csapat"
 
-#: ../../src/ui_fsmenu/launch_spg.cc:117
+#: ../../src/ui_fsmenu/launch_spg.cc:108
 msgid "Player’s tribe"
 msgstr "Játékos törzse"
 
-#: ../../src/ui_fsmenu/launch_spg.cc:121
+#: ../../src/ui_fsmenu/launch_spg.cc:113
 msgid "Start type"
 msgstr "Játék kezdés típusa"
 
-#: ../../src/ui_fsmenu/launch_spg.cc:167
+#: ../../src/ui_fsmenu/launch_spg.cc:153
 msgid "Switch to position"
 msgstr "Váltás a pozícióra"
+
+#: ../../src/ui_fsmenu/launch_spg.cc:223 ../../src/ui_fsmenu/launch_spg.cc:270
+#, c-format
+msgid ""
+"Unable to determine valid win conditions because the map '%s' could not be "
+"loaded."
+msgstr "Nem lehet meghatározni a valós győzelmi állapotot, mert a '%s' pályát nem lehetett betölteni."
+
+#: ../../src/ui_fsmenu/launch_spg.cc:227 ../../src/ui_fsmenu/launch_spg.cc:274
+msgid "Error"
+msgstr "Hiba"
 
 #. * TRANSLATORS: %1% is a map's name.
 #: ../../src/ui_fsmenu/loadgame.cc:67
@@ -2495,164 +2496,186 @@ msgstr "Automatikus mentés: %1%"
 msgid "Autosave %1%: %2%"
 msgstr "Automatikus mentés %1%: %2%"
 
-#: ../../src/ui_fsmenu/loadgame.cc:90
+#: ../../src/ui_fsmenu/loadgame.cc:101
 msgid "Choose a replay"
 msgstr "Visszajátszás kiválasztása"
 
-#: ../../src/ui_fsmenu/loadgame.cc:90
+#: ../../src/ui_fsmenu/loadgame.cc:101
 msgid "Choose a saved game"
 msgstr "Válassz egy mentett játékot"
 
-#: ../../src/ui_fsmenu/loadgame.cc:135
-#: ../../src/wui/game_main_menu_save_game.cc:109
+#: ../../src/ui_fsmenu/loadgame.cc:152
+#: ../../src/wui/game_main_menu_save_game.cc:97
 msgid "Delete"
 msgstr "Törlés"
 
-#: ../../src/ui_fsmenu/loadgame.cc:157
+#: ../../src/ui_fsmenu/loadgame.cc:175
 msgid "The time that elapsed inside this game"
 msgstr "A játékban eltelt idő"
 
-#: ../../src/ui_fsmenu/loadgame.cc:158
+#: ../../src/ui_fsmenu/loadgame.cc:176
 msgid "The number of players"
 msgstr "A játékosok száma"
 
-#: ../../src/ui_fsmenu/loadgame.cc:159
+#: ../../src/ui_fsmenu/loadgame.cc:177
 msgid "The version of Widelands that this game was played under"
 msgstr "A Widelands verzió amin ez a játék játszva volt"
 
-#: ../../src/ui_fsmenu/loadgame.cc:160
+#: ../../src/ui_fsmenu/loadgame.cc:178
 msgid "The win condition that was set for this game"
 msgstr "A játékhoz megadott elérendő cél"
 
-#: ../../src/ui_fsmenu/loadgame.cc:164
+#: ../../src/ui_fsmenu/loadgame.cc:182
 msgid "Load this replay"
 msgstr "A kiválasztott visszajátszás betöltése"
 
-#: ../../src/ui_fsmenu/loadgame.cc:165
+#: ../../src/ui_fsmenu/loadgame.cc:183
 msgid "The map that this replay is based on"
 msgstr "A térkép, amiről a visszajátszás készült"
 
-#: ../../src/ui_fsmenu/loadgame.cc:166
+#: ../../src/ui_fsmenu/loadgame.cc:184
 msgid "Delete this replay"
 msgstr "A kiválasztott visszajátszás törlése"
 
-#: ../../src/ui_fsmenu/loadgame.cc:168 ../../src/ui_fsmenu/mapselect.cc:68
+#: ../../src/ui_fsmenu/loadgame.cc:186 ../../src/ui_fsmenu/mapselect.cc:68
 msgid "Return to the single player menu"
 msgstr "Visszatérés az egyjátékos-menübe"
 
-#: ../../src/ui_fsmenu/loadgame.cc:169
+#: ../../src/ui_fsmenu/loadgame.cc:187
 msgid "Load this game"
 msgstr "A kiválasztott játék betöltése"
 
-#: ../../src/ui_fsmenu/loadgame.cc:170
+#: ../../src/ui_fsmenu/loadgame.cc:188
 msgid "The map that this game is based on"
 msgstr "A térkép, amiről a mentés készült"
 
-#: ../../src/ui_fsmenu/loadgame.cc:171
+#: ../../src/ui_fsmenu/loadgame.cc:189
 msgid "Delete this game"
 msgstr "A kiválasztott játék törlése"
 
-#: ../../src/ui_fsmenu/loadgame.cc:180
+#: ../../src/ui_fsmenu/loadgame.cc:197
 msgid "Save Date"
 msgstr "Mentés ideje"
 
-#: ../../src/ui_fsmenu/loadgame.cc:180
+#: ../../src/ui_fsmenu/loadgame.cc:197
 msgid "The date this game was saved"
 msgstr "A játék elmentésének időpontja"
 
 #. * TRANSLATORS: Tooltip for the "Mode" column when choosing a game/replay to
 #. load.
 #. * TRANSLATORS: Make sure that you keep consistency in your translation.
-#: ../../src/ui_fsmenu/loadgame.cc:187
+#: ../../src/ui_fsmenu/loadgame.cc:203
 msgid "SP = Single Player"
 msgstr "EJ = Egyjátékos"
 
 #. * TRANSLATORS: Tooltip for the "Mode" column when choosing a game/replay to
 #. load.
 #. * TRANSLATORS: Make sure that you keep consistency in your translation.
-#: ../../src/ui_fsmenu/loadgame.cc:191
+#: ../../src/ui_fsmenu/loadgame.cc:207
 msgid "MP = Multiplayer"
 msgstr "TJ = Többjátékos"
 
 #. * TRANSLATORS: Tooltip for the "Mode" column when choosing a game/replay to
 #. load.
 #. * TRANSLATORS: Make sure that you keep consistency in your translation.
-#: ../../src/ui_fsmenu/loadgame.cc:194
+#: ../../src/ui_fsmenu/loadgame.cc:210
 msgid "H = Multiplayer (Host)"
 msgstr "G = Többjátékos (gazda)"
 
 #. * TRANSLATORS: Tooltip for the "Mode" column when choosing a game/replay to
 #. load.
 #. * TRANSLATORS: %s is a list of game modes.
-#: ../../src/ui_fsmenu/loadgame.cc:198
+#: ../../src/ui_fsmenu/loadgame.cc:214
 #, c-format
 msgid "Game Mode: %s."
-msgstr "Játékmód: %s"
+msgstr "Játékmód: %s."
 
-#: ../../src/ui_fsmenu/loadgame.cc:201
+#: ../../src/ui_fsmenu/loadgame.cc:217
 msgid "Numbers are the number of players."
 msgstr "A számok a játékosok számát jelentik."
 
 #. * TRANSLATORS: Game Mode table column when choosing a game/replay to load.
 #. * TRANSLATORS: Keep this to 5 letters maximum.
 #. * TRANSLATORS: A tooltip will explain if you need to use an abbreviation.
-#: ../../src/ui_fsmenu/loadgame.cc:207
+#: ../../src/ui_fsmenu/loadgame.cc:224
 msgid "Mode"
 msgstr "Mód"
 
-#: ../../src/ui_fsmenu/loadgame.cc:213
+#: ../../src/ui_fsmenu/loadgame.cc:227
 msgid "Description"
 msgstr "Leírás"
 
-#: ../../src/ui_fsmenu/loadgame.cc:214
+#: ../../src/ui_fsmenu/loadgame.cc:228
 msgid ""
 "The filename that the game was saved under followed by the map’s name, or "
 "the map’s name followed by the last objective achieved."
 msgstr "A fájlnév amiként a játék mentve lett, követve a térkép nevével, vagy a térkép nevével és a legutóbbi elért céllal."
 
-#: ../../src/ui_fsmenu/loadgame.cc:267
+#: ../../src/ui_fsmenu/loadgame.cc:279
+#, c-format
+msgid "Do you really want to delete this %d replay?"
+msgid_plural "Do you really want to delete these %d replays?"
+msgstr[0] ""
+msgstr[1] ""
+
+#: ../../src/ui_fsmenu/loadgame.cc:285
+#, c-format
+msgid "Do you really want to delete this %d game?"
+msgid_plural "Do you really want to delete these %d games?"
+msgstr[0] ""
+msgstr[1] ""
+
+#: ../../src/ui_fsmenu/loadgame.cc:303
 msgid "Save Date:"
 msgstr "Mentés ideje:"
 
-#: ../../src/ui_fsmenu/loadgame.cc:280
+#: ../../src/ui_fsmenu/loadgame.cc:317
 msgid "Do you really want to delete this replay?"
 msgstr "Valóban szeretnéd törölni ezt a visszajátszást?"
 
-#: ../../src/ui_fsmenu/loadgame.cc:283
+#: ../../src/ui_fsmenu/loadgame.cc:321
 msgid "Do you really want to delete this game?"
 msgstr "Valóban szeretnéd törölni ezt a játékot?"
 
-#: ../../src/ui_fsmenu/loadgame.cc:287
+#: ../../src/ui_fsmenu/loadgame.cc:327
 msgid "Confirm deleting file"
-msgstr "Fájltörlés megerősítése"
+msgid_plural "Confirm deleting files"
+msgstr[0] ""
+msgstr[1] ""
 
-#: ../../src/ui_fsmenu/loadgame.cc:322
+#. * TRANSLATORS %1% = map name, %2% = save date.
+#: ../../src/ui_fsmenu/loadgame.cc:360
+msgid "%1%, saved on %2%"
+msgstr ""
+
+#: ../../src/ui_fsmenu/loadgame.cc:391
 msgid "Gametime:"
 msgstr "Játékidő:"
 
-#: ../../src/ui_fsmenu/loadgame.cc:324
+#: ../../src/ui_fsmenu/loadgame.cc:393
 msgid "Win Condition:"
 msgstr "Játék célja:"
 
-#: ../../src/ui_fsmenu/loadgame.cc:354
+#: ../../src/ui_fsmenu/loadgame.cc:423
 msgid "Widelands Version:"
 msgstr "Widelands verzió:"
 
-#. * TRANSLATORS: Display date for choosing a savegame/replay
-#. * TRANSLATORS: hour:minute
-#: ../../src/ui_fsmenu/loadgame.cc:507
+#: ../../src/ui_fsmenu/loadgame.cc:500
+#, c-format
+msgid "Selected %d file:"
+msgid_plural "Selected %d files:"
+msgstr[0] ""
+msgstr[1] ""
+
+#: ../../src/ui_fsmenu/loadgame.cc:587
 msgid "Today, %1%:%2%"
 msgstr "Ma %1%:%2%"
 
-#. * TRANSLATORS: Display date for choosing a savegame/replay
-#. * TRANSLATORS: hour:minute
-#: ../../src/ui_fsmenu/loadgame.cc:520
+#: ../../src/ui_fsmenu/loadgame.cc:600
 msgid "Yesterday, %1%:%2%"
 msgstr "Tegnap %1%:%2%"
 
-#. * TRANSLATORS: Display date for choosing a savegame/replay
-#. * TRANSLATORS: month day, year
-#: ../../src/ui_fsmenu/loadgame.cc:526
+#: ../../src/ui_fsmenu/loadgame.cc:606
 msgid "%2% %1%, %3%"
 msgstr "%3%. %2%. %1%."
 
@@ -2661,93 +2684,81 @@ msgstr "%3%. %2%. %1%."
 #. * TRANSLATORS: A tooltip will explain the abbreviation.
 #. * TRANSLATORS: Make sure that this translation is consistent with the
 #. tooltip.
-#: ../../src/ui_fsmenu/loadgame.cc:549
+#: ../../src/ui_fsmenu/loadgame.cc:627
 msgid "SP"
 msgstr "EJ"
 
-#. * TRANSLATORS: "Multiplayer Host" entry in the Game Mode table column.
-#. * TRANSLATORS: "Keep this to 2 letters maximum.
-#. * TRANSLATORS: A tooltip will explain the abbreviation.
-#. * TRANSLATORS: Make sure that this translation is consistent with the
-#. tooltip.
-#. * TRANSLATORS: %1% is the number of players
-#: ../../src/ui_fsmenu/loadgame.cc:557
+#: ../../src/ui_fsmenu/loadgame.cc:636
 msgid "H (%1%)"
 msgstr "G (%1%)"
 
-#. * TRANSLATORS: "Multiplayer" entry in the Game Mode table column.
-#. * TRANSLATORS: "Keep this to 2 letters maximum.
-#. * TRANSLATORS: A tooltip will explain the abbreviation.
-#. * TRANSLATORS: Make sure that this translation is consistent with the
-#. tooltip.
-#. * TRANSLATORS: %1% is the number of players
-#: ../../src/ui_fsmenu/loadgame.cc:566
+#: ../../src/ui_fsmenu/loadgame.cc:646
 msgid "MP (%1%)"
 msgstr "TJ (%1%)"
 
 #. * TRANSLATORS: Error message introduction for when an old savegame can't be
 #. loaded
-#: ../../src/ui_fsmenu/loadgame.cc:583
+#: ../../src/ui_fsmenu/loadgame.cc:663
 msgid ""
 "This file has the wrong format and can’t be loaded. Maybe it was created "
 "with an older version of Widelands."
 msgstr "Nem megfelelő a fájl formátuma. Lehet, hogy a Widelands korábbi verziójával lett létrehozva."
 
 #. * TRANSLATORS: This text is on a separate line with an error message below
-#: ../../src/ui_fsmenu/loadgame.cc:586
+#: ../../src/ui_fsmenu/loadgame.cc:666
 msgid "Error message:"
 msgstr "Hibaüzenet:"
 
 #. * TRANSLATORS: Prefix for incompatible files in load game screens
-#: ../../src/ui_fsmenu/loadgame.cc:599 ../../src/ui_fsmenu/loadgame.cc:601
+#: ../../src/ui_fsmenu/loadgame.cc:679 ../../src/ui_fsmenu/loadgame.cc:681
 #, c-format
 msgid "Incompatible: %s"
 msgstr "Nem kompatibilis: %s"
 
-#: ../../src/ui_fsmenu/main.cc:37
+#: ../../src/ui_fsmenu/main.cc:39
 msgid "Play Tutorial"
 msgstr "Oktatójáték"
 
-#: ../../src/ui_fsmenu/main.cc:40 ../../src/ui_fsmenu/singleplayer.cc:33
+#: ../../src/ui_fsmenu/main.cc:47 ../../src/ui_fsmenu/singleplayer.cc:30
 msgid "Single Player"
 msgstr "Egyjátékos"
 
-#: ../../src/ui_fsmenu/main.cc:43
+#: ../../src/ui_fsmenu/main.cc:55
 msgid "Multiplayer"
 msgstr "Többjátékos"
 
-#: ../../src/ui_fsmenu/main.cc:46
+#: ../../src/ui_fsmenu/main.cc:63
 msgid "Watch Replay"
 msgstr "Visszajátszás megtekintése"
 
-#: ../../src/ui_fsmenu/main.cc:49
+#: ../../src/ui_fsmenu/main.cc:65
 msgid "Editor"
 msgstr "Térképkészítő"
 
-#: ../../src/ui_fsmenu/main.cc:52 ../../src/ui_fsmenu/options.cc:111
+#: ../../src/ui_fsmenu/main.cc:73 ../../src/ui_fsmenu/options.cc:98
 msgid "Options"
 msgstr "Beállítások"
 
-#: ../../src/ui_fsmenu/main.cc:58
+#: ../../src/ui_fsmenu/main.cc:89
 msgid "Exit Widelands"
 msgstr "Kilépés a Widelandsből"
 
 #. * TRANSLATORS: %1$s = version string, %2%s = "Debug" or "Release"
-#: ../../src/ui_fsmenu/main.cc:64
+#: ../../src/ui_fsmenu/main.cc:97
 #, c-format
 msgid "Version %1$s (%2$s)"
 msgstr "Verzió: %1$s (%2$s)"
 
 #. * TRANSLATORS: Placeholders are the copyright years
-#: ../../src/ui_fsmenu/main.cc:69
+#: ../../src/ui_fsmenu/main.cc:103
 msgid "(C) %1%-%2% by the Widelands Development Team"
 msgstr "(C) %1%-%2%, Widelands fejlesztőcsapat"
 
-#: ../../src/ui_fsmenu/main.cc:74
+#: ../../src/ui_fsmenu/main.cc:107
 msgid "Licensed under the GNU General Public License V2.0"
 msgstr "Licenc: GNU General Public License V2.0"
 
-#: ../../src/ui_fsmenu/mapselect.cc:50
+#: ../../src/ui_fsmenu/mapselect.cc:49
 msgid "Choose a map"
 msgstr "Térkép kiválasztása"
 
@@ -2755,11 +2766,11 @@ msgstr "Térkép kiválasztása"
 msgid "Return to the multiplayer game setup"
 msgstr "Visszatérés a többjátékos játék beállításaiba"
 
-#: ../../src/ui_fsmenu/mapselect.cc:88
+#: ../../src/ui_fsmenu/mapselect.cc:91
 msgid "Show all maps"
 msgstr "Minden térkép megjelenítése"
 
-#: ../../src/ui_fsmenu/multiplayer.cc:36
+#: ../../src/ui_fsmenu/multiplayer.cc:33
 msgid "Choose game type"
 msgstr "Válaszd ki a játék típusát"
 
@@ -2767,184 +2778,183 @@ msgstr "Válaszd ki a játék típusát"
 msgid "Internet game"
 msgstr "Internetes játék"
 
-#: ../../src/ui_fsmenu/multiplayer.cc:46
+#: ../../src/ui_fsmenu/multiplayer.cc:52
 msgid "LAN / Direct IP"
 msgstr "LAN / direkt IP"
 
-#: ../../src/ui_fsmenu/multiplayer.cc:86
+#: ../../src/ui_fsmenu/multiplayer.cc:77
 msgid "Show login dialog"
 msgstr "Bejelentkezőablak megjelenítése"
 
-#: ../../src/ui_fsmenu/multiplayer.cc:116
-#: ../../src/ui_fsmenu/netsetup_lan.cc:111 ../../src/wui/login_box.cc:78
+#: ../../src/ui_fsmenu/multiplayer.cc:105
+#: ../../src/ui_fsmenu/netsetup_lan.cc:114 ../../src/wui/login_box.cc:66
 msgid "nobody"
 msgstr "névtelen"
 
-#: ../../src/ui_fsmenu/netsetup_lan.cc:43
+#: ../../src/ui_fsmenu/netsetup_lan.cc:40
 msgid "Begin Network Game"
 msgstr "Hálózati játék indítása"
 
-#: ../../src/ui_fsmenu/netsetup_lan.cc:47
+#: ../../src/ui_fsmenu/netsetup_lan.cc:42
 msgid "List of games in your local network:"
 msgstr "Játékok listája a helyi hálózaton:"
 
-#: ../../src/ui_fsmenu/netsetup_lan.cc:51
+#: ../../src/ui_fsmenu/netsetup_lan.cc:43
 msgid "Your nickname:"
 msgstr "Saját becenév:"
 
-#: ../../src/ui_fsmenu/netsetup_lan.cc:55
+#: ../../src/ui_fsmenu/netsetup_lan.cc:44
 msgid "Host to connect:"
 msgstr "Kapcsolat gépneve:"
 
-#: ../../src/ui_fsmenu/netsetup_lan.cc:67
+#: ../../src/ui_fsmenu/netsetup_lan.cc:62
 msgid "Host a new game"
 msgstr "Új játék készítése"
 
-#: ../../src/ui_fsmenu/netsetup_lan.cc:78
+#: ../../src/ui_fsmenu/netsetup_lan.cc:79
 msgid "Load previous host"
 msgstr "Előző gazda betöltése"
 
-#: ../../src/ui_fsmenu/netsetup_lan.cc:114
+#: ../../src/ui_fsmenu/netsetup_lan.cc:116
 msgid "Host"
 msgstr "Szerver"
 
-#: ../../src/ui_fsmenu/netsetup_lan.cc:116
+#: ../../src/ui_fsmenu/netsetup_lan.cc:118
 msgid "State"
 msgstr "Állapot"
 
-#: ../../src/ui_fsmenu/netsetup_lan.cc:192
-#: ../../src/wui/multiplayersetupgroup.cc:285
-#: ../../src/wui/playerdescrgroup.cc:154
+#: ../../src/ui_fsmenu/netsetup_lan.cc:193
+#: ../../src/wui/multiplayersetupgroup.cc:242
+#: ../../src/wui/playerdescrgroup.cc:136
 msgid "Open"
 msgstr "Szabad"
 
-#: ../../src/ui_fsmenu/netsetup_lan.cc:193
-#: ../../src/wui/multiplayersetupgroup.cc:274
+#: ../../src/ui_fsmenu/netsetup_lan.cc:196
+#: ../../src/wui/multiplayersetupgroup.cc:231
 msgid "Closed"
 msgstr "Zárt"
 
-#. * TRANSLATORS: The state of a LAN game can be open, closed or unknown
-#: ../../src/ui_fsmenu/netsetup_lan.cc:195
+#: ../../src/ui_fsmenu/netsetup_lan.cc:200
 msgctxt "game_state"
 msgid "Unknown"
 msgstr "Ismeretlen"
 
-#: ../../src/ui_fsmenu/options.cc:127
+#: ../../src/ui_fsmenu/options.cc:117
 msgid "Apply"
 msgstr "Alkalmaz"
 
-#: ../../src/ui_fsmenu/options.cc:149
+#: ../../src/ui_fsmenu/options.cc:141
+msgid "Language"
+msgstr "Nyelv"
+
+#: ../../src/ui_fsmenu/options.cc:147
 msgid "In-game resolution"
 msgstr "Képernyőfelbontás a játékban"
 
-#: ../../src/ui_fsmenu/options.cc:152
+#: ../../src/ui_fsmenu/options.cc:149
 msgid "Fullscreen"
 msgstr "Teljes képernyő"
 
-#: ../../src/ui_fsmenu/options.cc:153
+#: ../../src/ui_fsmenu/options.cc:150
 msgid "Grab Input"
 msgstr "Egér kisajátítása"
 
-#: ../../src/ui_fsmenu/options.cc:157
+#: ../../src/ui_fsmenu/options.cc:152
 msgid "Maximum FPS:"
 msgstr "Maximum FPS:"
 
-#: ../../src/ui_fsmenu/options.cc:161
+#: ../../src/ui_fsmenu/options.cc:156
 msgid "Snap windows only when overlapping"
 msgstr "Az ablakok csak átfedés esetén vonzzák egymást"
 
-#: ../../src/ui_fsmenu/options.cc:163
+#: ../../src/ui_fsmenu/options.cc:157
 msgid "Dock windows to edges"
 msgstr "Ablakok igazítása a sarkokhoz"
 
-#: ../../src/ui_fsmenu/options.cc:168
+#: ../../src/ui_fsmenu/options.cc:167
 msgid "Distance for windows to snap to other panels:"
 msgstr "Ablakok összeillesztése, ha ennél közelebb kerülnek egymáshoz:"
 
-#: ../../src/ui_fsmenu/options.cc:174
+#: ../../src/ui_fsmenu/options.cc:178
 msgid "Distance for windows to snap to borders:"
 msgstr "Ablak szélhez illesztése, ha ennél közelebb kerül hozzá:"
 
-#: ../../src/ui_fsmenu/options.cc:178
-#: ../../src/wui/game_options_sound_menu.cc:30
+#: ../../src/ui_fsmenu/options.cc:182
+#: ../../src/wui/game_options_sound_menu.cc:28
 msgid "Enable Music"
 msgstr "Zene engedélyezése"
 
-#: ../../src/ui_fsmenu/options.cc:179
+#: ../../src/ui_fsmenu/options.cc:183
 #: ../../src/wui/game_options_sound_menu.cc:31
 msgid "Enable Sound Effects"
 msgstr "Hanghatások engedélyezése"
 
-#: ../../src/ui_fsmenu/options.cc:180
+#: ../../src/ui_fsmenu/options.cc:184
 msgid "Play a sound at message arrival"
 msgstr "Hangjelzés üzenet érkezésekor"
 
-#: ../../src/ui_fsmenu/options.cc:186
+#: ../../src/ui_fsmenu/options.cc:195
 msgid "Save game automatically every:"
 msgstr "Automatikus mentés ennyi időnként:"
 
-#: ../../src/ui_fsmenu/options.cc:192
+#: ../../src/ui_fsmenu/options.cc:208
 msgid "Maximum number of autosave files:"
 msgstr "Automatikus mentés fájlok legnagyobb száma:"
 
-#: ../../src/ui_fsmenu/options.cc:196
+#: ../../src/ui_fsmenu/options.cc:215
 msgid "Compress widelands data files (maps, replays and savegames)"
 msgstr "Widelands adatfájlok tömörítése (térképek, visszajátszások és mentett játékok)"
 
-#: ../../src/ui_fsmenu/options.cc:198
+#: ../../src/ui_fsmenu/options.cc:220
 msgid "Write syncstreams in network games to debug desyncs"
 msgstr "Syncstreamek írása a halózati játékokban a deszinkronizációk hibakövetéséhez"
 
-#: ../../src/ui_fsmenu/options.cc:202
+#: ../../src/ui_fsmenu/options.cc:226
 msgid "Start building road after placing a flag"
 msgstr "Útépítés megkezdése zászló elhelyezése után"
 
-#: ../../src/ui_fsmenu/options.cc:203
+#: ../../src/ui_fsmenu/options.cc:227
 msgid "Show buildings area preview"
 msgstr "Mutassa az építési terület nézetét"
 
-#: ../../src/ui_fsmenu/options.cc:204
+#: ../../src/ui_fsmenu/options.cc:229
 msgid "Show in-game chat with transparent background"
 msgstr "Játék közbeni csevegés átlátszó háttérrel mutatása"
 
 #. * TRANSLATORS: A watchwindow is a window where you keep watching an object
 #. or a map region,
 #. * TRANSLATORS: and it also lets you jump to it on the map.
-#: ../../src/ui_fsmenu/options.cc:209
+#: ../../src/ui_fsmenu/options.cc:233
 msgid "Use single watchwindow mode"
 msgstr "Egy figyelőablakos mód"
 
-#: ../../src/ui_fsmenu/options.cc:212 ../../src/ui_fsmenu/options.cc:227
-msgid "Language"
-msgstr "Nyelv"
-
-#: ../../src/ui_fsmenu/options.cc:222
+#: ../../src/ui_fsmenu/options.cc:246
 msgid "Interface"
 msgstr "Felület"
 
-#: ../../src/ui_fsmenu/options.cc:223
+#: ../../src/ui_fsmenu/options.cc:247
 msgid "Windows"
 msgstr "Ablakok"
 
-#: ../../src/ui_fsmenu/options.cc:224
+#: ../../src/ui_fsmenu/options.cc:248
 msgid "Sound"
 msgstr "Hang"
 
-#: ../../src/ui_fsmenu/options.cc:225
+#: ../../src/ui_fsmenu/options.cc:249
 msgid "Saving"
 msgstr "Mentés"
 
 #. * TRANSLATORS Options: Save game automatically every:
-#: ../../src/ui_fsmenu/options.cc:284
+#: ../../src/ui_fsmenu/options.cc:299
 msgid "Off"
 msgstr "Kikapcsolva"
 
 #. * TRANSLATORS: Screen resolution, e.g. 800 x 600
-#: ../../src/ui_fsmenu/options.cc:312 ../../src/ui_fsmenu/options.cc:318
+#: ../../src/ui_fsmenu/options.cc:325 ../../src/ui_fsmenu/options.cc:334
 msgid "%1% x %2%"
 msgstr "%1% x %2%"
 
-#: ../../src/ui_fsmenu/options.cc:361
+#: ../../src/ui_fsmenu/options.cc:431
 msgid "Try system language"
 msgstr "Az operációs rendszer nyelve"
 
@@ -2952,75 +2962,78 @@ msgstr "Az operációs rendszer nyelve"
 msgid "New Game"
 msgstr "Új játék"
 
-#: ../../src/ui_fsmenu/singleplayer.cc:43
+#: ../../src/ui_fsmenu/singleplayer.cc:48
 msgid "Campaigns"
 msgstr "Hadjáratok"
 
-#: ../../src/ui_fsmenu/singleplayer.cc:46
+#: ../../src/ui_fsmenu/singleplayer.cc:56
 msgid "Load Game"
 msgstr "Játék betöltése"
 
-#: ../../src/wlapplication.cc:1043
+#: ../../src/wlapplication.cc:1032
 msgid "Game data error"
 msgstr "Játékadat hiba"
 
-#: ../../src/wlapplication.cc:1053
+#: ../../src/wlapplication.cc:1040
 #, c-format
 msgid ""
-"\n"
-"\n"
-"Please report this problem to help us improve Widelands. You will find related messages in the standard output (stdout.txt on Windows). You are using build %1$s (%2$s). "
-msgstr "\n\nKérlek jelentsd be ezt a hibát, hogy ezzel segítsd a Widelands fejlesztését. A hibával kapcsolatos üzeneteket megtalálod a sztenderd kimeneten (stdout.txt Windowson). Te ezt a verziót használod: %1$s (%2$s). "
+"Please report this problem to help us improve Widelands. You will find "
+"related messages in the standard output (stdout.txt on Windows). You are "
+"using build %1$s (%2$s)."
+msgstr "Kérlek jelentsd be ezt a hibát, hogy ezzel segítsd a Widelands fejlesztését. A hibával kapcsolatos üzeneteket megtalálod a sztenderd kimeneten (stdout.txt Windowson). Te ezt a verziót használod: %1$s (%2$s). "
 
-#: ../../src/wlapplication.cc:1060
+#: ../../src/wlapplication.cc:1047
 msgid ""
 "Please add this information to your report.\n"
 "\n"
-"Widelands attempts to create a savegame when errors occur during the game. It is often – though not always – possible to load it and continue playing.\n"
-msgstr "Kérlek add hozzá ezt is a bejelentéshez.\n\nA Widelands megpróbálja lementeni a játékot mikor hiba történik. Gyakran – de nem mindig – be lehet tölteni ezt a mentést és folytatni játékot.\n"
+"Widelands attempts to create a savegame when errors occur during the game. It is often – though not always – possible to load it and continue playing."
+msgstr "Kérlek add hozzá ezt is a bejelentéshez.\n\nA Widelands megpróbálja lementeni a játékot mikor hiba történik. Gyakran – de nem mindig – be lehet tölteni ezt a mentést és folytatni játékot."
 
-#: ../../src/wui/actionconfirm.cc:177
+#: ../../src/wui/actionconfirm.cc:176
 msgid "Destroy building?"
 msgstr "Megsemmisíted az épületet?"
 
-#: ../../src/wui/actionconfirm.cc:178
-#, c-format
-msgid "Do you really want to destroy this %s?"
-msgstr "Tényleg el akarod pusztítani ezt: %s?"
+#: ../../src/wui/actionconfirm.cc:177
+msgid "Do you really want to destroy this building?"
+msgstr "Tényleg el akarod pusztítani ezt az épületet?"
 
-#: ../../src/wui/actionconfirm.cc:241
+#: ../../src/wui/actionconfirm.cc:221
 msgid "Dismantle building?"
 msgstr "Lebontod az épületet?"
 
-#: ../../src/wui/actionconfirm.cc:242
-#, c-format
-msgid "Do you really want to dismantle this %s?"
-msgstr "Tényleg le akarod bontani ezt: %s?"
+#: ../../src/wui/actionconfirm.cc:222
+msgid "Do you really want to dismantle this building?"
+msgstr "Tényleg le akarod bontani ezt az épületet?"
 
-#: ../../src/wui/actionconfirm.cc:301
+#: ../../src/wui/actionconfirm.cc:267
 msgid "Enhance building?"
 msgstr "Fejleszted az épületet?"
 
-#: ../../src/wui/actionconfirm.cc:302
-#, c-format
-msgid "Do you really want to enhance this %s?"
-msgstr "Tényleg fejleszteni akarod ezt: %s?"
+#: ../../src/wui/actionconfirm.cc:269 ../../src/wui/actionconfirm.cc:273
+msgid "Do you really want to enhance this building?"
+msgstr "Tényleg fejleszteni akarod ezt az épületet?"
 
-#: ../../src/wui/actionconfirm.cc:354
+#. * TRANSLATORS: Warning message when player wants to enhance a military
+#. building
+#: ../../src/wui/actionconfirm.cc:271
+msgid "Be careful if the enemy is near!"
+msgstr "Légy óvatos, az ellenség közel jár!"
+
+#: ../../src/wui/actionconfirm.cc:313
 msgid "Sink the ship?"
 msgstr "Elsüllyeszted a hajód?"
 
 #. * TRANSLATORS: %s is a ship name
-#: ../../src/wui/actionconfirm.cc:356
+#: ../../src/wui/actionconfirm.cc:315
 #, c-format
 msgid "Do you really want to sink %s?"
 msgstr "Tényleg el akarod süllyeszteni ezt: %s?"
 
-#: ../../src/wui/actionconfirm.cc:398
+#: ../../src/wui/actionconfirm.cc:351
 msgid "Cancel expedition?"
 msgstr "Lefújod az expedíciót?"
 
-#: ../../src/wui/actionconfirm.cc:399
+#: ../../src/wui/actionconfirm.cc:352
 msgid "Do you really want to cancel the active expedition?"
 msgstr "Tényleg le akarod fújni az aktív expedíciót?"
 
@@ -3036,18 +3049,18 @@ msgstr "Katonák:"
 msgid "Send less soldiers"
 msgstr "Kevesebb katona küldése"
 
-#: ../../src/wui/attack_box.cc:155
+#: ../../src/wui/attack_box.cc:150
 msgid "Number of soldiers"
 msgstr "Katonák száma"
 
-#: ../../src/wui/attack_box.cc:161
+#: ../../src/wui/attack_box.cc:154
 msgid "Send more soldiers"
 msgstr "Több katona küldése"
 
 #: ../../src/wui/building_statistics_menu.cc:67
-#: ../../src/wui/game_main_menu.cc:59
+#: ../../src/wui/game_statistics_menu.cc:44
 msgid "Building Statistics"
-msgstr "Építési statisztika"
+msgstr "Épületstatisztika"
 
 #: ../../src/wui/building_statistics_menu.cc:77
 msgid "Owned:"
@@ -3060,265 +3073,275 @@ msgstr "Építés alatt:"
 #. * TRANSLATORS: This is the first part of productivity with input field
 #. * TRANSLATORS: Building statistics window - 'Low Productivity <input>%:'
 #: ../../src/wui/building_statistics_menu.cc:91
-#: ../../src/wui/building_statistics_menu.cc:696
-msgid "Low Productivity "
+#: ../../src/wui/building_statistics_menu.cc:638
+msgid "Low Productivity"
 msgstr "Alacsony termelékenység"
 
 #. * TRANSLATORS: This is the second part of productivity with input field
 #. * TRANSLATORS: Building statistics window -  'Low Productivity <input>%:'
-#: ../../src/wui/building_statistics_menu.cc:100
+#: ../../src/wui/building_statistics_menu.cc:106
 msgid "%:"
 msgstr "%:"
 
-#: ../../src/wui/building_statistics_menu.cc:134
+#: ../../src/wui/building_statistics_menu.cc:139
 msgid "Small Buildings"
 msgstr "Kis épületek"
 
-#: ../../src/wui/building_statistics_menu.cc:138
+#: ../../src/wui/building_statistics_menu.cc:142
 msgid "Medium Buildings"
 msgstr "Közepes épületek"
 
-#: ../../src/wui/building_statistics_menu.cc:142
+#: ../../src/wui/building_statistics_menu.cc:145
 msgid "Big Buildings"
 msgstr "Nagy épületek"
 
-#: ../../src/wui/building_statistics_menu.cc:146
+#: ../../src/wui/building_statistics_menu.cc:148
 msgid "Mines"
 msgstr "Bányák"
 
-#: ../../src/wui/building_statistics_menu.cc:153
+#: ../../src/wui/building_statistics_menu.cc:154
 msgid "Ports"
 msgstr "Kikötők"
 
-#: ../../src/wui/building_statistics_menu.cc:286
-#: ../../src/wui/building_statistics_menu.cc:310
-#: ../../src/wui/building_statistics_menu.cc:334
+#: ../../src/wui/building_statistics_menu.cc:267
+#: ../../src/wui/building_statistics_menu.cc:278
+#: ../../src/wui/building_statistics_menu.cc:290
 msgid "Show previous building"
 msgstr "Előző épület megjelenítése"
 
-#: ../../src/wui/building_statistics_menu.cc:298
-#: ../../src/wui/building_statistics_menu.cc:322
-#: ../../src/wui/building_statistics_menu.cc:346
+#: ../../src/wui/building_statistics_menu.cc:272
+#: ../../src/wui/building_statistics_menu.cc:284
+#: ../../src/wui/building_statistics_menu.cc:296
 msgid "Show next building"
 msgstr "Következő épület megjelenítése"
 
 #. * TRANSLATORS Buildings: owned / under construction
 #. * TRANSLATORS: %1% = the experience a worker has
 #. * TRANSLATORS: %2% = the experience a worker needs to reach the next level
-#: ../../src/wui/building_statistics_menu.cc:713
-#: ../../src/wui/building_statistics_menu.cc:737
-#: ../../src/wui/building_statistics_menu.cc:739
-#: ../../src/wui/productionsitewindow.cc:179
+#: ../../src/wui/building_statistics_menu.cc:656
+#: ../../src/wui/building_statistics_menu.cc:680
+#: ../../src/wui/building_statistics_menu.cc:682
+#: ../../src/wui/productionsitewindow.cc:153
 msgid "%1%/%2%"
 msgstr "%1%/%2%"
 
 #. * TRANSLATORS Label for number of buildings that are waiting for soldiers
-#: ../../src/wui/building_statistics_menu.cc:727
+#: ../../src/wui/building_statistics_menu.cc:670
 msgid "Lacking Soldiers:"
 msgstr "Hiányzó katonák:"
 
 #. * TRANSLATORS: Stop/Continue toggle button for production sites.
-#: ../../src/wui/buildingwindow.cc:211
+#: ../../src/wui/buildingwindow.cc:209
 msgid "Continue"
 msgstr "Folytatás"
 
 #. * TRANSLATORS: Stop/Continue toggle button for production sites.
-#: ../../src/wui/buildingwindow.cc:213
+#: ../../src/wui/buildingwindow.cc:211
 msgid "Stop"
 msgstr "Leállítás"
 
-#: ../../src/wui/buildingwindow.cc:237
+#: ../../src/wui/buildingwindow.cc:232
 #, c-format
 msgid "Enhance to %s"
 msgstr "Továbbfejlesztés: %s"
 
-#: ../../src/wui/buildingwindow.cc:239 ../../src/wui/fieldaction.cc:106
+#: ../../src/wui/buildingwindow.cc:233 ../../src/wui/fieldaction.cc:99
 msgid "Construction costs:"
 msgstr "Az építés költsége:"
 
-#: ../../src/wui/buildingwindow.cc:264
+#: ../../src/wui/buildingwindow.cc:250
 msgid "Destroy"
 msgstr "Megsemmisítés"
 
-#: ../../src/wui/buildingwindow.cc:282
+#: ../../src/wui/buildingwindow.cc:265
 msgid "Dismantle"
 msgstr "Lebontás"
 
-#: ../../src/wui/buildingwindow.cc:282
+#: ../../src/wui/buildingwindow.cc:265
 msgid "Returns:"
 msgstr "Visszajár:"
 
-#: ../../src/wui/buildingwindow.cc:312 ../../src/wui/buildingwindow.cc:504
+#: ../../src/wui/buildingwindow.cc:293 ../../src/wui/buildingwindow.cc:458
 msgid "Hide work area"
 msgstr "Munkaterület elrejtése"
 
-#: ../../src/wui/buildingwindow.cc:327 ../../src/wui/fieldaction.cc:446
-#: ../../src/wui/shipwindow.cc:206
+#: ../../src/wui/buildingwindow.cc:305 ../../src/wui/fieldaction.cc:371
+#: ../../src/wui/shipwindow.cc:166
 msgid "Show Debug Window"
 msgstr "Hibakereső ablak megjelenítése"
 
-#: ../../src/wui/buildingwindow.cc:338
+#: ../../src/wui/buildingwindow.cc:312
 msgid "Center view on this"
 msgstr "Látómező közepébe helyezés"
 
-#: ../../src/wui/buildingwindow.cc:507
+#: ../../src/wui/buildingwindow.cc:461
 msgid "Show work area"
 msgstr "Munkaterület megjelenítése"
 
-#: ../../src/wui/buildingwindow.cc:544
+#: ../../src/wui/buildingwindow.cc:494
 msgid "Start an expedition"
 msgstr "Expedíció indítása"
 
-#: ../../src/wui/buildingwindow.cc:548
+#: ../../src/wui/buildingwindow.cc:498
 msgid "Cancel the expedition"
 msgstr "Expedíció lefújása"
 
-#: ../../src/wui/constructionsitewindow.cc:75
-#: ../../src/wui/dismantlesitewindow.cc:69
+#: ../../src/wui/constructionsitewindow.cc:55
+#: ../../src/wui/dismantlesitewindow.cc:52
 msgid "Building materials"
 msgstr "Építőanayag"
 
-#: ../../src/wui/fieldaction.cc:239
-msgid "Build small building"
-msgstr "Kis épület építése"
+#: ../../src/wui/economy_options_window.cc:38
+msgid "Economy options"
+msgstr "Gazdaság beállításai"
 
-#: ../../src/wui/fieldaction.cc:240
-msgid "Build medium building"
-msgstr "Közepes épület építése"
+#: ../../src/wui/economy_options_window.cc:48
+#: ../../src/wui/general_statistics_menu.cc:150
+#: ../../src/wui/productionsitewindow.cc:75
+#: ../../src/wui/warehousewindow.cc:188
+msgid "Wares"
+msgstr "Termékek"
 
-#: ../../src/wui/fieldaction.cc:241
+#: ../../src/wui/economy_options_window.cc:49
+#: ../../src/wui/general_statistics_menu.cc:141
+#: ../../src/wui/warehousewindow.cc:192
+msgid "Workers"
+msgstr "Munkások"
+
+#: ../../src/wui/economy_options_window.cc:142
+msgid "Decrease target"
+msgstr "Cél csökkentése"
+
+#: ../../src/wui/economy_options_window.cc:150
+msgid "Increase target"
+msgstr "Cél növelése"
+
+#: ../../src/wui/economy_options_window.cc:158
+msgid "Reset to default"
+msgstr "Visszaállítás az alapértelmezésre"
+
+#: ../../src/wui/fieldaction.cc:219
 msgid "Build large building"
 msgstr "Nagy épület építése"
 
-#: ../../src/wui/fieldaction.cc:242
+#: ../../src/wui/fieldaction.cc:219
+msgid "Build medium building"
+msgstr "Közepes épület építése"
+
+#: ../../src/wui/fieldaction.cc:219
+msgid "Build small building"
+msgstr "Kis épület építése"
+
+#: ../../src/wui/fieldaction.cc:220
 msgid "Build port building"
 msgstr "Kikötő építése"
 
-#: ../../src/wui/fieldaction.cc:274
+#: ../../src/wui/fieldaction.cc:247
 msgid "Action"
 msgstr "Műveletek"
 
-#: ../../src/wui/fieldaction.cc:359 ../../src/wui/fieldaction.cc:450
+#: ../../src/wui/fieldaction.cc:318 ../../src/wui/fieldaction.cc:375
 msgid "Build road"
 msgstr "Út építése"
 
-#: ../../src/wui/fieldaction.cc:371
+#: ../../src/wui/fieldaction.cc:324
 msgid "Destroy this flag"
 msgstr "Zászló megsemmisítése"
 
-#: ../../src/wui/fieldaction.cc:379
+#: ../../src/wui/fieldaction.cc:329
 msgid "Configure economy"
 msgstr "Gazdaság beállítása"
 
-#: ../../src/wui/fieldaction.cc:385
+#: ../../src/wui/fieldaction.cc:332
 msgid "Send geologist to explore site"
 msgstr "Geológus küldése a terület felderítésére"
 
-#: ../../src/wui/fieldaction.cc:403
+#: ../../src/wui/fieldaction.cc:347
 msgid "Place a flag"
 msgstr "Zászló elhelyezése"
 
-#: ../../src/wui/fieldaction.cc:410
+#: ../../src/wui/fieldaction.cc:351
 msgid "Destroy a road"
 msgstr "Út megsemmisítése"
 
-#: ../../src/wui/fieldaction.cc:428
+#: ../../src/wui/fieldaction.cc:362
 msgid "Watch field in a separate window"
 msgstr "Terület figyelése külön ablakban"
 
-#: ../../src/wui/fieldaction.cc:433
+#: ../../src/wui/fieldaction.cc:364
 msgid "Toggle building statistics display"
-msgstr "Épület statisztika megjelenítése"
+msgstr "Épületstatisztika megjelenítése"
 
-#: ../../src/wui/fieldaction.cc:439
+#: ../../src/wui/fieldaction.cc:367
 msgid "Toggle building label display"
 msgstr "Épület nevek megjelenítése"
 
-#: ../../src/wui/fieldaction.cc:452 ../../src/wui/watchwindow.cc:99
+#: ../../src/wui/fieldaction.cc:377 ../../src/wui/watchwindow.cc:98
 msgid "Watch"
 msgstr "Nézőke"
 
-#: ../../src/wui/fieldaction.cc:476
+#: ../../src/wui/fieldaction.cc:389
 msgid "Start attack"
 msgstr "Támadás indítása"
 
-#: ../../src/wui/fieldaction.cc:481
+#: ../../src/wui/fieldaction.cc:394
 msgid "Attack"
 msgstr "Támadás"
 
-#: ../../src/wui/fieldaction.cc:562
+#: ../../src/wui/fieldaction.cc:472
 msgid "Build mines"
 msgstr "Bánya építése"
 
-#: ../../src/wui/fieldaction.cc:578
+#: ../../src/wui/fieldaction.cc:485
 msgid "Build flag"
 msgstr "Szászló létrehozása"
 
-#: ../../src/wui/fieldaction.cc:582
+#: ../../src/wui/fieldaction.cc:488
 msgid "Cancel road"
 msgstr "Mégsem kell ide út"
 
-#: ../../src/wui/fieldaction.cc:585
+#: ../../src/wui/fieldaction.cc:491
 msgid "Build roads"
 msgstr "Út építése"
 
-#: ../../src/wui/game_chat_menu.cc:57 ../../src/wui/interactive_player.cc:89
-#: ../../src/wui/interactive_spectator.cc:53
+#: ../../src/wui/game_chat_menu.cc:52 ../../src/wui/interactive_player.cc:93
+#: ../../src/wui/interactive_spectator.cc:86
 msgid "Chat"
 msgstr "Csevegés"
 
-#: ../../src/wui/game_chat_menu.cc:65
+#: ../../src/wui/game_chat_menu.cc:58
 msgid "Script console"
 msgstr "Parancsértelmező"
 
 #. * TRANSLATORS: Title for a window that shows debug information for a field
 #. on the map
-#: ../../src/wui/game_debug_ui.cc:236
+#: ../../src/wui/game_debug_ui.cc:211
 msgid "Debug Field"
 msgstr "Hibakereső ablak"
 
-#: ../../src/wui/game_main_menu.cc:39
-msgid "Statistics Menu"
-msgstr "Statisztikák menü"
-
-#: ../../src/wui/game_main_menu.cc:47
-#: ../../src/wui/general_statistics_menu.cc:67
-msgid "General Statistics"
-msgstr "Általános statisztika"
-
-#: ../../src/wui/game_main_menu.cc:53
-#: ../../src/wui/ware_statistics_menu.cc:142
-msgid "Ware Statistics"
-msgstr "Termék statisztika"
-
-#: ../../src/wui/game_main_menu.cc:65 ../../src/wui/stock_menu.cc:40
-#: ../../src/wui/ware_statistics_menu.cc:205 ../../src/wui/waresdisplay.cc:72
-msgid "Stock"
-msgstr "Készletek"
-
 #. * TRANSLATORS: Button tooltip
-#: ../../src/wui/game_main_menu_save_game.cc:64
-#: ../../src/wui/game_options_menu.cc:86
+#: ../../src/wui/game_main_menu_save_game.cc:61
+#: ../../src/wui/game_options_menu.cc:89
 #: ../../src/wui/interactive_spectator.cc:57
 msgid "Save Game"
 msgstr "Játék mentése"
 
-#: ../../src/wui/game_main_menu_save_game.cc:72
+#: ../../src/wui/game_main_menu_save_game.cc:77
 msgid "Game Time:"
 msgstr "Játékidő:"
 
-#: ../../src/wui/game_main_menu_save_game.cc:78
+#: ../../src/wui/game_main_menu_save_game.cc:80
 msgid "Win condition:"
 msgstr "Játék célja:"
 
-#: ../../src/wui/game_main_menu_save_game.cc:135
+#: ../../src/wui/game_main_menu_save_game.cc:123
 #, c-format
 msgid "%i player"
 msgid_plural "%i players"
 msgstr[0] "%i játékos"
 msgstr[1] "%i játékos"
 
-#: ../../src/wui/game_main_menu_save_game.cc:243
+#: ../../src/wui/game_main_menu_save_game.cc:223
 msgid ""
 "Game Saving Error!\n"
 "Saved game file may be corrupt!\n"
@@ -3326,132 +3349,175 @@ msgid ""
 "Reason given:\n"
 msgstr "Játék mentése közben hiba történt!\nAz elmentett játékfájl lehet hogy sérült!\n\nIndoklás:\n"
 
-#: ../../src/wui/game_main_menu_save_game.cc:247
-#: ../../src/wui/game_main_menu_save_game.cc:259
+#: ../../src/wui/game_main_menu_save_game.cc:226
+#: ../../src/wui/game_main_menu_save_game.cc:235
 msgid "Save Game Error!"
 msgstr "Játék mentési hiba!"
 
-#: ../../src/wui/game_main_menu_save_game.cc:322
+#: ../../src/wui/game_main_menu_save_game.cc:288
 msgid "File deletion"
 msgstr "Fájltörlés"
 
-#: ../../src/wui/game_main_menu_save_game.cc:324
+#: ../../src/wui/game_main_menu_save_game.cc:289
 #, c-format
 msgid "Do you really want to delete the file %s?"
 msgstr "Tényleg szeretnéd törölni a következő fájlt: %s?"
 
-#: ../../src/wui/game_message_menu.cc:54
-#: ../../src/wui/game_message_menu.cc:636
+#: ../../src/wui/game_message_menu.cc:51
+#: ../../src/wui/game_message_menu.cc:589
 msgid "Messages: Inbox"
 msgstr "Üzenetek: bejövő"
 
-#: ../../src/wui/game_message_menu.cc:73
+#: ../../src/wui/game_message_menu.cc:68
 msgid "Title"
 msgstr "Cím"
 
-#: ../../src/wui/game_message_menu.cc:74
+#: ../../src/wui/game_message_menu.cc:69
 msgctxt "message"
 msgid "Type"
 msgstr "Típus"
 
-#: ../../src/wui/game_message_menu.cc:75 ../../src/wui/game_summary.cc:121
+#: ../../src/wui/game_message_menu.cc:70 ../../src/wui/game_summary.cc:103
 msgid "Status"
 msgstr "Állapot"
 
 #. * TRANSLATORS: We have very little space here. You can also translate this
-#. as "Time" or "Time Sent"
+#. as "Time" or "Time
+#. * Sent"
 #. * TRANSLATORS: This is used in the game messages menu - please open an
-#. issue if you need more space.
-#: ../../src/wui/game_message_menu.cc:78
+#. issue if you need more
+#. * space.
+#: ../../src/wui/game_message_menu.cc:75
 msgctxt "message"
 msgid "Sent"
 msgstr "Küldve"
 
-#. * TRANSLATORS: %s is a tooltip, Del is the corresponding hotkey
-#: ../../src/wui/game_message_menu.cc:148
-#: ../../src/wui/game_message_menu.cc:628
-#: ../../src/wui/game_message_menu.cc:639
-#, c-format
-msgid "Del: %s"
-msgstr "Del: %s"
-
-#. * TRANSLATORS: Tooltip in the messages window
-#: ../../src/wui/game_message_menu.cc:150
-#: ../../src/wui/game_message_menu.cc:641
-msgid "Archive selected message"
-msgstr "Kijelölt üzenet archiválása"
-
-#: ../../src/wui/game_message_menu.cc:163
-#: ../../src/wui/game_message_menu.cc:643
+#: ../../src/wui/game_message_menu.cc:129
+#: ../../src/wui/game_message_menu.cc:592
 msgid "Show Archive"
 msgstr "Archívum"
 
 #. * TRANSLATORS: %s is a tooltip, G is the corresponding hotkey
-#: ../../src/wui/game_message_menu.cc:174
+#: ../../src/wui/game_message_menu.cc:138
 #, c-format
 msgid "G: %s"
 msgstr "G: %s"
 
 #. * TRANSLATORS: Tooltip in the messages window
-#: ../../src/wui/game_message_menu.cc:176
+#: ../../src/wui/game_message_menu.cc:140
 msgid "Center main mapview on location"
 msgstr "A hely a fő térképnézet közepére igazítása"
 
 #. * TRANSLATORS: %1% is a tooltip, %2% is the corresponding hotkey
-#: ../../src/wui/game_message_menu.cc:551
-#: ../../src/wui/game_message_menu.cc:562
-#: ../../src/wui/game_message_menu.cc:566
-#: ../../src/wui/game_message_menu.cc:570
-#: ../../src/wui/game_message_menu.cc:574
-#: ../../src/wui/game_message_menu.cc:578
+#: ../../src/wui/game_message_menu.cc:510
+#: ../../src/wui/game_message_menu.cc:521
+#: ../../src/wui/game_message_menu.cc:526
+#: ../../src/wui/game_message_menu.cc:530
+#: ../../src/wui/game_message_menu.cc:534
+#: ../../src/wui/game_message_menu.cc:538
 msgid "%1% (Hotkey: %2%)"
 msgstr "%1% (Gyorsgomb: %2%)"
 
+#: ../../src/wui/game_message_menu.cc:512
+msgctxt "hotkey"
+msgid "Alt + 0"
+msgstr "Alt + 0"
+
 #. * TRANSLATORS: Tooltip in the messages window
-#: ../../src/wui/game_message_menu.cc:553
+#: ../../src/wui/game_message_menu.cc:512
 msgid "Show all messages"
 msgstr "Minden üzenet megjelenítése"
 
 #. * TRANSLATORS: Tooltip in the messages window
-#: ../../src/wui/game_message_menu.cc:564
+#: ../../src/wui/game_message_menu.cc:523
 msgid "Show geologists' messages only"
 msgstr "Csak a geológusok üzeneteinek megjelenítése"
 
+#: ../../src/wui/game_message_menu.cc:524
+msgctxt "hotkey"
+msgid "Alt + 1"
+msgstr "Alt + 1"
+
+#: ../../src/wui/game_message_menu.cc:528
+msgctxt "hotkey"
+msgid "Alt + 2"
+msgstr "Alt + 2"
+
 #. * TRANSLATORS: Tooltip in the messages window
-#: ../../src/wui/game_message_menu.cc:568
+#: ../../src/wui/game_message_menu.cc:528
 msgid "Show economy messages only"
 msgstr "Csak a gazdasági üzenetek megjelenítése"
 
+#: ../../src/wui/game_message_menu.cc:532
+msgctxt "hotkey"
+msgid "Alt + 3"
+msgstr "Alt + 3"
+
 #. * TRANSLATORS: Tooltip in the messages window
-#: ../../src/wui/game_message_menu.cc:572
+#: ../../src/wui/game_message_menu.cc:532
 msgid "Show seafaring messages only"
 msgstr "Csak a hajózási üzenetek megjelenítése"
 
+#: ../../src/wui/game_message_menu.cc:536
+msgctxt "hotkey"
+msgid "Alt + 4"
+msgstr "Alt + 4"
+
 #. * TRANSLATORS: Tooltip in the messages window
-#: ../../src/wui/game_message_menu.cc:576
+#: ../../src/wui/game_message_menu.cc:536
 msgid "Show warfare messages only"
 msgstr "Csak a hadi üzenetek megjelenítése"
 
+#: ../../src/wui/game_message_menu.cc:540
+msgctxt "hotkey"
+msgid "Alt + 5"
+msgstr "Alt + 5"
+
 #. * TRANSLATORS: Tooltip in the messages window
-#: ../../src/wui/game_message_menu.cc:580
+#: ../../src/wui/game_message_menu.cc:540
 msgid "Show scenario messages only"
 msgstr "Csak a küldetés üzeneteinek megjelenítése"
 
-#: ../../src/wui/game_message_menu.cc:625
+#: ../../src/wui/game_message_menu.cc:582
 msgid "Messages: Archive"
 msgstr "Üzenetek: archívum"
 
-#. * TRANSLATORS: Tooltip in the messages window
-#: ../../src/wui/game_message_menu.cc:630
-msgid "Restore selected message"
-msgstr "Kijelölt üzenet visszaállítása"
-
-#: ../../src/wui/game_message_menu.cc:632
+#: ../../src/wui/game_message_menu.cc:585
 msgid "Show Inbox"
 msgstr "Bejövők"
 
-#: ../../src/wui/game_objectives_menu.cc:45
-#: ../../src/wui/interactive_player.cc:98
+#: ../../src/wui/game_message_menu.cc:613
+#, c-format
+msgid "Restore the selected %d message"
+msgid_plural "Restore the selected %d messages"
+msgstr[0] ""
+msgstr[1] ""
+
+#. * TRANSLATORS: Tooltip in the messages window
+#: ../../src/wui/game_message_menu.cc:619
+msgid "Restore selected message"
+msgstr "Kijelölt üzenet visszaállítása"
+
+#: ../../src/wui/game_message_menu.cc:627
+#, c-format
+msgid "Archive the selected %d message"
+msgid_plural "Archive the selected %d messages"
+msgstr[0] ""
+msgstr[1] ""
+
+#. * TRANSLATORS: Tooltip in the messages window
+#: ../../src/wui/game_message_menu.cc:633
+msgid "Archive selected message"
+msgstr "Kijelölt üzenet archiválása"
+
+#. * TRANSLATORS: %s is a tooltip, Del is the corresponding hotkey
+#: ../../src/wui/game_message_menu.cc:638
+#, c-format
+msgid "Del: %s"
+msgstr "Del: %s"
+
+#: ../../src/wui/game_objectives_menu.cc:42
+#: ../../src/wui/interactive_player.cc:103
 msgid "Objectives"
 msgstr "Célkitűzések"
 
@@ -3465,7 +3531,7 @@ msgid "Are you sure you wish to exit this game?"
 msgstr "Valóban szeretnél kilépni a játékból?"
 
 #: ../../src/wui/game_options_menu.cc:77
-#: ../../src/wui/game_options_sound_menu.cc:29
+#: ../../src/wui/game_options_sound_menu.cc:27
 msgid "Sound Options"
 msgstr "Hangbeállítások"
 
@@ -3475,7 +3541,7 @@ msgid "Set sound effect and music options"
 msgstr "Hanghatások és zenebeállítások megadása"
 
 #. * TRANSLATORS: Button tooltip
-#: ../../src/wui/game_options_menu.cc:93 ../../src/wui/game_summary.cc:110
+#: ../../src/wui/game_options_menu.cc:99 ../../src/wui/game_summary.cc:92
 msgid "Exit Game"
 msgstr "Kilépés a játékból"
 
@@ -3483,211 +3549,239 @@ msgstr "Kilépés a játékból"
 msgid "Music Volume"
 msgstr "Zene hangereje"
 
-#: ../../src/wui/game_options_sound_menu.cc:49
+#: ../../src/wui/game_options_sound_menu.cc:50
 msgid "Sound Effects Volume"
 msgstr "Hanghatások hangereje"
 
-#: ../../src/wui/game_summary.cc:56
+#: ../../src/wui/game_statistics_menu.cc:36
+msgid "Statistics Menu"
+msgstr "Statisztika menü"
+
+#: ../../src/wui/game_statistics_menu.cc:40
+#: ../../src/wui/general_statistics_menu.cc:51
+msgid "General Statistics"
+msgstr "Általános statisztika"
+
+#: ../../src/wui/game_statistics_menu.cc:43
+#: ../../src/wui/ware_statistics_menu.cc:106
+msgid "Ware Statistics"
+msgstr "Árustatisztika"
+
+#: ../../src/wui/game_statistics_menu.cc:46 ../../src/wui/stock_menu.cc:36
+#: ../../src/wui/ware_statistics_menu.cc:148 ../../src/wui/waresdisplay.cc:68
+msgid "Stock"
+msgstr "Készletek"
+
+#: ../../src/wui/game_summary.cc:44
 msgid "Game over"
 msgstr "Vége a játéknak"
 
-#: ../../src/wui/game_summary.cc:73
+#: ../../src/wui/game_summary.cc:62
 msgid "Player Info:"
-msgstr ""
+msgstr "Játékos infó:"
 
-#: ../../src/wui/game_summary.cc:89
+#: ../../src/wui/game_summary.cc:77
 msgid "Elapsed time:"
 msgstr "Eltelt idő:"
 
-#: ../../src/wui/game_summary.cc:102
+#: ../../src/wui/game_summary.cc:87
 msgid "Continue playing"
 msgstr "Játék folytatása"
 
-#: ../../src/wui/game_summary.cc:122
+#: ../../src/wui/game_summary.cc:104
 msgid "Time"
 msgstr "Idő"
 
 #. * TRANSLATORS: This is shown in the game summary for the players who have
 #. lost.
-#: ../../src/wui/game_summary.cc:189
+#: ../../src/wui/game_summary.cc:167
 msgid "Lost"
 msgstr "Vesztett"
 
 #. * TRANSLATORS: This is shown in the game summary for the players who have
 #. won.
-#: ../../src/wui/game_summary.cc:193
+#: ../../src/wui/game_summary.cc:171
 msgid "Won"
 msgstr "Nyert"
 
 #. * TRANSLATORS: This is shown in the game summary for the players who have
 #. resigned.
-#: ../../src/wui/game_summary.cc:202
+#: ../../src/wui/game_summary.cc:180
 msgid "Resigned"
 msgstr "Lemondott"
 
 #. * TRANSLATORS: This is shown in the game summary when we don't know
 #. * TRANSLATORS: if the player has lost or won.
-#: ../../src/wui/game_summary.cc:207
+#: ../../src/wui/game_summary.cc:185
 msgctxt "player_won"
 msgid "Unknown"
 msgstr "Ismeretlen"
 
-#: ../../src/wui/game_summary.cc:217
+#: ../../src/wui/game_summary.cc:195
 msgid "You won!"
 msgstr "Nyertél!"
 
-#: ../../src/wui/game_summary.cc:219
+#: ../../src/wui/game_summary.cc:197
 msgid "You lost."
 msgstr "Vesztettél."
 
-#: ../../src/wui/game_summary.cc:225
+#: ../../src/wui/game_summary.cc:202
 #, c-format
 msgid "%s won!"
 msgstr "%s nyert!"
 
-#: ../../src/wui/game_summary.cc:228
+#: ../../src/wui/game_summary.cc:205
 msgid "Team %|1$u| won!"
-msgstr "%l1$ul. csapat nyert!"
+msgstr "%|1$u| csapat nyert!"
 
-#: ../../src/wui/game_summary.cc:277
+#: ../../src/wui/game_summary.cc:249
 msgid "Score"
 msgstr "Pontszám"
 
-#: ../../src/wui/game_summary.cc:280
+#: ../../src/wui/game_summary.cc:251
 msgid "Team Score"
-msgstr ""
+msgstr "Csapat pontszám"
 
-#: ../../src/wui/general_statistics_menu.cc:191
+#: ../../src/wui/general_statistics_menu.cc:135
 msgid "Land"
 msgstr "Föld"
 
-#: ../../src/wui/general_statistics_menu.cc:199
-#: ../../src/wui/transport_ui.cc:65 ../../src/wui/warehousewindow.cc:218
-msgid "Workers"
-msgstr "Munkások"
-
-#: ../../src/wui/general_statistics_menu.cc:207 ../../src/wui/minimap.cc:171
+#: ../../src/wui/general_statistics_menu.cc:146 ../../src/wui/minimap.cc:165
 msgid "Buildings"
 msgstr "Épületek"
 
-#: ../../src/wui/general_statistics_menu.cc:215
-#: ../../src/wui/productionsitewindow.cc:67 ../../src/wui/transport_ui.cc:60
-#: ../../src/wui/warehousewindow.cc:208
-msgid "Wares"
-msgstr "Termékek"
-
-#: ../../src/wui/general_statistics_menu.cc:223
+#: ../../src/wui/general_statistics_menu.cc:156
 msgid "Productivity"
 msgstr "Termelékenység"
 
-#: ../../src/wui/general_statistics_menu.cc:231
+#: ../../src/wui/general_statistics_menu.cc:161
 msgid "Casualties"
 msgstr "Veszteségek"
 
-#: ../../src/wui/general_statistics_menu.cc:239
+#: ../../src/wui/general_statistics_menu.cc:165
 msgid "Kills"
 msgstr "Megölt"
 
-#: ../../src/wui/general_statistics_menu.cc:247
+#: ../../src/wui/general_statistics_menu.cc:171
 msgid "Military buildings lost"
 msgstr "Elveszített katonai épületek"
 
-#: ../../src/wui/general_statistics_menu.cc:255
+#: ../../src/wui/general_statistics_menu.cc:176
 msgid "Military buildings defeated"
 msgstr "Bevett katonai épületek"
 
-#: ../../src/wui/general_statistics_menu.cc:263
+#: ../../src/wui/general_statistics_menu.cc:181
 msgid "Civilian buildings lost"
 msgstr "Elveszített civil épületek"
 
-#: ../../src/wui/general_statistics_menu.cc:271
+#: ../../src/wui/general_statistics_menu.cc:186
 msgid "Military"
 msgstr "Haderő"
 
-#: ../../src/wui/interactive_gamebase.cc:44
+#: ../../src/wui/inputqueuedisplay.cc:185
+msgid "Highest priority"
+msgstr "Legmagasabb prioritás"
+
+#: ../../src/wui/inputqueuedisplay.cc:188
+msgid "Normal priority"
+msgstr "Normál prioritás"
+
+#: ../../src/wui/inputqueuedisplay.cc:191
+msgid "Lowest priority"
+msgstr "Legalacsonyabb prioritás"
+
+#: ../../src/wui/inputqueuedisplay.cc:236
+msgid "Decrease the number of wares you want to be stored here."
+msgstr "Az itt tárolandó árumennyiség csökkentése."
+
+#: ../../src/wui/inputqueuedisplay.cc:245
+msgid "Increase the number of wares you want to be stored here."
+msgstr "Az itt tárolandó árumennyiség növelése."
+
+#: ../../src/wui/interactive_gamebase.cc:52
 msgid "PAUSE"
 msgstr "SZÜNET"
 
 #. * TRANSLATORS: actual_speed (desired_speed)
-#: ../../src/wui/interactive_gamebase.cc:111
+#: ../../src/wui/interactive_gamebase.cc:123
 #, c-format
 msgid "%1$s (%2$s)"
 msgstr "%1$s (%2$s)"
 
-#: ../../src/wui/interactive_player.cc:95
-#: ../../src/wui/interactive_spectator.cc:61
+#: ../../src/wui/interactive_player.cc:73
+#: ../../src/wui/interactive_spectator.cc:62
 msgid "Statistics"
-msgstr "Statisztikák"
+msgstr "Statisztika"
 
-#: ../../src/wui/interactive_player.cc:104
-#: ../../src/wui/interactive_player.cc:223
+#: ../../src/wui/interactive_player.cc:107
+#: ../../src/wui/interactive_player.cc:157
 msgid "Messages"
 msgstr "Üzenetek"
 
-#: ../../src/wui/interactive_player.cc:107
+#: ../../src/wui/interactive_player.cc:110
 msgid "Tribal Encyclopedia"
 msgstr "Törzsi enciklopédia"
 
-#: ../../src/wui/interactive_player.cc:230
+#: ../../src/wui/interactive_player.cc:162
 #, c-format
 msgid "%u new message"
 msgid_plural "%u new messages"
 msgstr[0] "%u új üzenet"
 msgstr[1] "%u új üzenet"
 
-#: ../../src/wui/interactive_spectator.cc:55
+#: ../../src/wui/interactive_spectator.cc:53
 msgid "Exit Replay"
 msgstr "Kilépés a visszajátszásból"
 
-#: ../../src/wui/login_box.cc:30
+#: ../../src/wui/login_box.cc:29
 msgid "Metaserver login"
 msgstr "Metakiszolgáló bejelentkezés"
 
-#: ../../src/wui/login_box.cc:36
+#: ../../src/wui/login_box.cc:34
 msgid "Nickname:"
 msgstr "Becenév:"
 
-#: ../../src/wui/login_box.cc:40
+#: ../../src/wui/login_box.cc:35
 msgid "Password:"
 msgstr "Jelszó:"
 
-#: ../../src/wui/login_box.cc:46
+#: ../../src/wui/login_box.cc:42
 msgid "WARNING: Password will be shown and saved readable!"
 msgstr "FIGYELMEZTETÉS: A jelszó megjelenik a képernyőn és titkosítatlanul tárolódik!"
 
-#: ../../src/wui/login_box.cc:50
+#: ../../src/wui/login_box.cc:45
 msgid "Log in to a registered account"
 msgstr "Bejelentkezés egy regisztrált fiókba"
 
-#: ../../src/wui/login_box.cc:54
+#: ../../src/wui/login_box.cc:48
 msgid "Automatically use this login information from now on."
 msgstr "Legközelebb a fent megadott bejelentkezési adatokat használja."
 
-#: ../../src/wui/login_box.cc:65
+#: ../../src/wui/login_box.cc:56
 msgid "Login"
 msgstr "Bejelentkezés"
 
-#: ../../src/wui/login_box.cc:90
+#: ../../src/wui/login_box.cc:79
 msgid "Empty Nickname"
 msgstr "Üres becenév"
 
-#: ../../src/wui/login_box.cc:90
+#: ../../src/wui/login_box.cc:79
 msgid "Please enter a nickname!"
 msgstr "Kérlek adj meg egy becenevet!"
 
-#: ../../src/wui/login_box.cc:97
+#: ../../src/wui/login_box.cc:84
 msgid "Space in Nickname"
 msgstr "Szóköz a becenévben"
 
-#: ../../src/wui/login_box.cc:98
+#: ../../src/wui/login_box.cc:85
 msgid "Sorry, but spaces are not allowed in nicknames!"
 msgstr "Sajnálom, szóköz nem lehet a becenévben!"
 
-#: ../../src/wui/login_box.cc:105
+#: ../../src/wui/login_box.cc:91
 msgid "Empty Password"
 msgstr "Üres jelszó"
 
-#: ../../src/wui/login_box.cc:105
+#: ../../src/wui/login_box.cc:91
 msgid "Please enter your password!"
 msgstr "Kérlek add meg a jelszavad!"
 
@@ -3736,155 +3830,157 @@ msgstr "3 fős csapatok"
 msgid "Teams of 4"
 msgstr "4 fős csapatok"
 
-#: ../../src/wui/mapdata.cc:37
+#: ../../src/wui/mapdata.cc:46
 msgid "No Author"
-msgstr ""
+msgstr "Nincs készítő"
 
 #. * TRANSLATORS: Parent directory/folder
-#: ../../src/wui/mapdata.cc:130
+#: ../../src/wui/mapdata.cc:147
 msgid "parent"
 msgstr "szülő"
 
-#. * TRANSLATORS: Directory name for MP Scenarios in map selection
-#: ../../src/wui/mapdata.cc:138
-msgid "Multiplayer Scenarios"
-msgstr "Többjátékos küldetések"
+#. * TRANSLATORS: This label is shown when a folder is empty
+#: ../../src/wui/mapdata.cc:153
+msgid "empty"
+msgstr "üres"
 
-#: ../../src/wui/mapdetails.cc:123
+#: ../../src/wui/mapdetails.cc:125
 msgid "Directory:"
 msgstr "Könyvtár:"
 
 #. * TRANSLATORS: Tooltip in map description when translated map names are
-#. being displayed.
+#. being
+#. displayed.
 #. * TRANSLATORS: %s is the English name of the map.
-#: ../../src/wui/mapdetails.cc:139
+#: ../../src/wui/mapdetails.cc:144
 #, c-format
 msgid "The original name of this map: %s"
 msgstr "A térkép eredeti neve: %s"
 
 #. * TRANSLATORS: Tooltip in map description when map names are being
-#. displayed in English.
+#. displayed in
+#. English.
 #. * TRANSLATORS: %s is the localized name of the map.
-#: ../../src/wui/mapdetails.cc:145
+#: ../../src/wui/mapdetails.cc:150
 #, c-format
 msgid "The name of this map in your language: %s"
 msgstr "A térkép neve a te nyelveden: %s"
 
 #. * TRANSLATORS: Map hint header when selecting a map.
-#: ../../src/wui/mapdetails.cc:173
+#: ../../src/wui/mapdetails.cc:180
 msgid "Hint:"
-msgstr ""
+msgstr "Tipp:"
 
-#: ../../src/wui/maptable.cc:36
+#: ../../src/wui/maptable.cc:33
 msgid "Number of players"
 msgstr "Játékosok száma"
 
 #. * TRANSLATORS: Column title for number of players in map list
-#: ../../src/wui/maptable.cc:36
+#: ../../src/wui/maptable.cc:33
 msgid "Pl."
 msgstr "J."
 
-#: ../../src/wui/maptable.cc:37
-msgid "The name of the map or scenario"
-msgstr "A térkép vagy küldetés neve"
-
-#: ../../src/wui/maptable.cc:38
-msgid "Size"
-msgstr "Méret"
-
-#: ../../src/wui/maptable.cc:38
-msgid "The size of the map (Width x Height)"
-msgstr "A térkép mérete (szélesség × magasság)"
-
-#: ../../src/wui/maptable.cc:64
+#: ../../src/wui/maptable.cc:34 ../../src/wui/maptable.cc:63
 msgid "Filename"
 msgstr "Fájlnév"
 
-#: ../../src/wui/maptable.cc:70
+#: ../../src/wui/maptable.cc:34
+msgid "The name of the map or scenario"
+msgstr "A térkép vagy küldetés neve"
+
+#: ../../src/wui/maptable.cc:36
+msgid "Size"
+msgstr "Méret"
+
+#: ../../src/wui/maptable.cc:36
+msgid "The size of the map (Width x Height)"
+msgstr "A térkép mérete (szélesség × magasság)"
+
+#: ../../src/wui/maptable.cc:67
 msgid "Map Name"
 msgstr "Térkép neve"
 
-#: ../../src/wui/militarysitewindow.cc:59
+#: ../../src/wui/militarysitewindow.cc:44
 msgid "Soldiers"
 msgstr "Katonák"
 
-#: ../../src/wui/minimap.cc:150
+#: ../../src/wui/minimap.cc:132
 msgid "Owner"
 msgstr "Tulajdonos"
 
-#: ../../src/wui/minimap.cc:157
+#: ../../src/wui/minimap.cc:143
 msgid "Flags"
 msgstr "Zászlók"
 
-#: ../../src/wui/minimap.cc:164
+#: ../../src/wui/minimap.cc:154
 msgid "Roads"
 msgstr "Utak"
 
-#: ../../src/wui/minimap.cc:178
+#: ../../src/wui/minimap.cc:176
 msgid "Zoom"
 msgstr "Nagyítás"
 
-#: ../../src/wui/multiplayersetupgroup.cc:127
+#: ../../src/wui/multiplayersetupgroup.cc:95
 msgid "free"
 msgstr "szabad"
 
-#: ../../src/wui/multiplayersetupgroup.cc:143
+#: ../../src/wui/multiplayersetupgroup.cc:114
 msgid "Spectator"
 msgstr "Néző"
 
-#: ../../src/wui/multiplayersetupgroup.cc:296
+#: ../../src/wui/multiplayersetupgroup.cc:253
 msgid "Shared in"
 msgstr "Megosztva"
 
-#: ../../src/wui/multiplayersetupgroup.cc:314
-#: ../../src/wui/playerdescrgroup.cc:167
+#: ../../src/wui/multiplayersetupgroup.cc:275
+#: ../../src/wui/playerdescrgroup.cc:149
 msgid "Computer"
 msgstr "Számítógép"
 
 #. * TRANSLATORS: This is the name of an AI used in the game setup screens
-#: ../../src/wui/multiplayersetupgroup.cc:319
-#: ../../src/wui/playerdescrgroup.cc:170
+#: ../../src/wui/multiplayersetupgroup.cc:280
+#: ../../src/wui/playerdescrgroup.cc:152
 msgid "Random AI"
 msgstr "Véletlenszerű MI"
 
-#: ../../src/wui/multiplayersetupgroup.cc:329
-#: ../../src/wui/playerdescrgroup.cc:178
+#: ../../src/wui/multiplayersetupgroup.cc:290
+#: ../../src/wui/playerdescrgroup.cc:160
 msgid "Human"
 msgstr "Ember"
 
-#: ../../src/wui/multiplayersetupgroup.cc:335
-#: ../../src/wui/playerdescrgroup.cc:188
+#: ../../src/wui/multiplayersetupgroup.cc:296
+#: ../../src/wui/playerdescrgroup.cc:170
 msgctxt "tribe"
 msgid "Random"
 msgstr "Véletlenszerű"
 
-#: ../../src/wui/multiplayersetupgroup.cc:419
+#: ../../src/wui/multiplayersetupgroup.cc:378
 msgid "Client name"
 msgstr "Ügyfélnév"
 
-#: ../../src/wui/multiplayersetupgroup.cc:427
+#: ../../src/wui/multiplayersetupgroup.cc:383
 msgid "Role"
 msgstr "Szerep"
 
-#: ../../src/wui/multiplayersetupgroup.cc:439
+#: ../../src/wui/multiplayersetupgroup.cc:391
 msgid "Start"
 msgstr "Kezdés"
 
-#: ../../src/wui/multiplayersetupgroup.cc:447
+#: ../../src/wui/multiplayersetupgroup.cc:395
 msgid "Type"
 msgstr "Típus"
 
-#: ../../src/wui/multiplayersetupgroup.cc:463
-#: ../../src/wui/playerdescrgroup.cc:99
+#: ../../src/wui/multiplayersetupgroup.cc:404
+#: ../../src/wui/playerdescrgroup.cc:86
 msgid "Initialization"
 msgstr "Kezdőállapot"
 
-#: ../../src/wui/playerdescrgroup.cc:189
+#: ../../src/wui/playerdescrgroup.cc:171
 msgid "The tribe will be set at random."
-msgstr "A törzs véletlenszerűen lesz kiválasztva"
+msgstr "A törzs véletlenszerűen lesz kiválasztva."
 
 #. * TRANSLATORS: day(s). Keep this as short as possible. Used in statistics.
-#: ../../src/wui/plot_area.cc:125
+#: ../../src/wui/plot_area.cc:114
 msgctxt "unit_narrow"
 msgid "%1%d"
 msgid_plural "%1%d"
@@ -3892,7 +3988,7 @@ msgstr[0] "%1% nap"
 msgstr[1] "%1% nap"
 
 #. * TRANSLATORS: hour(s). Keep this as short as possible. Used in statistics.
-#: ../../src/wui/plot_area.cc:128
+#: ../../src/wui/plot_area.cc:117
 msgctxt "unit_narrow"
 msgid "%1%h"
 msgid_plural "%1%h"
@@ -3901,7 +3997,7 @@ msgstr[1] "%1% óra"
 
 #. * TRANSLATORS: minute(s). Keep this as short as possible. Used in
 #. statistics.
-#: ../../src/wui/plot_area.cc:131
+#: ../../src/wui/plot_area.cc:120
 msgctxt "unit_narrow"
 msgid "%1%m"
 msgid_plural "%1%m"
@@ -3909,230 +4005,193 @@ msgstr[0] "%1% perc"
 msgstr[1] "%1% perc"
 
 #. * TRANSLATORS: Generic unit label. Used in statistics.
-#: ../../src/wui/plot_area.cc:140
+#: ../../src/wui/plot_area.cc:133
 msgctxt "unit_generic"
 msgid "days"
 msgstr "nap"
 
 #. * TRANSLATORS: Generic unit label. Used in statistics.
-#: ../../src/wui/plot_area.cc:143
+#: ../../src/wui/plot_area.cc:136
 msgctxt "unit_generic"
 msgid "hours"
 msgstr "óra"
 
 #. * TRANSLATORS: Generic unit label. Used in statistics.
-#: ../../src/wui/plot_area.cc:146
+#: ../../src/wui/plot_area.cc:139
 msgctxt "unit_generic"
 msgid "minutes"
 msgstr "perc"
 
-#: ../../src/wui/plot_area.cc:319
+#: ../../src/wui/plot_area.cc:320
 msgid "game"
 msgstr "játék"
 
-#: ../../src/wui/productionsitewindow.cc:83
+#: ../../src/wui/productionsitewindow.cc:88
 msgid "Exp"
 msgstr "TP"
 
-#: ../../src/wui/productionsitewindow.cc:84
+#: ../../src/wui/productionsitewindow.cc:89
 msgid "Next Level"
 msgstr "Következő szint"
 
-#: ../../src/wui/productionsitewindow.cc:97
+#: ../../src/wui/productionsitewindow.cc:101
 msgid "Terminate the employment of the selected worker"
 msgstr "A kiválasztott munkás elbocsátása"
 
-#: ../../src/wui/productionsitewindow.cc:195
+#: ../../src/wui/productionsitewindow.cc:166
 msgid "(coming)"
 msgstr "(útban ide)"
 
-#: ../../src/wui/productionsitewindow.cc:195
+#: ../../src/wui/productionsitewindow.cc:166
 msgid "(vacant)"
 msgstr "(nincs munkás)"
 
-#: ../../src/wui/shipwindow.cc:120
+#: ../../src/wui/shipwindow.cc:96
 msgid "Scout towards the north west"
 msgstr "Felderítés északnyugat felé"
 
-#: ../../src/wui/shipwindow.cc:126
+#: ../../src/wui/shipwindow.cc:101
 msgid "Explore the island’s coast clockwise"
 msgstr "A sziget partjának felfedezése az óra járása szerint"
 
-#: ../../src/wui/shipwindow.cc:132
+#: ../../src/wui/shipwindow.cc:106
 msgid "Scout towards the north east"
 msgstr "Felderítés északkelet felé"
 
-#: ../../src/wui/shipwindow.cc:138
+#: ../../src/wui/shipwindow.cc:111
 msgid "Scout towards the west"
 msgstr "Felderítés nyugat felé"
 
-#: ../../src/wui/shipwindow.cc:144
+#: ../../src/wui/shipwindow.cc:116
 msgid "Construct a port at the current location"
 msgstr "Kikötő építése a jelenlegi helyen"
 
-#: ../../src/wui/shipwindow.cc:150
+#: ../../src/wui/shipwindow.cc:121
 msgid "Scout towards the east"
 msgstr "Felderítés kelet felé"
 
-#: ../../src/wui/shipwindow.cc:156
+#: ../../src/wui/shipwindow.cc:126
 msgid "Scout towards the south west"
 msgstr "Felderítés délnyugat felé"
 
-#: ../../src/wui/shipwindow.cc:162
+#: ../../src/wui/shipwindow.cc:131
 msgid "Explore the island’s coast counter clockwise"
 msgstr "A sziget partjának felfedezése az óramutató járásával szemben"
 
-#: ../../src/wui/shipwindow.cc:168
+#: ../../src/wui/shipwindow.cc:137
 msgid "Scout towards the south east"
 msgstr "Felderítés délkelet felé"
 
-#: ../../src/wui/shipwindow.cc:180
+#: ../../src/wui/shipwindow.cc:147
 msgid "Go to ship"
 msgstr "Menj a hajóhoz"
 
-#: ../../src/wui/shipwindow.cc:185
+#: ../../src/wui/shipwindow.cc:149
 msgid "Go to destination"
 msgstr "Menj a célhoz"
 
-#: ../../src/wui/shipwindow.cc:192
+#: ../../src/wui/shipwindow.cc:155
 msgid "Sink the ship"
 msgstr "A hajó elsüllyesztése"
 
-#: ../../src/wui/shipwindow.cc:198
+#: ../../src/wui/shipwindow.cc:160
 msgid "Cancel the Expedition"
 msgstr "Az expedíció lefújása"
 
-#: ../../src/wui/soldiercapacitycontrol.cc:66
+#: ../../src/wui/soldiercapacitycontrol.cc:72
 msgid "Decrease capacity"
 msgstr "Férőhelyek számának csökkentése"
 
-#: ../../src/wui/soldiercapacitycontrol.cc:70
+#: ../../src/wui/soldiercapacitycontrol.cc:81
 msgid "Increase capacity"
 msgstr "Férőhelyek számának növelése"
 
-#: ../../src/wui/soldiercapacitycontrol.cc:76
+#: ../../src/wui/soldiercapacitycontrol.cc:88
 msgid "Capacity"
 msgstr "Férőhelyek száma"
 
-#: ../../src/wui/soldierlist.cc:394 ../../src/wui/soldierlist.cc:415
-#: ../../src/wui/soldierlist.cc:485
+#: ../../src/wui/soldierlist.cc:373 ../../src/wui/soldierlist.cc:394
+#: ../../src/wui/soldierlist.cc:455
 msgid "Click soldier to send away"
 msgstr "Kattints a katonára a kiküldéshez"
 
-#. * TRANSLATORS: Health, Attack, Defense, Evade
-#: ../../src/wui/soldierlist.cc:409 ../../src/wui/soldierlist.cc:490
+#: ../../src/wui/soldierlist.cc:389 ../../src/wui/soldierlist.cc:460
 #, c-format
 msgid "HP: %1$u/%2$u  AT: %3$u/%4$u  DE: %5$u/%6$u  EV: %7$u/%8$u"
 msgstr "ÉP: %1$u/%2$u  TÁ: %3$u/%4$u  VÉ: %5$u/%6$u  KI: %7$u/%8$u"
 
-#: ../../src/wui/soldierlist.cc:425
+#: ../../src/wui/soldierlist.cc:403
 msgid "Prefer Rookies"
 msgstr "Elsőbbség adása újoncoknak"
 
-#: ../../src/wui/soldierlist.cc:429
+#: ../../src/wui/soldierlist.cc:406
 msgid "Prefer Heroes"
 msgstr "Elsőbbség adása hősöknek"
 
-#: ../../src/wui/stock_menu.cc:51
+#: ../../src/wui/stock_menu.cc:42
 msgid "Wares (total)"
 msgstr "Termékek (összesen)"
 
-#: ../../src/wui/stock_menu.cc:56
+#: ../../src/wui/stock_menu.cc:46
 msgid "Workers (total)"
 msgstr "Munkások (összesen)"
 
-#: ../../src/wui/stock_menu.cc:62
+#: ../../src/wui/stock_menu.cc:50
 msgid "Wares in warehouses"
 msgstr "Termékek raktáron"
 
-#: ../../src/wui/stock_menu.cc:69
+#: ../../src/wui/stock_menu.cc:55
 msgid "Workers in warehouses"
 msgstr "Munkások raktáron"
 
-#: ../../src/wui/trainingsitewindow.cc:57
+#: ../../src/wui/trainingsitewindow.cc:44
 msgid "Soldiers in training"
 msgstr "Katonák edzésen"
 
-#: ../../src/wui/transport_ui.cc:51
-msgid "Economy options"
-msgstr "Gazdaság beállításai"
-
-#: ../../src/wui/transport_ui.cc:142 ../../src/wui/transport_ui.cc:225
-msgid "Decrease target"
-msgstr "Cél csökkentése"
-
-#: ../../src/wui/transport_ui.cc:144 ../../src/wui/transport_ui.cc:227
-msgid "Increase target"
-msgstr "Cél növelése"
-
-#: ../../src/wui/transport_ui.cc:147 ../../src/wui/transport_ui.cc:230
-msgid "Reset to default"
-msgstr "Visszaállítás az alapértelmezésre"
-
-#: ../../src/wui/ware_statistics_menu.cc:173
+#: ../../src/wui/ware_statistics_menu.cc:130
 msgid "Production"
 msgstr "Termelés"
 
-#: ../../src/wui/ware_statistics_menu.cc:184
+#: ../../src/wui/ware_statistics_menu.cc:136
 msgid "Consumption"
 msgstr "Fogyasztás"
 
-#: ../../src/wui/ware_statistics_menu.cc:195
+#: ../../src/wui/ware_statistics_menu.cc:143
 msgid "Economy Health"
 msgstr "Gazdaság állapota"
 
-#: ../../src/wui/warehousewindow.cc:148
+#: ../../src/wui/warehousewindow.cc:146
 msgid "Normal policy"
 msgstr "Normál eljárás"
 
-#: ../../src/wui/warehousewindow.cc:149
+#: ../../src/wui/warehousewindow.cc:147
 msgid "Preferably store selected wares here"
 msgstr "A kiválasztott árukat lehetőleg itt tárolják"
 
-#: ../../src/wui/warehousewindow.cc:150
+#: ../../src/wui/warehousewindow.cc:148
 msgid "Do not store selected wares here"
 msgstr "A kiválasztott árukat ne itt tárolják"
 
-#: ../../src/wui/warehousewindow.cc:151
+#: ../../src/wui/warehousewindow.cc:149
 msgid "Remove selected wares from here"
 msgstr "A kijelölt áruk eltávolítása innen"
 
-#: ../../src/wui/warehousewindow.cc:225
+#: ../../src/wui/warehousewindow.cc:197
 msgid "Wares waiting to be shipped"
 msgstr "Szállításra váró áruk"
 
-#: ../../src/wui/warehousewindow.cc:230
+#: ../../src/wui/warehousewindow.cc:200
 msgid "Workers waiting to embark"
 msgstr "Indulásra váró munkások"
 
-#: ../../src/wui/warehousewindow.cc:236
+#: ../../src/wui/warehousewindow.cc:204
 msgid "Expedition"
 msgstr "Expedíció"
 
-#: ../../src/wui/waresqueuedisplay.cc:186
-msgid "Highest priority"
-msgstr "Legmagasabb prioritás"
-
-#: ../../src/wui/waresqueuedisplay.cc:189
-msgid "Normal priority"
-msgstr "Normál prioritás"
-
-#: ../../src/wui/waresqueuedisplay.cc:192
-msgid "Lowest priority"
-msgstr "Legalacsonyabb prioritás"
-
-#: ../../src/wui/waresqueuedisplay.cc:238
-msgid "Decrease the number of wares you want to be stored here."
-msgstr "Az itt tárolandó árumennyiség csökkentése"
-
-#: ../../src/wui/waresqueuedisplay.cc:248
-msgid "Increase the number of wares you want to be stored here."
-msgstr "Az itt tárolandó árumennyiség növelése"
+#: ../../src/wui/watchwindow.cc:105
+msgid "Follow"
+msgstr "Követés"
 
 #: ../../src/wui/watchwindow.cc:111
-msgid "Follow"
-msgstr "Követ"
-
-#: ../../src/wui/watchwindow.cc:120
 msgid "Center the main view on this"
 msgstr "Látómező közepébe helyezés"

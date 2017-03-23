@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2006-2015, 2011 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -26,28 +26,22 @@
 #include "wui/mapdata.h"
 #include "wui/suggested_teams_box.h"
 
-
 /**
  * Show a Panel with information about a map.
  */
 class MapDetails : public UI::Panel {
 public:
-	enum class Style {
-		kFsMenu,
-		kWui
-	};
+	enum class Style { kFsMenu, kWui };
 
-	MapDetails(Panel* parent, int32_t x, int32_t y, int32_t max_w, int32_t max_h, Style style);
+	MapDetails(Panel* parent, int32_t x, int32_t y, int32_t w, int32_t h, Style style);
 
 	void clear();
-	void set_max_height(int new_height);
-	void update_layout();
 	void update(const MapData& mapdata, bool localize_mapname);
 
 private:
+	void layout() override;
 	const Style style_;
 	const int padding_;
-	int max_h_;
 
 	UI::Box main_box_;
 	UI::MultilineTextarea name_label_;

@@ -1,0 +1,35 @@
+Author: Enrico Tassi <gareuselesinge@debian.org>
+Description: define PATH_MAX if not defined (i.e. on hurd)
+Forwarded-Upstream: should be
+
+---
+ src/io/filesystem/filesystem.cc |    4 ++++
+ src/wlapplication.cc            |    4 ++++
+ 2 files changed, 8 insertions(+)
+
+--- a/src/io/filesystem/filesystem.cc
++++ b/src/io/filesystem/filesystem.cc
+@@ -60,6 +60,10 @@
+ #define PATH_MAX MAX_PATH
+ #endif
+ 
++#ifndef PATH_MAX /* This happens, for example on the Hurd architecture */
++ #define PATH_MAX 1024
++#endif
++
+ FileSystem::FileSystem()
+    : root_("")
+ {}
+--- a/src/wlapplication.cc
++++ b/src/wlapplication.cc
+@@ -92,6 +92,10 @@
+ #include "wui/interactive_player.h"
+ #include "wui/interactive_spectator.h"
+ 
++#ifndef PATH_MAX /* This happens, for example on the Hurd architecture */
++ #define PATH_MAX 1024
++#endif
++
+ #define MINIMUM_DISK_SPACE 250000000lu
+ #define SCREENSHOT_DIR "screenshots"
+ 

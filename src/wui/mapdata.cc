@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2016 by the Widelands Development Team
+ * Copyright (C) 2006-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -21,42 +21,59 @@
 
 #include "io/filesystem/filesystem.h"
 
-MapData::MapData() : authors(""), nrplayers(0), width(0), height(0),
-		maptype(MapData::MapType::kNormal), displaytype(MapData::DisplayType::kMapnamesLocalized) {}
+MapData::MapData(const std::string& init_filename,
+                 const std::string& init_localized_name,
+                 const std::string& init_author,
+                 const MapData::MapType& init_maptype,
+                 const MapData::DisplayType& init_displaytype)
+   : filename(init_filename),
+     name(init_localized_name),
+     localized_name(init_localized_name),
+     authors(init_author),
+     description(""),
+     hint(""),
+     nrplayers(0),
+     width(0),
+     height(0),
+     maptype(init_maptype),
+     displaytype(init_displaytype) {
+}
 
-		MapData::MapData(const Widelands::Map& map, const std::string& init_filename,
-			  const MapData::MapType& init_maptype,
-			  const MapData::DisplayType& init_displaytype) :
-		MapData() {
-		i18n::Textdomain td("maps");
-		filename = init_filename;
-		name = map.get_name().empty() ? _("No Name") : map.get_name();
-		localized_name = _(name);
-		// Localizing this, because some author fields now have "edited by" text.
-		const std::string& author = map.get_author();
-		authors = MapAuthorData(author.empty() ? _("No Author") : _(author));
-		description = map.get_description().empty() ? "" : _(map.get_description());
-		hint = map.get_hint().empty() ? "" : _(map.get_hint());
-		nrplayers = map.get_nrplayers();
-		width = map.get_width();
-		height = map.get_height();
-		suggested_teams = map.get_suggested_teams();
-		tags = map.get_tags();
-		maptype = init_maptype;
-		displaytype = init_displaytype;
+MapData::MapData(const Widelands::Map& map,
+                 const std::string& init_filename,
+                 const MapData::MapType& init_maptype,
+                 const MapData::DisplayType& init_displaytype)
+   : MapData(init_filename, _("No Name"), _("No Author"), init_maptype, init_displaytype) {
 
-		if (maptype == MapData::MapType::kScenario) {
-			tags.insert("scenario");
-		}
+	i18n::Textdomain td("maps");
+	if (!map.get_name().empty()) {
+		name = map.get_name();
 	}
-
-MapData::MapData(const std::string& init_filename, const std::string& init_localized_name) :
-		MapData() {
-		filename = init_filename;
-		name = init_localized_name;
-		localized_name = init_localized_name;
-		maptype = MapData::MapType::kDirectory;
+	localized_name = _(name);
+	// Localizing this, because some author fields now have "edited by" text.
+	if (!map.get_author().empty()) {
+		authors = map.get_author();
 	}
+	description = map.get_description().empty() ? "" : _(map.get_description());
+	hint = map.get_hint().empty() ? "" : _(map.get_hint());
+	nrplayers = map.get_nrplayers();
+	width = map.get_width();
+	height = map.get_height();
+	suggested_teams = map.get_suggested_teams();
+	tags = map.get_tags();
+
+	if (maptype == MapData::MapType::kScenario) {
+		tags.insert("scenario");
+	}
+}
+
+MapData::MapData(const std::string& init_filename, const std::string& init_localized_name)
+   : MapData(init_filename,
+             init_localized_name,
+             "",
+             MapData::MapType::kDirectory,
+             MapData::DisplayType::kMapnamesLocalized) {
+}
 
 bool MapData::compare_names(const MapData& other) {
 	// The parent directory gets special treatment.

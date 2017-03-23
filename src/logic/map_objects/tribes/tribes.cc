@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2014 by the Widelands Development Team
+ * Copyright (C) 2006-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -27,16 +27,7 @@
 
 namespace Widelands {
 
-Tribes::Tribes() :
-	buildings_(new DescriptionMaintainer<BuildingDescr>()),
-	immovables_(new DescriptionMaintainer<ImmovableDescr>()),
-	ships_(new DescriptionMaintainer<ShipDescr>()),
-	wares_(new DescriptionMaintainer<WareDescr>()),
-	workers_(new DescriptionMaintainer<WorkerDescr>()),
-	tribes_(new DescriptionMaintainer<TribeDescr>()) {
-}
-
-std::vector<std::string> Tribes::get_all_tribenames() {
+std::vector<std::string> get_all_tribenames() {
 	std::vector<std::string> tribenames;
 	LuaInterface lua;
 	std::unique_ptr<LuaTable> table(lua.run_script("tribes/preload.lua"));
@@ -48,7 +39,7 @@ std::vector<std::string> Tribes::get_all_tribenames() {
 	return tribenames;
 }
 
-std::vector<TribeBasicInfo> Tribes::get_all_tribeinfos() {
+std::vector<TribeBasicInfo> get_all_tribeinfos() {
 	std::vector<TribeBasicInfo> tribeinfos;
 	LuaInterface lua;
 	std::unique_ptr<LuaTable> table(lua.run_script("tribes/preload.lua"));
@@ -58,19 +49,18 @@ std::vector<TribeBasicInfo> Tribes::get_all_tribeinfos() {
 	return tribeinfos;
 }
 
-TribeBasicInfo Tribes::tribeinfo(const std::string& tribename) {
-	if (tribe_exists(tribename)) {
-		for (const TribeBasicInfo& info : get_all_tribeinfos()) {
+TribeBasicInfo get_tribeinfo(const std::string& tribename) {
+	if (Widelands::tribe_exists(tribename)) {
+		for (const TribeBasicInfo& info : Widelands::get_all_tribeinfos()) {
 			if (info.name == tribename) {
 				return info;
 			}
 		}
 	}
 	throw GameDataError("The tribe '%s'' does not exist.", tribename.c_str());
-	NEVER_HERE();
 }
 
-bool Tribes::tribe_exists(const std::string& tribename) {
+bool tribe_exists(const std::string& tribename) {
 	for (const std::string& name : get_all_tribenames()) {
 		if (name == tribename) {
 			return true;
@@ -79,69 +69,63 @@ bool Tribes::tribe_exists(const std::string& tribename) {
 	return false;
 }
 
+Tribes::Tribes()
+   : buildings_(new DescriptionMaintainer<BuildingDescr>()),
+     immovables_(new DescriptionMaintainer<ImmovableDescr>()),
+     ships_(new DescriptionMaintainer<ShipDescr>()),
+     wares_(new DescriptionMaintainer<WareDescr>()),
+     workers_(new DescriptionMaintainer<WorkerDescr>()),
+     tribes_(new DescriptionMaintainer<TribeDescr>()) {
+}
+
 void Tribes::add_constructionsite_type(const LuaTable& table, const EditorGameBase& egbase) {
 	i18n::Textdomain td("tribes");
-	buildings_->add(
-				new ConstructionSiteDescr(
-					pgettext_expr(table.get_string("msgctxt").c_str(), table.get_string("descname").c_str()),
-					table,
-					egbase));
+	buildings_->add(new ConstructionSiteDescr(
+	   pgettext_expr(table.get_string("msgctxt").c_str(), table.get_string("descname").c_str()),
+	   table, egbase));
 }
 
 void Tribes::add_dismantlesite_type(const LuaTable& table, const EditorGameBase& egbase) {
 	i18n::Textdomain td("tribes");
-	buildings_->add(
-				new DismantleSiteDescr(
-					pgettext_expr(table.get_string("msgctxt").c_str(), table.get_string("descname").c_str()),
-					table,
-					egbase));
+	buildings_->add(new DismantleSiteDescr(
+	   pgettext_expr(table.get_string("msgctxt").c_str(), table.get_string("descname").c_str()),
+	   table, egbase));
 }
 
 void Tribes::add_militarysite_type(const LuaTable& table, const EditorGameBase& egbase) {
 	i18n::Textdomain td("tribes");
-	buildings_->add(
-				new MilitarySiteDescr(
-					pgettext_expr(table.get_string("msgctxt").c_str(), table.get_string("descname").c_str()),
-					table,
-					egbase));
+	buildings_->add(new MilitarySiteDescr(
+	   pgettext_expr(table.get_string("msgctxt").c_str(), table.get_string("descname").c_str()),
+	   table, egbase));
 }
 
 void Tribes::add_productionsite_type(const LuaTable& table, const EditorGameBase& egbase) {
 	i18n::Textdomain td("tribes");
 	const std::string msgctxt = table.get_string("msgctxt");
 	buildings_->add(
-				new ProductionSiteDescr(
-					pgettext_expr(msgctxt.c_str(), table.get_string("descname").c_str()),
-					msgctxt,
-					table,
-					egbase));
+	   new ProductionSiteDescr(pgettext_expr(msgctxt.c_str(), table.get_string("descname").c_str()),
+	                           msgctxt, table, egbase));
 }
 
 void Tribes::add_trainingsite_type(const LuaTable& table, const EditorGameBase& egbase) {
 	i18n::Textdomain td("tribes");
-	buildings_->add(
-				new TrainingSiteDescr(
-					pgettext_expr(table.get_string("msgctxt").c_str(), table.get_string("descname").c_str()),
-					table,
-					egbase));
+	buildings_->add(new TrainingSiteDescr(
+	   pgettext_expr(table.get_string("msgctxt").c_str(), table.get_string("descname").c_str()),
+	   table, egbase));
 }
 
 void Tribes::add_warehouse_type(const LuaTable& table, const EditorGameBase& egbase) {
 	i18n::Textdomain td("tribes");
-	buildings_->add(
-				new WarehouseDescr(
-					pgettext_expr(table.get_string("msgctxt").c_str(), table.get_string("descname").c_str()),
-					table,
-					egbase));
+	buildings_->add(new WarehouseDescr(
+	   pgettext_expr(table.get_string("msgctxt").c_str(), table.get_string("descname").c_str()),
+	   table, egbase));
 }
 
 void Tribes::add_immovable_type(const LuaTable& table) {
 	i18n::Textdomain td("tribes");
-	immovables_->add(
-				new ImmovableDescr(
-					pgettext_expr(table.get_string("msgctxt").c_str(), table.get_string("descname").c_str()),
-					table,
-					*this));
+	immovables_->add(new ImmovableDescr(
+	   pgettext_expr(table.get_string("msgctxt").c_str(), table.get_string("descname").c_str()),
+	   table, *this));
 }
 
 void Tribes::add_ship_type(const LuaTable& table) {
@@ -152,40 +136,35 @@ void Tribes::add_ship_type(const LuaTable& table) {
 void Tribes::add_ware_type(const LuaTable& table) {
 	i18n::Textdomain td("tribes");
 	wares_->add(new WareDescr(
-						pgettext_expr(table.get_string("msgctxt").c_str(), table.get_string("descname").c_str()),
-						table));
+	   pgettext_expr(table.get_string("msgctxt").c_str(), table.get_string("descname").c_str()),
+	   table));
 }
 
 void Tribes::add_carrier_type(const LuaTable& table, const EditorGameBase& egbase) {
 	i18n::Textdomain td("tribes");
 	workers_->add(new CarrierDescr(
-						  pgettext_expr(table.get_string("msgctxt").c_str(), table.get_string("descname").c_str()),
-						  table,
-						  egbase));
+	   pgettext_expr(table.get_string("msgctxt").c_str(), table.get_string("descname").c_str()),
+	   table, egbase));
 }
 
 void Tribes::add_soldier_type(const LuaTable& table, const EditorGameBase& egbase) {
 	i18n::Textdomain td("tribes");
-	workers_->add(
-				new SoldierDescr(
-					pgettext_expr(table.get_string("msgctxt").c_str(), table.get_string("descname").c_str()),
-					table,
-					egbase));
+	workers_->add(new SoldierDescr(
+	   pgettext_expr(table.get_string("msgctxt").c_str(), table.get_string("descname").c_str()),
+	   table, egbase));
 }
 
 void Tribes::add_worker_type(const LuaTable& table, const EditorGameBase& egbase) {
 	i18n::Textdomain td("tribes");
-	workers_->add(
-				new WorkerDescr(
-					pgettext_expr(table.get_string("msgctxt").c_str(), table.get_string("descname").c_str()),
-					table,
-					egbase));
+	workers_->add(new WorkerDescr(
+	   pgettext_expr(table.get_string("msgctxt").c_str(), table.get_string("descname").c_str()),
+	   table, egbase));
 }
 
 void Tribes::add_tribe(const LuaTable& table, const EditorGameBase& egbase) {
 	const std::string name = table.get_string("name");
-	if (tribe_exists(name)) {
-		tribes_->add(new TribeDescr(table, Tribes::tribeinfo(name), egbase.tribes()));
+	if (Widelands::tribe_exists(name)) {
+		tribes_->add(new TribeDescr(table, Widelands::get_tribeinfo(name), egbase.tribes()));
 	} else {
 		throw GameDataError("The tribe '%s'' has no preload file.", name.c_str());
 	}
@@ -277,7 +256,6 @@ DescriptionIndex Tribes::safe_worker_index(const std::string& workername) const 
 	return result;
 }
 
-
 DescriptionIndex Tribes::building_index(const std::string& buildingname) const {
 	return buildings_->get_index(buildingname);
 }
@@ -294,7 +272,6 @@ DescriptionIndex Tribes::tribe_index(const std::string& tribename) const {
 	return tribes_->get_index(tribename);
 }
 
-
 DescriptionIndex Tribes::ware_index(const std::string& warename) const {
 	return wares_->get_index(warename);
 }
@@ -302,7 +279,6 @@ DescriptionIndex Tribes::ware_index(const std::string& warename) const {
 DescriptionIndex Tribes::worker_index(const std::string& workername) const {
 	return workers_->get_index(workername);
 }
-
 
 const BuildingDescr* Tribes::get_building_descr(DescriptionIndex buildingindex) const {
 	return buildings_->get_mutable(buildingindex);
@@ -315,7 +291,6 @@ const ImmovableDescr* Tribes::get_immovable_descr(DescriptionIndex immovableinde
 const ShipDescr* Tribes::get_ship_descr(DescriptionIndex shipindex) const {
 	return ships_->get_mutable(shipindex);
 }
-
 
 const WareDescr* Tribes::get_ware_descr(DescriptionIndex wareindex) const {
 	return wares_->get_mutable(wareindex);
@@ -330,7 +305,7 @@ const TribeDescr* Tribes::get_tribe_descr(DescriptionIndex tribeindex) const {
 }
 
 void Tribes::set_ware_type_has_demand_check(const DescriptionIndex& wareindex,
-														  const std::string& tribename) const {
+                                            const std::string& tribename) const {
 	wares_->get_mutable(wareindex)->set_has_demand_check(tribename);
 }
 
@@ -338,11 +313,7 @@ void Tribes::set_worker_type_has_demand_check(const DescriptionIndex& workerinde
 	workers_->get_mutable(workerindex)->set_has_demand_check();
 }
 
-
-void Tribes::load_graphics()
-{
-	// These will be deleted at the end of the method.
-	std::vector<std::unique_ptr<Texture>> individual_textures_;
+void Tribes::load_graphics() {
 	for (size_t tribeindex = 0; tribeindex < nrtribes(); ++tribeindex) {
 		TribeDescr* tribe = tribes_->get_mutable(tribeindex);
 		for (const std::string& texture_path : tribe->normal_road_paths()) {
@@ -360,7 +331,7 @@ void Tribes::postload() {
 
 		// Add consumers and producers to wares.
 		if (upcast(ProductionSiteDescr, de, &building_descr)) {
-			for (const auto& ware_amount : de->inputs()) {
+			for (const auto& ware_amount : de->input_wares()) {
 				wares_->get_mutable(ware_amount.first)->add_consumer(i);
 			}
 			for (const DescriptionIndex& wareindex : de->output_ware_types()) {
@@ -377,11 +348,12 @@ void Tribes::postload() {
 			buildings_->get_mutable(enhancement)->set_enhanced_from(i);
 		}
 	}
-	// Resize the configuration of our wares if they won't fit in the current window (12 = info label size)
+	// Resize the configuration of our wares if they won't fit in the current window (12 = info label
+	// size)
 	int number = (g_gr->get_yres() - 290) / (WARE_MENU_PIC_HEIGHT + WARE_MENU_PIC_PAD_Y + 12);
 	for (DescriptionIndex i = 0; i < tribes_->size(); ++i) {
 		tribes_->get_mutable(i)->resize_ware_orders(number);
 	}
 }
 
-} // namespace Widelands
+}  // namespace Widelands

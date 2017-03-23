@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2008, 2012 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -32,29 +32,33 @@ class EditorGameBase;
  */
 // TODO(unknown):  Implement undo for this tool
 struct EditorMakeInfrastructureTool : public EditorTool {
-	EditorMakeInfrastructureTool() : EditorTool(*this, *this, false), player_(0) {}
+	EditorMakeInfrastructureTool() : EditorTool(*this, *this, false), player_(0) {
+	}
 
-	void set_player(Widelands::PlayerNumber const n)
-		{player_ = n;}
-	Widelands::PlayerNumber get_player() const
-		{return player_;}
+	void set_player(Widelands::PlayerNumber const n) {
+		player_ = n;
+	}
+	Widelands::PlayerNumber get_player() const {
+		return player_;
+	}
 
 	int32_t handle_click_impl(const Widelands::World& world,
-	                          Widelands::NodeAndTriangle<> center,
+	                          const Widelands::NodeAndTriangle<>& center,
 	                          EditorInteractive& parent,
 	                          EditorActionArgs* args,
-							  Widelands::Map* map) override;
+	                          Widelands::Map* map) override;
 
-	const char * get_sel_impl() const override
-		{return "images/ui_basic/fsel.png";} //  Standard sel icon, most complex tool of all
+	const Image* get_sel_impl() const override {
+		return g_gr->images().get("images/ui_basic/fsel.png");
+	}  //  Standard sel icon, most complex tool of all
 
 private:
 	Widelands::PlayerNumber player_;
 	UI::UniqueWindow::Registry registry_;
 };
 
-int32_t editor_make_infrastructure_tool_callback
-	(const Widelands::TCoords<Widelands::FCoords>& c,
-	 Widelands::EditorGameBase& egbase, int32_t const player);
+int32_t editor_make_infrastructure_tool_callback(const Widelands::TCoords<Widelands::FCoords>& c,
+                                                 Widelands::EditorGameBase& egbase,
+                                                 int32_t const player);
 
 #endif  // end of include guard: WL_EDITOR_TOOLS_MAKE_INFRASTRUCTURE_TOOL_H

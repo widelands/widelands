@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2010, 2013 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -26,21 +26,20 @@ namespace Widelands {
 
 /// Constants for where we are going.
 enum WalkingDir {
-	IDLE            = 0,
+	IDLE = 0,
 	FIRST_DIRECTION = 1,
-	WALK_NE         = 1,
-	WALK_E          = 2,
-	WALK_SE         = 3,
-	WALK_SW         = 4,
-	WALK_W          = 5,
-	WALK_NW         = 6,
-	LAST_DIRECTION  = 6,
+	WALK_NE = 1,
+	WALK_E = 2,
+	WALK_SE = 3,
+	WALK_SW = 4,
+	WALK_W = 5,
+	WALK_NW = 6,
+	LAST_DIRECTION = 6,
 };
 
 WalkingDir get_cw_neighbour(WalkingDir dir);
 WalkingDir get_ccw_neighbour(WalkingDir dir);
 WalkingDir get_backward_dir(WalkingDir dir);
-
 }
 
 #endif  // end of include guard: WL_LOGIC_MAP_OBJECTS_WALKINGDIR_H

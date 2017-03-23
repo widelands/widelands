@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2006-2008 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -36,7 +36,9 @@ template <typename T> struct DescriptionMaintainer {
 	Widelands::DescriptionIndex add(T* entry);
 
 	// Returns the number of entries in the container.
-	Widelands::DescriptionIndex size() const {return items_.size();}
+	Widelands::DescriptionIndex size() const {
+		return items_.size();
+	}
 
 	// Returns the entry with the given 'name' if it exists or nullptr.
 	T* exists(const std::string& name) const;
@@ -70,14 +72,12 @@ private:
 	NameToIndexMap name_to_index_;
 };
 
-
-template <typename T>
-Widelands::DescriptionIndex DescriptionMaintainer<T>::add(T * const item) {
+template <typename T> Widelands::DescriptionIndex DescriptionMaintainer<T>::add(T* const item) {
 	if (exists(item->name()) != nullptr) {
 		throw wexception("Tried to add %s twice.", item->name().c_str());
 	}
 	int32_t index = items_.size();
-	assert(index < (Widelands::INVALID_INDEX - 2)); // allowing for kInvalidIndex
+	assert(index < (Widelands::INVALID_INDEX - 2));  // allowing for kInvalidIndex
 	items_.emplace_back(item);
 	name_to_index_[item->name()] = index;
 	return index;
@@ -85,7 +85,8 @@ Widelands::DescriptionIndex DescriptionMaintainer<T>::add(T * const item) {
 
 template <typename T> T* DescriptionMaintainer<T>::exists(const std::string& name) const {
 	auto index = get_index(name);
-	if (index == Widelands::INVALID_INDEX) return nullptr;
+	if (index == Widelands::INVALID_INDEX)
+		return nullptr;
 	return items_[index].get();
 }
 

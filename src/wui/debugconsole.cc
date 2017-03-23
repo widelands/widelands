@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2016 by the Widelands Development Team
+ * Copyright (C) 2008-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -35,19 +35,16 @@ struct Console : public ChatProvider, public Handler {
 	CommandMap commands;
 	Handler::HandlerFn default_handler;
 
-	Console()
-	{
+	Console() {
 		addCommand("help", boost::bind(&Console::cmdHelp, this, _1));
 		addCommand("ls", boost::bind(&Console::cmdLs, this, _1));
 		default_handler = boost::bind(&Console::cmdErr, this, _1);
 	}
 
-	~Console()
-	{
+	~Console() {
 	}
 
-	void cmdHelp(const std::vector<std::string> &)
-	{
+	void cmdHelp(const std::vector<std::string>&) {
 		write("Use 'ls' to list all available commands.");
 	}
 
@@ -57,12 +54,11 @@ struct Console : public ChatProvider, public Handler {
 		}
 	}
 
-	void cmdErr(const std::vector<std::string> & args) {
+	void cmdErr(const std::vector<std::string>& args) {
 		write("Unknown command: " + args[0]);
 	}
 
-	void send(const std::string & msg) override
-	{
+	void send(const std::string& msg) override {
 		std::vector<std::string> arg;
 		std::string::size_type pos = 0;
 
@@ -86,13 +82,11 @@ struct Console : public ChatProvider, public Handler {
 		it->second(arg);
 	}
 
-	const std::vector<ChatMessage> & get_messages() const override
-	{
+	const std::vector<ChatMessage>& get_messages() const override {
 		return messages;
 	}
 
-	void write(const std::string & msg)
-	{
+	void write(const std::string& msg) {
 		ChatMessage cm;
 
 		cm.time = time(nullptr);
@@ -105,7 +99,7 @@ struct Console : public ChatProvider, public Handler {
 		if (messages.size() > 1000)
 			messages.erase(messages.begin(), messages.begin() + 100);
 
-		Notifications::publish(cm); // Notify listeners, i.e. the UI
+		Notifications::publish(cm);  // Notify listeners, i.e. the UI
 	}
 };
 
@@ -116,23 +110,18 @@ extern Console g_console;  // To shup up clang.
 // TODO(sirver): should instead be in a static function that returns pointer to static object
 Console g_console;
 
-ChatProvider * get_chat_provider()
-{
+ChatProvider* get_chat_provider() {
 	return &g_console;
 }
 
-void write(const std::string & text)
-{
+void write(const std::string& text) {
 	g_console.write(text);
 }
 
-
-Handler::Handler()
-{
+Handler::Handler() {
 }
 
-Handler::~Handler()
-{
+Handler::~Handler() {
 	// This check is an evil hack to account for the singleton-nature
 	// of the Console
 	if (this != &g_console) {
@@ -142,15 +131,12 @@ Handler::~Handler()
 	}
 }
 
-void Handler::addCommand(const std::string & cmd, const HandlerFn & fun)
-{
+void Handler::addCommand(const std::string& cmd, const HandlerFn& fun) {
 	g_console.commands[cmd] = fun;
 	commands_.push_back(cmd);
 }
 
-void Handler::setDefaultCommand(const HandlerFn & fun)
-{
+void Handler::setDefaultCommand(const HandlerFn& fun) {
 	g_console.default_handler = fun;
 }
-
 }

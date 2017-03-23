@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007-2016 by the Widelands Development Team
+ * Copyright (C) 2007-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -33,7 +33,15 @@
 #include "logic/map_objects/tribes/ship.h"
 #include "logic/player.h"
 #include "profile/profile.h"
+#include "wui/constructionsitewindow.h"
+#include "wui/dismantlesitewindow.h"
 #include "wui/game_summary.h"
+#include "wui/militarysitewindow.h"
+#include "wui/productionsitewindow.h"
+#include "wui/shipwindow.h"
+#include "wui/trainingsitewindow.h"
+#include "wui/unique_window_handler.h"
+#include "wui/warehousewindow.h"
 
 namespace {
 
@@ -46,49 +54,53 @@ std::string speed_string(int const speed) {
 
 }  // namespace
 
-InteractiveGameBase::InteractiveGameBase
-	(Widelands::Game& g, Section & global_s,
-	 PlayerType pt, bool const chatenabled, bool const multiplayer)
-	:
-	InteractiveBase(g, global_s),
-	chat_provider_(nullptr),
-	chatenabled_(chatenabled),
-	multiplayer_(multiplayer),
-	playertype_(pt),
-
-#define INIT_BTN(picture, name, tooltip)                            \
- TOOLBAR_BUTTON_COMMON_PARAMETERS(name),                                      \
- g_gr->images().get("images/" picture ".png"),                      \
- tooltip                                                                      \
-
-	toggle_buildhelp_
-		(INIT_BTN("wui/menus/menu_toggle_buildhelp", "buildhelp", _("Show Building Spaces (on/off)")))
-{
-	toggle_buildhelp_.sigclicked.connect(boost::bind(&InteractiveGameBase::toggle_buildhelp, this));
+InteractiveGameBase::InteractiveGameBase(Widelands::Game& g,
+                                         Section& global_s,
+                                         PlayerType pt,
+                                         bool const multiplayer)
+   : InteractiveBase(g, global_s),
+     chat_provider_(nullptr),
+     multiplayer_(multiplayer),
+     playertype_(pt) {
+	buildingnotes_subscriber_ = Notifications::subscribe<Widelands::NoteBuilding>(
+	   [this](const Widelands::NoteBuilding& note) {
+		   switch (note.action) {
+		   case Widelands::NoteBuilding::Action::kFinishWarp: {
+			   if (upcast(
+			          Widelands::Building const, building, game().objects().get_object(note.serial))) {
+				   const Widelands::Coords coords = building->get_position();
+				   // Check whether the window is wanted
+				   if (wanted_building_windows_.count(coords.hash()) == 1) {
+					   UI::UniqueWindow* building_window = show_building_window(coords, true);
+					   building_window->set_pos(wanted_building_windows_.at(coords.hash()).first);
+					   if (wanted_building_windows_.at(coords.hash()).second) {
+						   building_window->minimize();
+					   }
+					   wanted_building_windows_.erase(coords.hash());
+				   }
+			   }
+		   } break;
+		   default:
+			   break;
+		   }
+		});
 }
 
 /// \return a pointer to the running \ref Game instance.
-Widelands::Game * InteractiveGameBase::get_game() const
-{
-	return dynamic_cast<Widelands::Game *>(&egbase());
+Widelands::Game* InteractiveGameBase::get_game() const {
+	return dynamic_cast<Widelands::Game*>(&egbase());
 }
 
-
-Widelands::Game & InteractiveGameBase::    game() const
-{
+Widelands::Game& InteractiveGameBase::game() const {
 	return dynamic_cast<Widelands::Game&>(egbase());
 }
 
-void InteractiveGameBase::set_chat_provider(ChatProvider & chat)
-{
+void InteractiveGameBase::set_chat_provider(ChatProvider& chat) {
 	chat_provider_ = &chat;
 	chat_overlay_->set_chat_provider(chat);
-
-	chatenabled_ = true;
 }
 
-ChatProvider * InteractiveGameBase::get_chat_provider()
-{
+ChatProvider* InteractiveGameBase::get_chat_provider() {
 	return chat_provider_;
 }
 
@@ -107,69 +119,130 @@ void InteractiveGameBase::draw_overlay(RenderTarget& dst) {
 			}
 		} else {
 			game_speed = as_condensed((boost::format
-											/** TRANSLATORS: actual_speed (desired_speed) */
-											(_("%1$s (%2$s)")) %
-											speed_string(real) % speed_string(desired)).str());
+			                           /** TRANSLATORS: actual_speed (desired_speed) */
+			                           (_("%1$s (%2$s)")) %
+			                           speed_string(real) % speed_string(desired))
+			                             .str());
 		}
 
 		if (!game_speed.empty()) {
-			dst.blit(Point(get_w() - 5,  5),
-						UI::g_fh1->render(game_speed),
-						BlendMode::UseAlpha,
-						UI::Align::kTopRight);
+			dst.blit(Vector2f(get_w() - 5, 5), UI::g_fh1->render(game_speed), BlendMode::UseAlpha,
+			         UI::Align::kRight);
 		}
 	}
 }
-
 
 /**
  * Called for every game after loading (from a savegame or just from a map
  * during single/multiplayer/scenario).
  */
 void InteractiveGameBase::postload() {
-	Widelands::Map & map = egbase().map();
+	Widelands::Map& map = egbase().map();
 	auto* overlay_manager = mutable_field_overlay_manager();
 	show_buildhelp(false);
-	toggle_buildhelp_.set_perm_pressed(buildhelp());
+	on_buildhelp_changed(buildhelp());
 
-	overlay_manager->register_overlay_callback_function
-			(boost::bind(&InteractiveGameBase::calculate_buildcaps, this, _1));
-
+	overlay_manager->register_overlay_callback_function(
+	   boost::bind(&InteractiveGameBase::calculate_buildcaps, this, _1));
 
 	// Recalc whole map for changed owner stuff
 	map.recalc_whole_map(egbase().world());
 
 	// Close game-relevant UI windows (but keep main menu open)
-	delete fieldaction_.window;
-	fieldaction_.window = nullptr;
-
+	fieldaction_.destroy();
 	hide_minimap();
 }
 
 void InteractiveGameBase::on_buildhelp_changed(const bool value) {
-	toggle_buildhelp_.set_perm_pressed(value);
+	toggle_buildhelp_->set_perm_pressed(value);
+}
+
+void InteractiveGameBase::add_wanted_building_window(const Widelands::Coords& coords,
+                                                     const Vector2i point,
+                                                     bool was_minimal) {
+	wanted_building_windows_.insert(
+	   std::make_pair(coords.hash(), std::make_pair(point, was_minimal)));
+}
+
+UI::UniqueWindow* InteractiveGameBase::show_building_window(const Widelands::Coords& coord,
+                                                            bool avoid_fastclick) {
+	Widelands::BaseImmovable* immovable = game().map().get_immovable(coord);
+	upcast(Widelands::Building, building, immovable);
+	assert(building);
+	UI::UniqueWindow::Registry& registry =
+	   unique_windows().get_registry((boost::format("building_%d") % building->serial()).str());
+
+	switch (building->descr().type()) {
+	case Widelands::MapObjectType::CONSTRUCTIONSITE:
+		registry.open_window = [this, &registry, building, avoid_fastclick] {
+			new ConstructionSiteWindow(*this, registry,
+			                           *dynamic_cast<Widelands::ConstructionSite*>(building),
+			                           avoid_fastclick);
+		};
+		break;
+	case Widelands::MapObjectType::DISMANTLESITE:
+		registry.open_window = [this, &registry, building, avoid_fastclick] {
+			new DismantleSiteWindow(
+			   *this, registry, *dynamic_cast<Widelands::DismantleSite*>(building), avoid_fastclick);
+		};
+		break;
+	case Widelands::MapObjectType::MILITARYSITE:
+		registry.open_window = [this, &registry, building, avoid_fastclick] {
+			new MilitarySiteWindow(
+			   *this, registry, *dynamic_cast<Widelands::MilitarySite*>(building), avoid_fastclick);
+		};
+		break;
+	case Widelands::MapObjectType::PRODUCTIONSITE:
+		registry.open_window = [this, &registry, building, avoid_fastclick] {
+			new ProductionSiteWindow(
+			   *this, registry, *dynamic_cast<Widelands::ProductionSite*>(building), avoid_fastclick);
+		};
+		break;
+	case Widelands::MapObjectType::TRAININGSITE:
+		registry.open_window = [this, &registry, building, avoid_fastclick] {
+			new TrainingSiteWindow(
+			   *this, registry, *dynamic_cast<Widelands::TrainingSite*>(building), avoid_fastclick);
+		};
+		break;
+	case Widelands::MapObjectType::WAREHOUSE:
+		registry.open_window = [this, &registry, building, avoid_fastclick] {
+			new WarehouseWindow(
+			   *this, registry, *dynamic_cast<Widelands::Warehouse*>(building), avoid_fastclick);
+		};
+		break;
+	default:
+		log("Unable to show window for building '%s', type '%s'.\n", building->descr().name().c_str(),
+		    to_string(building->descr().type()).c_str());
+		NEVER_HERE();
+	}
+	registry.create();
+	return registry.window;
 }
 
 /**
  * See if we can reasonably open a ship window at the current selection position.
  * If so, do it and return true; otherwise, return false.
  */
-bool InteractiveGameBase::try_show_ship_window()
-{
-	Widelands::Map & map(game().map());
+bool InteractiveGameBase::try_show_ship_window() {
+	Widelands::Map& map(game().map());
 	Widelands::Area<Widelands::FCoords> area(map.get_fcoords(get_sel_pos().node), 1);
 
 	if (!(area.field->nodecaps() & Widelands::MOVECAPS_SWIM))
 		return false;
 
-	std::vector<Widelands::Bob *> ships;
+	std::vector<Widelands::Bob*> ships;
 	if (!map.find_bobs(area, &ships, Widelands::FindBobShip()))
 		return false;
 
-	for (Widelands::Bob * temp_ship : ships) {
+	for (Widelands::Bob* temp_ship : ships) {
 		if (upcast(Widelands::Ship, ship, temp_ship)) {
 			if (can_see(ship->get_owner()->player_number())) {
-				ship->show_window(*this);
+				UI::UniqueWindow::Registry& registry =
+				   unique_windows().get_registry((boost::format("ship_%d") % ship->serial()).str());
+				registry.open_window = [this, &registry, ship] {
+					new ShipWindow(*this, registry, *ship);
+				};
+				registry.create();
 				return true;
 			}
 		}
@@ -178,9 +251,7 @@ bool InteractiveGameBase::try_show_ship_window()
 	return false;
 }
 
-void InteractiveGameBase::show_game_summary()
-{
-	game().game_controller()->set_desired_speed(0);
+void InteractiveGameBase::show_game_summary() {
 	if (game_summary_.window) {
 		game_summary_.window->set_visible(true);
 		game_summary_.window->think();

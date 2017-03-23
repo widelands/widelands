@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2011 by the Widelands Development Team
+ * Copyright (C) 2011-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -35,9 +35,8 @@ struct MapPortSpacesPacket {
 
 	//  The following function prereads a given map without the need of a
 	//  properly configured EditorGameBase object.
-	void pre_read(FileSystem &, Map*);
+	void pre_read(FileSystem&, Map*);
 };
-
 }
 
 #endif  // end of include guard: WL_MAP_IO_MAP_PORT_SPACES_PACKET_H

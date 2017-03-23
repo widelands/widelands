@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2003-2016 by the Widelands Development Team
+ * Copyright (C) 2003-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -38,31 +38,27 @@
 
 const int WARE_MENU_INFO_SIZE = 12;
 
-AbstractWaresDisplay::AbstractWaresDisplay
-	(UI::Panel * const parent,
-	 int32_t x, int32_t y,
-	 const Widelands::TribeDescr & tribe,
-	 Widelands::WareWorker type,
-	 bool selectable,
-	 boost::function<void(Widelands::DescriptionIndex, bool)> callback_function,
-	 bool horizontal)
-	:
-	// Size is set when add_warelist is called, as it depends on the type_.
-	UI::Panel(parent, x, y, 0, 0),
-	tribe_ (tribe),
+AbstractWaresDisplay::AbstractWaresDisplay(
+   UI::Panel* const parent,
+   int32_t x,
+   int32_t y,
+   const Widelands::TribeDescr& tribe,
+   Widelands::WareWorker type,
+   bool selectable,
+   boost::function<void(Widelands::DescriptionIndex, bool)> callback_function,
+   bool horizontal)
+   :  // Size is set when add_warelist is called, as it depends on the type_.
+     UI::Panel(parent, x, y, 0, 0),
+     tribe_(tribe),
 
-	type_ (type),
-	indices_(type_ == Widelands::wwWORKER ? tribe_.workers() : tribe_.wares()),
-	curware_
-		(this,
-		 0, get_inner_h() - 25, get_inner_w(), 20,
-		 "", UI::Align::kCenter),
+     type_(type),
+     indices_(type_ == Widelands::wwWORKER ? tribe_.workers() : tribe_.wares()),
+     curware_(this, 0, get_inner_h() - 25, get_inner_w(), 20, "", UI::Align::kCenter),
 
-	selectable_(selectable),
-	horizontal_(horizontal),
-	selection_anchor_(Widelands::INVALID_INDEX),
-	callback_function_(callback_function)
-{
+     selectable_(selectable),
+     horizontal_(horizontal),
+     selection_anchor_(Widelands::INVALID_INDEX),
+     callback_function_(callback_function) {
 	for (const Widelands::DescriptionIndex& index : indices_) {
 		selected_.insert(std::make_pair(index, false));
 		hidden_.insert(std::make_pair(index, false));
@@ -84,24 +80,20 @@ AbstractWaresDisplay::AbstractWaresDisplay
 	}
 
 	// 25 is height of curware_ text
-	set_desired_size
-		(columns * (WARE_MENU_PIC_WIDTH  + WARE_MENU_PIC_PAD_X) + 1,
-		 rows * (WARE_MENU_PIC_HEIGHT + WARE_MENU_INFO_SIZE + WARE_MENU_PIC_PAD_Y) + 1 + 25);
+	set_desired_size(
+	   columns * (WARE_MENU_PIC_WIDTH + WARE_MENU_PIC_PAD_X) + 1,
+	   rows * (WARE_MENU_PIC_HEIGHT + WARE_MENU_INFO_SIZE + WARE_MENU_PIC_PAD_Y) + 1 + 25);
 }
 
-
-bool AbstractWaresDisplay::handle_mousemove
-	(uint8_t state, int32_t x, int32_t y, int32_t, int32_t)
-{
+bool AbstractWaresDisplay::handle_mousemove(uint8_t state, int32_t x, int32_t y, int32_t, int32_t) {
 	const Widelands::DescriptionIndex index = ware_at_point(x, y);
 
 	curware_.set_fixed_width(get_inner_w());
 
 	curware_.set_text(index != Widelands::INVALID_INDEX ?
-	                      (type_ == Widelands::wwWORKER ?
-	                          tribe_.get_worker_descr(index)->descname() :
-	                          tribe_.get_ware_descr(index)->descname()) :
-	                      "");
+	                     (type_ == Widelands::wwWORKER ? tribe_.get_worker_descr(index)->descname() :
+	                                                     tribe_.get_ware_descr(index)->descname()) :
+	                     "");
 	if (selection_anchor_ != Widelands::INVALID_INDEX) {
 		// Ensure mouse button is still pressed as some
 		// mouse release events do not reach us
@@ -116,9 +108,7 @@ bool AbstractWaresDisplay::handle_mousemove
 	return true;
 }
 
-bool AbstractWaresDisplay::handle_mousepress
-	(uint8_t btn, int32_t x, int32_t y)
-{
+bool AbstractWaresDisplay::handle_mousepress(uint8_t btn, int32_t x, int32_t y) {
 	if (btn == SDL_BUTTON_LEFT) {
 		Widelands::DescriptionIndex ware = ware_at_point(x, y);
 
@@ -142,8 +132,7 @@ bool AbstractWaresDisplay::handle_mousepress
 	return UI::Panel::handle_mousepress(btn, x, y);
 }
 
-bool AbstractWaresDisplay::handle_mouserelease(uint8_t btn, int32_t x, int32_t y)
-{
+bool AbstractWaresDisplay::handle_mouserelease(uint8_t btn, int32_t x, int32_t y) {
 	if (btn != SDL_BUTTON_LEFT || selection_anchor_ == Widelands::INVALID_INDEX) {
 		return UI::Panel::handle_mouserelease(btn, x, y);
 	}
@@ -168,16 +157,13 @@ bool AbstractWaresDisplay::handle_mouserelease(uint8_t btn, int32_t x, int32_t y
 	return true;
 }
 
-
 /**
  * Returns the index of the ware under the given coordinates, or
  * DescriptionIndex::null() if the given point is outside the range.
  */
-Widelands::DescriptionIndex AbstractWaresDisplay::ware_at_point(int32_t x, int32_t y) const
-{
+Widelands::DescriptionIndex AbstractWaresDisplay::ware_at_point(int32_t x, int32_t y) const {
 	if (x < 0 || y < 0)
 		return Widelands::INVALID_INDEX;
-
 
 	unsigned int i = x / (WARE_MENU_PIC_WIDTH + WARE_MENU_PIC_PAD_X);
 	unsigned int j = y / (WARE_MENU_PIC_HEIGHT + WARE_MENU_INFO_SIZE + WARE_MENU_PIC_PAD_Y);
@@ -201,8 +187,7 @@ Widelands::DescriptionIndex AbstractWaresDisplay::ware_at_point(int32_t x, int32
 // press. Mouse move call this function with the current mouse position.
 // This function will temporary store all wares in the rectangle between anchor
 // and current pos to allow their selection on mouse release
-void AbstractWaresDisplay::update_anchor_selection(int32_t x, int32_t y)
-{
+void AbstractWaresDisplay::update_anchor_selection(int32_t x, int32_t y) {
 	if (selection_anchor_ == Widelands::INVALID_INDEX || x < 0 || y < 0) {
 		return;
 	}
@@ -211,16 +196,18 @@ void AbstractWaresDisplay::update_anchor_selection(int32_t x, int32_t y)
 		in_selection_[resetme.first] = false;
 	}
 
-	Point anchor_pos = ware_position(selection_anchor_);
+	Vector2i anchor_pos = ware_position(selection_anchor_);
 	// Add an offset to make sure the anchor line and column will be
 	// selected when selecting in topleft direction
 	int32_t anchor_x = anchor_pos.x + WARE_MENU_PIC_WIDTH / 2;
 	int32_t anchor_y = anchor_pos.y + WARE_MENU_PIC_HEIGHT / 2;
 
 	unsigned int left_ware_idx = anchor_x / (WARE_MENU_PIC_WIDTH + WARE_MENU_PIC_PAD_X);
-	unsigned int top_ware_idx = anchor_y / (WARE_MENU_PIC_HEIGHT + WARE_MENU_INFO_SIZE + WARE_MENU_PIC_PAD_Y);
+	unsigned int top_ware_idx =
+	   anchor_y / (WARE_MENU_PIC_HEIGHT + WARE_MENU_INFO_SIZE + WARE_MENU_PIC_PAD_Y);
 	unsigned int right_ware_idx = x / (WARE_MENU_PIC_WIDTH + WARE_MENU_PIC_PAD_X);
-	unsigned int bottoware_idx_ = y / (WARE_MENU_PIC_HEIGHT + WARE_MENU_INFO_SIZE + WARE_MENU_PIC_PAD_Y);
+	unsigned int bottoware_idx_ =
+	   y / (WARE_MENU_PIC_HEIGHT + WARE_MENU_INFO_SIZE + WARE_MENU_PIC_PAD_Y);
 	unsigned int tmp;
 
 	// Reverse col/row and anchor/endpoint if needed
@@ -257,11 +244,8 @@ void AbstractWaresDisplay::update_anchor_selection(int32_t x, int32_t y)
 	}
 }
 
-
-
-void AbstractWaresDisplay::layout()
-{
-	curware_.set_pos(Point(0, get_inner_h() - 25));
+void AbstractWaresDisplay::layout() {
+	curware_.set_pos(Vector2i(0, get_inner_h() - 25));
 	curware_.set_size(get_inner_w(), 20);
 }
 
@@ -269,9 +253,7 @@ void WaresDisplay::remove_all_warelists() {
 	warelists_.clear();
 }
 
-
-void AbstractWaresDisplay::draw(RenderTarget & dst)
-{
+void AbstractWaresDisplay::draw(RenderTarget& dst) {
 	for (const Widelands::DescriptionIndex& index : indices_) {
 		if (!hidden_[index]) {
 			draw_ware(dst, index);
@@ -279,8 +261,7 @@ void AbstractWaresDisplay::draw(RenderTarget & dst)
 	}
 }
 
-const Widelands::TribeDescr::WaresOrder & AbstractWaresDisplay::icons_order() const
-{
+const Widelands::TribeDescr::WaresOrder& AbstractWaresDisplay::icons_order() const {
 	switch (type_) {
 	case Widelands::wwWARE:
 		return tribe_.wares_order();
@@ -290,8 +271,7 @@ const Widelands::TribeDescr::WaresOrder & AbstractWaresDisplay::icons_order() co
 	NEVER_HERE();
 }
 
-const Widelands::TribeDescr::WaresOrderCoords & AbstractWaresDisplay::icons_order_coords() const
-{
+const Widelands::TribeDescr::WaresOrderCoords& AbstractWaresDisplay::icons_order_coords() const {
 	switch (type_) {
 	case Widelands::wwWARE:
 		return tribe_.wares_order_coords();
@@ -301,20 +281,16 @@ const Widelands::TribeDescr::WaresOrderCoords & AbstractWaresDisplay::icons_orde
 	NEVER_HERE();
 }
 
-
-Point AbstractWaresDisplay::ware_position(Widelands::DescriptionIndex id) const
-{
-	Point p(2, 2);
+Vector2i AbstractWaresDisplay::ware_position(Widelands::DescriptionIndex id) const {
+	Vector2i p(2, 2);
 	if (horizontal_) {
-		p.x += icons_order_coords()[id].second  *
-			(WARE_MENU_PIC_WIDTH + WARE_MENU_PIC_PAD_X);
+		p.x += icons_order_coords()[id].second * (WARE_MENU_PIC_WIDTH + WARE_MENU_PIC_PAD_X);
 		p.y += icons_order_coords()[id].first *
-			(WARE_MENU_PIC_HEIGHT + WARE_MENU_PIC_PAD_Y + WARE_MENU_INFO_SIZE);
+		       (WARE_MENU_PIC_HEIGHT + WARE_MENU_PIC_PAD_Y + WARE_MENU_INFO_SIZE);
 	} else {
-		p.x += icons_order_coords()[id].first  *
-			(WARE_MENU_PIC_WIDTH + WARE_MENU_PIC_PAD_X);
+		p.x += icons_order_coords()[id].first * (WARE_MENU_PIC_WIDTH + WARE_MENU_PIC_PAD_X);
 		p.y += icons_order_coords()[id].second *
-			(WARE_MENU_PIC_HEIGHT + WARE_MENU_PIC_PAD_Y + WARE_MENU_INFO_SIZE);
+		       (WARE_MENU_PIC_HEIGHT + WARE_MENU_PIC_PAD_Y + WARE_MENU_INFO_SIZE);
 	}
 	return p;
 }
@@ -326,12 +302,7 @@ WaresDisplay::draw_ware [virtual]
 Draw one ware icon + additional information.
 ===============
 */
-void AbstractWaresDisplay::draw_ware
-	(RenderTarget & dst,
-	 Widelands::DescriptionIndex id)
-{
-	Point p = ware_position(id);
-
+void AbstractWaresDisplay::draw_ware(RenderTarget& dst, Widelands::DescriptionIndex id) {
 	bool draw_selected = selected_[id];
 	if (selection_anchor_ != Widelands::INVALID_INDEX) {
 		// Draw the temporary selected wares as if they were
@@ -345,49 +316,45 @@ void AbstractWaresDisplay::draw_ware
 	}
 
 	//  draw a background
-	const Image* bgpic =
-		g_gr->images().get(draw_selected ?
-									 "images/wui/ware_list_bg_selected.png" :
-									 "images/wui/ware_list_bg.png");
+	const Image* bgpic = g_gr->images().get(draw_selected ? "images/wui/ware_list_bg_selected.png" :
+	                                                        "images/wui/ware_list_bg.png");
 	uint16_t w = bgpic->width();
 
+	const Vector2f p = ware_position(id).cast<float>();
 	dst.blit(p, bgpic);
 
-	const Image* icon = type_ == Widelands::wwWORKER ? tribe_.get_worker_descr(id)->icon()
-		: tribe_.get_ware_descr(id)->icon();
+	const Image* icon = type_ == Widelands::wwWORKER ? tribe_.get_worker_descr(id)->icon() :
+	                                                   tribe_.get_ware_descr(id)->icon();
 
-	dst.blit(p + Point((w - WARE_MENU_PIC_WIDTH) / 2, 1), icon);
+	dst.blit(p + Vector2f((w - WARE_MENU_PIC_WIDTH) / 2.f, 1.f), icon);
 
-	dst.fill_rect
-		(Rect(p + Point(0, WARE_MENU_PIC_HEIGHT), w, WARE_MENU_INFO_SIZE),
-		 info_color_for_ware(id));
+	dst.fill_rect(Rectf(p + Vector2f(0.f, WARE_MENU_PIC_HEIGHT), w, WARE_MENU_INFO_SIZE),
+	              info_color_for_ware(id));
 
 	const Image* text = UI::g_fh1->render(as_waresinfo(info_for_ware(id)));
-	if (text) // might be zero when there is no info text.
-		dst.blit
-			(p + Point
-				(w - text->width() - 1, WARE_MENU_PIC_HEIGHT + WARE_MENU_INFO_SIZE + 1 - text->height()), text);
+	if (text)  // might be zero when there is no info text.
+		dst.blit(p + Vector2f(w - text->width() - 1,
+		                      WARE_MENU_PIC_HEIGHT + WARE_MENU_INFO_SIZE + 1 - text->height()),
+		         text);
 }
 
 // Wares highlighting/selecting
-void AbstractWaresDisplay::select_ware(Widelands::DescriptionIndex ware)
-{
+void AbstractWaresDisplay::select_ware(Widelands::DescriptionIndex ware) {
 	if (selected_[ware])
 		return;
 
 	selected_[ware] = true;
 	if (callback_function_)
-			callback_function_(ware, true);
+		callback_function_(ware, true);
 }
 
-void AbstractWaresDisplay::unselect_ware(Widelands::DescriptionIndex ware)
-{
+void AbstractWaresDisplay::unselect_ware(Widelands::DescriptionIndex ware) {
 	if (!selected_[ware])
 		return;
 
 	selected_[ware] = false;
 	if (callback_function_)
-			callback_function_(ware, false);
+		callback_function_(ware, false);
 }
 
 bool AbstractWaresDisplay::ware_selected(Widelands::DescriptionIndex ware) {
@@ -395,15 +362,13 @@ bool AbstractWaresDisplay::ware_selected(Widelands::DescriptionIndex ware) {
 }
 
 // Wares hiding
-void AbstractWaresDisplay::hide_ware(Widelands::DescriptionIndex ware)
-{
+void AbstractWaresDisplay::hide_ware(Widelands::DescriptionIndex ware) {
 	if (hidden_[ware])
 		return;
 	hidden_[ware] = true;
 }
 
-void AbstractWaresDisplay::unhide_ware(Widelands::DescriptionIndex ware)
-{
+void AbstractWaresDisplay::unhide_ware(Widelands::DescriptionIndex ware) {
 	if (!hidden_[ware])
 		return;
 	hidden_[ware] = false;
@@ -413,21 +378,20 @@ bool AbstractWaresDisplay::ware_hidden(Widelands::DescriptionIndex ware) {
 	return hidden_[ware];
 }
 
-WaresDisplay::WaresDisplay
-	(UI::Panel * const parent,
-	 int32_t x, int32_t y,
-	 const Widelands::TribeDescr & tribe,
-	 Widelands::WareWorker type,
-	 bool selectable)
-: AbstractWaresDisplay(parent, x, y, tribe, type, selectable)
-{}
+WaresDisplay::WaresDisplay(UI::Panel* const parent,
+                           int32_t x,
+                           int32_t y,
+                           const Widelands::TribeDescr& tribe,
+                           Widelands::WareWorker type,
+                           bool selectable)
+   : AbstractWaresDisplay(parent, x, y, tribe, type, selectable) {
+}
 
 RGBColor AbstractWaresDisplay::info_color_for_ware(Widelands::DescriptionIndex /* ware */) {
 	return RGBColor(0, 0, 0);
 }
 
-WaresDisplay::~WaresDisplay()
-{
+WaresDisplay::~WaresDisplay() {
 	remove_all_warelists();
 }
 
@@ -444,18 +408,13 @@ std::string WaresDisplay::info_for_ware(Widelands::DescriptionIndex ware) {
 add a ware list to be displayed in this WaresDisplay
 ===============
 */
-void WaresDisplay::add_warelist
-	(const Widelands::WareList & wares)
-{
+void WaresDisplay::add_warelist(const Widelands::WareList& wares) {
 	//  If you register something twice, it is counted twice. Not my problem.
 	warelists_.push_back(&wares);
 }
 
-
-std::string waremap_to_richtext
-		(const Widelands::TribeDescr & tribe,
-		 const std::map<Widelands::DescriptionIndex, uint8_t> & map)
-{
+std::string waremap_to_richtext(const Widelands::TribeDescr& tribe,
+                                const std::map<Widelands::DescriptionIndex, uint8_t>& map) {
 	std::string ret;
 
 	std::map<Widelands::DescriptionIndex, uint8_t>::const_iterator c;
@@ -464,15 +423,15 @@ std::string waremap_to_richtext
 	std::vector<Widelands::DescriptionIndex>::iterator j;
 	Widelands::TribeDescr::WaresOrder order = tribe.wares_order();
 
-	for (i = order.begin(); i != order.end(); i++)
+	for (i = order.begin(); i != order.end(); ++i)
 		for (j = i->begin(); j != i->end(); ++j)
 			if ((c = map.find(*j)) != map.end()) {
-				ret += "<sub width=30 padding=2><p align=center>"
-						 "<sub width=26 background=454545><p align=center><img src=\""
-						+ tribe.get_ware_descr(c->first)->icon_filename()
-						+ "\"></p></sub><sub width=26 background=000000><p><font size=9>"
-						+ boost::lexical_cast<std::string>(static_cast<int32_t>(c->second))
-						+ "</font></p></sub></p></sub>";
+				ret += "<div width=30 padding=2><p align=center>"
+				       "<div width=26 background=454545><p align=center><img src=\"" +
+				       tribe.get_ware_descr(c->first)->icon_filename() +
+				       "\"></p></div><div width=26 background=000000><p><font size=9>" +
+				       boost::lexical_cast<std::string>(static_cast<int32_t>(c->second)) +
+				       "</font></p></div></p></div>";
 			}
 	return ret;
 }

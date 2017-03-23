@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2010 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -21,7 +21,6 @@
 
 #include "io/fileread.h"
 #include "io/filewrite.h"
-#include "logic/constants.h"
 #include "logic/game.h"
 #include "logic/game_data_error.h"
 #include "logic/map_objects/tribes/tribe_descr.h"
@@ -33,8 +32,7 @@ namespace Widelands {
 
 constexpr uint16_t kCurrentPacketVersion = 20;
 
-void GamePlayerInfoPacket::read
-	(FileSystem & fs, Game & game, MapObjectLoader *) {
+void GamePlayerInfoPacket::read(FileSystem& fs, Game& game, MapObjectLoader*) {
 	try {
 		FileRead fr;
 		fr.open(fs, "binary/player_info");
@@ -47,18 +45,17 @@ void GamePlayerInfoPacket::read
 					bool const see_all = fr.unsigned_8();
 
 					int32_t const plnum = fr.unsigned_8();
-					if (plnum < 1 || MAX_PLAYERS < plnum)
-						throw GameDataError
-							("player number (%i) is out of range (1 .. %u)",
-							 plnum, MAX_PLAYERS);
+					if (plnum < 1 || kMaxPlayers < plnum)
+						throw GameDataError(
+						   "player number (%i) is out of range (1 .. %u)", plnum, kMaxPlayers);
 
 					Widelands::TeamNumber team = fr.unsigned_8();
-					char const * const tribe_name = fr.c_string();
+					char const* const tribe_name = fr.c_string();
 
 					std::string const name = fr.c_string();
 
 					game.add_player(plnum, 0, tribe_name, name, team);
-					Player & player = game.player(plnum);
+					Player& player = game.player(plnum);
 					player.set_see_all(see_all);
 
 					player.set_ai(fr.c_string());
@@ -66,10 +63,10 @@ void GamePlayerInfoPacket::read
 					player.read_remaining_shipnames(fr);
 
 					player.casualties_ = fr.unsigned_32();
-					player.kills_      = fr.unsigned_32();
-					player.msites_lost_         = fr.unsigned_32();
-					player.msites_defeated_     = fr.unsigned_32();
-					player.civil_blds_lost_     = fr.unsigned_32();
+					player.kills_ = fr.unsigned_32();
+					player.msites_lost_ = fr.unsigned_32();
+					player.msites_defeated_ = fr.unsigned_32();
+					player.civil_blds_lost_ = fr.unsigned_32();
 					player.civil_blds_defeated_ = fr.unsigned_32();
 				}
 			}
@@ -92,15 +89,12 @@ void GamePlayerInfoPacket::read
 		} else {
 			throw UnhandledVersionError("GamePlayerInfoPacket", packet_version, kCurrentPacketVersion);
 		}
-	} catch (const WException & e) {
+	} catch (const WException& e) {
 		throw GameDataError("player info: %s", e.what());
 	}
 }
 
-
-void GamePlayerInfoPacket::write
-	(FileSystem & fs, Game & game, MapObjectSaver *)
-{
+void GamePlayerInfoPacket::write(FileSystem& fs, Game& game, MapObjectSaver*) {
 	FileWrite fw;
 
 	fw.unsigned_16(kCurrentPacketVersion);
@@ -109,7 +103,7 @@ void GamePlayerInfoPacket::write
 	PlayerNumber const nr_players = game.map().get_nrplayers();
 	fw.unsigned_16(nr_players);
 	iterate_players_existing_const(p, nr_players, game, plr) {
-		fw.unsigned_8(1); // Player is in game.
+		fw.unsigned_8(1);  // Player is in game.
 
 		fw.unsigned_8(plr->see_all_);
 
@@ -129,18 +123,19 @@ void GamePlayerInfoPacket::write
 		plr->write_statistics(fw);
 		plr->write_remaining_shipnames(fw);
 		fw.unsigned_32(plr->casualties());
-		fw.unsigned_32(plr->kills     ());
-		fw.unsigned_32(plr->msites_lost        ());
-		fw.unsigned_32(plr->msites_defeated    ());
-		fw.unsigned_32(plr->civil_blds_lost    ());
+		fw.unsigned_32(plr->kills());
+		fw.unsigned_32(plr->msites_lost());
+		fw.unsigned_32(plr->msites_defeated());
+		fw.unsigned_32(plr->civil_blds_lost());
 		fw.unsigned_32(plr->civil_blds_defeated());
-
-	} else {
-		fw.unsigned_8(0); //  Player is NOT in game.
+	}
+	else {
+		fw.unsigned_8(0);  //  Player is NOT in game.
 	}
 
 	// Result screen
-	const std::vector<PlayerEndStatus>& end_status_list = game.player_manager()->get_players_end_status();
+	const std::vector<PlayerEndStatus>& end_status_list =
+	   game.player_manager()->get_players_end_status();
 	fw.unsigned_8(end_status_list.size());
 	for (const PlayerEndStatus& status : end_status_list) {
 		fw.unsigned_8(status.player);
@@ -153,5 +148,4 @@ void GamePlayerInfoPacket::write
 
 	fw.write(fs, "binary/player_info");
 }
-
 }

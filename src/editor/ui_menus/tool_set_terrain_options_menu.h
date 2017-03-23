@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2011 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -34,15 +34,14 @@ struct EditorSetTerrainTool;
 
 struct EditorToolSetTerrainOptionsMenu : public EditorToolOptionsMenu {
 	EditorToolSetTerrainOptionsMenu(EditorInteractive&,
-	                                     EditorSetTerrainTool&,
-	                                     UI::UniqueWindow::Registry&);
+	                                EditorSetTerrainTool&,
+	                                UI::UniqueWindow::Registry&);
 	virtual ~EditorToolSetTerrainOptionsMenu();
 
 private:
-	std::unique_ptr<CategorizedItemSelectionMenu<Widelands::TerrainDescription, EditorSetTerrainTool>>
-	multi_select_menu_;
-	std::vector<std::unique_ptr<const Image>>  offscreen_images_;
+	std::unique_ptr<CategorizedItemSelectionMenu<Widelands::TerrainDescription,
+	                                             EditorSetTerrainTool>> multi_select_menu_;
+	std::vector<std::unique_ptr<const Image>> offscreen_images_;
 };
-
 
 #endif  // end of include guard: WL_EDITOR_UI_MENUS_TOOL_SET_TERRAIN_OPTIONS_MENU_H

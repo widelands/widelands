@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2016 by the Widelands Development Team
+ * Copyright (C) 2004-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -21,19 +21,19 @@
 
 #include "ai/defaultai.h"
 
-ComputerPlayer::ComputerPlayer
-	(Widelands::Game & g, Widelands::PlayerNumber const pid)
-	: game_(g), player_number_(pid)
-{
+ComputerPlayer::ComputerPlayer(Widelands::Game& g, Widelands::PlayerNumber const pid)
+   : game_(g), player_number_(pid) {
 }
 
-ComputerPlayer::~ComputerPlayer() {}
+ComputerPlayer::~ComputerPlayer() {
+}
 
 struct EmptyAI : ComputerPlayer {
-	EmptyAI(Widelands::Game & g, const Widelands::PlayerNumber pid)
-	: ComputerPlayer(g, pid) {}
+	EmptyAI(Widelands::Game& g, const Widelands::PlayerNumber pid) : ComputerPlayer(g, pid) {
+	}
 
-	void think() override {}
+	void think() override {
+	}
 
 	struct EmptyAIImpl : Implementation {
 		EmptyAIImpl() {
@@ -41,10 +41,10 @@ struct EmptyAI : ComputerPlayer {
 			/** TRANSLATORS: This is the name of an AI used in the game setup screens */
 			descname = _("No AI");
 			icon_filename = "images/ai/ai_empty.png";
+			type = Implementation::Type::kEmpty;
 		}
-		ComputerPlayer * instantiate
-			(Widelands::Game & g, Widelands::PlayerNumber const pid) const override
-		{
+		ComputerPlayer* instantiate(Widelands::Game& g,
+		                            Widelands::PlayerNumber const pid) const override {
 			return new EmptyAI(g, pid);
 		}
 	};
@@ -54,10 +54,8 @@ struct EmptyAI : ComputerPlayer {
 
 EmptyAI::EmptyAIImpl EmptyAI::implementation;
 
-const ComputerPlayer::ImplementationVector &
-ComputerPlayer::get_implementations()
-{
-	static std::vector<ComputerPlayer::Implementation const *> impls;
+const ComputerPlayer::ImplementationVector& ComputerPlayer::get_implementations() {
+	static std::vector<ComputerPlayer::Implementation const*> impls;
 
 	if (impls.empty()) {
 		impls.push_back(&DefaultAI::normal_impl);
@@ -69,10 +67,8 @@ ComputerPlayer::get_implementations()
 	return impls;
 }
 
-const ComputerPlayer::Implementation * ComputerPlayer::get_implementation
-	(const std::string & name)
-{
-	const ImplementationVector & vec = get_implementations();
+const ComputerPlayer::Implementation* ComputerPlayer::get_implementation(const std::string& name) {
+	const ImplementationVector& vec = get_implementations();
 
 	for (const ComputerPlayer::Implementation* implementation : vec) {
 		if (implementation->name == name) {

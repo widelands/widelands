@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2008-2009 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -33,9 +33,8 @@ struct GameLogicCommand;
  * from the queue command file ids
  */
 namespace QueueCmdFactory {
-	GameLogicCommand & create_correct_queue_command(Widelands::QueueCommandTypes id);
+GameLogicCommand& create_correct_queue_command(Widelands::QueueCommandTypes id);
 }
-
 }
 
 #endif  // end of include guard: WL_LOGIC_QUEUE_CMD_FACTORY_H

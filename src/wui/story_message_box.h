@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2016 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -25,10 +25,14 @@
 #include "ui_basic/window.h"
 
 struct StoryMessageBox : public UI::Window {
-	StoryMessageBox
-		(UI::Panel *,
-		 const std::string &, const std::string &, const std::string &,
-		 int32_t gposx, int32_t gposy, uint32_t w, uint32_t h);
+	StoryMessageBox(UI::Panel*,
+	                const std::string&,
+	                const std::string&,
+	                const std::string&,
+	                int32_t gposx,
+	                int32_t gposy,
+	                uint32_t w,
+	                uint32_t h);
 
 	bool handle_mousepress(uint8_t btn, int32_t mx, int32_t my) override;
 

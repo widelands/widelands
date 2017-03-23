@@ -1,14 +1,14 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2016 Widelands Development Team
+# Copyright (C) 2005-2017 Widelands Development Team
 # 
 # Translators:
-# Любомир Василев, 2016
+# Любомир Василев, 2016-2017
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-04-07 14:12+0000\n"
-"PO-Revision-Date: 2016-04-07 17:18+0000\n"
+"POT-Creation-Date: 2017-01-28 21:57+0000\n"
+"PO-Revision-Date: 2017-01-30 07:35+0000\n"
 "Last-Translator: Любомир Василев\n"
 "Language-Team: Bulgarian (http://www.transifex.com/widelands/widelands/language/bg/)\n"
 "MIME-Version: 1.0\n"
@@ -17,126 +17,126 @@ msgstr ""
 "Language: bg\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: ../../data/scripting/editor/editor_controls.lua:7
+#: ../../data/scripting/editor/editor_controls.lua:11
 #: ../../data/scripting/editor/editor_help.lua:65
 msgid "Controls"
 msgstr "Управление"
 
-#: ../../data/scripting/editor/editor_controls.lua:10
+#: ../../data/scripting/editor/editor_controls.lua:14
 msgid "Keyboard Shortcuts"
 msgstr "Клавиши и комбинации"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
-#: ../../data/scripting/editor/editor_controls.lua:13
+#: ../../data/scripting/editor/editor_controls.lua:17
 msgid "Help"
 msgstr "Помощ"
 
 #. TRANSLATORS: This is an access key combination.
-#: ../../data/scripting/editor/editor_controls.lua:15
+#: ../../data/scripting/editor/editor_controls.lua:19
 msgid "Toggle main menu"
 msgstr "Превключване на главното меню"
 
 #. TRANSLATORS: This is an access key combination. The hotkey is 't'
-#: ../../data/scripting/editor/editor_controls.lua:17
+#: ../../data/scripting/editor/editor_controls.lua:21
 msgid "Toggle tools menu"
 msgstr "Превключване на менюто с инструментите"
 
 #. TRANSLATORS: This is an access key combination. The hotkey is 'p'
-#: ../../data/scripting/editor/editor_controls.lua:21
+#: ../../data/scripting/editor/editor_controls.lua:25
 msgid "Toggle player menu"
 msgstr "Превключване на менюто за играча"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
-#: ../../data/scripting/editor/editor_controls.lua:23
+#: ../../data/scripting/editor/editor_controls.lua:27
 msgid "Undo"
 msgstr "Отмяна"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
-#: ../../data/scripting/editor/editor_controls.lua:25
+#: ../../data/scripting/editor/editor_controls.lua:29
 msgid "Redo"
 msgstr "Повторение"
 
 #. TRANSLATORS: This is an access key combination. The hotkey is 'i'
-#: ../../data/scripting/editor/editor_controls.lua:27
+#: ../../data/scripting/editor/editor_controls.lua:31
 msgid "Activate information tool"
 msgstr "Включване на инструмента за информация"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
-#: ../../data/scripting/editor/editor_controls.lua:29
+#: ../../data/scripting/editor/editor_controls.lua:33
 msgctxt "hotkey"
 msgid "Ctrl + L"
 msgstr "Контрол + L"
 
-#: ../../data/scripting/editor/editor_controls.lua:29
+#: ../../data/scripting/editor/editor_controls.lua:33
 msgid "Load map"
 msgstr "Зареждане на карта"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
-#: ../../data/scripting/editor/editor_controls.lua:31
+#: ../../data/scripting/editor/editor_controls.lua:35
 msgctxt "hotkey"
 msgid "Ctrl + S"
 msgstr "Контрол + S"
 
-#: ../../data/scripting/editor/editor_controls.lua:31
+#: ../../data/scripting/editor/editor_controls.lua:35
 msgid "Save map"
 msgstr "Запазване на картата"
 
-#: ../../data/scripting/editor/editor_controls.lua:35
+#: ../../data/scripting/editor/editor_controls.lua:39
 msgid "Tools"
 msgstr "Инструменти"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
-#: ../../data/scripting/editor/editor_controls.lua:38
+#: ../../data/scripting/editor/editor_controls.lua:42
 msgctxt "hotkey"
-msgid "1-0"
-msgstr "1-0"
+msgid "0-9"
+msgstr "0-9"
 
-#: ../../data/scripting/editor/editor_controls.lua:38
+#: ../../data/scripting/editor/editor_controls.lua:42
 msgid "Change tool size"
 msgstr "Промяна на размера на инструмента"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
-#: ../../data/scripting/editor/editor_controls.lua:40
+#: ../../data/scripting/editor/editor_controls.lua:44
 msgctxt "hotkey"
 msgid "Click"
 msgstr "Щракване"
 
-#: ../../data/scripting/editor/editor_controls.lua:40
+#: ../../data/scripting/editor/editor_controls.lua:44
 msgid ""
 "Place new elements on the map, or increase map elements by the value "
 "selected by ‘Increase/Decrease value’"
-msgstr "Поставяне на нови елементи върху картата, или увеличаване на елементите на картата според стойността, избрана чрез „увеличаване/намаляване на стойност“."
+msgstr "Поставяне на нови елементи върху картата, или увеличаване на елементите на картата според стойността, избрана чрез „увеличаване/намаляване на стойност“"
 
-#: ../../data/scripting/editor/editor_controls.lua:42
+#: ../../data/scripting/editor/editor_controls.lua:46
 msgid ""
 "Remove elements from the map, or decrease map elements by the value selected"
 " by ‘Increase/Decrease value’"
-msgstr "Премахване на елементи от картата, или намаляване на елементите на картата според стойността, избрана чрез „увеличаване/намаляване на стойност“."
+msgstr "Премахване на елементи от картата, или намаляване на елементите на картата според стойността, избрана чрез „увеличаване/намаляване на стойност“"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
-#: ../../data/scripting/editor/editor_controls.lua:42
+#: ../../data/scripting/editor/editor_controls.lua:46
 msgctxt "hotkey"
 msgid "Shift + Click"
 msgstr "Шифт + щракване"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
-#: ../../data/scripting/editor/editor_controls.lua:44
+#: ../../data/scripting/editor/editor_controls.lua:48
 msgctxt "hotkey"
 msgid "Ctrl + Click"
 msgstr "Контрол + щракване"
 
-#: ../../data/scripting/editor/editor_controls.lua:44
+#: ../../data/scripting/editor/editor_controls.lua:48
 msgid "Set map elements to the value selected by ‘Set Value’"
-msgstr "Задаване на елементите на картата на стойността, избрана чрез „задаване на стойност“."
+msgstr "Задаване на елементите на картата на стойността, избрана чрез „задаване на стойност“"
 
 #: ../../data/scripting/editor/editor_help.lua:49
 msgid "Editor Help"
@@ -147,35 +147,40 @@ msgid "General"
 msgstr "Общи"
 
 #: ../../data/scripting/editor/editor_help.lua:59
-#: ../../data/scripting/editor/editor_introduction.lua:10
+#: ../../data/scripting/editor/editor_introduction.lua:12
 msgid "Introduction"
 msgstr "Въведение"
 
-#: ../../data/scripting/editor/editor_help.lua:74
+#: ../../data/scripting/editor/editor_help.lua:71
+#: ../../data/scripting/editor/tips.lua:16
+msgid "Tips"
+msgstr "Съвети"
+
+#: ../../data/scripting/editor/editor_help.lua:81
 msgid "Terrains"
 msgstr "Терени"
 
-#: ../../data/scripting/editor/editor_help.lua:81
+#: ../../data/scripting/editor/editor_help.lua:88
 msgid "Trees"
 msgstr "Дървета"
 
-#: ../../data/scripting/editor/editor_introduction.lua:7
+#: ../../data/scripting/editor/editor_introduction.lua:9
 msgid "The Widelands Editor"
 msgstr "Редакторът на Widelands"
 
-#: ../../data/scripting/editor/editor_introduction.lua:12
+#: ../../data/scripting/editor/editor_introduction.lua:14
 msgid ""
 "This editor is intended for players who would like to design their own maps "
 "to use with Widelands."
 msgstr "Този редактор е предназначен за играчите, които биха искали да проектират свои собствени карти за Widelands."
 
-#: ../../data/scripting/editor/editor_introduction.lua:13
+#: ../../data/scripting/editor/editor_introduction.lua:15
 msgid ""
 "As you can see, this editor is heavy work in progress and as the editor "
 "becomes better and better, this text will also get longer and more complete."
 msgstr "Както виждате, редакторът е в процес на разработка и с развитието му този текст ще става все по-дълъг."
 
-#: ../../data/scripting/editor/editor_introduction.lua:16
+#: ../../data/scripting/editor/editor_introduction.lua:18
 msgid "The wiki also includes a short tutorial on how to build a map."
 msgstr "Уикито също включва кратко обучение за създаване на карти."
 
@@ -210,11 +215,11 @@ msgstr "Тук няма да растат дървета."
 
 #. TRANSLATORS: A header in the editor help. Terrains preferred by a type of
 #. tree.
-#: ../../data/scripting/editor/tree_help.lua:17
+#: ../../data/scripting/editor/tree_help.lua:18
 msgid "Preferred terrains"
 msgstr "Предпочитани видове терен"
 
 #. TRANSLATORS: Terrain name (Climate)
-#: ../../data/scripting/editor/tree_help.lua:38
+#: ../../data/scripting/editor/tree_help.lua:39
 msgid "%1% (%2%)"
 msgstr "%1% (%2%)"

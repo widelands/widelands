@@ -14,7 +14,9 @@ override_dh_auto_configure:
 	CFLAGS="$(CFLAGS)" LDFLAGS="$(LDFLAGS)" CPPFLAGS="$(CPPFLAGS)" CXXFLAGS="$(CXXFLAGS)" \
 	  dh_auto_configure -Scmake -- \
 		-DWL_INSTALL_BASEDIR=/usr/share/games/widelands \
+		-DWL_INSTALL_BINDIR=games \
 		-DWL_INSTALL_DATADIR=/usr/share/games/widelands/data \
+		-DWL_INSTALL_PREFIX=/usr \
 		-DOPTION_USE_GLBINDING:BOOL=OFF \
 		-DCMAKE_BUILD_TYPE=Release
 
@@ -24,11 +26,24 @@ override_dh_strip:
 override_dh_auto_install:
 	dh_auto_install --parallel
 	mkdir -p debian/tmp/usr/share/applications/
-	cp debian/widelands.desktop debian/tmp/usr/share/applications/
-	# Probably need to remove other duplicated license files in data/i18n/fonts
+	cp debian/org.widelands.widelands.desktop debian/tmp/usr/share/applications/
+	# Take care of the fonts (use system-wide ones)
+	# Not doing so would violate the Debian Policy, preventing the package to enter the official repositories
+	# Skip this part for our packages, since we use the embedded fonts :/
+	# rm -r debian/tmp/usr/share/games/widelands/data/i18n/fonts/amiri
+	# ln -s /usr/share/fonts/opentype/fonts-hosny-amiri debian/tmp/usr/share/games/widelands/data/i18n/fonts/amiri
+	# rm -r debian/tmp/usr/share/games/widelands/data/i18n/fonts/DejaVu
+	# ln -s /usr/share/fonts/truetype/dejavu debian/tmp/usr/share/games/widelands/data/i18n/fonts/DejaVu
+	# rm -r debian/tmp/usr/share/games/widelands/data/i18n/fonts/MicroHei
+	# ln -s /usr/share/fonts/truetype/wqy debian/tmp/usr/share/games/widelands/data/i18n/fonts/MicroHei
+	# rm -r debian/tmp/usr/share/games/widelands/data/i18n/fonts/Nakula
+	# ln -s /usr/share/fonts/truetype/Nakula debian/tmp/usr/share/games/widelands/data/i18n/fonts
+	# rm -r debian/tmp/usr/share/games/widelands/data/i18n/fonts/Sinhala
+	# ln -s /usr/share/fonts/truetype/sinhala debian/tmp/usr/share/games/widelands/data/i18n/fonts/Sinhala
+	# Remove the licenses that are included in debian/copyright
+	rm debian/tmp/usr/share/games/widelands/data/i18n/fonts/Culmus/LICENSE
 	rm debian/tmp/usr/share/games/widelands/data/i18n/fonts/Widelands/LICENSE
-	# Do not include the GPL-2 license file again to keep lintian happy
-	# (but the file is listed from the user interface, so dont kill it completely)
+	# The GPL-2 license is listed from the user interface, so dont kill it completely
 	# (we cannot patch the user interface because that's in a translated text)
 	if cmp --quiet debian/tmp/usr/share/games/widelands/COPYING /usr/share/common-licenses/GPL-2 ; then \
 	  rm debian/tmp/usr/share/games/widelands/COPYING; \
@@ -42,12 +57,30 @@ override_dh_auto_install:
 	# Take care of the logo
 	for size in 16 32 48 64 128 ; do \
 	  mkdir -p debian/tmp/usr/share/icons/hicolor/$${size}x$${size}/apps ; \
-	  cp debian/tmp/usr/share/games/widelands/data/images/logos/wl-ico-$${size}.png \
+	  cp ./debian/tmp/usr/share/games/widelands/data/images/logos/wl-ico-$${size}.png \
 	     debian/tmp/usr/share/icons/hicolor/$${size}x$${size}/apps/widelands.png; \
 	done
 	convert debian/tmp/usr/share/icons/hicolor/32x32/apps/widelands.png \
 	        debian/tmp/usr/share/icons/hicolor/32x32/apps/widelands.xpm
+	# Remove binaries that are not intended for the user (according to SirVer)
+	# We want all binaries for our PPA...
+	# for b in wl_map_info wl_map_object_info wl_render_richtext ; do \
+	#  rm debian/tmp/usr/$${b} ;\
+	# done
+	# Move the main binary to the right location (no idea why it's misplaced)
+	mkdir debian/tmp/usr/games
+	# ... but we want to place them in the right location so that the .install files work
+	# mv debian/tmp/usr/widelands debian/tmp/usr/games
+	for b in wl_map_info wl_map_object_info wl_render_richtext widelands ; do \
+	  mv debian/tmp/usr/$${b} debian/tmp/usr/games ;\
+	done
+	# appdata
+	mkdir -p debian/tmp/usr/share/appdata/
+	cp debian/widelands.appdata.xml debian/tmp/usr/share/appdata/
 
 override_dh_install:
 	dh_install --fail-missing
 
+# Just build the current trunk, don't replace with any potentially newer versions.
+# get-orig-source:
+#	uscan --verbose --force-download

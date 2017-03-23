@@ -43,9 +43,9 @@ tribes:new_productionsite_type {
    },
 
    inputs = {
-      fish = 4,
-      meat = 4,
-      log = 8
+      { name = "fish", amount = 4 },
+      { name = "meat", amount = 4 },
+      { name = "log", amount = 8 }
    },
    outputs = {
       "smoked_meat",
@@ -67,11 +67,13 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start smoking meat because ...
          descname = _"smoking meat",
          actions = {
+            -- time total: 60
             "return=skipped when site has fish and economy needs smoked_fish and not economy needs smoked_meat",
             "return=skipped unless economy needs smoked_meat",
-            "sleep=30000",
+            "sleep=10000",
             "consume=meat:2 log",
             "animate=working 30000",
+            "sleep=20000",
             "produce=smoked_meat:2"
          }
       },
@@ -79,11 +81,13 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start smoking fish because ...
          descname = _"smoking fish",
          actions = {
+            -- time total: 60
             "return=skipped when site has meat and economy needs smoked_meat and not economy needs smoked_fish",
             "return=skipped unless economy needs smoked_fish",
-            "sleep=30000",
+            "sleep=10000",
             "consume=fish:2 log",
             "animate=working 30000",
+            "sleep=20000",
             "produce=smoked_fish:2"
          }
       },

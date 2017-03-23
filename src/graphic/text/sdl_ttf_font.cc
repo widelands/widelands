@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2012 by the Widelands Development Team
+ * Copyright (C) 2006-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -33,9 +33,15 @@ static const SDL_Color SHADOW_CLR = {0, 0, 0, SDL_ALPHA_OPAQUE};
 
 namespace RT {
 
-SdlTtfFont::SdlTtfFont(TTF_Font * font, const std::string& face, int ptsize, std::string* ttf_memory_block) :
-	font_(font), style_(TTF_STYLE_NORMAL), font_name_(face), ptsize_(ptsize),
-	ttf_file_memory_block_(ttf_memory_block) {
+SdlTtfFont::SdlTtfFont(TTF_Font* font,
+                       const std::string& face,
+                       int ptsize,
+                       std::string* ttf_memory_block)
+   : font_(font),
+     style_(TTF_STYLE_NORMAL),
+     font_name_(face),
+     ptsize_(ptsize),
+     ttf_file_memory_block_(ttf_memory_block) {
 }
 
 SdlTtfFont::~SdlTtfFont() {
@@ -43,39 +49,43 @@ SdlTtfFont::~SdlTtfFont() {
 	font_ = nullptr;
 }
 
-void SdlTtfFont::dimensions(const std::string& txt, int style, uint16_t * gw, uint16_t * gh) {
+void SdlTtfFont::dimensions(const std::string& txt, int style, uint16_t* gw, uint16_t* gh) {
 	set_style(style);
 
 	int w, h;
 	TTF_SizeUTF8(font_, txt.c_str(), &w, &h);
 
 	if (style & SHADOW) {
-		w += SHADOW_OFFSET; h += SHADOW_OFFSET;
+		w += SHADOW_OFFSET;
+		h += SHADOW_OFFSET;
 	}
-	*gw = w; *gh = h;
+	*gw = w;
+	*gh = h;
 }
 
-const Texture& SdlTtfFont::render
-	(const std::string& txt, const RGBColor& clr, int style, TextureCache* texture_cache) {
+const Texture& SdlTtfFont::render(const std::string& txt,
+                                  const RGBColor& clr,
+                                  int style,
+                                  TextureCache* texture_cache) {
 	const std::string hash =
-		(boost::format("%s:%s:%i:%02x%02x%02x:%i") % font_name_ % ptsize_ % txt %
-		 static_cast<int>(clr.r) % static_cast<int>(clr.g) % static_cast<int>(clr.b) % style)
-			.str();
+	   (boost::format("%s:%s:%i:%02x%02x%02x:%i") % font_name_ % ptsize_ % txt %
+	    static_cast<int>(clr.r) % static_cast<int>(clr.g) % static_cast<int>(clr.b) % style)
+	      .str();
 	const Texture* rv = texture_cache->get(hash);
-	if (rv) return *rv;
+	if (rv)
+		return *rv;
 
 	set_style(style);
 
-	SDL_Surface * text_surface = nullptr;
+	SDL_Surface* text_surface = nullptr;
 
 	SDL_Color sdlclr = {clr.r, clr.g, clr.b, SDL_ALPHA_OPAQUE};
 	if (style & SHADOW) {
-		SDL_Surface * tsurf = TTF_RenderUTF8_Blended(font_, txt.c_str(), sdlclr);
-		SDL_Surface * shadow = TTF_RenderUTF8_Blended(font_, txt.c_str(), SHADOW_CLR);
+		SDL_Surface* tsurf = TTF_RenderUTF8_Blended(font_, txt.c_str(), sdlclr);
+		SDL_Surface* shadow = TTF_RenderUTF8_Blended(font_, txt.c_str(), SHADOW_CLR);
 		text_surface = empty_sdl_surface(shadow->w + SHADOW_OFFSET, shadow->h + SHADOW_OFFSET);
-		SDL_FillRect(text_surface,
-		             NULL,
-						 SDL_MapRGBA(text_surface->format, 255, 255, 255, SDL_ALPHA_TRANSPARENT));
+		SDL_FillRect(text_surface, NULL,
+		             SDL_MapRGBA(text_surface->format, 255, 255, 255, SDL_ALPHA_TRANSPARENT));
 
 		if (text_surface->format->BitsPerPixel != 32)
 			throw RenderError("SDL_TTF did not return a 32 bit surface for shadow text. Giving up!");
@@ -115,7 +125,8 @@ const Texture& SdlTtfFont::render
 		text_surface = TTF_RenderUTF8_Blended(font_, txt.c_str(), sdlclr);
 
 	if (!text_surface)
-		throw RenderError((boost::format("Rendering '%s' gave the error: %s") % txt % TTF_GetError()).str());
+		throw RenderError(
+		   (boost::format("Rendering '%s' gave the error: %s") % txt % TTF_GetError()).str());
 
 	return *texture_cache->insert(hash, std::unique_ptr<Texture>(new Texture(text_surface)));
 }
@@ -129,7 +140,8 @@ uint16_t SdlTtfFont::ascent(int style) const {
 
 void SdlTtfFont::set_style(int style) {
 	int sdl_style = TTF_STYLE_NORMAL;
-	if (style & UNDERLINE) sdl_style |= TTF_STYLE_UNDERLINE;
+	if (style & UNDERLINE)
+		sdl_style |= TTF_STYLE_UNDERLINE;
 
 	// Remember the last style. This should avoid that SDL_TTF flushes its
 	// glyphcache all too often

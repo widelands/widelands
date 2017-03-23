@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2013 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -40,7 +40,6 @@
 #include "map_io/world_legacy_lookup_table.h"
 #include "scripting/lua_table.h"
 
-
 namespace Widelands {
 
 void CritterProgram::parse(const std::vector<std::string>& lines) {
@@ -60,8 +59,7 @@ void CritterProgram::parse(const std::vector<std::string>& lines) {
 			}
 
 			actions_.push_back(act);
-		}
-		catch (const std::exception& e) {
+		} catch (const std::exception& e) {
 			throw wexception("Line '%s': %s", line.c_str(), e.what());
 		}
 	}
@@ -84,15 +82,12 @@ Remove this critter
 
 ==============================
 */
-bool Critter::run_remove
-	(Game & game, State & state, const CritterAction &)
-{
+bool Critter::run_remove(Game& game, State& state, const CritterAction&) {
 	++state.ivar1;
 	// Bye, bye cruel world
 	schedule_destroy(game);
 	return true;
 }
-
 
 /*
 ===========================================================================
@@ -102,9 +97,11 @@ bool Critter::run_remove
 ===========================================================================
 */
 
-CritterDescr::CritterDescr(const std::string& init_descname, const LuaTable& table)
-	: BobDescr(init_descname, MapObjectType::CRITTER, MapObjectDescr::OwnerType::kWorld, table)
-{
+CritterDescr::CritterDescr(const std::string& init_descname,
+                           const LuaTable& table,
+                           const World& world)
+   : BobDescr(init_descname, MapObjectType::CRITTER, MapObjectDescr::OwnerType::kWorld, table),
+     editor_category_(nullptr) {
 	add_directional_animation(&walk_anims_, "walk");
 
 	add_attributes(
@@ -120,6 +117,13 @@ CritterDescr::CritterDescr(const std::string& init_descname, const LuaTable& tab
 			throw wexception("Parse error in program %s: %s", program_name.c_str(), e.what());
 		}
 	}
+	int editor_category_index =
+	   world.editor_critter_categories().get_index(table.get_string("editor_category"));
+	if (editor_category_index == Widelands::INVALID_INDEX) {
+		throw GameDataError(
+		   "Unknown editor_category: %s\n", table.get_string("editor_category").c_str());
+	}
+	editor_category_ = world.editor_critter_categories().get_mutable(editor_category_index);
 }
 
 CritterDescr::~CritterDescr() {
@@ -133,27 +137,25 @@ bool CritterDescr::is_swimming() const {
 	return has_attribute(swimming_attribute);
 }
 
-
 /*
 ===============
 Get a program from the workers description.
 ===============
 */
-CritterProgram const * CritterDescr::get_program
-	(const std::string & programname) const
-{
+CritterProgram const* CritterDescr::get_program(const std::string& programname) const {
 	Programs::const_iterator const it = programs_.find(programname);
 	if (it == programs_.end())
-		throw wexception
-			("%s has no program '%s'", name().c_str(), programname.c_str());
+		throw wexception("%s has no program '%s'", name().c_str(), programname.c_str());
 	return it->second;
 }
-
 
 uint32_t CritterDescr::movecaps() const {
 	return is_swimming() ? MOVECAPS_SWIM : MOVECAPS_WALK;
 }
 
+const EditorCategory* CritterDescr::editor_category() const {
+	return editor_category_;
+}
 
 /*
 ==============================================================================
@@ -170,10 +172,8 @@ class Critter
 // wait up to 12 seconds between moves
 #define CRITTER_MAX_WAIT_TIME_BETWEEN_WALK 2000
 
-Critter::Critter(const CritterDescr & critter_descr) :
-Bob(critter_descr)
-{}
-
+Critter::Critter(const CritterDescr& critter_descr) : Bob(critter_descr) {
+}
 
 /*
 ==============================
@@ -190,45 +190,33 @@ coords is used to store target coordinates found by findspace
 */
 
 Bob::Task const Critter::taskProgram = {
-	"program",
-	static_cast<Bob::Ptr>(&Critter::program_update),
-	nullptr,
-	nullptr,
-	true
-};
+   "program", static_cast<Bob::Ptr>(&Critter::program_update), nullptr, nullptr, true};
 
-
-void Critter::start_task_program
-	(Game & game, const std::string & programname)
-{
+void Critter::start_task_program(Game& game, const std::string& programname) {
 	push_task(game, taskProgram);
-	State & state = top_state();
+	State& state = top_state();
 	state.program = descr().get_program(programname);
-	state.ivar1   = 0;
+	state.ivar1 = 0;
 }
 
-
-void Critter::program_update(Game & game, State & state)
-{
+void Critter::program_update(Game& game, State& state) {
 	if (get_signal().size()) {
 		molog("[program]: Interrupted by signal '%s'\n", get_signal().c_str());
 		return pop_task(game);
 	}
 
 	for (;;) {
-		const CritterProgram & program =
-			dynamic_cast<const CritterProgram&>(*state.program);
+		const CritterProgram& program = dynamic_cast<const CritterProgram&>(*state.program);
 
 		if (state.ivar1 >= program.get_size())
 			return pop_task(game);
 
-		const CritterAction & action = program[state.ivar1];
+		const CritterAction& action = program[state.ivar1];
 
 		if ((this->*(action.function))(game, state, action))
 			return;
 	}
 }
-
 
 /*
 ==============================
@@ -241,15 +229,9 @@ Simply roam the map
 */
 
 Bob::Task const Critter::taskRoam = {
-	"roam",
-	static_cast<Bob::Ptr>(&Critter::roam_update),
-	nullptr,
-	nullptr,
-	true
-};
+   "roam", static_cast<Bob::Ptr>(&Critter::roam_update), nullptr, nullptr, true};
 
-void Critter::roam_update(Game & game, State & state)
-{
+void Critter::roam_update(Game& game, State& state) {
 	if (get_signal().size())
 		return pop_task(game);
 
@@ -258,29 +240,24 @@ void Critter::roam_update(Game & game, State & state)
 	Time idle_time_rnd = CRITTER_MAX_WAIT_TIME_BETWEEN_WALK;
 	if (state.ivar1) {
 		state.ivar1 = 0;
-		if
-			(start_task_movepath
-			 	(game,
-			 	 game.random_location(get_position(), 2), //  Pick a random target.
-			 	 3,
-			 	 descr().get_walk_anims()))
+		if (start_task_movepath(game,
+		                        game.random_location(get_position(), 2),  //  Pick a random target.
+		                        3, descr().get_walk_anims()))
 			return;
-		idle_time_min = 1, idle_time_rnd = 1000;
+		idle_time_min = 1;
+		idle_time_rnd = 1000;
 	}
 	state.ivar1 = 1;
-	return
-		start_task_idle
-			(game,
-			 descr().get_animation("idle"),
-			 idle_time_min + game.logic_rand() % idle_time_rnd);
+	return start_task_idle(
+	   game, descr().get_animation("idle"), idle_time_min + game.logic_rand() % idle_time_rnd);
 }
 
-void Critter::init_auto_task(Game & game) {
+void Critter::init_auto_task(Game& game) {
 	push_task(game, taskRoam);
 	top_state().ivar1 = 0;
 }
 
-Bob & CritterDescr::create_object() const {
+Bob& CritterDescr::create_object() const {
 	return *new Critter(*this);
 }
 
@@ -294,28 +271,26 @@ Load / Save implementation
 
 constexpr uint8_t kCurrentPacketVersion = 1;
 
-Critter::Loader::Loader()
-{
+Critter::Loader::Loader() {
 }
 
-const Bob::Task * Critter::Loader::get_task(const std::string & name)
-{
-	if (name == "roam") return &taskRoam;
-	if (name == "program") return &taskProgram;
+const Bob::Task* Critter::Loader::get_task(const std::string& name) {
+	if (name == "roam")
+		return &taskRoam;
+	if (name == "program")
+		return &taskProgram;
 	return Bob::Loader::get_task(name);
 }
 
-const BobProgramBase * Critter::Loader::get_program
-	(const std::string & name)
-{
-	Critter & critter = get<Critter>();
+const BobProgramBase* Critter::Loader::get_program(const std::string& name) {
+	Critter& critter = get<Critter>();
 	return critter.descr().get_program(name);
 }
 
 MapObject::Loader* Critter::load(EditorGameBase& egbase,
-												  MapObjectLoader& mol,
-                                      FileRead& fr,
-                                      const WorldLegacyLookupTable& lookup_table) {
+                                 MapObjectLoader& mol,
+                                 FileRead& fr,
+                                 const WorldLegacyLookupTable& lookup_table) {
 	std::unique_ptr<Loader> loader(new Loader);
 
 	try {
@@ -323,50 +298,44 @@ MapObject::Loader* Critter::load(EditorGameBase& egbase,
 
 		uint8_t const packet_version = fr.unsigned_8();
 		// Supporting older versions for map loading
-		if (1 <= packet_version && packet_version  <= kCurrentPacketVersion) {
+		if (1 <= packet_version && packet_version <= kCurrentPacketVersion) {
 			const std::string owner = fr.c_string();
 			std::string critter_name = fr.c_string();
-			const CritterDescr * descr = nullptr;
+			const CritterDescr* descr = nullptr;
 
 			if (owner == "world") {
 				critter_name = lookup_table.lookup_critter(critter_name);
-				descr =
-					dynamic_cast<const CritterDescr*>(egbase.world().get_bob_descr(critter_name));
+				descr = egbase.world().get_critter_descr(critter_name);
 			} else {
-				throw GameDataError
-					("Tribes don't have critters %s/%s", owner.c_str(), critter_name.c_str());
+				throw GameDataError(
+				   "Tribes don't have critters %s/%s", owner.c_str(), critter_name.c_str());
 			}
 
 			if (!descr)
-				throw GameDataError
-					("undefined critter %s/%s", owner.c_str(), critter_name.c_str());
+				throw GameDataError("undefined critter %s/%s", owner.c_str(), critter_name.c_str());
 
 			loader->init(egbase, mol, descr->create_object());
 			loader->load(fr);
 		} else {
 			throw UnhandledVersionError("Critter", packet_version, kCurrentPacketVersion);
 		}
-	} catch (const std::exception & e) {
+	} catch (const std::exception& e) {
 		throw wexception("loading critter: %s", e.what());
 	}
 
 	return loader.release();
 }
 
-void Critter::save
-	(EditorGameBase & egbase, MapObjectSaver & mos, FileWrite & fw)
-{
+void Critter::save(EditorGameBase& egbase, MapObjectSaver& mos, FileWrite& fw) {
 	fw.unsigned_8(HeaderCritter);
 	fw.unsigned_8(kCurrentPacketVersion);
 
-	const std::string owner =
-		descr().get_owner_type() == MapObjectDescr::OwnerType::kTribe ?
-				"" : // Tribes don't have critters
-				"world";
+	const std::string owner = descr().get_owner_type() == MapObjectDescr::OwnerType::kTribe ?
+	                             "" :  // Tribes don't have critters
+	                             "world";
 	fw.c_string(owner);
 	fw.c_string(descr().name());
 
 	Bob::save(egbase, mos, fw);
 }
-
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2010 by the Widelands Development Team
+ * Copyright (C) 2010-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -41,10 +41,10 @@ struct Buildcost : std::map<DescriptionIndex, uint8_t> {
 
 	uint32_t total() const;
 
-	void save(FileWrite & fw, const TribeDescr & tribe) const;
-	void load(FileRead & fw, const TribeDescr & tribe);
+	void save(FileWrite& fw, const TribeDescr& tribe) const;
+	void load(FileRead& fw, const TribeDescr& tribe);
 };
 
-} // namespace Widelands
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_LOGIC_MAP_OBJECTS_BUILDCOST_H

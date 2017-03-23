@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2010 by the Widelands Development Team
+ * Copyright (C) 2006-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -24,7 +24,7 @@
 
 #ifdef __GNUC__
 void report_error(lua_State*, const char*, ...)
-	__attribute__((__format__(__printf__, 2, 3), noreturn));
+   __attribute__((__format__(__printf__, 2, 3), noreturn));
 #else
 [[noreturn]] void report_error(lua_State*, const char*, ...)
 #endif

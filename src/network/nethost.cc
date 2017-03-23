@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2016 by the Widelands Development Team
+ * Copyright (C) 2008-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -26,9 +26,8 @@
 
 #include <boost/algorithm/string/predicate.hpp>
 #include <boost/format.hpp>
-#include <boost/lexical_cast.hpp>
 #ifndef _WIN32
-#include <unistd.h> // for usleep
+#include <unistd.h>  // for usleep
 #endif
 
 #include "ai/computer_player.h"
@@ -64,28 +63,31 @@
 #include "wui/interactive_player.h"
 #include "wui/interactive_spectator.h"
 
-
 struct HostGameSettingsProvider : public GameSettingsProvider {
-	HostGameSettingsProvider(NetHost * const init_host) : host_(init_host), current_wincondition_(0) {}
-	~HostGameSettingsProvider() {}
+	HostGameSettingsProvider(NetHost* const init_host) : host_(init_host), current_wincondition_(0) {
+	}
+	~HostGameSettingsProvider() {
+	}
 
-	void set_scenario(bool is_scenario) override {host_->set_scenario(is_scenario);}
+	void set_scenario(bool is_scenario) override {
+		host_->set_scenario(is_scenario);
+	}
 
-	const GameSettings & settings() override {return host_->settings();}
+	const GameSettings& settings() override {
+		return host_->settings();
+	}
 
-	bool can_change_map() override {return true;}
+	bool can_change_map() override {
+		return true;
+	}
 	bool can_change_player_state(uint8_t const number) override {
 		if (settings().savegame)
 			return settings().players.at(number).state != PlayerSettings::stateClosed;
 		else if (settings().scenario)
-			return
-				((settings().players.at(number).state == PlayerSettings::stateOpen
-				  ||
-				  settings().players.at(number).state == PlayerSettings::stateHuman)
-				 &&
-				 settings().players.at(number).closeable)
-				||
-				settings().players.at(number).state == PlayerSettings::stateClosed;
+			return ((settings().players.at(number).state == PlayerSettings::stateOpen ||
+			         settings().players.at(number).state == PlayerSettings::stateHuman) &&
+			        settings().players.at(number).closeable) ||
+			       settings().players.at(number).state == PlayerSettings::stateClosed;
 		return true;
 	}
 	bool can_change_player_tribe(uint8_t const number) override {
@@ -103,23 +105,20 @@ struct HostGameSettingsProvider : public GameSettingsProvider {
 			return false;
 		if (number == settings().playernum)
 			return true;
-		return
-			settings().players.at(number).state == PlayerSettings::stateComputer;
+		return settings().players.at(number).state == PlayerSettings::stateComputer;
 	}
 
-	bool can_launch() override {return host_->can_launch();}
+	bool can_launch() override {
+		return host_->can_launch();
+	}
 
-	virtual void set_map
-		(const std::string &       mapname,
-		 const std::string &       mapfilename,
-		 uint32_t            const maxplayers,
-		 bool                const savegame = false) override
-	{
+	virtual void set_map(const std::string& mapname,
+	                     const std::string& mapfilename,
+	                     uint32_t const maxplayers,
+	                     bool const savegame = false) override {
 		host_->set_map(mapname, mapfilename, maxplayers, savegame);
 	}
-	void set_player_state
-		(uint8_t number, PlayerSettings::State const state) override
-	{
+	void set_player_state(uint8_t number, PlayerSettings::State const state) override {
 		if (number >= settings().players.size())
 			return;
 
@@ -142,98 +141,85 @@ struct HostGameSettingsProvider : public GameSettingsProvider {
 				assert(host_->settings().players.at(number).closeable);
 				newstate = PlayerSettings::stateClosed;
 				break;
-			} // else fall through
-			/* no break */
-		case PlayerSettings::stateComputer:
-			{
-				const ComputerPlayer::ImplementationVector & impls =
-					ComputerPlayer::get_implementations();
-				ComputerPlayer::ImplementationVector::const_iterator it =
-					impls.begin();
-				if (host_->settings().players.at(number).ai.empty()) {
-					set_player_ai(number, (*it)->name);
-					newstate = PlayerSettings::stateComputer;
-					break;
-				}
-				do {
-					++it;
-					if ((*(it - 1))->name == host_->settings().players.at(number).ai)
-						break;
-				} while (it != impls.end());
-				if (settings().players.at(number).random_ai) {
-					set_player_ai(number, std::string());
-					set_player_name(number, std::string());
-					// Do not share a player in savegames or scenarios
-					if (host_->settings().scenario || host_->settings().savegame)
-						newstate = PlayerSettings::stateOpen;
-					else {
-						uint8_t shared = 0;
-						for (; shared < settings().players.size(); ++shared) {
-							if
-								(settings().players.at(shared).state != PlayerSettings::stateClosed
-								 &&
-								 settings().players.at(shared).state != PlayerSettings::stateShared)
-								break;
-						}
-						if (shared < settings().players.size()) {
-							newstate = PlayerSettings::stateShared;
-							set_player_shared(number, shared + 1);
-						} else
-							newstate = PlayerSettings::stateClosed;
-					}
-				} else if (it == impls.end()) {
-					do {
-						uint8_t random = (std::rand() % impls.size()); // Choose a random AI
-						it = impls.begin() + random;
-					} while ((*it)->name == "None");
-					set_player_ai(number, (*it)->name, true);
-					newstate = PlayerSettings::stateComputer;
-					break;
-				} else {
-					set_player_ai(number, (*it)->name);
-					newstate = PlayerSettings::stateComputer;
-				}
+			}  // else fall through
+		      /* no break */
+		case PlayerSettings::stateComputer: {
+			const ComputerPlayer::ImplementationVector& impls = ComputerPlayer::get_implementations();
+			ComputerPlayer::ImplementationVector::const_iterator it = impls.begin();
+			if (host_->settings().players.at(number).ai.empty()) {
+				set_player_ai(number, (*it)->name);
+				newstate = PlayerSettings::stateComputer;
 				break;
 			}
-		case PlayerSettings::stateShared:
-			{
-				// Do not close a player in savegames or scenarios
+			do {
+				++it;
+				if ((*(it - 1))->name == host_->settings().players.at(number).ai)
+					break;
+			} while (it != impls.end());
+			if (settings().players.at(number).random_ai) {
+				set_player_ai(number, std::string());
+				set_player_name(number, std::string());
+				// Do not share a player in savegames or scenarios
 				if (host_->settings().scenario || host_->settings().savegame)
 					newstate = PlayerSettings::stateOpen;
-				else
-					newstate = PlayerSettings::stateClosed;
+				else {
+					uint8_t shared = 0;
+					for (; shared < settings().players.size(); ++shared) {
+						if (settings().players.at(shared).state != PlayerSettings::stateClosed &&
+						    settings().players.at(shared).state != PlayerSettings::stateShared)
+							break;
+					}
+					if (shared < settings().players.size()) {
+						newstate = PlayerSettings::stateShared;
+						set_player_shared(number, shared + 1);
+					} else
+						newstate = PlayerSettings::stateClosed;
+				}
+			} else if (it == impls.end()) {
+				do {
+					uint8_t random = (std::rand() % impls.size());  // Choose a random AI
+					it = impls.begin() + random;
+				} while ((*it)->type == ComputerPlayer::Implementation::Type::kEmpty);
+				set_player_ai(number, (*it)->name, true);
+				newstate = PlayerSettings::stateComputer;
 				break;
+			} else {
+				set_player_ai(number, (*it)->name);
+				newstate = PlayerSettings::stateComputer;
 			}
+			break;
+		}
+		case PlayerSettings::stateShared: {
+			// Do not close a player in savegames or scenarios
+			if (host_->settings().scenario || host_->settings().savegame)
+				newstate = PlayerSettings::stateOpen;
+			else
+				newstate = PlayerSettings::stateClosed;
+			break;
+		}
 		}
 
 		host_->set_player_state(number, newstate, true);
 	}
 
-	void set_player_tribe
-		(uint8_t number, const std::string& tribe, bool const random_tribe) override
-	{
+	void
+	set_player_tribe(uint8_t number, const std::string& tribe, bool const random_tribe) override {
 		if (number >= host_->settings().players.size())
 			return;
 
-		if
-			(number == settings().playernum
-			 ||
-			 settings().players.at(number).state == PlayerSettings::stateComputer
-			 ||
-			 settings().players.at(number).state == PlayerSettings::stateShared
-			 ||
-			 settings().players.at(number).state == PlayerSettings::stateOpen)  // For savegame loading
+		if (number == settings().playernum ||
+		    settings().players.at(number).state == PlayerSettings::stateComputer ||
+		    settings().players.at(number).state == PlayerSettings::stateShared ||
+		    settings().players.at(number).state == PlayerSettings::stateOpen)  // For savegame loading
 			host_->set_player_tribe(number, tribe, random_tribe);
 	}
 
-	void set_player_team(uint8_t number, Widelands::TeamNumber team) override
-	{
+	void set_player_team(uint8_t number, Widelands::TeamNumber team) override {
 		if (number >= host_->settings().players.size())
 			return;
 
-		if
-			(number == settings().playernum ||
-			 settings().players.at(number).state == PlayerSettings::stateComputer)
+		if (number == settings().playernum ||
+		    settings().players.at(number).state == PlayerSettings::stateComputer)
 			host_->set_player_team(number, team);
 	}
 
@@ -256,26 +242,25 @@ struct HostGameSettingsProvider : public GameSettingsProvider {
 		host_->set_player_init(number, index);
 	}
 
-	void set_player_ai(uint8_t number, const std::string & name, bool const random_ai = false) override {
+	void
+	set_player_ai(uint8_t number, const std::string& name, bool const random_ai = false) override {
 		host_->set_player_ai(number, name, random_ai);
 	}
 
-	void set_player_name(uint8_t const number, const std::string & name) override {
+	void set_player_name(uint8_t const number, const std::string& name) override {
 		if (number >= host_->settings().players.size())
 			return;
 		host_->set_player_name(number, name);
 	}
 
-	void set_player(uint8_t const number, PlayerSettings const ps) override {
+	void set_player(uint8_t const number, const PlayerSettings& ps) override {
 		if (number >= host_->settings().players.size())
 			return;
 		host_->set_player(number, ps);
 	}
 
 	void set_player_number(uint8_t const number) override {
-		if
-			(number == UserSettings::none() ||
-			 number < host_->settings().players.size())
+		if (number == UserSettings::none() || number < host_->settings().players.size())
 			host_->set_player_number(number);
 	}
 
@@ -301,13 +286,14 @@ struct HostGameSettingsProvider : public GameSettingsProvider {
 	}
 
 private:
-	NetHost                * host_;
-	int16_t                  current_wincondition_;
+	NetHost* host_;
+	int16_t current_wincondition_;
 	std::vector<std::string> wincondition_scripts_;
 };
 
 struct HostChatProvider : public ChatProvider {
-	HostChatProvider(NetHost * const init_host) : h(init_host), kickClient(0) {}
+	HostChatProvider(NetHost* const init_host) : h(init_host), kickClient(0) {
+	}
 
 	void send(const std::string& msg) override {
 		ChatMessage c;
@@ -354,25 +340,20 @@ struct HostChatProvider : public ChatProvider {
 			// Help
 			if (cmd == "help") {
 				c.msg = (boost::format("<br>%s<br>%s<br>%s<br>%s<br>%s<br>%s<br>%s") %
-				         _("Available host commands are:")
-				         %
-							/** TRANSLATORS: Available host command */
-				         _("/help  -  Shows this help")
-				         %
-							/** TRANSLATORS: Available host command */
-				         _("/announce <msg>  -  Send a chatmessage as announcement (system chat)")
-				         %
-							/** TRANSLATORS: Available host command */
-				         _("/warn <name> <reason>  -  Warn the user <name> because of <reason>")
-				         %
-							/** TRANSLATORS: Available host command */
-				         _("/kick <name> <reason>  -  Kick the user <name> because of <reason>")
-				         %
-							/** TRANSLATORS: Available host command */
-				         _("/forcePause            -  Force the game to pause.")
-				         %
-							/** TRANSLATORS: Available host command */
-				         _("/endForcedPause        -  Return game to normal speed.")).str();
+				         _("Available host commands are:") %
+				         /** TRANSLATORS: Available host command */
+				         _("/help  -  Shows this help") %
+				         /** TRANSLATORS: Available host command */
+				         _("/announce <msg>  -  Send a chatmessage as announcement (system chat)") %
+				         /** TRANSLATORS: Available host command */
+				         _("/warn <name> <reason>  -  Warn the user <name> because of <reason>") %
+				         /** TRANSLATORS: Available host command */
+				         _("/kick <name> <reason>  -  Kick the user <name> because of <reason>") %
+				         /** TRANSLATORS: Available host command */
+				         _("/forcePause            -  Force the game to pause.") %
+				         /** TRANSLATORS: Available host command */
+				         _("/endForcedPause        -  Return game to normal speed."))
+				           .str();
 			}
 
 			// Announce
@@ -473,23 +454,25 @@ struct HostChatProvider : public ChatProvider {
 		h->send(c);
 	}
 
-	const std::vector<ChatMessage> & get_messages() const override {
+	const std::vector<ChatMessage>& get_messages() const override {
 		return messages;
 	}
 
-	void receive(const ChatMessage & msg) {
+	void receive(const ChatMessage& msg) {
 		messages.push_back(msg);
 		Notifications::publish(msg);
 	}
 
-	bool has_been_set() const override {return true;}
+	bool has_been_set() const override {
+		return true;
+	}
 
 private:
-	NetHost                * h;
+	NetHost* h;
 	std::vector<ChatMessage> messages;
-	std::string              kickUser;
-	uint32_t                 kickClient;
-	std::string              kickReason;
+	std::string kickUser;
+	uint32_t kickClient;
+	std::string kickReason;
 };
 
 struct Client {
@@ -500,12 +483,13 @@ struct Client {
 	std::string build_id;
 	Md5Checksum syncreport;
 	bool syncreport_arrived;
-	int32_t time; // last time report
+	int32_t time;  // last time report
 	uint32_t desiredspeed;
 	time_t hung_since;
-	/// The delta time where the last information about the hung client was sent to the other clients relative
+	/// The delta time where the last information about the hung client was sent to the other clients
+	/// relative
 	/// to when the last answer of the client was received.
-	time_t  lastdelta;
+	time_t lastdelta;
 };
 
 struct NetHostImpl {
@@ -516,7 +500,7 @@ struct NetHostImpl {
 	HostGameSettingsProvider hp;
 	NetworkPlayerSettingsBackend npsb;
 
-	LanGamePromoter * promoter;
+	LanGamePromoter* promoter;
 	TCPsocket svsock;
 	SDLNet_SocketSet sockset;
 
@@ -525,7 +509,7 @@ struct NetHostImpl {
 	std::vector<Client> clients;
 
 	/// The game itself; only non-null while game is running
-	Widelands::Game * game;
+	Widelands::Game* game;
 
 	/// If we were to send out a plain networktime packet, this would be the
 	/// time. However, we have not yet committed to this networktime.
@@ -539,7 +523,7 @@ struct NetHostImpl {
 	NetworkTime time;
 
 	/// Whether we're waiting for all clients to report back.
-	bool    waiting;
+	bool waiting;
 	uint32_t lastframe;
 
 	/**
@@ -547,11 +531,11 @@ struct NetHostImpl {
 	 * as we're not \ref waiting.
 	 */
 	uint32_t networkspeed;
-	time_t   lastpauseping;
+	time_t lastpauseping;
 
 	/// All currently running computer players, *NOT* in one-one correspondence
 	/// with \ref Player objects
-	std::vector<ComputerPlayer *> computerplayers;
+	std::vector<ComputerPlayer*> computerplayers;
 
 	/// \c true if a syncreport is currently in flight
 	bool syncreport_pending;
@@ -559,35 +543,30 @@ struct NetHostImpl {
 	Md5Checksum syncreport;
 	bool syncreport_arrived;
 
-	NetHostImpl(NetHost * const h) :
-		localdesiredspeed(0),
-		chat(h),
-		hp(h),
-		npsb(&hp),
-		promoter(nullptr),
-		svsock(nullptr),
-		sockset(nullptr),
-		game(nullptr),
-		pseudo_networktime(0),
-		last_heartbeat(0),
-		committed_networktime(0),
-		waiting(false),
-		lastframe(0),
-		networkspeed(0),
-		lastpauseping(0),
-		syncreport_pending(false),
-		syncreport_time(0),
-		syncreport_arrived(false)
-	{
+	NetHostImpl(NetHost* const h)
+	   : localdesiredspeed(0),
+	     chat(h),
+	     hp(h),
+	     npsb(&hp),
+	     promoter(nullptr),
+	     svsock(nullptr),
+	     sockset(nullptr),
+	     game(nullptr),
+	     pseudo_networktime(0),
+	     last_heartbeat(0),
+	     committed_networktime(0),
+	     waiting(false),
+	     lastframe(0),
+	     networkspeed(0),
+	     lastpauseping(0),
+	     syncreport_pending(false),
+	     syncreport_time(0),
+	     syncreport_arrived(false) {
 	}
 };
 
-NetHost::NetHost (const std::string & playername, bool internet)
-	:
-	d(new NetHostImpl(this)),
-	internet_(internet),
-	forced_pause_(false)
-{
+NetHost::NetHost(const std::string& playername, bool internet)
+   : d(new NetHostImpl(this)), internet_(internet), forced_pause_(false) {
 	log("[Host]: starting up.\n");
 
 	if (internet) {
@@ -598,7 +577,7 @@ NetHost::NetHost (const std::string & playername, bool internet)
 
 	// create a listening socket
 	IPaddress myaddr;
-	SDLNet_ResolveHost (&myaddr, nullptr, WIDELANDS_PORT);
+	SDLNet_ResolveHost(&myaddr, nullptr, WIDELANDS_PORT);
 	d->svsock = SDLNet_TCP_Open(&myaddr);
 
 	d->sockset = SDLNet_AllocSocketSet(16);
@@ -611,7 +590,7 @@ NetHost::NetHost (const std::string & playername, bool internet)
 	d->syncreport_pending = false;
 	d->syncreport_time = 0;
 
-	d->settings.tribes = Widelands::Tribes::get_all_tribeinfos();
+	d->settings.tribes = Widelands::get_all_tribeinfos();
 	set_multiplayer_game_settings();
 	d->settings.playernum = UserSettings::none();
 	d->settings.usernum = 0;
@@ -620,11 +599,10 @@ NetHost::NetHost (const std::string & playername, bool internet)
 	hostuser.position = UserSettings::none();
 	hostuser.ready = true;
 	d->settings.users.push_back(hostuser);
-	file_ = nullptr; //  Initialize as 0 pointer - unfortunately needed in struct.
+	file_ = nullptr;  //  Initialize as 0 pointer - unfortunately needed in struct.
 }
 
-NetHost::~NetHost ()
-{
+NetHost::~NetHost() {
 	clear_computer_players();
 
 	while (!d->clients.empty()) {
@@ -632,42 +610,37 @@ NetHost::~NetHost ()
 		reaper();
 	}
 
-	SDLNet_FreeSocketSet (d->sockset);
+	SDLNet_FreeSocketSet(d->sockset);
 
 	// close all open sockets
 	if (d->svsock != nullptr)
-		SDLNet_TCP_Close (d->svsock);
+		SDLNet_TCP_Close(d->svsock);
 
 	delete d->promoter;
 	delete d;
 	delete file_;
 }
 
-const std::string & NetHost::get_local_playername() const
-{
+const std::string& NetHost::get_local_playername() const {
 	return d->localplayername;
 }
 
-int16_t NetHost::get_local_playerposition()
-{
+int16_t NetHost::get_local_playerposition() {
 	return d->settings.users.at(0).position;
 }
 
-void NetHost::clear_computer_players()
-{
+void NetHost::clear_computer_players() {
 	for (uint32_t i = 0; i < d->computerplayers.size(); ++i)
 		delete d->computerplayers.at(i);
 	d->computerplayers.clear();
 }
 
-void NetHost::init_computer_player(Widelands::PlayerNumber p)
-{
-	d->computerplayers.push_back
-		(ComputerPlayer::get_implementation(d->game->get_player(p)->get_ai())->instantiate(*d->game, p));
+void NetHost::init_computer_player(Widelands::PlayerNumber p) {
+	d->computerplayers.push_back(ComputerPlayer::get_implementation(d->game->get_player(p)->get_ai())
+	                                ->instantiate(*d->game, p));
 }
 
-void NetHost::init_computer_players()
-{
+void NetHost::init_computer_players() {
 	const Widelands::PlayerNumber nr_players = d->game->map().get_nrplayers();
 	iterate_players_existing_novar(p, nr_players, *d->game) {
 		if (p == d->settings.playernum + 1)
@@ -683,8 +656,7 @@ void NetHost::init_computer_players()
 	}
 }
 
-void NetHost::run()
-{
+void NetHost::run() {
 	// Fill the list of possible system messages
 	NetworkGamingMessages::fill_map();
 	FullscreenMenuLaunchMPG lm(&d->hp, this);
@@ -751,9 +723,9 @@ void NetHost::run()
 		igb->set_chat_provider(d->chat);
 		game.set_ibase(igb);
 
-		if (!d->settings.savegame) // new game
-			game.init_newgame (loader_ui.get(), d->settings);
-		else                      // savegame
+		if (!d->settings.savegame)  // new game
+			game.init_newgame(loader_ui.get(), d->settings);
+		else  // savegame
 			game.init_savegame(loader_ui.get(), d->settings);
 		d->pseudo_networktime = game.get_gametime();
 		d->time.reset(d->pseudo_networktime);
@@ -769,12 +741,11 @@ void NetHost::run()
 		// wait mode when there are no clients
 		check_hung_clients();
 		init_computer_players();
-		game.run
-			(loader_ui.get(),
-			 d->settings.savegame ? Widelands::Game::Loaded : d->settings.scenario ?
-			 Widelands::Game::NewMPScenario : Widelands::Game::NewNonScenario,
-			 "",
-			 false, "nethost");
+		game.run(loader_ui.get(),
+		         d->settings.savegame ? Widelands::Game::Loaded : d->settings.scenario ?
+		                                Widelands::Game::NewMPScenario :
+		                                Widelands::Game::NewNonScenario,
+		         "", false, "nethost");
 
 		// if this is an internet game, tell the metaserver that the game is done.
 		if (internet_)
@@ -799,8 +770,7 @@ void NetHost::run()
 	d->game = nullptr;
 }
 
-void NetHost::think()
-{
+void NetHost::think() {
 	handle_network();
 
 	if (d->game) {
@@ -813,10 +783,9 @@ void NetHost::think()
 			d->pseudo_networktime += diff;
 		}
 
-		d->time.think(real_speed()); // must be called even when d->waiting
+		d->time.think(real_speed());  // must be called even when d->waiting
 
-		if (d->pseudo_networktime != d->committed_networktime)
-		{
+		if (d->pseudo_networktime != d->committed_networktime) {
 			if (d->pseudo_networktime - d->committed_networktime < 0) {
 				d->pseudo_networktime = d->committed_networktime;
 			} else if (curtime - d->last_heartbeat >= SERVER_TIMESTAMP_INTERVAL) {
@@ -838,8 +807,7 @@ void NetHost::think()
 	}
 }
 
-void NetHost::send_player_command(Widelands::PlayerCommand & pc)
-{
+void NetHost::send_player_command(Widelands::PlayerCommand& pc) {
 	pc.set_duetime(d->committed_networktime + 1);
 
 	SendPacket s;
@@ -859,8 +827,7 @@ void NetHost::send_player_command(Widelands::PlayerCommand & pc)
  * If it is a personal message it will only be send to the recipient and to
  * the sender (to show that the message was actually sent).
  */
-void NetHost::send(ChatMessage msg)
-{
+void NetHost::send(ChatMessage msg) {
 	if (msg.msg.empty())
 		return;
 
@@ -874,7 +841,7 @@ void NetHost::send(ChatMessage msg)
 		broadcast(s);
 
 		d->chat.receive(msg);
-	} else { //  personal messages
+	} else {  //  personal messages
 		SendPacket s;
 		s.unsigned_8(NETCMD_CHAT);
 
@@ -888,7 +855,7 @@ void NetHost::send(ChatMessage msg)
 			s.string(msg.msg);
 			s.unsigned_8(1);
 			s.string(msg.recipient);
-		} else { // Find the recipient
+		} else {  // Find the recipient
 			int32_t clientnum = check_client(msg.recipient);
 			if (clientnum >= 0) {
 				s.signed_16(msg.playern);
@@ -897,7 +864,8 @@ void NetHost::send(ChatMessage msg)
 				s.unsigned_8(1);
 				s.string(msg.recipient);
 				s.send(d->clients.at(clientnum).sock);
-				log("[Host]: personal chat: from %s to %s\n", msg.sender.c_str(), msg.recipient.c_str());
+				log(
+				   "[Host]: personal chat: from %s to %s\n", msg.sender.c_str(), msg.recipient.c_str());
 			} else {
 				std::string fail = "Failed to send message: Recipient \"";
 				fail += msg.recipient + "\" could not be found!";
@@ -906,32 +874,32 @@ void NetHost::send(ChatMessage msg)
 				if (d->localplayername == msg.sender) {
 					ChatMessage err;
 					err.time = time(nullptr);
-					err.playern = -2; // System message
+					err.playern = -2;  // System message
 					err.sender = "";
 					err.msg = fail;
 					err.recipient = "";
 					d->chat.receive(err);
-					return; // nothing left to do!
+					return;  // nothing left to do!
 				}
-				s.signed_16(-2); // System message
+				s.signed_16(-2);  // System message
 				s.string("");
 				s.string(fail);
 				s.unsigned_8(0);
 			}
 		}
 
-		if (msg.sender == msg.recipient) //  he sent himself a private message
-			return; //  do not deliver it to him twice
+		if (msg.sender == msg.recipient)  //  he sent himself a private message
+			return;                        //  do not deliver it to him twice
 
 		// Now find the sender and send either the message or the failure notice
-		else if (msg.playern == -2) // private system message
+		else if (msg.playern == -2)  // private system message
 			return;
 		else if (d->localplayername == msg.sender)
 			d->chat.receive(msg);
-		else { // host is not the sender -> get sender
+		else {  // host is not the sender -> get sender
 			uint16_t i = 0;
 			for (; i < d->settings.users.size(); ++i) {
-				const UserSettings & user = d->settings.users.at(i);
+				const UserSettings& user = d->settings.users.at(i);
 				if (user.name == msg.sender)
 					break;
 			}
@@ -958,8 +926,7 @@ void NetHost::send(ChatMessage msg)
  *   -   -1 if no client was found
  *   -   -2 if the host is the client (has no client number)
  */
-int32_t NetHost::check_client(std::string name)
-{
+int32_t NetHost::check_client(std::string name) {
 	// Check if the client is the host him-/herself
 	if (d->localplayername == name) {
 		return -2;
@@ -969,7 +936,7 @@ int32_t NetHost::check_client(std::string name)
 	uint16_t i = 0;
 	uint32_t client = 0;
 	for (; i < d->settings.users.size(); ++i) {
-		const UserSettings & user = d->settings.users.at(i);
+		const UserSettings& user = d->settings.users.at(i);
 		if (user.name == name)
 			break;
 	}
@@ -979,9 +946,9 @@ int32_t NetHost::check_client(std::string name)
 				break;
 		if (client >= d->clients.size())
 			throw wexception("WARNING: user was found but no client is connected to it!\n");
-		return client; // client found
+		return client;  // client found
 	} else {
-		return -1; // no client found
+		return -1;  // no client found
 	}
 }
 
@@ -989,17 +956,16 @@ int32_t NetHost::check_client(std::string name)
 * If the host sends a chat message with formation /kick <name> <reason>
 * This function will handle this command and try to kick the user.
 */
-void NetHost::kick_user(uint32_t client, std::string reason)
-{
+void NetHost::kick_user(uint32_t client, std::string reason) {
 	disconnect_client(client, "KICKED", true, reason);
 }
 
-
 /// Split up a user entered string in "cmd", "arg1" and "arg2"
 /// \note the cmd must begin with "/"
-void NetHost::split_command_array
-	(const std::string & cmdarray, std::string & cmd, std::string & arg1, std::string & arg2)
-{
+void NetHost::split_command_array(const std::string& cmdarray,
+                                  std::string& cmd,
+                                  std::string& arg1,
+                                  std::string& arg2) {
 	assert(cmdarray.size() > 1);
 
 	std::string::size_type const space = cmdarray.find(' ');
@@ -1023,9 +989,10 @@ void NetHost::split_command_array
 		arg2 = "";
 }
 
-void NetHost::send_system_message_code
-	(const std::string & code, const std::string & a, const std::string & b, const std::string & c)
-{
+void NetHost::send_system_message_code(const std::string& code,
+                                       const std::string& a,
+                                       const std::string& b,
+                                       const std::string& c) {
 	// First send to all clients
 	SendPacket s;
 	s.unsigned_8(NETCMD_SYSTEM_MESSAGE_CODE);
@@ -1039,28 +1006,24 @@ void NetHost::send_system_message_code
 	ChatMessage msg;
 	msg.time = time(nullptr);
 	msg.msg = NetworkGamingMessages::get_message(code, a, b, c);
-	msg.playern = UserSettings::none(); //  == System message
+	msg.playern = UserSettings::none();  //  == System message
 	// c.sender remains empty to indicate a system message
 	d->chat.receive(msg);
 }
 
-int32_t NetHost::get_frametime()
-{
+int32_t NetHost::get_frametime() {
 	return d->time.time() - d->game->get_gametime();
 }
 
-GameController::GameType NetHost::get_game_type()
-{
+GameController::GameType NetHost::get_game_type() {
 	return GameController::GameType::NETHOST;
 }
 
-const GameSettings& NetHost::settings()
-{
+const GameSettings& NetHost::settings() {
 	return d->settings;
 }
 
-bool NetHost::can_launch()
-{
+bool NetHost::can_launch() {
 	if (d->settings.mapname.empty())
 		return false;
 	if (d->settings.players.size() < 1)
@@ -1086,12 +1049,10 @@ bool NetHost::can_launch()
 	return one_not_closed;
 }
 
-void NetHost::set_map
-	(const std::string &       mapname,
-	 const std::string &       mapfilename,
-	 uint32_t            const maxplayers,
-	 bool                const savegame)
-{
+void NetHost::set_map(const std::string& mapname,
+                      const std::string& mapfilename,
+                      uint32_t const maxplayers,
+                      bool const savegame) {
 	d->settings.mapname = mapname;
 	d->settings.mapfilename = mapfilename;
 	d->settings.savegame = savegame;
@@ -1101,11 +1062,8 @@ void NetHost::set_map
 	SendPacket s;
 
 	// Care about the host
-	if
-		(static_cast<int32_t>(maxplayers) <= d->settings.playernum
-		 &&
-		 d->settings.playernum != UserSettings::none())
-	{
+	if (static_cast<int32_t>(maxplayers) <= d->settings.playernum &&
+	    d->settings.playernum != UserSettings::none()) {
 		set_player_number(UserSettings::none());
 	}
 
@@ -1134,17 +1092,17 @@ void NetHost::set_map
 	d->settings.players.resize(maxplayers);
 
 	while (oldplayers < maxplayers) {
-		PlayerSettings & player = d->settings.players.at(oldplayers);
-		player.state                = PlayerSettings::stateOpen;
-		player.name                 = "";
-		player.tribe                = d->settings.tribes.at(0).name;
-		player.random_tribe         = false;
+		PlayerSettings& player = d->settings.players.at(oldplayers);
+		player.state = PlayerSettings::stateOpen;
+		player.name = "";
+		player.tribe = d->settings.tribes.at(0).name;
+		player.random_tribe = false;
 		player.initialization_index = 0;
-		player.team                 = 0;
-		player.ai                   = "";
-		player.random_ai            = false;
-		player.closeable            = false;
-		player.shared_in            = 0;
+		player.team = 0;
+		player.ai = "";
+		player.random_ai = false;
+		player.closeable = false;
+		player.shared_in = 0;
 
 		++oldplayers;
 	}
@@ -1199,13 +1157,13 @@ void NetHost::set_map
 		broadcast(s);
 }
 
-void NetHost::set_player_state
-	(uint8_t const number, PlayerSettings::State const state, bool const host)
-{
+void NetHost::set_player_state(uint8_t const number,
+                               PlayerSettings::State const state,
+                               bool const host) {
 	if (number >= d->settings.players.size())
 		return;
 
-	PlayerSettings & player = d->settings.players.at(number);
+	PlayerSettings& player = d->settings.players.at(number);
 
 	if (player.state == state)
 		return;
@@ -1221,7 +1179,7 @@ void NetHost::set_player_state
 		for (uint8_t i = 1; i < d->settings.users.size(); ++i) {
 			if (d->settings.users.at(i).position == number) {
 				d->settings.users.at(i).position = UserSettings::none();
-				if (host) //  Did host send the user to lobby?
+				if (host)  //  Did host send the user to lobby?
 					send_system_message_code("SENT_PLAYER_TO_LOBBY", d->settings.users.at(i).name);
 
 				//  for local settings
@@ -1257,13 +1215,13 @@ void NetHost::set_player_state
 	broadcast(s);
 }
 
-
-void NetHost::set_player_tribe(uint8_t const number, const std::string & tribe, bool const random_tribe)
-{
+void NetHost::set_player_tribe(uint8_t const number,
+                               const std::string& tribe,
+                               bool const random_tribe) {
 	if (number >= d->settings.players.size())
 		return;
 
-	PlayerSettings & player = d->settings.players.at(number);
+	PlayerSettings& player = d->settings.players.at(number);
 
 	if (player.tribe == tribe && player.random_tribe == random_tribe)
 		return;
@@ -1292,17 +1250,14 @@ void NetHost::set_player_tribe(uint8_t const number, const std::string & tribe, 
 			return;
 		}
 	}
-	log
-		("Player %u attempted to change to tribe %s; not a valid tribe\n",
-		 number, tribe.c_str());
+	log("Player %u attempted to change to tribe %s; not a valid tribe\n", number, tribe.c_str());
 }
 
-void NetHost::set_player_init(uint8_t const number, uint8_t const index)
-{
+void NetHost::set_player_init(uint8_t const number, uint8_t const index) {
 	if (number >= d->settings.players.size())
 		return;
 
-	PlayerSettings & player = d->settings.players.at(number);
+	PlayerSettings& player = d->settings.players.at(number);
 
 	if (player.initialization_index == index)
 		return;
@@ -1320,22 +1275,20 @@ void NetHost::set_player_init(uint8_t const number, uint8_t const index)
 				broadcast(s);
 				return;
 			} else
-				log
-					("Attempted to change to out-of-range initialization index %u "
-					 "for player %u.\n", index, number);
+				log("Attempted to change to out-of-range initialization index %u "
+				    "for player %u.\n",
+				    index, number);
 			return;
 		}
 	}
 	NEVER_HERE();
 }
 
-
-void NetHost::set_player_ai(uint8_t number, const std::string & name, bool const random_ai)
-{
+void NetHost::set_player_ai(uint8_t number, const std::string& name, bool const random_ai) {
 	if (number >= d->settings.players.size())
 		return;
 
-	PlayerSettings & player = d->settings.players.at(number);
+	PlayerSettings& player = d->settings.players.at(number);
 	player.ai = name;
 	player.random_ai = random_ai;
 
@@ -1347,13 +1300,11 @@ void NetHost::set_player_ai(uint8_t number, const std::string & name, bool const
 	broadcast(s);
 }
 
-
-void NetHost::set_player_name(uint8_t const number, const std::string & name)
-{
+void NetHost::set_player_name(uint8_t const number, const std::string& name) {
 	if (number >= d->settings.players.size())
 		return;
 
-	PlayerSettings & player = d->settings.players.at(number);
+	PlayerSettings& player = d->settings.players.at(number);
 
 	if (player.name == name)
 		return;
@@ -1368,37 +1319,36 @@ void NetHost::set_player_name(uint8_t const number, const std::string & name)
 	broadcast(s);
 }
 
-
-void NetHost::set_player_closeable(uint8_t const number, bool closeable)
-{
+void NetHost::set_player_closeable(uint8_t const number, bool closeable) {
 	if (number >= d->settings.players.size())
 		return;
 
-	PlayerSettings & player = d->settings.players.at(number);
+	PlayerSettings& player = d->settings.players.at(number);
 
 	if (player.closeable == closeable)
 		return;
 
 	player.closeable = closeable;
 
-	// There is no need to broadcast a player closeability change, as the host is the only one who uses it.
+	// There is no need to broadcast a player closeability change, as the host is the only one who
+	// uses it.
 }
-
 
 void NetHost::set_player_shared(uint8_t number, uint8_t shared) {
 	if (number >= d->settings.players.size())
 		return;
 
-	PlayerSettings & player = d->settings.players.at(number);
+	PlayerSettings& player = d->settings.players.at(number);
 
 	if (player.shared_in == shared)
 		return;
 
-	PlayerSettings & sharedplr = d->settings.players.at(shared - 1);
-	assert(sharedplr.state != PlayerSettings::stateClosed && sharedplr.state != PlayerSettings::stateShared);
+	PlayerSettings& sharedplr = d->settings.players.at(shared - 1);
+	assert(sharedplr.state != PlayerSettings::stateClosed &&
+	       sharedplr.state != PlayerSettings::stateShared);
 
 	player.shared_in = shared;
-	player.tribe     = sharedplr.tribe;
+	player.tribe = sharedplr.tribe;
 
 	// Broadcast changes
 	SendPacket s;
@@ -1408,13 +1358,11 @@ void NetHost::set_player_shared(uint8_t number, uint8_t shared) {
 	broadcast(s);
 }
 
-
-void NetHost::set_player(uint8_t const number, PlayerSettings const ps)
-{
+void NetHost::set_player(uint8_t const number, const PlayerSettings& ps) {
 	if (number >= d->settings.players.size())
 		return;
 
-	PlayerSettings & player = d->settings.players.at(number);
+	PlayerSettings& player = d->settings.players.at(number);
 	player = ps;
 
 	// Broadcast changes
@@ -1425,13 +1373,11 @@ void NetHost::set_player(uint8_t const number, PlayerSettings const ps)
 	broadcast(s);
 }
 
-void NetHost::set_player_number(uint8_t const number)
-{
+void NetHost::set_player_number(uint8_t const number) {
 	switch_to_player(0, number);
 }
 
-void NetHost::set_win_condition_script(std::string wc)
-{
+void NetHost::set_win_condition_script(std::string wc) {
 	d->settings.win_condition_script = wc;
 
 	// Broadcast changes
@@ -1441,21 +1387,17 @@ void NetHost::set_win_condition_script(std::string wc)
 	broadcast(s);
 }
 
-void NetHost::switch_to_player(uint32_t user, uint8_t number)
-{
-	if
-		(number < d->settings.players.size()
-		 &&
-		 (d->settings.players.at(number).state != PlayerSettings::stateOpen
-		  &&
-		  d->settings.players.at(number).state != PlayerSettings::stateHuman))
+void NetHost::switch_to_player(uint32_t user, uint8_t number) {
+	if (number < d->settings.players.size() &&
+	    (d->settings.players.at(number).state != PlayerSettings::stateOpen &&
+	     d->settings.players.at(number).state != PlayerSettings::stateHuman))
 		return;
 
 	uint32_t old = d->settings.users.at(user).position;
 	std::string name = d->settings.users.at(user).name;
 	// Remove clients name from old player slot
 	if (old < d->settings.players.size()) {
-		PlayerSettings & op = d->settings.players.at(old);
+		PlayerSettings& op = d->settings.players.at(old);
 		std::string temp(" ");
 		temp += name;
 		temp += " ";
@@ -1468,7 +1410,7 @@ void NetHost::switch_to_player(uint32_t user, uint8_t number)
 
 	if (number < d->settings.players.size()) {
 		// Add clients name to new player slot
-		PlayerSettings & op = d->settings.players.at(number);
+		PlayerSettings& op = d->settings.players.at(number);
 		if (op.state == PlayerSettings::stateOpen) {
 			set_player_state(number, PlayerSettings::stateHuman);
 			set_player_name(number, " " + name + " ");
@@ -1476,7 +1418,7 @@ void NetHost::switch_to_player(uint32_t user, uint8_t number)
 			set_player_name(number, op.name + " " + name + " ");
 	}
 	d->settings.users.at(user).position = number;
-	if (user == 0) // host
+	if (user == 0)  // host
 		d->settings.playernum = number;
 	else
 		for (uint32_t j = 0; j < d->clients.size(); ++j)
@@ -1493,8 +1435,7 @@ void NetHost::switch_to_player(uint32_t user, uint8_t number)
 	broadcast(s);
 }
 
-void NetHost::set_player_team(uint8_t number, Widelands::TeamNumber team)
-{
+void NetHost::set_player_team(uint8_t number, Widelands::TeamNumber team) {
 	if (number >= d->settings.players.size())
 		return;
 	d->settings.players.at(number).team = team;
@@ -1507,31 +1448,26 @@ void NetHost::set_player_team(uint8_t number, Widelands::TeamNumber team)
 	broadcast(s);
 }
 
-void NetHost::set_multiplayer_game_settings()
-{
+void NetHost::set_multiplayer_game_settings() {
 	d->settings.scenario = false;
 	d->settings.multiplayer = true;
 }
 
-void NetHost::set_scenario(bool is_scenario)
-{
+void NetHost::set_scenario(bool is_scenario) {
 	d->settings.scenario = is_scenario;
 }
 
-uint32_t NetHost::real_speed()
-{
+uint32_t NetHost::real_speed() {
 	if (d->waiting)
 		return 0;
 	return d->networkspeed;
 }
 
-uint32_t NetHost::desired_speed()
-{
+uint32_t NetHost::desired_speed() {
 	return d->localdesiredspeed;
 }
 
-void NetHost::set_desired_speed(uint32_t const speed)
-{
+void NetHost::set_desired_speed(uint32_t const speed) {
 	if (speed != d->localdesiredspeed) {
 		d->localdesiredspeed = speed;
 		update_network_speed();
@@ -1539,18 +1475,15 @@ void NetHost::set_desired_speed(uint32_t const speed)
 }
 
 // Network games cannot be paused
-bool NetHost::is_paused()
-{
+bool NetHost::is_paused() {
 	return false;
 }
 
-void NetHost::set_paused(bool /* paused */)
-{
+void NetHost::set_paused(bool /* paused */) {
 }
 
 // Send the packet to all properly connected clients
-void NetHost::broadcast(SendPacket & packet)
-{
+void NetHost::broadcast(SendPacket& packet) {
 	for (const Client& client : d->clients) {
 		if (client.playernum != UserSettings::not_connected()) {
 			packet.send(client.sock);
@@ -1558,17 +1491,15 @@ void NetHost::broadcast(SendPacket & packet)
 	}
 }
 
-void NetHost::write_setting_map(SendPacket & packet)
-{
+void NetHost::write_setting_map(SendPacket& packet) {
 	packet.string(d->settings.mapname);
 	packet.string(d->settings.mapfilename);
 	packet.unsigned_8(d->settings.savegame ? 1 : 0);
 	packet.unsigned_8(d->settings.scenario ? 1 : 0);
 }
 
-void NetHost::write_setting_player(SendPacket & packet, uint8_t const number)
-{
-	PlayerSettings & player = d->settings.players.at(number);
+void NetHost::write_setting_player(SendPacket& packet, uint8_t const number) {
+	PlayerSettings& player = d->settings.players.at(number);
 	packet.unsigned_8(static_cast<uint8_t>(player.state));
 	packet.string(player.name);
 	packet.string(player.tribe);
@@ -1580,34 +1511,30 @@ void NetHost::write_setting_player(SendPacket & packet, uint8_t const number)
 	packet.unsigned_8(player.shared_in);
 }
 
-void NetHost::write_setting_all_players(SendPacket & packet)
-{
+void NetHost::write_setting_all_players(SendPacket& packet) {
 	packet.unsigned_8(d->settings.players.size());
 	for (uint8_t i = 0; i < d->settings.players.size(); ++i)
 		write_setting_player(packet, i);
 }
 
-void NetHost::write_setting_user(SendPacket & packet, uint32_t const number)
-{
+void NetHost::write_setting_user(SendPacket& packet, uint32_t const number) {
 	packet.string(d->settings.users.at(number).name);
 	packet.signed_32(d->settings.users.at(number).position);
 	packet.unsigned_8(d->settings.users.at(number).ready ? 1 : 0);
 }
 
-void NetHost::write_setting_all_users(SendPacket & packet)
-{
+void NetHost::write_setting_all_users(SendPacket& packet) {
 	packet.unsigned_8(d->settings.users.size());
 	for (uint32_t i = 0; i < d->settings.users.size(); ++i)
 		write_setting_user(packet, i);
 }
-
 
 /**
 * If possible, this function writes the MapTransferInfo to SendPacket & s
 *
 * \returns true if the data was written, else false
 */
-bool NetHost::write_map_transfer_info(SendPacket & s, std::string mapfilename) {
+bool NetHost::write_map_transfer_info(SendPacket& s, std::string mapfilename) {
 	// TODO(unknown): not yet able to handle directory type maps / savegames
 	if (g_fs->is_directory(mapfilename)) {
 		log("Map/Save is a directory! No way for making it available a.t.m.!\n");
@@ -1626,13 +1553,11 @@ bool NetHost::write_map_transfer_info(SendPacket & s, std::string mapfilename) {
 	return true;
 }
 
-
 /**
  *
  * \return a name for the given player.
  */
-std::string NetHost::get_computer_player_name(uint8_t const playernum)
-{
+std::string NetHost::get_computer_player_name(uint8_t const playernum) {
 	std::string name;
 	uint32_t suffix = playernum;
 	do {
@@ -1641,14 +1566,13 @@ std::string NetHost::get_computer_player_name(uint8_t const playernum)
 	return name;
 }
 
-
 /**
  * Checks whether a user with the given name exists already.
  *
  * If \p ignoreplayer < UserSettings::highest_playernum(), the user with this
  * number will be ignored.
  */
-bool NetHost::has_user_name(const std::string & name, uint8_t ignoreplayer) {
+bool NetHost::has_user_name(const std::string& name, uint8_t ignoreplayer) {
 	for (uint32_t i = 0; i < d->settings.users.size(); ++i)
 		if (i != ignoreplayer && d->settings.users.at(i).name == name)
 			return true;
@@ -1664,13 +1588,11 @@ bool NetHost::has_user_name(const std::string & name, uint8_t ignoreplayer) {
 	return false;
 }
 
-
 /// Respond to a client's Hello message.
-void NetHost::welcome_client (uint32_t const number, std::string & playername)
-{
+void NetHost::welcome_client(uint32_t const number, std::string& playername) {
 	assert(number < d->clients.size());
 
-	Client & client = d->clients.at(number);
+	Client& client = d->clients.at(number);
 
 	assert(client.playernum == UserSettings::not_connected());
 	assert(client.sock);
@@ -1678,24 +1600,24 @@ void NetHost::welcome_client (uint32_t const number, std::string & playername)
 	// The client gets its own initial data set.
 	client.playernum = UserSettings::none();
 
-	if (!d->game) // just in case we allow connection of spectators/players after game start
+	if (!d->game)  // just in case we allow connection of spectators/players after game start
 		for (uint32_t i = 0; i < d->settings.users.size(); ++i)
 			if (d->settings.users[i].position == UserSettings::not_connected()) {
 				client.usernum = i;
 				d->settings.users[i].result = Widelands::PlayerEndResult::UNDEFINED;
-				d->settings.users[i].ready  = true;
+				d->settings.users[i].ready = true;
 				break;
 			}
 	if (client.usernum == -1) {
 		client.usernum = d->settings.users.size();
 		UserSettings newuser;
 		newuser.result = Widelands::PlayerEndResult::UNDEFINED;
-		newuser.ready  = true;
+		newuser.ready = true;
 		d->settings.users.push_back(newuser);
 	}
 
 	// Assign the player a name, preferably the name chosen by the client
-	if (playername.empty()) // Make sure there is at least a name base.
+	if (playername.empty())  // Make sure there is at least a name base.
 		playername = _("Player");
 	std::string effective_name = playername;
 
@@ -1740,8 +1662,7 @@ void NetHost::welcome_client (uint32_t const number, std::string & playername)
 	s.unsigned_8(d->settings.tribes.size());
 	for (uint8_t i = 0; i < d->settings.tribes.size(); ++i) {
 		s.string(d->settings.tribes[i].name);
-		size_t const nr_initializations =
-			d->settings.tribes[i].initializations.size();
+		size_t const nr_initializations = d->settings.tribes[i].initializations.size();
 		s.unsigned_8(nr_initializations);
 		for (uint8_t j = 0; j < nr_initializations; ++j)
 			s.string(d->settings.tribes[i].initializations[j].script);
@@ -1780,27 +1701,24 @@ void NetHost::welcome_client (uint32_t const number, std::string & playername)
 	send_system_message_code("CLIENT_HAS_JOINED_GAME", effective_name);
 }
 
-void NetHost::committed_network_time(int32_t const time)
-{
+void NetHost::committed_network_time(int32_t const time) {
 	assert(time - d->committed_networktime > 0);
 
 	d->committed_networktime = time;
 	d->time.receive(time);
 
-	if
-		(!d->syncreport_pending &&
-		 d->committed_networktime - d->syncreport_time >= SYNCREPORT_INTERVAL)
+	if (!d->syncreport_pending &&
+	    d->committed_networktime - d->syncreport_time >= SYNCREPORT_INTERVAL)
 		request_sync_reports();
 }
 
-void NetHost::receive_client_time(uint32_t const number, int32_t const time)
-{
+void NetHost::receive_client_time(uint32_t const number, int32_t const time) {
 	assert(number < d->clients.size());
 
-	Client & client = d->clients.at(number);
+	Client& client = d->clients.at(number);
 
 	if (time - client.time < 0)
-		throw DisconnectException("BACKWARTS_RUNNING_TIME");
+		throw DisconnectException("BACKWARDS_RUNNING_TIME");
 	if (d->committed_networktime - time < 0)
 		throw DisconnectException("SIMULATING_BEYOND_TIME");
 	if (d->syncreport_pending && !client.syncreport_arrived) {
@@ -1812,19 +1730,15 @@ void NetHost::receive_client_time(uint32_t const number, int32_t const time)
 	log("[Host]: Client %i: Time %i\n", number, time);
 
 	if (d->waiting) {
-		log
-			("[Host]: Client %i reports time %i (networktime = %i) during hang\n",
-			 number, time, d->committed_networktime);
+		log("[Host]: Client %i reports time %i (networktime = %i) during hang\n", number, time,
+		    d->committed_networktime);
 		check_hung_clients();
 	}
 }
 
-
-void NetHost::check_hung_clients()
-{
+void NetHost::check_hung_clients() {
 	assert(d->game != nullptr);
 
-	int nrready = 0;
 	int nrdelayed = 0;
 	int nrhung = 0;
 
@@ -1835,24 +1749,15 @@ void NetHost::check_hung_clients()
 		int32_t const delta = d->committed_networktime - d->clients.at(i).time;
 
 		if (delta == 0) {
-			++nrready;
 			// reset the hung_since time
 			d->clients.at(i).hung_since = 0;
 		} else {
 			assert(d->game != nullptr);
 			++nrdelayed;
-			if
-				(delta
-				 >
-				 (5                         *
-				  CLIENT_TIMESTAMP_INTERVAL *
-				  static_cast<int32_t>(d->networkspeed))
-				 /
-				 1000)
-			{
-				log
-					("[Host]: Client %i (%s) hung\n",
-					 i, d->settings.users.at(d->clients.at(i).usernum).name.c_str());
+			if (delta >
+			    (5 * CLIENT_TIMESTAMP_INTERVAL * static_cast<int32_t>(d->networkspeed)) / 1000) {
+				log("[Host]: Client %i (%s) hung\n", i,
+				    d->settings.users.at(d->clients.at(i).usernum).name.c_str());
 				++nrhung;
 				if (d->clients.at(i).hung_since == 0) {
 					d->clients.at(i).hung_since = time(nullptr);
@@ -1861,12 +1766,12 @@ void NetHost::check_hung_clients()
 
 					// inform the other clients about the problem regulary
 					if (deltanow - d->clients.at(i).lastdelta > 30) {
-						std::string seconds = (boost::format(ngettext("%li second", "%li seconds", deltanow))
-															  % deltanow).str();
-						send_system_message_code
-							("CLIENT_HUNG",
-							 d->settings.users.at(d->clients.at(i).usernum).name,
-							 seconds.c_str());
+						std::string seconds =
+						   (boost::format(ngettext("%li second", "%li seconds", deltanow)) % deltanow)
+						      .str();
+						send_system_message_code("CLIENT_HUNG",
+						                         d->settings.users.at(d->clients.at(i).usernum).name,
+						                         seconds.c_str());
 						d->clients.at(i).lastdelta = deltanow;
 					}
 				}
@@ -1896,9 +1801,7 @@ void NetHost::check_hung_clients()
 	}
 }
 
-
-void NetHost::broadcast_real_speed(uint32_t const speed)
-{
+void NetHost::broadcast_real_speed(uint32_t const speed) {
 	assert(speed <= std::numeric_limits<uint16_t>::max());
 
 	SendPacket s;
@@ -1906,7 +1809,6 @@ void NetHost::broadcast_real_speed(uint32_t const speed)
 	s.unsigned_16(speed);
 	broadcast(s);
 }
-
 
 /**
  * This is the algorithm that decides upon the effective network speed,
@@ -1927,8 +1829,7 @@ void NetHost::broadcast_real_speed(uint32_t const speed)
  * network games, as sudden pauses would be distracting to other players. A
  * hard interruption of the game can be achieved with the forced pause.
  */
-void NetHost::update_network_speed()
-{
+void NetHost::update_network_speed() {
 	uint32_t const oldnetworkspeed = d->networkspeed;
 
 	// First check if a pause was forced by the host
@@ -1956,11 +1857,9 @@ void NetHost::update_network_speed()
 				speeds[1] = speeds[0] + 1000;
 		}
 
-
-		d->networkspeed =
-			speeds.size() % 2 ? speeds.at(speeds.size() / 2) :
-			(speeds.at(speeds.size() / 2) + speeds.at((speeds.size() / 2) - 1))
-			/ 2;
+		d->networkspeed = speeds.size() % 2 ?
+		                     speeds.at(speeds.size() / 2) :
+		                     (speeds.at(speeds.size() / 2) + speeds.at((speeds.size() / 2) - 1)) / 2;
 
 		if (d->networkspeed > std::numeric_limits<uint16_t>::max())
 			d->networkspeed = std::numeric_limits<uint16_t>::max();
@@ -1970,12 +1869,10 @@ void NetHost::update_network_speed()
 		broadcast_real_speed(d->networkspeed);
 }
 
-
 /**
  * Request sync reports from all clients at the next possible time.
  */
-void NetHost::request_sync_reports()
-{
+void NetHost::request_sync_reports() {
 	assert(!d->syncreport_pending);
 
 	d->syncreport_pending = true;
@@ -2000,17 +1897,15 @@ void NetHost::request_sync_reports()
 /**
  * Check whether all sync reports have arrived, and if so, compare.
  */
-void NetHost::check_sync_reports()
-{
+void NetHost::check_sync_reports() {
 	assert(d->syncreport_pending);
 
 	if (!d->syncreport_arrived)
 		return;
 
 	for (uint32_t i = 0; i < d->clients.size(); ++i) {
-		if
-			(d->clients.at(i).playernum != UserSettings::not_connected() &&
-			 !d->clients.at(i).syncreport_arrived)
+		if (d->clients.at(i).playernum != UserSettings::not_connected() &&
+		    !d->clients.at(i).syncreport_arrived)
 			return;
 	}
 
@@ -2018,16 +1913,15 @@ void NetHost::check_sync_reports()
 	log("[Host]: comparing syncreports for time %i\n", d->syncreport_time);
 
 	for (uint32_t i = 0; i < d->clients.size(); ++i) {
-		Client & client = d->clients.at(i);
+		Client& client = d->clients.at(i);
 		if (client.playernum == UserSettings::not_connected())
 			continue;
 
 		if (client.syncreport != d->syncreport) {
-			log
-				("[Host]: lost synchronization with client %u!\n"
-				 "I have:     %s\n"
-				 "Client has: %s\n",
-				 i, d->syncreport.str().c_str(), client.syncreport.str().c_str());
+			log("[Host]: lost synchronization with client %u!\n"
+			    "I have:     %s\n"
+			    "Client has: %s\n",
+			    i, d->syncreport.str().c_str(), client.syncreport.str().c_str());
 
 			d->game->save_syncstream(true);
 
@@ -2044,8 +1938,7 @@ void NetHost::check_sync_reports()
 	}
 }
 
-void NetHost::syncreport()
-{
+void NetHost::syncreport() {
 	assert(d->game->get_gametime() == static_cast<uint32_t>(d->syncreport_time));
 
 	d->syncreport = d->game->get_sync_hash();
@@ -2054,29 +1947,27 @@ void NetHost::syncreport()
 	check_sync_reports();
 }
 
-
-void NetHost::handle_network ()
-{
+void NetHost::handle_network() {
 	TCPsocket sock;
 
 	if (d->promoter != nullptr)
-		d->promoter->run ();
+		d->promoter->run();
 
 	// Check for new connections.
 	while (d->svsock != nullptr && (sock = SDLNet_TCP_Accept(d->svsock)) != nullptr) {
 		log("[Host]: Received a connection request\n");
 
-		SDLNet_TCP_AddSocket (d->sockset, sock);
+		SDLNet_TCP_AddSocket(d->sockset, sock);
 
 		Client peer;
 
-		peer.sock               = sock;
-		peer.playernum          = UserSettings::not_connected();
+		peer.sock = sock;
+		peer.playernum = UserSettings::not_connected();
 		peer.syncreport_arrived = false;
-		peer.desiredspeed       = 1000;
-		peer.usernum            = -1; // == no user assigned for now.
-		peer.hung_since         = 0;
-		peer.lastdelta          = 0;
+		peer.desiredspeed = 1000;
+		peer.usernum = -1;  // == no user assigned for now.
+		peer.hung_since = 0;
+		peer.lastdelta = 0;
 		d->clients.push_back(peer);
 	}
 
@@ -2095,7 +1986,7 @@ void NetHost::handle_network ()
 	while (SDLNet_CheckSockets(d->sockset, 0) > 0) {
 		for (size_t i = 0; i < d->clients.size(); ++i) {
 			try {
-				Client & client = d->clients.at(i);
+				Client& client = d->clients.at(i);
 
 				while (client.sock && SDLNet_SocketReady(client.sock)) {
 					if (!client.deserializer.read(client.sock)) {
@@ -2110,18 +2001,18 @@ void NetHost::handle_network ()
 						handle_packet(i, r);
 					}
 				}
-			} catch (const DisconnectException & e) {
+			} catch (const DisconnectException& e) {
 				disconnect_client(i, e.what());
-			} catch (const ProtocolException & e) {
-				disconnect_client(i, "PROTOCOL_EXCEPTION", true, boost::lexical_cast<std::string>(e.number()));
-			} catch (const std::exception & e) {
+			} catch (const ProtocolException& e) {
+				disconnect_client(i, "PROTOCOL_EXCEPTION", true, e.what());
+			} catch (const std::exception& e) {
 				disconnect_client(i, "MALFORMED_COMMANDS", true, e.what());
 			}
 		}
 	}
 
-    // If a pause was forced or if the players all pause, send a ping regularly
-    // to keep the sockets up and running
+	// If a pause was forced or if the players all pause, send a ping regularly
+	// to keep the sockets up and running
 	if ((forced_pause_ || real_speed() == 0) && (time(nullptr) > (d->lastpauseping + 20))) {
 		d->lastpauseping = time(nullptr);
 
@@ -2133,7 +2024,6 @@ void NetHost::handle_network ()
 	reaper();
 }
 
-
 /**
  * Handle a single received packet.
  *
@@ -2142,9 +2032,8 @@ void NetHost::handle_network ()
  * \param i the client number
  * \param r the received packet
  */
-void NetHost::handle_packet(uint32_t const i, RecvPacket & r)
-{
-	Client & client = d->clients.at(i);
+void NetHost::handle_packet(uint32_t const i, RecvPacket& r) {
+	Client& client = d->clients.at(i);
 	uint8_t const cmd = r.unsigned_8();
 
 	if (cmd == NETCMD_DISCONNECT) {
@@ -2169,8 +2058,8 @@ void NetHost::handle_packet(uint32_t const i, RecvPacket & r)
 
 			// Remove metaserver from list of clients
 			client.playernum = UserSettings::not_connected();
-			SDLNet_TCP_DelSocket (d->sockset, client.sock);
-			SDLNet_TCP_Close (client.sock);
+			SDLNet_TCP_DelSocket(d->sockset, client.sock);
+			SDLNet_TCP_Close(client.sock);
 			client.sock = nullptr;
 			return;
 		}
@@ -2282,10 +2171,9 @@ void NetHost::handle_packet(uint32_t const i, RecvPacket & r)
 		if (!d->game)
 			throw DisconnectException("PLAYERCMD_WO_GAME");
 		int32_t time = r.signed_32();
-		Widelands::PlayerCommand & plcmd = *Widelands::PlayerCommand::deserialize(r);
-		log
-			("[Host]: Client %u (%u) sent player command %u for %u, time = %i\n",
-			 i, client.playernum, static_cast<unsigned int>(plcmd.id()), plcmd.sender(), time);
+		Widelands::PlayerCommand& plcmd = *Widelands::PlayerCommand::deserialize(r);
+		log("[Host]: Client %u (%u) sent player command %u for %u, time = %i\n", i, client.playernum,
+		    static_cast<unsigned int>(plcmd.id()), plcmd.sender(), time);
 		receive_client_time(i, time);
 		if (plcmd.sender() != client.playernum + 1)
 			throw DisconnectException("PLAYERCMD_FOR_OTHER");
@@ -2328,10 +2216,10 @@ void NetHost::handle_packet(uint32_t const i, RecvPacket & r)
 	}
 
 	case NETCMD_NEW_FILE_AVAILABLE: {
-		if (!file_) // Do we have a file for sending
+		if (!file_)  // Do we have a file for sending
 			throw DisconnectException("REQUEST_OF_N_E_FILE");
-		send_system_message_code
-			("STARTED_SENDING_FILE", file_->filename, d->settings.users.at(client.usernum).name);
+		send_system_message_code(
+		   "STARTED_SENDING_FILE", file_->filename, d->settings.users.at(client.usernum).name);
 		send_file_part(client.sock, 0);
 		// Remember client as "currently receiving file"
 		d->settings.users[client.usernum].ready = false;
@@ -2344,19 +2232,20 @@ void NetHost::handle_packet(uint32_t const i, RecvPacket & r)
 	}
 
 	case NETCMD_FILE_PART: {
-		if (!file_) // Do we have a file for sending
+		if (!file_)  // Do we have a file for sending
 			throw DisconnectException("REQUEST_OF_N_E_FILE");
 		uint32_t part = r.unsigned_32();
 		std::string x = r.string();
 		if (x != file_->md5sum) {
-			log("[Host]: File transfer checksum missmatch %s != %s\n", x.c_str(), file_->md5sum.c_str());
-			return; // Surely the file was changed, so we cancel here.
+			log(
+			   "[Host]: File transfer checksum mismatch %s != %s\n", x.c_str(), file_->md5sum.c_str());
+			return;  // Surely the file was changed, so we cancel here.
 		}
 		if (part >= file_->parts.size())
 			throw DisconnectException("REQUEST_OF_N_E_FILEPART");
 		if (part == file_->parts.size() - 1) {
-			send_system_message_code
-				("COMPLETED_FILE_TRANSFER", file_->filename, d->settings.users.at(client.usernum).name);
+			send_system_message_code(
+			   "COMPLETED_FILE_TRANSFER", file_->filename, d->settings.users.at(client.usernum).name);
 			d->settings.users[client.usernum].ready = true;
 			SendPacket s;
 			s.unsigned_8(NETCMD_SETTING_USER);
@@ -2367,10 +2256,9 @@ void NetHost::handle_packet(uint32_t const i, RecvPacket & r)
 		}
 		++part;
 		if (part % 100 == 0)
-			send_system_message_code
-				("SENDING_FILE_PART",
-				 (boost::format("%i/%i") % part % (file_->parts.size() + 1)).str(),
-				 file_->filename, d->settings.users.at(client.usernum).name);
+			send_system_message_code("SENDING_FILE_PART",
+			                         (boost::format("%i/%i") % part % (file_->parts.size() + 1)).str(),
+			                         file_->filename, d->settings.users.at(client.usernum).name);
 		send_file_part(client.sock, part);
 		break;
 	}
@@ -2395,16 +2283,14 @@ void NetHost::send_file_part(TCPsocket csock, uint32_t part) {
 	s.send(csock);
 }
 
-
-void NetHost::disconnect_player_controller(uint8_t const number, const std::string & name)
-{
+void NetHost::disconnect_player_controller(uint8_t const number, const std::string& name) {
 	log("[Host]: disconnect_player_controller(%u, %s)\n", number, name.c_str());
 
 	for (uint32_t i = 0; i < d->settings.users.size(); ++i) {
 		if (d->settings.users.at(i).position == number) {
 			if (!d->game) {
 				// Remove player name
-				PlayerSettings & p = d->settings.players.at(number);
+				PlayerSettings& p = d->settings.players.at(number);
 				std::string temp(" ");
 				temp += name;
 				temp += " ";
@@ -2421,12 +2307,13 @@ void NetHost::disconnect_player_controller(uint8_t const number, const std::stri
 		init_computer_player(number + 1);
 }
 
-void NetHost::disconnect_client
-	(uint32_t const number, const std::string & reason, bool const sendreason, const std::string & arg)
-{
+void NetHost::disconnect_client(uint32_t const number,
+                                const std::string& reason,
+                                bool const sendreason,
+                                const std::string& arg) {
 	assert(number < d->clients.size());
 
-	Client & client = d->clients.at(number);
+	Client& client = d->clients.at(number);
 
 	// If the client was completely connected before the disconnect, free the
 	// user settings and send changes to the clients
@@ -2437,12 +2324,14 @@ void NetHost::disconnect_client
 		if (position <= UserSettings::highest_playernum()) {
 			disconnect_player_controller(position, d->settings.users.at(client.usernum).name);
 		}
-		// Do NOT reset the clients name in the corresponding UserSettings, that way we keep the name for the
+		// Do NOT reset the clients name in the corresponding UserSettings, that way we keep the name
+		// for the
 		// statistics.
 		// d->settings.users.at(client.usernum).name = std::string();
 
 		// Broadcast the user changes to everybody
-		send_system_message_code("CLIENT_X_LEFT_GAME", d->settings.users.at(client.usernum).name, reason, arg);
+		send_system_message_code(
+		   "CLIENT_X_LEFT_GAME", d->settings.users.at(client.usernum).name, reason, arg);
 
 		SendPacket s;
 		s.unsigned_8(NETCMD_SETTING_USER);
@@ -2465,8 +2354,8 @@ void NetHost::disconnect_client
 			s.send(client.sock);
 		}
 
-		SDLNet_TCP_DelSocket (d->sockset, client.sock);
-		SDLNet_TCP_Close (client.sock);
+		SDLNet_TCP_DelSocket(d->sockset, client.sock);
+		SDLNet_TCP_Close(client.sock);
 		client.sock = nullptr;
 	}
 
@@ -2482,8 +2371,7 @@ void NetHost::disconnect_client
  * Calls this when you're certain that nobody is holding any client indices or
  * iterators, since this function will invalidate them.
  */
-void NetHost::reaper()
-{
+void NetHost::reaper() {
 	uint32_t index = 0;
 	while (index < d->clients.size())
 		if (d->clients.at(index).sock)
@@ -2492,10 +2380,9 @@ void NetHost::reaper()
 			d->clients.erase(d->clients.begin() + index);
 }
 
-
-void NetHost::report_result
-	(uint8_t p_nr, Widelands::PlayerEndResult result, const std::string & info)
-{
+void NetHost::report_result(uint8_t p_nr,
+                            Widelands::PlayerEndResult result,
+                            const std::string& info) {
 	// Send to game
 	Widelands::PlayerEndStatus pes;
 	Widelands::Player* player = d->game->get_player(p_nr);
@@ -2509,9 +2396,9 @@ void NetHost::report_result
 	// there might be more than one client that control this Widelands player
 	// and maybe even none -> computer player
 	for (uint16_t i = 0; i < d->settings.users.size(); ++i) {
-		UserSettings & user = d->settings.users.at(i);
+		UserSettings& user = d->settings.users.at(i);
 		if (user.position == p_nr - 1) {
-			user.result               = result;
+			user.result = result;
 			user.win_condition_string = info;
 			if (result == Widelands::PlayerEndResult::PLAYER_LOST) {
 				send_system_message_code("PLAYER_DEFEATED", user.name);
@@ -2519,7 +2406,6 @@ void NetHost::report_result
 		}
 	}
 
-	log
-		("NetHost::report_result(%d, %u, %s)\n",
-		 player->player_number(), static_cast<uint8_t>(result), info.c_str());
+	log("NetHost::report_result(%d, %u, %s)\n", player->player_number(),
+	    static_cast<uint8_t>(result), info.c_str());
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006, 2008, 2010 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -34,17 +34,15 @@ class MapObjectLoader;
 // This data packet contains critters on old maps. These days, the bobs are saved in the map_objects
 // packet.
 struct MapBobPacket {
-	void read(FileSystem&,
-	          EditorGameBase&,
-				 MapObjectLoader&,
-	          const WorldLegacyLookupTable& lookup_table);
+	void
+	read(FileSystem&, EditorGameBase&, MapObjectLoader&, const WorldLegacyLookupTable& lookup_table);
 
 private:
 	void read_bob(FileRead&,
-	             EditorGameBase&,
-					 MapObjectLoader&,
-	             Coords,
-	             const WorldLegacyLookupTable& lookup_table);
+	              EditorGameBase&,
+	              MapObjectLoader&,
+	              const Coords&,
+	              const WorldLegacyLookupTable& lookup_table);
 };
 }
 

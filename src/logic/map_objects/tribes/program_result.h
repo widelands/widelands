@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2009 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -21,8 +21,8 @@
 #define WL_LOGIC_MAP_OBJECTS_TRIBES_PROGRAM_RESULT_H
 
 namespace Widelands {
-enum ProgramResult {None = 0, Failed = 1, Completed = 2, Skipped = 3};
-enum ProgramResultHandlingMethod {Fail, Complete, Skip, Continue, Repeat};
+enum ProgramResult { None = 0, Failed = 1, Completed = 2, Skipped = 3 };
+enum ProgramResultHandlingMethod { Fail, Complete, Skip, Continue, Repeat };
 }
 
 #endif  // end of include guard: WL_LOGIC_MAP_OBJECTS_TRIBES_PROGRAM_RESULT_H

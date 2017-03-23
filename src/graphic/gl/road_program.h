@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2015 by the Widelands Development Team
+ * Copyright (C) 2006-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -42,6 +42,7 @@ public:
 	void draw(int renderbuffer_width,
 	          int renderbuffer_height,
 	          const FieldsToDraw& fields_to_draw,
+	          float scale,
 	          float z_value);
 
 private:
@@ -56,11 +57,12 @@ private:
 
 	// Adds a road from 'start' to 'end' to be rendered in this frame using the
 	// correct texture for 'road_type'.
-	enum Direction {kEast, kSouthEast, kSouthWest};
+	enum Direction { kEast, kSouthEast, kSouthWest };
 	void add_road(int renderbuffer_width,
 	              int renderbuffer_height,
 	              const FieldsToDraw::Field& start,
 	              const FieldsToDraw::Field& end,
+	              float scale,
 	              const Widelands::RoadType road_type,
 	              const Direction direction,
 	              uint32_t* gl_texture);

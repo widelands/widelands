@@ -135,25 +135,30 @@ return {
 
    -- Send all players the momentary game state
    local function _send_state(remaining_time, plrs)
+      local msg = ""
       set_textdomain("win_conditions")
-      local h = math.floor(remaining_time / 60)
-      local m = remaining_time % 60
-      -- TRANSLATORS: Context: 'The game will end in (2 hours and) 30 minutes.'
-      local time = ""
-      if m > 0 then
-         time = (ngettext("%i minute", "%i minutes", m)):format(m)
-      end
-      if h > 0 then
+      if remaining_time <= 0 then
+         msg = p(_"The game has ended.")
+      else
+         local h = math.floor(remaining_time / 60)
+         local m = remaining_time % 60
+         -- TRANSLATORS: Context: 'The game will end in (2 hours and) 30 minutes.'
+         local time = ""
          if m > 0 then
-            -- TRANSLATORS: Context: 'The game will end in 2 hours and 30 minutes.'
-            time = (ngettext("%1% hour and %2%", "%1% hours and %2%", h)):bformat(h, time)
-         else
-            -- TRANSLATORS: Context: 'The game will end in 2 hours.'
-            time = (ngettext("%1% hour", "%1% hours", h)):bformat(h)
+            time = (ngettext("%i minute", "%i minutes", m)):format(m)
          end
+         if h > 0 then
+            if m > 0 then
+               -- TRANSLATORS: Context: 'The game will end in 2 hours and 30 minutes.'
+               time = (ngettext("%1% hour and %2%", "%1% hours and %2%", h)):bformat(h, time)
+            else
+               -- TRANSLATORS: Context: 'The game will end in 2 hours.'
+               time = (ngettext("%1% hour", "%1% hours", h)):bformat(h)
+            end
+         end
+         -- TRANSLATORS: Context: 'The game will end in 2 hours and 30 minutes.'
+         msg = p(_"The game will end in %s."):format(time)
       end
-      -- TRANSLATORS: Context: 'The game will end in 2 hours and 30 minutes.'
-      local msg = p(_"The game will end in %s."):format(time)
 
       -- Points for players without team
       for idx, plr in ipairs(plrs) do
@@ -196,10 +201,10 @@ return {
          local lost_or_won = 0
          if (info[2] < win_points) then
             lost_or_won = 0
-            player:send_message(lost_game_over.title, lost_game_over.body)
+            player:send_message(lost_game_over.title, rt(lost_game_over.body))
          else
             lost_or_won = 1
-            player:send_message(won_game_over.title, won_game_over.body)
+            player:send_message(won_game_over.title, rt(won_game_over.body))
          end
          if (player.team == 0) then
             wl.game.report_result(player, lost_or_won, make_extra_data(player, wc_descname, wc_version, {score=info[2]}))

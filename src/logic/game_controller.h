@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2011, 2013, 2015-2016 by the Widelands Development Team
+ * Copyright (C) 2008-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -27,9 +27,8 @@
 namespace Widelands {
 class Game;
 class PlayerCommand;
-enum class PlayerEndResult: uint8_t;
+enum class PlayerEndResult : uint8_t;
 }
-
 
 /**
  * A game controller implements the policies surrounding the actual
@@ -43,16 +42,17 @@ enum class PlayerEndResult: uint8_t;
 class GameController {
 public:
 	enum class GameType : uint8_t {
-		SINGLEPLAYER = 1, // we don't want SINGLEPLAYER just because a value is empty
+		SINGLEPLAYER = 1,  // we don't want SINGLEPLAYER just because a value is empty
 		NETCLIENT,
 		NETHOST,
 		REPLAY
 	};
 
-	virtual ~GameController() {}
+	virtual ~GameController() {
+	}
 
 	virtual void think() = 0;
-	virtual void send_player_command(Widelands::PlayerCommand &) = 0;
+	virtual void send_player_command(Widelands::PlayerCommand&) = 0;
 	virtual int32_t get_frametime() = 0;
 	virtual GameType get_game_type() = 0;
 
@@ -83,7 +83,7 @@ public:
 	 */
 	bool is_paused_or_zero_speed() {
 		return is_paused() || real_speed() == 0;
-	};
+	}
 
 	/**
 	 * Sets whether the game is paused.
@@ -100,15 +100,11 @@ public:
 	/**
 	 * Report a player result once he has left the game. This may be done through lua
 	 * by the win_condition scripts.
-	 * \param player : the player idx;
-	 * \param result : the player result
-	 * \param info : The info string (\see \struct PlayerEndStatus)
 	 */
-	virtual void report_result
-	    (uint8_t /* player */,
-	     Widelands::PlayerEndResult /*result*/,
-	     const std::string & /* info */)
-	{}
+	virtual void report_result(uint8_t /* player */,
+	                           Widelands::PlayerEndResult /*result*/,
+	                           const std::string& /* info */) {
+	}
 };
 
 #endif  // end of include guard: WL_LOGIC_GAME_CONTROLLER_H

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2008, 2012 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -24,45 +24,43 @@
 
 /// Set the height of a node to a random value within a defined interval.
 struct EditorNoiseHeightTool : public EditorTool {
-	EditorNoiseHeightTool
-	(EditorSetHeightTool & the_set_tool,
-	 const Widelands::HeightInterval the_interval =
-	     Widelands::HeightInterval(10, 14))
-		:
-		EditorTool(the_set_tool, the_set_tool),
-		set_tool_(the_set_tool),
-		interval_(the_interval)
-	{}
+	EditorNoiseHeightTool(
+	   EditorSetHeightTool& the_set_tool,
+	   const Widelands::HeightInterval& the_interval = Widelands::HeightInterval(10, 14))
+	   : EditorTool(the_set_tool, the_set_tool), set_tool_(the_set_tool), interval_(the_interval) {
+	}
 
 	int32_t handle_click_impl(const Widelands::World& world,
-	                          Widelands::NodeAndTriangle<> center,
+	                          const Widelands::NodeAndTriangle<>& center,
 	                          EditorInteractive& parent,
 	                          EditorActionArgs* args,
-							  Widelands::Map* map) override;
+	                          Widelands::Map* map) override;
 
 	int32_t handle_undo_impl(const Widelands::World& world,
-	                         Widelands::NodeAndTriangle<> center,
+	                         const Widelands::NodeAndTriangle<>& center,
 	                         EditorInteractive& parent,
 	                         EditorActionArgs* args,
-							 Widelands::Map* map) override;
+	                         Widelands::Map* map) override;
 
-	EditorActionArgs format_args_impl(EditorInteractive & parent) override;
+	EditorActionArgs format_args_impl(EditorInteractive& parent) override;
 
-	char const * get_sel_impl() const override {
-		return "images/wui/editor/fsel_editor_noise_height.png";
+	const Image* get_sel_impl() const override {
+		return g_gr->images().get("images/wui/editor/fsel_editor_noise_height.png");
 	}
 
 	Widelands::HeightInterval get_interval() const {
 		return interval_;
 	}
-	void set_interval(Widelands::HeightInterval const i) {
+	void set_interval(const Widelands::HeightInterval& i) {
 		interval_ = i;
 	}
 
-	EditorSetHeightTool & set_tool() const {return set_tool_;}
+	EditorSetHeightTool& set_tool() const {
+		return set_tool_;
+	}
 
 private:
-	EditorSetHeightTool & set_tool_;
+	EditorSetHeightTool& set_tool_;
 	Widelands::HeightInterval interval_;
 };
 

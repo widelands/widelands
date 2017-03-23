@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2011 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -38,10 +38,10 @@ class EditorInteractive;
  * author, name and description
 */
 struct MainMenuMapOptions : public UI::Window {
-	MainMenuMapOptions(EditorInteractive &, bool modal = false);
+	MainMenuMapOptions(EditorInteractive&, bool modal = false);
 
 private:
-	EditorInteractive & eia();
+	EditorInteractive& eia();
 	void changed();
 	void update();
 	void clicked_ok();

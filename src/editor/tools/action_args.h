@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2012 by the Widelands Development Team
+ * Copyright (C) 2012-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -36,22 +36,22 @@ struct EditorToolAction;
 /// Class to save important and changeable properties of classes needed for actions
 // Implementations in editor_history.cc
 struct EditorActionArgs {
-	EditorActionArgs(EditorInteractive & base);
+	EditorActionArgs(EditorInteractive& base);
 
 	// TODO(sirver): This class does its own reference counting. This design is
 	// brittle and on a quick overview I have a feeling that it might not be
 	// correct.
 	EditorActionArgs(const EditorActionArgs&) = default;
-	EditorActionArgs& operator = (const EditorActionArgs&) = default;
+	EditorActionArgs& operator=(const EditorActionArgs&) = default;
 
 	~EditorActionArgs();
 
 	uint32_t sel_radius;
 
-	int32_t change_by;                                                  // resources, change height tools
-	std::list<Widelands::Field::Height> original_heights;               // change height tool
-	Widelands::DescriptionIndex current_resource;                       // resources change tools
-	Widelands::ResourceAmount set_to;                                   // resources change tools
+	int32_t change_by;                                     // resources, change height tools
+	std::list<Widelands::Field::Height> original_heights;  // change height tool
+	Widelands::DescriptionIndex current_resource;          // resources change tools
+	Widelands::ResourceAmount set_to;                      // resources change tools
 
 	struct ResourceState {
 		Widelands::FCoords location;
@@ -64,9 +64,9 @@ struct EditorActionArgs {
 	std::list<std::string> old_immovable_types;                         // immovable change tools
 	std::list<Widelands::DescriptionIndex> new_immovable_types;         // immovable change tools
 	Widelands::HeightInterval interval;                                 // noise height tool
-	std::list<Widelands::DescriptionIndex> terrain_type, original_terrain_type; // set terrain tool
+	std::list<Widelands::DescriptionIndex> terrain_type, original_terrain_type;  // set terrain tool
 
-	std::list<EditorToolAction *> draw_actions;                         // draw tool
+	std::list<EditorToolAction*> draw_actions;  // draw tool
 
 	uint32_t refcount;
 };

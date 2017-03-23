@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2009 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -31,15 +31,13 @@ namespace Widelands {
 
 constexpr uint16_t kCurrentPacketVersion = 2;
 
-void GameCmdQueuePacket::read
-	(FileSystem & fs, Game & game, MapObjectLoader * const ol)
-{
+void GameCmdQueuePacket::read(FileSystem& fs, Game& game, MapObjectLoader* const ol) {
 	try {
 		FileRead fr;
 		fr.open(fs, "binary/cmd_queue");
 		uint16_t const packet_version = fr.unsigned_16();
 		if (packet_version == kCurrentPacketVersion) {
-			CmdQueue & cmdq = game.cmdqueue();
+			CmdQueue& cmdq = game.cmdqueue();
 
 			// nothing to be done for game_
 
@@ -59,32 +57,29 @@ void GameCmdQueuePacket::read
 				item.category = fr.signed_32();
 				item.serial = fr.unsigned_32();
 
-				GameLogicCommand & cmd =
-					QueueCmdFactory::create_correct_queue_command(static_cast<QueueCommandTypes>(packet_id));
+				GameLogicCommand& cmd = QueueCmdFactory::create_correct_queue_command(
+				   static_cast<QueueCommandTypes>(packet_id));
 				cmd.read(fr, game, *ol);
 
 				item.cmd = &cmd;
 
 				cmdq.cmds_[cmd.duetime() % kCommandQueueBucketSize].push(item);
-				++ cmdq.ncmds_;
+				++cmdq.ncmds_;
 			}
 		} else {
 			throw UnhandledVersionError("GameCmdQueuePacket", packet_version, kCurrentPacketVersion);
 		}
-	} catch (const WException & e) {
+	} catch (const WException& e) {
 		throw GameDataError("command queue: %s", e.what());
 	}
 }
 
-
-void GameCmdQueuePacket::write
-	(FileSystem & fs, Game & game, MapObjectSaver * const os)
-{
+void GameCmdQueuePacket::write(FileSystem& fs, Game& game, MapObjectSaver* const os) {
 	FileWrite fw;
 
 	fw.unsigned_16(kCurrentPacketVersion);
 
-	const CmdQueue & cmdq = game.cmdqueue();
+	const CmdQueue& cmdq = game.cmdqueue();
 
 	// nothing to be done for game_
 
@@ -102,7 +97,7 @@ void GameCmdQueuePacket::write
 		std::priority_queue<CmdQueue::CmdItem> p = cmdq.cmds_[time % kCommandQueueBucketSize];
 
 		while (!p.empty()) {
-			const CmdQueue::CmdItem & it = p.top();
+			const CmdQueue::CmdItem& it = p.top();
 			if (it.cmd->duetime() == time) {
 				if (upcast(GameLogicCommand, cmd, it.cmd)) {
 					// The id (aka command type)
@@ -115,7 +110,7 @@ void GameCmdQueuePacket::write
 					// Now the command itself
 					cmd->write(fw, game, *os);
 				}
-				++ nhandled;
+				++nhandled;
 			}
 
 			// DONE: next command
@@ -124,10 +119,8 @@ void GameCmdQueuePacket::write
 		++time;
 	}
 
-
-	fw.unsigned_16(0); // end of command queue
+	fw.unsigned_16(0);  // end of command queue
 
 	fw.write(fs, "binary/cmd_queue");
 }
-
 }

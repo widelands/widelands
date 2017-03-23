@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2009 by the Widelands Development Team
+ * Copyright (C) 2008-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -23,24 +23,20 @@
 
 namespace Widelands {
 
-Pathfields::Pathfields(uint32_t const nrfields)
-	: fields(new Pathfield[nrfields]), cycle(0)
-{}
+Pathfields::Pathfields(uint32_t const nrfields) : fields(new Pathfield[nrfields]), cycle(0) {
+}
 
+PathfieldManager::PathfieldManager() : nrfields_(0) {
+}
 
-PathfieldManager::PathfieldManager() : nrfields_(0) {}
-
-
-void PathfieldManager::set_size(uint32_t const nrfields)
-{
+void PathfieldManager::set_size(uint32_t const nrfields) {
 	if (nrfields_ != nrfields)
 		list_.clear();
 
 	nrfields_ = nrfields;
 }
 
-boost::shared_ptr<Pathfields> PathfieldManager::allocate()
-{
+boost::shared_ptr<Pathfields> PathfieldManager::allocate() {
 	for (boost::shared_ptr<Pathfields>& pathfield : list_) {
 		if (pathfield.use_count() == 1) {
 			++pathfield->cycle;
@@ -60,11 +56,9 @@ boost::shared_ptr<Pathfields> PathfieldManager::allocate()
 	return pf;
 }
 
-void PathfieldManager::clear(const boost::shared_ptr<Pathfields> & pf)
-{
+void PathfieldManager::clear(const boost::shared_ptr<Pathfields>& pf) {
 	for (uint32_t i = 0; i < nrfields_; ++i)
 		pf->fields[i].cycle = 0;
 	pf->cycle = 1;
 }
-
 }

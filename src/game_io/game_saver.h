@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2016 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -38,15 +38,14 @@ class Game;
  */
 
 struct GameSaver {
-	GameSaver(FileSystem &, Game &);
+	GameSaver(FileSystem&, Game&);
 
 	void save();
 
 private:
-	FileSystem & fs_;
-	Game       & game_;
+	FileSystem& fs_;
+	Game& game_;
 };
-
 }
 
 #endif  // end of include guard: WL_GAME_IO_GAME_SAVER_H

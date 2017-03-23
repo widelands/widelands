@@ -96,11 +96,13 @@ wl_library(map_io
     graphic
     graphic_image_io
     graphic_minimap_renderer
+    graphic_playercolor
     graphic_surface
     helper
     io_fileread
     io_filesystem
     logic
+    logic_constants
     logic_widelands_geometry
     profile
     scripting_logic

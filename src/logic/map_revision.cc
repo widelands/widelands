@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2013 by the Widelands Development Team
+ * Copyright (C) 2013-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -23,13 +23,8 @@
 
 namespace Widelands {
 
-
-MapVersion::MapVersion() :
-map_version_major(0),
-map_version_minor(0)
-{
+MapVersion::MapVersion() : map_version_major(0), map_version_minor(0) {
 	map_creator_version = build_id();
 	map_version_timestamp = static_cast<uint32_t>(time(nullptr));
 }
-
 }

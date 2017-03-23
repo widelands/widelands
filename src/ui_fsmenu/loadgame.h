@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2016 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -44,7 +44,6 @@ class RenderTarget;
 class GameController;
 struct GameSettingsProvider;
 
-
 /**
  * Data about a savegame/replay that we're interested in.
  */
@@ -62,20 +61,25 @@ struct SavegameData {
 	time_t savetimestamp;
 	GameController::GameType gametype;
 
-	SavegameData() : gametime(0), nrplayers(0), savetimestamp(0),
-		gametype(GameController::GameType::SINGLEPLAYER) {}
+	SavegameData()
+	   : gametime(0),
+	     nrplayers(0),
+	     savetimestamp(0),
+	     gametype(GameController::GameType::SINGLEPLAYER) {
+	}
 };
-
-
 
 /// Select a Saved Game in Fullscreen Mode. It's a modal fullscreen menu.
 class FullscreenMenuLoadGame : public FullscreenMenuLoadMapOrGame {
 public:
-	FullscreenMenuLoadGame
-		(Widelands::Game&, GameSettingsProvider* gsp, GameController* gc = nullptr,
-		 bool is_replay = false);
+	FullscreenMenuLoadGame(Widelands::Game&,
+	                       GameSettingsProvider* gsp,
+	                       GameController* gc = nullptr,
+	                       bool is_replay = false);
 
-	const std::string & filename() {return filename_;}
+	const std::string& filename() {
+		return filename_;
+	}
 
 	void think() override;
 
@@ -87,42 +91,44 @@ protected:
 	void fill_table() override;
 
 private:
+	void layout() override;
+
 	/// Updates buttons and text labels and returns whether a table entry is selected.
 	bool set_has_selection();
 	bool compare_date_descending(uint32_t, uint32_t);
 	void clicked_delete();
+	std::string filename_list_string();
 
-	UI::Table<uintptr_t const>    table_;
+	UI::Table<uintptr_t const> table_;
 
-	bool                          is_replay_;
+	bool is_replay_;
 
-	UI::Textarea                  title_;
-	UI::Textarea                  label_mapname_;
-	UI::MultilineTextarea         ta_mapname_;  // Multiline for long names
-	UI::Textarea                  label_gametime_;
-	UI::MultilineTextarea         ta_gametime_; // Multiline because we want tooltips
-	UI::Textarea                  label_players_;
-	UI::MultilineTextarea         ta_players_;
-	UI::Textarea                  label_version_;
-	UI::Textarea                  ta_version_;
-	UI::Textarea                  label_win_condition_;
-	UI::MultilineTextarea         ta_win_condition_;
+	UI::Textarea title_;
+	UI::Textarea label_mapname_;
+	UI::MultilineTextarea ta_mapname_;  // Multiline for long names
+	UI::Textarea label_gametime_;
+	UI::MultilineTextarea ta_gametime_;  // Multiline because we want tooltips
+	UI::Textarea label_players_;
+	UI::MultilineTextarea ta_players_;
+	UI::Textarea label_version_;
+	UI::Textarea ta_version_;
+	UI::Textarea label_win_condition_;
+	UI::MultilineTextarea ta_win_condition_;
 
-	UI::Button                    delete_;
+	UI::Button delete_;
 
-	UI::MultilineTextarea         ta_errormessage_;
+	UI::MultilineTextarea ta_long_generic_message_;
 
-	int32_t const                 minimap_y_, minimap_w_, minimap_h_;
-	UI::Icon                      minimap_icon_;
-	std::unique_ptr<const Image>  minimap_image_;
+	int32_t const minimap_y_, minimap_w_, minimap_h_;
+	UI::Icon minimap_icon_;
+	std::unique_ptr<const Image> minimap_image_;
 
-	std::vector<SavegameData>     games_data_;
-	std::string                   filename_;
+	std::vector<SavegameData> games_data_;
+	std::string filename_;
 
-	Widelands::Game&              game_;
-	GameSettingsProvider*         settings_;
-	GameController*               ctrl_;
+	Widelands::Game& game_;
+	GameSettingsProvider* settings_;
+	GameController* ctrl_;
 };
-
 
 #endif  // end of include guard: WL_UI_FSMENU_LOADGAME_H

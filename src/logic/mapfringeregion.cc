@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007-2008 by the Widelands Development Team
+ * Copyright (C) 2007-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -23,50 +23,33 @@
 
 namespace Widelands {
 
-template <>
-bool MapFringeRegion<Area<FCoords> >::advance(const Map & map) {
+template <> bool MapFringeRegion<Area<FCoords>>::advance(const Map& map) {
 	switch (phase_) {
 	case 0:
 		if (area_.radius) {
 			remaining_in_phase_ = area_.radius;
-			phase_              = 6;
-		}
-		else
+			phase_ = 6;
+		} else
 			return false;
-		/* no break */
-	case 1: map.get_trn(area_, &area_); break;
-	case 2: map.get_tln(area_, &area_); break;
-	case 3: map. get_ln(area_, &area_); break;
-	case 4: map.get_bln(area_, &area_); break;
-	case 5: map.get_brn(area_, &area_); break;
-	case 6: map. get_rn(area_, &area_); break;
-	default:
-	  NEVER_HERE();
-	}
-	if (--remaining_in_phase_ == 0) {
-		remaining_in_phase_ = area_.radius;
-		--phase_;
-	}
-	return phase_;
-}
-
-template <>
-bool MapFringeRegion<Area<> >::advance(const Map & map) {
-	switch (phase_) {
-	case 0:
-		if (area_.radius) {
-			remaining_in_phase_ = area_.radius;
-			phase_              = 6;
-		}
-		else
-			return false;
-		/* no break */
-	case 1: map.get_trn(area_, &area_); break;
-	case 2: map.get_tln(area_, &area_); break;
-	case 3: map. get_ln(area_, &area_); break;
-	case 4: map.get_bln(area_, &area_); break;
-	case 5: map.get_brn(area_, &area_); break;
-	case 6: map. get_rn(area_, &area_); break;
+	/* no break */
+	case 1:
+		map.get_trn(area_, &area_);
+		break;
+	case 2:
+		map.get_tln(area_, &area_);
+		break;
+	case 3:
+		map.get_ln(area_, &area_);
+		break;
+	case 4:
+		map.get_bln(area_, &area_);
+		break;
+	case 5:
+		map.get_brn(area_, &area_);
+		break;
+	case 6:
+		map.get_rn(area_, &area_);
+		break;
 	default:
 		NEVER_HERE();
 	}
@@ -77,4 +60,40 @@ bool MapFringeRegion<Area<> >::advance(const Map & map) {
 	return phase_;
 }
 
+template <> bool MapFringeRegion<Area<>>::advance(const Map& map) {
+	switch (phase_) {
+	case 0:
+		if (area_.radius) {
+			remaining_in_phase_ = area_.radius;
+			phase_ = 6;
+		} else
+			return false;
+	/* no break */
+	case 1:
+		map.get_trn(area_, &area_);
+		break;
+	case 2:
+		map.get_tln(area_, &area_);
+		break;
+	case 3:
+		map.get_ln(area_, &area_);
+		break;
+	case 4:
+		map.get_bln(area_, &area_);
+		break;
+	case 5:
+		map.get_brn(area_, &area_);
+		break;
+	case 6:
+		map.get_rn(area_, &area_);
+		break;
+	default:
+		NEVER_HERE();
+	}
+	if (--remaining_in_phase_ == 0) {
+		remaining_in_phase_ = area_.radius;
+		--phase_;
+	}
+	return phase_;
+}
 }

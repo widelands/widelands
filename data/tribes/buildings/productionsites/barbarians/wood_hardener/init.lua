@@ -49,7 +49,7 @@ tribes:new_productionsite_type {
    },
 
    inputs = {
-      log = 8
+      { name = "log", amount = 8 }
    },
    outputs = {
       "blackwood"
@@ -63,6 +63,7 @@ tribes:new_productionsite_type {
             "sleep=43000",
             "return=skipped unless economy needs blackwood",
             "consume=log:2",
+            "play_sound=sound/barbarians blackwood 80",
             "animate=working 24000",
             "produce=blackwood"
          }

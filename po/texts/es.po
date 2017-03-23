@@ -1,19 +1,20 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2016 Widelands Development Team
+# Copyright (C) 2005-2017 Widelands Development Team
 # 
 # Translators:
 # Antonio Trueba <atrueba@users.sourceforge.net>, 2007,2009
 # Diego Alberto Pereyra <diego.96.pereyra@gmail.com>, 2015-2016
-# Thadah <juchuf@gmail.com>, 2015
+# GunChleoc, 2016
+# Thadah D. Denyse <juchuf@gmail.com>, 2015
 # Lucía Pradillos <dreamers_88@hotmail.com>, 2015
-# Madkat Here, 2015
+# Madkat Here, 2015-2016
 # Raul Ferriz <raul.ferriz@gmail.com>, 2009
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-04-02 11:15+0000\n"
-"PO-Revision-Date: 2016-04-02 11:17+0000\n"
+"POT-Creation-Date: 2017-03-05 10:46+0000\n"
+"PO-Revision-Date: 2017-03-05 10:48+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Spanish (http://www.transifex.com/widelands/widelands/language/es/)\n"
 "MIME-Version: 1.0\n"
@@ -24,7 +25,7 @@ msgstr ""
 
 #: ../../data/txts/AUTHORS.lua:27
 msgid "Developers"
-msgstr ""
+msgstr "Desarrolladores"
 
 #: ../../data/txts/AUTHORS.lua:29
 msgid "Widelands Development Team"
@@ -40,7 +41,7 @@ msgstr "Información de licencia para Widelands"
 
 #: ../../data/txts/LICENSE.lua:23
 msgid "Copyright 2002 - 2016 by the Widelands Development Team."
-msgstr ""
+msgstr "Copyright 2002 - 2016 por el Equipo de Desarrollo de Widelands."
 
 #: ../../data/txts/LICENSE.lua:24
 msgid ""
@@ -52,8 +53,8 @@ msgstr "Este juego es Gratuito y de Código Abierto (FOSS), Licenciado bajo la L
 #, lua-format
 msgid ""
 "You can find more information on FOSS and the GPL by visiting the following "
-"webpage:  %s"
-msgstr "Puedes encontrar mas información acerca de FOSS y GPL visitando el siguiente sitio web: %s"
+"webpage: %s"
+msgstr ""
 
 #: ../../data/txts/LICENSE.lua:27
 msgid ""
@@ -92,7 +93,7 @@ msgstr "Este juego viene tal cual y sin ningún tipo de garantía. Para obtener 
 
 #: ../../data/txts/README.lua:7
 msgid "Readme"
-msgstr ""
+msgstr "Leeme"
 
 #: ../../data/txts/README.lua:12
 msgid "an open source strategy game"
@@ -106,7 +107,7 @@ msgstr "Visita la página principal de Widelands:"
 msgid ""
 "Widelands is licensed under the GNU General Public License (GPL). For more "
 "information, see the file ‘COPYING’."
-msgstr ""
+msgstr "Widelands está disponible bajo la Licencia Pública General de GNU (GPL). Para\nmás información, consulta el archivo «COPYING»."
 
 #: ../../data/txts/README.lua:18
 msgid "Status"
@@ -119,23 +120,23 @@ msgid ""
 " in all areas. If you are interested in contributing – be it by making "
 "graphics, fixing bugs or adding new features, translating the game into your"
 " language or creating new maps – get in touch on our homepage."
-msgstr ""
+msgstr "Widelands tiene casi completas sus características y es muy divertido de jugar\nsolo y aún más en multijugador con otros. Siempre hay más trabajo por hacer\nen todas las áreas. Si estás interesado en contribuir - ya sea haciendo gráficos,\narreglando errores o agregando nuevas funciones, traduciendo el juego en tu\nlenguaje o creando mapas - ponte al tanto en nuestra página web."
 
 #: ../../data/txts/README.lua:21
 msgid "Widelands Help"
-msgstr ""
+msgstr "Ayuda de Widelands"
 
 #. TRANSLATORS: %1% is a key on the keyboard
 #: ../../data/txts/README.lua:23
 msgid ""
 "You can find help about gameplay or the editor by using the help button on "
 "the bottom menu, or by pressing %1%."
-msgstr ""
+msgstr "Puedes encontrar ayuda sobre el juego o el editor utilizando el botón de ayuda en el menú inferior, o pulsando %1%."
 
 #. TRANSLATORS: This is a key on the keyboard
 #: ../../data/txts/README.lua:25
 msgid "F1"
-msgstr ""
+msgstr "F1"
 
 #: ../../data/txts/README.lua:28
 msgid "Reporting Bugs"
@@ -151,43 +152,43 @@ msgstr "Por favor, comunícanos suficiente información auxiliar. Dinos:"
 
 #: ../../data/txts/README.lua:33
 msgid "Detailed steps on how to trigger the bug, if possible."
-msgstr ""
+msgstr "Pasos detallados para poder reproducir el error, si es posible."
 
 #: ../../data/txts/README.lua:34
 msgid ""
 "What you expected to happen when performing the steps and what actually "
 "happened."
-msgstr ""
+msgstr "Que esperabas que pasara cuando llevabas a cabo los pasos y que pasó realmente."
 
 #: ../../data/txts/README.lua:35
 msgid ""
 "Which version of Widelands you are running (i.e. either the build number or "
 "the revision number if you are running a development version or a daily "
 "build.)"
-msgstr ""
+msgstr "Que versión de Widelands estás usando (es decir tanto el número de build o el número de revisión si estás usando una versión de desarrollo o build diaria.)"
 
 #: ../../data/txts/README.lua:36
 msgid ""
 "Please also include which operating system you are running Widelands on as "
 "some bugs can be platform specific."
-msgstr ""
+msgstr "Por favor además incluye en que sistema operativo estás usando Widelands ya que algunos errores pueden ser específicos de la plataforma."
 
 #: ../../data/txts/README.lua:37
 msgid "Which map you were playing when the bug occurred."
-msgstr ""
+msgstr "En que mapa estabas jugando cuando ocurrió el error."
 
 #: ../../data/txts/README.lua:38
 msgid ""
 "If the bug concerns something not being displayed correctly or if it helps "
 "demonstrate the issue, please include one or more screenshots."
-msgstr ""
+msgstr "Si algo del error en cuestión no es mostrado correctamente o si ayuda demostrar el problema, por favor incluye una o más capturas de pantalla."
 
 #: ../../data/txts/README.lua:39
 msgid ""
 "If you have a save game or replay demonstrating the issue (for instance "
 "crashes where it can be hard to tell exactly what is triggering it), please "
 "include that too. For more information, see the section on Replays below."
-msgstr ""
+msgstr "Si tienes un juego guardado o una repetición demostrando el problema (por ejemplo fallos donde es difícil explicar que pasó exactamente) por favor incluye también eso. Para más información, mira la sección en\nRepeticiones debajo."
 
 #: ../../data/txts/TRANSLATORS.lua:25
 msgid "Translators"
@@ -195,7 +196,7 @@ msgstr "Traductores"
 
 #: ../../data/txts/TRANSLATORS.lua:27
 msgid "Widelands Translators"
-msgstr ""
+msgstr "Traductores de Widelands"
 
 #: ../../data/txts/developers.lua:3
 msgid "Atlantean"
@@ -210,8 +211,8 @@ msgid "Campaign Story"
 msgstr "Historia de la Campaña"
 
 #: ../../data/txts/developers.lua:3
-msgid "Chieftain"
-msgstr "Jefe"
+msgid "Chieftains"
+msgstr ""
 
 #: ../../data/txts/developers.lua:3
 msgid "Coders"
@@ -319,7 +320,7 @@ msgid ""
 "If you need more documentation or help for Widelands or the Widelands "
 "Editor, be sure to visit our homepage at %s. You can find online help in our"
 " wiki there."
-msgstr ""
+msgstr "Si necesitas más documentación o ayuda con Widelands o el Editor de Widelands, no dudes en visitar nuestra página web en %s. Puedes encontrar ayuda en línea en nuestra Wiki allí."
 
 #: ../../data/txts/help/common_helptexts.lua:17
 msgid "Introduction"
@@ -331,7 +332,7 @@ msgid ""
 "campaigns and a multiplayer mode. The game was inspired by Settlers II but "
 "has significantly more variety and depth to it. Still, it is easy to get "
 "started through playable tutorials."
-msgstr ""
+msgstr "Widelands es un juego de estrategia en tiempo real, gratuito y de código abierto, con campañas de un solo jugador y un modo multijugador. El juego está inspirado en Settlers II pero tiene mucha más variedad y profundidad. Sin embargo, es fácil empezar a través de tutoriales jugables."
 
 #: ../../data/txts/help/common_helptexts.lua:19
 msgid ""
@@ -340,7 +341,7 @@ msgid ""
 "inhabitants. On your way towards this goal, you will have to establish an "
 "economic infrastructure, explore the land around you and face rivaling "
 "tribes."
-msgstr ""
+msgstr "En este juego, empiezas a partir de un pequeño pedazo de tierra con  algunos recursos. Usándolos, crearás un imperio con muchos cientos de habitantes. En tu camino hacia el objetivo, tendrás que establecer una infraestructura económica, explorar tierras a tu alrededor y enfrentar a tribus rivales."
 
 #: ../../data/txts/help/common_helptexts.lua:25
 msgid "Replays"
@@ -353,7 +354,7 @@ msgid ""
 ".wrpl extension and contains all commands that were issued by all players, "
 "such as building a road or attacking an enemy. The rest of the filenames "
 "will tell you the time you started the game."
-msgstr ""
+msgstr "Widelands graba cada juego en dos archivos. Uno de esos archivos tiene una extensión .wrpl.wgf y contiene un guardado inicial. El otro archivo tiene una extensión .wrpl y contiene todos los comandos que fueron usados por todos los jugadores, como construir caminos o atacar al enemigo. El resto de los nombres de los archivos te dirán el tiempo de inicio del juego."
 
 #: ../../data/txts/help/common_helptexts.lua:27
 msgid ""
@@ -363,7 +364,7 @@ msgid ""
 " replay to become incompatible and to ‘go out of sync’. This is similar to "
 "how network games will suffer from desynchronization problems if one of the "
 "players has a different version of the game."
-msgstr ""
+msgstr "Usando la opción de Ver Repetición en el menú principal, un juego jugado previamente será reconstruido para que lo veas. Ten en cuenta que incluso pequeños cambios en el archivo de datos del juego o el ejecutable de Widelands puede causar que la repetición sea incompatible y vaya fuera de sincronización. Esto es similar a cómo los juegos de red sufren problemas de desincronización si uno de los jugadores tiene una versión diferente del juego."
 
 #: ../../data/txts/help/common_helptexts.lua:28
 #, lua-format
@@ -372,112 +373,112 @@ msgid ""
 "be useful as attachments to bug reports. The replay files are saved in the "
 "%s directory on Linux and Mac OS X. On Windows, they are in the ‘replays’ "
 "subdirectory of your Widelands installation."
-msgstr ""
+msgstr "Las repeticiones son una herramienta útil para encontrar errores en la lógica del juego, así que pueden ser adjuntos útiles para reportar errores. Los archivos de repetición son guardados en el directorio %s en Linux y Mac OS X. En Windows están en el subdirectorio \"replays\" de tu instalación de Widelands."
 
 #. TRANSLATORS: The generic hotkey format
 #: ../../data/txts/help/common_helptexts.lua:35
 #, lua-format
 msgctxt "hotkey"
 msgid "%s:"
-msgstr ""
+msgstr "%s:"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
 #: ../../data/txts/help/common_helptexts.lua:42
 msgctxt "hotkey"
 msgid "Space"
-msgstr ""
+msgstr "Espacio"
 
 #: ../../data/txts/help/common_helptexts.lua:42
 msgid "Toggle building spaces"
-msgstr ""
+msgstr "Mostrar u ocultar Zonas de Construcción"
 
 #. TRANSLATORS: This is an access key combination. The hotkey is 'f'
 #: ../../data/txts/help/common_helptexts.lua:49
 msgid "Toggle fullscreen (if supported by the OS)"
-msgstr ""
+msgstr "Cambia a pantalla completa (si es soportado por el S.O.)"
 
 #. TRANSLATORS: This is an access key combination. The hotkey is 'm'
 #: ../../data/txts/help/common_helptexts.lua:56
 msgid "Toggle minimap"
-msgstr ""
+msgstr "Alterna la visibilidad del minimapa"
 
 #: ../../data/txts/help/multiplayer_help.lua:10
 msgid "Multiplayer Game Setup"
-msgstr ""
+msgstr "Configuración del juego multijugador"
 
 #: ../../data/txts/help/multiplayer_help.lua:11
 msgid "You are in the multiplayer launch game menu."
-msgstr ""
+msgstr "Estás en el menú de inicio de juego multijugador."
 
 #: ../../data/txts/help/multiplayer_help.lua:13
 msgid "Client settings"
-msgstr ""
+msgstr "Opciones del cliente."
 
 #: ../../data/txts/help/multiplayer_help.lua:14
 msgid ""
 "On the left side is a list of all clients including you. You can set your "
 "role with the button following your nickname. Available roles are:"
-msgstr ""
+msgstr "En la izquierda hay una lista de clientes incluyendote. Puedes establecer tu rol con el botón que esta al lado de tu alias. Los roles disponibles son:"
 
 #: ../../data/txts/help/multiplayer_help.lua:15
 msgid ""
 "The player with the color of the flag. If more than one client selected the "
 "same color, these share control over the player (‘shared kingdom mode’)."
-msgstr ""
+msgstr "El jugador con el color de la bandera. Si mas de un cliente selecciona el mismo color, compartirá el control del jugador (\"modo de reino compartido\")."
 
 #: ../../data/txts/help/multiplayer_help.lua:16
 msgid ""
 "Spectator mode, meaning you can see everything, but cannot control any "
-"player"
+"player."
 msgstr ""
 
 #: ../../data/txts/help/multiplayer_help.lua:18
 msgid "Player settings"
-msgstr ""
+msgstr "Opciones de jugador"
 
 #: ../../data/txts/help/multiplayer_help.lua:19
 msgid ""
 "In the middle are the settings for the players. To start a game, each player"
 " must be one of the following:"
-msgstr ""
+msgstr "En medio están las opciones para los jugadores. Para iniciar un juego, cada jugador debe ser uno de los siguientes:"
 
 #: ../../data/txts/help/multiplayer_help.lua:20
 msgid "Connected to one or more clients (see ‘Client settings’)."
-msgstr ""
+msgstr "Conectado a uno o más clientes (ver \"Opciones de cliente\")."
 
 #: ../../data/txts/help/multiplayer_help.lua:21
 msgid ""
 "Connected to a computer player (the face in the picture as well as the mouse"
 " hover texts indicate the strength of the currently selected computer "
 "player)."
-msgstr ""
+msgstr "Conectado a un jugador controlado por el ordenador (el rostro en el retrato así como el texto emergente al pasar por encima con el ratón indica la fuerza del jugador controlado por el ordenador actualmente seleccionado)"
 
 #: ../../data/txts/help/multiplayer_help.lua:22
 msgid "Set as shared in starting position for another player."
-msgstr ""
+msgstr "Configura como compartida la posición inicial para otro jugador."
 
 #: ../../data/txts/help/multiplayer_help.lua:23
 msgid "Closed."
-msgstr ""
+msgstr "Cerrado."
 
 #: ../../data/txts/help/multiplayer_help.lua:24
 msgid ""
 "The latter three can only be set by the hosting client by left-clicking the "
 "‘type’ button of a player. Hosting players can also set the initialization "
 "of each player (the set of buildings, wares and workers the player starts "
-"with) and the tribe and team for computer players"
+"with) and the tribe and team for computer players."
 msgstr ""
 
 #: ../../data/txts/help/multiplayer_help.lua:25
 msgid ""
 "Every client connected to a player (who isn’t a spectator) can set the tribe"
-" and the team for that player"
+" and the team for that player."
 msgstr ""
 
 #: ../../data/txts/help/multiplayer_help.lua:27
 msgid "Map details"
-msgstr ""
+msgstr "Detalles del mapa"
 
 #: ../../data/txts/help/multiplayer_help.lua:28
 msgid ""
@@ -485,192 +486,269 @@ msgid ""
 " side. A button next to the map name allows the host to change to a "
 "different map. Furthermore, the host is able to set a specific win "
 "condition, and finally can start the game as soon as all players are set up."
+msgstr "Puedes ver información sobre el mapa o partida salvada seleccionados en el lado derecho. Un botón junto al nombre del mapa permite al anfitrión cambiar a un mapa diferente. Adicionalmente, el anfitrión puede marcar una condición de victoria específica y finalmente iniciar la partida en cuanto todos los jugadores estén listos."
+
+#: ../../data/txts/tips/atlanteans.lua:4
+msgid ""
+"Keep an eye on your fishers and build a fish breeder’s house. After fish "
+"resources are exhausted in their work area, the fish supply cannot be "
+"regenerated."
 msgstr ""
 
-#: ../../data/txts/tips/atlanteans.tip:2 ../../data/txts/tips/barbarians.tip:2
-#: ../../data/txts/tips/empire.tip:2
+#: ../../data/txts/tips/atlanteans.lua:8
 msgid ""
-"Some buildings, such as the farm, have a very small work area. If the "
-"building is surrounded with trees or roads, production will stop."
-msgstr "Algunos edificios, como la granja, tienen una zona de trabajo pequeña. Si el edificio está rodeado de árboles o caminos, se parará la producción."
+"Always build a forester’s and a woodcutter’s house, so you will not run out "
+"of logs."
+msgstr ""
 
-#: ../../data/txts/tips/atlanteans.tip:6
+#: ../../data/txts/tips/atlanteans.lua:12
 msgid ""
-"Always build a forester’s and a fish breeder’s house, so you will not run "
-"out of logs or food."
-msgstr "Siempre construye una casa de silvicultor y una de piscicultor, para que no te quedes sin troncos o comida."
+"Atlanteans need spidercloth for many buildings. Build the needed "
+"infrastructure early before you run out."
+msgstr ""
 
-#: ../../data/txts/tips/barbarians.tip:6 ../../data/txts/tips/empire.tip:6
+#: ../../data/txts/tips/barbarians.lua:4 ../../data/txts/tips/empire.lua:4
 msgid ""
 "Keep an eye on your fishers. After fish resources are exhausted in their "
 "work area, they will stop fishing."
 msgstr "Mantén un ojo en tus pescadores. Después de agotar la fuentes de pescado en su área de trabajo, dejarán de pescar."
 
-#: ../../data/txts/tips/barbarians.tip:10
+#: ../../data/txts/tips/barbarians.lua:8
 msgid ""
 "Always build a ranger’s and a gamekeeper’s hut, so you will not run out of "
-"logs or food."
-msgstr "Siempre construye una cabaña de agente forestal y una de guardabosques, para que no te quedes sin troncos o comida."
+"logs or game."
+msgstr ""
 
-#: ../../data/txts/tips/editor.tip:2
+#: ../../data/txts/tips/barbarians.lua:12 ../../data/txts/tips/empire.lua:12
+msgid ""
+"Most enhanced buildings need experienced workers. Do not enhance a building "
+"unless you have the necessary workers available."
+msgstr ""
+
+#: ../../data/txts/tips/editor.lua:4
 msgid ""
 "You can find general help for the editor as well as a short tutorial on our "
 "wiki at www.widelands.org"
 msgstr "Puedes encontrar ayuda general para el editor así como un tutorial corto en nuestra wiki en www.widelands.org"
 
-#: ../../data/txts/tips/editor.tip:6
+#: ../../data/txts/tips/editor.lua:8
 msgid ""
 "You can select multiple animal types if you hold down Ctrl during selection."
 " If you then click on the map, an instance of one of the selected animal "
 "types will be placed."
 msgstr "Puedes seleccionar múltiples tipos de animales si mantienes Ctrl mientras seleccionas. Si luego haces click en el mapa, una instancia de uno del tipo de animal seleccionado será colocado."
 
-#: ../../data/txts/tips/editor.tip:10
+#: ../../data/txts/tips/editor.lua:12
 msgid ""
 "Just like with animals, you can also select multiple immovables or ground "
 "textures with Ctrl + mouse click."
 msgstr "Como con los animales, puedes además seleccionar múltiples inmóviles o texturas de suelo con Ctrl + click con el ratón."
 
-#: ../../data/txts/tips/editor.tip:14
+#: ../../data/txts/tips/editor.lua:16
 msgid ""
 "Holding down Shift switches the first alternative tool on. This tool is in "
 "most cases the complete opposite of the normal tool (for example deletion of"
 " an object instead of placing one)."
 msgstr "Manteniendo presionado Shift activa la primera herramienta alternativa. Esta herramienta es la mayoría de los casos opuesta a la herramienta normal (por ejemplo el borrado de un objeto en lugar de colocarlo)."
 
-#: ../../data/txts/tips/editor.tip:18
+#: ../../data/txts/tips/editor.lua:20
 msgid ""
 "Holding down Alt switches the second alternative tool on (if it exists)."
 msgstr "Manteniendo Alt activa la segunda herramienta alternativa (si existe)."
 
-#: ../../data/txts/tips/editor.tip:22
+#: ../../data/txts/tips/editor.lua:24
 msgid ""
-"The number keys (1 - 0) allow you to directly set the size of the selected "
+"The number keys (0 - 9) allow you to directly set the size of the selected "
 "area around your mouse cursor."
-msgstr "Los números (1-0) te permiten directamente el tamaño del área seleccionada alrededor de tu ratón."
+msgstr ""
 
-#: ../../data/txts/tips/editor.tip:26
+#: ../../data/txts/tips/editor.lua:28
 msgid ""
 "Space key behaves like in normal game. It switches if building spaces are "
 "shown on or off."
 msgstr "La barra espaciadora se comporta como en un juego normal. Activa o desactiva si las zonas de construcción se muestran."
 
-#: ../../data/txts/tips/empire.tip:10
+#: ../../data/txts/tips/editor.lua:32
+msgid ""
+"When placing trees, use the help button to see which trees are more likely "
+"to survive on which terrain."
+msgstr ""
+
+#: ../../data/txts/tips/editor.lua:36
+msgid ""
+"If you do not set water and fish resources, a default amount will be used."
+msgstr ""
+
+#: ../../data/txts/tips/editor.lua:40
+msgid ""
+"You can place a medium building on any node where there is a slope no "
+"greater than 1 in the south-east direction and its height difference to all "
+"nodes in a radius of 2 is no greater than 2."
+msgstr ""
+
+#: ../../data/txts/tips/editor.lua:44
+msgid ""
+"You can place a large building on any node where you could place a medium "
+"building if there is no obstacle or non-arable terrain towards the west, "
+"northwest and northeast."
+msgstr ""
+
+#: ../../data/txts/tips/empire.lua:8
 msgid "Always build a forester’s house so you will not run out of logs."
 msgstr "Siempre construye una casa de silvicultor para no quedarte sin troncos."
 
-#: ../../data/txts/tips/general_game.tip:2
+#: ../../data/txts/tips/empire.lua:16
+msgid "Empire needs a lot of marble. Keep looking for marble resources."
+msgstr ""
+
+#: ../../data/txts/tips/general_game.lua:4
 msgid ""
 "The building process will only start after a road is built to the "
 "construction site."
 msgstr "La construcción sólo comenzará cuando haya un camino construido hasta el punto de edificación."
 
-#: ../../data/txts/tips/general_game.tip:6
+#: ../../data/txts/tips/general_game.lua:8
 msgid ""
 "Be sure to send a geologist to survey sites before building a well or a "
 "mine."
 msgstr "Asegúrate de enviar un geólogo a explorar el área antes de construir un pozo o una mina."
 
-#: ../../data/txts/tips/general_game.tip:10
+#: ../../data/txts/tips/general_game.lua:12
 msgid ""
 "Your territory can be expanded by building various military buildings – "
 "Sentry, Fortress, Blockhouse, etc."
 msgstr "Tu territorio puede ser expandido construyendo varios edificios militares - Centinela, Fortaleza, Fortín, etc."
 
-#: ../../data/txts/tips/general_game.tip:14
+#: ../../data/txts/tips/general_game.lua:16
 msgid "Miners will work only if supplied with food."
 msgstr "Los mineros trabajarán solo si se les suministra comida."
 
-#: ../../data/txts/tips/general_game.tip:18
+#: ../../data/txts/tips/general_game.lua:20
 msgid ""
 "Split your roads into shorter sections by planting some flags. This will "
 "speed up transportation of your wares."
 msgstr "Divide tus caminos en varios tramos pequeños, colocando banderas intermedias. De este modo acelerarás el transporte de tus mercancías."
 
-#: ../../data/txts/tips/general_game.tip:22
+#: ../../data/txts/tips/general_game.lua:24
 msgid ""
 "Any further questions? Our FAQ, the wiki and of course our community forums "
 "can be found at www.widelands.org."
-msgstr "¿Alguna otra pregunta? Nuestras PFs, la wiki y por supuesto nuestros foros de la comunidad pueden ser encontrados en www.widelands.org"
+msgstr "¿Alguna otra pregunta? Nuestras PFs, la wiki y por supuesto nuestros foros de la comunidad pueden ser encontrados en www.widelands.org."
 
-#: ../../data/txts/tips/general_game.tip:26
+#: ../../data/txts/tips/general_game.lua:28
 msgid ""
 "Use the priority buttons in building windows to adjust delivery of a "
 "specific ware."
 msgstr "Usa los botones de prioridad en la ventana de los edificios para ajustar la entrega de mercancías específicas."
 
-#: ../../data/txts/tips/general_game.tip:30
+#: ../../data/txts/tips/general_game.lua:32
 msgid ""
 "Use the ‘configure economy’ menu to adjust the target quantity of wares. It "
 "can be accessed via the flag menu."
-msgstr ""
+msgstr "Utiliza el menú 'configurar economía' para ajustar la cantidad prevista de mercancías. Puedes acceder a través del menú de la bandera."
 
-#: ../../data/txts/tips/general_game.tip:34
+#: ../../data/txts/tips/general_game.lua:36
 msgid ""
 "Manage your messages more efficiently: press ‘N’ for News to access the "
 "messages window, then use ‘G’ for Go To, and the Delete key to archive "
 "messages."
 msgstr "Administra tus mensajes más eficientemente: presiona \"N\" para Nuevos para acceder a la ventan de mensajes, luego usa \"G\" para Ir A, y la tecla Supr para archivar mensajes."
 
-#: ../../data/txts/tips/general_game.tip:38
-msgid ""
-"Use the ‘,’ (comma) and ‘.’ (period) keys to go back and forth between "
-"recently visited places in the world."
-msgstr "Usa la \",\" (coma) y el \".\" (punto) para ir atrás y adelante entre los lugares recientemente visitados en el mundo."
+#: ../../data/txts/tips/general_game.lua:40
+msgctxt "hotkey"
+msgid "1-9"
+msgstr ""
 
-#: ../../data/txts/tips/general_game.tip:42
-msgid ""
-"Press Ctrl+(0-9) to store important locations, then press 0-9 to recall "
-"them."
-msgstr "Pulsa Ctrl+(0-9) para guardar ubicaciones importantes, y pulsa 0-9 para volver a ellas."
+#: ../../data/txts/tips/general_game.lua:40
+msgctxt "hotkey"
+msgid "Ctrl+(1-9)"
+msgstr ""
 
-#: ../../data/txts/tips/general_game.tip:46
+#: ../../data/txts/tips/general_game.lua:40
+msgid "Press %1% to store important locations, then press %2% to recall them."
+msgstr ""
+
+#: ../../data/txts/tips/general_game.lua:44
 msgid ""
 "Removing a road while holding Ctrl lets you remove all flags up to the first"
 " junction."
 msgstr "Remover un camino mientras mantienes Ctrl te permite remover todas las banderas hasta la primer cruce."
 
-#: ../../data/txts/tips/general_game.tip:50
+#: ../../data/txts/tips/general_game.lua:48
 msgid ""
-"New soldiers are recruited in the headquarters or a warehouse if all needed "
-"tools are available. Training sites are for improving their abilities."
-msgstr "Nuevos soldados son reclutados en el cuartel general o en el almacén si todas las herramientas necesarias están disponibles. Las zonas de entrenamiento son para mejorar sus habilidades."
+"New soldiers are recruited in a barracks. Their abilities can then be "
+"improved in training sites."
+msgstr ""
 
-#: ../../data/txts/tips/general_game.tip:54
+#: ../../data/txts/tips/general_game.lua:52
 msgid ""
 "If you like to live dangerously, pressing Ctrl while clicking the enhance, "
 "dismantle or destroy building buttons will skip the confirmation."
 msgstr "Si te gusta vivir al límite, presionando Ctrl mientras haces click en el botón mejorar, desmantelar o destruir edificio saltarás la confirmación."
 
-#: ../../data/txts/tips/general_game.tip:58
+#: ../../data/txts/tips/general_game.lua:56
 msgid "Press I to quickly toggle the display of your stock inventory."
 msgstr "Presiona I  para cambiar rápidamente la visualización de tu inventario."
 
-#: ../../data/txts/tips/general_game.tip:62
+#: ../../data/txts/tips/general_game.lua:60
 msgid ""
 "An economy consists of all buildings and flags connected by roads. The "
 "supplies and demands of buildings are handled in its economy."
 msgstr "Una economía está formada por todos los edificios y banderas conectados por carreteras. Los suministros y demandas de los edificios se manejan en su economía."
 
-#: ../../data/txts/tips/multiplayer.tip:2
+#: ../../data/txts/tips/general_game.lua:64
+msgid ""
+"Some buildings, such as the farm, have a very small work area. If the "
+"building is surrounded with trees or roads, production will stop."
+msgstr "Algunos edificios, como la granja, tienen una zona de trabajo pequeña. Si el edificio está rodeado de árboles o caminos, se parará la producción."
+
+#: ../../data/txts/tips/general_game.lua:68
+msgctxt "hotkey"
+msgid "Ctrl+(+/-)"
+msgstr ""
+
+#: ../../data/txts/tips/general_game.lua:68
+msgctxt "hotkey"
+msgid "Ctrl+0"
+msgstr ""
+
+#: ../../data/txts/tips/general_game.lua:68
+msgid "Zoom in/out with the mouse wheel or %1%. Press %2% to reset the zoom."
+msgstr ""
+
+#: ../../data/txts/tips/general_game.lua:72
+msgid ""
+"When a building is destroyed, its workers will start looking for a nearby "
+"flag from which they can move by road to a connected warehouse. If there are"
+" no such flags in the vicinity, they will keep wandering around and "
+"eventually die."
+msgstr ""
+
+#: ../../data/txts/tips/multiplayer.lua:4
 msgid ""
 "You can use the ’Page up’ and ‘Page down’ keys to adjust your desired speed "
 "– the real speed is then democratically set."
 msgstr "Puedes usar  las teclas \"RePág\" y \"AvPág\" para ajustar la velocidad deseada - la velocidad real es entonces establecida democráticamente."
 
-#: ../../data/txts/tips/multiplayer.tip:6
+#: ../../data/txts/tips/multiplayer.lua:8
 msgid ""
 "You can use ‘/me’ at the beginning of a chatmessage: ‘/me is tired’ will be "
 "printed as ‘-> Nickname is tired’."
 msgstr "Puedes utilizar ‘/me’ al inicio de un mensaje de chat: ‘/me está cansado’ se mostrará como ‘-> Nickname está cansado’."
 
-#: ../../data/txts/tips/multiplayer.tip:10
+#: ../../data/txts/tips/multiplayer.lua:12
 msgid ""
 "Use ‘@name’ at the beginning of a chat message to send it to only one "
 "player."
 msgstr "Usa \"@name\" al principio de un mensaje de chat para enviarlo solo a ese jugador."
 
-#: ../../data/txts/tips/singleplayer.tip:2
+#: ../../data/txts/tips/multiplayer.lua:16
+msgid ""
+"If the game should crash, don't worry! The game will be saved automatically "
+"so that you can reload it afterwards."
+msgstr ""
+
+#: ../../data/txts/tips/singleplayer.lua:4
 msgid ""
 "Our computer players are too boring? Visit our website at www.widelands.org "
 "and meet other players to play online."

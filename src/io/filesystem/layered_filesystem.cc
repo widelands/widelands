@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2009, 2011 by the Widelands Development Team
+ * Copyright (C) 2006-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -22,14 +22,18 @@
 #include <cstdio>
 #include <memory>
 
+#include <boost/algorithm/string/predicate.hpp>
+#include <boost/regex.hpp>
+
 #include "base/log.h"
 #include "base/wexception.h"
 #include "io/fileread.h"
 #include "io/streamread.h"
 
-LayeredFileSystem * g_fs;
+LayeredFileSystem* g_fs;
 
-LayeredFileSystem::LayeredFileSystem(): home_(nullptr) {}
+LayeredFileSystem::LayeredFileSystem() : home_(nullptr) {
+}
 
 /**
  * Free all sub-filesystems
@@ -37,6 +41,17 @@ LayeredFileSystem::LayeredFileSystem(): home_(nullptr) {}
 LayeredFileSystem::~LayeredFileSystem() {
 }
 
+bool LayeredFileSystem::is_legal_filename(const std::string& filename) {
+	// No potential file separators or other potentially illegal characters
+	// https://msdn.microsoft.com/en-us/library/windows/desktop/aa365247(v=vs.85).aspx
+	// http://www.linfo.org/file_name.html
+	// https://support.apple.com/en-us/HT202808
+	// We can't just regex for word & digit characters here because of non-Latin scripts.
+	boost::regex re(".*[<>:\"|?*/\\\\].*");
+	return !filename.empty() && !boost::starts_with(filename, ".") &&
+	       !boost::starts_with(filename, " ") && !boost::starts_with(filename, "-") &&
+	       !boost::regex_match(filename, re);
+}
 
 /**
  * Just assume that at least one of our child FSs is writable
@@ -50,8 +65,7 @@ void LayeredFileSystem::add_file_system(FileSystem* fs) {
 	filesystems_.emplace_back(fs);
 }
 
-void LayeredFileSystem::set_home_file_system(FileSystem * fs)
-{
+void LayeredFileSystem::set_home_file_system(FileSystem* fs) {
 	home_.reset(fs);
 }
 
@@ -59,12 +73,10 @@ void LayeredFileSystem::set_home_file_system(FileSystem * fs)
  * Remove a filesystem from the stack
  * \param fs The filesystem to be removed
  */
-void LayeredFileSystem::remove_file_system(const FileSystem & fs)
-{
+void LayeredFileSystem::remove_file_system(const FileSystem& fs) {
 	if (filesystems_.back().get() != &fs)
-		throw std::logic_error
-			("LayeredFileSystem::remove_file_system: interspersed add/remove "
-			 "detected!");
+		throw std::logic_error("LayeredFileSystem::remove_file_system: interspersed add/remove "
+		                       "detected!");
 	filesystems_.pop_back();
 }
 
@@ -82,18 +94,15 @@ std::set<std::string> LayeredFileSystem::list_directory(const std::string& path)
 	// Check home system first
 	if (home_) {
 		files = home_->list_directory(path);
-		for
-			(FilenameSet::iterator fnit = files.begin();
-			 fnit != files.end();
-			 ++fnit)
-				results.insert(*fnit);
+		for (FilenameSet::iterator fnit = files.begin(); fnit != files.end(); ++fnit)
+			results.insert(*fnit);
 	}
 
 	for (auto it = filesystems_.rbegin(); it != filesystems_.rend(); ++it) {
 		files = (*it)->list_directory(path);
 
 		for (FilenameSet::iterator fnit = files.begin(); fnit != files.end(); ++fnit)
-			   results.insert(*fnit);
+			results.insert(*fnit);
 	}
 	return results;
 }
@@ -101,7 +110,7 @@ std::set<std::string> LayeredFileSystem::list_directory(const std::string& path)
 /**
  * Returns true if the file can be found in at least one of the sub-filesystems
  */
-bool LayeredFileSystem::file_exists(const std::string & path) {
+bool LayeredFileSystem::file_exists(const std::string& path) {
 	if (home_ && home_->file_exists(path))
 		return true;
 	for (auto it = filesystems_.rbegin(); it != filesystems_.rend(); ++it)
@@ -115,7 +124,7 @@ bool LayeredFileSystem::file_exists(const std::string & path) {
  * Returns true if path is a directory in at least one of the directories
  */
 // TODO(unknown): What if it's a file in some and a dir in others?????
-bool LayeredFileSystem::is_directory(const std::string & path) {
+bool LayeredFileSystem::is_directory(const std::string& path) {
 	if (home_ && home_->is_directory(path))
 		return true;
 
@@ -134,7 +143,7 @@ bool LayeredFileSystem::is_directory(const std::string & path) {
  * we'd have problems differentiating the errors returned by the sub-FS.
  * Let's just avoid any possible hassles with that.
  */
-void * LayeredFileSystem::load(const std::string & fname, size_t & length) {
+void* LayeredFileSystem::load(const std::string& fname, size_t& length) {
 	if (home_ && home_->file_exists(fname))
 		return home_->load(fname, length);
 
@@ -149,9 +158,9 @@ void * LayeredFileSystem::load(const std::string & fname, size_t & length) {
  * Write the given block of memory out as a file to the first writable sub-FS.
  * Throws an exception if it fails.
  */
-void LayeredFileSystem::write
-	(const std::string & fname, void const * const data, int32_t const length)
-{
+void LayeredFileSystem::write(const std::string& fname,
+                              void const* const data,
+                              int32_t const length) {
 	if (home_ && home_->is_writable())
 		return home_->write(fname, data, length);
 
@@ -159,15 +168,15 @@ void LayeredFileSystem::write
 		if ((*it)->is_writable())
 			return (*it)->write(fname, data, length);
 
-	throw wexception("LayeredFileSystem: No writable filesystem for file: %s",
-						  paths_error_message(fname).c_str());
+	throw wexception(
+	   "LayeredFileSystem: No writable filesystem for file: %s", paths_error_message(fname).c_str());
 }
 
 /**
  * Analogously to Read, open the file from the first sub-filesystem where
  * it exists.
  */
-StreamRead  * LayeredFileSystem::open_stream_read (const std::string & fname) {
+StreamRead* LayeredFileSystem::open_stream_read(const std::string& fname) {
 	if (home_ && home_->file_exists(fname))
 		return home_->open_stream_read(fname);
 
@@ -175,14 +184,14 @@ StreamRead  * LayeredFileSystem::open_stream_read (const std::string & fname) {
 		if ((*it)->file_exists(fname))
 			return (*it)->open_stream_read(fname);
 
-	throw FileNotFoundError("LayeredFileSystem: Could not open file for stream read",
-									paths_error_message(fname));
+	throw FileNotFoundError(
+	   "LayeredFileSystem: Could not open file for stream read", paths_error_message(fname));
 }
 
 /**
  * Analogously to Write, create the file in the first writable sub-FS.
  */
-StreamWrite * LayeredFileSystem::open_stream_write(const std::string & fname) {
+StreamWrite* LayeredFileSystem::open_stream_write(const std::string& fname) {
 	if (home_ && home_->is_writable())
 		return home_->open_stream_write(fname);
 
@@ -196,7 +205,7 @@ StreamWrite * LayeredFileSystem::open_stream_write(const std::string & fname) {
 /**
  * MakeDir in first writable directory
  */
-void LayeredFileSystem::make_directory(const std::string & dirname) {
+void LayeredFileSystem::make_directory(const std::string& dirname) {
 	if (home_ && home_->is_writable())
 		return home_->make_directory(dirname);
 
@@ -210,7 +219,7 @@ void LayeredFileSystem::make_directory(const std::string & dirname) {
 /**
  * ensure_directory_exists in first writable directory
  */
-void LayeredFileSystem::ensure_directory_exists(const std::string & dirname) {
+void LayeredFileSystem::ensure_directory_exists(const std::string& dirname) {
 	if (home_ && home_->is_writable())
 		return home_->ensure_directory_exists(dirname);
 
@@ -224,8 +233,7 @@ void LayeredFileSystem::ensure_directory_exists(const std::string & dirname) {
 /**
  * Create a subfilesystem from an existing file/directory
  */
-FileSystem * LayeredFileSystem::make_sub_file_system(const std::string & dirname)
-{
+FileSystem* LayeredFileSystem::make_sub_file_system(const std::string& dirname) {
 	if (home_ && home_->is_writable() && home_->file_exists(dirname))
 		return home_->make_sub_file_system(dirname);
 
@@ -234,14 +242,13 @@ FileSystem * LayeredFileSystem::make_sub_file_system(const std::string & dirname
 			return (*it)->make_sub_file_system(dirname);
 
 	throw wexception("LayeredFileSystem: unable to create sub filesystem for existing directory: %s",
-						  paths_error_message(dirname).c_str());
+	                 paths_error_message(dirname).c_str());
 }
 
 /**
  * Create a subfilesystem from a new file/directory
  */
-FileSystem * LayeredFileSystem::create_sub_file_system(const std::string & dirname, Type const type)
-{
+FileSystem* LayeredFileSystem::create_sub_file_system(const std::string& dirname, Type const type) {
 	if (home_ && home_->is_writable() && !home_->file_exists(dirname))
 		return home_->create_sub_file_system(dirname, type);
 
@@ -250,13 +257,13 @@ FileSystem * LayeredFileSystem::create_sub_file_system(const std::string & dirna
 			return (*it)->create_sub_file_system(dirname, type);
 
 	throw wexception("LayeredFileSystem: unable to create sub filesystem for new directory: %s",
-						  paths_error_message(dirname).c_str());
+	                 paths_error_message(dirname).c_str());
 }
 
 /**
  * Remove this file or directory. If it is a directory, remove it recursively
  */
-void LayeredFileSystem::fs_unlink(const std::string & file) {
+void LayeredFileSystem::fs_unlink(const std::string& file) {
 	if (!file_exists(file))
 		return;
 
@@ -272,9 +279,7 @@ void LayeredFileSystem::fs_unlink(const std::string & file) {
 		}
 }
 
-void LayeredFileSystem::fs_rename
-	(const std::string & old_name, const std::string & new_name)
-{
+void LayeredFileSystem::fs_rename(const std::string& old_name, const std::string& new_name) {
 	if (!file_exists(old_name))
 		return;
 	if (home_ && home_->is_writable() && home_->file_exists(old_name)) {

@@ -24,45 +24,52 @@ function introduction_thread()
    plr:reveal_fields(al_thunran:region(8))
    message_box_objective(plr, briefing_msg_02) -- Al'thunran
    plr:reveal_fields(grave:region(4))
-   message_box_objective(plr, briefing_msg_03) -- grave
-   message_box_objective(plr, briefing_msg_04)
-
-   message_box_objective(plr, briefing_msg_05)
-   message_box_objective(plr, briefing_msg_06)
-   message_box_objective(plr, briefing_msg_07)
-
+   message_box_objective(plr, briefing_msg_03) -- grave, Boldreth
+   message_box_objective(plr, briefing_msg_04) -- wait
    -- introduction of Khantrukh
    message_box_objective(plr, briefing_msg_08)
 
    message_box_objective(plr, order_msg_ranger)
    local obj = add_campaign_objective(obj_build_rangers)
 
+   -- Try not to interrupt the player actions with a message, so we wait generously
+   sleep(50000)
+   message_box_objective(plr, briefing_msg_05) -- war goes on
+   message_box_objective(plr, briefing_msg_06) -- brothers brought men
+   sleep(50000)
+   message_box_objective(plr, briefing_msg_07) -- still living in huts and barracks
+   sleep(50000)
+   message_box_objective(plr, msg_story_2) -- winter is upon us
+   sleep(10000)
+
    while not check_for_buildings(plr, {barbarians_rangers_hut = 2}) do sleep(500) end
-   obj.done = true
+   set_objective_done(obj)
 
    plr:allow_buildings{"barbarians_sentry", "barbarians_barrier"}
 
-   message_box_objective(plr, order_msg_1)
-   message_box_objective(plr, order_msg_2)
+   message_box_objective(plr, order_msg_1) -- Boldreth, swords rusty
+   message_box_objective(plr, order_msg_2) -- Kantrukh, rocks
 
    -- Reveal the rocks
    local rocks = wl.Game().map:get_field(27, 48)
    plr:reveal_fields(rocks:region(6))
-   local way = scroll_smoothly_nordwards_to(rocks, 1500)
-
+   local prior_center = scroll_to_field(rocks)
    message_box_objective(plr, order_msg_3)
    obj = add_campaign_objective(obj_claim_northeastern_rocks)
    message_box_objective(plr, order_msg_4)
 
    -- Move back
-   timed_scroll(array_reverse(way), 10)
+   scroll_to_map_pixel(prior_center)
+
+   sleep(50000)
+   message_box_objective(plr, msg_story_1)
 
    -- Now, wait till the quarry comes up
    local f = wl.Game().map:get_field(27,48):region(6)
    while not check_for_buildings(plr, { barbarians_quarry = 1 }, f) do
       sleep(5000)
    end
-   obj.done = true
+   set_objective_done(obj)
 
    message_box_objective(plr, order_msg_5_quarry)
 
@@ -98,7 +105,7 @@ function mines_and_food_thread()
    while not check_for_buildings(plr, {barbarians_coalmine = 1, barbarians_ironmine = 1}) do
       sleep(5000)
    end
-   o.done = true
+   set_objective_done(o)
    message_box_objective(plr, order_msg_7_mines_up)
    message_box_objective(plr, order_msg_8_mines_up)
    message_box_objective(plr, order_msg_9_hunter)
@@ -127,8 +134,7 @@ function mines_and_food_thread()
                   and #rv.barbarians_tavern >= 1 then break end
          sleep(5331)
       end
-      obj_bf.done = true
-      sleep(5000)
+      set_objective_done(obj_bf)
       message_box_objective(plr, story_msg4)
    end)
 
@@ -146,7 +152,7 @@ function mines_and_food_thread()
          sleep(4234)
       end
       message_box_objective(plr, order_msg_12_farming_began)
-      obj_farming.done = true
+      set_objective_done(obj_farming)
    end)
 
    -- Enable food production
@@ -171,7 +177,7 @@ function mines_and_food_thread()
    while #plr:get_buildings("barbarians_smelting_works") < 1 do
       sleep(6223)
    end
-   o.done = true
+   set_objective_done(o)
 
    -- Information about making mines deeper
    -- Wait until the player has an experienced worker.
@@ -218,7 +224,7 @@ function mines_and_food_thread()
          end
          sleep(5421)
       end
-      obj.done = true
+      set_objective_done(obj)
       enhance_buildings_done = true
    end)
 
@@ -238,6 +244,7 @@ function build_materials_thread()
       end
       sleep(5421)
    end
+   sleep(5000)
 
    message_box_objective(plr, order_msg_16_blackwood)
    plr:allow_buildings{"barbarians_wood_hardener"}
@@ -245,10 +252,10 @@ function build_materials_thread()
    -- So that player has really little, but still enough to expand a bit
    local o = add_campaign_objective(obj_better_material_1)
 
-   sleep(30*1000)
+   sleep(50000)
    message_box_objective(plr, story_msg1)
    while #plr:get_buildings("barbarians_wood_hardener") < 1 do sleep(5421) end
-   o.done = true
+   set_objective_done(o)
 
    message_box_objective(plr, order_msg_17_grout)
    plr:allow_buildings{"barbarians_lime_kiln", "barbarians_well", "barbarians_charcoal_kiln"}
@@ -267,7 +274,7 @@ function build_materials_thread()
       end
       sleep(5421)
    end
-   o.done = true
+   set_objective_done(o)
 
    message_box_objective(plr, order_msg_18_reed)
    plr:allow_buildings{"barbarians_reed_yard"}
@@ -275,7 +282,7 @@ function build_materials_thread()
    while #plr:get_buildings("barbarians_reed_yard") < 1 do sleep(5421) end
 
    message_box_objective(plr, order_msg_19_all_material)
-   o.done = true
+   set_objective_done(o)
 
    build_materials_done = true
 end
@@ -299,22 +306,11 @@ function cattle_farm()
    while not check_for_buildings(plr, { barbarians_cattlefarm = 1 }) do
       sleep(2323)
    end
-   o.done = true
+   set_objective_done(o)
 
    cattle_farm_done = true
 end
 
-
--- ======================
--- Throns story messages
--- ======================
-function story_messages_thread()
-   wake_me(180 * 1000)
-   message_box_objective(plr, msg_story_2)
-
-   wake_me(600 * 1000)
-   message_box_objective(plr, msg_story_1)
-end
 
 -- =================
 -- Mission complete
@@ -333,7 +329,6 @@ end
 run(introduction_thread)
 run(mines_and_food_thread)
 run(build_materials_thread)
-run(story_messages_thread)
 
 include "map:scripting/secret_village.lua" -- starts the thread
 

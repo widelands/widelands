@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2011 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -57,7 +57,7 @@ MainMenuSaveMap::MainMenuSaveMap(EditorInteractive& parent)
                      tabley_ + tableh_ + 3 * padding_ - 1,
                      get_inner_w() - right_column_x_ - padding_,
                      buth_,
-							g_gr->images().get("images/ui_basic/but1.png"),
+                     g_gr->images().get("images/ui_basic/but1.png"),
                      _("Make Directory")),
      edit_options_(this,
                    "edit_options",
@@ -65,29 +65,23 @@ MainMenuSaveMap::MainMenuSaveMap(EditorInteractive& parent)
                    tabley_ + tableh_ - buth_,
                    get_inner_w() - right_column_x_ - padding_,
                    buth_,
-						 g_gr->images().get("images/ui_basic/but5.png"),
+                   g_gr->images().get("images/ui_basic/but5.png"),
                    _("Map Options")),
-     editbox_label_(this,
-                    padding_,
-                    tabley_ + tableh_ + 3 * padding_,
-                    butw_,
-                    buth_,
-                    _("Filename:"),
-                    UI::Align::kLeft) {
+     editbox_label_(
+        this, padding_, tabley_ + tableh_ + 3 * padding_, butw_, buth_, _("Filename:")) {
 	set_current_directory(curdir_);
 
 	// Make room for edit_options_ button
-	map_details_.set_max_height(map_details_.get_h() - buth_ - padding_);
+	map_details_.set_size(map_details_.get_w(), map_details_.get_h() - buth_ - padding_);
 
 	table_.selected.connect(boost::bind(&MainMenuSaveMap::clicked_item, boost::ref(*this)));
 	table_.double_clicked.connect(
 	   boost::bind(&MainMenuSaveMap::double_clicked_item, boost::ref(*this)));
 
-	editbox_ = new UI::EditBox(this,
-	                           editbox_label_.get_x() + editbox_label_.get_w() + padding_,
-	                           editbox_label_.get_y(),
-										tablew_ - editbox_label_.get_w() - padding_ + 1, buth_, 2,
-										g_gr->images().get("images/ui_basic/but1.png"));
+	editbox_ =
+	   new UI::EditBox(this, editbox_label_.get_x() + editbox_label_.get_w() + padding_,
+	                   editbox_label_.get_y(), tablew_ - editbox_label_.get_w() - padding_ + 1,
+	                   buth_, 2, g_gr->images().get("images/ui_basic/but1.png"));
 
 	editbox_->set_text(parent.egbase().map().get_name());
 	editbox_->changed.connect(boost::bind(&MainMenuSaveMap::edit_box_changed, this));
@@ -131,7 +125,7 @@ void MainMenuSaveMap::clicked_ok() {
 	}
 
 	if (g_fs->is_directory(complete_filename.c_str()) &&
-		 !Widelands::WidelandsMapLoader::is_widelands_map(complete_filename)) {
+	    !Widelands::WidelandsMapLoader::is_widelands_map(complete_filename)) {
 		set_current_directory(complete_filename);
 		fill_table();
 	} else {  //  Ok, save this map
@@ -156,8 +150,10 @@ void MainMenuSaveMap::clicked_make_directory() {
 	MainMenuSaveMapMakeDirectory md(this, _("unnamed"));
 	if (md.run<UI::Panel::Returncodes>() == UI::Panel::Returncodes::kOk) {
 		g_fs->ensure_directory_exists(curdir_);
-		//  create directory
+		//  Create directory.
 		std::string fullname = curdir_ + g_fs->file_separator() + md.get_dirname();
+		// Trim it for preceding/trailing whitespaces in user input
+		boost::trim(fullname);
 		g_fs->make_directory(fullname);
 		fill_table();
 	}
@@ -190,7 +186,8 @@ void MainMenuSaveMap::clicked_item() {
 	if (table_.has_selection()) {
 		const MapData& mapdata = maps_data_[table_.get_selected()];
 		if (mapdata.maptype != MapData::MapType::kDirectory) {
-			editbox_->set_text(FileSystem::fs_filename(maps_data_[table_.get_selected()].filename.c_str()));
+			editbox_->set_text(
+			   FileSystem::fs_filename(maps_data_[table_.get_selected()].filename.c_str()));
 			edit_box_changed();
 		}
 	}
@@ -215,14 +212,16 @@ void MainMenuSaveMap::double_clicked_item() {
  * The editbox was changed. Enable ok button
  */
 void MainMenuSaveMap::edit_box_changed() {
-	ok_.set_enabled(!editbox_->text().empty());
+	// Prevent the user from creating nonsense file names, like e.g. ".." or "...".
+	ok_.set_enabled(LayeredFileSystem::is_legal_filename(editbox_->text()));
 }
 
 void MainMenuSaveMap::set_current_directory(const std::string& filename) {
 	curdir_ = filename;
 	/** TRANSLATORS: The folder that a file will be saved to. */
-	directory_info_.set_text((boost::format(_("Current Directory: %s"))
-	                          % (_("My Maps") + curdir_.substr(basedir_.size()))).str());
+	directory_info_.set_text(
+	   (boost::format(_("Current Directory: %s")) % (_("My Maps") + curdir_.substr(basedir_.size())))
+	      .str());
 }
 
 /**
@@ -236,32 +235,38 @@ bool MainMenuSaveMap::save_map(std::string filename, bool binary) {
 	//  Make sure that the current directory exists and is writeable.
 	g_fs->ensure_directory_exists(curdir_);
 
+	// Trim it for preceding/trailing whitespaces in user input
+	boost::trim(filename);
+
 	//  OK, first check if the extension matches (ignoring case).
 	if (!boost::iends_with(filename, WLMF_SUFFIX))
 		filename += WLMF_SUFFIX;
 
-	//  append directory name
+	//  Append directory name.
 	const std::string complete_filename = curdir_ + g_fs->file_separator() + filename;
 
 	//  Check if file exists. If so, show a warning.
 	if (g_fs->file_exists(complete_filename)) {
-		const std::string s = (boost::format(_("A file with the name ‘%s’ already exists. Overwrite?")) %
-		                 FileSystem::fs_filename(filename.c_str())).str();
-		UI::WLMessageBox mbox
-				(&eia(), _("Error Saving Map!"), s, UI::WLMessageBox::MBoxType::kOkCancel);
-			if (mbox.run<UI::Panel::Returncodes>() == UI::Panel::Returncodes::kBack)
-				return false;
+		const std::string s =
+		   (boost::format(_("A file with the name ‘%s’ already exists. Overwrite?")) %
+		    FileSystem::fs_filename(filename.c_str()))
+		      .str();
+		UI::WLMessageBox mbox(
+		   &eia(), _("Error Saving Map!"), s, UI::WLMessageBox::MBoxType::kOkCancel);
+		if (mbox.run<UI::Panel::Returncodes>() == UI::Panel::Returncodes::kBack)
+			return false;
 	}
 
 	// save to a tmp file/dir first, rename later
 	// (important to keep script files in the script directory)
 	const std::string tmp_name = complete_filename + ".tmp";
 	if (g_fs->file_exists(tmp_name)) {
-		const std::string s = (boost::format(_
-				("A file with the name ‘%s.tmp’ already exists. You have to remove it manually."))
-					% FileSystem::fs_filename(filename.c_str())).str();
-		UI::WLMessageBox mbox
-			(&eia(), _("Error Saving Map!"), s, UI::WLMessageBox::MBoxType::kOk);
+		const std::string s =
+		   (boost::format(
+		       _("A file with the name ‘%s.tmp’ already exists. You have to remove it manually.")) %
+		    FileSystem::fs_filename(filename.c_str()))
+		      .str();
+		UI::WLMessageBox mbox(&eia(), _("Error Saving Map!"), s, UI::WLMessageBox::MBoxType::kOk);
 		mbox.run<UI::Panel::Returncodes>();
 		return false;
 	}
@@ -269,9 +274,9 @@ bool MainMenuSaveMap::save_map(std::string filename, bool binary) {
 	Widelands::EditorGameBase& egbase = eia().egbase();
 	Widelands::Map& map = egbase.map();
 
-	{ // fs scope
-		std::unique_ptr<FileSystem> fs
-			(g_fs->create_sub_file_system(tmp_name, binary ? FileSystem::ZIP : FileSystem::DIR));
+	{  // fs scope
+		std::unique_ptr<FileSystem> fs(
+		   g_fs->create_sub_file_system(tmp_name, binary ? FileSystem::ZIP : FileSystem::DIR));
 
 		// Recompute seafaring tag
 		if (map.allows_seafaring()) {
@@ -302,20 +307,17 @@ bool MainMenuSaveMap::save_map(std::string filename, bool binary) {
 			map.swap_filesystem(fs);
 			// DONT use fs as of here, its garbage now!
 
-		} catch (const std::exception & e) {
-			std::string s =
-				_
-				("Error Saving Map!\nSaved map file may be corrupt!\n\nReason "
-				 "given:\n");
+		} catch (const std::exception& e) {
+			std::string s = _("Error Saving Map!\nSaved map file may be corrupt!\n\nReason "
+			                  "given:\n");
 			s += e.what();
-			UI::WLMessageBox  mbox
-				(&eia(), _("Error Saving Map!"), s, UI::WLMessageBox::MBoxType::kOk);
+			UI::WLMessageBox mbox(&eia(), _("Error Saving Map!"), s, UI::WLMessageBox::MBoxType::kOk);
 			mbox.run<UI::Panel::Returncodes>();
 
 			// cleanup tmp file if it was created
 			g_fs->fs_unlink(tmp_name);
 		}
-	} // end fs scope, dont use it
+	}  // end fs scope, dont use it
 
 	die();
 	return true;

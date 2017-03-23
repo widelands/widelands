@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2016 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -19,6 +19,8 @@
 
 #include "ui_basic/unique_window.h"
 
+#include <boost/bind.hpp>
+
 namespace UI {
 /*
 ==============================================================================
@@ -34,6 +36,10 @@ UniqueWindow IMPLEMENTATION
 void UniqueWindow::Registry::create() {
 	if (!window) {
 		open_window();
+	} else {
+		if (window->is_minimal())
+			window->restore();
+		window->move_to_top();
 	}
 }
 
@@ -57,35 +63,45 @@ void UniqueWindow::Registry::toggle() {
 	}
 }
 
-
-
 /**
  * In order to avoid dangling pointers, we need to kill our contained window
  * here.
 */
-UniqueWindow::Registry::~Registry() {delete window;}
+UniqueWindow::Registry::~Registry() {
+	delete window;
+}
 
+void UniqueWindow::Registry::assign_toggle_button(UI::Button* button) {
+	assert(!on_create);
+	assert(!on_delete);
+	on_create = boost::bind(&UI::Button::set_style, button, UI::Button::Style::kPermpressed);
+	on_delete = boost::bind(&UI::Button::set_style, button, UI::Button::Style::kRaised);
+	if (window) {
+		button->set_style(UI::Button::Style::kPermpressed);
+	}
+}
+
+void UniqueWindow::Registry::unassign_toggle_button() {
+	on_create = 0;
+	on_delete = 0;
+}
 
 /**
  * Register, position according to the registry information.
 */
-UniqueWindow::UniqueWindow
-	(Panel                  * const parent,
-	 const std::string & name,
-	 UniqueWindow::Registry * const reg,
-	 int32_t const w, int32_t const h,
-	 const std::string      & title)
-	:
-	Window         (parent, name, 0, 0, w, h, title.c_str()),
-	registry_     (reg),
-	usedefaultpos_(true)
-{
+UniqueWindow::UniqueWindow(Panel* const parent,
+                           const std::string& name,
+                           UniqueWindow::Registry* const reg,
+                           int32_t const w,
+                           int32_t const h,
+                           const std::string& title)
+   : Window(parent, name, 0, 0, w, h, title.c_str()), registry_(reg), usedefaultpos_(true) {
 	if (registry_) {
 		delete registry_->window;
 
 		registry_->window = this;
 		if (registry_->valid_pos) {
-			set_pos(Point(registry_->x, registry_->y));
+			set_pos(Vector2i(registry_->x, registry_->y));
 			usedefaultpos_ = false;
 		}
 		if (registry_->on_create) {
@@ -94,12 +110,10 @@ UniqueWindow::UniqueWindow
 	}
 }
 
-
 /**
  * Unregister, save latest position.
 */
-UniqueWindow::~UniqueWindow()
-{
+UniqueWindow::~UniqueWindow() {
 	if (registry_) {
 		assert(registry_->window == this);
 
@@ -113,5 +127,4 @@ UniqueWindow::~UniqueWindow()
 		}
 	}
 }
-
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2008, 2013 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -44,9 +44,8 @@ private:
 	WorldType worldtype_;
 
 	void load_s2mf_header(FileRead&);
-	void load_s2mf(Widelands::EditorGameBase &);
-	void postload_fix_conversion(Widelands::EditorGameBase &);
+	void load_s2mf(Widelands::EditorGameBase&);
+	void postload_fix_conversion(Widelands::EditorGameBase&);
 };
-
 
 #endif  // end of include guard: WL_MAP_IO_S2MAP_H

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2015 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -83,6 +83,7 @@ void MainMenuLoadMap::entry_selected() {
 	if (!has_selection) {
 		map_details_.clear();
 	} else {
-		map_details_.update(maps_data_[table_.get_selected()], !cb_dont_localize_mapnames_->get_state());
+		map_details_.update(
+		   maps_data_[table_.get_selected()], !cb_dont_localize_mapnames_->get_state());
 	}
 }

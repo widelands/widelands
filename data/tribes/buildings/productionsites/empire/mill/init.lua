@@ -41,7 +41,7 @@ tribes:new_productionsite_type {
    },
 
    inputs = {
-      wheat = 6
+      { name = "wheat", amount = 6 }
    },
    outputs = {
       "flour"

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2011 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -31,7 +31,7 @@
 #include "ui_basic/window.h"
 
 namespace Widelands {
-	struct UniqueRandomMapInfo;
+struct UniqueRandomMapInfo;
 }
 
 class EditorInteractive;
@@ -45,9 +45,9 @@ template <typename T, typename ID> struct IDButton;
  * things like size, world ....
 */
 struct MainMenuNewRandomMap : public UI::Window {
-	MainMenuNewRandomMap(EditorInteractive &);
+	MainMenuNewRandomMap(EditorInteractive&);
 
-	enum class ButtonId: uint8_t {
+	enum class ButtonId : uint8_t {
 		kNone,
 		kMapSize,
 		kWater,

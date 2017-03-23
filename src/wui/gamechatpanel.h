@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2016 by the Widelands Development Team
+ * Copyright (C) 2008-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -33,19 +33,20 @@ struct ChatProvider;
  * entry field.
  */
 struct GameChatPanel : public UI::Panel {
-	GameChatPanel
-		(UI::Panel    *,
-		 int32_t x, int32_t y, uint32_t w, uint32_t h,
-		 ChatProvider &);
+	GameChatPanel(UI::Panel*, int32_t x, int32_t y, uint32_t w, uint32_t h, ChatProvider&);
 
 	// Signal is called when a message has been sent by the user.
-	boost::signals2::signal<void ()> sent;
+	boost::signals2::signal<void()> sent;
 
 	// Signal is called when the user has aborted entering a message.
-	boost::signals2::signal<void ()> aborted;
+	boost::signals2::signal<void()> aborted;
 
-	const std::string & get_edit_text() const {return editbox.text();}
-	void set_edit_text(const std::string & text) {editbox.set_text(text);}
+	const std::string& get_edit_text() const {
+		return editbox.text();
+	}
+	void set_edit_text(const std::string& text) {
+		editbox.set_text(text);
+	}
 
 	void focus_edit();
 
@@ -54,7 +55,7 @@ private:
 	void key_enter();
 	void key_escape();
 
-	ChatProvider & chat_;
+	ChatProvider& chat_;
 	UI::MultilineTextarea chatbox;
 	UI::EditBox editbox;
 	uint32_t chat_message_counter;

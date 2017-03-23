@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2009 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -25,18 +25,18 @@
 #include <string>
 #include <vector>
 
-#include "ui_fsmenu/base.h"
+#include "ui_basic/box.h"
 #include "ui_basic/button.h"
 #include "ui_basic/checkbox.h"
-#include "ui_basic/listselect.h"
+#include "ui_basic/dropdown.h"
 #include "ui_basic/multilinetextarea.h"
 #include "ui_basic/spinbox.h"
-#include "ui_basic/textarea.h"
 #include "ui_basic/tabpanel.h"
+#include "ui_basic/textarea.h"
+#include "ui_fsmenu/base.h"
 
 class FullscreenMenuOptions;
 class Section;
-
 
 class OptionsCtrl {
 public:
@@ -61,8 +61,8 @@ public:
 		bool message_sound;
 
 		// Saving options
-		int32_t autosave; // autosave interval in minutes
-		int32_t rolling_autosave; // number of file to use for rolling autosave
+		int32_t autosave;          // autosave interval in minutes
+		int32_t rolling_autosave;  // number of file to use for rolling autosave
 		bool zip;
 		bool write_syncstreams;
 
@@ -79,12 +79,13 @@ public:
 		uint32_t active_tab;
 	};
 
-	OptionsCtrl(Section &);
+	OptionsCtrl(Section&);
 	void handle_menu();
 	OptionsCtrl::OptionsStruct options_struct(uint32_t active_tab);
 	void save_options();
+
 private:
-	Section & opt_section_;
+	Section& opt_section_;
 	std::unique_ptr<FullscreenMenuOptions> opt_dialog_;
 };
 
@@ -98,22 +99,25 @@ public:
 	OptionsCtrl::OptionsStruct get_values();
 
 private:
+	void layout() override;
+
 	// Fills the language selection list
 	void add_languages_to_list(const std::string& current_locale);
 
 	// Saves the options and reloads the active tab
 	void clicked_apply();
 
-	uint32_t const              butw_;
-	uint32_t const              buth_;
-	uint32_t const              hmargin_;
-	uint32_t const              padding_;
-	uint32_t const              tab_panel_width_;
-	uint32_t const              column_width_;
-	uint32_t const              tab_panel_y_;
+	const uint32_t padding_;
+	uint32_t butw_;
+	uint32_t buth_;
+	uint32_t hmargin_;
+	uint32_t tab_panel_width_;
+	uint32_t column_width_;
+	uint32_t tab_panel_y_;
 
-	UI::Textarea                title_;
-	UI::Button                  cancel_, apply_, ok_;
+	UI::Textarea title_;
+	UI::Box button_box_;
+	UI::Button cancel_, apply_, ok_;
 
 	// UI elements
 	UI::TabPanel tabs_;
@@ -122,43 +126,38 @@ private:
 	UI::Box box_sound_;
 	UI::Box box_saving_;
 	UI::Box box_game_;
-	UI::Box box_language_;
 
 	// Interface options
-	UI::Textarea                label_resolution_;
-	UI::Listselect<void *>      resolution_list_;
-	UI::Checkbox                fullscreen_;
-	UI::Checkbox                inputgrab_;
-	UI::SpinBox                 sb_maxfps_;
+	UI::Dropdown<std::string> language_dropdown_;
+	UI::Dropdown<uintptr_t> resolution_dropdown_;
+	UI::Checkbox fullscreen_;
+	UI::Checkbox inputgrab_;
+	UI::SpinBox sb_maxfps_;
 
 	// Windows options
-	UI::Checkbox                snap_win_overlap_only_;
-	UI::Checkbox                dock_windows_to_edges_;
-	UI::SpinBox                 sb_dis_panel_;
-	UI::SpinBox                 sb_dis_border_;
+	UI::Checkbox snap_win_overlap_only_;
+	UI::Checkbox dock_windows_to_edges_;
+	UI::SpinBox sb_dis_panel_;
+	UI::SpinBox sb_dis_border_;
 
 	// Sound options
-	UI::Checkbox                music_;
-	UI::Checkbox                fx_;
-	UI::Checkbox                message_sound_;
+	UI::Checkbox music_;
+	UI::Checkbox fx_;
+	UI::Checkbox message_sound_;
 
 	// Saving options
-	UI::SpinBox                 sb_autosave_;
-	UI::SpinBox                 sb_rolling_autosave_;
-	UI::Checkbox                zip_;
-	UI::Checkbox                write_syncstreams_;
+	UI::SpinBox sb_autosave_;
+	UI::SpinBox sb_rolling_autosave_;
+	UI::Checkbox zip_;
+	UI::Checkbox write_syncstreams_;
 
 	// Game options
-	UI::Checkbox                auto_roadbuild_mode_;
-	UI::Checkbox                show_workarea_preview_;
-	UI::Checkbox                transparent_chat_;
-	UI::Checkbox                single_watchwin_;
+	UI::Checkbox auto_roadbuild_mode_;
+	UI::Checkbox show_workarea_preview_;
+	UI::Checkbox transparent_chat_;
+	UI::Checkbox single_watchwin_;
 
-	// Language options
-	UI::Textarea                label_language_;
-	UI::Listselect<std::string> language_list_;
-
-	OptionsCtrl::OptionsStruct  os_;
+	OptionsCtrl::OptionsStruct os_;
 
 	class ScreenResolution {
 	public:

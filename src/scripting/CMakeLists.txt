@@ -109,6 +109,7 @@ wl_library(scripting_logic
     io_filesystem
     logic
     logic_campaign_visibility
+    logic_constants
     logic_game_controller
     logic_widelands_geometry
     map_io

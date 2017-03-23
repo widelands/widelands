@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2011 by the Widelands Development Team
+ * Copyright (C) 2011-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -27,12 +27,14 @@ namespace Widelands {
 class Player;
 
 struct FindBobAttribute : public FindBob {
-	FindBobAttribute(uint32_t const init_attrib) : attrib(init_attrib) {}
+	FindBobAttribute(uint32_t const init_attrib) : attrib(init_attrib) {
+	}
 
-	bool accept(Bob *) const override;
+	bool accept(Bob*) const override;
 
 	uint32_t attrib;
-	virtual ~FindBobAttribute() {}  // make gcc shut up
+	virtual ~FindBobAttribute() {
+	}  // make gcc shut up
 };
 
 /**
@@ -40,22 +42,22 @@ struct FindBobAttribute : public FindBob {
  * if player is 0).
  */
 struct FindBobEnemySoldier : public FindBob {
-	FindBobEnemySoldier(Player * init_player) : player(init_player) {}
+	FindBobEnemySoldier(Player* init_player) : player(init_player) {
+	}
 
-	bool accept(Bob *) const override;
+	bool accept(Bob*) const override;
 
-	Player * player;
+	Player* player;
 };
 
 struct FindBobShip : FindBob {
-	bool accept(Bob * bob) const override;
+	bool accept(Bob* bob) const override;
 };
 
 struct FindBobCritter : FindBob {
-	bool accept(Bob * bob) const override;
+	bool accept(Bob* bob) const override;
 };
 
-
-} // namespace Widelands
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_LOGIC_FINDBOB_H

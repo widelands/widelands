@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2006-2009 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -32,15 +32,14 @@ using namespace std;
 vector<string> split_string(const string& s, const char* const separators) {
 	vector<string> result;
 	for (string::size_type pos = 0, endpos;
-	     (pos = s.find_first_not_of(separators, pos)) != string::npos;
-	     pos = endpos) {
+	     (pos = s.find_first_not_of(separators, pos)) != string::npos; pos = endpos) {
 		endpos = s.find_first_of(separators, pos);
 		result.push_back(s.substr(pos, endpos - pos));
 	}
 	return result;
 }
 
-char* next_word(char* & p, bool& reached_end, char const terminator) {
+char* next_word(char*& p, bool& reached_end, char const terminator) {
 	assert(terminator);
 	char* const result = p;
 	for (; *p != terminator; ++p)

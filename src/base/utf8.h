@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2011 by the Widelands Development Team
+ * Copyright (C) 2011-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -29,16 +29,14 @@ struct Utf8 {
 	 * a multi-byte UTF8 character. This function returns false for
 	 * the first byte of a multi-byte UTF8 character.
 	 */
-	static bool is_utf8_extended(char ch)
-	{
+	static bool is_utf8_extended(char ch) {
 		return (ch & 0xc0) == 0x80;
 	}
 
 	/**
 	 * Convert a unicode character into a multi-byte utf8 string.
 	 */
-	static std::string unicode_to_utf8(uint16_t unicode)
-	{
+	static std::string unicode_to_utf8(uint16_t unicode) {
 		unsigned char buf[4];
 
 		if (unicode < 0x80) {
@@ -55,7 +53,7 @@ struct Utf8 {
 			buf[3] = 0;
 		}
 
-		return reinterpret_cast<char *>(buf);
+		return reinterpret_cast<char*>(buf);
 	}
 
 	/**
@@ -63,8 +61,7 @@ struct Utf8 {
 	 * \p pos will point to the beginning of the next unicode character.
 	 * Return 0 on decoding errors.
 	 */
-	static uint16_t utf8_to_unicode(const std::string & in, std::string::size_type & pos)
-	{
+	static uint16_t utf8_to_unicode(const std::string& in, std::string::size_type& pos) {
 		assert(pos < in.size());
 		if (in[pos] & 0xc0) {
 			if (is_utf8_extended(in[pos])) {

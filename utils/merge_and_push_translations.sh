@@ -35,7 +35,7 @@ set -x
 # Pull translations from Transifex into local trunk and add new translation files
 bzr pull
 tx pull -a
-bzr add po/*/*.po data/i18n/locales/*.json || true
+bzr add po/*/*.po data/i18n/locales/*.json debian/translations/*.json || true
 
 # Update authors file
 utils/update_authors.py
@@ -56,6 +56,9 @@ else
   echo "Failed updating appdata";
   exit 1;
 fi
+
+# Fix formatting is being run by bunnybot
+# utils/fix_formatting.py
 
 # Fix line breaks.
 # TODO(GunChleoc): We hope that Transifex will fix these already.

@@ -3,6 +3,7 @@ Widelands Scripting Reference
 
 .. toctree::
    :maxdepth: 3
- 
+
    core
-   auxiliary
+   map_objects
+   autogen_toc_auxiliary

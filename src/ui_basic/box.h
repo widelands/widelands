@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2003-2016 by the Widelands Development Team
+ * Copyright (C) 2003-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -31,36 +31,41 @@ namespace UI {
 
 /**
  * A layouting panel that holds a number of child panels.
+ *
  * The Panels you add to the Box must be children of the Box.
  * The Box automatically resizes itself and positions the added children.
 */
 struct Box : public Panel {
+	// Determines whether the box' contents are layed out horizontally or vertically.
 	enum {
 		Horizontal = 0,
 		Vertical = 1,
 	};
 
-	Box
-		(Panel * parent,
-		 int32_t x, int32_t y,
-		 uint32_t orientation,
-		 int32_t max_x = 0, int32_t max_y = 0,
-		 uint32_t inner_spacing = 0);
+	Box(Panel* parent,
+	    int32_t x,
+	    int32_t y,
+	    uint32_t orientation,
+	    int32_t max_x = 0,
+	    int32_t max_y = 0,
+	    uint32_t inner_spacing = 0);
 
 	void set_scrolling(bool scroll);
 
-	int32_t get_nritems() const {return items_.size();}
+	int32_t get_nritems() const {
+		return items_.size();
+	}
 
-	void add
-		(Panel * panel,
-		UI::Align align,
-		bool fullsize = false,
-		bool fillspace = false);
+	enum class Resizing { kAlign, kFullSize, kFillSpace, kExpandBoth };
+	void add(Panel* panel, Resizing resizing = Resizing::kAlign, UI::Align align = UI::Align::kLeft);
 	void add_space(uint32_t space);
 	void add_inf_space();
-	bool is_snap_target() const override {return true;}
+	bool is_snap_target() const override {
+		return true;
+	}
 
 	void set_min_desired_breadth(uint32_t min);
+	void set_inner_spacing(uint32_t size);
 
 protected:
 	void layout() override;
@@ -87,7 +92,7 @@ private:
 
 		union {
 			struct {
-				Panel * panel;
+				Panel* panel;
 				UI::Align align;
 				bool fullsize;
 			} panel;
@@ -106,7 +111,6 @@ private:
 
 	std::vector<Item> items_;
 };
-
 }
 
 #endif  // end of include guard: WL_UI_BASIC_BOX_H

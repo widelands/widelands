@@ -3,6 +3,16 @@
 --  =======================================================
 
 -- RST
+-- .. _lua_tribes_global_helptexts.lua:
+--
+-- global_helptexts.lua
+-- --------------------
+--
+-- This file contains some default building helptexts that can be used when a more
+-- specific help text hasn't been defined yet. It also contains some global time naming
+-- functions for uniform translations.
+
+-- RST
 -- .. function:: no_lore_text_yet()
 --
 --    Returns a localized string for when no lore helptext has been defined yet.

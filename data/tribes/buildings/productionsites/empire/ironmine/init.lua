@@ -46,8 +46,8 @@ tribes:new_productionsite_type {
    },
 
    inputs = {
-      ration = 6,
-      beer = 6
+      { name = "ration", amount = 6 },
+      { name = "beer", amount = 6 }
    },
    outputs = {
       "iron_ore"

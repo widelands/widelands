@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2012 by the Widelands Development Team
+ * Copyright (C) 2006-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -31,8 +31,9 @@ namespace RT {
 
 struct EndOfTextImpl : public EndOfText {
 	EndOfTextImpl(size_t pos, string text)
-		: EndOfText((format("Unexpected End of Text, starting at %1%. Text is: '%2%'") % pos % text).str())
-	{}
+	   : EndOfText(
+	        (format("Unexpected End of Text, starting at %1%. Text is: '%2%'") % pos % text).str()) {
+	}
 };
 
 void TextStream::consume(size_t cnt) {
@@ -101,7 +102,8 @@ string TextStream::till_any(string chars) {
 				break;
 			}
 		}
-		if (found) break;
+		if (found)
+			break;
 
 		// Get rid of control characters
 		// http://en.cppreference.com/w/cpp/language/escape
@@ -136,7 +138,7 @@ string TextStream::till_any_or_end(string chars) {
 	string rv;
 	try {
 		rv = till_any(chars);
-	} catch (EndOfTextImpl &) {
+	} catch (EndOfTextImpl&) {
 		rv = text_.substr(pos_, end_ - pos_);
 		consume(end_ + 1 - pos_);
 	}
@@ -163,6 +165,4 @@ string TextStream::parse_string() {
 string TextStream::remaining_text() {
 	return text_.substr(pos_, end_ - pos_);
 }
-
 }
-

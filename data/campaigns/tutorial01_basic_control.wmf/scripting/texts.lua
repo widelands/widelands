@@ -166,7 +166,7 @@ construction_site_window = {
 }
 
 lumberjack_message_07 = {
-   title = _"Lumberjack is Done",
+   title = _"The Lumberjack’s Hut is Done",
    position = "topright",
    body = rt(
       p(_[[Excellent. The lumberjack’s hut is done. A lumberjack will now move in and start chopping down trees, so our log income is secured for now. Now on to the granite.]])
@@ -182,7 +182,7 @@ inform_about_rocks = {
       p(_[[Granite can be mined in granite mines, but the easier way is to build a quarry next to some rocks lying around. As it happens, there is a pile of them just to the west (left) of your headquarters. I will teach you now how to move your view over there.]]) ..
       paragraphdivider() ..
       listitem_arrow(_[[There are three ways to move your view. The first one is using the cursor keys on your keyboard. Go ahead and try this out.]]) ..
-      listitem_bullet(_[[Click the ‘OK’ button and then move the view using the cursor keys]])
+      listitem_bullet(_[[Click the ‘OK’ button and then move the view using the cursor keys.]])
    ),
    h = 350,
    obj_name = "move_view_with_cursor_keys",
@@ -398,13 +398,14 @@ teaching_about_messages = {
    heading = _"Introducing Messages",
    body = rt(
       p(_[[Hi, it’s me again! This time, I have sent you a message. Messages are sent to you by Widelands to inform you about important events: empty mines, attacks on your tribe, won or lost military buildings, resources found…]]) ..
-      p(_[[The message window can be toggled by the button on the very right at the bottom of the screen. This button will also change appearance whenever new messages are available, but there is also a bell sound played whenever you receive a new message.]]) ..
+      p(_[[The message window can be toggled by the second button from the right at the bottom of the screen. This button will also change appearance whenever new messages are available, but there is also a bell sound played whenever you receive a new message.]]) ..
       p(_[[You have two messages at the moment. This one, which you are currently reading, and the one that informed you that a new headquarters was added to your economy. Let’s learn how to archive messages: first, select the message that you wish to archive by clicking on it in the list. Then, click the]])
    ) ..
    rt("image=images/wui/messages/message_archive.png", p(_[[‘Archive selected message’ button to move it into your archive.]])) ..
    rt(
-      p(_[[Once you have deleted a message, another message will be selected automatically from the list.]]) ..
+      p(_[[Once you have archived a message, another message will be selected automatically from the list.]]) ..
       paragraphdivider() ..
+      listitem_arrow(_[[You can also hold down the Ctrl or Shift key to select multiple messages, or press Ctrl + A to select them all.]]) ..
       listitem_bullet(_[[Archive all messages that you currently have in your inbox, including this one.]])
    ),
    obj_name = "archive_all_messages",
@@ -414,7 +415,8 @@ teaching_about_messages = {
       p(_[[The message window is central to fully controlling your tribe’s fortune. However, you will get a lot of messages in a real game. To keep your head straight, you should try to keep the inbox empty.]]) ..
       paragraphdivider() ..
       listitem_bullet(_[[Archive all your messages in your inbox now.]]) ..
-      listitem_arrow(_[[To do so, open the message window by pressing ‘n’ or clicking the rightmost button at the very bottom of the screen. The newest message will be marked for you automatically. Keep clicking the ‘Archive selected message’ button until all messages have been archived and the list is empty.]])
+      listitem_arrow(_[[To do so, open the message window by pressing ‘n’ or clicking the second button from the right at the very bottom of the screen. The newest message will be marked for you automatically. Keep clicking the ‘Archive selected message’ button until all messages have been archived and the list is empty.]]) ..
+      listitem_arrow(_[[You can also hold down the Ctrl or Shift key to select multiple messages, or press Ctrl + A to select them all.]])
    )
 }
 
@@ -461,7 +463,7 @@ destroy_quarries_message = {
    ),
    h = 300,
    obj_name = "destroy_quarries",
-   obj_title = "Destroy the two quarries",
+   obj_title = _"Destroy the two quarries",
    obj_body = rt(
       p(_[[Since our quarries are useless now, you can destroy them and reuse the space later on.]]) ..
       paragraphdivider() ..

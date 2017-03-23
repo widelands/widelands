@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2011 by the Widelands Development Team
+ * Copyright (C) 2011-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -29,14 +29,13 @@ namespace Widelands {
  * to the given destination @p dest, which must have been discovered
  * in the A-star process already.
  */
-void MapAStarBase::pathto(Coords dest, Path & path) const
-{
+void MapAStarBase::pathto(Coords dest, Path& path) const {
 	path.end_ = dest;
 	path.path_.clear();
 
 	Coords cur = dest;
 	for (;;) {
-		const Pathfield & pf(pathfield(cur));
+		const Pathfield& pf(pathfield(cur));
 
 		assert(pf.cycle == pathfields->cycle);
 
@@ -51,4 +50,4 @@ void MapAStarBase::pathto(Coords dest, Path & path) const
 	path.start_ = cur;
 }
 
-} // namespace Widelands
+}  // namespace Widelands

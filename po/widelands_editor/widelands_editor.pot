@@ -1,12 +1,12 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2016 Widelands Development Team
+# Copyright (C) 2005-2017 Widelands Development Team
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-06-29 06:36+0000\n"
+"POT-Creation-Date: 2017-03-17 10:45+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -85,7 +85,7 @@ msgstr ""
 #. TRANSLATORS: This is an access key combination. Localize, but do not change the key.
 #: ../../data/scripting/editor/editor_controls.lua:42
 msgctxt "hotkey"
-msgid "1-0"
+msgid "0-9"
 msgstr ""
 
 #: ../../data/scripting/editor/editor_controls.lua:42
@@ -139,11 +139,16 @@ msgstr ""
 msgid "Introduction"
 msgstr ""
 
-#: ../../data/scripting/editor/editor_help.lua:74
-msgid "Terrains"
+#: ../../data/scripting/editor/editor_help.lua:71
+#: ../../data/scripting/editor/tips.lua:16
+msgid "Tips"
 msgstr ""
 
 #: ../../data/scripting/editor/editor_help.lua:81
+msgid "Terrains"
+msgstr ""
+
+#: ../../data/scripting/editor/editor_help.lua:88
 msgid "Trees"
 msgstr ""
 
@@ -197,11 +202,11 @@ msgid "No trees will grow here."
 msgstr ""
 
 #. TRANSLATORS: A header in the editor help. Terrains preferred by a type of tree.
-#: ../../data/scripting/editor/tree_help.lua:17
+#: ../../data/scripting/editor/tree_help.lua:18
 msgid "Preferred terrains"
 msgstr ""
 
 #. TRANSLATORS: Terrain name (Climate)
-#: ../../data/scripting/editor/tree_help.lua:38
+#: ../../data/scripting/editor/tree_help.lua:39
 msgid "%1% (%2%)"
 msgstr ""

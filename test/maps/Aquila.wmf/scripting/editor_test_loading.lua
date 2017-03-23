@@ -1,0 +1,2 @@
+-- All code in editor_test.lua. This file is just here so that the test runner
+-- picks up this map as a test case.

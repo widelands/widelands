@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2013 by the Widelands Development Team
+ * Copyright (C) 2006-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -24,9 +24,7 @@
 
 #include "base/log.h"
 
-ScopedTimer::ScopedTimer(const std::string& message)
-		: message_(message)
-{
+ScopedTimer::ScopedTimer(const std::string& message) : message_(message) {
 	startime_ = SDL_GetTicks();
 	lasttime_ = startime_;
 }

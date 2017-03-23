@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007-2009 by the Widelands Development Team
+ * Copyright (C) 2007-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -27,13 +27,12 @@
 
 struct CampaignVisibilitySave {
 	std::string get_path();
-	void set_campaign_visibility(const std::string &, bool);
-	void set_map_visibility     (const std::string &, bool);
+	void set_campaign_visibility(const std::string&, bool);
+	void set_map_visibility(const std::string&, bool);
 
 private:
-	void make_campvis  (const std::string &);
-	void update_campvis(const std::string &);
+	void make_campvis(const std::string&);
+	void update_campvis(const std::string&);
 };
-
 
 #endif  // end of include guard: WL_LOGIC_CAMPAIGN_VISIBILITY_H

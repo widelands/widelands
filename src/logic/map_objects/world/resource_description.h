@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2015 by the Widelands Development Team
+ * Copyright (C) 2006-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -56,7 +56,9 @@ public:
 	const std::string& editor_image(uint32_t amount) const;
 
 	/// Returns the path to the image that should be used in menus to represent this resource
-	const std::string& representative_image() const {return representative_image_;}
+	const std::string& representative_image() const {
+		return representative_image_;
+	}
 
 private:
 	const std::string name_;

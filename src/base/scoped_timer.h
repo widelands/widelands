@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2013 by the Widelands Development Team
+ * Copyright (C) 2006-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,8 +20,8 @@
 #ifndef WL_BASE_SCOPED_TIMER_H
 #define WL_BASE_SCOPED_TIMER_H
 
-#include <string>
 #include <stdint.h>
+#include <string>
 
 #include "base/macros.h"
 

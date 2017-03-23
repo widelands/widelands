@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2008, 2012 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -24,24 +24,25 @@
 
 /// Deletes immovables from the map.
 struct EditorDeleteImmovableTool : public EditorTool {
-	EditorDeleteImmovableTool() : EditorTool(*this, *this) {}
+	EditorDeleteImmovableTool() : EditorTool(*this, *this) {
+	}
 
 	int32_t handle_click_impl(const Widelands::World& world,
-	                          Widelands::NodeAndTriangle<> center,
+	                          const Widelands::NodeAndTriangle<>& center,
 	                          EditorInteractive& parent,
 	                          EditorActionArgs* args,
-							  Widelands::Map* map) override;
+	                          Widelands::Map* map) override;
 
 	int32_t handle_undo_impl(const Widelands::World& world,
-	                         Widelands::NodeAndTriangle<> center,
+	                         const Widelands::NodeAndTriangle<>& center,
 	                         EditorInteractive& parent,
 	                         EditorActionArgs* args,
-							 Widelands::Map* map) override;
+	                         Widelands::Map* map) override;
 
-	EditorActionArgs format_args_impl(EditorInteractive & parent) override;
+	EditorActionArgs format_args_impl(EditorInteractive& parent) override;
 
-	char const * get_sel_impl() const override {
-		return "images/wui/editor/fsel_editor_delete.png";
+	const Image* get_sel_impl() const override {
+		return g_gr->images().get("images/wui/editor/fsel_editor_delete.png");
 	}
 };
 

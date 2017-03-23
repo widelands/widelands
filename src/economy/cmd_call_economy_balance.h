@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004, 2006-2009 by the Widelands Development Team
+ * Copyright (C) 2004-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -29,24 +29,25 @@ class Economy;
 class Game;
 class MapObjectLoader;
 
-
 struct CmdCallEconomyBalance : public GameLogicCommand {
-	CmdCallEconomyBalance () : GameLogicCommand(0), timerid_(0) {} ///< for load and save
+	CmdCallEconomyBalance() : GameLogicCommand(0), timerid_(0) {
+	}  ///< for load and save
 
-	CmdCallEconomyBalance (uint32_t starttime, Economy *, uint32_t timerid);
+	CmdCallEconomyBalance(uint32_t starttime, Economy*, uint32_t timerid);
 
-	void execute (Game &) override;
+	void execute(Game&) override;
 
-	QueueCommandTypes id() const override {return QueueCommandTypes::kCallEconomyBalance;}
+	QueueCommandTypes id() const override {
+		return QueueCommandTypes::kCallEconomyBalance;
+	}
 
-	void write(FileWrite &, EditorGameBase &, MapObjectSaver  &) override;
-	void read (FileRead  &, EditorGameBase &, MapObjectLoader &) override;
+	void write(FileWrite&, EditorGameBase&, MapObjectSaver&) override;
+	void read(FileRead&, EditorGameBase&, MapObjectLoader&) override;
 
 private:
 	OPtr<Flag> flag_;
 	uint32_t timerid_;
 };
-
 }
 
 #endif  // end of include guard: WL_ECONOMY_CMD_CALL_ECONOMY_BALANCE_H

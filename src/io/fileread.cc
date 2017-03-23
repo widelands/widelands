@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2015 by the Widelands Development Team
+ * Copyright (C) 2006-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -19,7 +19,8 @@
 
 #include "io/fileread.h"
 
-FileRead::FileRead() : data_(nullptr), length_(0) {}
+FileRead::FileRead() : data_(nullptr), length_(0) {
+}
 
 FileRead::~FileRead() {
 	if (data_) {
@@ -36,8 +37,7 @@ void FileRead::open(FileSystem& fs, const std::string& filename) {
 bool FileRead::try_open(FileSystem& fs, const std::string& filename) {
 	try {
 		open(fs, filename);
-	}
-	catch (const std::exception&) {
+	} catch (const std::exception&) {
 		return false;
 	}
 	return true;
@@ -57,7 +57,7 @@ bool FileRead::end_of_file() const {
 	return length_ <= filepos_;
 }
 
-void FileRead::set_file_pos(Pos const pos) {
+void FileRead::set_file_pos(const Pos& pos) {
 	assert(data_);
 	if (pos >= length_)
 		throw FileBoundaryExceeded();
@@ -77,7 +77,7 @@ size_t FileRead::data(void* dst, size_t bufsize) {
 	return read;
 }
 
-char* FileRead::data(uint32_t const bytes, const Pos pos) {
+char* FileRead::data(uint32_t const bytes, const Pos& pos) {
 	assert(data_);
 	Pos i = pos;
 	if (pos.is_null()) {
@@ -89,16 +89,16 @@ char* FileRead::data(uint32_t const bytes, const Pos pos) {
 	return data_ + i;
 }
 
-char* FileRead::c_string(Pos const pos) {
+char* FileRead::c_string(const Pos& pos) {
 	assert(data_);
 
 	Pos i = pos.is_null() ? filepos_ : pos;
 	if (i >= length_)
 		throw FileBoundaryExceeded();
 	char* const result = data_ + i;
-	for (char* p = result; *p; ++p, ++i) {
+	for (char *p = result; *p; ++p, ++i) {
 	}
-	++i;                   //  beyond the null
+	++i;                    //  beyond the null
 	if (i > (length_ + 1))  // allow EOF as end marker for string
 		throw FileBoundaryExceeded();
 	if (pos.is_null())

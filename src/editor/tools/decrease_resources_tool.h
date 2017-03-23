@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -24,31 +24,36 @@
 
 ///  Decreases the resources of a node by a value.
 struct EditorDecreaseResourcesTool : public EditorTool {
-	EditorDecreaseResourcesTool()
-		: EditorTool(*this, *this), cur_res_(0), change_by_(1)
-	{}
-
-	int32_t handle_click_impl(const Widelands::World& world,
-	                          Widelands::NodeAndTriangle<> center,
-	                          EditorInteractive& parent,
-	                          EditorActionArgs* args,
-							  Widelands::Map* map) override;
-
-	int32_t handle_undo_impl(const Widelands::World& world,
-	                         Widelands::NodeAndTriangle<> center,
-	                         EditorInteractive& parent,
-	                         EditorActionArgs* args,
-							 Widelands::Map* map) override;
-
-	EditorActionArgs format_args_impl(EditorInteractive & parent) override;
-
-	char const * get_sel_impl() const override {
-		return "images/wui/editor/fsel_editor_decrease_resources.png";
+	EditorDecreaseResourcesTool() : EditorTool(*this, *this), cur_res_(0), change_by_(1) {
 	}
 
-	int32_t get_change_by() const        {return change_by_;}
-	void set_change_by(const int32_t n)  {change_by_ = n;}
-	Widelands::DescriptionIndex get_cur_res() const {return cur_res_;}
+	int32_t handle_click_impl(const Widelands::World& world,
+	                          const Widelands::NodeAndTriangle<>& center,
+	                          EditorInteractive& parent,
+	                          EditorActionArgs* args,
+	                          Widelands::Map* map) override;
+
+	int32_t handle_undo_impl(const Widelands::World& world,
+	                         const Widelands::NodeAndTriangle<>& center,
+	                         EditorInteractive& parent,
+	                         EditorActionArgs* args,
+	                         Widelands::Map* map) override;
+
+	EditorActionArgs format_args_impl(EditorInteractive& parent) override;
+
+	const Image* get_sel_impl() const override {
+		return g_gr->images().get("images/wui/editor/fsel_editor_decrease_resources.png");
+	}
+
+	int32_t get_change_by() const {
+		return change_by_;
+	}
+	void set_change_by(const int32_t n) {
+		change_by_ = n;
+	}
+	Widelands::DescriptionIndex get_cur_res() const {
+		return cur_res_;
+	}
 	void set_cur_res(Widelands::DescriptionIndex const res) {
 		cur_res_ = res;
 	}

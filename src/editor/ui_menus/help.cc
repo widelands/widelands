@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2015-2016 by the Widelands Development Team
+ * Copyright (C) 2015-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -19,7 +19,6 @@
 
 #include "editor/ui_menus/help.h"
 
-
 #include <memory>
 
 #include <boost/format.hpp>
@@ -32,19 +31,17 @@
 #include "ui_basic/messagebox.h"
 
 EditorHelp::EditorHelp(EditorInteractive& parent,
-							  UI::UniqueWindow::Registry& registry,
-							  LuaInterface* const lua)
-	: EncyclopediaWindow(parent, registry, lua)
-{
+                       UI::UniqueWindow::Registry& registry,
+                       LuaInterface* const lua)
+   : EncyclopediaWindow(parent, registry, lua) {
 	try {
 		init(parent, lua_->run_script("scripting/editor/editor_help.lua"));
 	} catch (LuaError& err) {
 		log("Error loading script for editor help:\n%s\n", err.what());
 		UI::WLMessageBox wmb(
-					&parent,
-					_("Error!"),
-					(boost::format("Error loading script for editor help:\n%s") % err.what()).str(),
-					UI::WLMessageBox::MBoxType::kOk);
+		   &parent, _("Error!"),
+		   (boost::format("Error loading script for editor help:\n%s") % err.what()).str(),
+		   UI::WLMessageBox::MBoxType::kOk);
 		wmb.run<UI::Panel::Returncodes>();
 	}
 }

@@ -2,14 +2,15 @@
 # Copyright (C) 2005-2016 Widelands Development Team
 # 
 # Translators:
-# Lyubomir Vasilev, 2015
+# Любомир Василев, 2015
+# Любомир Василев, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-03-02 08:54+0000\n"
-"PO-Revision-Date: 2016-03-02 09:02+0000\n"
-"Last-Translator: Lyubomir Vasilev\n"
+"POT-Creation-Date: 2016-11-30 12:41+0000\n"
+"PO-Revision-Date: 2016-11-30 14:30+0000\n"
+"Last-Translator: Любомир Василев\n"
 "Language-Team: Bulgarian (http://www.transifex.com/widelands/widelands/language/bg/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -46,7 +47,7 @@ msgid ""
 "Here in the northern part, you only have a goldmine and a warehouse. While "
 "the miners are supplied well with food, there is no way to transport the "
 "gold ore to our smelting works in the southern part."
-msgstr "Тук, в северната част, имате само златна мина и склад. Въпреки, че миньорите са снабдени добре с храна, няма начин за превозване на златната руда до нашата топилна в южната част"
+msgstr "Тук, в северната част, имате само златна мина и склад. Въпреки, че миньорите са снабдени добре с храна, няма начин за превозване на златната руда до нашата топилна в южната част."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:35
 msgid ""
@@ -78,10 +79,10 @@ msgstr "За всичко, което правите в морето, Ви тр�
 msgid ""
 "Additionally, ports offer the possibility of transporting wares via ships. "
 "When you click on the port you already have, you will notice two additional "
-"tabs: wares and workers in the dock. They are waiting for a ship to "
-"transport them to another port. Currently, there are none because we have "
-"not yet built a second port. So let’s change this!"
-msgstr "Освен това, пристанищата предлагат възможността да превозвате стоки чрез кораби. Когато щракнете върху пристанището, което вече имате, ще видите два нови раздела: стоки и работници в пристанището. Те чакат кораб, който да ги превози до друго пристанище. В момента няма такива, защото все още не сме построили второ пристанище. Да го направим!"
+"tabs: ‘Wares waiting to be shipped’ and ‘workers waiting to embark.’ They "
+"are waiting for a ship to transport them to another port. Currently, there "
+"are none because we have not yet built a second port. So let’s change this!"
+msgstr "Освен това, пристанищата предлагат възможността да превозвате стоки чрез кораби. Когато щракнете върху пристанището, което вече имате, ще видите два нови раздела: „Стоки, чакащи да бъдат доставени“ и „Работници, чакащи да се качат на кораб“. Те чакат кораб, който да ги превози до друго пристанище. В момента няма такива, защото все още не сме построили второ пристанище. Да го направим!"
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:55
 msgid "Building ports"
@@ -106,7 +107,7 @@ msgid ""
 "Port spaces are set by the map designer, so a map will either contain them "
 "or not. They might, however, be hidden under trees or be blocked by "
 "surrounding buildings."
-msgstr "Местата за пристанища се задават от създателя на картата, така че една карта може да ги има или не. Те може, обаче, да са скрити под дървета или пътят до тях да е препречен от други сгради"
+msgstr "Местата за пристанища се задават от създателя на картата, така че една карта може да ги има или не. Те може, обаче, да са скрити под дървета или пътят до тях да е препречен от други сгради."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:63
 msgid ""
@@ -362,7 +363,7 @@ msgstr "Основано е селище"
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:174
 msgid "Navigate your ship to an island that could contain iron ore."
-msgstr "Насочете кораба си към остров, на който може да има желязна руда"
+msgstr "Насочете кораба си към остров, на който може да има желязна руда."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:175
 msgid ""
@@ -417,7 +418,7 @@ msgstr "На тази карта няма врагове, от които да �
 msgid "“%s”"
 msgstr "„%s“"
 
-#: ../../data/scripting/format_scenario.lua:146
+#: ../../data/scripting/format_scenario.lua:96
 msgid "New Objective"
 msgid_plural "New Objectives"
 msgstr[0] "Нова задача"

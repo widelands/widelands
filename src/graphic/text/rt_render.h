@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2012 by the Widelands Development Team
+ * Copyright (C) 2006-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -41,10 +41,15 @@ class Parser;
 class RenderNode;
 
 struct RendererStyle {
-	RendererStyle(const std::string& font_face_, uint8_t font_size_,
-						  uint16_t remaining_width_, uint16_t overall_width_) :
-		font_face(font_face_), font_size(font_size_),
-		remaining_width(remaining_width_), overall_width(overall_width_) {}
+	RendererStyle(const std::string& font_face_,
+	              uint8_t font_size_,
+	              uint16_t remaining_width_,
+	              uint16_t overall_width_)
+	   : font_face(font_face_),
+	     font_size(font_size_),
+	     remaining_width(remaining_width_),
+	     overall_width(overall_width_) {
+	}
 
 	std::string font_face;
 	uint8_t font_size;
@@ -52,14 +57,14 @@ struct RendererStyle {
 	uint16_t overall_width;
 };
 
-
 /**
  * A map that maps pixels to a string. The string are the references which can be used
  * for hyperlink like constructions.
  */
 class IRefMap {
 public:
-	virtual ~IRefMap() {}
+	virtual ~IRefMap() {
+	}
 	virtual std::string query(int16_t x, int16_t y) = 0;
 };
 
@@ -89,12 +94,11 @@ private:
 
 	std::unique_ptr<FontCache> font_cache_;
 	std::unique_ptr<Parser> parser_;
-	ImageCache* const image_cache_;  // Not owned.
+	ImageCache* const image_cache_;      // Not owned.
 	TextureCache* const texture_cache_;  // Not owned.
-	const UI::FontSets& fontsets_; // All fontsets
-	RendererStyle renderer_style_; // Properties that all render nodes need to know about
+	const UI::FontSets& fontsets_;       // All fontsets
+	RendererStyle renderer_style_;       // Properties that all render nodes need to know about
 };
-
 }
 
 #endif  // end of include guard: WL_GRAPHIC_TEXT_RT_RENDER_H

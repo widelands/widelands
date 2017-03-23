@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2016 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -42,8 +42,7 @@ namespace UI {
 /// Width to use as the corner. This must be >= VT_B_PIXMAP_THICKNESS.
 #define HZ_B_CORNER_PIXMAP_LEN 20
 
-#define HZ_B_MIDDLE_PIXMAP_LEN \
-   (HZ_B_TOTAL_PIXMAP_LEN - 2 * HZ_B_CORNER_PIXMAP_LEN)
+#define HZ_B_MIDDLE_PIXMAP_LEN (HZ_B_TOTAL_PIXMAP_LEN - 2 * HZ_B_CORNER_PIXMAP_LEN)
 
 /// Width/height the vertical border graphics must have.
 #define VT_B_PIXMAP_THICKNESS 20
@@ -52,9 +51,7 @@ namespace UI {
 /// Height to use as the thingy.
 #define VT_B_THINGY_PIXMAP_LEN 20
 
-#define VT_B_MIDDLE_PIXMAP_LEN \
-   (VT_B_TOTAL_PIXMAP_LEN - 2 * VT_B_THINGY_PIXMAP_LEN)
-
+#define VT_B_MIDDLE_PIXMAP_LEN (VT_B_TOTAL_PIXMAP_LEN - 2 * VT_B_THINGY_PIXMAP_LEN)
 
 /**
  * Initialize a framed window.
@@ -68,47 +65,47 @@ namespace UI {
  * \param h height of the inner rectangle of the window
  * \param title string to display in the window title
  */
-Window::Window
-	(Panel * const parent,
-	 const string & name,
-	 int32_t const x, int32_t const y, uint32_t const w, uint32_t const h,
-	 const string& title)
-	:
-		NamedPanel
-			(parent, name, x, y, w + VT_B_PIXMAP_THICKNESS * 2,
-			 TP_B_PIXMAP_THICKNESS + h + BT_B_PIXMAP_THICKNESS),
-		is_minimal_(false), dragging_(false),
-		docked_left_(false), docked_right_(false), docked_bottom_(false),
-		drag_start_win_x_(0), drag_start_win_y_(0),
-		drag_start_mouse_x_(0), drag_start_mouse_y_(0),
-		pic_lborder_
-			(g_gr->images().get("images/wui/window_left.png")),
-		pic_rborder_
-			(g_gr->images().get("images/wui/window_right.png")),
-		pic_top_
-			(g_gr->images().get("images/wui/window_top.png")),
-		pic_bottom_
-			(g_gr->images().get("images/wui/window_bottom.png")),
-		pic_background_
-			(g_gr->images().get("images/wui/window_background.png")),
-		center_panel_(nullptr),
-		fastclick_panel_(nullptr)
-{
+Window::Window(Panel* const parent,
+               const string& name,
+               int32_t const x,
+               int32_t const y,
+               uint32_t const w,
+               uint32_t const h,
+               const string& title)
+   : NamedPanel(parent,
+                name,
+                x,
+                y,
+                w + VT_B_PIXMAP_THICKNESS * 2,
+                TP_B_PIXMAP_THICKNESS + h + BT_B_PIXMAP_THICKNESS),
+     is_minimal_(false),
+     dragging_(false),
+     docked_left_(false),
+     docked_right_(false),
+     docked_bottom_(false),
+     drag_start_win_x_(0),
+     drag_start_win_y_(0),
+     drag_start_mouse_x_(0),
+     drag_start_mouse_y_(0),
+     pic_lborder_(g_gr->images().get("images/wui/window_left.png")),
+     pic_rborder_(g_gr->images().get("images/wui/window_right.png")),
+     pic_top_(g_gr->images().get("images/wui/window_top.png")),
+     pic_bottom_(g_gr->images().get("images/wui/window_bottom.png")),
+     pic_background_(g_gr->images().get("images/wui/window_background.png")),
+     center_panel_(nullptr),
+     fastclick_panel_(nullptr) {
 	set_title(title);
 
-	set_border
-		(VT_B_PIXMAP_THICKNESS, VT_B_PIXMAP_THICKNESS,
-		 TP_B_PIXMAP_THICKNESS, BT_B_PIXMAP_THICKNESS);
+	set_border(
+	   VT_B_PIXMAP_THICKNESS, VT_B_PIXMAP_THICKNESS, TP_B_PIXMAP_THICKNESS, BT_B_PIXMAP_THICKNESS);
 	set_top_on_click(true);
 	set_layout_toplevel(true);
 }
 
-
 /**
  * Replace the current title with a new one
 */
-void Window::set_title(const string & text)
-{
+void Window::set_title(const string& text) {
 	assert(!is_richtext(text));
 	title_ = text;
 }
@@ -119,8 +116,7 @@ void Window::set_title(const string & text)
  * The center panel is a child panel that will automatically determine
  * the inner size of the window.
  */
-void Window::set_center_panel(Panel * panel)
-{
+void Window::set_center_panel(Panel* panel) {
 	assert(panel->get_parent() == this);
 
 	center_panel_ = panel;
@@ -130,14 +126,12 @@ void Window::set_center_panel(Panel * panel)
 /**
  * Update the window's desired size based on its center panel.
  */
-void Window::update_desired_size()
-{
+void Window::update_desired_size() {
 	if (center_panel_ && !is_minimal_) {
-		int innerw, innerh;
+		int innerw, innerh = 0;
 		center_panel_->get_desired_size(&innerw, &innerh);
-		set_desired_size
-			(innerw + get_lborder() + get_rborder(),
-			 innerh + get_tborder() + get_bborder());
+		set_desired_size(
+		   innerw + get_lborder() + get_rborder(), innerh + get_tborder() + get_bborder());
 	}
 }
 
@@ -145,10 +139,9 @@ void Window::update_desired_size()
  * Change the center panel's size so that it fills the window entirely, but
  * only if not minimized.
  */
-void Window::layout()
-{
+void Window::layout() {
 	if (center_panel_ && !is_minimal_) {
-		center_panel_->set_pos(Point(0, 0));
+		center_panel_->set_pos(Vector2i(0, 0));
 		center_panel_->set_size(get_inner_w(), get_inner_h());
 	}
 }
@@ -159,21 +152,11 @@ void Window::layout()
 void Window::move_out_of_the_way() {
 	center_to_parent();
 
-	const Point mouse = get_mouse_position();
-	if
-		(0 <= mouse.x && mouse.x < get_w()
-		 &&
-		 0 <= mouse.y && mouse.y < get_h())
-		{
-			set_pos
-				(Point(get_x(), get_y())
-				 +
-				 Point
-				 (0, (mouse.y < get_h() / 2 ? 1 : -1)
-				  *
-				  get_h()));
-			move_inside_parent();
-		}
+	const Vector2i mouse = get_mouse_position();
+	if (0 <= mouse.x && mouse.x < get_w() && 0 <= mouse.y && mouse.y < get_h()) {
+		set_pos(Vector2i(get_x(), get_y()) + Vector2i(0, (mouse.y < get_h() / 2 ? 1 : -1) * get_h()));
+		move_inside_parent();
+	}
 }
 
 /**
@@ -181,12 +164,12 @@ void Window::move_out_of_the_way() {
  */
 void Window::warp_mouse_to_fastclick_panel() {
 	if (fastclick_panel_) {
-		 Point pt(fastclick_panel_->get_w() / 2, fastclick_panel_->get_h() / 2);
-		 UI::Panel * p = fastclick_panel_;
+		Vector2i pt(fastclick_panel_->get_w() / 2, fastclick_panel_->get_h() / 2);
+		UI::Panel* p = fastclick_panel_;
 
 		while (p->get_parent() && p != this) {
-			 pt = p->to_parent(pt);
-			 p = p->get_parent();
+			pt = p->to_parent(pt);
+			p = p->get_parent();
 		}
 
 		set_mouse_pos(pt);
@@ -198,21 +181,19 @@ void Window::warp_mouse_to_fastclick_panel() {
  * If configured, hang the border off the edge of the panel.
 */
 void Window::move_inside_parent() {
-	if (Panel * const parent = get_parent()) {
+	if (Panel* const parent = get_parent()) {
 		int32_t px = get_x();
 		int32_t py = get_y();
 		if ((parent->get_inner_w() < get_w()) && (px + get_w() <= parent->get_inner_w() || px >= 0))
 			px = (parent->get_inner_w() - get_w()) / 2;
-		if
-			((parent->get_inner_h() < get_h()) &&
-			(py + get_h() < parent->get_inner_h() || py > 0))
-				py = 0;
+		if ((parent->get_inner_h() < get_h()) && (py + get_h() < parent->get_inner_h() || py > 0))
+			py = 0;
 
 		if (parent->get_inner_w() >= get_w()) {
 			if (px < 0) {
 				px = 0;
 				if (parent->get_dock_windows_to_edges() && !docked_left_)
-					docked_left_ =  true;
+					docked_left_ = true;
 			} else if (px + get_w() >= parent->get_inner_w()) {
 				px = parent->get_inner_w() - get_w();
 				if (parent->get_dock_windows_to_edges() && !docked_right_)
@@ -228,215 +209,166 @@ void Window::move_inside_parent() {
 				py = 0;
 			else if (py + get_h() > parent->get_inner_h()) {
 				py = parent->get_inner_h() - get_h();
-				if
-					(!is_minimal_
-					&&
-					parent->get_dock_windows_to_edges() && !docked_bottom_)
+				if (!is_minimal_ && parent->get_dock_windows_to_edges() && !docked_bottom_)
 					docked_bottom_ = true;
 			}
 			if (docked_bottom_)
 				py += BT_B_PIXMAP_THICKNESS;
 		}
-		set_pos(Point(px, py));
+		set_pos(Vector2i(px, py));
 	}
 }
-
 
 /**
  * Move the window so that it is centered wrt the parent.
 */
-void Window::center_to_parent()
-{
-	Panel & parent = *get_parent();
+void Window::center_to_parent() {
+	Panel& parent = *get_parent();
 
-	set_pos
-		(Point
-		((static_cast<int32_t>(parent.get_inner_w()) - get_w()) / 2,
-		 (static_cast<int32_t>(parent.get_inner_h()) - get_h()) / 2));
+	set_pos(Vector2i((static_cast<int32_t>(parent.get_inner_w()) - get_w()) / 2,
+	                 (static_cast<int32_t>(parent.get_inner_h()) - get_h()) / 2));
 }
-
 
 /**
  * Redraw the window background.
  */
-void Window::draw(RenderTarget & dst)
-{
+void Window::draw(RenderTarget& dst) {
 	if (!is_minimal()) {
-		dst.tile
-			(Rect(Point(0, 0), get_inner_w(), get_inner_h()),
-			 pic_background_, Point(0, 0));
+		dst.tile(
+		   Recti(Vector2i(0, 0), get_inner_w(), get_inner_h()), pic_background_, Vector2i(0, 0));
 	}
 }
-
 
 /**
  * Redraw the window frame
  */
-void Window::draw_border(RenderTarget & dst)
-{
+void Window::draw_border(RenderTarget& dst) {
 	assert(HZ_B_CORNER_PIXMAP_LEN >= VT_B_PIXMAP_THICKNESS);
 	assert(HZ_B_MIDDLE_PIXMAP_LEN > 0);
 
-	const int32_t hz_bar_end = get_w() -
-		HZ_B_CORNER_PIXMAP_LEN;
-	const int32_t hz_bar_end_minus_middle = hz_bar_end -
-		HZ_B_MIDDLE_PIXMAP_LEN;
+	const int32_t hz_bar_end = get_w() - HZ_B_CORNER_PIXMAP_LEN;
+	const int32_t hz_bar_end_minus_middle = hz_bar_end - HZ_B_MIDDLE_PIXMAP_LEN;
 
-	{ //  Top border.
+	{  //  Top border.
 		int32_t pos = HZ_B_CORNER_PIXMAP_LEN;
 
-		dst.blitrect //  top left corner
-			(Point(0, 0),
-			 pic_top_,
-			 Rect(Point(0, 0), pos, TP_B_PIXMAP_THICKNESS));
+		dst.blitrect  //  top left corner
+		   (Vector2f(0.f, 0.f), pic_top_, Recti(Vector2i(0, 0), pos, TP_B_PIXMAP_THICKNESS));
 
 		//  top bar
 		static_assert(0 <= HZ_B_CORNER_PIXMAP_LEN, "assert(0 <= HZ_B_CORNER_PIXMAP_LEN) failed.");
 		for (; pos < hz_bar_end_minus_middle; pos += HZ_B_MIDDLE_PIXMAP_LEN)
-			dst.blitrect
-				(Point(pos, 0),
-				 pic_top_,
-				 Rect
-				 	(Point(HZ_B_CORNER_PIXMAP_LEN, 0),
-				 	 HZ_B_MIDDLE_PIXMAP_LEN, TP_B_PIXMAP_THICKNESS));
+			dst.blitrect(
+			   Vector2f(pos, 0), pic_top_, Recti(Vector2i(HZ_B_CORNER_PIXMAP_LEN, 0),
+			                                     HZ_B_MIDDLE_PIXMAP_LEN, TP_B_PIXMAP_THICKNESS));
 
 		// odd pixels of top bar and top right corner
 		const int32_t width = hz_bar_end - pos + HZ_B_CORNER_PIXMAP_LEN;
 		assert(0 <= HZ_B_TOTAL_PIXMAP_LEN - width);
-		dst.blitrect
-			(Point(pos, 0),
-			 pic_top_,
-			 Rect
-			 	(Point(HZ_B_TOTAL_PIXMAP_LEN - width, 0),
-			 	 width, TP_B_PIXMAP_THICKNESS));
+		dst.blitrect(Vector2f(pos, 0), pic_top_,
+		             Recti(Vector2i(HZ_B_TOTAL_PIXMAP_LEN - width, 0), width, TP_B_PIXMAP_THICKNESS));
 	}
 
 	// draw the title if we have one
 	if (!title_.empty()) {
 		// The title shouldn't be richtext, but we escape it just to make sure.
-		dst.blit
-			(Point(get_lborder() + get_inner_w() / 2, TP_B_PIXMAP_THICKNESS / 2),
-			 autofit_ui_text(richtext_escape(title_), get_inner_w(), UI_FONT_CLR_FG, 13),
-				BlendMode::UseAlpha,
-				UI::Align::kCenter);
+		const Image* text =
+		   autofit_ui_text(richtext_escape(title_), get_inner_w(), UI_FONT_CLR_FG, 13);
+
+		// Blit on pixel boundary (not float), so that the text is blitted pixel perfect.
+		Vector2f pos(get_lborder() + get_inner_w() / 2, TP_B_PIXMAP_THICKNESS / 2);
+		UI::center_vertically(text->height(), &pos);
+		dst.blit(pos, text, BlendMode::UseAlpha, UI::Align::kCenter);
 	}
 
 	if (!is_minimal_) {
-		const int32_t vt_bar_end = get_h() -
-			(docked_bottom_ ? 0 : BT_B_PIXMAP_THICKNESS) - VT_B_THINGY_PIXMAP_LEN;
-		const int32_t vt_bar_end_minus_middle =
-			vt_bar_end - VT_B_MIDDLE_PIXMAP_LEN;
+		const int32_t vt_bar_end =
+		   get_h() - (docked_bottom_ ? 0 : BT_B_PIXMAP_THICKNESS) - VT_B_THINGY_PIXMAP_LEN;
+		const int32_t vt_bar_end_minus_middle = vt_bar_end - VT_B_MIDDLE_PIXMAP_LEN;
 
-		{ // Left border
+		{  // Left border
 
 			static_assert(0 <= VT_B_PIXMAP_THICKNESS, "assert(0 <= VT_B_PIXMAP_THICKNESS) failed.");
-			dst.blitrect // left top thingy
-				(Point(0, TP_B_PIXMAP_THICKNESS),
-				 pic_lborder_,
-				 Rect(Point(0, 0), VT_B_PIXMAP_THICKNESS, VT_B_THINGY_PIXMAP_LEN));
+			dst.blitrect  // left top thingy
+			   (Vector2f(0, TP_B_PIXMAP_THICKNESS), pic_lborder_,
+			    Recti(Vector2i(0, 0), VT_B_PIXMAP_THICKNESS, VT_B_THINGY_PIXMAP_LEN));
 
 			int32_t pos = TP_B_PIXMAP_THICKNESS + VT_B_THINGY_PIXMAP_LEN;
 
 			//  left bar
 			static_assert(0 <= VT_B_THINGY_PIXMAP_LEN, "assert(0 <= VT_B_THINGY_PIXMAP_LEN) failed.");
 			for (; pos < vt_bar_end_minus_middle; pos += VT_B_MIDDLE_PIXMAP_LEN)
-				dst.blitrect
-					(Point(0, pos),
-					 pic_lborder_,
-					 Rect
-					 	(Point(0, VT_B_THINGY_PIXMAP_LEN),
-					 	 VT_B_PIXMAP_THICKNESS, VT_B_MIDDLE_PIXMAP_LEN));
+				dst.blitrect(Vector2f(0, pos), pic_lborder_,
+				             Recti(Vector2i(0, VT_B_THINGY_PIXMAP_LEN), VT_B_PIXMAP_THICKNESS,
+				                   VT_B_MIDDLE_PIXMAP_LEN));
 
 			//  odd pixels of left bar and left bottom thingy
 			const int32_t height = vt_bar_end - pos + VT_B_THINGY_PIXMAP_LEN;
 			assert(0 <= VT_B_TOTAL_PIXMAP_LEN - height);
-			dst.blitrect
-				(Point(0, pos),
-				 pic_lborder_,
-				 Rect
-				 	(Point(0, VT_B_TOTAL_PIXMAP_LEN - height),
-				 	 VT_B_PIXMAP_THICKNESS, height));
+			dst.blitrect(
+			   Vector2f(0, pos), pic_lborder_,
+			   Recti(Vector2i(0, VT_B_TOTAL_PIXMAP_LEN - height), VT_B_PIXMAP_THICKNESS, height));
 		}
 
-
-		{ // Right border
+		{  // Right border
 			const int32_t right_border_x = get_w() - VT_B_PIXMAP_THICKNESS;
 
-			dst.blitrect // right top thingy
-				(Point(right_border_x, TP_B_PIXMAP_THICKNESS),
-				 pic_rborder_,
-				 Rect(Point(0, 0), VT_B_PIXMAP_THICKNESS, VT_B_THINGY_PIXMAP_LEN));
+			dst.blitrect  // right top thingy
+			   (Vector2f(right_border_x, TP_B_PIXMAP_THICKNESS), pic_rborder_,
+			    Recti(Vector2i(0, 0), VT_B_PIXMAP_THICKNESS, VT_B_THINGY_PIXMAP_LEN));
 
 			int32_t pos = TP_B_PIXMAP_THICKNESS + VT_B_THINGY_PIXMAP_LEN;
 
 			//  right bar
 			static_assert(0 <= VT_B_THINGY_PIXMAP_LEN, "assert(0 <= VT_B_THINGY_PIXMAP_LEN) failed.");
 			for (; pos < vt_bar_end_minus_middle; pos += VT_B_MIDDLE_PIXMAP_LEN)
-				dst.blitrect
-					(Point(right_border_x, pos),
-					 pic_rborder_,
-					 Rect
-					 	(Point(0, VT_B_THINGY_PIXMAP_LEN),
-					 	 VT_B_PIXMAP_THICKNESS, VT_B_MIDDLE_PIXMAP_LEN));
+				dst.blitrect(Vector2f(right_border_x, pos), pic_rborder_,
+				             Recti(Vector2i(0, VT_B_THINGY_PIXMAP_LEN), VT_B_PIXMAP_THICKNESS,
+				                   VT_B_MIDDLE_PIXMAP_LEN));
 
 			// odd pixels of right bar and right bottom thingy
 			const int32_t height = vt_bar_end - pos + VT_B_THINGY_PIXMAP_LEN;
-			dst.blitrect
-				(Point(right_border_x, pos),
-				 pic_rborder_,
-				 Rect
-				 	(Point(0, VT_B_TOTAL_PIXMAP_LEN - height),
-				 	 VT_B_PIXMAP_THICKNESS, height));
+			dst.blitrect(
+			   Vector2f(right_border_x, pos), pic_rborder_,
+			   Recti(Vector2i(0, VT_B_TOTAL_PIXMAP_LEN - height), VT_B_PIXMAP_THICKNESS, height));
 		}
 
-		{ // Bottom border
+		{  // Bottom border
 			int32_t pos = HZ_B_CORNER_PIXMAP_LEN;
 
-			dst.blitrect //  bottom left corner
-				(Point(0, get_h() - BT_B_PIXMAP_THICKNESS),
-				 pic_bottom_,
-				 Rect(Point(0, 0), pos, BT_B_PIXMAP_THICKNESS));
+			dst.blitrect  //  bottom left corner
+			   (Vector2f(0, get_h() - BT_B_PIXMAP_THICKNESS), pic_bottom_,
+			    Recti(Vector2i(0, 0), pos, BT_B_PIXMAP_THICKNESS));
 
 			//  bottom bar
 			for (; pos < hz_bar_end_minus_middle; pos += HZ_B_MIDDLE_PIXMAP_LEN)
-				dst.blitrect
-					(Point(pos, get_h() - BT_B_PIXMAP_THICKNESS),
-					 pic_bottom_,
-					 Rect
-					 	(Point(HZ_B_CORNER_PIXMAP_LEN, 0),
-					 	 HZ_B_MIDDLE_PIXMAP_LEN, BT_B_PIXMAP_THICKNESS));
+				dst.blitrect(Vector2f(pos, get_h() - BT_B_PIXMAP_THICKNESS), pic_bottom_,
+				             Recti(Vector2i(HZ_B_CORNER_PIXMAP_LEN, 0), HZ_B_MIDDLE_PIXMAP_LEN,
+				                   BT_B_PIXMAP_THICKNESS));
 
 			// odd pixels of bottom bar and bottom right corner
 			const int32_t width = hz_bar_end - pos + HZ_B_CORNER_PIXMAP_LEN;
-			dst.blitrect
-				(Point(pos, get_h() - BT_B_PIXMAP_THICKNESS),
-				 pic_bottom_,
-				 Rect
-				 	(Point(HZ_B_TOTAL_PIXMAP_LEN - width, 0),
-				 	 width, BT_B_PIXMAP_THICKNESS));
+			dst.blitrect(
+			   Vector2f(pos, get_h() - BT_B_PIXMAP_THICKNESS), pic_bottom_,
+			   Recti(Vector2i(HZ_B_TOTAL_PIXMAP_LEN - width, 0), width, BT_B_PIXMAP_THICKNESS));
 		}
 	}
 }
 
-
-void Window::think() {if (!is_minimal()) Panel::think();}
-
+void Window::think() {
+	if (!is_minimal())
+		Panel::think();
+}
 
 /**
  * Left-click: drag the window
  * Right-click: close the window
  */
-bool Window::handle_mousepress(const uint8_t btn, int32_t mx, int32_t my)
-{
+bool Window::handle_mousepress(const uint8_t btn, int32_t mx, int32_t my) {
 	//  TODO(unknown): This code is erroneous. It checks the current key state. What it
 	//  needs is the key state at the time the mouse was clicked. See the
 	//  usage comment for get_key_state.
-	if
-		(((get_key_state(SDL_SCANCODE_LCTRL) | get_key_state(SDL_SCANCODE_RCTRL))
-		  &&
-		  btn == SDL_BUTTON_LEFT)
-		 ||
-		 btn == SDL_BUTTON_MIDDLE)
+	if ((SDL_GetModState() & KMOD_CTRL && btn == SDL_BUTTON_LEFT) || btn == SDL_BUTTON_MIDDLE)
 		is_minimal() ? restore() : minimize();
 	else if (btn == SDL_BUTTON_LEFT) {
 		dragging_ = true;
@@ -457,13 +389,12 @@ bool Window::handle_mouserelease(const uint8_t btn, int32_t, int32_t) {
 		grab_mouse(false);
 		dragging_ = false;
 	}
-	return true;
+	return false;
 }
 
 // Always consume the tooltip event to prevent tooltips from
 // our parent to be rendered
-bool Window::handle_tooltip()
-{
+bool Window::handle_tooltip() {
 	UI::Panel::handle_tooltip();
 	return true;
 }
@@ -473,8 +404,7 @@ bool Window::handle_tooltip()
  * to take some action before the window is destroyed, or to
  * prevent it
  */
-void Window::die()
-{
+void Window::die() {
 	if (is_modal()) {
 		end_modal<UI::Panel::Returncodes>(UI::Panel::Returncodes::kBack);
 	} else {
@@ -482,13 +412,10 @@ void Window::die()
 	}
 }
 
-
 void Window::restore() {
 	assert(is_minimal_);
 	is_minimal_ = false;
-	set_border
-		(get_lborder(), get_rborder(),
-		 get_tborder(), BT_B_PIXMAP_THICKNESS);
+	set_border(get_lborder(), get_rborder(), get_tborder(), BT_B_PIXMAP_THICKNESS);
 	set_inner_size(get_inner_w(), oldh_);
 	update_desired_size();
 	move_inside_parent();
@@ -497,51 +424,50 @@ void Window::minimize() {
 	assert(!is_minimal_);
 	int32_t y = get_y(), x = get_x();
 	if (docked_bottom_) {
-		y -= BT_B_PIXMAP_THICKNESS; //  Minimal can not be bottom-docked.
+		y -= BT_B_PIXMAP_THICKNESS;  //  Minimal can not be bottom-docked.
 		docked_bottom_ = false;
 	}
-	if (y < 0) y = 0; //  Move into the screen
+	if (y < 0)
+		y = 0;  //  Move into the screen
 	oldh_ = get_inner_h();
 	is_minimal_ = true;
 	set_border(get_lborder(), get_rborder(), get_tborder(), 0);
 	set_size(get_w(), TP_B_PIXMAP_THICKNESS);
-	set_pos(Point(x, y)); // If on border, this feels more natural
+	set_pos(Vector2i(x, y));  // If on border, this feels more natural
 }
 
 /**
  * Drag the mouse if the left mouse button is clicked.
  * Ensure that the window isn't fully dragged out of the screen.
  */
-bool Window::handle_mousemove
-		(const uint8_t, int32_t mx, int32_t my, int32_t, int32_t)
-{
+bool Window::handle_mousemove(const uint8_t, int32_t mx, int32_t my, int32_t, int32_t) {
 	if (dragging_) {
 		const int32_t mouse_x = get_x() + get_lborder() + mx;
 		const int32_t mouse_y = get_y() + get_tborder() + my;
 		int32_t left = drag_start_win_x_ + mouse_x - drag_start_mouse_x_;
-		int32_t top  = drag_start_win_y_ + mouse_y - drag_start_mouse_y_;
+		int32_t top = drag_start_win_y_ + mouse_y - drag_start_mouse_y_;
 		int32_t new_left = left, new_top = top;
 
-		if (const Panel * const parent = get_parent()) {
+		if (const Panel* const parent = get_parent()) {
 			const int32_t w = get_w();
 			const int32_t h = get_h();
 			const int32_t max_x = parent->get_inner_w();
 			const int32_t max_y = parent->get_inner_h();
 
 			left = min<int32_t>(max_x - get_lborder(), left);
-			top  = min<int32_t>(max_y - get_tborder(), top);
+			top = min<int32_t>(max_y - get_tborder(), top);
 			left = max<int32_t>(get_rborder() - w, left);
-			top  = max
-				(-static_cast<int32_t>(h - ((is_minimal_) ? get_tborder() : get_bborder())), top);
-			new_left = left; new_top = top;
+			top = max(-static_cast<int32_t>(h - ((is_minimal_) ? get_tborder() : get_bborder())), top);
+			new_left = left;
+			new_top = top;
 
-			const uint8_t psnap = parent->get_panel_snap_distance ();
+			const uint8_t psnap = parent->get_panel_snap_distance();
 			const uint8_t bsnap = parent->get_border_snap_distance();
 
 			const uint32_t pborder_distance_l = abs(left);
 			const uint32_t pborder_distance_t = abs(top);
 			const uint32_t pborder_distance_r = abs(max_x - (left + w));
-			const uint32_t pborder_distance_b = abs(max_y - (top  + h));
+			const uint32_t pborder_distance_b = abs(max_y - (top + h));
 
 			//  These are needed to prefer snapping a shorter distance over a
 			//  longer distance, when there are several things to snap to.
@@ -583,20 +509,17 @@ bool Window::handle_mousemove
 				nearest_snap_distance_y = min(nearest_snap_distance_y, psnap);
 			}
 
-			{ //  Snap to other Panels.
+			{  //  Snap to other Panels.
 				const bool SOWO = parent->get_snap_windows_only_when_overlapping();
 				const int32_t right = left + w, bot = top + h;
 
-				for
-					(const Panel * snap_target = parent->get_first_child();
-					 snap_target;
-					 snap_target = snap_target->get_next_sibling())
-				{
+				for (const Panel* snap_target = parent->get_first_child(); snap_target;
+				     snap_target = snap_target->get_next_sibling()) {
 					if (snap_target != this && snap_target->is_snap_target()) {
-						int32_t const other_left  = snap_target->get_x();
-						int32_t const other_top   = snap_target->get_y();
+						int32_t const other_left = snap_target->get_x();
+						int32_t const other_top = snap_target->get_y();
 						int32_t const other_right = other_left + snap_target->get_w();
-						int32_t const other_bot   = other_top  + snap_target->get_h();
+						int32_t const other_bot = other_top + snap_target->get_h();
 
 						if (other_top <= bot && other_bot >= top) {
 							if (!SOWO || left <= other_right) {
@@ -636,30 +559,29 @@ bool Window::handle_mousemove
 
 			if (parent->get_dock_windows_to_edges()) {
 				if (new_left <= 0 && new_left >= -VT_B_PIXMAP_THICKNESS) {
-						new_left = -VT_B_PIXMAP_THICKNESS;
-						docked_left_ = true;
+					new_left = -VT_B_PIXMAP_THICKNESS;
+					docked_left_ = true;
 				} else if (docked_left_) {
 					docked_left_ = false;
 				}
 				if (new_left >= (max_x - w) && new_left <= (max_x - w) + VT_B_PIXMAP_THICKNESS) {
 					new_left = (max_x - w) + VT_B_PIXMAP_THICKNESS;
-						docked_right_ = true;
+					docked_right_ = true;
 				} else if (docked_right_) {
 					docked_right_ = false;
 				}
-				if (!is_minimal_) { //  minimal windows can not be bottom-docked
+				if (!is_minimal_) {  //  minimal windows can not be bottom-docked
 					if (new_top >= (max_y - h) && new_top <= (max_y - h) + BT_B_PIXMAP_THICKNESS) {
 						new_top = (max_y - h) + BT_B_PIXMAP_THICKNESS;
-							docked_bottom_ = true;
+						docked_bottom_ = true;
 					} else if (docked_bottom_) {
 						docked_bottom_ = false;
 					}
 				}
 			}
 		}
-		set_pos(Point(new_left, new_top));
+		set_pos(Vector2i(new_left, new_top));
 	}
 	return true;
 }
-
 }

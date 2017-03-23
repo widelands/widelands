@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2013 by the Widelands Development Team
+ * Copyright (C) 2006-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -30,8 +30,9 @@
 // http://timday.bitbucket.org/lru.html, but our use case here is a little
 // different.
 
-TextureCache::TextureCache(uint32_t max_size_in_bytes) :
-	max_size_in_bytes_(max_size_in_bytes), size_in_bytes_(0) {}
+TextureCache::TextureCache(uint32_t max_size_in_bytes)
+   : max_size_in_bytes_(max_size_in_bytes), size_in_bytes_(0) {
+}
 
 TextureCache::~TextureCache() {
 	flush();

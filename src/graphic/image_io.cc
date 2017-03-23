@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2013 by the Widelands Development Team
+ * Copyright (C) 2006-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -53,7 +53,6 @@ inline void ensure_sdl_image_is_initialized() {
 		is_initialized = true;
 	}
 }
-
 
 }  // namespace
 
@@ -111,15 +110,9 @@ bool save_to_png(Texture* texture, StreamWrite* sw, ColorType color_type) {
 	png_set_write_fn(png_ptr, sw, &png_write_function, &png_flush_function);
 
 	// Fill info struct
-	png_set_IHDR(png_ptr,
-	             info_ptr,
-	             texture->width(),
-	             texture->height(),
-	             8,
+	png_set_IHDR(png_ptr, info_ptr, texture->width(), texture->height(), 8,
 	             (color_type == ColorType::RGB) ? PNG_COLOR_TYPE_RGB : PNG_COLOR_TYPE_RGBA,
-	             PNG_INTERLACE_NONE,
-	             PNG_COMPRESSION_TYPE_DEFAULT,
-	             PNG_FILTER_TYPE_DEFAULT);
+	             PNG_INTERLACE_NONE, PNG_COMPRESSION_TYPE_DEFAULT, PNG_FILTER_TYPE_DEFAULT);
 
 	// Start writing
 	png_write_info(png_ptr, info_ptr);

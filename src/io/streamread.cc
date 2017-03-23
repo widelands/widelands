@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007-2009 by the Widelands Development Team
+ * Copyright (C) 2007-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -22,12 +22,14 @@
 #include <cassert>
 #include <cstdarg>
 #include <cstdio>
+#include <cstring>
 
 #include "base/wexception.h"
 
-StreamRead::~StreamRead() {}
+StreamRead::~StreamRead() {
+}
 
-StreamRead::DataError::DataError(char const * const fmt, ...) {
+StreamRead::DataError::DataError(char const* const fmt, ...) {
 	char buffer[256];
 	{
 		va_list va;
@@ -44,15 +46,12 @@ StreamRead::DataError::DataError(char const * const fmt, ...) {
  * If the requested number of bytes couldn't be read, this function
  * fails by throwing an exception.
  */
-void StreamRead::data_complete(void * const read_data, const size_t size)
-{
+void StreamRead::data_complete(void* const read_data, const size_t size) {
 	size_t read = data(read_data, size);
 
 	if (read != size)
-		throw data_error
-			("Stream ended unexpectedly (%lu bytes read, %lu expected)",
-			 static_cast<long unsigned int>(read),
-			 static_cast<long unsigned int>(size));
+		throw data_error("Stream ended unexpectedly (%lu bytes read, %lu expected)",
+		                 static_cast<long unsigned int>(read), static_cast<long unsigned int>(size));
 }
 
 int8_t StreamRead::signed_8() {
@@ -91,8 +90,16 @@ uint32_t StreamRead::unsigned_32() {
 	return little_32(x);
 }
 
-std::string StreamRead::string()
-{
+float StreamRead::float_32() {
+	uint32_t x;
+	data_complete(&x, 4);
+	x = little_32(x);
+	float rv;
+	memcpy(&rv, &x, 4);
+	return rv;
+}
+
+std::string StreamRead::string() {
 	std::string x;
 	char ch;
 

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -29,16 +29,13 @@
 class EditorInteractive;
 struct EditorIncreaseResourcesTool;
 
-struct EditorToolChangeResourcesOptionsMenu :
-	public EditorToolOptionsMenu
-{
-	EditorToolChangeResourcesOptionsMenu
-		(EditorInteractive             &,
-		 EditorIncreaseResourcesTool &,
-		 UI::UniqueWindow::Registry     &);
+struct EditorToolChangeResourcesOptionsMenu : public EditorToolOptionsMenu {
+	EditorToolChangeResourcesOptionsMenu(EditorInteractive&,
+	                                     EditorIncreaseResourcesTool&,
+	                                     UI::UniqueWindow::Registry&);
 
 private:
-	EditorInteractive & eia();
+	EditorInteractive& eia();
 	void change_resource();
 	void update_change_by();
 	void update_set_to();

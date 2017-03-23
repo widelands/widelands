@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2010 by the Widelands Development Team
+ * Copyright (C) 2006-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -27,35 +27,28 @@
 
 namespace Widelands {
 
-void CmdCalculateStatistics::execute (Game & game) {
+void CmdCalculateStatistics::execute(Game& game) {
 	game.sample_statistics();
-	game.enqueue_command
-		(new CmdCalculateStatistics
-		 (game.get_gametime() + kStatisticsSampleTime));
+	game.enqueue_command(new CmdCalculateStatistics(game.get_gametime() + kStatisticsSampleTime));
 }
 
 constexpr uint16_t kCurrentPacketVersion = 1;
 
-void CmdCalculateStatistics::read
-	(FileRead & fr, EditorGameBase & egbase, MapObjectLoader & mol)
-{
+void CmdCalculateStatistics::read(FileRead& fr, EditorGameBase& egbase, MapObjectLoader& mol) {
 	try {
 		uint16_t const packet_version = fr.unsigned_16();
 		if (packet_version == kCurrentPacketVersion) {
 			GameLogicCommand::read(fr, egbase, mol);
 		} else {
-			throw UnhandledVersionError("CmdCalculateStatistics", packet_version, kCurrentPacketVersion);
+			throw UnhandledVersionError(
+			   "CmdCalculateStatistics", packet_version, kCurrentPacketVersion);
 		}
-	} catch (const WException & e) {
+	} catch (const WException& e) {
 		throw GameDataError("calculate statistics function: %s", e.what());
 	}
 }
-void CmdCalculateStatistics::write
-	(FileWrite & fw, EditorGameBase & egbase, MapObjectSaver & mos)
-{
+void CmdCalculateStatistics::write(FileWrite& fw, EditorGameBase& egbase, MapObjectSaver& mos) {
 	fw.unsigned_16(kCurrentPacketVersion);
 	GameLogicCommand::write(fw, egbase, mos);
-
 }
-
 }

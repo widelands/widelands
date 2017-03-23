@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -37,15 +37,17 @@ class MapObjectLoader;
 /// Takes ownership of the filesystem that is passed to it.
 struct WidelandsMapLoader : public MapLoader {
 	// Takes ownership of 'fs'.
-	WidelandsMapLoader(FileSystem* fs, Map *);
+	WidelandsMapLoader(FileSystem* fs, Map*);
 	virtual ~WidelandsMapLoader();
 
 	int32_t preload_map(bool) override;
-	int32_t load_map_complete(EditorGameBase &, MapLoader::LoadType load_type) override;
+	int32_t load_map_complete(EditorGameBase&, MapLoader::LoadType load_type) override;
 
-	MapObjectLoader * get_map_object_loader() {return mol_.get();}
+	MapObjectLoader* get_map_object_loader() {
+		return mol_.get();
+	}
 
-	static bool is_widelands_map(const std::string & filename) {
+	static bool is_widelands_map(const std::string& filename) {
 		return boost::iends_with(filename, WLMF_SUFFIX);
 	}
 
@@ -60,7 +62,6 @@ private:
 	std::unique_ptr<MapObjectLoader> mol_;
 	std::string old_world_name_;
 };
-
 }
 
 #endif  // end of include guard: WL_MAP_IO_WIDELANDS_MAP_LOADER_H

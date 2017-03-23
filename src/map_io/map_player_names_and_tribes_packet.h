@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2008, 2010 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -36,9 +36,8 @@ struct MapPlayerNamesAndTribesPacket {
 	virtual void read(FileSystem&, EditorGameBase&, bool, MapObjectLoader&);
 	void write(FileSystem&, EditorGameBase&, MapObjectSaver&);
 
-	void pre_read(FileSystem &, Map *, bool skip);
+	void pre_read(FileSystem&, Map*, bool skip);
 };
-
 }
 
 #endif  // end of include guard: WL_MAP_IO_MAP_PLAYER_NAMES_AND_TRIBES_PACKET_H

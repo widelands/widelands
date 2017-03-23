@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2016 by the Widelands Development Team
+ * Copyright (C) 2006-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -36,8 +36,7 @@ enum class Trace {
 	kYes,
 	kNo,
 };
-SDL_GLContext
-initialize(const Trace& trace, SDL_Window* window, GLint* max_texture_size);
+SDL_GLContext initialize(const Trace& trace, SDL_Window* window, GLint* max_texture_size);
 
 }  // namespace Gl
 

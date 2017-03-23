@@ -7,8 +7,8 @@ animations = {
       fps = 10
    }
 }
-add_worker_animations(animations, "walk", dirname, "walk", {19, 33}, 10)
-add_worker_animations(animations, "walkload", dirname, "walk", {19, 33}, 10) -- TODO(GunChleoc): Make animation
+add_walking_animations(animations, "walk", dirname, "walk", {19, 33}, 10)
+add_walking_animations(animations, "walkload", dirname, "walk", {19, 33}, 10) -- TODO(GunChleoc): Make animation
 
 
 tribes:new_carrier_type {

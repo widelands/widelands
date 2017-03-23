@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2015 by the Widelands Development Team
+ * Copyright (C) 2006-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -24,6 +24,6 @@
 
 struct SDL_Surface;
 
-SDL_Surface * empty_sdl_surface(int16_t w, int16_t h);
+SDL_Surface* empty_sdl_surface(int16_t w, int16_t h);
 
 #endif  // end of include guard:

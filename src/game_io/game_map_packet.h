@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2009 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -31,27 +31,30 @@ struct WidelandsMapLoader;
  * This is just a wrapper around MapSaver and MapLoader
  */
 struct GameMapPacket : public GameDataPacket {
-	GameMapPacket() : mos_(nullptr), mol_(nullptr), wms_(nullptr), wml_(nullptr) {}
+	GameMapPacket() : mos_(nullptr), mol_(nullptr), wms_(nullptr), wml_(nullptr) {
+	}
 	virtual ~GameMapPacket();
 
-
 	/// Ensures that the world gets loaded but does not much more.
-	void read (FileSystem &, Game &, MapObjectLoader * = nullptr) override;
+	void read(FileSystem&, Game&, MapObjectLoader* = nullptr) override;
 
-	void read_complete(Game &); ///  Loads the rest of the map.
+	void read_complete(Game&);  ///  Loads the rest of the map.
 
-	void write(FileSystem &, Game &, MapObjectSaver  * = nullptr) override;
+	void write(FileSystem&, Game&, MapObjectSaver* = nullptr) override;
 
-	MapObjectSaver  * get_map_object_saver () {return mos_;}
-	MapObjectLoader * get_map_object_loader() {return mol_;}
+	MapObjectSaver* get_map_object_saver() {
+		return mos_;
+	}
+	MapObjectLoader* get_map_object_loader() {
+		return mol_;
+	}
 
 private:
-	MapObjectSaver  * mos_;
-	MapObjectLoader * mol_;
-	MapSaver             * wms_;
-	WidelandsMapLoader         * wml_;
+	MapObjectSaver* mos_;
+	MapObjectLoader* mol_;
+	MapSaver* wms_;
+	WidelandsMapLoader* wml_;
 };
-
 }
 
 #endif  // end of include guard: WL_GAME_IO_GAME_MAP_PACKET_H

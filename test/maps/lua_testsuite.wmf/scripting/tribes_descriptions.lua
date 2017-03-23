@@ -26,11 +26,11 @@ end
 
 function test_descr:test_get_buildings()
    local tribe = egbase:get_tribe_description("atlanteans")
-   assert_equal(41, #tribe.buildings)
+   assert_equal(42, #tribe.buildings)
    tribe = egbase:get_tribe_description("barbarians")
-   assert_equal(50, #tribe.buildings)
-   tribe = egbase:get_tribe_description("empire")
    assert_equal(51, #tribe.buildings)
+   tribe = egbase:get_tribe_description("empire")
+   assert_equal(52, #tribe.buildings)
 
    -- Test if buildings have been casted to their correct types
    for i, building in ipairs(tribe.buildings) do
@@ -94,11 +94,11 @@ end
 
 function test_descr:test_get_workers()
    local tribe = egbase:get_tribe_description("atlanteans")
-   assert_equal(29, #tribe.workers)
+   assert_equal(30, #tribe.workers)
    tribe = egbase:get_tribe_description("barbarians")
-   assert_equal(31, #tribe.workers)
-   tribe = egbase:get_tribe_description("empire")
    assert_equal(32, #tribe.workers)
+   tribe = egbase:get_tribe_description("empire")
+   assert_equal(33, #tribe.workers)
 end
 
 function test_descr:test_has_building()

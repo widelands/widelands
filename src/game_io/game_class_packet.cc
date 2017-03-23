@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2009 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -28,9 +28,7 @@ namespace Widelands {
 
 constexpr uint16_t kCurrentPacketVersion = 3;
 
-void GameClassPacket::read
-	(FileSystem & fs, Game & game, MapObjectLoader *)
-{
+void GameClassPacket::read(FileSystem& fs, Game& game, MapObjectLoader*) {
 	try {
 		FileRead fr;
 		fr.open(fs, "binary/game_class");
@@ -40,7 +38,7 @@ void GameClassPacket::read
 		} else {
 			throw UnhandledVersionError("GameClassPacket", packet_version, kCurrentPacketVersion);
 		}
-	} catch (const WException & e) {
+	} catch (const WException& e) {
 		throw GameDataError("game class: %s", e.what());
 	}
 }
@@ -48,9 +46,7 @@ void GameClassPacket::read
 /*
  * Write Function
  */
-void GameClassPacket::write
-	(FileSystem & fs, Game & game, MapObjectSaver * const)
-{
+void GameClassPacket::write(FileSystem& fs, Game& game, MapObjectSaver* const) {
 	FileWrite fw;
 
 	fw.unsigned_16(kCurrentPacketVersion);
@@ -80,5 +76,4 @@ void GameClassPacket::write
 
 	fw.write(fs, "binary/game_class");
 }
-
 }

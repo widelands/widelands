@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2013 by the Widelands Development Team
+ * Copyright (C) 2013-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -29,24 +29,17 @@
 
 namespace Widelands {
 
-
-
-
 struct MapVersion {
 
 	std::string map_source_url;
 	std::string map_source_release;
 	std::string map_creator_version;
-	int32_t     map_version_major;
-	int32_t     map_version_minor;
-	uint32_t    map_version_timestamp;
+	int32_t map_version_major;
+	int32_t map_version_minor;
+	uint32_t map_version_timestamp;
 
 	MapVersion();
-
 };
-
 }
-
-
 
 #endif  // end of include guard: WL_LOGIC_MAP_REVISION_H

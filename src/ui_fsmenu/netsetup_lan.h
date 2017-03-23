@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2016 by the Widelands Development Team
+ * Copyright (C) 2004-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -24,19 +24,19 @@
 #include <list>
 #include <string>
 
-#include "ui_fsmenu/base.h"
 #include "network/network_lan_promotion.h"
 #include "ui_basic/button.h"
 #include "ui_basic/editbox.h"
 #include "ui_basic/table.h"
 #include "ui_basic/textarea.h"
+#include "ui_fsmenu/base.h"
 
 struct NetOpenGame;
 struct NetGameInfo;
 
 class FullscreenMenuNetSetupLAN : public FullscreenMenuBase {
 public:
-	FullscreenMenuNetSetupLAN ();
+	FullscreenMenuNetSetupLAN();
 
 	void think() override;
 
@@ -46,17 +46,19 @@ public:
 	 * \return \c true if a valid server has been chosen. If \c false is
 	 * returned, the values of \p addr and \p port are undefined.
 	 */
-	bool get_host_address (uint32_t & addr, uint16_t & port);
+	bool get_host_address(uint32_t& addr, uint16_t& port);
 
 	/**
 	 * \return the name chosen by the player
 	 */
-	const std::string & get_playername();
+	const std::string& get_playername();
 
 protected:
 	void clicked_ok() override;
 
 private:
+	void layout() override;
+
 	uint32_t butx_;
 	uint32_t butw_;
 	uint32_t buth_;
@@ -66,21 +68,19 @@ private:
 	UI::Button joingame, hostgame, back, loadlasthost;
 	UI::EditBox playername;
 	UI::EditBox hostname;
-	UI::Table<const NetOpenGame * const> opengames;
+	UI::Table<const NetOpenGame* const> opengames;
 	LanGameFinder discovery;
 
-	void game_selected (uint32_t);
-	void game_doubleclicked (uint32_t);
+	void game_selected(uint32_t);
+	void game_doubleclicked(uint32_t);
 
-	static void discovery_callback (int32_t, NetOpenGame const *, void *);
+	static void discovery_callback(int32_t, NetOpenGame const*, void*);
 
-	void game_opened  (NetOpenGame const *);
-	void game_closed  (NetOpenGame const *);
-	void game_updated (NetOpenGame const *);
+	void game_opened(NetOpenGame const*);
+	void game_closed(NetOpenGame const*);
+	void game_updated(NetOpenGame const*);
 
-	void update_game_info
-		(UI::Table<const NetOpenGame * const>::EntryRecord &,
-		 const NetGameInfo &);
+	void update_game_info(UI::Table<const NetOpenGame* const>::EntryRecord&, const NetGameInfo&);
 
 	void change_hostname();
 	void change_playername();

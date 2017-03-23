@@ -4,8 +4,10 @@ include "tribes/scripting/help/format_help.lua"
 -- RST
 -- ware_help.lua
 -- ---------------
-
--- Functions used in the ingame ware help windows for formatting the text and pictures.
+--
+-- This script returns a formatted entry for the ingame ware help.
+-- Pass the internal tribe name and ware name to the coroutine to select the
+-- ware type.
 
 
 --  =======================================================
@@ -13,7 +15,7 @@ include "tribes/scripting/help/format_help.lua"
 --  =======================================================
 
 -- RST
--- .. function ware_help_general_string(tribe, ware_description)
+-- .. function:: ware_help_general_string(tribe, ware_description)
 --
 --    Displays general info texts about the ware
 --
@@ -26,7 +28,9 @@ function ware_help_general_string(tribe, ware_description)
    if (purpose_text ~= "") then
       purpose_text = purpose_text .. " "
    end
-   purpose_text = ware_helptext() .. ware_helptext(tribe.name)
+   -- TRANSLATORS: Put 2 sentences one after the other.
+   -- Languages using Chinese script probably want to lose the blank space here.
+   purpose_text = pgettext("sentence_separator", "%s %s"):bformat(ware_helptext(), ware_helptext(tribe.name))
 
    -- TODO(GunChleoc): Split into purpose and note
    local result = rt(h2(_"Purpose")) ..
@@ -35,7 +39,7 @@ function ware_help_general_string(tribe, ware_description)
 end
 
 -- RST
--- .. function ware_help_producers_string(tribe, ware_description)
+-- .. function:: ware_help_producers_string(tribe, ware_description)
 --
 --    Displays the buildings that produce this ware with information about
 --    wares consumed in their production programs
@@ -86,7 +90,7 @@ function ware_help_producers_string(tribe, ware_description)
 
          -- Now collect the consumed wares for each filtered program and print the program info
          for j, program_name in ipairs(producing_programs) do
-            result = result .. help_consumed_wares(building, program_name)
+            result = result .. help_consumed_wares_workers(tribe, building, program_name)
             if (produced_wares_counters[program_name] > 0) then
                result = result
                   -- TRANSLATORS: Ware Encyclopedia: Wares produced by a productionsite
@@ -101,7 +105,7 @@ function ware_help_producers_string(tribe, ware_description)
 end
 
 -- RST
--- .. function ware_help_consumers_string(tribe, ware_description)
+-- .. function:: ware_help_consumers_string(tribe, ware_description)
 --
 --    Displays the buildings that consume this ware and about
 --    workers that use this ware as a tool

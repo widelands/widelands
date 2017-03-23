@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2009 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -19,19 +19,25 @@
 
 #include "ui_fsmenu/main_menu.h"
 
-FullscreenMenuMainMenu::FullscreenMenuMainMenu():
-	FullscreenMenuMainMenu("images/ui_fsmenu/ui_fsmenu.jpg")
-	{}
+FullscreenMenuMainMenu::FullscreenMenuMainMenu()
+   : FullscreenMenuBase(),
 
-FullscreenMenuMainMenu::FullscreenMenuMainMenu(const std::string& background_image):
-	FullscreenMenuBase(background_image),
+     // Values for alignment and size
+     box_x_(get_w() * 13 / 40),
+     box_y_(get_h() * 6 / 25),
+     butw_(get_w() * 7 / 20),
+     buth_(get_h() * 9 / 200),
+     title_y_(get_h() * 3 / 40),
+     padding_(buth_ / 3),
+     button_background_("images/ui_basic//but3.png"),
+     vbox_(this, 0, 0, UI::Box::Vertical, 0, 0, padding_) {
+}
 
-	// Values for alignment and size
-	box_x_(get_w() * 13 / 40),
-	box_y_(get_h() * 6 / 25),
-	butw_(get_w() * 7 / 20),
-	buth_(get_h() * 9 / 200),
-	title_y_(get_h() * 3 / 40),
-	padding_(buth_ / 3),
-	button_background_("images/ui_basic//but3.png")
-{}
+void FullscreenMenuMainMenu::layout() {
+	box_x_ = get_w() * 13 / 40;
+	box_y_ = get_h() * 6 / 25;
+	butw_ = get_w() * 7 / 20;
+	buth_ = get_h() * 9 / 200;
+	title_y_ = get_h() * 3 / 40;
+	padding_ = buth_ / 3;
+}

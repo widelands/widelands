@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2008, 2010 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -25,10 +25,10 @@
 #include <set>
 #include <vector>
 
+#include "base/vector.h"
 #include "logic/field.h"
 #include "logic/map.h"
 #include "logic/widelands_geometry.h"
-#include "base/point.h"
 
 class Image;
 
@@ -56,12 +56,12 @@ struct FieldOverlayManager {
 	/// A overlay as drawn onto the screen.
 	struct OverlayInfo {
 		OverlayInfo() = default;
-		OverlayInfo(const Image* init_pic, const Point& init_hotspot)
+		OverlayInfo(const Image* init_pic, const Vector2i& init_hotspot)
 		   : pic(init_pic), hotspot(init_hotspot) {
 		}
 
 		const Image* pic;
-		Point hotspot;
+		Vector2i hotspot;
 	};
 
 	/// A function returning Field::nodecaps() for the build overlay. This can be
@@ -85,11 +85,11 @@ struct FieldOverlayManager {
 
 	/// Register an overlay at a location (node or triangle). hotspot is the point
 	/// of the picture that will be exactly over the location. If hotspot is
-	/// Point::invalid(), the center of the picture will be used as hotspot.
-	void register_overlay(const Widelands::TCoords<> coords,
+	/// Vector2i::invalid(), the center of the picture will be used as hotspot.
+	void register_overlay(const Widelands::TCoords<>& coords,
 	                      const Image* pic,
 	                      int32_t level,
-	                      Point hotspot = Point::invalid(),
+	                      Vector2i hotspot = Vector2i::invalid(),
 	                      OverlayId overlay_id = 0);
 
 	/// removes all overlays when pic is nullptr.
@@ -111,21 +111,21 @@ struct FieldOverlayManager {
 private:
 	struct RegisteredOverlays {
 		RegisteredOverlays(const OverlayId init_overlay_id,
-		                    const Image* init_pic,
-		                    const Point init_hotspot,
-		                    const int init_level)
+		                   const Image* init_pic,
+		                   const Vector2i init_hotspot,
+		                   const int init_level)
 		   : pic(init_pic), hotspot(init_hotspot), level(init_level) {
 			overlay_ids.insert(init_overlay_id);
 		}
 		std::set<OverlayId> overlay_ids;
 		const Image* pic;
-		Point hotspot;
+		Vector2i hotspot;
 		int level;
 	};
 
 	using RegisteredOverlaysMap = std::multimap<const Widelands::Coords,
-	                                                      RegisteredOverlays,
-	                                                      Widelands::Coords::OrderingFunctor>;
+	                                            RegisteredOverlays,
+	                                            Widelands::Coords::OrderingFunctor>;
 
 	// Returns the index into buildhelp_infos_ for the correct fieldcaps for
 	// 'fc' according to the current 'callback_'.

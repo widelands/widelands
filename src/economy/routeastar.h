@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2011-2013 by the Widelands Development Team
+ * Copyright (C) 2011-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -29,9 +29,9 @@ struct IRoute;
 struct Router;
 
 struct BaseRouteAStar {
-	BaseRouteAStar(Router & router, WareWorker type);
+	BaseRouteAStar(Router& router, WareWorker type);
 
-	void routeto(RoutingNode & to, IRoute & route);
+	void routeto(RoutingNode& to, IRoute& route);
 
 protected:
 	RoutingNode::Queue open_;
@@ -72,14 +72,13 @@ protected:
  *
  * @see MapAStar
  */
-template<typename Est_>
-struct RouteAStar : BaseRouteAStar {
+template <typename Est_> struct RouteAStar : BaseRouteAStar {
 	using Estimator = Est_;
 
-	RouteAStar(Router & router, WareWorker type, const Estimator & est = Estimator());
+	RouteAStar(Router& router, WareWorker type, const Estimator& est = Estimator());
 
-	void push(RoutingNode & node, int32_t cost = 0, RoutingNode * backlink = nullptr);
-	RoutingNode * step();
+	void push(RoutingNode& node, int32_t cost = 0, RoutingNode* backlink = nullptr);
+	RoutingNode* step();
 
 private:
 	Estimator estimator_;
@@ -90,11 +89,9 @@ private:
  * while @p est is used to estimate the remaining cost to destination at each newly
  * seen node.
  */
-template<typename Est_>
-RouteAStar<Est_>::RouteAStar(Router & router, WareWorker type, const Estimator & est) :
-	BaseRouteAStar(router, type),
-	estimator_(est)
-{
+template <typename Est_>
+RouteAStar<Est_>::RouteAStar(Router& router, WareWorker type, const Estimator& est)
+   : BaseRouteAStar(router, type), estimator_(est) {
 }
 
 /**
@@ -102,9 +99,8 @@ RouteAStar<Est_>::RouteAStar(Router & router, WareWorker type, const Estimator &
  *
  * In particular, this is used to populate the open queue with the initial source nodes.
  */
-template<typename Est_>
-void RouteAStar<Est_>::push(RoutingNode & node, int32_t cost, RoutingNode * backlink)
-{
+template <typename Est_>
+void RouteAStar<Est_>::push(RoutingNode& node, int32_t cost, RoutingNode* backlink) {
 	if (node.mpf_cycle != mpf_cycle) {
 		node.mpf_cycle = mpf_cycle;
 		node.mpf_backlink = backlink;
@@ -118,9 +114,7 @@ void RouteAStar<Est_>::push(RoutingNode & node, int32_t cost, RoutingNode * back
 	}
 }
 
-template<typename Est_>
-RoutingNode * RouteAStar<Est_>::step()
-{
+template <typename Est_> RoutingNode* RouteAStar<Est_>::step() {
 	if (open_.empty())
 		return nullptr;
 
@@ -130,19 +124,17 @@ RoutingNode * RouteAStar<Est_>::step()
 	// the reserved memory, but most implementations do not.
 	neighbours_.clear();
 
-	RoutingNode * current = open_.top();
+	RoutingNode* current = open_.top();
 	open_.pop(current);
 
 	current->get_neighbours(type_, neighbours_);
 
 	for (RoutingNodeNeighbour& temp_neighbour : neighbours_) {
-		RoutingNode & neighbour = *temp_neighbour.get_neighbour();
+		RoutingNode& neighbour = *temp_neighbour.get_neighbour();
 
 		// We have already found the best path
 		// to this neighbour, no need to visit it again.
-		if
-			(neighbour.mpf_cycle == mpf_cycle &&
-			 !neighbour.cookie().is_active())
+		if (neighbour.mpf_cycle == mpf_cycle && !neighbour.cookie().is_active())
 			continue;
 
 		int32_t realcost = current->mpf_realcost + temp_neighbour.get_cost();
@@ -157,18 +149,16 @@ RoutingNode * RouteAStar<Est_>::step()
  * so that it should move quickly towards the given destination.
  */
 struct AStarEstimator {
-	AStarEstimator(ITransportCostCalculator & calc, RoutingNode & dest) :
-		calc_(calc), dest_(dest.get_position())
-	{
+	AStarEstimator(ITransportCostCalculator& calc, RoutingNode& dest)
+	   : calc_(calc), dest_(dest.get_position()) {
 	}
 
-	int32_t operator()(RoutingNode & current) const
-	{
+	int32_t operator()(RoutingNode& current) const {
 		return calc_.calc_cost_estimate(current.get_position(), dest_);
 	}
 
 private:
-	ITransportCostCalculator & calc_;
+	ITransportCostCalculator& calc_;
 	Coords dest_;
 };
 
@@ -177,9 +167,11 @@ private:
  * which means that the resulting search is effectively Dijkstra's algorithm.
  */
 struct AStarZeroEstimator {
-	int32_t operator()(RoutingNode &) const {return 0;}
+	int32_t operator()(RoutingNode&) const {
+		return 0;
+	}
 };
 
-} // namespace Widelands
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_ECONOMY_ROUTEASTAR_H

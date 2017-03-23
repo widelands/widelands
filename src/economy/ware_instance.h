@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004, 2006-2013 by the Widelands Development Team
+ * Copyright (C) 2004-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -125,8 +125,8 @@ public:
 	}
 
 	void save(EditorGameBase&, MapObjectSaver&, FileWrite&) override;
-	static MapObject::Loader* load(EditorGameBase&, MapObjectLoader&, FileRead&,
-											 const TribesLegacyLookupTable& lookup_table);
+	static MapObject::Loader*
+	load(EditorGameBase&, MapObjectLoader&, FileRead&, const TribesLegacyLookupTable& lookup_table);
 };
 }
 

@@ -4,32 +4,11 @@ include "tribes/scripting/help/format_help.lua"
 
 -- RST
 -- building_help.lua
--- ---------------
-
--- Functions used in the ingame building help windows for formatting the text and pictures.
-
---  =======================================================
---  *************** Basic helper functions ****************
---  =======================================================
-
--- RST
--- .. function text_line(t1, t2[, imgstr = nil])
+-- -----------------
 --
---    Creates a line of h3 formatted text followed by normal text and an image.
---
---    :arg t1: text in h3 format.
---    :arg t2: text in p format.
---    :arg imgstr: image aligned right.
---    :returns: header followed by normal text and image.
---
-function text_line(t1, t2, imgstr)
-   if imgstr then
-      return "<rt text-align=left image=" .. imgstr .. " image-align=right><p font-size=13 font-color=D1D1D1>" ..  t1 .. "</p><p line-spacing=3 font-size=12>" .. t2 .. "<br></p><p font-size=8> <br></p></rt>"
-   else
-      return "<rt text-align=left><p font-size=13 font-color=D1D1D1>" ..  t1 .. "</p><p line-spacing=3 font-size=12>" .. t2 .. "<br></p><p font-size=8> <br></p></rt>"
-   end
-end
-
+-- This script returns a formatted entry for the ingame building help.
+-- Pass the internal tribe name and building name to the coroutine to select the
+-- building type.
 
 --  =======================================================
 --  ********** Helper functions for dependencies **********
@@ -103,7 +82,7 @@ function dependencies_training_food(foods)
          food_warenames[countfood] = ware_description.descname
          food_images[countfood] = ware_description.icon_name
       end
-      local text = localize_list(food_warenames, "or")
+      local text = localize_list(food_warenames, "or", "tribes_encyclopedia")
       if (countlist > 1) then
          text = _"%s and":bformat(text)
       end
@@ -174,7 +153,7 @@ end
 
 
 -- RST
--- .. function building_help_general_string(tribe, building_description)
+-- .. function:: building_help_general_string(tribe, building_description)
 --
 --    Creates the string for the general section in building help
 --
@@ -232,12 +211,12 @@ function building_help_general_string(tribe, building_description)
 
    elseif(building_description.type_name == "warehouse") then
       result = result .. rt(h3(_"Healing:")
-         .. p(ngettext("Garrisoned soldiers heal %d health point per second", "Garrisoned soldiers heal %d health points per second", building_description.heal_per_second):bformat(building_description.heal_per_second)))
+         .. p(ngettext("Garrisoned soldiers heal %d health point per second.", "Garrisoned soldiers heal %d health points per second.", building_description.heal_per_second):bformat(building_description.heal_per_second)))
       result = result .. text_line(_"Conquer range:", building_description.conquers)
 
    elseif(building_description.type_name == "militarysite") then
       result = result .. rt(h3(_"Healing:")
-         .. p(ngettext("Garrisoned soldiers heal %d health point per second", "Garrisoned soldiers heal %d health points per second", building_description.heal_per_second):bformat(building_description.heal_per_second)))
+         .. p(ngettext("Garrisoned soldiers heal %d health point per second.", "Garrisoned soldiers heal %d health points per second.", building_description.heal_per_second):bformat(building_description.heal_per_second)))
       result = result .. text_line(_"Capacity:", building_description.max_number_of_soldiers)
       result = result .. text_line(_"Conquer range:", building_description.conquers)
 
@@ -615,7 +594,7 @@ end
 
 
 -- RST
--- .. function building_help_crew_string(tribe, building_description)
+-- .. function:: building_help_crew_string(tribe, building_description)
 --
 --    Displays the building's workers with an image and the tool they use
 --
@@ -663,8 +642,10 @@ function building_help_crew_string(tribe, building_description)
 
       if (number_of_workers > 0) then
          local tool_string = help_tool_string(tribe, toolnames, number_of_workers)
-         -- TRANSLATORS: Tribal Encyclopedia: Heading for which tool workers use
-         result = result .. rt(h3(ngettext("Worker uses:","Workers use:", number_of_workers))) .. tool_string
+         if (tool_string ~= "") then
+            -- TRANSLATORS: Tribal Encyclopedia: Heading for which tool workers use
+            result = result .. rt(h3(ngettext("Worker uses:","Workers use:", number_of_workers))) .. tool_string
+         end
       end
 
       if(becomes_description) then
@@ -695,7 +676,7 @@ end
 
 
 -- RST
--- .. building_help_production_section()
+-- .. function:: building_help_production_section()
 --
 --    Displays the production/performance section with a headline
 --
@@ -712,7 +693,7 @@ end
 
 
 -- RST
--- .. function building_help(tribe, building_description)
+-- .. function:: building_help(tribe, building_description)
 --
 --    Main function to create a building help string.
 --

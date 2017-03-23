@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004, 2008 by the Widelands Development Team
+ * Copyright (C) 2004-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -34,7 +34,7 @@
 
 // be compatible to microsoft
 #define closesocket close
-#define DATATYPE    void
+#define DATATYPE void
 
 #else
 
@@ -42,7 +42,7 @@
 // at msdn.microsoft.com
 #include <winsock2.h>
 
-#define DATATYPE    char
+#define DATATYPE char
 // microsoft doesn't have these
 using in_port_t = uint16_t;
 using in_addr_t = uint32_t;

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004, 2006-2011 by the Widelands Development Team
+ * Copyright (C) 2004-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -33,7 +33,7 @@ class Warehouse;
 class WareInstance;
 class Worker;
 
-enum class SupplyProviders {kWarehouse, kFlagOrRoad, kShip};
+enum class SupplyProviders { kWarehouse, kFlagOrRoad, kShip };
 
 /**
  * A Supply is a virtual base class representing something that can offer
@@ -50,7 +50,7 @@ enum class SupplyProviders {kWarehouse, kFlagOrRoad, kShip};
  * changes.
  */
 struct Supply : public Trackable {
-	virtual PlayerImmovable * get_position(Game &) = 0;
+	virtual PlayerImmovable* get_position(Game&) = 0;
 
 	/**
 	 * Indicates whether this supply is active as explained above (out
@@ -62,7 +62,7 @@ struct Supply : public Trackable {
 	 * Return the type of player im/movable where the ware is now (warehouse,
 	 * flag or ship).
 	 */
-	virtual SupplyProviders provider_type(Game *) const = 0;
+	virtual SupplyProviders provider_type(Game*) const = 0;
 
 	/**
 	 * Indicates whether this supply is in storage or on its way to
@@ -77,7 +77,7 @@ struct Supply : public Trackable {
 	 *
 	 * \note This is only valid if \ref has_storage returns \c false.
 	 */
-	virtual void get_ware_type(WareWorker & type, DescriptionIndex & ware) const = 0;
+	virtual void get_ware_type(WareWorker& type, DescriptionIndex& ware) const = 0;
 
 	/**
 	 * Send this to the given warehouse.
@@ -85,13 +85,13 @@ struct Supply : public Trackable {
 	 * Sets up all the required transfers; assumes that \ref has_storage
 	 * returns \c false.
 	 */
-	virtual void send_to_storage(Game &, Warehouse * wh) = 0;
+	virtual void send_to_storage(Game&, Warehouse* wh) = 0;
 
 	/**
 	 * \return the number of wares or workers that can be launched right
 	 * now for the thing requested by the given request
 	 */
-	virtual uint32_t nr_supplies(const Game &, const Request &) const = 0;
+	virtual uint32_t nr_supplies(const Game&, const Request&) const = 0;
 
 	/**
 	 * Prepare an ware to satisfy the given request. Note that the caller
@@ -100,7 +100,7 @@ struct Supply : public Trackable {
 	 * \throw wexception if the request is not an ware request or no such
 	 * ware is available in the supply.
 	 */
-	virtual WareInstance & launch_ware(Game &, const Request &) = 0;
+	virtual WareInstance& launch_ware(Game&, const Request&) = 0;
 
 	/**
 	 * Prepare a worker to satisfy the given request. Note that the caller
@@ -109,9 +109,8 @@ struct Supply : public Trackable {
 	 * \throw wexception if the request is not a worker request or no such
 	 * worker is available in the supply.
 	 */
-	virtual Worker & launch_worker(Game &, const Request &) = 0;
+	virtual Worker& launch_worker(Game&, const Request&) = 0;
 };
-
 }
 
 #endif  // end of include guard: WL_ECONOMY_SUPPLY_H

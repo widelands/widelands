@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2015 by the Widelands Development Team
+ * Copyright (C) 2006-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -39,7 +39,7 @@
 
 using namespace Widelands;
 
-namespace  {
+namespace {
 
 // Setup the static objects Widelands needs to operate and initializes systems.
 void initialize() {
@@ -56,8 +56,7 @@ void initialize() {
 
 }  // namespace
 
-int main(int argc, char ** argv)
-{
+int main(int argc, char** argv) {
 	if (!(2 <= argc && argc <= 3)) {
 		log("Usage: %s <map file>\n", argv[0]);
 		return 1;
@@ -90,7 +89,7 @@ int main(int argc, char ** argv)
 		ml->load_map_complete(egbase, Widelands::MapLoader::LoadType::kScenario);
 
 		std::unique_ptr<Texture> minimap(
-		   draw_minimap(egbase, nullptr, Point(0, 0), MiniMapLayer::Terrain));
+		   draw_minimap(egbase, nullptr, Rectf(), MiniMapType::kStaticMap, MiniMapLayer::Terrain));
 
 		// Write minimap
 		{
@@ -103,20 +102,19 @@ int main(int argc, char ** argv)
 		{
 			FileWrite fw;
 
-			const auto write_string = [&fw] (const std::string& s) {
-				fw.data(s.c_str(), s.size());
-			};
-			const auto write_key_value =
-			   [&write_string](const std::string& key, const std::string& quoted_value) {
+			const auto write_string = [&fw](const std::string& s) { fw.data(s.c_str(), s.size()); };
+			const auto write_key_value = [&write_string](
+			   const std::string& key, const std::string& quoted_value) {
 				write_string((boost::format("\"%s\": %s") % key % quoted_value).str());
 			};
-			const auto write_key_value_string =
-			   [&write_key_value](const std::string& key, const std::string& value) {
+			const auto write_key_value_string = [&write_key_value](
+			   const std::string& key, const std::string& value) {
 				std::string quoted_value = value;
 				boost::replace_all(quoted_value, "\"", "\\\"");
 				write_key_value(key, "\"" + value + "\"");
 			};
-			const auto write_key_value_int = [&write_key_value] (const std::string& key, const int value) {
+			const auto write_key_value_int = [&write_key_value](
+			   const std::string& key, const int value) {
 				write_key_value(key, boost::lexical_cast<std::string>(value));
 			};
 			write_string("{\n  ");
@@ -136,7 +134,7 @@ int main(int argc, char ** argv)
 			write_string(",\n  ");
 
 			const std::string world_name =
-					static_cast<Widelands::WidelandsMapLoader*>(ml.get())->old_world_name();
+			   static_cast<Widelands::WidelandsMapLoader*>(ml.get())->old_world_name();
 			write_key_value_string("world_name", world_name);
 			write_string(",\n  ");
 			write_key_value_string("minimap", map_path + ".png");
@@ -145,8 +143,7 @@ int main(int argc, char ** argv)
 			write_string("}\n");
 			fw.write(*in_out_filesystem, (map_file + ".json").c_str());
 		}
-	}
-	catch (std::exception& e) {
+	} catch (std::exception& e) {
 		log("Exception: %s.\n", e.what());
 		return 1;
 	}

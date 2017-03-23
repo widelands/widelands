@@ -135,6 +135,7 @@ tribes:new_tribe {
       },
       {
          -- Military
+         "barbarians_recruit",
          "barbarians_soldier",
          "barbarians_trainer",
          "barbarians_helmsmith",
@@ -201,6 +202,7 @@ tribes:new_tribe {
       "barbarians_warmill",
       "barbarians_ax_workshop",
       "barbarians_shipyard",
+      "barbarians_barracks",
 
       -- Big
       "barbarians_cattlefarm",

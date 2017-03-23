@@ -8,6 +8,10 @@ wl_library(base_log
   SRCS
     log.cc
     log.h
+  USES_SDL2
+  DEPENDS
+    base_macros
+    base_exceptions
 )
 
 wl_library(base_exceptions
@@ -33,9 +37,9 @@ wl_library(base_i18n
 
 wl_library(base_geometry
   SRCS
-    point.h
-    point.cc
     rect.h
+    vector.h
+    vector.cc
 )
 
 wl_library(base_md5
@@ -45,7 +49,6 @@ wl_library(base_md5
   DEPENDS
     base_macros
 )
-
 
 wl_library(base_scoped_timer
   SRCS
@@ -63,4 +66,12 @@ wl_library(base_time_string
     time_string.cc
   DEPENDS
     base_i18n
+)
+
+wl_library(base_math
+  SRCS
+    math.h
+    math.cc
+  DEPENDS
+    base_macros
 )

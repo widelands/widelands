@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006, 2008-2010 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -41,17 +41,18 @@ namespace UI {
  */
 class BuildingHelpWindow : public UI::UniqueWindow {
 public:
-	BuildingHelpWindow
-		(Panel * parent, UI::UniqueWindow::Registry& reg,
-		 const Widelands::BuildingDescr& building_description,
-		 const Widelands::TribeDescr& tribe,
-		 LuaInterface * const lua,
-		 uint32_t width = 300, uint32_t height = 400);
+	BuildingHelpWindow(Panel* parent,
+	                   UI::UniqueWindow::Registry& reg,
+	                   const Widelands::BuildingDescr& building_description,
+	                   const Widelands::TribeDescr& tribe,
+	                   LuaInterface* const lua,
+	                   uint32_t width = 300,
+	                   uint32_t height = 400);
 
 private:
 	std::unique_ptr<MultilineTextarea> textarea_;
 };
 
-} // namespace UI
+}  // namespace UI
 
 #endif  // end of include guard: WL_WUI_HELPWINDOW_H

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2012 by the Widelands Development Team
+ * Copyright (C) 2012-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -26,28 +26,28 @@
 ///  This is not a real editor tool. It serves to combine 'hold down mouse and move'
 ///  tool actions in one class.
 struct EditorDrawTool : public EditorTool {
-	EditorDrawTool() : EditorTool(*this, *this) {}
-
-	int32_t handle_click_impl(const Widelands::World& world,
-	                          Widelands::NodeAndTriangle<> center,
-	                          EditorInteractive& parent,
-	                          EditorActionArgs* args,
-							  Widelands::Map* map) override;
-
-	int32_t handle_undo_impl(const Widelands::World& world,
-	                         Widelands::NodeAndTriangle<> center,
-	                         EditorInteractive& parent,
-	                         EditorActionArgs* args,
-							 Widelands::Map* map) override;
-
-	EditorActionArgs format_args_impl(EditorInteractive & parent) override;
-
-	char const * get_sel_impl() const override {
-		return "EDITOR_DRAW_TOOL";
+	EditorDrawTool() : EditorTool(*this, *this) {
 	}
 
-	void add_action(EditorToolAction ac, EditorActionArgs & args);
+	int32_t handle_click_impl(const Widelands::World& world,
+	                          const Widelands::NodeAndTriangle<>& center,
+	                          EditorInteractive& parent,
+	                          EditorActionArgs* args,
+	                          Widelands::Map* map) override;
 
+	int32_t handle_undo_impl(const Widelands::World& world,
+	                         const Widelands::NodeAndTriangle<>& center,
+	                         EditorInteractive& parent,
+	                         EditorActionArgs* args,
+	                         Widelands::Map* map) override;
+
+	EditorActionArgs format_args_impl(EditorInteractive& parent) override;
+
+	const Image* get_sel_impl() const override {
+		return g_gr->images().get("images/novalue.png");
+	}
+
+	void add_action(EditorToolAction ac, EditorActionArgs& args);
 };
 
 #endif  // end of include guard: WL_EDITOR_TOOLS_DRAW_TOOL_H

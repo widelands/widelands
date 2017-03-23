@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2016 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -46,17 +46,18 @@ using std::endl;
 using std::ios;
 using std::setiosflags;
 
-namespace  {
+namespace {
 
 struct S2MapDescrHeader {
-	char    magic[10]; // "WORLD_V1.0"
-	char    name [20]; // We need fixed char arrays rather than strings here. Otherwise, this will segfault.
+	char magic[10];  // "WORLD_V1.0"
+	char name[20];   // We need fixed char arrays rather than strings here. Otherwise, this will
+	                 // segfault.
 	int16_t w;
 	int16_t h;
-	int8_t  uses_world; // 0 = green, 1 =black, 2 = winter
-	int8_t  nplayers;
-	char    author[26];
-	char    bulk[2290]; // unknown
+	int8_t uses_world;  // 0 = green, 1 =black, 2 = winter
+	int8_t nplayers;
+	char author[26];
+	char bulk[2290];  // unknown
 } /* size 2352 */;
 
 // TODO(unknown): the following bob types appear in S2 maps but are unknown
@@ -173,14 +174,8 @@ load_s2mf_section(FileRead& fr, int32_t const width, int32_t const height) {
 
 	std::unique_ptr<uint8_t[]> section;
 	memcpy(buffer, fr.data(6), 6);
-	if
-		(buffer[0] != 0x10 ||
-		 buffer[1] != 0x27 ||
-		 buffer[2] != 0x00 ||
-		 buffer[3] != 0x00 ||
-		 buffer[4] != 0x00 ||
-		 buffer[5] != 0x00)
-	{
+	if (buffer[0] != 0x10 || buffer[1] != 0x27 || buffer[2] != 0x00 || buffer[3] != 0x00 ||
+	    buffer[4] != 0x00 || buffer[5] != 0x00) {
 		cerr << "Section marker not found" << endl;
 		return section;
 	}
@@ -218,9 +213,12 @@ load_s2mf_section(FileRead& fr, int32_t const width, int32_t const height) {
 
 std::string get_world_name(S2MapLoader::WorldType world) {
 	switch (world) {
-		case S2MapLoader::GREENLAND: return "greenland";
-		case S2MapLoader::BLACKLAND: return "blackland";
-		case S2MapLoader::WINTERLAND: return "winterland";
+	case S2MapLoader::GREENLAND:
+		return "greenland";
+	case S2MapLoader::BLACKLAND:
+		return "blackland";
+	case S2MapLoader::WINTERLAND:
+		return "winterland";
 	}
 	NEVER_HERE();
 }
@@ -242,57 +240,91 @@ private:
 	DISALLOW_COPY_AND_ASSIGN(TerrainConverter);
 };
 
-TerrainConverter::TerrainConverter
-		(const Widelands::World& world, const WorldLegacyLookupTable& lookup_table) :
-	world_legacy_lookup_table_(lookup_table),
-	world_(world),
-	table_
-	{
-	std::make_pair(S2MapLoader::GREENLAND, std::vector<std::string>
-		{
-			"steppe", "berg1", "schnee", "sumpf", "strand", "wasser", "wiese1",
-			"wiese2", "wiese3", "berg2", "berg3", "berg4", "steppe_kahl",
-			"wiese4", "lava", "bergwiese"
-		}),
-	std::make_pair(S2MapLoader::BLACKLAND, std::vector<std::string>
-		{
-			"ashes", "mountain1", "lava-stone1", "lava-stone2", "strand", "water",
-			"hardground1", "hardground2", "hardground3", "mountain2", "mountain3",
-			"mountain4", "ashes2", "hardground4", "lava", "hardlava"
-		}),
-	std::make_pair(S2MapLoader::WINTERLAND, std::vector<std::string>
-		{
-			"tundra", "mountain1", "ice_flows", "ice_flows2", "ice", "water",
-			"tundra_taiga", "tundra2", "tundra3", "mountain2", "mountain3",
-			"mountain4", "strand", "taiga", "lava", "snow"
-		})
-	}
-{}
+TerrainConverter::TerrainConverter(const Widelands::World& world,
+                                   const WorldLegacyLookupTable& lookup_table)
+   : world_legacy_lookup_table_(lookup_table),
+     world_(world),
+     table_{std::make_pair(
+               S2MapLoader::GREENLAND,
+               std::vector<std::string>{
+                  "summer_steppe", "summer_mountain1", "summer_snow", "summer_swamp",
+                  "summer_beach", "summer_water", "summer_meadow1", "summer_meadow2",
+                  "summer_meadow3", "summer_mountain2", "summer_mountain3", "summer_mountain4",
+                  "summer_steppe_barren", "summer_meadow4", "lava", "summer_mountain_meadow"}),
+            std::make_pair(S2MapLoader::BLACKLAND,
+                           std::vector<std::string>{
+                              "ashes", "mountain1", "lava-stone1", "lava-stone2", "strand", "water",
+                              "hardground1", "hardground2", "hardground3", "mountain2", "mountain3",
+                              "mountain4", "ashes2", "hardground4", "lava", "hardlava"}),
+            std::make_pair(S2MapLoader::WINTERLAND,
+                           std::vector<std::string>{
+                              "tundra", "mountain1", "ice_flows", "ice_flows2", "ice", "water",
+                              "tundra_taiga", "tundra2", "tundra3", "mountain2", "mountain3",
+                              "mountain4", "strand", "taiga", "lava", "snow"})} {
+}
 
 Widelands::DescriptionIndex TerrainConverter::lookup(S2MapLoader::WorldType world, int8_t c) const {
 	switch (c) {
 	// the following comments are valid for greenland - blackland and winterland have equivalents
 	// source: http://bazaar.launchpad.net/~xaser/s25rttr/s25edit/view/head:/WLD_reference.txt
-	case 0x00: c =  0; break; // steppe meadow1
-	case 0x01: c =  1; break; // mountain 1
-	case 0x02: c =  2; break; // snow
-	case 0x03: c =  3; break; // swamp
-	case 0x04: c =  4; break; // steppe = strand
-	case 0x05: c =  5; break; // water
-	case 0x06: c =  4; break; // strand
-	case 0x07: c = 12; break; // steppe 2 = dry land
-	case 0x08: c =  6; break; // meadow 1
-	case 0x09: c =  7; break; // meadow 2
-	case 0x0a: c =  8; break; // meadow 3
-	case 0x0b: c =  9; break; // mountain 2
-	case 0x0c: c = 10; break; // mountain 3
-	case 0x0d: c = 11; break; // mountain 4
-	case 0x0e: c = 12; break; // steppe meadow 2
-	case 0x0f: c = 13; break; // flower meadow
-	case 0x10: c = 14; break; // lava
+	case 0x00:
+		c = 0;
+		break;  // steppe meadow1
+	case 0x01:
+		c = 1;
+		break;  // mountain 1
+	case 0x02:
+		c = 2;
+		break;  // snow
+	case 0x03:
+		c = 3;
+		break;  // swamp
+	case 0x04:
+		c = 4;
+		break;  // steppe = strand
+	case 0x05:
+		c = 5;
+		break;  // water
+	case 0x06:
+		c = 4;
+		break;  // strand
+	case 0x07:
+		c = 12;
+		break;  // steppe 2 = dry land
+	case 0x08:
+		c = 6;
+		break;  // meadow 1
+	case 0x09:
+		c = 7;
+		break;  // meadow 2
+	case 0x0a:
+		c = 8;
+		break;  // meadow 3
+	case 0x0b:
+		c = 9;
+		break;  // mountain 2
+	case 0x0c:
+		c = 10;
+		break;  // mountain 3
+	case 0x0d:
+		c = 11;
+		break;  // mountain 4
+	case 0x0e:
+		c = 12;
+		break;  // steppe meadow 2
+	case 0x0f:
+		c = 13;
+		break;  // flower meadow
+	case 0x10:
+		c = 14;
+		break;  // lava
 	// case 0x11: // color
-	case 0x12: c = 15; break; // mountain meadow
-	case 0x13: c =  4; break; // unknown texture
+	case 0x12:
+		c = 15;
+		break;  // mountain meadow
+	case 0x13:
+		c = 4;
+		break;  // unknown texture
 
 	default:
 		log("Unknown texture %x. Defaulting to water.\n", c);
@@ -300,16 +332,14 @@ Widelands::DescriptionIndex TerrainConverter::lookup(S2MapLoader::WorldType worl
 		break;
 	}
 
-	const std::string& old_terrain_name = table_.at(world)[c];
 	return world_.terrains().get_index(
-	   world_legacy_lookup_table_.lookup_terrain(old_terrain_name));
+	   world_legacy_lookup_table_.lookup_terrain(table_.at(world)[c]));
 }
 
 }  // namespace
 
 S2MapLoader::S2MapLoader(const std::string& filename, Widelands::Map& M)
-: Widelands::MapLoader(filename, M), filename_(filename)
-{
+   : Widelands::MapLoader(filename, M), filename_(filename) {
 }
 
 /// Load the header. The map will then return valid information when
@@ -328,15 +358,9 @@ int32_t S2MapLoader::preload_map(bool const scenario) {
 		//  Load this as scenario. There is no such a thing as S2 scenario,
 		//  therefore set the tribes and some default names.
 
-		const char * const names[] = { //  Just for fun: some roman names
-			"Marius",
-			"Avitus",
-			"Silvanus",
-			"Caius",
-			"Augustus",
-			"Maximus",
-			"Titus",
-			"Rufus",
+		const char* const names[] = {
+		   //  Just for fun: some roman names
+		   "Marius", "Avitus", "Silvanus", "Caius", "Augustus", "Maximus", "Titus", "Rufus",
 		};
 
 		Widelands::PlayerNumber const nr_players = map_.get_nrplayers();
@@ -348,7 +372,6 @@ int32_t S2MapLoader::preload_map(bool const scenario) {
 		}
 	}
 
-
 	set_state(STATE_PRELOADED);
 
 	return 0;
@@ -358,9 +381,7 @@ int32_t S2MapLoader::preload_map(bool const scenario) {
  * Completely loads the map, loads the graphics and places all the objects.
  * From now on the Map* can't be set to another one.
  */
-int32_t S2MapLoader::load_map_complete
-	(Widelands::EditorGameBase& egbase, MapLoader::LoadType)
-{
+int32_t S2MapLoader::load_map_complete(Widelands::EditorGameBase& egbase, MapLoader::LoadType) {
 	std::string timer_message = "S2MapLoader::load_map_complete() for '";
 	timer_message += map_.get_name();
 	timer_message += "' took %ums";
@@ -377,26 +398,23 @@ int32_t S2MapLoader::load_map_complete
 	return 0;
 }
 
-
-
 /**
  * Load informational data of an S2 map
  */
-void S2MapLoader::load_s2mf_header(FileRead& fr)
-{
+void S2MapLoader::load_s2mf_header(FileRead& fr) {
 	S2MapDescrHeader header;
 	memcpy(&header, fr.data(sizeof(header)), sizeof(header));
 
-	//  Header must be swapped for big-endian Systems, works at the moment only
-	//  for PowerPC architecture
-	//  TODO(unknown): Generalize this
+//  Header must be swapped for big-endian Systems, works at the moment only
+//  for PowerPC architecture
+//  TODO(unknown): Generalize this
 #if defined(__ppc__)
 	header.w = swap_16(header.w);
 	header.h = swap_16(header.h);
 #endif
 
 	//  don't really set size, but make the structures valid
-	map_.width_  = header.w;
+	map_.width_ = header.w;
 	map_.height_ = header.h;
 
 	map_.set_author(header.author);
@@ -407,13 +425,11 @@ void S2MapLoader::load_s2mf_header(FileRead& fr)
 	worldtype_ = static_cast<WorldType>(header.uses_world);
 }
 
-
 /**
  * This loads a given file as a settlers 2 map file
  */
-void S2MapLoader::load_s2mf(Widelands::EditorGameBase & egbase)
-{
-	uint8_t * pc;
+void S2MapLoader::load_s2mf(Widelands::EditorGameBase& egbase) {
+	uint8_t* pc;
 
 	FileRead fr;
 	fr.open(*g_fs, filename_.c_str());
@@ -423,17 +439,17 @@ void S2MapLoader::load_s2mf(Widelands::EditorGameBase & egbase)
 
 	//  The header must already have been processed.
 	assert(map_.fields_.get());
-	int16_t const mapwidth  = map_.get_width ();
+	int16_t const mapwidth = map_.get_width();
 	int16_t const mapheight = map_.get_height();
 	assert(mapwidth > 0 && mapheight > 0);
-	egbase.allocate_player_maps(); //  initializes player_fields.vision
+	egbase.allocate_player_maps();  //  initializes player_fields.vision
 
 	//  SWD-SECTION 1: Heights
 	std::unique_ptr<uint8_t[]> section(load_s2mf_section(fr, mapwidth, mapheight));
 	if (!section)
 		throw wexception("Section 1 (Heights) not found");
 
-	Widelands::Field * f = map_.fields_.get();
+	Widelands::Field* f = map_.fields_.get();
 	pc = section.get();
 	for (int16_t y = 0; y < mapheight; ++y)
 		for (int16_t x = 0; x < mapwidth; ++x, ++f, ++pc)
@@ -445,7 +461,7 @@ void S2MapLoader::load_s2mf(Widelands::EditorGameBase & egbase)
 		throw wexception("Section 2 (Terrain 1) not found");
 
 	std::unique_ptr<WorldLegacyLookupTable> lookup_table(
-		create_world_legacy_lookup_table(get_world_name(worldtype_)));
+	   create_world_legacy_lookup_table(get_world_name(worldtype_)));
 
 	const Widelands::World& world = egbase.world();
 	TerrainConverter terrain_converter(world, *lookup_table);
@@ -478,7 +494,6 @@ void S2MapLoader::load_s2mf(Widelands::EditorGameBase & egbase)
 			f->set_terrain_r(terrain_converter.lookup(worldtype_, c & 0x1f));
 		}
 
-
 	//  SWD-SECTION 4: Existing Roads
 	//  As loading of Roads at game-start is not supported, yet - we simply
 	//  skip it.
@@ -486,12 +501,10 @@ void S2MapLoader::load_s2mf(Widelands::EditorGameBase & egbase)
 	if (!section)
 		throw wexception("Section 4 (Existing Roads) not found");
 
-
 	//  SWD-SECTION 5: Bobs
 	std::unique_ptr<uint8_t[]> bobs(load_s2mf_section(fr, mapwidth, mapheight));
 	if (!bobs)
 		throw wexception("Section 5 (Bobs) not found");
-
 
 	//  SWD-SECTION 6: Ways
 	//  This describes where you can put ways
@@ -514,12 +527,10 @@ void S2MapLoader::load_s2mf(Widelands::EditorGameBase & egbase)
 			// ignore everything but HQs
 			if (section[i] == 0x80) {
 				if (bobs[i] < map_.get_nrplayers())
-					map_.set_starting_pos
-						(bobs[i] + 1, Widelands::Coords(x, y));
+					map_.set_starting_pos(bobs[i] + 1, Widelands::Coords(x, y));
 			}
 		}
 	}
-
 
 	//  SWD-SECTION 7: Animals
 	//  0x01        == Bunny
@@ -539,25 +550,42 @@ void S2MapLoader::load_s2mf(Widelands::EditorGameBase & egbase)
 			std::string bobname;
 
 			switch (section[i]) {
-			case 0: break;
-			case 0x01: bobname = "bunny";    break;
-			case 0x02: bobname = "fox";      break;
-			case 0x03: bobname = "reindeer"; break;
-			case 0x04: bobname = "deer";     break;
-			case 0x05: bobname = "duck";     break;
-			case 0x06: bobname = "sheep";    break;
-			case 0x07: bobname = "deer";     break;
-			case 0x08: bobname = "duck";     break;
-			case 0x09: bobname = "elk";      break; // original "donkey"
+			case 0:
+				break;
+			case 0x01:
+				bobname = "bunny";
+				break;
+			case 0x02:
+				bobname = "fox";
+				break;
+			case 0x03:
+				bobname = "reindeer";
+				break;
+			case 0x04:
+				bobname = "deer";
+				break;
+			case 0x05:
+				bobname = "duck";
+				break;
+			case 0x06:
+				bobname = "sheep";
+				break;
+			case 0x07:
+				bobname = "deer";
+				break;
+			case 0x08:
+				bobname = "duck";
+				break;
+			case 0x09:
+				bobname = "elk";
+				break;  // original "donkey"
 			default:
-				cerr
-					<< "Unsupported animal: " << static_cast<int32_t>(section[i])
-					<< endl;
+				cerr << "Unsupported animal: " << static_cast<int32_t>(section[i]) << endl;
 				break;
 			}
 
 			if (!bobname.empty()) {
-				Widelands::DescriptionIndex const idx = world.get_bob(bobname.c_str());
+				Widelands::DescriptionIndex const idx = world.get_critter(bobname.c_str());
 				if (idx == Widelands::INVALID_INDEX) {
 					throw wexception("Missing bob type %s", bobname.c_str());
 				}
@@ -566,13 +594,11 @@ void S2MapLoader::load_s2mf(Widelands::EditorGameBase & egbase)
 		}
 	}
 
-
 	//  SWD-SECTION 8: Unknown
 	//  Skipped
 	section = load_s2mf_section(fr, mapwidth, mapheight);
 	if (!section)
 		throw wexception("Section 8 (Unknown) not found");
-
 
 	//  SWD-SECTION 9: Buildings
 	//  What kind of buildings can be build?
@@ -589,13 +615,11 @@ void S2MapLoader::load_s2mf(Widelands::EditorGameBase & egbase)
 	if (!buildings)
 		throw wexception("Section 9 (Buildings) not found");
 
-
 	//  SWD-SECTION 10: Unknown
 	//  Skipped
 	section = load_s2mf_section(fr, mapwidth, mapheight);
 	if (!section)
 		throw wexception("Section 10 (Unknown) not found");
-
 
 	//  SWD-SECTION 11: Settlers2 Mapeditor tool position
 	//  In this section the positions of the Mapeditor tools seem to be
@@ -604,7 +628,6 @@ void S2MapLoader::load_s2mf(Widelands::EditorGameBase & egbase)
 	section = load_s2mf_section(fr, mapwidth, mapheight);
 	if (!section)
 		throw wexception("Section 11 (Tool Position) not found");
-
 
 	//  SWD-SECTION 12: Resources
 	//  0x00 == Water
@@ -620,7 +643,7 @@ void S2MapLoader::load_s2mf(Widelands::EditorGameBase & egbase)
 		throw wexception("Section 12 (Resources) not found");
 
 	pc = section.get();
-	char const * res;
+	char const* res;
 	int32_t amount = 0;
 	for (uint16_t y = 0; y < mapheight; ++y) {
 		for (uint16_t x = 0; x < mapwidth; ++x, ++pc) {
@@ -628,28 +651,41 @@ void S2MapLoader::load_s2mf(Widelands::EditorGameBase & egbase)
 			uint8_t value = *pc;
 
 			switch (value & 0xF8) {
-			case 0x40: res = "coal";    amount = value & 7; break;
-			case 0x48: res = "iron";    amount = value & 7; break;
-			case 0x50: res = "gold";    amount = value & 7; break;
-			case 0x59: res = "granite"; amount = value & 7; break;
-			default:   res = "";        amount = 0; break;
+			case 0x40:
+				res = "coal";
+				amount = value & 7;
+				break;
+			case 0x48:
+				res = "iron";
+				amount = value & 7;
+				break;
+			case 0x50:
+				res = "gold";
+				amount = value & 7;
+				break;
+			case 0x59:
+				res = "granite";
+				amount = value & 7;
+				break;
+			default:
+				res = "";
+				amount = 0;
+				break;
 			};
 
 			Widelands::DescriptionIndex nres = 0;
 			if (*res) {
 				nres = world.get_resource(res);
 				if (nres == Widelands::INVALID_INDEX)
-					throw wexception
-						("world does not define resource type %s, you can not "
-						 "play settler maps here",
-						 res);
+					throw wexception("world does not define resource type %s, you can not "
+					                 "play settler maps here",
+					                 res);
 			}
-			const Widelands::ResourceAmount real_amount = static_cast<Widelands::ResourceAmount>(2.86f * amount);
+			const Widelands::ResourceAmount real_amount =
+			   static_cast<Widelands::ResourceAmount>(2.86f * amount);
 			map_.initialize_resources(c, nres, real_amount);
 		}
 	}
-
-
 
 	//  SWD-SECTION 13: Higlights and Shadows
 	//  It seems as if the Settlers2 Mapeditor saves the highlights and
@@ -658,7 +694,6 @@ void S2MapLoader::load_s2mf(Widelands::EditorGameBase & egbase)
 	section = load_s2mf_section(fr, mapwidth, mapheight);
 	if (!section)
 		throw wexception("Section 13 (Highlights and Shadows) not found");
-
 
 	//  SWD-SECTION 14: Fieldcount
 	//  Describes to which island the field sticks
@@ -689,25 +724,37 @@ void S2MapLoader::load_s2mf(Widelands::EditorGameBase & egbase)
 		if (idx == Widelands::INVALID_INDEX) {
 			throw wexception("Missing immovable type %s", new_immovable_name.c_str());
 		}
-		egbase.create_immovable(location, idx, Widelands::MapObjectDescr::OwnerType::kWorld);
+		egbase.create_immovable(
+		   location, idx, Widelands::MapObjectDescr::OwnerType::kWorld, nullptr /* owner */);
 	};
 
 	uint8_t c;
 	for (uint16_t y = 0; y < mapheight; ++y)
 		for (uint16_t x = 0; x < mapwidth; ++x) {
 			const Widelands::Coords location(x, y);
-			Widelands::MapIndex const index =
-				Widelands::Map::get_index(location, mapwidth);
+			Widelands::MapIndex const index = Widelands::Map::get_index(location, mapwidth);
 			c = bobs[index];
 			std::string bobname;
 			if (buildings[index] == 0x78) {
 				switch (c) {
-				case BOB_STONE1:        bobname = "stones1"; break;
-				case BOB_STONE2:        bobname = "stones2"; break;
-				case BOB_STONE3:        bobname = "stones3"; break;
-				case BOB_STONE4:        bobname = "stones4"; break;
-				case BOB_STONE5:        bobname = "stones5"; break;
-				case BOB_STONE6:        bobname = "stones6"; break;
+				case BOB_STONE1:
+					bobname = "stones1";
+					break;
+				case BOB_STONE2:
+					bobname = "stones2";
+					break;
+				case BOB_STONE3:
+					bobname = "stones3";
+					break;
+				case BOB_STONE4:
+					bobname = "stones4";
+					break;
+				case BOB_STONE5:
+					bobname = "stones5";
+					break;
+				case BOB_STONE6:
+					bobname = "stones6";
+					break;
 				default:
 					break;
 				}
@@ -718,79 +765,193 @@ void S2MapLoader::load_s2mf(Widelands::EditorGameBase & egbase)
 			}
 
 			switch (c) {
-			case BOB_NONE : break; // DO nothing
+			case BOB_NONE:
+				break;  // DO nothing
 
-			case BOB_PEBBLE1:          bobname = "pebble1";   break;
-			case BOB_PEBBLE2:          bobname = "pebble2";   break;
-			case BOB_PEBBLE3:          bobname = "pebble3";   break;
-			case BOB_PEBBLE4:          bobname = "pebble4";   break;
-			case BOB_PEBBLE5:          bobname = "pebble5";   break;
-			case BOB_PEBBLE6:          bobname = "pebble6";   break;
+			case BOB_PEBBLE1:
+				bobname = "pebble1";
+				break;
+			case BOB_PEBBLE2:
+				bobname = "pebble2";
+				break;
+			case BOB_PEBBLE3:
+				bobname = "pebble3";
+				break;
+			case BOB_PEBBLE4:
+				bobname = "pebble4";
+				break;
+			case BOB_PEBBLE5:
+				bobname = "pebble5";
+				break;
+			case BOB_PEBBLE6:
+				bobname = "pebble6";
+				break;
 
-			case BOB_MUSHROOM1:        bobname = "mushroom1"; break;
-			case BOB_MUSHROOM2:        bobname = "mushroom2"; break;
+			case BOB_MUSHROOM1:
+				bobname = "mushroom1";
+				break;
+			case BOB_MUSHROOM2:
+				bobname = "mushroom2";
+				break;
 
-			case BOB_DEADTREE1:        bobname = "deadtree1"; break;
-			case BOB_DEADTREE2:        bobname = "deadtree2"; break;
-			case BOB_DEADTREE3:        bobname = "deadtree3"; break;
-			case BOB_DEADTREE4:        bobname = "deadtree4"; break;
+			case BOB_DEADTREE1:
+				bobname = "deadtree1";
+				break;
+			case BOB_DEADTREE2:
+				bobname = "deadtree2";
+				break;
+			case BOB_DEADTREE3:
+				bobname = "deadtree3";
+				break;
+			case BOB_DEADTREE4:
+				bobname = "deadtree4";
+				break;
 
-			case BOB_TREE1_T:          bobname = "tree1_t";   break;
-			case BOB_TREE1_S:          bobname = "tree1_s";   break;
-			case BOB_TREE1_M:          bobname = "tree1_m";   break;
-			case BOB_TREE1:            bobname = "tree1";     break;
+			case BOB_TREE1_T:
+				bobname = "tree1_t";
+				break;
+			case BOB_TREE1_S:
+				bobname = "tree1_s";
+				break;
+			case BOB_TREE1_M:
+				bobname = "tree1_m";
+				break;
+			case BOB_TREE1:
+				bobname = "tree1";
+				break;
 
-			case BOB_TREE2_T:          bobname = "tree2_t";   break;
-			case BOB_TREE2_S:          bobname = "tree2_s";   break;
-			case BOB_TREE2_M:          bobname = "tree2_m";   break;
-			case BOB_TREE2:            bobname = "tree2";     break;
+			case BOB_TREE2_T:
+				bobname = "tree2_t";
+				break;
+			case BOB_TREE2_S:
+				bobname = "tree2_s";
+				break;
+			case BOB_TREE2_M:
+				bobname = "tree2_m";
+				break;
+			case BOB_TREE2:
+				bobname = "tree2";
+				break;
 
-			case BOB_TREE3_T:          bobname = "tree3_t";   break;
-			case BOB_TREE3_S:          bobname = "tree3_s";   break;
-			case BOB_TREE3_M:          bobname = "tree3_m";   break;
-			case BOB_TREE3:            bobname = "tree3";     break;
+			case BOB_TREE3_T:
+				bobname = "tree3_t";
+				break;
+			case BOB_TREE3_S:
+				bobname = "tree3_s";
+				break;
+			case BOB_TREE3_M:
+				bobname = "tree3_m";
+				break;
+			case BOB_TREE3:
+				bobname = "tree3";
+				break;
 
-			case BOB_TREE4_T:          bobname = "tree4_t";   break;
-			case BOB_TREE4_S:          bobname = "tree4_s";   break;
-			case BOB_TREE4_M:          bobname = "tree4_m";   break;
-			case BOB_TREE4:            bobname = "tree4";     break;
+			case BOB_TREE4_T:
+				bobname = "tree4_t";
+				break;
+			case BOB_TREE4_S:
+				bobname = "tree4_s";
+				break;
+			case BOB_TREE4_M:
+				bobname = "tree4_m";
+				break;
+			case BOB_TREE4:
+				bobname = "tree4";
+				break;
 
-			case BOB_TREE5_T:          bobname = "tree5_t";   break;
-			case BOB_TREE5_S:          bobname = "tree5_s";   break;
-			case BOB_TREE5_M:          bobname = "tree5_m";   break;
-			case BOB_TREE5:            bobname = "tree5";     break;
+			case BOB_TREE5_T:
+				bobname = "tree5_t";
+				break;
+			case BOB_TREE5_S:
+				bobname = "tree5_s";
+				break;
+			case BOB_TREE5_M:
+				bobname = "tree5_m";
+				break;
+			case BOB_TREE5:
+				bobname = "tree5";
+				break;
 
-			case BOB_TREE6_T:          bobname = "tree6_t";   break;
-			case BOB_TREE6_S:          bobname = "tree6_s";   break;
-			case BOB_TREE6_M:          bobname = "tree6_m";   break;
-			case BOB_TREE6:            bobname = "tree6";     break;
+			case BOB_TREE6_T:
+				bobname = "tree6_t";
+				break;
+			case BOB_TREE6_S:
+				bobname = "tree6_s";
+				break;
+			case BOB_TREE6_M:
+				bobname = "tree6_m";
+				break;
+			case BOB_TREE6:
+				bobname = "tree6";
+				break;
 
-			case BOB_TREE7_T:          bobname = "tree7_t";   break;
-			case BOB_TREE7_S:          bobname = "tree7_s";   break;
-			case BOB_TREE7_M:          bobname = "tree7_m";   break;
-			case BOB_TREE7:            bobname = "tree7";     break;
+			case BOB_TREE7_T:
+				bobname = "tree7_t";
+				break;
+			case BOB_TREE7_S:
+				bobname = "tree7_s";
+				break;
+			case BOB_TREE7_M:
+				bobname = "tree7_m";
+				break;
+			case BOB_TREE7:
+				bobname = "tree7";
+				break;
 
-			case BOB_TREE8_T:          bobname = "tree8_t";   break;
-			case BOB_TREE8_S:          bobname = "tree8_s";   break;
-			case BOB_TREE8_M:          bobname = "tree8_m";   break;
-			case BOB_TREE8:            bobname = "tree8";     break;
+			case BOB_TREE8_T:
+				bobname = "tree8_t";
+				break;
+			case BOB_TREE8_S:
+				bobname = "tree8_s";
+				break;
+			case BOB_TREE8_M:
+				bobname = "tree8_m";
+				break;
+			case BOB_TREE8:
+				bobname = "tree8";
+				break;
 
+			case BOB_GRASS1:
+				bobname = "grass1";
+				break;
+			case BOB_GRASS2:
+				bobname = "grass2";
+				break;
+			case BOB_GRASS3:
+				bobname = "grass3";
+				break;
 
-			case BOB_GRASS1:           bobname = "grass1";    break;
-			case BOB_GRASS2:           bobname = "grass2";    break;
-			case BOB_GRASS3:           bobname = "grass3";    break;
+			case BOB_STANDING_STONES1:
+				bobname = "sstones1";
+				break;
+			case BOB_STANDING_STONES2:
+				bobname = "sstones2";
+				break;
+			case BOB_STANDING_STONES3:
+				bobname = "sstones3";
+				break;
+			case BOB_STANDING_STONES4:
+				bobname = "sstones4";
+				break;
+			case BOB_STANDING_STONES5:
+				bobname = "sstones5";
+				break;
+			case BOB_STANDING_STONES6:
+				bobname = "sstones6";
+				break;
+			case BOB_STANDING_STONES7:
+				bobname = "sstones7";
+				break;
 
-			case BOB_STANDING_STONES1: bobname = "sstones1";  break;
-			case BOB_STANDING_STONES2: bobname = "sstones2";  break;
-			case BOB_STANDING_STONES3: bobname = "sstones3";  break;
-			case BOB_STANDING_STONES4: bobname = "sstones4";  break;
-			case BOB_STANDING_STONES5: bobname = "sstones5";  break;
-			case BOB_STANDING_STONES6: bobname = "sstones6";  break;
-			case BOB_STANDING_STONES7: bobname = "sstones7";  break;
-
-			case BOB_SKELETON1:        bobname = "skeleton1"; break;
-			case BOB_SKELETON2:        bobname = "skeleton2"; break;
-			case BOB_SKELETON3:        bobname = "skeleton3"; break;
+			case BOB_SKELETON1:
+				bobname = "skeleton1";
+				break;
+			case BOB_SKELETON2:
+				bobname = "skeleton2";
+				break;
+			case BOB_SKELETON3:
+				bobname = "skeleton3";
+				break;
 
 			case BOB_CACTUS1:
 				bobname = worldtype_ != S2MapLoader::WINTERLAND ? "cactus1" : "snowman";
@@ -799,11 +960,21 @@ void S2MapLoader::load_s2mf(Widelands::EditorGameBase & egbase)
 				bobname = worldtype_ != S2MapLoader::WINTERLAND ? "cactus2" : "track";
 				break;
 
-			case BOB_BUSH1:            bobname = "bush1";     break;
-			case BOB_BUSH2:            bobname = "bush2";     break;
-			case BOB_BUSH3:            bobname = "bush3";     break;
-			case BOB_BUSH4:            bobname = "bush4";     break;
-			case BOB_BUSH5:            bobname = "bush5";     break;
+			case BOB_BUSH1:
+				bobname = "bush1";
+				break;
+			case BOB_BUSH2:
+				bobname = "bush2";
+				break;
+			case BOB_BUSH3:
+				bobname = "bush3";
+				break;
+			case BOB_BUSH4:
+				bobname = "bush4";
+				break;
+			case BOB_BUSH5:
+				bobname = "bush5";
+				break;
 
 			default:
 				cerr << "Unknown bob " << static_cast<uint32_t>(c) << endl;
@@ -821,7 +992,7 @@ void S2MapLoader::load_s2mf(Widelands::EditorGameBase & egbase)
 	//  loading of Settlers 2 maps in the majority of cases, check all
 	//  starting positions and try to make it Widelands compatible, if its
 	//  size is too small.
-	map_.recalc_whole_map(world); //  to initialize buildcaps
+	map_.recalc_whole_map(world);  //  to initialize buildcaps
 
 	const Widelands::PlayerNumber nr_players = map_.get_nrplayers();
 	log("Checking starting position for all %u players:\n", nr_players);
@@ -842,20 +1013,16 @@ void S2MapLoader::load_s2mf(Widelands::EditorGameBase & egbase)
 			log("wrong size - trying to fix it: ");
 			bool fixed = false;
 
-			Widelands::MapRegion<Widelands::Area<Widelands::FCoords> >
-				mr(map_, Widelands::Area<Widelands::FCoords>(fpos, 3));
+			Widelands::MapRegion<Widelands::Area<Widelands::FCoords>> mr(
+			   map_, Widelands::Area<Widelands::FCoords>(fpos, 3));
 			do {
-				if
-					(map_.get_max_nodecaps(world, const_cast<Widelands::FCoords &>(mr.location()))
-					 &
-					 Widelands::BUILDCAPS_BIG)
-				{
+				if (map_.get_max_nodecaps(world, const_cast<Widelands::FCoords&>(mr.location())) &
+				    Widelands::BUILDCAPS_BIG) {
 					map_.set_starting_pos(p, mr.location());
 					fixed = true;
 					break;
 				}
 			} while (mr.advance(map_));
-
 
 			// check whether starting position was fixed.
 			if (fixed)
@@ -873,13 +1040,12 @@ void S2MapLoader::load_s2mf(Widelands::EditorGameBase & egbase)
 	}
 }
 
-
 /// Try to fix data, which is incompatible between S2 and Widelands
-void S2MapLoader::postload_fix_conversion(Widelands::EditorGameBase & egbase) {
+void S2MapLoader::postload_fix_conversion(Widelands::EditorGameBase& egbase) {
 
-/*
- * 1: Try to fix port spaces
- */
+	/*
+	 * 1: Try to fix port spaces
+	 */
 	const Widelands::Map::PortSpacesSet ports(map_.get_port_spaces());
 	uint16_t num_failed = 0;
 
@@ -889,26 +1055,20 @@ void S2MapLoader::postload_fix_conversion(Widelands::EditorGameBase & egbase) {
 	for (const Widelands::Coords& c : ports) {
 		Widelands::FCoords fc = map_.get_fcoords(c);
 		Widelands::NodeCaps nc = map_.get_max_nodecaps(world, fc);
-		if
-			((nc & Widelands::BUILDCAPS_SIZEMASK) != Widelands::BUILDCAPS_BIG
-			 ||
-			 map_.find_portdock(fc).empty())
-		{
+		if ((nc & Widelands::BUILDCAPS_SIZEMASK) != Widelands::BUILDCAPS_BIG ||
+		    map_.find_portdock(fc).empty()) {
 			log("Invalid port build space: ");
 			map_.set_port_space(c, false);
 
 			bool fixed = false;
-			Widelands::MapRegion<Widelands::Area<Widelands::FCoords> >
-				mr(map_, Widelands::Area<Widelands::FCoords>(fc, 3));
+			Widelands::MapRegion<Widelands::Area<Widelands::FCoords>> mr(
+			   map_, Widelands::Area<Widelands::FCoords>(fc, 3));
 			do {
 				// Check whether the maximum theoretical possible NodeCap of the field is big + port
 				Widelands::NodeCaps nc2 =
 				   map_.get_max_nodecaps(world, const_cast<Widelands::FCoords&>(mr.location()));
-				if
-					((nc2 & Widelands::BUILDCAPS_SIZEMASK) == Widelands::BUILDCAPS_BIG
-					 &&
-					 (!map_.find_portdock(mr.location()).empty()))
-				{
+				if ((nc2 & Widelands::BUILDCAPS_SIZEMASK) == Widelands::BUILDCAPS_BIG &&
+				    (!map_.find_portdock(mr.location()).empty())) {
 					map_.set_port_space(Widelands::Coords(mr.location().x, mr.location().y), true);
 					fixed = true;
 				}
@@ -916,8 +1076,7 @@ void S2MapLoader::postload_fix_conversion(Widelands::EditorGameBase & egbase) {
 			if (!fixed) {
 				++num_failed;
 				log("FAILED! No alternative port buildspace for (%i, %i) found!\n", fc.x, fc.y);
-			}
-			else
+			} else
 				log("Fixed!\n");
 		}
 	}

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004, 2006, 2008-2011 by the Widelands Development Team
+ * Copyright (C) 2004-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -28,14 +28,15 @@
 #include "base/macros.h"
 #include "scripting/lua_table.h"
 
-enum class TrainingSiteType : uint8_t {kNoTS = 0, kBasic = 1, kAdvanced = 2};
+enum class TrainingSiteType : uint8_t { kNoTS = 0, kBasic = 1, kAdvanced = 2 };
 
 /// This struct is used to read out the data given in [aihints] section of a
 /// buildings conf file. It is used to tell the computer player about the
 /// special properties of a building.
 struct BuildingHints {
 	BuildingHints(std::unique_ptr<LuaTable>);
-	~BuildingHints() {}
+	~BuildingHints() {
+	}
 
 	bool renews_map_resource() const {
 		return !renews_map_resource_.empty();

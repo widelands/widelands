@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2011 by the Widelands Development Team
+ * Copyright (C) 2011-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,27 +20,24 @@
 #ifndef WL_NETWORK_NETWORK_PLAYER_SETTINGS_BACKEND_H
 #define WL_NETWORK_NETWORK_PLAYER_SETTINGS_BACKEND_H
 
-#include "logic/constants.h"
+#include "graphic/playercolor.h"
 #include "logic/game_settings.h"
 
 struct NetworkPlayerSettingsBackend {
 
-	NetworkPlayerSettingsBackend(GameSettingsProvider * const settings)
-	:
-	s(settings)
-	{
-		for (uint8_t i = 0; i < MAX_PLAYERS; ++i)
+	NetworkPlayerSettingsBackend(GameSettingsProvider* const settings) : s(settings) {
+		for (uint8_t i = 0; i < kMaxPlayers; ++i)
 			shared_in_tribe[i] = std::string();
 	}
 
-	void toggle_type (uint8_t id);
+	void toggle_type(uint8_t id);
 	void toggle_tribe(uint8_t id);
-	void toggle_init (uint8_t id);
-	void toggle_team (uint8_t id);
-	void refresh     (uint8_t id);
+	void toggle_init(uint8_t id);
+	void toggle_team(uint8_t id);
+	void refresh(uint8_t id);
 
-	GameSettingsProvider * const s;
-	std::string            shared_in_tribe[MAX_PLAYERS];
+	GameSettingsProvider* const s;
+	std::string shared_in_tribe[kMaxPlayers];
 };
 
 #endif  // end of include guard: WL_NETWORK_NETWORK_PLAYER_SETTINGS_BACKEND_H

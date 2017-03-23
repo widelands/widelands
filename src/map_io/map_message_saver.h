@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2010 by the Widelands Development Team
+ * Copyright (C) 2010-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -40,18 +40,19 @@ namespace Widelands {
 /// translate from the id that is stored in the command to the sequence number
 /// that will be used as the id of the message when the game is loaded.
 struct MapMessageSaver : private std::map<MessageId, MessageId> {
-	MapMessageSaver() : counter(0) {}
-	void add(MessageId const id) {
+	MapMessageSaver() : counter(0) {
+	}
+	void add(const MessageId& id) {
 		assert(find(id) == end());
 		insert(std::pair<MessageId, MessageId>(id, ++counter));
 	}
-	MessageId operator[](MessageId const id) const {
+	MessageId operator[](const MessageId& id) const {
 		return find(id) != end() ? find(id)->second : MessageId::null();
 	}
+
 private:
 	MessageId counter;
 };
-
 }
 
 #endif  // end of include guard: WL_MAP_IO_MAP_MESSAGE_SAVER_H

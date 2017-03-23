@@ -2,14 +2,15 @@
 # Copyright (C) 2005-2016 Widelands Development Team
 # 
 # Translators:
+# GunChleoc, 2016
 # MiroslavR <miroslavr256@gmail.com>, 2015-2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-03-11 07:02+0000\n"
-"PO-Revision-Date: 2016-03-12 16:59+0000\n"
-"Last-Translator: MiroslavR <miroslavr256@gmail.com>\n"
+"POT-Creation-Date: 2016-11-30 12:41+0000\n"
+"PO-Revision-Date: 2016-11-30 12:43+0000\n"
+"Last-Translator: GunChleoc\n"
 "Language-Team: Slovak (http://www.transifex.com/widelands/widelands/language/sk/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -36,7 +37,7 @@ msgid ""
 "Building your economy up and making it work well and grow is the main part "
 "of Widelands. But you can’t control the workers directly – they will follow "
 "the general conditions you set."
-msgstr "Budovanie ekonomiky a zabezpečovanie jej správnej funkčnosti a rastu predstavuje jadro celej hry. Pracovníkov však nemožno ovládať priamo – riadia sa všeobecnými podmienkami, ktoré nastavíte. "
+msgstr "Budovanie ekonomiky a zabezpečovanie jej správnej funkčnosti a rastu predstavuje jadro celej hry. Pracovníkov však nemožno ovládať priamo – riadia sa všeobecnými podmienkami, ktoré nastavíte."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:23
 msgid ""
@@ -201,16 +202,13 @@ msgid ""
 msgstr "Takéto vysvetlenie zatiaľ postačí. Teraz si to vyskúšajte samostatne. Chceme zistiť, či ešte máme krčmy, takže musíte vybrať kartu „Stredné budovy“. Následne zavrite okno Štatistika budov."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:95
-msgid "Look up your number of taverns in the building statistics window."
-msgstr "V okne Štatistika budov zistite počet krčiem."
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:98
+msgid "Look up how many taverns you have."
+msgstr "Zistite, koľko krčiem máte."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:97
 msgid "Choose the ‘Medium Buildings’ tab in the building statistics window."
 msgstr "V okne Štatistika budov kliknite na kartu „Stredné budovy“."
-
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:98
-msgid "Look up how many taverns you have."
-msgstr "Zistite, koľko krčiem máte."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:99
 msgid ""
@@ -718,6 +716,10 @@ msgid ""
 "stonemason to produce them."
 msgstr "Nastavte cieľové množstvo mramorových stĺpov na 20 a počkajte, kým ich kamenár vyrobí."
 
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:412
+msgid "Produce 20 marble columns."
+msgstr "Vyrobte 20 mramorových stĺpov."
+
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:414
 msgid ""
 "Sometimes, you will need many wares at the same time quickly – faster than "
@@ -839,7 +841,7 @@ msgstr "Toto bol posledný z tutoriálov, ktoré som si pre vás pripravil. Nau�
 msgid "“%s”"
 msgstr "„%s“"
 
-#: ../../data/scripting/format_scenario.lua:146
+#: ../../data/scripting/format_scenario.lua:96
 msgid "New Objective"
 msgid_plural "New Objectives"
 msgstr[0] "Nová úloha"

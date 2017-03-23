@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2011 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -30,7 +30,7 @@
 
 #include "base/log.h"
 #include "base/wexception.h"
-#include "graphic/font_handler1.h" // We need the fontset for the BiDi algorithm
+#include "graphic/font_handler1.h"  // We need the fontset for the BiDi algorithm
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
 #include "graphic/text/bidi.h"
@@ -39,32 +39,29 @@
 
 namespace UI {
 
-namespace  {
+namespace {
 /**
  * Draw the caret for the given text rendered exactly at the given point
  * (including \ref LINE_MARGIN).
  */
-void draw_caret
-	(RenderTarget & dst,
-	 const TextStyle & style,
-	 const Point& dstpoint,
-	 const std::string & text,
-	 uint32_t caret_offset)
-{
+void draw_caret(RenderTarget& dst,
+                const TextStyle& style,
+                const Vector2f& dstpoint,
+                const std::string& text,
+                uint32_t caret_offset) {
 	int caret_x = style.calc_bare_width(text.substr(0, caret_offset));
 
 	const Image* caret_image = g_gr->images().get("images/ui_basic/caret.png");
-	Point caretpt;
+	Vector2f caretpt;
 	caretpt.x = dstpoint.x + caret_x + LINE_MARGIN - caret_image->width();
-	caretpt.y = dstpoint.y + (style.font->height() - caret_image->height()) / 2;
-
+	caretpt.y = dstpoint.y + (style.font->height() - caret_image->height()) / 2.f;
 	dst.blit(caretpt, caret_image);
 }
 
 }  // namespace
 
 /// The global unique \ref FontHandler object
-FontHandler * g_fh = nullptr;
+FontHandler* g_fh = nullptr;
 
 /**
  * The line cache stores unprocessed rendered lines of text.
@@ -92,7 +89,7 @@ static const unsigned MaxLineCacheSize = 500;
 struct FontHandler::Data {
 	LineCache linecache;
 
-	const LineCacheEntry & get_line(const TextStyle & style, const std::string & text);
+	const LineCacheEntry& get_line(const TextStyle& style, const std::string& text);
 
 	~Data() {
 		while (!linecache.empty()) {
@@ -101,17 +98,14 @@ struct FontHandler::Data {
 	}
 
 private:
-	void render_line(LineCacheEntry & lce);
+	void render_line(LineCacheEntry& lce);
 };
 
 /**
  * Plain Constructor
  */
-FontHandler::FontHandler() :
-	d(new Data)
-{
+FontHandler::FontHandler() : d(new Data) {
 }
-
 
 FontHandler::~FontHandler() {
 	flush();
@@ -125,15 +119,12 @@ void FontHandler::flush() {
 /*
  * Returns the height of the font, in pixels.
 */
-uint32_t FontHandler::get_fontheight
-	(const std::string & name, int32_t const size)
-{
-	TTF_Font * const f = Font::get(name, size)->get_ttf_font();
+uint32_t FontHandler::get_fontheight(const std::string& name, int32_t const size) {
+	TTF_Font* const f = Font::get(name, size)->get_ttf_font();
 	const int32_t fontheight = TTF_FontHeight(f);
 	if (fontheight < 0)
-		throw wexception
-			("TTF_FontHeight returned a negative value, which does not have a "
-			 "known meaning.");
+		throw wexception("TTF_FontHeight returned a negative value, which does not have a "
+		                 "known meaning.");
 	return fontheight;
 }
 
@@ -143,8 +134,8 @@ uint32_t FontHandler::get_fontheight
  *
  * If there is no pre-existing cache entry, a new one is created.
  */
-const LineCacheEntry & FontHandler::Data::get_line(const UI::TextStyle & style, const std::string & text)
-{
+const LineCacheEntry& FontHandler::Data::get_line(const UI::TextStyle& style,
+                                                  const std::string& text) {
 	for (LineCache::iterator it = linecache.begin(); it != linecache.end(); ++it) {
 		if (it->style != style || it->text != text)
 			continue;
@@ -173,9 +164,8 @@ const LineCacheEntry & FontHandler::Data::get_line(const UI::TextStyle & style, 
  * Render the image of a \ref LineCacheEntry whose key data has
  * already been filled in.
  */
-void FontHandler::Data::render_line(LineCacheEntry & lce)
-{
-	TTF_Font * font = lce.style.font->get_ttf_font();
+void FontHandler::Data::render_line(LineCacheEntry& lce) {
+	TTF_Font* font = lce.style.font->get_ttf_font();
 	SDL_Color sdl_fg = {lce.style.fg.r, lce.style.fg.g, lce.style.fg.b, SDL_ALPHA_OPAQUE};
 	std::string renderme = i18n::make_ligatures(lce.text.c_str());
 
@@ -196,9 +186,7 @@ void FontHandler::Data::render_line(LineCacheEntry & lce)
 
 	SDL_Surface* text_surface = TTF_RenderUTF8_Blended(font, renderme.c_str(), sdl_fg);
 	if (!text_surface) {
-		log
-			("FontHandler::render_line, an error : %s\n",
-			 TTF_GetError());
+		log("FontHandler::render_line, an error : %s\n", TTF_GetError());
 		log("Text was: '%s'\n", renderme.c_str());
 		return;
 	}
@@ -211,24 +199,23 @@ void FontHandler::Data::render_line(LineCacheEntry & lce)
 /**
  * Draw unwrapped, single-line text (i.e. no line breaks).
  */
-void FontHandler::draw_text
-	(RenderTarget & dst,
-	 const TextStyle & style,
-	 Point dstpoint,
-	 const std::string & text,
-	 Align align,
-	 uint32_t caret)
-{
+void FontHandler::draw_text(RenderTarget& dst,
+                            const TextStyle& style,
+                            Vector2i dstpoint_i,
+                            const std::string& text,
+                            Align align,
+                            uint32_t caret) {
 	// Erase every backslash in front of brackets
 	std::string copytext = boost::replace_all_copy(text, "\\<", "<");
 	boost::replace_all(copytext, "\\>", ">");
 	copytext = i18n::make_ligatures(copytext.c_str());
-	const LineCacheEntry & lce = d->get_line(style, copytext);
+	const LineCacheEntry& lce = d->get_line(style, copytext);
 
-	UI::correct_for_align(align, lce.width + 2 * LINE_MARGIN, lce.height, &dstpoint);
+	Vector2f dstpoint = dstpoint_i.cast<float>();
+	UI::correct_for_align(align, lce.width + 2 * LINE_MARGIN, &dstpoint);
 
 	if (lce.image)
-		dst.blit(Point(dstpoint.x + LINE_MARGIN, dstpoint.y), lce.image.get());
+		dst.blit(Vector2f(dstpoint.x + LINE_MARGIN, dstpoint.y), lce.image.get());
 
 	if (caret <= copytext.size())
 		draw_caret(dst, style, dstpoint, copytext, caret);
@@ -237,31 +224,25 @@ void FontHandler::draw_text
 /**
  * Draw unwrapped, un-aligned single-line text at the given point, and return the width of the text.
  */
-uint32_t FontHandler::draw_text_raw
-	(RenderTarget & dst,
-	 const UI::TextStyle & style,
-	 Point dstpoint,
-	 const std::string & text)
-{
-	const LineCacheEntry & lce = d->get_line(style, text);
+uint32_t FontHandler::draw_text_raw(RenderTarget& dst,
+                                    const UI::TextStyle& style,
+                                    Vector2i dstpoint,
+                                    const std::string& text) {
+	const LineCacheEntry& lce = d->get_line(style, text);
 
-	if (lce.image)
-		dst.blit(dstpoint, lce.image.get());
+	if (lce.image) {
+		dst.blit(dstpoint.cast<float>(), lce.image.get());
+	}
 
 	return lce.width;
 }
-
 
 /**
  * Compute the total size of the given text, when wrapped to the given
  * maximum width and rendered in the given text style.
  */
-void FontHandler::get_size
-	(const TextStyle & textstyle,
-	 const std::string & text,
-	 uint32_t & w, uint32_t & h,
-	 uint32_t wrap)
-{
+void FontHandler::get_size(
+   const TextStyle& textstyle, const std::string& text, uint32_t& w, uint32_t& h, uint32_t wrap) {
 	WordWrap ww(textstyle, wrap);
 	ww.wrap(text);
 	w = ww.width();
@@ -271,14 +252,15 @@ void FontHandler::get_size
 /**
  * Calculates size of a given text.
  */
-void FontHandler::get_size
-	(const std::string & fontname, int32_t const fontsize,
-	 const std::string & text,
-	 uint32_t & w, uint32_t & h,
-	 uint32_t const wrap)
-{
+void FontHandler::get_size(const std::string& fontname,
+                           int32_t const fontsize,
+                           const std::string& text,
+                           uint32_t& w,
+                           uint32_t& h,
+                           uint32_t const wrap) {
 	// use bold style by default for historical reasons
-	get_size(TextStyle::makebold(Font::get(fontname, fontsize), RGBColor(255, 255, 255)), text, w, h, wrap);
+	get_size(TextStyle::makebold(Font::get(fontname, fontsize), RGBColor(255, 255, 255)), text, w, h,
+	         wrap);
 }
 
-} // namespace UI
+}  // namespace UI

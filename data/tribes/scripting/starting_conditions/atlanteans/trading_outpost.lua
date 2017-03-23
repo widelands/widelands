@@ -84,7 +84,7 @@ return {
       })
 
       place_building_in_region(player, "atlanteans_toolsmithy", sf:region(11), {
-         wares = {
+         inputs = {
             iron = 6,
             log = 6,
             spidercloth = 4
@@ -92,13 +92,13 @@ return {
       })
 
       place_building_in_region(player, "atlanteans_sawmill", sf:region(11), {
-         wares = {
+         inputs = {
             log = 8
          }
       })
 
       place_building_in_region(player, "atlanteans_hunters_house", sf:region(11), {
-         wares = {}
+         inputs = {}
       })
 
       place_building_in_region(player, "atlanteans_tower", sf:region(13), {
@@ -108,11 +108,10 @@ return {
       })
 
       -- Get all warehouse types
-      local plr = wl.Game().players[player.number]
       local warehouse_types = {}
-      for i, building in ipairs(wl.Game():get_tribe_description(plr.tribe_name).buildings) do
+      for i, building in ipairs(wl.Game():get_tribe_description(player.tribe_name).buildings) do
          if (building.type_name == "warehouse") then
-            table.insert(warehouse_types, building_name)
+            table.insert(warehouse_types, building.name)
          end
       end
 
@@ -125,7 +124,7 @@ return {
       -- collect all ~warehouses and pick one to insert the wares
       local warehouses = {}
       for i, building_name in ipairs(warehouse_types) do
-            warehouses = array_combine(warehouses, plr:get_buildings(building_name))
+            warehouses = array_combine(warehouses, player:get_buildings(building_name))
       end
 
       if #warehouses > 0 then

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2010 by the Widelands Development Team
+ * Copyright (C) 2006-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -22,18 +22,18 @@
 #include "scripting/lua_editor.h"
 #include "scripting/lua_game.h"
 
-void EditorFactory::push_player(lua_State * L, Widelands::PlayerNumber plr) {
+void EditorFactory::push_player(lua_State* L, Widelands::PlayerNumber plr) {
 	to_lua<LuaEditor::LuaPlayer>(L, new LuaEditor::LuaPlayer(plr));
 }
 
-void GameFactory::push_player(lua_State * L, Widelands::PlayerNumber plr) {
-		to_lua<LuaGame::LuaPlayer>(L, new LuaGame::LuaPlayer(plr));
+void GameFactory::push_player(lua_State* L, Widelands::PlayerNumber plr) {
+	to_lua<LuaGame::LuaPlayer>(L, new LuaGame::LuaPlayer(plr));
 }
 
-Factory & get_factory(lua_State * const L) {
+Factory& get_factory(lua_State* const L) {
 	lua_getfield(L, LUA_REGISTRYINDEX, "factory");
-	Factory * fac = static_cast<Factory *>(lua_touserdata(L, -1));
-	lua_pop(L, 1); // pop this userdata
+	Factory* fac = static_cast<Factory*>(lua_touserdata(L, -1));
+	lua_pop(L, 1);  // pop this userdata
 
 	if (!fac)
 		throw LuaError("\"factory\" field was nil, which should be impossible!");

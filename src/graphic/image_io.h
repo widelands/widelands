@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2013 by the Widelands Development Team
+ * Copyright (C) 2006-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -46,11 +46,12 @@ public:
 /// Loads the image 'fn' from 'fs'.
 std::unique_ptr<Texture> load_image(const std::string& fn, FileSystem* fs = nullptr);
 
-/// Loads the image 'fn' from 'fs' into an SDL_Surface. Caller must SDL_FreeSurface() the returned value.
+/// Loads the image 'fn' from 'fs' into an SDL_Surface. Caller must SDL_FreeSurface() the returned
+/// value.
 SDL_Surface* load_image_as_sdl_surface(const std::string& fn, FileSystem* fs = nullptr);
 
 /// Saves the 'texture' to 'sw' as a PNG.
-enum class ColorType {RGB, RGBA};
+enum class ColorType { RGB, RGBA };
 bool save_to_png(Texture* texture, StreamWrite* sw, ColorType color_type);
 
 #endif  // end of include guard: WL_GRAPHIC_IMAGE_IO_H

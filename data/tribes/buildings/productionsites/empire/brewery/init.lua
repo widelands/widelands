@@ -42,8 +42,8 @@ tribes:new_productionsite_type {
    },
 
    inputs = {
-      water = 7,
-      wheat = 7
+      { name = "water", amount = 7 },
+      { name = "wheat", amount = 7 }
    },
    outputs = {
       "beer"

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2016 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -35,7 +35,6 @@
 #include "ui_basic/textarea.h"
 #include "wui/maptable.h"
 
-
 namespace Widelands {
 class EditorGameBase;
 class Game;
@@ -55,10 +54,14 @@ public:
 	FullscreenMenuLoadMapOrGame();
 
 protected:
+	void layout() override;
+
 	// Updates the information display on the right-hand side.
 	// Call this function when a different entry in the table gets selected.
-	virtual void entry_selected() {}
-	virtual void fill_table() {}
+	virtual void entry_selected() {
+	}
+	virtual void fill_table() {
+	}
 
 	// Returns a y coordinate that can be used to position a Panel below the Panel directly above it
 	int32_t get_y_from_preceding(UI::Panel& preceding_panel);
@@ -67,19 +70,18 @@ protected:
 	int32_t get_right_column_w(int32_t x);
 
 	// UI coordinates and spacers
-	int32_t const padding_;               // Common padding between panels
-	int32_t const indent_;                // Indent for elements below labels
-	int32_t const label_height_;
-	int32_t const tablex_, tabley_, tablew_, tableh_;
-	int32_t const right_column_margin_;   // X margins of the right column
-	int32_t const right_column_x_;
-	int32_t const buty_, butw_, buth_;  // Button dimensions
-	int32_t const right_column_tab_;
+	const int32_t padding_;  // Common padding between panels
+	const int32_t indent_;   // Indent for elements below labels
+	const int32_t label_height_;
+	const int32_t right_column_margin_;  // X margins of the right column
+	int32_t tablex_, tabley_, tablew_, tableh_;
+	int32_t right_column_x_;
+	int32_t buty_, butw_, buth_;  // Button dimensions
+	int32_t right_column_tab_;
 
 	// Main buttons
-	UI::Button    back_;
-	UI::Button    ok_;
+	UI::Button back_;
+	UI::Button ok_;
 };
-
 
 #endif  // end of include guard: WL_UI_FSMENU_LOAD_MAP_OR_GAME_H

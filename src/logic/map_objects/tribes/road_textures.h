@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2015 by the Widelands Development Team
+ * Copyright (C) 2006-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -24,14 +24,15 @@
 #include <vector>
 
 #include "graphic/image.h"
+#include "logic/widelands_geometry.h"
 
 // Simple container to give access of the road textures of a tribe.
 class RoadTextures {
 public:
-	// Returns the road texture that should be used for the Cooordinate x, y and
-	// the road going into direction 'direction' (which can be any number).
-	const Image& get_normal_texture(int x, int y, int direction) const;
-	const Image& get_busy_texture(int x, int y, int direction) const;
+	// Returns the road texture that should be used for 'coords' and the road
+	// going into direction 'direction' (which can be any number).
+	const Image& get_normal_texture(const Widelands::Coords& coords, int direction) const;
+	const Image& get_busy_texture(const Widelands::Coords& coords, int direction) const;
 
 	// Adds a new road texture.
 	void add_normal_road_texture(const Image* texture);

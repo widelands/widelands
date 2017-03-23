@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007-2008 by the Widelands Development Team
+ * Copyright (C) 2007-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -32,18 +32,16 @@ namespace Widelands {
  * the current implementation begins at the top left node and then moves around
  * clockwise when advance is called repeatedly).
  */
-template <typename AreaType = Area<> > struct MapFringeRegion {
-	MapFringeRegion(const Map & map, AreaType area) :
-		area_              (area),
-		remaining_in_phase_(area.radius),
-		phase_             (area.radius ? 6 : 0)
-	{
+template <typename AreaType = Area<>> struct MapFringeRegion {
+	MapFringeRegion(const Map& map, AreaType area)
+	   : area_(area), remaining_in_phase_(area.radius), phase_(area.radius ? 6 : 0) {
 		for (typename AreaType::RadiusType r = area.radius; r; --r)
 			map.get_tln(area_, &area_);
 	}
 
-
-	const typename AreaType::CoordsType & location() const {return area_;}
+	const typename AreaType::CoordsType& location() const {
+		return area_;
+	}
 
 	/**
 	 * Moves on to the next location. The return value indicates whether the new
@@ -56,27 +54,29 @@ template <typename AreaType = Area<> > struct MapFringeRegion {
 	 * again, which will return true until it reaches the first location the next
 	 * time around, and so on.
 	 */
-	bool advance(const Map &);
+	bool advance(const Map&);
 
 	/**
 	 * When advance has returned false, iterating over the same fringe again is
 	 * not the only possibility. It is also possible to call extend. This makes
 	 * the region ready to iterate over the next layer of nodes.
 	 */
-	void extend(const Map & map) {
+	void extend(const Map& map) {
 		map.get_tln(area_, &area_);
 		++area_.radius;
 		remaining_in_phase_ = area_.radius;
 		phase_ = 6;
 	}
 
-	typename AreaType::RadiusType radius() const {return area_.radius;}
-private:
-	AreaType                       area_;
-	typename AreaType::RadiusType remaining_in_phase_;
-	uint8_t   phase_;
-};
+	typename AreaType::RadiusType radius() const {
+		return area_.radius;
+	}
 
+private:
+	AreaType area_;
+	typename AreaType::RadiusType remaining_in_phase_;
+	uint8_t phase_;
+};
 }
 
 #endif  // end of include guard: WL_LOGIC_MAPFRINGEREGION_H

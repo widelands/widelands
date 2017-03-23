@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2013 by the Widelands Development Team
+ * Copyright (C) 2008-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -28,43 +28,44 @@
 namespace Widelands {
 
 struct FindImmovableAlwaysTrueImpl {
-	bool accept(const BaseImmovable &) const {return true;}
+	bool accept(const BaseImmovable&) const {
+		return true;
+	}
 };
 
-const FindImmovable & find_immovable_always_true()
-{
+const FindImmovable& find_immovable_always_true() {
 	static FindImmovable alwaystrue = FindImmovableAlwaysTrueImpl();
 	return alwaystrue;
 }
 
-bool FindImmovableSize              ::accept(const BaseImmovable & imm) const {
+bool FindImmovableSize::accept(const BaseImmovable& imm) const {
 	int32_t const size = imm.get_size();
 	return min <= size && size <= max;
 }
 
-bool FindImmovableType              ::accept(const BaseImmovable & imm) const {
+bool FindImmovableType::accept(const BaseImmovable& imm) const {
 	return type == imm.descr().type();
 }
 
-bool FindImmovableAttribute         ::accept(const BaseImmovable & imm) const {
+bool FindImmovableAttribute::accept(const BaseImmovable& imm) const {
 	return imm.has_attribute(attrib);
 }
 
-bool FindImmovablePlayerImmovable   ::accept(const BaseImmovable & imm) const {
-	return dynamic_cast<PlayerImmovable const *>(&imm);
+bool FindImmovablePlayerImmovable::accept(const BaseImmovable& imm) const {
+	return dynamic_cast<PlayerImmovable const*>(&imm);
 }
 
-bool FindImmovablePlayerMilitarySite::accept(const BaseImmovable & imm) const {
+bool FindImmovablePlayerMilitarySite::accept(const BaseImmovable& imm) const {
 	if (upcast(MilitarySite const, ms, &imm))
 		return &ms->owner() == &player;
 	return false;
 }
 
-bool FindImmovableAttackable        ::accept(const BaseImmovable & imm) const {
-	return dynamic_cast<Attackable const *>(&imm);
+bool FindImmovableAttackable::accept(const BaseImmovable& imm) const {
+	return dynamic_cast<Attackable const*>(&imm);
 }
 
-bool FindImmovableByDescr::accept(const BaseImmovable & baseimm) const {
+bool FindImmovableByDescr::accept(const BaseImmovable& baseimm) const {
 	if (upcast(const Immovable, imm, &baseimm)) {
 		if (&imm->descr() == &descr)
 			return true;
@@ -72,9 +73,9 @@ bool FindImmovableByDescr::accept(const BaseImmovable & baseimm) const {
 	return false;
 }
 
-bool FindFlagOf::accept(const BaseImmovable & baseimm) const {
+bool FindFlagOf::accept(const BaseImmovable& baseimm) const {
 	if (upcast(const Flag, flag, &baseimm)) {
-		if (Building * building = flag->get_building()) {
+		if (Building* building = flag->get_building()) {
 			if (finder.accept(*building))
 				return true;
 		}
@@ -82,4 +83,4 @@ bool FindFlagOf::accept(const BaseImmovable & baseimm) const {
 	return false;
 }
 
-} // namespace Widelands
+}  // namespace Widelands

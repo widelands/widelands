@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2007-2010 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -36,35 +36,34 @@ class EditorGameBase;
 /// must be selected.
 class MapLoader {
 public:
-	enum class LoadType {
-		kGame,
-		kScenario,
-		kEditor
-	};
+	enum class LoadType { kGame, kScenario, kEditor };
 
-	MapLoader(const std::string& filename, Map & M)
-		: map_(M), state_(STATE_INIT) {map_.set_filename(filename);}
-	virtual ~MapLoader() {}
+	MapLoader(const std::string& filename, Map& M) : map_(M), state_(STATE_INIT) {
+		map_.set_filename(filename);
+	}
+	virtual ~MapLoader() {
+	}
 
 	virtual int32_t preload_map(bool as_scenario) = 0;
-	virtual int32_t load_map_complete(EditorGameBase &, MapLoader::LoadType) = 0;
+	virtual int32_t load_map_complete(EditorGameBase&, MapLoader::LoadType) = 0;
 
-	Map & map() {return map_;}
+	Map& map() {
+		return map_;
+	}
 
 protected:
-	enum State {
-		STATE_INIT,
-		STATE_PRELOADED,
-		STATE_LOADED
-	};
-	void set_state(State const s) {state_ = s;}
-	State get_state() const {return state_;}
-	Map & map_;
+	enum State { STATE_INIT, STATE_PRELOADED, STATE_LOADED };
+	void set_state(State const s) {
+		state_ = s;
+	}
+	State get_state() const {
+		return state_;
+	}
+	Map& map_;
 
 private:
 	State state_;
 };
-
 }
 
 #endif  // end of include guard: WL_MAP_IO_MAP_LOADER_H

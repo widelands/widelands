@@ -1,5 +1,28 @@
+-- RST
+-- .. _lua_tribes_buildings_constructionsites:
+--
+-- Construction Sites
+-- ------------------
+--
+-- The constructionsite is a special building.
+-- It is a building site where a building is being constructed.
+-- Just like the dismantlesite, it is defined only once for all tribes.
+--
+-- The constructionsite is defined in
+-- ``buildings/partially_finished/constructionsite/init.lua``.
+-- The building will also need its help texts, which are defined in
+-- ``buildings/partially_finished/constructionsite/helptexts.lua``
+
 dirname = path.dirname(__file__)
 
+-- RST
+-- .. function:: new_constructionsite_type{table}
+--
+--    This function adds the definition of the construction site building to the engine.
+--
+--    :arg table: This table contains all the data that the game engine will add to this building.
+--                It only contains :ref:`lua_tribes_buildings_common`.
+--
 tribes:new_constructionsite_type {
    msgctxt = "building",
    name = "constructionsite",

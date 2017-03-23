@@ -7,6 +7,7 @@ include("${CMAKE_SOURCE_DIR}/cmake/WlFunctions.cmake")
 option(OPTION_USE_GLBINDING "Use glbinding instead of GLEW" OFF)
 option(OPTION_GLEW_STATIC "Use static GLEW Library" OFF)
 option(OPTION_BUILD_WEBSITE_TOOLS "Build website-related tools" ON)
+option(OPTION_BUILD_TRANSLATIONS "Build translations" ON)
 
 if (CMAKE_SOURCE_DIR STREQUAL CMAKE_BINARY_DIR)
   message(FATAL_ERROR "Build directory and source directory must not be the same.")
@@ -25,12 +26,12 @@ wl_set_if_unset(WL_INSTALL_BASEDIR ".")
 wl_set_if_unset(WL_INSTALL_DATADIR "./data")
 
 if("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
-  if (CMAKE_CXX_COMPILER_VERSION VERSION_LESS 4.7)
-    message(FATAL_ERROR "Widelands needs GCC >= 4.7 to compile.")
+  if (CMAKE_CXX_COMPILER_VERSION VERSION_LESS 4.8)
+    message(FATAL_ERROR "Widelands needs GCC >= 4.8 to compile.")
   endif()
 elseif("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
-  if (CMAKE_CXX_COMPILER_VERSION VERSION_LESS 3.2)
-    message(FATAL_ERROR "Clang version must be at least 3.2!")
+  if (CMAKE_CXX_COMPILER_VERSION VERSION_LESS 3.4)
+    message(FATAL_ERROR "Clang version must be at least 3.4!")
   endif()
 else()
   message(WARNING "You are using an unsupported compiler! Supported are Clang and GCC.")
@@ -69,8 +70,8 @@ else()
   find_package(GLEW REQUIRED)
 endif()
 
-if (APPLE OR WIN32 OR 
-    CMAKE_SYSTEM_NAME MATCHES "FreeBSD" OR 
+if (APPLE OR WIN32 OR
+    CMAKE_SYSTEM_NAME MATCHES "FreeBSD" OR
     CMAKE_SYSTEM_NAME MATCHES "OpenBSD")
   if (NOT CMAKE_SYSTEM_NAME MATCHES "kFreeBSD")
     find_package(intl REQUIRED)
@@ -92,11 +93,21 @@ endif (NOT CMAKE_BUILD_TYPE OR CMAKE_BUILD_TYPE STREQUAL "")
 if(CMAKE_BUILD_TYPE STREQUAL "Debug")
   set(WL_DEBUG_FLAGS "-g -DDEBUG")
 elseif(CMAKE_BUILD_TYPE STREQUAL "Release")
-  set(WL_OPTIMIZE_FLAGS "-O3")
+  if(("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU") AND (CMAKE_CXX_COMPILER_VERSION VERSION_EQUAL 6.3))
+    message(STATUS "GCC 6.3.0 breaks -03, setting -02")
+    set(WL_OPTIMIZE_FLAGS "-O2")
+  else()
+    set(WL_OPTIMIZE_FLAGS "-O3")
+  endif ()
   set(WL_DEBUG_FLAGS "-DNDEBUG -DNOPARACHUTE")
 elseif(CMAKE_BUILD_TYPE STREQUAL "RelWithDebInfo")
-  set(WL_OPTIMIZE_FLAGS "-O3")
-  set(WL_DEBUG_FLAGS "-g -DNDEBUG -DNOPARACHUTE")
+  if(("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU") AND (CMAKE_CXX_COMPILER_VERSION VERSION_EQUAL 6.3))
+    message(STATUS "GCC 6.3.0 breaks -03, setting -02")
+    set(WL_OPTIMIZE_FLAGS "-O2")
+  else()
+    set(WL_OPTIMIZE_FLAGS "-O3")
+  endif ()
+  set(WL_DEBUG_FLAGS "-DNDEBUG -DNOPARACHUTE")
 else()
   message(FATAL_ERROR "Unknown CMAKE_BUILD_TYPE: ${CMAKE_BUILD_TYPE}")
 endif()
@@ -127,23 +138,17 @@ if("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
 
   wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Qunused-arguments")
 else()
-  # Assuming GCC 4.7 or higher.
+  # Assuming GCC 4.8 or higher.
   if(WIN32)
     # This is needed for getenv().
     wl_add_flag(WL_GENERIC_CXX_FLAGS "-std=gnu++11")
   endif()
 
-  if (NOT (CMAKE_CXX_COMPILER_VERSION VERSION_LESS 4.8))
-     # Because of: https://svn.boost.org/trac/boost/ticket/9240.
-     wl_add_flag(WL_GENERIC_CXX_FLAGS "-fext-numeric-literals")
-  endif()
+  # Because of: https://svn.boost.org/trac/boost/ticket/9240.
+  wl_add_flag(WL_GENERIC_CXX_FLAGS "-fext-numeric-literals")
 
   wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wall")
-  if (CMAKE_CXX_COMPILER_VERSION VERSION_LESS 4.8)
-    wl_add_flag(WL_COMPILE_DIAGNOSTICS "-pedantic")
-  else()
-    wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wpedantic")
-  endif()
+  wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wpedantic")
   wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wdeprecated-declarations")
   wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wextra")
   wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wformat")
@@ -168,6 +173,7 @@ else()
   wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wunused-macros")
 endif()
 
+
 # Turn some warnings into errors.
 wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Werror=format-security")
 wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Werror=return-type")
@@ -190,6 +196,12 @@ if (CMAKE_SYSTEM_NAME MATCHES "FreeBSD" OR CMAKE_SYSTEM_NAME MATCHES "OpenBSD")
   if (NOT CMAKE_SYSTEM_NAME MATCHES "kFreeBSD")
     find_library(EXECINFO_LIBRARY NAMES execinfo)
   endif (NOT CMAKE_SYSTEM_NAME MATCHES "kFreeBSD")
+
+  # OpenBSD needs the X11 include directory in order to find GL/glu.h
+  if (CMAKE_SYSTEM_NAME MATCHES "OpenBSD")
+    find_package(X11 REQUIRED)
+    include_directories(${X11_INCLUDE_DIR})
+  endif ()
 endif (CMAKE_SYSTEM_NAME MATCHES "FreeBSD" OR CMAKE_SYSTEM_NAME MATCHES "OpenBSD")
 
 if (NOT DEFINED WL_VERSION)
@@ -237,7 +249,9 @@ install (
 
 # Installation.
 add_subdirectory(doc)
-add_subdirectory(po)
+if(OPTION_BUILD_TRANSLATIONS)
+  add_subdirectory(po)
+endif(OPTION_BUILD_TRANSLATIONS)
 add_subdirectory(src)
 
 # install files to the correct locations here

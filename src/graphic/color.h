@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -38,11 +38,11 @@ struct RGBColor {
 	uint32_t map(const SDL_PixelFormat& fmt) const;
 
 	// Set it to the given 'clr' which is interpretes through 'fmt'.
-	void set(SDL_PixelFormat * fmt, uint32_t clr);
+	void set(SDL_PixelFormat* fmt, uint32_t clr);
 
-	RGBColor& operator = (const RGBColor& other) = default;
-	bool operator != (const RGBColor& other) const;
-	bool operator == (const RGBColor& other) const;
+	RGBColor& operator=(const RGBColor& other) = default;
+	bool operator!=(const RGBColor& other) const;
+	bool operator==(const RGBColor& other) const;
 
 	uint8_t r, g, b;
 };
@@ -64,11 +64,11 @@ struct RGBAColor {
 	uint32_t map(const SDL_PixelFormat& fmt) const;
 
 	// Set it to the given 'clr' which is interpretes through 'fmt'.
-	void set(const SDL_PixelFormat & fmt, uint32_t clr);
+	void set(const SDL_PixelFormat& fmt, uint32_t clr);
 
-	RGBAColor& operator = (const RGBAColor& other) = default;
-	bool operator != (const RGBAColor& other) const;
-	bool operator == (const RGBAColor& other) const;
+	RGBAColor& operator=(const RGBAColor& other) = default;
+	bool operator!=(const RGBAColor& other) const;
+	bool operator==(const RGBAColor& other) const;
 
 	uint8_t r;
 	uint8_t g;

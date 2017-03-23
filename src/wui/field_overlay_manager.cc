@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2016 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -42,7 +42,8 @@ FieldOverlayManager::FieldOverlayManager() : current_overlay_id_(0) {
 
 	//  Special case for flag, which has a different formula for hotspot_y.
 	buildhelp_info->pic = g_gr->images().get(*filename);
-	buildhelp_info->hotspot = Point(buildhelp_info->pic->width() / 2, buildhelp_info->pic->height() - 1);
+	buildhelp_info->hotspot =
+	   Vector2i(buildhelp_info->pic->width() / 2, buildhelp_info->pic->height() - 1);
 
 	const OverlayInfo * const buildhelp_infos_end =
 		buildhelp_info + static_cast<int>(Widelands::Field::Buildhelp::kNone);
@@ -51,9 +52,9 @@ FieldOverlayManager::FieldOverlayManager() : current_overlay_id_(0) {
 		if (buildhelp_info == buildhelp_infos_end)
 			break;
 		buildhelp_info->pic = g_gr->images().get(*filename);
-		buildhelp_info->hotspot = Point(buildhelp_info->pic->width() / 2, buildhelp_info->pic->height() / 2);
+		buildhelp_info->hotspot =
+		   Vector2i(buildhelp_info->pic->width() / 2, buildhelp_info->pic->height() / 2);
 	}
-
 }
 
 bool FieldOverlayManager::buildhelp() const {
@@ -91,8 +92,7 @@ void FieldOverlayManager::get_overlays(Widelands::TCoords<> const c,
                                        std::vector<OverlayInfo>* result) const {
 	assert(c.t == Widelands::TCoords<>::D || c.t == Widelands::TCoords<>::R);
 
-
-	const RegisteredOverlaysMap & overlay_map = overlays_[c.t];
+	const RegisteredOverlaysMap& overlay_map = overlays_[c.t];
 	RegisteredOverlaysMap::const_iterator it = overlay_map.lower_bound(c);
 	while (it != overlay_map.end() && it->first == c) {
 		result->emplace_back(it->second.pic, it->second.hotspot);
@@ -131,39 +131,28 @@ const {
 	return static_cast<int>(value);
 }
 
-void FieldOverlayManager::register_overlay
-	(Widelands::TCoords<> const c,
-	 const Image* pic,
-	 int32_t              const level,
-	 Point                      hotspot,
-	 OverlayId               const overlay_id)
-{
+void FieldOverlayManager::register_overlay(const Widelands::TCoords<>& c,
+                                           const Image* pic,
+                                           int32_t const level,
+                                           Vector2i hotspot,
+                                           OverlayId const overlay_id) {
 	assert(c.t <= 2);
-	assert(level != 5); //  level == 5 is undefined behavior
+	assert(level != 5);  //  level == 5 is undefined behavior
 
-	if (hotspot == Point::invalid()) {
-		hotspot = Point(pic->width() / 2, pic->height() / 2);
+	if (hotspot == Vector2i::invalid()) {
+		hotspot = Vector2i(pic->width() / 2, pic->height() / 2);
 	}
 
-	RegisteredOverlaysMap & overlay_map = overlays_[c.t];
-	for
-		(RegisteredOverlaysMap::iterator it = overlay_map.find(c);
-		 it != overlay_map.end() && it->first == c;
-		 ++it)
-		if
-			(it->second.pic   == pic
-			 &&
-			 it->second.hotspot == hotspot
-			 &&
-			 it->second.level   == level)
-		{
+	RegisteredOverlaysMap& overlay_map = overlays_[c.t];
+	for (RegisteredOverlaysMap::iterator it = overlay_map.find(c);
+	     it != overlay_map.end() && it->first == c; ++it)
+		if (it->second.pic == pic && it->second.hotspot == hotspot && it->second.level == level) {
 			it->second.overlay_ids.insert(overlay_id);
 			return;
 		}
 
-	overlay_map.insert
-		(std::pair<Widelands::Coords const, RegisteredOverlays>
-		 	(c, RegisteredOverlays(overlay_id, pic, hotspot, level)));
+	overlay_map.insert(std::pair<Widelands::Coords const, RegisteredOverlays>(
+	   c, RegisteredOverlays(overlay_id, pic, hotspot, level)));
 
 	//  Now manually sort, so that they are ordered
 	//    * first by c (done by std::multimap)
@@ -182,8 +171,10 @@ void FieldOverlayManager::register_overlay
 			if (jt->second.level < it->second.level) {
 				std::swap(it->second, jt->second);
 				it = overlay_map.lower_bound(c);
-			} else ++it;
-		} else break; // it is the last element, break this loop.
+			} else
+				++it;
+		} else
+			break;  // it is the last element, break this loop.
 	} while (it->first == c);
 }
 
@@ -195,7 +186,7 @@ void FieldOverlayManager::register_overlay
 void FieldOverlayManager::remove_overlay(Widelands::TCoords<> const c, const Image* pic) {
 	assert(c.t <= 2);
 
-	RegisteredOverlaysMap & overlay_map = overlays_[c.t];
+	RegisteredOverlaysMap& overlay_map = overlays_[c.t];
 
 	if (overlay_map.count(c)) {
 		RegisteredOverlaysMap::iterator it = overlay_map.lower_bound(c);
@@ -211,12 +202,12 @@ void FieldOverlayManager::remove_overlay(Widelands::TCoords<> const c, const Ima
 }
 
 void FieldOverlayManager::remove_overlay(const OverlayId overlay_id) {
-	const RegisteredOverlaysMap * const overlays_end = overlays_ + 3;
-	for (RegisteredOverlaysMap * j = overlays_; j != overlays_end; ++j)
+	const RegisteredOverlaysMap* const overlays_end = overlays_ + 3;
+	for (RegisteredOverlaysMap* j = overlays_; j != overlays_end; ++j)
 		for (RegisteredOverlaysMap::iterator it = j->begin(); it != j->end();) {
 			it->second.overlay_ids.erase(overlay_id);
 			if (it->second.overlay_ids.empty())
-				j->erase(it++); //  This is necessary!
+				j->erase(it++);  //  This is necessary!
 			else
 				++it;
 		}

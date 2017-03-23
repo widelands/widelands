@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2015 by the Widelands Development Team
+ * Copyright (C) 2006-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -27,8 +27,8 @@
 #include "base/macros.h"
 #include "graphic/color.h"
 #include "graphic/graphic.h"
-#include "logic/widelands.h"
 #include "logic/map_objects/world/resource_description.h"
+#include "logic/widelands.h"
 
 class LuaTable;
 class Texture;
@@ -46,7 +46,7 @@ public:
 	enum Is {
 		kArable = 0,
 		kWalkable = 1,
-		kWater =  2,
+		kWater = 2,
 		kUnreachable = 4,
 		kMineable = 8,
 		kUnwalkable = 16,
@@ -68,7 +68,6 @@ public:
 
 	/// The name showed to users of Widelands. Usually translated.
 	const std::string& descname() const;
-
 
 	const std::vector<std::string>& texture_paths() const;
 
@@ -125,8 +124,9 @@ public:
 	double fertility() const;
 
 	/// Additional tooptip entries for the editor
-	const std::vector<std::string>& custom_tooltips() const {return custom_tooltips_;}
-
+	const std::vector<std::string>& custom_tooltips() const {
+		return custom_tooltips_;
+	}
 
 private:
 	const std::string name_;
@@ -144,7 +144,7 @@ private:
 	double humidity_;
 	std::vector<std::string> texture_paths_;
 	std::vector<const Image*> textures_;
-	RGBColor    minimap_colors_[256];
+	RGBColor minimap_colors_[256];
 
 	DISALLOW_COPY_AND_ASSIGN(TerrainDescription);
 };

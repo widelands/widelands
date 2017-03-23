@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2012 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -24,6 +24,8 @@
 
 #include "base/macros.h"
 #include "editor/tools/action_args.h"
+#include "graphic/graphic.h"
+#include "graphic/image.h"
 #include "logic/widelands_geometry.h"
 
 class EditorInteractive;
@@ -34,72 +36,75 @@ class World;
 
 /**
  * An editor tool is a tool that can be selected in the editor. Examples are:
- * modify height, place bob, place critter, place building. A Tool only makes
- * one function (like delete_building, place building, modify building are 3
- * tools).
+ * modify height, place immovable, place critter, place building. A Tool only
+ * makes one function (like delete_building, place building, modify building
+ * are 3 tools).
  */
 class EditorTool {
 public:
-	EditorTool(EditorTool & second, EditorTool & third, bool uda = true) :
-		second_(second), third_(third), undoable_(uda)
-	{}
-	virtual ~EditorTool() {}
-
-	enum ToolIndex {First, Second, Third};
-	int32_t handle_click
-		(ToolIndex i,
-		const Widelands::World& world, Widelands::NodeAndTriangle<> const center,
-		EditorInteractive& parent, EditorActionArgs* args, Widelands::Map* map)
-	{
-		return
-			 (i == First ? *this : i == Second ? second_ : third_)
-		    .handle_click_impl(world, center, parent, args, map);
+	EditorTool(EditorTool& second, EditorTool& third, bool uda = true)
+	   : second_(second), third_(third), undoable_(uda) {
+	}
+	virtual ~EditorTool() {
 	}
 
-	int32_t handle_undo
-		(ToolIndex i,
-		const Widelands::World& world, Widelands::NodeAndTriangle<> const center,
-		EditorInteractive& parent, EditorActionArgs* args, Widelands::Map* map)
-	{
-		return
-			 (i == First ? *this : i == Second ? second_ : third_)
-		    .handle_undo_impl(world, center, parent, args, map);
+	enum ToolIndex { First, Second, Third };
+	int32_t handle_click(ToolIndex i,
+	                     const Widelands::World& world,
+	                     const Widelands::NodeAndTriangle<>& center,
+	                     EditorInteractive& parent,
+	                     EditorActionArgs* args,
+	                     Widelands::Map* map) {
+		return (i == First ? *this : i == Second ? second_ : third_)
+		   .handle_click_impl(world, center, parent, args, map);
 	}
 
-	const char * get_sel(const ToolIndex i) {
-		return
-			 (i == First ? *this : i == Second ? second_ : third_)
-		    .get_sel_impl();
+	int32_t handle_undo(ToolIndex i,
+	                    const Widelands::World& world,
+	                    const Widelands::NodeAndTriangle<>& center,
+	                    EditorInteractive& parent,
+	                    EditorActionArgs* args,
+	                    Widelands::Map* map) {
+		return (i == First ? *this : i == Second ? second_ : third_)
+		   .handle_undo_impl(world, center, parent, args, map);
 	}
 
-	EditorActionArgs format_args(const ToolIndex i, EditorInteractive & parent) {
-		return
-			 (i == First ? *this : i == Second ? second_ : third_)
-		    .format_args_impl(parent);
+	const Image* get_sel(const ToolIndex i) {
+		return (i == First ? *this : i == Second ? second_ : third_).get_sel_impl();
 	}
 
-	bool is_undoable() {return undoable_;}
-	virtual bool has_size_one() const {return false;}
-	virtual EditorActionArgs format_args_impl(EditorInteractive & parent) {
+	EditorActionArgs format_args(const ToolIndex i, EditorInteractive& parent) {
+		return (i == First ? *this : i == Second ? second_ : third_).format_args_impl(parent);
+	}
+
+	bool is_undoable() {
+		return undoable_;
+	}
+	virtual bool has_size_one() const {
+		return false;
+	}
+	virtual EditorActionArgs format_args_impl(EditorInteractive& parent) {
 		return EditorActionArgs(parent);
 	}
 	virtual int32_t handle_click_impl(const Widelands::World& world,
-	                                  Widelands::NodeAndTriangle<>,
+	                                  const Widelands::NodeAndTriangle<>&,
 	                                  EditorInteractive&,
 	                                  EditorActionArgs*,
-									  Widelands::Map*) = 0;
+	                                  Widelands::Map*) = 0;
 	virtual int32_t handle_undo_impl(const Widelands::World&,
-	                                 Widelands::NodeAndTriangle<>,
+	                                 const Widelands::NodeAndTriangle<>&,
 	                                 EditorInteractive&,
 	                                 EditorActionArgs*,
-									 Widelands::Map*) {
+	                                 Widelands::Map*) {
 		return 0;
 	}  // non unduable tools don't need to implement this.
-	virtual const char * get_sel_impl() const = 0;
-	virtual bool operates_on_triangles() const {return false;}
+	virtual const Image* get_sel_impl() const = 0;
+	virtual bool operates_on_triangles() const {
+		return false;
+	}
 
 protected:
-	EditorTool & second_, & third_;
+	EditorTool &second_, &third_;
 	bool undoable_;
 
 private:
