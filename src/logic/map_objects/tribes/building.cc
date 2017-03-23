@@ -187,6 +187,14 @@ int32_t BuildingDescr::suitability(const Map&, const FCoords& fc) const {
 	return size_ <= (fc.field->nodecaps() & Widelands::BUILDCAPS_SIZEMASK);
 }
 
+const BuildingHints& BuildingDescr::hints() const {
+	return hints_;
+}
+
+void BuildingDescr::set_hints_trainingsites_max_percent(int percent) {
+	hints_.set_trainingsites_max_percent(percent);
+}
+
 /**
  * Normal buildings don't conquer anything, so this returns 0 by default.
  *
