@@ -12,8 +12,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-03-10 07:01+0000\n"
-"PO-Revision-Date: 2017-03-13 10:35+0000\n"
+"POT-Creation-Date: 2017-03-17 10:45+0000\n"
+"PO-Revision-Date: 2017-03-24 11:51+0000\n"
 "Last-Translator: Thadah D. Denyse <juchuf@gmail.com>\n"
 "Language-Team: Spanish (http://www.transifex.com/widelands/widelands/language/es/)\n"
 "MIME-Version: 1.0\n"
@@ -678,7 +678,7 @@ msgstr "He considerado esto, Sidolus. Creo que ya es hora. Haremos de esto una p
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:317
 msgid "Jundlina Writes a Letter"
-msgstr ""
+msgstr "Jundlina escribe una carta"
 
 #. TRANSLATORS: Jundlina
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:320
