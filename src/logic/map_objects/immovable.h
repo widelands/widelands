@@ -114,6 +114,8 @@ struct BaseImmovable : public MapObject {
 protected:
 	void set_position(EditorGameBase&, const Coords&);
 	void unset_position(EditorGameBase&, const Coords&);
+	/// Empty port spaces have an extra immovable to make them more visible and to prevent trees from seeding. We want them back whenever the field is freed.
+	void reinstate_portspace_anchor(EditorGameBase& egbase, const Coords& coords);
 };
 
 class Immovable;

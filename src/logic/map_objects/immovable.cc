@@ -130,10 +130,21 @@ void BaseImmovable::unset_position(EditorGameBase& egbase, const Coords& c) {
 	assert(f.field->immovable == this);
 
 	f.field->immovable = nullptr;
+	reinstate_portspace_anchor(egbase, c);
 	egbase.inform_players_about_immovable(f.field - &map[0], nullptr);
 
 	if (get_size() >= SMALL)
 		map.recalc_for_field_area(egbase.world(), Area<FCoords>(f, 2));
+}
+
+void BaseImmovable::reinstate_portspace_anchor(EditorGameBase& egbase, const Coords& coords) {
+	Map* map = egbase.get_map();
+	if (map->is_port_space(coords) && descr().name() != "portspace_anchor") {
+		const DescriptionIndex imm_idx = egbase.world().get_immovable_index("portspace_anchor");
+		if (imm_idx != Widelands::INVALID_INDEX) {
+			egbase.create_immovable(coords, imm_idx, MapObjectDescr::OwnerType::kWorld, nullptr);
+		}
+	}
 }
 
 /*
