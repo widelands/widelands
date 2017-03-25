@@ -40,13 +40,13 @@ include "scripting/messages.lua"
       end
 	  
    while true do
-   sleep(4000)  
-   -- objective will be triggered if 50+ buildings are build
-   local number_buildings = p1:get_buildings{"empire_headquarters_shipwreck", "empire_warehouse", "empire_port", "empire_quarry", "empire_lumberjacks_house", "empire_foresters_house", "empire_fishers_house", "empire_hunters_house", "empire_well", "empire_scouts_house", "empire_stonemasons_house", "empire_sawmill", "empire_mill", "empire_bakery", "empire_brewery", "empire_vineyard", "empire_winery", "empire_tavern", "empire_inn", "empire_charcoal_kiln", "empire_smelting_works", "empire_toolsmithy", "empire_armorsmithy", "empire_shipyard", "empire_donkeyfarm", "empire_farm", "empire_piggery", "empire_sheepfarm", "empire_weaving_mill", "empire_weaponsmithy", "empire_marblemine", "empire_marblemine_deep", "empire_coalmine", "empire_coalmine_deep", "empire_ironmine", "empire_ironmine_deep", "empire_goldmine", "empire_goldmine_deep", "empire_arena", "empire_colosseum", "empire_trainingcamp", "empire_blockhouse", "empire_sentry", "empire_outpost", "empire_barrier", "empire_tower", "empire_fortress", "empire_castle"}
-   if (#number_buildings.empire_headquarters_shipwreck + #number_buildings.empire_warehouse + #number_buildings.empire_port + #number_buildings.empire_quarry + #number_buildings.empire_lumberjacks_house + #number_buildings.empire_foresters_house + #number_buildings.empire_fishers_house + #number_buildings.empire_hunters_house + #number_buildings.empire_well + #number_buildings.empire_scouts_house + #number_buildings.empire_stonemasons_house + #number_buildings.empire_sawmill + #number_buildings.empire_mill + #number_buildings.empire_bakery + #number_buildings.empire_brewery + #number_buildings.empire_vineyard + #number_buildings.empire_winery + #number_buildings.empire_tavern + #number_buildings.empire_inn + #number_buildings.empire_charcoal_kiln + #number_buildings.empire_smelting_works + #number_buildings.empire_toolsmithy + #number_buildings.empire_armorsmithy + #number_buildings.empire_shipyard + #number_buildings.empire_donkeyfarm + #number_buildings.empire_farm + #number_buildings.empire_piggery + #number_buildings.empire_sheepfarm + #number_buildings.empire_weaving_mill + #number_buildings.empire_weaponsmithy + #number_buildings.empire_marblemine + #number_buildings.empire_marblemine_deep + #number_buildings.empire_coalmine + #number_buildings.empire_coalmine_deep + #number_buildings.empire_ironmine + #number_buildings.empire_ironmine_deep + #number_buildings.empire_goldmine + #number_buildings.empire_goldmine_deep + #number_buildings.empire_arena + #number_buildings.empire_colosseum + #number_buildings.empire_trainingcamp + #number_buildings.empire_blockhouse + #number_buildings.empire_sentry + #number_buildings.empire_outpost + #number_buildings.empire_barrier + #number_buildings.empire_tower + #number_buildings.empire_fortress + #number_buildings.empire_castle) > 50 then
-   break
-   end
-   sleep(4000)
+      sleep(4000)  
+      objective will be triggered if 50+ buildings are build
+      local number_buildings = p1:get_buildings{"empire_headquarters_shipwreck", "empire_warehouse", "empire_port", "empire_quarry", "empire_lumberjacks_house", "empire_foresters_house", "empire_fishers_house", "empire_hunters_house", "empire_well", "empire_scouts_house", "empire_stonemasons_house", "empire_sawmill", "empire_mill", "empire_bakery", "empire_brewery", "empire_vineyard", "empire_winery", "empire_tavern", "empire_inn", "empire_charcoal_kiln", "empire_smelting_works", "empire_toolsmithy", "empire_armorsmithy", "empire_shipyard", "empire_donkeyfarm", "empire_farm", "empire_piggery", "empire_sheepfarm", "empire_weaving_mill", "empire_weaponsmithy", "empire_marblemine", "empire_marblemine_deep", "empire_coalmine", "empire_coalmine_deep", "empire_ironmine", "empire_ironmine_deep", "empire_goldmine", "empire_goldmine_deep", "empire_arena", "empire_colosseum", "empire_trainingcamp", "empire_blockhouse", "empire_sentry", "empire_outpost", "empire_barrier", "empire_tower", "empire_fortress", "empire_castle"}
+      if (#number_buildings.empire_headquarters_shipwreck + #number_buildings.empire_warehouse + #number_buildings.empire_port + #number_buildings.empire_quarry + #number_buildings.empire_lumberjacks_house + #number_buildings.empire_foresters_house + #number_buildings.empire_fishers_house + #number_buildings.empire_hunters_house + #number_buildings.empire_well + #number_buildings.empire_scouts_house + #number_buildings.empire_stonemasons_house + #number_buildings.empire_sawmill + #number_buildings.empire_mill + #number_buildings.empire_bakery + #number_buildings.empire_brewery + #number_buildings.empire_vineyard + #number_buildings.empire_winery + #number_buildings.empire_tavern + #number_buildings.empire_inn + #number_buildings.empire_charcoal_kiln + #number_buildings.empire_smelting_works + #number_buildings.empire_toolsmithy + #number_buildings.empire_armorsmithy + #number_buildings.empire_shipyard + #number_buildings.empire_donkeyfarm + #number_buildings.empire_farm + #number_buildings.empire_piggery + #number_buildings.empire_sheepfarm + #number_buildings.empire_weaving_mill + #number_buildings.empire_weaponsmithy + #number_buildings.empire_marblemine + #number_buildings.empire_marblemine_deep + #number_buildings.empire_coalmine + #number_buildings.empire_coalmine_deep + #number_buildings.empire_ironmine + #number_buildings.empire_ironmine_deep + #number_buildings.empire_goldmine + #number_buildings.empire_goldmine_deep + #number_buildings.empire_arena + #number_buildings.empire_colosseum + #number_buildings.empire_trainingcamp + #number_buildings.empire_blockhouse + #number_buildings.empire_sentry + #number_buildings.empire_outpost + #number_buildings.empire_barrier + #number_buildings.empire_tower + #number_buildings.empire_fortress + #number_buildings.empire_castle) > 50 then
+         break
+      end
+      sleep(4000)
    end
    campaign_message_box(saledus_8)
    o12 = add_campaign_objective(obj_find_artifacts)
@@ -60,14 +60,16 @@ include "scripting/messages.lua"
                if not artifacts_owner[f] then
                   if f.owner ~= p1 then
                      artifacts_owner[f] = nil
-					 all_artifacts_found = false
-				  end
-				  else
-                  artifacts_owner[f] = f.owner
-				  sleep(2000)
-				  campaign_message_box(diary_page_6)
-				  end
-           end
+                     all_artifacts_found = false
+                  else
+                     artifacts_owner[f] = f.owner
+                     sleep(2000)
+                     campaign_message_box(diary_page_6)
+                  end
+               end
+            else
+               all_artifacts_found = false
+            end
 		   end
       until all_artifacts_found	 
    campaign_message_box(saledus_9)
