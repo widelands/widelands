@@ -3342,6 +3342,128 @@ int LuaTerrainDescription::get_valid_resources(lua_State* L) {
  */
 
 /* RST
+Economy
+-------
+.. class:: LuaEconomy
+
+   Provides access to an economy. A player can have multiple economies;
+   you can get an economy from a :class:`Flag`.
+*/
+const char LuaEconomy::className[] = "Economy";
+const MethodType<LuaEconomy> LuaEconomy::Methods[] = {
+   METHOD(LuaEconomy, ware_target_quantity),
+   METHOD(LuaEconomy, worker_target_quantity),
+   METHOD(LuaEconomy, set_ware_target_quantity),
+   METHOD(LuaEconomy, set_worker_target_quantity),
+   {nullptr, nullptr},
+};
+const PropertyType<LuaEconomy> LuaEconomy::Properties[] = {
+   {nullptr, nullptr, nullptr},
+};
+
+void LuaEconomy::__persist(lua_State* L) {
+	const Widelands::Economy* economy = get();
+	const Widelands::Player& player = economy->owner();
+	PERS_UINT32("player", player.player_number());
+	PERS_UINT32("economy", player.get_economy_number(economy));
+}
+
+void LuaEconomy::__unpersist(lua_State* L) {
+	Widelands::PlayerNumber player_number;
+	size_t economy_number;
+	UNPERS_UINT32("player", player_number);
+	UNPERS_UINT32("economy", economy_number);
+	const Widelands::Player& player = get_egbase(L).player(player_number);
+	set_economy_pointer(player.get_economy_by_number(economy_number));
+}
+
+/* RST
+   .. method:: ware_target_quantity(warename)
+
+      Returns the amount of the given ware that should be kept in stock for this economy.
+
+      :arg warename: the name of the ware.
+      :type warename: :class:`string`
+*/
+int LuaEconomy::ware_target_quantity(lua_State* L) {
+	const std::string warename = luaL_checkstring(L, 2);
+	const Widelands::DescriptionIndex index = get_egbase(L).tribes().ware_index(warename);
+	if (get_egbase(L).tribes().ware_exists(index)) {
+		const Widelands::Economy::TargetQuantity& quantity = get()->ware_target_quantity(index);
+		lua_pushinteger(L, quantity.permanent);
+	} else {
+		report_error(L, "There is no ware '%s'.", warename.c_str());
+	}
+	return 1;
+}
+
+/* RST
+   .. method:: worker_target_quantity(workername)
+
+      Returns the amount of the given worker that should be kept in stock for this economy.
+
+      :arg workername: the name of the worker.
+      :type workername: :class:`string`
+*/
+int LuaEconomy::worker_target_quantity(lua_State* L) {
+	const std::string workername = luaL_checkstring(L, 2);
+	const Widelands::DescriptionIndex index = get_egbase(L).tribes().worker_index(workername);
+	if (get_egbase(L).tribes().worker_exists(index)) {
+		const Widelands::Economy::TargetQuantity& quantity = get()->worker_target_quantity(index);
+		lua_pushinteger(L, quantity.permanent);
+	} else {
+		report_error(L, "There is no worker '%s'.", workername.c_str());
+	}
+	return 1;
+}
+
+/* RST
+   .. method:: set_ware_target_quantity(warename)
+
+      Sets the amount of the given ware type that should be kept in stock for this economy.
+
+      :arg warename: the name of the ware type.
+      :type warename: :class:`string`
+
+      :arg amount: the new target amount for the ware.
+      :type amount: :class:`integer`
+*/
+int LuaEconomy::set_ware_target_quantity(lua_State* L) {
+	const std::string warename = luaL_checkstring(L, 2);
+	const Widelands::DescriptionIndex index = get_egbase(L).tribes().ware_index(warename);
+	if (get_egbase(L).tribes().ware_exists(index)) {
+		const int quantity = luaL_checkinteger(L, 3);
+		get()->set_ware_target_quantity(index, quantity, get_egbase(L).get_gametime());
+	} else {
+		report_error(L, "There is no ware '%s'.", warename.c_str());
+	}
+	return 1;
+}
+
+/* RST
+   .. method:: set_worker_target_quantity(workername)
+
+      Sets the amount of the given worker type that should be kept in stock for this economy.
+
+      :arg workername: the name of the worker type.
+      :type workername: :class:`string`
+
+      :arg amount: the new target amount for the worker.
+      :type amount: :class:`integer`
+*/
+int LuaEconomy::set_worker_target_quantity(lua_State* L) {
+	const std::string workername = luaL_checkstring(L, 2);
+	const Widelands::DescriptionIndex index = get_egbase(L).tribes().worker_index(workername);
+	if (get_egbase(L).tribes().worker_exists(index)) {
+		const int quantity = luaL_checkinteger(L, 3);
+		get()->set_worker_target_quantity(index, quantity, get_egbase(L).get_gametime());
+	} else {
+		report_error(L, "There is no worker '%s'.", workername.c_str());
+	}
+	return 1;
+}
+
+/* RST
 MapObject
 ---------
 
@@ -3682,7 +3804,10 @@ const MethodType<LuaFlag> LuaFlag::Methods[] = {
    METHOD(LuaFlag, set_wares), METHOD(LuaFlag, get_wares), {nullptr, nullptr},
 };
 const PropertyType<LuaFlag> LuaFlag::Properties[] = {
-   PROP_RO(LuaFlag, roads), PROP_RO(LuaFlag, building), {nullptr, nullptr, nullptr},
+   PROP_RO(LuaFlag, economy),
+   PROP_RO(LuaFlag, roads),
+   PROP_RO(LuaFlag, building),
+   {nullptr, nullptr, nullptr},
 };
 
 /*
@@ -3690,6 +3815,18 @@ const PropertyType<LuaFlag> LuaFlag::Properties[] = {
  PROPERTIES
  ==========================================================
  */
+/* RST
+   .. attribute:: economy
+
+      (RO) Returns the economy that this flag belongs to.
+
+      :returns: The :class:`Economy` associated with the flag.
+*/
+int LuaFlag::get_economy(lua_State* L) {
+	const Flag* f = get(L, get_egbase(L));
+	return to_lua<LuaEconomy>(L, new LuaEconomy(f->get_economy()));
+}
+
 /* RST
    .. attribute:: roads
 
@@ -6075,6 +6212,7 @@ void luaopen_wlmap(lua_State* L) {
 
 	register_class<LuaField>(L, "map");
 	register_class<LuaPlayerSlot>(L, "map");
+	register_class<LuaEconomy>(L, "map");
 	register_class<LuaMapObject>(L, "map");
 
 	register_class<LuaBob>(L, "map", true);

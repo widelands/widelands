@@ -22,6 +22,7 @@
 
 #include <set>
 
+#include "economy/economy.h"
 #include "economy/flag.h"
 #include "economy/portdock.h"
 #include "economy/road.h"
@@ -728,6 +729,54 @@ private:
 	const Widelands::TerrainDescription* terraindescr_;
 };
 
+class LuaEconomy : public LuaMapModuleClass {
+public:
+    LUNA_CLASS_HEAD(LuaEconomy);
+
+    virtual ~LuaEconomy() {
+    }
+
+    LuaEconomy() : economy_(nullptr) {
+    }
+	 LuaEconomy(Widelands::Economy* economy) : economy_(economy) {
+    }
+    LuaEconomy(lua_State* L) : economy_(nullptr) {
+        report_error(L, "Cannot instantiate a 'LuaEconomy' directly!");
+    }
+
+    void __persist(lua_State* L) override;
+    void __unpersist(lua_State* L) override;
+
+	 /*
+     * Properties
+     */
+
+	 /*
+	  * Lua methods
+	  */
+	 int ware_target_quantity(lua_State*);
+	 int worker_target_quantity(lua_State*);
+	 int set_ware_target_quantity(lua_State*);
+	 int set_worker_target_quantity(lua_State*);
+
+    /*
+     * C methods
+     */
+
+protected:
+	 Widelands::Economy* get() const {
+        assert(economy_ != nullptr);
+        return economy_;
+    }
+    // For persistence.
+	 void set_economy_pointer(Widelands::Economy* pointer) {
+        economy_ = pointer;
+    }
+
+private:
+	 Widelands::Economy* economy_;
+};
+
 #define CASTED_GET(klass)                                                                          \
 	Widelands::klass* get(lua_State* L, Widelands::EditorGameBase& egbase) {                        \
 		return static_cast<Widelands::klass*>(LuaMapObject::get(L, egbase, #klass));                 \
@@ -904,6 +953,7 @@ public:
 	/*
 	 * Properties
 	 */
+	int get_economy(lua_State* L);
 	int get_roads(lua_State* L);
 	int get_building(lua_State* L);
 	/*
