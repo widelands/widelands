@@ -9,9 +9,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-03-03 06:24+0000\n"
-"PO-Revision-Date: 2017-03-03 06:26+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2017-03-17 10:45+0000\n"
+"PO-Revision-Date: 2017-03-23 09:45+0000\n"
+"Last-Translator: Adam Piggott\n"
 "Language-Team: English (United Kingdom) (http://www.transifex.com/widelands/widelands/language/en_GB/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -401,7 +401,7 @@ msgid ""
 "The Barbarian ax workshop is the intermediate production site in a series of"
 " three buildings. It is enhanced from the metal workshop but doesn’t require"
 " additional qualification for the worker."
-msgstr ""
+msgstr "The Barbarian axe workshop is the intermediate production site in a series of three buildings. It is enhanced from the metal workshop but doesn’t require additional qualifications for the worker."
 
 #: ../../data/tribes/buildings/productionsites/barbarians/ax_workshop/helptexts.lua:23
 #: ../../data/tribes/buildings/productionsites/barbarians/bakery/helptexts.lua:26
@@ -1953,27 +1953,27 @@ msgstr "Home"
 #: ../../data/tribes/scripting/help/controls.lua:59
 msgctxt "hotkey"
 msgid "Ctrl + 1-9"
-msgstr ""
+msgstr "Ctrl + 1-9"
 
 #: ../../data/tribes/scripting/help/controls.lua:59
 msgid "Remember current location"
-msgstr ""
+msgstr "Remember current location"
 
 #: ../../data/tribes/scripting/help/controls.lua:60
 msgctxt "hotkey"
 msgid "1-9"
-msgstr ""
+msgstr "1-9"
 
 #: ../../data/tribes/scripting/help/controls.lua:60
 msgid "Go to previously remembered location"
-msgstr ""
+msgstr "Go to previously remembered location"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
 #: ../../data/tribes/scripting/help/controls.lua:62
 msgctxt "hotkey"
 msgid "Ctrl + +"
-msgstr ""
+msgstr "Ctrl + +"
 
 #: ../../data/tribes/scripting/help/controls.lua:62
 msgid "Increase zoom"
@@ -1984,7 +1984,7 @@ msgstr "Increase zoom"
 #: ../../data/tribes/scripting/help/controls.lua:64
 msgctxt "hotkey"
 msgid "Ctrl + -"
-msgstr ""
+msgstr "Ctrl + -"
 
 #: ../../data/tribes/scripting/help/controls.lua:64
 msgid "Decrease zoom"
@@ -1995,7 +1995,7 @@ msgstr "Decrease zoom"
 #: ../../data/tribes/scripting/help/controls.lua:66
 msgctxt "hotkey"
 msgid "Ctrl + 0"
-msgstr ""
+msgstr "Ctrl + 0"
 
 #: ../../data/tribes/scripting/help/controls.lua:66
 msgid "Reset zoom"
@@ -2034,53 +2034,53 @@ msgstr "Show the debug console (only in debug-builds)"
 
 #: ../../data/tribes/scripting/help/controls.lua:76
 msgid "Table Control"
-msgstr ""
+msgstr "Table Control"
 
 #: ../../data/tribes/scripting/help/controls.lua:77
 msgid ""
 "In tables that allow the selection of multiple entries, the following key "
 "combinations are available:"
-msgstr ""
+msgstr "In tables that allow the selection of multiple entries, the following key combinations are available:"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
 #: ../../data/tribes/scripting/help/controls.lua:80
 msgctxt "hotkey"
 msgid "Ctrl + Click"
-msgstr ""
+msgstr "Ctrl + Click"
 
 #: ../../data/tribes/scripting/help/controls.lua:80
 msgctxt "table_control"
 msgid "Select multiple entries"
-msgstr ""
+msgstr "Select multiple entries"
 
 #: ../../data/tribes/scripting/help/controls.lua:82
 msgctxt "table_control"
 msgid "Select a range of entries"
-msgstr ""
+msgstr "Select a range of entries"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
 #: ../../data/tribes/scripting/help/controls.lua:82
 msgctxt "hotkey"
 msgid "Shift + Click"
-msgstr ""
+msgstr "Shift + Click"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
 #: ../../data/tribes/scripting/help/controls.lua:84
 msgctxt "hotkey"
 msgid "Ctrl + A"
-msgstr ""
+msgstr "Ctrl + A"
 
 #: ../../data/tribes/scripting/help/controls.lua:84
 msgctxt "table_control"
 msgid "Select all entries"
-msgstr ""
+msgstr "Select all entries"
 
 #: ../../data/tribes/scripting/help/controls.lua:86
 msgid "Message Window"
-msgstr ""
+msgstr "Message Window"
 
 #: ../../data/tribes/scripting/help/controls.lua:87
 msgid ""
@@ -2217,7 +2217,7 @@ msgstr "Introduction"
 #: ../../data/tribes/scripting/help/init.lua:70
 #: ../../data/tribes/scripting/help/tips.lua:71
 msgid "Tips"
-msgstr ""
+msgstr "Tips"
 
 #: ../../data/tribes/scripting/help/init.lua:79
 msgid "Wares"
@@ -2233,23 +2233,23 @@ msgstr "About Widelands"
 
 #: ../../data/tribes/scripting/help/tips.lua:50
 msgid "Atlanteans"
-msgstr ""
+msgstr "Atlanteans"
 
 #: ../../data/tribes/scripting/help/tips.lua:53
 msgid "Barbarians"
-msgstr ""
+msgstr "Barbarians"
 
 #: ../../data/tribes/scripting/help/tips.lua:56
 msgid "Empire"
-msgstr ""
+msgstr "Empire"
 
 #: ../../data/tribes/scripting/help/tips.lua:62
 msgid "Single Player"
-msgstr ""
+msgstr "Single Player"
 
 #: ../../data/tribes/scripting/help/tips.lua:65
 msgid "Multiplayer"
-msgstr ""
+msgstr "Multiplayer"
 
 #. TRANSLATORS: Put 2 sentences one after the other.
 #. Languages using Chinese script probably want to lose the blank space here.
@@ -3627,7 +3627,7 @@ msgstr "Works deep in the mines to obtain coal, iron, gold or precious stones."
 #: ../../data/tribes/workers/atlanteans/recruit/helptexts.lua:3
 msgctxt "atlanteans_worker"
 msgid "Eager to become a soldier and defend his tribe!"
-msgstr ""
+msgstr "Eager to become a soldier and defend his tribe!"
 
 #. TRANSLATORS: Helptext for a worker: Sawyer
 #: ../../data/tribes/workers/atlanteans/sawyer/helptexts.lua:3
@@ -3700,7 +3700,7 @@ msgstr "Produces weapons for soldiers."
 #: ../../data/tribes/workers/atlanteans/weaver/helptexts.lua:3
 msgctxt "atlanteans_worker"
 msgid "Produces spidercloth for buildings, ships and soldiers."
-msgstr ""
+msgstr "Produces spidercloth for buildings, ships and soldiers."
 
 #. TRANSLATORS: Helptext for a worker: Woodcutter
 #: ../../data/tribes/workers/atlanteans/woodcutter/helptexts.lua:3
@@ -3848,7 +3848,7 @@ msgstr "Plants trees."
 #: ../../data/tribes/workers/barbarians/recruit/helptexts.lua:3
 msgctxt "barbarians_worker"
 msgid "Eager to become a soldier and defend his tribe!"
-msgstr ""
+msgstr "Eager to become a soldier and defend his tribe!"
 
 #. TRANSLATORS: Helptext for a worker: Scout
 #: ../../data/tribes/workers/barbarians/scout/helptexts.lua:3
@@ -4017,7 +4017,7 @@ msgstr "Breeds pigs."
 #: ../../data/tribes/workers/empire/recruit/helptexts.lua:3
 msgctxt "empire_worker"
 msgid "Eager to become a soldier and defend his tribe!"
-msgstr ""
+msgstr "Eager to become a soldier and defend his tribe!"
 
 #. TRANSLATORS: Helptext for a worker: Scout
 #: ../../data/tribes/workers/empire/scout/helptexts.lua:3

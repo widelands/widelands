@@ -31,6 +31,7 @@
 #include "graphic/text/font_set.h"
 #include "graphic/text/rt_errors.h"
 #include "graphic/text_constants.h"
+#include "graphic/text_layout.h"
 #include "ui_basic/mouse_constants.h"
 
 // TODO(GunChleoc): Arabic: Fix positioning for Arabic
@@ -428,7 +429,7 @@ void EditBox::draw(RenderTarget& dst) {
 
 		const Image* caret_image = g_gr->images().get("images/ui_basic/caret.png");
 		Vector2f caretpt;
-		caretpt.x = point.x + m_->scrolloffset + caret_x - caret_image->width() + LINE_MARGIN;
+		caretpt.x = point.x + m_->scrolloffset + caret_x - caret_image->width() + kLineMargin;
 		caretpt.y = point.y + (fontheight - caret_image->height()) / 2.f;
 		dst.blit(caretpt, caret_image);
 	}
