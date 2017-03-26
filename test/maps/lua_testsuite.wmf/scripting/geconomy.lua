@@ -3,7 +3,7 @@
 -- ==================================================
 
 economy_tests = lunit.TestCase("Economy test")
-function test_descr:test_instantiation_forbidden()
+function economy_tests:test_instantiation_forbidden()
    assert_error("Cannot instantiate", function()
       wl.map.Economy()
    end)

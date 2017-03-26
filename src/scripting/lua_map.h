@@ -731,50 +731,50 @@ private:
 
 class LuaEconomy : public LuaMapModuleClass {
 public:
-    LUNA_CLASS_HEAD(LuaEconomy);
+	LUNA_CLASS_HEAD(LuaEconomy);
 
-    virtual ~LuaEconomy() {
-    }
+	virtual ~LuaEconomy() {
+	}
 
-    LuaEconomy() : economy_(nullptr) {
-    }
-	 LuaEconomy(Widelands::Economy* economy) : economy_(economy) {
-    }
-    LuaEconomy(lua_State* L) : economy_(nullptr) {
-        report_error(L, "Cannot instantiate a 'LuaEconomy' directly!");
-    }
+	LuaEconomy() : economy_(nullptr) {
+	}
+	LuaEconomy(Widelands::Economy* economy) : economy_(economy) {
+	}
+	LuaEconomy(lua_State* L) : economy_(nullptr) {
+		report_error(L, "Cannot instantiate a 'LuaEconomy' directly!");
+	}
 
-    void __persist(lua_State* L) override;
-    void __unpersist(lua_State* L) override;
+	void __persist(lua_State* L) override;
+	void __unpersist(lua_State* L) override;
 
-	 /*
-     * Properties
-     */
+	/*
+	 * Properties
+	 */
 
-	 /*
-	  * Lua methods
-	  */
-	 int ware_target_quantity(lua_State*);
-	 int worker_target_quantity(lua_State*);
-	 int set_ware_target_quantity(lua_State*);
-	 int set_worker_target_quantity(lua_State*);
+	/*
+	 * Lua methods
+	 */
+	int ware_target_quantity(lua_State*);
+	int worker_target_quantity(lua_State*);
+	int set_ware_target_quantity(lua_State*);
+	int set_worker_target_quantity(lua_State*);
 
-    /*
-     * C methods
-     */
+	/*
+	 * C methods
+	 */
 
 protected:
-	 Widelands::Economy* get() const {
-        assert(economy_ != nullptr);
-        return economy_;
-    }
-    // For persistence.
-	 void set_economy_pointer(Widelands::Economy* pointer) {
-        economy_ = pointer;
-    }
+	Widelands::Economy* get() const {
+		assert(economy_ != nullptr);
+		return economy_;
+	}
+	// For persistence.
+	void set_economy_pointer(Widelands::Economy* pointer) {
+		economy_ = pointer;
+	}
 
 private:
-	 Widelands::Economy* economy_;
+	Widelands::Economy* economy_;
 };
 
 #define CASTED_GET(klass)                                                                          \
