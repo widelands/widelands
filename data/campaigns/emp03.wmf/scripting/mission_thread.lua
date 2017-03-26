@@ -65,6 +65,7 @@ include "scripting/messages.lua"
                      artifacts_owner[f] = f.owner
                      sleep(2000)
                      campaign_message_box(diary_page_6)
+                     scroll_to_field(f)
                   end
                end
             else
