@@ -17,14 +17,17 @@ function economy_tests:test_ware_target_quantity()
    local hq_flag = hq.flag
    local eco = hq_flag.economy
 
-   -- Nonexisting ware should fail
+   -- Test illegal parameters
    assert_error("Nonexisting ware",function() eco:ware_target_quantity("foobar") end)
+   assert_error("Quantity for nonexisting ware",function() eco:worker_target_quantity("foobar", 1) end)
+   assert_error("Negative ware quantity",function() eco:set_ware_target_quantity("log", -1) end)
 
    -- Now set and confirm ware quantity
    quantity = eco:ware_target_quantity("log")
    quantity = quantity + 1
    eco:set_ware_target_quantity("log", quantity)
    assert_equal(quantity, eco:ware_target_quantity("log"))
+
    hq_flag:remove()
 end
 
@@ -35,8 +38,10 @@ function economy_tests:test_worker_target_quantity()
    local hq_flag = hq.flag
    local eco = hq_flag.economy
 
-   -- Nonexisting worker should fail
+   -- Test illegal parameters
    assert_error("Nonexisting worker",function() eco:worker_target_quantity("foobar") end)
+   assert_error("Quantity for nonexisting worker",function() eco:worker_target_quantity("foobar", 1) end)
+   assert_error("Negative worker quantity",function() eco:set_worker_target_quantity("barbarians_soldier", -1) end)
 
    -- Now set and confirm worker quantity
    quantity = eco:worker_target_quantity("barbarians_soldier")

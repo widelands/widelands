@@ -3425,7 +3425,7 @@ int LuaEconomy::worker_target_quantity(lua_State* L) {
       :arg warename: the name of the ware type.
       :type warename: :class:`string`
 
-      :arg amount: the new target amount for the ware.
+      :arg amount: the new target amount for the ware. Needs to be >= 0.
       :type amount: :class:`integer`
 */
 int LuaEconomy::set_ware_target_quantity(lua_State* L) {
@@ -3433,6 +3433,9 @@ int LuaEconomy::set_ware_target_quantity(lua_State* L) {
 	const Widelands::DescriptionIndex index = get_egbase(L).tribes().ware_index(warename);
 	if (get_egbase(L).tribes().ware_exists(index)) {
 		const int quantity = luaL_checkinteger(L, 3);
+		if (quantity < 0) {
+			report_error(L, "Target ware quantity needs to be >= 0 but was '%d'.", quantity);
+		}
 		get()->set_ware_target_quantity(index, quantity, get_egbase(L).get_gametime());
 	} else {
 		report_error(L, "There is no ware '%s'.", warename.c_str());
@@ -3448,7 +3451,7 @@ int LuaEconomy::set_ware_target_quantity(lua_State* L) {
       :arg workername: the name of the worker type.
       :type workername: :class:`string`
 
-      :arg amount: the new target amount for the worker.
+      :arg amount: the new target amount for the worker. Needs to be >= 0.
       :type amount: :class:`integer`
 */
 int LuaEconomy::set_worker_target_quantity(lua_State* L) {
@@ -3456,6 +3459,9 @@ int LuaEconomy::set_worker_target_quantity(lua_State* L) {
 	const Widelands::DescriptionIndex index = get_egbase(L).tribes().worker_index(workername);
 	if (get_egbase(L).tribes().worker_exists(index)) {
 		const int quantity = luaL_checkinteger(L, 3);
+		if (quantity < 0) {
+			report_error(L, "Target worker quantity needs to be >= 0 but was '%d'.", quantity);
+		}
 		get()->set_worker_target_quantity(index, quantity, get_egbase(L).get_gametime());
 	} else {
 		report_error(L, "There is no worker '%s'.", workername.c_str());
