@@ -445,7 +445,7 @@ public:
 	              const bool forward = false);
 
 	/// Decrement this player's vision for a node.
-	void unsee_node(const MapIndex, const Time, const bool forward = false);
+	void unsee_node(const MapIndex, const Time, const bool hide_completely = false, const bool forward = false);
 
 	/// Call see_node for each node in the area.
 	void see_area(const Area<FCoords>& area) {
