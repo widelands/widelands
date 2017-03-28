@@ -1,108 +1,166 @@
 include "scripting/messages.lua"
+include "map:scripting/starting_conditions.lua"
+include "map:scripting/helper_functions.lua"
 
-   function check_stonemason()  -- check for completed stonemason
+function check_stonemason()  -- check for completed stonemason
    while #p1:get_buildings("empire_stonemasons_house") < 1 do sleep(3000) end
    campaign_message_box(amalea_3)
+
    -- don't use all your marble for columns
    o3 = add_campaign_objective(obj_lower_marble_column_demand)
    run(economy_settings)
-   end   
+end
 
-   function explore_sea() --  if more than 3 ships are available it is time to explore the whole map
+function explore_sea() --  if more than 3 ships are available it is time to explore the whole map
    while #p1:get_ships() < 3 do sleep(3000) end
-		if #p1:get_buildings("empire_port") == 5 then
-		run(artifacts)
-		else
-		campaign_message_box(amalea_11)
-		o11 = add_campaign_objective(obj_find_all_ports)
-	       -- check if all ports possible are build
-	       while #p1:get_buildings("empire_port") < 5 do sleep(3000) end
-		o11.done = true
-		campaign_message_box(amalea_12)
-		run(artifacts)
-	   end
-	end
-   
-   function artifacts()  -- check for control of all artifacts
+   if #p1:get_buildings("empire_port") == 5 then
+      run(artifacts)
+   else
+      campaign_message_box(amalea_11)
+      o11 = add_campaign_objective(obj_find_all_ports)
+      -- check if all ports possible are build
+      while #p1:get_buildings("empire_port") < 5 do sleep(3000) end
+      o11.done = true
+      campaign_message_box(amalea_12)
+      run(artifacts)
+   end
+end
+
+function artifacts()  -- check for control of all artifacts
    local artifact_fields = {}
    local map = wl.Game().map
    local i = 1
-      -- find all artifacts
-      for x=0, map.width-1 do
-         for y=0, map.height-1 do
-            local field = map:get_field(x,y)
-            if field.immovable and field.immovable:has_attribute("artifact") then
-               -- this assumes that the immovable has size small or medium, i.e. only occupies one field
-               artifact_fields[i] = map:get_field(x,y)
-               i = i + 1
-            end
+   -- find all artifacts
+   for x=0, map.width-1 do
+      for y=0, map.height-1 do
+         local field = map:get_field(x,y)
+         if field.immovable and field.immovable:has_attribute("artifact") then
+            -- this assumes that the immovable has size small or medium, i.e. only occupies one field
+            artifact_fields[i] = map:get_field(x,y)
+            i = i + 1
          end
       end
-	  
+   end
+
    while true do
       sleep(4000)  
       -- objective will be triggered if 50+ buildings are build
-      local number_buildings = p1:get_buildings{"empire_headquarters_shipwreck", "empire_warehouse", "empire_port", "empire_quarry", "empire_lumberjacks_house", "empire_foresters_house", "empire_fishers_house", "empire_hunters_house", "empire_well", "empire_scouts_house", "empire_stonemasons_house", "empire_sawmill", "empire_mill", "empire_bakery", "empire_brewery", "empire_vineyard", "empire_winery", "empire_tavern", "empire_inn", "empire_charcoal_kiln", "empire_smelting_works", "empire_toolsmithy", "empire_armorsmithy", "empire_shipyard", "empire_donkeyfarm", "empire_farm", "empire_piggery", "empire_sheepfarm", "empire_weaving_mill", "empire_weaponsmithy", "empire_marblemine", "empire_marblemine_deep", "empire_coalmine", "empire_coalmine_deep", "empire_ironmine", "empire_ironmine_deep", "empire_goldmine", "empire_goldmine_deep", "empire_arena", "empire_colosseum", "empire_trainingcamp", "empire_blockhouse", "empire_sentry", "empire_outpost", "empire_barrier", "empire_tower", "empire_fortress", "empire_castle"}
-      if (#number_buildings.empire_headquarters_shipwreck + #number_buildings.empire_warehouse + #number_buildings.empire_port + #number_buildings.empire_quarry + #number_buildings.empire_lumberjacks_house + #number_buildings.empire_foresters_house + #number_buildings.empire_fishers_house + #number_buildings.empire_hunters_house + #number_buildings.empire_well + #number_buildings.empire_scouts_house + #number_buildings.empire_stonemasons_house + #number_buildings.empire_sawmill + #number_buildings.empire_mill + #number_buildings.empire_bakery + #number_buildings.empire_brewery + #number_buildings.empire_vineyard + #number_buildings.empire_winery + #number_buildings.empire_tavern + #number_buildings.empire_inn + #number_buildings.empire_charcoal_kiln + #number_buildings.empire_smelting_works + #number_buildings.empire_toolsmithy + #number_buildings.empire_armorsmithy + #number_buildings.empire_shipyard + #number_buildings.empire_donkeyfarm + #number_buildings.empire_farm + #number_buildings.empire_piggery + #number_buildings.empire_sheepfarm + #number_buildings.empire_weaving_mill + #number_buildings.empire_weaponsmithy + #number_buildings.empire_marblemine + #number_buildings.empire_marblemine_deep + #number_buildings.empire_coalmine + #number_buildings.empire_coalmine_deep + #number_buildings.empire_ironmine + #number_buildings.empire_ironmine_deep + #number_buildings.empire_goldmine + #number_buildings.empire_goldmine_deep + #number_buildings.empire_arena + #number_buildings.empire_colosseum + #number_buildings.empire_trainingcamp + #number_buildings.empire_blockhouse + #number_buildings.empire_sentry + #number_buildings.empire_outpost + #number_buildings.empire_barrier + #number_buildings.empire_tower + #number_buildings.empire_fortress + #number_buildings.empire_castle) > 50 then
+      local number_buildings = {
+         "empire_headquarters_shipwreck", 
+         "empire_warehouse", 
+         "empire_port", 
+         "empire_quarry", 
+         "empire_lumberjacks_house", 
+         "empire_foresters_house", 
+         "empire_fishers_house", 
+         "empire_hunters_house", 
+         "empire_well", 
+         "empire_scouts_house", 
+         "empire_stonemasons_house", 
+         "empire_sawmill", 
+         "empire_mill", 
+         "empire_bakery", 
+         "empire_brewery", 
+         "empire_vineyard", 
+         "empire_winery", 
+         "empire_tavern", 
+         "empire_inn", 
+         "empire_charcoal_kiln", 
+         "empire_smelting_works", 
+         "empire_toolsmithy", 
+         "empire_armorsmithy", 
+         "empire_shipyard", 
+         "empire_donkeyfarm", 
+         "empire_farm", 
+         "empire_piggery", 
+         "empire_sheepfarm", 
+         "empire_weaving_mill", 
+         "empire_weaponsmithy", 
+         "empire_marblemine", 
+         "empire_marblemine_deep", 
+         "empire_coalmine", 
+         "empire_coalmine_deep", 
+         "empire_ironmine", 
+         "empire_ironmine_deep", 
+         "empire_goldmine", 
+         "empire_goldmine_deep", 
+         "empire_arena", 
+         "empire_colosseum", 
+         "empire_trainingcamp", 
+         "empire_blockhouse",
+         "empire_sentry", 
+         "empire_outpost", 
+         "empire_barrier", 
+         "empire_tower", 
+         "empire_fortress", 
+         "empire_castle",
+      }
+      if count_buildings(p1, number_buildings) > 50 then
          break
       end
       sleep(4000)
    end
    campaign_message_box(saledus_8)
    o12 = add_campaign_objective(obj_find_artifacts)
-	 
-	local artifacts_owner = {}
-      repeat
-         sleep(2000)
-         local all_artifacts_found = true
-         for idx, f in ipairs(artifact_fields) do
-            if f.owner then
-               if not artifacts_owner[f] then
-                  if f.owner ~= p1 then
-                     artifacts_owner[f] = nil
-                     all_artifacts_found = false
-                  else
-                     artifacts_owner[f] = f.owner
-                     sleep(2000)
-                     campaign_message_box(diary_page_6)
-                     scroll_to_field(f)
-                  end
+
+   local artifacts_owner = {}
+   repeat
+      sleep(2000)
+      local all_artifacts_found = true
+      for idx, f in ipairs(artifact_fields) do
+         if f.owner then
+            if not artifacts_owner[f] then
+               if f.owner ~= p1 then
+                  artifacts_owner[f] = nil
+                  all_artifacts_found = false
+               else
+                  artifacts_owner[f] = f.owner
+                  sleep(2000)
+                  campaign_message_box(diary_page_6)
+                  scroll_to_field(f)
                end
-            else
-               all_artifacts_found = false
             end
-		   end
-      until all_artifacts_found	 
+         else
+            all_artifacts_found = false
+         end
+      end
+   until all_artifacts_found	 
    campaign_message_box(saledus_9)
    o12.done = true  
-  end
-   
-   function check_wood_industry()  -- check for completed Woddcutter and sawmill
+end
+
+function check_wood_industry()  -- check for completed Woddcutter and sawmill
    while not check_for_buildings(p1, { empire_lumberjacks_house = 1, empire_sawmill = 1}) do sleep(2000) end
    campaign_message_box(amalea_10)
-   end  
-   
-   function check_military()  -- check for too much military buildings
-     local too_much_mil_build = nil
-	 while not too_much_mil_build do
-	 local number_mil_buildings = p1:get_buildings{"empire_sentry", "empire_blockhouse", "empire_outpost", "empire_barrier", "empire_tower"}
-      if  ((#number_mil_buildings.empire_sentry+#number_mil_buildings.empire_blockhouse+#number_mil_buildings.empire_outpost+#number_mil_buildings.empire_barrier+#number_mil_buildings.empire_tower) > 2 and #p1:get_buildings("empire_port") < 2) then
-	     too_much_mil_build = 1
-	     break
-	   end
-	   sleep(3000)
-	 end
-	 campaign_message_box(amalea_9)
-   end     
-   
-   function economy_settings()  -- check for opened economy options window
+end
+
+function check_military()  -- check for too much military buildings
+   local too_much_mil_build = nil
+   while not too_much_mil_build do
+      local number_mil_buildings = {
+         "empire_sentry", 
+         "empire_blockhouse", 
+         "empire_outpost", 
+         "empire_barrier", 
+         "empire_tower",
+      }
+      if count_buildings(p1, number_mil_buildings) > 2 and #p1:get_buildings("empire_port") < 2 then
+         too_much_mil_build = 1
+         break
+      end
+   sleep(3000)
+   end
+   campaign_message_box(amalea_9)
+end
+
+function economy_settings()  -- check for opened economy options window
    while not mv.windows.economy_options do sleep(2434) end
    sleep(40000)
    o3.done = true 
    campaign_message_box(amalea_8)   
-   end   
-   
-   function building_industry()  -- check for completed building industry
+end
+
+function building_industry()  -- check for completed building industry
    run(check_stonemason)
    run(check_wood_industry)
    while not check_for_buildings(p1, { empire_lumberjacks_house = 1, empire_sawmill = 1, empire_stonemasons_house = 1})
@@ -110,7 +168,7 @@ include "scripting/messages.lua"
    o2.done = true
    end
 
-   function port_build()  -- check for port build to realize we need gold
+function port_build()  -- check for port build to realize we need gold
    while not check_for_buildings(p1, {empire_port = 1}) do sleep(2434) end
    campaign_message_box(amalea_6)
    p1:allow_buildings{ 
@@ -126,7 +184,7 @@ include "scripting/messages.lua"
       "empire_mill",
       "empire_bakery",
       "empire_piggery",
-	  "empire_donkeyfarm",
+      "empire_donkeyfarm",
       "empire_tavern",
       "empire_inn",
       "empire_toolsmithy",
@@ -145,29 +203,29 @@ include "scripting/messages.lua"
       "barbarians_coalmine_deeper",
       "barbarians_ironmine_deeper",
       "barbarians_goldmine_deeper",
-	  "barbarians_port",
-	  "barbarians_cattlefarm",
-	  "barbarians_charcoal_kiln",
-	  "barbarians_weaving_mill",
-      }    
+      "barbarians_port",
+      "barbarians_cattlefarm",
+      "barbarians_charcoal_kiln",
+      "barbarians_weaving_mill",
+      }
    o7 = add_campaign_objective(obj_produce_gold)
    run(check_gold)
-   end
-   
-   function check_gold()  -- check for gold to be able to send out expeditions
+end
+
+function check_gold()  -- check for gold to be able to send out expeditions
    while p1:get_produced_wares_count('gold') < 6 do sleep(2434) end
    campaign_message_box(amalea_7)
    o7.done = true
-   end
-   
-   function ship_industry()
+end
+
+function ship_industry()
    run(port_build)
    while not check_for_buildings(p1, { empire_port = 1, empire_shipyard =1 }) do sleep(2434) end
    campaign_message_box(diary_page_4)
    o5.done = true
-   end
-   
-   function wheat() -- check for enough wheat in warehouses
+end
+
+function wheat() -- check for enough wheat in warehouses
    while count_in_warehouses("wheat") < 50 do sleep(2434) end
    campaign_message_box(amalea_5)
    p1:allow_buildings{"empire_well"}
@@ -181,8 +239,9 @@ include "scripting/messages.lua"
       "empire_charcoal_kiln",
       "empire_marblemine",
       "empire_marblemine_deep"
-}
-   p2:allow_buildings{"barbarians_port",
+   }
+   p2:allow_buildings{
+      "barbarians_port",
       "barbarians_shipyard", 
       "barbarians_brewery", 
       "barbarians_inn",
@@ -194,77 +253,104 @@ include "scripting/messages.lua"
       "barbarians_barracks",
       "barbarians_battlearena",
       "barbarians_trainingcamp",
-      "barbarians_big_inn", }
+      "barbarians_big_inn",
+   }
 
    while p1:get_produced_wares_count('cloth') < 6 do sleep(2434) end
    o8.done = true
    run(expedition)
-   end
-   
-   function expedition()
+end
+
+function expedition()
    -- now we should explore our little world
    while not o5.done == true do sleep(2434) end
    campaign_message_box(saledus_5)
    o9 = add_campaign_objective(obj_build_expedition_ports)
+
    while not check_for_buildings(p1, { empire_port = 3 }) do sleep(2434) end
    campaign_message_box(saledus_6)
-p1:allow_buildings{
-   "empire_barracks", "empire_fortress", "empire_arena", "empire_trainingcamp","empire_colosseum","empire_warehouse","empire_castle","empire_scouts_house",
-}
-p2:allow_buildings{
-   "barbarians_scouts_hut","barbarians_citadel",
-}
+
+   p1:allow_buildings{"empire_barracks",
+                      "empire_fortress", 
+                      "empire_arena", 
+                      "empire_trainingcamp",
+                      "empire_colosseum",
+                      "empire_warehouse",
+                      "empire_castle",
+                      "empire_scouts_house",
+   }
+   p2:allow_buildings{"barbarians_scouts_hut",
+                      "barbarians_citadel",
+   }
+
    o9.done = true
    o10 = add_campaign_objective(obj_conquer_all)
    run(explore_sea)
    run(soldiers)
-      while true do
-      local barmil = p2:get_buildings{"barbarians_headquarters", "barbarians_warehouse", "barbarians_port"}
-      if (#barmil.barbarians_headquarters + #barmil.barbarians_warehouse + #barmil.barbarians_port) < 1 then
+
+   while true do
+      local barmil = {
+         "barbarians_headquarters", 
+         "barbarians_warehouse", 
+         "barbarians_port"}
+      if count_buildings(p2, barmil) < 1 then
          break
       end
       sleep(2342)
    end
    o10.done = true
+
    -- Babarians defeated. 
    campaign_message_box(saledus_7)
 
    while not o12.done == true do sleep(3000) end -- to get home we need as well all artifacts 
    sleep(25000) -- Sleep a while to have some time between the last objective done message and final victory
    campaign_message_box(diary_page_5)
-   
+
    p1:reveal_campaign("campsect2")
    p1:reveal_scenario("empiretut03")
-   end
+end
 
 function soldiers() -- after discovery of babarian ruins we should hurry to build a full training capability
-	local ruins = map:get_field(86,82)
-	local ruin_fortress = map:get_field(85,80)
+   local ruins = map:get_field(86,82)
+   local ruin_fortress = map:get_field(85,80)
 
-	while not p1:sees_field(ruins) == true do sleep(3000) end
-	scroll_to_field(ruin_fortress,5)
-	campaign_message_box(saledus_12)
-	p1: reveal_fields(ruin_fortress:region(5))
-	
-	local training = p1:get_buildings{"empire_trainingcamp", "empire_barracks", "empire_arena", "empire_colosseum"}
+   while not p1:sees_field(ruins) == true do sleep(3000) end
+   scroll_to_field(ruin_fortress,5)
+   campaign_message_box(saledus_12)
+   p1: reveal_fields(ruin_fortress:region(5))
 
-	if #training.empire_trainingcamp > 0 and #training.empire_barracks > 0 and (#training.empire_arena > 0 or #training.empire_colosseum > 0)
-		then 
-		campaign_message_box(saledus_10)
-	    else
-		campaign_message_box(saledus_11)
-		o13 = add_campaign_objective(obj_training)
-	end
-	
-	while not (#training.empire_trainingcamp > 0 and #training.empire_barracks > 0 and (#training.empire_arena > 0 or #training.empire_colosseum > 0))
-	do 
-	sleep(3000) 
-	training = p1:get_buildings{"empire_trainingcamp", "empire_barracks", "empire_arena", "empire_colosseum"}
-	end
-	o13.done = true
-	campaign_message_box(saledus_10)
-	end
-   
+   local training = p1:get_buildings{
+      "empire_trainingcamp", 
+      "empire_barracks", 
+      "empire_arena", 
+      "empire_colosseum"
+   }
+
+   if #training.empire_trainingcamp > 0 and 
+      #training.empire_barracks > 0 and 
+      (#training.empire_arena > 0 or #training.empire_colosseum > 0) then
+      campaign_message_box(saledus_10)
+   else
+      campaign_message_box(saledus_11)
+      o13 = add_campaign_objective(obj_training)
+   end
+
+   while not (#training.empire_trainingcamp > 0 and 
+              #training.empire_barracks > 0 and 
+              (#training.empire_arena > 0 or #training.empire_colosseum > 0)) do 
+      sleep(3000) 
+      training = p1:get_buildings{
+         "empire_trainingcamp", 
+         "empire_barracks", 
+         "empire_arena", 
+         "empire_colosseum"
+      }
+      end
+   o13.done = true
+   campaign_message_box(saledus_10)
+end
+
 function mission_thread()
    sleep(1000)
 
@@ -273,21 +359,21 @@ function mission_thread()
    scroll_to_field(sea,5)
 
    campaign_message_box(diary_page_1)
-   
+
    -- Show the sea
    p1:reveal_fields(sea:region(5))
    local ship = p1:place_ship(sea)
    sleep(2000)
    campaign_message_box(diary_page_2)
+
    -- Hide the sea after 2 seconds
    sleep(400)
    ship:remove()
    sleep(1000)
    p1:hide_fields(sea:region(5))
    sleep(500)
-   
+
    -- Back home
-   include "map:scripting/starting_conditions.lua"
    scroll_to_field(sf)
    campaign_message_box(diary_page_3)
    sleep(400)
@@ -297,9 +383,8 @@ function mission_thread()
    sleep(400)
    campaign_message_box(saledus_1)
    o = add_campaign_objective(obj_build_first_outpost)
-	
-    while #p1:get_buildings("empire_outpost") < 1 do sleep(3249) end
-    o.done = true
+   while #p1:get_buildings("empire_outpost") < 1 do sleep(3249) end
+   o.done = true
 
    -- Outpost is completed now
    campaign_message_box(saledus_2)
@@ -310,30 +395,48 @@ function mission_thread()
 
    -- quarry is now build but we need more basic infrastructure
    campaign_message_box(amalea_2)
-   p1:allow_buildings{"empire_barrier", "empire_sawmill", "empire_stonemasons_house", "empire_foresters_house", "empire_tower"}
-   p2:allow_buildings{"barbarians_tower", "barbarians_fortress"}
+   p1:allow_buildings{
+      "empire_barrier", 
+      "empire_sawmill", 
+      "empire_stonemasons_house", 
+      "empire_foresters_house", 
+      "empire_tower",
+   }
+   p2:allow_buildings{
+      "barbarians_tower", 
+      "barbarians_fortress",
+      
    o2 = add_campaign_objective(obj_build_sawmill_stonemason_and_lumberjacks)
    -- in the same time we need to discover more land and a port space
    run(building_industry)
    sleep(40000)
    campaign_message_box(saledus_3)
-   p1:allow_buildings{"empire_port", "empire_shipyard", }
+   p1:allow_buildings{
+      "empire_port", 
+      "empire_shipyard",
+   }
    o4 = add_campaign_objective(obj_find_port_space)
 
    local port = map:get_field(17, 17)
    local fowned = nil
-     while not fowned do
-         if port.owner == p1 then
-            fowned = 1
-            break
-         end
-		 sleep(3000)
-	  end
-      sleep(3213)
+   while not fowned do
+      if port.owner == p1 then
+         fowned = 1
+         break
+      end
+   sleep(3000)
+   end
+
+   sleep(3213)
    o4.done = true
+
    -- Portspace discovered now we can build a port
    campaign_message_box(saledus_4)
-   p1:allow_buildings{"empire_farm", "empire_fishers_house", "empire_hunters_house", }
+   p1:allow_buildings{
+      "empire_farm", 
+      "empire_fishers_house", 
+      "empire_hunters_house",
+   }
    o5 = add_campaign_objective(obj_build_port_and_shipyard)
    run(ship_industry)
 
