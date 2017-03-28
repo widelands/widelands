@@ -1,5 +1,4 @@
 include "scripting/messages.lua"
-include "map:scripting/starting_conditions.lua"
 include "map:scripting/helper_functions.lua"
 
 function check_stonemason()  -- check for completed stonemason
@@ -154,7 +153,7 @@ function check_military()  -- check for too much military buildings
 end
 
 function economy_settings()  -- check for opened economy options window
-   while not mv.windows.economy_options do sleep(2434) end
+   while not hq.flag.economy:ware_target_quantity("marble_column") == 4 do sleep(2434) end
    sleep(40000)
    o3.done = true 
    campaign_message_box(amalea_8)   
@@ -367,14 +366,15 @@ function mission_thread()
    campaign_message_box(diary_page_2)
 
    -- Hide the sea after 2 seconds
-   sleep(400)
+   sleep(500)
    ship:remove()
-   sleep(1000)
-   p1:hide_fields(sea:region(5))
+   sleep(500)
+   p1:hide_fields(sea:region(5), true)
    sleep(500)
 
-   -- Back home
-   scroll_to_field(sf)
+   -- Stranded again
+   scroll_to_field(sf)  --scroll to the place where the ship is finally stranded
+   include "map:scripting/starting_conditions.lua"  --now we place the shipwreck headquarters and fill it with workers and wares
    campaign_message_box(diary_page_3)
    sleep(400)
    campaign_message_box(saledus)
