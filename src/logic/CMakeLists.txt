@@ -229,9 +229,11 @@ wl_library(logic
     game_io
     graphic
     graphic_color
+    graphic_fonthandler
     graphic_image_io
     graphic_playercolor
     graphic_surface
+    graphic_text_constants
     graphic_text_layout
     helper
     io_fileread
