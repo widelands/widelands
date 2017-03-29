@@ -47,7 +47,6 @@
 #include "logic/map_objects/tribes/tribes.h"
 #include "logic/map_objects/tribes/worker.h"
 #include "logic/player.h"
-#include "sound/sound_handler.h"
 
 namespace Widelands {
 

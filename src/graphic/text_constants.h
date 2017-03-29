@@ -28,6 +28,7 @@
 #define UI_FONT_SIZE_MESSAGE 12
 #define UI_FONT_SIZE_ULTRASMALL 10
 constexpr int kMinimumFontSize = 6;
+constexpr int kLineMargin = 1;
 
 /// Font colors
 

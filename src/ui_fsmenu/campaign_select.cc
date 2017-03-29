@@ -48,29 +48,21 @@ FullscreenMenuCampaignSelect::FullscreenMenuCampaignSelect()
      title_(this, get_w() / 2, tabley_ / 3, _("Choose a campaign"), UI::Align::kCenter),
 
      // Campaign description
-     label_campname_(this, right_column_x_, tabley_, "", UI::Align::kLeft),
+     label_campname_(this, right_column_x_, tabley_),
      ta_campname_(this,
                   right_column_x_ + indent_,
                   get_y_from_preceding(label_campname_) + padding_,
                   get_right_column_w(right_column_x_) - indent_,
                   label_height_),
 
-     label_tribename_(this,
-                      right_column_x_,
-                      get_y_from_preceding(ta_campname_) + 2 * padding_,
-                      "",
-                      UI::Align::kLeft),
+     label_tribename_(this, right_column_x_, get_y_from_preceding(ta_campname_) + 2 * padding_),
      ta_tribename_(this,
                    right_column_x_ + indent_,
                    get_y_from_preceding(label_tribename_) + padding_,
                    get_right_column_w(right_column_x_ + indent_),
                    label_height_),
 
-     label_difficulty_(this,
-                       right_column_x_,
-                       get_y_from_preceding(ta_tribename_) + 2 * padding_,
-                       "",
-                       UI::Align::kLeft),
+     label_difficulty_(this, right_column_x_, get_y_from_preceding(ta_tribename_) + 2 * padding_),
      ta_difficulty_(this,
                     right_column_x_ + indent_,
                     get_y_from_preceding(label_difficulty_) + padding_,
@@ -80,8 +72,7 @@ FullscreenMenuCampaignSelect::FullscreenMenuCampaignSelect()
      label_description_(this,
                         right_column_x_,
                         get_y_from_preceding(ta_difficulty_) + 2 * padding_,
-                        _("Description:"),
-                        UI::Align::kLeft),
+                        _("Description:")),
      ta_description_(this,
                      right_column_x_ + indent_,
                      get_y_from_preceding(label_description_) + padding_,
@@ -103,8 +94,8 @@ FullscreenMenuCampaignSelect::FullscreenMenuCampaignSelect()
 	   boost::bind(&FullscreenMenuCampaignSelect::clicked_ok, boost::ref(*this)));
 
 	/** TRANSLATORS: Campaign difficulty table header */
-	table_.add_column(45, _("Diff."), _("Difficulty"), UI::Align::kLeft);
-	table_.add_column(100, _("Tribe"), _("Tribe Name"), UI::Align::kLeft);
+	table_.add_column(45, _("Diff."), _("Difficulty"));
+	table_.add_column(100, _("Tribe"), _("Tribe Name"));
 	table_.add_column(
 	   0, _("Campaign Name"), _("Campaign Name"), UI::Align::kLeft, UI::TableColumnType::kFlexible);
 	table_.set_column_compare(
@@ -291,26 +282,21 @@ FullscreenMenuCampaignMapSelect::FullscreenMenuCampaignMapSelect(bool is_tutoria
                UI::Align::kCenter),
 
      // Map description
-     label_mapname_(this, right_column_x_, tabley_, "", UI::Align::kLeft),
+     label_mapname_(this, right_column_x_, tabley_),
      ta_mapname_(this,
                  right_column_x_ + indent_,
                  get_y_from_preceding(label_mapname_) + padding_,
                  get_right_column_w(right_column_x_ + indent_),
                  label_height_),
 
-     label_author_(this,
-                   right_column_x_,
-                   get_y_from_preceding(ta_mapname_) + 2 * padding_,
-                   "",
-                   UI::Align::kLeft),
+     label_author_(this, right_column_x_, get_y_from_preceding(ta_mapname_) + 2 * padding_),
      ta_author_(this,
                 right_column_x_ + indent_,
                 get_y_from_preceding(label_author_) + padding_,
                 get_right_column_w(right_column_x_ + indent_),
                 2 * label_height_),
 
-     label_description_(
-        this, right_column_x_, get_y_from_preceding(ta_author_) + padding_, "", UI::Align::kLeft),
+     label_description_(this, right_column_x_, get_y_from_preceding(ta_author_) + padding_),
      ta_description_(this,
                      right_column_x_ + indent_,
                      get_y_from_preceding(label_description_) + padding_,
@@ -348,7 +334,7 @@ FullscreenMenuCampaignMapSelect::FullscreenMenuCampaignMapSelect(bool is_tutoria
 	}
 
 	/** TRANSLATORS: Campaign scenario number table header */
-	table_.add_column(35, _("#"), number_tooltip, UI::Align::kLeft);
+	table_.add_column(35, _("#"), number_tooltip);
 	table_.add_column(
 	   0, name_tooltip, name_tooltip, UI::Align::kLeft, UI::TableColumnType::kFlexible);
 	table_.set_sort_column(0);
@@ -358,6 +344,7 @@ FullscreenMenuCampaignMapSelect::FullscreenMenuCampaignMapSelect(bool is_tutoria
 
 void FullscreenMenuCampaignMapSelect::layout() {
 	// TODO(GunChleoc): Implement when we have box layout for the details.
+	table_.layout();
 }
 
 std::string FullscreenMenuCampaignMapSelect::get_map() {

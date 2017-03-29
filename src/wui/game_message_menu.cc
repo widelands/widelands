@@ -152,6 +152,7 @@ GameMessageMenu::GameMessageMenu(InteractivePlayer& plr, UI::UniqueWindow::Regis
 	   ColTimeSent, boost::bind(&GameMessageMenu::compare_time_sent, this, _1, _2));
 
 	list->set_sort_column(ColTimeSent);
+	list->layout();
 
 	set_can_focus(true);
 	focus();

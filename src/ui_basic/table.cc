@@ -21,7 +21,6 @@
 
 #include <boost/bind.hpp>
 
-#include "graphic/font.h"
 #include "graphic/font_handler1.h"
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
@@ -108,7 +107,7 @@ void Table<void*>::add_column(uint32_t const width,
 	//  If there would be existing entries, they would not get the new column.
 	assert(size() == 0);
 
-	uint32_t complete_width = 0;
+	int complete_width = 0;
 	for (const Column& col : columns_) {
 		complete_width += col.width;
 	}
@@ -133,7 +132,6 @@ void Table<void*>::add_column(uint32_t const width,
 			flexible_column_ = columns_.size() - 1;
 		}
 	}
-	layout();
 }
 
 void Table<void*>::set_column_title(uint8_t const col, const std::string& title) {
@@ -209,8 +207,7 @@ void Table<void*>::fit_height(uint32_t entries) {
 	if (entries == 0) {
 		entries = size();
 	}
-	int tablewidth;
-	int tableheight;
+	int tablewidth, tableheight = 0;
 	get_desired_size(&tablewidth, &tableheight);
 	tableheight = headerheight_ + 2 + get_lineheight() * entries;
 	set_desired_size(tablewidth, tableheight);
@@ -606,15 +603,13 @@ void Table<void*>::layout() {
 
 	// Find a column to resize
 	size_t resizeable_column = std::numeric_limits<size_t>::max();
-	if (flexible_column_ != std::numeric_limits<size_t>::max()) {
+	if (flexible_column_ < columns_.size()) {
 		resizeable_column = flexible_column_;
 	} else {
 		// Use the widest column
-		int all_columns_width = scrollbar_ && scrollbar_->is_enabled() ? scrollbar_->get_w() : 0;
 		uint32_t widest_width = columns_[resizeable_column].width;
 		for (size_t i = 1; i < columns_.size(); ++i) {
 			const uint32_t width = columns_[i].width;
-			all_columns_width += width;
 			if (width > widest_width) {
 				widest_width = width;
 				resizeable_column = i;
@@ -630,8 +625,9 @@ void Table<void*>::layout() {
 		}
 		if (all_columns_width != get_w()) {
 			Column& column = columns_.at(resizeable_column);
-			column.width = column.width + get_w() - all_columns_width;
+			column.width = std::max(0, column.width + get_w() - all_columns_width);
 			column.btn->set_size(column.width, column.btn->get_h());
+
 			int offset = 0;
 			for (const auto& col : columns_) {
 				col.btn->set_pos(Vector2i(offset, col.btn->get_y()));
