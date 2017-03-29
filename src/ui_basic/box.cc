@@ -98,7 +98,7 @@ void Box::update_desired_size() {
 	int maxbreadth = mindesiredbreadth_;
 
 	for (uint32_t idx = 0; idx < items_.size(); ++idx) {
-		int depth, breadth;
+		int depth, breadth = 0;
 		get_item_desired_size(idx, &depth, &breadth);
 
 		totaldepth += depth;
@@ -137,7 +137,7 @@ void Box::layout() {
 	int totaldepth = 0;
 
 	for (size_t idx = 0; idx < items_.size(); ++idx) {
-		int depth, unused;
+		int depth, unused = 0;
 		get_item_desired_size(idx, &depth, &unused);
 		totaldepth += depth;
 	}
@@ -203,7 +203,7 @@ void Box::layout() {
 	for (size_t idx = 0; idx < items_.size(); ++idx)
 		if (items_[idx].fillspace) {
 			assert(infspace_count > 0);
-			items_[idx].assigned_var_depth = (max_depths - totaldepth) / infspace_count;
+			items_[idx].assigned_var_depth = std::max(0, (max_depths - totaldepth) / infspace_count);
 			totaldepth += items_[idx].assigned_var_depth;
 			infspace_count--;
 		}
@@ -217,11 +217,12 @@ void Box::update_positions() {
 
 	uint32_t totaldepth = 0;
 	uint32_t totalbreadth = orientation_ == Horizontal ? get_inner_h() : get_inner_w();
-	if (scrollbar_)
+	if (scrollbar_ && scrollbar_->is_enabled()) {
 		totalbreadth -= Scrollbar::kSize;
+	}
 
 	for (uint32_t idx = 0; idx < items_.size(); ++idx) {
-		int depth, breadth;
+		int depth, breadth = 0;
 		get_item_size(idx, &depth, &breadth);
 
 		if (items_[idx].type == Item::ItemPanel) {
@@ -371,7 +372,7 @@ void Box::set_item_pos(uint32_t idx, int32_t pos) {
 
 	switch (it.type) {
 	case Item::ItemPanel: {
-		int32_t breadth, maxbreadth;
+		int32_t breadth, maxbreadth = 0;
 
 		if (orientation_ == Horizontal) {
 			breadth = it.u.panel.panel->get_inner_h();

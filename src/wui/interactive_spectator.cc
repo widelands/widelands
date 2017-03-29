@@ -142,12 +142,15 @@ Widelands::PlayerNumber InteractiveSpectator::player_number() const {
  * Observer has clicked on the given node; bring up the context menu.
  */
 void InteractiveSpectator::node_action() {
-	if  //  special case for buildings
-	   (upcast(Widelands::Building, building, egbase().map().get_immovable(get_sel_pos().node)))
-		return building->show_options(*this);
-
-	if (try_show_ship_window())
+	// Special case for buildings
+	if (is_a(Widelands::Building, egbase().map().get_immovable(get_sel_pos().node))) {
+		show_building_window(get_sel_pos().node, false);
 		return;
+	}
+
+	if (try_show_ship_window()) {
+		return;
+	}
 
 	//  everything else can bring up the temporary dialog
 	show_field_action(this, nullptr, &fieldaction_);

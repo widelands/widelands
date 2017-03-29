@@ -50,7 +50,7 @@ SuggestedTeamsBox::SuggestedTeamsBox(Panel* parent,
 	suggested_teams_.clear();
 	set_size(max_x, max_y);
 
-	suggested_teams_box_label_ = new UI::Textarea(this, "", UI::Align::kLeft);
+	suggested_teams_box_label_ = new UI::Textarea(this);
 	add(suggested_teams_box_label_);
 }
 SuggestedTeamsBox::~SuggestedTeamsBox() {

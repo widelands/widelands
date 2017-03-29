@@ -102,9 +102,8 @@ FullscreenMenuMain::FullscreenMenuMain()
                /** TRANSLATORS: Placeholders are the copyright years */
                (boost::format(_("(C) %1%-%2% by the Widelands Development Team")) %
                 kWidelandsCopyrightStart % kWidelandsCopyrightEnd)
-                  .str(),
-               UI::Align::kLeft),
-     gpl(this, 0, 0, _("Licensed under the GNU General Public License V2.0"), UI::Align::kLeft) {
+                  .str()),
+     gpl(this, 0, 0, _("Licensed under the GNU General Public License V2.0")) {
 	playtutorial.sigclicked.connect(
 	   boost::bind(&FullscreenMenuMain::end_modal<FullscreenMenuBase::MenuTarget>, boost::ref(*this),
 	               FullscreenMenuBase::MenuTarget::kTutorial));
