@@ -1,5 +1,5 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2016 Widelands Development Team
+# Copyright (C) 2005-2017 Widelands Development Team
 # 
 # Translators:
 # Antonio Trueba <atrueba@users.sourceforge.net>, 2007
@@ -7,13 +7,14 @@
 # GunChleoc, 2016
 # Lucía Pradillos <dreamers_88@hotmail.com>, 2015
 # Madkat Here, 2015-2016
+# Thadah D. Denyse <juchuf@gmail.com>, 2017
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-12-15 15:23+0000\n"
-"PO-Revision-Date: 2016-12-15 15:32+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2017-03-24 18:58+0000\n"
+"PO-Revision-Date: 2017-03-28 10:49+0000\n"
+"Last-Translator: Thadah D. Denyse <juchuf@gmail.com>\n"
 "Language-Team: Spanish (http://www.transifex.com/widelands/widelands/language/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -531,11 +532,11 @@ msgid ""
 "range where the amount of gold and the space to live merely suffice for one "
 "tribe – only two opposite paths lead. But remember, be careful… this last "
 "living space is also a hard and small place to live."
-msgstr ""
+msgstr "Los dioses caprichosos no respondieron a nuestras oraciones. En su lugar, el aumento de la luz del sol calienta la tierra por miles y los glaciares se derritieron y la gente se sumergió en las profundidades. Pero ahora - en lo alto de las montañas majestuosas, en el último trozo de tierra - dos tribus supervivientes se han refugiado. A pesar de que los dioses mostraron piedad y por lo tanto el clima se volvió más frío de nuevo, el agua sigue subiendo y subiendo. En el último lugar seguro - el rango más alto de la montaña, donde la cantidad de oro y el espacio para vivir son más que suficientes para una tribu - sólo llegan dos caminos opuestos. Pero recuerda, ten cuidado ... este último espacio de vida es también un lugar duro y pequeño para vivir."
 
 #: ../../data/maps/Last_Bastion_v2.wmf/elemental:11
 msgid "Don’t forget to take care of your timber supplies, you’ll need them."
-msgstr ""
+msgstr "No te olvides de cuidar tu suministro de madera, la necesitarás."
 
 #: ../../data/maps/Last_Survivors.wmf/elemental:8
 msgid "Last Survivors"
@@ -589,13 +590,13 @@ msgid ""
 "Only a small hill in the centre of the map connects these four competing "
 "tribes. Lead your army to this hill right away and build a giant stronghold "
 "as a sign of your superiority!"
-msgstr ""
+msgstr "Sólo una pequeña colina en el centro del mapa conecta a éstas cuatro tribus rivales. ¡Lleva a tu ejército inmediatamente a ésta colina y construye una fortaleza gigante como signo de tu superioridad!"
 
 #: ../../data/maps/Rendez-Vous.wmf/elemental:11
 msgid ""
 "There is space for only one stronghold in the centre. Water can be found "
 "everywhere, so there is no need to send out geologists."
-msgstr ""
+msgstr "Solo hay un espacio para una única fortaleza en el centro. El agua se puede encontrar en todas partes, así que no hay necesidad de mandar geólogos."
 
 #: ../../data/maps/River_Explorers.wmf/elemental:8
 msgid "River Explorers"

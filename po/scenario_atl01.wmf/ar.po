@@ -7,9 +7,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-02-19 19:34+0000\n"
-"PO-Revision-Date: 2017-02-19 19:35+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2017-03-24 18:58+0000\n"
+"PO-Revision-Date: 2017-03-28 16:01+0000\n"
+"Last-Translator: Omar Anwar <omaraglan91@yahoo.com>\n"
 "Language-Team: Arabic (http://www.transifex.com/widelands/widelands/language/ar/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -22,7 +22,7 @@ msgstr ""
 #: ../../data/campaigns/atl01.wmf/scripting/init.lua:75
 msgctxt "message_short_title"
 msgid "Building lost!"
-msgstr "مبنى فقد!"
+msgstr "مبنى فُقد!"
 
 #: ../../data/campaigns/atl01.wmf/scripting/init.lua:77
 msgid "We lost a building to the ocean!"
@@ -31,11 +31,11 @@ msgstr "لقد فقدنا مبنى للبحر!"
 #: ../../data/campaigns/atl01.wmf/scripting/init.lua:83
 msgctxt "message_heading"
 msgid "Building lost!"
-msgstr "مبنى فقد!"
+msgstr "مبنى فُقد!"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:32
 msgid "Ensure the supply of building wares"
-msgstr "تاكد من المؤن لمتاع المبنى"
+msgstr "تأكد من المؤن لبناء المبني"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:34
 msgid "Supply Building Wares"
@@ -47,38 +47,38 @@ msgstr "زود المباني الأساسية بالموارد من اجل ال
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:36
 msgid "Build a quarry"
-msgstr "ابنى محجر"
+msgstr "إبني محجر"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:37
 msgid "Build two woodcutter’s houses"
-msgstr "ابنى اثنين من منازل قاطعى الأخشاب "
+msgstr "إبنى اثنين من منازل قاطعي الأخشاب "
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:38
 msgid "Build two forester’s houses"
-msgstr "ابنى اثنين من منازل الاحراش"
+msgstr "إبنى أثنين من منازل الأحراش"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:39
 msgid "Build a sawmill"
-msgstr "ابنى منشره"
+msgstr "إبنى منشرة"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:45
 msgid "Expand your territory and explore"
-msgstr "وسع منطقة سيطرتك واكتشف "
+msgstr "وسع منطقة سيطرتك وإكتشف "
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:47
 msgid "Expand and Explore"
-msgstr "وسع واكتشف من حولك"
+msgstr "وسع وإكتشف من حولك"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:48
 msgid ""
 "The island is huge and as long as we are not sure that we are alone here, we"
 " cannot relax. Explore and conquer it, this is the only way to protect us "
 "from threats on the island and from Atlantis."
-msgstr "الجزيره كبيرة وطالما نحن لسنا متأكدين اننا بمفردنا هنا, لا يمكننا الاسترخاء, استطلع وسيطر عليها, هذه هى الطريقة الوحيدة التي ستحمينا من الأخطار على الجزيره ومن المحيط الاطلنطى."
+msgstr "الجزيرة كبيرة وطالما أننا لسنا متأكدين إننا بمفردنا هنا, لا يمكننا الأسترخاء, أستطلع وسيطر عليها, هذه هى الطريقة الوحيدة التي ستحمينا من الأخطار على الجزيرة ومن المحيط الاطلنطي."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:49
 msgid "Build military sites to expand your territory"
-msgstr "ابنى مواقع عسكرية ووسع منطقة نفوذك"
+msgstr "إبنى مواقع عسكرية ووسع منطقة نفوذك"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:55
 msgid "Establish a solid food production"
@@ -86,7 +86,7 @@ msgstr "أنشئ إنتاج طعام متين"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:57
 msgid "Food Production"
-msgstr "انتاج الطعام"
+msgstr "إنتاج الطعام"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:58
 msgid ""
@@ -94,7 +94,7 @@ msgid ""
 "well working food environment by building at least one farm, one blackroot "
 "farm and a mill. The two kinds of flour together with water from a well will"
 " be baked into bread in a bakery, so build a bakery and a well, too."
-msgstr "الطعام مهم جدا للمناجم ومناطق التدريب العسكرية. أنشئ مجال إنتاج طعام جيد ببناء على الاقل مزرعة واحدة,مزرعة الجزر الأسود و طاحونة. النوعان من الدقيق معا مع الماء من البئر سوف يخبز الى خبز فى المخبز, إذا ابنى مخبزا و بئر ايضا."
+msgstr "الطعام مهم جدا للمناجم ومناطق التدريب العسكرية. أنشئ إنتاج طعام جيد ببناء على الاقل مزرعة واحدة, ومزرعة الجزر الأسود و طاحونة. النوعان من الدقيق معا مع الماء من البئر سوف يُخبز الى خُبز فى المخبز, إذا إبنى مخبزا و بئر أيضا."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:59
 msgid ""
@@ -104,49 +104,49 @@ msgid ""
 "breeding more. Make sure that there are always fish left, otherwise the fish"
 " breeder won’t be able to breed new ones. The smoking happens in a smokery, "
 "you will need at least two of those."
-msgstr "النوعان الآخران المهمان من الطعام هو السمك المدخن واللحم المدخن. اللحم النئ يوصل من الصياد. صياد السمك يخرج السمك من البحر حالما مربى السمك يتأكد من أن اسمك لن ينقرض بتربية السمك أكثر. تأكد دائما من ان يكون هناك بعض السمك الباقي وإلا لن يستطيع مربى الأسماك من تربيه المزيد. التدخين يحصل فى المدخنة. انت سوف تحتاج على الأقل اثنين من هذه. "
+msgstr "النوعان الآخران المهمان من الطعام هو السمك المدخن واللحم المدخن. اللحم النئ يُوصل من الصياد. صياد السمك يخرج السمك من البحر في حين أن مربى السمك يتأكد من أن الأسماك لن تنقرض بتربية أسماك أكثر. تأكد دائما من أن يكون هناك بعض السمك الباقي وإلا لن يستطيع مربى الأسماك من تربيه المزيد. التدخين يحصل فى المدخنة. أنت سوف تحتاج على الأقل أثنين من هذه. "
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:60
 msgid "Build a farm and a blackroot farm"
-msgstr "ابنى مزرعة ومزرعة الجزر الأسود "
+msgstr "إبنى مزرعة ومزرعة الجزر الأسود "
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:61
 msgid "Build a mill to make cornmeal and blackroot flour"
-msgstr "ابنى طاحونة لكى تنتج نشا الذرة و طحين الجذور السوداء "
+msgstr "إبنى طاحونة لكي تُنتج نشا الذرة و طحين الجذور السوداء "
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:62
 msgid "Build a well"
-msgstr "ابنى بئر "
+msgstr "إبنى بئر "
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:63
 msgid "Build a bakery to bake bread from cornmeal, blackroot flour and water"
-msgstr "ابنى مخبز لكي تنتج الخبز من نشا الذرة, طحين الجذور السوداء والماء "
+msgstr "إبنى مخبز لكي تنتج الخبز من نشا الذرة, طحين الجذور السوداء والماء "
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:64
 msgid "Build a hunter’s house to get raw meat"
-msgstr "ابنى منزل الصياد لكي تحصل على اللحم النئ "
+msgstr "إبنى منزل الصياد لكي تحصل على اللحم النئ "
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:65
 msgid "Build a fisher’s house close to water to get raw fish"
-msgstr "ابنى منزل الصياد بالقرب من الماء لكي تحصل على سمك نئ "
+msgstr "إبنى منزل صياد السمك بالقرب من الماء لكي تحصل على سمك نئ "
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:66
 msgid ""
 "Build a fish breeder’s house close to the fisher to make sure the fish do "
 "not die out"
-msgstr "ابنى منزل مربى الأسماك قريبا من الصياد لكى تتاكد ام السمك لا ينتهى"
+msgstr "إبنى منزل مربي الأسماك قريبا من الصياد لكى تتأكد أن السمك لا ينتهي"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:67
 msgid "Build two smokeries to smoke raw meat and fish"
-msgstr "ابنى مدخنتين لكى تدخن السمك واللحم النيئ "
+msgstr "إبنى مدَخنَتيَن لكى تُدخن السمك واللحم النيئ "
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:73
 msgid "Build a spider farm and a weaving mill"
-msgstr "ابنى مزرعه العنكبوت و مصنع النسيج "
+msgstr "إبنى مزرعة العنكبوت و مصنع النسيج "
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:75
 msgid "Spidercloth Production"
-msgstr "انتاج  ملابس العنكبوت "
+msgstr "إنتاج ملابس العنكبوت "
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:76
 msgid ""
@@ -155,19 +155,19 @@ msgid ""
 "tabards are the uniforms of soldiers. The weaving mill needs gold thread and"
 " spider silk as raw material. Spider silk is produced by the spider farm, "
 "while gold thread is produced by the gold spinning mill out of gold."
-msgstr "النساجون ينتجون ملابس العنكبوت والسترات القصيرة فى مصنع النسيج. قماش العنكبوت مطلوبة لبناء بعض المباني والملابس, حينما تكون السترات ملابس الجنود. مصانع النسيج تحتاج إلى مصدر الذهب وخيوط العنكبوت كمادة بدائية. خيوط العنكبوت تنتج بواسطة مزرعه العنكبوت, حينما يكون الذهب ينتج من منجم الذهب."
+msgstr "النساجون ينتجون ملابس العنكبوت والسترات القصيرة فى مصنع النسيج. قماش العنكبوت مطلوبة لبناء بعض المباني وصناعة الملابس, حينما تكون السترات ملابس الجنود. مصانع النسيج تحتاج إلى مصدر الذهب وخيوط العنكبوت كمادة بدائية. خيوط العنكبوت تُنَتج بواسطة مزرعة العنكبوت, فى حين أن الذهب يُنتج من منجم الذهب."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:77
 msgid "Build a weaving mill"
-msgstr "ابنى مصنع نسيج "
+msgstr "إبنى مصنع نسيج "
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:78
 msgid "Build a spider farm"
-msgstr "ابنى مزرعه عنكبوت"
+msgstr "إبنى مزرعة عنكبوت"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:79
 msgid "Build a gold spinning mill"
-msgstr "ابنى مصنع ومنجم الذهب "
+msgstr "إبنى مصنع ومنجم الذهب "
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:85
 msgid "Build industry and mines"
@@ -183,37 +183,37 @@ msgid ""
 "mine will dig for quartz and diamonds – all of them are precious materials "
 "and very rarely found. It will produce a lot of granite while searching for "
 "them."
-msgstr "خام الحديد, خام الذهب والفحم يعدن عنها فى مناجمها المحددة. منجم الكريستال سوف يبحث عن الكوارتز والمجوهرات -- كلهم معادن غاليه وقلليه الوجود جدا. هو سوف ينتج الكثير من الجرانيت حالما يبحث عنهم."
+msgstr "خام الحديد, خام الذهب والفحم يُعَدن عنها فى مناجمها المحددة. منجم الكريستال سوف يبحث عن الكوارتز والمجوهرات -- كلها معادن غالية وقليلة الوجود جدا. سوف ينتج الكثير من الجرانيت حالما يبحث عنهم."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:89
 msgid ""
 "The ores have to be smelted at a smelting works before they can be used. The"
 " refined materials are then used in the weapon smithy, the armor smithy and "
 "the toolsmithy."
-msgstr "المعدن الخام يجب ان يصهر فى اعمال الصهر قبل ان يستخدم. الموارد المستخرجه تستخدم فى حداد الاسلحه, حداد الدروع و حداد الادوات."
+msgstr "المعدن الخام يجب أن يٌصهر فى أعمال الصهر قبل أن يُستخدم. الموارد المستخرجة تستخدم فى حدادة الأسلحة, حدادة الدروع و حدادة الادوات."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:90
 msgid ""
 "Build a mine of each type. Make sure to send geologists to the mountain "
 "first."
-msgstr "ابنى منجم من كل نوع. لكن تأكد ان ترسل الجيولوجيون إلى الجبل اولا."
+msgstr "إبنى منجم من كل نوع. لكن تأكد أن تُرسل الجيولوجيون إلى الجبل اولاً."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:91
 msgid "Build a smelting works"
-msgstr "ابنى مصنع الصهر "
+msgstr "إبنى مصنع الصهر "
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:92
 msgid "Build an armor smithy and a weapon smithy"
-msgstr "ابنى حداد الدرع و حداد الأسلحة "
+msgstr "إبني حداد الدرع و حداد الأسلحة "
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:93
 msgid "Build a toolsmithy"
-msgstr "ابنى حداد الأدوات "
+msgstr "إبنى حداد الأدوات "
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:99
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:103
 msgid "Build a barracks"
-msgstr "أبنى ثكنات"
+msgstr "إبنى ثكنات"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:101
 msgid "Recruiting new soldiers"
@@ -225,11 +225,11 @@ msgid ""
 "we need to deliver light tridents and tabards to the barracks. Recruits will"
 " arrive from the warehouse and receive one of each and some basic training "
 "to become a soldier."
-msgstr ""
+msgstr "الأن الأسلحة يتم صياغتها، الجنود الجدد يمكن أن يجندوا. من أجل هذا، نحن نحتاج الرمح الخفيف ثلاثى الشعب و السترة القصيرة أن تُرسل إلي الثكنات. المُجندون سوف يَصلون من المستودع ويحصلون على واحدة من كل من الرمح والسترة و بعض التدريب البسيط ويصبح جندياً."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:109
 msgid "Build training sites for soldiers"
-msgstr "ابنى مواقع تدريب للجنود "
+msgstr "إبنى مواقع تدريب للجنود "
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:111
 msgid "Soldier Training Sites"
@@ -241,19 +241,19 @@ msgid ""
 "dungeon trains attack – the major attribute of the Atlanteans – and the "
 "labyrinth trains evasion, health and defense. The items produced by the "
 "industry are used to train better soldiers in the two training sites."
-msgstr "مثل كل القبائل الأخرى, الاطلانطسيون ايضا لديهم المقدرة على تدريب الجنود: البرج تدرب الهجوم -- الهجوم الاساسى للاطلانطسيون -- و المتاهه تدرب المراوغة, الصحة والدفاع. الأدوات المنتجة بالصناعة تستخدم لتدريب الجنود الافضل فى مكانين للتدريب."
+msgstr "مثل كل القبائل الأخرى, الاطلانطسيون أيضا لديهم المقدرة على تدريب الجنود: البرج يدرب الهجوم -- الهجوم الاساسي للاطلانطسيون -- و المتاهه تدرب المراوغة, الصحة والدفاع. الأدوات المنتجة بالصناعة تستخدم لتدريب الجنود الافضل فى مكانين للتدريب."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:113
 msgid "Build a dungeon and a labyrinth"
-msgstr "ابنى البرج و المتاهه "
+msgstr "إبنى البرج و المتاهه "
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:119
 msgid "Build a warehouse and a horse farm"
-msgstr "ابنى مستودع و مزرعة احصنة "
+msgstr "إبنى مستودع و مزرعة أحصنة "
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:121
 msgid "Warehouse and Horse Farm"
-msgstr "مستودع و مزعة احصنة"
+msgstr "مستودع و مزرعة أحصنة"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:122
 msgid ""
@@ -261,19 +261,19 @@ msgid ""
 "horses to help out your carriers. Horses are bred at horse farms using water"
 " and corn. A warehouse will also help to ensure that your transportation "
 "system does not collapse."
-msgstr "بما ان شبكه الطرق تصبح اطول واكثر تعقيدا, يجب عليك"
+msgstr "بما أن شبكة الطرق تصبح أطول وأكثر تعقيداً, يجب عليك أن توكل بعض الاحصنة لكي تساعد الحمالين. الأحصنة تُربي في مزرعة الأحصنة بأستخدام الماء والذرة. مستودع سوف يساعد أيضاً على تأكيد أن نظام النقل لن ينهار."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:123
 msgid "Build a warehouse"
-msgstr "أبني مخزن"
+msgstr "إبني مستودع"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:124
 msgid "Build a horse farm"
-msgstr "أبنى مزرعة"
+msgstr "إبنى مزرعة أحصنة"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:130
 msgid "Build 3 ships to escape from the island"
-msgstr "أبنى 3 سفن لكي تعرب من الجزيرة"
+msgstr "إبنى 3 سفن لكي تهرب من الجزيرة"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:132
 msgid "Escape From the Island"
@@ -284,11 +284,11 @@ msgid ""
 "There is a lake at the top of the island. Build three ships in these waters "
 "and you might be able to rescue your people before the island is swallowed "
 "completely by the ocean."
-msgstr "هناك بحيرة فى أعلى الجزيرة. أبنى ثلاث سفن فى هذه المياه وربما من الممكن ان تنقذ شعبك قبل أن تبتلع الجزيرة بالكامل من البحر."
+msgstr "هُناك بُحيرة فى أعلى الجزيرة. إبنى ثلاث سفن فى هذه المياه وربما من الممكن أن تُنقذ شعبك قبل أن تُبتَلع الجزيرة بالكامل من البحر."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:134
 msgid "Build a shipyard close to the lake to start building ships"
-msgstr "أبنى حوض سفن قريب من البحيره لكى تبدأ بناء السفن"
+msgstr "إبنى حوض سفن قريب من البحيرة لكى تبدأ بناء السفن"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:145
 msgid "Proud to the Death"
@@ -296,7 +296,7 @@ msgstr "فخور حتى الموت"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:147
 msgid "Favored by the God"
-msgstr "اختاره الاله"
+msgstr "إختاره الإله"
 
 #. TRANSLATORS: Foreword
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:149
@@ -747,7 +747,7 @@ msgstr ""
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:367
 msgid "Jundlina Considers the Economy"
-msgstr ""
+msgstr "\"جوندلينا\" يأخذ الأقتصاد بعين الاعتبار"
 
 #. TRANSLATORS: Jundlina
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:370
@@ -767,12 +767,12 @@ msgstr ""
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:385
 msgid "A Dangerous Discovery"
-msgstr "اكتشاف خطير "
+msgstr "إكتشاف خطير "
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:386
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:414
 msgid "Jundlina is in Thought"
-msgstr ""
+msgstr "\"جوندلينا\" فى تفكير"
 
 #. TRANSLATORS: Jundlina
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:388
@@ -804,11 +804,11 @@ msgstr ""
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:402
 msgid "Another Building"
-msgstr ""
+msgstr "مبني أخر"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:403
 msgid "Jundlina is Worried"
-msgstr ""
+msgstr "\"جوندلينا\" قلق"
 
 #. TRANSLATORS: Jundlina
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:405
@@ -822,7 +822,7 @@ msgstr ""
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:413
 msgid "One More Building"
-msgstr ""
+msgstr "مبنى واحد أكثر"
 
 #. TRANSLATORS: Jundlina
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:416
@@ -837,7 +837,7 @@ msgstr ""
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:427
 msgid "The Water is Rising!"
-msgstr ""
+msgstr "المياة ترتفع!"
 
 #. TRANSLATORS: Jundlina
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:430
@@ -917,7 +917,7 @@ msgstr ""
 msgid ""
 "I expect a long journey, but we will find the land of Satul in the end. This"
 " is what I promised my people. And myself."
-msgstr "انا اتوقع مشوار طويل, لكنك ستجد ارض \"ساتول\" فى النهاية. هذا ما وعدت به الناس, ونفسى."
+msgstr "انا أتوقع مشوار طويل, لكنك ستجد أرض \"ساتول\" فى النهاية. هذا ما وَعَدتُ بِه الناس, ونفسي."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:479
 msgid "Congratulations"
@@ -927,7 +927,7 @@ msgstr "تهانينا"
 msgid ""
 "You have won this mission. Continue with the next one or keep playing for as"
 " long as you like."
-msgstr "لقد فزت فى المهمه. اكمل فى القادمه او ابقى لتلعب قدر ما تحب."
+msgstr "لقد فُزت فى المهمة. أكمل فى القادمة او إبقى لتلعب قدر ما تحب."
 
 #: ../../data/scripting/format_scenario.lua:36
 #, lua-format
@@ -937,9 +937,9 @@ msgstr "“%s”"
 #: ../../data/scripting/format_scenario.lua:84
 msgid "New Objective"
 msgid_plural "New Objectives"
-msgstr[0] "لا اهداف جديده"
+msgstr[0] "لا أهداف جديدة"
 msgstr[1] "هدف جديد "
 msgstr[2] "هدفان جديدان "
-msgstr[3] "اهداف جديده"
-msgstr[4] "اهداف جديده"
-msgstr[5] "اهداف جديده"
+msgstr[3] "أهداف جديدة"
+msgstr[4] "أهداف جديدة"
+msgstr[5] "أهداف جديدة"
