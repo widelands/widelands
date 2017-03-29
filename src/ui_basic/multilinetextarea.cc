@@ -26,6 +26,7 @@
 #include "graphic/rendertarget.h"
 #include "graphic/text/font_set.h"
 #include "graphic/text_constants.h"
+#include "graphic/text_layout.h"
 
 namespace UI {
 
