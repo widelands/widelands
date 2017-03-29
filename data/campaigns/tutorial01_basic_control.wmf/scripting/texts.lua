@@ -166,7 +166,7 @@ construction_site_window = {
 }
 
 lumberjack_message_07 = {
-   title = _"Lumberjack is Done",
+   title = _"The Lumberjack’s Hut is Done",
    position = "topright",
    body = rt(
       p(_[[Excellent. The lumberjack’s hut is done. A lumberjack will now move in and start chopping down trees, so our log income is secured for now. Now on to the granite.]])
