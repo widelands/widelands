@@ -3,16 +3,12 @@ add_subdirectory(text)
 # TODO(sirver): Separate this directory into a base directory and one
 # that is Widelands aware (can include logic stuff).
 
-wl_library(graphic_build_texture_atlas
+# Align and color
+
+wl_library(graphic_align
   SRCS
-    build_texture_atlas.h
-    build_texture_atlas.cc
-  DEPENDS
-    graphic
-    graphic_image_io
-    graphic_surface
-    graphic_texture_atlas
-    io_filesystem
+    align.h
+    align.cc
 )
 
 wl_library(graphic_color
@@ -31,31 +27,19 @@ wl_library(graphic_playercolor
     graphic_surface
 )
 
-wl_library(graphic_render_queue
-  SRCS
-    render_queue.cc
-    render_queue.h
-  DEPENDS
-    base_exceptions
-    base_geometry
-    base_macros
-    graphic_color
-    graphic_terrain_programs
-    graphic_draw_programs
-    logic
-)
 
-wl_library(graphic_text_layout
+# Rendering utils
+
+wl_library(graphic_build_texture_atlas
   SRCS
-    text_layout.cc
-    text_layout.h
-    text_constants.h
+    build_texture_atlas.h
+    build_texture_atlas.cc
   DEPENDS
-    base_i18n
     graphic
-    graphic_color
+    graphic_image_io
     graphic_surface
-    graphic_text
+    graphic_texture_atlas
+    io_filesystem
 )
 
 wl_library(graphic_image_io
@@ -113,49 +97,6 @@ wl_library(graphic_gl_utils
     io_filesystem
 )
 
-wl_library(graphic_terrain_programs
-  SRCS
-    gl/fields_to_draw.h
-    gl/road_program.cc
-    gl/road_program.h
-    gl/terrain_program.cc
-    gl/terrain_program.h
-    gl/dither_program.cc
-    gl/dither_program.h
-  DEPENDS
-    base_exceptions
-    base_geometry
-    base_log
-    base_macros
-    graphic
-    graphic_gl_utils
-    graphic_image_io
-    graphic_surface
-    io_filesystem
-    logic
-    logic_constants
-    logic_widelands_geometry
-)
-
-wl_library(graphic_draw_programs
-  SRCS
-    blend_mode.h
-    blit_mode.h
-    gl/blit_program.cc
-    gl/blit_program.h
-    gl/draw_line_program.cc
-    gl/draw_line_program.h
-    gl/fill_rect_program.cc
-    gl/fill_rect_program.h
-  DEPENDS
-    base_exceptions
-    base_macros
-    base_geometry
-    graphic_gl_utils
-    base_log
-    graphic_color
-)
-
 wl_library(graphic_surface
   SRCS
     image.h
@@ -167,7 +108,6 @@ wl_library(graphic_surface
     texture.h
     texture_cache.cc
     texture_cache.h
-  USES_OPENGL
   USES_SDL2
   DEPENDS
     base_exceptions
@@ -190,6 +130,42 @@ wl_library(graphic_texture_atlas
     base_exceptions
     base_macros
     graphic_surface
+)
+
+wl_library(graphic_draw_programs
+  SRCS
+    blend_mode.h
+    blit_mode.h
+    gl/blit_program.cc
+    gl/blit_program.h
+    gl/draw_line_program.cc
+    gl/draw_line_program.h
+    gl/fill_rect_program.cc
+    gl/fill_rect_program.h
+  DEPENDS
+    base_exceptions
+    base_macros
+    base_geometry
+    graphic_gl_utils
+    base_log
+    graphic_color
+)
+
+
+# Logic-aware stuff
+
+wl_library(graphic_render_queue
+  SRCS
+    render_queue.cc
+    render_queue.h
+  DEPENDS
+    base_exceptions
+    base_geometry
+    base_macros
+    graphic_color
+    graphic_terrain_programs
+    graphic_draw_programs
+    logic
 )
 
 wl_library(graphic_game_renderer
@@ -225,33 +201,133 @@ wl_library(graphic_minimap_renderer
     wui_mapview_pixelfunctions
 )
 
-wl_library(graphic
+wl_library(graphic_terrain_programs
   SRCS
-    align.cc
-    align.h
-    animation.cc
-    animation.h
-    default_resolution.h
-    diranimations.h
+    gl/fields_to_draw.h
+    gl/road_program.cc
+    gl/road_program.h
+    gl/terrain_program.cc
+    gl/terrain_program.h
+    gl/dither_program.cc
+    gl/dither_program.h
+  DEPENDS
+    base_exceptions
+    base_geometry
+    base_log
+    base_macros
+    graphic
+    graphic_gl_utils
+    graphic_image_io
+    graphic_surface
+    io_filesystem
+    logic
+    logic_constants
+    logic_widelands_geometry
+)
+
+
+# Font handlers and text
+
+wl_library(graphic_fonthandler_legacy
+  SRCS
     font.cc
     font.h
     font_handler.cc
     font_handler.h
-    font_handler1.cc
-    font_handler1.h
-    graphic.cc
-    graphic.h
-    rendertarget.cc
-    rendertarget.h
     richtext.cc
     richtext.h
     text_parser.cc
     text_parser.h
+  USES_ICU
+  USES_SDL2_TTF
+  DEPENDS
+    base_exceptions
+    base_geometry
+    base_i18n
+    base_log
+    base_utf8
+    graphic
+    graphic_align
+    graphic_color
+    graphic_fonthandler
+    graphic_surface
+    graphic_text
+    graphic_text_constants
+    graphic_text_layout
+    graphic_wordwrap
+    helper
+    io_fileread
+    io_filesystem
+)
+
+wl_library(graphic_fonthandler
+  SRCS
+    font_handler1.cc
+    font_handler1.h
+  DEPENDS
+    base_exceptions
+    base_geometry
+    base_log
+    base_macros
+    graphic
+    graphic_align
+    graphic_image_cache
+    graphic_surface
+    graphic_text
+    io_filesystem
+)
+
+wl_library(graphic_text_constants
+  SRCS
+    text_constants.h
+    text_constants.cc
+)
+
+wl_library(graphic_text_layout
+  SRCS
+    text_layout.cc
+    text_layout.h
+  DEPENDS
+    graphic_align
+    graphic_color
+    graphic_surface
+    graphic_text
+    graphic_text_constants
+    graphic_fonthandler
+)
+
+wl_library(graphic_wordwrap
+  SRCS
     wordwrap.cc
     wordwrap.h
-  USES_OPENGL
-  USES_SDL2
+  USES_ICU
   USES_SDL2_TTF
+  DEPENDS
+    base_geometry
+    base_log
+    graphic
+    graphic_align
+    graphic_color
+    graphic_fonthandler
+    graphic_text
+    graphic_text_constants
+    graphic_text_layout
+)
+
+
+# Base library
+
+wl_library(graphic
+  SRCS
+    animation.cc
+    animation.h
+    default_resolution.h
+    diranimations.h
+    graphic.cc
+    graphic.h
+    rendertarget.cc
+    rendertarget.h
+  USES_SDL2
   DEPENDS
     base_exceptions
     base_geometry
@@ -259,6 +335,7 @@ wl_library(graphic
     base_log
     base_macros
     build_info
+    graphic_align
     graphic_build_texture_atlas
     graphic_color
     graphic_draw_programs
@@ -268,10 +345,7 @@ wl_library(graphic
     graphic_playercolor
     graphic_render_queue
     graphic_surface
-    graphic_text
     graphic_text_layout
-    helper
-    io_fileread
     io_filesystem
     io_stream
     logic_constants
