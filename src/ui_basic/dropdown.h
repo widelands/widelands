@@ -45,7 +45,7 @@ protected:
 	/// \param list_w             the dropdown's width
 	/// \param list_h             the maximum height for the dropdown list
 	/// \param button_dimension   the width of the push button in textual dropdowns. For pictorial
-	/// dropdowns, this both the width and the height of the button.
+	/// dropdowns, this is both the width and the height of the button.
 	/// \param label              a label to prefix to the selected entry on the display button.
 	/// \param type               whether this is a textual or pictorial dropdown
 	/// \param background         the background image for this dropdown
@@ -171,7 +171,7 @@ public:
 	/// \param list_w             the dropdown's width
 	/// \param list_h             the maximum height for the dropdown list
 	/// \param button_dimension   the width of the push button in textual dropdowns. For pictorial
-	/// dropdowns, this both the width and the height of the button.
+	/// dropdowns, this is both the width and the height of the button.
 	/// \param label              a label to prefix to the selected entry on the display button.
 	/// \param type               whether this is a textual or pictorial dropdown
 	/// \param background         the background image for this dropdown
