@@ -26,7 +26,23 @@ tips = {
    },
    {
       text = _"Space key behaves like in normal game. It switches if building spaces are shown on or off.",
+      seconds = 4
+   },
+   {
+      text = _"When placing trees, use the help button to see which trees are more likely to survive on which terrain.",
       seconds = 6
+   },
+   {
+      text = _"If you do not set water and fish resources, a default amount will be used.",
+      seconds = 4
+   },
+   {
+      text = _"You can place a medium building on any node where there is a slope no greater than 1 in the south-east direction and its height difference to all nodes in a radius of 2 is no greater than 2.",
+      seconds = 7
+   },
+   {
+      text = _"You can place a large building on any node where you could place a medium building if there is no obstacle or non-arable terrain towards the west, northwest and northeast.",
+      seconds = 7
    },
 }
 return tips

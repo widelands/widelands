@@ -54,6 +54,7 @@ public:
 	virtual const Texture& render(const std::string&, const RGBColor& clr, int, TextureCache*) = 0;
 
 	virtual uint16_t ascent(int) const = 0;
+	virtual TTF_Font* get_ttf_font() const = 0;
 };
 
 // Implementation of a Font object using SDL_ttf.
@@ -65,6 +66,9 @@ public:
 	void dimensions(const std::string&, int, uint16_t* w, uint16_t* h) override;
 	const Texture& render(const std::string&, const RGBColor& clr, int, TextureCache*) override;
 	uint16_t ascent(int) const override;
+	TTF_Font* get_ttf_font() const override {
+		return font_;
+	}
 
 private:
 	void set_style(int);

@@ -240,8 +240,12 @@ void Panel::set_size(const int nw, const int nh) {
 	if (nw == w_ && nh == h_)
 		return;
 
-	w_ = nw;
-	h_ = nh;
+	assert(nw >= 0);
+	assert(nh >= 0);
+
+	// Make sure that we never get negative width/height in release builds.
+	w_ = std::max(0, nw);
+	h_ = std::max(0, nh);
 
 	if (parent_)
 		move_inside_parent();
@@ -282,9 +286,12 @@ void Panel::set_desired_size(int w, int h) {
 
 	assert(w < 3000);
 	assert(h < 3000);
+	assert(w >= 0);
+	assert(h >= 0);
 
-	desired_w_ = w;
-	desired_h_ = h;
+	// Make sure that we never get negative width/height in release builds.
+	desired_w_ = std::max(0, w);
+	desired_h_ = std::max(0, h);
 	if (!get_layout_toplevel() && parent_) {
 		parent_->update_desired_size();
 	} else {
@@ -351,6 +358,7 @@ void Panel::layout() {
  * Set the size of the inner area (total area minus border)
  */
 void Panel::set_inner_size(int const nw, int const nh) {
+	assert(nw >= 0 && nh >= 0);
 	set_size(nw + lborder_ + rborder_, nh + tborder_ + bborder_);
 }
 
@@ -364,6 +372,15 @@ void Panel::set_border(int l, int r, int t, int b) {
 	rborder_ = r;
 	tborder_ = t;
 	bborder_ = b;
+}
+
+int Panel::get_inner_w() const {
+	assert(w_ == 0 || lborder_ + rborder_ <= w_);
+	return (w_ == 0 ? 0 : w_ - (lborder_ + rborder_));
+}
+int Panel::get_inner_h() const {
+	assert(h_ == 0 || tborder_ + bborder_ <= h_);
+	return (h_ == 0 ? 0 : h_ - (tborder_ + bborder_));
 }
 
 /**

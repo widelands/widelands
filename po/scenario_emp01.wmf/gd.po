@@ -1,8 +1,8 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2016 Widelands Development Team
+# Copyright (C) 2005-2017 Widelands Development Team
 # 
 # Translators:
-# GunChleoc, 2015-2016
+# GunChleoc, 2015-2017
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2013
 # GunChleoc, 2015
 # GunChleoc, 2013-2016
@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-12-04 07:02+0000\n"
-"PO-Revision-Date: 2016-12-07 18:38+0000\n"
+"POT-Creation-Date: 2017-03-03 06:24+0000\n"
+"PO-Revision-Date: 2017-03-05 08:34+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Gaelic, Scottish (http://www.transifex.com/widelands/widelands/language/gd/)\n"
 "MIME-Version: 1.0\n"
@@ -139,7 +139,7 @@ msgid ""
 "furious at the Barbarians, yet forbade any attack on these tribes. He "
 "believed that our army was too weak to survive in a war against the "
 "Barbarians."
-msgstr "Trì seachdainean às dèidh sin, thill mi gu Fremil gus bruidhinn ri ’r rìgh. Bha an ainmein air ris na Tùsanaich ach thoirmisg e ionnsaigh sam bith ’nan aghaidh. Bha e den bheachd gun robh am feachd againn ro lag airson seasamh ann an cogadh an aghaidh nan Tùsanach."
+msgstr "Trì seachdainean às dèidh sin, thill mi gu Fremil gus bruidhinn ri ’r rìgh. Bha an ainmein air ris na Tùsanaich ach thoirmisg e ionnsaigh sam bith an aghaidh nan treubhan ud. Bha e den bheachd gun robh am feachd againn ro lag airson seasamh ann an cogadh an aghaidh nan Tùsanach."
 
 #. TRANSLATORS: Lutius - Diary. Gulf of Perl is a place name.
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:93
@@ -434,7 +434,7 @@ msgstr "A thighearna, rinn sibh àite glè thèarainte dhen rubha seo. Thàinig 
 msgid "“%s”"
 msgstr "“%s”"
 
-#: ../../data/scripting/format_scenario.lua:96
+#: ../../data/scripting/format_scenario.lua:84
 msgid "New Objective"
 msgid_plural "New Objectives"
 msgstr[0] "Amas ùr"

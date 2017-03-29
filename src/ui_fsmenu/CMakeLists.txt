@@ -45,11 +45,12 @@ wl_library(ui_fsmenu
     build_info
     game_io
     graphic
+    graphic_fonthandler
     graphic_image_io
     graphic_playercolor
     graphic_surface
     graphic_text
-    graphic_text_layout
+    graphic_text_constants
     helper
     io_filesystem
     logic
