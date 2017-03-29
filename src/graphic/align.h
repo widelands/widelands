@@ -20,8 +20,6 @@
 #ifndef WL_GRAPHIC_ALIGN_H
 #define WL_GRAPHIC_ALIGN_H
 
-#include "base/vector.h"
-
 namespace UI {
 
 // TODO(GunChleoc): Step 1: Clean up superfluous usages of kLeft/kTop, especially with dalls to
@@ -35,10 +33,5 @@ enum class Align {
 	kTop = kLeft,
 	kBottom = kRight,
 };
-
-Align mirror_alignment(Align alignment);
-
-void center_vertically(uint32_t h, Vector2f* pt);
-void correct_for_align(Align, uint32_t w, Vector2f* pt);
 }
 #endif  // end of include guard: WL_GRAPHIC_ALIGN_H

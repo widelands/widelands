@@ -16,8 +16,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-03-03 06:24+0000\n"
-"PO-Revision-Date: 2017-03-03 21:15+0000\n"
+"POT-Creation-Date: 2017-03-10 07:01+0000\n"
+"PO-Revision-Date: 2017-03-10 09:46+0000\n"
 "Last-Translator: Elisabeth Jäger\n"
 "Language-Team: German (http://www.transifex.com/widelands/widelands/language/de/)\n"
 "MIME-Version: 1.0\n"
@@ -288,7 +288,7 @@ msgid ""
 msgstr "Um das Fenster zu schließen genügt ein einfacher Rechtsklick. Alle Fenster in Widelands können so geschlossen werden, außer welche mit Anweisungen, wie dieses hier. Probier es aus!"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:169
-msgid "Lumberjack is Done"
+msgid "The Lumberjack’s Hut is Done"
 msgstr "Die Holzfällerhütte ist fertig"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:172

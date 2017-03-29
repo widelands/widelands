@@ -59,11 +59,17 @@ wl_library(ui_basic
     base_i18n
     base_log
     base_macros
+    base_utf8
     graphic
+    graphic_align
     graphic_color
+    graphic_fonthandler
+    graphic_fonthandler_legacy
     graphic_surface
     graphic_text
+    graphic_text_constants
     graphic_text_layout
+    graphic_wordwrap
     io_filesystem
     notifications
     profile

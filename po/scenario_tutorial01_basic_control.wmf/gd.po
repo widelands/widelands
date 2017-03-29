@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-03-03 06:24+0000\n"
-"PO-Revision-Date: 2017-03-03 09:41+0000\n"
+"POT-Creation-Date: 2017-03-05 10:46+0000\n"
+"PO-Revision-Date: 2017-03-05 13:03+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Gaelic, Scottish (http://www.transifex.com/widelands/widelands/language/gd/)\n"
 "MIME-Version: 1.0\n"
@@ -281,7 +281,7 @@ msgid ""
 msgstr "Gus an uinneag a dhùnadh, cha leig thu leas ach briogadh deas a dhèanamh air. Gabhaidh gach uinneag ann an Widelands dùnadh mar seo ach an fheadhainn le stiùireadh annta mar an tè seo fhèin. Siuthad is feuch e!"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:169
-msgid "Lumberjack is Done"
+msgid "The Lumberjack’s Hut is Done"
 msgstr "Tha am bothan coillteir deiseil"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:172
