@@ -405,7 +405,7 @@ function mission_thread()
    p2:allow_buildings{
       "barbarians_tower", 
       "barbarians_fortress",
-      
+   }
    o2 = add_campaign_objective(obj_build_sawmill_stonemason_and_lumberjacks)
    -- in the same time we need to discover more land and a port space
    run(building_industry)
