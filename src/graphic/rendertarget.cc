@@ -23,6 +23,7 @@
 #include "graphic/animation.h"
 #include "graphic/graphic.h"
 #include "graphic/surface.h"
+#include "graphic/text_layout.h"
 
 /**
  * Build a render target for the given surface.

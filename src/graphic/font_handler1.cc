@@ -25,7 +25,6 @@
 #include <boost/lexical_cast.hpp>
 #include <boost/utility.hpp>
 
-#include "base/i18n.h"
 #include "base/log.h"
 #include "base/wexception.h"
 #include "graphic/graphic.h"
@@ -110,10 +109,10 @@ namespace UI {
 // be a problem.
 class FontHandler1 : public IFontHandler1 {
 public:
-	FontHandler1(ImageCache* image_cache)
+	FontHandler1(ImageCache* image_cache, const std::string& locale)
 	   : texture_cache_(new TextureCache(RICHTEXT_TEXTURE_CACHE)),
 	     fontsets_(),
-	     fontset_(fontsets_.get_fontset(i18n::get_locale())),
+	     fontset_(fontsets_.get_fontset(locale)),
 	     rt_renderer_(new RT::Renderer(image_cache, texture_cache_.get(), fontsets_)),
 	     image_cache_(image_cache) {
 	}
@@ -137,8 +136,8 @@ public:
 		return fontset_;
 	}
 
-	void reinitialize_fontset() override {
-		fontset_ = fontsets_.get_fontset(i18n::get_locale());
+	void reinitialize_fontset(const std::string& locale) override {
+		fontset_ = fontsets_.get_fontset(locale);
 		texture_cache_.get()->flush();
 		rt_renderer_.reset(new RT::Renderer(image_cache_, texture_cache_.get(), fontsets_));
 	}
@@ -151,8 +150,8 @@ private:
 	ImageCache* const image_cache_;  // not owned
 };
 
-IFontHandler1* create_fonthandler(ImageCache* image_cache) {
-	return new FontHandler1(image_cache);
+IFontHandler1* create_fonthandler(ImageCache* image_cache, const std::string& locale) {
+	return new FontHandler1(image_cache, locale);
 }
 
 IFontHandler1* g_fh1 = nullptr;
