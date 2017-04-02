@@ -44,8 +44,7 @@ BuildingHelpWindow::BuildingHelpWindow(Panel* const parent,
                       width,
                       height,
                       (boost::format(_("Help: %s")) % building_description.descname()).str()),
-     textarea_(new MultilineTextarea(
-        this, 5, 5, width - 10, height - 10, std::string(), UI::Align::kLeft)) {
+     textarea_(new MultilineTextarea(this, 5, 5, width - 10, height - 10)) {
 	assert(tribe.has_building(tribe.building_index(building_description.name())) ||
 	       building_description.type() == Widelands::MapObjectType::MILITARYSITE);
 	try {

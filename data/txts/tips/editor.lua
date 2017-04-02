@@ -41,7 +41,7 @@ tips = {
       seconds = 7
    },
    {
-      text = _"You can place a large building on any node where you could place a medium building if there is no obstacle or unbuildable terrain towards the west, northwest and northeast.",
+      text = _"You can place a large building on any node where you could place a medium building if there is no obstacle or non-arable terrain towards the west, northwest and northeast.",
       seconds = 7
    },
 }
