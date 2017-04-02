@@ -54,6 +54,9 @@ enum class BuildingNecessity : uint8_t {
 	kForbidden
 };
 
+enum class ExpansionMode : uint8_t { kResources = 0, kSpace = 1, kEconomy = 2, kBoth = 3, kDismantle = 4};
+enum class ScoreBlock : uint8_t {kResource = 0, kLand = 1, kEnemy = 2, kDismantle = 3};
+
 enum class AiModeBuildings : uint8_t { kAnotherAllowed, kOnLimit, kLimitExceeded };
 
 enum class SchedulerTaskId : uint8_t {
@@ -271,8 +274,8 @@ struct BuildableField {
 	uint16_t nearest_buildable_spot_nearby;
 	// to identify that field is too close to border and no production building should be built there
 	bool near_border;
-	uint8_t unowned_mines_spots_nearby;
-	bool unowned_iron_mines_nearby;
+	uint16_t unowned_mines_spots_nearby;
+	uint16_t unowned_iron_mines_nearby;
 	uint8_t trees_nearby;
 	uint8_t rocks_nearby;
 	int16_t water_nearby;
@@ -559,6 +562,27 @@ struct FNeuron {
 
 private:
 	std::bitset<f_neuron_bit_size> core;
+};
+
+struct ExpansionType { //NOCOM
+	ExpansionType();
+	
+	void set_expantion_type(ExpansionMode);
+	int16_t get_proportions(ScoreBlock, bool = false);
+	ExpansionMode get_expansion_type() {return type;};
+	
+	private:
+	ExpansionMode type;
+	
+	// columns ScoreBlock: kResource = 0, kLand = 1, kEnemy = 2, kDismantle = 3
+	uint8_t proportion_table[5][4] = {
+		{ 70, 10, 40,  0}, //kResources
+		{ 10, 70, 80,  0}, //kSpace
+		{ 35, 35, 50,  0}, //kEconomy
+		{ 40, 40, 65,  0},  //kBoth	
+		{ 20, 20, 65, 60},  //kDismantle					
+	};
+		
 };
 
 // This is to keep all data related to AI magic numbers

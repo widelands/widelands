@@ -281,6 +281,7 @@ private:
 	Widelands::BlockedFields blocked_fields;
 	Widelands::PlayersStrengths player_statistics;
 	Widelands::ManagementData management_data;
+	Widelands::ExpansionType expansion_type;
 	std::unordered_set<uint32_t> port_reserved_coords;
 	std::list<Widelands::MineableField*> mineable_fields;
 	std::list<Widelands::Flag const*> new_flags;
@@ -318,6 +319,7 @@ private:
 	int32_t limit_cnt_target(int32_t, int32_t);
 	uint32_t time_of_last_construction_;
 	uint32_t next_mine_construction_due_;
+	uint16_t fishers_count_;
 
 	// for training sites per type
 	int16_t ts_basic_count_;
@@ -340,15 +342,6 @@ private:
 	
 	int16_t productionsites_ratio_;
 
-	bool new_buildings_stop_;
-	bool needs_boost_economy;
-
-	// when territory is expanded for every candidate field benefits are calculated
-	// but need for water, space, mines can vary
-	// so if 255 = resource is needed, 0 = not needed
-	int32_t resource_necessity_territory_;
-	int32_t resource_necessity_mines_;
-	int32_t resource_necessity_water_;
 	bool resource_necessity_water_needed_;  // unless atlanteans
 
 	// This stores highest priority for new buildings except for militarysites
@@ -356,6 +349,8 @@ private:
 	
 	// id of iron_ore to identify iron mines in mines_per_type map
 	int32_t iron_ore_id = -1;
+	// This should logically be permanent variable, but is to be used only for AI training
+	uint32_t first_iron_mine_gametime;
 
 	// this is a bunch of patterns that have to identify weapons and armors for input queues of
 	// trainingsites

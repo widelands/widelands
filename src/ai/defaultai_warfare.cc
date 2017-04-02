@@ -595,7 +595,7 @@ bool DefaultAI::check_trainingsites(uint32_t gametime) {
 			inputs[19] = (player_statistics.get_player_power(pn) < player_statistics.get_old_player_power(pn) + 1) ? 1 : 0;
 			inputs[20] = (player_statistics.get_player_power(pn) < player_statistics.get_old60_player_power(pn) + 4) ? 0 : 1;		
 			inputs[21] = (player_statistics.get_player_power(pn) < player_statistics.get_old_player_power(pn) + 2) ? 0 : 1;
-			//NOCOM
+
 			if (player_statistics.any_enemy_seen_lately(gametime)) {
 				inputs[20] = (player_statistics.get_player_power(pn) < player_statistics.get_old60_player_power(pn) + 4) ? 0 : 1;		
 				inputs[21] = (player_statistics.get_player_power(pn) < player_statistics.get_old_player_power(pn) + 2) ? 0 : 1;
@@ -692,12 +692,13 @@ bool DefaultAI::check_militarysites(uint32_t gametime) {
 	// Also size is consideration, bigger buildings are to be preffered
 	usefullness_score += (ms->get_size() - 2) * std::abs(management_data.get_military_number_at(77) / 2);
 	
-	const int32_t dism_treshold = 20 - management_data.get_military_number_at(89) * 2 / 3;
-	const int32_t pref_treshold_upper = dism_treshold + std::abs(management_data.get_military_number_at(90) * 35 / 20);
-	const int32_t pref_treshold_lower = dism_treshold + std::abs(management_data.get_military_number_at(90) * 25 / 20);
-	//printf ("pref tresholds %d  %d\n", pref_treshold_lower, pref_treshold_upper);
+	const int32_t dism_treshold = 20 - management_data.get_military_number_at(89)  / 2;
+	const int32_t pref_treshold_upper = dism_treshold + std::abs(management_data.get_military_number_at(90));
+	const int32_t pref_treshold_lower = dism_treshold + std::abs(management_data.get_military_number_at(90) / 2);
+	//printf ("current score %3d, dism: tresh %3d, pref tresholds: %3d   %3d %s\n",
+		//usefullness_score, dism_treshold, pref_treshold_lower, pref_treshold_upper, (usefullness_score > pref_treshold_upper) ? "*" : "");
 	
-	Quantity const total_capacity = ms->max_soldier_capacity(); //NOCOM
+	Quantity const total_capacity = ms->max_soldier_capacity();
 	Quantity const current_target = ms->soldier_capacity();
 
 	if (usefullness_score < dism_treshold) {
@@ -864,9 +865,9 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 					(player_statistics.get_player_land(pn) < player_statistics.get_enemies_max_land() / 2) ? 1 : 0;
 
 	inputs[38] = (!player_statistics.any_enemy_seen_lately(gametime)) *
-					(player_statistics.get_player_land(pn) < player_statistics.get_old_player_land(pn) + 10) ? 1 : 0;
+					(player_statistics.get_player_land(pn) < player_statistics.get_old_player_land(pn) * 105 / 100) ? 2 : 0;
 	inputs[39] = (!player_statistics.any_enemy_seen_lately(gametime)) *
-					(player_statistics.get_player_land(pn) < player_statistics.get_old_player_land(pn) + 10) ? 2 : 0;
+					(player_statistics.get_player_land(pn) < player_statistics.get_old_player_land(pn) + 110) ? 3 : 0;
 
 	inputs[40] = (player_statistics.get_player_power(pn) < player_statistics.get_old60_player_power(pn)) ? 1 : 0;
 	inputs[41] = (player_statistics.get_player_power(pn) > player_statistics.get_old60_player_power(pn)) ? 1 : 0;
@@ -899,8 +900,8 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 	inputs[57] = (player_statistics.any_enemy_seen_lately(gametime)) * (spots_ < kSpotsTooLittle) ? +2 : 0;
 	inputs[58] = ((mines_per_type[iron_ore_id].in_construction + mines_per_type[iron_ore_id].finished) == 0) ? +3 : 0;
 	inputs[59] = ((mines_per_type[iron_ore_id].in_construction + mines_per_type[iron_ore_id].finished) == 0) ? +1 : 0;
-	inputs[60] = (needs_boost_economy) ? -2 : 0;
-	inputs[61] = (needs_boost_economy) ? -4 : 0;
+	inputs[60] = (expansion_type.get_expansion_type() == ExpansionMode::kEconomy) ? -2 : 0;
+	inputs[61] = (expansion_type.get_expansion_type() == ExpansionMode::kEconomy || expansion_type.get_expansion_type() == ExpansionMode::kBoth) ? -4 : 0;
 	inputs[62] = (soldier_status_ == SoldiersStatus::kBadShortage) ? -3 : 0;
 	inputs[63] = (soldier_status_ == SoldiersStatus::kShortage) ? -2 : 0;	
 	
@@ -922,33 +923,43 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 	inputs[79] = (player_statistics.get_player_power(pn) < player_statistics.get_old60_player_power(pn) + 10) ? 1 : 0;
 	inputs[80] = (player_statistics.get_player_power(pn) > player_statistics.get_old60_player_power(pn) + 20) ? 1 : 0;
 	if(!player_statistics.any_enemy_seen_lately(gametime)){
-		inputs[81] = (player_statistics.get_player_land(pn) * 30 / player_statistics.get_old60_player_land(pn)) - 30;
-		inputs[82] = (player_statistics.get_old60_player_land(pn) * 30 / player_statistics.get_player_land(pn)) - 30;
+		inputs[81] = (player_statistics.get_player_land(pn) * 130 / 100 < player_statistics.get_old60_player_land(pn)) ? 2 : 0;
+		inputs[82] = (player_statistics.get_old60_player_land(pn) * 130 / 100 < player_statistics.get_player_land(pn)) ? 0 : 2;
 	} else {
-		inputs[83] = (player_statistics.get_player_land(pn) * 30 / player_statistics.get_old60_player_land(pn)) - 30;
-		inputs[84] = (player_statistics.get_old60_player_land(pn) * 30 / player_statistics.get_player_land(pn)) - 30;	
+		inputs[83] = (player_statistics.get_player_land(pn) * 130 / 100 < player_statistics.get_old60_player_land(pn)) ? 2 : 0;
+		inputs[84] = (player_statistics.get_old60_player_land(pn) * 130 / 100 < player_statistics.get_player_land(pn)) ? 0 : 2;	
 	}
-	inputs[85] = -msites_in_constr();
-	inputs[86] = -msites_in_constr() / 2;
-	inputs[87] = -msites_in_constr() / 3;
-	inputs[88] = ((msites_in_constr() > 2) && (msites_in_constr() >  msites_built() / 2)) ? -1 : 0;
-	inputs[89] = ((msites_in_constr() > 2) && (msites_in_constr() >  msites_built() / 3)) ? -1 : 0;
-	inputs[90] = ((msites_in_constr() > 2) && (msites_in_constr() >  msites_built() / 4)) ? -1 : 0;
-	inputs[91] = -msites_in_constr() / 4;
+	inputs[85] = -1 * static_cast<int32_t>(msites_in_constr());
+	inputs[86] = -1 * static_cast<int32_t>(msites_in_constr())/ 2;
+	inputs[87] = -1 * static_cast<int32_t>(msites_in_constr()) / 3;
+	inputs[88] = (msites_in_constr() > 2 && msites_in_constr() >  msites_built() / 2) ? -1 : 0;
+	inputs[89] = (msites_in_constr() > 2 && msites_in_constr() >  msites_built() / 3) ? -1 : 0;
+	inputs[90] = (msites_in_constr() > 2 && msites_in_constr() >  msites_built() / 4) ? -1 : 0;
+	inputs[91] = -static_cast<int32_t>(msites_in_constr()) / 4;
+	inputs[92] = (player_statistics.get_player_land(pn) < player_statistics.get_old_player_land(pn) * 130 / 100) ? 2 : 0;
+	inputs[93] = (player_statistics.get_player_land(pn) < player_statistics.get_old_player_land(pn) * 140 / 100) ? 2 : 0;
+	inputs[94] = (!player_statistics.any_enemy_seen_lately(gametime)) *
+				(player_statistics.get_player_land(pn) < player_statistics.get_old_player_land(pn) * 120 / 100) ? 2 : 0;
+	inputs[95] = (!player_statistics.any_enemy_seen_lately(gametime)) *
+				(player_statistics.get_player_land(pn) < player_statistics.get_old_player_land(pn) * 140 / 100) ? 2 : 0;
+
+
+	for (int i = 0; i < 3 * f_neuron_bit_size; i = i + 1) {
+		if (inputs[i] < -20 || inputs[i] > 6) {
+			printf ("Warning check_building_necessity score on position %2d too high %2d\n", i, inputs[i]);
+		}
+	}
 
 	int32_t final_score = 0;
 	for (int i = 0; i < f_neuron_bit_size; i = i + 1) {
 		if (management_data.f_neuron_pool[56].get_position(i)) {
 			final_score += inputs[i];
-			//if (inputs[i] > 500) {printf ("military inputs %d %d\n", i,inputs[i]);}//NOCOM
 		}
 		if (management_data.f_neuron_pool[57].get_position(i)) {
 			final_score += inputs[f_neuron_bit_size + i];
-			//if (inputs[i] > 500) {printf ("military inputs %d %d\n", f_neuron_bit_size + i,inputs[f_neuron_bit_size + i]);}//NOCOM
 		}
 		if (management_data.f_neuron_pool[58].get_position(i)) {
 			final_score += inputs[2 * f_neuron_bit_size + i];
-			//if (inputs[i] > 500) {printf ("military inputs %d %d\n", 2 * f_neuron_bit_size + i,inputs[2 * f_neuron_bit_size + i]);}//NOCOM
 		}
 	}
 
@@ -957,7 +968,6 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 
 	if (final_score >0) {
 		bo.primary_priority = final_score * std::abs(management_data.get_military_number_at(79) / 2);
-		//if (bo.primary_priority > 1000) {printf ("military bo.primary_priority %d (%d)\n",bo.primary_priority, management_data.get_military_number_at(79));}//NOCOM
 		return BuildingNecessity::kAllowed;
 	} else {
 		return BuildingNecessity::kForbidden;
