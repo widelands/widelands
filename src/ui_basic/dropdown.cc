@@ -114,7 +114,8 @@ BaseDropdown::BaseDropdown(UI::Panel* parent,
 }
 
 BaseDropdown::~BaseDropdown() {
-	// The list will clear itself
+	// Listselect is already taking care of the cleanup,
+	// so no call to clear() needed here.
 }
 
 void BaseDropdown::set_height(int height) {
@@ -133,10 +134,8 @@ void BaseDropdown::layout() {
 	list_->set_size(type_ == DropdownType::kTextual ? w : list_width_, new_list_height);
 	set_desired_size(w, base_h);
 
-	// Update list position.
-	// The list is hooked into the highest parent that we can get so that we can drop down outside
-	// the panel.
-	// Positioning breaks down with TabPanels, so we exclude them.
+	// Update list position. The list is hooked into the highest parent that we can get so that we
+	// can drop down outside the panel. Positioning breaks down with TabPanels, so we exclude them.
 	UI::Panel* parent = get_parent();
 	int new_list_y = get_y() + get_h() + parent->get_y();
 	int new_list_x = get_x() + parent->get_x();
