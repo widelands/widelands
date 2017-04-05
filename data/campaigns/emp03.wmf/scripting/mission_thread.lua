@@ -27,7 +27,6 @@ end
 
 function artifacts()  -- check for control of all artifacts
    local artifact_fields = {}
-   local map = wl.Game().map
    local i = 1
    -- find all artifacts
    for x=0, map.width-1 do
@@ -152,9 +151,14 @@ function check_military()  -- check for too much military buildings
    campaign_message_box(amalea_9)
 end
 
-function economy_settings()  -- check for opened economy options window
-   while not hq.flag.economy:ware_target_quantity("marble_column") == 4 do sleep(2434) end
-   sleep(40000)
+function economy_settings()  -- check for economy options of marble column lowered to 4
+   local flag_field = map:get_field(4, 7)
+   local flag = flag_field.immovable
+   local eco = flag.economy
+   while eco:ware_target_quantity("marble_column") ~= 4 do 
+	 sleep(2434) 
+   end
+   sleep(4000)
    o3.done = true 
    campaign_message_box(amalea_8)   
 end
@@ -254,7 +258,6 @@ function wheat() -- check for enough wheat in warehouses
       "barbarians_trainingcamp",
       "barbarians_big_inn",
    }
-
    while p1:get_produced_wares_count('cloth') < 6 do sleep(2434) end
    o8.done = true
    run(expedition)
@@ -316,8 +319,11 @@ function soldiers() -- after discovery of babarian ruins we should hurry to buil
 
    while not p1:sees_field(ruins) == true do sleep(3000) end
    scroll_to_field(ruin_fortress,5)
+   sleep(500)
+   --p1: reveal_fields(ruin_fortress:region(5))
+   random_reveal(p1, ruin_fortress:region(5), 1000)
+   sleep(500)
    campaign_message_box(saledus_12)
-   p1: reveal_fields(ruin_fortress:region(5))
 
    local training = p1:get_buildings{
       "empire_trainingcamp", 
@@ -360,21 +366,24 @@ function mission_thread()
    campaign_message_box(diary_page_1)
 
    -- Show the sea
-   p1:reveal_fields(sea:region(5))
+   random_reveal(p1, sea:region(5), 1000)
+   sleep(100)
    local ship = p1:place_ship(sea)
-   sleep(2000)
+   sleep(2500)
    campaign_message_box(diary_page_2)
 
    -- Hide the sea after 2 seconds
-   sleep(500)
+   sleep(400)
    ship:remove()
-   sleep(500)
-   p1:hide_fields(sea:region(5), true)
-   sleep(500)
+   sleep(300)
+   random_hide(p1, sea:region(6), 1000)
+   sleep(300)
 
    -- Stranded again
    scroll_to_field(sf)  --scroll to the place where the ship is finally stranded
    include "map:scripting/starting_conditions.lua"  --now we place the shipwreck headquarters and fill it with workers and wares
+   p1:hide_fields(sf:region(13), true)
+   concentric_reveal(p1, sf, 13, 100)
    campaign_message_box(diary_page_3)
    sleep(400)
    campaign_message_box(saledus)

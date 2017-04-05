@@ -52,7 +52,6 @@ obj_build_quarry = {
    ),
 }
 
-
 obj_build_sawmill_stonemason_and_lumberjacks = {
    name = "build_sawmill_stonemason_and_lumberjacks",
    title=_"Build at least a lumberjack’s house, a sawmill and a stonemason to complete the building material supply chain",
@@ -148,7 +147,7 @@ obj_find_artifacts = {
    name = "Find the pieces of Neptune's shrine",
    title=_"Recover the shrine",
    number = 1,
-   body = objective_text(_"Find all pieces of the holy shrine",
+   body = objective_text(_"Find all 6 pieces of the holy shrine",
       listitem_bullet(_[[We need to find and secure all pieces of the holy shrine of Neptune.]])
    ),
 }
@@ -237,6 +236,7 @@ saledus_1 = {
       .. new_objectives(obj_build_first_outpost),
 	  
    posy=1,
+   h=500,
 }
 
 saledus_2 = {
@@ -263,6 +263,7 @@ amalea_1 = {
       _([[Additionally this would gain us some stone and some marble to build up our new world. We can use them as soon as there is enough space for buildings finally.]]))
       .. new_objectives(obj_build_quarry),
    posy=1,
+   h=500,
 }
 
 amalea_2 = {
@@ -275,6 +276,7 @@ amalea_2 = {
       _([[Perhaps it would be a good idea to wait until it has cleared some space for building up a basic construction material industry.]]))
 	  .. new_objectives(obj_build_sawmill_stonemason_and_lumberjacks),
    posy=1,
+   h=500,
 }
 
 amalea_3 = {
@@ -290,6 +292,7 @@ amalea_3 = {
       _([[But here is the problem, if we use all of our marble for columns we might ran out of it. So we should lower the settings for marble columns in the economy settings to a smaller amount. I think a reserve of 4 columns might be sufficient for the moment being.]]))
       .. new_objectives(obj_lower_marble_column_demand),
    posy=1,
+   h=500,
 }
 
 amalea_10 = {
@@ -316,6 +319,7 @@ saledus_3 = {
       _([[The problem is that a port is a building which needs a very special place to be build. So while buidling our economy we should nevertheless expand further to discover the whole island. Let's try to find such a valuable place.]]))
       .. new_objectives(obj_find_port_space),
    posy=1,
+   h=500,
 }
 
 saledus_4 = {
@@ -328,6 +332,7 @@ saledus_4 = {
       _([[Now we truly can look forward to build some ships. So we should build a shipyard as well.]]))
 	  .. new_objectives(obj_build_port_and_shipyard),
    posy=1,
+   h=500,
 }
 
 amalea_4 = {
@@ -352,6 +357,7 @@ amalea_4 = {
       _([[I think for the beginning a stock of 50 wheat would be enough. Perhaps we have to adjust the target quantity for wheat to achieve this.]]))
       .. new_objectives(obj_produce_wheat),
    posy=1,
+   h=600,
 }
 
 
@@ -377,6 +383,7 @@ amalea_5 = {
       _([[Perhaps it would be a good idea to stop the shipyard's production until we have some cloth available to not waste any logs or planks.]]))
       .. new_objectives(obj_produce_cloth),
    posy=1,
+   h=500,
 }
 
 saledus_5 = {
@@ -395,6 +402,7 @@ saledus_5 = {
       _([[I think I have heard the wind carrying some weird but well known sounds from the north. If I'm not totally wrong I heard some barbarian war drums, so we should better going to look what is going on up there.]]))
 	  .. new_objectives(obj_build_expedition_ports),
    posy=1,
+   h=500,
 }
 
 amalea_6 = {
@@ -416,6 +424,7 @@ amalea_6 = {
       _([[If there are difficulties to build all the buildings needed, we should think about all we have learned so far. We can cut all the stone. We should perhaps optimize our roads to free up some building site, or even dismantle some military buildings to get more space for our economy.]]))
       .. new_objectives(obj_produce_gold),
    posy=1,
+   h=600,
 }
 
 saledus_6 = {
@@ -427,6 +436,7 @@ saledus_6 = {
       _([[Let's finish the barbarians off and provide a nice colony to the caesar of our empire.]]))
       .. new_objectives(obj_conquer_all),
    posy=1,
+   h=500,
 }
 
 amalea_7 = {
@@ -478,6 +488,7 @@ amalea_11 = {
       _([[Especially it would be very helpful to find more marble either within stone fields or in the mountains to mine it.]]))
 	  .. new_objectives(obj_find_all_ports),
    posy=1,
+   h=500,
 }
 
 amalea_12 = {
@@ -504,13 +515,14 @@ saledus_8 = {
       -- TRANSLATORS: Saledus
       _([[Sire, we are making good progress to get home eventually. But there is one thing I need to talk about:]])
       .. paragraphdivider() ..
-      _([[As we have seen the last time it is of great importance that the gods and especially Neptune are in a good mood to guard our journey.]])
+      _([[As we have seen on our last journey it is of great importance that the gods and especially Neptune are in a good mood to guard our journey.]])
       .. paragraphdivider() ..
-      _([[Unfortunately we lost our holy shrine of Neptune in the great storm, so we can't worship him well. I think we should search the whole region to see if we can recover the shrine with all its 5 pieces.]])
+      _([[Unfortunately we lost our holy shrine of Neptune in the great storm, so we can't worship him well. I think we should search the whole region to see if we can recover the shrine with all its 6 pieces.]])
       .. paragraphdivider() ..
       _([[To ease up the search I made some models of the pieces as you can see. You can give them to our soldiers and sailors to look for them.]]))
 	  .. new_objectives(obj_find_artifacts),
    posy=1,
+   h=500,
 }
 
 saledus_9 = {
@@ -550,6 +562,7 @@ saledus_11 = {
       _([[Therefore we need to build a full training infrastructure despite the limited space available. We need some barracks, a trainingcamp and an arena or a colosseum.]]))
 	  .. new_objectives(obj_training),
    posy=1,
+   h=500,
 }
 
 
