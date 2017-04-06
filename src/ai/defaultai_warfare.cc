@@ -301,7 +301,7 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 					inputs[24] = (player_attackable[owner_number - 1] == Attackable::kAttackableVeryWeak) ? 6 : 0;
 					inputs[25] = (player_attackable[owner_number - 1] == Attackable::kAttackableAndWeak) ? 3 : 0;
 					inputs[26] = management_data.get_military_number_at(62) / 10;
-					inputs[27] = (ts_basic_count_ + ts_advanced_count_ - ts_without_trainers_) * 2; 
+					inputs[27] = (ts_finished_count_ - ts_without_trainers_) * 2; 
 					inputs[28] = general_score * 3;
 					inputs[29] = general_score;
 					inputs[30] = ((mines_per_type[iron_ore_id].in_construction + mines_per_type[iron_ore_id].finished) > 0) ? 1 : -1;
@@ -473,7 +473,7 @@ bool DefaultAI::check_trainingsites(uint32_t gametime) {
 	const DescriptionIndex enhancement = ts->descr().enhancement();
 
 	if (enhancement != INVALID_INDEX && ts_without_trainers_ == 0 && mines_.size() > 3 &&
-	    (ts_basic_const_count_ + ts_advanced_const_count_) == 0 && ts_advanced_count_ > 0) {
+	    ts_finished_count_ > 1) {
 
 		if (player_->is_building_type_allowed(enhancement)) {
 			game().send_player_enhance_building(*tso.site, enhancement);
@@ -514,12 +514,12 @@ bool DefaultAI::check_trainingsites(uint32_t gametime) {
 		}
 	}
 
-	// changing priority if basic
-	if (tso.bo->trainingsite_type == TrainingSiteType::kBasic) {
-		for (uint32_t k = 0; k < tso.bo->inputs.size(); ++k) {
-			game().send_player_set_ware_priority(*ts, wwWARE, tso.bo->inputs.at(k), HIGH_PRIORITY);
-		}
-	}
+	//// changing priority if basic
+	//if (tso.bo->trainingsite_type == TrainingSiteType::kBasic) {
+		//for (uint32_t k = 0; k < tso.bo->inputs.size(); ++k) {
+			//game().send_player_set_ware_priority(*ts, wwWARE, tso.bo->inputs.at(k), HIGH_PRIORITY);
+		//}
+	//}
 
 	// are we willing to train another soldier
 	// bool want_train = true;
@@ -818,7 +818,7 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 
 	//printf ("stat sample %d  %d\n", player_statistics.get_player_land(pn), player_statistics.get_enemies_max_land()); 
 	
-	int32_t inputs[3 * f_neuron_bit_size] = {0};
+	int32_t inputs[4 * f_neuron_bit_size] = {0};
 	inputs[0] = (msites_total < 1) ? 1 : 0;
 	inputs[1] = (msites_total < 2) ? 1 : 0;
 	inputs[2] = (msites_total < 3) ? 1 : 0;
@@ -942,10 +942,17 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 				(player_statistics.get_player_land(pn) < player_statistics.get_old_player_land(pn) * 120 / 100) ? 2 : 0;
 	inputs[95] = (!player_statistics.any_enemy_seen_lately(gametime)) *
 				(player_statistics.get_player_land(pn) < player_statistics.get_old_player_land(pn) * 140 / 100) ? 2 : 0;
+	if (msites_built() > 5) {
+		inputs[96] = -1 * static_cast<int32_t>(msites_in_constr());
+		inputs[97] = -1 * static_cast<int32_t>(msites_in_constr()) / 2;
+		inputs[98] = -1 * static_cast<int32_t>(msites_in_constr()) / 3;
+		inputs[99] = (msites_in_constr() >  msites_built() / 2) ? -2 : 0;
+		inputs[100] = (msites_in_constr() >  msites_built() / 3) ? -2 : 0;
+		inputs[101] = (msites_in_constr() >  msites_built() / 4) ? -2 : 0;
+	}
 
-
-	for (int i = 0; i < 3 * f_neuron_bit_size; i = i + 1) {
-		if (inputs[i] < -20 || inputs[i] > 6) {
+	for (int i = 0; i < 4 * f_neuron_bit_size; i = i + 1) {
+		if (inputs[i] < -35 || inputs[i] > 6) {
 			printf ("Warning check_building_necessity score on position %2d too high %2d\n", i, inputs[i]);
 		}
 	}
@@ -960,6 +967,9 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 		}
 		if (management_data.f_neuron_pool[58].get_position(i)) {
 			final_score += inputs[2 * f_neuron_bit_size + i];
+		}
+		if (management_data.f_neuron_pool[13].get_position(i)) {
+			final_score += inputs[3 * f_neuron_bit_size + i];
 		}
 	}
 

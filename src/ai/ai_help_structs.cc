@@ -307,12 +307,12 @@ void ExpansionType::set_expantion_type(const ExpansionMode etype) {
 	type = etype;
 }
 
-int16_t ExpansionType::get_proportions(const ScoreBlock block, bool dismantlement) {
-	if (dismantlement) {
-		return proportion_table[static_cast<uint8_t>(ScoreBlock::kDismantle)][static_cast<uint8_t>(block)];
-	}
-	return proportion_table[static_cast<uint8_t>(type)][static_cast<uint8_t>(block)];
-}
+//int16_t ExpansionType::get_proportions(const ScoreBlock block, bool dismantlement) {
+	//if (dismantlement) {
+		//return proportion_table[static_cast<uint8_t>(ScoreBlock::kDismantle)][static_cast<uint8_t>(block)];
+	//}
+	//return proportion_table[static_cast<uint8_t>(type)][static_cast<uint8_t>(block)];
+//}
 
 
 
@@ -441,11 +441,11 @@ void ManagementData::mutate(const uint32_t gametime, const PlayerNumber pn) {
 	const int8_t old_probability = get_military_number_at(MutationRatePosition);
 
 	int16_t probability = shift_weight_value(get_military_number_at(MutationRatePosition), false) + 101;
-	if (probability > 40) {
-			probability = 40;
+	if (probability > 100) {
+			probability = 100;
 	}
-	if (probability < 25) {
-			probability = 25;
+	if (probability < 40) {
+			probability = 40;
 	}
 
 	set_military_number_at(MutationRatePosition, probability - 101);
@@ -474,7 +474,7 @@ void ManagementData::mutate(const uint32_t gametime, const PlayerNumber pn) {
 		
 		
 		// Modifying pool of Military numbers
-		std::set<int32_t>preferred_numbers = {79};   //92,93,58,83,136,133};
+		std::set<int32_t>preferred_numbers = {}; //79, 67, 68, 72 ,112, 57,56, 113, 78};   //92,93,58,83,136,133};
 		for (uint16_t i = 0; i < magic_numbers_size; i += 1){
 			if (i == MutationRatePosition) { //mutated above
 				continue;
@@ -534,7 +534,7 @@ void ManagementData::mutate(const uint32_t gametime, const PlayerNumber pn) {
 		}
 	
 		// Modifying pool of f-neurons
-		std::set<int32_t> preffered_neurons = {56,57,58};
+		std::set<int32_t> preffered_neurons = {56,57,58,13};
 		uint16_t pos = 0;	
 		for (auto& item : f_neuron_pool){
 			bool fneuron_changed = false;
@@ -563,14 +563,13 @@ void ManagementData::mutate(const uint32_t gametime, const PlayerNumber pn) {
 
 // Used to score performance of AI
 void ManagementData::review(const uint32_t gametime, PlayerNumber pn,
- const uint32_t strength, const uint32_t land, const uint32_t old_land, const uint16_t attackers,
-   const uint32_t first_ironmine, const int16_t ts_b,  const int16_t ts_a) {
+ const int32_t strength_diff, const uint32_t land, const uint32_t old_land, const uint16_t attackers,
+   const uint32_t first_ironmine, const int16_t ts_f, const uint8_t etype) {
 	assert(!pd->magic_numbers.empty());
 	const int16_t current_land_divider = 6;
 	const int16_t land_delta_divider = 1;
 	const int16_t land_delta_bonus = 200;
 	const int16_t strength_multiplicator = 4;
-	const uint32_t strength_cap = 100;
 	const int16_t attackers_multiplicator = 6;
 	const int16_t attack_bonus = 100;
 	const uint32_t ironmine_start_tresh = 30;
@@ -596,31 +595,30 @@ void ManagementData::review(const uint32_t gametime, PlayerNumber pn,
 	score = land / current_land_divider
 		+ static_cast<int32_t>(land - old_land) / land_delta_divider
 		+ ((static_cast<int32_t>(land-old_land) > 0) ? land_delta_bonus : 0)
-		+ std::min(strength,strength_cap)  * strength_multiplicator
+		+ strength_diff * strength_multiplicator
 		+ attackers * attackers_multiplicator
 		+ ((attackers > 0) ? attack_bonus : -attack_bonus)
 		+ ironmines_bonus 
-		+ std::min(ts_b, ts_cap) * ts_score 
-		+ std::min(ts_a, ts_cap) * ts_score;
+		+ std::min(ts_f, ts_cap) * ts_score;
 		
-	printf (" %2d %s: reviewing AI mngm. data, score: %4d Pr.p: %d (l: %4d / %3d / %4d, st.: %4d, att: %3d, im: %4d, ts: %3d(%1d+%1d))\n",
+	printf (" %2d %s: reviewing AI mngm. data, score: %4d Pr.p: %d (l: %4d / %3d / %4d, st.:%4d, att:%4d, im:%4d, ts:%3d(%1d), etype %d)\n",
 		pn, gamestring_with_leading_zeros(gametime), score,
 		primary_parent, 
 		land / current_land_divider,
 		(static_cast<int32_t>(land-old_land) > 0) ? land_delta_bonus : 0,
 		static_cast<int32_t>(land - old_land) / land_delta_divider,
-		std::min(strength,strength_cap)  * strength_multiplicator,
+		strength_diff * strength_multiplicator,
 		attackers * attackers_multiplicator,
 		ironmines_bonus,
-		std::min(ts_b, ts_cap) * ts_score + std::min(ts_a, ts_cap) * ts_score,
-		ts_b,
-		ts_a);
+		std::min(ts_f, ts_cap) * ts_score,
+		ts_f,
+		etype);
 
 	
 	if (score < -10000 || score > 20000){
 		printf ("MASTERERROR %2d %s: reviewing AI mngm. data, score: %4d (land: %4d  strength: %4d, attackers: %3d)\n",
 	pn, gamestring_with_leading_zeros(gametime), score,
-	land / 86, strength, attackers);
+	land / 86, strength_diff * strength_multiplicator, attackers);
 	}
 	assert (score > -10000 && score < 100000);
 
@@ -645,21 +643,21 @@ void ManagementData::initialize( const uint8_t pn, const bool reinitializing) {
 
     //AutoSCore_AIDNA_1
     const std::vector<int16_t> AI_initial_military_numbers_A =
-      {  81 ,  -100 ,  -70 ,  100 ,  -22 ,   55 ,  -22 ,    0 ,  -72 ,   28 ,  //AutoContent_01_AIDNA_1
-         -8 ,   65 ,  -75 ,   35 ,  -91 ,  -92 ,    0 ,  100 ,   -6 ,  -45 ,  //AutoContent_02_AIDNA_1
-         15 ,  100 ,  -100 ,  -100 ,  -91 ,  -37 ,   93 ,  -25 ,  100 ,  -36 ,  //AutoContent_03_AIDNA_1
-         79 ,  100 ,  -100 ,   92 ,    9 ,   83 ,  -14 ,  -100 ,   27 ,  -100 ,  //AutoContent_04_AIDNA_1
-        -74 ,   56 ,  -76 ,  -95 ,  100 ,  -44 ,  100 ,  100 ,   16 ,    0 ,  //AutoContent_05_AIDNA_1
-        -79 ,  -26 ,  -86 ,  -100 ,  -21 ,  100 ,   35 ,   40 ,   20 ,    0 ,  //AutoContent_06_AIDNA_1
-         42 ,  100 ,    0 ,  -66 ,  -17 ,   18 ,  -40 ,  -100 ,   71 ,  -100 ,  //AutoContent_07_AIDNA_1
-        -100 ,    0 ,  -47 ,   52 ,  100 ,  -16 ,  -100 ,    6 ,   29 ,  -100 ,  //AutoContent_08_AIDNA_1
-        -79 ,   23 ,   56 ,  -88 ,    0 ,  -46 ,    0 ,  100 ,   16 ,    3 ,  //AutoContent_09_AIDNA_1
-         40 ,   83 ,  -100 ,  100 ,   34 ,  -29 ,  -43 ,   13 ,  -100 ,  -10 ,  //AutoContent_10_AIDNA_1
-         68 ,  -12 ,   77 ,   47 ,   12 ,   72 ,  -67 ,   43 ,  -100 ,   88 ,  //AutoContent_11_AIDNA_1
-         91 ,   85 ,  -100 ,   30 ,  100 ,  100 ,  -50 ,   89 ,   81 ,  100 ,  //AutoContent_12_AIDNA_1
-          0 ,  -100 ,   -7 ,   47 ,   70 ,   24 ,  -18 ,  -100 ,   82 ,   49 ,  //AutoContent_13_AIDNA_1
-        -77 ,   59 ,   26 ,  -63 ,   18 ,  -100 ,  -100 ,   95 ,  -92 ,  -100 ,  //AutoContent_14_AIDNA_1
-        100 ,  -100 ,  -100 ,  100 ,  -100 ,  100 ,   -1 ,  -84 ,  100 ,   40  //AutoContent_15_AIDNA_1
+      {  81 ,  -100 ,  -100 ,  100 ,  -78 ,   55 ,  -50 ,   13 ,  -72 ,    3 ,  //AutoContent_01_AIDNA_1
+         -8 ,   65 ,  -94 ,   35 ,   99 ,  -92 ,  -17 ,  100 ,  -52 ,  -69 ,  //AutoContent_02_AIDNA_1
+         24 ,  100 ,   85 ,  -68 ,  -70 ,   31 ,   93 ,  -29 ,   92 ,  -54 ,  //AutoContent_03_AIDNA_1
+         91 ,   77 ,  -62 ,  -19 ,   35 ,   54 ,  -98 ,  -68 ,   71 ,   78 ,  //AutoContent_04_AIDNA_1
+        -52 ,   79 ,  -51 ,  -95 ,  -30 ,  -44 ,   67 ,  -66 ,  -100 ,   33 ,  //AutoContent_05_AIDNA_1
+        -79 ,  -26 ,  -100 ,  -100 ,   61 ,  -100 ,   35 ,  -64 ,    0 ,   -2 ,  //AutoContent_06_AIDNA_1
+         92 ,   78 ,    0 ,  -26 ,  -100 ,   68 ,  -40 ,  -93 ,   42 ,  -100 ,  //AutoContent_07_AIDNA_1
+        -100 ,   21 ,  -79 ,  -95 ,  100 ,    0 ,  -39 ,    6 ,   56 ,  -61 ,  //AutoContent_08_AIDNA_1
+        100 ,  -100 ,   48 ,  -78 ,    0 ,  100 ,  -31 ,   26 ,  -50 ,  -91 ,  //AutoContent_09_AIDNA_1
+         67 ,   63 ,  -100 ,  -18 ,   32 ,  -27 ,   -8 ,  100 ,  100 ,  -96 ,  //AutoContent_10_AIDNA_1
+         81 ,  -12 ,  100 ,    0 ,  -97 ,   72 ,  -65 ,   49 ,   63 ,   20 ,  //AutoContent_11_AIDNA_1
+        100 ,  -88 ,  -100 ,   20 ,  100 ,  100 ,   70 ,  -100 ,   68 ,   67 ,  //AutoContent_12_AIDNA_1
+         49 ,   90 ,  -11 ,   47 ,   70 ,    0 ,  -53 ,  -100 ,  100 ,  100 ,  //AutoContent_13_AIDNA_1
+        -77 ,   59 ,    0 ,  -63 ,  100 ,  -100 ,   97 ,   73 ,   17 ,  -99 ,  //AutoContent_14_AIDNA_1
+         88 ,   -7 ,  -100 ,  -21 ,  -100 ,  100 ,   -1 ,  -92 ,   56 ,  -100  //AutoContent_15_AIDNA_1
        }
 		;
 	
@@ -667,83 +665,83 @@ void ManagementData::initialize( const uint8_t pn, const bool reinitializing) {
 	
 	const std::vector<int8_t> input_weights_A =
 		//0		1		2		3	4		5		6		7		8	9
-      {  100 ,  -100 ,  -66 ,    0 ,  -24 ,   -4 ,  -32 ,  -34 ,  100 ,  -74 ,  //AutoContent_16_AIDNA_1
-        100 ,  -35 ,  -100 ,   63 ,   62 ,   -2 ,  -100 ,  -100 ,  -100 ,   62 ,  //AutoContent_17_AIDNA_1
-        -46 ,  -26 ,  100 ,  -18 ,  -100 ,   67 ,    0 ,  -100 ,  100 ,  -100 ,  //AutoContent_18_AIDNA_1
-        100 ,  100 ,   22 ,   45 ,   82 ,  -100 ,  -44 ,  -100 ,  -47 ,  -100 ,  //AutoContent_19_AIDNA_1
-        -92 ,  -90 ,  -39 ,  -93 ,  100 ,   84 ,   88 ,  -42 ,  -42 ,    2 ,  //AutoContent_20_AIDNA_1
-        -100 ,  -32 ,   67 ,  -100 ,  -35 ,  -100 ,   83 ,   47 ,    0 ,   49 ,  //AutoContent_21_AIDNA_1
-        -80 ,   13 ,  -94 ,  -82 ,  -80 ,  -83 ,  100 ,  -100 ,  -28 ,  -100 ,  //AutoContent_22_AIDNA_1
-        100 ,  -83 ,  -100 ,  100 ,  -100 ,  100 ,   53 ,  -100 ,   65 ,  -54  //AutoContent_23_AIDNA_1
+      {  100 ,  -94 ,  -35 ,    0 ,  -100 ,  -18 ,  -32 ,  -34 ,   96 ,  -62 ,  //AutoContent_16_AIDNA_1
+        100 ,  -100 ,  -100 ,  100 ,   43 ,   17 ,  -100 ,  -100 ,  -100 ,  -44 ,  //AutoContent_17_AIDNA_1
+         -9 ,   47 ,  100 ,  -18 ,  -100 ,   81 ,    0 ,  -95 ,  100 ,  -34 ,  //AutoContent_18_AIDNA_1
+         59 ,   69 ,    0 ,   35 ,   39 ,  -100 ,  -71 ,  -100 ,  -47 ,  -83 ,  //AutoContent_19_AIDNA_1
+        -92 ,  -90 ,  -57 ,  -93 ,   65 ,  -100 ,   88 ,  100 ,  100 ,   33 ,  //AutoContent_20_AIDNA_1
+         21 ,  -29 ,   68 ,  -100 ,   -1 ,   32 ,   84 ,   47 ,    2 ,   39 ,  //AutoContent_21_AIDNA_1
+        -97 ,   44 ,   68 ,  -100 ,  -40 ,  -77 ,  100 ,   53 ,    0 ,  -87 ,  //AutoContent_22_AIDNA_1
+        -84 ,  -83 ,  -100 ,  100 ,   76 ,  100 ,   53 ,  -100 ,   40 ,  -24  //AutoContent_23_AIDNA_1
 	}
 			;
 	const std::vector<int8_t> input_func_A =
-      {    2 ,    2 ,    0 ,    1 ,    1 ,    1 ,    0 ,    0 ,    0 ,    0 ,  //AutoContent_24_AIDNA_1
-          2 ,    2 ,    1 ,    1 ,    0 ,    2 ,    2 ,    1 ,    0 ,    1 ,  //AutoContent_25_AIDNA_1
-          1 ,    2 ,    2 ,    1 ,    1 ,    0 ,    1 ,    0 ,    1 ,    0 ,  //AutoContent_26_AIDNA_1
-          1 ,    1 ,    1 ,    0 ,    0 ,    2 ,    1 ,    0 ,    1 ,    1 ,  //AutoContent_27_AIDNA_1
-          1 ,    1 ,    1 ,    1 ,    0 ,    1 ,    1 ,    0 ,    1 ,    1 ,  //AutoContent_28_AIDNA_1
-          2 ,    2 ,    1 ,    2 ,    2 ,    1 ,    1 ,    2 ,    2 ,    1 ,  //AutoContent_29_AIDNA_1
-          0 ,    1 ,    1 ,    1 ,    1 ,    1 ,    1 ,    1 ,    2 ,    0 ,  //AutoContent_30_AIDNA_1
-          1 ,    2 ,    2 ,    2 ,    1 ,    1 ,    0 ,    2 ,    0 ,    1  //AutoContent_31_AIDNA_1
+      {    2 ,    2 ,    1 ,    1 ,    1 ,    1 ,    0 ,    1 ,    0 ,    0 ,  //AutoContent_24_AIDNA_1
+          2 ,    2 ,    1 ,    2 ,    1 ,    0 ,    2 ,    2 ,    0 ,    1 ,  //AutoContent_25_AIDNA_1
+          2 ,    2 ,    2 ,    1 ,    1 ,    0 ,    1 ,    0 ,    1 ,    0 ,  //AutoContent_26_AIDNA_1
+          0 ,    1 ,    1 ,    0 ,    2 ,    2 ,    1 ,    0 ,    1 ,    1 ,  //AutoContent_27_AIDNA_1
+          2 ,    1 ,    1 ,    1 ,    0 ,    1 ,    1 ,    0 ,    1 ,    1 ,  //AutoContent_28_AIDNA_1
+          2 ,    2 ,    1 ,    1 ,    2 ,    2 ,    0 ,    0 ,    2 ,    2 ,  //AutoContent_29_AIDNA_1
+          0 ,    1 ,    1 ,    2 ,    1 ,    0 ,    2 ,    1 ,    2 ,    0 ,  //AutoContent_30_AIDNA_1
+          1 ,    2 ,    0 ,    2 ,    2 ,    1 ,    0 ,    2 ,    2 ,    1  //AutoContent_31_AIDNA_1
 	}
 		;
 	assert(neuron_pool_size == input_func_A.size());
 	assert(neuron_pool_size == input_weights_A.size());
 
 	const std::vector<uint32_t> f_neurons_A =
-      {  893882022 ,  1012949768 ,  1282767981 ,  3407235130 ,  3488362998 ,  1378359763 ,  3750471457 ,  3081116877 ,  1458320738 ,  3170464195 ,  //AutoContent_32_AIDNA_1
-        3905971216 ,  2431616046 ,  3953923374 ,  1845086815 ,  1836137029 ,  3646071245 ,  2696265141 ,  2349270127 ,  2541958369 ,  112271656 ,  //AutoContent_33_AIDNA_1
-        2585687829 ,  1160096990 ,  747039753 ,  2568184014 ,  3664092356 ,  3104318854 ,  635697358 ,  4023463768 ,  3995831573 ,  810417449 ,  //AutoContent_34_AIDNA_1
-        2514696973 ,  2929871575 ,  3993670318 ,  4150727141 ,  678008812 ,  3994635043 ,  4075247787 ,  1828808396 ,  861393788 ,  4097686692 ,  //AutoContent_35_AIDNA_1
-        912147624 ,  3938965162 ,  1917001130 ,  3589205776 ,  3024535343 ,  2542193932 ,  2188433370 ,  2114073999 ,  1228715640 ,  3622652715 ,  //AutoContent_36_AIDNA_1
-        3174765257 ,  1932367510 ,  4058855805 ,  1474295732 ,  3830756535 ,  4251837603 ,  1242644035 ,  1803864740 ,  668753102 ,  46743497  //AutoContent_37_AIDNA_1
+      {  3309955814 ,  975196348 ,  645341115 ,  3409054482 ,  3012473085 ,  403182623 ,  4284714785 ,  3083470066 ,  4070337802 ,  3181373923 ,  //AutoContent_32_AIDNA_1
+        1660972662 ,  2167382325 ,  2838275238 ,  2700209163 ,  493648927 ,  1899328449 ,  3822859765 ,  2249679974 ,  1705319597 ,  3476402480 ,  //AutoContent_33_AIDNA_1
+        4177926033 ,  477303249 ,  1782744073 ,  2857550926 ,  1580317938 ,  3507260686 ,  1669570526 ,  2105257862 ,  3761105982 ,  79019566 ,  //AutoContent_34_AIDNA_1
+        3140161870 ,  2453200087 ,  4081694169 ,  3488420781 ,  3896873754 ,  673139511 ,  1980421819 ,  2063693514 ,  4198974812 ,  3322003348 ,  //AutoContent_35_AIDNA_1
+        861801995 ,  4165882970 ,  1925734763 ,  2180148672 ,  4058774954 ,  3586051090 ,  3711091132 ,  4272958759 ,  966571352 ,  1286424906 ,  //AutoContent_36_AIDNA_1
+        3171512925 ,  2436803795 ,  1738252967 ,  3545200605 ,  762625763 ,  473300775 ,  3982444519 ,  700026397 ,  2059771872 ,  49979274  //AutoContent_37_AIDNA_1
 	 };
 	assert(f_neuron_pool_size == f_neurons_A.size());
 
 		
     //AutoSCore_AIDNA_2
 	const std::vector<int16_t> AI_initial_military_numbers_B =
-      {  81 ,  -100 ,  -70 ,  100 ,  -89 ,   55 ,  -40 ,    0 ,  -72 ,   28 ,  //AutoContent_01_AIDNA_2
-         -8 ,   65 ,  -75 ,   35 ,  -91 ,  -92 ,  -26 ,  100 ,  -22 ,  -45 ,  //AutoContent_02_AIDNA_2
-         15 ,  100 ,  -77 ,  -100 ,  -70 ,   31 ,   93 ,    0 ,   74 ,  -56 ,  //AutoContent_03_AIDNA_2
-         79 ,  100 ,  -62 ,   92 ,    9 ,   83 ,  -14 ,  -100 ,   36 ,  -100 ,  //AutoContent_04_AIDNA_2
-        -74 ,   56 ,  -81 ,  -95 ,  -30 ,  -44 ,  100 ,  100 ,  -86 ,   33 ,  //AutoContent_05_AIDNA_2
-        -79 ,  -26 ,  -86 ,  -100 ,   63 ,  -61 ,   35 ,  -58 ,    0 ,    0 ,  //AutoContent_06_AIDNA_2
-         42 ,  100 ,    0 ,  -40 ,  -17 ,   97 ,  -40 ,  -100 ,   71 ,  -100 ,  //AutoContent_07_AIDNA_2
-        -100 ,    0 ,  -47 ,  -82 ,  100 ,  -16 ,  -100 ,    6 ,   29 ,   -9 ,  //AutoContent_08_AIDNA_2
-        -79 ,   23 ,   80 ,  -88 ,    0 ,  100 ,  -17 ,   52 ,  -50 ,  -57 ,  //AutoContent_09_AIDNA_2
-         40 ,   83 ,  -68 ,   88 ,   32 ,  -29 ,  -43 ,   13 ,  -100 ,  -67 ,  //AutoContent_10_AIDNA_2
-         68 ,  -12 ,   77 ,  -14 ,   12 ,   72 ,  -67 ,   43 ,   63 ,   88 ,  //AutoContent_11_AIDNA_2
-         91 ,  -100 ,  -34 ,   30 ,  100 ,  100 ,   33 ,   76 ,   81 ,  100 ,  //AutoContent_12_AIDNA_2
-        -31 ,  -32 ,   -7 ,   47 ,   70 ,    0 ,  -18 ,  -100 ,   82 ,   51 ,  //AutoContent_13_AIDNA_2
-        -77 ,   59 ,   26 ,  -63 ,  100 ,  -100 ,  -61 ,  100 ,  100 ,  -100 ,  //AutoContent_14_AIDNA_2
-        100 ,   -3 ,  -100 ,  100 ,  -100 ,  100 ,   -1 ,  -57 ,   44 ,  -100  //AutoContent_15_AIDNA_2
+      {  81 ,  -100 ,  -100 ,  100 ,  -78 ,   55 ,  -50 ,   13 ,  -86 ,    3 ,  //AutoContent_01_AIDNA_2
+         -8 ,   65 ,  -94 ,   35 ,   99 ,  -92 ,  -17 ,  100 ,  -52 ,  -100 ,  //AutoContent_02_AIDNA_2
+         24 ,  100 ,   85 ,  -68 ,  -70 ,   31 ,   93 ,  -29 ,   92 ,  -54 ,  //AutoContent_03_AIDNA_2
+         91 ,   77 ,  -62 ,  -19 ,   35 ,   54 ,  -98 ,  -70 ,   71 ,   78 ,  //AutoContent_04_AIDNA_2
+        -37 ,   79 ,  -71 ,  -95 ,  -30 ,  -44 ,   67 ,  -66 ,  -100 ,   33 ,  //AutoContent_05_AIDNA_2
+        -79 ,  -26 ,  -100 ,  -100 ,   61 ,  -100 ,   35 ,  -64 ,    0 ,   -2 ,  //AutoContent_06_AIDNA_2
+         92 ,   78 ,    0 ,  -26 ,  -100 ,   68 ,  -40 ,  -93 ,   42 ,  -100 ,  //AutoContent_07_AIDNA_2
+        -100 ,   21 ,  -79 ,  -95 ,  100 ,    0 ,  -39 ,    6 ,   56 ,  -61 ,  //AutoContent_08_AIDNA_2
+        100 ,  -100 ,   48 ,  -78 ,    0 ,  100 ,  -31 ,   26 ,  -50 ,  -91 ,  //AutoContent_09_AIDNA_2
+         67 ,   63 ,  -100 ,  -17 ,   32 ,  -27 ,   -8 ,  100 ,  100 ,  -96 ,  //AutoContent_10_AIDNA_2
+         81 ,  -12 ,  100 ,    0 ,  -100 ,   72 ,  -67 ,   49 ,   63 ,   20 ,  //AutoContent_11_AIDNA_2
+        100 ,  -88 ,  -100 ,   37 ,  100 ,  100 ,   70 ,  -100 ,   68 ,   67 ,  //AutoContent_12_AIDNA_2
+         49 ,   90 ,  -11 ,   47 ,   70 ,    0 ,  -53 ,  -100 ,  100 ,  100 ,  //AutoContent_13_AIDNA_2
+        -77 ,   59 ,    0 ,  -63 ,  100 ,  -100 ,   97 ,   73 ,   17 ,  -99 ,  //AutoContent_14_AIDNA_2
+         88 ,    0 ,  -100 ,  -21 ,  -100 ,  100 ,   -1 ,  -92 ,   44 ,  -100  //AutoContent_15_AIDNA_2
 		}
 		;
 	assert(magic_numbers_size == AI_initial_military_numbers_B.size());
 		
 	const std::vector<int8_t> input_weights_B =
-      {  100 ,  -100 ,  -66 ,    0 ,  -100 ,   -4 ,  -32 ,  -34 ,  100 ,  -74 ,  //AutoContent_16_AIDNA_2
-        100 ,  -35 ,  -100 ,   63 ,   62 ,   17 ,  -100 ,  -100 ,  -100 ,   62 ,  //AutoContent_17_AIDNA_2
-        -46 ,   47 ,  100 ,  -18 ,  -100 ,   81 ,    0 ,  -95 ,  100 ,  -95 ,  //AutoContent_18_AIDNA_2
-         59 ,  100 ,   22 ,   56 ,   66 ,  -100 ,  -44 ,  -100 ,  -47 ,  -47 ,  //AutoContent_19_AIDNA_2
-        -100 ,  -90 ,  -24 ,  -93 ,  100 ,  -100 ,   88 ,  -24 ,   86 ,    2 ,  //AutoContent_20_AIDNA_2
-        -100 ,  -32 ,   68 ,  -100 ,  -35 ,  -100 ,   83 ,   47 ,    4 ,   49 ,  //AutoContent_21_AIDNA_2
-        -80 ,   13 ,  -94 ,  -82 ,  -80 ,  -100 ,  100 ,  -89 ,  -28 ,  -100 ,  //AutoContent_22_AIDNA_2
-        100 ,  -83 ,  -100 ,  100 ,  -100 ,  100 ,   53 ,  -100 ,   65 ,  -54  //AutoContent_23_AIDNA_2
+      {  100 ,  -94 ,  -53 ,    0 ,  -100 ,  -18 ,  -32 ,  -34 ,  100 ,  -62 ,  //AutoContent_16_AIDNA_2
+        100 ,  -100 ,  -100 ,  100 ,   43 ,   17 ,  -100 ,  -100 ,  -100 ,  -44 ,  //AutoContent_17_AIDNA_2
+         -9 ,   47 ,  100 ,  -18 ,  -100 ,   81 ,    0 ,  -95 ,  100 ,  -34 ,  //AutoContent_18_AIDNA_2
+         59 ,   69 ,    0 ,   35 ,   39 ,  -100 ,  -71 ,  -100 ,  -47 ,  -83 ,  //AutoContent_19_AIDNA_2
+        -92 ,  -90 ,  -57 ,  -93 ,   65 ,  -100 ,   88 ,  100 ,  100 ,   33 ,  //AutoContent_20_AIDNA_2
+         21 ,  -29 ,   68 ,  -100 ,   -1 ,   32 ,   84 ,   47 ,    2 ,   39 ,  //AutoContent_21_AIDNA_2
+        -100 ,   44 ,   68 ,  -100 ,  -40 ,  -77 ,  100 ,   53 ,  -28 ,  -87 ,  //AutoContent_22_AIDNA_2
+        -84 ,  -83 ,  -100 ,  100 ,   76 ,  100 ,   53 ,  -100 ,   40 ,  -24  //AutoContent_23_AIDNA_2
 }
 	      ;
 	
 	const std::vector<int8_t> input_func_B = 
-      {    2 ,    2 ,    1 ,    1 ,    1 ,    1 ,    0 ,    0 ,    0 ,    0 ,  //AutoContent_24_AIDNA_2
-          2 ,    2 ,    1 ,    2 ,    1 ,    2 ,    2 ,    1 ,    0 ,    1 ,  //AutoContent_25_AIDNA_2
-          1 ,    2 ,    2 ,    1 ,    1 ,    0 ,    1 ,    0 ,    1 ,    0 ,  //AutoContent_26_AIDNA_2
-          1 ,    1 ,    1 ,    0 ,    0 ,    2 ,    1 ,    0 ,    1 ,    1 ,  //AutoContent_27_AIDNA_2
-          1 ,    1 ,    1 ,    1 ,    0 ,    1 ,    1 ,    0 ,    1 ,    1 ,  //AutoContent_28_AIDNA_2
-          2 ,    2 ,    1 ,    2 ,    2 ,    1 ,    0 ,    2 ,    2 ,    1 ,  //AutoContent_29_AIDNA_2
-          0 ,    1 ,    1 ,    1 ,    1 ,    1 ,    1 ,    1 ,    2 ,    0 ,  //AutoContent_30_AIDNA_2
-          1 ,    2 ,    2 ,    2 ,    1 ,    1 ,    0 ,    2 ,    0 ,    1  //AutoContent_31_AIDNA_2
+      {    2 ,    2 ,    1 ,    1 ,    1 ,    1 ,    0 ,    1 ,    0 ,    0 ,  //AutoContent_24_AIDNA_2
+          2 ,    2 ,    1 ,    2 ,    1 ,    0 ,    2 ,    2 ,    0 ,    1 ,  //AutoContent_25_AIDNA_2
+          2 ,    2 ,    2 ,    1 ,    1 ,    2 ,    1 ,    0 ,    1 ,    0 ,  //AutoContent_26_AIDNA_2
+          0 ,    1 ,    1 ,    0 ,    2 ,    2 ,    1 ,    0 ,    1 ,    1 ,  //AutoContent_27_AIDNA_2
+          2 ,    1 ,    1 ,    1 ,    0 ,    1 ,    1 ,    0 ,    1 ,    1 ,  //AutoContent_28_AIDNA_2
+          2 ,    2 ,    1 ,    1 ,    2 ,    2 ,    0 ,    0 ,    2 ,    2 ,  //AutoContent_29_AIDNA_2
+          0 ,    1 ,    1 ,    2 ,    1 ,    0 ,    2 ,    1 ,    2 ,    0 ,  //AutoContent_30_AIDNA_2
+          1 ,    2 ,    0 ,    2 ,    2 ,    1 ,    0 ,    2 ,    2 ,    1  //AutoContent_31_AIDNA_2
 }
 		;
 		assert(neuron_pool_size == input_func_B.size());
@@ -751,33 +749,33 @@ void ManagementData::initialize( const uint8_t pn, const bool reinitializing) {
 
       
 	const std::vector<uint32_t> f_neurons_B =
-      {  1430358758 ,  3095552264 ,  1282801261 ,  3409324314 ,  2414637556 ,  308941267 ,  3754665761 ,  3081112781 ,  4074077506 ,  3187241154 ,  //AutoContent_32_AIDNA_2
-        1271948823 ,  2427356220 ,  2067531174 ,  2830749311 ,  1844541029 ,  1364386253 ,  3235199397 ,  2887205990 ,  2508666081 ,  45162797 ,  //AutoContent_33_AIDNA_2
-        2048546577 ,  1098235354 ,  747031625 ,  2299781327 ,  3638925522 ,  3106669958 ,  2682510542 ,  1836167003 ,  3928993053 ,  538836270 ,  //AutoContent_34_AIDNA_2
-        3517135645 ,  2927774933 ,  3997741742 ,  4159115621 ,  1751749196 ,  3894021923 ,  4064763067 ,  1761699018 ,  4081548412 ,  4096375974 ,  //AutoContent_35_AIDNA_2
-        912148139 ,  4203139770 ,  1916999978 ,  3321818896 ,  3588668847 ,  3583421725 ,  3329349594 ,  2115122575 ,  1562162300 ,  3573370731 ,  //AutoContent_36_AIDNA_2
-        4246344297 ,  1881970390 ,  904604125 ,  3502766012 ,  3864312883 ,  3160796071 ,  856384099 ,  3701294241 ,  1148662363 ,  47037385  //AutoContent_37_AIDNA_2
+      {  3443649254 ,  975196348 ,  645349307 ,  1127353106 ,  2744037629 ,  403182623 ,  4284714785 ,  3083470066 ,  4072434954 ,  3181373923 ,  //AutoContent_32_AIDNA_2
+        1660972662 ,  2167382325 ,  2838275238 ,  2700338187 ,  1567382559 ,  1899328449 ,  3822859765 ,  2249679974 ,  1705319597 ,  3476402480 ,  //AutoContent_33_AIDNA_2
+        4186314641 ,  477303249 ,  1782748169 ,  2823996622 ,  1580317939 ,  3507258638 ,  1669570526 ,  2105257862 ,  3761105982 ,  79019566 ,  //AutoContent_34_AIDNA_2
+        3139637582 ,  2452118743 ,  4081694173 ,  3488420781 ,  3896881946 ,  673139511 ,  1980651195 ,  2063693514 ,  4198958428 ,  3322003380 ,  //AutoContent_35_AIDNA_2
+        324931083 ,  4165882970 ,  1925734762 ,  2180148672 ,  4058774698 ,  3586018322 ,  3576873404 ,  4272958759 ,  966571352 ,  1286424906 ,  //AutoContent_36_AIDNA_2
+        3171512925 ,  2436803795 ,  1738252967 ,  3620698108 ,  762625763 ,  473431463 ,  3982444007 ,  1220138589 ,  3906838497 ,  49979278  //AutoContent_37_AIDNA_2
 	 };
 	assert(f_neuron_pool_size == f_neurons_B.size());
 
 
     //AutoSCore_AIDNA_3
 	const std::vector<int16_t> AI_initial_military_numbers_C =
-      {  81 ,  -100 ,  -70 ,  100 ,  -89 ,   55 ,  -40 ,    0 ,  -72 ,   28 ,  //AutoContent_01_AIDNA_3
-         -8 ,   65 ,  -75 ,   35 ,  -91 ,  -92 ,    0 ,  100 ,   -6 ,  -45 ,  //AutoContent_02_AIDNA_3
-         15 ,   94 ,  -77 ,  -100 ,  -91 ,   31 ,   93 ,  -25 ,  100 ,  -36 ,  //AutoContent_03_AIDNA_3
-        100 ,  100 ,  -100 ,   92 ,    9 ,   83 ,  -14 ,  -100 ,   27 ,  -100 ,  //AutoContent_04_AIDNA_3
-        -74 ,   56 ,  -81 ,  -95 ,  100 ,  -44 ,  100 ,  100 ,   16 ,   17 ,  //AutoContent_05_AIDNA_3
-        -100 ,  -26 ,  -86 ,  -100 ,  100 ,  100 ,   35 ,   23 ,  -10 ,  -28 ,  //AutoContent_06_AIDNA_3
-         42 ,  100 ,    0 ,  -66 ,  -17 ,  100 ,  -40 ,  -100 ,   71 ,  -100 ,  //AutoContent_07_AIDNA_3
-        -76 ,    0 ,  -47 ,  -70 ,  100 ,  -16 ,  -100 ,    6 ,   29 ,  -45 ,  //AutoContent_08_AIDNA_3
-        -79 ,   23 ,   56 ,  -88 ,    0 ,  100 ,    0 ,   23 ,  -50 ,  -45 ,  //AutoContent_09_AIDNA_3
-         40 ,   83 ,  -100 ,  100 ,   34 ,  -29 ,  -43 ,   13 ,  -100 ,  -10 ,  //AutoContent_10_AIDNA_3
-         68 ,  -12 ,   77 ,  -100 ,   12 ,   72 ,  -67 ,   43 ,  -100 ,   88 ,  //AutoContent_11_AIDNA_3
-        100 ,   93 ,  -34 ,   30 ,  100 ,  100 ,   33 ,   89 ,   81 ,  100 ,  //AutoContent_12_AIDNA_3
-          0 ,  -100 ,   -7 ,   47 ,   70 ,   24 ,  -18 ,  -100 ,   82 ,   49 ,  //AutoContent_13_AIDNA_3
-        -77 ,   59 ,   26 ,  -45 ,  100 ,  -100 ,  -100 ,   95 ,  -92 ,  -100 ,  //AutoContent_14_AIDNA_3
-        100 ,   -3 ,  -100 ,  100 ,  -100 ,  100 ,   -1 ,  -84 ,  100 ,   40  //AutoContent_15_AIDNA_3
+      {  81 ,  -100 ,  -100 ,  100 ,  -100 ,   55 ,  -80 ,   13 ,  -72 ,    3 ,  //AutoContent_01_AIDNA_3
+         -8 ,   65 ,  -94 ,   35 ,   99 ,  -92 ,  -17 ,  100 ,  -52 ,  -100 ,  //AutoContent_02_AIDNA_3
+         10 ,  100 ,   85 ,  -100 ,  -70 ,   31 ,  100 ,  -29 ,  100 ,  -54 ,  //AutoContent_03_AIDNA_3
+         91 ,   77 ,  -62 ,  -19 ,    9 ,   54 ,  -98 ,  -70 ,   71 ,   78 ,  //AutoContent_04_AIDNA_3
+        -54 ,   79 ,  -62 ,  -100 ,  -30 ,  -44 ,   36 ,  -40 ,  -69 ,   33 ,  //AutoContent_05_AIDNA_3
+        -79 ,  -26 ,  -100 ,  -100 ,   63 ,  -100 ,   35 ,  -59 ,    0 ,    0 ,  //AutoContent_06_AIDNA_3
+         92 ,   49 ,    0 ,  -26 ,  -100 ,   68 ,  -40 ,  -93 ,   60 ,  -100 ,  //AutoContent_07_AIDNA_3
+        -100 ,   21 ,  -79 ,  -79 ,  100 ,  -16 ,  -39 ,    0 ,   72 ,  -61 ,  //AutoContent_08_AIDNA_3
+        100 ,  -100 ,   48 ,  -78 ,    0 ,  100 ,  -10 ,    0 ,  -50 ,  -57 ,  //AutoContent_09_AIDNA_3
+         67 ,   63 ,  -100 ,  -18 ,   32 ,  -27 ,    0 ,  100 ,  100 ,  -79 ,  //AutoContent_10_AIDNA_3
+         81 ,  -12 ,  100 ,  -12 ,  -100 ,   72 ,  -99 ,   24 ,   63 ,   20 ,  //AutoContent_11_AIDNA_3
+        100 ,  -88 ,  -100 ,   52 ,  100 ,  100 ,  100 ,  -100 ,   68 ,   67 ,  //AutoContent_12_AIDNA_3
+         16 ,   90 ,  -11 ,   47 ,   70 ,    0 ,  -53 ,  -100 ,  100 ,  100 ,  //AutoContent_13_AIDNA_3
+        -77 ,   59 ,   -3 ,  -63 ,  100 ,  -100 ,   97 ,   64 ,   17 ,  -99 ,  //AutoContent_14_AIDNA_3
+         88 ,    0 ,  -100 ,  -21 ,  -100 ,  100 ,   -1 ,  -57 ,   44 ,  -100  //AutoContent_15_AIDNA_3
        }
 
 		;
@@ -785,95 +783,95 @@ void ManagementData::initialize( const uint8_t pn, const bool reinitializing) {
 		assert(magic_numbers_size == AI_initial_military_numbers_C.size());
 	
 	const std::vector<int8_t> input_weights_C =
-      {   89 ,  -100 ,  -66 ,    0 ,  -100 ,   -4 ,  -32 ,  -34 ,  100 ,  -74 ,  //AutoContent_16_AIDNA_3
-         81 ,  -35 ,  -100 ,   63 ,   62 ,   -2 ,  -100 ,  -100 ,  -100 ,   62 ,  //AutoContent_17_AIDNA_3
-        -79 ,  -26 ,  100 ,  -18 ,  -100 ,   67 ,    0 ,  -100 ,  100 ,  -95 ,  //AutoContent_18_AIDNA_3
-        100 ,  100 ,   22 ,   56 ,   82 ,  -100 ,  -44 ,  -100 ,  -47 ,  -100 ,  //AutoContent_19_AIDNA_3
-        -92 ,  -90 ,  -39 ,  -93 ,  100 ,  -100 ,   88 ,  -24 ,  -42 ,    2 ,  //AutoContent_20_AIDNA_3
-        -100 ,  -32 ,   67 ,  -100 ,  -35 ,  -100 ,   83 ,   47 ,    0 ,   49 ,  //AutoContent_21_AIDNA_3
-        -80 ,   13 ,  -94 ,  -82 ,  -80 ,  -83 ,  100 ,  -100 ,  -28 ,  -100 ,  //AutoContent_22_AIDNA_3
-        100 ,  -83 ,  -100 ,  100 ,  -100 ,  100 ,   53 ,  -100 ,   65 ,  -54  //AutoContent_23_AIDNA_3
+      {  100 ,  -89 ,  -35 ,    0 ,  -100 ,  -18 ,  -39 ,  -34 ,  100 ,  -62 ,  //AutoContent_16_AIDNA_3
+        100 ,  -100 ,  -93 ,  100 ,   62 ,   17 ,  -66 ,  -98 ,  -100 ,  -44 ,  //AutoContent_17_AIDNA_3
+        -19 ,   47 ,  100 ,  -18 ,  -100 ,   81 ,    0 ,  -95 ,  100 ,  -34 ,  //AutoContent_18_AIDNA_3
+         59 ,  100 ,    0 ,   35 ,   39 ,  -100 ,  -94 ,  -100 ,  -47 ,  -83 ,  //AutoContent_19_AIDNA_3
+        -92 ,  -90 ,  -57 ,  -93 ,   65 ,  -36 ,   88 ,  100 ,  100 ,   33 ,  //AutoContent_20_AIDNA_3
+         21 ,  -31 ,   68 ,  -100 ,   -1 ,   32 ,   84 ,   47 ,    2 ,   49 ,  //AutoContent_21_AIDNA_3
+        -100 ,   44 ,   68 ,  -100 ,  -40 ,  -77 ,  100 ,   55 ,  -40 ,  -100 ,  //AutoContent_22_AIDNA_3
+        -84 ,  -83 ,  -77 ,  100 ,   76 ,  100 ,   55 ,  -100 ,   40 ,  -54  //AutoContent_23_AIDNA_3
        }
 			;
 	const std::vector<int8_t> input_func_C =
-      {    2 ,    2 ,    0 ,    1 ,    1 ,    1 ,    0 ,    0 ,    1 ,    0 ,  //AutoContent_24_AIDNA_3
-          2 ,    2 ,    0 ,    2 ,    1 ,    2 ,    2 ,    1 ,    0 ,    1 ,  //AutoContent_25_AIDNA_3
-          1 ,    2 ,    2 ,    1 ,    1 ,    0 ,    1 ,    0 ,    1 ,    0 ,  //AutoContent_26_AIDNA_3
-          1 ,    1 ,    1 ,    0 ,    0 ,    2 ,    1 ,    0 ,    1 ,    1 ,  //AutoContent_27_AIDNA_3
-          1 ,    1 ,    1 ,    1 ,    0 ,    1 ,    1 ,    0 ,    1 ,    1 ,  //AutoContent_28_AIDNA_3
-          2 ,    2 ,    1 ,    2 ,    2 ,    1 ,    1 ,    2 ,    2 ,    1 ,  //AutoContent_29_AIDNA_3
-          0 ,    1 ,    1 ,    1 ,    1 ,    1 ,    1 ,    1 ,    2 ,    0 ,  //AutoContent_30_AIDNA_3
-          1 ,    2 ,    2 ,    2 ,    1 ,    1 ,    0 ,    2 ,    0 ,    1  //AutoContent_31_AIDNA_3
+      {    2 ,    2 ,    1 ,    1 ,    1 ,    1 ,    0 ,    0 ,    0 ,    0 ,  //AutoContent_24_AIDNA_3
+          2 ,    2 ,    1 ,    2 ,    1 ,    0 ,    2 ,    2 ,    0 ,    1 ,  //AutoContent_25_AIDNA_3
+          2 ,    2 ,    2 ,    1 ,    1 ,    0 ,    1 ,    0 ,    1 ,    0 ,  //AutoContent_26_AIDNA_3
+          0 ,    1 ,    1 ,    0 ,    2 ,    2 ,    1 ,    0 ,    1 ,    1 ,  //AutoContent_27_AIDNA_3
+          2 ,    1 ,    1 ,    1 ,    0 ,    1 ,    1 ,    0 ,    1 ,    1 ,  //AutoContent_28_AIDNA_3
+          2 ,    2 ,    1 ,    1 ,    2 ,    1 ,    0 ,    0 ,    0 ,    2 ,  //AutoContent_29_AIDNA_3
+          0 ,    1 ,    1 ,    1 ,    1 ,    0 ,    2 ,    1 ,    2 ,    0 ,  //AutoContent_30_AIDNA_3
+          1 ,    2 ,    0 ,    2 ,    1 ,    1 ,    0 ,    2 ,    2 ,    1  //AutoContent_31_AIDNA_3
        }
 			;
 	assert(neuron_pool_size == input_func_C.size());
 	assert(neuron_pool_size == input_weights_C.size());
 	
 	const std::vector<uint32_t> f_neurons_C =
-      {  893882022 ,  1008788232 ,  1282767981 ,  3406981402 ,  3488359910 ,  1382554067 ,  3754669861 ,  3081116877 ,  1996242274 ,  3170463939 ,  //AutoContent_32_AIDNA_3
-        3419431952 ,  2427421756 ,  3945532718 ,  1777977951 ,  1836138053 ,  1498587597 ,  2163605429 ,  2350318702 ,  2541958369 ,  511254568 ,  //AutoContent_33_AIDNA_3
-        2585425689 ,  1092992222 ,  747031561 ,  2299633863 ,  3638920388 ,  3171419526 ,  2783181002 ,  3891343184 ,  3996093717 ,  810417453 ,  //AutoContent_34_AIDNA_3
-        2497919757 ,  2930919637 ,  3997348526 ,  4159025508 ,  2825492428 ,  3927657251 ,  4140259499 ,  1839293516 ,  3008876924 ,  4097686692 ,  //AutoContent_35_AIDNA_3
-        912150176 ,  4207400618 ,  1912839594 ,  3590254352 ,  3578183471 ,  2542202124 ,  2188695514 ,  2114073999 ,  1562162808 ,  3589098283 ,  //AutoContent_36_AIDNA_3
-        3174765257 ,  1933416087 ,  4125964797 ,  1473771452 ,  3830756531 ,  4251837603 ,  2807436931 ,  1635798158 ,  249306730 ,  47005673  //AutoContent_37_AIDNA_3
+      {  1195493607 ,  977563804 ,  746045179 ,  3409120018 ,  3217959165 ,  805983259 ,  3743647712 ,  936006882 ,  4036356362 ,  3172977121 ,  //AutoContent_32_AIDNA_3
+        1661103734 ,  2167383093 ,  2838275494 ,  3023098829 ,  1567390815 ,  1628746177 ,  3806112181 ,  2183087182 ,  1705319599 ,  3996483632 ,  //AutoContent_33_AIDNA_3
+        4253456273 ,  426774967 ,  1992543451 ,  2157675726 ,  1512289491 ,  3490483470 ,  1669570526 ,  1837084551 ,  808447038 ,  202751566 ,  //AutoContent_34_AIDNA_3
+        2602766606 ,  2594364628 ,  3813193209 ,  3882684845 ,  3896873247 ,  677334791 ,  302991035 ,  1900144330 ,  3393668188 ,  3590406044 ,  //AutoContent_35_AIDNA_3
+        1885211659 ,  4182660186 ,  2059428202 ,  2750836610 ,  4058772650 ,  901139670 ,  3710960044 ,  4273480967 ,  836543582 ,  1286424906 ,  //AutoContent_36_AIDNA_3
+        2097754973 ,  2436803803 ,  2811869887 ,  3553589245 ,  762362101 ,  473284131 ,  2881295822 ,  2048427667 ,  939821761 ,  49987466  //AutoContent_37_AIDNA_3
 	 };
 	assert(f_neuron_pool_size == f_neurons_C.size());
 
 		
     //AutoSCore_AIDNA_4
 	const std::vector<int16_t> AI_initial_military_numbers_D =
-      {  81 ,  -100 ,  -54 ,  100 ,  -89 ,   55 ,  -40 ,    0 ,  -72 ,   28 ,  //AutoContent_01_AIDNA_4
-         -8 ,   65 ,  -75 ,   35 ,   85 ,  -92 ,  -17 ,  100 ,  -22 ,  -45 ,  //AutoContent_02_AIDNA_4
-         15 ,  100 ,  -77 ,  -100 ,  -70 ,   31 ,   93 ,    0 ,  100 ,  -56 ,  //AutoContent_03_AIDNA_4
-         79 ,  100 ,  -62 ,   92 ,    9 ,  100 ,   -5 ,  -100 ,   36 ,   78 ,  //AutoContent_04_AIDNA_4
-        -74 ,   56 ,  -81 ,  -95 ,  -30 ,  -37 ,  100 ,   63 ,  -86 ,  -100 ,  //AutoContent_05_AIDNA_4
-        -79 ,  -26 ,  -86 ,  -100 ,   63 ,  -61 ,   35 ,  -58 ,   38 ,    0 ,  //AutoContent_06_AIDNA_4
-        100 ,  100 ,    0 ,  -40 ,  -100 ,   97 ,  -40 ,  -100 ,   71 ,  -100 ,  //AutoContent_07_AIDNA_4
-        -100 ,    0 ,  -47 ,  -82 ,  100 ,  -16 ,  -100 ,    6 ,   29 ,  -31 ,  //AutoContent_08_AIDNA_4
-        -79 ,  -100 ,   80 ,  -88 ,    0 ,  100 ,  -17 ,   52 ,  -50 ,  -57 ,  //AutoContent_09_AIDNA_4
-         67 ,   83 ,  -68 ,  -18 ,   32 ,  -29 ,  -43 ,   13 ,   92 ,  -67 ,  //AutoContent_10_AIDNA_4
-         68 ,  -12 ,   77 ,  -21 ,   12 ,   72 ,  -67 ,   43 ,   63 ,   32 ,  //AutoContent_11_AIDNA_4
-         91 ,  -100 ,  -100 ,   30 ,  100 ,  100 ,  100 ,  -100 ,   44 ,  100 ,  //AutoContent_12_AIDNA_4
-          0 ,  100 ,   -7 ,   47 ,   70 ,  -81 ,  -18 ,  -100 ,  100 ,  100 ,  //AutoContent_13_AIDNA_4
-        -77 ,   59 ,   26 ,  -63 ,  100 ,  -100 ,   71 ,  100 ,  100 ,  -100 ,  //AutoContent_14_AIDNA_4
-        100 ,   -3 ,  -100 ,  100 ,  -100 ,  100 ,   -1 ,  -57 ,   44 ,  -100  //AutoContent_15_AIDNA_4
+      {  81 ,  -100 ,  -100 ,  100 ,  -100 ,   55 ,  -56 ,   45 ,  -72 ,   29 ,  //AutoContent_01_AIDNA_4
+        -20 ,   40 ,  -94 ,   35 ,   99 ,  -92 ,  -17 ,  100 ,  -52 ,  -100 ,  //AutoContent_02_AIDNA_4
+         24 ,  100 ,   50 ,  -92 ,  -70 ,   21 ,   84 ,  -23 ,  100 ,  -54 ,  //AutoContent_03_AIDNA_4
+         91 ,   77 ,  -62 ,  -19 ,    9 ,   54 ,  -98 ,  -70 ,   71 ,   78 ,  //AutoContent_04_AIDNA_4
+        -54 ,   79 ,  -51 ,  -100 ,  -30 ,  -44 ,   67 ,  -66 ,  -100 ,   33 ,  //AutoContent_05_AIDNA_4
+        -79 ,  -26 ,  -100 ,  -100 ,   63 ,  -100 ,   35 ,  -94 ,   33 ,    0 ,  //AutoContent_06_AIDNA_4
+         71 ,   78 ,    0 ,  -26 ,  -100 ,   68 ,  -40 ,  -100 ,   42 ,  -100 ,  //AutoContent_07_AIDNA_4
+        -100 ,   24 ,  -79 ,  -79 ,  100 ,  -16 ,  -13 ,    6 ,   56 ,  -61 ,  //AutoContent_08_AIDNA_4
+        100 ,  -80 ,   48 ,  -78 ,    0 ,  100 ,    0 ,   26 ,  -50 ,  -74 ,  //AutoContent_09_AIDNA_4
+         67 ,   63 ,  -100 ,  -17 ,   32 ,  -25 ,    0 ,  100 ,  100 ,  -79 ,  //AutoContent_10_AIDNA_4
+         81 ,  -12 ,  100 ,    0 ,  -100 ,   72 ,  -67 ,   54 ,   69 ,   20 ,  //AutoContent_11_AIDNA_4
+        100 ,  -100 ,  -100 ,   36 ,  100 ,  100 ,   92 ,  -100 ,   70 ,  100 ,  //AutoContent_12_AIDNA_4
+         16 ,   90 ,  -11 ,   47 ,   70 ,   28 ,  -53 ,  -100 ,  100 ,  100 ,  //AutoContent_13_AIDNA_4
+        -77 ,   59 ,    0 ,  -63 ,  100 ,  -100 ,   97 ,   73 ,   17 ,  -99 ,  //AutoContent_14_AIDNA_4
+         88 ,    0 ,  -100 ,  -21 ,  -100 ,  100 ,    0 ,  -57 ,   44 ,  -100  //AutoContent_15_AIDNA_4
 	}
 		;
 	assert(magic_numbers_size == AI_initial_military_numbers_D.size());
 		
 	const std::vector<int8_t> input_weights_D =
-      {  100 ,  -100 ,  -66 ,    0 ,  -100 ,   -4 ,  -32 ,  -34 ,   96 ,  -74 ,  //AutoContent_16_AIDNA_4
-        100 ,  -100 ,  -100 ,   63 ,   62 ,   17 ,  -100 ,  -100 ,  -100 ,  -31 ,  //AutoContent_17_AIDNA_4
-        -46 ,   47 ,  100 ,  -18 ,  -100 ,   81 ,    0 ,  -95 ,  100 ,  -95 ,  //AutoContent_18_AIDNA_4
-         59 ,  100 ,   22 ,   56 ,   66 ,  -100 ,    9 ,  -100 ,  -47 ,  -97 ,  //AutoContent_19_AIDNA_4
-        -92 ,  -90 ,  -24 ,  -93 ,  100 ,  -100 ,   88 ,  -24 ,   86 ,    2 ,  //AutoContent_20_AIDNA_4
-         20 ,  -32 ,   68 ,  -100 ,  -35 ,   32 ,   83 ,   47 ,   29 ,   49 ,  //AutoContent_21_AIDNA_4
-        -100 ,   13 ,  -94 ,  -82 ,  -80 ,  -100 ,  100 ,  -89 ,  -28 ,  -100 ,  //AutoContent_22_AIDNA_4
-        -84 ,  -83 ,  -100 ,  100 ,  -100 ,  100 ,   53 ,  -100 ,   40 ,  -54  //AutoContent_23_AIDNA_4
+      {  100 ,  -94 ,  -66 ,    0 ,  -100 ,  -18 ,  -39 ,  -34 ,   96 ,  -63 ,  //AutoContent_16_AIDNA_4
+        100 ,  -100 ,  -100 ,  100 ,   62 ,   17 ,  -100 ,  -100 ,  -100 ,  -44 ,  //AutoContent_17_AIDNA_4
+        -19 ,   47 ,  100 ,  -18 ,  -100 ,   81 ,   30 ,  -95 ,  100 ,  -34 ,  //AutoContent_18_AIDNA_4
+         29 ,  100 ,  -13 ,   35 ,   39 ,  -100 ,  -71 ,  -100 ,  -47 ,  -83 ,  //AutoContent_19_AIDNA_4
+        -92 ,  -90 ,  -57 ,  -93 ,   65 ,  -100 ,   88 ,  100 ,  100 ,   33 ,  //AutoContent_20_AIDNA_4
+         21 ,  -31 ,   52 ,  -100 ,   -1 ,   32 ,   84 ,   47 ,    2 ,   49 ,  //AutoContent_21_AIDNA_4
+        -97 ,   44 ,   68 ,  -100 ,  -40 ,  -100 ,  100 ,   55 ,  -28 ,  -100 ,  //AutoContent_22_AIDNA_4
+        -84 ,  -83 ,  -100 ,  100 ,   76 ,  100 ,   53 ,  -100 ,   40 ,  -54  //AutoContent_23_AIDNA_4
 	}
 	      ;
 	
 	const std::vector<int8_t> input_func_D = 
-      {    2 ,    2 ,    1 ,    1 ,    1 ,    1 ,    0 ,    0 ,    0 ,    0 ,  //AutoContent_24_AIDNA_4
-          2 ,    2 ,    1 ,    2 ,    1 ,    2 ,    2 ,    1 ,    0 ,    1 ,  //AutoContent_25_AIDNA_4
-          1 ,    2 ,    2 ,    1 ,    1 ,    0 ,    1 ,    0 ,    1 ,    0 ,  //AutoContent_26_AIDNA_4
-          1 ,    1 ,    1 ,    0 ,    0 ,    2 ,    1 ,    0 ,    1 ,    1 ,  //AutoContent_27_AIDNA_4
-          1 ,    1 ,    1 ,    1 ,    0 ,    1 ,    1 ,    0 ,    1 ,    1 ,  //AutoContent_28_AIDNA_4
-          2 ,    2 ,    1 ,    2 ,    2 ,    1 ,    0 ,    0 ,    2 ,    2 ,  //AutoContent_29_AIDNA_4
-          0 ,    1 ,    1 ,    1 ,    1 ,    1 ,    1 ,    1 ,    2 ,    0 ,  //AutoContent_30_AIDNA_4
-          1 ,    2 ,    2 ,    2 ,    1 ,    1 ,    0 ,    2 ,    0 ,    1  //AutoContent_31_AIDNA_4
+      {    2 ,    2 ,    1 ,    1 ,    1 ,    1 ,    0 ,    1 ,    0 ,    0 ,  //AutoContent_24_AIDNA_4
+          2 ,    2 ,    1 ,    2 ,    1 ,    0 ,    2 ,    2 ,    0 ,    1 ,  //AutoContent_25_AIDNA_4
+          2 ,    2 ,    2 ,    1 ,    1 ,    0 ,    1 ,    0 ,    1 ,    0 ,  //AutoContent_26_AIDNA_4
+          0 ,    1 ,    2 ,    1 ,    2 ,    2 ,    1 ,    0 ,    1 ,    1 ,  //AutoContent_27_AIDNA_4
+          2 ,    1 ,    1 ,    1 ,    0 ,    1 ,    1 ,    0 ,    1 ,    1 ,  //AutoContent_28_AIDNA_4
+          2 ,    0 ,    1 ,    1 ,    2 ,    1 ,    0 ,    0 ,    2 ,    2 ,  //AutoContent_29_AIDNA_4
+          0 ,    1 ,    1 ,    1 ,    1 ,    0 ,    2 ,    1 ,    2 ,    0 ,  //AutoContent_30_AIDNA_4
+          1 ,    2 ,    0 ,    2 ,    1 ,    1 ,    0 ,    2 ,    2 ,    1  //AutoContent_31_AIDNA_4
 	}
 		;
 	assert(neuron_pool_size == input_func_D.size());
 	assert(neuron_pool_size == input_weights_D.size());
 
 	const std::vector<uint32_t> f_neurons_D =
-      {  1698810566 ,  948065036 ,  1148550781 ,  3413518622 ,  2414637557 ,  304748759 ,  3687573281 ,  3081637101 ,  2462481730 ,  3170496707 ,  //AutoContent_32_AIDNA_4
-        1271948887 ,  2158986300 ,  2067539366 ,  2897334143 ,  1836086789 ,  1364648397 ,  3268684213 ,  2350335078 ,  3582407905 ,  246489384 ,  //AutoContent_33_AIDNA_4
-        4206778257 ,  1098235354 ,  679791753 ,  2299773135 ,  3655703634 ,  2569831814 ,  2682511054 ,  1299558227 ,  3895438653 ,  538819886 ,  //AutoContent_34_AIDNA_4
-        2476946207 ,  2894220501 ,  3997741231 ,  4159674853 ,  1751749452 ,  3894021921 ,  4064763067 ,  1694721246 ,  4081548404 ,  4096376454 ,  //AutoContent_35_AIDNA_4
-        845039243 ,  4161197754 ,  4065467690 ,  3321818896 ,  4125539759 ,  3583421725 ,  1450235866 ,  2115122447 ,  1562162300 ,  3304933738 ,  //AutoContent_36_AIDNA_4
-        4246344265 ,  1882035934 ,  904608189 ,  1363666876 ,  3864312883 ,  3160796071 ,  1937466202 ,  3099091013 ,  2455683018 ,  47037386  //AutoContent_37_AIDNA_4
+      {  3309390820 ,  2072008861 ,  620051705 ,  1127353106 ,  4224596223 ,  1342313563 ,  3743647712 ,  935994578 ,  4036880650 ,  3181373667 ,  //AutoContent_32_AIDNA_4
+        1662054006 ,  2167267509 ,  2838242726 ,  4274187613 ,  2104507415 ,  1633022401 ,  3805557941 ,  3323413606 ,  633843885 ,  3324092720 ,  //AutoContent_33_AIDNA_4
+        4110817169 ,  1162897795 ,  1992485011 ,  2320745679 ,  2048965842 ,  1359875342 ,  1671663582 ,  1836822406 ,  1076882750 ,  89497134 ,  //AutoContent_34_AIDNA_4
+        2602766606 ,  2586369111 ,  3815356345 ,  3892134349 ,  3896873978 ,  677333799 ,  4128200379 ,  1761703114 ,  3393410268 ,  2248253332 ,  //AutoContent_35_AIDNA_4
+        981339147 ,  4048442458 ,  2059944298 ,  2717273360 ,  4109106347 ,  2508115159 ,  3575169468 ,  4003472643 ,  832480348 ,  1285835082 ,  //AutoContent_36_AIDNA_4
+        4245238365 ,  343600379 ,  3424434735 ,  3620698108 ,  745847491 ,  2553674599 ,  1633417678 ,  1061405009 ,  1625137121 ,  48936842  //AutoContent_37_AIDNA_4
 	 };
 	assert(f_neuron_pool_size == f_neurons_D.size());
 

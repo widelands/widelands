@@ -322,10 +322,8 @@ private:
 	uint16_t fishers_count_;
 
 	// for training sites per type
-	int16_t ts_basic_count_;
-	int16_t ts_basic_const_count_;
-	int16_t ts_advanced_count_;
-	int16_t ts_advanced_const_count_;
+	int16_t ts_finished_count_;
+	int16_t ts_in_const_count_;
 	int16_t ts_without_trainers_;
 
 	// for roads

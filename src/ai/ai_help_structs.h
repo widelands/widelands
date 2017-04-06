@@ -54,8 +54,8 @@ enum class BuildingNecessity : uint8_t {
 	kForbidden
 };
 
-enum class ExpansionMode : uint8_t { kResources = 0, kSpace = 1, kEconomy = 2, kBoth = 3, kDismantle = 4};
-enum class ScoreBlock : uint8_t {kResource = 0, kLand = 1, kEnemy = 2, kDismantle = 3};
+enum class ExpansionMode : uint8_t { kResources = 0, kSpace = 1, kEconomy = 2, kBoth = 3};
+//enum class ScoreBlock : uint8_t {kResource = 0, kLand = 1, kEnemy = 2, kDismantle = 3};
 
 enum class AiModeBuildings : uint8_t { kAnotherAllowed, kOnLimit, kLimitExceeded };
 
@@ -299,6 +299,7 @@ struct BuildableField {
 	// actual count of soldiers in nearby buldings
 	int16_t own_military_presence;
 	int16_t enemy_military_presence;
+	int16_t enemy_military_sites;	//Including unfinished
 	int16_t ally_military_presence;
 	// stationed (manned) military buildings nearby
 	int16_t military_stationed;
@@ -389,7 +390,7 @@ struct BuildingObserver {
 	bool mountain_conqueror;   // military building built near mountains
 	uint32_t prohibited_till;  // do not build before (ms)
 	uint32_t forced_after;     // do not wait until ware is needed
-	TrainingSiteType trainingsite_type;
+	uint8_t max_ts_proportion; 
 
 	uint16_t unconnected_count;  // to any warehouse (count of such buildings)
 
@@ -568,20 +569,20 @@ struct ExpansionType { //NOCOM
 	ExpansionType();
 	
 	void set_expantion_type(ExpansionMode);
-	int16_t get_proportions(ScoreBlock, bool = false);
+	//int16_t get_proportions(ScoreBlock, bool = false);
 	ExpansionMode get_expansion_type() {return type;};
 	
 	private:
 	ExpansionMode type;
 	
-	// columns ScoreBlock: kResource = 0, kLand = 1, kEnemy = 2, kDismantle = 3
-	uint8_t proportion_table[5][4] = {
-		{ 70, 10, 40,  0}, //kResources
-		{ 10, 70, 80,  0}, //kSpace
-		{ 35, 35, 50,  0}, //kEconomy
-		{ 40, 40, 65,  0},  //kBoth	
-		{ 20, 20, 65, 60},  //kDismantle					
-	};
+	//// columns ScoreBlock: kResource = 0, kLand = 1, kEnemy = 2, kDismantle = 3
+	//uint8_t proportion_table[5][4] = {
+		//{ 70, 10, 40,  0}, //kResources
+		//{ 10, 70, 80,  0}, //kSpace
+		//{ 35, 35, 50,  0}, //kEconomy
+		//{ 40, 40, 65,  0},  //kBoth	
+		//{ 20, 20, 65, 60},  //kDismantle					
+	//};
 		
 };
 
@@ -594,7 +595,7 @@ struct ManagementData {
 	Widelands::Player::AiPersistentState* pd;
 
 	void mutate(uint32_t, PlayerNumber = 0);
-	void review(uint32_t, PlayerNumber, uint32_t, uint32_t, uint32_t, uint16_t, uint32_t, int16_t, int16_t);
+	void review(uint32_t, PlayerNumber, int32_t, uint32_t, uint32_t, uint16_t, uint32_t, int16_t, uint8_t);
 	void dump_data();
 	void initialize(uint8_t, bool reinitializing = false);
 	uint16_t new_neuron_id() {

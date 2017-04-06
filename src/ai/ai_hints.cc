@@ -44,24 +44,15 @@ BuildingHints::BuildingHints(std::unique_ptr<LuaTable> table)
      very_weak_ai_limit_(
         table->has_key("very_weak_ai_limit") ? table->get_int("very_weak_ai_limit") : -1),
      weak_ai_limit_(table->has_key("weak_ai_limit") ? table->get_int("weak_ai_limit") : -1),
-     trainingsite_type_(TrainingSiteType::kNoTS),
      trainingsites_max_percent_(table->has_key("trainingsites_max_percent") ?
                                    table->get_int("trainingsites_max_percent") :
                                    -1) {
-
-	if (table->has_key("trainingsite_type")) {
-		if (table->get_string("trainingsite_type") == "basic") {
-			trainingsite_type_ = TrainingSiteType::kBasic;
-		} else if (table->get_string("trainingsite_type") == "advanced") {
-			trainingsite_type_ = TrainingSiteType::kAdvanced;
-		}
-	}
 }
 
 void BuildingHints::set_trainingsites_max_percent(int percent) {
 	trainingsites_max_percent_ = percent;
 }
 
-int BuildingHints::trainingsites_max_percent() const {
+uint8_t BuildingHints::trainingsites_max_percent() const {
 	return trainingsites_max_percent_;
 }
