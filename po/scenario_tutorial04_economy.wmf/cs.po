@@ -1,15 +1,15 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2016 Widelands Development Team
+# Copyright (C) 2005-2017 Widelands Development Team
 # 
 # Translators:
 # Matej Svrcek <mmatej@yahoo.com>, 2016
-# Milan Fašina <matrix17@seznam.cz>, 2016
+# Milan Fašina <matrix17@seznam.cz>, 2016-2017
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-12-30 14:03+0000\n"
-"PO-Revision-Date: 2016-12-31 21:34+0000\n"
+"POT-Creation-Date: 2017-03-29 17:32+0000\n"
+"PO-Revision-Date: 2017-04-02 08:18+0000\n"
 "Last-Translator: Milan Fašina <matrix17@seznam.cz>\n"
 "Language-Team: Czech (http://www.transifex.com/widelands/widelands/language/cs/)\n"
 "MIME-Version: 1.0\n"
@@ -30,14 +30,14 @@ msgstr "Hospodářství"
 msgid ""
 "Welcome back. In this tutorial, I’ll tell you what you can do to check how "
 "well your economy works."
-msgstr "Vítej zpět. V tomto tutoriálu se dovíš, co máš kontrolovat, aby jsi zjistil, jak se daří tvému hospodářství."
+msgstr "Vítej zpět. V tomto tutoriálu ti povím, co máš kontrolovat, aby jsi zjistil, jak se daří tvému hospodářství."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:22
 msgid ""
 "Building your economy up and making it work well and grow is the main part "
 "of Widelands. But you can’t control the workers directly – they will follow "
 "the general conditions you set."
-msgstr "Budování hospodářství, jeho udržování a rozšiřování je hlavní částí Widelands. Nemůžeš ovládat dělníky přímo - následují pouze obecné podmínky, které jim stanovíš."
+msgstr "Budování hospodářství, jeho udržování a rozšiřování je hlavní částí Widelands. Nemůžeš ovládat dělníky přímo - následují pouze obecné instrukce, které jim stanovíš."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:23
 msgid ""
@@ -841,7 +841,7 @@ msgstr "Toto byl poslední tutoriál, který jsem pro tebe připravil. Teď jsem
 msgid "“%s”"
 msgstr "“%s”"
 
-#: ../../data/scripting/format_scenario.lua:96
+#: ../../data/scripting/format_scenario.lua:84
 msgid "New Objective"
 msgid_plural "New Objectives"
 msgstr[0] "Nový úkol"

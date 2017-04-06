@@ -34,62 +34,59 @@ void NetworkPlayerSettingsBackend::toggle_type(uint8_t id) {
 	s->next_player_state(id);
 }
 
-/// Toggle through the tribes + handle shared in players
-void NetworkPlayerSettingsBackend::toggle_tribe(uint8_t id) {
+void NetworkPlayerSettingsBackend::set_tribe(uint8_t id, const std::string& tribename) {
 	const GameSettings& settings = s->settings();
 
-	if (id >= settings.players.size())
+	if (id >= settings.players.size() || tribename.empty())
 		return;
 
 	if (settings.players.at(id).state != PlayerSettings::stateShared) {
-		const PlayerSettings& player = settings.players.at(id);
-		const std::string& currenttribe = player.tribe;
-		std::string nexttribe = settings.tribes.at(0).name;
-		uint32_t num_tribes = settings.tribes.size();
-		bool random_tribe = false;
+		s->set_player_tribe(id, tribename, tribename == "random");
+	}
+}
 
-		if (player.random_tribe) {
-			nexttribe = settings.tribes.at(0).name;
-		} else if (player.tribe == settings.tribes.at(num_tribes - 1).name) {
-			nexttribe = "Random";
-			random_tribe = true;
-		} else {
-			for (uint32_t i = 0; i < num_tribes - 1; ++i) {
-				if (settings.tribes[i].name == currenttribe) {
-					nexttribe = settings.tribes.at(i + 1).name;
-					break;
-				}
-			}
-		}
+/// Set the shared in player for the given id
+void NetworkPlayerSettingsBackend::set_shared_in(uint8_t id, uint8_t shared_in) {
+	const GameSettings& settings = s->settings();
+	if (id > settings.players.size() || shared_in > settings.players.size())
+		return;
+	if (settings.players.at(id).state == PlayerSettings::stateShared) {
+		s->set_player_shared(id, shared_in);
+	}
+}
 
-		s->set_player_tribe(id, nexttribe, random_tribe);
+/// Toggle through shared in players
+void NetworkPlayerSettingsBackend::toggle_shared_in(uint8_t id) {
+	const GameSettings& settings = s->settings();
+
+	if (id >= settings.players.size() ||
+	    settings.players.at(id).state != PlayerSettings::stateShared)
+		return;
+
+	uint8_t sharedplr = settings.players.at(id).shared_in;
+	for (; sharedplr < settings.players.size(); ++sharedplr) {
+		if (settings.players.at(sharedplr).state != PlayerSettings::stateClosed &&
+		    settings.players.at(sharedplr).state != PlayerSettings::stateShared)
+			break;
+	}
+	if (sharedplr < settings.players.size()) {
+		// We have already found the next player
+		set_shared_in(id, sharedplr + 1);
+		return;
+	}
+	sharedplr = 0;
+	for (; sharedplr < settings.players.at(id).shared_in; ++sharedplr) {
+		if (settings.players.at(sharedplr).state != PlayerSettings::stateClosed &&
+		    settings.players.at(sharedplr).state != PlayerSettings::stateShared)
+			break;
+	}
+	if (sharedplr < settings.players.at(id).shared_in) {
+		// We have found the next player
+		set_shared_in(id, sharedplr + 1);
+		return;
 	} else {
-		// This button is temporarily used to select the player that uses this starting position
-		uint8_t sharedplr = settings.players.at(id).shared_in;
-		for (; sharedplr < settings.players.size(); ++sharedplr) {
-			if (settings.players.at(sharedplr).state != PlayerSettings::stateClosed &&
-			    settings.players.at(sharedplr).state != PlayerSettings::stateShared)
-				break;
-		}
-		if (sharedplr < settings.players.size()) {
-			// We have already found the next player
-			s->set_player_shared(id, sharedplr + 1);
-			return;
-		}
-		sharedplr = 0;
-		for (; sharedplr < settings.players.at(id).shared_in; ++sharedplr) {
-			if (settings.players.at(sharedplr).state != PlayerSettings::stateClosed &&
-			    settings.players.at(sharedplr).state != PlayerSettings::stateShared)
-				break;
-		}
-		if (sharedplr < settings.players.at(id).shared_in) {
-			// We have found the next player
-			s->set_player_shared(id, sharedplr + 1);
-			return;
-		} else {
-			// No fitting player found
-			return toggle_type(id);
-		}
+		// No fitting player found
+		return toggle_type(id);
 	}
 }
 
@@ -141,10 +138,10 @@ void NetworkPlayerSettingsBackend::refresh(uint8_t id) {
 	if (player.state == PlayerSettings::stateShared) {
 		// ensure that the shared_in player is able to use this starting position
 		if (player.shared_in > settings.players.size())
-			toggle_tribe(id);
+			toggle_shared_in(id);
 		if (settings.players.at(player.shared_in - 1).state == PlayerSettings::stateClosed ||
 		    settings.players.at(player.shared_in - 1).state == PlayerSettings::stateShared)
-			toggle_tribe(id);
+			toggle_shared_in(id);
 
 		if (shared_in_tribe[id] != settings.players.at(player.shared_in - 1).tribe) {
 			s->set_player_tribe(id, settings.players.at(player.shared_in - 1).tribe,

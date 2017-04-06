@@ -7,13 +7,14 @@
 # GunChleoc, 2016
 # Javier Mora <morehash@gmail.com>, 2015
 # Madkat Here, 2015-2016
+# Thadah D. Denyse <juchuf@gmail.com>, 2017
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-01-21 14:22+0000\n"
-"PO-Revision-Date: 2017-01-21 14:25+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2017-03-24 18:58+0000\n"
+"PO-Revision-Date: 2017-03-28 11:13+0000\n"
+"Last-Translator: Thadah D. Denyse <juchuf@gmail.com>\n"
 "Language-Team: Spanish (http://www.transifex.com/widelands/widelands/language/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -55,7 +56,7 @@ msgid ""
 " from a warehouse (or your headquarters) to the barracks where they will "
 "receive some basic training and become soldiers. Basic Barbarian soldiers do"
 " not use armor, they only need an ax."
-msgstr ""
+msgstr "Un soldado nuevo se crea de forma diferente a los trabajadores normales: los reclutas andarán de un almacén (o tu cuartel general) a los barracones donde recibirán entrenamiento básico y se convertirán en soldados. Los soldados básicos Bárbaros no usan armadura, solo necesitan un hacha."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:38
 msgid ""
@@ -276,7 +277,7 @@ msgid ""
 " ability levels cannot be compared: an Imperial soldier has a base attack of"
 " %1% at level 0, while a Barbarian soldier at the same level only has a base"
 " attack of %2%."
-msgstr ""
+msgstr "También deberías tener en cuenta que cada una de las tres tribus en Widelands tiene su propia forma de entrenamiento, así que los edificios y mercancías son diferentes. Los niveles de habilidad tampoco son comparables: un soldado Imperial tiene un ataque base de %1% en nivel 0, mientras que un soldado Bárbaro al mismo nivel solo tiene un ataque base de %2%."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:130
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:132
@@ -557,7 +558,7 @@ msgstr "Ya estás listo para jugar las campañas. Te enseñarán acerca de las d
 msgid "“%s”"
 msgstr "“%s”"
 
-#: ../../data/scripting/format_scenario.lua:96
+#: ../../data/scripting/format_scenario.lua:84
 msgid "New Objective"
 msgid_plural "New Objectives"
 msgstr[0] "Nuevo Objetivo"

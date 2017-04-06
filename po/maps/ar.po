@@ -1,17 +1,18 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2016 Widelands Development Team
+# Copyright (C) 2005-2017 Widelands Development Team
 # 
 # Translators:
 # GunChleoc, 2016
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2013
 # GunChleoc, 2014
+# Omar Anwar <omaraglan91@yahoo.com>, 2017
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-12-15 15:23+0000\n"
-"PO-Revision-Date: 2016-12-15 15:32+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2017-03-29 17:32+0000\n"
+"PO-Revision-Date: 2017-04-02 10:16+0000\n"
+"Last-Translator: Omar Anwar <omaraglan91@yahoo.com>\n"
 "Language-Team: Arabic (http://www.transifex.com/widelands/widelands/language/ar/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -22,47 +23,47 @@ msgstr ""
 #: ../../data/campaigns/atl01.wmf/elemental:9
 #: ../../data/campaigns/campaigns.conf:95
 msgid "From Nemesis to Genesis"
-msgstr ""
+msgstr "من العداء إلي التكوين"
 
 #: ../../data/campaigns/atl01.wmf/elemental:11
 msgid ""
 "After landing on a mysterious island close to Atlantis, the remaining "
 "Atlanteans struggle to make a new home for themselves."
-msgstr ""
+msgstr "بعد الهبوط علي جزيرة غامضة قريبه من اتلانتيس، الأطلانطسين الباقين يكافحون لإيجاد وصنع موطن لأنفسهم."
 
 #: ../../data/campaigns/bar01.wmf/elemental:8
 #: ../../data/campaigns/campaigns.conf:67
 msgid "A Place to Call Home"
-msgstr ""
+msgstr "مكان ليُطلق عليه المنزل"
 
 #: ../../data/campaigns/bar01.wmf/elemental:10
 msgid ""
 "In this scenario, the higher production buildings including mining will be "
 "introduced."
-msgstr ""
+msgstr "في هذا المشهد، مباني الإنتاج العالي بما فيها التعدين سوف تُقدم."
 
 #: ../../data/campaigns/bar02.wmf/elemental:7
 #: ../../data/campaigns/campaigns.conf:72
 msgid "This Land is Our Land"
-msgstr ""
+msgstr "هذه الأرض أرضُنا"
 
 #: ../../data/campaigns/bar02.wmf/elemental:9
 msgid ""
 "This tutorial explains the handling of military and training site buildings "
 "and will introduce fighting."
-msgstr ""
+msgstr "هذا الدرس التعليمي يشرح التحكم فى القوات الحربية ومباني التدريب وسوف يشرح القتال."
 
 #: ../../data/campaigns/campaigns.conf:27
 msgid "The Second Empire"
-msgstr ""
+msgstr "الإمبراطورية الثانية"
 
 #: ../../data/campaigns/campaigns.conf:29
 msgid "Barbarians"
-msgstr ""
+msgstr "البرابرة"
 
 #: ../../data/campaigns/campaigns.conf:31
 msgid "Easy. Introduces the Barbarians"
-msgstr ""
+msgstr "سهله. يُقدم البرابرة"
 
 #: ../../data/campaigns/campaigns.conf:32
 msgid ""
@@ -87,11 +88,11 @@ msgstr ""
 
 #: ../../data/campaigns/campaigns.conf:37
 msgid "Empire"
-msgstr ""
+msgstr "اﻹمبراطورية"
 
 #: ../../data/campaigns/campaigns.conf:39
 msgid "Easy. Introduces the Empire"
-msgstr ""
+msgstr "سهله. يُقدم الإمبراطورية"
 
 #: ../../data/campaigns/campaigns.conf:40
 msgid ""
@@ -237,7 +238,7 @@ msgstr ""
 
 #: ../../data/maps/Atoll.wmf/elemental:8
 msgid "Atoll"
-msgstr "جزيره مرجانيه"
+msgstr "جزيرة مرجانية"
 
 #: ../../data/maps/Atoll.wmf/elemental:10
 msgid "Who will be the real king of the big atoll?"
@@ -256,7 +257,7 @@ msgstr ""
 
 #: ../../data/maps/Checkmate.wmf/elemental:8
 msgid "Checkmate"
-msgstr "كِش مات"
+msgstr "كش ملك"
 
 #: ../../data/maps/Checkmate.wmf/elemental:10
 msgid ""
@@ -267,7 +268,7 @@ msgstr ""
 
 #: ../../data/maps/Comet_Island_v2.wmf/elemental:8
 msgid "Comet Island"
-msgstr "ارض الذنب"
+msgstr "أرض المذنب"
 
 #: ../../data/maps/Comet_Island_v2.wmf/elemental:9
 #: ../../data/maps/Glacier_Lake_v2.wmf/elemental:9
@@ -281,7 +282,7 @@ msgid ""
 "came from the sky and touched down in its center. Is this a sign of the "
 "Gods? You believe it is and you hope that your tribe will find the treasure "
 "of this island before other tribes will follow."
-msgstr "بضعه اميال بعيداً عن ساحل جريون عند جزيره غير مُسماه. لم يكن من اسباب تدفعك للذهاب هناك، ولكن بالبارحه سقطت كره نار من السماء وتلامست مع الجزيره تماماً فى المُنتصف، بدت وكأنها آتيه من الجحيم، تقول لنفسك بصوتاً خافت داخل عقلك \"هل هذه إشاره من الالهه؟\" وتصدق ما تمنى عقلك ان يكون، وتأمل بداخلك ان تكون انت وقبيلتك اول الواصلين لكنز هذه الجزيره، قبل ان تفعل باقى القبائل."
+msgstr "بضعه اميال بعيداً عن ساحل جريون عند جزيره غير مُسماه. لم يكن من أسباب تدفعك للذهاب هناك، ولكن بالبارحه سقطت كره نار من السماء وتلامست مع الجزيرة تماماً فى المُنتصف، بدت وكأنها آتيه من الجحيم، تقول لنفسك بصوت خافت داخل عقلك \"هل هذه إشاره من الألهه؟\" وتصدق ما يريد عقلك أن يكون، وتأمل بداخلك أن تكون أنت وقبيلتك أول الواصلين لكنز هذه الجزيرة، قبل ان تفعل باقي القبائل."
 
 #: ../../data/maps/Comet_Island_v2.wmf/elemental:11
 msgid ""
@@ -299,26 +300,26 @@ msgstr "الفوهه"
 msgid ""
 "Long after a meteor crashed into a couple of mountains, life blossoms in the"
 " crater. Two tribes are now fighting for the rich resources."
-msgstr "طويلاً بعد اصطدام نيزك فى جبلين، ظهرت موارد عند الفوهه. والان تتقاتل قبيلتين للحصول على تلك الموارد"
+msgstr "طويلاً بعد إصطدام نيزك فى جبلين، ظهرت موارد عند الفوهه. والأن تتقاتل قبيلتين للحصول علي تلك الموارد."
 
 #: ../../data/maps/Crossing_the_Horizon.wmf/elemental:8
 msgid "Crossing the Horizon"
-msgstr "اثناء عبر الافق"
+msgstr "عبور الأفق"
 
 #: ../../data/maps/Crossing_the_Horizon.wmf/elemental:10
 msgid "Man your ship and sail to the horizon."
-msgstr "إملأ سُفُنَك بالرجال الاشداء وابحر نحو الافق"
+msgstr "إملأ سُفُنَك بالرجال الأشداء وأبحر نحو الأفق"
 
 #: ../../data/maps/Desert_Tournament.wmf/elemental:8
 msgid "Desert Tournament"
-msgstr "الدوره الصحراويه"
+msgstr "البطولة الصحراوية"
 
 #: ../../data/maps/Desert_Tournament.wmf/elemental:10
 msgid ""
 "Four tribes struggle with their nearest neighbor to be the first to reach "
 "the mountain of gold that promises riches beyond belief. But can the two "
 "remaining ones share the resources wisely?"
-msgstr "ارب قبائل تتصارع مع اقرب جيرانها لتكون اول من يصل الى جبل الذهب الذى يعدهم بالغنا وراء اﻹيمان. ولكن هل ستتمكن القبيلتين المتبقيتين من تشارك الموارد بحكمه؟"
+msgstr "اربع قبائل تتصارع مع أقرب جيرانها لتكون أول من يصل إلي جبل الذهب الذى يعدهم بالغنا وراء اﻹيمان. ولكن هل ستتمكن القبيلتين المتبقيتين من تشارك الموارد بِحكمَه؟"
 
 #: ../../data/maps/Dolomites_v2.wmf/elemental:8
 msgid "Dolomites"
@@ -370,7 +371,7 @@ msgstr ""
 
 #: ../../data/maps/Finnish_Lakes.wmf/elemental:8
 msgid "Finnish Lakes"
-msgstr "بحيرات فنلنديه"
+msgstr "بحيرات فنلندية"
 
 #: ../../data/maps/Finnish_Lakes.wmf/elemental:10
 msgid ""
@@ -386,7 +387,7 @@ msgstr ""
 
 #: ../../data/maps/Firegames.wmf/elemental:8
 msgid "Firegames"
-msgstr "العاب ناريه"
+msgstr "العاب نارية"
 
 #: ../../data/maps/Firegames.wmf/elemental:10
 msgid ""
@@ -394,11 +395,11 @@ msgid ""
 "your tribe woke up on this island among fire and lava? Until now it seems as"
 " if you are alone, but no-one knows what might happen if you met an opposing"
 " tribe?"
-msgstr "أهذا إختبار من الالهه ام خطه شريره من شخص اخر، انت وقبيلتك تستيقظون على هذه الجزيره بين النيران ومقذوفات البراكين؟ حتى الان يبدو انك وحدك، ولكن لا احد يعلم، ما قد يحدث إذا واجهت قبيله خصمه؟"
+msgstr "أهذا إختبار من الألهه أم خطة شريرة من شخص أخر، أنت وقبيلتك تستيقظون علي هذه الجزيرة بين النيران ومقذوفات البراكين؟ حتى الأن يبدو أنك وحدك، ولكن لا أحد يعلم، ما قد يحدث إذا واجهت قبيلة خصمه؟"
 
 #: ../../data/maps/Four_Castles.wmf/elemental:8
 msgid "Four Castles"
-msgstr "4 قلاع"
+msgstr "أربع قلاع"
 
 #: ../../data/maps/Four_Castles.wmf/elemental:10
 msgid ""
@@ -408,7 +409,7 @@ msgstr ""
 
 #: ../../data/maps/Four_Mountains.wmf/elemental:8
 msgid "Four Mountains"
-msgstr "4 جبال"
+msgstr "أربع جبال"
 
 #: ../../data/maps/Four_Mountains.wmf/elemental:10
 msgid ""
@@ -434,7 +435,7 @@ msgstr ""
 
 #: ../../data/maps/Glacier_Lake_v2.wmf/elemental:8
 msgid "Glacier Lake"
-msgstr "بحيره جليديه"
+msgstr "بحيرة جليدية"
 
 #: ../../data/maps/Glacier_Lake_v2.wmf/elemental:10
 msgid ""
@@ -447,7 +448,7 @@ msgstr ""
 
 #: ../../data/maps/Golden_Peninsula.wmf/elemental:8
 msgid "Golden Peninsula"
-msgstr "شبه الجزيره الذهبيه"
+msgstr "شبه الجزيرة الذهبية"
 
 #: ../../data/maps/Golden_Peninsula.wmf/elemental:10
 msgid "Two empires race for the treasures of a legendary peninsula…"
@@ -486,7 +487,7 @@ msgid ""
 "For centuries, you’ve lived peacefully side by side with the other tribe on "
 "the neighboring island. This peace seems to come to an end now – your "
 "neighbor has begun to expand."
-msgstr "عشت اربع قرون بسلام مع قبيله الجزيره المجاوره. يبدو ان حقبه السلام إنتهت - حيث يحاول جارك التوسع"
+msgstr "لقرون، أنت قد عِشت بسلام مع قبيلة الجزيرة المجاورة. يبدو أن حقبة السلام إنتهت - حيث بدأ جارك التوسع."
 
 #: ../../data/maps/Kings_and_Queens_v2.wmf/elemental:8
 msgid "Kings and Queens"
@@ -512,7 +513,7 @@ msgstr ""
 
 #: ../../data/maps/Last_Bastion_v2.wmf/elemental:8
 msgid "Last Bastion"
-msgstr "الحصن الاخير"
+msgstr "الحصن الأخير"
 
 #: ../../data/maps/Last_Bastion_v2.wmf/elemental:9
 msgid "Another Barbarian – edited by king_of_nowhere"

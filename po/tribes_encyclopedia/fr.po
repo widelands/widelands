@@ -14,8 +14,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-03-05 10:46+0000\n"
-"PO-Revision-Date: 2017-03-09 15:43+0000\n"
+"POT-Creation-Date: 2017-03-17 10:45+0000\n"
+"PO-Revision-Date: 2017-03-23 18:26+0000\n"
 "Last-Translator: Renaud Bouchard\n"
 "Language-Team: French (http://www.transifex.com/widelands/widelands/language/fr/)\n"
 "MIME-Version: 1.0\n"
@@ -2039,37 +2039,37 @@ msgstr "Affiche la console de déboguage (seulement dans les compilations de dé
 
 #: ../../data/tribes/scripting/help/controls.lua:76
 msgid "Table Control"
-msgstr ""
+msgstr "Table de contrôle"
 
 #: ../../data/tribes/scripting/help/controls.lua:77
 msgid ""
 "In tables that allow the selection of multiple entries, the following key "
 "combinations are available:"
-msgstr ""
+msgstr "Dans les tables qui permettent la sélection d' entrées multiples, les combinaisons de touches suivantes sont disponibles:"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
 #: ../../data/tribes/scripting/help/controls.lua:80
 msgctxt "hotkey"
 msgid "Ctrl + Click"
-msgstr ""
+msgstr "Ctrl + Clic"
 
 #: ../../data/tribes/scripting/help/controls.lua:80
 msgctxt "table_control"
 msgid "Select multiple entries"
-msgstr ""
+msgstr "Sélection d' entrées multiples"
 
 #: ../../data/tribes/scripting/help/controls.lua:82
 msgctxt "table_control"
 msgid "Select a range of entries"
-msgstr ""
+msgstr "Sélectionnez une liste d' entrées"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
 #: ../../data/tribes/scripting/help/controls.lua:82
 msgctxt "hotkey"
 msgid "Shift + Click"
-msgstr ""
+msgstr "Shift + Clic"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
@@ -2081,11 +2081,11 @@ msgstr "Ctrl + A"
 #: ../../data/tribes/scripting/help/controls.lua:84
 msgctxt "table_control"
 msgid "Select all entries"
-msgstr ""
+msgstr "Sélectionnez toutes les entrées"
 
 #: ../../data/tribes/scripting/help/controls.lua:86
 msgid "Message Window"
-msgstr ""
+msgstr "Fenêtre des messages"
 
 #: ../../data/tribes/scripting/help/controls.lua:87
 msgid ""
