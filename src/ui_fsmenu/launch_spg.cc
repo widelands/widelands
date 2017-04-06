@@ -54,6 +54,7 @@ FullscreenMenuLaunchSPG::FullscreenMenuLaunchSPG(GameSettingsProvider* const set
                  buth_,
                  g_gr->images().get("images/ui_basic/but1.png"),
                  _("Select map")),
+
      // Text labels
      mapname_(this,
               get_w() * 7 / 10 + butw_ / 2,

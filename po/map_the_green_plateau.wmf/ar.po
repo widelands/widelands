@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-02-14 20:31+0000\n"
-"PO-Revision-Date: 2017-02-17 12:08+0000\n"
+"POT-Creation-Date: 2017-03-24 18:58+0000\n"
+"PO-Revision-Date: 2017-03-27 13:47+0000\n"
 "Last-Translator: Omar Anwar <omaraglan91@yahoo.com>\n"
 "Language-Team: Arabic (http://www.transifex.com/widelands/widelands/language/ar/)\n"
 "MIME-Version: 1.0\n"
@@ -32,40 +32,40 @@ msgid ""
 "the other warlords has detected us so far, so we should keep quiet and build"
 " up our infrastructure. Soon we will be strong enough to raid their "
 "positions."
-msgstr "أخيراً! لقد خطونا أول خطواتنا نحو المجد!الليلة الماضية، لقد هبطنا على الجزيرة المحظورة وهزمنا بعض الحماة الذين كانوا يحمون الجزء الشمالى الغربى من الجزيرة.انا متاكد تمام الثقة ان لا احد من رؤساء الحروب قد أكتشف وجودنا حتى الان، اذا يجب علينا أن نبقى هادئين ونبنى مباني الوحدات. قريباً سوف نكون أقوياء كفاية لغزو مواقعهم."
+msgstr "أخيراً! لقد خطونا أول خطواتنا نحو المجد!الليلة الماضية، لقد هبطنا على الجزيرة المحظورة وهزمنا بعض الحُماة الذين كَانوا يَحمُون الجُزء الشمالي الغربي من الجزيرة.أنا متأكد تمام الثقة أن لا أحد من رؤساء الحروب قد إكتشف وُجُودَنَا حتي الأن، إذاً يَجب علينا أن نبقى هادئين ونَبِنِي مباني القوات. قريباً سوف نكون أقوياء كفاية لغزو مواقعهم."
 
 #: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:26
 #: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:28
 msgid "Capture the Ancient Castle"
-msgstr "احتلال القلعة القديمة"
+msgstr "احتل القلعة القديمة"
 
 #: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:29
 msgid "Defeat Lanissa and capture the ancient castle."
-msgstr "اهزم  \"لانيسا\" و احتل القلعة القديمة"
+msgstr "اهزم  \"لانيسا\" و أحتل القلعة القديمة"
 
 #: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:35
 #: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:37
 msgid "Defeat Erwyn"
-msgstr "أهزم \"أروين\""
+msgstr "إهزم \"أروين\""
 
 #: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:38
 msgid ""
 "Defeat Erwyn. He commands the strongest opposing military force left on this"
 " island."
-msgstr "أهزم \"أروين\". هو يتحكم بأقوى قوة عسكرية باقية على الجزيرة."
+msgstr "إهزم \"أروين\". هُو يَتحكم بأقوى قوة عسكرية باقية على الجزيرة."
 
 #: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:43
 #: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:45
 msgid "Defeat Jomo"
-msgstr "أهزم \"جومو\""
+msgstr "إهزم \"جومو\""
 
 #: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:46
 msgid "Defeat Jomo. He is taking care of the soldiers’ food supply."
-msgstr "أهزم \"جومو\". هو يتكفل بمخزون طعام الجنود."
+msgstr "إهزم \"جومو\". هُو يتكفل بمخزون طعام الجنود."
 
 #: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:64
 msgid "First Briefing"
-msgstr "التوجية الاول"
+msgstr "التوجيه الأول"
 
 #: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:74
 #: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:85
@@ -82,7 +82,7 @@ msgid ""
 "of the old plateau. The castle must be quite old and seems to have been "
 "built in a foreign style. It’s quite obvious that this is not barbarian "
 "craft."
-msgstr "يا ألهى! أحد كشافتنا قد اكتشف قصر عظيم فى منتصف الهضبة القديمة. القصر لابد انه قديم ويبدو أنه قد بنى على شكل اجنبى. إنه لمن الواضح جداً أنه ليس صناعة بربرية."
+msgstr "يا ألهى! أحد كشافتنا قد إكتشف قصر عظيم فى منتصف الهضبة القديمة. القصر لابد أنه قديم ويبدو أنه قَد بُني علي شكل أجنبى. إنه لمن الواضح جداً أنه ليس صناعة بربرية."
 
 #: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:80
 msgid ""
@@ -90,7 +90,7 @@ msgid ""
 "not discovered our movements yet. Perhaps we have a chance of conquering "
 "that mighty building without a bigger fight! However, it is essential that "
 "we capture it. It will be the key to our reign over this island!"
-msgstr "لنئمل ان \"لانيسا\" - رئيس الحرب يهيمن على القصر - لم يكتشف تحركاتنا بعد. ربما لدينا الفرصة للسيطرة على هذا المبنى العظيم من دون قتال كبير! على اية حال، انه لمن الاساسى ان نسيطر عليه. هو سوف يكون المفتاح لسيطرتنا على باقى الجزيرة!"
+msgstr "لنئمل ان \"لانيسا\" - رئيس الحرب الذى يهيمن علي القصر - لم يكتشف تحركاتنا بعد. ربما لدينا الفرصة للسيطرة علي هذا المبني العظيم من دون قتال كبير! على أية حال، إنه لمن الأساسي ان نسيطر عليه. هو سوف يكون المفتاح لسيطرتنا علي باقى الجزيرة!"
 
 #: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:89
 msgid "Ancient Castle Captured"
@@ -100,7 +100,7 @@ msgstr "القصر القديم أسر"
 msgid ""
 "Wonderful! Our troops have finally defeated Lanissa and her soldiers. The "
 "ancient castle is ours!"
-msgstr "رائع! جنودنا اخيراً هزمت \"لانيسا\" وجنودها. القصر القديم اصبح لنا!"
+msgstr "رائع! جنودنا اخيراً هزمت \"لانيسا\" وجنودها. القصر القديم أصبح لنا!"
 
 #: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:91
 msgid ""
@@ -158,4 +158,4 @@ msgstr "أخيرا! الجزيرة ملكنا بالكامل. الان يجب ع
 msgid ""
 "Congratulations! You have mastered this scenario. You may play on if you "
 "like!"
-msgstr "تهانينا! لقد أتقنت هذا السيناريو. أنت ربما تلعب أذا اردت!"
+msgstr "تهانينا! لقد أتقنت هذا السيناريو. أنت ربما تلعب إذا اردت!"
