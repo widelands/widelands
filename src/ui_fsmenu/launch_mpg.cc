@@ -226,7 +226,6 @@ void FullscreenMenuLaunchMPG::clicked_back() {
 }
 
 void FullscreenMenuLaunchMPG::win_condition_selected() {
-	// last_win_condition_ = win_condition_dropdown_.get_selected();
 	if (settings_->can_change_map()) {
 		settings_->set_win_condition_script(win_condition_dropdown_.get_selected());
 		last_win_condition_ = win_condition_dropdown_.get_selected();
