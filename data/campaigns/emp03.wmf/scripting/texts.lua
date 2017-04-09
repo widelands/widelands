@@ -584,4 +584,12 @@ diary_page_6 = {
       -- TRANSLATORS: Lutius - Diary
       _([[Finally we found a piece of our shrine. Praise Neptune.]])),
    posy=1,
-}
+   }
+
+
+show_artifacts = {
+      title = _"Models of Neptunes shrine",
+      body = rt("image=map:artifacts_models.png", ""),
+      h = 220,
+      w = 135
+   }

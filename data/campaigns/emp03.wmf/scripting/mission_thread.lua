@@ -99,6 +99,8 @@ function artifacts()  -- check for control of all artifacts
       sleep(4000)
    end
    campaign_message_box(saledus_8)
+   campaign_message_box(show_artifacts)
+
    o12 = add_campaign_objective(obj_find_artifacts)
 
    local artifacts_owner = {}
