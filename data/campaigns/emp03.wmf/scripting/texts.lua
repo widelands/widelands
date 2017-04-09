@@ -15,7 +15,7 @@ function saledus3(title, text)
    return speech("map:Saledus3.png", "8F9131", title, text)
 end
 function saledus4(title, text)
-   return speech("map:Saledus.png", "8F9131", title, text)
+   return speech("map:Saledus2.png", "8F9131", title, text)
 end
 function amalea1(title, text)
    return speech("map:Amalea.png", "AF7511", title, text)
