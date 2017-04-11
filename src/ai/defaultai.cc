@@ -3686,26 +3686,17 @@ bool DefaultAI::check_productionsites(uint32_t gametime) {
 
 		int16_t tmp_score = 0;
 		int16_t inputs[f_neuron_bit_size] = {0};
-		tmp_score += (soldier_status_ == SoldiersStatus::kBadShortage) * 6;
-		tmp_score += (soldier_status_ == SoldiersStatus::kShortage) * 5;
+		tmp_score += (soldier_status_ == SoldiersStatus::kBadShortage) * 8;
+		tmp_score += (soldier_status_ == SoldiersStatus::kShortage) * 4;
 		tmp_score += (soldier_status_ == SoldiersStatus::kEnough) * 2;		
 		tmp_score += (soldier_status_ == SoldiersStatus::kFull) * 1;
-		inputs[0] = (persistent_data->last_soldier_trained < gametime && persistent_data->last_soldier_trained > gametime - 5 * 60 * 1000) * 1;
-		inputs[1] = (persistent_data->last_soldier_trained < gametime && persistent_data->last_soldier_trained > gametime - 15 * 60 * 1000) * 1;
 		inputs[2] = (expansion_type.get_expansion_type() == ExpansionMode::kEconomy) * -1;
 		inputs[3] = (expansion_type.get_expansion_type() == ExpansionMode::kSpace) * 1;
-		inputs[4] = player_statistics.strong_enough(player_number()) * -1;
-		inputs[5] = player_statistics.strong_enough(player_number()) * -1;
-		inputs[6] = ((mines_per_type[iron_ore_id].in_construction + mines_per_type[iron_ore_id].finished) > 0) * 1;
-		inputs[7] = ((mines_per_type[iron_ore_id].in_construction + mines_per_type[iron_ore_id].finished) > 0) * -1;
-		inputs[8] = 1;
-		inputs[9] = 1;
-		inputs[10] = 2;
-		inputs[11] = -1;
-		inputs[12] = -1;
-		inputs[13] = -2;
-		inputs[14] = -2;
-		inputs[15] = -3;
+		inputs[4] = -1;
+		inputs[5] = -2;
+		inputs[6] = -3;		
+		inputs[14] = (player_statistics.get_player_power(pn) < player_statistics.get_old_player_power(pn)) * 1;
+		inputs[15] = (player_statistics.get_player_power(pn) < player_statistics.get_old60_player_power(pn)) * 1;
 		inputs[16] = (player_statistics.get_player_power(pn) < player_statistics.get_old_player_power(pn)) * 1;
 		inputs[17] = (player_statistics.get_player_power(pn) < player_statistics.get_old60_player_power(pn)) * 1;
 		inputs[18] = (expansion_type.get_expansion_type() == ExpansionMode::kSpace) * -1;
@@ -3716,8 +3707,6 @@ bool DefaultAI::check_productionsites(uint32_t gametime) {
 				tmp_score += inputs[i];
 			}
 		}
-
-		tmp_score += 1;//NOCOM
 
 		printf ("%2d: barracks here, %s, score: %d\n",
 			player_number(),
@@ -5114,7 +5103,8 @@ void DefaultAI::gain_building(Building& b, const bool found_on_load) {
 			} else {
 				militarysites.back().built_time = gametime;
 			}
-			militarysites.back().enemies_nearby = true;
+			//militarysites.back().enemies_nearby = true;
+			militarysites.back().last_change = 0; // or gametime?
 			msites_per_size[bo.desc->get_size()].finished += 1;
 
 		} else if (bo.type == BuildingObserver::Type::kTrainingsite) {

@@ -650,16 +650,23 @@ bool DefaultAI::check_militarysites(uint32_t gametime) {
 		return false;
 	}
 
-
 	// Check next militarysite
 	bool changed = false;
 	Map& map = game().map();
 	MilitarySite* ms = militarysites.front().site;
+
+	//Dont do anything if last change took place lately
+	if (militarysites.front().last_change + 2 * 60 * 1000 > gametime) {
+		militarysites.push_back(militarysites.front());
+		militarysites.pop_front();
+		return false;
+	}
+
 	// MilitarySiteObserver& mso = militarysites.front();
 	// uint32_t const vision = ms->descr().vision_range();
 	FCoords f = map.get_fcoords(ms->get_position());
 	// look if there are any enemies building
-	FindNodeEnemiesBuilding find_enemy(player_, game());
+	//FindNodeEnemiesBuilding find_enemy(player_, game());
 
 	int16_t usefullness_score = 0;
 	BuildableField bf(f);
@@ -733,6 +740,9 @@ bool DefaultAI::check_militarysites(uint32_t gametime) {
 	// reorder:;
 	militarysites.push_back(militarysites.front());
 	militarysites.pop_front();
+	if (changed) {
+		militarysites.front().last_change = gametime;
+	}
 	return changed;
 }
 
