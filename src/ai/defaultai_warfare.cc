@@ -270,7 +270,7 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 					site->second.no_attack_counter += 1;
 				} else {					 
 					 
-					int16_t inputs[f_neuron_bit_size] = {0};
+					int16_t inputs[2 * f_neuron_bit_size] = {0};
 					inputs[0] = (site->second.attack_soldiers_strength - site->second.defenders_strength) *
 						std::abs(management_data.get_military_number_at(114)) / 30;	 
 					inputs[1] = (site->second.attack_soldiers_strength - site->second.defenders_strength) *
@@ -306,12 +306,17 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 					inputs[29] = general_score;
 					inputs[30] = ((mines_per_type[iron_ore_id].in_construction + mines_per_type[iron_ore_id].finished) > 0) ? 1 : -1;
 					inputs[31] = (player_statistics.get_player_power(pn) > player_statistics.get_old60_player_power(pn) + 5) ? 2 : -2;
-	
+					inputs[32] = soldier_trained_log.count(gametime);
+					inputs[33] = soldier_trained_log.count(gametime) / 2;
+					inputs[34] = +1;
+					inputs[35] = -1;
 					site->second.score = 0;
 					for (uint8_t j = 0; j < f_neuron_bit_size; j +=1) {
 						if (management_data.f_neuron_pool[47].get_position(j)){
 							site->second.score += inputs[j];
-							
+						}
+						if (management_data.f_neuron_pool[0].get_position(j)){
+							site->second.score += inputs[j + f_neuron_bit_size];
 						}
 					}
 				}				
@@ -646,24 +651,6 @@ bool DefaultAI::check_militarysites(uint32_t gametime) {
 	}
 
 
-	//if (gametime % 100 == 0) {
-		//for (int i = 0; i < f_neuron_bit_size; i = i + 1) {
-			//if ( !management_data.f_neuron_pool[5 3].get_position(i) &&
-			 //!management_data.f_neuron_pool[5 4].get_position(i) &&
-			 //!management_data.f_neuron_pool[5 5].get_position(i) &&
-			 //!management_data.f_neuron_pool[5 6].get_position(i)) {
-				 //printf (" neuron bit on position %d not used\n", i);
-			//}
-			//if ( !management_data.f_neuron_pool[7].get_position(i) &&
-			 //!management_data.f_neuron_pool[9 ].get_position(i) &&
-			 //!management_data.f_neuron_pool[1 2].get_position(i) &&
-			 //!management_data.f_neuron_pool[7 4].get_position(i)) {
-				 //printf (" neuron bit on position %d not used\n", i+32);
-			//}		
-		//}
-	//}
-
-
 	// Check next militarysite
 	bool changed = false;
 	Map& map = game().map();
@@ -678,13 +665,15 @@ bool DefaultAI::check_militarysites(uint32_t gametime) {
 	BuildableField bf(f);
 	update_buildable_field(bf);
 	usefullness_score += bf.military_score_ / 10;
-	if (military_last_dismantle_ == 0 || military_last_dismantle_ + 2 * 60 * 1000 > gametime) {
-		usefullness_score += std::abs(management_data.get_military_number_at(99)) / 2;
-	}
+	//if (military_last_dismantle_ == 0 || military_last_dismantle_ + 2 * 60 * 1000 > gametime) {
+		//usefullness_score += std::abs(management_data.get_military_number_at(99)) / 2;
+	//}
 	
-	if (militarysites.front().built_time + 2 * 60 * 1000 > gametime) {
-		usefullness_score += std::abs(management_data.get_military_number_at(99)) / 2;
-	}
+	//if (militarysites.front().built_time + 2 * 60 * 1000 > gametime) {
+		//usefullness_score += std::abs(management_data.get_military_number_at(99)) / 2;
+	//}
+	
+	const bool can_be_dismantled = ms->present_soldiers().size() > 0 || militarysites.front().built_time + 10 * 60 * 1000 < gametime;
 	
 	usefullness_score -= static_cast<int16_t>(soldier_status_) * std::abs(management_data.get_military_number_at(84));
 	usefullness_score += ((bf.enemy_accessible_) ? (std::abs(management_data.get_military_number_at(91))) / 2 : 0);
@@ -692,7 +681,7 @@ bool DefaultAI::check_militarysites(uint32_t gametime) {
 	// Also size is consideration, bigger buildings are to be preffered
 	usefullness_score += (ms->get_size() - 2) * std::abs(management_data.get_military_number_at(77) / 2);
 	
-	const int32_t dism_treshold = 20 - management_data.get_military_number_at(89)  / 2;
+	const int32_t dism_treshold = 25 - management_data.get_military_number_at(89)  / 2;
 	const int32_t pref_treshold_upper = dism_treshold + std::abs(management_data.get_military_number_at(90));
 	const int32_t pref_treshold_lower = dism_treshold + std::abs(management_data.get_military_number_at(90) / 2);
 	//printf ("current score %3d, dism: tresh %3d, pref tresholds: %3d   %3d %s\n",
@@ -702,15 +691,23 @@ bool DefaultAI::check_militarysites(uint32_t gametime) {
 	Quantity const current_target = ms->soldier_capacity();
 
 	if (usefullness_score < dism_treshold) {
-		changed = true;
-		if (ms->get_playercaps() & Widelands::Building::PCap_Dismantle) {
-			flags_to_be_removed.push_back(ms->base_flag().get_position());
-			game().send_player_dismantle(*ms);
-			military_last_dismantle_ = game().get_gametime();
-		} else {
-			game().send_player_bulldoze(*ms);
-			military_last_dismantle_ = game().get_gametime();
-		}		
+		if (can_be_dismantled) { // not too soon
+			
+			printf ("Dismanling military site with military loneliness: %d\n", bf.military_loneliness);
+			changed = true;
+			dismantled_msites_count += 1;
+			if (ms->get_playercaps() & Widelands::Building::PCap_Dismantle) {
+				flags_to_be_removed.push_back(ms->base_flag().get_position());
+				game().send_player_dismantle(*ms);
+				military_last_dismantle_ = game().get_gametime();
+			} else {
+				game().send_player_bulldoze(*ms);
+				military_last_dismantle_ = game().get_gametime();
+			}	
+		} 
+		//else {
+			//printf ("Not dismantling the militarysite yet\n");
+		//}	
 	} else if (usefullness_score < pref_treshold_lower) {
 		// this site is not that important but is to be preserved
 		if (current_target > 1){
@@ -742,7 +739,7 @@ bool DefaultAI::check_militarysites(uint32_t gametime) {
 uint32_t DefaultAI::barracks_count() {
 	uint32_t count = 0;
 	for (auto ps : productionsites) {
-		if (ps.bo->is_barracks) {
+		if (ps.bo->is(BuildingAttribute::kBarracks)) {
 			count += ps.bo->total_count();
 		}
 	}
@@ -950,7 +947,10 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 		inputs[100] = (msites_in_constr() >  msites_built() / 3) ? -2 : 0;
 		inputs[101] = (msites_in_constr() >  msites_built() / 4) ? -2 : 0;
 	}
-
+	inputs[102] = (expansion_type.get_expansion_type() == ExpansionMode::kEconomy) ? -4 : 0;
+	inputs[104] = (expansion_type.get_expansion_type() == ExpansionMode::kEconomy || expansion_type.get_expansion_type() == ExpansionMode::kBoth) ? -3 : 0;
+	inputs[105] = (expansion_type.get_expansion_type() == ExpansionMode::kEconomy) ? -1 : 0;
+	
 	for (int i = 0; i < 4 * f_neuron_bit_size; i = i + 1) {
 		if (inputs[i] < -35 || inputs[i] > 6) {
 			printf ("Warning check_building_necessity score on position %2d too high %2d\n", i, inputs[i]);
@@ -990,7 +990,10 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 // (AI will then wait till training site is stocked)
 void DefaultAI::soldier_trained(const TrainingSite& site) {
 
-	persistent_data->last_soldier_trained = game().get_gametime();
+	const uint32_t gametime = game().get_gametime();
+	persistent_data->last_soldier_trained = gametime;
+	soldier_trained_log.push(gametime);
+	printf ("Soldier trained log size: %d\n", soldier_trained_log.count(gametime));
 
 	for (TrainingSiteObserver& trainingsite_obs : trainingsites) {
 		if (trainingsite_obs.site == &site) {

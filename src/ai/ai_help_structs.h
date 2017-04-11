@@ -22,6 +22,7 @@
 
 #include <list>
 #include <unordered_set>
+#include <queue>
 
 #include "ai/ai_hints.h"
 #include "economy/flag.h"
@@ -53,6 +54,9 @@ enum class BuildingNecessity : uint8_t {
 	kNeededPending,
 	kForbidden
 };
+
+enum class BuildingAttribute : uint8_t {kBakery, kRanger, kBuildable, kLumberjack, kPort, kNeedsRocks, kWell, kNeedsCoast,
+	 kHunter, kFisher, kShipyard, kBarracks, kSpaceConsumer};
 
 enum class ExpansionMode : uint8_t { kResources = 0, kSpace = 1, kEconomy = 2, kBoth = 3};
 //enum class ScoreBlock : uint8_t {kResource = 0, kLand = 1, kEnemy = 2, kDismantle = 3};
@@ -244,6 +248,19 @@ struct NearFlag {
 	int32_t distance;
 };
 
+struct ProductTimeQueue {
+	ProductTimeQueue();
+	
+	void push(uint32_t);
+	uint32_t count(uint32_t);
+	void strip_old(uint32_t);
+	
+	uint32_t duration_ = 20 * 60 * 1000;
+	std::queue<uint32_t> queue;
+};
+	
+	
+
 struct WalkableSpot {
 	Coords coords;
 	bool has_flag;
@@ -369,22 +386,26 @@ struct BuildingObserver {
 
 	Type type;
 
-	bool plants_trees;
+	//bool plants_trees;
 	bool recruitment;  // is "producing" workers?
 	Widelands::BuildingNecessity new_building;
 	uint32_t new_building_overdue;
 	int32_t primary_priority;
-	bool is_buildable;
-	bool need_trees;   // lumberjack = true
-	bool need_rocks;   // quarry = true
-	bool mines_water;  // wells
-	bool need_water;   // fisher, fish_breeder = true
-	bool is_hunter;    // need to identify hunters
-	bool is_fisher;    // need to identify fishers
-	bool is_port;
-	bool is_shipyard;
-	bool is_barracks;
-	bool space_consumer;       // farm, vineyard... = true
+	//bool is_buildable;
+	//bool need_trees;   // lumberjack = true
+	//bool need_rocks;   // quarry = true
+	//bool mines_water;  // wells
+	//bool need_water;   // fisher, fish_breeder = true
+	//bool is_hunter;    // need to identify hunters
+	//bool is_fisher;    // need to identify fishers
+	//bool is_port;
+	//bool is_shipyard;
+	//bool is_barracks;
+	std::set<BuildingAttribute> is_what;
+	//this is a "shortcut" to above
+	bool is(BuildingAttribute) const;
+	void set_is(BuildingAttribute);
+	//bool space_consumer;       // farm, vineyard... = true
 	bool expansion_type;       // military building used that can be used to control area
 	bool fighting_type;        // military building built near enemies
 	bool mountain_conqueror;   // military building built near mountains
@@ -400,6 +421,7 @@ struct BuildingObserver {
 
 	std::vector<Widelands::DescriptionIndex> inputs;
 	std::vector<Widelands::DescriptionIndex> outputs;
+	std::vector<Widelands::DescriptionIndex> positions;
 	std::vector<Widelands::DescriptionIndex> critical_building_material;
 
 	bool produces_building_material;
@@ -595,7 +617,7 @@ struct ManagementData {
 	Widelands::Player::AiPersistentState* pd;
 
 	void mutate(uint32_t, PlayerNumber = 0);
-	void review(uint32_t, PlayerNumber, int32_t, uint32_t, uint32_t, uint16_t, uint32_t, int16_t, uint8_t);
+	void review(uint32_t, PlayerNumber, uint32_t, uint32_t, uint16_t, uint32_t, int16_t, uint8_t, uint8_t, uint16_t);
 	void dump_data();
 	void initialize(uint8_t, bool reinitializing = false);
 	uint16_t new_neuron_id() {

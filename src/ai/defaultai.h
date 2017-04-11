@@ -95,6 +95,8 @@ struct DefaultAI : ComputerPlayer {
 	};
 
 	enum class SoldiersStatus : uint8_t { kFull = 0, kEnough = 1, kShortage = 3, kBadShortage = 6 }; //NOCOM needed?
+	
+	enum class WareWorker : uint8_t { kWare, kWorker};
 
 	/// Implementation for Strong
 	struct NormalImpl : public ComputerPlayer::Implementation {
@@ -200,11 +202,11 @@ private:
 	void print_stats(uint32_t);
 
 	uint32_t get_stocklevel_by_hint(size_t);
-	uint32_t get_stocklevel(Widelands::BuildingObserver&, uint32_t);
-	uint32_t get_warehoused_stock(Widelands::DescriptionIndex wt);
-	uint32_t get_stocklevel(Widelands::DescriptionIndex);  // count all direct outputs_
-	uint32_t calculate_stocklevel(Widelands::BuildingObserver&);
-	uint32_t calculate_stocklevel(Widelands::DescriptionIndex);  // count all direct outputs_
+	uint32_t get_stocklevel(Widelands::BuildingObserver&, uint32_t, WareWorker  = WareWorker::kWare);
+	//uint32_t get_warehoused_stock(Widelands::DescriptionIndex wt);
+	//uint32_t get_stocklevel(Widelands::DescriptionIndex, WareWorker);  // count stock of inputs
+	uint32_t calculate_stocklevel(Widelands::BuildingObserver&, WareWorker  = WareWorker::kWare);
+	uint32_t calculate_stocklevel(Widelands::DescriptionIndex, WareWorker = WareWorker::kWare);  // count all direct outputs_
 
 	void review_wares_targets(uint32_t);
 
@@ -265,6 +267,8 @@ private:
 	SoldiersStatus soldier_status_;
 	uint32_t military_status_last_updated;
 	uint16_t attackers_count_;
+	uint16_t dismantled_msites_count;
+	Widelands::ProductTimeQueue soldier_trained_log;
 
 	// used by AI scheduler
 	uint32_t sched_stat_[20] = {0};
@@ -320,6 +324,7 @@ private:
 	uint32_t time_of_last_construction_;
 	uint32_t next_mine_construction_due_;
 	uint16_t fishers_count_;
+	uint16_t bakeries_count_;	
 
 	// for training sites per type
 	int16_t ts_finished_count_;
