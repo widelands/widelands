@@ -4,14 +4,16 @@
 # Translators:
 # GunChleoc, 2016
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2013
+# GunChleoc, 2014,2016
 # GunChleoc, 2014
 # Omar Anwar <omaraglan91@yahoo.com>, 2017
+# عمر أنور <omar.aglan91@yahoo.com>, 2017
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-03-29 17:32+0000\n"
-"PO-Revision-Date: 2017-04-02 10:16+0000\n"
+"POT-Creation-Date: 2017-04-06 19:07+0000\n"
+"PO-Revision-Date: 2017-04-10 12:33+0000\n"
 "Last-Translator: Omar Anwar <omaraglan91@yahoo.com>\n"
 "Language-Team: Arabic (http://www.transifex.com/widelands/widelands/language/ar/)\n"
 "MIME-Version: 1.0\n"
@@ -45,7 +47,7 @@ msgstr "في هذا المشهد، مباني الإنتاج العالي بما
 #: ../../data/campaigns/bar02.wmf/elemental:7
 #: ../../data/campaigns/campaigns.conf:72
 msgid "This Land is Our Land"
-msgstr "هذه الأرض أرضُنا"
+msgstr "هذه الأرض هي أرضنا"
 
 #: ../../data/campaigns/bar02.wmf/elemental:9
 msgid ""
@@ -63,7 +65,7 @@ msgstr "البرابرة"
 
 #: ../../data/campaigns/campaigns.conf:31
 msgid "Easy. Introduces the Barbarians"
-msgstr "سهله. يُقدم البرابرة"
+msgstr "سهل. يُقدم البرابرة"
 
 #: ../../data/campaigns/campaigns.conf:32
 msgid ""
@@ -84,7 +86,7 @@ msgstr ""
 
 #: ../../data/campaigns/campaigns.conf:35
 msgid "The Months of Exile"
-msgstr ""
+msgstr "أشهر المنفى"
 
 #: ../../data/campaigns/campaigns.conf:37
 msgid "Empire"
@@ -92,7 +94,7 @@ msgstr "اﻹمبراطورية"
 
 #: ../../data/campaigns/campaigns.conf:39
 msgid "Easy. Introduces the Empire"
-msgstr "سهله. يُقدم الإمبراطورية"
+msgstr "سهل. يُقدم الإمبراطورية"
 
 #: ../../data/campaigns/campaigns.conf:40
 msgid ""
@@ -110,15 +112,15 @@ msgstr ""
 
 #: ../../data/campaigns/campaigns.conf:43
 msgid "The Run for the Fire"
-msgstr ""
+msgstr "جري النار"
 
 #: ../../data/campaigns/campaigns.conf:45
 msgid "Atlanteans"
-msgstr ""
+msgstr "الاطلانتيين"
 
 #: ../../data/campaigns/campaigns.conf:47
 msgid "Challenging. Introduces the Atlanteans"
-msgstr ""
+msgstr "تحدي. يُقدم الاطلانتيين"
 
 #: ../../data/campaigns/campaigns.conf:48
 msgid ""
@@ -132,26 +134,26 @@ msgstr ""
 #: ../../data/campaigns/campaigns.conf:78
 #: ../../data/campaigns/emp01.wmf/elemental:7
 msgid "The Strands of Malac’ Mor"
-msgstr ""
+msgstr "السواحل لـ ملك 'مور"
 
 #: ../../data/campaigns/campaigns.conf:83
 #: ../../data/campaigns/emp02.wmf/elemental:9
 msgid "An Outpost for Exile"
-msgstr ""
+msgstr "نقطة مراقبة للمنفي"
 
 #: ../../data/campaigns/campaigns.conf:88
 #: ../../data/campaigns/campaigns.conf:100
 #: ../../data/campaigns/dummy.wmf/elemental:7
 msgid "Not yet implemented"
-msgstr ""
+msgstr "لم تنتهى بعد"
 
 #: ../../data/campaigns/dummy.wmf/elemental:9
 msgid "Nobody"
-msgstr ""
+msgstr "لا أحد"
 
 #: ../../data/campaigns/dummy.wmf/elemental:10
 msgid "Sorry, this map is not yet implemented."
-msgstr ""
+msgstr "عذراً، هذه الخريطة لم تنتهي بعد."
 
 #: ../../data/campaigns/emp01.wmf/elemental:9
 msgid ""
@@ -160,7 +162,7 @@ msgid ""
 "a new life. But his destiny takes his ship into a heavy storm, which nearly "
 "destroys it. Only with a lot of luck he manages to beach his damaged ship on"
 " an unknown desert strand and save his people. For now."
-msgstr ""
+msgstr "بعد خسارة معركة هامة ضد البرابرة الذي أدت إلى فُقدان جزء كبير من أراضي الإمبراطورية، يترك\" لوتيوس\" فريميل لبدء حياة جديدة. ولكن  مصيره  يأخذ سفينته إلى عاصفة شديدة، مما دمرها تقريباً. فقط الكثير من الحظ أنقذه هو تمكن من أن يُرسي سفينته المتضررة علي شواطئ صحراء غير معروفة وينقذ شعبه. إلي الأن."
 
 #: ../../data/campaigns/emp02.wmf/elemental:11
 msgid ""
@@ -168,55 +170,55 @@ msgid ""
 "quest to find a good place for a new beginning. Only a few days later, they "
 "land on a green, Mediterranean island, looking like paradise. Overjoyed, "
 "they set out to explore this new living space."
-msgstr ""
+msgstr "أخيراً تم إصلاح السفينة، حيث \"لوتيوس\" وشعبه عاد إلى السعي إلى إيجاد مكان جيد للبدء من جديد. منذ بضعة أيام في وقت لاحق، هبطوا على أرض الجزيرة الخضراء، والبحر الأبيض المتوسط، تبدو وكأنها الجنة. بسعادة غامرة، خرجوا لإستكشاف هذه المساحة المعيشية الجديدة."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/elemental:8
 #: ../../data/campaigns/tutorials.conf:15
 msgid "Basic Control"
-msgstr ""
+msgstr "تحكم أساسي"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/elemental:10
 msgid ""
 "In this tutorial, you will learn how to navigate in Widelands and how to "
 "build buildings and roads."
-msgstr ""
+msgstr "في هذا الدرس التعليمي، سوف تتعلم كيف تتحرك في \"الأرض الواسعة\"و كيف تَبني المدن والطرق."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/elemental:8
 #: ../../data/campaigns/tutorials.conf:19
 msgid "Warfare"
-msgstr ""
+msgstr "الحرب"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/elemental:10
 msgid ""
 "In this tutorial, you will be taught the secrets of warfare: how to create "
 "soldiers, how to train them and how to lead them in battle."
-msgstr ""
+msgstr "في هذا الدرس التعليمي، سوف تتعلم أسرار الحرب: كيف تُجند الجُنود، كَيف تُدربهم وكَيف تقودهم في المعركة."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/elemental:8
 #: ../../data/campaigns/tutorials.conf:23
 msgid "Seafaring"
-msgstr ""
+msgstr "الإبحار"
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/elemental:10
 msgid ""
 "In this tutorial, you will get to know seafaring, which is how to handle "
 "ships and ports."
-msgstr ""
+msgstr "في هذا الدرس التعليمي، أنت سوف تتعلم عن الإبحار، حيث سوف تتعلم كيف تتعامل مع السفن و المرافئ."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/elemental:8
 #: ../../data/campaigns/tutorials.conf:27
 msgid "Economy"
-msgstr ""
+msgstr "الإقتصاد"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/elemental:10
 msgid ""
 "In this tutorial, you will learn what option Widelands offers to adjust your"
 " economy. Recommended for players with some experience."
-msgstr ""
+msgstr "في هذا الدرس التعليمي، سوف تتعلم الخيارات التي توفرها لك \"الأرض الواسعة\" لكي تُعدل إقتصادك. يُنصح به للاعبين الذين لديهم بعض الخبرة."
 
 #: ../../data/maps/Archipelago_Sea.wmf/elemental:8
 msgid "Archipelago Sea"
-msgstr ""
+msgstr "بحر الأرخبيل"
 
 #: ../../data/maps/Archipelago_Sea.wmf/elemental:10
 msgid ""
@@ -242,7 +244,7 @@ msgstr "جزيرة مرجانية"
 
 #: ../../data/maps/Atoll.wmf/elemental:10
 msgid "Who will be the real king of the big atoll?"
-msgstr ""
+msgstr "من سوف يكون الملك الحقيقي لهذه الجزيرة المرجانية الكبيرة؟"
 
 #: ../../data/maps/Calvisson.wmf/elemental:8
 msgid "Calvisson"
@@ -300,7 +302,7 @@ msgstr "الفوهه"
 msgid ""
 "Long after a meteor crashed into a couple of mountains, life blossoms in the"
 " crater. Two tribes are now fighting for the rich resources."
-msgstr "طويلاً بعد إصطدام نيزك فى جبلين، ظهرت موارد عند الفوهه. والأن تتقاتل قبيلتين للحصول علي تلك الموارد."
+msgstr "طويلاً بعد إصطدام نيزك فى جبلين، ظهرت موارد عند الفوهة. والأن تتقاتل قبيلتين للحصول علي تلك الموارد."
 
 #: ../../data/maps/Crossing_the_Horizon.wmf/elemental:8
 msgid "Crossing the Horizon"
@@ -308,7 +310,7 @@ msgstr "عبور الأفق"
 
 #: ../../data/maps/Crossing_the_Horizon.wmf/elemental:10
 msgid "Man your ship and sail to the horizon."
-msgstr "إملأ سُفُنَك بالرجال الأشداء وأبحر نحو الأفق"
+msgstr "إملأ سُفُنَك بالرجال الأشداء وأبحر نحو الأفق."
 
 #: ../../data/maps/Desert_Tournament.wmf/elemental:8
 msgid "Desert Tournament"
@@ -452,11 +454,11 @@ msgstr "شبه الجزيرة الذهبية"
 
 #: ../../data/maps/Golden_Peninsula.wmf/elemental:10
 msgid "Two empires race for the treasures of a legendary peninsula…"
-msgstr ""
+msgstr "أمبراطورتين يتسابقون علي الكنز في شبه الجزيرة الأسطورية..."
 
 #: ../../data/maps/Ice_wars.wmf/elemental:8
 msgid "Ice wars"
-msgstr ""
+msgstr "الحروب الجليدية"
 
 #: ../../data/maps/Ice_wars.wmf/elemental:10
 msgid "Autumn became winter. Some things are frozen, but not the war."
@@ -480,7 +482,7 @@ msgstr "بعد سقوط كويكب متلو بشتاء قاسى، وَصَلَ �
 
 #: ../../data/maps/Islands_at_War.wmf/elemental:8
 msgid "Islands at War"
-msgstr ""
+msgstr "الجزر في الحرب"
 
 #: ../../data/maps/Islands_at_War.wmf/elemental:10
 msgid ""
