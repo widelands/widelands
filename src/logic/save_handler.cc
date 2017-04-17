@@ -55,24 +55,26 @@ SaveHandler::SaveHandler()
 }
 
 void SaveHandler::rollSaveFiles(const std::string& filename) {
-	log("Autosave: Rolling savefiles (count): %d\n", number_of_rolls);
-    number_of_rolls--; // TODO(k.halfmann): not sure if this is correct
+  
+    int32_t rolls = number_of_rolls;
+	log("Autosave: Rolling savefiles (count): %d\n", rolls);
+    rolls--; 
 	std::string filename_previous = create_file_name(
-	   get_base_dir(), (boost::format("%s_%02d") % filename % number_of_rolls).str());
-	if (number_of_rolls > 0 && g_fs->file_exists(filename_previous)) {
+	   get_base_dir(), (boost::format("%s_%02d") % filename % rolls).str());
+	if (rolls > 0 && g_fs->file_exists(filename_previous)) {
 		g_fs->fs_unlink(filename_previous); // Delete last of the rolling files
 		log("Autosave: Deleted %s\n", filename_previous.c_str());
 	}
-	number_of_rolls--;
-	while (number_of_rolls >= 0) {
+	rolls--;
+	while (rolls >= 0) {
 		const std::string filename_next = create_file_name(
-		   get_base_dir(), (boost::format("%s_%02d") % filename % number_of_rolls).str());
+		   get_base_dir(), (boost::format("%s_%02d") % filename % rolls).str());
 		if (g_fs->file_exists(filename_next)) {
 			g_fs->fs_rename(filename_next, filename_previous); // e.g. wl_autosave_08 -> wl_autosave_09
 			log("Autosave: Rolled %s to %s\n", filename_next.c_str(), filename_previous.c_str());
 		}
 		filename_previous = filename_next;
-		number_of_rolls--;
+		rolls--;
 	}
 }
 
