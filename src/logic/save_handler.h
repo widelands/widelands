@@ -37,7 +37,7 @@ class Game;
 /**
  * Cares about manual or autosave via think().
  *
- * Note that this hanlder is used for replay, via the ReplayWriter, too.
+ * Note that this handler is used for replay, via the ReplayWriter, too.
  */
 class SaveHandler {
 public:

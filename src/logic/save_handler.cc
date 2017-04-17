@@ -77,7 +77,7 @@ void SaveHandler::rollSaveFiles(const std::string& filename) {
 }
 
 /**
- * Check if game sould be saved at next tick / think.
+ * Check if game should be saved at next tick / think.
  *
  * @return true if game should be saved ad next think().
  */
@@ -98,12 +98,12 @@ bool SaveHandler::checkNextTick(Widelands::Game& game, uint32_t realtime) {
 	log("Autosave: %d ms interval elapsed, current gametime: %s, saving...\n", autosave_interval_in_millis,
 	    gametimestring(game.get_gametime(), true).c_str());
 
-	game.get_ibase()->log_message(_("Saving game at next tick"));
+	game.get_ibase()->log_message(_("Saving game…"));
 	return true;
 }
 
 /**
- * If Saveing fails restore the backup file.
+ * If saving fails restore the backup file.
  *
  * @return true when save was a success.
  */
@@ -192,7 +192,7 @@ void SaveHandler::think(Widelands::Game& game) {
 }
 
 /**
- * Initialize autosave timer
+ * Lazy intialisation on first call.
  */
 void SaveHandler::initialize(uint32_t realtime) {
 	if (initialized_)
@@ -234,7 +234,7 @@ std::string SaveHandler::create_file_name(const std::string& dir,
 /*
  * Save the game using the GameSaver.
  *
- * Will copy text or exceptions to error string.
+ * Will copy text of exceptions to error string.
  *
  * returns true if saved, false in case some error occured.
  */
