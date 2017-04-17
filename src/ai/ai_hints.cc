@@ -46,7 +46,7 @@ BuildingHints::BuildingHints(std::unique_ptr<LuaTable> table)
      weak_ai_limit_(table->has_key("weak_ai_limit") ? table->get_int("weak_ai_limit") : -1),
      trainingsites_max_percent_(table->has_key("trainingsites_max_percent") ?
                                    table->get_int("trainingsites_max_percent") :
-                                   -1) {
+                                   0) {
 }
 
 void BuildingHints::set_trainingsites_max_percent(int percent) {

@@ -73,13 +73,13 @@ struct Flag;
 //   out, to have some more forces. Reincrease the number of soldiers that
 //   should be trained if inputs_ get filled again.).
 struct DefaultAI : ComputerPlayer {
-	enum class Type {
-		kVeryWeak,
-		kWeak,
-		kNormal,
-	};
+	//enum class Type {
+		//kVeryWeak,
+		//kWeak,
+		//kNormal,
+	//};
 
-	DefaultAI(Widelands::Game&, const Widelands::PlayerNumber, DefaultAI::Type);
+	DefaultAI(Widelands::Game&, const Widelands::PlayerNumber, Widelands::AiType);
 	~DefaultAI();
 	void think() override;
 
@@ -109,7 +109,7 @@ struct DefaultAI : ComputerPlayer {
 		}
 		ComputerPlayer* instantiate(Widelands::Game& game,
 		                            Widelands::PlayerNumber const p) const override {
-			return new DefaultAI(game, p, DefaultAI::Type::kNormal);
+			return new DefaultAI(game, p, Widelands::AiType::kNormal);
 		}
 	};
 
@@ -123,7 +123,7 @@ struct DefaultAI : ComputerPlayer {
 		}
 		ComputerPlayer* instantiate(Widelands::Game& game,
 		                            Widelands::PlayerNumber const p) const override {
-			return new DefaultAI(game, p, DefaultAI::Type::kWeak);
+			return new DefaultAI(game, p, Widelands::AiType::kWeak);
 		}
 	};
 
@@ -137,7 +137,7 @@ struct DefaultAI : ComputerPlayer {
 		}
 		ComputerPlayer* instantiate(Widelands::Game& game,
 		                            Widelands::PlayerNumber const p) const override {
-			return new DefaultAI(game, p, DefaultAI::Type::kVeryWeak);
+			return new DefaultAI(game, p, Widelands::AiType::kVeryWeak);
 		}
 	};
 
@@ -147,7 +147,7 @@ struct DefaultAI : ComputerPlayer {
 
 private:
 	// Variables of default AI
-	DefaultAI::Type type_;
+	Widelands::AiType type_;
 	Widelands::Player* player_;
 	Widelands::TribeDescr const* tribe_;
 

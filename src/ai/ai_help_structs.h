@@ -21,8 +21,8 @@
 #define WL_AI_AI_HELP_STRUCTS_H
 
 #include <list>
-#include <unordered_set>
 #include <queue>
+#include <unordered_set>
 
 #include "ai/ai_hints.h"
 #include "economy/flag.h"
@@ -55,11 +55,35 @@ enum class BuildingNecessity : uint8_t {
 	kForbidden
 };
 
-enum class BuildingAttribute : uint8_t {kBakery, kRanger, kBuildable, kLumberjack, kPort, kNeedsRocks, kWell, kNeedsCoast,
-	 kHunter, kFisher, kShipyard, kBarracks, kSpaceConsumer};
+// A building type can have no, one or multiple of these attributes
+enum class BuildingAttribute : uint8_t {
+	kBakery,
+	kRanger,
+	kBuildable,
+	kLumberjack,
+	kPort,
+	kNeedsRocks,
+	kWell,
+	kNeedsCoast,
+	kHunter,
+	kFisher,
+	kShipyard,
+	kBarracks,
+	kSpaceConsumer,
+	kRecruitment,
+	kBuildingMatProducer,
+	kUpgradeSubstitutes,
+	kUpgradeExtends
+};
 
-enum class ExpansionMode : uint8_t { kResources = 0, kSpace = 1, kEconomy = 2, kBoth = 3};
-//enum class ScoreBlock : uint8_t {kResource = 0, kLand = 1, kEnemy = 2, kDismantle = 3};
+enum class AiType : uint8_t  {
+	kVeryWeak,
+	kWeak,
+	kNormal
+};
+
+enum class ExpansionMode : uint8_t { kResources = 0, kSpace = 1, kEconomy = 2, kBoth = 3 };
+// enum class ScoreBlock : uint8_t {kResource = 0, kLand = 1, kEnemy = 2, kDismantle = 3};
 
 enum class AiModeBuildings : uint8_t { kAnotherAllowed, kOnLimit, kLimitExceeded };
 
@@ -250,16 +274,14 @@ struct NearFlag {
 
 struct ProductTimeQueue {
 	ProductTimeQueue();
-	
+
 	void push(uint32_t);
 	uint32_t count(uint32_t);
 	void strip_old(uint32_t);
-	
+
 	uint32_t duration_ = 20 * 60 * 1000;
 	std::queue<uint32_t> queue;
 };
-	
-	
 
 struct WalkableSpot {
 	Coords coords;
@@ -316,7 +338,7 @@ struct BuildableField {
 	// actual count of soldiers in nearby buldings
 	int16_t own_military_presence;
 	int16_t enemy_military_presence;
-	int16_t enemy_military_sites;	//Including unfinished
+	int16_t enemy_military_sites;  // Including unfinished
 	int16_t ally_military_presence;
 	// stationed (manned) military buildings nearby
 	int16_t military_stationed;
@@ -386,32 +408,21 @@ struct BuildingObserver {
 
 	Type type;
 
-	//bool plants_trees;
-	bool recruitment;  // is "producing" workers?
+	//bool recruitment;  // is "producing" workers?
 	Widelands::BuildingNecessity new_building;
 	uint32_t new_building_overdue;
 	int32_t primary_priority;
-	//bool is_buildable;
-	//bool need_trees;   // lumberjack = true
-	//bool need_rocks;   // quarry = true
-	//bool mines_water;  // wells
-	//bool need_water;   // fisher, fish_breeder = true
-	//bool is_hunter;    // need to identify hunters
-	//bool is_fisher;    // need to identify fishers
-	//bool is_port;
-	//bool is_shipyard;
-	//bool is_barracks;
 	std::set<BuildingAttribute> is_what;
-	//this is a "shortcut" to above
+	// this is a "shortcut" to above
 	bool is(BuildingAttribute) const;
 	void set_is(BuildingAttribute);
-	//bool space_consumer;       // farm, vineyard... = true
+	void unset_is(BuildingAttribute);
 	bool expansion_type;       // military building used that can be used to control area
 	bool fighting_type;        // military building built near enemies
 	bool mountain_conqueror;   // military building built near mountains
 	uint32_t prohibited_till;  // do not build before (ms)
 	uint32_t forced_after;     // do not wait until ware is needed
-	uint8_t max_ts_proportion; 
+	uint8_t max_ts_proportion;
 
 	uint16_t unconnected_count;  // to any warehouse (count of such buildings)
 
@@ -424,13 +435,11 @@ struct BuildingObserver {
 	std::vector<Widelands::DescriptionIndex> positions;
 	std::vector<Widelands::DescriptionIndex> critical_building_material;
 
-	bool produces_building_material;
-
 	// an enhancement to this building:
 	// produces all wares as current building, and perhaps more
-	bool upgrade_substitutes;
+	//bool upgrade_substitutes;
 	// produces some additional wares
-	bool upgrade_extends;
+	//bool upgrade_extends;
 
 	// It seems that fish and meat are subsitutes (for trainingsites), so
 	// when testing if a trainingsite is supplied enough
@@ -477,10 +486,7 @@ struct MilitarySiteObserver {
 	Widelands::MilitarySite* site;
 	BuildingObserver* bo;
 	uint8_t checks;
-	// when considering attack most military sites are inside territory and should be skipped during
-	// evaluation
-	//bool enemies_nearby;
-	uint32_t last_change; //to prevent too fast switching ocupancy policy
+	uint32_t last_change;  // to prevent too fast switching ocupancy policy
 	uint32_t built_time;
 };
 
@@ -576,37 +582,32 @@ private:
 };
 
 struct FNeuron {
-	FNeuron(uint32_t);
+	FNeuron(uint32_t, uint16_t);
 
 	void flip_bit(uint8_t);
 	// void set(uint8_t);
 	bool get_result(bool, bool, bool, bool bool4 = true, bool bool5 = true);
 	bool get_position(uint8_t);
 	uint32_t get_int();
+	uint16_t get_id() {
+		return id;
+	};
 
 private:
 	std::bitset<f_neuron_bit_size> core;
+	uint16_t id;
 };
 
-struct ExpansionType { //NOCOM
+struct ExpansionType {
 	ExpansionType();
-	
+
 	void set_expantion_type(ExpansionMode);
-	//int16_t get_proportions(ScoreBlock, bool = false);
-	ExpansionMode get_expansion_type() {return type;};
-	
-	private:
+	ExpansionMode get_expansion_type() {
+		return type;
+	};
+
+private:
 	ExpansionMode type;
-	
-	//// columns ScoreBlock: kResource = 0, kLand = 1, kEnemy = 2, kDismantle = 3
-	//uint8_t proportion_table[5][4] = {
-		//{ 70, 10, 40,  0}, //kResources
-		//{ 10, 70, 80,  0}, //kSpace
-		//{ 35, 35, 50,  0}, //kEconomy
-		//{ 40, 40, 65,  0},  //kBoth	
-		//{ 20, 20, 65, 60},  //kDismantle					
-	//};
-		
 };
 
 // This is to keep all data related to AI magic numbers
@@ -618,9 +619,17 @@ struct ManagementData {
 	Widelands::Player::AiPersistentState* pd;
 
 	void mutate(uint32_t, PlayerNumber = 0);
-	void review(uint32_t, PlayerNumber, uint32_t, uint32_t, uint16_t, uint32_t, int16_t, uint8_t, uint8_t, uint16_t);
+	void review(uint32_t,
+	            PlayerNumber,
+	            uint32_t,
+	            uint32_t,
+	            uint16_t,
+	            uint32_t,
+	            int16_t,
+	            uint8_t,
+	            uint16_t);
 	void dump_data();
-	void initialize(uint8_t, bool reinitializing = false);
+	void initialize(uint8_t, Widelands::AiType, bool reinitializing = false);
 	uint16_t new_neuron_id() {
 		next_neuron_id += 1;
 		return next_neuron_id - 1;
@@ -648,6 +657,7 @@ private:
 	uint16_t next_neuron_id;
 	uint16_t next_bi_neuron_id;
 	uint16_t performance_change;
+	Widelands::AiType ai_type;
 };
 
 // this is used to count militarysites by their size

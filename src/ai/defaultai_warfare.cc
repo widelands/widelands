@@ -39,10 +39,10 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 
 	// defining treshold ratio of own_strength/enemy's strength
 	uint32_t treshold_ratio = 100;
-	if (type_ == DefaultAI::Type::kNormal) {
+	if (type_ == Widelands::AiType::kNormal) {
 		treshold_ratio = 80;
 	}
-	if (type_ == DefaultAI::Type::kVeryWeak) {
+	if (type_ == Widelands::AiType::kVeryWeak) {
 		treshold_ratio = 120;
 	}
 
@@ -147,16 +147,16 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 	if (persistent_data->last_soldier_trained > gametime) {
 		// No soldier was ever trained ...
 		switch (type_) {
-		case DefaultAI::Type::kNormal:
+		case Widelands::AiType::kNormal:
 			general_score = 1;
 			break;
-		case DefaultAI::Type::kWeak:
+		case Widelands::AiType::kWeak:
 			general_score = 0;
 			break;
-		case DefaultAI::Type::kVeryWeak:
+		case Widelands::AiType::kVeryWeak:
 			general_score = -1;
 		}
-	} 
+	}
 
 	const bool strong_enough = player_statistics.strong_enough(pn);
 
@@ -263,64 +263,106 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 			     player_attackable[owner_number - 1] == Attackable::kAttackableVeryWeak)) {
 
 				// treating no attack score
-				if (site->second.no_attack_counter < 0) { //NOCOM move this higher
+				if (site->second.no_attack_counter < 0) {  // NOCOM move this higher
 					// we cannot attack yet
 					site->second.score = 0;
 					// but increase the counter by 1
 					site->second.no_attack_counter += 1;
-				} else {					 
-					 
+				} else {
+
 					int16_t inputs[2 * f_neuron_bit_size] = {0};
-					inputs[0] = (site->second.attack_soldiers_strength - site->second.defenders_strength) *
-						std::abs(management_data.get_military_number_at(114)) / 30;	 
-					inputs[1] = (site->second.attack_soldiers_strength - site->second.defenders_strength) *
-						std::abs(management_data.get_military_number_at(115)) / 30;	 					 
-					inputs[2] = (is_warehouse) ? 4 : 0;	 
-					inputs[3] = (is_warehouse) ? 2 : 0;						 
-					inputs[4] = (site->second.attack_soldiers_competency > 15)  ? 2 : 0;
-					inputs[5] = (site->second.attack_soldiers_competency > 25)  ? 4 : 0	;	;			 
-					inputs[6] = (2 * site->second.defenders_strength > 3 * site->second.attack_soldiers_strength) ? 2 : 0;
-					inputs[7] = (3 * site->second.defenders_strength > 2 * site->second.attack_soldiers_strength) ? 2 : 0;
-					inputs[8] =  (soldier_status_ == SoldiersStatus::kBadShortage || soldier_status_ == SoldiersStatus::kShortage) ? -2 : 0;
-					inputs[8] =  (soldier_status_ == SoldiersStatus::kBadShortage) ? -2 : 0;
-					inputs[9] =  (soldier_status_ == SoldiersStatus::kBadShortage || soldier_status_ == SoldiersStatus::kShortage) ? -3 : 0;
+					inputs[0] =
+					   (site->second.attack_soldiers_strength - site->second.defenders_strength) *
+					   std::abs(management_data.get_military_number_at(114)) / 30;
+					inputs[1] =
+					   (site->second.attack_soldiers_strength - site->second.defenders_strength) *
+					   std::abs(management_data.get_military_number_at(115)) / 30;
+					inputs[2] = (is_warehouse) ? 4 : 0;
+					inputs[3] = (is_warehouse) ? 2 : 0;
+					inputs[4] = (site->second.attack_soldiers_competency > 15) ? 2 : 0;
+					inputs[5] = (site->second.attack_soldiers_competency > 25) ? 4 : 0;
+					;
+					inputs[6] = (2 * site->second.defenders_strength >
+					             3 * site->second.attack_soldiers_strength) ?
+					               2 :
+					               0;
+					inputs[7] = (3 * site->second.defenders_strength >
+					             2 * site->second.attack_soldiers_strength) ?
+					               2 :
+					               0;
+					inputs[8] = (soldier_status_ == SoldiersStatus::kBadShortage ||
+					             soldier_status_ == SoldiersStatus::kShortage) ?
+					               -2 :
+					               0;
+					inputs[8] = (soldier_status_ == SoldiersStatus::kBadShortage) ? -2 : 0;
+					inputs[9] = (soldier_status_ == SoldiersStatus::kBadShortage ||
+					             soldier_status_ == SoldiersStatus::kShortage) ?
+					               -3 :
+					               0;
 					inputs[10] = (site->second.mines_nearby == ExtendedBool::kTrue) ? 3 : -1;
 					inputs[11] = (site->second.mines_nearby == ExtendedBool::kTrue) ? 0 : 0;
 					inputs[12] = (owner_number == persistent_data->last_attacked_player) ? 2 : -2;
-					inputs[13] = (owner_number == persistent_data->last_attacked_player) ? 4 : -4;	
-					inputs[14] = (strong_enough)	? 1 : -1;
-					inputs[15] = (strong_enough)	? 3 : -3;
-					inputs[16] = (player_statistics.get_player_power(pn) > player_statistics.get_old_player_power(pn)) ? 2 : - 2;
-					inputs[17] = (player_statistics.get_player_power(pn) > player_statistics.get_old60_player_power(pn)) ? 3 : - 3;
-					inputs[18] = (player_statistics.get_visible_enemies_power(pn) > player_statistics.get_old_visible_enemies_power(pn))? - 1 : 1;
-					inputs[19] = (player_statistics.get_visible_enemies_power(pn) > player_statistics.get_old_visible_enemies_power(pn))? - 3 : 3;				
-					inputs[20] = (player_statistics.get_player_power(pn) > player_statistics.get_old_player_power(owner_number)) ? 2 : - 2;
-					inputs[21] = (player_statistics.get_player_power(pn) > player_statistics.get_old_player_power(owner_number)) ? 1 : - 1;						
-					inputs[22] = (player_attackable[owner_number - 1] == Attackable::kAttackableVeryWeak) ? 2 : 0;
-					inputs[23] = (player_attackable[owner_number - 1] == Attackable::kAttackableAndWeak) ? 2 : 0;
-					inputs[24] = (player_attackable[owner_number - 1] == Attackable::kAttackableVeryWeak) ? 6 : 0;
-					inputs[25] = (player_attackable[owner_number - 1] == Attackable::kAttackableAndWeak) ? 3 : 0;
+					inputs[13] = (owner_number == persistent_data->last_attacked_player) ? 4 : -4;
+					inputs[14] = (strong_enough) ? 1 : -1;
+					inputs[15] = (strong_enough) ? 3 : -3;
+					inputs[16] = (player_statistics.get_player_power(pn) >
+					              player_statistics.get_old_player_power(pn)) ?
+					                2 :
+					                -2;
+					inputs[17] = (player_statistics.get_player_power(pn) >
+					              player_statistics.get_old60_player_power(pn)) ?
+					                3 :
+					                -3;
+					inputs[18] = (player_statistics.get_visible_enemies_power(pn) >
+					              player_statistics.get_old_visible_enemies_power(pn)) ?
+					                -1 :
+					                1;
+					inputs[19] = (player_statistics.get_visible_enemies_power(pn) >
+					              player_statistics.get_old_visible_enemies_power(pn)) ?
+					                -3 :
+					                3;
+					inputs[20] = (player_statistics.get_player_power(pn) >
+					              player_statistics.get_old_player_power(owner_number)) ?
+					                2 :
+					                -2;
+					inputs[21] = (player_statistics.get_player_power(pn) >
+					              player_statistics.get_old_player_power(owner_number)) ?
+					                1 :
+					                -1;
+					inputs[22] =
+					   (player_attackable[owner_number - 1] == Attackable::kAttackableVeryWeak) ? 2 : 0;
+					inputs[23] =
+					   (player_attackable[owner_number - 1] == Attackable::kAttackableAndWeak) ? 2 : 0;
+					inputs[24] =
+					   (player_attackable[owner_number - 1] == Attackable::kAttackableVeryWeak) ? 6 : 0;
+					inputs[25] =
+					   (player_attackable[owner_number - 1] == Attackable::kAttackableAndWeak) ? 3 : 0;
 					inputs[26] = management_data.get_military_number_at(62) / 10;
-					inputs[27] = (ts_finished_count_ - ts_without_trainers_) * 2; 
+					inputs[27] = (ts_finished_count_ - ts_without_trainers_) * 2;
 					inputs[28] = general_score * 3;
 					inputs[29] = general_score;
-					inputs[30] = ((mines_per_type[iron_ore_id].in_construction + mines_per_type[iron_ore_id].finished) > 0) ? 1 : -1;
-					inputs[31] = (player_statistics.get_player_power(pn) > player_statistics.get_old60_player_power(pn) + 5) ? 2 : -2;
+					inputs[30] = ((mines_per_type[iron_ore_id].in_construction +
+					               mines_per_type[iron_ore_id].finished) > 0) ?
+					                1 :
+					                -1;
+					inputs[31] = (player_statistics.get_player_power(pn) >
+					              player_statistics.get_old60_player_power(pn) + 5) ?
+					                2 :
+					                -2;
 					inputs[32] = soldier_trained_log.count(gametime);
 					inputs[33] = soldier_trained_log.count(gametime) / 2;
 					inputs[34] = +1;
 					inputs[35] = -1;
 					site->second.score = 0;
-					for (uint8_t j = 0; j < f_neuron_bit_size; j +=1) {
-						if (management_data.f_neuron_pool[47].get_position(j)){
+					for (uint8_t j = 0; j < f_neuron_bit_size; j += 1) {
+						if (management_data.f_neuron_pool[47].get_position(j)) {
 							site->second.score += inputs[j];
 						}
-						if (management_data.f_neuron_pool[0].get_position(j)){
+						if (management_data.f_neuron_pool[0].get_position(j)) {
 							site->second.score += inputs[j + f_neuron_bit_size];
 						}
 					}
-				}				
-				
+				}
 
 			} else {
 				site->second.score = 0;
@@ -390,7 +432,7 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 
 	// how many attack soldiers we can send?
 	int32_t attackers = player_->find_attack_soldiers(*flag);
-	assert (attackers < 500);
+	assert(attackers < 500);
 
 	// Of course not all of them:
 	// reduce by 0-3 for attackers below 10
@@ -403,15 +445,16 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 	above_ten = (above_ten > 30) ? 30 : above_ten;
 
 	attackers = attackers - (std::rand() % 3) - ((above_ten > 0) ? std::rand() % above_ten : 0);
-	//attackers += management_data.neuron_pool[48].get_result_safe(training_score / 2, kAbsValue) / 10;
-	assert (attackers < 500);
+	// attackers += management_data.neuron_pool[48].get_result_safe(training_score / 2, kAbsValue) /
+	// 10;
+	assert(attackers < 500);
 
 	if (attackers <= 0) {
 		return false;
 	}
 
 	attackers_count_ += static_cast<uint16_t>(attackers);
-	assert (attackers_count_ < 5000);
+	assert(attackers_count_ < 5000);
 
 	game().send_player_enemyflagaction(*flag, player_number(), static_cast<uint16_t>(attackers));
 
@@ -519,13 +562,6 @@ bool DefaultAI::check_trainingsites(uint32_t gametime) {
 		}
 	}
 
-	//// changing priority if basic
-	//if (tso.bo->trainingsite_type == TrainingSiteType::kBasic) {
-		//for (uint32_t k = 0; k < tso.bo->inputs.size(); ++k) {
-			//game().send_player_set_ware_priority(*ts, wwWARE, tso.bo->inputs.at(k), HIGH_PRIORITY);
-		//}
-	//}
-
 	// are we willing to train another soldier
 	// bool want_train = true;
 	const PlayerNumber pn = player_number();
@@ -569,54 +605,96 @@ bool DefaultAI::check_trainingsites(uint32_t gametime) {
 
 		if (shortage <= 3) {  // training only if supplied
 
-			
 			int16_t inputs[f_neuron_bit_size] = {0};
 			inputs[0] = -shortage;
 			inputs[1] = (player_statistics.get_visible_enemies_power(gametime) >
-			                        player_statistics.get_old_visible_enemies_power(gametime)) ? 1 : 0;
-			inputs[2] = (mines_.size() < 3) ? -1 : 0;			
-			inputs[3] = (mines_per_type[iron_ore_id].total_count() == 0) ? -1 : 0;	
+			             player_statistics.get_old_visible_enemies_power(gametime)) ?
+			               1 :
+			               0;
+			inputs[2] = (mines_.size() < 3) ? -1 : 0;
+			inputs[3] = (mines_per_type[iron_ore_id].total_count() == 0) ? -1 : 0;
 			inputs[4] = (player_statistics.get_player_power(pn) * 2 >
-			                player_statistics.get_visible_enemies_power(gametime)) ? -1 : 0;
+			             player_statistics.get_visible_enemies_power(gametime)) ?
+			               -1 :
+			               0;
 			inputs[5] = (player_statistics.get_player_power(pn) * 2 >
-			                player_statistics.get_enemies_average_power()) ? -1 : 0;
+			             player_statistics.get_enemies_average_power()) ?
+			               -1 :
+			               0;
 			inputs[6] = (player_statistics.get_player_power(pn) >
-			                player_statistics.get_visible_enemies_power(gametime)) ? -1 : 1;
+			             player_statistics.get_visible_enemies_power(gametime)) ?
+			               -1 :
+			               1;
 			inputs[7] = (player_statistics.get_player_power(pn) >
-			                player_statistics.get_enemies_average_power()) ? -1 : 1;
+			             player_statistics.get_enemies_average_power()) ?
+			               -1 :
+			               1;
 			inputs[8] = (player_statistics.get_player_power(pn) * 2 >
-			                player_statistics.get_visible_enemies_power(gametime)) ? -1 : 1;
+			             player_statistics.get_visible_enemies_power(gametime)) ?
+			               -1 :
+			               1;
 			inputs[9] = (player_statistics.get_player_power(pn) * 2 >
-			                player_statistics.get_enemies_average_power()) ? -1 : 1;
+			             player_statistics.get_enemies_average_power()) ?
+			               -1 :
+			               1;
 			inputs[10] = (3 - shortage) * 1;
 			inputs[11] = (3 - shortage) * 2;
-			inputs[12] = +1;	
-			inputs[13] = +2;	
-			inputs[14] = -1;	
-			inputs[15] = -2;	
-			inputs[16] = (player_statistics.get_player_power(pn) < player_statistics.get_old60_player_power(pn)) ? 1 : 0;		
-			inputs[17] = (player_statistics.get_player_power(pn) < player_statistics.get_old_player_power(pn)) ? 1 : 0;
-			inputs[18] = (player_statistics.get_player_power(pn) < player_statistics.get_old60_player_power(pn) + 4) ? 1 : 0;		
-			inputs[19] = (player_statistics.get_player_power(pn) < player_statistics.get_old_player_power(pn) + 1) ? 1 : 0;
-			inputs[20] = (player_statistics.get_player_power(pn) < player_statistics.get_old60_player_power(pn) + 4) ? 0 : 1;		
-			inputs[21] = (player_statistics.get_player_power(pn) < player_statistics.get_old_player_power(pn) + 2) ? 0 : 1;
+			inputs[12] = +1;
+			inputs[13] = +2;
+			inputs[14] = -1;
+			inputs[15] = -2;
+			inputs[16] = (player_statistics.get_player_power(pn) <
+			              player_statistics.get_old60_player_power(pn)) ?
+			                1 :
+			                0;
+			inputs[17] =
+			   (player_statistics.get_player_power(pn) < player_statistics.get_old_player_power(pn)) ?
+			      1 :
+			      0;
+			inputs[18] = (player_statistics.get_player_power(pn) <
+			              player_statistics.get_old60_player_power(pn) + 4) ?
+			                1 :
+			                0;
+			inputs[19] = (player_statistics.get_player_power(pn) <
+			              player_statistics.get_old_player_power(pn) + 1) ?
+			                1 :
+			                0;
+			inputs[20] = (player_statistics.get_player_power(pn) <
+			              player_statistics.get_old60_player_power(pn) + 4) ?
+			                0 :
+			                1;
+			inputs[21] = (player_statistics.get_player_power(pn) <
+			              player_statistics.get_old_player_power(pn) + 2) ?
+			                0 :
+			                1;
 
 			if (player_statistics.any_enemy_seen_lately(gametime)) {
-				inputs[20] = (player_statistics.get_player_power(pn) < player_statistics.get_old60_player_power(pn) + 4) ? 0 : 1;		
-				inputs[21] = (player_statistics.get_player_power(pn) < player_statistics.get_old_player_power(pn) + 2) ? 0 : 1;
-				inputs[22] = (player_statistics.get_player_power(pn) < player_statistics.get_old60_player_power(pn) + 4) ? 1 : 0;		
-				inputs[23] = (player_statistics.get_player_power(pn) < player_statistics.get_old_player_power(pn) + 2) ? 1 : 0;
+				inputs[20] = (player_statistics.get_player_power(pn) <
+				              player_statistics.get_old60_player_power(pn) + 4) ?
+				                0 :
+				                1;
+				inputs[21] = (player_statistics.get_player_power(pn) <
+				              player_statistics.get_old_player_power(pn) + 2) ?
+				                0 :
+				                1;
+				inputs[22] = (player_statistics.get_player_power(pn) <
+				              player_statistics.get_old60_player_power(pn) + 4) ?
+				                1 :
+				                0;
+				inputs[23] = (player_statistics.get_player_power(pn) <
+				              player_statistics.get_old_player_power(pn) + 2) ?
+				                1 :
+				                0;
 			}
-			
+
 			int16_t tmp_score = 0;
-			for (uint8_t i = 0; i < f_neuron_bit_size; i +=1) {
-				if (management_data.f_neuron_pool[29].get_position(i)){
+			for (uint8_t i = 0; i < f_neuron_bit_size; i += 1) {
+				if (management_data.f_neuron_pool[29].get_position(i)) {
 					tmp_score += inputs[i];
 				}
 			}
 
-			
-			if (tmp_score > 0) { 
+			if (tmp_score > 0) {
 				game().send_player_change_soldier_capacity(*ts, 1);
 			}
 		}
@@ -632,8 +710,6 @@ bool DefaultAI::check_trainingsites(uint32_t gametime) {
 	}
 	return true;
 }
-
-
 
 /**
  * Updates the first military building in list and reenques it at the end of
@@ -655,7 +731,7 @@ bool DefaultAI::check_militarysites(uint32_t gametime) {
 	Map& map = game().map();
 	MilitarySite* ms = militarysites.front().site;
 
-	//Dont do anything if last change took place lately
+	// Dont do anything if last change took place lately
 	if (militarysites.front().last_change + 2 * 60 * 1000 > gametime) {
 		militarysites.push_back(militarysites.front());
 		militarysites.pop_front();
@@ -666,41 +742,41 @@ bool DefaultAI::check_militarysites(uint32_t gametime) {
 	// uint32_t const vision = ms->descr().vision_range();
 	FCoords f = map.get_fcoords(ms->get_position());
 	// look if there are any enemies building
-	//FindNodeEnemiesBuilding find_enemy(player_, game());
+	// FindNodeEnemiesBuilding find_enemy(player_, game());
 
 	int16_t usefullness_score = 0;
 	BuildableField bf(f);
 	update_buildable_field(bf);
 	usefullness_score += bf.military_score_ / 10;
-	//if (military_last_dismantle_ == 0 || military_last_dismantle_ + 2 * 60 * 1000 > gametime) {
-		//usefullness_score += std::abs(management_data.get_military_number_at(99)) / 2;
-	//}
-	
-	//if (militarysites.front().built_time + 2 * 60 * 1000 > gametime) {
-		//usefullness_score += std::abs(management_data.get_military_number_at(99)) / 2;
-	//}
-	
-	const bool can_be_dismantled = ms->present_soldiers().size() > 0 || militarysites.front().built_time + 10 * 60 * 1000 < gametime;
-	
-	usefullness_score -= static_cast<int16_t>(soldier_status_) * std::abs(management_data.get_military_number_at(84));
-	usefullness_score += ((bf.enemy_accessible_) ? (std::abs(management_data.get_military_number_at(91))) / 2 : 0);
-	
+
+	const bool can_be_dismantled = ms->present_soldiers().size() > 0 ||
+	                               militarysites.front().built_time + 10 * 60 * 1000 < gametime;
+
+	usefullness_score -=
+	   static_cast<int16_t>(soldier_status_) * std::abs(management_data.get_military_number_at(84));
+	usefullness_score +=
+	   (bf.enemy_accessible_) ? 200 + management_data.get_military_number_at(91) * 2 : 0;
+
 	// Also size is consideration, bigger buildings are to be preffered
-	usefullness_score += (ms->get_size() - 2) * std::abs(management_data.get_military_number_at(77) / 2);
-	
-	const int32_t dism_treshold = 25 - management_data.get_military_number_at(89)  / 2;
-	const int32_t pref_treshold_upper = dism_treshold + std::abs(management_data.get_military_number_at(90));
-	const int32_t pref_treshold_lower = dism_treshold + std::abs(management_data.get_military_number_at(90) / 2);
-	//printf ("current score %3d, dism: tresh %3d, pref tresholds: %3d   %3d %s\n",
-		//usefullness_score, dism_treshold, pref_treshold_lower, pref_treshold_upper, (usefullness_score > pref_treshold_upper) ? "*" : "");
-	
+	usefullness_score +=
+	   (ms->get_size() - 2) * std::abs(management_data.get_military_number_at(77));
+
+	const int32_t dism_treshold = 25 + management_data.get_military_number_at(89) * 2;
+	const int32_t pref_treshold_upper =
+	   dism_treshold + std::abs(management_data.get_military_number_at(90));
+	const int32_t pref_treshold_lower =
+	   dism_treshold + std::abs(management_data.get_military_number_at(90) / 2);
+	// printf ("current score %3d, dism: tresh %3d, pref tresholds: %3d   %3d %s\n",
+	// usefullness_score, dism_treshold, pref_treshold_lower, pref_treshold_upper, (usefullness_score
+	// > pref_treshold_upper) ? "*" : "");
+
 	Quantity const total_capacity = ms->max_soldier_capacity();
 	Quantity const current_target = ms->soldier_capacity();
 
 	if (usefullness_score < dism_treshold) {
-		if (can_be_dismantled) { // not too soon
-			
-			printf ("Dismanling military site with military loneliness: %d\n", bf.military_loneliness);
+		if (can_be_dismantled) {  // not too soon
+
+			printf("Dismanling military site with military loneliness: %d\n", bf.military_loneliness);
 			changed = true;
 			dismantled_msites_count += 1;
 			if (ms->get_playercaps() & Widelands::Building::PCap_Dismantle) {
@@ -710,17 +786,17 @@ bool DefaultAI::check_militarysites(uint32_t gametime) {
 			} else {
 				game().send_player_bulldoze(*ms);
 				military_last_dismantle_ = game().get_gametime();
-			}	
-		} 
-		//else {
-			//printf ("Not dismantling the militarysite yet\n");
-		//}	
+			}
+		}
+		// else {
+		// printf ("Not dismantling the militarysite yet\n");
+		//}
 	} else if (usefullness_score < pref_treshold_lower) {
 		// this site is not that important but is to be preserved
-		if (current_target > 1){
+		if (current_target > 1) {
 			game().send_player_change_soldier_capacity(*ms, -1);
 			changed = true;
-			}
+		}
 		if (ms->get_soldier_preference() == MilitarySite::kPrefersHeroes) {
 			game().send_player_militarysite_set_soldier_preference(*ms, MilitarySite::kPrefersRookies);
 			changed = true;
@@ -736,7 +812,7 @@ bool DefaultAI::check_militarysites(uint32_t gametime) {
 			changed = true;
 		}
 	}
-	
+
 	// reorder:;
 	militarysites.push_back(militarysites.front());
 	militarysites.pop_front();
@@ -763,7 +839,6 @@ int32_t DefaultAI::calculate_strength(const std::vector<Widelands::Soldier*>& so
 	if (soldiers.empty()) {
 		return 0;
 	}
-
 
 	float health = 0;
 	float attack = 0;
@@ -797,121 +872,178 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
                                                       const uint32_t gametime) {
 
 	assert(militarysites.size() == msites_built());
-	
+
 	const PlayerNumber pn = player_number();
-	
+
 	// logically size of militarysite must in between 1 and 3 (including)
 	const uint8_t size = bo.desc->get_size();
 	assert(size >= BaseImmovable::SMALL && size <= BaseImmovable::BIG);
 
-	if (military_last_build_ > gametime - (10 + std::abs(management_data.get_military_number_at(43)) * 1000 / 2)) {
+	if (military_last_build_ >
+	    gametime - (10 + std::abs(management_data.get_military_number_at(43)) * 1000 / 2)) {
 		return BuildingNecessity::kForbidden;
 	}
 
 	bo.primary_priority = 0;
-	
-	
-	// Inputs
-	// in construction
-	// proportion of sizes
-	// available fields
-	// soldier status
-	
-	const uint32_t msites_total = msites_built() + msites_in_constr();
-	const uint16_t scores[3] = {static_cast<uint16_t>(msites_per_size[1].in_construction + msites_per_size[1].finished),
-		static_cast<uint16_t>((msites_per_size[2].in_construction + msites_per_size[2].finished) * 2),
-		static_cast<uint16_t>((msites_per_size[3].in_construction + msites_per_size[3].finished) * 3)};
-	const uint16_t total_score = scores[0]+scores[1]+scores[2];
 
-	//printf ("stat sample %d  %d\n", player_statistics.get_player_land(pn), player_statistics.get_enemies_max_land()); 
-	
+	const uint32_t msites_total = msites_built() + msites_in_constr();
+	const uint16_t scores[3] = {
+	   static_cast<uint16_t>(msites_per_size[1].in_construction + msites_per_size[1].finished),
+	   static_cast<uint16_t>((msites_per_size[2].in_construction + msites_per_size[2].finished) * 2),
+	   static_cast<uint16_t>((msites_per_size[3].in_construction + msites_per_size[3].finished) *
+	                         3)};
+	const uint16_t total_score = scores[0] + scores[1] + scores[2];
+
+	// printf ("stat sample %d  %d\n", player_statistics.get_player_land(pn),
+	// player_statistics.get_enemies_max_land());
+
 	int32_t inputs[4 * f_neuron_bit_size] = {0};
 	inputs[0] = (msites_total < 1) ? 1 : 0;
 	inputs[1] = (msites_total < 2) ? 1 : 0;
 	inputs[2] = (msites_total < 3) ? 1 : 0;
 	inputs[3] = (msites_total < 4) ? 1 : 0;
 	inputs[3] = (msites_total < 5) ? 1 : 0;
-	inputs[4] = (msites_in_constr() >  msites_built()) ? -1 : 0;
-	inputs[5] = - 3;
-	inputs[6] = (msites_in_constr() >  msites_built() / 2) ? -1 : 0;
-	inputs[7] = (msites_in_constr() >  msites_built() / 3) ? -1 : 0;
+	inputs[4] = (msites_in_constr() > msites_built()) ? -1 : 0;
+	inputs[5] = -3;
+	inputs[6] = (msites_in_constr() > msites_built() / 2) ? -1 : 0;
+	inputs[7] = (msites_in_constr() > msites_built() / 3) ? -1 : 0;
 	inputs[8] = (soldier_status_ == SoldiersStatus::kBadShortage) ? -2 : 0;
 	inputs[9] = (soldier_status_ == SoldiersStatus::kShortage) ? -1 : 0;
-	inputs[10] = (scores[size - 1] > total_score ) ? -2 : 0;
+	inputs[10] = (scores[size - 1] > total_score) ? -2 : 0;
 	inputs[11] = (scores[size - 1] > total_score / 2) ? -2 : 0;
 	inputs[12] = (scores[size - 1] > total_score / 3) ? -2 : 0;
-	inputs[13] = (player_statistics.get_enemies_max_land() < player_statistics.get_player_land(pn)) ? -1 : 0;
+	inputs[13] =
+	   (player_statistics.get_enemies_max_land() < player_statistics.get_player_land(pn)) ? -1 : 0;
 	inputs[14] = (mines_per_type[iron_ore_id].total_count() == 0) ? +1 : 0;
 	inputs[15] = (spots_ < kSpotsTooLittle) ? +1 : 0;
-	inputs[16] = +1 ;
-	inputs[17] = +2 ;
+	inputs[16] = +1;
+	inputs[17] = +2;
 	inputs[18] = -1;
 	inputs[19] = -2;
 	inputs[20] = (scores[size - 1] > total_score / 2) ? -1 : 0;
-	inputs[21] = (msites_in_constr() >  msites_built() / 3) ? -1 : 0;
-	inputs[22] = (scores[size - 1] > total_score / 4) ? -1 : 0;	
-	inputs[23] = (3 - size) * (msites_in_constr() < 1) ? +1 : 0;	
-	inputs[24] = (3 - size) * (msites_in_constr() < 3) ? +1 : 0;	
-	inputs[25] = (3 - size) * (msites_in_constr() < 5) ? +1 : 0;		
-	inputs[26] = (msites_in_constr() < 7) ? +1 : 0;	
+	inputs[21] = (msites_in_constr() > msites_built() / 3) ? -1 : 0;
+	inputs[22] = (scores[size - 1] > total_score / 4) ? -1 : 0;
+	inputs[23] = (3 - size) * (msites_in_constr() < 1) ? +1 : 0;
+	inputs[24] = (3 - size) * (msites_in_constr() < 3) ? +1 : 0;
+	inputs[25] = (3 - size) * (msites_in_constr() < 5) ? +1 : 0;
+	inputs[26] = (msites_in_constr() < 7) ? +1 : 0;
 	inputs[27] = +5;
 	inputs[28] = -5;
 	inputs[29] = +3;
 	inputs[30] = (soldier_status_ == SoldiersStatus::kBadShortage) ? -4 : 0;
 	inputs[31] = (soldier_status_ == SoldiersStatus::kShortage) ? -2 : 0;
-	
+
 	inputs[32] = (soldier_status_ == SoldiersStatus::kBadShortage) ? -3 : 0;
-	inputs[33] = (soldier_status_ == SoldiersStatus::kShortage) ? -2 : 0;	
-	
-	inputs[34] = (player_statistics.get_player_land(pn) < player_statistics.get_enemies_max_land()) ? 1 : 0;
-	inputs[35] = (!player_statistics.any_enemy_seen_lately(gametime)) *
-					(player_statistics.get_player_land(pn) < player_statistics.get_enemies_max_land()) ? 2 : 0;
-	inputs[36] = (!player_statistics.any_enemy_seen_lately(gametime)) *
-					(player_statistics.get_player_land(pn) < player_statistics.get_enemies_max_land() * 2) ? 1 : 0;
-	inputs[37] = (!player_statistics.any_enemy_seen_lately(gametime)) *
-					(player_statistics.get_player_land(pn) < player_statistics.get_enemies_max_land() / 2) ? 1 : 0;
+	inputs[33] = (soldier_status_ == SoldiersStatus::kShortage) ? -2 : 0;
+
+	inputs[34] =
+	   (player_statistics.get_player_land(pn) < player_statistics.get_enemies_max_land()) ? 1 : 0;
+	inputs[35] =
+	   (!player_statistics.any_enemy_seen_lately(gametime)) *
+	         (player_statistics.get_player_land(pn) < player_statistics.get_enemies_max_land()) ?
+	      2 :
+	      0;
+	inputs[36] =
+	   (!player_statistics.any_enemy_seen_lately(gametime)) *
+	         (player_statistics.get_player_land(pn) < player_statistics.get_enemies_max_land() * 2) ?
+	      1 :
+	      0;
+	inputs[37] =
+	   (!player_statistics.any_enemy_seen_lately(gametime)) *
+	         (player_statistics.get_player_land(pn) < player_statistics.get_enemies_max_land() / 2) ?
+	      1 :
+	      0;
 
 	inputs[38] = (!player_statistics.any_enemy_seen_lately(gametime)) *
-					(player_statistics.get_player_land(pn) < player_statistics.get_old_player_land(pn) * 105 / 100) ? 2 : 0;
+	                   (player_statistics.get_player_land(pn) <
+	                    player_statistics.get_old_player_land(pn) * 105 / 100) ?
+	                2 :
+	                0;
 	inputs[39] = (!player_statistics.any_enemy_seen_lately(gametime)) *
-					(player_statistics.get_player_land(pn) < player_statistics.get_old_player_land(pn) + 110) ? 3 : 0;
+	                   (player_statistics.get_player_land(pn) <
+	                    player_statistics.get_old_player_land(pn) + 110) ?
+	                3 :
+	                0;
 
-	inputs[40] = (player_statistics.get_player_power(pn) < player_statistics.get_old60_player_power(pn)) ? 1 : 0;
-	inputs[41] = (player_statistics.get_player_power(pn) > player_statistics.get_old60_player_power(pn)) ? 1 : 0;
+	inputs[40] =
+	   (player_statistics.get_player_power(pn) < player_statistics.get_old60_player_power(pn)) ? 1 :
+	                                                                                             0;
+	inputs[41] =
+	   (player_statistics.get_player_power(pn) > player_statistics.get_old60_player_power(pn)) ? 1 :
+	                                                                                             0;
 	inputs[42] = (!player_statistics.any_enemy_seen_lately(gametime)) *
-					(player_statistics.get_player_power(pn) < player_statistics.get_old60_player_power(pn)) ? 1 : 0;
+	                   (player_statistics.get_player_power(pn) <
+	                    player_statistics.get_old60_player_power(pn)) ?
+	                1 :
+	                0;
 	inputs[43] = (!player_statistics.any_enemy_seen_lately(gametime)) *
-					(player_statistics.get_player_power(pn) > player_statistics.get_old60_player_power(pn)) ? 1 : 0;
+	                   (player_statistics.get_player_power(pn) >
+	                    player_statistics.get_old60_player_power(pn)) ?
+	                1 :
+	                0;
 
-	inputs[44] = (player_statistics.get_player_land(pn) < player_statistics.get_enemies_average_land()) ? 1 : 0;
-	inputs[45] = (player_statistics.get_player_land(pn) > player_statistics.get_enemies_average_land()) ? 1 : 0;
+	inputs[44] =
+	   (player_statistics.get_player_land(pn) < player_statistics.get_enemies_average_land()) ? 1 :
+	                                                                                            0;
+	inputs[45] =
+	   (player_statistics.get_player_land(pn) > player_statistics.get_enemies_average_land()) ? 1 :
+	                                                                                            0;
 
-	inputs[46] = (!player_statistics.any_enemy_seen_lately(gametime)) *
-					(player_statistics.get_player_land(pn) < player_statistics.get_enemies_average_land()) ? 2 : 0;
-	inputs[47] = (!player_statistics.any_enemy_seen_lately(gametime)) *
-					(player_statistics.get_player_land(pn) > player_statistics.get_enemies_average_land()) ? 2 : 0;
+	inputs[46] =
+	   (!player_statistics.any_enemy_seen_lately(gametime)) *
+	         (player_statistics.get_player_land(pn) < player_statistics.get_enemies_average_land()) ?
+	      2 :
+	      0;
+	inputs[47] =
+	   (!player_statistics.any_enemy_seen_lately(gametime)) *
+	         (player_statistics.get_player_land(pn) > player_statistics.get_enemies_average_land()) ?
+	      2 :
+	      0;
 
 	inputs[48] = (soldier_status_ == SoldiersStatus::kBadShortage) ? -3 : 0;
 	inputs[49] = (soldier_status_ == SoldiersStatus::kShortage) ? -2 : 0;
 
 	inputs[50] = (!player_statistics.any_enemy_seen_lately(gametime)) *
-				(player_statistics.get_player_land(pn) < player_statistics.get_old_player_land(pn) * 110 / 100) ? 1 : 0;
+	                   (player_statistics.get_player_land(pn) <
+	                    player_statistics.get_old_player_land(pn) * 110 / 100) ?
+	                1 :
+	                0;
 	inputs[51] = (!player_statistics.any_enemy_seen_lately(gametime)) *
-				(player_statistics.get_player_land(pn) < player_statistics.get_old_player_land(pn) * 105 / 100) ? 2 : 0;
+	                   (player_statistics.get_player_land(pn) <
+	                    player_statistics.get_old_player_land(pn) * 105 / 100) ?
+	                2 :
+	                0;
 
-	inputs[52] = (player_statistics.get_player_land(pn) < player_statistics.get_enemies_max_land()) ? 1 : 0;
-	inputs[53] = (player_statistics.get_player_land(pn) < player_statistics.get_enemies_max_land()) ? 3 : 0;
-	inputs[54] = (player_statistics.get_player_land(pn) < player_statistics.get_enemies_max_land() * 2) ? 2 : 0;
-	inputs[55] = (player_statistics.get_player_land(pn) < player_statistics.get_enemies_max_land() / 2) ? 2 : 0;
-	inputs[56] = (!player_statistics.any_enemy_seen_lately(gametime)) * (spots_ < kSpotsTooLittle) ? +2 : 0;
-	inputs[57] = (player_statistics.any_enemy_seen_lately(gametime)) * (spots_ < kSpotsTooLittle) ? +2 : 0;
-	inputs[58] = ((mines_per_type[iron_ore_id].in_construction + mines_per_type[iron_ore_id].finished) == 0) ? +3 : 0;
-	inputs[59] = ((mines_per_type[iron_ore_id].in_construction + mines_per_type[iron_ore_id].finished) == 0) ? +1 : 0;
+	inputs[52] =
+	   (player_statistics.get_player_land(pn) < player_statistics.get_enemies_max_land()) ? 1 : 0;
+	inputs[53] =
+	   (player_statistics.get_player_land(pn) < player_statistics.get_enemies_max_land()) ? 3 : 0;
+	inputs[54] =
+	   (player_statistics.get_player_land(pn) < player_statistics.get_enemies_max_land() * 2) ? 2 :
+	                                                                                            0;
+	inputs[55] =
+	   (player_statistics.get_player_land(pn) < player_statistics.get_enemies_max_land() / 2) ? 2 :
+	                                                                                            0;
+	inputs[56] =
+	   (!player_statistics.any_enemy_seen_lately(gametime)) * (spots_ < kSpotsTooLittle) ? +2 : 0;
+	inputs[57] =
+	   (player_statistics.any_enemy_seen_lately(gametime)) * (spots_ < kSpotsTooLittle) ? +2 : 0;
+	inputs[58] =
+	   ((mines_per_type[iron_ore_id].in_construction + mines_per_type[iron_ore_id].finished) == 0) ?
+	      +3 :
+	      0;
+	inputs[59] =
+	   ((mines_per_type[iron_ore_id].in_construction + mines_per_type[iron_ore_id].finished) == 0) ?
+	      +1 :
+	      0;
 	inputs[60] = (expansion_type.get_expansion_type() == ExpansionMode::kEconomy) ? -2 : 0;
-	inputs[61] = (expansion_type.get_expansion_type() == ExpansionMode::kEconomy || expansion_type.get_expansion_type() == ExpansionMode::kBoth) ? -4 : 0;
+	inputs[61] = (expansion_type.get_expansion_type() == ExpansionMode::kEconomy ||
+	              expansion_type.get_expansion_type() == ExpansionMode::kBoth) ?
+	                -4 :
+	                0;
 	inputs[62] = (soldier_status_ == SoldiersStatus::kBadShortage) ? -3 : 0;
-	inputs[63] = (soldier_status_ == SoldiersStatus::kShortage) ? -2 : 0;	
-	
+	inputs[63] = (soldier_status_ == SoldiersStatus::kShortage) ? -2 : 0;
+
 	inputs[64] = (bo.build_material_shortage) ? -3 : 0;
 	inputs[65] = (bo.build_material_shortage) ? -1 : 0;
 	inputs[66] = (bo.build_material_shortage) ? -2 : 0;
@@ -925,45 +1057,85 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 	inputs[74] = (gametime < 15 * 60 * 1000) ? (size - 1) * -3 : 0;
 	inputs[75] = (gametime < 30 * 60 * 1000) ? (size - 1) * -3 : 0;
 	inputs[76] = (gametime < 45 * 60 * 1000) ? (size - 1) * -3 : 0;
-	inputs[77] = (player_statistics.get_player_power(pn) < player_statistics.get_old60_player_power(pn) + 2) ? 1 : 0;
-	inputs[78] = (player_statistics.get_player_power(pn) > player_statistics.get_old60_player_power(pn) + 5) ? 1 : 0;
-	inputs[79] = (player_statistics.get_player_power(pn) < player_statistics.get_old60_player_power(pn) + 10) ? 1 : 0;
-	inputs[80] = (player_statistics.get_player_power(pn) > player_statistics.get_old60_player_power(pn) + 20) ? 1 : 0;
-	if(!player_statistics.any_enemy_seen_lately(gametime)){
-		inputs[81] = (player_statistics.get_player_land(pn) * 130 / 100 < player_statistics.get_old60_player_land(pn)) ? 2 : 0;
-		inputs[82] = (player_statistics.get_old60_player_land(pn) * 130 / 100 < player_statistics.get_player_land(pn)) ? 0 : 2;
+	inputs[77] =
+	   (player_statistics.get_player_power(pn) < player_statistics.get_old60_player_power(pn) + 2) ?
+	      1 :
+	      0;
+	inputs[78] =
+	   (player_statistics.get_player_power(pn) > player_statistics.get_old60_player_power(pn) + 5) ?
+	      1 :
+	      0;
+	inputs[79] =
+	   (player_statistics.get_player_power(pn) < player_statistics.get_old60_player_power(pn) + 10) ?
+	      1 :
+	      0;
+	inputs[80] =
+	   (player_statistics.get_player_power(pn) > player_statistics.get_old60_player_power(pn) + 20) ?
+	      1 :
+	      0;
+	if (!player_statistics.any_enemy_seen_lately(gametime)) {
+		inputs[81] = (player_statistics.get_player_land(pn) * 130 / 100 <
+		              player_statistics.get_old60_player_land(pn)) ?
+		                2 :
+		                0;
+		inputs[82] = (player_statistics.get_old60_player_land(pn) * 130 / 100 <
+		              player_statistics.get_player_land(pn)) ?
+		                0 :
+		                2;
 	} else {
-		inputs[83] = (player_statistics.get_player_land(pn) * 130 / 100 < player_statistics.get_old60_player_land(pn)) ? 2 : 0;
-		inputs[84] = (player_statistics.get_old60_player_land(pn) * 130 / 100 < player_statistics.get_player_land(pn)) ? 0 : 2;	
+		inputs[83] = (player_statistics.get_player_land(pn) * 130 / 100 <
+		              player_statistics.get_old60_player_land(pn)) ?
+		                2 :
+		                0;
+		inputs[84] = (player_statistics.get_old60_player_land(pn) * 130 / 100 <
+		              player_statistics.get_player_land(pn)) ?
+		                0 :
+		                2;
 	}
 	inputs[85] = -1 * static_cast<int32_t>(msites_in_constr());
-	inputs[86] = -1 * static_cast<int32_t>(msites_in_constr())/ 2;
+	inputs[86] = -1 * static_cast<int32_t>(msites_in_constr()) / 2;
 	inputs[87] = -1 * static_cast<int32_t>(msites_in_constr()) / 3;
-	inputs[88] = (msites_in_constr() > 2 && msites_in_constr() >  msites_built() / 2) ? -1 : 0;
-	inputs[89] = (msites_in_constr() > 2 && msites_in_constr() >  msites_built() / 3) ? -1 : 0;
-	inputs[90] = (msites_in_constr() > 2 && msites_in_constr() >  msites_built() / 4) ? -1 : 0;
+	inputs[88] = (msites_in_constr() > 2 && msites_in_constr() > msites_built() / 2) ? -1 : 0;
+	inputs[89] = (msites_in_constr() > 2 && msites_in_constr() > msites_built() / 3) ? -1 : 0;
+	inputs[90] = (msites_in_constr() > 2 && msites_in_constr() > msites_built() / 4) ? -1 : 0;
 	inputs[91] = -static_cast<int32_t>(msites_in_constr()) / 4;
-	inputs[92] = (player_statistics.get_player_land(pn) < player_statistics.get_old_player_land(pn) * 130 / 100) ? 2 : 0;
-	inputs[93] = (player_statistics.get_player_land(pn) < player_statistics.get_old_player_land(pn) * 140 / 100) ? 2 : 0;
+	inputs[92] = (player_statistics.get_player_land(pn) <
+	              player_statistics.get_old_player_land(pn) * 130 / 100) ?
+	                2 :
+	                0;
+	inputs[93] = (player_statistics.get_player_land(pn) <
+	              player_statistics.get_old_player_land(pn) * 140 / 100) ?
+	                2 :
+	                0;
 	inputs[94] = (!player_statistics.any_enemy_seen_lately(gametime)) *
-				(player_statistics.get_player_land(pn) < player_statistics.get_old_player_land(pn) * 120 / 100) ? 2 : 0;
+	                   (player_statistics.get_player_land(pn) <
+	                    player_statistics.get_old_player_land(pn) * 120 / 100) ?
+	                2 :
+	                0;
 	inputs[95] = (!player_statistics.any_enemy_seen_lately(gametime)) *
-				(player_statistics.get_player_land(pn) < player_statistics.get_old_player_land(pn) * 140 / 100) ? 2 : 0;
+	                   (player_statistics.get_player_land(pn) <
+	                    player_statistics.get_old_player_land(pn) * 140 / 100) ?
+	                2 :
+	                0;
 	if (msites_built() > 5) {
 		inputs[96] = -1 * static_cast<int32_t>(msites_in_constr());
 		inputs[97] = -1 * static_cast<int32_t>(msites_in_constr()) / 2;
 		inputs[98] = -1 * static_cast<int32_t>(msites_in_constr()) / 3;
-		inputs[99] = (msites_in_constr() >  msites_built() / 2) ? -2 : 0;
-		inputs[100] = (msites_in_constr() >  msites_built() / 3) ? -2 : 0;
-		inputs[101] = (msites_in_constr() >  msites_built() / 4) ? -2 : 0;
+		inputs[99] = (msites_in_constr() > msites_built() / 2) ? -2 : 0;
+		inputs[100] = (msites_in_constr() > msites_built() / 3) ? -2 : 0;
+		inputs[101] = (msites_in_constr() > msites_built() / 4) ? -2 : 0;
 	}
 	inputs[102] = (expansion_type.get_expansion_type() == ExpansionMode::kEconomy) ? -4 : 0;
-	inputs[104] = (expansion_type.get_expansion_type() == ExpansionMode::kEconomy || expansion_type.get_expansion_type() == ExpansionMode::kBoth) ? -3 : 0;
+	inputs[104] = (expansion_type.get_expansion_type() == ExpansionMode::kEconomy ||
+	               expansion_type.get_expansion_type() == ExpansionMode::kBoth) ?
+	                 -3 :
+	                 0;
 	inputs[105] = (expansion_type.get_expansion_type() == ExpansionMode::kEconomy) ? -1 : 0;
-	
+
 	for (int i = 0; i < 4 * f_neuron_bit_size; i = i + 1) {
 		if (inputs[i] < -35 || inputs[i] > 6) {
-			printf ("Warning check_building_necessity score on position %2d too high %2d\n", i, inputs[i]);
+			printf(
+			   "Warning check_building_necessity score on position %2d too high %2d\n", i, inputs[i]);
 		}
 	}
 
@@ -986,13 +1158,12 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 	final_score += std::abs(management_data.get_military_number_at(76) / 10);
 	final_score += management_data.get_military_number_at(100) / 5;
 
-	if (final_score >0) {
+	if (final_score > 0) {
 		bo.primary_priority = final_score * std::abs(management_data.get_military_number_at(79) / 2);
 		return BuildingNecessity::kAllowed;
 	} else {
 		return BuildingNecessity::kForbidden;
-		}
-
+	}
 }
 
 // This is called when soldier left the trainingsite
@@ -1003,7 +1174,7 @@ void DefaultAI::soldier_trained(const TrainingSite& site) {
 	const uint32_t gametime = game().get_gametime();
 	persistent_data->last_soldier_trained = gametime;
 	soldier_trained_log.push(gametime);
-	printf ("Soldier trained log size: %d\n", soldier_trained_log.count(gametime));
+	printf("Soldier trained log size: %d\n", soldier_trained_log.count(gametime));
 
 	for (TrainingSiteObserver& trainingsite_obs : trainingsites) {
 		if (trainingsite_obs.site == &site) {
