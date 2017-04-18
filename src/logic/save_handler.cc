@@ -37,7 +37,7 @@
 #include "wlapplication.h"
 #include "wui/interactive_base.h"
 
-// The actual wor of saving is done by the GameSaver
+// The actual work of saving is done by the GameSaver
 using Widelands::GameSaver;
 
 SaveHandler::SaveHandler()
