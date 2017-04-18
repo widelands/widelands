@@ -55,10 +55,10 @@ SaveHandler::SaveHandler()
 }
 
 void SaveHandler::rollSaveFiles(const std::string& filename) {
-  
+ 
     int32_t rolls = number_of_rolls;
 	log("Autosave: Rolling savefiles (count): %d\n", rolls);
-    rolls--; 
+    rolls--;
 	std::string filename_previous = create_file_name(
 	   get_base_dir(), (boost::format("%s_%02d") % filename % rolls).str());
 	if (rolls > 0 && g_fs->file_exists(filename_previous)) {
