@@ -6,9 +6,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-03-05 10:46+0000\n"
-"PO-Revision-Date: 2017-03-05 10:48+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2017-04-06 19:07+0000\n"
+"PO-Revision-Date: 2017-04-10 09:46+0000\n"
+"Last-Translator: Omar Anwar <omaraglan91@yahoo.com>\n"
 "Language-Team: Arabic (http://www.transifex.com/widelands/widelands/language/ar/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -30,11 +30,11 @@ msgstr ""
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:26
 msgid "Welcome to the Widelands Tutorial!"
-msgstr ""
+msgstr "مرحباً بكم في الدروس التعليمية ل الأرض الواسعة!"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:28
 msgid "Welcome to Widelands!"
-msgstr ""
+msgstr "مرحباً بكم في الأرض الواسعة"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:29
 msgid ""
@@ -49,11 +49,11 @@ msgstr ""
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:37
 msgid "Diving In"
-msgstr ""
+msgstr "لنبدأ"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:41
 msgid "Let’s dive right in!"
-msgstr ""
+msgstr "لنبدأ في الحال"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:42
 msgid ""
@@ -124,7 +124,7 @@ msgstr ""
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:70
 msgid "Building the Lumberjack"
-msgstr ""
+msgstr "يبني الحطاب"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:73
 msgid ""
@@ -145,7 +145,7 @@ msgstr ""
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:81
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:92
 msgid "Building a Connecting Road"
-msgstr ""
+msgstr "يبني طريق متصل"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:84
 msgid ""
@@ -167,7 +167,7 @@ msgstr ""
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:103
 msgid "Waiting for the Lumberjack to Go Up"
-msgstr ""
+msgstr "ينتظر للحطاب لكي ينطلق"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:106
 msgid ""
@@ -178,7 +178,7 @@ msgstr ""
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:113
 msgid "Placing Another Flag"
-msgstr ""
+msgstr "يضع علم أخر"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:116
 msgid ""
@@ -203,7 +203,7 @@ msgstr ""
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:126
 msgid "Build a Flag on the Road"
-msgstr ""
+msgstr "أبني عٙلم علي الطريق"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:127
 msgid ""
@@ -257,11 +257,11 @@ msgstr ""
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:157
 msgid "The Construction Site"
-msgstr ""
+msgstr "موقع الإنشاء"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:159
 msgid "Let's see the progress"
-msgstr ""
+msgstr "هيا لنري التقدم المحرز"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:160
 msgid ""
@@ -290,7 +290,7 @@ msgstr ""
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:179
 msgid "Some Rocks Were Found"
-msgstr ""
+msgstr "بعض الصخور وُجدت"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:180
 msgid "Getting a Quarry Up"
@@ -316,21 +316,21 @@ msgstr ""
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:189
 msgid "Move your view with the cursor keys"
-msgstr ""
+msgstr "حرك مشهدك بواسطة مفاتيح الأسهم"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:191
 msgid "Moving Your View"
-msgstr ""
+msgstr "حرك مشهدك"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:192
 msgid ""
 "Moving your view is essential to get a complete overview of your whole "
 "economy. There are three ways to move your view in Widelands."
-msgstr ""
+msgstr "هناك ثلاث طرق لكي تحرك مشهدك في الأرض الواسعة."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:194
 msgid "The first one is to use the cursor keys on your keyboard."
-msgstr ""
+msgstr "الأول أن تستخدم مفاتيح الأسهم في لوحة المفاتيح."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:195
 msgid ""
@@ -347,11 +347,11 @@ msgstr ""
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:201
 msgid "Other Ways to Move the View"
-msgstr ""
+msgstr "طرق أخري لكي تحرك المشهد"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:203
 msgid "Excellent. Now there is a faster way to move, using the mouse instead:"
-msgstr ""
+msgstr "ممتاز. الأن هناك طريقة أسرع لكي تتحرك، أستخدم الماوس أفضل:"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:205
 msgid ""
@@ -361,16 +361,16 @@ msgstr ""
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:210
 msgid "Move your view with the mouse"
-msgstr ""
+msgstr "حرك مشهدك من خلال الماوس"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:215
 msgid "Use the minimap"
-msgstr ""
+msgstr "أستخدم الخريطة المصغرة"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:217
 msgid ""
 "Very good. And now about the minimap. You can open it by clicking on the"
-msgstr ""
+msgstr "جيد جداً. و الأن عن الخريطة المصغرة. يمكنك فتحها عن طريق الضغط علي ال"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:219
 msgid ""
@@ -393,7 +393,7 @@ msgstr ""
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:228
 msgid "Learn to use the minimap"
-msgstr ""
+msgstr "تعلم إستخدام الخريطة المصغرة"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:231
 msgid ""
@@ -505,7 +505,7 @@ msgstr ""
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:310
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:318
 msgid "Road Building"
-msgstr ""
+msgstr "بناء الطريق"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:278
 msgid ""
@@ -637,7 +637,7 @@ msgstr ""
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:351
 msgid "You Destroyed the Construction Site!"
-msgstr ""
+msgstr "أنت دمرت موقع البناء!"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:353
 msgid ""
@@ -715,11 +715,11 @@ msgstr ""
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:397
 msgid "Messages"
-msgstr ""
+msgstr "الرسائل"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:398
 msgid "Introducing Messages"
-msgstr ""
+msgstr "يُقدم الرسائل"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:400
 msgid ""
@@ -797,7 +797,7 @@ msgstr ""
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:426
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:447
 msgid "Closing Windows"
-msgstr ""
+msgstr "إغلاق النوافذ"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:428
 msgid ""
@@ -814,11 +814,11 @@ msgstr ""
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:435
 msgid "Close the messages window"
-msgstr ""
+msgstr "أغلق نافذة الرسائل"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:437
 msgid "Close the Messages Window"
-msgstr ""
+msgstr "أغلق نافذة الرسائل"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:438
 msgid ""
@@ -841,7 +841,7 @@ msgstr ""
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:457
 msgid "Messages Arrived!"
-msgstr ""
+msgstr "رسائل وصلت!"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:459
 msgid ""
@@ -895,7 +895,7 @@ msgstr ""
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:477
 msgid "Expanding Your Territory!"
-msgstr ""
+msgstr "وسع منطقة نفوذك!"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:479
 msgid ""
@@ -925,7 +925,7 @@ msgstr ""
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:483
 msgid "Let’s try it out now: build a military building on your border."
-msgstr ""
+msgstr "لنجربه الأن: إبني مبني عسكري علي حدودك."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:484
 msgid ""
@@ -936,11 +936,11 @@ msgstr ""
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:487
 msgid "Expand your territory"
-msgstr ""
+msgstr "وسع منطقة نفوذك"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:489
 msgid "Make your territory grow"
-msgstr ""
+msgstr "إجعل منطقة نفوذك تنمو"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:490
 msgid ""
@@ -970,7 +970,7 @@ msgstr ""
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:501
 msgid "Your territory has just grown!"
-msgstr ""
+msgstr "منطقة نفوذك قد نمت للتو"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:502
 msgid ""
