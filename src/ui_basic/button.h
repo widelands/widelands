@@ -30,6 +30,20 @@
 
 namespace UI {
 
+struct Font;
+
+enum class ButtonDisableStyle {
+	kMonochrome = 2,   // Greyed out. Can be combined with the other 2 styles.
+	kPermpressed = 4,  // Button will appear pressed.
+	kFlat = 8,         // Button will appear flat.
+};
+inline ButtonDisableStyle operator&(ButtonDisableStyle a, ButtonDisableStyle b) {
+	return static_cast<ButtonDisableStyle>(static_cast<int>(a) & static_cast<int>(b));
+}
+inline ButtonDisableStyle operator|(ButtonDisableStyle a, ButtonDisableStyle b) {
+	return static_cast<ButtonDisableStyle>(static_cast<int>(a) | static_cast<int>(b));
+}
+
 /// This is simply a button. Override void clicked() to react to the click.
 /// This is all that is needed in most cases, but if there is a need to give a
 /// callback function to the button, there are some templates for that below.
@@ -103,6 +117,9 @@ struct Button : public NamedPanel {
 		return style_;
 	}
 
+	/// Sets the visual style of the disabled button
+	void set_disable_style(UI::ButtonDisableStyle input_style);
+
 	/// Convenience function. If 'pressed', sets the style to kPermpressed, otherwise to kRaised.
 	void set_perm_pressed(bool pressed);
 
@@ -121,6 +138,7 @@ protected:
 	bool pressed_;      //  mouse is clicked over the button
 	bool enabled_;
 	UI::Button::Style style_;
+	UI::ButtonDisableStyle disable_style_;
 	bool repeating_;
 	const UI::Button::ImageMode image_mode_;
 
