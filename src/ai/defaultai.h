@@ -307,7 +307,7 @@ private:
 	std::map<int32_t, Widelands::MineTypesObserver> mines_per_type;
 
 	// used for statistics of buildings
-	uint32_t num_prod_constructionsites;
+	uint32_t numof_psites_in_constr;
 	uint32_t num_ports;
 	uint16_t numof_warehouses_;
 	uint16_t numof_warehouses_in_const_;

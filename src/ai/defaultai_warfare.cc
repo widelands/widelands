@@ -353,6 +353,13 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 					inputs[33] = soldier_trained_log.count(gametime) / 2;
 					inputs[34] = +1;
 					inputs[35] = -1;
+					inputs[36] = (gametime < 15 * 60 * 1000) ? -1 : 0;
+					inputs[37] = (gametime < 20 * 60 * 1000) ? -1 : 0;
+					inputs[38] = (gametime < 25 * 60 * 1000) ? -1 : 0;
+					inputs[39] = (gametime < 30 * 60 * 1000) ? -1 : 0;
+					inputs[40] = (gametime < 35 * 60 * 1000) ? -1 : 0;
+					inputs[41] = (gametime < 40 * 60 * 1000) ? -1 : 0;
+					
 					site->second.score = 0;
 					for (uint8_t j = 0; j < f_neuron_bit_size; j += 1) {
 						if (management_data.f_neuron_pool[47].get_position(j)) {
@@ -749,8 +756,9 @@ bool DefaultAI::check_militarysites(uint32_t gametime) {
 	update_buildable_field(bf);
 	usefullness_score += bf.military_score_ / 10;
 
-	const bool can_be_dismantled = ms->present_soldiers().size() > 0 ||
-	                               militarysites.front().built_time + 10 * 60 * 1000 < gametime;
+	const bool can_be_dismantled = (ms->present_soldiers().size() > 0 ||
+	                               militarysites.front().built_time + 10 * 60 * 1000 < gametime) &&
+	                               bf.military_loneliness < 1000 - 2 * std::abs(management_data.get_military_number_at(14));
 
 	usefullness_score -=
 	   static_cast<int16_t>(soldier_status_) * std::abs(management_data.get_military_number_at(84));
@@ -776,7 +784,12 @@ bool DefaultAI::check_militarysites(uint32_t gametime) {
 	if (usefullness_score < dism_treshold) {
 		if (can_be_dismantled) {  // not too soon
 
-			printf("Dismanling military site with military loneliness: %d\n", bf.military_loneliness);
+			printf("Dismantling military at %3dx%3d site with military loneliness: %4d, left capacity: %2d\n",
+			bf.coords.x,
+			bf.coords.y,
+			bf.military_loneliness,
+			bf.area_military_capacity - ms->max_soldier_capacity());
+			 
 			changed = true;
 			dismantled_msites_count += 1;
 			if (ms->get_playercaps() & Widelands::Building::PCap_Dismantle) {
@@ -1047,7 +1060,7 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 	inputs[64] = (bo.build_material_shortage) ? -3 : 0;
 	inputs[65] = (bo.build_material_shortage) ? -1 : 0;
 	inputs[66] = (bo.build_material_shortage) ? -2 : 0;
-	inputs[67] = (bo.build_material_shortage) ? -2 : 0;
+	inputs[67] = (bo.build_material_shortage) ? -8 : 0;
 	inputs[68] = (gametime < 15 * 60 * 1000) ? (size - 1) * -1 : 0;
 	inputs[69] = (gametime < 30 * 60 * 1000) ? (size - 1) * -1 : 0;
 	inputs[70] = (gametime < 45 * 60 * 1000) ? (size - 1) * -1 : 0;

@@ -623,10 +623,10 @@ struct ManagementData {
 	            PlayerNumber,
 	            uint32_t,
 	            uint32_t,
+	            uint32_t,
 	            uint16_t,
 	            uint32_t,
 	            int16_t,
-	            uint8_t,
 	            uint16_t);
 	void dump_data();
 	void initialize(uint8_t, Widelands::AiType, bool reinitializing = false);
