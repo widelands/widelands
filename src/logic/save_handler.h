@@ -35,9 +35,9 @@ class Game;
 #define DEFAULT_AUTOSAVE_INTERVAL 15
 
 /**
- * Cares about manual or autosave via think().
+ * Takes care of manual or autosave via think().
  *
- * Note that this handler is used for replay, via the ReplayWriter, too.
+ * Note that this handler is used for replays via the ReplayWriter, too.
  */
 class SaveHandler {
 public:
@@ -84,8 +84,8 @@ private:
 	std::string autosave_filename_;
 
     FileSystem::Type fs_type_;
-	int32_t autosave_interval_in_millis;
-    int32_t number_of_rolls; // For rolling file update
+	int32_t autosave_interval_in_ms_;
+    int32_t number_of_rolls_; // For rolling file update
 
 	void initialize(uint32_t gametime);
     void rollSaveFiles(const std::string& filename);

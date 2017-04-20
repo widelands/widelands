@@ -1211,7 +1211,7 @@ bool WLApplication::new_game() {
 		return false;
 	}
 
-    Widelands::Game game;
+	Widelands::Game game;
 
 	if (code == FullscreenMenuBase::MenuTarget::kScenarioGame) {  // scenario
 		try {
@@ -1260,17 +1260,16 @@ bool WLApplication::new_game() {
  * or aborted the game setup via some other means.
  */
 bool WLApplication::load_game() {
+	Widelands::Game game;
+	std::string filename;
 
-    std::string                         filename;
-	SinglePlayerGameSettingsProvider    sp;
-    Widelands::Game                     game;
-	FullscreenMenuLoadGame              ssg(game, &sp, nullptr);
+	SinglePlayerGameSettingsProvider sp;
+	FullscreenMenuLoadGame ssg(game, &sp, nullptr);
 
 	if (ssg.run<FullscreenMenuBase::MenuTarget>() == FullscreenMenuBase::MenuTarget::kOk)
 		filename = ssg.filename();
 	else
 		return false;
-
 
 	try {
 		if (game.run_load_game(filename, ""))

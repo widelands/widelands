@@ -49,14 +49,14 @@ SaveHandler::SaveHandler()
         save_filename_(""),
         autosave_filename_("wl_autosave"),
         fs_type_(FileSystem::ZIP),
-        autosave_interval_in_millis(DEFAULT_AUTOSAVE_INTERVAL * 60 * 1000),
-		number_of_rolls(5)
+        autosave_interval_in_ms_(DEFAULT_AUTOSAVE_INTERVAL * 60 * 1000),
+		number_of_rolls_(5)
 {
 }
 
 void SaveHandler::rollSaveFiles(const std::string& filename) {
  
-    int32_t rolls = number_of_rolls;
+    int32_t rolls = number_of_rolls_;
 	log("Autosave: Rolling savefiles (count): %d\n", rolls);
     rolls--;
 	std::string filename_previous = create_file_name(
@@ -86,18 +86,18 @@ void SaveHandler::rollSaveFiles(const std::string& filename) {
 bool SaveHandler::checkNextTick(Widelands::Game& game, uint32_t realtime) {
 
 	// Perhaps save is due now?
-	if (autosave_interval_in_millis <= 0 || next_save_realtime_ > realtime) {
+	if (autosave_interval_in_ms_ <= 0 || next_save_realtime_ > realtime) {
 		return false;  // no autosave or not due, yet
 	}
 
-    next_save_realtime_ = realtime + autosave_interval_in_millis;
+    next_save_realtime_ = realtime + autosave_interval_in_ms_;
 
 	// check if game is paused (in any way)
 	if (game.game_controller()->is_paused_or_zero_speed()) {
 		return false;
 	}
 
-	log("Autosave: %d ms interval elapsed, current gametime: %s, saving...\n", autosave_interval_in_millis,
+	log("Autosave: %d ms interval elapsed, current gametime: %s, saving...\n", autosave_interval_in_ms_,
 	    gametimestring(game.get_gametime(), true).c_str());
 
 	game.get_ibase()->log_message(_("Saving game…"));
@@ -202,15 +202,14 @@ void SaveHandler::initialize(uint32_t realtime) {
 
     Section& global = g_options.pull_section("global");
 
-    bool const binary = !global.get_bool("nozip", false);
-    fs_type_ = binary ? FileSystem::ZIP : FileSystem::DIR;
+    fs_type_ = global.get_bool("nozip", false) ? FileSystem::DIR : FileSystem::ZIP;
 
-	autosave_interval_in_millis =
+	autosave_interval_in_ms_ =
 	   global.get_int("autosave", DEFAULT_AUTOSAVE_INTERVAL * 60) * 1000;
 
-	next_save_realtime_ = realtime + autosave_interval_in_millis;
+	next_save_realtime_ = realtime + autosave_interval_in_ms_;
 
-	number_of_rolls = global.get_int("rolling_autosave", 5);
+	number_of_rolls_ = global.get_int("rolling_autosave", 5);
 
 	initialized_ = true;
 }
