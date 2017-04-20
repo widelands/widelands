@@ -2,14 +2,14 @@
 # Copyright (C) 2005-2017 Widelands Development Team
 # 
 # Translators:
-# abuyop <abuyop@gmail.com>, 2015
+# abuyop <abuyop@gmail.com>, 2015,2017
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-01-21 14:22+0000\n"
-"PO-Revision-Date: 2017-01-21 14:26+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2017-04-06 19:07+0000\n"
+"PO-Revision-Date: 2017-04-08 05:26+0000\n"
+"Last-Translator: abuyop <abuyop@gmail.com>\n"
 "Language-Team: Malay (http://www.transifex.com/widelands/widelands/language/ms/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -17,67 +17,67 @@ msgstr ""
 "Language: ms\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: ../../data/world/critters/badger/init.lua:14
+#: ../../data/world/critters/badger/init.lua:15
 msgid "Badger"
 msgstr "Bajing"
 
-#: ../../data/world/critters/brownbear/init.lua:14
+#: ../../data/world/critters/brownbear/init.lua:15
 msgid "Brown bear"
 msgstr "Beruang coklat"
 
-#: ../../data/world/critters/bunny/init.lua:13
+#: ../../data/world/critters/bunny/init.lua:14
 msgid "Bunny"
 msgstr "Arnab"
 
-#: ../../data/world/critters/chamois/init.lua:14
+#: ../../data/world/critters/chamois/init.lua:15
 msgid "Chamois"
 msgstr "Syamwa"
 
-#: ../../data/world/critters/deer/init.lua:14
+#: ../../data/world/critters/deer/init.lua:15
 msgid "Deer"
 msgstr "Rusa"
 
-#: ../../data/world/critters/duck/init.lua:18
+#: ../../data/world/critters/duck/init.lua:19
 msgid "Duck"
 msgstr "Itik"
 
-#: ../../data/world/critters/elk/init.lua:19
+#: ../../data/world/critters/elk/init.lua:20
 msgid "Elk"
 msgstr "Elk"
 
-#: ../../data/world/critters/fox/init.lua:19
+#: ../../data/world/critters/fox/init.lua:20
 msgid "Fox"
 msgstr "Musang"
 
-#: ../../data/world/critters/lynx/init.lua:14
+#: ../../data/world/critters/lynx/init.lua:16
 msgid "Lynx"
 msgstr "Kucing Lynx"
 
-#: ../../data/world/critters/marten/init.lua:14
+#: ../../data/world/critters/marten/init.lua:15
 msgid "Marten"
 msgstr "Marten"
 
-#: ../../data/world/critters/reindeer/init.lua:14
+#: ../../data/world/critters/reindeer/init.lua:16
 msgid "Reindeer"
 msgstr "Rusa Kutub"
 
-#: ../../data/world/critters/sheep/init.lua:18
+#: ../../data/world/critters/sheep/init.lua:19
 msgid "Sheep"
 msgstr "Biri-Biri"
 
-#: ../../data/world/critters/stag/init.lua:19
+#: ../../data/world/critters/stag/init.lua:20
 msgid "Stag"
 msgstr "Rusa Jantan"
 
-#: ../../data/world/critters/wildboar/init.lua:18
+#: ../../data/world/critters/wildboar/init.lua:19
 msgid "Wild boar"
 msgstr "Babi Hutan"
 
-#: ../../data/world/critters/wisent/init.lua:14
+#: ../../data/world/critters/wisent/init.lua:15
 msgid "Wisent"
 msgstr "Wisent"
 
-#: ../../data/world/critters/wolf/init.lua:19
+#: ../../data/world/critters/wolf/init.lua:20
 msgid "Wolf"
 msgstr "Serigala"
 
@@ -107,7 +107,7 @@ msgstr "Rumput"
 #: ../../data/world/immovables/manmade/artifacts/artifact02/init.lua:5
 #: ../../data/world/immovables/manmade/artifacts/artifact03/init.lua:5
 msgid "Artifact"
-msgstr ""
+msgstr "Artifaks"
 
 #: ../../data/world/immovables/manmade/bar-ruin00/init.lua:5
 #: ../../data/world/immovables/manmade/bar-ruin01/init.lua:5
@@ -147,48 +147,48 @@ msgstr "Batu Kerakal"
 #: ../../data/world/immovables/rocks/greenland_rocks1/init.lua:12
 #: ../../data/world/immovables/rocks/winterland_rocks1/init.lua:12
 msgid "Rocks 1"
-msgstr ""
+msgstr "Batu 1"
 
 #: ../../data/world/immovables/rocks/blackland_rocks2/init.lua:12
 #: ../../data/world/immovables/rocks/desert_rocks2/init.lua:12
 #: ../../data/world/immovables/rocks/greenland_rocks2/init.lua:12
 #: ../../data/world/immovables/rocks/winterland_rocks2/init.lua:12
 msgid "Rocks 2"
-msgstr ""
+msgstr "Batu 2"
 
 #: ../../data/world/immovables/rocks/blackland_rocks3/init.lua:12
 #: ../../data/world/immovables/rocks/desert_rocks3/init.lua:12
 #: ../../data/world/immovables/rocks/greenland_rocks3/init.lua:12
 #: ../../data/world/immovables/rocks/winterland_rocks3/init.lua:12
 msgid "Rocks 3"
-msgstr ""
+msgstr "Batu 3"
 
 #: ../../data/world/immovables/rocks/blackland_rocks4/init.lua:12
 #: ../../data/world/immovables/rocks/desert_rocks4/init.lua:12
 #: ../../data/world/immovables/rocks/greenland_rocks4/init.lua:12
 #: ../../data/world/immovables/rocks/winterland_rocks4/init.lua:12
 msgid "Rocks 4"
-msgstr ""
+msgstr "Batu 4"
 
 #: ../../data/world/immovables/rocks/blackland_rocks5/init.lua:12
 #: ../../data/world/immovables/rocks/desert_rocks5/init.lua:12
 #: ../../data/world/immovables/rocks/greenland_rocks5/init.lua:12
 #: ../../data/world/immovables/rocks/winterland_rocks5/init.lua:12
 msgid "Rocks 5"
-msgstr ""
+msgstr "Batu 5"
 
 #: ../../data/world/immovables/rocks/blackland_rocks6/init.lua:12
 #: ../../data/world/immovables/rocks/desert_rocks6/init.lua:12
 #: ../../data/world/immovables/rocks/greenland_rocks6/init.lua:12
 #: ../../data/world/immovables/rocks/winterland_rocks6/init.lua:12
 msgid "Rocks 6"
-msgstr ""
+msgstr "Batu 6"
 
 #: ../../data/world/immovables/ruin3/init.lua:5
 #: ../../data/world/immovables/ruin4/init.lua:5
 #: ../../data/world/immovables/ruin5/init.lua:5
 msgid "Tombstone"
-msgstr ""
+msgstr "Batu Nisan"
 
 #: ../../data/world/immovables/skeleton1/init.lua:5
 #: ../../data/world/immovables/skeleton3/init.lua:5
@@ -248,7 +248,7 @@ msgstr "Pokok Alder (Tua)"
 
 #: ../../data/world/immovables/trees/alder/init.lua:90
 msgid "Alder"
-msgstr ""
+msgstr "Pokok Alder"
 
 #: ../../data/world/immovables/trees/aspen/init.lua:12
 msgid "Aspen (Sapling)"
@@ -268,7 +268,7 @@ msgstr "Pokok Aspen (Tua)"
 
 #: ../../data/world/immovables/trees/aspen/init.lua:85
 msgid "Aspen"
-msgstr ""
+msgstr "Pokok Aspen"
 
 #: ../../data/world/immovables/trees/beech/init.lua:12
 msgid "Beech (Sapling)"
@@ -288,7 +288,7 @@ msgstr "Pokok Bic (Tua)"
 
 #: ../../data/world/immovables/trees/beech/init.lua:82
 msgid "Beech"
-msgstr ""
+msgstr "Pokok Bic"
 
 #: ../../data/world/immovables/trees/birch/init.lua:12
 msgid "Birch (Sapling)"
@@ -308,7 +308,7 @@ msgstr "Pokok Birch (Tua)"
 
 #: ../../data/world/immovables/trees/birch/init.lua:85
 msgid "Birch"
-msgstr ""
+msgstr "Pokok Birch"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../data/world/immovables/trees/cirrus/init.lua:13
@@ -333,7 +333,7 @@ msgstr "Pokok Sirus (Tua)"
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../data/world/immovables/trees/cirrus/init.lua:87
 msgid "Cirrus Tree"
-msgstr ""
+msgstr "Pokok Sirus"
 
 #: ../../data/world/immovables/trees/deadtree1/init.lua:5
 #: ../../data/world/immovables/trees/deadtree2/init.lua:5
@@ -366,7 +366,7 @@ msgstr "Pokok Larch (Tua)"
 
 #: ../../data/world/immovables/trees/larch/init.lua:82
 msgid "Larch"
-msgstr ""
+msgstr "Pokok Larch"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../data/world/immovables/trees/liana/init.lua:13
@@ -391,7 +391,7 @@ msgstr "Pokok Liana (Tua)"
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../data/world/immovables/trees/liana/init.lua:90
 msgid "Liana Tree"
-msgstr ""
+msgstr "Pokok Liana"
 
 #: ../../data/world/immovables/trees/maple/init.lua:12
 msgid "Maple (Sapling)"
@@ -411,7 +411,7 @@ msgstr "Pokok Mapel (Tua)"
 
 #: ../../data/world/immovables/trees/maple/init.lua:82
 msgid "Maple"
-msgstr ""
+msgstr "Pokok Mapel"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../data/world/immovables/trees/mushroom_dark/init.lua:13
@@ -436,7 +436,7 @@ msgstr "Pokok Kulat Hitam (Tua)"
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../data/world/immovables/trees/mushroom_dark/init.lua:87
 msgid "Dark Mushroom Tree"
-msgstr ""
+msgstr "Pokok Kulat Hitam"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../data/world/immovables/trees/mushroom_green/init.lua:13
@@ -461,7 +461,7 @@ msgstr "Pokok Kulat Hijau (Tua)"
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../data/world/immovables/trees/mushroom_green/init.lua:87
 msgid "Green Mushroom Tree"
-msgstr ""
+msgstr "Pokok Kulat Hijau"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../data/world/immovables/trees/mushroom_red/init.lua:13
@@ -486,7 +486,7 @@ msgstr "Pokok Kulat Merah (Tua)"
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../data/world/immovables/trees/mushroom_red/init.lua:90
 msgid "Red Mushroom Tree"
-msgstr ""
+msgstr "Pokok Kulat Merah"
 
 #: ../../data/world/immovables/trees/oak/init.lua:12
 msgid "Oak (Sapling)"
@@ -506,7 +506,7 @@ msgstr "Pokok Oak (Tua)"
 
 #: ../../data/world/immovables/trees/oak/init.lua:82
 msgid "Oak"
-msgstr ""
+msgstr "Pokok Oak"
 
 #: ../../data/world/immovables/trees/palm_borassus/init.lua:12
 msgid "Borassus Palm (Sapling)"
@@ -526,7 +526,7 @@ msgstr "Pokok Lontar (Tua)"
 
 #: ../../data/world/immovables/trees/palm_borassus/init.lua:82
 msgid "Borassus Palm"
-msgstr ""
+msgstr "Pokok Lontar"
 
 #: ../../data/world/immovables/trees/palm_coconut/init.lua:12
 msgid "Coconut Palm (Sapling)"
@@ -546,7 +546,7 @@ msgstr "Pokok Kelapa (Tua)"
 
 #: ../../data/world/immovables/trees/palm_coconut/init.lua:82
 msgid "Coconut Palm"
-msgstr ""
+msgstr "Pokok Kelapa"
 
 #: ../../data/world/immovables/trees/palm_date/init.lua:12
 msgid "Date Palm (Sapling)"
@@ -566,7 +566,7 @@ msgstr "Pokok Kurma (Tua)"
 
 #: ../../data/world/immovables/trees/palm_date/init.lua:85
 msgid "Date Palm"
-msgstr ""
+msgstr "Pokok Kurma"
 
 #: ../../data/world/immovables/trees/palm_oil/init.lua:12
 msgid "Oil Palm (Sapling)"
@@ -586,7 +586,7 @@ msgstr "Pokok Kelapa Sawit (Tua)"
 
 #: ../../data/world/immovables/trees/palm_oil/init.lua:86
 msgid "Oil Palm"
-msgstr ""
+msgstr "Pokok Kelapa Sawit"
 
 #: ../../data/world/immovables/trees/palm_roystonea/init.lua:12
 msgid "Roystonea regia Palm (Sapling)"
@@ -606,7 +606,7 @@ msgstr "Pokok Palma Raja (Tua)"
 
 #: ../../data/world/immovables/trees/palm_roystonea/init.lua:82
 msgid "Roystonea regia Palm"
-msgstr ""
+msgstr "Pokok Palma Raja"
 
 #: ../../data/world/immovables/trees/rowan/init.lua:12
 msgid "Rowan (Sapling)"
@@ -626,7 +626,7 @@ msgstr "Pokok Rowan (Tua)"
 
 #: ../../data/world/immovables/trees/rowan/init.lua:85
 msgid "Rowan"
-msgstr ""
+msgstr "Pokok Rowan"
 
 #: ../../data/world/immovables/trees/spruce/init.lua:12
 msgid "Spruce (Sapling)"
@@ -646,7 +646,7 @@ msgstr "Pokok Spruce (Tua)"
 
 #: ../../data/world/immovables/trees/spruce/init.lua:82
 msgid "Spruce"
-msgstr ""
+msgstr "Pokok Spruce"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../data/world/immovables/trees/twine/init.lua:13
@@ -671,7 +671,7 @@ msgstr "Pokok Menjalar (Tua)"
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../data/world/immovables/trees/twine/init.lua:87
 msgid "Twine Tree"
-msgstr ""
+msgstr "Pokok Menjalar"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../data/world/immovables/trees/umbrella_green/init.lua:13
@@ -696,7 +696,7 @@ msgstr "Pokok Green Umbrella (Tua)"
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../data/world/immovables/trees/umbrella_green/init.lua:87
 msgid "Green Umbrella Tree"
-msgstr ""
+msgstr "Pokok Green Umbrella"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../data/world/immovables/trees/umbrella_red/init.lua:13
@@ -721,66 +721,66 @@ msgstr "Pokok Red Umbrella (Tua)"
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../data/world/immovables/trees/umbrella_red/init.lua:90
 msgid "Red Umbrella Tree"
-msgstr ""
+msgstr "Pokok Red Umbrella"
 
-#: ../../data/world/init.lua:11
+#: ../../data/world/init.lua:19
 msgid "Miscellaneous"
 msgstr "Pelbagai"
 
-#: ../../data/world/init.lua:18
+#: ../../data/world/init.lua:26
 msgid "Artifacts"
-msgstr ""
+msgstr "Artifaks"
 
-#: ../../data/world/init.lua:18
+#: ../../data/world/init.lua:26
 msgid "These immovables are used by the win condition “Artifacts”."
 msgstr ""
 
-#: ../../data/world/init.lua:25
+#: ../../data/world/init.lua:33
 msgid "Plants"
 msgstr "Tumbuh-tumbuhan"
 
-#: ../../data/world/init.lua:32
+#: ../../data/world/init.lua:40
 msgid "Standing Stones"
 msgstr "Batu Berdiri"
 
-#: ../../data/world/init.lua:39
+#: ../../data/world/init.lua:47
 msgid "Rocks"
-msgstr ""
+msgstr "Batu"
 
-#: ../../data/world/init.lua:46
+#: ../../data/world/init.lua:54
 msgid "Dead Trees"
 msgstr "Pokok Mati"
 
-#: ../../data/world/init.lua:53
+#: ../../data/world/init.lua:61
 msgid "Coniferous Trees"
 msgstr "Pokok Konifer"
 
-#: ../../data/world/init.lua:60
+#: ../../data/world/init.lua:68
 msgid "Deciduous Trees"
 msgstr "Pokok Daun Luruh"
 
-#: ../../data/world/init.lua:67
+#: ../../data/world/init.lua:75
 msgid "Palm Trees"
 msgstr "Pokok Palma"
 
-#: ../../data/world/init.lua:74
+#: ../../data/world/init.lua:82
 msgid "Wasteland Trees"
 msgstr "Pokok Tanah Tandus"
 
 #. TRANSLATORS: A category in the editor for placing animals on the map.
-#: ../../data/world/init.lua:82
-msgid "Herbivores"
-msgstr ""
-
-#. TRANSLATORS: A category in the editor for placing animals on the map.
 #: ../../data/world/init.lua:90
-msgid "Carnivores"
-msgstr ""
+msgid "Herbivores"
+msgstr "Herbivor"
 
 #. TRANSLATORS: A category in the editor for placing animals on the map.
 #: ../../data/world/init.lua:98
+msgid "Carnivores"
+msgstr "Karnivor"
+
+#. TRANSLATORS: A category in the editor for placing animals on the map.
+#: ../../data/world/init.lua:106
 msgid "Aquatic"
-msgstr ""
+msgstr "Akuatik"
 
 #: ../../data/world/resources/init.lua:7
 msgid "Coal"
@@ -828,7 +828,7 @@ msgstr "Padang Pasir"
 
 #: ../../data/world/terrains/init.lua:37
 msgid "Meadow 1"
-msgstr ""
+msgstr "Padang Rumput 1"
 
 #. TRANSLATORS: This is an entry in a terrain tooltip. Try to use 1 word if
 #. possible.
@@ -857,19 +857,19 @@ msgstr ""
 #: ../../data/world/terrains/init.lua:1104
 #: ../../data/world/terrains/init.lua:1123
 msgid "likes trees"
-msgstr ""
+msgstr "seakan pokok"
 
 #: ../../data/world/terrains/init.lua:90
 msgid "Meadow 2"
-msgstr ""
+msgstr "Padang Rumput 2"
 
 #: ../../data/world/terrains/init.lua:111
 msgid "Meadow 3"
-msgstr ""
+msgstr "Padang Rumput 3"
 
 #: ../../data/world/terrains/init.lua:131
 msgid "Meadow 4"
-msgstr ""
+msgstr "Padang Rumput 4"
 
 #: ../../data/world/terrains/init.lua:151
 #: ../../data/world/terrains/init.lua:1019
@@ -890,42 +890,42 @@ msgstr "Padang Rumput Pergunungan"
 #: ../../data/world/terrains/init.lua:803
 #: ../../data/world/terrains/init.lua:1099
 msgid "Forested Mountain 1"
-msgstr ""
+msgstr "Gunung Berhutan 1"
 
 #: ../../data/world/terrains/init.lua:218
 #: ../../data/world/terrains/init.lua:540
 #: ../../data/world/terrains/init.lua:822
 #: ../../data/world/terrains/init.lua:1118
 msgid "Forested Mountain 2"
-msgstr ""
+msgstr "Gunung Berhutan 2"
 
 #: ../../data/world/terrains/init.lua:238
 #: ../../data/world/terrains/init.lua:559
 #: ../../data/world/terrains/init.lua:841
 #: ../../data/world/terrains/init.lua:1138
 msgid "Mountain 1"
-msgstr ""
+msgstr "Gunung 1"
 
 #: ../../data/world/terrains/init.lua:254
 #: ../../data/world/terrains/init.lua:575
 #: ../../data/world/terrains/init.lua:857
 #: ../../data/world/terrains/init.lua:1154
 msgid "Mountain 2"
-msgstr ""
+msgstr "Gunung 2"
 
 #: ../../data/world/terrains/init.lua:270
 #: ../../data/world/terrains/init.lua:591
 #: ../../data/world/terrains/init.lua:873
 #: ../../data/world/terrains/init.lua:1170
 msgid "Mountain 3"
-msgstr ""
+msgstr "Gunung 3"
 
 #: ../../data/world/terrains/init.lua:286
 #: ../../data/world/terrains/init.lua:607
 #: ../../data/world/terrains/init.lua:889
 #: ../../data/world/terrains/init.lua:1186
 msgid "Mountain 4"
-msgstr ""
+msgstr "Gunung 4"
 
 #: ../../data/world/terrains/init.lua:301
 #: ../../data/world/terrains/init.lua:623
@@ -949,27 +949,27 @@ msgstr "Lava"
 
 #: ../../data/world/terrains/init.lua:385
 msgid "Ashes 1"
-msgstr ""
+msgstr "Abu 1"
 
 #: ../../data/world/terrains/init.lua:405
 msgid "Ashes 2"
-msgstr ""
+msgstr "Abu 2"
 
 #: ../../data/world/terrains/init.lua:425
 msgid "Hard Ground 1"
-msgstr ""
+msgstr "Tanah Keras 1"
 
 #: ../../data/world/terrains/init.lua:445
 msgid "Hard Ground 2"
-msgstr ""
+msgstr "Tanah Keras 2"
 
 #: ../../data/world/terrains/init.lua:465
 msgid "Hard Ground 3"
-msgstr ""
+msgstr "Tanah Keras 3"
 
 #: ../../data/world/terrains/init.lua:485
 msgid "Hard Ground 4"
-msgstr ""
+msgstr "Tanah Keras 4"
 
 #: ../../data/world/terrains/init.lua:505
 msgid "Igneous Rocks"
@@ -977,23 +977,23 @@ msgstr "Batu Igneus"
 
 #: ../../data/world/terrains/init.lua:639
 msgid "Lava Rocks 1"
-msgstr ""
+msgstr "Batu Lava 1"
 
 #: ../../data/world/terrains/init.lua:656
 msgid "Lava Rocks 2"
-msgstr ""
+msgstr "Batu Lava 2"
 
 #: ../../data/world/terrains/init.lua:695
 msgid "Tundra 1"
-msgstr ""
+msgstr "Tundra 1"
 
 #: ../../data/world/terrains/init.lua:715
 msgid "Tundra 2"
-msgstr ""
+msgstr "Tundra 2"
 
 #: ../../data/world/terrains/init.lua:735
 msgid "Tundra 3"
-msgstr ""
+msgstr "Tundra 3"
 
 #: ../../data/world/terrains/init.lua:755
 msgid "Tundra Taiga"
@@ -1009,15 +1009,15 @@ msgstr "Ais"
 
 #: ../../data/world/terrains/init.lua:935
 msgid "Ice Floes 1"
-msgstr ""
+msgstr "Flo Ais 1"
 
 #: ../../data/world/terrains/init.lua:952
 msgid "Ice Floes 2"
-msgstr ""
+msgstr "Flo Ais 2"
 
 #: ../../data/world/terrains/init.lua:990
 msgid "Desert 4"
-msgstr ""
+msgstr "Padang Pasir 4"
 
 #: ../../data/world/terrains/init.lua:1005
 msgid "Dry Soil"
@@ -1033,12 +1033,12 @@ msgstr "Padang Rumput Tanah Tinggi"
 
 #: ../../data/world/terrains/init.lua:1200
 msgid "Desert 1"
-msgstr ""
+msgstr "Padang Pasir 1"
 
 #: ../../data/world/terrains/init.lua:1216
 msgid "Desert 2"
-msgstr ""
+msgstr "Padang Pasir 2"
 
 #: ../../data/world/terrains/init.lua:1232
 msgid "Desert 3"
-msgstr ""
+msgstr "Padang Pasir 3"
