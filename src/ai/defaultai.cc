@@ -960,9 +960,14 @@ void DefaultAI::late_initialization() {
 		assert(persistent_data->magic_numbers.size() == 0);
 
 		// AI's DNA population
-		management_data.initialize(player_number(), type_);
+		//management_data.initialize(player_number(), type_);
+		//management_data.mutate();
+		management_data.new_dna_for_persistent(player_number(), type_);
+		management_data.copy_persistent_to_local(player_number());
+		management_data.mutate(player_number());
+		management_data.dump_data();
 
-		management_data.test_consistency();
+		management_data.test_consistency(true);
 		assert(management_data.get_military_number_at(42) ==
 		       management_data.get_military_number_at(MutationRatePosition));
 
@@ -982,27 +987,39 @@ void DefaultAI::late_initialization() {
 			persistent_data->least_military_score  = persistent_data->target_military_score;
 			}
 
-		assert(persistent_data->magic_numbers_size == magic_numbers_size);
-		assert(persistent_data->neuron_pool_size == neuron_pool_size);
-		assert(persistent_data->magic_numbers.size() == magic_numbers_size);
-		assert(persistent_data->neuron_weights.size() == neuron_pool_size);
-		assert(persistent_data->neuron_functs.size() == neuron_pool_size);
-		assert(persistent_data->f_neurons.size() == f_neuron_pool_size);
+		//assert(persistent_data->magic_numbers_size == magic_numbers_size);
+		//assert(persistent_data->neuron_pool_size == neuron_pool_size);
+		//assert(persistent_data->magic_numbers.size() == magic_numbers_size);
+		//assert(persistent_data->neuron_weights.size() == neuron_pool_size);
+		//assert(persistent_data->neuron_functs.size() == neuron_pool_size);
+		//assert(persistent_data->f_neurons.size() == f_neuron_pool_size);
 
-		for (uint32_t i = 0; i < persistent_data->magic_numbers_size; i = i + 1) {
-			management_data.set_military_number_at(i, persistent_data->magic_numbers[i]);
-		}
-		for (uint32_t i = 0; i < persistent_data->neuron_pool_size; i = i + 1) {
-			management_data.neuron_pool.push_back(Neuron(persistent_data->neuron_weights[i],
-			                                             persistent_data->neuron_functs[i],
-			                                             management_data.new_neuron_id()));
+		//for (uint32_t i = 0; i < persistent_data->magic_numbers_size; i = i + 1) {
+			//management_data.set_military_number_at(i, persistent_data->magic_numbers[i]);
+		//}
+		//for (uint32_t i = 0; i < persistent_data->neuron_pool_size; i = i + 1) {
+			//management_data.neuron_pool.push_back(Neuron(persistent_data->neuron_weights[i],
+			                                             //persistent_data->neuron_functs[i],
+			                                             //management_data.new_neuron_id()));
+		//}
+
+		//for (uint32_t i = 0; i < persistent_data->f_neuron_pool_size; i = i + 1) {
+			//management_data.f_neuron_pool.push_back(FNeuron(persistent_data->f_neurons[i], i));
+		//}
+
+		if (kInitializeOnLoad) {
+			printf ("%2d: reinitializing dna (kReinitializeOnLoad set ON)", player_number());
+			management_data.new_dna_for_persistent(player_number(), type_);
+			management_data.copy_persistent_to_local(player_number());
+			management_data.mutate(player_number());
+			//management_data.initialize(player_number(), type_, true);
+			//management_data.mutate();
+			//management_data.dump_data();
+		} else {
+			management_data.copy_persistent_to_local(player_number());
 		}
 
-		for (uint32_t i = 0; i < persistent_data->f_neuron_pool_size; i = i + 1) {
-			management_data.f_neuron_pool.push_back(FNeuron(persistent_data->f_neurons[i], i));
-		}
-
-		management_data.test_consistency();
+		management_data.test_consistency(true);
 		management_data.dump_data();
 
 	} else {
@@ -3866,8 +3883,8 @@ bool DefaultAI::check_productionsites(uint32_t gametime) {
 		//NOCOM
 		// Blocking the vicinity if too low performance and ware is still needed
 		if (site.site->get_statistics_percent() <= 50 || get_stocklevel(*site.bo, gametime) < 5) {
-			printf ("Blocking vicinity of %-25s at position %3dx%3d\n",
-				site.bo->name, site.site->base_flag().get_position().x, site.site->base_flag().get_position().y);
+			//printf ("Blocking vicinity of %-25s at position %3dx%3d\n",
+				//site.bo->name, site.site->base_flag().get_position().x, site.site->base_flag().get_position().y);
 			MapRegion<Area<FCoords>> mr(map, Area<FCoords>(map.get_fcoords(site.site->base_flag().get_position()), 5));
 			do {
 				blocked_fields.add(mr.location(), gametime + 5 * 60 * 100);

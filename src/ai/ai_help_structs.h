@@ -121,6 +121,7 @@ constexpr int neuron_pool_size = 80;
 constexpr int f_neuron_pool_size = 60;
 constexpr int f_neuron_bit_size = 32;
 constexpr int MutationRatePosition = 42;
+constexpr bool kInitializeOnLoad = true;
 
 constexpr uint32_t kNever = std::numeric_limits<uint32_t>::max();
 
@@ -618,7 +619,9 @@ struct ManagementData {
 	std::vector<FNeuron> f_neuron_pool;
 	Widelands::Player::AiPersistentState* pd;
 
-	void mutate(uint32_t, PlayerNumber = 0);
+	void mutate(PlayerNumber = 0);
+	void new_dna_for_persistent(uint8_t, Widelands::AiType);
+	void copy_persistent_to_local(uint8_t);
 	void review(uint32_t,
 	            PlayerNumber,
 	            uint32_t,
@@ -629,7 +632,7 @@ struct ManagementData {
 	            int16_t,
 	            uint16_t);
 	void dump_data();
-	void initialize(uint8_t, Widelands::AiType, bool reinitializing = false);
+	//void initialize(uint8_t, Widelands::AiType, bool reinitializing = false);
 	uint16_t new_neuron_id() {
 		next_neuron_id += 1;
 		return next_neuron_id - 1;
@@ -647,12 +650,11 @@ struct ManagementData {
 	int16_t get_military_number_at(uint8_t);
 	void set_military_number_at(uint8_t, int16_t);
 	int8_t shift_weight_value(int8_t, bool = true);
-	bool test_consistency();
+	bool test_consistency(bool = false);
 
 private:
 	int32_t score;
 	uint8_t primary_parent;
-	uint32_t last_mutate_time;
 	uint16_t review_count;
 	uint16_t next_neuron_id;
 	uint16_t next_bi_neuron_id;

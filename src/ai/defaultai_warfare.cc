@@ -528,7 +528,7 @@ bool DefaultAI::check_trainingsites(uint32_t gametime) {
 	const DescriptionIndex enhancement = ts->descr().enhancement();
 
 	if (enhancement != INVALID_INDEX && ts_without_trainers_ == 0 && mines_.size() > 3 &&
-	    ts_finished_count_ > 1) {
+	    ts_finished_count_ > 1 && ts_in_const_count_ == 0) {
 
 		if (player_->is_building_type_allowed(enhancement)) {
 			game().send_player_enhance_building(*tso.site, enhancement);
