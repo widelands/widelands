@@ -55,7 +55,7 @@ SaveHandler::SaveHandler()
 }
 
 void SaveHandler::rollSaveFiles(const std::string& filename) {
- 
+
     int32_t rolls = number_of_rolls_;
 	log("Autosave: Rolling savefiles (count): %d\n", rolls);
     rolls--;
