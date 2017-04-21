@@ -89,9 +89,14 @@ wl_library(wui_common
     base_exceptions
     base_i18n
     base_log
+    base_time_string
+    helper
+    game_io
     graphic
     graphic_fonthandler
+    graphic_image_io
     graphic_playercolor
+    graphic_surface
     graphic_text_constants
     io_filesystem
     logic
@@ -278,6 +283,7 @@ wl_library(wui
     ui_basic
     widelands_ball_of_mud
     wui_chat_ui
+    wui_common
     wui_economy_options
     wui_edge_overlay_manager
     wui_field_overlay_manager

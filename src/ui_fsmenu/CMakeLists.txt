@@ -39,14 +39,10 @@ wl_library(ui_fsmenu
     base_i18n
     base_log
     base_macros
-    base_time_string
     build_info
-    game_io
     graphic
     graphic_fonthandler
-    graphic_image_io
     graphic_playercolor
-    graphic_surface
     graphic_text
     graphic_text_constants
     helper
