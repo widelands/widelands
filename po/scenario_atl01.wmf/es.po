@@ -12,8 +12,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-03-10 07:01+0000\n"
-"PO-Revision-Date: 2017-03-13 10:35+0000\n"
+"POT-Creation-Date: 2017-03-24 18:58+0000\n"
+"PO-Revision-Date: 2017-03-28 07:31+0000\n"
 "Last-Translator: Thadah D. Denyse <juchuf@gmail.com>\n"
 "Language-Team: Spanish (http://www.transifex.com/widelands/widelands/language/es/)\n"
 "MIME-Version: 1.0\n"
@@ -230,7 +230,7 @@ msgid ""
 "we need to deliver light tridents and tabards to the barracks. Recruits will"
 " arrive from the warehouse and receive one of each and some basic training "
 "to become a soldier."
-msgstr ""
+msgstr "Ahora que hay armas siendo forjadas, puedes reclutar nuevos soldados. Para ésto, debes entregar tridentes ligeros y tabardos a los barracones. Los reclutas llegarán desde el almacén y recibirán entrenamiento básico para convertirse en soldados."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:109
 msgid "Build training sites for soldiers"
@@ -678,7 +678,7 @@ msgstr "He considerado esto, Sidolus. Creo que ya es hora. Haremos de esto una p
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:317
 msgid "Jundlina Writes a Letter"
-msgstr ""
+msgstr "Jundlina escribe una carta"
 
 #. TRANSLATORS: Jundlina
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:320
@@ -686,14 +686,14 @@ msgid ""
 "I have received word that our mining industry started working. Now that we "
 "are forging weapons, I will send a letter to Sidolus informing him that it’s"
 " time to build a barracks and start recruiting soldiers."
-msgstr ""
+msgstr "He recibido información de que nuestra industria minera ha empezado a funcionar. Ahora que estamos forjando armas, mandaré una carta a Sidolus informándole de que es momento de construir unos barracones y comenzar a reclutar soldados."
 
 #. TRANSLATORS: Jundlina
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:330
 msgid ""
 "Today I saw the first recruits gathering in front of the new barracks. If "
 "everything goes well, they should receive their training soon."
-msgstr ""
+msgstr "Hoy he visto a los primeros reclutas reuniéndose delante de los nuevos barracones. Si todo va bien, deberían recibir su entrenamiento pronto. "
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:336
 msgid "Jundlina Summons Sidolus"
