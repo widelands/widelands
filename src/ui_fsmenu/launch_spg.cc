@@ -152,7 +152,9 @@ void FullscreenMenuLaunchSPG::clicked_back() {
 }
 
 void FullscreenMenuLaunchSPG::win_condition_selected() {
-	last_win_condition_ = win_condition_dropdown_.get_selected();
+	if (win_condition_dropdown_.has_selection()) {
+		last_win_condition_ = win_condition_dropdown_.get_selected();
+	}
 }
 
 /**
@@ -173,7 +175,9 @@ void FullscreenMenuLaunchSPG::clicked_ok() {
 		if (is_scenario_) {
 			end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kScenarioGame);
 		} else {
-			settings_->set_win_condition_script(win_condition_dropdown_.get_selected());
+			if (win_condition_dropdown_.has_selection()) {
+				settings_->set_win_condition_script(win_condition_dropdown_.get_selected());
+			}
 			end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kNormalGame);
 		}
 	}

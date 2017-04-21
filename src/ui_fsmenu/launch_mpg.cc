@@ -226,7 +226,7 @@ void FullscreenMenuLaunchMPG::clicked_back() {
 }
 
 void FullscreenMenuLaunchMPG::win_condition_selected() {
-	if (settings_->can_change_map()) {
+	if (settings_->can_change_map() && win_condition_dropdown_.has_selection()) {
 		settings_->set_win_condition_script(win_condition_dropdown_.get_selected());
 		last_win_condition_ = win_condition_dropdown_.get_selected();
 	}
@@ -343,7 +343,9 @@ void FullscreenMenuLaunchMPG::clicked_ok() {
 		                  "finished!?!"),
 		                settings_->settings().mapfilename.c_str());
 	if (settings_->can_launch()) {
-		settings_->set_win_condition_script(win_condition_dropdown_.get_selected());
+		if (win_condition_dropdown_.has_selection()) {
+			settings_->set_win_condition_script(win_condition_dropdown_.get_selected());
+		}
 		end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kNormalGame);
 	}
 }
