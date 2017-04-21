@@ -32,7 +32,7 @@ add_walking_animations(animations, "walkload", dirname, "walkload", {8, 25}, 10)
 --
 --    :arg table: This table contains all the data that the game engine will add
 --                to this carrier. It contains the :ref:`lua_tribes_workers_common`,
---                plus the following additional properties:
+--                plus the following additional property:
 --
 --    **ware_hotspot**
 --        *Optional*. The x, y coordinates for adjusting the placement of the
