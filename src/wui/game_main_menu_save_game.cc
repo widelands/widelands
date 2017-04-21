@@ -140,8 +140,6 @@ void GameMainMenuSaveGame::layout() {
 }
 
 void GameMainMenuSaveGame::entry_selected() {
-	// TODO(GunChleoc): When editbox is focused, multiselect is not possible, because it steals the
-	// key presses.
 	ok_.set_enabled(load_or_save_.table().selections().size() == 1);
 	load_or_save_.delete_button()->set_enabled(load_or_save_.has_selection());
 	if (load_or_save_.has_selection()) {
