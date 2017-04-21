@@ -35,7 +35,7 @@ FullscreenMenuLoadGame::FullscreenMenuLoadGame(Widelands::Game& g,
      title_(&main_box_,
             0,
             0,
-            is_replay_ ? _("Choose a replay") : _("Choose a saved game"),
+            is_replay ? _("Choose a replay") : _("Choose a saved game"),
             UI::Align::kCenter),
 
      load_or_save_(&info_box_,
