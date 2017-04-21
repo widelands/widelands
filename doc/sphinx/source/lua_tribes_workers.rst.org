@@ -75,7 +75,7 @@ Workers are defined with Lua functions called ``new_worker_type{table}``. The co
       animations and sounds played.
       See :doc:`worker_program`.
 
-NOCOM create Worker Program Reference
+TODO(GunChleoc): create Worker Program Reference
 
 Help Texts
 ----------
