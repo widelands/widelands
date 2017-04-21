@@ -31,6 +31,7 @@
 #include "graphic/text/font_set.h"
 #include "graphic/text/rt_errors.h"
 #include "graphic/text_constants.h"
+#include "graphic/text_layout.h"
 #include "ui_basic/mouse_constants.h"
 
 // TODO(GunChleoc): Arabic: Fix positioning for Arabic
@@ -98,7 +99,7 @@ EditBox::EditBox(Panel* const parent,
 	m_->fontsize = font_size;
 
 	// Set alignment to the UI language's principal writing direction
-	m_->align = UI::g_fh1->fontset()->is_rtl() ? UI::Align::kCenterRight : UI::Align::kCenterLeft;
+	m_->align = UI::g_fh1->fontset()->is_rtl() ? UI::Align::kRight : UI::Align::kLeft;
 	m_->caret = 0;
 	m_->scrolloffset = 0;
 	// yes, use *signed* max as maximum length; just a small safe-guard.
@@ -352,8 +353,7 @@ bool EditBox::handle_textinput(const std::string& input_text) {
 	return true;
 }
 
-void EditBox::draw(RenderTarget& odst) {
-	RenderTarget& dst = odst;
+void EditBox::draw(RenderTarget& dst) {
 
 	// Draw the background
 	dst.tile(Recti(0, 0, get_w(), get_h()), m_->background, Vector2i(get_x(), get_y()));
@@ -390,13 +390,11 @@ void EditBox::draw(RenderTarget& odst) {
 	         ->height() :
 	      entry_text_im->height();
 
-	Vector2f point(kMarginX, get_h() / 2.f);
-
-	if (static_cast<int>(m_->align & UI::Align::kRight)) {
-		point.x += max_width;
+	Vector2f point(kMarginX, get_h() / 2);
+	if (m_->align == UI::Align::kRight) {
+		point.x += max_width - linewidth;
 	}
-
-	UI::correct_for_align(m_->align, linewidth, lineheight, &point);
+	UI::center_vertically(lineheight, &point);
 
 	// Crop to max_width while blitting
 	if (max_width < linewidth) {
@@ -409,7 +407,7 @@ void EditBox::draw(RenderTarget& odst) {
 			// TODO(GunChleoc): Arabic: Fix scrolloffset
 			dst.blitrect(point, entry_text_im, Recti(linewidth - max_width, 0, linewidth, lineheight));
 		} else {
-			if (static_cast<int>(m_->align & UI::Align::kRight)) {
+			if (m_->align == UI::Align::kRight) {
 				// TODO(GunChleoc): Arabic: Fix scrolloffset
 				dst.blitrect(point, entry_text_im,
 				             Recti(point.x + m_->scrolloffset + kMarginX, 0, max_width, lineheight));
@@ -431,7 +429,7 @@ void EditBox::draw(RenderTarget& odst) {
 
 		const Image* caret_image = g_gr->images().get("images/ui_basic/caret.png");
 		Vector2f caretpt;
-		caretpt.x = point.x + m_->scrolloffset + caret_x - caret_image->width() + LINE_MARGIN;
+		caretpt.x = point.x + m_->scrolloffset + caret_x - caret_image->width() + kLineMargin;
 		caretpt.y = point.y + (fontheight - caret_image->height()) / 2.f;
 		dst.blit(caretpt, caret_image);
 	}
@@ -446,13 +444,14 @@ void EditBox::check_caret() {
 	int32_t leftw = text_width(leftstr, m_->fontsize);
 	int32_t rightw = text_width(rightstr, m_->fontsize);
 
-	int32_t caretpos;
+	int32_t caretpos = 0;
 
-	switch (m_->align & UI::Align::kHorizontal) {
+	switch (m_->align) {
 	case UI::Align::kRight:
 		caretpos = get_w() - kMarginX + m_->scrolloffset - rightw;
 		break;
-	default:
+	case UI::Align::kCenter:
+	case UI::Align::kLeft:
 		caretpos = kMarginX + m_->scrolloffset + leftw;
 	}
 
@@ -461,10 +460,10 @@ void EditBox::check_caret() {
 	else if (caretpos > get_w() - kMarginX)
 		m_->scrolloffset -= caretpos - get_w() + kMarginX + get_w() / 5;
 
-	if ((m_->align & UI::Align::kHorizontal) == UI::Align::kLeft) {
+	if (m_->align == UI::Align::kLeft) {
 		if (m_->scrolloffset > 0)
 			m_->scrolloffset = 0;
-	} else if ((m_->align & UI::Align::kHorizontal) == UI::Align::kRight) {
+	} else if (m_->align == UI::Align::kRight) {
 		if (m_->scrolloffset < 0)
 			m_->scrolloffset = 0;
 	}

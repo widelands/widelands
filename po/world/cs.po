@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-01-21 21:10+0000\n"
-"PO-Revision-Date: 2017-01-27 18:43+0000\n"
+"POT-Creation-Date: 2017-04-13 13:07+0000\n"
+"PO-Revision-Date: 2017-04-02 08:22+0000\n"
 "Last-Translator: Milan Fašina <matrix17@seznam.cz>\n"
 "Language-Team: Czech (http://www.transifex.com/widelands/widelands/language/cs/)\n"
 "MIME-Version: 1.0\n"
@@ -19,67 +19,67 @@ msgstr ""
 "Language: cs\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
 
-#: ../../data/world/critters/badger/init.lua:14
+#: ../../data/world/critters/badger/init.lua:15
 msgid "Badger"
 msgstr "Jezevec"
 
-#: ../../data/world/critters/brownbear/init.lua:14
+#: ../../data/world/critters/brownbear/init.lua:15
 msgid "Brown bear"
 msgstr "Hnědý medvěd"
 
-#: ../../data/world/critters/bunny/init.lua:13
+#: ../../data/world/critters/bunny/init.lua:14
 msgid "Bunny"
 msgstr "Zajíc"
 
-#: ../../data/world/critters/chamois/init.lua:14
+#: ../../data/world/critters/chamois/init.lua:15
 msgid "Chamois"
 msgstr "Kamzík"
 
-#: ../../data/world/critters/deer/init.lua:14
+#: ../../data/world/critters/deer/init.lua:15
 msgid "Deer"
 msgstr "Jelen"
 
-#: ../../data/world/critters/duck/init.lua:18
+#: ../../data/world/critters/duck/init.lua:19
 msgid "Duck"
 msgstr "Kachna"
 
-#: ../../data/world/critters/elk/init.lua:19
+#: ../../data/world/critters/elk/init.lua:20
 msgid "Elk"
 msgstr "Los"
 
-#: ../../data/world/critters/fox/init.lua:19
+#: ../../data/world/critters/fox/init.lua:20
 msgid "Fox"
 msgstr "Liška"
 
-#: ../../data/world/critters/lynx/init.lua:14
+#: ../../data/world/critters/lynx/init.lua:16
 msgid "Lynx"
 msgstr "Rys"
 
-#: ../../data/world/critters/marten/init.lua:14
+#: ../../data/world/critters/marten/init.lua:15
 msgid "Marten"
 msgstr "Kuna"
 
-#: ../../data/world/critters/reindeer/init.lua:14
+#: ../../data/world/critters/reindeer/init.lua:16
 msgid "Reindeer"
 msgstr "Sob"
 
-#: ../../data/world/critters/sheep/init.lua:18
+#: ../../data/world/critters/sheep/init.lua:19
 msgid "Sheep"
 msgstr "Ovce"
 
-#: ../../data/world/critters/stag/init.lua:19
+#: ../../data/world/critters/stag/init.lua:20
 msgid "Stag"
 msgstr "Srnec"
 
-#: ../../data/world/critters/wildboar/init.lua:18
+#: ../../data/world/critters/wildboar/init.lua:19
 msgid "Wild boar"
 msgstr "Kanec"
 
-#: ../../data/world/critters/wisent/init.lua:14
+#: ../../data/world/critters/wisent/init.lua:15
 msgid "Wisent"
 msgstr "Zubr"
 
-#: ../../data/world/critters/wolf/init.lua:19
+#: ../../data/world/critters/wolf/init.lua:20
 msgid "Wolf"
 msgstr "Vlk"
 
@@ -725,62 +725,62 @@ msgstr "Červený deštníkový strom (starý)"
 msgid "Red Umbrella Tree"
 msgstr "Červený deštníkový strom"
 
-#: ../../data/world/init.lua:11
+#: ../../data/world/init.lua:19
 msgid "Miscellaneous"
 msgstr "Různé"
 
-#: ../../data/world/init.lua:18
+#: ../../data/world/init.lua:26
 msgid "Artifacts"
 msgstr "Artefakty"
 
-#: ../../data/world/init.lua:18
+#: ../../data/world/init.lua:26
 msgid "These immovables are used by the win condition “Artifacts”."
 msgstr "Tyto nemovitosti jsou použity pro typ vítězství \"Artefakty\"."
 
-#: ../../data/world/init.lua:25
+#: ../../data/world/init.lua:33
 msgid "Plants"
 msgstr "Rostliny"
 
-#: ../../data/world/init.lua:32
+#: ../../data/world/init.lua:40
 msgid "Standing Stones"
 msgstr "Menhiry"
 
-#: ../../data/world/init.lua:39
+#: ../../data/world/init.lua:47
 msgid "Rocks"
 msgstr "Skály"
 
-#: ../../data/world/init.lua:46
+#: ../../data/world/init.lua:54
 msgid "Dead Trees"
 msgstr "Suché stromy"
 
-#: ../../data/world/init.lua:53
+#: ../../data/world/init.lua:61
 msgid "Coniferous Trees"
 msgstr "Jehličnany"
 
-#: ../../data/world/init.lua:60
+#: ../../data/world/init.lua:68
 msgid "Deciduous Trees"
 msgstr "Listnaté stromy"
 
-#: ../../data/world/init.lua:67
+#: ../../data/world/init.lua:75
 msgid "Palm Trees"
 msgstr "Palmy"
 
-#: ../../data/world/init.lua:74
+#: ../../data/world/init.lua:82
 msgid "Wasteland Trees"
 msgstr "Pustinné stromy"
 
 #. TRANSLATORS: A category in the editor for placing animals on the map.
-#: ../../data/world/init.lua:82
+#: ../../data/world/init.lua:90
 msgid "Herbivores"
 msgstr "Býložravci"
 
 #. TRANSLATORS: A category in the editor for placing animals on the map.
-#: ../../data/world/init.lua:90
+#: ../../data/world/init.lua:98
 msgid "Carnivores"
 msgstr "Masožravci"
 
 #. TRANSLATORS: A category in the editor for placing animals on the map.
-#: ../../data/world/init.lua:98
+#: ../../data/world/init.lua:106
 msgid "Aquatic"
 msgstr "Vodní"
 

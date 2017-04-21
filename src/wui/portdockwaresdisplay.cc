@@ -76,7 +76,7 @@ create_portdock_expedition_display(UI::Panel* parent, Warehouse& wh, Interactive
 
 	// Add the input queues.
 	for (InputQueue* wq : wh.get_portdock()->expedition_bootstrap()->queues()) {
-		box.add(new InputQueueDisplay(&box, 0, 0, igb, wh, wq, true), UI::Align::kLeft);
+		box.add(new InputQueueDisplay(&box, 0, 0, igb, wh, wq, true));
 	}
 
 	return &box;

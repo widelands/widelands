@@ -67,13 +67,8 @@ MainMenuSaveMap::MainMenuSaveMap(EditorInteractive& parent)
                    buth_,
                    g_gr->images().get("images/ui_basic/but5.png"),
                    _("Map Options")),
-     editbox_label_(this,
-                    padding_,
-                    tabley_ + tableh_ + 3 * padding_,
-                    butw_,
-                    buth_,
-                    _("Filename:"),
-                    UI::Align::kLeft) {
+     editbox_label_(
+        this, padding_, tabley_ + tableh_ + 3 * padding_, butw_, buth_, _("Filename:")) {
 	set_current_directory(curdir_);
 
 	// Make room for edit_options_ button

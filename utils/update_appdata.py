@@ -14,11 +14,11 @@ import sys
 # is inserted.
 # The output is written to ../debian/widelands.appdata.xml
 #
-# All non-translatable content for ../debian/widelands.desktop is taken from
-# ../debian/widelands.desktop.stub
+# All non-translatable content for ../debian/org.widelands.widelands.desktop is taken from
+# ../debian/org.widelands.widelands.desktop.stub
 # That file contains a GENERIC_NAME_COMMENT_HOOK where the translatable information
 # is inserted.
-# The output is written to ../debian/widelands.desktop
+# The output is written to ../debian/org.widelands.widelands.desktop
 #
 # All translations are sourced from ../debian/translations/
 
@@ -36,7 +36,7 @@ if (not os.path.isfile(appdata_input_filename)):
     sys.exit(1)
 
 desktop_input_filename = os.path.normpath(
-    base_path + '/debian/widelands.desktop.stub')
+    base_path + '/debian/org.widelands.widelands.desktop.stub')
 if (not os.path.isfile(desktop_input_filename)):
     print('Error: File ' + desktop_input_filename + ' not found.')
     sys.exit(1)
@@ -135,7 +135,7 @@ for line in input_file:
 
 input_file.close()
 
-dest_filepath = base_path + '/debian/widelands.desktop'
+dest_filepath = base_path + '/debian/org.widelands.widelands.desktop'
 dest_file = codecs.open(dest_filepath, encoding='utf-8', mode='w')
 dest_file.write(desktop)
 dest_file.close()

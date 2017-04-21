@@ -25,10 +25,6 @@
 
 #include "ui_basic/panel.h"
 
-namespace UI {
-struct Font;
-}
-
 struct GameSettingsProvider;
 struct PlayerDescriptionGroupImpl;
 
