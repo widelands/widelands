@@ -100,16 +100,19 @@ void FullscreenMenuLaunchGame::think() {
 
 bool FullscreenMenuLaunchGame::init_win_condition_label() {
 	if (settings_->settings().scenario) {
+		win_condition_dropdown_.set_enabled(false);
 		win_condition_dropdown_.set_label(_("Scenario"));
 		win_condition_dropdown_.set_tooltip(_("Win condition is set through the scenario"));
 		return true;
 	} else if (settings_->settings().savegame) {
+		win_condition_dropdown_.set_enabled(false);
 		/** Translators: This is a game type */
 		win_condition_dropdown_.set_label(_("Saved Game"));
 		win_condition_dropdown_.set_tooltip(
 		   _("The game is a saved game – the win condition was set before."));
 		return true;
 	} else {
+		win_condition_dropdown_.set_enabled(settings_->can_change_map());
 		win_condition_dropdown_.set_label("");
 		win_condition_dropdown_.set_tooltip("");
 		return false;
@@ -120,9 +123,6 @@ bool FullscreenMenuLaunchGame::init_win_condition_label() {
  * Fill the dropdown with the available win conditions.
  */
 void FullscreenMenuLaunchGame::update_win_conditions() {
-	win_condition_dropdown_.set_enabled(settings_->can_change_map() &&
-	                                    !settings_->settings().savegame &&
-	                                    !settings_->settings().scenario);
 	if (!init_win_condition_label()) {
 		Widelands::Map map;
 		std::unique_ptr<Widelands::MapLoader> ml =
