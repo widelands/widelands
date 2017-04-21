@@ -34,9 +34,9 @@
 struct SavegameData {
 	/// The filename of the currenty selected file
 	std::string filename;
-	/// List of filenames when lumtiple files have been selected
+	/// List of filenames when multiple files have been selected
 	std::string filename_list;
-	/// The name of the map that the game is bases on
+	/// The name of the map that the game is based on
 	std::string mapname;
 	/// The win condition that was played
 	std::string wincondition;
@@ -53,7 +53,7 @@ struct SavegameData {
 	std::string gametime;
 	/// Number of players on the map
 	std::string nrplayers;
-	/// The version of Widelands that the game as played with
+	/// The version of Widelands that the game was played with
 	std::string version;
 	/// Gametime as time stamp. For games, it's the time the game ended. For replays, it's the time the game started.
 	time_t savetimestamp;

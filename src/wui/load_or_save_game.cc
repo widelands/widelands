@@ -27,6 +27,7 @@
 #include "base/i18n.h"
 #include "base/log.h"
 #include "base/time_string.h"
+#include "graphic/font_handler1.h"
 #include "game_io/game_loader.h"
 #include "game_io/game_preload_packet.h"
 #include "helper.h"
