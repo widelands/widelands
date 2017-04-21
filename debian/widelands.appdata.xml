@@ -20,6 +20,7 @@
   <summary xml:lang="hu">Egy valós idejű, építkezős stratégiai játék</summary>
   <summary xml:lang="it">Un gioco di costruzione e strategia in tempo reale</summary>
   <summary xml:lang="la">Ludus strategicae exstructionis in tempore vero</summary>
+  <summary xml:lang="ms">Permainan strategi pembinaan masa-nyata</summary>
   <summary xml:lang="nl">Een realtime opbouwend strategiespel</summary>
   <summary xml:lang="pl">Strategia czasu rzeczywistego skupiona na rozbudowie</summary>
   <summary xml:lang="pt">Um jogo de construção estratégica em tempo real</summary>
@@ -41,7 +42,7 @@
       أنت الوصي  لعشيرة صغيرة. مهمتك أن تبني مستوطنة. كل عضو من العشيرة  سوف يكون جزء لإنتاج موارد أكثر لدفع هذا النمو.
     </p>
     <p xml:lang="ar">
-      "أراضي واسعة" تقدم تجربة لاعب واحد مع طور الحملات التي تحكي قصة قبيلة وصراعهم فى الكون الخاص بـ"أراضي واسعة".ومع ذلك, الاستيطان يبدأ حقا عندما تتحد مع أصدقائك من خلال الإنترنت و اللان لكى تبنى مملكه جديدا معا-- او محاربة بعضهم البعض وتدمير بعضهم البعض. "أراضي واسعة" ايضا تقدم ذكاء اصطناعي يتحداك.
+      "أراضي واسعة" تقدم تجربة لاعب واحد مع طور الحملات التي تحكي قصة قبيلة وصراعهم فى الكون الخاص بـ"أراضي واسعة".ومع ذلك, الاستيطان يبدأ حقا عندما تتحد مع أصدقائك من خلال الإنترنت و اللان لكى تبنى مملكه جديده معا-- او محاربة بعضهم البعض وتدمير بعضهم البعض. "أراضي واسعة" ايضا تقدم ذكاء اصطناعي يتحداك.
     </p>
     <p xml:lang="bg">
       Вие сте водачът на малък клан. Задачата Ви е да изградите развиващо се селище. Всеки член на клана Ви ще върши своята работа, за да произвеждате все повече ресурси и да продължавате да разраствате селището си.
@@ -92,7 +93,7 @@
       Widelands-ek jokalari bakarreko aukera eskeintzen du tribuen historiak kontatzen dituen kanpainekin eta Widelands unibertsoan dituzten tirabirekin. Hala ere, zure lagunekin Internet edo LAN bidez elkartzen zarenean hasten da benetako jokoa, bai inperio berriak elkarrekin eraikitzeko edo elkar erasotzeko gerraren hautsen artean. Widelans-ek adimen artifizialeko etsaiak ere eskeintzen dizkizu erronka bezala.
     </p>
     <p xml:lang="fi">
-      Ohjaat pientä heimoa. Tehtävänäsi luoda laajentua, sekä luoda toimiva talous jotta heimosi pärjäisi naapureiden puristuksessa.
+      Ohjaat pientä heimoa. Tehtävänäsi on laajentaa siirtokuntaasi, sekä luoda toimiva talous, jotta heimosi pärjäisi naapureiden puristuksessa.
     </p>
     <p xml:lang="fi">
       Widelandsissa on yksinpelimoodi, jossa voit aloittelijana kohdata haasteita WL-maailmassa. Todellinen hupi alkaa LAN- tai verkkopelissä kavereiden kanssa.
@@ -126,6 +127,12 @@
     </p>
     <p xml:lang="la">
       Widelands offers a single-player mode with campaigns that tell stories of the tribes and their struggle in the Widelands universe. However, settling really starts when you unite with friends over the Internet or LAN to build up new empires together – or to crush each other in the dusts of war. Widelands also offers an artificial intelligence to challenge you.
+    </p>
+    <p xml:lang="ms">
+      Anda merupakan pemangku raja di sebuah puak kecil. Anda ditugaskan untuk membangunkan penempatan yang sedang membesar. Setiap ahli puak anda akan berperanan membantu dalam pembangunan puak ini.
+    </p>
+    <p xml:lang="ms">
+      Widelands menawarkan mod pemain-tunggal dengan kempen yang menceritakan kisah sebuah puak dan perjuangan mereka di dunia Widelands. Peredaan sebenarnya bermula apabila anda bersatu dengan rakan anda di Internet atau LAN untuk bersama-sama membina sebuah empayar - atau musnahkan di antara satu sama lain. Widelands juga menawarkan kepintaran buatan yang dapat memberi cabaran kepada anda.
     </p>
     <p xml:lang="nl">
       Je bent de leider van een kleine stam.  Het is jouw taak een bloeiende nederzetting uit te bouwen.  Elk stamlid zal daarbij haar of zijn steentje bijdragen door het produceren van meer grondstoffen.

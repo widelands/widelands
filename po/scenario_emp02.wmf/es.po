@@ -8,13 +8,14 @@
 # Kiba Gasteiz <kibafang@gmail.com>, 2015
 # Lucía Pradillos <dreamers_88@hotmail.com>, 2015
 # Madkat Here, 2015
+# Thadah D. Denyse <juchuf@gmail.com>, 2017
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-01-21 14:22+0000\n"
-"PO-Revision-Date: 2017-01-21 14:24+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2017-03-24 18:58+0000\n"
+"PO-Revision-Date: 2017-03-28 07:40+0000\n"
+"Last-Translator: Thadah D. Denyse <juchuf@gmail.com>\n"
 "Language-Team: Spanish (http://www.transifex.com/widelands/widelands/language/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -83,7 +84,7 @@ msgid ""
 "Build a stonemason’s house and then a complete mining and production "
 "infrastructure (coal mine and / or charcoal kiln, iron mine, toolsmithy, "
 "weapon smithy, armor smithy and smelting works)."
-msgstr ""
+msgstr "Construye una mampostería y luego completa una infraestructura de minería y producción (mina de carbón y/o fosa de carbonización, mina de hierro, taller de herramientas, armería, taller de armaduras y forja)."
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:73
 msgid "Provide your miners with food"
@@ -118,7 +119,7 @@ msgid ""
 "It’s up to you what you want to build. But remember – coal and iron mines "
 "need beer, marble and gold mines need wine and all mines need at least "
 "rations, which are produced out of bread OR meat OR fish."
-msgstr ""
+msgstr "Está en ti qué quieres construir. Pero recuerda – las minas de carbón y hierro necesitan cerveza, las minas de mármol y oro vino y todas las minas necesitan raciones al menos, que son producidos a partir de pan O carne O pescado."
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:85
 msgid "Protect your eastern frontier"
@@ -148,7 +149,7 @@ msgstr "Destruye a la tribu bárbara"
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:98
 msgid "Build a barracks to start training soldiers."
-msgstr ""
+msgstr "Construye unos barracones para empezar a entrenar soldados."
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:99
 msgid ""
@@ -341,7 +342,7 @@ msgid ""
 "of iron ore. I advise you to immediately build iron and coal mines (or at "
 "least charcoal kilns), smelting works, toolsmithies, armor and weapon "
 "smithies."
-msgstr ""
+msgstr "Por los dioses, éste es un increíble golpe de suerte! Hay dos montañas más, y parece que una tiene grandes cantidades de carbón y la otra mineral de hierro. Te sugiero que construyas minas de hierro y carbón (o al menos fosas de carbonización), forjas, talleres de herramientas, talleres de armaduras y armerías."
 
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:197
@@ -518,7 +519,7 @@ msgstr "Has completado esta misión. Puedes continuar jugando si quieres, de otr
 msgid "“%s”"
 msgstr "“%s”"
 
-#: ../../data/scripting/format_scenario.lua:96
+#: ../../data/scripting/format_scenario.lua:84
 msgid "New Objective"
 msgid_plural "New Objectives"
 msgstr[0] "Nuevo objetivo"

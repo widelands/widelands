@@ -14,8 +14,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-03-05 10:46+0000\n"
-"PO-Revision-Date: 2017-03-09 15:43+0000\n"
+"POT-Creation-Date: 2017-03-17 10:45+0000\n"
+"PO-Revision-Date: 2017-03-23 18:20+0000\n"
 "Last-Translator: Renaud Bouchard\n"
 "Language-Team: French (http://www.transifex.com/widelands/widelands/language/fr/)\n"
 "MIME-Version: 1.0\n"
@@ -585,14 +585,14 @@ msgid ""
 "You can place a medium building on any node where there is a slope no "
 "greater than 1 in the south-east direction and its height difference to all "
 "nodes in a radius of 2 is no greater than 2."
-msgstr ""
+msgstr "Vous pouvez placer un bâtiment moyen sur n'importe quel point où il n'y a pas de pente plus grande que 1 dans la direction du sud-est et dont la différence d' altitude par rapport à tous les points dans un rayon de 2  n'est pas supérieure à 2. "
 
 #: ../../data/txts/tips/editor.lua:44
 msgid ""
 "You can place a large building on any node where you could place a medium "
 "building if there is no obstacle or non-arable terrain towards the west, "
 "northwest and northeast."
-msgstr ""
+msgstr "Vous pouvez placer un grand bâtiment sur n'importe quel point où vous pourriez construire un bâtiment moyen si il n'y a pas d' obstacle ou de terrain non-arable vers l'est, le nord-ouest et le nord-est."
 
 #: ../../data/txts/tips/empire.lua:8
 msgid "Always build a forester’s house so you will not run out of logs."
@@ -600,7 +600,7 @@ msgstr "Toujours construire une maison de garde forestier, pour ne pas avoir de 
 
 #: ../../data/txts/tips/empire.lua:16
 msgid "Empire needs a lot of marble. Keep looking for marble resources."
-msgstr ""
+msgstr "L' Empire a besoin de beaucoup de marbre. Continuez de chercher des ressources de marbre."
 
 #: ../../data/txts/tips/general_game.lua:4
 msgid ""
@@ -715,7 +715,7 @@ msgstr "Ctrl+0"
 
 #: ../../data/txts/tips/general_game.lua:68
 msgid "Zoom in/out with the mouse wheel or %1%. Press %2% to reset the zoom."
-msgstr ""
+msgstr "Zoomez/Dézoomez avez la roulette de la souris ou %1%. Appuyez sur %2% pour revenir à la position de départ."
 
 #: ../../data/txts/tips/general_game.lua:72
 msgid ""
@@ -723,7 +723,7 @@ msgid ""
 "flag from which they can move by road to a connected warehouse. If there are"
 " no such flags in the vicinity, they will keep wandering around and "
 "eventually die."
-msgstr ""
+msgstr "Quand un bâtiment est détruit, ses travailleurs commenceront part chercher un drapeau proche depuis lequel ils rejoindront un dépôt par la route. Si il n'y a pas de drapeau dans le voisinage, ils continuerons de déambuler et éventuellement mourront."
 
 #: ../../data/txts/tips/multiplayer.lua:4
 msgid ""
@@ -747,7 +747,7 @@ msgstr "Utilisez '@name' au début d'un message tchat pour l'envoyer seulement a
 msgid ""
 "If the game should crash, don't worry! The game will be saved automatically "
 "so that you can reload it afterwards."
-msgstr ""
+msgstr "Si le jeux venait à planter, ne vous inquiétez pas ! Le jeux est automatiquement sauvé et vous pourrez le recharger après."
 
 #: ../../data/txts/tips/singleplayer.lua:4
 msgid ""

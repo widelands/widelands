@@ -10,6 +10,7 @@ tags
 /build
 update.sh
 widelands
+wl_map*_info
 locale
 VERSION
 

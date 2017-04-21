@@ -1,17 +1,17 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2016 Widelands Development Team
+# Copyright (C) 2005-2017 Widelands Development Team
 # 
 # Translators:
 # GunChleoc, 2014
 # Markus7cz <markus7cz@gmail.com>, 2008
 # Matej Svrcek <mmatej@yahoo.com>, 2015-2016
-# Milan Fašina <matrix17@seznam.cz>, 2016
+# Milan Fašina <matrix17@seznam.cz>, 2016-2017
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-11-03 16:07+0000\n"
-"PO-Revision-Date: 2016-10-30 11:05+0000\n"
+"POT-Creation-Date: 2017-03-29 17:32+0000\n"
+"PO-Revision-Date: 2017-04-02 08:25+0000\n"
 "Last-Translator: Milan Fašina <matrix17@seznam.cz>\n"
 "Language-Team: Czech (http://www.transifex.com/widelands/widelands/language/cs/)\n"
 "MIME-Version: 1.0\n"
@@ -36,7 +36,7 @@ msgstr "Možnosti:"
 
 #: ../../src/wlapplication_messages.cc:45
 msgid " --<config-entry-name>=value overwrites any config file setting"
-msgstr " --<config-entry-name>=hodnota přepíše jakékoli nastavení v configu"
+msgstr " --<config-entry-name>=hodnota přepíše jakékoli nastavení v konfiguračním souboru"
 
 #: ../../src/wlapplication_messages.cc:47
 msgid ""
@@ -52,7 +52,7 @@ msgstr "--homedir=DIRNAME Použij určený adresář pro Widelands config,\nulo�
 
 #: ../../src/wlapplication_messages.cc:54
 msgid "                      Default is ~/.widelands"
-msgstr "Standardní je ~/.widelands"
+msgstr "Výchozí je ~/.widelands"
 
 #. * TRANSLATORS: You may translate true/false, also as on/off or yes/no, but
 #. * TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the
