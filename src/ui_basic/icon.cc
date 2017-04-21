@@ -64,6 +64,6 @@ void Icon::draw(RenderTarget& dst) {
 		if (draw_frame_) {
 			dst.draw_rect(Rectf(x, y, width, height), framecolor_);
 		}
-	}	
+	}
 }
 }
