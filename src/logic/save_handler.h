@@ -88,9 +88,9 @@ private:
     int32_t number_of_rolls_; // For rolling file update
 
 	void initialize(uint32_t gametime);
-    void rollSaveFiles(const std::string& filename);
-    bool checkNextTick(Widelands::Game& game, uint32_t realtime);
-    bool saveAndHandleError(Widelands::Game& game,
+    void roll_save_files(const std::string& filename);
+    bool check_next_tick(Widelands::Game& game, uint32_t realtime);
+    bool save_and_handle_error(Widelands::Game& game,
 			const std::string& complete_filename, const std::string& backup_filename);
 
 };

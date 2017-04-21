@@ -54,7 +54,7 @@ SaveHandler::SaveHandler()
 {
 }
 
-void SaveHandler::rollSaveFiles(const std::string& filename) {
+void SaveHandler::roll_save_files(const std::string& filename) {
 
     int32_t rolls = number_of_rolls_;
 	log("Autosave: Rolling savefiles (count): %d\n", rolls);
@@ -83,7 +83,7 @@ void SaveHandler::rollSaveFiles(const std::string& filename) {
  *
  * @return true if game should be saved ad next think().
  */
-bool SaveHandler::checkNextTick(Widelands::Game& game, uint32_t realtime) {
+bool SaveHandler::check_next_tick(Widelands::Game& game, uint32_t realtime) {
 
 	// Perhaps save is due now?
 	if (autosave_interval_in_ms_ <= 0 || next_save_realtime_ > realtime) {
@@ -109,7 +109,7 @@ bool SaveHandler::checkNextTick(Widelands::Game& game, uint32_t realtime) {
  *
  * @return true when save was a success.
  */
-bool SaveHandler::saveAndHandleError(Widelands::Game& game,
+bool SaveHandler::save_and_handle_error(Widelands::Game& game,
 						const std::string& complete_filename,
 						const std::string& backup_filename) {
 	std::string error;
@@ -160,7 +160,7 @@ void SaveHandler::think(Widelands::Game& game) {
 			save_filename_ = "";
 		} else {
 			// Autosave ...
-			rollSaveFiles(filename);
+			roll_save_files(filename);
 			filename = (boost::format("%s_00") % autosave_filename_).str();
 			log("Autosave: saving as %s\n", filename.c_str());
 		}
@@ -180,7 +180,7 @@ void SaveHandler::think(Widelands::Game& game) {
 		}
 
 		std::string error;
-		if (!saveAndHandleError(game, complete_filename, backup_filename)) {
+		if (!save_and_handle_error(game, complete_filename, backup_filename)) {
 			return;
 		}
 
@@ -189,7 +189,7 @@ void SaveHandler::think(Widelands::Game& game) {
 		saving_next_tick_ = false;
 
 	} else {
-		saving_next_tick_ = checkNextTick(game, realtime);
+		saving_next_tick_ = check_next_tick(game, realtime);
 	}
 }
 
