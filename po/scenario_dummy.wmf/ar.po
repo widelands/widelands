@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-03-24 18:58+0000\n"
-"PO-Revision-Date: 2017-03-27 13:33+0000\n"
+"POT-Creation-Date: 2017-04-13 13:07+0000\n"
+"PO-Revision-Date: 2017-04-13 17:08+0000\n"
 "Last-Translator: Omar Anwar <omaraglan91@yahoo.com>\n"
 "Language-Team: Arabic (http://www.transifex.com/widelands/widelands/language/ar/)\n"
 "MIME-Version: 1.0\n"
@@ -19,7 +19,7 @@ msgstr ""
 
 #: ../../data/campaigns/dummy.wmf/scripting/init.lua:11
 msgid "Not yet implemented"
-msgstr "لم تنتهى  بعد "
+msgstr "لم تنتهى بعد "
 
 #: ../../data/campaigns/dummy.wmf/scripting/init.lua:12
 msgid "Sorry, this map is not yet implemented."
