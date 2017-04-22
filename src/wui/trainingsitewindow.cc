@@ -17,56 +17,34 @@
  *
  */
 
-#include "logic/map_objects/tribes/trainingsite.h"
+#include "wui/trainingsitewindow.h"
 
 #include "graphic/graphic.h"
 #include "ui_basic/tabpanel.h"
-#include "wui/productionsitewindow.h"
 #include "wui/soldiercapacitycontrol.h"
 #include "wui/soldierlist.h"
 
-using Widelands::TrainingSite;
-
 static char const* pic_tab_military = "images/wui/buildings/menu_tab_military.png";
-
-/**
- * Status window for \ref TrainingSite
- */
-struct TrainingSiteWindow : public ProductionSiteWindow {
-	TrainingSiteWindow(InteractiveGameBase& parent, TrainingSite&, UI::Window*& registry);
-
-	TrainingSite& trainingsite() {
-		return dynamic_cast<TrainingSite&>(building());
-	}
-
-protected:
-	void create_capsbuttons(UI::Box* buttons) override;
-};
 
 /**
  * Create the \ref TrainingSite specific soldier list tab.
  */
 TrainingSiteWindow::TrainingSiteWindow(InteractiveGameBase& parent,
-                                       TrainingSite& ts,
-                                       UI::Window*& registry)
-   : ProductionSiteWindow(parent, ts, registry) {
+                                       UI::UniqueWindow::Registry& reg,
+                                       Widelands::TrainingSite& ts,
+                                       bool avoid_fastclick)
+   : ProductionSiteWindow(parent, reg, ts, avoid_fastclick) {
+	init(avoid_fastclick);
+}
+
+void TrainingSiteWindow::init(bool avoid_fastclick) {
+	ProductionSiteWindow::init(avoid_fastclick);
 	get_tabs()->add("soldiers", g_gr->images().get(pic_tab_military),
-	                create_soldier_list(*get_tabs(), parent, trainingsite()),
+	                create_soldier_list(*get_tabs(), *igbase(), trainingsite()),
 	                _("Soldiers in training"));
+	think();
 }
 
 void TrainingSiteWindow::create_capsbuttons(UI::Box* buttons) {
 	ProductionSiteWindow::create_capsbuttons(buttons);
-}
-
-/*
-===============
-Create the training site information window.
-===============
-*/
-void TrainingSite::create_options_window(InteractiveGameBase& plr, UI::Window*& registry) {
-	ProductionSiteWindow* win =
-	   dynamic_cast<ProductionSiteWindow*>(new TrainingSiteWindow(plr, *this, registry));
-	Building::options_window_connections.push_back(Building::workers_changed.connect(
-	   boost::bind(&ProductionSiteWindow::update_worker_table, boost::ref(*win))));
 }

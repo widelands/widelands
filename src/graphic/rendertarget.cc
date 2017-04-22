@@ -23,6 +23,7 @@
 #include "graphic/animation.h"
 #include "graphic/graphic.h"
 #include "graphic/surface.h"
+#include "graphic/text_layout.h"
 
 /**
  * Build a render target for the given surface.
@@ -147,7 +148,7 @@ void RenderTarget::blit(const Vector2f& dst,
                         BlendMode blend_mode,
                         UI::Align align) {
 	Vector2f destination_point(dst);
-	UI::correct_for_align(align, image->width(), image->height(), &destination_point);
+	UI::correct_for_align(align, image->width(), &destination_point);
 
 	Rectf source_rect(Vector2i(0, 0), image->width(), image->height());
 	Rectf destination_rect(destination_point.x, destination_point.y, source_rect.w, source_rect.h);
@@ -164,7 +165,7 @@ void RenderTarget::blit_monochrome(const Vector2f& dst,
                                    const RGBAColor& blend_mode,
                                    UI::Align align) {
 	Vector2f destination_point(dst);
-	UI::correct_for_align(align, image->width(), image->height(), &destination_point);
+	UI::correct_for_align(align, image->width(), &destination_point);
 
 	Rectf source_rect(Vector2i(0, 0), image->width(), image->height());
 	Rectf destination_rect(destination_point.x, destination_point.y, source_rect.w, source_rect.h);
@@ -330,12 +331,6 @@ void RenderTarget::do_blit_animation(const Vector2f& dst,
 			animation.blit(time, srcrc, dstrc, player_color, surface_);
 		}
 	}
-
-	// Look if there is a sound effect registered for this frame and trigger the
-	// effect (see SoundHandler::stereo_position).
-	// TODO(sirver): Playing a sound effect in here is rather silly. What if
-	// this animation is used in the menus?
-	animation.trigger_sound(time, 128);
 }
 
 /**

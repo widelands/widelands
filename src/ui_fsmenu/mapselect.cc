@@ -26,6 +26,7 @@
 #include "base/i18n.h"
 #include "base/log.h"
 #include "base/wexception.h"
+#include "graphic/font_handler1.h"
 #include "graphic/graphic.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "logic/game_controller.h"
@@ -46,9 +47,9 @@ FullscreenMenuMapSelect::FullscreenMenuMapSelect(GameSettingsProvider* const set
      checkbox_padding_(UI::g_fh1->fontset()->size_offset() > 0 ? 0 : 2 * padding_),
 
      // Main title
-     title_(this, 0, 0, _("Choose a map"), UI::Align::kHCenter),
+     title_(this, 0, 0, _("Choose a map"), UI::Align::kCenter),
      checkboxes_(this, 0, 0, UI::Box::Vertical, 0, 0, 2 * padding_),
-     table_(this, tablex_, tabley_, tablew_, tableh_, false),
+     table_(this, tablex_, tabley_, tablew_, tableh_),
      map_details_(this,
                   right_column_x_,
                   tabley_,
@@ -92,8 +93,8 @@ FullscreenMenuMapSelect::FullscreenMenuMapSelect(GameSettingsProvider* const set
 	tags_checkboxes_.clear();  // Remove this again, it is a special tag checkbox
 	cb_show_all_maps_->set_state(true);
 
-	hbox->add(cb_dont_localize_mapnames_, UI::Align::kLeft, true);
-	checkboxes_.add(hbox, UI::Align::kLeft, true);
+	hbox->add(cb_dont_localize_mapnames_, UI::Box::Resizing::kFullSize);
+	checkboxes_.add(hbox, UI::Box::Resizing::kFullSize);
 
 	hbox = new UI::Box(&checkboxes_, 0, 0, UI::Box::Horizontal, checkbox_space_, get_w());
 	add_tag_checkbox(hbox, "official", localize_tag("official"));
@@ -101,18 +102,18 @@ FullscreenMenuMapSelect::FullscreenMenuMapSelect(GameSettingsProvider* const set
 	add_tag_checkbox(hbox, "seafaring", localize_tag("seafaring"));
 	add_tag_checkbox(hbox, "artifacts", localize_tag("artifacts"));
 	add_tag_checkbox(hbox, "scenario", localize_tag("scenario"));
-	checkboxes_.add(hbox, UI::Align::kLeft, true);
+	checkboxes_.add(hbox, UI::Box::Resizing::kFullSize);
 
 	hbox = new UI::Box(&checkboxes_, 0, 0, UI::Box::Horizontal, checkbox_space_, get_w());
 	add_tag_checkbox(hbox, "ffa", localize_tag("ffa"));
 	add_tag_checkbox(hbox, "1v1", localize_tag("1v1"));
-	checkboxes_.add(hbox, UI::Align::kLeft, true);
+	checkboxes_.add(hbox, UI::Box::Resizing::kFullSize);
 
 	hbox = new UI::Box(&checkboxes_, 0, 0, UI::Box::Horizontal, checkbox_space_, get_w());
 	add_tag_checkbox(hbox, "2teams", localize_tag("2teams"));
 	add_tag_checkbox(hbox, "3teams", localize_tag("3teams"));
 	add_tag_checkbox(hbox, "4teams", localize_tag("4teams"));
-	checkboxes_.add(hbox, UI::Align::kLeft, true);
+	checkboxes_.add(hbox, UI::Box::Resizing::kFullSize);
 
 	scenario_types_ = settings_->settings().multiplayer ? Map::MP_SCENARIO : Map::SP_SCENARIO;
 
@@ -305,7 +306,7 @@ FullscreenMenuMapSelect::add_tag_checkbox(UI::Box* box, std::string tag, std::st
 	UI::Checkbox* cb = new UI::Checkbox(box, Vector2i(0, 0), displ_name);
 	cb->changedto.connect(boost::bind(&FullscreenMenuMapSelect::tagbox_changed, this, id, _1));
 
-	box->add(cb, UI::Align::kLeft, true);
+	box->add(cb, UI::Box::Resizing::kFullSize);
 	box->add_space(checkbox_space_);
 	tags_checkboxes_.push_back(cb);
 

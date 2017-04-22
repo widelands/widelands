@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-01-28 21:57+0000\n"
-"PO-Revision-Date: 2017-01-30 07:39+0000\n"
+"POT-Creation-Date: 2017-03-05 10:46+0000\n"
+"PO-Revision-Date: 2017-03-06 07:09+0000\n"
 "Last-Translator: Любомир Василев\n"
 "Language-Team: Bulgarian (http://www.transifex.com/widelands/widelands/language/bg/)\n"
 "MIME-Version: 1.0\n"
@@ -496,6 +496,12 @@ msgid ""
 "of logs."
 msgstr "Винаги стройте лесничейска и дърварска къщи, за да не останете без дървени трупи."
 
+#: ../../data/txts/tips/atlanteans.lua:12
+msgid ""
+"Atlanteans need spidercloth for many buildings. Build the needed "
+"infrastructure early before you run out."
+msgstr "Много от сградите на атландците се нуждаят от паяжинен плат. Изградете нужните условия за производството му по-рано, преди да Ви свършат запасите."
+
 #: ../../data/txts/tips/barbarians.lua:4 ../../data/txts/tips/empire.lua:4
 msgid ""
 "Keep an eye on your fishers. After fish resources are exhausted in their "
@@ -505,8 +511,14 @@ msgstr "Наглеждайте рибарите си. След като рибн
 #: ../../data/txts/tips/barbarians.lua:8
 msgid ""
 "Always build a ranger’s and a gamekeeper’s hut, so you will not run out of "
-"logs."
-msgstr "Винаги стройте лесничейска и дивечовъдска хижи, за да не останете без дървени трупи."
+"logs or game."
+msgstr "Винаги стройте лесничейска и дивечовъдска хижи, за да не останете без дървени трупи или дивеч."
+
+#: ../../data/txts/tips/barbarians.lua:12 ../../data/txts/tips/empire.lua:12
+msgid ""
+"Most enhanced buildings need experienced workers. Do not enhance a building "
+"unless you have the necessary workers available."
+msgstr "След подобряването си, повечето от сградите се нуждаят от опитни работници. Не подобрявайте сграда, ако не разполагате с нужните работници."
 
 #: ../../data/txts/tips/editor.lua:4
 msgid ""
@@ -551,9 +563,38 @@ msgid ""
 "shown on or off."
 msgstr "Клавишът Интервал работи по същия начин, като в игра. Той превключва показването на местата за строеж."
 
+#: ../../data/txts/tips/editor.lua:32
+msgid ""
+"When placing trees, use the help button to see which trees are more likely "
+"to survive on which terrain."
+msgstr "Когато поставяте дървета, използвайте бутона за помощ, за да видите кои дървета имат по-добри шансове за оцеляване на съответния терен."
+
+#: ../../data/txts/tips/editor.lua:36
+msgid ""
+"If you do not set water and fish resources, a default amount will be used."
+msgstr "Ако не зададете стойности за водата и рибата, ще бъдат използвани количествата по подразбиране."
+
+#: ../../data/txts/tips/editor.lua:40
+msgid ""
+"You can place a medium building on any node where there is a slope no "
+"greater than 1 in the south-east direction and its height difference to all "
+"nodes in a radius of 2 is no greater than 2."
+msgstr "Можете да поставяте средни сгради на възлите, където наклонът не е повече от 1 в югоизточна посока и разликата във височините на всички възли в радиус 2 е не по-голяма от 2."
+
+#: ../../data/txts/tips/editor.lua:44
+msgid ""
+"You can place a large building on any node where you could place a medium "
+"building if there is no obstacle or non-arable terrain towards the west, "
+"northwest and northeast."
+msgstr "Можете да поставяте големи сгради на възлите, на които мое да се поставят и средни сгради, ако няма препятствия или необработваем терен на запад, северозапад или североизток."
+
 #: ../../data/txts/tips/empire.lua:8
 msgid "Always build a forester’s house so you will not run out of logs."
 msgstr "Винаги стройте лесничейска къща, за да не останете без дървени трупи."
+
+#: ../../data/txts/tips/empire.lua:16
+msgid "Empire needs a lot of marble. Keep looking for marble resources."
+msgstr "Империята се нуждае от много мрамор. Търсете залежи на мрамор."
 
 #: ../../data/txts/tips/general_game.lua:4
 msgid ""
@@ -609,10 +650,18 @@ msgid ""
 msgstr "Управлявайте съобщенията си по-ефективно: натиснете „N“, за да отворите прозореца със съобщения, а след това „G“ за превключване и DELETE за архивиране на съобщения."
 
 #: ../../data/txts/tips/general_game.lua:40
-msgid ""
-"Press Ctrl+(0-9) to store important locations, then press 0-9 to recall "
-"them."
-msgstr "Натиснете Контрол+(0-9), за да запазите важните местоположения, а след това 0-9, за да ги видите отново."
+msgctxt "hotkey"
+msgid "1-9"
+msgstr "1-9"
+
+#: ../../data/txts/tips/general_game.lua:40
+msgctxt "hotkey"
+msgid "Ctrl+(1-9)"
+msgstr "Контрол + (1-9)"
+
+#: ../../data/txts/tips/general_game.lua:40
+msgid "Press %1% to store important locations, then press %2% to recall them."
+msgstr "Натиснете %1%, за да запазване на важни местоположения, и след това %2% за връщане към тях."
 
 #: ../../data/txts/tips/general_game.lua:44
 msgid ""
@@ -648,11 +697,33 @@ msgid ""
 "building is surrounded with trees or roads, production will stop."
 msgstr "Някои сгради, като например фермата, имат много малка работната област. Ако сградата е заобиколена от дървета или пътища, производството ще спре."
 
+#: ../../data/txts/tips/general_game.lua:68
+msgctxt "hotkey"
+msgid "Ctrl+(+/-)"
+msgstr "Контрол + (+/-)"
+
+#: ../../data/txts/tips/general_game.lua:68
+msgctxt "hotkey"
+msgid "Ctrl+0"
+msgstr "Контрол + 0"
+
+#: ../../data/txts/tips/general_game.lua:68
+msgid "Zoom in/out with the mouse wheel or %1%. Press %2% to reset the zoom."
+msgstr "Приближаване/отдалечаване с колелото на мишката или %1%. Натиснете %2% за връщане на нормалния мащаб."
+
+#: ../../data/txts/tips/general_game.lua:72
+msgid ""
+"When a building is destroyed, its workers will start looking for a nearby "
+"flag from which they can move by road to a connected warehouse. If there are"
+" no such flags in the vicinity, they will keep wandering around and "
+"eventually die."
+msgstr "Когато сграда бъде унищожена, нейните работници ще потърсят най-близкия флаг, от който могат да се доберат до път, по който да стигнат до свързан с него склад. Ако няма такива флагове наоколо, те ще се лутат известно време и накрая ще умрат."
+
 #: ../../data/txts/tips/multiplayer.lua:4
 msgid ""
 "You can use the ’Page up’ and ‘Page down’ keys to adjust your desired speed "
 "– the real speed is then democratically set."
-msgstr "Можете да използвате клавишите „Page up“ и „Page down“, за да промените скоростта на играта – истинската скорост е избрана по демократичен начин."
+msgstr "Можете да използвате клавишите „Page up“ и „Page down“, за да промените скоростта на играта – истинската скорост ще бъде избрана по демократичен начин."
 
 #: ../../data/txts/tips/multiplayer.lua:8
 msgid ""
@@ -665,6 +736,12 @@ msgid ""
 "Use ‘@name’ at the beginning of a chat message to send it to only one "
 "player."
 msgstr "Започнете чат съобщение с „@name“, за да го изпратите само на един играч."
+
+#: ../../data/txts/tips/multiplayer.lua:16
+msgid ""
+"If the game should crash, don't worry! The game will be saved automatically "
+"so that you can reload it afterwards."
+msgstr "Ако играта претърпи срив, не се притеснявайте! Играта Ви се запазва автоматично, така че ще можете да я продължите."
 
 #: ../../data/txts/tips/singleplayer.lua:4
 msgid ""

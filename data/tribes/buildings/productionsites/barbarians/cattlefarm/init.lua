@@ -49,7 +49,7 @@ tribes:new_productionsite_type {
    programs = {
       work = {
          -- TRANSLATORS: Completed/Skipped/Did not start rearing cattle because ...
-         descname = _"rearing cattle",
+         descname = pgettext("barbarians_building", "rearing cattle"),
          actions = {
             "sleep=15000",
             "return=skipped unless economy needs barbarians_ox",

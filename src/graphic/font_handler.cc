@@ -30,10 +30,12 @@
 
 #include "base/log.h"
 #include "base/wexception.h"
+#include "graphic/font.h"
 #include "graphic/font_handler1.h"  // We need the fontset for the BiDi algorithm
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
 #include "graphic/text/bidi.h"
+#include "graphic/text_layout.h"
 #include "graphic/texture.h"
 #include "graphic/wordwrap.h"
 
@@ -212,7 +214,7 @@ void FontHandler::draw_text(RenderTarget& dst,
 	const LineCacheEntry& lce = d->get_line(style, copytext);
 
 	Vector2f dstpoint = dstpoint_i.cast<float>();
-	UI::correct_for_align(align, lce.width + 2 * LINE_MARGIN, lce.height, &dstpoint);
+	UI::correct_for_align(align, lce.width + 2 * LINE_MARGIN, &dstpoint);
 
 	if (lce.image)
 		dst.blit(Vector2f(dstpoint.x + LINE_MARGIN, dstpoint.y), lce.image.get());
@@ -243,7 +245,7 @@ uint32_t FontHandler::draw_text_raw(RenderTarget& dst,
  */
 void FontHandler::get_size(
    const TextStyle& textstyle, const std::string& text, uint32_t& w, uint32_t& h, uint32_t wrap) {
-	WordWrap ww(textstyle, wrap);
+	WordWrap ww(textstyle.font->size(), textstyle.fg, wrap);
 	ww.wrap(text);
 	w = ww.width();
 	h = ww.height();

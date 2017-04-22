@@ -26,6 +26,7 @@
 #include "graphic/rendertarget.h"
 #include "graphic/text/font_set.h"
 #include "graphic/text_constants.h"
+#include "graphic/text_layout.h"
 
 namespace UI {
 
@@ -43,6 +44,7 @@ MultilineTextarea::MultilineTextarea(Panel* const parent,
    : Panel(parent, x, y, w, h),
      text_(text),
      color_(UI_FONT_CLR_FG),
+     align_(align),
      force_new_renderer_(false),
      use_old_renderer_(false),
      scrollbar_(this,
@@ -56,9 +58,6 @@ MultilineTextarea::MultilineTextarea(Panel* const parent,
      pic_background_(nullptr) {
 	assert(scrollmode_ == MultilineTextarea::ScrollMode::kNoScrolling || Scrollbar::kSize <= w);
 	set_thinks(false);
-
-	//  do not allow vertical alignment as it does not make sense
-	align_ = align & UI::Align::kHorizontal;
 
 	scrollbar_.moved.connect(boost::bind(&MultilineTextarea::scrollpos_changed, this, _1));
 
@@ -87,7 +86,7 @@ void MultilineTextarea::set_text(const std::string& text) {
  * and adjust scrollbar settings accordingly.
  */
 void MultilineTextarea::recompute() {
-	uint32_t height;
+	int height = 0;
 
 	// We wrap the text twice. We need to do this to account for the presence/absence of the
 	// scollbar.
@@ -173,14 +172,14 @@ void MultilineTextarea::draw(RenderTarget& dst) {
 		if (blit_width > 0 && blit_height > 0) {
 			int anchor = 0;
 			Align alignment = mirror_alignment(align_);
-			switch (alignment & UI::Align::kHorizontal) {
-			case UI::Align::kHCenter:
+			switch (alignment) {
+			case UI::Align::kCenter:
 				anchor = (get_eff_w() - blit_width) / 2;
 				break;
 			case UI::Align::kRight:
 				anchor = get_eff_w() - blit_width - RICHTEXT_MARGIN;
 				break;
-			default:
+			case UI::Align::kLeft:
 				anchor = RICHTEXT_MARGIN;
 			}
 

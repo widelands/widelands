@@ -1,14 +1,15 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2016 Widelands Development Team
+# Copyright (C) 2005-2017 Widelands Development Team
 # 
 # Translators:
+# Omar Anwar <omaraglan91@yahoo.com>, 2017
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-10-15 08:42+0000\n"
-"PO-Revision-Date: 2016-05-20 21:04+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2017-04-06 19:07+0000\n"
+"PO-Revision-Date: 2017-04-11 14:31+0000\n"
+"Last-Translator: Omar Anwar <omaraglan91@yahoo.com>\n"
 "Language-Team: Arabic (http://www.transifex.com/widelands/widelands/language/ar/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -18,86 +19,86 @@ msgstr ""
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:28
 msgid "Build a blockhouse"
-msgstr ""
+msgstr "إبني معقل"
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:30
 msgid "Blockhouse"
-msgstr ""
+msgstr "معقل"
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:31
 msgid ""
 "Build a blockhouse at the red house symbol on the east side of the forests, "
 "to the right of your provisional headquarters."
-msgstr ""
+msgstr "إبني معقل في مكان رمز المنزل الأحمر في الجانب الشرقي للغابات، إلي اليمين من مقرك الرئيسيي المؤقت."
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:37
 msgid "Build a lumberjack’s house"
-msgstr ""
+msgstr "إبني منزل قاطع الأخشاب"
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:39
 msgid "Lumberjack’s House"
-msgstr ""
+msgstr "منزل قاطع الأخشاب"
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:40
 msgid ""
 "Build a lumberjack’s house at the red house symbol, south of your "
 "provisional headquarters."
-msgstr ""
+msgstr "إبني منزل قاطع الأخشاب فى مكان رمز المنزل الأحمر، جنوب مقرك الرئيسيي المؤقت."
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:46
 msgid "Build 2 lumberjack’s houses and a sawmill"
-msgstr ""
+msgstr "إبني 2 منزل قاطع الأخشاب و منشرة"
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:48
 msgid "Two Lumberjack’s Houses and a Sawmill"
-msgstr ""
+msgstr "منزلين قاطعي الأخشاب و منشرة "
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:49
 msgid ""
 "Build two more lumberjack’s houses and a sawmill as soon as there is enough "
 "space for them."
-msgstr ""
+msgstr "إبني منزليين إضافيين لقاطعي الأخشاب و منشرة حالما يكون هناك مساحة كافية لهم."
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:55
 msgid "Build a forester’s house"
-msgstr ""
+msgstr "إبني منزل الحراج"
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:57
 msgid "Forester’s House"
-msgstr ""
+msgstr "منزل حراج"
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:58
 msgid ""
 "Build a forester’s house to preserve the wood resources of this island."
-msgstr ""
+msgstr "إبني منزل الحراج لكي تحافظ علي مورد الخشب في الجزيرة."
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:64
 msgid "Build a quarry"
-msgstr ""
+msgstr "إبني محجر"
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:66
 msgid "Quarry"
-msgstr ""
+msgstr "محجر"
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:67
 msgid ""
 "Build a quarry in the south to cut some granite and marble out of the rocks."
-msgstr ""
+msgstr "إبني محجر في الشمال لكي تقطع بعض الجرانيت والرخام من الصخور."
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:68
 msgid "These might be used for future buildings."
-msgstr ""
+msgstr "هذه ربما تستعمل في المباني المستقبلية."
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:78
 msgid "A Dark Night"
-msgstr ""
+msgstr "ليلة مظلمة"
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:79
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:100
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:112
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:225
 msgid "Diary of Lutius"
-msgstr ""
+msgstr "يوميات لوتيوس"
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:81
@@ -339,7 +340,7 @@ msgstr ""
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:202
 msgid "Saledus notes…"
-msgstr ""
+msgstr "ساليدوس يلاحظ ..."
 
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:204
@@ -357,11 +358,11 @@ msgstr ""
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:213
 msgid "A Step Forward"
-msgstr ""
+msgstr "خطوة للأمام"
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:214
 msgid "Saledus looks excited…"
-msgstr ""
+msgstr "ساليدوس يبدو متشوقاً..."
 
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:216
@@ -369,16 +370,16 @@ msgid ""
 "Sire, today we got a lot closer to our first castle. The quarry to the south"
 " began its work today and will soon provide us with granite and beautiful "
 "marble."
-msgstr ""
+msgstr "سيدي، اليوم أصبحنا قريبون من قلعتنا الأولي. المحجر في الشمال بدأ عمله اليوم وقريباً سوف يوفر لنا الجرانيت و الرخام الجميل."
 
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:219
 msgid "Now we truly can look forward to settling down on another island."
-msgstr ""
+msgstr "الأن يمكننا النظر إلي الأمام لكي نستقر علي جزيرة أخري."
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:224
 msgid "Mission Complete"
-msgstr ""
+msgstr "المهمة إكتملت"
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:227
@@ -386,56 +387,56 @@ msgid ""
 "Today I got the message that our ship is completely repaired. At the moment,"
 " my people are loading everything onto our newly repaired ship, hoping it "
 "will serve us better than last time."
-msgstr ""
+msgstr "اليوم أنا حصلت علي رسالة من السفينة أنها صُلحت بالكامل. في هذه الدقيقة، شعبنا يُحمل كل شئ في سفينتنا الجديدة، نأمل أنها سوف تخدمنا أفضل من المرة الأولي."
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:230
 msgid ""
 "Tonight will be our last night on this island. Tomorrow morning we will "
 "leave, searching for a new place for our exile."
-msgstr ""
+msgstr "اليوم هو أخر يوم لنا علي الجزيرة. غداً صباحاً سوف نغادر، لكي نبحث عن مكان جديد لمنفانا."
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:233
 msgid "I still wonder if we will ever see Fremil again."
-msgstr ""
+msgstr "أنا أتسأل إذا كنا سوف نري فريميل مجدداً."
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:234
 msgid "Victory"
-msgstr ""
+msgstr "النصر"
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:235
 msgid ""
 "You have completed this mission. You may continue playing if you wish, "
 "otherwise move on to the next mission."
-msgstr ""
+msgstr "لقد أكملت المهمة. أنت ربما تُكمل اللعب إذا أردت، غير ذلك تحرك إلي المهمة التالية."
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:240
 msgid "Safe Peninsula"
-msgstr ""
+msgstr "أنقذ شبه الجزيرة"
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:241
 msgid "Saledus speaks:"
-msgstr ""
+msgstr "ساليدوس يتكلم:"
 
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:243
 msgid ""
 "Sire, you have made this peninsula a very secure place. Now it’s time to "
 "move on!"
-msgstr ""
+msgstr "سيدي، لقد جعلت شبه الجزيرة هذه أمنة جداً. الأن هو الوقت للتحرك!"
 
 #: ../../data/scripting/format_scenario.lua:36
 #, lua-format
 msgid "“%s”"
-msgstr ""
+msgstr "“%s”"
 
-#: ../../data/scripting/format_scenario.lua:96
+#: ../../data/scripting/format_scenario.lua:84
 msgid "New Objective"
 msgid_plural "New Objectives"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
-msgstr[4] ""
-msgstr[5] ""
+msgstr[0] "لا أهداف جديدة"
+msgstr[1] "هدف جديد"
+msgstr[2] "هدفان جديدان"
+msgstr[3] "أهداف جديدة"
+msgstr[4] "أهداف جديدة"
+msgstr[5] "أهداف جديدة"

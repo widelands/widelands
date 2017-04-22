@@ -50,8 +50,8 @@ SuggestedTeamsBox::SuggestedTeamsBox(Panel* parent,
 	suggested_teams_.clear();
 	set_size(max_x, max_y);
 
-	suggested_teams_box_label_ = new UI::Textarea(this, "", UI::Align::kCenterLeft);
-	add(suggested_teams_box_label_, UI::Align::kLeft);
+	suggested_teams_box_label_ = new UI::Textarea(this);
+	add(suggested_teams_box_label_);
 }
 SuggestedTeamsBox::~SuggestedTeamsBox() {
 	SuggestedTeamsBox::hide();
@@ -109,8 +109,8 @@ void SuggestedTeamsBox::show(
 
 				if (!is_first) {
 					lineup_box_->add_space(padding_);
-					vs_label = new UI::Textarea(lineup_box_, "x", UI::Align::kBottomCenter);
-					lineup_box_->add(vs_label, UI::Align::kLeft);
+					vs_label = new UI::Textarea(lineup_box_, "x", UI::Align::kCenter);
+					lineup_box_->add(vs_label);
 					vs_label->set_visible(true);
 					vs_labels_.push_back(vs_label);
 					lineup_box_->add_space(padding_);
@@ -128,7 +128,7 @@ void SuggestedTeamsBox::show(
 					   lineup_box_, 0, 0, player_image->width(), player_image->height(), player_image);
 					player_icon->set_visible(true);
 					player_icon->set_no_frame();
-					lineup_box_->add(player_icon, UI::Align::kLeft);
+					lineup_box_->add(player_icon);
 					player_icons_.push_back(player_icon);
 				}  // Players in team
 			}     // Teams in lineup
