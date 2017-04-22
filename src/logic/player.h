@@ -446,10 +446,10 @@ public:
 
 	/// Decrement this player's vision for a node.
 	enum class UnseeNodeMode { kUnsee, kUnexplore };
-	void unsee_node(const MapIndex,
-	                const Time,
+	void unsee_node(MapIndex,
+	                Time,
 	                UnseeNodeMode mode = UnseeNodeMode::kUnsee,
-	                const bool forward = false);
+	                bool forward = false);
 
 	/// Call see_node for each node in the area.
 	void see_area(const Area<FCoords>& area) {
