@@ -176,10 +176,10 @@ int32_t calc_how_many(uint32_t time_ms, uint32_t sample_rate) {
  */
 void draw_value(const string& value,
                 const RGBColor& color,
-                const Vector2f& pos,
+                const Vector2i& pos,
                 RenderTarget& dst) {
 	const Image* pic = UI::g_fh1->render(ytick_text_style(value, color));
-	Vector2f point(pos);  // Un-const this
+	Vector2i point(pos);  // Un-const this
 	UI::center_vertically(pic->height(), &point);
 	dst.blit(point, pic, BlendMode::UseAlpha, UI::Align::kRight);
 }
@@ -254,7 +254,7 @@ void draw_diagram(uint32_t time_ms,
 		// over the number, not to the left
 		const Image* xtick = UI::g_fh1->render(
 		   xtick_text_style((boost::format("-%u ") % (max_x / how_many_ticks * i)).str()));
-		Vector2f pos(posx, inner_h - kSpaceBottom + 10);
+		Vector2i pos(posx, inner_h - kSpaceBottom + 10);
 		UI::center_vertically(xtick->height(), &pos);
 		dst.blit(pos, xtick, BlendMode::UseAlpha, UI::Align::kCenter);
 
@@ -272,7 +272,7 @@ void draw_diagram(uint32_t time_ms,
 
 	//  print the used unit
 	const Image* xtick = UI::g_fh1->render(xtick_text_style(get_generic_unit_name(unit)));
-	Vector2f pos(2, kSpacing + 2);
+	Vector2i pos(2, kSpacing + 2);
 	UI::center_vertically(xtick->height(), &pos);
 	dst.blit(pos, xtick, BlendMode::UseAlpha, UI::Align::kLeft);
 }
@@ -460,7 +460,7 @@ void WuiPlotArea::draw_plot(RenderTarget& dst,
 
 	//  print the maximal value into the top right corner
 	draw_value(yscale_label, RGBColor(60, 125, 0),
-	           Vector2f(get_inner_w() - kSpaceRight - 2, kSpacing + 2), dst);
+	           Vector2i(get_inner_w() - kSpaceRight - 2, kSpacing + 2), dst);
 
 	//  plot the pixels
 	for (uint32_t plot = 0; plot < plotdata_.size(); ++plot) {
@@ -646,7 +646,7 @@ void DifferentialPlotArea::draw(RenderTarget& dst) {
 
 	// Print the min value
 	draw_value((boost::format("-%u") % (highest_scale_)).str(), RGBColor(125, 0, 0),
-	           Vector2f(get_inner_w() - kSpaceRight - 2, get_inner_h() - kSpacing - 15), dst);
+	           Vector2i(get_inner_w() - kSpaceRight - 2, get_inner_h() - kSpacing - 15), dst);
 
 	// draw zero line
 	dst.draw_line_strip({Vector2f(get_inner_w() - kSpaceRight, yoffset),

@@ -187,7 +187,7 @@ Align mirror_alignment(Align alignment) {
  * subsampled rendering - this can lead to blurry texts. That is why we
  * never do float divisions in this function.
  */
-void correct_for_align(Align align, uint32_t w, Vector2f* pt) {
+void correct_for_align(Align align, uint32_t w, Vector2i* pt) {
 
 	if (align == Align::kCenter)
 		pt->x -= w / 2;
@@ -198,7 +198,7 @@ void correct_for_align(Align align, uint32_t w, Vector2f* pt) {
 /**
  * Adjust the y coordinate in 'point 'pt' to vertically center an element with height 'h'.
  */
-void center_vertically(uint32_t h, Vector2f* pt) {
+void center_vertically(uint32_t h, Vector2i* pt) {
 	pt->y -= h / 2;
 }
 }  // namespace UI

@@ -117,7 +117,7 @@ void ItemWaresDisplay::draw(RenderTarget& dst) {
 		} else {
 			y += IWD_WareBaseLine;
 			if (tribe.get_ware_descr(it.index)->icon())
-				dst.blit(Vector2f(x, y), tribe.get_ware_descr(it.index)->icon());
+				dst.blit(Vector2i(x, y), tribe.get_ware_descr(it.index)->icon());
 		}
 	}
 }

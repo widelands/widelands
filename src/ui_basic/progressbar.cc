@@ -89,7 +89,7 @@ void ProgressBar::draw(RenderTarget& dst) {
 	                                   UI_FONT_CLR_BRIGHT.hex_value() % floor(fraction * 100.f))
 	                                     .str();
 	const Image* rendered_text = UI::g_fh1->render(as_uifont(progress_text));
-	Vector2f pos(get_w() / 2, get_h() / 2);
+	Vector2i pos(get_w() / 2, get_h() / 2);
 	UI::center_vertically(rendered_text->height(), &pos);
 	dst.blit(pos, rendered_text, BlendMode::UseAlpha, UI::Align::kCenter);
 }

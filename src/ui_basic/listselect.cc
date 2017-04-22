@@ -390,7 +390,7 @@ void BaseListselect::draw(RenderTarget& dst) {
 			break;
 		}
 
-		Vector2f point(selection_mode_ == ListselectLayout::kDropdown ? 3.f : 1.f, y);
+		Vector2i point(selection_mode_ == ListselectLayout::kDropdown ? 3 : 1, y);
 		uint32_t maxw =
 		   get_eff_w() -
 		   (selection_mode_ == ListselectLayout::kDropdown ? scrollbar_.is_enabled() ? 4 : 5 : 2);
@@ -417,7 +417,7 @@ void BaseListselect::draw(RenderTarget& dst) {
 
 		// Now draw pictures
 		if (er.pic) {
-			dst.blit(Vector2f(UI::g_fh1->fontset()->is_rtl() ? get_eff_w() - er.pic->width() - 1 : 1,
+			dst.blit(Vector2i(UI::g_fh1->fontset()->is_rtl() ? get_eff_w() - er.pic->width() - 1 : 1,
 			                  y + (get_lineheight() - er.pic->height()) / 2),
 			         er.pic);
 		}

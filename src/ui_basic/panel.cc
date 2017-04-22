@@ -191,7 +191,7 @@ int Panel::do_run() {
 			RenderTarget& rt = *g_gr->get_render_target();
 			forefather->do_draw(rt);
 			rt.blit(
-			   (app->get_mouse_position() - Vector2i(3, 7)).cast<float>(),
+			   (app->get_mouse_position() - Vector2i(3, 7)),
 			   WLApplication::get()->is_mouse_pressed() ? default_cursor_click_ : default_cursor_);
 			forefather->do_tooltip();
 			g_gr->refresh();
@@ -1068,17 +1068,17 @@ bool Panel::draw_tooltip(RenderTarget& dst, const std::string& text) {
 	uint16_t tip_width = rendered_text->width() + 4;
 	uint16_t tip_height = rendered_text->height() + 4;
 
-	Rectf r(WLApplication::get()->get_mouse_position() + Vector2i(2, 32), tip_width, tip_height);
-	const Vector2f tooltip_bottom_right = r.opposite_of_origin();
-	const Vector2f screen_bottom_right(g_gr->get_xres(), g_gr->get_yres());
+	Recti r(WLApplication::get()->get_mouse_position() + Vector2i(2, 32), tip_width, tip_height);
+	const Vector2i tooltip_bottom_right = r.opposite_of_origin();
+	const Vector2i screen_bottom_right(g_gr->get_xres(), g_gr->get_yres());
 	if (screen_bottom_right.x < tooltip_bottom_right.x)
 		r.x -= 4 + r.w;
 	if (screen_bottom_right.y < tooltip_bottom_right.y)
 		r.y -= 35 + r.h;
 
-	dst.fill_rect(r, RGBColor(63, 52, 34));
-	dst.draw_rect(r, RGBColor(0, 0, 0));
-	dst.blit(r.origin() + Vector2f(2.f, 2.f), rendered_text);
+	dst.fill_rect(r.cast<float>(), RGBColor(63, 52, 34));
+	dst.draw_rect(r.cast<float>(), RGBColor(0, 0, 0));
+	dst.blit(r.origin() + Vector2i(2, 2), rendered_text);
 	return true;
 }
 }

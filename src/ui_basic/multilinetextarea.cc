@@ -174,7 +174,7 @@ void MultilineTextarea::draw(RenderTarget& dst) {
 				anchor = RICHTEXT_MARGIN;
 			}
 
-			dst.blitrect(Vector2f(anchor, 0), text_im,
+			dst.blitrect(Vector2i(anchor, 0), text_im,
 			             Recti(0, scrollbar_.get_scrollpos(), blit_width, blit_height),
 			             BlendMode::UseAlpha);
 		}

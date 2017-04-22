@@ -103,8 +103,8 @@ namespace UI {
 
 Align mirror_alignment(Align alignment);
 
-void center_vertically(uint32_t h, Vector2f* pt);
-void correct_for_align(Align, uint32_t w, Vector2f* pt);
+void center_vertically(uint32_t h, Vector2i* pt);
+void correct_for_align(Align, uint32_t w, Vector2i* pt);
 
 }  // namespace UI
 

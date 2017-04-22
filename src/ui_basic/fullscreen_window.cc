@@ -150,7 +150,7 @@ void FullscreenWindow::blit_image(RenderTarget& dst,
 			const int h = (tiling == kHorizontal) ? image->height() : get_h();
 			dst.tile(Recti(x, y, w, h), image, Vector2i(0, 0));
 		} else {
-			dst.blit(Vector2f(x, y), image);
+			dst.blit(Vector2i(x, y), image);
 		}
 	}
 }

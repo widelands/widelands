@@ -300,7 +300,7 @@ void TabPanel::draw(RenderTarget& dst) {
 			   tabs_[idx]->pic, Recti(0, 0, tabs_[idx]->pic->width(), tabs_[idx]->pic->height()), 1,
 			   BlendMode::UseAlpha);
 		} else {
-			dst.blit(Vector2f(x + kTabPanelTextMargin,
+			dst.blit(Vector2i(x + kTabPanelTextMargin,
 			                  (kTabPanelButtonHeight - tabs_[idx]->pic->height()) / 2),
 			         tabs_[idx]->pic, BlendMode::UseAlpha, UI::Align::kLeft);
 		}

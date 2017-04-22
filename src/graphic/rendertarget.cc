@@ -143,11 +143,11 @@ void RenderTarget::brighten_rect(const Rectf& rect, int32_t factor) {
  *
  * This blit function copies the pixels to the destination surface.
  */
-void RenderTarget::blit(const Vector2f& dst,
+void RenderTarget::blit(const Vector2i& dst,
                         const Image* image,
                         BlendMode blend_mode,
                         UI::Align align) {
-	Vector2f destination_point(dst);
+	Vector2i destination_point(dst);
 	UI::correct_for_align(align, image->width(), &destination_point);
 
 	Rectf source_rect(Vector2i(0, 0), image->width(), image->height());
@@ -160,11 +160,11 @@ void RenderTarget::blit(const Vector2f& dst,
 	}
 }
 
-void RenderTarget::blit_monochrome(const Vector2f& dst,
+void RenderTarget::blit_monochrome(const Vector2i& dst,
                                    const Image* image,
                                    const RGBAColor& blend_mode,
                                    UI::Align align) {
-	Vector2f destination_point(dst);
+	Vector2i destination_point(dst);
 	UI::correct_for_align(align, image->width(), &destination_point);
 
 	Rectf source_rect(Vector2i(0, 0), image->width(), image->height());
@@ -178,7 +178,7 @@ void RenderTarget::blit_monochrome(const Vector2f& dst,
 /**
  * Like \ref blit, but use only a sub-rectangle of the source image.
  */
-void RenderTarget::blitrect(const Vector2f& dst,
+void RenderTarget::blitrect(const Vector2i& dst,
                             const Image* image,
                             const Recti& gsrcrc,
                             BlendMode blend_mode) {

@@ -390,7 +390,7 @@ void EditBox::draw(RenderTarget& dst) {
 	         ->height() :
 	      entry_text_im->height();
 
-	Vector2f point(kMarginX, get_h() / 2);
+	Vector2i point(kMarginX, get_h() / 2);
 	if (m_->align == UI::Align::kRight) {
 		point.x += max_width - linewidth;
 	}
@@ -428,9 +428,9 @@ void EditBox::draw(RenderTarget& dst) {
 		const uint16_t fontheight = text_height(m_->text, m_->fontsize);
 
 		const Image* caret_image = g_gr->images().get("images/ui_basic/caret.png");
-		Vector2f caretpt;
+		Vector2i caretpt;
 		caretpt.x = point.x + m_->scrolloffset + caret_x - caret_image->width() + kLineMargin;
-		caretpt.y = point.y + (fontheight - caret_image->height()) / 2.f;
+		caretpt.y = point.y + (fontheight - caret_image->height()) / 2;
 		dst.blit(caretpt, caret_image);
 	}
 }

@@ -63,7 +63,7 @@ struct ProgressWindow : public UI::FullscreenWindow {
 private:
 	using VisualizationArray = std::vector<IProgressVisualization*>;
 
-	Vector2f label_center_;
+	Vector2i label_center_;
 	Rectf label_rectangle_;
 	VisualizationArray visualizations_;
 	std::string background_;
