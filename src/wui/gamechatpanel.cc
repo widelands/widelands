@@ -22,6 +22,7 @@
 #include <limits>
 #include <string>
 
+#include "graphic/font_handler1.h"
 #include "wui/chat_msg_layout.h"
 
 /**

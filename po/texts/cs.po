@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-03-03 06:24+0000\n"
-"PO-Revision-Date: 2017-03-03 18:46+0000\n"
+"POT-Creation-Date: 2017-04-13 13:07+0000\n"
+"PO-Revision-Date: 2017-04-02 08:18+0000\n"
 "Last-Translator: Milan Fašina <matrix17@seznam.cz>\n"
 "Language-Team: Czech (http://www.transifex.com/widelands/widelands/language/cs/)\n"
 "MIME-Version: 1.0\n"
@@ -519,9 +519,9 @@ msgstr "Vždy postav chaty pro lesníka a hajného, aby ti nedošly kmeny nebo z
 
 #: ../../data/txts/tips/barbarians.lua:12 ../../data/txts/tips/empire.lua:12
 msgid ""
-"Most upgraded buildings also need an upgraded worker. Do not upgrade a "
-"building unless you have the upgraded workers available."
-msgstr "Nejpokročilejší budovy vyžadují i zkušené dělníky. Nevylepšuj budovy, pokud ještě nemáš zkušené dělníky."
+"Most enhanced buildings need experienced workers. Do not enhance a building "
+"unless you have the necessary workers available."
+msgstr "Nejpokročilejší budovy vyžadují i zkušené dělníky. Nevylepšuj budovy, pokud pro ně nemáš dělníky."
 
 #: ../../data/txts/tips/editor.lua:4
 msgid ""
@@ -582,14 +582,14 @@ msgid ""
 "You can place a medium building on any node where there is a slope no "
 "greater than 1 in the south-east direction and its height difference to all "
 "nodes in a radius of 2 is no greater than 2."
-msgstr ""
+msgstr "Střední budovu můžeš umístit na jakýkoliv uzel, kde není sklon větší než 1 v jiho-východním směru a výškový rozdíl všech uzlů v okolí 2 uzlů není větší než 2."
 
 #: ../../data/txts/tips/editor.lua:44
 msgid ""
 "You can place a large building on any node where you could place a medium "
-"building if there is no obstacle or unbuildable terrain towards the west, "
+"building if there is no obstacle or non-arable terrain towards the west, "
 "northwest and northeast."
-msgstr ""
+msgstr "Velkou budovu můžeš umístit na jakýkoliv uzel, kde lze umístit střední budovu, pokud tu není žádná překážka nebo nepřístupný terén směrem na západ, severo-západ a severo-východ."
 
 #: ../../data/txts/tips/empire.lua:8
 msgid "Always build a forester’s house so you will not run out of logs."
@@ -712,7 +712,7 @@ msgstr "Ctrl+0"
 
 #: ../../data/txts/tips/general_game.lua:68
 msgid "Zoom in/out with the mouse wheel or %1%. Press %2% to reset the zoom."
-msgstr ""
+msgstr "Přiblížení/oddálení kolečkem myši nebo %1%. Pro reset přiblížení stiskni %2%."
 
 #: ../../data/txts/tips/general_game.lua:72
 msgid ""

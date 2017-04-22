@@ -27,6 +27,7 @@
 #define UI_FONT_SIZE_SMALL 14
 #define UI_FONT_SIZE_ULTRASMALL 10
 constexpr int kMinimumFontSize = 6;
+constexpr int kLineMargin = 1;
 
 /// Font colors
 

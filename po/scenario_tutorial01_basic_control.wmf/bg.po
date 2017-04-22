@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-03-03 06:24+0000\n"
-"PO-Revision-Date: 2017-03-03 14:16+0000\n"
+"POT-Creation-Date: 2017-03-05 10:46+0000\n"
+"PO-Revision-Date: 2017-03-06 07:10+0000\n"
 "Last-Translator: Любомир Василев\n"
 "Language-Team: Bulgarian (http://www.transifex.com/widelands/widelands/language/bg/)\n"
 "MIME-Version: 1.0\n"
@@ -280,8 +280,8 @@ msgid ""
 msgstr "За да затворите прозореца, просто щракнете с десния бутон. Всички прозорци в Widelands могат да бъдат затворени по този начин, с изключение на тези с инструкции, като този. Опитайте!"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:169
-msgid "Lumberjack is Done"
-msgstr "Дърварят е готов"
+msgid "The Lumberjack’s Hut is Done"
+msgstr "Дърварската хижа е готова"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:172
 msgid ""
