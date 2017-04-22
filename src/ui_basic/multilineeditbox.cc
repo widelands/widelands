@@ -22,6 +22,7 @@
 #include <boost/bind.hpp>
 
 #include "base/utf8.h"
+#include "graphic/font_handler1.h"
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
 #include "graphic/text_layout.h"
@@ -47,8 +48,7 @@ struct MultilineEditbox::Data {
 	/// text.size() inidicates that the cursor is after the last character.
 	uint32_t cursor_pos;
 
-	/// Font and style
-	UI::TextStyle textstyle;
+	int lineheight;
 
 	/// Maximum length of the text string, in bytes
 	uint32_t maxbytes;
@@ -91,6 +91,7 @@ MultilineEditbox::MultilineEditbox(Panel* parent,
                                    const Image* button_background)
    : Panel(parent, x, y, w, h), d_(new Data(*this, button_background)) {
 	d_->background = background;
+	d_->lineheight = text_height();
 	set_handle_mouse(true);
 	set_can_focus(true);
 	set_thinks(false);
@@ -107,8 +108,8 @@ MultilineEditbox::Data::Data(MultilineEditbox& o, const Image* button_background
      owner(o) {
 	scrollbar.moved.connect(boost::bind(&MultilineEditbox::scrollpos_changed, &o, _1));
 
-	scrollbar.set_pagesize(owner.get_h() - 2 * textstyle.font->height());
-	scrollbar.set_singlestepsize(textstyle.font->height());
+	scrollbar.set_pagesize(owner.get_h() - 2 * lineheight);
+	scrollbar.set_singlestepsize(lineheight);
 }
 
 /**
@@ -303,7 +304,7 @@ bool MultilineEditbox::handle_key(bool const down, SDL_Keysym const code) {
 			if (d_->cursor_pos < d_->text.size()) {
 				d_->refresh_ww();
 
-				uint32_t cursorline, cursorpos;
+				uint32_t cursorline, cursorpos = 0;
 				d_->ww.calc_wrapped_pos(d_->cursor_pos, cursorline, cursorpos);
 
 				if (cursorline + 1 < d_->ww.nrlines()) {
@@ -332,7 +333,7 @@ bool MultilineEditbox::handle_key(bool const down, SDL_Keysym const code) {
 			if (d_->cursor_pos > 0) {
 				d_->refresh_ww();
 
-				uint32_t cursorline, cursorpos;
+				uint32_t cursorline, cursorpos = 0;
 				d_->ww.calc_wrapped_pos(d_->cursor_pos, cursorline, cursorpos);
 
 				if (cursorline > 0) {
@@ -361,7 +362,7 @@ bool MultilineEditbox::handle_key(bool const down, SDL_Keysym const code) {
 			} else {
 				d_->refresh_ww();
 
-				uint32_t cursorline, cursorpos;
+				uint32_t cursorline, cursorpos = 0;
 				d_->ww.calc_wrapped_pos(d_->cursor_pos, cursorline, cursorpos);
 
 				d_->set_cursor_pos(d_->ww.line_offset(cursorline));
@@ -379,7 +380,7 @@ bool MultilineEditbox::handle_key(bool const down, SDL_Keysym const code) {
 			} else {
 				d_->refresh_ww();
 
-				uint32_t cursorline, cursorpos;
+				uint32_t cursorline, cursorpos = 0;
 				d_->ww.calc_wrapped_pos(d_->cursor_pos, cursorline, cursorpos);
 
 				if (cursorline + 1 < d_->ww.nrlines())
@@ -488,12 +489,10 @@ void MultilineEditbox::Data::set_cursor_pos(uint32_t newpos) {
 void MultilineEditbox::Data::scroll_cursor_into_view() {
 	refresh_ww();
 
-	uint32_t cursorline, cursorpos;
+	uint32_t cursorline, cursorpos = 0;
 	ww.calc_wrapped_pos(cursor_pos, cursorline, cursorpos);
 
-	int32_t lineheight = textstyle.font->height();
-	int32_t lineskip = textstyle.font->lineskip();
-	int32_t top = cursorline * lineskip;
+	int32_t top = cursorline * lineheight;
 
 	if (top < int32_t(scrollbar.get_scrollpos())) {
 		scrollbar.set_scrollpos(top - lineheight);
@@ -517,7 +516,6 @@ void MultilineEditbox::Data::refresh_ww() {
 	if (ww_valid)
 		return;
 
-	ww.set_style(textstyle);
 	ww.set_wrapwidth(owner.get_w() - Scrollbar::kSize);
 
 	ww.wrap(text);

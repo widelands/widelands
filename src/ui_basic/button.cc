@@ -49,6 +49,7 @@ Button::Button  //  for textual buttons. If h = 0, h will resize according to th
      pressed_(false),
      enabled_(true),
      style_(init_style),
+     disable_style_(ButtonDisableStyle::kMonochrome),
      repeating_(false),
      image_mode_(UI::Button::ImageMode::kShrink),
      time_nextact_(0),
@@ -83,6 +84,7 @@ Button::Button  //  for pictorial buttons
      pressed_(false),
      enabled_(true),
      style_(init_style),
+     disable_style_(ButtonDisableStyle::kMonochrome),
      repeating_(false),
      image_mode_(mode),
      time_nextact_(0),
@@ -147,6 +149,14 @@ void Button::set_enabled(bool const on) {
  * Redraw the button
 */
 void Button::draw(RenderTarget& dst) {
+	const bool is_flat = (enabled_ && style_ == Style::kFlat) ||
+	                     (!enabled_ && static_cast<int>(disable_style_ & ButtonDisableStyle::kFlat));
+	const bool is_permpressed =
+	   (enabled_ && style_ == Style::kPermpressed) ||
+	   (!enabled_ && static_cast<int>(disable_style_ & ButtonDisableStyle::kPermpressed));
+	const bool is_monochrome =
+	   !enabled_ && static_cast<int>(disable_style_ & ButtonDisableStyle::kMonochrome);
+
 	// Draw the background
 	if (pic_background_) {
 		dst.fill_rect(Rectf(0.f, 0.f, get_w(), get_h()), RGBAColor(0, 0, 0, 255));
@@ -154,13 +164,13 @@ void Button::draw(RenderTarget& dst) {
 		   Recti(Vector2i(0, 0), get_w(), get_h()), pic_background_, Vector2i(get_x(), get_y()));
 	}
 
-	if (enabled_ && highlighted_ && style_ != Style::kFlat)
+	if (is_flat && highlighted_)
 		dst.brighten_rect(Rectf(0.f, 0.f, get_w(), get_h()), MOUSE_OVER_BRIGHT_FACTOR);
 
 	//  If we've got a picture, draw it centered
 	if (pic_custom_) {
 		if (image_mode_ == UI::Button::ImageMode::kUnscaled) {
-			if (enabled_) {
+			if (!is_monochrome) {
 				dst.blit(Vector2f((get_w() - static_cast<int32_t>(pic_custom_->width())) / 2.f,
 				                  (get_h() - static_cast<int32_t>(pic_custom_->height())) / 2.f),
 				         pic_custom_);
@@ -179,7 +189,7 @@ void Button::draw(RenderTarget& dst) {
 			int blit_width = image_scale * pic_custom_->width();
 			int blit_height = image_scale * pic_custom_->height();
 
-			if (enabled_) {
+			if (!is_monochrome) {
 				dst.blitrect_scale(Rectf((get_w() - blit_width) / 2.f, (get_h() - blit_height) / 2.f,
 				                         blit_width, blit_height),
 				                   pic_custom_,
@@ -198,7 +208,7 @@ void Button::draw(RenderTarget& dst) {
 		//  Otherwise draw title string centered
 		const UI::RenderedText* rendered_text =
 		   autofit_ui_text(title_, get_inner_w() - 2 * kButtonImageMargin,
-		                   enabled_ ? UI_FONT_CLR_FG : UI_FONT_CLR_DISABLED);
+		                   is_monochrome ? UI_FONT_CLR_DISABLED : UI_FONT_CLR_FG);
 		// Blit on pixel boundary (not float), so that the text is blitted pixel perfect.
 		draw_text(dst, Vector2i((get_w() - rendered_text->width()) / 2,
 		                        (get_h() - rendered_text->height()) / 2),
@@ -211,11 +221,11 @@ void Button::draw(RenderTarget& dst) {
 	//  stays pressed when it is pressed once
 	RGBAColor black(0, 0, 0, 255);
 
-	if (style_ != Style::kFlat) {
+	if (!is_flat) {
 		assert(2 <= get_w());
 		assert(2 <= get_h());
 		//  Button is a normal one, not flat. We invert the behaviour for kPermpressed.
-		if ((style_ == Style::kPermpressed) == (pressed_ && highlighted_)) {
+		if (is_permpressed == (pressed_ && highlighted_)) {
 			//  top edge
 			dst.brighten_rect(Rectf(0.f, 0.f, get_w(), 2.f), BUTTON_EDGE_BRIGHT_FACTOR);
 			//  left edge
@@ -335,6 +345,10 @@ bool Button::handle_mousemove(const uint8_t, int32_t, int32_t, int32_t, int32_t)
 
 void Button::set_style(UI::Button::Style input_style) {
 	style_ = input_style;
+}
+
+void Button::set_disable_style(UI::ButtonDisableStyle input_style) {
+	disable_style_ = input_style;
 }
 
 void Button::set_perm_pressed(bool pressed) {

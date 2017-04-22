@@ -10,15 +10,16 @@
 # Yuriy Sokolov <lention@mail.ru>, 2015
 # Владимир Куряев <istercul@gmail.com>, 2016
 # Денис Шабанов <inactive+Dodolphin@transifex.com>, 2016
-# Олег Шевчеко <olegrock@gmail.com>, 2017
+# Олег Шевченко <olegrock@gmail.com>, 2017
+# Олег Шевченко <olegrock@gmail.com>, 2017
 # Федор <Lunar-energy@ya.ru>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-02-11 11:38+0000\n"
-"PO-Revision-Date: 2017-02-14 06:21+0000\n"
-"Last-Translator: Олег Шевчеко <olegrock@gmail.com>\n"
+"POT-Creation-Date: 2017-03-05 10:46+0000\n"
+"PO-Revision-Date: 2017-03-06 06:15+0000\n"
+"Last-Translator: Олег Шевченко <olegrock@gmail.com>\n"
 "Language-Team: Russian (http://www.transifex.com/widelands/widelands/language/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -504,6 +505,12 @@ msgid ""
 "of logs."
 msgstr "Всегда стройте домик лесника и домик лесоруба, чтобы не остаться без бревен."
 
+#: ../../data/txts/tips/atlanteans.lua:12
+msgid ""
+"Atlanteans need spidercloth for many buildings. Build the needed "
+"infrastructure early before you run out."
+msgstr "Шёлк нужен атлантам для многих строений. Постройте необходимую инфраструктуру как можно раньше, пока всё не кончилось."
+
 #: ../../data/txts/tips/barbarians.lua:4 ../../data/txts/tips/empire.lua:4
 msgid ""
 "Keep an eye on your fishers. After fish resources are exhausted in their "
@@ -513,8 +520,14 @@ msgstr "Присматривайте за вашими рыболовами. К�
 #: ../../data/txts/tips/barbarians.lua:8
 msgid ""
 "Always build a ranger’s and a gamekeeper’s hut, so you will not run out of "
-"logs."
-msgstr "Всегда стройте хижины лесничего и егеря, чтобы не остаться без бревен."
+"logs or game."
+msgstr "Всегда стройте хижины лесничего и егеря, чтобы не остаться без бревен или дичи."
+
+#: ../../data/txts/tips/barbarians.lua:12 ../../data/txts/tips/empire.lua:12
+msgid ""
+"Most enhanced buildings need experienced workers. Do not enhance a building "
+"unless you have the necessary workers available."
+msgstr "Самым продвинутым зданиям нужны квалифицированные работники. Не улучшайте здание, пока нет требуемых работников."
 
 #: ../../data/txts/tips/editor.lua:4
 msgid ""
@@ -557,11 +570,40 @@ msgstr "Цифровые клавиши (0—9) позволяют задать 
 msgid ""
 "Space key behaves like in normal game. It switches if building spaces are "
 "shown on or off."
-msgstr "Клавиша Пробел работает также как в обычной игре. Она переключает видимость мест строительства - показ включен или выключен."
+msgstr "Клавиша Пробел работает также как в обычной игре. Она переключает показ мест строительства."
+
+#: ../../data/txts/tips/editor.lua:32
+msgid ""
+"When placing trees, use the help button to see which trees are more likely "
+"to survive on which terrain."
+msgstr "Перед посадкой деревьев используйте кнопку помощи, чтобы посмотреть, какие деревья лучше выживают в этой местности."
+
+#: ../../data/txts/tips/editor.lua:36
+msgid ""
+"If you do not set water and fish resources, a default amount will be used."
+msgstr "Если вы не настроили водные и рыбные ресурсы, будет использовано количество по-умолчанию."
+
+#: ../../data/txts/tips/editor.lua:40
+msgid ""
+"You can place a medium building on any node where there is a slope no "
+"greater than 1 in the south-east direction and its height difference to all "
+"nodes in a radius of 2 is no greater than 2."
+msgstr "Вы можете расположить средние здания на любом узле, где имеется откос, не превышающий 1 в юго-восточном направлении, и его разность высоты ко всем узлам в радиусе 2 не превышает 2."
+
+#: ../../data/txts/tips/editor.lua:44
+msgid ""
+"You can place a large building on any node where you could place a medium "
+"building if there is no obstacle or non-arable terrain towards the west, "
+"northwest and northeast."
+msgstr "Вы можете расположить большие здания на любом узле, на котором вы можете разместить средние здания, если к западу, северо-западу и северо-востоку от них нет препятствий или непахотных земель."
 
 #: ../../data/txts/tips/empire.lua:8
 msgid "Always build a forester’s house so you will not run out of logs."
 msgstr "Если не хотите остаться без брёвен, всегда стройте домик лесника."
+
+#: ../../data/txts/tips/empire.lua:16
+msgid "Empire needs a lot of marble. Keep looking for marble resources."
+msgstr "Имперцам требуется много мрамора. Продолжайте искать мраморные ресурсы."
 
 #: ../../data/txts/tips/general_game.lua:4
 msgid ""
@@ -573,7 +615,7 @@ msgstr "Процесс строительства начнётся только 
 msgid ""
 "Be sure to send a geologist to survey sites before building a well or a "
 "mine."
-msgstr "Не забудьте отправить геолога для обследования области до создания колодцев и рудников."
+msgstr "Не забудьте отправить геолога для обследования области до начала строительства колодца или рудника."
 
 #: ../../data/txts/tips/general_game.lua:12
 msgid ""
@@ -617,10 +659,18 @@ msgid ""
 msgstr "Управляйте своими сообщениями более эффективно: нажмите N чтобы попасть в окно сообщений, G для перехода, и DELETE для архивации сообщений."
 
 #: ../../data/txts/tips/general_game.lua:40
-msgid ""
-"Press Ctrl+(0-9) to store important locations, then press 0-9 to recall "
-"them."
-msgstr "Нажмите Ctrl+(0—9) для сохранения расположения важных вам локаций, после чего нажимайте 0—9 для перемещения к ним."
+msgctxt "hotkey"
+msgid "1-9"
+msgstr "1-9"
+
+#: ../../data/txts/tips/general_game.lua:40
+msgctxt "hotkey"
+msgid "Ctrl+(1-9)"
+msgstr "Ctrl+(1-9)"
+
+#: ../../data/txts/tips/general_game.lua:40
+msgid "Press %1% to store important locations, then press %2% to recall them."
+msgstr "Нажмите %1% для запоминания важных мест, а потом используйте %2%, чтобы вспомнить их."
 
 #: ../../data/txts/tips/general_game.lua:44
 msgid ""
@@ -656,6 +706,28 @@ msgid ""
 "building is surrounded with trees or roads, production will stop."
 msgstr "Некоторые здания, например фермы, имеют очень небольшую рабочую область. Если здание будет окружено деревьями и дорогами, то производство остановится."
 
+#: ../../data/txts/tips/general_game.lua:68
+msgctxt "hotkey"
+msgid "Ctrl+(+/-)"
+msgstr "Ctrl+(+/-)"
+
+#: ../../data/txts/tips/general_game.lua:68
+msgctxt "hotkey"
+msgid "Ctrl+0"
+msgstr "Ctrl+0"
+
+#: ../../data/txts/tips/general_game.lua:68
+msgid "Zoom in/out with the mouse wheel or %1%. Press %2% to reset the zoom."
+msgstr "Изменить масштаб можно колесом мыши или %1%. Нажмите %2%, чтобы сбросить масштаб."
+
+#: ../../data/txts/tips/general_game.lua:72
+msgid ""
+"When a building is destroyed, its workers will start looking for a nearby "
+"flag from which they can move by road to a connected warehouse. If there are"
+" no such flags in the vicinity, they will keep wandering around and "
+"eventually die."
+msgstr "Когда здание разрушено его работники начнут искать ближайший флаг, от которого они смогут дойти к складу, присоединённому к дороге."
+
 #: ../../data/txts/tips/multiplayer.lua:4
 msgid ""
 "You can use the ’Page up’ and ‘Page down’ keys to adjust your desired speed "
@@ -673,6 +745,12 @@ msgid ""
 "Use ‘@name’ at the beginning of a chat message to send it to only one "
 "player."
 msgstr "Чтобы послать сообщение в чате только одному конкретному игроку, используйте «@ИмяДругогоИгрока» в начале сообщения."
+
+#: ../../data/txts/tips/multiplayer.lua:16
+msgid ""
+"If the game should crash, don't worry! The game will be saved automatically "
+"so that you can reload it afterwards."
+msgstr "Если игра завершилась аварийно - не волнуйтесь! Игра сохраняется автоматически, так что вы можете загрузиться после этого."
 
 #: ../../data/txts/tips/singleplayer.lua:4
 msgid ""

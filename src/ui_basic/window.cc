@@ -128,7 +128,7 @@ void Window::set_center_panel(Panel* panel) {
  */
 void Window::update_desired_size() {
 	if (center_panel_ && !is_minimal_) {
-		int innerw, innerh;
+		int innerw, innerh = 0;
 		center_panel_->get_desired_size(&innerw, &innerh);
 		set_desired_size(
 		   innerw + get_lborder() + get_rborder(), innerh + get_tborder() + get_bborder());
@@ -276,8 +276,9 @@ void Window::draw_border(RenderTarget& dst) {
 		   autofit_ui_text(richtext_escape(title_), get_inner_w(), UI_FONT_CLR_FG, 13);
 
 		// Blit on pixel boundary (not float), so that the text is blitted pixel perfect.
-		draw_text(dst, Vector2i(get_lborder() + get_inner_w() / 2, TP_B_PIXMAP_THICKNESS / 2), text,
-		          UI::Align::kCenter);
+		Vector2i pos(get_lborder() + get_inner_w() / 2, TP_B_PIXMAP_THICKNESS / 2);
+		UI::center_vertically(text->height(), &pos);
+		dst.blit(pos.cast<float>(), text->texts[0]->image, BlendMode::UseAlpha, UI::Align::kCenter);
 	}
 
 	if (!is_minimal_) {

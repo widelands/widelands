@@ -52,9 +52,9 @@ wl_library(economy
     base_macros
     io_fileread
     logic
+    logic_constants
     logic_widelands_geometry
     map_io
     notifications
-    wui
 )
 add_subdirectory(test)

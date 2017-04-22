@@ -183,14 +183,8 @@ public:
 		return bborder_;
 	}
 
-	int get_inner_w() const {
-		assert(lborder_ + rborder_ <= w_);
-		return w_ - (lborder_ + rborder_);
-	}
-	int get_inner_h() const {
-		assert(tborder_ + bborder_ <= h_);
-		return h_ - (tborder_ + bborder_);
-	}
+	int get_inner_w() const;
+	int get_inner_h() const;
 
 	const Panel* get_next_sibling() const {
 		return next_;
@@ -231,7 +225,7 @@ public:
 	void draw_text(RenderTarget& dst,
 	               const Vector2i& position,
 	               const UI::RenderedText* text,
-	               UI::Align align = UI::Align::kTopLeft);
+	               UI::Align align = UI::Align::kLeft);
 	void draw_text(RenderTarget& dst,
 						const Vector2i& position,
 						const UI::RenderedText* text,

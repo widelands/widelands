@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-02-11 11:38+0000\n"
-"PO-Revision-Date: 2017-02-12 08:29+0000\n"
+"POT-Creation-Date: 2017-04-13 13:07+0000\n"
+"PO-Revision-Date: 2017-04-13 17:08+0000\n"
 "Last-Translator: Omar Anwar <omaraglan91@yahoo.com>\n"
 "Language-Team: Arabic (http://www.transifex.com/widelands/widelands/language/ar/)\n"
 "MIME-Version: 1.0\n"
@@ -19,11 +19,11 @@ msgstr ""
 
 #: ../../data/campaigns/dummy.wmf/scripting/init.lua:11
 msgid "Not yet implemented"
-msgstr "لم تنتهى  بعد "
+msgstr "لم تنتهى بعد "
 
 #: ../../data/campaigns/dummy.wmf/scripting/init.lua:12
 msgid "Sorry, this map is not yet implemented."
-msgstr "اسف, هذه الخريطة لم تنتهى بعد"
+msgstr "أسف, هذه الخريطة لم تنتهى بعد."
 
 #: ../../data/scripting/format_scenario.lua:36
 #, lua-format
@@ -33,9 +33,9 @@ msgstr "“%s”"
 #: ../../data/scripting/format_scenario.lua:84
 msgid "New Objective"
 msgid_plural "New Objectives"
-msgstr[0] "لا اهداف جديده"
+msgstr[0] "لا أهداف جديدة"
 msgstr[1] "هدف جديد "
 msgstr[2] "هدفان جديدان"
-msgstr[3] "اهداف جديده"
-msgstr[4] "اهداف جديده"
-msgstr[5] "اهداف جديده"
+msgstr[3] "أهداف جديدة"
+msgstr[4] "أهداف جديدة"
+msgstr[5] "أهداف جديدة"

@@ -48,7 +48,7 @@ FullscreenMenuInternetLobby::FullscreenMenuInternetLobby(char const* const nick,
      prev_clientlist_len_(1000),
 
      // Text labels
-     title(this, get_w() / 2, get_h() / 20, _("Metaserver Lobby"), UI::Align::kHCenter),
+     title(this, get_w() / 2, get_h() / 20, _("Metaserver Lobby"), UI::Align::kCenter),
      clients_(this, get_w() * 4 / 125, get_h() * 15 / 100, _("Clients online:")),
      opengames_(this, get_w() * 17 / 25, get_h() * 15 / 100, _("List of games:")),
      servername_(this, get_w() * 17 / 25, get_h() * 63 / 100, _("Name of your server:")),
@@ -153,6 +153,7 @@ FullscreenMenuInternetLobby::FullscreenMenuInternetLobby(char const* const nick,
 
 void FullscreenMenuInternetLobby::layout() {
 	// TODO(GunChleoc): Box layout and then implement
+	clientsonline_list_.layout();
 }
 
 /// think function of the UI (main loop)

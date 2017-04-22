@@ -53,8 +53,8 @@ const uint32_t time_in_ms[] = {
 
 const char BG_PIC[] = "images/wui/plot_area_bg.png";
 const RGBColor kAxisLineColor(0, 0, 0);
-constexpr float kAxisLinesWidth = 2.0f;
-constexpr float kPlotLinesWidth = 3.f;
+constexpr int kAxisLinesWidth = 2;
+constexpr int kPlotLinesWidth = 3;
 const RGBColor kZeroLineColor(255, 255, 255);
 
 enum class Units {
@@ -68,7 +68,7 @@ enum class Units {
 
 string ytick_text_style(const string& text, const RGBColor& clr) {
 	static boost::format f(
-	   "<rt><p><font face=condensed size=13 color=%02x%02x%02x>%s</font></p></rt>");
+	   "<rt keep_spaces=1><p><font face=condensed size=13 color=%02x%02x%02x>%s</font></p></rt>");
 	f % int(clr.r) % int(clr.g) % int(clr.b);
 	f % text;
 	return f.str();
@@ -171,6 +171,111 @@ int32_t calc_how_many(uint32_t time_ms, uint32_t sample_rate) {
 	return how_many;
 }
 
+/**
+ * print the string into the RenderTarget.
+ */
+void draw_value(const string& value,
+                const RGBColor& color,
+                const Vector2i& pos,
+                RenderTarget& dst) {
+	const Image* pic = UI::g_fh1->render(ytick_text_style(value, color))->texts[0]->image;
+	Vector2i point(pos);  // Un-const this
+	UI::center_vertically(pic->height(), &point);
+	dst.blit(point.cast<float>(), pic, BlendMode::UseAlpha, UI::Align::kRight);
+}
+
+/**
+ * draw the background and the axis of the diagram
+ */
+void draw_diagram(uint32_t time_ms,
+                  const uint32_t inner_w,
+                  const uint32_t inner_h,
+                  const float xline_length,
+                  RenderTarget& dst) {
+	uint32_t how_many_ticks, max_x;
+
+	Units unit = get_suggested_unit(time_ms, true);
+	max_x = ms_to_unit(unit, time_ms);
+	// Make sure that we always have a tick
+	max_x = std::max(max_x, 1u);
+
+	// Try to find a nice division of max_x (some number between 3 and 7 so data on graph are
+	// readable) - to get correct data on graph, how_many_ticks has to be a divisor of max_x. Now
+	// dividing by 5 is first and we get more readable intervals.
+	how_many_ticks = max_x;
+
+	while (how_many_ticks > 10 && how_many_ticks % 5 == 0) {
+		how_many_ticks /= 5;
+	}
+	while (how_many_ticks > 7 && how_many_ticks % 2 == 0) {
+		how_many_ticks /= 2;
+	}
+	while (how_many_ticks > 7 && how_many_ticks % 3 == 0) {
+		how_many_ticks /= 3;
+	}
+	while (how_many_ticks > 7 && how_many_ticks % 7 == 0) {
+		how_many_ticks /= 7;
+	}
+	// Make sure that we always have a tick
+	how_many_ticks = std::max(how_many_ticks, 1u);
+
+	// first, tile the background
+	dst.tile(Recti(Vector2i(0, 0), inner_w, inner_h), g_gr->images().get(BG_PIC), Vector2i(0, 0));
+
+	// Draw coordinate system
+	// X Axis
+	dst.draw_line_strip({Vector2f(kSpacing, inner_h - kSpaceBottom),
+	                     Vector2f(inner_w - kSpaceRight, inner_h - kSpaceBottom)},
+	                    kAxisLineColor, kAxisLinesWidth);
+	// Arrow
+	dst.draw_line_strip(
+	   {
+	      Vector2f(kSpacing + 5, inner_h - kSpaceBottom - 3),
+	      Vector2f(kSpacing, inner_h - kSpaceBottom),
+	      Vector2f(kSpacing + 5, inner_h - kSpaceBottom + 3),
+	   },
+	   kAxisLineColor, kAxisLinesWidth);
+
+	//  Y Axis
+	dst.draw_line_strip({Vector2f(inner_w - kSpaceRight, kSpacing),
+	                     Vector2f(inner_w - kSpaceRight, inner_h - kSpaceBottom)},
+	                    kAxisLineColor, kAxisLinesWidth);
+	//  No Arrow here, since this doesn't continue.
+
+	float sub = (xline_length - kSpaceLeftOfLabel) / how_many_ticks;
+	float posx = inner_w - kSpaceRight;
+
+	for (uint32_t i = 0; i <= how_many_ticks; ++i) {
+		dst.draw_line_strip({Vector2f(static_cast<int32_t>(posx), inner_h - kSpaceBottom),
+		                     Vector2f(static_cast<int32_t>(posx), inner_h - kSpaceBottom + 3)},
+		                    kAxisLineColor, kAxisLinesWidth);
+
+		// The space at the end is intentional to have the tick centered
+		// over the number, not to the left
+		const Image* xtick = UI::g_fh1->render(
+		   xtick_text_style((boost::format("-%u ") % (max_x / how_many_ticks * i)).str()))->texts[0]->image;
+		Vector2i pos(posx, inner_h - kSpaceBottom + 10);
+		UI::center_vertically(xtick->height(), &pos);
+		dst.blit(pos.cast<float>(), xtick, BlendMode::UseAlpha, UI::Align::kCenter);
+
+		posx -= sub;
+	}
+
+	//  draw yticks, one at full, one at half
+	dst.draw_line_strip(
+	   {Vector2f(inner_w - kSpaceRight, kSpacing), Vector2f(inner_w - kSpaceRight - 3, kSpacing)},
+	   kAxisLineColor, kAxisLinesWidth);
+	dst.draw_line_strip(
+	   {Vector2f(inner_w - kSpaceRight, kSpacing + ((inner_h - kSpaceBottom) - kSpacing) / 2),
+	    Vector2f(inner_w - kSpaceRight - 3, kSpacing + ((inner_h - kSpaceBottom) - kSpacing) / 2)},
+	   kAxisLineColor, kAxisLinesWidth);
+
+	//  print the used unit
+	const Image* xtick = UI::g_fh1->render(xtick_text_style(get_generic_unit_name(unit)))->texts[0]->image;
+	Vector2i pos(2, kSpacing + 2);
+	UI::center_vertically(xtick->height(), &pos);
+	dst.blit(pos.cast<float>(), xtick, BlendMode::UseAlpha, UI::Align::kLeft);
+}
 }  // namespace
 
 WuiPlotArea::WuiPlotArea(UI::Panel* const parent,
@@ -189,7 +294,7 @@ WuiPlotArea::WuiPlotArea(UI::Panel* const parent,
      yline_length_(get_inner_h() - kSpaceBottom - kSpacing),
      time_ms_(0),
      highest_scale_(0),
-     sub_(0.0f),
+     sub_(0),
      time_(TIME_GAME),
      game_time_id_(0) {
 	update();
@@ -366,107 +471,6 @@ void WuiPlotArea::draw_plot(RenderTarget& dst,
 	}
 }
 
-
-
-/**
- * draw the background and the axis of the diagram
- */
-void WuiPlotArea::draw_diagram(uint32_t time_ms,
-						const uint32_t inner_w,
-						const uint32_t inner_h,
-						const float xline_length,
-						RenderTarget& dst) {
-	uint32_t how_many_ticks, max_x;
-
-	Units unit = get_suggested_unit(time_ms, true);
-	max_x = ms_to_unit(unit, time_ms);
-	// Make sure that we always have a tick
-	max_x = std::max(max_x, 1u);
-
-	// Try to find a nice division of max_x (some number between 3 and 7 so data on graph are
-	// readable) - to get correct data on graph, how_many_ticks has to be a divisor of max_x. Now
-	// dividing by 5 is first and we get more readable intervals.
-	how_many_ticks = max_x;
-
-	while (how_many_ticks > 10 && how_many_ticks % 5 == 0) {
-		how_many_ticks /= 5;
-	}
-	while (how_many_ticks > 7 && how_many_ticks % 2 == 0) {
-		how_many_ticks /= 2;
-	}
-	while (how_many_ticks > 7 && how_many_ticks % 3 == 0) {
-		how_many_ticks /= 3;
-	}
-	while (how_many_ticks > 7 && how_many_ticks % 7 == 0) {
-		how_many_ticks /= 7;
-	}
-	// Make sure that we always have a tick
-	how_many_ticks = std::max(how_many_ticks, 1u);
-
-	// first, tile the background
-	dst.tile(Recti(Vector2i(0, 0), inner_w, inner_h), g_gr->images().get(BG_PIC), Vector2i(0, 0));
-
-	// Draw coordinate system
-	// X Axis
-	dst.draw_line_strip({Vector2f(kSpacing, inner_h - kSpaceBottom),
-								Vector2f(inner_w - kSpaceRight, inner_h - kSpaceBottom)},
-							  kAxisLineColor, kAxisLinesWidth);
-	// Arrow
-	dst.draw_line_strip(
-		{
-			Vector2f(kSpacing + 5, inner_h - kSpaceBottom - 3),
-			Vector2f(kSpacing, inner_h - kSpaceBottom),
-			Vector2f(kSpacing + 5, inner_h - kSpaceBottom + 3),
-		},
-		kAxisLineColor, kAxisLinesWidth);
-
-	//  Y Axis
-	dst.draw_line_strip({Vector2f(inner_w - kSpaceRight, kSpacing),
-								Vector2f(inner_w - kSpaceRight, inner_h - kSpaceBottom)},
-							  kAxisLineColor, kAxisLinesWidth);
-	//  No Arrow here, since this doesn't continue.
-
-	float sub = (xline_length - kSpaceLeftOfLabel) / how_many_ticks;
-	float posx = inner_w - kSpaceRight;
-
-	for (uint32_t i = 0; i <= how_many_ticks; ++i) {
-		dst.draw_line_strip({Vector2f(static_cast<int32_t>(posx), inner_h - kSpaceBottom),
-									Vector2f(static_cast<int32_t>(posx), inner_h - kSpaceBottom + 3)},
-								  kAxisLineColor, kAxisLinesWidth);
-
-		// The space at the end is intentional to have the tick centered
-		// over the number, not to the left
-		const UI::RenderedText* xtick = UI::g_fh1->render(xtick_text_style((boost::format("-%u ") % (max_x / how_many_ticks * i)).str()));
-		draw_text(dst, Vector2i(posx, inner_h - kSpaceBottom + 10), xtick, UI::Align::kCenter);
-
-		posx -= sub;
-	}
-
-	//  draw yticks, one at full, one at half
-	dst.draw_line_strip(
-		{Vector2f(inner_w - kSpaceRight, kSpacing), Vector2f(inner_w - kSpaceRight - 3, kSpacing)},
-		kAxisLineColor, kAxisLinesWidth);
-	dst.draw_line_strip(
-		{Vector2f(inner_w - kSpaceRight, kSpacing + ((inner_h - kSpaceBottom) - kSpacing) / 2),
-		 Vector2f(inner_w - kSpaceRight - 3, kSpacing + ((inner_h - kSpaceBottom) - kSpacing) / 2)},
-		kAxisLineColor, kAxisLinesWidth);
-
-	//  print the used unit
-	const UI::RenderedText* xtick = UI::g_fh1->render(xtick_text_style(get_generic_unit_name(unit)));
-	draw_text(dst,Vector2i(2, kSpacing + 2), xtick, UI::Align::kCenterLeft);
-}
-
-
-/**
- * print the string into the RenderTarget.
- */
-void WuiPlotArea::draw_value(const std::string& value,
-					 const RGBColor& color,
-					 const Vector2i& pos,
-					 RenderTarget& dst) {
-	const UI::RenderedText* pic = UI::g_fh1->render(ytick_text_style(value, color));
-	draw_text(dst, pos, pic, UI::Align::kCenterRight);
-}
 
 /**
  * scale the values from dataset down to the available space and draw a single plot line

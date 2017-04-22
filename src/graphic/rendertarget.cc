@@ -23,6 +23,7 @@
 #include "graphic/animation.h"
 #include "graphic/graphic.h"
 #include "graphic/surface.h"
+#include "graphic/text_layout.h"
 
 /**
  * Build a render target for the given surface.
@@ -144,9 +145,13 @@ void RenderTarget::brighten_rect(const Rectf& rect, int32_t factor) {
  */
 void RenderTarget::blit(const Vector2f& dst,
                         const Image* image,
-								BlendMode blend_mode) {
+                        BlendMode blend_mode,
+                        UI::Align align) {
+	Vector2i destination_point(dst.cast<int>()); // NOCOM
+	UI::correct_for_align(align, image->width(), &destination_point);
+
 	Rectf source_rect(Vector2i(0, 0), image->width(), image->height());
-	Rectf destination_rect(dst.x, dst.y, source_rect.w, source_rect.h);
+	Rectf destination_rect(destination_point.x, destination_point.y, source_rect.w, source_rect.h);
 
 	if (to_surface_geometry(&destination_rect, &source_rect)) {
 		// I seem to remember seeing 1. a lot in blitting calls.
@@ -157,9 +162,13 @@ void RenderTarget::blit(const Vector2f& dst,
 
 void RenderTarget::blit_monochrome(const Vector2f& dst,
                                    const Image* image,
-											  const RGBAColor& blend_mode) {
+                                   const RGBAColor& blend_mode,
+                                   UI::Align align) {
+	Vector2i destination_point(dst.cast<int>()); // NOCOM
+	UI::correct_for_align(align, image->width(), &destination_point);
+
 	Rectf source_rect(Vector2i(0, 0), image->width(), image->height());
-	Rectf destination_rect(dst.x, dst.y, source_rect.w, source_rect.h);
+	Rectf destination_rect(destination_point.x, destination_point.y, source_rect.w, source_rect.h);
 
 	if (to_surface_geometry(&destination_rect, &source_rect)) {
 		surface_->blit_monochrome(destination_rect, *image, source_rect, blend_mode);
@@ -322,12 +331,6 @@ void RenderTarget::do_blit_animation(const Vector2f& dst,
 			animation.blit(time, srcrc, dstrc, player_color, surface_);
 		}
 	}
-
-	// Look if there is a sound effect registered for this frame and trigger the
-	// effect (see SoundHandler::stereo_position).
-	// TODO(sirver): Playing a sound effect in here is rather silly. What if
-	// this animation is used in the menus?
-	animation.trigger_sound(time, 128);
 }
 
 /**

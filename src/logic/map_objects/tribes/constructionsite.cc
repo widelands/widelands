@@ -35,9 +35,7 @@
 #include "logic/game.h"
 #include "logic/map_objects/tribes/tribe_descr.h"
 #include "logic/map_objects/tribes/worker.h"
-#include "sound/sound_handler.h"
 #include "ui_basic/window.h"
-#include "wui/interactive_gamebase.h"
 
 namespace Widelands {
 
@@ -150,6 +148,8 @@ If construction was finished successfully, place the building at our position.
 ===============
 */
 void ConstructionSite::cleanup(EditorGameBase& egbase) {
+	// Register whether the window was open
+	Notifications::publish(NoteBuilding(serial(), NoteBuilding::Action::kStartWarp));
 	PartiallyFinishedBuilding::cleanup(egbase);
 
 	if (work_steps_ <= work_completed_) {
@@ -162,12 +162,7 @@ void ConstructionSite::cleanup(EditorGameBase& egbase) {
 			builder->set_location(&b);
 		}
 		// Open the new building window if needed
-		if (optionswindow_) {
-			Vector2i window_position = optionswindow_->get_pos();
-			hide_options();
-			InteractiveGameBase& igbase = dynamic_cast<InteractiveGameBase&>(*egbase.get_ibase());
-			b.show_options(igbase, false, window_position);
-		}
+		Notifications::publish(NoteBuilding(b.serial(), NoteBuilding::Action::kFinishWarp));
 	}
 }
 

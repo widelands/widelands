@@ -69,27 +69,19 @@ BuildingStatisticsMenu::BuildingStatisticsMenu(InteractivePlayer& parent,
      navigation_panel_(this, 0, 0, kWindowWidth, 4 * kButtonRowHeight),
      building_name_(
         &navigation_panel_, get_inner_w() / 2, 0, 0, kButtonHeight, "", UI::Align::kCenter),
-     owned_label_(&navigation_panel_,
-                  kMargin,
-                  kButtonRowHeight,
-                  0,
-                  kButtonHeight,
-                  _("Owned:"),
-                  UI::Align::kCenterLeft),
+     owned_label_(&navigation_panel_, kMargin, kButtonRowHeight, 0, kButtonHeight, _("Owned:")),
      construction_label_(&navigation_panel_,
                          kMargin,
                          2 * kButtonRowHeight,
                          0,
                          kButtonHeight,
-                         _("Under Construction:"),
-                         UI::Align::kCenterLeft),
+                         _("Under Construction:")),
      unproductive_box_(&navigation_panel_, kMargin, 3 * kButtonRowHeight + 3, UI::Box::Horizontal),
      unproductive_label_(
         &unproductive_box_,
         /** TRANSLATORS: This is the first part of productivity with input field */
         /** TRANSLATORS: Building statistics window - 'Low Productivity <input>%:' */
-        _("Low Productivity"),
-        UI::Align::kBottomLeft),
+        _("Low Productivity")),
      unproductive_percent_(
         &unproductive_box_,
         0,
@@ -103,29 +95,28 @@ BuildingStatisticsMenu::BuildingStatisticsMenu(InteractivePlayer& parent,
         &unproductive_box_,
         /** TRANSLATORS: This is the second part of productivity with input field */
         /** TRANSLATORS: Building statistics window -  'Low Productivity <input>%:' */
-        _("%:"),
-        UI::Align::kBottomLeft),
+        _("%:")),
      no_owned_label_(&navigation_panel_,
                      get_inner_w() - 2 * kButtonRowHeight - kMargin,
                      kButtonRowHeight,
                      0,
                      kButtonHeight,
                      "",
-                     UI::Align::kCenterRight),
+                     UI::Align::kRight),
      no_construction_label_(&navigation_panel_,
                             get_inner_w() - 2 * kButtonRowHeight - kMargin,
                             2 * kButtonRowHeight,
                             0,
                             kButtonHeight,
                             "",
-                            UI::Align::kCenterRight),
+                            UI::Align::kRight),
      no_unproductive_label_(&navigation_panel_,
                             get_inner_w() - 2 * kButtonRowHeight - kMargin,
                             3 * kButtonRowHeight,
                             0,
                             kButtonHeight,
                             "",
-                            UI::Align::kCenterRight),
+                            UI::Align::kRight),
      low_production_(33),
      has_selection_(false) {
 
@@ -238,7 +229,7 @@ BuildingStatisticsMenu::BuildingStatisticsMenu(InteractivePlayer& parent,
 	}
 
 	for (int i = 0; i < kNoOfBuildingTabs; ++i) {
-		tabs_[i]->add(rows[i], UI::Align::kLeft);
+		tabs_[i]->add(rows[i]);
 	}
 
 	set_label_font(&owned_label_);
@@ -253,10 +244,10 @@ BuildingStatisticsMenu::BuildingStatisticsMenu(InteractivePlayer& parent,
 	unproductive_percent_.set_text(std::to_string(low_production_));
 	unproductive_percent_.set_max_length(4);
 	unproductive_label2_.set_size(unproductive_label2_.get_w(), kButtonRowHeight);
-	unproductive_box_.add(&unproductive_label_, UI::Align::kLeft);
+	unproductive_box_.add(&unproductive_label_);
 	unproductive_box_.add_space(2);
-	unproductive_box_.add(&unproductive_percent_, UI::Align::kLeft);
-	unproductive_box_.add(&unproductive_label2_, UI::Align::kLeft);
+	unproductive_box_.add(&unproductive_percent_);
+	unproductive_box_.add(&unproductive_label2_);
 	unproductive_box_.set_size(
 	   unproductive_label_.get_w() + unproductive_percent_.get_w() + unproductive_label2_.get_w(),
 	   kButtonRowHeight);
@@ -324,10 +315,13 @@ BuildingStatisticsMenu::~BuildingStatisticsMenu() {
 	productivity_labels_.clear();
 }
 
-// Adds 3 buttons per building type:
-// - Building image, steps through all buildings of the type
-// - Buildings owned, steps through constructionsites
-// - Productivity, steps though buildings with low productivity and stopped buildings
+/**
+ * Adds 3 buttons per building type.
+ *
+ * - Building image, steps through all buildings of the type
+ * - Buildings owned, steps through constructionsites
+ * - Productivity, steps though buildings with low productivity and stopped buildings
+ */
 bool BuildingStatisticsMenu::add_button(
    DescriptionIndex id, const BuildingDescr& descr, int tab_index, UI::Box& row, int* column) {
 
@@ -337,21 +331,23 @@ bool BuildingStatisticsMenu::add_button(
 	   kBuildGridCellHeight, g_gr->images().get("images/ui_basic/but1.png"),
 	   descr.representative_image(&iplayer().get_player()->get_playercolor()), "",
 	   UI::Button::Style::kFlat);
-	button_box->add(building_buttons_[id], UI::Align::kLeft);
+	building_buttons_[id]->set_disable_style(UI::ButtonDisableStyle::kMonochrome |
+	                                         UI::ButtonDisableStyle::kFlat);
+	button_box->add(building_buttons_[id]);
 
 	owned_labels_[id] =
 	   new UI::Textarea(button_box, 0, 0, kBuildGridCellWidth, kLabelHeight, UI::Align::kCenter);
 	owned_labels_[id]->set_fontsize(kLabelFontSize);
 	owned_labels_[id]->set_fixed_width(kBuildGridCellWidth);
-	button_box->add(owned_labels_[id], UI::Align::kHCenter);
+	button_box->add(owned_labels_[id]);
 
 	productivity_labels_[id] =
 	   new UI::Textarea(button_box, 0, 0, kBuildGridCellWidth, kLabelHeight, UI::Align::kCenter);
 	productivity_labels_[id]->set_fontsize(kLabelFontSize);
 	productivity_labels_[id]->set_fixed_width(kBuildGridCellWidth);
-	button_box->add(productivity_labels_[id], UI::Align::kHCenter);
+	button_box->add(productivity_labels_[id]);
 
-	row.add(button_box, UI::Align::kLeft);
+	row.add(button_box);
 
 	building_buttons_[id]->sigclicked.connect(
 	   boost::bind(&BuildingStatisticsMenu::set_current_building_type, boost::ref(*this), id));
@@ -364,7 +360,7 @@ bool BuildingStatisticsMenu::add_button(
 	// Check if the row is full
 	++*column;
 	if (*column == kColumns) {
-		tabs_[tab_index]->add(&row, UI::Align::kLeft);
+		tabs_[tab_index]->add(&row);
 		tabs_[tab_index]->add_space(6);
 		*column = 0;
 		return true;

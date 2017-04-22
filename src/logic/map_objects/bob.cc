@@ -940,9 +940,11 @@ void Bob::log_general_info(const EditorGameBase& egbase) {
 			molog("** Path length: %lu\n", static_cast<long unsigned int>(nr_steps));
 			molog("** Start: (%i, %i)\n", path.get_start().x, path.get_start().y);
 			molog("** End: (%i, %i)\n", path.get_end().x, path.get_end().y);
-			for (Path::StepVector::size_type j = 0; j < nr_steps; ++j)
-				molog("** Step %lu/%lu: %i\n", static_cast<long unsigned int>(j + 1),
-				      static_cast<long unsigned int>(nr_steps), path[j]);
+			// Printing all coordinates of the path
+			CoordPath coordpath(egbase.map(), path);
+			for (const Coords& coords : coordpath.get_coords()) {
+				molog("*  (%i, %i)\n", coords.x, coords.y);
+			}
 		}
 		molog("* route: %p\n", stack_[i].route);
 

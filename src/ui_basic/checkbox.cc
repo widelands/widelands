@@ -45,8 +45,8 @@ Statebox::Statebox(Panel* const parent,
    : Panel(parent, p.x, p.y, kStateboxSize, kStateboxSize, tooltip_text),
      flags_(Is_Enabled),
      pic_graphics_(pic),
-     label_text_(""),
-     rendered_text_(nullptr) {
+	  rendered_text_(nullptr),
+     label_text_("") {
 	uint16_t w = pic->width();
 	uint16_t h = pic->height();
 	set_desired_size(w, h);
@@ -63,8 +63,8 @@ Statebox::Statebox(Panel* const parent,
    : Panel(parent, p.x, p.y, std::max(width, kStateboxSize), kStateboxSize, tooltip_text),
      flags_(Is_Enabled),
      pic_graphics_(g_gr->images().get("images/ui_basic/checkbox_light.png")),
-     label_text_(label_text),
-     rendered_text_(nullptr) {
+	  rendered_text_(nullptr),
+     label_text_(label_text) {
 	set_flags(Has_Text, !label_text_.empty());
 	layout();
 }

@@ -67,10 +67,9 @@ BaseListselect::BaseListselect(Panel* const parent,
 	scrollbar_.moved.connect(boost::bind(&BaseListselect::set_scrollpos, this, _1));
 
 	if (selection_mode_ == ListselectLayout::kShowCheck) {
-		int pic_h;
 		check_pic_ = g_gr->images().get("images/ui_basic/list_selected.png");
 		max_pic_width_ = check_pic_->width();
-		pic_h = check_pic_->height();
+		int pic_h = check_pic_->height();
 		if (pic_h > lineheight_)
 			lineheight_ = pic_h;
 	} else {
@@ -304,6 +303,14 @@ const std::string& BaseListselect::get_selected_tooltip() const {
 	return entry_records_[selection_]->tooltip;
 }
 
+/**
+ * \return The image for the currently selected entry. Requires an entry to have been selected.
+ */
+const Image* BaseListselect::get_selected_image() const {
+	assert(selection_ < entry_records_.size());
+	return entry_records_[selection_]->pic;
+}
+
 int BaseListselect::get_lineheight() const {
 	return lineheight_ + kMargin;
 }
@@ -320,6 +327,19 @@ void BaseListselect::layout() {
 	scrollbar_.set_steps(steps);
 	if (scrollbar_.is_enabled() && selection_mode_ == ListselectLayout::kDropdown) {
 		scrollbar_.set_steps(steps + kMargin);
+	}
+	// For dropdowns, autoincrease width
+	if (selection_mode_ == ListselectLayout::kDropdown) {
+		for (size_t i = 0; i < entry_records_.size(); ++i) {
+			const EntryRecord& er = *entry_records_[i];
+			const Image* entry_text_im = UI::g_fh1->render(as_uifont(
+			   richtext_escape(er.name), UI_FONT_SIZE_SMALL, er.use_clr ? er.clr : UI_FONT_CLR_FG))->texts[0]->image;
+			int picw = max_pic_width_ ? max_pic_width_ + 10 : 0;
+			int difference = entry_text_im->width() + picw + 8 - get_eff_w();
+			if (difference > 0) {
+				set_size(get_w() + difference, get_h());
+			}
+		}
 	}
 }
 
@@ -339,6 +359,8 @@ void BaseListselect::draw(RenderTarget& dst) {
 
 	if (selection_mode_ == ListselectLayout::kDropdown) {
 		RGBAColor black(0, 0, 0, 255);
+		//  top edge
+		dst.brighten_rect(Rectf(0.f, 0.f, get_w(), 2.f), BUTTON_EDGE_BRIGHT_FACTOR / 4);
 		//  left edge
 		dst.brighten_rect(Rectf(0.f, 0.f, 2.f, get_h()), BUTTON_EDGE_BRIGHT_FACTOR);
 		//  bottom edge
@@ -398,13 +420,12 @@ void BaseListselect::draw(RenderTarget& dst) {
 			         er.pic);
 		}
 
-		Align alignment =
-		   i18n::has_rtl_character(er.name.c_str(), 20) ? UI::Align::kRight : UI::Align::kLeft;
-		if (static_cast<int>(alignment & UI::Align::kRight)) {
+		Align alignment = i18n::has_rtl_character(er.name.c_str(), 20) ? Align::kRight : Align::kLeft;
+		if (alignment == UI::Align::kRight) {
 			point.x += maxw - picw;
 		}
 
-		UI::correct_for_align(alignment, rendered_text->width(), rendered_text->height(), &point);
+		UI::correct_for_align(alignment, rendered_text->width(), &point);
 
 		// Shift for image width
 		if (!UI::g_fh1->fontset()->is_rtl()) {
@@ -425,7 +446,7 @@ void BaseListselect::draw(RenderTarget& dst) {
 		}
 
 		// Crop to column width while blitting
-		if (static_cast<int>(alignment & UI::Align::kRight) &&
+		if ((alignment == UI::Align::kRight) &&
 		    (maxw + picw) < static_cast<uint32_t>(rendered_text->width())) {
 			// Fix positioning for BiDi languages.
 			point.x = 0;

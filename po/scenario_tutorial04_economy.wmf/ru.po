@@ -6,15 +6,15 @@
 # Alexander Bikmeyev <bikmeyev@gmail.com>, 2016
 # Anton Khabarov <2233009@gmail.com>, 2015-2016
 # GunChleoc, 2016
-# Олег Шевчеко <olegrock@gmail.com>, 2017
+# Олег Шевченко <olegrock@gmail.com>, 2017
 # Федор <Lunar-energy@ya.ru>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-02-11 11:38+0000\n"
-"PO-Revision-Date: 2017-02-14 10:01+0000\n"
-"Last-Translator: Олег Шевчеко <olegrock@gmail.com>\n"
+"POT-Creation-Date: 2017-02-19 19:34+0000\n"
+"PO-Revision-Date: 2017-02-22 12:43+0000\n"
+"Last-Translator: Олег Шевченко <olegrock@gmail.com>\n"
 "Language-Team: Russian (http://www.transifex.com/widelands/widelands/language/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -34,20 +34,20 @@ msgstr "Экономика"
 msgid ""
 "Welcome back. In this tutorial, I’ll tell you what you can do to check how "
 "well your economy works."
-msgstr "Добро пожаловать. В этом обучении я расскажу вам как проверить, насколько хорошо работает ваша экономика."
+msgstr "С возвращением. В этом обучении я расскажу вам как проверить, насколько хорошо работает ваша экономика."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:22
 msgid ""
 "Building your economy up and making it work well and grow is the main part "
 "of Widelands. But you can’t control the workers directly – they will follow "
 "the general conditions you set."
-msgstr "Создайте свою экономику и сделайте, чтобы она работала на высшем уровне и росла – это основная часть Widelands. Но вы не можете контролировать работников напрямую – они будут следовать общим условиям, установленных вами."
+msgstr "Создайте свою экономику и сделайте, чтобы она работала на высшем уровне и росла – это основная часть Widelands. Однако, вы не можете контролировать работников напрямую – они будут следовать общим условиям, установленных вами."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:23
 msgid ""
 "This is what I’ll show you in this tutorial: what actions can you take to "
 "define those general conditions?"
-msgstr "Что я покажу в этом уроке: какие действия вы можете предпринять для определения общих условий?"
+msgstr "Что я покажу в этом уроке: какие действия вы можете предпринять для установки общих условий?"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:31
 msgid "A Peaceful Land"
@@ -57,7 +57,7 @@ msgstr "Мирная земля"
 msgid ""
 "Now about the map: you have settled in a nice valley between two mountains, "
 "rich in marble, iron ore and coal. All were hoping for a peaceful life."
-msgstr "Теперь немного о карте: вы поселились в красивой долине между двух гор, богатых мрамором, железной рудой и углём. Все надеялись на мирную жизнь."
+msgstr "Теперь о карте: вы поселились в красивой долине между двух гор, богатых мрамором, железной рудой и углём. Все надеялись на мирную жизнь."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:34
 msgid ""

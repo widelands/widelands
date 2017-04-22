@@ -105,6 +105,7 @@ struct BaseListselect : public Panel {
 
 	const std::string& get_selected_name() const;
 	const std::string& get_selected_tooltip() const;
+	const Image* get_selected_image() const;
 
 	void set_background(const Image* background) {
 		background_ = background;
