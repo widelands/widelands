@@ -19,6 +19,8 @@
 
 #include "logic/map_objects/tribes/carrier.h"
 
+#include <memory>
+
 #include "base/macros.h"
 #include "base/wexception.h"
 #include "economy/flag.h"
