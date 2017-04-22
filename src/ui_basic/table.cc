@@ -284,7 +284,7 @@ void Table<void*>::draw(RenderTarget& dst) {
 					} else if (alignment == UI::Align::kRight) {
 						draw_x += curw - picw;
 					}
-					dst.blit(Vector2f(draw_x, point.y + (lineheight - pich) / 2), entry_picture);
+					dst.blit(Vector2i(draw_x, point.y + (lineheight - pich) / 2), entry_picture);
 				}
 				point.x += picw;
 			}

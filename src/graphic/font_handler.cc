@@ -54,9 +54,9 @@ void draw_caret(RenderTarget& dst,
 	int caret_x = style.calc_bare_width(text.substr(0, caret_offset));
 
 	const Image* caret_image = g_gr->images().get("images/ui_basic/caret.png");
-	Vector2f caretpt;
+	Vector2i caretpt;
 	caretpt.x = dstpoint.x + caret_x + LINE_MARGIN - caret_image->width();
-	caretpt.y = dstpoint.y + (style.font->height() - caret_image->height()) / 2.f;
+	caretpt.y = dstpoint.y + (style.font->height() - caret_image->height()) / 2;
 	dst.blit(caretpt, caret_image);
 }
 
@@ -216,7 +216,7 @@ void FontHandler::draw_text(RenderTarget& dst,
 	UI::correct_for_align(align, lce.width + 2 * LINE_MARGIN, &dstpoint);
 
 	if (lce.image)
-		dst.blit(Vector2f(dstpoint.x + LINE_MARGIN, dstpoint.y), lce.image.get());
+		dst.blit(Vector2i(dstpoint.x + LINE_MARGIN, dstpoint.y), lce.image.get());
 
 	if (caret <= copytext.size())
 		draw_caret(dst, style, dstpoint.cast<float>(), copytext, caret);
@@ -232,7 +232,7 @@ uint32_t FontHandler::draw_text_raw(RenderTarget& dst,
 	const LineCacheEntry& lce = d->get_line(style, text);
 
 	if (lce.image) {
-		dst.blit(dstpoint.cast<float>(), lce.image.get());
+		dst.blit(dstpoint, lce.image.get());
 	}
 
 	return lce.width;

@@ -131,7 +131,7 @@ void InputQueueDisplay::draw(RenderTarget& dst) {
 	uint32_t nr_inputs_to_draw = std::min(queue_->get_filled(), cache_size_);
 	uint32_t nr_empty_to_draw = cache_size_ - nr_inputs_to_draw;
 
-	Vector2f point;
+	Vector2i point;
 	point.x = Border + (show_only_ ? 0 : CellWidth + CellSpacing);
 	point.y = Border + (total_height_ - 2 * Border - WARE_MENU_PIC_HEIGHT) / 2;
 

@@ -341,7 +341,7 @@ void WordWrap::draw(RenderTarget& dst, Vector2i where, Align align, uint32_t car
 		   lines_[line].text, fontsize_ - UI::g_fh1->fontset()->size_offset(), color_));
 		UI::correct_for_align(alignment, rendered_text->width(), &point);
 		for (const auto& rect : rendered_text->texts) {
-			dst.blit(Vector2f(point.x + rect->point.x, point.y + rect->point.y), rect->image);
+			dst.blit(Vector2i(point.x + rect->point.x, point.y + rect->point.y), rect->image);
 		}
 
 		if (draw_caret_ && line == caretline) {
@@ -350,10 +350,10 @@ void WordWrap::draw(RenderTarget& dst, Vector2i where, Align align, uint32_t car
 			int caret_x = text_width(line_to_caret, fontsize_);
 
 			const Image* caret_image = g_gr->images().get("images/ui_basic/caret.png");
-			Vector2f caretpt;
+			Vector2i caretpt;
 			caretpt.x = point.x + caret_x - caret_image->width() + kLineMargin;
 			caretpt.y = point.y + (fontheight - caret_image->height()) / 2;
-			dst.blit(caretpt.cast<float>(), caret_image);
+			dst.blit(caretpt, caret_image);
 		}
 	}
 }

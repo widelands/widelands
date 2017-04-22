@@ -171,13 +171,13 @@ void Button::draw(RenderTarget& dst) {
 	if (pic_custom_) {
 		if (image_mode_ == UI::Button::ImageMode::kUnscaled) {
 			if (!is_monochrome) {
-				dst.blit(Vector2f((get_w() - static_cast<int32_t>(pic_custom_->width())) / 2.f,
-				                  (get_h() - static_cast<int32_t>(pic_custom_->height())) / 2.f),
+				dst.blit(Vector2i((get_w() - static_cast<int32_t>(pic_custom_->width())) / 2,
+				                  (get_h() - static_cast<int32_t>(pic_custom_->height())) / 2),
 				         pic_custom_);
 			} else {
 				dst.blit_monochrome(
-				   Vector2f((get_w() - static_cast<int32_t>(pic_custom_->width())) / 2.f,
-				            (get_h() - static_cast<int32_t>(pic_custom_->height())) / 2.f),
+				   Vector2i((get_w() - static_cast<int32_t>(pic_custom_->width())) / 2,
+				            (get_h() - static_cast<int32_t>(pic_custom_->height())) / 2),
 				   pic_custom_, RGBAColor(255, 255, 255, 127));
 			}
 		} else {

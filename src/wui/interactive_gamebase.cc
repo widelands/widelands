@@ -127,7 +127,7 @@ void InteractiveGameBase::draw_overlay(RenderTarget& dst) {
 
 		if (!game_speed.empty()) {
 			// NOCOM
-			dst.blit(Vector2f(get_w() - 5, 5), UI::g_fh1->render(game_speed)->texts[0]->image, BlendMode::UseAlpha,
+			dst.blit(Vector2i(get_w() - 5, 5), UI::g_fh1->render(game_speed)->texts[0]->image, BlendMode::UseAlpha,
 			         UI::Align::kRight);
 		}
 	}

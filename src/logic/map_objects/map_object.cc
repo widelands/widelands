@@ -475,14 +475,14 @@ void MapObject::do_draw_info(const TextToDraw& draw_text,
 	Vector2i position = field_on_dst.cast<int>() - Vector2i(0, 48) * scale;
 	if (draw_text & TextToDraw::kCensus) {
 		UI::correct_for_align(UI::Align::kCenter, rendered_census_info->width(), &position);
-		dst->blit(position.cast<float>(), rendered_census_info);
+		dst->blit(position, rendered_census_info);
 	}
 	// NOCOM alignment is screwed up.
 	if (draw_text & TextToDraw::kStatistics && !statictics.empty()) {
 		position.y += rendered_census_info->height() / 2 + 10 * scale;
 		// NOCOM invisible
 		const Image* statistics_image = UI::g_fh1->render(as_condensed(statictics, UI::Align::kLeft, font_size))->texts[0]->image;
-		dst->blit(position.cast<float>(), statistics_image);
+		dst->blit(position, statistics_image);
 	}
 }
 

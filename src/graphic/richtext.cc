@@ -61,7 +61,7 @@ struct ImageElement : Element {
 	}
 
 	void draw(RenderTarget& dst) override {
-		dst.blit(Vector2f(0, 0), image);
+		dst.blit(Vector2i(), image);
 	}
 
 	const Image* image;
