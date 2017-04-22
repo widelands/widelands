@@ -2,13 +2,14 @@
 # Copyright (C) 2005-2017 Widelands Development Team
 # 
 # Translators:
+# Omar Anwar <omaraglan91@yahoo.com>, 2017
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-01-21 14:22+0000\n"
-"PO-Revision-Date: 2017-01-21 14:25+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2017-04-06 19:07+0000\n"
+"PO-Revision-Date: 2017-04-12 16:27+0000\n"
+"Last-Translator: Omar Anwar <omaraglan91@yahoo.com>\n"
 "Language-Team: Arabic (http://www.transifex.com/widelands/widelands/language/ar/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -18,11 +19,11 @@ msgstr ""
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:24
 msgid "Introduction"
-msgstr ""
+msgstr "التقديم"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:26
 msgid "Soldiers, Training and Warfare"
-msgstr ""
+msgstr "الجنود، التدريب و الحرب"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:27
 msgid ""
@@ -42,7 +43,7 @@ msgstr ""
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:35
 msgid "Soldiers’ abilities"
-msgstr ""
+msgstr "مقدرات الجنود"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:37
 msgid ""
@@ -71,7 +72,7 @@ msgstr ""
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:42
 msgid "Health:"
-msgstr ""
+msgstr "الصحة"
 
 #. TRANSLATORS: the current stats are: 13000 health, 2800 health gain.
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:44
@@ -82,7 +83,7 @@ msgstr ""
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:45
 msgid "Attack:"
-msgstr ""
+msgstr "الهجوم:"
 
 #. TRANSLATORS: the current stats are: 1400 damage, gains 850 damage points.
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:47
@@ -95,7 +96,7 @@ msgstr ""
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:49
 msgid "Defense:"
-msgstr ""
+msgstr "الدفاع:"
 
 #. TRANSLATORS: the current stats are: 3%. The calculated health value is 3395
 #. TRANSLATORS: The last two %% after the placeholder are the percent symbol.
@@ -110,7 +111,7 @@ msgstr ""
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:53
 msgid "Evade:"
-msgstr ""
+msgstr "التفادي:"
 
 #. TRANSLATORS: the current stats are: 25% evade, increases in steps of 15%.
 #. TRANSLATORS: The last two %% after the placeholder are the percent symbol.
@@ -119,12 +120,12 @@ msgid ""
 "Evade is the chance that the soldier is able to dodge an attack. A level 0 "
 "Barbarian has a %1%%% chance to evade an attack, and this increases in steps"
 " of %2%%% for each level."
-msgstr ""
+msgstr "التفادي هي فرصة الجندي أن يكون قادر علي تفادي هجوم. بربري مستوي 0 لديه %1%%% فرصة لكي يتفادي هجوم، وهذا الفرصة تزداد بنسبة %2%%% لكل مستوي."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:61
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:83
 msgid "The Battle Arena"
-msgstr ""
+msgstr "ميدان القتال"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:63
 msgid "Now I have talked about training and levels. Let me elaborate on that."
@@ -157,11 +158,11 @@ msgstr ""
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:73
 msgid "Build a battle arena"
-msgstr ""
+msgstr "إبني ميدان القتال"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:76
 msgid "Build a battle arena. It is a big building."
-msgstr ""
+msgstr "إبني ميدان القتال. هو مبني كبير."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:77
 msgid ""
@@ -219,7 +220,7 @@ msgstr ""
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:102
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:119
 msgid "The Training Camp"
-msgstr ""
+msgstr "مخيم التدريب"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:103
 msgid ""
@@ -231,11 +232,11 @@ msgstr ""
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:105
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:113
 msgid "Build a training camp."
-msgstr ""
+msgstr "إبني مخيم تدريب"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:109
 msgid "Build a training camp"
-msgstr ""
+msgstr "إبني مخيم تدريب"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:111
 msgid ""
@@ -276,12 +277,12 @@ msgstr ""
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:130
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:132
 msgid "Heroes and Rookies"
-msgstr ""
+msgstr "الأبطال والمبتدئين"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:133
 msgid ""
 "While our soldiers are training, let me tell you what we can do with them."
-msgstr ""
+msgstr "في حين أن جنودنا يتدربون، سوف أخُبرك ماذا يمكنك أن تفعل معهم."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:134
 msgid ""
@@ -307,11 +308,11 @@ msgstr ""
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:142
 msgid "Soldier capacity"
-msgstr ""
+msgstr "كمية الجنود"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:144
 msgid "Adjusting the number of soldiers"
-msgstr ""
+msgstr "تحكم في عدد الجنود"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:145
 msgid ""
@@ -418,11 +419,11 @@ msgstr ""
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:179
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:191
 msgid "Enhance Your Fortress"
-msgstr ""
+msgstr "عزز قلعتك"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:181
 msgid "Enhancing Buildings"
-msgstr ""
+msgstr "تعزيز المباني"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:182
 msgid ""
@@ -453,15 +454,15 @@ msgstr ""
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:186
 msgid "Enhance your fortress to a citadel now."
-msgstr ""
+msgstr "عزز قلعتك إلى حصن الأن."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:189
 msgid "Enhance your fortress to a citadel"
-msgstr ""
+msgstr "عزز قلعتك إلى حصن"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:193
 msgid "Enhance your fortress to a mighty citadel."
-msgstr ""
+msgstr "عزز قلعتك إلى حصن جبار"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:194
 msgid ""
@@ -473,11 +474,11 @@ msgstr ""
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:201
 msgid "Defeat your Enemy"
-msgstr ""
+msgstr "إهزم أعدائك"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:203
 msgid "Defeat the Enemy"
-msgstr ""
+msgstr "إهزم الأعداء"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:204
 msgid ""
@@ -510,20 +511,20 @@ msgstr ""
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:211
 msgid "Defeat the enemy tribe"
-msgstr ""
+msgstr "إهزم قبيلة الأعداء"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:213
 msgid "Defeat Your Enemy"
-msgstr ""
+msgstr "إهزم أعدائك"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:215
 msgid "Defeat the nearby enemy."
-msgstr ""
+msgstr "إهزم الأعداء القريبون منك"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:221
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:223
 msgid "Conclusion"
-msgstr ""
+msgstr "خاتمة"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:224
 msgid ""
@@ -550,14 +551,14 @@ msgstr ""
 #: ../../data/scripting/format_scenario.lua:36
 #, lua-format
 msgid "“%s”"
-msgstr ""
+msgstr "“%s”"
 
-#: ../../data/scripting/format_scenario.lua:96
+#: ../../data/scripting/format_scenario.lua:84
 msgid "New Objective"
 msgid_plural "New Objectives"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
-msgstr[4] ""
-msgstr[5] ""
+msgstr[0] "لا أهداف جديدة"
+msgstr[1] "هدف جديد"
+msgstr[2] "هدفان جديدان"
+msgstr[3] "أهداف جديدة"
+msgstr[4] "أهداف جديدة"
+msgstr[5] "أهداف جديدة"

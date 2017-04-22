@@ -3,14 +3,14 @@
 # 
 # Translators:
 # abuyop <abuyop@gmail.com>, 2015
-# abuyop <abuyop@gmail.com>, 2015
+# abuyop <abuyop@gmail.com>, 2015,2017
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-01-21 14:22+0000\n"
-"PO-Revision-Date: 2017-01-21 14:23+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2017-04-06 19:07+0000\n"
+"PO-Revision-Date: 2017-04-09 06:04+0000\n"
+"Last-Translator: abuyop <abuyop@gmail.com>\n"
 "Language-Team: Malay (http://www.transifex.com/widelands/widelands/language/ms/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -21,35 +21,35 @@ msgstr ""
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:21
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:23
 msgid "Build up a basic economy"
-msgstr ""
+msgstr "Bina ekonomi asas"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:24
 msgid "Start collecting basic building materials, and fortify the camp."
-msgstr ""
+msgstr "Mula mengutip bahan pembinaan asas, dan perkukuhkan kem."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:26
 msgid "Build a lumberjack’s hut"
-msgstr ""
+msgstr "Bina pondok pembalak"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:27
 msgid "Build a ranger’s hut"
-msgstr ""
+msgstr "Bina pondok renjer"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:28
 msgid "Build a quarry"
-msgstr ""
+msgstr "Bina kuari"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:29
 msgid "Build a wood hardener"
-msgstr ""
+msgstr "Bina pengeras kayu"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:30
 msgid "Build a sentry on the eastern border"
-msgstr ""
+msgstr "Bina pondok sentri di sempadan timur"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:31
 msgid "You should eventually also build a reed yard and a lime kiln."
-msgstr ""
+msgstr "Anda sepatutnya membina ruang jeriji dan tanur batu kapur."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:36
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:38
@@ -98,13 +98,13 @@ msgstr "Oleh kerana jalan anda semakin panjang dan ekonomi anda semakin membesar
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:61
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:63
 msgid "Build a tower"
-msgstr ""
+msgstr "Bina menara"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:64
 msgid ""
 "Build a tower at the north-east border of your territory to get greater "
 "visual range and to protect your people from sudden attacks by enemies."
-msgstr ""
+msgstr "Bina sebuah menara dis empadan timur-laut wilayah anda untuk memperoleh julat penglihatan lebih luas dan untuk melindungi rakyat anda daripada serangan mengejut pihak musuh."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:69
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:71
@@ -145,7 +145,7 @@ msgstr "Bina kemudahan latihan"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:96
 msgid "Build a barracks to train some basic soldiers."
-msgstr ""
+msgstr "Bina berek untuk melatih askar."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:97
 msgid "Build a battle arena and a training camp to the west of the mountains."
@@ -159,7 +159,7 @@ msgid ""
 " the blacksmith reaches his next level (master blacksmith), you can even "
 "enhance the ax workshop to a war mill, which will produce additional "
 "weapons."
-msgstr ""
+msgstr "Tambah baik bengkel logam anda kepada bengkel senjata untuk menghasilkan senjata, dan bina bengkel logam kedua untuk memastikan kesinambungan pengeluaran alatan. Apabila tukang besi mencapai tahap kemahiran berikutnya (pakar besi), anda boleh menaik taraf bengkel senjata menjadi kilang senjata, yang dapat mengeluarkan pelbagai senjata tambahan."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:99
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:136
@@ -194,7 +194,7 @@ msgstr "Bina tapak latihan"
 msgid ""
 "Build a barracks, a battle arena and a training camp to the west of the "
 "mountains."
-msgstr ""
+msgstr "Bina berek, arena lawan dan kem latihan di bahagian barat kawasan pergunungan."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:118
 msgid ""
@@ -202,7 +202,7 @@ msgid ""
 " battle arena are used for training soldiers in their different attributes. "
 "These attributes are important in fights and the better a soldier is, the "
 "higher is the chance to win a fight."
-msgstr ""
+msgstr "Berek melatih askar mudan manakala kem latihan atau arena lawan yang digunakan untuk melatih askar yang berlainan atribut. Atribut ini penting ketika bertempur dan semakin cekap tentera, semakin tinggi peluang untuk memenangi pertempuran."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:120
 msgid "The attributes are: health, attack, defense and evade."
@@ -285,15 +285,15 @@ msgid ""
 " is the first war leader to leave Al’thunran, thus leaving his side weak and"
 " vulnerable. As my scouts report, he has set foot on the lower grounds "
 "around the capital, securing the outer fortification rings."
-msgstr ""
+msgstr "Berita buruk dariapda peronda. Mata-mata kita memberitahui semangat perang antara puak masih membara, walaupun masih terdapat beberapa askar tua dan ketua puak yang berasa letih dengan perperangan yang masih berterusan. Kalitath, anak Kun merupakan ketua perang pertama yang meninggalkan Al’thunran, dan menjadikannya lemah dan terdedah dengan serangan. Daripada laporan peninjau saya, dia telah berkubu di kawasan rendah disekeliling pusat bandar, untuk menambahbaik keselamatan gelang pertahanan luar."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:181
 msgid "Doubts"
-msgstr ""
+msgstr "Keraguan"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:182
 msgid "Boldreth is shaking his head…"
-msgstr ""
+msgstr "Boldreth mengganguk kepalanya…"
 
 #. TRANSLATORS: Boldreth
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:184
@@ -304,12 +304,12 @@ msgid ""
 "generals of our forces and his family never quite liked the thought of "
 "bowing before the banner of Chat’Karuth. Why should he march with "
 "Chat’Karuth’s son to reclaim his heritage and the throne?"
-msgstr ""
+msgstr "Thron mempercayai Kalitath sudah letih dengan perperangan dan sanggup menyertai kita bilamana kita bersedia untuk menegakkan kebenaran dan keamanan di Al’thunran. Tetapi saya tidak berfikir sebegitu. Oleh kerana, Kalitath merupakan salah seorang anak daripada jeneral terhebat dalam angkatan tentera kita dan ahli keluarganya tidak sesekali tunduk kepada Chat’Karuth. Kenapa kita patut bersama-sama dengan anak lelaki Chat’Karuth untuk menuntut hak dan tahtanya?"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:189
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:205
 msgid "The Story Continues"
-msgstr ""
+msgstr "Kisah Ini Masih Berterusan"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:190
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:238
@@ -325,11 +325,11 @@ msgid ""
 "However, Thron is not willing to listen to my doubts. He seeks to expand our"
 " fortifications to the borders of Kalitath’s territory and to reunite with "
 "his forces. I have to keep an eye on everything that happens here."
-msgstr ""
+msgstr "Walaubagaimanapun, Thron tetap berdegil dengan pendiriannya dan tidak mahu percaya keraguan saya. Dia hanya mahu luaskan pertahanan sehingga ke sempadan wilayah Kalitath dan bersatu semula dengan angkatan tenteranya. Saya perlu pantau apa yang akan berlaku selepas ini."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:198
 msgid "Thron is speaking confidently."
-msgstr ""
+msgstr "Thron menjelaskan dengan yakin."
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:200
@@ -340,7 +340,7 @@ msgid ""
 "goods, and once Al’thunran is in my hands, the two cities will be linked by "
 "a good and defensible infrastructure. Still, I hope I will not walk alone on"
 " this mission, I hope Kalitath son of Kun will follow my call."
-msgstr ""
+msgstr "Bahagian hadapan tentera saya telah berada di hujung hutan. Kita perlu menghadapi cuaca musim sejuk yang panjang dan jarak yang jauh di belakang kami. Pertahanan yang kami bangunkan di sekitar Ondun akan memberi jaminan tentera dan bekalan barangan yang berterusan sehinggalah Al’thunran berada dalam genggaman saya, kedua-dua bandar akan diperkemaskan dengan infastruktur pertahanan yang terbaik. Saya berharap, tidak berseorangan dalam misi ini. Saya juga berharap, Kalitath anak lelaki Kun akan menyertai saya."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:206
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:224
@@ -350,7 +350,7 @@ msgstr ""
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:310
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:343
 msgid "Thron says:"
-msgstr ""
+msgstr "Thron berkata:"
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:208
@@ -361,7 +361,7 @@ msgid ""
 "ring is intact. Until now, he has not answered any of my messages. But the "
 "time I spend waiting won’t be lost. I will further upgrade my soldiers and "
 "prepare for battle."
-msgstr ""
+msgstr "Saya telah menghantar seseorang untuk meninjau Kalitath dan kubunya. Dia telah membubuh sekatan pada pintu masuk utama ke ibu negeri dan pasang pengepung gelang di sekitar Al’thunran. Dia tidak membiarkan sesiapa sahaja keluar atau masuk bandar ketika gelang pengepung terpasang. Sehingga kini, dia belum menjawab mana-mana mesej saya. Dalam tempoh ini, saya akan tambah baik askar saya dan bersedia bertempur."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:212
 msgid "Your Loyal Companion"
@@ -369,7 +369,7 @@ msgstr "Rakan Setia Anda"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:213
 msgid "Boldreth shouts out!"
-msgstr ""
+msgstr "Boldreth menjerit!"
 
 #. TRANSLATORS: Boldreth
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:215
@@ -382,7 +382,7 @@ msgstr "KURANG AJAR! Hanya seorang peronta perbatasan kita yang masih hidup. Dia
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:223
 msgid "Renegade Fortification"
-msgstr ""
+msgstr "Pertahanan yang Berpaling Tadah"
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:226
@@ -392,7 +392,7 @@ msgid ""
 "but I don’t care now. Shall he flee and be forgotten for all times as a "
 "tribal leader that would not bow before the wooden throne, that is mine to "
 "take now."
-msgstr ""
+msgstr "Pembelot telah meninggalkan askar yang telah mati ketika dia melihat tidak mampu mengekalkan angkatan tentera saya. Kalitath hilang dalam kelam kabut perperangan, tetapi saya tidak peduli sekarang. Biarlah dia hilang dan dilupakan sebagai seorang ketua puak dan tidak lagi menuntut tahta, ia sudah menjadi milik saya."
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:229
@@ -467,7 +467,7 @@ msgid ""
 "settlement. He has instructed us to build a tower, to have a greater visual "
 "range over the area around our hall to protect our people from sudden "
 "attacks."
-msgstr ""
+msgstr "Thron memberitahu saya, beliau menemui jejak bersalji di bahagian timur laut penempatan kita. Beliau mencadangkan kita membina menara, supaya pemantauan kita sekitar dewan kita lebih jauh dan dapat melindungi orang kita daripada serangan hendap."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:271
 msgid "Further Exploration"
@@ -492,7 +492,7 @@ msgid ""
 "set up more guards and scouts to observe the frontier and keep an eye on the"
 " raging wars on our doorstep. THEN we will be prepared once trouble seeks to"
 " capture our woods."
-msgstr ""
+msgstr "Untuk melihat lagi lanjut disekitar dewan kita, kita perlu menjelajah lebih jauh dan tambah lagi pengawal dan peninjau untuk memantau perkembangan di sempadan dan apa jua perperangan yang telah berlaku. KEMUDIAN kita akan bersedia ada percubaan untuk menguasai kawasan hutan kita."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:283
 msgid "Mountains Found"
@@ -533,7 +533,7 @@ msgid ""
 "are quite hard to control, and so it seems to me like we have only one "
 "chance to secure the mountains from enemy hands: we must build a fortress to"
 " the east of the mountains!"
-msgstr ""
+msgstr "Boldreth dan saya baru lepas menjelajah kawasan disekitar pergunungan. Salah satu masalah strategik utama ialah kawasan tersebut mempunyai dua laluan besar – satu di utaran dan satu lagi di selatan renfah pergunungan. Kedua-dua laluan tersebut sukar dikawal, dan hanya ada satu peluang untuk menguasai dan mengawal pergunungan daripada pihak musuh: kita mesti bina kubu di bahagian timur pergunungan!"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:309
 msgid "Fortress Completed"
@@ -546,7 +546,7 @@ msgid ""
 "settlement should be safe for now. For the future, we might think on "
 "building some more fortifications like barriers and towers at the passages, "
 "but for now we can take a deep breath."
-msgstr ""
+msgstr "Akhirnya! Kubu kita telah selesai dibina, jalan masuk ke penempatan kita buat masa ini lebih selamat. Pada masa akan datang, kita perlu tambah lagi beberapa lagi kubu pertahanan seperti perisai sawar dan menara di laluan tersebut, tetapi kita boleh menarik nafas lega kerana sudah ada pertahanan."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:317
 msgid "Enhanced Economy and Training"
@@ -649,7 +649,7 @@ msgstr "Ketua, kesian kepada tukang angkut: Jalan kita semakin panjang dan ia me
 msgid "“%s”"
 msgstr "“%s”"
 
-#: ../../data/scripting/format_scenario.lua:96
+#: ../../data/scripting/format_scenario.lua:84
 msgid "New Objective"
 msgid_plural "New Objectives"
 msgstr[0] "Objektif Baharu"

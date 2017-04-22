@@ -1,14 +1,15 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2016 Widelands Development Team
+# Copyright (C) 2005-2017 Widelands Development Team
 # 
 # Translators:
+# abuyop <abuyop@gmail.com>, 2017
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-12-15 15:23+0000\n"
-"PO-Revision-Date: 2016-12-15 15:32+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2017-04-06 19:07+0000\n"
+"PO-Revision-Date: 2017-04-08 04:54+0000\n"
+"Last-Translator: abuyop <abuyop@gmail.com>\n"
 "Language-Team: Malay (http://www.transifex.com/widelands/widelands/language/ms/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -19,47 +20,47 @@ msgstr ""
 #: ../../data/campaigns/atl01.wmf/elemental:9
 #: ../../data/campaigns/campaigns.conf:95
 msgid "From Nemesis to Genesis"
-msgstr ""
+msgstr "Dari Nemesis ke Genesis"
 
 #: ../../data/campaigns/atl01.wmf/elemental:11
 msgid ""
 "After landing on a mysterious island close to Atlantis, the remaining "
 "Atlanteans struggle to make a new home for themselves."
-msgstr ""
+msgstr "Selepas berjaya mendarat di sebuah pulau misteri yang berhampiran dengan Atlantis, Orang Atlantis berjuang menjadikannya penempatan mereka."
 
 #: ../../data/campaigns/bar01.wmf/elemental:8
 #: ../../data/campaigns/campaigns.conf:67
 msgid "A Place to Call Home"
-msgstr ""
+msgstr "Sebuah Tempat yang Dijadikan Penempatan"
 
 #: ../../data/campaigns/bar01.wmf/elemental:10
 msgid ""
 "In this scenario, the higher production buildings including mining will be "
 "introduced."
-msgstr ""
+msgstr "Dalam senario ini, bangunan yang mengeluarkan produk lebih banyak termasuklah perlombongan akan diperkenalkan."
 
 #: ../../data/campaigns/bar02.wmf/elemental:7
 #: ../../data/campaigns/campaigns.conf:72
 msgid "This Land is Our Land"
-msgstr ""
+msgstr "Tanah Ini adalah Tanah Kami"
 
 #: ../../data/campaigns/bar02.wmf/elemental:9
 msgid ""
 "This tutorial explains the handling of military and training site buildings "
 "and will introduce fighting."
-msgstr ""
+msgstr "Tutorial ini menjelaskan bagaimana hendak mengurus bangunan ketenteraan dan arena latihan yang seterusnya memperkenalkan pertempuran."
 
 #: ../../data/campaigns/campaigns.conf:27
 msgid "The Second Empire"
-msgstr ""
+msgstr "Empayar Kedua"
 
 #: ../../data/campaigns/campaigns.conf:29
 msgid "Barbarians"
-msgstr ""
+msgstr "Gasar"
 
 #: ../../data/campaigns/campaigns.conf:31
 msgid "Easy. Introduces the Barbarians"
-msgstr ""
+msgstr "Mudah, Pengenalan terhadap Puak Gasar"
 
 #: ../../data/campaigns/campaigns.conf:32
 msgid ""
@@ -84,11 +85,11 @@ msgstr ""
 
 #: ../../data/campaigns/campaigns.conf:37
 msgid "Empire"
-msgstr ""
+msgstr "Empayar"
 
 #: ../../data/campaigns/campaigns.conf:39
 msgid "Easy. Introduces the Empire"
-msgstr ""
+msgstr "Mudah, Pengenalan terhadap Empayar"
 
 #: ../../data/campaigns/campaigns.conf:40
 msgid ""
@@ -102,19 +103,19 @@ msgid ""
 "March his unprepared army was attacked by 100 Barbarian footmen and was "
 "completely scattered. Only with his bare life he and a handful of his "
 "soldiers survived."
-msgstr ""
+msgstr "Enam bulan lepas, Lutius - seorang jeneral muda Empayar - telah mengerahkan sejumlah 150 orang askar ke perbatasan di bahagian hutan utara yang mana puak Gasar telah menceroboh masuk ke dalam tanah jajahan Empayar. Beliau ditugaskan untuk mempertahankan tahah air ini. Pada awalnya, keadaan masih terkawal. Dia berjaya memujuk beberapa orang anak-anak puak Gasar untuk berdamai - menggunakan kemahiran dialeknya. Beliau merasa lebih selamat dan tenteranya tidak lagi menunjukkan tanda-tanda bersedia untuk berperang. Tindakannya mengundang satu malapetaka yang lebih besar. Pada malam Mac, askarnya yang tidak bersedia berperang telah diserang hendap oleh 100 orang puak Gasar dan sepenuhnya menjadi kelam kabut. Hanya sebilangan kecil tenteranya masih hidup."
 
 #: ../../data/campaigns/campaigns.conf:43
 msgid "The Run for the Fire"
-msgstr ""
+msgstr "Lari dari Serangan"
 
 #: ../../data/campaigns/campaigns.conf:45
 msgid "Atlanteans"
-msgstr ""
+msgstr "Orang Altantis"
 
 #: ../../data/campaigns/campaigns.conf:47
 msgid "Challenging. Introduces the Atlanteans"
-msgstr ""
+msgstr "Mencabar Pengenalan Orang Atlantis"
 
 #: ../../data/campaigns/campaigns.conf:48
 msgid ""
@@ -139,15 +140,15 @@ msgstr ""
 #: ../../data/campaigns/campaigns.conf:100
 #: ../../data/campaigns/dummy.wmf/elemental:7
 msgid "Not yet implemented"
-msgstr ""
+msgstr "Belum lagi dilaksanakan"
 
 #: ../../data/campaigns/dummy.wmf/elemental:9
 msgid "Nobody"
-msgstr ""
+msgstr "Tiada Siapa"
 
 #: ../../data/campaigns/dummy.wmf/elemental:10
 msgid "Sorry, this map is not yet implemented."
-msgstr ""
+msgstr "Maaf, peta ini belum lagi dilaksanakan."
 
 #: ../../data/campaigns/emp01.wmf/elemental:9
 msgid ""
@@ -169,13 +170,13 @@ msgstr ""
 #: ../../data/campaigns/tutorial01_basic_control.wmf/elemental:8
 #: ../../data/campaigns/tutorials.conf:15
 msgid "Basic Control"
-msgstr ""
+msgstr "Kawalan Asas"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/elemental:10
 msgid ""
 "In this tutorial, you will learn how to navigate in Widelands and how to "
 "build buildings and roads."
-msgstr ""
+msgstr "Dalam tutorial ini, anda akan pelajari bagaimana hendak mengendali Widelands dan bagaimana hendak membangunkan bangunan dan jalan."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/elemental:8
 #: ../../data/campaigns/tutorials.conf:19
@@ -465,36 +466,36 @@ msgstr ""
 
 #: ../../data/maps/Impact.wmf/elemental:8
 msgid "Impact"
-msgstr ""
+msgstr "Impak"
 
 #: ../../data/maps/Impact.wmf/elemental:10
 msgid ""
 "After an impact of an asteroid and the following harsh winter, three isles "
 "are connected by ice and stone, setting an end to the peaceful coexistence "
 "of three tribes."
-msgstr ""
+msgstr "Selepas satu impak besar asteroid dan diikuti musim sejuk yang luar biasa, tiga buah pulau kecil telah dihubungkan dengan enapan batu dan ais yang mana penemuan ini telah menamatkan keamanan tiga puak yang sebelum ini hidup aman damai."
 
 #: ../../data/maps/Islands_at_War.wmf/elemental:8
 msgid "Islands at War"
-msgstr ""
+msgstr "Kepulauan dalam Peperangan"
 
 #: ../../data/maps/Islands_at_War.wmf/elemental:10
 msgid ""
 "For centuries, you’ve lived peacefully side by side with the other tribe on "
 "the neighboring island. This peace seems to come to an end now – your "
 "neighbor has begun to expand."
-msgstr ""
+msgstr "Berabad-abad lamanya, anda telah hidup aman damai dengan puak lain di kepulauan berhampiran. Keamanan ini kelihatan akan berakhir tidak lama lagi -  ia disebabkan pihak jiran anda mahu meluaskan pengaruh dan jajahannya."
 
 #: ../../data/maps/Kings_and_Queens_v2.wmf/elemental:8
 msgid "Kings and Queens"
-msgstr ""
+msgstr "Raja dan Permaisuri"
 
 #: ../../data/maps/Kings_and_Queens_v2.wmf/elemental:10
 msgid ""
 "An old legend tells that these seven kingdoms, that have flourished for ages"
 " in prosperity, will someday collapse into a devastating war. Has your "
 "latest betrayal been one too many and will the prophecy come true?"
-msgstr ""
+msgstr "Ada satu legenda purba berkenaan ketujuh-tujuh kerjaan ini, yang telah berkembang baik dan maju berabad lamanya, tetapi suatu hari nanti akan berpecah belah dalam peperangan yang memusnahkan. Adakah pembelotan anda merupakan salah satu punca legenda purba ini menjadi kenyataan?"
 
 #: ../../data/maps/Lake_of_Tranquility.wmf/elemental:8
 msgid "Lake of Tranquility"
@@ -705,19 +706,19 @@ msgstr ""
 
 #: ../../data/maps/The_Nile_v2.wmf/elemental:8
 msgid "The Nile"
-msgstr ""
+msgstr "Sungai Nil"
 
 #: ../../data/maps/The_Nile_v2.wmf/elemental:10
 msgid ""
 "The river has always provided food and communication. This time, eight "
 "empires will fight for control over this land."
-msgstr ""
+msgstr "Sungai Nil adalah sumber makanan dan laluan komunikasi. Pada waktu ini, lapan empayar akan berperang untuk menguasai tanah ini."
 
 #: ../../data/maps/The_Nile_v2.wmf/elemental:11
 msgid ""
 "Use the river wisely. Your opponents will do the same. You will find the "
 "main ore resources deep in the desert."
-msgstr ""
+msgstr "Guna sungai ini dengan bijak. Pihak musuh juga akan mengambil peluang yang serupa. Anda akan dapati terdapat sumber bijih logam yang tersorok ditengah-tengah padang pasir."
 
 #: ../../data/maps/The_Oasis_Triangle.wmf/elemental:8
 msgid "The Oasis Triangle"

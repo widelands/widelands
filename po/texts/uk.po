@@ -2,15 +2,16 @@
 # Copyright (C) 2005-2017 Widelands Development Team
 # 
 # Translators:
+# Dmytro Kyrychuk <dmytro.kyrychuck@gmail.com>, 2017
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2014
 # GunChleoc, 2014
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-03-03 06:24+0000\n"
-"PO-Revision-Date: 2017-03-03 06:26+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2017-03-24 18:58+0000\n"
+"PO-Revision-Date: 2017-03-28 10:33+0000\n"
+"Last-Translator: Dmytro Kyrychuk <dmytro.kyrychuck@gmail.com>\n"
 "Language-Team: Ukrainian (http://www.transifex.com/widelands/widelands/language/uk/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -20,7 +21,7 @@ msgstr ""
 
 #: ../../data/txts/AUTHORS.lua:27
 msgid "Developers"
-msgstr ""
+msgstr "Розробники"
 
 #: ../../data/txts/AUTHORS.lua:29
 msgid "Widelands Development Team"
@@ -516,8 +517,8 @@ msgstr ""
 
 #: ../../data/txts/tips/barbarians.lua:12 ../../data/txts/tips/empire.lua:12
 msgid ""
-"Most upgraded buildings also need an upgraded worker. Do not upgrade a "
-"building unless you have the upgraded workers available."
+"Most enhanced buildings need experienced workers. Do not enhance a building "
+"unless you have the necessary workers available."
 msgstr ""
 
 #: ../../data/txts/tips/editor.lua:4
@@ -584,7 +585,7 @@ msgstr ""
 #: ../../data/txts/tips/editor.lua:44
 msgid ""
 "You can place a large building on any node where you could place a medium "
-"building if there is no obstacle or unbuildable terrain towards the west, "
+"building if there is no obstacle or non-arable terrain towards the west, "
 "northwest and northeast."
 msgstr ""
 
