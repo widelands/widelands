@@ -1,17 +1,17 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2016 Widelands Development Team
+# Copyright (C) 2005-2017 Widelands Development Team
 # 
 # Translators:
 # GunChleoc, 2016
-# Joe Hansen <joedalton2@yahoo.dk>, 2009,2015-2016
+# Joe Hansen <joedalton2@yahoo.dk>, 2009,2015-2017
 # Ole Laursen <ole.laursen@gmail.com>, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-12-15 15:23+0000\n"
-"PO-Revision-Date: 2016-12-15 15:32+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2017-01-21 21:10+0000\n"
+"PO-Revision-Date: 2017-01-27 22:30+0000\n"
+"Last-Translator: Joe Hansen <joedalton2@yahoo.dk>\n"
 "Language-Team: Danish (http://www.transifex.com/widelands/widelands/language/da/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -331,7 +331,7 @@ msgid ""
 "reasonable reconstruction of the area delimited by Cortina d’Ampezzo in the "
 "north-east and Canazei in the south-west. If you have to be pitted in a duel"
 " to the death against your enemies, it may as well be in a beautiful place."
-msgstr "Juvelen i Alperne, bjergkæden Dolomitterne er blevet erklæret opført på UNESCOs verdensarvsliste for sin skønhed. Dette kort er en så nøjagtig som det kan lade sig gøre rekonstruktion af området afgrænset af Cortina d'Ampezzo i nordøst og Canazei i sydvest. Hvis du bliver udfordret i en duel til døen mod dine fjender, så kan det ligeså godt være på et smukt sted."
+msgstr "Juvelen i Alperne, bjergkæden Dolomitterne er blevet erklæret opført på UNESCOs verdensarvsliste for sin skønhed. Dette kort er en så nøjagtig som det kan lade sig gøre rekonstruktion af området afgrænset af Cortina d'Ampezzo i nordøst og Canazei i sydvest. Hvis du bliver udfordret i en duel til døden mod dine fjender, så kan det ligeså godt være på et smukt sted."
 
 #: ../../data/maps/Dolomites_v2.wmf/elemental:11
 msgid ""
@@ -529,11 +529,11 @@ msgid ""
 "range where the amount of gold and the space to live merely suffice for one "
 "tribe – only two opposite paths lead. But remember, be careful… this last "
 "living space is also a hard and small place to live."
-msgstr ""
+msgstr "De lunefulde guder besvarede ikke vores bønner. I stedet varmede det stigende sollys jorden op tusindfold og smeltede gletsjere og folk faldt i dybet. Men nu - højt oppe i de majestætiske bjerge, på den sidste klump jord - har to overlevende stammer søgt ly. Selvom guderne viste barmhjertighed og klimaet derfor blev køligere igen, stiger vandet stadig. Inde på det sidste sikkert sted - den højeste bjergkæde, hvor mængden af guld og plads til at leve alene er tilstrækkelig for en stamme - fører kun to modstående veje. Men husk, vær forsigtig ... dette sidste levested er også et hårdt og lille sted at bo."
 
 #: ../../data/maps/Last_Bastion_v2.wmf/elemental:11
 msgid "Don’t forget to take care of your timber supplies, you’ll need them."
-msgstr ""
+msgstr "Husk at sørge for leverancen af træ, du får brug for træet."
 
 #: ../../data/maps/Last_Survivors.wmf/elemental:8
 msgid "Last Survivors"
@@ -587,13 +587,13 @@ msgid ""
 "Only a small hill in the centre of the map connects these four competing "
 "tribes. Lead your army to this hill right away and build a giant stronghold "
 "as a sign of your superiority!"
-msgstr ""
+msgstr "Kun en lille bakke i centrum af kortet forbinder disse fire konkurrerende stammer. Før din hær lige mod bakken og byg en gigantisk fæstning som et tegn på dit overherredømme!"
 
 #: ../../data/maps/Rendez-Vous.wmf/elemental:11
 msgid ""
 "There is space for only one stronghold in the centre. Water can be found "
 "everywhere, so there is no need to send out geologists."
-msgstr ""
+msgstr "Der er kun plads til en fæstning i centrum. Vand kan findes overalt, så der er ikke behov for at udsende geologer."
 
 #: ../../data/maps/River_Explorers.wmf/elemental:8
 msgid "River Explorers"
@@ -754,7 +754,7 @@ msgid ""
 "and went to war. The only survivor will sacrifice his enemies’ treasures on "
 "the ancient altar, build there a splendid castle and gain the goodwill and "
 "respect of the Gods."
-msgstr "En anden tø satte i. Tre stammer havde søgt ly for en hård vinter blandt majestætiske bjerge. På tidspunktet for solhverv lyttede de til oraklet og gik i krig. Den eneste overlevende vil ofre sine fjenders skatte på den gamle alter, bygge der et pragtfuld slot og vinde goodwill og respekt fra guderne."
+msgstr "En anden tø satte i. Tre stammer havde søgt ly for en hård vinter blandt majestætiske bjerge. På tidspunktet for solhverv lyttede de til oraklet og gik i krig. Den eneste overlevende vil ofre sine fjenders skatte på den gamle alter, bygge der en pragtfuld borg og vinde goodwill og respekt fra guderne."
 
 #: ../../data/maps/Three_Warriors.wmf/elemental:8
 msgid "Three Warriors"

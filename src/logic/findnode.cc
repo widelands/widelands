@@ -116,27 +116,79 @@ bool FindNodeResourceBreedable::accept(const Map& map, const FCoords& coord) con
 	if (resource != coord.field->get_resources()) {
 		return false;
 	}
-	if (coord.field->get_resources_amount() < coord.field->get_initial_res_amount()) {
-		return true;
+	switch (strictness) {
+	case AnimalBreedable::kDefault:
+		// We test actual breedability
+		if (coord.field->get_resources_amount() < coord.field->get_initial_res_amount()) {
+			return true;
+		}
+		break;
+	case AnimalBreedable::kAnimalFull:
+		// We test potential breedability, just resources are now full
+		if (coord.field->get_resources_amount() == coord.field->get_initial_res_amount()) {
+			return true;
+		}
+		break;
 	}
 	for (Direction dir = FIRST_DIRECTION; dir <= LAST_DIRECTION; ++dir) {
 		const FCoords neighb = map.get_neighbour(coord, dir);
-		if (resource == neighb.field->get_resources() &&
-		    neighb.field->get_resources_amount() < neighb.field->get_initial_res_amount()) {
-			return true;
+		if (resource == neighb.field->get_resources()) {
+			switch (strictness) {
+			case AnimalBreedable::kDefault:
+				if (neighb.field->get_resources_amount() < neighb.field->get_initial_res_amount()) {
+					return true;
+				}
+				break;
+			case AnimalBreedable::kAnimalFull:
+				if (neighb.field->get_resources_amount() == neighb.field->get_initial_res_amount()) {
+					return true;
+				}
+				break;
+			}
 		}
 	}
 	return false;
 }
 
-bool FindNodeShore::accept(const Map& map, const FCoords& coord) const {
-	if (!(coord.field->nodecaps() & MOVECAPS_WALK))
+bool FindNodeShore::accept(const Map& map, const FCoords& coords) const {
+	if (!(coords.field->nodecaps() & MOVECAPS_WALK))
 		return false;
 
-	for (Direction dir = FIRST_DIRECTION; dir <= LAST_DIRECTION; ++dir) {
-		FCoords neighb = map.get_neighbour(coord, dir);
-		if (neighb.field->nodecaps() & MOVECAPS_SWIM)
-			return true;
+	// Vector of fields whose neighbours are to be checked, starting with current one
+	std::vector<FCoords> nodes_to_process = {coords};
+	// Set of nodes that that are swimmable & and achievable by swimming
+	// We use hashes here
+	std::set<uint32_t> accepted_nodes = {};
+	// just not to check the same node twice
+	std::set<uint32_t> rejected_nodes = {};
+
+	// Continue untill all nodes to process are processed, or we found sufficient number of nodes
+	while (!nodes_to_process.empty() && accepted_nodes.size() < min_fields) {
+		FCoords cur = nodes_to_process.back();
+		nodes_to_process.pop_back();
+
+		// Now test all neighbours
+		for (Direction dir = FIRST_DIRECTION; dir <= LAST_DIRECTION; ++dir) {
+			FCoords neighb = map.get_neighbour(cur, dir);
+			if (accepted_nodes.count(neighb.hash()) > 0 || rejected_nodes.count(neighb.hash()) > 0) {
+				// We already processed this node
+				continue;
+			}
+
+			if (neighb.field->nodecaps() & MOVECAPS_SWIM) {
+				// This is new node, that is swimmable
+				accepted_nodes.insert(neighb.hash());
+				// But also neighbours must be processed in next iterations
+				nodes_to_process.push_back(neighb);
+			} else {
+				rejected_nodes.insert(neighb.hash());
+			}
+		}
+	}
+
+	// We iterated over all reachanble fields or we found sufficient number of swimmable nodes
+	if (accepted_nodes.size() >= min_fields) {
+		return true;
 	}
 
 	return false;

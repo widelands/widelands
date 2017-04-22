@@ -37,7 +37,7 @@ tips = {
       seconds = 6
    },
    {
-      text = _"Press Ctrl+(0-9) to store important locations, then press 0-9 to recall them.",
+      text = _"Press %1% to store important locations, then press %2% to recall them.":bformat(pgettext("hotkey", "Ctrl+(1-9)"), pgettext("hotkey", "1-9")),
       seconds = 4
    },
    {
@@ -64,5 +64,14 @@ tips = {
       text = _"Some buildings, such as the farm, have a very small work area. If the building is surrounded with trees or roads, production will stop.",
       seconds = 7
    },
+   {
+      text = _"Zoom in/out with the mouse wheel or %1%. Press %2% to reset the zoom.":bformat(pgettext("hotkey", "Ctrl+(+/-)"), pgettext("hotkey", "Ctrl+0")),
+      seconds = 3
+   },
+   {
+      text = _"When a building is destroyed, its workers will start looking for a nearby flag from which they can move by road to a connected warehouse. If there are no such flags in the vicinity, they will keep wandering around and eventually die.",
+      seconds = 7
+   },
+
 }
 return tips

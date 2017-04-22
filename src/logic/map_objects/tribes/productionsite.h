@@ -43,6 +43,8 @@ class WareDescr;
 class WaresQueue;
 class WorkerDescr;
 
+enum class FailNotificationType { kDefault, kFull };
+
 /**
  * Every building that is part of the economics system is a production site.
  *
@@ -115,6 +117,11 @@ public:
 	const std::string& out_of_resource_message() const {
 		return out_of_resource_message_;
 	}
+
+	const std::string& resource_not_needed_message() const {
+		return resource_not_needed_message_;
+	}
+
 	uint32_t out_of_resource_productivity_threshold() const {
 		return out_of_resource_productivity_threshold_;
 	}
@@ -129,6 +136,7 @@ private:
 	std::string out_of_resource_title_;
 	std::string out_of_resource_heading_;
 	std::string out_of_resource_message_;
+	std::string resource_not_needed_message_;
 	int out_of_resource_productivity_threshold_;
 
 	DISALLOW_COPY_AND_ASSIGN(ProductionSiteDescr);
@@ -219,15 +227,15 @@ public:
 	bool can_start_working() const;
 
 	/// sends a message to the player e.g. if the building's resource can't be found
-	void notify_player(Game& game, uint8_t minutes);
+	void notify_player(Game& game,
+	                   uint8_t minutes,
+	                   FailNotificationType type = FailNotificationType::kDefault);
 	void unnotify_player();
 
 	void set_default_anim(std::string);
 
 protected:
 	void update_statistics_string(std::string* statistics) override;
-
-	void create_options_window(InteractiveGameBase&, UI::Window*& registry) override;
 
 	void load_finish(EditorGameBase& egbase) override;
 

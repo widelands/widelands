@@ -2,7 +2,7 @@
 # Copyright (C) 2005-2017 Widelands Development Team
 # 
 # Translators:
-# Elisabeth Jäger, 2016
+# Elisabeth Jäger, 2016-2017
 # wl-zocker, 2014
 # Peter Schwanemann <nasenbaer_peter@sourceforge.net>, 2009
 # Raymond Vetter, 2016
@@ -14,9 +14,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-01-21 14:22+0000\n"
-"PO-Revision-Date: 2017-01-21 14:23+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2017-02-26 10:10+0000\n"
+"PO-Revision-Date: 2017-02-26 10:30+0000\n"
+"Last-Translator: Tino Miegel <tino.miegel@gmail.com>\n"
 "Language-Team: German (http://www.transifex.com/widelands/widelands/language/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -151,7 +151,7 @@ msgstr "Baue eine Trainingsinfrastruktur"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:96
 msgid "Build a barracks to train some basic soldiers."
-msgstr ""
+msgstr "Baue eine Kaserne, um einfache Krieger auszubilden."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:97
 msgid "Build a battle arena and a training camp to the west of the mountains."
@@ -200,7 +200,7 @@ msgstr "Baue Trainingsgebäude"
 msgid ""
 "Build a barracks, a battle arena and a training camp to the west of the "
 "mountains."
-msgstr ""
+msgstr "Baue eine Kaserne, eine Arena und ein Ausbildungslager westlich der Berge."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:118
 msgid ""
@@ -208,7 +208,7 @@ msgid ""
 " battle arena are used for training soldiers in their different attributes. "
 "These attributes are important in fights and the better a soldier is, the "
 "higher is the chance to win a fight."
-msgstr ""
+msgstr "Kasernen bilden einfache Krieger aus, während Trainingsgebäude wie Ausbildungslager und Arena verwendet werden, um die verschiedenen Eigenschaften der Krieger zu trainieren. Diese Eigenschaften sind in Kämpfen wichtig: Je besser ein Krieger ist, umso höher ist die Chance, einen Kampf zu gewinnen."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:120
 msgid "The attributes are: health, attack, defense and evade."
@@ -655,7 +655,7 @@ msgstr "Häuptling, denkt an die armen Träger: Unsere Straßen werden immer lä
 msgid "“%s”"
 msgstr "„%s“"
 
-#: ../../data/scripting/format_scenario.lua:96
+#: ../../data/scripting/format_scenario.lua:84
 msgid "New Objective"
 msgid_plural "New Objectives"
 msgstr[0] "Neues Ziel"

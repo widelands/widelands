@@ -139,7 +139,7 @@ void TabPanel::update_desired_size() {
 	// size of contents
 	if (active_ < tabs_.size()) {
 		Panel* const panel = tabs_[active_]->panel;
-		int panelw, panelh;
+		int panelw, panelh = 0;
 
 		panel->get_desired_size(&panelw, &panelh);
 		// TODO(unknown):  the panel might be bigger -> add a scrollbar in that case
@@ -377,10 +377,6 @@ bool TabPanel::handle_mousepress(const uint8_t btn, int32_t x, int32_t y) {
 			return true;
 		}
 	}
-	return false;
-}
-
-bool TabPanel::handle_mouserelease(uint8_t, int32_t, int32_t) {
 	return false;
 }
 

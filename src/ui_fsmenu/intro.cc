@@ -29,18 +29,15 @@ FullscreenMenuIntro::FullscreenMenuIntro()
               get_w() / 2,
               get_h() * 19 / 20,
               _("Press any key or click to continue…"),
-              UI::Align::kHCenter) {
+              UI::Align::kCenter) {
 	message_.set_fontsize(fs_small() * 6 / 5);
 	message_.set_color(RGBColor(192, 192, 128));
-	add_overlay_image("images/loadscreens/splash.jpg", UI::Align::kCenter);
+	add_overlay_image("images/loadscreens/splash.jpg",
+	                  FullscreenWindow::Alignment(UI::Align::kCenter, UI::Align::kCenter));
 }
 
 bool FullscreenMenuIntro::handle_mousepress(uint8_t, int32_t, int32_t) {
 	end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kOk);
-
-	return true;
-}
-bool FullscreenMenuIntro::handle_mouserelease(uint8_t, int32_t, int32_t) {
 	return true;
 }
 

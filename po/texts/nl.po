@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-01-16 07:51+0000\n"
-"PO-Revision-Date: 2017-01-16 07:52+0000\n"
+"POT-Creation-Date: 2017-03-05 10:46+0000\n"
+"PO-Revision-Date: 2017-03-05 10:48+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Dutch (http://www.transifex.com/widelands/widelands/language/nl/)\n"
 "MIME-Version: 1.0\n"
@@ -486,184 +486,267 @@ msgid ""
 "condition, and finally can start the game as soon as all players are set up."
 msgstr "Aan de rechterkant staat informatie over de geselecteerde kaart of opgeslagen spel. Een knop rechts van de kaartnaam stelt de host in staat om deze te veranderen. Verder kan de host een winconditie instellen en tenslotte het spel starten als alle spelers klaar zijn."
 
-#: ../../data/txts/tips/atlanteans.tip:2 ../../data/txts/tips/barbarians.tip:2
-#: ../../data/txts/tips/empire.tip:2
+#: ../../data/txts/tips/atlanteans.lua:4
 msgid ""
-"Some buildings, such as the farm, have a very small work area. If the "
-"building is surrounded with trees or roads, production will stop."
-msgstr "Sommige gebouwen, zoals de boerderij, hebben een heel klein werkgebied. Als het gebouw volledig omringd is door bomen of wegen zal de productie stoppen."
+"Keep an eye on your fishers and build a fish breeder’s house. After fish "
+"resources are exhausted in their work area, the fish supply cannot be "
+"regenerated."
+msgstr ""
 
-#: ../../data/txts/tips/atlanteans.tip:6
+#: ../../data/txts/tips/atlanteans.lua:8
 msgid ""
-"Always build a forester’s and a fish breeder’s house, so you will not run "
-"out of logs or food."
-msgstr "Bouw altijd een boswachtershuis en viskwekerij, zodat je altijd voorzien bent van boomstammen en voedsel."
+"Always build a forester’s and a woodcutter’s house, so you will not run out "
+"of logs."
+msgstr ""
 
-#: ../../data/txts/tips/barbarians.tip:6 ../../data/txts/tips/empire.tip:6
+#: ../../data/txts/tips/atlanteans.lua:12
+msgid ""
+"Atlanteans need spidercloth for many buildings. Build the needed "
+"infrastructure early before you run out."
+msgstr ""
+
+#: ../../data/txts/tips/barbarians.lua:4 ../../data/txts/tips/empire.lua:4
 msgid ""
 "Keep an eye on your fishers. After fish resources are exhausted in their "
 "work area, they will stop fishing."
 msgstr "Let goed op je vissers. Als de visreserves zijn uitgeput in het werkgebied zal de productie stoppen."
 
-#: ../../data/txts/tips/barbarians.tip:10
+#: ../../data/txts/tips/barbarians.lua:8
 msgid ""
 "Always build a ranger’s and a gamekeeper’s hut, so you will not run out of "
-"logs or food."
-msgstr "Bouw altijd een boswachters- en jachtopzichtershut, zodat je altijd voorzien bent van boomstammen en voedsel."
+"logs or game."
+msgstr ""
 
-#: ../../data/txts/tips/editor.tip:2
+#: ../../data/txts/tips/barbarians.lua:12 ../../data/txts/tips/empire.lua:12
+msgid ""
+"Most enhanced buildings need experienced workers. Do not enhance a building "
+"unless you have the necessary workers available."
+msgstr ""
+
+#: ../../data/txts/tips/editor.lua:4
 msgid ""
 "You can find general help for the editor as well as a short tutorial on our "
 "wiki at www.widelands.org"
 msgstr "Je kunt algemene hulp en een korte handleiding voor de editor vinden in onze wiki op www.widelands.org"
 
-#: ../../data/txts/tips/editor.tip:6
+#: ../../data/txts/tips/editor.lua:8
 msgid ""
 "You can select multiple animal types if you hold down Ctrl during selection."
 " If you then click on the map, an instance of one of the selected animal "
 "types will be placed."
 msgstr "Je kunt meerdere diersoorten selecteren als je Ctrl ingedrukt houdt tijdens de selectie. Als je dan op de kaart klikt, zal één van de geselecteerde dieren willekeurig geplaatst worden."
 
-#: ../../data/txts/tips/editor.tip:10
+#: ../../data/txts/tips/editor.lua:12
 msgid ""
 "Just like with animals, you can also select multiple immovables or ground "
 "textures with Ctrl + mouse click."
 msgstr "Juist zoals met dieren kan je ook meerdere immobiele objecten of bodemsoorten selecteren met Ctrl + muisklik."
 
-#: ../../data/txts/tips/editor.tip:14
+#: ../../data/txts/tips/editor.lua:16
 msgid ""
 "Holding down Shift switches the first alternative tool on. This tool is in "
 "most cases the complete opposite of the normal tool (for example deletion of"
 " an object instead of placing one)."
 msgstr "Shift ingedrukt houden schakelt het eerste alternatieve gereedschap aan. Dit gereedschap is in de meeste gevallen het compleet tegenovergestelde van het normale gereedschap (bijvoorbeeld het verwijderen van een object in plaats van het plaatsen ervan)."
 
-#: ../../data/txts/tips/editor.tip:18
+#: ../../data/txts/tips/editor.lua:20
 msgid ""
 "Holding down Alt switches the second alternative tool on (if it exists)."
 msgstr "Alt ingedrukt houden zet het tweede alternatieve gereedschap aan (als dit bestaat)."
 
-#: ../../data/txts/tips/editor.tip:22
+#: ../../data/txts/tips/editor.lua:24
 msgid ""
 "The number keys (0 - 9) allow you to directly set the size of the selected "
 "area around your mouse cursor."
 msgstr "Met de numerieke toetsen (0 - 9) kun je direct de grootte van het geselecteerde gebied rond je muiscursor instellen."
 
-#: ../../data/txts/tips/editor.tip:26
+#: ../../data/txts/tips/editor.lua:28
 msgid ""
 "Space key behaves like in normal game. It switches if building spaces are "
 "shown on or off."
 msgstr "Spatie werkt net als tijdens het normale spel: het toont of verbergt de bouwlocaties."
 
-#: ../../data/txts/tips/empire.tip:10
+#: ../../data/txts/tips/editor.lua:32
+msgid ""
+"When placing trees, use the help button to see which trees are more likely "
+"to survive on which terrain."
+msgstr ""
+
+#: ../../data/txts/tips/editor.lua:36
+msgid ""
+"If you do not set water and fish resources, a default amount will be used."
+msgstr ""
+
+#: ../../data/txts/tips/editor.lua:40
+msgid ""
+"You can place a medium building on any node where there is a slope no "
+"greater than 1 in the south-east direction and its height difference to all "
+"nodes in a radius of 2 is no greater than 2."
+msgstr ""
+
+#: ../../data/txts/tips/editor.lua:44
+msgid ""
+"You can place a large building on any node where you could place a medium "
+"building if there is no obstacle or non-arable terrain towards the west, "
+"northwest and northeast."
+msgstr ""
+
+#: ../../data/txts/tips/empire.lua:8
 msgid "Always build a forester’s house so you will not run out of logs."
 msgstr "Bouw altijd een boswachtershuis, zodat je altijd bent voorzien van boomstammen."
 
-#: ../../data/txts/tips/general_game.tip:2
+#: ../../data/txts/tips/empire.lua:16
+msgid "Empire needs a lot of marble. Keep looking for marble resources."
+msgstr ""
+
+#: ../../data/txts/tips/general_game.lua:4
 msgid ""
 "The building process will only start after a road is built to the "
 "construction site."
 msgstr "Het bouwproces zal pas starten als er een weg is aangelegd naar de werf."
 
-#: ../../data/txts/tips/general_game.tip:6
+#: ../../data/txts/tips/general_game.lua:8
 msgid ""
 "Be sure to send a geologist to survey sites before building a well or a "
 "mine."
 msgstr "Zorg ervoor dat je eerst een geoloog naar een locatie stuurt voor je een waterput of een mijn bouwt."
 
-#: ../../data/txts/tips/general_game.tip:10
+#: ../../data/txts/tips/general_game.lua:12
 msgid ""
 "Your territory can be expanded by building various military buildings – "
 "Sentry, Fortress, Blockhouse, etc."
 msgstr "Je territorium kan worden uitgebreid door verscheidene militaire gebouwen te bouwen – Wachtpost, Vesting, Blokhuis, en zo meer."
 
-#: ../../data/txts/tips/general_game.tip:14
+#: ../../data/txts/tips/general_game.lua:16
 msgid "Miners will work only if supplied with food."
 msgstr "Mijnwerkers werken niet zonder voedsel."
 
-#: ../../data/txts/tips/general_game.tip:18
+#: ../../data/txts/tips/general_game.lua:20
 msgid ""
 "Split your roads into shorter sections by planting some flags. This will "
 "speed up transportation of your wares."
 msgstr "Deel je wegen op in kortere secties door vlaggen te plaatsen. Dit versnelt het transport van je goederen."
 
-#: ../../data/txts/tips/general_game.tip:22
+#: ../../data/txts/tips/general_game.lua:24
 msgid ""
 "Any further questions? Our FAQ, the wiki and of course our community forums "
 "can be found at www.widelands.org."
 msgstr "Nog meer vragen? Onze veelgestelde vragen (FAQ's), de wiki en uiteraard onze gemeenschapsfora zijn te vinden op www.widelands.org."
 
-#: ../../data/txts/tips/general_game.tip:26
+#: ../../data/txts/tips/general_game.lua:28
 msgid ""
 "Use the priority buttons in building windows to adjust delivery of a "
 "specific ware."
 msgstr "Gebruik de prioriteitsknoppen in het gebouwvenster om de levering van specifieke goederen aan te passen."
 
-#: ../../data/txts/tips/general_game.tip:30
+#: ../../data/txts/tips/general_game.lua:32
 msgid ""
 "Use the ‘configure economy’ menu to adjust the target quantity of wares. It "
 "can be accessed via the flag menu."
 msgstr "Gebruik het 'configureer economie' menu om de gewenste hoeveelheid van goederen aan te passen. Het is bereikbaar via het vlagmenu."
 
-#: ../../data/txts/tips/general_game.tip:34
+#: ../../data/txts/tips/general_game.lua:36
 msgid ""
 "Manage your messages more efficiently: press ‘N’ for News to access the "
 "messages window, then use ‘G’ for Go To, and the Delete key to archive "
 "messages."
 msgstr "Beheer je berichten efficiënter: druk 'N' van Nieuws om het berichtenvenster te bekijken, daarna 'G' van Ga Naar, en de Deletetoets om berichten te archiveren."
 
-#: ../../data/txts/tips/general_game.tip:38
-msgid ""
-"Press Ctrl+(0-9) to store important locations, then press 0-9 to recall "
-"them."
-msgstr "Druk Ctrl+(0-9) om belangrijke locaties op te slaan, druk daarna 0-9 om er naar terug te gaan."
+#: ../../data/txts/tips/general_game.lua:40
+msgctxt "hotkey"
+msgid "1-9"
+msgstr ""
 
-#: ../../data/txts/tips/general_game.tip:42
+#: ../../data/txts/tips/general_game.lua:40
+msgctxt "hotkey"
+msgid "Ctrl+(1-9)"
+msgstr ""
+
+#: ../../data/txts/tips/general_game.lua:40
+msgid "Press %1% to store important locations, then press %2% to recall them."
+msgstr ""
+
+#: ../../data/txts/tips/general_game.lua:44
 msgid ""
 "Removing a road while holding Ctrl lets you remove all flags up to the first"
 " junction."
 msgstr "Het verwijderen van een weg tot de eerstvolgende kruising kan je doen door Ctrl ingedrukt te houden."
 
-#: ../../data/txts/tips/general_game.tip:46
+#: ../../data/txts/tips/general_game.lua:48
 msgid ""
-"New soldiers are recruited in the headquarters or a warehouse if all needed "
-"tools are available. Training sites are for improving their abilities."
-msgstr "Nieuwe soldaten worden gerecruteerd in het hoofdkwartier of een magazijn als alle benodigde wapens en uitrusting beschikbaar zijn. Trainingsgebouwen dienen voor het verbeteren van hun vaardigheden."
+"New soldiers are recruited in a barracks. Their abilities can then be "
+"improved in training sites."
+msgstr ""
 
-#: ../../data/txts/tips/general_game.tip:50
+#: ../../data/txts/tips/general_game.lua:52
 msgid ""
 "If you like to live dangerously, pressing Ctrl while clicking the enhance, "
 "dismantle or destroy building buttons will skip the confirmation."
 msgstr "Als je graag gevaarlijk wilt leven, het indrukken van Ctrl terwijl je op verbeter, vernietig of ontmantelen klikt zal het vragen om bevestiging omzeilen."
 
-#: ../../data/txts/tips/general_game.tip:54
+#: ../../data/txts/tips/general_game.lua:56
 msgid "Press I to quickly toggle the display of your stock inventory."
 msgstr "Druk I om snel de voorraadlijst te tonen of verbergen"
 
-#: ../../data/txts/tips/general_game.tip:58
+#: ../../data/txts/tips/general_game.lua:60
 msgid ""
 "An economy consists of all buildings and flags connected by roads. The "
 "supplies and demands of buildings are handled in its economy."
 msgstr "Een economie bestaat uit alle gebouwen en vlaggen verbonden door wegen. Vraag en aanbod van afzonderlijke gebouwen worden geregeld door de economie waar ze mee verbonden zijn."
 
-#: ../../data/txts/tips/multiplayer.tip:2
+#: ../../data/txts/tips/general_game.lua:64
+msgid ""
+"Some buildings, such as the farm, have a very small work area. If the "
+"building is surrounded with trees or roads, production will stop."
+msgstr "Sommige gebouwen, zoals de boerderij, hebben een heel klein werkgebied. Als het gebouw volledig omringd is door bomen of wegen zal de productie stoppen."
+
+#: ../../data/txts/tips/general_game.lua:68
+msgctxt "hotkey"
+msgid "Ctrl+(+/-)"
+msgstr ""
+
+#: ../../data/txts/tips/general_game.lua:68
+msgctxt "hotkey"
+msgid "Ctrl+0"
+msgstr ""
+
+#: ../../data/txts/tips/general_game.lua:68
+msgid "Zoom in/out with the mouse wheel or %1%. Press %2% to reset the zoom."
+msgstr ""
+
+#: ../../data/txts/tips/general_game.lua:72
+msgid ""
+"When a building is destroyed, its workers will start looking for a nearby "
+"flag from which they can move by road to a connected warehouse. If there are"
+" no such flags in the vicinity, they will keep wandering around and "
+"eventually die."
+msgstr ""
+
+#: ../../data/txts/tips/multiplayer.lua:4
 msgid ""
 "You can use the ’Page up’ and ‘Page down’ keys to adjust your desired speed "
 "– the real speed is then democratically set."
 msgstr "Je kan de 'Page up' en 'Page down' toetsen gebruiken om je gewenste snelheid aan te passen. De echte snelheid wordt daarna democratisch bepaald."
 
-#: ../../data/txts/tips/multiplayer.tip:6
+#: ../../data/txts/tips/multiplayer.lua:8
 msgid ""
 "You can use ‘/me’ at the beginning of a chatmessage: ‘/me is tired’ will be "
 "printed as ‘-> Nickname is tired’."
 msgstr "Je kunt '/me' gebruiken aan het begin van een chatbericht. '/me is moe' zal worden weergegeven als '-> Nickname is moe'."
 
-#: ../../data/txts/tips/multiplayer.tip:10
+#: ../../data/txts/tips/multiplayer.lua:12
 msgid ""
 "Use ‘@name’ at the beginning of a chat message to send it to only one "
 "player."
 msgstr "Gebruik '@name' aan  het begin van een bericht om het naar één speler te sturen."
 
-#: ../../data/txts/tips/singleplayer.tip:2
+#: ../../data/txts/tips/multiplayer.lua:16
+msgid ""
+"If the game should crash, don't worry! The game will be saved automatically "
+"so that you can reload it afterwards."
+msgstr ""
+
+#: ../../data/txts/tips/singleplayer.lua:4
 msgid ""
 "Our computer players are too boring? Visit our website at www.widelands.org "
 "and meet other players to play online."

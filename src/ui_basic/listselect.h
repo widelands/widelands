@@ -105,6 +105,7 @@ struct BaseListselect : public Panel {
 
 	const std::string& get_selected_name() const;
 	const std::string& get_selected_tooltip() const;
+	const Image* get_selected_image() const;
 
 	void set_background(const Image* background) {
 		background_ = background;
@@ -120,7 +121,6 @@ struct BaseListselect : public Panel {
 	// Drawing and event handling
 	void draw(RenderTarget&) override;
 	bool handle_mousepress(uint8_t btn, int32_t x, int32_t y) override;
-	bool handle_mouserelease(uint8_t btn, int32_t x, int32_t y) override;
 	bool
 	handle_mousemove(uint8_t state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff) override;
 	bool handle_mousewheel(uint32_t which, int32_t x, int32_t y) override;

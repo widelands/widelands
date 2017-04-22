@@ -1,16 +1,17 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2016 Widelands Development Team
+# Copyright (C) 2005-2017 Widelands Development Team
 # 
 # Translators:
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2012
 # Javier Mora <morehash@gmail.com>, 2015
+# Thadah D. Denyse <juchuf@gmail.com>, 2017
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-11-30 12:41+0000\n"
-"PO-Revision-Date: 2016-11-30 12:43+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2017-03-24 18:58+0000\n"
+"PO-Revision-Date: 2017-03-28 11:26+0000\n"
+"Last-Translator: Thadah D. Denyse <juchuf@gmail.com>\n"
 "Language-Team: Spanish (http://www.transifex.com/widelands/widelands/language/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -82,7 +83,7 @@ msgid ""
 "tabs: ‘Wares waiting to be shipped’ and ‘workers waiting to embark.’ They "
 "are waiting for a ship to transport them to another port. Currently, there "
 "are none because we have not yet built a second port. So let’s change this!"
-msgstr ""
+msgstr "Además, los puertos ofrecen la posibilidad de transportar mercancías por barco. Cuando haces clic en un puerto que ya tienes, verás dos pestañas nuevas: \"Mercancías esperando ser embarcadas\" y \"trabajadores esperando embarcar\". Están esperando que un barco los transporte a otro puerto. Actualmente, no hay ninguno porque no hemos construido un segundo puerto. ¡Vamos a arreglar eso!"
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:55
 msgid "Building ports"
@@ -418,7 +419,7 @@ msgstr "En este mapa no hay enemigo que temer. Como siempre, puedes continuar ju
 msgid "“%s”"
 msgstr "“%s”"
 
-#: ../../data/scripting/format_scenario.lua:96
+#: ../../data/scripting/format_scenario.lua:84
 msgid "New Objective"
 msgid_plural "New Objectives"
 msgstr[0] "Nuevo Objetivo"

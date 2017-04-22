@@ -3,15 +3,15 @@
 # 
 # Translators:
 # GunChleoc, 2014
-# Jukka Pakarinen, 2016
+# Jukka Pakarinen, 2016-2017
 # Pekka Järvinen <pekka.jarvinen@gmail.com>, 2007
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-01-21 14:22+0000\n"
-"PO-Revision-Date: 2017-01-21 14:24+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2017-03-05 10:46+0000\n"
+"PO-Revision-Date: 2017-03-06 20:26+0000\n"
+"Last-Translator: Jukka Pakarinen\n"
 "Language-Team: Finnish (http://www.transifex.com/widelands/widelands/language/fi/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -145,7 +145,7 @@ msgstr "Tuhoa barbaariheimo"
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:98
 msgid "Build a barracks to start training soldiers."
-msgstr ""
+msgstr "Rakenna kasarmi koluttaaksesi sotilaita."
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:99
 msgid ""
@@ -218,7 +218,7 @@ msgstr "Ennen sitä päivää on edessä vielä monia vuosia! Juuri nyt meidän 
 msgid ""
 "But we mustn’t forget to preserve this natural bounty. These forests should "
 "last forever, so we really have to build a forester’s house too."
-msgstr "Meidän ei myöskään tule unohtaa suojella tätä luonnon aarreaittaa. Näiden metsien pitäisi kestää ikuisesti, joten meidän tosiaankin täytyy rakentaa myös puunistuttajan mökki."
+msgstr "Meidän ei myöskään tule unohtaa suojella tätä luonnon aarreaittaa. Näiden metsien pitäisi kestää ikuisesti, joten meidän tosiaankin täytyy rakentaa myös metsänhoitajan mökki."
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:134
 msgid "The Rocks"
@@ -515,7 +515,7 @@ msgstr "Olet selviytynyt tästä komennuksesta. Voit jatkaa pelaamista halutessa
 msgid "“%s”"
 msgstr "\"%s\""
 
-#: ../../data/scripting/format_scenario.lua:96
+#: ../../data/scripting/format_scenario.lua:84
 msgid "New Objective"
 msgid_plural "New Objectives"
 msgstr[0] "Uusi Tavoite"

@@ -4,15 +4,15 @@
 # Translators:
 # Endrju <endrjux@gmail.com>, 2005
 # Wesmania <ikk_pl@yahoo.co.uk>, 2015
-# Wesmania <ikk_pl@yahoo.co.uk>, 2016
+# Wesmania <ikk_pl@yahoo.co.uk>, 2016-2017
 # Tomasz Pudło <wptom@wp.pl>, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-01-21 14:22+0000\n"
-"PO-Revision-Date: 2017-01-21 14:26+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2017-01-21 21:10+0000\n"
+"PO-Revision-Date: 2017-01-22 09:46+0000\n"
+"Last-Translator: Wesmania <ikk_pl@yahoo.co.uk>\n"
 "Language-Team: Polish (http://www.transifex.com/widelands/widelands/language/pl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -191,7 +191,7 @@ msgstr "Skały 6"
 #: ../../data/world/immovables/ruin4/init.lua:5
 #: ../../data/world/immovables/ruin5/init.lua:5
 msgid "Tombstone"
-msgstr ""
+msgstr "Nagrobek"
 
 #: ../../data/world/immovables/skeleton1/init.lua:5
 #: ../../data/world/immovables/skeleton3/init.lua:5
@@ -773,17 +773,17 @@ msgstr "Drzewa pustkowi"
 #. TRANSLATORS: A category in the editor for placing animals on the map.
 #: ../../data/world/init.lua:82
 msgid "Herbivores"
-msgstr ""
+msgstr "Mięsożerne"
 
 #. TRANSLATORS: A category in the editor for placing animals on the map.
 #: ../../data/world/init.lua:90
 msgid "Carnivores"
-msgstr ""
+msgstr "Roślinożerne"
 
 #. TRANSLATORS: A category in the editor for placing animals on the map.
 #: ../../data/world/init.lua:98
 msgid "Aquatic"
-msgstr ""
+msgstr "Morskie"
 
 #: ../../data/world/resources/init.lua:7
 msgid "Coal"

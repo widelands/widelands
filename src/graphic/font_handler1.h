@@ -56,13 +56,13 @@ public:
 	/// Loads the FontSet for the currently active locale into the
 	/// font handler. This needs to be called after the language of the
 	/// game has changed.
-	virtual void reinitialize_fontset() = 0;
+	virtual void reinitialize_fontset(const std::string& locale) = 0;
 
 	DISALLOW_COPY_AND_ASSIGN(IFontHandler1);
 };
 
 // Create a new FontHandler1.
-IFontHandler1* create_fonthandler(ImageCache* image_cache);
+IFontHandler1* create_fonthandler(ImageCache* image_cache, const std::string& locale);
 
 extern IFontHandler1* g_fh1;
 }

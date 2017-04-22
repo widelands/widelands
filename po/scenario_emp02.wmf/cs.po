@@ -5,14 +5,14 @@
 # GunChleoc, 2014
 # Markus7cz <markus7cz@gmail.com>, 2008
 # Matej Svrcek <mmatej@yahoo.com>, 2015
-# Milan Fašina <matrix17@seznam.cz>, 2016
+# Milan Fašina <matrix17@seznam.cz>, 2016-2017
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-01-21 14:22+0000\n"
-"PO-Revision-Date: 2017-01-21 14:24+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2017-04-13 13:07+0000\n"
+"PO-Revision-Date: 2017-04-02 08:23+0000\n"
+"Last-Translator: Milan Fašina <matrix17@seznam.cz>\n"
 "Language-Team: Czech (http://www.transifex.com/widelands/widelands/language/cs/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -146,7 +146,7 @@ msgstr "Znič barbarský kmen"
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:98
 msgid "Build a barracks to start training soldiers."
-msgstr ""
+msgstr "Postav kasárna a začni trénovat vojáky."
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:99
 msgid ""
@@ -516,7 +516,7 @@ msgstr "Splnil jsi tuto misi. Jestli chceš, můžeš pokračovat v hraní nebo 
 msgid "“%s”"
 msgstr "“%s”"
 
-#: ../../data/scripting/format_scenario.lua:96
+#: ../../data/scripting/format_scenario.lua:84
 msgid "New Objective"
 msgid_plural "New Objectives"
 msgstr[0] "Nový úkol"

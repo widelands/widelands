@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Copyright 2016 The Widelands Development Team <widelands-dev_at_lists.launchpad.net> -->
-<component>
-  <id>org.widelands.widelands</id>
+<component type="desktop-application">
+  <id>org.widelands.widelands.desktop</id>
   <metadata_license>CC0-1.0</metadata_license>
   <project_license>GPL-2.0</project_license>
   <name>Widelands</name>
   <summary>A real-time build-up strategy game</summary>
+  <summary xml:lang="ar">لعبة بناء إستراتيجية في الوقت الحقيقي</summary>
   <summary xml:lang="bg">Стратегическа игра за изграждане на цивилизация в реално време</summary>
   <summary xml:lang="ca">Un joc d'estratègia i construcció a temps real </summary>
   <summary xml:lang="cs">Real-time budovatelská strategická hra</summary>
@@ -19,10 +20,12 @@
   <summary xml:lang="hu">Egy valós idejű, építkezős stratégiai játék</summary>
   <summary xml:lang="it">Un gioco di costruzione e strategia in tempo reale</summary>
   <summary xml:lang="la">Ludus strategicae exstructionis in tempore vero</summary>
+  <summary xml:lang="ms">Permainan strategi pembinaan masa-nyata</summary>
   <summary xml:lang="nl">Een realtime opbouwend strategiespel</summary>
   <summary xml:lang="pl">Strategia czasu rzeczywistego skupiona na rozbudowie</summary>
   <summary xml:lang="pt">Um jogo de construção estratégica em tempo real</summary>
   <summary xml:lang="ro">Un joc strategic de construire în timp real</summary>
+  <summary xml:lang="ru">Стратегия развития в реальном времени</summary>
   <summary xml:lang="sk">Budovateľská stretegická hra v reálnom čase</summary>
   <summary xml:lang="sr">Graditeljska strateška igra u realnom vremenu</summary>
   <summary xml:lang="sv">Ett uppbyggnadsstrategispel i realtid</summary>
@@ -34,6 +37,12 @@
     </p>
     <p>
       Widelands offers a single-player mode with campaigns that tell stories of the tribes and their struggle in the Widelands universe. However, settling really starts when you unite with friends over the Internet or LAN to build up new empires together – or to crush each other in the dusts of war. Widelands also offers an artificial intelligence to challenge you.
+    </p>
+    <p xml:lang="ar">
+      أنت الوصي  لعشيرة صغيرة. مهمتك أن تبني مستوطنة. كل عضو من العشيرة سوف يكون جزء لإنتاج موارد أكثر لدفع هذا النمو.
+    </p>
+    <p xml:lang="ar">
+      "أراضي واسعة" تقدم تجربة لاعب واحد مع طور الحملات التي تحكي قصة قبيلة وصراعهم فى الكون الخاص بـ"أراضي واسعة".ومع ذلك, الاستيطان يبدأ حقا عندما تتحد مع أصدقائك من خلال الإنترنت و اللان لكى تبنى مملكه جديده معا-- او محاربة بعضهم البعض وتدمير بعضهم البعض. "أراضي واسعة" ايضا تقدم ذكاء اصطناعي يتحداك.
     </p>
     <p xml:lang="bg">
       Вие сте водачът на малък клан. Задачата Ви е да изградите развиващо се селище. Всеки член на клана Ви ще върши своята работа, за да произвеждате все повече ресурси и да продължавате да разраствате селището си.
@@ -84,7 +93,7 @@
       Widelands-ek jokalari bakarreko aukera eskeintzen du tribuen historiak kontatzen dituen kanpainekin eta Widelands unibertsoan dituzten tirabirekin. Hala ere, zure lagunekin Internet edo LAN bidez elkartzen zarenean hasten da benetako jokoa, bai inperio berriak elkarrekin eraikitzeko edo elkar erasotzeko gerraren hautsen artean. Widelans-ek adimen artifizialeko etsaiak ere eskeintzen dizkizu erronka bezala.
     </p>
     <p xml:lang="fi">
-      Ohjaat pientä heimoa. Tehtävänäsi luoda laajentua, sekä luoda toimiva talous jotta heimosi pärjäisi naapureiden puristuksessa.
+      Ohjaat pientä heimoa. Tehtävänäsi on laajentaa siirtokuntaasi, sekä luoda toimiva talous, jotta heimosi pärjäisi naapureiden puristuksessa.
     </p>
     <p xml:lang="fi">
       Widelandsissa on yksinpelimoodi, jossa voit aloittelijana kohdata haasteita WL-maailmassa. Todellinen hupi alkaa LAN- tai verkkopelissä kavereiden kanssa.
@@ -119,6 +128,12 @@
     <p xml:lang="la">
       Widelands offers a single-player mode with campaigns that tell stories of the tribes and their struggle in the Widelands universe. However, settling really starts when you unite with friends over the Internet or LAN to build up new empires together – or to crush each other in the dusts of war. Widelands also offers an artificial intelligence to challenge you.
     </p>
+    <p xml:lang="ms">
+      Anda merupakan pemangku raja di sebuah puak kecil. Anda ditugaskan untuk membangunkan penempatan yang sedang membesar. Setiap ahli puak anda akan berperanan membantu dalam pembangunan puak ini.
+    </p>
+    <p xml:lang="ms">
+      Widelands menawarkan mod pemain-tunggal dengan kempen yang menceritakan kisah sebuah puak dan perjuangan mereka di dunia Widelands. Peredaan sebenarnya bermula apabila anda bersatu dengan rakan anda di Internet atau LAN untuk bersama-sama membina sebuah empayar - atau musnahkan di antara satu sama lain. Widelands juga menawarkan kepintaran buatan yang dapat memberi cabaran kepada anda.
+    </p>
     <p xml:lang="nl">
       Je bent de leider van een kleine stam.  Het is jouw taak een bloeiende nederzetting uit te bouwen.  Elk stamlid zal daarbij haar of zijn steentje bijdragen door het produceren van meer grondstoffen.
     </p>
@@ -142,6 +157,12 @@
     </p>
     <p xml:lang="ro">
       Widelands ofera un mod single-player cu campanii care spun povești ale triburilor și lupta lor în universul Widelands. Cu toate acestea, stabilirea începe într-adevăr atunci când te întâlneşti cu prietenii pe Internet sau LAN pentru a construi noi imperii împreună - sau pentru a vă zdrobi reciproc în prafurile războiului. Widelands oferă, de asemenea, o inteligență artificială pentru a vă provoca.
+    </p>
+    <p xml:lang="ru">
+      Вы представитель правления небольшого клана. Ваша задача строить постоянно растущее поселение. Каждый участник клана развивает его или его часть, чтобы производить дополнительные ресурсы для дальнейшего роста.
+    </p>
+    <p xml:lang="ru">
+      Widelands предлагает режим одного игрока с кампаниями, которые повествуют о племенах и их борьбе во вселенной Widelands. И всё-таки, самое интересное действительно начинается, когда вы объединяетесь с друзьями через Интернет или локальную сеть для совместного создания новых империй или чтобы втоптать друг друга в пыль войны. Также Widelands предлагает вам искусственный интеллект, способный бросить вызов вам.
     </p>
     <p xml:lang="sk">
       Stojíte na čele malého klanu. Vašou úlohou je budovať neustále rastúcu osadu. Každý člen vášho klanu prispeje svojim dielom práce k získaniu zdrojov na podporu tohto rastu.
@@ -217,7 +238,7 @@
   <url type="donation">https://wl.widelands.org/wiki/The%20Widelands%20Project/</url>
   <url type="help">https://wl.widelands.org/wiki/Game%20Manual/</url>
   <developer_name>The Widelands Development Team</developer_name>
-  <content_rating type="oars-1.0">
+  <x-content_rating type="oars-1.0">
     <content_attribute id="violence-cartoon">moderate</content_attribute>
     <content_attribute id="violence-fantasy">none</content_attribute>
     <content_attribute id="violence-realistic">none</content_attribute>
@@ -238,5 +259,5 @@
     <content_attribute id="social-contacts">none</content_attribute>
     <content_attribute id="money-purchasing">none</content_attribute>
     <content_attribute id="money-gambling">none</content_attribute>
-  </content_rating>
+  </x-content_rating>
 </component>

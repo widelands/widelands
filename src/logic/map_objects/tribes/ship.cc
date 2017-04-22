@@ -32,6 +32,7 @@
 #include "economy/wares_queue.h"
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
+#include "graphic/text_constants.h"
 #include "io/fileread.h"
 #include "io/filewrite.h"
 #include "logic/findbob.h"
@@ -48,7 +49,6 @@
 #include "logic/widelands_geometry_io.h"
 #include "map_io/map_object_loader.h"
 #include "map_io/map_object_saver.h"
-#include "wui/interactive_gamebase.h"
 
 namespace Widelands {
 
@@ -1177,7 +1177,7 @@ MapObject::Loader* Ship::load(EditorGameBase& egbase, MapObjectLoader& mol, File
 				if (packet_version < 5) {
 					std::string tribe_name = fr.string();
 					fr.c_string();  // This used to be the ship's name, which we don't need any more.
-					if (!(egbase.tribes().tribe_exists(tribe_name))) {
+					if (!Widelands::tribe_exists(tribe_name)) {
 						throw GameDataError("Tribe %s does not exist for ship", tribe_name.c_str());
 					}
 					const DescriptionIndex& tribe_index = egbase.tribes().tribe_index(tribe_name);

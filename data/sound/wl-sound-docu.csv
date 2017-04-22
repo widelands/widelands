@@ -1,0 +1,53 @@
+Widelands Sound Documentation (toptopple’s sounds added since BZR 8019),,,,,,,,,,
+,,,,,,,,,,
+File Name,Format,Location,Usage,Author,License,reworked,Original File Name,Source,Orig. Format,BZR
+,,,,,,,,,,
+beerbubble_01.ogg,11025 – 16,sound/empire,empire.brewery,Julian Evans,CC-0,yes,338107__mentalsanityoff__beer-fermenter-gurgling-liquid-bubbles-glug.wav,http://www.freesound.org/people/MentalSanityOff/sounds/338107/,48000 – 24,8022
+beerbubble_02.ogg,11025 – 16,sound/empire,empire.brewery,Julian Evans,CC-0,yes,338107__mentalsanityoff__beer-fermenter-gurgling-liquid-bubbles-glug.wav,http://www.freesound.org/people/MentalSanityOff/sounds/338107/,48000 – 24,8022
+winebubble_01.ogg,22050 – 16,sound/empire,empire.winery,Michael Hinze,CC-0,yes,275578__hinzebeat__big-bubbles-on-water.wav,http://www.freesound.org/people/hinzebeat/sounds/275578/,44100 – 16,8022
+winebubble_02.ogg,22050 – 16,sound/empire,empire.winery,Michael Hinze,CC-0,yes,275578__hinzebeat__big-bubbles-on-water.wav,http://www.freesound.org/people/hinzebeat/sounds/275578/,44100 – 16,8022
+fizzle_01.ogg,11025 – 16,sound/metal,empire.smelting_works,luffy,CC-3,yes,17299__luffy__luffy-fire3alternate.wav,http://www.freesound.org/people/luffy/sounds/17299/,44100 – 16,8022
+ironping_01.ogg,22050 – 16,sound/metal,empire.smelting_works,timgormly,CC-3,yes,170964__timgormly__metal-ping1.aiff,http://www.freesound.org/people/timgormly/sounds/170964/,44100 – 16,8022
+goldping_01.ogg,22050 – 16,sound/metal,empire.smelting_works,timgormly,CC-3,yes,170964__timgormly__metal-ping1.aiff,http://www.freesound.org/people/timgormly/sounds/170964/,44100 – 16,8022
+furnace_01.ogg,11025 – 16,sound/metal,barbarian.smelting_works,UNKNOWN,,yes,Fire-8.wav,UNKNOWN,22050,8022
+blackwood_01.ogg,11025 – 16,sound/barbarians,barbarian.wood_hardener,UNKNOWN,,,Creek-1.wav,UNKNOWN,11025-32,8029
+mortar_01.ogg,11025 – 16,sound/barbarians,barbarian.limekiln,qubodup,CC-0,yes,184383__qubodup__gathering-stone-resources.flac,http://www.freesound.org/people/qubodup/sounds/184383/,48000 – 16,8029
+stonegrind_01.ogg,22050 – 16,sound/barbarians,barbarian.limekiln,timgormly,CC-3,yes,232102__thalamus-lab__stone-grind.wav,http://www.freesound.org/people/Thalamus_Lab/sounds/232102/,44100 – 32,8029
+tavern_01.ogg,11025 – 16,sound/barbarians/taverns,,UNKNOWN,,,Dishes-21.wav,UNKNOWN,11025,8029
+tavern_02.ogg,16000,sound/barbarians/taverns,,UNKNOWN,,,Dishes-1.wav,UNKNOWN,22050,8029
+inn_01.ogg,22050 – 16,sound/barbarians/taverns,barbarian.inn,Eelke Dekker,CC-3,yes,192099__eelke__preparing-dishes.wav,http://www.freesound.org/people/Eelke/sounds/192099/,44100 – 32,8145
+inn_02.ogg,22050 – 16,sound/barbarians/taverns,barbarian.inn,Hannebu,CC-0,yes,194806__hannebu__frying.wav,http://www.freesound.org/people/Hannebu/sounds/194806/,48000 – 24,8145
+biginn_01.ogg,22050 – 16,sound/barbarians/taverns,barbarian.biginn,Eelke Dekker,CC-3,yes,192099__eelke__preparing-dishes.wav,http://www.freesound.org/people/Eelke/sounds/192099/,44100 – 32,8145
+biginn_02.ogg,11025 – 16,sound/barbarians/taverns,barbarian.biginn,Mike Koenig,CC-3,yes,Glass Cookie Jar-SoundBible.com-2105585386.wav,http://soundbible.com/314-Glass-Cookie-Jar.html,32000 – 32,8145
+meal_01.ogg,,sound/empire/taverns,empire.biginn,DUPLICATE to inn_01.ogg,,,,,,8145
+meal_02.ogg,22050 – 16,sound/empire/taverns,empire.biginn,UNKNOWN,,,Bottle-2.wav,UNKNOWN,22050 – 32,8145
+ration_01.ogg,,sound/empire/taverns,empire.inn,DUPLICATE to tavern_02.ogg,,,,,,8145
+ration_02.ogg,,sound/empire/taverns,empire.inn,DUPLICATE to tavern_01.ogg,,,,,,8145
+weaving_01.ogg,22050 – 32,sound/mill,"empire.weavingmill, atlanteans.weavingmill",Xavier Serra,CC-3,yes,320510__xserra__kerala-1.wav,http://www.freesound.org/people/xserra/sounds/320510/,44100 – 16,8251
+weaver_01.ogg,22050 – 32,sound/barbarians,barbarian.weavingmill,Yle Arkisto,CC-3,yes,368577__ylearkisto__kangaspuut-old-wooden-loom-from-1857-weaving-a-rag-rug.wav,http://www.freesound.org/people/YleArkisto/sounds/368577/,44100 – 24,8251
+stonecutter_01.ogg,22050 – 32,sound/atlanteans/cutting,atlanteans.stonecutter,Benboncan,CC-3,yes,71823__benboncan__pickaxe-striking-rock.wav,http://www.freesound.org/people/Benboncan/sounds/71823/,44100 – 16,8251
+stonecutter_02.ogg,22050 – 32,sound/atlanteans/cutting,atlanteans.stonecutter,Benboncan,CC-3,yes,71823__benboncan__pickaxe-striking-rock.wav,http://www.freesound.org/people/Benboncan/sounds/71823/,44100 – 16,8251
+stonecutter_03.ogg,22050 – 32,sound/atlanteans/cutting,atlanteans.stonecutter,Benboncan,CC-3,yes,71823__benboncan__pickaxe-striking-rock.wav,http://www.freesound.org/people/Benboncan/sounds/71823/,44100 – 16,8251
+benchsaw_01.ogg,22050 – 32,sound/atlanteans/saw,atlanteans.sawmill,mauxuam,CC-0,yes,216828__mauxuam__saw-of-avalon-2.wav,http://www.freesound.org/people/mauxuam/sounds/216828/,44100 – 16,8251
+benchsaw_02.ogg,22050 – 32,sound/atlanteans/saw,atlanteans.sawmill,mauxuam,CC-0,yes,216828__mauxuam__saw-of-avalon-2.wav,http://www.freesound.org/people/mauxuam/sounds/216828/,44100 – 16,8251
+sawing_01.ogg,22050 – 32,sound/atlanteans/saw,atlanteans.woodcutter,dobroide,CC-3,yes,102844__dobroide__20100802-sawing.wav,http://www.freesound.org/people/dobroide/sounds/102844/,44100 – 16,8251
+sawing_02.ogg,22050 – 32,sound/atlanteans/saw,atlanteans.woodcutter,dobroide,CC-3,yes,102844__dobroide__20100802-sawing.wav,http://www.freesound.org/people/dobroide/sounds/102844/,44100 – 16,8251
+sawing_03.ogg,22050 – 32,sound/atlanteans/saw,atlanteans.woodcutter,dobroide,CC-3,yes,102844__dobroide__20100802-sawing.wav,http://www.freesound.org/people/dobroide/sounds/102844/,44100 – 16,8251
+goldspin_01.ogg,22050 – 32,sound/atlanteans,atlanteans.goldspinner,Mike Koenig,CC-3,yes,Metal Debris Falling-SoundBible.com-238218965.wav,http://soundbible.com/1099-Metal-Debris-Falling.html,44100 – 16,8251
+goldspin_02.ogg,22050 – 32,sound/atlanteans,atlanteans.goldspinner,Mike Koenig,CC-3,yes,Metal Debris Falling-SoundBible.com-238218965.wav,http://soundbible.com/1099-Metal-Debris-Falling.html,44100 – 16,8251
+tree-falling_00.ogg,11025 – 16,sound/woodcutting,woodcutters,ecfike,CC-0,yes,139952__ecfike__a-tree-falling-down.wav,http://www.freesound.org/people/ecfike/sounds/139952/,44100 – 16,new
+tree-falling_01.ogg,11025 – 16,sound/woodcutting,woodcutters,Daniel Simion,CC-3,yes,Tree_Fall_Small-Daniel_Simion-1639156552.wav,http://soundbible.com/2039-Tree-Fall-Small.html,44100 – 16,new
+,,,,,,,,,,
+boar_01.ogg,11025 – 16,data/sound/animals,,UNKNOWN,personal,yes,Pig-SoundBible.com-1026656068.wav,http://soundbible.com/736-Pig.html,11025,8019
+elk_01.ogg,16000,data/sound/animals,,fws.gov,PD,yes,Elk Bellowing In Forest-SoundBible.com-681308174.wav,http://soundbible.com/245-Elk-Bellowing-In-Forest.html,48000,8019
+elk_02.ogg,22050 – 16,data/sound/animals,,fws.gov,PD,yes,Elk Bellowing In Forest 2-SoundBible.com-860406835.wav,http://soundbible.com/246-Elk-Bellowing-In-Forest-2.html,48000,8029
+stag_01.ogg,11025 – 16,data/sound/animals,,Juan Carlos,PD,yes,Red_stag_roar-Juan_Carlos_-2004708707.wav,http://soundbible.com/2073-Red-Stag-Roar.html,44100 – 16,8019
+stag_02.ogg,11025 – 16,data/sound/animals,,Juan Carlos,PD,yes,Red_stag_roar-Juan_Carlos_-2004708707.wav,http://soundbible.com/2073-Red-Stag-Roar.html,44100 – 16,8019
+coyote_01.ogg,11025 – 16,data/sound/animals,,UNKNOWN,PD,yes,Coyote Call-SoundBible.com-2012388009.wav,http://soundbible.com/977-Coyote-Call.html,44100 – 16,8019
+coyote_02.ogg,11025 – 16,data/sound/animals,,UNKNOWN,PD,yes,Coyote Call-SoundBible.com-2012388009.wav,http://soundbible.com/977-Coyote-Call.html,44100 – 16,8019
+wolf_01.ogg,11025 – 16,data/sound/animals,,UNKNOWN,,,Howl-5.wav,UNKNOWN,11025,8019
+wolf_02.ogg,22050 – 16,data/sound/animals,,UNKNOWN,,,Howl-4.wav,UNKNOWN,22050,8019
+wolf_03.ogg,11025 – 16,data/sound/animals,,UNKNOWN,,,Howl-6.wav,UNKNOWN,11025,8019
+sheep_01.ogg,22050 – 16,data/sound/farm,,UNKNOWN,,,Sheep-3.wav,UNKNOWN,22050,8019
+sheep_02.ogg,22050 – 16,data/sound/farm,,UNKNOWN,,,Sheep-6.wav,UNKNOWN,22050,8019
+sheep_03.ogg,22050 – 16,data/sound/farm,,UNKNOWN,,,Sheep-2.wav,UNKNOWN,22050,8019

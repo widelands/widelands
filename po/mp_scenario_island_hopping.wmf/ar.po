@@ -1,18 +1,18 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2016 Widelands Development Team
+# Copyright (C) 2005-2017 Widelands Development Team
 # 
 # Translators:
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2013
 # GunChleoc, 2014
 # Majed Alotaibi <ma55kk@hotmail.com>, 2016
-# Omar Anwar <omaraglan91@yahoo.com>, 2015
+# Omar Anwar <omaraglan91@yahoo.com>, 2015,2017
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-10-15 08:42+0000\n"
-"PO-Revision-Date: 2016-07-19 22:47+0000\n"
-"Last-Translator: Majed Alotaibi <ma55kk@hotmail.com>\n"
+"POT-Creation-Date: 2017-04-13 13:07+0000\n"
+"PO-Revision-Date: 2017-04-13 17:01+0000\n"
+"Last-Translator: Omar Anwar <omaraglan91@yahoo.com>\n"
 "Language-Team: Arabic (http://www.transifex.com/widelands/widelands/language/ar/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -30,7 +30,7 @@ msgstr "10 دقائق"
 
 #: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/first_island.lua:78
 msgid "15 minutes"
-msgstr "15 دقيقه"
+msgstr "15 دقيقة"
 
 #: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/multiplayer_init.lua:99
 #: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/multiplayer_init.lua:101
@@ -49,7 +49,7 @@ msgstr "القواعد"
 
 #: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:5
 msgid "Welcome to Island Hopping"
-msgstr "مرحباً بك فى حُلم الجزيره"
+msgstr "مرحباً بك فى حُلم الجزيرة"
 
 #: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:9
 msgid ""
@@ -58,21 +58,21 @@ msgid ""
 " finish a castle at the end of the first island, you are granted a second "
 "headquarters on a second island, which will contain all wares from your "
 "first headquarters."
-msgstr ""
+msgstr "حُلم الجزيرة هي بطولة تقليدية في الثقافة الأطلنطية. قواعد هذه اللعبة بسيطة: أنت تبدأ بمقر رئيسي علي جزيرة. عندما تُنهي قصر في الجزيرة الأولي, أنت تُمنح مقر رئيسى ثاني علي جزيرة ثانية,  التي ستحتوى على كل السلع من المقر الرئيسي الأول."
 
 #: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:16
 msgid ""
 "If you finish a castle in the target area on the second island, you will get"
 " a third headquarters on the third island. You must build a castle at the "
 "center of the third island and hold it for 20 minutes to win the game."
-msgstr "إذا انهيت بناء قلعه فى المركز المُحدد فى الجزيره الثانيه، تحصل على مقر رئيسى ثالث على الجزيره الثالثه. يجب عليك بناء واﻹحتفاظ بقلعه فى مركز الجزيره الثالثه لـ 20 دقيقه لتربح اللعبه"
+msgstr "إذا أنهيت بناء قلعة في المركز المُحدد فى الجزيرة الثانية، تَحصُل علي مقر رئيسى ثالث على الجزيرة الثالثة. يجب عليك بناء واﻹحتفاظ بقلعة في مركز الجزيرة الثالثة لـ 20 دقيقة لتربح اللعبة."
 
 #: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:21
 msgid ""
 "Whenever you finish an island, you will get bonus wares, depending on how "
 "many players have finished the island before you. The earlier you finish, "
 "the fewer wares you will get. See below for the details."
-msgstr "عند إنتهائك من احدى الجزر فستحصل على سلع إضافيه كهديه، قيمه وعدد هذه السلع يعتمد على عدد اللاعبين الاخرين الذين انهو هذه الجزيره قبلك. هذا يعنى انه كلما انهيت فى وقت مُتأخر كلما حصلت على سلع اقل. يمكنك رؤيه التالى لمزيد من التفاصيل."
+msgstr "عند إنتهائك من إحدى الجزر فستحصل علي سلع إضافية كهدية، قيمة وعدد هذه السلع يعتمد على عدد اللاعبين الأخرين الذين أنهو هذه الجزيرة قبلك. هذا يعني أنه كلما أنهيت في وقت مُتأخر كلما حصلت على سلع أقل. يمكنك رؤية التالي لمزيد من التفاصيل."
 
 #: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:24
 msgid ""
@@ -80,59 +80,59 @@ msgid ""
 " only meadows and resources. The economies you leave behind will continue to"
 " work for you, but you will only reap the benefits at the moment you reach a"
 " new island."
-msgstr ""
+msgstr "النقطة هى أن الجزيرة الأولي تقدم فقط الحِجارة والشجر, الثانية فقط المراعي والموارد. الإقتصادات التي تتركها خلفك سوف تكمل العمل لك, لكن أنت سوف تحصل علي المكاسب فقط عندما تصل إلى جزيرة جديدة."
 
 #: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:27
 msgid "Finally, be careful not to waste your quartz and diamonds."
-msgstr ""
+msgstr "أخيرا. كن حذراً لكى لا تٌضيِع المجوهرات و الكوارتز."
 
 #: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:29
 msgid "Finish Rewards"
-msgstr "الجوائز"
+msgstr "جوائز الإنهاء"
 
 #: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:30
 msgid "First Island"
-msgstr "الجزيره الاولى"
+msgstr "الجزيرة الاولي"
 
 #: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:31
 #: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:36
 msgid "1st to finish"
-msgstr "اول من انهى السباق"
+msgstr "1 أول من أنهي السباق"
 
 #: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:32
 #: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:37
 msgid "2nd to finish"
-msgstr "ثانى من انهى السباق"
+msgstr "2 ثانى من أنهي السباق"
 
 #: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:33
 #: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:38
 msgid "3rd to finish"
-msgstr "ثالث من انهى السباق"
+msgstr "3 ثالث من أنهى السباق"
 
 #: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:34
 #: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:39
 msgid "4th to finish"
-msgstr "رابع من انهى السباق"
+msgstr "4 رابع من أنهى السباق"
 
 #: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:35
 msgid "Second Island"
-msgstr "الجزيره الثانيه"
+msgstr "الجزيرة الثانية"
 
 #: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:44
 msgid "%1$s was the first to reach Island number %2$i."
-msgstr "%1$s هو اول من وصل الى الجزيره رقم %2$i."
+msgstr "%1$s هو أول من وصل إلى الجزيرة رقم %2$i."
 
 #: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:45
 msgid "%1$s was the second to reach Island number %2$i."
-msgstr "%1$s هو ثانى من وصل الى الجزيره رقم %2$i."
+msgstr "%1$s هو ثانى من وصل إلى الجزيرة رقم %2$i."
 
 #: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:46
 msgid "%1$s was the third to reach Island number %2$i."
-msgstr "%1$s هو ثالث من وصل الى الجزيره رقم %2$i."
+msgstr "%1$s هو ثالث من وصل إلى الجزيرة رقم %2$i."
 
 #: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:47
 msgid "%1$s was the fourth to reach Island number %2$i."
-msgstr "%1$s هو رابع من وصل الى الجزيره رقم %2$i."
+msgstr "%1$s هو رابع من وصل إلى الجزيرة رقم %2$i."
 
 #: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:49
 msgid "The reward for this feat amounts to:"
@@ -143,12 +143,12 @@ msgstr "جائزة هذا العمل الفذ تصل إلى:"
 msgid ""
 "%s is now King of the Hill and will win the game in 20 minutes, if nobody "
 "takes over the hill before then."
-msgstr "%s هو ملك التل الجديد وسيربح اللعبه خلال 20 دقيقه، ولكن فقط إذا لم يستولى احدهم على التل حتى إنتهاء الـ 20 دقيقه"
+msgstr "%s هو ملك التل الجديد وسيربح اللعبة خلال 20 دقيقة، ولكن فقط إذا لم يستولي أحدهم على التل قبل ذلك."
 
 #: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:55
 #, lua-format
 msgid "%s lost control of the hill."
-msgstr "فقد %s السيطره على التل."
+msgstr "فقد %s السيطرة على التل."
 
 #: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:57
 msgid "%1$s has been King of the Hill for %2$s!"

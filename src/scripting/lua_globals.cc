@@ -22,6 +22,7 @@
 #include <exception>
 #include <memory>
 
+#include <SDL.h>
 #include <boost/format.hpp>
 
 #include "base/i18n.h"
@@ -249,6 +250,16 @@ static int L_include(lua_State* L) {
 }
 
 /* RST
+.. function:: ticks()
+
+	Returns an integer value representing the number of milliseconds since the SDL library initialized.
+*/
+static int L_ticks(lua_State* L) {
+	lua_pushinteger(L, SDL_GetTicks());
+	return 1;
+}
+
+/* RST
 .. function:: get_build_id()
 
    returns the version string of this widelands executable.  Something like
@@ -265,6 +276,7 @@ const static struct luaL_Reg globals[] = {{"_", &L__},
                                           {"ngettext", &L_ngettext},
                                           {"pgettext", &L_pgettext},
                                           {"set_textdomain", &L_set_textdomain},
+                                          {"ticks", &L_ticks},
                                           {nullptr, nullptr}};
 
 void luaopen_globals(lua_State* L) {

@@ -32,8 +32,9 @@
 namespace UI {
 
 /**
- * Shows a standard messagebox. The message box can be used either as a modal
- * or as a non-modal dialog box.
+ * Shows a standard messagebox.
+ *
+ * The message box can be used either as a modal or as a non-modal dialog box.
  *
  * Using it as a modal dialog box is very straightforward:
  *     WLMessageBox mb(parent, "Title", "Text", MBoxType::kOK);

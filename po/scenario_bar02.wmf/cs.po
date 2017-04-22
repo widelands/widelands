@@ -4,14 +4,14 @@
 # Translators:
 # GunChleoc, 2014
 # Markus7cz <markus7cz@gmail.com>, 2008
-# Milan Fašina <matrix17@seznam.cz>, 2016
+# Milan Fašina <matrix17@seznam.cz>, 2016-2017
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-01-21 14:22+0000\n"
-"PO-Revision-Date: 2017-01-21 14:23+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2017-04-13 13:07+0000\n"
+"PO-Revision-Date: 2017-04-02 08:22+0000\n"
+"Last-Translator: Milan Fašina <matrix17@seznam.cz>\n"
 "Language-Team: Czech (http://www.transifex.com/widelands/widelands/language/cs/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -146,7 +146,7 @@ msgstr "Postav výcvikovou infrastrukturu"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:96
 msgid "Build a barracks to train some basic soldiers."
-msgstr ""
+msgstr "Postav kasárna a vytrénuj pár vojáků."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:97
 msgid "Build a battle arena and a training camp to the west of the mountains."
@@ -195,7 +195,7 @@ msgstr "Postav cvičiště"
 msgid ""
 "Build a barracks, a battle arena and a training camp to the west of the "
 "mountains."
-msgstr ""
+msgstr "Postav kasárna, bitevní arénu a výcvikový tábor na západ od hor."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:118
 msgid ""
@@ -203,7 +203,7 @@ msgid ""
 " battle arena are used for training soldiers in their different attributes. "
 "These attributes are important in fights and the better a soldier is, the "
 "higher is the chance to win a fight."
-msgstr ""
+msgstr "V kasárnách se trénují základní vojáci, zatímco cvičiště jako je výcvikový tábor nebo bitevní aréna jsou určena pro výcvik vojáků v různých dovednostech. Tyto dovednosti jsou důležité v boji, protože čím lépe je voják vycvičený, tím vyšší je jeho šance na vítězství v boji."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:120
 msgid "The attributes are: health, attack, defense and evade."
@@ -650,7 +650,7 @@ msgstr "Náčelníku, měj na paměti chudáky nosiče: Naše cesty se stávají
 msgid "“%s”"
 msgstr "“%s”"
 
-#: ../../data/scripting/format_scenario.lua:96
+#: ../../data/scripting/format_scenario.lua:84
 msgid "New Objective"
 msgid_plural "New Objectives"
 msgstr[0] "Nový úkol"
