@@ -219,7 +219,7 @@ public:
 	// Draw the info icon containing health bar and levels. If 'anchor_below' is
 	// true, the icon is drawn horizontally centered above Otherwise, the icon
 	// is drawn below and right of 'draw_position'.
-	void draw_info_icon(Vector2f draw_position,
+	void draw_info_icon(Vector2i draw_position,
 	                    const float scale,
 	                    const bool anchor_below,
 	                    RenderTarget*) const;

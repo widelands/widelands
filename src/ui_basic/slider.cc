@@ -161,12 +161,12 @@ void Slider::draw_cursor(
 		   (Recti(x + w - 2, y, 2, h - 2), BUTTON_EDGE_BRIGHT_FACTOR);
 
 		//  top edge
-		dst.fill_rect(Rectf(x, y, w - 1, 1), black);
-		dst.fill_rect(Rectf(x, y + 1, w - 2, 1), black);
+		dst.fill_rect(Recti(x, y, w - 1, 1), black);
+		dst.fill_rect(Recti(x, y + 1, w - 2, 1), black);
 
 		//  left edge
-		dst.fill_rect(Rectf(x, y, 1, h - 1), black);
-		dst.fill_rect(Rectf(x + 1, y, 1, h - 2), black);
+		dst.fill_rect(Recti(x, y, 1, h - 1), black);
+		dst.fill_rect(Recti(x + 1, y, 1, h - 2), black);
 	} else {
 		dst.brighten_rect  //  top edge
 		   (Recti(x, y, w, 2), BUTTON_EDGE_BRIGHT_FACTOR);
@@ -174,12 +174,12 @@ void Slider::draw_cursor(
 		   (Recti(x, y + 2, 2, h - 2), BUTTON_EDGE_BRIGHT_FACTOR);
 
 		//  bottom edge
-		dst.fill_rect(Rectf(x + 2, y + h - 2, w - 2, 1), black);
-		dst.fill_rect(Rectf(x + 1, y + h - 1, w - 1, 1), black);
+		dst.fill_rect(Recti(x + 2, y + h - 2, w - 2, 1), black);
+		dst.fill_rect(Recti(x + 1, y + h - 1, w - 1, 1), black);
 
 		//  right edge
-		dst.fill_rect(Rectf(x + w - 2, y + 2, 1, h - 2), black);
-		dst.fill_rect(Rectf(x + w - 1, y + 1, 1, h - 1), black);
+		dst.fill_rect(Recti(x + w - 2, y + 2, 1, h - 2), black);
+		dst.fill_rect(Recti(x + w - 1, y + 1, 1, h - 1), black);
 	}
 }
 
@@ -367,13 +367,13 @@ void HorizontalSlider::draw(RenderTarget& dst) {
 		   (Recti(get_x_gap() + get_bar_size() - 2, get_y_gap(), 2, 2), BUTTON_EDGE_BRIGHT_FACTOR);
 
 		//  top edge
-		dst.fill_rect(Rectf(get_x_gap(), get_y_gap(), get_bar_size() - 1, 1), black);
-		dst.fill_rect(Rectf(get_x_gap(), get_y_gap() + 1, get_bar_size() - 2, 1), black);
+		dst.fill_rect(Recti(get_x_gap(), get_y_gap(), get_bar_size() - 1, 1), black);
+		dst.fill_rect(Recti(get_x_gap(), get_y_gap() + 1, get_bar_size() - 2, 1), black);
 	}
 
 	//  left edge
-	dst.fill_rect(Rectf(get_x_gap(), get_y_gap(), 1, 4), black);
-	dst.fill_rect(Rectf(get_x_gap() + 1, get_y_gap(), 1, 3), black);
+	dst.fill_rect(Recti(get_x_gap(), get_y_gap(), 1, 4), black);
+	dst.fill_rect(Recti(get_x_gap() + 1, get_y_gap(), 1, 3), black);
 
 	draw_cursor(dst, cursor_pos_, 0, cursor_size_, get_h());
 }
@@ -440,12 +440,12 @@ void VerticalSlider::draw(RenderTarget& dst) {
 	   (Recti(get_x_gap(), get_y_gap() + get_bar_size() - 2, 2, 2), BUTTON_EDGE_BRIGHT_FACTOR);
 
 	//  left edge
-	dst.fill_rect(Rectf(get_x_gap(), get_y_gap(), 1, get_bar_size() - 1), black);
-	dst.fill_rect(Rectf(get_x_gap() + 1, get_y_gap(), 1, get_bar_size() - 2), black);
+	dst.fill_rect(Recti(get_x_gap(), get_y_gap(), 1, get_bar_size() - 1), black);
+	dst.fill_rect(Recti(get_x_gap() + 1, get_y_gap(), 1, get_bar_size() - 2), black);
 
 	//  top edge
-	dst.fill_rect(Rectf(get_x_gap(), get_y_gap(), 4, 1), black);
-	dst.fill_rect(Rectf(get_x_gap(), get_y_gap() + 1, 3, 1), black);
+	dst.fill_rect(Recti(get_x_gap(), get_y_gap(), 4, 1), black);
+	dst.fill_rect(Recti(get_x_gap(), get_y_gap() + 1, 3, 1), black);
 
 	draw_cursor(dst, 0, cursor_pos_, get_w(), cursor_size_);
 }

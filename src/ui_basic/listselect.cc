@@ -366,11 +366,11 @@ void BaseListselect::draw(RenderTarget& dst) {
 		//  left edge
 		dst.brighten_rect(Recti(0, 0, 2, get_h()), BUTTON_EDGE_BRIGHT_FACTOR);
 		//  bottom edge
-		dst.fill_rect(Rectf(2.f, get_h() - 2.f, get_eff_w() - 2.f, 1.f), black);
-		dst.fill_rect(Rectf(1.f, get_h() - 1.f, get_eff_w() - 1.f, 1.f), black);
+		dst.fill_rect(Recti(2, get_h() - 2, get_eff_w() - 2, 1), black);
+		dst.fill_rect(Recti(1, get_h() - 1, get_eff_w() - 1, 1), black);
 		//  right edge
-		dst.fill_rect(Rectf(get_w() - 2.f, 1.f, 1.f, get_h() - 1.f), black);
-		dst.fill_rect(Rectf(get_w() - 1.f, 0.f, 1.f, get_h()), black);
+		dst.fill_rect(Recti(get_w() - 2, 1, 1, get_h() - 1), black);
+		dst.fill_rect(Recti(get_w() - 1, 0, 1, get_h()), black);
 	} else {
 		dst.brighten_rect(Recti(0, 0, get_eff_w(), get_h()), ms_darken_value);
 	}

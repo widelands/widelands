@@ -118,15 +118,15 @@ void RenderTarget::draw_line_strip(const std::vector<Vector2f>& points,
 /**
  * Clip against window and pass those primitives along to the bitmap.
  */
-void RenderTarget::draw_rect(const Rectf& rect, const RGBColor& clr) {
-	Rectf r(rect);
+void RenderTarget::draw_rect(const Recti& rect, const RGBColor& clr) {
+	Rectf r(rect.cast<float>());
 	if (clip(r)) {
 		::draw_rect(r, clr, surface_);
 	}
 }
 
-void RenderTarget::fill_rect(const Rectf& rect, const RGBAColor& clr, BlendMode blend_mode) {
-	Rectf r(rect);
+void RenderTarget::fill_rect(const Recti& rect, const RGBAColor& clr, BlendMode blend_mode) {
+	Rectf r(rect.cast<float>());
 	if (clip(r))
 		surface_->fill_rect(r, clr, blend_mode);
 }

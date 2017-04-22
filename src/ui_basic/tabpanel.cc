@@ -308,8 +308,8 @@ void TabPanel::draw(RenderTarget& dst) {
 		// Draw top part of border
 		dst.brighten_rect(Recti(x, 0, tab_width, 2), BUTTON_EDGE_BRIGHT_FACTOR);
 		dst.brighten_rect(Recti(x, 2, 2, kTabPanelButtonHeight - 4), BUTTON_EDGE_BRIGHT_FACTOR);
-		dst.fill_rect(Rectf(x + tab_width - 2, 2, 1, kTabPanelButtonHeight - 4), black);
-		dst.fill_rect(Rectf(x + tab_width - 1, 1, 1, kTabPanelButtonHeight - 3), black);
+		dst.fill_rect(Recti(x + tab_width - 2, 2, 1, kTabPanelButtonHeight - 4), black);
+		dst.fill_rect(Recti(x + tab_width - 1, 1, 1, kTabPanelButtonHeight - 3), black);
 
 		// Draw bottom part
 		if (active_ != idx)
@@ -320,8 +320,8 @@ void TabPanel::draw(RenderTarget& dst) {
 
 			dst.brighten_rect(Recti(x + tab_width - 2, kTabPanelButtonHeight - 2, 2, 2),
 			                  2 * BUTTON_EDGE_BRIGHT_FACTOR);
-			dst.fill_rect(Rectf(x + tab_width - 2, kTabPanelButtonHeight - 1, 1, 1), black);
-			dst.fill_rect(Rectf(x + tab_width - 2, kTabPanelButtonHeight - 2, 2, 1), black);
+			dst.fill_rect(Recti(x + tab_width - 2, kTabPanelButtonHeight - 1, 1, 1), black);
+			dst.fill_rect(Recti(x + tab_width - 2, kTabPanelButtonHeight - 2, 2, 1), black);
 		}
 	}
 
@@ -335,11 +335,11 @@ void TabPanel::draw(RenderTarget& dst) {
 		//  left edge
 		dst.brighten_rect(Recti(0, kTabPanelButtonHeight, 2, get_h() - 2), BUTTON_EDGE_BRIGHT_FACTOR);
 		//  bottom edge
-		dst.fill_rect(Rectf(2, get_h() - 2, get_w() - 2, 1), black);
-		dst.fill_rect(Rectf(1, get_h() - 1, get_w() - 1, 1), black);
+		dst.fill_rect(Recti(2, get_h() - 2, get_w() - 2, 1), black);
+		dst.fill_rect(Recti(1, get_h() - 1, get_w() - 1, 1), black);
 		//  right edge
-		dst.fill_rect(Rectf(get_w() - 2, kTabPanelButtonHeight - 1, 1, get_h() - 2), black);
-		dst.fill_rect(Rectf(get_w() - 1, kTabPanelButtonHeight - 2, 1, get_h() - 1), black);
+		dst.fill_rect(Recti(get_w() - 2, kTabPanelButtonHeight - 1, 1, get_h() - 2), black);
+		dst.fill_rect(Recti(get_w() - 1, kTabPanelButtonHeight - 2, 1, get_h() - 1), black);
 	}
 }
 

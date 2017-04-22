@@ -70,7 +70,7 @@ void ProgressWindow::draw(RenderTarget& rt) {
 	label_rectangle_.y = label_center_.y - h / 2 - PROGRESS_STATUS_RECT_PADDING;
 	label_rectangle_.h = h + 2 * PROGRESS_STATUS_RECT_PADDING;
 
-	Rectf border_rect = label_rectangle_;
+	Recti border_rect = label_rectangle_;
 	border_rect.x -= PROGRESS_STATUS_BORDER_X;
 	border_rect.y -= PROGRESS_STATUS_BORDER_Y;
 	border_rect.w += 2 * PROGRESS_STATUS_BORDER_X;

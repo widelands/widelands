@@ -437,11 +437,11 @@ void MultilineEditbox::draw(RenderTarget& dst) {
 		// right edge
 		dst.brighten_rect(Recti(get_w() - 2, 0, 2, get_h() - 2), BUTTON_EDGE_BRIGHT_FACTOR);
 		// top edge
-		dst.fill_rect(Rectf(0, 0, get_w() - 1, 1), black);
-		dst.fill_rect(Rectf(0, 1, get_w() - 2, 1), black);
+		dst.fill_rect(Recti(0, 0, get_w() - 1, 1), black);
+		dst.fill_rect(Recti(0, 1, get_w() - 2, 1), black);
 		// left edge
-		dst.fill_rect(Rectf(0, 0, 1, get_h() - 1), black);
-		dst.fill_rect(Rectf(1, 0, 1, get_h() - 2), black);
+		dst.fill_rect(Recti(0, 0, 1, get_h() - 1), black);
+		dst.fill_rect(Recti(1, 0, 1, get_h() - 2), black);
 	}
 
 	if (has_focus())

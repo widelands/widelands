@@ -498,7 +498,7 @@ void RichText::draw(RenderTarget& dst, const Vector2i& offset, bool background) 
 
 		if (dst.enter_window(bbox, &oldbox, &oldofs)) {
 			if (background)
-				dst.fill_rect(Rectf(0.f, 0.f, bbox.w, bbox.h), m->background_color);
+				dst.fill_rect(Recti(0, 0, bbox.w, bbox.h), m->background_color);
 			(*elt)->draw(dst);
 			dst.set_window(oldbox, oldofs);
 		}

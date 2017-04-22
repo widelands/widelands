@@ -75,13 +75,13 @@ void ProgressBar::draw(RenderTarget& dst) {
 		const float w = get_w() * fraction;
 		assert(w <= get_w());
 
-		dst.fill_rect(Rectf(0.f, 0.f, w, get_h()), color);
-		dst.fill_rect(Rectf(w, 0.f, get_w() - w, get_h()), RGBColor(0, 0, 0));
+		dst.fill_rect(Recti(0, 0, w, get_h()), color);
+		dst.fill_rect(Recti(w, 0, get_w() - w, get_h()), RGBColor(0, 0, 0));
 	} else {
 		const uint32_t h = static_cast<uint32_t>(get_h() * (1.0f - fraction));
 
-		dst.fill_rect(Rectf(0.f, 0.f, get_w(), h), RGBColor(0, 0, 0));
-		dst.fill_rect(Rectf(0.f, h, get_w(), get_h() - h), color);
+		dst.fill_rect(Recti(0, 0, get_w(), h), RGBColor(0, 0, 0));
+		dst.fill_rect(Recti(0, h, get_w(), get_h() - h), color);
 	}
 
 	// Print the state in percent without decimal points.

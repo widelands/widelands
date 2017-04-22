@@ -264,11 +264,11 @@ void Scrollbar::draw_button(RenderTarget& dst, Area area, const Recti& r) {
 		// left edge
 		dst.brighten_rect(Recti(r.origin() + Vector2i(0, 2), 2, r.h - 2), BUTTON_EDGE_BRIGHT_FACTOR);
 		// bottom edge
-		dst.fill_rect(Rectf(r.origin() + Vector2i(2, r.h - 2), r.w - 2, 1), black);
-		dst.fill_rect(Rectf(r.origin() + Vector2i(1, r.h - 1), r.w - 1, 1), black);
+		dst.fill_rect(Recti(r.origin() + Vector2i(2, r.h - 2), r.w - 2, 1), black);
+		dst.fill_rect(Recti(r.origin() + Vector2i(1, r.h - 1), r.w - 1, 1), black);
 		// right edge
-		dst.fill_rect(Rectf(r.origin() + Vector2i(r.w - 2, 2), 1, r.h - 2), black);
-		dst.fill_rect(Rectf(r.origin() + Vector2i(r.w - 1, 1), 1, r.h - 1), black);
+		dst.fill_rect(Recti(r.origin() + Vector2i(r.w - 2, 2), 1, r.h - 2), black);
+		dst.fill_rect(Recti(r.origin() + Vector2i(r.w - 1, 1), 1, r.h - 1), black);
 	} else {
 		// bottom edge
 		dst.brighten_rect(
@@ -277,11 +277,11 @@ void Scrollbar::draw_button(RenderTarget& dst, Area area, const Recti& r) {
 		dst.brighten_rect(
 		   Recti(r.origin() + Vector2i(r.w - 2, 0), 2, r.h - 2), BUTTON_EDGE_BRIGHT_FACTOR);
 		// top edge
-		dst.fill_rect(Rectf(r.origin(), r.w - 1, 1), black);
-		dst.fill_rect(Rectf(r.origin() + Vector2i(0, 1), r.w - 2, 1), black);
+		dst.fill_rect(Recti(r.origin(), r.w - 1, 1), black);
+		dst.fill_rect(Recti(r.origin() + Vector2i(0, 1), r.w - 2, 1), black);
 		// left edge
-		dst.fill_rect(Rectf(r.origin(), 1, r.h - 1), black);
-		dst.fill_rect(Rectf(r.origin() + Vector2i(1, 0), 1, r.h - 2), black);
+		dst.fill_rect(Recti(r.origin(), 1, r.h - 1), black);
+		dst.fill_rect(Recti(r.origin() + Vector2i(1, 0), 1, r.h - 2), black);
 	}
 }
 
