@@ -59,6 +59,30 @@ function player_vision_tests:test_sees_field_see_all_hide()
    assert_equal(true, player1:sees_field(self.f))
 end
 
+-- This test must go last, because we change the state of player1:seen_field.
+function player_vision_tests:test_hide_completely()
+   player1.see_all = true
+   assert_equal(true, player1:sees_field(self.f))
+   player1.see_all = false
+   assert_equal(false, player1:sees_field(self.f))
+
+   player1:hide_fields(self.f:region(1), false)
+   game.desired_speed = 0;
+   assert_equal(false, player1:sees_field(self.f))
+   assert_equal(true, player1:seen_field(self.f))
+
+   player1.see_all = true
+   assert_equal(true, player1:sees_field(self.f))
+   player1.see_all = false
+   assert_equal(false, player1:sees_field(self.f))
+
+   player1:hide_fields(self.f:region(1), true)
+   game.desired_speed = 0;
+   assert_equal(false, player1:sees_field(self.f))
+   assert_equal(false, player1:seen_field(self.f))
+   player1:reveal_fields(self.f:region(1))
+end
+
 
 -- =========================
 -- Forbid & Allow buildings
