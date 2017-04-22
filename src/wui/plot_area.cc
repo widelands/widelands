@@ -180,8 +180,9 @@ void draw_value(const string& value,
                 RenderTarget& dst) {
 	const Image* pic = UI::g_fh1->render(ytick_text_style(value, color));
 	Vector2i point(pos);  // Un-const this
+	UI::correct_for_align(UI::Align::kRight, pic->width(), &point);
 	UI::center_vertically(pic->height(), &point);
-	dst.blit(point, pic, BlendMode::UseAlpha, UI::Align::kRight);
+	dst.blit(point, pic, BlendMode::UseAlpha);
 }
 
 /**
@@ -255,8 +256,9 @@ void draw_diagram(uint32_t time_ms,
 		const Image* xtick = UI::g_fh1->render(
 		   xtick_text_style((boost::format("-%u ") % (max_x / how_many_ticks * i)).str()));
 		Vector2i pos(posx, inner_h - kSpaceBottom + 10);
+		UI::correct_for_align(UI::Align::kCenter, xtick->width(), &pos);
 		UI::center_vertically(xtick->height(), &pos);
-		dst.blit(pos, xtick, BlendMode::UseAlpha, UI::Align::kCenter);
+		dst.blit(pos, xtick, BlendMode::UseAlpha);
 
 		posx -= sub;
 	}
@@ -274,7 +276,7 @@ void draw_diagram(uint32_t time_ms,
 	const Image* xtick = UI::g_fh1->render(xtick_text_style(get_generic_unit_name(unit)));
 	Vector2i pos(2, kSpacing + 2);
 	UI::center_vertically(xtick->height(), &pos);
-	dst.blit(pos, xtick, BlendMode::UseAlpha, UI::Align::kLeft);
+	dst.blit(pos, xtick, BlendMode::UseAlpha);
 }
 
 }  // namespace

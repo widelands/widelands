@@ -302,7 +302,7 @@ void TabPanel::draw(RenderTarget& dst) {
 		} else {
 			dst.blit(Vector2i(x + kTabPanelTextMargin,
 			                  (kTabPanelButtonHeight - tabs_[idx]->pic->height()) / 2),
-			         tabs_[idx]->pic, BlendMode::UseAlpha, UI::Align::kLeft);
+			         tabs_[idx]->pic, BlendMode::UseAlpha);
 		}
 
 		// Draw top part of border

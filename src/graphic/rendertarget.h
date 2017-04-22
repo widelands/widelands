@@ -64,14 +64,12 @@ public:
 
 	void blit(const Vector2i& dst,
 	          const Image* image,
-	          BlendMode blend_mode = BlendMode::UseAlpha,
-	          UI::Align = UI::Align::kLeft);
+	          BlendMode blend_mode = BlendMode::UseAlpha);
 
 	// Like blit. See MonochromeBlitProgram for details.
 	void blit_monochrome(const Vector2i& dst,
 	                     const Image* image,
-	                     const RGBAColor& blend_mode,
-	                     UI::Align = UI::Align::kLeft);
+	                     const RGBAColor& blend_mode);
 
 	void blitrect(const Vector2i& dst,
 	              const Image* image,
