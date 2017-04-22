@@ -131,8 +131,8 @@ void RenderTarget::fill_rect(const Rectf& rect, const RGBAColor& clr, BlendMode 
 		surface_->fill_rect(r, clr, blend_mode);
 }
 
-void RenderTarget::brighten_rect(const Rectf& rect, int32_t factor) {
-	Rectf r(rect);
+void RenderTarget::brighten_rect(const Recti& rect, int32_t factor) {
+	Rectf r(rect.cast<float>());
 	if (clip(r))
 		surface_->brighten_rect(r, factor);
 }

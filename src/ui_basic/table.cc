@@ -220,7 +220,7 @@ void Table<void*>::draw(RenderTarget& dst) {
 	uint32_t idx = scrollpos_ / lineheight;
 	int32_t y = 1 + idx * lineheight - scrollpos_ + headerheight_;
 
-	dst.brighten_rect(Rectf(0.f, 0.f, get_eff_w(), get_h()), ms_darken_value);
+	dst.brighten_rect(Recti(0, 0, get_eff_w(), get_h()), ms_darken_value);
 
 	while (idx < entry_records_.size()) {
 		if (y >= static_cast<int32_t>(get_h()))
@@ -230,7 +230,7 @@ void Table<void*>::draw(RenderTarget& dst) {
 
 		if (idx == selection_ || multiselect_.count(idx)) {
 			assert(2 <= get_eff_w());
-			dst.brighten_rect(Rectf(1.f, y, get_eff_w() - 2, lineheight_), -ms_darken_value);
+			dst.brighten_rect(Recti(1, y, get_eff_w() - 2, lineheight_), -ms_darken_value);
 		}
 
 		Columns::size_type const nr_columns = columns_.size();

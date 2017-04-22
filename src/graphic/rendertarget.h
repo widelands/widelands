@@ -60,7 +60,7 @@ public:
 	void draw_line_strip(const std::vector<Vector2f>& points, const RGBColor& color, float width);
 	void draw_rect(const Rectf&, const RGBColor&);
 	void fill_rect(const Rectf&, const RGBAColor&, BlendMode blend_mode = BlendMode::Copy);
-	void brighten_rect(const Rectf&, int32_t factor);
+	void brighten_rect(const Recti&, int32_t factor);
 
 	void blit(const Vector2i& dst,
 	          const Image* image,

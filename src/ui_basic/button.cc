@@ -167,7 +167,7 @@ void Button::draw(RenderTarget& dst) {
 	}
 
 	if (is_flat && highlighted_)
-		dst.brighten_rect(Rectf(0.f, 0.f, get_w(), get_h()), MOUSE_OVER_BRIGHT_FACTOR);
+		dst.brighten_rect(Recti(0, 0, get_w(), get_h()), MOUSE_OVER_BRIGHT_FACTOR);
 
 	//  If we've got a picture, draw it centered
 	if (pic_custom_) {
@@ -229,9 +229,9 @@ void Button::draw(RenderTarget& dst) {
 		//  Button is a normal one, not flat. We invert the behaviour for kPermpressed.
 		if (is_permpressed == (pressed_ && highlighted_)) {
 			//  top edge
-			dst.brighten_rect(Rectf(0.f, 0.f, get_w(), 2.f), BUTTON_EDGE_BRIGHT_FACTOR);
+			dst.brighten_rect(Recti(0, 0, get_w(), 2), BUTTON_EDGE_BRIGHT_FACTOR);
 			//  left edge
-			dst.brighten_rect(Rectf(0, 2, 2, get_h() - 2), BUTTON_EDGE_BRIGHT_FACTOR);
+			dst.brighten_rect(Recti(0, 2, 2, get_h() - 2), BUTTON_EDGE_BRIGHT_FACTOR);
 			//  bottom edge
 			dst.fill_rect(Rectf(2, get_h() - 2, get_w() - 2, 1), black);
 			dst.fill_rect(Rectf(1, get_h() - 1, get_w() - 1, 1), black);
@@ -240,9 +240,9 @@ void Button::draw(RenderTarget& dst) {
 			dst.fill_rect(Rectf(get_w() - 1, 1, 1, get_h() - 1), black);
 		} else {
 			//  bottom edge
-			dst.brighten_rect(Rectf(0, get_h() - 2, get_w(), 2), BUTTON_EDGE_BRIGHT_FACTOR);
+			dst.brighten_rect(Recti(0, get_h() - 2, get_w(), 2), BUTTON_EDGE_BRIGHT_FACTOR);
 			//  right edge
-			dst.brighten_rect(Rectf(get_w() - 2, 0, 2, get_h() - 2), BUTTON_EDGE_BRIGHT_FACTOR);
+			dst.brighten_rect(Recti(get_w() - 2, 0, 2, get_h() - 2), BUTTON_EDGE_BRIGHT_FACTOR);
 			//  top edge
 			dst.fill_rect(Rectf(0, 0, get_w() - 1, 1), black);
 			dst.fill_rect(Rectf(0, 1, get_w() - 2, 1), black);

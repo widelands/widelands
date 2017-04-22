@@ -363,9 +363,9 @@ void EditBox::draw(RenderTarget& dst) {
 		static const RGBColor black(0, 0, 0);
 
 		// bottom edge
-		dst.brighten_rect(Rectf(0, get_h() - 2, get_w(), 2), BUTTON_EDGE_BRIGHT_FACTOR);
+		dst.brighten_rect(Recti(0, get_h() - 2, get_w(), 2), BUTTON_EDGE_BRIGHT_FACTOR);
 		// right edge
-		dst.brighten_rect(Rectf(get_w() - 2, 0, 2, get_h() - 2), BUTTON_EDGE_BRIGHT_FACTOR);
+		dst.brighten_rect(Recti(get_w() - 2, 0, 2, get_h() - 2), BUTTON_EDGE_BRIGHT_FACTOR);
 		// top edge
 		dst.fill_rect(Rectf(0.f, 0.f, get_w() - 1, 1), black);
 		dst.fill_rect(Rectf(0.f, 1.f, get_w() - 2, 1), black);
@@ -375,7 +375,7 @@ void EditBox::draw(RenderTarget& dst) {
 	}
 
 	if (has_focus()) {
-		dst.brighten_rect(Rectf(0.f, 0.f, get_w(), get_h()), MOUSE_OVER_BRIGHT_FACTOR);
+		dst.brighten_rect(Recti(0, 0, get_w(), get_h()), MOUSE_OVER_BRIGHT_FACTOR);
 	}
 
 	const int max_width = get_w() - 2 * kMarginX;

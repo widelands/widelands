@@ -279,7 +279,7 @@ void TabPanel::draw(RenderTarget& dst) {
 		tab_width = tabs_[idx]->get_w();
 
 		if (highlight_ == idx) {
-			dst.brighten_rect(Rectf(x, 0, tab_width, kTabPanelButtonHeight), MOUSE_OVER_BRIGHT_FACTOR);
+			dst.brighten_rect(Recti(x, 0, tab_width, kTabPanelButtonHeight), MOUSE_OVER_BRIGHT_FACTOR);
 		}
 
 		assert(tabs_[idx]->pic);
@@ -306,19 +306,19 @@ void TabPanel::draw(RenderTarget& dst) {
 		}
 
 		// Draw top part of border
-		dst.brighten_rect(Rectf(x, 0, tab_width, 2), BUTTON_EDGE_BRIGHT_FACTOR);
-		dst.brighten_rect(Rectf(x, 2, 2, kTabPanelButtonHeight - 4), BUTTON_EDGE_BRIGHT_FACTOR);
+		dst.brighten_rect(Recti(x, 0, tab_width, 2), BUTTON_EDGE_BRIGHT_FACTOR);
+		dst.brighten_rect(Recti(x, 2, 2, kTabPanelButtonHeight - 4), BUTTON_EDGE_BRIGHT_FACTOR);
 		dst.fill_rect(Rectf(x + tab_width - 2, 2, 1, kTabPanelButtonHeight - 4), black);
 		dst.fill_rect(Rectf(x + tab_width - 1, 1, 1, kTabPanelButtonHeight - 3), black);
 
 		// Draw bottom part
 		if (active_ != idx)
 			dst.brighten_rect(
-			   Rectf(x, kTabPanelButtonHeight - 2, tab_width, 2), 2 * BUTTON_EDGE_BRIGHT_FACTOR);
+			   Recti(x, kTabPanelButtonHeight - 2, tab_width, 2), 2 * BUTTON_EDGE_BRIGHT_FACTOR);
 		else {
-			dst.brighten_rect(Rectf(x, kTabPanelButtonHeight - 2, 2, 2), BUTTON_EDGE_BRIGHT_FACTOR);
+			dst.brighten_rect(Recti(x, kTabPanelButtonHeight - 2, 2, 2), BUTTON_EDGE_BRIGHT_FACTOR);
 
-			dst.brighten_rect(Rectf(x + tab_width - 2, kTabPanelButtonHeight - 2, 2, 2),
+			dst.brighten_rect(Recti(x + tab_width - 2, kTabPanelButtonHeight - 2, 2, 2),
 			                  2 * BUTTON_EDGE_BRIGHT_FACTOR);
 			dst.fill_rect(Rectf(x + tab_width - 2, kTabPanelButtonHeight - 1, 1, 1), black);
 			dst.fill_rect(Rectf(x + tab_width - 2, kTabPanelButtonHeight - 2, 2, 1), black);
@@ -327,13 +327,13 @@ void TabPanel::draw(RenderTarget& dst) {
 
 	// draw the remaining separator
 	assert(x <= get_w());
-	dst.brighten_rect(Rectf(x + tab_width, kTabPanelButtonHeight - 2, get_w() - x, 2),
+	dst.brighten_rect(Recti(x + tab_width, kTabPanelButtonHeight - 2, get_w() - x, 2),
 	                  2 * BUTTON_EDGE_BRIGHT_FACTOR);
 
 	// Draw border around the main panel
 	if (border_type_ == TabPanel::Type::kBorder) {
 		//  left edge
-		dst.brighten_rect(Rectf(0, kTabPanelButtonHeight, 2, get_h() - 2), BUTTON_EDGE_BRIGHT_FACTOR);
+		dst.brighten_rect(Recti(0, kTabPanelButtonHeight, 2, get_h() - 2), BUTTON_EDGE_BRIGHT_FACTOR);
 		//  bottom edge
 		dst.fill_rect(Rectf(2, get_h() - 2, get_w() - 2, 1), black);
 		dst.fill_rect(Rectf(1, get_h() - 1, get_w() - 1, 1), black);
