@@ -15,8 +15,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-02-19 19:34+0000\n"
-"PO-Revision-Date: 2017-02-22 13:24+0000\n"
+"POT-Creation-Date: 2017-04-06 19:07+0000\n"
+"PO-Revision-Date: 2017-04-09 16:35+0000\n"
 "Last-Translator: Олег Шевченко <olegrock@gmail.com>\n"
 "Language-Team: Russian (http://www.transifex.com/widelands/widelands/language/ru/)\n"
 "MIME-Version: 1.0\n"
@@ -213,8 +213,8 @@ msgstr "Ноя"
 msgid "Dec"
 msgstr "Дек"
 
-#: ../../src/editor/editorinteractive.cc:63 ../../src/logic/game.cc:213
-#: ../../src/logic/game.cc:263
+#: ../../src/editor/editorinteractive.cc:63 ../../src/logic/game.cc:212
+#: ../../src/logic/game.cc:262
 msgid "Loading tribes"
 msgstr "Загружаем племена"
 
@@ -268,7 +268,7 @@ msgid "Redo"
 msgstr "Повторить"
 
 #: ../../src/editor/editorinteractive.cc:142
-#: ../../src/wui/buildingwindow.cc:305
+#: ../../src/wui/buildingwindow.cc:324
 msgid "Help"
 msgstr "Помощь"
 
@@ -283,8 +283,8 @@ msgid ""
 "incompatible."
 msgstr "Не удается загрузить файл «%s». Возможно формат файла несовместим."
 
-#: ../../src/editor/editorinteractive.cc:214 ../../src/logic/game.cc:217
-#: ../../src/logic/game.cc:270
+#: ../../src/editor/editorinteractive.cc:214 ../../src/logic/game.cc:216
+#: ../../src/logic/game.cc:269
 msgid "Creating players"
 msgstr "Создание игроков"
 
@@ -305,7 +305,7 @@ msgstr "Создание пустой карты..."
 #: ../../src/editor/editorinteractive.cc:589
 #: ../../src/editor/ui_menus/main_menu_new_map.cc:151
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:535
-#: ../../src/editor/ui_menus/main_menu_save_map.cc:138
+#: ../../src/editor/ui_menus/main_menu_save_map.cc:133
 #: ../../src/logic/map.h:179 ../../src/wui/mapdata.cc:46
 msgid "No Name"
 msgstr "Без имени"
@@ -536,7 +536,7 @@ msgstr "Выход из редактора"
 
 #. * TRANSLATORS: Directory name for user maps in map selection
 #: ../../src/editor/ui_menus/main_menu_load_map.cc:69
-#: ../../src/editor/ui_menus/main_menu_save_map.cc:228
+#: ../../src/editor/ui_menus/main_menu_save_map.cc:223
 #: ../../src/wui/mapdata.cc:164
 msgid "My Maps"
 msgstr "Мои карты"
@@ -549,82 +549,82 @@ msgstr "Многопользовательские сценарии"
 
 #. * TRANSLATORS: The folder that a file will be saved to.
 #: ../../src/editor/ui_menus/main_menu_load_map.cc:74
-#: ../../src/editor/ui_menus/main_menu_save_map.cc:228
+#: ../../src/editor/ui_menus/main_menu_save_map.cc:223
 #, c-format
 msgid "Current Directory: %s"
 msgstr "Выбран каталог: %s"
 
-#: ../../src/editor/ui_menus/main_menu_load_or_save_map.cc:69
+#: ../../src/editor/ui_menus/main_menu_load_or_save_map.cc:68
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:62
-#: ../../src/editor/ui_menus/main_menu_save_map_make_directory.cc:62
+#: ../../src/editor/ui_menus/main_menu_save_map_make_directory.cc:56
 #: ../../src/scripting/lua_game.cc:432 ../../src/ui_basic/messagebox.cc:87
-#: ../../src/ui_fsmenu/helpwindow.cc:52
+#: ../../src/ui_fsmenu/helpwindow.cc:51
 #: ../../src/ui_fsmenu/load_map_or_game.cc:45
 #: ../../src/ui_fsmenu/options.cc:118
-#: ../../src/wui/game_main_menu_save_game.cc:88
+#: ../../src/wui/game_main_menu_save_game.cc:87
 msgid "OK"
 msgstr "OK"
 
-#: ../../src/editor/ui_menus/main_menu_load_or_save_map.cc:78
+#: ../../src/editor/ui_menus/main_menu_load_or_save_map.cc:77
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:70
 #: ../../src/editor/ui_menus/main_menu_new_map.cc:92
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:228
-#: ../../src/editor/ui_menus/main_menu_save_map_make_directory.cc:70
+#: ../../src/editor/ui_menus/main_menu_save_map_make_directory.cc:64
 #: ../../src/ui_basic/messagebox.cc:93 ../../src/ui_fsmenu/launch_mpg.cc:77
 #: ../../src/ui_fsmenu/options.cc:109
-#: ../../src/wui/game_main_menu_save_game.cc:93 ../../src/wui/login_box.cc:62
+#: ../../src/wui/game_main_menu_save_game.cc:92 ../../src/wui/login_box.cc:61
 msgid "Cancel"
 msgstr "Отмена"
 
-#: ../../src/editor/ui_menus/main_menu_load_or_save_map.cc:88
-#: ../../src/editor/ui_menus/main_menu_load_or_save_map.cc:133
+#: ../../src/editor/ui_menus/main_menu_load_or_save_map.cc:87
+#: ../../src/editor/ui_menus/main_menu_load_or_save_map.cc:132
 msgid "Show Map Names"
 msgstr "Показывать названия карт"
 
-#: ../../src/editor/ui_menus/main_menu_load_or_save_map.cc:93
-#: ../../src/ui_fsmenu/mapselect.cc:86
+#: ../../src/editor/ui_menus/main_menu_load_or_save_map.cc:92
+#: ../../src/ui_fsmenu/mapselect.cc:87
 msgid "Show original map names"
 msgstr "Отображать реальные имена карт"
 
-#: ../../src/editor/ui_menus/main_menu_load_or_save_map.cc:135
+#: ../../src/editor/ui_menus/main_menu_load_or_save_map.cc:134
 msgid "Show Filenames"
 msgstr "Показывать имена файлов"
 
-#: ../../src/editor/ui_menus/main_menu_map_options.cc:112
-#: ../../src/ui_fsmenu/loadgame.cc:338
+#: ../../src/editor/ui_menus/main_menu_map_options.cc:111
+#: ../../src/ui_fsmenu/loadgame.cc:382
 #: ../../src/wui/game_main_menu_save_game.cc:75
 msgid "Map Name:"
 msgstr "Имя карты:"
 
-#: ../../src/editor/ui_menus/main_menu_map_options.cc:117
+#: ../../src/editor/ui_menus/main_menu_map_options.cc:115
 msgid "Authors:"
 msgstr "Авторы:"
 
-#: ../../src/editor/ui_menus/main_menu_map_options.cc:122
-#: ../../src/ui_fsmenu/campaign_select.cc:83
-#: ../../src/ui_fsmenu/campaign_select.cc:160
-#: ../../src/ui_fsmenu/campaign_select.cc:388 ../../src/wui/mapdetails.cc:174
+#: ../../src/editor/ui_menus/main_menu_map_options.cc:119
+#: ../../src/ui_fsmenu/campaign_select.cc:75
+#: ../../src/ui_fsmenu/campaign_select.cc:151
+#: ../../src/ui_fsmenu/campaign_select.cc:376 ../../src/wui/mapdetails.cc:174
 msgid "Description:"
 msgstr "Описание:"
 
-#: ../../src/editor/ui_menus/main_menu_map_options.cc:127
+#: ../../src/editor/ui_menus/main_menu_map_options.cc:123
 msgid "Hint (optional):"
 msgstr "Подсказки (по желанию):"
 
-#: ../../src/editor/ui_menus/main_menu_map_options.cc:134
+#: ../../src/editor/ui_menus/main_menu_map_options.cc:130
 #: ../../src/wui/mapdetails.cc:168
 msgid "Tags:"
 msgstr "Метки:"
 
 #. * TRANSLATORS: Label for the list of suggested teams when choosing a map
-#: ../../src/editor/ui_menus/main_menu_map_options.cc:142
+#: ../../src/editor/ui_menus/main_menu_map_options.cc:138
 #: ../../src/wui/suggested_teams_box.cc:92
 msgid "Suggested Teams:"
 msgstr "Предлагаемые команды:"
 
-#: ../../src/editor/ui_menus/main_menu_map_options.cc:152
+#: ../../src/editor/ui_menus/main_menu_map_options.cc:147
 #: ../../src/ui_fsmenu/launch_mpg.cc:642
-#: ../../src/wui/game_main_menu_save_game.cc:158
+#: ../../src/wui/game_main_menu_save_game.cc:157
 #, c-format
 msgid "%u Player"
 msgid_plural "%u Players"
@@ -633,19 +633,19 @@ msgstr[1] "%u игрока"
 msgstr[2] "%u игроков"
 msgstr[3] "%u игроков"
 
-#: ../../src/editor/ui_menus/main_menu_map_options.cc:157
+#: ../../src/editor/ui_menus/main_menu_map_options.cc:152
 msgid "Main Options"
 msgstr "Основные настройки"
 
-#: ../../src/editor/ui_menus/main_menu_map_options.cc:159
+#: ../../src/editor/ui_menus/main_menu_map_options.cc:154
 msgid "Tags"
 msgstr "Метки"
 
-#: ../../src/editor/ui_menus/main_menu_map_options.cc:161
+#: ../../src/editor/ui_menus/main_menu_map_options.cc:156
 msgid "Teams"
 msgstr "Команды"
 
-#: ../../src/editor/ui_menus/main_menu_map_options.cc:185
+#: ../../src/editor/ui_menus/main_menu_map_options.cc:180
 msgid "Size: %1% x %2%"
 msgstr "Размер: %1% x %2%"
 
@@ -664,7 +664,7 @@ msgid "Create Map"
 msgstr "Создать карту"
 
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:93
-#: ../../src/ui_fsmenu/loadgame.cc:340
+#: ../../src/ui_fsmenu/loadgame.cc:384
 msgid "Players:"
 msgstr "Игроков:"
 
@@ -729,7 +729,7 @@ msgstr "Горы:"
 #. * TRANSLATORS: A spinbox unit
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:189
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:509
-#: ../../src/ui_basic/spinbox.cc:324
+#: ../../src/ui_basic/spinbox.cc:325
 #, c-format
 msgid "%i %%"
 msgstr "%i %%"
@@ -779,36 +779,36 @@ msgstr "Карта сгенерирована. Пожалуйста, переп�
 msgid "Make Directory"
 msgstr "Создать каталог"
 
-#: ../../src/editor/ui_menus/main_menu_save_map.cc:75
-#: ../../src/ui_fsmenu/loadgame.cc:294 ../../src/ui_fsmenu/loadgame.cc:426
+#: ../../src/editor/ui_menus/main_menu_save_map.cc:71
+#: ../../src/ui_fsmenu/loadgame.cc:305 ../../src/ui_fsmenu/loadgame.cc:471
 msgid "Filename:"
 msgstr "Имя файла:"
 
 #. * TRANSLATORS: A folder that hasn't been given a name yet
-#: ../../src/editor/ui_menus/main_menu_save_map.cc:155
+#: ../../src/editor/ui_menus/main_menu_save_map.cc:150
 msgid "unnamed"
 msgstr "Без названия"
 
-#: ../../src/editor/ui_menus/main_menu_save_map.cc:256
-#: ../../src/wui/game_main_menu_save_game.cc:237
+#: ../../src/editor/ui_menus/main_menu_save_map.cc:251
+#: ../../src/wui/game_main_menu_save_game.cc:236
 #, c-format
 msgid "A file with the name ‘%s’ already exists. Overwrite?"
 msgstr "Файл с названием «%s» уже существует. Перезаписать?"
 
-#: ../../src/editor/ui_menus/main_menu_save_map.cc:260
-#: ../../src/editor/ui_menus/main_menu_save_map.cc:274
-#: ../../src/editor/ui_menus/main_menu_save_map.cc:319
+#: ../../src/editor/ui_menus/main_menu_save_map.cc:255
+#: ../../src/editor/ui_menus/main_menu_save_map.cc:269
+#: ../../src/editor/ui_menus/main_menu_save_map.cc:314
 msgid "Error Saving Map!"
 msgstr "Ошибка сохранения карты!"
 
-#: ../../src/editor/ui_menus/main_menu_save_map.cc:271
+#: ../../src/editor/ui_menus/main_menu_save_map.cc:266
 #, c-format
 msgid ""
 "A file with the name ‘%s.tmp’ already exists. You have to remove it "
 "manually."
 msgstr "Файл с названием «%s.tmp» уже существует. Вам нужно удалить его вручную."
 
-#: ../../src/editor/ui_menus/main_menu_save_map.cc:316
+#: ../../src/editor/ui_menus/main_menu_save_map.cc:311
 msgid ""
 "Error Saving Map!\n"
 "Saved map file may be corrupt!\n"
@@ -816,7 +816,7 @@ msgid ""
 "Reason given:\n"
 msgstr "Ошибка сохранения карты!\nСохранённый файл карты может быть повреждён!\n\nВозможная причина:\n"
 
-#: ../../src/editor/ui_menus/main_menu_save_map_make_directory.cc:46
+#: ../../src/editor/ui_menus/main_menu_save_map_make_directory.cc:41
 msgid "Enter Directory Name:"
 msgstr "Введите имя каталога:"
 
@@ -840,8 +840,7 @@ msgstr "Количество игроков"
 #: ../../src/logic/single_player_game_settings_provider.cc:88
 #: ../../src/map_io/map_player_names_and_tribes_packet.cc:94
 #: ../../src/network/nethost.cc:1627 ../../src/ui_fsmenu/launch_mpg.cc:558
-#: ../../src/wui/multiplayersetupgroup.cc:110
-#: ../../src/wui/multiplayersetupgroup.cc:262
+#: ../../src/wui/multiplayersetupgroup.cc:113
 #, c-format
 msgid "Player %u"
 msgstr "Игрок %u"
@@ -962,7 +961,7 @@ msgstr "Фиксированная высота"
 #. * TRANSLATORS: %1% = terrain name, %2% = list of terrain types
 #. * TRANSLATORS: Label: Value.
 #: ../../src/editor/ui_menus/tool_set_terrain_options_menu.cc:77
-#: ../../src/ui_basic/dropdown.cc:179
+#: ../../src/ui_basic/dropdown.cc:246 ../../src/ui_basic/dropdown.cc:254
 msgid "%1%: %2%"
 msgstr "%1%: %2%"
 
@@ -971,42 +970,42 @@ msgstr "%1%: %2%"
 msgid "Current Size: %u"
 msgstr "Текущий размер: %u"
 
-#: ../../src/logic/editor_game_base.cc:235
+#: ../../src/logic/editor_game_base.cc:231
 msgid "Loading graphics"
 msgstr "Загрузка графики"
 
 #. * TRANSLATORS: Win condition for this game has not been set.
-#: ../../src/logic/game.cc:130
+#: ../../src/logic/game.cc:129
 msgid "Not set"
 msgstr "Не заданы"
 
-#: ../../src/logic/game.cc:205 ../../src/logic/game.cc:251
-#: ../../src/logic/game.cc:324 ../../src/logic/game.cc:354
+#: ../../src/logic/game.cc:204 ../../src/logic/game.cc:250
+#: ../../src/logic/game.cc:323 ../../src/logic/game.cc:353
 msgid "Preloading map"
 msgstr "Предзагрузка карты"
 
-#: ../../src/logic/game.cc:211 ../../src/logic/game.cc:260
+#: ../../src/logic/game.cc:210 ../../src/logic/game.cc:259
 msgid "Loading world"
 msgstr "Загрузка мира"
 
-#: ../../src/logic/game.cc:227 ../../src/logic/game.cc:298
+#: ../../src/logic/game.cc:226 ../../src/logic/game.cc:297
 msgid "Loading map…"
 msgstr "Загрузка карты..."
 
-#: ../../src/logic/game.cc:339 ../../src/logic/game.cc:374
-#: ../../src/ui_basic/progresswindow.cc:50 ../../src/wlapplication.cc:1341
+#: ../../src/logic/game.cc:338 ../../src/logic/game.cc:373
+#: ../../src/ui_basic/progresswindow.cc:50 ../../src/wlapplication.cc:1346
 msgid "Loading…"
 msgstr "Загрузка..."
 
-#: ../../src/logic/game.cc:437
+#: ../../src/logic/game.cc:436
 msgid "Creating player infrastructure"
 msgstr "Создание инфрастуктуры игрока"
 
-#: ../../src/logic/game.cc:448 ../../src/logic/player.cc:219
+#: ../../src/logic/game.cc:447 ../../src/logic/player.cc:219
 msgid "Missing starting position"
 msgstr "Отсутствует стартовая позиция"
 
-#: ../../src/logic/game.cc:449 ../../src/logic/player.cc:220
+#: ../../src/logic/game.cc:448 ../../src/logic/player.cc:220
 #, c-format
 msgid ""
 "Widelands could not start the game, because player %u has no starting position.\n"
@@ -1023,13 +1022,13 @@ msgstr "Эта игра была сохранена, используя стар
 msgid "No description defined"
 msgstr "Описание отсутствует"
 
-#: ../../src/logic/map_objects/immovable.cc:511
-#: ../../src/logic/map_objects/tribes/constructionsite.cc:74
+#: ../../src/logic/map_objects/immovable.cc:512
+#: ../../src/logic/map_objects/tribes/constructionsite.cc:72
 #, c-format
 msgid "%i%% built"
 msgstr "%i%% построено"
 
-#: ../../src/logic/map_objects/tribes/dismantlesite.cc:101
+#: ../../src/logic/map_objects/tribes/dismantlesite.cc:100
 #, c-format
 msgid "%u%% dismantled"
 msgstr "%u%% разобрано"
@@ -1105,7 +1104,7 @@ msgstr "Вы атакованы"
 #. * TRANSLATORS: e.g. Completed/Skipped/Did not start ... because the economy
 #. needs the ware
 #. * ‘%s’
-#: ../../src/logic/map_objects/tribes/production_program.cc:309
+#: ../../src/logic/map_objects/tribes/production_program.cc:310
 #, c-format
 msgid "the economy needs the ware ‘%s’"
 msgstr "экономика нуждается в товаре «%s»"
@@ -1113,7 +1112,7 @@ msgstr "экономика нуждается в товаре «%s»"
 #. * TRANSLATORS: e.g. Completed/Skipped/Did not start ... because the economy
 #. doesn’t need the
 #. * ware ‘%s’
-#: ../../src/logic/map_objects/tribes/production_program.cc:318
+#: ../../src/logic/map_objects/tribes/production_program.cc:319
 #, c-format
 msgid "the economy doesn’t need the ware ‘%s’"
 msgstr "экономика не нуждается в товаре «%s»"
@@ -1121,14 +1120,14 @@ msgstr "экономика не нуждается в товаре «%s»"
 #. * TRANSLATORS: e.g. Completed/Skipped/Did not start ... because the economy
 #. needs the worker
 #. * ‘%s’
-#: ../../src/logic/map_objects/tribes/production_program.cc:331
+#: ../../src/logic/map_objects/tribes/production_program.cc:332
 #, c-format
 msgid "the economy needs the worker ‘%s’"
 msgstr "экономике нужен работник «%s»"
 
 #. * TRANSLATORS: e.g. Completed/Skipped/Did not start ...
 #. * TRANSLATORS:      ... because the economy doesn’t need the worker ‘%s’
-#: ../../src/logic/map_objects/tribes/production_program.cc:341
+#: ../../src/logic/map_objects/tribes/production_program.cc:342
 #, c-format
 msgid "the economy doesn’t need the worker ‘%s’"
 msgstr "экономике не нужен работник «%s»"
@@ -1146,34 +1145,34 @@ msgstr "экономике не нужен работник «%s»"
 #. Ox":
 #. * TRANSLATORS:    %1$i = "2"
 #. * TRANSLATORS:    %2$s = "Ox"
-#: ../../src/logic/map_objects/tribes/production_program.cc:388
-#: ../../src/logic/map_objects/tribes/production_program.cc:414
-#: ../../src/logic/map_objects/tribes/production_program.cc:877
-#: ../../src/logic/map_objects/tribes/production_program.cc:983
-#: ../../src/logic/map_objects/tribes/production_program.cc:1065
+#: ../../src/logic/map_objects/tribes/production_program.cc:389
+#: ../../src/logic/map_objects/tribes/production_program.cc:415
+#: ../../src/logic/map_objects/tribes/production_program.cc:878
+#: ../../src/logic/map_objects/tribes/production_program.cc:984
+#: ../../src/logic/map_objects/tribes/production_program.cc:1066
 #, c-format
 msgid "%1$ix %2$s"
 msgstr "%1$ix %2$s"
 
-#: ../../src/logic/map_objects/tribes/production_program.cc:394
+#: ../../src/logic/map_objects/tribes/production_program.cc:395
 #, c-format
 msgid "the building has the following wares: %s"
 msgstr "в здании есть следующие товары: %s"
 
-#: ../../src/logic/map_objects/tribes/production_program.cc:420
+#: ../../src/logic/map_objects/tribes/production_program.cc:421
 #, c-format
 msgid "the building doesn’t have the following wares: %s"
 msgstr "в здании нет следующих товаров: %s"
 
 #. * TRANSLATORS: 'Completed/Skipped/Did not start ... because a worker needs
 #. experience'.
-#: ../../src/logic/map_objects/tribes/production_program.cc:433
+#: ../../src/logic/map_objects/tribes/production_program.cc:434
 msgid "a worker needs experience"
 msgstr "у работника недостаточно опыта"
 
 #. * TRANSLATORS: 'Completed/Skipped/Did not start ... because the workers
 #. need no experience'.
-#: ../../src/logic/map_objects/tribes/production_program.cc:439
+#: ../../src/logic/map_objects/tribes/production_program.cc:440
 msgid "the workers need no experience"
 msgstr "работникам не требуется дополнительный опыт"
 
@@ -1190,25 +1189,25 @@ msgstr "работникам не требуется дополнительны�
 #. * TRANSLATORS: on a development build if you can, and let us know if there
 #. are any issues
 #. * TRANSLATORS: we need to address for your language.
-#: ../../src/logic/map_objects/tribes/production_program.cc:543
-#: ../../src/logic/map_objects/tribes/production_program.cc:901
+#: ../../src/logic/map_objects/tribes/production_program.cc:544
+#: ../../src/logic/map_objects/tribes/production_program.cc:902
 #, c-format
 msgid "Did not start %1$s because %2$s"
 msgstr "Не могу начать %1$s, потому что %2$s"
 
 #. * TRANSLATORS: "Completed working because the economy needs the ware ‘%s’"
-#: ../../src/logic/map_objects/tribes/production_program.cc:548
+#: ../../src/logic/map_objects/tribes/production_program.cc:549
 #, c-format
 msgid "Completed %1$s because %2$s"
 msgstr "Завершено %1$s, потому что %2$s"
 
 #. * TRANSLATORS: "Skipped working because the economy needs the ware ‘%s’"
-#: ../../src/logic/map_objects/tribes/production_program.cc:553
+#: ../../src/logic/map_objects/tribes/production_program.cc:554
 #, c-format
 msgid "Skipped %1$s because %2$s"
 msgstr "Не работает %1$s, потому что %2$s"
 
-#: ../../src/logic/map_objects/tribes/production_program.cc:748
+#: ../../src/logic/map_objects/tribes/production_program.cc:749
 msgid "No use for ships on this map!"
 msgstr "На этой карте не используются корабли!"
 
@@ -1216,7 +1215,7 @@ msgstr "На этой карте не используются корабли!"
 #. are missing'
 #. * TRANSLATORS: e.g. 'Did not start working because fish, meat or pitta
 #. bread is missing'
-#: ../../src/logic/map_objects/tribes/production_program.cc:887
+#: ../../src/logic/map_objects/tribes/production_program.cc:888
 #, c-format
 msgid "%s is missing"
 msgid_plural "%s are missing"
@@ -1228,7 +1227,7 @@ msgstr[3] "%s отсутствуют"
 #. * TRANSLATORS: %s is a list of wares. String is fetched according to total
 #. amount of
 #. wares.
-#: ../../src/logic/map_objects/tribes/production_program.cc:994
+#: ../../src/logic/map_objects/tribes/production_program.cc:995
 #, c-format
 msgid "Produced %s"
 msgid_plural "Produced %s"
@@ -1240,7 +1239,7 @@ msgstr[3] "Производит %s"
 #. * TRANSLATORS: %s is a list of workers. String is fetched according to
 #. total amount of
 #. workers.
-#: ../../src/logic/map_objects/tribes/production_program.cc:1076
+#: ../../src/logic/map_objects/tribes/production_program.cc:1077
 #, c-format
 msgid "Recruited %s"
 msgid_plural "Recruited %s"
@@ -1249,12 +1248,12 @@ msgstr[1] "Нанято %s"
 msgstr[2] "Нанято %s"
 msgstr[3] "Нанято %s"
 
-#: ../../src/logic/map_objects/tribes/production_program.cc:1282
+#: ../../src/logic/map_objects/tribes/production_program.cc:1283
 msgid "No soldier to train!"
 msgstr "Нет солдат для тренировки!"
 
-#: ../../src/logic/map_objects/tribes/production_program.cc:1291
-#: ../../src/logic/map_objects/tribes/production_program.cc:1368
+#: ../../src/logic/map_objects/tribes/production_program.cc:1292
+#: ../../src/logic/map_objects/tribes/production_program.cc:1369
 msgid "No soldier found for this training level!"
 msgstr "Нет солдат для этого уровня тренировки!"
 
@@ -1277,12 +1276,12 @@ msgstr "(остановлено)"
 #. * TRANSLATORS: Percent in building statistics window, e.g. 85%
 #. * TRANSLATORS: If you wish to add a space, translate as '%i %%'
 #: ../../src/logic/map_objects/tribes/productionsite.cc:383
-#: ../../src/wui/building_statistics_menu.cc:623
+#: ../../src/wui/building_statistics_menu.cc:619
 #, c-format
 msgid "%i%%"
 msgstr "%i%%"
 
-#: ../../src/logic/map_objects/tribes/productionsite.cc:942
+#: ../../src/logic/map_objects/tribes/productionsite.cc:943
 msgid "Can’t find any more resources!"
 msgstr "Больше не можем найти ресурсов!"
 
@@ -1428,8 +1427,8 @@ msgid "Your %s can't find a way home and will likely die."
 msgstr "Ваш %s не может найти дорогу домой и, похоже, умрёт."
 
 #: ../../src/logic/map_objects/tribes/worker.cc:1682
-#: ../../src/wui/productionsitewindow.cc:74
-#: ../../src/wui/productionsitewindow.cc:99
+#: ../../src/wui/productionsitewindow.cc:87
+#: ../../src/wui/productionsitewindow.cc:112
 msgid "Worker"
 msgid_plural "Workers"
 msgstr[0] "Работник"
@@ -1497,7 +1496,7 @@ msgid "Bluebyte Settlers II Map. No comment defined!"
 msgstr "Карта Bluebyte Settlers II. Без комментариев!"
 
 #: ../../src/network/internet_gaming.cc:108
-#: ../../src/ui_fsmenu/internet_lobby.cc:394
+#: ../../src/ui_fsmenu/internet_lobby.cc:395
 msgid "Connection problem"
 msgstr "Проблема соединения"
 
@@ -1521,39 +1520,41 @@ msgid "For hosting a game, please take a look at the notes at:"
 msgstr "Для того, чтобы захостить (инициировать) игру, пожалуйста, ознакомьтесь со следующими замечаниями:"
 
 #: ../../src/network/internet_gaming.cc:297
-msgid "Something went wrong: "
-msgstr "Что-то пошло неправильно: "
+#: ../../src/network/network_gaming_messages.cc:129
+#, c-format
+msgid "Something went wrong: %s"
+msgstr "Где-то допущена ошибка: %s"
 
-#: ../../src/network/internet_gaming.cc:384
+#: ../../src/network/internet_gaming.cc:382
 msgid "Successfully reconnected to the metaserver!"
 msgstr "Успешное переподключение к метасерверу!"
 
-#: ../../src/network/internet_gaming.cc:392
+#: ../../src/network/internet_gaming.cc:390
 msgid "Mixed up"
 msgstr "В замешательстве"
 
-#: ../../src/network/internet_gaming.cc:392
+#: ../../src/network/internet_gaming.cc:390
 msgid "The metaserver sent a strange ERROR during connection"
 msgstr "Метасервер сообщил о странной ошибке во время соединения"
 
-#: ../../src/network/internet_gaming.cc:403
+#: ../../src/network/internet_gaming.cc:401
 msgid "Unexpected packet"
 msgstr "Неожиданный пакет"
 
-#: ../../src/network/internet_gaming.cc:404
+#: ../../src/network/internet_gaming.cc:402
 #, c-format
 msgid ""
 "Expected a LOGIN, RELOGIN or REJECTED packet from server, but received "
 "command %s. Maybe the metaserver is using a different protocol version ?"
 msgstr "Вместо ожидаемых пакетов LOGIN, RELOGIN или REJECTED от сервера получена команда %s. Возможно метасервер использует другую версию протокола?"
 
-#: ../../src/network/internet_gaming.cc:417
+#: ../../src/network/internet_gaming.cc:415
 #, c-format
 msgid ""
 "WARNING: Received a %s command although we are not in CONNECTING state."
 msgstr "ВНИМАНИЕ: Получена команда %s хотя соединения нет."
 
-#: ../../src/network/internet_gaming.cc:428
+#: ../../src/network/internet_gaming.cc:426
 #, c-format
 msgid "Server time offset is %d second."
 msgid_plural "Server time offset is %d seconds."
@@ -1562,98 +1563,94 @@ msgstr[1] "Время на сервере смещено на %d сек."
 msgstr[2] "Время на сервере смещено на %d сек."
 msgstr[3] "Время на сервере смещено на %d сек."
 
-#: ../../src/network/internet_gaming.cc:452
+#: ../../src/network/internet_gaming.cc:450
 #, c-format
 msgid "Invalid chat message type \"%s\"."
 msgstr "Некорректный тип сообщения чата «%s»."
 
-#: ../../src/network/internet_gaming.cc:452
+#: ../../src/network/internet_gaming.cc:450
 msgid "Invalid message type"
 msgstr "Некорректный тип сообщения"
 
-#: ../../src/network/internet_gaming.cc:489
+#: ../../src/network/internet_gaming.cc:487
 #, c-format
 msgid "The game %s is now available"
 msgstr "Игра %s доступна"
 
-#: ../../src/network/internet_gaming.cc:499
+#: ../../src/network/internet_gaming.cc:497
 #, c-format
 msgid "The game %s has been closed"
 msgstr "Игра %s была закрыта"
 
-#: ../../src/network/internet_gaming.cc:535
+#: ../../src/network/internet_gaming.cc:533
 #, c-format
 msgid "%s joined the lobby"
 msgstr "%s вошёл в комнату"
 
-#: ../../src/network/internet_gaming.cc:544
+#: ../../src/network/internet_gaming.cc:542
 #, c-format
 msgid "%s left the lobby"
 msgstr "%s покинул комнату"
 
-#: ../../src/network/internet_gaming.cc:578
+#: ../../src/network/internet_gaming.cc:576
 msgid "Chat message could not be sent."
 msgstr "Сообщение чата не может быть отправлено."
 
-#: ../../src/network/internet_gaming.cc:592
+#: ../../src/network/internet_gaming.cc:590
 #, c-format
 msgid "ERROR: %s"
 msgstr "ОШИБКА: %s"
 
-#: ../../src/network/internet_gaming.cc:602
+#: ../../src/network/internet_gaming.cc:600
 #, c-format
 msgid "Received an unknown command from the metaserver: %s"
 msgstr "Получена неизвестная команда от метасервера: %s"
 
-#: ../../src/network/internet_gaming.cc:713
+#: ../../src/network/internet_gaming.cc:711
 msgid "Message could not be sent: You are not connected to the metaserver!"
 msgstr "Сообщение не может быть отправлено — вы не подключены к метасерверу!"
 
-#: ../../src/network/internet_gaming.cc:726
+#: ../../src/network/internet_gaming.cc:724
 msgid "Message could not be sent: Was this supposed to be a private message?"
 msgstr "Сообщение не может быть отправлено: быть может это было личное сообщение?"
 
-#: ../../src/network/internet_gaming.cc:800
+#: ../../src/network/internet_gaming.cc:798
 msgid "Conversion error"
 msgstr "Ошибка преобразования"
 
 #. * TRANSLATORS: Geeky message from the metaserver
 #. * TRANSLATORS: This message is shown if %s isn't "true" or "false"
-#: ../../src/network/internet_gaming.cc:803
+#: ../../src/network/internet_gaming.cc:801
 #, c-format
 msgid "Unable to determine truth value for \"%s\""
 msgstr "Невозможно определить истинное значение для «%s»"
 
-#: ../../src/network/internet_gaming.cc:820
+#: ../../src/network/internet_gaming.cc:818
 msgid "unknown"
 msgstr "неизвестно"
 
-#: ../../src/network/internet_gaming_messages.cc:42
+#: ../../src/network/internet_gaming_messages.cc:43
 #, c-format
 msgid "There is no user with the name %s logged in!"
 msgstr "Ни один пользователь с именем %s не подключен!"
 
-#: ../../src/network/internet_gaming_messages.cc:43
+#: ../../src/network/internet_gaming_messages.cc:44
 msgid "The sent password was incorrect!"
 msgstr "Отправленный пароль неверен!"
 
-#: ../../src/network/internet_gaming_messages.cc:44
+#: ../../src/network/internet_gaming_messages.cc:45
 msgid "The protocol version you are using is not supported!"
 msgstr "Используемая вами версия протокола не поддерживается!"
 
-#: ../../src/network/internet_gaming_messages.cc:45
+#: ../../src/network/internet_gaming_messages.cc:46
 msgid "You are already logged in!"
 msgstr "Вы уже вошли!"
 
-#: ../../src/network/internet_gaming_messages.cc:47
+#: ../../src/network/internet_gaming_messages.cc:48
 msgid ""
 "You got disconnected, as you sent a superuser command without superuser "
 "permission. This incident will be logged and reported to the administrator."
 msgstr "Вы были отключены, так как вы использовали команду суперпользователя без разрешения суперпользователя. Этот инцидент будет зарегистрирован и доведён до сведения администратора."
-
-#: ../../src/network/internet_gaming_messages.cc:49
-msgid "You got disconnected, as the metaserver is currently restarting."
-msgstr "Вы были отключены в следствии перезагрузки метасервера."
 
 #: ../../src/network/internet_gaming_messages.cc:51
 msgid "Connection was closed by the client normally."
@@ -1667,17 +1664,13 @@ msgstr "Соединение с метасервером потеряно."
 msgid "Metaserver did not answer"
 msgstr "Метасервер не отвечает"
 
-#: ../../src/network/internet_gaming_messages.cc:54
-msgid "Your game can’t be connected to from the internet"
-msgstr "Ваша игра не может быть подключена через интернет"
-
-#: ../../src/network/internet_gaming_messages.cc:56
+#: ../../src/network/internet_gaming_messages.cc:55
 msgid ""
 "You got disconnected from the metaserver, as you did not answer a PING "
 "request in time."
 msgstr "Вы были оключены от метасервера, так как не отвечаете на запрос PING."
 
-#: ../../src/network/internet_gaming_messages.cc:58
+#: ../../src/network/internet_gaming_messages.cc:57
 msgid ""
 "The metaserver was unable to connect to your game. Most likely it can’t be "
 "connected to from the internet! Please take a look at "
@@ -1685,7 +1678,7 @@ msgid ""
 "internet connection for hosting a game online."
 msgstr "Метасерверу не удалось подключиться к вашей игре. Скорее всего, не получается установить соединение через интернет! Пожалуйста, прочтите информацию на http://wl.widelands.org/wiki/InternetGaming, чтобы узнать, как настроить подключение к Интернету для размещения игры онлайн."
 
-#: ../../src/network/internet_gaming_messages.cc:64
+#: ../../src/network/internet_gaming_messages.cc:63
 msgid ""
 "You tried to log back in, but the server has no knowledge of your previous "
 "state anymore."
@@ -1699,7 +1692,7 @@ msgid ""
 msgstr "Widelands не может осуществить соединение по указанному адресу. \nВозможно сервер выключен или запущен на другом порту. Проверьте настройки и попробуйте подключиться еще раз."
 
 #: ../../src/network/netclient.cc:176 ../../src/network/nethost.cc:701
-#: ../../src/wlapplication.cc:1234
+#: ../../src/wlapplication.cc:1239
 msgid "Preparing game"
 msgstr "Подготовка игры"
 
@@ -1859,167 +1852,142 @@ msgstr "Игра началась сразу после того как вы п�
 msgid "Server has crashed and performed an emergency save."
 msgstr "Сервер «упал» и осуществил аварийное сохранение."
 
-#: ../../src/network/network_gaming_messages.cc:127
-msgid "Connection to client timed out: no response for 10 minutes!"
-msgstr "Вышло время соединения с клиентом: нет ответа в течение 10-ти минут!"
-
-#: ../../src/network/network_gaming_messages.cc:128
+#: ../../src/network/network_gaming_messages.cc:126
 msgid "Client and host have become desynchronized."
 msgstr "Клиент и хост рассинхронизированы."
 
-#: ../../src/network/network_gaming_messages.cc:129
+#: ../../src/network/network_gaming_messages.cc:127
 #, c-format
 msgid "Kicked by the host: %s"
 msgstr "Изгнан хостом: %s"
 
-#: ../../src/network/network_gaming_messages.cc:130
+#: ../../src/network/network_gaming_messages.cc:128
 #, c-format
 msgid "Client sent malformed commands: %s"
 msgstr "Клиент передает неправильные команды: %s"
 
-#: ../../src/network/network_gaming_messages.cc:131
-#, c-format
-msgid "Something went wrong: %s"
-msgstr "Где-то допущена ошибка: %s"
-
-#: ../../src/network/network_gaming_messages.cc:132
+#: ../../src/network/network_gaming_messages.cc:130
 #, c-format
 msgid "%1$s has left the game (%2$s)"
 msgstr "%1$s покинул игру (%2$s)"
 
-#: ../../src/network/network_gaming_messages.cc:133
+#: ../../src/network/network_gaming_messages.cc:131
 #, c-format
 msgid "Unknown user has left the game (%s)"
 msgstr "Незнакомец вышел из игры (%s)"
 
-#: ../../src/network/network_gaming_messages.cc:135
+#: ../../src/network/network_gaming_messages.cc:133
 msgid "Server sent a SYNCREQUEST even though no game is running."
 msgstr "Сервер послал SYNCREQUEST хотя игра не запущена."
 
-#: ../../src/network/network_gaming_messages.cc:136
+#: ../../src/network/network_gaming_messages.cc:134
 msgid "Received a PLAYERCOMMAND even though no game is running."
 msgstr "Получение PLAYERCOMMAND даже в отсутствии игры."
 
-#: ../../src/network/network_gaming_messages.cc:137
+#: ../../src/network/network_gaming_messages.cc:135
 msgid "Unexpectedly received LAUNCH command from server."
 msgstr "Неожиданно получил команду СТАРТ с сервера."
 
-#: ../../src/network/network_gaming_messages.cc:139
+#: ../../src/network/network_gaming_messages.cc:137
 msgid "Server sent a player update for a player that does not exist."
 msgstr "Сервер выслал обновления для игрока, которого не существует."
 
-#: ../../src/network/network_gaming_messages.cc:141
+#: ../../src/network/network_gaming_messages.cc:139
 msgid "Server sent a user update for a user that does not exist."
 msgstr "Сервер отправляет обновление пользователю которого нет"
 
-#: ../../src/network/network_gaming_messages.cc:142
+#: ../../src/network/network_gaming_messages.cc:140
 msgid "Server uses a different protocol version"
 msgstr "Сервер использую другую версию протокола"
 
-#: ../../src/network/network_gaming_messages.cc:143
+#: ../../src/network/network_gaming_messages.cc:141
 #, c-format
 msgid "Received command number %s, which is not allowed in this state."
 msgstr "Получена команда номер %s, которая недопустима в этой ситуации."
 
-#: ../../src/network/network_gaming_messages.cc:146
+#: ../../src/network/network_gaming_messages.cc:144
 msgid "Client reports time to host that is running backwards."
 msgstr "Клиент получает время от хоста, который отстает по времени"
 
-#: ../../src/network/network_gaming_messages.cc:148
+#: ../../src/network/network_gaming_messages.cc:146
 msgid "Client simulates beyond the game time allowed by the host."
 msgstr "Клиент имитирует время хоста во время игры."
 
-#: ../../src/network/network_gaming_messages.cc:149
+#: ../../src/network/network_gaming_messages.cc:147
 msgid "Client did not submit sync report in time."
 msgstr "Клиент не может отправить пакет синхронизации в данный момент."
 
-#: ../../src/network/network_gaming_messages.cc:150
+#: ../../src/network/network_gaming_messages.cc:148
 msgid "The game has already started."
 msgstr "Игра уже началась"
 
-#: ../../src/network/network_gaming_messages.cc:151
+#: ../../src/network/network_gaming_messages.cc:149
 msgid "Client has no access to other player’s settings."
 msgstr "Клиент не имеет доступа к настройкам других игроков"
 
-#: ../../src/network/network_gaming_messages.cc:152
+#: ../../src/network/network_gaming_messages.cc:150
 msgid "Client has no access to server settings."
 msgstr "Клиент не имеет доступа к настройкам сервера."
 
-#: ../../src/network/network_gaming_messages.cc:154
-msgid "Client sent start command, although server is not yet ready."
-msgstr "Клиент отправил стартовую команду, хотя сервер не готов."
-
-#: ../../src/network/network_gaming_messages.cc:156
+#: ../../src/network/network_gaming_messages.cc:152
 msgid "Client sent TIME command even though game is not running."
 msgstr "Клиент послал команду TIME, хотя игра не запущена."
 
-#: ../../src/network/network_gaming_messages.cc:157
+#: ../../src/network/network_gaming_messages.cc:153
 msgid "Client sent a PLAYERCOMMAND for another player."
 msgstr "Клиент отправляет PLAYERCOMMAND другому игроку."
 
-#: ../../src/network/network_gaming_messages.cc:158
+#: ../../src/network/network_gaming_messages.cc:154
 msgid "Client sent unexpected synchronization report."
 msgstr "Клиент отправил непонятный синхронизационный пакет."
 
-#: ../../src/network/network_gaming_messages.cc:160
+#: ../../src/network/network_gaming_messages.cc:156
 msgid "Client requests file although none is available to send."
 msgstr "Клиент запрашивает файл, хотя передавать нечего."
 
-#: ../../src/network/network_gaming_messages.cc:161
+#: ../../src/network/network_gaming_messages.cc:157
 msgid "Client requests file part that does not exist."
 msgstr "Клиент запршивает часть файла, которая не существует."
 
-#: ../../src/network/network_gaming_messages.cc:162
+#: ../../src/network/network_gaming_messages.cc:158
 #, c-format
 msgid "Host sent player %s to the lobby!"
 msgstr "Хост отправил игрока %s в прихожую!"
 
-#: ../../src/network/network_gaming_messages.cc:164
+#: ../../src/network/network_gaming_messages.cc:160
 #, c-format
 msgid "WARNING: %1$s uses version: %2$s, while Host uses version: %3$s"
 msgstr "ВНИМАНИЕ: %1$s использует версию: %2$s, тогда как версия хоста: %3$s"
 
-#: ../../src/network/network_gaming_messages.cc:165
+#: ../../src/network/network_gaming_messages.cc:161
 #, c-format
 msgid "%s has joined the game"
 msgstr "%s присоединился к игре"
 
-#: ../../src/network/network_gaming_messages.cc:166
-#, c-format
-msgid "Game was saved as %s."
-msgstr "Игра сохранена как  %s."
-
-#: ../../src/network/network_gaming_messages.cc:167
+#: ../../src/network/network_gaming_messages.cc:162
 #, c-format
 msgid "Started to send file %1$s to %2$s!"
 msgstr "Начата передача файла %1$s к %2$s!"
 
-#: ../../src/network/network_gaming_messages.cc:168
+#: ../../src/network/network_gaming_messages.cc:163
 #, c-format
 msgid "Completed transfer of file %1$s to %2$s"
 msgstr "Завершена передача файла %1$s к %2$s"
 
-#: ../../src/network/network_gaming_messages.cc:169
+#: ../../src/network/network_gaming_messages.cc:164
 #, c-format
 msgid "Sending part %1$s of file %2$s to %3$s"
 msgstr "Передана часть %1$s файла %2$s к %3$s"
 
-#: ../../src/network/network_gaming_messages.cc:170
+#: ../../src/network/network_gaming_messages.cc:165
 #, c-format
 msgid "The player ‘%s’ was defeated and became a spectator."
 msgstr "Игрок ‘%s’ потерпел поражение и стал наблюдателем."
 
-#: ../../src/network/network_gaming_messages.cc:171
+#: ../../src/network/network_gaming_messages.cc:166
 #, c-format
 msgid "Client %1$s did not answer for more than %2$s."
 msgstr "Клиент %1$s не отвечает более %2$s."
-
-#: ../../src/network/network_gaming_messages.cc:173
-#, c-format
-msgid ""
-"Client %1$s will automatically be kicked, if no answer is received within "
-"%2$s."
-msgstr "Клиент %1$s будет изгнан автоматически, если не ответит в течение %2$s."
 
 #. * TRANSLATORS: A variant of the commandline parameter "true" value
 #. * TRANSLATORS: Needs to be consistent with the translations in widelands-
@@ -2070,13 +2038,13 @@ msgstr "выкл"
 msgid "%1% (%2%)"
 msgstr "%1% (%2%)"
 
-#: ../../src/ui_basic/dropdown.cc:68 ../../src/ui_basic/dropdown.cc:141
+#: ../../src/ui_basic/dropdown.cc:76 ../../src/ui_basic/dropdown.cc:195
 msgctxt "dropdown"
 msgid "Select Item"
 msgstr "Выбрать элемент"
 
 #. * TRANSLATORS: Selection in Dropdown menus.
-#: ../../src/ui_basic/dropdown.cc:173
+#: ../../src/ui_basic/dropdown.cc:239
 msgctxt "dropdown"
 msgid "Not Selected"
 msgstr "Не выбрано"
@@ -2098,7 +2066,7 @@ msgid "Increase the value by 10"
 msgstr "Увеличить значение на 10"
 
 #. * TRANSLATORS: A spinbox unit
-#: ../../src/ui_basic/spinbox.cc:318
+#: ../../src/ui_basic/spinbox.cc:319
 #, c-format
 msgid "%d minute"
 msgid_plural "%d minutes"
@@ -2108,7 +2076,7 @@ msgstr[2] "%d минут"
 msgstr[3] "%d минут"
 
 #. * TRANSLATORS: A spinbox unit
-#: ../../src/ui_basic/spinbox.cc:321
+#: ../../src/ui_basic/spinbox.cc:322
 #, c-format
 msgid "%d pixel"
 msgid_plural "%d pixels"
@@ -2129,125 +2097,126 @@ msgstr "Закрыть"
 msgid "Choose a campaign"
 msgstr "Выбрать кампанию"
 
-#: ../../src/ui_fsmenu/campaign_select.cc:91
-#: ../../src/ui_fsmenu/campaign_select.cc:321
-#: ../../src/ui_fsmenu/loadgame.cc:181
+#: ../../src/ui_fsmenu/campaign_select.cc:82
+#: ../../src/ui_fsmenu/campaign_select.cc:308
+#: ../../src/ui_fsmenu/loadgame.cc:172
 msgid "Return to the main menu"
 msgstr "Вернуться в главное меню"
 
-#: ../../src/ui_fsmenu/campaign_select.cc:92
+#: ../../src/ui_fsmenu/campaign_select.cc:83
 msgid "Play this campaign"
 msgstr "Играть эту кампанию"
 
-#: ../../src/ui_fsmenu/campaign_select.cc:93
+#: ../../src/ui_fsmenu/campaign_select.cc:84
 msgid "The name of this campaign"
 msgstr "Название кампании"
 
-#: ../../src/ui_fsmenu/campaign_select.cc:94
+#: ../../src/ui_fsmenu/campaign_select.cc:85
 msgid "The tribe you will be playing"
 msgstr "Племя, за которое вы будете играть"
 
-#: ../../src/ui_fsmenu/campaign_select.cc:95
+#: ../../src/ui_fsmenu/campaign_select.cc:86
 msgid "The difficulty of this campaign"
 msgstr "Сложность кампании"
 
 #. * TRANSLATORS: Campaign difficulty table header
-#: ../../src/ui_fsmenu/campaign_select.cc:106
+#: ../../src/ui_fsmenu/campaign_select.cc:97
 msgid "Diff."
 msgstr "Сложн."
 
-#: ../../src/ui_fsmenu/campaign_select.cc:106
+#: ../../src/ui_fsmenu/campaign_select.cc:97
 msgid "Difficulty"
 msgstr "Уровень сложности"
 
-#: ../../src/ui_fsmenu/campaign_select.cc:107
-#: ../../src/wui/multiplayersetupgroup.cc:399
+#: ../../src/ui_fsmenu/campaign_select.cc:98
+#: ../../src/wui/multiplayersetupgroup.cc:159
+#: ../../src/wui/multiplayersetupgroup.cc:498
 msgid "Tribe"
 msgstr "Племя"
 
-#: ../../src/ui_fsmenu/campaign_select.cc:107
+#: ../../src/ui_fsmenu/campaign_select.cc:98
 msgid "Tribe Name"
 msgstr "Название племени"
 
-#: ../../src/ui_fsmenu/campaign_select.cc:109
+#: ../../src/ui_fsmenu/campaign_select.cc:100
 msgid "Campaign Name"
 msgstr "Название кампании"
 
-#: ../../src/ui_fsmenu/campaign_select.cc:157
+#: ../../src/ui_fsmenu/campaign_select.cc:148
 msgid "Campaign Name:"
 msgstr "Название кампании:"
 
-#: ../../src/ui_fsmenu/campaign_select.cc:158
+#: ../../src/ui_fsmenu/campaign_select.cc:149
 msgid "Tribe:"
 msgstr "Племя:"
 
-#: ../../src/ui_fsmenu/campaign_select.cc:159
+#: ../../src/ui_fsmenu/campaign_select.cc:150
 msgid "Difficulty:"
 msgstr "Сложность:"
 
-#: ../../src/ui_fsmenu/campaign_select.cc:282
+#: ../../src/ui_fsmenu/campaign_select.cc:274
 msgid "Choose a scenario"
 msgstr "Выбрать сценарий"
 
-#: ../../src/ui_fsmenu/campaign_select.cc:282
+#: ../../src/ui_fsmenu/campaign_select.cc:274
 msgid "Choose a tutorial"
 msgstr "Выбрать обучение"
 
-#: ../../src/ui_fsmenu/campaign_select.cc:323
+#: ../../src/ui_fsmenu/campaign_select.cc:310
 msgid "Play this tutorial"
 msgstr "Пройти обучение"
 
-#: ../../src/ui_fsmenu/campaign_select.cc:324
+#: ../../src/ui_fsmenu/campaign_select.cc:311
 msgid "The name of this tutorial"
 msgstr "Название обучения"
 
-#: ../../src/ui_fsmenu/campaign_select.cc:325
+#: ../../src/ui_fsmenu/campaign_select.cc:312
 msgid "What you will learn in this tutorial"
 msgstr "Чему вы научитесь в этом учебнике"
 
-#: ../../src/ui_fsmenu/campaign_select.cc:327
+#: ../../src/ui_fsmenu/campaign_select.cc:314
 msgid "Play this scenario"
 msgstr "Играть это сценарий"
 
-#: ../../src/ui_fsmenu/campaign_select.cc:328
+#: ../../src/ui_fsmenu/campaign_select.cc:315
 msgid "The name of this scenario"
 msgstr "Название сценария"
 
-#: ../../src/ui_fsmenu/campaign_select.cc:342
+#: ../../src/ui_fsmenu/campaign_select.cc:329
 msgid "The order in which the tutorials should be played"
 msgstr "Порядок прохождения обучающих сценариев"
 
-#: ../../src/ui_fsmenu/campaign_select.cc:343
+#: ../../src/ui_fsmenu/campaign_select.cc:330
 msgid "Tutorial Name"
 msgstr "Название обучения"
 
-#: ../../src/ui_fsmenu/campaign_select.cc:345
+#: ../../src/ui_fsmenu/campaign_select.cc:332
 msgid "The number of this scenario in the campaign"
 msgstr "Номер сценария в кампании"
 
-#: ../../src/ui_fsmenu/campaign_select.cc:346
+#: ../../src/ui_fsmenu/campaign_select.cc:333
 msgid "Scenario Name"
 msgstr "Название сценария"
 
 #. * TRANSLATORS: Campaign scenario number table header
-#: ../../src/ui_fsmenu/campaign_select.cc:350
+#: ../../src/ui_fsmenu/campaign_select.cc:337
 msgid "#"
 msgstr "№"
 
-#: ../../src/ui_fsmenu/campaign_select.cc:386
+#: ../../src/ui_fsmenu/campaign_select.cc:374
 msgid "Tutorial:"
 msgstr "Обучение:"
 
-#: ../../src/ui_fsmenu/campaign_select.cc:387 ../../src/wui/mapdetails.cc:133
+#: ../../src/ui_fsmenu/campaign_select.cc:375 ../../src/wui/mapdetails.cc:133
 msgid "Scenario:"
 msgstr "Сценарий:"
 
-#: ../../src/ui_fsmenu/campaign_select.cc:401
+#: ../../src/ui_fsmenu/campaign_select.cc:389
 #, c-format
 msgid "Invalid path to file in campaigns.conf: %s"
 msgstr "Неправильный путь к файлу в campaigns.conf: %s"
 
-#: ../../src/ui_fsmenu/campaign_select.cc:412
+#: ../../src/ui_fsmenu/campaign_select.cc:400
 msgid "The designer of this tutorial"
 msgid_plural "The designers of this tutorial"
 msgstr[0] "Создатель этого обучения"
@@ -2255,7 +2224,7 @@ msgstr[1] "Создатели этого обучения"
 msgstr[2] "Создатели этого обучения"
 msgstr[3] "Создатели этого обучения"
 
-#: ../../src/ui_fsmenu/campaign_select.cc:415
+#: ../../src/ui_fsmenu/campaign_select.cc:403
 msgid "The designer of this scenario"
 msgid_plural "The designers of this scenario"
 msgstr[0] "Создатель этого сценария"
@@ -2263,7 +2232,7 @@ msgstr[1] "Создатели этого сценария"
 msgstr[2] "Создатели этого сценария"
 msgstr[3] "Создатели этого сценария"
 
-#: ../../src/ui_fsmenu/campaign_select.cc:418 ../../src/wui/mapdetails.cc:158
+#: ../../src/ui_fsmenu/campaign_select.cc:406 ../../src/wui/mapdetails.cc:158
 msgid "Author:"
 msgid_plural "Authors:"
 msgstr[0] "Автор"
@@ -2271,11 +2240,11 @@ msgstr[1] "Авторы"
 msgstr[2] "Авторы"
 msgstr[3] "Авторы"
 
-#: ../../src/ui_fsmenu/campaign_select.cc:445
+#: ../../src/ui_fsmenu/campaign_select.cc:433
 msgid "Pick a tutorial from the list, then hit \"OK\"."
 msgstr "Выберите урок из списка и нажмите \"ОК\""
 
-#: ../../src/ui_fsmenu/campaign_select.cc:447
+#: ../../src/ui_fsmenu/campaign_select.cc:435
 msgid ""
 "You can see a description of the currently selected tutorial on the right."
 msgstr "Справа вы можете прочитать описание выбранного урока."
@@ -2311,7 +2280,7 @@ msgid "Open a new game"
 msgstr "Открыть новую игру"
 
 #: ../../src/ui_fsmenu/internet_lobby.cc:80
-#: ../../src/ui_fsmenu/launch_mpg.cc:137 ../../src/ui_fsmenu/launch_spg.cc:76
+#: ../../src/ui_fsmenu/launch_mpg.cc:137 ../../src/ui_fsmenu/launch_spg.cc:77
 #: ../../src/ui_fsmenu/load_map_or_game.cc:44
 #: ../../src/ui_fsmenu/multiplayer.cc:53
 #: ../../src/ui_fsmenu/netsetup_lan.cc:70
@@ -2346,28 +2315,28 @@ msgid "Version"
 msgstr "Версия"
 
 #: ../../src/ui_fsmenu/internet_lobby.cc:139
-#: ../../src/ui_fsmenu/options.cc:250
+#: ../../src/ui_fsmenu/options.cc:252
 msgid "Game"
 msgstr "Игра"
 
-#: ../../src/ui_fsmenu/internet_lobby.cc:366
+#: ../../src/ui_fsmenu/internet_lobby.cc:367
 msgid ""
 "Widelands was unable to get the IP address of the server in time.\n"
 "There seems to be a network problem, either on your side or on the side\n"
 "of the server.\n"
 msgstr "Widelands не удалось получить IP-адрес сервера. Похоже проблема с сетью на вашей стороне, или стороне сервера.\n"
 
-#: ../../src/ui_fsmenu/internet_lobby.cc:369
+#: ../../src/ui_fsmenu/internet_lobby.cc:370
 msgid "Connection timed out"
 msgstr "Время ожидания для соединения истекло"
 
-#: ../../src/ui_fsmenu/internet_lobby.cc:395
+#: ../../src/ui_fsmenu/internet_lobby.cc:396
 msgid "Widelands was unable to connect to the host."
 msgstr "Widelands не может соединиться с хостом."
 
 #. * TRANSLATORS: This is shown for multiplayer games when no host
 #. * TRANSLATORS: server to connect to has been specified yet.
-#: ../../src/ui_fsmenu/internet_lobby.cc:416
+#: ../../src/ui_fsmenu/internet_lobby.cc:417
 msgctxt "server_name"
 msgid "unnamed"
 msgstr "безымянный"
@@ -2393,7 +2362,7 @@ msgid "Select a map"
 msgstr "Выбор карты"
 
 #: ../../src/ui_fsmenu/launch_mpg.cc:71 ../../src/ui_fsmenu/launch_mpg.cc:286
-#: ../../src/wui/multiplayersetupgroup.cc:332
+#: ../../src/wui/multiplayersetupgroup.cc:430
 msgid "Saved Game"
 msgstr "Сохраненная игра"
 
@@ -2409,7 +2378,7 @@ msgstr "Отменить выбор"
 msgid "Change map or saved game"
 msgstr "Сменить карту или сохранённую игру"
 
-#: ../../src/ui_fsmenu/launch_mpg.cc:129 ../../src/ui_fsmenu/launch_spg.cc:84
+#: ../../src/ui_fsmenu/launch_mpg.cc:129 ../../src/ui_fsmenu/launch_spg.cc:85
 msgid "Start game"
 msgstr "Начать игру"
 
@@ -2426,11 +2395,11 @@ msgstr "Настройка сетевой игры"
 msgid "Clients"
 msgstr "Клиенты"
 
-#: ../../src/ui_fsmenu/launch_mpg.cc:178 ../../src/ui_fsmenu/launch_spg.cc:118
+#: ../../src/ui_fsmenu/launch_mpg.cc:178 ../../src/ui_fsmenu/launch_spg.cc:113
 msgid "Type of game"
 msgstr "Тип игры"
 
-#: ../../src/ui_fsmenu/launch_mpg.cc:213 ../../src/ui_fsmenu/launch_spg.cc:346
+#: ../../src/ui_fsmenu/launch_mpg.cc:213 ../../src/ui_fsmenu/launch_spg.cc:341
 msgid "(no map)"
 msgstr "(нет карты)"
 
@@ -2439,12 +2408,12 @@ msgid "The host has not yet selected a map or saved game."
 msgstr "На хосте ещё не выбрана карта или сохранённая игра."
 
 #. * TRANSLATORS: This is a map tag
-#: ../../src/ui_fsmenu/launch_mpg.cc:282 ../../src/ui_fsmenu/launch_spg.cc:209
-#: ../../src/wui/map_tags.cc:36 ../../src/wui/multiplayersetupgroup.cc:329
+#: ../../src/ui_fsmenu/launch_mpg.cc:282 ../../src/ui_fsmenu/launch_spg.cc:204
+#: ../../src/wui/map_tags.cc:36 ../../src/wui/multiplayersetupgroup.cc:427
 msgid "Scenario"
 msgstr "Сценарий"
 
-#: ../../src/ui_fsmenu/launch_mpg.cc:283 ../../src/ui_fsmenu/launch_spg.cc:210
+#: ../../src/ui_fsmenu/launch_mpg.cc:283 ../../src/ui_fsmenu/launch_spg.cc:205
 msgid "Win condition is set through the scenario"
 msgstr "Условия для победы установлены сценарием"
 
@@ -2463,11 +2432,11 @@ msgid ""
 "Widelands is not able to transfer directory structures to the clients, please select another saved game or zip the directories’ content."
 msgstr "ВНИМАНИЕ:\nВыбранная вами сохраненная игра представляет собой каталог. Такое могло случиться если вы поставили параметр ‘nozip’  в значение \"истина\" или вручную распаковали сохраненную игру.\nWidelands не может передавать клиентам структуру каталогов, поэтому, пожалуйста, выберите другую сохраненную игру, или упакуйте содержимое каталога."
 
-#: ../../src/ui_fsmenu/launch_mpg.cc:434 ../../src/ui_fsmenu/launch_spg.cc:318
+#: ../../src/ui_fsmenu/launch_mpg.cc:434 ../../src/ui_fsmenu/launch_spg.cc:313
 msgid "File not found"
 msgstr "Файл не найден"
 
-#: ../../src/ui_fsmenu/launch_mpg.cc:435 ../../src/ui_fsmenu/launch_spg.cc:319
+#: ../../src/ui_fsmenu/launch_mpg.cc:435 ../../src/ui_fsmenu/launch_spg.cc:314
 #, c-format
 msgid ""
 "Widelands tried to start a game with a file that could not be found at the given path.\n"
@@ -2515,43 +2484,43 @@ msgstr "Выбран режим сценариев"
 msgid "Select map"
 msgstr "Выбрать карту"
 
-#: ../../src/ui_fsmenu/launch_spg.cc:87
+#: ../../src/ui_fsmenu/launch_spg.cc:88
 msgid "Launch Game"
 msgstr "Запустить игру"
 
-#: ../../src/ui_fsmenu/launch_spg.cc:93
+#: ../../src/ui_fsmenu/launch_spg.cc:94
 msgid "Player’s name"
 msgstr "Имя игрока"
 
-#: ../../src/ui_fsmenu/launch_spg.cc:98
+#: ../../src/ui_fsmenu/launch_spg.cc:99
 msgid "Player’s type"
 msgstr "Тип игрока"
 
-#: ../../src/ui_fsmenu/launch_spg.cc:103 ../../src/wui/game_summary.cc:102
-#: ../../src/wui/multiplayersetupgroup.cc:408
+#: ../../src/ui_fsmenu/launch_spg.cc:101 ../../src/wui/game_summary.cc:102
+#: ../../src/wui/multiplayersetupgroup.cc:507
 msgid "Team"
 msgstr "Команда"
 
-#: ../../src/ui_fsmenu/launch_spg.cc:108
+#: ../../src/ui_fsmenu/launch_spg.cc:105
 msgid "Player’s tribe"
 msgstr "Племя игрока"
 
-#: ../../src/ui_fsmenu/launch_spg.cc:113
+#: ../../src/ui_fsmenu/launch_spg.cc:109
 msgid "Start type"
 msgstr "Стартовые условия"
 
-#: ../../src/ui_fsmenu/launch_spg.cc:153
+#: ../../src/ui_fsmenu/launch_spg.cc:148
 msgid "Switch to position"
 msgstr "Переключиться в эту позицию"
 
-#: ../../src/ui_fsmenu/launch_spg.cc:223 ../../src/ui_fsmenu/launch_spg.cc:270
+#: ../../src/ui_fsmenu/launch_spg.cc:218 ../../src/ui_fsmenu/launch_spg.cc:265
 #, c-format
 msgid ""
 "Unable to determine valid win conditions because the map '%s' could not be "
 "loaded."
 msgstr "Не удалось определить допустимые условия победы, поскольку не удалось загрузить карту '%s'."
 
-#: ../../src/ui_fsmenu/launch_spg.cc:227 ../../src/ui_fsmenu/launch_spg.cc:274
+#: ../../src/ui_fsmenu/launch_spg.cc:222 ../../src/ui_fsmenu/launch_spg.cc:269
 msgid "Error"
 msgstr "Ошибка"
 
@@ -2573,150 +2542,186 @@ msgstr "Выбор повтора"
 msgid "Choose a saved game"
 msgstr "Выбрать сохраненную игру"
 
-#: ../../src/ui_fsmenu/loadgame.cc:152
-#: ../../src/wui/game_main_menu_save_game.cc:98
+#: ../../src/ui_fsmenu/loadgame.cc:143
+#: ../../src/wui/game_main_menu_save_game.cc:97
 msgid "Delete"
 msgstr "Удалить"
 
-#: ../../src/ui_fsmenu/loadgame.cc:175
+#: ../../src/ui_fsmenu/loadgame.cc:166
 msgid "The time that elapsed inside this game"
 msgstr "Время прошедшее с момента начала игры"
 
-#: ../../src/ui_fsmenu/loadgame.cc:176
+#: ../../src/ui_fsmenu/loadgame.cc:167
 msgid "The number of players"
 msgstr "Число игроков"
 
-#: ../../src/ui_fsmenu/loadgame.cc:177
+#: ../../src/ui_fsmenu/loadgame.cc:168
 msgid "The version of Widelands that this game was played under"
 msgstr "Версия Widelands, на которой играли в эту игру"
 
-#: ../../src/ui_fsmenu/loadgame.cc:178
+#: ../../src/ui_fsmenu/loadgame.cc:169
 msgid "The win condition that was set for this game"
 msgstr "Условия победы, заданные для этой игры"
 
-#: ../../src/ui_fsmenu/loadgame.cc:182
+#: ../../src/ui_fsmenu/loadgame.cc:173
 msgid "Load this replay"
 msgstr "Загрузить этот повтор"
 
-#: ../../src/ui_fsmenu/loadgame.cc:183
+#: ../../src/ui_fsmenu/loadgame.cc:174
 msgid "The map that this replay is based on"
 msgstr "Карта, на которой основан этот повтор"
 
-#: ../../src/ui_fsmenu/loadgame.cc:184
+#: ../../src/ui_fsmenu/loadgame.cc:175
 msgid "Delete this replay"
 msgstr "Удалить этот повтор"
 
-#: ../../src/ui_fsmenu/loadgame.cc:186 ../../src/ui_fsmenu/mapselect.cc:68
+#: ../../src/ui_fsmenu/loadgame.cc:177 ../../src/ui_fsmenu/mapselect.cc:69
 msgid "Return to the single player menu"
 msgstr "Вернуться в меню одиночной игры"
 
-#: ../../src/ui_fsmenu/loadgame.cc:187
+#: ../../src/ui_fsmenu/loadgame.cc:178
 msgid "Load this game"
 msgstr "Загрузить игру"
 
-#: ../../src/ui_fsmenu/loadgame.cc:188
+#: ../../src/ui_fsmenu/loadgame.cc:179
 msgid "The map that this game is based on"
 msgstr "Карта, на которой основана эта игра"
 
-#: ../../src/ui_fsmenu/loadgame.cc:189
+#: ../../src/ui_fsmenu/loadgame.cc:180
 msgid "Delete this game"
 msgstr "Удалить игру"
 
-#: ../../src/ui_fsmenu/loadgame.cc:197
+#: ../../src/ui_fsmenu/loadgame.cc:189
 msgid "Save Date"
 msgstr "Дата сохранения:"
 
-#: ../../src/ui_fsmenu/loadgame.cc:197
+#: ../../src/ui_fsmenu/loadgame.cc:189
 msgid "The date this game was saved"
 msgstr "Дата, когда эта игра была сохранена"
 
 #. * TRANSLATORS: Tooltip for the "Mode" column when choosing a game/replay to
 #. load.
 #. * TRANSLATORS: Make sure that you keep consistency in your translation.
-#: ../../src/ui_fsmenu/loadgame.cc:203
+#: ../../src/ui_fsmenu/loadgame.cc:195
 msgid "SP = Single Player"
 msgstr "SP = Один игрок"
 
 #. * TRANSLATORS: Tooltip for the "Mode" column when choosing a game/replay to
 #. load.
 #. * TRANSLATORS: Make sure that you keep consistency in your translation.
-#: ../../src/ui_fsmenu/loadgame.cc:207
+#: ../../src/ui_fsmenu/loadgame.cc:199
 msgid "MP = Multiplayer"
 msgstr "MP = Многопользовательская игра"
 
 #. * TRANSLATORS: Tooltip for the "Mode" column when choosing a game/replay to
 #. load.
 #. * TRANSLATORS: Make sure that you keep consistency in your translation.
-#: ../../src/ui_fsmenu/loadgame.cc:210
+#: ../../src/ui_fsmenu/loadgame.cc:202
 msgid "H = Multiplayer (Host)"
 msgstr "H = Многопользовательская игра (хост)"
 
 #. * TRANSLATORS: Tooltip for the "Mode" column when choosing a game/replay to
 #. load.
 #. * TRANSLATORS: %s is a list of game modes.
-#: ../../src/ui_fsmenu/loadgame.cc:214
+#: ../../src/ui_fsmenu/loadgame.cc:206
 #, c-format
 msgid "Game Mode: %s."
 msgstr "Режим игры: %s."
 
-#: ../../src/ui_fsmenu/loadgame.cc:217
+#: ../../src/ui_fsmenu/loadgame.cc:209
 msgid "Numbers are the number of players."
 msgstr "Числа - это количество игроков."
 
 #. * TRANSLATORS: Game Mode table column when choosing a game/replay to load.
 #. * TRANSLATORS: Keep this to 5 letters maximum.
 #. * TRANSLATORS: A tooltip will explain if you need to use an abbreviation.
-#: ../../src/ui_fsmenu/loadgame.cc:224
+#: ../../src/ui_fsmenu/loadgame.cc:216
 msgid "Mode"
 msgstr "Режим"
 
-#: ../../src/ui_fsmenu/loadgame.cc:227
+#: ../../src/ui_fsmenu/loadgame.cc:218
 msgid "Description"
 msgstr "Описание"
 
-#: ../../src/ui_fsmenu/loadgame.cc:228
+#: ../../src/ui_fsmenu/loadgame.cc:219
 msgid ""
 "The filename that the game was saved under followed by the map’s name, or "
 "the map’s name followed by the last objective achieved."
 msgstr "Имя файла сохранения игры основанное на имени карты, или имя карты основанное на последней достигнутой цели."
 
-#: ../../src/ui_fsmenu/loadgame.cc:284
+#: ../../src/ui_fsmenu/loadgame.cc:271
+#, c-format
+msgid "Do you really want to delete this %d replay?"
+msgid_plural "Do you really want to delete these %d replays?"
+msgstr[0] "Вы действительно хотите удалить повтор %d?"
+msgstr[1] "Вы действительно хотите удалить повторы %d?"
+msgstr[2] "Вы действительно хотите удалить повторы %d?"
+msgstr[3] "Вы действительно хотите удалить повторы %d?"
+
+#: ../../src/ui_fsmenu/loadgame.cc:277
+#, c-format
+msgid "Do you really want to delete this %d game?"
+msgid_plural "Do you really want to delete these %d games?"
+msgstr[0] "Вы действительно хотите удалить игру %d?"
+msgstr[1] "Вы действительно хотите удалить игры %d?"
+msgstr[2] "Вы действительно хотите удалить игры %d?"
+msgstr[3] "Вы действительно хотите удалить игры %d?"
+
+#: ../../src/ui_fsmenu/loadgame.cc:295
 msgid "Save Date:"
 msgstr "Дата сохранения:"
 
-#: ../../src/ui_fsmenu/loadgame.cc:298
+#: ../../src/ui_fsmenu/loadgame.cc:309
 msgid "Do you really want to delete this replay?"
 msgstr "Вы действительно хотите удалить этот повтор?"
 
-#: ../../src/ui_fsmenu/loadgame.cc:302
+#: ../../src/ui_fsmenu/loadgame.cc:313
 msgid "Do you really want to delete this game?"
 msgstr "Вы действительно хотите удалить эту игру?"
 
-#: ../../src/ui_fsmenu/loadgame.cc:306
+#: ../../src/ui_fsmenu/loadgame.cc:319
 msgid "Confirm deleting file"
-msgstr "Подтвердить удаление"
+msgid_plural "Confirm deleting files"
+msgstr[0] "Подтверждение удаления файла"
+msgstr[1] "Подтверждение удаления файлов"
+msgstr[2] "Подтверждение удаления файлов"
+msgstr[3] "Подтверждение удаления файлов"
 
-#: ../../src/ui_fsmenu/loadgame.cc:339
+#. * TRANSLATORS %1% = map name, %2% = save date.
+#: ../../src/ui_fsmenu/loadgame.cc:352
+msgid "%1%, saved on %2%"
+msgstr "%1%, сохранение от %2%"
+
+#: ../../src/ui_fsmenu/loadgame.cc:383
 msgid "Gametime:"
 msgstr "Время игры:"
 
-#: ../../src/ui_fsmenu/loadgame.cc:341
+#: ../../src/ui_fsmenu/loadgame.cc:385
 msgid "Win Condition:"
 msgstr "Условия победы:"
 
-#: ../../src/ui_fsmenu/loadgame.cc:370
+#: ../../src/ui_fsmenu/loadgame.cc:415
 msgid "Widelands Version:"
 msgstr "Версия «Widelands»:"
 
-#: ../../src/ui_fsmenu/loadgame.cc:527
+#: ../../src/ui_fsmenu/loadgame.cc:492
+#, c-format
+msgid "Selected %d file:"
+msgid_plural "Selected %d files:"
+msgstr[0] "Выбран %d файл"
+msgstr[1] "Выбрано %d файлов"
+msgstr[2] "Выбрано %d файлов"
+msgstr[3] "Выбрано %d файлов"
+
+#: ../../src/ui_fsmenu/loadgame.cc:579
 msgid "Today, %1%:%2%"
 msgstr "Сегодня, %1%:%2%"
 
-#: ../../src/ui_fsmenu/loadgame.cc:540
+#: ../../src/ui_fsmenu/loadgame.cc:592
 msgid "Yesterday, %1%:%2%"
 msgstr "Вчера, %1%:%2%"
 
-#: ../../src/ui_fsmenu/loadgame.cc:546
+#: ../../src/ui_fsmenu/loadgame.cc:598
 msgid "%2% %1%, %3%"
 msgstr "%2% %1%, %3%"
 
@@ -2725,33 +2730,33 @@ msgstr "%2% %1%, %3%"
 #. * TRANSLATORS: A tooltip will explain the abbreviation.
 #. * TRANSLATORS: Make sure that this translation is consistent with the
 #. tooltip.
-#: ../../src/ui_fsmenu/loadgame.cc:567
+#: ../../src/ui_fsmenu/loadgame.cc:619
 msgid "SP"
 msgstr "SP"
 
-#: ../../src/ui_fsmenu/loadgame.cc:576
+#: ../../src/ui_fsmenu/loadgame.cc:628
 msgid "H (%1%)"
 msgstr "H (%1%)"
 
-#: ../../src/ui_fsmenu/loadgame.cc:586
+#: ../../src/ui_fsmenu/loadgame.cc:638
 msgid "MP (%1%)"
 msgstr "MP (%1%)"
 
 #. * TRANSLATORS: Error message introduction for when an old savegame can't be
 #. loaded
-#: ../../src/ui_fsmenu/loadgame.cc:603
+#: ../../src/ui_fsmenu/loadgame.cc:655
 msgid ""
 "This file has the wrong format and can’t be loaded. Maybe it was created "
 "with an older version of Widelands."
 msgstr "Этот файл имеет неправильный формат и не может быть загружен. Возможно он создан в старой версии Widelands."
 
 #. * TRANSLATORS: This text is on a separate line with an error message below
-#: ../../src/ui_fsmenu/loadgame.cc:606
+#: ../../src/ui_fsmenu/loadgame.cc:658
 msgid "Error message:"
 msgstr "Сообщение об ошибке:"
 
 #. * TRANSLATORS: Prefix for incompatible files in load game screens
-#: ../../src/ui_fsmenu/loadgame.cc:619 ../../src/ui_fsmenu/loadgame.cc:621
+#: ../../src/ui_fsmenu/loadgame.cc:671 ../../src/ui_fsmenu/loadgame.cc:673
 #, c-format
 msgid "Incompatible: %s"
 msgstr "Несовместимо: %s"
@@ -2795,19 +2800,19 @@ msgstr "Версия %1$s (%2$s)"
 msgid "(C) %1%-%2% by the Widelands Development Team"
 msgstr "(C) %1%-%2% команда разработчиков Widelands"
 
-#: ../../src/ui_fsmenu/main.cc:110
+#: ../../src/ui_fsmenu/main.cc:106
 msgid "Licensed under the GNU General Public License V2.0"
 msgstr "Распространяется на основе лицензии GNU General Public License V2.0"
 
-#: ../../src/ui_fsmenu/mapselect.cc:49
+#: ../../src/ui_fsmenu/mapselect.cc:50
 msgid "Choose a map"
 msgstr "Выбор карты"
 
-#: ../../src/ui_fsmenu/mapselect.cc:66
+#: ../../src/ui_fsmenu/mapselect.cc:67
 msgid "Return to the multiplayer game setup"
 msgstr "Вернуться к установкам многопользовательской игры"
 
-#: ../../src/ui_fsmenu/mapselect.cc:91
+#: ../../src/ui_fsmenu/mapselect.cc:92
 msgid "Show all maps"
 msgstr "Показать все карты"
 
@@ -2828,7 +2833,7 @@ msgid "Show login dialog"
 msgstr "Показывать окно входа"
 
 #: ../../src/ui_fsmenu/multiplayer.cc:105
-#: ../../src/ui_fsmenu/netsetup_lan.cc:114 ../../src/wui/login_box.cc:66
+#: ../../src/ui_fsmenu/netsetup_lan.cc:114 ../../src/wui/login_box.cc:65
 msgid "nobody"
 msgstr "никто"
 
@@ -2864,18 +2869,18 @@ msgstr "Хост"
 msgid "State"
 msgstr "Состояние"
 
-#: ../../src/ui_fsmenu/netsetup_lan.cc:193
-#: ../../src/wui/multiplayersetupgroup.cc:242
+#: ../../src/ui_fsmenu/netsetup_lan.cc:194
+#: ../../src/wui/multiplayersetupgroup.cc:360
 #: ../../src/wui/playerdescrgroup.cc:136
 msgid "Open"
 msgstr "Открыто"
 
-#: ../../src/ui_fsmenu/netsetup_lan.cc:196
-#: ../../src/wui/multiplayersetupgroup.cc:231
+#: ../../src/ui_fsmenu/netsetup_lan.cc:197
+#: ../../src/wui/multiplayersetupgroup.cc:350
 msgid "Closed"
 msgstr "Закрыто"
 
-#: ../../src/ui_fsmenu/netsetup_lan.cc:200
+#: ../../src/ui_fsmenu/netsetup_lan.cc:201
 msgctxt "game_state"
 msgid "Unknown"
 msgstr "Неизвестно"
@@ -2884,118 +2889,118 @@ msgstr "Неизвестно"
 msgid "Apply"
 msgstr "Применить"
 
-#: ../../src/ui_fsmenu/options.cc:141
+#: ../../src/ui_fsmenu/options.cc:142
 msgid "Language"
 msgstr "Язык"
 
-#: ../../src/ui_fsmenu/options.cc:147
+#: ../../src/ui_fsmenu/options.cc:149
 msgid "In-game resolution"
 msgstr "Разрешение экрана"
 
-#: ../../src/ui_fsmenu/options.cc:149
+#: ../../src/ui_fsmenu/options.cc:151
 msgid "Fullscreen"
 msgstr "Во весь экран"
 
-#: ../../src/ui_fsmenu/options.cc:150
+#: ../../src/ui_fsmenu/options.cc:152
 msgid "Grab Input"
 msgstr "Захват ввода"
 
-#: ../../src/ui_fsmenu/options.cc:152
+#: ../../src/ui_fsmenu/options.cc:154
 msgid "Maximum FPS:"
 msgstr "Максимум FPS:"
 
-#: ../../src/ui_fsmenu/options.cc:156
+#: ../../src/ui_fsmenu/options.cc:158
 msgid "Snap windows only when overlapping"
 msgstr "Захватывать окна только при наложении"
 
-#: ../../src/ui_fsmenu/options.cc:157
+#: ../../src/ui_fsmenu/options.cc:159
 msgid "Dock windows to edges"
 msgstr "Парковать окна по краям"
 
-#: ../../src/ui_fsmenu/options.cc:167
+#: ../../src/ui_fsmenu/options.cc:169
 msgid "Distance for windows to snap to other panels:"
 msgstr "Дистанция до стыковки окон между собой:"
 
-#: ../../src/ui_fsmenu/options.cc:178
+#: ../../src/ui_fsmenu/options.cc:180
 msgid "Distance for windows to snap to borders:"
 msgstr "Дистанция до стыковки окон к границам:"
 
-#: ../../src/ui_fsmenu/options.cc:182
+#: ../../src/ui_fsmenu/options.cc:184
 #: ../../src/wui/game_options_sound_menu.cc:28
 msgid "Enable Music"
 msgstr "Включить музыку"
 
-#: ../../src/ui_fsmenu/options.cc:183
+#: ../../src/ui_fsmenu/options.cc:185
 #: ../../src/wui/game_options_sound_menu.cc:31
 msgid "Enable Sound Effects"
 msgstr "Включить звуковые эффекты"
 
-#: ../../src/ui_fsmenu/options.cc:184
+#: ../../src/ui_fsmenu/options.cc:186
 msgid "Play a sound at message arrival"
 msgstr "Воспроизводить сигнал при получении сообщения"
 
-#: ../../src/ui_fsmenu/options.cc:195
+#: ../../src/ui_fsmenu/options.cc:197
 msgid "Save game automatically every:"
 msgstr "Автосохранение каждые:"
 
-#: ../../src/ui_fsmenu/options.cc:208
+#: ../../src/ui_fsmenu/options.cc:210
 msgid "Maximum number of autosave files:"
 msgstr "Максимум файлов автосохранения:"
 
-#: ../../src/ui_fsmenu/options.cc:215
+#: ../../src/ui_fsmenu/options.cc:217
 msgid "Compress widelands data files (maps, replays and savegames)"
 msgstr "Сжать файлы данных (карты, повторы и сохранения)"
 
-#: ../../src/ui_fsmenu/options.cc:220
+#: ../../src/ui_fsmenu/options.cc:222
 msgid "Write syncstreams in network games to debug desyncs"
 msgstr "Записывать синхронизацию клиентов в сетевой игре для отладки рассинхронизации"
 
-#: ../../src/ui_fsmenu/options.cc:226
+#: ../../src/ui_fsmenu/options.cc:228
 msgid "Start building road after placing a flag"
 msgstr "Предлагать строительство дороги сразу после установки флага"
 
-#: ../../src/ui_fsmenu/options.cc:227
+#: ../../src/ui_fsmenu/options.cc:229
 msgid "Show buildings area preview"
 msgstr "Предпросмотр рабочей области зданий при строительстве"
 
-#: ../../src/ui_fsmenu/options.cc:229
+#: ../../src/ui_fsmenu/options.cc:231
 msgid "Show in-game chat with transparent background"
 msgstr "Использовать полупрозрачный фон для внутриигрового чата"
 
 #. * TRANSLATORS: A watchwindow is a window where you keep watching an object
 #. or a map region,
 #. * TRANSLATORS: and it also lets you jump to it on the map.
-#: ../../src/ui_fsmenu/options.cc:233
+#: ../../src/ui_fsmenu/options.cc:235
 msgid "Use single watchwindow mode"
 msgstr "Включить однооконный режим \"Наблюдение\" "
 
-#: ../../src/ui_fsmenu/options.cc:246
+#: ../../src/ui_fsmenu/options.cc:248
 msgid "Interface"
 msgstr "Интерфейс"
 
-#: ../../src/ui_fsmenu/options.cc:247
+#: ../../src/ui_fsmenu/options.cc:249
 msgid "Windows"
 msgstr "Окна"
 
-#: ../../src/ui_fsmenu/options.cc:248
+#: ../../src/ui_fsmenu/options.cc:250
 msgid "Sound"
 msgstr "Звук"
 
-#: ../../src/ui_fsmenu/options.cc:249
+#: ../../src/ui_fsmenu/options.cc:251
 msgid "Saving"
 msgstr "Сохранение"
 
 #. * TRANSLATORS Options: Save game automatically every:
-#: ../../src/ui_fsmenu/options.cc:299
+#: ../../src/ui_fsmenu/options.cc:301
 msgid "Off"
 msgstr "Откл."
 
 #. * TRANSLATORS: Screen resolution, e.g. 800 x 600
-#: ../../src/ui_fsmenu/options.cc:325 ../../src/ui_fsmenu/options.cc:334
+#: ../../src/ui_fsmenu/options.cc:327 ../../src/ui_fsmenu/options.cc:336
 msgid "%1% x %2%"
 msgstr "%1% x %2%"
 
-#: ../../src/ui_fsmenu/options.cc:431
+#: ../../src/ui_fsmenu/options.cc:433
 msgid "Try system language"
 msgstr "Пытаться использовать язык системы"
 
@@ -3011,11 +3016,11 @@ msgstr "Кампании"
 msgid "Load Game"
 msgstr "Загрузить игру"
 
-#: ../../src/wlapplication.cc:1032
+#: ../../src/wlapplication.cc:1037
 msgid "Game data error"
 msgstr "Ошибка в данных игры"
 
-#: ../../src/wlapplication.cc:1040
+#: ../../src/wlapplication.cc:1045
 #, c-format
 msgid ""
 "Please report this problem to help us improve Widelands. You will find "
@@ -3023,7 +3028,7 @@ msgid ""
 "using build %1$s (%2$s)."
 msgstr "Сообщите об этой проблеме, чтобы помочь нам улучшить Widelands. Вы найдете соответствующие сообщения в стандартном выводе (stdout.txt на Windows). Вы используете сборку %1$s (%2$s). "
 
-#: ../../src/wlapplication.cc:1047
+#: ../../src/wlapplication.cc:1052
 msgid ""
 "Please add this information to your report.\n"
 "\n"
@@ -3103,132 +3108,132 @@ msgstr "Послать больше солдат"
 msgid "Building Statistics"
 msgstr "Статистика построек"
 
-#: ../../src/wui/building_statistics_menu.cc:77
+#: ../../src/wui/building_statistics_menu.cc:72
 msgid "Owned:"
 msgstr "В собственности:"
 
-#: ../../src/wui/building_statistics_menu.cc:84
+#: ../../src/wui/building_statistics_menu.cc:78
 msgid "Under Construction:"
 msgstr "Строится:"
 
 #. * TRANSLATORS: This is the first part of productivity with input field
 #. * TRANSLATORS: Building statistics window - 'Low Productivity <input>%:'
-#: ../../src/wui/building_statistics_menu.cc:91
-#: ../../src/wui/building_statistics_menu.cc:635
+#: ../../src/wui/building_statistics_menu.cc:84
+#: ../../src/wui/building_statistics_menu.cc:631
 msgid "Low Productivity"
 msgstr "Производство ниже"
 
 #. * TRANSLATORS: This is the second part of productivity with input field
 #. * TRANSLATORS: Building statistics window -  'Low Productivity <input>%:'
-#: ../../src/wui/building_statistics_menu.cc:106
+#: ../../src/wui/building_statistics_menu.cc:98
 msgid "%:"
 msgstr "%:"
 
-#: ../../src/wui/building_statistics_menu.cc:139
+#: ../../src/wui/building_statistics_menu.cc:130
 msgid "Small Buildings"
 msgstr "Малые здания"
 
-#: ../../src/wui/building_statistics_menu.cc:142
+#: ../../src/wui/building_statistics_menu.cc:133
 msgid "Medium Buildings"
 msgstr "Средние здания"
 
-#: ../../src/wui/building_statistics_menu.cc:145
+#: ../../src/wui/building_statistics_menu.cc:136
 msgid "Big Buildings"
 msgstr "Большие здания"
 
-#: ../../src/wui/building_statistics_menu.cc:148
+#: ../../src/wui/building_statistics_menu.cc:139
 msgid "Mines"
 msgstr "Шахты"
 
-#: ../../src/wui/building_statistics_menu.cc:154
+#: ../../src/wui/building_statistics_menu.cc:145
 msgid "Ports"
 msgstr "Порты"
 
-#: ../../src/wui/building_statistics_menu.cc:267
-#: ../../src/wui/building_statistics_menu.cc:278
-#: ../../src/wui/building_statistics_menu.cc:290
+#: ../../src/wui/building_statistics_menu.cc:258
+#: ../../src/wui/building_statistics_menu.cc:269
+#: ../../src/wui/building_statistics_menu.cc:281
 msgid "Show previous building"
 msgstr "Показать предыдущее здание"
 
-#: ../../src/wui/building_statistics_menu.cc:272
-#: ../../src/wui/building_statistics_menu.cc:284
-#: ../../src/wui/building_statistics_menu.cc:296
+#: ../../src/wui/building_statistics_menu.cc:263
+#: ../../src/wui/building_statistics_menu.cc:275
+#: ../../src/wui/building_statistics_menu.cc:287
 msgid "Show next building"
 msgstr "Показать следующее здание"
 
 #. * TRANSLATORS Buildings: owned / under construction
 #. * TRANSLATORS: %1% = the experience a worker has
 #. * TRANSLATORS: %2% = the experience a worker needs to reach the next level
-#: ../../src/wui/building_statistics_menu.cc:653
-#: ../../src/wui/building_statistics_menu.cc:677
-#: ../../src/wui/building_statistics_menu.cc:679
-#: ../../src/wui/productionsitewindow.cc:150
+#: ../../src/wui/building_statistics_menu.cc:649
+#: ../../src/wui/building_statistics_menu.cc:673
+#: ../../src/wui/building_statistics_menu.cc:675
+#: ../../src/wui/productionsitewindow.cc:153
 msgid "%1%/%2%"
 msgstr "%1%/%2%"
 
 #. * TRANSLATORS Label for number of buildings that are waiting for soldiers
-#: ../../src/wui/building_statistics_menu.cc:667
+#: ../../src/wui/building_statistics_menu.cc:663
 msgid "Lacking Soldiers:"
 msgstr "Недостаточно солдат:"
 
 #. * TRANSLATORS: Stop/Continue toggle button for production sites.
-#: ../../src/wui/buildingwindow.cc:190
+#: ../../src/wui/buildingwindow.cc:209
 msgid "Continue"
 msgstr "Возобновить"
 
 #. * TRANSLATORS: Stop/Continue toggle button for production sites.
-#: ../../src/wui/buildingwindow.cc:192
+#: ../../src/wui/buildingwindow.cc:211
 msgid "Stop"
 msgstr "Остановить"
 
-#: ../../src/wui/buildingwindow.cc:213
+#: ../../src/wui/buildingwindow.cc:232
 #, c-format
 msgid "Enhance to %s"
 msgstr "Улучшить до %s"
 
-#: ../../src/wui/buildingwindow.cc:214 ../../src/wui/fieldaction.cc:99
+#: ../../src/wui/buildingwindow.cc:233 ../../src/wui/fieldaction.cc:99
 msgid "Construction costs:"
 msgstr "Стоимость постройки:"
 
-#: ../../src/wui/buildingwindow.cc:231
+#: ../../src/wui/buildingwindow.cc:250
 msgid "Destroy"
 msgstr "Разрушить"
 
-#: ../../src/wui/buildingwindow.cc:246
+#: ../../src/wui/buildingwindow.cc:265
 msgid "Dismantle"
 msgstr "Разобрать"
 
-#: ../../src/wui/buildingwindow.cc:246
+#: ../../src/wui/buildingwindow.cc:265
 msgid "Returns:"
 msgstr "Вернётся:"
 
-#: ../../src/wui/buildingwindow.cc:274 ../../src/wui/buildingwindow.cc:440
+#: ../../src/wui/buildingwindow.cc:293 ../../src/wui/buildingwindow.cc:458
 msgid "Hide work area"
 msgstr "Скрыть рабочую область"
 
-#: ../../src/wui/buildingwindow.cc:286 ../../src/wui/fieldaction.cc:371
+#: ../../src/wui/buildingwindow.cc:305 ../../src/wui/fieldaction.cc:371
 #: ../../src/wui/shipwindow.cc:166
 msgid "Show Debug Window"
 msgstr "Показать окно отладки"
 
-#: ../../src/wui/buildingwindow.cc:293
+#: ../../src/wui/buildingwindow.cc:312
 msgid "Center view on this"
 msgstr "Центрировать вид на это здание"
 
-#: ../../src/wui/buildingwindow.cc:443
+#: ../../src/wui/buildingwindow.cc:461
 msgid "Show work area"
 msgstr "Показать рабочую область"
 
-#: ../../src/wui/buildingwindow.cc:476
+#: ../../src/wui/buildingwindow.cc:494
 msgid "Start an expedition"
 msgstr "Начать экспедицию"
 
-#: ../../src/wui/buildingwindow.cc:480
+#: ../../src/wui/buildingwindow.cc:498
 msgid "Cancel the expedition"
 msgstr "Отменить экспедицию"
 
-#: ../../src/wui/constructionsitewindow.cc:64
-#: ../../src/wui/dismantlesitewindow.cc:61
+#: ../../src/wui/constructionsitewindow.cc:55
+#: ../../src/wui/dismantlesitewindow.cc:52
 msgid "Building materials"
 msgstr "Стройматериалы"
 
@@ -3238,14 +3243,14 @@ msgstr "Настройки экономики"
 
 #: ../../src/wui/economy_options_window.cc:48
 #: ../../src/wui/general_statistics_menu.cc:150
-#: ../../src/wui/productionsitewindow.cc:62
-#: ../../src/wui/warehousewindow.cc:190
+#: ../../src/wui/productionsitewindow.cc:75
+#: ../../src/wui/warehousewindow.cc:188
 msgid "Wares"
 msgstr "Товары"
 
 #: ../../src/wui/economy_options_window.cc:49
 #: ../../src/wui/general_statistics_menu.cc:141
-#: ../../src/wui/warehousewindow.cc:194
+#: ../../src/wui/warehousewindow.cc:192
 msgid "Workers"
 msgstr "Работники"
 
@@ -3371,11 +3376,11 @@ msgstr "Сохранить игру"
 msgid "Game Time:"
 msgstr "Время игры:"
 
-#: ../../src/wui/game_main_menu_save_game.cc:81
+#: ../../src/wui/game_main_menu_save_game.cc:80
 msgid "Win condition:"
 msgstr "Условия победы:"
 
-#: ../../src/wui/game_main_menu_save_game.cc:124
+#: ../../src/wui/game_main_menu_save_game.cc:123
 #, c-format
 msgid "%i player"
 msgid_plural "%i players"
@@ -3384,7 +3389,7 @@ msgstr[1] "%i игрока"
 msgstr[2] "%i игроков"
 msgstr[3] "%i игроков"
 
-#: ../../src/wui/game_main_menu_save_game.cc:224
+#: ../../src/wui/game_main_menu_save_game.cc:223
 msgid ""
 "Game Saving Error!\n"
 "Saved game file may be corrupt!\n"
@@ -3392,22 +3397,22 @@ msgid ""
 "Reason given:\n"
 msgstr "Ошибка сохранения игры!\nВозможно файл сохранения поврежден!\n\nПричина:\n"
 
-#: ../../src/wui/game_main_menu_save_game.cc:227
-#: ../../src/wui/game_main_menu_save_game.cc:236
+#: ../../src/wui/game_main_menu_save_game.cc:226
+#: ../../src/wui/game_main_menu_save_game.cc:235
 msgid "Save Game Error!"
 msgstr "Ошибка сохранения игры!"
 
-#: ../../src/wui/game_main_menu_save_game.cc:289
+#: ../../src/wui/game_main_menu_save_game.cc:288
 msgid "File deletion"
 msgstr "Удаление файла"
 
-#: ../../src/wui/game_main_menu_save_game.cc:290
+#: ../../src/wui/game_main_menu_save_game.cc:289
 #, c-format
 msgid "Do you really want to delete the file %s?"
 msgstr "Вы действительно хотите удалить файл %s?"
 
 #: ../../src/wui/game_message_menu.cc:51
-#: ../../src/wui/game_message_menu.cc:603
+#: ../../src/wui/game_message_menu.cc:590
 msgid "Messages: Inbox"
 msgstr "Сообщения: Входящее"
 
@@ -3435,118 +3440,133 @@ msgctxt "message"
 msgid "Sent"
 msgstr "Время"
 
-#. * TRANSLATORS: %s is a tooltip, Del is the corresponding hotkey
-#: ../../src/wui/game_message_menu.cc:123
-#: ../../src/wui/game_message_menu.cc:594
-#: ../../src/wui/game_message_menu.cc:606
-#, c-format
-msgid "Del: %s"
-msgstr "Del: %s"
-
-#. * TRANSLATORS: Tooltip in the messages window
-#: ../../src/wui/game_message_menu.cc:125
-#: ../../src/wui/game_message_menu.cc:608
-msgid "Archive selected message"
-msgstr "Архивировать выбранное сообщение"
-
-#: ../../src/wui/game_message_menu.cc:133
-#: ../../src/wui/game_message_menu.cc:611
+#: ../../src/wui/game_message_menu.cc:129
+#: ../../src/wui/game_message_menu.cc:593
 msgid "Show Archive"
 msgstr "Показать архивированные сообщения"
 
 #. * TRANSLATORS: %s is a tooltip, G is the corresponding hotkey
-#: ../../src/wui/game_message_menu.cc:142
+#: ../../src/wui/game_message_menu.cc:138
 #, c-format
 msgid "G: %s"
 msgstr "G: %s"
 
 #. * TRANSLATORS: Tooltip in the messages window
-#: ../../src/wui/game_message_menu.cc:144
+#: ../../src/wui/game_message_menu.cc:140
 msgid "Center main mapview on location"
 msgstr "Центрировать карту на месте события"
 
 #. * TRANSLATORS: %1% is a tooltip, %2% is the corresponding hotkey
-#: ../../src/wui/game_message_menu.cc:519
-#: ../../src/wui/game_message_menu.cc:530
+#: ../../src/wui/game_message_menu.cc:511
+#: ../../src/wui/game_message_menu.cc:522
+#: ../../src/wui/game_message_menu.cc:527
+#: ../../src/wui/game_message_menu.cc:531
 #: ../../src/wui/game_message_menu.cc:535
 #: ../../src/wui/game_message_menu.cc:539
-#: ../../src/wui/game_message_menu.cc:543
-#: ../../src/wui/game_message_menu.cc:547
 msgid "%1% (Hotkey: %2%)"
 msgstr "%1% (клавиатура: %2%)"
 
-#: ../../src/wui/game_message_menu.cc:521
+#: ../../src/wui/game_message_menu.cc:513
 msgctxt "hotkey"
 msgid "Alt + 0"
 msgstr "Alt + 0"
 
 #. * TRANSLATORS: Tooltip in the messages window
-#: ../../src/wui/game_message_menu.cc:521
+#: ../../src/wui/game_message_menu.cc:513
 msgid "Show all messages"
 msgstr "Показать все сообщения"
 
 #. * TRANSLATORS: Tooltip in the messages window
-#: ../../src/wui/game_message_menu.cc:532
+#: ../../src/wui/game_message_menu.cc:524
 msgid "Show geologists' messages only"
 msgstr "Показать только сообщения геологов"
 
-#: ../../src/wui/game_message_menu.cc:533
+#: ../../src/wui/game_message_menu.cc:525
 msgctxt "hotkey"
 msgid "Alt + 1"
 msgstr "Alt + 1"
 
-#: ../../src/wui/game_message_menu.cc:537
+#: ../../src/wui/game_message_menu.cc:529
 msgctxt "hotkey"
 msgid "Alt + 2"
 msgstr "Alt + 2"
 
 #. * TRANSLATORS: Tooltip in the messages window
-#: ../../src/wui/game_message_menu.cc:537
+#: ../../src/wui/game_message_menu.cc:529
 msgid "Show economy messages only"
 msgstr "Показать только сообщения о состоянии экономики"
 
-#: ../../src/wui/game_message_menu.cc:541
+#: ../../src/wui/game_message_menu.cc:533
 msgctxt "hotkey"
 msgid "Alt + 3"
 msgstr "Alt + 3"
 
 #. * TRANSLATORS: Tooltip in the messages window
-#: ../../src/wui/game_message_menu.cc:541
+#: ../../src/wui/game_message_menu.cc:533
 msgid "Show seafaring messages only"
 msgstr "Показать только сообщения о мореплавании"
 
-#: ../../src/wui/game_message_menu.cc:545
+#: ../../src/wui/game_message_menu.cc:537
 msgctxt "hotkey"
 msgid "Alt + 4"
 msgstr "Alt + 4"
 
 #. * TRANSLATORS: Tooltip in the messages window
-#: ../../src/wui/game_message_menu.cc:545
+#: ../../src/wui/game_message_menu.cc:537
 msgid "Show warfare messages only"
 msgstr "Показать только военные сообщения"
 
-#: ../../src/wui/game_message_menu.cc:549
+#: ../../src/wui/game_message_menu.cc:541
 msgctxt "hotkey"
 msgid "Alt + 5"
 msgstr "Alt + 5"
 
 #. * TRANSLATORS: Tooltip in the messages window
-#: ../../src/wui/game_message_menu.cc:549
+#: ../../src/wui/game_message_menu.cc:541
 msgid "Show scenario messages only"
 msgstr "Показать только сообщения сценария"
 
-#: ../../src/wui/game_message_menu.cc:591
+#: ../../src/wui/game_message_menu.cc:583
 msgid "Messages: Archive"
 msgstr "Сообщения: Архив"
 
+#: ../../src/wui/game_message_menu.cc:586
+msgid "Show Inbox"
+msgstr "Показать \"Входящие\" сообщения"
+
+#: ../../src/wui/game_message_menu.cc:614
+#, c-format
+msgid "Restore the selected %d message"
+msgid_plural "Restore the selected %d messages"
+msgstr[0] "Восстановить выбранное %d сообщение"
+msgstr[1] "Восстановить выбранные %d сообщения"
+msgstr[2] "Восстановить выбранные %d сообщения"
+msgstr[3] "Восстановить выбранные %d сообщения"
+
 #. * TRANSLATORS: Tooltip in the messages window
-#: ../../src/wui/game_message_menu.cc:596
+#: ../../src/wui/game_message_menu.cc:620
 msgid "Restore selected message"
 msgstr "Восстановить выбранное сообщение"
 
-#: ../../src/wui/game_message_menu.cc:599
-msgid "Show Inbox"
-msgstr "Показать \"Входящие\" сообщения"
+#: ../../src/wui/game_message_menu.cc:628
+#, c-format
+msgid "Archive the selected %d message"
+msgid_plural "Archive the selected %d messages"
+msgstr[0] "Архивировать выбранное %d сообщение"
+msgstr[1] "Архивировать выбранные %d сообщения"
+msgstr[2] "Архивировать выбранные %d сообщения"
+msgstr[3] "Архивировать выбранные %d сообщения"
+
+#. * TRANSLATORS: Tooltip in the messages window
+#: ../../src/wui/game_message_menu.cc:634
+msgid "Archive selected message"
+msgstr "Архивировать выбранное сообщение"
+
+#. * TRANSLATORS: %s is a tooltip, Del is the corresponding hotkey
+#: ../../src/wui/game_message_menu.cc:639
+#, c-format
+msgid "Del: %s"
+msgstr "Del: %s"
 
 #: ../../src/wui/game_objectives_menu.cc:42
 #: ../../src/wui/interactive_player.cc:103
@@ -3666,11 +3686,11 @@ msgstr "%s победил!"
 msgid "Team %|1$u| won!"
 msgstr "Команда %|1$u| выиграла!"
 
-#: ../../src/wui/game_summary.cc:249
+#: ../../src/wui/game_summary.cc:250
 msgid "Score"
 msgstr "Счет"
 
-#: ../../src/wui/game_summary.cc:251
+#: ../../src/wui/game_summary.cc:252
 msgid "Team Score"
 msgstr "Командный счёт"
 
@@ -3730,12 +3750,12 @@ msgstr "Уменьшить количество товаров, которые �
 msgid "Increase the number of wares you want to be stored here."
 msgstr "Увеличить количество товаров, которые вы хотите здесь хранить."
 
-#: ../../src/wui/interactive_gamebase.cc:45
+#: ../../src/wui/interactive_gamebase.cc:52
 msgid "PAUSE"
 msgstr "ПАУЗА"
 
 #. * TRANSLATORS: actual_speed (desired_speed)
-#: ../../src/wui/interactive_gamebase.cc:94
+#: ../../src/wui/interactive_gamebase.cc:123
 #, c-format
 msgid "%1$s (%2$s)"
 msgstr "%1$s (%2$s)"
@@ -3783,39 +3803,39 @@ msgstr "Пароль:"
 msgid "WARNING: Password will be shown and saved readable!"
 msgstr "ВНИМАНИЕ: Пароль будет показан и сохранён незашифрованным!"
 
-#: ../../src/wui/login_box.cc:45
+#: ../../src/wui/login_box.cc:44
 msgid "Log in to a registered account"
 msgstr "Использовать зарегистрированную учётную запись"
 
-#: ../../src/wui/login_box.cc:48
+#: ../../src/wui/login_box.cc:47
 msgid "Automatically use this login information from now on."
 msgstr "Автоматически входить используя эту информацию"
 
-#: ../../src/wui/login_box.cc:56
+#: ../../src/wui/login_box.cc:55
 msgid "Login"
 msgstr "Вход"
 
-#: ../../src/wui/login_box.cc:77
+#: ../../src/wui/login_box.cc:78
 msgid "Empty Nickname"
 msgstr "Имя не введено"
 
-#: ../../src/wui/login_box.cc:77
+#: ../../src/wui/login_box.cc:78
 msgid "Please enter a nickname!"
 msgstr "Пожалуйста, введите имя!"
 
-#: ../../src/wui/login_box.cc:82
+#: ../../src/wui/login_box.cc:83
 msgid "Space in Nickname"
 msgstr "Пробел в имени"
 
-#: ../../src/wui/login_box.cc:83
+#: ../../src/wui/login_box.cc:84
 msgid "Sorry, but spaces are not allowed in nicknames!"
 msgstr "Извините, но пробелы в имени не разрешены!"
 
-#: ../../src/wui/login_box.cc:89
+#: ../../src/wui/login_box.cc:90
 msgid "Empty Password"
 msgstr "Пустой пароль"
 
-#: ../../src/wui/login_box.cc:89
+#: ../../src/wui/login_box.cc:90
 msgid "Please enter your password!"
 msgstr "Пожалуйста, введите пароль!"
 
@@ -3905,36 +3925,36 @@ msgstr "Название карты на вашем языке: %s"
 msgid "Hint:"
 msgstr "Подсказка:"
 
-#: ../../src/wui/maptable.cc:35
+#: ../../src/wui/maptable.cc:33
 msgid "Number of players"
 msgstr "Количество игроков"
 
 #. * TRANSLATORS: Column title for number of players in map list
-#: ../../src/wui/maptable.cc:35
+#: ../../src/wui/maptable.cc:33
 msgid "Pl."
 msgstr "Игр."
 
-#: ../../src/wui/maptable.cc:36 ../../src/wui/maptable.cc:65
+#: ../../src/wui/maptable.cc:34 ../../src/wui/maptable.cc:63
 msgid "Filename"
 msgstr "Имя файла"
 
-#: ../../src/wui/maptable.cc:36
+#: ../../src/wui/maptable.cc:34
 msgid "The name of the map or scenario"
 msgstr "Название карты или сценария"
 
-#: ../../src/wui/maptable.cc:38
+#: ../../src/wui/maptable.cc:36
 msgid "Size"
 msgstr "Размер"
 
-#: ../../src/wui/maptable.cc:38
+#: ../../src/wui/maptable.cc:36
 msgid "The size of the map (Width x Height)"
 msgstr "Размер карты (ширина x высота)"
 
-#: ../../src/wui/maptable.cc:69
+#: ../../src/wui/maptable.cc:67
 msgid "Map Name"
 msgstr "Карта"
 
-#: ../../src/wui/militarysitewindow.cc:51
+#: ../../src/wui/militarysitewindow.cc:44
 msgid "Soldiers"
 msgstr "Солдаты"
 
@@ -3954,57 +3974,68 @@ msgstr "Дороги"
 msgid "Zoom"
 msgstr "Масштаб"
 
-#: ../../src/wui/multiplayersetupgroup.cc:95
+#: ../../src/wui/multiplayersetupgroup.cc:98
 msgid "free"
 msgstr "Свободно"
 
-#: ../../src/wui/multiplayersetupgroup.cc:114
+#: ../../src/wui/multiplayersetupgroup.cc:117
 msgid "Spectator"
 msgstr "Наблюдатель"
 
-#: ../../src/wui/multiplayersetupgroup.cc:253
-msgid "Shared in"
-msgstr "Общие в"
+#. * TRANSLATORS: This is an option in multiplayer setup for sharing
+#. another player's starting position.
+#: ../../src/wui/multiplayersetupgroup.cc:293
+#, c-format
+msgid "Shared in Player %u"
+msgstr "Совместная с игроком %u"
 
-#: ../../src/wui/multiplayersetupgroup.cc:275
-#: ../../src/wui/playerdescrgroup.cc:149
-msgid "Computer"
-msgstr "Компьютер"
-
-#. * TRANSLATORS: This is the name of an AI used in the game setup screens
-#: ../../src/wui/multiplayersetupgroup.cc:280
-#: ../../src/wui/playerdescrgroup.cc:152
-msgid "Random AI"
-msgstr "Случайный ИИ"
-
-#: ../../src/wui/multiplayersetupgroup.cc:290
-#: ../../src/wui/playerdescrgroup.cc:160
-msgid "Human"
-msgstr "Человек"
-
-#: ../../src/wui/multiplayersetupgroup.cc:296
+#: ../../src/wui/multiplayersetupgroup.cc:314
 #: ../../src/wui/playerdescrgroup.cc:170
 msgctxt "tribe"
 msgid "Random"
 msgstr "Случайно"
 
-#: ../../src/wui/multiplayersetupgroup.cc:378
+#: ../../src/wui/multiplayersetupgroup.cc:316
+msgid "The tribe will be selected at random"
+msgstr "Племя будет выбрано случайно"
+
+#: ../../src/wui/multiplayersetupgroup.cc:370
+msgid "Shared in"
+msgstr "Общие в"
+
+#: ../../src/wui/multiplayersetupgroup.cc:388
+#: ../../src/wui/playerdescrgroup.cc:149
+msgid "Computer"
+msgstr "Компьютер"
+
+#. * TRANSLATORS: This is the name of an AI used in the game setup screens
+#: ../../src/wui/multiplayersetupgroup.cc:393
+#: ../../src/wui/playerdescrgroup.cc:152
+msgid "Random AI"
+msgstr "Случайный ИИ"
+
+#: ../../src/wui/multiplayersetupgroup.cc:403
+#: ../../src/wui/playerdescrgroup.cc:160
+msgid "Human"
+msgstr "Человек"
+
+#: ../../src/wui/multiplayersetupgroup.cc:477
 msgid "Client name"
 msgstr "Клиент"
 
-#: ../../src/wui/multiplayersetupgroup.cc:383
+#: ../../src/wui/multiplayersetupgroup.cc:482
 msgid "Role"
 msgstr "Роль"
 
-#: ../../src/wui/multiplayersetupgroup.cc:391
+#: ../../src/wui/multiplayersetupgroup.cc:490
 msgid "Start"
 msgstr "Старт"
 
-#: ../../src/wui/multiplayersetupgroup.cc:395
+#: ../../src/wui/multiplayersetupgroup.cc:494
 msgid "Type"
 msgstr "Тип"
 
-#: ../../src/wui/multiplayersetupgroup.cc:404
+#: ../../src/wui/multiplayersetupgroup.cc:503
 #: ../../src/wui/playerdescrgroup.cc:86
 msgid "Initialization"
 msgstr "Начальные условия"
@@ -4062,27 +4093,27 @@ msgctxt "unit_generic"
 msgid "minutes"
 msgstr "минут"
 
-#: ../../src/wui/plot_area.cc:315
+#: ../../src/wui/plot_area.cc:320
 msgid "game"
 msgstr "Вся игра"
 
-#: ../../src/wui/productionsitewindow.cc:75
+#: ../../src/wui/productionsitewindow.cc:88
 msgid "Exp"
 msgstr "Опыт"
 
-#: ../../src/wui/productionsitewindow.cc:76
+#: ../../src/wui/productionsitewindow.cc:89
 msgid "Next Level"
 msgstr "Следующий уровень"
 
-#: ../../src/wui/productionsitewindow.cc:88
+#: ../../src/wui/productionsitewindow.cc:101
 msgid "Terminate the employment of the selected worker"
 msgstr "Уволить выбранного работника"
 
-#: ../../src/wui/productionsitewindow.cc:163
+#: ../../src/wui/productionsitewindow.cc:166
 msgid "(coming)"
 msgstr "(идёт)"
 
-#: ../../src/wui/productionsitewindow.cc:163
+#: ../../src/wui/productionsitewindow.cc:166
 msgid "(vacant)"
 msgstr "(вакантно)"
 
@@ -4151,11 +4182,11 @@ msgid "Capacity"
 msgstr "Вместимость"
 
 #: ../../src/wui/soldierlist.cc:373 ../../src/wui/soldierlist.cc:394
-#: ../../src/wui/soldierlist.cc:456
+#: ../../src/wui/soldierlist.cc:455
 msgid "Click soldier to send away"
 msgstr "Щёлкните чтобы отозвать солдата"
 
-#: ../../src/wui/soldierlist.cc:389 ../../src/wui/soldierlist.cc:461
+#: ../../src/wui/soldierlist.cc:389 ../../src/wui/soldierlist.cc:460
 #, c-format
 msgid "HP: %1$u/%2$u  AT: %3$u/%4$u  DE: %5$u/%6$u  EV: %7$u/%8$u"
 msgstr "ЗД: %1$u/%2$u  АТ: %3$u/%4$u  ЗЩ: %5$u/%6$u  УК: %7$u/%8$u"
@@ -4184,7 +4215,7 @@ msgstr "Товары на складах"
 msgid "Workers in warehouses"
 msgstr "Работники на складах"
 
-#: ../../src/wui/trainingsitewindow.cc:55
+#: ../../src/wui/trainingsitewindow.cc:44
 msgid "Soldiers in training"
 msgstr "Солдаты на обучении"
 
@@ -4200,31 +4231,31 @@ msgstr "Потребление"
 msgid "Economy Health"
 msgstr "Здоровье экономики"
 
-#: ../../src/wui/warehousewindow.cc:145
+#: ../../src/wui/warehousewindow.cc:146
 msgid "Normal policy"
 msgstr "Нормальная политика"
 
-#: ../../src/wui/warehousewindow.cc:146
+#: ../../src/wui/warehousewindow.cc:147
 msgid "Preferably store selected wares here"
 msgstr "Предпочтительно хранить выбранные изделия здесь"
 
-#: ../../src/wui/warehousewindow.cc:147
+#: ../../src/wui/warehousewindow.cc:148
 msgid "Do not store selected wares here"
 msgstr "Не хранить выбранные изделия здесь"
 
-#: ../../src/wui/warehousewindow.cc:148
+#: ../../src/wui/warehousewindow.cc:149
 msgid "Remove selected wares from here"
 msgstr "Переместить выбранные изделия отсюда"
 
-#: ../../src/wui/warehousewindow.cc:199
+#: ../../src/wui/warehousewindow.cc:197
 msgid "Wares waiting to be shipped"
 msgstr "Товары, ожидающие погрузки"
 
-#: ../../src/wui/warehousewindow.cc:202
+#: ../../src/wui/warehousewindow.cc:200
 msgid "Workers waiting to embark"
 msgstr "Работники, ожидающие посадки на корабль"
 
-#: ../../src/wui/warehousewindow.cc:206
+#: ../../src/wui/warehousewindow.cc:204
 msgid "Expedition"
 msgstr "Экспедиция"
 

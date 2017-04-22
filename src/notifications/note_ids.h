@@ -36,9 +36,11 @@ enum class NoteId : uint32_t {
 	TrainingSiteSoldierTrained,
 	ShipMessage,
 	ShipWindow,
+	Building,
 	Economy,
 	GraphicResolutionChanged,
-	NoteExpeditionCanceled
+	NoteExpeditionCanceled,
+	Sound
 };
 
 #endif  // end of include guard: WL_NOTIFICATIONS_NOTE_IDS_H

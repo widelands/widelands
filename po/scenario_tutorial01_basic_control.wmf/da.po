@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-01-21 21:10+0000\n"
-"PO-Revision-Date: 2017-01-27 22:28+0000\n"
+"POT-Creation-Date: 2017-04-13 13:07+0000\n"
+"PO-Revision-Date: 2017-03-30 15:31+0000\n"
 "Last-Translator: Joe Hansen <joedalton2@yahoo.dk>\n"
 "Language-Team: Danish (http://www.transifex.com/widelands/widelands/language/da/)\n"
 "MIME-Version: 1.0\n"
@@ -281,8 +281,8 @@ msgid ""
 msgstr "Du lukker vinduet ved at højreklikke på det. Alle vinduer i Widelands kan lukkes på den måde, undtagen dem med instruktioner, såsom denne. Prøv det!"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:169
-msgid "Lumberjack is Done"
-msgstr "Skovhugger er færdig"
+msgid "The Lumberjack’s Hut is Done"
+msgstr "Skovhuggerhytten er færdig"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:172
 msgid ""
@@ -758,31 +758,38 @@ msgid ""
 msgstr "Når du har arkiveret en besked, vil en anden besked blive valgt automatisk fra listen."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:408
+#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:419
+msgid ""
+"You can also hold down the Ctrl or Shift key to select multiple messages, or"
+" press Ctrl + A to select them all."
+msgstr "Du kan også holde tasterne Ctrl eller Skift nede for at vælge flere beskeder, eller trykke på Ctrl + A for at vælge dem alle."
+
+#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:409
 msgid ""
 "Archive all messages that you currently have in your inbox, including this "
 "one."
 msgstr "Arkiver alle beskeder du har i øjeblikket i din indboks, inklusive denne."
 
-#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:411
+#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:412
 msgid "Archive all messages in your inbox"
 msgstr "Arkiver alle beskeder i din indboks"
 
-#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:413
+#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:414
 msgid "Archive Your Inbox Messages"
 msgstr "Arkiver dine beskeder i indboksen"
 
-#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:414
+#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:415
 msgid ""
 "The message window is central to fully controlling your tribe’s fortune. "
 "However, you will get a lot of messages in a real game. To keep your head "
 "straight, you should try to keep the inbox empty."
 msgstr "Beskedvinduet er centralt for fuldt ud at kontrollere din stammes lykke. Du får dog en masse beskeder i løbet af et spil. For at bevare overblikket, bør du forsøge at holde din indboks tom."
 
-#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:416
+#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:417
 msgid "Archive all your messages in your inbox now."
 msgstr "Arkiver alle dine beskeder i din indboks nu."
 
-#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:417
+#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:418
 msgid ""
 "To do so, open the message window by pressing ‘n’ or clicking the second "
 "button from the right at the very bottom of the screen. The newest message "
@@ -790,44 +797,44 @@ msgid ""
 "message’ button until all messages have been archived and the list is empty."
 msgstr "For at gøre dette åbnes beskedvinduet via tasten »n« eller ved at klikke på knappen yderst til højre i bunden af skærmen. Den nyeste besked vil være markeret for dig automatisk. Bliv ved med at klikke på knappen »Arkiver valgt besked« indtil alle beskeder er blevet arkiveret og listen er tom."
 
-#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:424
-#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:445
+#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:426
+#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:447
 msgid "Closing Windows"
 msgstr "Luk vindue"
 
-#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:426
+#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:428
 msgid ""
 "Excellent. Do you remember how to close windows? You simply have to right-"
 "click on them. This will work with all windows except for story message "
 "windows like this one. Go ahead and try it."
 msgstr "Glimrende. Kan du huske hvordan vinduer skal lukkes? Du skal bare højreklikke på dem. Dette vil fungere med alle vinduer undtagen for vinduer med historiebeskeder såsom denne. Prøv det."
 
-#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:428
+#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:430
 msgid ""
 "First, close this window by pressing the button below, then right-click into"
 " the messages window to close it."
 msgstr "Først, luk dette vindue ved at trykke på knappen nedenfor, så højreklik på beskedvinduet for at lukke det."
 
-#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:433
+#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:435
 msgid "Close the messages window"
 msgstr "Luk beskedvinduet"
 
-#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:435
+#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:437
 msgid "Close the Messages Window"
 msgstr "Luk beskedvinduet"
 
-#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:436
+#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:438
 msgid ""
 "All windows in Widelands can be closed by right-clicking into them. Some "
 "windows can also be toggled with the buttons at the very bottom of the "
 "screen."
 msgstr "Alle vinduer i Widelands kan lukkes ved at højreklikke på dem. Nogle vinduer kan aktiveres via knapperne i bunden af skærmen."
 
-#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:438
+#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:440
 msgid "Close the messages window now by right-clicking into it."
 msgstr "Luk beskedvinduet nu ved at højreklikke på det."
 
-#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:447
+#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:449
 msgid ""
 "Well done! Let’s see how messages work in a real game, shall we? For this, "
 "I’ll take all rocks away from the poor stonemasons in the quarries. They "
@@ -835,11 +842,11 @@ msgid ""
 "the next time they try to do some work."
 msgstr "Glimrende! Lad os se hvordan beskederne fungerer i et rigtigt spil, skal vi? Jeg fjerner lige alle sten fra de stakkels stenhuggere i stenbruddene. De vil så sende en besked hver om, at de ikke kan finde sten i deres arbejdsområde næsten gang de forsøger at udføre noget arbejde."
 
-#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:455
+#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:457
 msgid "Messages Arrived!"
 msgstr "Beskeder ankommet!"
 
-#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:457
+#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:459
 msgid ""
 "You received some messages. See how the button at the bottom of the screen "
 "has changed appearance? You can destroy the quarries now as they are no "
@@ -847,53 +854,53 @@ msgid ""
 "possibilities:"
 msgstr "Du har modtaget nogle beskeder. Kan du se hvordan knappen i bunden af skærmen har ændret fremtoning? Du kan ødelægge stenbruddene nu, da de ikke længere er til nytte og bare blokerer plads. For dette er der to muligheder:"
 
-#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:459
+#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:461
 msgid ""
 "Burning down the quarry: this is the fastest way of clearing the space. "
 "While the worker abandons the building, the wares are lost."
 msgstr "Brænd stenbruddet ned: Dette er den hurtigste måde at rydde pladsen. Mens arbejderne forlader bygningen, går varerne til grunde."
 
-#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:460
+#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:462
 msgid ""
 "Dismantling the quarry: a builder will walk from the headquarters to "
 "dismantle the quarry piece by piece. Thereby, you regain some of the "
 "resources you used for the construction."
 msgstr "Nedrivning af stenbruddet: En byggearbejder vil gå fra hovedkvarteret for at rive stenbruddet ned et stykke ad gangen. Dermed genbruger du nogle af ressourcerne fra konstruktionen."
 
-#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:464
+#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:466
 msgid "Destroy the two quarries"
 msgstr "Ødelæg de to stenbrud"
 
-#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:466
+#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:468
 msgid ""
 "Since our quarries are useless now, you can destroy them and reuse the space"
 " later on."
 msgstr "Da vores stenbrud er uden nytte nu, så kan du nedlægge dem og genbruge pladsen senere."
 
-#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:468
+#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:470
 msgid ""
 "There are two different ways of destroying a building: burning down and "
 "dismantling. Try them both out on your quarries."
 msgstr "Der er to metoder til at nedlægge en bygning: Den kan brændes eller nedrives. Prøv begge metoder på dine stenbrud."
 
-#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:469
+#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:471
 msgid ""
 "Burning down the quarry: This is the fastest way of clearing the space. "
 "While the worker abandons the building, the wares are lost."
 msgstr "Brænd stenbruddet ned: Dette er dem hurtigste måde at rydde pladsen. Mens arbejderne forlader bygningen, går varerne til grunde."
 
-#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:470
+#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:472
 msgid ""
 "Dismantling the quarry: A builder will walk from the headquarters to "
 "dismantle the quarry piece by piece. Thereby, you regain some of the "
 "resources you used for the construction."
 msgstr "Nedrivning af stenbruddet: En byggearbejder vil gå fra hovedkvarteret for at rive stenbruddet ned et stykke ad gangen. Dermed genbruger du nogle af ressourcerne fra konstruktionen."
 
-#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:475
+#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:477
 msgid "Expanding Your Territory!"
 msgstr "Udvidelse af dit territorium!"
 
-#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:477
+#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:479
 msgid ""
 "There is one more thing I’d like to teach you now: Expanding your territory."
 " The place that we started with around our headquarters is barely enough for"
@@ -902,7 +909,7 @@ msgid ""
 "territory."
 msgstr "Der er en mere ting jeg gerne vil vise dig: Udvidelse af dit territorium. Pladsen rundt om hovedkvarteret, hvor vi startede, er næsten ikke nok for en grundlæggende bygningsinfrastruktur, og vi har ikke adgang til bjerge, som vi skal have, for at kunne udvinde mineraler og kul. Så vi må udvide vores territorium."
 
-#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:478
+#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:480
 msgid ""
 "Expanding is as simple as building a military building at the edge of your "
 "territory. The Barbarians have a selection of different military buildings: "
@@ -913,46 +920,46 @@ msgid ""
 "farther than others."
 msgstr "Udvidelse foregår ved at bygge en militærbygning i udkanten af dit territorium. Barbarerne har et udvalg af forskellige militærbygninger: vagttårne, forte, tårne, fæstninger og kasteller. Jo større bygningen er, jo mere dyr er den at bygge, men jo mere land vil den også kontrollere omkring sig og jo flere soldater kan der være udstationeret i bygningen. Bygningerne har også forskelligt udsyn: Bygninger med et tårn kan se længere end bygninger uden tårn."
 
-#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:479
+#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:481
 msgid ""
 "As soon as a military building is manned, it will extend your land. I will "
 "tell your more about military buildings in another tutorial."
 msgstr "Så snart en militærbygning er bemandet, så vil den udvide dit landområde. Jeg vil fortælle dig mere om militære bygninger i en anden øvelse."
 
-#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:481
+#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:483
 msgid "Let’s try it out now: build a military building on your border."
 msgstr "Lad os nu prøve i praksis: Byg en militærbygning på din grænse."
 
-#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:482
+#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:484
 msgid ""
 "The sentry is the only military site that fits on a small building plot. If "
 "your lumberjack has cleared enough space, you can also build another "
 "military building."
 msgstr "Vagttårnet er det eneste militæranlæg, som kan være på en lille byggeplads. Hvis din skovhugger har ryddet nok plads, så kan du også bygge andre militærbygninger."
 
-#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:485
+#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:487
 msgid "Expand your territory"
 msgstr "Udvid dit territorium"
 
-#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:487
+#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:489
 msgid "Make your territory grow"
 msgstr "Få dit territorium til at vokse"
 
-#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:488
+#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:490
 msgid ""
 "In Widelands, it is necessary to build many buildings, which take up a lot "
 "of space. To expand your territory, you have to build military buildings "
 "next to your border. Every tribe has several military buildings."
 msgstr "I Widelands er det nødvendigt at bygge mange bygninger, som optager en masse plads. For at udvide dit territorium, skal du bygge mange militære bygninger ved dine grænser. Hver stamme har flere forskellige militærbygninger."
 
-#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:490
+#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:492
 msgid ""
 "The Barbarians have four different military buildings you can build: the "
 "sentry (small), the barrier and the tower (both medium) and the fortress "
 "(big). Just choose the one you like most."
 msgstr "Barbarerne har fire forskellige militærbygninger: Vagttårn (lille), fortet og tårnet (begge bygninger i mellemstørrelse) og fæstningen (stor). Bare vælg den du foretrækker."
 
-#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:491
+#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:493
 msgid ""
 "Remember that big buildings (green icon) cannot be built on small (red) or "
 "medium (yellow) building plots, but buildings can be built on a building "
@@ -960,59 +967,59 @@ msgid ""
 " mind when you search for a suitable place."
 msgstr "Husk at store bygninger (grønt ikon) ikke kan bygges på små (røde) eller mellem (gule) byggepladser, men bygninger kan bygges på en byggeplads, som tilbyder mere plads end de skal bruge. Det skal du huske, når du leder efter en egnet plads."
 
-#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:497
+#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:499
 msgid "Military Site Occupied"
 msgstr "Militæranlæg indtaget"
 
-#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:499
+#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:501
 msgid "Your territory has just grown!"
 msgstr "Dit territorium er vokset!"
 
-#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:500
+#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:502
 msgid ""
 "Great. Do you see how your territory has grown since your soldiers entered "
 "your new military building?"
 msgstr "Glimrende. Kan du se, at dit territorium er vokset siden dine soldater indtog din nye militære bygning?"
 
-#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:501
+#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:503
 msgid ""
 "Every military building has a certain conquer area – the more expensive the "
 "building, the more land it conquers."
 msgstr "Hver militærbygning har et bestemt kontrolområde - jo mere dyr bygningen er, jo mere land kontrollerer den."
 
-#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:508
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:510
+#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:512
 msgid "Conclusion"
 msgstr "Konklusion"
 
-#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:511
+#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:513
 msgid ""
 "This concludes the first tutorial. In order to learn more about the game, I "
 "suggest to play one of the other tutorials. Each of them covers a different "
 "topic."
 msgstr "Dette afslutter den første øvelse. For at lære mere om spillet foreslår jeg, at du spiller en af de andre øvelser. Hver af dem dækker et separat emne."
 
-#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:512
+#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:514
 msgid ""
 "However, since you now know how to control Widelands, you can also start a "
 "game (or continue this one) and discover more by yourself."
 msgstr "Da du nu ved hvordan Widelands kontrolleres, så kan du også starte et spil (eller fortsætte dette) og finde ud af mere selv."
 
-#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:513
+#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:515
 msgid "To leave this game and return to the main menu, click on the"
 msgstr "For at forlade dette spil og returnere til hovedmenuen klikkes på"
 
-#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:515
+#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:517
 msgid ""
 "‘Main Menu’ button on the very left at the bottom of the screen. Then click "
 "the"
 msgstr "knappen »Hovedmenu« til venstre i bunden af skærmen. Klik så på"
 
-#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:516
+#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:518
 msgid "‘Exit Game’ button."
 msgstr "knappen »Afslut spil«."
 
-#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:517
+#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:519
 msgid ""
 "Thanks for playing this tutorial. Enjoy Widelands and remember to visit us "
 "at"
@@ -1023,7 +1030,7 @@ msgstr "Tak fordi du spillede denne øvelse. Nyd Wideland og husk at besøge os 
 msgid "“%s”"
 msgstr "“%s”"
 
-#: ../../data/scripting/format_scenario.lua:96
+#: ../../data/scripting/format_scenario.lua:84
 msgid "New Objective"
 msgid_plural "New Objectives"
 msgstr[0] "Nyt mål"

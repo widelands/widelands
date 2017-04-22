@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-02-19 19:34+0000\n"
-"PO-Revision-Date: 2017-02-20 08:08+0000\n"
+"POT-Creation-Date: 2017-03-03 06:24+0000\n"
+"PO-Revision-Date: 2017-03-05 08:33+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Gaelic, Scottish (http://www.transifex.com/widelands/widelands/language/gd/)\n"
 "MIME-Version: 1.0\n"
@@ -573,7 +573,7 @@ msgid ""
 "building where the side effects do not matter? I think those two things "
 "would be accepted by the people and would reduce the cooking time without "
 "taking away the ritual."
-msgstr "Ò agus nas cudromaiche buileach: tha e dòrainneach an t-iasg is feòil a thoiteadh gus an glanadh ’s piseach a thoirt air a’ bhlas a th’ orra. Tha an taigh agam loma-làn smùide agus bidh droch-fhàileadh ann fad seachdainean. Saoilibh am b’ urrainn dhuinn seo a dhèanamh ann an taigh sònraichte far nach biodh an droch-bhuil gu diofar? Saoilidh mi gun gabhadh an sluagh ris an dà chùis seo agus cha bhiodh againn ri ùine mhòr a thoirt seachad air a’ chòcaireachd is sinn a’ cumail ris a’ gnàths fhathast."
+msgstr "Ò agus nas cudromaiche buileach: tha e dòrainneach an t-iasg is feòil a thoiteadh gus an glanadh ’s piseach a thoirt air a’ bhlas a th’ orra. Tha an taigh agam loma-làn smùide agus bidh droch-fhàileadh ann fad seachdainean. Saoilibh am b’ urrainn dhuinn seo a dhèanamh ann an togalach sònraichte far nach biodh an droch-bhuil gu diofar? Saoilidh mi gun gabhadh an sluagh ris an dà chùis seo agus cha bhiodh againn ri ùine mhòr a thoirt seachad air a’ chòcaireachd is sinn a’ cumail ris a’ gnàths fhathast."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:247
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:248
@@ -691,7 +691,7 @@ msgstr "Fhuair mi naidheachd gun do thòisich gnìomhachas nam mèinnean againn 
 msgid ""
 "Today I saw the first recruits gathering in front of the new barracks. If "
 "everything goes well, they should receive their training soon."
-msgstr "Chunnaic mi na ciad glas-laoich cruinn còmhla air beulaibh an taigh-fheachd ùir an-diugh. Chan fhada gus am faigh iad oideachadh ma thèid leinn mar bu chòir."
+msgstr "Chunnaic mi na ciad glas-laoich cruinn còmhla air beulaibh an taighe-fheachd ùir an-diugh. Chan fhada gus am faigh iad oideachadh ma thèid leinn mar bu chòir."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:336
 msgid "Jundlina Summons Sidolus"

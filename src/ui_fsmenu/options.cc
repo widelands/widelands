@@ -124,12 +124,14 @@ FullscreenMenuOptions::FullscreenMenuOptions(OptionsCtrl::OptionsStruct opt)
                         0,
                         100,  // 100 is arbitrary, will be resized in layout().
                         100,  // 100 is arbitrary, will be resized in layout().
+                        24,
                         _("Language")),
      resolution_dropdown_(&box_interface_left_,
                           0,
                           0,
                           100,  // 100 is arbitrary, will be resized in layout().
                           100,  // 100 is arbitrary, will be resized in layout().
+                          24,
                           _("In-game resolution")),
 
      fullscreen_(&box_interface_left_, Vector2i(0, 0), _("Fullscreen"), "", 0),
@@ -679,7 +681,7 @@ void OptionsCtrl::save_options() {
 
 	WLApplication::get()->set_input_grab(opt.inputgrab);
 	i18n::set_locale(opt.language);
-	UI::g_fh1->reinitialize_fontset();
+	UI::g_fh1->reinitialize_fontset(i18n::get_locale());
 	g_sound_handler.set_disable_music(!opt.music);
 	g_sound_handler.set_disable_fx(!opt.fx);
 }

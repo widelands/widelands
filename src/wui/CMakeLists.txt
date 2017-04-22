@@ -15,6 +15,7 @@ wl_library(wui_chat_ui
     chat
     graphic
     graphic_color
+    graphic_fonthandler
     graphic_text
     graphic_text_layout
     logic
@@ -85,8 +86,9 @@ wl_library(wui_common
     base_i18n
     base_log
     graphic
+    graphic_fonthandler
     graphic_playercolor
-    graphic_text_layout
+    graphic_text_constants
     io_filesystem
     logic
     logic_game_controller
@@ -131,6 +133,7 @@ wl_library(wui_waresdisplay
     base_exceptions
     base_i18n
     graphic
+    graphic_fonthandler
     graphic_text_layout
     logic
     ui_basic
@@ -145,13 +148,14 @@ wl_library(wui
     attack_box.h
     building_statistics_menu.cc
     building_statistics_menu.h
-    building_ui.cc
     buildingwindow.cc
     buildingwindow.h
     constructionsitewindow.cc
+    constructionsitewindow.h
     debugconsole.cc
     debugconsole.h
     dismantlesitewindow.cc
+    dismantlesitewindow.h
     encyclopedia_window.cc
     encyclopedia_window.h
     fieldaction.cc
@@ -194,6 +198,7 @@ wl_library(wui
     login_box.h
     logmessage.h
     militarysitewindow.cc
+    militarysitewindow.h
     minimap.cc
     minimap.h
     multiplayersetupgroup.cc
@@ -217,6 +222,7 @@ wl_library(wui
     story_message_box.cc
     story_message_box.h
     trainingsitewindow.cc
+    trainingsitewindow.h
     transport_draw.cc
     tribal_encyclopedia.cc
     tribal_encyclopedia.h
@@ -225,6 +231,7 @@ wl_library(wui
     ware_statistics_menu.cc
     ware_statistics_menu.h
     warehousewindow.cc
+    warehousewindow.h
     watchwindow.cc
     watchwindow.h
   USES_SDL2
@@ -240,11 +247,14 @@ wl_library(wui
     economy
     game_io
     graphic
+    graphic_align
     graphic_color
+    graphic_fonthandler
     graphic_minimap_renderer
     graphic_playercolor
     graphic_surface
     graphic_text
+    graphic_text_constants
     graphic_text_layout
     io_fileread
     io_filesystem
@@ -254,6 +264,7 @@ wl_library(wui
     logic_game_settings
     logic_widelands_geometry
     network
+    note_sound
     notifications
     profile
     scripting_coroutine

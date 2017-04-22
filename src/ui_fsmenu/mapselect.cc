@@ -26,6 +26,7 @@
 #include "base/i18n.h"
 #include "base/log.h"
 #include "base/wexception.h"
+#include "graphic/font_handler1.h"
 #include "graphic/graphic.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "logic/game_controller.h"
@@ -48,7 +49,7 @@ FullscreenMenuMapSelect::FullscreenMenuMapSelect(GameSettingsProvider* const set
      // Main title
      title_(this, 0, 0, _("Choose a map"), UI::Align::kCenter),
      checkboxes_(this, 0, 0, UI::Box::Vertical, 0, 0, 2 * padding_),
-     table_(this, tablex_, tabley_, tablew_, tableh_, false),
+     table_(this, tablex_, tabley_, tablew_, tableh_),
      map_details_(this,
                   right_column_x_,
                   tabley_,
