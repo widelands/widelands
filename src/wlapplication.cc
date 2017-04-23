@@ -1206,11 +1206,13 @@ bool WLApplication::new_game() {
 	SinglePlayerGameSettingsProvider sp;
 	FullscreenMenuLaunchSPG lgm(&sp);
 	const FullscreenMenuBase::MenuTarget code = lgm.run<FullscreenMenuBase::MenuTarget>();
-	Widelands::Game game;
 
 	if (code == FullscreenMenuBase::MenuTarget::kBack) {
 		return false;
 	}
+
+	Widelands::Game game;
+
 	if (code == FullscreenMenuBase::MenuTarget::kScenarioGame) {  // scenario
 		try {
 			game.run_splayer_scenario_direct(sp.get_map().c_str(), "");
