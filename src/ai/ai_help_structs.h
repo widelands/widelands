@@ -122,6 +122,7 @@ constexpr int f_neuron_pool_size = 60;
 constexpr int f_neuron_bit_size = 32;
 constexpr int MutationRatePosition = 42;
 constexpr bool kInitializeOnLoad = true;
+constexpr bool kDisableHigherMutationForWeakerAI = true;
 
 constexpr uint32_t kNever = std::numeric_limits<uint32_t>::max();
 

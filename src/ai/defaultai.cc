@@ -685,7 +685,6 @@ void DefaultAI::late_initialization() {
 
 			// now we identify producers of critical build materials
 			for (DescriptionIndex ware : bo.outputs) {
-				//printf ("%-20s: Testing output %s / %d\n", bo.name, tribe_->get_ware_descr(ware)->descname().c_str(), ware); //NOCOM
 				// iterating over wares subsitutes
 				if (tribe_->ware_index("wood") == ware || tribe_->ware_index("blackwood") == ware ||
 				    tribe_->ware_index("marble") == ware || tribe_->ware_index("planks") == ware ||
@@ -697,10 +696,6 @@ void DefaultAI::late_initialization() {
 				}
 			}
 			
-			//if (bo.is(BuildingAttribute::kBuildingMatProducer)) {
-				//printf (" %-20s is building material producer\n", bo.name);
-			//}
-
 			for (const auto& temp_buildcosts : prod.buildcost()) {
 				// bellow are non-critical wares (well, various types of wood)
 				if (tribe_->ware_index("blackwood") == temp_buildcosts.first ||
@@ -716,11 +711,6 @@ void DefaultAI::late_initialization() {
 					 bo.name, tribe_->get_ware_descr(temp_buildcosts.first)->descname().c_str());
 				}
 			}
-
-			//if (!bo.critical_building_material.empty()) {
-				//printf (" %-20s needs %lu critical materials for construction\n", bo.name, bo.critical_building_material.size());
-			//}
-
 
 			continue;
 		}
@@ -1750,12 +1740,6 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 		field.military_score_ += score_parts[i];
 	}
 
-	//if (field.enemy_owned_land_nearby) {
-		//field.military_score_ += 50; //NOCOM get rid of this gradually
-	//}
-
-
-
 	if (field.military_score_ < -5000 || field.military_score_ > 2000) {
 		printf ("Warning field.military_score_ %5d, compounds: ", field.military_score_);
 		for (uint16_t i = 0; i < score_parts_size;  i++) {
@@ -2391,7 +2375,7 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 
 					prio += -10 + 2 * bf->ground_water;
 
-				} else if (bo.is(BuildingAttribute::kLumberjack)) {  // LUMBERJACS
+				} else if (bo.is(BuildingAttribute::kLumberjack)) {
 
 					prio = bo.primary_priority;
 
@@ -2403,7 +2387,12 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 
 					// consider cutters and rangers nearby
 					prio += bf->supporters_nearby.at(bo.outputs.at(0)) * std::abs(management_data.get_military_number_at(25));
-					prio += std::abs(management_data.get_military_number_at(26) / 10) * (bf->trees_nearby - 10);
+					
+					if (bo.new_building == BuildingNecessity::kAllowed) {
+						prio += std::abs(management_data.get_military_number_at(26)) * (bf->trees_nearby - 10);
+					} else {
+						prio += 3 * (bf->trees_nearby - 2);
+					}
 					
 					prio -= bf->producers_nearby.at(bo.outputs.at(0)) * 20;
 					        //std::abs(management_data.get_military_number_at(25) / 3);
@@ -3880,7 +3869,6 @@ bool DefaultAI::check_productionsites(uint32_t gametime) {
 			return true;
 		}
 		
-		//NOCOM
 		// Blocking the vicinity if too low performance and ware is still needed
 		if (site.site->get_statistics_percent() <= 50 || get_stocklevel(*site.bo, gametime) < 5) {
 			//printf ("Blocking vicinity of %-25s at position %3dx%3d\n",
@@ -3935,8 +3923,6 @@ bool DefaultAI::check_productionsites(uint32_t gametime) {
 	// supporting productionsites (rangers)
 	// stop/start them based on stock avaiable
 	if (site.bo->production_hint >= 0) {
-
-		assert(site.bo->is_what.count(BuildingAttribute::kRanger) == site.bo->is(BuildingAttribute::kRanger));// NOCOM
 
 		if (!site.bo->is(BuildingAttribute::kRanger)) {
 			// other supporting sites, like fish breeders, gamekeepers are not dismantled at all
@@ -4416,7 +4402,7 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 			} else {
 				return BuildingNecessity::kAllowed;
 			}
-		} else if (bo.is_what.count(BuildingAttribute::kRanger)) {
+		} else if (bo.is(BuildingAttribute::kRanger)) {
 			int32_t value = management_data.neuron_pool[39].get_result_safe(
 			   mines_.size() + productionsites.size() / 2, kAbsValue);
 			value -= management_data.neuron_pool[40].get_result_safe(
@@ -4425,7 +4411,7 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 			   get_stocklevel(bo, gametime) / 4, kAbsValue);
 			value -= management_data.neuron_pool[42].get_result_safe(bo.total_count(), kAbsValue);
 			value += management_data.get_military_number_at(13);
-			value /= 5;
+			value /= 1 + std::abs(management_data.get_military_number_at(52))/ 10;
 			value = std::max(value, -3);
 
 			bo.cnt_target = 5 + value;
