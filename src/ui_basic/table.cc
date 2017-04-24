@@ -577,7 +577,7 @@ bool Table<void*>::sort_helper(uint32_t a, uint32_t b) {
 }
 
 void Table<void*>::layout() {
-	if (columns_.empty()) {
+	if (columns_.empty() || get_w() == 0) {
 		return;
 	}
 
@@ -588,12 +588,13 @@ void Table<void*>::layout() {
 	scrollbar_->set_steps(entry_records_.size() * get_lineheight() - (get_h() - headerheight_ - 2));
 
 	// Find a column to resize
-	size_t resizeable_column = std::numeric_limits<size_t>::max();
+	size_t resizeable_column;
 	if (flexible_column_ < columns_.size()) {
 		resizeable_column = flexible_column_;
 	} else {
 		// Use the widest column
-		uint32_t widest_width = columns_[resizeable_column].width;
+		resizeable_column = 0;
+		uint32_t widest_width = columns_[0].width;
 		for (size_t i = 1; i < columns_.size(); ++i) {
 			const uint32_t width = columns_[i].width;
 			if (width > widest_width) {
@@ -603,31 +604,30 @@ void Table<void*>::layout() {
 		}
 	}
 
-	// If we have a resizeable column, adjust the column sizes.
-	if (resizeable_column != std::numeric_limits<size_t>::max()) {
-		int all_columns_width = scrollbar_->is_enabled() ? scrollbar_->get_w() : 0;
-		for (const auto& column : columns_) {
-			all_columns_width += column.width;
+	// Adjust the column sizes.
+	int all_columns_width = scrollbar_->is_enabled() ? scrollbar_->get_w() : 0;
+	for (const auto& column : columns_) {
+		all_columns_width += column.width;
+	}
+
+	if (all_columns_width != get_w()) {
+		Column& column = columns_.at(resizeable_column);
+		column.width = std::max(0, column.width + get_w() - all_columns_width);
+		column.btn->set_size(column.width, column.btn->get_h());
+
+		int offset = 0;
+		for (const auto& col : columns_) {
+			col.btn->set_pos(Vector2i(offset, col.btn->get_y()));
+			offset = col.btn->get_x() + col.btn->get_w();
 		}
-		if (all_columns_width != get_w()) {
-			Column& column = columns_.at(resizeable_column);
-			column.width = std::max(0, column.width + get_w() - all_columns_width);
-			column.btn->set_size(column.width, column.btn->get_h());
 
-			int offset = 0;
-			for (const auto& col : columns_) {
-				col.btn->set_pos(Vector2i(offset, col.btn->get_y()));
-				offset = col.btn->get_x() + col.btn->get_w();
-			}
-
-			if (scrollbar_->is_enabled()) {
-				const UI::Button* last_column_btn = columns_.back().btn;
-				scrollbar_filler_button_->set_pos(
-				   Vector2i(last_column_btn->get_x() + last_column_btn->get_w(), 0));
-				scrollbar_filler_button_->set_visible(true);
-			} else {
-				scrollbar_filler_button_->set_visible(false);
-			}
+		if (scrollbar_->is_enabled()) {
+			const UI::Button* last_column_btn = columns_.back().btn;
+			scrollbar_filler_button_->set_pos(
+			   Vector2i(last_column_btn->get_x() + last_column_btn->get_w(), 0));
+			scrollbar_filler_button_->set_visible(true);
+		} else {
+			scrollbar_filler_button_->set_visible(false);
 		}
 	}
 }
