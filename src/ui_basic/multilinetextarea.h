@@ -68,6 +68,10 @@ struct MultilineTextarea : public Panel {
 	void set_color(RGBColor fg) {
 		color_ = fg;
 	}
+	// NOCOM(#codereview): The semantis of this function are unclear to me.
+	// Could you document what it does and maybe rename it? Also, force_new_rendere(yes|no) is a
+	// hard to understand API. 
+	// I assume it means something like "start new texture" or so?
 	void force_new_renderer(bool force = true) {
 		force_new_renderer_ = force;
 	}

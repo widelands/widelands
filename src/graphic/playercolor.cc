@@ -21,6 +21,7 @@
 
 #include "graphic/texture.h"
 
+// NOCOM(#codereview): This should return a unique_ptr<>, since it creates a memory that must then be owned (i.e. freed) by the caller.
 Image* playercolor_image(const RGBColor* clr, const Image* image, const Image* color_mask) {
 	int w = image->width();
 	int h = image->height();
@@ -30,6 +31,7 @@ Image* playercolor_image(const RGBColor* clr, const Image* image, const Image* c
 	return rv;
 }
 
+// NOCOM(#codereview): should return unique_ptr
 Image* playercolor_image(int player_number, const Image* image, const Image* color_mask) {
 	return playercolor_image(&kPlayerColors[player_number], image, color_mask);
 }

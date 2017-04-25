@@ -65,7 +65,19 @@ struct Borders {
 	uint8_t left, top, right, bottom;
 };
 
+// NOCOM(#codereview): please document the meaning of the individual values for
+// the final render.
 enum class WidthUnit { kAbsolute, kPercent, kShrink, kFill };
+
+struct DesiredWidth {
+	DesiredWidth(int init_width, WidthUnit init_unit) : width(init_width), unit(init_unit) {
+	}
+	DesiredWidth() : DesiredWidth(0, WidthUnit::kShrink) {
+	}
+
+	int width;
+	WidthUnit unit;
+};
 
 struct NodeStyle {
 	UI::FontSet const* fontset;
@@ -662,8 +674,7 @@ class DivTagRenderNode : public RenderNode {
 public:
 	DivTagRenderNode(NodeStyle& ns)
 	   : RenderNode(ns),
-	     desired_width_(0),
-	     desired_width_unit_(WidthUnit::kShrink),
+	     desired_width_(),
 	     background_color_(0, 0, 0),
 	     is_background_color_set_(false),
 	     background_image_(nullptr) {
@@ -685,12 +696,8 @@ public:
 		return height();
 	}
 
-	uint16_t desired_width() const {
+	DesiredWidth desired_width() const {
 		return desired_width_;
-	}
-
-	WidthUnit desired_width_unit() const {
-		return desired_width_unit_;
 	}
 
 	Texture* render(TextureCache* texture_cache) override {
@@ -756,9 +763,8 @@ public:
 		h_ = inner_h;
 		margin_ = margin;
 	}
-	void set_desired_width(int w, WidthUnit unit) {
-		desired_width_ = w;
-		desired_width_unit_ = unit;
+	void set_desired_width(DesiredWidth desired_width) {
+		desired_width_ = desired_width;
 	}
 	void set_background(RGBColor clr) {
 		background_color_ = clr;
@@ -776,8 +782,7 @@ public:
 	}
 
 private:
-	uint16_t desired_width_;
-	WidthUnit desired_width_unit_;
+	DesiredWidth desired_width_;
 	uint16_t w_, h_;
 	vector<RenderNode*> nodes_to_render_;
 	Borders margin_;
@@ -798,6 +803,18 @@ public:
 			std::string pc_image_filename = image_filename;
 			boost::replace_all(pc_image_filename, ".png", "_pc.png");
 			if (g_fs->file_exists(pc_image_filename)) {
+				// NOCOM(#codereview): If this branch is not taken, image_ is
+				// borrowed (and owned by g_gr->images()) which is fine. But if
+				// this branch is taken, this creates a new Texure for each
+				// ImgRenderNode that passes by here - which can potentially be
+				// many over the course of a game.
+				// I see two ways to solve this: either in this class have two members: Image* image_ and unique_ptr<Texture> owned_image_, assing 
+				// owned_image_ here, but always use image_ in all your uses. 
+				// Alternatively make a smart pointer class in /base that
+				// encompasses this pattern. Something akin to OwnedOrBorrowed that
+				// you can either initialize with a T* (which means that this is
+				// borrowed and should not be freed) or a unique_ptr<T> which means
+				// that it needs to be freed. The internal implementation would look like described above with two member variables.
 				image_ = playercolor_image(&color_, image_, g_gr->images().get(pc_image_filename));
 			}
 		}
@@ -1081,7 +1098,7 @@ public:
 			}
 			const int image_width = image_cache_->get(image_filename)->width();
 			if (width < image_width) {
-				scale = double(width) / image_width;
+				scale = static_cast<double>(width) / image_width;
 			}
 		}
 		render_node_ = new ImgRenderNode(nodestyle_, image_filename, scale, color);
@@ -1251,9 +1268,9 @@ public:
 			}
 		}
 
-		switch (render_node_->desired_width_unit()) {
+		switch (render_node_->desired_width().unit) {
 		case WidthUnit::kPercent:
-			w_ = render_node_->desired_width() * renderer_style_.overall_width / 100;
+			w_ = render_node_->desired_width().width * renderer_style_.overall_width / 100;
 			renderer_style_.remaining_width -= w_;
 			break;
 		case WidthUnit::kFill:
@@ -1270,7 +1287,7 @@ public:
 		uint16_t extra_width = 0;
 		if (w_ < INFINITE_WIDTH && w_ > max_line_width) {
 			extra_width = w_ - max_line_width;
-		} else if (render_node_->desired_width_unit() == WidthUnit::kShrink) {
+		} else if (render_node_->desired_width().unit == WidthUnit::kShrink) {
 			w_ = max_line_width;
 			renderer_style_.remaining_width -= w_;
 		}
@@ -1317,7 +1334,7 @@ public:
 			w_ = INFINITE_WIDTH;
 			std::string width_string = a["width"].get_string();
 			if (width_string == "*") {
-				render_node_->set_desired_width(INFINITE_WIDTH, WidthUnit::kFill);
+				render_node_->set_desired_width(DesiredWidth(INFINITE_WIDTH, WidthUnit::kFill));
 			} else if (boost::algorithm::ends_with(width_string, "%")) {
 				width_string = width_string.substr(0, width_string.length() - 1);
 				uint8_t width_percent = strtol(width_string.c_str(), nullptr, 10);
@@ -1325,7 +1342,7 @@ public:
 					log("WARNING: Font renderer: Do not use width > 100%%\n");
 					width_percent = 100;
 				}
-				render_node_->set_desired_width(width_percent, WidthUnit::kPercent);
+				render_node_->set_desired_width(DesiredWidth(width_percent, WidthUnit::kPercent));
 			} else {
 				w_ = a["width"].get_int();
 				if (w_ > renderer_style_.overall_width) {
@@ -1334,7 +1351,7 @@ public:
 					    w_, renderer_style_.overall_width, renderer_style_.overall_width);
 					w_ = renderer_style_.overall_width;
 				}
-				render_node_->set_desired_width(w_, WidthUnit::kAbsolute);
+				render_node_->set_desired_width(DesiredWidth(w_, WidthUnit::kAbsolute));
 			}
 		}
 		if (a.has("float")) {
