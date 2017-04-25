@@ -588,12 +588,11 @@ void Table<void*>::layout() {
 	scrollbar_->set_steps(entry_records_.size() * get_lineheight() - (get_h() - headerheight_ - 2));
 
 	// Find a column to resize
-	size_t resizeable_column;
+	size_t resizeable_column = 0;
 	if (flexible_column_ < columns_.size()) {
 		resizeable_column = flexible_column_;
 	} else {
 		// Use the widest column
-		resizeable_column = 0;
 		uint32_t widest_width = columns_[0].width;
 		for (size_t i = 1; i < columns_.size(); ++i) {
 			const uint32_t width = columns_[i].width;
