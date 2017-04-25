@@ -1071,7 +1071,7 @@ void Worker::set_economy(Economy* const economy) {
 /**
  * Initialize the worker
  */
-void Worker::init(EditorGameBase& egbase) {
+bool Worker::init(EditorGameBase& egbase) {
 	Bob::init(egbase);
 
 	// a worker should always start out at a fixed location
@@ -1081,6 +1081,7 @@ void Worker::init(EditorGameBase& egbase) {
 
 	if (upcast(Game, game, &egbase))
 		create_needed_experience(*game);
+	return true;
 }
 
 /**
