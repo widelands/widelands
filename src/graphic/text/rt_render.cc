@@ -65,9 +65,13 @@ struct Borders {
 	uint8_t left, top, right, bottom;
 };
 
-// NOCOM(#codereview): please document the meaning of the individual values for
-// the final render.
-enum class WidthUnit { kAbsolute, kPercent, kShrink, kFill };
+/// How the width of a div should be calculated
+enum class WidthUnit {
+	kAbsolute, // Width in pixels
+	kPercent, // Width in percent
+	kShrink, // Shrink width to content
+	kFill // Expand width to fill all remaining space
+};
 
 struct DesiredWidth {
 	DesiredWidth(int init_width, WidthUnit init_unit) : width(init_width), unit(init_unit) {

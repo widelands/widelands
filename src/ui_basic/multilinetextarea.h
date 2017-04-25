@@ -68,10 +68,11 @@ struct MultilineTextarea : public Panel {
 	void set_color(RGBColor fg) {
 		color_ = fg;
 	}
-	// NOCOM(#codereview): The semantis of this function are unclear to me.
-	// Could you document what it does and maybe rename it? Also, force_new_rendere(yes|no) is a
-	// hard to understand API. 
-	// I assume it means something like "start new texture" or so?
+
+	// Most MultilineTextareas that contain richtext markup still use the old font renderer, but some are already switched over the the new font renderer.
+	// The markup is incompatible, so we need to be able to tell the MultilineTextarea which one to use.
+	// MultilineTextareas without markup automatically use the new font renderer.
+	// TODO(GunChleoc): Remove this function once the switchover to the new font renderer is complete.
 	void force_new_renderer(bool force = true) {
 		force_new_renderer_ = force;
 	}
