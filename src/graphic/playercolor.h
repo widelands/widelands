@@ -49,9 +49,12 @@ const RGBColor kPlayerColors[kMaxPlayers] = {
    RGBColor(144, 144, 144),  // light gray
 };
 
-/// Looks for a player color mask image, and if it finds one, returns the image with added playercolor.
-/// If no player color image file is found, gets the image from 'image_filename' without player color added.
-/// File name format: if image_filename == 'foo.png', the playercolor mask image's filename must be 'foo_pc.png'.
+/// Looks for a player color mask image, and if it finds one,
+/// returns the image with added playercolor. If no player color
+/// image file is found, gets the image from 'image_filename'
+/// without player color added. File name format: if image_filename
+/// == 'foo.png', the playercolor mask image's filename must be
+/// 'foo_pc.png'.
 const Image* playercolor_image(const RGBColor* clr, const std::string& image_filename);
 const Image* playercolor_image(int player_number, const std::string& image_filename);
 
