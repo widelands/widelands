@@ -115,7 +115,7 @@ public:
 	void schedule_incorporate(Game&);
 	void incorporate(Game&);
 
-	void init(EditorGameBase&) override;
+	bool init(EditorGameBase&) override;
 	void cleanup(EditorGameBase&) override;
 
 	bool wakeup_flag_capacity(Game&, Flag&);

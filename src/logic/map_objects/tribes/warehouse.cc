@@ -383,7 +383,7 @@ void Warehouse::load_finish(EditorGameBase& egbase) {
 	}
 }
 
-void Warehouse::init(EditorGameBase& egbase) {
+bool Warehouse::init(EditorGameBase& egbase) {
 	Building::init(egbase);
 
 	Player& player = owner();
@@ -448,6 +448,7 @@ void Warehouse::init(EditorGameBase& egbase) {
 		}
 	}
 	cleanup_in_progress_ = false;
+	return true;
 }
 
 void Warehouse::init_containers(Player& player) {

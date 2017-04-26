@@ -84,7 +84,7 @@ public:
 	MilitarySite(const MilitarySiteDescr&);
 	virtual ~MilitarySite();
 
-	void init(EditorGameBase&) override;
+	bool init(EditorGameBase&) override;
 	void cleanup(EditorGameBase&) override;
 	void act(Game&, uint32_t data) override;
 	void remove_worker(Worker&) override;

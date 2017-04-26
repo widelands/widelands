@@ -106,7 +106,7 @@ void DismantleSite::update_statistics_string(std::string* s) {
 Initialize the construction site by starting orders
 ===============
 */
-void DismantleSite::init(EditorGameBase& egbase) {
+bool DismantleSite::init(EditorGameBase& egbase) {
 	PartiallyFinishedBuilding::init(egbase);
 
 	for (const auto& ware : count_returned_wares(this)) {
@@ -115,6 +115,7 @@ void DismantleSite::init(EditorGameBase& egbase) {
 		wares_.push_back(wq);
 		work_steps_ += ware.second;
 	}
+	return true;
 }
 
 /*

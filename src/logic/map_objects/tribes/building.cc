@@ -313,7 +313,7 @@ Common building initialization code. You must call this from
 derived class' init.
 ===============
 */
-void Building::init(EditorGameBase& egbase) {
+bool Building::init(EditorGameBase& egbase) {
 	PlayerImmovable::init(egbase);
 
 	// Set the building onto the map
@@ -351,6 +351,7 @@ void Building::init(EditorGameBase& egbase) {
 		start_animation(egbase, descr().get_animation("idle"));
 
 	leave_time_ = egbase.get_gametime();
+	return true;
 }
 
 void Building::cleanup(EditorGameBase& egbase) {
