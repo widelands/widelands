@@ -234,7 +234,7 @@ Soldier::Soldier(const SoldierDescr& soldier_descr) : Worker(soldier_descr) {
 	combat_walkend_ = 0;
 }
 
-void Soldier::init(EditorGameBase& egbase) {
+bool Soldier::init(EditorGameBase& egbase) {
 	health_level_ = 0;
 	attack_level_ = 0;
 	defense_level_ = 0;
@@ -247,7 +247,7 @@ void Soldier::init(EditorGameBase& egbase) {
 	combat_walkstart_ = 0;
 	combat_walkend_ = 0;
 
-	Worker::init(egbase);
+	return Worker::init(egbase);
 }
 
 void Soldier::cleanup(EditorGameBase& egbase) {

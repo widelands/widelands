@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-01-21 21:10+0000\n"
-"PO-Revision-Date: 2017-01-27 18:35+0000\n"
+"POT-Creation-Date: 2017-04-13 13:07+0000\n"
+"PO-Revision-Date: 2017-04-02 08:15+0000\n"
 "Last-Translator: Milan Fašina <matrix17@seznam.cz>\n"
 "Language-Team: Czech (http://www.transifex.com/widelands/widelands/language/cs/)\n"
 "MIME-Version: 1.0\n"
@@ -35,14 +35,14 @@ msgid ""
 "burning down, there is an enemy you sometimes have to defeat. Yet warfare is"
 " mainly focused on economics, not on military strategies, and its mechanics "
 "deserve explanation."
-msgstr "V tomto scénáři se dozvíte o vojsku, jeho výcviku a jeho účelu: válce. Přestože je Widelands o budování, ne o ničení, někdy se potkáte s nepřítelem, které ho potřeba porazit. A přestože je vedení války zaměřeno na ekonomiku a ne na vojenské strategie, základní mechanismy je potřeba vysvětlit."
+msgstr "V tomto scénáři se dozvíte o vojsku, jeho výcviku a jeho účelu: válce. Přestože je Widelands o budování, ne o ničení, někdy se potkáte s nepřítelem, kterého je potřeba porazit. I když je vedení války zaměřeno na ekonomiku, ne na vojenské strategie, základní mechanismy je potřeba vysvětlit."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:28
 msgid ""
 "I’ve set up a small village that contains the most important buildings. You "
 "also have enough wares, so you do not have to take care of your weapons "
 "production. In a real game, you will not have this luxury."
-msgstr "Založili jsme malou vesnici se základními typy budov. K dispozici je také dostatek surovin, takže při výrobě zbraní se není nutné zabývat jejich získáváním. Při skutečné hře samozřejmě není dostupný takový luxus."
+msgstr "Založil jsem malou vesnici, ve které najdeš ty nejdůležitější budovy. Máš také dostatek surovin, takže se nemusíš starat ani o výrobu zbraní. Při skutečné hře to tak snadné mít nebudeš."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:35
 msgid "Soldiers’ abilities"
@@ -556,7 +556,7 @@ msgstr "Jsi teď připraven odehrát kampaně. Naučíš se v nich o odlišnoste
 msgid "“%s”"
 msgstr "“%s”"
 
-#: ../../data/scripting/format_scenario.lua:96
+#: ../../data/scripting/format_scenario.lua:84
 msgid "New Objective"
 msgid_plural "New Objectives"
 msgstr[0] "Nový úkol"

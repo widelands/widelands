@@ -74,7 +74,7 @@ Battle::Battle(Game& game, Soldier& First, Soldier& Second)
 	init(game);
 }
 
-void Battle::init(EditorGameBase& egbase) {
+bool Battle::init(EditorGameBase& egbase) {
 	MapObject::init(egbase);
 
 	creationtime_ = egbase.get_gametime();
@@ -89,6 +89,7 @@ void Battle::init(EditorGameBase& egbase) {
 		battle->cancel(game, *second_);
 	}
 	second_->set_battle(game, this);
+	return true;
 }
 
 void Battle::cleanup(EditorGameBase& egbase) {
