@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-03-24 18:58+0000\n"
-"PO-Revision-Date: 2017-03-27 15:26+0000\n"
+"POT-Creation-Date: 2017-04-13 13:07+0000\n"
+"PO-Revision-Date: 2017-04-13 16:36+0000\n"
 "Last-Translator: Omar Anwar <omaraglan91@yahoo.com>\n"
 "Language-Team: Arabic (http://www.transifex.com/widelands/widelands/language/ar/)\n"
 "MIME-Version: 1.0\n"
@@ -742,7 +742,7 @@ msgstr "نباتات"
 
 #: ../../data/world/init.lua:40
 msgid "Standing Stones"
-msgstr "الاحجار الواقفة"
+msgstr "الأحجار الواقفة"
 
 #: ../../data/world/init.lua:47
 msgid "Rocks"

@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-03-24 18:58+0000\n"
-"PO-Revision-Date: 2017-03-28 16:22+0000\n"
+"POT-Creation-Date: 2017-04-06 19:07+0000\n"
+"PO-Revision-Date: 2017-04-12 16:16+0000\n"
 "Last-Translator: Omar Anwar <omaraglan91@yahoo.com>\n"
 "Language-Team: Arabic (http://www.transifex.com/widelands/widelands/language/ar/)\n"
 "MIME-Version: 1.0\n"
@@ -37,20 +37,20 @@ msgstr "معلومات ترخيص \"الأرض الواسعة\""
 
 #: ../../data/txts/LICENSE.lua:23
 msgid "Copyright 2002 - 2016 by the Widelands Development Team."
-msgstr ""
+msgstr "حقوق النشر 2002 - 2016 بواسطة فريق تطوير الأرض الواسعة."
 
 #: ../../data/txts/LICENSE.lua:24
 msgid ""
 "This game is Free and Open Source (FOSS), licensed under the GNU General "
 "Public License (GPL) V2.0."
-msgstr ""
+msgstr "هذه اللعبة مجانية ومفتوحة المصدر(FOSS)، مرخصة تحت رخصة GNU العامة الشاملة الرخصة (GPL) نسخة 2.0."
 
 #: ../../data/txts/LICENSE.lua:26
 #, lua-format
 msgid ""
 "You can find more information on FOSS and the GPL by visiting the following "
 "webpage: %s"
-msgstr ""
+msgstr "يمكنك معرفة تفاصيل أكثر عن رخصة FOSS ورخصة GPL  عن طريق زيارة الموقع التالي: %s"
 
 #: ../../data/txts/LICENSE.lua:27
 msgid ""
@@ -78,7 +78,7 @@ msgstr ""
 msgid ""
 "On MacOS, you can find the file called COPYING in the archive you downloaded"
 " from the website."
-msgstr "فى نظام تشغيل الماك يمكنك إيجاد ملف رخصه اللعبه (مُسَمى بـ\"copying\") فى الارشيف الذى نزلته من موقع اللعبه"
+msgstr "فى نظام التشغيل ماك يمكنك إيجاد ملف رخصة اللعبة مُسَمى بـ\"copying\" فى الارشيف الذى نزلته من موقع اللعبة."
 
 #: ../../data/txts/LICENSE.lua:34
 msgid ""
@@ -116,7 +116,7 @@ msgid ""
 " in all areas. If you are interested in contributing – be it by making "
 "graphics, fixing bugs or adding new features, translating the game into your"
 " language or creating new maps – get in touch on our homepage."
-msgstr ""
+msgstr "الأرض الواسعة مكتملة الخصائص تقريباً وممتعة للعب فردياً و ممتعة حتي أكثر جماعياً مع لاعبيين أخرين. مع ذلك، هناك دائماً عمل أكثر لكي يتم الإنتهاء منه في كل المناطق. إذا كنت مهتماً بالمساعدة -- إضافة جرافيك، إصلاح أخطاء أو إضافة خصائص جديدة، ترجمة اللعبة إلي لغتك أو صناعة خرائط جديدة -- إعرف كيف في الصفحة الرئيسية للعبة."
 
 #: ../../data/txts/README.lua:21
 msgid "Widelands Help"
@@ -148,43 +148,43 @@ msgstr "يُرجَى تزويدنا بما يكفى من المعلومات. أ�
 
 #: ../../data/txts/README.lua:33
 msgid "Detailed steps on how to trigger the bug, if possible."
-msgstr ""
+msgstr "خطوات مُفصلة حول كيفية إفتعال الخطأ من جديد، لو أمكن."
 
 #: ../../data/txts/README.lua:34
 msgid ""
 "What you expected to happen when performing the steps and what actually "
 "happened."
-msgstr ""
+msgstr "ماذا توقعت حدوثه عندما نفذت الخطوات وماذا حدث بالفعل."
 
 #: ../../data/txts/README.lua:35
 msgid ""
 "Which version of Widelands you are running (i.e. either the build number or "
 "the revision number if you are running a development version or a daily "
 "build.)"
-msgstr ""
+msgstr "إي نسخة من اللعبة تُشخلها (مثال: إما رقم النسخة أو رقم المُراجعة إذا كُنت تُشغل إصدار المطوريين أو نسخة اليومية.)"
 
 #: ../../data/txts/README.lua:36
 msgid ""
 "Please also include which operating system you are running Widelands on as "
 "some bugs can be platform specific."
-msgstr ""
+msgstr "من فضلك أيضاً أدرج إسم نظام تشغيلك حيث أن بعض الأخطاء قد تحدث علي منصات محددة."
 
 #: ../../data/txts/README.lua:37
 msgid "Which map you were playing when the bug occurred."
-msgstr ""
+msgstr "في أى خريطة كُنت تلعب عندما حدث الخطأ."
 
 #: ../../data/txts/README.lua:38
 msgid ""
 "If the bug concerns something not being displayed correctly or if it helps "
 "demonstrate the issue, please include one or more screenshots."
-msgstr ""
+msgstr "لو ظننت أن هناك أشياء لا تُعرض بشكل صحيح أو أن لقطة الشاشة ستساعد علي معرفة المشكلة، من فضلك أضف لقطة أو لقطتين للشاشة."
 
 #: ../../data/txts/README.lua:39
 msgid ""
 "If you have a save game or replay demonstrating the issue (for instance "
 "crashes where it can be hard to tell exactly what is triggering it), please "
 "include that too. For more information, see the section on Replays below."
-msgstr ""
+msgstr "إذا إمتلكت لعبة محفوظة او مَقطع إعادة يظهر فيه الخطأ (هذا مفيد فى حالات اﻹنهيار الفورى\nحيث يكون من شبه المُستحيل تحديد ما أطلق الخطأ بدقة)، فيُرجَى إدراجهم أيضاً. لمزيد من المعلومات يًُمكنك قراءة قسم مقاطع اﻹعادات أدناه."
 
 #: ../../data/txts/TRANSLATORS.lua:25
 msgid "Translators"
@@ -316,7 +316,7 @@ msgid ""
 "If you need more documentation or help for Widelands or the Widelands "
 "Editor, be sure to visit our homepage at %s. You can find online help in our"
 " wiki there."
-msgstr ""
+msgstr "إذا أردت مستندات أكثر أو مساعدة أكثر في \"الأرض الواسعة\" أو المُحرر، كن متأكداً أن تزور صفحتنا الرئيسية علي %s. يُمكنك إيجاد المساعدة أونلاين علي الويكي الخاص بنا هناك."
 
 #: ../../data/txts/help/common_helptexts.lua:17
 msgid "Introduction"

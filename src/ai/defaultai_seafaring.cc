@@ -19,6 +19,8 @@
 
 #include "ai/defaultai.h"
 
+#include "economy/fleet.h"
+
 using namespace Widelands;
 
 // this scores spot for potential colony
@@ -357,6 +359,14 @@ void DefaultAI::check_ship_in_expedition(ShipObserver& so, uint32_t const gameti
 		game().send_player_cancel_expedition_ship(*so.ship);
 		log("%d: %s at %3dx%3d: END OF EXPEDITION due to time-out\n", pn,
 		    so.ship->get_shipname().c_str(), so.ship->get_position().x, so.ship->get_position().y);
+
+		// In case there is no port left to get back to, continue exploring
+		if (!so.ship->get_fleet() || !so.ship->get_fleet()->has_ports()) {
+			log("%d: %s at %3dx%3d: END OF EXPEDITION without port, continue exploring\n", pn,
+			    so.ship->get_shipname().c_str(), so.ship->get_position().x, so.ship->get_position().y);
+			persistent_data->expedition_start_time = gametime;
+			return;
+		}
 
 		// For known and running expedition
 	} else {
