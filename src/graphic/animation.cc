@@ -139,7 +139,7 @@ NonPackedAnimation::NonPackedAnimation(const LuaTable& table)
 		}
 
 		for (std::string image_file : image_files_) {
-			boost::replace_all(image_file, ".png", "_pc.png");
+			boost::replace_last(image_file, ".png", "_pc.png");
 			if (g_fs->file_exists(image_file)) {
 				hasplrclrs_ = true;
 				pc_mask_image_files_.push_back(image_file);
@@ -223,7 +223,7 @@ const Image* NonPackedAnimation::representative_image(const RGBColor* clr) const
 	assert(!image_files_.empty());
 	const Image* image = g_gr->images().get(image_files_[0]);
 	if (hasplrclrs_ && clr) {
-		image = playercolor_image(clr, image, g_gr->images().get(pc_mask_image_files_[0]));
+		image = playercolor_image(clr, image_files_[0]); // NOCOM
 	}
 	const int w = image->width();
 	const int h = image->height();

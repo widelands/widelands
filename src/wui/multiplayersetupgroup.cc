@@ -107,8 +107,7 @@ struct MultiPlayerClientGroup : public UI::Box {
 				std::string temp_tooltip;
 				if (us.position < UserSettings::highest_playernum()) {
 					position_image = playercolor_image(
-					   us.position, g_gr->images().get("images/players/genstats_player.png"),
-					   g_gr->images().get("images/players/genstats_player_pc.png"));
+					   us.position, "images/players/genstats_player.png");
 					temp_tooltip =
 					   (boost::format(_("Player %u")) % static_cast<unsigned int>(us.position + 1))
 					      .str();
@@ -166,8 +165,7 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 		   boost::bind(&MultiPlayerPlayerGroup::set_tribe_or_shared_in, boost::ref(*this)));
 
 		const Image* player_image =
-		   playercolor_image(id, g_gr->images().get("images/players/player_position_menu.png"),
-		                     g_gr->images().get("images/players/player_position_menu_pc.png"));
+		   playercolor_image(id, "images/players/player_position_menu.png");
 		assert(player_image);
 		player = new UI::Icon(this, 0, 0, h, h, player_image);
 		add(player);
@@ -284,8 +282,7 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 					if (i != id_) {
 						// TODO(GunChleoc): Do not add players that are also shared_in.
 						const Image* player_image = playercolor_image(
-						   i, g_gr->images().get("images/players/player_position_menu.png"),
-						   g_gr->images().get("images/players/player_position_menu_pc.png"));
+						   i, "images/players/player_position_menu.png");
 						assert(player_image);
 						const std::string player_name =
 						   /** TRANSLATORS: This is an option in multiplayer setup for sharing

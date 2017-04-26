@@ -184,8 +184,7 @@ void EditorPlayerMenu::update() {
 			   boost::bind(&EditorPlayerMenu::set_starting_pos_clicked, boost::ref(*this), p));
 		}
 		const Image* player_image =
-		   playercolor_image(p - 1, g_gr->images().get("images/players/player_position_menu.png"),
-		                     g_gr->images().get("images/players/player_position_menu_pc.png"));
+		   playercolor_image(p - 1, "images/players/player_position_menu.png");
 		assert(player_image);
 
 		plr_set_pos_buts_[p - 1]->set_pic(player_image);
@@ -226,8 +225,7 @@ void EditorPlayerMenu::clicked_remove_last_player() {
 		if (const Widelands::Coords sp = map.get_starting_pos(old_nr_players)) {
 			//  Remove starting position marker.
 			const Image* player_image = playercolor_image(
-			   old_nr_players - 1, g_gr->images().get("images/players/player_position.png"),
-			   g_gr->images().get("images/players/player_position_pc.png"));
+			   old_nr_players - 1, "images/players/player_position.png");
 			assert(player_image);
 			menu.mutable_field_overlay_manager()->remove_overlay(sp, player_image);
 		}
@@ -360,8 +358,7 @@ void EditorPlayerMenu::make_infrastructure_clicked(uint8_t n) {
 		// Remove the player overlay from this starting pos.
 		// A HQ is overlay enough
 		const Image* player_image =
-		   playercolor_image(n - 1, g_gr->images().get("images/players/player_position.png"),
-		                     g_gr->images().get("images/players/player_position_pc.png"));
+		   playercolor_image(n - 1, "images/players/player_position.png");
 		assert(player_image);
 		overlay_manager->remove_overlay(start_pos, player_image);
 	}

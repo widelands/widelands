@@ -43,8 +43,7 @@ struct EditorSetStartingPosTool : public EditorTool {
 	                          Widelands::Map*) override;
 	const Image* get_sel_impl() const override {
 		return playercolor_image(get_current_player() - 1,
-		                         g_gr->images().get("images/players/player_position_menu.png"),
-		                         g_gr->images().get("images/players/player_position_menu_pc.png"));
+		                         "images/players/player_position_menu.png");
 	}
 
 	Widelands::PlayerNumber get_current_player() const;

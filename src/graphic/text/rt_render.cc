@@ -804,23 +804,7 @@ public:
 	              const RGBColor& color)
 	   : RenderNode(ns), image_(g_gr->images().get(image_filename)), scale_(scale), color_(color) {
 		if (color_.hex_value() != "000000") {
-			std::string pc_image_filename = image_filename;
-			boost::replace_all(pc_image_filename, ".png", "_pc.png");
-			if (g_fs->file_exists(pc_image_filename)) {
-				// NOCOM(#codereview): If this branch is not taken, image_ is
-				// borrowed (and owned by g_gr->images()) which is fine. But if
-				// this branch is taken, this creates a new Texure for each
-				// ImgRenderNode that passes by here - which can potentially be
-				// many over the course of a game.
-				// I see two ways to solve this: either in this class have two members: Image* image_ and unique_ptr<Texture> owned_image_, assing 
-				// owned_image_ here, but always use image_ in all your uses. 
-				// Alternatively make a smart pointer class in /base that
-				// encompasses this pattern. Something akin to OwnedOrBorrowed that
-				// you can either initialize with a T* (which means that this is
-				// borrowed and should not be freed) or a unique_ptr<T> which means
-				// that it needs to be freed. The internal implementation would look like described above with two member variables.
-				image_ = playercolor_image(&color_, image_, g_gr->images().get(pc_image_filename));
-			}
+			image_ = playercolor_image(&color_, image_filename);
 		}
 	}
 

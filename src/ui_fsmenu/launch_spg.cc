@@ -138,8 +138,7 @@ FullscreenMenuLaunchSPG::FullscreenMenuLaunchSPG(GameSettingsProvider* const set
 	uint32_t y = get_h() * 3 / 10 - buth_;
 	for (uint32_t i = 0; i < kMaxPlayers; ++i) {
 		const Image* player_image =
-		   playercolor_image(i, g_gr->images().get("images/players/player_position_menu.png"),
-		                     g_gr->images().get("images/players/player_position_menu_pc.png"));
+		   playercolor_image(i, "images/players/player_position_menu.png");
 		assert(player_image);
 
 		pos_[i] =

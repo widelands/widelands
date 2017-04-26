@@ -19,19 +19,35 @@
 
 #include "graphic/playercolor.h"
 
-#include "graphic/texture.h"
+#include <memory>
 
-// NOCOM(#codereview): This should return a unique_ptr<>, since it creates a memory that must then be owned (i.e. freed) by the caller.
-Image* playercolor_image(const RGBColor* clr, const Image* image, const Image* color_mask) {
-	int w = image->width();
-	int h = image->height();
-	Texture* rv = new Texture(w, h);
-	rv->fill_rect(Rectf(0, 0, w, h), RGBAColor(0, 0, 0, 0));
-	rv->blit_blended(Rectf(0, 0, w, h), *image, *color_mask, Rectf(0, 0, w, h), *clr);
-	return rv;
+#include <boost/algorithm/string/replace.hpp>
+
+#include "graphic/graphic.h"
+#include "graphic/image_cache.h"
+#include "graphic/texture.h"
+#include "io/filesystem/layered_filesystem.h"
+
+const Image* playercolor_image(const RGBColor* clr, const std::string& image_filename) {
+	std::string color_mask_filename = image_filename;
+	boost::replace_last(color_mask_filename, ".png", "_pc.png");
+	if (!g_fs->file_exists(color_mask_filename)) {
+		return g_gr->images().get(image_filename);
+	}
+	const std::string hash = image_filename + "+pc" + clr->hex_value();
+	if (!g_gr->images().has(hash)) {
+		const Image* image = g_gr->images().get(image_filename);
+		const Image* color_mask = g_gr->images().get(color_mask_filename);
+		const int w = image->width();
+		const int h = image->height();
+		Texture* pc_image = new Texture(w, h);
+		pc_image->fill_rect(Rectf(0, 0, w, h), RGBAColor(0, 0, 0, 0));
+		pc_image->blit_blended(Rectf(0, 0, w, h), *image, *color_mask, Rectf(0, 0, w, h), *clr);
+		g_gr->images().insert(hash, std::move(std::unique_ptr<const Texture>(pc_image)));
+	}
+	return g_gr->images().get(hash);
 }
 
-// NOCOM(#codereview): should return unique_ptr
-Image* playercolor_image(int player_number, const Image* image, const Image* color_mask) {
-	return playercolor_image(&kPlayerColors[player_number], image, color_mask);
+const Image* playercolor_image(int player_number, const std::string& image_filename) {
+	return playercolor_image(&kPlayerColors[player_number], image_filename);
 }
