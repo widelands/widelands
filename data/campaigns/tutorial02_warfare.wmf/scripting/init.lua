@@ -11,6 +11,7 @@ include "scripting/infrastructure.lua"
 include "scripting/messages.lua"
 include "scripting/table.lua"
 include "scripting/ui.lua"
+include "scripting/animations.lua"
 
 include "map:scripting/starting_conditions.lua"
 

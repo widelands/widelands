@@ -3,6 +3,7 @@
 -- ================
 
 function intro()
+   reveal_concentric(plr, wl.Game().map:get_field(32, 62), 16, 80)
    sleep(1000)
    message_box_objective(plr, introduction)
 

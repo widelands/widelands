@@ -10,9 +10,10 @@
 -- .. function:: reveal_randomly(player, region, time)
 --
 --    Reveal a given region field by field, where the fields 
---    are chosen randomly. The animation runs the specified time regardless 
---    how big the given region is. So region(6) and region(13) will take 
---    the same time. See also :meth:`wl.map.Field.region`
+--    are chosen randomly. The region get hidden prior revealing.
+--    The animation runs the specified time regardless how big the given
+--    region is. So region(6) and region(13) will take the same time.
+--    See also :meth:`wl.map.Field.region`
 --
 --    :arg player: The player who get sight to the region
 --    :arg region: The region that has to be revealed
@@ -20,6 +21,13 @@
 --               Defaults to 1000 (1 sec)
 
 function reveal_randomly(plr, region, time)
+   local buildhelp_state = wl.ui.MapView().buildhelp
+   plr:hide_fields(region, true)
+
+   if buildhelp_state then
+      -- Turn off buildhelp during animation
+      wl.ui.MapView().buildhelp = false
+   end
    -- If no 'time' is given the default 1000 is used
    if not time then time = 1000 end
 
@@ -35,6 +43,7 @@ function reveal_randomly(plr, region, time)
       sleep(delay)
       table.remove(region, id)
    end
+   wl.ui.MapView().buildhelp = buildhelp_state
 end
 
 -- RST
@@ -51,7 +60,10 @@ end
 --               Defaults to 1000 (1 sec)
 
 function hide_randomly(plr, region, time)
+   -- Turn off buildhelp
+   wl.ui.MapView().buildhelp = false
    if not time then time = 1000 end
+
    local delay = math.floor(time / #region)
    if delay < 1 then delay = 1 end
    while #region > 0 do
@@ -76,6 +88,10 @@ end
 
 function reveal_concentric(plr, center, max_radius, delay)
    local buildhelp_state = wl.ui.MapView().buildhelp
+   if buildhelp_state then
+      -- Turn off buildhelp during animation
+      wl.ui.MapView().buildhelp = false
+   end
    plr:hide_fields(center:region(max_radius), true)
    if not delay then delay = 100 end
    local steps = 0
@@ -100,6 +116,8 @@ end
 --                revealed
 
 function hide_concentric(plr, center, max_radius, delay)
+   -- Turn off buildhelp
+   wl.ui.MapView().buildhelp = false
    if not delay then delay = 100 end
    while max_radius > 0 do
       local to_hide = center:region(max_radius, max_radius - 1)
