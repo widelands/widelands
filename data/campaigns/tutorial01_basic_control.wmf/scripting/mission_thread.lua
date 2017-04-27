@@ -3,6 +3,7 @@
 -- ================
 
 function starting_infos()
+   reveal_concentric(plr, sf, 14, 80)
    map:place_immovable("debris00",second_quarry_field, "world")
    -- so that the player cannot build anything here
 

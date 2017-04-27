@@ -66,7 +66,7 @@ end
 -- .. function:: reveal_concentric(player, center, max_radius, delay)
 --
 --    Reveal a part of the map in a concentric way beginning from center onto
---    max_radius.
+--    max_radius. The region get hidden prior revealing.
 --
 --    :arg player: The player who get sight to the region
 --    :arg center: The field from where the animation should start revealing
@@ -75,6 +75,8 @@ end
 --                revealed
 
 function reveal_concentric(plr, center, max_radius, delay)
+   local buildhelp_state = wl.ui.MapView().buildhelp
+   plr:hide_fields(center:region(max_radius), true)
    if not delay then delay = 100 end
    local steps = 0
    while steps < max_radius do
@@ -82,6 +84,7 @@ function reveal_concentric(plr, center, max_radius, delay)
       steps = steps + 1
       sleep(delay)
    end
+   wl.ui.MapView().buildhelp = buildhelp_state
 end
 
 -- RST
