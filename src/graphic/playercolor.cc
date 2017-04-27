@@ -29,22 +29,30 @@
 #include "io/filesystem/layered_filesystem.h"
 
 const Image* playercolor_image(const RGBColor* clr, const std::string& image_filename) {
+	const std::string hash = image_filename + "+pc" + clr->hex_value();
+
+	// Get from cache if we already have it
+	if (g_gr->images().has(hash)) {
+		return g_gr->images().get(hash);
+	}
+
+	// Check whether we have a player color mask
 	std::string color_mask_filename = image_filename;
 	boost::replace_last(color_mask_filename, ".png", "_pc.png");
 	if (!g_fs->file_exists(color_mask_filename)) {
 		return g_gr->images().get(image_filename);
 	}
-	const std::string hash = image_filename + "+pc" + clr->hex_value();
-	if (!g_gr->images().has(hash)) {
-		const Image* image = g_gr->images().get(image_filename);
-		const Image* color_mask = g_gr->images().get(color_mask_filename);
-		const int w = image->width();
-		const int h = image->height();
-		auto pc_image = std::unique_ptr<Texture>(new Texture(w, h));
-		pc_image->fill_rect(Rectf(0, 0, w, h), RGBAColor(0, 0, 0, 0));
-		pc_image->blit_blended(Rectf(0, 0, w, h), *image, *color_mask, Rectf(0, 0, w, h), *clr);
-		g_gr->images().insert(hash, std::move(pc_image));
-	}
+
+	// Now calculate the image and add it to the cache
+	const Image* image = g_gr->images().get(image_filename);
+	const Image* color_mask = g_gr->images().get(color_mask_filename);
+	const int w = image->width();
+	const int h = image->height();
+	auto pc_image = std::unique_ptr<Texture>(new Texture(w, h));
+	pc_image->fill_rect(Rectf(0, 0, w, h), RGBAColor(0, 0, 0, 0));
+	pc_image->blit_blended(Rectf(0, 0, w, h), *image, *color_mask, Rectf(0, 0, w, h), *clr);
+	g_gr->images().insert(hash, std::move(pc_image));
+	assert(g_gr->images().has(hash));
 	return g_gr->images().get(hash);
 }
 
