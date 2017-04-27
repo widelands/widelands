@@ -801,11 +801,8 @@ public:
 	ImgRenderNode(NodeStyle& ns,
 	              const std::string& image_filename,
 	              double scale,
-	              const RGBColor& color)
-	   : RenderNode(ns), image_(g_gr->images().get(image_filename)), scale_(scale), color_(color) {
-		if (color_.hex_value() != "000000") {
-			image_ = playercolor_image(&color_, image_filename);
-		}
+	              const RGBColor& color, bool use_playercolor)
+	   : RenderNode(ns), image_(use_playercolor ? playercolor_image(&color, image_filename) : g_gr->images().get(image_filename)), scale_(scale) {
 	}
 
 	uint16_t width() override {
@@ -822,7 +819,6 @@ public:
 private:
 	const Image* image_;
 	const double scale_;
-	const RGBColor color_;
 };
 
 Texture* ImgRenderNode::render(TextureCache* /* texture_cache */) {
@@ -1070,11 +1066,13 @@ public:
 	void enter() override {
 		const AttrMap& a = tag_.attrs();
 		RGBColor color;
+		bool use_playercolor = false;
 		const std::string image_filename = a["src"].get_string();
 		double scale = 1.0;
 
 		if (a.has("color")) {
 			color = a["color"].get_color();
+			use_playercolor = true;
 		}
 		if (a.has("width")) {
 			int width = a["width"].get_int();
@@ -1089,7 +1087,7 @@ public:
 				scale = static_cast<double>(width) / image_width;
 			}
 		}
-		render_node_ = new ImgRenderNode(nodestyle_, image_filename, scale, color);
+		render_node_ = new ImgRenderNode(nodestyle_, image_filename, scale, color, use_playercolor);
 	}
 	void emit_nodes(vector<RenderNode*>& nodes) override {
 		nodes.push_back(render_node_);
