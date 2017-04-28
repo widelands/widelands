@@ -221,10 +221,10 @@ uint32_t NonPackedAnimation::frametime() const {
 
 const Image* NonPackedAnimation::representative_image(const RGBColor* clr) const {
 	assert(!image_files_.empty());
-	const Image* image = g_gr->images().get(image_files_[0]);
-	if (hasplrclrs_ && clr) {
-		image = playercolor_image(clr, image_files_[0]);
-	}
+	const Image* image = (hasplrclrs_ && clr) ?
+				playercolor_image(*clr, image_files_[0]) :
+		g_gr->images().get(image_files_[0]);
+
 	const int w = image->width();
 	const int h = image->height();
 	Texture* rv = new Texture(w / scale_, h / scale_);

@@ -55,7 +55,7 @@ const RGBColor kPlayerColors[kMaxPlayers] = {
 /// without player color added. File name format: if image_filename
 /// == 'foo.png', the playercolor mask image's filename must be
 /// 'foo_pc.png'.
-const Image* playercolor_image(const RGBColor* clr, const std::string& image_filename);
+const Image* playercolor_image(const RGBColor& clr, const std::string& image_filename);
 const Image* playercolor_image(int player_number, const std::string& image_filename);
 
 #endif  // end of include guard: WL_GRAPHIC_PLAYERCOLOR_H

@@ -802,7 +802,7 @@ public:
 	              const std::string& image_filename,
 	              double scale,
 	              const RGBColor& color, bool use_playercolor)
-	   : RenderNode(ns), image_(use_playercolor ? playercolor_image(&color, image_filename) : g_gr->images().get(image_filename)), scale_(scale) {
+	   : RenderNode(ns), image_(use_playercolor ? playercolor_image(color, image_filename) : g_gr->images().get(image_filename)), scale_(scale) {
 	}
 
 	uint16_t width() override {

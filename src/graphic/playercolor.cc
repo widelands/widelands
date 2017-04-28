@@ -28,8 +28,8 @@
 #include "graphic/texture.h"
 #include "io/filesystem/layered_filesystem.h"
 
-const Image* playercolor_image(const RGBColor* clr, const std::string& image_filename) {
-	const std::string hash = image_filename + "+pc" + clr->hex_value();
+const Image* playercolor_image(const RGBColor& clr, const std::string& image_filename) {
+	const std::string hash = image_filename + "+pc" + clr.hex_value();
 
 	// Get from cache if we already have it
 	if (g_gr->images().has(hash)) {
@@ -50,12 +50,12 @@ const Image* playercolor_image(const RGBColor* clr, const std::string& image_fil
 	const int h = image->height();
 	auto pc_image = std::unique_ptr<Texture>(new Texture(w, h));
 	pc_image->fill_rect(Rectf(0, 0, w, h), RGBAColor(0, 0, 0, 0));
-	pc_image->blit_blended(Rectf(0, 0, w, h), *image, *color_mask, Rectf(0, 0, w, h), *clr);
+	pc_image->blit_blended(Rectf(0, 0, w, h), *image, *color_mask, Rectf(0, 0, w, h), clr);
 	g_gr->images().insert(hash, std::move(pc_image));
 	assert(g_gr->images().has(hash));
 	return g_gr->images().get(hash);
 }
 
 const Image* playercolor_image(int player_number, const std::string& image_filename) {
-	return playercolor_image(&kPlayerColors[player_number], image_filename);
+	return playercolor_image(kPlayerColors[player_number], image_filename);
 }
