@@ -767,8 +767,8 @@ public:
 		h_ = inner_h;
 		margin_ = margin;
 	}
-	void set_desired_width(DesiredWidth desired_width) {
-		desired_width_ = desired_width;
+	void set_desired_width(DesiredWidth width) {
+		desired_width_ = width;
 	}
 	void set_background(RGBColor clr) {
 		background_color_ = clr;
