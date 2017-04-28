@@ -466,6 +466,9 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 	game().send_player_enemyflagaction(*flag, player_number(), static_cast<uint16_t>(attackers));
 
 	last_attack_time_ = gametime;
+	for(int j= 0; j<attackers; j +=1) {
+		soldier_attacks_log.push(gametime);
+	}
 	persistent_data->last_attacked_player = flag->owner().player_number();
 
 	return true;
@@ -474,6 +477,8 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 void DefaultAI::count_military_vacant_positions(const uint32_t gametime) {
 	// counting vacant positions
 	int32_t vacant_mil_positions_ = 0;
+	int32_t understaffed_ = 0;
+	int32_t on_stock_ = 0;
 	for (TrainingSiteObserver tso : trainingsites) {
 		vacant_mil_positions_ +=
 		   5 * std::min<int32_t>(
@@ -481,32 +486,49 @@ void DefaultAI::count_military_vacant_positions(const uint32_t gametime) {
 	}
 	for (MilitarySiteObserver mso : militarysites) {
 		vacant_mil_positions_ += mso.site->soldier_capacity() - mso.site->stationed_soldiers().size();
+		understaffed_ += mso.understaffed;
+	}
+	vacant_mil_positions_ += understaffed_;
+
+	//also available in warehouses
+	for (auto wh : warehousesites) {
+		on_stock_ += wh.site->stationed_soldiers().size();
 	}
 
-	SoldiersStatus soldier_status_tmp;
+	vacant_mil_positions_ += on_stock_;
 
-	if (vacant_mil_positions_ <= 1) {
-		soldier_status_tmp = SoldiersStatus::kFull;
-	} else if (vacant_mil_positions_ * 4 <= static_cast<int32_t>(militarysites.size())) {
-		soldier_status_tmp = SoldiersStatus::kEnough;
+	// to avoid floats this is actual number * 100
+	vacant_mil_positions_average_ = vacant_mil_positions_average_ * 8 / 10 + 20 * vacant_mil_positions_;
+
+	if (vacant_mil_positions_ <= 1 || on_stock_ > 4) {
+		soldier_status_ = SoldiersStatus::kFull;
+	} else if (vacant_mil_positions_ * 4 <= static_cast<int32_t>(militarysites.size()) || on_stock_ > 2) {
+		soldier_status_ = SoldiersStatus::kEnough;
 	} else if (vacant_mil_positions_ > static_cast<int32_t>(militarysites.size())) {
-		soldier_status_tmp = SoldiersStatus::kBadShortage;
+		soldier_status_ = SoldiersStatus::kBadShortage;
 	} else {
-		soldier_status_tmp = SoldiersStatus::kShortage;
+		soldier_status_ = SoldiersStatus::kShortage;
 	}
 
-	// Never increase soldier status too soon
-	if (soldier_status_tmp >= soldier_status_) {
-		soldier_status_ = soldier_status_tmp;
-		military_status_last_updated = gametime;
-	} else if (soldier_status_tmp < soldier_status_ &&
-	           military_status_last_updated +
-	                 std::abs(management_data.get_military_number_at(60)) * 60 * 1000 / 10 <
-	              gametime) {
-		// printf("%d / %d: finaly increasing soldier status %d -> %d\n", player_number(),
-		// gametime / 1000, soldier_status_, soldier_status_tmp);
-		soldier_status_ = soldier_status_tmp;
-	}
+	//// Never increase soldier status too soon
+	//if (soldier_status_tmp >= soldier_status_) {
+		//soldier_status_ = soldier_status_tmp;
+		//military_status_last_updated = gametime;
+	//} else if (soldier_status_tmp < soldier_status_ &&
+	           //military_status_last_updated +
+	                 //std::abs(management_data.get_military_number_at(60)) * 60 * 1000 / 10 <
+	              //gametime) {
+		//// printf("%d / %d: finaly increasing soldier status %d -> %d\n", player_number(),
+		//// gametime / 1000, soldier_status_, soldier_status_tmp);
+		//soldier_status_ = soldier_status_tmp;
+	//}
+	printf ("Soldier status: %d, vacant: %3d (average: %3d), understaffed: %2d, in warehouse: %2d\n",
+	 static_cast<uint8_t>(soldier_status_),  vacant_mil_positions_, vacant_mil_positions_average_ / 100, understaffed_, on_stock_);
+	 
+	assert(soldier_status_ == SoldiersStatus::kFull ||
+	soldier_status_ == SoldiersStatus::kEnough ||
+	soldier_status_ == SoldiersStatus::kShortage ||
+	soldier_status_ == SoldiersStatus::kBadShortage);
 }
 
 // this function only check with trainingsites
@@ -751,62 +773,90 @@ bool DefaultAI::check_militarysites(uint32_t gametime) {
 	// look if there are any enemies building
 	// FindNodeEnemiesBuilding find_enemy(player_, game());
 
-	int16_t usefullness_score = 0;
+
 	BuildableField bf(f);
 	update_buildable_field(bf);
-	usefullness_score += bf.military_score_ / 10;
-
-	const bool can_be_dismantled = (ms->present_soldiers().size() > 0 ||
-	                               militarysites.front().built_time + 10 * 60 * 1000 < gametime) &&
-	                               bf.military_loneliness < 1000 - 2 * std::abs(management_data.get_military_number_at(14));
-
-	usefullness_score -=
-	   static_cast<int16_t>(soldier_status_) * std::abs(management_data.get_military_number_at(84));
-	usefullness_score +=
-	   (bf.enemy_accessible_) ? 200 + management_data.get_military_number_at(91) * 2 : 0;
-
-	// Also size is consideration, bigger buildings are to be preffered
-	usefullness_score +=
-	   (ms->get_size() - 2) * std::abs(management_data.get_military_number_at(77));
-
-	const int32_t dism_treshold = 25 + management_data.get_military_number_at(89) * 2;
-	const int32_t pref_treshold_upper =
-	   dism_treshold + std::abs(management_data.get_military_number_at(90));
-	const int32_t pref_treshold_lower =
-	   dism_treshold + std::abs(management_data.get_military_number_at(90) / 2);
-	// printf ("current score %3d, dism: tresh %3d, pref tresholds: %3d   %3d %s\n",
-	// usefullness_score, dism_treshold, pref_treshold_lower, pref_treshold_upper, (usefullness_score
-	// > pref_treshold_upper) ? "*" : "");
 
 	Quantity const total_capacity = ms->max_soldier_capacity();
 	Quantity const current_target = ms->soldier_capacity();
+	Quantity const current_soldiers = ms->present_soldiers().size();
+	Quantity target_occupancy = total_capacity;
+	if (soldier_status_ == SoldiersStatus::kBadShortage) {
+		target_occupancy = total_capacity / 3 + 1;
+	} else if (soldier_status_ == SoldiersStatus::kShortage) {
+		target_occupancy = total_capacity * 2 / 3 + 1;
+	} 
 
-	if (usefullness_score < dism_treshold) {
-		if (can_be_dismantled) {  // not too soon
+	militarysites.front().understaffed = 0;
 
-			printf("Dismantling military at %3dx%3d site with military loneliness: %4d, left capacity: %2d\n",
-			bf.coords.x,
-			bf.coords.y,
-			bf.military_loneliness,
-			bf.area_military_capacity - ms->max_soldier_capacity());
-			 
-			changed = true;
-			dismantled_msites_count += 1;
-			if (ms->get_playercaps() & Widelands::Building::PCap_Dismantle) {
-				flags_to_be_removed.push_back(ms->base_flag().get_position());
-				game().send_player_dismantle(*ms);
-				military_last_dismantle_ = game().get_gametime();
-			} else {
-				game().send_player_bulldoze(*ms);
-				military_last_dismantle_ = game().get_gametime();
-			}
+	
+	
+	const bool can_be_dismantled = (current_soldiers == 1 ||
+	                               militarysites.front().built_time + 10 * 60 * 1000 < gametime) &&
+	                               bf.military_loneliness < 1000 - 2 * std::abs(management_data.get_military_number_at(14));
+
+
+
+	bool should_be_dismantled = false;
+	const int32_t enemy_military_capacity = std::max<int32_t>({
+		bf.enemy_military_presence,
+		bf.enemy_military_sites * (1 + std::abs(management_data.get_military_number_at(77)/20)),
+		(bf.enemy_owned_land_nearby) ? 4 + std::abs(management_data.get_military_number_at(99)/20) : 0
+		});
+	//if (bf.defense_msite_allowed) {
+		//should_be_dismantled = false;
+	//} else 
+	if (bf.enemy_owned_land_nearby) {
+		if (bf.military_score_ < std::abs(management_data.get_military_number_at(91) * 10) &&
+			bf.area_military_capacity - static_cast<int16_t>(total_capacity) - std::abs(management_data.get_military_number_at(84)/10) > enemy_military_capacity) {
+				should_be_dismantled = true;
 		}
-		// else {
-		// printf ("Not dismantling the militarysite yet\n");
-		//}
-	} else if (usefullness_score < pref_treshold_lower) {
-		// this site is not that important but is to be preserved
-		if (current_target > 1) {
+	} else {
+		if (bf.military_score_ < management_data.get_military_number_at(88) * 5 &&
+			bf.area_military_capacity > static_cast<int16_t>(total_capacity)) {
+				should_be_dismantled = true;
+		}
+	}
+
+	printf ("msite at %3dx%3d can be dismantled: %s, should be dismantled: %s, own cap.: %2d, en. land: %s, en. capacity: %2d(%2d/%2d), score: %5d\n",
+	bf.coords.x, bf.coords.y, (can_be_dismantled) ? "Y":"N", (should_be_dismantled) ? "Y":"N",
+	bf.area_military_capacity,
+	(bf.enemy_owned_land_nearby) ? "Y":"N",
+	 enemy_military_capacity,
+	 bf.enemy_military_presence,
+	 bf.enemy_military_sites,
+	 bf.military_score_);
+
+	if (bf.enemy_accessible_ && !should_be_dismantled) {
+		
+		assert(total_capacity >= target_occupancy);
+
+		militarysites.front().understaffed = total_capacity - target_occupancy;
+		
+		if (current_target < target_occupancy) {
+			game().send_player_change_soldier_capacity(*ms, 1);
+			changed = true;
+		}
+		if (current_target > target_occupancy) {
+			game().send_player_change_soldier_capacity(*ms, -1);
+			changed = true;
+		}
+		if (ms->get_soldier_preference() == MilitarySite::kPrefersRookies) {
+			game().send_player_militarysite_set_soldier_preference(*ms, MilitarySite::kPrefersHeroes);
+			changed = true;
+		}		
+	} else if (should_be_dismantled && can_be_dismantled) {
+		changed = true;
+		if (ms->get_playercaps() & Widelands::Building::PCap_Dismantle) {
+			flags_to_be_removed.push_back(ms->base_flag().get_position());
+			game().send_player_dismantle(*ms);
+			military_last_dismantle_ = game().get_gametime();
+		} else {
+			game().send_player_bulldoze(*ms);
+			military_last_dismantle_ = game().get_gametime();
+		}
+	} else {
+		if (current_target > 1) {//reduce number of soldiers here at least....
 			game().send_player_change_soldier_capacity(*ms, -1);
 			changed = true;
 		}
@@ -814,24 +864,14 @@ bool DefaultAI::check_militarysites(uint32_t gametime) {
 			game().send_player_militarysite_set_soldier_preference(*ms, MilitarySite::kPrefersRookies);
 			changed = true;
 		}
-	} else if (usefullness_score > pref_treshold_upper) {
-		// this is important military site
-		if (current_target < total_capacity) {
-			game().send_player_change_soldier_capacity(*ms, 1);
-			changed = true;
-		}
-		if (ms->get_soldier_preference() == MilitarySite::kPrefersRookies) {
-			game().send_player_militarysite_set_soldier_preference(*ms, MilitarySite::kPrefersHeroes);
-			changed = true;
-		}
+	}
+	if (changed) {
+		militarysites.front().last_change = gametime;
 	}
 
 	// reorder:;
 	militarysites.push_back(militarysites.front());
 	militarysites.pop_front();
-	if (changed) {
-		militarysites.front().last_change = gametime;
-	}
 	return changed;
 }
 

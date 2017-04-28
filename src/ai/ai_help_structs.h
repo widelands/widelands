@@ -274,13 +274,14 @@ struct NearFlag {
 	int32_t distance;
 };
 
-struct ProductTimeQueue {
-	ProductTimeQueue();
+struct EventTimeQueue {
+	EventTimeQueue();
 
 	void push(uint32_t);
 	uint32_t count(uint32_t);
 	void strip_old(uint32_t);
 
+private:
 	uint32_t duration_ = 20 * 60 * 1000;
 	std::queue<uint32_t> queue;
 };
@@ -349,6 +350,7 @@ struct BuildableField {
 	bool unconnected_nearby;
 	int16_t military_unstationed;
 	int16_t own_non_military_nearby;
+	bool defense_msite_allowed;
 	Widelands::ExtendedBool is_portspace;
 	bool port_nearby;  // to increase priority if a port is nearby,
 	// especially for new colonies
@@ -487,7 +489,8 @@ struct ProductionSiteObserver {
 struct MilitarySiteObserver {
 	Widelands::MilitarySite* site;
 	BuildingObserver* bo;
-	uint8_t checks;
+	//uint8_t checks;
+	uint16_t understaffed;
 	uint32_t last_change;  // to prevent too fast switching ocupancy policy
 	uint32_t built_time;
 };
@@ -631,7 +634,7 @@ struct ManagementData {
 	            uint16_t,
 	            uint32_t,
 	            int16_t,
-	            uint16_t);
+	            int16_t);
 	void dump_data();
 	//void initialize(uint8_t, Widelands::AiType, bool reinitializing = false);
 	uint16_t new_neuron_id() {

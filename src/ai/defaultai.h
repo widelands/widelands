@@ -265,10 +265,11 @@ private:
 	Widelands::BuildingNecessity check_building_necessity(Widelands::BuildingObserver&, uint32_t);
 	void soldier_trained(const Widelands::TrainingSite&);
 	SoldiersStatus soldier_status_;
-	uint32_t military_status_last_updated;
+	int32_t vacant_mil_positions_average_;
 	uint16_t attackers_count_;
-	uint16_t dismantled_msites_count;
-	Widelands::ProductTimeQueue soldier_trained_log;
+	//uint16_t overfilled_msites_count;
+	Widelands::EventTimeQueue soldier_trained_log;
+	Widelands::EventTimeQueue soldier_attacks_log;
 
 	// used by AI scheduler
 	uint32_t sched_stat_[20] = {0};
