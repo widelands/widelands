@@ -19,13 +19,16 @@
 #ifndef WL_GRAPHIC_WORDWRAP_H
 #define WL_GRAPHIC_WORDWRAP_H
 
+#include <memory>
 #include <string>
+#include <unicode/uchar.h>
 #include <vector>
 
 #include "base/vector.h"
 #include "graphic/align.h"
 #include "graphic/color.h"
 #include "graphic/text_constants.h"
+#include "graphic/text/sdl_ttf_font.h"
 
 class RenderTarget;
 
@@ -79,12 +82,18 @@ private:
 
 	bool line_fits(const std::string& text, uint32_t safety_margin) const;
 
+	uint32_t quick_width(const UChar& c) const;
+	uint32_t quick_width(const std::string& text) const;
+
 	uint32_t wrapwidth_;
 	bool draw_caret_;
 
 	// TODO(GunChleoc): We can tie these to constexpr once the old font renderer is gone.
 	int fontsize_;
 	RGBColor color_;
+
+	// Editor font is sans bold.
+	std::unique_ptr<RT::IFont> font_;
 
 	std::vector<LineData> lines_;
 };
