@@ -89,7 +89,7 @@ private:
 	bool draw_caret_;
 
 	// TODO(GunChleoc): We can tie these to constexpr once the old font renderer is gone.
-	int fontsize_;
+	const int fontsize_;
 	RGBColor color_;
 
 	// Editor font is sans bold.
