@@ -48,6 +48,7 @@ uint32_t quick_width(const UChar& c, int ptsize) {
 	RT::IFont* font = RT::load_font(UI::g_fh1->fontset()->sans_bold(), ptsize);
 	int result = 0;
 	TTF_GlyphMetrics(font->get_ttf_font(), c, nullptr, nullptr, nullptr, nullptr, &result);
+	delete font;
 	return result;
 }
 
