@@ -379,8 +379,7 @@ void Warehouse::load_finish(EditorGameBase& egbase) {
 			assert(!worker.empty());
 			if (worker.compare("recruit") == 0) {
 				// Enable barracks
-				const DescriptionIndex barracks_id = owner().tribe().building_index(tribe + "_barracks");
-				assert(barracks_id != INVALID_INDEX);
+				const DescriptionIndex barracks_id = owner().tribe().barracks();
 				if (!owner().is_building_type_allowed(barracks_id)) {
 					log("WARNING: Enabling barracks for player %u\n", owner().player_number());
 					owner().allow_building_type(barracks_id, true);
