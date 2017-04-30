@@ -370,19 +370,20 @@ void Warehouse::load_finish(EditorGameBase& egbase) {
 			// We are most likely loading a pre-barracks savegame in that case, so when not
 			// adding the barracks the game becomes unplayable. Note that this might be strange in
 			// old savegames of campaigns or scenarios (e.g. barracks allowed but no weapons possible)
-			const std::string& name = owner().tribe().get_worker_descr(worker_index)->name();
-			const std::string tribe = name.substr(0, name.find('_'));
-			assert(tribe != name);
-			assert(!tribe.empty());
-			const std::string worker = name.substr(name.find('_') + 1);
-			assert(worker != name);
-			assert(!worker.empty());
-			if (worker.compare("recruit") == 0) {
-				// Enable barracks
-				const DescriptionIndex barracks_id = owner().tribe().barracks();
-				if (!owner().is_building_type_allowed(barracks_id)) {
-					log("WARNING: Enabling barracks for player %u\n", owner().player_number());
-					owner().allow_building_type(barracks_id, true);
+			const DescriptionIndex barracks_id = owner().tribe().barracks();
+			const ProductionSiteDescr* barracksDescr =
+				dynamic_cast<const ProductionSiteDescr*>(owner().tribe().get_building_descr(barracks_id));
+			assert(barracksDescr != nullptr);
+			const BillOfMaterials& recruits = barracksDescr->input_workers();
+			for (const WareAmount& amount : recruits) {
+				if (amount.first == worker_index) {
+					// The found worker is one input of the barracks -> a recruit
+					// Enable barracks
+					if (!owner().is_building_type_allowed(barracks_id)) {
+						log("WARNING: Enabling barracks for player %u\n", owner().player_number());
+						owner().allow_building_type(barracks_id, true);
+					}
+					break;
 				}
 			}
 		}
