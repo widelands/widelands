@@ -79,7 +79,7 @@ string xtick_text_style(const string& text) {
 }
 
 /**
- * scale value down to the available space, which is specifiey by
+ * scale value down to the available space, which is specified by
  * the length of the y axis and the highest scale.
  */
 float scale_value(float const yline_length, uint32_t const highest_scale, int32_t const value) {
@@ -184,6 +184,12 @@ void draw_value(const string& value,
 	dst.blit(point, pic, BlendMode::UseAlpha, UI::Align::kRight);
 }
 
+uint32_t calc_max_ticks(int32_t plot_width) {
+	// Render a number with 3 digits (maximal length which should appear)
+	const Image* pic = UI::g_fh1->render(ytick_text_style(" -888 ", kAxisLineColor));
+	return plot_width / pic->width();
+}
+
 /**
  * draw the background and the axis of the diagram
  */
@@ -218,6 +224,8 @@ void draw_diagram(uint32_t time_ms,
 	}
 	// Make sure that we always have a tick
 	how_many_ticks = std::max(how_many_ticks, 1u);
+	// Make sure we have no more than 9 ticks -> overlap
+	how_many_ticks = std::min(how_many_ticks, calc_max_ticks(inner_w));
 
 	// first, tile the background
 	dst.tile(Recti(Vector2i(0, 0), inner_w, inner_h), g_gr->images().get(BG_PIC), Vector2i(0, 0));
