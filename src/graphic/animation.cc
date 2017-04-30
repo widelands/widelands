@@ -72,7 +72,7 @@ public:
 	                            float scale) const override;
 	uint16_t nr_frames() const override;
 	uint32_t frametime() const override;
-	const Image* representative_image(const RGBColor* clr) const override;
+	std::unique_ptr<const Image> representative_image(const RGBColor* clr) const override;
 	const std::string& representative_image_filename() const override;
 	virtual void blit(uint32_t time,
 	                  const Rectf& source_rect,
@@ -219,7 +219,7 @@ uint32_t NonPackedAnimation::frametime() const {
 	return frametime_;
 }
 
-const Image* NonPackedAnimation::representative_image(const RGBColor* clr) const {
+std::unique_ptr<const Image> NonPackedAnimation::representative_image(const RGBColor* clr) const {
 	assert(!image_files_.empty());
 	const Image* image = (hasplrclrs_ && clr) ?
 				playercolor_image(*clr, image_files_[0]) :
@@ -227,7 +227,7 @@ const Image* NonPackedAnimation::representative_image(const RGBColor* clr) const
 
 	const int w = image->width();
 	const int h = image->height();
-	Texture* rv = new Texture(w / scale_, h / scale_);
+	auto rv = std::unique_ptr<Texture>(new Texture(w / scale_, h / scale_));
 	rv->blit(Rectf(0, 0, w / scale_, h / scale_), *image, Rectf(0, 0, w, h), 1., BlendMode::Copy);
 	return rv;
 }
@@ -333,10 +333,10 @@ const Animation& AnimationManager::get_animation(uint32_t id) const {
 }
 
 const Image* AnimationManager::get_representative_image(uint32_t id, const RGBColor* clr) {
-	if (representative_images_.count(id) != 1) {
+	const auto hash = std::make_pair(id, clr);
+	if (representative_images_.count(hash) != 1) {
 		representative_images_.insert(
-		   std::make_pair(id, std::unique_ptr<const Image>(
-		                         g_gr->animations().get_animation(id).representative_image(clr))));
+		   std::make_pair(hash, std::move(g_gr->animations().get_animation(id).representative_image(clr))));
 	}
-	return representative_images_.at(id).get();
+	return representative_images_.at(hash).get();
 }
