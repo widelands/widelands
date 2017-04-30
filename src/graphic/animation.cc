@@ -227,7 +227,7 @@ std::unique_ptr<const Image> NonPackedAnimation::representative_image(const RGBC
 
 	const int w = image->width();
 	const int h = image->height();
-	auto rv = std::unique_ptr<Texture>(new Texture(w / scale_, h / scale_));
+	std::unique_ptr<Texture> rv = std::unique_ptr<Texture>(new Texture(w / scale_, h / scale_));
 	rv->blit(Rectf(0, 0, w / scale_, h / scale_), *image, Rectf(0, 0, w, h), 1., BlendMode::Copy);
 	return rv;
 }
