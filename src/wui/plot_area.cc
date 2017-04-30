@@ -224,7 +224,7 @@ void draw_diagram(uint32_t time_ms,
 	}
 	// Make sure that we always have a tick
 	how_many_ticks = std::max(how_many_ticks, 1u);
-	// Make sure we have no more than 9 ticks -> overlap
+	// Make sure we haven't more ticks than we have space for -> avoid overlap
 	how_many_ticks = std::min(how_many_ticks, calc_max_ticks(inner_w));
 
 	// first, tile the background
@@ -468,7 +468,7 @@ void WuiPlotArea::draw_plot(RenderTarget& dst,
 
 	//  print the maximal value into the top right corner
 	draw_value(yscale_label, RGBColor(60, 125, 0),
-	           Vector2f(get_inner_w() - kSpaceRight - 2, kSpacing + 2), dst);
+	           Vector2f(get_inner_w() - kSpaceRight - 3, kSpacing + 2), dst);
 
 	//  plot the pixels
 	for (uint32_t plot = 0; plot < plotdata_.size(); ++plot) {
@@ -654,7 +654,7 @@ void DifferentialPlotArea::draw(RenderTarget& dst) {
 
 	// Print the min value
 	draw_value((boost::format("-%u") % (highest_scale_)).str(), RGBColor(125, 0, 0),
-	           Vector2f(get_inner_w() - kSpaceRight - 2, get_inner_h() - kSpacing - 15), dst);
+	           Vector2f(get_inner_w() - kSpaceRight - 3, get_inner_h() - kSpacing - 23), dst);
 
 	// draw zero line
 	dst.draw_line_strip({Vector2f(get_inner_w() - kSpaceRight, yoffset),
