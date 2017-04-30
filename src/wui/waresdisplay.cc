@@ -431,7 +431,7 @@ std::string waremap_to_richtext(const Widelands::TribeDescr& tribe,
 				       tribe.get_ware_descr(c->first)->icon_filename() +
 				       "\"></p></div><div width=26 background=000000><p><font size=9>" +
 				       boost::lexical_cast<std::string>(static_cast<int32_t>(c->second)) +
-						 "</font></p></div></p></div>";
+				       "</font></p></div></p></div>";
 			}
 	return ret;
 }
