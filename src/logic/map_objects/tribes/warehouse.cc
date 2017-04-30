@@ -370,6 +370,8 @@ void Warehouse::load_finish(EditorGameBase& egbase) {
 			// We are most likely loading a pre-barracks savegame in that case, so when not
 			// adding the barracks the game becomes unplayable. Note that this might be strange in
 			// old savegames of campaigns or scenarios (e.g. barracks allowed but no weapons possible)
+			// TODO(Notabilis): If savegame compatibility is dropped next time (release build 20?),
+			// remove this code
 			const DescriptionIndex barracks_id = owner().tribe().barracks();
 			const ProductionSiteDescr* barracksDescr =
 				dynamic_cast<const ProductionSiteDescr*>(owner().tribe().get_building_descr(barracks_id));
@@ -386,6 +388,7 @@ void Warehouse::load_finish(EditorGameBase& egbase) {
 					break;
 				}
 			}
+			// End code-to-remove
 		}
 	}
 
