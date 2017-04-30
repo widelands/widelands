@@ -366,6 +366,26 @@ void Warehouse::load_finish(EditorGameBase& egbase) {
 			    owner().player_number(),
 			    owner().tribe().get_worker_descr(worker_index)->descname().c_str(),
 			    descr().descname().c_str(), serial(), get_position().x, get_position().y, next_spawn);
+			// Check if it is an recruit. If it is, enable barracks.
+			// We are most likely loading a pre-barracks savegame in that case, so when not
+			// adding the barracks the game becomes unplayable. Note that this might be strange in
+			// old savegames of campaigns or scenarios (e.g. barracks allowed but no weapons possible)
+			const std::string& name = owner().tribe().get_worker_descr(worker_index)->name();
+			const std::string tribe = name.substr(0, name.find('_'));
+			assert(tribe != name);
+			assert(!tribe.empty());
+			const std::string worker = name.substr(name.find('_') + 1);
+			assert(worker != name);
+			assert(!worker.empty());
+			if (worker.compare("recruit") == 0) {
+				// Enable barracks
+				const DescriptionIndex barracks_id = owner().tribe().building_index(tribe + "_barracks");
+				assert(barracks_id != INVALID_INDEX);
+				if (!owner().is_building_type_allowed(barracks_id)) {
+					log("WARNING: Enabling barracks for player %u\n", owner().player_number());
+					owner().allow_building_type(barracks_id, true);
+				}
+			}
 		}
 	}
 
