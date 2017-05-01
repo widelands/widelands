@@ -186,8 +186,20 @@ void draw_value(const string& value,
 
 uint32_t calc_max_ticks(int32_t plot_width) {
 	// Render a number with 3 digits (maximal length which should appear)
-	const Image* pic = UI::g_fh1->render(ytick_text_style(" -888 ", kAxisLineColor));
-	return plot_width / pic->width();
+	// Font size and style as used by DiscreteSlider
+	int new_width = UI::g_fh1
+	                   ->render(as_condensed(
+	                      /** TRANSLATORS: Used for calculating width in the statistics sliders. for
+	                       * m, use the widest time unit for h, m or s */
+	                      (boost::format("--%s") % pgettext("slider_width_unit", "-888m")).str(),
+	                      UI::Align::kLeft, UI_FONT_SIZE_SMALL - 2))
+	                   ->width();
+	new_width =
+	   std::max(new_width, UI::g_fh1
+	                          ->render(as_condensed((boost::format("--%s") % _("game")).str(),
+	                                                UI::Align::kLeft, UI_FONT_SIZE_SMALL - 2))
+	                          ->width());
+	return plot_width / new_width;
 }
 
 /**
