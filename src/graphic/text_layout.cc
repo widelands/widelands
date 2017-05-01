@@ -31,6 +31,16 @@
 #include "graphic/text/font_set.h"
 #include "graphic/text_constants.h"
 
+namespace {
+bool is_paragraph(const std::string& text) {
+	return boost::starts_with(text, "<p");
+}
+
+bool is_div(const std::string& text) {
+	return boost::starts_with(text, "<div");
+}
+} // namespace
+
 void replace_entities(std::string* text) {
 	boost::replace_all(*text, "&gt;", ">");
 	boost::replace_all(*text, "&lt;", "<");
@@ -47,14 +57,6 @@ uint32_t text_height(const std::string& text, int ptsize) {
 	return UI::g_fh1->render(as_editorfont(text.empty() ? "." : text,
 	                                       ptsize - UI::g_fh1->fontset()->size_offset()))
 	   ->height();
-}
-
-bool is_paragraph(const std::string& text) {
-	return boost::starts_with(text, "<p");
-}
-
-bool is_div(const std::string& text) {
-	return boost::starts_with(text, "<div");
 }
 
 std::string richtext_escape(const std::string& given_text) {
