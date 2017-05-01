@@ -366,29 +366,6 @@ void Warehouse::load_finish(EditorGameBase& egbase) {
 			    owner().player_number(),
 			    owner().tribe().get_worker_descr(worker_index)->descname().c_str(),
 			    descr().descname().c_str(), serial(), get_position().x, get_position().y, next_spawn);
-			// Check if it is an recruit. If it is, enable barracks.
-			// We are most likely loading a pre-barracks savegame in that case, so when not
-			// adding the barracks the game becomes unplayable. Note that this might be strange in
-			// old savegames of campaigns or scenarios (e.g. barracks allowed but no weapons possible)
-			// TODO(Notabilis): If savegame compatibility is dropped next time (release build 20?),
-			// remove this code
-			const DescriptionIndex barracks_id = owner().tribe().barracks();
-			const ProductionSiteDescr* barracksDescr =
-				dynamic_cast<const ProductionSiteDescr*>(owner().tribe().get_building_descr(barracks_id));
-			assert(barracksDescr != nullptr);
-			const BillOfMaterials& recruits = barracksDescr->input_workers();
-			for (const WareAmount& amount : recruits) {
-				if (amount.first == worker_index) {
-					// The found worker is one input of the barracks -> a recruit
-					// Enable barracks
-					if (!owner().is_building_type_allowed(barracks_id)) {
-						log("WARNING: Enabling barracks for player %u\n", owner().player_number());
-						owner().allow_building_type(barracks_id, true);
-					}
-					break;
-				}
-			}
-			// End code-to-remove
 		}
 	}
 

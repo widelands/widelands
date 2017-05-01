@@ -85,6 +85,13 @@ void MapAllowedBuildingTypesPacket::read(FileSystem& fs,
 				} catch (const WException& e) {
 					throw GameDataError("player %u (%s): %s", p, tribe.name().c_str(), e.what());
 				}
+
+				// Enable barracks
+				// TODO(Notabilis): Remove this when we break save game compatibility anyway
+				if (!player->is_building_type_allowed(player->tribe().barracks())) {
+					log("WARNING: Enabling barracks for player %u! This might break scenarios.\n", player->player_number());
+					player->allow_building_type(player->tribe().barracks(), true);
+				}
 			}
 		} else {
 			throw UnhandledVersionError(
