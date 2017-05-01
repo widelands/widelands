@@ -11,9 +11,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-04-06 19:07+0000\n"
-"PO-Revision-Date: 2017-04-06 19:11+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2017-04-21 16:17+0000\n"
+"PO-Revision-Date: 2017-04-21 18:54+0000\n"
+"Last-Translator: Milan Fašina <matrix17@seznam.cz>\n"
 "Language-Team: Czech (http://www.transifex.com/widelands/widelands/language/cs/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -3957,7 +3957,7 @@ msgstr "Divák"
 #: ../../src/wui/multiplayersetupgroup.cc:293
 #, c-format
 msgid "Shared in Player %u"
-msgstr ""
+msgstr "Sdíleno hráčem %u"
 
 #: ../../src/wui/multiplayersetupgroup.cc:314
 #: ../../src/wui/playerdescrgroup.cc:170
@@ -3967,7 +3967,7 @@ msgstr "Náhodně"
 
 #: ../../src/wui/multiplayersetupgroup.cc:316
 msgid "The tribe will be selected at random"
-msgstr ""
+msgstr "Kmen bude vybrán náhodně"
 
 #: ../../src/wui/multiplayersetupgroup.cc:370
 msgid "Shared in"
