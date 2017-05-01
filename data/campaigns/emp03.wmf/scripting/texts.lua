@@ -48,21 +48,21 @@ obj_build_quarry = {
    title=_"Build a quarry",
    number = 1,
    body = objective_text(_"Quarry",
-      listitem_bullet(_[[Build a quarry close to the abundant rocks, so we can free some building plots and get some valued resources.]])
+      listitem_bullet(_[[Build a quarry close to the abundant rocks, so we can free some building plots and get some valueable resources.]])
    ),
 }
 
 obj_build_sawmill_stonemason_and_lumberjacks = {
    name = "build_sawmill_stonemason_and_lumberjacks",
-   title=_"Build a lumberjack’s house, a sawmill and a stonemason at least to complete the building material supply chain",
+   title=_"Build a lumberjack’s house, a sawmill and a stonemason's house at least to complete the building material supply chain",
    number = 3,
-   body = objective_text(_"Lumberjack’s House, Sawmill and Stonemason",
-      listitem_bullet(_[[Build a lumberjack’s house, a sawmill and a stonemason as soon as there is enough space for them.]])
+   body = objective_text(_"Lumberjack, Sawmill and Stonemason",
+      listitem_bullet(_[[Build a lumberjack’s house, a sawmill and a stonemason's house as soon as there is enough space for them.]])
    ),
 }
 
 obj_lower_marble_column_demand = {
-   name = "lower marble column demand",
+   name = "lower_marble_column_demand",
    title=_"Lower the demand for marble columns in the economy settings",
    number = 1,
    body = objective_text(_"Lower Demand for Marble Columns",
@@ -71,7 +71,7 @@ obj_lower_marble_column_demand = {
 }
 
 obj_find_port_space = {
-   name = "find a portspace",
+   name = "find_port_space",
    title=_"Find a port space on the small island",
    number = 1,
    body = objective_text(_"Port Space",
@@ -80,7 +80,7 @@ obj_find_port_space = {
 }
 
 obj_build_port_and_shipyard = {
-   name = "build a port and a shipyard",
+   name = "build_port_and_shipyard",
    title=_"Build a port and a shipyard on the Island",
    number = 2,
    body = objective_text(_"Ship Industry",
@@ -89,8 +89,8 @@ obj_build_port_and_shipyard = {
 }
 
 obj_produce_wheat = {
-   name = "produce 50 wheat",
-   title=_"Produce 50 sheaves of wheat",
+   name = "produce_50_wheat",
+   title=_"Produce 50 sheaves of wheat at least",
    number = 1,
    body = objective_text(_"Wheat Production",
       listitem_bullet(_[[To get our wool production started, we need at least 50 sheaves of wheat.]])
@@ -98,26 +98,26 @@ obj_produce_wheat = {
 }
 
 obj_produce_cloth = {
-   name = "produce cloth",
+   name = "produce_cloth",
    title=_"Produce cloth for building our first ship",
    number = 1,
    body = objective_text(_"Cloth Production",
-      listitem_bullet(_[[Now let's turn all the wheat into wool (at least 50 bales) and all the wool into cloth to build a ship.]])
+      listitem_bullet(_[[Now let's turn all the wheat into wool (at least 50 bales) and then use the wool to weave cloth in order to build a ship.]])
    ),
 }
 
 obj_build_expedition_ports = {
-   name = "build two expedition ports",
-   title=_"Build 2 expedition ports",
+   name = "build_expedition_ports",
+   title=_"Build 2 ports on distant islands",
    number = 1,
    body = objective_text(_"Build 2 Expedition Ports",
-      listitem_bullet(_[[We should explore the Island in the south and build an expedition port. Let's try to find some mining resources there.]]) ..
-	  listitem_bullet(_[[We should send a ship to the north so that we can gather some intelligence about the barbarians. Try to build a port on the island and found an outpost.]])
+      listitem_bullet(_[[We should explore the island in the south, use an expedition to build a port there. Afterwards let's try to find some mining resources.]]) ..
+	  listitem_bullet(_[[We should send a ship nothwards to gather some intelligence about the barbarians. Try to build a port on the island and found an outpost.]])
    ),
 }
 
 obj_produce_gold = {
-   name = "produce gold",
+   name = "produce_gold",
    title=_"Produce gold to send out expeditions",
    number = 1,
    body = objective_text(_"Gold Production",
@@ -126,16 +126,16 @@ obj_produce_gold = {
 }
 
 obj_conquer_all = {
-   name = "Conquer all",
+   name = "conquer_all",
    title=_"Defeat the Barbarians",
    number = 1,
    body = objective_text(_"Defeat the Enemy",
-      listitem_bullet(_[[We should end the Barbarians’ existence in this part of the world.]])
+      listitem_bullet(_[[We should end the barbarians’ existence in this part of the world.]])
    ),
 }
 
 obj_find_all_ports = {
-   name = "Explore additional islands and search for port spaces",
+   name = "Explore_futher_ build_ports",
    title=_"Explore further and build ports",
    number = 1,
    body = objective_text(_"Explore Additional Islands and Search for Port Spaces",
@@ -144,16 +144,16 @@ obj_find_all_ports = {
 }
 
 obj_find_artifacts = {
-   name = "Find the pieces of Neptune's shrine",
+   name = "find_neptune'_shrine",
    title=_"Recover the shrine",
    number = 1,
-   body = objective_text(_"Find all 6 Pieces of the Holy Shrine",
+   body = objective_text(_"Find 6 Pieces of the Holy Shrine",
       listitem_bullet(_[[We need to find and secure all pieces of the Holy Shrine of Neptune.]])
    ),
 }
 
 obj_training = {
-   name = "Build training infrastructure",
+   name = "build_training_infrastructure",
    title=_"Build a training camp, some barracks and an arena or colosseum",
    number = 3,
    body = objective_text(_"Training Infrastructure",
@@ -169,7 +169,7 @@ diary_page_1 = {
    title =_"The Journey Home",
    body=lutius(_"Diary of Lutius",
       -- TRANSLATORS: Lutius - Diary
-      _([[Finally ,we were set towards Fremil again. I couldn’t await the chance to clear my records of this big defeat by the Barbarians.]])
+      _([[Finally, we were set towards Fremil again. I couldn’t await the chance to clear my records of this big defeat by the Barbarians.]])
       .. paragraphdivider() ..
       -- TRANSLATORS: Lutius - Diary
       _([[But the gods themselves didn’t want us to get home so quickly!]])),
@@ -202,7 +202,7 @@ diary_page_3 = {
       _([[It really seems as if we have landed on a very small island with little space.]])
 	  .. paragraphdivider() ..
       -- TRANSLATORS: Lutius - Diary
-      _([[To make matters even worse, all the land we can see is blocked by rocks and trees. I fear we won’t find the help we need to build a new ship.]])
+      _([[To make matters even worse, all the land we can see is blocked by rocks and trees. I fear we won’t find the resources we need to build a new ship.]])
 	  .. paragraphdivider() ..
       -- TRANSLATORS: Lutius - Diary
       _([[I really don't know if and how we will get back home. And the war is going on without us. I hope my comrades are defending our empire well.]])),
@@ -286,7 +286,7 @@ amalea_3 = {
       _([[I’ve got important things to talk about… First the good news:]])
       .. paragraphdivider() ..
       -- TRANSLATORS: Amalea
-      _([[I noticed that our stonemason has started his work, finally. He will cut the number of columns that we request in our basic economy settings.]])
+      _([[I noticed that our stonemason has started his work, finally. He will cut the number of marble columns that we request in our basic economy settings.]])
       .. paragraphdivider() ..
       -- TRANSLATORS: Amalea
       _([[But here’s the rub, if we use up all of our marble for columns, we might run out. So, we should lower the settings for marble columns in the economy settings to a smaller amount. I think a reserve of 4 columns might be sufficient for the moment being.]]))
@@ -302,7 +302,7 @@ amalea_10 = {
       _([[Ave Lutius. I have excellent progress to report now.]])
       .. paragraphdivider() ..
       -- TRANSLATORS: Amalea
-      _([[I found out that the construction of the lumberjack and the sawmill is complete, so we can begin to harvest logs and make planks out of them.]])
+      _([[I found out that the construction of the lumberjack´s house and the sawmill is complete, so we can begin to harvest logs and make planks out of them.]])
       .. paragraphdivider() ..
       -- TRANSLATORS: Amalea
       _([[This is a great step forward in constructing advanced buildings. And we can think of using some planks to build new ships.]])),
@@ -316,7 +316,7 @@ saledus_3 = {
       _([[Sire, I just pondered our way home. It is of utmost importance to build a port for loading our ships and starting an expedition.]])
       .. paragraphdivider() ..
       -- TRANSLATORS: Saledus
-      _([[The problem is that a port is a building which needs a very special place to be build. So, while building our economy, we should nevertheless expand further to discover the whole island. Let’s try to find such a valuable place.]]))
+      _([[The problem is that a port is a building which needs a very special place to be build. So, while building our economy, we should nevertheless expand further to discover the whole island. Let’s try to find such a valuable construction site.]]))
       .. new_objectives(obj_find_port_space),
    posy=1,
    h=500,
@@ -348,7 +348,7 @@ amalea_4 = {
       _([[So, we need more cloth to finally be able to build ships. But there is no space on the island for building a whole economy to produce cloth. Therefore, we need to build the necessary wares step by step.]])
       .. paragraphdivider() ..
       -- TRANSLATORS: Amalea
-      _([[So, let’s think this over. To produce cloth, we need some wool. And to produce wool, we need wheat. So, let’s find a space for a big building and build a wheat farm first.]])
+      _([[So let's think this over. To weave cloth we need some wool from a sheep farm. The sheepfarm itself needs wheat and water to work. So let's find a space for a big building and build a wheat farm first.]])
 	  .. paragraphdivider() ..
 	  -- TRANSLATORS: Amalea
       _([[After the production of enough wheat, we can dismantle the farm and build a sheep farm to produce wool. Later on, we could build a weaving mill in the same spot to use our wool for weaving cloth. But for the moment being, let’s start by producing a reasonable amount of wheat.]])
@@ -371,7 +371,7 @@ diary_page_4 = {
 
 
 amalea_5 = {
-   title=_"Amalea’s Proud",
+   title=_"Amalea Proud",
    body= amalea2(_"Amalea cheers…",
       -- TRANSLATORS: Amalea
       _([[Well done so far. We have produced enough wheat. Now dismantle the farm and build the next building in the production chain.]])
@@ -387,7 +387,7 @@ amalea_5 = {
 }
 
 saledus_5 = {
-   title=_"We Ahould Explore the Islands",
+   title=_"We Should Explore the Islands",
    body= saledus2(_"Saledus is excited…",
       -- TRANSLATORS: Saledus
       _([[Now that we have all resources ready for building a ship, we should explore the surrounding islands.]])
@@ -454,7 +454,7 @@ amalea_8 = {
    title=_"Amalea is Pleased",
    body= amalea1(_"Amalea is content that we will manage all our challenges",
       -- TRANSLATORS: Amalea
-      _([[Well done so far. I really think we will need this feature quite often to adjust our economy. Remember, our industry will only be working until the given amount in the economy settings is reached.]])
+      _([[Well done so far. Now we will not produce more marble columns than needed. I really think we will need this economy feature quite often to adjust our economy. Remember, our industry will only be working until the given amount in the economy settings is reached.]])
       .. paragraphdivider() ..
 	  -- TRANSLATORS: Amalea
       _([[For example, it might be a good idea to produce a reasonable amount of a ware and afterwards dismantle the building to gain space for another building.]])),
@@ -462,13 +462,13 @@ amalea_8 = {
 }
 
 amalea_9 = {
-   title=_"Amalea’s reminder",
+   title=_"Amalea’s Reminder",
    body= amalea3(_"Amalea is shaking her head…",
       -- TRANSLATORS: Amalea
       _([[Lutius. I really appreciate that you and Saledus are so concerned about our security. But I think we could use the little space on this island better than by building a lot of military buildings.]])
       .. paragraphdivider() ..
 	  -- TRANSLATORS: Amalea
-      _([[I strongly recommend dismantling the most of them to be able to build industry buildings. I don’t think there is much danger on this island, but if you want to be cautious, you can keep some sentries or blockhouses at the waterline.]])
+      _([[I strongly recommend dismantling the most of them to be able to build industrial buildings. I don’t think there is much danger on this island, but if you want to be cautious, you can keep some sentries or blockhouses near the coastline.]])
       .. paragraphdivider() ..
 	  -- TRANSLATORS: Amalea
       _([[But be careful not to waste any bigger building spots.]])),
@@ -568,7 +568,7 @@ saledus_11 = {
 
 
 diary_page_5 = {
-   title=_"Now it’s time to get home again",
+   title=_"Time to get Home Again",
    body= lutius(_"Diary of Lutius",
       -- TRANSLATORS: Lutius - Diary
       _([[Yes my fellow comrades, we have done it! We met all the challenges that were put in front of us. But my heart is still with our home. We shall set sail as soon as possible to help defend the empire from the Barbarian tribe.]])
