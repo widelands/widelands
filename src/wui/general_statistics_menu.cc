@@ -197,9 +197,10 @@ GeneralStatisticsMenu::GeneralStatisticsMenu(InteractiveGameBase& parent,
 
 	box_.add(hbox2, UI::Box::Resizing::kFullSize);
 
-	box_.add(new WuiPlotAreaSlider(
-	            &box_, plot_, 0, 0, 100, 45, g_gr->images().get("images/ui_basic/but1.png")),
-	         UI::Box::Resizing::kFullSize);
+	WuiPlotAreaSlider *slider = new WuiPlotAreaSlider(
+	            &box_, plot_, 0, 0, 100, 45, g_gr->images().get("images/ui_basic/but1.png"));
+	slider->changedto.connect(boost::bind(&WuiPlotArea::set_time_id, &plot_, _1));
+	box_.add(slider, UI::Box::Resizing::kFullSize);
 }
 
 GeneralStatisticsMenu::~GeneralStatisticsMenu() {

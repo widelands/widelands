@@ -184,23 +184,17 @@ void draw_value(const string& value,
 	dst.blit(point, pic, BlendMode::UseAlpha, UI::Align::kRight);
 }
 
-uint32_t calc_max_ticks(int32_t plot_width) {
+uint32_t calc_plot_x_max_ticks(int32_t plot_width) {
 	// Render a number with 3 digits (maximal length which should appear)
-	// Font size and style as used by DiscreteSlider
-	int new_width = UI::g_fh1
-	                   ->render(as_condensed(
-	                      /** TRANSLATORS: Used for calculating width in the statistics sliders. for
-	                       * m, use the widest time unit for h, m or s */
-	                      (boost::format("--%s") % pgettext("slider_width_unit", "-888m")).str(),
-	                      UI::Align::kLeft, UI_FONT_SIZE_SMALL - 2))
-	                   ->width();
-	new_width =
-	   std::max(new_width, UI::g_fh1
-	                          ->render(as_condensed((boost::format("--%s") % _("game")).str(),
-	                                                UI::Align::kLeft, UI_FONT_SIZE_SMALL - 2))
-	                          ->width());
-	return plot_width / new_width;
+	const Image* pic = UI::g_fh1->render(ytick_text_style(" -888 ", kAxisLineColor));
+	return plot_width / pic->width();
 }
+
+int calc_slider_label_width(const std::string& label) {
+	// Font size and style as used by DiscreteSlider
+	return UI::g_fh1->render(as_condensed(label, UI::Align::kLeft, UI_FONT_SIZE_SMALL - 2))->width();
+}
+
 
 /**
  * draw the background and the axis of the diagram
@@ -237,7 +231,7 @@ void draw_diagram(uint32_t time_ms,
 	// Make sure that we always have a tick
 	how_many_ticks = std::max(how_many_ticks, 1u);
 	// Make sure we haven't more ticks than we have space for -> avoid overlap
-	how_many_ticks = std::min(how_many_ticks, calc_max_ticks(inner_w));
+	how_many_ticks = std::min(how_many_ticks, calc_plot_x_max_ticks(inner_w));
 
 	// first, tile the background
 	dst.tile(Recti(Vector2i(0, 0), inner_w, inner_h), g_gr->images().get(BG_PIC), Vector2i(0, 0));
@@ -576,7 +570,23 @@ void WuiPlotAreaSlider::draw(RenderTarget& dst) {
 	uint32_t new_game_time_id = plot_area_.get_game_time_id();
 	if (new_game_time_id != last_game_time_id_) {
 		last_game_time_id_ = new_game_time_id;
-		set_labels(plot_area_.get_labels());
+		std::vector<std::string> new_labels = plot_area_.get_labels();
+		// There should be always at least "15m" and "game"
+		assert(new_labels.size() >= 2);
+		// The slider places the level with equal distances, so find the
+		// longest label and use it to calculate how many labels are possible
+		int max_width = std::max(calc_slider_label_width(new_labels[0]),
+			calc_slider_label_width(new_labels.back()));
+		for (size_t i = 1; i < new_labels.size() - 1; ++i) {
+			max_width = std::max(max_width, calc_slider_label_width(new_labels[i]));
+			if (max_width * (static_cast<int>(i) + 2) > get_w()) {
+				// We have too many labels. Drop all further ones
+				new_labels[i] = new_labels.back();
+				new_labels.resize(i + 1);
+				break;
+			}
+		}
+		set_labels(new_labels);
 		slider.set_value(plot_area_.get_time_id());
 	}
 	UI::DiscreteSlider::draw(dst);
