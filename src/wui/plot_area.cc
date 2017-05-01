@@ -233,9 +233,6 @@ void draw_diagram(uint32_t time_ms,
 	// Make sure we haven't more ticks than we have space for -> avoid overlap
 	how_many_ticks = std::min(how_many_ticks, calc_plot_x_max_ticks(inner_w));
 
-	// first, tile the background
-	dst.tile(Recti(Vector2i(0, 0), inner_w, inner_h), g_gr->images().get(BG_PIC), Vector2i(0, 0));
-
 	// Draw coordinate system
 	// X Axis
 	dst.draw_line_strip({Vector2f(kSpacing, inner_h - kSpaceBottom),
@@ -463,6 +460,7 @@ void WuiPlotArea::update() {
  * Draw this. This is the main function
  */
 void WuiPlotArea::draw(RenderTarget& dst) {
+	dst.tile(Recti(Vector2i(0, 0), get_inner_w(), get_inner_h()), g_gr->images().get(BG_PIC), Vector2i(0, 0));
 	draw_plot(dst, get_inner_h() - kSpaceBottom, std::to_string(highest_scale_), highest_scale_);
 }
 
@@ -470,11 +468,6 @@ void WuiPlotArea::draw_plot(RenderTarget& dst,
                             float yoffset,
                             const std::string& yscale_label,
                             uint32_t highest_scale) {
-	draw_diagram(time_ms_, get_inner_w(), get_inner_h(), xline_length_, dst);
-
-	//  print the maximal value into the top right corner
-	draw_value(yscale_label, RGBColor(60, 125, 0),
-	           Vector2f(get_inner_w() - kSpaceRight - 3, kSpacing + 2), dst);
 
 	//  plot the pixels
 	for (uint32_t plot = 0; plot < plotdata_.size(); ++plot) {
@@ -484,6 +477,12 @@ void WuiPlotArea::draw_plot(RenderTarget& dst,
 			               highest_scale, sub_, plotdata_[plot].plotcolor, yoffset);
 		}
 	}
+
+	draw_diagram(time_ms_, get_inner_w(), get_inner_h(), xline_length_, dst);
+
+	//  print the maximal value into the top right corner
+	draw_value(yscale_label, RGBColor(60, 125, 0),
+	           Vector2f(get_inner_w() - kSpaceRight - 3, kSpacing + 2), dst);
 }
 
 /**
@@ -670,18 +669,25 @@ void DifferentialPlotArea::update() {
 }
 
 void DifferentialPlotArea::draw(RenderTarget& dst) {
+
+	// first, tile the background
+	dst.tile(Recti(Vector2i(0, 0), get_inner_w(), get_inner_h()), g_gr->images().get(BG_PIC), Vector2i(0, 0));
+
 	// yoffset of the zero line
 	float const yoffset = kSpacing + ((get_inner_h() - kSpaceBottom) - kSpacing) / 2;
+
+	// draw zero line
+	dst.draw_line_strip({Vector2f(get_inner_w() - kSpaceRight, yoffset),
+	                     Vector2f(get_inner_w() - kSpaceRight - xline_length_, yoffset)},
+	                    kZeroLineColor, kPlotLinesWidth);
+
+	// Draw data and diagram
 	draw_plot(dst, yoffset, std::to_string(highest_scale_), 2 * highest_scale_);
 
 	// Print the min value
 	draw_value((boost::format("-%u") % (highest_scale_)).str(), RGBColor(125, 0, 0),
 	           Vector2f(get_inner_w() - kSpaceRight - 3, get_inner_h() - kSpacing - 23), dst);
 
-	// draw zero line
-	dst.draw_line_strip({Vector2f(get_inner_w() - kSpaceRight, yoffset),
-	                     Vector2f(get_inner_w() - kSpaceRight - xline_length_, yoffset)},
-	                    kZeroLineColor, kPlotLinesWidth);
 }
 
 /**
