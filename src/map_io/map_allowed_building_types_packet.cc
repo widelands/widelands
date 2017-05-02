@@ -86,11 +86,23 @@ void MapAllowedBuildingTypesPacket::read(FileSystem& fs,
 					throw GameDataError("player %u (%s): %s", p, tribe.name().c_str(), e.what());
 				}
 
-				// Enable barracks
+				// Savegame compatibility: If all buildings except for the barracks are allowed, allow
+				// it too. This will make games playable again except for scenarios that restrict the
+				// number of buildings and need soldier creation.
 				// TODO(Notabilis): Remove this when we break save game compatibility anyway
 				if (!player->is_building_type_allowed(player->tribe().barracks())) {
-					log("WARNING: Enabling barracks for player %u! This might break scenarios.\n", player->player_number());
-					player->allow_building_type(player->tribe().barracks(), true);
+					int tribe_buildings = 0;
+					int allowed_buildings = 0;
+					for (const Widelands::DescriptionIndex& index : player->tribe().buildings()) {
+						if (player->is_building_type_allowed(index)) {
+							++allowed_buildings;
+						}
+						++tribe_buildings;
+					}
+					if (tribe_buildings - 1 == allowed_buildings) {
+						log("WARNING: Enabling barracks for player %u.\n", player->player_number());
+						player->allow_building_type(player->tribe().barracks(), true);
+					}
 				}
 			}
 		} else {
