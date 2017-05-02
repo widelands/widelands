@@ -146,7 +146,7 @@ private:
 
 /**
  * A discrete slider with plot time steps.
- * Signal setup is no longer done automatically!
+ * Enclosing element will need to connect the changedto signal.
  */
 struct WuiPlotAreaSlider : public UI::DiscreteSlider {
 	WuiPlotAreaSlider(Panel* const parent,
