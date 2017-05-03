@@ -91,15 +91,13 @@ void MapAllowedBuildingTypesPacket::read(FileSystem& fs,
 				// number of buildings and need soldier creation.
 				// TODO(Notabilis): Remove this when we break save game compatibility anyway
 				if (!player->is_building_type_allowed(player->tribe().barracks())) {
-					int tribe_buildings = 0;
-					int allowed_buildings = 0;
+					size_t allowed_buildings = 0;
 					for (const Widelands::DescriptionIndex& index : player->tribe().buildings()) {
 						if (player->is_building_type_allowed(index)) {
 							++allowed_buildings;
 						}
-						++tribe_buildings;
 					}
-					if (tribe_buildings - 1 == allowed_buildings) {
+					if (player->tribe().buildings().size() - 1 == allowed_buildings) {
 						log("WARNING: Enabling barracks for player %u.\n", player->player_number());
 						player->allow_building_type(player->tribe().barracks(), true);
 					}
