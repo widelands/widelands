@@ -81,7 +81,10 @@ LoadOrSaveGame::LoadOrSaveGame(UI::Panel* parent,
      filetype_(filetype),
      localize_autosave_(localize_autosave),
      // Savegame description
-     game_details_(parent, style),
+     game_details_(
+        parent,
+        style,
+        filetype_ == FileType::kReplay ? GameDetails::Mode::kReplay : GameDetails::Mode::kSavegame),
      delete_(new UI::Button(game_details()->button_box(),
                             "delete",
                             0,

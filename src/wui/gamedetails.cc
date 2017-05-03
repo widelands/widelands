@@ -83,9 +83,10 @@ void SavegameData::set_mapname(const std::string& input_mapname) {
 	mapname = _(input_mapname);
 }
 
-GameDetails::GameDetails(Panel* parent, Style style)
+GameDetails::GameDetails(Panel* parent, Style style, Mode mode)
    : UI::Box(parent, 0, 0, UI::Box::Vertical),
      style_(style),
+     mode_(mode),
      padding_(4),
      name_label_(
         this,
@@ -144,13 +145,20 @@ void GameDetails::update(const SavegameData& gamedata) {
 			    as_header_with_content(_("Map Name:"), gamedata.mapname, style_, true))
 			      .str());
 
-			name_label_.set_tooltip(gamedata.gametype == GameController::GameType::REPLAY ?
+			name_label_.set_tooltip(mode_ == Mode::kReplay ?
 			                           _("The map that this replay is based on") :
 			                           _("The map that this game is based on"));
 
 			// Show game information
 			std::string description =
-			   as_header_with_content(_("Game Time:"), gamedata.gametime, style_);
+			   as_header_with_content(
+			      mode_ == Mode::kReplay ?
+			         /** TRANSLATORS: The time a replay starts. Shown in the replay loading screen*/
+			         _("Start of Replay:") :
+			         /** TRANSLATORS: The current time of a savegame. Shown in the game saving and
+			            loading screens. */
+			         _("Game Time:"),
+			      gamedata.gametime, style_);
 
 			description = (boost::format("%s%s") % description %
 			               as_header_with_content(_("Players:"), gamedata.nrplayers, style_))
@@ -215,7 +223,7 @@ void GameDetails::layout() {
 		// Scale the minimap image.
 		const float available_width = get_w() - 4 * padding_;
 		const float available_height =
-			get_h() - name_label_.get_h() - descr_.get_h() - button_box_->get_h() - 4 * padding_;
+		   get_h() - name_label_.get_h() - descr_.get_h() - button_box_->get_h() - 4 * padding_;
 
 		// Scale it
 		float scale = available_width / minimap_image_->width();

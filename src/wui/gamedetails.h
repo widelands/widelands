@@ -55,7 +55,8 @@ struct SavegameData {
 	std::string nrplayers;
 	/// The version of Widelands that the game was played with
 	std::string version;
-	/// Gametime as time stamp. For games, it's the time the game ended. For replays, it's the time the game started.
+	/// Gametime as time stamp. For games, it's the time the game ended. For replays, it's the time
+	/// the game started.
 	time_t savetimestamp;
 	/// Single payer, nethost, netclient or replay
 	GameController::GameType gametype;
@@ -76,8 +77,9 @@ struct SavegameData {
 class GameDetails : public UI::Box {
 public:
 	enum class Style { kFsMenu, kWui };
+	enum class Mode { kSavegame, kReplay };
 
-	GameDetails(Panel* parent, Style style);
+	GameDetails(Panel* parent, Style style, Mode mode);
 
 	/// Reset the data
 	void clear();
@@ -95,6 +97,7 @@ private:
 	void layout() override;
 
 	const Style style_;
+	const Mode mode_;
 	const int padding_;
 
 	UI::MultilineTextarea name_label_;
