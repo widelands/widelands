@@ -58,7 +58,7 @@ map_filename(const std::string& filename, const std::string& mapname, bool local
 		}
 	} else if (!(boost::starts_with(result, mapname))) {
 		/** TRANSLATORS: %1% is a filename, %2% a map's name. */
-		result = (boost::format(_("%1% (%2%)")) % result % mapname).str();
+		result = (boost::format(pgettext("filename_mapname", "%1%: %2%")) % result % mapname).str();
 	}
 	return result;
 }
@@ -121,8 +121,10 @@ LoadOrSaveGame::LoadOrSaveGame(UI::Panel* parent,
 		   _("Mode"), (boost::format("%s %s") % mode_tooltip_1 % mode_tooltip_2).str());
 	}
 	table_.add_column(0, _("Description"),
-	                  _("The filename that the game was saved under followed by the map’s name, "
-	                    "or the map’s name followed by the last objective achieved."),
+	                  filetype_ == FileType::kReplay ?
+	                     _("Map name (start of replay)") :
+	                     _("The filename that the game was saved under followed by the map’s name, "
+	                       "or the map’s name followed by the last objective achieved."),
 	                  UI::Align::kLeft, UI::TableColumnType::kFlexible);
 	table_.set_column_compare(
 	   0, boost::bind(&LoadOrSaveGame::compare_date_descending, this, _1, _2));
@@ -259,8 +261,8 @@ void LoadOrSaveGame::clicked_delete() {
 	bool do_delete = SDL_GetModState() & KMOD_CTRL;
 	if (!do_delete) {
 		UI::WLMessageBox confirmationBox(
-			parent_, ngettext("Confirm deleting file", "Confirm deleting files", no_selections), message,
-			UI::WLMessageBox::MBoxType::kOkCancel);
+		   parent_, ngettext("Confirm deleting file", "Confirm deleting files", no_selections),
+		   message, UI::WLMessageBox::MBoxType::kOkCancel);
 		do_delete = confirmationBox.run<UI::Panel::Returncodes>() == UI::Panel::Returncodes::kOk;
 	}
 	if (do_delete) {
@@ -433,13 +435,9 @@ void LoadOrSaveGame::fill_table() {
 				}
 				te.set_string(1, gametypestring);
 				if (filetype_ == FileType::kReplay) {
-					if (UI::g_fh1->fontset()->is_rtl()) {
-						te.set_string(
-						   2, (boost::format("%1% ← %2%") % gamedata.gametime % gamedata.mapname).str());
-					} else {
-						te.set_string(
-						   2, (boost::format("%1% → %2%") % gamedata.gametime % gamedata.mapname).str());
-					}
+					te.set_string(2, (boost::format(pgettext("mapname_gametime", "%1% (%2%)")) %
+					                  gamedata.mapname % gamedata.gametime)
+					                    .str());
 				} else {
 					te.set_string(
 					   2, map_filename(gamedata.filename, gamedata.mapname, localize_autosave_));
