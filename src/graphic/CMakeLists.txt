@@ -23,8 +23,11 @@ wl_library(graphic_playercolor
     playercolor.cc
     playercolor.h
   DEPENDS
+    graphic
     graphic_color
+    graphic_image_cache
     graphic_surface
+    io_filesystem
 )
 
 
