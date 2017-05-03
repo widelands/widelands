@@ -401,7 +401,7 @@ protected:
 	/// Called only when the oject is logically created in the simulation. If
 	/// called again, such as when the object is loaded from a savegame, it will
 	/// cause bugs.
-	virtual void init(EditorGameBase&);
+	virtual bool init(EditorGameBase&);
 
 	virtual void cleanup(EditorGameBase&);
 
