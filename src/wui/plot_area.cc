@@ -79,7 +79,7 @@ string xtick_text_style(const string& text) {
 }
 
 /**
- * scale value down to the available space, which is specifiey by
+ * scale value down to the available space, which is specified by
  * the length of the y axis and the highest scale.
  */
 float scale_value(float const yline_length, uint32_t const highest_scale, int32_t const value) {
@@ -184,6 +184,16 @@ void draw_value(const string& value,
 	dst.blit(point, pic, BlendMode::UseAlpha, UI::Align::kRight);
 }
 
+uint32_t calc_plot_x_max_ticks(int32_t plot_width) {
+	// Render a number with 3 digits (maximal length which should appear)
+	return plot_width / UI::g_fh1->render(ytick_text_style(" -888 ", kAxisLineColor))->width();
+}
+
+int calc_slider_label_width(const std::string& label) {
+	// Font size and style as used by DiscreteSlider
+	return UI::g_fh1->render(as_condensed(label, UI::Align::kLeft, UI_FONT_SIZE_SMALL - 2))->width();
+}
+
 /**
  * draw the background and the axis of the diagram
  */
@@ -218,9 +228,8 @@ void draw_diagram(uint32_t time_ms,
 	}
 	// Make sure that we always have a tick
 	how_many_ticks = std::max(how_many_ticks, 1u);
-
-	// first, tile the background
-	dst.tile(Recti(Vector2i(0, 0), inner_w, inner_h), g_gr->images().get(BG_PIC), Vector2i(0, 0));
+	// Make sure we haven't more ticks than we have space for -> avoid overlap
+	how_many_ticks = std::min(how_many_ticks, calc_plot_x_max_ticks(inner_w));
 
 	// Draw coordinate system
 	// X Axis
@@ -448,6 +457,8 @@ void WuiPlotArea::update() {
  * Draw this. This is the main function
  */
 void WuiPlotArea::draw(RenderTarget& dst) {
+	dst.tile(Recti(Vector2i(0, 0), get_inner_w(), get_inner_h()), g_gr->images().get(BG_PIC),
+	         Vector2i(0, 0));
 	draw_plot(dst, get_inner_h() - kSpaceBottom, std::to_string(highest_scale_), highest_scale_);
 }
 
@@ -455,11 +466,6 @@ void WuiPlotArea::draw_plot(RenderTarget& dst,
                             float yoffset,
                             const std::string& yscale_label,
                             uint32_t highest_scale) {
-	draw_diagram(time_ms_, get_inner_w(), get_inner_h(), xline_length_, dst);
-
-	//  print the maximal value into the top right corner
-	draw_value(yscale_label, RGBColor(60, 125, 0),
-				  Vector2i(get_inner_w() - kSpaceRight - 2, kSpacing + 2), dst);
 
 	//  plot the pixels
 	for (uint32_t plot = 0; plot < plotdata_.size(); ++plot) {
@@ -469,6 +475,12 @@ void WuiPlotArea::draw_plot(RenderTarget& dst,
 			               highest_scale, sub_, plotdata_[plot].plotcolor, yoffset);
 		}
 	}
+
+	draw_diagram(time_ms_, get_inner_w(), get_inner_h(), xline_length_, dst);
+
+	//  print the maximal value into the top right corner
+	draw_value(yscale_label, RGBColor(60, 125, 0),
+	           Vector2i(get_inner_w() - kSpaceRight - 3, kSpacing + 2), dst);
 }
 
 
@@ -556,7 +568,23 @@ void WuiPlotAreaSlider::draw(RenderTarget& dst) {
 	uint32_t new_game_time_id = plot_area_.get_game_time_id();
 	if (new_game_time_id != last_game_time_id_) {
 		last_game_time_id_ = new_game_time_id;
-		set_labels(plot_area_.get_labels());
+		std::vector<std::string> new_labels = plot_area_.get_labels();
+		// There should be always at least "15m" and "game"
+		assert(new_labels.size() >= 2);
+		// The slider places the level with equal distances, so find the
+		// longest label and use it to calculate how many labels are possible
+		int max_width = std::max(
+		   calc_slider_label_width(new_labels[0]), calc_slider_label_width(new_labels.back()));
+		for (size_t i = 1; i < new_labels.size() - 1; ++i) {
+			max_width = std::max(max_width, calc_slider_label_width(new_labels[i]));
+			if (max_width * (static_cast<int>(i) + 2) > get_w()) {
+				// We have too many labels. Drop all further ones
+				new_labels[i] = new_labels.back();
+				new_labels.resize(i + 1);
+				break;
+			}
+		}
+		set_labels(new_labels);
 		slider.set_value(plot_area_.get_time_id());
 	}
 	UI::DiscreteSlider::draw(dst);
@@ -640,18 +668,25 @@ void DifferentialPlotArea::update() {
 }
 
 void DifferentialPlotArea::draw(RenderTarget& dst) {
+
+	// first, tile the background
+	dst.tile(Recti(Vector2i(0, 0), get_inner_w(), get_inner_h()), g_gr->images().get(BG_PIC),
+	         Vector2i(0, 0));
+
 	// yoffset of the zero line
 	float const yoffset = kSpacing + ((get_inner_h() - kSpaceBottom) - kSpacing) / 2;
-	draw_plot(dst, yoffset, std::to_string(highest_scale_), 2 * highest_scale_);
-
-	// Print the min value
-	draw_value((boost::format("-%u") % (highest_scale_)).str(), RGBColor(125, 0, 0),
-				  Vector2i(get_inner_w() - kSpaceRight - 2, get_inner_h() - kSpacing - 15), dst);
 
 	// draw zero line
 	dst.draw_line_strip({Vector2f(get_inner_w() - kSpaceRight, yoffset),
 	                     Vector2f(get_inner_w() - kSpaceRight - xline_length_, yoffset)},
 	                    kZeroLineColor, kPlotLinesWidth);
+
+	// Draw data and diagram
+	draw_plot(dst, yoffset, std::to_string(highest_scale_), 2 * highest_scale_);
+
+	// Print the min value
+	draw_value((boost::format("-%u") % (highest_scale_)).str(), RGBColor(125, 0, 0),
+	           Vector2i(get_inner_w() - kSpaceRight - 3, get_inner_h() - kSpacing - 23), dst);
 }
 
 /**

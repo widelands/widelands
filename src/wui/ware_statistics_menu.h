@@ -49,36 +49,4 @@ private:
 	void cb_changed_to(Widelands::DescriptionIndex, bool);
 };
 
-/**
- * A discrete slider with plot time steps preconfigured, automatic signal
- * setup and the set_time callback function from WareStatisticsMenu.
- *
- */
-struct WuiPlotGenericAreaSlider : public UI::DiscreteSlider {
-	WuiPlotGenericAreaSlider(Panel* const parent,
-	                         WuiPlotArea& plot_area,
-	                         WareStatisticsMenu* signal_listener,
-	                         const int32_t x,
-	                         const int32_t y,
-	                         const int w,
-	                         const int h,
-	                         const Image* background_picture_id,
-	                         const std::string& tooltip_text = std::string(),
-	                         const uint32_t cursor_size = 20,
-	                         const bool enabled = true)
-	   : DiscreteSlider(parent,
-	                    x,
-	                    y,
-	                    w,
-	                    h,
-	                    plot_area.get_labels(),
-	                    plot_area.get_time_id(),
-	                    background_picture_id,
-	                    tooltip_text,
-	                    cursor_size,
-	                    enabled) {
-		changedto.connect(boost::bind(&WareStatisticsMenu::set_time, signal_listener, _1));
-	}
-};
-
 #endif  // end of include guard: WL_WUI_WARE_STATISTICS_MENU_H

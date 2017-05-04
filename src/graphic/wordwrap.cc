@@ -25,7 +25,6 @@
 
 #include <SDL_ttf.h>
 #include <boost/format.hpp>
-#include <unicode/uchar.h>
 #include <unicode/unistr.h>
 
 #include "base/log.h"
@@ -35,39 +34,15 @@
 #include "graphic/rendertarget.h"
 #include "graphic/text/bidi.h"
 #include "graphic/text/font_io.h"
-#include "graphic/text/sdl_ttf_font.h"
 #include "graphic/text_layout.h"
-
-namespace {
-
-/**
- * Get a width estimate for text wrapping.
- */
-uint32_t quick_width(const UChar& c, int ptsize) {
-	// Editor font is sans bold.
-	RT::IFont* font = RT::load_font(UI::g_fh1->fontset()->sans_bold(), ptsize);
-	int result = 0;
-	TTF_GlyphMetrics(font->get_ttf_font(), c, nullptr, nullptr, nullptr, nullptr, &result);
-	return result;
-}
-
-uint32_t quick_width(const std::string& text, int ptsize) {
-	int result = 0;
-	const icu::UnicodeString parseme(text.c_str(), "UTF-8");
-	for (int i = 0; i < parseme.length(); ++i) {
-		UChar c = parseme.charAt(i);
-		if (!i18n::is_diacritic(c)) {
-			result += quick_width(c, ptsize);
-		}
-	}
-	return result;
-}
-}
 
 namespace UI {
 
 WordWrap::WordWrap(int fontsize, const RGBColor& color, uint32_t gwrapwidth)
-   : draw_caret_(false), fontsize_(fontsize), color_(color) {
+   : draw_caret_(false),
+     fontsize_(fontsize),
+     color_(color),
+     font_(RT::load_font(UI::g_fh1->fontset()->sans_bold(), fontsize_)) {
 	wrapwidth_ = gwrapwidth;
 
 	if (wrapwidth_ < std::numeric_limits<uint32_t>::max()) {
@@ -101,7 +76,7 @@ void WordWrap::wrap(const std::string& text) {
 	lines_.clear();
 
 	std::string::size_type line_start = 0;
-	uint32_t margin = quick_width(0x2003, fontsize_);  // Em space
+	uint32_t margin = quick_width(0x2003);  // Em space
 
 	while (line_start <= text.size()) {
 		std::string::size_type next_line_start;
@@ -209,7 +184,7 @@ void WordWrap::compute_end_of_line(const std::string& text,
 		// Diacritics do not add to the line width
 		if (!i18n::is_diacritic(c)) {
 			// This only estimates the width
-			line_width += quick_width(c, fontsize_);
+			line_width += quick_width(c);
 		}
 		unicode_line += c;
 	}
@@ -247,8 +222,7 @@ void WordWrap::compute_end_of_line(const std::string& text,
 bool WordWrap::line_fits(const std::string& text, uint32_t safety_margin) const {
 	// calc_width_for_wrapping is fast, but it will underestimate the width.
 	// So, we test again with text_width to make sure that the line really fits.
-	return quick_width(i18n::make_ligatures(text.c_str()), fontsize_) <=
-	          wrapwidth_ - safety_margin &&
+	return quick_width(i18n::make_ligatures(text.c_str())) <= wrapwidth_ - safety_margin &&
 	       uint32_t(text_width(text, fontsize_)) <= wrapwidth_ - safety_margin;
 }
 
@@ -356,6 +330,27 @@ void WordWrap::draw(RenderTarget& dst, Vector2i where, Align align, uint32_t car
 			dst.blit(caretpt, caret_image);
 		}
 	}
+}
+
+/**
+ * Get a width estimate for text wrapping.
+ */
+uint32_t WordWrap::quick_width(const UChar& c) const {
+	int result = 0;
+	TTF_GlyphMetrics(font_->get_ttf_font(), c, nullptr, nullptr, nullptr, nullptr, &result);
+	return result;
+}
+
+uint32_t WordWrap::quick_width(const std::string& text) const {
+	int result = 0;
+	const icu::UnicodeString parseme(text.c_str(), "UTF-8");
+	for (int i = 0; i < parseme.length(); ++i) {
+		UChar c = parseme.charAt(i);
+		if (!i18n::is_diacritic(c)) {
+			result += quick_width(c);
+		}
+	}
+	return result;
 }
 
 }  // namespace UI

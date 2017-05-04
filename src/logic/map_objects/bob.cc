@@ -118,7 +118,7 @@ Bob::~Bob() {
  *
  * \note Make sure you call this from derived classes!
  */
-void Bob::init(EditorGameBase& egbase) {
+bool Bob::init(EditorGameBase& egbase) {
 	MapObject::init(egbase);
 
 	if (upcast(Game, game, &egbase))
@@ -126,6 +126,7 @@ void Bob::init(EditorGameBase& egbase) {
 	else
 		// In editor: play idle task forever
 		set_animation(egbase, descr().get_animation("idle"));
+	return true;
 }
 
 /**

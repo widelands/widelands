@@ -222,11 +222,12 @@ void Road::unmark_map(EditorGameBase& egbase) {
 /**
  * Initialize the road.
 */
-void Road::init(EditorGameBase& egbase) {
+bool Road::init(EditorGameBase& egbase) {
 	PlayerImmovable::init(egbase);
 
 	if (2 <= path_.get_nsteps())
 		link_into_flags(egbase);
+	return true;
 }
 
 /**

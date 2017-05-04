@@ -439,8 +439,9 @@ void MapObject::schedule_destroy(Game& game) {
  *
  * \warning Make sure you call this from derived classes!
  */
-void MapObject::init(EditorGameBase& egbase) {
+bool MapObject::init(EditorGameBase& egbase) {
 	egbase.objects().insert(this);
+	return true;
 }
 
 /**

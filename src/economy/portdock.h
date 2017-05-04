@@ -102,7 +102,7 @@ public:
 	          float scale,
 	          RenderTarget* dst) override;
 
-	void init(EditorGameBase&) override;
+	bool init(EditorGameBase&) override;
 	void cleanup(EditorGameBase&) override;
 
 	void add_neighbours(std::vector<RoutingNodeNeighbour>& neighbours);
