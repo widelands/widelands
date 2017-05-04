@@ -474,7 +474,7 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 	return true;
 }
 // this just counts free positions in military and training sites
-void DefaultAI::count_military_vacant_positions(const uint32_t gametime) {
+void DefaultAI::count_military_vacant_positions() {
 	// counting vacant positions
 	int32_t vacant_mil_positions_ = 0;
 	int32_t understaffed_ = 0;
@@ -510,20 +510,8 @@ void DefaultAI::count_military_vacant_positions(const uint32_t gametime) {
 		soldier_status_ = SoldiersStatus::kShortage;
 	}
 
-	//// Never increase soldier status too soon
-	//if (soldier_status_tmp >= soldier_status_) {
-		//soldier_status_ = soldier_status_tmp;
-		//military_status_last_updated = gametime;
-	//} else if (soldier_status_tmp < soldier_status_ &&
-	           //military_status_last_updated +
-	                 //std::abs(management_data.get_military_number_at(60)) * 60 * 1000 / 10 <
-	              //gametime) {
-		//// printf("%d / %d: finaly increasing soldier status %d -> %d\n", player_number(),
-		//// gametime / 1000, soldier_status_, soldier_status_tmp);
-		//soldier_status_ = soldier_status_tmp;
-	//}
-	printf ("Soldier status: %d, vacant: %3d (average: %3d), understaffed: %2d, in warehouse: %2d\n",
-	 static_cast<uint8_t>(soldier_status_),  vacant_mil_positions_, vacant_mil_positions_average_ / 100, understaffed_, on_stock_);
+	//printf ("Soldier status: %d, vacant: %3d (average: %3d), understaffed: %2d, in warehouse: %2d\n",
+	 //static_cast<uint8_t>(soldier_status_),  vacant_mil_positions_, vacant_mil_positions_average_ / 100, understaffed_, on_stock_);
 	 
 	assert(soldier_status_ == SoldiersStatus::kFull ||
 	soldier_status_ == SoldiersStatus::kEnough ||
@@ -565,7 +553,6 @@ bool DefaultAI::check_trainingsites(uint32_t gametime) {
 
 	// reducing ware queues
 	// - for armours and weapons to 1
-	// - for others to 6
 	// - for others to 6
 	for (InputQueue* queue : tso.site->inputqueues()) {
 
@@ -803,29 +790,27 @@ bool DefaultAI::check_militarysites(uint32_t gametime) {
 		bf.enemy_military_sites * (1 + std::abs(management_data.get_military_number_at(77)/20)),
 		(bf.enemy_owned_land_nearby) ? 4 + std::abs(management_data.get_military_number_at(99)/20) : 0
 		});
-	//if (bf.defense_msite_allowed) {
-		//should_be_dismantled = false;
-	//} else 
 	if (bf.enemy_owned_land_nearby) {
 		if (bf.military_score_ < std::abs(management_data.get_military_number_at(91) * 10) &&
 			bf.area_military_capacity - static_cast<int16_t>(total_capacity) - std::abs(management_data.get_military_number_at(84)/10) > enemy_military_capacity) {
 				should_be_dismantled = true;
 		}
 	} else {
-		if (bf.military_score_ < management_data.get_military_number_at(88) * 5 &&
+		const uint16_t size_bonus = total_capacity * std::abs(management_data.get_military_number_at(89)) / 5; 
+		if (bf.military_score_  + size_bonus < management_data.get_military_number_at(88) * 5 &&
 			bf.area_military_capacity > static_cast<int16_t>(total_capacity)) {
 				should_be_dismantled = true;
 		}
 	}
 
-	printf ("msite at %3dx%3d can be dismantled: %s, should be dismantled: %s, own cap.: %2d, en. land: %s, en. capacity: %2d(%2d/%2d), score: %5d\n",
-	bf.coords.x, bf.coords.y, (can_be_dismantled) ? "Y":"N", (should_be_dismantled) ? "Y":"N",
-	bf.area_military_capacity,
-	(bf.enemy_owned_land_nearby) ? "Y":"N",
-	 enemy_military_capacity,
-	 bf.enemy_military_presence,
-	 bf.enemy_military_sites,
-	 bf.military_score_);
+	//printf ("msite at %3dx%3d can be dismantled: %s, should be dismantled: %s, own cap.: %2d, en. land: %s, en. capacity: %2d(%2d/%2d), score: %5d\n",
+	//bf.coords.x, bf.coords.y, (can_be_dismantled) ? "Y":"N", (should_be_dismantled) ? "Y":"N",
+	//bf.area_military_capacity,
+	//(bf.enemy_owned_land_nearby) ? "Y":"N",
+	 //enemy_military_capacity,
+	 //bf.enemy_military_presence,
+	 //bf.enemy_military_sites,
+	 //bf.military_score_);
 
 	if (bf.enemy_accessible_ && !should_be_dismantled) {
 		
@@ -1227,7 +1212,6 @@ void DefaultAI::soldier_trained(const TrainingSite& site) {
 	const uint32_t gametime = game().get_gametime();
 	persistent_data->last_soldier_trained = gametime;
 	soldier_trained_log.push(gametime);
-	printf("Soldier trained log size: %d\n", soldier_trained_log.count(gametime));
 
 	for (TrainingSiteObserver& trainingsite_obs : trainingsites) {
 		if (trainingsite_obs.site == &site) {

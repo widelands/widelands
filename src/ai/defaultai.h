@@ -255,7 +255,7 @@ private:
 	// Functions used for war and training stuff / defaultai_warfare.cc
 	bool check_militarysites(uint32_t);
 	bool check_enemy_sites(uint32_t);
-	void count_military_vacant_positions(uint32_t);
+	void count_military_vacant_positions();
 	bool check_trainingsites(uint32_t);
 	uint32_t barracks_count();
 	// return single number of strength of vector of soldiers
@@ -306,6 +306,7 @@ private:
 	std::map<uint32_t, Widelands::EnemySiteObserver> enemy_sites;
 	// it will map mined material to observer
 	std::map<int32_t, Widelands::MineTypesObserver> mines_per_type;
+	std::vector<uint32_t> spots_avail;
 
 	// used for statistics of buildings
 	uint32_t numof_psites_in_constr;
@@ -353,8 +354,6 @@ private:
 	
 	// id of iron_ore to identify iron mines in mines_per_type map
 	int32_t iron_ore_id = -1;
-	// This should logically be permanent variable, but is to be used only for AI training
-	uint32_t first_iron_mine_gametime;
 
 	// this is a bunch of patterns that have to identify weapons and armors for input queues of
 	// trainingsites

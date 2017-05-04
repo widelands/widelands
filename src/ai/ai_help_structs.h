@@ -632,9 +632,9 @@ struct ManagementData {
 	            uint32_t,
 	            uint32_t,
 	            uint16_t,
-	            uint32_t,
 	            int16_t,
-	            int16_t);
+	            int16_t,
+	            uint32_t);
 	void dump_data();
 	//void initialize(uint8_t, Widelands::AiType, bool reinitializing = false);
 	uint16_t new_neuron_id() {
