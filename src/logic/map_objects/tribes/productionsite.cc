@@ -411,7 +411,7 @@ void ProductionSite::calc_statistics() {
 /**
  * Initialize the production site.
  */
-void ProductionSite::init(EditorGameBase& egbase) {
+bool ProductionSite::init(EditorGameBase& egbase) {
 	Building::init(egbase);
 
 	const BillOfMaterials& input_wares = descr().input_wares();
@@ -440,6 +440,7 @@ void ProductionSite::init(EditorGameBase& egbase) {
 
 	if (upcast(Game, game, &egbase))
 		try_start_working(*game);
+	return true;
 }
 
 /**

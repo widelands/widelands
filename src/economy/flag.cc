@@ -652,12 +652,13 @@ void Flag::update_wares(Game& game, Flag* const other) {
 	always_call_for_flag_ = nullptr;
 }
 
-void Flag::init(EditorGameBase& egbase) {
+bool Flag::init(EditorGameBase& egbase) {
 	PlayerImmovable::init(egbase);
 
 	set_position(egbase, position_);
 
 	animstart_ = egbase.get_gametime();
+	return true;
 }
 
 /**
