@@ -31,6 +31,16 @@
 #include "graphic/text/font_set.h"
 #include "graphic/text_constants.h"
 
+namespace {
+bool is_paragraph(const std::string& text) {
+	return boost::starts_with(text, "<p");
+}
+
+bool is_div(const std::string& text) {
+	return boost::starts_with(text, "<div");
+}
+}  // namespace
+
 void replace_entities(std::string* text) {
 	boost::replace_all(*text, "&gt;", ">");
 	boost::replace_all(*text, "&lt;", "<");
@@ -144,6 +154,13 @@ std::string as_waresinfo(const std::string& txt) {
 	f % UI_FONT_TOOLTIP_CLR.hex_value();
 	f % txt;
 	return f.str();
+}
+
+std::string as_message(const std::string& heading, const std::string& body) {
+	return ((boost::format(
+	            "<rt><p><font size=18 bold=1 color=D1D1D1>%s<br></font></p><vspace gap=6>%s</rt>") %
+	         heading % (is_paragraph(body) || is_div(body) ? body : "<p>" + body + "</p>"))
+	           .str());
 }
 
 const UI::RenderedText* autofit_ui_text(const std::string& text, int width, RGBColor color, int fontsize) {

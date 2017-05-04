@@ -36,6 +36,7 @@
 #include "io/filewrite.h"
 #include "logic/cmd_queue.h"
 #include "logic/game.h"
+#include "logic/player.h"
 #include "logic/queue_cmd_ids.h"
 #include "map_io/map_object_loader.h"
 #include "map_io/map_object_saver.h"
@@ -488,7 +489,7 @@ void MapObject::do_draw_info(const TextToDraw& draw_text,
 }
 
 const Image* MapObject::representative_image() const {
-	return descr().representative_image();
+	return descr().representative_image(get_owner() ? &get_owner()->get_playercolor() : nullptr);
 }
 
 /**
