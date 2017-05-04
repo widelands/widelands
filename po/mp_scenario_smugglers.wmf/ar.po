@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-03-24 18:58+0000\n"
-"PO-Revision-Date: 2017-03-27 14:05+0000\n"
+"POT-Creation-Date: 2017-04-13 13:07+0000\n"
+"PO-Revision-Date: 2017-04-13 17:05+0000\n"
 "Last-Translator: Omar Anwar <omaraglan91@yahoo.com>\n"
 "Language-Team: Arabic (http://www.transifex.com/widelands/widelands/language/ar/)\n"
 "MIME-Version: 1.0\n"
@@ -30,7 +30,7 @@ msgstr "الحالة"
 
 #: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/multiplayer_init.lua:122
 msgid "Wares Smuggled"
-msgstr "هُرِبَت السلع بنجاح"
+msgstr "هُرِبَت السلع"
 
 #: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/multiplayer_init.lua:145
 #: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/multiplayer_init.lua:148
@@ -61,7 +61,7 @@ msgid ""
 "Smugglers is a fun map for 4 players. You and your partner start diagonally "
 "from each other on a point symmetric island. There are plenty of smuggling "
 "tunnels on this island, each consisting of a receiving and a sending end."
-msgstr "المهربون هى خريطة ممتعة من أجل 4 لاعبيين. أنت وصديقك تبدأون بعيداً عن بعضكم البعض على نقطة خريطة متماثلة. هناك الكثير من أنفاق التهريب فى هذه الجزيرة، كل منها من تتألف من نهاية أستقبال وأرسال."
+msgstr "المُهَرِبون هى خريطة ممتعة من أجل 4 لاعبيين. أنت وصديقك تبدأون بعيداً عن بعضكم البعض على نقطة خريطة متماثلة. هناك الكثير من أنفاق التهريب فى هذه الجزيرة، كل منها تتألف من نهاية إستقبال وأرسال."
 
 #: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/texts.lua:10
 msgid ""
@@ -69,7 +69,7 @@ msgid ""
 "sending/receiving spot while your team mate has to build one on the "
 "corresponding receiving/sending spot. A ware is then transported every 10 "
 "seconds."
-msgstr "لإنشاء طريق التهريب، أنت تحتاج أن تبنى مخزن فى كل نقطة أرسال/أستقبال حينما يبنى صديقك واحداً أخر على كل نقاط الأستقبال/الأرسال المقابلة. البضاعة إذاً يتم نقلها كل 10 ثواني. "
+msgstr "لإنشاء طريق التهريب، أنت تحتاج أن تبنى مخزن في كل نقطة أرسال/أستقبال حينما يبنى صديقك واحداً أخر علي كل نقاط الأستقبال/الأرسال المقابلة. البضاعة يتم نقلها كل 10 ثواني. "
 
 #. TRANSLATORS: %s = '<number> points'
 #: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/texts.lua:12

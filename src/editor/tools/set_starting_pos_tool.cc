@@ -99,9 +99,7 @@ void EditorSetStartingPosTool::set_starting_pos(EditorInteractive& eia,
 	FieldOverlayManager::OverlayId overlay_id = overlay_manager->next_overlay_id();
 	overlay_ids_[plnum - 1] = overlay_id;
 
-	const Image* player_image =
-	   playercolor_image(plnum - 1, g_gr->images().get("images/players/player_position.png"),
-	                     g_gr->images().get("images/players/player_position_pc.png"));
+	const Image* player_image = playercolor_image(plnum - 1, "images/players/player_position.png");
 	assert(player_image);
 
 	overlay_manager->register_overlay(
