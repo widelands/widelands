@@ -1169,6 +1169,10 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 	                 -3 :
 	                 0;
 	inputs[105] = (expansion_type.get_expansion_type() == ExpansionMode::kEconomy) ? -1 : 0;
+	inputs[106] = (wood_policy_ == WoodPolicy::kAllowRangers) ? -1 * (size - 1) : 0;	
+	inputs[107] = (wood_policy_ == WoodPolicy::kAllowRangers) ? -3 * (size - 1) : 0;	
+	inputs[108] = (wood_policy_ == WoodPolicy::kAllowRangers) ? -5 * size : 0;	
+	inputs[109] = (wood_policy_ == WoodPolicy::kAllowRangers) ? -5 * (size - 1) : 0;
 
 	for (int i = 0; i < 4 * f_neuron_bit_size; i = i + 1) {
 		if (inputs[i] < -35 || inputs[i] > 6) {

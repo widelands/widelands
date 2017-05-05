@@ -4594,7 +4594,7 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 								
 		} else if (bo.max_needed_preciousness > 0) {
 			
-			int16_t inputs[3 * f_neuron_bit_size] = {0};
+			int16_t inputs[4 * f_neuron_bit_size] = {0};
 			inputs[0] = (bo.total_count() <= 1) ? std::abs(management_data.get_military_number_at(110)) / 10 : 0;
 			inputs[1] = -2 * bo.total_count();
 			inputs[2] = (bo.total_count() == 0) ? std::abs(management_data.get_military_number_at(0)) / 10 : 0;			
@@ -4635,13 +4635,13 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 			inputs[31] = ((bo.cnt_under_construction + bo.unoccupied_count) > 0) ? -5 : 0;
 			inputs[32] = bo.max_needed_preciousness / 2;
 			inputs[33] = -(bo.cnt_under_construction + bo.unoccupied_count) * 4;
-			if (bo.cnt_built > 0 && !bo.outputs.empty()){
+			if (bo.cnt_built > 0 && !bo.outputs.empty() && !bo.inputs.empty()){
 				inputs[34] += bo.current_stats / 10;
 			}
-			inputs[35] = (!bo.outputs.empty() && bo.current_stats > 10 + 70 / bo.outputs.size()) ? 2 : 0;
+			inputs[35] = (!bo.outputs.empty() && !bo.inputs.empty() && bo.current_stats > 10 + 70 / bo.outputs.size()) ? 2 : 0;
 			inputs[36] = (!bo.outputs.empty() && !bo.inputs.empty() && bo.cnt_under_construction + bo.unoccupied_count == 0)
 						? bo.current_stats / 12 : 0;
-			if (bo.cnt_built > 0 && !bo.outputs.empty() && bo.current_stats<20){
+			if (bo.cnt_built > 0 && !bo.inputs.empty() && !bo.outputs.empty() && bo.current_stats<20){
 				inputs[37] = -5;
 			}
 			inputs[38] = (bo.cnt_under_construction + bo.unoccupied_count > 0) ? -10 : 0;						
@@ -4667,7 +4667,7 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 			inputs[56] = (expansion_type.get_expansion_type() != ExpansionMode::kEconomy)? -8 : 1;
 			inputs[57] = (expansion_type.get_expansion_type() != ExpansionMode::kEconomy) ? -6 : 1;
 			inputs[58] = (bo.total_count() == 0 && inputs_on_stock) ? 4 : 0;
-			inputs[59] = bo.current_stats / 10 - 5;
+			inputs[59] = (bo.inputs.empty()) ? 5: bo.current_stats / 10 - 5;
 			inputs[60] = (spots_ < kSpotsTooLittle) ? -10 : 0;
 			inputs[61] = (player_statistics.any_enemy_seen_lately(gametime)) ? 2 : 0;
 			inputs[62] = (player_statistics.any_enemy_seen_lately(gametime) && bo.cnt_under_construction + bo.unoccupied_count == 0) ? 6 : 0;
@@ -4705,8 +4705,15 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 			inputs[90] = (bo.is(BuildingAttribute::kBuildingMatProducer)) ? std::abs(management_data.get_military_number_at(10)) / 10 : 0;
 			inputs[91] = (bo.build_material_shortage)  ? -2 : 0;
 			inputs[92] = (numof_psites_in_constr < 4) ? 3 :0 ;
-			inputs[93] = (numof_psites_in_constr < 8) ? 3 :0 ;	
-
+			inputs[93] = (numof_psites_in_constr < 8) ? 3 :0 ;
+			inputs[94] = (bo.inputs.empty()) ? 5 :0 ;	
+			inputs[95] = (bo.inputs.empty()) ? 3 :0 ;	
+			inputs[96] = (wood_policy_ == WoodPolicy::kAllowRangers) ? -2 : 0;
+			inputs[97] = (wood_policy_ == WoodPolicy::kAllowRangers) ? -8 : 0;
+			inputs[98] = (wood_policy_ == WoodPolicy::kAllowRangers) ? -4 : 0;			
+			inputs[99] = (wood_policy_ == WoodPolicy::kAllowRangers) ? -1 : 0;	
+			
+						
 			int16_t tmp_score = 0;
 			const bool print_debug = (gametime % 500 == 0);
 			for (uint8_t i = 0; i < f_neuron_bit_size; i +=1) {
@@ -4731,6 +4738,13 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 					}
 					tmp_score += partial_input;
 				}
+				if (management_data.f_neuron_pool[12].get_position(i)){
+					const int16_t partial_input = inputs[i + 3 * f_neuron_bit_size];
+					if (partial_input< -10 || partial_input > 10){
+						if (print_debug) printf ("Partial input for posiion %2d too high: %3d\n", i + 3 * f_neuron_bit_size, partial_input);
+					}
+					tmp_score += partial_input;
+				}
 			}
 
 			const int16_t bottom_limit = management_data.get_military_number_at(73) / 2 + management_data.get_military_number_at(47) / 10;
@@ -4739,17 +4753,17 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 
 			if (tmp_score > upper_limit) {
 				bo.primary_priority += (tmp_score - bottom_limit) / 2;
-				if (bo.total_count() <= 1 && spots_avail.at(BUILDCAPS_BIG) > 1) printf (
+				if (gametime % 20 == 0 && bo.total_count() <= 1 && spots_avail.at(BUILDCAPS_BIG) > 1) printf (
 					"%2d: %-35s needed:   primary score = %4d, current count = %2d, tmp_score: %3d, upper limit: %3d, current stats: %3d\n",
 					player_number(), bo.name, bo.primary_priority, bo.total_count(), tmp_score, upper_limit, bo.current_stats);
 				return BuildingNecessity::kNeeded;
 			} else if (tmp_score > bottom_limit) {
-				if (bo.total_count() <= 1 && spots_avail.at(BUILDCAPS_BIG) > 1) printf (	
+				if (gametime % 20 == 0 && bo.total_count() <= 1 && spots_avail.at(BUILDCAPS_BIG) > 1) printf (	
 				"%2d: %-35s pending:   current count = %2d, tmp_score: %3d, upper_limit %2d, current stats: %3d\n",
 					player_number(), bo.name, bo.total_count(), tmp_score, upper_limit, bo.current_stats);
 				return BuildingNecessity::kNeededPending;
 			} else {
-				if (bo.total_count() <= 1 && spots_avail.at(BUILDCAPS_BIG) > 1) printf (
+				if (gametime % 20 == 0 && bo.total_count() <= 1 && spots_avail.at(BUILDCAPS_BIG) > 1) printf (
 					"%2d: %-35s forbidden: current count = %2d, tmp_score: %3d, bottom_limit %2d, current stats: %3d\n",
 					player_number(), bo.name, bo.total_count(), tmp_score, bottom_limit, bo.current_stats);
 				return BuildingNecessity::kForbidden;
