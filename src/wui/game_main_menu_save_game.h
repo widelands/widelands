@@ -62,11 +62,9 @@ private:
 
 	// UI coordinates and spacers
 	int32_t const padding_;  // Common padding between panels
-	int32_t const butw_;     // Button dimensions
 
 	UI::Box main_box_;
 	UI::Box info_box_;
-	UI::Box buttons_box_;
 
 	LoadOrSaveGame load_or_save_;
 
@@ -74,7 +72,9 @@ private:
 	UI::Textarea filename_label_;
 	UI::EditBox filename_editbox_;
 
+	UI::Box buttons_box_;
 	UI::Button cancel_, ok_;
+
 	std::string curdir_;
 	std::string parentdir_;
 	std::string filename_;

@@ -47,11 +47,9 @@ GameMainMenuSaveGame::GameMainMenuSaveGame(InteractiveGameBase& parent,
                       _("Save Game")),
      // Values for alignment and size
      padding_(4),
-     butw_(150),
 
      main_box_(this, 0, 0, UI::Box::Vertical),
      info_box_(&main_box_, 0, 0, UI::Box::Horizontal),
-     buttons_box_(&main_box_, 0, 0, UI::Box::Horizontal),
 
      load_or_save_(&info_box_,
                    igbase().game(),
@@ -61,24 +59,19 @@ GameMainMenuSaveGame::GameMainMenuSaveGame(InteractiveGameBase& parent,
 
      filename_box_(load_or_save_.table_box(), 0, 0, UI::Box::Horizontal),
      filename_label_(&filename_box_, 0, 0, 0, 0, _("Filename:"), UI::Align::kLeft),
-     filename_editbox_(&filename_box_, 0, 0, 0, 0, 2, g_gr->images().get("images/ui_basic/but1.png")),
+     filename_editbox_(
+        &filename_box_, 0, 0, 0, 0, 2, g_gr->images().get("images/ui_basic/but1.png")),
 
+     buttons_box_(load_or_save_.game_details()->button_box(), 0, 0, UI::Box::Horizontal),
      cancel_(&buttons_box_,
              "cancel",
              0,
              0,
-             butw_,
+             0,
              0,
              g_gr->images().get("images/ui_basic/but1.png"),
              _("Cancel")),
-     ok_(&buttons_box_,
-         "ok",
-         0,
-         0,
-         butw_,
-         0,
-         g_gr->images().get("images/ui_basic/but5.png"),
-         _("OK")),
+     ok_(&buttons_box_, "ok", 0, 0, 0, 0, g_gr->images().get("images/ui_basic/but5.png"), _("OK")),
 
      curdir_(SaveHandler::get_base_dir()) {
 
@@ -87,8 +80,6 @@ GameMainMenuSaveGame::GameMainMenuSaveGame(InteractiveGameBase& parent,
 	main_box_.add_space(padding_);
 	main_box_.set_inner_spacing(padding_);
 	main_box_.add(&info_box_, UI::Box::Resizing::kExpandBoth);
-	main_box_.add_space(0);
-	main_box_.add(&buttons_box_, UI::Box::Resizing::kFullSize);
 
 	info_box_.set_inner_spacing(padding_);
 	info_box_.add_space(padding_);
@@ -102,15 +93,11 @@ GameMainMenuSaveGame::GameMainMenuSaveGame(InteractiveGameBase& parent,
 	filename_box_.add(&filename_label_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 	filename_box_.add(&filename_editbox_, UI::Box::Resizing::kFillSpace);
 
+	load_or_save_.game_details()->button_box()->add_space(padding_);
+	load_or_save_.game_details()->button_box()->add(&buttons_box_, UI::Box::Resizing::kFullSize);
 	buttons_box_.set_inner_spacing(padding_);
-	buttons_box_.add_space(padding_);
-	buttons_box_.add_inf_space();
-	buttons_box_.add_inf_space();
-	buttons_box_.add(&cancel_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
-	buttons_box_.add_inf_space();
-	buttons_box_.add(&ok_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
-	buttons_box_.add_inf_space();
-	buttons_box_.add_inf_space();
+	buttons_box_.add(&cancel_, UI::Box::Resizing::kFillSpace);
+	buttons_box_.add(&ok_, UI::Box::Resizing::kFillSpace);
 
 	ok_.set_enabled(false);
 
@@ -131,11 +118,13 @@ GameMainMenuSaveGame::GameMainMenuSaveGame(InteractiveGameBase& parent,
 
 	pause_game(true);
 	set_thinks(false);
+	layout();
 }
 
 void GameMainMenuSaveGame::layout() {
 	main_box_.set_size(get_inner_w() - 2 * padding_, get_inner_h() - 2 * padding_);
 	load_or_save_.table().set_desired_size(get_inner_w() * 7 / 12, load_or_save_.table().get_h());
+	load_or_save_.delete_button()->set_desired_size(ok_.get_w(), ok_.get_h());
 }
 
 void GameMainMenuSaveGame::entry_selected() {

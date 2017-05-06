@@ -138,10 +138,7 @@ LoadOrSaveGame::LoadOrSaveGame(UI::Panel* parent,
 
 	table_box_->add(&table_, UI::Box::Resizing::kExpandBoth);
 
-	game_details_.button_box()->add(delete_, style == GameDetails::Style::kFsMenu ?
-	                                            UI::Box::Resizing::kAlign :
-	                                            UI::Box::Resizing::kFullSize,
-	                                UI::Align::kLeft);
+	game_details_.button_box()->add(delete_, UI::Box::Resizing::kAlign, UI::Align::kLeft);
 	delete_->set_enabled(false);
 	delete_->sigclicked.connect(boost::bind(&LoadOrSaveGame::clicked_delete, boost::ref(*this)));
 }
