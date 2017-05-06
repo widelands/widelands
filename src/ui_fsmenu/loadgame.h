@@ -40,10 +40,8 @@ public:
 	                       GameController* gc = nullptr,
 	                       bool is_replay = false);
 
-	/// Ths currently selected filename
-	const std::string& filename() {
-		return filename_;
-	}
+	/// The currently selected filename
+	const std::string& filename() const;
 
 	bool handle_key(bool down, SDL_Keysym code) override;
 
@@ -59,9 +57,6 @@ protected:
 
 private:
 	void layout() override;
-
-	/// Updates buttons and text labels and returns whether a table entry is selected.
-	bool compare_date_descending(uint32_t, uint32_t);
 
 	UI::Box main_box_;
 	UI::Box info_box_;

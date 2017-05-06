@@ -132,6 +132,10 @@ void FullscreenMenuLoadGame::fill_table() {
 	load_or_save_.fill_table();
 }
 
+const std::string& FullscreenMenuLoadGame::filename() const {
+	return filename_;
+}
+
 bool FullscreenMenuLoadGame::handle_key(bool down, SDL_Keysym code) {
 	if (!down)
 		return false;

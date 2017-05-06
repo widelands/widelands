@@ -54,9 +54,6 @@ private:
 	/// Called when the OK button is clicked or the Return key pressed in the edit box.
 	void ok();
 
-	/// Saves the current game to 'filename'
-	bool save_game(std::string filename);
-
 	/// Pause/unpause the game
 	void pause_game(bool paused);
 

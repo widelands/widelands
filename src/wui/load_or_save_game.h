@@ -46,7 +46,7 @@ protected:
 	const SavegameData* entry_selected();
 
 	/// Whether the table has a selection
-	bool has_selection();
+	bool has_selection() const;
 
 	/// Clear table selections and game data
 	void clear_selections();
@@ -70,9 +70,8 @@ protected:
 	const std::string get_filename(int index) const;
 
 	/// The delete button shown on the bottom of the game details panel
-	UI::Button* delete_button() const {
-		return delete_;
-	}
+	UI::Button* delete_button();
+
 	/// Show confirmation window and delete the selected file(s)
 	void clicked_delete();
 
@@ -81,7 +80,7 @@ private:
 	const std::string filename_list_string() const;
 
 	/// Reverse default sort order for save date column
-	bool compare_date_descending(uint32_t, uint32_t);
+	bool compare_date_descending(uint32_t, uint32_t) const;
 
 	UI::Panel* parent_;
 	UI::Box* table_box_;

@@ -170,7 +170,7 @@ const std::string LoadOrSaveGame::filename_list_string() const {
 	return message.str();
 }
 
-bool LoadOrSaveGame::compare_date_descending(uint32_t rowa, uint32_t rowb) {
+bool LoadOrSaveGame::compare_date_descending(uint32_t rowa, uint32_t rowb) const {
 	const SavegameData& r1 = games_data_[table_[rowa]];
 	const SavegameData& r2 = games_data_[table_[rowb]];
 
@@ -207,7 +207,7 @@ const SavegameData* LoadOrSaveGame::entry_selected() {
 	return result;
 }
 
-bool LoadOrSaveGame::has_selection() {
+bool LoadOrSaveGame::has_selection() const {
 	return table_.has_selection();
 }
 
@@ -290,6 +290,10 @@ void LoadOrSaveGame::clicked_delete() {
 		}
 		fill_table();
 	}
+}
+
+UI::Button* LoadOrSaveGame::delete_button() {
+	return delete_;
 }
 
 void LoadOrSaveGame::fill_table() {
