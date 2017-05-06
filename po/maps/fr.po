@@ -1,10 +1,11 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2016 Widelands Development Team
+# Copyright (C) 2005-2017 Widelands Development Team
 # 
 # Translators:
 # adrien vigneron <adrienvigneron@ml1.net>, 2015
 # Bouchard Renaud <renaud.bouchard@gmail.com>, 2014
-# GunChleoc, 2016
+# GunChleoc, 2016-2017
+# Gwendal D <samuel.weber@normalesup.org>, 2017
 # Jaypad <ju-ju@nataju.fr>, 2015-2016
 # Pierre Salagnac <pierre.salagnac@free.fr>, 2007
 # Renaud Bouchard, 2016
@@ -13,9 +14,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-12-15 15:23+0000\n"
-"PO-Revision-Date: 2016-12-15 20:57+0000\n"
-"Last-Translator: Renaud Bouchard\n"
+"POT-Creation-Date: 2017-04-28 06:01+0000\n"
+"PO-Revision-Date: 2017-05-01 19:47+0000\n"
+"Last-Translator: GunChleoc\n"
 "Language-Team: French (http://www.transifex.com/widelands/widelands/language/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -32,7 +33,7 @@ msgstr "Du départ à la vengeance"
 msgid ""
 "After landing on a mysterious island close to Atlantis, the remaining "
 "Atlanteans struggle to make a new home for themselves."
-msgstr "Après avoir accosté sur une île mystérieuse près d' Atlantide, les Atlantes restants durent lutter pour pour établir une nouvelle colonie."
+msgstr "Après avoir accosté sur une île mystérieuse près d'Atlantide, les Atlantes restants durent lutter pour établir une nouvelle colonie."
 
 #: ../../data/campaigns/bar01.wmf/elemental:8
 #: ../../data/campaigns/campaigns.conf:67
@@ -109,7 +110,7 @@ msgid ""
 "March his unprepared army was attacked by 100 Barbarian footmen and was "
 "completely scattered. Only with his bare life he and a handful of his "
 "soldiers survived."
-msgstr "Il y a six mois, Lutius - un jeune général de l'Empire - a été envoyé avec 150 soldats à la frontière au-delà des forêts du nord où les tribus barbares traversaient sur des terres détenues par l'Empire. Sa tâche était de défendre la terre de l'Empire. Au début, tout était calme. Il a même parlé à quelques enfants barbares et pensa à une vie paisible - côte à côte avec ce peuple archaïque. Il a commencé à se sentir en sécurité et son armée a commencé à baisser sa garde. Ceci les conduit à leur perte. Une nuit de mars, son armée mal préparée a été attaquée par 100 fantassins barbares et a été complètement dispersée. Seul Lutius et une poignée de ses soldats ont survécu."
+msgstr "Il y a six mois, Lutius – un jeune général de l'Empire – a été envoyé avec 150 soldats à la frontière au-delà des forêts du nord où les tribus barbares traversaient sur des terres détenues par l'Empire. Sa tâche était de défendre la terre de l'Empire. Au début, tout était calme. Il a même parlé à quelques enfants barbares et pensa à une vie paisible - côte à côte avec ce peuple archaïque. Il a commencé à se sentir en sécurité et son armée a commencé à baisser sa garde. Ceci les conduit à leur perte. Une nuit de mars, son armée mal préparée a été attaquée par 100 fantassins barbares et a été complètement dispersée. Seul Lutius et une poignée de ses soldats ont survécu."
 
 #: ../../data/campaigns/campaigns.conf:43
 msgid "The Run for the Fire"
@@ -130,7 +131,7 @@ msgid ""
 " the stuff of legends. Leading the remaining Atlanteans into a new future in"
 " a new part of the World, Jundlina became the most powerful human of her "
 "time, but at a high cost: her humanity and soul."
-msgstr "Lorsque leur Dieu a perdu sa foi dans les Atlantes et noyé leur île, la lutte d'une femme pour la justice et une seconde chance pour son peuple deviendra l'étoffe des légendes. Diriger les Atlantes restants vers un nouvel avenir dans une nouvelle partie du monde, Jundlina est devenu la femme la plus puissante de son temps, mais à un coût élevé&nbsp;: son humanité et son âme."
+msgstr "Lorsque leur Dieu a perdu sa foi dans les Atlantes et noyé leur île, la lutte d'une femme pour la justice et une seconde chance pour son peuple deviendra l'étoffe des légendes. Dirigeant les Atlantes restants vers un nouvel avenir dans une nouvelle partie du monde, Jundlina est devenue la femme la plus puissante de son temps, mais à un coût élevé : son humanité et son âme."
 
 #: ../../data/campaigns/campaigns.conf:78
 #: ../../data/campaigns/emp01.wmf/elemental:7
@@ -163,7 +164,7 @@ msgid ""
 "a new life. But his destiny takes his ship into a heavy storm, which nearly "
 "destroys it. Only with a lot of luck he manages to beach his damaged ship on"
 " an unknown desert strand and save his people. For now."
-msgstr "Après avoir perdu une importante bataille contre les barbares qui mena à la perte d'une grosse partie du territoire de l' Empire, Lutius quitta Fremil pour commencer une nouvelle vie. Mais sa destinée conduit son navire dans un violent orage, qui le détruisit presque.  Il ne doit qu'à la chance de réussir à échouer son navire endommagé sur un rivage désertique et inconnu et sauver ses gens. Pour l'instant."
+msgstr "Après avoir perdu une importante bataille contre les barbares qui mena à la perte d'une grosse partie du territoire de l'Empire, Lutius quitta Fremil pour commencer une nouvelle vie. Mais sa destinée conduit son navire dans un violent orage, qui le détruisit presque.  Il ne doit qu'à la chance de réussir à échouer son navire endommagé sur un rivage désertique et inconnu et sauver ses gens. Pour l'instant."
 
 #: ../../data/campaigns/emp02.wmf/elemental:11
 msgid ""
@@ -230,7 +231,7 @@ msgid ""
 "latitude; farming thrives, berries are abundant, and fish plentiful. The "
 "small human population of this place never knew famine. You warlording "
 "bastards just couldn’t leave this little paradise in peace, could you?"
-msgstr "Entre la Suisse et la Finlande réside la mer des archipels. Cet endroit d'une incroyable beauté n'est ni terre, ni mer, mais les deux. D'une centaine de kilomètres, il n'y a pas moins de 50,000 îles et îlots, dont certains ne font pas plus que quelques acres. Le climat est assez doux pour cette latitude; les fermes prospèrent, les baies sont abondantes, et le poisson foisonnent. La petite population humaine de cet endroit n'ont jamais connues la famine. Même en tant qu'ignoble seigneur de guerre, vous n'auriez pas pu laisser ce petit paradis en paix ?"
+msgstr "Entre la Suisse et la Finlande réside la mer des archipels. Cet endroit d'une incroyable beauté n'est ni terre, ni mer, mais les deux. D'une centaine de kilomètres, il n'y a pas moins de 50 000 îles et îlots, dont certains ne font pas plus que quelques acres. Le climat est assez doux pour cette latitude; les fermes prospèrent, les baies sont abondantes, et le poisson foisonnent. La petite population humaine de cet endroit n'ont jamais connues la famine. Même en tant qu'ignoble seigneur de guerre, vous n'auriez pas pu laisser ce petit paradis en paix ?"
 
 #: ../../data/maps/Archipelago_Sea.wmf/elemental:11
 msgid ""
@@ -276,7 +277,7 @@ msgstr "L'île de la comète"
 #: ../../data/maps/Comet_Island_v2.wmf/elemental:9
 #: ../../data/maps/Glacier_Lake_v2.wmf/elemental:9
 msgid "Nasenbaer – edited by king_of_nowhere"
-msgstr "Nasenbaer - édité par King_of_nowhere"
+msgstr "Nasenbaer – édité par King_of_nowhere"
 
 #: ../../data/maps/Comet_Island_v2.wmf/elemental:10
 msgid ""
@@ -293,7 +294,7 @@ msgid ""
 "player has plenty of good land, but must move far from his starting position"
 " to find ores. Blue player takes the middle ground – he has some fertile "
 "land and is not too far away from the resources."
-msgstr "Le joueur rouge est près des minerais, mais a très peu de terres fertiles. Le joueur jaune possède pleins de belles terres, mais doit se déplacer loin de son point de départ pour trouver des minerais. Le joueur bleu prend les terres du milieu - Il a quelques terrains fertiles et n'est pas trop loin des ressources."
+msgstr "Le joueur rouge est près des minerais, mais a très peu de terres fertiles. Le joueur jaune possède pleins de belles terres, mais doit se déplacer loin de son point de départ pour trouver des minerais. Le joueur bleu prend les terres du milieu – il a quelques terrains fertiles et n'est pas trop loin des ressources."
 
 #: ../../data/maps/Crater.wmf/elemental:8
 msgid "Crater"
@@ -370,7 +371,7 @@ msgid ""
 "This is a somewhat technical map, and it is best suited for two or three "
 "human players. Coal is hard to find – consider making some. There is gold "
 "near the starting point – do you see it?"
-msgstr "C'est une carte plutôt technique, et est étudiée pour deux à trois joueurs humains. Le charbon est difficile à trouver - pensez à en produire. Il y a de l'or près des points de départ - le voyez vous ?"
+msgstr "C'est une carte plutôt technique, et est étudiée pour deux à trois joueurs humains. Le charbon est difficile à trouver – pensez à en produire. Il y a de l'or près des points de départ – le voyez vous ?"
 
 #: ../../data/maps/Finnish_Lakes.wmf/elemental:8
 msgid "Finnish Lakes"
@@ -386,7 +387,7 @@ msgstr "Voici les magnifiques contrées Finlandaises, faites de lacs, de rivièr
 msgid ""
 "Yellow player has a much easier starting position than the other two; this "
 "map is suited for 1v2."
-msgstr "Le joueur jaune à une position de départ plus aisée que les deux autres; cette carte est étudiée pour 1 contre 2."
+msgstr "Le joueur jaune à une position de départ plus aisée que les deux autres. Cette carte est étudiée pour 1 contre 2."
 
 #: ../../data/maps/Firegames.wmf/elemental:8
 msgid "Firegames"
@@ -424,7 +425,7 @@ msgstr "Chaque tribu est entourée de quatre chaînes montagneuses. Qui en fera 
 msgid ""
 "I: Water can be found along the river. II: Snowmen mark additional water "
 "sources. III: Each mountain contains only one resource."
-msgstr "I : L'eau peut être trouvée le long de la rivière. II : Les bonshommes de neige sont des sources d'eau supplémentaires. III: Chaque montagne ne contient qu'un type de ressource."
+msgstr "I : L'eau peut être trouvée le long de la rivière. II : Les bonshommes de neige sont des sources d'eau supplémentaires. III : Chaque montagne ne contient qu'un type de ressource."
 
 #: ../../data/maps/Full_Moon_v2.wmf/elemental:8
 msgid "Full Moon"
@@ -463,7 +464,7 @@ msgstr "Guerres des glaces"
 
 #: ../../data/maps/Ice_wars.wmf/elemental:10
 msgid "Autumn became winter. Some things are frozen, but not the war."
-msgstr "L' Automne devient l' hiver. Des choses gèlent, mais pas la guerre."
+msgstr "L' Automne devient l'hiver. Des choses gèlent, mais pas la guerre."
 
 #: ../../data/maps/Ice_wars.wmf/elemental:11
 #: ../../data/maps/Sun_of_Fire.wmf/elemental:11
@@ -520,7 +521,7 @@ msgstr "Dernier bastion"
 
 #: ../../data/maps/Last_Bastion_v2.wmf/elemental:9
 msgid "Another Barbarian – edited by king_of_nowhere"
-msgstr "Un autre barbare - édité par king_of_nowhere"
+msgstr "Un autre barbare – édité par king_of_nowhere"
 
 #: ../../data/maps/Last_Bastion_v2.wmf/elemental:10
 msgid ""
@@ -533,7 +534,7 @@ msgid ""
 "range where the amount of gold and the space to live merely suffice for one "
 "tribe – only two opposite paths lead. But remember, be careful… this last "
 "living space is also a hard and small place to live."
-msgstr "Les dieux capricieux n'ont pas répondus à nos prières. A la place, les rayonnement augmentant réchauffèrent la terre un centenaire, fondant glacier et plongeant les gens dans les profondeurs. Mais maintenant, haut dans ces majestueuses montagnes, sur ce dernier morceau de terre - deux tribu survivantes ont trouvé abri. Malgré la clémence des dieux et un refroidissement du climat, l'eau monte encore et encore. Vers le dernier endroit sûr, le territoire de la plus haute montagne où l' or et l'espace ne sont suffisant que pour faire vivre une tribu. Seuls deux chemins opposés y mènent. Mais rappelez vous, soyez prudent... Ce dernier endroit habitable est aussi petit que difficile à vivre."
+msgstr "Les dieux capricieux n'ont pas répondus à nos prières. À la place, le rayonnement augmentant réchauffa la terre un centenaire, fondant glacier et plongeant les gens dans les profondeurs. Mais maintenant, haut dans ces majestueuses montagnes, sur ce dernier morceau de terre – deux tribu survivantes ont trouvé abri. Malgré la clémence des dieux et un refroidissement du climat, l'eau monte encore et encore. Vers le dernier endroit sûr, le territoire de la plus haute montagne où l'or et l'espace ne sont suffisant que pour faire vivre une tribu. Seuls deux chemins opposés y mènent. Mais rappelez vous, soyez prudent... Ce dernier endroit habitable est aussi petit que difficile à vivre."
 
 #: ../../data/maps/Last_Bastion_v2.wmf/elemental:11
 msgid "Don’t forget to take care of your timber supplies, you’ll need them."
@@ -559,18 +560,18 @@ msgid ""
 " where two or more groups try to reach the center island as fast as "
 "possible, to be the first erecting a castle on the top of the central "
 "mountain."
-msgstr "Un tournoi spécial de la culture Atlante est le renommé 'Sautillement d'île', où deux ou plusieurs groupes tentent de rejoindre l'île centrale le plus vite possible, pour être les premiers à ériger un château en haut de la montagne centrale."
+msgstr "Un tournoi spécial de la culture Atlante est le renommé « Sautillement d'île », où deux ou plusieurs groupes tentent de rejoindre l'île centrale le plus vite possible, pour être les premiers à ériger un château en haut de la montagne centrale."
 
 #: ../../data/maps/MP_Scenarios/Smugglers.wmf/elemental:9
 msgid "Smugglers"
-msgstr "Bandits"
+msgstr "Contrebande"
 
 #: ../../data/maps/MP_Scenarios/Smugglers.wmf/elemental:11
 msgid ""
 "Your well established smuggling routes suddenly got busy: two other tribes "
 "have appeared and now a rivalry among smugglers has started. Which team will"
 " be the first to smuggle a certain number of wares?"
-msgstr "Vos itinéraires de contrebande bien établies ont soudainement été occupés&nbsp;: deux autres tribus ont fait leur apparition et maintenant une rivalité entre trafiquants a commencé. Quelle équipe sera la première à introduire clandestinement un certain nombre de marchandises?"
+msgstr "Vos itinéraires de contrebande bien établies ont soudainement été occupés : deux autres tribus ont fait leur apparition et maintenant une rivalité entre trafiquants a commencé. Quelle équipe sera la première à introduire clandestinement un certain nombre de marchandises?"
 
 #: ../../data/maps/Mystical_Maze.wmf/elemental:8
 msgid "Mystical Maze"
@@ -580,7 +581,7 @@ msgstr "Le Labyrinthe Mystique"
 msgid ""
 "There are two big questions in the air: Who created this unbelievably big "
 "maze, and what can be found inside?"
-msgstr "Il y a deux grandes questions qui se posent : Qui a créé ce labyrinthe incroyablement grand, et que peut on trouver à l'intérieur?"
+msgstr "Il y a deux grandes questions qui se posent : qui a créé ce labyrinthe incroyablement grand, et que peut-on trouver à l'intérieur?"
 
 #: ../../data/maps/Rendez-Vous.wmf/elemental:8
 msgid "Rendez-Vous"
@@ -610,7 +611,7 @@ msgid ""
 "building a single ship, players are advised to make ports and shipyards a "
 "priority – expeditions are universally useful and are often the fastest way "
 "to gold deposits."
-msgstr "Chaque joueur rencontre un obstacle différent à son expansion, et il y a toujours plus d'une manière de le circonvenir. Alors que l' IA peut être vaincue sans construire un seul navire, les joueurs sont invités à faire des ports et des chantiers navals une priorité - les expéditions sont universellement utiles et sont souvent le moyen le plus rapide d'atteindre les gisements d'or."
+msgstr "Chaque joueur rencontre un obstacle différent à son expansion, et il y a toujours plus d'une manière de le circonvenir. Alors que l'IA peut être vaincue sans construire un seul navire, les joueurs sont invités à faire des ports et des chantiers navals une priorité – les expéditions sont universellement utiles et sont souvent le moyen le plus rapide d'atteindre les gisements d'or."
 
 #: ../../data/maps/Riverlands.wmf/elemental:8
 msgid "Riverlands"
@@ -698,7 +699,7 @@ msgid ""
 "wonderful and mighty treasure in their middle – The Green Plateau, which is "
 "hard to conquer but easy to lose. So, if you want it, be aware of the other "
 "clans."
-msgstr "Vous vous trouvez sur une île, couronnée par de majestueuses montagnes, qui gardent en leur cœur un merveilleux et majestueux trésor - le Plateau Vert, dur à conquérir mais facile à perdre, alors si vous le voulez, méfiez vous des autres clans."
+msgstr "Vous vous trouvez sur une île, couronnée par de majestueuses montagnes, qui gardent en leur cœur un merveilleux et majestueux trésor – le Plateau Vert, dur à conquérir mais facile à perdre, alors si vous le voulez, méfiez vous des autres clans."
 
 #: ../../data/maps/The_Long_Way.wmf/elemental:8
 msgid "The Long Way"
@@ -718,7 +719,7 @@ msgstr "Le Nil"
 msgid ""
 "The river has always provided food and communication. This time, eight "
 "empires will fight for control over this land."
-msgstr "La rivière a toujours fournie nourriture et communication. Cette fois , huit empires combattrons pour le contrôle de ce territoire."
+msgstr "La rivière a toujours fournie nourriture et communication. Cette fois, huit empires combattrons pour le contrôle de ce territoire."
 
 #: ../../data/maps/The_Nile_v2.wmf/elemental:11
 msgid ""
@@ -789,7 +790,7 @@ msgid ""
 "exclusive trade alliance, forcing the other two to do the same. Suddenly, it"
 " seems only a matter of time before the first fights between the harbors "
 "will shatter the peaceful life that has lasted for so long…"
-msgstr "Les quatre puissants ports des îles Craw se sont échangés leurs biens durant des siècles. Chacun d'entre eux avait besoin de ressources qu'ils ne pouvaient produire sur leur territoire et fournissaient des ressources que les autres ne pouvaient produire en échange. Sur la base de ces échanges un commerce très amical et commun aux quatre ports et les personnes vivant sur ​​les îles Craw - jusqu'à ce que récemment deux des ports concluent une alliance de commerce exclusif, ce qui obligea les deux autres à faire de même. Tout à coup, il semble que cela ne soit qu'une plus qu'une question de temps pour que les premiers combats entre les ports ne perturbent la vie paisible qui avait duré si longtemps ..."
+msgstr "Les quatre puissants ports des îles Craw se sont échangés leurs biens durant des siècles. Chacun d'entre eux avait besoin de ressources qu'ils ne pouvaient produire sur leur territoire et fournissaient des ressources que les autres ne pouvaient produire en échange. Sur la base de ces échanges un commerce très amical et commun aux quatre ports et les personnes vivant sur ​​les îles Craw – jusqu'à ce que récemment deux des ports concluent une alliance de commerce exclusif, ce qui obligea les deux autres à faire de même. Tout à coup, il semble que cela ne soit qu'une plus qu'une question de temps pour que les premiers combats entre les ports ne perturbent la vie paisible qui avait duré si longtemps..."
 
 #: ../../data/maps/Trident_of_Fire.wmf/elemental:8
 msgid "Trident of Fire"
@@ -814,7 +815,7 @@ msgid ""
 "desperately searching for more resources to support their endlessly ongoing "
 "wars, would end up in this forgotten place at the same time and for the same"
 " well-known reason."
-msgstr "Lorsque le vent s´éleva et que les premières dunes se formèrent sur ces lagons jumeaux abandonnés, personne n'aurait pu s'attendre à ce que deux tribus cherchant désespérément davantage de ressources pour soutenir leurs guerres interminables n' arrivent à cet endroit oublié en même temps et pour la même raison."
+msgstr "Lorsque le vent s'éleva et que les premières dunes se formèrent sur ces lagons jumeaux abandonnés, personne n'aurait pu s'attendre à ce que deux tribus cherchant désespérément davantage de ressources pour soutenir leurs guerres interminables n'arrivent à cet endroit oublié en même temps et pour la même raison."
 
 #: ../../data/maps/Twin_Lagoons_v2.wmf/elemental:11
 msgid ""
@@ -860,7 +861,7 @@ msgstr "Vaste monde"
 msgid ""
 "The world is not enough! If you want to win, you have to send some ships. "
 "But remember: your opponents are very close to you."
-msgstr "Le monde n'est pas assez ! Si vous voulez gagner, vous devrez envoyer des navires. Mais rappelez vous : Vos adversaires sont très proches de vous."
+msgstr "Le monde n'est pas assez ! Si vous voulez gagner, vous devrez envoyer des navires. Mais rappelez vous : vos adversaires sont très proches de vous."
 
 #: ../../data/maps/Wisent_Valley.wmf/elemental:8
 msgid "Wisent Valley"
