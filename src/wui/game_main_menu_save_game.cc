@@ -60,8 +60,8 @@ GameMainMenuSaveGame::GameMainMenuSaveGame(InteractiveGameBase& parent,
                    false),
 
      filename_box_(load_or_save_.table_box(), 0, 0, UI::Box::Horizontal),
-     editbox_label_(&filename_box_, 0, 0, 0, 0, _("Filename:"), UI::Align::kLeft),
-     editbox_(&filename_box_, 0, 0, 0, 0, 2, g_gr->images().get("images/ui_basic/but1.png")),
+     filename_label_(&filename_box_, 0, 0, 0, 0, _("Filename:"), UI::Align::kLeft),
+     filename_editbox_(&filename_box_, 0, 0, 0, 0, 2, g_gr->images().get("images/ui_basic/but1.png")),
 
      cancel_(&buttons_box_,
              "cancel",
@@ -99,8 +99,8 @@ GameMainMenuSaveGame::GameMainMenuSaveGame(InteractiveGameBase& parent,
 	load_or_save_.table_box()->add(&filename_box_, UI::Box::Resizing::kFullSize);
 
 	filename_box_.set_inner_spacing(padding_);
-	filename_box_.add(&editbox_label_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
-	filename_box_.add(&editbox_, UI::Box::Resizing::kFillSpace);
+	filename_box_.add(&filename_label_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
+	filename_box_.add(&filename_editbox_, UI::Box::Resizing::kFillSpace);
 
 	buttons_box_.set_inner_spacing(padding_);
 	buttons_box_.add_space(padding_);
@@ -114,8 +114,8 @@ GameMainMenuSaveGame::GameMainMenuSaveGame(InteractiveGameBase& parent,
 
 	ok_.set_enabled(false);
 
-	editbox_.changed.connect(boost::bind(&GameMainMenuSaveGame::edit_box_changed, this));
-	editbox_.ok.connect(boost::bind(&GameMainMenuSaveGame::ok, this));
+	filename_editbox_.changed.connect(boost::bind(&GameMainMenuSaveGame::edit_box_changed, this));
+	filename_editbox_.ok.connect(boost::bind(&GameMainMenuSaveGame::ok, this));
 
 	ok_.sigclicked.connect(boost::bind(&GameMainMenuSaveGame::ok, this));
 	cancel_.sigclicked.connect(boost::bind(&GameMainMenuSaveGame::die, this));
@@ -143,13 +143,13 @@ void GameMainMenuSaveGame::entry_selected() {
 	load_or_save_.delete_button()->set_enabled(load_or_save_.has_selection());
 	if (load_or_save_.has_selection()) {
 		const SavegameData& gamedata = *load_or_save_.entry_selected();
-		editbox_.set_text(FileSystem::filename_without_ext(gamedata.filename.c_str()));
+		filename_editbox_.set_text(FileSystem::filename_without_ext(gamedata.filename.c_str()));
 	}
 }
 
 void GameMainMenuSaveGame::edit_box_changed() {
 	// Prevent the user from creating nonsense directory names, like e.g. ".." or "...".
-	const bool is_legal_filename = LayeredFileSystem::is_legal_filename(editbox_.text());
+	const bool is_legal_filename = LayeredFileSystem::is_legal_filename(filename_editbox_.text());
 	ok_.set_enabled(is_legal_filename);
 	load_or_save_.delete_button()->set_enabled(false);
 	load_or_save_.clear_selections();
@@ -199,11 +199,11 @@ private:
 };
 
 void GameMainMenuSaveGame::ok() {
-	if (editbox_.text().empty())
+	if (filename_editbox_.text().empty())
 		return;
 
 	std::string const complete_filename =
-	   igbase().game().save_handler().create_file_name(curdir_, editbox_.text());
+	   igbase().game().save_handler().create_file_name(curdir_, filename_editbox_.text());
 
 	//  Check if file exists. If it does, show a warning.
 	if (g_fs->file_exists(complete_filename)) {

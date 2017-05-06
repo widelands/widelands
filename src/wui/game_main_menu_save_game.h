@@ -71,8 +71,8 @@ private:
 	LoadOrSaveGame load_or_save_;
 
 	UI::Box filename_box_;
-	UI::Textarea editbox_label_;
-	UI::EditBox editbox_;
+	UI::Textarea filename_label_;
+	UI::EditBox filename_editbox_;
 
 	UI::Button cancel_, ok_;
 	std::string curdir_;
