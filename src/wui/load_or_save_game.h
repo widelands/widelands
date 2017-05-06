@@ -66,9 +66,6 @@ protected:
 	/// The game details panel
 	GameDetails* game_details();
 
-	/// Returns the filename for the table entry at 'index'
-	const std::string get_filename(int index) const;
-
 	/// The delete button shown on the bottom of the game details panel
 	UI::Button* delete_button();
 
@@ -76,6 +73,9 @@ protected:
 	void clicked_delete();
 
 private:
+	/// Returns the filename for the table entry at 'index'
+	const std::string get_filename(int index) const;
+
 	/// Formats the current table selection as a list of filenames with savedate information.
 	const std::string filename_list_string() const;
 
