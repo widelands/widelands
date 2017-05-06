@@ -69,9 +69,9 @@
 #include "logic/single_player_game_controller.h"
 #include "logic/single_player_game_settings_provider.h"
 #include "map_io/map_loader.h"
+#include "network/gameclient.h"
+#include "network/gamehost.h"
 #include "network/internet_gaming.h"
-#include "network/netclient.h"
-#include "network/nethost.h"
 #include "profile/profile.h"
 #include "sound/sound_handler.h"
 #include "ui_basic/messagebox.h"
@@ -1170,7 +1170,7 @@ void WLApplication::mainmenu_multiplayer() {
 
 			switch (menu_result) {
 			case FullscreenMenuBase::MenuTarget::kHostgame: {
-				NetHost netgame(playername);
+				GameHost netgame(playername);
 				netgame.run();
 				break;
 			}
@@ -1184,7 +1184,7 @@ void WLApplication::mainmenu_multiplayer() {
 				peer.host = addr;
 				peer.port = port;
 
-				NetClient netgame(&peer, playername);
+				GameClient netgame(&peer, playername);
 				netgame.run();
 				break;
 			}

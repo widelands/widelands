@@ -17,7 +17,7 @@
  *
  */
 
-#include "network/netclient.h"
+#include "network/gameclient.h"
 
 #include <memory>
 
@@ -53,7 +53,7 @@
 #include "wui/interactive_player.h"
 #include "wui/interactive_spectator.h"
 
-struct NetClientImpl {
+struct GameClientImpl {
 	GameSettings settings;
 
 	std::string localplayername;
@@ -96,8 +96,8 @@ struct NetClientImpl {
 	std::vector<ChatMessage> chatmessages;
 };
 
-NetClient::NetClient(IPaddress* const svaddr, const std::string& playername, bool internet)
-   : d(new NetClientImpl), internet_(internet) {
+GameClient::GameClient(IPaddress* const svaddr, const std::string& playername, bool internet)
+   : d(new GameClientImpl), internet_(internet) {
 	d->sock = SDLNet_TCP_Open(svaddr);
 	if (d->sock == nullptr)
 		throw WLWarning(_("Could not establish connection to host"),
@@ -122,7 +122,7 @@ NetClient::NetClient(IPaddress* const svaddr, const std::string& playername, boo
 	d->settings.win_condition_script = d->settings.win_condition_scripts.front();
 }
 
-NetClient::~NetClient() {
+GameClient::~GameClient() {
 	if (d->sock != nullptr)
 		disconnect("CLIENT_LEFT_GAME", "", true, false);
 
@@ -131,7 +131,7 @@ NetClient::~NetClient() {
 	delete d;
 }
 
-void NetClient::run() {
+void GameClient::run() {
 	SendPacket s;
 	s.unsigned_8(NETCMD_HELLO);
 	s.unsigned_8(NETWORK_PROTOCOL_VERSION);
@@ -221,7 +221,7 @@ void NetClient::run() {
 	}
 }
 
-void NetClient::think() {
+void GameClient::think() {
 	handle_network();
 
 	if (d->game) {
@@ -242,7 +242,7 @@ void NetClient::think() {
 	}
 }
 
-void NetClient::send_player_command(Widelands::PlayerCommand& pc) {
+void GameClient::send_player_command(Widelands::PlayerCommand& pc) {
 	assert(d->game);
 	if (pc.sender() != d->settings.playernum + 1) {
 		delete &pc;
@@ -263,15 +263,15 @@ void NetClient::send_player_command(Widelands::PlayerCommand& pc) {
 	delete &pc;
 }
 
-int32_t NetClient::get_frametime() {
+int32_t GameClient::get_frametime() {
 	return d->time.time() - d->game->get_gametime();
 }
 
-GameController::GameType NetClient::get_game_type() {
+GameController::GameType GameClient::get_game_type() {
 	return GameController::GameType::NETCLIENT;
 }
 
-void NetClient::report_result(uint8_t player_nr,
+void GameClient::report_result(uint8_t player_nr,
                               Widelands::PlayerEndResult result,
                               const std::string& info) {
 	// Send to game
@@ -285,54 +285,54 @@ void NetClient::report_result(uint8_t player_nr,
 	d->game->player_manager()->add_player_end_status(pes);
 }
 
-const GameSettings& NetClient::settings() {
+const GameSettings& GameClient::settings() {
 	return d->settings;
 }
 
-void NetClient::set_scenario(bool) {
+void GameClient::set_scenario(bool) {
 }
 
-bool NetClient::can_change_map() {
+bool GameClient::can_change_map() {
 	return false;
 }
 
-bool NetClient::can_change_player_state(uint8_t const) {
+bool GameClient::can_change_player_state(uint8_t const) {
 	return false;
 }
 
-bool NetClient::can_change_player_tribe(uint8_t number) {
+bool GameClient::can_change_player_tribe(uint8_t number) {
 	return can_change_player_team(number);
 }
 
-bool NetClient::can_change_player_team(uint8_t number) {
+bool GameClient::can_change_player_team(uint8_t number) {
 	return (number == d->settings.playernum) && !d->settings.scenario && !d->settings.savegame;
 }
 
-bool NetClient::can_change_player_init(uint8_t) {
+bool GameClient::can_change_player_init(uint8_t) {
 	return false;
 }
 
-bool NetClient::can_launch() {
+bool GameClient::can_launch() {
 	return false;
 }
 
-void NetClient::set_player_state(uint8_t, PlayerSettings::State) {
+void GameClient::set_player_state(uint8_t, PlayerSettings::State) {
 	// client is not allowed to do this
 }
 
-void NetClient::set_player_ai(uint8_t, const std::string&, bool const /* random_ai */) {
+void GameClient::set_player_ai(uint8_t, const std::string&, bool const /* random_ai */) {
 	// client is not allowed to do this
 }
 
-void NetClient::next_player_state(uint8_t) {
+void GameClient::next_player_state(uint8_t) {
 	// client is not allowed to do this
 }
 
-void NetClient::set_map(const std::string&, const std::string&, uint32_t, bool) {
+void GameClient::set_map(const std::string&, const std::string&, uint32_t, bool) {
 	// client is not allowed to do this
 }
 
-void NetClient::set_player_tribe(uint8_t number,
+void GameClient::set_player_tribe(uint8_t number,
                                  const std::string& tribe,
                                  bool const random_tribe) {
 	if ((number != d->settings.playernum))
@@ -346,7 +346,7 @@ void NetClient::set_player_tribe(uint8_t number,
 	s.send(d->sock);
 }
 
-void NetClient::set_player_team(uint8_t number, Widelands::TeamNumber team) {
+void GameClient::set_player_team(uint8_t number, Widelands::TeamNumber team) {
 	if ((number != d->settings.playernum))
 		return;
 
@@ -357,11 +357,11 @@ void NetClient::set_player_team(uint8_t number, Widelands::TeamNumber team) {
 	s.send(d->sock);
 }
 
-void NetClient::set_player_closeable(uint8_t, bool) {
+void GameClient::set_player_closeable(uint8_t, bool) {
 	//  client is not allowed to do this
 }
 
-void NetClient::set_player_shared(uint8_t number, uint8_t player) {
+void GameClient::set_player_shared(uint8_t number, uint8_t player) {
 	if ((number != d->settings.playernum))
 		return;
 
@@ -372,7 +372,7 @@ void NetClient::set_player_shared(uint8_t number, uint8_t player) {
 	s.send(d->sock);
 }
 
-void NetClient::set_player_init(uint8_t number, uint8_t) {
+void GameClient::set_player_init(uint8_t number, uint8_t) {
 	if ((number != d->settings.playernum))
 		return;
 
@@ -383,29 +383,29 @@ void NetClient::set_player_init(uint8_t number, uint8_t) {
 	s.send(d->sock);
 }
 
-void NetClient::set_player_name(uint8_t, const std::string&) {
+void GameClient::set_player_name(uint8_t, const std::string&) {
 	// until now the name is set before joining - if you allow a change in
 	// launchgame-menu, here properly should be a set_name function
 }
 
-void NetClient::set_player(uint8_t, const PlayerSettings&) {
+void GameClient::set_player(uint8_t, const PlayerSettings&) {
 	// do nothing here - the request for a positionchange is send in
 	// set_player_number(uint8_t) to the host.
 }
 
-std::string NetClient::get_win_condition_script() {
+std::string GameClient::get_win_condition_script() {
 	return d->settings.win_condition_script;
 }
 
-void NetClient::set_win_condition_script(std::string) {
+void GameClient::set_win_condition_script(std::string) {
 	// Clients are not allowed to change this
 }
 
-void NetClient::next_win_condition() {
+void GameClient::next_win_condition() {
 	// Clients are not allowed to change this
 }
 
-void NetClient::set_player_number(uint8_t const number) {
+void GameClient::set_player_number(uint8_t const number) {
 	// If the playernumber we want to switch to is our own, there is no need
 	// for sending a request to the host.
 	if (number == d->settings.playernum)
@@ -423,15 +423,15 @@ void NetClient::set_player_number(uint8_t const number) {
 	s.send(d->sock);
 }
 
-uint32_t NetClient::real_speed() {
+uint32_t GameClient::real_speed() {
 	return d->realspeed;
 }
 
-uint32_t NetClient::desired_speed() {
+uint32_t GameClient::desired_speed() {
 	return d->desiredspeed;
 }
 
-void NetClient::set_desired_speed(uint32_t speed) {
+void GameClient::set_desired_speed(uint32_t speed) {
 	if (speed > std::numeric_limits<uint16_t>::max())
 		speed = std::numeric_limits<uint16_t>::max();
 
@@ -446,14 +446,14 @@ void NetClient::set_desired_speed(uint32_t speed) {
 }
 
 // Network games cannot be paused
-bool NetClient::is_paused() {
+bool GameClient::is_paused() {
 	return false;
 }
 
-void NetClient::set_paused(bool /* paused */) {
+void GameClient::set_paused(bool /* paused */) {
 }
 
-void NetClient::receive_one_player(uint8_t const number, StreamRead& packet) {
+void GameClient::receive_one_player(uint8_t const number, StreamRead& packet) {
 	if (number >= d->settings.players.size())
 		throw DisconnectException("PLAYER_UPDATE_FOR_N_E_P");
 
@@ -469,7 +469,7 @@ void NetClient::receive_one_player(uint8_t const number, StreamRead& packet) {
 	player.shared_in = packet.unsigned_8();
 }
 
-void NetClient::receive_one_user(uint32_t const number, StreamRead& packet) {
+void GameClient::receive_one_user(uint32_t const number, StreamRead& packet) {
 	if (number > d->settings.users.size())
 		throw DisconnectException("USER_UPDATE_FOR_N_E_U");
 
@@ -488,18 +488,18 @@ void NetClient::receive_one_user(uint32_t const number, StreamRead& packet) {
 	}
 }
 
-void NetClient::send(const std::string& msg) {
+void GameClient::send(const std::string& msg) {
 	SendPacket s;
 	s.unsigned_8(NETCMD_CHAT);
 	s.string(msg);
 	s.send(d->sock);
 }
 
-const std::vector<ChatMessage>& NetClient::get_messages() const {
+const std::vector<ChatMessage>& GameClient::get_messages() const {
 	return d->chatmessages;
 }
 
-void NetClient::send_time() {
+void GameClient::send_time() {
 	assert(d->game);
 
 	log("[Client]: sending timestamp: %i\n", d->game->get_gametime());
@@ -513,7 +513,7 @@ void NetClient::send_time() {
 	d->lasttimestamp_realtime = SDL_GetTicks();
 }
 
-void NetClient::syncreport() {
+void GameClient::syncreport() {
 	if (d->sock) {
 		SendPacket s;
 		s.unsigned_8(NETCMD_SYNCREPORT);
@@ -528,7 +528,7 @@ void NetClient::syncreport() {
  *
  * \note The caller must handle exceptions by closing the connection.
  */
-void NetClient::handle_packet(RecvPacket& packet) {
+void GameClient::handle_packet(RecvPacket& packet) {
 	uint8_t cmd = packet.unsigned_8();
 
 	if (cmd == NETCMD_DISCONNECT) {
@@ -870,7 +870,7 @@ void NetClient::handle_packet(RecvPacket& packet) {
 /**
  * Handle all incoming network traffic.
  */
-void NetClient::handle_network() {
+void GameClient::handle_network() {
 	// if this is an internet game, handle the metaserver network
 	if (internet_)
 		InternetGaming::ref().handle_metaserver_communication();
@@ -899,7 +899,7 @@ void NetClient::handle_network() {
 	}
 }
 
-void NetClient::disconnect(const std::string& reason,
+void GameClient::disconnect(const std::string& reason,
                            const std::string& arg,
                            bool const sendreason,
                            bool const showmsg) {

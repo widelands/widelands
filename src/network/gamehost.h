@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef WL_NETWORK_NETHOST_H
-#define WL_NETWORK_NETHOST_H
+#ifndef WL_NETWORK_GAMEHOST_H
+#define WL_NETWORK_GAMEHOST_H
 
 #include "logic/game_controller.h"
 #include "logic/game_settings.h"
@@ -26,19 +26,19 @@
 #include "network/network.h"
 
 struct ChatMessage;
-struct NetHostImpl;
+struct GameHostImpl;
 struct Client;
 
 /**
- * NetHost manages the lifetime of a network game in which this computer
+ * GameHost manages the lifetime of a network game in which this computer
  * acts as the host.
  *
  * This includes running the game setup screen and the actual game after
  * launch, as well as dealing with the actual network protocol.
  */
-struct NetHost : public GameController, private SyncCallback {
-	NetHost(const std::string& playername, bool internet = false);
-	virtual ~NetHost();
+struct GameHost : public GameController, private SyncCallback {
+	GameHost(const std::string& playername, bool internet = false);
+	virtual ~GameHost();
 
 	void run();
 	const std::string& get_local_playername() const;
@@ -153,9 +153,9 @@ private:
 	void reaper();
 
 	NetTransferFile* file_;
-	NetHostImpl* d;
+	GameHostImpl* d;
 	bool internet_;
 	bool forced_pause_;
 };
 
-#endif  // end of include guard: WL_NETWORK_NETHOST_H
+#endif  // end of include guard: WL_NETWORK_GAMEHOST_H

@@ -43,7 +43,7 @@ struct SyncCallback {
 };
 
 /**
- * This non-gamelogic command is used by \ref NetHost and \ref NetClient
+ * This non-gamelogic command is used by \ref GameHost and \ref GameClient
  * to schedule taking a synchronization hash.
  */
 struct CmdNetCheckSync : public Widelands::Command {

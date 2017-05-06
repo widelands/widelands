@@ -28,9 +28,9 @@
 #include "graphic/graphic.h"
 #include "graphic/text_constants.h"
 #include "network/constants.h"
+#include "network/gameclient.h"
+#include "network/gamehost.h"
 #include "network/internet_gaming.h"
-#include "network/netclient.h"
-#include "network/nethost.h"
 #include "profile/profile.h"
 #include "ui_basic/messagebox.h"
 
@@ -400,7 +400,7 @@ void FullscreenMenuInternetLobby::clicked_joingame() {
 		}
 		SDLNet_ResolveHost(&peer, ip.c_str(), WIDELANDS_PORT);
 
-		NetClient netgame(&peer, InternetGaming::ref().get_local_clientname(), true);
+		GameClient netgame(&peer, InternetGaming::ref().get_local_clientname(), true);
 		netgame.run();
 	} else
 		throw wexception("No server selected! That should not happen!");
@@ -423,6 +423,6 @@ void FullscreenMenuInternetLobby::clicked_hostgame() {
 	InternetGaming::ref().set_local_servername(servername_ui);
 
 	// Start the game
-	NetHost netgame(InternetGaming::ref().get_local_clientname(), true);
+	GameHost netgame(InternetGaming::ref().get_local_clientname(), true);
 	netgame.run();
 }

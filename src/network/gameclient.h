@@ -17,30 +17,30 @@
  *
  */
 
-#ifndef WL_NETWORK_NETCLIENT_H
-#define WL_NETWORK_NETCLIENT_H
+#ifndef WL_NETWORK_GAMECLIENT_H
+#define WL_NETWORK_GAMECLIENT_H
 
 #include "chat/chat.h"
 #include "logic/game_controller.h"
 #include "logic/game_settings.h"
 #include "network/network.h"
 
-struct NetClientImpl;
+struct GameClientImpl;
 
 // TODO(unknown): Use composition instead of inheritance
 /**
- * NetClient manages the lifetime of a network game in which this computer
+ * GameClient manages the lifetime of a network game in which this computer
  * participates as a client.
  *
  * This includes running the game setup screen and the actual game after
  * launch, as well as dealing with the actual network protocol.
  */
-struct NetClient : public GameController,
+struct GameClient : public GameController,
                    public GameSettingsProvider,
                    private SyncCallback,
                    public ChatProvider {
-	NetClient(IPaddress*, const std::string& playername, bool internet = false);
-	virtual ~NetClient();
+	GameClient(IPaddress*, const std::string& playername, bool internet = false);
+	virtual ~GameClient();
 
 	void run();
 
@@ -120,8 +120,8 @@ private:
 	                bool showmsg = true);
 
 	NetTransferFile* file_;
-	NetClientImpl* d;
+	GameClientImpl* d;
 	bool internet_;
 };
 
-#endif  // end of include guard: WL_NETWORK_NETCLIENT_H
+#endif  // end of include guard: WL_NETWORK_GAMECLIENT_H
