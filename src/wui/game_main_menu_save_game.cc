@@ -51,7 +51,6 @@ GameMainMenuSaveGame::GameMainMenuSaveGame(InteractiveGameBase& parent,
 
      main_box_(this, 0, 0, UI::Box::Vertical),
      info_box_(&main_box_, 0, 0, UI::Box::Horizontal),
-     filename_box_(&main_box_, 0, 0, UI::Box::Horizontal),
      buttons_box_(&main_box_, 0, 0, UI::Box::Horizontal),
 
      load_or_save_(&info_box_,
@@ -60,6 +59,7 @@ GameMainMenuSaveGame::GameMainMenuSaveGame(InteractiveGameBase& parent,
                    GameDetails::Style::kWui,
                    false),
 
+     filename_box_(load_or_save_.table_box(), 0, 0, UI::Box::Horizontal),
      editbox_label_(&filename_box_, 0, 0, 0, 0, _("Filename:"), UI::Align::kLeft),
      editbox_(&filename_box_, 0, 0, 0, 0, 2, g_gr->images().get("images/ui_basic/but1.png")),
 
@@ -87,18 +87,18 @@ GameMainMenuSaveGame::GameMainMenuSaveGame(InteractiveGameBase& parent,
 	main_box_.add_space(padding_);
 	main_box_.set_inner_spacing(padding_);
 	main_box_.add(&info_box_, UI::Box::Resizing::kExpandBoth);
-	main_box_.add_space(padding_);
-	main_box_.add(&filename_box_, UI::Box::Resizing::kFullSize);
 	main_box_.add_space(0);
 	main_box_.add(&buttons_box_, UI::Box::Resizing::kFullSize);
 
 	info_box_.set_inner_spacing(padding_);
 	info_box_.add_space(padding_);
-	info_box_.add(&load_or_save_.table(), UI::Box::Resizing::kFullSize);
+	info_box_.add(load_or_save_.table_box(), UI::Box::Resizing::kFullSize);
 	info_box_.add(load_or_save_.game_details(), UI::Box::Resizing::kExpandBoth);
 
+	load_or_save_.table_box()->add_space(padding_);
+	load_or_save_.table_box()->add(&filename_box_, UI::Box::Resizing::kFullSize);
+
 	filename_box_.set_inner_spacing(padding_);
-	filename_box_.add_space(padding_);
 	filename_box_.add(&editbox_label_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 	filename_box_.add(&editbox_, UI::Box::Resizing::kFillSpace);
 
@@ -121,8 +121,7 @@ GameMainMenuSaveGame::GameMainMenuSaveGame(InteractiveGameBase& parent,
 	cancel_.sigclicked.connect(boost::bind(&GameMainMenuSaveGame::die, this));
 
 	load_or_save_.table().selected.connect(boost::bind(&GameMainMenuSaveGame::entry_selected, this));
-	load_or_save_.table().double_clicked.connect(
-		boost::bind(&GameMainMenuSaveGame::ok, this));
+	load_or_save_.table().double_clicked.connect(boost::bind(&GameMainMenuSaveGame::ok, this));
 
 	load_or_save_.fill_table();
 	load_or_save_.select_by_name(parent.game().save_handler().get_cur_filename());

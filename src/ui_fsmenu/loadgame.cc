@@ -62,7 +62,7 @@ FullscreenMenuLoadGame::FullscreenMenuLoadGame(Widelands::Game& g,
 	main_box_.add(&info_box_, UI::Box::Resizing::kExpandBoth);
 	main_box_.add_space(padding_);
 
-	info_box_.add(&load_or_save_.table(), UI::Box::Resizing::kFullSize);
+	info_box_.add(load_or_save_.table_box(), UI::Box::Resizing::kFullSize);
 	info_box_.add_space(right_column_margin_);
 	info_box_.add(load_or_save_.game_details(), UI::Box::Resizing::kFullSize);
 

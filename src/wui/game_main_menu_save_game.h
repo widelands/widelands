@@ -66,11 +66,11 @@ private:
 
 	UI::Box main_box_;
 	UI::Box info_box_;
-	UI::Box filename_box_;
 	UI::Box buttons_box_;
 
 	LoadOrSaveGame load_or_save_;
 
+	UI::Box filename_box_;
 	UI::Textarea editbox_label_;
 	UI::EditBox editbox_;
 

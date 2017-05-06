@@ -21,6 +21,7 @@
 #define WL_WUI_LOAD_OR_SAVE_GAME_H
 
 #include "logic/game.h"
+#include "ui_basic/box.h"
 #include "ui_basic/panel.h"
 #include "ui_basic/table.h"
 #include "wui/gamedetails.h"
@@ -57,14 +58,13 @@ protected:
 	void fill_table();
 
 	/// The table panel
-	UI::Table<uintptr_t const>& table() {
-		return table_;
-	}
+	UI::Table<uintptr_t const>& table();
+
+	/// A vertical box wrapping the table. This can be used to add UI elements above/below the table.
+	UI::Box* table_box();
 
 	/// The game details panel
-	GameDetails* game_details() {
-		return &game_details_;
-	}
+	GameDetails* game_details();
 
 	/// Returns the filename for the table entry at 'index'
 	const std::string get_filename(int index) const;
@@ -84,6 +84,7 @@ private:
 	bool compare_date_descending(uint32_t, uint32_t);
 
 	UI::Panel* parent_;
+	UI::Box* table_box_;
 	UI::Table<uintptr_t const> table_;
 	FileType filetype_;
 	bool localize_autosave_;

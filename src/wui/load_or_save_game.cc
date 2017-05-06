@@ -70,7 +70,8 @@ LoadOrSaveGame::LoadOrSaveGame(UI::Panel* parent,
                                GameDetails::Style style,
                                bool localize_autosave)
    : parent_(parent),
-     table_(parent,
+     table_box_(new UI::Box(parent, 0, 0, UI::Box::Vertical)),
+     table_(table_box_,
             0,
             0,
             0,
@@ -134,6 +135,8 @@ LoadOrSaveGame::LoadOrSaveGame(UI::Panel* parent,
 	table_.set_sort_column(0);
 	table_.focus();
 	fill_table();
+
+	table_box_->add(&table_, UI::Box::Resizing::kExpandBoth);
 
 	game_details_.button_box()->add(delete_, style == GameDetails::Style::kFsMenu ?
 	                                            UI::Box::Resizing::kAlign :
@@ -225,6 +228,18 @@ void LoadOrSaveGame::select_by_name(const std::string& name) {
 			return;
 		}
 	}
+}
+
+UI::Table<uintptr_t const>& LoadOrSaveGame::table() {
+	return table_;
+}
+
+UI::Box* LoadOrSaveGame::table_box() {
+	return table_box_;
+}
+
+GameDetails* LoadOrSaveGame::game_details() {
+	return &game_details_;
 }
 
 const std::string LoadOrSaveGame::get_filename(int index) const {
