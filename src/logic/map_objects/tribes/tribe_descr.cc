@@ -174,6 +174,7 @@ TribeDescr::TribeDescr(const LuaTable& table, const TribeBasicInfo& info, const 
 
 				// Register trainigsites
 				if (get_building_descr(index)->type() == MapObjectType::TRAININGSITE) {
+					log("NOCOM registering trainingsite %s for tribe %s\n", get_building_descr(index)->name().c_str(), name_.c_str());
 					trainingsites_.push_back(index);
 				}
 
