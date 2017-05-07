@@ -364,8 +364,8 @@ void Warehouse::load_finish(EditorGameBase& egbase) {
 			    "%s %u at (%i, %i) does not have a next_spawn time set for that "
 			    "worker type; setting it to %u\n",
 			    owner().player_number(),
-			    owner().tribe().get_worker_descr(worker_index)->descname().c_str(),
-			    descr().descname().c_str(), serial(), get_position().x, get_position().y, next_spawn);
+			    owner().tribe().get_worker_descr(worker_index)->name().c_str(), descr().name().c_str(),
+			    serial(), get_position().x, get_position().y, next_spawn);
 		}
 	}
 
