@@ -147,10 +147,10 @@ obj_find_artifacts = {
    name = "find_neptune'_shrine",
    title=_"Recover the shrine",
    number = 1,
-   body = objective_text(_"Find 6 Pieces of the Holy Shrine",
-      listitem_bullet(_[[We need to find and secure all pieces of the Holy Shrine of Neptune.]])
-   ),
+   body = text_line("</p><p font-size=14 font-weight=bold font-color=d1d1d1 line-spacing=6>Find the Holy Shrine<br>",
+       listitem_bullet(_[[We need to find and secure all six pieces of the holy shrine of Neptune.]]), "map:artifacts_models.png")
 }
+
 
 obj_training = {
    name = "build_training_infrastructure",
@@ -399,7 +399,7 @@ saledus_5 = {
       _([[But the following objective is even more important:]])
       .. paragraphdivider() ..
       -- TRANSLATORS: Saledus
-      _([[I think I have heard the wind carrying some weird but well known sounds from the north. If I’m not totally wrong. I have heard some Barbarian war drums, so we should better go and look what is going on up there.]]))
+      _([[I think I have heard the wind carrying some weird but well known sounds from the north. If I’m not totally wrong, I have heard some Barbarian war drums. So, we should better go and look what is going on up there.]]))
 	  .. new_objectives(obj_build_expedition_ports),
    posy=1,
    h=500,
@@ -587,9 +587,4 @@ diary_page_6 = {
    }
 
 
-show_artifacts = {
-      title = _"Models of Neptune’s Shrine",
-      body = rt("image=map:artifacts_models.png", ""),
-      h = 220,
-      w = 135
-   }
+
