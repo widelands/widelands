@@ -43,6 +43,7 @@
 #include "graphic/text/bidi.h"
 #include "graphic/text/font_io.h"
 #include "graphic/text/font_set.h"
+#include "graphic/text/rendered_text.h"
 #include "graphic/text/rt_parse.h"
 #include "graphic/text/sdl_ttf_font.h"
 #include "graphic/text/textstream.h"
@@ -705,6 +706,7 @@ public:
 	}
 
 	Texture* render(TextureCache* texture_cache) override {
+		// NOCOM this needs to return RenderedText
 		if (width() > g_gr->max_texture_size() || height() > g_gr->max_texture_size()) {
 			const std::string error_message =
 			   (boost::format("Texture (%d, %d) too big! Maximum size is %d.") % width() % height() %

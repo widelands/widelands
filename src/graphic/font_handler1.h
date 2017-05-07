@@ -29,36 +29,13 @@
 #include "base/vector.h"
 #include "graphic/align.h"
 #include "graphic/text/font_set.h"
+#include "graphic/text/rendered_text.h"
 
 class FileSystem;
 class Image;
 class ImageCache;
 
 namespace UI {
-
-struct RenderedRect {
-	Vector2i point;
-	const Image* image; // Not owned
-	RenderedRect()
-		: RenderedRect(Vector2i(0, 0), nullptr) {
-	}
-	RenderedRect(Vector2i init_point, const Image* init_image)
-		: point(init_point), image(init_image) {
-	}
-	RenderedRect(const RenderedRect& other)
-		: point(other.point), image(other.image) {
-	}
-	~RenderedRect() {}
-	bool operator==(const RenderedRect& other) const {
-		return point == other.point;
-	}
-};
-struct RenderedText {
-	std::vector<std::unique_ptr<RenderedRect>> texts;
-	// Dimensions occupied by the rendered images in pixels.
-	int width() const;
-	int height() const;
-};
 
 /**
  * Main class for string rendering. Manages the cache of pre-rendered strings.

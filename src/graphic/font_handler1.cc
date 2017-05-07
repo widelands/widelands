@@ -104,21 +104,6 @@ private:
 
 namespace UI {
 
-int RenderedText::width() const {
-	int result = 0;
-	for (const auto& rect : texts) {
-		result = std::max(result, rect->point.x + rect->image->width());
-	}
-	return result;
-}
-int RenderedText::height() const {
-	int result = 0;
-	for (const auto& rect : texts) {
-		result = std::max(result, rect->point.y + rect->image->height());
-	}
-	return result;
-}
-
 // Utility class to render a rich text string. The returned string is cached in
 // the ImageCache, so repeated calls to render with the same arguments should not
 // be a problem.

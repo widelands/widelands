@@ -14,6 +14,8 @@ wl_library(graphic_text
     rt_parse.h
     rt_render.cc
     rt_render.h
+    rendered_text.cc
+    rendered_text.h
     sdl_ttf_font.cc
     sdl_ttf_font.h
     textstream.cc
