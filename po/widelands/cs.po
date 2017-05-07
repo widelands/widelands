@@ -11,9 +11,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-04-06 19:07+0000\n"
-"PO-Revision-Date: 2017-04-06 19:11+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2017-04-28 06:01+0000\n"
+"PO-Revision-Date: 2017-05-04 18:46+0000\n"
+"Last-Translator: Milan Fašina <matrix17@seznam.cz>\n"
 "Language-Team: Czech (http://www.transifex.com/widelands/widelands/language/cs/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -987,7 +987,7 @@ msgid "Loading map…"
 msgstr "Nahrávání mapy..."
 
 #: ../../src/logic/game.cc:338 ../../src/logic/game.cc:373
-#: ../../src/ui_basic/progresswindow.cc:50 ../../src/wlapplication.cc:1346
+#: ../../src/ui_basic/progresswindow.cc:50 ../../src/wlapplication.cc:1348
 msgid "Loading…"
 msgstr "Nahrávání..."
 
@@ -1016,7 +1016,7 @@ msgstr "Hra byla uložena v jiné verzi Widelands než je vaše a nelze ji proto
 msgid "No description defined"
 msgstr "Bez popisu"
 
-#: ../../src/logic/map_objects/immovable.cc:512
+#: ../../src/logic/map_objects/immovable.cc:513
 #: ../../src/logic/map_objects/tribes/constructionsite.cc:72
 #, c-format
 msgid "%i%% built"
@@ -1061,33 +1061,33 @@ msgstr[1] "%1%(+%2%) vojáci"
 msgstr[2] "%1%(+%2%) vojáků"
 
 #. * TRANSLATORS: Militarysite lost (taken/destroyed by enemy)
-#: ../../src/logic/map_objects/tribes/militarysite.cc:774
+#: ../../src/logic/map_objects/tribes/militarysite.cc:775
 msgctxt "building"
 msgid "Lost!"
 msgstr "Zabit!"
 
-#: ../../src/logic/map_objects/tribes/militarysite.cc:775
+#: ../../src/logic/map_objects/tribes/militarysite.cc:776
 msgid "Militarysite lost!"
 msgstr "Vojenský post zabrán nepřítelem!"
 
 #. * TRANSLATORS: Message title.
 #. * TRANSLATORS: If you run out of space, you can also translate this as
 #. "Success!"
-#: ../../src/logic/map_objects/tribes/militarysite.cc:815
+#: ../../src/logic/map_objects/tribes/militarysite.cc:816
 msgid "Enemy Defeated!"
 msgstr "Nepřítel poražen!"
 
-#: ../../src/logic/map_objects/tribes/militarysite.cc:815
+#: ../../src/logic/map_objects/tribes/militarysite.cc:816
 msgid "Enemy at site defeated!"
 msgstr "Nepřítel na daném místě poražen!"
 
 #. * TRANSLATORS: Militarysite is being attacked
-#: ../../src/logic/map_objects/tribes/militarysite.cc:857
+#: ../../src/logic/map_objects/tribes/militarysite.cc:858
 msgctxt "building"
 msgid "Attack!"
 msgstr "Útok!"
 
-#: ../../src/logic/map_objects/tribes/militarysite.cc:857
+#: ../../src/logic/map_objects/tribes/militarysite.cc:858
 msgid "You are under attack"
 msgstr "Nepřítel na tebe útočí"
 
@@ -1267,99 +1267,99 @@ msgstr "(zastaveno)"
 msgid "%i%%"
 msgstr "%i%%"
 
-#: ../../src/logic/map_objects/tribes/productionsite.cc:943
+#: ../../src/logic/map_objects/tribes/productionsite.cc:944
 msgid "Can’t find any more resources!"
 msgstr "Nelze najít další suroviny!"
 
-#: ../../src/logic/map_objects/tribes/ship.cc:416
+#: ../../src/logic/map_objects/tribes/ship.cc:417
 msgid "Port Space"
 msgstr "Místo pro přístav"
 
-#: ../../src/logic/map_objects/tribes/ship.cc:416
+#: ../../src/logic/map_objects/tribes/ship.cc:417
 msgid "Port Space Found"
 msgstr "Nalezeno místo pro přístav"
 
-#: ../../src/logic/map_objects/tribes/ship.cc:417
+#: ../../src/logic/map_objects/tribes/ship.cc:418
 msgid "An expedition ship found a new port build space."
 msgstr "Loď výpravy nalezla nové místo pro stavbu přístavu."
 
-#: ../../src/logic/map_objects/tribes/ship.cc:538
+#: ../../src/logic/map_objects/tribes/ship.cc:539
 msgid "Island Circumnavigated"
 msgstr "Ostrov obeplut"
 
 #. * TRANSLATORS: A ship has circumnavigated an island and is waiting
 #. for orders
-#: ../../src/logic/map_objects/tribes/ship.cc:538
+#: ../../src/logic/map_objects/tribes/ship.cc:539
 msgctxt "ship"
 msgid "Waiting"
 msgstr "Čekání"
 
-#: ../../src/logic/map_objects/tribes/ship.cc:539
+#: ../../src/logic/map_objects/tribes/ship.cc:540
 msgid "An expedition ship sailed around its island without any events."
 msgstr "Loď výpravy obeplula ostrov bez jakýchkoliv problémů."
 
-#: ../../src/logic/map_objects/tribes/ship.cc:603
+#: ../../src/logic/map_objects/tribes/ship.cc:604
 msgid "Coast Reached"
 msgstr "Pobřeží dosaženo"
 
 #. * TRANSLATORS: A ship has discovered land
-#: ../../src/logic/map_objects/tribes/ship.cc:603
+#: ../../src/logic/map_objects/tribes/ship.cc:604
 msgid "Land Ahoy!"
 msgstr "Nazdaaar!"
 
-#: ../../src/logic/map_objects/tribes/ship.cc:604
+#: ../../src/logic/map_objects/tribes/ship.cc:605
 msgid ""
 "An expedition ship reached a coast and is waiting for further commands."
 msgstr "Loď výpravy dosáhla přístavu a čeká na další rozkazy."
 
-#: ../../src/logic/map_objects/tribes/ship.cc:659
+#: ../../src/logic/map_objects/tribes/ship.cc:660
 msgid "New port construction site is gone"
 msgstr "Stavební místo pro nový přístav je ztraceno"
 
-#: ../../src/logic/map_objects/tribes/ship.cc:659
+#: ../../src/logic/map_objects/tribes/ship.cc:660
 msgid "Port Lost!"
 msgstr "Přístav ztracen"
 
-#: ../../src/logic/map_objects/tribes/ship.cc:660
+#: ../../src/logic/map_objects/tribes/ship.cc:661
 msgid "Unloading of wares failed, expedition is cancelled now."
 msgstr "Vykládání surovin selhalo, výprava je zrušena."
 
 #. * TRANSLATORS: Ship expedition ready
-#: ../../src/logic/map_objects/tribes/ship.cc:835
+#: ../../src/logic/map_objects/tribes/ship.cc:836
 msgctxt "ship"
 msgid "Expedition"
 msgstr "Výprava"
 
-#: ../../src/logic/map_objects/tribes/ship.cc:835
+#: ../../src/logic/map_objects/tribes/ship.cc:836
 msgid "Expedition Ready"
 msgstr "Výprava je připravena"
 
-#: ../../src/logic/map_objects/tribes/ship.cc:836
+#: ../../src/logic/map_objects/tribes/ship.cc:837
 msgid "An expedition ship is waiting for your commands."
 msgstr "Loď výpravy čeká na tvé rozkazy."
 
 #. * TRANSLATORS: This is a ship state
-#: ../../src/logic/map_objects/tribes/ship.cc:957
+#: ../../src/logic/map_objects/tribes/ship.cc:976
 msgctxt "ship_state"
 msgid "Shipping"
 msgstr "Plavba"
 
 #. * TRANSLATORS: This is a ship state. An expedition is waiting for your
 #. commands.
-#: ../../src/logic/map_objects/tribes/ship.cc:961
+#: ../../src/logic/map_objects/tribes/ship.cc:980
 msgctxt "ship_state"
 msgid "Waiting"
 msgstr "Čekání"
 
 #. * TRANSLATORS: This is a ship state. An expedition is scouting for port
 #. spaces.
-#: ../../src/logic/map_objects/tribes/ship.cc:965
+#: ../../src/logic/map_objects/tribes/ship.cc:984
 msgctxt "ship_state"
 msgid "Scouting"
 msgstr "Průzkum"
 
 #. * TRANSLATORS: This is a ship state. An expedition has found a port space.
-#: ../../src/logic/map_objects/tribes/ship.cc:969
+#: ../../src/logic/map_objects/tribes/ship.cc:988
 msgctxt "ship_state"
 msgid "Port Space Found"
 msgstr "Nalezeno místo pro přístav"
@@ -1367,7 +1367,7 @@ msgstr "Nalezeno místo pro přístav"
 #. * TRANSLATORS: This is a ship state. An expedition is unloading
 #. wares/workers to build a
 #. * port.
-#: ../../src/logic/map_objects/tribes/ship.cc:974
+#: ../../src/logic/map_objects/tribes/ship.cc:993
 msgctxt "ship_state"
 msgid "Founding a Colony"
 msgstr "Zakládání kolonie"
@@ -1407,12 +1407,12 @@ msgstr "má chovat %s, který se v tomto světě nevyskytuje; kmen není kompati
 msgid "A geologist found resources."
 msgstr "Geolog objevil suroviny."
 
-#: ../../src/logic/map_objects/tribes/worker.cc:1677
+#: ../../src/logic/map_objects/tribes/worker.cc:1678
 #, c-format
 msgid "Your %s can't find a way home and will likely die."
 msgstr "Tvůj %s nemůže najít cestu domů a pravděpodobně zemře."
 
-#: ../../src/logic/map_objects/tribes/worker.cc:1682
+#: ../../src/logic/map_objects/tribes/worker.cc:1683
 #: ../../src/wui/productionsitewindow.cc:87
 #: ../../src/wui/productionsitewindow.cc:112
 msgid "Worker"
@@ -1421,7 +1421,7 @@ msgstr[0] "Dělník"
 msgstr[1] "Dělníci"
 msgstr[2] "Dělníci"
 
-#: ../../src/logic/map_objects/tribes/worker.cc:1683
+#: ../../src/logic/map_objects/tribes/worker.cc:1684
 msgid "Worker got lost!"
 msgstr "Dělník se ztratil!"
 
@@ -1464,17 +1464,17 @@ msgid ""
 " unpause the game and continue watching if you want to."
 msgstr "Byl dosažen konec záznamu a hra byla pozastavena. Pokud chcete, můžete hru odpauzovat a pokračovat ve sledování."
 
-#: ../../src/logic/save_handler.cc:111
+#: ../../src/logic/save_handler.cc:103
+msgid "Saving game…"
+msgstr "Ukládám hru..."
+
+#: ../../src/logic/save_handler.cc:119
 msgid "Saving failed!"
 msgstr "Ukládání selhalo!"
 
-#: ../../src/logic/save_handler.cc:130
+#: ../../src/logic/save_handler.cc:188
 msgid "Game saved"
 msgstr "Hra uložena"
-
-#: ../../src/logic/save_handler.cc:157
-msgid "Saving game…"
-msgstr "Ukládám hru..."
 
 #: ../../src/map_io/s2map.cc:423
 msgid "Bluebyte Settlers II Map. No comment defined!"
@@ -1676,7 +1676,7 @@ msgid ""
 msgstr "Widelands nemohly navázat spojení se zadanou adresou.\nBuď na zadaném portu neběží žádný server Widelands nebo\nse server vypnul když ses snažil připojit."
 
 #: ../../src/network/netclient.cc:176 ../../src/network/nethost.cc:701
-#: ../../src/wlapplication.cc:1239
+#: ../../src/wlapplication.cc:1241
 msgid "Preparing game"
 msgstr "Připravuji hru"
 
@@ -2017,7 +2017,7 @@ msgstr "vypnuto"
 #. * TRANSLATORS: %1% is a filename, %2% a map's name.
 #. * TRANSLATORS: File name for saving objective achieved
 #. * TRANSLATORS: %1% = map name. %2% = achievement name
-#: ../../src/scripting/lua_game.cc:1084 ../../src/ui_fsmenu/loadgame.cc:76
+#: ../../src/scripting/lua_game.cc:1089 ../../src/ui_fsmenu/loadgame.cc:76
 msgid "%1% (%2%)"
 msgstr "%1% (%2%)"
 
@@ -3186,7 +3186,7 @@ msgid "Hide work area"
 msgstr "Skrýt pracovní oblast"
 
 #: ../../src/wui/buildingwindow.cc:305 ../../src/wui/fieldaction.cc:371
-#: ../../src/wui/shipwindow.cc:166
+#: ../../src/wui/shipwindow.cc:181
 msgid "Show Debug Window"
 msgstr "Zobrazit okno ladění"
 
@@ -3957,7 +3957,7 @@ msgstr "Divák"
 #: ../../src/wui/multiplayersetupgroup.cc:293
 #, c-format
 msgid "Shared in Player %u"
-msgstr ""
+msgstr "Sdíleno hráčem %u"
 
 #: ../../src/wui/multiplayersetupgroup.cc:314
 #: ../../src/wui/playerdescrgroup.cc:170
@@ -3967,7 +3967,7 @@ msgstr "Náhodně"
 
 #: ../../src/wui/multiplayersetupgroup.cc:316
 msgid "The tribe will be selected at random"
-msgstr ""
+msgstr "Kmen bude vybrán náhodně"
 
 #: ../../src/wui/multiplayersetupgroup.cc:370
 msgid "Shared in"
@@ -4084,55 +4084,66 @@ msgstr "(na cestě)"
 msgid "(vacant)"
 msgstr "(neobsazeno)"
 
-#: ../../src/wui/shipwindow.cc:96
+#. * TRANSLATORS: Window label when an expedition can't be canceled
+#: ../../src/wui/shipwindow.cc:68
+msgid "Cancel expedition"
+msgstr "Zrušit výpravu"
+
+#: ../../src/wui/shipwindow.cc:68
+msgid ""
+"This expedition can’t be canceled, because the ship has no port to return "
+"to."
+msgstr "Výpravu nelze zrušit, protože zde není žádný přístav, kam by se loď mohla vrátit."
+
+#: ../../src/wui/shipwindow.cc:111
 msgid "Scout towards the north west"
 msgstr "Prozkoumat severozápadním směrem"
 
-#: ../../src/wui/shipwindow.cc:101
+#: ../../src/wui/shipwindow.cc:116
 msgid "Explore the island’s coast clockwise"
 msgstr "Prozkoumat pobřeží ostrovat po směru hodinových ručiček"
 
-#: ../../src/wui/shipwindow.cc:106
+#: ../../src/wui/shipwindow.cc:121
 msgid "Scout towards the north east"
 msgstr "Prozkoumat severovýchodním směrem"
 
-#: ../../src/wui/shipwindow.cc:111
+#: ../../src/wui/shipwindow.cc:126
 msgid "Scout towards the west"
 msgstr "Prozkoumat západním směrem"
 
-#: ../../src/wui/shipwindow.cc:116
+#: ../../src/wui/shipwindow.cc:131
 msgid "Construct a port at the current location"
 msgstr "Postavit přístav na současném místě"
 
-#: ../../src/wui/shipwindow.cc:121
+#: ../../src/wui/shipwindow.cc:136
 msgid "Scout towards the east"
 msgstr "Prozkoumat východním směrem"
 
-#: ../../src/wui/shipwindow.cc:126
+#: ../../src/wui/shipwindow.cc:141
 msgid "Scout towards the south west"
 msgstr "Prozkoumat jihozápadním směrem"
 
-#: ../../src/wui/shipwindow.cc:131
+#: ../../src/wui/shipwindow.cc:146
 msgid "Explore the island’s coast counter clockwise"
 msgstr "Prozkoumat pobřeží ostrova proti směru hodinových ručiček"
 
-#: ../../src/wui/shipwindow.cc:137
+#: ../../src/wui/shipwindow.cc:152
 msgid "Scout towards the south east"
 msgstr "Prozkoumat jihovýchodním směrem"
 
-#: ../../src/wui/shipwindow.cc:147
+#: ../../src/wui/shipwindow.cc:162
 msgid "Go to ship"
 msgstr "Jít k lodi"
 
-#: ../../src/wui/shipwindow.cc:149
+#: ../../src/wui/shipwindow.cc:164
 msgid "Go to destination"
 msgstr "Jít k cíli"
 
-#: ../../src/wui/shipwindow.cc:155
+#: ../../src/wui/shipwindow.cc:170
 msgid "Sink the ship"
 msgstr "Potopit loď"
 
-#: ../../src/wui/shipwindow.cc:160
+#: ../../src/wui/shipwindow.cc:175
 msgid "Cancel the Expedition"
 msgstr "Zrušit výpravu"
 

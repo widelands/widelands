@@ -311,7 +311,7 @@ protected:
 
 	void start_animation(EditorGameBase&, uint32_t anim);
 
-	void init(EditorGameBase&) override;
+	bool init(EditorGameBase&) override;
 	void cleanup(EditorGameBase&) override;
 	void act(Game&, uint32_t data) override;
 
