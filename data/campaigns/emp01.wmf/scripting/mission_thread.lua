@@ -16,8 +16,8 @@ function mission_thread()
    local ship = p1:place_ship(sea)
    sleep(1000)
    campaign_message_box(diary_page_2)
-   -- Hide the sea after 2 seconds
-   run(function() sleep(2000) p1:hide_fields(sea:region(6), true) end)
+   -- Hide the sea after 5 seconds
+   run(function() sleep(5000) p1:hide_fields(sea:region(6)) end)
 
    -- Back home
    include "map:scripting/starting_conditions.lua"
