@@ -631,12 +631,13 @@ int LuaPlayer::hide_fields(lua_State* L) {
 	Map& m = egbase.map();
 
 	luaL_checktype(L, 2, LUA_TTABLE);
-	const bool hide_completely = !lua_isnone(L, 3) && luaL_checkboolean(L, 3);
+	const bool mode = !lua_isnone(L, 3) && luaL_checkboolean(L, 3);
 
 	lua_pushnil(L); /* first key */
 	while (lua_next(L, 2) != 0) {
 		p.unsee_node((*get_user_class<LuaField>(L, -1))->fcoords(L).field - &m[0],
-		             egbase.get_gametime(), hide_completely);
+		             egbase.get_gametime(),
+		             mode ? Player::UnseeNodeMode::kUnexplore : Player::UnseeNodeMode::kUnsee);
 		lua_pop(L, 1);
 	}
 

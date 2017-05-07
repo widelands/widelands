@@ -351,4 +351,5 @@ tribes:new_tribe {
    ship = "atlanteans_ship",
    headquarters = "atlanteans_headquarters",
    port = "atlanteans_port",
+   barracks = "atlanteans_barracks",
 }
