@@ -27,6 +27,7 @@
 #include "economy/flag.h"
 #include "logic/campaign_visibility.h"
 #include "logic/game_controller.h"
+#include "logic/map_objects/tribes/building.h"
 #include "logic/map_objects/tribes/tribe_descr.h"
 #include "logic/message.h"
 #include "logic/objective.h"
@@ -615,7 +616,7 @@ int LuaPlayer::reveal_fields(lua_State* L) {
    .. method:: hide_fields(fields)
 
       Make these fields hidden for the current player if they are not
-      seen by a military building.
+      seen by a building.
 
       :arg fields: The fields to hide
       :type fields: :class:`array` of :class:`wl.map.Fields`
@@ -639,6 +640,19 @@ int LuaPlayer::hide_fields(lua_State* L) {
 		             egbase.get_gametime(),
 		             mode ? Player::UnseeNodeMode::kUnexplore : Player::UnseeNodeMode::kUnsee);
 		lua_pop(L, 1);
+	}
+
+	// Player should still see what the buildings see
+	for (const auto& building_index : p.tribe().buildings()) {
+		const std::vector<Player::BuildingStats>& stats_vector = p.get_building_statistics(building_index);
+		for (size_t i = 0; i < stats_vector.size(); ++i) {
+			const BaseImmovable* immovable = m[stats_vector[i].pos].get_immovable();
+			if (upcast(const Widelands::Building, building, immovable)) {
+				if (building->is_seeing()) {
+					p.see_area(Area<FCoords>(m.get_fcoords(building->get_position()), building->descr().vision_range()));
+				}
+			}
+		}
 	}
 
 	return 0;

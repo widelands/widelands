@@ -713,6 +713,13 @@ void Building::set_seeing(bool see) {
 }
 
 /**
+ * Returns whether this building should see its vision range.
+ */
+bool Building::is_seeing() const {
+	return seeing_ || descr().type() == MapObjectType::WAREHOUSE;
+}
+
+/**
  * Send a message about this building to the owning player.
  *
  * It will have the building's coordinates, and display a picture of the
