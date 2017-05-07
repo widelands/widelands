@@ -98,7 +98,7 @@ void BuildingWindow::init(bool avoid_fastclick) {
 	capscache_ = 0;
 	caps_setup_ = false;
 	toggle_workarea_ = nullptr;
-	avoid_fastclick_ = avoid_fastclick,
+	avoid_fastclick_ = avoid_fastclick;
 
 	vbox_.reset(new UI::Box(this, 0, 0, UI::Box::Vertical));
 

@@ -1071,7 +1071,7 @@ void Worker::set_economy(Economy* const economy) {
 /**
  * Initialize the worker
  */
-void Worker::init(EditorGameBase& egbase) {
+bool Worker::init(EditorGameBase& egbase) {
 	Bob::init(egbase);
 
 	// a worker should always start out at a fixed location
@@ -1081,6 +1081,7 @@ void Worker::init(EditorGameBase& egbase) {
 
 	if (upcast(Game, game, &egbase))
 		create_needed_experience(*game);
+	return true;
 }
 
 /**
@@ -1678,12 +1679,10 @@ void Worker::return_update(Game& game, State& state) {
 		    descr().descname().c_str())
 		      .str();
 
-		owner().add_message(
-		   game, *new Message(Message::Type::kGameLogic, game.get_gametime(), _("Worker"),
-		                      "images/ui_basic/menu_help.png", _("Worker got lost!"),
-		                      (boost::format("<rt><p font-size=12>%s</p></rt>") % message).str(),
-		                      get_position()),
-		   serial_);
+		owner().add_message(game, *new Message(Message::Type::kGameLogic, game.get_gametime(),
+		                                       _("Worker"), "images/ui_basic/menu_help.png",
+		                                       _("Worker got lost!"), message, get_position()),
+		                    serial_);
 		set_location(nullptr);
 		return pop_task(game);
 	}
@@ -2550,14 +2549,6 @@ void Worker::draw_inner(const EditorGameBase& game,
 
 	dst->blit_animation(
 	   point_on_dst, scale, get_current_anim(), game.get_gametime() - get_animstart(), player_color);
-
-	if (WareInstance const* const carried_ware = get_carried_ware(game)) {
-		const Vector2f hotspot = descr().get_ware_hotspot().cast<float>();
-		const Vector2f location(
-		   point_on_dst.x - hotspot.x * scale, point_on_dst.y - hotspot.y * scale);
-		dst->blit_animation(
-		   location, scale, carried_ware->descr().get_animation("idle"), 0, player_color);
-	}
 }
 
 /**

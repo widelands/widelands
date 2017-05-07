@@ -25,6 +25,8 @@
 
 #include <stdint.h>
 
+#include "io/filesystem/filesystem.h"
+
 namespace Widelands {
 class Game;
 }
@@ -32,17 +34,15 @@ class Game;
 // default autosave interval in minutes
 #define DEFAULT_AUTOSAVE_INTERVAL 15
 
+/**
+ * Takes care of manual or autosave via think().
+ *
+ * Note that this handler is used for replays via the ReplayWriter, too.
+ */
 class SaveHandler {
 public:
-	SaveHandler()
-	   : last_saved_realtime_(0),
-	     initialized_(false),
-	     allow_saving_(true),
-	     save_requested_(false),
-	     saving_next_tick_(false),
-	     save_filename_(""),
-	     autosave_filename_("wl_autosave") {
-	}
+	SaveHandler();
+
 	void think(Widelands::Game&);
 	std::string create_file_name(const std::string& dir, const std::string& filename) const;
 	bool save_game(Widelands::Game&, const std::string& filename, std::string* error = nullptr);
@@ -59,19 +59,22 @@ public:
 	void set_autosave_filename(const std::string& filename) {
 		autosave_filename_ = filename;
 	}
+	// Used by lua only
 	void set_allow_saving(bool t) {
 		allow_saving_ = t;
 	}
+	// Used by lua only
 	bool get_allow_saving() {
 		return allow_saving_;
 	}
+	// Used by lua only
 	void request_save(const std::string& filename = "") {
 		save_requested_ = true;
 		save_filename_ = filename;
 	}
 
 private:
-	uint32_t last_saved_realtime_;
+	uint32_t next_save_realtime_;
 	bool initialized_;
 	bool allow_saving_;
 	bool save_requested_;
@@ -80,7 +83,16 @@ private:
 	std::string current_filename_;
 	std::string autosave_filename_;
 
+	FileSystem::Type fs_type_;
+	int32_t autosave_interval_in_ms_;
+	int32_t number_of_rolls_;  // For rolling file update
+
 	void initialize(uint32_t gametime);
+	void roll_save_files(const std::string& filename);
+	bool check_next_tick(Widelands::Game& game, uint32_t realtime);
+	bool save_and_handle_error(Widelands::Game& game,
+	                           const std::string& complete_filename,
+	                           const std::string& backup_filename);
 };
 
 #endif  // end of include guard: WL_LOGIC_SAVE_HANDLER_H
