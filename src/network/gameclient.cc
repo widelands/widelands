@@ -92,7 +92,7 @@ struct GameClientImpl {
 GameClient::GameClient(const std::string& host, const uint16_t port, const std::string& playername, bool internet)
    : d(new GameClientImpl), internet_(internet) {
    	d->con = NetClient::connect(host, port);
-	if (!d->con) {
+	if (!d->con || !d->con->is_connected()) {
 		throw WLWarning(_("Could not establish connection to host"),
 		                _("Widelands could not establish a connection to the given "
 		                  "address.\n"

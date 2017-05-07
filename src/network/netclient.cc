@@ -2,6 +2,10 @@
 
 #include <memory>
 
+#include <SDL_net.h>
+
+#include "base/log.h"
+
 class NetClientImpl {
 	public:
 		NetClientImpl()

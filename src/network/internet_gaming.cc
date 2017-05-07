@@ -34,8 +34,7 @@
 /// will ensure
 /// that only one instance is running at time.
 InternetGaming::InternetGaming()
-   : sock_(nullptr),
-     sockset_(nullptr),
+   : con(),
      state_(OFFLINE),
      reg_(false),
      port_(INTERNET_GAMING_PORT),
@@ -58,8 +57,7 @@ InternetGaming::InternetGaming()
 
 /// resets all stored variables without the chat messages for a clean new login (not relogin)
 void InternetGaming::reset() {
-	sock_ = nullptr;
-	sockset_ = nullptr;
+	con.reset();
 	state_ = OFFLINE;
 	pwd_ = "";
 	reg_ = false;
@@ -97,26 +95,12 @@ InternetGaming& InternetGaming::ref() {
 void InternetGaming::initialize_connection() {
 	// First of all try to connect to the metaserver
 	log("InternetGaming: Connecting to the metaserver.\n");
-	IPaddress peer;
-	if (hostent* const he = gethostbyname(meta_.c_str())) {
-		peer.host = (reinterpret_cast<in_addr*>(he->h_addr_list[0]))->s_addr;
-		DIAG_OFF("-Wold-style-cast")
-		peer.port = htons(port_);
-		DIAG_ON("-Wold-style-cast")
-	} else
-		throw WLWarning(
-		   _("Connection problem"), "%s", _("Widelands could not connect to the metaserver."));
-
-	SDLNet_ResolveHost(&peer, meta_.c_str(), port_);
-	sock_ = SDLNet_TCP_Open(&peer);
-	if (sock_ == nullptr)
+	con = NetClient::connect(meta_, port_);
+	if (!con || !con->is_connected())
 		throw WLWarning(_("Could not establish connection to host"),
 		                _("Widelands could not establish a connection to the given address.\n"
 		                  "Either there was no metaserver running at the supposed port or\n"
 		                  "your network setup is broken."));
-
-	sockset_ = SDLNet_AllocSocketSet(1);
-	SDLNet_TCP_AddSocket(sockset_, sock_);
 
 	// Of course not 100% true, but we just care about an answer at all, so we reset this tracker
 	lastping_ = time(nullptr);
@@ -148,7 +132,7 @@ bool InternetGaming::login(const std::string& nick,
 	s.string(bool2str(reg));
 	if (reg)
 		s.string(pwd);
-	s.send(sock_);
+	con->send(s);
 
 	// Now let's see, whether the metaserver is answering
 	uint32_t const secs = time(nullptr);
@@ -191,7 +175,7 @@ bool InternetGaming::relogin() {
 	s.string(bool2str(reg_));
 	if (reg_)
 		s.string(pwd_);
-	s.send(sock_);
+	con->send(s);
 
 	// Now let's see, whether the metaserver is answering
 	uint32_t const secs = time(nullptr);
@@ -235,7 +219,7 @@ void InternetGaming::logout(const std::string& msgcode) {
 	SendPacket s;
 	s.string(IGPCMD_DISCONNECT);
 	s.string(msgcode);
-	s.send(sock_);
+	con->send(s);
 
 	const std::string& msg = InternetGamingMessages::get_message(msgcode);
 	log("InternetGaming: logout(%s)\n", msg.c_str());
@@ -278,26 +262,16 @@ void InternetGaming::handle_metaserver_communication() {
 	if (error())
 		return;
 	try {
-		while (sock_ != nullptr && SDLNet_CheckSockets(sockset_, 0) > 0) {
-			// Perform only one read operation, then process all packets
-			// from this read. This ensures that we process DISCONNECT
-			// packets that are followed immediately by connection close.
-
-			uint8_t buffer[512];
-			const int32_t bytes = SDLNet_TCP_Recv(sock_, buffer, sizeof(buffer));
-
-			if (bytes <= 0) {
-				handle_failed_read();
-				return;
-			}
-
-			deserializer_.read_data(buffer, bytes);
-
-			// Process all the packets from the last read
-			RecvPacket packet;
-			while (sock_ && deserializer_.write_packet(packet)) {
-				handle_packet(packet);
-			}
+		assert(con != nullptr);
+		// Check if the connection is still open
+		if (!con->is_connected()) {
+			handle_failed_read();
+			return;
+		}
+		// Process all available packets
+		RecvPacket packet;
+		while (con->try_receive(packet)) {
+			handle_packet(packet);
 		}
 	} catch (const std::exception& e) {
 		logout((boost::format(_("Something went wrong: %s")) % e.what()).str());
@@ -309,7 +283,7 @@ void InternetGaming::handle_metaserver_communication() {
 		if (clientupdateonmetaserver_) {
 			SendPacket s;
 			s.string(IGPCMD_CLIENTS);
-			s.send(sock_);
+			con->send(s);
 
 			clientupdateonmetaserver_ = false;
 		}
@@ -317,7 +291,7 @@ void InternetGaming::handle_metaserver_communication() {
 		if (gameupdateonmetaserver_) {
 			SendPacket s;
 			s.string(IGPCMD_GAMES);
-			s.send(sock_);
+			con->send(s);
 
 			gameupdateonmetaserver_ = false;
 		}
@@ -440,7 +414,7 @@ void InternetGaming::handle_packet(RecvPacket& packet) {
 			// Client received a PING and should immediately PONG as requested
 			SendPacket s;
 			s.string(IGPCMD_PONG);
-			s.send(sock_);
+			con->send(s);
 
 			lastping_ = time(nullptr);
 		}
@@ -624,7 +598,7 @@ void InternetGaming::join_game(const std::string& gamename) {
 	SendPacket s;
 	s.string(IGPCMD_GAME_CONNECT);
 	s.string(gamename);
-	s.send(sock_);
+	con->send(s);
 	gamename_ = gamename;
 	log("InternetGaming: Client tries to join a game with the name %s\n", gamename_.c_str());
 	state_ = IN_GAME;
@@ -643,7 +617,7 @@ void InternetGaming::open_game() {
 	s.string(IGPCMD_GAME_OPEN);
 	s.string(gamename_);
 	s.string("1024");  // Used to be maxclients, no longer used.
-	s.send(sock_);
+	con->send(s);
 	log("InternetGaming: Client opened a game with the name %s.\n", gamename_.c_str());
 	state_ = IN_GAME;
 
@@ -659,7 +633,7 @@ void InternetGaming::set_game_playing() {
 
 	SendPacket s;
 	s.string(IGPCMD_GAME_START);
-	s.send(sock_);
+	con->send(s);
 	log("InternetGaming: Client announced the start of the game %s.\n", gamename_.c_str());
 
 	// From now on we wait for a reply from the metaserver
@@ -676,7 +650,7 @@ void InternetGaming::set_game_done() {
 
 	SendPacket s;
 	s.string(IGPCMD_GAME_DISCONNECT);
-	s.send(sock_);
+	con->send(s);
 
 	gameip_ = "";
 	state_ = LOBBY;
@@ -773,14 +747,14 @@ void InternetGaming::send(const std::string& msg) {
 			}
 			// send the request to change the motd
 			m.string(arg);
-			m.send(sock_);
+			con->send(s);
 			return;
 		} else if (cmd == "announcement") {
 			// send the request to change the motd
 			SendPacket m;
 			m.string(IGPCMD_ANNOUNCEMENT);
 			m.string(arg);
-			m.send(sock_);
+			con->send(s);
 			return;
 		} else
 			// let everything else pass
@@ -792,7 +766,7 @@ void InternetGaming::send(const std::string& msg) {
 		s.string("");
 	}
 
-	s.send(sock_);
+	con->send(s);
 }
 
 /**
