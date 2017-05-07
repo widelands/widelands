@@ -12,6 +12,7 @@ include "scripting/infrastructure.lua"
 include "scripting/messages.lua"
 include "scripting/table.lua"
 include "scripting/ui.lua"
+include "scripting/animations.lua"
 
 sf = map.player_slots[1].starting_field
 second_port_field = map:get_field(37, 27)

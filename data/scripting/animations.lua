@@ -11,8 +11,7 @@
 --
 --    Reveal a given region field by field, where the fields 
 --    are chosen randomly. The region get hidden prior revealing.
---    The animation runs the specified time regardless how big the given
---    region is. So region(6) and region(13) will take the same time.
+--    The animation runs the specified time.
 --    See also :meth:`wl.map.Field.region`
 --
 --    :arg player: The player who get sight to the region
@@ -21,9 +20,10 @@
 --               Defaults to 1000 (1 sec)
 
 function reveal_randomly(plr, region, time)
-   local buildhelp_state = wl.ui.MapView().buildhelp
+   -- Make sure the region is hidden
    plr:hide_fields(region, true)
 
+   local buildhelp_state = wl.ui.MapView().buildhelp
    if buildhelp_state then
       -- Turn off buildhelp during animation
       wl.ui.MapView().buildhelp = false
@@ -38,8 +38,12 @@ function reveal_randomly(plr, region, time)
 
    -- Reveal field by field
    while #region > 0 do
+      local t = {}
       local id = math.random(1, #region)
-      plr:reveal_fields({region[id]})
+      table.insert(t, region[id])
+      local id2 = math.random(1, #region)
+      table.insert(t, region[id2])
+      plr:reveal_fields(t)
       sleep(delay)
       table.remove(region, id)
    end
@@ -127,4 +131,31 @@ function hide_concentric(plr, center, max_radius, delay)
    end
    -- Hide the remaining field
    plr:hide_fields({center},true)
+end
+
+-- RST
+-- .. function:: get_sees_fields(player)
+--
+--    Gather all fields a player can see in the current view. The current view 
+--    is the whole area of the map in the current game window. You can use this
+--    function to get an unregular (non hexagonal) region and feed e.g. 
+--    :meth:`reveal_randomly()` with it.
+--
+--    :arg player: The player for whom the fields get gathered
+--    :returns: A table containing all visible fields in the current view
+
+function get_sees_fields(plr)
+   local sees_fields = {}
+   for x=0, wl.Game().map.width-1 do
+      for y=0, wl.Game().map.height-1  do
+         f = wl.Game().map:get_field(x,y)
+         if wl.ui.MapView():is_visible(f) then
+            -- Gather only fields which are seen in the view
+            if plr:sees_field(f) then
+               table.insert(sees_fields, f)
+            end
+         end
+      end
+   end
+   return sees_fields
 end
