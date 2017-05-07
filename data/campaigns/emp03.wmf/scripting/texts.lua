@@ -60,7 +60,8 @@ obj_build_sawmill_stonemason_and_lumberjacks = {
       listitem_bullet(_[[Build a lumberjack’s house, a sawmill and a stonemason's house as soon as there is enough space for them.]])
    ),
 }
-
+-- NOCOM(#codereview): Explain how to do that - this is still a tutorial campaign.
+-- Also, the value is not checked (objective won't complete). What value shold the demand be lowered to?
 obj_lower_marble_column_demand = {
    name = "lower_marble_column_demand",
    title=_"Lower the demand for marble columns in the economy settings",
@@ -254,13 +255,13 @@ amalea_1 = {
    title=_"Amalea’s Plan",
    body= amalea2(_"Amalea smiles…",
       -- TRANSLATORS: Amalea
-      _([[Lutius, this can be very tricky, but we can reach it. First of all, we need patience as well as speed and a plan to succeed in this part of the world.]])
+      _([[Lutius, this may seem very tricky, but we can do it. First of all, we need patience as well as speed and a plan to succeed in this part of the world.]])
       .. paragraphdivider() ..
       -- TRANSLATORS: Amalea
-      _([[I think we should try to reveal some building space by cutting all the stone in a quarry.]])
+      _([[I think we should try to reveal some building space by cutting up all the rocks in a quarry.]])
       .. paragraphdivider() ..
       -- TRANSLATORS: Amalea
-      _([[Additionally, this would gain us some stone and some marble to build up our new world. We can use them as soon as there will finally be enough space for buildings.]]))
+      _([[Additionally, this would gain us some granite and some marble to build up our new world. We can use them as soon as there will finally be enough space for buildings.]]))
       .. new_objectives(obj_build_quarry),
    posy=1,
    h=500,
