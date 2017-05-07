@@ -1989,16 +1989,22 @@ void GameHost::handle_network() {
 				Client& client = d->clients.at(i);
 
 				while (client.sock && SDLNet_SocketReady(client.sock)) {
-					if (!client.deserializer.read(client.sock)) {
+
+					uint8_t buffer[512];
+					const int32_t bytes = SDLNet_TCP_Recv(client.sock, buffer, sizeof(buffer));
+
+					if (bytes <= 0) {
 						disconnect_client(i, "CONNECTION_LOST", false);
 						break;
 					}
 
+					client.deserializer.read_data(buffer, bytes);
+
 					//  Handle all available packets immediately after each read, so
 					//  that we do not miss any commands (especially DISCONNECT...).
-					while (client.sock && client.deserializer.avail()) {
-						RecvPacket r(client.deserializer);
-						handle_packet(i, r);
+					RecvPacket packet;
+					while (client.sock && client.deserializer.write_packet(packet)) {
+						handle_packet(i, packet);
 					}
 				}
 			} catch (const DisconnectException& e) {

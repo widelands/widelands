@@ -58,14 +58,7 @@ struct GameClientImpl {
 
 	std::string localplayername;
 
-	/// The socket that connects us to the host
-	TCPsocket sock;
-
-	/// Socket set used for selection
-	SDLNet_SocketSet sockset;
-
-	/// Deserializer acts as a buffer for packets (reassembly/splitting up)
-	Deserializer deserializer;
+	std::unique_ptr<NetClient> con;
 
 	/// Currently active modal panel. Receives an end_modal on disconnect
 	UI::Panel* modal;
@@ -96,18 +89,16 @@ struct GameClientImpl {
 	std::vector<ChatMessage> chatmessages;
 };
 
-GameClient::GameClient(IPaddress* const svaddr, const std::string& playername, bool internet)
+GameClient::GameClient(const std::string& host, const uint16_t port, const std::string& playername, bool internet)
    : d(new GameClientImpl), internet_(internet) {
-	d->sock = SDLNet_TCP_Open(svaddr);
-	if (d->sock == nullptr)
+   	d->con = NetClient::connect(host, port);
+	if (!d->con) {
 		throw WLWarning(_("Could not establish connection to host"),
 		                _("Widelands could not establish a connection to the given "
 		                  "address.\n"
 		                  "Either no Widelands server was running at the supposed port or\n"
 		                  "the server shut down as you tried to connect."));
-
-	d->sockset = SDLNet_AllocSocketSet(1);
-	SDLNet_TCP_AddSocket(d->sockset, d->sock);
+	}
 
 	d->settings.playernum = UserSettings::not_connected();
 	d->settings.usernum = -2;
@@ -123,10 +114,9 @@ GameClient::GameClient(IPaddress* const svaddr, const std::string& playername, b
 }
 
 GameClient::~GameClient() {
-	if (d->sock != nullptr)
+	assert(d->con != nullptr);
+	if (d->con->is_connected())
 		disconnect("CLIENT_LEFT_GAME", "", true, false);
-
-	SDLNet_FreeSocketSet(d->sockset);
 
 	delete d;
 }
@@ -137,7 +127,7 @@ void GameClient::run() {
 	s.unsigned_8(NETWORK_PROTOCOL_VERSION);
 	s.string(d->localplayername);
 	s.string(build_id());
-	s.send(d->sock);
+	d->con->send(s);
 
 	d->settings.multiplayer = true;
 
@@ -255,7 +245,7 @@ void GameClient::send_player_command(Widelands::PlayerCommand& pc) {
 	s.unsigned_8(NETCMD_PLAYERCOMMAND);
 	s.signed_32(d->game->get_gametime());
 	pc.serialize(s);
-	s.send(d->sock);
+	d->con->send(s);
 
 	d->lasttimestamp = d->game->get_gametime();
 	d->lasttimestamp_realtime = SDL_GetTicks();
@@ -343,7 +333,7 @@ void GameClient::set_player_tribe(uint8_t number,
 	s.unsigned_8(number);
 	s.string(tribe);
 	s.unsigned_8(random_tribe ? 1 : 0);
-	s.send(d->sock);
+	d->con->send(s);
 }
 
 void GameClient::set_player_team(uint8_t number, Widelands::TeamNumber team) {
@@ -354,7 +344,7 @@ void GameClient::set_player_team(uint8_t number, Widelands::TeamNumber team) {
 	s.unsigned_8(NETCMD_SETTING_CHANGETEAM);
 	s.unsigned_8(number);
 	s.unsigned_8(team);
-	s.send(d->sock);
+	d->con->send(s);
 }
 
 void GameClient::set_player_closeable(uint8_t, bool) {
@@ -369,7 +359,7 @@ void GameClient::set_player_shared(uint8_t number, uint8_t player) {
 	s.unsigned_8(NETCMD_SETTING_CHANGESHARED);
 	s.unsigned_8(number);
 	s.unsigned_8(player);
-	s.send(d->sock);
+	d->con->send(s);
 }
 
 void GameClient::set_player_init(uint8_t number, uint8_t) {
@@ -380,7 +370,7 @@ void GameClient::set_player_init(uint8_t number, uint8_t) {
 	SendPacket s;
 	s.unsigned_8(NETCMD_SETTING_CHANGEINIT);
 	s.unsigned_8(number);
-	s.send(d->sock);
+	d->con->send(s);
 }
 
 void GameClient::set_player_name(uint8_t, const std::string&) {
@@ -420,7 +410,7 @@ void GameClient::set_player_number(uint8_t const number) {
 	SendPacket s;
 	s.unsigned_8(NETCMD_SETTING_CHANGEPOSITION);
 	s.unsigned_8(number);
-	s.send(d->sock);
+	d->con->send(s);
 }
 
 uint32_t GameClient::real_speed() {
@@ -441,7 +431,7 @@ void GameClient::set_desired_speed(uint32_t speed) {
 		SendPacket s;
 		s.unsigned_8(NETCMD_SETSPEED);
 		s.unsigned_16(d->desiredspeed);
-		s.send(d->sock);
+		d->con->send(s);
 	}
 }
 
@@ -492,7 +482,7 @@ void GameClient::send(const std::string& msg) {
 	SendPacket s;
 	s.unsigned_8(NETCMD_CHAT);
 	s.string(msg);
-	s.send(d->sock);
+	d->con->send(s);
 }
 
 const std::vector<ChatMessage>& GameClient::get_messages() const {
@@ -507,19 +497,20 @@ void GameClient::send_time() {
 	SendPacket s;
 	s.unsigned_8(NETCMD_TIME);
 	s.signed_32(d->game->get_gametime());
-	s.send(d->sock);
+	d->con->send(s);
 
 	d->lasttimestamp = d->game->get_gametime();
 	d->lasttimestamp_realtime = SDL_GetTicks();
 }
 
 void GameClient::syncreport() {
-	if (d->sock) {
+	assert(d->con != nullptr);
+	if (d->con->is_connected()) {
 		SendPacket s;
 		s.unsigned_8(NETCMD_SYNCREPORT);
 		s.signed_32(d->game->get_gametime());
 		s.data(d->game->get_sync_hash().data, 16);
-		s.send(d->sock);
+		d->con->send(s);
 	}
 }
 
@@ -558,7 +549,7 @@ void GameClient::handle_packet(RecvPacket& packet) {
 	case NETCMD_PING: {
 		SendPacket s;
 		s.unsigned_8(NETCMD_PONG);
-		s.send(d->sock);
+		d->con->send(s);
 
 		log("[Client] Pong!\n");
 		break;
@@ -614,7 +605,7 @@ void GameClient::handle_packet(RecvPacket& packet) {
 		// Yes we need the file!
 		SendPacket s;
 		s.unsigned_8(NETCMD_NEW_FILE_AVAILABLE);
-		s.send(d->sock);
+		d->con->send(s);
 
 		if (file_)
 			delete file_;
@@ -648,7 +639,7 @@ void GameClient::handle_packet(RecvPacket& packet) {
 		s.unsigned_8(NETCMD_FILE_PART);
 		s.unsigned_32(part);
 		s.string(file_->md5sum);
-		s.send(d->sock);
+		d->con->send(s);
 
 		FilePart fp;
 
@@ -691,12 +682,12 @@ void GameClient::handle_packet(RecvPacket& packet) {
 				// Something went wrong! We have to rerequest the file.
 				s.reset();
 				s.unsigned_8(NETCMD_NEW_FILE_AVAILABLE);
-				s.send(d->sock);
+				d->con->send(s);
 				// Notify the players
 				s.reset();
 				s.unsigned_8(NETCMD_CHAT);
 				s.string(_("/me 's file failed md5 checksumming."));
-				s.send(d->sock);
+				d->con->send(s);
 				g_fs->fs_unlink(file_->filename);
 			}
 			// Check file for validity
@@ -725,7 +716,7 @@ void GameClient::handle_packet(RecvPacket& packet) {
 				s.unsigned_8(NETCMD_CHAT);
 				s.string(_("/me checked the received file. Although md5 check summing succeeded, "
 				           "I can not handle the file."));
-				s.send(d->sock);
+				d->con->send(s);
 			}
 		}
 		break;
@@ -875,20 +866,16 @@ void GameClient::handle_network() {
 	if (internet_)
 		InternetGaming::ref().handle_metaserver_communication();
 	try {
-		while (d->sock != nullptr && SDLNet_CheckSockets(d->sockset, 0) > 0) {
-			// Perform only one read operation, then process all packets
-			// from this read. This ensures that we process DISCONNECT
-			// packets that are followed immediately by connection close.
-			if (!d->deserializer.read(d->sock)) {
-				disconnect("CONNECTION_LOST", "", false);
-				return;
-			}
-
-			// Process all the packets from the last read
-			while (d->sock && d->deserializer.avail()) {
-				RecvPacket packet(d->deserializer);
-				handle_packet(packet);
-			}
+		assert(d->con != nullptr);
+		// Check if the connection is still open
+		if (!d->con->is_connected()) {
+			disconnect("CONNECTION_LOST", "", false);
+			return;
+		}
+		// Process all available packets
+		RecvPacket packet;
+		while (d->con->try_receive(packet)) {
+			handle_packet(packet);
 		}
 	} catch (const DisconnectException& e) {
 		disconnect(e.what());
@@ -905,7 +892,8 @@ void GameClient::disconnect(const std::string& reason,
                            bool const showmsg) {
 	log("[Client]: disconnect(%s, %s)\n", reason.c_str(), arg.c_str());
 
-	if (d->sock) {
+	assert(d->con != nullptr);
+	if (d->con->is_connected()) {
 		if (sendreason) {
 			SendPacket s;
 			s.unsigned_8(NETCMD_DISCONNECT);
@@ -914,12 +902,10 @@ void GameClient::disconnect(const std::string& reason,
 			if (!arg.empty()) {
 				s.string(arg);
 			}
-			s.send(d->sock);
+			d->con->send(s);
 		}
 
-		SDLNet_TCP_DelSocket(d->sockset, d->sock);
-		SDLNet_TCP_Close(d->sock);
-		d->sock = nullptr;
+		d->con->close();
 	}
 
 	bool const trysave = showmsg && d->game;

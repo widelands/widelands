@@ -375,6 +375,7 @@ void FullscreenMenuInternetLobby::clicked_joingame() {
 		}
 		std::string ip = InternetGaming::ref().ip();
 
+		// TODO(Notabilis): Change this for IPv6
 		//  convert IPv6 addresses returned by the metaserver to IPv4 addresses.
 		//  At the moment SDL_net does not support IPv6 anyways.
 		if (!ip.compare(0, 7, "::ffff:")) {
@@ -382,6 +383,8 @@ void FullscreenMenuInternetLobby::clicked_joingame() {
 			log("InternetGaming: cut IPv6 address: %s\n", ip.c_str());
 		}
 
+		/*
+		// NOCOM(Notabilis): This section does not seem to make any sense??
 		IPaddress peer;
 		if (hostent* const he = gethostbyname(ip.c_str())) {
 			peer.host = (reinterpret_cast<in_addr*>(he->h_addr_list[0]))->s_addr;
@@ -399,8 +402,8 @@ void FullscreenMenuInternetLobby::clicked_joingame() {
 			mmb.run<UI::Panel::Returncodes>();
 		}
 		SDLNet_ResolveHost(&peer, ip.c_str(), WIDELANDS_PORT);
-
-		GameClient netgame(&peer, InternetGaming::ref().get_local_clientname(), true);
+		*/
+		GameClient netgame(ip, WIDELANDS_PORT, InternetGaming::ref().get_local_clientname(), true);
 		netgame.run();
 	} else
 		throw wexception("No server selected! That should not happen!");

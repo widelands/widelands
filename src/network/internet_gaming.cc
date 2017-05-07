@@ -282,14 +282,20 @@ void InternetGaming::handle_metaserver_communication() {
 			// Perform only one read operation, then process all packets
 			// from this read. This ensures that we process DISCONNECT
 			// packets that are followed immediately by connection close.
-			if (!deserializer_.read(sock_)) {
+
+			uint8_t buffer[512];
+			const int32_t bytes = SDLNet_TCP_Recv(sock_, buffer, sizeof(buffer));
+
+			if (bytes <= 0) {
 				handle_failed_read();
 				return;
 			}
 
+			deserializer_.read_data(buffer, bytes);
+
 			// Process all the packets from the last read
-			while (sock_ && deserializer_.avail()) {
-				RecvPacket packet(deserializer_);
+			RecvPacket packet;
+			while (sock_ && deserializer_.write_packet(packet)) {
 				handle_packet(packet);
 			}
 		}
@@ -827,7 +833,7 @@ void InternetGaming::format_and_add_chat(std::string from,
 
 	receive(c);
 	if (system && (state_ == IN_GAME)) {
-		// Save system chat messages seperately as well, so the nethost can import and show them in
+		// Save system chat messages separately as well, so the nethost can import and show them in
 		// game;
 		c.msg = "METASERVER: " + msg;
 		ingame_system_chat_.push_back(c);

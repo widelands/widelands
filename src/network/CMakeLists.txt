@@ -10,6 +10,10 @@ wl_library(network
     gameclient.h
     gamehost.cc
     gamehost.h
+    netclient.cc
+    netclient.h
+    nethost.cc
+    nethost.h
     network.cc
     network.h
     network_gaming_messages.cc

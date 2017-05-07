@@ -1164,6 +1164,7 @@ void WLApplication::mainmenu_multiplayer() {
 			FullscreenMenuNetSetupLAN ns;
 			menu_result = ns.run<FullscreenMenuBase::MenuTarget>();
 			std::string playername = ns.get_playername();
+			// TODO(Notabilis): This has to be updated for IPv6
 			uint32_t addr;
 			uint16_t port;
 			bool const host_address = ns.get_host_address(addr, port);
@@ -1175,16 +1176,21 @@ void WLApplication::mainmenu_multiplayer() {
 				break;
 			}
 			case FullscreenMenuBase::MenuTarget::kJoingame: {
-				IPaddress peer;
+				//IPaddress peer;
 
 				if (!host_address)
 					throw WLWarning(
 					   "Invalid Address", "%s", "The address of the game server is invalid");
 
-				peer.host = addr;
-				peer.port = port;
+				//peer.host = addr;
+				//peer.port = port;
 
-				GameClient netgame(&peer, playername);
+				// TODO(Notabilis): Make this prettier
+				char ip_str[] = {"255.255.255.255"};
+				sprintf(ip_str, "%d.%d.%d.%d", (addr & 0x000000ff), (addr & 0x0000ff00) >> 8,
+												(addr & 0x00ff0000) >> 16, (addr & 0xff000000) >> 24);
+				port = (port >> 8) | ((port & 0xFF) << 8);
+				GameClient netgame(ip_str, port, playername);
 				netgame.run();
 				break;
 			}
