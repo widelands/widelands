@@ -519,14 +519,16 @@ uint16_t TextNode::hotspot_y() {
 }
 
 UI::RenderedText* TextNode::render(TextureCache* texture_cache) {
-	// NOCOM
+	// NOCOM TextNode
 	const Image& img =
 	   font_.render(txt_, nodestyle_.font_color, nodestyle_.font_style, texture_cache);
-	Texture* rv = new Texture(img.width(), img.height());
-	rv->blit(Rectf(0, 0, img.width(), img.height()), img, Rectf(0, 0, img.width(), img.height()), 1.,
+
+	Texture* texture = new Texture(img.width(), img.height());
+	texture->blit(Rectf(0, 0, img.width(), img.height()), img, Rectf(0, 0, img.width(), img.height()), 1.,
 	         BlendMode::Copy);
+
 	UI::RenderedText* rendered_text = new UI::RenderedText();
-	rendered_text->texts.push_back(std::unique_ptr<const UI::RenderedRect>(new UI::RenderedRect(Vector2i(0, 0), (rv))));
+	rendered_text->texts.push_back(std::unique_ptr<const UI::RenderedRect>(new UI::RenderedRect(Vector2i(0, 0), (texture))));
 	return rendered_text;
 }
 
@@ -558,14 +560,16 @@ private:
 UI::RenderedText* FillingTextNode::render(TextureCache* texture_cache) {
 	const Image& t =
 	   font_.render(txt_, nodestyle_.font_color, nodestyle_.font_style, texture_cache);
-	Texture* rv = new Texture(w_, h_);
+
+	Texture* texture = new Texture(w_, h_);
 	for (uint16_t curx = 0; curx < w_; curx += t.width()) {
 		Rectf srcrect(0.f, 0.f, min<int>(t.width(), w_ - curx), h_);
-		rv->blit(Rectf(curx, 0, srcrect.w, srcrect.h), t, srcrect, 1., BlendMode::Copy);
+		texture->blit(Rectf(curx, 0, srcrect.w, srcrect.h), t, srcrect, 1., BlendMode::Copy);
 	}
-	// NOCOM
+
+	// NOCOM FillingTextNode
 	UI::RenderedText* rendered_text = new UI::RenderedText();
-	rendered_text->texts.push_back(std::unique_ptr<const UI::RenderedRect>(new UI::RenderedRect(Vector2i(0, 0), (rv))));
+	rendered_text->texts.push_back(std::unique_ptr<const UI::RenderedRect>(new UI::RenderedRect(Vector2i(0, 0), (texture))));
 	return rendered_text;
 }
 
@@ -583,11 +587,11 @@ public:
 
 	UI::RenderedText* render(TextureCache* texture_cache) override {
 		if (show_spaces_) {
-			Texture* rv = new Texture(w_, h_);
-			rv->fill_rect(Rectf(0, 0, w_, h_), RGBAColor(0xcc, 0, 0, 0xcc));
-			// NOCOM
+			Texture* texture = new Texture(w_, h_);
+			texture->fill_rect(Rectf(0, 0, w_, h_), RGBAColor(0xcc, 0, 0, 0xcc));
+			// NOCOM WordSpacerNode
 			UI::RenderedText* rendered_text = new UI::RenderedText();
-			rendered_text->texts.push_back(std::unique_ptr<const UI::RenderedRect>(new UI::RenderedRect(Vector2i(0, 0), (rv))));
+			rendered_text->texts.push_back(std::unique_ptr<const UI::RenderedRect>(new UI::RenderedRect(Vector2i(0, 0), (texture))));
 			return rendered_text;
 		}
 		return TextNode::render(texture_cache);
@@ -645,7 +649,7 @@ public:
 		return h_;
 	}
 	UI::RenderedText* render(TextureCache* /* texture_cache */) override {
-		Texture* rv = new Texture(w_, h_);
+		Texture* texture = new Texture(w_, h_);
 
 		// Draw background image (tiling)
 		if (background_image_) {
@@ -656,14 +660,14 @@ public:
 				dst.y = 0;
 				srcrect.w = dst.w = min<int>(background_image_->width(), w_ - curx);
 				srcrect.h = dst.h = h_;
-				rv->blit(dst, *background_image_, srcrect, 1., BlendMode::Copy);
+				texture->blit(dst, *background_image_, srcrect, 1., BlendMode::Copy);
 			}
 		} else {
-			rv->fill_rect(Rectf(0, 0, w_, h_), RGBAColor(255, 255, 255, 0));
+			texture->fill_rect(Rectf(0, 0, w_, h_), RGBAColor(255, 255, 255, 0));
 		}
-		// NOCOM
+		// NOCOM SpaceNode
 		UI::RenderedText* rendered_text = new UI::RenderedText();
-		rendered_text->texts.push_back(std::unique_ptr<const UI::RenderedRect>(new UI::RenderedRect(Vector2i(0, 0), (rv))));
+		rendered_text->texts.push_back(std::unique_ptr<const UI::RenderedRect>(new UI::RenderedRect(Vector2i(0, 0), (texture))));
 		return rendered_text;
 	}
 	bool is_expanding() override {
@@ -716,9 +720,9 @@ public:
 	DesiredWidth desired_width() const {
 		return desired_width_;
 	}
-
+	// NOCOM can these all be const UI::RenderedText*?
 	UI::RenderedText* render(TextureCache* texture_cache) override {
-		// NOCOM memory handling for the textures in the rendered text?
+		// NOCOM DivTagRenderNode
 		if (width() > g_gr->max_texture_size() || height() > g_gr->max_texture_size()) {
 			const std::string error_message =
 			   (boost::format("Texture (%d, %d) too big! Maximum size is %d.") % width() % height() %
@@ -762,7 +766,6 @@ public:
 			Rectf dst(n->x() + margin_.left, n->y() + margin_.top, rendered_node->width(),
 						 rendered_node->height());
 			Rectf src(0, 0, rendered_node->width(), rendered_node->height());
-			// NOCOM
 			rv->blit(
 				dst, *rendered_node->texts[0]->image(), src, 1., set_alpha ? BlendMode::Copy : BlendMode::UseAlpha);
 			delete rendered_node;
@@ -840,14 +843,15 @@ private:
 	const Image* image_;
 	const double scale_;
 };
-// NOCOM can these all be const UI::RenderedText*?
+
 UI::RenderedText* ImgRenderNode::render(TextureCache* /* texture_cache */) {
-	// NOCOM
-	Texture* rv = new Texture(width(), height());
-	rv->blit(Rectf(0, 0, width(), height()), *image_, Rectf(0, 0, image_->width(), image_->height()),
+	// NOCOM ImgRenderNode
+	Texture* texture = new Texture(width(), height());
+	texture->blit(Rectf(0, 0, width(), height()), *image_, Rectf(0, 0, image_->width(), image_->height()),
 	         1., BlendMode::Copy);
+
 	UI::RenderedText* rendered_text = new UI::RenderedText();
-	rendered_text->texts.push_back(std::unique_ptr<const UI::RenderedRect>(new UI::RenderedRect(Vector2i(0, 0), (rv))));
+	rendered_text->texts.push_back(std::unique_ptr<const UI::RenderedRect>(new UI::RenderedRect(Vector2i(0, 0), (texture))));
 	return rendered_text;
 }
 // End: Helper Stuff

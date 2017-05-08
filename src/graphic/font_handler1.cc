@@ -77,7 +77,7 @@ public:
 	const RenderedText* render(const string& text, uint16_t w = 0) override {
 		const string hash = boost::lexical_cast<string>(w) + text;
 		if (render_results_.count(hash) != 1) {
-			log("\nNOCOM needs render (%d): %s\n", w, text.c_str());
+			log("\nNOCOM rendering new text (%d): %s\n", w, text.c_str());
 			render_results_.insert(std::make_pair(hash, std::move(rt_renderer_->render(text, w))));
 		} else {
 			assert(image_cache_->has(hash));

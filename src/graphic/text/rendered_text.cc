@@ -78,6 +78,8 @@ void RenderedText::draw(RenderTarget& dst,
 		//if (contains_origin && contains_opposite) {
 		Vector2f blit_point(aligned_pos.x + rect->get_x(),  aligned_pos.y + rect->get_y());
 		dst.blitrect(blit_point, rect->image(), region);
+		// TODO(GunChleoc): Remove this line when testing is done.
+		dst.draw_rect(Rectf(blit_point.x, blit_point.y, rect->width(), rect->height()), RGBColor(100, 100, 100));
 		//}
 	}
 
