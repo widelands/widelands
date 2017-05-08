@@ -87,4 +87,13 @@ void RenderedText::draw(RenderTarget& dst, const Vector2i& position, UI::Align a
 	draw(dst, position, Recti(0, 0, width(), height()), align);
 }
 
+std::unique_ptr<Texture> RenderedText::as_texture() const {
+	std::unique_ptr<Texture> texture(new Texture(width(), height()));
+	for (const auto& rect : texts) {
+		const Rectf dest(rect->get_x(), rect->get_y(), rect->width(), rect->height());
+		texture->blit(dest, *rect->image(), dest, 1., BlendMode::Copy);
+	}
+	return texture;
+}
+
 }  // namespace UI

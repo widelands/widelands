@@ -26,6 +26,7 @@
 #include "base/vector.h"
 #include "graphic/image.h"
 #include "graphic/rendertarget.h"
+#include "graphic/texture.h"
 
 namespace UI {
 
@@ -54,6 +55,8 @@ struct RenderedText {
 	int height() const;
 	void draw(RenderTarget& dst, const Vector2i& position, Recti region, UI::Align align = UI::Align::kLeft) const;
 	void draw(RenderTarget& dst, const Vector2i& position, UI::Align align = UI::Align::kLeft) const;
+	/// Blit everything into a single texture. Use this only for testing purposes.
+	std::unique_ptr<Texture> as_texture() const;
 };
 
 } // namespace UI
