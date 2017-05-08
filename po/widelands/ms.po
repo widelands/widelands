@@ -9,9 +9,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-04-06 19:07+0000\n"
-"PO-Revision-Date: 2017-04-09 05:35+0000\n"
-"Last-Translator: abuyop <abuyop@gmail.com>\n"
+"POT-Creation-Date: 2017-04-28 06:01+0000\n"
+"PO-Revision-Date: 2017-04-28 06:04+0000\n"
+"Last-Translator: GunChleoc\n"
 "Language-Team: Malay (http://www.transifex.com/widelands/widelands/language/ms/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -981,7 +981,7 @@ msgid "Loading map…"
 msgstr "Memuatkan peta..."
 
 #: ../../src/logic/game.cc:338 ../../src/logic/game.cc:373
-#: ../../src/ui_basic/progresswindow.cc:50 ../../src/wlapplication.cc:1346
+#: ../../src/ui_basic/progresswindow.cc:50 ../../src/wlapplication.cc:1348
 msgid "Loading…"
 msgstr "Memuatkan..."
 
@@ -1010,7 +1010,7 @@ msgstr "Permainan ini disimpan menggunakan versi Widelands lebih lama dan tidak 
 msgid "No description defined"
 msgstr "Tiada keterangan ditakrif"
 
-#: ../../src/logic/map_objects/immovable.cc:512
+#: ../../src/logic/map_objects/immovable.cc:513
 #: ../../src/logic/map_objects/tribes/constructionsite.cc:72
 #, c-format
 msgid "%i%% built"
@@ -1047,33 +1047,33 @@ msgid_plural "%1%(+%2%) soldiers"
 msgstr[0] "%1%(+%2%) askar"
 
 #. * TRANSLATORS: Militarysite lost (taken/destroyed by enemy)
-#: ../../src/logic/map_objects/tribes/militarysite.cc:774
+#: ../../src/logic/map_objects/tribes/militarysite.cc:775
 msgctxt "building"
 msgid "Lost!"
 msgstr "Ditawan!"
 
-#: ../../src/logic/map_objects/tribes/militarysite.cc:775
+#: ../../src/logic/map_objects/tribes/militarysite.cc:776
 msgid "Militarysite lost!"
 msgstr "Tapak tentera ditawan!"
 
 #. * TRANSLATORS: Message title.
 #. * TRANSLATORS: If you run out of space, you can also translate this as
 #. "Success!"
-#: ../../src/logic/map_objects/tribes/militarysite.cc:815
+#: ../../src/logic/map_objects/tribes/militarysite.cc:816
 msgid "Enemy Defeated!"
 msgstr "Erwyn Dikalahkan!"
 
-#: ../../src/logic/map_objects/tribes/militarysite.cc:815
+#: ../../src/logic/map_objects/tribes/militarysite.cc:816
 msgid "Enemy at site defeated!"
 msgstr "Pihak musuh dalam tapak telah kalah!"
 
 #. * TRANSLATORS: Militarysite is being attacked
-#: ../../src/logic/map_objects/tribes/militarysite.cc:857
+#: ../../src/logic/map_objects/tribes/militarysite.cc:858
 msgctxt "building"
 msgid "Attack!"
 msgstr "Serang!"
 
-#: ../../src/logic/map_objects/tribes/militarysite.cc:857
+#: ../../src/logic/map_objects/tribes/militarysite.cc:858
 msgid "You are under attack"
 msgstr "Anda telah diserang"
 
@@ -1245,99 +1245,99 @@ msgstr "(dihentikan)"
 msgid "%i%%"
 msgstr "%i%%"
 
-#: ../../src/logic/map_objects/tribes/productionsite.cc:943
+#: ../../src/logic/map_objects/tribes/productionsite.cc:944
 msgid "Can’t find any more resources!"
 msgstr "Tidak dapat cari sumber lagi!"
 
-#: ../../src/logic/map_objects/tribes/ship.cc:416
+#: ../../src/logic/map_objects/tribes/ship.cc:417
 msgid "Port Space"
 msgstr "Ruang Pelabuhan"
 
-#: ../../src/logic/map_objects/tribes/ship.cc:416
+#: ../../src/logic/map_objects/tribes/ship.cc:417
 msgid "Port Space Found"
 msgstr "Ruang Pelabuhan Ditemui"
 
-#: ../../src/logic/map_objects/tribes/ship.cc:417
+#: ../../src/logic/map_objects/tribes/ship.cc:418
 msgid "An expedition ship found a new port build space."
 msgstr "Sebuah kapal ekspedisi telah menemui ruang untuk pembinaan pelabuhan baharu."
 
-#: ../../src/logic/map_objects/tribes/ship.cc:538
+#: ../../src/logic/map_objects/tribes/ship.cc:539
 msgid "Island Circumnavigated"
 msgstr "Sekeliling Pulau Dijelajahi"
 
 #. * TRANSLATORS: A ship has circumnavigated an island and is waiting
 #. for orders
-#: ../../src/logic/map_objects/tribes/ship.cc:538
+#: ../../src/logic/map_objects/tribes/ship.cc:539
 msgctxt "ship"
 msgid "Waiting"
 msgstr "Menunggu"
 
-#: ../../src/logic/map_objects/tribes/ship.cc:539
+#: ../../src/logic/map_objects/tribes/ship.cc:540
 msgid "An expedition ship sailed around its island without any events."
 msgstr "Sebuah kapal ekspedisi berlayar mengelilingi pulay tanpa apa-apa arahan."
 
-#: ../../src/logic/map_objects/tribes/ship.cc:603
+#: ../../src/logic/map_objects/tribes/ship.cc:604
 msgid "Coast Reached"
 msgstr "Pantai Dilabuhi"
 
 #. * TRANSLATORS: A ship has discovered land
-#: ../../src/logic/map_objects/tribes/ship.cc:603
+#: ../../src/logic/map_objects/tribes/ship.cc:604
 msgid "Land Ahoy!"
 msgstr "Daratan Ditemui!"
 
-#: ../../src/logic/map_objects/tribes/ship.cc:604
+#: ../../src/logic/map_objects/tribes/ship.cc:605
 msgid ""
 "An expedition ship reached a coast and is waiting for further commands."
 msgstr "Sebuah kapal ekspedisi telah berlabuh dan menunggu arahan lanjut."
 
-#: ../../src/logic/map_objects/tribes/ship.cc:659
+#: ../../src/logic/map_objects/tribes/ship.cc:660
 msgid "New port construction site is gone"
 msgstr "Tapak pembinaan pelabuhan baharu telah hilang"
 
-#: ../../src/logic/map_objects/tribes/ship.cc:659
+#: ../../src/logic/map_objects/tribes/ship.cc:660
 msgid "Port Lost!"
 msgstr "Pelabuhan Ditawan!"
 
-#: ../../src/logic/map_objects/tribes/ship.cc:660
+#: ../../src/logic/map_objects/tribes/ship.cc:661
 msgid "Unloading of wares failed, expedition is cancelled now."
 msgstr "Kerja-kerja memuat naik barangan telah gagal, ekspedisi dibatalkan sekarang."
 
 #. * TRANSLATORS: Ship expedition ready
-#: ../../src/logic/map_objects/tribes/ship.cc:835
+#: ../../src/logic/map_objects/tribes/ship.cc:836
 msgctxt "ship"
 msgid "Expedition"
 msgstr "Ekspedisi"
 
-#: ../../src/logic/map_objects/tribes/ship.cc:835
+#: ../../src/logic/map_objects/tribes/ship.cc:836
 msgid "Expedition Ready"
 msgstr "Ekspedisi Sedia"
 
-#: ../../src/logic/map_objects/tribes/ship.cc:836
+#: ../../src/logic/map_objects/tribes/ship.cc:837
 msgid "An expedition ship is waiting for your commands."
 msgstr "Kapal ekspedisi menunggu arahan tuan."
 
 #. * TRANSLATORS: This is a ship state
-#: ../../src/logic/map_objects/tribes/ship.cc:957
+#: ../../src/logic/map_objects/tribes/ship.cc:976
 msgctxt "ship_state"
 msgid "Shipping"
 msgstr "Perkapalan"
 
 #. * TRANSLATORS: This is a ship state. An expedition is waiting for your
 #. commands.
-#: ../../src/logic/map_objects/tribes/ship.cc:961
+#: ../../src/logic/map_objects/tribes/ship.cc:980
 msgctxt "ship_state"
 msgid "Waiting"
 msgstr "Menunggu"
 
 #. * TRANSLATORS: This is a ship state. An expedition is scouting for port
 #. spaces.
-#: ../../src/logic/map_objects/tribes/ship.cc:965
+#: ../../src/logic/map_objects/tribes/ship.cc:984
 msgctxt "ship_state"
 msgid "Scouting"
 msgstr "Peninjauan"
 
 #. * TRANSLATORS: This is a ship state. An expedition has found a port space.
-#: ../../src/logic/map_objects/tribes/ship.cc:969
+#: ../../src/logic/map_objects/tribes/ship.cc:988
 msgctxt "ship_state"
 msgid "Port Space Found"
 msgstr "Ruang Pelabuhan Ditemui"
@@ -1345,7 +1345,7 @@ msgstr "Ruang Pelabuhan Ditemui"
 #. * TRANSLATORS: This is a ship state. An expedition is unloading
 #. wares/workers to build a
 #. * port.
-#: ../../src/logic/map_objects/tribes/ship.cc:974
+#: ../../src/logic/map_objects/tribes/ship.cc:993
 msgctxt "ship_state"
 msgid "Founding a Colony"
 msgstr "Mengasaskan sebuah Koloni"
@@ -1385,19 +1385,19 @@ msgstr "sepatutnya membiak jenis sumber %s, yang mana tidak wujud di dunia ini; 
 msgid "A geologist found resources."
 msgstr "Ahli geologi telah menemui sumber."
 
-#: ../../src/logic/map_objects/tribes/worker.cc:1677
+#: ../../src/logic/map_objects/tribes/worker.cc:1678
 #, c-format
 msgid "Your %s can't find a way home and will likely die."
 msgstr "%s anda telah sesat dan berkemungkinan akan mati bila-bila masa."
 
-#: ../../src/logic/map_objects/tribes/worker.cc:1682
+#: ../../src/logic/map_objects/tribes/worker.cc:1683
 #: ../../src/wui/productionsitewindow.cc:87
 #: ../../src/wui/productionsitewindow.cc:112
 msgid "Worker"
 msgid_plural "Workers"
 msgstr[0] "Pekerja"
 
-#: ../../src/logic/map_objects/tribes/worker.cc:1683
+#: ../../src/logic/map_objects/tribes/worker.cc:1684
 msgid "Worker got lost!"
 msgstr "Pekerja telah sesat!"
 
@@ -1440,17 +1440,17 @@ msgid ""
 " unpause the game and continue watching if you want to."
 msgstr "Penghujung main semula telah dicapai dan permainan telah dijedakan. Anda boleh menyahjeda permainan dan terus menonton jika anda mahu."
 
-#: ../../src/logic/save_handler.cc:111
+#: ../../src/logic/save_handler.cc:103
+msgid "Saving game…"
+msgstr "Menyimpan permainan..."
+
+#: ../../src/logic/save_handler.cc:119
 msgid "Saving failed!"
 msgstr "Penyimpanan gagal!"
 
-#: ../../src/logic/save_handler.cc:130
+#: ../../src/logic/save_handler.cc:188
 msgid "Game saved"
 msgstr "Permainan disimpan"
-
-#: ../../src/logic/save_handler.cc:157
-msgid "Saving game…"
-msgstr "Menyimpan permainan..."
 
 #: ../../src/map_io/s2map.cc:423
 msgid "Bluebyte Settlers II Map. No comment defined!"
@@ -1650,7 +1650,7 @@ msgid ""
 msgstr "Widelands tidak dapat jalinkan sambungan ke alamat yang diberi.\nSama ada tiada pelayan Widelands berjalan pada port cadangan atau\npelayan dimatikan bila anda cuba menyambung."
 
 #: ../../src/network/netclient.cc:176 ../../src/network/nethost.cc:701
-#: ../../src/wlapplication.cc:1239
+#: ../../src/wlapplication.cc:1241
 msgid "Preparing game"
 msgstr "Menyediakan permainan"
 
@@ -1989,7 +1989,7 @@ msgstr "mati"
 #. * TRANSLATORS: %1% is a filename, %2% a map's name.
 #. * TRANSLATORS: File name for saving objective achieved
 #. * TRANSLATORS: %1% = map name. %2% = achievement name
-#: ../../src/scripting/lua_game.cc:1084 ../../src/ui_fsmenu/loadgame.cc:76
+#: ../../src/scripting/lua_game.cc:1089 ../../src/ui_fsmenu/loadgame.cc:76
 msgid "%1% (%2%)"
 msgstr "%1% (%2%)"
 
@@ -3140,7 +3140,7 @@ msgid "Hide work area"
 msgstr "Sembunyi kawasan kerja"
 
 #: ../../src/wui/buildingwindow.cc:305 ../../src/wui/fieldaction.cc:371
-#: ../../src/wui/shipwindow.cc:166
+#: ../../src/wui/shipwindow.cc:181
 msgid "Show Debug Window"
 msgstr "Tunjuk Tetingkap Nyahpepijat"
 
@@ -4024,55 +4024,66 @@ msgstr "(akan datang)"
 msgid "(vacant)"
 msgstr "(kosong)"
 
-#: ../../src/wui/shipwindow.cc:96
+#. * TRANSLATORS: Window label when an expedition can't be canceled
+#: ../../src/wui/shipwindow.cc:68
+msgid "Cancel expedition"
+msgstr ""
+
+#: ../../src/wui/shipwindow.cc:68
+msgid ""
+"This expedition can’t be canceled, because the ship has no port to return "
+"to."
+msgstr ""
+
+#: ../../src/wui/shipwindow.cc:111
 msgid "Scout towards the north west"
 msgstr "Tinjau ke arah barat laut"
 
-#: ../../src/wui/shipwindow.cc:101
+#: ../../src/wui/shipwindow.cc:116
 msgid "Explore the island’s coast clockwise"
 msgstr "Jelajah persisir pantai pula mengikut jam"
 
-#: ../../src/wui/shipwindow.cc:106
+#: ../../src/wui/shipwindow.cc:121
 msgid "Scout towards the north east"
 msgstr "Tinjau ke arah timur laut"
 
-#: ../../src/wui/shipwindow.cc:111
+#: ../../src/wui/shipwindow.cc:126
 msgid "Scout towards the west"
 msgstr "Tinjau ke arah barat"
 
-#: ../../src/wui/shipwindow.cc:116
+#: ../../src/wui/shipwindow.cc:131
 msgid "Construct a port at the current location"
 msgstr "Bina pelabuhan pada lokasi semasa"
 
-#: ../../src/wui/shipwindow.cc:121
+#: ../../src/wui/shipwindow.cc:136
 msgid "Scout towards the east"
 msgstr "Tinjau ke arah timur"
 
-#: ../../src/wui/shipwindow.cc:126
+#: ../../src/wui/shipwindow.cc:141
 msgid "Scout towards the south west"
 msgstr "Tinjau ke arah barat daya"
 
-#: ../../src/wui/shipwindow.cc:131
+#: ../../src/wui/shipwindow.cc:146
 msgid "Explore the island’s coast counter clockwise"
 msgstr "Jelajah persisir pantau pulau melawan jam"
 
-#: ../../src/wui/shipwindow.cc:137
+#: ../../src/wui/shipwindow.cc:152
 msgid "Scout towards the south east"
 msgstr "Tinjau ke arah tenggara"
 
-#: ../../src/wui/shipwindow.cc:147
+#: ../../src/wui/shipwindow.cc:162
 msgid "Go to ship"
 msgstr "Pergi ke kapal"
 
-#: ../../src/wui/shipwindow.cc:149
+#: ../../src/wui/shipwindow.cc:164
 msgid "Go to destination"
 msgstr "Pergi ke destinasi"
 
-#: ../../src/wui/shipwindow.cc:155
+#: ../../src/wui/shipwindow.cc:170
 msgid "Sink the ship"
 msgstr "Tenggelamkan kapal"
 
-#: ../../src/wui/shipwindow.cc:160
+#: ../../src/wui/shipwindow.cc:175
 msgid "Cancel the Expedition"
 msgstr "Batalkan Ekspedisi"
 
