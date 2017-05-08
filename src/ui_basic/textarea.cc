@@ -127,7 +127,7 @@ void Textarea::draw(RenderTarget& dst) {
 		// Blit on pixel boundary (not float), so that the text is blitted pixel perfect.
 		Vector2i anchor(
 		   (align_ == Align::kCenter) ? get_w() / 2 : (align_ == UI::Align::kRight) ? get_w() : 0, 0);
-		dst.blit(anchor, rendered_text_->texts[0]->image(), BlendMode::UseAlpha, align_);
+		rendered_text_->draw(dst, anchor, align_);
 	}
 }
 

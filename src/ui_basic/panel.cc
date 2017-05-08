@@ -1078,8 +1078,7 @@ bool Panel::draw_tooltip(RenderTarget& dst, const std::string& text) {
 
 	dst.fill_rect(r.cast<float>(), RGBColor(63, 52, 34));
 	dst.draw_rect(r.cast<float>(), RGBColor(0, 0, 0));
-	// NOCOM
-	dst.blit(r.origin() + Vector2i(2, 2), rendered_text->texts[0]->image());
+	rendered_text->draw(dst, r.origin() + Vector2i(2, 2));
 	return true;
 }
 }

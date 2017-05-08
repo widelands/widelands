@@ -165,7 +165,7 @@ uint32_t TabPanel::add(const std::string& name,
                        const std::string& title,
                        Panel* const panel,
                        const std::string& tooltip_text) {
-	// NOCOM
+	// NOCOM investigate if we can get rid of needing texts[0]->image() - this is too hacky
 	const Image* pic = UI::g_fh1->render(as_uifont(title))->texts[0]->image();
 	return add_tab(std::max(kTabPanelButtonHeight, pic->width() + 2 * kTabPanelTextMargin), name,
 	               title, pic, tooltip_text, panel);

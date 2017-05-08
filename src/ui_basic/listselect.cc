@@ -332,10 +332,10 @@ void BaseListselect::layout() {
 	if (selection_mode_ == ListselectLayout::kDropdown) {
 		for (size_t i = 0; i < entry_records_.size(); ++i) {
 			const EntryRecord& er = *entry_records_[i];
-			const Image* entry_text_im = UI::g_fh1->render(as_uifont(
-			   richtext_escape(er.name), UI_FONT_SIZE_SMALL, er.use_clr ? er.clr : UI_FONT_CLR_FG))->texts[0]->image();
+			const UI::RenderedText* rendered_text = UI::g_fh1->render(as_uifont(
+			   richtext_escape(er.name), UI_FONT_SIZE_SMALL, er.use_clr ? er.clr : UI_FONT_CLR_FG));
 			int picw = max_pic_width_ ? max_pic_width_ + 10 : 0;
-			int difference = entry_text_im->width() + picw + 8 - get_eff_w();
+			int difference = rendered_text->width() + picw + 8 - get_eff_w();
 			if (difference > 0) {
 				set_size(get_w() + difference, get_h());
 			}

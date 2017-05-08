@@ -126,9 +126,8 @@ void InteractiveGameBase::draw_overlay(RenderTarget& dst) {
 		}
 
 		if (!game_speed.empty()) {
-			// NOCOM
-			dst.blit(Vector2i(get_w() - 5, 5), UI::g_fh1->render(game_speed)->texts[0]->image(), BlendMode::UseAlpha,
-			         UI::Align::kRight);
+			const UI::RenderedText* rendered_text = UI::g_fh1->render(game_speed);
+			rendered_text->draw(dst, Vector2i(get_w() - 5, 5), UI::Align::kRight);
 		}
 	}
 }

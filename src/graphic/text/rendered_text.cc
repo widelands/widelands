@@ -17,6 +17,7 @@
  *
  */
 
+#include "graphic/text_layout.h"
 #include "graphic/text/rendered_text.h"
 
 namespace UI {
@@ -66,17 +67,24 @@ int RenderedText::height() const {
 
 void RenderedText::draw(RenderTarget& dst,
 					const Vector2i& position,
-					Recti region) const {
+					Recti region, Align align) const {
+
+	Vector2i aligned_pos(position.x, position.y); // un-const the position
+	UI::correct_for_align(align, region.w, &aligned_pos);
 	for (const auto& rect : texts) {
 		// NOCOM implement when we have actual data
 		//bool contains_origin = region.contains(rect->point);
 		//bool contains_opposite = region.contains(Vector2i(rect->point.x + rect->image->width(), rect->image->height()));
 		//if (contains_origin && contains_opposite) {
-		const Vector2f blit_point(position.x + rect->get_x(),  position.y + rect->get_y());
+		Vector2f blit_point(aligned_pos.x + rect->get_x(),  aligned_pos.y + rect->get_y());
 		dst.blitrect(blit_point, rect->image(), region);
 		//}
 	}
 
+}
+
+void RenderedText::draw(RenderTarget& dst, const Vector2i& position, UI::Align align) const {
+	draw(dst, position, Recti(0, 0, width(), height()), align);
 }
 
 }  // namespace UI

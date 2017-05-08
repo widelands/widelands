@@ -52,7 +52,8 @@ struct RenderedText {
 	// Dimensions occupied by the rendered images in pixels.
 	int width() const;
 	int height() const;
-	void draw(RenderTarget& dst, const Vector2i& position, Recti region) const;
+	void draw(RenderTarget& dst, const Vector2i& position, Recti region, UI::Align align = UI::Align::kLeft) const;
+	void draw(RenderTarget& dst, const Vector2i& position, UI::Align align = UI::Align::kLeft) const;
 };
 
 } // namespace UI

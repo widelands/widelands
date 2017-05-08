@@ -144,7 +144,7 @@ int main(int argc, char** argv) {
 		std::unique_ptr<FileSystem> fs(&FileSystem::create("."));
 		std::unique_ptr<StreamWrite> sw(fs->open_stream_write(outname));
 
-		// NOCOM
+		// NOCOM we need to get a complete texture off the RenderedText
 		const int width = rendered_text->width();
 		const int height = rendered_text->height();
 		std::unique_ptr<Texture> texture(new Texture(width, height));

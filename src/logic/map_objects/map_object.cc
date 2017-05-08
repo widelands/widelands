@@ -470,21 +470,18 @@ void MapObject::do_draw_info(const TextToDraw& draw_text,
 	const int font_size = scale * UI_FONT_SIZE_SMALL;
 
 	// We always render this so we can have a stable position for the statistics string.
-	// NOCOM
-	const Image* rendered_census_info =
-		UI::g_fh1->render(as_condensed(census, UI::Align::kCenter, font_size), 120)->texts[0]->image();
-	// Rounding guarantees that text aligns with pixels to avoid subsampling.
+	const UI::RenderedText* rendered_census =
+		UI::g_fh1->render(as_condensed(census, UI::Align::kCenter, font_size), 120);
 	Vector2i position = field_on_dst.cast<int>() - Vector2i(0, 48) * scale;
 	if (draw_text & TextToDraw::kCensus) {
-		UI::correct_for_align(UI::Align::kCenter, rendered_census_info->width(), &position);
-		dst->blit(position, rendered_census_info);
+		UI::correct_for_align(UI::Align::kCenter, rendered_census->width(), &position);
+		rendered_census->draw(*dst, position);
 	}
-	// NOCOM alignment is screwed up.
+
 	if (draw_text & TextToDraw::kStatistics && !statictics.empty()) {
-		position.y += rendered_census_info->height() / 2 + 10 * scale;
-		// NOCOM invisible
-		const Image* statistics_image = UI::g_fh1->render(as_condensed(statictics, UI::Align::kLeft, font_size))->texts[0]->image();
-		dst->blit(position, statistics_image);
+		const UI::RenderedText* rendered_statistics = UI::g_fh1->render(as_condensed(statictics, UI::Align::kCenter, font_size));
+		position += Vector2i(rendered_census->width() / 2, rendered_census->height() / 2 + 10 * scale);
+		rendered_statistics->draw(*dst, position, UI::Align::kCenter);
 	}
 }
 

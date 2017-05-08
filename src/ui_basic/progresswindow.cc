@@ -97,10 +97,10 @@ void ProgressWindow::step(const std::string& description) {
 	draw(rt);
 
 	rt.fill_rect(label_rectangle_, PROGRESS_FONT_COLOR_BG);
-	const Image* rendered_text =
-	   UI::g_fh1->render(as_uifont(description, UI_FONT_SIZE_SMALL, PROGRESS_FONT_COLOR_FG))->texts[0]->image();
+	const UI::RenderedText* rendered_text =
+	   UI::g_fh1->render(as_uifont(description, UI_FONT_SIZE_SMALL, PROGRESS_FONT_COLOR_FG));
 	UI::center_vertically(rendered_text->height(), &label_center_);
-	rt.blit(label_center_, rendered_text, BlendMode::UseAlpha, UI::Align::kCenter);
+	rendered_text->draw(rt, label_center_, UI::Align::kCenter);
 
 #ifdef _WIN32
 	// Pump events to prevent "not responding" on windows

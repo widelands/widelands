@@ -314,9 +314,7 @@ void WordWrap::draw(RenderTarget& dst, Vector2i where, Align align, uint32_t car
 		const UI::RenderedText* rendered_text = UI::g_fh1->render(as_editorfont(
 		   lines_[line].text, fontsize_ - UI::g_fh1->fontset()->size_offset(), color_));
 		UI::correct_for_align(alignment, rendered_text->width(), &point);
-		for (const auto& rect : rendered_text->texts) {
-			dst.blit(Vector2i(point.x + rect->get_x(), point.y + rect->get_y()), rect->image());
-		}
+		rendered_text->draw(dst, point);
 
 		if (draw_caret_ && line == caretline) {
 			std::string line_to_caret = lines_[line].text.substr(0, caretpos);
