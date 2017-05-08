@@ -50,57 +50,8 @@ namespace {
 // 30 MB was enough to cache texts for many frames (> 1000), while it is
 // quickly overflowing in the map selection menu.
 // This might need reevaluation is the new font handler is used for more stuff.
-const uint32_t RICHTEXT_TEXTURE_CACHE = 30 << 20;  // shifting converts to MB
-
-// An Image implementation that recreates a rich text texture when needed on
-// the fly. It is meant to be saved into the ImageCache.
-class RTImage : public Image {
-public:
-	RTImage(const string& ghash,
-	        TextureCache* texture_cache,
-	        std::function<RT::Renderer*()> get_renderer,
-	        const string& text,
-	        int gwidth)
-	   : hash_(ghash),
-	     text_(text),
-	     width_(gwidth),
-	     get_renderer_(get_renderer),
-	     texture_cache_(texture_cache) {
-	}
-	virtual ~RTImage() {
-	}
-
-	// Implements Image.
-	int width() const override {
-		return texture()->width();
-	}
-	int height() const override {
-		return texture()->height();
-	}
-
-	const BlitData& blit_data() const override {
-		return texture()->blit_data();
-	}
-
-private:
-	Texture* texture() const {
-		Texture* surf = texture_cache_->get(hash_);
-		if (surf != nullptr) {
-			return surf;
-		}
-		return texture_cache_->insert(
-		   hash_, std::unique_ptr<Texture>(get_renderer_()->render(text_, width_)));
-	}
-
-	const string hash_;
-	const string text_;
-	int width_;
-	std::function<RT::Renderer*()> get_renderer_;
-
-	// Nothing owned.
-	TextureCache* const texture_cache_;
-};
-}
+constexpr uint32_t kTextureCacheSize = 30 << 20;  // shifting converts to MB
+} // namespace
 
 namespace UI {
 
@@ -110,7 +61,7 @@ namespace UI {
 class FontHandler1 : public IFontHandler1 {
 public:
 	FontHandler1(ImageCache* image_cache, const std::string& locale)
-	   : texture_cache_(new TextureCache(RICHTEXT_TEXTURE_CACHE)),
+	   : texture_cache_(new TextureCache(kTextureCacheSize)),
 	     fontsets_(),
 	     fontset_(fontsets_.get_fontset(locale)),
 	     rt_renderer_(new RT::Renderer(image_cache, texture_cache_.get(), fontsets_)),
@@ -123,20 +74,11 @@ public:
 		render_results_.clear();
 	}
 
-	// NOCOM(GunChleoc): This will become the normal render function when we're done.
 	const RenderedText* render(const string& text, uint16_t w = 0) override {
 		const string hash = boost::lexical_cast<string>(w) + text;
 		if (render_results_.count(hash) != 1) {
-			std::unique_ptr<RTImage> image(new RTImage(
-			   hash, texture_cache_.get(), [this] { return rt_renderer_.get(); }, text, w));
-			// force the rich text to get rendered in case there is an exception thrown.
-			image->width();
-
-			RenderedText* rendered_text = new RenderedText();
-			// NOCOM only 1 texture so far, this needs to be implemented. We need to get the interface
-			// to work first though.
-			rendered_text->texts.push_back(std::unique_ptr<RenderedRect>(new RenderedRect(Vector2i(0, 0), image_cache_->insert(hash, std::move(image)))));
-			render_results_.insert(std::make_pair(hash, rendered_text));
+			log("\nNOCOM needs render (%d): %s\n", w, text.c_str());
+			render_results_.insert(std::make_pair(hash, std::move(rt_renderer_->render(text, w))));
 		} else {
 			assert(image_cache_->has(hash));
 		}

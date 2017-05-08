@@ -63,7 +63,7 @@ void SdlTtfFont::dimensions(const std::string& txt, int style, uint16_t* gw, uin
 	*gh = h;
 }
 
-const Texture& SdlTtfFont::render(const std::string& txt,
+const Image& SdlTtfFont::render(const std::string& txt,
                                   const RGBColor& clr,
                                   int style,
                                   TextureCache* texture_cache) {
@@ -71,7 +71,7 @@ const Texture& SdlTtfFont::render(const std::string& txt,
 	   (boost::format("%s:%s:%i:%02x%02x%02x:%i") % font_name_ % ptsize_ % txt %
 	    static_cast<int>(clr.r) % static_cast<int>(clr.g) % static_cast<int>(clr.b) % style)
 	      .str();
-	const Texture* rv = texture_cache->get(hash);
+	const Image* rv = texture_cache->get(hash);
 	if (rv)
 		return *rv;
 

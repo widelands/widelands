@@ -29,8 +29,9 @@
 #include <boost/utility.hpp>
 
 #include "base/macros.h"
+#include "graphic/text/rendered_text.h"
 
-class Texture;
+class Image;
 
 // Caches transient Surfaces, i.e. those that are always free to be deleted
 // because they can be regenerated - somebody else must then recreate them when
@@ -50,21 +51,21 @@ public:
 	void flush();
 
 	/// Returns an entry if it is cached, nullptr otherwise.
-	Texture* get(const std::string& hash);
+	const Image* get(const std::string& hash);
 
 	// Inserts this entry into the TextureCache. asserts() that there is no
 	// entry with this hash already cached. Returns the given Surface for
 	// convenience. If 'transient' is false, this surface will not be deleted
 	// automatically - use this if surfaces are around for a long time and
 	// recreation is expensive (i.e. images loaded from disk).
-	Texture* insert(const std::string& hash, std::unique_ptr<Texture> texture);
+	const Image* insert(const std::string& hash, std::unique_ptr<const Image> texture);
 
 private:
 	void drop();
 
 	using AccessHistory = std::list<std::string>;
 	struct Entry {
-		std::unique_ptr<Texture> texture;
+		std::unique_ptr<const Image> texture;
 		uint32_t last_access;  // Mainly for debugging and analysis.
 		const AccessHistory::iterator list_iterator;
 	};

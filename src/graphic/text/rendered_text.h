@@ -29,22 +29,28 @@
 namespace UI {
 
 struct RenderedRect {
-	Vector2i point;
-	const Image* image; // Not owned
+	/*
 	RenderedRect()
 		: RenderedRect(Vector2i(0, 0), nullptr) {
 	}
-	RenderedRect(Vector2i init_point, const Image* init_image)
-		: point(init_point), image(init_image) {
-	}
-	RenderedRect(const RenderedRect& other)
-		: point(other.point), image(other.image) {
-	}
+	*/
+	RenderedRect(Vector2i init_point, const Image* init_image);
 	~RenderedRect() {}
-	bool operator==(const RenderedRect& other) const {
-		return point == other.point;
-	}
+
+	bool operator==(const RenderedRect& other) const;
+
+	const Image* image() const;
+
+	int get_x() const;
+	int get_y() const;
+	int width() const;
+	int height() const;
+
+private:
+	const Vector2i point_;
+	std::unique_ptr<const Image> image_;
 };
+
 struct RenderedText {
 	std::vector<std::unique_ptr<RenderedRect>> texts;
 	// Dimensions occupied by the rendered images in pixels.

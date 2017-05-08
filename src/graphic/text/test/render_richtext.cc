@@ -138,12 +138,17 @@ int main(int argc, char** argv) {
 	StandaloneRenderer standalone_renderer;
 
 	try {
-		// NOCOM
-		std::unique_ptr<Texture> texture(
+		std::unique_ptr<UI::RenderedText> rendered_text(
 		   standalone_renderer.renderer()->render(txt, w, allowed_tags));
 
 		std::unique_ptr<FileSystem> fs(&FileSystem::create("."));
 		std::unique_ptr<StreamWrite> sw(fs->open_stream_write(outname));
+
+		// NOCOM
+		const int width = rendered_text->width();
+		const int height = rendered_text->height();
+		std::unique_ptr<Texture> texture(new Texture(width, height));
+		texture->blit(Rectf(0, 0, width, height), *rendered_text->texts[0]->image(), Rectf(0, 0, width, height), 1., BlendMode::Copy);
 		if (!save_to_png(texture.get(), sw.get(), ColorType::RGBA)) {
 			std::cout << "Could not encode PNG." << std::endl;
 		}

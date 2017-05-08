@@ -170,11 +170,11 @@ void ChatOverlay::draw(RenderTarget& dst) {
 	// NOCOM
 	const Image* im = nullptr;
 	try {
-		im = UI::g_fh1->render(m->all_text_, get_w())->texts[0]->image;
+		im = UI::g_fh1->render(m->all_text_, get_w())->texts[0]->image();
 	} catch (RT::WidthTooSmall&) {
 		// Oops, maybe one long word? We render again, not limiting the width, but
 		// render everything in one single line.
-		im = UI::g_fh1->render(m->all_text_, 0)->texts[0]->image;
+		im = UI::g_fh1->render(m->all_text_, 0)->texts[0]->image();
 	}
 	assert(im != nullptr);
 

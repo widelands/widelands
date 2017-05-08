@@ -24,7 +24,7 @@
 #include <SDL.h>
 #include <stdint.h>
 
-#include "graphic/texture.h"
+#include "graphic/image.h"
 
 // The implementation took inspiration from
 // http://timday.bitbucket.org/lru.html, but our use case here is a little
@@ -44,7 +44,7 @@ void TextureCache::flush() {
 	size_in_bytes_ = 0;
 }
 
-Texture* TextureCache::get(const std::string& hash) {
+const Image* TextureCache::get(const std::string& hash) {
 	const auto it = entries_.find(hash);
 	if (it == entries_.end())
 		return nullptr;
@@ -56,7 +56,7 @@ Texture* TextureCache::get(const std::string& hash) {
 	return it->second.texture.get();
 }
 
-Texture* TextureCache::insert(const std::string& hash, std::unique_ptr<Texture> texture) {
+const Image* TextureCache::insert(const std::string& hash, std::unique_ptr<const Image> texture) {
 	assert(entries_.find(hash) == entries_.end());
 
 	const uint32_t texture_size = texture->width() * texture->height() * 4;

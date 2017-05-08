@@ -438,9 +438,9 @@ void Panel::draw_text(RenderTarget& dst,
                       UI::Align align) {
 	// NOCOM
 	for (const auto& rect : text->texts) {
-		Vector2i blit_point(position.x + rect->point.x,  position.y + rect->point.y);
-		UI::correct_for_align(align, rect->image->width(), &blit_point);
-		dst.blit(blit_point, rect->image);
+		Vector2i blit_point(position.x + rect->get_x(),  position.y + rect->get_y());
+		UI::correct_for_align(align, rect->width(), &blit_point);
+		dst.blit(blit_point, rect->image());
 	}
 }
 
@@ -453,7 +453,7 @@ void Panel::draw_text(RenderTarget& dst,
 		//bool contains_origin = srcrect.contains(rect->point);
 		//bool contains_opposite = srcrect.contains(Vector2i(rect->point.x + rect->image->width(), rect->image->height()));
 		//if (contains_origin && contains_opposite) {
-			dst.blitrect(Vector2f(position.x + rect->point.x, position.y + rect->point.y), rect->image, srcrect);
+			dst.blitrect(Vector2f(position.x + rect->get_x(), position.y + rect->get_y()), rect->image(), srcrect);
 		//}
 	}
 
@@ -1109,7 +1109,7 @@ bool Panel::draw_tooltip(RenderTarget& dst, const std::string& text) {
 	dst.fill_rect(r.cast<float>(), RGBColor(63, 52, 34));
 	dst.draw_rect(r.cast<float>(), RGBColor(0, 0, 0));
 	// NOCOM
-	dst.blit(r.origin() + Vector2i(2, 2), rendered_text->texts[0]->image);
+	dst.blit(r.origin() + Vector2i(2, 2), rendered_text->texts[0]->image());
 	return true;
 }
 }

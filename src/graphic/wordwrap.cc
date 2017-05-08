@@ -315,7 +315,7 @@ void WordWrap::draw(RenderTarget& dst, Vector2i where, Align align, uint32_t car
 		   lines_[line].text, fontsize_ - UI::g_fh1->fontset()->size_offset(), color_));
 		UI::correct_for_align(alignment, rendered_text->width(), &point);
 		for (const auto& rect : rendered_text->texts) {
-			dst.blit(Vector2i(point.x + rect->point.x, point.y + rect->point.y), rect->image);
+			dst.blit(Vector2i(point.x + rect->get_x(), point.y + rect->get_y()), rect->image());
 		}
 
 		if (draw_caret_ && line == caretline) {

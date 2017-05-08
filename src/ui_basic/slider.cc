@@ -535,7 +535,7 @@ void DiscreteSlider::draw(RenderTarget& dst) {
 	for (uint32_t i = 0; i < labels.size(); i++) {
 		// NOCOM
 		const Image* rendered_text =
-		   UI::g_fh1->render(as_condensed(labels[i], UI::Align::kCenter, UI_FONT_SIZE_SMALL - 2))->texts[0]->image;
+		   UI::g_fh1->render(as_condensed(labels[i], UI::Align::kCenter, UI_FONT_SIZE_SMALL - 2))->texts[0]->image();
 		dst.blit(Vector2i(gap_1 + i * gap_n, get_h() - rendered_text->height()), rendered_text,
 		         BlendMode::UseAlpha, UI::Align::kCenter);
 	}
