@@ -46,7 +46,6 @@ struct Tab : public NamedPanel {
 	Tab(TabPanel* parent,
 	    size_t id,
 	    int32_t x,
-	    int32_t w,
 	    const std::string& name,
 	    const std::string& title,
 	    const Image* pic,
@@ -68,7 +67,7 @@ private:
 	uint32_t id;
 
 	const Image* pic;
-	std::string title;
+	const UI::RenderedText* rendered_title;
 	std::string tooltip;
 	Panel* panel;
 };
@@ -136,8 +135,7 @@ protected:
 
 private:
 	// Common adding function for textual and pictorial tabs
-	uint32_t add_tab(int32_t width,
-	                 const std::string& name,
+	uint32_t add_tab(const std::string& name,
 	                 const std::string& title,
 	                 const Image* pic,
 	                 const std::string& tooltip,
