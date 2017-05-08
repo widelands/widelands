@@ -399,17 +399,17 @@ void EditBox::draw(RenderTarget& dst) {
 		// We want this always on, e.g. for mixed language savegame filenames
 		if (i18n::has_rtl_character(m_->text.c_str(), 100)) {  // Restrict check for efficiency
 			// TODO(GunChleoc): Arabic: Fix scrolloffset
-			draw_text(dst, point, rendered_text, Recti(linewidth - max_width, 0, linewidth, lineheight));
+			rendered_text->draw(dst, point, Recti(linewidth - max_width, 0, linewidth, lineheight));
 		} else {
 			if (m_->align == UI::Align::kRight) {
 				// TODO(GunChleoc): Arabic: Fix scrolloffset
-				draw_text(dst, point, rendered_text, Recti(point.x + m_->scrolloffset + kMarginX, 0, max_width, lineheight));
+				rendered_text->draw(dst, point, Recti(point.x + m_->scrolloffset + kMarginX, 0, max_width, lineheight));
 			} else {
-				draw_text(dst, point, rendered_text, Recti(-m_->scrolloffset, 0, max_width, lineheight));
+				rendered_text->draw(dst, point, Recti(-m_->scrolloffset, 0, max_width, lineheight));
 			}
 		}
 	} else {
-		draw_text(dst, point, rendered_text, Recti(0, 0, max_width, lineheight));
+		rendered_text->draw(dst, point, Recti(0, 0, max_width, lineheight));
 	}
 
 	if (has_focus()) {

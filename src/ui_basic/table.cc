@@ -324,12 +324,12 @@ void Table<void*>::draw(RenderTarget& dst) {
 				// We want this always on, e.g. for mixed language savegame filenames
 				// Restrict check for efficiency
 				if (i18n::has_rtl_character(entry_string.c_str(), 20)) {
-					draw_text(dst, point, rendered_text, Recti(text_width - curw + picw, 0, text_width, lineheight));
+					rendered_text->draw(dst, point, Recti(text_width - curw + picw, 0, text_width, lineheight));
 				} else {
-					draw_text(dst, point, rendered_text, Recti(0, 0, curw - picw, lineheight));
+					rendered_text->draw(dst, point, Recti(0, 0, curw - picw, lineheight));
 				}
 			} else {
-				draw_text(dst, point, rendered_text, Recti(0, 0, curw - picw, lineheight));
+				rendered_text->draw(dst, point, Recti(0, 0, curw - picw, lineheight));
 			}
 			curx += curw;
 		}

@@ -25,15 +25,11 @@
 
 #include "base/vector.h"
 #include "graphic/image.h"
+#include "graphic/rendertarget.h"
 
 namespace UI {
 
 struct RenderedRect {
-	/*
-	RenderedRect()
-		: RenderedRect(Vector2i(0, 0), nullptr) {
-	}
-	*/
 	RenderedRect(Vector2i init_point, const Image* init_image);
 	~RenderedRect() {}
 
@@ -52,10 +48,11 @@ private:
 };
 
 struct RenderedText {
-	std::vector<std::unique_ptr<RenderedRect>> texts;
+	std::vector<std::unique_ptr<const RenderedRect>> texts;
 	// Dimensions occupied by the rendered images in pixels.
 	int width() const;
 	int height() const;
+	void draw(RenderTarget& dst, const Vector2i& position, Recti region) const;
 };
 
 } // namespace UI

@@ -526,7 +526,7 @@ UI::RenderedText* TextNode::render(TextureCache* texture_cache) {
 	rv->blit(Rectf(0, 0, img.width(), img.height()), img, Rectf(0, 0, img.width(), img.height()), 1.,
 	         BlendMode::Copy);
 	UI::RenderedText* rendered_text = new UI::RenderedText();
-	rendered_text->texts.push_back(std::unique_ptr<UI::RenderedRect>(new UI::RenderedRect(Vector2i(0, 0), (rv))));
+	rendered_text->texts.push_back(std::unique_ptr<const UI::RenderedRect>(new UI::RenderedRect(Vector2i(0, 0), (rv))));
 	return rendered_text;
 }
 
@@ -565,7 +565,7 @@ UI::RenderedText* FillingTextNode::render(TextureCache* texture_cache) {
 	}
 	// NOCOM
 	UI::RenderedText* rendered_text = new UI::RenderedText();
-	rendered_text->texts.push_back(std::unique_ptr<UI::RenderedRect>(new UI::RenderedRect(Vector2i(0, 0), (rv))));
+	rendered_text->texts.push_back(std::unique_ptr<const UI::RenderedRect>(new UI::RenderedRect(Vector2i(0, 0), (rv))));
 	return rendered_text;
 }
 
@@ -587,7 +587,7 @@ public:
 			rv->fill_rect(Rectf(0, 0, w_, h_), RGBAColor(0xcc, 0, 0, 0xcc));
 			// NOCOM
 			UI::RenderedText* rendered_text = new UI::RenderedText();
-			rendered_text->texts.push_back(std::unique_ptr<UI::RenderedRect>(new UI::RenderedRect(Vector2i(0, 0), (rv))));
+			rendered_text->texts.push_back(std::unique_ptr<const UI::RenderedRect>(new UI::RenderedRect(Vector2i(0, 0), (rv))));
 			return rendered_text;
 		}
 		return TextNode::render(texture_cache);
@@ -663,7 +663,7 @@ public:
 		}
 		// NOCOM
 		UI::RenderedText* rendered_text = new UI::RenderedText();
-		rendered_text->texts.push_back(std::unique_ptr<UI::RenderedRect>(new UI::RenderedRect(Vector2i(0, 0), (rv))));
+		rendered_text->texts.push_back(std::unique_ptr<const UI::RenderedRect>(new UI::RenderedRect(Vector2i(0, 0), (rv))));
 		return rendered_text;
 	}
 	bool is_expanding() override {
@@ -772,7 +772,7 @@ public:
 		nodes_to_render_.clear();
 
 		UI::RenderedText* rendered_text = new UI::RenderedText();
-		rendered_text->texts.push_back(std::unique_ptr<UI::RenderedRect>(new UI::RenderedRect(Vector2i(0, 0), (rv))));
+		rendered_text->texts.push_back(std::unique_ptr<const UI::RenderedRect>(new UI::RenderedRect(Vector2i(0, 0), (rv))));
 		return rendered_text;
 	}
 	const vector<Reference> get_references() override {
@@ -840,14 +840,14 @@ private:
 	const Image* image_;
 	const double scale_;
 };
-
+// NOCOM can these all be const UI::RenderedText*?
 UI::RenderedText* ImgRenderNode::render(TextureCache* /* texture_cache */) {
 	// NOCOM
 	Texture* rv = new Texture(width(), height());
 	rv->blit(Rectf(0, 0, width(), height()), *image_, Rectf(0, 0, image_->width(), image_->height()),
 	         1., BlendMode::Copy);
 	UI::RenderedText* rendered_text = new UI::RenderedText();
-	rendered_text->texts.push_back(std::unique_ptr<UI::RenderedRect>(new UI::RenderedRect(Vector2i(0, 0), (rv))));
+	rendered_text->texts.push_back(std::unique_ptr<const UI::RenderedRect>(new UI::RenderedRect(Vector2i(0, 0), (rv))));
 	return rendered_text;
 }
 // End: Helper Stuff

@@ -167,7 +167,7 @@ void MultilineTextarea::draw(RenderTarget& dst) {
 			case UI::Align::kLeft:
 				anchor = RICHTEXT_MARGIN;
 			}
-			draw_text(dst, Vector2i(anchor, 0), rendered_text, Recti(0, scrollbar_.get_scrollpos(), blit_width, blit_height));
+			rendered_text->draw(dst, Vector2i(anchor, 0), Recti(0, scrollbar_.get_scrollpos(), blit_width, blit_height));
 		}
 	}
 }

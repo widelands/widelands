@@ -153,7 +153,7 @@ void Statebox::draw(RenderTarget& dst) {
 				image_anchor.x = rendered_text_->width() + kPadding;
 				image_anchor.y = (get_h() - kStateboxSize) / 2;
 			}
-			draw_text(dst, text_anchor, rendered_text_, UI::Align::kLeft);
+			rendered_text_->draw(dst, text_anchor, Recti(0, 0, rendered_text_->width(), rendered_text_->height()));
 		}
 
 		dst.blitrect(

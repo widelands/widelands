@@ -332,7 +332,7 @@ void AbstractWaresDisplay::draw_ware(RenderTarget& dst, Widelands::DescriptionIn
 	              info_color_for_ware(id));
 
 	const UI::RenderedText* rendered_text = UI::g_fh1->render(as_waresinfo(info_for_ware(id)));
-	draw_text(dst, Vector2i(p.x + w - rendered_text->width() - 1, p.y + WARE_MENU_PIC_HEIGHT + WARE_MENU_INFO_SIZE + 1 - rendered_text->height()), rendered_text);
+	rendered_text->draw(dst, Vector2i(p.x + w - rendered_text->width() - 1, p.y + WARE_MENU_PIC_HEIGHT + WARE_MENU_INFO_SIZE + 1 - rendered_text->height()), Recti(0, 0, rendered_text->width(), rendered_text->height()));
 }
 
 // Wares highlighting/selecting

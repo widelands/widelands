@@ -210,9 +210,9 @@ void Button::draw(RenderTarget& dst) {
 		   autofit_ui_text(title_, get_inner_w() - 2 * kButtonImageMargin,
 		                   is_monochrome ? UI_FONT_CLR_DISABLED : UI_FONT_CLR_FG);
 		// Blit on pixel boundary (not float), so that the text is blitted pixel perfect.
-		draw_text(dst, Vector2i((get_w() - rendered_text->width()) / 2,
+		rendered_text->draw(dst, Vector2i((get_w() - rendered_text->width()) / 2,
 		                        (get_h() - rendered_text->height()) / 2),
-		          rendered_text);
+		          Recti(0, 0, rendered_text->width(), rendered_text->height()));
 	}
 
 	//  draw border

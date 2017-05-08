@@ -63,4 +63,20 @@ int RenderedText::height() const {
 	}
 	return result;
 }
+
+void RenderedText::draw(RenderTarget& dst,
+					const Vector2i& position,
+					Recti region) const {
+	for (const auto& rect : texts) {
+		// NOCOM implement when we have actual data
+		//bool contains_origin = region.contains(rect->point);
+		//bool contains_opposite = region.contains(Vector2i(rect->point.x + rect->image->width(), rect->image->height()));
+		//if (contains_origin && contains_opposite) {
+		const Vector2f blit_point(position.x + rect->get_x(),  position.y + rect->get_y());
+		dst.blitrect(blit_point, rect->image(), region);
+		//}
+	}
+
+}
+
 }  // namespace UI

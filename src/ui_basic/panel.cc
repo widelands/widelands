@@ -430,36 +430,6 @@ void Panel::draw(RenderTarget&) {
 }
 
 /**
- * Blit a set of rendered 'text' textures at the given 'position'.
- */
-void Panel::draw_text(RenderTarget& dst,
-                      const Vector2i& position,
-                      const UI::RenderedText* text,
-                      UI::Align align) {
-	// NOCOM
-	for (const auto& rect : text->texts) {
-		Vector2i blit_point(position.x + rect->get_x(),  position.y + rect->get_y());
-		UI::correct_for_align(align, rect->width(), &blit_point);
-		dst.blit(blit_point, rect->image());
-	}
-}
-
-void Panel::draw_text(RenderTarget& dst,
-					const Vector2i& position,
-					const UI::RenderedText* text,
-					Recti srcrect) {
-	for (const auto& rect : text->texts) {
-		// NOCOM implement when we have actual data
-		//bool contains_origin = srcrect.contains(rect->point);
-		//bool contains_opposite = srcrect.contains(Vector2i(rect->point.x + rect->image->width(), rect->image->height()));
-		//if (contains_origin && contains_opposite) {
-			dst.blitrect(Vector2f(position.x + rect->get_x(), position.y + rect->get_y()), rect->image(), srcrect);
-		//}
-	}
-
-}
-
-/**
  * Redraw the panel border.
  */
 void Panel::draw_border(RenderTarget&) {

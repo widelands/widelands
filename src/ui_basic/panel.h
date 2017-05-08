@@ -222,14 +222,6 @@ public:
 	virtual void draw(RenderTarget&);
 	virtual void draw_border(RenderTarget&);
 	virtual void draw_overlay(RenderTarget&);
-	void draw_text(RenderTarget& dst,
-	               const Vector2i& position,
-	               const UI::RenderedText* text,
-	               UI::Align align = UI::Align::kLeft);
-	void draw_text(RenderTarget& dst,
-						const Vector2i& position,
-						const UI::RenderedText* text,
-						Recti srcrect);
 
 	// Events
 	virtual void think();
