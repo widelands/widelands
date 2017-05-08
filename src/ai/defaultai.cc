@@ -2492,7 +2492,7 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 					}
 
 				} else if (bo.production_hint >= 0) {
-					if (bo.is_what.count(BuildingAttribute::kRanger)) {
+					if (bo.is(BuildingAttribute::kRanger)) {
 						assert(bo.cnt_target > 0);
 					} else {
 						bo.cnt_target =
@@ -3727,9 +3727,9 @@ bool DefaultAI::check_productionsites(uint32_t gametime) {
 	if (site.bo->is(BuildingAttribute::kBarracks)) {
 		assert(site.bo->total_count() == 1);
 		for (auto& queue : site.site->inputqueues()) {
-			if (queue->get_max_fill() > 2) {
+			if (queue->get_max_fill() > 4) {
 				game().send_player_set_input_max_fill(
-				   *site.site, queue->get_index(), queue->get_type(), 2);
+				   *site.site, queue->get_index(), queue->get_type(), 4);
 			}
 		}
 
@@ -3766,11 +3766,19 @@ bool DefaultAI::check_productionsites(uint32_t gametime) {
 						
 		// starting the site
 		if (site.site->is_stopped() && tmp_score >= 0) {
-			game().send_player_start_stop_building(*site.site);	
+			game().send_player_start_stop_building(*site.site);
+			for (auto& queue : site.site->inputqueues()) {
+				game().send_player_set_input_max_fill(
+					   *site.site, queue->get_index(), queue->get_type(), 4);
+			}	
 		}
 		//stopping the site
 		if (!site.site->is_stopped() && tmp_score < 0) {
-			game().send_player_start_stop_building(*site.site);	
+			game().send_player_start_stop_building(*site.site);
+			for (auto& queue : site.site->inputqueues()) {
+				game().send_player_set_input_max_fill(
+					   *site.site, queue->get_index(), queue->get_type(), 2);
+			}		
 		}
 		
 	}
@@ -3791,7 +3799,10 @@ bool DefaultAI::check_productionsites(uint32_t gametime) {
 		// persistent_data->trees_around_cutters
 		// but keep in mind that trees_around_cutters is multiplied by 10
 		persistent_data->trees_around_cutters =
-		   (remaining_trees * 10 + 9 * persistent_data->trees_around_cutters) / 10;
+		   remaining_trees + 9 * persistent_data->trees_around_cutters / 10;
+		   
+		//printf ("Trees around lumberjack: %3d, new trees_around_cutters: %3d\n", remaining_trees, persistent_data->trees_around_cutters);
+		assert(persistent_data->trees_around_cutters < 5000);
 
 		// Do not destruct the last few lumberjacks
 		if (site.bo->cnt_built <= site.bo->cnt_target) {
@@ -4459,34 +4470,120 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 			} else {
 				return BuildingNecessity::kAllowed;
 			}
-		} else if (bo.is(BuildingAttribute::kRanger)) {
-			int32_t value = management_data.neuron_pool[39].get_result_safe(
-			   mines_.size() + productionsites.size() / 2, kAbsValue);
-			value -= management_data.neuron_pool[40].get_result_safe(
-			   persistent_data->trees_around_cutters / 10, kAbsValue);
-			value -= management_data.neuron_pool[41].get_result_safe(
-			   get_stocklevel(bo, gametime) / 4, kAbsValue);
-			value -= management_data.neuron_pool[42].get_result_safe(bo.total_count(), kAbsValue);
-			value += management_data.get_military_number_at(13);
-			value /= 1 + std::abs(management_data.get_military_number_at(52))/ 10;
-			value = std::max(value, -3);
+		} else if (bo.is(BuildingAttribute::kRanger)) { //NOCOM
+			
+			
+			int16_t tmp_target = 2;
+			int16_t inputs[2 * f_neuron_bit_size] = {0};
+			inputs[0] = (persistent_data->trees_around_cutters < 10) * 1;
+			inputs[1] = (persistent_data->trees_around_cutters < 20) * 1;
+			inputs[2] = (persistent_data->trees_around_cutters < 30) * 1;			
+			inputs[3] = (persistent_data->trees_around_cutters < 40) * 1;			
+			inputs[4] = (persistent_data->trees_around_cutters < 50) * 1;			
+			inputs[5] = (persistent_data->trees_around_cutters < 60) * 1;
+			inputs[6] = (persistent_data->trees_around_cutters < 10) * 1;
+			inputs[7] = (persistent_data->trees_around_cutters < 20) * 1;
+			inputs[8] = (persistent_data->trees_around_cutters < 100) * 1;			
+			inputs[9] = (persistent_data->trees_around_cutters < 200) * 1;			
+			inputs[10] = (persistent_data->trees_around_cutters < 300) * 1;			
+			inputs[11] = (persistent_data->trees_around_cutters < 400) * 1;			
+			inputs[12] = (wood_policy_ != WoodPolicy::kAllowRangers) * 1;
+			inputs[13] = (wood_policy_ != WoodPolicy::kAllowRangers) * 1;
+			inputs[14] = (get_stocklevel(bo, gametime) < 10) * 1;	
+			inputs[15] = (get_stocklevel(bo, gametime) < 10) * 1;			
+			inputs[16] = (get_stocklevel(bo, gametime) < 2) * 1;
+			if (gametime > 15 * 60) {	
+				inputs[17] = (get_stocklevel(bo, gametime) > 30) * -1;	
+				inputs[18] = (get_stocklevel(bo, gametime) > 20) * -1;	
+				inputs[19] = (get_stocklevel(bo, gametime) > 10) * -1;	
+			} else {
+				inputs[20] = 1;
+				inputs[21] = 1;
+			}
+			inputs[22] = 1;			
+			inputs[23] = 1;
+			inputs[24] = 1;
+			inputs[25] = (wood_policy_ != WoodPolicy::kAllowRangers) * 1;
+			if (gametime > 90 * 60) {
+				inputs[26] = (wood_policy_ != WoodPolicy::kAllowRangers) * 1;
+				inputs[27] = (persistent_data->trees_around_cutters < 20) * 1;						
+			}
+			if (gametime > 45 * 60) {
+				inputs[28] = (wood_policy_ != WoodPolicy::kAllowRangers) * 1;
+				inputs[29] = (persistent_data->trees_around_cutters < 20) * 1;
+				inputs[30] = (get_stocklevel(bo, gametime) > 30) * -1;							
+			}
+			inputs[31] = (persistent_data->trees_around_cutters < 100) * 1;			
+			inputs[32] = (persistent_data->trees_around_cutters < 200) * 1;	
+			inputs[33] = ((mines_per_type[iron_ore_id].in_construction + mines_per_type[iron_ore_id].finished) <= 1) * -1;
+			inputs[34] = ((mines_per_type[iron_ore_id].in_construction + mines_per_type[iron_ore_id].finished) <= 1) * -1;
+			inputs[35] = ((mines_per_type[iron_ore_id].in_construction + mines_per_type[iron_ore_id].finished) == 0) * -1;
+			inputs[36] = ((mines_per_type[iron_ore_id].in_construction + mines_per_type[iron_ore_id].finished) == 0) * -1;			
+			inputs[37] = -1;			
+			inputs[38] = -1;
+			inputs[39] = -1;
 
-			bo.cnt_target = 5 + value;
-			assert(bo.cnt_target > 1 && bo.cnt_target < 1000);
+			for (uint8_t i = 0; i < f_neuron_bit_size; i +=1) {
+				if (management_data.f_neuron_pool[14].get_position(i)){
+					assert(inputs[i] >= -1 && inputs[i] <= 1)	;
+					tmp_target += inputs[i];
+				}
+				if (management_data.f_neuron_pool[15].get_position(i)){
+					tmp_target += inputs[f_neuron_bit_size + i];
+					assert(inputs[f_neuron_bit_size + i] >= -1 && inputs[f_neuron_bit_size + i] <= 1)	;
+				}
+			}
+			if (tmp_target < 2) {
+				tmp_target = 2;
+			}
+			
+			bo.cnt_target = tmp_target;
 
 			// adjusting/decreasing based on cnt_limit_by_aimode
 			bo.cnt_target = limit_cnt_target(bo.cnt_target, bo.cnt_limit_by_aimode);
+
+
+			bool paralel_construction = false;
+			if (bo.total_count() + 2 < bo.cnt_target) {
+				paralel_construction = true;				
+			}
+			
+			//int32_t value = management_data.neuron_pool[39].get_result_safe(
+			   //mines_.size() + productionsites.size() / 2, kAbsValue);
+			//value -= management_data.neuron_pool[40].get_result_safe(
+			   //persistent_data->trees_around_cutters, kAbsValue);
+			//value -= management_data.neuron_pool[41].get_result_safe(
+			   //get_stocklevel(bo, gametime) / 4, kAbsValue);
+			//value -= management_data.neuron_pool[42].get_result_safe(bo.total_count(), kAbsValue);
+			//value += management_data.get_military_number_at(13);
+			//if (persistent_data->trees_around_cutters < 4){
+				//value += management_data.get_military_number_at(59);				
+			//}
+			//value /= 1 + std::abs(management_data.get_military_number_at(52))/ 10;
+			//value = std::max(value, -3);
+
+			//bo.cnt_target = 5 + value;
+			assert(bo.cnt_target > 1 && bo.cnt_target < 1000);
+			
+			if (gametime % 50 == 0) printf ("Rangers target: %5d, now %2d, trees around lumberjacks: %3d/10, paralel: %s\n",
+			bo.cnt_target, bo.total_count(), persistent_data->trees_around_cutters, (paralel_construction)?"Y":"N");
+
+
 
 			if (wood_policy_ != WoodPolicy::kAllowRangers) {
 				return BuildingNecessity::kForbidden;
 			}
 
-			if (bo.total_count() > 1 && (bo.cnt_under_construction + bo.unoccupied_count > 0)) {
-				return BuildingNecessity::kForbidden;
-			} else if (bo.total_count() > bo.cnt_target) {
+			if (bo.total_count() > bo.cnt_target) {
 				return BuildingNecessity::kForbidden;
 			}
-			return BuildingNecessity::kNeeded;
+
+			if (paralel_construction && (bo.cnt_under_construction + bo.unoccupied_count <= 1)) {
+				return BuildingNecessity::kNeeded;
+			} else if (bo.cnt_under_construction + bo.unoccupied_count == 0) {
+				return BuildingNecessity::kNeeded;	
+			}
+			return BuildingNecessity::kForbidden;
 		} else if (bo.is(BuildingAttribute::kNeedsRocks) && bo.cnt_under_construction + bo.unoccupied_count == 0) {
 			bo.max_needed_preciousness = bo.max_preciousness;  // even when rocks are not needed
 			return BuildingNecessity::kAllowed;
@@ -4753,19 +4850,19 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 
 			if (tmp_score > upper_limit) {
 				bo.primary_priority += (tmp_score - bottom_limit) / 2;
-				if (gametime % 20 == 0 && bo.total_count() <= 1 && spots_avail.at(BUILDCAPS_BIG) > 1) printf (
-					"%2d: %-35s needed:   primary score = %4d, current count = %2d, tmp_score: %3d, upper limit: %3d, current stats: %3d\n",
-					player_number(), bo.name, bo.primary_priority, bo.total_count(), tmp_score, upper_limit, bo.current_stats);
+				//if (gametime % 20 == 0 && bo.total_count() <= 1 && spots_avail.at(BUILDCAPS_BIG) > 1) printf (
+					//"%2d: %-35s needed:   primary score = %4d, current count = %2d, tmp_score: %3d, upper limit: %3d, current stats: %3d\n",
+					//player_number(), bo.name, bo.primary_priority, bo.total_count(), tmp_score, upper_limit, bo.current_stats);
 				return BuildingNecessity::kNeeded;
 			} else if (tmp_score > bottom_limit) {
-				if (gametime % 20 == 0 && bo.total_count() <= 1 && spots_avail.at(BUILDCAPS_BIG) > 1) printf (	
-				"%2d: %-35s pending:   current count = %2d, tmp_score: %3d, upper_limit %2d, current stats: %3d\n",
-					player_number(), bo.name, bo.total_count(), tmp_score, upper_limit, bo.current_stats);
+				//if (gametime % 20 == 0 && bo.total_count() <= 1 && spots_avail.at(BUILDCAPS_BIG) > 1) printf (	
+				//"%2d: %-35s pending:   current count = %2d, tmp_score: %3d, upper_limit %2d, current stats: %3d\n",
+					//player_number(), bo.name, bo.total_count(), tmp_score, upper_limit, bo.current_stats);
 				return BuildingNecessity::kNeededPending;
 			} else {
-				if (gametime % 20 == 0 && bo.total_count() <= 1 && spots_avail.at(BUILDCAPS_BIG) > 1) printf (
-					"%2d: %-35s forbidden: current count = %2d, tmp_score: %3d, bottom_limit %2d, current stats: %3d\n",
-					player_number(), bo.name, bo.total_count(), tmp_score, bottom_limit, bo.current_stats);
+				//if (gametime % 20 == 0 && bo.total_count() <= 1 && spots_avail.at(BUILDCAPS_BIG) > 1) printf (
+					//"%2d: %-35s forbidden: current count = %2d, tmp_score: %3d, bottom_limit %2d, current stats: %3d\n",
+					//player_number(), bo.name, bo.total_count(), tmp_score, bottom_limit, bo.current_stats);
 				return BuildingNecessity::kForbidden;
 			}
 
