@@ -161,7 +161,7 @@ private:
 	void format_and_add_chat(std::string from, std::string to, bool system, std::string msg);
 
 	/// The connection to the metaserver
-	std::unique_ptr<NetClient> con;
+	std::unique_ptr<NetClient> net;
 
 	/// Current state of this class
 	enum { OFFLINE, CONNECTING, LOBBY, IN_GAME, COMMUNICATION_ERROR } state_;

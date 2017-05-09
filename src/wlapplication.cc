@@ -1180,7 +1180,8 @@ void WLApplication::mainmenu_multiplayer() {
 					throw WLWarning(
 					   "Invalid Address", "%s", "The address of the game server is invalid");
 
-				// TODO(Notabilis): Make this prettier
+				// TODO(Notabilis): Make this prettier. I am aware that this is quite ugly but it should work
+				// for now and will be removed shortly when we switch to boost.asio
 				char ip_str[] = {"255.255.255.255"};
 				sprintf(ip_str, "%d.%d.%d.%d", (addr & 0x000000ff), (addr & 0x0000ff00) >> 8,
 												(addr & 0x00ff0000) >> 16, (addr & 0xff000000) >> 24);

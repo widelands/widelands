@@ -34,7 +34,7 @@
 /// will ensure
 /// that only one instance is running at time.
 InternetGaming::InternetGaming()
-   : con(),
+   : net(),
      state_(OFFLINE),
      reg_(false),
      port_(INTERNET_GAMING_PORT),
@@ -57,7 +57,7 @@ InternetGaming::InternetGaming()
 
 /// resets all stored variables without the chat messages for a clean new login (not relogin)
 void InternetGaming::reset() {
-	con.reset();
+	net.reset();
 	state_ = OFFLINE;
 	pwd_ = "";
 	reg_ = false;
@@ -95,8 +95,8 @@ InternetGaming& InternetGaming::ref() {
 void InternetGaming::initialize_connection() {
 	// First of all try to connect to the metaserver
 	log("InternetGaming: Connecting to the metaserver.\n");
-	con = NetClient::connect(meta_, port_);
-	if (!con || !con->is_connected())
+	net = NetClient::connect(meta_, port_);
+	if (!net || !net->is_connected())
 		throw WLWarning(_("Could not establish connection to host"),
 		                _("Widelands could not establish a connection to the given address.\n"
 		                  "Either there was no metaserver running at the supposed port or\n"
@@ -132,7 +132,7 @@ bool InternetGaming::login(const std::string& nick,
 	s.string(bool2str(reg));
 	if (reg)
 		s.string(pwd);
-	con->send(s);
+	net->send(s);
 
 	// Now let's see, whether the metaserver is answering
 	uint32_t const secs = time(nullptr);
@@ -175,7 +175,7 @@ bool InternetGaming::relogin() {
 	s.string(bool2str(reg_));
 	if (reg_)
 		s.string(pwd_);
-	con->send(s);
+	net->send(s);
 
 	// Now let's see, whether the metaserver is answering
 	uint32_t const secs = time(nullptr);
@@ -219,7 +219,7 @@ void InternetGaming::logout(const std::string& msgcode) {
 	SendPacket s;
 	s.string(IGPCMD_DISCONNECT);
 	s.string(msgcode);
-	con->send(s);
+	net->send(s);
 
 	const std::string& msg = InternetGamingMessages::get_message(msgcode);
 	log("InternetGaming: logout(%s)\n", msg.c_str());
@@ -262,15 +262,15 @@ void InternetGaming::handle_metaserver_communication() {
 	if (error())
 		return;
 	try {
-		assert(con != nullptr);
+		assert(net != nullptr);
 		// Check if the connection is still open
-		if (!con->is_connected()) {
+		if (!net->is_connected()) {
 			handle_failed_read();
 			return;
 		}
 		// Process all available packets
 		RecvPacket packet;
-		while (con->try_receive(packet)) {
+		while (net->try_receive(packet)) {
 			handle_packet(packet);
 		}
 	} catch (const std::exception& e) {
@@ -283,7 +283,7 @@ void InternetGaming::handle_metaserver_communication() {
 		if (clientupdateonmetaserver_) {
 			SendPacket s;
 			s.string(IGPCMD_CLIENTS);
-			con->send(s);
+			net->send(s);
 
 			clientupdateonmetaserver_ = false;
 		}
@@ -291,7 +291,7 @@ void InternetGaming::handle_metaserver_communication() {
 		if (gameupdateonmetaserver_) {
 			SendPacket s;
 			s.string(IGPCMD_GAMES);
-			con->send(s);
+			net->send(s);
 
 			gameupdateonmetaserver_ = false;
 		}
@@ -414,7 +414,7 @@ void InternetGaming::handle_packet(RecvPacket& packet) {
 			// Client received a PING and should immediately PONG as requested
 			SendPacket s;
 			s.string(IGPCMD_PONG);
-			con->send(s);
+			net->send(s);
 
 			lastping_ = time(nullptr);
 		}
@@ -598,7 +598,7 @@ void InternetGaming::join_game(const std::string& gamename) {
 	SendPacket s;
 	s.string(IGPCMD_GAME_CONNECT);
 	s.string(gamename);
-	con->send(s);
+	net->send(s);
 	gamename_ = gamename;
 	log("InternetGaming: Client tries to join a game with the name %s\n", gamename_.c_str());
 	state_ = IN_GAME;
@@ -617,7 +617,7 @@ void InternetGaming::open_game() {
 	s.string(IGPCMD_GAME_OPEN);
 	s.string(gamename_);
 	s.string("1024");  // Used to be maxclients, no longer used.
-	con->send(s);
+	net->send(s);
 	log("InternetGaming: Client opened a game with the name %s.\n", gamename_.c_str());
 	state_ = IN_GAME;
 
@@ -633,7 +633,7 @@ void InternetGaming::set_game_playing() {
 
 	SendPacket s;
 	s.string(IGPCMD_GAME_START);
-	con->send(s);
+	net->send(s);
 	log("InternetGaming: Client announced the start of the game %s.\n", gamename_.c_str());
 
 	// From now on we wait for a reply from the metaserver
@@ -650,7 +650,7 @@ void InternetGaming::set_game_done() {
 
 	SendPacket s;
 	s.string(IGPCMD_GAME_DISCONNECT);
-	con->send(s);
+	net->send(s);
 
 	gameip_ = "";
 	state_ = LOBBY;
@@ -747,14 +747,14 @@ void InternetGaming::send(const std::string& msg) {
 			}
 			// send the request to change the motd
 			m.string(arg);
-			con->send(s);
+			net->send(s);
 			return;
 		} else if (cmd == "announcement") {
 			// send the request to change the motd
 			SendPacket m;
 			m.string(IGPCMD_ANNOUNCEMENT);
 			m.string(arg);
-			con->send(s);
+			net->send(s);
 			return;
 		} else
 			// let everything else pass
@@ -766,7 +766,7 @@ void InternetGaming::send(const std::string& msg) {
 		s.string("");
 	}
 
-	con->send(s);
+	net->send(s);
 }
 
 /**
