@@ -177,6 +177,8 @@ void Tag::parse(TextStream& ts, TagConstraints& tcs, const TagSet& allowed_tags)
 Parser::Parser() {
 	{  // rt tag
 		TagConstraint tc;
+		// TODO(GunChleoc): padding on the bottom and on the right is broken.
+		// Maybe we don't need padding in the rt element anyway?
 		tc.allowed_attrs.insert("padding");
 		tc.allowed_attrs.insert("padding_r");
 		tc.allowed_attrs.insert("padding_l");

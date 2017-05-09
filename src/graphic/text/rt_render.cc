@@ -285,16 +285,24 @@ public:
 	}
 
 protected:
-	/// Throws a TextureTooBig exception if the node's texture would be bigger than the graphics can handle
-	void check_size() {
-		if (width() > g_gr->max_texture_size() || height() > g_gr->max_texture_size()) {
+	/// Throws a TextureTooBig exception if the given dimensions would be bigger than the graphics can handle
+	void check_size(int check_w, int check_h) {
+		// NOCOM we have a minimum supported texture size someplace, we should check against that instead
+		// - at least in debug builds.
+		const int maximum_size = g_gr->max_texture_size();
+		if (check_w > maximum_size || check_h > maximum_size) {
 			const std::string error_message =
-			   (boost::format("Texture (%d, %d) too big! Maximum size is %d.") % width() % height() %
-			    g_gr->max_texture_size())
+			   (boost::format("Texture (%d, %d) too big! Maximum size is %d.") % check_w % check_h %
+			    maximum_size)
 			      .str();
 			log("%s\n", error_message.c_str());
 			throw TextureTooBig(error_message);
 		}
+	}
+
+	/// Check the size for the node's own dimensions
+	void check_size() {
+		check_size(width(), height());
 	}
 
 private:
@@ -775,35 +783,20 @@ public:
 	UI::RenderedText* render(TextureCache* texture_cache) override {
 		UI::RenderedText* rendered_text = new UI::RenderedText();
 
-		if (is_background_color_set_ || background_image_) {
-			// NOCOM tile this in RenderedText:draw
-			check_size();
-			Texture* rv = new Texture(width(), height());
-			rv->fill_rect(Rectf(0, 0, rv->width(), rv->height()), RGBAColor(255, 255, 255, 0));
+		// Draw Solid background Color
+		if (is_background_color_set_) {
+			UI::RenderedRect* bg_rect = new UI::RenderedRect(Recti(margin_.left, margin_.top, w_, h_), nullptr);
+			check_size(bg_rect->width(), bg_rect->height());
+			bg_rect->background_color_ = background_color_;
+			bg_rect->is_background_color_set_ = true;
+			rendered_text->texts.push_back(std::unique_ptr<UI::RenderedRect>(std::move(bg_rect)));
+		}
 
-			// Draw Solid background Color
-			if (is_background_color_set_) {
-				rv->fill_rect(Rectf(margin_.left, margin_.top, w_, h_), background_color_);
-			}
-
-			// Draw background image (tiling)
-			if (background_image_) {
-				Rectf dst;
-				Rectf src(0, 0, 0, 0);
-
-				for (uint16_t cury = margin_.top; cury < h_ + margin_.top;
-				     cury += background_image_->height()) {
-					for (uint16_t curx = margin_.left; curx < w_ + margin_.left;
-					     curx += background_image_->width()) {
-						dst.x = curx;
-						dst.y = cury;
-						src.w = dst.w = min<int>(background_image_->width(), w_ + margin_.left - curx);
-						src.h = dst.h = min<int>(background_image_->height(), h_ + margin_.top - cury);
-						rv->blit(dst, *background_image_, src, 1., BlendMode::Copy);
-					}
-				}
-			}
-			rendered_text->texts.push_back(std::unique_ptr<UI::RenderedRect>(new UI::RenderedRect(Recti(x(), y(), rv->width(), rv->height()), (rv))));
+		// Draw background image (tiling)
+		if (background_image_) {
+			UI::RenderedRect* bg_rect = new UI::RenderedRect(Recti(margin_.left, margin_.top, w_, h_), background_image_, UI::RenderedRect::DrawMode::kTile);
+			check_size(bg_rect->width(), bg_rect->height());
+			rendered_text->texts.push_back(std::unique_ptr<UI::RenderedRect>(std::move(bg_rect)));
 		}
 
 		for (RenderNode* n : nodes_to_render_) {

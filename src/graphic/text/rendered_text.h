@@ -31,7 +31,8 @@
 namespace UI {
 
 struct RenderedRect {
-	RenderedRect(Recti init_point, const Image* init_image);
+	enum class DrawMode {kBlit, kTile };
+	RenderedRect(Recti init_point, const Image* init_image, DrawMode mode = DrawMode::kBlit);
 	~RenderedRect() {}
 
 	bool operator==(const RenderedRect& other) const;
@@ -50,6 +51,9 @@ struct RenderedRect {
 	Recti rect_;
 	std::unique_ptr<const Image> image_;
 	bool locked_;
+	RGBColor background_color_;
+	bool is_background_color_set_;
+	DrawMode mode_;
 };
 
 struct RenderedText {

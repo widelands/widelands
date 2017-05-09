@@ -22,9 +22,8 @@
 
 namespace UI {
 
-
-RenderedRect::RenderedRect(Recti init_point, const Image* init_image)
-	: rect_(init_point), image_(init_image), locked_(false) {
+RenderedRect::RenderedRect(Recti init_point, const Image* init_image, DrawMode mode)
+	: rect_(init_point), image_(init_image), locked_(false), background_color_(0, 0, 0), is_background_color_set_(false), mode_(mode) {
 }
 /// RenderedRects are considered identical if they have the same position and dimensions.
 bool RenderedRect::operator==(const RenderedRect& other) const {
@@ -48,8 +47,6 @@ int RenderedRect::width() const {
 int RenderedRect::height() const {
 	return rect_.h;
 }
-
-
 int RenderedText::width() const {
 	int result = 0;
 	for (const auto& rect : texts) {
@@ -73,7 +70,24 @@ void RenderedText::draw(RenderTarget& dst,
 	UI::correct_for_align(align, region.w, &aligned_pos);
 	for (const auto& rect : texts) {
 		Vector2i blit_point(aligned_pos.x + rect->get_x(), aligned_pos.y + rect->get_y());
-		dst.blit(blit_point, rect->image());
+
+		// Draw Solid background Color
+		if (rect->is_background_color_set_) {
+			dst.fill_rect(Rectf(blit_point, rect->width(), rect->height()), rect->background_color_);
+		}
+
+		if (rect->image()) {
+			switch (rect->mode_) {
+			// Draw a foreground texture
+			case RenderedRect::DrawMode::kBlit:
+				dst.blit(blit_point, rect->image());
+				break;
+			// Draw a background image (tiling)
+			case RenderedRect::DrawMode::kTile:
+				dst.tile(Recti(blit_point, rect->width(), rect->height()), rect->image(), Vector2i(0, 0));
+				break;
+			}
+		}
 		// TODO(GunChleoc): Remove this line when testing is done.
 		//dst.draw_rect(Rectf(blit_point.x, blit_point.y, rect->width(), rect->height()), RGBColor(100, 100, 100));
 	}
@@ -83,11 +97,29 @@ void RenderedText::draw(RenderTarget& dst, const Vector2i& position, UI::Align a
 	draw(dst, position, Recti(0, 0, width(), height()), align);
 }
 
+// For testing purposes only. Needs to mirror the draw function.
 std::unique_ptr<Texture> RenderedText::as_texture() const {
 	std::unique_ptr<Texture> texture(new Texture(width(), height()));
 	for (const auto& rect : texts) {
 		const Rectf dest(rect->get_x(), rect->get_y(), rect->width(), rect->height());
-		texture->blit(dest, *rect->image(), dest, 1., BlendMode::Copy);
+
+		// Draw Solid background Color
+		if (rect->is_background_color_set_) {
+			texture->fill_rect(dest, rect->background_color_);
+		}
+
+		if (rect->image()) {
+			switch (rect->mode_) {
+			// Draw a foreground texture
+			case RenderedRect::DrawMode::kBlit:
+				texture->blit(dest, *rect->image(), dest, 1., BlendMode::Copy);
+				break;
+			// Draw a background image (tiling)
+			// TODO(GunChleoc): Support tiling here
+			case RenderedRect::DrawMode::kTile:
+				break;
+			}
+		}
 	}
 	return texture;
 }
