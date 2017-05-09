@@ -49,6 +49,7 @@ struct RenderedRect {
 // NOCOM private:
 	Recti rect_;
 	std::unique_ptr<const Image> image_;
+	bool locked_;
 };
 
 struct RenderedText {

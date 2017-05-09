@@ -24,7 +24,7 @@ namespace UI {
 
 
 RenderedRect::RenderedRect(Recti init_point, const Image* init_image)
-	: rect_(init_point), image_(init_image) {
+	: rect_(init_point), image_(init_image), locked_(false) {
 }
 /// RenderedRects are considered identical if they have the same position and dimensions.
 bool RenderedRect::operator==(const RenderedRect& other) const {

@@ -236,6 +236,10 @@ public:
 	// TODO(GunChleoc): Remove this function once conversion is finished and well tested.
 	virtual const std::string debug_info() const = 0;
 
+	virtual bool is_div() const {
+		return false;
+	}
+
 	virtual bool is_non_mandatory_space() const {
 		return false;
 	}
@@ -497,7 +501,7 @@ public:
 	}
 
 	const std::string debug_info() const override {
-		return txt_;
+		return "'" + txt_ + "'";
 	}
 
 	uint16_t width() const override {
@@ -751,6 +755,10 @@ public:
 		nodes_to_render_.clear();
 	}
 
+	virtual bool is_div() const {
+		return true;
+	}
+
 	const std::string debug_info() const override {
 		return "div";
 	}
@@ -771,8 +779,6 @@ public:
 	// NOCOM can these all be const UI::RenderedText*?
 	UI::RenderedText* render(TextureCache* texture_cache) override {
 		UI::RenderedText* rendered_text = new UI::RenderedText();
-
-		log("(%d %d %d %d) render div\n", x(), y(), width(), height());
 
 		if (is_background_color_set_ || background_image_) {
 			// NOCOM tile this in RenderedText:draw
@@ -802,16 +808,19 @@ public:
 					}
 				}
 			}
-			log("(%d %d %d %d) bg\n", x(), y(), rv->width(), rv->height());
 			rendered_text->texts.push_back(std::unique_ptr<UI::RenderedRect>(new UI::RenderedRect(Recti(x(), y(), rv->width(), rv->height()), (rv))));
 		}
 
 		// NOCOM DivTagRenderNode
 		for (RenderNode* n : nodes_to_render_) {
-			// NOCOM fix positioning
-			log("(%d %d %d %d) %s!\n", n->x(), n->y(), n->width(), n->height(), n->debug_info().c_str());
-			for (auto& rendered_rect : n->render(texture_cache)->texts) {
-				rendered_rect->set_rectangle(Recti(x() + n->x() + margin_.left, y() + n->y() + margin_.top, n->width(), n->height()));
+			const auto& renderme = n->render(texture_cache);
+			for (auto& rendered_rect : renderme->texts) {
+				if (!rendered_rect->locked_) {
+					rendered_rect->set_rectangle(Recti(x() + n->x() + margin_.left, y() + n->y() + margin_.top, rendered_rect->width(), rendered_rect->height()));
+				} else {
+					rendered_rect->set_rectangle(Recti(x() + rendered_rect->get_x(), y() + rendered_rect->get_y() + margin_.top, rendered_rect->width(), rendered_rect->height()));
+				}
+				rendered_rect->locked_ = true;
 				rendered_text->texts.push_back(std::move(rendered_rect));
 			}
 			delete n;
