@@ -69,18 +69,13 @@ void RenderedText::draw(RenderTarget& dst,
 					const Vector2i& position,
 					Recti region, Align align) const {
 
-	Vector2i aligned_pos(position.x, position.y); // un-const the position
+	Vector2i aligned_pos(position.x - region.x, position.y - region.y); // un-const the position and adjust for region
 	UI::correct_for_align(align, region.w, &aligned_pos);
 	for (const auto& rect : texts) {
-		// NOCOM implement when we have actual data
-		//bool contains_origin = region.contains(rect->point);
-		//bool contains_opposite = region.contains(Vector2i(rect->point.x + rect->image->width(), rect->image->height()));
-		//if (contains_origin && contains_opposite) {
-		Vector2f blit_point(aligned_pos.x + rect->get_x(),  aligned_pos.y + rect->get_y());
-		dst.blitrect(blit_point, rect->image(), region);
+		Vector2i blit_point(aligned_pos.x + rect->get_x(), aligned_pos.y + rect->get_y());
+		dst.blit(blit_point, rect->image());
 		// TODO(GunChleoc): Remove this line when testing is done.
-		dst.draw_rect(Rectf(blit_point.x, blit_point.y, rect->width(), rect->height()), RGBColor(100, 100, 100));
-		//}
+		//dst.draw_rect(Rectf(blit_point.x, blit_point.y, rect->width(), rect->height()), RGBColor(100, 100, 100));
 	}
 }
 

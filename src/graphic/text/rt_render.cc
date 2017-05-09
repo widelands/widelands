@@ -545,7 +545,6 @@ uint16_t TextNode::hotspot_y() const {
 }
 
 UI::RenderedText* TextNode::render(TextureCache* texture_cache) {
-	// NOCOM TextNode
 	const Image& img =
 	   font_.render(txt_, nodestyle_.font_color, nodestyle_.font_style, texture_cache);
 
@@ -598,8 +597,6 @@ UI::RenderedText* FillingTextNode::render(TextureCache* texture_cache) {
 		Rectf srcrect(0.f, 0.f, min<int>(t.width(), w_ - curx), h_);
 		texture->blit(Rectf(curx, 0, srcrect.w, srcrect.h), t, srcrect, 1., BlendMode::Copy);
 	}
-
-	// NOCOM FillingTextNode
 	UI::RenderedText* rendered_text = new UI::RenderedText();
 	rendered_text->texts.push_back(std::unique_ptr<UI::RenderedRect>(new UI::RenderedRect(Recti(0, 0, texture->width(), texture->height()), (texture))));
 	return rendered_text;
@@ -626,7 +623,6 @@ public:
 		if (show_spaces_) {
 			Texture* texture = new Texture(w_, h_);
 			texture->fill_rect(Rectf(0, 0, w_, h_), RGBAColor(0xcc, 0, 0, 0xcc));
-			// NOCOM WordSpacerNode
 			UI::RenderedText* rendered_text = new UI::RenderedText();
 			rendered_text->texts.push_back(std::unique_ptr<UI::RenderedRect>(new UI::RenderedRect(Recti(0, 0, texture->width(), texture->height()), (texture))));
 			return rendered_text;
@@ -712,7 +708,6 @@ public:
 		} else {
 			texture->fill_rect(Rectf(0, 0, w_, h_), RGBAColor(255, 255, 255, 0));
 		}
-		// NOCOM SpaceNode
 		UI::RenderedText* rendered_text = new UI::RenderedText();
 		rendered_text->texts.push_back(std::unique_ptr<UI::RenderedRect>(new UI::RenderedRect(Recti(0, 0, texture->width(), texture->height()), (texture))));
 		return rendered_text;
@@ -811,7 +806,6 @@ public:
 			rendered_text->texts.push_back(std::unique_ptr<UI::RenderedRect>(new UI::RenderedRect(Recti(x(), y(), rv->width(), rv->height()), (rv))));
 		}
 
-		// NOCOM DivTagRenderNode
 		for (RenderNode* n : nodes_to_render_) {
 			const auto& renderme = n->render(texture_cache);
 			for (auto& rendered_rect : renderme->texts) {
@@ -901,7 +895,6 @@ private:
 };
 
 UI::RenderedText* ImgRenderNode::render(TextureCache* /* texture_cache */) {
-	// NOCOM ImgRenderNode
 	Texture* texture = new Texture(width(), height());
 	texture->blit(Rectf(0, 0, width(), height()), *image_, Rectf(0, 0, image_->width(), image_->height()),
 	         1., BlendMode::Copy);
