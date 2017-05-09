@@ -54,20 +54,21 @@ obj_build_quarry = {
 
 obj_build_sawmill_stonemason_and_lumberjacks = {
    name = "build_sawmill_stonemason_and_lumberjacks",
-   title=_"Build a lumberjack’s house, a sawmill and a stonemason's house at least to complete the building material supply chain",
+   title=_"Build a lumberjack’s house, a sawmill and a stonemason's house",
    number = 3,
    body = objective_text(_"Lumberjack, Sawmill and Stonemason",
-      listitem_bullet(_[[Build a lumberjack’s house, a sawmill and a stonemason's house as soon as there is enough space for them.]])
+      listitem_bullet(_[[Build a lumberjack’s house, a sawmill and a stonemason's house as soon as there is enough space for them. This will complete the basic building material supply chain.]])
    ),
 }
 
 
 obj_lower_marble_column_demand = {
    name = "lower_marble_column_demand",
-   title=_"Lower the demand for marble columns in the economy settings to four",
+   title=_"Lower the demand for marble columns",
    number = 1,
    body = objective_text(_"Lower Demand for Marble Columns",
-      listitem_bullet(_[[We should save some marble for buildings. So, please lower the demand for marble columns in the economy settings to four. (Remember you can access the economy settings by clicking on any flag.)]])
+      listitem_bullet(_[[We should save some marble for buildings. So, please lower the demand for marble columns in the economy settings to four.]]) ..
+      listitem_arrow(_[[Remember that you can access the economy settings by clicking on any flag.]])
    ),
 }
 
@@ -91,7 +92,7 @@ obj_build_port_and_shipyard = {
 
 obj_produce_wheat = {
    name = "produce_50_wheat",
-   title=_"Produce 50 sheaves of wheat at least",
+   title=_"Produce at least 50 sheaves of wheat",
    number = 1,
    body = objective_text(_"Wheat Production",
       listitem_bullet(_[[To get our wool production started, we need at least 50 sheaves of wheat.]])
@@ -112,8 +113,8 @@ obj_build_expedition_ports = {
    title=_"Build 2 ports on distant islands",
    number = 1,
    body = objective_text(_"Build 2 Expedition Ports",
-      listitem_bullet(_[[We should explore the island in the south, use an expedition to build a port there. Afterwards let's try to find some mining resources.]]) ..
-	  listitem_bullet(_[[We should send a ship nothwards to gather some intelligence about the barbarians. Try to build a port on the island and found an outpost.]])
+      listitem_bullet(_[[We should explore the island in the south. Use an expedition to build a port there. Afterwards, let's try to find some mining resources.]]) ..
+	  listitem_bullet(_[[We should send a ship nothwards to gather some intelligence about the Barbarians. Try to build a port on the island and found an outpost.]])
    ),
 }
 
@@ -131,7 +132,7 @@ obj_conquer_all = {
    title=_"Defeat the Barbarians",
    number = 1,
    body = objective_text(_"Defeat the Enemy",
-      listitem_bullet(_[[We should end the barbarians’ existence in this part of the world.]])
+      listitem_bullet(_[[We should end the Barbarians’ existence in this part of the world.]])
    ),
 }
 
@@ -155,7 +156,7 @@ obj_find_artifacts = {
 
 obj_training = {
    name = "build_training_infrastructure",
-   title=_"Build a training camp, some barracks and an arena or colosseum",
+   title=_"Build a training infrastructure",
    number = 3,
    body = objective_text(_"Training Infrastructure",
       listitem_bullet(_[[Build a training camp, some barracks and an arena or colosseum to train our soldiers.]])
@@ -359,10 +360,11 @@ amalea_4 = {
       _([[I think a stock of 50 wheat would be enough for starters. Perhaps we will have to adjust the target quantity for wheat to achieve this.]]))
       .. new_objectives(obj_produce_wheat),
    posy=1,
-   h=650,
+   h=550,
 }
 
-
+-- NOCOM (#codereview): This message was overlayed by another message by Amalea. Sleep in between?
+-- I also made some message windows smaller. Our minimum supported resoultion is 800 x 600, so message windows that are higher than 550 are cumbersome.
 diary_page_4 = {
    title=_"Seafaring is Possible Again",
    body= lutius(_"Diary of Lutius",
@@ -387,7 +389,8 @@ amalea_5 = {
    posy=1,
    h=500,
 }
-
+-- NOCOM(#codereview): Wait with this one until our first expedition is ready?
+-- If that can't be checked for easily, wait until we have a smelting works and a gold mine?
 saledus_5 = {
    title=_"We Should Explore the Islands",
    body= saledus2(_"Saledus is excited…",
@@ -401,7 +404,7 @@ saledus_5 = {
       _([[But the following objective is even more important:]])
       .. paragraphdivider() ..
       -- TRANSLATORS: Saledus
-      _([[I think I have heard the wind carrying some weird but well known sounds from the north. If I’m not totally wrong, I have heard some Barbarian war drums. So, we should better go and look what is going on up there.]]))
+      _([[I think I have heard the wind carrying some weird but well known sounds from the north. If I’m not totally wrong, I have heard some Barbarian war drums. So, we should better go and have a look at what is going on up there.]]))
 	  .. new_objectives(obj_build_expedition_ports),
    posy=1,
    h=550,
@@ -426,7 +429,7 @@ amalea_6 = {
       _([[If there are difficulties with building all the buildings needed, we should think about all we have learned so far. We can cut down all the rocks. We should perhaps optimize our roads to free up some building sites, or even dismantle some military buildings to obtain more space for our economy.]]))
       .. new_objectives(obj_produce_gold),
    posy=1,
-   h=650,
+   h=550,
 }
 
 saledus_6 = {
@@ -524,7 +527,7 @@ saledus_8 = {
       _([[To ease the search, I have crafted some models of the pieces as you can see. You can give them to our soldiers and sailors to look for them.]]))
 	  .. new_objectives(obj_find_artifacts),
    posy=1,
-   h=650,
+   h=550,
 }
 
 saledus_9 = {
@@ -579,7 +582,7 @@ diary_page_5 = {
    posy=1,
 }
 
-
+-- NOCOM(#codereview): Move back to original location after the message has been dismissed.
 diary_page_6 = {
    title=_"Artifact Found",
    body= lutius(_"Diary of Lutius",
