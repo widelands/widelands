@@ -23,30 +23,30 @@
 namespace UI {
 
 
-RenderedRect::RenderedRect(Vector2i init_point, const Image* init_image)
-	: point_(init_point), image_(init_image) {
+RenderedRect::RenderedRect(Recti init_point, const Image* init_image)
+	: rect_(init_point), image_(init_image) {
 }
-
+/// RenderedRects are considered identical if they have the same position and dimensions.
 bool RenderedRect::operator==(const RenderedRect& other) const {
-	return point_ == Vector2i(other.get_x(), other.get_y());
+	return get_x() == other.get_x() && get_y() == other.get_y() && width() == other.width() && height() == other.height();
 }
 const Image* RenderedRect::image() const {
 	return image_.get();
 }
 
 int RenderedRect::get_x() const {
-	return point_.x;
+	return rect_.x;
 }
 
 int RenderedRect::get_y() const {
-	return point_.y;
+	return rect_.y;
 }
 
 int RenderedRect::width() const {
-	return image_->width();
+	return rect_.w;
 }
 int RenderedRect::height() const {
-	return image_->height();
+	return rect_.h;
 }
 
 
@@ -82,7 +82,6 @@ void RenderedText::draw(RenderTarget& dst,
 		dst.draw_rect(Rectf(blit_point.x, blit_point.y, rect->width(), rect->height()), RGBColor(100, 100, 100));
 		//}
 	}
-
 }
 
 void RenderedText::draw(RenderTarget& dst, const Vector2i& position, UI::Align align) const {

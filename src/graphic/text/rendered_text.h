@@ -31,7 +31,7 @@
 namespace UI {
 
 struct RenderedRect {
-	RenderedRect(Vector2i init_point, const Image* init_image);
+	RenderedRect(Recti init_point, const Image* init_image);
 	~RenderedRect() {}
 
 	bool operator==(const RenderedRect& other) const;
@@ -42,14 +42,17 @@ struct RenderedRect {
 	int get_y() const;
 	int width() const;
 	int height() const;
+	void set_rectangle(const Recti& new_dimension) {
+		rect_ = new_dimension;
+	}
 
-private:
-	const Vector2i point_;
+// NOCOM private:
+	Recti rect_;
 	std::unique_ptr<const Image> image_;
 };
 
 struct RenderedText {
-	std::vector<std::unique_ptr<const RenderedRect>> texts;
+	std::vector<std::unique_ptr<RenderedRect>> texts;
 	// Dimensions occupied by the rendered images in pixels.
 	int width() const;
 	int height() const;

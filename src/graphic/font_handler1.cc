@@ -78,7 +78,13 @@ public:
 		const string hash = boost::lexical_cast<string>(w) + text;
 		if (render_results_.count(hash) != 1) {
 			log("\nNOCOM rendering new text (%d): %s\n", w, text.c_str());
-			render_results_.insert(std::make_pair(hash, std::move(rt_renderer_->render(text, w))));
+			UI::RenderedText* rendered_text = rt_renderer_->render(text, w);
+			render_results_.insert(std::make_pair(hash, std::move(rendered_text)));
+			log("\nNOCOM got rects:\n");
+			for (const auto& rect : rendered_text->texts) {
+				log("(%d %d %d %d)\n", rect->get_x(), rect->get_y(), rect->width(), rect->height());
+			}
+
 		} else {
 			assert(image_cache_->has(hash));
 		}
