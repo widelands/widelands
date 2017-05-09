@@ -387,12 +387,9 @@ std::string GameClient::get_win_condition_script() {
 	return d->settings.win_condition_script;
 }
 
-void GameClient::set_win_condition_script(std::string) {
+void GameClient::set_win_condition_script(const std::string&) {
 	// Clients are not allowed to change this
-}
-
-void GameClient::next_win_condition() {
-	// Clients are not allowed to change this
+	NEVER_HERE();
 }
 
 void GameClient::set_player_number(uint8_t const number) {
