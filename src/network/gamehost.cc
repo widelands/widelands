@@ -33,6 +33,7 @@
 #include "ai/computer_player.h"
 #include "base/i18n.h"
 #include "base/md5.h"
+#include "base/warning.h"
 #include "base/wexception.h"
 #include "build_info.h"
 #include "chat/chat.h"
@@ -49,6 +50,7 @@
 #include "map_io/widelands_map_loader.h"
 #include "network/constants.h"
 #include "network/internet_gaming.h"
+#include "network/nethost.h"
 #include "network/network_gaming_messages.h"
 #include "network/network_lan_promotion.h"
 #include "network/network_player_settings_backend.h"
@@ -476,8 +478,7 @@ private:
 };
 
 struct Client {
-	TCPsocket sock;
-	Deserializer deserializer;
+	NetHost::ConId sock_id;
 	uint8_t playernum;
 	int16_t usernum;
 	std::string build_id;
@@ -501,8 +502,7 @@ struct GameHostImpl {
 	NetworkPlayerSettingsBackend npsb;
 
 	LanGamePromoter* promoter;
-	TCPsocket svsock;
-	SDLNet_SocketSet sockset;
+	std::unique_ptr<NetHost> net;
 
 	/// List of connected clients. Note that clients are not in the same
 	/// order as players. In fact, a client must not be assigned to a player.
@@ -549,8 +549,7 @@ struct GameHostImpl {
 	     hp(h),
 	     npsb(&hp),
 	     promoter(nullptr),
-	     svsock(nullptr),
-	     sockset(nullptr),
+	     net(),
 	     game(nullptr),
 	     pseudo_networktime(0),
 	     last_heartbeat(0),
@@ -576,11 +575,13 @@ GameHost::GameHost(const std::string& playername, bool internet)
 	d->localplayername = playername;
 
 	// create a listening socket
-	IPaddress myaddr;
-	SDLNet_ResolveHost(&myaddr, nullptr, WIDELANDS_PORT);
-	d->svsock = SDLNet_TCP_Open(&myaddr);
-
-	d->sockset = SDLNet_AllocSocketSet(16);
+	d->net = NetHost::listen(WIDELANDS_PORT);
+	if (d->net == nullptr) {
+		// This might happen when the widelands socket is already in use
+		throw WLWarning(_("Failed to start the server!"),
+		                _("Widelands could not start a server.\n"
+		                  "Probably some other process is already running a server on our port."));
+	}
 	d->promoter = new LanGamePromoter();
 	d->game = nullptr;
 	d->pseudo_networktime = 0;
@@ -610,12 +611,8 @@ GameHost::~GameHost() {
 		reaper();
 	}
 
-	SDLNet_FreeSocketSet(d->sockset);
-
 	// close all open sockets
-	if (d->svsock != nullptr)
-		SDLNet_TCP_Close(d->svsock);
-
+	d->net.reset();
 	delete d->promoter;
 	delete d;
 	delete file_;
@@ -863,7 +860,7 @@ void GameHost::send(ChatMessage msg) {
 				s.string(msg.msg);
 				s.unsigned_8(1);
 				s.string(msg.recipient);
-				s.send(d->clients.at(clientnum).sock);
+				d->net->send(d->clients.at(clientnum).sock_id, s);
 				log(
 				   "[Host]: personal chat: from %s to %s\n", msg.sender.c_str(), msg.recipient.c_str());
 			} else {
@@ -909,7 +906,7 @@ void GameHost::send(ChatMessage msg) {
 					if (d->clients.at(j).usernum == static_cast<int16_t>(i))
 						break;
 				if (j < d->clients.size())
-					s.send(d->clients.at(j).sock);
+					d->net->send(d->clients.at(j).sock_id, s);
 				else
 					// Better no wexception it would break the whole game
 					log("WARNING: user was found but no client is connected to it!\n");
@@ -1486,7 +1483,8 @@ void GameHost::set_paused(bool /* paused */) {
 void GameHost::broadcast(SendPacket& packet) {
 	for (const Client& client : d->clients) {
 		if (client.playernum != UserSettings::not_connected()) {
-			packet.send(client.sock);
+			assert(client.sock_id > 0);
+			d->net->send(client.sock_id, packet);
 		}
 	}
 }
@@ -1595,7 +1593,7 @@ void GameHost::welcome_client(uint32_t const number, std::string& playername) {
 	Client& client = d->clients.at(number);
 
 	assert(client.playernum == UserSettings::not_connected());
-	assert(client.sock);
+	assert(client.sock_id > 0);
 
 	// The client gets its own initial data set.
 	client.playernum = UserSettings::none();
@@ -1637,23 +1635,22 @@ void GameHost::welcome_client(uint32_t const number, std::string& playername) {
 	s.unsigned_8(NETCMD_HELLO);
 	s.unsigned_8(NETWORK_PROTOCOL_VERSION);
 	s.unsigned_32(client.usernum);
-	s.send(client.sock);
-
+	d->net->send(client.sock_id, s);
 	// even if the network protocol is the same, the data might be different.
 	if (client.build_id != build_id())
 		send_system_message_code("DIFFERENT_WL_VERSION", effective_name, client.build_id, build_id());
-
 	// Send information about currently selected map / savegame
 	s.reset();
+
 	s.unsigned_8(NETCMD_SETTING_MAP);
 	write_setting_map(s);
-	s.send(client.sock);
+	d->net->send(client.sock_id, s);
 
 	// If possible, offer the map / savegame as transfer
 	if (file_) {
 		s.reset();
 		if (write_map_transfer_info(s, file_->filename))
-			s.send(client.sock);
+			d->net->send(client.sock_id, s);
 	}
 
 	//  Send the tribe information to the new client.
@@ -1667,22 +1664,22 @@ void GameHost::welcome_client(uint32_t const number, std::string& playername) {
 		for (uint8_t j = 0; j < nr_initializations; ++j)
 			s.string(d->settings.tribes[i].initializations[j].script);
 	}
-	s.send(client.sock);
+	d->net->send(client.sock_id, s);
 
 	s.reset();
 	s.unsigned_8(NETCMD_SETTING_ALLPLAYERS);
 	write_setting_all_players(s);
-	s.send(client.sock);
+	d->net->send(client.sock_id, s);
 
 	s.reset();
 	s.unsigned_8(NETCMD_SETTING_ALLUSERS);
 	write_setting_all_users(s);
-	s.send(client.sock);
+	d->net->send(client.sock_id, s);
 
 	s.reset();
 	s.unsigned_8(NETCMD_WIN_CONDITION);
 	s.string(d->settings.win_condition_script);
-	s.send(client.sock);
+	d->net->send(client.sock_id, s);
 
 	// Broadcast new information about the player to everybody
 	s.reset();
@@ -1948,20 +1945,15 @@ void GameHost::syncreport() {
 }
 
 void GameHost::handle_network() {
-	TCPsocket sock;
 
 	if (d->promoter != nullptr)
 		d->promoter->run();
 
+
 	// Check for new connections.
-	while (d->svsock != nullptr && (sock = SDLNet_TCP_Accept(d->svsock)) != nullptr) {
-		log("[Host]: Received a connection request\n");
-
-		SDLNet_TCP_AddSocket(d->sockset, sock);
-
-		Client peer;
-
-		peer.sock = sock;
+	Client peer;
+	assert(d->net != nullptr);
+	while (d->net->try_accept(peer.sock_id)) {
 		peer.playernum = UserSettings::not_connected();
 		peer.syncreport_arrived = false;
 		peer.desiredspeed = 1000;
@@ -1982,38 +1974,25 @@ void GameHost::handle_network() {
 			send(msgs.at(i));
 	}
 
+	for (size_t i = 0; i < d->clients.size(); ++i) {
+		if (!d->net->is_connected(d->clients.at(i).sock_id))
+			disconnect_client(i, "CONNECTION_LOST", false);
+	}
+
 	// Check if we hear anything from our clients
-	while (SDLNet_CheckSockets(d->sockset, 0) > 0) {
-		for (size_t i = 0; i < d->clients.size(); ++i) {
-			try {
-				Client& client = d->clients.at(i);
-
-				while (client.sock && SDLNet_SocketReady(client.sock)) {
-
-					uint8_t buffer[512];
-					const int32_t bytes = SDLNet_TCP_Recv(client.sock, buffer, sizeof(buffer));
-
-					if (bytes <= 0) {
-						disconnect_client(i, "CONNECTION_LOST", false);
-						break;
-					}
-
-					client.deserializer.read_data(buffer, bytes);
-
-					//  Handle all available packets immediately after each read, so
-					//  that we do not miss any commands (especially DISCONNECT...).
-					RecvPacket packet;
-					while (client.sock && client.deserializer.write_packet(packet)) {
-						handle_packet(i, packet);
-					}
-				}
-			} catch (const DisconnectException& e) {
-				disconnect_client(i, e.what());
-			} catch (const ProtocolException& e) {
-				disconnect_client(i, "PROTOCOL_EXCEPTION", true, e.what());
-			} catch (const std::exception& e) {
-				disconnect_client(i, "MALFORMED_COMMANDS", true, e.what());
+	RecvPacket packet;
+	for (size_t i = 0; i < d->clients.size(); ++i) {
+		try {
+			while (d->net->try_receive(d->clients.at(i).sock_id, packet)) {
+				handle_packet(i, packet);
 			}
+		// Thrown by handle_packet()
+		} catch (const DisconnectException& e) {
+			disconnect_client(i, e.what());
+		} catch (const ProtocolException& e) {
+			disconnect_client(i, "PROTOCOL_EXCEPTION", true, e.what());
+		} catch (const std::exception& e) {
+			disconnect_client(i, "MALFORMED_COMMANDS", true, e.what());
 		}
 	}
 
@@ -2060,13 +2039,12 @@ void GameHost::handle_packet(uint32_t const i, RecvPacket& r) {
 			// Send PING back
 			SendPacket s;
 			s.unsigned_8(NETCMD_METASERVER_PING);
-			s.send(client.sock);
+			d->net->send(client.sock_id, s);
 
 			// Remove metaserver from list of clients
 			client.playernum = UserSettings::not_connected();
-			SDLNet_TCP_DelSocket(d->sockset, client.sock);
-			SDLNet_TCP_Close(client.sock);
-			client.sock = nullptr;
+			d->net->close(client.sock_id);
+			client.sock_id = 0;
 			return;
 		}
 
@@ -2226,7 +2204,7 @@ void GameHost::handle_packet(uint32_t const i, RecvPacket& r) {
 			throw DisconnectException("REQUEST_OF_N_E_FILE");
 		send_system_message_code(
 		   "STARTED_SENDING_FILE", file_->filename, d->settings.users.at(client.usernum).name);
-		send_file_part(client.sock, 0);
+		send_file_part(client.sock_id, 0);
 		// Remember client as "currently receiving file"
 		d->settings.users[client.usernum].ready = false;
 		SendPacket s;
@@ -2265,7 +2243,7 @@ void GameHost::handle_packet(uint32_t const i, RecvPacket& r) {
 			send_system_message_code("SENDING_FILE_PART",
 			                         (boost::format("%i/%i") % part % (file_->parts.size() + 1)).str(),
 			                         file_->filename, d->settings.users.at(client.usernum).name);
-		send_file_part(client.sock, part);
+		send_file_part(client.sock_id, part);
 		break;
 	}
 
@@ -2274,7 +2252,7 @@ void GameHost::handle_packet(uint32_t const i, RecvPacket& r) {
 	}
 }
 
-void GameHost::send_file_part(TCPsocket csock, uint32_t part) {
+void GameHost::send_file_part(NetHost::ConId csock_id, uint32_t part) {
 	assert(part < file_->parts.size());
 
 	uint32_t left = file_->bytes - NETFILEPARTSIZE * part;
@@ -2286,7 +2264,7 @@ void GameHost::send_file_part(TCPsocket csock, uint32_t part) {
 	s.unsigned_32(part);
 	s.unsigned_32(size);
 	s.data(file_->parts[part].part, size);
-	s.send(csock);
+	d->net->send(csock_id, s);
 }
 
 void GameHost::disconnect_player_controller(uint8_t const number, const std::string& name) {
@@ -2349,7 +2327,7 @@ void GameHost::disconnect_client(uint32_t const number,
 
 	log("[Host]: disconnect_client(%u, %s, %s)\n", number, reason.c_str(), arg.c_str());
 
-	if (client.sock) {
+	if (client.sock_id > 0) {
 		if (sendreason) {
 			SendPacket s;
 			s.unsigned_8(NETCMD_DISCONNECT);
@@ -2357,12 +2335,11 @@ void GameHost::disconnect_client(uint32_t const number,
 			s.string(reason);
 			if (!arg.empty())
 				s.string(arg);
-			s.send(client.sock);
+			d->net->send(client.sock_id, s);
 		}
 
-		SDLNet_TCP_DelSocket(d->sockset, client.sock);
-		SDLNet_TCP_Close(client.sock);
-		client.sock = nullptr;
+		d->net->close(client.sock_id);
+		client.sock_id = 0;
 	}
 
 	if (d->game) {
@@ -2380,7 +2357,7 @@ void GameHost::disconnect_client(uint32_t const number,
 void GameHost::reaper() {
 	uint32_t index = 0;
 	while (index < d->clients.size())
-		if (d->clients.at(index).sock)
+		if (d->clients.at(index).sock_id > 0)
 			++index;
 		else
 			d->clients.erase(d->clients.begin() + index);

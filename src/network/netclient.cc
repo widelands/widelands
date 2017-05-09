@@ -37,6 +37,7 @@ NetClient::~NetClient() {
 		close();
 	if (d->sockset != nullptr)
 		SDLNet_FreeSocketSet(d->sockset);
+	delete d;
 }
 
 bool NetClient::is_connected() const {
@@ -85,7 +86,10 @@ NetClient::NetClient(const std::string& ip_address, const uint16_t port)
 	: d(new NetClientImpl) {
 
 	IPaddress addr;
-	SDLNet_ResolveHost(&addr, ip_address.c_str(), port);
+	if (SDLNet_ResolveHost(&addr, ip_address.c_str(), port) != 0) {
+		log("[Client]: Failed to resolve host address %s:%u.\n", ip_address.c_str(), port);
+		return;
+	}
 	log("[Client]: Trying to connect to %s:%u ... ", ip_address.c_str(), port);
 	d->sock = SDLNet_TCP_Open(&addr);
 	if (is_connected()) {

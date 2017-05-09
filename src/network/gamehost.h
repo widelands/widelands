@@ -125,7 +125,7 @@ private:
 
 	void handle_packet(uint32_t i, RecvPacket&);
 	void handle_network();
-	void send_file_part(TCPsocket, uint32_t);
+	void send_file_part(uint32_t, uint32_t);
 
 	void check_hung_clients();
 	void broadcast_real_speed(uint32_t speed);

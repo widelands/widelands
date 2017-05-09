@@ -110,31 +110,20 @@ void NetworkTime::receive(int32_t const ntime) {
 /*** class SendPacket ***/
 
 SendPacket::SendPacket() {
-	buffer.push_back(0);  //  this will finally be the length of the packet
-	buffer.push_back(0);
 }
 
 void SendPacket::data(const void* const packet_data, const size_t size) {
+	if (buffer.empty()) {
+		buffer.push_back(0);  //  this will finally be the length of the packet
+		buffer.push_back(0);
+	}
+
 	for (size_t idx = 0; idx < size; ++idx)
 		buffer.push_back(static_cast<const uint8_t*>(packet_data)[idx]);
 }
 
 void SendPacket::reset() {
 	buffer.clear();
-}
-
-void SendPacket::send(TCPsocket sock) const {
-	// NOCOM(Notabilis): Method will be removed
-	uint32_t const length = buffer.size();
-
-	assert(length < 0x10000);
-
-	// update packet length
-	buffer[0] = length >> 8;
-	buffer[1] = length & 0xFF;
-
-	if (sock)
-		SDLNet_TCP_Send(sock, &(buffer[0]), buffer.size());
 }
 
 size_t SendPacket::size() const {

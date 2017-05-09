@@ -1176,14 +1176,9 @@ void WLApplication::mainmenu_multiplayer() {
 				break;
 			}
 			case FullscreenMenuBase::MenuTarget::kJoingame: {
-				//IPaddress peer;
-
 				if (!host_address)
 					throw WLWarning(
 					   "Invalid Address", "%s", "The address of the game server is invalid");
-
-				//peer.host = addr;
-				//peer.port = port;
 
 				// TODO(Notabilis): Make this prettier
 				char ip_str[] = {"255.255.255.255"};

@@ -99,10 +99,6 @@ struct SendPacket : public StreamWrite {
 
 	void reset();
 
-	// NOCOM(Notabilis): Method will be removed
-	void send(TCPsocket sock) const;
-
-
 	void data(void const* data, size_t size) override;
 
 	size_t size() const;
