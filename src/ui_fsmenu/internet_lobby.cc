@@ -383,26 +383,6 @@ void FullscreenMenuInternetLobby::clicked_joingame() {
 			log("InternetGaming: cut IPv6 address: %s\n", ip.c_str());
 		}
 
-		/*
-		// NOCOM(Notabilis): This section does not seem to make any sense??
-		IPaddress peer;
-		if (hostent* const he = gethostbyname(ip.c_str())) {
-			peer.host = (reinterpret_cast<in_addr*>(he->h_addr_list[0]))->s_addr;
-			DIAG_OFF("-Wold-style-cast")
-			peer.port = htons(WIDELANDS_PORT);
-			DIAG_ON("-Wold-style-cast")
-		} else {
-			// Actually the game is not done, but that way we are again listed as in the lobby
-			InternetGaming::ref().set_game_done();
-			// Show a popup warning message
-			std::string warningheader(_("Connection problem"));
-			std::string warning(_("Widelands was unable to connect to the host."));
-			UI::WLMessageBox mmb(
-			   this, warningheader, warning, UI::WLMessageBox::MBoxType::kOk, UI::Align::kLeft);
-			mmb.run<UI::Panel::Returncodes>();
-		}
-		SDLNet_ResolveHost(&peer, ip.c_str(), WIDELANDS_PORT);
-		*/
 		GameClient netgame(ip, WIDELANDS_PORT, InternetGaming::ref().get_local_clientname(), true);
 		netgame.run();
 	} else
