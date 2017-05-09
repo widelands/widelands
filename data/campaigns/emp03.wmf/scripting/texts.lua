@@ -60,14 +60,14 @@ obj_build_sawmill_stonemason_and_lumberjacks = {
       listitem_bullet(_[[Build a lumberjack’s house, a sawmill and a stonemason's house as soon as there is enough space for them.]])
    ),
 }
--- NOCOM(#codereview): Explain how to do that - this is still a tutorial campaign.
--- Also, the value is not checked (objective won't complete). What value shold the demand be lowered to?
+
+
 obj_lower_marble_column_demand = {
    name = "lower_marble_column_demand",
-   title=_"Lower the demand for marble columns in the economy settings",
+   title=_"Lower the demand for marble columns in the economy settings to four",
    number = 1,
    body = objective_text(_"Lower Demand for Marble Columns",
-      listitem_bullet(_[[We should save some marble for buildings. So, please lower the demand for marble columns.]])
+      listitem_bullet(_[[We should save some marble for buildings. So, please lower the demand for marble columns in the economy settings to four. (Remember you can access the economy settings by clicking on any flag.)]])
    ),
 }
 
@@ -209,6 +209,7 @@ diary_page_3 = {
       _([[I really don't know if and how we will get back home. And the war is going on without us. I hope my comrades are defending our empire well.]])),
 
    posy=1,
+   h=500,
 }
 
 saledus = {
@@ -358,7 +359,7 @@ amalea_4 = {
       _([[I think a stock of 50 wheat would be enough for starters. Perhaps we will have to adjust the target quantity for wheat to achieve this.]]))
       .. new_objectives(obj_produce_wheat),
    posy=1,
-   h=600,
+   h=650,
 }
 
 
@@ -403,7 +404,7 @@ saledus_5 = {
       _([[I think I have heard the wind carrying some weird but well known sounds from the north. If I’m not totally wrong, I have heard some Barbarian war drums. So, we should better go and look what is going on up there.]]))
 	  .. new_objectives(obj_build_expedition_ports),
    posy=1,
-   h=500,
+   h=550,
 }
 
 amalea_6 = {
@@ -425,7 +426,7 @@ amalea_6 = {
       _([[If there are difficulties with building all the buildings needed, we should think about all we have learned so far. We can cut down all the rocks. We should perhaps optimize our roads to free up some building sites, or even dismantle some military buildings to obtain more space for our economy.]]))
       .. new_objectives(obj_produce_gold),
    posy=1,
-   h=600,
+   h=650,
 }
 
 saledus_6 = {
@@ -523,7 +524,7 @@ saledus_8 = {
       _([[To ease the search, I have crafted some models of the pieces as you can see. You can give them to our soldiers and sailors to look for them.]]))
 	  .. new_objectives(obj_find_artifacts),
    posy=1,
-   h=500,
+   h=650,
 }
 
 saledus_9 = {
