@@ -54,10 +54,10 @@ obj_build_quarry = {
 
 obj_build_sawmill_stonemason_and_lumberjacks = {
    name = "build_sawmill_stonemason_and_lumberjacks",
-   title=_"Build a lumberjack’s house, a sawmill and a stonemason's house",
+   title=_"Build a lumberjack’s house, a sawmill and a stonemason’s house",
    number = 3,
    body = objective_text(_"Lumberjack, Sawmill and Stonemason",
-      listitem_bullet(_[[Build a lumberjack’s house, a sawmill and a stonemason's house as soon as there is enough space for them. This will complete the basic building material supply chain.]])
+      listitem_bullet(_[[Build a lumberjack’s house, a sawmill and a stonemason’s house as soon as there is enough space for them. This will complete the basic building material supply chain.]])
    ),
 }
 
@@ -104,7 +104,7 @@ obj_produce_cloth = {
    title=_"Produce cloth for building our first ship",
    number = 1,
    body = objective_text(_"Cloth Production",
-      listitem_bullet(_[[Now let's turn all the wheat into wool (at least 50 bales) and then use the wool to weave cloth in order to build a ship.]])
+      listitem_bullet(_[[Now let’s turn all the wheat into wool (at least 50 bales) and then use the wool to weave cloth in order to build a ship.]])
    ),
 }
 
@@ -113,7 +113,7 @@ obj_build_expedition_ports = {
    title=_"Build 2 ports on distant islands",
    number = 1,
    body = objective_text(_"Build 2 Expedition Ports",
-      listitem_bullet(_[[We should explore the island in the south. Use an expedition to build a port there. Afterwards, let's try to find some mining resources.]]) ..
+      listitem_bullet(_[[We should explore the island in the south. Use an expedition to build a port there. Afterwards, let’s try to find some mining resources.]]) ..
 	  listitem_bullet(_[[We should send a ship nothwards to gather some intelligence about the Barbarians. Try to build a port on the island and found an outpost.]])
    ),
 }
@@ -146,7 +146,7 @@ obj_find_all_ports = {
 }
 
 obj_find_artifacts = {
-   name = "find_neptune'_shrine",
+   name = "find_neptunes_shrine",
    title=_"Recover the shrine",
    number = 1,
    body = text_line("</p><p font-size=14 font-weight=bold font-color=d1d1d1 line-spacing=6>Find the Holy Shrine<br>",
@@ -207,7 +207,7 @@ diary_page_3 = {
       _([[To make matters even worse, all the land we can see is blocked by rocks and trees. I fear we won’t find the resources we need to build a new ship.]])
 	  .. paragraphdivider() ..
       -- TRANSLATORS: Lutius - Diary
-      _([[I really don't know if and how we will get back home. And the war is going on without us. I hope my comrades are defending our empire well.]])),
+      _([[I really don’t know if and how we will get back home. And the war is going on without us. I hope my comrades are defending our empire well.]])),
 
    posy=1,
    h=500,
@@ -226,7 +226,7 @@ amalea = {
     title=_"Amalea Interrupts",
     body= amalea1(_"Amalea raises her hand…",
     -- TRANSLATORS: Amalea
-    _([[Salve Lutius. As we don't know how many resources we can get, we should be very restrictive in spending them. Even for military buildings, we should be very careful.]])),
+    _([[Salve Lutius. As we don’t know how many resources we can get, we should be very restrictive in spending them. Even for military buildings, we should be very careful.]])),
 
     posy=1,
 }
@@ -249,7 +249,7 @@ saledus_2 = {
       _([[Sire, I saw that the construction of the outpost was completed, so I have assigned some of my best soldiers to it to keep the watch.]])
       .. paragraphdivider() ..
       -- TRANSLATORS: Saledus
-      _([[But although this is a good step forward, I can't see much space for buildings. The whole island is littered with rocks. How can we ever build a new ship or even have some basic infrastructure to make our lives more comfortable?]])),
+      _([[But although this is a good step forward, I can’t see much space for buildings. The whole island is littered with rocks. How can we ever build a new ship or even have some basic infrastructure to make our lives more comfortable?]])),
    posy=1,
 }
 
@@ -351,7 +351,7 @@ amalea_4 = {
       _([[So, we need more cloth to finally be able to build ships. But there is no space on the island for building a whole economy to produce cloth. Therefore, we need to build the necessary wares step by step.]])
       .. paragraphdivider() ..
       -- TRANSLATORS: Amalea
-      _([[So let's think this over. To weave cloth we need some wool from a sheep farm. The sheepfarm itself needs wheat and water to work. So let's find a space for a big building and build a wheat farm first.]])
+      _([[So, let’s think this over. To weave cloth we need some wool from a sheep farm. The sheepfarm itself needs wheat and water to work. So, let’s find a space for a big building and build a wheat farm first.]])
 	  .. paragraphdivider() ..
 	  -- TRANSLATORS: Amalea
       _([[After the production of enough wheat, we can dismantle the farm and build a sheep farm to produce wool. Later on, we could build a weaving mill in the same spot to use our wool for weaving cloth. But for the moment being, let’s start by producing a reasonable amount of wheat.]])
@@ -536,7 +536,7 @@ saledus_9 = {
       -- TRANSLATORS: Saledus
       _([[Sire, we recovered the holy shrine of Neptune. Now we can seek his protection for our journey.]])
       .. paragraphdivider() ..
-      _([[Oh great Neptune, safeguard our journey! Oh great Neptune, let the winds be friendly for our course! Oh great Neptune, save us from the creatures of the sea! Oh great Neptune, …]])),
+      _([[Oh great Neptune, safeguard our journey! Oh great Neptune, let the winds be friendly to our course! Oh great Neptune, save us from the creatures of the sea! Oh great Neptune, …]])),
    posy=1,
 }
 
@@ -576,7 +576,7 @@ diary_page_5 = {
    title=_"Time to get Home Again",
    body= lutius(_"Diary of Lutius",
       -- TRANSLATORS: Lutius - Diary
-      _([[Yes my fellow comrades, we have done it! We met all the challenges that were put in front of us. But my heart is still with our home. We shall set sail as soon as possible to help defend the empire from the Barbarian tribe.]])
+      _([[Yes my fellow soldiers, we have done it! We have met all the challenges that were put in front of us. But my heart is still with our home. We shall set sail as soon as possible to help defend the Empire from the Barbarian tribe.]])
 	  .. paragraphdivider() ..
       _([[You have completed this mission. You may continue playing if you wish, otherwise move on to the next mission.]])),
    posy=1,
