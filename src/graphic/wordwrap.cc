@@ -192,7 +192,8 @@ void WordWrap::compute_end_of_line(const std::string& text,
 	// Now make sure that it really fits.
 	std::string::size_type test_cutoff = line_start + end * 2 / 3;
 	while ((end > 0) && (static_cast<uint32_t>(line_start + end) > test_cutoff)) {
-		if (uint32_t(text_width(text.substr(line_start, end), fontsize_)) > wrapwidth_ - safety_margin) {
+		if (uint32_t(text_width(text.substr(line_start, end), fontsize_)) >
+		    wrapwidth_ - safety_margin) {
 			--end;
 		} else {
 			break;
@@ -311,8 +312,8 @@ void WordWrap::draw(RenderTarget& dst, Vector2i where, Align align, uint32_t car
 			point.x += wrapwidth_ - kLineMargin;
 		}
 
-		const UI::RenderedText* rendered_text = UI::g_fh1->render(as_editorfont(
-		   lines_[line].text, fontsize_ - UI::g_fh1->fontset()->size_offset(), color_));
+		const UI::RenderedText* rendered_text = UI::g_fh1->render(
+		   as_editorfont(lines_[line].text, fontsize_ - UI::g_fh1->fontset()->size_offset(), color_));
 		UI::correct_for_align(alignment, rendered_text->width(), &point);
 		rendered_text->draw(dst, point);
 

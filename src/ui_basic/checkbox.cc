@@ -45,7 +45,7 @@ Statebox::Statebox(Panel* const parent,
    : Panel(parent, p.x, p.y, kStateboxSize, kStateboxSize, tooltip_text),
      flags_(Is_Enabled),
      pic_graphics_(pic),
-	  rendered_text_(nullptr),
+     rendered_text_(nullptr),
      label_text_("") {
 	uint16_t w = pic->width();
 	uint16_t h = pic->height();
@@ -63,7 +63,7 @@ Statebox::Statebox(Panel* const parent,
    : Panel(parent, p.x, p.y, std::max(width, kStateboxSize), kStateboxSize, tooltip_text),
      flags_(Is_Enabled),
      pic_graphics_(g_gr->images().get("images/ui_basic/checkbox_light.png")),
-	  rendered_text_(nullptr),
+     rendered_text_(nullptr),
      label_text_(label_text) {
 	set_flags(Has_Text, !label_text_.empty());
 	layout();
@@ -153,7 +153,8 @@ void Statebox::draw(RenderTarget& dst) {
 				image_anchor.x = rendered_text_->width() + kPadding;
 				image_anchor.y = (get_h() - kStateboxSize) / 2;
 			}
-			rendered_text_->draw(dst, text_anchor, Recti(0, 0, rendered_text_->width(), rendered_text_->height()));
+			rendered_text_->draw(
+			   dst, text_anchor, Recti(0, 0, rendered_text_->width(), rendered_text_->height()));
 		}
 
 		dst.blitrect(

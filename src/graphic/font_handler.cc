@@ -203,7 +203,7 @@ void FontHandler::Data::render_line(LineCacheEntry& lce) {
  */
 void FontHandler::draw_text(RenderTarget& dst,
                             const TextStyle& style,
-									 Vector2i dstpoint,
+                            Vector2i dstpoint,
                             const std::string& text,
                             Align align,
                             uint32_t caret) {

@@ -56,12 +56,13 @@ Tab::Tab(TabPanel* const tab_parent,
      parent(tab_parent),
      id(tab_id),
      pic(init_pic),
-	  rendered_title(nullptr),
+     rendered_title(nullptr),
      tooltip(tooltip_text),
      panel(contents) {
 	if (!init_title.empty()) {
 		rendered_title = UI::g_fh1->render(as_uifont(init_title));
-		set_size(std::max(kTabPanelButtonHeight, rendered_title->width() + 2 * kTabPanelTextMargin), kTabPanelButtonHeight);
+		set_size(std::max(kTabPanelButtonHeight, rendered_title->width() + 2 * kTabPanelTextMargin),
+		         kTabPanelButtonHeight);
 	}
 }
 
@@ -298,8 +299,9 @@ void TabPanel::draw(RenderTarget& dst) {
 			   tabs_[idx]->pic, Recti(0, 0, tabs_[idx]->pic->width(), tabs_[idx]->pic->height()), 1,
 			   BlendMode::UseAlpha);
 		} else if (tabs_[idx]->rendered_title != nullptr) {
-			tabs_[idx]->rendered_title->draw(dst, Vector2i(x + kTabPanelTextMargin,
-														 (kTabPanelButtonHeight - tabs_[idx]->rendered_title->height()) / 2));
+			tabs_[idx]->rendered_title->draw(
+			   dst, Vector2i(x + kTabPanelTextMargin,
+			                 (kTabPanelButtonHeight - tabs_[idx]->rendered_title->height()) / 2));
 		}
 
 		// Draw top part of border

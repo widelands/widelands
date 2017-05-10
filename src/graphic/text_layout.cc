@@ -55,8 +55,8 @@ int text_width(const std::string& text, int ptsize) {
 
 int text_height(int ptsize, UI::FontSet::Face face) {
 	return UI::g_fh1
-		->render(
-			as_aligned(UI::g_fh1->fontset()->representative_character(), UI::Align::kLeft, ptsize - UI::g_fh1->fontset()->size_offset(), RGBColor(0, 0, 0), face))
+	   ->render(as_aligned(UI::g_fh1->fontset()->representative_character(), UI::Align::kLeft,
+	                       ptsize - UI::g_fh1->fontset()->size_offset(), RGBColor(0, 0, 0), face))
 	   ->height();
 }
 
@@ -69,7 +69,8 @@ std::string richtext_escape(const std::string& given_text) {
 }
 
 std::string as_game_tip(const std::string& txt) {
-	static boost::format f("<rt><p align=center><font color=21211b face=serif size=16>%s</font></p></rt>");
+	static boost::format f(
+	   "<rt><p align=center><font color=21211b face=serif size=16>%s</font></p></rt>");
 	f % txt;
 	return f.str();
 }
@@ -160,8 +161,10 @@ std::string as_message(const std::string& heading, const std::string& body) {
 	           .str());
 }
 
-const UI::RenderedText* autofit_ui_text(const std::string& text, int width, RGBColor color, int fontsize) {
-	const UI::RenderedText* result = UI::g_fh1->render(as_uifont(richtext_escape(text), fontsize, color));
+const UI::RenderedText*
+autofit_ui_text(const std::string& text, int width, RGBColor color, int fontsize) {
+	const UI::RenderedText* result =
+	   UI::g_fh1->render(as_uifont(richtext_escape(text), fontsize, color));
 	if (width > 0) {  // Autofit
 		for (; result->width() > width && fontsize >= kMinimumFontSize; --fontsize) {
 			result = UI::g_fh1->render(

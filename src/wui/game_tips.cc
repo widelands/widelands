@@ -111,7 +111,9 @@ void GameTips::show_tip(int32_t index) {
 	constexpr int kPaddingH = 28;
 
 	Recti tips_area(pt.x + kPaddingW, pt.y + kPaddingH, w - 2 * kPaddingW, h - 2 * kPaddingH);
-	const UI::RenderedText* rendered_text = UI::g_fh1->render(as_game_tip(tips_[index].text), tips_area.w);
-	pt = Vector2i((g_gr->get_xres() - rendered_text->width()) / 2, (g_gr->get_yres() - rendered_text->height()) / 2);
+	const UI::RenderedText* rendered_text =
+	   UI::g_fh1->render(as_game_tip(tips_[index].text), tips_area.w);
+	pt = Vector2i((g_gr->get_xres() - rendered_text->width()) / 2,
+	              (g_gr->get_yres() - rendered_text->height()) / 2);
 	rendered_text->draw(rt, pt);
 }

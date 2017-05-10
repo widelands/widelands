@@ -80,11 +80,7 @@ EditBox::EditBox(Panel* const parent,
                  int margin_y,
                  const Image* background,
                  int font_size)
-   : Panel(parent,
-           x,
-           y,
-           w,
-			  h > 0 ? h : text_height(font_size) + 2 * margin_y),
+   : Panel(parent, x, y, w, h > 0 ? h : text_height(font_size) + 2 * margin_y),
      m_(new EditBoxImpl),
      history_active_(false),
      history_position_(-1) {
@@ -379,10 +375,7 @@ void EditBox::draw(RenderTarget& dst) {
 	const UI::RenderedText* rendered_text = UI::g_fh1->render(as_editorfont(m_->text, m_->fontsize));
 
 	const int linewidth = rendered_text->width();
-	const int lineheight =
-	   m_->text.empty() ?
-			text_height(m_->fontsize) :
-			rendered_text->height();
+	const int lineheight = m_->text.empty() ? text_height(m_->fontsize) : rendered_text->height();
 
 	Vector2i point(kMarginX, get_h() / 2);
 	if (m_->align == UI::Align::kRight) {
@@ -403,7 +396,8 @@ void EditBox::draw(RenderTarget& dst) {
 		} else {
 			if (m_->align == UI::Align::kRight) {
 				// TODO(GunChleoc): Arabic: Fix scrolloffset
-				rendered_text->draw(dst, point, Recti(point.x + m_->scrolloffset + kMarginX, 0, max_width, lineheight));
+				rendered_text->draw(
+				   dst, point, Recti(point.x + m_->scrolloffset + kMarginX, 0, max_width, lineheight));
 			} else {
 				rendered_text->draw(dst, point, Recti(-m_->scrolloffset, 0, max_width, lineheight));
 			}

@@ -391,7 +391,7 @@ SoldierList::SoldierList(UI::Panel& parent, InteractiveGameBase& igb, Widelands:
 	                            .str()))
 	      ->width();
 	uint32_t maxtextwidth =
-		std::max(w, UI::g_fh1->render(as_uifont(_("Click soldier to send away")))->width());
+	   std::max(w, UI::g_fh1->render(as_uifont(_("Click soldier to send away")))->width());
 	set_min_desired_breadth(maxtextwidth + 4);
 
 	UI::Box* buttons = new UI::Box(this, 0, 0, UI::Box::Horizontal);

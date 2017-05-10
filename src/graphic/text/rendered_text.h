@@ -38,7 +38,12 @@ public:
 	enum class DrawMode { kBlit, kTile };
 
 private:
-	RenderedRect(const Recti& init_rect, const Image* init_image, bool visited, const RGBColor& color, bool is_background_color_set, DrawMode mode);
+	RenderedRect(const Recti& init_rect,
+	             const Image* init_image,
+	             bool visited,
+	             const RGBColor& color,
+	             bool is_background_color_set,
+	             DrawMode mode);
 
 public:
 	/// RenderedRect will contain a background image that should be tiled
@@ -49,7 +54,8 @@ public:
 
 	/// RenderedRect will contain a normal image
 	RenderedRect(const Image* init_image);
-	~RenderedRect() {}
+	~RenderedRect() {
+	}
 
 	/// An image to be blitted. Can be nullptr.
 	const Image* image() const;
@@ -66,7 +72,8 @@ public:
 	/// Change x and y position of the rectangle.
 	void set_origin(const Vector2i& new_origin);
 
-	/// Set that this rectangle was already visited by the font renderer. Needed by the font renderer for correct positioning.
+	/// Set that this rectangle was already visited by the font renderer. Needed by the font renderer
+	/// for correct positioning.
 	void set_visited();
 	/// Whether this rectangle was already visited by the font renderer
 	bool was_visited() const;
@@ -97,16 +104,21 @@ struct RenderedText {
 	/// The height occupied  by all rects in pixels.
 	int height() const;
 
-	/// Draw the rects. 'position', 'region' and 'align' are used to control the overall drawing position and cropping
-	void draw(RenderTarget& dst, const Vector2i& position, Recti region, UI::Align align = UI::Align::kLeft) const;
+	/// Draw the rects. 'position', 'region' and 'align' are used to control the overall drawing
+	/// position and cropping
+	void draw(RenderTarget& dst,
+	          const Vector2i& position,
+	          Recti region,
+	          UI::Align align = UI::Align::kLeft) const;
 
-	/// Draw the rects without cropping. 'position' and 'align' are used to control the overall drawing position
+	/// Draw the rects without cropping. 'position' and 'align' are used to control the overall
+	/// drawing position
 	void draw(RenderTarget& dst, const Vector2i& position, UI::Align align = UI::Align::kLeft) const;
 
 	/// Blit everything into a single texture. Use this only for testing purposes.
 	std::unique_ptr<Texture> as_texture() const;
 };
 
-} // namespace UI
+}  // namespace UI
 
 #endif  // end of include guard: WL_GRAPHIC_TEXT_RENDERED_TEXT_H

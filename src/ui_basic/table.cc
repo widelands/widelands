@@ -52,8 +52,8 @@ Table<void*>::Table(Panel* const parent,
                     TableRows rowtype)
    : Panel(parent, x, y, w, h),
      total_width_(0),
-	  headerheight_(text_height() + 4),
-	  lineheight_(text_height()),
+     headerheight_(text_height() + 4),
+     lineheight_(text_height()),
      button_background_(button_background),
      scrollbar_(nullptr),
      scrollbar_filler_button_(
@@ -295,7 +295,8 @@ void Table<void*>::draw(RenderTarget& dst) {
 				curx += curw;
 				continue;
 			}
-			const UI::RenderedText* rendered_text = UI::g_fh1->render(as_uifont(richtext_escape(entry_string)));
+			const UI::RenderedText* rendered_text =
+			   UI::g_fh1->render(as_uifont(richtext_escape(entry_string)));
 
 			switch (alignment) {
 			case UI::Align::kCenter:
@@ -324,7 +325,8 @@ void Table<void*>::draw(RenderTarget& dst) {
 				// We want this always on, e.g. for mixed language savegame filenames
 				// Restrict check for efficiency
 				if (i18n::has_rtl_character(entry_string.c_str(), 20)) {
-					rendered_text->draw(dst, point, Recti(text_width - curw + picw, 0, text_width, lineheight));
+					rendered_text->draw(
+					   dst, point, Recti(text_width - curw + picw, 0, text_width, lineheight));
 				} else {
 					rendered_text->draw(dst, point, Recti(0, 0, curw - picw, lineheight));
 				}

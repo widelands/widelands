@@ -46,7 +46,7 @@ MainMenuMapOptions::MainMenuMapOptions(EditorInteractive& parent, bool modal)
    : UI::Window(&parent, "map_options", 0, 0, 350, parent.get_inner_h() - 80, _("Map Options")),
      padding_(4),
      indent_(10),
-	  labelh_(text_height() + 4),
+     labelh_(text_height() + 4),
      checkbox_space_(25),
      butw_((get_inner_w() - 3 * padding_) / 2),
      max_w_(get_inner_w() - 2 * padding_),

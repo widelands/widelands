@@ -24,8 +24,8 @@
 
 #include "graphic/align.h"
 #include "graphic/color.h"
-#include "graphic/image.h"
 #include "graphic/font_handler1.h"
+#include "graphic/image.h"
 #include "graphic/text/font_set.h"
 #include "graphic/text_constants.h"
 
@@ -96,9 +96,9 @@ std::string as_message(const std::string& heading, const std::string& body);
   * 'kMinimumFontSize'.
   */
 const UI::RenderedText* autofit_ui_text(const std::string& text,
-                             int width = 0,
-                             RGBColor color = UI_FONT_CLR_FG,
-                             int fontsize = UI_FONT_SIZE_SMALL);
+                                        int width = 0,
+                                        RGBColor color = UI_FONT_CLR_FG,
+                                        int fontsize = UI_FONT_SIZE_SMALL);
 
 namespace UI {
 

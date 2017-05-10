@@ -454,7 +454,7 @@ void BaseListselect::draw(RenderTarget& dst) {
 			// We want this always on, e.g. for mixed language savegame filenames, or the languages
 			// list
 			rendered_text->draw(dst, point, Recti(rendered_text->width() - maxw + picw, 0, maxw,
-			                                         rendered_text->height()));
+			                                      rendered_text->height()));
 		} else {
 			rendered_text->draw(dst, point, Recti(0, 0, maxw, lineheight));
 		}

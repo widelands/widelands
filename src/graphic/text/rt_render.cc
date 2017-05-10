@@ -285,9 +285,10 @@ public:
 	}
 
 protected:
-	/// Throws a TextureTooBig exception if the given dimensions would be bigger than the graphics can handle
+	/// Throws a TextureTooBig exception if the given dimensions would be bigger than the graphics
+	/// can handle
 	void check_size(int check_w, int check_h) {
-		// Test for minimum supported size in debug builds.
+// Test for minimum supported size in debug builds.
 #ifndef NDEBUG
 		const int maximum_size = kMinimumSizeForTextures;
 #else
@@ -531,7 +532,6 @@ public:
 		return rv;
 	}
 
-
 	UI::RenderedText* render(TextureCache* texture_cache) override;
 
 protected:
@@ -560,8 +560,8 @@ UI::RenderedText* TextNode::render(TextureCache* texture_cache) {
 	   font_.render(txt_, nodestyle_.font_color, nodestyle_.font_style, texture_cache);
 
 	Texture* texture = new Texture(img.width(), img.height());
-	texture->blit(Rectf(0, 0, img.width(), img.height()), img, Rectf(0, 0, img.width(), img.height()), 1.,
-	         BlendMode::Copy);
+	texture->blit(Rectf(0, 0, img.width(), img.height()), img,
+	              Rectf(0, 0, img.width(), img.height()), 1., BlendMode::Copy);
 
 	UI::RenderedText* rendered_text = new UI::RenderedText();
 	rendered_text->rects.push_back(std::unique_ptr<UI::RenderedRect>(new UI::RenderedRect(texture)));
@@ -600,8 +600,7 @@ private:
 	bool is_expanding_;
 };
 UI::RenderedText* FillingTextNode::render(TextureCache* texture_cache) {
-	const Image& t =
-	   font_.render(txt_, nodestyle_.font_color, nodestyle_.font_style, texture_cache);
+	const Image& t = font_.render(txt_, nodestyle_.font_color, nodestyle_.font_style, texture_cache);
 
 	Texture* texture = new Texture(w_, h_);
 	for (uint16_t curx = 0; curx < w_; curx += t.width()) {
@@ -635,7 +634,8 @@ public:
 			Texture* texture = new Texture(w_, h_);
 			texture->fill_rect(Rectf(0, 0, w_, h_), RGBAColor(0xcc, 0, 0, 0xcc));
 			UI::RenderedText* rendered_text = new UI::RenderedText();
-			rendered_text->rects.push_back(std::unique_ptr<UI::RenderedRect>(new UI::RenderedRect(texture)));
+			rendered_text->rects.push_back(
+			   std::unique_ptr<UI::RenderedRect>(new UI::RenderedRect(texture)));
 			return rendered_text;
 		}
 		return TextNode::render(texture_cache);
@@ -720,7 +720,8 @@ public:
 			texture->fill_rect(Rectf(0, 0, w_, h_), RGBAColor(255, 255, 255, 0));
 		}
 		UI::RenderedText* rendered_text = new UI::RenderedText();
-		rendered_text->rects.push_back(std::unique_ptr<UI::RenderedRect>(new UI::RenderedRect(texture)));
+		rendered_text->rects.push_back(
+		   std::unique_ptr<UI::RenderedRect>(new UI::RenderedRect(texture)));
 		return rendered_text;
 	}
 
@@ -788,14 +789,17 @@ public:
 
 		// Draw Solid background Color
 		if (is_background_color_set_) {
-			UI::RenderedRect* bg_rect = new UI::RenderedRect(Recti(margin_.left, margin_.top, w_, h_), background_color_);
-			// Size is automatically adjusted in RenderedText while blitting, so no need to call check_size() here.
+			UI::RenderedRect* bg_rect =
+			   new UI::RenderedRect(Recti(margin_.left, margin_.top, w_, h_), background_color_);
+			// Size is automatically adjusted in RenderedText while blitting, so no need to call
+			// check_size() here.
 			rendered_text->rects.push_back(std::unique_ptr<UI::RenderedRect>(std::move(bg_rect)));
 		}
 
 		// Draw background image (tiling)
 		if (background_image_) {
-			UI::RenderedRect* bg_rect = new UI::RenderedRect(Recti(margin_.left, margin_.top, w_, h_), background_image_);
+			UI::RenderedRect* bg_rect =
+			   new UI::RenderedRect(Recti(margin_.left, margin_.top, w_, h_), background_image_);
 			check_size(bg_rect->width(), bg_rect->height());
 			rendered_text->rects.push_back(std::unique_ptr<UI::RenderedRect>(std::move(bg_rect)));
 		}
@@ -804,9 +808,11 @@ public:
 			const auto& renderme = n->render(texture_cache);
 			for (auto& rendered_rect : renderme->rects) {
 				if (!rendered_rect->was_visited()) {
-					rendered_rect->set_origin(Vector2i(x() + n->x() + margin_.left, y() + n->y() + margin_.top));
+					rendered_rect->set_origin(
+					   Vector2i(x() + n->x() + margin_.left, y() + n->y() + margin_.top));
 				} else {
-					rendered_rect->set_origin(Vector2i(x() + rendered_rect->get_x(), y() + rendered_rect->get_y() + margin_.top));
+					rendered_rect->set_origin(Vector2i(
+					   x() + rendered_rect->get_x(), y() + rendered_rect->get_y() + margin_.top));
 				}
 				rendered_rect->set_visited();
 				rendered_text->rects.push_back(std::move(rendered_rect));
@@ -890,8 +896,8 @@ private:
 
 UI::RenderedText* ImgRenderNode::render(TextureCache* /* texture_cache */) {
 	Texture* texture = new Texture(width(), height());
-	texture->blit(Rectf(0, 0, width(), height()), *image_, Rectf(0, 0, image_->width(), image_->height()),
-	         1., BlendMode::Copy);
+	texture->blit(Rectf(0, 0, width(), height()), *image_,
+	              Rectf(0, 0, image_->width(), image_->height()), 1., BlendMode::Copy);
 
 	UI::RenderedText* rendered_text = new UI::RenderedText();
 	rendered_text->rects.push_back(std::unique_ptr<UI::RenderedRect>(new UI::RenderedRect(texture)));

@@ -51,7 +51,7 @@ namespace {
 // quickly overflowing in the map selection menu.
 // This might need reevaluation is the new font handler is used for more stuff.
 constexpr uint32_t kTextureCacheSize = 30 << 20;  // shifting converts to MB
-} // namespace
+}  // namespace
 
 namespace UI {
 

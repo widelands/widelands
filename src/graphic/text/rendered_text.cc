@@ -17,24 +17,39 @@
  *
  */
 
+#include "graphic/text/rendered_text.h"
 #include "graphic/graphic.h"
 #include "graphic/text_layout.h"
-#include "graphic/text/rendered_text.h"
 
 namespace UI {
 // RenderedRect
-RenderedRect::RenderedRect(const Recti& init_rect, const Image* init_image, bool visited, const RGBColor& color, bool is_background_color_set, DrawMode mode)
-	: rect_(init_rect), image_(init_image), visited_(visited), background_color_(color), is_background_color_set_(is_background_color_set), mode_(mode) {
+RenderedRect::RenderedRect(const Recti& init_rect,
+                           const Image* init_image,
+                           bool visited,
+                           const RGBColor& color,
+                           bool is_background_color_set,
+                           DrawMode mode)
+   : rect_(init_rect),
+     image_(init_image),
+     visited_(visited),
+     background_color_(color),
+     is_background_color_set_(is_background_color_set),
+     mode_(mode) {
 }
 
 RenderedRect::RenderedRect(const Recti& init_rect, const Image* init_image)
-	: RenderedRect(init_rect, init_image, false, RGBColor(0, 0, 0), false, DrawMode::kTile) {
+   : RenderedRect(init_rect, init_image, false, RGBColor(0, 0, 0), false, DrawMode::kTile) {
 }
 RenderedRect::RenderedRect(const Recti& init_rect, const RGBColor& color)
-	: RenderedRect(init_rect, nullptr, false, color, true, DrawMode::kTile) {
+   : RenderedRect(init_rect, nullptr, false, color, true, DrawMode::kTile) {
 }
 RenderedRect::RenderedRect(const Image* init_image)
-	: RenderedRect(Recti(0, 0, init_image->width(), init_image->height()), init_image, false, RGBColor(0, 0, 0), false, DrawMode::kBlit) {
+   : RenderedRect(Recti(0, 0, init_image->width(), init_image->height()),
+                  init_image,
+                  false,
+                  RGBColor(0, 0, 0),
+                  false,
+                  DrawMode::kBlit) {
 }
 
 const Image* RenderedRect::image() const {
@@ -78,7 +93,6 @@ RenderedRect::DrawMode RenderedRect::mode() const {
 	return mode_;
 }
 
-
 // RenderedText
 int RenderedText::width() const {
 	int result = 0;
@@ -96,10 +110,12 @@ int RenderedText::height() const {
 }
 
 void RenderedText::draw(RenderTarget& dst,
-					const Vector2i& position,
-					Recti region, Align align) const {
+                        const Vector2i& position,
+                        Recti region,
+                        Align align) const {
 
-	Vector2i aligned_pos(position.x - region.x, position.y - region.y); // un-const the position and adjust for region
+	Vector2i aligned_pos(
+	   position.x - region.x, position.y - region.y);  // un-const the position and adjust for region
 	UI::correct_for_align(align, region.w, &aligned_pos);
 	for (const auto& rect : rects) {
 		Vector2i blit_point(aligned_pos.x + rect->get_x(), aligned_pos.y + rect->get_y());
@@ -115,9 +131,12 @@ void RenderedText::draw(RenderTarget& dst,
 			const int test = 4;
 			const int tile_width = std::min(test, rect->width());
 			const int tile_height = std::min(test, rect->height());
-			for (int tile_x = blit_point.x; tile_x + tile_width <= blit_point.x + rect->width(); tile_x += tile_width) {
-				for (int tile_y = blit_point.y; tile_y + tile_height <= blit_point.y + rect->height(); tile_y += tile_height) {
-					dst.fill_rect(Rectf(tile_x, tile_y, tile_width, tile_height), rect->background_color());
+			for (int tile_x = blit_point.x; tile_x + tile_width <= blit_point.x + rect->width();
+			     tile_x += tile_width) {
+				for (int tile_y = blit_point.y; tile_y + tile_height <= blit_point.y + rect->height();
+				     tile_y += tile_height) {
+					dst.fill_rect(
+					   Rectf(tile_x, tile_y, tile_width, tile_height), rect->background_color());
 				}
 			}
 		}
@@ -130,12 +149,14 @@ void RenderedText::draw(RenderTarget& dst,
 				break;
 			// Draw a background image (tiling)
 			case RenderedRect::DrawMode::kTile:
-				dst.tile(Recti(blit_point, rect->width(), rect->height()), rect->image(), Vector2i(0, 0));
+				dst.tile(
+				   Recti(blit_point, rect->width(), rect->height()), rect->image(), Vector2i(0, 0));
 				break;
 			}
 		}
 		// TODO(GunChleoc): Remove this line when testing is done.
-		//dst.draw_rect(Rectf(blit_point.x, blit_point.y, rect->width(), rect->height()), RGBColor(100, 100, 100));
+		// dst.draw_rect(Rectf(blit_point.x, blit_point.y, rect->width(), rect->height()),
+		// RGBColor(100, 100, 100));
 	}
 }
 

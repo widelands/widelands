@@ -177,7 +177,7 @@ int32_t calc_how_many(uint32_t time_ms, uint32_t sample_rate) {
 void draw_value(const string& value,
                 const RGBColor& color,
                 const Vector2i& pos,
-					 RenderTarget& dst) {
+                RenderTarget& dst) {
 	const UI::RenderedText* tick = UI::g_fh1->render(ytick_text_style(value, color));
 	Vector2i point(pos);  // Un-const this
 	UI::center_vertically(tick->height(), &point);
@@ -482,7 +482,6 @@ void WuiPlotArea::draw_plot(RenderTarget& dst,
 	draw_value(yscale_label, RGBColor(60, 125, 0),
 	           Vector2i(get_inner_w() - kSpaceRight - 3, kSpacing + 2), dst);
 }
-
 
 /**
  * scale the values from dataset down to the available space and draw a single plot line
