@@ -789,7 +789,7 @@ public:
 		// Draw Solid background Color
 		if (is_background_color_set_) {
 			UI::RenderedRect* bg_rect = new UI::RenderedRect(Recti(margin_.left, margin_.top, w_, h_), background_color_);
-			check_size(bg_rect->width(), bg_rect->height());
+			// Size is automatically adjusted in RenderedText while blitting, so no need to call check_size() here.
 			rendered_text->rects.push_back(std::unique_ptr<UI::RenderedRect>(std::move(bg_rect)));
 		}
 
