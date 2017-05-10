@@ -287,9 +287,12 @@ public:
 protected:
 	/// Throws a TextureTooBig exception if the given dimensions would be bigger than the graphics can handle
 	void check_size(int check_w, int check_h) {
-		// NOCOM we have a minimum supported texture size someplace, we should check against that instead
-		// - at least in debug builds.
+		// Test for minimum supported size in debug builds.
+#ifndef NDEBUG
+		const int maximum_size = kMinimumSizeForTextures;
+#else
 		const int maximum_size = g_gr->max_texture_size();
+#endif
 		if (check_w > maximum_size || check_h > maximum_size) {
 			const std::string error_message =
 			   (boost::format("Texture (%d, %d) too big! Maximum size is %d.") % check_w % check_h %
@@ -561,7 +564,7 @@ UI::RenderedText* TextNode::render(TextureCache* texture_cache) {
 	         BlendMode::Copy);
 
 	UI::RenderedText* rendered_text = new UI::RenderedText();
-	rendered_text->texts.push_back(std::unique_ptr<UI::RenderedRect>(new UI::RenderedRect(Recti(0, 0, texture->width(), texture->height()), (texture))));
+	rendered_text->rects.push_back(std::unique_ptr<UI::RenderedRect>(new UI::RenderedRect(texture)));
 	return rendered_text;
 }
 
@@ -606,7 +609,7 @@ UI::RenderedText* FillingTextNode::render(TextureCache* texture_cache) {
 		texture->blit(Rectf(curx, 0, srcrect.w, srcrect.h), t, srcrect, 1., BlendMode::Copy);
 	}
 	UI::RenderedText* rendered_text = new UI::RenderedText();
-	rendered_text->texts.push_back(std::unique_ptr<UI::RenderedRect>(new UI::RenderedRect(Recti(0, 0, texture->width(), texture->height()), (texture))));
+	rendered_text->rects.push_back(std::unique_ptr<UI::RenderedRect>(new UI::RenderedRect(texture)));
 	return rendered_text;
 }
 
@@ -632,7 +635,7 @@ public:
 			Texture* texture = new Texture(w_, h_);
 			texture->fill_rect(Rectf(0, 0, w_, h_), RGBAColor(0xcc, 0, 0, 0xcc));
 			UI::RenderedText* rendered_text = new UI::RenderedText();
-			rendered_text->texts.push_back(std::unique_ptr<UI::RenderedRect>(new UI::RenderedRect(Recti(0, 0, texture->width(), texture->height()), (texture))));
+			rendered_text->rects.push_back(std::unique_ptr<UI::RenderedRect>(new UI::RenderedRect(texture)));
 			return rendered_text;
 		}
 		return TextNode::render(texture_cache);
@@ -717,7 +720,7 @@ public:
 			texture->fill_rect(Rectf(0, 0, w_, h_), RGBAColor(255, 255, 255, 0));
 		}
 		UI::RenderedText* rendered_text = new UI::RenderedText();
-		rendered_text->texts.push_back(std::unique_ptr<UI::RenderedRect>(new UI::RenderedRect(Recti(0, 0, texture->width(), texture->height()), (texture))));
+		rendered_text->rects.push_back(std::unique_ptr<UI::RenderedRect>(new UI::RenderedRect(texture)));
 		return rendered_text;
 	}
 
@@ -779,36 +782,34 @@ public:
 	DesiredWidth desired_width() const {
 		return desired_width_;
 	}
-	// NOCOM can these all be const UI::RenderedText*?
+
 	UI::RenderedText* render(TextureCache* texture_cache) override {
 		UI::RenderedText* rendered_text = new UI::RenderedText();
 
 		// Draw Solid background Color
 		if (is_background_color_set_) {
-			UI::RenderedRect* bg_rect = new UI::RenderedRect(Recti(margin_.left, margin_.top, w_, h_), nullptr);
+			UI::RenderedRect* bg_rect = new UI::RenderedRect(Recti(margin_.left, margin_.top, w_, h_), background_color_);
 			check_size(bg_rect->width(), bg_rect->height());
-			bg_rect->background_color_ = background_color_;
-			bg_rect->is_background_color_set_ = true;
-			rendered_text->texts.push_back(std::unique_ptr<UI::RenderedRect>(std::move(bg_rect)));
+			rendered_text->rects.push_back(std::unique_ptr<UI::RenderedRect>(std::move(bg_rect)));
 		}
 
 		// Draw background image (tiling)
 		if (background_image_) {
-			UI::RenderedRect* bg_rect = new UI::RenderedRect(Recti(margin_.left, margin_.top, w_, h_), background_image_, UI::RenderedRect::DrawMode::kTile);
+			UI::RenderedRect* bg_rect = new UI::RenderedRect(Recti(margin_.left, margin_.top, w_, h_), background_image_);
 			check_size(bg_rect->width(), bg_rect->height());
-			rendered_text->texts.push_back(std::unique_ptr<UI::RenderedRect>(std::move(bg_rect)));
+			rendered_text->rects.push_back(std::unique_ptr<UI::RenderedRect>(std::move(bg_rect)));
 		}
 
 		for (RenderNode* n : nodes_to_render_) {
 			const auto& renderme = n->render(texture_cache);
-			for (auto& rendered_rect : renderme->texts) {
-				if (!rendered_rect->locked_) {
-					rendered_rect->set_rectangle(Recti(x() + n->x() + margin_.left, y() + n->y() + margin_.top, rendered_rect->width(), rendered_rect->height()));
+			for (auto& rendered_rect : renderme->rects) {
+				if (!rendered_rect->was_visited()) {
+					rendered_rect->set_origin(Vector2i(x() + n->x() + margin_.left, y() + n->y() + margin_.top));
 				} else {
-					rendered_rect->set_rectangle(Recti(x() + rendered_rect->get_x(), y() + rendered_rect->get_y() + margin_.top, rendered_rect->width(), rendered_rect->height()));
+					rendered_rect->set_origin(Vector2i(x() + rendered_rect->get_x(), y() + rendered_rect->get_y() + margin_.top));
 				}
-				rendered_rect->locked_ = true;
-				rendered_text->texts.push_back(std::move(rendered_rect));
+				rendered_rect->set_visited();
+				rendered_text->rects.push_back(std::move(rendered_rect));
 			}
 			delete n;
 		}
@@ -893,7 +894,7 @@ UI::RenderedText* ImgRenderNode::render(TextureCache* /* texture_cache */) {
 	         1., BlendMode::Copy);
 
 	UI::RenderedText* rendered_text = new UI::RenderedText();
-	rendered_text->texts.push_back(std::unique_ptr<UI::RenderedRect>(new UI::RenderedRect(Recti(0, 0, texture->width(), texture->height()), (texture))));
+	rendered_text->rects.push_back(std::unique_ptr<UI::RenderedRect>(new UI::RenderedRect(texture)));
 	return rendered_text;
 }
 // End: Helper Stuff

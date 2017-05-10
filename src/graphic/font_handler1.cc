@@ -100,7 +100,7 @@ private:
 	UI::FontSet const* fontset_;  // The currently active FontSet
 	std::unique_ptr<RT::Renderer> rt_renderer_;
 	ImageCache* const image_cache_;  // not owned
-	std::unordered_map<std::string, RenderedText*> render_results_;
+	std::unordered_map<std::string, const RenderedText*> render_results_;
 };
 
 IFontHandler1* create_fonthandler(ImageCache* image_cache, const std::string& locale) {
