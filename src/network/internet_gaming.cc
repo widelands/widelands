@@ -34,7 +34,7 @@
 /// will ensure
 /// that only one instance is running at time.
 InternetGaming::InternetGaming()
-   : net(),
+   : net(nullptr),
      state_(OFFLINE),
      reg_(false),
      port_(INTERNET_GAMING_PORT),
@@ -270,7 +270,7 @@ void InternetGaming::handle_metaserver_communication() {
 		}
 		// Process all available packets
 		RecvPacket packet;
-		while (net->try_receive(packet)) {
+		while (net->try_receive(&packet)) {
 			handle_packet(packet);
 		}
 	} catch (const std::exception& e) {

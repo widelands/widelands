@@ -37,7 +37,6 @@ NetClient::~NetClient() {
 		close();
 	if (d->sockset != nullptr)
 		SDLNet_FreeSocketSet(d->sockset);
-	delete d;
 }
 
 bool NetClient::is_connected() const {
@@ -52,7 +51,7 @@ void NetClient::close() {
 	d->sock = nullptr;
 }
 
-bool NetClient::try_receive(RecvPacket& packet) {
+bool NetClient::try_receive(RecvPacket *packet) {
 	if (!is_connected())
 		return false;
 
@@ -69,11 +68,7 @@ bool NetClient::try_receive(RecvPacket& packet) {
 		d->deserializer.read_data(buffer, bytes);
 	}
 	// Get one packet from the deserializer
-	if (d->deserializer.write_packet(packet)) {
-		return true;
-	} else {
-		return false;
-	}
+	return d->deserializer.write_packet(packet);
 }
 
 void NetClient::send(const SendPacket& packet) {

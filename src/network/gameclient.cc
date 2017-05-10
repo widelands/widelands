@@ -871,7 +871,7 @@ void GameClient::handle_network() {
 		}
 		// Process all available packets
 		RecvPacket packet;
-		while (d->net->try_receive(packet)) {
+		while (d->net->try_receive(&packet)) {
 			handle_packet(packet);
 		}
 	} catch (const DisconnectException& e) {

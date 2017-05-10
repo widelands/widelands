@@ -146,7 +146,7 @@ public:
 	 * \param packet The packet to fill with the received data.
 	 * \return \c true if an entire packet has been received and written to the given packet.
 	 */
-	bool write_packet(RecvPacket& packet);
+	bool write_packet(RecvPacket *packet);
 
 private:
 	std::vector<uint8_t> queue_;

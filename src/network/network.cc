@@ -164,7 +164,7 @@ void Deserializer::read_data(const uint8_t *data, const int32_t len) {
 	queue_.insert(queue_.end(), &data[0], &data[len]);
 }
 
-bool Deserializer::write_packet(RecvPacket& packet) {
+bool Deserializer::write_packet(RecvPacket *packet) {
 	// No data at all
 	if (queue_.size() < 2)
 		return false;
@@ -176,9 +176,9 @@ bool Deserializer::write_packet(RecvPacket& packet) {
 	if (queue_.size() < static_cast<size_t>(size))
 		return false;
 
-	packet.buffer.clear();
-	packet.buffer.insert(packet.buffer.end(), queue_.begin() + 2, queue_.begin() + size);
-	packet.index_ = 0;
+	packet->buffer.clear();
+	packet->buffer.insert(packet->buffer.end(), queue_.begin() + 2, queue_.begin() + size);
+	packet->index_ = 0;
 
 	queue_.erase(queue_.begin(), queue_.begin() + size);
 	return true;

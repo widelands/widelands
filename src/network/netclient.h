@@ -27,11 +27,8 @@
 class NetClientImpl;
 
 /**
- * GameClient manages the lifetime of a network game in which this computer
+ * NetClient manages the network connection for a network game in which this computer
  * participates as a client.
- *
- * This includes running the game setup screen and the actual game after
- * launch, as well as dealing with the actual network protocol.
  */
 class NetClient {
 	public:
@@ -39,7 +36,7 @@ class NetClient {
 		 * Tries to establish a connection to the given host.
 		 * @param ip_address A hostname or an IPv4 address as string.
 		 * @param port The port to connect to.
-		 * @return A pointer to a connected \c NetClient object or an invalid pointer if the connection failed.
+		 * @return A pointer to a connected \c NetClient object or a nullptr if the connection failed.
 		 */
 		static std::unique_ptr<NetClient> connect(const std::string& ip_address,
 												const uint16_t port);
@@ -69,7 +66,7 @@ class NetClient {
 		 *   The given packet is only modified when \c true is returned.
 		 *   Calling this on a closed connection will return false.
 		 */
-		bool try_receive(RecvPacket& packet);
+		bool try_receive(RecvPacket *packet);
 
 		/**
 		 * Sends a packet.
@@ -81,7 +78,7 @@ class NetClient {
 	private:
 		NetClient(const std::string& ip_address, const uint16_t port);
 
-		NetClientImpl *d;
+		std::unique_ptr<NetClientImpl> d;
 };
 
 #endif  // end of include guard: WL_NETWORK_NETCLIENT_H

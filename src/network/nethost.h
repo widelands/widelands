@@ -27,21 +27,18 @@
 class NetHostImpl;
 
 /**
- * GameClient manages the lifetime of a network game in which this computer
- * participates as a client.
- *
- * This includes running the game setup screen and the actual game after
- * launch, as well as dealing with the actual network protocol.
+ * NetHost manages the client connections of a network game in which this computer
+ * participates as a server.
  */
 class NetHost {
 	public:
 
-		using ConId = uint32_t;
+		using ConnectionId = uint32_t;
 
 		/**
 		 * Tries to listen on the given port.
 		 * @param port The port to listen on.
-		 * @return A pointer to a listening \c NetHost object or an invalid pointer if the connection failed.
+		 * @return A pointer to a listening \c NetHost object or a nullptr if the connection failed.
 		 */
 		static std::unique_ptr<NetHost> listen(const uint16_t port);
 
@@ -61,7 +58,7 @@ class NetHost {
 		 * @param The id of the client to check.
 		 * @return \c true if the connection is open, \c false otherwise.
 		 */
-		bool is_connected(ConId id) const;
+		bool is_connected(ConnectionId id) const;
 
 		/**
 		 * Stops listening for connections.
@@ -72,7 +69,7 @@ class NetHost {
 		 * Closes the connection to the given client.
 		 * @param id The id of the client to close the connection to.
 		 */
-		void close(ConId id);
+		void close(ConnectionId id);
 
 		/**
 		 * Tries to accept a new client.
@@ -80,9 +77,9 @@ class NetHost {
 		 * @return \c true if a client has connected, \c false otherwise.
 		 *   The given id is only modified when \c true is returned.
 		 *   Calling this on a closed server will return false.
-		 *   The returned id is always greater 0.
+		 *   The returned id is always greater than 0.
 		 */
-		bool try_accept(ConId& new_id);
+		bool try_accept(ConnectionId *new_id);
 
 		/**
 		 * Tries to receive a packet.
@@ -92,20 +89,20 @@ class NetHost {
 		 *   The given packet is only modified when \c true is returned.
 		 *   Calling this on a closed connection will return false.
 		 */
-		bool try_receive(ConId id, RecvPacket& packet);
+		bool try_receive(ConnectionId id, RecvPacket *packet);
 
 		/**
 		 * Sends a packet.
 		 * Calling this on a closed connection will silently fail.
-		 * @param id The connection id of the client that should be send to.
+		 * @param id The connection id of the client that should be sent to.
 		 * @param packet The packet to send.
 		 */
-		 void send(ConId id, const SendPacket& packet);
+		 void send(ConnectionId id, const SendPacket& packet);
 
 	private:
 		NetHost(const uint16_t port);
 
-		NetHostImpl *d;
+		std::unique_ptr<NetHostImpl> d;
 };
 
 #endif  // end of include guard: WL_NETWORK_NETHOST_H
