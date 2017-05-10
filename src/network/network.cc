@@ -126,7 +126,7 @@ void SendPacket::reset() {
 	buffer.clear();
 }
 
-size_t SendPacket::size() const {
+size_t SendPacket::get_size() const {
 	return buffer.size();
 }
 

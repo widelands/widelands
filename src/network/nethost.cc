@@ -128,7 +128,7 @@ bool NetHost::try_receive(const ConId id, RecvPacket& packet) {
 
 void NetHost::send(const ConId id, const SendPacket& packet) {
 	if (is_connected(id)) {
-		SDLNet_TCP_Send(d->clients.at(id).socket, packet.get_data(), packet.size());
+		SDLNet_TCP_Send(d->clients.at(id).socket, packet.get_data(), packet.get_size());
 	}
 }
 

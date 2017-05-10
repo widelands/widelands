@@ -78,7 +78,7 @@ bool NetClient::try_receive(RecvPacket& packet) {
 
 void NetClient::send(const SendPacket& packet) {
 	if (is_connected()) {
-		SDLNet_TCP_Send(d->sock, packet.get_data(), packet.size());
+		SDLNet_TCP_Send(d->sock, packet.get_data(), packet.get_size());
 	}
 }
 

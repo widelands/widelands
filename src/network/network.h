@@ -101,7 +101,7 @@ struct SendPacket : public StreamWrite {
 
 	void data(void const* data, size_t size) override;
 
-	size_t size() const;
+	size_t get_size() const;
 
 	uint8_t* get_data() const;
 
