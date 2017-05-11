@@ -34,6 +34,8 @@
 #define LAN_GAME_CLOSED 0
 #define LAN_GAME_OPEN 1
 
+// TODO(Notabilis): Update file for IPv6
+
 struct NetGameInfo {
 	char magic[6];
 	uint8_t version;
