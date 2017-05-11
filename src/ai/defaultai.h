@@ -229,7 +229,8 @@ private:
 
 	Widelands::EconomyObserver* get_economy_observer(Widelands::Economy&);
 	Widelands::BuildingObserver& get_building_observer(char const*);
-
+	Widelands::BuildingObserver& get_building_observer(Widelands::BuildingAttribute);
+	
 	void gain_immovable(Widelands::PlayerImmovable&, bool found_on_load = false);
 	void lose_immovable(const Widelands::PlayerImmovable&);
 	void gain_building(Widelands::Building&, bool found_on_load);
@@ -385,6 +386,9 @@ private:
 	// duration of military campaign
 	static constexpr int kCampaignDuration = 15 * 60 * 1000;
 	static constexpr int kTrainingSitesCheckInterval = 15 * 1000;
+
+	bool has_critical_mines = false;
+	uint16_t buil_material_mines_count = 0;
 
 	// Notification subscribers
 	std::unique_ptr<Notifications::Subscriber<Widelands::NoteFieldPossession>>

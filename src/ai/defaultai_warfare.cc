@@ -1173,6 +1173,18 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 	inputs[107] = (wood_policy_ == WoodPolicy::kAllowRangers) ? -3 * (size - 1) : 0;	
 	inputs[108] = (wood_policy_ == WoodPolicy::kAllowRangers) ? -5 * size : 0;	
 	inputs[109] = (wood_policy_ == WoodPolicy::kAllowRangers) ? -5 * (size - 1) : 0;
+	if (!bo.critical_building_material.empty() && buil_material_mines_count == 0) {
+		inputs[110] = -5;
+		inputs[111] = -2;
+		inputs[111] = -10;		
+	}
+	if (bo.build_material_shortage) {
+		inputs[112] = -5;
+		inputs[113] = -2;
+		inputs[114] = -10;		
+	}
+
+
 
 	for (int i = 0; i < 4 * f_neuron_bit_size; i = i + 1) {
 		if (inputs[i] < -35 || inputs[i] > 6) {
