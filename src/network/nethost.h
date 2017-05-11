@@ -20,11 +20,12 @@
 #ifndef WL_NETWORK_NETHOST_H
 #define WL_NETWORK_NETHOST_H
 
+#include <map>
 #include <memory>
 
-#include "network/network.h"
+#include <SDL_net.h>
 
-class NetHostImpl;
+#include "network/network.h"
 
 /**
  * NetHost manages the client connections of a network game in which this computer
@@ -100,9 +101,21 @@ class NetHost {
 		 void send(ConnectionId id, const SendPacket& packet);
 
 	private:
+
 		NetHost(const uint16_t port);
 
-		std::unique_ptr<NetHostImpl> d;
+		class Client {
+			public:
+				Client(TCPsocket sock);
+
+				TCPsocket socket;
+				Deserializer deserializer;
+		};
+
+		TCPsocket svrsock_;
+		SDLNet_SocketSet sockset_;
+		std::map<NetHost::ConnectionId, Client> clients_;
+		NetHost::ConnectionId next_id_;
 };
 
 #endif  // end of include guard: WL_NETWORK_NETHOST_H

@@ -2,25 +2,7 @@
 
 #include <memory>
 
-#include <SDL_net.h>
-
 #include "base/log.h"
-
-class NetClientImpl {
-	public:
-		NetClientImpl()
-			: sock(nullptr), sockset(nullptr), deserializer() {
-		}
-
-		/// The socket that connects us to the host
-		TCPsocket sock;
-
-		/// Socket set used for selection
-		SDLNet_SocketSet sockset;
-
-		/// Deserializer acts as a buffer for packets (reassembly/splitting up)
-		Deserializer deserializer;
-};
 
 std::unique_ptr<NetClient> NetClient::connect(const std::string& ip_address, const uint16_t port) {
 	std::unique_ptr<NetClient> ptr(new NetClient(ip_address, port));
@@ -35,20 +17,20 @@ std::unique_ptr<NetClient> NetClient::connect(const std::string& ip_address, con
 NetClient::~NetClient() {
 	if (is_connected())
 		close();
-	if (d->sockset != nullptr)
-		SDLNet_FreeSocketSet(d->sockset);
+	if (sockset_ != nullptr)
+		SDLNet_FreeSocketSet(sockset_);
 }
 
 bool NetClient::is_connected() const {
-	return d->sock != nullptr;
+	return sock_ != nullptr;
 }
 
 void NetClient::close() {
 	if (!is_connected())
 		return;
-	SDLNet_TCP_DelSocket(d->sockset, d->sock);
-	SDLNet_TCP_Close(d->sock);
-	d->sock = nullptr;
+	SDLNet_TCP_DelSocket(sockset_, sock_);
+	SDLNet_TCP_Close(sock_);
+	sock_ = nullptr;
 }
 
 bool NetClient::try_receive(RecvPacket *packet) {
@@ -56,29 +38,29 @@ bool NetClient::try_receive(RecvPacket *packet) {
 		return false;
 
 	uint8_t buffer[512];
-	while (SDLNet_CheckSockets(d->sockset, 0) > 0) {
+	while (SDLNet_CheckSockets(sockset_, 0) > 0) {
 
-		const int32_t bytes = SDLNet_TCP_Recv(d->sock, buffer, sizeof(buffer));
+		const int32_t bytes = SDLNet_TCP_Recv(sock_, buffer, sizeof(buffer));
 		if (bytes <= 0) {
 			// Error while receiving
 			close();
 			return false;
 		}
 
-		d->deserializer.read_data(buffer, bytes);
+		deserializer_.read_data(buffer, bytes);
 	}
 	// Get one packet from the deserializer
-	return d->deserializer.write_packet(packet);
+	return deserializer_.write_packet(packet);
 }
 
 void NetClient::send(const SendPacket& packet) {
 	if (is_connected()) {
-		SDLNet_TCP_Send(d->sock, packet.get_data(), packet.get_size());
+		SDLNet_TCP_Send(sock_, packet.get_data(), packet.get_size());
 	}
 }
 
 NetClient::NetClient(const std::string& ip_address, const uint16_t port)
-	: d(new NetClientImpl) {
+	: sock_(nullptr), sockset_(nullptr), deserializer_() {
 
 	IPaddress addr;
 	if (SDLNet_ResolveHost(&addr, ip_address.c_str(), port) != 0) {
@@ -86,11 +68,11 @@ NetClient::NetClient(const std::string& ip_address, const uint16_t port)
 		return;
 	}
 	log("[Client]: Trying to connect to %s:%u ... ", ip_address.c_str(), port);
-	d->sock = SDLNet_TCP_Open(&addr);
+	sock_ = SDLNet_TCP_Open(&addr);
 	if (is_connected()) {
 		log("success\n");
-		d->sockset = SDLNet_AllocSocketSet(1);
-		SDLNet_TCP_AddSocket(d->sockset, d->sock);
+		sockset_ = SDLNet_AllocSocketSet(1);
+		SDLNet_TCP_AddSocket(sockset_, sock_);
 	} else {
 		log("failed\n");
 	}

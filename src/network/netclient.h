@@ -22,9 +22,9 @@
 
 #include <memory>
 
-#include "network/network.h"
+#include <SDL_net.h>
 
-class NetClientImpl;
+#include "network/network.h"
 
 /**
  * NetClient manages the network connection for a network game in which this computer
@@ -78,9 +78,14 @@ class NetClient {
 	private:
 		NetClient(const std::string& ip_address, const uint16_t port);
 
-		// NOCOM(#codereview): Personally, I do not think the pimpl ideom is worthwhile in this day and age. 
-		// Suggestion: remove NetClientImpl and inline members here. Your call. If you, please also change NetHostImpl.
-		std::unique_ptr<NetClientImpl> d;
+		/// The socket that connects us to the host
+		TCPsocket sock_;
+
+		/// Socket set used for selection
+		SDLNet_SocketSet sockset_;
+
+		/// Deserializer acts as a buffer for packets (reassembly/splitting up)
+		Deserializer deserializer_;
 };
 
 #endif  // end of include guard: WL_NETWORK_NETCLIENT_H
