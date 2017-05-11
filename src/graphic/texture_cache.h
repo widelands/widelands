@@ -29,7 +29,6 @@
 #include <boost/utility.hpp>
 
 #include "base/macros.h"
-#include "graphic/text/rendered_text.h"
 
 class Image;
 
