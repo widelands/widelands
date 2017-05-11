@@ -894,7 +894,9 @@ public:
 	     image_(use_playercolor ? playercolor_image(color, image_filename) :
 	                              g_gr->images().get(image_filename)),
 	     filename_(image_filename),
-	     scale_(scale) {
+	     scale_(scale),
+	     color_(color),
+	     use_playercolor_(use_playercolor) {
 		check_size();
 	}
 
@@ -917,23 +919,33 @@ private:
 	const Image* image_;
 	const std::string filename_;
 	const double scale_;
+	const RGBColor& color_;
+	bool use_playercolor_;
 };
 
 UI::RenderedText* ImgRenderNode::render(TextureCache* texture_cache) {
 	UI::RenderedText* rendered_text = new UI::RenderedText();
 
-	const std::string hash =
-	   (boost::format("rt:img:%s:%i:%i") % filename_ % width() % height()).str();
-	const Image* rendered_image = texture_cache->get(hash);
-	if (!rendered_image) {
-		std::unique_ptr<Texture> texture(new Texture(width(), height()));
-		texture->blit(Rectf(0, 0, width(), height()), *image_,
-		              Rectf(0, 0, image_->width(), image_->height()), 1., BlendMode::Copy);
-		rendered_image = texture_cache->insert(hash, std::move(texture));
-	}
+	if (scale_ == 1.0) {
+		// Image can be used as is, and has already been cached in g_gr->images()
+		rendered_text->rects.push_back(
+		   std::unique_ptr<UI::RenderedRect>(new UI::RenderedRect(image_)));
+	} else {
 
-	rendered_text->rects.push_back(
-	   std::unique_ptr<UI::RenderedRect>(new UI::RenderedRect(rendered_image)));
+		const std::string hash = (boost::format("rt:img:%s:%s:%i:%i") % filename_ %
+		                          (use_playercolor_ ? color_.hex_value() : "") % width() % height())
+		                            .str();
+		const Image* rendered_image = texture_cache->get(hash);
+		if (!rendered_image) {
+			std::unique_ptr<Texture> texture(new Texture(width(), height()));
+			texture->blit(Rectf(0, 0, width(), height()), *image_,
+			              Rectf(0, 0, image_->width(), image_->height()), 1., BlendMode::Copy);
+			rendered_image = texture_cache->insert(hash, std::move(texture));
+		}
+
+		rendered_text->rects.push_back(
+		   std::unique_ptr<UI::RenderedRect>(new UI::RenderedRect(rendered_image)));
+	}
 	return rendered_text;
 }
 // End: Helper Stuff
