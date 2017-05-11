@@ -177,6 +177,8 @@ diary_page_1 = {
       _([[But the gods themselves didn’t want us to get home so quickly!]])),
 
    posy=1,
+   w=500,
+   
 }
 
 diary_page_2 = {
@@ -189,6 +191,7 @@ diary_page_2 = {
       _([[Our ship is heavily damaged. The mast has gone overboard and the hull is taking in more and more water. We would be glad to survive this black night with barely more than our lives.]])),
 
    posy=1,
+   w=500,
 }
 
 diary_page_3 = {
@@ -210,7 +213,7 @@ diary_page_3 = {
       _([[I really don’t know if and how we will get back home. And the war is going on without us. I hope my comrades are defending our empire well.]])),
 
    posy=1,
-   h=500,
+   w=500,
 }
 
 saledus = {
@@ -220,6 +223,7 @@ saledus = {
        _([[Sire, we do not know anything about the island. And I believe we are not safe either. It would probably be reasonable to build a tower to explore the island and add some military strength.]])),
 
     posy=1,
+	w=500,
 }
 
 amalea = {
@@ -229,6 +233,7 @@ amalea = {
     _([[Salve Lutius. As we don’t know how many resources we can get, we should be very restrictive in spending them. Even for military buildings, we should be very careful.]])),
 
     posy=1,
+	w=500,
 }
 
 saledus_1 = {
@@ -239,7 +244,8 @@ saledus_1 = {
       .. new_objectives(obj_build_first_outpost),
 
    posy=1,
-   h=500,
+   w=500,
+   h=480,
 }
 
 saledus_2 = {
@@ -251,6 +257,7 @@ saledus_2 = {
       -- TRANSLATORS: Saledus
       _([[But although this is a good step forward, I can’t see much space for buildings. The whole island is littered with rocks. How can we ever build a new ship or even have some basic infrastructure to make our lives more comfortable?]])),
    posy=1,
+   w=500,
 }
 
 amalea_1 = {
@@ -266,7 +273,8 @@ amalea_1 = {
       _([[Additionally, this would gain us some granite and some marble to build up our new world. We can use them as soon as there will finally be enough space for buildings.]]))
       .. new_objectives(obj_build_quarry),
    posy=1,
-   h=500,
+   w=500,
+   h=480,
 }
 
 amalea_2 = {
@@ -279,6 +287,7 @@ amalea_2 = {
       _([[Perhaps it would be a good idea to wait until it has cleared some space and then build up a basic construction material industry.]]))
 	  .. new_objectives(obj_build_sawmill_stonemason_and_lumberjacks),
    posy=1,
+   w=500,
    h=500,
 }
 
@@ -295,7 +304,8 @@ amalea_3 = {
       _([[But here’s the rub, if we use up all of our marble for columns, we might run out. So, we should lower the settings for marble columns in the economy settings to a smaller amount. I think a reserve of 4 columns might be sufficient for the moment being.]]))
       .. new_objectives(obj_lower_marble_column_demand),
    posy=1,
-   h=500,
+   w=500,
+   h=480,
 }
 
 amalea_10 = {
@@ -310,6 +320,7 @@ amalea_10 = {
       -- TRANSLATORS: Amalea
       _([[This is a great step forward in constructing advanced buildings. And we can think of using some planks to build new ships.]])),
    posy=1,
+   w=500,
 }
 
 saledus_3 = {
@@ -322,7 +333,8 @@ saledus_3 = {
       _([[The problem is that a port is a building which needs a very special place to be build. So, while building our economy, we should nevertheless expand further to discover the whole island. Let’s try to find such a valuable construction site.]]))
       .. new_objectives(obj_find_port_space),
    posy=1,
-   h=500,
+   w=500,
+   h=480,
 }
 
 saledus_4 = {
@@ -335,7 +347,8 @@ saledus_4 = {
       _([[Now we truly can look forward to building some ships. So, we should build a shipyard as well.]]))
 	  .. new_objectives(obj_build_port_and_shipyard),
    posy=1,
-   h=500,
+   w=500,
+   h=480,
 }
 
 amalea_4 = {
@@ -360,6 +373,7 @@ amalea_4 = {
       _([[I think a stock of 50 wheat would be enough for starters. Perhaps we will have to adjust the target quantity for wheat to achieve this.]]))
       .. new_objectives(obj_produce_wheat),
    posy=1,
+   w=500,
    h=550,
 }
 
@@ -371,6 +385,7 @@ diary_page_4 = {
       -- TRANSLATORS: Lutius - Diary
       _([[Praise the gods. We finally have a ship industry.]])),
    posy=1,
+   w=500,
 }
 
 
@@ -387,10 +402,10 @@ amalea_5 = {
       _([[Perhaps it would be a good idea to stop the shipyard’s production until we have some cloth available in order to not waste any logs or planks.]]))
       .. new_objectives(obj_produce_cloth),
    posy=1,
-   h=500,
+   w=500,
+   h=480,
 }
--- NOCOM(#codereview): Wait with this one until our first expedition is ready?
--- If that can't be checked for easily, wait until we have a smelting works and a gold mine?
+
 saledus_5 = {
    title=_"We Should Explore the Islands",
    body= saledus2(_"Saledus is excited…",
@@ -407,6 +422,7 @@ saledus_5 = {
       _([[I think I have heard the wind carrying some weird but well known sounds from the north. If I’m not totally wrong, I have heard some Barbarian war drums. So, we should better go and have a look at what is going on up there.]]))
 	  .. new_objectives(obj_build_expedition_ports),
    posy=1,
+   w=500,
    h=550,
 }
 
@@ -429,6 +445,7 @@ amalea_6 = {
       _([[If there are difficulties with building all the buildings needed, we should think about all we have learned so far. We can cut down all the rocks. We should perhaps optimize our roads to free up some building sites, or even dismantle some military buildings to obtain more space for our economy.]]))
       .. new_objectives(obj_produce_gold),
    posy=1,
+   w=500,
    h=550,
 }
 
@@ -441,7 +458,8 @@ saledus_6 = {
       _([[Let’s finish the Barbarians off and provide a nice colony to the caesar of our empire.]]))
       .. new_objectives(obj_conquer_all),
    posy=1,
-   h=500,
+   w=500,
+   h=480,
 }
 
 amalea_7 = {
@@ -453,6 +471,7 @@ amalea_7 = {
 	  -- TRANSLATORS: Amalea
       _([[I’m just kidding. Of course we should spare as much gold as we can for building an arena and other buildings to train our soldiers.]])),
    posy=1,
+   w=500,
 }
 
 amalea_8 = {
@@ -464,6 +483,7 @@ amalea_8 = {
 	  -- TRANSLATORS: Amalea
       _([[For example, it might be a good idea to produce a reasonable amount of a ware and afterwards dismantle the building to gain space for another building.]])),
    posy=1,
+   w=500,
 }
 
 amalea_9 = {
@@ -478,6 +498,7 @@ amalea_9 = {
 	  -- TRANSLATORS: Amalea
       _([[But be careful not to waste any bigger building spots.]])),
    posy=1,
+   w=500,
 }
 
 amalea_11 = {
@@ -493,7 +514,8 @@ amalea_11 = {
       _([[It would be especially helpful to find more marble, either within fields of rock or in the mountains to mine it.]]))
 	  .. new_objectives(obj_find_all_ports),
    posy=1,
-   h=500,
+   w=500,
+   h=480,
 }
 
 amalea_12 = {
@@ -502,6 +524,20 @@ amalea_12 = {
       -- TRANSLATORS: Amalea
       _([[Lutius. Well done. Well done. We have discovered all possible port locations in the complete region. Now we can backup our economy and we will manage to sail home soon.]])),
    posy=1,
+   w=500,
+}
+
+amalea_13 = {
+   title=_"Amalea Consulting",
+   body= amalea1(_"Amalea is clapping her hands…",
+      -- TRANSLATORS: Amalea
+      _([[Salve Lutius. We just completed our weaving mill. Now we are very close to get to the sea again. However I thought it would be helpful to remind you that ship production is not the only industry that needs cloth.]])
+	  .. paragraphdivider() ..
+	  _([[We need as well some cloth to produce armor in our armor smithy. We need it to build some of the training buildings for our soldiers. And most important and most imminent we need it to send out expeditions.]])
+	  .. paragraphdivider() ..
+	  _([[Therefore I really recommend to check the stock of cloth quite regularly to ensure that at least we keep enough cloth to send out some expeditions. As one expedition needs 3 rolls of cloth I think a reserve of 6 to 9 rolls giving us 2 to 3 expeditions would be sufficient.]])),
+   posy=1,
+   w=500,
 }
 
 saledus_7 = {
@@ -512,6 +548,7 @@ saledus_7 = {
       .. paragraphdivider() ..
       _([[Caesar will be very pleased about our victory.]])),
    posy=1,
+   w=500,
 }
 
 saledus_8 = {
@@ -527,6 +564,7 @@ saledus_8 = {
       _([[To ease the search, I have crafted some models of the pieces as you can see. You can give them to our soldiers and sailors to look for them.]]))
 	  .. new_objectives(obj_find_artifacts),
    posy=1,
+   w=500,
    h=550,
 }
 
@@ -538,6 +576,7 @@ saledus_9 = {
       .. paragraphdivider() ..
       _([[Oh great Neptune, safeguard our journey! Oh great Neptune, let the winds be friendly to our course! Oh great Neptune, save us from the creatures of the sea! Oh great Neptune, …]])),
    posy=1,
+   w=500,
 }
 
 saledus_12 = {
@@ -546,6 +585,7 @@ saledus_12 = {
       -- TRANSLATORS: Saledus
       _([[Sire, we found the ruins of a former Barbarian fortress and village. I’m somewhat worried that we will have to fight against them before we are ready.]])),
    posy=1,
+   w=500,
 }
 
 saledus_10 = {
@@ -556,6 +596,7 @@ saledus_10 = {
       .. paragraphdivider() ..
       _([[We need a lot of food, a lot of iron and a lot of gold to do so. So, we have lots of challenges to cope with.]])),
    posy=1,
+   w=500,
 }
 
 saledus_11 = {
@@ -567,7 +608,8 @@ saledus_11 = {
       _([[Therefore, we need to build a full training infrastructure despite the limited space available. We need some barracks, a training camp and an arena or a colosseum.]]))
 	  .. new_objectives(obj_training),
    posy=1,
-   h=500,
+   w=500,
+   h=480,
 }
 
 
@@ -580,15 +622,17 @@ diary_page_5 = {
 	  .. paragraphdivider() ..
       _([[You have completed this mission. You may continue playing if you wish, otherwise move on to the next mission.]])),
    posy=1,
+   w=500,
 }
 
--- NOCOM(#codereview): Move back to original location after the message has been dismissed.
+
 diary_page_6 = {
    title=_"Artifact Found",
    body= lutius(_"Diary of Lutius",
       -- TRANSLATORS: Lutius - Diary
       _([[Finally, we found a piece of our shrine. Praise Neptune!]])),
    posy=1,
+   w=500,
    }
 
 

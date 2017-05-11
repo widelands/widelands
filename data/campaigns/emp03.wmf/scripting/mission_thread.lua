@@ -25,7 +25,7 @@ function explore_sea() --  if more than 3 ships are available it is time to expl
    end
 end
 
-function artifacts()  -- check for control of all artifacts
+function artifacts()  -- check for control of all pieces of Neptune's shrine (artifacts)
    local artifact_fields = {}
    local i = 1
    -- find all artifacts
@@ -116,8 +116,10 @@ function artifacts()  -- check for control of all artifacts
                else
                   artifacts_owner[f] = f.owner
                   sleep(2000)
-                  campaign_message_box(diary_page_6)
-                  scroll_to_field(f)
+                  local prior_center = scroll_to_field(f)
+				  campaign_message_box(diary_page_6)
+				  sleep(2000)
+				  scroll_to_map_pixel(prior_center)
                end
             end
          else
@@ -260,6 +262,8 @@ function wheat() -- check for enough wheat in warehouses
       "barbarians_trainingcamp",
       "barbarians_big_inn",
    }
+   while #p1:get_buildings("empire_weaving_mill") < 1 do sleep(3000) end
+   campaign_message_box(amalea_13)
    while p1:get_produced_wares_count('cloth') < 6 do sleep(2434) end
    o8.done = true
    run(expedition)
@@ -363,6 +367,7 @@ function mission_thread()
 
    -- Initial messages
    local sea = map:get_field(28, 8)
+
    scroll_to_field(sea,5)
 
    campaign_message_box(diary_page_1)
