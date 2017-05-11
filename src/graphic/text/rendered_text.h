@@ -108,7 +108,7 @@ struct RenderedText {
 	/// position and cropping
 	void draw(RenderTarget& dst,
 	          const Vector2i& position,
-	          Recti region,
+	          const Recti& region,
 	          UI::Align align = UI::Align::kLeft) const;
 
 	/// Draw the rects without cropping. 'position' and 'align' are used to control the overall

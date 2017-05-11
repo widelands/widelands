@@ -114,11 +114,11 @@ int RenderedText::height() const {
 
 void RenderedText::draw(RenderTarget& dst,
                         const Vector2i& position,
-                        Recti region,
+                        const Recti& region,
                         Align align) const {
 
-	Vector2i aligned_pos(
-	   position.x - region.x, position.y - region.y);  // un-const the position and adjust for region
+	// Un-const the position and adjust for the region's origin point
+	Vector2i aligned_pos(position.x - region.x, position.y - region.y);
 	UI::correct_for_align(align, region.w, &aligned_pos);
 	for (const auto& rect : rects) {
 		Vector2i blit_point(aligned_pos.x + rect->get_x(), aligned_pos.y + rect->get_y());

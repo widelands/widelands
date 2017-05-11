@@ -147,7 +147,7 @@ void MultilineTextarea::draw(RenderTarget& dst) {
 		const UI::RenderedText* rendered_text = UI::g_fh1->render(
 		   is_richtext(text_) ? text_ : make_richtext(), get_eff_w() - 2 * RICHTEXT_MARGIN);
 		uint32_t blit_width = std::min(rendered_text->width(), static_cast<int>(get_eff_w()));
-		uint32_t blit_height = std::min(rendered_text->height(), static_cast<int>(get_inner_h()));
+		uint32_t blit_height = std::min(rendered_text->height(), get_inner_h());
 
 		if (blit_width > 0 && blit_height > 0) {
 			int anchor = 0;

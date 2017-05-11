@@ -829,14 +829,15 @@ public:
 		for (RenderNode* n : nodes_to_render_) {
 			const auto& renderme = n->render(texture_cache);
 			for (auto& rendered_rect : renderme->rects) {
-				if (!rendered_rect->was_visited()) {
-					rendered_rect->set_origin(
-					   Vector2i(x() + n->x() + margin_.left, y() + n->y() + margin_.top));
-				} else {
+				if (rendered_rect->was_visited()) {
 					rendered_rect->set_origin(Vector2i(
 					   x() + rendered_rect->get_x(), y() + rendered_rect->get_y() + margin_.top));
+
+				} else {
+					rendered_rect->set_origin(
+					   Vector2i(x() + n->x() + margin_.left, y() + n->y() + margin_.top));
+					rendered_rect->set_visited();
 				}
-				rendered_rect->set_visited();
 				rendered_text->rects.push_back(std::move(rendered_rect));
 			}
 			delete n;

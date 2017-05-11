@@ -47,7 +47,7 @@ public:
 	}
 
 	/*
-	 * Renders the given text into an set of images. The images are cached and therefore
+	 * Renders the given text into a set of images. The images are cached and therefore
 	 * ownership remains with this class. Will throw on error.
 	 */
 	virtual const RenderedText* render(const std::string& text, uint16_t w = 0) = 0;
