@@ -18,6 +18,9 @@
  */
 
 #include "graphic/text/rendered_text.h"
+
+#include <memory>
+
 #include "graphic/graphic.h"
 #include "graphic/text_layout.h"
 

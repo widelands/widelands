@@ -234,7 +234,7 @@ public:
 	virtual UI::RenderedText* render(TextureCache* texture_cache) = 0;
 
 	// TODO(GunChleoc): Remove this function once conversion is finished and well tested.
-	virtual const std::string debug_info() const = 0;
+	virtual std::string debug_info() const = 0;
 
 	virtual bool is_div() const {
 		return false;
@@ -512,7 +512,7 @@ public:
 	virtual ~TextNode() {
 	}
 
-	const std::string debug_info() const override {
+	std::string debug_info() const override {
 		return "'" + txt_ + "'";
 	}
 
@@ -579,7 +579,7 @@ public:
 	virtual ~FillingTextNode() {
 	}
 
-	const std::string debug_info() const override {
+	std::string debug_info() const override {
 		return "ft";
 	}
 
@@ -632,7 +632,7 @@ public:
 		show_spaces_ = t;
 	}
 
-	const std::string debug_info() const override {
+	std::string debug_info() const override {
 		return "wsp";
 	}
 
@@ -672,7 +672,7 @@ public:
 	NewlineNode(NodeStyle& ns) : RenderNode(ns) {
 	}
 
-	const std::string debug_info() const override {
+	std::string debug_info() const override {
 		return "nl";
 	}
 
@@ -708,7 +708,7 @@ public:
 		check_size();
 	}
 
-	const std::string debug_info() const override {
+	std::string debug_info() const override {
 		return "sp";
 	}
 
@@ -796,7 +796,7 @@ public:
 		return true;
 	}
 
-	const std::string debug_info() const override {
+	std::string debug_info() const override {
 		return "div";
 	}
 
@@ -905,7 +905,7 @@ public:
 		check_size();
 	}
 
-	const std::string debug_info() const override {
+	std::string debug_info() const override {
 		return "img";
 	}
 
