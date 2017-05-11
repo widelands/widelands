@@ -140,7 +140,7 @@ public:
 	/**
 	 * Adds the given data to the internal buffer.
 	 */
-	void read_data(const uint8_t* data, const int32_t len);
+	void read_data(const uint8_t* data, int32_t len);
 
 	/**
 	 * \param packet The packet to fill with the received data.
