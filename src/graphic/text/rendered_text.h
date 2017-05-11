@@ -88,7 +88,7 @@ public:
 
 private:
 	Recti rect_;
-	std::unique_ptr<const Image> image_;
+	const Image* image_;  // Not owned
 	bool visited_;
 	const RGBColor background_color_;
 	const bool is_background_color_set_;

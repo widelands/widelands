@@ -53,7 +53,7 @@ RenderedRect::RenderedRect(const Image* init_image)
 }
 
 const Image* RenderedRect::image() const {
-	return image_.get();
+	return image_;
 }
 
 int RenderedRect::get_x() const {

@@ -68,20 +68,16 @@ public:
 	     image_cache_(image_cache) {
 	}
 	virtual ~FontHandler1() {
-		for (auto& render_result : render_results_) {
-			delete render_result.second;
-		}
-		render_results_.clear();
+		render_cache_.clear();
 	}
 
 	const RenderedText* render(const string& text, uint16_t w = 0) override {
 		const string hash = boost::lexical_cast<string>(w) + text;
-		if (render_results_.count(hash) != 1) {
-			render_results_.insert(std::make_pair(hash, std::move(rt_renderer_->render(text, w))));
-		} else {
-			assert(image_cache_->has(hash));
+		if (render_cache_.count(hash) != 1) {
+			render_cache_.insert(std::make_pair(hash, std::unique_ptr<const RenderedText>(std::move(rt_renderer_->render(text, w)))));
 		}
-		return (*render_results_.find(hash)).second;
+		assert(render_cache_.count(hash) == 1);
+		return render_cache_.find(hash)->second.get();
 	}
 
 	UI::FontSet const* fontset() const override {
@@ -91,6 +87,7 @@ public:
 	void reinitialize_fontset(const std::string& locale) override {
 		fontset_ = fontsets_.get_fontset(locale);
 		texture_cache_.get()->flush();
+		render_cache_.clear();
 		rt_renderer_.reset(new RT::Renderer(image_cache_, texture_cache_.get(), fontsets_));
 	}
 
@@ -100,7 +97,7 @@ private:
 	UI::FontSet const* fontset_;  // The currently active FontSet
 	std::unique_ptr<RT::Renderer> rt_renderer_;
 	ImageCache* const image_cache_;  // not owned
-	std::unordered_map<std::string, const RenderedText*> render_results_;
+	std::unordered_map<std::string, std::unique_ptr<const RenderedText>> render_cache_;
 };
 
 IFontHandler1* create_fonthandler(ImageCache* image_cache, const std::string& locale) {
