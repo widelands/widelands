@@ -68,7 +68,7 @@ const Image& SdlTtfFont::render(const std::string& txt,
                                 int style,
                                 TextureCache* texture_cache) {
 	const std::string hash =
-	   (boost::format("text:%s:%s:%i:%02x%02x%02x:%i") % font_name_ % ptsize_ % txt %
+	   (boost::format("ttf:%s:%s:%i:%02x%02x%02x:%i") % font_name_ % ptsize_ % txt %
 	    static_cast<int>(clr.r) % static_cast<int>(clr.g) % static_cast<int>(clr.b) % style)
 	      .str();
 	const Image* rv = texture_cache->get(hash);

@@ -83,6 +83,7 @@ void Textarea::update() {
 	if (layoutmode_ == AutoMove) {
 		collapse();  // collapse() implicitly updates the size and position
 	}
+
 	rendered_text_ = autofit_ui_text(text_, fixed_width_, color_, fontsize_);
 
 	if (layoutmode_ == AutoMove) {

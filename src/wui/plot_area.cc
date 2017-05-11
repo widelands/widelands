@@ -285,6 +285,7 @@ void draw_diagram(uint32_t time_ms,
 	UI::center_vertically(xtick->height(), &pos);
 	xtick->draw(dst, pos);
 }
+
 }  // namespace
 
 WuiPlotArea::WuiPlotArea(UI::Panel* const parent,

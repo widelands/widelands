@@ -236,10 +236,6 @@ public:
 	// TODO(GunChleoc): Remove this function once conversion is finished and well tested.
 	virtual std::string debug_info() const = 0;
 
-	virtual bool is_div() const {
-		return false;
-	}
-
 	virtual bool is_non_mandatory_space() const {
 		return false;
 	}
@@ -790,10 +786,6 @@ public:
 			delete n;
 		}
 		nodes_to_render_.clear();
-	}
-
-	virtual bool is_div() const {
-		return true;
 	}
 
 	std::string debug_info() const override {
