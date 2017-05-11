@@ -630,6 +630,10 @@ void GameHost::init_computer_players() {
 			continue;
 
 		uint32_t client;
+		// NOCOM(#codereview): In some places in your code you can replace this
+		// with a range based loop:
+		// for (auto& client : d->clients) 
+		// This is easier to read and more performant.
 		for (client = 0; client < d->clients.size(); ++client)
 			if (d->clients.at(client).playernum + 1 == p)
 				break;

@@ -78,6 +78,8 @@ class NetClient {
 	private:
 		NetClient(const std::string& ip_address, const uint16_t port);
 
+		// NOCOM(#codereview): Personally, I do not think the pimpl ideom is worthwhile in this day and age. 
+		// Suggestion: remove NetClientImpl and inline members here. Your call. If you, please also change NetHostImpl.
 		std::unique_ptr<NetClientImpl> d;
 };
 
