@@ -43,7 +43,7 @@ private:
 	             bool visited,
 	             const RGBColor& color,
 	             bool is_background_color_set,
-	             DrawMode mode);
+	             DrawMode init_mode);
 
 public:
 	/// RenderedRect will contain a background image that should be tiled

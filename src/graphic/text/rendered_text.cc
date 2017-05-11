@@ -31,13 +31,13 @@ RenderedRect::RenderedRect(const Recti& init_rect,
                            bool visited,
                            const RGBColor& color,
                            bool is_background_color_set,
-                           DrawMode mode)
+                           DrawMode init_mode)
    : rect_(init_rect),
      image_(init_image),
      visited_(visited),
      background_color_(color),
      is_background_color_set_(is_background_color_set),
-     mode_(mode) {
+     mode_(init_mode) {
 }
 
 RenderedRect::RenderedRect(const Recti& init_rect, const Image* init_image)
