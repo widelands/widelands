@@ -1,7 +1,8 @@
--- NOCOM(GunChleoc): Wrap all tags and document allowed attributes when we're done
+-- TODO(GunChleoc): Wrap all tags and document allowed attributes when we're done
+
 -- RST
--- formatting.lua
--- --------------
+-- richtext.lua
+-- ------------
 --
 -- Functions to simplify and unique text formatting in scenarios and help files.
 -- Most of these functions are simple wrapper functions that make working with
