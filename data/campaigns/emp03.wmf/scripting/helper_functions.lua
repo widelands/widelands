@@ -76,4 +76,3 @@ function random_hide(plr, region, time)
       sleep(delay)
    end
 end
-
