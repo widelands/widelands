@@ -61,7 +61,7 @@ end
 --    So, only use this function if you wish to add some attributes to the tag.
 --
 --    Allowed attributes are:
---       padding, padding_r, padding_l, padding_b, padding_t: NOCOM(GunChleoc): Document
+--       padding, padding_r, padding_l, padding_b, padding_t: TODO(GunChleoc): Document
 --       background:  a background color or image
 --       debug:       add visual debug information and debug log
 --       editor_mode: allow multiple blank spaces for editing
@@ -93,7 +93,7 @@ end
 --
 --    Allowed attributes are:
 --       color:     a hex color to be applied to the image's player color mask, if it has any
---       ref:       NOCOM(GunChleoc): I have no idea what it does.
+--       ref:       TODO(GunChleoc): I have no idea what it does.
 --
 --    :returns: the img tag.
 --
@@ -241,7 +241,7 @@ end
 --       italic:    if you add italic=1, the text will be italic
 --       underline: if you add underline=1, the text will be underlined
 --       shadow:    if you add shadow=1, the text will have a shadow
---       ref:       NOCOM(GunChleoc): I don't know what this does.
+--       ref:       TODO(GunChleoc): I don't know what this does.
 --
 --    :returns: The text wrapped in font tags with the given attributes
 --
@@ -392,9 +392,9 @@ end
 --    :type attributes: :class:`string`
 --
 --    Allowed attributes are:
---       padding, padding_r, padding_l, padding_b, padding_t: NOCOM(GunChleoc): Document
---       margin:     NOCOM(GunChleoc): Document
---       float:      NOCOM(GunChleoc): this does not work yet
+--       padding, padding_r, padding_l, padding_b, padding_t: TODO(GunChleoc): Document
+--       margin:     TODO(GunChleoc): Document
+--       float:      TODO(GunChleoc): this does not work yet
 --       margin:     inner margin for the div
 --       valign:     vertical alignment
 --       background: a background color or image
