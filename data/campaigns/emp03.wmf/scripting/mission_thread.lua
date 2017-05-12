@@ -37,16 +37,9 @@ function artifacts()
       end
    end
 
-   while true do
-      sleep(4000)
-      -- Objective will be triggered if 50+ buildings are built
-      local building_types = {}
-      for idx, building in pairs(p1.tribe.buildings) do
-         table.insert(building_types, building.name)
-      end
-      if count_buildings(p1, building_types) > 50 then
-         break
-      end
+   -- Objective will be triggered if 50+ buildings are built
+   local all_building_types = p1.tribe.buildings
+   while count_buildings(p1, all_building_types) < 50 do
       sleep(4000)
    end
    campaign_message_box(saledus_8)
@@ -117,7 +110,7 @@ function check_military()
    }
    local too_many_mil_buildings = false
    while not too_many_mil_buildings do
-      if count_buildings(p1, number_mil_buildings) > 2 and #p1:get_buildings("empire_port") < 2 then
+      if count_buildings_by_name(p1, number_mil_buildings) > 2 and #p1:get_buildings("empire_port") < 2 then
          too_many_mil_buildings = true
          break
       end

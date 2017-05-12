@@ -1,12 +1,23 @@
 -- Helper functions for campaign emp03
 
-function count_buildings(plr, tbl)
+function count_buildings_by_name(plr, tbl)
    -- return overall amount of buildings:
    -- plr : Player to count for
    -- tbl : Table in form of {"building_name1", "building_name2", ...}
    local amount = 0
    for idx, bldng in ipairs(tbl) do
       amount = amount + #plr:get_buildings(bldng)
+   end
+   return amount
+end
+
+function count_buildings(plr, buildings)
+   -- return overall amount of buildings:
+   -- plr : Player to count for
+   -- tbl : Table consisting of building description objects
+   local amount = 0
+   for idx, building in pairs(p1.tribe.buildings) do
+      amount = amount + #plr:get_buildings(building.name)
    end
    return amount
 end
