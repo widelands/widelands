@@ -178,7 +178,7 @@ diary_page_1 = {
 
    posy=1,
    w=500,
-   
+
 }
 
 diary_page_2 = {
@@ -528,14 +528,14 @@ amalea_12 = {
 }
 
 amalea_13 = {
-   title=_"Amalea Consulting",
+   title=_"Amalea’s Councel",
    body= amalea1(_"Amalea is clapping her hands…",
       -- TRANSLATORS: Amalea
-      _([[Salve Lutius. We just completed our weaving mill. Now we are very close to get to the sea again. However I thought it would be helpful to remind you that ship production is not the only industry that needs cloth.]])
+      _([[Salve Lutius. We just completed our weaving mill. Now we are very close to taking to the sea again. However, I thought it would be helpful to remind you that ship production is not the only industry that needs cloth.]])
 	  .. paragraphdivider() ..
-	  _([[We need as well some cloth to produce armor in our armor smithy. We need it to build some of the training buildings for our soldiers. And most important and most imminent we need it to send out expeditions.]])
+	  _([[We need some cloth as well for producing armor in our armor smithy. We need it to build some of the training buildings for our soldiers. And most important and most imminent of all, we need it to send out expeditions.]])
 	  .. paragraphdivider() ..
-	  _([[Therefore I really recommend to check the stock of cloth quite regularly to ensure that at least we keep enough cloth to send out some expeditions. As one expedition needs 3 rolls of cloth I think a reserve of 6 to 9 rolls giving us 2 to 3 expeditions would be sufficient.]])),
+	  _([[Therefore, I really recommend that we check our stock of cloth quite regularly to ensure that we keep enough cloth in reserve to send out some expeditions at least. As one expedition needs 3 bales of cloth, I think a reserve of 6 to 9 bales giving us 2 to 3 expeditions would be sufficient.]])),
    posy=1,
    w=500,
 }
