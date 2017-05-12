@@ -56,17 +56,19 @@ function message_box(player, title, body, parameters)
 end
 
 -- RST
--- .. function:: campaign_message_box(message)
+-- .. function:: campaign_message_box(message, [sleeptime])
 --
 --    Sets message.h and message.w if not set and calls
 --    message_box(player, title, body, parameters) for player 1
 --
 --    :arg message: the message to be sent
+--    :arg sleeptime: ms spent sleeping after the message has been dismissed by the player
 --
-function campaign_message_box(message)
+function campaign_message_box(message, sleeptime)
    if not message.h then message.h = 400 end
    if not message.w then message.w = 450 end
    message_box(wl.Game().players[1], message.title, message.body, message)
+   if sleeptime then sleep(sleeptime) end
 end
 
 

@@ -11,6 +11,19 @@ function count_buildings(plr, tbl)
    return amount
 end
 
+function check_trainingsites()
+   local training = p1:get_buildings {
+      "empire_trainingcamp",
+      "empire_barracks",
+      "empire_arena",
+      "empire_colosseum"
+   }
+   return
+      #training.empire_trainingcamp > 0 and
+      #training.empire_barracks > 0 and
+      (#training.empire_arena + #training.empire_colosseum > 0)
+end
+
 function count_in_warehouses(ware)
    local whs = array_combine(
       p1:get_buildings("empire_headquarters_shipwreck"),
@@ -49,10 +62,10 @@ end
 function random_reveal(plr, region, time)
    -- if no time is given the default '1000' (1 sec) is used
    if not time then time = 1000 end
-   -- Calculate the sleep as integer
+   -- Calculate the sleep time as an integer
    delay = math.floor(time / #region)
    -- Create a table with randomized fields
-   -- This is done for efficience reasons
+   -- This is done for efficiency reasons
    rand_tbl = {}
    while #region > 0 do
       f = math.random(1, #region)
