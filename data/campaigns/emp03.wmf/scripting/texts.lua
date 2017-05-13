@@ -328,7 +328,7 @@ saledus_3 = {
       _([[Sire, I just pondered our way home. It is of utmost importance to build a port for loading our ships and starting an expedition.]])
       .. paragraphdivider() ..
       -- TRANSLATORS: Saledus
-      _([[The problem is that a port is a building which needs a very special place to be build. So, while building our economy, we should nevertheless expand further to discover the whole island. Let’s try to find such a valuable construction site.]]))
+      _([[The problem is that a port is a building which needs a very special place to be built. So, while building our economy, we should nevertheless expand further to discover the whole island. Let’s try to find such a valuable construction site.]]))
       .. new_objectives(obj_find_port_space),
    posy=1,
    w=500,
@@ -356,7 +356,7 @@ amalea_4 = {
       _([[I understand the euphoria of Saledus, but we have some serious problems to solve first.]])
       .. paragraphdivider() ..
       -- TRANSLATORS: Amalea
-      _([[To send out an expeditionary ship, we first need a ship. Unfortunately we have only 5 bales of cloth left, which we will need to build the port and the shipyard.]])
+      _([[To send out an expeditionary ship, we first need a ship. Unfortunately, we have only 5 bales of cloth left, which we will need to build the port and the shipyard.]])
       .. paragraphdivider() ..
       -- TRANSLATORS: Amalea
       _([[So, we need more cloth to finally be able to build ships. But there is no space on the island for building a whole economy to produce cloth. Therefore, we need to build the necessary wares step by step.]])
@@ -488,7 +488,7 @@ amalea_9 = {
       _([[Lutius. I really appreciate that you and Saledus are so concerned about our security. But I think we could use the little space on this island better than by building a lot of military buildings.]])
       .. paragraphdivider() ..
      -- TRANSLATORS: Amalea
-      _([[I strongly recommend dismantling the most of them to be able to build industrial buildings. I don’t think there is much danger on this island, but if you want to be cautious, you can keep some sentries or blockhouses near the coastline.]])
+      _([[I strongly recommend dismantling most of them to be able to build industrial buildings. I don’t think there is much danger on this island, but if you want to be cautious, you can keep some sentries or blockhouses near the coastline.]])
       .. paragraphdivider() ..
      -- TRANSLATORS: Amalea
       _([[But be careful not to waste any bigger building spots.]])),
@@ -500,7 +500,7 @@ amalea_11 = {
    title=_"Amalea’s Excited",
    body= amalea1(_"Amalea is looking forward to the exploration…",
       -- TRANSLATORS: Amalea
-      _([[Lutius. We have made so much progress so far. I just got the information that we have completed our third ship.]])
+      _([[Lutius. We have made so much progress so far. I am glad to hear that we have many ships now.]])
       .. paragraphdivider() ..
      -- TRANSLATORS: Amalea
       _([[Now that our fleet is growing and growing we should discover the complete region. Let’s try to find more land and eventually get more resources.]])
@@ -618,9 +618,9 @@ diary_page_5 = {
    w=500,
 }
 
-function diary_page_6(found, missing)
+function diary_page_6(first_message, missing)
    local text = ""
-   if found == 1 then
+   if first_message then
    -- TRANSLATORS: Lutius - Diary
       text = _([[Finally, we have discovered a piece of our shrine. Praise Neptune!]])
    else

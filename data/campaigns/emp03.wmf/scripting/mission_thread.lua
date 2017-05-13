@@ -56,6 +56,9 @@ function artifacts()
       artifacts_found[idx] = 0
    end
 
+   -- We send a slightly different message the first time
+   local first_message = true
+
    repeat
       local all_artifacts_found = true
       for idx, f in ipairs(artifact_fields) do
@@ -77,12 +80,13 @@ function artifacts()
                      heading = pgettext("message_heading", "We lost a piece of our holy shrine!")
                   }
                )
+               artifacts_found[idx] = -1
             end
-            artifacts_found[idx] = -1
             all_artifacts_found = false
          else
             -- We own it, check if it's newly found
-            if artifacts_found[idx] == 0 then
+            if artifacts_found[idx] == 0 or first_message then
+               artifacts_found[idx] = 1
                -- Count how many artifacts we have already found
                local count_found = 0
                for j, state in ipairs(artifacts_found) do
@@ -90,8 +94,9 @@ function artifacts()
                end
 
                local prior_center = scroll_to_field(f)
-               campaign_message_box(diary_page_6(count_found, #artifact_fields - count_found))
+               campaign_message_box(diary_page_6(first_message, #artifact_fields - count_found))
                scroll_to_map_pixel(prior_center)
+               first_message = false
             end
             artifacts_found[idx] = 1
          end
