@@ -22,8 +22,8 @@ class NetClientImpl {
 		Deserializer deserializer;
 };
 
-std::unique_ptr<NetClient> NetClient::connect(const std::string& ip_address, const uint16_t port) {
-	std::unique_ptr<NetClient> ptr(new NetClient(ip_address, port));
+std::unique_ptr<NetClient> NetClient::connect(const NetAddress& host) {
+	std::unique_ptr<NetClient> ptr(new NetClient(host));
 	if (ptr->is_connected()) {
 		return ptr;
 	} else {
@@ -82,15 +82,15 @@ void NetClient::send(const SendPacket& packet) {
 	}
 }
 
-NetClient::NetClient(const std::string& ip_address, const uint16_t port)
+NetClient::NetClient(const NetAddress& host)
 	: d(new NetClientImpl) {
 
 	IPaddress addr;
-	if (SDLNet_ResolveHost(&addr, ip_address.c_str(), port) != 0) {
-		log("[Client]: Failed to resolve host address %s:%u.\n", ip_address.c_str(), port);
+	if (SDLNet_ResolveHost(&addr, host.ip.c_str(), host.port) != 0) {
+		log("[Client]: Failed to resolve host address %s:%u.\n", host.ip.c_str(), host.port);
 		return;
 	}
-	log("[Client]: Trying to connect to %s:%u ... ", ip_address.c_str(), port);
+	log("[Client]: Trying to connect to %s:%u ... ", host.ip.c_str(), host.port);
 	d->sock = SDLNet_TCP_Open(&addr);
 	if (is_connected()) {
 		log("success\n");

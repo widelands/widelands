@@ -383,7 +383,7 @@ void FullscreenMenuInternetLobby::clicked_joingame() {
 			log("InternetGaming: cut IPv6 address: %s\n", ip.c_str());
 		}
 
-		GameClient netgame(ip, WIDELANDS_PORT, InternetGaming::ref().get_local_clientname(), true);
+		GameClient netgame(NetAddress{ip, WIDELANDS_PORT}, InternetGaming::ref().get_local_clientname(), true);
 		netgame.run();
 	} else
 		throw wexception("No server selected! That should not happen!");

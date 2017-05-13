@@ -135,7 +135,7 @@ void FullscreenMenuNetSetupLAN::think() {
 	discovery.run();
 }
 
-bool FullscreenMenuNetSetupLAN::get_host_address(uint32_t& addr, uint16_t& port) {
+void FullscreenMenuNetSetupLAN::get_host_address(NetAddress *addr) {
 	const std::string& host = hostname.text();
 
 	const uint32_t opengames_size = opengames.size();
@@ -143,20 +143,14 @@ bool FullscreenMenuNetSetupLAN::get_host_address(uint32_t& addr, uint16_t& port)
 		const NetOpenGame& game = *opengames[i];
 
 		if (!strcmp(game.info.hostname, host.c_str())) {
-			addr = game.address;
-			port = game.port;
-			return true;
+			*addr = game.address;
+			return;
 		}
 	}
 
-	if (hostent* const he = gethostbyname(host.c_str())) {
-		addr = (reinterpret_cast<in_addr*>(he->h_addr_list[0]))->s_addr;
-		DIAG_OFF("-Wold-style-cast")
-		port = htons(WIDELANDS_PORT);
-		DIAG_ON("-Wold-style-cast")
-		return true;
-	} else
-		return false;
+	// Just return the input with the default port.
+	// The NetClient will do the address resolution
+	*addr = NetAddress{host, WIDELANDS_PORT};
 }
 
 const std::string& FullscreenMenuNetSetupLAN::get_playername() {

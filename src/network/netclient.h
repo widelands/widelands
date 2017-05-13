@@ -37,12 +37,10 @@ class NetClient {
 	public:
 		/**
 		 * Tries to establish a connection to the given host.
-		 * @param ip_address A hostname or an IPv4 address as string.
-		 * @param port The port to connect to.
+		 * @param host The host to connect to.
 		 * @return A pointer to a connected \c NetClient object or an invalid pointer if the connection failed.
 		 */
-		static std::unique_ptr<NetClient> connect(const std::string& ip_address,
-												const uint16_t port);
+		static std::unique_ptr<NetClient> connect(const NetAddress& host);
 
 		/**
 		 * Closes the connection.
@@ -79,7 +77,7 @@ class NetClient {
 		 void send(const SendPacket& packet);
 
 	private:
-		NetClient(const std::string& ip_address, const uint16_t port);
+		NetClient(const NetAddress& host);
 
 		NetClientImpl *d;
 };

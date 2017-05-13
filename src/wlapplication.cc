@@ -1164,10 +1164,6 @@ void WLApplication::mainmenu_multiplayer() {
 			FullscreenMenuNetSetupLAN ns;
 			menu_result = ns.run<FullscreenMenuBase::MenuTarget>();
 			std::string playername = ns.get_playername();
-			// TODO(Notabilis): This has to be updated for IPv6
-			uint32_t addr;
-			uint16_t port;
-			bool const host_address = ns.get_host_address(addr, port);
 
 			switch (menu_result) {
 			case FullscreenMenuBase::MenuTarget::kHostgame: {
@@ -1176,17 +1172,14 @@ void WLApplication::mainmenu_multiplayer() {
 				break;
 			}
 			case FullscreenMenuBase::MenuTarget::kJoingame: {
-				if (!host_address)
-					throw WLWarning(
-					   "Invalid Address", "%s", "The address of the game server is invalid");
-
-				// TODO(Notabilis): Make this prettier. I am aware that this is quite ugly but it should work
-				// for now and will be removed shortly when we switch to boost.asio
-				char ip_str[] = {"255.255.255.255"};
-				sprintf(ip_str, "%d.%d.%d.%d", (addr & 0x000000ff), (addr & 0x0000ff00) >> 8,
-												(addr & 0x00ff0000) >> 16, (addr & 0xff000000) >> 24);
-				port = (port >> 8) | ((port & 0xFF) << 8);
-				GameClient netgame(ip_str, port, playername);
+				NetAddress addr;
+				ns.get_host_address(&addr);
+// NOCOM(Notabilis): Remove this for IPv6
+if (!addr.ip.compare(0, 7, "::ffff:")) {
+	addr.ip = addr.ip.substr(7);
+	log("InternetGaming: cut IPv6 address: %s\n", addr.ip.c_str());
+}
+				GameClient netgame(addr, playername);
 				netgame.run();
 				break;
 			}

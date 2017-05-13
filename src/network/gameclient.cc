@@ -89,14 +89,13 @@ struct GameClientImpl {
 	std::vector<ChatMessage> chatmessages;
 };
 
-GameClient::GameClient(const std::string& host, const uint16_t port, const std::string& playername, bool internet)
+GameClient::GameClient(const NetAddress& host, const std::string& playername, bool internet)
    : d(new GameClientImpl), internet_(internet) {
-	d->net = NetClient::connect(host, port);
+	d->net = NetClient::connect(host);
 	if (!d->net || !d->net->is_connected()) {
 		throw WLWarning(_("Could not establish connection to host"),
-		                _("Widelands could not establish a connection to the given "
-		                  "address.\n"
-		                  "Either no Widelands server was running at the supposed port or\n"
+		                _("Widelands could not establish a connection to the given address. "
+		                  "Either no Widelands server was running at the supposed port or "
 		                  "the server shut down as you tried to connect."));
 	}
 

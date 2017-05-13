@@ -50,7 +50,8 @@ find_package(Boost 1.48
   COMPONENTS
     unit_test_framework
     regex
-  REQUIRED)
+  REQUIRED
+    system)
 
 find_package (PythonInterp REQUIRED)
 

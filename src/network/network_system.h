@@ -20,6 +20,8 @@
 #ifndef WL_NETWORK_NETWORK_SYSTEM_H
 #define WL_NETWORK_NETWORK_SYSTEM_H
 
+// TODO(Notabilis): Check whether this file can be deleted
+
 #include <stdint.h>
 #ifndef _WIN32
 // These includes work on Linux and should be fine on any other Unix-alike.

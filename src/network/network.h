@@ -36,6 +36,14 @@
 class Deserializer;
 class FileRead;
 
+/**
+ Simple structure to hold the ip address and port of a server.
+ */
+struct NetAddress {
+	std::string ip;
+	uint16_t port;
+};
+
 struct SyncCallback {
 	virtual ~SyncCallback() {
 	}

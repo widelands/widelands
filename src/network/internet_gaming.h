@@ -170,7 +170,7 @@ private:
 	std::string pwd_;
 	bool reg_;
 	std::string meta_;
-	uint32_t port_;
+	uint16_t port_;
 
 	/// local clients name and rights
 	std::string clientname_;
