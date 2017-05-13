@@ -6,6 +6,10 @@ wl_library(network
     internet_gaming_messages.cc
     internet_gaming_messages.h
     internet_gaming_protocol.h
+    gameclient.cc
+    gameclient.h
+    gamehost.cc
+    gamehost.h
     netclient.cc
     netclient.h
     nethost.cc

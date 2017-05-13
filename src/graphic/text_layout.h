@@ -87,6 +87,7 @@ std::string as_aligned(const std::string& txt,
 std::string as_tooltip(const std::string&);
 std::string as_waresinfo(const std::string&);
 std::string as_game_tip(const std::string&);
+std::string as_message(const std::string& heading, const std::string& body);
 
 /**
   * Render 'text' as ui_font. If 'width' > 0 and the rendered image is too
