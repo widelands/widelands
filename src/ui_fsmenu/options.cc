@@ -148,15 +148,15 @@ FullscreenMenuOptions::FullscreenMenuOptions(OptionsCtrl::OptionsStruct opt)
                           24,
                           _("In-game resolution")),
 
-     fullscreen_(&box_interface_, Vector2i(0, 0), _("Fullscreen"), "", 0),
-     inputgrab_(&box_interface_, Vector2i(0, 0), _("Grab Input"), "", 0),
+     fullscreen_(&box_interface_, Vector2i::zero(), _("Fullscreen"), "", 0),
+     inputgrab_(&box_interface_, Vector2i::zero(), _("Grab Input"), "", 0),
 
      sb_maxfps_(&box_interface_, 0, 0, 0, 0, opt.maxfps, 0, 99, _("Maximum FPS:")),
 
      // Windows options
      snap_win_overlap_only_(
-        &box_windows_, Vector2i(0, 0), _("Snap windows only when overlapping"), "", 0),
-     dock_windows_to_edges_(&box_windows_, Vector2i(0, 0), _("Dock windows to edges"), "", 0),
+        &box_windows_, Vector2i::zero(), _("Snap windows only when overlapping"), "", 0),
+     dock_windows_to_edges_(&box_windows_, Vector2i::zero(), _("Dock windows to edges"), "", 0),
 
      sb_dis_panel_(&box_windows_,
                    0,
@@ -181,9 +181,9 @@ FullscreenMenuOptions::FullscreenMenuOptions(OptionsCtrl::OptionsStruct opt)
                     UI::SpinBox::Units::kPixels),
 
      // Sound options
-     music_(&box_sound_, Vector2i(0, 0), _("Enable Music"), "", 0),
-     fx_(&box_sound_, Vector2i(0, 0), _("Enable Sound Effects"), "", 0),
-     message_sound_(&box_sound_, Vector2i(0, 0), _("Play a sound at message arrival"), "", 0),
+     music_(&box_sound_, Vector2i::zero(), _("Enable Music"), "", 0),
+     fx_(&box_sound_, Vector2i::zero(), _("Enable Sound Effects"), "", 0),
+     message_sound_(&box_sound_, Vector2i::zero(), _("Play a sound at message arrival"), "", 0),
 
      // Saving options
      sb_autosave_(&box_saving_,
@@ -213,26 +213,26 @@ FullscreenMenuOptions::FullscreenMenuOptions(OptionsCtrl::OptionsStruct opt)
                           UI::SpinBox::Type::kBig),
 
      zip_(&box_saving_,
-          Vector2i(0, 0),
+          Vector2i::zero(),
           _("Compress widelands data files (maps, replays and savegames)"),
           "",
           0),
      write_syncstreams_(&box_saving_,
-                        Vector2i(0, 0),
+                        Vector2i::zero(),
                         _("Write syncstreams in network games to debug desyncs"),
                         "",
                         0),
 
      // Game options
      auto_roadbuild_mode_(
-        &box_game_, Vector2i(0, 0), _("Start building road after placing a flag")),
-     show_workarea_preview_(&box_game_, Vector2i(0, 0), _("Show buildings area preview")),
+        &box_game_, Vector2i::zero(), _("Start building road after placing a flag")),
+     show_workarea_preview_(&box_game_, Vector2i::zero(), _("Show buildings area preview")),
      transparent_chat_(
-        &box_game_, Vector2i(0, 0), _("Show in-game chat with transparent background"), "", 0),
+        &box_game_, Vector2i::zero(), _("Show in-game chat with transparent background"), "", 0),
 
      /** TRANSLATORS: A watchwindow is a window where you keep watching an object or a map region,*/
      /** TRANSLATORS: and it also lets you jump to it on the map. */
-     single_watchwin_(&box_game_, Vector2i(0, 0), _("Use single watchwindow mode")),
+     single_watchwin_(&box_game_, Vector2i::zero(), _("Use single watchwindow mode")),
      os_(opt) {
 	// Set up UI Elements
 	title_.set_fontsize(UI_FONT_SIZE_BIG);
