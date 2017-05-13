@@ -426,7 +426,7 @@ void MultilineEditbox::focus(bool topcaller) {
  */
 void MultilineEditbox::draw(RenderTarget& dst) {
 	// Draw the background
-	dst.tile(Recti(Vector2i(0, 0), get_w(), get_h()), d_->background, Vector2i(get_x(), get_y()));
+	dst.tile(Recti(Vector2i::zero(), get_w(), get_h()), d_->background, Vector2i(get_x(), get_y()));
 
 	// Draw border.
 	if (get_w() >= 4 && get_h() >= 4) {

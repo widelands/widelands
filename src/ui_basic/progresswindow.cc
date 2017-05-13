@@ -45,7 +45,9 @@ namespace {
 
 namespace UI {
 
-ProgressWindow::ProgressWindow(const std::string& background) : UI::FullscreenWindow() {
+ProgressWindow::ProgressWindow(const std::string& background) :
+	UI::FullscreenWindow(),
+	label_center_(Vector2i::zero()) {
 	set_background(background);
 	step(_("Loading…"));
 }

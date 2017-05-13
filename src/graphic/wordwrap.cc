@@ -353,7 +353,7 @@ void WordWrap::draw(RenderTarget& dst, Vector2i where, Align align, uint32_t car
 			int caret_x = text_width(line_to_caret, fontsize_);
 
 			const Image* caret_image = g_gr->images().get("images/ui_basic/caret.png");
-			Vector2i caretpt;
+			Vector2i caretpt = Vector2i::zero();
 			caretpt.x = point.x + caret_x - caret_image->width() + kLineMargin;
 			caretpt.y = point.y + (fontheight - caret_image->height()) / 2;
 			dst.blit(caretpt, caret_image);

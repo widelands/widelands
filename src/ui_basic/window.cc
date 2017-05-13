@@ -141,7 +141,7 @@ void Window::update_desired_size() {
  */
 void Window::layout() {
 	if (center_panel_ && !is_minimal_) {
-		center_panel_->set_pos(Vector2i(0, 0));
+		center_panel_->set_pos(Vector2i::zero());
 		center_panel_->set_size(get_inner_w(), get_inner_h());
 	}
 }
@@ -235,7 +235,7 @@ void Window::center_to_parent() {
 void Window::draw(RenderTarget& dst) {
 	if (!is_minimal()) {
 		dst.tile(
-		   Recti(Vector2i(0, 0), get_inner_w(), get_inner_h()), pic_background_, Vector2i(0, 0));
+		   Recti(Vector2i::zero(), get_inner_w(), get_inner_h()), pic_background_, Vector2i::zero());
 	}
 }
 
@@ -253,7 +253,7 @@ void Window::draw_border(RenderTarget& dst) {
 		int32_t pos = HZ_B_CORNER_PIXMAP_LEN;
 
 		dst.blitrect  //  top left corner
-		   (Vector2i(), pic_top_, Recti(Vector2i(0, 0), pos, TP_B_PIXMAP_THICKNESS));
+		   (Vector2i::zero(), pic_top_, Recti(Vector2i::zero(), pos, TP_B_PIXMAP_THICKNESS));
 
 		//  top bar
 		static_assert(0 <= HZ_B_CORNER_PIXMAP_LEN, "assert(0 <= HZ_B_CORNER_PIXMAP_LEN) failed.");
@@ -292,7 +292,7 @@ void Window::draw_border(RenderTarget& dst) {
 			static_assert(0 <= VT_B_PIXMAP_THICKNESS, "assert(0 <= VT_B_PIXMAP_THICKNESS) failed.");
 			dst.blitrect  // left top thingy
 			   (Vector2i(0, TP_B_PIXMAP_THICKNESS), pic_lborder_,
-			    Recti(Vector2i(0, 0), VT_B_PIXMAP_THICKNESS, VT_B_THINGY_PIXMAP_LEN));
+			    Recti(Vector2i::zero(), VT_B_PIXMAP_THICKNESS, VT_B_THINGY_PIXMAP_LEN));
 
 			int32_t pos = TP_B_PIXMAP_THICKNESS + VT_B_THINGY_PIXMAP_LEN;
 
@@ -316,7 +316,7 @@ void Window::draw_border(RenderTarget& dst) {
 
 			dst.blitrect  // right top thingy
 			   (Vector2i(right_border_x, TP_B_PIXMAP_THICKNESS), pic_rborder_,
-			    Recti(Vector2i(0, 0), VT_B_PIXMAP_THICKNESS, VT_B_THINGY_PIXMAP_LEN));
+			    Recti(Vector2i::zero(), VT_B_PIXMAP_THICKNESS, VT_B_THINGY_PIXMAP_LEN));
 
 			int32_t pos = TP_B_PIXMAP_THICKNESS + VT_B_THINGY_PIXMAP_LEN;
 
@@ -339,7 +339,7 @@ void Window::draw_border(RenderTarget& dst) {
 
 			dst.blitrect  //  bottom left corner
 			   (Vector2i(0, get_h() - BT_B_PIXMAP_THICKNESS), pic_bottom_,
-			    Recti(Vector2i(0, 0), pos, BT_B_PIXMAP_THICKNESS));
+			    Recti(Vector2i::zero(), pos, BT_B_PIXMAP_THICKNESS));
 
 			//  bottom bar
 			for (; pos < hz_bar_end_minus_middle; pos += HZ_B_MIDDLE_PIXMAP_LEN)

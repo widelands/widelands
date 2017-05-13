@@ -43,15 +43,15 @@ public:
 		Widelands::Coords geometric_coords;  // geometric coordinates (i.e. map coordinates that can
 		                                     // be out of bounds).
 		Widelands::FCoords fcoords;  // The normalized coords and the field this is refering to.
-		Vector2f gl_position;        // GL Position of this field.
+		Vector2f gl_position = Vector2f::zero(); // GL Position of this field.
 
 		// Surface pixel this will be plotted on.
-		Vector2f surface_pixel;
+		Vector2f surface_pixel = Vector2f::zero();
 
 		// Rendertarget pixel this will be plotted on. This is only different by
 		// the Rendertarget::get_rect().origin() of the view window.
-		Vector2f rendertarget_pixel;
-		Vector2f texture_coords;  // Texture coordinates.
+		Vector2f rendertarget_pixel = Vector2f::zero();
+		Vector2f texture_coords = Vector2f::zero();  // Texture coordinates.
 		float brightness;         // brightness of the pixel
 
 		// The next values are not necessarily the true data of this field, but

@@ -61,7 +61,7 @@ struct ImageElement : Element {
 	}
 
 	void draw(RenderTarget& dst) override {
-		dst.blit(Vector2i(), image);
+		dst.blit(Vector2i::zero(), image);
 	}
 
 	const Image* image;
@@ -107,7 +107,7 @@ struct TextlineElement : Element {
 			}
 		}
 		// Now render
-		uint32_t x = g_fh->draw_text_raw(dst, style, Vector2i(0, 0), result_words[0]);
+		uint32_t x = g_fh->draw_text_raw(dst, style, Vector2i::zero(), result_words[0]);
 
 		it = result_words.begin() + 1;
 		if (it != result_words.end()) {
@@ -493,7 +493,7 @@ void RichText::draw(RenderTarget& dst, const Vector2i& offset, bool background) 
 	for (std::vector<Element*>::const_iterator elt = m->elements.begin(); elt != m->elements.end();
 	     ++elt) {
 		Recti oldbox;
-		Vector2i oldofs;
+		Vector2i oldofs = Vector2i::zero();
 		Recti bbox((*elt)->bbox.origin() + offset, (*elt)->bbox.w, (*elt)->bbox.h);
 
 		if (dst.enter_window(bbox, &oldbox, &oldofs)) {

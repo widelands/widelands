@@ -746,7 +746,7 @@ void Panel::do_draw(RenderTarget& dst) {
 		return;
 
 	Recti outerrc;
-	Vector2i outerofs;
+	Vector2i outerofs = Vector2i::zero();
 
 	if (!dst.enter_window(Recti(Vector2i(x_, y_), w_, h_), &outerrc, &outerofs))
 		return;

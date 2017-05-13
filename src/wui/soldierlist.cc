@@ -82,7 +82,7 @@ private:
 		Widelands::OPtr<Soldier> soldier;
 		uint32_t row;
 		uint32_t col;
-		Vector2i pos;
+		Vector2i pos = Vector2i::zero();
 
 		/**
 		 * Keep track of how we last rendered this soldier,
@@ -398,7 +398,7 @@ SoldierList::SoldierList(UI::Panel& parent, InteractiveGameBase& igb, Widelands:
 
 	bool can_act = igbase_.can_act(building_.owner().player_number());
 	if (upcast(Widelands::MilitarySite, ms, &building)) {
-		soldier_preference_.add_button(buttons, Vector2i(0, 0),
+		soldier_preference_.add_button(buttons, Vector2i::zero(),
 		                               g_gr->images().get("images/wui/buildings/prefer_rookies.png"),
 		                               _("Prefer Rookies"));
 		soldier_preference_.add_button(buttons, Vector2i(32, 0),

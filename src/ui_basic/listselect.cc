@@ -356,7 +356,7 @@ void BaseListselect::draw(RenderTarget& dst) {
 	int y = 1 + idx * get_lineheight() - scrollpos_;
 
 	if (background_ != nullptr) {
-		dst.tile(Recti(Vector2i(0, 0), get_w(), get_h()), background_, Vector2i(0, 0));
+		dst.tile(Recti(Vector2i::zero(), get_w(), get_h()), background_, Vector2i::zero());
 	}
 
 	if (selection_mode_ == ListselectLayout::kDropdown) {

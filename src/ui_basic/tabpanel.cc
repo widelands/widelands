@@ -259,7 +259,7 @@ void TabPanel::draw(RenderTarget& dst) {
 
 	if (pic_background_) {
 		if (!tabs_.empty()) {
-			dst.tile(Recti(Vector2i(0, 0), tabs_.back()->get_x() + tabs_.back()->get_w(),
+			dst.tile(Recti(Vector2i::zero(), tabs_.back()->get_x() + tabs_.back()->get_w(),
 			               kTabPanelButtonHeight - 2),
 			         pic_background_, Vector2i(get_x(), get_y()));
 		}

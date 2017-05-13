@@ -145,7 +145,7 @@ protected:
 	/// The current clip rectangle
 	Recti rect_;
 	/// Drawing offset
-	Vector2i offset_;
+	Vector2i offset_ = Vector2i::zero();
 };
 
 #endif  // end of include guard: WL_GRAPHIC_RENDERTARGET_H

@@ -131,64 +131,66 @@ GeneralStatisticsMenu::GeneralStatisticsMenu(InteractiveGameBase& parent,
 
 	UI::Radiobutton* btn;
 
-	radiogroup_.add_button(hbox2, Vector2i(0, 0),
+	const Vector2i zero = Vector2i::zero();
+
+	radiogroup_.add_button(hbox2, zero,
 	                       g_gr->images().get("images/wui/stats/genstats_landsize.png"), _("Land"),
 	                       &btn);
 	hbox2->add(btn, UI::Box::Resizing::kFillSpace);
 
-	radiogroup_.add_button(hbox2, Vector2i(0, 0),
+	radiogroup_.add_button(hbox2, zero,
 	                       g_gr->images().get("images/wui/stats/genstats_nrworkers.png"),
 	                       _("Workers"), &btn);
 	hbox2->add(btn, UI::Box::Resizing::kFillSpace);
 
-	radiogroup_.add_button(hbox2, Vector2i(0, 0),
+	radiogroup_.add_button(hbox2, zero,
 	                       g_gr->images().get("images/wui/stats/genstats_nrbuildings.png"),
 	                       _("Buildings"), &btn);
 	hbox2->add(btn, UI::Box::Resizing::kFillSpace);
 
-	radiogroup_.add_button(hbox2, Vector2i(0, 0),
+	radiogroup_.add_button(hbox2, zero,
 	                       g_gr->images().get("images/wui/stats/genstats_nrwares.png"), _("Wares"),
 	                       &btn);
 	hbox2->add(btn, UI::Box::Resizing::kFillSpace);
 
-	radiogroup_.add_button(hbox2, Vector2i(0, 0),
+	radiogroup_.add_button(hbox2, zero,
 	                       g_gr->images().get("images/wui/stats/genstats_productivity.png"),
 	                       _("Productivity"), &btn);
 	hbox2->add(btn, UI::Box::Resizing::kFillSpace);
 
-	radiogroup_.add_button(hbox2, Vector2i(0, 0),
+	radiogroup_.add_button(hbox2, zero,
 	                       g_gr->images().get("images/wui/stats/genstats_casualties.png"),
 	                       _("Casualties"), &btn);
 	hbox2->add(btn, UI::Box::Resizing::kFillSpace);
 
-	radiogroup_.add_button(hbox2, Vector2i(0, 0),
+	radiogroup_.add_button(hbox2, zero,
 	                       g_gr->images().get("images/wui/stats/genstats_kills.png"), _("Kills"),
 	                       &btn);
 	hbox2->add(btn, UI::Box::Resizing::kFillSpace);
 
-	radiogroup_.add_button(hbox2, Vector2i(0, 0),
+	radiogroup_.add_button(hbox2, zero,
 	                       g_gr->images().get("images/wui/stats/genstats_msites_lost.png"),
 	                       _("Military buildings lost"), &btn);
 	hbox2->add(btn, UI::Box::Resizing::kFillSpace);
 
-	radiogroup_.add_button(hbox2, Vector2i(0, 0),
+	radiogroup_.add_button(hbox2, zero,
 	                       g_gr->images().get("images/wui/stats/genstats_msites_defeated.png"),
 	                       _("Military buildings defeated"), &btn);
 	hbox2->add(btn, UI::Box::Resizing::kFillSpace);
 
-	radiogroup_.add_button(hbox2, Vector2i(0, 0),
+	radiogroup_.add_button(hbox2, zero,
 	                       g_gr->images().get("images/wui/stats/genstats_civil_blds_lost.png"),
 	                       _("Civilian buildings lost"), &btn);
 	hbox2->add(btn, UI::Box::Resizing::kFillSpace);
 
-	radiogroup_.add_button(hbox2, Vector2i(0, 0),
+	radiogroup_.add_button(hbox2, zero,
 	                       g_gr->images().get("images/wui/stats/genstats_militarystrength.png"),
 	                       _("Military"), &btn);
 	hbox2->add(btn, UI::Box::Resizing::kFillSpace);
 
 	if (hook) {
 		radiogroup_.add_button(
-		   hbox2, Vector2i(0, 0), g_gr->images().get(cs_pic), cs_name.c_str(), &btn);
+		   hbox2, zero, g_gr->images().get(cs_pic), cs_name.c_str(), &btn);
 		hbox2->add(btn, UI::Box::Resizing::kFillSpace);
 	}
 

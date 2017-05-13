@@ -91,7 +91,7 @@ private:
 	uint32_t current_frame(uint32_t time) const;
 
 	uint32_t frametime_;
-	Vector2i hotspot_;
+	Vector2i hotspot_ = Vector2i::zero();
 	bool hasplrclrs_;
 	std::vector<std::string> image_files_;
 	std::vector<std::string> pc_mask_image_files_;

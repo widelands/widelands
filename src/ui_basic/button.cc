@@ -163,7 +163,7 @@ void Button::draw(RenderTarget& dst) {
 	if (pic_background_) {
 		dst.fill_rect(Recti(0, 0, get_w(), get_h()), RGBAColor(0, 0, 0, 255));
 		dst.tile(
-		   Recti(Vector2i(0, 0), get_w(), get_h()), pic_background_, Vector2i(get_x(), get_y()));
+		   Recti(Vector2i::zero(), get_w(), get_h()), pic_background_, Vector2i(get_x(), get_y()));
 	}
 
 	if (is_flat && highlighted_)

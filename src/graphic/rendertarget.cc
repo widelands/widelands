@@ -145,7 +145,7 @@ void RenderTarget::brighten_rect(const Recti& rect, int32_t factor) {
 void RenderTarget::blit(const Vector2i& dst,
                         const Image* image,
                         BlendMode blend_mode) {
-	Rectf source_rect(Vector2i(0, 0), image->width(), image->height());
+	Rectf source_rect(Vector2i::zero(), image->width(), image->height());
 	Rectf destination_rect(dst.x, dst.y, source_rect.w, source_rect.h);
 
 	if (to_surface_geometry(&destination_rect, &source_rect)) {
@@ -158,7 +158,7 @@ void RenderTarget::blit(const Vector2i& dst,
 void RenderTarget::blit_monochrome(const Vector2i& dst,
                                    const Image* image,
                                    const RGBAColor& blend_mode) {
-	Rectf source_rect(Vector2i(0, 0), image->width(), image->height());
+	Rectf source_rect(Vector2i::zero(), image->width(), image->height());
 	Rectf destination_rect(dst.x, dst.y, source_rect.w, source_rect.h);
 
 	if (to_surface_geometry(&destination_rect, &source_rect)) {
