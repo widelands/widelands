@@ -808,6 +808,9 @@ public:
 
 	UI::RenderedText* render(TextureCache* texture_cache) override {
 		UI::RenderedText* rendered_text = new UI::RenderedText();
+		// Preserve padding
+		rendered_text->rects.push_back(std::unique_ptr<UI::RenderedRect>(
+		   new UI::RenderedRect(Recti(0, 0, width(), height()), nullptr)));
 
 		// Draw Solid background Color
 		if (is_background_color_set_) {

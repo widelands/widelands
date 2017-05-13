@@ -70,7 +70,9 @@ std::string richtext_escape(const std::string& given_text) {
 
 std::string as_game_tip(const std::string& txt) {
 	static boost::format f(
-	   "<rt><p align=center><font color=21211b face=serif size=16>%s</font></p></rt>");
+	   "<rt padding_l=48 padding_t=28 padding_r=48 padding_b=28>"
+	   "<p align=center><font color=21211b face=serif size=16>%s</font></p></rt>");
+
 	f % txt;
 	return f.str();
 }
