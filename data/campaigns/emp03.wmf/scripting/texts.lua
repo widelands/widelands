@@ -618,11 +618,22 @@ diary_page_5 = {
    w=500,
 }
 
-diary_page_6 = {
-   title=_"Artifact Found",
-   body= lutius(_"Diary of Lutius",
+function diary_page_6(found, missing)
+   local text = ""
+   if found == 1 then
+   -- TRANSLATORS: Lutius - Diary
+      text = _([[Finally, we have discovered a piece of our shrine. Praise Neptune!]])
+   else
+   -- TRANSLATORS: Lutius - Diary
+      text = _([[We have discovered another piece of our shrine. Praise Neptune!]])
+   end
+   text = text .. paragraphdivider() ..
       -- TRANSLATORS: Lutius - Diary
-      _([[Finally, we found a piece of our shrine. Praise Neptune!]])),
-   posy=1,
-   w=500,
+      ngettext([[We still need to discover %d piece of our shrine]], [[We still need to discover %d pieces of our shrine]], missing):bformat(missing)
+   return {
+      title=_"Artifact Found",
+      body= lutius(_"Diary of Lutius", text),
+      posy=1,
+      w=500,
    }
+end

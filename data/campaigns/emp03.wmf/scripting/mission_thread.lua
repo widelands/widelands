@@ -23,6 +23,15 @@ end
 
 -- Check for control of all pieces of Neptune's shrine (artifacts)
 function artifacts()
+   -- Objective will be triggered if 50+ buildings are built
+   local all_building_types = p1.tribe.buildings
+   while count_buildings(p1, all_building_types) < 50 do
+      sleep(4000)
+   end
+   campaign_message_box(saledus_8)
+
+   local objective = add_campaign_objective(obj_find_artifacts)
+
    local artifact_fields = {}
    local i = 1
    -- Find all artifacts
@@ -37,63 +46,76 @@ function artifacts()
       end
    end
 
-   -- Objective will be triggered if 50+ buildings are built
-   local all_building_types = p1.tribe.buildings
-   while count_buildings(p1, all_building_types) < 50 do
-      sleep(4000)
+
+   -- Remember which artifacts have been found
+   --    0 = not found yet
+   --    1 = currently owned
+   --   -1 = we owned it previously but lost it
+   local artifacts_found = {}
+   for idx, f in ipairs(artifact_fields) do
+      artifacts_found[idx] = 0
    end
-   campaign_message_box(saledus_8)
 
+   repeat
+      local all_artifacts_found = true
+      for idx, f in ipairs(artifact_fields) do
+         sleep(2000)
+         if f.owner ~= p1 then
+            if artifacts_found[idx] == 1 then
+               -- We just lost it, send a message
+               send_message(
+                  p1,
+                  -- TRANSLATORS: Short message title. Translate as "Lost!" if you don't have enough space.
+                  pgettext("message_short_title", "Artifact lost!"),
+                  rt("image=".. f.immovable.descr.representative_image,
+                     p(_"We just lost a piece of Neptune’s shrine! We need to reconquer it so that we can return home safely.")
+                  ),
+                  {
+                     field = f,
+                     popup = true,
+                     icon = f.immovable.descr.representative_image,
+                     heading = pgettext("message_heading", "We lost a piece of our holy shrine!")
+                  }
+               )
+            end
+            artifacts_found[idx] = -1
+            all_artifacts_found = false
+         else
+            -- We own it, check if it's newly found
+            if artifacts_found[idx] == 0 then
+               -- Count how many artifacts we have already found
+               local count_found = 0
+               for j, state in ipairs(artifacts_found) do
+                  if state ~= 0 then count_found = count_found + 1 end
+               end
 
-   local objective = add_campaign_objective(obj_find_artifacts)
+               local prior_center = scroll_to_field(f)
+               campaign_message_box(diary_page_6(count_found, #artifact_fields - count_found))
+               scroll_to_map_pixel(prior_center)
+            end
+            artifacts_found[idx] = 1
+         end
+      end
+   until all_artifacts_found
 
-   local artifacts_owner = {}
+   -- Check that we still have them all
    repeat
       sleep(2000)
       local all_artifacts_found = true
       for idx, f in ipairs(artifact_fields) do
-
-      --[[
-      -- NOCOM(#codereview): What is the intention here, that the player will own all artifact fields at the same time, or that they have been conquered once and might have been lost in the meantime?
-
-      If the player has to own them all at the same time, the code can be made much simpler, something like this:
-
-         for idx, f in ipairs(artifact_fields) do
-         if f.owner and f.owner == p1 then
-            sleep(2000)
-            local prior_center = scroll_to_field(f)
-            campaign_message_box(diary_page_6, 2000)
-            scroll_to_map_pixel(prior_center)
-         else
+         if f.owner ~= p1 then
             all_artifacts_found = false
             break
          end
       end
-      ]]
-         if f.owner then
-            if not artifacts_owner[f] then
-               if f.owner ~= p1 then
-                  artifacts_owner[f] = nil
-                  all_artifacts_found = false
-               else
-                  artifacts_owner[f] = f.owner
-                  sleep(2000)
-                  local prior_center = scroll_to_field(f)
-                  campaign_message_box(diary_page_6, 2000)
-                  scroll_to_map_pixel(prior_center)
-               end
-            end
-         else
-            all_artifacts_found = false
-         end
-      end
    until all_artifacts_found
+
    campaign_message_box(saledus_9)
    objective.done = true
    obj_find_artifacts_done = true
 end
 
--- Check for completed Woddcutter and Sawmill
+-- Check for completed Woodcutter and Sawmill
 function check_wood_industry()
    while not check_for_buildings(p1, { empire_lumberjacks_house = 1, empire_sawmill = 1}) do sleep(2000) end
    campaign_message_box(amalea_10)
@@ -375,7 +397,7 @@ function mission_thread()
    while #p1:get_buildings("empire_quarry") < 1 do sleep(3000) end
    objective.done = true
 
-   -- quarry is now build but we need more basic infrastructure
+   -- Quarry is now built but we need more basic infrastructure
    campaign_message_box(amalea_2)
    p1:allow_buildings{
       "empire_barrier",
