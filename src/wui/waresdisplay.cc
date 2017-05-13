@@ -320,20 +320,20 @@ void AbstractWaresDisplay::draw_ware(RenderTarget& dst, Widelands::DescriptionIn
 	                                                        "images/wui/ware_list_bg.png");
 	uint16_t w = bgpic->width();
 
-	const Vector2f p = ware_position(id).cast<float>();
+	const Vector2i p = ware_position(id);
 	dst.blit(p, bgpic);
 
 	const Image* icon = type_ == Widelands::wwWORKER ? tribe_.get_worker_descr(id)->icon() :
 	                                                   tribe_.get_ware_descr(id)->icon();
 
-	dst.blit(p + Vector2f((w - WARE_MENU_PIC_WIDTH) / 2.f, 1.f), icon);
+	dst.blit(p + Vector2i((w - WARE_MENU_PIC_WIDTH) / 2, 1), icon);
 
-	dst.fill_rect(Rectf(p + Vector2f(0.f, WARE_MENU_PIC_HEIGHT), w, WARE_MENU_INFO_SIZE),
+	dst.fill_rect(Recti(p + Vector2i(0, WARE_MENU_PIC_HEIGHT), w, WARE_MENU_INFO_SIZE),
 	              info_color_for_ware(id));
 
 	const Image* text = UI::g_fh1->render(as_waresinfo(info_for_ware(id)));
 	if (text)  // might be zero when there is no info text.
-		dst.blit(p + Vector2f(w - text->width() - 1,
+		dst.blit(p + Vector2i(w - text->width() - 1,
 		                      WARE_MENU_PIC_HEIGHT + WARE_MENU_INFO_SIZE + 1 - text->height()),
 		         text);
 }

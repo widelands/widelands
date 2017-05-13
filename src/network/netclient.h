@@ -22,64 +22,68 @@
 
 #include <memory>
 
+#include <SDL_net.h>
+
 #include "network/network.h"
 
-class NetClientImpl;
-
 /**
- * GameClient manages the lifetime of a network game in which this computer
+ * NetClient manages the network connection for a network game in which this computer
  * participates as a client.
- *
- * This includes running the game setup screen and the actual game after
- * launch, as well as dealing with the actual network protocol.
  */
 class NetClient {
-	public:
-		/**
-		 * Tries to establish a connection to the given host.
-		 * @param host The host to connect to.
-		 * @return A pointer to a connected \c NetClient object or an invalid pointer if the connection failed.
-		 */
-		static std::unique_ptr<NetClient> connect(const NetAddress& host);
+public:
+	/**
+	 * Tries to establish a connection to the given host.
+	 * @param host The host to connect to.
+	 * @return A pointer to a connected \c NetClient object or an invalid pointer if the connection failed.
+	 */
+	static std::unique_ptr<NetClient> connect(const NetAddress& host);
 
-		/**
-		 * Closes the connection.
-		 * If you want to send a goodbye-message to the host, do so before freeing the object.
-		 */
-		~NetClient();
+	/**
+	 * Closes the connection.
+	 * If you want to send a goodbye-message to the host, do so before freeing the object.
+	 */
+	~NetClient();
 
-		/**
-		 * Returns whether the client is connected.
-		 * @return \c true if the connection is open, \c false otherwise.
-		 */
-		bool is_connected() const;
+	/**
+	 * Returns whether the client is connected.
+	 * @return \c true if the connection is open, \c false otherwise.
+	 */
+	bool is_connected() const;
 
-		/**
-		 * Closes the connection.
-		 * If you want to send a goodbye-message to the host, do so before calling this.
-		 */
-		void close();
+	/**
+	 * Closes the connection.
+	 * If you want to send a goodbye-message to the host, do so before calling this.
+	 */
+	void close();
 
-		/**
-		 * Tries to receive a packet.
-		 * @param packet A packet that should be overwritten with the received data.
-		 * @return \c true if a packet is available, \c false otherwise.
-		 *   The given packet is only modified when \c true is returned.
-		 *   Calling this on a closed connection will return false.
-		 */
-		bool try_receive(RecvPacket& packet);
+	/**
+	 * Tries to receive a packet.
+	 * @param packet A packet that should be overwritten with the received data.
+	 * @return \c true if a packet is available, \c false otherwise.
+	 *   The given packet is only modified when \c true is returned.
+	 *   Calling this on a closed connection will return false.
+	 */
+	bool try_receive(RecvPacket *packet);
 
-		/**
-		 * Sends a packet.
-		 * Calling this on a closed connection will silently fail.
-		 * @param packet The packet to send.
-		 */
-		 void send(const SendPacket& packet);
+	/**
+	 * Sends a packet.
+	 * Calling this on a closed connection will silently fail.
+	 * @param packet The packet to send.
+	 */
+	 void send(const SendPacket& packet);
 
-	private:
-		NetClient(const NetAddress& host);
+private:
+	NetClient(const NetAddress& host);
 
-		NetClientImpl *d;
+	/// The socket that connects us to the host
+	TCPsocket sock_;
+
+	/// Socket set used for selection
+	SDLNet_SocketSet sockset_;
+
+	/// Deserializer acts as a buffer for packets (reassembly/splitting up)
+	Deserializer deserializer_;
 };
 
 #endif  // end of include guard: WL_NETWORK_NETCLIENT_H

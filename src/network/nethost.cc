@@ -1,33 +1,11 @@
 #include "network/nethost.h"
 
-#include <map>
 #include <memory>
-
-#include <SDL_net.h>
 
 #include "base/log.h"
 
-class NetHostImpl {
-	public:
-
-		class Client {
-			public:
-				Client(TCPsocket sock)
-					: socket(sock), deserializer() {
-				}
-				TCPsocket socket;
-				Deserializer deserializer;
-		};
-
-		NetHostImpl()
-			: svsock(nullptr), sockset(nullptr), next_id(1) {
-		}
-
-		TCPsocket svsock;
-		SDLNet_SocketSet sockset;
-		std::map<NetHost::ConId, NetHostImpl::Client> clients;
-		NetHost::ConId next_id;
-};
+NetHost::Client::Client(TCPsocket sock) : socket(sock), deserializer() {
+}
 
 std::unique_ptr<NetHost> NetHost::listen(const uint16_t port) {
 	std::unique_ptr<NetHost> ptr(new NetHost(port));
@@ -41,65 +19,63 @@ std::unique_ptr<NetHost> NetHost::listen(const uint16_t port) {
 
 NetHost::~NetHost() {
 	stop_listening();
-	while (!d->clients.empty()) {
-		close(d->clients.begin()->first);
+	while (!clients_.empty()) {
+		close(clients_.begin()->first);
 	}
-	SDLNet_FreeSocketSet(d->sockset);
-	delete d;
+	SDLNet_FreeSocketSet(sockset_);
 }
-
 
 bool NetHost::is_listening() const {
-	return d->svsock != nullptr;
+	return svrsock_ != nullptr;
 }
 
-bool NetHost::is_connected(const ConId id) const {
-	return d->clients.count(id) > 0;
+bool NetHost::is_connected(const ConnectionId id) const {
+	return clients_.count(id) > 0;
 }
 
 void NetHost::stop_listening() {
 	if (!is_listening())
 		return;
-	SDLNet_TCP_DelSocket(d->sockset, d->svsock);
-	SDLNet_TCP_Close(d->svsock);
-	d->svsock = nullptr;
+	SDLNet_TCP_DelSocket(sockset_, svrsock_);
+	SDLNet_TCP_Close(svrsock_);
+	svrsock_ = nullptr;
 }
 
-void NetHost::close(const ConId id) {
-	auto iter_client = d->clients.find(id);
-	if (iter_client == d->clients.end()) {
+void NetHost::close(const ConnectionId id) {
+	auto iter_client = clients_.find(id);
+	if (iter_client == clients_.end()) {
 		// Not connected anyway
 		return;
 	}
-	SDLNet_TCP_DelSocket(d->sockset, iter_client->second.socket);
+	SDLNet_TCP_DelSocket(sockset_, iter_client->second.socket);
 	SDLNet_TCP_Close(iter_client->second.socket);
-	d->clients.erase(iter_client);
+	clients_.erase(iter_client);
 }
 
-bool NetHost::try_accept(ConId& new_id) {
+bool NetHost::try_accept(ConnectionId* new_id) {
 	if (!is_listening())
 		return false;
 
-	TCPsocket sock = SDLNet_TCP_Accept(d->svsock);
+	TCPsocket sock = SDLNet_TCP_Accept(svrsock_);
 	// No client wants to connect
 	if (sock == nullptr)
 		return false;
-	SDLNet_TCP_AddSocket(d->sockset, sock);
-	ConId id = d->next_id++;
+	SDLNet_TCP_AddSocket(sockset_, sock);
+	ConnectionId id = next_id_++;
 	assert(id > 0);
-	assert(d->clients.count(id) == 0);
-	d->clients.insert(std::make_pair(id, NetHostImpl::Client(sock)));
-	assert(d->clients.count(id) == 1);
-	new_id = id;
+	assert(clients_.count(id) == 0);
+	clients_.insert(std::make_pair(id, Client(sock)));
+	assert(clients_.count(id) == 1);
+	*new_id = id;
 	return true;
 }
 
-bool NetHost::try_receive(const ConId id, RecvPacket& packet) {
+bool NetHost::try_receive(const ConnectionId id, RecvPacket* packet) {
 
 	// Always read all available data into buffers
 	uint8_t buffer[512];
-	while (SDLNet_CheckSockets(d->sockset, 0) > 0) {
-		for (auto& e : d->clients) {
+	while (SDLNet_CheckSockets(sockset_, 0) > 0) {
+		for (auto& e : clients_) {
 			if (SDLNet_SocketReady(e.second.socket)) {
 				const int32_t bytes = SDLNet_TCP_Recv(e.second.socket, buffer, sizeof(buffer));
 				if (bytes <= 0) {
@@ -119,25 +95,20 @@ bool NetHost::try_receive(const ConId id, RecvPacket& packet) {
 		return false;
 
 	// Get one packet from the deserializer
-	if (d->clients.at(id).deserializer.write_packet(packet)) {
-		return true;
-	} else {
-		return false;
-	}
+	return clients_.at(id).deserializer.write_packet(packet);
 }
 
-void NetHost::send(const ConId id, const SendPacket& packet) {
+void NetHost::send(const ConnectionId id, const SendPacket& packet) {
 	if (is_connected(id)) {
-		SDLNet_TCP_Send(d->clients.at(id).socket, packet.get_data(), packet.size());
+		SDLNet_TCP_Send(clients_.at(id).socket, packet.get_data(), packet.get_size());
 	}
 }
 
-NetHost::NetHost(const uint16_t port)
-	: d(new NetHostImpl) {
+NetHost::NetHost(const uint16_t port) : svrsock_(nullptr), sockset_(nullptr), next_id_(1) {
 
 	IPaddress myaddr;
 	SDLNet_ResolveHost(&myaddr, nullptr, port);
-	d->svsock = SDLNet_TCP_Open(&myaddr);
-	// Maximal 16 sockets! This mean we can have at most 15 clients in our game (+ metaserver)
-	d->sockset = SDLNet_AllocSocketSet(16);
+	svrsock_ = SDLNet_TCP_Open(&myaddr);
+	// Maximal 16 sockets! This mean we can have at most 15 clients_ in our game (+ metaserver)
+	sockset_ = SDLNet_AllocSocketSet(16);
 }

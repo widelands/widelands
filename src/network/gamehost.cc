@@ -50,7 +50,6 @@
 #include "map_io/widelands_map_loader.h"
 #include "network/constants.h"
 #include "network/internet_gaming.h"
-#include "network/nethost.h"
 #include "network/network_gaming_messages.h"
 #include "network/network_lan_promotion.h"
 #include "network/network_player_settings_backend.h"
@@ -66,7 +65,8 @@
 #include "wui/interactive_spectator.h"
 
 struct HostGameSettingsProvider : public GameSettingsProvider {
-	HostGameSettingsProvider(GameHost* const init_host) : host_(init_host), current_wincondition_(0) {
+	HostGameSettingsProvider(GameHost* const init_host)
+	   : host_(init_host), current_wincondition_(0) {
 	}
 	~HostGameSettingsProvider() {
 	}
@@ -465,7 +465,7 @@ private:
 };
 
 struct Client {
-	NetHost::ConId sock_id;
+	NetHost::ConnectionId sock_id;
 	uint8_t playernum;
 	int16_t usernum;
 	std::string build_id;
@@ -718,8 +718,9 @@ void GameHost::run() {
 
 		d->committed_networktime = d->pseudo_networktime;
 
-		for (uint32_t i = 0; i < d->clients.size(); ++i)
-			d->clients.at(i).time = d->committed_networktime - 1;
+		for (Client& client : d->clients) {
+			client.time = d->committed_networktime - 1;
+		}
 
 		// The call to check_hung_clients ensures that the game leaves the
 		// wait mode when there are no clients
@@ -786,8 +787,9 @@ void GameHost::think() {
 			}
 		}
 
-		for (uint32_t i = 0; i < d->computerplayers.size(); ++i)
-			d->computerplayers.at(i)->think();
+		for (ComputerPlayer* cp : d->computerplayers) {
+			cp->think();
+		}
 	}
 }
 
@@ -947,9 +949,9 @@ void GameHost::kick_user(uint32_t client, std::string reason) {
 /// Split up a user entered string in "cmd", "arg1" and "arg2"
 /// \note the cmd must begin with "/"
 void GameHost::split_command_array(const std::string& cmdarray,
-                                  std::string& cmd,
-                                  std::string& arg1,
-                                  std::string& arg2) {
+                                   std::string& cmd,
+                                   std::string& arg1,
+                                   std::string& arg2) {
 	assert(cmdarray.size() > 1);
 
 	std::string::size_type const space = cmdarray.find(' ');
@@ -974,9 +976,9 @@ void GameHost::split_command_array(const std::string& cmdarray,
 }
 
 void GameHost::send_system_message_code(const std::string& code,
-                                       const std::string& a,
-                                       const std::string& b,
-                                       const std::string& c) {
+                                        const std::string& a,
+                                        const std::string& b,
+                                        const std::string& c) {
 	// First send to all clients
 	SendPacket s;
 	s.unsigned_8(NETCMD_SYSTEM_MESSAGE_CODE);
@@ -1024,19 +1026,19 @@ bool GameHost::can_launch() {
 	// all players must be connected to a controller (human/ai) or be closed.
 	// but not all should be closed!
 	bool one_not_closed = false;
-	for (size_t i = 0; i < d->settings.players.size(); ++i) {
-		if (d->settings.players.at(i).state != PlayerSettings::stateClosed)
+	for (PlayerSettings& setting : d->settings.players) {
+		if (setting.state != PlayerSettings::stateClosed)
 			one_not_closed = true;
-		if (d->settings.players.at(i).state == PlayerSettings::stateOpen)
+		if (setting.state == PlayerSettings::stateOpen)
 			return false;
 	}
 	return one_not_closed;
 }
 
 void GameHost::set_map(const std::string& mapname,
-                      const std::string& mapfilename,
-                      uint32_t const maxplayers,
-                      bool const savegame) {
+                       const std::string& mapfilename,
+                       uint32_t const maxplayers,
+                       bool const savegame) {
 	d->settings.mapname = mapname;
 	d->settings.mapfilename = mapfilename;
 	d->settings.savegame = savegame;
@@ -1142,8 +1144,8 @@ void GameHost::set_map(const std::string& mapname,
 }
 
 void GameHost::set_player_state(uint8_t const number,
-                               PlayerSettings::State const state,
-                               bool const host) {
+                                PlayerSettings::State const state,
+                                bool const host) {
 	if (number >= d->settings.players.size())
 		return;
 
@@ -1200,8 +1202,8 @@ void GameHost::set_player_state(uint8_t const number,
 }
 
 void GameHost::set_player_tribe(uint8_t const number,
-                               const std::string& tribe,
-                               bool const random_tribe) {
+                                const std::string& tribe,
+                                bool const random_tribe) {
 	if (number >= d->settings.players.size())
 		return;
 
@@ -1361,7 +1363,6 @@ void GameHost::set_player_number(uint8_t const number) {
 	switch_to_player(0, number);
 }
 
-
 void GameHost::set_win_condition_script(const std::string& wc) {
 	d->settings.win_condition_script = wc;
 
@@ -1403,14 +1404,16 @@ void GameHost::switch_to_player(uint32_t user, uint8_t number) {
 			set_player_name(number, op.name + " " + name + " ");
 	}
 	d->settings.users.at(user).position = number;
-	if (user == 0)  // host
+	if (user == 0) {  // host
 		d->settings.playernum = number;
-	else
-		for (uint32_t j = 0; j < d->clients.size(); ++j)
-			if (d->clients.at(j).usernum == static_cast<int16_t>(user)) {
-				d->clients.at(j).playernum = number;
+	} else {
+		for (Client& client : d->clients) {
+			if (client.usernum == static_cast<int16_t>(user)) {
+				client.playernum = number;
 				break;
 			}
+		}
+	}
 
 	// Broadcast the user changes to everybody
 	SendPacket s;
@@ -1645,12 +1648,12 @@ void GameHost::welcome_client(uint32_t const number, std::string& playername) {
 	s.reset();
 	s.unsigned_8(NETCMD_SETTING_TRIBES);
 	s.unsigned_8(d->settings.tribes.size());
-	for (uint8_t i = 0; i < d->settings.tribes.size(); ++i) {
-		s.string(d->settings.tribes[i].name);
-		size_t const nr_initializations = d->settings.tribes[i].initializations.size();
+	for (const TribeBasicInfo& tribe : d->settings.tribes) {
+		s.string(tribe.name);
+		size_t const nr_initializations = tribe.initializations.size();
 		s.unsigned_8(nr_initializations);
-		for (uint8_t j = 0; j < nr_initializations; ++j)
-			s.string(d->settings.tribes[i].initializations[j].script);
+		for (const TribeBasicInfo::Initialization& init : tribe.initializations)
+			s.string(init.script);
 	}
 	d->net->send(client.sock_id, s);
 
@@ -1826,9 +1829,9 @@ void GameHost::update_network_speed() {
 		std::vector<uint32_t> speeds;
 
 		speeds.push_back(d->localdesiredspeed);
-		for (uint32_t i = 0; i < d->clients.size(); ++i) {
-			if (d->clients.at(i).playernum <= UserSettings::highest_playernum())
-				speeds.push_back(d->clients.at(i).desiredspeed);
+		for (const Client& client : d->clients) {
+			if (client.playernum <= UserSettings::highest_playernum())
+				speeds.push_back(client.desiredspeed);
 		}
 		assert(!speeds.empty());
 
@@ -1864,8 +1867,9 @@ void GameHost::request_sync_reports() {
 	d->syncreport_arrived = false;
 	d->syncreport_time = d->committed_networktime + 1;
 
-	for (uint32_t i = 0; i < d->clients.size(); ++i)
-		d->clients.at(i).syncreport_arrived = false;
+	for (Client& client : d->clients) {
+		client.syncreport_arrived = false;
+	}
 
 	log("[Host]: Requesting sync reports for time %i\n", d->syncreport_time);
 
@@ -1888,9 +1892,8 @@ void GameHost::check_sync_reports() {
 	if (!d->syncreport_arrived)
 		return;
 
-	for (uint32_t i = 0; i < d->clients.size(); ++i) {
-		if (d->clients.at(i).playernum != UserSettings::not_connected() &&
-		    !d->clients.at(i).syncreport_arrived)
+	for (const Client& client : d->clients) {
+		if (client.playernum != UserSettings::not_connected() && !client.syncreport_arrived)
 			return;
 	}
 
@@ -1937,11 +1940,10 @@ void GameHost::handle_network() {
 	if (d->promoter != nullptr)
 		d->promoter->run();
 
-
 	// Check for new connections.
 	Client peer;
 	assert(d->net != nullptr);
-	while (d->net->try_accept(peer.sock_id)) {
+	while (d->net->try_accept(&peer.sock_id)) {
 		peer.playernum = UserSettings::not_connected();
 		peer.syncreport_arrived = false;
 		peer.desiredspeed = 1000;
@@ -1958,8 +1960,8 @@ void GameHost::handle_network() {
 		// that we should show in game as well.
 		std::vector<ChatMessage> msgs;
 		InternetGaming::ref().get_ingame_system_messages(msgs);
-		for (uint8_t i = 0; i < msgs.size(); ++i)
-			send(msgs.at(i));
+		for (const ChatMessage& msg : msgs)
+			send(msg);
 	}
 
 	for (size_t i = 0; i < d->clients.size(); ++i) {
@@ -1971,10 +1973,10 @@ void GameHost::handle_network() {
 	RecvPacket packet;
 	for (size_t i = 0; i < d->clients.size(); ++i) {
 		try {
-			while (d->net->try_receive(d->clients.at(i).sock_id, packet)) {
+			while (d->net->try_receive(d->clients.at(i).sock_id, &packet)) {
 				handle_packet(i, packet);
 			}
-		// Thrown by handle_packet()
+			// Thrown by handle_packet()
 		} catch (const DisconnectException& e) {
 			disconnect_client(i, e.what());
 		} catch (const ProtocolException& e) {
@@ -2240,7 +2242,7 @@ void GameHost::handle_packet(uint32_t const i, RecvPacket& r) {
 	}
 }
 
-void GameHost::send_file_part(NetHost::ConId csock_id, uint32_t part) {
+void GameHost::send_file_part(NetHost::ConnectionId csock_id, uint32_t part) {
 	assert(part < file_->parts.size());
 
 	uint32_t left = file_->bytes - NETFILEPARTSIZE * part;
@@ -2258,8 +2260,8 @@ void GameHost::send_file_part(NetHost::ConId csock_id, uint32_t part) {
 void GameHost::disconnect_player_controller(uint8_t const number, const std::string& name) {
 	log("[Host]: disconnect_player_controller(%u, %s)\n", number, name.c_str());
 
-	for (uint32_t i = 0; i < d->settings.users.size(); ++i) {
-		if (d->settings.users.at(i).position == number) {
+	for (const UserSettings& setting : d->settings.users) {
+		if (setting.position == number) {
 			if (!d->game) {
 				// Remove player name
 				PlayerSettings& p = d->settings.players.at(number);
@@ -2280,9 +2282,9 @@ void GameHost::disconnect_player_controller(uint8_t const number, const std::str
 }
 
 void GameHost::disconnect_client(uint32_t const number,
-                                const std::string& reason,
-                                bool const sendreason,
-                                const std::string& arg) {
+                                 const std::string& reason,
+                                 bool const sendreason,
+                                 const std::string& arg) {
 	assert(number < d->clients.size());
 
 	Client& client = d->clients.at(number);
@@ -2352,8 +2354,8 @@ void GameHost::reaper() {
 }
 
 void GameHost::report_result(uint8_t p_nr,
-                            Widelands::PlayerEndResult result,
-                            const std::string& info) {
+                             Widelands::PlayerEndResult result,
+                             const std::string& info) {
 	// Send to game
 	Widelands::PlayerEndStatus pes;
 	Widelands::Player* player = d->game->get_player(p_nr);
@@ -2366,8 +2368,7 @@ void GameHost::report_result(uint8_t p_nr,
 
 	// there might be more than one client that control this Widelands player
 	// and maybe even none -> computer player
-	for (uint16_t i = 0; i < d->settings.users.size(); ++i) {
-		UserSettings& user = d->settings.users.at(i);
+	for (UserSettings& user : d->settings.users) {
 		if (user.position == p_nr - 1) {
 			user.result = result;
 			user.win_condition_string = info;

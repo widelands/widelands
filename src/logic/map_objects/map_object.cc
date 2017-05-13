@@ -473,19 +473,20 @@ void MapObject::do_draw_info(const TextToDraw& draw_text,
 	const Image* rendered_census_info =
 	   UI::g_fh1->render(as_condensed(census, UI::Align::kCenter, font_size), 120);
 
-	// Rounding guarantees that text aligns with pixels to avoid subsampling.
-	const Vector2f census_pos = round(field_on_dst - Vector2f(0, 48) * scale).cast<float>();
+	const Vector2i base_pos = field_on_dst.cast<int>() - Vector2i(0, 48) * scale;
+	Vector2i census_pos(base_pos);
+	UI::correct_for_align(UI::Align::kCenter, rendered_census_info->width(), &census_pos);
 	if (draw_text & TextToDraw::kCensus) {
-		dst->blit(census_pos, rendered_census_info, BlendMode::UseAlpha, UI::Align::kCenter);
+		dst->blit(census_pos, rendered_census_info, BlendMode::UseAlpha);
 	}
 
 	if (draw_text & TextToDraw::kStatistics && !statictics.empty()) {
-		const Vector2f statistics_pos =
-		   round(census_pos + Vector2f(0, rendered_census_info->height() / 2.f + 10 * scale))
-		      .cast<float>();
-		dst->blit(statistics_pos,
-		          UI::g_fh1->render(as_condensed(statictics, UI::Align::kCenter, font_size)),
-		          BlendMode::UseAlpha, UI::Align::kCenter);
+		Vector2i statistics_pos =
+		   base_pos + Vector2i(0, rendered_census_info->height() / 2 + 10 * scale);
+		const Image* rendered_statictics =
+		   UI::g_fh1->render(as_condensed(statictics, UI::Align::kCenter, font_size));
+		UI::correct_for_align(UI::Align::kCenter, rendered_statictics->width(), &statistics_pos);
+		dst->blit(statistics_pos, rendered_statictics, BlendMode::UseAlpha);
 	}
 }
 

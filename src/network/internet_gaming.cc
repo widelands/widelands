@@ -34,7 +34,7 @@
 /// will ensure
 /// that only one instance is running at time.
 InternetGaming::InternetGaming()
-   : net(),
+   : net(nullptr),
      state_(OFFLINE),
      reg_(false),
      port_(INTERNET_GAMING_PORT),
@@ -270,7 +270,7 @@ void InternetGaming::handle_metaserver_communication() {
 		}
 		// Process all available packets
 		RecvPacket packet;
-		while (net->try_receive(packet)) {
+		while (net->try_receive(&packet)) {
 			handle_packet(packet);
 		}
 	} catch (const std::exception& e) {
@@ -455,12 +455,13 @@ void InternetGaming::handle_packet(RecvPacket& packet) {
 				gamelist_.push_back(*ing);
 
 				bool found = false;
-				for (std::vector<InternetGame>::size_type j = 0; j < old.size(); ++j)
-					if (old[j].name == ing->name) {
+				for (InternetGame& old_game : old) {
+					if (old_game.name == ing->name) {
 						found = true;
-						old[j].name = "";
+						old_game.name = "";
 						break;
 					}
+				}
 				if (!found)
 					format_and_add_chat(
 					   "", "", true,
@@ -470,11 +471,13 @@ void InternetGaming::handle_packet(RecvPacket& packet) {
 				ing = nullptr;
 			}
 
-			for (std::vector<InternetGame>::size_type i = 0; i < old.size(); ++i)
-				if (old[i].name.size())
+			for (InternetGame& old_game : old) {
+				if (old_game.name.size()) {
 					format_and_add_chat(
 					   "", "", true,
-					   (boost::format(_("The game %s has been closed")) % old[i].name).str());
+					   (boost::format(_("The game %s has been closed")) % old_game.name).str());
+				}
+			}
 
 			gameupdate_ = true;
 		}
@@ -502,12 +505,13 @@ void InternetGaming::handle_packet(RecvPacket& packet) {
 
 				bool found =
 				   old.empty();  // do not show all clients, if this instance is the actual change
-				for (std::vector<InternetClient>::size_type j = 0; j < old.size(); ++j)
-					if (old[j].name == inc->name) {
+				for (InternetClient& client : old) {
+					if (client.name == inc->name) {
 						found = true;
-						old[j].name = "";
+						client.name = "";
 						break;
 					}
+				}
 				if (!found)
 					format_and_add_chat(
 					   "", "", true, (boost::format(_("%s joined the lobby")) % inc->name).str());
@@ -516,11 +520,12 @@ void InternetGaming::handle_packet(RecvPacket& packet) {
 				inc = nullptr;
 			}
 
-			for (std::vector<InternetClient>::size_type i = 0; i < old.size(); ++i)
-				if (old[i].name.size())
+			for (InternetClient& client : old) {
+				if (client.name.size()) {
 					format_and_add_chat(
-					   "", "", true, (boost::format(_("%s left the lobby")) % old[i].name).str());
-
+					   "", "", true, (boost::format(_("%s left the lobby")) % client.name).str());
+				}
+			}
 			clientupdate_ = true;
 		}
 

@@ -206,9 +206,8 @@ void FullscreenMenuInternetLobby::fill_games_list(const std::vector<InternetGame
 	std::string localservername = edit_servername_.text();
 
 	if (games != nullptr) {  // If no communication error occurred, fill the list.
-		for (uint32_t i = 0; i < games->size(); ++i) {
+		for (const InternetGame& game : *games) {
 			const Image* pic;
-			const InternetGame& game = games->at(i);
 			if (game.connectable) {
 				if (game.build_id == build_id())
 					pic = g_gr->images().get("images/ui_basic/continue.png");
@@ -255,8 +254,7 @@ bool FullscreenMenuInternetLobby::compare_clienttype(unsigned int rowa, unsigned
 void FullscreenMenuInternetLobby::fill_client_list(const std::vector<InternetClient>* clients) {
 	clientsonline_list_.clear();
 	if (clients != nullptr) {  // If no communication error occurred, fill the list.
-		for (uint32_t i = 0; i < clients->size(); ++i) {
-			const InternetClient& client(clients->at(i));
+		for (const InternetClient& client : *clients) {
 			UI::Table<const InternetClient* const>::EntryRecord& er = clientsonline_list_.add(&client);
 			er.set_string(1, client.name);
 			er.set_string(2, client.build_id);
@@ -344,8 +342,8 @@ void FullscreenMenuInternetLobby::change_servername() {
 	// And disable 'hostgame' button if yes.
 	const std::vector<InternetGame>* games = InternetGaming::ref().games();
 	if (games != nullptr) {
-		for (uint32_t i = 0; i < games->size(); ++i) {
-			if (games->at(i).name == edit_servername_.text()) {
+		for (const InternetGame& game : *games) {
+			if (game.name == edit_servername_.text()) {
 				hostgame_.set_enabled(false);
 			}
 		}

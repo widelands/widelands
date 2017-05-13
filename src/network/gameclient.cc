@@ -261,8 +261,8 @@ GameController::GameType GameClient::get_game_type() {
 }
 
 void GameClient::report_result(uint8_t player_nr,
-                              Widelands::PlayerEndResult result,
-                              const std::string& info) {
+                               Widelands::PlayerEndResult result,
+                               const std::string& info) {
 	// Send to game
 	Widelands::PlayerEndStatus pes;
 	Widelands::Player* player = d->game->get_player(player_nr);
@@ -322,8 +322,8 @@ void GameClient::set_map(const std::string&, const std::string&, uint32_t, bool)
 }
 
 void GameClient::set_player_tribe(uint8_t number,
-                                 const std::string& tribe,
-                                 bool const random_tribe) {
+                                  const std::string& tribe,
+                                  bool const random_tribe) {
 	if ((number != d->settings.playernum))
 		return;
 
@@ -870,7 +870,7 @@ void GameClient::handle_network() {
 		}
 		// Process all available packets
 		RecvPacket packet;
-		while (d->net->try_receive(packet)) {
+		while (d->net->try_receive(&packet)) {
 			handle_packet(packet);
 		}
 	} catch (const DisconnectException& e) {
@@ -883,9 +883,9 @@ void GameClient::handle_network() {
 }
 
 void GameClient::disconnect(const std::string& reason,
-                           const std::string& arg,
-                           bool const sendreason,
-                           bool const showmsg) {
+                            const std::string& arg,
+                            bool const sendreason,
+                            bool const showmsg) {
 	log("[Client]: disconnect(%s, %s)\n", reason.c_str(), arg.c_str());
 
 	assert(d->net != nullptr);

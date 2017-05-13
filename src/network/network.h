@@ -109,7 +109,7 @@ struct SendPacket : public StreamWrite {
 
 	void data(void const* data, size_t size) override;
 
-	size_t size() const;
+	size_t get_size() const;
 
 	uint8_t* get_data() const;
 
@@ -148,13 +148,13 @@ public:
 	/**
 	 * Adds the given data to the internal buffer.
 	 */
-	void read_data(const uint8_t *data, const int32_t len);
+	void read_data(const uint8_t* data, int32_t len);
 
 	/**
 	 * \param packet The packet to fill with the received data.
 	 * \return \c true if an entire packet has been received and written to the given packet.
 	 */
-	bool write_packet(RecvPacket& packet);
+	bool write_packet(RecvPacket* packet);
 
 private:
 	std::vector<uint8_t> queue_;
