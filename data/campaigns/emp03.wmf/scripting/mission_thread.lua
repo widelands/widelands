@@ -104,6 +104,9 @@ function artifacts()
    until all_artifacts_found
 
    -- Check that we still have them all
+   -- Code Review: What is the purpose of this repeat loop? From my understanding of the code we will only reach this after the first loop has been completed and therefore we own all of them. 
+   -- For this reason I think the loop will only be run through once 
+   
    repeat
       sleep(2000)
       local all_artifacts_found = true

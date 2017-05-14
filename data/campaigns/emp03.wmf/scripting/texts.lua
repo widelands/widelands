@@ -303,7 +303,7 @@ amalea_3 = {
       .. new_objectives(obj_lower_marble_column_demand),
    posy=1,
    w=500,
-   h=480,
+   h=500,
 }
 
 amalea_10 = {
@@ -346,7 +346,7 @@ saledus_4 = {
      .. new_objectives(obj_build_port_and_shipyard),
    posy=1,
    w=500,
-   h=480,
+   h=500,
 }
 
 amalea_4 = {
@@ -517,7 +517,7 @@ amalea_12 = {
    title=_"Amalea is Very Content",
    body= amalea2(_"Amalea is clapping her hands…",
       -- TRANSLATORS: Amalea
-      _([[Lutius. Well done. Well done. We have discovered all possible port locations in the complete region. Now we can rebuild our economy and we will manage to sail home soon.]])),
+      _([[Lutius. Well done. Well done. We have discovered all possible port locations in the complete region. Now we can reinforce our economy and we will manage to sail home soon.]])),
    posy=1,
    w=500,
 }
@@ -627,9 +627,14 @@ function diary_page_6(first_message, missing)
    -- TRANSLATORS: Lutius - Diary
       text = _([[We have discovered another piece of our shrine. Praise Neptune!]])
    end
-   text = text .. paragraphdivider() ..
+   if missing > 0 then
+      text = text .. paragraphdivider() ..
       -- TRANSLATORS: Lutius - Diary
       ngettext([[We still need to discover %d piece of our shrine]], [[We still need to discover %d pieces of our shrine]], missing):bformat(missing)
+   else
+   -- TRANSLATORS: Lutius - Diary
+      text = _([[Finally, we have discovered the last piece of our shrine. Praise Neptune!]])  
+   end
    return {
       title=_"Artifact Found",
       body= lutius(_"Diary of Lutius", text),
