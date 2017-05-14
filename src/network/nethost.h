@@ -108,8 +108,11 @@ private:
 	 */
 	NetHost(const uint16_t port);
 
+	bool open_acceptor(boost::asio::ip::tcp::acceptor *acceptor,
+						const boost::asio::ip::tcp::endpoint& endpoint);
+
 	/**
-	 * Helper struct to store variables about a connected client.
+	 * Helper structure to store variables about a connected client.
 	 */
 	struct Client {
 		/**
@@ -131,8 +134,10 @@ private:
 	NetHost::ConnectionId next_id_;
 	/// An io_service needed by boost.asio. Primary needed for async operations.
 	boost::asio::io_service io_service_;
-	/// The acceptor we get connection requests to.
-	boost::asio::ip::tcp::acceptor acceptor_;
+	/// The acceptor we get IPv4 connection requests to.
+	boost::asio::ip::tcp::acceptor acceptor_v4_;
+	/// The acceptor we get IPv6 connection requests to.
+	boost::asio::ip::tcp::acceptor acceptor_v6_;
 };
 
 #endif  // end of include guard: WL_NETWORK_NETHOST_H

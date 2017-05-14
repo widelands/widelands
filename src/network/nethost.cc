@@ -25,7 +25,7 @@ NetHost::~NetHost() {
 }
 
 bool NetHost::is_listening() const {
-	return acceptor_.is_open();
+	return acceptor_v4_.is_open() || acceptor_v6_.is_open();
 }
 
 bool NetHost::is_connected(const ConnectionId id) const {
@@ -33,10 +33,11 @@ bool NetHost::is_connected(const ConnectionId id) const {
 }
 
 void NetHost::stop_listening() {
-	if (!is_listening())
-		return;
 	boost::system::error_code ec;
-	acceptor_.close(ec);
+	if (acceptor_v4_.is_open())
+		acceptor_v4_.close(ec);
+	if (acceptor_v6_.is_open())
+		acceptor_v6_.close(ec);
 	// Ignore errors
 }
 
@@ -57,14 +58,39 @@ bool NetHost::try_accept(ConnectionId* new_id) {
 		return false;
 	boost::system::error_code ec;
 	boost::asio::ip::tcp::socket socket(io_service_);
-	acceptor_.accept(socket, ec);
-	if (ec == boost::asio::error::would_block) {
-		// No client wants to connect
-		// New socket don't need to be closed since it isn't open yet
+	if (acceptor_v4_.is_open()) {
+		acceptor_v4_.accept(socket, ec);
+		if (ec == boost::asio::error::would_block) {
+			// No client wants to connect
+			// New socket don't need to be closed since it isn't open yet
+		} else if (ec) {
+			// Some other error, close the acceptor
+			acceptor_v4_.close(ec);
+		} else {
+			log("[NetHost]: Accepting IPv4 connection from %s\n",
+				socket.remote_endpoint().address().to_string().c_str());
+		}
+	}
+	if (acceptor_v6_.is_open() && !socket.is_open()) {
+		// IPv4 did not get a connection
+		acceptor_v6_.accept(socket, ec);
+		if (ec == boost::asio::error::would_block) {
+			;
+		} else if (ec) {
+			acceptor_v6_.close(ec);
+		} else {
+			log("[NetHost]: Accepting IPv6 connection from %s\n",
+				socket.remote_endpoint().address().to_string().c_str());
+		}
+	}
+
+	if (!socket.is_open()) {
+		// No new connection
 		return false;
 	}
 
 	socket.non_blocking(true);
+
 	ConnectionId id = next_id_++;
 	assert(id > 0);
 	assert(clients_.count(id) == 0);
@@ -126,9 +152,25 @@ void NetHost::send(const ConnectionId id, const SendPacket& packet) {
 }
 
 NetHost::NetHost(const uint16_t port)
-	: clients_(), next_id_(1), io_service_(),
-		acceptor_(io_service_, boost::asio::ip::tcp::endpoint(boost::asio::ip::tcp::v4(), port)) {
+	: clients_(), next_id_(1), io_service_(), acceptor_v4_(io_service_), acceptor_v6_(io_service_) {
 
-	// Not catching errors on purpose. If it doesn't work, the code is broken anyway
-	acceptor_.non_blocking(true);
+	open_acceptor(&acceptor_v4_, boost::asio::ip::tcp::endpoint(boost::asio::ip::tcp::v4(), port));
+	open_acceptor(&acceptor_v6_, boost::asio::ip::tcp::endpoint(boost::asio::ip::tcp::v6(), port));
+}
+
+bool NetHost::open_acceptor(boost::asio::ip::tcp::acceptor *acceptor,
+						const boost::asio::ip::tcp::endpoint& endpoint) {
+	try {
+		acceptor->open(endpoint.protocol());
+		acceptor->non_blocking(true);
+		if (endpoint.protocol() == boost::asio::ip::tcp::v6()) {
+			const boost::asio::ip::v6_only option_v6only(true);
+			acceptor->set_option(option_v6only);
+		}
+		acceptor->bind(endpoint);
+		acceptor->listen(boost::asio::socket_base::max_connections);
+		return true;
+	} catch (const boost::system::system_error&) {
+		return false;
+	}
 }
