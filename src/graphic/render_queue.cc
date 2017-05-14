@@ -252,6 +252,7 @@ void RenderQueue::draw_items(const std::vector<Item>& items) {
 		} break;
 
 		case Program::kTerrainRoad: {
+			log("NOCOM drawing roads\n");
 			ScopedScissor scoped_scissor(item.terrain_arguments.destination_rect);
 			road_program_->draw(item.terrain_arguments.renderbuffer_width,
 			                    item.terrain_arguments.renderbuffer_height,

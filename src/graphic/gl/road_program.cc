@@ -71,12 +71,13 @@ void RoadProgram::add_road(const int renderbuffer_width,
 	// points for the quad that will make the road.
 	const float road_thickness_x = (-delta_y / vector_length) * kRoadThicknessInPixels * scale;
 	const float road_thickness_y = (delta_x / vector_length) * kRoadThicknessInPixels * scale;
-	log("Road start %d, %d\n", start.fcoords.x, start.fcoords.y);
-	log("Road end %d, %d\n", end.fcoords.x, end.fcoords.y);
-	if (start.owner == nullptr){
+
+	if (start.owner == nullptr && end.owner == nullptr) {
+		log("Road start %d, %d - %s\n", start.fcoords.x, start.fcoords.y, start.owner ? "owned" : "not owned");
+		log("Road end %d, %d - %s\n", end.fcoords.x, end.fcoords.y, end.owner ? "owned" : "not owned");
 		return;
 	}
-	assert(start.owner != nullptr || end.owner != nullptr);
+	// NOCOM assert(start.owner != nullptr || end.owner != nullptr);
 
 	Widelands::Player* visible_owner = start.owner;
 	if (start.owner == nullptr) {
@@ -153,6 +154,7 @@ void RoadProgram::draw(const int renderbuffer_width,
 			const Widelands::RoadType road =
 			   static_cast<Widelands::RoadType>(field.roads & Widelands::RoadType::kMask);
 			if (road != Widelands::RoadType::kNone) {
+				log("NOCOM drawing rn\n");
 				add_road(renderbuffer_width, renderbuffer_height, field,
 				         fields_to_draw.at(field.rn_index), scale, road, kEast, &gl_texture);
 			}
@@ -163,6 +165,7 @@ void RoadProgram::draw(const int renderbuffer_width,
 			const Widelands::RoadType road =
 			   static_cast<Widelands::RoadType>((field.roads >> 2) & Widelands::RoadType::kMask);
 			if (road != Widelands::RoadType::kNone) {
+				log("NOCOM drawing brn\n");
 				add_road(renderbuffer_width, renderbuffer_height, field,
 				         fields_to_draw.at(field.brn_index), scale, road, kSouthEast, &gl_texture);
 			}
@@ -173,6 +176,7 @@ void RoadProgram::draw(const int renderbuffer_width,
 			const Widelands::RoadType road =
 			   static_cast<Widelands::RoadType>((field.roads >> 4) & Widelands::RoadType::kMask);
 			if (road != Widelands::RoadType::kNone) {
+				log("NOCOM drawing bln\n");
 				add_road(renderbuffer_width, renderbuffer_height, field,
 				         fields_to_draw.at(field.bln_index), scale, road, kSouthWest, &gl_texture);
 			}
