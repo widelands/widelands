@@ -328,7 +328,7 @@ void AbstractWaresDisplay::draw_ware(RenderTarget& dst, Widelands::DescriptionIn
 
 	dst.blit(p + Vector2i((w - WARE_MENU_PIC_WIDTH) / 2, 1), icon);
 
-	dst.fill_rect(Rectf(p + Vector2i(0.f, WARE_MENU_PIC_HEIGHT), w, WARE_MENU_INFO_SIZE),
+	dst.fill_rect(Recti(p + Vector2i(0, WARE_MENU_PIC_HEIGHT), w, WARE_MENU_INFO_SIZE),
 	              info_color_for_ware(id));
 
 	const UI::RenderedText* rendered_text = UI::g_fh1->render(as_waresinfo(info_for_ware(id)));

@@ -126,7 +126,7 @@ public:
 	uint32_t get_positive(char const* name, uint32_t def = 1);
 	bool get_bool(char const* name, bool def = false);
 	const char* get_string(char const* name, char const* def = nullptr);
-	Vector2i get_point(char const* name, Vector2i def = Vector2i(0, 0));
+	Vector2i get_point(char const* name, Vector2i def = Vector2i::zero());
 
 	int32_t get_safe_int(const char* name);
 	uint32_t get_safe_natural(char const* name);

@@ -228,6 +228,7 @@ void draw_diagram(uint32_t time_ms,
 	}
 	// Make sure that we always have a tick
 	how_many_ticks = std::max(how_many_ticks, 1u);
+
 	// Make sure we haven't more ticks than we have space for -> avoid overlap
 	how_many_ticks = std::min(how_many_ticks, calc_plot_x_max_ticks(inner_w));
 
@@ -458,8 +459,8 @@ void WuiPlotArea::update() {
  * Draw this. This is the main function
  */
 void WuiPlotArea::draw(RenderTarget& dst) {
-	dst.tile(Recti(Vector2i(0, 0), get_inner_w(), get_inner_h()), g_gr->images().get(BG_PIC),
-	         Vector2i(0, 0));
+	dst.tile(Recti(Vector2i::zero(), get_inner_w(), get_inner_h()), g_gr->images().get(BG_PIC),
+	         Vector2i::zero());
 	draw_plot(dst, get_inner_h() - kSpaceBottom, std::to_string(highest_scale_), highest_scale_);
 }
 
@@ -670,8 +671,8 @@ void DifferentialPlotArea::update() {
 void DifferentialPlotArea::draw(RenderTarget& dst) {
 
 	// first, tile the background
-	dst.tile(Recti(Vector2i(0, 0), get_inner_w(), get_inner_h()), g_gr->images().get(BG_PIC),
-	         Vector2i(0, 0));
+	dst.tile(Recti(Vector2i::zero(), get_inner_w(), get_inner_h()), g_gr->images().get(BG_PIC),
+	         Vector2i::zero());
 
 	// yoffset of the zero line
 	float const yoffset = kSpacing + ((get_inner_h() - kSpaceBottom) - kSpacing) / 2;

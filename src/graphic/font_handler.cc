@@ -54,7 +54,7 @@ void draw_caret(RenderTarget& dst,
 	int caret_x = style.calc_bare_width(text.substr(0, caret_offset));
 
 	const Image* caret_image = g_gr->images().get("images/ui_basic/caret.png");
-	Vector2i caretpt;
+	Vector2i caretpt = Vector2i::zero();
 	caretpt.x = dstpoint.x + caret_x + LINE_MARGIN - caret_image->width();
 	caretpt.y = dstpoint.y + (style.font->height() - caret_image->height()) / 2;
 	dst.blit(caretpt, caret_image);

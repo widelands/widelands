@@ -746,7 +746,7 @@ void Panel::do_draw(RenderTarget& dst) {
 		return;
 
 	Recti outerrc;
-	Vector2i outerofs;
+	Vector2i outerofs = Vector2i::zero();
 
 	if (!dst.enter_window(Recti(Vector2i(x_, y_), w_, h_), &outerrc, &outerofs))
 		return;
@@ -1077,8 +1077,8 @@ bool Panel::draw_tooltip(RenderTarget& dst, const std::string& text) {
 	if (screen_bottom_right.y < tooltip_bottom_right.y)
 		r.y -= 35 + r.h;
 
-	dst.fill_rect(r.cast<float>(), RGBColor(63, 52, 34));
-	dst.draw_rect(r.cast<float>(), RGBColor(0, 0, 0));
+	dst.fill_rect(r, RGBColor(63, 52, 34));
+	dst.draw_rect(r, RGBColor(0, 0, 0));
 	rendered_text->draw(dst, r.origin() + Vector2i(2, 2));
 	return true;
 }

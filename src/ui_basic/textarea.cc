@@ -125,7 +125,6 @@ void Textarea::set_fixed_width(int w) {
  */
 void Textarea::draw(RenderTarget& dst) {
 	if (!text_.empty()) {
-		// Blit on pixel boundary (not float), so that the text is blitted pixel perfect.
 		Vector2i anchor(
 		   (align_ == Align::kCenter) ? get_w() / 2 : (align_ == UI::Align::kRight) ? get_w() : 0, 0);
 		rendered_text_->draw(dst, anchor, align_);

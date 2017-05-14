@@ -426,26 +426,26 @@ void MultilineEditbox::focus(bool topcaller) {
  */
 void MultilineEditbox::draw(RenderTarget& dst) {
 	// Draw the background
-	dst.tile(Recti(Vector2i(0, 0), get_w(), get_h()), d_->background, Vector2i(get_x(), get_y()));
+	dst.tile(Recti(Vector2i::zero(), get_w(), get_h()), d_->background, Vector2i(get_x(), get_y()));
 
 	// Draw border.
 	if (get_w() >= 4 && get_h() >= 4) {
 		static const RGBColor black(0, 0, 0);
 
 		// bottom edge
-		dst.brighten_rect(Rectf(0.f, get_h() - 2, get_w(), 2), BUTTON_EDGE_BRIGHT_FACTOR);
+		dst.brighten_rect(Recti(0, get_h() - 2, get_w(), 2), BUTTON_EDGE_BRIGHT_FACTOR);
 		// right edge
-		dst.brighten_rect(Rectf(get_w() - 2, 0, 2, get_h() - 2), BUTTON_EDGE_BRIGHT_FACTOR);
+		dst.brighten_rect(Recti(get_w() - 2, 0, 2, get_h() - 2), BUTTON_EDGE_BRIGHT_FACTOR);
 		// top edge
-		dst.fill_rect(Rectf(0, 0, get_w() - 1, 1), black);
-		dst.fill_rect(Rectf(0, 1, get_w() - 2, 1), black);
+		dst.fill_rect(Recti(0, 0, get_w() - 1, 1), black);
+		dst.fill_rect(Recti(0, 1, get_w() - 2, 1), black);
 		// left edge
-		dst.fill_rect(Rectf(0, 0, 1, get_h() - 1), black);
-		dst.fill_rect(Rectf(1, 0, 1, get_h() - 2), black);
+		dst.fill_rect(Recti(0, 0, 1, get_h() - 1), black);
+		dst.fill_rect(Recti(1, 0, 1, get_h() - 2), black);
 	}
 
 	if (has_focus())
-		dst.brighten_rect(Rectf(0, 0, get_w(), get_h()), MOUSE_OVER_BRIGHT_FACTOR);
+		dst.brighten_rect(Recti(0, 0, get_w(), get_h()), MOUSE_OVER_BRIGHT_FACTOR);
 
 	d_->refresh_ww();
 

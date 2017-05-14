@@ -139,7 +139,7 @@ void MultilineTextarea::layout() {
  */
 void MultilineTextarea::draw(RenderTarget& dst) {
 	if (pic_background_) {
-		dst.tile(Recti(0, 0, get_inner_w(), get_inner_h()), pic_background_, Vector2i(0, 0));
+		dst.tile(Recti(0, 0, get_inner_w(), get_inner_h()), pic_background_, Vector2i::zero());
 	}
 	if (use_old_renderer_) {
 		rt.draw(dst, Vector2i(RICHTEXT_MARGIN, RICHTEXT_MARGIN - scrollbar_.get_scrollpos()));

@@ -139,7 +139,7 @@ void RenderedText::draw(RenderTarget& dst,
 				for (int tile_y = blit_point.y; tile_y + tile_height <= blit_point.y + rect->height();
 				     tile_y += tile_height) {
 					dst.fill_rect(
-					   Rectf(tile_x, tile_y, tile_width, tile_height), rect->background_color());
+					   Recti(tile_x, tile_y, tile_width, tile_height), rect->background_color());
 				}
 			}
 		}

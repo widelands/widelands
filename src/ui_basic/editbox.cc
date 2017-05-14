@@ -355,19 +355,19 @@ void EditBox::draw(RenderTarget& dst) {
 		static const RGBColor black(0, 0, 0);
 
 		// bottom edge
-		dst.brighten_rect(Rectf(0, get_h() - 2, get_w(), 2), BUTTON_EDGE_BRIGHT_FACTOR);
+		dst.brighten_rect(Recti(0, get_h() - 2, get_w(), 2), BUTTON_EDGE_BRIGHT_FACTOR);
 		// right edge
-		dst.brighten_rect(Rectf(get_w() - 2, 0, 2, get_h() - 2), BUTTON_EDGE_BRIGHT_FACTOR);
+		dst.brighten_rect(Recti(get_w() - 2, 0, 2, get_h() - 2), BUTTON_EDGE_BRIGHT_FACTOR);
 		// top edge
-		dst.fill_rect(Rectf(0.f, 0.f, get_w() - 1, 1), black);
-		dst.fill_rect(Rectf(0.f, 1.f, get_w() - 2, 1), black);
+		dst.fill_rect(Recti(0, 0, get_w() - 1, 1), black);
+		dst.fill_rect(Recti(0, 1, get_w() - 2, 1), black);
 		// left edge
-		dst.fill_rect(Rectf(0.f, 0.f, 1, get_h() - 1), black);
-		dst.fill_rect(Rectf(1.f, 0.f, 1, get_h() - 2), black);
+		dst.fill_rect(Recti(0, 0, 1, get_h() - 1), black);
+		dst.fill_rect(Recti(1, 0, 1, get_h() - 2), black);
 	}
 
 	if (has_focus()) {
-		dst.brighten_rect(Rectf(0.f, 0.f, get_w(), get_h()), MOUSE_OVER_BRIGHT_FACTOR);
+		dst.brighten_rect(Recti(0, 0, get_w(), get_h()), MOUSE_OVER_BRIGHT_FACTOR);
 	}
 
 	const int max_width = get_w() - 2 * kMarginX;
@@ -415,7 +415,7 @@ void EditBox::draw(RenderTarget& dst) {
 		const uint16_t fontheight = text_height(m_->fontsize);
 
 		const Image* caret_image = g_gr->images().get("images/ui_basic/caret.png");
-		Vector2i caretpt;
+		Vector2i caretpt = Vector2i::zero();
 		caretpt.x = point.x + m_->scrolloffset + caret_x - caret_image->width() + kLineMargin;
 		caretpt.y = point.y + (fontheight - caret_image->height()) / 2;
 		dst.blit(caretpt, caret_image);

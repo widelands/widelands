@@ -283,9 +283,9 @@ WLApplication::WLApplication(int const argc, char const* const* const argv)
      game_type_(NONE),
      mouse_swapped_(false),
      faking_middle_mouse_button_(false),
-     mouse_position_(0, 0),
+     mouse_position_(Vector2i::zero()),
      mouse_locked_(0),
-     mouse_compensate_warp_(0, 0),
+     mouse_compensate_warp_(Vector2i::zero()),
      should_die_(false),
 #ifdef _WIN32
      homedir_(FileSystem::get_homedir() + "\\.widelands"),
@@ -469,7 +469,7 @@ bool WLApplication::poll_event(SDL_Event& ev) {
 	case SDL_MOUSEMOTION:
 		ev.motion.xrel += mouse_compensate_warp_.x;
 		ev.motion.yrel += mouse_compensate_warp_.y;
-		mouse_compensate_warp_ = Vector2i(0, 0);
+		mouse_compensate_warp_ = Vector2i::zero();
 
 		if (mouse_locked_) {
 			warp_mouse(mouse_position_);
@@ -665,7 +665,7 @@ void WLApplication::handle_mousebutton(SDL_Event& ev, InputCallback const* cb) {
 void WLApplication::warp_mouse(const Vector2i position) {
 	mouse_position_ = position;
 
-	Vector2i cur_position;
+	Vector2i cur_position = Vector2i::zero();
 	SDL_GetMouseState(&cur_position.x, &cur_position.y);
 	if (cur_position != position) {
 		mouse_compensate_warp_ += cur_position - position;
