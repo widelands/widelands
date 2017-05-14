@@ -12,6 +12,8 @@ wl_library(ui_fsmenu
     internet_lobby.h
     intro.cc
     intro.h
+    launch_game.cc
+    launch_game.h
     launch_mpg.cc
     launch_mpg.h
     launch_spg.cc

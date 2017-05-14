@@ -143,7 +143,7 @@ void MultilineTextarea::layout() {
  */
 void MultilineTextarea::draw(RenderTarget& dst) {
 	if (pic_background_) {
-		dst.tile(Recti(0, 0, get_inner_w(), get_inner_h()), pic_background_, Vector2i(0, 0));
+		dst.tile(Recti(0, 0, get_inner_w(), get_inner_h()), pic_background_, Vector2i::zero());
 	}
 	if (use_old_renderer_) {
 		rt.draw(dst, Vector2i(RICHTEXT_MARGIN, RICHTEXT_MARGIN - scrollbar_.get_scrollpos()));
@@ -172,7 +172,7 @@ void MultilineTextarea::draw(RenderTarget& dst) {
 				anchor = RICHTEXT_MARGIN;
 			}
 
-			dst.blitrect(Vector2f(anchor, 0), text_im,
+			dst.blitrect(Vector2i(anchor, 0), text_im,
 			             Recti(0, scrollbar_.get_scrollpos(), blit_width, blit_height),
 			             BlendMode::UseAlpha);
 		}

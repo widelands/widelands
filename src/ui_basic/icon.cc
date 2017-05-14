@@ -62,7 +62,7 @@ void Icon::draw(RenderTarget& dst) {
 		dst.blitrect_scale(Rectf(x, y, width, height), pic_,
 		                   Recti(0, 0, pic_->width(), pic_->height()), 1., BlendMode::UseAlpha);
 		if (draw_frame_) {
-			dst.draw_rect(Rectf(x, y, width, height), framecolor_);
+			dst.draw_rect(Recti(x, y, width, height), framecolor_);
 		}
 	}
 }
