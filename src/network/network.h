@@ -24,7 +24,6 @@
 #include <string>
 #include <vector>
 
-#include <SDL_net.h>
 #include <boost/lexical_cast.hpp>
 
 #include "base/wexception.h"

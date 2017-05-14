@@ -350,9 +350,6 @@ WLApplication::WLApplication(int const argc, char const* const* const argv)
 	// This might grab the input.
 	refresh_graphics();
 
-	if (SDLNet_Init() == -1)
-		throw wexception("SDLNet_Init failed: %s\n", SDLNet_GetError());
-
 	// seed random number generator used for random tribe selection
 	std::srand(time(nullptr));
 
@@ -377,8 +374,6 @@ WLApplication::~WLApplication() {
 	assert(UI::g_fh1);
 	delete UI::g_fh1;
 	UI::g_fh1 = nullptr;
-
-	SDLNet_Quit();
 
 	TTF_Quit();  // TODO(unknown): not here
 

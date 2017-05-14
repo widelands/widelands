@@ -23,7 +23,6 @@ wl_library(network
     network_player_settings_backend.cc
     network_player_settings_backend.h
     network_protocol.h
-  USES_SDL2_NET
   DEPENDS
     ai
     base_exceptions
