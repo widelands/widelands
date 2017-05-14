@@ -104,17 +104,17 @@ void ItemWaresDisplay::draw(RenderTarget& dst) {
 	const int width = get_w() - 2 * kMargin;
 	const int height = get_h() - 2 * kMargin;
 	RGBAColor black(0, 0, 0, 255);
-	dst.brighten_rect(Rectf(kMargin, kMargin, width - 1, height - 1), -BUTTON_EDGE_BRIGHT_FACTOR / 2);
+	dst.brighten_rect(Recti(kMargin, kMargin, width - 1, height - 1), -BUTTON_EDGE_BRIGHT_FACTOR / 2);
 	//  bottom edge
-	dst.brighten_rect(Rectf(kMargin, height + 2, width, 2), 1.5 * BUTTON_EDGE_BRIGHT_FACTOR);
+	dst.brighten_rect(Recti(kMargin, height + 2, width, 2), 1.5 * BUTTON_EDGE_BRIGHT_FACTOR);
 	//  right edge
-	dst.brighten_rect(Rectf(kMargin + width - 2, kMargin, 2, height - 2), 1.5 * BUTTON_EDGE_BRIGHT_FACTOR);
+	dst.brighten_rect(Recti(kMargin + width - 2, kMargin, 2, height - 2), 1.5 * BUTTON_EDGE_BRIGHT_FACTOR);
 	//  top edge
-	dst.fill_rect(Rectf(kMargin, kMargin, width - 1, 1), black);
-	dst.fill_rect(Rectf(kMargin, kMargin + 1, width - 2, 1), black);
+	dst.fill_rect(Recti(kMargin, kMargin, width - 1, 1), black);
+	dst.fill_rect(Recti(kMargin, kMargin + 1, width - 2, 1), black);
 	//  left edge
-	dst.fill_rect(Rectf(kMargin, kMargin, 1, height - 1), black);
-	dst.fill_rect(Rectf(kMargin + 1, kMargin, 1, height - 2), black);
+	dst.fill_rect(Recti(kMargin, kMargin, 1, height - 1), black);
+	dst.fill_rect(Recti(kMargin + 1, kMargin, 1, height - 2), black);
 
 	for (uint32_t idx = 0; idx < items_.size(); ++idx) {
 		const Item& it = items_[idx];
@@ -133,7 +133,7 @@ void ItemWaresDisplay::draw(RenderTarget& dst) {
 		} else {
 			y += IWD_WareBaseLine;
 			if (tribe.get_ware_descr(it.index)->icon())
-				dst.blit(Vector2f(x, y), tribe.get_ware_descr(it.index)->icon());
+				dst.blit(Vector2i(x, y), tribe.get_ware_descr(it.index)->icon());
 		}
 	}
 }
