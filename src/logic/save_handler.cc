@@ -34,7 +34,6 @@
 #include "io/filesystem/filesystem.h"
 #include "logic/game.h"
 #include "logic/game_controller.h"
-#include "wlapplication.h"
 #include "wui/interactive_base.h"
 
 // The actual work of saving is done by the GameSaver
