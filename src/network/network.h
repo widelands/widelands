@@ -37,7 +37,8 @@ class Deserializer;
 class FileRead;
 
 /**
- Simple structure to hold the ip address and port of a server.
+ * Simple structure to hold the IP address and port of a server.
+ * This structure should not contain a hostname.
  */
 struct NetAddress {
 	std::string ip;

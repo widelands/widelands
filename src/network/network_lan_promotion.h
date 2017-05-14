@@ -50,6 +50,7 @@ struct NetOpenGame {
  * Base class for UDP networking.
  * This class is used by derived classes to find open games on the
  * local network and to announce a just opened game on the local network.
+ * This class tries to create sockets for IPv4 and IPv6.
  */
 struct LanBase {
 protected:

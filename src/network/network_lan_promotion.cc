@@ -146,6 +146,8 @@ bool LanBase::is_open() {
 }
 
 ssize_t LanBase::receive(void* const buf, size_t const len, NetAddress *addr) {
+	assert(buf != nullptr);
+	assert(addr != nullptr);
 	boost::asio::ip::udp::endpoint sender_endpoint;
 	size_t recv_len;
 	if (socket_v4.is_open()) {
@@ -180,7 +182,11 @@ ssize_t LanBase::receive(void* const buf, size_t const len, NetAddress *addr) {
 
 bool LanBase::send(void const* const buf, size_t const len, const NetAddress& addr) {
 	boost::system::error_code ec;
-	boost::asio::ip::udp::endpoint destination(boost::asio::ip::address::from_string(addr.ip), addr.port);
+	const boost::asio::ip::address address = boost::asio::ip::address::from_string(addr.ip, ec);
+	// If this assert failed, then there is some bug in the code. NetAddress should only be filled
+	// with valid IP addresses (e.g. no hostnames)
+	assert(!ec);
+	boost::asio::ip::udp::endpoint destination(address, addr.port);
 	boost::asio::ip::udp::socket *socket = nullptr;
 	if (destination.address().is_v4()) {
 		socket = &socket_v4;
@@ -194,7 +200,7 @@ bool LanBase::send(void const* const buf, size_t const len, const NetAddress& ad
 		// I think this shouldn't happen normally. It might happen, though, if we receive
 		// a broadcast and learn the IP, then our sockets goes down, then we try to send
 		log("[LAN] Error: trying to send to an %s address but socket is not open",
-			get_ip_version_string(destination.address()));
+			get_ip_version_string(address));
 		return false;
 	}
 	socket->send_to(boost::asio::buffer(buf, len), destination, 0, ec);

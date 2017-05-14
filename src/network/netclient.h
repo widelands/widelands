@@ -22,20 +22,43 @@
 
 #include <memory>
 
-#include <SDL_net.h>
+#include <boost/asio.hpp>
 
 #include "network/network.h"
 
 /**
  * NetClient manages the network connection for a network game in which this computer
  * participates as a client.
+ * This class only tries to create a single socket, either for IPv4 and IPv6.
+ * Which is used depends on what kind of address is given on call to connect().
  */
 class NetClient {
 public:
+
+	/**
+	 * Tries to resolve the given hostname to an IPv4 address.
+	 * \param[out] addr An NetAddress structure to write the result to,
+	 *                  if resolution succeeds.
+	 * \param hostname The name of the host.
+	 * \param port The port on the host.
+	 * \return \c True if the resolution succeeded, \c false otherwise.
+	 */
+	static bool resolve_to_v4(NetAddress *addr, const std::string& hostname, uint16_t port);
+
+	/**
+	 * Tries to resolve the given hostname to an IPv6 address.
+	 * \param[out] addr An NetAddress structure to write the result to,
+	 *                  if resolution succeeds.
+	 * \param hostname The name of the host.
+	 * \param port The port on the host.
+	 * \return \c True if the resolution succeeded, \c false otherwise.
+	 */
+	static bool resolve_to_v6(NetAddress *addr, const std::string& hostname, uint16_t port);
+
 	/**
 	 * Tries to establish a connection to the given host.
-	 * @param host The host to connect to.
-	 * @return A pointer to a connected \c NetClient object or an invalid pointer if the connection failed.
+	 * \param host The host to connect to.
+	 * \return A pointer to a connected \c NetClient object or an invalid pointer if the connection failed.
 	 */
 	static std::unique_ptr<NetClient> connect(const NetAddress& host);
 
@@ -47,7 +70,7 @@ public:
 
 	/**
 	 * Returns whether the client is connected.
-	 * @return \c true if the connection is open, \c false otherwise.
+	 * \return \c true if the connection is open, \c false otherwise.
 	 */
 	bool is_connected() const;
 
@@ -59,8 +82,8 @@ public:
 
 	/**
 	 * Tries to receive a packet.
-	 * @param packet A packet that should be overwritten with the received data.
-	 * @return \c true if a packet is available, \c false otherwise.
+	 * \param packet A packet that should be overwritten with the received data.
+	 * \return \c true if a packet is available, \c false otherwise.
 	 *   The given packet is only modified when \c true is returned.
 	 *   Calling this on a closed connection will return false.
 	 */
@@ -69,20 +92,25 @@ public:
 	/**
 	 * Sends a packet.
 	 * Calling this on a closed connection will silently fail.
-	 * @param packet The packet to send.
+	 * \param packet The packet to send.
 	 */
 	 void send(const SendPacket& packet);
 
 private:
+	/**
+	 * Tries to establish a connection to the given host.
+	 * If the connection attempt failed, is_connected() will return \c false.
+	 * \param host The host to connect to.
+	 */
 	NetClient(const NetAddress& host);
 
-	/// The socket that connects us to the host
-	TCPsocket sock_;
+	/// An io_service needed by boost.asio. Primary needed for asynchronous operations.
+	boost::asio::io_service io_service_;
 
-	/// Socket set used for selection
-	SDLNet_SocketSet sockset_;
+	/// The socket that connects us to the host.
+	boost::asio::ip::tcp::socket socket_;
 
-	/// Deserializer acts as a buffer for packets (reassembly/splitting up)
+	/// Deserializer acts as a buffer for packets (splitting stream to packets)
 	Deserializer deserializer_;
 };
 

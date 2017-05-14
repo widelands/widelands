@@ -30,6 +30,7 @@
 /**
  * NetHost manages the client connections of a network game in which this computer
  * participates as a server.
+ * This class tries to create sockets for IPv4 and IPv6.
  */
 class NetHost {
 public:
