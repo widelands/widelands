@@ -25,7 +25,6 @@
 #include <set>
 
 #include "network/network.h"
-#include "network/network_system.h"
 
 #define LAN_PROMOTION_PROTOCOL_VERSION 1
 
