@@ -29,9 +29,9 @@
 #include "graphic/graphic.h"
 #include "graphic/text_constants.h"
 #include "network/constants.h"
+#include "network/gameclient.h"
+#include "network/gamehost.h"
 #include "network/internet_gaming.h"
-#include "network/netclient.h"
-#include "network/nethost.h"
 #include "profile/profile.h"
 #include "ui_basic/messagebox.h"
 
@@ -227,9 +227,8 @@ void FullscreenMenuInternetLobby::fill_games_list(const std::vector<InternetGame
 	std::string localservername = servername_.text();
 
 	if (games != nullptr) {  // If no communication error occurred, fill the list.
-		for (uint32_t i = 0; i < games->size(); ++i) {
+		for (const InternetGame& game : *games) {
 			const Image* pic;
-			const InternetGame& game = games->at(i);
 			if (game.connectable) {
 				if (game.build_id == build_id())
 					pic = g_gr->images().get("images/ui_basic/continue.png");
@@ -276,10 +275,8 @@ bool FullscreenMenuInternetLobby::compare_clienttype(unsigned int rowa, unsigned
 void FullscreenMenuInternetLobby::fill_client_list(const std::vector<InternetClient>* clients) {
 	clientsonline_table_.clear();
 	if (clients != nullptr) {  // If no communication error occurred, fill the list.
-		for (uint32_t i = 0; i < clients->size(); ++i) {
-			const InternetClient& client(clients->at(i));
-			UI::Table<const InternetClient* const>::EntryRecord& er =
-			   clientsonline_table_.add(&client);
+		for (const InternetClient& client : *clients) {
+			UI::Table<const InternetClient* const>::EntryRecord& er = clientsonline_table_.add(&client);
 			er.set_string(1, client.name);
 			er.set_string(2, client.build_id);
 			er.set_string(3, client.game);
@@ -366,8 +363,8 @@ void FullscreenMenuInternetLobby::change_servername() {
 	// And disable 'hostgame' button if yes.
 	const std::vector<InternetGame>* games = InternetGaming::ref().games();
 	if (games != nullptr) {
-		for (uint32_t i = 0; i < games->size(); ++i) {
-			if (games->at(i).name == servername_.text()) {
+		for (const InternetGame& game : *games) {
+			if (game.name == servername_.text()) {
 				hostgame_.set_enabled(false);
 			}
 		}
@@ -397,6 +394,7 @@ void FullscreenMenuInternetLobby::clicked_joingame() {
 		}
 		std::string ip = InternetGaming::ref().ip();
 
+		// TODO(Notabilis): Change this for IPv6
 		//  convert IPv6 addresses returned by the metaserver to IPv4 addresses.
 		//  At the moment SDL_net does not support IPv6 anyways.
 		if (!ip.compare(0, 7, "::ffff:")) {
@@ -404,25 +402,7 @@ void FullscreenMenuInternetLobby::clicked_joingame() {
 			log("InternetGaming: cut IPv6 address: %s\n", ip.c_str());
 		}
 
-		IPaddress peer;
-		if (hostent* const he = gethostbyname(ip.c_str())) {
-			peer.host = (reinterpret_cast<in_addr*>(he->h_addr_list[0]))->s_addr;
-			DIAG_OFF("-Wold-style-cast")
-			peer.port = htons(WIDELANDS_PORT);
-			DIAG_ON("-Wold-style-cast")
-		} else {
-			// Actually the game is not done, but that way we are again listed as in the lobby
-			InternetGaming::ref().set_game_done();
-			// Show a popup warning message
-			std::string warningheader(_("Connection problem"));
-			std::string warning(_("Widelands was unable to connect to the host."));
-			UI::WLMessageBox mmb(
-			   this, warningheader, warning, UI::WLMessageBox::MBoxType::kOk, UI::Align::kLeft);
-			mmb.run<UI::Panel::Returncodes>();
-		}
-		SDLNet_ResolveHost(&peer, ip.c_str(), WIDELANDS_PORT);
-
-		NetClient netgame(&peer, InternetGaming::ref().get_local_clientname(), true);
+		GameClient netgame(ip, WIDELANDS_PORT, InternetGaming::ref().get_local_clientname(), true);
 		netgame.run();
 	} else
 		throw wexception("No server selected! That should not happen!");
@@ -445,6 +425,6 @@ void FullscreenMenuInternetLobby::clicked_hostgame() {
 	InternetGaming::ref().set_local_servername(servername_ui);
 
 	// Start the game
-	NetHost netgame(InternetGaming::ref().get_local_clientname(), true);
+	GameHost netgame(InternetGaming::ref().get_local_clientname(), true);
 	netgame.run();
 }

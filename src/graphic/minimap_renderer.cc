@@ -97,7 +97,7 @@ void draw_view_window(const Map& map,
 	const int half_height =
 	   round_up_to_nearest_even(std::ceil(view_area.h / kTriangleHeight / divider));
 
-	Vector2i center_pixel;
+	Vector2i center_pixel = Vector2i::zero();
 	switch (minimap_type) {
 	case MiniMapType::kStaticViewWindow:
 		center_pixel = Vector2i(texture->width() / 2, texture->height() / 2);
@@ -203,7 +203,7 @@ Vector2f minimap_pixel_to_mappixel(const Widelands::Map& map,
                                    const Rectf& view_area,
                                    MiniMapType minimap_type,
                                    const bool zoom) {
-	Vector2f top_left;
+	Vector2f top_left = Vector2f::zero();
 	switch (minimap_type) {
 	case MiniMapType::kStaticViewWindow:
 		top_left =
@@ -212,7 +212,7 @@ Vector2f minimap_pixel_to_mappixel(const Widelands::Map& map,
 		break;
 
 	case MiniMapType::kStaticMap:
-		top_left = Vector2f(0., 0.);
+		top_left = Vector2f::zero();
 		break;
 	}
 
@@ -242,7 +242,7 @@ std::unique_ptr<Texture> draw_minimap(const EditorGameBase& egbase,
 	// Center the view on the middle of the 'view_area'.
 	const bool zoom = layers & MiniMapLayer::Zoom2;
 	Vector2f top_left =
-	   minimap_pixel_to_mappixel(map, Vector2i(0, 0), view_area, minimap_type, zoom);
+	   minimap_pixel_to_mappixel(map, Vector2i::zero(), view_area, minimap_type, zoom);
 	const Coords node =
 	   MapviewPixelFunctions::calc_node_and_triangle(map, top_left.x, top_left.y).node;
 
