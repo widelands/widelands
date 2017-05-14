@@ -26,13 +26,13 @@
 #include <stdint.h>
 
 #include "io/filesystem/filesystem.h"
+#include "logic/constants.h"
 
 namespace Widelands {
 class Game;
 }
 
-// default autosave interval in minutes
-#define DEFAULT_AUTOSAVE_INTERVAL 15
+
 
 /**
  * Takes care of manual or autosave via think().
