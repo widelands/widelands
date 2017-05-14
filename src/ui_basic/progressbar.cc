@@ -75,13 +75,13 @@ void ProgressBar::draw(RenderTarget& dst) {
 		const float w = get_w() * fraction;
 		assert(w <= get_w());
 
-		dst.fill_rect(Rectf(0.f, 0.f, w, get_h()), color);
-		dst.fill_rect(Rectf(w, 0.f, get_w() - w, get_h()), RGBColor(0, 0, 0));
+		dst.fill_rect(Recti(0, 0, w, get_h()), color);
+		dst.fill_rect(Recti(w, 0, get_w() - w, get_h()), RGBColor(0, 0, 0));
 	} else {
 		const uint32_t h = static_cast<uint32_t>(get_h() * (1.0f - fraction));
 
-		dst.fill_rect(Rectf(0.f, 0.f, get_w(), h), RGBColor(0, 0, 0));
-		dst.fill_rect(Rectf(0.f, h, get_w(), get_h() - h), color);
+		dst.fill_rect(Recti(0, 0, get_w(), h), RGBColor(0, 0, 0));
+		dst.fill_rect(Recti(0, h, get_w(), get_h() - h), color);
 	}
 
 	// Print the state in percent without decimal points.
@@ -89,8 +89,9 @@ void ProgressBar::draw(RenderTarget& dst) {
 	                                   UI_FONT_CLR_BRIGHT.hex_value() % floor(fraction * 100.f))
 	                                     .str();
 	const Image* rendered_text = UI::g_fh1->render(as_uifont(progress_text));
-	Vector2f pos(get_w() / 2, get_h() / 2);
+	Vector2i pos(get_w() / 2, get_h() / 2);
+	UI::correct_for_align(UI::Align::kCenter, rendered_text->width(), &pos);
 	UI::center_vertically(rendered_text->height(), &pos);
-	dst.blit(pos, rendered_text, BlendMode::UseAlpha, UI::Align::kCenter);
+	dst.blit(pos, rendered_text, BlendMode::UseAlpha);
 }
 }
