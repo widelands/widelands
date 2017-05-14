@@ -395,7 +395,7 @@ void Immovable::increment_program_pointer() {
 /**
  * Actually initialize the immovable.
 */
-void Immovable::init(EditorGameBase& egbase) {
+bool Immovable::init(EditorGameBase& egbase) {
 	BaseImmovable::init(egbase);
 
 	set_position(egbase, position_);
@@ -412,6 +412,7 @@ void Immovable::init(EditorGameBase& egbase) {
 	if (upcast(Game, game, &egbase)) {
 		switch_program(*game, "program");
 	}
+	return true;
 }
 
 /**
@@ -1289,8 +1290,8 @@ void PlayerImmovable::set_owner(Player* new_owner) {
 /**
  * Initialize the immovable.
 */
-void PlayerImmovable::init(EditorGameBase& egbase) {
-	BaseImmovable::init(egbase);
+bool PlayerImmovable::init(EditorGameBase& egbase) {
+	return BaseImmovable::init(egbase);
 }
 
 /**

@@ -15,8 +15,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-04-06 19:07+0000\n"
-"PO-Revision-Date: 2017-04-09 16:35+0000\n"
+"POT-Creation-Date: 2017-04-28 06:01+0000\n"
+"PO-Revision-Date: 2017-05-04 04:12+0000\n"
 "Last-Translator: Олег Шевченко <olegrock@gmail.com>\n"
 "Language-Team: Russian (http://www.transifex.com/widelands/widelands/language/ru/)\n"
 "MIME-Version: 1.0\n"
@@ -993,7 +993,7 @@ msgid "Loading map…"
 msgstr "Загрузка карты..."
 
 #: ../../src/logic/game.cc:338 ../../src/logic/game.cc:373
-#: ../../src/ui_basic/progresswindow.cc:50 ../../src/wlapplication.cc:1346
+#: ../../src/ui_basic/progresswindow.cc:50 ../../src/wlapplication.cc:1348
 msgid "Loading…"
 msgstr "Загрузка..."
 
@@ -1022,7 +1022,7 @@ msgstr "Эта игра была сохранена, используя стар
 msgid "No description defined"
 msgstr "Описание отсутствует"
 
-#: ../../src/logic/map_objects/immovable.cc:512
+#: ../../src/logic/map_objects/immovable.cc:513
 #: ../../src/logic/map_objects/tribes/constructionsite.cc:72
 #, c-format
 msgid "%i%% built"
@@ -1071,33 +1071,33 @@ msgstr[2] "%1%(+%2%) солдат"
 msgstr[3] "%1%(+%2%) солдат"
 
 #. * TRANSLATORS: Militarysite lost (taken/destroyed by enemy)
-#: ../../src/logic/map_objects/tribes/militarysite.cc:774
+#: ../../src/logic/map_objects/tribes/militarysite.cc:775
 msgctxt "building"
 msgid "Lost!"
 msgstr "Потеряно!"
 
-#: ../../src/logic/map_objects/tribes/militarysite.cc:775
+#: ../../src/logic/map_objects/tribes/militarysite.cc:776
 msgid "Militarysite lost!"
 msgstr "Военное строение потеряно!"
 
 #. * TRANSLATORS: Message title.
 #. * TRANSLATORS: If you run out of space, you can also translate this as
 #. "Success!"
-#: ../../src/logic/map_objects/tribes/militarysite.cc:815
+#: ../../src/logic/map_objects/tribes/militarysite.cc:816
 msgid "Enemy Defeated!"
 msgstr "Враг разбит!"
 
-#: ../../src/logic/map_objects/tribes/militarysite.cc:815
+#: ../../src/logic/map_objects/tribes/militarysite.cc:816
 msgid "Enemy at site defeated!"
 msgstr "Враг в этом месте разбит!"
 
 #. * TRANSLATORS: Militarysite is being attacked
-#: ../../src/logic/map_objects/tribes/militarysite.cc:857
+#: ../../src/logic/map_objects/tribes/militarysite.cc:858
 msgctxt "building"
 msgid "Attack!"
 msgstr "Атаковано!"
 
-#: ../../src/logic/map_objects/tribes/militarysite.cc:857
+#: ../../src/logic/map_objects/tribes/militarysite.cc:858
 msgid "You are under attack"
 msgstr "Вы атакованы"
 
@@ -1281,99 +1281,99 @@ msgstr "(остановлено)"
 msgid "%i%%"
 msgstr "%i%%"
 
-#: ../../src/logic/map_objects/tribes/productionsite.cc:943
+#: ../../src/logic/map_objects/tribes/productionsite.cc:944
 msgid "Can’t find any more resources!"
 msgstr "Больше не можем найти ресурсов!"
 
-#: ../../src/logic/map_objects/tribes/ship.cc:416
+#: ../../src/logic/map_objects/tribes/ship.cc:417
 msgid "Port Space"
 msgstr "Место порта"
 
-#: ../../src/logic/map_objects/tribes/ship.cc:416
+#: ../../src/logic/map_objects/tribes/ship.cc:417
 msgid "Port Space Found"
 msgstr "Найдено место для порта"
 
-#: ../../src/logic/map_objects/tribes/ship.cc:417
+#: ../../src/logic/map_objects/tribes/ship.cc:418
 msgid "An expedition ship found a new port build space."
 msgstr "Экспедиционный корабль нашёл место для строительства нового порта."
 
-#: ../../src/logic/map_objects/tribes/ship.cc:538
+#: ../../src/logic/map_objects/tribes/ship.cc:539
 msgid "Island Circumnavigated"
 msgstr "Исследование побережья острова завершено"
 
 #. * TRANSLATORS: A ship has circumnavigated an island and is waiting
 #. for orders
-#: ../../src/logic/map_objects/tribes/ship.cc:538
+#: ../../src/logic/map_objects/tribes/ship.cc:539
 msgctxt "ship"
 msgid "Waiting"
 msgstr "Ожидаю приказов"
 
-#: ../../src/logic/map_objects/tribes/ship.cc:539
+#: ../../src/logic/map_objects/tribes/ship.cc:540
 msgid "An expedition ship sailed around its island without any events."
 msgstr "Корабль экспедиции обогнул остров без происшествий."
 
-#: ../../src/logic/map_objects/tribes/ship.cc:603
+#: ../../src/logic/map_objects/tribes/ship.cc:604
 msgid "Coast Reached"
 msgstr "Берег достигнут"
 
 #. * TRANSLATORS: A ship has discovered land
-#: ../../src/logic/map_objects/tribes/ship.cc:603
+#: ../../src/logic/map_objects/tribes/ship.cc:604
 msgid "Land Ahoy!"
 msgstr "Земля!"
 
-#: ../../src/logic/map_objects/tribes/ship.cc:604
+#: ../../src/logic/map_objects/tribes/ship.cc:605
 msgid ""
 "An expedition ship reached a coast and is waiting for further commands."
 msgstr "Экспедиционный корабль достиг побережья и ждёт дальнейших указаний."
 
-#: ../../src/logic/map_objects/tribes/ship.cc:659
+#: ../../src/logic/map_objects/tribes/ship.cc:660
 msgid "New port construction site is gone"
 msgstr "Новое место для строительства порта потеряно"
 
-#: ../../src/logic/map_objects/tribes/ship.cc:659
+#: ../../src/logic/map_objects/tribes/ship.cc:660
 msgid "Port Lost!"
 msgstr "Порт потерян!"
 
-#: ../../src/logic/map_objects/tribes/ship.cc:660
+#: ../../src/logic/map_objects/tribes/ship.cc:661
 msgid "Unloading of wares failed, expedition is cancelled now."
 msgstr "Разгрузка товаров не удалась, экспедиция отменяется."
 
 #. * TRANSLATORS: Ship expedition ready
-#: ../../src/logic/map_objects/tribes/ship.cc:835
+#: ../../src/logic/map_objects/tribes/ship.cc:836
 msgctxt "ship"
 msgid "Expedition"
 msgstr "Экспедиция"
 
-#: ../../src/logic/map_objects/tribes/ship.cc:835
+#: ../../src/logic/map_objects/tribes/ship.cc:836
 msgid "Expedition Ready"
 msgstr "Экспедиция готова"
 
-#: ../../src/logic/map_objects/tribes/ship.cc:836
+#: ../../src/logic/map_objects/tribes/ship.cc:837
 msgid "An expedition ship is waiting for your commands."
 msgstr "Экспедиционный корабль ждёт ваших указаний."
 
 #. * TRANSLATORS: This is a ship state
-#: ../../src/logic/map_objects/tribes/ship.cc:957
+#: ../../src/logic/map_objects/tribes/ship.cc:976
 msgctxt "ship_state"
 msgid "Shipping"
 msgstr "Транспортировка"
 
 #. * TRANSLATORS: This is a ship state. An expedition is waiting for your
 #. commands.
-#: ../../src/logic/map_objects/tribes/ship.cc:961
+#: ../../src/logic/map_objects/tribes/ship.cc:980
 msgctxt "ship_state"
 msgid "Waiting"
 msgstr "Ожидает"
 
 #. * TRANSLATORS: This is a ship state. An expedition is scouting for port
 #. spaces.
-#: ../../src/logic/map_objects/tribes/ship.cc:965
+#: ../../src/logic/map_objects/tribes/ship.cc:984
 msgctxt "ship_state"
 msgid "Scouting"
 msgstr "Разведывает"
 
 #. * TRANSLATORS: This is a ship state. An expedition has found a port space.
-#: ../../src/logic/map_objects/tribes/ship.cc:969
+#: ../../src/logic/map_objects/tribes/ship.cc:988
 msgctxt "ship_state"
 msgid "Port Space Found"
 msgstr "Нашел место для постройки порта"
@@ -1381,7 +1381,7 @@ msgstr "Нашел место для постройки порта"
 #. * TRANSLATORS: This is a ship state. An expedition is unloading
 #. wares/workers to build a
 #. * port.
-#: ../../src/logic/map_objects/tribes/ship.cc:974
+#: ../../src/logic/map_objects/tribes/ship.cc:993
 msgctxt "ship_state"
 msgid "Founding a Colony"
 msgstr "Основывает колонию"
@@ -1421,12 +1421,12 @@ msgstr "должен разводитить %s, которого нет в эт�
 msgid "A geologist found resources."
 msgstr "Геолог нашел полезные ископаемые."
 
-#: ../../src/logic/map_objects/tribes/worker.cc:1677
+#: ../../src/logic/map_objects/tribes/worker.cc:1678
 #, c-format
 msgid "Your %s can't find a way home and will likely die."
 msgstr "Ваш %s не может найти дорогу домой и, похоже, умрёт."
 
-#: ../../src/logic/map_objects/tribes/worker.cc:1682
+#: ../../src/logic/map_objects/tribes/worker.cc:1683
 #: ../../src/wui/productionsitewindow.cc:87
 #: ../../src/wui/productionsitewindow.cc:112
 msgid "Worker"
@@ -1436,7 +1436,7 @@ msgstr[1] "Работники"
 msgstr[2] "Работники"
 msgstr[3] "Работники"
 
-#: ../../src/logic/map_objects/tribes/worker.cc:1683
+#: ../../src/logic/map_objects/tribes/worker.cc:1684
 msgid "Worker got lost!"
 msgstr "Работник потерян!"
 
@@ -1479,17 +1479,17 @@ msgid ""
 " unpause the game and continue watching if you want to."
 msgstr "Конец повтора достигнут и игра приостановлена. Вы можете снова активировать игру и продолжить просмотр, если захотите."
 
-#: ../../src/logic/save_handler.cc:111
+#: ../../src/logic/save_handler.cc:103
+msgid "Saving game…"
+msgstr "Сохранение игры..."
+
+#: ../../src/logic/save_handler.cc:119
 msgid "Saving failed!"
 msgstr "Ошибки при сохранении игры!"
 
-#: ../../src/logic/save_handler.cc:130
+#: ../../src/logic/save_handler.cc:188
 msgid "Game saved"
 msgstr "Игра сохранена"
-
-#: ../../src/logic/save_handler.cc:157
-msgid "Saving game…"
-msgstr "Сохранение игры..."
 
 #: ../../src/map_io/s2map.cc:423
 msgid "Bluebyte Settlers II Map. No comment defined!"
@@ -1692,7 +1692,7 @@ msgid ""
 msgstr "Widelands не может осуществить соединение по указанному адресу. \nВозможно сервер выключен или запущен на другом порту. Проверьте настройки и попробуйте подключиться еще раз."
 
 #: ../../src/network/netclient.cc:176 ../../src/network/nethost.cc:701
-#: ../../src/wlapplication.cc:1239
+#: ../../src/wlapplication.cc:1241
 msgid "Preparing game"
 msgstr "Подготовка игры"
 
@@ -2034,7 +2034,7 @@ msgstr "выкл"
 #. * TRANSLATORS: %1% is a filename, %2% a map's name.
 #. * TRANSLATORS: File name for saving objective achieved
 #. * TRANSLATORS: %1% = map name. %2% = achievement name
-#: ../../src/scripting/lua_game.cc:1084 ../../src/ui_fsmenu/loadgame.cc:76
+#: ../../src/scripting/lua_game.cc:1089 ../../src/ui_fsmenu/loadgame.cc:76
 msgid "%1% (%2%)"
 msgstr "%1% (%2%)"
 
@@ -3212,7 +3212,7 @@ msgid "Hide work area"
 msgstr "Скрыть рабочую область"
 
 #: ../../src/wui/buildingwindow.cc:305 ../../src/wui/fieldaction.cc:371
-#: ../../src/wui/shipwindow.cc:166
+#: ../../src/wui/shipwindow.cc:181
 msgid "Show Debug Window"
 msgstr "Показать окно отладки"
 
@@ -4117,55 +4117,66 @@ msgstr "(идёт)"
 msgid "(vacant)"
 msgstr "(вакантно)"
 
-#: ../../src/wui/shipwindow.cc:96
+#. * TRANSLATORS: Window label when an expedition can't be canceled
+#: ../../src/wui/shipwindow.cc:68
+msgid "Cancel expedition"
+msgstr "Отмена экспедиции"
+
+#: ../../src/wui/shipwindow.cc:68
+msgid ""
+"This expedition can’t be canceled, because the ship has no port to return "
+"to."
+msgstr "Эта экспедиция не может быть отменена, т.к. нет порта, чтобы вернутся туда."
+
+#: ../../src/wui/shipwindow.cc:111
 msgid "Scout towards the north west"
 msgstr "Вести разведку на северо-западном направлении"
 
-#: ../../src/wui/shipwindow.cc:101
+#: ../../src/wui/shipwindow.cc:116
 msgid "Explore the island’s coast clockwise"
 msgstr "Исследовать побережье острова двигаясь по направлению часовой стрелки."
 
-#: ../../src/wui/shipwindow.cc:106
+#: ../../src/wui/shipwindow.cc:121
 msgid "Scout towards the north east"
 msgstr "Вести разведку на северо-восточном направлении"
 
-#: ../../src/wui/shipwindow.cc:111
+#: ../../src/wui/shipwindow.cc:126
 msgid "Scout towards the west"
 msgstr "Вести разведку на западном направлении"
 
-#: ../../src/wui/shipwindow.cc:116
+#: ../../src/wui/shipwindow.cc:131
 msgid "Construct a port at the current location"
 msgstr "Построить порт в текущей локации"
 
-#: ../../src/wui/shipwindow.cc:121
+#: ../../src/wui/shipwindow.cc:136
 msgid "Scout towards the east"
 msgstr "Вести разведку на восточном направлении"
 
-#: ../../src/wui/shipwindow.cc:126
+#: ../../src/wui/shipwindow.cc:141
 msgid "Scout towards the south west"
 msgstr "Вести разведку на юго-западном направлении"
 
-#: ../../src/wui/shipwindow.cc:131
+#: ../../src/wui/shipwindow.cc:146
 msgid "Explore the island’s coast counter clockwise"
 msgstr "Исследовать побережье острова двигаясь против часовой."
 
-#: ../../src/wui/shipwindow.cc:137
+#: ../../src/wui/shipwindow.cc:152
 msgid "Scout towards the south east"
 msgstr "Вести разведку на южном направлении"
 
-#: ../../src/wui/shipwindow.cc:147
+#: ../../src/wui/shipwindow.cc:162
 msgid "Go to ship"
 msgstr "Идти в корабль"
 
-#: ../../src/wui/shipwindow.cc:149
+#: ../../src/wui/shipwindow.cc:164
 msgid "Go to destination"
 msgstr "Идти к указанному месту"
 
-#: ../../src/wui/shipwindow.cc:155
+#: ../../src/wui/shipwindow.cc:170
 msgid "Sink the ship"
 msgstr "Затопить корабль"
 
-#: ../../src/wui/shipwindow.cc:160
+#: ../../src/wui/shipwindow.cc:175
 msgid "Cancel the Expedition"
 msgstr "Отменить экспедицию"
 

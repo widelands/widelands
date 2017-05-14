@@ -117,11 +117,21 @@ void SendPacket::data(const void* const packet_data, const size_t size) {
 		buffer.push_back(0);  //  this will finally be the length of the packet
 		buffer.push_back(0);
 	}
+
 	for (size_t idx = 0; idx < size; ++idx)
 		buffer.push_back(static_cast<const uint8_t*>(packet_data)[idx]);
 }
 
-void SendPacket::send(TCPsocket sock) {
+void SendPacket::reset() {
+	buffer.clear();
+}
+
+size_t SendPacket::get_size() const {
+	return buffer.size();
+}
+
+uint8_t* SendPacket::get_data() const {
+
 	uint32_t const length = buffer.size();
 
 	assert(length < 0x10000);
@@ -130,28 +140,10 @@ void SendPacket::send(TCPsocket sock) {
 	buffer[0] = length >> 8;
 	buffer[1] = length & 0xFF;
 
-	if (sock)
-		SDLNet_TCP_Send(sock, &(buffer[0]), buffer.size());
-}
-
-void SendPacket::reset() {
-	buffer.clear();
+	return &(buffer[0]);
 }
 
 /*** class RecvPacket ***/
-
-RecvPacket::RecvPacket(Deserializer& des) {
-	uint16_t const size = des.queue_[0] << 8 | des.queue_[1];
-
-	// The following should be caught by Deserializer::read and ::avail
-	assert(des.queue_.size() >= static_cast<size_t>(size));
-	assert(size >= 2);
-
-	buffer.insert(buffer.end(), des.queue_.begin() + 2, des.queue_.begin() + size);
-	index_ = 0;
-
-	des.queue_.erase(des.queue_.begin(), des.queue_.begin() + size);
-}
 
 size_t RecvPacket::data(void* const packet_data, size_t const bufsize) {
 	if (index_ + bufsize > buffer.size())
@@ -167,29 +159,29 @@ bool RecvPacket::end_of_file() const {
 	return index_ < buffer.size();
 }
 
-bool Deserializer::read(TCPsocket sock) {
-	uint8_t buffer[512];
-	const int32_t bytes = SDLNet_TCP_Recv(sock, buffer, sizeof(buffer));
-	if (bytes <= 0)
-		return false;
+void Deserializer::read_data(const uint8_t* data, const int32_t len) {
 
-	queue_.insert(queue_.end(), &buffer[0], &buffer[bytes]);
-
-	return queue_.size() < 2 || 2 <= (queue_[0] << 8 | queue_[1]);
+	queue_.insert(queue_.end(), &data[0], &data[len]);
 }
 
-/**
- * Returns true if an entire packet is available
- */
-bool Deserializer::avail() const {
+bool Deserializer::write_packet(RecvPacket* packet) {
+	// No data at all
 	if (queue_.size() < 2)
 		return false;
 
-	const uint16_t size = queue_[0] << 8 | queue_[1];
-	if (size < 2)
+	uint16_t const size = queue_[0] << 8 | queue_[1];
+	assert(size >= 2);
+
+	// Not enough data for a complete packet
+	if (queue_.size() < static_cast<size_t>(size))
 		return false;
 
-	return queue_.size() >= static_cast<size_t>(size);
+	packet->buffer.clear();
+	packet->buffer.insert(packet->buffer.end(), queue_.begin() + 2, queue_.begin() + size);
+	packet->index_ = 0;
+
+	queue_.erase(queue_.begin(), queue_.begin() + size);
+	return true;
 }
 
 DisconnectException::DisconnectException(const char* fmt, ...) {

@@ -46,14 +46,13 @@ struct NoteShip {
 
 	Ship* ship;
 
-	enum class Action { kStateChanged, kDestinationChanged, kWaitingForCommand, kLost, kGained };
+	enum class Action { kStateChanged, kDestinationChanged, kWaitingForCommand, kNoPortLeft, kLost, kGained };
 	Action action;
 
 	NoteShip(Ship* const init_ship, const Action& init_action)
 		: ship(init_ship), action(init_action) {
 	}
 };
-
 
 class ShipDescr : public BobDescr {
 public:
@@ -108,7 +107,7 @@ struct Ship : Bob {
 
 	void init_auto_task(Game&) override;
 
-	void init(EditorGameBase&) override;
+	bool init(EditorGameBase&) override;
 	void cleanup(EditorGameBase&) override;
 
 	void start_task_ship(Game&);
@@ -254,7 +253,7 @@ private:
 	/// Set the ship's state to 'state' and if the ship state has changed, publish a notification.
 	void set_ship_state_and_notify(ShipStates state, NoteShip::Action action);
 
-	void init_fleet(EditorGameBase&);
+	bool init_fleet(EditorGameBase&);
 	void set_fleet(Fleet* fleet);
 
 	void send_message(Game& game,

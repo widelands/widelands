@@ -110,7 +110,7 @@ void ConstructionSite::set_building(const BuildingDescr& building_descr) {
 Initialize the construction site by starting orders
 ===============
 */
-void ConstructionSite::init(EditorGameBase& egbase) {
+bool ConstructionSite::init(EditorGameBase& egbase) {
 	PartiallyFinishedBuilding::init(egbase);
 
 	const std::map<DescriptionIndex, uint8_t>* buildcost;
@@ -139,6 +139,7 @@ void ConstructionSite::init(EditorGameBase& egbase) {
 
 		work_steps_ += it->second;
 	}
+	return true;
 }
 
 /*

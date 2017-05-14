@@ -96,7 +96,7 @@ public:
 		return *building_;
 	}
 
-	void init(EditorGameBase&) override;
+	bool init(EditorGameBase&) override;
 	void cleanup(EditorGameBase&) override;
 
 	bool burn_on_destroy() override;

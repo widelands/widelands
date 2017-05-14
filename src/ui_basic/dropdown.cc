@@ -165,6 +165,7 @@ bool BaseDropdown::has_selection() const {
 }
 
 uint32_t BaseDropdown::get_selected() const {
+	assert(has_selection());
 	return list_->get_selected();
 }
 

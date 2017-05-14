@@ -151,7 +151,7 @@ void Ship::init_auto_task(Game& game) {
 	start_task_ship(game);
 }
 
-void Ship::init(EditorGameBase& egbase) {
+bool Ship::init(EditorGameBase& egbase) {
 	Bob::init(egbase);
 	init_fleet(egbase);
 	assert(get_owner());
@@ -160,8 +160,8 @@ void Ship::init(EditorGameBase& egbase) {
 	// Assigning a ship name
 	shipname_ = get_owner()->pick_shipname();
 	molog("New ship: %s\n", shipname_.c_str());
-
 	Notifications::publish(NoteShip(this, NoteShip::Action::kGained));
+	return true;
 }
 
 /**
@@ -169,11 +169,11 @@ void Ship::init(EditorGameBase& egbase) {
  * The fleet code will automatically merge us into a larger
  * fleet, if one is reachable.
  */
-void Ship::init_fleet(EditorGameBase& egbase) {
+bool Ship::init_fleet(EditorGameBase& egbase) {
 	assert(get_owner() != nullptr);
 	Fleet* fleet = new Fleet(*get_owner());
 	fleet->add_ship(this);
-	fleet->init(egbase);
+	return fleet->init(egbase);
 	// fleet calls the set_fleet function appropriately
 }
 
@@ -902,7 +902,6 @@ void Ship::exp_cancel(Game& game) {
 
 	if ((ship_state_ == ShipStates::kExpeditionColonizing) || !state_is_expedition())
 		return;
-	send_signal(game, "cancel_expedition");
 
 	// The workers were hold in an idle state so that they did not try
 	// to become fugitive or run to the next warehouse. But now, we
@@ -924,7 +923,26 @@ void Ship::exp_cancel(Game& game) {
 	// Bring us back into a fleet and a economy.
 	set_economy(game, nullptr);
 	init_fleet(game);
+	if (!get_fleet() || !get_fleet()->has_ports()) {
+		// We lost our last reachable port, so we reset the expedition's state
+		ship_state_ = ShipStates::kExpeditionWaiting;
+		set_economy(game, expedition_->economy.get());
+
+		worker = nullptr;
+		for (ShippingItem& item : items_) {
+			item.get(game, nullptr, &worker);
+			if (worker) {
+				worker->reset_tasks(game);
+				worker->start_task_idle(game, 0, -1);
+			}
+		}
+
+		Notifications::publish(NoteShip(this, NoteShip::Action::kNoPortLeft));
+		return;
+	}
 	assert(get_economy() && get_economy() != expedition_->economy.get());
+
+	send_signal(game, "cancel_expedition");
 
 	// Delete the expedition and the economy it created.
 	expedition_.reset(nullptr);
@@ -1041,25 +1059,22 @@ void Ship::log_general_info(const EditorGameBase& egbase) {
  * It will have the ship's coordinates, and display a picture in its description.
  *
  * \param msgsender a computer-readable description of why the message was sent
- * \param title user-visible title of the message
+ * \param title short title to be displayed in message listings
+ * \param heading long title to be displayed within the message
  * \param description user-visible message body, will be placed in an appropriate rich-text
  *paragraph
- * \param picture picture name relative to the data/ directory
+ * \param picture the filename to be used for the icon in message listings
  */
 void Ship::send_message(Game& game,
                         const std::string& title,
                         const std::string& heading,
                         const std::string& description,
                         const std::string& picture) {
-	std::string rt_description;
-	if (picture.size() > 3) {
-		rt_description = "<rt image=";
-		rt_description += picture;
-		rt_description += "><p font-size=14 font-face=serif>";
-	} else
-		rt_description = "<rt><p font-size=14 font-face=serif>";
-	rt_description += description;
-	rt_description += "</p></rt>";
+	const std::string rt_description =
+	   (boost::format("<div padding_r=10><p><img src=%s></p></div>"
+	                  "<div width=*><p><font size=%d>%s</font></p></div>") %
+	    picture % UI_FONT_SIZE_MESSAGE % description)
+	      .str();
 
 	Message* msg = new Message(Message::Type::kSeafaring, game.get_gametime(), title, picture,
 	                           heading, rt_description, get_position(), serial_);

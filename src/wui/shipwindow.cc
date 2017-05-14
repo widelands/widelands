@@ -27,6 +27,7 @@
 #include "logic/map_objects/tribes/worker.h"
 #include "logic/player.h"
 #include "ui_basic/box.h"
+#include "ui_basic/messagebox.h"
 #include "wui/actionconfirm.h"
 #include "wui/game_debug_ui.h"
 #include "wui/interactive_player.h"
@@ -57,6 +58,20 @@ ShipWindow::ShipWindow(InteractiveGameBase& igb, UniqueWindow::Registry& reg, Sh
 		[this](const Widelands::NoteShip& note) {
 			if (note.ship->serial() == ship_.serial()) {
 			   switch (note.action) {
+				// Unable to cancel the expedition
+				case Widelands::NoteShip::Action::kNoPortLeft:
+					if (upcast(InteractiveGameBase, igamebase, ship_.get_owner()->egbase().get_ibase())) {
+						if (igamebase->can_act(ship_.get_owner()->player_number())) {
+							UI::WLMessageBox messagebox(
+							   get_parent(),
+							   /** TRANSLATORS: Window label when an expedition can't be canceled */
+							   _("Cancel expedition"), _("This expedition can’t be canceled, because the "
+							                             "ship has no port to return to."),
+							   UI::WLMessageBox::MBoxType::kOk);
+							messagebox.run<UI::Panel::Returncodes>();
+						}
+					}
+					break;
 			   // The ship state has changed, e.g. expedition canceled
 				case Widelands::NoteShip::Action::kStateChanged:
 				   init(true);

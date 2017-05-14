@@ -20,108 +20,71 @@
 #ifndef WL_NETWORK_NETCLIENT_H
 #define WL_NETWORK_NETCLIENT_H
 
-#include "chat/chat.h"
-#include "logic/game_controller.h"
-#include "logic/game_settings.h"
+#include <memory>
+
+#include <SDL_net.h>
+
 #include "network/network.h"
 
-struct NetClientImpl;
-
-// TODO(unknown): Use composition instead of inheritance
 /**
- * NetClient manages the lifetime of a network game in which this computer
+ * NetClient manages the network connection for a network game in which this computer
  * participates as a client.
- *
- * This includes running the game setup screen and the actual game after
- * launch, as well as dealing with the actual network protocol.
  */
-struct NetClient : public GameController,
-                   public GameSettingsProvider,
-                   private SyncCallback,
-                   public ChatProvider {
-	NetClient(IPaddress*, const std::string& playername, bool internet = false);
-	virtual ~NetClient();
+class NetClient {
+public:
+	/**
+	 * Tries to establish a connection to the given host.
+	 * @param ip_address A hostname or an IPv4 address as string.
+	 * @param port The port to connect to.
+	 * @return A pointer to a connected \c NetClient object or a nullptr if the connection failed.
+	 */
+	static std::unique_ptr<NetClient> connect(const std::string& ip_address, const uint16_t port);
 
-	void run();
+	/**
+	 * Closes the connection.
+	 * If you want to send a goodbye-message to the host, do so before freeing the object.
+	 */
+	~NetClient();
 
-	// GameController interface
-	void think() override;
-	void send_player_command(Widelands::PlayerCommand&) override;
-	int32_t get_frametime() override;
-	GameController::GameType get_game_type() override;
+	/**
+	 * Returns whether the client is connected.
+	 * @return \c true if the connection is open, \c false otherwise.
+	 */
+	bool is_connected() const;
 
-	uint32_t real_speed() override;
-	uint32_t desired_speed() override;
-	void set_desired_speed(uint32_t speed) override;
-	bool is_paused() override;
-	void set_paused(bool paused) override;
-	void report_result(uint8_t player,
-	                   Widelands::PlayerEndResult result,
-	                   const std::string& info) override;
-	// End GameController interface
+	/**
+	 * Closes the connection.
+	 * If you want to send a goodbye-message to the host, do so before calling this.
+	 */
+	void close();
 
-	// GameSettingsProvider interface
-	const GameSettings& settings() override;
+	/**
+	 * Tries to receive a packet.
+	 * @param packet A packet that should be overwritten with the received data.
+	 * @return \c true if a packet is available, \c false otherwise.
+	 *   The given packet is only modified when \c true is returned.
+	 *   Calling this on a closed connection will return false.
+	 */
+	bool try_receive(RecvPacket* packet);
 
-	void set_scenario(bool) override;
-	bool can_change_map() override;
-	bool can_change_player_state(uint8_t number) override;
-	bool can_change_player_tribe(uint8_t number) override;
-	bool can_change_player_init(uint8_t number) override;
-	bool can_change_player_team(uint8_t number) override;
-
-	bool can_launch() override;
-
-	virtual void set_map(const std::string& mapname,
-	                     const std::string& mapfilename,
-	                     uint32_t maxplayers,
-	                     bool savegame = false) override;
-	void set_player_state(uint8_t number, PlayerSettings::State state) override;
-	virtual void
-	set_player_ai(uint8_t number, const std::string& ai, bool const random_ai = false) override;
-	void next_player_state(uint8_t number) override;
-	virtual void set_player_tribe(uint8_t number,
-	                              const std::string& tribe,
-	                              bool const random_tribe = false) override;
-	void set_player_init(uint8_t number, uint8_t index) override;
-	void set_player_name(uint8_t number, const std::string& name) override;
-	void set_player(uint8_t number, const PlayerSettings& ps) override;
-	void set_player_number(uint8_t number) override;
-	void set_player_team(uint8_t number, Widelands::TeamNumber team) override;
-	void set_player_closeable(uint8_t number, bool closeable) override;
-	void set_player_shared(uint8_t number, uint8_t shared) override;
-	void set_win_condition_script(std::string) override;
-	void next_win_condition() override;
-	std::string get_win_condition_script() override;
-
-	// ChatProvider interface
-	void send(const std::string& msg) override;
-	const std::vector<ChatMessage>& get_messages() const override;
-	bool has_been_set() const override {
-		return true;
-	}
+	/**
+	 * Sends a packet.
+	 * Calling this on a closed connection will silently fail.
+	 * @param packet The packet to send.
+	 */
+	void send(const SendPacket& packet);
 
 private:
-	/// for unique backupname
-	std::string backup_file_name(std::string& path) {
-		return path + "~backup";
-	}
+	NetClient(const std::string& ip_address, const uint16_t port);
 
-	void syncreport() override;
+	/// The socket that connects us to the host
+	TCPsocket sock_;
 
-	void handle_packet(RecvPacket&);
-	void handle_network();
-	void send_time();
-	void receive_one_player(uint8_t number, StreamRead&);
-	void receive_one_user(uint32_t number, StreamRead&);
-	void disconnect(const std::string& reason,
-	                const std::string& arg = "",
-	                bool sendreason = true,
-	                bool showmsg = true);
+	/// Socket set used for selection
+	SDLNet_SocketSet sockset_;
 
-	NetTransferFile* file_;
-	NetClientImpl* d;
-	bool internet_;
+	/// Deserializer acts as a buffer for packets (reassembly/splitting up)
+	Deserializer deserializer_;
 };
 
 #endif  // end of include guard: WL_NETWORK_NETCLIENT_H
