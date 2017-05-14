@@ -34,8 +34,6 @@
 struct NetOpenGame;
 struct NetGameInfo;
 
-// TODO(Notabilis): Update for IPv6
-
 class FullscreenMenuNetSetupLAN : public FullscreenMenuBase {
 public:
 	FullscreenMenuNetSetupLAN();
@@ -44,8 +42,9 @@ public:
 
 	/**
 	 * \param[out] addr filled in with the host name or IP address and port of the chosen server
+	 * \return \c True if the address is valid, \c false otherwise. In that case \c addr is not modified
 	 */
-	void get_host_address(NetAddress *addr);
+	bool get_host_address(NetAddress *addr);
 
 	/**
 	 * \return the name chosen by the player

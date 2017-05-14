@@ -4,33 +4,6 @@
 
 #include "base/log.h"
 
-namespace {
-
-bool do_resolve(const boost::asio::ip::tcp& protocol, NetAddress *addr, const std::string& hostname, uint16_t port) {
-	assert(addr != nullptr);
-	boost::asio::io_service io_service;
-	boost::asio::ip::tcp::resolver resolver(io_service);
-	boost::asio::ip::tcp::resolver::query query(protocol, hostname, boost::lexical_cast<std::string>(port));
-	boost::asio::ip::tcp::resolver::iterator iter = resolver.resolve(query);
-	if (iter == boost::asio::ip::tcp::resolver::iterator()) {
-		// Resolution failed
-		return false;
-	}
-	addr->ip = iter->endpoint().address().to_string();
-	addr->port = port;
-	return true;
-}
-
-}
-
-bool resolve_to_v4(NetAddress *addr, const std::string& hostname, uint16_t port) {
-	return do_resolve(boost::asio::ip::tcp::v4(), addr, hostname, port);
-}
-
-bool resolve_to_v6(NetAddress *addr, const std::string& hostname, uint16_t port) {
-	return do_resolve(boost::asio::ip::tcp::v6(), addr, hostname, port);
-}
-
 std::unique_ptr<NetClient> NetClient::connect(const NetAddress& host) {
 
 	std::unique_ptr<NetClient> ptr(new NetClient(host));

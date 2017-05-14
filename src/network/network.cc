@@ -19,8 +19,43 @@
 
 #include "network/network.h"
 
+#include <boost/asio.hpp>
+
 #include "base/log.h"
 #include "wlapplication.h"
+
+
+namespace {
+
+bool do_resolve(const boost::asio::ip::tcp& protocol, NetAddress *addr, const std::string& hostname, uint16_t port) {
+	assert(addr != nullptr);
+	try {
+		boost::asio::io_service io_service;
+		boost::asio::ip::tcp::resolver resolver(io_service);
+		boost::asio::ip::tcp::resolver::query query(protocol, hostname, boost::lexical_cast<std::string>(port));
+		boost::asio::ip::tcp::resolver::iterator iter = resolver.resolve(query);
+		if (iter == boost::asio::ip::tcp::resolver::iterator()) {
+			// Resolution failed
+			return false;
+		}
+		addr->ip = iter->endpoint().address().to_string();
+		addr->port = port;
+		return true;
+	} catch (const boost::system::system_error&) {
+		// Resolution failed
+		return false;
+	}
+}
+
+}
+
+bool NetAddress::resolve_to_v4(NetAddress *addr, const std::string& hostname, uint16_t port) {
+	return do_resolve(boost::asio::ip::tcp::v4(), addr, hostname, port);
+}
+
+bool NetAddress::resolve_to_v6(NetAddress *addr, const std::string& hostname, uint16_t port) {
+	return do_resolve(boost::asio::ip::tcp::v6(), addr, hostname, port);
+}
 
 CmdNetCheckSync::CmdNetCheckSync(uint32_t const dt, SyncCallback* const cb)
    : Command(dt), callback_(cb) {

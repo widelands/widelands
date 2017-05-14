@@ -41,6 +41,26 @@ class FileRead;
  * This structure should not contain a hostname.
  */
 struct NetAddress {
+	/**
+	 * Tries to resolve the given hostname to an IPv4 address.
+	 * \param[out] addr An NetAddress structure to write the result to,
+	 *                  if resolution succeeds.
+	 * \param hostname The name of the host.
+	 * \param port The port on the host.
+	 * \return \c True if the resolution succeeded, \c false otherwise.
+	 */
+	static bool resolve_to_v4(NetAddress *addr, const std::string& hostname, uint16_t port);
+
+	/**
+	 * Tries to resolve the given hostname to an IPv6 address.
+	 * \param[out] addr An NetAddress structure to write the result to,
+	 *                  if resolution succeeds.
+	 * \param hostname The name of the host.
+	 * \param port The port on the host.
+	 * \return \c True if the resolution succeeded, \c false otherwise.
+	 */
+	static bool resolve_to_v6(NetAddress *addr, const std::string& hostname, uint16_t port);
+
 	std::string ip;
 	uint16_t port;
 };

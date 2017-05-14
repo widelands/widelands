@@ -1173,12 +1173,14 @@ void WLApplication::mainmenu_multiplayer() {
 			}
 			case FullscreenMenuBase::MenuTarget::kJoingame: {
 				NetAddress addr;
-				ns.get_host_address(&addr);
-// NOCOM(Notabilis): Remove this for IPv6
-if (!addr.ip.compare(0, 7, "::ffff:")) {
-	addr.ip = addr.ip.substr(7);
-	log("InternetGaming: cut IPv6 address: %s\n", addr.ip.c_str());
-}
+				if (!ns.get_host_address(&addr)) {
+					UI::WLMessageBox mmb(&ns, _("Invalid address"),
+								_("The entered hostname or address is invalid and can't be connected to."),
+								UI::WLMessageBox::MBoxType::kOk);
+					mmb.run<UI::Panel::Returncodes>();
+					break;
+				}
+
 				GameClient netgame(addr, playername);
 				netgame.run();
 				break;

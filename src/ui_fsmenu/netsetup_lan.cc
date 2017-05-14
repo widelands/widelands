@@ -135,7 +135,7 @@ void FullscreenMenuNetSetupLAN::think() {
 	discovery.run();
 }
 
-void FullscreenMenuNetSetupLAN::get_host_address(NetAddress *addr) {
+bool FullscreenMenuNetSetupLAN::get_host_address(NetAddress *addr) {
 	const std::string& host = hostname.text();
 
 	const uint32_t opengames_size = opengames.size();
@@ -144,13 +144,16 @@ void FullscreenMenuNetSetupLAN::get_host_address(NetAddress *addr) {
 
 		if (!strcmp(game.info.hostname, host.c_str())) {
 			*addr = game.address;
-			return;
+			return true;
 		}
 	}
 
-	// Just return the input with the default port.
-	// The NetClient will do the address resolution
-	*addr = NetAddress{host, WIDELANDS_PORT};
+	// The user probably entered a hostname on his own. Try to resolve it
+	if (NetAddress::resolve_to_v6(addr, host, WIDELANDS_PORT))
+		return true;
+	if (NetAddress::resolve_to_v4(addr, host, WIDELANDS_PORT))
+		return true;
+    return false;
 }
 
 const std::string& FullscreenMenuNetSetupLAN::get_playername() {
