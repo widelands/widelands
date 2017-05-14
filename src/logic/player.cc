@@ -1024,9 +1024,15 @@ void Player::see_node(const Map& map,
 	field.vision = fvision;
 }
 
-void Player::unsee_node(MapIndex const i, Time const gametime, bool const forward) {
+/// If 'mode' = UnseeMode::kUnexplore, fields will be marked as unexplored. Else, player no longer
+/// sees what's currently going on.
+void Player::unsee_node(MapIndex const i,
+                        Time const gametime,
+                        const UnseeNodeMode mode,
+                        bool const forward) {
 	Field& field = fields_[i];
-	if (field.vision <= 1)  //  Already does not see this
+	if ((mode == UnseeNodeMode::kUnsee && field.vision <= 1) ||
+	    field.vision < 1)  //  Already does not see this
 		return;
 
 	//  If this is not already a forwarded call, we should inform allied players
@@ -1035,13 +1041,18 @@ void Player::unsee_node(MapIndex const i, Time const gametime, bool const forwar
 		update_team_players();
 	if (!forward && !team_player_.empty()) {
 		for (uint8_t j = 0; j < team_player_.size(); ++j)
-			team_player_[j]->unsee_node(i, gametime, true);
+			team_player_[j]->unsee_node(i, gametime, mode, true);
 	}
 
-	--field.vision;
-	if (field.vision == 1)
+	if (mode == UnseeNodeMode::kUnexplore) {
+		field.vision = 0;
+	} else {
+		--field.vision;
+		assert(1 <= field.vision);
+	}
+	if (field.vision < 2) {
 		field.time_node_last_unseen = gametime;
-	assert(1 <= field.vision);
+	}
 }
 
 /**

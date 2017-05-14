@@ -220,7 +220,7 @@ void Table<void*>::draw(RenderTarget& dst) {
 	uint32_t idx = scrollpos_ / lineheight;
 	int32_t y = 1 + idx * lineheight - scrollpos_ + headerheight_;
 
-	dst.brighten_rect(Rectf(0.f, 0.f, get_eff_w(), get_h()), ms_darken_value);
+	dst.brighten_rect(Recti(0, 0, get_eff_w(), get_h()), ms_darken_value);
 
 	while (idx < entry_records_.size()) {
 		if (y >= static_cast<int32_t>(get_h()))
@@ -230,7 +230,7 @@ void Table<void*>::draw(RenderTarget& dst) {
 
 		if (idx == selection_ || multiselect_.count(idx)) {
 			assert(2 <= get_eff_w());
-			dst.brighten_rect(Rectf(1.f, y, get_eff_w() - 2, lineheight_), -ms_darken_value);
+			dst.brighten_rect(Recti(1, y, get_eff_w() - 2, lineheight_), -ms_darken_value);
 		}
 
 		Columns::size_type const nr_columns = columns_.size();
@@ -242,14 +242,14 @@ void Table<void*>::draw(RenderTarget& dst) {
 			const Image* entry_picture = er.get_picture(i);
 			const std::string& entry_string = er.get_string(i);
 
-			Vector2f point(curx, y);
+			Vector2i point(curx, y);
 			int picw = 0;
 
 			if (entry_picture != nullptr) {
 				picw = entry_picture->width();
 				const int pich = entry_picture->height();
 
-				float draw_x = point.x;
+				int draw_x = point.x;
 
 				// We want a bit of margin
 				int max_pic_height = lineheight - 3;
@@ -263,7 +263,7 @@ void Table<void*>::draw(RenderTarget& dst) {
 						if (i == nr_columns - 1 && scrollbar_->is_enabled()) {
 							draw_x = point.x + (curw - blit_width - scrollbar_->get_w()) / 2.f;
 						} else {
-							draw_x = point.x + (curw - blit_width) / 2.f;
+							draw_x = point.x + (curw - blit_width) / 2;
 						}
 					}
 
@@ -272,7 +272,7 @@ void Table<void*>::draw(RenderTarget& dst) {
 					}
 
 					// Create the scaled image
-					dst.blitrect_scale(Rectf(draw_x, point.y + 1.f, blit_width, max_pic_height),
+					dst.blitrect_scale(Rectf(draw_x, point.y + 1, blit_width, max_pic_height),
 					                   entry_picture, Recti(0, 0, picw, pich), 1., BlendMode::UseAlpha);
 
 					// For text alignment below
@@ -282,12 +282,12 @@ void Table<void*>::draw(RenderTarget& dst) {
 						if (i == nr_columns - 1 && scrollbar_->is_enabled()) {
 							draw_x = point.x + (curw - picw - scrollbar_->get_w()) / 2.f;
 						} else {
-							draw_x = point.x + (curw - picw) / 2.f;
+							draw_x = point.x + (curw - picw) / 2;
 						}
 					} else if (alignment == UI::Align::kRight) {
 						draw_x += curw - picw;
 					}
-					dst.blit(Vector2f(draw_x, point.y + (lineheight - pich) / 2.f), entry_picture);
+					dst.blit(Vector2i(draw_x, point.y + (lineheight - pich) / 2), entry_picture);
 				}
 				point.x += picw;
 			}
@@ -577,7 +577,7 @@ bool Table<void*>::sort_helper(uint32_t a, uint32_t b) {
 }
 
 void Table<void*>::layout() {
-	if (columns_.empty()) {
+	if (columns_.empty() || get_w() == 0) {
 		return;
 	}
 
@@ -588,12 +588,12 @@ void Table<void*>::layout() {
 	scrollbar_->set_steps(entry_records_.size() * get_lineheight() - (get_h() - headerheight_ - 2));
 
 	// Find a column to resize
-	size_t resizeable_column = std::numeric_limits<size_t>::max();
+	size_t resizeable_column = 0;
 	if (flexible_column_ < columns_.size()) {
 		resizeable_column = flexible_column_;
 	} else {
 		// Use the widest column
-		uint32_t widest_width = columns_[resizeable_column].width;
+		uint32_t widest_width = columns_[0].width;
 		for (size_t i = 1; i < columns_.size(); ++i) {
 			const uint32_t width = columns_[i].width;
 			if (width > widest_width) {
@@ -603,31 +603,30 @@ void Table<void*>::layout() {
 		}
 	}
 
-	// If we have a resizeable column, adjust the column sizes.
-	if (resizeable_column != std::numeric_limits<size_t>::max()) {
-		int all_columns_width = scrollbar_->is_enabled() ? scrollbar_->get_w() : 0;
-		for (const auto& column : columns_) {
-			all_columns_width += column.width;
+	// Adjust the column sizes.
+	int all_columns_width = scrollbar_->is_enabled() ? scrollbar_->get_w() : 0;
+	for (const auto& column : columns_) {
+		all_columns_width += column.width;
+	}
+
+	if (all_columns_width != get_w()) {
+		Column& column = columns_.at(resizeable_column);
+		column.width = std::max(0, column.width + get_w() - all_columns_width);
+		column.btn->set_size(column.width, column.btn->get_h());
+
+		int offset = 0;
+		for (const auto& col : columns_) {
+			col.btn->set_pos(Vector2i(offset, col.btn->get_y()));
+			offset = col.btn->get_x() + col.btn->get_w();
 		}
-		if (all_columns_width != get_w()) {
-			Column& column = columns_.at(resizeable_column);
-			column.width = std::max(0, column.width + get_w() - all_columns_width);
-			column.btn->set_size(column.width, column.btn->get_h());
 
-			int offset = 0;
-			for (const auto& col : columns_) {
-				col.btn->set_pos(Vector2i(offset, col.btn->get_y()));
-				offset = col.btn->get_x() + col.btn->get_w();
-			}
-
-			if (scrollbar_->is_enabled()) {
-				const UI::Button* last_column_btn = columns_.back().btn;
-				scrollbar_filler_button_->set_pos(
-				   Vector2i(last_column_btn->get_x() + last_column_btn->get_w(), 0));
-				scrollbar_filler_button_->set_visible(true);
-			} else {
-				scrollbar_filler_button_->set_visible(false);
-			}
+		if (scrollbar_->is_enabled()) {
+			const UI::Button* last_column_btn = columns_.back().btn;
+			scrollbar_filler_button_->set_pos(
+			   Vector2i(last_column_btn->get_x() + last_column_btn->get_w(), 0));
+			scrollbar_filler_button_->set_visible(true);
+		} else {
+			scrollbar_filler_button_->set_visible(false);
 		}
 	}
 }

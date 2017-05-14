@@ -234,7 +234,7 @@ Soldier::Soldier(const SoldierDescr& soldier_descr) : Worker(soldier_descr) {
 	combat_walkend_ = 0;
 }
 
-void Soldier::init(EditorGameBase& egbase) {
+bool Soldier::init(EditorGameBase& egbase) {
 	health_level_ = 0;
 	attack_level_ = 0;
 	defense_level_ = 0;
@@ -247,7 +247,7 @@ void Soldier::init(EditorGameBase& egbase) {
 	combat_walkstart_ = 0;
 	combat_walkend_ = 0;
 
-	Worker::init(egbase);
+	return Worker::init(egbase);
 }
 
 void Soldier::cleanup(EditorGameBase& egbase) {
@@ -451,8 +451,8 @@ void Soldier::draw(const EditorGameBase& game,
 
 	const Vector2f point_on_dst = calc_drawpos(game, field_on_dst, scale);
 	draw_info_icon(
-	   point_on_dst -
-	      Vector2f(0.f, (g_gr->animations().get_animation(get_current_anim()).height() - 7) * scale),
+	   point_on_dst.cast<int>() -
+	      Vector2i(0, (g_gr->animations().get_animation(get_current_anim()).height() - 7) * scale),
 	   scale, true, dst);
 	draw_inner(game, point_on_dst, scale, dst);
 }
@@ -460,7 +460,7 @@ void Soldier::draw(const EditorGameBase& game,
 /**
  * Draw the info icon (level indicators + health bar) for this soldier.
  */
-void Soldier::draw_info_icon(Vector2f draw_position,
+void Soldier::draw_info_icon(Vector2i draw_position,
                              float scale,
                              const bool anchor_below,
                              RenderTarget* dst) const {
@@ -492,29 +492,26 @@ void Soldier::draw_info_icon(Vector2f draw_position,
 	assert(kSoldierHealthBarWidth > dimension);
 #endif
 
-	const float icon_size = healthpic->width();
-	const float half_width = kSoldierHealthBarWidth;
+	const int icon_size = healthpic->width();
 
 	if (!anchor_below) {
-		float totalwidth = 2 * half_width;
-		float totalheight = 5.f + 2 * icon_size;
-		draw_position.x += (totalwidth / 2.f) * scale;
-		draw_position.y += (totalheight - 5.f) * scale;
+		draw_position.x += kSoldierHealthBarWidth * scale;
+		draw_position.y += 2 * icon_size * scale;
 	} else {
-		draw_position.y -= 5.f * scale;
+		draw_position.y -= 5 * scale;
 	}
 
 	// Draw energy bar
 	assert(get_max_health());
-	const Rectf energy_outer(
-	   draw_position - Vector2f(half_width, 0.f) * scale, half_width * 2.f * scale, 5.f * scale);
+	const Recti energy_outer(draw_position - Vector2i(kSoldierHealthBarWidth, 0) * scale,
+	                         kSoldierHealthBarWidth * 2 * scale, 5 * scale);
 	dst->fill_rect(energy_outer, RGBColor(255, 255, 255));
 
-	float health_width = 2.f * (half_width - 1.f) * current_health_ / get_max_health();
-	Rectf energy_inner(
-	   draw_position + Vector2f(-half_width + 1.f, 1.f) * scale, health_width * scale, 3 * scale);
-	Rectf energy_complement(energy_inner.origin() + Vector2f(health_width, 0.f) * scale,
-	                        (2 * (half_width - 1) - health_width) * scale, 3 * scale);
+	int health_width = 2 * (kSoldierHealthBarWidth - 1) * current_health_ / get_max_health();
+	Recti energy_inner(draw_position + Vector2i(-kSoldierHealthBarWidth + 1, 1) * scale,
+	                   health_width * scale, 3 * scale);
+	Recti energy_complement(energy_inner.origin() + Vector2i(health_width, 0) * scale,
+	                        (2 * (kSoldierHealthBarWidth - 1) - health_width) * scale, 3 * scale);
 
 	const RGBColor& color = owner().get_playercolor();
 	RGBColor complement_color;
@@ -528,15 +525,15 @@ void Soldier::draw_info_icon(Vector2f draw_position,
 	dst->fill_rect(energy_complement, complement_color);
 
 	const auto draw_level_image = [icon_size, scale, &draw_position, dst](
-	   const Vector2f& offset, const Image* image) {
+	   const Vector2i& offset, const Image* image) {
 		dst->blitrect_scale(
 		   Rectf(draw_position + offset * icon_size * scale, icon_size * scale, icon_size * scale),
 		   image, Recti(0, 0, icon_size, icon_size), 1.f, BlendMode::UseAlpha);
 	};
-	draw_level_image(Vector2f(-1.f, -2.f), attackpic);
-	draw_level_image(Vector2f(0.f, -2.f), defensepic);
-	draw_level_image(Vector2f(-1.f, -1.f), healthpic);
-	draw_level_image(Vector2f(0.f, -1.f), evadepic);
+	draw_level_image(Vector2i(-1, -2), attackpic);
+	draw_level_image(Vector2i(0, -2), defensepic);
+	draw_level_image(Vector2i(-1, -1), healthpic);
+	draw_level_image(Vector2i(0, -1), evadepic);
 }
 
 /**
@@ -1345,17 +1342,14 @@ void Soldier::battle_update(Game& game, State&) {
 					    descr().descname().c_str())
 					      .str();
 					owner().add_message(
-					   game, *new Message(
-					            Message::Type::kGameLogic, game.get_gametime(), descr().descname(),
-					            "images/ui_basic/menu_help.png", _("Logic error"),
-					            (boost::format("<rt><p font-size=12>%s</p></rt>") % messagetext).str(),
-					            get_position(), serial_));
+					   game, *new Message(Message::Type::kGameLogic, game.get_gametime(),
+					                      descr().descname(), "images/ui_basic/menu_help.png",
+					                      _("Logic error"), messagetext, get_position(), serial_));
 					opponent.owner().add_message(
-					   game, *new Message(
-					            Message::Type::kGameLogic, game.get_gametime(), descr().descname(),
-					            "images/ui_basic/menu_help.png", _("Logic error"),
-					            (boost::format("<rt><p font-size=12>%s</p></rt>") % messagetext).str(),
-					            opponent.get_position(), serial_));
+					   game,
+					   *new Message(Message::Type::kGameLogic, game.get_gametime(), descr().descname(),
+					                "images/ui_basic/menu_help.png", _("Logic error"), messagetext,
+					                opponent.get_position(), serial_));
 					game.game_controller()->set_desired_speed(0);
 					return pop_task(game);
 				}

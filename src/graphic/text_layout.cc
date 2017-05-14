@@ -31,6 +31,16 @@
 #include "graphic/text/font_set.h"
 #include "graphic/text_constants.h"
 
+namespace {
+bool is_paragraph(const std::string& text) {
+	return boost::starts_with(text, "<p");
+}
+
+bool is_div(const std::string& text) {
+	return boost::starts_with(text, "<div");
+}
+}  // namespace
+
 void replace_entities(std::string* text) {
 	boost::replace_all(*text, "&gt;", ">");
 	boost::replace_all(*text, "&lt;", "<");
@@ -145,6 +155,13 @@ std::string as_waresinfo(const std::string& txt) {
 	return f.str();
 }
 
+std::string as_message(const std::string& heading, const std::string& body) {
+	return ((boost::format(
+	            "<rt><p><font size=18 bold=1 color=D1D1D1>%s<br></font></p><vspace gap=6>%s</rt>") %
+	         heading % (is_paragraph(body) || is_div(body) ? body : "<p>" + body + "</p>"))
+	           .str());
+}
+
 const Image* autofit_ui_text(const std::string& text, int width, RGBColor color, int fontsize) {
 	const Image* result = UI::g_fh1->render(as_uifont(richtext_escape(text), fontsize, color));
 	if (width > 0) {  // Autofit
@@ -187,7 +204,7 @@ Align mirror_alignment(Align alignment) {
  * subsampled rendering - this can lead to blurry texts. That is why we
  * never do float divisions in this function.
  */
-void correct_for_align(Align align, uint32_t w, Vector2f* pt) {
+void correct_for_align(Align align, uint32_t w, Vector2i* pt) {
 
 	if (align == Align::kCenter)
 		pt->x -= w / 2;
@@ -198,7 +215,7 @@ void correct_for_align(Align align, uint32_t w, Vector2f* pt) {
 /**
  * Adjust the y coordinate in 'point 'pt' to vertically center an element with height 'h'.
  */
-void center_vertically(uint32_t h, Vector2f* pt) {
+void center_vertically(uint32_t h, Vector2i* pt) {
 	pt->y -= h / 2;
 }
 }  // namespace UI
