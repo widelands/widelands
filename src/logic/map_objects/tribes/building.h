@@ -155,7 +155,7 @@ public:
 
 	WorkareaInfo workarea_info_;
 
-	virtual int32_t suitability(const Map&, const FCoords&) const;
+	bool suitability(const Map&, const FCoords&) const;
 	const BuildingHints& hints() const {
 		return hints_;
 	}
@@ -311,7 +311,7 @@ protected:
 
 	void start_animation(EditorGameBase&, uint32_t anim);
 
-	void init(EditorGameBase&) override;
+	bool init(EditorGameBase&) override;
 	void cleanup(EditorGameBase&) override;
 	void act(Game&, uint32_t data) override;
 

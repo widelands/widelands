@@ -28,9 +28,11 @@ wl_library(graphic_text
     base_log
     base_macros
     graphic
+    graphic_align
     graphic_color
     graphic_image_cache
     graphic_image_io
+    graphic_playercolor
     graphic_sdl_utils
     graphic_surface
     graphic_text_layout

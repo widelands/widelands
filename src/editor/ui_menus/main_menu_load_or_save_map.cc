@@ -56,8 +56,7 @@ MainMenuLoadOrSaveMap::MainMenuLoadOrSaveMap(EditorInteractive& parent,
                   get_inner_w() - right_column_x_ - padding_,
                   tableh_,
                   MapDetails::Style::kWui),
-     directory_info_(
-        this, padding_, get_inner_h() - 2 * buth_ - 4 * padding_, "", UI::Align::kLeft),
+     directory_info_(this, padding_, get_inner_h() - 2 * buth_ - 4 * padding_),
      ok_(this,
          "ok",
          UI::g_fh1->fontset()->is_rtl() ? get_inner_w() / 2 - butw_ - padding_ :
@@ -90,7 +89,7 @@ MainMenuLoadOrSaveMap::MainMenuLoadOrSaveMap(EditorInteractive& parent,
 
 	/** TRANSLATORS: Checkbox title. If this checkbox is enabled, map names aren't translated. */
 	cb_dont_localize_mapnames_ =
-	   new UI::Checkbox(vbox, Vector2i(0, 0), _("Show original map names"));
+	   new UI::Checkbox(vbox, Vector2i::zero(), _("Show original map names"));
 	cb_dont_localize_mapnames_->set_state(false);
 	vbox->add_space(2 * padding_);
 	vbox->add(cb_dont_localize_mapnames_, UI::Box::Resizing::kFullSize);

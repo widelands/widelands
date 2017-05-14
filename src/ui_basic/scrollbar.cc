@@ -129,7 +129,7 @@ void Scrollbar::set_scrollpos(int32_t pos) {
 }
 
 Scrollbar::Area Scrollbar::get_area_for_point(int32_t x, int32_t y) {
-	int32_t extent;
+	int32_t extent = 0;
 
 	// Out of panel
 	if (x < 0 || x >= static_cast<int32_t>(get_w()) || y < 0 || y >= static_cast<int32_t>(get_h()))
@@ -232,7 +232,7 @@ void Scrollbar::action(Area const area) {
 	set_scrollpos(pos);
 }
 
-void Scrollbar::draw_button(RenderTarget& dst, Area area, const Rectf& r) {
+void Scrollbar::draw_button(RenderTarget& dst, Area area, const Recti& r) {
 	dst.tile(r.cast<int>(), pic_buttons_, Vector2i(get_x(), get_y()));
 
 	// Draw the picture
@@ -249,8 +249,8 @@ void Scrollbar::draw_button(RenderTarget& dst, Area area, const Rectf& r) {
 		int blit_height = image_scale * pic->height();
 
 		dst.blitrect_scale(
-		   Rectf(r.origin() + Vector2f((r.w - blit_width) / 2.f, (r.h - blit_height) / 2.f),
-		         blit_width, blit_height),
+		   Rectf(r.origin() + Vector2i((r.w - blit_width) / 2, (r.h - blit_height) / 2), blit_width,
+		         blit_height),
 		   pic, Recti(0, 0, pic->width(), pic->height()), 1., BlendMode::UseAlpha);
 	}
 
@@ -259,46 +259,46 @@ void Scrollbar::draw_button(RenderTarget& dst, Area area, const Rectf& r) {
 
 	if (area != pressed_) {
 		// top edge
-		dst.brighten_rect(Rectf(r.origin(), r.w, 2), BUTTON_EDGE_BRIGHT_FACTOR);
+		dst.brighten_rect(Recti(r.origin(), r.w, 2), BUTTON_EDGE_BRIGHT_FACTOR);
 		// left edge
-		dst.brighten_rect(Rectf(r.origin() + Vector2f(0, 2), 2, r.h - 2), BUTTON_EDGE_BRIGHT_FACTOR);
+		dst.brighten_rect(Recti(r.origin() + Vector2i(0, 2), 2, r.h - 2), BUTTON_EDGE_BRIGHT_FACTOR);
 		// bottom edge
-		dst.fill_rect(Rectf(r.origin() + Vector2f(2, r.h - 2), r.w - 2, 1), black);
-		dst.fill_rect(Rectf(r.origin() + Vector2f(1, r.h - 1), r.w - 1, 1), black);
+		dst.fill_rect(Recti(r.origin() + Vector2i(2, r.h - 2), r.w - 2, 1), black);
+		dst.fill_rect(Recti(r.origin() + Vector2i(1, r.h - 1), r.w - 1, 1), black);
 		// right edge
-		dst.fill_rect(Rectf(r.origin() + Vector2f(r.w - 2, 2), 1, r.h - 2), black);
-		dst.fill_rect(Rectf(r.origin() + Vector2f(r.w - 1, 1), 1, r.h - 1), black);
+		dst.fill_rect(Recti(r.origin() + Vector2i(r.w - 2, 2), 1, r.h - 2), black);
+		dst.fill_rect(Recti(r.origin() + Vector2i(r.w - 1, 1), 1, r.h - 1), black);
 	} else {
 		// bottom edge
 		dst.brighten_rect(
-		   Rectf(r.origin() + Vector2f(0, r.h - 2), r.w, 2), BUTTON_EDGE_BRIGHT_FACTOR);
+		   Recti(r.origin() + Vector2i(0, r.h - 2), r.w, 2), BUTTON_EDGE_BRIGHT_FACTOR);
 		// right edge
 		dst.brighten_rect(
-		   Rectf(r.origin() + Vector2f(r.w - 2, 0), 2, r.h - 2), BUTTON_EDGE_BRIGHT_FACTOR);
+		   Recti(r.origin() + Vector2i(r.w - 2, 0), 2, r.h - 2), BUTTON_EDGE_BRIGHT_FACTOR);
 		// top edge
-		dst.fill_rect(Rectf(r.origin(), r.w - 1, 1), black);
-		dst.fill_rect(Rectf(r.origin() + Vector2f(0, 1), r.w - 2, 1), black);
+		dst.fill_rect(Recti(r.origin(), r.w - 1, 1), black);
+		dst.fill_rect(Recti(r.origin() + Vector2i(0, 1), r.w - 2, 1), black);
 		// left edge
-		dst.fill_rect(Rectf(r.origin(), 1, r.h - 1), black);
-		dst.fill_rect(Rectf(r.origin() + Vector2f(1, 0), 1, r.h - 2), black);
+		dst.fill_rect(Recti(r.origin(), 1, r.h - 1), black);
+		dst.fill_rect(Recti(r.origin() + Vector2i(1, 0), 1, r.h - 2), black);
 	}
 }
 
-void Scrollbar::draw_area(RenderTarget& dst, Area area, const Rectf& r) {
+void Scrollbar::draw_area(RenderTarget& dst, Area area, const Recti& r) {
 	//  background
 	dst.brighten_rect(r, area == pressed_ ? 2 * MOUSE_OVER_BRIGHT_FACTOR : MOUSE_OVER_BRIGHT_FACTOR);
 	if (horizontal_) {
 		//  top edge
-		dst.brighten_rect(Rectf(r.x, r.y, r.w - 1.f, 1.f), -BUTTON_EDGE_BRIGHT_FACTOR);
-		dst.brighten_rect(Rectf(r.x, r.y + 1.f, r.w - 2.f, 1.f), -BUTTON_EDGE_BRIGHT_FACTOR);
+		dst.brighten_rect(Recti(r.x, r.y, r.w - 1, 1), -BUTTON_EDGE_BRIGHT_FACTOR);
+		dst.brighten_rect(Recti(r.x, r.y + 1, r.w - 2, 1), -BUTTON_EDGE_BRIGHT_FACTOR);
 		//  bottom edge
-		dst.brighten_rect(Rectf(r.x, r.h - 2.f, r.w, 2.f), BUTTON_EDGE_BRIGHT_FACTOR);
+		dst.brighten_rect(Recti(r.x, r.h - 2, r.w, 2), BUTTON_EDGE_BRIGHT_FACTOR);
 	} else {
 		//  right edge
-		dst.brighten_rect(Rectf(r.w - 2.f, r.y, 2.f, r.h), BUTTON_EDGE_BRIGHT_FACTOR);
+		dst.brighten_rect(Recti(r.w - 2, r.y, 2, r.h), BUTTON_EDGE_BRIGHT_FACTOR);
 		//  left edge
-		dst.brighten_rect(Rectf(r.x, r.y, 1.f, r.h - 1.f), -BUTTON_EDGE_BRIGHT_FACTOR);
-		dst.brighten_rect(Rectf(r.x + 1.f, r.y, 1.f, r.h - 2.f), -BUTTON_EDGE_BRIGHT_FACTOR);
+		dst.brighten_rect(Recti(r.x, r.y, 1, r.h - 1), -BUTTON_EDGE_BRIGHT_FACTOR);
+		dst.brighten_rect(Recti(r.x + 1, r.y, 1, r.h - 2), -BUTTON_EDGE_BRIGHT_FACTOR);
 	}
 }
 
@@ -316,46 +316,46 @@ void Scrollbar::draw(RenderTarget& dst) {
 		if ((2 * buttonsize_ + knobsize) > static_cast<uint32_t>(get_w())) {
 			// Our owner allocated too little space
 			if (static_cast<uint32_t>(get_w()) >= 2 * buttonsize_) {
-				draw_button(dst, Minus, Rectf(0, 0, get_w() / 2, get_h()));
-				draw_button(dst, Plus, Rectf(get_w() - buttonsize_, 0, get_w() / 2, get_h()));
+				draw_button(dst, Minus, Recti(0, 0, get_w() / 2, get_h()));
+				draw_button(dst, Plus, Recti(get_w() - buttonsize_, 0, get_w() / 2, get_h()));
 			} else {
-				draw_button(dst, Minus, Rectf(0.f, 0.f, get_w(), get_h()));
+				draw_button(dst, Minus, Recti(0, 0, get_w(), get_h()));
 			}
 			return;
 		}
 
-		draw_button(dst, Minus, Rectf(0, 0, buttonsize_, get_h()));
-		draw_button(dst, Plus, Rectf(get_w() - buttonsize_, 0, buttonsize_, get_h()));
-		draw_button(dst, Knob, Rectf(knobpos - knobsize / 2.f, 0, knobsize, get_h()));
+		draw_button(dst, Minus, Recti(0, 0, buttonsize_, get_h()));
+		draw_button(dst, Plus, Recti(get_w() - buttonsize_, 0, buttonsize_, get_h()));
+		draw_button(dst, Knob, Recti(knobpos - knobsize / 2, 0, knobsize, get_h()));
 
 		assert(buttonsize_ + knobsize / 2 <= knobpos);
 		draw_area(
-		   dst, MinusPage, Rectf(buttonsize_, 0, knobpos - buttonsize_ - knobsize / 2, get_h()));
+		   dst, MinusPage, Recti(buttonsize_, 0, knobpos - buttonsize_ - knobsize / 2, get_h()));
 		assert(knobpos + knobsize / 2 + buttonsize_ <= static_cast<uint32_t>(get_w()));
-		draw_area(dst, PlusPage, Rectf(knobpos + knobsize / 2.f, 0.f,
+		draw_area(dst, PlusPage, Recti(knobpos + knobsize / 2, 0,
 		                               get_w() - knobpos - knobsize / 2 - buttonsize_, get_h()));
 	} else {
 		if ((2 * buttonsize_ + knobsize) > static_cast<uint32_t>(get_h())) {
 			// Our owner allocated too little space
 			if (static_cast<uint32_t>(get_h()) >= 2 * buttonsize_) {
-				draw_button(dst, Minus, Rectf(0.f, 0.f, get_w(), get_h() / 2.f));
-				draw_button(dst, Plus, Rectf(0.f, get_h() - buttonsize_, get_w(), get_h() / 2));
+				draw_button(dst, Minus, Recti(0, 0, get_w(), get_h() / 2));
+				draw_button(dst, Plus, Recti(0, get_h() - buttonsize_, get_w(), get_h() / 2));
 			} else {
-				draw_button(dst, Minus, Rectf(0.f, 0.f, get_w(), get_h()));
+				draw_button(dst, Minus, Recti(0, 0, get_w(), get_h()));
 			}
 			return;
 		}
 
-		draw_button(dst, Minus, Rectf(0, 0, get_w(), buttonsize_));
-		draw_button(dst, Plus, Rectf(0, get_h() - buttonsize_, get_w(), buttonsize_));
-		draw_button(dst, Knob, Rectf(0, knobpos - knobsize / 2.f, get_w(), knobsize));
+		draw_button(dst, Minus, Recti(0, 0, get_w(), buttonsize_));
+		draw_button(dst, Plus, Recti(0, get_h() - buttonsize_, get_w(), buttonsize_));
+		draw_button(dst, Knob, Recti(0, knobpos - knobsize / 2, get_w(), knobsize));
 
 		assert(buttonsize_ + knobsize / 2 <= knobpos);
 		draw_area(
-		   dst, MinusPage, Rectf(0.f, buttonsize_, get_w(), knobpos - buttonsize_ - knobsize / 2));
+		   dst, MinusPage, Recti(0, buttonsize_, get_w(), knobpos - buttonsize_ - knobsize / 2));
 		assert(knobpos + knobsize / 2 + buttonsize_ <= static_cast<uint32_t>(get_h()));
-		draw_area(dst, PlusPage, Rectf(0.f, knobpos + knobsize / 2.f, get_w(),
-		                               get_h() - knobpos - knobsize / 2.f - buttonsize_));
+		draw_area(dst, PlusPage, Recti(0, knobpos + knobsize / 2, get_w(),
+		                               get_h() - knobpos - knobsize / 2 - buttonsize_));
 	}
 }
 

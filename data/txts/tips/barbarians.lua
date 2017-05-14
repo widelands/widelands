@@ -9,7 +9,7 @@ tips = {
       seconds = 5
    },
    {
-      text = _"Most upgraded buildings also need an upgraded worker. Do not upgrade a building unless you have the upgraded workers available.",
+      text = _"Most enhanced buildings need experienced workers. Do not enhance a building unless you have the necessary workers available.",
       seconds = 7
    },
 }

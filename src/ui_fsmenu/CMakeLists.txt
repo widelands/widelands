@@ -12,6 +12,8 @@ wl_library(ui_fsmenu
     internet_lobby.h
     intro.cc
     intro.h
+    launch_game.cc
+    launch_game.h
     launch_mpg.cc
     launch_mpg.h
     launch_spg.cc
@@ -43,11 +45,12 @@ wl_library(ui_fsmenu
     build_info
     game_io
     graphic
+    graphic_fonthandler
     graphic_image_io
     graphic_playercolor
     graphic_surface
     graphic_text
-    graphic_text_layout
+    graphic_text_constants
     helper
     io_filesystem
     logic

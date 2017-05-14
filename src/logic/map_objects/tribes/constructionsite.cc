@@ -35,7 +35,6 @@
 #include "logic/game.h"
 #include "logic/map_objects/tribes/tribe_descr.h"
 #include "logic/map_objects/tribes/worker.h"
-#include "sound/sound_handler.h"
 #include "ui_basic/window.h"
 
 namespace Widelands {
@@ -111,7 +110,7 @@ void ConstructionSite::set_building(const BuildingDescr& building_descr) {
 Initialize the construction site by starting orders
 ===============
 */
-void ConstructionSite::init(EditorGameBase& egbase) {
+bool ConstructionSite::init(EditorGameBase& egbase) {
 	PartiallyFinishedBuilding::init(egbase);
 
 	const std::map<DescriptionIndex, uint8_t>* buildcost;
@@ -140,6 +139,7 @@ void ConstructionSite::init(EditorGameBase& egbase) {
 
 		work_steps_ += it->second;
 	}
+	return true;
 }
 
 /*

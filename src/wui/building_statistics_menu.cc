@@ -69,27 +69,19 @@ BuildingStatisticsMenu::BuildingStatisticsMenu(InteractivePlayer& parent,
      navigation_panel_(this, 0, 0, kWindowWidth, 4 * kButtonRowHeight),
      building_name_(
         &navigation_panel_, get_inner_w() / 2, 0, 0, kButtonHeight, "", UI::Align::kCenter),
-     owned_label_(&navigation_panel_,
-                  kMargin,
-                  kButtonRowHeight,
-                  0,
-                  kButtonHeight,
-                  _("Owned:"),
-                  UI::Align::kLeft),
+     owned_label_(&navigation_panel_, kMargin, kButtonRowHeight, 0, kButtonHeight, _("Owned:")),
      construction_label_(&navigation_panel_,
                          kMargin,
                          2 * kButtonRowHeight,
                          0,
                          kButtonHeight,
-                         _("Under Construction:"),
-                         UI::Align::kLeft),
+                         _("Under Construction:")),
      unproductive_box_(&navigation_panel_, kMargin, 3 * kButtonRowHeight + 3, UI::Box::Horizontal),
      unproductive_label_(
         &unproductive_box_,
         /** TRANSLATORS: This is the first part of productivity with input field */
         /** TRANSLATORS: Building statistics window - 'Low Productivity <input>%:' */
-        _("Low Productivity"),
-        UI::Align::kLeft),
+        _("Low Productivity")),
      unproductive_percent_(
         &unproductive_box_,
         0,
@@ -103,8 +95,7 @@ BuildingStatisticsMenu::BuildingStatisticsMenu(InteractivePlayer& parent,
         &unproductive_box_,
         /** TRANSLATORS: This is the second part of productivity with input field */
         /** TRANSLATORS: Building statistics window -  'Low Productivity <input>%:' */
-        _("%:"),
-        UI::Align::kLeft),
+        _("%:")),
      no_owned_label_(&navigation_panel_,
                      get_inner_w() - 2 * kButtonRowHeight - kMargin,
                      kButtonRowHeight,
@@ -340,6 +331,8 @@ bool BuildingStatisticsMenu::add_button(
 	   kBuildGridCellHeight, g_gr->images().get("images/ui_basic/but1.png"),
 	   descr.representative_image(&iplayer().get_player()->get_playercolor()), "",
 	   UI::Button::Style::kFlat);
+	building_buttons_[id]->set_disable_style(UI::ButtonDisableStyle::kMonochrome |
+	                                         UI::ButtonDisableStyle::kFlat);
 	button_box->add(building_buttons_[id]);
 
 	owned_labels_[id] =

@@ -1,3 +1,13 @@
+wl_library(note_sound
+  SRCS
+    note_sound.h
+    note_sound.cc
+  DEPENDS
+    logic_widelands_geometry
+    notifications
+)
+
+
 wl_library(sound
   SRCS
     fxset.cc
@@ -16,10 +26,6 @@ wl_library(sound
     helper
     io_fileread
     io_filesystem
-    logic
-    logic_widelands_geometry
+    profile
     random
-    wui
-    wui_mapview_pixelfunctions
-    wui_mapview
 )

@@ -32,7 +32,6 @@
 #include "logic/map_objects/tribes/worker.h"
 #include "logic/map_objects/tribes/worker_program.h"
 #include "logic/nodecaps.h"
-#include "sound/sound_handler.h"
 
 namespace Widelands {
 
@@ -41,7 +40,6 @@ WorkerDescr::WorkerDescr(const std::string& init_descname,
                          const LuaTable& table,
                          const EditorGameBase& egbase)
    : BobDescr(init_descname, init_type, MapObjectDescr::OwnerType::kTribe, table),
-     ware_hotspot_(Vector2i(0, 15)),
      buildable_(false),
      needed_experience_(INVALID_INDEX),
      becomes_(INVALID_INDEX),
@@ -119,10 +117,6 @@ WorkerDescr::WorkerDescr(const std::string& init_descname,
 		default_target_quantity_ = table.get_int("default_target_quantity");
 	} else {
 		default_target_quantity_ = std::numeric_limits<uint32_t>::max();
-	}
-	if (table.has_key("ware_hotspot")) {
-		items_table = table.get_table("ware_hotspot");
-		ware_hotspot_ = Vector2i(items_table->get_int(1), items_table->get_int(2));
 	}
 }
 

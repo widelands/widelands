@@ -21,7 +21,6 @@
 
 #include <boost/bind.hpp>
 
-#include "graphic/font.h"
 #include "graphic/font_handler1.h"
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
@@ -70,9 +69,7 @@ Table<void*>::Table(Panel* const parent,
      sort_descending_(rowtype == TableRows::kSingleDescending ||
                       rowtype == TableRows::kMultiDescending),
      flexible_column_(std::numeric_limits<size_t>::max()),
-     is_multiselect_(rowtype == TableRows::kMulti || rowtype == TableRows::kMultiDescending),
-     ctrl_down_(false),
-     shift_down_(false) {
+     is_multiselect_(rowtype == TableRows::kMulti || rowtype == TableRows::kMultiDescending) {
 	set_thinks(false);
 	set_can_focus(true);
 	scrollbar_filler_button_->set_visible(false);
@@ -107,7 +104,7 @@ void Table<void*>::add_column(uint32_t const width,
 	//  If there would be existing entries, they would not get the new column.
 	assert(size() == 0);
 
-	uint32_t complete_width = 0;
+	int complete_width = 0;
 	for (const Column& col : columns_) {
 		complete_width += col.width;
 	}
@@ -132,7 +129,6 @@ void Table<void*>::add_column(uint32_t const width,
 			flexible_column_ = columns_.size() - 1;
 		}
 	}
-	layout();
 }
 
 void Table<void*>::set_column_title(uint8_t const col, const std::string& title) {
@@ -208,8 +204,7 @@ void Table<void*>::fit_height(uint32_t entries) {
 	if (entries == 0) {
 		entries = size();
 	}
-	int tablewidth;
-	int tableheight;
+	int tablewidth, tableheight = 0;
 	get_desired_size(&tablewidth, &tableheight);
 	tableheight = headerheight_ + 2 + get_lineheight() * entries;
 	set_desired_size(tablewidth, tableheight);
@@ -224,7 +219,7 @@ void Table<void*>::draw(RenderTarget& dst) {
 	uint32_t idx = scrollpos_ / lineheight;
 	int32_t y = 1 + idx * lineheight - scrollpos_ + headerheight_;
 
-	dst.brighten_rect(Rectf(0.f, 0.f, get_eff_w(), get_h()), ms_darken_value);
+	dst.brighten_rect(Recti(0, 0, get_eff_w(), get_h()), ms_darken_value);
 
 	while (idx < entry_records_.size()) {
 		if (y >= static_cast<int32_t>(get_h()))
@@ -234,7 +229,7 @@ void Table<void*>::draw(RenderTarget& dst) {
 
 		if (idx == selection_ || multiselect_.count(idx)) {
 			assert(2 <= get_eff_w());
-			dst.brighten_rect(Rectf(1.f, y, get_eff_w() - 2, lineheight_), -ms_darken_value);
+			dst.brighten_rect(Recti(1, y, get_eff_w() - 2, lineheight_), -ms_darken_value);
 		}
 
 		Columns::size_type const nr_columns = columns_.size();
@@ -246,14 +241,14 @@ void Table<void*>::draw(RenderTarget& dst) {
 			const Image* entry_picture = er.get_picture(i);
 			const std::string& entry_string = er.get_string(i);
 
-			Vector2f point(curx, y);
+			Vector2i point(curx, y);
 			int picw = 0;
 
 			if (entry_picture != nullptr) {
 				picw = entry_picture->width();
 				const int pich = entry_picture->height();
 
-				float draw_x = point.x;
+				int draw_x = point.x;
 
 				// We want a bit of margin
 				int max_pic_height = lineheight - 3;
@@ -267,7 +262,7 @@ void Table<void*>::draw(RenderTarget& dst) {
 						if (i == nr_columns - 1 && scrollbar_->is_enabled()) {
 							draw_x = point.x + (curw - blit_width - scrollbar_->get_w()) / 2.f;
 						} else {
-							draw_x = point.x + (curw - blit_width) / 2.f;
+							draw_x = point.x + (curw - blit_width) / 2;
 						}
 					}
 
@@ -276,7 +271,7 @@ void Table<void*>::draw(RenderTarget& dst) {
 					}
 
 					// Create the scaled image
-					dst.blitrect_scale(Rectf(draw_x, point.y + 1.f, blit_width, max_pic_height),
+					dst.blitrect_scale(Rectf(draw_x, point.y + 1, blit_width, max_pic_height),
 					                   entry_picture, Recti(0, 0, picw, pich), 1., BlendMode::UseAlpha);
 
 					// For text alignment below
@@ -286,12 +281,12 @@ void Table<void*>::draw(RenderTarget& dst) {
 						if (i == nr_columns - 1 && scrollbar_->is_enabled()) {
 							draw_x = point.x + (curw - picw - scrollbar_->get_w()) / 2.f;
 						} else {
-							draw_x = point.x + (curw - picw) / 2.f;
+							draw_x = point.x + (curw - picw) / 2;
 						}
 					} else if (alignment == UI::Align::kRight) {
 						draw_x += curw - picw;
 					}
-					dst.blit(Vector2f(draw_x, point.y + (lineheight - pich) / 2.f), entry_picture);
+					dst.blit(Vector2i(draw_x, point.y + (lineheight - pich) / 2), entry_picture);
 				}
 				point.x += picw;
 			}
@@ -351,24 +346,10 @@ void Table<void*>::draw(RenderTarget& dst) {
  * handle key presses
  */
 bool Table<void*>::handle_key(bool down, SDL_Keysym code) {
-	if (is_multiselect_) {
-		switch (code.sym) {
-		case SDLK_LSHIFT:
-		case SDLK_RSHIFT:
-			shift_down_ = down;
-			break;
-		case SDLK_LCTRL:
-		case SDLK_RCTRL:
-			ctrl_down_ = down;
-			break;
-		default:
-			break;
-		}
-	}
 	if (down) {
 		switch (code.sym) {
 		case SDLK_a:
-			if (is_multiselect_ && ctrl_down_ && !empty()) {
+			if (is_multiselect_ && (code.mod & KMOD_CTRL) && !empty()) {
 				multiselect_.clear();
 				for (uint32_t i = 0; i < size(); ++i) {
 					toggle_entry(i);
@@ -425,8 +406,9 @@ bool Table<void*>::handle_mousepress(uint8_t const btn, int32_t, int32_t const y
 		}
 
 		// Check if doubleclicked
-		if (!ctrl_down_ && !shift_down_ && time - real_last_click_time < DOUBLE_CLICK_INTERVAL &&
-		    last_selection_ == selection_ && selection_ != no_selection_index()) {
+		if (!(SDL_GetModState() & (KMOD_CTRL | KMOD_SHIFT)) &&
+		    time - real_last_click_time < DOUBLE_CLICK_INTERVAL && last_selection_ == selection_ &&
+		    selection_ != no_selection_index()) {
 			double_clicked(selection_);
 		}
 		return true;
@@ -493,7 +475,7 @@ void Table<void*>::select(const uint32_t i) {
 void Table<void*>::multiselect(uint32_t row) {
 	if (is_multiselect_) {
 		// Ranged selection with Shift
-		if (shift_down_) {
+		if (SDL_GetModState() & KMOD_SHIFT) {
 			multiselect_.clear();
 			if (has_selection()) {
 				const uint32_t last_selected = selection_index();
@@ -503,12 +485,13 @@ void Table<void*>::multiselect(uint32_t row) {
 					toggle_entry(i);
 				}
 				select(last_selected);
+				selected(last_selected);
 			} else {
 				select(toggle_entry(row));
 			}
 		} else {
 			// Single selection without Ctrl
-			if (!ctrl_down_) {
+			if (!(SDL_GetModState() & KMOD_CTRL)) {
 				multiselect_.clear();
 			}
 			select(toggle_entry(row));
@@ -593,7 +576,7 @@ bool Table<void*>::sort_helper(uint32_t a, uint32_t b) {
 }
 
 void Table<void*>::layout() {
-	if (columns_.empty()) {
+	if (columns_.empty() || get_w() == 0) {
 		return;
 	}
 
@@ -604,16 +587,14 @@ void Table<void*>::layout() {
 	scrollbar_->set_steps(entry_records_.size() * get_lineheight() - (get_h() - headerheight_ - 2));
 
 	// Find a column to resize
-	size_t resizeable_column = std::numeric_limits<size_t>::max();
-	if (flexible_column_ != std::numeric_limits<size_t>::max()) {
+	size_t resizeable_column = 0;
+	if (flexible_column_ < columns_.size()) {
 		resizeable_column = flexible_column_;
 	} else {
 		// Use the widest column
-		int all_columns_width = scrollbar_ && scrollbar_->is_enabled() ? scrollbar_->get_w() : 0;
-		uint32_t widest_width = columns_[resizeable_column].width;
+		uint32_t widest_width = columns_[0].width;
 		for (size_t i = 1; i < columns_.size(); ++i) {
 			const uint32_t width = columns_[i].width;
-			all_columns_width += width;
 			if (width > widest_width) {
 				widest_width = width;
 				resizeable_column = i;
@@ -621,30 +602,30 @@ void Table<void*>::layout() {
 		}
 	}
 
-	// If we have a resizeable column, adjust the column sizes.
-	if (resizeable_column != std::numeric_limits<size_t>::max()) {
-		int all_columns_width = scrollbar_->is_enabled() ? scrollbar_->get_w() : 0;
-		for (const auto& column : columns_) {
-			all_columns_width += column.width;
-		}
-		if (all_columns_width != get_w()) {
-			Column& column = columns_.at(resizeable_column);
-			column.width = column.width + get_w() - all_columns_width;
-			column.btn->set_size(column.width, column.btn->get_h());
-			int offset = 0;
-			for (const auto& col : columns_) {
-				col.btn->set_pos(Vector2i(offset, col.btn->get_y()));
-				offset = col.btn->get_x() + col.btn->get_w();
-			}
+	// Adjust the column sizes.
+	int all_columns_width = scrollbar_->is_enabled() ? scrollbar_->get_w() : 0;
+	for (const auto& column : columns_) {
+		all_columns_width += column.width;
+	}
 
-			if (scrollbar_->is_enabled()) {
-				const UI::Button* last_column_btn = columns_.back().btn;
-				scrollbar_filler_button_->set_pos(
-				   Vector2i(last_column_btn->get_x() + last_column_btn->get_w(), 0));
-				scrollbar_filler_button_->set_visible(true);
-			} else {
-				scrollbar_filler_button_->set_visible(false);
-			}
+	if (all_columns_width != get_w()) {
+		Column& column = columns_.at(resizeable_column);
+		column.width = std::max(0, column.width + get_w() - all_columns_width);
+		column.btn->set_size(column.width, column.btn->get_h());
+
+		int offset = 0;
+		for (const auto& col : columns_) {
+			col.btn->set_pos(Vector2i(offset, col.btn->get_y()));
+			offset = col.btn->get_x() + col.btn->get_w();
+		}
+
+		if (scrollbar_->is_enabled()) {
+			const UI::Button* last_column_btn = columns_.back().btn;
+			scrollbar_filler_button_->set_pos(
+			   Vector2i(last_column_btn->get_x() + last_column_btn->get_w(), 0));
+			scrollbar_filler_button_->set_visible(true);
+		} else {
+			scrollbar_filler_button_->set_visible(false);
 		}
 	}
 }

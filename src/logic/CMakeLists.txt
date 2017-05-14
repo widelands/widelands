@@ -14,6 +14,7 @@ wl_library(logic_game_settings
     base_exceptions
     io_filesystem
     logic
+    logic_constants
     scripting_lua_interface
     scripting_lua_table
 )
@@ -28,6 +29,7 @@ wl_library(logic_game_controller
   DEPENDS
     ai
     logic
+    logic_constants
     profile
     ui_basic
     widelands_ball_of_mud
@@ -48,6 +50,9 @@ wl_library(logic_constants
   SRCS
     constants.h
     constants.cc
+    widelands.h
+  DEPENDS
+    base_macros
 )
 
 wl_library(logic
@@ -123,7 +128,6 @@ wl_library(logic
     save_handler.h
     widelands_geometry_io.cc
     widelands_geometry_io.h
-    widelands.h
     map_objects/draw_text.h
     map_objects/attackable.h
     map_objects/bob.cc
@@ -225,9 +229,11 @@ wl_library(logic
     game_io
     graphic
     graphic_color
+    graphic_fonthandler
     graphic_image_io
     graphic_playercolor
     graphic_surface
+    graphic_text_constants
     graphic_text_layout
     helper
     io_fileread
@@ -240,6 +246,7 @@ wl_library(logic
     map_io
     map_io_map_loader
     network
+    note_sound
     notifications
     random
     scripting_coroutine

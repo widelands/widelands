@@ -43,14 +43,8 @@
 #include "wui/playerdescrgroup.h"
 
 FullscreenMenuLaunchSPG::FullscreenMenuLaunchSPG(GameSettingsProvider* const settings,
-                                                 GameController* const ctrl,
-                                                 bool /* autolaunch */)
-   : FullscreenMenuBase(),
-
-     // Values for alignment and size
-     butw_(get_w() / 4),
-     buth_(get_h() * 9 / 200),
-
+                                                 GameController* const ctrl)
+   : FullscreenMenuLaunchGame(settings, ctrl),
      // Buttons
      select_map_(this,
                  "select_map",
@@ -60,58 +54,29 @@ FullscreenMenuLaunchSPG::FullscreenMenuLaunchSPG(GameSettingsProvider* const set
                  buth_,
                  g_gr->images().get("images/ui_basic/but1.png"),
                  _("Select map")),
-     win_condition_dropdown_(this,
-                             get_w() * 7 / 10,
-                             get_h() * 4 / 10 + buth_,
-                             butw_,
-                             get_h() - get_h() * 4 / 10 - buth_,
-                             ""),
-     back_(this,
-           "back",
-           get_w() * 7 / 10,
-           get_h() * 17 / 20,
-           butw_,
-           buth_,
-           g_gr->images().get("images/ui_basic/but0.png"),
-           _("Back")),
-     ok_(this,
-         "ok",
-         get_w() * 7 / 10,
-         get_h() * 9 / 10,
-         butw_,
-         buth_,
-         g_gr->images().get("images/ui_basic/but2.png"),
-         _("Start game")),
 
      // Text labels
-     title_(this, get_w() / 2, get_h() / 10, _("Launch Game"), UI::Align::kCenter),
      mapname_(this,
               get_w() * 7 / 10 + butw_ / 2,
               get_h() * 53 / 200 - 15,
               std::string(),
               UI::Align::kCenter),
-     name_(this, get_w() * 1 / 25, get_h() * 53 / 200 - 15, _("Player’s name"), UI::Align::kLeft),
+     name_(this, get_w() * 1 / 25, get_h() * 53 / 200 - 15, _("Player’s name")),
      type_(this,
            // (Element x) + (PlayerDescriptionGroup x)  + border
            ((get_w() * 16 / 25) * 35 / 125) + (get_w() / 25) + 2,
            get_h() * 53 / 200 - 15,
-           _("Player’s type"),
-           UI::Align::kLeft),
-     team_(this,
-           ((get_w() * 16 / 25) * 35 / 125) + (get_w() / 25) + 2,
-           get_h() * 53 / 200,
-           _("Team"),
-           UI::Align::kLeft),
+           _("Player’s type")),
+     team_(
+        this, ((get_w() * 16 / 25) * 35 / 125) + (get_w() / 25) + 2, get_h() * 53 / 200, _("Team")),
      tribe_(this,
             ((get_w() * 16 / 25) * 80 / 125) + (get_w() / 25) + 2,
             get_h() * 53 / 200 - 15,
-            _("Player’s tribe"),
-            UI::Align::kLeft),
+            _("Player’s tribe")),
      init_(this,
            ((get_w() * 16 / 25) * 55 / 125) + (get_w() / 25) + 2,
            get_h() * 53 / 200,
-           _("Start type"),
-           UI::Align::kLeft),
+           _("Start type")),
      wincondition_type_(this,
                         get_w() * 7 / 10 + (butw_ / 2),
                         get_h() * 7 / 20 + buth_,
@@ -119,19 +84,13 @@ FullscreenMenuLaunchSPG::FullscreenMenuLaunchSPG(GameSettingsProvider* const set
                         UI::Align::kCenter),
 
      // Variables and objects used in the menu
-     settings_(settings),
-     ctrl_(ctrl),
      is_scenario_(false) {
+	ok_.set_pos(Vector2i(get_w() * 7 / 10, get_h() * 9 / 10));
+	back_.set_pos(Vector2i(get_w() * 7 / 10, get_h() * 17 / 20));
+	win_condition_dropdown_.set_pos(Vector2i(get_w() * 7 / 10, get_h() * 4 / 10 + buth_));
+	title_.set_text(_("Launch Game"));
 	select_map_.sigclicked.connect(
 	   boost::bind(&FullscreenMenuLaunchSPG::select_map, boost::ref(*this)));
-	win_condition_dropdown_.selected.connect(
-	   boost::bind(&FullscreenMenuLaunchSPG::win_condition_selected, this));
-	back_.sigclicked.connect(boost::bind(&FullscreenMenuLaunchSPG::clicked_back, boost::ref(*this)));
-	ok_.sigclicked.connect(boost::bind(&FullscreenMenuLaunchSPG::clicked_ok, boost::ref(*this)));
-
-	lua_ = new LuaInterface();
-
-	title_.set_fontsize(UI_FONT_SIZE_BIG);
 
 	int smaller_fontsize = fs_small() * 4 / 5;
 	name_.set_fontsize(smaller_fontsize);
@@ -142,9 +101,7 @@ FullscreenMenuLaunchSPG::FullscreenMenuLaunchSPG(GameSettingsProvider* const set
 
 	uint32_t y = get_h() * 3 / 10 - buth_;
 	for (uint32_t i = 0; i < kMaxPlayers; ++i) {
-		const Image* player_image =
-		   playercolor_image(i, g_gr->images().get("images/players/player_position_menu.png"),
-		                     g_gr->images().get("images/players/player_position_menu_pc.png"));
+		const Image* player_image = playercolor_image(i, "images/players/player_position_menu.png");
 		assert(player_image);
 
 		pos_[i] =
@@ -160,7 +117,6 @@ FullscreenMenuLaunchSPG::FullscreenMenuLaunchSPG(GameSettingsProvider* const set
 }
 
 FullscreenMenuLaunchSPG::~FullscreenMenuLaunchSPG() {
-	delete lua_;
 }
 
 void FullscreenMenuLaunchSPG::layout() {
@@ -178,13 +134,6 @@ void FullscreenMenuLaunchSPG::start() {
 	}
 }
 
-void FullscreenMenuLaunchSPG::think() {
-	if (ctrl_)
-		ctrl_->think();
-
-	refresh();
-}
-
 /**
  * back-button has been pressed
  */
@@ -200,114 +149,10 @@ void FullscreenMenuLaunchSPG::clicked_back() {
 	refresh();
 }
 
-/**
- * Fill the dropdown with the available win conditions.
- */
-void FullscreenMenuLaunchSPG::update_win_conditions() {
-	win_condition_dropdown_.clear();
-	if (settings_->settings().scenario) {
-		win_condition_dropdown_.set_label(_("Scenario"));
-		win_condition_dropdown_.set_tooltip(_("Win condition is set through the scenario"));
-		win_condition_dropdown_.set_enabled(false);
-	} else {
-		win_condition_dropdown_.set_label("");
-		win_condition_dropdown_.set_tooltip("");
-		Widelands::Map map;
-		std::unique_ptr<Widelands::MapLoader> ml =
-		   map.get_correct_loader(settings_->settings().mapfilename);
-		if (ml != nullptr) {
-			ml->preload_map(true);
-			load_win_conditions(map);
-		} else {
-			const std::string error_message =
-			   (boost::format(_("Unable to determine valid win conditions because the map '%s' could "
-			                    "not be loaded.")) %
-			    settings_->settings().mapfilename)
-			      .str();
-			win_condition_dropdown_.set_label(_("Error"));
-			win_condition_dropdown_.set_tooltip(error_message);
-			log("LaunchSPG: No map loader: %s\n", error_message.c_str());
-		}
-		win_condition_dropdown_.set_enabled(true);
-	}
-}
-
-void FullscreenMenuLaunchSPG::load_win_conditions(const Widelands::Map& map) {
-	try {
-		const std::set<std::string> tags = map.get_tags();
-		// Make sure that the last win condition is still valid. If not, pick the first one
-		// available.
-		if (last_win_condition_.empty()) {
-			last_win_condition_ = settings_->settings().win_condition_scripts.front();
-		}
-		std::unique_ptr<LuaTable> t = win_condition_if_valid(last_win_condition_, tags);
-		for (const std::string& win_condition_script : settings_->settings().win_condition_scripts) {
-			if (t) {
-				break;
-			} else {
-				last_win_condition_ = win_condition_script;
-				t = win_condition_if_valid(last_win_condition_, tags);
-			}
-		}
-
-		// Now fill the dropdown.
-		for (const std::string& win_condition_script : settings_->settings().win_condition_scripts) {
-			try {
-				t = win_condition_if_valid(win_condition_script, tags);
-				if (t) {
-					i18n::Textdomain td("win_conditions");
-					win_condition_dropdown_.add(_(t->get_string("name")), win_condition_script, nullptr,
-					                            win_condition_script == last_win_condition_,
-					                            t->get_string("description"));
-				}
-			} catch (LuaTableKeyError& e) {
-				log("LaunchSPG: Error loading win condition: %s %s\n", win_condition_script.c_str(),
-				    e.what());
-			}
-		}
-	} catch (const std::exception& e) {
-		const std::string error_message =
-		   (boost::format(_("Unable to determine valid win conditions because the map '%s' "
-		                    "could not be loaded.")) %
-		    settings_->settings().mapfilename)
-		      .str();
-		win_condition_dropdown_.set_label(_("Error"));
-		win_condition_dropdown_.set_tooltip(error_message);
-		log("LaunchSPG: Exception: %s %s\n", error_message.c_str(), e.what());
-	}
-}
-
 void FullscreenMenuLaunchSPG::win_condition_selected() {
-	last_win_condition_ = win_condition_dropdown_.get_selected();
-}
-
-// TODO(GunChleoc): Turn this into a free standing function. It seems it is not using any state.
-std::unique_ptr<LuaTable>
-FullscreenMenuLaunchSPG::win_condition_if_valid(const std::string& win_condition_script,
-                                                std::set<std::string> tags) const {
-	bool is_usable = true;
-	std::unique_ptr<LuaTable> t;
-	try {
-		t = lua_->run_script(win_condition_script);
-		t->do_not_warn_about_unaccessed_keys();
-
-		// Skip this win condition if the map doesn't have all the required tags
-		if (t->has_key("map_tags")) {
-			for (const std::string& map_tag : t->get_table("map_tags")->array_entries<std::string>()) {
-				if (!tags.count(map_tag)) {
-					is_usable = false;
-					break;
-				}
-			}
-		}
-	} catch (LuaTableKeyError& e) {
-		log(
-		   "LaunchSPG: Error loading win condition: %s %s\n", win_condition_script.c_str(), e.what());
+	if (win_condition_dropdown_.has_selection()) {
+		last_win_condition_ = win_condition_dropdown_.get_selected();
 	}
-	if (!is_usable) {
-		t.reset(nullptr);
-	}
-	return t;
 }
 
 /**
@@ -328,7 +173,9 @@ void FullscreenMenuLaunchSPG::clicked_ok() {
 		if (is_scenario_) {
 			end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kScenarioGame);
 		} else {
-			settings_->set_win_condition_script(win_condition_dropdown_.get_selected());
+			if (win_condition_dropdown_.has_selection()) {
+				settings_->set_win_condition_script(win_condition_dropdown_.get_selected());
+			}
 			end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kNormalGame);
 		}
 	}

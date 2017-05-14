@@ -10,9 +10,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-02-19 19:34+0000\n"
-"PO-Revision-Date: 2017-02-19 19:35+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2017-04-13 13:07+0000\n"
+"PO-Revision-Date: 2017-03-30 15:08+0000\n"
+"Last-Translator: Joe Hansen <joedalton2@yahoo.dk>\n"
 "Language-Team: Danish (http://www.transifex.com/widelands/widelands/language/da/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -216,11 +216,11 @@ msgstr "Byg en klejnsmed"
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:99
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:103
 msgid "Build a barracks"
-msgstr ""
+msgstr "Byg en barrak"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:101
 msgid "Recruiting new soldiers"
-msgstr ""
+msgstr "Rekruttering af nye soldater"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:102
 msgid ""
@@ -228,7 +228,7 @@ msgid ""
 "we need to deliver light tridents and tabards to the barracks. Recruits will"
 " arrive from the warehouse and receive one of each and some basic training "
 "to become a soldier."
-msgstr ""
+msgstr "Nu da våben bliver smedet, kan nye soldater rekrutteres. For dette skal vi fremstille lette treforke og våbenkjortler til barakkerne. Rekrutter vil ankomme fra lageret og modtage en af hver og lidt grundlæggende træning for at blive soldat."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:109
 msgid "Build training sites for soldiers"
@@ -676,7 +676,7 @@ msgstr "Jeg har overvejet dette, Sidolus. Jeg synes det er på tide. Vi vil oppr
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:317
 msgid "Jundlina Writes a Letter"
-msgstr ""
+msgstr "Jundlina skriver et brev"
 
 #. TRANSLATORS: Jundlina
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:320
@@ -684,14 +684,14 @@ msgid ""
 "I have received word that our mining industry started working. Now that we "
 "are forging weapons, I will send a letter to Sidolus informing him that it’s"
 " time to build a barracks and start recruiting soldiers."
-msgstr ""
+msgstr "Jeg har modtaget besked om, at mineindustrien er begyndt med sit arbejde. Nu da vi smeder våben, vil jeg sende et brev til Sidolus, der informerer ham om at det er tid at bygge en barak og starte rekrutteringen af soldater."
 
 #. TRANSLATORS: Jundlina
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:330
 msgid ""
 "Today I saw the first recruits gathering in front of the new barracks. If "
 "everything goes well, they should receive their training soon."
-msgstr ""
+msgstr "I dag så jeg de første rekrutter samle sig foran den nye barak. Hvis alt går godt, så er de snart uddannet."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:336
 msgid "Jundlina Summons Sidolus"

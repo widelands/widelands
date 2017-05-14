@@ -62,10 +62,6 @@ public:
 		return buildcost_;
 	}
 
-	Vector2i get_ware_hotspot() const {
-		return ware_hotspot_;
-	}
-
 	/// How much of the worker type that an economy should store in warehouses.
 	/// The special value std::numeric_limits<uint32_t>::max() means that the
 	/// the target quantity of this ware type will never be checked and should
@@ -124,7 +120,6 @@ public:
 	}
 
 protected:
-	Vector2i ware_hotspot_;
 	Quantity default_target_quantity_;
 	std::string helptext_script_;  // The path and filename to the worker's helptext script
 	DirAnimations walk_anims_;

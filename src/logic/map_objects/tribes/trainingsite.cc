@@ -218,7 +218,7 @@ void TrainingSite::init_kick_state(const TrainingAttribute& art, const TrainingS
 /**
  * Setup the building and request soldiers
  */
-void TrainingSite::init(EditorGameBase& egbase) {
+bool TrainingSite::init(EditorGameBase& egbase) {
 	ProductionSite::init(egbase);
 
 	upcast(Game, game, &egbase);
@@ -232,6 +232,7 @@ void TrainingSite::init(EditorGameBase& egbase) {
 		}
 	}
 	update_soldier_request();
+	return true;
 }
 
 /**

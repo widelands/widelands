@@ -6,6 +6,10 @@ wl_library(network
     internet_gaming_messages.cc
     internet_gaming_messages.h
     internet_gaming_protocol.h
+    gameclient.cc
+    gameclient.h
+    gamehost.cc
+    gamehost.h
     netclient.cc
     netclient.h
     nethost.cc
@@ -37,6 +41,7 @@ wl_library(network
     io_filesystem
     io_stream
     logic
+    logic_constants
     logic_game_controller
     logic_game_settings
     map_io_map_loader
