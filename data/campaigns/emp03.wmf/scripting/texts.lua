@@ -517,7 +517,7 @@ amalea_12 = {
    title=_"Amalea is Very Content",
    body= amalea2(_"Amalea is clapping her hands…",
       -- TRANSLATORS: Amalea
-      _([[Lutius. Well done. Well done. We have discovered all possible port locations in the complete region. Now we can reinforce our economy and we will manage to sail home soon.]])),
+      _([[Lutius. Well done. Well done. We have discovered all possible port locations in the complete region. Now we can strengthen our economy and we will manage to sail home soon.]])),
    posy=1,
    w=500,
 }
