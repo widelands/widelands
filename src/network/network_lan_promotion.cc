@@ -254,14 +254,15 @@ void LanBase::start_socket(boost::asio::ip::udp::socket *socket, boost::asio::ip
 		return;
 	}
 
+	const boost::asio::socket_base::reuse_address option_reuse(true);
+	socket->set_option(option_reuse, ec);
+	// This one isn't really needed so ignore the error
+
+
 	if (version == boost::asio::ip::udp::v6()) {
 		const boost::asio::ip::v6_only option_v6only(true);
 		socket->set_option(option_v6only, ec);
-		if (ec) {
-			log("[LAN] Error setting options for IPv6 socket, closing socket: %s\n", ec.message().c_str());
-			close_socket(socket);
-			return;
-		}
+		// This one might not be needed, ignore the error and see whether we fail on bind()
 	}
 
 	socket->bind(boost::asio::ip::udp::endpoint(version, port), ec);
