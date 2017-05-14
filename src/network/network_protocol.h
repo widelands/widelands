@@ -165,7 +165,7 @@ enum {
     * During game setup, this command is sent by the host to inform clients
     * about the names of the tribes they may choose.
     *
-    * \see NetClient::handle_network
+    * \see GameClient::handle_network
     */
 	NETCMD_SETTING_TRIBES = 6,
 
@@ -173,7 +173,7 @@ enum {
     * During game setup, this command contains complete information about all
     * player slots (independent of their state).
     *
-    * \see NetClient::handle_network
+    * \see GameClient::handle_network
     */
 	NETCMD_SETTING_ALLPLAYERS = 7,
 
@@ -184,7 +184,7 @@ enum {
     * Payload in that case is:
     * \li unsigned_8: number of the player
     *
-    * \see NetClient::handle_network
+    * \see GameClient::handle_network
     */
 	NETCMD_SETTING_PLAYER = 8,
 
@@ -192,7 +192,7 @@ enum {
     * During game setup, this command contains complete information about all
     * users.
     *
-    * \see NetClient::handle_network
+    * \see GameClient::handle_network
     */
 	NETCMD_SETTING_ALLUSERS = 9,
 
@@ -200,7 +200,7 @@ enum {
     * During game setup, this command updates the information associated to
     * one user.
     *
-    * \see NetClient::handle_network
+    * \see GameClient::handle_network
     */
 	NETCMD_SETTING_USER = 10,
 

@@ -69,9 +69,9 @@
 #include "logic/single_player_game_controller.h"
 #include "logic/single_player_game_settings_provider.h"
 #include "map_io/map_loader.h"
+#include "network/gameclient.h"
+#include "network/gamehost.h"
 #include "network/internet_gaming.h"
-#include "network/netclient.h"
-#include "network/nethost.h"
 #include "profile/profile.h"
 #include "sound/sound_handler.h"
 #include "ui_basic/messagebox.h"
@@ -283,9 +283,9 @@ WLApplication::WLApplication(int const argc, char const* const* const argv)
      game_type_(NONE),
      mouse_swapped_(false),
      faking_middle_mouse_button_(false),
-     mouse_position_(0, 0),
+     mouse_position_(Vector2i::zero()),
      mouse_locked_(0),
-     mouse_compensate_warp_(0, 0),
+     mouse_compensate_warp_(Vector2i::zero()),
      should_die_(false),
 #ifdef _WIN32
      homedir_(FileSystem::get_homedir() + "\\.widelands"),
@@ -469,7 +469,7 @@ bool WLApplication::poll_event(SDL_Event& ev) {
 	case SDL_MOUSEMOTION:
 		ev.motion.xrel += mouse_compensate_warp_.x;
 		ev.motion.yrel += mouse_compensate_warp_.y;
-		mouse_compensate_warp_ = Vector2i(0, 0);
+		mouse_compensate_warp_ = Vector2i::zero();
 
 		if (mouse_locked_) {
 			warp_mouse(mouse_position_);
@@ -665,7 +665,7 @@ void WLApplication::handle_mousebutton(SDL_Event& ev, InputCallback const* cb) {
 void WLApplication::warp_mouse(const Vector2i position) {
 	mouse_position_ = position;
 
-	Vector2i cur_position;
+	Vector2i cur_position = Vector2i::zero();
 	SDL_GetMouseState(&cur_position.x, &cur_position.y);
 	if (cur_position != position) {
 		mouse_compensate_warp_ += cur_position - position;
@@ -1164,27 +1164,30 @@ void WLApplication::mainmenu_multiplayer() {
 			FullscreenMenuNetSetupLAN ns;
 			menu_result = ns.run<FullscreenMenuBase::MenuTarget>();
 			std::string playername = ns.get_playername();
+			// TODO(Notabilis): This has to be updated for IPv6
 			uint32_t addr;
 			uint16_t port;
 			bool const host_address = ns.get_host_address(addr, port);
 
 			switch (menu_result) {
 			case FullscreenMenuBase::MenuTarget::kHostgame: {
-				NetHost netgame(playername);
+				GameHost netgame(playername);
 				netgame.run();
 				break;
 			}
 			case FullscreenMenuBase::MenuTarget::kJoingame: {
-				IPaddress peer;
-
 				if (!host_address)
 					throw WLWarning(
 					   "Invalid Address", "%s", "The address of the game server is invalid");
 
-				peer.host = addr;
-				peer.port = port;
-
-				NetClient netgame(&peer, playername);
+				// TODO(Notabilis): Make this prettier. I am aware that this is quite ugly but it should
+				// work
+				// for now and will be removed shortly when we switch to boost.asio
+				char ip_str[] = {"255.255.255.255"};
+				sprintf(ip_str, "%d.%d.%d.%d", (addr & 0x000000ff), (addr & 0x0000ff00) >> 8,
+				        (addr & 0x00ff0000) >> 16, (addr & 0xff000000) >> 24);
+				port = (port >> 8) | ((port & 0xFF) << 8);
+				GameClient netgame(ip_str, port, playername);
 				netgame.run();
 				break;
 			}
@@ -1206,11 +1209,13 @@ bool WLApplication::new_game() {
 	SinglePlayerGameSettingsProvider sp;
 	FullscreenMenuLaunchSPG lgm(&sp);
 	const FullscreenMenuBase::MenuTarget code = lgm.run<FullscreenMenuBase::MenuTarget>();
-	Widelands::Game game;
 
 	if (code == FullscreenMenuBase::MenuTarget::kBack) {
 		return false;
 	}
+
+	Widelands::Game game;
+
 	if (code == FullscreenMenuBase::MenuTarget::kScenarioGame) {  // scenario
 		try {
 			game.run_splayer_scenario_direct(sp.get_map().c_str(), "");

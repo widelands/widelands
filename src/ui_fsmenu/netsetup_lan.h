@@ -35,6 +35,7 @@
 struct NetOpenGame;
 struct NetGameInfo;
 
+// TODO(Notabilis): Update for IPv6
 class FullscreenMenuNetSetupLAN : public FullscreenMenuLoadMapOrGame {
 public:
 	FullscreenMenuNetSetupLAN();

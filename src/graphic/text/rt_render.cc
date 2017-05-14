@@ -26,7 +26,7 @@
 #include <vector>
 
 #include <SDL.h>
-#include <boost/algorithm/string/predicate.hpp>
+#include <boost/algorithm/string.hpp>
 #include <boost/format.hpp>
 
 #include "base/i18n.h"
@@ -39,6 +39,7 @@
 #include "graphic/graphic.h"
 #include "graphic/image_cache.h"
 #include "graphic/image_io.h"
+#include "graphic/playercolor.h"
 #include "graphic/text/bidi.h"
 #include "graphic/text/font_io.h"
 #include "graphic/text/font_set.h"
@@ -48,6 +49,7 @@
 #include "graphic/text_layout.h"
 #include "graphic/texture.h"
 #include "io/filesystem/filesystem_exceptions.h"
+#include "io/filesystem/layered_filesystem.h"
 
 using namespace std;
 
@@ -61,6 +63,24 @@ struct Borders {
 		left = top = right = bottom = 0;
 	}
 	uint8_t left, top, right, bottom;
+};
+
+/// How the width of a div should be calculated
+enum class WidthUnit {
+	kAbsolute,  // Width in pixels
+	kPercent,   // Width in percent
+	kShrink,    // Shrink width to content
+	kFill       // Expand width to fill all remaining space
+};
+
+struct DesiredWidth {
+	DesiredWidth(int init_width, WidthUnit init_unit) : width(init_width), unit(init_unit) {
+	}
+	DesiredWidth() : DesiredWidth(0, WidthUnit::kShrink) {
+	}
+
+	int width;
+	WidthUnit unit;
 };
 
 struct NodeStyle {
@@ -658,6 +678,7 @@ class DivTagRenderNode : public RenderNode {
 public:
 	DivTagRenderNode(NodeStyle& ns)
 	   : RenderNode(ns),
+	     desired_width_(),
 	     background_color_(0, 0, 0),
 	     is_background_color_set_(false),
 	     background_image_(nullptr) {
@@ -677,6 +698,10 @@ public:
 	}
 	uint16_t hotspot_y() override {
 		return height();
+	}
+
+	DesiredWidth desired_width() const {
+		return desired_width_;
 	}
 
 	Texture* render(TextureCache* texture_cache) override {
@@ -742,6 +767,9 @@ public:
 		h_ = inner_h;
 		margin_ = margin;
 	}
+	void set_desired_width(DesiredWidth input_width) {
+		desired_width_ = input_width;
+	}
 	void set_background(RGBColor clr) {
 		background_color_ = clr;
 		is_background_color_set_ = true;
@@ -758,6 +786,7 @@ public:
 	}
 
 private:
+	DesiredWidth desired_width_;
 	uint16_t w_, h_;
 	vector<RenderNode*> nodes_to_render_;
 	Borders margin_;
@@ -769,28 +798,37 @@ private:
 
 class ImgRenderNode : public RenderNode {
 public:
-	ImgRenderNode(NodeStyle& ns, const Image& image) : RenderNode(ns), image_(image) {
+	ImgRenderNode(NodeStyle& ns,
+	              const std::string& image_filename,
+	              double scale,
+	              const RGBColor& color,
+	              bool use_playercolor)
+	   : RenderNode(ns),
+	     image_(use_playercolor ? playercolor_image(color, image_filename) :
+	                              g_gr->images().get(image_filename)),
+	     scale_(scale) {
 	}
 
 	uint16_t width() override {
-		return image_.width();
+		return scale_ * image_->width();
 	}
 	uint16_t height() override {
-		return image_.height();
+		return scale_ * image_->height();
 	}
 	uint16_t hotspot_y() override {
-		return image_.height();
+		return scale_ * image_->height();
 	}
 	Texture* render(TextureCache* texture_cache) override;
 
 private:
-	const Image& image_;
+	const Image* image_;
+	const double scale_;
 };
 
 Texture* ImgRenderNode::render(TextureCache* /* texture_cache */) {
-	Texture* rv = new Texture(image_.width(), image_.height());
-	rv->blit(Rectf(0, 0, image_.width(), image_.height()), image_,
-	         Rectf(0, 0, image_.width(), image_.height()), 1., BlendMode::Copy);
+	Texture* rv = new Texture(width(), height());
+	rv->blit(Rectf(0, 0, width(), height()), *image_, Rectf(0, 0, image_->width(), image_->height()),
+	         1., BlendMode::Copy);
 	return rv;
 }
 // End: Helper Stuff
@@ -1031,7 +1069,29 @@ public:
 
 	void enter() override {
 		const AttrMap& a = tag_.attrs();
-		render_node_ = new ImgRenderNode(nodestyle_, *image_cache_->get(a["src"].get_string()));
+		RGBColor color;
+		bool use_playercolor = false;
+		const std::string image_filename = a["src"].get_string();
+		double scale = 1.0;
+
+		if (a.has("color")) {
+			color = a["color"].get_color();
+			use_playercolor = true;
+		}
+		if (a.has("width")) {
+			int width = a["width"].get_int();
+			if (width > renderer_style_.overall_width) {
+				log("WARNING: Font renderer: Specified image width of %d exceeds the overall available "
+				    "width of %d. Setting width to %d.\n",
+				    width, renderer_style_.overall_width, renderer_style_.overall_width);
+				width = renderer_style_.overall_width;
+			}
+			const int image_width = image_cache_->get(image_filename)->width();
+			if (width < image_width) {
+				scale = static_cast<double>(width) / image_width;
+			}
+		}
+		render_node_ = new ImgRenderNode(nodestyle_, image_filename, scale, color, use_playercolor);
 	}
 	void emit_nodes(vector<RenderNode*>& nodes) override {
 		nodes.push_back(render_node_);
@@ -1198,6 +1258,18 @@ public:
 			}
 		}
 
+		switch (render_node_->desired_width().unit) {
+		case WidthUnit::kPercent:
+			w_ = render_node_->desired_width().width * renderer_style_.overall_width / 100;
+			renderer_style_.remaining_width -= w_;
+			break;
+		case WidthUnit::kFill:
+			w_ = renderer_style_.remaining_width;
+			renderer_style_.remaining_width = 0;
+			break;
+		default:;  // Do nothing
+		}
+
 		// Layout takes ownership of subnodes
 		Layout layout(subnodes);
 		vector<RenderNode*> nodes_to_render;
@@ -1205,6 +1277,9 @@ public:
 		uint16_t extra_width = 0;
 		if (w_ < INFINITE_WIDTH && w_ > max_line_width) {
 			extra_width = w_ - max_line_width;
+		} else if (render_node_->desired_width().unit == WidthUnit::kShrink) {
+			w_ = max_line_width;
+			renderer_style_.remaining_width -= w_;
 		}
 
 		// Collect all tags from children
@@ -1230,9 +1305,7 @@ public:
 			w_ = max_line_width;
 		}
 
-		if (renderer_style_.remaining_width >= w_) {
-			renderer_style_.remaining_width -= w_;
-		} else {
+		if (renderer_style_.remaining_width < w_) {
 			renderer_style_.remaining_width = renderer_style_.overall_width;
 		}
 
@@ -1247,18 +1320,29 @@ public:
 	virtual void handle_unique_attributes() {
 		const AttrMap& a = tag_.attrs();
 		if (a.has("width")) {
+			shrink_to_fit_ = false;
+			w_ = INFINITE_WIDTH;
 			std::string width_string = a["width"].get_string();
 			if (width_string == "*") {
-				w_ = renderer_style_.remaining_width;
+				render_node_->set_desired_width(DesiredWidth(INFINITE_WIDTH, WidthUnit::kFill));
 			} else if (boost::algorithm::ends_with(width_string, "%")) {
 				width_string = width_string.substr(0, width_string.length() - 1);
-				uint8_t new_width_percent = strtol(width_string.c_str(), nullptr, 10);
-				w_ = floor(renderer_style_.overall_width * new_width_percent / 100);
-				w_ = std::min(w_, renderer_style_.remaining_width);
+				uint8_t width_percent = strtol(width_string.c_str(), nullptr, 10);
+				if (width_percent > 100) {
+					log("WARNING: Font renderer: Do not use width > 100%%\n");
+					width_percent = 100;
+				}
+				render_node_->set_desired_width(DesiredWidth(width_percent, WidthUnit::kPercent));
 			} else {
 				w_ = a["width"].get_int();
+				if (w_ > renderer_style_.overall_width) {
+					log("WARNING: Font renderer: Specified width of %d exceeds the overall available "
+					    "width of %d. Setting width to %d.\n",
+					    w_, renderer_style_.overall_width, renderer_style_.overall_width);
+					w_ = renderer_style_.overall_width;
+				}
+				render_node_->set_desired_width(DesiredWidth(w_, WidthUnit::kAbsolute));
 			}
-			shrink_to_fit_ = false;
 		}
 		if (a.has("float")) {
 			const string s = a["float"].get_string();

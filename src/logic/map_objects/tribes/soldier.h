@@ -175,7 +175,7 @@ class Soldier : public Worker {
 public:
 	Soldier(const SoldierDescr&);
 
-	void init(EditorGameBase&) override;
+	bool init(EditorGameBase&) override;
 	void cleanup(EditorGameBase&) override;
 
 	void set_level(uint32_t health, uint32_t attack, uint32_t defense, uint32_t evade);
@@ -219,7 +219,7 @@ public:
 	// Draw the info icon containing health bar and levels. If 'anchor_below' is
 	// true, the icon is drawn horizontally centered above Otherwise, the icon
 	// is drawn below and right of 'draw_position'.
-	void draw_info_icon(Vector2f draw_position,
+	void draw_info_icon(Vector2i draw_position,
 	                    const float scale,
 	                    const bool anchor_below,
 	                    RenderTarget*) const;

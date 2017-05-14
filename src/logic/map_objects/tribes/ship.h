@@ -59,7 +59,7 @@ struct NoteShipWindow {
 
 	Serial serial;
 
-	enum class Action { kRefresh, kClose };
+	enum class Action { kRefresh, kClose, kNoPortLeft };
 	const Action action;
 
 	NoteShipWindow(Serial init_serial, const Action& init_action)
@@ -120,7 +120,7 @@ struct Ship : Bob {
 
 	void init_auto_task(Game&) override;
 
-	void init(EditorGameBase&) override;
+	bool init(EditorGameBase&) override;
 	void cleanup(EditorGameBase&) override;
 
 	void start_task_ship(Game&);
@@ -264,7 +264,7 @@ private:
 	void ship_update_expedition(Game&, State&);
 	void ship_update_idle(Game&, State&);
 
-	void init_fleet(EditorGameBase&);
+	bool init_fleet(EditorGameBase&);
 	void set_fleet(Fleet* fleet);
 
 	void send_message(Game& game,
