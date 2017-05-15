@@ -1056,6 +1056,10 @@ void DefaultAI::late_initialization() {
 	vacant_mil_positions_average_ = 0;
 	
 	spots_avail.resize(4);
+	
+	trees_nearby_treshold_ = 3 + std::abs(management_data.get_military_number_at(121)) / 2;
+	
+	last_road_dismantled_ = 0;
 }
 
 /**
@@ -2408,22 +2412,18 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 					prio = bo.primary_priority;
 
 					if (bo.new_building == BuildingNecessity::kForced) {
-						prio += 200;
+						prio += 5 * std::abs(management_data.get_military_number_at(17));
 					}
+
+					if (bf->trees_nearby < trees_nearby_treshold_ && bo.new_building == BuildingNecessity::kAllowed) {
+						continue;
+					}
+
+					prio += std::abs(management_data.get_military_number_at(26)) * (bf->trees_nearby - trees_nearby_treshold_) / 10;
 
 					// consider cutters and rangers nearby
 					prio += 2 * bf->supporters_nearby.at(bo.outputs.at(0)) * std::abs(management_data.get_military_number_at(25));
-					prio += std::abs(management_data.get_military_number_at(26)) * (bf->trees_nearby - 10);
-					
-					if (bo.new_building == BuildingNecessity::kNeeded) {
-						prio *= 2;
-					} 
-					
-					prio -= bf->producers_nearby.at(bo.outputs.at(0)) * 20;
-					        //std::abs(management_data.get_military_number_at(25) / 3);
-					//prio += bf->supporters_nearby.at(bo.outputs.at(0)) * 5;
-
-					//prio += std::abs(management_data.get_military_number_at(26) / 10) * bf->trees_nearby;
+					prio -= bf->producers_nearby.at(bo.outputs.at(0)) * std::abs(management_data.get_military_number_at(36)) * 3;
 
 				} else if (bo.is(BuildingAttribute::kNeedsRocks)) {
 
@@ -2564,15 +2564,11 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 						}
 					}
 
-				} else if (bo.is(BuildingAttribute::kRecruitment) && !(expansion_type.get_expansion_type() != ExpansionMode::kEconomy)) {
-					// this will depend on number of mines_ and productionsites
-					if (static_cast<int32_t>((productionsites.size() + mines_.size()) / 30) >
-					       bo.total_count() &&
-					    (bo.cnt_under_construction + bo.unoccupied_count) == 0 &&
-					    // but only if current buildings are utilized enough
-					    (bo.total_count() == 0 || bo.current_stats > 60)) {
-						prio = 10;
-					}
+				} else if (bo.is(BuildingAttribute::kRecruitment)) {
+					prio = bo.primary_priority;
+					prio -= bf->unowned_land_nearby * 2;
+					prio -= (bf->enemy_nearby) * 100;
+					prio -= (expansion_type.get_expansion_type() != ExpansionMode::kEconomy) * 100;
 				} else {  // finally normal productionsites
 					assert(bo.production_hint < 0);
 
@@ -3014,6 +3010,10 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 		do {
 			blocked_fields.add(mr.location(), game().get_gametime() + block_time);
 		} while (mr.advance(map));
+	}
+
+	if (best_building->is(BuildingAttribute::kRecruitment)) {
+		printf ("Building a kRecruitment: %s\n", best_building->name);
 	}
 
 	if (!(best_building->type == BuildingObserver::Type::kMilitarysite)) {
@@ -3788,41 +3788,53 @@ bool DefaultAI::check_productionsites(uint32_t gametime) {
 	if (site.bo->is(BuildingAttribute::kLumberjack)) {
 
 		// do not dismantle immediatelly
-		if ((game().get_gametime() - site.built_time) < 4 * 60 * 1000) {
+		if ((game().get_gametime() - site.built_time) < 6 * 60 * 1000) {
 			return false;
 		}
-
-		const uint32_t remaining_trees = map.find_immovables(
-		   Area<FCoords>(map.get_fcoords(site.site->get_position()), radius), nullptr,
-		   FindImmovableAttribute(MapObjectDescr::get_attribute_id("tree")));
-
-		// generally, trees_around_cutters = remaining_trees + 9 *
-		// persistent_data->trees_around_cutters
-		// but keep in mind that trees_around_cutters is multiplied by 10
-		persistent_data->trees_around_cutters =
-		   remaining_trees + 9 * persistent_data->trees_around_cutters / 10;
-		   
-		//printf ("Trees around lumberjack: %3d, new trees_around_cutters: %3d\n", remaining_trees, persistent_data->trees_around_cutters);
-		assert(persistent_data->trees_around_cutters < 5000);
 
 		// Do not destruct the last few lumberjacks
 		if (site.bo->cnt_built <= site.bo->cnt_target) {
 			return false;
 		}
 
-		if (site.site->get_statistics_percent() > 20) {
+
+		const uint32_t remaining_trees = map.find_immovables(
+		   Area<FCoords>(map.get_fcoords(site.site->get_position()), radius), nullptr,
+		   FindImmovableAttribute(MapObjectDescr::get_attribute_id("tree")));
+
+		if (site.site->get_statistics_percent() > std::abs(management_data.get_military_number_at(117)) / 2) {
 			return false;
 		}
 
-		// do not dismantle if there are some trees remaining
-		if (remaining_trees > 5) {
+		if (remaining_trees > trees_nearby_treshold_ / 3){
 			return false;
 		}
 
-		// if we need wood badly
-		if (remaining_trees > 0 && get_stocklevel(*site.bo, gametime) <= 50) {
-			return false;
-		}
+		//// generally, trees_around_cutters = remaining_trees + 9 *
+		//// persistent_data->trees_around_cutters
+		//// but keep in mind that trees_around_cutters is multiplied by 10
+		//persistent_data->trees_around_cutters =
+		   //remaining_trees + 9 * persistent_data->trees_around_cutters / 10;
+		   
+		////printf ("Trees around lumberjack: %3d, new trees_around_cutters: %3d\n", remaining_trees, persistent_data->trees_around_cutters);
+		//assert(persistent_data->trees_around_cutters < 5000);
+
+		//// Do not destruct the last few lumberjacks
+		//if (site.bo->cnt_built <= site.bo->cnt_target) {
+			//return false;
+		//}
+
+
+
+		//// do not dismantle if there are some trees remaining
+		//if (remaining_trees > 5) {
+			//return false;
+		//}
+
+		//// if we need wood badly
+		//if (remaining_trees > 0 && get_stocklevel(*site.bo, gametime) <= 50) {
+			//return false;
+		//}
 
 		// so finally we dismantle the lumberjac
 		site.bo->last_dismantle_time = game().get_gametime();
@@ -4309,6 +4321,18 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 		}
 	}
 
+	if (bo.is(BuildingAttribute::kRecruitment)) {
+		if (bo.total_count()>1) {
+			return BuildingNecessity::kForbidden;
+		}
+		const uint16_t min_roads_count = 50 + std::abs(management_data.get_military_number_at(142)) * 5;
+		if (roads.size() <  min_roads_count) {
+			return BuildingNecessity::kForbidden;
+		}
+		bo.primary_priority = (roads.size() - min_roads_count) * (1 + std::abs(management_data.get_military_number_at(143)) / 5);
+		return BuildingNecessity::kNeeded;
+	}
+
 	// Let deal with productionsites now
 	// First we iterate over outputs of building, count warehoused stock
 	// and deciding if we have enough on stock (in warehouses)
@@ -4455,29 +4479,51 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 			if (bo.total_count() > 1 && (bo.cnt_under_construction + bo.unoccupied_count > 0)) {
 				return BuildingNecessity::kForbidden;
 			}
-			bo.cnt_target = 3 + static_cast<int32_t>(mines_.size() + productionsites.size()) / 20;
-			bo.cnt_target += (persistent_data->trees_around_cutters < 40) * -1;
-			bo.cnt_target += (persistent_data->trees_around_cutters > 100) * 2;
-			bo.cnt_target += (get_stocklevel(bo, gametime) < 20) * 2;
-			bo.cnt_target += (get_stocklevel(bo, gametime) < 5) * 2;
-			bo.cnt_target += (get_stocklevel(bo, gametime) > 60) * -2;
-
+			bo.cnt_target = 3;
 			// adjusting/decreasing based on cnt_limit_by_aimode
 			bo.cnt_target = limit_cnt_target(bo.cnt_target, bo.cnt_limit_by_aimode);
 
 			// for case the wood is not needed yet, to avoid inconsistency later on
 			bo.max_needed_preciousness = bo.max_preciousness;
-
-			bo.primary_priority = 60 - management_data.neuron_pool[57].get_result_safe(
-				       get_stocklevel(bo, gametime) / 3, kAbsValue);
+			
+			bo.primary_priority = 0;
+			
 			if (bo.total_count() < bo.cnt_target) {
-				bo.primary_priority += (bo.cnt_target - bo.total_count()) * std::abs(management_data.get_military_number_at(34));
-				if (gametime % 25 == 0) printf("Lumberjack needed,  now: %2d, target: %2d, logs on stock: %3d, prio: %3d\n", bo.total_count(), bo.cnt_target, get_stocklevel(bo, gametime), bo.primary_priority);
+				bo.primary_priority += 10 * std::abs(management_data.get_military_number_at(34));
+			}
+			if (get_stocklevel(bo, gametime) < 10){
+				bo.primary_priority += std::abs(management_data.get_military_number_at(118));				
+			}
+			if (bo.total_count() < bo.cnt_target) {
 				return BuildingNecessity::kNeeded;
 			} else {
-				if (gametime % 25 == 0) printf("Lumberjack allowed, now: %2d, target: %2d, logs on stock: %3d, prio: %3d\n", bo.total_count(), bo.cnt_target, get_stocklevel(bo, gametime), bo.primary_priority);
-				return BuildingNecessity::kAllowed;
+				return BuildingNecessity::kAllowed;				
 			}
+			
+			//bo.cnt_target = 3 + static_cast<int32_t>(mines_.size() + productionsites.size()) / 20;
+			//bo.cnt_target += (persistent_data->trees_around_cutters < 40) * -1;
+			//bo.cnt_target += (persistent_data->trees_around_cutters > 100) * 2;
+			//bo.cnt_target += (get_stocklevel(bo, gametime) < 20) * 2;
+			//bo.cnt_target += (get_stocklevel(bo, gametime) < 5) * 2;
+			//bo.cnt_target += (get_stocklevel(bo, gametime) > 60) * -2;
+
+			//// adjusting/decreasing based on cnt_limit_by_aimode
+			//bo.cnt_target = limit_cnt_target(bo.cnt_target, bo.cnt_limit_by_aimode);
+
+			//// for case the wood is not needed yet, to avoid inconsistency later on
+			//bo.max_needed_preciousness = bo.max_preciousness;
+
+			//const int16_t missing_stocks = 60 - std::max<int16_t>(60, get_stocklevel(bo, gametime));
+			//bo.primary_priority =  5 * management_data.neuron_pool[57].get_result_safe(
+				       //missing_stocks / 3, kAbsValue);
+			//if (bo.total_count() < bo.cnt_target) {
+				//bo.primary_priority += (bo.cnt_target - bo.total_count()) * std::abs(management_data.get_military_number_at(34));
+				//if (gametime % 25 == 0) printf("Lumberjack needed,  now: %2d, target: %2d, logs on stock: %3d, prio: %3d\n", bo.total_count(), bo.cnt_target, get_stocklevel(bo, gametime), bo.primary_priority);
+				//return BuildingNecessity::kNeeded;
+			//} else {
+				//if (gametime % 25 == 0) printf("Lumberjack allowed, now: %2d, target: %2d, logs on stock: %3d, prio: %3d\n", bo.total_count(), bo.cnt_target, get_stocklevel(bo, gametime), bo.primary_priority);
+				//return BuildingNecessity::kAllowed;
+			//}
 		} else if (bo.is(BuildingAttribute::kRanger)) { //NOCOM
 			
 			//making sure we have one completed lumberjack
@@ -4677,7 +4723,10 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 			if (mines_per_type[bo.mines].finished > 1 && bo.current_stats < 50) {
 				return BuildingNecessity::kForbidden;
 			}
-			assert(bo.last_building_built != kNever);
+			if (bo.last_building_built == kNever) { //NOCOM
+				printf ("%d: MASTERERROR: %s never built? but we have mines of such type already\n", player_number(), bo.name);
+			}
+	
 			if (gametime < bo.last_building_built + 3 * 60 * 1000) {
 				return BuildingNecessity::kForbidden;
 			}

@@ -280,6 +280,7 @@ private:
 	int32_t scheduler_delay_counter_;
 
 	WoodPolicy wood_policy_;
+	uint16_t trees_nearby_treshold_;
 
 	std::vector<Widelands::BuildingObserver> buildings_;
 	std::list<Widelands::FCoords> unusable_fields;
