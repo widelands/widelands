@@ -32,91 +32,28 @@ function artifacts()
 
    local objective = add_campaign_objective(obj_find_artifacts)
 
-   local artifact_fields = {}
-   local i = 1
-   -- Find all artifacts
-   for x=0, map.width-1 do
-      for y=0, map.height-1 do
-         local field = map:get_field(x,y)
-         if field.immovable and field.immovable:has_attribute("artifact") then
-            -- This assumes that the immovable has size small or medium, i.e. only occupies one field
-            artifact_fields[i] = map:get_field(x,y)
-            i = i + 1
-         end
-      end
-   end
-
-
-   -- Remember which artifacts have been found
-   --    0 = not found yet
-   --    1 = currently owned
-   --   -1 = we owned it previously but lost it
-   local artifacts_found = {}
-   for idx, f in ipairs(artifact_fields) do
-      artifacts_found[idx] = 0
-   end
-
    -- We send a slightly different message the first time
    local first_message = true
-
+   local artifact_fields = get_artifact_fields()
    repeat
-      local all_artifacts_found = true
       for idx, f in ipairs(artifact_fields) do
          sleep(2000)
-         if f.owner ~= p1 then
-            if artifacts_found[idx] == 1 then
-               -- We just lost it, send a message
-               send_message(
-                  p1,
-                  -- TRANSLATORS: Short message title. Translate as "Lost!" if you don't have enough space.
-                  pgettext("message_short_title", "Artifact lost!"),
-                  rt("image=".. f.immovable.descr.representative_image,
-                     p(_"We just lost a piece of Neptune’s shrine! We need to reconquer it so that we can return home safely.")
-                  ),
-                  {
-                     field = f,
-                     popup = true,
-                     icon = f.immovable.descr.representative_image,
-                     heading = pgettext("message_heading", "We lost a piece of our holy shrine!")
-                  }
-               )
-               artifacts_found[idx] = -1
+         if f.owner == p1 then
+            -- We have found a new artifact
+            local prior_center = scroll_to_field(f)
+            campaign_message_box(diary_page_6(first_message, #artifact_fields - 1))
+            scroll_to_map_pixel(prior_center)
+            first_message = false
+            if f.immovable then
+               f.immovable:remove()
+               sleep(2000)
+            else
+               print("Failed to remove artifact at (" .. f.x .. ", " .. f.y .. ")")
             end
-            all_artifacts_found = false
-         else
-            -- We own it, check if it's newly found
-            if artifacts_found[idx] == 0 or first_message then
-               artifacts_found[idx] = 1
-               -- Count how many artifacts we have already found
-               local count_found = 0
-               for j, state in ipairs(artifacts_found) do
-                  if state ~= 0 then count_found = count_found + 1 end
-               end
-
-               local prior_center = scroll_to_field(f)
-               campaign_message_box(diary_page_6(first_message, #artifact_fields - count_found))
-               scroll_to_map_pixel(prior_center)
-               first_message = false
-            end
-            artifacts_found[idx] = 1
+            artifact_fields = get_artifact_fields()
          end
       end
-   until all_artifacts_found
-
-   -- Check that we still have them all
-   -- Code Review: What is the purpose of this repeat loop? From my understanding of the code we will only reach this after the first loop has been completed and therefore we own all of them. 
-   -- For this reason I think the loop will only be run through once 
-   
-   repeat
-      sleep(2000)
-      local all_artifacts_found = true
-      for idx, f in ipairs(artifact_fields) do
-         if f.owner ~= p1 then
-            all_artifacts_found = false
-            break
-         end
-      end
-   until all_artifacts_found
+   until #artifact_fields == 0
 
    campaign_message_box(saledus_9)
    objective.done = true

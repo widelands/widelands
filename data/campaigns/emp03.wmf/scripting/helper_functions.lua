@@ -1,5 +1,20 @@
 -- Helper functions for campaign emp03
 
+function get_artifact_fields()
+   -- Returns a table of all map fields that contain an artifact
+   local artifact_fields = {}
+   for x=0, map.width-1 do
+      for y=0, map.height-1 do
+         local field = map:get_field(x,y)
+         if field.immovable and field.immovable:has_attribute("artifact") then
+            -- This assumes that the immovable has size small or medium, i.e. only occupies one field
+            table.insert(artifact_fields, map:get_field(x,y))
+         end
+      end
+   end
+   return artifact_fields
+end
+
 function count_buildings_by_name(plr, tbl)
    -- return overall amount of buildings:
    -- plr : Player to count for
