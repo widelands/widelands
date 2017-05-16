@@ -262,16 +262,20 @@ void InternetGaming::handle_metaserver_communication() {
 	if (error())
 		return;
 	try {
-		assert(net != nullptr);
-		// Check if the connection is still open
-		if (!net->is_connected()) {
-			handle_failed_read();
-			return;
-		}
-		// Process all available packets
-		RecvPacket packet;
-		while (net->try_receive(&packet)) {
-			handle_packet(packet);
+		while (net != nullptr) {
+			// Check if the connection is still open
+			if (!net->is_connected()) {
+				handle_failed_read();
+				return;
+			}
+			// Process all available packets
+			RecvPacket packet;
+			if (net->try_receive(&packet)) {
+				handle_packet(packet);
+			} else {
+				// Nothing more to receive
+				break;
+			}
 		}
 	} catch (const std::exception& e) {
 		logout((boost::format(_("Something went wrong: %s")) % e.what()).str());
