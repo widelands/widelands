@@ -41,15 +41,17 @@ function artifacts()
          if f.owner == p1 then
             -- We have found a new artifact
             local prior_center = scroll_to_field(f)
+			sleep(500)
             campaign_message_box(diary_page_6(first_message, #artifact_fields - 1))
-            scroll_to_map_pixel(prior_center)
-            first_message = false
-            if f.immovable then
+			sleep(1000)
+			if f.immovable then
                f.immovable:remove()
                sleep(2000)
             else
                print("Failed to remove artifact at (" .. f.x .. ", " .. f.y .. ")")
             end
+            scroll_to_map_pixel(prior_center)
+            first_message = false
             artifact_fields = get_artifact_fields()
          end
       end

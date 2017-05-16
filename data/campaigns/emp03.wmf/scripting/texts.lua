@@ -636,7 +636,7 @@ function diary_page_6(first_message, missing)
       ngettext([[We still need to discover %d piece of our shrine.]], [[We still need to discover %d pieces of our shrine.]], missing):bformat(missing)
    else
    -- TRANSLATORS: Lutius - Diary
-      text = _([[Finally, we have discovered the last piece of our shrine. Praise Neptune!]])
+      text = _([[Finally, we have discovered the last piece of our shrine. Now we can reassemble it to worship our god. Praise Neptune!]])
    end
    return {
       title=_"Artifact Found",
