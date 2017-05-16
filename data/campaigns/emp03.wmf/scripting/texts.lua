@@ -48,7 +48,7 @@ obj_build_quarry = {
    title=_"Build a quarry",
    number = 1,
    body = objective_text(_"Quarry",
-      listitem_bullet(_[[Build a quarry close to the abundant rocks, so we can free some building plots and get some valueable resources.]])
+      listitem_bullet(_[[Build a quarry close to the abundant rocks, so we can free some building plots and get some valuable resources.]])
    ),
 }
 
@@ -111,6 +111,7 @@ obj_build_expedition_ports = {
    name = "build_expedition_ports",
    title=_"Build 2 ports on distant islands",
    number = 1,
+   -- TRANSLATORS: Objective - create 2 expeditions and found new colonies with them
    body = objective_text(_"Build 2 Expedition Ports",
       listitem_bullet(_[[We should explore the island in the south. Use an expedition to build a port there. Afterwards, let’s try to find some mining resources.]]) ..
      listitem_bullet(_[[We should send a ship nothwards to gather some intelligence about the Barbarians. Try to build a port on the island and found an outpost.]])
@@ -146,9 +147,10 @@ obj_find_all_ports = {
 
 obj_find_artifacts = {
    name = "find_neptunes_shrine",
+   -- TRANSLATORS: Objective header
    title=_"Recover the shrine",
    number = 1,
-   body = text_line("</p><p font-size=14 font-weight=bold font-color=d1d1d1 line-spacing=6>Find the Holy Shrine<br>",
+   body = text_line("</p>".. h2(_"Find the Holy Shrine"),
        listitem_bullet(_[[We need to find and secure all six pieces of the holy shrine of Neptune.]]), "map:artifacts_models.png")
 }
 
@@ -208,7 +210,7 @@ diary_page_3 = {
       _([[To make matters even worse, all the land we can see is blocked by rocks and trees. I fear we won’t find the resources we need to build a new ship.]])
      .. paragraphdivider() ..
       -- TRANSLATORS: Lutius - Diary
-      _([[I really don’t know if and how we will get back home. And the war is going on without us. I hope my comrades are defending our empire well.]])),
+      _([[I really don’t know if and how we will get back home. And the war is going on without us. I hope my fellow soldiers are defending our empire well.]])),
 
    posy=1,
    w=500,
@@ -228,13 +230,14 @@ amalea = {
     title=_"Amalea Interrupts",
     body= amalea1(_"Amalea raises her hand…",
     -- TRANSLATORS: Amalea
-    _([[Salve Lutius. As we don’t know how many resources we can get, we should be very restrictive in spending them. Even for military buildings, we should be very careful.]])),
+    _([[As we don’t know how many resources we can get, we should be very restrictive in spending them. Even for military buildings, we should be very careful.]])),
 
     posy=1,
    w=500,
 }
 
 saledus_1 = {
+   -- TRANSLATORS: Message header - Saledus is advising to save resources
    title=_"Save Resources",
    body= saledus2(_"Saledus is nodding in agreement…",
       -- TRANSLATORS: Saledus
@@ -310,10 +313,10 @@ amalea_10 = {
    title=_"Amalea Looks Happy",
    body= amalea2(_"Amalea comes in…",
       -- TRANSLATORS: Amalea
-      _([[Ave Lutius. I have excellent progress to report now.]])
+      _([[I have excellent progress to report now.]])
       .. paragraphdivider() ..
       -- TRANSLATORS: Amalea
-      _([[I found out that the construction of the lumberjack´s house and the sawmill is complete, so we can begin to harvest logs and make planks out of them.]])
+      _([[I found out that the construction of the lumberjack’s house and the sawmill is complete, so we can begin to harvest logs and make planks out of them.]])
       .. paragraphdivider() ..
       -- TRANSLATORS: Amalea
       _([[This is a great step forward in constructing advanced buildings. And we can think of using some planks to build new ships.]])),
@@ -323,7 +326,7 @@ amalea_10 = {
 
 saledus_3 = {
    title=_"We Need a Port",
-   body= saledus2(_"Saledus thoughtfully…",
+   body= saledus2(_"Saledus is thoughtful…",
       -- TRANSLATORS: Saledus
       _([[Sire, I just pondered our way home. It is of utmost importance to build a port for loading our ships and starting an expedition.]])
       .. paragraphdivider() ..
@@ -362,7 +365,7 @@ amalea_4 = {
       _([[So, we need more cloth to finally be able to build ships. But there is no space on the island for building a whole economy to produce cloth. Therefore, we need to build the necessary wares step by step.]])
       .. paragraphdivider() ..
       -- TRANSLATORS: Amalea
-      _([[So, let’s think this over. To weave cloth we need some wool from a sheep farm. The sheepfarm itself needs wheat and water to work. So, let’s find a space for a big building and build a wheat farm first.]])
+      _([[So, let’s think this over. To weave cloth we need some wool from a sheep farm. The sheepfarm itself needs wheat and water to work. So, let’s find a space for a big building and build a farm first.]])
      .. paragraphdivider() ..
      -- TRANSLATORS: Amalea
       _([[After the production of enough wheat, we can dismantle the farm and build a sheep farm to produce wool. Later on, we could build a weaving mill in the same spot to use our wool for weaving cloth. But for the moment being, let’s start by producing a reasonable amount of wheat.]])
@@ -385,7 +388,7 @@ diary_page_4 = {
 }
 
 amalea_5 = {
-   title=_"Amalea Proud",
+   title=_"Amalea is Proud",
    body= amalea2(_"Amalea cheers…",
       -- TRANSLATORS: Amalea
       _([[Well done so far. We have produced enough wheat. Now dismantle the farm and build the next building in the production chain.]])
@@ -423,7 +426,7 @@ saledus_5 = {
 
 amalea_6 = {
    title=_"Amalea Advises",
-   body= amalea3(_"Amalea looks thoughtfully…",
+   body= amalea3(_"Amalea looks thoughtful…",
       -- TRANSLATORS: Amalea
       _([[Salve Lutius. While talking to all our brave builders, they told me that they had to use up all our remaining gold for building the port. Now we don’t have any gold left.]])
       .. paragraphdivider() ..
@@ -541,7 +544,7 @@ saledus_7 = {
       -- TRANSLATORS: Saledus
       _([[Sire, finally we have defeated the Barbarians in this region. And furthermore, we have built a nice colony for our empire.]])
       .. paragraphdivider() ..
-      _([[Caesar will be very pleased about our victory.]])),
+      _([[The king will be very pleased with our victory.]])),
    posy=1,
    w=500,
 }
@@ -630,10 +633,10 @@ function diary_page_6(first_message, missing)
    if missing > 0 then
       text = text .. paragraphdivider() ..
       -- TRANSLATORS: Lutius - Diary
-      ngettext([[We still need to discover %d piece of our shrine]], [[We still need to discover %d pieces of our shrine]], missing):bformat(missing)
+      ngettext([[We still need to discover %d piece of our shrine.]], [[We still need to discover %d pieces of our shrine.]], missing):bformat(missing)
    else
    -- TRANSLATORS: Lutius - Diary
-      text = _([[Finally, we have discovered the last piece of our shrine. Praise Neptune!]])  
+      text = _([[Finally, we have discovered the last piece of our shrine. Praise Neptune!]])
    end
    return {
       title=_"Artifact Found",
