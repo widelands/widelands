@@ -122,6 +122,7 @@ wl_library(widelands_ball_of_mud
     sound
     ui_basic
     ui_fsmenu
+    ui_fsmenu_options
     wui
 )
 

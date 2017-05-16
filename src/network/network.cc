@@ -23,7 +23,6 @@
 #include <boost/asio.hpp>
 
 #include "base/log.h"
-#include "wlapplication.h"
 
 
 namespace {

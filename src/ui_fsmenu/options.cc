@@ -38,7 +38,7 @@
 #include "graphic/text_constants.h"
 #include "helper.h"
 #include "io/filesystem/layered_filesystem.h"
-#include "logic/save_handler.h"
+#include "logic/constants.h"
 #include "profile/profile.h"
 #include "scripting/lua_interface.h"
 #include "scripting/lua_table.h"
@@ -576,7 +576,7 @@ OptionsCtrl::OptionsStruct OptionsCtrl::options_struct(uint32_t active_tab) {
 	opt.message_sound = opt_section_.get_bool("sound_at_message", true);
 
 	// Saving options
-	opt.autosave = opt_section_.get_int("autosave", DEFAULT_AUTOSAVE_INTERVAL * 60);
+	opt.autosave = opt_section_.get_int("autosave", kDefaultAutosaveInterval * 60);
 	opt.rolling_autosave = opt_section_.get_int("rolling_autosave", 5);
 	opt.zip = !opt_section_.get_bool("nozip", false);
 	opt.write_syncstreams = opt_section_.get_bool("write_syncstreams", true);

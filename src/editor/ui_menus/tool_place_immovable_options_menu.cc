@@ -31,7 +31,6 @@
 #include "ui_basic/button.h"
 #include "ui_basic/checkbox.h"
 #include "ui_basic/textarea.h"
-#include "wlapplication.h"
 
 namespace {
 
