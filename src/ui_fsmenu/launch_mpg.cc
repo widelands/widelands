@@ -412,6 +412,12 @@ void FullscreenMenuLaunchMPG::refresh() {
 				win_condition_dropdown_.set_label(_(t->get_string("name")));
 				win_condition_dropdown_.set_tooltip(_(t->get_string("description")));
 			}
+		} catch (LuaScriptNotExistingError&) {
+			win_condition_dropdown_.set_label(_("Error"));
+			win_condition_dropdown_.set_tooltip(
+						(boost::format(_("Unable to load the win condition script file '%s'."))
+							% settings_->get_win_condition_script()).str());
+
 		} catch (LuaTableKeyError& e) {
 			log("LaunchMPG: Error loading win condition: %s %s\n",
 			    settings_->get_win_condition_script().c_str(), e.what());

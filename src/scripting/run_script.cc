@@ -21,6 +21,8 @@
 
 #include <memory>
 
+#include <boost/format.hpp>
+
 #include "io/filesystem/filesystem.h"
 #include "scripting/lua_table.h"
 
@@ -30,6 +32,9 @@ namespace {
 std::string get_file_content(FileSystem* fs, const std::string& filename) {
 	if (!fs || !fs->file_exists(filename)) {
 		throw LuaScriptNotExistingError(filename);
+	}
+	if (fs->is_directory(filename)) {
+		throw LuaScriptNotExistingError((boost::format("%s is a directory") % filename.c_str()).str());
 	}
 	size_t length;
 	void* input_data = fs->load(filename, length);
