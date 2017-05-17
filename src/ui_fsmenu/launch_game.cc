@@ -124,29 +124,23 @@ bool FullscreenMenuLaunchGame::init_win_condition_label() {
  */
 void FullscreenMenuLaunchGame::update_win_conditions() {
 	if (!init_win_condition_label()) {
-		Widelands::Map map;
-		std::unique_ptr<Widelands::MapLoader> ml =
-		   map.get_correct_loader(settings_->settings().mapfilename);
-		if (ml != nullptr) {
-			ml->preload_map(true);
-			load_win_conditions(map);
-		} else {
-			const std::string error_message =
-			   (boost::format(_("Unable to determine valid win conditions because the map '%s' could "
-			                    "not be loaded.")) %
-			    settings_->settings().mapfilename)
-			      .str();
-			win_condition_dropdown_.set_label(_("Error"));
-			win_condition_dropdown_.set_tooltip(error_message);
-			log("Launch Game: No map loader: %s\n", error_message.c_str());
+		std::set<std::string> tags;
+		if (!settings_->settings().mapfilename.empty()) {
+		 	Widelands::Map map;
+			std::unique_ptr<Widelands::MapLoader> ml =
+				map.get_correct_loader(settings_->settings().mapfilename);
+			if (ml != nullptr) {
+				ml->preload_map(true);
+				tags = map.get_tags();
+			}
 		}
+		load_win_conditions(tags);
 	}
 }
 
-void FullscreenMenuLaunchGame::load_win_conditions(const Widelands::Map& map) {
+void FullscreenMenuLaunchGame::load_win_conditions(const std::set<std::string>& tags) {
 	win_condition_dropdown_.clear();
 	try {
-		const std::set<std::string> tags = map.get_tags();
 		// Make sure that the last win condition is still valid. If not, pick the first one
 		// available.
 		if (last_win_condition_.empty()) {
