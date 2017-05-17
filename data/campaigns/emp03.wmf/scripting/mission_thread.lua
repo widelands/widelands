@@ -41,9 +41,9 @@ function artifacts()
          if f.owner == p1 then
             -- We have found a new artifact
             local prior_center = scroll_to_field(f)
-			sleep(500)
-            campaign_message_box(diary_page_6(first_message, #artifact_fields - 1))
 			sleep(1000)
+            campaign_message_box(diary_page_6(first_message, #artifact_fields - 1))
+			sleep(2000)
 			if f.immovable then
                f.immovable:remove()
                sleep(2000)
