@@ -1,0 +1,13 @@
+# Automatically created by Widelands _widelands_dev_widelands_empire_mission_3-1910_Release_x64 (Release)
+
+[global]
+packet_version="1"
+map_w="112"
+map_h="96"
+nr_players="2"
+name="Neptune’s Revenge"
+author="hessenfarmer"
+descr=_"On their way home to defend the Empire, the crew of Lutius was surprised by the will of the gods."
+hint=
+background="campaigns/emp03.wmf/pics/background.jpg"
+tags="artifacts,seafaring,unbalanced"
