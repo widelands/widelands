@@ -115,7 +115,7 @@
     is finished.
   - Window is no longer closed on enhance or dismantle.
   - Let the user select multiple entries in a table using Ctrl/Shift + Click
-   (multiple/range selection) and Ctrl+A (select all) where appropriate.
+    (multiple/range selection) and Ctrl+A (select all) where appropriate.
   - Implemented textual and pictorial dropdown menus. Dropdowns are used for win
     condition and multiplayer tribe selection in the launch game screens.
   - Fullscreen background images are now tiled rather than stretched.
