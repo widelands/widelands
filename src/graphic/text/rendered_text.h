@@ -104,12 +104,21 @@ struct RenderedText {
 	/// The height occupied  by all rects in pixels.
 	int height() const;
 
+	enum class CropMode {
+		kRenderTarget,  // The RenderTarget will handle the cropping
+		kHorizontal     // The draw() method will handle horizontal cropping only
+	};
+
 	/// Draw the rects. 'position', 'region' and 'align' are used to control the overall drawing
 	/// position and cropping
+	/// For 'cropmode', use kRenderTarget if you wish the text to fill the whole RenderTarget, e.g.
+	/// for scrolling panels. Use kHorizontal for horizontal croping in smaller elements, e.g. table
+	/// cells.
 	void draw(RenderTarget& dst,
 	          const Vector2i& position,
 	          const Recti& region,
-	          UI::Align align = UI::Align::kLeft) const;
+	          UI::Align align = UI::Align::kLeft,
+	          CropMode cropmode = CropMode::kRenderTarget) const;
 
 	/// Draw the rects without cropping. 'position' and 'align' are used to control the overall
 	/// drawing position
@@ -117,6 +126,16 @@ struct RenderedText {
 
 	/// Blit everything into a single texture. Use this only for testing purposes.
 	std::unique_ptr<Texture> as_texture() const;
+
+private:
+	/// Helper function for horizontal positioning & cropping
+	void blit_cropped(RenderTarget& dst,
+	                  int offset_x,
+	                  const Vector2i& position,
+	                  const Vector2i& blit_point,
+	                  const RenderedRect& rect,
+	                  const Recti& region,
+	                  Align align) const;
 };
 
 }  // namespace UI

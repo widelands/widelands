@@ -102,7 +102,7 @@ const UI::RenderedText* autofit_ui_text(const std::string& text,
 
 namespace UI {
 
-Align mirror_alignment(Align alignment);
+Align mirror_alignment(Align alignment, const std::string& checkme = "");
 
 void center_vertically(uint32_t h, Vector2i* pt);
 void correct_for_align(Align, uint32_t w, Vector2i* pt);

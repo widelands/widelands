@@ -151,7 +151,7 @@ void MultilineTextarea::draw(RenderTarget& dst) {
 
 		if (blit_width > 0 && blit_height > 0) {
 			int anchor = 0;
-			Align alignment = mirror_alignment(align_);
+			Align alignment = mirror_alignment(align_, text_);
 			switch (alignment) {
 			case UI::Align::kCenter:
 				anchor = (get_eff_w() - blit_width) / 2;

@@ -182,9 +182,14 @@ namespace UI {
  * This mirrors the horizontal alignment for RTL languages.
  *
  * Do not store this value as it is based on the global font setting.
+ *
+ * If 'checkme' is not empty, mirror the alignment if the first 20 characters contain an RTL
+ * character. Otherwise, mirror if the current fontset is RTL.
  */
-Align mirror_alignment(Align alignment) {
-	if (UI::g_fh1->fontset()->is_rtl()) {
+Align mirror_alignment(Align alignment, const std::string& checkme) {
+	bool do_swap_alignment = checkme.empty() ? UI::g_fh1->fontset()->is_rtl() :
+	                                           i18n::has_rtl_character(checkme.c_str(), 20);
+	if (do_swap_alignment) {
 		switch (alignment) {
 		case Align::kLeft:
 			alignment = Align::kRight;

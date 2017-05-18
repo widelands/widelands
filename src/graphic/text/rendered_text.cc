@@ -115,13 +115,33 @@ int RenderedText::height() const {
 void RenderedText::draw(RenderTarget& dst,
                         const Vector2i& position,
                         const Recti& region,
-                        Align align) const {
+                        Align align,
+                        CropMode cropmode) const {
 
-	// Un-const the position and adjust for the region's origin point
-	Vector2i aligned_pos(position.x - region.x, position.y - region.y);
-	UI::correct_for_align(align, region.w, &aligned_pos);
+	// Un-const the position and adjust for alignment according to region width
+	Vector2i aligned_pos(position.x, position.y);
+
+	// For cropping images that don't fit
+	int offset_x = 0;
+	if (cropmode == CropMode::kHorizontal) {
+		UI::correct_for_align(align, width(), &aligned_pos);
+		if (align != UI::Align::kLeft) {
+			for (const auto& rect : rects) {
+				offset_x = std::min(region.w - rect->width(), offset_x);
+			}
+			if (align == UI::Align::kCenter) {
+				offset_x /= 2;
+			}
+		}
+	} else {
+		aligned_pos.x -= region.x;
+		aligned_pos.y -= region.y;
+		UI::correct_for_align(align, region.w, &aligned_pos);
+	}
+
+	// Blit the rects
 	for (const auto& rect : rects) {
-		Vector2i blit_point(aligned_pos.x + rect->get_x(), aligned_pos.y + rect->get_y());
+		const Vector2i blit_point(aligned_pos.x + rect->get_x(), aligned_pos.y + rect->get_y());
 
 		// Draw Solid background Color
 		if (rect->has_background_color()) {
@@ -147,9 +167,16 @@ void RenderedText::draw(RenderTarget& dst,
 		if (rect->image()) {
 			switch (rect->mode()) {
 			// Draw a foreground texture
-			case RenderedRect::DrawMode::kBlit:
-				dst.blit(blit_point, rect->image());
-				break;
+			case RenderedRect::DrawMode::kBlit: {
+				switch (cropmode) {
+				case CropMode::kRenderTarget:
+					// dst will handle any cropping
+					dst.blit(blit_point, rect->image());
+					break;
+				case CropMode::kHorizontal:
+					blit_cropped(dst, offset_x, position, blit_point, *rect, region, align);
+				}
+			} break;
 			// Draw a background image (tiling)
 			case RenderedRect::DrawMode::kTile:
 				dst.tile(
@@ -157,9 +184,6 @@ void RenderedText::draw(RenderTarget& dst,
 				break;
 			}
 		}
-		// TODO(GunChleoc): Remove this line when testing is done.
-		// dst.draw_rect(Rectf(blit_point.x, blit_point.y, rect->width(), rect->height()),
-		// RGBColor(100, 100, 100));
 	}
 }
 
@@ -192,6 +216,48 @@ std::unique_ptr<Texture> RenderedText::as_texture() const {
 		}
 	}
 	return texture;
+}
+
+// Crop horizontally if it doesn't fit
+void RenderedText::blit_cropped(RenderTarget& dst,
+                                int offset_x,
+                                const Vector2i& position,
+                                const Vector2i& blit_point,
+                                const RenderedRect& rect,
+                                const Recti& region,
+                                Align align) const {
+
+	int blit_width = rect.width();
+	int cropped_left = 0;
+	if (align != UI::Align::kLeft) {
+		if (rect.get_x() + rect.width() + offset_x <= region.x) {
+			// Falls off the left-hand side
+			return;
+		}
+		if (rect.get_x() + offset_x < 0) {
+			// Needs cropping
+			blit_width = rect.width() + offset_x + rect.get_x() - region.x;
+			cropped_left = rect.width() - blit_width;
+		}
+	}
+
+	if (align != UI::Align::kRight) {
+		if (rect.get_x() + rect.width() - offset_x > region.w - region.x) {
+			blit_width = region.w - rect.get_x() - offset_x;
+		}
+	}
+
+	// Don't blit tiny or negative width
+	if (!(blit_width > 2)) {
+		return;
+	}
+
+	dst.blitrect(
+	   Vector2i(cropped_left > 0 ?
+	               position.x + region.x - (align == UI::Align::kRight ? region.w : region.w / 2) :
+	               blit_point.x,
+	            blit_point.y),
+	   rect.image(), Recti(cropped_left > 0 ? cropped_left : 0, region.y, blit_width, region.h));
 }
 
 }  // namespace UI

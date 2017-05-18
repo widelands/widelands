@@ -233,7 +233,7 @@ void Table<void*>::draw(RenderTarget& dst) {
 		Columns::size_type const nr_columns = columns_.size();
 		for (uint32_t i = 0, curx = 0; i < nr_columns; ++i) {
 			const Column& column = columns_[i];
-			int const curw = column.width;
+			const int curw = column.width;
 			Align alignment = mirror_alignment(column.alignment);
 
 			const Image* entry_picture = er.get_picture(i);
@@ -286,10 +286,10 @@ void Table<void*>::draw(RenderTarget& dst) {
 					}
 					dst.blit(Vector2i(draw_x, point.y + (lineheight - pich) / 2), entry_picture);
 				}
-				point.x += picw;
+				if (alignment != Align::kRight) {
+					point.x += picw;
+				}
 			}
-
-			++picw;  // A bit of margin between image and text
 
 			if (entry_string.empty()) {
 				curx += curw;
@@ -298,41 +298,25 @@ void Table<void*>::draw(RenderTarget& dst) {
 			const UI::RenderedText* rendered_text =
 			   UI::g_fh1->render(as_uifont(richtext_escape(entry_string)));
 
+			// Fix text alignment for BiDi languages if the entry contains an RTL character. We want
+			// this always on, e.g. for mixed language savegame filenames.
+			alignment = mirror_alignment(column.alignment, entry_string);
+
+			// Position the text according to alignment
 			switch (alignment) {
 			case UI::Align::kCenter:
 				point.x += (curw - picw) / 2;
 				break;
 			case UI::Align::kRight:
-				point.x += curw - 2 * picw;
+				point.x += curw - picw;
 				break;
 			case UI::Align::kLeft:
 				break;
 			}
 
-			// Add an offset for rightmost column when the scrollbar is shown.
-			int text_width = rendered_text->width();
-			if (i == nr_columns - 1 && scrollbar_->is_enabled()) {
-				text_width = text_width + scrollbar_->get_w();
-			}
-			UI::correct_for_align(alignment, text_width, &point);
-
-			// Crop to column width while blitting
-			if ((curw + picw) < text_width) {
-				// Fix positioning for BiDi languages.
-				if (UI::g_fh1->fontset()->is_rtl()) {
-					point.x = (alignment == UI::Align::kRight) ? curx : curx + picw;
-				}
-				// We want this always on, e.g. for mixed language savegame filenames
-				// Restrict check for efficiency
-				if (i18n::has_rtl_character(entry_string.c_str(), 20)) {
-					rendered_text->draw(
-					   dst, point, Recti(text_width - curw + picw, 0, text_width, lineheight));
-				} else {
-					rendered_text->draw(dst, point, Recti(0, 0, curw - picw, lineheight));
-				}
-			} else {
-				rendered_text->draw(dst, point, Recti(0, 0, curw - picw, lineheight));
-			}
+			constexpr int kMargin = 1;
+			rendered_text->draw(dst, point, Recti(kMargin, 0, curw - picw - 2 * kMargin, lineheight),
+			                    alignment, RenderedText::CropMode::kHorizontal);
 			curx += curw;
 		}
 

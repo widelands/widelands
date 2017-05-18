@@ -420,12 +420,11 @@ void BaseListselect::draw(RenderTarget& dst) {
 			         er.pic);
 		}
 
+		// Position the text according to alignment
 		Align alignment = i18n::has_rtl_character(er.name.c_str(), 20) ? Align::kRight : Align::kLeft;
 		if (alignment == UI::Align::kRight) {
 			point.x += maxw - picw;
 		}
-
-		UI::correct_for_align(alignment, rendered_text->width(), &point);
 
 		// Shift for image width
 		if (!UI::g_fh1->fontset()->is_rtl()) {
@@ -444,21 +443,7 @@ void BaseListselect::draw(RenderTarget& dst) {
 		if (lineheight < 0) {
 			break;
 		}
-
-		// Crop to column width while blitting
-		if ((alignment == UI::Align::kRight) &&
-		    (maxw + picw) < static_cast<uint32_t>(rendered_text->width())) {
-			// Fix positioning for BiDi languages.
-			point.x = 0;
-
-			// We want this always on, e.g. for mixed language savegame filenames, or the languages
-			// list
-			rendered_text->draw(dst, point, Recti(rendered_text->width() - maxw + picw, 0, maxw,
-			                                      rendered_text->height()));
-		} else {
-			rendered_text->draw(dst, point, Recti(0, 0, maxw, lineheight));
-		}
-
+		rendered_text->draw(dst, point, Recti(0, 0, maxw, lineheight), alignment, RenderedText::CropMode::kHorizontal);
 		y += get_lineheight();
 		++idx;
 	}
