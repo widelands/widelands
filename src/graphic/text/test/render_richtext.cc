@@ -33,6 +33,7 @@
 #include "config.h"
 #include "graphic/graphic.h"
 #include "graphic/image_io.h"
+#include "graphic/rendertarget.h"
 #include "graphic/text/rt_errors.h"
 #include "graphic/text/test/render.h"
 #include "graphic/texture.h"
@@ -140,11 +141,14 @@ int main(int argc, char** argv) {
 	try {
 		std::unique_ptr<UI::RenderedText> rendered_text(
 		   standalone_renderer.renderer()->render(txt, w, allowed_tags));
+		std::unique_ptr<Texture> texture(new Texture(rendered_text->width(), rendered_text->height()));
+		std::unique_ptr<RenderTarget> dst(new RenderTarget(texture.get()));
+		rendered_text->draw(*dst.get(), Vector2i::zero());
 
 		std::unique_ptr<FileSystem> fs(&FileSystem::create("."));
 		std::unique_ptr<StreamWrite> sw(fs->open_stream_write(outname));
 
-		if (!save_to_png(rendered_text->as_texture().get(), sw.get(), ColorType::RGBA)) {
+		if (!save_to_png(texture.get(), sw.get(), ColorType::RGBA)) {
 			std::cout << "Could not encode PNG." << std::endl;
 		}
 	} catch (RT::Exception& e) {

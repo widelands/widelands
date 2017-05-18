@@ -191,33 +191,6 @@ void RenderedText::draw(RenderTarget& dst, const Vector2i& position, UI::Align a
 	draw(dst, position, Recti(0, 0, width(), height()), align);
 }
 
-// For testing purposes only. Needs to mirror the draw function.
-std::unique_ptr<Texture> RenderedText::as_texture() const {
-	std::unique_ptr<Texture> texture(new Texture(width(), height()));
-	for (const auto& rect : rects) {
-		const Rectf dest(rect->x(), rect->y(), rect->width(), rect->height());
-
-		// Draw Solid background Color
-		if (rect->has_background_color()) {
-			texture->fill_rect(dest, rect->background_color());
-		}
-
-		if (rect->image()) {
-			switch (rect->mode()) {
-			// Draw a foreground texture
-			case RenderedRect::DrawMode::kBlit:
-				texture->blit(dest, *rect->image(), dest, 1., BlendMode::Copy);
-				break;
-			// Draw a background image (tiling)
-			// TODO(GunChleoc): Support tiling here
-			case RenderedRect::DrawMode::kTile:
-				break;
-			}
-		}
-	}
-	return texture;
-}
-
 // Crop horizontally if it doesn't fit
 void RenderedText::blit_cropped(RenderTarget& dst,
                                 int offset_x,

@@ -124,11 +124,8 @@ struct RenderedText {
 	/// drawing position
 	void draw(RenderTarget& dst, const Vector2i& position, UI::Align align = UI::Align::kLeft) const;
 
-	/// Blit everything into a single texture. Use this only for testing purposes.
-	std::unique_ptr<Texture> as_texture() const;
-
 private:
-	/// Helper function for horizontal positioning & cropping
+	/// Helper function for CropMode::kHorizontal
 	void blit_cropped(RenderTarget& dst,
 	                  int offset_x,
 	                  const Vector2i& position,
