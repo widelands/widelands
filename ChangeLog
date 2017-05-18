@@ -45,7 +45,8 @@
 
 ### Saveloading
 
-  - Old scenario save games will no longer work.
+  - Old scenario save games will no longer work due to changes to the map
+    scrolling functions.
   - Savehandler: Avoid reading config more than once per game
 
 ### AI
@@ -176,7 +177,7 @@
   - Renamed "sub" tag to "div" in new font renderer.
   - The new font renderer now sets the width properly and supports player color
     for images. Added width property to img tag
-- Buildings and ships now send their messages with the new font renderer.
+  - Buildings and ships now send their messages with the new font renderer.
   - Messages try to render with the new font renderer first, then fall back to
     the old font renderer for layouting messages that haven't been converted yet
     (and from savegames).
