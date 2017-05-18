@@ -95,7 +95,7 @@
 ### User Interface
 
   - Maps can now be zoomed using the mouse wheel or keyboard keys: CTRL+, CTRL-
-    to in in-/decrease, and CTRL+0 to reset. This also removes 0 as a possible
+    to in-/decrease, and CTRL+0 to reset. This also removes 0 as a possible
     landmark number.
   - All map transitions like jumping in messages and in the buildings menu are
     now animated.
