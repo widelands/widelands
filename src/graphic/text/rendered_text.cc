@@ -221,7 +221,7 @@ void RenderedText::blit_cropped(RenderTarget& dst,
 	}
 
 	// Don't blit tiny or negative width
-	if (!(blit_width > 2)) {
+	if (blit_width < 3) {
 		return;
 	}
 

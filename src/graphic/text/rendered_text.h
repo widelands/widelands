@@ -78,7 +78,7 @@ public:
 	/// Whether this rectangle was already visited by the font renderer
 	bool was_visited() const;
 
-	/// Whether this rectangle contains a background color rather than an image
+	/// Whether this rectangle contains a background color
 	bool has_background_color() const;
 	/// This rectangle's background color
 	const RGBColor& background_color() const;
@@ -105,14 +105,14 @@ struct RenderedText {
 	int height() const;
 
 	enum class CropMode {
-		kRenderTarget,  // The RenderTarget will handle the cropping
-		kHorizontal     // The draw() method will handle horizontal cropping only
+		kRenderTarget,  // The RenderTarget will handle all cropping
+		kHorizontal     // The draw() method will handle horizontal cropping
 	};
 
 	/// Draw the rects. 'position', 'region' and 'align' are used to control the overall drawing
-	/// position and cropping
+	/// position and cropping.
 	/// For 'cropmode', use kRenderTarget if you wish the text to fill the whole RenderTarget, e.g.
-	/// for scrolling panels. Use kHorizontal for horizontal croping in smaller elements, e.g. table
+	/// for scrolling panels. Use kHorizontal for horizontal cropping in smaller elements, e.g. table
 	/// cells.
 	void draw(RenderTarget& dst,
 	          const Vector2i& position,

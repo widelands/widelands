@@ -211,8 +211,7 @@ void Button::draw(RenderTarget& dst) {
 		                   is_monochrome ? UI_FONT_CLR_DISABLED : UI_FONT_CLR_FG);
 		// Blit on pixel boundary (not float), so that the text is blitted pixel perfect.
 		rendered_text->draw(dst, Vector2i((get_w() - rendered_text->width()) / 2,
-		                                  (get_h() - rendered_text->height()) / 2),
-		                    Recti(0, 0, rendered_text->width(), rendered_text->height()));
+		                                  (get_h() - rendered_text->height()) / 2));
 	}
 
 	//  draw border
