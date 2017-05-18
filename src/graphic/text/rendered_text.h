@@ -61,9 +61,9 @@ public:
 	const Image* image() const;
 
 	/// The x position of the rectangle
-	int get_x() const;
+	int x() const;
 	/// The y position of the rectangle
-	int get_y() const;
+	int y() const;
 	/// The width of the rectangle
 	int width() const;
 	/// The height of the rectangle

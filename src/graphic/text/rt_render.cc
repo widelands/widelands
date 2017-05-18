@@ -834,7 +834,7 @@ public:
 			for (auto& rendered_rect : renderme->rects) {
 				if (rendered_rect->was_visited()) {
 					rendered_rect->set_origin(Vector2i(
-					   x() + rendered_rect->get_x(), y() + rendered_rect->get_y() + margin_.top));
+					   x() + rendered_rect->x(), y() + rendered_rect->y() + margin_.top));
 
 				} else {
 					rendered_rect->set_origin(

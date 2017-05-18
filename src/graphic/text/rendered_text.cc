@@ -59,11 +59,11 @@ const Image* RenderedRect::image() const {
 	return image_;
 }
 
-int RenderedRect::get_x() const {
+int RenderedRect::x() const {
 	return rect_.x;
 }
 
-int RenderedRect::get_y() const {
+int RenderedRect::y() const {
 	return rect_.y;
 }
 
@@ -100,14 +100,14 @@ RenderedRect::DrawMode RenderedRect::mode() const {
 int RenderedText::width() const {
 	int result = 0;
 	for (const auto& rect : rects) {
-		result = std::max(result, rect->get_x() + rect->width());
+		result = std::max(result, rect->x() + rect->width());
 	}
 	return result;
 }
 int RenderedText::height() const {
 	int result = 0;
 	for (const auto& rect : rects) {
-		result = std::max(result, rect->get_y() + rect->height());
+		result = std::max(result, rect->y() + rect->height());
 	}
 	return result;
 }
@@ -141,7 +141,7 @@ void RenderedText::draw(RenderTarget& dst,
 
 	// Blit the rects
 	for (const auto& rect : rects) {
-		const Vector2i blit_point(aligned_pos.x + rect->get_x(), aligned_pos.y + rect->get_y());
+		const Vector2i blit_point(aligned_pos.x + rect->x(), aligned_pos.y + rect->y());
 
 		// Draw Solid background Color
 		if (rect->has_background_color()) {
@@ -195,7 +195,7 @@ void RenderedText::draw(RenderTarget& dst, const Vector2i& position, UI::Align a
 std::unique_ptr<Texture> RenderedText::as_texture() const {
 	std::unique_ptr<Texture> texture(new Texture(width(), height()));
 	for (const auto& rect : rects) {
-		const Rectf dest(rect->get_x(), rect->get_y(), rect->width(), rect->height());
+		const Rectf dest(rect->x(), rect->y(), rect->width(), rect->height());
 
 		// Draw Solid background Color
 		if (rect->has_background_color()) {
@@ -230,20 +230,20 @@ void RenderedText::blit_cropped(RenderTarget& dst,
 	int blit_width = rect.width();
 	int cropped_left = 0;
 	if (align != UI::Align::kLeft) {
-		if (rect.get_x() + rect.width() + offset_x <= region.x) {
+		if (rect.x() + rect.width() + offset_x <= region.x) {
 			// Falls off the left-hand side
 			return;
 		}
-		if (rect.get_x() + offset_x < 0) {
+		if (rect.x() + offset_x < 0) {
 			// Needs cropping
-			blit_width = rect.width() + offset_x + rect.get_x() - region.x;
+			blit_width = rect.width() + offset_x + rect.x() - region.x;
 			cropped_left = rect.width() - blit_width;
 		}
 	}
 
 	if (align != UI::Align::kRight) {
-		if (rect.get_x() + rect.width() - offset_x > region.w - region.x) {
-			blit_width = region.w - rect.get_x() - offset_x;
+		if (rect.x() + rect.width() - offset_x > region.w - region.x) {
+			blit_width = region.w - rect.x() - offset_x;
 		}
 	}
 
