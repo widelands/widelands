@@ -212,7 +212,7 @@ int LuaPanel::set_height(lua_State* L) {
 */
 int LuaPanel::get_position_x(lua_State* L) {
 	assert(panel_);
-	Vector2i p = panel_->to_parent(Vector2i(0, 0));
+	Vector2i p = panel_->to_parent(Vector2i::zero());
 
 	lua_pushint32(L, p.x);
 	return 1;
@@ -225,7 +225,7 @@ int LuaPanel::set_position_x(lua_State* L) {
 }
 int LuaPanel::get_position_y(lua_State* L) {
 	assert(panel_);
-	Vector2i p = panel_->to_parent(Vector2i(0, 0));
+	Vector2i p = panel_->to_parent(Vector2i::zero());
 
 	lua_pushint32(L, p.y);
 	return 1;
@@ -257,9 +257,9 @@ int LuaPanel::get_descendant_position(lua_State* L) {
 
 	UI::Panel* cur = (*get_base_user_class<LuaPanel>(L, 2))->panel_;
 
-	Vector2i cp = Vector2i(0, 0);
+	Vector2i cp = Vector2i::zero();
 	while (cur && cur != panel_) {
-		cp += cur->to_parent(Vector2i(0, 0));
+		cp += cur->to_parent(Vector2i::zero());
 		cur = cur->get_parent();
 	}
 

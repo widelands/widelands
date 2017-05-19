@@ -147,7 +147,7 @@ public:
 	/// * Conquers land if the the warehouse type is configured to do that.
 	/// * Sends a message to the player about the creation of this warehouse.
 	/// * Sets up @ref PortDock for ports
-	void init(EditorGameBase&) override;
+	bool init(EditorGameBase&) override;
 
 	void cleanup(EditorGameBase&) override;
 

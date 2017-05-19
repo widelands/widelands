@@ -148,7 +148,7 @@ void MilitarySite::update_statistics_string(std::string* s) {
 	        .str();
 }
 
-void MilitarySite::init(EditorGameBase& egbase) {
+bool MilitarySite::init(EditorGameBase& egbase) {
 	Building::init(egbase);
 
 	upcast(Game, game, &egbase);
@@ -167,6 +167,7 @@ void MilitarySite::init(EditorGameBase& egbase) {
 	nexthealtime_ = egbase.get_gametime() + 1000;
 	if (game)
 		schedule_act(*game, 1000);
+	return true;
 }
 
 /**

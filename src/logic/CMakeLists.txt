@@ -32,7 +32,6 @@ wl_library(logic_game_controller
     logic_constants
     profile
     ui_basic
-    widelands_ball_of_mud
     wui
 )
 
@@ -229,9 +228,11 @@ wl_library(logic
     game_io
     graphic
     graphic_color
+    graphic_fonthandler
     graphic_image_io
     graphic_playercolor
     graphic_surface
+    graphic_text_constants
     graphic_text_layout
     helper
     io_fileread
@@ -253,7 +254,6 @@ wl_library(logic
     scripting_lua_table
     sound
     ui_basic
-    widelands_ball_of_mud
     wui
     wui_mapview_pixelfunctions
 )

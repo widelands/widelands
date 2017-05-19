@@ -125,10 +125,10 @@ void Textarea::set_fixed_width(int w) {
  */
 void Textarea::draw(RenderTarget& dst) {
 	if (!text_.empty()) {
-		// Blit on pixel boundary (not float), so that the text is blitted pixel perfect.
-		Vector2f anchor(
+		Vector2i anchor(
 		   (align_ == Align::kCenter) ? get_w() / 2 : (align_ == UI::Align::kRight) ? get_w() : 0, 0);
-		dst.blit(anchor, rendered_text_, BlendMode::UseAlpha, align_);
+		UI::correct_for_align(align_, rendered_text_->width(), &anchor);
+		dst.blit(anchor, rendered_text_, BlendMode::UseAlpha);
 	}
 }
 
