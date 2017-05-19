@@ -33,7 +33,6 @@
 #include "logic/player.h"
 #include "ui_basic/box.h"
 #include "ui_basic/button.h"
-#include "wlapplication.h"
 #include "wui/interactive_gamebase.h"
 #include "wui/soldiercapacitycontrol.h"
 

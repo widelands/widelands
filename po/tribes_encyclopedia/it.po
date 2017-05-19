@@ -12,16 +12,16 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2014
 # Gabriel Rota <gabriel.rota@gmail.com>, 2009
 # GunChleoc, 2014
-# Guybrush88 <erpizzo@alice.it>, 2015-2016
+# Guybrush88 <erpizzo@alice.it>, 2015-2017
 # Luigi Lain <lainluigi86@tiscali.it>, 2015-2016
 # theo the best <enthusedquill6@gmail.com>, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-03-03 06:24+0000\n"
-"PO-Revision-Date: 2017-03-03 06:26+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2017-05-12 13:53+0000\n"
+"PO-Revision-Date: 2017-05-17 14:11+0000\n"
+"Last-Translator: Guybrush88 <erpizzo@alice.it>\n"
 "Language-Team: Italian (http://www.transifex.com/widelands/widelands/language/it/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1963,16 +1963,16 @@ msgstr "Pagina iniziale"
 #: ../../data/tribes/scripting/help/controls.lua:59
 msgctxt "hotkey"
 msgid "Ctrl + 1-9"
-msgstr ""
+msgstr "Ctrl + 1-9"
 
 #: ../../data/tribes/scripting/help/controls.lua:59
 msgid "Remember current location"
-msgstr ""
+msgstr "Ricorda la posizione corrente"
 
 #: ../../data/tribes/scripting/help/controls.lua:60
 msgctxt "hotkey"
 msgid "1-9"
-msgstr ""
+msgstr "1-9"
 
 #: ../../data/tribes/scripting/help/controls.lua:60
 msgid "Go to previously remembered location"
@@ -1983,7 +1983,7 @@ msgstr ""
 #: ../../data/tribes/scripting/help/controls.lua:62
 msgctxt "hotkey"
 msgid "Ctrl + +"
-msgstr ""
+msgstr "Ctrl + +"
 
 #: ../../data/tribes/scripting/help/controls.lua:62
 msgid "Increase zoom"
@@ -1994,7 +1994,7 @@ msgstr "Aumenta lo zoom"
 #: ../../data/tribes/scripting/help/controls.lua:64
 msgctxt "hotkey"
 msgid "Ctrl + -"
-msgstr ""
+msgstr "Ctrl + -"
 
 #: ../../data/tribes/scripting/help/controls.lua:64
 msgid "Decrease zoom"
@@ -2005,7 +2005,7 @@ msgstr "Riduci lo zoom"
 #: ../../data/tribes/scripting/help/controls.lua:66
 msgctxt "hotkey"
 msgid "Ctrl + 0"
-msgstr ""
+msgstr "Ctrl + 0"
 
 #: ../../data/tribes/scripting/help/controls.lua:66
 msgid "Reset zoom"
@@ -2057,7 +2057,7 @@ msgstr ""
 #: ../../data/tribes/scripting/help/controls.lua:80
 msgctxt "hotkey"
 msgid "Ctrl + Click"
-msgstr ""
+msgstr "Ctrl + Click"
 
 #: ../../data/tribes/scripting/help/controls.lua:80
 msgctxt "table_control"
@@ -2074,19 +2074,19 @@ msgstr ""
 #: ../../data/tribes/scripting/help/controls.lua:82
 msgctxt "hotkey"
 msgid "Shift + Click"
-msgstr ""
+msgstr "Shift + Click"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
 #: ../../data/tribes/scripting/help/controls.lua:84
 msgctxt "hotkey"
 msgid "Ctrl + A"
-msgstr ""
+msgstr "Ctrl + A"
 
 #: ../../data/tribes/scripting/help/controls.lua:84
 msgctxt "table_control"
 msgid "Select all entries"
-msgstr ""
+msgstr "Seleziona tutte le voci"
 
 #: ../../data/tribes/scripting/help/controls.lua:86
 msgid "Message Window"
@@ -2189,13 +2189,13 @@ msgstr ""
 #. productionsite
 #: ../../data/tribes/scripting/help/format_help.lua:178
 msgid "Workers consumed:"
-msgstr ""
+msgstr "Lavoratori consumati:"
 
 #. TRANSLATORS: Tribal Encyclopedia: Heading for wares consumed by a
 #. productionsite
 #: ../../data/tribes/scripting/help/format_help.lua:182
 msgid "Wares consumed:"
-msgstr ""
+msgstr "Merci consumate:"
 
 #. TRANSLATORS: Lore helptext for a building - it hasn't been written yet.
 #. TRANSLATORS: Purpose helptext for a building - it hasn't been written yet.
@@ -2227,7 +2227,7 @@ msgstr "Introduzione"
 #: ../../data/tribes/scripting/help/init.lua:70
 #: ../../data/tribes/scripting/help/tips.lua:71
 msgid "Tips"
-msgstr ""
+msgstr "Suggerimenti"
 
 #: ../../data/tribes/scripting/help/init.lua:79
 msgid "Wares"
@@ -2243,23 +2243,23 @@ msgstr "Riguardo a Widelands"
 
 #: ../../data/tribes/scripting/help/tips.lua:50
 msgid "Atlanteans"
-msgstr ""
+msgstr "Atlantidei"
 
 #: ../../data/tribes/scripting/help/tips.lua:53
 msgid "Barbarians"
-msgstr ""
+msgstr "Barbari"
 
 #: ../../data/tribes/scripting/help/tips.lua:56
 msgid "Empire"
-msgstr ""
+msgstr "Impero"
 
 #: ../../data/tribes/scripting/help/tips.lua:62
 msgid "Single Player"
-msgstr ""
+msgstr "Giocatore singolo"
 
 #: ../../data/tribes/scripting/help/tips.lua:65
 msgid "Multiplayer"
-msgstr ""
+msgstr "Multiplayer"
 
 #. TRANSLATORS: Put 2 sentences one after the other.
 #. Languages using Chinese script probably want to lose the blank space here.
@@ -3526,7 +3526,7 @@ msgid "Wool is the hair of sheep. Weaving mills use it to make cloth."
 msgstr "La lana è il pelo delle pecore. I mulini di tessitura la usano per produrre tessuto."
 
 #. TRANSLATORS: Helptext for a worker: Armorsmith
-#: ../../data/tribes/workers/atlanteans/armorsmith/helptexts.lua:3
+#: ../../data/tribes/workers/atlanteans/armorsmith/helptexts.lua:5
 msgctxt "atlanteans_worker"
 msgid "Produces armor for the soldiers."
 msgstr "Produce armature per i soldati."
