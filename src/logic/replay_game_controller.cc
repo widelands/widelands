@@ -22,7 +22,6 @@
 #include "logic/game.h"
 #include "logic/replay.h"
 #include "ui_basic/messagebox.h"
-#include "wlapplication.h"
 #include "wui/interactive_base.h"
 
 ReplayGameController::ReplayGameController(Widelands::Game& game, const std::string& filename)
