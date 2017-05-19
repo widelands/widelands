@@ -33,6 +33,7 @@ tribes:new_productionsite_type {
    },
 
    aihints = {
+      is_basic = true,
       prohibited_till = 600
    },
 

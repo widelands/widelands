@@ -32,7 +32,7 @@ tribes:new_productionsite_type {
    },
 
    aihints = {
-      forced_after = 800,
+      is_basic = true,
       prohibited_till = 180,
       very_weak_ai_limit = 1,
       weak_ai_limit = 2

@@ -31,7 +31,7 @@ tribes:new_productionsite_type {
    },
 
    aihints = {
-      forced_after = 600,
+      is_basic = true,
       very_weak_ai_limit = 1,
       weak_ai_limit = 2
    },

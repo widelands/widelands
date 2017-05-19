@@ -38,7 +38,7 @@ tribes:new_productionsite_type {
    },
 
    aihints = {
-      forced_after = 900
+      is_basic = true
    },
 
    working_positions = {

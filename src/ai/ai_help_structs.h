@@ -73,7 +73,8 @@ enum class BuildingAttribute : uint8_t {
 	kRecruitment,
 	kBuildingMatProducer,
 	kUpgradeSubstitutes,
-	kUpgradeExtends
+	kUpgradeExtends,
+	kSaw
 };
 
 enum class AiType : uint8_t  {
@@ -536,11 +537,11 @@ struct EnemySiteObserver {
 	int32_t attack_soldiers_competency;
 	int32_t defenders_strength;
 	uint8_t stationed_soldiers;
-	uint32_t last_time_attackable;
+	uint32_t last_time_seen;
 	uint32_t last_tested;
 	int16_t score;
 	Widelands::ExtendedBool mines_nearby;
-	int16_t no_attack_counter;
+	uint32_t last_time_attacked;
 };
 
 // as all mines have 3 levels, AI does not know total count of mines per mined material

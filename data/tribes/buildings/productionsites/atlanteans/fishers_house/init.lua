@@ -26,6 +26,7 @@ tribes:new_productionsite_type {
 
    aihints = {
       needs_water = true,
+      is_basic = true,
       prohibited_till = 600
    },
 

@@ -27,9 +27,9 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 	Map& map = game().map();
 
 	// define which players are attackable
-	std::vector<Attackable> player_attackable;
+	//std::vector<Attackable> player_attackable;
 	PlayerNumber const nr_players = map.get_nrplayers();
-	player_attackable.resize(nr_players);
+	//player_attackable.resize(nr_players);
 	uint32_t plr_in_game = 0;
 	Widelands::PlayerNumber const pn = player_number();
 
@@ -63,30 +63,30 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 
 	const uint32_t my_power = player_statistics.get_modified_player_power(pn);
 
-	// now we test all players to identify 'attackable' ones
-	for (Widelands::PlayerNumber j = 1; j <= plr_in_game; ++j) {
-		// if we are the same team, or it is just me
-		if (player_statistics.players_in_same_team(pn, j) || pn == j) {
-			player_attackable[j - 1] = Attackable::kNotAttackable;
-			continue;
-		}
+	//// now we test all players to identify 'attackable' ones
+	//for (Widelands::PlayerNumber j = 1; j <= plr_in_game; ++j) {
+		//// if we are the same team, or it is just me
+		//if (player_statistics.players_in_same_team(pn, j) || pn == j) {
+			//player_attackable[j - 1] = Attackable::kNotAttackable;
+			//continue;
+		//}
 
-		// now we compare strength
-		// strength of the other player (considering his team)
-		uint32_t players_power = player_statistics.get_modified_player_power(j);
+		//// now we compare strength
+		//// strength of the other player (considering his team)
+		//uint32_t players_power = player_statistics.get_modified_player_power(j);
 
-		if (players_power == 0) {
-			player_attackable.at(j - 1) = Attackable::kAttackable;
-		} else if (my_power * 100 / players_power > treshold_ratio * 8) {
-			player_attackable.at(j - 1) = Attackable::kAttackableVeryWeak;
-		} else if (my_power * 100 / players_power > treshold_ratio * 4) {
-			player_attackable.at(j - 1) = Attackable::kAttackableAndWeak;
-		} else if (my_power * 100 / players_power > treshold_ratio) {
-			player_attackable.at(j - 1) = Attackable::kAttackable;
-		} else {
-			player_attackable.at(j - 1) = Attackable::kNotAttackable;
-		}
-	}
+		//if (players_power == 0) {
+			//player_attackable.at(j - 1) = Attackable::kAttackable;
+		//} else if (my_power * 100 / players_power > treshold_ratio * 8) {
+			//player_attackable.at(j - 1) = Attackable::kAttackableVeryWeak;
+		//} else if (my_power * 100 / players_power > treshold_ratio * 4) {
+			//player_attackable.at(j - 1) = Attackable::kAttackableAndWeak;
+		//} else if (my_power * 100 / players_power > treshold_ratio) {
+			//player_attackable.at(j - 1) = Attackable::kAttackable;
+		//} else {
+			//player_attackable.at(j - 1) = Attackable::kNotAttackable;
+		//}
+	//}
 
 	// first we scan vicitnity of couple of militarysites to get new enemy sites
 	// Militarysites rotate (see check_militarysites())
@@ -115,6 +115,8 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 					player_statistics.set_last_time_seen(gametime, opn);
 					if (enemy_sites.count(bld->get_position().hash()) == 0) {
 						enemy_sites[bld->get_position().hash()] = EnemySiteObserver();
+					} else {
+						enemy_sites[bld->get_position().hash()].last_time_seen = gametime;
 					}
 				}
 			}
@@ -125,6 +127,8 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 					player_statistics.set_last_time_seen(gametime, opn);
 					if (enemy_sites.count(wh->get_position().hash()) == 0) {
 						enemy_sites[wh->get_position().hash()] = EnemySiteObserver();
+					} else {
+						enemy_sites[wh->get_position().hash()].last_time_seen = gametime;
 					}
 				}
 			}
@@ -136,6 +140,7 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 	uint8_t best_score = 0;
 	uint32_t count = 0;
 	// sites that were either conquered or destroyed
+	uint32_t site_to_be_removed = std::numeric_limits<uint32_t>::max();
 	std::vector<uint32_t> disappeared_sites;
 
 	// Willingness to attack depend on how long ago the last soldier has been trained. This is used
@@ -144,7 +149,7 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 	// Moreover the stronger AI the more sensitive to it it is (a score of attack willingness is more
 	// decreased if promotion of soldiers is stalled)
 	int8_t general_score = 0;
-	if (persistent_data->last_soldier_trained > gametime) {
+	if (soldier_trained_log.count(gametime) == 0) {
 		// No soldier was ever trained ...
 		switch (type_) {
 		case Widelands::AiType::kNormal:
@@ -160,6 +165,22 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 
 	const bool strong_enough = player_statistics.strong_enough(pn);
 
+
+	
+	//removing sites we saw too long ago
+	for (std::map<uint32_t, EnemySiteObserver>::iterator site = enemy_sites.begin();
+	     site != enemy_sites.end(); ++site) {
+			if (site->second.last_time_seen + 20 * 60 * 1000 < gametime) {
+				disappeared_sites.push_back(site->first);
+			}
+	}
+	while (!disappeared_sites.empty()) {
+		//printf ("  removing site %d from enemysites\n", disappeared_sites.back());
+		enemy_sites.erase(disappeared_sites.back());
+		disappeared_sites.pop_back();
+	}
+
+	site_to_be_removed = std::numeric_limits<uint32_t>::max();
 	for (std::map<uint32_t, EnemySiteObserver>::iterator site = enemy_sites.begin();
 	     site != enemy_sites.end(); ++site) {
 
@@ -168,7 +189,9 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 		    count > 12) {
 			continue;
 		}
-		count += 1;
+
+		//printf ("%2d: considering site at %3dx%3d for attack, enemsites: %2lu\n",
+		//player_number(),Coords::unhash(site->first).x, Coords::unhash(site->first).y, enemy_sites.size());
 
 		site->second.last_tested = gametime;
 		uint8_t defenders_strength = 0;
@@ -182,7 +205,7 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 		// testing if we can attack the building - result is a flag
 		// if we dont get a flag, we remove the building from observers list
 		FCoords f = map.get_fcoords(Coords::unhash(site->first));
-		uint32_t site_to_be_removed = std::numeric_limits<uint32_t>::max();
+
 		Flag* flag = nullptr;
 
 		if (upcast(MilitarySite, bld, f.field->get_immovable())) {
@@ -231,10 +254,10 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 
 			site->second.is_warehouse = is_warehouse;
 
-			// getting rid of default
-			if (site->second.last_time_attackable == kNever) {
-				site->second.last_time_attackable = gametime;
-			}
+			//// getting rid of default
+			//if (site->second.last_time_attackable == kNever) {
+				//site->second.last_time_attackable = gametime;
+			//}
 
 			// can we attack:
 			if (is_attackable) {
@@ -256,138 +279,211 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 			}
 
 			site->second.defenders_strength = defenders_strength;
+			
+			site->second.score = 0;
 
-			if (site->second.attack_soldiers_strength > 0 &&
-			    (player_attackable[owner_number - 1] == Attackable::kAttackable ||
-			     player_attackable[owner_number - 1] == Attackable::kAttackableAndWeak ||
-			     player_attackable[owner_number - 1] == Attackable::kAttackableVeryWeak)) {
+			if (site->second.attack_soldiers_strength > 0 && !player_statistics.players_in_same_team(pn, owner_number)) {
 
-				// treating no attack score
-				if (site->second.no_attack_counter < 0) {  // NOCOM move this higher
-					// we cannot attack yet
-					site->second.score = 0;
-					// but increase the counter by 1
-					site->second.no_attack_counter += 1;
-				} else {
+				//// treating no attack score
+				//if (site->second.no_attack_counter < 0) {  // NOCOM move this higher
+					//// we cannot attack yet
+					//site->second.score = 0;
+					//// but increase the counter by 1
+					//site->second.no_attack_counter += 1;
+				//} else {
 
-					int16_t inputs[2 * f_neuron_bit_size] = {0};
-					inputs[0] =
-					   (site->second.attack_soldiers_strength - site->second.defenders_strength) *
-					   std::abs(management_data.get_military_number_at(114)) / 30;
-					inputs[1] =
-					   (site->second.attack_soldiers_strength - site->second.defenders_strength) *
-					   std::abs(management_data.get_military_number_at(115)) / 30;
-					inputs[2] = (is_warehouse) ? 4 : 0;
-					inputs[3] = (is_warehouse) ? 2 : 0;
-					inputs[4] = (site->second.attack_soldiers_competency > 15) ? 2 : 0;
-					inputs[5] = (site->second.attack_soldiers_competency > 25) ? 4 : 0;
-					;
-					inputs[6] = (2 * site->second.defenders_strength >
-					             3 * site->second.attack_soldiers_strength) ?
-					               2 :
-					               0;
-					inputs[7] = (3 * site->second.defenders_strength >
-					             2 * site->second.attack_soldiers_strength) ?
-					               2 :
-					               0;
-					inputs[8] = (soldier_status_ == SoldiersStatus::kBadShortage ||
-					             soldier_status_ == SoldiersStatus::kShortage) ?
-					               -2 :
-					               0;
-					inputs[8] = (soldier_status_ == SoldiersStatus::kBadShortage) ? -2 : 0;
-					inputs[9] = (soldier_status_ == SoldiersStatus::kBadShortage ||
-					             soldier_status_ == SoldiersStatus::kShortage) ?
-					               -3 :
-					               0;
-					inputs[10] = (site->second.mines_nearby == ExtendedBool::kTrue) ? 3 : -1;
-					inputs[11] = (site->second.mines_nearby == ExtendedBool::kTrue) ? 0 : 0;
-					inputs[12] = (owner_number == persistent_data->last_attacked_player) ? 2 : -2;
-					inputs[13] = (owner_number == persistent_data->last_attacked_player) ? 4 : -4;
-					inputs[14] = (strong_enough) ? 1 : -1;
-					inputs[15] = (strong_enough) ? 3 : -3;
-					inputs[16] = (player_statistics.get_player_power(pn) >
-					              player_statistics.get_old_player_power(pn)) ?
-					                2 :
-					                -2;
-					inputs[17] = (player_statistics.get_player_power(pn) >
-					              player_statistics.get_old60_player_power(pn)) ?
-					                3 :
-					                -3;
-					inputs[18] = (player_statistics.get_visible_enemies_power(pn) >
-					              player_statistics.get_old_visible_enemies_power(pn)) ?
-					                -1 :
-					                1;
-					inputs[19] = (player_statistics.get_visible_enemies_power(pn) >
-					              player_statistics.get_old_visible_enemies_power(pn)) ?
-					                -3 :
-					                3;
-					inputs[20] = (player_statistics.get_player_power(pn) >
-					              player_statistics.get_old_player_power(owner_number)) ?
-					                2 :
-					                -2;
-					inputs[21] = (player_statistics.get_player_power(pn) >
-					              player_statistics.get_old_player_power(owner_number)) ?
-					                1 :
-					                -1;
-					inputs[22] =
-					   (player_attackable[owner_number - 1] == Attackable::kAttackableVeryWeak) ? 2 : 0;
-					inputs[23] =
-					   (player_attackable[owner_number - 1] == Attackable::kAttackableAndWeak) ? 2 : 0;
-					inputs[24] =
-					   (player_attackable[owner_number - 1] == Attackable::kAttackableVeryWeak) ? 6 : 0;
-					inputs[25] =
-					   (player_attackable[owner_number - 1] == Attackable::kAttackableAndWeak) ? 3 : 0;
-					inputs[26] = management_data.get_military_number_at(62) / 10;
-					inputs[27] = (ts_finished_count_ - ts_without_trainers_) * 2;
-					inputs[28] = general_score * 3;
-					inputs[29] = general_score;
-					inputs[30] = ((mines_per_type[iron_ore_id].in_construction +
-					               mines_per_type[iron_ore_id].finished) > 0) ?
-					                1 :
-					                -1;
-					inputs[31] = (player_statistics.get_player_power(pn) >
-					              player_statistics.get_old60_player_power(pn) + 5) ?
-					                2 :
-					                -2;
-					inputs[32] = soldier_trained_log.count(gametime);
-					inputs[33] = soldier_trained_log.count(gametime) / 2;
-					inputs[34] = +1;
-					inputs[35] = -1;
-					inputs[36] = (gametime < 15 * 60 * 1000) ? -1 : 0;
-					inputs[37] = (gametime < 20 * 60 * 1000) ? -1 : 0;
-					inputs[38] = (gametime < 25 * 60 * 1000) ? -1 : 0;
-					inputs[39] = (gametime < 30 * 60 * 1000) ? -1 : 0;
-					inputs[40] = (gametime < 35 * 60 * 1000) ? -1 : 0;
-					inputs[41] = (gametime < 40 * 60 * 1000) ? -1 : 0;
-					
-					site->second.score = 0;
-					for (uint8_t j = 0; j < f_neuron_bit_size; j += 1) {
-						if (management_data.f_neuron_pool[47].get_position(j)) {
-							site->second.score += inputs[j];
+				const uint16_t enemys_power = player_statistics.get_modified_player_power(owner_number);
+				uint16_t my_to_enemy_power_ratio = 10;
+				if (enemys_power) {
+					my_to_enemy_power_ratio = my_power * 100 / enemys_power;
+				}
+				uint16_t enemys_power_growth = 10;
+				if (player_statistics.get_old60_player_land(owner_number)) {
+					enemys_power_growth = player_statistics.get_player_power(owner_number) * 100 / player_statistics.get_old60_player_land(owner_number);
+				}
+				uint16_t own_power_growth = 10;
+				if (player_statistics.get_old60_player_land(pn)) {
+					enemys_power_growth = player_statistics.get_player_power(pn) * 100 / player_statistics.get_old60_player_land(pn);
+				}
+
+				int16_t inputs[3 * f_neuron_bit_size] = {0};
+				inputs[0] =
+				   (site->second.attack_soldiers_strength - site->second.defenders_strength) *
+				   std::abs(management_data.get_military_number_at(114)) / 30;
+				inputs[1] =
+				   (site->second.attack_soldiers_strength - site->second.defenders_strength) *
+				   std::abs(management_data.get_military_number_at(115)) / 30;
+				inputs[2] = (is_warehouse) ? 4 : 0;
+				inputs[3] = (is_warehouse) ? 2 : 0;
+				inputs[4] = (site->second.attack_soldiers_competency > 15) ? 2 : 0;
+				inputs[5] = (site->second.attack_soldiers_competency > 25) ? 4 : 0;
+				;
+				inputs[6] = (2 * site->second.defenders_strength >
+				             3 * site->second.attack_soldiers_strength) ?
+				               2 :
+				               0;
+				inputs[7] = (3 * site->second.defenders_strength >
+				             2 * site->second.attack_soldiers_strength) ?
+				               2 :
+				               0;
+				inputs[8] = (soldier_status_ == SoldiersStatus::kBadShortage ||
+				             soldier_status_ == SoldiersStatus::kShortage) ?
+				               -2 :
+				               0;
+				inputs[8] = (soldier_status_ == SoldiersStatus::kBadShortage) ? -2 : 0;
+				inputs[9] = (soldier_status_ == SoldiersStatus::kBadShortage ||
+				             soldier_status_ == SoldiersStatus::kShortage) ?
+				               -3 :
+				               0;
+				inputs[10] = (site->second.mines_nearby == ExtendedBool::kTrue) ? 3 : -1;
+				inputs[11] = (site->second.mines_nearby == ExtendedBool::kTrue) ? 0 : 0;
+				inputs[12] = (owner_number == persistent_data->last_attacked_player) ? 2 : -2;
+				inputs[13] = (owner_number == persistent_data->last_attacked_player) ? 4 : -4;
+				inputs[14] = (strong_enough) ? 1 : -1;
+				inputs[15] = (strong_enough) ? 3 : -3;
+				inputs[16] = (player_statistics.get_player_power(pn) >
+				              player_statistics.get_old_player_power(pn)) ?
+				                2 :
+				                -2;
+				inputs[17] = (player_statistics.get_player_power(pn) >
+				              player_statistics.get_old60_player_power(pn)) ?
+				                3 :
+				                -3;
+				inputs[18] = (player_statistics.get_visible_enemies_power(pn) >
+				              player_statistics.get_old_visible_enemies_power(pn)) ?
+				                -1 :
+				                1;
+				inputs[19] = (player_statistics.get_visible_enemies_power(pn) >
+				              player_statistics.get_old_visible_enemies_power(pn)) ?
+				                -3 :
+				                3;
+				inputs[20] = (player_statistics.get_player_power(owner_number) >
+				              player_statistics.get_old_player_power(owner_number)) ?
+				                -2 :
+				                2;
+				inputs[21] = (player_statistics.get_player_power(owner_number) >
+				              player_statistics.get_old_player_power(owner_number)) ?
+				                -1 :
+				                1;
+				inputs[22] = (my_to_enemy_power_ratio > 80)? 2 : -2; 
+				inputs[23] = (my_to_enemy_power_ratio > 90)? 2 : -2; 
+				inputs[24] = (my_to_enemy_power_ratio > 110)? 2 : -2; 
+				inputs[55] = (my_to_enemy_power_ratio > 120)? 2 : -2; 
+				inputs[26] = management_data.get_military_number_at(62) / 10;
+				inputs[27] = (ts_finished_count_ - ts_without_trainers_) * 2;
+				inputs[28] = general_score * 3;
+				inputs[29] = general_score;
+				inputs[30] = ((mines_per_type[iron_ore_id].in_construction +
+				               mines_per_type[iron_ore_id].finished) > 0) ?
+				                1 :
+				                -1;
+				inputs[31] = (player_statistics.get_player_power(pn) >
+				              player_statistics.get_old60_player_power(pn) + 5) ?
+				                2 :
+				                -2;
+				inputs[32] = soldier_trained_log.count(gametime);
+				inputs[33] = soldier_trained_log.count(gametime) / 2;
+				inputs[34] = +1;
+				inputs[35] = -1;
+				inputs[36] = (gametime < 15 * 60 * 1000) ? -1 : 0;
+				inputs[37] = (gametime < 20 * 60 * 1000) ? -1 : 0;
+				inputs[38] = (gametime < 25 * 60 * 1000) ? -1 : 0;
+				inputs[39] = (gametime < 30 * 60 * 1000) ? -1 : 0;
+				inputs[40] = (gametime < 35 * 60 * 1000) ? -1 : 0;
+				inputs[41] = (gametime < 40 * 60 * 1000) ? -1 : 0;
+				inputs[42] = (site->second.last_time_attacked < gametime + 1 * 60 * 1000) ? -3 : 0;
+				inputs[43] = (site->second.last_time_attacked < gametime + 1 * 60 * 1000) ? -1 : 0;
+				inputs[44] = (site->second.last_time_attacked < gametime + 2 * 60 * 1000) ? -2 : 0;
+				inputs[45] = (site->second.last_time_attacked < gametime + 2 * 60 * 1000) ? -1 : 0;
+				inputs[46] = (site->second.last_time_attacked < gametime + 3 * 60 * 1000) ? -1 : 0;				
+				inputs[47] = (site->second.last_time_attacked < gametime + 4 * 60 * 1000) ? -1 : 0;
+				inputs[48] = (site->second.last_time_attacked < gametime + 5 * 60 * 1000) ? -1 : 0;
+				inputs[49] = (site->second.last_time_attacked < gametime + 2 * 60 * 1000) ? -1 : 0;
+				inputs[50] = soldier_trained_log.count(gametime);
+				inputs[51] = soldier_trained_log.count(gametime) / 2;
+				inputs[52] = (my_to_enemy_power_ratio - 100) / 20; 
+				inputs[53] = (my_to_enemy_power_ratio > 60)? 0 : -4; 
+				inputs[54] = (my_to_enemy_power_ratio > 70)? 0 : -3; 
+				inputs[55] = (my_to_enemy_power_ratio > 80)? 2 : -2; 
+				inputs[56] = (my_to_enemy_power_ratio> 90)? 2 : -2; 
+				inputs[57] = (my_to_enemy_power_ratio > 100)? 2 : -2; 
+				inputs[58] = (my_to_enemy_power_ratio > 110)? 2 : -2; 
+				inputs[59] = (my_to_enemy_power_ratio > 120)? 2 : -2; 
+				inputs[60] = (my_to_enemy_power_ratio > 130)? 2 : -2; 
+				inputs[61] = (my_to_enemy_power_ratio > 140)? 3 : 0; 
+				inputs[62] = (my_to_enemy_power_ratio > 150)? 4 : 0; 
+				inputs[63] = (my_to_enemy_power_ratio - 100) / 20;  
+				inputs[64] = (enemys_power_growth > 105)? -1 : 0; 
+				inputs[65] = (enemys_power_growth > 110)? -2 : 0; 
+				inputs[66] = (enemys_power_growth > 115)? -1 : 0; 
+				inputs[67] = (enemys_power_growth > 120)? -2 : 0; 
+				inputs[68] = (enemys_power_growth < 95)? 1 : 0; 
+				inputs[69] = (enemys_power_growth < 90)? 2 : 0; 
+				inputs[70] = (enemys_power_growth < 85)? 1 : 0; 
+				inputs[71] = (enemys_power_growth < 80)? 2 : 0; 
+				inputs[72] = (own_power_growth > 105)? 1 : 0; 
+				inputs[73] = (own_power_growth > 110)? 2 : 0; 
+				inputs[74] = (own_power_growth > 115)? 1 : 0; 
+				inputs[75] = (own_power_growth > 120)? 2 : 0; 
+				inputs[76] = (own_power_growth < 95)? -1 : 0; 
+				inputs[77] = (own_power_growth < 90)? -2 : 0; 
+				inputs[77] = (own_power_growth < 85)? -1 : 0; 
+				inputs[78] = (own_power_growth < 80)? -2 : 0; 
+				inputs[79] = +1;
+				inputs[80] = -1;
+				inputs[81] = +1;
+				inputs[82] = -1;
+				inputs[83] = (soldier_status_ == SoldiersStatus::kBadShortage || soldier_status_ == SoldiersStatus::kShortage) ? -3 : 1;
+				inputs[84] = (soldier_status_ == SoldiersStatus::kBadShortage || soldier_status_ == SoldiersStatus::kShortage) ? -4 : 1;
+				inputs[85] = (soldier_status_ == SoldiersStatus::kBadShortage) ? -2 : 1;
+				inputs[86] = (soldier_status_ == SoldiersStatus::kBadShortage) ? -4 : 1;	
+				inputs[87] = (soldier_status_ == SoldiersStatus::kBadShortage || soldier_status_ == SoldiersStatus::kShortage) ? -2 : 1;	
+											
+				site->second.score = 0;
+				for (uint8_t j = 0; j < f_neuron_bit_size; j += 1) {
+					if (management_data.f_neuron_pool[47].get_position(j)) {
+						site->second.score += inputs[j];
+						if (inputs[j] < -10 || inputs[j] > 10) {
+							printf (" pos: %d - value %d\n", j, inputs[j]);
 						}
-						if (management_data.f_neuron_pool[0].get_position(j)) {
-							site->second.score += inputs[j + f_neuron_bit_size];
+					}
+					if (management_data.f_neuron_pool[0].get_position(j)) {
+						site->second.score += inputs[j + f_neuron_bit_size];
+						if (inputs[j + f_neuron_bit_size] < -10 || inputs[j + f_neuron_bit_size] > 10) {
+							printf (" pos: %d - value %d\n", j + f_neuron_bit_size, inputs[j + f_neuron_bit_size]);
+						}
+					}
+					if (management_data.f_neuron_pool[16].get_position(j)) {
+						site->second.score += inputs[j + 2 * f_neuron_bit_size];
+						if (inputs[j +  2 * f_neuron_bit_size] < -10 || inputs[j +  2 * f_neuron_bit_size] > 10) {
+							printf (" pos: %d - value %d\n", j +  2 * f_neuron_bit_size, inputs[j +  2 * f_neuron_bit_size]);
 						}
 					}
 				}
+				//}
 
-			} else {
-				site->second.score = 0;
-			}  // or the score will remain 0
+			} 
+			//else {
+				//site->second.score = 0;
+			//}  // or the score will remain 0
 
 			if (site->second.score > 0) {
+				printf ("  ... %d is candidate for attack: score %d, best score by now: %2d\n", site->first, site->second.score, best_score);
 				if (site->second.score > best_score) {
 					best_score = site->second.score;
 					best_target = site->first;
 				}
-			}
+			} 
+			//else {
+				//printf ("  ... not suitable for attack: score %d\n", site->second.score);
+				//}
 
-			if (site->second.attack_soldiers_strength > 0) {
-				site->second.last_time_attackable = gametime;
-			}
-			if (site->second.last_time_attackable + 20 * 60 * 1000 < gametime) {
-				site_to_be_removed = site->first;
-			}
+			//if (site->second.attack_soldiers_strength > 0) {
+				//site->second.last_time_attackable = gametime;
+			//}
+			//if (site->second.last_time_seen + 20 * 60 * 1000 < gametime) {
+				//site_to_be_removed = site->first;
+			//}
 		} else {  // we dont have a flag, let remove the site from out observer list
 			site_to_be_removed = site->first;
 		}
@@ -398,16 +494,17 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 	}
 
 	while (!disappeared_sites.empty()) {
+		//printf ("  removing site %d from enemysites\n", disappeared_sites.back());
 		enemy_sites.erase(disappeared_sites.back());
 		disappeared_sites.pop_back();
 	}
 
 	// modifying enemysites_check_delay_,this depends on the count
 	// of enemysites in observer
-	if (count >= 13 && enemysites_check_delay_ < 180) {
+	if (enemy_sites.size() >= 13 && enemysites_check_delay_ < 180) {
 		enemysites_check_delay_ += 3;
 	}
-	if (count < 10 && enemysites_check_delay_ > 45) {
+	if (enemy_sites.size() < 10 && enemysites_check_delay_ > 30) {
 		enemysites_check_delay_ -= 2;
 	}
 
@@ -423,10 +520,10 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 	// setting no attack counter here
 	// this gauranties that it will not be attacked in next 3
 	// turns
-	enemy_sites[best_target].no_attack_counter =
-	   -3 + management_data.get_military_number_at(20) / 40;
-	assert(enemy_sites[best_target].no_attack_counter > -7 &&
-	       enemy_sites[best_target].no_attack_counter < 0);
+	//enemy_sites[best_target].no_attack_counter =
+	   //-3 + management_data.get_military_number_at(20) / 40;
+	//assert(enemy_sites[best_target].no_attack_counter > -7 &&
+	       //enemy_sites[best_target].no_attack_counter < 0);
 
 	Flag* flag = nullptr;  // flag of a building to be attacked
 	if (upcast(MilitarySite, bld, f.field->get_immovable())) {
@@ -463,7 +560,9 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 	attackers_count_ += static_cast<uint16_t>(attackers);
 	assert(attackers_count_ < 5000);
 
+	printf ("%2d: attacking site at %3dx%d, with  %d soldiers\n", player_number(),flag->get_position().x, flag->get_position().y, attackers_count_);
 	game().send_player_enemyflagaction(*flag, player_number(), static_cast<uint16_t>(attackers));
+	//enemy_sites[best_target].last_time_attackable = gametime;
 
 	last_attack_time_ = gametime;
 	for(int j= 0; j<attackers; j +=1) {

@@ -87,12 +87,13 @@ struct DefaultAI : ComputerPlayer {
 	enum class WoodPolicy : uint8_t { kDismantleRangers, kStopRangers, kAllowRangers };
 	enum class NewShip : uint8_t { kBuilt, kFoundOnLoad };
 	enum class PerfEvaluation : uint8_t { kForConstruction, kForDismantle };
-	enum class Attackable : uint8_t {
-		kNotAttackable,
-		kAttackable,
-		kAttackableAndWeak,
-		kAttackableVeryWeak
-	};
+	enum class BasicEconomyBuildingStatus : uint8_t { kEncouraged, kDiscouraged,kNeutral };
+	//enum class Attackable : uint8_t {
+		//kNotAttackable,
+		//kAttackable,
+		//kAttackableAndWeak,
+		//kAttackableVeryWeak
+	//};
 
 	enum class SoldiersStatus : uint8_t { kFull = 0, kEnough = 1, kShortage = 3, kBadShortage = 6 }; //NOCOM needed?
 	
@@ -229,7 +230,9 @@ private:
 
 	Widelands::EconomyObserver* get_economy_observer(Widelands::Economy&);
 	Widelands::BuildingObserver& get_building_observer(char const*);
+	bool has_building_observer(char const*);
 	Widelands::BuildingObserver& get_building_observer(Widelands::BuildingAttribute);
+	Widelands::BuildingObserver& get_building_observer(Widelands::DescriptionIndex);
 	
 	void gain_immovable(Widelands::PlayerImmovable&, bool found_on_load = false);
 	void lose_immovable(const Widelands::PlayerImmovable&);
@@ -353,6 +356,11 @@ private:
 
 	// This stores highest priority for new buildings except for militarysites
 	int32_t highest_nonmil_prio_;
+	
+	//list of basic buildings as defined by "is_basic" flag in lua conf file
+	//std::set<Widelands::DescriptionIndex> basic_buildings;
+	std::set<Widelands::DescriptionIndex> remaining_basic_buildings;
+	bool basic_economy_established;
 	
 	// id of iron_ore to identify iron mines in mines_per_type map
 	int32_t iron_ore_id = -1;
