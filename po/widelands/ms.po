@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-05-12 13:53+0000\n"
-"PO-Revision-Date: 2017-05-12 13:55+0000\n"
+"POT-Creation-Date: 2017-05-18 21:30+0000\n"
+"PO-Revision-Date: 2017-05-18 21:33+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Malay (http://www.transifex.com/widelands/widelands/language/ms/)\n"
 "MIME-Version: 1.0\n"
@@ -204,12 +204,12 @@ msgstr "Nov"
 msgid "Dec"
 msgstr "Dis"
 
-#: ../../src/editor/editorinteractive.cc:63 ../../src/logic/game.cc:212
-#: ../../src/logic/game.cc:262
+#: ../../src/editor/editorinteractive.cc:62 ../../src/logic/game.cc:211
+#: ../../src/logic/game.cc:261
 msgid "Loading tribes"
 msgstr "Memuatkan suku kaum"
 
-#: ../../src/editor/editorinteractive.cc:99
+#: ../../src/editor/editorinteractive.cc:98
 #: ../../src/editor/ui_menus/main_menu.cc:43
 #: ../../src/wui/game_options_menu.cc:66
 #: ../../src/wui/interactive_player.cc:69
@@ -217,83 +217,83 @@ msgstr "Memuatkan suku kaum"
 msgid "Main Menu"
 msgstr "Menu Utama"
 
-#: ../../src/editor/editorinteractive.cc:103
+#: ../../src/editor/editorinteractive.cc:102
 #: ../../src/editor/ui_menus/tool_menu.cc:45
 msgid "Tools"
 msgstr "Alatan"
 
-#: ../../src/editor/editorinteractive.cc:107
+#: ../../src/editor/editorinteractive.cc:106
 #: ../../src/editor/ui_menus/toolsize_menu.cc:40
 msgid "Tool Size"
 msgstr "Saiz Alat"
 
-#: ../../src/editor/editorinteractive.cc:111
+#: ../../src/editor/editorinteractive.cc:110
 #: ../../src/ui_fsmenu/launch_mpg.cc:144
 msgid "Players"
 msgstr "Pemain"
 
-#: ../../src/editor/editorinteractive.cc:120
+#: ../../src/editor/editorinteractive.cc:119
 #: ../../src/wui/interactive_player.cc:81
 #: ../../src/wui/interactive_spectator.cc:71
 msgid "Minimap"
 msgstr "Peta Mini"
 
-#: ../../src/editor/editorinteractive.cc:124
+#: ../../src/editor/editorinteractive.cc:123
 #: ../../src/wui/interactive_player.cc:85
 #: ../../src/wui/interactive_spectator.cc:75
 msgid "Show Building Spaces (on/off)"
 msgstr "Tunjuk Kawasan Bangunan (hidup/mati)"
 
-#: ../../src/editor/editorinteractive.cc:127
+#: ../../src/editor/editorinteractive.cc:126
 #: ../../src/wui/interactive_player.cc:87
 #: ../../src/wui/interactive_spectator.cc:78
 msgid "Reset zoom"
 msgstr "Tetap semula zum"
 
-#: ../../src/editor/editorinteractive.cc:134
+#: ../../src/editor/editorinteractive.cc:133
 msgid "Undo"
 msgstr "Buat Asal"
 
-#: ../../src/editor/editorinteractive.cc:137
+#: ../../src/editor/editorinteractive.cc:136
 msgid "Redo"
 msgstr "Buat Semula"
 
-#: ../../src/editor/editorinteractive.cc:142
+#: ../../src/editor/editorinteractive.cc:141
 #: ../../src/wui/buildingwindow.cc:324
 msgid "Help"
 msgstr "Bantuan"
 
-#: ../../src/editor/editorinteractive.cc:200
+#: ../../src/editor/editorinteractive.cc:199
 msgid "Unsupported format"
 msgstr "Format tidak disokong"
 
-#: ../../src/editor/editorinteractive.cc:201
+#: ../../src/editor/editorinteractive.cc:200
 #, c-format
 msgid ""
 "Widelands could not load the file \"%s\". The file format seems to be "
 "incompatible."
 msgstr "Widelands tidak dapat memuatkan fail \"%s\". Format fail kelihatan tidak serasi."
 
-#: ../../src/editor/editorinteractive.cc:214 ../../src/logic/game.cc:216
-#: ../../src/logic/game.cc:269
+#: ../../src/editor/editorinteractive.cc:213 ../../src/logic/game.cc:215
+#: ../../src/logic/game.cc:268
 msgid "Creating players"
 msgstr "Mencipta pemain"
 
-#: ../../src/editor/editorinteractive.cc:264
+#: ../../src/editor/editorinteractive.cc:263
 msgid "Unsaved Map"
 msgstr "Peta Tidak Disimpan"
 
-#: ../../src/editor/editorinteractive.cc:265
+#: ../../src/editor/editorinteractive.cc:264
 msgid "The map has not been saved, do you really want to quit?"
 msgstr "Peta belum lagi disimpan, anda pasti mahu keluar?"
 
-#: ../../src/editor/editorinteractive.cc:586
+#: ../../src/editor/editorinteractive.cc:585
 #: ../../src/editor/ui_menus/main_menu_new_map.cc:144
 msgid "Creating empty map…"
 msgstr "Mencipta peta kosong..."
 
 #. * TRANSLATORS: Default name for new map
-#: ../../src/editor/editorinteractive.cc:589
+#: ../../src/editor/editorinteractive.cc:588
 #: ../../src/editor/ui_menus/main_menu_new_map.cc:151
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:535
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:133
@@ -301,7 +301,7 @@ msgstr "Mencipta peta kosong..."
 msgid "No Name"
 msgstr "Tanpa Nama"
 
-#: ../../src/editor/editorinteractive.cc:592
+#: ../../src/editor/editorinteractive.cc:591
 #: ../../src/editor/ui_menus/main_menu_new_map.cc:152
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:536
 #: ../../src/logic/map.h:180
@@ -309,7 +309,7 @@ msgctxt "author_name"
 msgid "Unknown"
 msgstr "Tidak Diketahui"
 
-#: ../../src/editor/editorinteractive.cc:599
+#: ../../src/editor/editorinteractive.cc:598
 #, c-format
 msgid "Loading map “%s”…"
 msgstr "Memuatkan peta “%s”…"
@@ -614,7 +614,7 @@ msgid "Suggested Teams:"
 msgstr "Pasukan Disaran:"
 
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:147
-#: ../../src/ui_fsmenu/launch_mpg.cc:559
+#: ../../src/ui_fsmenu/launch_mpg.cc:566
 #: ../../src/wui/game_main_menu_save_game.cc:157
 #, c-format
 msgid "%u Player"
@@ -827,7 +827,7 @@ msgstr "Bilangan Pemain"
 #: ../../src/editor/ui_menus/player_menu.cc:207 ../../src/logic/map.cc:309
 #: ../../src/logic/single_player_game_settings_provider.cc:88
 #: ../../src/map_io/map_player_names_and_tribes_packet.cc:94
-#: ../../src/network/gamehost.cc:1616 ../../src/ui_fsmenu/launch_mpg.cc:475
+#: ../../src/network/gamehost.cc:1616 ../../src/ui_fsmenu/launch_mpg.cc:482
 #: ../../src/wui/multiplayersetupgroup.cc:112
 #, c-format
 msgid "Player %u"
@@ -899,12 +899,12 @@ msgid "Terrain"
 msgstr "Rupa Bumi"
 
 #: ../../src/editor/ui_menus/tool_menu.cc:62
-#: ../../src/editor/ui_menus/tool_place_immovable_options_menu.cc:53
+#: ../../src/editor/ui_menus/tool_place_immovable_options_menu.cc:52
 msgid "Immovables"
 msgstr "Kekal"
 
 #: ../../src/editor/ui_menus/tool_menu.cc:63
-#: ../../src/editor/ui_menus/tool_place_critter_options_menu.cc:52
+#: ../../src/editor/ui_menus/tool_place_critter_options_menu.cc:51
 msgid "Animals"
 msgstr "Haiwan"
 
@@ -963,37 +963,37 @@ msgid "Loading graphics"
 msgstr "Memuatkan grafik"
 
 #. * TRANSLATORS: Win condition for this game has not been set.
-#: ../../src/logic/game.cc:129
+#: ../../src/logic/game.cc:128
 msgid "Not set"
 msgstr "Tidak ditetapkan"
 
-#: ../../src/logic/game.cc:204 ../../src/logic/game.cc:250
-#: ../../src/logic/game.cc:323 ../../src/logic/game.cc:353
+#: ../../src/logic/game.cc:203 ../../src/logic/game.cc:249
+#: ../../src/logic/game.cc:322 ../../src/logic/game.cc:352
 msgid "Preloading map"
 msgstr "Mempra-muatkan peta"
 
-#: ../../src/logic/game.cc:210 ../../src/logic/game.cc:259
+#: ../../src/logic/game.cc:209 ../../src/logic/game.cc:258
 msgid "Loading world"
 msgstr "Memuatkan dunia"
 
-#: ../../src/logic/game.cc:226 ../../src/logic/game.cc:297
+#: ../../src/logic/game.cc:225 ../../src/logic/game.cc:296
 msgid "Loading map…"
 msgstr "Memuatkan peta..."
 
-#: ../../src/logic/game.cc:338 ../../src/logic/game.cc:373
-#: ../../src/ui_basic/progresswindow.cc:50 ../../src/wlapplication.cc:1351
+#: ../../src/logic/game.cc:337 ../../src/logic/game.cc:372
+#: ../../src/ui_basic/progresswindow.cc:51 ../../src/wlapplication.cc:1351
 msgid "Loading…"
 msgstr "Memuatkan..."
 
-#: ../../src/logic/game.cc:436
+#: ../../src/logic/game.cc:435
 msgid "Creating player infrastructure"
 msgstr "Mencipta infrastuktur pemain"
 
-#: ../../src/logic/game.cc:447 ../../src/logic/player.cc:219
+#: ../../src/logic/game.cc:446 ../../src/logic/player.cc:219
 msgid "Missing starting position"
 msgstr "Kedudukan permulaan hilang"
 
-#: ../../src/logic/game.cc:448 ../../src/logic/player.cc:220
+#: ../../src/logic/game.cc:447 ../../src/logic/player.cc:220
 #, c-format
 msgid ""
 "Widelands could not start the game, because player %u has no starting position.\n"
@@ -1350,8 +1350,8 @@ msgctxt "ship_state"
 msgid "Founding a Colony"
 msgstr "Mengasaskan sebuah Koloni"
 
-#: ../../src/logic/map_objects/tribes/soldier.cc:1350
-#: ../../src/logic/map_objects/tribes/soldier.cc:1354
+#: ../../src/logic/map_objects/tribes/soldier.cc:1347
+#: ../../src/logic/map_objects/tribes/soldier.cc:1351
 msgid "Logic error"
 msgstr "Ralat logik"
 
@@ -1430,11 +1430,11 @@ msgstr "tidak boleh dilalui"
 msgid "This objective has no description."
 msgstr "Objektif ini tidak mempunyai keterangan."
 
-#: ../../src/logic/replay_game_controller.cc:101
+#: ../../src/logic/replay_game_controller.cc:100
 msgid "End of replay"
 msgstr "Main semula tamat"
 
-#: ../../src/logic/replay_game_controller.cc:102
+#: ../../src/logic/replay_game_controller.cc:101
 msgid ""
 "The end of the replay has been reached and the game has been paused. You may"
 " unpause the game and continue watching if you want to."
@@ -1601,7 +1601,7 @@ msgstr ""
 msgid "Computer %u"
 msgstr "Komputer %u"
 
-#: ../../src/network/gamehost.cc:1610 ../../src/wui/game_summary.cc:101
+#: ../../src/network/gamehost.cc:1610 ../../src/wui/game_summary.cc:100
 msgid "Player"
 msgstr "Pemain"
 
@@ -1622,110 +1622,110 @@ msgstr "Widelands tidak dapat jalinkan sambungan ke alamat yang diberi.\nSama ad
 msgid "For hosting a game, please take a look at the notes at:"
 msgstr "Untuk mengehos sesebuah permainan, sila rujuk panduan di:"
 
-#: ../../src/network/internet_gaming.cc:277
+#: ../../src/network/internet_gaming.cc:281
 #: ../../src/network/network_gaming_messages.cc:129
 #, c-format
 msgid "Something went wrong: %s"
 msgstr "Ada masalah berlaku: %s"
 
-#: ../../src/network/internet_gaming.cc:362
+#: ../../src/network/internet_gaming.cc:366
 msgid "Successfully reconnected to the metaserver!"
 msgstr "Berjaya menyambung semula dengan pelayan meta!"
 
-#: ../../src/network/internet_gaming.cc:370
+#: ../../src/network/internet_gaming.cc:374
 msgid "Mixed up"
 msgstr "Bercampur"
 
-#: ../../src/network/internet_gaming.cc:370
+#: ../../src/network/internet_gaming.cc:374
 msgid "The metaserver sent a strange ERROR during connection"
 msgstr "Pelayan meta menghantar RALAT pelik ketika penyambungan"
 
-#: ../../src/network/internet_gaming.cc:381
+#: ../../src/network/internet_gaming.cc:385
 msgid "Unexpected packet"
 msgstr "Paket tidak dijangka"
 
-#: ../../src/network/internet_gaming.cc:382
+#: ../../src/network/internet_gaming.cc:386
 #, c-format
 msgid ""
 "Expected a LOGIN, RELOGIN or REJECTED packet from server, but received "
 "command %s. Maybe the metaserver is using a different protocol version ?"
 msgstr "Jangkakan paket DAFTAR MASUK, DAFTAR MASUK SEMULA atau DITOLAK dari pelayan, tetapi perintah %s diterima. Mungkin pelayan meta menggunakan versi protokol yang berlainan ?"
 
-#: ../../src/network/internet_gaming.cc:395
+#: ../../src/network/internet_gaming.cc:399
 #, c-format
 msgid ""
 "WARNING: Received a %s command although we are not in CONNECTING state."
 msgstr "AMARAN: Menerima satu perintah %s walaupun tidak berada dalam keadaan BERSAMBUNG."
 
-#: ../../src/network/internet_gaming.cc:406
+#: ../../src/network/internet_gaming.cc:410
 #, c-format
 msgid "Server time offset is %d second."
 msgid_plural "Server time offset is %d seconds."
 msgstr[0] "Ofset masa pelayan ialah %d saat."
 
-#: ../../src/network/internet_gaming.cc:430
+#: ../../src/network/internet_gaming.cc:434
 #, c-format
 msgid "Invalid chat message type \"%s\"."
 msgstr "Jenis mesej sembang \"%s\" tidak sah."
 
-#: ../../src/network/internet_gaming.cc:430
+#: ../../src/network/internet_gaming.cc:434
 msgid "Invalid message type"
 msgstr "Jenis mesej tidak sah"
 
-#: ../../src/network/internet_gaming.cc:468
+#: ../../src/network/internet_gaming.cc:472
 #, c-format
 msgid "The game %s is now available"
 msgstr "Permainan %s kini tersedia"
 
-#: ../../src/network/internet_gaming.cc:478
+#: ../../src/network/internet_gaming.cc:482
 #, c-format
 msgid "The game %s has been closed"
 msgstr "Permainan %s telah ditutup"
 
-#: ../../src/network/internet_gaming.cc:517
+#: ../../src/network/internet_gaming.cc:521
 #, c-format
 msgid "%s joined the lobby"
 msgstr "%s menyertai lobi"
 
-#: ../../src/network/internet_gaming.cc:526
+#: ../../src/network/internet_gaming.cc:530
 #, c-format
 msgid "%s left the lobby"
 msgstr "%s meninggalkan lobi"
 
-#: ../../src/network/internet_gaming.cc:561
+#: ../../src/network/internet_gaming.cc:565
 msgid "Chat message could not be sent."
 msgstr "Mesej sembang tidak dapat dihantar."
 
-#: ../../src/network/internet_gaming.cc:575
+#: ../../src/network/internet_gaming.cc:579
 #, c-format
 msgid "ERROR: %s"
 msgstr "RALAT: %s"
 
-#: ../../src/network/internet_gaming.cc:585
+#: ../../src/network/internet_gaming.cc:589
 #, c-format
 msgid "Received an unknown command from the metaserver: %s"
 msgstr "Menerima satu perintah tidak diketahui daripada pelayan meta: %s"
 
-#: ../../src/network/internet_gaming.cc:696
+#: ../../src/network/internet_gaming.cc:700
 msgid "Message could not be sent: You are not connected to the metaserver!"
 msgstr "Mesej tidak dapat dihantar: Anda tidak bersambung dengan pelayan meta!"
 
-#: ../../src/network/internet_gaming.cc:709
+#: ../../src/network/internet_gaming.cc:713
 msgid "Message could not be sent: Was this supposed to be a private message?"
 msgstr "Mesej tidak dapat dihantar: Adakah ia merupakan mesej persendirian?"
 
-#: ../../src/network/internet_gaming.cc:783
+#: ../../src/network/internet_gaming.cc:787
 msgid "Conversion error"
 msgstr "Ralat penukaran"
 
 #. * TRANSLATORS: Geeky message from the metaserver
 #. * TRANSLATORS: This message is shown if %s isn't "true" or "false"
-#: ../../src/network/internet_gaming.cc:786
+#: ../../src/network/internet_gaming.cc:790
 #, c-format
 msgid "Unable to determine truth value for \"%s\""
 msgstr "Tidak dapat tentukan nilai sebenar untuk \"%s\""
 
-#: ../../src/network/internet_gaming.cc:803
+#: ../../src/network/internet_gaming.cc:807
 msgid "unknown"
 msgstr "tidak diketahui"
 
@@ -2305,16 +2305,15 @@ msgstr "Permainan Tersimpan"
 msgid "The game is a saved game – the win condition was set before."
 msgstr "Permainan merupakan permainan tersimpan - syarat menang telah ditetapkan sebelum ini."
 
-#: ../../src/ui_fsmenu/launch_game.cc:135
-#: ../../src/ui_fsmenu/launch_game.cc:182
+#: ../../src/ui_fsmenu/launch_game.cc:176
 #, c-format
 msgid ""
 "Unable to determine valid win conditions because the map '%s' could not be "
 "loaded."
 msgstr "Tidak boleh menentukan syarat menang yang sah kerana peta '%s' tidak dimuatkan."
 
-#: ../../src/ui_fsmenu/launch_game.cc:139
-#: ../../src/ui_fsmenu/launch_game.cc:186
+#: ../../src/ui_fsmenu/launch_game.cc:180
+#: ../../src/ui_fsmenu/launch_mpg.cc:416
 msgid "Error"
 msgstr "Ralat"
 
@@ -2359,7 +2358,7 @@ msgid "Type of game"
 msgstr "Jenis permainan"
 
 #. * TRANSLATORS: This is a heading for a help window
-#: ../../src/ui_fsmenu/launch_mpg.cc:165 ../../src/ui_fsmenu/launch_mpg.cc:585
+#: ../../src/ui_fsmenu/launch_mpg.cc:165 ../../src/ui_fsmenu/launch_mpg.cc:592
 msgid "Multiplayer Game Setup"
 msgstr "Persediaan Permainan Pemain Berbilang"
 
@@ -2409,24 +2408,29 @@ msgstr "Anda adalah Pemain %i."
 msgid "You are a spectator."
 msgstr "Anda adalah penonton."
 
-#: ../../src/ui_fsmenu/launch_mpg.cc:461
+#: ../../src/ui_fsmenu/launch_mpg.cc:418
+#, c-format
+msgid "Unable to load the win condition script file '%s'."
+msgstr ""
+
+#: ../../src/ui_fsmenu/launch_mpg.cc:468
 msgid "Saved players are:"
 msgstr "Pemain tersimpan adalah:"
 
-#: ../../src/ui_fsmenu/launch_mpg.cc:477
+#: ../../src/ui_fsmenu/launch_mpg.cc:484
 msgid "closed"
 msgstr "ditutup"
 
-#: ../../src/ui_fsmenu/launch_mpg.cc:553
+#: ../../src/ui_fsmenu/launch_mpg.cc:560
 msgid "Map details:"
 msgstr "Perincian peta:"
 
-#: ../../src/ui_fsmenu/launch_mpg.cc:555
+#: ../../src/ui_fsmenu/launch_mpg.cc:562
 #, c-format
 msgid "Size: %1$u x %2$u"
 msgstr "Saiz: %1$u x %2$u"
 
-#: ../../src/ui_fsmenu/launch_mpg.cc:561
+#: ../../src/ui_fsmenu/launch_mpg.cc:568
 msgid "Scenario mode selected"
 msgstr "Mod senario dipilih"
 
@@ -2442,7 +2446,7 @@ msgstr "Nama pemain"
 msgid "Player’s type"
 msgstr "Jenis pemain"
 
-#: ../../src/ui_fsmenu/launch_spg.cc:71 ../../src/wui/game_summary.cc:102
+#: ../../src/ui_fsmenu/launch_spg.cc:71 ../../src/wui/game_summary.cc:101
 #: ../../src/wui/multiplayersetupgroup.cc:503
 msgid "Team"
 msgstr "Pasukan"
@@ -3169,14 +3173,14 @@ msgid "Economy options"
 msgstr "Pilihan ekonomi"
 
 #: ../../src/wui/economy_options_window.cc:48
-#: ../../src/wui/general_statistics_menu.cc:148
+#: ../../src/wui/general_statistics_menu.cc:149
 #: ../../src/wui/productionsitewindow.cc:75
 #: ../../src/wui/warehousewindow.cc:188
 msgid "Wares"
 msgstr "Barangan"
 
 #: ../../src/wui/economy_options_window.cc:49
-#: ../../src/wui/general_statistics_menu.cc:139
+#: ../../src/wui/general_statistics_menu.cc:140
 #: ../../src/wui/warehousewindow.cc:192
 msgid "Workers"
 msgstr "Pekerja"
@@ -3349,7 +3353,7 @@ msgctxt "message"
 msgid "Type"
 msgstr "Jenis"
 
-#: ../../src/wui/game_message_menu.cc:70 ../../src/wui/game_summary.cc:103
+#: ../../src/wui/game_message_menu.cc:70 ../../src/wui/game_summary.cc:102
 msgid "Status"
 msgstr "Status"
 
@@ -3511,7 +3515,7 @@ msgid "Set sound effect and music options"
 msgstr "Tetapkan pilihan kesan bunyi dan muzik"
 
 #. * TRANSLATORS: Button tooltip
-#: ../../src/wui/game_options_menu.cc:99 ../../src/wui/game_summary.cc:92
+#: ../../src/wui/game_options_menu.cc:99 ../../src/wui/game_summary.cc:91
 msgid "Exit Game"
 msgstr "Keluar dari Permainan"
 
@@ -3542,81 +3546,81 @@ msgstr "Statistik Barangan"
 msgid "Stock"
 msgstr "Stok"
 
-#: ../../src/wui/game_summary.cc:44
+#: ../../src/wui/game_summary.cc:43
 msgid "Game over"
 msgstr "Permainan tamat"
 
-#: ../../src/wui/game_summary.cc:62
+#: ../../src/wui/game_summary.cc:61
 msgid "Player Info:"
 msgstr "Maklumat Pemain:"
 
-#: ../../src/wui/game_summary.cc:77
+#: ../../src/wui/game_summary.cc:76
 msgid "Elapsed time:"
 msgstr "Masa berlalu:"
 
-#: ../../src/wui/game_summary.cc:87
+#: ../../src/wui/game_summary.cc:86
 msgid "Continue playing"
 msgstr "Terus bermain"
 
-#: ../../src/wui/game_summary.cc:104
+#: ../../src/wui/game_summary.cc:103
 msgid "Time"
 msgstr "Masa"
 
 #. * TRANSLATORS: This is shown in the game summary for the players who have
 #. lost.
-#: ../../src/wui/game_summary.cc:166
+#: ../../src/wui/game_summary.cc:165
 msgid "Lost"
 msgstr "Kalah"
 
 #. * TRANSLATORS: This is shown in the game summary for the players who have
 #. won.
-#: ../../src/wui/game_summary.cc:170
+#: ../../src/wui/game_summary.cc:169
 msgid "Won"
 msgstr "Menang"
 
 #. * TRANSLATORS: This is shown in the game summary for the players who have
 #. resigned.
-#: ../../src/wui/game_summary.cc:179
+#: ../../src/wui/game_summary.cc:178
 msgid "Resigned"
 msgstr "Tarik Diri"
 
 #. * TRANSLATORS: This is shown in the game summary when we don't know
 #. * TRANSLATORS: if the player has lost or won.
-#: ../../src/wui/game_summary.cc:184
+#: ../../src/wui/game_summary.cc:183
 msgctxt "player_won"
 msgid "Unknown"
 msgstr "Tidak Diketahui"
 
-#: ../../src/wui/game_summary.cc:194
+#: ../../src/wui/game_summary.cc:193
 msgid "You won!"
 msgstr "Anda menang!"
 
-#: ../../src/wui/game_summary.cc:196
+#: ../../src/wui/game_summary.cc:195
 msgid "You lost."
 msgstr "Anda kalah"
 
-#: ../../src/wui/game_summary.cc:201
+#: ../../src/wui/game_summary.cc:200
 #, c-format
 msgid "%s won!"
 msgstr "%s menang!"
 
-#: ../../src/wui/game_summary.cc:204
+#: ../../src/wui/game_summary.cc:203
 msgid "Team %|1$u| won!"
 msgstr "Pasukan %|1$u| menang!"
 
-#: ../../src/wui/game_summary.cc:249
+#: ../../src/wui/game_summary.cc:248
 msgid "Score"
 msgstr "Skor"
 
-#: ../../src/wui/game_summary.cc:251
+#: ../../src/wui/game_summary.cc:250
 msgid "Team Score"
 msgstr "Skor Pasukan"
 
-#: ../../src/wui/general_statistics_menu.cc:133
+#: ../../src/wui/general_statistics_menu.cc:135
 msgid "Land"
 msgstr "Daratan"
 
-#: ../../src/wui/general_statistics_menu.cc:144 ../../src/wui/minimap.cc:165
+#: ../../src/wui/general_statistics_menu.cc:145 ../../src/wui/minimap.cc:165
 msgid "Buildings"
 msgstr "Bangunan"
 
@@ -3632,19 +3636,19 @@ msgstr "Kematian"
 msgid "Kills"
 msgstr "Bunuh"
 
-#: ../../src/wui/general_statistics_menu.cc:169
+#: ../../src/wui/general_statistics_menu.cc:168
 msgid "Military buildings lost"
 msgstr "Bangunan tentera yang musnah"
 
-#: ../../src/wui/general_statistics_menu.cc:174
+#: ../../src/wui/general_statistics_menu.cc:173
 msgid "Military buildings defeated"
 msgstr "Bangunan tentera ditawan"
 
-#: ../../src/wui/general_statistics_menu.cc:179
+#: ../../src/wui/general_statistics_menu.cc:178
 msgid "Civilian buildings lost"
 msgstr "Bangunan awam musnah"
 
-#: ../../src/wui/general_statistics_menu.cc:184
+#: ../../src/wui/general_statistics_menu.cc:183
 msgid "Military"
 msgstr "Tentera"
 
@@ -3999,7 +4003,7 @@ msgctxt "unit_generic"
 msgid "minutes"
 msgstr "minit"
 
-#: ../../src/wui/plot_area.cc:330
+#: ../../src/wui/plot_area.cc:333
 msgid "game"
 msgstr "permainan"
 
@@ -4098,21 +4102,21 @@ msgstr "Tingkatkan kapasiti"
 msgid "Capacity"
 msgstr "Kapasiti"
 
-#: ../../src/wui/soldierlist.cc:373 ../../src/wui/soldierlist.cc:394
-#: ../../src/wui/soldierlist.cc:455
+#: ../../src/wui/soldierlist.cc:371 ../../src/wui/soldierlist.cc:392
+#: ../../src/wui/soldierlist.cc:453
 msgid "Click soldier to send away"
 msgstr "Klik askar untuk mengerahnya"
 
-#: ../../src/wui/soldierlist.cc:389 ../../src/wui/soldierlist.cc:460
+#: ../../src/wui/soldierlist.cc:387 ../../src/wui/soldierlist.cc:458
 #, c-format
 msgid "HP: %1$u/%2$u  AT: %3$u/%4$u  DE: %5$u/%6$u  EV: %7$u/%8$u"
 msgstr "HY: %1$u/%2$u  SR: %3$u/%4$u  TH: %5$u/%6$u  EL: %7$u/%8$u"
 
-#: ../../src/wui/soldierlist.cc:403
+#: ../../src/wui/soldierlist.cc:401
 msgid "Prefer Rookies"
 msgstr "Utamakan Askar Biasa"
 
-#: ../../src/wui/soldierlist.cc:406
+#: ../../src/wui/soldierlist.cc:404
 msgid "Prefer Heroes"
 msgstr "Utamakan Adiwira"
 
