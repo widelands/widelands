@@ -537,30 +537,22 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 	// how many attack soldiers we can send?
 	int32_t attackers = player_->find_attack_soldiers(*flag);
 	assert(attackers < 500);
+	
+	if (attackers > 5){
+		attackers = 5 + std::rand() % (attackers - 5);
+	}
 
-	// Of course not all of them:
-	// reduce by 0-3 for attackers below 10
-	// but for soldiers in range 10-40 reduce by much more.
-	// Soldiers above 40 are ignored for calculation
 
-	// Number of soldiers in the range 10-40, random portion of
-	// them will be used
-	uint32_t above_ten = (attackers > 10) ? attackers - 10 : 0;
-	above_ten = (above_ten > 30) ? 30 : above_ten;
-
-	attackers = attackers - (std::rand() % 3) - ((above_ten > 0) ? std::rand() % above_ten : 0);
-	// attackers += management_data.neuron_pool[48].get_result_safe(training_score / 2, kAbsValue) /
-	// 10;
+	//attackers = attackers - (std::rand() % 3) - ((above_ten > 0) ? std::rand() % above_ten : 0);
+	//// attackers += management_data.neuron_pool[48].get_result_safe(training_score / 2, kAbsValue) /
+	//// 10;
 	assert(attackers < 500);
 
 	if (attackers <= 0) {
 		return false;
 	}
 
-	attackers_count_ += static_cast<uint16_t>(attackers);
-	assert(attackers_count_ < 5000);
-
-	printf ("%2d: attacking site at %3dx%d, with  %d soldiers\n", player_number(),flag->get_position().x, flag->get_position().y, attackers_count_);
+	printf ("%2d: attacking site at %3dx%d, with  %d soldiers\n", player_number(),flag->get_position().x, flag->get_position().y, attackers);
 	game().send_player_enemyflagaction(*flag, player_number(), static_cast<uint16_t>(attackers));
 	//enemy_sites[best_target].last_time_attackable = gametime;
 

@@ -4192,7 +4192,8 @@ BuildingNecessity DefaultAI::check_warehouse_necessity(BuildingObserver& bo,
 	bo.primary_priority = 0;
 
 	if (numof_warehouses_in_const_ > 0 ||
-	    bo.aimode_limit_status() != AiModeBuildings::kAnotherAllowed) {
+	    bo.aimode_limit_status() != AiModeBuildings::kAnotherAllowed ||
+	    !basic_economy_established) {
 		bo.new_building_overdue = 0;
 		bo.primary_priority = 0;
 		return BuildingNecessity::kForbidden;
@@ -4562,9 +4563,9 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 				inputs[20] = 1;
 				inputs[21] = 1;
 			}
-			inputs[22] = 1;			
-			inputs[23] = 1;
-			inputs[24] = 1;
+			inputs[22] = (basic_economy_established) ? -1 : 1;			
+			inputs[23] = (msites_in_constr() > 0) ? 1 : -2;
+			inputs[24] = (msites_in_constr() > 1) ? 1 : -2;
 			inputs[25] = (wood_policy_ != WoodPolicy::kAllowRangers) * 1;
 			if (gametime > 90 * 60) {
 				inputs[26] = (wood_policy_ != WoodPolicy::kAllowRangers) * 1;
@@ -4609,6 +4610,12 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 			inputs[55] = (6 * 60 * 100 > gametime) * -2;
 			inputs[56] = (8 * 60 * 100 > gametime) * -2;
 			inputs[57] = (10 * 60 * 100 > gametime) * -2;
+			inputs[58] = (spots_ < kSpotsEnough) ? -2 : 0;
+			inputs[59] = (spots_ < kSpotsTooLittle) ? -2 : 0;
+			inputs[60] = (spots_ < kSpotsTooLittle) ? -2 : 0;
+			inputs[61] = (spots_ < kSpotsTooLittle) ? -2 : 0;
+			inputs[62] = (basic_economy_established) ? 0 : -2;
+			inputs[63] = (spots_ < kSpotsTooLittle) ? 0 : -2;						
 			
 			for (uint8_t i = 0; i < f_neuron_bit_size; i +=1) {
 				if (management_data.f_neuron_pool[14].get_position(i)){
