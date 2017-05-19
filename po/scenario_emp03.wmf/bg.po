@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-05-16 10:34+0000\n"
+"POT-Creation-Date: 2017-05-18 21:30+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Любомир Василев <lyubomirv@abv.bg>, 2017\n"
 "Language-Team: Bulgarian (https://www.transifex.com/widelands/teams/35159/bg/)\n"
@@ -1263,8 +1263,11 @@ msgstr[1] "Трябва да открием още %d части от олтар
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:639
 msgid ""
-"Finally, we have discovered the last piece of our shrine. Praise Neptune!"
-msgstr "Най-после открихме последната част от олтара. Слава на Нептун!"
+"Finally, we have discovered the last piece of our shrine. Now we can "
+"reassemble it to worship our god. Praise Neptune!"
+msgstr ""
+"Най-после открихме последната част от олтара. Сега можем да го сглобим и да "
+"отдадем почитта си на бога. Слава на Нептун!"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:642
 msgid "Artifact Found"

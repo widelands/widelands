@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-05-16 10:34+0000\n"
+"POT-Creation-Date: 2017-05-18 21:30+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Milan Fašina <matrix17@seznam.cz>, 2017\n"
 "Language-Team: Czech (https://www.transifex.com/widelands/teams/35159/cs/)\n"
@@ -31,6 +31,8 @@ msgid ""
 "Build an outpost at the yellow house symbol to the east of your provisional "
 "headquarters."
 msgstr ""
+"Postav hlásku na symbolu žlutého domku na východ od tvé provizorní Hlavní "
+"budovy."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:48
 msgid "Build a quarry"
@@ -48,11 +50,11 @@ msgstr ""
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:57
 msgid "Build a lumberjack’s house, a sawmill and a stonemason’s house"
-msgstr ""
+msgstr "Postav domek dřevorubce, pilu a domek kameníka"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:59
 msgid "Lumberjack, Sawmill and Stonemason"
-msgstr ""
+msgstr "Dřevorubec, pila a kameník"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:60
 msgid ""
@@ -99,7 +101,7 @@ msgstr ""
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:87
 msgid "Ship Industry"
-msgstr ""
+msgstr "Lodní hospodářství"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:88
 msgid "Build a port to set sail from this island."
@@ -115,12 +117,12 @@ msgstr ""
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:96
 msgid "Wheat Production"
-msgstr ""
+msgstr "Produkce pšenice"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:97
 msgid ""
 "To get our wool production started, we need at least 50 sheaves of wheat."
-msgstr ""
+msgstr "Na rozjezd naší produkce vlny, potřebujeme alespoň 50 otýpek pšenice."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:103
 msgid "Produce cloth for building our first ship"
@@ -128,7 +130,7 @@ msgstr ""
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:105
 msgid "Cloth Production"
-msgstr ""
+msgstr "Produkce látky"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:106
 msgid ""
@@ -164,7 +166,7 @@ msgstr ""
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:125
 msgid "Gold Production"
-msgstr ""
+msgstr "Produkce zlata"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:126
 msgid ""
@@ -173,15 +175,15 @@ msgstr ""
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:132
 msgid "Defeat the Barbarians"
-msgstr ""
+msgstr "Poraž barbary"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:134
 msgid "Defeat the Enemy"
-msgstr ""
+msgstr "Poraž nepřítele"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:135
 msgid "We should end the Barbarians’ existence in this part of the world."
-msgstr ""
+msgstr "Na tomto místě nemají barbaři, co pohledávat."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:141
 msgid "Explore further and build ports"
@@ -202,7 +204,7 @@ msgstr ""
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:153
 msgid "Find the Holy Shrine"
-msgstr ""
+msgstr "Najdi posvátný chrám"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:154
 msgid ""
@@ -225,7 +227,7 @@ msgstr ""
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:171
 msgid "The Journey Home"
-msgstr ""
+msgstr "Cesta domů"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:172
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:186
@@ -234,7 +236,7 @@ msgstr ""
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:615
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:643
 msgid "Diary of Lutius"
-msgstr ""
+msgstr "Lutiusův denník"
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:174
@@ -250,7 +252,7 @@ msgstr ""
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:185
 msgid "The Wrath of Neptune"
-msgstr ""
+msgstr "Neptunův hněv"
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:188
@@ -275,7 +277,7 @@ msgstr ""
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:201
 msgid "Finally, the wrath of the gods and the ocean seems to be over."
-msgstr ""
+msgstr "Konečně, hněv bohů a oceánu se zdá být u konce."
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:204
@@ -357,7 +359,7 @@ msgstr ""
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:253
 msgid "Rocks, Nothing but Rocks"
-msgstr ""
+msgstr "Kameny a nic než kameny"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:254
 msgid "Saledus speaks with a sigh of relief…"
@@ -487,7 +489,7 @@ msgstr ""
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:328
 msgid "We Need a Port"
-msgstr ""
+msgstr "Potřebujeme přístav"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:329
 msgid "Saledus is thoughtful…"
@@ -585,7 +587,7 @@ msgstr ""
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:382
 msgid "Seafaring is Possible Again"
-msgstr ""
+msgstr "Mořeplavectví je opět dostupné"
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:385
@@ -624,7 +626,7 @@ msgstr ""
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:408
 msgid "We Should Explore the Islands"
-msgstr ""
+msgstr "Měli bychom prozkoumat ostrovy"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:409
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:452
@@ -679,7 +681,7 @@ msgstr ""
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:434
 msgid ""
 "But the problem is that for sending out an expedition, we need some gold."
-msgstr ""
+msgstr "Problém je, že na vyslání výpravy, potřebujeme zlato."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:437
@@ -719,7 +721,7 @@ msgstr "Je čas dobýt ostrovy."
 msgid ""
 "Let’s finish the Barbarians off and provide a nice colony to the caesar of "
 "our empire."
-msgstr ""
+msgstr "Skoncujeme s barbary a dáme caesarovi naší říše pěknou kolonii."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:464
 msgid "Amalea’s Luck"
@@ -889,7 +891,7 @@ msgstr ""
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:547
 msgid "The king will be very pleased with our victory."
-msgstr ""
+msgstr "Naše vítězství krále velmi potěší."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:553
 msgid "Pleasing Neptune"
@@ -949,11 +951,11 @@ msgstr ""
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:581
 msgid "Unpleasant Discoveries"
-msgstr ""
+msgstr "Nemilé objevy"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:582
 msgid "Saledus looks very worried…"
-msgstr ""
+msgstr "Saledus vypadá velmi ustaraně…"
 
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:584
@@ -965,7 +967,7 @@ msgstr ""
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:590
 msgid "Train Faster, Train Harder"
-msgstr ""
+msgstr "Trénuj rychleji, trénuj tvrději"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:591
 msgid "Saledus is demanding some discipline"
@@ -1048,7 +1050,8 @@ msgstr[2] ""
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:639
 msgid ""
-"Finally, we have discovered the last piece of our shrine. Praise Neptune!"
+"Finally, we have discovered the last piece of our shrine. Now we can "
+"reassemble it to worship our god. Praise Neptune!"
 msgstr ""
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:642

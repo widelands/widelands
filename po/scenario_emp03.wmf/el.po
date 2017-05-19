@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-05-16 10:34+0000\n"
+"POT-Creation-Date: 2017-05-18 21:30+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Language-Team: Greek (https://www.transifex.com/widelands/teams/35159/el/)\n"
 "MIME-Version: 1.0\n"
@@ -1044,7 +1044,8 @@ msgstr[1] ""
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:639
 msgid ""
-"Finally, we have discovered the last piece of our shrine. Praise Neptune!"
+"Finally, we have discovered the last piece of our shrine. Now we can "
+"reassemble it to worship our god. Praise Neptune!"
 msgstr ""
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:642

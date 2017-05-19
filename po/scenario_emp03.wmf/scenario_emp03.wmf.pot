@@ -1,19 +1,18 @@
 # Widelands PATH/TO/FILE.PO
 # Copyright (C) 2005-2017 Widelands Development Team
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# 
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-05-18 21:30+0000\n"
+"POT-Creation-Date: 2017-05-19 07:45+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Language-Team: Marathi (https://www.transifex.com/widelands/teams/35159/mr/)\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: mr\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:39
 msgid "Build your first outpost"
@@ -137,16 +136,15 @@ msgstr ""
 msgid "Build 2 ports on distant islands"
 msgstr ""
 
-#. TRANSLATORS: Objective - create 2 expeditions and found new colonies with
-#. them
+#. TRANSLATORS: Objective - create 2 expeditions and found new colonies with them
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:115
 msgid "Build 2 Expedition Ports"
 msgstr ""
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:116
 msgid ""
-"We should explore the island in the south. Use an expedition to build a port"
-" there. Afterwards, let’s try to find some mining resources."
+"We should explore the island in the south. Use an expedition to build a port "
+"there. Afterwards, let’s try to find some mining resources."
 msgstr ""
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:117
@@ -164,8 +162,7 @@ msgid "Gold Production"
 msgstr ""
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:126
-msgid ""
-"We need to produce at least 6 gold to be able to colonize our vicinity."
+msgid "We need to produce at least 6 gold to be able to colonize our vicinity."
 msgstr ""
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:132
@@ -315,8 +312,8 @@ msgstr ""
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:223
 msgid ""
 "Sire, we do not know anything about the island. And I believe we are not "
-"safe either. It would probably be reasonable to build a tower to explore the"
-" island and add some military strength."
+"safe either. It would probably be reasonable to build a tower to explore the "
+"island and add some military strength."
 msgstr ""
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:230
@@ -331,8 +328,8 @@ msgstr ""
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:233
 msgid ""
 "As we don’t know how many resources we can get, we should be very "
-"restrictive in spending them. Even for military buildings, we should be very"
-" careful."
+"restrictive in spending them. Even for military buildings, we should be very "
+"careful."
 msgstr ""
 
 #. TRANSLATORS: Message header - Saledus is advising to save resources
@@ -348,8 +345,7 @@ msgstr ""
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:244
 msgid ""
 "Sire, Amalea is right about the resources. Therefore I correct myself. We "
-"should only build an outpost as this is the most effective military "
-"building."
+"should only build an outpost as this is the most effective military building."
 msgstr ""
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:253
@@ -402,8 +398,8 @@ msgstr ""
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:274
 msgid ""
 "Additionally, this would gain us some granite and some marble to build up "
-"our new world. We can use them as soon as there will finally be enough space"
-" for buildings."
+"our new world. We can use them as soon as there will finally be enough space "
+"for buildings."
 msgstr ""
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:282
@@ -446,15 +442,15 @@ msgstr ""
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:302
 msgid ""
-"I noticed that our stonemason has started his work, finally. He will cut the"
-" number of marble columns that we request in our basic economy settings."
+"I noticed that our stonemason has started his work, finally. He will cut the "
+"number of marble columns that we request in our basic economy settings."
 msgstr ""
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:305
 msgid ""
-"But here’s the rub, if we use up all of our marble for columns, we might run"
-" out. So, we should lower the settings for marble columns in the economy "
+"But here’s the rub, if we use up all of our marble for columns, we might run "
+"out. So, we should lower the settings for marble columns in the economy "
 "settings to a smaller amount. I think a reserve of 4 columns might be "
 "sufficient for the moment being."
 msgstr ""
@@ -500,8 +496,8 @@ msgstr ""
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:334
 msgid ""
-"The problem is that a port is a building which needs a very special place to"
-" be built. So, while building our economy, we should nevertheless expand "
+"The problem is that a port is a building which needs a very special place to "
+"be built. So, while building our economy, we should nevertheless expand "
 "further to discover the whole island. Let’s try to find such a valuable "
 "construction site."
 msgstr ""
@@ -569,8 +565,8 @@ msgstr ""
 msgid ""
 "After the production of enough wheat, we can dismantle the farm and build a "
 "sheep farm to produce wool. Later on, we could build a weaving mill in the "
-"same spot to use our wool for weaving cloth. But for the moment being, let’s"
-" start by producing a reasonable amount of wheat."
+"same spot to use our wool for weaving cloth. But for the moment being, let’s "
+"start by producing a reasonable amount of wheat."
 msgstr ""
 
 #. TRANSLATORS: Amalea
@@ -638,9 +634,9 @@ msgstr ""
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:414
 msgid ""
-"First, we need to find some more resources to back up our growing economy. I"
-" have spotted an island with some mountains in the south. Perhaps we can "
-"find some valuable resources like iron there."
+"First, we need to find some more resources to back up our growing economy. I "
+"have spotted an island with some mountains in the south. Perhaps we can find "
+"some valuable resources like iron there."
 msgstr ""
 
 #. TRANSLATORS: Saledus
@@ -651,9 +647,9 @@ msgstr ""
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:420
 msgid ""
-"I think I have heard the wind carrying some weird but well known sounds from"
-" the north. If I’m not totally wrong, I have heard some Barbarian war drums."
-" So, we should better go and have a look at what is going on up there."
+"I think I have heard the wind carrying some weird but well known sounds from "
+"the north. If I’m not totally wrong, I have heard some Barbarian war drums. "
+"So, we should better go and have a look at what is going on up there."
 msgstr ""
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:428
@@ -689,9 +685,9 @@ msgstr ""
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:440
 msgid ""
-"I strongly recommend building a production chain for mining and melting some"
-" gold. I think we need a vineyard, a winery, a tavern, a fisher’s house or a"
-" hunter’s house and a smelting works. And the mines themselves of course."
+"I strongly recommend building a production chain for mining and melting some "
+"gold. I think we need a vineyard, a winery, a tavern, a fisher’s house or a "
+"hunter’s house and a smelting works. And the mines themselves of course."
 msgstr ""
 
 #. TRANSLATORS: Amalea
@@ -730,8 +726,8 @@ msgstr ""
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:467
 msgid ""
 "Lutius, we have just solved another problem. We managed to melt enough gold "
-"to send out at least three expeditions. Perhaps we might even keep some gold"
-" to make some jewelry."
+"to send out at least three expeditions. Perhaps we might even keep some gold "
+"to make some jewelry."
 msgstr ""
 
 #. TRANSLATORS: Amalea
@@ -752,8 +748,8 @@ msgstr ""
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:479
 msgid ""
-"Well done so far. Now we will not produce more marble columns than needed. I"
-" really think we will need this economy feature quite often to adjust our "
+"Well done so far. Now we will not produce more marble columns than needed. I "
+"really think we will need this economy feature quite often to adjust our "
 "economy. Remember, our industry will only be working until the given amount "
 "in the economy settings is reached."
 msgstr ""
@@ -785,8 +781,8 @@ msgstr ""
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:494
 msgid ""
-"I strongly recommend dismantling most of them to be able to build industrial"
-" buildings. I don’t think there is much danger on this island, but if you "
+"I strongly recommend dismantling most of them to be able to build industrial "
+"buildings. I don’t think there is much danger on this island, but if you "
 "want to be cautious, you can keep some sentries or blockhouses near the "
 "coastline."
 msgstr ""
@@ -807,8 +803,8 @@ msgstr ""
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:506
 msgid ""
-"Lutius. We have made so much progress so far. I am glad to hear that we have"
-" many ships now."
+"Lutius. We have made so much progress so far. I am glad to hear that we have "
+"many ships now."
 msgstr ""
 
 #. TRANSLATORS: Amalea
@@ -837,9 +833,9 @@ msgstr ""
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:523
 msgid ""
-"Lutius. Well done. Well done. We have discovered all possible port locations"
-" in the complete region. Now we can strengthen our economy and we will "
-"manage to sail home soon."
+"Lutius. Well done. Well done. We have discovered all possible port locations "
+"in the complete region. Now we can strengthen our economy and we will manage "
+"to sail home soon."
 msgstr ""
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:529
@@ -899,8 +895,8 @@ msgstr ""
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:556
 msgid ""
-"Sire, we are making good progress towards getting home eventually. But there"
-" is one thing I need to talk about:"
+"Sire, we are making good progress towards getting home eventually. But there "
+"is one thing I need to talk about:"
 msgstr ""
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:558
@@ -918,8 +914,8 @@ msgstr ""
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:562
 msgid ""
-"To ease the search, I have crafted some models of the pieces as you can see."
-" You can give them to our soldiers and sailors to look for them."
+"To ease the search, I have crafted some models of the pieces as you can see. "
+"You can give them to our soldiers and sailors to look for them."
 msgstr ""
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:570
@@ -956,8 +952,7 @@ msgstr ""
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:584
 msgid ""
 "Sire, we found the ruins of a former Barbarian fortress and village. I’m "
-"somewhat worried that we will have to fight against them before we are "
-"ready."
+"somewhat worried that we will have to fight against them before we are ready."
 msgstr ""
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:590
@@ -978,8 +973,8 @@ msgstr ""
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:595
 msgid ""
-"We need a lot of food, a lot of iron and a lot of gold to do so. So, we have"
-" lots of challenges to cope with."
+"We need a lot of food, a lot of iron and a lot of gold to do so. So, we have "
+"lots of challenges to cope with."
 msgstr ""
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:601
@@ -993,16 +988,16 @@ msgstr ""
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:604
 msgid ""
-"Sire, we need to train some of our people to serve in your great army. It is"
-" important to increase the number of our soldiers as fast as we can. And we "
+"Sire, we need to train some of our people to serve in your great army. It is "
+"important to increase the number of our soldiers as fast as we can. And we "
 "should train them well to improve their fighting abilities."
 msgstr ""
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:606
 msgid ""
 "Therefore, we need to build a full training infrastructure despite the "
-"limited space available. We need some barracks, a training camp and an arena"
-" or a colosseum."
+"limited space available. We need some barracks, a training camp and an arena "
+"or a colosseum."
 msgstr ""
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:614
@@ -1012,8 +1007,8 @@ msgstr ""
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:617
 msgid ""
-"Yes my fellow soldiers, we have done it! We have met all the challenges that"
-" were put in front of us. But my heart is still with our home. We shall set "
+"Yes my fellow soldiers, we have done it! We have met all the challenges that "
+"were put in front of us. But my heart is still with our home. We shall set "
 "sail as soon as possible to help defend the Empire from the Barbarian tribe."
 msgstr ""
 
