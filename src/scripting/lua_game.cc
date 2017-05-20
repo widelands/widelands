@@ -594,6 +594,10 @@ int LuaPlayer::add_objective(lua_State* L) {
       :arg fields: The fields to show
       :type fields: :class:`array` of :class:`wl.map.Fields`
 
+      :arg show_completely: *Optional*. The fields will be marked as explored as if a building was
+         seeing them. Always use this option if you hid the fields with the option `hide_completely`.
+      :type show_completely: :class:`boolean`
+
       :returns: :const:`nil`
 */
 int LuaPlayer::reveal_fields(lua_State* L) {
@@ -602,11 +606,17 @@ int LuaPlayer::reveal_fields(lua_State* L) {
 	Map& m = egbase.map();
 
 	luaL_checktype(L, 2, LUA_TTABLE);
+	const bool bump_vision = (!lua_isnone(L, 3) && luaL_checkboolean(L, 3));
 
 	lua_pushnil(L); /* first key */
 	while (lua_next(L, 2) != 0) {
-		p.see_node(m, m[0], (*get_user_class<LuaField>(L, -1))->fcoords(L), egbase.get_gametime());
+		LuaField* field = *get_user_class<LuaField>(L, -1);
+		p.see_node(m, m[0], field->fcoords(L), egbase.get_gametime());
 		lua_pop(L, 1);
+		// Player should now see what the buildings see
+		if (bump_vision) {
+			p.see_node(m, m[0], field->fcoords(L), egbase.get_gametime());
+		}
 	}
 
 	return 0;
@@ -621,7 +631,8 @@ int LuaPlayer::reveal_fields(lua_State* L) {
       :arg fields: The fields to hide
       :type fields: :class:`array` of :class:`wl.map.Fields`
 
-      :arg hide_completely: *Optional*. The fields will be marked as unexplored.
+      :arg hide_completely: *Optional*. The fields will be marked as unexplored and the buildings' vision
+         ignored. When you reveal the fields again, use the option `show_completely`.
       :type hide_completely: :class:`boolean`
 
       :returns: :const:`nil`
@@ -632,24 +643,29 @@ int LuaPlayer::hide_fields(lua_State* L) {
 	Map& m = egbase.map();
 
 	luaL_checktype(L, 2, LUA_TTABLE);
-	const bool mode = !lua_isnone(L, 3) && luaL_checkboolean(L, 3);
+	const Player::UnseeNodeMode mode = (!lua_isnone(L, 3) && luaL_checkboolean(L, 3)) ?
+	                                      Player::UnseeNodeMode::kUnexplore :
+	                                      Player::UnseeNodeMode::kUnsee;
 
 	lua_pushnil(L); /* first key */
 	while (lua_next(L, 2) != 0) {
-		p.unsee_node((*get_user_class<LuaField>(L, -1))->fcoords(L).field - &m[0],
-		             egbase.get_gametime(),
-		             mode ? Player::UnseeNodeMode::kUnexplore : Player::UnseeNodeMode::kUnsee);
+		p.unsee_node(
+		   (*get_user_class<LuaField>(L, -1))->fcoords(L).field - &m[0], egbase.get_gametime(), mode);
 		lua_pop(L, 1);
 	}
 
-	// Player should still see what the buildings see
-	for (const auto& building_index : p.tribe().buildings()) {
-		const std::vector<Player::BuildingStats>& stats_vector = p.get_building_statistics(building_index);
-		for (size_t i = 0; i < stats_vector.size(); ++i) {
-			const BaseImmovable* immovable = m[stats_vector[i].pos].get_immovable();
-			if (upcast(const Widelands::Building, building, immovable)) {
-				if (building->is_seeing()) {
-					p.see_area(Area<FCoords>(m.get_fcoords(building->get_position()), building->descr().vision_range()));
+	if (mode == Player::UnseeNodeMode::kUnsee) {
+		// Player should still see what the buildings see
+		for (const auto& building_index : p.tribe().buildings()) {
+			const std::vector<Player::BuildingStats>& stats_vector =
+			   p.get_building_statistics(building_index);
+			for (size_t i = 0; i < stats_vector.size(); ++i) {
+				const BaseImmovable* immovable = m[stats_vector[i].pos].get_immovable();
+				if (upcast(const Widelands::Building, building, immovable)) {
+					if (building->is_seeing()) {
+						p.see_area(Area<FCoords>(
+						   m.get_fcoords(building->get_position()), building->descr().vision_range()));
+					}
 				}
 			}
 		}
