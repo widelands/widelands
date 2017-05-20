@@ -1047,7 +1047,8 @@ void Soldier::defense_update(Game& game, State& state) {
 			for (Bob* temp_bob : soldiers) {
 				if (upcast(Soldier, temp_soldier, temp_bob)) {
 					if (temp_soldier->can_be_challenged()) {
-						new Battle(game, *this, *temp_soldier);
+						assert(temp_soldier != nullptr);
+						new Battle(game, this, temp_soldier);
 						return start_task_battle(game);
 					}
 				}
@@ -1134,7 +1135,8 @@ void Soldier::defense_update(Game& game, State& state) {
 
 		if (target.dist <= 1) {
 			molog("[defense] starting battle with %u!\n", target.s->serial());
-			new Battle(game, *this, *(target.s));
+			assert(target.s != nullptr);
+			new Battle(game, this, target.s);
 			return start_task_battle(game);
 		}
 
@@ -1257,7 +1259,8 @@ void Soldier::battle_update(Game& game, State&) {
 		}
 	}
 
-	if (!battle_) {
+	// The opponent might have died on us
+	if (!battle_ || battle_->opponent(*this) == nullptr) {
 		if (combat_walking_ == CD_COMBAT_W) {
 			return start_task_move_in_battle(game, CD_RETURN_W);
 		}
@@ -1287,7 +1290,7 @@ void Soldier::battle_update(Game& game, State&) {
 	if (stay_home()) {
 		if (this == battle_->first()) {
 			molog("[battle] stay_home, so reverse roles\n");
-			new Battle(game, *battle_->second(), *battle_->first());
+			new Battle(game, battle_->second(), battle_->first());
 			return skip_act();  //  we will get a signal via set_battle()
 		} else {
 			if (combat_walking_ != CD_COMBAT_E) {
@@ -1298,7 +1301,7 @@ void Soldier::battle_update(Game& game, State&) {
 	} else {
 		if (opponent.stay_home() && (this == battle_->second())) {
 			// Wait until correct roles are assigned
-			new Battle(game, *battle_->second(), *battle_->first());
+			new Battle(game, battle_->second(), battle_->first());
 			return schedule_act(game, 10);
 		}
 
@@ -1488,7 +1491,7 @@ bool Soldier::check_node_blocked(Game& game, const FCoords& field, bool const co
 		if (commit && !foundbattle && !multiplesoldiers) {
 			if (foundsoldier->owner().is_hostile(*get_owner()) && foundsoldier->can_be_challenged()) {
 				molog("[check_node_blocked] attacking a soldier (%u)\n", foundsoldier->serial());
-				new Battle(game, *this, *foundsoldier);
+				new Battle(game, this, foundsoldier);
 			}
 		}
 
