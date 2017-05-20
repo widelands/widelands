@@ -25,6 +25,7 @@
 #include "ui_basic/table.h"
 #include "ui_basic/textarea.h"
 #include "ui_fsmenu/base.h"
+#include "ui_fsmenu/campaigndetails.h"
 #include "ui_fsmenu/load_map_or_game.h"
 
 /*
@@ -52,36 +53,14 @@ private:
 	/// Updates buttons and text labels and returns whether a table entry is selected.
 	bool set_has_selection();
 
-	/**
-	 * Data about a campaign that we're interested in.
-	 */
-	struct CampaignListData {
-		uint32_t index;
-		std::string name;
-		std::string tribename;
-		uint32_t difficulty;
-		std::string difficulty_description;
-		std::string description;
-
-		CampaignListData() : index(0), difficulty(0) {
-		}
-	};
-
 	bool compare_difficulty(uint32_t, uint32_t);
 
 	UI::Table<uintptr_t const> table_;
 
 	UI::Textarea title_;
-	UI::Textarea label_campname_;
-	UI::MultilineTextarea ta_campname_;
-	UI::Textarea label_tribename_;
-	UI::MultilineTextarea ta_tribename_;
-	UI::Textarea label_difficulty_;
-	UI::MultilineTextarea ta_difficulty_;
-	UI::Textarea label_description_;
-	UI::MultilineTextarea ta_description_;
+	CampaignDetails campaign_details_;
 
-	std::vector<CampaignListData> campaigns_data_;
+	std::vector<CampaignData> campaigns_data_;
 
 	/// Variables used for exchange between the two Campaign UIs and
 	/// Game::run_campaign

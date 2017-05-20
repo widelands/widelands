@@ -42,48 +42,16 @@
  */
 FullscreenMenuCampaignSelect::FullscreenMenuCampaignSelect()
    : FullscreenMenuLoadMapOrGame(),
-     table_(this, tablex_, tabley_, tablew_, tableh_),
+     table_(this, 0, 0, 0, 0),
 
      // Main Title
-     title_(this, get_w() / 2, tabley_ / 3, _("Choose a campaign"), UI::Align::kCenter),
+     title_(this, 0, 0, _("Choose a campaign"), UI::Align::kCenter),
 
      // Campaign description
-     label_campname_(this, right_column_x_, tabley_),
-     ta_campname_(this,
-                  right_column_x_ + indent_,
-                  get_y_from_preceding(label_campname_) + padding_,
-                  get_right_column_w(right_column_x_) - indent_,
-                  label_height_),
-
-     label_tribename_(this, right_column_x_, get_y_from_preceding(ta_campname_) + 2 * padding_),
-     ta_tribename_(this,
-                   right_column_x_ + indent_,
-                   get_y_from_preceding(label_tribename_) + padding_,
-                   get_right_column_w(right_column_x_ + indent_),
-                   label_height_),
-
-     label_difficulty_(this, right_column_x_, get_y_from_preceding(ta_tribename_) + 2 * padding_),
-     ta_difficulty_(this,
-                    right_column_x_ + indent_,
-                    get_y_from_preceding(label_difficulty_) + padding_,
-                    get_right_column_w(right_column_x_ + indent_),
-                    2 * label_height_ - padding_),
-
-     label_description_(this,
-                        right_column_x_,
-                        get_y_from_preceding(ta_difficulty_) + 2 * padding_,
-                        _("Description:")),
-     ta_description_(this,
-                     right_column_x_ + indent_,
-                     get_y_from_preceding(label_description_) + padding_,
-                     get_right_column_w(right_column_x_ + indent_),
-                     buty_ - get_y_from_preceding(label_description_) - 4 * padding_) {
+     campaign_details_(this) {
 	title_.set_fontsize(UI_FONT_SIZE_BIG);
 	back_.set_tooltip(_("Return to the main menu"));
 	ok_.set_tooltip(_("Play this campaign"));
-	ta_campname_.set_tooltip(_("The name of this campaign"));
-	ta_tribename_.set_tooltip(_("The tribe you will be playing"));
-	ta_difficulty_.set_tooltip(_("The difficulty of this campaign"));
 
 	ok_.sigclicked.connect(
 	   boost::bind(&FullscreenMenuCampaignSelect::clicked_ok, boost::ref(*this)));
@@ -103,10 +71,18 @@ FullscreenMenuCampaignSelect::FullscreenMenuCampaignSelect()
 	table_.set_sort_column(0);
 	table_.focus();
 	fill_table();
+	layout();
 }
 
 void FullscreenMenuCampaignSelect::layout() {
-	// TODO(GunChleoc): Implement when we have box layout for the details.
+	FullscreenMenuLoadMapOrGame::layout();
+	title_.set_pos(Vector2i(0, tabley_ / 3));
+	title_.set_size(get_w(), title_.get_h());
+	table_.set_size(tablew_, tableh_);
+	table_.set_pos(Vector2i(tablex_, tabley_));
+	campaign_details_.set_size(get_right_column_w(right_column_x_), tableh_ - buth_ - 4 * padding_);
+	campaign_details_.set_desired_size(get_right_column_w(right_column_x_), tableh_ - buth_ - 4 * padding_);
+	campaign_details_.set_pos(Vector2i(right_column_x_, tabley_));
 }
 
 /**
@@ -132,38 +108,15 @@ static char const* const difficulty_picture_filenames[] = {
 bool FullscreenMenuCampaignSelect::set_has_selection() {
 	bool has_selection = table_.has_selection();
 	ok_.set_enabled(has_selection);
-
-	if (!has_selection) {
-		label_campname_.set_text(std::string());
-		label_tribename_.set_text(std::string());
-		label_difficulty_.set_text(std::string());
-		label_description_.set_text(std::string());
-
-		ta_campname_.set_text(std::string());
-		ta_tribename_.set_text(std::string());
-		ta_difficulty_.set_text(std::string());
-		ta_description_.set_text(std::string());
-
-	} else {
-		label_campname_.set_text(_("Campaign Name:"));
-		label_tribename_.set_text(_("Tribe:"));
-		label_difficulty_.set_text(_("Difficulty:"));
-		label_description_.set_text(_("Description:"));
-	}
 	return has_selection;
 }
 
 void FullscreenMenuCampaignSelect::entry_selected() {
 	if (set_has_selection()) {
-		const CampaignListData& campaign_data = campaigns_data_[table_.get_selected()];
+		const CampaignData& campaign_data = campaigns_data_[table_.get_selected()];
 		campaign = campaign_data.index;
-
-		ta_campname_.set_text(campaign_data.name);
-		ta_tribename_.set_text(campaign_data.tribename);
-		ta_difficulty_.set_text(campaign_data.difficulty_description);
-		ta_description_.set_text(campaign_data.description);
+		campaign_details_.update(campaign_data);
 	}
-	ta_description_.scroll_to_top();
 }
 
 /**
@@ -208,7 +161,7 @@ void FullscreenMenuCampaignSelect::fill_table() {
 				difficulty = 0;
 			}
 
-			CampaignListData campaign_data;
+			CampaignData campaign_data;
 
 			campaign_data.index = i;
 
@@ -243,8 +196,8 @@ void FullscreenMenuCampaignSelect::fill_table() {
 }
 
 bool FullscreenMenuCampaignSelect::compare_difficulty(uint32_t rowa, uint32_t rowb) {
-	const CampaignListData& r1 = campaigns_data_[table_[rowa]];
-	const CampaignListData& r2 = campaigns_data_[table_[rowb]];
+	const CampaignData& r1 = campaigns_data_[table_[rowa]];
+	const CampaignData& r2 = campaigns_data_[table_[rowb]];
 
 	if (r1.difficulty < r2.difficulty) {
 		return true;

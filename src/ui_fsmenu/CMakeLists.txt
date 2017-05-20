@@ -28,6 +28,8 @@ wl_library(ui_fsmenu
     about.h
     base.cc
     base.h
+    campaigndetails.cc
+    campaigndetails.h
     campaign_select.cc
     campaign_select.h
     helpwindow.cc
