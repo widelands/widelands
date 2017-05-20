@@ -75,8 +75,8 @@ public:
 	}
 
 	// Returns the other soldier involved in this battle. CHECKs that the given
-	// soldier is participating in this battle. Can return nullptr, but I have
-	// no idea what that means.
+	// soldier is participating in this battle. Can return nullptr, probably when the
+	// opponent has died.
 	Soldier* opponent(const Soldier&) const;
 
 	// Called by the battling soldiers once they've met on a common node and are
