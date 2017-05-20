@@ -67,8 +67,6 @@ wl_library(ui_fsmenu
     graphic
     graphic_fonthandler
     graphic_playercolor
-    graphic_text
-    graphic_surface
     graphic_text_constants
     helper
     io_filesystem
