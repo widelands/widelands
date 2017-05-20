@@ -49,7 +49,7 @@ namespace {
 // that we do not need to lay out text every frame. Last benchmarked at r7712,
 // 30 MB was enough to cache texts for many frames (> 1000), while it is
 // quickly overflowing in the map selection menu.
-// This might need reevaluation is the new font handler is used for more stuff.
+// This might need reevaluation if this font handler is used for more stuff.
 constexpr uint32_t kTextureCacheSize = 30 << 20;  // shifting converts to MB
 }  // namespace
 
@@ -71,10 +71,13 @@ public:
 		render_cache_.clear();
 	}
 
+	// This will render the 'text' with a width restriction of 'w'. If 'w' == 0, no restriction is
+	// applied.
 	const RenderedText* render(const string& text, uint16_t w = 0) override {
 		const string hash = boost::lexical_cast<string>(w) + text;
 		if (render_cache_.count(hash) != 1) {
-			render_cache_.insert(std::make_pair(hash, std::unique_ptr<const RenderedText>(std::move(rt_renderer_->render(text, w)))));
+			render_cache_.insert(std::make_pair(
+			   hash, std::unique_ptr<const RenderedText>(std::move(rt_renderer_->render(text, w)))));
 		}
 		assert(render_cache_.count(hash) == 1);
 		return render_cache_.find(hash)->second.get();

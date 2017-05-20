@@ -150,7 +150,7 @@ void RenderTarget::blit(const Vector2i& dst,
 	Vector2i destination_point(dst);
 	UI::correct_for_align(align, image->width(), &destination_point);
 
-	Rectf source_rect(Vector2i(0, 0), image->width(), image->height());
+	Rectf source_rect(0, 0, image->width(), image->height());
 	Rectf destination_rect(destination_point.x, destination_point.y, source_rect.w, source_rect.h);
 
 	if (to_surface_geometry(&destination_rect, &source_rect)) {
@@ -167,7 +167,7 @@ void RenderTarget::blit_monochrome(const Vector2i& dst,
 	Vector2i destination_point(dst);
 	UI::correct_for_align(align, image->width(), &destination_point);
 
-	Rectf source_rect(Vector2i(0, 0), image->width(), image->height());
+	Rectf source_rect(0, 0, image->width(), image->height());
 	Rectf destination_rect(destination_point.x, destination_point.y, source_rect.w, source_rect.h);
 
 	if (to_surface_geometry(&destination_rect, &source_rect)) {
