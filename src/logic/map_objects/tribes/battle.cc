@@ -68,7 +68,7 @@ Battle::Battle(Game& game, Soldier* first_soldier, Soldier* second_soldier)
 		ss.unsigned_32(second_soldier->serial());
 	}
 
-	// Ensures only live soldiers engages in a battle
+	// Ensures only live soldiers engage in a battle
 	assert(first_soldier->get_current_health() && second_soldier->get_current_health());
 
 	init(game);
