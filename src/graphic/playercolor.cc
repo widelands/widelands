@@ -48,10 +48,10 @@ const Image* playercolor_image(const RGBColor& clr, const std::string& image_fil
 	const Image* color_mask = g_gr->images().get(color_mask_filename);
 	const int w = image->width();
 	const int h = image->height();
-	auto pc_image = std::unique_ptr<Texture>(new Texture(w, h));
+	Texture* pc_image = new Texture(w, h);
 	pc_image->fill_rect(Rectf(0, 0, w, h), RGBAColor(0, 0, 0, 0));
 	pc_image->blit_blended(Rectf(0, 0, w, h), *image, *color_mask, Rectf(0, 0, w, h), clr);
-	g_gr->images().insert(hash, std::move(pc_image));
+	g_gr->images().insert(hash, std::unique_ptr<const Texture>(std::move(pc_image)));
 	assert(g_gr->images().has(hash));
 	return g_gr->images().get(hash);
 }
