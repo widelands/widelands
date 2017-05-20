@@ -24,7 +24,6 @@
 #include "base/wexception.h"
 #include "economy/request.h"
 #include "economy/wares_queue.h"
-#include "logic/map_objects/attackable.h"
 #include "logic/map_objects/tribes/building.h"
 #include "logic/map_objects/tribes/soldiercontrol.h"
 #include "logic/map_objects/tribes/wareworker.h"
@@ -71,7 +70,7 @@ private:
 	DISALLOW_COPY_AND_ASSIGN(WarehouseDescr);
 };
 
-class Warehouse : public Building, public Attackable, public SoldierControl {
+class Warehouse : public Building, public SoldierControl {
 	friend class PortDock;
 	friend class MapBuildingdataPacket;
 
@@ -221,15 +220,6 @@ public:
 	void enable_spawn(Game&, uint8_t worker_types_without_cost_index);
 	void disable_spawn(uint8_t worker_types_without_cost_index);
 
-	// Begin Attackable implementation
-	Player& owner() const override {
-		return Building::owner();
-	}
-	bool can_attack() override;
-	void aggressor(Soldier&) override;
-	bool attack(Soldier&) override;
-	// End Attackable implementation
-
 	void receive_ware(Game&, DescriptionIndex ware) override;
 	void receive_worker(Game&, Worker& worker) override;
 
@@ -250,12 +240,25 @@ public:
 
 	void log_general_info(const EditorGameBase&) override;
 
-protected:
+private:
+	// A warehouse that conquers space can also be attacked.
+	class AttackTarget : public Widelands::AttackTarget {
+	public:
+		AttackTarget(Warehouse* warehouse) : warehouse_(warehouse) {
+		}
+
+		bool can_be_attacked() const override;
+		void enemy_soldier_approaches(const Soldier&) const override;
+		Widelands::AttackTarget::AttackResult attack(Soldier*) const override;
+
+	private:
+		Warehouse* const warehouse_;
+	};
+
+	void init_portdock(EditorGameBase& egbase);
+
 	/// Initializes the container sizes for the owner's tribe.
 	void init_containers(Player& owner);
-
-private:
-	void init_portdock(EditorGameBase& egbase);
 
 	/**
 	 * Plan to produce a certain worker type in this warehouse. This means
@@ -282,6 +285,7 @@ private:
 	void update_planned_workers(Game&, PlannedWorkers& pw);
 	void update_all_planned_workers(Game&);
 
+	AttackTarget attack_target_;
 	WarehouseSupply* supply_;
 
 	std::vector<StockPolicy> ware_policy_;

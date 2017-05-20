@@ -452,8 +452,8 @@ Road& Player::force_road(const Path& path) {
 		log("Clearing for road at (%i, %i)\n", c.x, c.y);
 
 		//  Make sure that the player owns the area around.
-		dynamic_cast<Game&>(egbase())
-		   .conquer_area_no_building(PlayerArea<Area<FCoords>>(player_number(), Area<FCoords>(c, 1)));
+		dynamic_cast<Game&>(egbase()).conquer_area_no_building(
+		   PlayerArea<Area<FCoords>>(player_number(), Area<FCoords>(c, 1)));
 
 		if (BaseImmovable* const immovable = c.field->get_immovable()) {
 			assert(immovable != &start);
@@ -869,8 +869,8 @@ void Player::enemyflagaction(Flag& flag, PlayerNumber const attacker, uint32_t c
 		log("enemyflagaction: count is 0\n");
 	else if (is_hostile(flag.owner())) {
 		if (Building* const building = flag.get_building()) {
-			if (upcast(Attackable, attackable, building)) {
-				if (attackable->can_attack()) {
+			if (const AttackTarget* attack_target = building->attack_target()) {
+				if (attack_target->can_be_attacked()) {
 					std::vector<Soldier*> attackers;
 					find_attack_soldiers(flag, &attackers, count);
 					assert(attackers.size() <= count);

@@ -128,7 +128,7 @@ wl_library(logic
     widelands_geometry_io.cc
     widelands_geometry_io.h
     map_objects/draw_text.h
-    map_objects/attackable.h
+    map_objects/attack_target.h
     map_objects/bob.cc
     map_objects/bob.h
     map_objects/buildcost.cc
