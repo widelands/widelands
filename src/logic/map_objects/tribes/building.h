@@ -155,7 +155,7 @@ public:
 
 	WorkareaInfo workarea_info_;
 
-	virtual int32_t suitability(const Map&, const FCoords&) const;
+	bool suitability(const Map&, const FCoords&) const;
 	const BuildingHints& hints() const {
 		return hints_;
 	}

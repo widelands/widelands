@@ -184,8 +184,9 @@ Building& BuildingDescr::create(EditorGameBase& egbase,
 	return b;
 }
 
-int32_t BuildingDescr::suitability(const Map&, const FCoords& fc) const {
-	return size_ <= (fc.field->nodecaps() & Widelands::BUILDCAPS_SIZEMASK);
+bool BuildingDescr::suitability(const Map&, const FCoords& fc) const {
+	return mine_ ? fc.field->nodecaps() & Widelands::BUILDCAPS_MINE :
+	               size_ <= (fc.field->nodecaps() & Widelands::BUILDCAPS_SIZEMASK);
 }
 
 /**

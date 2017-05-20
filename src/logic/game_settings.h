@@ -161,8 +161,7 @@ struct GameSettingsProvider {
 	virtual void set_player_team(uint8_t number, Widelands::TeamNumber team) = 0;
 	virtual void set_player_closeable(uint8_t number, bool closeable) = 0;
 	virtual void set_player_shared(uint8_t number, uint8_t shared) = 0;
-	virtual void set_win_condition_script(std::string wc) = 0;
-	virtual void next_win_condition() = 0;
+	virtual void set_win_condition_script(const std::string& wc) = 0;
 	virtual std::string get_win_condition_script() = 0;
 
 	struct NoTribe {};

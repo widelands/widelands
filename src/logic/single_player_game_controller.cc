@@ -25,7 +25,6 @@
 #include "logic/playercommand.h"
 #include "logic/playersmanager.h"
 #include "profile/profile.h"
-#include "wlapplication.h"
 
 SinglePlayerGameController::SinglePlayerGameController(Widelands::Game& game,
                                                        bool const useai,
