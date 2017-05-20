@@ -552,11 +552,12 @@ uint16_t TextNode::hotspot_y() const {
 }
 
 UI::RenderedText* TextNode::render(TextureCache* texture_cache) {
-	const Image* img =
+	const Image* rendered_image =
 	   &font_.render(txt_, nodestyle_.font_color, nodestyle_.font_style, texture_cache);
+	assert(rendered_image != nullptr);
 
 	UI::RenderedText* rendered_text = new UI::RenderedText();
-	rendered_text->rects.push_back(std::unique_ptr<UI::RenderedRect>(new UI::RenderedRect(img)));
+	rendered_text->rects.push_back(std::unique_ptr<UI::RenderedRect>(new UI::RenderedRect(rendered_image)));
 	return rendered_text;
 }
 
@@ -599,7 +600,7 @@ UI::RenderedText* FillingTextNode::render(TextureCache* texture_cache) {
 	    nodestyle_.font_style % width() % height() % (is_expanding_ ? "e" : "f"))
 	      .str();
 	const Image* rendered_image = texture_cache->get(hash);
-	if (!rendered_image) {
+	if (rendered_image == nullptr) {
 		const Image& t =
 		   font_.render(txt_, nodestyle_.font_color, nodestyle_.font_style, texture_cache);
 		std::unique_ptr<Texture> texture(new Texture(width(), height()));
@@ -610,6 +611,7 @@ UI::RenderedText* FillingTextNode::render(TextureCache* texture_cache) {
 		rendered_image = texture_cache->insert(hash, std::move(texture));
 	}
 
+	assert(rendered_image != nullptr);
 	rendered_text->rects.push_back(
 	   std::unique_ptr<UI::RenderedRect>(new UI::RenderedRect(rendered_image)));
 	return rendered_text;
@@ -638,12 +640,13 @@ public:
 
 			const std::string hash = (boost::format("rt:wsp:%i:%i") % width() % height()).str();
 			const Image* rendered_image = texture_cache->get(hash);
-			if (!rendered_image) {
+			if (rendered_image == nullptr) {
 				std::unique_ptr<Texture> texture(new Texture(width(), height()));
 				texture->fill_rect(Rectf(0, 0, w_, h_), RGBAColor(0xcc, 0, 0, 0xcc));
 				rendered_image = texture_cache->insert(hash, std::move(texture));
 			}
 
+			assert(rendered_image != nullptr);
 			rendered_text->rects.push_back(
 			   std::unique_ptr<UI::RenderedRect>(new UI::RenderedRect(rendered_image)));
 			return rendered_text;
@@ -728,7 +731,7 @@ public:
 			std::unique_ptr<Texture> texture(new Texture(width(), height()));
 
 			// Draw background image (tiling)
-			if (background_image_) {
+			if (background_image_ != nullptr) {
 				Rectf dst;
 				Rectf srcrect(0, 0, 1, 1);
 				for (uint16_t curx = 0; curx < w_; curx += background_image_->width()) {
@@ -744,6 +747,7 @@ public:
 			rendered_image = texture_cache->insert(hash, std::move(texture));
 		}
 
+		assert(rendered_image != nullptr);
 		rendered_text->rects.push_back(
 		   std::unique_ptr<UI::RenderedRect>(new UI::RenderedRect(rendered_image)));
 		return rendered_text;
@@ -822,7 +826,7 @@ public:
 		}
 
 		// Draw background image (tiling)
-		if (background_image_) {
+		if (background_image_ != nullptr) {
 			UI::RenderedRect* bg_rect =
 			   new UI::RenderedRect(Recti(margin_.left, margin_.top, w_, h_), background_image_);
 			check_size(bg_rect->width(), bg_rect->height());
@@ -931,6 +935,7 @@ UI::RenderedText* ImgRenderNode::render(TextureCache* texture_cache) {
 
 	if (scale_ == 1.0) {
 		// Image can be used as is, and has already been cached in g_gr->images()
+		assert(image_ != nullptr);
 		rendered_text->rects.push_back(
 		   std::unique_ptr<UI::RenderedRect>(new UI::RenderedRect(image_)));
 	} else {
@@ -939,13 +944,14 @@ UI::RenderedText* ImgRenderNode::render(TextureCache* texture_cache) {
 		                          (use_playercolor_ ? color_.hex_value() : "") % width() % height())
 		                            .str();
 		const Image* rendered_image = texture_cache->get(hash);
-		if (!rendered_image) {
+		if (rendered_image == nullptr) {
 			std::unique_ptr<Texture> texture(new Texture(width(), height()));
 			texture->blit(Rectf(0, 0, width(), height()), *image_,
 			              Rectf(0, 0, image_->width(), image_->height()), 1., BlendMode::Copy);
 			rendered_image = texture_cache->insert(hash, std::move(texture));
 		}
 
+		assert(rendered_image != nullptr);
 		rendered_text->rects.push_back(
 		   std::unique_ptr<UI::RenderedRect>(new UI::RenderedRect(rendered_image)));
 	}

@@ -164,7 +164,7 @@ void RenderedText::draw(RenderTarget& dst,
 			}
 		}
 
-		if (rect->image()) {
+		if (rect->image() != nullptr) {
 			switch (rect->mode()) {
 			// Draw a foreground texture
 			case RenderedRect::DrawMode::kBlit: {

@@ -147,6 +147,7 @@ void RenderTarget::blit(const Vector2i& dst,
                         const Image* image,
                         BlendMode blend_mode,
                         UI::Align align) {
+	assert(image != nullptr);
 	Vector2i destination_point(dst);
 	UI::correct_for_align(align, image->width(), &destination_point);
 
