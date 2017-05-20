@@ -34,10 +34,14 @@ bool NetHost::is_connected(const ConnectionId id) const {
 
 void NetHost::stop_listening() {
 	boost::system::error_code ec;
-	if (acceptor_v4_.is_open())
+	if (acceptor_v4_.is_open()) {
+		log("[NetHost]: Closing a listening IPv4 socket\n");
 		acceptor_v4_.close(ec);
-	if (acceptor_v6_.is_open())
+	}
+	if (acceptor_v6_.is_open()) {
+		log("[NetHost]: Closing a listening IPv6 socket\n");
 		acceptor_v6_.close(ec);
+	}
 	// Ignore errors
 }
 
@@ -154,8 +158,12 @@ void NetHost::send(const ConnectionId id, const SendPacket& packet) {
 NetHost::NetHost(const uint16_t port)
 	: clients_(), next_id_(1), io_service_(), acceptor_v4_(io_service_), acceptor_v6_(io_service_) {
 
-	open_acceptor(&acceptor_v4_, boost::asio::ip::tcp::endpoint(boost::asio::ip::tcp::v4(), port));
-	open_acceptor(&acceptor_v6_, boost::asio::ip::tcp::endpoint(boost::asio::ip::tcp::v6(), port));
+	if (open_acceptor(&acceptor_v4_, boost::asio::ip::tcp::endpoint(boost::asio::ip::tcp::v4(), port))) {
+		log("[NetHost]: Opening a listening IPv4 socket on port %u\n", port);
+	}
+	if (open_acceptor(&acceptor_v6_, boost::asio::ip::tcp::endpoint(boost::asio::ip::tcp::v6(), port))) {
+		log("[NetHost]: Opening a listening IPv6 socket on port %u\n", port);
+	}
 }
 
 bool NetHost::open_acceptor(boost::asio::ip::tcp::acceptor *acceptor,
@@ -163,6 +171,8 @@ bool NetHost::open_acceptor(boost::asio::ip::tcp::acceptor *acceptor,
 	try {
 		acceptor->open(endpoint.protocol());
 		acceptor->non_blocking(true);
+		const boost::asio::socket_base::reuse_address option_reuse(true);
+		acceptor->set_option(option_reuse);
 		if (endpoint.protocol() == boost::asio::ip::tcp::v6()) {
 			const boost::asio::ip::v6_only option_v6only(true);
 			acceptor->set_option(option_v6only);
