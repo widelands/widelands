@@ -231,11 +231,6 @@ std::string SinglePlayerGameSettingsProvider::get_win_condition_script() {
 	return s.win_condition_script;
 }
 
-void SinglePlayerGameSettingsProvider::set_win_condition_script(std::string wc) {
+void SinglePlayerGameSettingsProvider::set_win_condition_script(const std::string& wc) {
 	s.win_condition_script = wc;
-}
-
-void SinglePlayerGameSettingsProvider::next_win_condition() {
-	// not implemented - feel free to do so, if you need it.
-	NEVER_HERE();
 }

@@ -785,17 +785,17 @@ int LuaPlayer::get_buildings(lua_State* L) {
 /* RST
    .. method:: get_suitability(building, field)
 
-      Returns the suitability that this building has for this field. This
-      is mainly useful in initialization where buildings must be placed
+      Returns whether this building type can be placed on this field. This
+      is mainly useful in initializations where buildings must be placed
       automatically.
 
-      :arg building: name of the building to check for
+      :arg building: name of the building description to check for
       :type building: :class:`string`
       :arg field: where the suitability should be checked
       :type field: :class:`wl.map.Field`
 
-      :returns: the suitability
-      :rtype: :class:`integer`
+      :returns: whether the field has a suitable building plot for this building type
+      :rtype: :class:`boolean`
 */
 // UNTESTED
 int LuaPlayer::get_suitability(lua_State* L) {
@@ -807,8 +807,8 @@ int LuaPlayer::get_suitability(lua_State* L) {
 	if (!tribes.building_exists(i))
 		report_error(L, "Unknown building type: <%s>", name);
 
-	lua_pushint32(L, tribes.get_building_descr(i)->suitability(
-	                    game.map(), (*get_user_class<LuaField>(L, 3))->fcoords(L)));
+	lua_pushboolean(L, tribes.get_building_descr(i)->suitability(
+	                      game.map(), (*get_user_class<LuaField>(L, 3))->fcoords(L)));
 	return 1;
 }
 

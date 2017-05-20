@@ -79,7 +79,7 @@ UI::Checkbox* create_terrain_checkbox(UI::Panel* parent,
 	                               .str();
 
 	std::unique_ptr<const Image>& image = offscreen_images->back();
-	UI::Checkbox* cb = new UI::Checkbox(parent, Vector2i(0, 0), image.get(), tooltip);
+	UI::Checkbox* cb = new UI::Checkbox(parent, Vector2i::zero(), image.get(), tooltip);
 	cb->set_desired_size(image->width() + 1, image->height() + 1);
 	return cb;
 }

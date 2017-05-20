@@ -43,7 +43,7 @@ function reveal_randomly(plr, region, time)
       table.insert(t, region[id])
       local id2 = math.random(1, #region)
       table.insert(t, region[id2])
-      plr:reveal_fields(t)
+      plr:reveal_fields(t, true)
       sleep(delay)
       table.remove(region, id)
    end
@@ -100,7 +100,7 @@ function reveal_concentric(plr, center, max_radius, delay)
    if not delay then delay = 100 end
    local steps = 0
    while steps < max_radius do
-      plr:reveal_fields(center:region(steps))
+      plr:reveal_fields(center:region(steps), true)
       steps = steps + 1
       sleep(delay)
    end
