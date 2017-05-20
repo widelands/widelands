@@ -150,7 +150,6 @@ public:
 	// For cheating
 	void set_see_all(bool const t) {
 		see_all_ = t;
-		view_changed_ = true;
 	}
 	bool see_all() const {
 		return see_all_;
@@ -428,12 +427,6 @@ public:
 		return (see_all_ ? 2 : 0) + fields_[i].vision;
 	}
 
-	bool has_view_changed() {
-		bool t = view_changed_;
-		view_changed_ = false;
-		return t;
-	}
-
 	/**
 	 * Update this player's information about this node and the surrounding
 	 * triangles and edges.
@@ -458,7 +451,6 @@ public:
 		do {
 			see_node(map, first_map_field, mr.location(), gametime);
 		} while (mr.advance(map));
-		view_changed_ = true;
 	}
 
 	/// Decrement this player's vision for each node in an area.
@@ -470,7 +462,6 @@ public:
 		do
 			unsee_node(mr.location().field - &first_map_field, gametime);
 		while (mr.advance(map));
-		view_changed_ = true;
 	}
 
 	MilitaryInfluence military_influence(MapIndex const i) const {
@@ -628,7 +619,6 @@ private:
 	std::vector<Player*> team_player_;
 	bool team_player_uptodate_;
 	bool see_all_;
-	bool view_changed_;
 	const PlayerNumber player_number_;
 	const TribeDescr& tribe_;  // buildings, wares, workers, sciences
 	uint32_t casualties_, kills_;
