@@ -95,7 +95,10 @@ InternetGaming& InternetGaming::ref() {
 void InternetGaming::initialize_connection() {
 	// First of all try to connect to the metaserver
 	log("InternetGaming: Connecting to the metaserver.\n");
-	net = NetClient::connect(NetAddress{meta_, port_});
+	NetAddress addr;
+	net.reset();
+	if (NetAddress::resolve_to_v4(&addr, meta_, port_))
+		net = NetClient::connect(addr);
 	if (!net || !net->is_connected())
 		throw WLWarning(_("Could not establish connection to host"),
 		                _("Widelands could not establish a connection to the given address.\n"
