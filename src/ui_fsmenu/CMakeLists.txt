@@ -58,6 +58,10 @@ wl_library(ui_fsmenu
     multiplayer.h
     netsetup_lan.cc
     netsetup_lan.h
+    scenariodetails.cc
+    scenariodetails.h
+    scenario_select.cc
+    scenario_select.h
     singleplayer.cc
     singleplayer.h
   DEPENDS

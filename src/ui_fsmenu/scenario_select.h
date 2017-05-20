@@ -17,48 +17,60 @@
  *
  */
 
-#ifndef WL_UI_FSMENU_CAMPAIGN_SELECT_H
-#define WL_UI_FSMENU_CAMPAIGN_SELECT_H
+#ifndef WL_UI_FSMENU_SCENARIO_SELECT_H
+#define WL_UI_FSMENU_SCENARIO_SELECT_H
 
-#include <vector>
-
+#include "ui_basic/box.h"
+#include "ui_basic/multilinetextarea.h"
 #include "ui_basic/table.h"
 #include "ui_basic/textarea.h"
-#include "ui_fsmenu/campaigndetails.h"
 #include "ui_fsmenu/load_map_or_game.h"
+#include "ui_fsmenu/scenariodetails.h"
 
 /*
- * Fullscreen Menu for selecting a campaign
+ * Fullscreen Menu for selecting a campaign or tutorial scenario
  */
-class FullscreenMenuCampaignSelect : public FullscreenMenuLoadMapOrGame {
+class FullscreenMenuScenarioSelect : public FullscreenMenuLoadMapOrGame {
 public:
-	FullscreenMenuCampaignSelect();
+	FullscreenMenuScenarioSelect(bool is_tutorial = false);
 
-	int32_t get_campaign();
+	std::string get_map();
+	void set_campaign(uint32_t);
 
 protected:
-	void clicked_ok() override;
 	void entry_selected() override;
 	void fill_table() override;
 
 private:
+	struct ScenarioTableData {
+		uint32_t index;
+		std::string name;
+		std::string author;
+		std::string path;
+
+		ScenarioTableData() : index(0) {
+		}
+	};
+
 	void layout() override;
 
 	/// Updates buttons and text labels and returns whether a table entry is selected.
 	bool set_has_selection();
 
-	bool compare_difficulty(uint32_t, uint32_t);
-
 	UI::Table<uintptr_t const> table_;
 
+	UI::Box header_box_;
+
 	UI::Textarea title_;
-	CampaignDetails campaign_details_;
+	UI::MultilineTextarea subtitle_;
+	ScenarioDetails scenario_details_;
 
-	std::vector<CampaignData> campaigns_data_;
+	uint32_t campaign;
+	std::string campmapfile;
 
-	/// Variables used for exchange between the two Campaign UIs and
-	/// Game::run_campaign
-	int32_t campaign_;
+	std::vector<ScenarioTableData> scenarios_data_;
+
+	bool is_tutorial_;
 };
 
-#endif  // end of include guard: WL_UI_FSMENU_CAMPAIGN_SELECT_H
+#endif  // end of include guard: WL_UI_FSMENU_SCENARIO_SELECT_H

@@ -16,7 +16,7 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-#include "ui_fsmenu/campaigndetails.h"
+#include "ui_fsmenu/scenariodetails.h"
 
 #include <boost/format.hpp>
 
@@ -40,7 +40,7 @@ std::string as_content(const std::string& txt) {
 }
 }  // namespace
 
-CampaignDetails::CampaignDetails(Panel* parent)
+ScenarioDetails::ScenarioDetails(Panel* parent)
    : UI::Box(parent, 0, 0, UI::Box::Vertical),
      name_label_(this,
                  0,
@@ -61,20 +61,21 @@ CampaignDetails::CampaignDetails(Panel* parent)
 	add(&descr_, UI::Box::Resizing::kExpandBoth);
 }
 
-void CampaignDetails::update(const CampaignData& campaigndata) {
-	name_label_.set_text((boost::format("<rt>%s%s</rt>") % as_header(_("Campaign:"), true) %
-	                      as_content(campaigndata.name))
-	                        .str());
+void ScenarioDetails::update(const ScenarioMapData& scenariodata) {
+	name_label_.set_text(
+	   (boost::format("<rt>%s%s</rt>") %
+	    as_header(scenariodata.is_tutorial ? _("Tutorial:") : _("Scenario:"), true) %
+	    as_content(scenariodata.name))
+	      .str());
 
 	std::string description =
-	   (boost::format("%s%s") % as_header("Tribe:") % as_content(campaigndata.tribename)).str();
+	   (boost::format("%s%s") %
+	    as_header(ngettext("Author:", "Authors:", scenariodata.authors.get_number())) %
+	    as_content(scenariodata.authors.get_names()))
+	      .str();
 
-	description = (boost::format("%s%s") % description % as_header(_("Difficulty:"))).str();
-	description =
-	   (boost::format("%s%s") % description % as_content(campaigndata.difficulty_description)).str();
-
-	description = (boost::format("%s%s") % description % as_header(_("Story:"))).str();
-	description = (boost::format("%s%s") % description % as_content(campaigndata.description)).str();
+	description = (boost::format("%s%s") % description % as_header(_("Description:"))).str();
+	description = (boost::format("%s%s") % description % as_content(scenariodata.description)).str();
 
 	description = (boost::format("<rt>%s</rt>") % description).str();
 	descr_.set_text(description);

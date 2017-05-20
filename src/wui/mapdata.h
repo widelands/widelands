@@ -30,32 +30,7 @@
 #include "base/i18n.h"
 #include "io/filesystem/filesystem.h"
 #include "logic/map.h"
-
-/**
- * Author data for a map or scenario.
- */
-struct MapAuthorData {
-	const std::string& get_names() const {
-		return names_;
-	}
-	size_t get_number() const {
-		return number_;
-	}
-
-	// Parses author list string into localized contatenated list
-	// string. Use , as list separator and no whitespaces between
-	// author names.
-	MapAuthorData(const std::string& author_list) {
-		std::vector<std::string> authors;
-		boost::split(authors, author_list, boost::is_any_of(","));
-		names_ = i18n::localize_list(authors, i18n::ConcatenateWith::AMPERSAND);
-		number_ = authors.size();
-	}
-
-private:
-	std::string names_;
-	size_t number_;
-};
+#include "wui/mapauthordata.h"
 
 /**
  * Data about a map that we're interested in.

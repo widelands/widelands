@@ -71,6 +71,7 @@ wl_library(wui_mapview_pixelfunctions
 
 wl_library(wui_common
   SRCS
+    mapauthordata.h
     mapdetails.cc
     mapdetails.h
     mapdata.cc

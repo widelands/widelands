@@ -87,6 +87,7 @@
 #include "ui_fsmenu/multiplayer.h"
 #include "ui_fsmenu/netsetup_lan.h"
 #include "ui_fsmenu/options.h"
+#include "ui_fsmenu/scenario_select.h"
 #include "ui_fsmenu/singleplayer.h"
 #include "wlapplication_messages.h"
 #include "wui/game_tips.h"
@@ -1067,7 +1068,7 @@ void WLApplication::mainmenu_tutorial() {
 	Widelands::Game game;
 	std::string filename;
 	//  Start UI for the tutorials.
-	FullscreenMenuCampaignMapSelect select_campaignmap(true);
+	FullscreenMenuScenarioSelect select_campaignmap(true);
 	select_campaignmap.set_campaign(0);
 	if (select_campaignmap.run<FullscreenMenuBase::MenuTarget>() ==
 	    FullscreenMenuBase::MenuTarget::kOk) {
@@ -1308,7 +1309,7 @@ bool WLApplication::campaign_game() {
 			}
 		}
 		//  Then start UI for the selected campaign.
-		FullscreenMenuCampaignMapSelect select_campaignmap;
+		FullscreenMenuScenarioSelect select_campaignmap;
 		select_campaignmap.set_campaign(campaign);
 		if (select_campaignmap.run<FullscreenMenuBase::MenuTarget>() ==
 		    FullscreenMenuBase::MenuTarget::kOk) {
