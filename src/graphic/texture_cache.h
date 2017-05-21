@@ -50,21 +50,21 @@ public:
 	void flush();
 
 	/// Returns an entry if it is cached, nullptr otherwise.
-	const Image* get(const std::string& hash);
+	std::shared_ptr<const Image> get(const std::string& hash);
 
 	// Inserts this entry into the TextureCache. asserts() that there is no
 	// entry with this hash already cached. Returns the given Surface for
 	// convenience. If 'transient' is false, this surface will not be deleted
 	// automatically - use this if surfaces are around for a long time and
 	// recreation is expensive (i.e. images loaded from disk).
-	const Image* insert(const std::string& hash, std::unique_ptr<const Image> texture);
+	std::shared_ptr<const Image> insert(const std::string& hash, std::shared_ptr<const Image> texture);
 
 private:
 	void drop();
 
 	using AccessHistory = std::list<std::string>;
 	struct Entry {
-		std::unique_ptr<const Image> texture;
+		std::shared_ptr<const Image> texture;
 		uint32_t last_access;  // Mainly for debugging and analysis.
 		const AccessHistory::iterator list_iterator;
 	};

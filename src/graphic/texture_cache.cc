@@ -24,6 +24,7 @@
 #include <SDL.h>
 #include <stdint.h>
 
+#include "base/log.h"
 #include "graphic/image.h"
 
 // The implementation took inspiration from
@@ -44,19 +45,20 @@ void TextureCache::flush() {
 	size_in_bytes_ = 0;
 }
 
-const Image* TextureCache::get(const std::string& hash) {
+std::shared_ptr<const Image> TextureCache::get(const std::string& hash) {
 	const auto it = entries_.find(hash);
-	if (it == entries_.end())
-		return nullptr;
+	if (it == entries_.end()) {
+		return std::shared_ptr<const Image>(nullptr);
+	}
 
 	// Move this to the back of the access list to signal that we have used this
 	// recently and update last access time.
 	access_history_.splice(access_history_.end(), access_history_, it->second.list_iterator);
 	it->second.last_access = SDL_GetTicks();
-	return it->second.texture.get();
+	return it->second.texture;
 }
 
-const Image* TextureCache::insert(const std::string& hash, std::unique_ptr<const Image> texture) {
+std::shared_ptr<const Image> TextureCache::insert(const std::string& hash, std::shared_ptr<const Image> texture) {
 	assert(entries_.find(hash) == entries_.end());
 
 	const uint32_t texture_size = texture->width() * texture->height() * 4;
@@ -68,7 +70,7 @@ const Image* TextureCache::insert(const std::string& hash, std::unique_ptr<const
 	AccessHistory::iterator it = access_history_.insert(access_history_.end(), hash);
 	size_in_bytes_ += texture_size;
 	return entries_.insert(make_pair(hash, Entry{std::move(texture), SDL_GetTicks(), it}))
-	   .first->second.texture.get();
+	   .first->second.texture;
 }
 
 void TextureCache::drop() {
@@ -80,6 +82,7 @@ void TextureCache::drop() {
 
 	const uint32_t texture_size = it->second.texture->width() * it->second.texture->height() * 4;
 	size_in_bytes_ -= texture_size;
+	log("TextureCache: Dropping %d bytes, new size %d. Hash: %s\n", texture_size, size_in_bytes_, it->first.c_str());
 
 	// Erase both elements to completely purge record
 	entries_.erase(it);

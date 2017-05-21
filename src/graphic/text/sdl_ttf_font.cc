@@ -63,7 +63,7 @@ void SdlTtfFont::dimensions(const std::string& txt, int style, uint16_t* gw, uin
 	*gh = h;
 }
 
-const Image& SdlTtfFont::render(const std::string& txt,
+std::shared_ptr<const Image> SdlTtfFont::render(const std::string& txt,
                                 const RGBColor& clr,
                                 int style,
                                 TextureCache* texture_cache) {
@@ -71,9 +71,10 @@ const Image& SdlTtfFont::render(const std::string& txt,
 	   (boost::format("ttf:%s:%s:%i:%02x%02x%02x:%i") % font_name_ % ptsize_ % txt %
 	    static_cast<int>(clr.r) % static_cast<int>(clr.g) % static_cast<int>(clr.b) % style)
 	      .str();
-	const Image* rv = texture_cache->get(hash);
-	if (rv)
-		return *rv;
+	std::shared_ptr<const Image> rv = texture_cache->get(hash);
+	if (rv.get() != nullptr) {
+		return rv;
+	}
 
 	set_style(style);
 
@@ -128,7 +129,7 @@ const Image& SdlTtfFont::render(const std::string& txt,
 		throw RenderError(
 		   (boost::format("Rendering '%s' gave the error: %s") % txt % TTF_GetError()).str());
 
-	return *texture_cache->insert(hash, std::unique_ptr<Texture>(new Texture(text_surface)));
+	return texture_cache->insert(hash, std::make_shared<Texture>(text_surface));
 }
 
 uint16_t SdlTtfFont::ascent(int style) const {

@@ -27,13 +27,28 @@
 namespace UI {
 // RenderedRect
 RenderedRect::RenderedRect(const Recti& init_rect,
+                           std::shared_ptr<const Image> init_image,
+                           bool visited,
+                           const RGBColor& color,
+                           bool is_background_color_set,
+                           DrawMode init_mode)
+   : rect_(init_rect),
+     transient_image_(init_image),
+     permanent_image_(nullptr),
+     visited_(visited),
+     background_color_(color),
+     is_background_color_set_(is_background_color_set),
+     mode_(init_mode) {
+}
+RenderedRect::RenderedRect(const Recti& init_rect,
                            const Image* init_image,
                            bool visited,
                            const RGBColor& color,
                            bool is_background_color_set,
                            DrawMode init_mode)
    : rect_(init_rect),
-     image_(init_image),
+     transient_image_(nullptr),
+     permanent_image_(init_image),
      visited_(visited),
      background_color_(color),
      is_background_color_set_(is_background_color_set),
@@ -46,6 +61,14 @@ RenderedRect::RenderedRect(const Recti& init_rect, const Image* init_image)
 RenderedRect::RenderedRect(const Recti& init_rect, const RGBColor& color)
    : RenderedRect(init_rect, nullptr, false, color, true, DrawMode::kTile) {
 }
+RenderedRect::RenderedRect(std::shared_ptr<const Image> init_image)
+   : RenderedRect(Recti(0, 0, init_image->width(), init_image->height()),
+                  init_image,
+                  false,
+                  RGBColor(0, 0, 0),
+                  false,
+                  DrawMode::kBlit) {
+}
 RenderedRect::RenderedRect(const Image* init_image)
    : RenderedRect(Recti(0, 0, init_image->width(), init_image->height()),
                   init_image,
@@ -56,7 +79,8 @@ RenderedRect::RenderedRect(const Image* init_image)
 }
 
 const Image* RenderedRect::image() const {
-	return image_;
+	assert(permanent_image_ == nullptr || transient_image_.get() == nullptr);
+	return permanent_image_ == nullptr ? transient_image_.get() : permanent_image_;
 }
 
 int RenderedRect::x() const {

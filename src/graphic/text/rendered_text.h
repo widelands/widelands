@@ -38,6 +38,14 @@ public:
 	enum class DrawMode { kBlit, kTile };
 
 private:
+	// The image is managed by a transient cache
+	RenderedRect(const Recti& init_rect,
+	             std::shared_ptr<const Image> init_image,
+	             bool visited,
+	             const RGBColor& color,
+	             bool is_background_color_set,
+	             DrawMode init_mode);
+	// The image is managed by a pernament cache
 	RenderedRect(const Recti& init_rect,
 	             const Image* init_image,
 	             bool visited,
@@ -52,7 +60,12 @@ public:
 	/// RenderedRect will contain a background color that should be tiled
 	RenderedRect(const Recti& init_rect, const RGBColor& color);
 
-	/// RenderedRect will contain a normal image
+	/// RenderedRect will contain a normal image that is managed by a transient cache.
+	/// Use this if the image is managed by an instance of TextureCache.
+	RenderedRect(std::shared_ptr<const Image> init_image);
+
+	/// RenderedRect will contain a normal image that is managed by a permanent cache.
+	/// Use this if the image is managed by g_gr->images().
 	RenderedRect(const Image* init_image);
 	~RenderedRect() {
 	}
@@ -88,7 +101,10 @@ public:
 
 private:
 	Recti rect_;
-	const Image* image_;  // Not owned
+	// We have 2 image objects depending on the caching situation - only use one of them at the same
+	// time.
+	std::shared_ptr<const Image> transient_image_;  // Shared ownership, managed by a transient cache
+	const Image* permanent_image_;                  // Not owned, managed by a permanent cache
 	bool visited_;
 	const RGBColor background_color_;
 	const bool is_background_color_set_;
