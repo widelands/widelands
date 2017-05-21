@@ -266,16 +266,9 @@ wl_library(graphic_fonthandler
     font_handler1.cc
     font_handler1.h
   DEPENDS
-    base_exceptions
-    base_geometry
-    base_log
     base_macros
-    graphic
-    graphic_align
     graphic_image_cache
-    graphic_surface
     graphic_text
-    io_filesystem
 )
 
 wl_library(graphic_text_constants
