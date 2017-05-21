@@ -54,7 +54,7 @@ private:
 	// A transient cache for the generated rendered texts
 	class RenderCache : public TransientCache<RenderedText> {
 	public:
-		RenderCache(uint32_t max_size_in_bytes) : TransientCache<RenderedText>(max_size_in_bytes) {
+		RenderCache(uint32_t max_number_of_rects) : TransientCache<RenderedText>(max_number_of_rects) {
 		}
 
 		std::shared_ptr<const RenderedText> insert(const std::string& hash,
