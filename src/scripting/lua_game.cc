@@ -595,7 +595,8 @@ int LuaPlayer::add_objective(lua_State* L) {
       :type fields: :class:`array` of :class:`wl.map.Fields`
 
       :arg show_completely: *Optional*. The fields will be marked as explored as if a building was
-         seeing them. Always use this option if you hid the fields with the option `hide_completely`.
+         seeing them. Always use this option as `true` if you hid the fields with the option
+         `hide_completely` set to `true`.
       :type show_completely: :class:`boolean`
 
       :returns: :const:`nil`
@@ -631,8 +632,8 @@ int LuaPlayer::reveal_fields(lua_State* L) {
       :arg fields: The fields to hide
       :type fields: :class:`array` of :class:`wl.map.Fields`
 
-      :arg hide_completely: *Optional*. The fields will be marked as unexplored and the buildings' vision
-         ignored. When you reveal the fields again, use the option `show_completely`.
+      :arg hide_completely: *Optional*. If  `true`, the fields will be marked as unexplored and the buildings'
+         vision ignored. When you reveal the fields again, use the option `show_completely` and set it to `true`.
       :type hide_completely: :class:`boolean`
 
       :returns: :const:`nil`
