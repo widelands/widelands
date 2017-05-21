@@ -37,7 +37,7 @@ class FileRead;
 
 /**
  * Simple structure to hold the IP address and port of a server.
- * This structure should not contain a hostname.
+ * This structure must not contain a hostname but only IP addresses.
  */
 struct NetAddress {
 	/**
@@ -59,6 +59,13 @@ struct NetAddress {
 	 * \return \c True if the resolution succeeded, \c false otherwise.
 	 */
 	static bool resolve_to_v6(NetAddress *addr, const std::string& hostname, uint16_t port);
+
+	/**
+	 * Returns whether the stored IP is in IPv6 format.
+	 * @return \c true if the stored IP is in IPv6 format, \c false otherwise.
+	 *   If it isn't an IPv6 address, it is an IPv4 address.
+	 */
+	bool is_ipv6() const;
 
 	std::string ip;
 	uint16_t port;

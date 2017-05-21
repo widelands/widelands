@@ -105,10 +105,6 @@ LanBase::LanBase(uint16_t port)
 	broadcast_addresses_v4.insert("255.255.255.255");
 #endif
 
-	// Okay, needed this for development. But might be useful to debug network problems
-	for (const std::string& ip : broadcast_addresses_v4)
-		log("[LAN] Will broadcast to %s\n", ip.c_str());
-
 	if (!is_open()) {
 		// Hm, not good. Just try to open them and hope for the best
 		start_socket(&socket_v4, boost::asio::ip::udp::v4(), port);
@@ -119,6 +115,11 @@ LanBase::LanBase(uint16_t port)
 		// Still not open? Go back to main menu.
 		report_network_error();
 	}
+
+	for (const std::string& ip : broadcast_addresses_v4)
+		log("[LAN] Will broadcast to %s\n", ip.c_str());
+	if (socket_v6.is_open())
+		log("[LAN] Will broadcast for IPv6\n");
 }
 
 LanBase::~LanBase() {
@@ -399,6 +400,9 @@ void LanGameFinder::run() {
 		for (NetOpenGame* opengame : opengames) {
 			if (0 == strncmp(opengame->info.hostname, info.hostname, 128)) {
 				opengame->info = info;
+				if (!opengame->address.is_ipv6() && addr.is_ipv6()) {
+					opengame->address.ip = addr.ip;
+				}
 				callback(GameUpdated, opengame, userdata);
 				was_in_list = true;
 				break;
@@ -407,10 +411,8 @@ void LanGameFinder::run() {
 
 		if (!was_in_list) {
 			opengames.push_back(new NetOpenGame);
-			DIAG_OFF("-Wold-style-cast")
 			addr.port = WIDELANDS_PORT;
 			opengames.back()->address = addr;
-			DIAG_ON("-Wold-style-cast")
 			opengames.back()->info = info;
 			callback(GameOpened, opengames.back(), userdata);
 			break;

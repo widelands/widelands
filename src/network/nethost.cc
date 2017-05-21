@@ -159,10 +159,10 @@ NetHost::NetHost(const uint16_t port)
 	: clients_(), next_id_(1), io_service_(), acceptor_v4_(io_service_), acceptor_v6_(io_service_) {
 
 	if (open_acceptor(&acceptor_v4_, boost::asio::ip::tcp::endpoint(boost::asio::ip::tcp::v4(), port))) {
-		log("[NetHost]: Opening a listening IPv4 socket on port %u\n", port);
+		log("[NetHost]: Opening a listening IPv4 socket on TCP port %u\n", port);
 	}
 	if (open_acceptor(&acceptor_v6_, boost::asio::ip::tcp::endpoint(boost::asio::ip::tcp::v6(), port))) {
-		log("[NetHost]: Opening a listening IPv6 socket on port %u\n", port);
+		log("[NetHost]: Opening a listening IPv6 socket on TCP port %u\n", port);
 	}
 }
 

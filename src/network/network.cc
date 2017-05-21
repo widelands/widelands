@@ -57,6 +57,13 @@ bool NetAddress::resolve_to_v6(NetAddress *addr, const std::string& hostname, ui
 	return do_resolve(boost::asio::ip::tcp::v6(), addr, hostname, port);
 }
 
+bool NetAddress::is_ipv6() const {
+	// Don't catch errors. If the stored address is no valid IP address,
+	// we have a coding error somewhere
+	boost::asio::ip::address addr = boost::asio::ip::address::from_string(ip);
+	return addr.is_v6();
+}
+
 CmdNetCheckSync::CmdNetCheckSync(uint32_t const dt, SyncCallback* const cb)
    : Command(dt), callback_(cb) {
 }
