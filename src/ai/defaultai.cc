@@ -1079,7 +1079,7 @@ void DefaultAI::late_initialization() {
 	
 	last_road_dismantled_ = 0;
 	
-	basic_economy_established = true; //just to initialize it
+	basic_economy_established = remaining_basic_buildings.empty(); //just to initialize it
 }
 
 /**
@@ -1962,15 +1962,21 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 	//Do we have basic economy established?
 	if (!basic_economy_established && remaining_basic_buildings.empty()) {
 		printf ("%2d: Player has achieved the basic economy at %s\n", player_number(), gamestring_with_leading_zeros(gametime));
+		basic_economy_established = true;
+	}
+	
+	if (!basic_economy_established && player_statistics.any_enemy_seen_lately(gametime) && management_data.f_neuron_pool[17].get_position(0)) {
+		printf ("%2d: Player has not all buildings for basic economy yet (%lu missing), but enemy is nearby, so quitting the mode at %s\n", 
+		player_number(), remaining_basic_buildings.size(), gamestring_with_leading_zeros(gametime));
+		basic_economy_established = true;
 		}
-	basic_economy_established = remaining_basic_buildings.empty();
+
 	if (!basic_economy_established && gametime % 50 == 0){
 		printf ("%2d: basic economy not established, %lu buildings still missing, f.e. %s\n", 
 		player_number(),
 		remaining_basic_buildings.size(),
 		get_building_observer(*remaining_basic_buildings.begin()).name);
-	}
-				
+	}				
 
 	//printf ("%2d: basic economy %s\n", player_number(), (basic_economy_established) ? "established" : "not established");
 
@@ -3600,7 +3606,7 @@ bool DefaultAI::check_productionsites(uint32_t gametime) {
 
 	bool considering_upgrade = enhancement != INVALID_INDEX;
 	//NOCOM
-	if (!basic_economy_established){
+	if (!basic_economy_established && management_data.f_neuron_pool[17].get_position(2)){
 		considering_upgrade = false; //NOCOM consider this
 	}
 
@@ -4286,7 +4292,9 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 	// First we deal with training sites, they are separate category
 	if (bo.type == BuildingObserver::Type::kTrainingsite) {
 
-		if (bo.aimode_limit_status() != AiModeBuildings::kAnotherAllowed) {
+		if(!basic_economy_established && management_data.f_neuron_pool[17].get_position(1)) {
+			return BuildingNecessity::kNotNeeded;
+		} else if (bo.aimode_limit_status() != AiModeBuildings::kAnotherAllowed) {
 			return BuildingNecessity::kNotNeeded;
 		} else if (ts_without_trainers_ > 0 || bo.cnt_under_construction > 0 || ts_in_const_count_ > 1) {
 			return BuildingNecessity::kNotNeeded;
