@@ -31,34 +31,32 @@
 
 namespace {
 
-	static const char *ip_versions[] = {"IPv4", "IPv6"};
-
 	/**
-	 * Returns the matching string for the given IP address.
+	 * Returns the IP version.
 	 * \param addr The address object to get the IP version for.
-	 * \return A pointer to a constant string naming the IP version.
+	 * \return Either 4 or 6, depending on the version of the given address.
 	 */
-	const char* get_ip_version_string(const boost::asio::ip::address& addr) {
+	int get_ip_version(const boost::asio::ip::address& addr) {
 		assert(!addr.is_unspecified());
 		if (addr.is_v4()) {
-			return ip_versions[0];
+			return 4;
 		} else {
 			assert(addr.is_v6());
-			return ip_versions[1];
+			return 6;
 		}
 	}
 
 	/**
-	 * Returns the matching string for the given IP address.
+	 * Returns the IP version.
 	 * \param version A whatever object to get the IP version for.
-	 * \return A pointer to a constant string naming the IP version.
+	 * \return Either 4 or 6, depending on the version of the given address.
 	 */
-	const char* get_ip_version_string(const boost::asio::ip::udp& version) {
+	int get_ip_version(const boost::asio::ip::udp& version) {
 		if (version == boost::asio::ip::udp::v4()) {
-			return ip_versions[0];
+			return 4;
 		} else {
 			assert(version == boost::asio::ip::udp::v6());
-			return ip_versions[1];
+			return 6;
 		}
 	}
 }
@@ -73,10 +71,10 @@ LanBase::LanBase(uint16_t port)
 	// the socket. There is one fixed broadcast-address for IPv6 (well, actually multicast)
 
 	// Adapted example out of "man getifaddrs"
-	// Admittedly: I don't like this part. But boost is not able to iterate over
+	// TODO(Notabilis): I don't like this part. But boost is not able to iterate over
 	// the local IPs at this time. If they ever add it, replace this code
 	struct ifaddrs *ifaddr, *ifa;
-	int family, s, n;
+	int s, n;
 	char host[NI_MAXHOST];
 	if (getifaddrs(&ifaddr) == -1) {
 		perror("getifaddrs");
@@ -85,17 +83,21 @@ LanBase::LanBase(uint16_t port)
 	for (ifa = ifaddr, n = 0; ifa != nullptr; ifa = ifa->ifa_next, n++) {
 		if (ifa->ifa_addr == nullptr)
 			continue;
-		family = ifa->ifa_addr->sa_family;
-		if (family == AF_INET && (ifa->ifa_flags & IFF_BROADCAST)) {
-			s = getnameinfo(ifa->ifa_ifu.ifu_broadaddr, sizeof(struct sockaddr_in),
-						host, NI_MAXHOST, nullptr, 0, NI_NUMERICHOST);
-			if (s == 0) {
-				start_socket(&socket_v4, boost::asio::ip::udp::v4(), port);
-				broadcast_addresses_v4.insert(host);
-			}
-		} else if (family == AF_INET6 && (ifa->ifa_flags & IFF_BROADCAST)) {
-			start_socket(&socket_v6, boost::asio::ip::udp::v6(), port);
-			// Nothing to insert here. There is only one "broadcast" address for IPv6 (I think)
+		if (!(ifa->ifa_flags & IFF_BROADCAST))
+			continue;
+		switch (ifa->ifa_addr->sa_family) {
+			case AF_INET:
+				s = getnameinfo(ifa->ifa_ifu.ifu_broadaddr, sizeof(struct sockaddr_in),
+							host, NI_MAXHOST, nullptr, 0, NI_NUMERICHOST);
+				if (s == 0) {
+					start_socket(&socket_v4, boost::asio::ip::udp::v4(), port);
+					broadcast_addresses_v4.insert(host);
+				}
+				break;
+			case AF_INET6:
+				start_socket(&socket_v6, boost::asio::ip::udp::v6(), port);
+				// Nothing to insert here. As far as I know, there is only one "broadcast" address for IPv6
+				break;
 		}
 	}
 	freeifaddrs(ifaddr);
@@ -127,7 +129,7 @@ LanBase::~LanBase() {
 	close_socket(&socket_v6);
 }
 
-bool LanBase::avail() {
+bool LanBase::is_available() {
 	boost::system::error_code ec;
 	bool available_v4 = (socket_v4.is_open() && socket_v4.available(ec) > 0);
 	if (ec) {
@@ -200,8 +202,8 @@ bool LanBase::send(void const* const buf, size_t const len, const NetAddress& ad
 	if (!socket->is_open()) {
 		// I think this shouldn't happen normally. It might happen, though, if we receive
 		// a broadcast and learn the IP, then our sockets goes down, then we try to send
-		log("[LAN] Error: trying to send to an %s address but socket is not open",
-			get_ip_version_string(address));
+		log("[LAN] Error: trying to send to an IPv%d address but socket is not open",
+			get_ip_version(address));
 		return false;
 	}
 	socket->send_to(boost::asio::buffer(buf, len), destination, 0, ec);
@@ -246,16 +248,16 @@ void LanBase::start_socket(boost::asio::ip::udp::socket *socket, boost::asio::ip
 	// Try to open the socket
 	socket->open(version, ec);
 	if (ec) {
-		log("[LAN] Failed to start an %s socket: %s\n",
-			get_ip_version_string(version), ec.message().c_str());
+		log("[LAN] Failed to start an IPv%d socket: %s\n",
+			get_ip_version(version), ec.message().c_str());
 		return;
 	}
 
 	const boost::asio::socket_base::broadcast option_broadcast(true);
 	socket->set_option(option_broadcast, ec);
 	if (ec) {
-		log("[LAN] Error setting options for %s socket, closing socket: %s\n",
-			get_ip_version_string(version), ec.message().c_str());
+		log("[LAN] Error setting options for IPv%d socket, closing socket: %s\n",
+			get_ip_version(version), ec.message().c_str());
 		// Retrieve the error code to avoid throwing but ignore it
 		close_socket(socket);
 		return;
@@ -274,13 +276,13 @@ void LanBase::start_socket(boost::asio::ip::udp::socket *socket, boost::asio::ip
 
 	socket->bind(boost::asio::ip::udp::endpoint(version, port), ec);
 	if (ec) {
-		log("[LAN] Error binding %s socket to UDP port %d, closing socket: %s\n",
-			get_ip_version_string(version), port, ec.message().c_str());
+		log("[LAN] Error binding IPv%d socket to UDP port %d, closing socket: %s\n",
+			get_ip_version(version), port, ec.message().c_str());
 		close_socket(socket);
 		return;
 	}
 
-	log("[LAN] Started an %s socket on UDP port %d\n", get_ip_version_string(version), port);
+	log("[LAN] Started an IPv%d socket on UDP port %d\n", get_ip_version(version), port);
 }
 
 void LanBase::report_network_error() {
@@ -297,7 +299,7 @@ void LanBase::close_socket(boost::asio::ip::udp::socket *socket) {
 	if (socket->is_open()) {
 		const boost::asio::ip::udp::endpoint& endpoint = socket->local_endpoint(ec);
 		if (!ec)
-			log("[LAN] Closing an %s socket.\n", get_ip_version_string(endpoint.protocol()));
+			log("[LAN] Closing an IPv%d socket.\n", get_ip_version(endpoint.protocol()));
 		socket->shutdown(boost::asio::ip::udp::socket::shutdown_both, ec);
 		socket->close(ec);
 	}
@@ -332,11 +334,12 @@ void LanGamePromoter::run() {
 	if (needupdate) {
 		needupdate = false;
 
-		if (!broadcast(&gameinfo, sizeof(gameinfo), WIDELANDS_LAN_DISCOVERY_PORT))
+		if (!broadcast(&gameinfo, sizeof(gameinfo), WIDELANDS_LAN_DISCOVERY_PORT)) {
 			report_network_error();
+		}
 	}
 
-	while (avail()) {
+	while (is_available()) {
 		char magic[8];
 		NetAddress addr;
 
@@ -346,8 +349,9 @@ void LanGamePromoter::run() {
 		log("Received %s packet from %s\n", magic, addr.ip.c_str());
 
 		if (!strncmp(magic, "QUERY", 6) && magic[6] == LAN_PROMOTION_PROTOCOL_VERSION) {
-			if (!send(&gameinfo, sizeof(gameinfo), addr))
+			if (!send(&gameinfo, sizeof(gameinfo), addr)) {
 				report_network_error();
+			}
 		}
 	}
 }
@@ -379,7 +383,7 @@ void LanGameFinder::reset() {
 }
 
 void LanGameFinder::run() {
-	while (avail()) {
+	while (is_available()) {
 		NetGameInfo info;
 		NetAddress addr;
 

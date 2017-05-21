@@ -71,7 +71,7 @@ protected:
 	 * Returns whether data is available to be read.
 	 * \return \c True when receive() will return data, \c false otherwise.
 	 */
-	bool avail();
+	bool is_available();
 
 	/**
 	 * Returns whether at least one of the sockets is open.

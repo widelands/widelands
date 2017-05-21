@@ -4,6 +4,8 @@
 
 #include "base/log.h"
 
+constexpr size_t kNetworkBufferSize = 512;
+
 NetHost::Client::Client(boost::asio::ip::tcp::socket&& sock) : socket(std::move(sock)), deserializer() {
 }
 
@@ -106,11 +108,11 @@ bool NetHost::try_accept(ConnectionId* new_id) {
 
 bool NetHost::try_receive(const ConnectionId id, RecvPacket* packet) {
 	// Always read all available data into buffers
-	uint8_t buffer[512];
+	uint8_t buffer[kNetworkBufferSize];
 
 	boost::system::error_code ec;
 	for (auto it = clients_.begin(); it != clients_.end(); ) {
-		size_t length = it->second.socket.read_some(boost::asio::buffer(buffer, 512), ec);
+		size_t length = it->second.socket.read_some(boost::asio::buffer(buffer, kNetworkBufferSize), ec);
 		if (ec == boost::asio::error::would_block) {
 			// Nothing to read
 			assert(length == 0);
@@ -126,7 +128,7 @@ bool NetHost::try_receive(const ConnectionId id, RecvPacket* packet) {
 			continue;
 		}
 		assert(length > 0);
-		assert(length <= 512);
+		assert(length <= kNetworkBufferSize);
 		// Read something
 		it->second.deserializer.read_data(buffer, length);
 		++it;
