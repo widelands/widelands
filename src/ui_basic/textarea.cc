@@ -187,7 +187,7 @@ void Textarea::update_desired_size() {
 	uint32_t w = 0;
 	uint16_t h = 0;
 
-	if (rendered_text_) {
+	if (rendered_text_.get()) {
 		w = fixed_width_ > 0 ? fixed_width_ : rendered_text_->width();
 		h = rendered_text_->height();
 		// We want empty textareas to have height

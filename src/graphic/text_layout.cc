@@ -163,9 +163,9 @@ std::string as_message(const std::string& heading, const std::string& body) {
 	           .str());
 }
 
-const UI::RenderedText*
+std::shared_ptr<const UI::RenderedText>
 autofit_ui_text(const std::string& text, int width, RGBColor color, int fontsize) {
-	const UI::RenderedText* result =
+	std::shared_ptr<const UI::RenderedText> result =
 	   UI::g_fh1->render(as_uifont(richtext_escape(text), fontsize, color));
 	if (width > 0) {  // Autofit
 		for (; result->width() > width && fontsize >= kMinimumFontSize; --fontsize) {

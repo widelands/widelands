@@ -356,7 +356,7 @@ void InteractiveBase::draw_overlay(RenderTarget& dst) {
 		std::string node_text;
 		if (is_game) {
 			const std::string gametime(gametimestring(egbase().get_gametime(), true));
-			const UI::RenderedText* rendered_text = UI::g_fh1->render(as_condensed(gametime));
+			std::shared_ptr<const UI::RenderedText> rendered_text = UI::g_fh1->render(as_condensed(gametime));
 			rendered_text->draw(dst, Vector2i(5, 5));
 
 			static boost::format node_format("(%i, %i)");
@@ -366,7 +366,7 @@ void InteractiveBase::draw_overlay(RenderTarget& dst) {
 			const int32_t height = map[sel_.pos.node].get_height();
 			node_text = as_condensed((node_format % sel_.pos.node.x % sel_.pos.node.y % height).str());
 		}
-		const UI::RenderedText* rendered_text = UI::g_fh1->render(node_text);
+		std::shared_ptr<const UI::RenderedText> rendered_text = UI::g_fh1->render(node_text);
 		rendered_text->draw(
 		   dst, Vector2i(get_w() - 5, get_h() - rendered_text->height() - 5), UI::Align::kRight);
 	}
@@ -374,7 +374,7 @@ void InteractiveBase::draw_overlay(RenderTarget& dst) {
 	// Blit FPS when playing a game in debug mode.
 	if (get_display_flag(dfDebug) && is_game) {
 		static boost::format fps_format("%5.1f fps (avg: %5.1f fps)");
-		const UI::RenderedText* rendered_text = UI::g_fh1->render(as_condensed(
+		std::shared_ptr<const UI::RenderedText> rendered_text = UI::g_fh1->render(as_condensed(
 		   (fps_format % (1000.0 / frametime_) % (1000.0 / (avg_usframetime_ / 1000))).str()));
 		rendered_text->draw(dst, Vector2i((get_w() - rendered_text->width()) / 2, 5));
 	}

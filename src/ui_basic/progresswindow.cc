@@ -98,7 +98,7 @@ void ProgressWindow::step(const std::string& description) {
 	draw(rt);
 
 	rt.fill_rect(label_rectangle_, PROGRESS_FONT_COLOR_BG);
-	const UI::RenderedText* rendered_text =
+	std::shared_ptr<const UI::RenderedText> rendered_text =
 	   UI::g_fh1->render(as_uifont(description, UI_FONT_SIZE_SMALL, PROGRESS_FONT_COLOR_FG));
 	UI::center_vertically(rendered_text->height(), &label_center_);
 	rendered_text->draw(rt, label_center_, UI::Align::kCenter);

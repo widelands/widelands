@@ -272,7 +272,7 @@ void Window::draw_border(RenderTarget& dst) {
 	// draw the title if we have one
 	if (!title_.empty()) {
 		// The title shouldn't be richtext, but we escape it just to make sure.
-		const UI::RenderedText* text =
+		std::shared_ptr<const UI::RenderedText> text =
 		   autofit_ui_text(richtext_escape(title_), get_inner_w(), UI_FONT_CLR_FG, 13);
 
 		// Blit on pixel boundary (not float), so that the text is blitted pixel perfect.

@@ -88,7 +88,7 @@ void ProgressBar::draw(RenderTarget& dst) {
 	const std::string progress_text = (boost::format("<font color=%s>%u%%</font>") %
 	                                   UI_FONT_CLR_BRIGHT.hex_value() % floor(fraction * 100.f))
 	                                     .str();
-	const UI::RenderedText* rendered_text = UI::g_fh1->render(as_uifont(progress_text));
+	std::shared_ptr<const UI::RenderedText> rendered_text = UI::g_fh1->render(as_uifont(progress_text));
 	Vector2i pos(get_w() / 2, get_h() / 2);
 	UI::center_vertically(rendered_text->height(), &pos);
 	rendered_text->draw(dst, pos, UI::Align::kCenter);

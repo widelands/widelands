@@ -227,7 +227,8 @@ const Image* NonPackedAnimation::representative_image(const RGBColor* clr) const
 	const int w = image->width();
 	const int h = image->height();
 	Texture* rv = new Texture(w / scale_, h / scale_);
-	rv->blit(Rectf(0.f, 0.f, w / scale_, h / scale_), *image, Rectf(0.f, 0.f, w, h), 1., BlendMode::Copy);
+	rv->blit(
+	   Rectf(0.f, 0.f, w / scale_, h / scale_), *image, Rectf(0.f, 0.f, w, h), 1., BlendMode::Copy);
 	return rv;
 }
 

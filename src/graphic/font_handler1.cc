@@ -19,27 +19,12 @@
 
 #include "graphic/font_handler1.h"
 
-#include <functional>
 #include <memory>
 
 #include <boost/lexical_cast.hpp>
-#include <boost/utility.hpp>
 
-#include "base/log.h"
-#include "base/wexception.h"
-#include "graphic/graphic.h"
-#include "graphic/image.h"
-#include "graphic/image_cache.h"
-#include "graphic/rendertarget.h"
-#include "graphic/text/rt_errors.h"
 #include "graphic/text/rt_render.h"
-#include "graphic/text/sdl_ttf_font.h"
-#include "graphic/texture.h"
 #include "graphic/text/texture_cache.h"
-#include "io/filesystem/filesystem.h"
-
-using namespace std;
-using namespace boost;
 
 namespace {
 
@@ -59,28 +44,46 @@ namespace UI {
 // the ImageCache, so repeated calls to render with the same arguments should not
 // be a problem.
 class FontHandler1 : public IFontHandler1 {
+private:
+	// A transient cache for the generated rendered texts
+	class RenderCache : public TransientCache<RenderedText> {
+	public:
+		RenderCache(uint32_t max_size_in_bytes) : TransientCache<RenderedText>(max_size_in_bytes) {
+		}
+
+		std::shared_ptr<const RenderedText> insert(const std::string& hash,
+		                                           std::shared_ptr<const RenderedText> entry) {
+			// For the size calculation, we estimate that the member variables of each RenderedRect
+			// take up ca. 13 * 32 bytes. It's all pointers or combinations of basic data types, so the
+			// size requirement is pretty constant.
+			constexpr uint32_t kRenderedRectSize = 13 * 32;
+			return TransientCache<RenderedText>::insert(
+			   hash, entry, entry->rects.size() * kRenderedRectSize);
+		}
+	};
+
 public:
 	FontHandler1(ImageCache* image_cache, const std::string& locale)
 	   : texture_cache_(new TextureCache(kTextureCacheSize)),
+	     render_cache_(new RenderCache(kTextureCacheSize)),
 	     fontsets_(),
 	     fontset_(fontsets_.get_fontset(locale)),
 	     rt_renderer_(new RT::Renderer(image_cache, texture_cache_.get(), fontsets_)),
 	     image_cache_(image_cache) {
 	}
 	virtual ~FontHandler1() {
-		render_cache_.clear();
 	}
 
 	// This will render the 'text' with a width restriction of 'w'. If 'w' == 0, no restriction is
 	// applied.
-	const RenderedText* render(const string& text, uint16_t w = 0) override {
-		const string hash = boost::lexical_cast<string>(w) + text;
-		if (render_cache_.count(hash) != 1) {
-			render_cache_.insert(std::make_pair(
-			   hash, std::unique_ptr<const RenderedText>(std::move(rt_renderer_->render(text, w)))));
+	std::shared_ptr<const UI::RenderedText> render(const std::string& text,
+	                                               uint16_t w = 0) override {
+		const std::string hash = boost::lexical_cast<std::string>(w) + text;
+		std::shared_ptr<const RenderedText> rendered_text = render_cache_->get(hash);
+		if (rendered_text.get() == nullptr) {
+			rendered_text = render_cache_->insert(hash, std::move(rt_renderer_->render(text, w)));
 		}
-		assert(render_cache_.count(hash) == 1);
-		return render_cache_.find(hash)->second.get();
+		return rendered_text;
 	}
 
 	UI::FontSet const* fontset() const override {
@@ -89,18 +92,18 @@ public:
 
 	void reinitialize_fontset(const std::string& locale) override {
 		fontset_ = fontsets_.get_fontset(locale);
-		texture_cache_.get()->flush();
-		render_cache_.clear();
+		texture_cache_->flush();
+		render_cache_->flush();
 		rt_renderer_.reset(new RT::Renderer(image_cache_, texture_cache_.get(), fontsets_));
 	}
 
 private:
 	std::unique_ptr<TextureCache> texture_cache_;
+	std::unique_ptr<RenderCache> render_cache_;
 	UI::FontSets fontsets_;       // All fontsets
 	UI::FontSet const* fontset_;  // The currently active FontSet
 	std::unique_ptr<RT::Renderer> rt_renderer_;
 	ImageCache* const image_cache_;  // not owned
-	std::unordered_map<std::string, std::unique_ptr<const RenderedText>> render_cache_;
 };
 
 IFontHandler1* create_fonthandler(ImageCache* image_cache, const std::string& locale) {

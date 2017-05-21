@@ -533,7 +533,7 @@ void DiscreteSlider::draw(RenderTarget& dst) {
 	uint32_t gap_n = get_w() / labels.size();
 
 	for (uint32_t i = 0; i < labels.size(); i++) {
-		const UI::RenderedText* rendered_text =
+		std::shared_ptr<const UI::RenderedText> rendered_text =
 		   UI::g_fh1->render(as_condensed(labels[i], UI::Align::kCenter, UI_FONT_SIZE_SMALL - 2));
 		rendered_text->draw(
 		   dst, Vector2i(gap_1 + i * gap_n, get_h() - rendered_text->height()), UI::Align::kCenter);

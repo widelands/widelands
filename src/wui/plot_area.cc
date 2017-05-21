@@ -178,7 +178,7 @@ void draw_value(const string& value,
                 const RGBColor& color,
                 const Vector2i& pos,
                 RenderTarget& dst) {
-	const UI::RenderedText* tick = UI::g_fh1->render(ytick_text_style(value, color));
+	std::shared_ptr<const UI::RenderedText> tick = UI::g_fh1->render(ytick_text_style(value, color));
 	Vector2i point(pos);  // Un-const this
 	UI::center_vertically(tick->height(), &point);
 	tick->draw(dst, point, UI::Align::kRight);
@@ -262,7 +262,7 @@ void draw_diagram(uint32_t time_ms,
 
 		// The space at the end is intentional to have the tick centered
 		// over the number, not to the left
-		const UI::RenderedText* xtick = UI::g_fh1->render(
+		std::shared_ptr<const UI::RenderedText> xtick = UI::g_fh1->render(
 		   xtick_text_style((boost::format("-%u ") % (max_x / how_many_ticks * i)).str()));
 		Vector2i pos(posx, inner_h - kSpaceBottom + 10);
 		UI::center_vertically(xtick->height(), &pos);
@@ -281,7 +281,7 @@ void draw_diagram(uint32_t time_ms,
 	   kAxisLineColor, kAxisLinesWidth);
 
 	//  print the used unit
-	const UI::RenderedText* xtick = UI::g_fh1->render(xtick_text_style(get_generic_unit_name(unit)));
+	std::shared_ptr<const UI::RenderedText> xtick = UI::g_fh1->render(xtick_text_style(get_generic_unit_name(unit)));
 	Vector2i pos(2, kSpacing + 2);
 	UI::center_vertically(xtick->height(), &pos);
 	xtick->draw(dst, pos);

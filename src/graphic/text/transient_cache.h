@@ -39,25 +39,28 @@
 /// Caches transient rendered text. The entries will be kept until the memory limit is reached,
 /// then the stalest entries will be deleted to make room for new entries.
 ///
-/// We use shared_ptr so that other objects can hold onto the textures if they need them more permanently.
+/// We use shared_ptr so that other objects can hold onto the textures if they need them more
+/// permanently.
 template <typename T> class TransientCache {
 public:
-	/// Create a new Cache in whith the combined pixel data for all transient entries
-	/// are always below the 'max_size_in_bytes'.
+	/// Create a new cache in whith the combined data for all transient entries is always below the
+	/// 'max_size_in_bytes'.
 	TransientCache(uint32_t max_size_in_bytes);
 	~TransientCache();
 
-	/// Deletes all surfaces in the cache leaving it as if it were just created.
+	/// Deletes all entries in the cache, leaving it as if it were just created.
 	void flush();
 
 	/// Returns an entry if it is cached, nullptr otherwise.
 	std::shared_ptr<const T> get(const std::string& hash);
 
-	/// Inserts this entry of type T into the TextureCache. asserts() that there is no
-	/// entry with this hash already cached. Returns the given T for convenience.
-	std::shared_ptr<const T> insert(const std::string& hash, std::shared_ptr<const T> entry, uint32_t entry_size);
+	/// Inserts this entry of type T into the cache. asserts() that there is no entry with this hash
+	/// already cached. Returns the given T for convenience.
+	std::shared_ptr<const T>
+	insert(const std::string& hash, std::shared_ptr<const T> entry, uint32_t entry_size);
 
 private:
+	/// Drop the oldest entry
 	void drop();
 
 	using AccessHistory = std::list<std::string>;
@@ -78,7 +81,10 @@ private:
 
 // Implementation
 
-template <typename T> TransientCache<T>::TransientCache(uint32_t max_size_in_bytes) : max_size_in_bytes_(max_size_in_bytes), size_in_bytes_(0) {}
+template <typename T>
+TransientCache<T>::TransientCache(uint32_t max_size_in_bytes)
+   : max_size_in_bytes_(max_size_in_bytes), size_in_bytes_(0) {
+}
 template <typename T> TransientCache<T>::~TransientCache() {
 	flush();
 }
@@ -103,7 +109,10 @@ template <typename T> std::shared_ptr<const T> TransientCache<T>::get(const std:
 	return it->second.entry;
 }
 
-template <typename T> std::shared_ptr<const T> TransientCache<T>::insert(const std::string& hash, std::shared_ptr<const T> entry, uint32_t entry_size) {
+template <typename T>
+std::shared_ptr<const T> TransientCache<T>::insert(const std::string& hash,
+                                                   std::shared_ptr<const T> entry,
+                                                   uint32_t entry_size) {
 	assert(entries_.find(hash) == entries_.end());
 
 	while (size_in_bytes_ + entry_size > max_size_in_bytes_) {
@@ -125,7 +134,8 @@ template <typename T> void TransientCache<T>::drop() {
 	assert(it != entries_.end());
 
 	size_in_bytes_ -= it->second.size;
-	log("TextureCache: Dropping %d bytes, new size %d. Hash: %s\n", it->second.size, size_in_bytes_, it->first.c_str());
+	log("TransientCache: Dropping %d bytes, new size %d. Hash: %s\n", it->second.size,
+	    size_in_bytes_, it->first.c_str());
 
 	// Erase both elements to completely purge record
 	entries_.erase(it);

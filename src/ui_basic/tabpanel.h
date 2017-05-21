@@ -67,7 +67,7 @@ private:
 	uint32_t id;
 
 	const Image* pic;
-	const UI::RenderedText* rendered_title;
+	std::shared_ptr<const UI::RenderedText> rendered_title;
 	std::string tooltip;
 	Panel* panel;
 };

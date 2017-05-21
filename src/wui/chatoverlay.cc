@@ -167,7 +167,7 @@ void ChatOverlay::draw(RenderTarget& dst) {
 	if (!m->havemessages_)
 		return;
 
-	const UI::RenderedText* im = nullptr;
+	std::shared_ptr<const UI::RenderedText> im = std::shared_ptr<const UI::RenderedText>(nullptr);
 	try {
 		im = UI::g_fh1->render(m->all_text_, get_w());
 	} catch (RT::WidthTooSmall&) {
@@ -175,7 +175,7 @@ void ChatOverlay::draw(RenderTarget& dst) {
 		// render everything in one single line.
 		im = UI::g_fh1->render(m->all_text_);
 	}
-	assert(im != nullptr);
+	assert(im.get() != nullptr);
 
 	// Background
 	const int32_t height = im->height() > get_h() ? get_h() : im->height();

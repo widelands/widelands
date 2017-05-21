@@ -95,10 +95,10 @@ std::string as_message(const std::string& heading, const std::string& body);
   * smaller until it fits 'width'. The resulting font size will not go below
   * 'kMinimumFontSize'.
   */
-const UI::RenderedText* autofit_ui_text(const std::string& text,
-                                        int width = 0,
-                                        RGBColor color = UI_FONT_CLR_FG,
-                                        int fontsize = UI_FONT_SIZE_SMALL);
+std::shared_ptr<const UI::RenderedText> autofit_ui_text(const std::string& text,
+                                                        int width = 0,
+                                                        RGBColor color = UI_FONT_CLR_FG,
+                                                        int fontsize = UI_FONT_SIZE_SMALL);
 
 namespace UI {
 

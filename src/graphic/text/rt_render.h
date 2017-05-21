@@ -80,7 +80,8 @@ public:
 
 	// Render the given string in the given width. Restricts the allowed tags to
 	// the ones in TagSet.
-	UI::RenderedText* render(const std::string&, uint16_t width, const TagSet& tagset = TagSet());
+	std::shared_ptr<const UI::RenderedText>
+	render(const std::string&, uint16_t width, const TagSet& tagset = TagSet());
 
 	// Returns a reference map of the clickable hyperlinks in the image. This
 	// will do no caching and needs to do all layouting, so do not call this too

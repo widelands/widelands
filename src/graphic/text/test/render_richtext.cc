@@ -139,8 +139,8 @@ int main(int argc, char** argv) {
 	StandaloneRenderer standalone_renderer;
 
 	try {
-		std::unique_ptr<UI::RenderedText> rendered_text(
-		   standalone_renderer.renderer()->render(txt, w, allowed_tags));
+		std::shared_ptr<const UI::RenderedText> rendered_text =
+		   standalone_renderer.renderer()->render(txt, w, allowed_tags);
 		std::unique_ptr<Texture> texture(new Texture(rendered_text->width(), rendered_text->height()));
 		std::unique_ptr<RenderTarget> dst(new RenderTarget(texture.get()));
 		rendered_text->draw(*dst.get(), Vector2i::zero());

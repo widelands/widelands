@@ -144,7 +144,7 @@ void MultilineTextarea::draw(RenderTarget& dst) {
 	if (use_old_renderer_) {
 		rt.draw(dst, Vector2i(RICHTEXT_MARGIN, RICHTEXT_MARGIN - scrollbar_.get_scrollpos()));
 	} else {
-		const UI::RenderedText* rendered_text = UI::g_fh1->render(
+		std::shared_ptr<const UI::RenderedText> rendered_text = UI::g_fh1->render(
 		   is_richtext(text_) ? text_ : make_richtext(), get_eff_w() - 2 * RICHTEXT_MARGIN);
 		uint32_t blit_width = std::min(rendered_text->width(), static_cast<int>(get_eff_w()));
 		uint32_t blit_height = std::min(rendered_text->height(), get_inner_h());

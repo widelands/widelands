@@ -294,7 +294,7 @@ void Table<void*>::draw(RenderTarget& dst) {
 				curx += curw;
 				continue;
 			}
-			const UI::RenderedText* rendered_text =
+			std::shared_ptr<const UI::RenderedText> rendered_text =
 			   UI::g_fh1->render(as_uifont(richtext_escape(entry_string)));
 
 			// Fix text alignment for BiDi languages if the entry contains an RTL character. We want

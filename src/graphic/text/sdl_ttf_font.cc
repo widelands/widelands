@@ -64,9 +64,9 @@ void SdlTtfFont::dimensions(const std::string& txt, int style, uint16_t* gw, uin
 }
 
 std::shared_ptr<const Image> SdlTtfFont::render(const std::string& txt,
-                                const RGBColor& clr,
-                                int style,
-                                TextureCache* texture_cache) {
+                                                const RGBColor& clr,
+                                                int style,
+                                                TextureCache* texture_cache) {
 	const std::string hash =
 	   (boost::format("ttf:%s:%s:%i:%02x%02x%02x:%i") % font_name_ % ptsize_ % txt %
 	    static_cast<int>(clr.r) % static_cast<int>(clr.g) % static_cast<int>(clr.b) % style)
