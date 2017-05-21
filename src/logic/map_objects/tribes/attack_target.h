@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef WL_LOGIC_MAP_OBJECTS_ATTACK_TARGET_H
-#define WL_LOGIC_MAP_OBJECTS_ATTACK_TARGET_H
+#ifndef WL_LOGIC_MAP_OBJECTS_TRIBES_ATTACK_TARGET_H
+#define WL_LOGIC_MAP_OBJECTS_TRIBES_ATTACK_TARGET_H
 
 #include "base/macros.h"
 
@@ -68,4 +68,4 @@ private:
 };
 }
 
-#endif  // end of include guard: WL_LOGIC_MAP_OBJECTS_ATTACK_TARGET_H
+#endif  // end of include guard: WL_LOGIC_MAP_OBJECTS_TRIBES_ATTACK_TARGET_H
