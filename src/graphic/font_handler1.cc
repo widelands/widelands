@@ -36,6 +36,12 @@ namespace {
 // quickly overflowing in the map selection menu.
 // This might need reevaluation if this font handler is used for more stuff.
 constexpr uint32_t kTextureCacheSize = 30 << 20;  // shifting converts to MB
+
+// The maximum number of RenderedRects. It's all pointers or combinations of basic data types, so
+// the size requirement is pretty constant. Therefore, simply counting them is sufficient.
+// We estimate that the member variables of each RenderedRect take up ca. 13 * 32 bytes.
+// TODO(GunChleoc): Do some testing to arrive at a reasonable size.
+uint32_t kRenderCacheSize = 4096;
 }  // namespace
 
 namespace UI {
@@ -53,19 +59,14 @@ private:
 
 		std::shared_ptr<const RenderedText> insert(const std::string& hash,
 		                                           std::shared_ptr<const RenderedText> entry) {
-			// For the size calculation, we estimate that the member variables of each RenderedRect
-			// take up ca. 13 * 32 bytes. It's all pointers or combinations of basic data types, so the
-			// size requirement is pretty constant.
-			constexpr uint32_t kRenderedRectSize = 13 * 32;
-			return TransientCache<RenderedText>::insert(
-			   hash, entry, entry->rects.size() * kRenderedRectSize);
+			return TransientCache<RenderedText>::insert(hash, entry, entry->rects.size());
 		}
 	};
 
 public:
 	FontHandler1(ImageCache* image_cache, const std::string& locale)
 	   : texture_cache_(new TextureCache(kTextureCacheSize)),
-	     render_cache_(new RenderCache(kTextureCacheSize)),
+	     render_cache_(new RenderCache(kRenderCacheSize)),
 	     fontsets_(),
 	     fontset_(fontsets_.get_fontset(locale)),
 	     rt_renderer_(new RT::Renderer(image_cache, texture_cache_.get(), fontsets_)),

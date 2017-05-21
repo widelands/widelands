@@ -44,8 +44,8 @@
 template <typename T> class TransientCache {
 public:
 	/// Create a new cache in whith the combined data for all transient entries is always below the
-	/// 'max_size_in_bytes'.
-	TransientCache(uint32_t max_size_in_bytes);
+	/// 'max_size_in_arbitrary_unit'.
+	TransientCache(uint32_t max_size_in_arbitrary_unit);
 	~TransientCache();
 
 	/// Deletes all entries in the cache, leaving it as if it were just created.
@@ -57,7 +57,7 @@ public:
 	/// Inserts this entry of type T into the cache. asserts() that there is no entry with this hash
 	/// already cached. Returns the given T for convenience.
 	std::shared_ptr<const T>
-	insert(const std::string& hash, std::shared_ptr<const T> entry, uint32_t entry_size);
+	insert(const std::string& hash, std::shared_ptr<const T> entry, uint32_t entry_size_in_size_unit);
 
 private:
 	/// Drop the oldest entry
@@ -71,8 +71,8 @@ private:
 		const AccessHistory::iterator list_iterator;
 	};
 
-	uint32_t max_size_in_bytes_;
-	uint32_t size_in_bytes_;
+	uint32_t max_size_in_size_unit_;
+	uint32_t size_in_size_unit_;
 	std::map<std::string, Entry> entries_;
 	AccessHistory access_history_;
 
@@ -82,8 +82,8 @@ private:
 // Implementation
 
 template <typename T>
-TransientCache<T>::TransientCache(uint32_t max_size_in_bytes)
-   : max_size_in_bytes_(max_size_in_bytes), size_in_bytes_(0) {
+TransientCache<T>::TransientCache(uint32_t max_size_in_arbitrary_unit)
+   : max_size_in_size_unit_(max_size_in_arbitrary_unit), size_in_size_unit_(0) {
 }
 template <typename T> TransientCache<T>::~TransientCache() {
 	flush();
@@ -91,7 +91,7 @@ template <typename T> TransientCache<T>::~TransientCache() {
 
 template <typename T> void TransientCache<T>::flush() {
 	access_history_.clear();
-	size_in_bytes_ = 0;
+	size_in_size_unit_ = 0;
 	entries_.clear();
 }
 
@@ -112,17 +112,17 @@ template <typename T> std::shared_ptr<const T> TransientCache<T>::get(const std:
 template <typename T>
 std::shared_ptr<const T> TransientCache<T>::insert(const std::string& hash,
                                                    std::shared_ptr<const T> entry,
-                                                   uint32_t entry_size) {
+                                                   uint32_t entry_size_in_size_unit) {
 	assert(entries_.find(hash) == entries_.end());
 
-	while (size_in_bytes_ + entry_size > max_size_in_bytes_) {
+	while (size_in_size_unit_ + entry_size_in_size_unit > max_size_in_size_unit_) {
 		drop();
 	}
 
 	// Record hash as most-recently-used.
 	AccessHistory::iterator it = access_history_.insert(access_history_.end(), hash);
-	size_in_bytes_ += entry_size;
-	return entries_.insert(make_pair(hash, Entry{std::move(entry), entry_size, SDL_GetTicks(), it}))
+	size_in_size_unit_ += entry_size_in_size_unit;
+	return entries_.insert(make_pair(hash, Entry{std::move(entry), entry_size_in_size_unit, SDL_GetTicks(), it}))
 	   .first->second.entry;
 }
 
@@ -133,9 +133,9 @@ template <typename T> void TransientCache<T>::drop() {
 	const auto it = entries_.find(access_history_.front());
 	assert(it != entries_.end());
 
-	size_in_bytes_ -= it->second.size;
+	size_in_size_unit_ -= it->second.size;
 	log("TransientCache: Dropping %d bytes, new size %d. Hash: %s\n", it->second.size,
-	    size_in_bytes_, it->first.c_str());
+	    size_in_size_unit_, it->first.c_str());
 
 	// Erase both elements to completely purge record
 	entries_.erase(it);
