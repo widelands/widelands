@@ -693,9 +693,9 @@ void Building::remove_worker(Worker& worker) {
 	Notifications::publish(NoteBuilding(serial(), NoteBuilding::Action::kWorkersChanged));
 }
 
-void Building::set_attack_target(AttackTarget* attack_target) {
+void Building::set_attack_target(AttackTarget* new_attack_target) {
 	assert(attack_target_ == nullptr);
-	attack_target_ = attack_target;
+	attack_target_ = new_attack_target;
 }
 
 /**
