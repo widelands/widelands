@@ -109,8 +109,6 @@ wl_library(graphic_surface
     surface.h
     texture.cc
     texture.h
-    texture_cache.cc
-    texture_cache.h
   USES_SDL2
   DEPENDS
     base_exceptions

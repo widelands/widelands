@@ -26,7 +26,7 @@
 #include <SDL_ttf.h>
 
 #include "graphic/texture.h"
-#include "graphic/texture_cache.h"
+#include "graphic/text/texture_cache.h"
 
 namespace RT {
 

@@ -20,6 +20,8 @@ wl_library(graphic_text
     sdl_ttf_font.h
     textstream.cc
     textstream.h
+    texture_cache.h
+    transient_cache.h
   USES_SDL2
   USES_SDL2_TTF
   USES_ICU

@@ -35,7 +35,7 @@
 #include "graphic/text/rt_render.h"
 #include "graphic/text/sdl_ttf_font.h"
 #include "graphic/texture.h"
-#include "graphic/texture_cache.h"
+#include "graphic/text/texture_cache.h"
 #include "io/filesystem/filesystem.h"
 
 using namespace std;

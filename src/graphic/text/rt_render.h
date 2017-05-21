@@ -28,12 +28,10 @@
 
 #include "graphic/color.h"
 #include "graphic/image.h"
+#include "graphic/image_cache.h"
 #include "graphic/text/font_set.h"
 #include "graphic/text/rendered_text.h"
-
-class Texture;
-class ImageCache;
-class TextureCache;
+#include "graphic/text/texture_cache.h"
 
 namespace RT {
 
@@ -81,8 +79,7 @@ public:
 	~Renderer();
 
 	// Render the given string in the given width. Restricts the allowed tags to
-	// the ones in TagSet. The renderer does not do caching in the TextureCache
-	// for its individual nodes, but the font render does.
+	// the ones in TagSet.
 	UI::RenderedText* render(const std::string&, uint16_t width, const TagSet& tagset = TagSet());
 
 	// Returns a reference map of the clickable hyperlinks in the image. This
