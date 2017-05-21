@@ -20,6 +20,7 @@
 #ifndef WL_WUI_MAPDETAILS_H
 #define WL_WUI_MAPDETAILS_H
 
+#include "graphic/text_layout.h"
 #include "ui_basic/box.h"
 #include "ui_basic/multilinetextarea.h"
 #include "ui_basic/panel.h"
@@ -31,16 +32,14 @@
  */
 class MapDetails : public UI::Panel {
 public:
-	enum class Style { kFsMenu, kWui };
-
-	MapDetails(Panel* parent, int32_t x, int32_t y, int32_t w, int32_t h, Style style);
+	MapDetails(Panel* parent, int32_t x, int32_t y, int32_t w, int32_t h, UIStyle style);
 
 	void clear();
 	void update(const MapData& mapdata, bool localize_mapname);
 
 private:
 	void layout() override;
-	const Style style_;
+	const UIStyle style_;
 	const int padding_;
 
 	UI::Box main_box_;

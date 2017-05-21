@@ -89,6 +89,13 @@ std::string as_waresinfo(const std::string&);
 std::string as_game_tip(const std::string&);
 std::string as_message(const std::string& heading, const std::string& body);
 
+/// Fullscreen or in-game/in-editor style
+enum class UIStyle { kFsMenu, kWui };
+/// Header in menu info texts
+std::string as_header(const std::string& txt, UIStyle style, bool is_first = false);
+/// Paragraph in menu info texts
+std::string as_content(const std::string& txt, UIStyle style);
+
 /**
   * Render 'text' as ui_font. If 'width' > 0 and the rendered image is too
   * wide, it will first use the condensed font face and then make the text

@@ -25,21 +25,6 @@
 #include "graphic/text_constants.h"
 #include "ui_basic/scrollbar.h"
 
-namespace {
-// NOCOM Code duplication from MapDetails
-std::string as_header(const std::string& txt, bool is_first = false) {
-	return (boost::format("<p><font size=%i bold=1 shadow=1>%s%s</font></p>") % UI_FONT_SIZE_SMALL %
-	        (is_first ? "" : "<vspace gap=9>") % richtext_escape(txt))
-	   .str();
-}
-std::string as_content(const std::string& txt) {
-	return (boost::format(
-	           "<p><font size=%i bold=1 color=D1D1D1 shadow=1><vspace gap=2>%s</font></p>") %
-	        UI_FONT_SIZE_SMALL % richtext_escape(txt))
-	   .str();
-}
-}  // namespace
-
 CampaignDetails::CampaignDetails(Panel* parent)
    : UI::Box(parent, 0, 0, UI::Box::Vertical),
      name_label_(this,
@@ -62,19 +47,19 @@ CampaignDetails::CampaignDetails(Panel* parent)
 }
 
 void CampaignDetails::update(const CampaignData& campaigndata) {
-	name_label_.set_text((boost::format("<rt>%s%s</rt>") % as_header(_("Campaign:"), true) %
-	                      as_content(campaigndata.name))
+	name_label_.set_text((boost::format("<rt>%s%s</rt>") % as_header(_("Campaign:"), UIStyle::kFsMenu, true) %
+	                      as_content(campaigndata.name, UIStyle::kFsMenu))
 	                        .str());
 
 	std::string description =
-	   (boost::format("%s%s") % as_header("Tribe:") % as_content(campaigndata.tribename)).str();
+	   (boost::format("%s%s") % as_header(_("Tribe:"), UIStyle::kFsMenu) % as_content(campaigndata.tribename, UIStyle::kFsMenu)).str();
 
-	description = (boost::format("%s%s") % description % as_header(_("Difficulty:"))).str();
+	description = (boost::format("%s%s") % description % as_header(_("Difficulty:"), UIStyle::kFsMenu)).str();
 	description =
-	   (boost::format("%s%s") % description % as_content(campaigndata.difficulty_description)).str();
+	   (boost::format("%s%s") % description % as_content(campaigndata.difficulty_description, UIStyle::kFsMenu)).str();
 
-	description = (boost::format("%s%s") % description % as_header(_("Story:"))).str();
-	description = (boost::format("%s%s") % description % as_content(campaigndata.description)).str();
+	description = (boost::format("%s%s") % description % as_header(_("Story:"), UIStyle::kFsMenu)).str();
+	description = (boost::format("%s%s") % description % as_content(campaigndata.description, UIStyle::kFsMenu)).str();
 
 	description = (boost::format("<rt>%s</rt>") % description).str();
 	descr_.set_text(description);

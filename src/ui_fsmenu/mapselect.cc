@@ -55,7 +55,7 @@ FullscreenMenuMapSelect::FullscreenMenuMapSelect(GameSettingsProvider* const set
                   tabley_,
                   get_right_column_w(right_column_x_),
                   tableh_ - buth_ - 4 * padding_,
-                  MapDetails::Style::kFsMenu),
+                  UIStyle::kFsMenu),
 
      basedir_("maps"),
      settings_(settings),

@@ -25,21 +25,6 @@
 #include "graphic/text_constants.h"
 #include "ui_basic/scrollbar.h"
 
-namespace {
-// NOCOM Code duplication from MapDetails
-std::string as_header(const std::string& txt, bool is_first = false) {
-	return (boost::format("<p><font size=%i bold=1 shadow=1>%s%s</font></p>") % UI_FONT_SIZE_SMALL %
-	        (is_first ? "" : "<vspace gap=9>") % richtext_escape(txt))
-	   .str();
-}
-std::string as_content(const std::string& txt) {
-	return (boost::format(
-	           "<p><font size=%i bold=1 color=D1D1D1 shadow=1><vspace gap=2>%s</font></p>") %
-	        UI_FONT_SIZE_SMALL % richtext_escape(txt))
-	   .str();
-}
-}  // namespace
-
 ScenarioDetails::ScenarioDetails(Panel* parent)
    : UI::Box(parent, 0, 0, UI::Box::Vertical),
      name_label_(this,
@@ -64,18 +49,18 @@ ScenarioDetails::ScenarioDetails(Panel* parent)
 void ScenarioDetails::update(const ScenarioMapData& scenariodata) {
 	name_label_.set_text(
 	   (boost::format("<rt>%s%s</rt>") %
-	    as_header(scenariodata.is_tutorial ? _("Tutorial:") : _("Scenario:"), true) %
-	    as_content(scenariodata.name))
+	    as_header(scenariodata.is_tutorial ? _("Tutorial:") : _("Scenario:"), UIStyle::kFsMenu, true) %
+	    as_content(scenariodata.name, UIStyle::kFsMenu))
 	      .str());
 
 	std::string description =
 	   (boost::format("%s%s") %
-	    as_header(ngettext("Author:", "Authors:", scenariodata.authors.get_number())) %
-	    as_content(scenariodata.authors.get_names()))
+	    as_header(ngettext("Author:", "Authors:", scenariodata.authors.get_number()), UIStyle::kFsMenu) %
+	    as_content(scenariodata.authors.get_names(), UIStyle::kFsMenu))
 	      .str();
 
-	description = (boost::format("%s%s") % description % as_header(_("Description:"))).str();
-	description = (boost::format("%s%s") % description % as_content(scenariodata.description)).str();
+	description = (boost::format("%s%s") % description % as_header(_("Description:"), UIStyle::kFsMenu)).str();
+	description = (boost::format("%s%s") % description % as_content(scenariodata.description, UIStyle::kFsMenu)).str();
 
 	description = (boost::format("<rt>%s</rt>") % description).str();
 	descr_.set_text(description);
