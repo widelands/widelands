@@ -419,6 +419,7 @@ void GameRenderer::draw(const EditorGameBase& egbase,
 				f.roads = pf.roads;
 				f.vision = pf.vision;
 				if (pf.vision == 1) {
+					f.owner = pf.owner != 0 ? &egbase.player(owned_by) : nullptr;
 					f.is_border = pf.border;
 				}
 			}
