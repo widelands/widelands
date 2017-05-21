@@ -39,12 +39,12 @@
 /// Caches transient rendered text. The entries will be kept until the memory limit is reached,
 /// then the stalest entries will be deleted to make room for new entries.
 ///
-/// We use shared_ptr so that other objects can hold onto the textures if they need them more
+/// We use shared_ptr so that other objects can hold on to the textures if they need them more
 /// permanently.
 template <typename T> class TransientCache {
 public:
-	/// Create a new cache in whith the combined data for all transient entries is always below the
-	/// 'max_size_in_arbitrary_unit'.
+	/// Create a new cache in which the combined data size for all transient entries is always below
+	/// the 'max_size_in_arbitrary_unit'.
 	TransientCache(uint32_t max_size_in_arbitrary_unit);
 	~TransientCache();
 
@@ -115,7 +115,7 @@ std::shared_ptr<const T> TransientCache<T>::insert(const std::string& hash,
                                                    uint32_t entry_size_in_size_unit) {
 	assert(entries_.find(hash) == entries_.end());
 
-	while (size_in_size_unit_ + entry_size_in_size_unit > max_size_in_size_unit_) {
+	while (!entries_.empty() && size_in_size_unit_ + entry_size_in_size_unit > max_size_in_size_unit_) {
 		drop();
 	}
 
