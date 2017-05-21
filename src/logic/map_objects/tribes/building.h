@@ -28,9 +28,9 @@
 
 #include "ai/ai_hints.h"
 #include "base/macros.h"
-#include "logic/map_objects/attack_target.h"
 #include "logic/map_objects/buildcost.h"
 #include "logic/map_objects/immovable.h"
+#include "logic/map_objects/tribes/attack_target.h"
 #include "logic/map_objects/tribes/bill_of_materials.h"
 #include "logic/map_objects/tribes/wareworker.h"
 #include "logic/map_objects/tribes/workarea_info.h"

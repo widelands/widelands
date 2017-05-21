@@ -26,7 +26,7 @@
 #include "economy/road.h"
 #include "graphic/graphic.h"
 #include "logic/cmd_queue.h"
-#include "logic/map_objects/attack_target.h"
+#include "logic/map_objects/tribes/attack_target.h"
 #include "logic/map_objects/tribes/soldier.h"
 #include "logic/map_objects/tribes/tribe_descr.h"
 #include "logic/map_objects/tribes/warehouse.h"

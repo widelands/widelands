@@ -127,14 +127,13 @@ wl_library(logic
     save_handler.h
     widelands_geometry_io.cc
     widelands_geometry_io.h
-    map_objects/draw_text.h
-    map_objects/attack_target.h
     map_objects/bob.cc
     map_objects/bob.h
     map_objects/buildcost.cc
     map_objects/buildcost.h
     map_objects/checkstep.cc
     map_objects/checkstep.h
+    map_objects/draw_text.h
     map_objects/immovable.cc
     map_objects/immovable.h
     map_objects/immovable_program.h
@@ -142,6 +141,7 @@ wl_library(logic
     map_objects/map_object.h
     map_objects/terrain_affinity.cc
     map_objects/terrain_affinity.h
+    map_objects/tribes/attack_target.h
     map_objects/tribes/battle.cc
     map_objects/tribes/battle.h
     map_objects/tribes/bill_of_materials.h

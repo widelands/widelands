@@ -1529,7 +1529,7 @@ void Soldier::send_space_signals(Game& game) {
 
 		for (BaseImmovable* temp_attack_target : attack_targets) {
 			Building* building = dynamic_cast<Building*>(temp_attack_target);
-			assert(building->attack_target() != nullptr);
+			assert(building != nullptr && building->attack_target() != nullptr);
 			const Player& attack_target_player = building->owner();
 			// Let's inform the site that this (=enemy) soldier is nearby and within the site's owner's
 			// territory
