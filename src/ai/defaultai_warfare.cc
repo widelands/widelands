@@ -37,56 +37,7 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 
 	update_player_stat();
 
-	//// defining treshold ratio of own_strength/enemy's strength
-	//uint32_t treshold_ratio = 100;
-	//if (type_ == Widelands::AiType::kNormal) {
-		//treshold_ratio = 80;
-	//}
-	//if (type_ == Widelands::AiType::kVeryWeak) {
-		//treshold_ratio = 120;
-	//}
-
-	// let's say a 'campaign' is a series of attacks,
-	// if there is more then 3 minutes without attack after last
-	// attack, then a campaign is over.
-	// To start new campaign (=attack again), our strenth must exceed
-	// target values (calculated above) by some treshold =
-	// ai_personality_attack_margin
-	// Once a new campaign started we will fight until
-	// we get below above treshold or there will be 3
-	// minutes gap since last attack
-	// note - AI is not aware of duration of attacks
-	// everywhere we consider time when an attack is ordered.
-	//if (last_attack_time_ < gametime - kCampaignDuration) {
-		//treshold_ratio += persistent_data->ai_personality_attack_margin;
-	//}
-
 	const uint32_t my_power = player_statistics.get_modified_player_power(pn);
-
-	//// now we test all players to identify 'attackable' ones
-	//for (Widelands::PlayerNumber j = 1; j <= plr_in_game; ++j) {
-		//// if we are the same team, or it is just me
-		//if (player_statistics.players_in_same_team(pn, j) || pn == j) {
-			//player_attackable[j - 1] = Attackable::kNotAttackable;
-			//continue;
-		//}
-
-		//// now we compare strength
-		//// strength of the other player (considering his team)
-		//uint32_t players_power = player_statistics.get_modified_player_power(j);
-
-		//if (players_power == 0) {
-			//player_attackable.at(j - 1) = Attackable::kAttackable;
-		//} else if (my_power * 100 / players_power > treshold_ratio * 8) {
-			//player_attackable.at(j - 1) = Attackable::kAttackableVeryWeak;
-		//} else if (my_power * 100 / players_power > treshold_ratio * 4) {
-			//player_attackable.at(j - 1) = Attackable::kAttackableAndWeak;
-		//} else if (my_power * 100 / players_power > treshold_ratio) {
-			//player_attackable.at(j - 1) = Attackable::kAttackable;
-		//} else {
-			//player_attackable.at(j - 1) = Attackable::kNotAttackable;
-		//}
-	//}
 
 	// first we scan vicitnity of couple of militarysites to get new enemy sites
 	// Militarysites rotate (see check_militarysites())
@@ -140,7 +91,7 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 	uint8_t best_score = 0;
 	uint32_t count = 0;
 	// sites that were either conquered or destroyed
-	uint32_t site_to_be_removed = std::numeric_limits<uint32_t>::max();
+	//uint32_t site_to_be_removed = std::numeric_limits<uint32_t>::max();
 	std::vector<uint32_t> disappeared_sites;
 
 	// Willingness to attack depend on how long ago the last soldier has been trained. This is used
@@ -180,9 +131,10 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 		disappeared_sites.pop_back();
 	}
 
-	site_to_be_removed = std::numeric_limits<uint32_t>::max();
+	//site_to_be_removed = std::numeric_limits<uint32_t>::max();
 	for (std::map<uint32_t, EnemySiteObserver>::iterator site = enemy_sites.begin();
 	     site != enemy_sites.end(); ++site) {
+
 
 		// we test max 12 sites and prefer ones tested more then 1 min ago
 		if (((site->second.last_tested + (enemysites_check_delay_ * 1000)) > gametime && count > 4) ||
@@ -239,6 +191,16 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 
 		// if flag is defined it is a good taget
 		if (flag) {
+			
+			//Site is still there but not visible for us
+			if (!is_visible) {
+				if(site->second.last_time_seen + 20 * 60 * 1000 < gametime){
+					printf ("site %d not visible for more than 20 minutes\n", site->first);
+					disappeared_sites.push_back(site->first);
+				}
+				continue;
+			}
+			
 			// updating some info
 			// updating info on mines nearby if needed
 			if (site->second.mines_nearby == ExtendedBool::kUnset) {
@@ -253,11 +215,6 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 			}
 
 			site->second.is_warehouse = is_warehouse;
-
-			//// getting rid of default
-			//if (site->second.last_time_attackable == kNever) {
-				//site->second.last_time_attackable = gametime;
-			//}
 
 			// can we attack:
 			if (is_attackable) {
@@ -283,14 +240,6 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 			site->second.score = 0;
 
 			if (site->second.attack_soldiers_strength > 0 && !player_statistics.players_in_same_team(pn, owner_number)) {
-
-				//// treating no attack score
-				//if (site->second.no_attack_counter < 0) {  // NOCOM move this higher
-					//// we cannot attack yet
-					//site->second.score = 0;
-					//// but increase the counter by 1
-					//site->second.no_attack_counter += 1;
-				//} else {
 
 				const uint16_t enemys_power = player_statistics.get_modified_player_power(owner_number);
 				uint16_t my_to_enemy_power_ratio = 100;
@@ -391,14 +340,14 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 				inputs[39] = (gametime < 30 * 60 * 1000) ? -1 : 0;
 				inputs[40] = (gametime < 35 * 60 * 1000) ? -1 : 0;
 				inputs[41] = (gametime < 40 * 60 * 1000) ? -1 : 0;
-				inputs[42] = (site->second.last_time_attacked < gametime + 1 * 60 * 1000) ? -3 : 0;
-				inputs[43] = (site->second.last_time_attacked < gametime + 1 * 60 * 1000) ? -1 : 0;
-				inputs[44] = (site->second.last_time_attacked < gametime + 2 * 60 * 1000) ? -2 : 0;
-				inputs[45] = (site->second.last_time_attacked < gametime + 2 * 60 * 1000) ? -1 : 0;
-				inputs[46] = (site->second.last_time_attacked < gametime + 3 * 60 * 1000) ? -1 : 0;				
-				inputs[47] = (site->second.last_time_attacked < gametime + 4 * 60 * 1000) ? -1 : 0;
-				inputs[48] = (site->second.last_time_attacked < gametime + 5 * 60 * 1000) ? -1 : 0;
-				inputs[49] = (site->second.last_time_attacked < gametime + 2 * 60 * 1000) ? -1 : 0;
+				inputs[42] = (site->second.last_time_attacked + 1 * 60 * 1000 > gametime) ? -3 : 0;
+				inputs[43] = (site->second.last_time_attacked +     30 * 1000 > gametime) ? -1 : 0;
+				inputs[44] = (site->second.last_time_attacked + 2 * 60 * 1000 > gametime) ? -2 : 0;
+				inputs[45] = (site->second.last_time_attacked +     40 * 1000 > gametime) ? -1 : 0;
+				inputs[46] = (site->second.last_time_attacked + 3 * 60 * 1000 > gametime) ? -1 : 0;				
+				inputs[47] = (site->second.last_time_attacked +     30 * 1000 > gametime) ? -1 : 0;
+				inputs[48] = (site->second.last_time_attacked +     90 * 1000 > gametime) ? -1 : 0;
+				inputs[49] = (site->second.last_time_attacked + 2 * 60 * 1000 > gametime) ? -1 : 0;
 				inputs[50] = soldier_trained_log.count(gametime);
 				inputs[51] = soldier_trained_log.count(gametime) / 2;
 				inputs[52] = (my_to_enemy_power_ratio - 100) / 50; 
@@ -468,12 +417,11 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 						}
 					}
 				}
-
-
 			} 
 			site->second.score += management_data.get_military_number_at(138) / 4;
 
 			if (site->second.score > 0) {
+				assert(is_visible);
 				//printf ("  ... %7d is candidate for attack, competency: %2d, score %d, best score by now: %2d\n",
 				 //site->first,site->second.attack_soldiers_competency, site->second.score, best_score);
 				if (site->second.score > best_score) {
@@ -481,23 +429,11 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 					best_target = site->first;
 				}
 			} 
-			//else {
-				//printf ("  ... not suitable for attack: score %d, strength: %d\n", site->second.score, site->second.attack_soldiers_strength);
-				//}
 
-			//if (site->second.attack_soldiers_strength > 0) {
-				//site->second.last_time_attackable = gametime;
-			//}
-			//if (site->second.last_time_seen + 20 * 60 * 1000 < gametime) {
-				//site_to_be_removed = site->first;
-			//}
-		} else {  // we dont have a flag, let remove the site from out observer list
-			site_to_be_removed = site->first;
+		} else {  // we dont have a flag = site does not exists anymore, let remove the site from out observer list
+			disappeared_sites.push_back(site->first);
 		}
 
-		if (site_to_be_removed < std::numeric_limits<uint32_t>::max()) {
-			disappeared_sites.push_back(site_to_be_removed);
-		}
 	}
 
 	while (!disappeared_sites.empty()) {
@@ -524,13 +460,6 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 
 	// attacking
 	FCoords f = map.get_fcoords(Coords::unhash(best_target));
-	// setting no attack counter here
-	// this gauranties that it will not be attacked in next 3
-	// turns
-	//enemy_sites[best_target].no_attack_counter =
-	   //-3 + management_data.get_military_number_at(20) / 40;
-	//assert(enemy_sites[best_target].no_attack_counter > -7 &&
-	       //enemy_sites[best_target].no_attack_counter < 0);
 
 	Flag* flag = nullptr;  // flag of a building to be attacked
 	if (upcast(MilitarySite, bld, f.field->get_immovable())) {
@@ -549,10 +478,6 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 		attackers = 5 + std::rand() % (attackers - 5);
 	}
 
-
-	//attackers = attackers - (std::rand() % 3) - ((above_ten > 0) ? std::rand() % above_ten : 0);
-	//// attackers += management_data.neuron_pool[48].get_result_safe(training_score / 2, kAbsValue) /
-	//// 10;
 	assert(attackers < 500);
 
 	if (attackers <= 0) {
@@ -562,8 +487,9 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 	printf ("%2d: attacking site at %3dx%3d, score %3d, with %2d soldiers, attacking after %3d seconds\n",
 	player_number(),flag->get_position().x, flag->get_position().y, best_score, attackers, (gametime - last_attack_time_) / 1000);
 	game().send_player_enemyflagaction(*flag, player_number(), static_cast<uint16_t>(attackers));
+	assert(1 < player_->vision(Map::get_index(flag->get_building()->get_position(), map.get_width())));
 	attackers_count_ += attackers;
-	//enemy_sites[best_target].last_time_attackable = gametime;
+	enemy_sites[best_target].last_time_attacked = gametime;
 
 	last_attack_time_ = gametime;
 	for(int j= 0; j<attackers; j +=1) {
@@ -994,17 +920,19 @@ int32_t DefaultAI::calculate_strength(const std::vector<Widelands::Soldier*>& so
 		defense = 100 - descr.get_base_defense() - 8 * soldier->get_defense_level();
 		evade = 100 - descr.get_base_evade() -
 		        descr.get_evade_incr_per_level() / 100.f * soldier->get_evade_level();
-		final += soldier ->get_current_health() * (attack * health) / (defense * evade);
+		final += (attack * health) / (defense * evade);
 		//printf ("%d %d %d %d %d\n", //NOCOM
 		//descr.get_base_defense(),
 		//soldier->get_defense_level(),
 		//descr.get_base_evade(),
 		//descr.get_evade_incr_per_level(),
 		//soldier->get_evade_level());
-		if (health < 1000) {
-			printf (" * This soldier: (%4f * %4f) / (%4f * %4f) = %5f\n", attack, health,  defense,  evade, (attack * health) / (defense * evade));
+		if (health < 1000 || final < 0 || final > 100 * 2500) {
+			printf (" * This soldier: (%4f * %4f) / (%4f * %4f) = %5f. Final %3f\n", attack, health,  defense,  evade, (attack * health) / (defense * evade), final);
 		}
 	}
+	assert(final >= 0);
+	assert(final <= 100 * 2500);
 	//printf ("This soldier %5f / 2500 = %5f\n", final, final / 2500);
 	// 2500 is aproximate strength of one unpromoted soldier
 	return static_cast<int32_t>(final / 2500);
