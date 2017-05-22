@@ -29,7 +29,6 @@
 #include <SDL.h>
 #include <boost/utility.hpp>
 
-#include "base/log.h"
 #include "base/macros.h"
 
 // The implementation took inspiration from
@@ -56,8 +55,9 @@ public:
 
 	/// Inserts this entry of type T into the cache. asserts() that there is no entry with this hash
 	/// already cached. Returns the given T for convenience.
-	std::shared_ptr<const T>
-	insert(const std::string& hash, std::shared_ptr<const T> entry, uint32_t entry_size_in_size_unit);
+	std::shared_ptr<const T> insert(const std::string& hash,
+	                                std::shared_ptr<const T> entry,
+	                                uint32_t entry_size_in_size_unit);
 
 private:
 	/// Drop the oldest entry
@@ -115,14 +115,16 @@ std::shared_ptr<const T> TransientCache<T>::insert(const std::string& hash,
                                                    uint32_t entry_size_in_size_unit) {
 	assert(entries_.find(hash) == entries_.end());
 
-	while (!entries_.empty() && size_in_size_unit_ + entry_size_in_size_unit > max_size_in_size_unit_) {
+	while (!entries_.empty() &&
+	       size_in_size_unit_ + entry_size_in_size_unit > max_size_in_size_unit_) {
 		drop();
 	}
 
 	// Record hash as most-recently-used.
 	AccessHistory::iterator it = access_history_.insert(access_history_.end(), hash);
 	size_in_size_unit_ += entry_size_in_size_unit;
-	return entries_.insert(make_pair(hash, Entry{std::move(entry), entry_size_in_size_unit, SDL_GetTicks(), it}))
+	return entries_
+	   .insert(make_pair(hash, Entry{std::move(entry), entry_size_in_size_unit, SDL_GetTicks(), it}))
 	   .first->second.entry;
 }
 
@@ -134,8 +136,10 @@ template <typename T> void TransientCache<T>::drop() {
 	assert(it != entries_.end());
 
 	size_in_size_unit_ -= it->second.size;
-	log("TransientCache: Dropping %d bytes, new size %d. Hash: %s\n", it->second.size,
-	    size_in_size_unit_, it->first.c_str());
+	// TODO(GunChleoc): Remove the following line once everything is converted to the new font
+	// renderer and all testing has been done.
+	// log("TransientCache: Dropping %d bytes, new size %d. Hash: %s\n", it->second.size,
+	//    size_in_size_unit_, it->first.c_str());
 
 	// Erase both elements to completely purge record
 	entries_.erase(it);
