@@ -53,6 +53,14 @@ public:
 	/// Returns an entry if it is cached, nullptr otherwise.
 	std::shared_ptr<const T> get(const std::string& hash);
 
+
+	/// Inserts this entry of type T into the cache. Returns the given T for convenience.
+	/// When overriding this function, calculate the size of 'entry' and then call
+	/// insert(hash, entry, entry_size_in_size_unit).
+	virtual std::shared_ptr<const T> insert(const std::string& hash,
+	                                std::shared_ptr<const T> entry) = 0;
+
+protected:
 	/// Inserts this entry of type T into the cache. asserts() that there is no entry with this hash
 	/// already cached. Returns the given T for convenience.
 	std::shared_ptr<const T> insert(const std::string& hash,

@@ -31,7 +31,7 @@ public:
 	}
 
 	std::shared_ptr<const Image> insert(const std::string& hash,
-	                                    std::shared_ptr<const Image> entry) {
+	                                    std::shared_ptr<const Image> entry) override {
 		return TransientCache<Image>::insert(hash, entry, entry->width() * entry->height() * 4);
 	}
 };

@@ -63,7 +63,7 @@ private:
 		}
 
 		std::shared_ptr<const RenderedText> insert(const std::string& hash,
-		                                           std::shared_ptr<const RenderedText> entry) {
+		                                           std::shared_ptr<const RenderedText> entry) override {
 			return TransientCache<RenderedText>::insert(hash, entry, entry->rects.size());
 		}
 	};
