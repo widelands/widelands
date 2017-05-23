@@ -174,10 +174,8 @@ void RenderedText::draw(RenderTarget& dst,
 #else
 			const int maximum_size = g_gr->max_texture_size();
 #endif
-			// NOCOM Replace 'test' with 'maximum_size' when testing is done.
-			const int test = 4;
-			const int tile_width = std::min(test, rect->width());
-			const int tile_height = std::min(test, rect->height());
+			const int tile_width = std::min(maximum_size, rect->width());
+			const int tile_height = std::min(maximum_size, rect->height());
 			for (int tile_x = blit_point.x; tile_x + tile_width <= blit_point.x + rect->width();
 			     tile_x += tile_width) {
 				for (int tile_y = blit_point.y; tile_y + tile_height <= blit_point.y + rect->height();

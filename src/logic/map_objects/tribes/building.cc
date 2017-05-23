@@ -748,11 +748,9 @@ void Building::send_message(Game& game,
                             uint32_t throttle_radius) {
 	const std::string& img = descr().representative_image_filename();
 	const int width = descr().representative_image()->width();
-	// NOCOM Remove the background image when testing is done.
 	const std::string rt_description =
 	   (boost::format("<div padding_r=10><p><img width=%d src=%s color=%s></p></div>"
-	                  "<div background=images/ui_fsmenu/left.png width=*><p><font "
-	                  "size=%d>%s</font></p></div>") %
+	                  "<div width=*><p><font size=%d>%s</font></p></div>") %
 	    width % img % owner().get_playercolor().hex_value() % UI_FONT_SIZE_MESSAGE % description)
 	      .str();
 
