@@ -236,6 +236,8 @@ public:
 	// TODO(GunChleoc): Remove this function once conversion is finished and well tested.
 	virtual std::string debug_info() const = 0;
 
+	// If a node is a non-mandatory space, it can be removed as a leading/trailing space
+	// by the positioning algorithm.
 	virtual bool is_non_mandatory_space() const {
 		return false;
 	}

@@ -87,7 +87,7 @@ public:
 		const std::string hash = boost::lexical_cast<std::string>(w) + text;
 		std::shared_ptr<const RenderedText> rendered_text = render_cache_->get(hash);
 		if (rendered_text.get() == nullptr) {
-			rendered_text = render_cache_->insert(hash, std::move(rt_renderer_->render(text, w)));
+			rendered_text = render_cache_->insert(hash, rt_renderer_->render(text, w));
 		}
 		return rendered_text;
 	}

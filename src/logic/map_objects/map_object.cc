@@ -465,7 +465,7 @@ void MapObject::do_draw_info(const TextToDraw& draw_text,
 
 	// Rendering text is expensive, so let's just do it for only a few sizes.
 	// The forumla is a bit fancy to avoid too much text overlap.
-	scale = std::round(2 * (scale > 1.f ? std::sqrt(scale) : std::pow(scale, 2))) / 2;
+	scale = std::round(2.f * (scale > 1.f ? std::sqrt(scale) : std::pow(scale, 2.f))) / 2.f;
 	if (scale < 1.f) {
 		return;
 	}
