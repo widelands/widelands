@@ -42,7 +42,6 @@
 #include "logic/game.h"
 #include "logic/game_controller.h"
 #include "logic/game_data_error.h"
-#include "logic/map_objects/attackable.h"
 #include "logic/map_objects/checkstep.h"
 #include "logic/map_objects/tribes/battle.h"
 #include "logic/map_objects/tribes/building.h"
@@ -602,7 +601,7 @@ bool Soldier::is_attacking_player(Game& game, Player& player) {
 	return false;
 }
 
-Battle* Soldier::get_battle() {
+Battle* Soldier::get_battle() const {
 	return battle_;
 }
 
@@ -902,12 +901,14 @@ void Soldier::attack_update(Game& game, State& state) {
 		}
 	}
 
-	upcast(Attackable, attackable, enemy);
-	assert(attackable);
+	assert(enemy->attack_target() != nullptr);
 
 	molog("[attack] attacking target building\n");
 	//  give the enemy soldier some time to act
-	schedule_act(game, attackable->attack(*this) ? 1000 : 10);
+	schedule_act(
+	   game, enemy->attack_target()->attack(this) == AttackTarget::AttackResult::DefenderLaunched ?
+	            1000 :
+	            10);
 }
 
 void Soldier::attack_pop(Game& game, State&) {
@@ -1047,7 +1048,8 @@ void Soldier::defense_update(Game& game, State& state) {
 			for (Bob* temp_bob : soldiers) {
 				if (upcast(Soldier, temp_soldier, temp_bob)) {
 					if (temp_soldier->can_be_challenged()) {
-						new Battle(game, *this, *temp_soldier);
+						assert(temp_soldier != nullptr);
+						new Battle(game, this, temp_soldier);
 						return start_task_battle(game);
 					}
 				}
@@ -1134,7 +1136,8 @@ void Soldier::defense_update(Game& game, State& state) {
 
 		if (target.dist <= 1) {
 			molog("[defense] starting battle with %u!\n", target.s->serial());
-			new Battle(game, *this, *(target.s));
+			assert(target.s != nullptr);
+			new Battle(game, this, target.s);
 			return start_task_battle(game);
 		}
 
@@ -1257,7 +1260,8 @@ void Soldier::battle_update(Game& game, State&) {
 		}
 	}
 
-	if (!battle_) {
+	// The opponent might have died on us
+	if (!battle_ || battle_->opponent(*this) == nullptr) {
 		if (combat_walking_ == CD_COMBAT_W) {
 			return start_task_move_in_battle(game, CD_RETURN_W);
 		}
@@ -1287,7 +1291,7 @@ void Soldier::battle_update(Game& game, State&) {
 	if (stay_home()) {
 		if (this == battle_->first()) {
 			molog("[battle] stay_home, so reverse roles\n");
-			new Battle(game, *battle_->second(), *battle_->first());
+			new Battle(game, battle_->second(), battle_->first());
 			return skip_act();  //  we will get a signal via set_battle()
 		} else {
 			if (combat_walking_ != CD_COMBAT_E) {
@@ -1298,7 +1302,7 @@ void Soldier::battle_update(Game& game, State&) {
 	} else {
 		if (opponent.stay_home() && (this == battle_->second())) {
 			// Wait until correct roles are assigned
-			new Battle(game, *battle_->second(), *battle_->first());
+			new Battle(game, battle_->second(), battle_->first());
 			return schedule_act(game, 10);
 		}
 
@@ -1488,7 +1492,7 @@ bool Soldier::check_node_blocked(Game& game, const FCoords& field, bool const co
 		if (commit && !foundbattle && !multiplesoldiers) {
 			if (foundsoldier->owner().is_hostile(*get_owner()) && foundsoldier->can_be_challenged()) {
 				molog("[check_node_blocked] attacking a soldier (%u)\n", foundsoldier->serial());
-				new Battle(game, *this, *foundsoldier);
+				new Battle(game, this, foundsoldier);
 			}
 		}
 
@@ -1520,20 +1524,21 @@ void Soldier::send_space_signals(Game& game) {
 	PlayerNumber const land_owner = get_position().field->get_owned_by();
 	// First check if the soldier is standing on someone else's territory
 	if (land_owner != owner().player_number()) {
-		// Let's collect all reachable attackable sites in vicinity (militarysites mainly)
-		std::vector<BaseImmovable*> attackables;
+		// Let's collect all reachable attack_target sites in vicinity (militarysites mainly)
+		std::vector<BaseImmovable*> attack_targets;
 		game.map().find_reachable_immovables_unique(
-		   Area<FCoords>(get_position(), MaxProtectionRadius), attackables,
-		   CheckStepWalkOn(descr().movecaps(), false), FindImmovableAttackable());
+		   Area<FCoords>(get_position(), kMaxProtectionRadius), attack_targets,
+		   CheckStepWalkOn(descr().movecaps(), false), FindImmovableAttackTarget());
 
-		for (BaseImmovable* temp_attackable : attackables) {
-			const Player* attackable_player =
-			   dynamic_cast<const PlayerImmovable&>(*temp_attackable).get_owner();
+		for (BaseImmovable* temp_attack_target : attack_targets) {
+			Building* building = dynamic_cast<Building*>(temp_attack_target);
+			assert(building != nullptr && building->attack_target() != nullptr);
+			const Player& attack_target_player = building->owner();
 			// Let's inform the site that this (=enemy) soldier is nearby and within the site's owner's
 			// territory
-			if (attackable_player->player_number() == land_owner &&
-			    attackable_player->is_hostile(*get_owner())) {
-				dynamic_cast<Attackable&>(*temp_attackable).aggressor(*this);
+			if (attack_target_player.player_number() == land_owner &&
+			    attack_target_player.is_hostile(*get_owner())) {
+				building->attack_target()->enemy_soldier_approaches(*this);
 			}
 		}
 	}
