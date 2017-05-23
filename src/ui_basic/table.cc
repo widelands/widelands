@@ -315,7 +315,7 @@ void Table<void*>::draw(RenderTarget& dst) {
 
 			constexpr int kMargin = 1;
 			rendered_text->draw(dst, point, Recti(kMargin, 0, curw - picw - 2 * kMargin, lineheight),
-			                    alignment, RenderedText::CropMode::kHorizontal);
+			                    alignment, RenderedText::CropMode::kSelf);
 			curx += curw;
 		}
 

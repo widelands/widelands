@@ -147,7 +147,7 @@ void RenderedText::draw(RenderTarget& dst,
 
 	// For cropping images that don't fit
 	int offset_x = 0;
-	if (cropmode == CropMode::kHorizontal) {
+	if (cropmode == CropMode::kSelf) {
 		UI::correct_for_align(align, width(), &aligned_pos);
 		if (align != UI::Align::kLeft) {
 			for (const auto& rect : rects) {
@@ -165,46 +165,54 @@ void RenderedText::draw(RenderTarget& dst,
 
 	// Blit the rects
 	for (const auto& rect : rects) {
-		const Vector2i blit_point(aligned_pos.x + rect->x(), aligned_pos.y + rect->y());
+		blit_rect(dst, offset_x, aligned_pos, *rect.get(), region, align, cropmode);
+	}
+}
 
-		// Draw Solid background Color
-		if (rect->has_background_color()) {
+void RenderedText::blit_rect(RenderTarget& dst,
+                             int offset_x,
+                             const Vector2i& aligned_position,
+                             const RenderedRect& rect,
+                             const Recti& region,
+                             Align align,
+                             CropMode cropmode) const {
+	const Vector2i blit_point(aligned_position.x + rect.x(), aligned_position.y + rect.y());
+
+	// Draw Solid background Color
+	if (rect.has_background_color()) {
 #ifndef NDEBUG
-			const int maximum_size = kMinimumSizeForTextures;
+		const int maximum_size = kMinimumSizeForTextures;
 #else
-			const int maximum_size = g_gr->max_texture_size();
+		const int maximum_size = g_gr->max_texture_size();
 #endif
-			const int tile_width = std::min(maximum_size, rect->width());
-			const int tile_height = std::min(maximum_size, rect->height());
-			for (int tile_x = blit_point.x; tile_x + tile_width <= blit_point.x + rect->width();
-			     tile_x += tile_width) {
-				for (int tile_y = blit_point.y; tile_y + tile_height <= blit_point.y + rect->height();
-				     tile_y += tile_height) {
-					dst.fill_rect(
-					   Recti(tile_x, tile_y, tile_width, tile_height), rect->background_color());
-				}
+		const int tile_width = std::min(maximum_size, rect.width());
+		const int tile_height = std::min(maximum_size, rect.height());
+		for (int tile_x = blit_point.x; tile_x + tile_width <= blit_point.x + rect.width();
+		     tile_x += tile_width) {
+			for (int tile_y = blit_point.y; tile_y + tile_height <= blit_point.y + rect.height();
+			     tile_y += tile_height) {
+				dst.fill_rect(Recti(tile_x, tile_y, tile_width, tile_height), rect.background_color());
 			}
 		}
+	}
 
-		if (rect->image() != nullptr) {
-			switch (rect->mode()) {
-			// Draw a foreground texture
-			case RenderedRect::DrawMode::kBlit: {
-				switch (cropmode) {
-				case CropMode::kRenderTarget:
-					// dst will handle any cropping
-					dst.blit(blit_point, rect->image());
-					break;
-				case CropMode::kHorizontal:
-					blit_cropped(dst, offset_x, position, blit_point, *rect, region, align);
-				}
-			} break;
-			// Draw a background image (tiling)
-			case RenderedRect::DrawMode::kTile:
-				dst.tile(
-				   Recti(blit_point, rect->width(), rect->height()), rect->image(), Vector2i(0, 0));
+	if (rect.image() != nullptr) {
+		switch (rect.mode()) {
+		// Draw a foreground texture
+		case RenderedRect::DrawMode::kBlit: {
+			switch (cropmode) {
+			case CropMode::kRenderTarget:
+				// dst will handle any cropping
+				dst.blit(blit_point, rect.image());
 				break;
+			case CropMode::kSelf:
+				blit_cropped(dst, offset_x, aligned_position, blit_point, rect, region, align);
 			}
+		} break;
+		// Draw a background image (tiling)
+		case RenderedRect::DrawMode::kTile:
+			dst.tile(Recti(blit_point, rect.width(), rect.height()), rect.image(), Vector2i::zero());
+			break;
 		}
 	}
 }

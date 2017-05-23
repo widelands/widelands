@@ -35,7 +35,10 @@ namespace UI {
 class RenderedRect {
 public:
 	/// Whether the RenderedRect's image should be blitted once or tiled
-	enum class DrawMode { kBlit, kTile };
+	enum class DrawMode {
+		kBlit,  // The image texture is considered a foreground image and blitted as is
+		kTile   // The image texture is considered a background image and is tiled to fill the rect
+	};
 
 private:
 	// The image is managed by a transient cache
@@ -121,8 +124,11 @@ struct RenderedText {
 	int height() const;
 
 	enum class CropMode {
-		kRenderTarget,  // The RenderTarget will handle all cropping
-		kHorizontal     // The draw() method will handle horizontal cropping
+		// The RenderTarget will handle all cropping. Use this for scrollable elements or when you
+		// don't expect any cropping.
+		kRenderTarget,
+		// The draw() method will handle horizontal cropping. Use this for table entries.
+		kSelf
 	};
 
 	/// Draw the rects. 'position', 'region' and 'align' are used to control the overall drawing
@@ -141,7 +147,19 @@ struct RenderedText {
 	void draw(RenderTarget& dst, const Vector2i& position, UI::Align align = UI::Align::kLeft) const;
 
 private:
-	/// Helper function for CropMode::kHorizontal
+	/// Helper function for draw(). Blits the rect's background color and images. The rect will be
+	/// positioned according to 'aligned_position' and cropped according to 'region'. 'offxet_x' and
+	/// 'align' are used by the cropping algorithm when we use CropMode::kSelf mode.
+	void blit_rect(RenderTarget& dst,
+	               int offset_x,
+	               const Vector2i& aligned_position,
+	               const RenderedRect& rect,
+	               const Recti& region,
+	               Align align,
+	               CropMode cropmode) const;
+
+	/// Helper function for CropMode::kSelf. It only does horizontal cropping since the RenderTarget
+	/// itself still seems to take care of vertical stuff for us in tables.
 	void blit_cropped(RenderTarget& dst,
 	                  int offset_x,
 	                  const Vector2i& position,

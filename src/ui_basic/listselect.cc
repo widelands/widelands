@@ -442,7 +442,7 @@ void BaseListselect::draw(RenderTarget& dst) {
 		if (lineheight < 0) {
 			break;
 		}
-		rendered_text->draw(dst, point, Recti(0, 0, maxw, lineheight), alignment, RenderedText::CropMode::kHorizontal);
+		rendered_text->draw(dst, point, Recti(0, 0, maxw, lineheight), alignment, RenderedText::CropMode::kSelf);
 		y += get_lineheight();
 		++idx;
 	}
