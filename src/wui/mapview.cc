@@ -27,7 +27,7 @@
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
 #include "logic/map.h"
-#include "logic/map_objects/draw_text.h"
+#include "logic/map_objects/info_to_draw.h"
 #include "logic/player.h"
 #include "wlapplication.h"
 #include "wui/interactive_base.h"
@@ -392,21 +392,27 @@ void MapView::draw(RenderTarget& dst) {
 			return;
 	}
 
-	TextToDraw draw_text = TextToDraw::kNone;
+	InfoToDraw info_to_draw = InfoToDraw::kNone;
 	auto display_flags = intbase().get_display_flags();
 	if (display_flags & InteractiveBase::dfShowCensus) {
-		draw_text = draw_text | TextToDraw::kCensus;
+		info_to_draw = info_to_draw | InfoToDraw::kCensus;
 	}
 	if (display_flags & InteractiveBase::dfShowStatistics) {
-		draw_text = draw_text | TextToDraw::kStatistics;
+		info_to_draw = info_to_draw | InfoToDraw::kStatistics;
+	}
+	if (display_flags & InteractiveBase::dfShowSoldierHealthBars) {
+		info_to_draw = info_to_draw | InfoToDraw::kSoldierHealthBars;
+	}
+	if (display_flags & InteractiveBase::dfShowSoldierLevels) {
+		info_to_draw = info_to_draw | InfoToDraw::kSoldierLevels;
 	}
 
 	if (upcast(InteractivePlayer const, interactive_player, &intbase())) {
 		renderer_->rendermap(
-		   egbase, view_.viewpoint, view_.zoom, interactive_player->player(), draw_text, &dst);
+		   egbase, view_.viewpoint, view_.zoom, interactive_player->player(), info_to_draw, &dst);
 	} else {
 		renderer_->rendermap(
-		   egbase, view_.viewpoint, view_.zoom, static_cast<TextToDraw>(draw_text), &dst);
+		   egbase, view_.viewpoint, view_.zoom, static_cast<InfoToDraw>(info_to_draw), &dst);
 	}
 }
 

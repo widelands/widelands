@@ -452,13 +452,13 @@ void MapObject::cleanup(EditorGameBase& egbase) {
 	egbase.objects().remove(*this);
 }
 
-void MapObject::do_draw_info(const TextToDraw& draw_text,
+void MapObject::do_draw_info(const InfoToDraw& info_to_draw,
                              const std::string& census,
                              const std::string& statictics,
                              const Vector2f& field_on_dst,
                              float scale,
                              RenderTarget* dst) const {
-	if (draw_text == TextToDraw::kNone) {
+	if (!(info_to_draw & (InfoToDraw::kCensus | InfoToDraw::kStatistics))) {
 		return;
 	}
 
@@ -476,11 +476,11 @@ void MapObject::do_draw_info(const TextToDraw& draw_text,
 	const Vector2i base_pos = field_on_dst.cast<int>() - Vector2i(0, 48) * scale;
 	Vector2i census_pos(base_pos);
 	UI::correct_for_align(UI::Align::kCenter, rendered_census_info->width(), &census_pos);
-	if (draw_text & TextToDraw::kCensus) {
+	if (info_to_draw & InfoToDraw::kCensus) {
 		dst->blit(census_pos, rendered_census_info, BlendMode::UseAlpha);
 	}
 
-	if (draw_text & TextToDraw::kStatistics && !statictics.empty()) {
+	if (info_to_draw & InfoToDraw::kStatistics && !statictics.empty()) {
 		Vector2i statistics_pos =
 		   base_pos + Vector2i(0, rendered_census_info->height() / 2 + 10 * scale);
 		const Image* rendered_statictics =

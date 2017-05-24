@@ -17,17 +17,19 @@
  *
  */
 
-#ifndef WL_LOGIC_MAP_OBJECTS_DRAW_TEXT_H
-#define WL_LOGIC_MAP_OBJECTS_DRAW_TEXT_H
+#ifndef WL_LOGIC_MAP_OBJECTS_INFO_TO_DRAW_H
+#define WL_LOGIC_MAP_OBJECTS_INFO_TO_DRAW_H
 
-enum TextToDraw {
+enum InfoToDraw {
 	kNone = 0,
 	kCensus = 1,
 	kStatistics = 2,
+	kSoldierHealthBars = 4,
+	kSoldierLevels = 8,
 };
 
-inline TextToDraw operator|(TextToDraw a, TextToDraw b) {
-	return static_cast<TextToDraw>(static_cast<int>(a) | static_cast<int>(b));
+inline InfoToDraw operator|(InfoToDraw a, InfoToDraw b) {
+	return static_cast<InfoToDraw>(static_cast<int>(a) | static_cast<int>(b));
 }
 
-#endif  // end of include guard: WL_LOGIC_MAP_OBJECTS_DRAW_TEXT_H
+#endif  // end of include guard: WL_LOGIC_MAP_OBJECTS_INFO_TO_DRAW_H

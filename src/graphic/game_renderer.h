@@ -25,7 +25,7 @@
 #include "base/macros.h"
 #include "base/vector.h"
 #include "graphic/gl/fields_to_draw.h"
-#include "logic/map_objects/draw_text.h"
+#include "logic/map_objects/info_to_draw.h"
 
 namespace Widelands {
 class Player;
@@ -47,7 +47,7 @@ public:
 	               const Vector2f& viewpoint,
 	               float scale,
 	               const Widelands::Player& player,
-	               TextToDraw draw_text,
+	               InfoToDraw info_to_draw,
 	               RenderTarget* dst);
 
 	// Renders the map from an omniscient perspective. This is used
@@ -55,7 +55,7 @@ public:
 	void rendermap(const Widelands::EditorGameBase& egbase,
 	               const Vector2f& viewpoint,
 	               float scale,
-	               TextToDraw draw_text,
+	               InfoToDraw info_to_draw,
 	               RenderTarget* dst);
 
 private:
@@ -64,7 +64,7 @@ private:
 	void draw(const Widelands::EditorGameBase& egbase,
 	          const Vector2f& viewpoint,
 	          float scale,
-	          TextToDraw draw_text,
+	          InfoToDraw info_to_draw,
 	          const Widelands::Player* player,
 	          RenderTarget* dst);
 

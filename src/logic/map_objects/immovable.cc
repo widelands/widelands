@@ -449,7 +449,7 @@ void Immovable::act(Game& game, uint32_t const data) {
 }
 
 void Immovable::draw(uint32_t gametime,
-                     const TextToDraw draw_text,
+                     const InfoToDraw info_to_draw,
                      const Vector2f& point_on_dst,
                      float scale,
                      RenderTarget* dst) {
@@ -459,15 +459,15 @@ void Immovable::draw(uint32_t gametime,
 	if (!anim_construction_total_) {
 		dst->blit_animation(point_on_dst, scale, anim_, gametime - animstart_);
 		if (former_building_descr_) {
-			do_draw_info(draw_text, former_building_descr_->descname(), "", point_on_dst, scale, dst);
+			do_draw_info(info_to_draw, former_building_descr_->descname(), "", point_on_dst, scale, dst);
 		}
 	} else {
-		draw_construction(gametime, draw_text, point_on_dst, scale, dst);
+		draw_construction(gametime, info_to_draw, point_on_dst, scale, dst);
 	}
 }
 
 void Immovable::draw_construction(const uint32_t gametime,
-                                  const TextToDraw draw_text,
+                                  const InfoToDraw info_to_draw,
                                   const Vector2f& point_on_dst,
                                   const float scale,
                                   RenderTarget* dst) {
@@ -508,7 +508,7 @@ void Immovable::draw_construction(const uint32_t gametime,
 	   point_on_dst, scale, anim_, current_frame * frametime, player_color, percent);
 
 	// Additionally, if statistics are enabled, draw a progression string
-	do_draw_info(draw_text, descr().descname(),
+	do_draw_info(info_to_draw, descr().descname(),
 	             (boost::format("<font color=%s>%s</font>") % UI_FONT_CLR_DARK.hex_value() %
 	              (boost::format(_("%i%% built")) % (100 * done / total)).str())
 	                .str(),

@@ -439,7 +439,7 @@ Vector2f Soldier::calc_drawpos(const EditorGameBase& game,
  * Draw this soldier. This basically draws him as a worker, but add health points
  */
 void Soldier::draw(const EditorGameBase& game,
-                   const TextToDraw&,
+                   const InfoToDraw& info_to_draw,
                    const Vector2f& field_on_dst,
                    const float scale,
                    RenderTarget* dst) const {
@@ -452,7 +452,7 @@ void Soldier::draw(const EditorGameBase& game,
 	draw_info_icon(
 	   point_on_dst.cast<int>() -
 	      Vector2i(0, (g_gr->animations().get_animation(get_current_anim()).height() - 7) * scale),
-	   scale, true, dst);
+	   scale, InfoMode::kWalkingAround, info_to_draw, dst);
 	draw_inner(game, point_on_dst, scale, dst);
 }
 
@@ -461,8 +461,13 @@ void Soldier::draw(const EditorGameBase& game,
  */
 void Soldier::draw_info_icon(Vector2i draw_position,
                              float scale,
-                             const bool anchor_below,
+                             const InfoMode draw_mode,
+                             const InfoToDraw info_to_draw,
                              RenderTarget* dst) const {
+	if (!(info_to_draw & (InfoToDraw::kSoldierHealthBars | InfoToDraw::kSoldierLevels))) {
+		return;
+	}
+
 	// Since the graphics below are all pixel perfect and scaling them as floats
 	// looks weird, we round to the nearest fullest integer.
 	scale = std::round(scale);
@@ -493,46 +498,52 @@ void Soldier::draw_info_icon(Vector2i draw_position,
 
 	const int icon_size = healthpic->width();
 
-	if (!anchor_below) {
+	switch (draw_mode) {
+	case InfoMode::kInBuilding:
 		draw_position.x += kSoldierHealthBarWidth * scale;
 		draw_position.y += 2 * icon_size * scale;
-	} else {
+		break;
+	case InfoMode::kWalkingAround:
 		draw_position.y -= 5 * scale;
 	}
 
-	// Draw energy bar
-	assert(get_max_health());
-	const Recti energy_outer(draw_position - Vector2i(kSoldierHealthBarWidth, 0) * scale,
-	                         kSoldierHealthBarWidth * 2 * scale, 5 * scale);
-	dst->fill_rect(energy_outer, RGBColor(255, 255, 255));
+	if (info_to_draw & InfoToDraw::kSoldierHealthBars) {
+		// Draw energy bar
+		assert(get_max_health());
+		const Recti energy_outer(draw_position - Vector2i(kSoldierHealthBarWidth, 0) * scale,
+		                         kSoldierHealthBarWidth * 2 * scale, 5 * scale);
+		dst->fill_rect(energy_outer, RGBColor(255, 255, 255));
 
-	int health_width = 2 * (kSoldierHealthBarWidth - 1) * current_health_ / get_max_health();
-	Recti energy_inner(draw_position + Vector2i(-kSoldierHealthBarWidth + 1, 1) * scale,
-	                   health_width * scale, 3 * scale);
-	Recti energy_complement(energy_inner.origin() + Vector2i(health_width, 0) * scale,
-	                        (2 * (kSoldierHealthBarWidth - 1) - health_width) * scale, 3 * scale);
+		int health_width = 2 * (kSoldierHealthBarWidth - 1) * current_health_ / get_max_health();
+		Recti energy_inner(draw_position + Vector2i(-kSoldierHealthBarWidth + 1, 1) * scale,
+		                   health_width * scale, 3 * scale);
+		Recti energy_complement(energy_inner.origin() + Vector2i(health_width, 0) * scale,
+		                        (2 * (kSoldierHealthBarWidth - 1) - health_width) * scale, 3 * scale);
 
-	const RGBColor& color = owner().get_playercolor();
-	RGBColor complement_color;
-	if (static_cast<uint32_t>(color.r) + color.g + color.b > 128 * 3) {
-		complement_color = RGBColor(32, 32, 32);
-	} else {
-		complement_color = RGBColor(224, 224, 224);
+		const RGBColor& color = owner().get_playercolor();
+		RGBColor complement_color;
+		if (static_cast<uint32_t>(color.r) + color.g + color.b > 128 * 3) {
+			complement_color = RGBColor(32, 32, 32);
+		} else {
+			complement_color = RGBColor(224, 224, 224);
+		}
+
+		dst->fill_rect(energy_inner, color);
+		dst->fill_rect(energy_complement, complement_color);
 	}
 
-	dst->fill_rect(energy_inner, color);
-	dst->fill_rect(energy_complement, complement_color);
-
-	const auto draw_level_image = [icon_size, scale, &draw_position, dst](
-	   const Vector2i& offset, const Image* image) {
-		dst->blitrect_scale(
-		   Rectf(draw_position + offset * icon_size * scale, icon_size * scale, icon_size * scale),
-		   image, Recti(0, 0, icon_size, icon_size), 1.f, BlendMode::UseAlpha);
-	};
-	draw_level_image(Vector2i(-1, -2), attackpic);
-	draw_level_image(Vector2i(0, -2), defensepic);
-	draw_level_image(Vector2i(-1, -1), healthpic);
-	draw_level_image(Vector2i(0, -1), evadepic);
+	if (info_to_draw & InfoToDraw::kSoldierLevels) {
+		const auto draw_level_image = [icon_size, scale, &draw_position, dst](
+		   const Vector2i& offset, const Image* image) {
+			dst->blitrect_scale(
+			   Rectf(draw_position + offset * icon_size * scale, icon_size * scale, icon_size * scale),
+			   image, Recti(0, 0, icon_size, icon_size), 1.f, BlendMode::UseAlpha);
+		};
+		draw_level_image(Vector2i(-1, -2), attackpic);
+		draw_level_image(Vector2i(0, -2), defensepic);
+		draw_level_image(Vector2i(-1, -1), healthpic);
+		draw_level_image(Vector2i(0, -1), evadepic);
+	}
 }
 
 /**

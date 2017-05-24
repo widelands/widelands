@@ -591,7 +591,7 @@ bool Building::fetch_from_flag(Game&) {
 }
 
 void Building::draw(uint32_t gametime,
-                    const TextToDraw draw_text,
+                    const InfoToDraw info_to_draw,
                     const Vector2f& point_on_dst,
                     const float scale,
                     RenderTarget* dst) {
@@ -601,7 +601,7 @@ void Building::draw(uint32_t gametime,
 	//  door animation?
 
 	//  overlay strings (draw when enabled)
-	draw_info(draw_text, point_on_dst, scale, dst);
+	draw_info(info_to_draw, point_on_dst, scale, dst);
 }
 
 /*
@@ -609,13 +609,13 @@ void Building::draw(uint32_t gametime,
 Draw overlay help strings when enabled.
 ===============
 */
-void Building::draw_info(const TextToDraw draw_text,
+void Building::draw_info(const InfoToDraw info_to_draw,
                          const Vector2f& point_on_dst,
                          const float scale,
                          RenderTarget* dst) {
 	const std::string statistics_string =
-	   (draw_text & TextToDraw::kStatistics) ? info_string(InfoStringFormat::kStatistics) : "";
-	do_draw_info(draw_text, info_string(InfoStringFormat::kCensus), statistics_string, point_on_dst,
+	   (info_to_draw & InfoToDraw::kStatistics) ? info_string(InfoStringFormat::kStatistics) : "";
+	do_draw_info(info_to_draw, info_string(InfoStringFormat::kCensus), statistics_string, point_on_dst,
 	             scale, dst);
 }
 

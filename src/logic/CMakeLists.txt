@@ -133,7 +133,7 @@ wl_library(logic
     map_objects/buildcost.h
     map_objects/checkstep.cc
     map_objects/checkstep.h
-    map_objects/draw_text.h
+    map_objects/info_to_draw.h
     map_objects/immovable.cc
     map_objects/immovable.h
     map_objects/immovable_program.h

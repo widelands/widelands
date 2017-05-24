@@ -26,7 +26,7 @@
 #include "base/macros.h"
 #include "graphic/animation.h"
 #include "logic/map_objects/buildcost.h"
-#include "logic/map_objects/draw_text.h"
+#include "logic/map_objects/info_to_draw.h"
 #include "logic/map_objects/map_object.h"
 #include "logic/widelands_geometry.h"
 #include "notifications/note_ids.h"
@@ -97,13 +97,13 @@ struct BaseImmovable : public MapObject {
 	virtual PositionList get_positions(const EditorGameBase&) const = 0;
 
 	// Draw this immovable onto 'dst' choosing the frame appropriate for
-	// 'gametime'. 'draw_text' decides if census and statistics are written too.
+	// 'gametime'. 'info_to_draw' decides if census and statistics are written too.
 	// The 'coords_to_draw' are passed one to give objects that occupy multiple
 	// fields a way to only draw themselves once. The 'point_on_dst' determines
 	// the point for the hotspot of the animation and 'scale' determines how big
 	// the immovable will be plotted.
 	virtual void draw(uint32_t gametime,
-	                  TextToDraw draw_text,
+	                  InfoToDraw info_to_draw,
 	                  const Vector2f& point_on_dst,
 	                  float scale,
 	                  RenderTarget* dst) = 0;
@@ -228,7 +228,7 @@ public:
 	void cleanup(EditorGameBase&) override;
 	void act(Game&, uint32_t data) override;
 	void draw(uint32_t gametime,
-	          TextToDraw draw_text,
+	          InfoToDraw info_to_draw,
 	          const Vector2f& point_on_dst,
 	          float scale,
 	          RenderTarget* dst) override;
@@ -314,7 +314,7 @@ private:
 
 	void increment_program_pointer();
 	void draw_construction(uint32_t gametime,
-	                       TextToDraw draw_text,
+	                       InfoToDraw info_to_draw,
 	                       const Vector2f& point_on_dst,
 	                       float scale,
 	                       RenderTarget* dst);

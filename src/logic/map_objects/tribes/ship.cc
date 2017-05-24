@@ -961,15 +961,15 @@ void Ship::sink_ship(Game& game) {
 }
 
 void Ship::draw(const EditorGameBase& egbase,
-                const TextToDraw& draw_text,
+                const InfoToDraw& info_to_draw,
                 const Vector2f& field_on_dst,
                 const float scale,
                 RenderTarget* dst) const {
-	Bob::draw(egbase, draw_text, field_on_dst, scale, dst);
+	Bob::draw(egbase, info_to_draw, field_on_dst, scale, dst);
 
 	// Show ship name and current activity
 	std::string statistics_string = "";
-	if (draw_text & TextToDraw::kStatistics) {
+	if (info_to_draw & InfoToDraw::kStatistics) {
 		switch (ship_state_) {
 		case (ShipStates::kTransport):
 			/** TRANSLATORS: This is a ship state */
@@ -1001,7 +1001,7 @@ void Ship::draw(const EditorGameBase& egbase,
 		                       .str();
 	}
 
-	do_draw_info(draw_text, shipname_, statistics_string, calc_drawpos(egbase, field_on_dst, scale),
+	do_draw_info(info_to_draw, shipname_, statistics_string, calc_drawpos(egbase, field_on_dst, scale),
 	             scale, dst);
 }
 

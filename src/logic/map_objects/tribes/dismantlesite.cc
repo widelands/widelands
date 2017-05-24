@@ -218,7 +218,7 @@ Draw it.
 ===============
 */
 void DismantleSite::draw(uint32_t gametime,
-                         const TextToDraw draw_text,
+                         const InfoToDraw info_to_draw,
                          const Vector2f& point_on_dst,
                          float scale,
                          RenderTarget* dst) {
@@ -235,6 +235,6 @@ void DismantleSite::draw(uint32_t gametime,
 	   point_on_dst, scale, anim_idx, tanim, player_color, 100 - ((get_built_per64k() * 100) >> 16));
 
 	// Draw help strings
-	draw_info(draw_text, point_on_dst, scale, dst);
+	draw_info(info_to_draw, point_on_dst, scale, dst);
 }
 }
