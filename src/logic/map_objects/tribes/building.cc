@@ -184,8 +184,9 @@ Building& BuildingDescr::create(EditorGameBase& egbase,
 	return b;
 }
 
-int32_t BuildingDescr::suitability(const Map&, const FCoords& fc) const {
-	return size_ <= (fc.field->nodecaps() & Widelands::BUILDCAPS_SIZEMASK);
+bool BuildingDescr::suitability(const Map&, const FCoords& fc) const {
+	return mine_ ? fc.field->nodecaps() & Widelands::BUILDCAPS_MINE :
+	               size_ <= (fc.field->nodecaps() & Widelands::BUILDCAPS_SIZEMASK);
 }
 
 /**
@@ -234,7 +235,8 @@ Building::Building(const BuildingDescr& building_descr)
      animstart_(0),
      leave_time_(0),
      defeating_player_(0),
-     seeing_(false) {
+     seeing_(false),
+     attack_target_(nullptr) {
 }
 
 void Building::load_finish(EditorGameBase& egbase) {
@@ -689,6 +691,11 @@ void Building::remove_worker(Worker& worker) {
 	if (!get_workers().size())
 		set_seeing(false);
 	Notifications::publish(NoteBuilding(serial(), NoteBuilding::Action::kWorkersChanged));
+}
+
+void Building::set_attack_target(AttackTarget* new_attack_target) {
+	assert(attack_target_ == nullptr);
+	attack_target_ = new_attack_target;
 }
 
 /**

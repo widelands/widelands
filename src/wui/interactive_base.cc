@@ -45,7 +45,6 @@
 #include "logic/player.h"
 #include "profile/profile.h"
 #include "scripting/lua_interface.h"
-#include "wlapplication.h"
 #include "wui/edge_overlay_manager.h"
 #include "wui/field_overlay_manager.h"
 #include "wui/game_chat_menu.h"
@@ -358,8 +357,7 @@ void InteractiveBase::draw_overlay(RenderTarget& dst) {
 		if (is_game) {
 			const std::string gametime(gametimestring(egbase().get_gametime(), true));
 			const std::string gametime_text = as_condensed(gametime);
-			dst.blit(Vector2f(5, 5), UI::g_fh1->render(gametime_text), BlendMode::UseAlpha,
-			         UI::Align::kLeft);
+			dst.blit(Vector2i(5, 5), UI::g_fh1->render(gametime_text), BlendMode::UseAlpha);
 
 			static boost::format node_format("(%i, %i)");
 			node_text = as_condensed((node_format % sel_.pos.node.x % sel_.pos.node.y).str());
@@ -370,9 +368,9 @@ void InteractiveBase::draw_overlay(RenderTarget& dst) {
 		}
 
 		const Image* rendered_text = UI::g_fh1->render(node_text);
-
-		dst.blit(Vector2f(get_w() - 5, get_h() - rendered_text->height() - 5), rendered_text,
-		         BlendMode::UseAlpha, UI::Align::kRight);
+		Vector2i point(get_w() - 5, get_h() - rendered_text->height() - 5);
+		UI::correct_for_align(UI::Align::kRight, rendered_text->width(), &point);
+		dst.blit(point, rendered_text, BlendMode::UseAlpha);
 	}
 
 	// Blit FPS when playing a game in debug mode.
@@ -380,8 +378,8 @@ void InteractiveBase::draw_overlay(RenderTarget& dst) {
 		static boost::format fps_format("%5.1f fps (avg: %5.1f fps)");
 		const Image* rendered_text = UI::g_fh1->render(as_condensed(
 		   (fps_format % (1000.0 / frametime_) % (1000.0 / (avg_usframetime_ / 1000))).str()));
-		dst.blit(Vector2f((get_w() - rendered_text->width()) / 2, 5), rendered_text,
-		         BlendMode::UseAlpha, UI::Align::kLeft);
+		dst.blit(
+		   Vector2i((get_w() - rendered_text->width()) / 2, 5), rendered_text, BlendMode::UseAlpha);
 	}
 }
 

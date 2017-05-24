@@ -43,7 +43,7 @@ struct SyncCallback {
 };
 
 /**
- * This non-gamelogic command is used by \ref NetHost and \ref NetClient
+ * This non-gamelogic command is used by \ref GameHost and \ref GameClient
  * to schedule taking a synchronization hash.
  */
 struct CmdNetCheckSync : public Widelands::Command {
@@ -92,18 +92,22 @@ private:
 
 /**
  * Buffered StreamWrite object for assembling a packet that will be
- * sent via the \ref send() function.
+ * sent over the network.
  */
 struct SendPacket : public StreamWrite {
 	SendPacket();
 
-	void send(TCPsocket);
 	void reset();
 
 	void data(void const* data, size_t size) override;
 
+	size_t get_size() const;
+
+	uint8_t* get_data() const;
+
 private:
-	std::vector<uint8_t> buffer;
+	// First two bytes are overwritten on call to get_data()
+	mutable std::vector<uint8_t> buffer;
 };
 
 /**
@@ -111,12 +115,11 @@ private:
  */
 struct RecvPacket : public StreamRead {
 public:
-	RecvPacket(Deserializer&);
-
 	size_t data(void* data, size_t bufsize) override;
 	bool end_of_file() const override;
 
 private:
+	friend struct Deserializer;
 	std::vector<uint8_t> buffer;
 	size_t index_;
 };
@@ -135,21 +138,17 @@ struct NetTransferFile {
 class Deserializer {
 public:
 	/**
-	 * Read data from the given socket.
-	 * \return \c false if the socket was disconnected or another error
-	 * occurred.
-	 * \c true if some data could be read (this does not imply that \ref avail
-	 * will return \c true !)
+	 * Adds the given data to the internal buffer.
 	 */
-	bool read(TCPsocket sock);
+	void read_data(const uint8_t* data, int32_t len);
 
 	/**
-	 * \return \c true if an entire packet has been received.
+	 * \param packet The packet to fill with the received data.
+	 * \return \c true if an entire packet has been received and written to the given packet.
 	 */
-	bool avail() const;
+	bool write_packet(RecvPacket* packet);
 
 private:
-	friend struct RecvPacket;
 	std::vector<uint8_t> queue_;
 };
 
