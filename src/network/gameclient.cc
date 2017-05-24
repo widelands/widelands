@@ -175,11 +175,10 @@ void GameClient::run() {
 		   (boost::format("wl_autosave_netclient%u") % static_cast<unsigned int>(pn)).str());
 		InteractiveGameBase* igb;
 		if (pn > 0)
-			igb = new InteractivePlayer(game, g_options.pull_section("global"), pn, true);
+			igb = new InteractivePlayer(game, g_options.pull_section("global"), pn, true, this);
 		else
-			igb = new InteractiveSpectator(game, g_options.pull_section("global"), true);
+			igb = new InteractiveSpectator(game, g_options.pull_section("global"), true, this);
 		game.set_ibase(igb);
-		igb->set_chat_provider(*this);
 		if (!d->settings.savegame) {  //  new map
 			game.init_newgame(loader_ui, d->settings);
 		} else {  // savegame

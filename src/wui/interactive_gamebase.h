@@ -53,13 +53,10 @@ public:
 	InteractiveGameBase(Widelands::Game&,
 	                    Section& global_s,
 	                    PlayerType pt = NONE,
-	                    bool multiplayer = false);
+	                    bool multiplayer = false,
+	                    ChatProvider* chat_provider = nullptr);
 	Widelands::Game* get_game() const;
 	Widelands::Game& game() const;
-
-	// Chat messages
-	void set_chat_provider(ChatProvider&);
-	ChatProvider* get_chat_provider();
 
 	virtual bool can_see(Widelands::PlayerNumber) const = 0;
 	virtual bool can_act(Widelands::PlayerNumber) const = 0;
@@ -87,12 +84,15 @@ public:
 	void start() override {
 	}
 
+	bool handle_key(bool down, SDL_Keysym) override;
+
 protected:
 	void draw_overlay(RenderTarget&) override;
 	virtual int32_t calculate_buildcaps(const Widelands::TCoords<Widelands::FCoords>& c) = 0;
 
 	GameMainMenuWindows main_windows_;
 	ChatProvider* chat_provider_;
+	UI::UniqueWindow::Registry chat_;
 	bool multiplayer_;
 	PlayerType playertype_;
 	UI::UniqueWindow::Registry fieldaction_;

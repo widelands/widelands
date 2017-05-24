@@ -393,17 +393,6 @@ bool EditorInteractive::handle_key(bool const down, SDL_Keysym const code) {
 			handled = true;
 			break;
 
-		case SDLK_SPACE:
-			toggle_buildhelp();
-			handled = true;
-			break;
-
-		case SDLK_c:
-			set_display_flag(
-			   InteractiveBase::dfShowCensus, !get_display_flag(InteractiveBase::dfShowCensus));
-			handled = true;
-			break;
-
 		case SDLK_h:
 			mainmenu_.toggle();
 			handled = true;
@@ -411,11 +400,6 @@ bool EditorInteractive::handle_key(bool const down, SDL_Keysym const code) {
 
 		case SDLK_i:
 			select_tool(tools_->info, EditorTool::First);
-			handled = true;
-			break;
-
-		case SDLK_m:
-			minimap_registry().toggle();
 			handled = true;
 			break;
 

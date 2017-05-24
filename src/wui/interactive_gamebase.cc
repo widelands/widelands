@@ -35,6 +35,7 @@
 #include "profile/profile.h"
 #include "wui/constructionsitewindow.h"
 #include "wui/dismantlesitewindow.h"
+#include "wui/game_main_menu_save_game.h"
 #include "wui/game_summary.h"
 #include "wui/militarysitewindow.h"
 #include "wui/productionsitewindow.h"
@@ -57,7 +58,8 @@ std::string speed_string(int const speed) {
 InteractiveGameBase::InteractiveGameBase(Widelands::Game& g,
                                          Section& global_s,
                                          PlayerType pt,
-                                         bool const multiplayer)
+                                         bool const multiplayer,
+                                         ChatProvider* chat_provider)
    : InteractiveBase(g, global_s),
      chat_provider_(nullptr),
      multiplayer_(multiplayer),
@@ -84,6 +86,9 @@ InteractiveGameBase::InteractiveGameBase(Widelands::Game& g,
 			   break;
 		   }
 		});
+
+	chat_provider_ = chat_provider;
+	chat_overlay_->set_chat_provider(*chat_provider);
 }
 
 /// \return a pointer to the running \ref Game instance.
@@ -93,15 +98,6 @@ Widelands::Game* InteractiveGameBase::get_game() const {
 
 Widelands::Game& InteractiveGameBase::game() const {
 	return dynamic_cast<Widelands::Game&>(egbase());
-}
-
-void InteractiveGameBase::set_chat_provider(ChatProvider& chat) {
-	chat_provider_ = &chat;
-	chat_overlay_->set_chat_provider(chat);
-}
-
-ChatProvider* InteractiveGameBase::get_chat_provider() {
-	return chat_provider_;
 }
 
 void InteractiveGameBase::draw_overlay(RenderTarget& dst) {
@@ -153,6 +149,28 @@ void InteractiveGameBase::postload() {
 	// Close game-relevant UI windows (but keep main menu open)
 	fieldaction_.destroy();
 	hide_minimap();
+}
+
+bool InteractiveGameBase::handle_key(bool down, SDL_Keysym code) {
+	if (down)
+		switch (code.sym) {
+
+		case SDLK_c:
+			set_display_flag(dfShowCensus, !get_display_flag(dfShowCensus));
+			return true;
+
+		case SDLK_s:
+			if (code.mod & (KMOD_LCTRL | KMOD_RCTRL)) {
+				new GameMainMenuSaveGame(*this, main_windows_.savegame);
+			} else
+				set_display_flag(dfShowStatistics, !get_display_flag(dfShowStatistics));
+			return true;
+
+		default:
+			break;
+		}
+
+	return InteractiveBase::handle_key(down, code);
 }
 
 void InteractiveGameBase::on_buildhelp_changed(const bool value) {

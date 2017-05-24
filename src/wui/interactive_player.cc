@@ -45,7 +45,6 @@
 #include "wui/debugconsole.h"
 #include "wui/fieldaction.h"
 #include "wui/game_chat_menu.h"
-#include "wui/game_main_menu_save_game.h"
 #include "wui/game_message_menu.h"
 #include "wui/game_objectives_menu.h"
 #include "wui/game_options_menu.h"
@@ -61,8 +60,9 @@ using Widelands::Map;
 InteractivePlayer::InteractivePlayer(Widelands::Game& g,
                                      Section& global_s,
                                      Widelands::PlayerNumber const plyn,
-                                     bool const multiplayer)
-   : InteractiveGameBase(g, global_s, NONE, multiplayer),
+                                     bool const multiplayer,
+                                     ChatProvider* chat_provider)
+   : InteractiveGameBase(g, global_s, NONE, multiplayer, chat_provider),
      auto_roadbuild_mode_(global_s.get_bool("auto_roadbuild_mode", true)),
      flag_to_connect_(Widelands::Coords::null()) {
 	add_toolbar_button(
@@ -90,7 +90,7 @@ InteractivePlayer::InteractivePlayer(Widelands::Game& g,
 	});
 	toolbar_.add_space(15);
 	if (multiplayer) {
-		toggle_chat_ = add_toolbar_button("wui/menus/menu_chat", "chat", _("Chat"), &chat_, true);
+		add_toolbar_button("wui/menus/menu_chat", "chat", _("Chat"), &chat_, true);
 		chat_.open_window = [this] {
 			if (chat_provider_) {
 				GameChatMenu::create_chat_console(this, chat_, *chat_provider_);
@@ -147,10 +147,6 @@ void InteractivePlayer::think() {
 				}
 			flag_to_connect_ = Widelands::Coords::null();
 		}
-	}
-	if (is_multiplayer()) {
-		toggle_chat_->set_visible(chat_provider_);
-		toggle_chat_->set_enabled(chat_provider_);
 	}
 	{
 		char const* msg_icon = "images/wui/menus/menu_toggle_oldmessage_menu.png";
@@ -226,16 +222,9 @@ void InteractivePlayer::node_action() {
 bool InteractivePlayer::handle_key(bool const down, SDL_Keysym const code) {
 	if (down) {
 		switch (code.sym) {
-		case SDLK_SPACE:
-			toggle_buildhelp();
-			return true;
 
 		case SDLK_i:
 			main_windows_.stock.toggle();
-			return true;
-
-		case SDLK_m:
-			minimap_registry().toggle();
 			return true;
 
 		case SDLK_n:
@@ -250,23 +239,12 @@ bool InteractivePlayer::handle_key(bool const down, SDL_Keysym const code) {
 			encyclopedia_.toggle();
 			return true;
 
-		case SDLK_c:
-			set_display_flag(dfShowCensus, !get_display_flag(dfShowCensus));
-			return true;
-
 		case SDLK_b:
 			if (main_windows_.building_stats.window == nullptr) {
 				new BuildingStatisticsMenu(*this, main_windows_.building_stats);
 			} else {
 				main_windows_.building_stats.toggle();
 			}
-			return true;
-
-		case SDLK_s:
-			if (code.mod & (KMOD_LCTRL | KMOD_RCTRL))
-				new GameMainMenuSaveGame(*this, main_windows_.savegame);
-			else
-				set_display_flag(dfShowStatistics, !get_display_flag(dfShowStatistics));
 			return true;
 
 		case SDLK_KP_7:

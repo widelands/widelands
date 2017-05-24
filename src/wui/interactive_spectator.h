@@ -38,7 +38,10 @@ class Game;
  * This class provides the UI, runs the game logic, etc.
  */
 struct InteractiveSpectator : public InteractiveGameBase {
-	InteractiveSpectator(Widelands::Game&, Section& global_s, bool multiplayer = false);
+	InteractiveSpectator(Widelands::Game&,
+	                     Section& global_s,
+	                     bool multiplayer = false,
+	                     ChatProvider* chat_provider = nullptr);
 
 	Widelands::Player* get_player() const override;
 
@@ -53,7 +56,6 @@ private:
 	void node_action() override;
 
 private:
-	UI::UniqueWindow::Registry chat_;
 	UI::UniqueWindow::Registry options_;
 };
 

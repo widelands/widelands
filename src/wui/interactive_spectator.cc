@@ -41,8 +41,9 @@
  */
 InteractiveSpectator::InteractiveSpectator(Widelands::Game& g,
                                            Section& global_s,
-                                           bool const multiplayer)
-   : InteractiveGameBase(g, global_s, OBSERVER, multiplayer) {
+                                           bool const multiplayer,
+                                           ChatProvider* chat_provider)
+   : InteractiveGameBase(g, global_s, OBSERVER, multiplayer, chat_provider) {
 	if (is_multiplayer()) {
 		add_toolbar_button(
 		   "wui/menus/menu_options_menu", "options_menu", _("Main Menu"), &options_, true);
@@ -53,8 +54,11 @@ InteractiveSpectator::InteractiveSpectator(Widelands::Game& g,
 		   add_toolbar_button("wui/menus/menu_exit_game", "exit_replay", _("Exit Replay"));
 		button->sigclicked.connect(boost::bind(&InteractiveSpectator::exit_btn, this));
 
-		add_toolbar_button(
-		   "wui/menus/menu_save_game", "save_game", _("Save Game"), &main_windows_.savegame, true);
+		add_toolbar_button("wui/menus/menu_save_game", "save_game",
+		                   /** TRANSLATORS: When watching a replay, one can save it as a playable
+		                      game. This is the button tooltip. */
+		                   _("Save as Game"),
+		                   &main_windows_.savegame, true);
 		main_windows_.savegame.open_window = [this] {
 			new GameMainMenuSaveGame(*this, main_windows_.savegame);
 		};
@@ -160,26 +164,8 @@ void InteractiveSpectator::node_action() {
  * Global in-game keypresses:
  */
 bool InteractiveSpectator::handle_key(bool const down, SDL_Keysym const code) {
-	if (down)
+	if (down) {
 		switch (code.sym) {
-		case SDLK_SPACE:
-			toggle_buildhelp();
-			return true;
-
-		case SDLK_m:
-			minimap_registry().toggle();
-			return true;
-
-		case SDLK_c:
-			set_display_flag(dfShowCensus, !get_display_flag(dfShowCensus));
-			return true;
-
-		case SDLK_s:
-			if (code.mod & (KMOD_LCTRL | KMOD_RCTRL)) {
-				new GameMainMenuSaveGame(*this, main_windows_.savegame);
-			} else
-				set_display_flag(dfShowStatistics, !get_display_flag(dfShowStatistics));
-			return true;
 
 		case SDLK_RETURN:
 		case SDLK_KP_ENTER:
@@ -193,6 +179,7 @@ bool InteractiveSpectator::handle_key(bool const down, SDL_Keysym const code) {
 		default:
 			break;
 		}
+	}
 
 	return InteractiveGameBase::handle_key(down, code);
 }

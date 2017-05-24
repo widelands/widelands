@@ -793,6 +793,15 @@ bool InteractiveBase::handle_key(bool const down, SDL_Keysym const code) {
 			   this, debugconsole_, *DebugConsole::get_chat_provider());
 			return true;
 #endif
+		// Common shortcuts for InteractivePlayer and InteractiveSpectator
+		case SDLK_SPACE:
+			toggle_buildhelp();
+			return true;
+
+		case SDLK_m:
+			minimap_registry().toggle();
+			return true;
+
 		default:
 			break;
 		}
