@@ -458,6 +458,9 @@ void Soldier::draw(const EditorGameBase& game,
 
 /**
  * Draw the info icon (level indicators + health bar) for this soldier.
+ * 'draw_mode' determines whether the soldier info is displayed in a building window
+ * or on top of a soldier walking around. 'info_to_draw' checks which info the user wants to see
+ * for soldiers walking around.
  */
 void Soldier::draw_info_icon(Vector2i draw_position,
                              float scale,
@@ -475,28 +478,31 @@ void Soldier::draw_info_icon(Vector2i draw_position,
 		return;
 	}
 
-	const Image* healthpic = get_health_level_pic();
-	const Image* attackpic = get_attack_level_pic();
-	const Image* defensepic = get_defense_level_pic();
-	const Image* evadepic = get_evade_level_pic();
-
 #ifndef NDEBUG
-	// This function assumes stuff about our data files: level icons are all the
-	// same size and this is smaller than the width of the healthbar. This
-	// simplifies the drawing code below a lot. Before it had a lot of if () that
-	// were never tested - since our data files never changed.
-	const int dimension = attackpic->width();
-	assert(attackpic->height() == dimension);
-	assert(healthpic->width() == dimension);
-	assert(healthpic->height() == dimension);
-	assert(defensepic->width() == dimension);
-	assert(defensepic->height() == dimension);
-	assert(evadepic->width() == dimension);
-	assert(evadepic->height() == dimension);
-	assert(kSoldierHealthBarWidth > dimension);
+	{
+		// This function assumes stuff about our data files: level icons are all the
+		// same size and this is smaller than the width of the healthbar. This
+		// simplifies the drawing code below a lot. Before it had a lot of if () that
+		// were never tested - since our data files never changed.
+		const Image* healthpic = get_health_level_pic();
+
+		const Image* attackpic = get_attack_level_pic();
+		const Image* defensepic = get_defense_level_pic();
+		const Image* evadepic = get_evade_level_pic();
+
+		const int dimension = attackpic->width();
+		assert(attackpic->height() == dimension);
+		assert(healthpic->width() == dimension);
+		assert(healthpic->height() == dimension);
+		assert(defensepic->width() == dimension);
+		assert(defensepic->height() == dimension);
+		assert(evadepic->width() == dimension);
+		assert(evadepic->height() == dimension);
+		assert(kSoldierHealthBarWidth > dimension);
+	}
 #endif
 
-	const int icon_size = healthpic->width();
+	const int icon_size = get_health_level_pic()->height();
 
 	switch (draw_mode) {
 	case InfoMode::kInBuilding:
@@ -516,7 +522,8 @@ void Soldier::draw_info_icon(Vector2i draw_position,
 		                         kSoldierHealthBarWidth * 2 * scale, 5 * scale);
 		dst->fill_rect(energy_outer, RGBColor(255, 255, 255));
 
-		int health_width = 2 * (kSoldierHealthBarWidth - 1) * current_health_ / get_max_health();
+		const int health_width =
+		   2 * (kSoldierHealthBarWidth - 1) * current_health_ / get_max_health();
 		Recti energy_inner(draw_position + Vector2i(-kSoldierHealthBarWidth + 1, 1) * scale,
 		                   health_width * scale, 3 * scale);
 		Recti energy_complement(energy_inner.origin() + Vector2i(health_width, 0) * scale,
@@ -535,16 +542,22 @@ void Soldier::draw_info_icon(Vector2i draw_position,
 	}
 
 	if (info_to_draw & InfoToDraw::kSoldierLevels) {
-		const auto draw_level_image = [icon_size, scale, &draw_position, dst](
-		   const Vector2i& offset, const Image* image) {
-			dst->blitrect_scale(
-			   Rectf(draw_position + offset * icon_size * scale, icon_size * scale, icon_size * scale),
-			   image, Recti(0, 0, icon_size, icon_size), 1.f, BlendMode::UseAlpha);
-		};
-		draw_level_image(Vector2i(-1, -2), attackpic);
-		draw_level_image(Vector2i(0, -2), defensepic);
-		draw_level_image(Vector2i(-1, -1), healthpic);
-		draw_level_image(Vector2i(0, -1), evadepic);
+		// Draw level info in building windows, or if the soldier has at least 1 promotion.
+		if (draw_mode == InfoMode::kInBuilding || health_level_ > 0 || attack_level_ > 0 ||
+		    defense_level_ > 0 || evade_level_ > 0) {
+
+			const auto draw_level_image = [icon_size, scale, &draw_position, dst](
+			   const Vector2i& offset, const Image* image) {
+				dst->blitrect_scale(Rectf(draw_position + offset * icon_size * scale, icon_size * scale,
+				                          icon_size * scale),
+				                    image, Recti(0, 0, icon_size, icon_size), 1.f, BlendMode::UseAlpha);
+			};
+
+			draw_level_image(Vector2i(-1, -2), get_attack_level_pic());
+			draw_level_image(Vector2i(0, -2), get_defense_level_pic());
+			draw_level_image(Vector2i(-1, -1), get_health_level_pic());
+			draw_level_image(Vector2i(0, -1), get_evade_level_pic());
+		}
 	}
 }
 
@@ -552,27 +565,14 @@ void Soldier::draw_info_icon(Vector2i draw_position,
  * Compute the size of the info icon (level indicators + health bar) for soldiers of
  * the given tribe.
  */
-void Soldier::calc_info_icon_size(const TribeDescr& tribe, uint32_t& w, uint32_t& h) {
+void Soldier::calc_info_icon_size(const TribeDescr& tribe, int& w, int& h) {
 	const SoldierDescr* soldierdesc =
 	   static_cast<const SoldierDescr*>(tribe.get_worker_descr(tribe.soldier()));
-	const Image* healthpic = soldierdesc->get_health_level_pic(0);
-	const Image* attackpic = soldierdesc->get_attack_level_pic(0);
-	const Image* defensepic = soldierdesc->get_defense_level_pic(0);
-	const Image* evadepic = soldierdesc->get_evade_level_pic(0);
-	uint16_t hpw = healthpic->width();
-	uint16_t hph = healthpic->height();
-	uint16_t atw = attackpic->width();
-	uint16_t ath = attackpic->height();
-	uint16_t dew = defensepic->width();
-	uint16_t deh = defensepic->height();
-	uint16_t evw = evadepic->width();
-	uint16_t evh = evadepic->height();
-
-	uint16_t animw;
-	animw = kSoldierHealthBarWidth;
-
-	w = std::max(std::max(atw + dew, hpw + evw), 2 * animw);
-	h = 5 + std::max(hph + ath, evh + deh);
+	// The function draw_info_icon() already assumes that all icons have the same dimensions,
+	// so we can make the same assumption here too.
+	const int dimension = soldierdesc->get_health_level_pic(0)->height();
+	w = 2 * std::max(dimension, kSoldierHealthBarWidth);
+	h = 5 + 2 * dimension;
 }
 
 void Soldier::pop_task_or_fight(Game& game) {

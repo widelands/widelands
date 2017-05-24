@@ -216,7 +216,7 @@ public:
 	          float scale,
 	          RenderTarget* dst) const override;
 
-	static void calc_info_icon_size(const TribeDescr&, uint32_t& w, uint32_t& h);
+	static void calc_info_icon_size(const TribeDescr&, int& w, int& h);
 
 	// Draw the info icon containing health bar and levels. If 'anchor_below' is
 	// true, the icon is drawn horizontally centered above Otherwise, the icon
@@ -328,7 +328,7 @@ private:
 	 */
 	Battle* battle_;
 
-	static constexpr uint8_t kSoldierHealthBarWidth = 13;
+	static constexpr int kSoldierHealthBarWidth = 13;
 
 	/// Number of consecutive blocked signals until the soldiers are considered permanently stuck
 	static constexpr uint8_t kBockCountIsStuck = 10;

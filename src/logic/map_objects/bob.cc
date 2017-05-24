@@ -756,7 +756,7 @@ Vector2f Bob::calc_drawpos(const EditorGameBase& game,
 /// Note that the current node is actually the node that we are walking to, not
 /// the the one that we start from.
 void Bob::draw(const EditorGameBase& egbase,
-               const InfoToDraw&info_to_draw,
+               const InfoToDraw&,
                const Vector2f& field_on_dst,
                const float scale,
                RenderTarget* dst) const {

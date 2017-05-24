@@ -43,7 +43,7 @@ namespace {
 
 constexpr uint32_t kMaxColumns = 6;
 constexpr uint32_t kAnimateSpeed = 300;  ///< in pixels per second
-constexpr uint32_t kIconBorder = 2;
+constexpr int kIconBorder = 2;
 
 }  // namespace
 
@@ -104,8 +104,8 @@ private:
 	uint32_t rows_;
 	uint32_t cols_;
 
-	uint32_t icon_width_;
-	uint32_t icon_height_;
+	int icon_width_;
+	int icon_height_;
 
 	int32_t last_animate_time_;
 };
