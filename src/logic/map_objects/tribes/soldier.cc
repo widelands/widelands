@@ -504,7 +504,9 @@ void Soldier::draw_info_icon(Vector2i draw_position,
 		draw_position.y += 2 * icon_size * scale;
 		break;
 	case InfoMode::kWalkingAround:
-		draw_position.y -= 5 * scale;
+		if (info_to_draw & InfoToDraw::kSoldierHealthBars) {
+			draw_position.y -= 5 * scale;
+		}
 	}
 
 	if (info_to_draw & InfoToDraw::kSoldierHealthBars) {
