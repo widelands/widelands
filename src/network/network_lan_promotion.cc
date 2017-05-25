@@ -87,7 +87,7 @@ LanBase::LanBase(uint16_t port)
 			continue;
 		switch (ifa->ifa_addr->sa_family) {
 			case AF_INET:
-				s = getnameinfo(ifa->ifa_ifu.ifu_broadaddr, sizeof(struct sockaddr_in),
+				s = getnameinfo(ifa->ifa_broadaddr, sizeof(struct sockaddr_in),
 							host, NI_MAXHOST, nullptr, 0, NI_NUMERICHOST);
 				if (s == 0) {
 					start_socket(&socket_v4, boost::asio::ip::udp::v4(), port);

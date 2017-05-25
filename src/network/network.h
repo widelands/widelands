@@ -154,7 +154,7 @@ public:
 	bool end_of_file() const override;
 
 private:
-	friend struct Deserializer;
+	friend class Deserializer;
 	std::vector<uint8_t> buffer;
 	size_t index_;
 };
