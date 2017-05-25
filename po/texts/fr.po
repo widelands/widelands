@@ -4,6 +4,7 @@
 # Translators:
 # adrien vigneron <adrienvigneron@ml1.net>, 2015
 # GunChleoc, 2016
+# Gwendal D <samuel.weber@normalesup.org>, 2017
 # Jaypad <ju-ju@nataju.fr>, 2016
 # Peter Schwanemann <nasenbaer_peter@sourceforge.net.TLD>, 2008
 # Renaud Bouchard, 2015-2017
@@ -14,9 +15,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-03-05 10:46+0000\n"
-"PO-Revision-Date: 2017-03-09 15:43+0000\n"
-"Last-Translator: Renaud Bouchard\n"
+"POT-Creation-Date: 2017-04-28 06:01+0000\n"
+"PO-Revision-Date: 2017-04-29 11:33+0000\n"
+"Last-Translator: Gwendal D <samuel.weber@normalesup.org>\n"
 "Language-Team: French (http://www.transifex.com/widelands/widelands/language/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -94,7 +95,7 @@ msgstr "Ce jeu est livré tel-quel et sans aucune garantie. Pour plus d'informat
 
 #: ../../data/txts/README.lua:7
 msgid "Readme"
-msgstr "Lisezmoi"
+msgstr "Lisez-moi"
 
 #: ../../data/txts/README.lua:12
 msgid "an open source strategy game"
@@ -121,7 +122,7 @@ msgid ""
 " in all areas. If you are interested in contributing – be it by making "
 "graphics, fixing bugs or adding new features, translating the game into your"
 " language or creating new maps – get in touch on our homepage."
-msgstr "Widelands est presque complètement fonctionnel et est très amusant à jouer seul ou en multijoueur avec les autres. Mais, il y a toujours du travail à faire dans touts les domaines. Si vous êtes intéressés en contribuant - que ce soit en créant des graphismes, réparer des bugs ou ajouter de nouvelles possibilités, traduire le jeu dans votre langue ou créer des cartes - contactez nous par notre page d'accueil."
+msgstr "Widelands est presque complètement fonctionnel et est très amusant à jouer seul ou à plusieurs en multijoueur. Mais, il y a toujours du travail à faire dans tous les domaines. Si vous êtes intéressés pour contribuer - que ce soit en créant des graphismes, corriger des bugs ou ajouter de nouvelles possibilités, traduire le jeu dans votre langue ou créer des cartes - contactez nous par notre page d'accueil."
 
 #: ../../data/txts/README.lua:21
 msgid "Widelands Help"
@@ -166,7 +167,7 @@ msgid ""
 "Which version of Widelands you are running (i.e. either the build number or "
 "the revision number if you are running a development version or a daily "
 "build.)"
-msgstr "Quelle version de Widelands vous exécutez (c.à.d soit le numéro de compilation ou\nle numéro de révision si vous exécutez une version de développement ou une compilation quotidienne.)"
+msgstr "Quelle version de Widelands vous exécutez (c-à-d soit le numéro de compilation ou le numéro de révision si vous exécutez une version de développement ou une compilation quotidienne)."
 
 #: ../../data/txts/README.lua:36
 msgid ""
@@ -182,7 +183,7 @@ msgstr "Quelle carte vous jouiez lorsque le bogue est survenu."
 msgid ""
 "If the bug concerns something not being displayed correctly or if it helps "
 "demonstrate the issue, please include one or more screenshots."
-msgstr "Si le bogue concerne quelque chose qui ne s'affiche pas correctement ou \nsi cela aide à démontrer le problème, veuillez inclure une ou plusieurs captures d'écran."
+msgstr "Si le bogue concerne quelque chose qui ne s'affiche pas correctement ou si cela aide à démontrer le problème, veuillez inclure une ou plusieurs captures d'écran."
 
 #: ../../data/txts/README.lua:39
 msgid ""
@@ -333,7 +334,7 @@ msgid ""
 "campaigns and a multiplayer mode. The game was inspired by Settlers II but "
 "has significantly more variety and depth to it. Still, it is easy to get "
 "started through playable tutorials."
-msgstr "Widelands est un jeu de stratégie en temps réel gratuit et open source avec des \ncampagnes solo et un mode multijoueur. Le jeu a été inspiré par Settlers II mais a significativement plus de variété et de profondeur. Pourtant, il est facile de se lancer à travers des tutoriels jouables."
+msgstr "Widelands est un jeu de stratégie en temps réel gratuit et open source avec des campagnes solo et un mode multijoueur. Le jeu a été inspiré par Settlers II mais a significativement plus de variété et de profondeur. Pourtant, il est facile de se lancer à travers des tutoriels jouables."
 
 #: ../../data/txts/help/common_helptexts.lua:19
 msgid ""
@@ -342,7 +343,7 @@ msgid ""
 "inhabitants. On your way towards this goal, you will have to establish an "
 "economic infrastructure, explore the land around you and face rivaling "
 "tribes."
-msgstr "Dans ce jeu, vous commencez sur un petit morceau de terre avec juste quelques ressources. En les utilisant, vous créerez un empire avec plusieurs milliers d'habitants. Dans ce but, vous devrez établir une infrastructure économique, explorer les terres qui vous entourent et affronter des tribus rivales."
+msgstr "Dans ce jeu, vous commencez sur un petit morceau de terre avec juste quelques ressources. En les utilisant, vous créerez un empire de plusieurs milliers d'habitants. Dans ce but, vous devrez établir une infrastructure économique, explorer les terres qui vous entourent et affronter des tribus rivales."
 
 #: ../../data/txts/help/common_helptexts.lua:25
 msgid "Replays"
@@ -355,7 +356,7 @@ msgid ""
 ".wrpl extension and contains all commands that were issued by all players, "
 "such as building a road or attacking an enemy. The rest of the filenames "
 "will tell you the time you started the game."
-msgstr "Widelands enregistre chaque partie que vous jouez dans deux fichiers.  Un de ces fichiers a une extension .wrpl.wgf et contient la sauvegarde du jeu initial. L'autre fichier possède une extension. wrpl et contient toutes les commandes qui ont été émises par l'ensemble des acteurs, tels que la construction d'une route \nou l'attaque d'un ennemi. Le reste des noms des fichiers vous donnera l'heure à laquelle vous avez commencé la partie."
+msgstr "Widelands enregistre chaque partie que vous jouez dans deux fichiers. Un de ces fichiers a une extension .wrpl.wgf et contient la sauvegarde du jeu initial. L'autre fichier possède une extension .wrpl et contient toutes les commandes qui ont été émises par l'ensemble des acteurs, tels que la construction d'une route ou l'attaque d'un ennemi. Le reste des noms des fichiers vous donnera l'heure à laquelle vous avez commencé la partie."
 
 #: ../../data/txts/help/common_helptexts.lua:27
 msgid ""
@@ -365,7 +366,7 @@ msgid ""
 " replay to become incompatible and to ‘go out of sync’. This is similar to "
 "how network games will suffer from desynchronization problems if one of the "
 "players has a different version of the game."
-msgstr "Utilisez le bouton Voir Replay du menu principal, un jeu précédent sera précisément reconstruit pour que vous puissiez le visionner. Notez, cependant, que même de petits changements dans les fichiers de données ou sur l'exécutable de Widelands peuvent rendre les replays incompatibles et 'perdre leur synchronisation'. Cela est similaire au réseaux qui souffrent de problèmes de désynchronisation si un des joueurs à une différente version du jeu."
+msgstr "Utilisez le bouton Voir Replay du menu principal, un jeu précédent sera précisément reconstruit pour que vous puissiez le visionner. Notez, cependant, que même de petits changements dans les fichiers de données ou sur l'exécutable de Widelands peuvent rendre les replays incompatibles et 'perdre leur synchronisation'. Cela est similaire aux réseaux qui souffrent de problèmes de désynchronisation si un des joueurs à une version différente du jeu."
 
 #: ../../data/txts/help/common_helptexts.lua:28
 #, lua-format
@@ -494,7 +495,7 @@ msgid ""
 "Keep an eye on your fishers and build a fish breeder’s house. After fish "
 "resources are exhausted in their work area, the fish supply cannot be "
 "regenerated."
-msgstr "Gardez un oeil sur vos pêcheurs and construisez une maison de pisciculteur. Une fois les ressources épuisées dans la zone de travail, les poissons ne pourront plus se régénérer."
+msgstr "Gardez un œil sur vos pêcheurs et construisez une maison de pisciculteur. Une fois les ressources épuisées dans la zone de travail, les poissons ne pourront plus se régénérer."
 
 #: ../../data/txts/tips/atlanteans.lua:8
 msgid ""
@@ -524,7 +525,7 @@ msgstr "Construisez toujours une cabane de sylviculteur et de garde-chasse, ains
 msgid ""
 "Most enhanced buildings need experienced workers. Do not enhance a building "
 "unless you have the necessary workers available."
-msgstr "La plupart des bâtiments améliorés nécessitent des travailleurs expérimentés. N' améliorez pas un bâtiments sans avoir le travailleur nécessaire disponible."
+msgstr "La plupart des bâtiments améliorés nécessitent des travailleurs expérimentés. N'améliorez pas un bâtiments sans avoir le travailleur nécessaire disponible."
 
 #: ../../data/txts/tips/editor.lua:4
 msgid ""
@@ -585,14 +586,14 @@ msgid ""
 "You can place a medium building on any node where there is a slope no "
 "greater than 1 in the south-east direction and its height difference to all "
 "nodes in a radius of 2 is no greater than 2."
-msgstr ""
+msgstr "Vous pouvez placer un bâtiment moyen sur n'importe quel point où il n'y a pas de pente plus grande que 1 dans la direction du sud-est et dont la différence d' altitude par rapport à tous les points dans un rayon de 2  n'est pas supérieure à 2. "
 
 #: ../../data/txts/tips/editor.lua:44
 msgid ""
 "You can place a large building on any node where you could place a medium "
 "building if there is no obstacle or non-arable terrain towards the west, "
 "northwest and northeast."
-msgstr ""
+msgstr "Vous pouvez placer un grand bâtiment sur n'importe quel point où vous pourriez construire un bâtiment moyen si il n'y a pas d' obstacle ou de terrain non-arable vers l'est, le nord-ouest et le nord-est."
 
 #: ../../data/txts/tips/empire.lua:8
 msgid "Always build a forester’s house so you will not run out of logs."
@@ -600,7 +601,7 @@ msgstr "Toujours construire une maison de garde forestier, pour ne pas avoir de 
 
 #: ../../data/txts/tips/empire.lua:16
 msgid "Empire needs a lot of marble. Keep looking for marble resources."
-msgstr ""
+msgstr "L'Empire a besoin de beaucoup de marbre. Continuez de chercher des ressources de marbre."
 
 #: ../../data/txts/tips/general_game.lua:4
 msgid ""
@@ -653,7 +654,7 @@ msgid ""
 "Manage your messages more efficiently: press ‘N’ for News to access the "
 "messages window, then use ‘G’ for Go To, and the Delete key to archive "
 "messages."
-msgstr "Gérez vos messages plus efficacement: pressez 'N' pour Nouvelles pour accéder à la fenêtre des messages, utilisez alors 'G' pour aller à, et la touche supprimer pour archiver les messages."
+msgstr "Gérez vos messages plus efficacement : pressez 'N' comme News pour accéder à la fenêtre des messages, utilisez alors 'G' comme Go To, et la touche supprimer pour archiver les messages."
 
 #: ../../data/txts/tips/general_game.lua:40
 msgctxt "hotkey"
@@ -685,11 +686,11 @@ msgstr "Les nouveaux soldats sont recrutés dans les casernes. Leurs capacités 
 msgid ""
 "If you like to live dangerously, pressing Ctrl while clicking the enhance, "
 "dismantle or destroy building buttons will skip the confirmation."
-msgstr "Si vous aimez vivre dangereusement, appuyez sur \"Ctrl\" pendant que vous cliquez sur les boutons \"Améliorer\", \"démanteler\" ou \"détruire\" les constructions, ceci passera la confirmation."
+msgstr "Si vous aimez vivre dangereusement, appuyez sur « Ctrl » pendant que vous cliquez sur les boutons « Améliorer », « démanteler » ou « détruire » les constructions, ceci passera la confirmation."
 
 #: ../../data/txts/tips/general_game.lua:56
 msgid "Press I to quickly toggle the display of your stock inventory."
-msgstr "Appuyer sur I pour basculer rapidement vers la fenêtre de l'inventaire."
+msgstr "Appuyer sur « i » pour basculer rapidement vers la fenêtre de l'inventaire."
 
 #: ../../data/txts/tips/general_game.lua:60
 msgid ""
@@ -715,7 +716,7 @@ msgstr "Ctrl+0"
 
 #: ../../data/txts/tips/general_game.lua:68
 msgid "Zoom in/out with the mouse wheel or %1%. Press %2% to reset the zoom."
-msgstr ""
+msgstr "Zoomez/Dézoomez avez la roulette de la souris ou %1%. Appuyez sur %2% pour revenir à la position de départ."
 
 #: ../../data/txts/tips/general_game.lua:72
 msgid ""
@@ -723,7 +724,7 @@ msgid ""
 "flag from which they can move by road to a connected warehouse. If there are"
 " no such flags in the vicinity, they will keep wandering around and "
 "eventually die."
-msgstr ""
+msgstr "Quand un bâtiment est détruit, ses travailleurs commenceront part chercher un drapeau proche depuis lequel ils rejoindront un dépôt par la route. S'il n'y a pas de drapeau dans le voisinage, ils continuerons de déambuler et éventuellement mourront."
 
 #: ../../data/txts/tips/multiplayer.lua:4
 msgid ""
@@ -735,19 +736,19 @@ msgstr "Vous pouvez utiliser les touches 'PageHaut' et 'PageBas' pour ajuster la
 msgid ""
 "You can use ‘/me’ at the beginning of a chatmessage: ‘/me is tired’ will be "
 "printed as ‘-> Nickname is tired’."
-msgstr "Vous pouvez utiliser '/me\" au début d'un message tchat: '/me est fatigué' sera marqué '->Nomdujoueur est fatigué'."
+msgstr "Vous pouvez utiliser « /me » au début d'un message de tchat:  « /me est fatigué » sera affiché « ->Nomdujoueur est fatigué »."
 
 #: ../../data/txts/tips/multiplayer.lua:12
 msgid ""
 "Use ‘@name’ at the beginning of a chat message to send it to only one "
 "player."
-msgstr "Utilisez '@name' au début d'un message tchat pour l'envoyer seulement au joueur."
+msgstr "Utilisez « name » au début d'un message de tchat pour l'envoyer seulement au joueur."
 
 #: ../../data/txts/tips/multiplayer.lua:16
 msgid ""
 "If the game should crash, don't worry! The game will be saved automatically "
 "so that you can reload it afterwards."
-msgstr ""
+msgstr "Si le jeux venait à planter, ne vous inquiétez pas ! Le jeux est automatiquement sauvegardé et vous pourrez le recharger après."
 
 #: ../../data/txts/tips/singleplayer.lua:4
 msgid ""

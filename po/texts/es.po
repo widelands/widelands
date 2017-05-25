@@ -9,13 +9,14 @@
 # Lucía Pradillos <dreamers_88@hotmail.com>, 2015
 # Madkat Here, 2015-2016
 # Raul Ferriz <raul.ferriz@gmail.com>, 2009
+# Thadah D. Denyse <juchuf@gmail.com>, 2017
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-03-05 10:46+0000\n"
-"PO-Revision-Date: 2017-03-05 10:48+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2017-03-24 18:58+0000\n"
+"PO-Revision-Date: 2017-03-28 11:24+0000\n"
+"Last-Translator: Thadah D. Denyse <juchuf@gmail.com>\n"
 "Language-Team: Spanish (http://www.transifex.com/widelands/widelands/language/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -54,7 +55,7 @@ msgstr "Este juego es Gratuito y de Código Abierto (FOSS), Licenciado bajo la L
 msgid ""
 "You can find more information on FOSS and the GPL by visiting the following "
 "webpage: %s"
-msgstr ""
+msgstr "Puedes encontrar mas información acerca de FOSS y GPL visitando el siguiente sitio web: %s"
 
 #: ../../data/txts/LICENSE.lua:27
 msgid ""
@@ -212,7 +213,7 @@ msgstr "Historia de la Campaña"
 
 #: ../../data/txts/developers.lua:3
 msgid "Chieftains"
-msgstr ""
+msgstr "Jefes"
 
 #: ../../data/txts/developers.lua:3
 msgid "Coders"
@@ -431,7 +432,7 @@ msgstr "El jugador con el color de la bandera. Si mas de un cliente selecciona e
 msgid ""
 "Spectator mode, meaning you can see everything, but cannot control any "
 "player."
-msgstr ""
+msgstr "Modo espectador, podrás verlo todo, pero no controlarás a ningún jugador"
 
 #: ../../data/txts/help/multiplayer_help.lua:18
 msgid "Player settings"
@@ -468,13 +469,13 @@ msgid ""
 "‘type’ button of a player. Hosting players can also set the initialization "
 "of each player (the set of buildings, wares and workers the player starts "
 "with) and the tribe and team for computer players."
-msgstr ""
+msgstr "Las tres últimas solo las puede ajustar el anfitrión haciendo clic izquierdo en el botón 'tipo' de un jugador. Los anfitriones también pueden ajustar el inicio de cada jugador (el conjunto de edificios, mercancías y trabajadores con los que el jugador comienza) así como la tribu y el equipo para los jugadores controlados por el ordenador."
 
 #: ../../data/txts/help/multiplayer_help.lua:25
 msgid ""
 "Every client connected to a player (who isn’t a spectator) can set the tribe"
 " and the team for that player."
-msgstr ""
+msgstr "Cada cliente conectado a un jugador (que no sea un espectador) puede asignar la tribu y el equipo para ese jugador."
 
 #: ../../data/txts/help/multiplayer_help.lua:27
 msgid "Map details"
@@ -493,19 +494,19 @@ msgid ""
 "Keep an eye on your fishers and build a fish breeder’s house. After fish "
 "resources are exhausted in their work area, the fish supply cannot be "
 "regenerated."
-msgstr ""
+msgstr "Mantén un ojo en tus pescadores y construye una casa del piscicultor. Después de agotar la fuentes de pescado en su área de trabajo, el suministro de pescado no puede regenerarse."
 
 #: ../../data/txts/tips/atlanteans.lua:8
 msgid ""
 "Always build a forester’s and a woodcutter’s house, so you will not run out "
 "of logs."
-msgstr ""
+msgstr "Construye siempre una casa del silvicultor y del talador, para que no te quedes sin troncos."
 
 #: ../../data/txts/tips/atlanteans.lua:12
 msgid ""
 "Atlanteans need spidercloth for many buildings. Build the needed "
 "infrastructure early before you run out."
-msgstr ""
+msgstr "Los atlantes necesitan tela de araña para muchos edificios. Construye la infraestructura necesaria pronto antes de quedarte sin ella."
 
 #: ../../data/txts/tips/barbarians.lua:4 ../../data/txts/tips/empire.lua:4
 msgid ""
@@ -517,13 +518,13 @@ msgstr "Mantén un ojo en tus pescadores. Después de agotar la fuentes de pesca
 msgid ""
 "Always build a ranger’s and a gamekeeper’s hut, so you will not run out of "
 "logs or game."
-msgstr ""
+msgstr "Construye siempre una cabaña del cazador y del guardabosques, para que no te quedes sin troncos o caza."
 
 #: ../../data/txts/tips/barbarians.lua:12 ../../data/txts/tips/empire.lua:12
 msgid ""
 "Most enhanced buildings need experienced workers. Do not enhance a building "
 "unless you have the necessary workers available."
-msgstr ""
+msgstr "La mayoría de edificios mejorados necesitan a trabajadores cualificados. No mejores un edificio a no ser que tengas a los trabajadores necesarios disponibles."
 
 #: ../../data/txts/tips/editor.lua:4
 msgid ""
@@ -560,7 +561,7 @@ msgstr "Manteniendo Alt activa la segunda herramienta alternativa (si existe)."
 msgid ""
 "The number keys (0 - 9) allow you to directly set the size of the selected "
 "area around your mouse cursor."
-msgstr ""
+msgstr "Los números (0 - 9) te permiten directamente el tamaño del área seleccionada alrededor de tu ratón."
 
 #: ../../data/txts/tips/editor.lua:28
 msgid ""
@@ -572,26 +573,26 @@ msgstr "La barra espaciadora se comporta como en un juego normal. Activa o desac
 msgid ""
 "When placing trees, use the help button to see which trees are more likely "
 "to survive on which terrain."
-msgstr ""
+msgstr "Cuando plantes arboles, utiliza el botón de ayuda para ver qué arboles tienen más probabilidades de sobrevivir en qué terreno."
 
 #: ../../data/txts/tips/editor.lua:36
 msgid ""
 "If you do not set water and fish resources, a default amount will be used."
-msgstr ""
+msgstr "Si no estableces recursos de agua y pescado, se utilizará una cantidad predeterminada."
 
 #: ../../data/txts/tips/editor.lua:40
 msgid ""
 "You can place a medium building on any node where there is a slope no "
 "greater than 1 in the south-east direction and its height difference to all "
 "nodes in a radius of 2 is no greater than 2."
-msgstr ""
+msgstr "Puedes poner un edificio mediano en cualquier nodo donde haya una cuesta no más grande de 1 en dirección sureste y que su diferencia de altura respecto a todos los demás nodos en un radio de 2 no sea más grande de 2."
 
 #: ../../data/txts/tips/editor.lua:44
 msgid ""
 "You can place a large building on any node where you could place a medium "
 "building if there is no obstacle or non-arable terrain towards the west, "
 "northwest and northeast."
-msgstr ""
+msgstr "Puedes poner un edificio grande en cualquier nodo donde podías poner un edificio mediano si no hay obstaculos o tierra no-arable hacia el oeste, noroeste o noreste."
 
 #: ../../data/txts/tips/empire.lua:8
 msgid "Always build a forester’s house so you will not run out of logs."
@@ -599,7 +600,7 @@ msgstr "Siempre construye una casa de silvicultor para no quedarte sin troncos."
 
 #: ../../data/txts/tips/empire.lua:16
 msgid "Empire needs a lot of marble. Keep looking for marble resources."
-msgstr ""
+msgstr "El imperio necesita mucho mármol. Asegurate de buscar recursos de mármol."
 
 #: ../../data/txts/tips/general_game.lua:4
 msgid ""
@@ -657,16 +658,16 @@ msgstr "Administra tus mensajes más eficientemente: presiona \"N\" para Nuevos 
 #: ../../data/txts/tips/general_game.lua:40
 msgctxt "hotkey"
 msgid "1-9"
-msgstr ""
+msgstr "1-9"
 
 #: ../../data/txts/tips/general_game.lua:40
 msgctxt "hotkey"
 msgid "Ctrl+(1-9)"
-msgstr ""
+msgstr "Ctrl+(1-9)"
 
 #: ../../data/txts/tips/general_game.lua:40
 msgid "Press %1% to store important locations, then press %2% to recall them."
-msgstr ""
+msgstr "Pulsa %1% para guardar ubicaciones importantes, y pulsa %2% para volver a ellas."
 
 #: ../../data/txts/tips/general_game.lua:44
 msgid ""
@@ -678,7 +679,7 @@ msgstr "Remover un camino mientras mantienes Ctrl te permite remover todas las b
 msgid ""
 "New soldiers are recruited in a barracks. Their abilities can then be "
 "improved in training sites."
-msgstr ""
+msgstr "Los nuevos soldados se reclutan en los barracones. Sus habilidades pueden entonces mejorarse en las zonas de entrenamiento."
 
 #: ../../data/txts/tips/general_game.lua:52
 msgid ""
@@ -705,16 +706,16 @@ msgstr "Algunos edificios, como la granja, tienen una zona de trabajo pequeña. 
 #: ../../data/txts/tips/general_game.lua:68
 msgctxt "hotkey"
 msgid "Ctrl+(+/-)"
-msgstr ""
+msgstr "Ctrl+(+/-)"
 
 #: ../../data/txts/tips/general_game.lua:68
 msgctxt "hotkey"
 msgid "Ctrl+0"
-msgstr ""
+msgstr "Ctrl+0"
 
 #: ../../data/txts/tips/general_game.lua:68
 msgid "Zoom in/out with the mouse wheel or %1%. Press %2% to reset the zoom."
-msgstr ""
+msgstr "Aumenta o reduce el zoom usando la rueda del ratón o %1%. Pulsa %2% para reiniciar el zoom."
 
 #: ../../data/txts/tips/general_game.lua:72
 msgid ""
@@ -722,7 +723,7 @@ msgid ""
 "flag from which they can move by road to a connected warehouse. If there are"
 " no such flags in the vicinity, they will keep wandering around and "
 "eventually die."
-msgstr ""
+msgstr "Cuando un edificio es destruido, sus trabajadores se pondrán a buscar una bandera cercada desde la que puedan moverse por carretera a un almacén conectado. Si no hay banderas cerca, vagaran sin rumbo y eventualmente morirán."
 
 #: ../../data/txts/tips/multiplayer.lua:4
 msgid ""
@@ -746,7 +747,7 @@ msgstr "Usa \"@name\" al principio de un mensaje de chat para enviarlo solo a es
 msgid ""
 "If the game should crash, don't worry! The game will be saved automatically "
 "so that you can reload it afterwards."
-msgstr ""
+msgstr "Si el juego se cierra inesperadamente, no te preocupes! La partida se guardará automáticamente para que puedas cargarla."
 
 #: ../../data/txts/tips/singleplayer.lua:4
 msgid ""

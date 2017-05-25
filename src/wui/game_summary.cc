@@ -34,7 +34,6 @@
 #include "ui_basic/table.h"
 #include "ui_basic/textarea.h"
 #include "ui_basic/unique_window.h"
-#include "wlapplication.h"
 #include "wui/interactive_gamebase.h"
 #include "wui/interactive_player.h"
 
@@ -151,8 +150,7 @@ void GameSummaryScreen::fill_data() {
 		UI::Table<uintptr_t const>::EntryRecord& te = players_table_->add(i);
 		// Player name & pic
 		const Image* player_image =
-		   playercolor_image(pes.player - 1, g_gr->images().get("images/players/genstats_player.png"),
-		                     g_gr->images().get("images/players/genstats_player_pc.png"));
+		   playercolor_image(pes.player - 1, "images/players/genstats_player.png");
 		assert(player_image);
 		te.set_picture(0, player_image, p->get_name());
 		// Team

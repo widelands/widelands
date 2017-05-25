@@ -1,15 +1,15 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2016 Widelands Development Team
+# Copyright (C) 2005-2017 Widelands Development Team
 # 
 # Translators:
 # Jakub Šebek <mrfly8988@gmail.com>, 2015
-# Milan Fašina <matrix17@seznam.cz>, 2016
+# Milan Fašina <matrix17@seznam.cz>, 2016-2017
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-12-30 14:03+0000\n"
-"PO-Revision-Date: 2016-12-31 21:37+0000\n"
+"POT-Creation-Date: 2017-03-29 17:32+0000\n"
+"PO-Revision-Date: 2017-04-02 08:17+0000\n"
 "Last-Translator: Milan Fašina <matrix17@seznam.cz>\n"
 "Language-Team: Czech (http://www.transifex.com/widelands/widelands/language/cs/)\n"
 "MIME-Version: 1.0\n"
@@ -30,13 +30,13 @@ msgstr "Mořeplavecký tutoriál"
 msgid ""
 "Welcome back. In this tutorial, you are going to learn the most important "
 "things about seafaring, that is ships, ports, and expedition."
-msgstr "Vítej zpět. V tomto tutoriálu se naučíš ty nejdůležitější věci o mořeplavectví, tedy o lodích, přístavech a expedicích."
+msgstr "Vítej zpět. V tomto tutoriálu se naučíš nejdůležitější věci o mořeplavectví, tedy o lodích, přístavech a expedicích."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:24
 msgid ""
 "But let me first give you an overview about your territory: here in the "
 "south, you have a whole economy with almost everything you need."
-msgstr "Ale nejdřív ti dám přehled o tvém území: zde na jihu, máš celé hospodářství se vším, co potřebuješ."
+msgstr "Ale nejdřív ti dám přehled o tvém území: zde na jihu, máš hospodářství, kde nalezneš skoro všechno, co potřebuješ."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:32
 msgid "The Northern Part"
@@ -418,7 +418,7 @@ msgstr "Na této mapě není nepřítel, kterého je třeba se bát. Jako vždy,
 msgid "“%s”"
 msgstr "“%s”"
 
-#: ../../data/scripting/format_scenario.lua:96
+#: ../../data/scripting/format_scenario.lua:84
 msgid "New Objective"
 msgid_plural "New Objectives"
 msgstr[0] "Nový úkol"

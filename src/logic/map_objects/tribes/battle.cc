@@ -53,28 +53,28 @@ Battle::Battle()
      last_attack_hits_(false) {
 }
 
-Battle::Battle(Game& game, Soldier& First, Soldier& Second)
+Battle::Battle(Game& game, Soldier* first_soldier, Soldier* second_soldier)
    : MapObject(&g_battle_descr),
-     first_(&First),
-     second_(&Second),
+     first_(first_soldier),
+     second_(second_soldier),
      readyflags_(0),
      damage_(0),
      first_strikes_(true) {
-	assert(First.get_owner() != Second.get_owner());
+	assert(first_soldier->get_owner() != second_soldier->get_owner());
 	{
 		StreamWrite& ss = game.syncstream();
 		ss.unsigned_32(0x00e111ba);  // appears as ba111e00 in a hexdump
-		ss.unsigned_32(First.serial());
-		ss.unsigned_32(Second.serial());
+		ss.unsigned_32(first_soldier->serial());
+		ss.unsigned_32(second_soldier->serial());
 	}
 
-	// Ensures only live soldiers eganges in a battle
-	assert(First.get_current_health() && Second.get_current_health());
+	// Ensures only live soldiers engage in a battle
+	assert(first_soldier->get_current_health() && second_soldier->get_current_health());
 
 	init(game);
 }
 
-void Battle::init(EditorGameBase& egbase) {
+bool Battle::init(EditorGameBase& egbase) {
 	MapObject::init(egbase);
 
 	creationtime_ = egbase.get_gametime();
@@ -89,6 +89,7 @@ void Battle::init(EditorGameBase& egbase) {
 		battle->cancel(game, *second_);
 	}
 	second_->set_battle(game, this);
+	return true;
 }
 
 void Battle::cleanup(EditorGameBase& egbase) {
@@ -128,7 +129,8 @@ bool Battle::locked(Game& game) {
 	return first_->get_position() == second_->get_position();
 }
 
-Soldier* Battle::opponent(Soldier& soldier) {
+Soldier* Battle::opponent(const Soldier& soldier) const {
+	assert(&soldier != nullptr);
 	assert(first_ == &soldier || second_ == &soldier);
 	Soldier* other_soldier = first_ == &soldier ? second_ : first_;
 	return other_soldier;

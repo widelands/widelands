@@ -16,4 +16,5 @@ file. The ``init.lua`` script will load the unit to be used in the game, and
    :maxdepth: 3
 
    autogen_toc_lua_tribes_buildings
+   autogen_toc_lua_tribes_workers
 REPLACE_ME

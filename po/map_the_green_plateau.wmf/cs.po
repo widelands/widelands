@@ -1,16 +1,16 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2016 Widelands Development Team
+# Copyright (C) 2005-2017 Widelands Development Team
 # 
 # Translators:
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
 # GunChleoc, 2014
-# Milan Fašina <matrix17@seznam.cz>, 2016
+# Milan Fašina <matrix17@seznam.cz>, 2016-2017
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-12-30 14:03+0000\n"
-"PO-Revision-Date: 2016-12-31 21:35+0000\n"
+"POT-Creation-Date: 2017-03-29 17:32+0000\n"
+"PO-Revision-Date: 2017-04-02 08:20+0000\n"
 "Last-Translator: Milan Fašina <matrix17@seznam.cz>\n"
 "Language-Team: Czech (http://www.transifex.com/widelands/widelands/language/cs/)\n"
 "MIME-Version: 1.0\n"
@@ -43,12 +43,12 @@ msgstr "Zmocni se starobylého hradu"
 
 #: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:29
 msgid "Defeat Lanissa and capture the ancient castle."
-msgstr "Musíš porazit Lanissu a zmocnit se starobylého hradu."
+msgstr "Poraz Lanissu a zmocni se starobylého hradu."
 
 #: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:35
 #: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:37
 msgid "Defeat Erwyn"
-msgstr "Musíš porazit Erwyna"
+msgstr "Poraz Erwyna"
 
 #: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:38
 msgid ""

@@ -74,7 +74,7 @@ public:
 	              Building::FormerBuildings& former_buildings);
 
 	bool burn_on_destroy() override;
-	void init(EditorGameBase&) override;
+	bool init(EditorGameBase&) override;
 
 	bool get_building_work(Game&, Worker&, bool success) override;
 

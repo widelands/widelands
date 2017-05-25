@@ -284,4 +284,5 @@ tribes:new_tribe {
    ship = "barbarians_ship",
    headquarters = "barbarians_headquarters",
    port = "barbarians_port",
+   barracks = "barbarians_barracks",
 }

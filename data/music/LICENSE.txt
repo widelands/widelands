@@ -1,0 +1,4 @@
+Unless otherwise stated in this file or in the meta tags, all music is licensed under the GPL v2 or later.
+
+ingame_24.ogg (Hypathia's Theme) (c) Stuart Marshall, license CC-BY-SA v3.00
+ingame_25.ogg (We Work in the Vineyards) (c) Stuart Marshall, license CC-BY-SA v3.00
