@@ -167,15 +167,15 @@ void ChatOverlay::draw(RenderTarget& dst) {
 	if (!m->havemessages_)
 		return;
 
-	const Image* im = nullptr;
+	std::shared_ptr<const UI::RenderedText> im = std::shared_ptr<const UI::RenderedText>(nullptr);
 	try {
 		im = UI::g_fh1->render(m->all_text_, get_w());
 	} catch (RT::WidthTooSmall&) {
 		// Oops, maybe one long word? We render again, not limiting the width, but
 		// render everything in one single line.
-		im = UI::g_fh1->render(m->all_text_, 0);
+		im = UI::g_fh1->render(m->all_text_);
 	}
-	assert(im != nullptr);
+	assert(im.get() != nullptr);
 
 	// Background
 	const int32_t height = im->height() > get_h() ? get_h() : im->height();
@@ -185,8 +185,6 @@ void ChatOverlay::draw(RenderTarget& dst) {
 	if (!m->transparent_) {
 		dst.fill_rect(Recti(0, top, width, height), RGBAColor(50, 50, 50, 128), BlendMode::Default);
 	}
-	int32_t topcrop = im->height() - height;
-	Recti cropRect(0, topcrop, width, height);
-
-	dst.blitrect(Vector2i(0, top), im, cropRect);
+	const int topcrop = im->height() - height;
+	im->draw(dst, Vector2i(0, top), Recti(0, topcrop, width, height));
 }

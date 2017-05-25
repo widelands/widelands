@@ -36,7 +36,7 @@
 namespace UI {
 struct ProgressWindow;
 }
-struct FullscreenMenuLaunchGame;
+class FullscreenMenuLaunchGame;
 class InteractiveBase;
 class InteractiveGameBase;  // TODO(GunChleoc): Get rid
 
@@ -78,7 +78,7 @@ struct NoteFieldPossession {
 class EditorGameBase {
 public:
 	friend class InteractiveBase;
-	friend struct FullscreenMenuLaunchGame;
+	friend class FullscreenMenuLaunchGame;
 	friend struct GameClassPacket;
 
 	EditorGameBase(LuaInterface* lua);

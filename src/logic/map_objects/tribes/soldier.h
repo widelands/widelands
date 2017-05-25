@@ -262,7 +262,7 @@ public:
 
 	bool is_on_battlefield();
 	bool is_attacking_player(Game&, Player&);
-	Battle* get_battle();
+	Battle* get_battle() const;
 	bool can_be_challenged();
 	bool check_node_blocked(Game&, const FCoords&, bool commit) override;
 
