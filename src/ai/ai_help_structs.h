@@ -542,6 +542,7 @@ struct EnemySiteObserver {
 	int16_t score;
 	Widelands::ExtendedBool mines_nearby;
 	uint32_t last_time_attacked;
+	uint32_t attack_counter;
 };
 
 // as all mines have 3 levels, AI does not know total count of mines per mined material

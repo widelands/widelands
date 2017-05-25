@@ -135,6 +135,10 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 	for (std::map<uint32_t, EnemySiteObserver>::iterator site = enemy_sites.begin();
 	     site != enemy_sites.end(); ++site) {
 
+		//Do not attack too soon
+		if (std::min<uint32_t>(site->second.attack_counter, 10) * 20 > (gametime - site->second.last_time_attacked)){
+			continue;
+		}
 
 		// we test max 12 sites and prefer ones tested more then 1 min ago
 		if (((site->second.last_tested + (enemysites_check_delay_ * 1000)) > gametime && count > 4) ||
@@ -490,6 +494,7 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 	assert(1 < player_->vision(Map::get_index(flag->get_building()->get_position(), map.get_width())));
 	attackers_count_ += attackers;
 	enemy_sites[best_target].last_time_attacked = gametime;
+	enemy_sites[best_target].attack_counter += 1;
 
 	last_attack_time_ = gametime;
 	for(int j= 0; j<attackers; j +=1) {
