@@ -43,6 +43,7 @@
 #include "graphic/text/bidi.h"
 #include "graphic/text/font_io.h"
 #include "graphic/text/font_set.h"
+#include "graphic/text/rendered_text.h"
 #include "graphic/text/rt_parse.h"
 #include "graphic/text/sdl_ttf_font.h"
 #include "graphic/text/textstream.h"
@@ -52,7 +53,7 @@
 #include "io/filesystem/layered_filesystem.h"
 
 using namespace std;
-
+// TODO(GunChleoc): text line can start with space text node when it's within a div.
 namespace RT {
 
 static const uint16_t INFINITE_WIDTH = 65535;  // 2^16-1
@@ -227,15 +228,20 @@ public:
 	virtual ~RenderNode() {
 	}
 
-	virtual uint16_t width() = 0;
-	virtual uint16_t height() = 0;
-	virtual uint16_t hotspot_y() = 0;
-	virtual Texture* render(TextureCache* texture_cache) = 0;
+	virtual uint16_t width() const = 0;
+	virtual uint16_t height() const = 0;
+	virtual uint16_t hotspot_y() const = 0;
+	virtual UI::RenderedText* render(TextureCache* texture_cache) = 0;
 
-	virtual bool is_non_mandatory_space() {
+	// TODO(GunChleoc): Remove this function once conversion is finished and well tested.
+	virtual std::string debug_info() const = 0;
+
+	// If a node is a non-mandatory space, it can be removed as a leading/trailing space
+	// by the positioning algorithm.
+	virtual bool is_non_mandatory_space() const {
 		return false;
 	}
-	virtual bool is_expanding() {
+	virtual bool is_expanding() const {
 		return false;
 	}
 	virtual void set_w(uint16_t) {
@@ -245,19 +251,19 @@ public:
 		return vector<Reference>();
 	}
 
-	Floating get_floating() {
+	Floating get_floating() const {
 		return floating_;
 	}
 	void set_floating(Floating f) {
 		floating_ = f;
 	}
-	UI::Align halign() {
+	UI::Align halign() const {
 		return halign_;
 	}
 	void set_halign(UI::Align ghalign) {
 		halign_ = ghalign;
 	}
-	UI::Align valign() {
+	UI::Align valign() const {
 		return valign_;
 	}
 	void set_valign(UI::Align gvalign) {
@@ -269,11 +275,36 @@ public:
 	void set_y(int32_t ny) {
 		y_ = ny;
 	}
-	int32_t x() {
+	int32_t x() const {
 		return x_;
 	}
-	int32_t y() {
+	int32_t y() const {
 		return y_;
+	}
+
+protected:
+	/// Throws a TextureTooBig exception if the given dimensions would be bigger than the graphics
+	/// can handle
+	void check_size(int check_w, int check_h) {
+// Test for minimum supported size in debug builds.
+#ifndef NDEBUG
+		const int maximum_size = kMinimumSizeForTextures;
+#else
+		const int maximum_size = g_gr->max_texture_size();
+#endif
+		if (check_w > maximum_size || check_h > maximum_size) {
+			const std::string error_message =
+			   (boost::format("Texture (%d, %d) too big! Maximum size is %d.") % check_w % check_h %
+			    maximum_size)
+			      .str();
+			log("%s\n", error_message.c_str());
+			throw TextureTooBig(error_message);
+		}
+	}
+
+	/// Check the size for the node's own dimensions
+	void check_size() {
+		check_size(width(), height());
 	}
 
 private:
@@ -479,13 +510,17 @@ public:
 	virtual ~TextNode() {
 	}
 
-	uint16_t width() override {
+	std::string debug_info() const override {
+		return "'" + txt_ + "'";
+	}
+
+	uint16_t width() const override {
 		return w_;
 	}
-	uint16_t height() override {
+	uint16_t height() const override {
 		return h_ + nodestyle_.spacing;
 	}
-	uint16_t hotspot_y() override;
+	uint16_t hotspot_y() const override;
 	const vector<Reference> get_references() override {
 		vector<Reference> rv;
 		if (!nodestyle_.reference.empty()) {
@@ -495,7 +530,7 @@ public:
 		return rv;
 	}
 
-	Texture* render(TextureCache* texture_cache) override;
+	UI::RenderedText* render(TextureCache* texture_cache) override;
 
 protected:
 	uint16_t w_, h_;
@@ -512,18 +547,20 @@ TextNode::TextNode(FontCache& font, NodeStyle& ns, const string& txt)
      fontcache_(font),
      font_(dynamic_cast<SdlTtfFont&>(fontcache_.get_font(&nodestyle_))) {
 	font_.dimensions(txt_, ns.font_style, &w_, &h_);
+	check_size();
 }
-uint16_t TextNode::hotspot_y() {
+uint16_t TextNode::hotspot_y() const {
 	return font_.ascent(nodestyle_.font_style);
 }
 
-Texture* TextNode::render(TextureCache* texture_cache) {
-	const Texture& img =
+UI::RenderedText* TextNode::render(TextureCache* texture_cache) {
+	auto rendered_image =
 	   font_.render(txt_, nodestyle_.font_color, nodestyle_.font_style, texture_cache);
-	Texture* rv = new Texture(img.width(), img.height());
-	rv->blit(Rectf(0, 0, img.width(), img.height()), img, Rectf(0, 0, img.width(), img.height()), 1.,
-	         BlendMode::Copy);
-	return rv;
+	assert(rendered_image.get() != nullptr);
+	UI::RenderedText* rendered_text = new UI::RenderedText();
+	rendered_text->rects.push_back(
+	   std::unique_ptr<UI::RenderedRect>(new UI::RenderedRect(rendered_image)));
+	return rendered_text;
 }
 
 /*
@@ -536,12 +573,18 @@ public:
 	   FontCache& font, NodeStyle& ns, uint16_t w, const string& txt, bool expanding = false)
 	   : TextNode(font, ns, txt), is_expanding_(expanding) {
 		w_ = w;
+		check_size();
 	}
 	virtual ~FillingTextNode() {
 	}
-	Texture* render(TextureCache*) override;
 
-	bool is_expanding() override {
+	std::string debug_info() const override {
+		return "ft";
+	}
+
+	UI::RenderedText* render(TextureCache*) override;
+
+	bool is_expanding() const override {
 		return is_expanding_;
 	}
 	void set_w(uint16_t w) override {
@@ -551,15 +594,29 @@ public:
 private:
 	bool is_expanding_;
 };
-Texture* FillingTextNode::render(TextureCache* texture_cache) {
-	const Texture& t =
-	   font_.render(txt_, nodestyle_.font_color, nodestyle_.font_style, texture_cache);
-	Texture* rv = new Texture(w_, h_);
-	for (uint16_t curx = 0; curx < w_; curx += t.width()) {
-		Rectf srcrect(0.f, 0.f, min<int>(t.width(), w_ - curx), h_);
-		rv->blit(Rectf(curx, 0, srcrect.w, srcrect.h), t, srcrect, 1., BlendMode::Copy);
+UI::RenderedText* FillingTextNode::render(TextureCache* texture_cache) {
+	UI::RenderedText* rendered_text = new UI::RenderedText();
+	const std::string hash =
+	   (boost::format("rt:fill:%s:%s:%i:%i:%i:%s") % txt_ % nodestyle_.font_color.hex_value() %
+	    nodestyle_.font_style % width() % height() % (is_expanding_ ? "e" : "f"))
+	      .str();
+
+	std::shared_ptr<const Image> rendered_image = texture_cache->get(hash);
+	if (rendered_image.get() == nullptr) {
+		std::shared_ptr<const Image> ttf =
+		   font_.render(txt_, nodestyle_.font_color, nodestyle_.font_style, texture_cache);
+		auto texture = std::make_shared<Texture>(width(), height());
+		for (uint16_t curx = 0; curx < w_; curx += ttf->width()) {
+			Rectf srcrect(0.f, 0.f, min<int>(ttf->width(), w_ - curx), h_);
+			texture->blit(
+			   Rectf(curx, 0, srcrect.w, srcrect.h), *ttf.get(), srcrect, 1., BlendMode::Copy);
+		}
+		rendered_image = texture_cache->insert(hash, std::move(texture));
 	}
-	return rv;
+	assert(rendered_image.get() != nullptr);
+	rendered_text->rects.push_back(
+	   std::unique_ptr<UI::RenderedRect>(new UI::RenderedRect(rendered_image)));
+	return rendered_text;
 }
 
 /*
@@ -569,20 +626,34 @@ Texture* FillingTextNode::render(TextureCache* texture_cache) {
 class WordSpacerNode : public TextNode {
 public:
 	WordSpacerNode(FontCache& font, NodeStyle& ns) : TextNode(font, ns, " ") {
+		check_size();
 	}
 	static void show_spaces(bool t) {
 		show_spaces_ = t;
 	}
 
-	Texture* render(TextureCache* texture_cache) override {
+	std::string debug_info() const override {
+		return "wsp";
+	}
+
+	UI::RenderedText* render(TextureCache* texture_cache) override {
 		if (show_spaces_) {
-			Texture* rv = new Texture(w_, h_);
-			rv->fill_rect(Rectf(0, 0, w_, h_), RGBAColor(0xcc, 0, 0, 0xcc));
-			return rv;
+			UI::RenderedText* rendered_text = new UI::RenderedText();
+			const std::string hash = (boost::format("rt:wsp:%i:%i") % width() % height()).str();
+			std::shared_ptr<const Image> rendered_image = texture_cache->get(hash);
+			if (rendered_image.get() == nullptr) {
+				auto texture = std::make_shared<Texture>(width(), height());
+				texture->fill_rect(Rectf(0.f, 0.f, w_, h_), RGBAColor(0xcc, 0, 0, 0xcc));
+				rendered_image = texture_cache->insert(hash, std::move(texture));
+			}
+			assert(rendered_image.get() != nullptr);
+			rendered_text->rects.push_back(
+			   std::unique_ptr<UI::RenderedRect>(new UI::RenderedRect(rendered_image)));
+			return rendered_text;
 		}
 		return TextNode::render(texture_cache);
 	}
-	bool is_non_mandatory_space() override {
+	bool is_non_mandatory_space() const override {
 		return true;
 	}
 
@@ -599,19 +670,24 @@ class NewlineNode : public RenderNode {
 public:
 	NewlineNode(NodeStyle& ns) : RenderNode(ns) {
 	}
-	uint16_t height() override {
+
+	std::string debug_info() const override {
+		return "nl";
+	}
+
+	uint16_t height() const override {
 		return 0;
 	}
-	uint16_t width() override {
+	uint16_t width() const override {
 		return INFINITE_WIDTH;
 	}
-	uint16_t hotspot_y() override {
+	uint16_t hotspot_y() const override {
 		return 0;
 	}
-	Texture* render(TextureCache* /* texture_cache */) override {
+	UI::RenderedText* render(TextureCache* /* texture_cache */) override {
 		NEVER_HERE();
 	}
-	bool is_non_mandatory_space() override {
+	bool is_non_mandatory_space() const override {
 		return true;
 	}
 };
@@ -622,52 +698,76 @@ public:
 class SpaceNode : public RenderNode {
 public:
 	SpaceNode(NodeStyle& ns, uint16_t w, uint16_t h = 0, bool expanding = false)
-	   : RenderNode(ns), w_(w), h_(h), background_image_(nullptr), is_expanding_(expanding) {
+	   : RenderNode(ns),
+	     w_(w),
+	     h_(h),
+	     background_image_(nullptr),
+	     filename_(""),
+	     is_expanding_(expanding) {
+		check_size();
 	}
 
-	uint16_t height() override {
+	std::string debug_info() const override {
+		return "sp";
+	}
+
+	uint16_t height() const override {
 		return h_;
 	}
-	uint16_t width() override {
+	uint16_t width() const override {
 		return w_;
 	}
-	uint16_t hotspot_y() override {
+	uint16_t hotspot_y() const override {
 		return h_;
 	}
-	Texture* render(TextureCache* /* texture_cache */) override {
-		Texture* rv = new Texture(w_, h_);
+	UI::RenderedText* render(TextureCache* texture_cache) override {
+		UI::RenderedText* rendered_text = new UI::RenderedText();
+		const std::string hash = (boost::format("rt:sp:%s:%i:%i:%s") % filename_ % width() %
+		                          height() % (is_expanding_ ? "e" : "f"))
+		                            .str();
 
-		// Draw background image (tiling)
-		if (background_image_) {
-			Rectf dst;
-			Rectf srcrect(0, 0, 1, 1);
-			for (uint16_t curx = 0; curx < w_; curx += background_image_->width()) {
-				dst.x = curx;
-				dst.y = 0;
-				srcrect.w = dst.w = min<int>(background_image_->width(), w_ - curx);
-				srcrect.h = dst.h = h_;
-				rv->blit(dst, *background_image_, srcrect, 1., BlendMode::Copy);
+		std::shared_ptr<const Image> rendered_image = texture_cache->get(hash);
+		if (rendered_image.get() == nullptr) {
+			// Draw background image (tiling)
+			auto texture = std::make_shared<Texture>(width(), height());
+			if (background_image_ != nullptr) {
+				Rectf dst;
+				Rectf srcrect(0, 0, 1, 1);
+				for (uint16_t curx = 0; curx < w_; curx += background_image_->width()) {
+					dst.x = curx;
+					dst.y = 0;
+					srcrect.w = dst.w = min<int>(background_image_->width(), w_ - curx);
+					srcrect.h = dst.h = h_;
+					texture->blit(dst, *background_image_, srcrect, 1., BlendMode::Copy);
+				}
+			} else {
+				texture->fill_rect(Rectf(0.f, 0.f, w_, h_), RGBAColor(255, 255, 255, 0));
 			}
-		} else {
-			rv->fill_rect(Rectf(0, 0, w_, h_), RGBAColor(255, 255, 255, 0));
+			rendered_image = texture_cache->insert(hash, std::move(texture));
 		}
-		return rv;
+		assert(rendered_image.get() != nullptr);
+		rendered_text->rects.push_back(
+		   std::unique_ptr<UI::RenderedRect>(new UI::RenderedRect(rendered_image)));
+		return rendered_text;
 	}
-	bool is_expanding() override {
+
+	bool is_expanding() const override {
 		return is_expanding_;
 	}
 	void set_w(uint16_t w) override {
 		w_ = w;
 	}
 
-	void set_background(const Image* s) {
+	void set_background(const Image* s, const std::string& filename) {
 		background_image_ = s;
+		filename_ = filename;
 		h_ = s->height();
 	}
 
 private:
 	uint16_t w_, h_;
 	const Image* background_image_;  // not owned
+	std::string filename_;
 	bool is_expanding_;
 };
 
@@ -690,13 +790,17 @@ public:
 		nodes_to_render_.clear();
 	}
 
-	uint16_t width() override {
+	std::string debug_info() const override {
+		return "div";
+	}
+
+	uint16_t width() const override {
 		return w_ + margin_.left + margin_.right;
 	}
-	uint16_t height() override {
+	uint16_t height() const override {
 		return h_ + margin_.top + margin_.bottom;
 	}
-	uint16_t hotspot_y() override {
+	uint16_t hotspot_y() const override {
 		return height();
 	}
 
@@ -704,60 +808,48 @@ public:
 		return desired_width_;
 	}
 
-	Texture* render(TextureCache* texture_cache) override {
-		if (width() > g_gr->max_texture_size() || height() > g_gr->max_texture_size()) {
-			const std::string error_message =
-			   (boost::format("Texture (%d, %d) too big! Maximum size is %d.") % width() % height() %
-			    g_gr->max_texture_size())
-			      .str();
-			log("%s\n", error_message.c_str());
-			throw TextureTooBig(error_message);
-		}
-		Texture* rv = new Texture(width(), height());
-		rv->fill_rect(Rectf(0, 0, rv->width(), rv->height()), RGBAColor(255, 255, 255, 0));
+	UI::RenderedText* render(TextureCache* texture_cache) override {
+		UI::RenderedText* rendered_text = new UI::RenderedText();
+		// Preserve padding
+		rendered_text->rects.push_back(std::unique_ptr<UI::RenderedRect>(
+		   new UI::RenderedRect(Recti(0, 0, width(), height()), nullptr)));
 
 		// Draw Solid background Color
-		bool set_alpha = true;
 		if (is_background_color_set_) {
-			rv->fill_rect(Rectf(margin_.left, margin_.top, w_, h_), background_color_);
-			set_alpha = false;
+			UI::RenderedRect* bg_rect =
+			   new UI::RenderedRect(Recti(margin_.left, margin_.top, w_, h_), background_color_);
+			// Size is automatically adjusted in RenderedText while blitting, so no need to call
+			// check_size() here.
+			rendered_text->rects.push_back(std::unique_ptr<UI::RenderedRect>(std::move(bg_rect)));
 		}
 
 		// Draw background image (tiling)
-		if (background_image_) {
-			Rectf dst;
-			Rectf src(0, 0, 0, 0);
-
-			for (uint16_t cury = margin_.top; cury < h_ + margin_.top;
-			     cury += background_image_->height()) {
-				for (uint16_t curx = margin_.left; curx < w_ + margin_.left;
-				     curx += background_image_->width()) {
-					dst.x = curx;
-					dst.y = cury;
-					src.w = dst.w = min<int>(background_image_->width(), w_ + margin_.left - curx);
-					src.h = dst.h = min<int>(background_image_->height(), h_ + margin_.top - cury);
-					rv->blit(dst, *background_image_, src, 1., BlendMode::Copy);
-				}
-			}
-			set_alpha = false;
+		if (background_image_ != nullptr) {
+			UI::RenderedRect* bg_rect =
+			   new UI::RenderedRect(Recti(margin_.left, margin_.top, w_, h_), background_image_);
+			check_size(bg_rect->width(), bg_rect->height());
+			rendered_text->rects.push_back(std::unique_ptr<UI::RenderedRect>(std::move(bg_rect)));
 		}
 
 		for (RenderNode* n : nodes_to_render_) {
-			Texture* node_texture = n->render(texture_cache);
-			if (node_texture) {
-				Rectf dst(n->x() + margin_.left, n->y() + margin_.top, node_texture->width(),
-				          node_texture->height());
-				Rectf src(0, 0, node_texture->width(), node_texture->height());
-				rv->blit(
-				   dst, *node_texture, src, 1., set_alpha ? BlendMode::Copy : BlendMode::UseAlpha);
-				delete node_texture;
+			const auto& renderme = n->render(texture_cache);
+			for (auto& rendered_rect : renderme->rects) {
+				if (rendered_rect->was_visited()) {
+					rendered_rect->set_origin(
+					   Vector2i(x() + rendered_rect->x(), y() + rendered_rect->y() + margin_.top));
+
+				} else {
+					rendered_rect->set_origin(
+					   Vector2i(x() + n->x() + margin_.left, y() + n->y() + margin_.top));
+					rendered_rect->set_visited();
+				}
+				rendered_text->rects.push_back(std::move(rendered_rect));
 			}
 			delete n;
 		}
-
 		nodes_to_render_.clear();
 
-		return rv;
+		return rendered_text;
 	}
 	const vector<Reference> get_references() override {
 		return refs_;
@@ -806,30 +898,62 @@ public:
 	   : RenderNode(ns),
 	     image_(use_playercolor ? playercolor_image(color, image_filename) :
 	                              g_gr->images().get(image_filename)),
-	     scale_(scale) {
+	     filename_(image_filename),
+	     scale_(scale),
+	     color_(color),
+	     use_playercolor_(use_playercolor) {
+		check_size();
 	}
 
-	uint16_t width() override {
+	std::string debug_info() const override {
+		return "img";
+	}
+
+	uint16_t width() const override {
 		return scale_ * image_->width();
 	}
-	uint16_t height() override {
+	uint16_t height() const override {
 		return scale_ * image_->height();
 	}
-	uint16_t hotspot_y() override {
+	uint16_t hotspot_y() const override {
 		return scale_ * image_->height();
 	}
-	Texture* render(TextureCache* texture_cache) override;
+	UI::RenderedText* render(TextureCache* texture_cache) override;
 
 private:
 	const Image* image_;
+	const std::string filename_;
 	const double scale_;
+	const RGBColor& color_;
+	bool use_playercolor_;
 };
 
-Texture* ImgRenderNode::render(TextureCache* /* texture_cache */) {
-	Texture* rv = new Texture(width(), height());
-	rv->blit(Rectf(0, 0, width(), height()), *image_, Rectf(0, 0, image_->width(), image_->height()),
-	         1., BlendMode::Copy);
-	return rv;
+UI::RenderedText* ImgRenderNode::render(TextureCache* texture_cache) {
+	UI::RenderedText* rendered_text = new UI::RenderedText();
+
+	if (scale_ == 1.0) {
+		// Image can be used as is, and has already been cached in g_gr->images()
+		assert(image_ != nullptr);
+		rendered_text->rects.push_back(
+		   std::unique_ptr<UI::RenderedRect>(new UI::RenderedRect(image_)));
+	} else {
+		const std::string hash = (boost::format("rt:img:%s:%s:%i:%i") % filename_ %
+		                          (use_playercolor_ ? color_.hex_value() : "") % width() % height())
+		                            .str();
+		std::shared_ptr<const Image> rendered_image = texture_cache->get(hash);
+		if (rendered_image.get() == nullptr) {
+			auto texture = std::make_shared<Texture>(width(), height());
+			texture->blit(Rectf(0.f, 0.f, width(), height()), *image_,
+			              Rectf(0.f, 0.f, image_->width(), image_->height()), 1., BlendMode::Copy);
+			rendered_image = texture_cache->insert(hash, std::move(texture));
+		}
+
+		assert(rendered_image.get() != nullptr);
+		rendered_text->rects.push_back(
+		   std::unique_ptr<UI::RenderedRect>(new UI::RenderedRect(rendered_image)));
+	}
+
+	return rendered_text;
 }
 // End: Helper Stuff
 
@@ -1136,6 +1260,7 @@ public:
 	                 const UI::FontSets& fontsets)
 	   : TagHandler(tag, fc, ns, image_cache, init_renderer_style, fontsets),
 	     background_image_(nullptr),
+	     image_filename_(""),
 	     space_(0) {
 	}
 
@@ -1151,6 +1276,7 @@ public:
 			fill_text_ = a["fill"].get_string();
 			try {
 				background_image_ = image_cache_->get(fill_text_);
+				image_filename_ = fill_text_;
 				fill_text_ = "";
 			} catch (ImageNotFound&) {
 			}
@@ -1172,7 +1298,7 @@ public:
 				sn = new SpaceNode(nodestyle_, 0, 0, true);
 
 			if (background_image_)
-				sn->set_background(background_image_);
+				sn->set_background(background_image_, image_filename_);
 			rn = sn;
 		}
 		nodes.push_back(rn);
@@ -1181,6 +1307,7 @@ public:
 private:
 	string fill_text_;
 	const Image* background_image_;
+	std::string image_filename_;
 	uint16_t space_;
 };
 
@@ -1481,10 +1608,11 @@ RenderNode* Renderer::layout_(const string& text, uint16_t width, const TagSet& 
 	return nodes[0];
 }
 
-Texture* Renderer::render(const string& text, uint16_t width, const TagSet& allowed_tags) {
+std::shared_ptr<const UI::RenderedText>
+Renderer::render(const string& text, uint16_t width, const TagSet& allowed_tags) {
 	std::unique_ptr<RenderNode> node(layout_(text, width, allowed_tags));
 
-	return node->render(texture_cache_);
+	return std::shared_ptr<const UI::RenderedText>(std::move(node->render(texture_cache_)));
 }
 
 IRefMap*

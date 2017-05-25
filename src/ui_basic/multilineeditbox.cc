@@ -91,7 +91,7 @@ MultilineEditbox::MultilineEditbox(Panel* parent,
                                    const Image* button_background)
    : Panel(parent, x, y, w, h), d_(new Data(*this, button_background)) {
 	d_->background = background;
-	d_->lineheight = text_height(g_fh1->fontset()->representative_character(), UI_FONT_SIZE_SMALL);
+	d_->lineheight = text_height();
 	set_handle_mouse(true);
 	set_can_focus(true);
 	set_thinks(false);
