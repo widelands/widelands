@@ -172,7 +172,7 @@ int Texture::height() const {
 void Texture::init(uint16_t w, uint16_t h) {
 	blit_data_ = {
 	   0,  // initialized below
-	   w, h, Rectf(0, 0, w, h),
+	   w, h, Rectf(0.f, 0.f, w, h),
 	};
 	if (w * h == 0) {
 		return;
