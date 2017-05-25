@@ -94,7 +94,7 @@ private:
 
 	LayoutMode layoutmode_;
 	std::string text_;
-	const Image* rendered_text_;
+	std::shared_ptr<const UI::RenderedText> rendered_text_;
 	Align align_;
 	RGBColor color_;
 	int fontsize_;

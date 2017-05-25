@@ -21,7 +21,6 @@
 
 #include "base/macros.h"
 #include "economy/flag.h"
-#include "logic/map_objects/attackable.h"
 #include "logic/map_objects/immovable.h"
 #include "logic/map_objects/tribes/militarysite.h"
 
@@ -61,8 +60,11 @@ bool FindImmovablePlayerMilitarySite::accept(const BaseImmovable& imm) const {
 	return false;
 }
 
-bool FindImmovableAttackable::accept(const BaseImmovable& imm) const {
-	return dynamic_cast<Attackable const*>(&imm);
+bool FindImmovableAttackTarget::accept(const BaseImmovable& imm) const {
+	if (upcast(Building const, b, &imm)) {
+		return b->attack_target() != nullptr;
+	}
+	return false;
 }
 
 bool FindImmovableByDescr::accept(const BaseImmovable& baseimm) const {
