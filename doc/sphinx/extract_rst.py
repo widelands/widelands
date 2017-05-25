@@ -53,6 +53,10 @@ lua_dirs = (
      'ships', 'lua_tribes_units'),
      ('data/tribes/wares/armor',
      'wares', 'lua_tribes_units'),
+     ('data/tribes/workers/atlanteans/carrier',
+     'carriers', 'lua_tribes_workers'),
+     ('data/tribes/workers/atlanteans/soldier',
+     'soldiers', 'lua_tribes_workers'),
 )
 
 

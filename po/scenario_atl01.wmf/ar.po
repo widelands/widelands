@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-03-24 18:58+0000\n"
-"PO-Revision-Date: 2017-03-28 16:01+0000\n"
+"POT-Creation-Date: 2017-04-06 19:07+0000\n"
+"PO-Revision-Date: 2017-04-10 10:00+0000\n"
 "Last-Translator: Omar Anwar <omaraglan91@yahoo.com>\n"
 "Language-Team: Arabic (http://www.transifex.com/widelands/widelands/language/ar/)\n"
 "MIME-Version: 1.0\n"
@@ -306,7 +306,7 @@ msgid ""
 "human to be empowered by the sea god Lutas to breathe above sea level – and "
 "the wise clerics, who provided the link to Lutas – they prospered and became"
 " civilized."
-msgstr ""
+msgstr "علي جزيرة مخفية وضائعة فى أتلانتيس، قبيلة فخورة إستقرت عليها منذ كان العالم صغير جداً. محكومة بسلالة الملك \"أجانثول\" -- أول إنسان يفوض من ألهه البحر \"لوتاس\" ليعيش فوق مستوي البحر -- ورجال الدين الحكماء الذين وفروا الرابط بـ\"لوتاس\" -- هم إزدهروا و أصبحوا متحضريين."
 
 #. TRANSLATORS: Foreword
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:151
@@ -317,15 +317,15 @@ msgid ""
 "began looking for a cure for death even though most clerics warned him "
 "against it. Some said that endless life was only for the gods and that to "
 "seek for it was forbidden."
-msgstr ""
+msgstr "القصة تحدث في عصر حكم الملك \"أسكندور\"، الحاكم 43 من سلالة الملك\"أجانثول\". هو كان ملك جيد، يحكم أتلانتيس بالحكمة والبصيرة. لكن مع العمر، هو أصبح خائفاً من الموت و بدأ يتكلم ويبحث عن علاج للموت بالرغم من أن رجال الدين حذروه من ما يفعلة. البعض قال أن الحياة اللانهائية كانت فقط للالهة والبحث عنها مُحرم."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:155
 msgid "Disgraced Before the God"
-msgstr ""
+msgstr "المنكر قبل الاله"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:157
 msgid "The God’s Punishment"
-msgstr ""
+msgstr "عقاب الإله"
 
 #. TRANSLATORS: Foreword
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:159

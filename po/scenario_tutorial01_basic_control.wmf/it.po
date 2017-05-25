@@ -7,16 +7,16 @@
 # GunChleoc, 2016
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
 # GunChleoc, 2014
-# Guybrush88 <erpizzo@alice.it>, 2015-2016
+# Guybrush88 <erpizzo@alice.it>, 2015-2017
 # Luigi Lain <lainluigi86@tiscali.it>, 2016
 # Riccardo Di Maio <riccardodimaio11@gmail.com>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-03-05 10:46+0000\n"
-"PO-Revision-Date: 2017-03-05 10:48+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2017-05-12 13:53+0000\n"
+"PO-Revision-Date: 2017-05-15 15:18+0000\n"
+"Last-Translator: Guybrush88 <erpizzo@alice.it>\n"
 "Language-Team: Italian (http://www.transifex.com/widelands/widelands/language/it/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -287,7 +287,7 @@ msgstr "Per chiudere la finestra, è sufficiente cliccarci sopra col tasto destr
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:169
 msgid "The Lumberjack’s Hut is Done"
-msgstr ""
+msgstr "La capanna del taglialegna è completata"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:172
 msgid ""

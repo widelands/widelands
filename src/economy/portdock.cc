@@ -144,7 +144,7 @@ void PortDock::draw(uint32_t, const TextToDraw, const Vector2f&, float, RenderTa
 	// do nothing
 }
 
-void PortDock::init(EditorGameBase& egbase) {
+bool PortDock::init(EditorGameBase& egbase) {
 	PlayerImmovable::init(egbase);
 
 	for (const Coords& coords : dockpoints_) {
@@ -152,6 +152,7 @@ void PortDock::init(EditorGameBase& egbase) {
 	}
 
 	init_fleet(egbase);
+	return true;
 }
 
 /**

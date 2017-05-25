@@ -1,14 +1,15 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2016 Widelands Development Team
+# Copyright (C) 2005-2017 Widelands Development Team
 # 
 # Translators:
+# Omar Anwar <omaraglan91@yahoo.com>, 2017
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-12-10 10:58+0000\n"
-"PO-Revision-Date: 2016-12-10 10:59+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2017-04-13 13:07+0000\n"
+"PO-Revision-Date: 2017-04-16 10:49+0000\n"
+"Last-Translator: Omar Anwar <omaraglan91@yahoo.com>\n"
 "Language-Team: Arabic (http://www.transifex.com/widelands/widelands/language/ar/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -19,25 +20,25 @@ msgstr ""
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:23
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:25
 msgid "Build two ranger’s huts"
-msgstr ""
+msgstr "إبني إثنين من مباني الحُراس."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:26
 msgid "Build a ranger’s hut next to each lumberjack’s hut."
-msgstr ""
+msgstr "إبني مبني حارس بجانب كل مبني حطاب."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:27
 msgid ""
 "Naturally, trees only grow at a slow rate. To make sure you have enough "
 "logs, you have to build rangers."
-msgstr ""
+msgstr "طبيعياً، الشجر فقط ينمو بُمعدل بطئ. لكي تتأكد أن لديك ألواح شجر كافية، يجب عليك أن تبني مبني الحارس."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:33
 msgid "Expand north-east and build a quarry"
-msgstr ""
+msgstr "توسع في الشمال الشرقي وإبني محجر"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:35
 msgid "Expand north-east to the rocks"
-msgstr ""
+msgstr "توسع في الشمال الشرقي إلي الصخور"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:36
 msgid ""
@@ -105,11 +106,11 @@ msgstr ""
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:56
 msgid "water"
-msgstr ""
+msgstr "ماء"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:57
 msgid "nothing was found here"
-msgstr ""
+msgstr "لاشئ وُجد هنا"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:59
 msgid ""
@@ -119,7 +120,7 @@ msgstr ""
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:64
 msgid "Provide your miners with food"
-msgstr ""
+msgstr "زود عمال مناجمك بالطعام"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:66
 msgid "Build a hunter’s hut, a gamekeeper’s hut and a tavern"
@@ -127,7 +128,7 @@ msgstr ""
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:67
 msgid "In order to work, your miners need food."
-msgstr ""
+msgstr "لكي يعمل، عمال مناجمك بحاجة للطعام."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:68
 msgid ""
@@ -1029,14 +1030,14 @@ msgstr ""
 #: ../../data/scripting/format_scenario.lua:36
 #, lua-format
 msgid "“%s”"
-msgstr ""
+msgstr "“%s”"
 
-#: ../../data/scripting/format_scenario.lua:96
+#: ../../data/scripting/format_scenario.lua:84
 msgid "New Objective"
 msgid_plural "New Objectives"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
-msgstr[4] ""
-msgstr[5] ""
+msgstr[0] "لا أهداف جديده"
+msgstr[1] "هدف جديد"
+msgstr[2] "هدفان جديدان"
+msgstr[3] "أهداف جديدة"
+msgstr[4] "أهداف جديدة"
+msgstr[5] "أهداف جديدة"

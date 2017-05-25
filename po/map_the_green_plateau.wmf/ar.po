@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-03-24 18:58+0000\n"
-"PO-Revision-Date: 2017-03-27 13:47+0000\n"
+"POT-Creation-Date: 2017-04-13 13:07+0000\n"
+"PO-Revision-Date: 2017-04-13 16:33+0000\n"
 "Last-Translator: Omar Anwar <omaraglan91@yahoo.com>\n"
 "Language-Team: Arabic (http://www.transifex.com/widelands/widelands/language/ar/)\n"
 "MIME-Version: 1.0\n"
@@ -32,16 +32,16 @@ msgid ""
 "the other warlords has detected us so far, so we should keep quiet and build"
 " up our infrastructure. Soon we will be strong enough to raid their "
 "positions."
-msgstr "أخيراً! لقد خطونا أول خطواتنا نحو المجد!الليلة الماضية، لقد هبطنا على الجزيرة المحظورة وهزمنا بعض الحُماة الذين كَانوا يَحمُون الجُزء الشمالي الغربي من الجزيرة.أنا متأكد تمام الثقة أن لا أحد من رؤساء الحروب قد إكتشف وُجُودَنَا حتي الأن، إذاً يَجب علينا أن نبقى هادئين ونَبِنِي مباني القوات. قريباً سوف نكون أقوياء كفاية لغزو مواقعهم."
+msgstr "أخيراً! لقد خطونا أول خطواتنا نحو المجد! الليلة الماضية، هبطنا علي الجزيرة المحظورة وهزمنا بعض الحُماة الذين كَانوا يَحمُون الجُزء الشمالي الغربي من الجزيرة.أنا متأكد تمام الثقة أن لا أحد من رؤساء الحروب قد إكتشف وُجُودَنَا حتي الأن، إذاً يَجب علينا أن نبقى هادئين ونَبِنِي مباني القوات. قريباً سوف نكون أقوياء كفاية لغزو مواقعهم."
 
 #: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:26
 #: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:28
 msgid "Capture the Ancient Castle"
-msgstr "احتل القلعة القديمة"
+msgstr "إحتل القلعة القديمة"
 
 #: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:29
 msgid "Defeat Lanissa and capture the ancient castle."
-msgstr "اهزم  \"لانيسا\" و أحتل القلعة القديمة"
+msgstr "إهزم  \"لانيسا\" و إحتل القلعة القديمة"
 
 #: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:35
 #: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:37
@@ -158,4 +158,4 @@ msgstr "أخيرا! الجزيرة ملكنا بالكامل. الان يجب ع
 msgid ""
 "Congratulations! You have mastered this scenario. You may play on if you "
 "like!"
-msgstr "تهانينا! لقد أتقنت هذا السيناريو. أنت ربما تلعب إذا اردت!"
+msgstr "تهانينا! لقد أتقنت هذا السيناريو. أنت ربما تُكمل اللعب إذا اردت!"

@@ -20,6 +20,7 @@
 #ifndef WL_NETWORK_INTERNET_GAMING_H
 #define WL_NETWORK_INTERNET_GAMING_H
 
+#include <memory>
 #include <string>
 #include <vector>
 
@@ -31,6 +32,7 @@
 #include "build_info.h"
 #include "chat/chat.h"
 #include "network/internet_gaming_protocol.h"
+#include "network/netclient.h"
 #include "network/network.h"
 #include "network/network_lan_promotion.h"
 
@@ -158,14 +160,8 @@ private:
 
 	void format_and_add_chat(std::string from, std::string to, bool system, std::string msg);
 
-	/// The socket that connects us to the host
-	TCPsocket sock_;
-
-	/// Socket set used for selection
-	SDLNet_SocketSet sockset_;
-
-	/// Deserializer acts as a buffer for packets (reassembly/splitting up)
-	Deserializer deserializer_;
+	/// The connection to the metaserver
+	std::unique_ptr<NetClient> net;
 
 	/// Current state of this class
 	enum { OFFLINE, CONNECTING, LOBBY, IN_GAME, COMMUNICATION_ERROR } state_;

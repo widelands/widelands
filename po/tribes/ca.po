@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-02-19 19:34+0000\n"
-"PO-Revision-Date: 2017-02-19 23:44+0000\n"
+"POT-Creation-Date: 2017-04-06 19:07+0000\n"
+"PO-Revision-Date: 2017-04-09 11:30+0000\n"
 "Last-Translator: Juanjo\n"
 "Language-Team: Catalan (http://www.transifex.com/widelands/widelands/language/ca/)\n"
 "MIME-Version: 1.0\n"
@@ -2737,7 +2737,7 @@ msgstr "Aldea fortificada"
 #: ../../data/tribes/scripting/starting_conditions/barbarians/fortified_village.lua:13
 #: ../../data/tribes/scripting/starting_conditions/empire/fortified_village.lua:13
 msgid "Start the game with a fortified military installation"
-msgstr "Comença la partida amb una instal·lació militar fortificada"
+msgstr "Comença la partida amb una instal·lació militar fortificada."
 
 #. TRANSLATORS: This is the name of a starting condition
 #: ../../data/tribes/scripting/starting_conditions/atlanteans/headquarters.lua:11
@@ -2751,7 +2751,7 @@ msgstr "Quarter general"
 #: ../../data/tribes/scripting/starting_conditions/barbarians/headquarters.lua:13
 #: ../../data/tribes/scripting/starting_conditions/empire/headquarters.lua:13
 msgid "Start the game with your headquarters only"
-msgstr "Comença la partida només amb el quarter general"
+msgstr "Comença la partida només amb el quarter general."
 
 #. TRANSLATORS: This is the name of a starting condition
 #: ../../data/tribes/scripting/starting_conditions/atlanteans/trading_outpost.lua:11
@@ -2768,7 +2768,7 @@ msgstr "Post de mercaderies avançat"
 msgid ""
 "If this player runs low on important wares, they will be replenished for "
 "free"
-msgstr "Si aquest jugador es queda sense béns importants, n'aconseguirà uns quants de franc"
+msgstr "Si aquest jugador es queda sense béns importants, n'aconseguirà uns quants de franc."
 
 #. TRANSLATORS: This is the ship's name used in lists of units
 #: ../../data/tribes/ships/atlanteans/init.lua:55

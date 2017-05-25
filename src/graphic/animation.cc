@@ -91,7 +91,7 @@ private:
 	uint32_t current_frame(uint32_t time) const;
 
 	uint32_t frametime_;
-	Vector2i hotspot_;
+	Vector2i hotspot_ = Vector2i::zero();
 	bool hasplrclrs_;
 	std::vector<std::string> image_files_;
 	std::vector<std::string> pc_mask_image_files_;
@@ -139,7 +139,7 @@ NonPackedAnimation::NonPackedAnimation(const LuaTable& table)
 		}
 
 		for (std::string image_file : image_files_) {
-			boost::replace_all(image_file, ".png", "_pc.png");
+			boost::replace_last(image_file, ".png", "_pc.png");
 			if (g_fs->file_exists(image_file)) {
 				hasplrclrs_ = true;
 				pc_mask_image_files_.push_back(image_file);
@@ -221,14 +221,14 @@ uint32_t NonPackedAnimation::frametime() const {
 
 const Image* NonPackedAnimation::representative_image(const RGBColor* clr) const {
 	assert(!image_files_.empty());
-	const Image* image = g_gr->images().get(image_files_[0]);
-	if (hasplrclrs_ && clr) {
-		image = playercolor_image(clr, image, g_gr->images().get(pc_mask_image_files_[0]));
-	}
+	const Image* image = (hasplrclrs_ && clr) ? playercolor_image(*clr, image_files_[0]) :
+	                                            g_gr->images().get(image_files_[0]);
+
 	const int w = image->width();
 	const int h = image->height();
 	Texture* rv = new Texture(w / scale_, h / scale_);
-	rv->blit(Rectf(0, 0, w / scale_, h / scale_), *image, Rectf(0, 0, w, h), 1., BlendMode::Copy);
+	rv->blit(
+	   Rectf(0.f, 0.f, w / scale_, h / scale_), *image, Rectf(0.f, 0.f, w, h), 1., BlendMode::Copy);
 	return rv;
 }
 
@@ -333,10 +333,11 @@ const Animation& AnimationManager::get_animation(uint32_t id) const {
 }
 
 const Image* AnimationManager::get_representative_image(uint32_t id, const RGBColor* clr) {
-	if (representative_images_.count(id) != 1) {
-		representative_images_.insert(
-		   std::make_pair(id, std::unique_ptr<const Image>(
-		                         g_gr->animations().get_animation(id).representative_image(clr))));
+	const auto hash = std::make_pair(id, clr);
+	if (representative_images_.count(hash) != 1) {
+		representative_images_.insert(std::make_pair(
+		   hash, std::unique_ptr<const Image>(
+		            std::move(g_gr->animations().get_animation(id).representative_image(clr)))));
 	}
-	return representative_images_.at(id).get();
+	return representative_images_.at(hash).get();
 }

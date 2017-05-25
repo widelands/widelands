@@ -6,7 +6,7 @@
   <project_license>GPL-2.0</project_license>
   <name>Widelands</name>
   <summary>A real-time build-up strategy game</summary>
-  <summary xml:lang="ar">لعبة بناء استراتيجية فى الوقت الحقيقى</summary>
+  <summary xml:lang="ar">لعبة بناء إستراتيجية في الوقت الحقيقي</summary>
   <summary xml:lang="bg">Стратегическа игра за изграждане на цивилизация в реално време</summary>
   <summary xml:lang="ca">Un joc d'estratègia i construcció a temps real </summary>
   <summary xml:lang="cs">Real-time budovatelská strategická hra</summary>
@@ -20,6 +20,7 @@
   <summary xml:lang="hu">Egy valós idejű, építkezős stratégiai játék</summary>
   <summary xml:lang="it">Un gioco di costruzione e strategia in tempo reale</summary>
   <summary xml:lang="la">Ludus strategicae exstructionis in tempore vero</summary>
+  <summary xml:lang="ms">Permainan strategi pembinaan masa-nyata</summary>
   <summary xml:lang="nl">Een realtime opbouwend strategiespel</summary>
   <summary xml:lang="pl">Strategia czasu rzeczywistego skupiona na rozbudowie</summary>
   <summary xml:lang="pt">Um jogo de construção estratégica em tempo real</summary>
@@ -38,7 +39,7 @@
       Widelands offers a single-player mode with campaigns that tell stories of the tribes and their struggle in the Widelands universe. However, settling really starts when you unite with friends over the Internet or LAN to build up new empires together – or to crush each other in the dusts of war. Widelands also offers an artificial intelligence to challenge you.
     </p>
     <p xml:lang="ar">
-      أنت الوصي  لعشيرة صغيرة. مهمتك أن تبني مستوطنة. كل عضو من العشيرة  سوف يكون جزء لإنتاج موارد أكثر لدفع هذا النمو.
+      أنت الوصي  لعشيرة صغيرة. مهمتك أن تبني مستوطنة. كل عضو من العشيرة سوف يكون جزء لإنتاج موارد أكثر لدفع هذا النمو.
     </p>
     <p xml:lang="ar">
       "أراضي واسعة" تقدم تجربة لاعب واحد مع طور الحملات التي تحكي قصة قبيلة وصراعهم فى الكون الخاص بـ"أراضي واسعة".ومع ذلك, الاستيطان يبدأ حقا عندما تتحد مع أصدقائك من خلال الإنترنت و اللان لكى تبنى مملكه جديده معا-- او محاربة بعضهم البعض وتدمير بعضهم البعض. "أراضي واسعة" ايضا تقدم ذكاء اصطناعي يتحداك.
@@ -78,6 +79,12 @@
     </p>
     <p xml:lang="en_GB">
       Widelands offers a single-player mode with campaigns that tell stories of the tribes and their struggle in the Widelands universe. However, settling really starts when you unite with friends over the Internet or LAN to build up new empires together – or to crush each other in the dusts of war. Widelands also offers an artificial intelligence to challenge you.
+    </p>
+    <p xml:lang="en_US">
+      You are the regent of a small clan. Your task is to build an ever-growing settlement. Every member of your clan will do his or her part to produce more resources to further this growth.
+    </p>
+    <p xml:lang="en_US">
+      Widelands offers a single-player mode with campaigns that tell stories of the tribes and their struggle in the Widelands universe. Settling, However, really starts when you unite with friends over the Internet or LAN to build up new empires together – or to crush each other in the dusts of war. Widelands also offers an artificial intelligence to challenge you.
     </p>
     <p xml:lang="es">
       Eres el regente de un pequeño clan. Tu tarea es construir un asentamiento cada vez mayor. Todos los miembros de tu clan va a hacer su parte para producir más recursos para promover este crecimiento.
@@ -126,6 +133,12 @@
     </p>
     <p xml:lang="la">
       Widelands offers a single-player mode with campaigns that tell stories of the tribes and their struggle in the Widelands universe. However, settling really starts when you unite with friends over the Internet or LAN to build up new empires together – or to crush each other in the dusts of war. Widelands also offers an artificial intelligence to challenge you.
+    </p>
+    <p xml:lang="ms">
+      Anda merupakan pemangku raja di sebuah puak kecil. Anda ditugaskan untuk membangunkan penempatan yang sedang membesar. Setiap ahli puak anda akan berperanan membantu dalam pembangunan puak ini.
+    </p>
+    <p xml:lang="ms">
+      Widelands menawarkan mod pemain-tunggal dengan kempen yang menceritakan kisah sebuah puak dan perjuangan mereka di dunia Widelands. Peredaan sebenarnya bermula apabila anda bersatu dengan rakan anda di Internet atau LAN untuk bersama-sama membina sebuah empayar - atau musnahkan di antara satu sama lain. Widelands juga menawarkan kepintaran buatan yang dapat memberi cabaran kepada anda.
     </p>
     <p xml:lang="nl">
       Je bent de leider van een kleine stam.  Het is jouw taak een bloeiende nederzetting uit te bouwen.  Elk stamlid zal daarbij haar of zijn steentje bijdragen door het produceren van meer grondstoffen.
