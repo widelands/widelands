@@ -115,8 +115,9 @@ struct BuildingHints {
 		return trainingsite_type_;
 	}
 
-	void set_trainingsites_max_percent(int percent);
-	int trainingsites_max_percent() const;
+	void set_trainingsites_max_percent(uint8_t percent);
+
+	uint8_t trainingsites_max_percent() const;
 
 private:
 	std::string renews_map_resource_;

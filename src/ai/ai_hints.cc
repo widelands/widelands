@@ -47,7 +47,7 @@ BuildingHints::BuildingHints(std::unique_ptr<LuaTable> table)
      trainingsite_type_(TrainingSiteType::kNoTS),
      trainingsites_max_percent_(table->has_key("trainingsites_max_percent") ?
                                    table->get_int("trainingsites_max_percent") :
-                                   -1) {
+                                   0) {
 
 	if (table->has_key("trainingsite_type")) {
 		if (table->get_string("trainingsite_type") == "basic") {
@@ -58,10 +58,10 @@ BuildingHints::BuildingHints(std::unique_ptr<LuaTable> table)
 	}
 }
 
-void BuildingHints::set_trainingsites_max_percent(int percent) {
+void BuildingHints::set_trainingsites_max_percent(uint8_t percent) {
 	trainingsites_max_percent_ = percent;
 }
 
-int BuildingHints::trainingsites_max_percent() const {
+uint8_t BuildingHints::trainingsites_max_percent() const {
 	return trainingsites_max_percent_;
 }
