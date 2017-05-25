@@ -23,7 +23,6 @@ wl_library(graphic_text_test_render
   DEPENDS
     base_i18n
     graphic_image_cache
-    graphic_surface
     graphic_text
     io_filesystem
 )

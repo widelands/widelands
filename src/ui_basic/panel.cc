@@ -1060,13 +1060,15 @@ bool Panel::draw_tooltip(RenderTarget& dst, const std::string& text) {
 		text_to_render = as_tooltip(text);
 	}
 
-	static const uint32_t TIP_WIDTH_MAX = 360;
-	const Image* rendered_text = g_fh1->render(text_to_render, TIP_WIDTH_MAX);
-	if (!rendered_text) {
+	constexpr uint32_t kTipWidthMax = 360;
+	std::shared_ptr<const UI::RenderedText> rendered_text =
+	   g_fh1->render(text_to_render, kTipWidthMax);
+	if (rendered_text->rects.empty()) {
 		return false;
 	}
-	uint16_t tip_width = rendered_text->width() + 4;
-	uint16_t tip_height = rendered_text->height() + 4;
+
+	const uint16_t tip_width = rendered_text->width() + 4;
+	const uint16_t tip_height = rendered_text->height() + 4;
 
 	Recti r(WLApplication::get()->get_mouse_position() + Vector2i(2, 32), tip_width, tip_height);
 	const Vector2i tooltip_bottom_right = r.opposite_of_origin();
@@ -1078,7 +1080,7 @@ bool Panel::draw_tooltip(RenderTarget& dst, const std::string& text) {
 
 	dst.fill_rect(r, RGBColor(63, 52, 34));
 	dst.draw_rect(r, RGBColor(0, 0, 0));
-	dst.blit(r.origin() + Vector2i(2, 2), rendered_text);
+	rendered_text->draw(dst, r.origin() + Vector2i(2, 2));
 	return true;
 }
 }
