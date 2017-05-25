@@ -194,7 +194,6 @@ const BuildingHints& BuildingDescr::hints() const {
 }
 
 void BuildingDescr::set_hints_trainingsites_max_percent(int percent) {
-	log("NOCOM setting training sites max percent for %s to %d\n", name().c_str(), percent);
 	hints_.set_trainingsites_max_percent(percent);
 }
 
