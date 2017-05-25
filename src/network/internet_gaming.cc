@@ -19,6 +19,8 @@
 
 #include "network/internet_gaming.h"
 
+#include <memory>
+
 #include <boost/format.hpp>
 #include <boost/lexical_cast.hpp>
 
@@ -97,8 +99,11 @@ void InternetGaming::initialize_connection() {
 	log("InternetGaming: Connecting to the metaserver.\n");
 	NetAddress addr;
 	net.reset();
-	if (NetAddress::resolve_to_v4(&addr, meta_, port_))
+	if (NetAddress::resolve_to_v6(&addr, meta_, port_)) {
 		net = NetClient::connect(addr);
+	} else if ((!net || !net->is_connected()) && NetAddress::resolve_to_v4(&addr, meta_, port_)) {
+		net = NetClient::connect(addr);
+	}
 	if (!net || !net->is_connected())
 		throw WLWarning(_("Could not establish connection to host"),
 		                _("Widelands could not establish a connection to the given address.\n"
@@ -122,6 +127,16 @@ bool InternetGaming::login(const std::string& nick,
 	meta_ = meta;
 	port_ = port;
 
+	// If we are not connecting to a registered account, create a random value
+	// to send as password. Used so the metaserver can match our IPv4 and IPv6 connections
+	if (!reg_) {
+		// Admittedly this is a pretty stupid generator. But it should be fine for us
+        static const char random_chars[] = "0123456789ABCDEF";
+		pwd_ = "";
+		while (pwd_.length() < 8)
+			pwd_.push_back(random_chars[rand() % (sizeof(random_chars) - 1)]);
+	}
+
 	initialize_connection();
 
 	// If we are here, a connection was established and we can send our login package through the
@@ -132,9 +147,8 @@ bool InternetGaming::login(const std::string& nick,
 	s.string(boost::lexical_cast<std::string>(INTERNET_GAMING_PROTOCOL_VERSION));
 	s.string(nick);
 	s.string(build_id());
-	s.string(bool2str(reg));
-	if (reg)
-		s.string(pwd);
+	s.string(bool2str(reg_));
+	s.string(pwd_);
 	net->send(s);
 
 	// Now let's see, whether the metaserver is answering
@@ -149,6 +163,9 @@ bool InternetGaming::login(const std::string& nick,
 				format_and_add_chat(
 				   "", "", true, _("For hosting a game, please take a look at the notes at:"));
 				format_and_add_chat("", "", true, "http://wl.widelands.org/wiki/InternetGaming");
+
+				// Try to establish a second connection to tell the metaserver about our IPv4 address
+				create_second_connection();
 				return true;
 			} else if (error())
 				return false;
@@ -176,8 +193,7 @@ bool InternetGaming::relogin() {
 	s.string(clientname_);
 	s.string(build_id());
 	s.string(bool2str(reg_));
-	if (reg_)
-		s.string(pwd_);
+	s.string(pwd_);
 	net->send(s);
 
 	// Now let's see, whether the metaserver is answering
@@ -199,6 +215,8 @@ bool InternetGaming::relogin() {
 		log("InternetGaming: No answer from metaserver!\n");
 		return false;
 	}
+
+	create_second_connection();
 
 	// Client is reconnected, so let's try resend the timeouted command.
 	if (waitcmd_ == IGPCMD_GAME_CONNECT)
@@ -330,6 +348,46 @@ void InternetGaming::handle_metaserver_communication() {
 			set_error();
 		}
 	}
+}
+
+void InternetGaming::create_second_connection() {
+	// TODO(Notabilis): This method could probably be executed by a separate thread. Do we want to do so?
+	// Of course, we would have to be carefully that the main thread might call disconnect while doing so
+	NetAddress addr;
+	net->get_remote_address(&addr);
+	if (!addr.is_ipv6()) {
+		// Primary connection already is IPv4, abort
+		return;
+	}
+
+	if (!NetAddress::resolve_to_v4(&addr, meta_, port_)) {
+		// Could not get the IPv4 address of the metaserver? Strange :-/
+		return;
+	}
+
+	std::unique_ptr<NetClient> tmpNet = NetClient::connect(addr);
+
+	if (!tmpNet || !tmpNet->is_connected()) {
+		// Connecting by IPv4 doesn't work? Well, nothing to do then
+		return;
+	}
+
+	// Okay, we have a connection. Send the login message and terminate the connection
+	SendPacket s;
+	s.string(IGPCMD_RELOGIN);
+	s.string(boost::lexical_cast<std::string>(INTERNET_GAMING_PROTOCOL_VERSION));
+	s.string(clientname_);
+	s.string(build_id());
+	s.string(bool2str(reg_));
+	s.string(pwd_);
+	tmpNet->send(s);
+
+	s.reset();
+	s.string(IGPCMD_DISCONNECT);
+	tmpNet->send(s);
+
+	// Close the connection
+	tmpNet->close();
 }
 
 /// Handle one packet received from the metaserver.

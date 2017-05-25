@@ -151,6 +151,20 @@ struct InternetGaming : public ChatProvider {
 private:
 	InternetGaming();
 
+	/**
+	 * Temporarily creates a second connection to the metaserver.
+	 * If the primary connection is an IPv6 connection, we also try
+	 * an IPv4 connection to tell the metaserver our IP.
+	 * This way, when we host a game later on, the metaserver
+	 * knows how to reach us for both protocol versions.
+	 * The established connection does a login, then the connection is
+	 * immediately closed.
+	 *
+	 * If the primary connection already is IPv4, this method
+	 * does nothing.
+	 */
+	void create_second_connection();
+
 	void handle_packet(RecvPacket& packet);
 	void handle_failed_read();
 

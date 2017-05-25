@@ -49,6 +49,14 @@ public:
 	~NetClient();
 
 	/**
+	 * Returns the ip and port of the remote host we are connected to.
+	 * \param addr A pointer to a NetAddress structure to write the address to.
+	 * \return \c True when \c addr has successfully been written to. \c False otherwise,
+	 *   should only happen when the client is not connected.
+	 */
+	bool get_remote_address(NetAddress *addr) const;
+
+	/**
 	 * Returns whether the client is connected.
 	 * \return \c true if the connection is open, \c false otherwise.
 	 */

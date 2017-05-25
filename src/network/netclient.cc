@@ -20,6 +20,15 @@ NetClient::~NetClient() {
 		close();
 }
 
+bool NetClient::get_remote_address(NetAddress *addr) const {
+	if (!is_connected())
+		return false;
+	boost::asio::ip::tcp::endpoint remote = socket_.remote_endpoint();
+	addr->ip = remote.address().to_string();
+	addr->port = remote.port();
+	return true;
+}
+
 bool NetClient::is_connected() const {
 	return socket_.is_open();
 }
