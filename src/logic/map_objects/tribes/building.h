@@ -156,7 +156,7 @@ public:
 
 	WorkareaInfo workarea_info_;
 
-	virtual int32_t suitability(const Map&, const FCoords&) const;
+	virtual bool suitability(const Map&, const FCoords&) const;
 	const BuildingHints& hints() const;
 	void set_hints_trainingsites_max_percent(int percent);
 
