@@ -80,15 +80,7 @@ EditBox::EditBox(Panel* const parent,
                  int margin_y,
                  const Image* background,
                  int font_size)
-   : Panel(parent,
-           x,
-           y,
-           w,
-           h > 0 ? h :
-                   UI::g_fh1->render(as_editorfont(UI::g_fh1->fontset()->representative_character(),
-                                                   font_size))
-                         ->height() +
-                      2 * margin_y),
+   : Panel(parent, x, y, w, h > 0 ? h : text_height(font_size) + 2 * margin_y),
      m_(new EditBoxImpl),
      history_active_(false),
      history_position_(-1) {
@@ -380,15 +372,11 @@ void EditBox::draw(RenderTarget& dst) {
 
 	const int max_width = get_w() - 2 * kMarginX;
 
-	const Image* entry_text_im = UI::g_fh1->render(as_editorfont(m_->text, m_->fontsize));
+	std::shared_ptr<const UI::RenderedText> rendered_text =
+	   UI::g_fh1->render(as_editorfont(m_->text, m_->fontsize));
 
-	const int linewidth = entry_text_im->width();
-	const int lineheight =
-	   m_->text.empty() ?
-	      UI::g_fh1->render(
-	                  as_editorfont(UI::g_fh1->fontset()->representative_character(), m_->fontsize))
-	         ->height() :
-	      entry_text_im->height();
+	const int linewidth = rendered_text->width();
+	const int lineheight = m_->text.empty() ? text_height(m_->fontsize) : rendered_text->height();
 
 	Vector2i point(kMarginX, get_h() / 2);
 	if (m_->align == UI::Align::kRight) {
@@ -405,18 +393,18 @@ void EditBox::draw(RenderTarget& dst) {
 		// We want this always on, e.g. for mixed language savegame filenames
 		if (i18n::has_rtl_character(m_->text.c_str(), 100)) {  // Restrict check for efficiency
 			// TODO(GunChleoc): Arabic: Fix scrolloffset
-			dst.blitrect(point, entry_text_im, Recti(linewidth - max_width, 0, linewidth, lineheight));
+			rendered_text->draw(dst, point, Recti(linewidth - max_width, 0, linewidth, lineheight));
 		} else {
 			if (m_->align == UI::Align::kRight) {
 				// TODO(GunChleoc): Arabic: Fix scrolloffset
-				dst.blitrect(point, entry_text_im,
-				             Recti(point.x + m_->scrolloffset + kMarginX, 0, max_width, lineheight));
+				rendered_text->draw(
+				   dst, point, Recti(point.x + m_->scrolloffset + kMarginX, 0, max_width, lineheight));
 			} else {
-				dst.blitrect(point, entry_text_im, Recti(-m_->scrolloffset, 0, max_width, lineheight));
+				rendered_text->draw(dst, point, Recti(-m_->scrolloffset, 0, max_width, lineheight));
 			}
 		}
 	} else {
-		dst.blitrect(point, entry_text_im, Recti(0, 0, max_width, lineheight));
+		rendered_text->draw(dst, point, Recti(0, 0, max_width, lineheight));
 	}
 
 	if (has_focus()) {
@@ -425,7 +413,7 @@ void EditBox::draw(RenderTarget& dst) {
 		// TODO(GunChleoc): Arabic: Fix cursor position for BIDI text.
 		int caret_x = text_width(line_to_caret, m_->fontsize);
 
-		const uint16_t fontheight = text_height(m_->text, m_->fontsize);
+		const uint16_t fontheight = text_height(m_->fontsize);
 
 		const Image* caret_image = g_gr->images().get("images/ui_basic/caret.png");
 		Vector2i caretpt = Vector2i::zero();
