@@ -55,7 +55,7 @@ bool NetClient::try_receive(RecvPacket* packet) {
 
 	if (ec && ec != boost::asio::error::would_block) {
 		// Connection closed or some error, close the socket
-		log("[NetClient] Error when trying to receive some data.\n");
+		log("[NetClient] Error when trying to receive some data: %s.\n", ec.message().c_str());
 		close();
 		return false;
 	}
@@ -75,7 +75,7 @@ void NetClient::send(const SendPacket& packet) {
 	assert(ec != boost::asio::error::would_block);
 	assert(written == packet.get_size() || ec);
 	if (ec) {
-		log("[NetClient] Error when trying to send some data.\n");
+		log("[NetClient] Error when trying to send some data: %s.\n", ec.message().c_str());
 		close();
 	}
 }

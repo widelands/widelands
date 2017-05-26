@@ -135,13 +135,15 @@ bool LanBase::is_available() {
 	boost::system::error_code ec;
 	bool available_v4 = (socket_v4.is_open() && socket_v4.available(ec) > 0);
 	if (ec) {
-		log("[LAN] Error when checking whether data is available on IPv4 socket, closing it.\n");
+		log("[LAN] Error when checking whether data is available on IPv4 socket, closing it: %s.\n",
+			ec.message().c_str());
 		close_socket(&socket_v4);
 		available_v4 = false;
 	}
 	bool available_v6 = (socket_v6.is_open() && socket_v6.available(ec) > 0);
 	if (ec) {
-		log("[LAN] Error when checking whether data is available on IPv6 socket, closing it.\n");
+		log("[LAN] Error when checking whether data is available on IPv6 socket, closing it: %s.\n",
+			ec.message().c_str());
 		close_socket(&socket_v6);
 		available_v4 = false;
 	}
@@ -165,9 +167,9 @@ ssize_t LanBase::receive(void* const buf, size_t const len, NetAddress *addr) {
 				assert(recv_len <= len);
 				return recv_len;
 			}
-		} catch (const boost::system::system_error&) {
+		} catch (const boost::system::system_error& ec) {
 			// Some network error. Close the socket
-			log("[LAN] Error when receiving data on IPv4 socket, closing it.\n");
+			log("[LAN] Error when receiving data on IPv4 socket, closing it: %s.\n", ec.what());
 			close_socket(&socket_v4);
 		}
 	}
@@ -180,8 +182,8 @@ ssize_t LanBase::receive(void* const buf, size_t const len, NetAddress *addr) {
 				assert(recv_len <= len);
 				return recv_len;
 			}
-		} catch (const boost::system::system_error&) {
-			log("[LAN] Error when receiving data on IPv6 socket, closing it.\n");
+		} catch (const boost::system::system_error& ec) {
+			log("[LAN] Error when receiving data on IPv6 socket, closing it: %s.\n", ec.what());
 			close_socket(&socket_v6);
 		}
 	}
@@ -214,8 +216,8 @@ bool LanBase::send(void const* const buf, size_t const len, const NetAddress& ad
 	}
 	socket->send_to(boost::asio::buffer(buf, len), destination, 0, ec);
 	if (ec) {
-		log("[LAN] Error when trying to send something over IPv%d, closing socket.\n",
-			get_ip_version(address));
+		log("[LAN] Error when trying to send something over IPv%d, closing socket: %s.\n",
+			get_ip_version(address), ec.message().c_str());
 		close_socket(socket);
 		return false;
 	}
@@ -230,7 +232,8 @@ bool LanBase::broadcast(void const* const buf, size_t const len, uint16_t const 
 			boost::asio::ip::udp::endpoint destination(boost::asio::ip::address::from_string(address), port);
 			socket_v4.send_to(boost::asio::buffer(buf, len), destination, 0, ec);
 			if (ec) {
-				log("[LAN] Error when broadcasting on IPv4 socket to %s, closing it.\n", address.c_str());
+				log("[LAN] Error when broadcasting on IPv4 socket to %s, closing it: %s.\n",
+					address.c_str(), ec.message().c_str());
 				close_socket(&socket_v4);
 				error_v4 = true;
 				break;
@@ -243,7 +246,7 @@ bool LanBase::broadcast(void const* const buf, size_t const len, uint16_t const 
 		boost::asio::ip::udp::endpoint destination(addr, port);
 		socket_v6.send_to(boost::asio::buffer(buf, len), destination, 0, ec);
 		if (ec) {
-			log("[LAN] Error when broadcasting on IPv6 socket, closing it.\n");
+			log("[LAN] Error when broadcasting on IPv6 socket, closing it: %s.\n", ec.message().c_str());
 			close_socket(&socket_v6);
 			if (error_v4) {
 				return false;

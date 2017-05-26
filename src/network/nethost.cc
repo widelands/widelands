@@ -92,7 +92,8 @@ bool NetHost::try_accept(ConnectionId* new_id) {
 		if (ec == boost::asio::error::would_block) {
 			// No client wants to connect
 		} else if (ec) {
-			log("[NetHost] No longer listening for IPv6 connections due to error: %s.\n", ec.message().c_str());
+			log("[NetHost] No longer listening for IPv6 connections due to error: %s.\n",
+				ec.message().c_str());
 			acceptor_v6_.close(ec);
 		} else {
 			log("[NetHost]: Accepting IPv6 connection from %s.\n",
@@ -134,7 +135,8 @@ bool NetHost::try_receive(const ConnectionId id, RecvPacket* packet) {
 			// close() will remove the client from the map so we have to increment the iterator first
 			ConnectionId id_to_remove = it->first;
 			++it;
-			log("[NetHost] Error when receiving from a client, closing connection.\n");
+			log("[NetHost] Error when receiving from a client, closing connection: %s.\n",
+				ec.message().c_str());
 			close(id_to_remove);
 			continue;
 		}
@@ -163,7 +165,7 @@ void NetHost::send(const ConnectionId id, const SendPacket& packet) {
 		assert(ec != boost::asio::error::would_block);
 		assert(written == packet.get_size() || ec);
 		if (ec) {
-			log("[NetHost] Error when sending to a client, closing connection.\n");
+			log("[NetHost] Error when sending to a client, closing connection: %s.\n", ec.message().c_str());
 			close(id);
 		}
 	}
