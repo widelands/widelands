@@ -217,10 +217,13 @@ void FullscreenMenuScenarioSelect::fill_table() {
 			scenario_data.path = s->get_string("path");
 			scenarios_data_.push_back(scenario_data);
 
-			UI::Table<uintptr_t>::EntryRecord& tableEntry = table_.add(i);
-			tableEntry.set_string(0, (boost::format("%u") % scenario_data.index).str());
-			tableEntry.set_picture(
+			UI::Table<uintptr_t>::EntryRecord& te = table_.add(i);
+			te.set_string(0, (boost::format("%u") % scenario_data.index).str());
+			te.set_picture(
 			   1, g_gr->images().get("images/ui_basic/ls_wlmap.png"), scenario_data.name);
+			if (scenario_data.path == "campaigns/dummy.wmf") {
+				te.set_color(UI_FONT_CLR_DISABLED);
+			}
 		}
 
 		// Increase counter & mapsection

@@ -295,7 +295,7 @@ void Table<void*>::draw(RenderTarget& dst) {
 				continue;
 			}
 			std::shared_ptr<const UI::RenderedText> rendered_text =
-			   UI::g_fh1->render(as_uifont(richtext_escape(entry_string)));
+			   UI::g_fh1->render(as_uifont(richtext_escape(entry_string), UI_FONT_SIZE_SMALL, er.get_color()));
 
 			// Fix text alignment for BiDi languages if the entry contains an RTL character. We want
 			// this always on, e.g. for mixed language savegame filenames.
@@ -667,7 +667,7 @@ bool Table<void*>::default_compare_string(uint32_t column, uint32_t a, uint32_t 
 	return ea.get_string(column) < eb.get_string(column);
 }
 
-Table<void*>::EntryRecord::EntryRecord(void* const e) : entry_(e) {
+Table<void*>::EntryRecord::EntryRecord(void* const e) : entry_(e), clr(UI_FONT_CLR_FG) {
 }
 
 void Table<void*>::EntryRecord::set_picture(uint8_t const col,
