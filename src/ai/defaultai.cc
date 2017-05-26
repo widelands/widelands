@@ -4261,7 +4261,7 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 	BasicEconomyBuildingStatus site_needed_for_economy = BasicEconomyBuildingStatus::kNeutral;
 	if (gametime > 2 * 60 * 1000 && gametime < 120 * 60 * 1000 && !basic_economy_established){
 		if (remaining_basic_buildings.count(bo.id)){
-			if ((bo.total_count() > 0 && !bo.is(BuildingAttribute::kSaw)) || bo.total_count() > 1) { // exemption for sawmill
+			if (bo.total_count() > 0) { // exemption for sawmill
 				site_needed_for_economy = BasicEconomyBuildingStatus::kDiscouraged;
 				//printf ("%s is critical but is discouraged\n",bo.name);
 				
