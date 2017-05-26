@@ -239,9 +239,11 @@ bool LanBase::broadcast(void const* const buf, size_t const len, uint16_t const 
 				return false;
 			}
 		}
+		// At least one of them succeeded
+		return true;
 	}
-	// At least one succeeded
-	return true;
+	// IPv6 did not run, return whether IPv4 succeeded
+	return !error_v4;
 }
 
 void LanBase::start_socket(boost::asio::ip::udp::socket *socket, boost::asio::ip::udp version, uint16_t port) {
