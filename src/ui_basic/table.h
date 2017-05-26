@@ -82,7 +82,7 @@ public:
 	void sort(uint32_t lower_bound = 0, uint32_t upper_bound = std::numeric_limits<uint32_t>::max());
 	void remove(uint32_t);
 
-	EntryRecord& add(void* const entry, const bool select_this = false);
+	EntryRecord& add(void* const entry);
 
 	uint32_t size() const;
 	bool empty() const;
@@ -204,7 +204,7 @@ public:
 	void sort(uint32_t lower_bound = 0, uint32_t upper_bound = std::numeric_limits<uint32_t>::max());
 	void remove(uint32_t);
 
-	EntryRecord& add(void* entry = nullptr, bool select = false);
+	EntryRecord& add(void* entry = nullptr);
 
 	uint32_t size() const {
 		return entry_records_.size();
@@ -273,6 +273,8 @@ public:
 	/// If entries == 0, the current entries are used.
 	void fit_height(uint32_t entries = 0);
 
+	void scroll_to_top();
+
 	// Drawing and event handling
 	void draw(RenderTarget&) override;
 	bool handle_mousepress(uint8_t btn, int32_t x, int32_t y) override;
@@ -333,8 +335,8 @@ public:
 	   : Base(parent, x, y, w, h, button_background, rowtype) {
 	}
 
-	EntryRecord& add(Entry const* const entry = 0, bool const select_this = false) {
-		return Base::add(const_cast<Entry*>(entry), select_this);
+	EntryRecord& add(Entry const* const entry = 0) {
+		return Base::add(const_cast<Entry*>(entry));
 	}
 
 	Entry const* operator[](uint32_t const i) const {
@@ -363,8 +365,8 @@ public:
 	   : Base(parent, x, y, w, h, button_background, rowtype) {
 	}
 
-	EntryRecord& add(Entry* const entry = 0, bool const select_this = false) {
-		return Base::add(entry, select_this);
+	EntryRecord& add(Entry* const entry = 0) {
+		return Base::add(entry);
 	}
 
 	Entry* operator[](uint32_t const i) const {
@@ -393,8 +395,8 @@ public:
 	   : Base(parent, x, y, w, h, button_background, rowtype) {
 	}
 
-	EntryRecord& add(const Entry& entry, bool const select_this = false) {
-		return Base::add(&const_cast<Entry&>(entry), select_this);
+	EntryRecord& add(const Entry& entry) {
+		return Base::add(&const_cast<Entry&>(entry));
 	}
 
 	const Entry& operator[](uint32_t const i) const {
@@ -427,8 +429,8 @@ public:
 	   : Base(parent, x, y, w, h, button_background, rowtype) {
 	}
 
-	EntryRecord& add(Entry& entry, bool const select_this = false) {
-		return Base::add(&entry, select_this);
+	EntryRecord& add(Entry& entry) {
+		return Base::add(&entry);
 	}
 
 	Entry& operator[](uint32_t const i) const {
@@ -463,8 +465,8 @@ public:
 	   : Base(parent, x, y, w, h, button_background, rowtype) {
 	}
 
-	EntryRecord& add(uintptr_t const entry, bool const select_this = false) {
-		return Base::add(reinterpret_cast<void*>(entry), select_this);
+	EntryRecord& add(uintptr_t const entry) {
+		return Base::add(reinterpret_cast<void*>(entry));
 	}
 
 	uintptr_t operator[](uint32_t const i) const {

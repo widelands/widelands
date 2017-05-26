@@ -508,15 +508,10 @@ uint32_t Table<void*>::toggle_entry(uint32_t row) {
 /**
  * Add a new entry to the table.
 */
-Table<void*>::EntryRecord& Table<void*>::add(void* const entry, const bool do_select) {
+Table<void*>::EntryRecord& Table<void*>::add(void* const entry) {
 	EntryRecord& result = *new EntryRecord(entry);
 	entry_records_.push_back(&result);
 	result.data_.resize(columns_.size());
-
-	if (do_select) {
-		select(entry_records_.size() - 1);
-		scrollbar_->set_scrollpos(std::numeric_limits<int32_t>::max());
-	}
 	layout();
 	return result;
 }
@@ -526,6 +521,10 @@ Table<void*>::EntryRecord& Table<void*>::add(void* const entry, const bool do_se
 */
 void Table<void*>::set_scrollpos(int32_t const i) {
 	scrollpos_ = i;
+}
+
+void Table<void*>::scroll_to_top() {
+	scrollbar_->set_scrollpos(0);
 }
 
 /**
