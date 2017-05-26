@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-02-19 19:34+0000\n"
-"PO-Revision-Date: 2017-02-19 23:42+0000\n"
+"POT-Creation-Date: 2017-05-19 07:45+0000\n"
+"PO-Revision-Date: 2017-05-20 20:42+0000\n"
 "Last-Translator: Juanjo\n"
 "Language-Team: Catalan (http://www.transifex.com/widelands/widelands/language/ca/)\n"
 "MIME-Version: 1.0\n"
@@ -146,7 +146,7 @@ msgstr "Construïu una infraestructura d'entrenament"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:96
 msgid "Build a barracks to train some basic soldiers."
-msgstr "Construïu uns barracons per entrenar soldats."
+msgstr "Construïu un quarter per entrenar soldats."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:97
 msgid "Build a battle arena and a training camp to the west of the mountains."
@@ -195,7 +195,7 @@ msgstr "Construïu llocs d'entrenaments"
 msgid ""
 "Build a barracks, a battle arena and a training camp to the west of the "
 "mountains."
-msgstr "Construïu uns barracons, una palestra d'entrenament i un camp d'entrenament a l'oest de les muntanyes."
+msgstr "Construïu un quarter, una palestra d'entrenament i un camp d'entrenament a l'oest de les muntanyes."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:118
 msgid ""
@@ -203,7 +203,7 @@ msgid ""
 " battle arena are used for training soldiers in their different attributes. "
 "These attributes are important in fights and the better a soldier is, the "
 "higher is the chance to win a fight."
-msgstr "Als barracons podeu crear soldats. Després, als llocs d'entrenament (edificis com el camp d'entrenament o la palestra) els soldats milloraran les seves característiques. Aquestes característiques són importants durant la lluita i com millor sigui un soldat major és la probabilitat de guanyar una lluita."
+msgstr "Al quarter podeu crear soldats. Després, als llocs d'entrenament (edificis com el camp d'entrenament o la palestra) els soldats milloraran les seves característiques. Aquestes característiques són importants durant la lluita i com millor sigui un soldat major és la probabilitat de guanyar una lluita."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:120
 msgid "The attributes are: health, attack, defense and evade."
