@@ -49,8 +49,8 @@ const Image* playercolor_image(const RGBColor& clr, const std::string& image_fil
 	const int w = image->width();
 	const int h = image->height();
 	Texture* pc_image = new Texture(w, h);
-	pc_image->fill_rect(Rectf(0, 0, w, h), RGBAColor(0, 0, 0, 0));
-	pc_image->blit_blended(Rectf(0, 0, w, h), *image, *color_mask, Rectf(0, 0, w, h), clr);
+	pc_image->fill_rect(Rectf(0.f, 0.f, w, h), RGBAColor(0, 0, 0, 0));
+	pc_image->blit_blended(Rectf(0.f, 0.f, w, h), *image, *color_mask, Rectf(0.f, 0.f, w, h), clr);
 	g_gr->images().insert(hash, std::unique_ptr<const Texture>(std::move(pc_image)));
 	assert(g_gr->images().has(hash));
 	return g_gr->images().get(hash);

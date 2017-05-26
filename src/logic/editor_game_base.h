@@ -78,7 +78,7 @@ struct NoteFieldPossession {
 class EditorGameBase {
 public:
 	friend class InteractiveBase;
-	friend struct FullscreenMenuLaunchGame;
+	friend class FullscreenMenuLaunchGame;
 	friend struct GameClassPacket;
 
 	EditorGameBase(LuaInterface* lua);

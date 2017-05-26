@@ -272,14 +272,13 @@ void Window::draw_border(RenderTarget& dst) {
 	// draw the title if we have one
 	if (!title_.empty()) {
 		// The title shouldn't be richtext, but we escape it just to make sure.
-		const Image* text =
+		std::shared_ptr<const UI::RenderedText> text =
 		   autofit_ui_text(richtext_escape(title_), get_inner_w(), UI_FONT_CLR_FG, 13);
 
 		// Blit on pixel boundary (not float), so that the text is blitted pixel perfect.
 		Vector2i pos(get_lborder() + get_inner_w() / 2, TP_B_PIXMAP_THICKNESS / 2);
-		UI::correct_for_align(UI::Align::kCenter, text->width(), &pos);
 		UI::center_vertically(text->height(), &pos);
-		dst.blit(pos, text, BlendMode::UseAlpha);
+		text->draw(dst, pos, UI::Align::kCenter);
 	}
 
 	if (!is_minimal_) {
