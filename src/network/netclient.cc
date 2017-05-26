@@ -28,6 +28,13 @@ void NetClient::close() {
 	if (!is_connected())
 		return;
 	boost::system::error_code ec;
+	boost::asio::ip::tcp::endpoint remote = socket_.remote_endpoint(ec);
+	if (!ec) {
+		log("[NetClient] Closing network socket connected to %s:%i.\n",
+			remote.address().to_string().c_str(), remote.port());
+	} else {
+		log("[NetClient] Closing network socket.\n");
+	}
 	socket_.shutdown(boost::asio::ip::tcp::socket::shutdown_both, ec);
 	socket_.close(ec);
 }
@@ -48,6 +55,7 @@ bool NetClient::try_receive(RecvPacket* packet) {
 
 	if (ec && ec != boost::asio::error::would_block) {
 		// Connection closed or some error, close the socket
+		log("[NetClient] Error when trying to receive some data.\n");
 		close();
 		return false;
 	}
@@ -67,6 +75,7 @@ void NetClient::send(const SendPacket& packet) {
 	assert(ec != boost::asio::error::would_block);
 	assert(written == packet.get_size() || ec);
 	if (ec) {
+		log("[NetClient] Error when trying to send some data.\n");
 		close();
 	}
 }
@@ -79,12 +88,12 @@ NetClient::NetClient(const NetAddress& host)
 	assert(!ec);
 	const boost::asio::ip::tcp::endpoint destination(address, host.port);
 
-	log("[Client]: Trying to connect to %s:%u ... ", host.ip.c_str(), host.port);
+	log("[NetClient]: Trying to connect to %s:%u ... ", host.ip.c_str(), host.port);
 	socket_.connect(destination, ec);
 	if (!ec && is_connected()) {
-		log("success\n");
+		log("success.\n");
 		socket_.non_blocking(true);
 	} else {
-		log("failed\n");
+		log("failed.\n");
 	}
 }

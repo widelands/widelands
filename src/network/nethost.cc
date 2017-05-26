@@ -37,11 +37,11 @@ bool NetHost::is_connected(const ConnectionId id) const {
 void NetHost::stop_listening() {
 	boost::system::error_code ec;
 	if (acceptor_v4_.is_open()) {
-		log("[NetHost]: Closing a listening IPv4 socket\n");
+		log("[NetHost]: Closing a listening IPv4 socket.\n");
 		acceptor_v4_.close(ec);
 	}
 	if (acceptor_v6_.is_open()) {
-		log("[NetHost]: Closing a listening IPv6 socket\n");
+		log("[NetHost]: Closing a listening IPv6 socket.\n");
 		acceptor_v6_.close(ec);
 	}
 	// Ignore errors
@@ -54,6 +54,13 @@ void NetHost::close(const ConnectionId id) {
 		return;
 	}
 	boost::system::error_code ec;
+	boost::asio::ip::tcp::endpoint remote = iter_client->second.socket.remote_endpoint(ec);
+	if (!ec) {
+		log("[NetHost] Closing network connection to %s:%i.\n",
+			remote.address().to_string().c_str(), remote.port());
+	} else {
+		log("[NetHost] Closing network connection to some client.\n");
+	}
 	iter_client->second.socket.shutdown(boost::asio::ip::tcp::socket::shutdown_both, ec);
 	iter_client->second.socket.close(ec);
 	clients_.erase(iter_client);
@@ -71,9 +78,11 @@ bool NetHost::try_accept(ConnectionId* new_id) {
 			// New socket don't need to be closed since it isn't open yet
 		} else if (ec) {
 			// Some other error, close the acceptor
+			log("[NetHost] No longer listening for IPv4 connections due to error: %s.\n",
+				ec.message().c_str());
 			acceptor_v4_.close(ec);
 		} else {
-			log("[NetHost]: Accepting IPv4 connection from %s\n",
+			log("[NetHost]: Accepting IPv4 connection from %s.\n",
 				socket.remote_endpoint().address().to_string().c_str());
 		}
 	}
@@ -81,11 +90,12 @@ bool NetHost::try_accept(ConnectionId* new_id) {
 		// IPv4 did not get a connection
 		acceptor_v6_.accept(socket, ec);
 		if (ec == boost::asio::error::would_block) {
-			;
+			// No client wants to connect
 		} else if (ec) {
+			log("[NetHost] No longer listening for IPv6 connections due to error: %s.\n", ec.message().c_str());
 			acceptor_v6_.close(ec);
 		} else {
-			log("[NetHost]: Accepting IPv6 connection from %s\n",
+			log("[NetHost]: Accepting IPv6 connection from %s.\n",
 				socket.remote_endpoint().address().to_string().c_str());
 		}
 	}
@@ -124,6 +134,7 @@ bool NetHost::try_receive(const ConnectionId id, RecvPacket* packet) {
 			// close() will remove the client from the map so we have to increment the iterator first
 			ConnectionId id_to_remove = it->first;
 			++it;
+			log("[NetHost] Error when receiving from a client, closing connection.\n");
 			close(id_to_remove);
 			continue;
 		}
@@ -152,6 +163,7 @@ void NetHost::send(const ConnectionId id, const SendPacket& packet) {
 		assert(ec != boost::asio::error::would_block);
 		assert(written == packet.get_size() || ec);
 		if (ec) {
+			log("[NetHost] Error when sending to a client, closing connection.\n");
 			close(id);
 		}
 	}

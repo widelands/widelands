@@ -109,19 +109,21 @@ LanBase::LanBase(uint16_t port)
 
 	if (!is_open()) {
 		// Hm, not good. Just try to open them and hope for the best
+		log("[LAN] Trying to open both sockets.\n");
 		start_socket(&socket_v4, boost::asio::ip::udp::v4(), port);
 		start_socket(&socket_v6, boost::asio::ip::udp::v6(), port);
 	}
 
 	if (!is_open()) {
 		// Still not open? Go back to main menu.
+		log("[LAN] Error: No sockets could be opened.\n");
 		report_network_error();
 	}
 
 	for (const std::string& ip : broadcast_addresses_v4)
-		log("[LAN] Will broadcast to %s\n", ip.c_str());
+		log("[LAN] Will broadcast to %s.\n", ip.c_str());
 	if (socket_v6.is_open())
-		log("[LAN] Will broadcast for IPv6\n");
+		log("[LAN] Will broadcast for IPv6.\n");
 }
 
 LanBase::~LanBase() {
@@ -133,11 +135,13 @@ bool LanBase::is_available() {
 	boost::system::error_code ec;
 	bool available_v4 = (socket_v4.is_open() && socket_v4.available(ec) > 0);
 	if (ec) {
+		log("[LAN] Error when checking whether data is available on IPv4 socket, closing it.\n");
 		close_socket(&socket_v4);
 		available_v4 = false;
 	}
 	bool available_v6 = (socket_v6.is_open() && socket_v6.available(ec) > 0);
 	if (ec) {
+		log("[LAN] Error when checking whether data is available on IPv6 socket, closing it.\n");
 		close_socket(&socket_v6);
 		available_v4 = false;
 	}
@@ -163,6 +167,7 @@ ssize_t LanBase::receive(void* const buf, size_t const len, NetAddress *addr) {
 			}
 		} catch (const boost::system::system_error&) {
 			// Some network error. Close the socket
+			log("[LAN] Error when receiving data on IPv4 socket, closing it.\n");
 			close_socket(&socket_v4);
 		}
 	}
@@ -176,6 +181,7 @@ ssize_t LanBase::receive(void* const buf, size_t const len, NetAddress *addr) {
 				return recv_len;
 			}
 		} catch (const boost::system::system_error&) {
+			log("[LAN] Error when receiving data on IPv6 socket, closing it.\n");
 			close_socket(&socket_v6);
 		}
 	}
@@ -202,12 +208,14 @@ bool LanBase::send(void const* const buf, size_t const len, const NetAddress& ad
 	if (!socket->is_open()) {
 		// I think this shouldn't happen normally. It might happen, though, if we receive
 		// a broadcast and learn the IP, then our sockets goes down, then we try to send
-		log("[LAN] Error: trying to send to an IPv%d address but socket is not open",
+		log("[LAN] Error: trying to send to an IPv%d address but socket is not open.\n",
 			get_ip_version(address));
 		return false;
 	}
 	socket->send_to(boost::asio::buffer(buf, len), destination, 0, ec);
 	if (ec) {
+		log("[LAN] Error when trying to send something over IPv%d, closing socket.\n",
+			get_ip_version(address));
 		close_socket(socket);
 		return false;
 	}
@@ -222,6 +230,7 @@ bool LanBase::broadcast(void const* const buf, size_t const len, uint16_t const 
 			boost::asio::ip::udp::endpoint destination(boost::asio::ip::address::from_string(address), port);
 			socket_v4.send_to(boost::asio::buffer(buf, len), destination, 0, ec);
 			if (ec) {
+				log("[LAN] Error when broadcasting on IPv4 socket to %s, closing it.\n", address.c_str());
 				close_socket(&socket_v4);
 				error_v4 = true;
 				break;
@@ -234,6 +243,7 @@ bool LanBase::broadcast(void const* const buf, size_t const len, uint16_t const 
 		boost::asio::ip::udp::endpoint destination(addr, port);
 		socket_v6.send_to(boost::asio::buffer(buf, len), destination, 0, ec);
 		if (ec) {
+			log("[LAN] Error when broadcasting on IPv6 socket, closing it.\n");
 			close_socket(&socket_v6);
 			if (error_v4) {
 				return false;
@@ -255,7 +265,7 @@ void LanBase::start_socket(boost::asio::ip::udp::socket *socket, boost::asio::ip
 	// Try to open the socket
 	socket->open(version, ec);
 	if (ec) {
-		log("[LAN] Failed to start an IPv%d socket: %s\n",
+		log("[LAN] Failed to start an IPv%d socket: %s.\n",
 			get_ip_version(version), ec.message().c_str());
 		return;
 	}
@@ -263,7 +273,7 @@ void LanBase::start_socket(boost::asio::ip::udp::socket *socket, boost::asio::ip
 	const boost::asio::socket_base::broadcast option_broadcast(true);
 	socket->set_option(option_broadcast, ec);
 	if (ec) {
-		log("[LAN] Error setting options for IPv%d socket, closing socket: %s\n",
+		log("[LAN] Error setting options for IPv%d socket, closing socket: %s.\n",
 			get_ip_version(version), ec.message().c_str());
 		// Retrieve the error code to avoid throwing but ignore it
 		close_socket(socket);
@@ -283,13 +293,13 @@ void LanBase::start_socket(boost::asio::ip::udp::socket *socket, boost::asio::ip
 
 	socket->bind(boost::asio::ip::udp::endpoint(version, port), ec);
 	if (ec) {
-		log("[LAN] Error binding IPv%d socket to UDP port %d, closing socket: %s\n",
+		log("[LAN] Error binding IPv%d socket to UDP port %d, closing socket: %s.\n",
 			get_ip_version(version), port, ec.message().c_str());
 		close_socket(socket);
 		return;
 	}
 
-	log("[LAN] Started an IPv%d socket on UDP port %d\n", get_ip_version(version), port);
+	log("[LAN] Started an IPv%d socket on UDP port %d.\n", get_ip_version(version), port);
 }
 
 void LanBase::report_network_error() {
