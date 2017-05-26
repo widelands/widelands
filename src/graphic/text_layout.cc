@@ -48,14 +48,16 @@ void replace_entities(std::string* text) {
 	boost::replace_all(*text, "&amp;", "&");  // Must be performed last
 }
 
-uint32_t text_width(const std::string& text, int ptsize) {
+int text_width(const std::string& text, int ptsize) {
 	return UI::g_fh1->render(as_editorfont(text, ptsize - UI::g_fh1->fontset()->size_offset()))
 	   ->width();
 }
 
-uint32_t text_height(const std::string& text, int ptsize) {
-	return UI::g_fh1->render(as_editorfont(text.empty() ? "." : text,
-	                                       ptsize - UI::g_fh1->fontset()->size_offset()))
+int text_height(int ptsize, UI::FontSet::Face face) {
+	return UI::g_fh1->render(as_aligned(UI::g_fh1->fontset()->representative_character(),
+	                                    UI::Align::kLeft,
+	                                    ptsize - UI::g_fh1->fontset()->size_offset(),
+	                                    RGBColor(0, 0, 0), face))
 	   ->height();
 }
 
@@ -191,8 +193,10 @@ std::string as_content(const std::string& txt, UIStyle style) {
 	NEVER_HERE();
 }
 
-const Image* autofit_ui_text(const std::string& text, int width, RGBColor color, int fontsize) {
-	const Image* result = UI::g_fh1->render(as_uifont(richtext_escape(text), fontsize, color));
+std::shared_ptr<const UI::RenderedText>
+autofit_ui_text(const std::string& text, int width, RGBColor color, int fontsize) {
+	std::shared_ptr<const UI::RenderedText> result =
+	   UI::g_fh1->render(as_uifont(richtext_escape(text), fontsize, color));
 	if (width > 0) {  // Autofit
 		for (; result->width() > width && fontsize >= kMinimumFontSize; --fontsize) {
 			result = UI::g_fh1->render(
@@ -208,9 +212,14 @@ namespace UI {
  * This mirrors the horizontal alignment for RTL languages.
  *
  * Do not store this value as it is based on the global font setting.
+ *
+ * If 'checkme' is not empty, mirror the alignment if the first 20 characters contain an RTL
+ * character. Otherwise, mirror if the current fontset is RTL.
  */
-Align mirror_alignment(Align alignment) {
-	if (UI::g_fh1->fontset()->is_rtl()) {
+Align mirror_alignment(Align alignment, const std::string& checkme) {
+	bool do_swap_alignment = checkme.empty() ? UI::g_fh1->fontset()->is_rtl() :
+	                                           i18n::has_rtl_character(checkme.c_str(), 20);
+	if (do_swap_alignment) {
 		switch (alignment) {
 		case Align::kLeft:
 			alignment = Align::kRight;

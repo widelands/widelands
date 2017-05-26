@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2017 by the Widelands Development Team
+ * Copyright (C) 2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,24 +17,23 @@
  *
  */
 
-#include "notifications/notifications.h"
+#ifndef WL_GRAPHIC_TEXT_TEXTURE_CACHE_H
+#define WL_GRAPHIC_TEXT_TEXTURE_CACHE_H
 
-#include "base/log.h"
+#include <memory>
 
-namespace Notifications {
+#include "graphic/image.h"
+#include "graphic/text/transient_cache.h"
 
-NotificationsManager* NotificationsManager::get() {
-	static NotificationsManager instance;
-	return &instance;
-}
-
-NotificationsManager::NotificationsManager() : next_subscriber_id_(1), num_subscribers_(0) {
-}
-
-NotificationsManager::~NotificationsManager() {
-	if (num_subscribers_ != 0) {
-		log("ERROR: NotificationsManager is destroyed, but there are still subscribers.\n");
+class TextureCache : public TransientCache<Image> {
+public:
+	TextureCache(uint32_t max_size_in_bytes) : TransientCache<Image>(max_size_in_bytes) {
 	}
-}
 
-}  // namespace Notifications
+	std::shared_ptr<const Image> insert(const std::string& hash,
+	                                    std::shared_ptr<const Image> entry) override {
+		return TransientCache<Image>::insert(hash, entry, entry->width() * entry->height() * 4);
+	}
+};
+
+#endif  // end of include guard: WL_GRAPHIC_TEXT_TEXTURE_CACHE_H

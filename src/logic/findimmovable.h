@@ -132,8 +132,8 @@ struct FindImmovablePlayerMilitarySite {
 
 	const Player& player;
 };
-struct FindImmovableAttackable {
-	FindImmovableAttackable() {
+struct FindImmovableAttackTarget {
+	FindImmovableAttackTarget() {
 	}
 
 	bool accept(const BaseImmovable&) const;

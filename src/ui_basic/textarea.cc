@@ -127,8 +127,7 @@ void Textarea::draw(RenderTarget& dst) {
 	if (!text_.empty()) {
 		Vector2i anchor(
 		   (align_ == Align::kCenter) ? get_w() / 2 : (align_ == UI::Align::kRight) ? get_w() : 0, 0);
-		UI::correct_for_align(align_, rendered_text_->width(), &anchor);
-		dst.blit(anchor, rendered_text_, BlendMode::UseAlpha);
+		rendered_text_->draw(dst, anchor, align_);
 	}
 }
 
@@ -188,14 +187,12 @@ void Textarea::update_desired_size() {
 	uint32_t w = 0;
 	uint16_t h = 0;
 
-	if (rendered_text_) {
+	if (rendered_text_.get()) {
 		w = fixed_width_ > 0 ? fixed_width_ : rendered_text_->width();
 		h = rendered_text_->height();
 		// We want empty textareas to have height
 		if (text_.empty()) {
-			h = UI::g_fh1->render(
-			                as_uifont(UI::g_fh1->fontset()->representative_character(), fontsize_))
-			       ->height();
+			h = text_height(fontsize_);
 		}
 	}
 	set_desired_size(w, h);

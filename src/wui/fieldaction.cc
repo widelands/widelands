@@ -26,7 +26,7 @@
 #include "economy/road.h"
 #include "graphic/graphic.h"
 #include "logic/cmd_queue.h"
-#include "logic/map_objects/attackable.h"
+#include "logic/map_objects/tribes/attack_target.h"
 #include "logic/map_objects/tribes/soldier.h"
 #include "logic/map_objects/tribes/tribe_descr.h"
 #include "logic/map_objects/tribes/warehouse.h"
@@ -380,13 +380,16 @@ void FieldActionWindow::add_buttons_auto() {
 void FieldActionWindow::add_buttons_attack() {
 	UI::Box& a_box = *new UI::Box(&tabpanel_, 0, 0, UI::Box::Horizontal);
 
-	if (upcast(Widelands::Attackable, attackable, map_->get_immovable(node_))) {
-		if (player_ && player_->is_hostile(attackable->owner()) && attackable->can_attack()) {
-			attack_box_ = new AttackBox(&a_box, player_, &node_, 0, 0);
-			a_box.add(attack_box_);
+	if (upcast(Widelands::Building, building, map_->get_immovable(node_))) {
+		if (const Widelands::AttackTarget* attack_target = building->attack_target()) {
+			if (player_ && player_->is_hostile(building->owner()) &&
+			    attack_target->can_be_attacked()) {
+				attack_box_ = new AttackBox(&a_box, player_, &node_, 0, 0);
+				a_box.add(attack_box_);
 
-			set_fastclick_panel(&add_button(
-			   &a_box, "attack", pic_attack, &FieldActionWindow::act_attack, _("Start attack")));
+				set_fastclick_panel(&add_button(
+				   &a_box, "attack", pic_attack, &FieldActionWindow::act_attack, _("Start attack")));
+			}
 		}
 	}
 
