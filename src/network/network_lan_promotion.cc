@@ -216,27 +216,32 @@ bool LanBase::send(void const* const buf, size_t const len, const NetAddress& ad
 
 bool LanBase::broadcast(void const* const buf, size_t const len, uint16_t const port) {
 	boost::system::error_code ec;
-	bool error = false;
+	bool error_v4 = false;
 	if (socket_v4.is_open()) {
 		for (const std::string& address : broadcast_addresses_v4) {
 			boost::asio::ip::udp::endpoint destination(boost::asio::ip::address::from_string(address), port);
 			socket_v4.send_to(boost::asio::buffer(buf, len), destination, 0, ec);
 			if (ec) {
 				close_socket(&socket_v4);
-				error = true;
+				error_v4 = true;
 				break;
 			}
 		}
 	}
 	if (socket_v6.is_open()) {
-		boost::asio::ip::udp::endpoint destination(boost::asio::ip::address::from_string("ff02::1"), port);
+		boost::asio::ip::address addr(boost::asio::ip::address::from_string("ff02::1", ec));
+		assert(!ec);
+		boost::asio::ip::udp::endpoint destination(addr, port);
 		socket_v6.send_to(boost::asio::buffer(buf, len), destination, 0, ec);
 		if (ec) {
 			close_socket(&socket_v6);
-				error = true;
+			if (error_v4) {
+				return false;
+			}
 		}
 	}
-	return !error;
+	// At least one succeeded
+	return true;
 }
 
 void LanBase::start_socket(boost::asio::ip::udp::socket *socket, boost::asio::ip::udp version, uint16_t port) {
