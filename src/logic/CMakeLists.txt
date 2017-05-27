@@ -43,6 +43,8 @@ wl_library(logic_campaign_visibility
     base_exceptions
     io_filesystem
     profile
+    scripting_lua_interface
+    scripting_lua_table
 )
 
 wl_library(logic_constants

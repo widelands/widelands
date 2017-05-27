@@ -90,6 +90,7 @@ wl_library(wui_common
     graphic_fonthandler
     graphic_playercolor
     graphic_text_constants
+    graphic_text_layout
     io_filesystem
     logic
     logic_game_controller
