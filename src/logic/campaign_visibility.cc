@@ -26,7 +26,6 @@
 
 #include <sys/stat.h>
 
-#include "base/log.h"  // NOCOM
 #include "base/wexception.h"
 #include "io/filesystem/filesystem.h"
 #include "profile/profile.h"
