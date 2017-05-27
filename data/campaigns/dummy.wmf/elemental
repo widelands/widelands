@@ -4,7 +4,8 @@ map_w="32"
 map_h="32"
 nr_players="1"
 world="greenland"
-name=_"Not yet implemented"
-# TRANSLATORS: Author for dummy map
-author=_"Nobody"
-descr=_"Sorry, this map is not yet implemented."
+# TRANSLATORS: Description for greyed out dummy scenario displayed in campaign screen
+name=_"Sorry, this scenario is not yet implemented."
+# We only ever see the name on screen
+author="Nobody"
+descr="No description"

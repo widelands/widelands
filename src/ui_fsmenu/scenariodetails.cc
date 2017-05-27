@@ -48,21 +48,25 @@ ScenarioDetails::ScenarioDetails(Panel* parent)
 
 void ScenarioDetails::update(const ScenarioMapData& scenariodata) {
 	name_label_.set_text(
-	   (boost::format("<rt>%s%s</rt>") %
-	    as_header(scenariodata.is_tutorial ? _("Tutorial:") : _("Scenario:"), UIStyle::kFsMenu, true) %
-	    as_content(scenariodata.name, UIStyle::kFsMenu))
-	      .str());
+		(boost::format("<rt>%s%s</rt>") %
+		 as_header(scenariodata.is_tutorial ? _("Tutorial:") : _("Scenario:"), UIStyle::kFsMenu, true) %
+		 as_content(scenariodata.name, UIStyle::kFsMenu))
+			.str());
 
-	std::string description =
-	   (boost::format("%s%s") %
-	    as_header(ngettext("Author:", "Authors:", scenariodata.authors.get_number()), UIStyle::kFsMenu) %
-	    as_content(scenariodata.authors.get_names(), UIStyle::kFsMenu))
-	      .str();
+	if (scenariodata.visible) {
+		std::string description =
+			(boost::format("%s%s") %
+			 as_header(ngettext("Author:", "Authors:", scenariodata.authors.get_number()), UIStyle::kFsMenu) %
+			 as_content(scenariodata.authors.get_names(), UIStyle::kFsMenu))
+				.str();
 
-	description = (boost::format("%s%s") % description % as_header(_("Description:"), UIStyle::kFsMenu)).str();
-	description = (boost::format("%s%s") % description % as_content(scenariodata.description, UIStyle::kFsMenu)).str();
+		description = (boost::format("%s%s") % description % as_header(_("Description:"), UIStyle::kFsMenu)).str();
+		description = (boost::format("%s%s") % description % as_content(scenariodata.description, UIStyle::kFsMenu)).str();
 
-	description = (boost::format("<rt>%s</rt>") % description).str();
-	descr_.set_text(description);
+		description = (boost::format("<rt>%s</rt>") % description).str();
+		descr_.set_text(description);
+	} else {
+		descr_.set_text("");
+	}
 	descr_.scroll_to_top();
 }

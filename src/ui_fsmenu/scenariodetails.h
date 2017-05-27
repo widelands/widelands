@@ -32,6 +32,7 @@ struct ScenarioMapData {
 	MapAuthorData authors;
 	std::string description;
 	bool is_tutorial;
+	bool visible;
 	ScenarioMapData(const std::string& author_list) : authors(author_list) {
 	}
 };

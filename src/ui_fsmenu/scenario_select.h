@@ -38,6 +38,7 @@ public:
 	void set_campaign(const std::string& campaign_name);
 
 protected:
+	void clicked_ok() override;
 	void entry_selected() override;
 	void fill_table() override;
 
@@ -47,6 +48,7 @@ private:
 		std::string name;
 		std::string author;
 		std::string path;
+		bool visible;
 
 		ScenarioTableData() = default;
 	};

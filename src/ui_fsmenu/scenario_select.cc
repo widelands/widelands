@@ -130,6 +130,17 @@ bool FullscreenMenuScenarioSelect::set_has_selection() {
 	return has_selection;
 }
 
+void FullscreenMenuScenarioSelect::clicked_ok() {
+	if (!table_.has_selection()) {
+		return;
+	}
+	const ScenarioTableData& scenario_data = scenarios_data_[table_.get_selected()];
+	if (!scenario_data.visible) {
+		return;
+	}
+	end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kOk);
+}
+
 void FullscreenMenuScenarioSelect::entry_selected() {
 	if (set_has_selection()) {
 		const ScenarioTableData& scenario_data = scenarios_data_[table_.get_selected()];
@@ -152,12 +163,11 @@ void FullscreenMenuScenarioSelect::entry_selected() {
 			scenario_map_data.description = _(map.get_description());
 		}
 		scenario_map_data.is_tutorial = is_tutorial_;
+		scenario_map_data.visible = scenario_data.visible;
 		scenario_details_.update(scenario_map_data);
 
 		// The dummy scenario can't be played, so we disable the OK button.
-		if (campmapfile == "campaigns/dummy.wmf") {
-			ok_.set_enabled(false);
-		}
+		ok_.set_enabled(scenario_map_data.visible);
 	}
 }
 
@@ -221,13 +231,14 @@ void FullscreenMenuScenarioSelect::fill_table() {
 					scenario_data.index = counter + 1;
 					scenario_data.name = descname;
 					scenario_data.path = "campaigns/" + path;
+					scenario_data.visible = path != "dummy.wmf";
 					scenarios_data_.push_back(scenario_data);
 
 					UI::Table<uintptr_t>::EntryRecord& te = table_.add(counter);
 					te.set_string(0, (boost::format("%u") % scenario_data.index).str());
 					te.set_picture(
 						1, g_gr->images().get("images/ui_basic/ls_wlmap.png"), scenario_data.name);
-					if (scenario_data.path == "campaigns/dummy.wmf") {
+					if (!scenario_data.visible) {
 						te.set_color(UI_FONT_CLR_DISABLED);
 					}
 					++counter;
