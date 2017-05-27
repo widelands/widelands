@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-05-18 21:30+0000\n"
+"POT-Creation-Date: 2017-05-19 07:45+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Milan Fašina <matrix17@seznam.cz>, 2017\n"
 "Language-Team: Czech (https://www.transifex.com/widelands/teams/35159/cs/)\n"
@@ -97,7 +97,7 @@ msgstr ""
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:85
 msgid "Build a port and a shipyard on the Island"
-msgstr ""
+msgstr "Postav na ostrově přístav a loděnici"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:87
 msgid "Ship Industry"
@@ -105,15 +105,15 @@ msgstr "Lodní hospodářství"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:88
 msgid "Build a port to set sail from this island."
-msgstr ""
+msgstr "Postav přístav a odpluj z ostrovu."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:89
 msgid "Build a shipyard to produce the ships to sail on."
-msgstr ""
+msgstr "Postav loděnici na stavbu lodí na plavbu."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:94
 msgid "Produce at least 50 sheaves of wheat"
-msgstr ""
+msgstr "Vyrob alespoň 50 otýpek pšenice"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:96
 msgid "Wheat Production"
@@ -126,7 +126,7 @@ msgstr "Na rozjezd naší produkce vlny, potřebujeme alespoň 50 otýpek pšeni
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:103
 msgid "Produce cloth for building our first ship"
-msgstr ""
+msgstr "Vyrob látku na stavbu naší první lodi."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:105
 msgid "Cloth Production"
@@ -140,7 +140,7 @@ msgstr ""
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:112
 msgid "Build 2 ports on distant islands"
-msgstr ""
+msgstr "Postav 2 přístavy na odlehlých ostrovech"
 
 #. TRANSLATORS: Objective - create 2 expeditions and found new colonies with
 #. them
@@ -162,7 +162,7 @@ msgstr ""
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:123
 msgid "Produce gold to send out expeditions"
-msgstr ""
+msgstr "Vyrob zlato, abys mohl vyslat výpravu"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:125
 msgid "Gold Production"
@@ -191,11 +191,13 @@ msgstr ""
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:143
 msgid "Explore Additional Islands and Search for Port Spaces"
-msgstr ""
+msgstr "Prozkoumej další ostrovy a hledej místa pro přístavy"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:144
 msgid "We should discover more land and build as many ports as we can."
 msgstr ""
+"Měli bychom prozkoumat větší území a postavit tolik přístavů, kolik bude "
+"možné."
 
 #. TRANSLATORS: Objective header
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:151
@@ -213,11 +215,11 @@ msgstr ""
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:159
 msgid "Build a training infrastructure"
-msgstr ""
+msgstr "Postav budovy na výcvik"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:161
 msgid "Training Infrastructure"
-msgstr ""
+msgstr "Zázemí pro výcvik"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:162
 msgid ""
@@ -330,7 +332,7 @@ msgstr ""
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:231
 msgid "Amalea raises her hand…"
-msgstr ""
+msgstr "Amalea zvedá ruku..."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:233
@@ -343,7 +345,7 @@ msgstr ""
 #. TRANSLATORS: Message header - Saledus is advising to save resources
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:241
 msgid "Save Resources"
-msgstr ""
+msgstr "Šetři surovinami"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:242
 msgid "Saledus is nodding in agreement…"
@@ -383,11 +385,11 @@ msgstr ""
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:265
 msgid "Amalea’s Plan"
-msgstr ""
+msgstr "Amalein plán"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:266
 msgid "Amalea smiles…"
-msgstr ""
+msgstr "Amalea se usmívá…"
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:268
@@ -436,7 +438,7 @@ msgstr ""
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:296
 msgid "Amalea’s Recommendations"
-msgstr ""
+msgstr "Amaleina doporučení"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:297
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:314
@@ -466,7 +468,7 @@ msgstr ""
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:313
 msgid "Amalea Looks Happy"
-msgstr ""
+msgstr "Amalea vypadá šťastně"
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:316
@@ -596,7 +598,7 @@ msgstr ""
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:391
 msgid "Amalea is Proud"
-msgstr ""
+msgstr "Amalea je hrdá"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:392
 msgid "Amalea cheers…"
@@ -663,11 +665,11 @@ msgstr ""
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:428
 msgid "Amalea Advises"
-msgstr ""
+msgstr "Amalea radí"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:429
 msgid "Amalea looks thoughtful…"
-msgstr ""
+msgstr "Amalea vypadá zamyšleně…"
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:431
@@ -980,16 +982,21 @@ msgid ""
 "should increase our efforts to train them to the highest level and to train "
 "more of them."
 msgstr ""
+"Pane, máme všechny budovy, které potřebujeme pro výcvik našich vojáků, ale "
+"měli bychom zvýšit naše úsilí vycvičit je na nejvyšší úroveň a vycvičit jich"
+" co nejvíc."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:595
 msgid ""
 "We need a lot of food, a lot of iron and a lot of gold to do so. So, we have"
 " lots of challenges to cope with."
 msgstr ""
+"Abychom to zvládli, potřebujeme hodně jídla, železa a zlata. Máme před sebou"
+" hodně překážek, které musíme překonat."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:601
 msgid "Training Infrastructure is Needed"
-msgstr ""
+msgstr "Potřebujeme budovy na výcvik"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:602
 msgid "Saledus has security concerns"
@@ -1043,9 +1050,9 @@ msgstr ""
 #, lua-format
 msgid "We still need to discover %d piece of our shrine."
 msgid_plural "We still need to discover %d pieces of our shrine."
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "Stále musíme najít %d kus naší svatyně."
+msgstr[1] "Stále musíme najít %d kusy naší svatyně."
+msgstr[2] "Stále musíme najít %d kusů naší svatyně."
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:639
