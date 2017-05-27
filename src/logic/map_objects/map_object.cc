@@ -20,6 +20,7 @@
 #include "logic/map_objects/map_object.h"
 
 #include <algorithm>
+#include <cmath>
 #include <cstdarg>
 #include <cstdio>
 #include <cstring>
@@ -463,30 +464,26 @@ void MapObject::do_draw_info(const InfoToDraw& info_to_draw,
 	}
 
 	// Rendering text is expensive, so let's just do it for only a few sizes.
-	scale = std::round(scale);
-	if (scale == 0.f) {
+	// The forumla is a bit fancy to avoid too much text overlap.
+	scale = std::round(2.f * (scale > 1.f ? std::sqrt(scale) : std::pow(scale, 2.f))) / 2.f;
+	if (scale < 1.f) {
 		return;
 	}
 	const int font_size = scale * UI_FONT_SIZE_SMALL;
 
 	// We always render this so we can have a stable position for the statistics string.
-	const Image* rendered_census_info =
-	   UI::g_fh1->render(as_condensed(census, UI::Align::kCenter, font_size), 120);
-
-	const Vector2i base_pos = field_on_dst.cast<int>() - Vector2i(0, 48) * scale;
-	Vector2i census_pos(base_pos);
-	UI::correct_for_align(UI::Align::kCenter, rendered_census_info->width(), &census_pos);
+	std::shared_ptr<const UI::RenderedText> rendered_census =
+	   UI::g_fh1->render(as_condensed(census, UI::Align::kCenter, font_size), 120 * scale);
+	Vector2i position = field_on_dst.cast<int>() - Vector2i(0, 48) * scale;
 	if (info_to_draw & InfoToDraw::kCensus) {
-		dst->blit(census_pos, rendered_census_info, BlendMode::UseAlpha);
+		rendered_census->draw(*dst, position, UI::Align::kCenter);
 	}
 
 	if (info_to_draw & InfoToDraw::kStatistics && !statictics.empty()) {
-		Vector2i statistics_pos =
-		   base_pos + Vector2i(0, rendered_census_info->height() / 2 + 10 * scale);
-		const Image* rendered_statictics =
+		std::shared_ptr<const UI::RenderedText> rendered_statistics =
 		   UI::g_fh1->render(as_condensed(statictics, UI::Align::kCenter, font_size));
-		UI::correct_for_align(UI::Align::kCenter, rendered_statictics->width(), &statistics_pos);
-		dst->blit(statistics_pos, rendered_statictics, BlendMode::UseAlpha);
+		position.y += rendered_census->height() + text_height(font_size) / 4;
+		rendered_statistics->draw(*dst, position, UI::Align::kCenter);
 	}
 }
 

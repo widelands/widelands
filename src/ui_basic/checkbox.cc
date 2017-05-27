@@ -45,8 +45,8 @@ Statebox::Statebox(Panel* const parent,
    : Panel(parent, p.x, p.y, kStateboxSize, kStateboxSize, tooltip_text),
      flags_(Is_Enabled),
      pic_graphics_(pic),
-     label_text_(""),
-     rendered_text_(nullptr) {
+     rendered_text_(nullptr),
+     label_text_("") {
 	uint16_t w = pic->width();
 	uint16_t h = pic->height();
 	set_desired_size(w, h);
@@ -63,8 +63,8 @@ Statebox::Statebox(Panel* const parent,
    : Panel(parent, p.x, p.y, std::max(width, kStateboxSize), kStateboxSize, tooltip_text),
      flags_(Is_Enabled),
      pic_graphics_(g_gr->images().get("images/ui_basic/checkbox_light.png")),
-     label_text_(label_text),
-     rendered_text_(nullptr) {
+     rendered_text_(nullptr),
+     label_text_(label_text) {
 	set_flags(Has_Text, !label_text_.empty());
 	layout();
 }
@@ -83,7 +83,7 @@ void Statebox::layout() {
 		rendered_text_ = label_text_.empty() ?
 		                    nullptr :
 		                    UI::g_fh1->render(as_uifont(label_text_), text_width(get_w(), pic_width));
-		if (rendered_text_) {
+		if (rendered_text_.get()) {
 			w = std::max(rendered_text_->width() + kPadding + pic_width, w);
 			h = std::max(rendered_text_->height(), h);
 		}
@@ -144,16 +144,16 @@ void Statebox::draw(RenderTarget& dst) {
 	} else {
 		static_assert(0 <= kStateboxSize, "assert(0 <= STATEBOX_WIDTH) failed.");
 		static_assert(0 <= kStateboxSize, "assert(0 <= STATEBOX_HEIGHT) failed.");
-		Vector2i image_anchor(0, 0);
+		Vector2i image_anchor = Vector2i::zero();
 		Vector2i text_anchor(kStateboxSize + kPadding, 0);
 
-		if (rendered_text_) {
+		if (rendered_text_.get()) {
 			if (UI::g_fh1->fontset()->is_rtl()) {
 				text_anchor.x = 0;
 				image_anchor.x = rendered_text_->width() + kPadding;
 				image_anchor.y = (get_h() - kStateboxSize) / 2;
 			}
-			dst.blit(text_anchor, rendered_text_, BlendMode::UseAlpha);
+			rendered_text_->draw(dst, text_anchor);
 		}
 
 		dst.blitrect(

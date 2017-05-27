@@ -10,9 +10,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-05-18 21:30+0000\n"
-"PO-Revision-Date: 2017-05-18 21:33+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2017-05-19 07:45+0000\n"
+"PO-Revision-Date: 2017-05-20 18:46+0000\n"
+"Last-Translator: Juanjo\n"
 "Language-Team: Catalan (http://www.transifex.com/widelands/widelands/language/ca/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -913,7 +913,7 @@ msgstr "Animals"
 
 #: ../../src/editor/ui_menus/tool_menu.cc:65
 msgid "Set port space"
-msgstr "Defineix espais portuaris"
+msgstr "Defineix zones portuàries"
 
 #: ../../src/editor/ui_menus/tool_menu.cc:66
 msgid ""
@@ -1262,7 +1262,7 @@ msgstr "No es troben més recursos!"
 
 #: ../../src/logic/map_objects/tribes/ship.cc:417
 msgid "Port Space"
-msgstr "Espai portuari"
+msgstr "Zona portuària"
 
 #: ../../src/logic/map_objects/tribes/ship.cc:417
 msgid "Port Space Found"
@@ -2430,7 +2430,7 @@ msgstr "Sou un espectador."
 #: ../../src/ui_fsmenu/launch_mpg.cc:418
 #, c-format
 msgid "Unable to load the win condition script file '%s'."
-msgstr ""
+msgstr "No s'ha pogut carregar la condició de victòria de l'arxiu de script «%s»."
 
 #: ../../src/ui_fsmenu/launch_mpg.cc:468
 msgid "Saved players are:"
