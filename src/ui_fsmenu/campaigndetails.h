@@ -29,13 +29,13 @@
 struct CampaignData {
 	uint32_t index;
 	std::string name;
+	std::string descname;
 	std::string tribename;
 	uint32_t difficulty;
 	std::string difficulty_description;
 	std::string description;
 
-	CampaignData() : index(0), difficulty(0) {
-	}
+	CampaignData() = default;
 };
 
 /**

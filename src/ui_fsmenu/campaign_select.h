@@ -34,7 +34,7 @@ class FullscreenMenuCampaignSelect : public FullscreenMenuLoadMapOrGame {
 public:
 	FullscreenMenuCampaignSelect();
 
-	int32_t get_campaign();
+	std::string get_campaign() const;
 
 protected:
 	void clicked_ok() override;
@@ -58,7 +58,7 @@ private:
 
 	/// Variables used for exchange between the two Campaign UIs and
 	/// Game::run_campaign
-	int32_t campaign_;
+	std::string campaign_;
 };
 
 #endif  // end of include guard: WL_UI_FSMENU_CAMPAIGN_SELECT_H

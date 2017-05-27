@@ -659,6 +659,7 @@ int LuaPlayer::reveal_scenario(lua_State* L) {
 		report_error(L, "Can only be called for interactive player!");
 
 	CampaignVisibilitySave cvs;
+	// NOCOM
 	cvs.set_map_visibility(luaL_checkstring(L, 2), true);
 
 	return 0;
@@ -680,6 +681,7 @@ int LuaPlayer::reveal_campaign(lua_State* L) {
 	}
 
 	CampaignVisibilitySave cvs;
+	// NOCOM
 	cvs.set_campaign_visibility(luaL_checkstring(L, 2), true);
 
 	return 0;

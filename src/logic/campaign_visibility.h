@@ -29,9 +29,9 @@ struct CampaignVisibilitySave {
 	std::string get_path();
 	void set_campaign_visibility(const std::string&, bool);
 	void set_map_visibility(const std::string&, bool);
+	void mark_as_solved(const std::string& scenario);
 
 private:
-	void make_campvis(const std::string&);
 	void update_campvis(const std::string&);
 };
 

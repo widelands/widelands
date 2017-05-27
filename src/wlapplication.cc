@@ -1069,7 +1069,7 @@ void WLApplication::mainmenu_tutorial() {
 	std::string filename;
 	//  Start UI for the tutorials.
 	FullscreenMenuScenarioSelect select_campaignmap(true);
-	select_campaignmap.set_campaign(0);
+	select_campaignmap.set_campaign("tutorials");
 	if (select_campaignmap.run<FullscreenMenuBase::MenuTarget>() ==
 	    FullscreenMenuBase::MenuTarget::kOk) {
 		filename = select_campaignmap.get_map();
@@ -1297,7 +1297,7 @@ bool WLApplication::campaign_game() {
 	Widelands::Game game;
 	std::string filename;
 	for (;;) {  // Campaign UI - Loop
-		int32_t campaign;
+		std::string campaign;
 		{  //  First start UI for selecting the campaign.
 			FullscreenMenuCampaignSelect select_campaign;
 			if (select_campaign.run<FullscreenMenuBase::MenuTarget>() ==

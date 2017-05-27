@@ -35,7 +35,7 @@ public:
 	FullscreenMenuScenarioSelect(bool is_tutorial = false);
 
 	std::string get_map();
-	void set_campaign(uint32_t);
+	void set_campaign(const std::string& campaign_name);
 
 protected:
 	void entry_selected() override;
@@ -48,8 +48,7 @@ private:
 		std::string author;
 		std::string path;
 
-		ScenarioTableData() : index(0) {
-		}
+		ScenarioTableData() = default;
 	};
 
 	void layout() override;
@@ -65,7 +64,7 @@ private:
 	UI::MultilineTextarea subtitle_;
 	ScenarioDetails scenario_details_;
 
-	uint32_t campaign;
+	std::string campaign_name_;
 	std::string campmapfile;
 
 	std::vector<ScenarioTableData> scenarios_data_;

@@ -30,6 +30,8 @@
 #include "logic/campaign_visibility.h"
 #include "map_io/widelands_map_loader.h"
 #include "profile/profile.h"
+#include "scripting/lua_interface.h"
+#include "scripting/lua_table.h"
 #include "ui_basic/scrollbar.h"
 
 /**
@@ -117,8 +119,8 @@ std::string FullscreenMenuScenarioSelect::get_map() {
 }
 
 // Telling this class what campaign we have and since we know what campaign we have, fill it.
-void FullscreenMenuScenarioSelect::set_campaign(uint32_t const i) {
-	campaign = i;
+void FullscreenMenuScenarioSelect::set_campaign(const std::string& campaign_name) {
+	campaign_name_ = campaign_name;
 	fill_table();
 }
 
@@ -136,7 +138,7 @@ void FullscreenMenuScenarioSelect::entry_selected() {
 
 		std::unique_ptr<Widelands::MapLoader> ml(map.get_correct_loader(campmapfile));
 		if (!ml) {
-			throw wexception(_("Invalid path to file in campaigns.conf: %s"), campmapfile.c_str());
+			throw wexception(_("Invalid path to file in campaigns.lua: %s"), campmapfile.c_str());
 		}
 
 		map.set_filename(campmapfile);
@@ -163,75 +165,78 @@ void FullscreenMenuScenarioSelect::entry_selected() {
  * fill the campaign-map list
  */
 void FullscreenMenuScenarioSelect::fill_table() {
-	// read in the campaign config
-	Profile* prof;
-	std::string campsection;
-	if (is_tutorial_) {
-		prof = new Profile("campaigns/tutorials.conf", nullptr, "maps");
+	// Read in the campaign configuration for the currently selected campaign
+	LuaInterface lua;
+	std::unique_ptr<LuaTable> table(is_tutorial_ ? lua.run_script("campaigns/tutorials.lua") :
+	                                               lua.run_script("campaigns/campaigns.lua"));
+	table->do_not_warn_about_unaccessed_keys();
+	std::unique_ptr<LuaTable> all_campaigns(table->get_table("campaigns"));
+	all_campaigns->do_not_warn_about_unaccessed_keys();
 
-		// Set subtitle of the page
-		const std::string subtitle1 = _("Pick a tutorial from the list, then hit “OK”.");
-		const std::string subtitle2 =
-		   _("You can see a description of the currently selected tutorial on the right.");
-		subtitle_.set_text((boost::format("%s\n%s") % subtitle1 % subtitle2).str());
-
-		// Get section of campaign-maps
-		campsection = "tutorials";
-
-	} else {
-		prof = new Profile("campaigns/campaigns.conf", nullptr, "maps");
-
-		Section& global_s = prof->get_safe_section("global");
-
-		// Set subtitle of the page
-		const char* campaign_tribe =
-		   _(global_s.get_string((boost::format("camptribe%u") % campaign).str().c_str()));
-		const char* campaign_name;
-		{
-			i18n::Textdomain td("maps");
-			campaign_name =
-			   _(global_s.get_string((boost::format("campname%u") % campaign).str().c_str()));
+	bool found = false;
+	for (const auto& campaign_table : all_campaigns->array_entries<std::unique_ptr<LuaTable>>()) {
+		campaign_table->do_not_warn_about_unaccessed_keys();
+		if (found) {
+			// We need to shut up the table warnings, so we can't break from the loop
+			continue;
 		}
-		subtitle_.set_text((boost::format("%s — %s") % campaign_tribe % campaign_name).str());
-
-		// Get section of campaign-maps
-		campsection = global_s.get_string((boost::format("campsect%u") % campaign).str().c_str());
-	}
-
-	// Create the entry we use to load the section of the map
-	uint32_t i = 0;
-	std::string mapsection = campsection + (boost::format("%02i") % i).str();
-
-	// Read in campvis-file
-	CampaignVisibilitySave cvs;
-	Profile campvis(cvs.get_path().c_str());
-	Section& c = campvis.get_safe_section("campmaps");
-
-	// Add all visible entries to the list.
-	while (Section* const s = prof->get_section(mapsection)) {
-		if (is_tutorial_ || c.get_bool(mapsection.c_str())) {
-
-			ScenarioTableData scenario_data;
-			scenario_data.index = i + 1;
-			scenario_data.name = s->get_string("name", "");
-			scenario_data.path = s->get_string("path");
-			scenarios_data_.push_back(scenario_data);
-
-			UI::Table<uintptr_t>::EntryRecord& te = table_.add(i);
-			te.set_string(0, (boost::format("%u") % scenario_data.index).str());
-			te.set_picture(
-			   1, g_gr->images().get("images/ui_basic/ls_wlmap.png"), scenario_data.name);
-			if (scenario_data.path == "campaigns/dummy.wmf") {
-				te.set_color(UI_FONT_CLR_DISABLED);
+		// Find the campaign by name
+		if (campaign_name_ == campaign_table->get_string("name")) {
+			// Set subtitle of the page
+			if (is_tutorial_) {
+				const std::string subtitle1 = _("Pick a tutorial from the list, then hit “OK”.");
+				const std::string subtitle2 =
+				   _("You can see a description of the currently selected tutorial on the right.");
+				subtitle_.set_text((boost::format("%s\n%s") % subtitle1 % subtitle2).str());
+			} else {
+				const std::string campaign_tribe = _(campaign_table->get_string("tribe"));
+				{
+					i18n::Textdomain td("maps");
+					const std::string campaign_descname = _(campaign_table->get_string("descname"));
+					subtitle_.set_text(
+					   (boost::format("%s — %s") % campaign_tribe % campaign_descname).str());
+				}
 			}
-		}
 
-		// Increase counter & mapsection
-		++i;
-		mapsection = campsection + (boost::format("%02i") % i).str();
+			// Create the entry we use to load the section of the map
+			uint32_t counter = 0;
+			// Read in campvis-file
+			CampaignVisibilitySave cvs;
+			Profile campvis(cvs.get_path().c_str());
+			Section& scenario_visibility = campvis.get_safe_section("scenarios");
+
+			// Add all visible entries to the list.
+			std::unique_ptr<LuaTable> scenarios_table(campaign_table->get_table("scenarios"));
+			scenarios_table->do_not_warn_about_unaccessed_keys();
+			for (const auto& scenario : scenarios_table->array_entries<std::unique_ptr<LuaTable>>()) {
+				scenario->do_not_warn_about_unaccessed_keys();
+				const std::string name = scenario->get_string("name");
+
+				if (is_tutorial_ || scenario_visibility.get_bool(name.c_str())) {
+					const std::string descname = scenario->get_string("descname");
+					const std::string path = scenario->get_string("path");
+
+					ScenarioTableData scenario_data;
+					scenario_data.index = counter + 1;
+					scenario_data.name = descname;
+					scenario_data.path = "campaigns/" + path;
+					scenarios_data_.push_back(scenario_data);
+
+					UI::Table<uintptr_t>::EntryRecord& te = table_.add(counter);
+					te.set_string(0, (boost::format("%u") % scenario_data.index).str());
+					te.set_picture(
+						1, g_gr->images().get("images/ui_basic/ls_wlmap.png"), scenario_data.name);
+					if (scenario_data.path == "campaigns/dummy.wmf") {
+						te.set_color(UI_FONT_CLR_DISABLED);
+					}
+					++counter;
+				}
+			} // scenario
+			found = true;
+		} // campaign
 	}
-	table_.sort();
 
+	table_.sort();
 	if (table_.size()) {
 		table_.select(0);
 	}

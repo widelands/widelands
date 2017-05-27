@@ -48,7 +48,7 @@ CampaignDetails::CampaignDetails(Panel* parent)
 
 void CampaignDetails::update(const CampaignData& campaigndata) {
 	name_label_.set_text((boost::format("<rt>%s%s</rt>") % as_header(_("Campaign:"), UIStyle::kFsMenu, true) %
-	                      as_content(campaigndata.name, UIStyle::kFsMenu))
+	                      as_content(campaigndata.descname, UIStyle::kFsMenu))
 	                        .str());
 
 	std::string description =

@@ -19,6 +19,8 @@
 
 #include "ui_fsmenu/campaign_select.h"
 
+#include <memory>
+
 #include <boost/format.hpp>
 
 #include "base/i18n.h"
@@ -27,6 +29,8 @@
 #include "graphic/text_constants.h"
 #include "logic/campaign_visibility.h"
 #include "profile/profile.h"
+#include "scripting/lua_interface.h"
+#include "scripting/lua_table.h"
 
 /**
  * CampaignSelect UI
@@ -88,7 +92,7 @@ void FullscreenMenuCampaignSelect::clicked_ok() {
 	end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kOk);
 }
 
-int32_t FullscreenMenuCampaignSelect::get_campaign() {
+std::string FullscreenMenuCampaignSelect::get_campaign() const {
 	return campaign_;
 }
 
@@ -106,7 +110,7 @@ bool FullscreenMenuCampaignSelect::set_has_selection() {
 void FullscreenMenuCampaignSelect::entry_selected() {
 	if (set_has_selection()) {
 		const CampaignData& campaign_data = campaigns_data_[table_.get_selected()];
-		campaign_ = campaign_data.index;
+		campaign_ = campaign_data.name;
 		campaign_details_.update(campaign_data);
 	}
 }
@@ -118,67 +122,53 @@ void FullscreenMenuCampaignSelect::fill_table() {
 	campaigns_data_.clear();
 	table_.clear();
 
-	// Read in the campaign config
-	Profile prof("campaigns/campaigns.conf", nullptr, "maps");
-	Section& s = prof.get_safe_section("global");
+	// Read in the campaign configuration for the currently selected campaign
+	LuaInterface lua;
+	std::unique_ptr<LuaTable> table(lua.run_script("campaigns/campaigns.lua"));
+	table->do_not_warn_about_unaccessed_keys();
+	std::unique_ptr<LuaTable> campaigns_table(table->get_table("campaigns"));
+	campaigns_table->do_not_warn_about_unaccessed_keys();
 
 	// Read in campvis-file
 	CampaignVisibilitySave cvs;
 	Profile campvis(cvs.get_path().c_str());
-	Section& c = campvis.get_safe_section("campaigns");
+	Section& campaign_visibility = campvis.get_safe_section("campaigns");
 
-	// Predefine variables, used in while-loop
-	uint32_t i = 0;
-	std::string csection = (boost::format("campsect%u") % i).str();
-	std::string cname;
-	std::string ctribename;
-	std::string cdifficulty;
-	std::string cdiff_descr;
-	std::string cdescription;
-
-	while (s.get_string(csection.c_str())) {
-
-		cname = (boost::format("campname%u") % i).str();
-		ctribename = (boost::format("camptribe%u") % i).str();
-		cdifficulty = (boost::format("campdiff%u") % i).str();
-		cdiff_descr = (boost::format("campdiffdescr%u") % i).str();
-		cdescription = (boost::format("campdesc%u") % i).str();
+	uint32_t counter = 0;
+	for (const auto& campaign : campaigns_table->array_entries<std::unique_ptr<LuaTable>>()) {
+		campaign->do_not_warn_about_unaccessed_keys();
+		CampaignData campaign_data;
+		campaign_data.index = counter;
+		campaign_data.name = campaign->get_string("name");
 
 		// Only list visible campaigns
-		if (c.get_bool(csection.c_str())) {
+		if (campaign_visibility.get_bool(campaign_data.name.c_str())) {
 
-			uint32_t difficulty = s.get_int(cdifficulty.c_str());
+			i18n::Textdomain td("maps");
+
+			campaign_data.descname = _(campaign->get_string("descname"));
+			campaign_data.tribename = _(campaign->get_string("tribe"));
+			campaign_data.description = _(campaign->get_string("description"));
+
+			std::unique_ptr<LuaTable> difficulty(campaign->get_table("difficulty"));
+			campaign_data.difficulty = difficulty->get_int("value");
 			if (sizeof(difficulty_picture_filenames) / sizeof(*difficulty_picture_filenames) <=
-			    difficulty) {
-				difficulty = 0;
+				 campaign_data.difficulty) {
+				campaign_data.difficulty = 0;
 			}
 
-			CampaignData campaign_data;
-
-			campaign_data.index = i;
-
-			{
-				i18n::Textdomain td("maps");
-				campaign_data.name = _(s.get_string(cname.c_str(), ""));
-				campaign_data.tribename = _(s.get_string(ctribename.c_str(), ""));
-				campaign_data.difficulty = difficulty;
-				campaign_data.difficulty_description = _(s.get_string(cdiff_descr.c_str(), ""));
-				campaign_data.description = _(s.get_string(cdescription.c_str(), ""));
-			}
-
+			campaign_data.difficulty_description = _(difficulty->get_string("description"));
 			campaigns_data_.push_back(campaign_data);
 
-			UI::Table<uintptr_t>::EntryRecord& tableEntry = table_.add(i);
-			tableEntry.set_picture(0, g_gr->images().get(difficulty_picture_filenames[difficulty]));
+			UI::Table<uintptr_t>::EntryRecord& tableEntry = table_.add(campaign_data.index);
+			tableEntry.set_picture(
+				0, g_gr->images().get(difficulty_picture_filenames[campaign_data.difficulty]));
 			tableEntry.set_string(1, campaign_data.tribename);
-			tableEntry.set_string(2, campaign_data.name);
+			tableEntry.set_string(2, campaign_data.descname);
+			++counter;
 		}
+	}
 
-		// Increase counter & csection
-		++i;
-		csection = (boost::format("campsect%u") % i).str();
-
-	}  // while (s.get_string(csection.c_str()))
 	table_.sort();
 
 	if (table_.size()) {
