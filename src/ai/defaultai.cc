@@ -539,8 +539,8 @@ void DefaultAI::late_initialization() {
 		if (bh.is_graniteproducer()) {
 			bo.set_is(BuildingAttribute::kNeedsRocks);
 		}
-		if (bh.get_is_basic() && gametime <= 1 * 60 * 1000){ //This is very begining of game
-			remaining_basic_buildings.insert(bo.id);
+		if (bh.get_is_basic() > 0 && gametime <= 1 * 60 * 1000){ //This is very begining of game
+			remaining_basic_buildings[bo.id] = bh.get_is_basic();
 			}		
 		if (bh.get_needs_water()) {
 			bo.set_is(BuildingAttribute::kNeedsCoast);
@@ -707,7 +707,6 @@ void DefaultAI::late_initialization() {
 					printf (" %-25s: produces %-15s as critical material\n", bo.name, tribe_->get_ware_descr(ware)->descname().c_str());
 					bo.set_is(BuildingAttribute::kBuildingMatProducer);
 					if (bo.type == BuildingObserver::Type::kMine) {
-						printf ("This is mine\n");
 						has_critical_mines = true;
 					}
 				}
@@ -798,7 +797,7 @@ void DefaultAI::late_initialization() {
 	//printing identified basic buildings  NOCOM
 	printf ("%2d: basic buildings:\n", player_number());
 	for (auto bb : remaining_basic_buildings) {
-		printf ("   %3d / %s\n", bb, get_building_observer(bb).name);
+		printf ("   %3d / %-20s,  target %d\n", bb.first, get_building_observer(bb.first).name, bb.second);
 	}
 	
 	assert (barracks_identified); //To be sure we have barracks identified
@@ -1975,7 +1974,7 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 		printf ("%2d: basic economy not established, %lu buildings still missing, f.e. %s\n", 
 		player_number(),
 		remaining_basic_buildings.size(),
-		get_building_observer(*remaining_basic_buildings.begin()).name);
+		get_building_observer(remaining_basic_buildings.begin()->first).name);
 	}				
 
 	//printf ("%2d: basic economy %s\n", player_number(), (basic_economy_established) ? "established" : "not established");
@@ -2737,8 +2736,8 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 				}
 				if (prio > persistent_data->ai_personality_mil_upper_limit) {
 					persistent_data->ai_personality_mil_upper_limit = prio;
-					printf(" %d increasing ai_personality_mil_upper_limit to %3d\n", pn,
-					       persistent_data->ai_personality_mil_upper_limit);
+					//printf(" %d increasing ai_personality_mil_upper_limit to %3d\n", pn,
+					       //persistent_data->ai_personality_mil_upper_limit);
 				}
 			} else if (bo.type == BuildingObserver::Type::kWarehouse) {
 
@@ -4261,7 +4260,7 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 	BasicEconomyBuildingStatus site_needed_for_economy = BasicEconomyBuildingStatus::kNeutral;
 	if (gametime > 2 * 60 * 1000 && gametime < 120 * 60 * 1000 && !basic_economy_established){
 		if (remaining_basic_buildings.count(bo.id)){
-			if (bo.total_count() > 0) { // exemption for sawmill
+			if (static_cast<uint32_t>(bo.total_count()) >= remaining_basic_buildings[bo.id]) { // exemption for sawmill
 				site_needed_for_economy = BasicEconomyBuildingStatus::kDiscouraged;
 				//printf ("%s is critical but is discouraged\n",bo.name);
 				
@@ -4269,7 +4268,7 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 				site_needed_for_economy = BasicEconomyBuildingStatus::kNeutral;
 			} else {
 				site_needed_for_economy = BasicEconomyBuildingStatus::kEncouraged;
-				if (gametime % 50 == 0)printf ("%s is critical and encouraged\n",bo.name);
+				//if (gametime % 50 == 0)printf ("%s is critical and encouraged\n",bo.name);
 			}
 			
 		} else if (remaining_basic_buildings.count(bo.id) == 0){
@@ -5400,9 +5399,14 @@ void DefaultAI::gain_building(Building& b, const bool found_on_load) {
 		const uint32_t gametime = game().get_gametime();
 		bo.last_building_built = gametime;
 		if(remaining_basic_buildings.count(bo.id) > 0){
-			remaining_basic_buildings.erase(bo.id);
+			if (remaining_basic_buildings[bo.id] > 1) {
+				remaining_basic_buildings[bo.id] -= 1;
+			} else {
+				remaining_basic_buildings.erase(bo.id);
+			}
 		}
-		assert(remaining_basic_buildings.count(bo.id) == 0);
+		// Remaining basic buildings map contain either no entry for the building, or the number is nonzero
+		assert(remaining_basic_buildings.count(bo.id) == 0 || remaining_basic_buildings[bo.id] > 0);
 		
 
 		if (bo.type == BuildingObserver::Type::kProductionsite) {
@@ -5684,6 +5688,10 @@ void DefaultAI::update_player_stat() {
 				uint32_t old_land = 0;
 				uint32_t old60_land = 0;
 				uint32_t cass = 0;
+				uint32_t productivity = 0;
+				uint32_t NumbOfWares = 0;
+				uint32_t NumbOfBuildings = 0;				
+				uint32_t NumbOfWorkers = 0;					
 				if (vsize > 0) {
 					cur_strength = genstats.at(j - 1).miltary_strength.back();
 					cur_land = genstats.at(j - 1).land_size.back();
@@ -5703,11 +5711,17 @@ void DefaultAI::update_player_stat() {
 						old60_strength = genstats.at(j - 1).miltary_strength[0];
 						old60_land = genstats.at(j - 1).land_size[0];
 					}
+					productivity = genstats.at(j - 1).productivity.back();
+					NumbOfWares = genstats.at(j - 1).nr_wares.back();	
+					NumbOfBuildings = genstats.at(j - 1).nr_buildings.back();	
+					NumbOfWorkers = genstats.at(j - 1).nr_workers.back();					
 				}
 
 				player_statistics.add(pn, j, me->team_number(), this_player->team_number(),
 				                      cur_strength, old_strength, old60_strength, cass, cur_land,
 				                      old_land, old60_land);
+				//For Nordfriese Land:Productivity:Number of Wares:Number of Buildings:Number of Workers 
+				if (pn==j) printf ("STATISTICS %d %d %d:%d:%d:%d:%d\n", pn, (vsize-1) * 30,  cur_land, productivity, NumbOfWares, NumbOfBuildings, NumbOfWorkers);
 			} catch (const std::out_of_range&) {
 				log("ComputerPlayer(%d): genstats entry missing - size :%d\n",
 				    static_cast<unsigned int>(player_number()),

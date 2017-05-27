@@ -488,8 +488,12 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 		return false;
 	}
 
-	printf ("%2d: attacking site at %3dx%3d, score %3d, with %2d soldiers, attacking after %3d seconds\n",
-	player_number(),flag->get_position().x, flag->get_position().y, best_score, attackers, (gametime - last_attack_time_) / 1000);
+	printf ("%2d: attacking site at %3dx%3d, score %3d, with %2d soldiers, attacking %2d times, after %3d seconds\n",
+		player_number(),
+		flag->get_position().x, flag->get_position().y,
+		best_score, attackers,
+		enemy_sites[best_target].attack_counter + 1,
+		(gametime - last_attack_time_) / 1000);
 	game().send_player_enemyflagaction(*flag, player_number(), static_cast<uint16_t>(attackers));
 	assert(1 < player_->vision(Map::get_index(flag->get_building()->get_position(), map.get_width())));
 	attackers_count_ += attackers;
@@ -932,9 +936,9 @@ int32_t DefaultAI::calculate_strength(const std::vector<Widelands::Soldier*>& so
 		//descr.get_base_evade(),
 		//descr.get_evade_incr_per_level(),
 		//soldier->get_evade_level());
-		if (health < 1000 || final < 0 || final > 100 * 2500) {
-			printf (" * This soldier: (%4f * %4f) / (%4f * %4f) = %5f. Final %3f\n", attack, health,  defense,  evade, (attack * health) / (defense * evade), final);
-		}
+		//if (health < 1000 || final < 0 || final > 100 * 2500) {
+			//printf (" * This soldier: (%4f * %4f) / (%4f * %4f) = %5f. Final %3f\n", attack, health,  defense,  evade, (attack * health) / (defense * evade), final);
+		//}
 	}
 	assert(final >= 0);
 	assert(final <= 100 * 2500);

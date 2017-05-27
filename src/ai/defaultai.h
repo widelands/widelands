@@ -24,6 +24,7 @@
 #include <map>
 #include <memory>
 #include <unordered_set>
+#include <unordered_map>
 
 #include "ai/ai_help_structs.h"
 #include "ai/computer_player.h"
@@ -359,7 +360,7 @@ private:
 	
 	//list of basic buildings as defined by "is_basic" flag in lua conf file
 	//std::set<Widelands::DescriptionIndex> basic_buildings;
-	std::set<Widelands::DescriptionIndex> remaining_basic_buildings;
+	std::unordered_map<Widelands::DescriptionIndex, uint32_t> remaining_basic_buildings;
 	bool basic_economy_established;
 	
 	// id of iron_ore to identify iron mines in mines_per_type map
