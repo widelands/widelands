@@ -85,7 +85,7 @@ function mission_thread()
    sleep(25000) -- Sleep a while
 
    campaign_message_box(diary_page_4)
-   p1:reveal_scenario("empiretut01")
+   p1:mark_scenario_as_solved("emp01")
 end
 
 -- Show a funny message when the player has build 10 blockhouses

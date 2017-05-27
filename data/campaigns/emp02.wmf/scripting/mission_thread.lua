@@ -261,7 +261,7 @@ function barbarians_thread()
    campaign_message_box(seven_days_later)
    campaign_message_box(diary_page_11)
 
-   p1:reveal_scenario("empiretut02")
+   p1:mark_scenario_as_solved("emp02")
 end
 
 run(building_materials)

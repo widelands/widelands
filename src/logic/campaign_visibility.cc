@@ -55,6 +55,7 @@ std::string CampaignVisibilitySave::get_path() {
  * Update the campaign visibility save-file of the user
  */
 void CampaignVisibilitySave::update_campvis(const std::string& savepath) {
+	// Prepare campvis
 	if (!(g_fs->file_exists(savepath))) {
 		// There is no campvis file - create one.
 		Profile campvis(savepath.c_str());
@@ -64,13 +65,9 @@ void CampaignVisibilitySave::update_campvis(const std::string& savepath) {
 		campvis.write(savepath.c_str(), true);
 	}
 
-	// Prepare campaigns.lua and campvis
-	LuaInterface lua;
-	std::unique_ptr<LuaTable> table(lua.run_script("campaigns/campaigns.lua"));
-	table->do_not_warn_about_unaccessed_keys();
 	Profile campvis(savepath.c_str());
 
-	// Collect all information about campaigns and scenarios
+
 	// TODO(GunChleoc): Remove compatibility code after Build 21.
 	std::map<std::string, std::string> legacy_scenarios;
 	bool is_legacy = false;
@@ -90,11 +87,18 @@ void CampaignVisibilitySave::update_campvis(const std::string& savepath) {
 	}
 
 	Section& campvis_campaigns = campvis.get_safe_section("campaigns");
-	Section campvis_scenarios = is_legacy ? campvis.get_safe_section("campmaps") : campvis.get_safe_section("scenarios");
-	std::map<std::string, bool> campaigns;
-	std::map<std::string, bool> scenarios;
+	Section& campvis_scenarios = is_legacy ? campvis.get_safe_section("campmaps") : campvis.get_safe_section("scenarios");
+
+	// Prepare campaigns.lua
+	LuaInterface lua;
+	std::unique_ptr<LuaTable> table(lua.run_script("campaigns/campaigns.lua"));
+	table->do_not_warn_about_unaccessed_keys();
 	std::unique_ptr<LuaTable> campaigns_table(table->get_table("campaigns"));
 	campaigns_table->do_not_warn_about_unaccessed_keys();
+
+	// Collect all information about campaigns and scenarios
+	std::map<std::string, bool> campaigns;
+	std::map<std::string, bool> scenarios;
 	for (const auto& campaign : campaigns_table->array_entries<std::unique_ptr<LuaTable>>()) {
 		campaign->do_not_warn_about_unaccessed_keys();
 		const std::string campaign_name = campaign->get_string("name");
@@ -155,42 +159,54 @@ void CampaignVisibilitySave::update_campvis(const std::string& savepath) {
 }
 
 /**
- * Set an campaign entry in campvis visible or invisible.
- * If it doesn't exist, create it.
- * \param entry entry to be changed
- * \param visible should the map be visible?
+ * Searches for the scenario with the given 'name' in data/campaigns/campaigns.lua,
+ * and if the scenario has 'reveal_campaign' and/or 'reveal_scenario' defined, marks the respective
+ * campaign/scenario as visible.
  */
-void CampaignVisibilitySave::set_campaign_visibility(const std::string& entry, bool visible) {
+void CampaignVisibilitySave::mark_scenario_as_solved(const std::string& name) {
+	// Check which campaign and/or scenario to reveal
+	std::string campaign_to_reveal = "";
+	std::string scenario_to_reveal = "";
+
+	LuaInterface lua;
+	std::unique_ptr<LuaTable> table(lua.run_script("campaigns/campaigns.lua"));
+	table->do_not_warn_about_unaccessed_keys();
+	std::unique_ptr<LuaTable> campaigns_table(table->get_table("campaigns"));
+	campaigns_table->do_not_warn_about_unaccessed_keys();
+
+	bool found = false;
+	for (const auto& campaign : campaigns_table->array_entries<std::unique_ptr<LuaTable>>()) {
+		campaign->do_not_warn_about_unaccessed_keys();
+		if (found) {
+			continue;
+		}
+		std::unique_ptr<LuaTable> scenarios_table(campaign->get_table("scenarios"));
+		scenarios_table->do_not_warn_about_unaccessed_keys();
+		for (const auto& scenario : scenarios_table->array_entries<std::unique_ptr<LuaTable>>()) {
+			scenario->do_not_warn_about_unaccessed_keys();
+			if (name == scenario->get_string("name")) {
+				if (scenario->has_key<std::string>("reveal_scenario")) {
+					scenario_to_reveal = scenario->get_string("reveal_scenario");
+				}
+				if (scenario->has_key<std::string>("reveal_campaign")) {
+					campaign_to_reveal = scenario->get_string("reveal_campaign");
+				}
+				// We can't break here, because we need to shut up the table warnings.
+				found = true;
+			}
+		}
+	}
+
+	// Write the campvis
 	std::string savepath = get_path();
 	Profile campvis(savepath.c_str());
+	if (!campaign_to_reveal.empty()) {
+		campvis.pull_section("campaigns").set_bool(campaign_to_reveal.c_str(), true);
 
-	campvis.pull_section("campaigns").set_bool(entry.c_str(), visible);
+	}
+	if (!scenario_to_reveal.empty()) {
+		campvis.pull_section("scenarios").set_bool(scenario_to_reveal.c_str(), true);
 
+	}
 	campvis.write(savepath.c_str(), false);
-}
-
-/**
- * Set an campaignmap entry in campvis visible or invisible.
- * If it doesn't exist, create it.
- * \param entry entry to be changed
- * \param visible should the map be visible?
- */
-void CampaignVisibilitySave::set_map_visibility(const std::string& entry, bool visible) {
-	std::string savepath = get_path();
-	Profile campvis(savepath.c_str());
-
-	campvis.pull_section("scenarios").set_bool(entry.c_str(), visible);
-
-	campvis.write(savepath.c_str(), false);
-}
-
-// NOCOM Get scenario from LuaTable and check which other scenarios and / or campaigns it makes visible
-// To replace set_map_visibility and set_campaign_visibility
-void CampaignVisibilitySave::mark_as_solved(const std::string& scenario) {
-	/*
-	std::string savepath = get_path();
-	Profile campvis(savepath.c_str());
-	campvis.pull_section("scenarios").set_bool(entry.c_str(), visible);
-	campvis.write(savepath.c_str(), false);
-	*/
 }

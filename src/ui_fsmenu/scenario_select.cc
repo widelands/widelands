@@ -182,6 +182,7 @@ void FullscreenMenuScenarioSelect::fill_table() {
 		}
 		// Find the campaign by name
 		if (campaign_name_ == campaign_table->get_string("name")) {
+			found = true;
 			// Set subtitle of the page
 			if (is_tutorial_) {
 				const std::string subtitle1 = _("Pick a tutorial from the list, then hit “OK”.");
@@ -232,7 +233,6 @@ void FullscreenMenuScenarioSelect::fill_table() {
 					++counter;
 				}
 			} // scenario
-			found = true;
 		} // campaign
 	}
 
