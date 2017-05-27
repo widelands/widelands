@@ -294,8 +294,8 @@ void Table<void*>::draw(RenderTarget& dst) {
 				curx += curw;
 				continue;
 			}
-			std::shared_ptr<const UI::RenderedText> rendered_text =
-			   UI::g_fh1->render(as_uifont(richtext_escape(entry_string), UI_FONT_SIZE_SMALL, er.get_color()));
+			std::shared_ptr<const UI::RenderedText> rendered_text = UI::g_fh1->render(
+			   as_uifont(richtext_escape(entry_string), UI_FONT_SIZE_SMALL, er.get_color()));
 
 			// Fix text alignment for BiDi languages if the entry contains an RTL character. We want
 			// this always on, e.g. for mixed language savegame filenames.

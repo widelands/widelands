@@ -169,22 +169,26 @@ void FullscreenMenuCampaignSelect::fill_table() {
 			std::unique_ptr<LuaTable> difficulty(campaign->get_table("difficulty"));
 			campaign_data.difficulty = difficulty->get_int("value");
 			if (sizeof(difficulty_picture_filenames) / sizeof(*difficulty_picture_filenames) <=
-				 campaign_data.difficulty) {
+			    campaign_data.difficulty) {
 				campaign_data.difficulty = 0;
 			}
 			campaign_data.difficulty_description = _(difficulty->get_string("description"));
 		}
 
 		if (!campaign_data.visible) {
-			/** TRANSLATORS: This is shown on the campaign selection screen when a campaign is greyed out. %s is the name of another campaign. */
-			campaign_data.description = (boost::format(_("Finish playing “%s” to unlock this campaign.")) % descnames[campaign->get_string("prerequisite")]).str();
+			campaign_data.description =
+			   /** TRANSLATORS: This is shown on the campaign selection screen when a campaign is
+			      greyed out. %s is the name of another campaign. */
+			   (boost::format(_("Finish playing “%s” to unlock this campaign.")) %
+			    descnames[campaign->get_string("prerequisite")])
+			      .str();
 		}
 
 		campaigns_data_.push_back(campaign_data);
 
 		UI::Table<uintptr_t>::EntryRecord& tableEntry = table_.add(campaign_data.index);
 		tableEntry.set_picture(
-			0, g_gr->images().get(difficulty_picture_filenames[campaign_data.difficulty]));
+		   0, g_gr->images().get(difficulty_picture_filenames[campaign_data.difficulty]));
 		tableEntry.set_string(1, campaign_data.tribename);
 		tableEntry.set_string(2, campaign_data.descname);
 		if (!campaign_data.visible) {

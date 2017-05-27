@@ -237,14 +237,14 @@ void FullscreenMenuScenarioSelect::fill_table() {
 					UI::Table<uintptr_t>::EntryRecord& te = table_.add(counter);
 					te.set_string(0, (boost::format("%u") % scenario_data.index).str());
 					te.set_picture(
-						1, g_gr->images().get("images/ui_basic/ls_wlmap.png"), scenario_data.name);
+					   1, g_gr->images().get("images/ui_basic/ls_wlmap.png"), scenario_data.name);
 					if (!scenario_data.visible) {
 						te.set_color(UI_FONT_CLR_DISABLED);
 					}
 					++counter;
 				}
-			} // scenario
-		} // campaign
+			}  // scenario
+		}     // campaign
 	}
 
 	table_.sort();

@@ -26,7 +26,7 @@
 
 #include <sys/stat.h>
 
-#include "base/log.h" // NOCOM
+#include "base/log.h"  // NOCOM
 #include "base/wexception.h"
 #include "io/filesystem/filesystem.h"
 #include "profile/profile.h"
@@ -50,7 +50,6 @@ std::string CampaignVisibilitySave::get_path() {
 	return savepath;
 }
 
-
 /**
  * Update the campaign visibility save-file of the user
  */
@@ -67,7 +66,6 @@ void CampaignVisibilitySave::update_campvis(const std::string& savepath) {
 
 	Profile campvis(savepath.c_str());
 
-
 	// TODO(GunChleoc): Remove compatibility code after Build 21.
 	std::map<std::string, std::string> legacy_scenarios;
 	bool is_legacy = false;
@@ -75,19 +73,15 @@ void CampaignVisibilitySave::update_campvis(const std::string& savepath) {
 	if (campvis_version > 0 && campvis_version < 8) {
 		is_legacy = true;
 		legacy_scenarios = {
-		      {"bar01", "barbariantut00"},
-		      {"bar02", "barbariantut01"},
-		      {"emp01", "empiretut00"},
-		      {"emp02", "empiretut01"},
-		      {"emp03", "empiretut02"},
-		      {"emp04", "empiretut03"},
-		      {"atl01", "atlanteans00"},
-		      {"atl02", "atlanteans01"},
+		   {"bar01", "barbariantut00"}, {"bar02", "barbariantut01"}, {"emp01", "empiretut00"},
+		   {"emp02", "empiretut01"},    {"emp03", "empiretut02"},    {"emp04", "empiretut03"},
+		   {"atl01", "atlanteans00"},   {"atl02", "atlanteans01"},
 		};
 	}
 
 	Section& campvis_campaigns = campvis.get_safe_section("campaigns");
-	Section& campvis_scenarios = is_legacy ? campvis.get_safe_section("campmaps") : campvis.get_safe_section("scenarios");
+	Section& campvis_scenarios =
+	   is_legacy ? campvis.get_safe_section("campmaps") : campvis.get_safe_section("scenarios");
 
 	// Prepare campaigns.lua
 	LuaInterface lua;
@@ -105,14 +99,17 @@ void CampaignVisibilitySave::update_campvis(const std::string& savepath) {
 		if (campaigns.count(campaign_name) != 1) {
 			campaigns[campaign_name] = false;
 		}
-		campaigns[campaign_name] = campaigns[campaign_name] || !campaign->has_key("prerequisite") || campvis_campaigns.get_bool(campaign_name.c_str());
+		campaigns[campaign_name] = campaigns[campaign_name] || !campaign->has_key("prerequisite") ||
+		                           campvis_campaigns.get_bool(campaign_name.c_str());
 
 		std::unique_ptr<LuaTable> scenarios_table(campaign->get_table("scenarios"));
 		scenarios_table->do_not_warn_about_unaccessed_keys();
 		for (const auto& scenario : scenarios_table->array_entries<std::unique_ptr<LuaTable>>()) {
 			scenario->do_not_warn_about_unaccessed_keys();
 			const std::string scenario_name = scenario->get_string("name");
-			scenarios[scenario_name] = is_legacy ? campvis_scenarios.get_bool(legacy_scenarios[scenario_name].c_str()) : campvis_scenarios.get_bool(scenario_name.c_str());
+			scenarios[scenario_name] =
+			   is_legacy ? campvis_scenarios.get_bool(legacy_scenarios[scenario_name].c_str()) :
+			               campvis_scenarios.get_bool(scenario_name.c_str());
 
 			// If a scenario is visible, this campaign is visible too.
 			if (scenarios[scenario_name]) {
@@ -122,7 +119,8 @@ void CampaignVisibilitySave::update_campvis(const std::string& savepath) {
 
 		// A campaign can also make sure that scenarios of a previous campaign are visible
 		if (campaigns[campaign_name] && campaign->has_key<std::string>("reveal_scenarios")) {
-			for (const auto& scenario : campaign->get_table("reveal_scenarios")->array_entries<std::string>()) {
+			for (const auto& scenario :
+			     campaign->get_table("reveal_scenarios")->array_entries<std::string>()) {
 				scenarios[scenario] = true;
 			}
 		}
@@ -146,12 +144,12 @@ void CampaignVisibilitySave::update_campvis(const std::string& savepath) {
 	write_campvis.pull_section("global").set_int("version", kCurrentVersion);
 
 	Section& write_campaigns = write_campvis.pull_section("campaigns");
-	for (const auto& campaign: campaigns) {
+	for (const auto& campaign : campaigns) {
 		write_campaigns.set_bool(campaign.first.c_str(), campaign.second);
 	}
 
 	Section& write_scenarios = write_campvis.pull_section("scenarios");
-	for (const auto& scenario: scenarios) {
+	for (const auto& scenario : scenarios) {
 		write_scenarios.set_bool(scenario.first.c_str(), scenario.second);
 	}
 
@@ -202,11 +200,9 @@ void CampaignVisibilitySave::mark_scenario_as_solved(const std::string& name) {
 	Profile campvis(savepath.c_str());
 	if (!campaign_to_reveal.empty()) {
 		campvis.pull_section("campaigns").set_bool(campaign_to_reveal.c_str(), true);
-
 	}
 	if (!scenario_to_reveal.empty()) {
 		campvis.pull_section("scenarios").set_bool(scenario_to_reveal.c_str(), true);
-
 	}
 	campvis.write(savepath.c_str(), false);
 }
