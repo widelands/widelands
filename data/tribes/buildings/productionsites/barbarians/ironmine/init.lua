@@ -41,7 +41,7 @@ tribes:new_productionsite_type {
    aihints = {
       mines = "iron",
       prohibited_till =900,
-      is_basic = true,
+      is_basic = 1,
       mines_percent = 30
    },
 

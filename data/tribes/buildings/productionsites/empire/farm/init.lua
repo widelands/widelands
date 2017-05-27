@@ -30,7 +30,7 @@ tribes:new_productionsite_type {
    },
 
    aihints = {
-      is_basic = true,
+      is_basic = 1,
       space_consumer = true
    },
 

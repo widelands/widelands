@@ -30,7 +30,7 @@ tribes:new_productionsite_type {
 
    aihints = {
       space_consumer = true,
-      is_basic = true,
+      is_basic = 1,
        -- Farm needs spidercloth to be built and spidercloth needs corn for production
        -- -> farm should be built ASAP!
       prohibited_till = 200

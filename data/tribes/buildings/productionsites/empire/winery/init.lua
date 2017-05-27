@@ -36,7 +36,7 @@ tribes:new_productionsite_type {
       prohibited_till = 600,
       very_weak_ai_limit = 1,
       weak_ai_limit = 2,
-      is_basic = true
+      is_basic = 1
    },
 
    working_positions = {

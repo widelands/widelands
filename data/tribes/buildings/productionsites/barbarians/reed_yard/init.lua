@@ -27,7 +27,7 @@ tribes:new_productionsite_type {
 
    aihints = {
       space_consumer = true,
-      is_basic = true,
+      is_basic = 1,
       prohibited_till = 250
    },
 

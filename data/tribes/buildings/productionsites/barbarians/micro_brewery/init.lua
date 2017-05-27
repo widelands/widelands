@@ -34,7 +34,7 @@ tribes:new_productionsite_type {
    },
 
    aihints = {
-      is_basic = true
+      is_basic = 1
    },
 
    working_positions = {

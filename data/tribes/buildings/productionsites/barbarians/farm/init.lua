@@ -41,7 +41,7 @@ tribes:new_productionsite_type {
 
    aihints = {
       space_consumer = true,
-      is_basic = true
+      is_basic = 1
    },
 
    working_positions = {
