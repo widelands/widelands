@@ -503,7 +503,7 @@ void Soldier::draw_info_icon(Vector2i draw_position,
 #endif
 
 	const int icon_size = get_health_level_pic()->height();
-	const bool draw_health_bar = info_to_draw & InfoToDraw::kSoldierHealthBars && current_health_ < get_max_health();
+	const bool draw_health_bar = draw_mode == InfoMode::kInBuilding || (info_to_draw & InfoToDraw::kSoldierHealthBars && current_health_ < get_max_health());
 
 	switch (draw_mode) {
 	case InfoMode::kInBuilding:
