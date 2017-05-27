@@ -89,6 +89,10 @@ void FullscreenMenuCampaignSelect::clicked_ok() {
 	if (!table_.has_selection()) {
 		return;
 	}
+	const CampaignData& campaign_data = campaigns_data_[table_.get_selected()];
+	if (!campaign_data.visible) {
+		return;
+	}
 	end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kOk);
 }
 
@@ -102,7 +106,7 @@ static char const* const difficulty_picture_filenames[] = {
    "images/ui_fsmenu/hard.png"};
 
 bool FullscreenMenuCampaignSelect::set_has_selection() {
-	bool has_selection = table_.has_selection();
+	const bool has_selection = table_.has_selection();
 	ok_.set_enabled(has_selection);
 	return has_selection;
 }
@@ -111,6 +115,7 @@ void FullscreenMenuCampaignSelect::entry_selected() {
 	if (set_has_selection()) {
 		const CampaignData& campaign_data = campaigns_data_[table_.get_selected()];
 		campaign_ = campaign_data.name;
+		ok_.set_enabled(campaign_data.visible);
 		campaign_details_.update(campaign_data);
 	}
 }
@@ -122,31 +127,42 @@ void FullscreenMenuCampaignSelect::fill_table() {
 	campaigns_data_.clear();
 	table_.clear();
 
-	// Read in the campaign configuration for the currently selected campaign
+	// Read in the campaign configuration for all campaigns
 	LuaInterface lua;
 	std::unique_ptr<LuaTable> table(lua.run_script("campaigns/campaigns.lua"));
 	table->do_not_warn_about_unaccessed_keys();
 	std::unique_ptr<LuaTable> campaigns_table(table->get_table("campaigns"));
 	campaigns_table->do_not_warn_about_unaccessed_keys();
 
+	// Grab the descnames so we can display prerequisites for locked campaigns
+	std::map<std::string, std::string> descnames;
+	{
+		i18n::Textdomain td("maps");
+		for (const auto& campaign : campaigns_table->array_entries<std::unique_ptr<LuaTable>>()) {
+			campaign->do_not_warn_about_unaccessed_keys();
+			descnames[campaign->get_string("name")] = _(campaign->get_string("descname"));
+		}
+	}
+
 	// Read in campvis-file
 	CampaignVisibilitySave cvs;
 	Profile campvis(cvs.get_path().c_str());
 	Section& campaign_visibility = campvis.get_safe_section("campaigns");
 
+	// Now get the campaigns data
 	uint32_t counter = 0;
 	for (const auto& campaign : campaigns_table->array_entries<std::unique_ptr<LuaTable>>()) {
 		campaign->do_not_warn_about_unaccessed_keys();
 		CampaignData campaign_data;
 		campaign_data.index = counter;
 		campaign_data.name = campaign->get_string("name");
+		campaign_data.visible = campaign_visibility.get_bool(campaign_data.name.c_str());
 
 		// Only list visible campaigns
-		if (campaign_visibility.get_bool(campaign_data.name.c_str())) {
-
+		{
 			i18n::Textdomain td("maps");
 
-			campaign_data.descname = _(campaign->get_string("descname"));
+			campaign_data.descname = descnames[campaign_data.name];
 			campaign_data.tribename = _(campaign->get_string("tribe"));
 			campaign_data.description = _(campaign->get_string("description"));
 
@@ -156,17 +172,25 @@ void FullscreenMenuCampaignSelect::fill_table() {
 				 campaign_data.difficulty) {
 				campaign_data.difficulty = 0;
 			}
-
 			campaign_data.difficulty_description = _(difficulty->get_string("description"));
-			campaigns_data_.push_back(campaign_data);
-
-			UI::Table<uintptr_t>::EntryRecord& tableEntry = table_.add(campaign_data.index);
-			tableEntry.set_picture(
-				0, g_gr->images().get(difficulty_picture_filenames[campaign_data.difficulty]));
-			tableEntry.set_string(1, campaign_data.tribename);
-			tableEntry.set_string(2, campaign_data.descname);
-			++counter;
 		}
+
+		if (!campaign_data.visible) {
+			/** TRANSLATORS: This is shown on the campaign selection screen when a campaign is greyed out. %s is the name of another campaign. */
+			campaign_data.description = (boost::format(_("Finish playing “%s” to unlock this campaign.")) % descnames[campaign->get_string("prerequisite")]).str();
+		}
+
+		campaigns_data_.push_back(campaign_data);
+
+		UI::Table<uintptr_t>::EntryRecord& tableEntry = table_.add(campaign_data.index);
+		tableEntry.set_picture(
+			0, g_gr->images().get(difficulty_picture_filenames[campaign_data.difficulty]));
+		tableEntry.set_string(1, campaign_data.tribename);
+		tableEntry.set_string(2, campaign_data.descname);
+		if (!campaign_data.visible) {
+			tableEntry.set_color(UI_FONT_CLR_DISABLED);
+		}
+		++counter;
 	}
 
 	table_.sort();

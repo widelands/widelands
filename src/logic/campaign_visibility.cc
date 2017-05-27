@@ -105,7 +105,7 @@ void CampaignVisibilitySave::update_campvis(const std::string& savepath) {
 		if (campaigns.count(campaign_name) != 1) {
 			campaigns[campaign_name] = false;
 		}
-		campaigns[campaign_name] = campaigns[campaign_name] || campaign->get_bool("visible") || campvis_campaigns.get_bool(campaign_name.c_str());
+		campaigns[campaign_name] = campaigns[campaign_name] || !campaign->has_key("prerequisite") || campvis_campaigns.get_bool(campaign_name.c_str());
 
 		std::unique_ptr<LuaTable> scenarios_table(campaign->get_table("scenarios"));
 		scenarios_table->do_not_warn_about_unaccessed_keys();

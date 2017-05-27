@@ -34,6 +34,7 @@ struct CampaignData {
 	uint32_t difficulty;
 	std::string difficulty_description;
 	std::string description;
+	bool visible;
 
 	CampaignData() = default;
 };

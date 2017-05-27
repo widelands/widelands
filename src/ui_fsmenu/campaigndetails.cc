@@ -51,14 +51,18 @@ void CampaignDetails::update(const CampaignData& campaigndata) {
 	                      as_content(campaigndata.descname, UIStyle::kFsMenu))
 	                        .str());
 
-	std::string description =
-	   (boost::format("%s%s") % as_header(_("Tribe:"), UIStyle::kFsMenu) % as_content(campaigndata.tribename, UIStyle::kFsMenu)).str();
+	std::string description = "";
 
-	description = (boost::format("%s%s") % description % as_header(_("Difficulty:"), UIStyle::kFsMenu)).str();
-	description =
-	   (boost::format("%s%s") % description % as_content(campaigndata.difficulty_description, UIStyle::kFsMenu)).str();
 
-	description = (boost::format("%s%s") % description % as_header(_("Story:"), UIStyle::kFsMenu)).str();
+	if (campaigndata.visible) {
+		description = (boost::format("%s%s") % as_header(_("Tribe:"), UIStyle::kFsMenu) % as_content(campaigndata.tribename, UIStyle::kFsMenu)).str();
+		description = (boost::format("%s%s") % description % as_header(_("Difficulty:"), UIStyle::kFsMenu)).str();
+		description =
+			(boost::format("%s%s") % description % as_content(campaigndata.difficulty_description, UIStyle::kFsMenu)).str();
+
+		description = (boost::format("%s%s") % description % as_header(_("Story:"), UIStyle::kFsMenu)).str();
+		description = (boost::format("%s%s") % description % as_content(campaigndata.description, UIStyle::kFsMenu)).str();
+	}
 	description = (boost::format("%s%s") % description % as_content(campaigndata.description, UIStyle::kFsMenu)).str();
 
 	description = (boost::format("<rt>%s</rt>") % description).str();
