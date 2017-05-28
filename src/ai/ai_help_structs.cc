@@ -1338,7 +1338,7 @@ bool FlagsForRoads::get_winner(uint32_t* winner_hash) {
 	}
 	return false;
 }
-
+PlayersStrengths::PlayersStrengths() : update_time(0) {}
 // This is an struct that stores strength of players, info on teams and provides some outputs from
 // these data
 PlayersStrengths::PlayerStat::PlayerStat() : team_number(0), is_enemy(false), players_power(0), old_players_power(0), old60_players_power(0),players_casualities(0) {
@@ -1346,7 +1346,7 @@ PlayersStrengths::PlayerStat::PlayerStat() : team_number(0), is_enemy(false), pl
 PlayersStrengths::PlayerStat::PlayerStat(Widelands::TeamNumber tc, bool e, uint32_t pp, uint32_t op, uint32_t o60p, uint32_t cs, uint32_t land, uint32_t oland, uint32_t o60l)
    : team_number(tc), is_enemy(e), players_power(pp),  old_players_power(op), old60_players_power(o60p), players_casualities(cs), players_land(land),
 	old_players_land(oland), old60_players_land(o60l)  {
-	 last_time_seen = kNever;  
+	 last_time_seen = kNever;
 }
 
 // Inserting/updating data
@@ -1613,6 +1613,15 @@ bool PlayersStrengths::strong_enough(Widelands::PlayerNumber pl) {
 		}
 	}
 	return my_strength > strongest_opponent_strength + 50;
+}
+
+
+void PlayersStrengths::set_update_time(const uint32_t gametime) {
+	update_time = gametime;
+}
+
+uint32_t PlayersStrengths::get_update_time(){
+	return update_time;
 }
 
 }  // namespace WIdelands

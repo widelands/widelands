@@ -456,7 +456,7 @@ void DefaultAI::think() {
 			   gametime + kManagementUpdateInterval, SchedulerTaskId::kManagementUpdate);
 			break;
 		case SchedulerTaskId::kUpdateStats:
-			update_player_stat();
+			update_player_stat(gametime);
 			set_taskpool_task_time(
 			   gametime + kStatUpdateInterval, SchedulerTaskId::kUpdateStats);
 			break;		
@@ -1037,7 +1037,7 @@ void DefaultAI::late_initialization() {
 		throw wexception("Corrupted AI data");
 	}
 
-	update_player_stat();
+	update_player_stat(gametime);
 
 	// Initialise the max duration of a single ship's expedition
 	const uint32_t map_area = uint32_t(map.get_height()) * map.get_width();
@@ -5663,7 +5663,11 @@ bool DefaultAI::check_supply(const BuildingObserver& bo) {
 }
 
 // TODO (tiborb) - should be called from scheduler, once in 60s is enough
-void DefaultAI::update_player_stat() {
+void DefaultAI::update_player_stat(const uint32_t gametime) {
+	if (player_statistics.get_update_time() > 0 && player_statistics.get_update_time() + 15 * 1000 > gametime) {
+		return;
+	}
+	player_statistics.set_update_time(gametime);
 	Map& map = game().map();
 	Widelands::PlayerNumber const pn = player_number();
 	PlayerNumber const nr_players = map.get_nrplayers();

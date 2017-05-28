@@ -212,7 +212,7 @@ private:
 
 	void review_wares_targets(uint32_t);
 
-	void update_player_stat();
+	void update_player_stat(uint32_t);
 
 	// sometimes scanning an area in radius gives inappropriate results, so this is to verify that
 	// other player is accessible

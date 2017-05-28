@@ -35,7 +35,7 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 
 	iterate_players_existing_novar(p, nr_players, game())++ plr_in_game;
 
-	update_player_stat();
+	update_player_stat(gametime);
 
 	const uint32_t my_power = player_statistics.get_modified_player_power(pn);
 

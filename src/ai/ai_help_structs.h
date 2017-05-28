@@ -783,6 +783,7 @@ private:
 	};
 
 public:
+	PlayersStrengths();
 	// Inserting/updating data
 	void add(Widelands::PlayerNumber pn,
 	         Widelands::PlayerNumber opn,
@@ -821,13 +822,17 @@ public:
 	bool any_enemy_seen_lately(uint32_t);
 	uint32_t enemy_last_seen();
 	PlayerNumber this_player_number;
-
+	void set_update_time(uint32_t);
+	uint32_t get_update_time();
+	
 private:
 	// This is the core part of this struct
 	std::map<Widelands::PlayerNumber, PlayerStat> all_stats;
 
 	// Number of team, sum of players' strength
 	std::map<Widelands::TeamNumber, uint32_t> team_powers;
+	
+	uint32_t update_time;
 };
 }  // namespace Widelands
 
