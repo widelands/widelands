@@ -27,7 +27,6 @@
 #include "economy/flag.h"
 #include "logic/campaign_visibility.h"
 #include "logic/game_controller.h"
-#include "logic/map_objects/tribes/building.h"
 #include "logic/map_objects/tribes/tribe_descr.h"
 #include "logic/message.h"
 #include "logic/objective.h"
@@ -607,6 +606,7 @@ int LuaPlayer::reveal_fields(lua_State* L) {
 		game.send_player_hide_reveal_field(p.player_number(), (*get_user_class<LuaField>(L, -1))->coords(), SeeUnseeNode::kReveal);
 		lua_pop(L, 1);
 	}
+
 	return 0;
 }
 
@@ -638,6 +638,7 @@ int LuaPlayer::hide_fields(lua_State* L) {
 		game.send_player_hide_reveal_field(p.player_number(), (*get_user_class<LuaField>(L, -1))->coords(), mode);
 		lua_pop(L, 1);
 	}
+
 	return 0;
 }
 
