@@ -125,6 +125,7 @@ wl_library(logic
     roadtype.h
     save_handler.cc
     save_handler.h
+    see_unsee_node.h
     widelands_geometry_io.cc
     widelands_geometry_io.h
     map_objects/bob.cc

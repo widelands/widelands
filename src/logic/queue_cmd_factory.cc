@@ -104,6 +104,8 @@ GameLogicCommand& QueueCmdFactory::create_correct_queue_command(QueueCommandType
 		return *new CmdCalculateStatistics();
 	case QueueCommandTypes::kCallEconomyBalance:
 		return *new CmdCallEconomyBalance();
+	case QueueCommandTypes::kHideRevealField:
+		return *new CmdHideRevealField();
 	case QueueCommandTypes::kDeleteMessage:  // Not a logic command
 	case QueueCommandTypes::kNetCheckSync:
 	case QueueCommandTypes::kReplaySyncWrite:

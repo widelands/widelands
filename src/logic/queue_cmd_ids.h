@@ -93,7 +93,8 @@ enum class QueueCommandTypes {
 	kNetCheckSync = 250,
 	kReplaySyncWrite,
 	kReplaySyncRead,
-	kReplayEnd  // 253
+	kReplayEnd,  // 253
+	kHideRevealField
 };
 
 }  // namespace Widelands

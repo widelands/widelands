@@ -88,7 +88,8 @@ enum {
 	PLCMD_SHIP_EXPLORE = 27,
 	PLCMD_SHIP_CONSTRUCT = 28,
 	PLCMD_SHIP_SINK = 29,
-	PLCMD_SHIP_CANCELEXPEDITION = 30
+	PLCMD_SHIP_CANCELEXPEDITION = 30,
+	PLCMD_HIDE_REVEAL_FIELD = 31
 };
 
 /*** class PlayerCommand ***/
@@ -157,6 +158,8 @@ PlayerCommand* PlayerCommand::deserialize(StreamRead& des) {
 		return new CmdEvictWorker(des);
 	case PLCMD_MILITARYSITESETSOLDIERPREFERENCE:
 		return new CmdMilitarySiteSetSoldierPreference(des);
+	case PLCMD_HIDE_REVEAL_FIELD:
+		return new CmdHideRevealField(des);
 	default:
 		throw wexception("PlayerCommand::deserialize(): Invalid command id encountered");
 	}
@@ -1775,4 +1778,49 @@ void CmdSetStockPolicy::write(FileWrite& fw, EditorGameBase& egbase, MapObjectSa
 	fw.unsigned_8(ware_);
 	fw.unsigned_8(static_cast<uint8_t>(policy_));
 }
+
+
+/*** class CmdHideRevealField ***/
+
+CmdHideRevealField::CmdHideRevealField(StreamRead& des)
+   : PlayerCommand(0, des.unsigned_8()), coords(read_coords_32(&des)), mode(static_cast<SeeUnseeNode>(des.unsigned_8())) {
+}
+
+void CmdHideRevealField::execute(Game& game) {
+	game.player(sender()).hide_or_reveal_field(game.get_gametime(), coords, mode);
+}
+
+void CmdHideRevealField::serialize(StreamWrite& ser) {
+	ser.unsigned_8(PLCMD_HIDE_REVEAL_FIELD);
+	ser.unsigned_8(sender());
+	write_coords_32(&ser, coords);
+	ser.unsigned_8(static_cast<unsigned int>(mode));
+}
+
+constexpr uint8_t kCurrentPacketVersionCmdHideField = 0;
+
+void CmdHideRevealField::read(FileRead& fr, EditorGameBase& egbase, MapObjectLoader& mol) {
+	try {
+		const uint16_t packet_version = fr.unsigned_8();
+		if (packet_version == kCurrentPacketVersionCmdHideField) {
+			PlayerCommand::read(fr, egbase, mol);
+			coords = read_coords_32(&fr, egbase.map().extent());
+			mode = static_cast<SeeUnseeNode>(fr.unsigned_8());
+		} else {
+			throw UnhandledVersionError(
+			   "CmdHideField", packet_version, kCurrentPacketVersionCmdHideField);
+		}
+	} catch (const WException& e) {
+		throw GameDataError("hide/unhide field: %s", e.what());
+	}
+}
+void CmdHideRevealField::write(FileWrite& fw, EditorGameBase& egbase, MapObjectSaver& mos) {
+	// First, write version
+	fw.unsigned_8(kCurrentPacketVersionCmdHideField);
+	// Write base classes
+	PlayerCommand::write(fw, egbase, mos);
+	write_coords_32(&fw, coords);
+	fw.unsigned_8(static_cast<unsigned int>(mode));
+}
+
 }

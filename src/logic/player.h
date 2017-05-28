@@ -33,6 +33,7 @@
 #include "logic/map_objects/tribes/warehouse.h"
 #include "logic/mapregion.h"
 #include "logic/message_queue.h"
+#include "logic/see_unsee_node.h"
 #include "logic/widelands.h"
 
 // there are three arrays to be used by AI
@@ -431,25 +432,23 @@ public:
 	 * Update this player's information about this node and the surrounding
 	 * triangles and edges.
 	 */
-	void see_node(const Map&,
-	              const Widelands::Field& first_map_field,
+	Vision see_node(const Map&,
 	              const FCoords&,
 	              const Time,
 	              const bool forward = false);
 
 	/// Decrement this player's vision for a node.
-	enum class UnseeNodeMode { kUnsee, kUnexplore };
-	void
-	unsee_node(MapIndex, Time, UnseeNodeMode mode = UnseeNodeMode::kUnsee, bool forward = false);
+
+	Vision
+	unsee_node(MapIndex, Time, SeeUnseeNode mode = SeeUnseeNode::kUnsee, bool forward = false);
 
 	/// Call see_node for each node in the area.
 	void see_area(const Area<FCoords>& area) {
 		const Time gametime = egbase().get_gametime();
 		const Map& map = egbase().map();
-		const Widelands::Field& first_map_field = map[0];
 		MapRegion<Area<FCoords>> mr(map, area);
 		do {
-			see_node(map, first_map_field, mr.location(), gametime);
+			see_node(map, mr.location(), gametime);
 		} while (mr.advance(map));
 	}
 
@@ -463,6 +462,13 @@ public:
 			unsee_node(mr.location().field - &first_map_field, gametime);
 		while (mr.advance(map));
 	}
+
+	/// Explicitly hide or reveal the field at 'c'. The modes are as follows:
+	/// - kUnsee:     Decrement the field's vision
+	/// - kUnexplore: Set the field's vision to 0
+	/// - kReveal:    If the field was hidden previously, restore the vision to the value it had
+	///               at the time of hiding. Otherwise, increment the vision.
+	void hide_or_reveal_field(const uint32_t gametime, const Coords& c, SeeUnseeNode mode);
 
 	MilitaryInfluence military_influence(MapIndex const i) const {
 		return fields_[i].military_influence;
@@ -603,7 +609,7 @@ private:
 	// Called when a node becomes seen or has changed.  Discovers the node and
 	// those of the 6 surrounding edges/triangles that are not seen from another
 	// node.
-	void rediscover_node(const Map&, const Widelands::Field&, const FCoords&);
+	void rediscover_node(const Map&, const FCoords&);
 
 	std::unique_ptr<Notifications::Subscriber<NoteImmovable>> immovable_subscriber_;
 	std::unique_ptr<Notifications::Subscriber<NoteFieldTerrainChanged>>
@@ -632,6 +638,10 @@ private:
 	Economies economies_;
 	std::string name_;  // Player name
 	std::string ai_;    /**< Name of preferred AI implementation */
+
+	// NOCOM saveloading
+	// Fields that were explicitly hidden, with their vision at the time of hiding
+	std::map<MapIndex, Widelands::Vision> hidden_fields_;
 
 	/**
 	 * Wares produced (by ware id) since the last call to @ref sample_statistics

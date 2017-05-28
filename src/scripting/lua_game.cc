@@ -588,90 +588,56 @@ int LuaPlayer::add_objective(lua_State* L) {
 /* RST
    .. method:: reveal_fields(fields)
 
-      Make these fields visible for the current player. The fields will remain
-      visible until they are hidden again.
+      Make these fields visible for the current player. If the fields were previously hidden with
+      `hide_fields` before, restores the exact vision that they had before that was done.
 
-      :arg fields: The fields to show
+      :arg fields: The fields to reveal
       :type fields: :class:`array` of :class:`wl.map.Fields`
-
-      :arg show_completely: *Optional*. The fields will be marked as explored as if a building was
-         seeing them. Always use this option as `true` if you hid the fields with the option
-         `hide_completely` set to `true`.
-      :type show_completely: :class:`boolean`
 
       :returns: :const:`nil`
 */
 int LuaPlayer::reveal_fields(lua_State* L) {
-	EditorGameBase& egbase = get_egbase(L);
-	Player& p = get(L, egbase);
-	Map& m = egbase.map();
+	Game& game = get_game(L);
+	Player& p = get(L, game);
 
 	luaL_checktype(L, 2, LUA_TTABLE);
-	const bool bump_vision = (!lua_isnone(L, 3) && luaL_checkboolean(L, 3));
 
 	lua_pushnil(L); /* first key */
 	while (lua_next(L, 2) != 0) {
-		LuaField* field = *get_user_class<LuaField>(L, -1);
-		p.see_node(m, m[0], field->fcoords(L), egbase.get_gametime());
+		game.send_player_hide_reveal_field(p.player_number(), (*get_user_class<LuaField>(L, -1))->coords(), SeeUnseeNode::kReveal);
 		lua_pop(L, 1);
-		// Player should now see what the buildings see
-		if (bump_vision) {
-			p.see_node(m, m[0], field->fcoords(L), egbase.get_gametime());
-		}
 	}
-
 	return 0;
 }
 
 /* RST
    .. method:: hide_fields(fields)
 
-      Make these fields hidden for the current player if they are not
-      seen by a building.
+      Make these fields hidden for the current player.
 
       :arg fields: The fields to hide
       :type fields: :class:`array` of :class:`wl.map.Fields`
 
-      :arg hide_completely: *Optional*. If  `true`, the fields will be marked as unexplored and the buildings'
-         vision ignored. When you reveal the fields again, use the option `show_completely` and set it to `true`.
-      :type hide_completely: :class:`boolean`
+      :arg unexplore: *Optional*. If  `true`, the fields will be marked as completely unexplored.
+      :type unexplore: :class:`boolean`
 
       :returns: :const:`nil`
 */
+// UNTESTED
 int LuaPlayer::hide_fields(lua_State* L) {
-	EditorGameBase& egbase = get_egbase(L);
-	Player& p = get(L, egbase);
-	Map& m = egbase.map();
+	Game& game = get_game(L);
+	Player& p = get(L, game);
 
 	luaL_checktype(L, 2, LUA_TTABLE);
-	const Player::UnseeNodeMode mode = (!lua_isnone(L, 3) && luaL_checkboolean(L, 3)) ?
-	                                      Player::UnseeNodeMode::kUnexplore :
-	                                      Player::UnseeNodeMode::kUnsee;
+	const SeeUnseeNode mode = (!lua_isnone(L, 3) && luaL_checkboolean(L, 3)) ?
+	                                      SeeUnseeNode::kUnexplore :
+	                                      SeeUnseeNode::kUnsee;
 
 	lua_pushnil(L); /* first key */
 	while (lua_next(L, 2) != 0) {
-		p.unsee_node(
-		   (*get_user_class<LuaField>(L, -1))->fcoords(L).field - &m[0], egbase.get_gametime(), mode);
+		game.send_player_hide_reveal_field(p.player_number(), (*get_user_class<LuaField>(L, -1))->coords(), mode);
 		lua_pop(L, 1);
 	}
-
-	if (mode == Player::UnseeNodeMode::kUnsee) {
-		// Player should still see what the buildings see
-		for (const auto& building_index : p.tribe().buildings()) {
-			const std::vector<Player::BuildingStats>& stats_vector =
-			   p.get_building_statistics(building_index);
-			for (size_t i = 0; i < stats_vector.size(); ++i) {
-				const BaseImmovable* immovable = m[stats_vector[i].pos].get_immovable();
-				if (upcast(const Widelands::Building, building, immovable)) {
-					if (building->is_seeing()) {
-						p.see_area(Area<FCoords>(
-						   m.get_fcoords(building->get_position()), building->descr().vision_range()));
-					}
-				}
-			}
-		}
-	}
-
 	return 0;
 }
 

@@ -761,6 +761,10 @@ void Game::send_player_cancel_expedition_ship(Ship& ship) {
 	   get_gametime(), ship.get_owner()->player_number(), ship.serial()));
 }
 
+void Game::send_player_hide_reveal_field(PlayerNumber pid, const Coords& coords, SeeUnseeNode mode) {
+	send_player_command(*new CmdHideRevealField(get_gametime(), pid, coords, mode));
+}
+
 LuaGameInterface& Game::lua() {
 	return static_cast<LuaGameInterface&>(EditorGameBase::lua());
 }
