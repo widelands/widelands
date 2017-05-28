@@ -5701,16 +5701,16 @@ void DefaultAI::update_player_stat(const uint32_t gametime) {
 					cur_land = genstats.at(j - 1).land_size.back();
 					cass = genstats.at(j - 1).nr_casualties.back();
 
-					if (vsize > 16) {
-						old_strength = genstats.at(j - 1).miltary_strength[vsize - 15];
-						old_land = genstats.at(j - 1).land_size[vsize - 15];
+					if (vsize > 21) {
+						old_strength = genstats.at(j - 1).miltary_strength[vsize - 20];
+						old_land = genstats.at(j - 1).land_size[vsize - 20];
 					} else {
 						old_strength = genstats.at(j - 1).miltary_strength[0];
 						old_land = genstats.at(j - 1).land_size[0];
 					}
-					if (vsize > 61) {
-						old60_strength = genstats.at(j - 1).miltary_strength[vsize - 60];
-						old60_land = genstats.at(j - 1).land_size[vsize - 60];
+					if (vsize > 91) {
+						old60_strength = genstats.at(j - 1).miltary_strength[vsize - 90];
+						old60_land = genstats.at(j - 1).land_size[vsize - 90];
 					} else {
 						old60_strength = genstats.at(j - 1).miltary_strength[0];
 						old60_land = genstats.at(j - 1).land_size[0];

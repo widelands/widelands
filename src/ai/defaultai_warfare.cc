@@ -135,8 +135,9 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 	for (std::map<uint32_t, EnemySiteObserver>::iterator site = enemy_sites.begin();
 	     site != enemy_sites.end(); ++site) {
 
+		assert(site->second.last_time_attacked <= gametime);
 		//Do not attack too soon
-		if (std::min<uint32_t>(site->second.attack_counter, 10) * 20 > (gametime - site->second.last_time_attacked)){
+		if (std::min<uint32_t>(site->second.attack_counter, 10) * 20 * 1000 > (gametime - site->second.last_time_attacked)){
 			continue;
 		}
 
@@ -488,12 +489,12 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 		return false;
 	}
 
-	printf ("%2d: attacking site at %3dx%3d, score %3d, with %2d soldiers, attacking %2d times, after %3d seconds\n",
+	printf ("%2d: attacking site at %3dx%3d, score %3d, with %2d soldiers, attacking %2d times, after %5d seconds\n",
 		player_number(),
 		flag->get_position().x, flag->get_position().y,
 		best_score, attackers,
 		enemy_sites[best_target].attack_counter + 1,
-		(gametime - last_attack_time_) / 1000);
+		(gametime - enemy_sites[best_target].last_time_attacked) / 1000);
 	game().send_player_enemyflagaction(*flag, player_number(), static_cast<uint16_t>(attackers));
 	assert(1 < player_->vision(Map::get_index(flag->get_building()->get_position(), map.get_width())));
 	attackers_count_ += attackers;
