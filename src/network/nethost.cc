@@ -6,6 +6,24 @@
 
 constexpr size_t kNetworkBufferSize = 512;
 
+namespace {
+
+	/**
+	 * Returns the IP version.
+	 * \param acceptor The acceptor socket to get the IP version for.
+	 * \return Either 4 or 6, depending on the version of the given acceptor.
+	 */
+	int get_ip_version(const boost::asio::ip::tcp::acceptor& acceptor) {
+		assert(acceptor.is_open());
+		if (acceptor.local_endpoint().protocol() == boost::asio::ip::tcp::v4()) {
+			return 4;
+		} else {
+			return 6;
+		}
+	}
+}
+
+
 NetHost::Client::Client(boost::asio::ip::tcp::socket&& sock) : socket(std::move(sock)), deserializer() {
 }
 
@@ -35,16 +53,17 @@ bool NetHost::is_connected(const ConnectionId id) const {
 }
 
 void NetHost::stop_listening() {
-	boost::system::error_code ec;
-	if (acceptor_v4_.is_open()) {
-		log("[NetHost]: Closing a listening IPv4 socket.\n");
-		acceptor_v4_.close(ec);
-	}
-	if (acceptor_v6_.is_open()) {
-		log("[NetHost]: Closing a listening IPv6 socket.\n");
-		acceptor_v6_.close(ec);
-	}
-	// Ignore errors
+	static const auto do_stop = [](boost::asio::ip::tcp::acceptor& acceptor) {
+		boost::system::error_code ec;
+		if (acceptor.is_open()) {
+			log("[NetHost]: Closing a listening IPv%d socket.\n", get_ip_version(acceptor));
+			acceptor.close(ec);
+		}
+		// Ignore errors
+	};
+
+	do_stop(acceptor_v4_);
+	do_stop(acceptor_v6_);
 }
 
 void NetHost::close(const ConnectionId id) {
@@ -69,37 +88,30 @@ void NetHost::close(const ConnectionId id) {
 bool NetHost::try_accept(ConnectionId* new_id) {
 	if (!is_listening())
 		return false;
-	boost::system::error_code ec;
 	boost::asio::ip::tcp::socket socket(io_service_);
-	if (acceptor_v4_.is_open()) {
-		acceptor_v4_.accept(socket, ec);
-		if (ec == boost::asio::error::would_block) {
-			// No client wants to connect
-			// New socket don't need to be closed since it isn't open yet
-		} else if (ec) {
-			// Some other error, close the acceptor
-			log("[NetHost] No longer listening for IPv4 connections due to error: %s.\n",
-				ec.message().c_str());
-			acceptor_v4_.close(ec);
-		} else {
-			log("[NetHost]: Accepting IPv4 connection from %s.\n",
-				socket.remote_endpoint().address().to_string().c_str());
+
+	const auto do_try_accept = [&socket](boost::asio::ip::tcp::acceptor& acceptor) {
+		boost::system::error_code ec;
+		if (acceptor.is_open()) {
+			acceptor.accept(socket, ec);
+			if (ec == boost::asio::error::would_block) {
+				// No client wants to connect
+				// New socket don't need to be closed since it isn't open yet
+			} else if (ec) {
+				// Some other error, close the acceptor
+				log("[NetHost] No longer listening for IPv%d connections due to error: %s.\n",
+					get_ip_version(acceptor), ec.message().c_str());
+				acceptor.close(ec);
+			} else {
+				log("[NetHost]: Accepting IPv%d connection from %s.\n",
+					get_ip_version(acceptor), socket.remote_endpoint().address().to_string().c_str());
+			}
 		}
-	}
-	if (acceptor_v6_.is_open() && !socket.is_open()) {
-		// IPv4 did not get a connection
-		acceptor_v6_.accept(socket, ec);
-		if (ec == boost::asio::error::would_block) {
-			// No client wants to connect
-		} else if (ec) {
-			log("[NetHost] No longer listening for IPv6 connections due to error: %s.\n",
-				ec.message().c_str());
-			acceptor_v6_.close(ec);
-		} else {
-			log("[NetHost]: Accepting IPv6 connection from %s.\n",
-				socket.remote_endpoint().address().to_string().c_str());
-		}
-	}
+	};
+
+	do_try_accept(acceptor_v4_);
+	if (!socket.is_open())
+		do_try_accept(acceptor_v6_);
 
 	if (!socket.is_open()) {
 		// No new connection
@@ -160,8 +172,9 @@ void NetHost::send(const ConnectionId id, const SendPacket& packet) {
 	if (is_connected(id)) {
 		size_t written = boost::asio::write(clients_.at(id).socket,
 											boost::asio::buffer(packet.get_data(), packet.get_size()), ec);
-		// This one is an assertion of mine, I am not sure if it will hold
+		// TODO(Notabilis): This one is an assertion of mine, I am not sure if it will hold
 		// If it doesn't, set the socket to blocking before writing
+		// If it does, remove this comment after build 20
 		assert(ec != boost::asio::error::would_block);
 		assert(written == packet.get_size() || ec);
 		if (ec) {

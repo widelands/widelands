@@ -24,6 +24,7 @@
 #include <string>
 #include <vector>
 
+#include <boost/asio.hpp>
 #include <boost/lexical_cast.hpp>
 
 #include "base/wexception.h"
@@ -61,13 +62,29 @@ struct NetAddress {
 	static bool resolve_to_v6(NetAddress *addr, const std::string& hostname, uint16_t port);
 
 	/**
+	 * Parses the given string to an IP address.
+	 * \param[out] addr An NetAddress structure to write the result to,
+	 *                  if parsing succeeds.
+	 * \param ip An IP address as string.
+	 * \param port The port on the host.
+	 * \return \c True if the parsing succeeded, \c false otherwise.
+	 */
+	static bool parse_ip(NetAddress *addr, const std::string& ip, uint16_t port);
+
+	/**
 	 * Returns whether the stored IP is in IPv6 format.
 	 * @return \c true if the stored IP is in IPv6 format, \c false otherwise.
 	 *   If it isn't an IPv6 address, it is an IPv4 address.
 	 */
 	bool is_ipv6() const;
 
-	std::string ip;
+	/**
+	 * Returns whether valid IP address and port are stored.
+	 * @return \c true if valid, \c false otherwise.
+	 */
+	bool is_valid() const;
+
+	boost::asio::ip::address ip;
 	uint16_t port;
 };
 

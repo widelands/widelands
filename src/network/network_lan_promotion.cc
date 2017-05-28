@@ -132,22 +132,19 @@ LanBase::~LanBase() {
 }
 
 bool LanBase::is_available() {
-	boost::system::error_code ec;
-	bool available_v4 = (socket_v4.is_open() && socket_v4.available(ec) > 0);
-	if (ec) {
-		log("[LAN] Error when checking whether data is available on IPv4 socket, closing it: %s.\n",
-			ec.message().c_str());
-		close_socket(&socket_v4);
-		available_v4 = false;
-	}
-	bool available_v6 = (socket_v6.is_open() && socket_v6.available(ec) > 0);
-	if (ec) {
-		log("[LAN] Error when checking whether data is available on IPv6 socket, closing it: %s.\n",
-			ec.message().c_str());
-		close_socket(&socket_v6);
-		available_v4 = false;
-	}
-	return available_v4 || available_v6;
+	const auto do_is_available = [this](boost::asio::ip::udp::socket& socket) -> bool {
+		boost::system::error_code ec;
+		bool available = (socket.is_open() && socket.available(ec) > 0);
+		if (ec) {
+			log("[LAN] Error when checking whether data is available on IPv%d socket, closing it: %s.\n",
+				get_ip_version(socket.local_endpoint().protocol()), ec.message().c_str());
+			close_socket(&socket);
+			return false;
+		}
+		return available;
+	};
+
+	return do_is_available(socket_v4) || do_is_available(socket_v6);
 }
 
 bool LanBase::is_open() {
@@ -157,47 +154,45 @@ bool LanBase::is_open() {
 ssize_t LanBase::receive(void* const buf, size_t const len, NetAddress *addr) {
 	assert(buf != nullptr);
 	assert(addr != nullptr);
-	boost::asio::ip::udp::endpoint sender_endpoint;
-	size_t recv_len;
-	if (socket_v4.is_open()) {
-		try {
-			if (socket_v4.available() > 0) {
-				recv_len = socket_v4.receive_from(boost::asio::buffer(buf, len), sender_endpoint);
-				*addr = NetAddress{sender_endpoint.address().to_string(), sender_endpoint.port()};
-				assert(recv_len <= len);
-				return recv_len;
+	size_t recv_len = 0;
+
+	const auto do_receive
+		= [this, &buf, &len, &recv_len, addr](boost::asio::ip::udp::socket& socket) -> bool {
+		if (socket.is_open()) {
+			try {
+				if (socket.available() > 0) {
+					boost::asio::ip::udp::endpoint sender_endpoint;
+					recv_len = socket.receive_from(boost::asio::buffer(buf, len), sender_endpoint);
+					*addr = NetAddress{sender_endpoint.address(), sender_endpoint.port()};
+					assert(recv_len <= len);
+					return true;
+				}
+			} catch (const boost::system::system_error& ec) {
+				// Some network error. Close the socket
+				log("[LAN] Error when receiving data on IPv%d socket, closing it: %s.\n",
+						get_ip_version(socket.local_endpoint().protocol()), ec.what());
+				close_socket(&socket);
 			}
-		} catch (const boost::system::system_error& ec) {
-			// Some network error. Close the socket
-			log("[LAN] Error when receiving data on IPv4 socket, closing it: %s.\n", ec.what());
-			close_socket(&socket_v4);
 		}
-	}
-	// We only reach this point if there was nothing to receive for IPv4
-	if (socket_v6.is_open()) {
-		try {
-			if (socket_v6.available() > 0) {
-				recv_len = socket_v6.receive_from(boost::asio::buffer(buf, len), sender_endpoint);
-				*addr = NetAddress{sender_endpoint.address().to_string(), sender_endpoint.port()};
-				assert(recv_len <= len);
-				return recv_len;
-			}
-		} catch (const boost::system::system_error& ec) {
-			log("[LAN] Error when receiving data on IPv6 socket, closing it: %s.\n", ec.what());
-			close_socket(&socket_v6);
-		}
-	}
-	// Nothing to receive at all. So lonely here...
-	return 0;
+		// Nothing received
+		return false;
+	};
+
+	// Try to receive something somewhere
+	if (!do_receive(socket_v4))
+		do_receive(socket_v6);
+
+	// Return how much has been received, might be 0
+	return recv_len;
 }
 
 bool LanBase::send(void const* const buf, size_t const len, const NetAddress& addr) {
 	boost::system::error_code ec;
-	const boost::asio::ip::address address = boost::asio::ip::address::from_string(addr.ip, ec);
+	assert(addr.is_valid());
 	// If this assert failed, then there is some bug in the code. NetAddress should only be filled
 	// with valid IP addresses (e.g. no hostnames)
 	assert(!ec);
-	boost::asio::ip::udp::endpoint destination(address, addr.port);
+	boost::asio::ip::udp::endpoint destination(addr.ip, addr.port);
 	boost::asio::ip::udp::socket *socket = nullptr;
 	if (destination.address().is_v4()) {
 		socket = &socket_v4;
@@ -211,13 +206,13 @@ bool LanBase::send(void const* const buf, size_t const len, const NetAddress& ad
 		// I think this shouldn't happen normally. It might happen, though, if we receive
 		// a broadcast and learn the IP, then our sockets goes down, then we try to send
 		log("[LAN] Error: trying to send to an IPv%d address but socket is not open.\n",
-			get_ip_version(address));
+			get_ip_version(addr.ip));
 		return false;
 	}
 	socket->send_to(boost::asio::buffer(buf, len), destination, 0, ec);
 	if (ec) {
 		log("[LAN] Error when trying to send something over IPv%d, closing socket: %s.\n",
-			get_ip_version(address), ec.message().c_str());
+			get_ip_version(addr.ip), ec.message().c_str());
 		close_socket(socket);
 		return false;
 	}
@@ -225,38 +220,30 @@ bool LanBase::send(void const* const buf, size_t const len, const NetAddress& ad
 }
 
 bool LanBase::broadcast(void const* const buf, size_t const len, uint16_t const port) {
-	boost::system::error_code ec;
-	bool error_v4 = false;
-	if (socket_v4.is_open()) {
-		for (const std::string& address : broadcast_addresses_v4) {
+
+	const auto do_broadcast
+		= [this, buf, len, port](boost::asio::ip::udp::socket& socket, const std::string& address) -> bool {
+		if (socket.is_open()) {
+			boost::system::error_code ec;
 			boost::asio::ip::udp::endpoint destination(boost::asio::ip::address::from_string(address), port);
-			socket_v4.send_to(boost::asio::buffer(buf, len), destination, 0, ec);
-			if (ec) {
-				log("[LAN] Error when broadcasting on IPv4 socket to %s, closing it: %s.\n",
-					address.c_str(), ec.message().c_str());
-				close_socket(&socket_v4);
-				error_v4 = true;
-				break;
+			socket.send_to(boost::asio::buffer(buf, len), destination, 0, ec);
+			if (!ec) {
+				return true;
 			}
+			log("[LAN] Error when broadcasting on IPv%d socket to %s, closing it: %s.\n",
+				get_ip_version(destination.address()), address.c_str(), ec.message().c_str());
+			close_socket(&socket);
 		}
+		return false;
+	};
+
+	bool one_success = false;
+	for (const std::string& address : broadcast_addresses_v4) {
+		one_success |= do_broadcast(socket_v4, address);
 	}
-	if (socket_v6.is_open()) {
-		boost::asio::ip::address addr(boost::asio::ip::address::from_string("ff02::1", ec));
-		assert(!ec);
-		boost::asio::ip::udp::endpoint destination(addr, port);
-		socket_v6.send_to(boost::asio::buffer(buf, len), destination, 0, ec);
-		if (ec) {
-			log("[LAN] Error when broadcasting on IPv6 socket, closing it: %s.\n", ec.message().c_str());
-			close_socket(&socket_v6);
-			if (error_v4) {
-				return false;
-			}
-		}
-		// At least one of them succeeded
-		return true;
-	}
-	// IPv6 did not run, return whether IPv4 succeeded
-	return !error_v4;
+	one_success |= do_broadcast(socket_v6, "ff02::1");
+
+	return one_success;
 }
 
 void LanBase::start_socket(boost::asio::ip::udp::socket *socket, boost::asio::ip::udp version, uint16_t port) {
@@ -366,7 +353,7 @@ void LanGamePromoter::run() {
 		if (receive(magic, 8, &addr) < 8)
 			continue;
 
-		log("Received %s packet from %s\n", magic, addr.ip.c_str());
+		log("Received %s packet from %s\n", magic, addr.ip.to_string().c_str());
 
 		if (!strncmp(magic, "QUERY", 6) && magic[6] == LAN_PROMOTION_PROTOCOL_VERSION) {
 			if (!send(&gameinfo, sizeof(gameinfo), addr)) {
@@ -410,7 +397,7 @@ void LanGameFinder::run() {
 		if (receive(&info, sizeof(info), &addr) < static_cast<int32_t>(sizeof(info)))
 			continue;
 
-		log("Received %s packet from %s\n", info.magic, addr.ip.c_str());
+		log("Received %s packet from %s\n", info.magic, addr.ip.to_string().c_str());
 
 		if (strncmp(info.magic, "GAME", 6))
 			continue;

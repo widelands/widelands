@@ -70,8 +70,9 @@ void NetClient::send(const SendPacket& packet) {
 	boost::system::error_code ec;
 	size_t written = boost::asio::write(socket_,
 						boost::asio::buffer(packet.get_data(), packet.get_size()), ec);
-	// This one is an assertion of mine, I am not sure if it will hold
+	// TODO(Notabilis): This one is an assertion of mine, I am not sure if it will hold
 	// If it doesn't, set the socket to blocking before writing
+	// If it does, remove this comment after build 20
 	assert(ec != boost::asio::error::would_block);
 	assert(written == packet.get_size() || ec);
 	if (ec) {
@@ -83,12 +84,11 @@ void NetClient::send(const SendPacket& packet) {
 NetClient::NetClient(const NetAddress& host)
    : io_service_(), socket_(io_service_), deserializer_() {
 
-	boost::system::error_code ec;
-	const boost::asio::ip::address address = boost::asio::ip::address::from_string(host.ip, ec);
-	assert(!ec);
-	const boost::asio::ip::tcp::endpoint destination(address, host.port);
+	assert(host.is_valid());
+	const boost::asio::ip::tcp::endpoint destination(host.ip, host.port);
 
-	log("[NetClient]: Trying to connect to %s:%u ... ", host.ip.c_str(), host.port);
+	log("[NetClient]: Trying to connect to %s:%u ... ", host.ip.to_string().c_str(), host.port);
+	boost::system::error_code ec;
 	socket_.connect(destination, ec);
 	if (!ec && is_connected()) {
 		log("success.\n");
