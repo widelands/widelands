@@ -23,8 +23,6 @@
 #include <map>
 #include <memory>
 
-#include <boost/asio.hpp>
-
 #include "network/network.h"
 
 /**

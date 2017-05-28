@@ -20,7 +20,6 @@
 #ifndef WL_NETWORK_NETWORK_LAN_PROMOTION_H
 #define WL_NETWORK_NETWORK_LAN_PROMOTION_H
 
-#include <boost/asio.hpp>
 #include <list>
 #include <set>
 
