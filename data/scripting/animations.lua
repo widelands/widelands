@@ -98,9 +98,11 @@ function reveal_concentric(plr, center, max_radius, delay)
    end
    plr:hide_fields(center:region(max_radius), true)
    if not delay then delay = 100 end
-   local steps = 0
+   local steps = 1
+   local pre_step = 0
    while steps < max_radius do
-      plr:reveal_fields(center:region(steps), true)
+      plr:reveal_fields(center:region(steps, pre_step), true)
+      pre_step = steps
       steps = steps + 1
       sleep(delay)
    end
