@@ -3019,19 +3019,8 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 
 	if (!(best_building->type == BuildingObserver::Type::kMilitarysite)) {
 		best_building->construction_decision_time = gametime;
-	} else {  // very ugly hack here
-		//BuildableField bf2(map.get_fcoords(proposed_coords));
-		//update_buildable_field(bf2);
-		//printf ("Building msite at %3dx%3d: needed for defense: %s (%2d<%2d), beyond bspot: %2d(%2d-%2d)) \n",
-		//proposed_coords.x, proposed_coords.y,
-		//(bf2.defense_msite_allowed) ? "Y":"N",
-		//bf2.area_military_capacity, bf2.enemy_military_presence,
-		//static_cast<int16_t>(best_building->desc->get_conquers()) - static_cast<int16_t>(bf2.nearest_buildable_spot_nearby),
-		//static_cast<int16_t>(best_building->desc->get_conquers()),
-		//static_cast<int16_t>(bf2.nearest_buildable_spot_nearby)
-		
-		//);   //NOCOM
-		
+	} else {
+	
 		military_last_build_ = gametime;
 		best_building->construction_decision_time = gametime - kBuildingMinInterval / 2;
 	}
@@ -4255,24 +4244,23 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
                                                       const uint32_t gametime) {
 
 	bo.primary_priority = 0;
-	// BasicEconomyBuildingStatus : uint8_t { kEncouraged, kDiscouraged,kNeutral };
 	
-	BasicEconomyBuildingStatus site_needed_for_economy = BasicEconomyBuildingStatus::kNeutral;
+	BasicEconomyBuildingStatus site_needed_for_economy = BasicEconomyBuildingStatus::kNone;
 	if (gametime > 2 * 60 * 1000 && gametime < 120 * 60 * 1000 && !basic_economy_established){
 		if (remaining_basic_buildings.count(bo.id)){
 			if (static_cast<uint32_t>(bo.total_count()) >= remaining_basic_buildings[bo.id]) { // exemption for sawmill
 				site_needed_for_economy = BasicEconomyBuildingStatus::kDiscouraged;
 				//printf ("%s is critical but is discouraged\n",bo.name);
 				
-			} else if (spots_ < kSpotsTooLittle){
+			} else if (spots_ < kSpotsTooLittle && bo.type != BuildingObserver::Type::kMine){
 				site_needed_for_economy = BasicEconomyBuildingStatus::kNeutral;
 			} else {
 				site_needed_for_economy = BasicEconomyBuildingStatus::kEncouraged;
-				//if (gametime % 50 == 0)printf ("%s is critical and encouraged\n",bo.name);
+				if (gametime % 50 == 0)printf ("%s is critical and encouraged\n",bo.name);
 			}
 			
 		} else if (remaining_basic_buildings.count(bo.id) == 0){
-			site_needed_for_economy = BasicEconomyBuildingStatus::kDiscouraged;
+			site_needed_for_economy = BasicEconomyBuildingStatus::kNone;
 			//printf ("%s not critical and is discouraged\n",bo.name);
 		} 
 	} //else 
@@ -4280,8 +4268,6 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 		//printf (" no treatment for  %s, gametime %d, %s\n", bo.name, gametime );
 	//}
 
-
-	
 	// Very first we finds if AI is allowed to build such building due to its mode
 	if (purpose == PerfEvaluation::kForConstruction &&
 	    bo.aimode_limit_status() != AiModeBuildings::kAnotherAllowed) {
@@ -4654,28 +4640,8 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 				paralel_construction = true;				
 			}
 			
-			//int32_t value = management_data.neuron_pool[39].get_result_safe(
-			   //mines_.size() + productionsites.size() / 2, kAbsValue);
-			//value -= management_data.neuron_pool[40].get_result_safe(
-			   //persistent_data->trees_around_cutters, kAbsValue);
-			//value -= management_data.neuron_pool[41].get_result_safe(
-			   //get_stocklevel(bo, gametime) / 4, kAbsValue);
-			//value -= management_data.neuron_pool[42].get_result_safe(bo.total_count(), kAbsValue);
-			//value += management_data.get_military_number_at(13);
-			//if (persistent_data->trees_around_cutters < 4){
-				//value += management_data.get_military_number_at(59);				
-			//}
-			//value /= 1 + std::abs(management_data.get_military_number_at(52))/ 10;
-			//value = std::max(value, -3);
-
-			//bo.cnt_target = 5 + value;
 			assert(bo.cnt_target > 1 && bo.cnt_target < 1000);
 			
-			//if (gametime % 50 == 0) printf ("Rangers target: %5d, now %2d, trees around lumberjacks: %3d/10, paralel: %s\n",
-			//bo.cnt_target, bo.total_count(), persistent_data->trees_around_cutters, (paralel_construction)?"Y":"N");
-
-
-
 			if (wood_policy_ != WoodPolicy::kAllowRangers) {
 				return BuildingNecessity::kForbidden;
 			}
@@ -4981,9 +4947,10 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 			const int16_t upper_limit = bottom_limit + std::abs(management_data.get_military_number_at(44) / 3);			
 
 
-			//if (site_needed_for_economy == BasicEconomyBuildingStatus::kEncouraged) {
-				//printf ("encouraged building %s with score %d (upper limit %d)\n", bo.name, tmp_score, upper_limit);
-			//}
+			if (!basic_economy_established && site_needed_for_economy != BasicEconomyBuildingStatus::kDiscouraged && gametime % 50 == 0) {
+				printf ("%s building %s with score %d (upper limit %d)\n",
+				 (site_needed_for_economy == BasicEconomyBuildingStatus::kEncouraged) ? "Encouraged":"Allowed",bo.name, tmp_score, upper_limit);
+			}
 				
 			if (tmp_score > upper_limit) {
 				bo.primary_priority += (tmp_score - bottom_limit) / 2;
