@@ -519,10 +519,16 @@ void Soldier::draw_info_icon(Vector2i draw_position,
 	if (draw_health_bar) {
 		// Draw energy bar
 		assert(get_max_health());
+		const RGBColor& color = owner().get_playercolor();
+		const uint16_t color_sum = color.r + color.g + color.b;
+
+		// The frame gets a slight tint of player color
 		const Recti energy_outer(draw_position - Vector2i(kSoldierHealthBarWidth, 0) * scale,
 		                         kSoldierHealthBarWidth * 2 * scale, 5 * scale);
-		dst->fill_rect(energy_outer, RGBColor(255, 255, 255));
+		dst->fill_rect(energy_outer, color);
+		dst->brighten_rect(energy_outer, 230 - color_sum / 3);
 
+		// Now draw the health bar itself
 		const int health_width =
 		   2 * (kSoldierHealthBarWidth - 1) * current_health_ / get_max_health();
 		Recti energy_inner(draw_position + Vector2i(-kSoldierHealthBarWidth + 1, 1) * scale,
@@ -530,14 +536,7 @@ void Soldier::draw_info_icon(Vector2i draw_position,
 		Recti energy_complement(energy_inner.origin() + Vector2i(health_width, 0) * scale,
 		                        (2 * (kSoldierHealthBarWidth - 1) - health_width) * scale, 3 * scale);
 
-		const RGBColor& color = owner().get_playercolor();
-		RGBColor complement_color;
-		if (static_cast<uint32_t>(color.r) + color.g + color.b > 128 * 3) {
-			complement_color = RGBColor(32, 32, 32);
-		} else {
-			complement_color = RGBColor(224, 224, 224);
-		}
-
+		const RGBColor complement_color = color_sum > 128 * 3 ? RGBColor(32, 32, 32) : RGBColor(224, 224, 224);
 		dst->fill_rect(energy_inner, color);
 		dst->fill_rect(energy_complement, complement_color);
 	}
