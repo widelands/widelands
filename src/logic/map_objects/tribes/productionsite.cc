@@ -260,31 +260,39 @@ void ProductionSite::load_finish(EditorGameBase& egbase) {
  * Display whether we're occupied.
  */
 void ProductionSite::update_statistics_string(std::string* s) {
-	uint32_t const nr_working_positions = descr().nr_working_positions();
-	uint32_t nr_workers = 0;
-	for (uint32_t i = nr_working_positions; i;)
-		nr_workers += working_positions_[--i].worker ? 1 : 0;
-
-	if (nr_workers == 0) {
-		*s = (boost::format("<font color=%s>%s</font>") % UI_FONT_CLR_BAD.hex_value() %
-		      _("(not occupied)"))
-		        .str();
-		return;
-	}
-
-	if (uint32_t const nr_requests = nr_working_positions - nr_workers) {
-		*s = (boost::format("<font color=%s>%s</font>") % UI_FONT_CLR_BAD.hex_value() %
-		      ngettext("Worker missing", "Workers missing", nr_requests))
-		        .str();
-		return;
-	}
-
 	if (is_stopped_) {
 		*s = (boost::format("<font color=%s>%s</font>") % UI_FONT_CLR_BRIGHT.hex_value() %
-		      _("(stopped)"))
+		      _("Stopped"))
 		        .str();
 		return;
 	}
+
+	uint32_t nr_requests = 0;
+	uint32_t nr_coming = 0;
+	for (uint32_t i = 0; i < descr().nr_working_positions(); ++i) {
+		const Widelands::Request* request = working_positions_[i].worker_request;
+		if (request) {
+			if (request->is_open()) {
+				++nr_requests;
+			} else {
+				++nr_coming;
+			}
+		}
+	}
+
+	if (nr_requests > 0) {
+		*s = (boost::format("<font color=%s>%s</font>") % UI_FONT_CLR_BAD.hex_value() %
+		      (nr_requests > 1 ? ngettext("Worker missing", "Workers missing", nr_requests) : _("Worker missing")))
+		        .str();
+		return;
+	}
+	if (nr_coming > 0) {
+		*s = (boost::format("<font color=%s>%s</font>") % UI_FONT_CLR_GOOD.hex_value() %
+		      (nr_coming > 1 ? ngettext("Waiting for worker", "Waiting for workers", nr_coming) : _("Waiting for worker")))
+		        .str();
+		return;
+	}
+
 	*s = statistics_string_on_changed_statistics_;
 }
 
