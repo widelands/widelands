@@ -1065,14 +1065,14 @@ void Player::hide_or_reveal_field(const uint32_t gametime, const Coords& coords,
 	switch (mode) {
 	// Reveal field
 	case SeeUnseeNode::kReveal: {
-		Widelands::Vision vision = see_node(map, fcoords, gametime);
+		Widelands::Vision new_vision = see_node(map, fcoords, gametime);
 		// If the field was manually hidden, restore the original vision
 		const Widelands::MapIndex index = fcoords.field - &map[0];
 		if (hidden_fields_.count(index) == 1) {
 			auto iter = hidden_fields_.find(index);
 			Vision original_vision = iter->second;
-			while (vision < original_vision) {
-				vision = see_node(map, fcoords, gametime);
+			while (new_vision < original_vision) {
+				new_vision = see_node(map, fcoords, gametime);
 			}
 			hidden_fields_.erase(iter);
 		}
@@ -1081,10 +1081,10 @@ void Player::hide_or_reveal_field(const uint32_t gametime, const Coords& coords,
 	case SeeUnseeNode::kUnsee:
 	case SeeUnseeNode::kUnexplore: {
 		const Widelands::MapIndex index = fcoords.field - &map[0];
-		const Widelands::Vision vision = unsee_node(index, gametime, mode);
+		const Widelands::Vision new_vision = unsee_node(index, gametime, mode);
 		// Remember the original vision so that we can unhide the fields again
 		if (hidden_fields_.count(index) != 1) {
-			hidden_fields_.insert(std::make_pair(index, vision));
+			hidden_fields_.insert(std::make_pair(index, new_vision));
 		}
 	} break;
 	}
