@@ -2,12 +2,15 @@
 # Copyright (C) 2005-2017 Widelands Development Team
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
+# Translators:
+# Jukka Pakarinen <flegmaatikko@gmail.com>, 2017
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-05-18 21:30+0000\n"
+"POT-Creation-Date: 2017-05-19 07:45+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: Jukka Pakarinen <flegmaatikko@gmail.com>, 2017\n"
 "Language-Team: Finnish (https://www.transifex.com/widelands/teams/35159/fi/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -17,39 +20,43 @@ msgstr ""
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:39
 msgid "Build your first outpost"
-msgstr ""
+msgstr "Rakenna ensimmäinen etuvartioasemasi"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:41
 msgid "First Outpost"
-msgstr ""
+msgstr "Ensimmäinen Etuvartioasema"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:42
 msgid ""
 "Build an outpost at the yellow house symbol to the east of your provisional "
 "headquarters."
 msgstr ""
+"Rakenna etuvartioasema keltaisella talosymbolilla väliaikaisesta "
+"päämajastasi itään."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:48
 msgid "Build a quarry"
-msgstr ""
+msgstr "Rakenna kivilouhos"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:50
 msgid "Quarry"
-msgstr ""
+msgstr "Kivilouhos"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:51
 msgid ""
 "Build a quarry close to the abundant rocks, so we can free some building "
 "plots and get some valuable resources."
 msgstr ""
+"Rakenna kivilouhos lähelle runsasta kivikkoa, jotta voimme vapauttaa "
+"rakennuspaikkoja ja saada arvokkaita resursseja."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:57
 msgid "Build a lumberjack’s house, a sawmill and a stonemason’s house"
-msgstr ""
+msgstr "Rakenna puunhakkaajan mökki, saha ja kivenhakkaajan talo"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:59
 msgid "Lumberjack, Sawmill and Stonemason"
-msgstr ""
+msgstr "Puunhakkaaja, Saha ja Kivenhakkaaja"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:60
 msgid ""
@@ -57,140 +64,160 @@ msgid ""
 "there is enough space for them. This will complete the basic building "
 "material supply chain."
 msgstr ""
+"Rakenna puunhakkaajan talo, saha ja kivenhakkaajan talo heti, kun niille on "
+"riittävästi tilaa. Se täydentää perusrakennusmateriaalien toimitusketjua."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:66
 msgid "Lower the demand for marble columns"
-msgstr ""
+msgstr "Pienennä marmoripylväiden kysyntää"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:68
 msgid "Lower Demand for Marble Columns"
-msgstr ""
+msgstr "Pienennä Marmoripylväiden Kysyntää"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:69
 msgid ""
 "We should save some marble for buildings. So, please lower the demand for "
 "marble columns in the economy settings to four."
 msgstr ""
+"Meidän pitäisi säästää marmoria rakennuksiin. Joten pienennäthän "
+"marmoripylväiden kysynnän neljään talouden asetuksissa."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:70
 msgid ""
 "Remember that you can access the economy settings by clicking on any flag."
 msgstr ""
+"Muistathan, että pääset talouden asetuksiin painamalla mitä tahansa lippua."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:76
 msgid "Find a port space on the small island"
-msgstr ""
+msgstr "Etsi satamapaikka pieneltä saarelta"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:78
 msgid "Port Space"
-msgstr ""
+msgstr "Satamapaikka"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:79
 msgid ""
 "In order to regain access to the sea, we first must discover a port space."
 msgstr ""
+"Jotta saisimme takaisin yhteyden merelle, meidän täytyy ensin löytää "
+"satamapaikka."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:85
 msgid "Build a port and a shipyard on the Island"
-msgstr ""
+msgstr "Rakenna saarelle satama ja telakka "
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:87
 msgid "Ship Industry"
-msgstr ""
+msgstr "Laivateollisuus"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:88
 msgid "Build a port to set sail from this island."
-msgstr ""
+msgstr "Rakenna satama purjehtiaksesi pois saarelta."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:89
 msgid "Build a shipyard to produce the ships to sail on."
-msgstr ""
+msgstr "Rakenna telakka tuottaaksesi aluksia purjehtimiseen."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:94
 msgid "Produce at least 50 sheaves of wheat"
-msgstr ""
+msgstr "Tuota ainakin 50 vehnälyhdettä"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:96
 msgid "Wheat Production"
-msgstr ""
+msgstr "Vehnätuotanto"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:97
 msgid ""
 "To get our wool production started, we need at least 50 sheaves of wheat."
 msgstr ""
+"Saadaksemme villan tuotannon käyntiin, me tarvitsemme ainakin 50 "
+"vehnälyhdettä."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:103
 msgid "Produce cloth for building our first ship"
-msgstr ""
+msgstr "Tuota kangasta ensimmäisen aluksen rakentamista varten"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:105
 msgid "Cloth Production"
-msgstr ""
+msgstr "Kangastuotanto"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:106
 msgid ""
 "Now let’s turn all the wheat into wool (at least 50 bales) and then use the "
 "wool to weave cloth in order to build a ship."
 msgstr ""
+"Muutetaampa ensin kaikki vehnä villaksi (ainakin 50 paalia) ja sitten "
+"kudotaan villasta kangasta aluksen rakentamista varten."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:112
 msgid "Build 2 ports on distant islands"
-msgstr ""
+msgstr "Rakenna 2 satamaa kaukaisille saarille"
 
 #. TRANSLATORS: Objective - create 2 expeditions and found new colonies with
 #. them
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:115
 msgid "Build 2 Expedition Ports"
-msgstr ""
+msgstr "Rakenna 2 Tutkimusmatkasatamaa"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:116
 msgid ""
 "We should explore the island in the south. Use an expedition to build a port"
 " there. Afterwards, let’s try to find some mining resources."
 msgstr ""
+"Meidän pitäisi tutkia etelässä oleva saari. Käytä tukimusmatkaa "
+"rakentaaksesi sinne sataman. Jälkeenpäin yritetään löytää joitakin "
+"kaivosresursseja."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:117
 msgid ""
 "We should send a ship nothwards to gather some intelligence about the "
 "Barbarians. Try to build a port on the island and found an outpost."
 msgstr ""
+"Meidän pitäisi lähettää alus pohjoiseen keräämään tietoja Barbaareista. "
+"Yritä rakentaa saarelle satama ja perusta etuvartioasema."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:123
 msgid "Produce gold to send out expeditions"
-msgstr ""
+msgstr "Tuota kultaa lähettääksesi tutkimusmatkoja"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:125
 msgid "Gold Production"
-msgstr ""
+msgstr "Kultatuotanto"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:126
 msgid ""
 "We need to produce at least 6 gold to be able to colonize our vicinity."
 msgstr ""
+"Meidän täytyy tuottaa ainakin 6 kultaa pystyäksemme asuttamaan meidän "
+"lähialueen."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:132
 msgid "Defeat the Barbarians"
-msgstr ""
+msgstr "Kukista Barbaarit"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:134
 msgid "Defeat the Enemy"
-msgstr ""
+msgstr "Kukista Vihollinen"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:135
 msgid "We should end the Barbarians’ existence in this part of the world."
-msgstr ""
+msgstr "Meidän pitäisi päättää Barbaarien olemassaolo tässä osassa maailmaa."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:141
 msgid "Explore further and build ports"
-msgstr ""
+msgstr "Tutki lisää ja rakenna satamia"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:143
 msgid "Explore Additional Islands and Search for Port Spaces"
-msgstr ""
+msgstr "Tutki Muita Saaria ja Etsi Satamapaikkoja"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:144
 msgid "We should discover more land and build as many ports as we can."
 msgstr ""
+"Meidän pitäisi löytää lisää maata ja rakentaa niin monta satamaa kuin "
+"voimme."
 
 #. TRANSLATORS: Objective header
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:151
@@ -1060,5 +1087,5 @@ msgstr ""
 #: ../../data/scripting/format_scenario.lua:84
 msgid "New Objective"
 msgid_plural "New Objectives"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Uusi Tavoite"
+msgstr[1] "Uudet Tavoitteet"

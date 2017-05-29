@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-05-18 21:30+0000\n"
-"PO-Revision-Date: 2017-05-18 21:33+0000\n"
+"POT-Creation-Date: 2017-05-19 07:45+0000\n"
+"PO-Revision-Date: 2017-05-25 09:45+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Gaelic, Scottish (http://www.transifex.com/widelands/widelands/language/gd/)\n"
 "MIME-Version: 1.0\n"
@@ -2466,7 +2466,7 @@ msgstr "Tha thu ’nad amharc."
 #: ../../src/ui_fsmenu/launch_mpg.cc:418
 #, c-format
 msgid "Unable to load the win condition script file '%s'."
-msgstr ""
+msgstr "Cha b’ urrainn dhuinn am faidhle “%s” airson cumha buaidhe a luchdadh."
 
 #: ../../src/ui_fsmenu/launch_mpg.cc:468
 msgid "Saved players are:"
