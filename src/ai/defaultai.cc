@@ -795,9 +795,9 @@ void DefaultAI::late_initialization() {
 	}
 
 	//printing identified basic buildings  NOCOM
-	printf ("%2d: basic buildings:\n", player_number());
+	printf ("%2d: Starting the basic economy mode, required buildings:\n", player_number());
 	for (auto bb : remaining_basic_buildings) {
-		printf ("   %3d / %-20s,  target %d\n", bb.first, get_building_observer(bb.first).name, bb.second);
+		printf ("   %3d / %-25s,  target %d\n", bb.first, get_building_observer(bb.first).name, bb.second);
 	}
 	
 	assert (barracks_identified); //To be sure we have barracks identified
