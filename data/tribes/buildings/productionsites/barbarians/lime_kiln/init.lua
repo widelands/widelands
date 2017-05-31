@@ -31,9 +31,9 @@ tribes:new_productionsite_type {
    },
 
    aihints = {
-      is_basic = 1,
       very_weak_ai_limit = 1,
-      weak_ai_limit = 2
+      weak_ai_limit = 2,
+      is_basic = 1
    },
 
    working_positions = {
