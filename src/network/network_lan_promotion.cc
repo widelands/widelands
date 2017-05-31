@@ -62,8 +62,20 @@ namespace {
 }
 
 /*** class LanBase ***/
+/**
+ * \internal
+ * In an ideal world, we would use the same code with boost asio for all three operating systems.
+ * Unfortunately, it isn't that easy and we need some platform specific code.
+ * For IPv4, windows needs a special case: For Linux and Apple we have to iterate over all assigned IPv4
+ * addresses (e.g. 192.168.1.68), transform them to broadcast addresses (e.g. 192.168.1.255) and send our
+ * packets to those addresses. For windows, we simply can sent to 255.255.255.255.
+ * For IPv6, Apple requires special handling. On the other two operating systems we can send to the multicast
+ * address ff02::1 (kind of a local broadcast) without specifying over which interface we want to send.
+ * On Apple we have to specify the interface, forcing us to send our message over all interfaces we can find.
+ */
 LanBase::LanBase(uint16_t port)
-	: io_service(), socket_v4(io_service), socket_v6(io_service) {
+	: io_service(), socket_v4(io_service), socket_v6(io_service),
+		broadcast_addresses_v4(), interface_indices_v6() {
 
 #ifndef _WIN32
 	// Iterate over all interfaces. If they support IPv4, store the broadcast-address
@@ -72,7 +84,7 @@ LanBase::LanBase(uint16_t port)
 
 	// Adapted example out of "man getifaddrs"
 	// TODO(Notabilis): I don't like this part. But boost is not able to iterate over
-	// the local IPs at this time. If they ever add it, replace this code
+	// the local IPs and interfaces at this time. If they ever add it, replace this code
 	struct ifaddrs *ifaddr, *ifa;
 	int s, n;
 	char host[NI_MAXHOST];
@@ -83,7 +95,7 @@ LanBase::LanBase(uint16_t port)
 	for (ifa = ifaddr, n = 0; ifa != nullptr; ifa = ifa->ifa_next, n++) {
 		if (ifa->ifa_addr == nullptr)
 			continue;
-		if (!(ifa->ifa_flags & IFF_BROADCAST))
+		if (!(ifa->ifa_flags & IFF_BROADCAST) && !(ifa->ifa_flags & IFF_MULTICAST))
 			continue;
 		switch (ifa->ifa_addr->sa_family) {
 			case AF_INET:
@@ -95,12 +107,16 @@ LanBase::LanBase(uint16_t port)
 				}
 				break;
 			case AF_INET6:
+#ifdef __APPLE__
+				interface_indices_v6.insert(if_nametoindex(ifa->ifa_name));
+#endif
 				start_socket(&socket_v6, boost::asio::ip::udp::v6(), port);
-				// Nothing to insert here. As far as I know, there is only one "broadcast" address for IPv6
+				// No address to store here. There is only one "broadcast" address for IPv6
 				break;
 		}
 	}
 	freeifaddrs(ifaddr);
+
 #else
 	//  As Microsoft does not seem to support if_nameindex, we just broadcast to
 	//  INADDR_BROADCAST.
@@ -221,104 +237,60 @@ bool LanBase::send(void const* const buf, size_t const len, const NetAddress& ad
 
 bool LanBase::broadcast(void const* const buf, size_t const len, uint16_t const port) {
 
+	const auto do_broadcast
+		= [this, buf, len, port](boost::asio::ip::udp::socket& socket, const std::string& address) -> bool {
+		if (socket.is_open()) {
+			boost::system::error_code ec;
+			boost::asio::ip::udp::endpoint destination(boost::asio::ip::address::from_string(address), port);
+			socket.send_to(boost::asio::buffer(buf, len), destination, 0, ec);
+			if (!ec) {
+				return true;
+			}
 #ifdef __APPLE__
-	printf("Compiled for apple\n");
-
-	const auto do_broadcast
-		= [this, buf, len, port](boost::asio::ip::udp::socket& socket, const std::string& address) -> bool {
-		if (socket.is_open()) {
-			boost::system::error_code ec;
-			boost::asio::ip::udp::endpoint destination(boost::asio::ip::address::from_string(address), port);
-			socket.send_to(boost::asio::buffer(buf, len), destination, 0, ec);
-			if (!ec) {
-				return true;
+			if (get_ip_version(destination.address()) == 4) {
+#endif // __APPLE__
+				log("[LAN] Error when broadcasting on IPv%d socket to %s, closing it: %s.\n",
+					get_ip_version(destination.address()), address.c_str(), ec.message().c_str());
+				close_socket(&socket);
+#ifdef __APPLE__
+			} else {
+				log("[LAN] Error when broadcasting on IPv6 socket to %s: %s.\n",
+					address.c_str(), ec.message().c_str());
 			}
-			log("[LAN] Error when broadcasting on IPv%d socket to %s, NOT closing it (due to debugging): %s.\n",
-				get_ip_version(destination.address()), address.c_str(), ec.message().c_str());
-			//close_socket(&socket);
+#endif // __APPLE__
 		}
 		return false;
 	};
 
 	bool one_success = false;
 
-    struct ifaddrs * ifAddrStruct=NULL;
-    struct ifaddrs * ifa=NULL;
-    void * tmpAddrPtr=NULL;
-
-    getifaddrs(&ifAddrStruct);
-
-    // From above
-	int s;
-	char host[NI_MAXHOST];
-
-    for (ifa = ifAddrStruct; ifa != NULL; ifa = ifa->ifa_next) {
-        if (!ifa->ifa_addr) {
-            continue;
-        }
-        if (ifa->ifa_addr->sa_family == AF_INET) { // check it is IP4
-            // is a valid IP4 Address
-            tmpAddrPtr=&((struct sockaddr_in *)ifa->ifa_addr)->sin_addr;
-            char addressBuffer[INET_ADDRSTRLEN];
-            inet_ntop(AF_INET, tmpAddrPtr, addressBuffer, INET_ADDRSTRLEN);
-            printf("%s IPv4 Address %s\n", ifa->ifa_name, addressBuffer);
-
-				s = getnameinfo(ifa->ifa_broadaddr, sizeof(struct sockaddr_in),
-							host, NI_MAXHOST, nullptr, 0, NI_NUMERICHOST);
-				if (s == 0) {
-		boost::asio::ip::address addr = boost::asio::ip::address::from_string(addressBuffer);
-		if (!addr.is_loopback()) {
-				printf("  ... with broadcast address %s\n", host);
-			socket_v4.set_option(boost::asio::ip::multicast::outbound_interface(addr.to_v4()));
-			one_success |= do_broadcast(socket_v4, host);
-			}
-				//boost::asio::ip::address_v4::broadcast(boost::asio::ip::address_v4::from_string(address),
-
-				}
-        } else if (ifa->ifa_addr->sa_family == AF_INET6) { // check it is IP6
-            // is a valid IP6 Address
-            tmpAddrPtr=&((struct sockaddr_in6 *)ifa->ifa_addr)->sin6_addr;
-            char addressBuffer[INET6_ADDRSTRLEN];
-            inet_ntop(AF_INET6, tmpAddrPtr, addressBuffer, INET6_ADDRSTRLEN);
-            printf("%s IPv6 Address %s\n", ifa->ifa_name, addressBuffer);
-		boost::asio::ip::address addr = boost::asio::ip::address::from_string(addressBuffer);
-		if (!addr.is_loopback()) {
-            socket_v6.set_option(boost::asio::ip::multicast::outbound_interface(if_nametoindex(ifa->ifa_name)));
-			one_success |= do_broadcast(socket_v6, "ff02::1");
-		}
-        }
-    }
-    if (ifAddrStruct!=NULL) freeifaddrs(ifAddrStruct);
-
-	return one_success;
-
-#else
-
-	const auto do_broadcast
-		= [this, buf, len, port](boost::asio::ip::udp::socket& socket, const std::string& address) -> bool {
-		if (socket.is_open()) {
-			boost::system::error_code ec;
-			boost::asio::ip::udp::endpoint destination(boost::asio::ip::address::from_string(address), port);
-			socket.send_to(boost::asio::buffer(buf, len), destination, 0, ec);
-			if (!ec) {
-				return true;
-			}
-			log("[LAN] Error when broadcasting on IPv%d socket to %s, closing it: %s.\n",
-				get_ip_version(destination.address()), address.c_str(), ec.message().c_str());
-			close_socket(&socket);
-		}
-		return false;
-	};
-
-	bool one_success = false;
+	// IPv4 broadcasting is the same for all
 	for (const std::string& address : broadcast_addresses_v4) {
 		one_success |= do_broadcast(socket_v4, address);
 	}
+#ifndef __APPLE__
+	// For IPv6 on Linux and Windows just send on an undefined network interface
 	one_success |= do_broadcast(socket_v6, "ff02::1");
+#else // __APPLE__
 
+	// Apple forces us to define which interface we want to send through
+	for (auto it = interface_indices_v6.begin(); it != interface_indices_v6.end(); ) {
+		socket_v6.set_option(boost::asio::ip::multicast::outbound_interface(*it));
+		bool success = do_broadcast(socket_v6, "ff02::1");
+		one_success |= success;
+		if (!success) {
+			// Remove this interface id from the set
+			it = interface_indices_v6.erase(it);
+			if (interface_indices_v6.empty()) {
+				log("[LAN] Warning: No more multicast capable IPv6 interfaces."
+					"Other LAN players won't find your game.\n");
+			}
+		} else {
+			++it;
+		}
+	}
+#endif // __APPLE__
 	return one_success;
-
-#endif // OSX
 }
 
 void LanBase::start_socket(boost::asio::ip::udp::socket *socket, boost::asio::ip::udp version, uint16_t port) {
