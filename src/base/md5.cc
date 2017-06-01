@@ -27,13 +27,11 @@
 
 #include "base/macros.h"
 
-using namespace std;
-
 /**
  * Create a hex string out of the MD5 checksum.
  */
-string Md5Checksum::str() const {
-	string s;
+std::string Md5Checksum::str() const {
+	std::string s;
 
 	for (uint32_t i = 0; i < sizeof(data); ++i) {
 		char buf[3];

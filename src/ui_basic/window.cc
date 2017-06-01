@@ -27,9 +27,8 @@
 #include "graphic/rendertarget.h"
 #include "graphic/text_layout.h"
 
-using namespace std;
-
 namespace UI {
+
 /// Width the horizontal border graphics must have.
 #define HZ_B_TOTAL_PIXMAP_LEN 100
 
@@ -66,12 +65,12 @@ namespace UI {
  * \param title string to display in the window title
  */
 Window::Window(Panel* const parent,
-               const string& name,
+               const std::string& name,
                int32_t const x,
                int32_t const y,
                uint32_t const w,
                uint32_t const h,
-               const string& title)
+               const std::string& title)
    : NamedPanel(parent,
                 name,
                 x,
@@ -105,7 +104,7 @@ Window::Window(Panel* const parent,
 /**
  * Replace the current title with a new one
 */
-void Window::set_title(const string& text) {
+void Window::set_title(const std::string& text) {
 	assert(!is_richtext(text));
 	title_ = text;
 }
@@ -141,7 +140,7 @@ void Window::update_desired_size() {
  */
 void Window::layout() {
 	if (center_panel_ && !is_minimal_) {
-		center_panel_->set_pos(Vector2i(0, 0));
+		center_panel_->set_pos(Vector2i::zero());
 		center_panel_->set_size(get_inner_w(), get_inner_h());
 	}
 }
@@ -235,7 +234,7 @@ void Window::center_to_parent() {
 void Window::draw(RenderTarget& dst) {
 	if (!is_minimal()) {
 		dst.tile(
-		   Recti(Vector2i(0, 0), get_inner_w(), get_inner_h()), pic_background_, Vector2i(0, 0));
+		   Recti(Vector2i::zero(), get_inner_w(), get_inner_h()), pic_background_, Vector2i::zero());
 	}
 }
 
@@ -253,32 +252,32 @@ void Window::draw_border(RenderTarget& dst) {
 		int32_t pos = HZ_B_CORNER_PIXMAP_LEN;
 
 		dst.blitrect  //  top left corner
-		   (Vector2f(0.f, 0.f), pic_top_, Recti(Vector2i(0, 0), pos, TP_B_PIXMAP_THICKNESS));
+		   (Vector2i::zero(), pic_top_, Recti(Vector2i::zero(), pos, TP_B_PIXMAP_THICKNESS));
 
 		//  top bar
 		static_assert(0 <= HZ_B_CORNER_PIXMAP_LEN, "assert(0 <= HZ_B_CORNER_PIXMAP_LEN) failed.");
 		for (; pos < hz_bar_end_minus_middle; pos += HZ_B_MIDDLE_PIXMAP_LEN)
 			dst.blitrect(
-			   Vector2f(pos, 0), pic_top_, Recti(Vector2i(HZ_B_CORNER_PIXMAP_LEN, 0),
+			   Vector2i(pos, 0), pic_top_, Recti(Vector2i(HZ_B_CORNER_PIXMAP_LEN, 0),
 			                                     HZ_B_MIDDLE_PIXMAP_LEN, TP_B_PIXMAP_THICKNESS));
 
 		// odd pixels of top bar and top right corner
 		const int32_t width = hz_bar_end - pos + HZ_B_CORNER_PIXMAP_LEN;
 		assert(0 <= HZ_B_TOTAL_PIXMAP_LEN - width);
-		dst.blitrect(Vector2f(pos, 0), pic_top_,
+		dst.blitrect(Vector2i(pos, 0), pic_top_,
 		             Recti(Vector2i(HZ_B_TOTAL_PIXMAP_LEN - width, 0), width, TP_B_PIXMAP_THICKNESS));
 	}
 
 	// draw the title if we have one
 	if (!title_.empty()) {
 		// The title shouldn't be richtext, but we escape it just to make sure.
-		const Image* text =
+		std::shared_ptr<const UI::RenderedText> text =
 		   autofit_ui_text(richtext_escape(title_), get_inner_w(), UI_FONT_CLR_FG, 13);
 
 		// Blit on pixel boundary (not float), so that the text is blitted pixel perfect.
-		Vector2f pos(get_lborder() + get_inner_w() / 2, TP_B_PIXMAP_THICKNESS / 2);
+		Vector2i pos(get_lborder() + get_inner_w() / 2, TP_B_PIXMAP_THICKNESS / 2);
 		UI::center_vertically(text->height(), &pos);
-		dst.blit(pos, text, BlendMode::UseAlpha, UI::Align::kCenter);
+		text->draw(dst, pos, UI::Align::kCenter);
 	}
 
 	if (!is_minimal_) {
@@ -290,15 +289,15 @@ void Window::draw_border(RenderTarget& dst) {
 
 			static_assert(0 <= VT_B_PIXMAP_THICKNESS, "assert(0 <= VT_B_PIXMAP_THICKNESS) failed.");
 			dst.blitrect  // left top thingy
-			   (Vector2f(0, TP_B_PIXMAP_THICKNESS), pic_lborder_,
-			    Recti(Vector2i(0, 0), VT_B_PIXMAP_THICKNESS, VT_B_THINGY_PIXMAP_LEN));
+			   (Vector2i(0, TP_B_PIXMAP_THICKNESS), pic_lborder_,
+			    Recti(Vector2i::zero(), VT_B_PIXMAP_THICKNESS, VT_B_THINGY_PIXMAP_LEN));
 
 			int32_t pos = TP_B_PIXMAP_THICKNESS + VT_B_THINGY_PIXMAP_LEN;
 
 			//  left bar
 			static_assert(0 <= VT_B_THINGY_PIXMAP_LEN, "assert(0 <= VT_B_THINGY_PIXMAP_LEN) failed.");
 			for (; pos < vt_bar_end_minus_middle; pos += VT_B_MIDDLE_PIXMAP_LEN)
-				dst.blitrect(Vector2f(0, pos), pic_lborder_,
+				dst.blitrect(Vector2i(0, pos), pic_lborder_,
 				             Recti(Vector2i(0, VT_B_THINGY_PIXMAP_LEN), VT_B_PIXMAP_THICKNESS,
 				                   VT_B_MIDDLE_PIXMAP_LEN));
 
@@ -306,7 +305,7 @@ void Window::draw_border(RenderTarget& dst) {
 			const int32_t height = vt_bar_end - pos + VT_B_THINGY_PIXMAP_LEN;
 			assert(0 <= VT_B_TOTAL_PIXMAP_LEN - height);
 			dst.blitrect(
-			   Vector2f(0, pos), pic_lborder_,
+			   Vector2i(0, pos), pic_lborder_,
 			   Recti(Vector2i(0, VT_B_TOTAL_PIXMAP_LEN - height), VT_B_PIXMAP_THICKNESS, height));
 		}
 
@@ -314,22 +313,22 @@ void Window::draw_border(RenderTarget& dst) {
 			const int32_t right_border_x = get_w() - VT_B_PIXMAP_THICKNESS;
 
 			dst.blitrect  // right top thingy
-			   (Vector2f(right_border_x, TP_B_PIXMAP_THICKNESS), pic_rborder_,
-			    Recti(Vector2i(0, 0), VT_B_PIXMAP_THICKNESS, VT_B_THINGY_PIXMAP_LEN));
+			   (Vector2i(right_border_x, TP_B_PIXMAP_THICKNESS), pic_rborder_,
+			    Recti(Vector2i::zero(), VT_B_PIXMAP_THICKNESS, VT_B_THINGY_PIXMAP_LEN));
 
 			int32_t pos = TP_B_PIXMAP_THICKNESS + VT_B_THINGY_PIXMAP_LEN;
 
 			//  right bar
 			static_assert(0 <= VT_B_THINGY_PIXMAP_LEN, "assert(0 <= VT_B_THINGY_PIXMAP_LEN) failed.");
 			for (; pos < vt_bar_end_minus_middle; pos += VT_B_MIDDLE_PIXMAP_LEN)
-				dst.blitrect(Vector2f(right_border_x, pos), pic_rborder_,
+				dst.blitrect(Vector2i(right_border_x, pos), pic_rborder_,
 				             Recti(Vector2i(0, VT_B_THINGY_PIXMAP_LEN), VT_B_PIXMAP_THICKNESS,
 				                   VT_B_MIDDLE_PIXMAP_LEN));
 
 			// odd pixels of right bar and right bottom thingy
 			const int32_t height = vt_bar_end - pos + VT_B_THINGY_PIXMAP_LEN;
 			dst.blitrect(
-			   Vector2f(right_border_x, pos), pic_rborder_,
+			   Vector2i(right_border_x, pos), pic_rborder_,
 			   Recti(Vector2i(0, VT_B_TOTAL_PIXMAP_LEN - height), VT_B_PIXMAP_THICKNESS, height));
 		}
 
@@ -337,19 +336,19 @@ void Window::draw_border(RenderTarget& dst) {
 			int32_t pos = HZ_B_CORNER_PIXMAP_LEN;
 
 			dst.blitrect  //  bottom left corner
-			   (Vector2f(0, get_h() - BT_B_PIXMAP_THICKNESS), pic_bottom_,
-			    Recti(Vector2i(0, 0), pos, BT_B_PIXMAP_THICKNESS));
+			   (Vector2i(0, get_h() - BT_B_PIXMAP_THICKNESS), pic_bottom_,
+			    Recti(Vector2i::zero(), pos, BT_B_PIXMAP_THICKNESS));
 
 			//  bottom bar
 			for (; pos < hz_bar_end_minus_middle; pos += HZ_B_MIDDLE_PIXMAP_LEN)
-				dst.blitrect(Vector2f(pos, get_h() - BT_B_PIXMAP_THICKNESS), pic_bottom_,
+				dst.blitrect(Vector2i(pos, get_h() - BT_B_PIXMAP_THICKNESS), pic_bottom_,
 				             Recti(Vector2i(HZ_B_CORNER_PIXMAP_LEN, 0), HZ_B_MIDDLE_PIXMAP_LEN,
 				                   BT_B_PIXMAP_THICKNESS));
 
 			// odd pixels of bottom bar and bottom right corner
 			const int32_t width = hz_bar_end - pos + HZ_B_CORNER_PIXMAP_LEN;
 			dst.blitrect(
-			   Vector2f(pos, get_h() - BT_B_PIXMAP_THICKNESS), pic_bottom_,
+			   Vector2i(pos, get_h() - BT_B_PIXMAP_THICKNESS), pic_bottom_,
 			   Recti(Vector2i(HZ_B_TOTAL_PIXMAP_LEN - width, 0), width, BT_B_PIXMAP_THICKNESS));
 		}
 	}
@@ -454,10 +453,11 @@ bool Window::handle_mousemove(const uint8_t, int32_t mx, int32_t my, int32_t, in
 			const int32_t max_x = parent->get_inner_w();
 			const int32_t max_y = parent->get_inner_h();
 
-			left = min<int32_t>(max_x - get_lborder(), left);
-			top = min<int32_t>(max_y - get_tborder(), top);
-			left = max<int32_t>(get_rborder() - w, left);
-			top = max(-static_cast<int32_t>(h - ((is_minimal_) ? get_tborder() : get_bborder())), top);
+			left = std::min<int32_t>(max_x - get_lborder(), left);
+			top = std::min<int32_t>(max_y - get_tborder(), top);
+			left = std::max<int32_t>(get_rborder() - w, left);
+			top = std::max(
+			   -static_cast<int32_t>(h - ((is_minimal_) ? get_tborder() : get_bborder())), top);
 			new_left = left;
 			new_top = top;
 
@@ -500,13 +500,13 @@ bool Window::handle_mousemove(const uint8_t, int32_t mx, int32_t my, int32_t, in
 				nearest_snap_distance_x = psnap;
 			else {
 				assert(nearest_snap_distance_x < bsnap);
-				nearest_snap_distance_x = min(nearest_snap_distance_x, psnap);
+				nearest_snap_distance_x = std::min(nearest_snap_distance_x, psnap);
 			}
 			if (nearest_snap_distance_y == bsnap)
 				nearest_snap_distance_y = psnap;
 			else {
 				assert(nearest_snap_distance_y < bsnap);
-				nearest_snap_distance_y = min(nearest_snap_distance_y, psnap);
+				nearest_snap_distance_y = std::min(nearest_snap_distance_y, psnap);
 			}
 
 			{  //  Snap to other Panels.

@@ -32,7 +32,6 @@ wl_library(logic_game_controller
     logic_constants
     profile
     ui_basic
-    widelands_ball_of_mud
     wui
 )
 
@@ -128,14 +127,13 @@ wl_library(logic
     save_handler.h
     widelands_geometry_io.cc
     widelands_geometry_io.h
-    map_objects/draw_text.h
-    map_objects/attackable.h
     map_objects/bob.cc
     map_objects/bob.h
     map_objects/buildcost.cc
     map_objects/buildcost.h
     map_objects/checkstep.cc
     map_objects/checkstep.h
+    map_objects/draw_text.h
     map_objects/immovable.cc
     map_objects/immovable.h
     map_objects/immovable_program.h
@@ -143,6 +141,7 @@ wl_library(logic
     map_objects/map_object.h
     map_objects/terrain_affinity.cc
     map_objects/terrain_affinity.h
+    map_objects/tribes/attack_target.h
     map_objects/tribes/battle.cc
     map_objects/tribes/battle.h
     map_objects/tribes/bill_of_materials.h
@@ -229,9 +228,11 @@ wl_library(logic
     game_io
     graphic
     graphic_color
+    graphic_fonthandler
     graphic_image_io
     graphic_playercolor
     graphic_surface
+    graphic_text_constants
     graphic_text_layout
     helper
     io_fileread
@@ -253,7 +254,6 @@ wl_library(logic
     scripting_lua_table
     sound
     ui_basic
-    widelands_ball_of_mud
     wui
     wui_mapview_pixelfunctions
 )

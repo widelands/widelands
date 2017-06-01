@@ -23,6 +23,7 @@
 #include "graphic/animation.h"
 #include "graphic/graphic.h"
 #include "graphic/surface.h"
+#include "graphic/text_layout.h"
 
 /**
  * Build a render target for the given surface.
@@ -118,21 +119,21 @@ void RenderTarget::draw_line_strip(const std::vector<Vector2f>& points,
 /**
  * Clip against window and pass those primitives along to the bitmap.
  */
-void RenderTarget::draw_rect(const Rectf& rect, const RGBColor& clr) {
-	Rectf r(rect);
+void RenderTarget::draw_rect(const Recti& rect, const RGBColor& clr) {
+	Rectf r(rect.cast<float>());
 	if (clip(r)) {
 		::draw_rect(r, clr, surface_);
 	}
 }
 
-void RenderTarget::fill_rect(const Rectf& rect, const RGBAColor& clr, BlendMode blend_mode) {
-	Rectf r(rect);
+void RenderTarget::fill_rect(const Recti& rect, const RGBAColor& clr, BlendMode blend_mode) {
+	Rectf r(rect.cast<float>());
 	if (clip(r))
 		surface_->fill_rect(r, clr, blend_mode);
 }
 
-void RenderTarget::brighten_rect(const Rectf& rect, int32_t factor) {
-	Rectf r(rect);
+void RenderTarget::brighten_rect(const Recti& rect, int32_t factor) {
+	Rectf r(rect.cast<float>());
 	if (clip(r))
 		surface_->brighten_rect(r, factor);
 }
@@ -142,14 +143,15 @@ void RenderTarget::brighten_rect(const Rectf& rect, int32_t factor) {
  *
  * This blit function copies the pixels to the destination surface.
  */
-void RenderTarget::blit(const Vector2f& dst,
+void RenderTarget::blit(const Vector2i& dst,
                         const Image* image,
                         BlendMode blend_mode,
                         UI::Align align) {
-	Vector2f destination_point(dst);
+	assert(image != nullptr);
+	Vector2i destination_point(dst);
 	UI::correct_for_align(align, image->width(), &destination_point);
 
-	Rectf source_rect(Vector2i(0, 0), image->width(), image->height());
+	Rectf source_rect(0.f, 0.f, image->width(), image->height());
 	Rectf destination_rect(destination_point.x, destination_point.y, source_rect.w, source_rect.h);
 
 	if (to_surface_geometry(&destination_rect, &source_rect)) {
@@ -159,14 +161,14 @@ void RenderTarget::blit(const Vector2f& dst,
 	}
 }
 
-void RenderTarget::blit_monochrome(const Vector2f& dst,
+void RenderTarget::blit_monochrome(const Vector2i& dst,
                                    const Image* image,
                                    const RGBAColor& blend_mode,
                                    UI::Align align) {
-	Vector2f destination_point(dst);
+	Vector2i destination_point(dst);
 	UI::correct_for_align(align, image->width(), &destination_point);
 
-	Rectf source_rect(Vector2i(0, 0), image->width(), image->height());
+	Rectf source_rect(0.f, 0.f, image->width(), image->height());
 	Rectf destination_rect(destination_point.x, destination_point.y, source_rect.w, source_rect.h);
 
 	if (to_surface_geometry(&destination_rect, &source_rect)) {
@@ -177,7 +179,7 @@ void RenderTarget::blit_monochrome(const Vector2f& dst,
 /**
  * Like \ref blit, but use only a sub-rectangle of the source image.
  */
-void RenderTarget::blitrect(const Vector2f& dst,
+void RenderTarget::blitrect(const Vector2i& dst,
                             const Image* image,
                             const Recti& gsrcrc,
                             BlendMode blend_mode) {

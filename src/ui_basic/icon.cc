@@ -63,7 +63,7 @@ void Icon::draw(RenderTarget& dst) {
 		                   Recti(0, 0, pic_->width(), pic_->height()), 1., BlendMode::UseAlpha);
 	}
 	if (draw_frame_) {
-		dst.draw_rect(Rectf(0.f, 0.f, get_w(), get_h()), framecolor_);
+		dst.draw_rect(Recti(0, 0, get_w(), get_h()), framecolor_);
 	}
 }
 }

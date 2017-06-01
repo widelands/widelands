@@ -14,14 +14,15 @@
 # Madkat Here, 2015-2016
 # Miguel de Dios Matias <tres.14159@gmail.com>, 2015
 # Raul Ferriz <raul.ferriz@gmail.com>, 2009
+# Thadah D. Denyse <juchuf@gmail.com>, 2017
 # Thadah D. Denyse <juchuf@gmail.com>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-03-03 06:24+0000\n"
-"PO-Revision-Date: 2017-03-03 06:26+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2017-04-13 13:07+0000\n"
+"PO-Revision-Date: 2017-04-04 08:19+0000\n"
+"Last-Translator: Thadah D. Denyse <juchuf@gmail.com>\n"
 "Language-Team: Spanish (http://www.transifex.com/widelands/widelands/language/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -113,7 +114,7 @@ msgstr "Hornea pan para alimentar los exploradores y mineros y para entrenar sol
 #: ../../data/tribes/buildings/productionsites/atlanteans/barracks/helptexts.lua:16
 msgctxt "atlanteans_building"
 msgid "Equips recruits and trains them as soldiers."
-msgstr ""
+msgstr "Equipa a reclutas y los entrena como soldados."
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/atlanteans/blackroot_farm/helptexts.lua:16
@@ -129,6 +130,7 @@ msgid ""
 "blackroot."
 msgstr "El granjero de raíz negras necesita %1% de rendimiento para sembrar y cosechar un haz de raíz negra."
 
+#. TRANSLATORS: Purpose helptext for a building
 #. TRANSLATORS: Note helptext for a building
 #. TRANSLATORS: Performance helptext for a building
 #. This include can be removed when all help texts have been defined.
@@ -268,7 +270,7 @@ msgctxt "atlanteans_building"
 msgid ""
 "Grinds blackroots and corn to produce blackroot flour and cornmeal, "
 "respectively."
-msgstr ""
+msgstr "Muele raíz negra y maíz para producir harina de raíz negra y harina de maíz, respectivamente."
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/atlanteans/quarry/helptexts.lua:16
@@ -411,7 +413,7 @@ msgid ""
 "The Barbarian ax workshop is the intermediate production site in a series of"
 " three buildings. It is enhanced from the metal workshop but doesn’t require"
 " additional qualification for the worker."
-msgstr ""
+msgstr "El taller de hachas bárbaro es el sitio de producción intermedio en una serie de tres edificios. Es una mejora del taller del metal pero no necesita cualificación adicional para el trabajador."
 
 #: ../../data/tribes/buildings/productionsites/barbarians/ax_workshop/helptexts.lua:23
 #: ../../data/tribes/buildings/productionsites/barbarians/bakery/helptexts.lua:26
@@ -478,7 +480,7 @@ msgstr "Si todas las mercancías necesarias son entregadas a tiempo, este edific
 #: ../../data/tribes/buildings/productionsites/barbarians/barracks/helptexts.lua:16
 msgctxt "barbarians_building"
 msgid "Equips recruits and trains them as soldiers."
-msgstr ""
+msgstr "Equipa a reclutas y los entrena como soldados."
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/big_inn/helptexts.lua:16
@@ -1150,7 +1152,7 @@ msgstr "El panadero necesita %1% de rendimiento para hornear una hogaza de pan."
 #: ../../data/tribes/buildings/productionsites/empire/barracks/helptexts.lua:16
 msgctxt "empire_building"
 msgid "Equips recruits and trains them as soldiers."
-msgstr ""
+msgstr "Equipa a reclutas y los entrena como soldados."
 
 #. TRANSLATORS: Performance helptext for a building
 #: ../../data/tribes/buildings/productionsites/empire/brewery/helptexts.lua:26
@@ -1590,8 +1592,8 @@ msgstr "Entrenamiento de Vida:"
 #, lua-format
 msgid "Garrisoned soldiers heal %d health point per second."
 msgid_plural "Garrisoned soldiers heal %d health points per second."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Los soldados guarnecidos se curan %d punto de vida por segundo"
+msgstr[1] "Los soldados guarnecidos se curan %d puntos de vida por segundo"
 
 #: ../../data/tribes/scripting/help/building_help.lua:215
 #: ../../data/tribes/scripting/help/building_help.lua:221
@@ -1963,53 +1965,53 @@ msgstr "Inicio"
 #: ../../data/tribes/scripting/help/controls.lua:59
 msgctxt "hotkey"
 msgid "Ctrl + 1-9"
-msgstr ""
+msgstr "Ctrl + 1-9"
 
 #: ../../data/tribes/scripting/help/controls.lua:59
 msgid "Remember current location"
-msgstr ""
+msgstr "Recordar localización actual"
 
 #: ../../data/tribes/scripting/help/controls.lua:60
 msgctxt "hotkey"
 msgid "1-9"
-msgstr ""
+msgstr "1-9"
 
 #: ../../data/tribes/scripting/help/controls.lua:60
 msgid "Go to previously remembered location"
-msgstr ""
+msgstr "Ir a localización previamente recordada"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
 #: ../../data/tribes/scripting/help/controls.lua:62
 msgctxt "hotkey"
 msgid "Ctrl + +"
-msgstr ""
+msgstr "Ctrl + +"
 
 #: ../../data/tribes/scripting/help/controls.lua:62
 msgid "Increase zoom"
-msgstr ""
+msgstr "Aumentar zoom"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
 #: ../../data/tribes/scripting/help/controls.lua:64
 msgctxt "hotkey"
 msgid "Ctrl + -"
-msgstr ""
+msgstr "Ctrl + -"
 
 #: ../../data/tribes/scripting/help/controls.lua:64
 msgid "Decrease zoom"
-msgstr ""
+msgstr "Reducir zoom"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
 #: ../../data/tribes/scripting/help/controls.lua:66
 msgctxt "hotkey"
 msgid "Ctrl + 0"
-msgstr ""
+msgstr "Ctrl + 0"
 
 #: ../../data/tribes/scripting/help/controls.lua:66
 msgid "Reset zoom"
-msgstr ""
+msgstr "Reiniciar zoom"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
@@ -2044,53 +2046,53 @@ msgstr "Muestra la consola de depuración (solo en debug-builds)"
 
 #: ../../data/tribes/scripting/help/controls.lua:76
 msgid "Table Control"
-msgstr ""
+msgstr "Control de Tabla"
 
 #: ../../data/tribes/scripting/help/controls.lua:77
 msgid ""
 "In tables that allow the selection of multiple entries, the following key "
 "combinations are available:"
-msgstr ""
+msgstr "En las tablas que permiten varias entradas, los próximos atajos de teclado son posibles:"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
 #: ../../data/tribes/scripting/help/controls.lua:80
 msgctxt "hotkey"
 msgid "Ctrl + Click"
-msgstr ""
+msgstr "Ctrl + Click"
 
 #: ../../data/tribes/scripting/help/controls.lua:80
 msgctxt "table_control"
 msgid "Select multiple entries"
-msgstr ""
+msgstr "Seleccionar multiples entradas"
 
 #: ../../data/tribes/scripting/help/controls.lua:82
 msgctxt "table_control"
 msgid "Select a range of entries"
-msgstr ""
+msgstr "Seleccionar un rango de entradas"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
 #: ../../data/tribes/scripting/help/controls.lua:82
 msgctxt "hotkey"
 msgid "Shift + Click"
-msgstr ""
+msgstr "Mayús + Click"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
 #: ../../data/tribes/scripting/help/controls.lua:84
 msgctxt "hotkey"
 msgid "Ctrl + A"
-msgstr ""
+msgstr "Ctrl + A"
 
 #: ../../data/tribes/scripting/help/controls.lua:84
 msgctxt "table_control"
 msgid "Select all entries"
-msgstr ""
+msgstr "Seleccionar todas las entradas"
 
 #: ../../data/tribes/scripting/help/controls.lua:86
 msgid "Message Window"
-msgstr ""
+msgstr "Ventana de Mensajes"
 
 #: ../../data/tribes/scripting/help/controls.lua:87
 msgid ""
@@ -2183,19 +2185,19 @@ msgstr "%1$dx %2$s"
 #. a productionsite
 #: ../../data/tribes/scripting/help/format_help.lua:175
 msgid "Wares and workers consumed:"
-msgstr ""
+msgstr "Mercancía y Trabajadores consumidos:"
 
 #. TRANSLATORS: Tribal Encyclopedia: Heading for workers consumed by a
 #. productionsite
 #: ../../data/tribes/scripting/help/format_help.lua:178
 msgid "Workers consumed:"
-msgstr ""
+msgstr "Trabajadores consumidos:"
 
 #. TRANSLATORS: Tribal Encyclopedia: Heading for wares consumed by a
 #. productionsite
 #: ../../data/tribes/scripting/help/format_help.lua:182
 msgid "Wares consumed:"
-msgstr ""
+msgstr "Mercancía consumida:"
 
 #. TRANSLATORS: Lore helptext for a building - it hasn't been written yet.
 #. TRANSLATORS: Purpose helptext for a building - it hasn't been written yet.
@@ -2227,7 +2229,7 @@ msgstr "Introducción"
 #: ../../data/tribes/scripting/help/init.lua:70
 #: ../../data/tribes/scripting/help/tips.lua:71
 msgid "Tips"
-msgstr ""
+msgstr "Consejos"
 
 #: ../../data/tribes/scripting/help/init.lua:79
 msgid "Wares"
@@ -2243,23 +2245,23 @@ msgstr "Acerca de Widelands"
 
 #: ../../data/tribes/scripting/help/tips.lua:50
 msgid "Atlanteans"
-msgstr ""
+msgstr "Atlantes"
 
 #: ../../data/tribes/scripting/help/tips.lua:53
 msgid "Barbarians"
-msgstr ""
+msgstr "Bárbaros"
 
 #: ../../data/tribes/scripting/help/tips.lua:56
 msgid "Empire"
-msgstr ""
+msgstr "Imperio"
 
 #: ../../data/tribes/scripting/help/tips.lua:62
 msgid "Single Player"
-msgstr ""
+msgstr "Un jugador"
 
 #: ../../data/tribes/scripting/help/tips.lua:65
 msgid "Multiplayer"
-msgstr ""
+msgstr "Multijugador"
 
 #. TRANSLATORS: Put 2 sentences one after the other.
 #. Languages using Chinese script probably want to lose the blank space here.
@@ -3460,7 +3462,7 @@ msgid ""
 "This is the medium trident. It is produced in the weapon smithy and used by "
 "advanced soldiers in the dungeon – together with food – to train from attack"
 " level 1 to level 2."
-msgstr ""
+msgstr "Este es el tridente medio. Se produce en la armería y es usado por soldados avanzado en el calabozo - junto con comida - para entrenar el ataque de nivel 1 al 2."
 
 #. TRANSLATORS: Helptext for a ware: Water
 #: ../../data/tribes/wares/water/helptexts.lua:4
@@ -3625,7 +3627,7 @@ msgctxt "atlanteans_worker"
 msgid ""
 "Grinds blackroots and corn to produce blackroot flour and cornmeal, "
 "respectively."
-msgstr ""
+msgstr "Muele raíz negra y maíz para producir harina de raíz negra y harina de maíz, respectivamente."
 
 #. TRANSLATORS: Helptext for a worker: Miner
 #: ../../data/tribes/workers/atlanteans/miner/helptexts.lua:3
@@ -3637,7 +3639,7 @@ msgstr "Trabaja profundo en las minas para obtener carbón, hierro, oro y piedra
 #: ../../data/tribes/workers/atlanteans/recruit/helptexts.lua:3
 msgctxt "atlanteans_worker"
 msgid "Eager to become a soldier and defend his tribe!"
-msgstr ""
+msgstr "Ansioso de volverse un soldado y defender a su tribu!"
 
 #. TRANSLATORS: Helptext for a worker: Sawyer
 #: ../../data/tribes/workers/atlanteans/sawyer/helptexts.lua:3
@@ -3710,7 +3712,7 @@ msgstr "Produce armas para los soldados"
 #: ../../data/tribes/workers/atlanteans/weaver/helptexts.lua:3
 msgctxt "atlanteans_worker"
 msgid "Produces spidercloth for buildings, ships and soldiers."
-msgstr ""
+msgstr "Fabrica tela de araña para edificios, barcos y soldados."
 
 #. TRANSLATORS: Helptext for a worker: Woodcutter
 #: ../../data/tribes/workers/atlanteans/woodcutter/helptexts.lua:3
@@ -3858,7 +3860,7 @@ msgstr "Planta árboles."
 #: ../../data/tribes/workers/barbarians/recruit/helptexts.lua:3
 msgctxt "barbarians_worker"
 msgid "Eager to become a soldier and defend his tribe!"
-msgstr ""
+msgstr "Ansioso de volverse un soldado y defender a su tribu!"
 
 #. TRANSLATORS: Helptext for a worker: Scout
 #: ../../data/tribes/workers/barbarians/scout/helptexts.lua:3
@@ -4027,7 +4029,7 @@ msgstr "Cría cerdos."
 #: ../../data/tribes/workers/empire/recruit/helptexts.lua:3
 msgctxt "empire_worker"
 msgid "Eager to become a soldier and defend his tribe!"
-msgstr ""
+msgstr "Ansioso de volverse un soldado y defender a su tribu!"
 
 #. TRANSLATORS: Helptext for a worker: Scout
 #: ../../data/tribes/workers/empire/scout/helptexts.lua:3

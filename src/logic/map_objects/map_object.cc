@@ -20,6 +20,7 @@
 #include "logic/map_objects/map_object.h"
 
 #include <algorithm>
+#include <cmath>
 #include <cstdarg>
 #include <cstdio>
 #include <cstring>
@@ -36,6 +37,7 @@
 #include "io/filewrite.h"
 #include "logic/cmd_queue.h"
 #include "logic/game.h"
+#include "logic/player.h"
 #include "logic/queue_cmd_ids.h"
 #include "map_io/map_object_loader.h"
 #include "map_io/map_object_saver.h"
@@ -439,8 +441,9 @@ void MapObject::schedule_destroy(Game& game) {
  *
  * \warning Make sure you call this from derived classes!
  */
-void MapObject::init(EditorGameBase& egbase) {
+bool MapObject::init(EditorGameBase& egbase) {
 	egbase.objects().insert(this);
+	return true;
 }
 
 /**
@@ -461,34 +464,31 @@ void MapObject::do_draw_info(const TextToDraw& draw_text,
 	}
 
 	// Rendering text is expensive, so let's just do it for only a few sizes.
-	scale = std::round(scale);
-	if (scale == 0.f) {
+	// The forumla is a bit fancy to avoid too much text overlap.
+	scale = std::round(2.f * (scale > 1.f ? std::sqrt(scale) : std::pow(scale, 2.f))) / 2.f;
+	if (scale < 1.f) {
 		return;
 	}
 	const int font_size = scale * UI_FONT_SIZE_SMALL;
 
 	// We always render this so we can have a stable position for the statistics string.
-	const Image* rendered_census_info =
-	   UI::g_fh1->render(as_condensed(census, UI::Align::kCenter, font_size), 120);
-
-	// Rounding guarantees that text aligns with pixels to avoid subsampling.
-	const Vector2f census_pos = round(field_on_dst - Vector2f(0, 48) * scale).cast<float>();
+	std::shared_ptr<const UI::RenderedText> rendered_census =
+	   UI::g_fh1->render(as_condensed(census, UI::Align::kCenter, font_size), 120 * scale);
+	Vector2i position = field_on_dst.cast<int>() - Vector2i(0, 48) * scale;
 	if (draw_text & TextToDraw::kCensus) {
-		dst->blit(census_pos, rendered_census_info, BlendMode::UseAlpha, UI::Align::kCenter);
+		rendered_census->draw(*dst, position, UI::Align::kCenter);
 	}
 
 	if (draw_text & TextToDraw::kStatistics && !statictics.empty()) {
-		const Vector2f statistics_pos =
-		   round(census_pos + Vector2f(0, rendered_census_info->height() / 2.f + 10 * scale))
-		      .cast<float>();
-		dst->blit(statistics_pos,
-		          UI::g_fh1->render(as_condensed(statictics, UI::Align::kCenter, font_size)),
-		          BlendMode::UseAlpha, UI::Align::kCenter);
+		std::shared_ptr<const UI::RenderedText> rendered_statistics =
+		   UI::g_fh1->render(as_condensed(statictics, UI::Align::kCenter, font_size));
+		position.y += rendered_census->height() + text_height(font_size) / 4;
+		rendered_statistics->draw(*dst, position, UI::Align::kCenter);
 	}
 }
 
 const Image* MapObject::representative_image() const {
-	return descr().representative_image();
+	return descr().representative_image(get_owner() ? &get_owner()->get_playercolor() : nullptr);
 }
 
 /**

@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-02-14 20:31+0000\n"
-"PO-Revision-Date: 2017-02-17 04:07+0000\n"
+"POT-Creation-Date: 2017-03-24 18:58+0000\n"
+"PO-Revision-Date: 2017-03-27 14:08+0000\n"
 "Last-Translator: Omar Anwar <omaraglan91@yahoo.com>\n"
 "Language-Team: Arabic (http://www.transifex.com/widelands/widelands/language/ar/)\n"
 "MIME-Version: 1.0\n"
@@ -24,7 +24,7 @@ msgstr "التحكم"
 
 #: ../../data/scripting/editor/editor_controls.lua:14
 msgid "Keyboard Shortcuts"
-msgstr "إختصارات لوحه المفاتيح"
+msgstr "إختصارات لوحة المفاتيح"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
@@ -57,7 +57,7 @@ msgstr "تراجع"
 #. the key.
 #: ../../data/scripting/editor/editor_controls.lua:29
 msgid "Redo"
-msgstr "إعاده"
+msgstr "إعادة"
 
 #. TRANSLATORS: This is an access key combination. The hotkey is 'i'
 #: ../../data/scripting/editor/editor_controls.lua:31
@@ -166,19 +166,19 @@ msgstr "الشجر"
 
 #: ../../data/scripting/editor/editor_introduction.lua:9
 msgid "The Widelands Editor"
-msgstr "معدلّ \"الأرض البرية\""
+msgstr "معدلّ \"الأرض الواسعة\""
 
 #: ../../data/scripting/editor/editor_introduction.lua:14
 msgid ""
 "This editor is intended for players who would like to design their own maps "
 "to use with Widelands."
-msgstr "المُعدل موجود من أجل اللاعبين الذين يودون أن يصنعوا خرائطهم الخاصة لاستخدامها فى \"الاراضى البرية\""
+msgstr "المُعدل موجود من أجل اللاعبين الذين يودون أن يصنعوا خرائطهم الخاصة لاستخدامها فى \"الاراضى الواسعة\""
 
 #: ../../data/scripting/editor/editor_introduction.lua:15
 msgid ""
 "As you can see, this editor is heavy work in progress and as the editor "
 "becomes better and better, this text will also get longer and more complete."
-msgstr "كما ترى، المُعدل هو عمل ثقيل جارى انهائه وسوف يصبح أفضل وأفضل، أيضا الكلام هذا سوف يصبح أكبر وأكمل."
+msgstr "كما ترى، المُعدل هو عمل ثقيل جارى إنهائه وسوف يصبح أفضل وأفضل، أيضا الكلام هذا سوف يصبح أكبر وأكمل."
 
 #: ../../data/scripting/editor/editor_introduction.lua:18
 msgid "The wiki also includes a short tutorial on how to build a map."
