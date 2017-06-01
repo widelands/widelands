@@ -74,8 +74,7 @@ namespace {
  * On Apple we have to specify the interface, forcing us to send our message over all interfaces we can find.
  */
 LanBase::LanBase(uint16_t port)
-	: io_service(), socket_v4(io_service), socket_v6(io_service),
-		broadcast_addresses_v4(), interface_indices_v6() {
+	: io_service(), socket_v4(io_service), socket_v6(io_service) {
 
 #ifndef _WIN32
 	// Iterate over all interfaces. If they support IPv4, store the broadcast-address

@@ -141,7 +141,7 @@ private:
     /// The found broadcast addresses for IPv4.
     /// No addresses for v6, there is only one fixed address.
 	std::set<std::string> broadcast_addresses_v4;
-#ifndef __APPLE__
+#ifdef __APPLE__
 	/// Apple forces us to define which interface to broadcast through.
 	std::set<unsigned int> interface_indices_v6;
 #endif // __APPLE__
