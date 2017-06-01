@@ -60,7 +60,7 @@ struct UserSettings {
 		return not_connected() - 1;
 	}
 
-	UserSettings() = default;
+	UserSettings() : position(0), name(""), win_condition_string(""), ready(false) {}
 
 	uint8_t position;
 	std::string name;
