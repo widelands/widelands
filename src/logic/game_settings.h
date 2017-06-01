@@ -60,6 +60,8 @@ struct UserSettings {
 		return not_connected() - 1;
 	}
 
+	UserSettings() = default;
+
 	uint8_t position;
 	std::string name;
 	Widelands::PlayerEndResult result;
