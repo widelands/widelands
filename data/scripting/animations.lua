@@ -23,15 +23,16 @@ function reveal_randomly(plr, region, time)
    -- Make sure the region is hidden
    plr:hide_fields(region, true)
 
+   -- Turn off buildhelp during animation
    local buildhelp_state = wl.ui.MapView().buildhelp
    if buildhelp_state then
-      -- Turn off buildhelp during animation
       wl.ui.MapView().buildhelp = false
    end
-   -- If no 'time' is given the default 1000 is used
+   
+   -- If no 'time' is given use a default
    if not time then time = 1000 end
 
-   -- Calculate the sleep as integer
+   -- Calculate delay as integer
    local delay = math.floor(time / #region)
    -- Make sure 'delay' is valid
    if delay < 1 then delay = 1 end
@@ -41,12 +42,11 @@ function reveal_randomly(plr, region, time)
       local t = {}
       local id = math.random(1, #region)
       table.insert(t, region[id])
-      local id2 = math.random(1, #region)
-      table.insert(t, region[id2])
-      plr:reveal_fields(t, true)
+      plr:reveal_fields(t)
       sleep(delay)
       table.remove(region, id)
    end
+   -- Restore buildhelp status
    wl.ui.MapView().buildhelp = buildhelp_state
 end
 
@@ -98,12 +98,10 @@ function reveal_concentric(plr, center, max_radius, delay)
    end
    plr:hide_fields(center:region(max_radius), true)
    if not delay then delay = 100 end
-   local steps = 1
-   local pre_step = 0
-   while steps < max_radius do
-      plr:reveal_fields(center:region(steps, pre_step), true)
-      pre_step = steps
-      steps = steps + 1
+   local radius = 0
+   while radius < max_radius do
+      plr:reveal_fields(center:region(radius))
+      radius = radius + 1
       sleep(delay)
    end
    wl.ui.MapView().buildhelp = buildhelp_state
