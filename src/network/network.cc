@@ -20,7 +20,6 @@
 #include "network/network.h"
 
 #include <SDL.h>
-#include <boost/asio.hpp>
 
 #include "base/log.h"
 
