@@ -2,12 +2,15 @@
 # Copyright (C) 2005-2017 Widelands Development Team
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
+# Translators:
+# zecas <jjorge@free.fr>, 2017
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-05-18 21:30+0000\n"
+"POT-Creation-Date: 2017-05-26 17:01+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: zecas <jjorge@free.fr>, 2017\n"
 "Language-Team: Portuguese (https://www.transifex.com/widelands/teams/35159/pt/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -17,39 +20,43 @@ msgstr ""
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:39
 msgid "Build your first outpost"
-msgstr ""
+msgstr "Construa o seu primeiro posto avançado"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:41
 msgid "First Outpost"
-msgstr ""
+msgstr "Primeiro Posto Avançado"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:42
 msgid ""
 "Build an outpost at the yellow house symbol to the east of your provisional "
 "headquarters."
 msgstr ""
+"Construa um posto avançado no símbolo amarelo ao leste dos seu quartel-"
+"general provisório. "
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:48
 msgid "Build a quarry"
-msgstr ""
+msgstr "Construa uma pedreira"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:50
 msgid "Quarry"
-msgstr ""
+msgstr "Pedreira"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:51
 msgid ""
 "Build a quarry close to the abundant rocks, so we can free some building "
 "plots and get some valuable resources."
 msgstr ""
+"Construa uma pedreira perto dos rochedos abundantes, para limpar mais zonas "
+"de construção e obter alguns recursos."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:57
 msgid "Build a lumberjack’s house, a sawmill and a stonemason’s house"
-msgstr ""
+msgstr "Construa uma casa do lenhador, uma serração e uma casa de pedreiro"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:59
 msgid "Lumberjack, Sawmill and Stonemason"
-msgstr ""
+msgstr "Lenhador, SErração e Pedreira"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:60
 msgid ""
@@ -57,75 +64,83 @@ msgid ""
 "there is enough space for them. This will complete the basic building "
 "material supply chain."
 msgstr ""
+"Construa uma casa do lenhador, uma serração e uma pedreira assim que haja "
+"espaço para elas. Assim teremos uma fonte de matérias primas de construção."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:66
 msgid "Lower the demand for marble columns"
-msgstr ""
+msgstr "Diminua o pedido de colunas de mármore"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:68
 msgid "Lower Demand for Marble Columns"
-msgstr ""
+msgstr "Diminua o Pedido de Colunas de mármore"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:69
 msgid ""
 "We should save some marble for buildings. So, please lower the demand for "
 "marble columns in the economy settings to four."
 msgstr ""
+"Deveríamos economizar algun mármore para as construções. Portanto, baixe o "
+"pedido de colunas de mármore na configuração da economia para quatro."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:70
 msgid ""
 "Remember that you can access the economy settings by clicking on any flag."
 msgstr ""
+"Lembre-se que pode aceder à configuração da economia carregando em qualquer "
+"bandeira."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:76
 msgid "Find a port space on the small island"
-msgstr ""
+msgstr "Ache um espaço portuário na pequena ilha"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:78
 msgid "Port Space"
-msgstr ""
+msgstr "Espaço Portuário"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:79
 msgid ""
 "In order to regain access to the sea, we first must discover a port space."
 msgstr ""
+"Para obter acesso ao mar, devemos primeiro descobrir um espaço portuário."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:85
 msgid "Build a port and a shipyard on the Island"
-msgstr ""
+msgstr "Construa um porto e um estaleiro naval na Ilha"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:87
 msgid "Ship Industry"
-msgstr ""
+msgstr "Indústria Marîtima"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:88
 msgid "Build a port to set sail from this island."
-msgstr ""
+msgstr "Construa um porto para navegar fora desta ilha"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:89
 msgid "Build a shipyard to produce the ships to sail on."
-msgstr ""
+msgstr "Construa um estaleiro naval para  produzir navios em que navegar."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:94
 msgid "Produce at least 50 sheaves of wheat"
-msgstr ""
+msgstr "Produza pelo menos 50 molhes de trigo"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:96
 msgid "Wheat Production"
-msgstr ""
+msgstr "Produção de Trigo"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:97
 msgid ""
 "To get our wool production started, we need at least 50 sheaves of wheat."
 msgstr ""
+"Para arrancar a produção de lã, precisamos pelo menos de 50 molhes de trigo."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:103
 msgid "Produce cloth for building our first ship"
-msgstr ""
+msgstr "Produz tecido para construir o nosso primeiro navio"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:105
 msgid "Cloth Production"
-msgstr ""
+msgstr "Produção de Tecido"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:106
 msgid ""
