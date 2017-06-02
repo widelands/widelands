@@ -60,7 +60,11 @@ struct UserSettings {
 		return not_connected() - 1;
 	}
 
-	UserSettings() : position(0), name(""), win_condition_string(""), ready(false) {}
+	UserSettings() : position(0), name(""), win_condition_string(""), ready(false) {
+	}
+	UserSettings(Widelands::PlayerEndResult init_result, bool init_ready)
+	   : position(0), name(""), result(init_result), win_condition_string(""), ready(init_ready) {
+	}
 
 	uint8_t position;
 	std::string name;
