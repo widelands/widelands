@@ -328,8 +328,6 @@ private:
 	 */
 	Battle* battle_;
 
-	static constexpr int kSoldierHealthBarWidth = 13;
-
 	/// Number of consecutive blocked signals until the soldiers are considered permanently stuck
 	static constexpr uint8_t kBockCountIsStuck = 10;
 

@@ -57,7 +57,7 @@
 namespace Widelands {
 
 namespace {
-
+static constexpr int kSoldierHealthBarWidth = 13;
 constexpr int kRetreatWhenHealthDropsBelowThisPercentage = 50;
 }  // namespace
 
