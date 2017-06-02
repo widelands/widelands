@@ -752,6 +752,7 @@ bool InteractiveBase::handle_key(bool const down, SDL_Keysym const code) {
 		return true;
 
 	if (down) {
+		GCC7_DIAG_OFF("-Wimplicit-fallthrough")
 		switch (code.sym) {
 		case SDLK_KP_9:
 			if (code.mod & KMOD_NUM)
@@ -794,6 +795,7 @@ bool InteractiveBase::handle_key(bool const down, SDL_Keysym const code) {
 		default:
 			break;
 		}
+		GCC7_DIAG_ON("-Wimplicit-fallthrough")
 	}
 
 	return MapView::handle_key(down, code);

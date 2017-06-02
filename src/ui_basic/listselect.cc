@@ -507,6 +507,7 @@ bool BaseListselect::handle_mousemove(uint8_t, int32_t, int32_t y, int32_t, int3
 bool BaseListselect::handle_key(bool const down, SDL_Keysym const code) {
 	if (down) {
 		uint32_t selected_idx;
+		GCC7_DIAG_OFF("-Wimplicit-fallthrough")
 		switch (code.sym) {
 		case SDLK_KP_2:
 			if (code.mod & KMOD_NUM)
@@ -538,6 +539,7 @@ bool BaseListselect::handle_key(bool const down, SDL_Keysym const code) {
 		default:
 			break;  // not handled
 		}
+		GCC7_DIAG_ON("-Wimplicit-fallthrough")
 	}
 
 	return UI::Panel::handle_key(down, code);

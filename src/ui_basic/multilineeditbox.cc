@@ -232,6 +232,7 @@ uint32_t MultilineEditbox::Data::snap_to_char(uint32_t cursor) {
  */
 bool MultilineEditbox::handle_key(bool const down, SDL_Keysym const code) {
 	if (down) {
+		GCC7_DIAG_OFF("-Wimplicit-fallthrough")
 		switch (code.sym) {
 		case SDLK_TAB:
 			// Let the panel handle the tab key
@@ -399,6 +400,7 @@ bool MultilineEditbox::handle_key(bool const down, SDL_Keysym const code) {
 		default:
 			break;
 		}
+		GCC7_DIAG_ON("-Wimplicit-fallthrough")
 		return true;
 	}
 

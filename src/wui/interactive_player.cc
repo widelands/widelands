@@ -225,6 +225,7 @@ void InteractivePlayer::node_action() {
 */
 bool InteractivePlayer::handle_key(bool const down, SDL_Keysym const code) {
 	if (down) {
+		GCC7_DIAG_OFF("-Wimplicit-fallthrough")
 		switch (code.sym) {
 		case SDLK_SPACE:
 			toggle_buildhelp();
@@ -289,6 +290,7 @@ bool InteractivePlayer::handle_key(bool const down, SDL_Keysym const code) {
 		default:
 			break;
 		}
+		GCC7_DIAG_ON("-Wimplicit-fallthrough")
 	}
 
 	return InteractiveGameBase::handle_key(down, code);

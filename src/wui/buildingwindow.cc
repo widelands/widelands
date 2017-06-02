@@ -68,6 +68,7 @@ BuildingWindow::~BuildingWindow() {
 
 void BuildingWindow::on_building_note(const Widelands::NoteBuilding& note) {
 	if (note.serial == building_.serial()) {
+		GCC7_DIAG_OFF("-Wimplicit-fallthrough")
 		switch (note.action) {
 		// The building's state has changed
 		case Widelands::NoteBuilding::Action::kChanged:
@@ -89,6 +90,7 @@ void BuildingWindow::on_building_note(const Widelands::NoteBuilding& note) {
 		default:
 			break;
 		}
+		GCC7_DIAG_ON("-Wimplicit-fallthrough")
 	}
 }
 

@@ -256,6 +256,7 @@ void Ship::ship_update(Game& game, Bob::State& state) {
 		}
 	}
 
+	GCC7_DIAG_OFF("-Wimplicit-fallthrough")
 	switch (ship_state_) {
 	case ShipStates::kTransport:
 		if (ship_update_transport(game, state))
@@ -282,6 +283,7 @@ void Ship::ship_update(Game& game, Bob::State& state) {
 		remove(game);
 		return;
 	}
+	GCC7_DIAG_ON("-Wimplicit-fallthrough")
 
 	// if the real update function failed (e.g. nothing to transport), the ship goes idle
 	ship_update_idle(game, state);
@@ -439,6 +441,7 @@ void Ship::ship_update_idle(Game& game, Bob::State& state) {
 
 	// If we are waiting for the next transport job, check if we should move away from ships and
 	// shores
+	GCC7_DIAG_OFF("-Wimplicit-fallthrough")
 	switch (ship_state_) {
 	case ShipStates::kTransport: {
 		FCoords position = get_position();
@@ -696,6 +699,7 @@ void Ship::ship_update_idle(Game& game, Bob::State& state) {
 		return;
 	}
 	}
+	GCC7_DIAG_ON("-Wimplicit-fallthrough")
 	NEVER_HERE();
 }
 

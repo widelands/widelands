@@ -182,6 +182,7 @@ bool EditBox::handle_mousepress(const uint8_t btn, int32_t, int32_t) {
 // real unicode.
 bool EditBox::handle_key(bool const down, SDL_Keysym const code) {
 	if (down) {
+		GCC7_DIAG_OFF("-Wimplicit-fallthrough")
 		switch (code.sym) {
 		case SDLK_ESCAPE:
 			cancel();
@@ -330,6 +331,7 @@ bool EditBox::handle_key(bool const down, SDL_Keysym const code) {
 		default:
 			break;
 		}
+		GCC7_DIAG_ON("-Wimplicit-fallthrough")
 	}
 
 	return false;

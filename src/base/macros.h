@@ -44,6 +44,18 @@
 #define GCC_DIAG_ON(x)
 #endif
 
+/* Macros for disabling GCC 7 warnings and errors only, for flags not available in previous versions
+ * of GCC */
+#define GCC7_DIAG_OFF(x)
+#if __GNUC__ >= 7
+GCC_DIAG_OFF(x)
+#endif
+
+#define GCC7_DIAG_ON(x)
+#if __GNUC__ >= 7
+GCC_DIAG_ON(x)
+#endif
+
 /* Macros for disabling Clang warnings and errors
  * From https://svn.boost.org/trac/boost/wiki/Guidelines/WarningsGuidelines and
  * slightly modified.

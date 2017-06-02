@@ -24,6 +24,7 @@
 namespace Widelands {
 
 template <> bool MapFringeRegion<Area<FCoords>>::advance(const Map& map) {
+	GCC7_DIAG_OFF("-Wimplicit-fallthrough")
 	switch (phase_) {
 	case 0:
 		if (area_.radius) {
@@ -53,6 +54,7 @@ template <> bool MapFringeRegion<Area<FCoords>>::advance(const Map& map) {
 	default:
 		NEVER_HERE();
 	}
+	GCC7_DIAG_ON("-Wimplicit-fallthrough")
 	if (--remaining_in_phase_ == 0) {
 		remaining_in_phase_ = area_.radius;
 		--phase_;
@@ -61,6 +63,7 @@ template <> bool MapFringeRegion<Area<FCoords>>::advance(const Map& map) {
 }
 
 template <> bool MapFringeRegion<Area<>>::advance(const Map& map) {
+	GCC7_DIAG_OFF("-Wimplicit-fallthrough")
 	switch (phase_) {
 	case 0:
 		if (area_.radius) {
@@ -90,6 +93,7 @@ template <> bool MapFringeRegion<Area<>>::advance(const Map& map) {
 	default:
 		NEVER_HERE();
 	}
+	GCC7_DIAG_ON("-Wimplicit-fallthrough")
 	if (--remaining_in_phase_ == 0) {
 		remaining_in_phase_ = area_.radius;
 		--phase_;

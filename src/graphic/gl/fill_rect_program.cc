@@ -21,7 +21,7 @@
 
 #include <vector>
 
-#include "base/log.h"
+#include "base/macros.h"
 #include "base/wexception.h"
 
 // static
@@ -63,6 +63,7 @@ void FillRectProgram::draw(const std::vector<Arguments>& arguments) {
 
 		// The simple trick here is to fill the rect, but using a different glBlendFunc that will sum
 		// src and target (or subtract them if factor is negative).
+		GCC7_DIAG_OFF("-Wimplicit-fallthrough")
 		switch (template_args.blend_mode) {
 		case BlendMode::Subtract:
 			glBlendEquation(GL_FUNC_REVERSE_SUBTRACT);
@@ -78,6 +79,7 @@ void FillRectProgram::draw(const std::vector<Arguments>& arguments) {
 		case BlendMode::Default:
 			break;
 		}
+		GCC7_DIAG_ON("-Wimplicit-fallthrough")
 
 		glUseProgram(gl_program_.object());
 
@@ -129,6 +131,7 @@ void FillRectProgram::draw(const std::vector<Arguments>& arguments) {
 
 		glDrawArrays(GL_TRIANGLES, 0, vertices_.size());
 
+		GCC7_DIAG_OFF("-Wimplicit-fallthrough")
 		switch (template_args.blend_mode) {
 		case BlendMode::Subtract:
 			glBlendEquation(GL_FUNC_ADD);
@@ -144,5 +147,6 @@ void FillRectProgram::draw(const std::vector<Arguments>& arguments) {
 		case BlendMode::Default:
 			break;
 		}
+		GCC7_DIAG_ON("-Wimplicit-fallthrough")
 	}
 }
