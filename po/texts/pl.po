@@ -5,14 +5,14 @@
 # Andrzej 'Endrju' Krentosz <endrjux@gmail.com>, 2006
 # Wesmania <ikk_pl@yahoo.co.uk>, 2015
 # Wesmania <ikk_pl@yahoo.co.uk>, 2016-2017
-# Tomasz Pudło <wptom@wp.pl>, 2015-2016
+# Tomasz Pudło <wptom@wp.pl>, 2015-2017
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-03-05 10:46+0000\n"
-"PO-Revision-Date: 2017-03-05 10:48+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2017-05-26 17:01+0000\n"
+"PO-Revision-Date: 2017-05-30 19:44+0000\n"
+"Last-Translator: Tomasz Pudło <wptom@wp.pl>\n"
 "Language-Team: Polish (http://www.transifex.com/widelands/widelands/language/pl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -596,7 +596,7 @@ msgstr "Zawsze buduj leśniczówkę, żeby zapewnić sobie stałe dostawy drewna
 
 #: ../../data/txts/tips/empire.lua:16
 msgid "Empire needs a lot of marble. Keep looking for marble resources."
-msgstr ""
+msgstr "Imperium potrzebuje dużo marmuru. Szukaj złóż marmuru."
 
 #: ../../data/txts/tips/general_game.lua:4
 msgid ""
@@ -654,16 +654,16 @@ msgstr "Organizuj wiadomości efektywnie: klawisz \"N\" otwiera okno wiadomości
 #: ../../data/txts/tips/general_game.lua:40
 msgctxt "hotkey"
 msgid "1-9"
-msgstr ""
+msgstr "1-9"
 
 #: ../../data/txts/tips/general_game.lua:40
 msgctxt "hotkey"
 msgid "Ctrl+(1-9)"
-msgstr ""
+msgstr "Ctrl+(1-9)"
 
 #: ../../data/txts/tips/general_game.lua:40
 msgid "Press %1% to store important locations, then press %2% to recall them."
-msgstr ""
+msgstr "Naciśnij %1% aby zachować ważne lokacje, naciskając %2% przywołasz je."
 
 #: ../../data/txts/tips/general_game.lua:44
 msgid ""
@@ -702,16 +702,16 @@ msgstr "Niektóre budynki, jak na przykład farma, mają bardzo mały promień p
 #: ../../data/txts/tips/general_game.lua:68
 msgctxt "hotkey"
 msgid "Ctrl+(+/-)"
-msgstr ""
+msgstr "Ctrl+(+/-)"
 
 #: ../../data/txts/tips/general_game.lua:68
 msgctxt "hotkey"
 msgid "Ctrl+0"
-msgstr ""
+msgstr "Ctrl+0"
 
 #: ../../data/txts/tips/general_game.lua:68
 msgid "Zoom in/out with the mouse wheel or %1%. Press %2% to reset the zoom."
-msgstr ""
+msgstr "Przybliż/oddal kółkiem myszy lub %1%. Naciśnij %2% aby usunąć przybliżenie."
 
 #: ../../data/txts/tips/general_game.lua:72
 msgid ""

@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-05-18 21:30+0000\n"
+"POT-Creation-Date: 2017-05-26 17:01+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Airina Santonocito <airina.santonocito@gmail.com>, 2017\n"
 "Language-Team: Italian (https://www.transifex.com/widelands/teams/35159/it/)\n"
@@ -71,11 +71,11 @@ msgstr ""
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:66
 msgid "Lower the demand for marble columns"
-msgstr ""
+msgstr "Abbassa la richiesta di colonne di marmo"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:68
 msgid "Lower Demand for Marble Columns"
-msgstr ""
+msgstr "Abbassa la Richiesta di Colonne di Marmo"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:69
 msgid ""
@@ -119,7 +119,7 @@ msgstr ""
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:94
 msgid "Produce at least 50 sheaves of wheat"
-msgstr ""
+msgstr "Produci almeno 50 fasci di grano"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:96
 msgid "Wheat Production"
@@ -129,6 +129,8 @@ msgstr "Produzione di grano"
 msgid ""
 "To get our wool production started, we need at least 50 sheaves of wheat."
 msgstr ""
+"Per iniziare la nostra produzione di lana, abbiamo bisogno di almeno 50 "
+"fasci di grano."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:103
 msgid "Produce cloth for building our first ship"
