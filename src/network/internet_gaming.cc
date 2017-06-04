@@ -219,10 +219,12 @@ bool InternetGaming::relogin() {
 void InternetGaming::logout(const std::string& msgcode) {
 
 	// Just in case the metaserver is listening on the socket - tell him we break up with him ;)
-	SendPacket s;
-	s.string(IGPCMD_DISCONNECT);
-	s.string(msgcode);
-	net->send(s);
+	if (net && net->is_connected()) {
+		SendPacket s;
+		s.string(IGPCMD_DISCONNECT);
+		s.string(msgcode);
+		net->send(s);
+	}
 
 	const std::string& msg = InternetGamingMessages::get_message(msgcode);
 	log("InternetGaming: logout(%s)\n", msg.c_str());
