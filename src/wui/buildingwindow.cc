@@ -129,13 +129,16 @@ Draw a picture of the building in the background.
 void BuildingWindow::draw(RenderTarget& dst) {
 	UI::Window::draw(dst);
 
-	// TODO(sirver): chang this to directly blit the animation. This needs support for or removal of
-	// RenderTarget.
+	// TODO(sirver): chang this to directly blit the animation.
+    // This needs support for or removal of RenderTarget.
 	const Image* image = building()->representative_image();
-	dst.blitrect_scale(
-	   Rectf((get_inner_w() - image->width()) / 2.f, (get_inner_h() - image->height()) / 2.f,
-	         image->width(), image->height()),
-	   image, Recti(0, 0, image->width(), image->height()), 0.5, BlendMode::UseAlpha);
+
+    Rectf destination((get_inner_w() - image->width())  / 2.f,
+                      (get_inner_h() - image->height()) / 2.f,
+	                  image->width(), image->height());
+    Recti source(0, 0, image->width(), image->height());
+
+	dst.blitrect_scale(destination, image, source, 0.5f /* opacity */ , BlendMode::UseAlpha);
 }
 
 /*
@@ -144,13 +147,15 @@ Check the capabilities and setup the capsbutton panel in case they've changed.
 ===============
 */
 void BuildingWindow::think() {
-	if (!building() || !building()->get_owner() || !igbase()->can_see(building()->owner().player_number())) {
+	 Widelands::Building* b = building();
+
+	if (!b || !b->get_owner() || !igbase()->can_see(b->owner().player_number())) {
 		die();
 		return;
 	}
 
 	if (!caps_setup_ || capscache_player_number_ != igbase()->player_number() ||
-	    building()->get_playercaps() != capscache_) {
+	    b->get_playercaps() != capscache_) {
 		capsbuttons_->free_children();
 		create_capsbuttons(capsbuttons_);
 		if (!avoid_fastclick_) {
