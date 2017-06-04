@@ -51,7 +51,7 @@ struct BuildingWindow : public UI::UniqueWindow {
 
 	virtual ~BuildingWindow();
 
-	Widelands::Building& building() {
+	Widelands::Building* building() {
 		return building_;
 	}
 
@@ -64,6 +64,7 @@ struct BuildingWindow : public UI::UniqueWindow {
 
 protected:
 	virtual void init(bool avoid_fastclick);
+	void die() override;
 
 	UI::TabPanel* get_tabs() {
 		return tabs_;
@@ -92,7 +93,7 @@ private:
 	InteractiveGameBase* parent_;
 	/// Actions performed when a NoteBuilding is received.
 	void on_building_note(const Widelands::NoteBuilding& note);
-	Widelands::Building& building_;
+	Widelands::Building* building_;
 
 	std::unique_ptr<UI::Box> vbox_;
 

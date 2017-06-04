@@ -37,7 +37,7 @@ ConstructionSiteWindow::ConstructionSiteWindow(InteractiveGameBase& parent,
 
 void ConstructionSiteWindow::init(bool avoid_fastclick) {
 	BuildingWindow::init(avoid_fastclick);
-	Widelands::ConstructionSite& cs = dynamic_cast<Widelands::ConstructionSite&>(building());
+	Widelands::ConstructionSite* cs = dynamic_cast<Widelands::ConstructionSite*>(building());
 	UI::Box& box = *new UI::Box(get_tabs(), 0, 0, UI::Box::Vertical);
 
 	// Add the progress bar
@@ -49,12 +49,12 @@ void ConstructionSiteWindow::init(bool avoid_fastclick) {
 	box.add_space(8);
 
 	// Add the wares queue
-	for (uint32_t i = 0; i < cs.get_nrwaresqueues(); ++i)
-		box.add(new InputQueueDisplay(&box, 0, 0, *igbase(), cs, cs.get_waresqueue(i)));
+	for (uint32_t i = 0; i < cs->get_nrwaresqueues(); ++i)
+		box.add(new InputQueueDisplay(&box, 0, 0, *igbase(), *cs, cs->get_waresqueue(i)));
 
 	get_tabs()->add("wares", g_gr->images().get(pic_tab_wares), &box, _("Building materials"));
 
-	set_title((boost::format("(%s)") % cs.building().descname()).str());
+	set_title((boost::format("(%s)") % cs->building().descname()).str());
 	think();
 }
 
@@ -66,7 +66,7 @@ Make sure the window is redrawn when necessary.
 void ConstructionSiteWindow::think() {
 	BuildingWindow::think();
 
-	const Widelands::ConstructionSite& cs = dynamic_cast<Widelands::ConstructionSite&>(building());
+	const Widelands::ConstructionSite* cs = dynamic_cast<Widelands::ConstructionSite*>(building());
 
-	progress_->set_state(cs.get_built_per64k());
+	progress_->set_state(cs->get_built_per64k());
 }
