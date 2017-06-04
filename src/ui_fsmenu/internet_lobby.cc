@@ -399,6 +399,12 @@ void FullscreenMenuInternetLobby::clicked_hostgame() {
 	InternetGaming::ref().set_local_servername(servername_ui);
 
 	// Start the game
-	GameHost netgame(InternetGaming::ref().get_local_clientname(), true);
-	netgame.run();
+	try {
+		GameHost netgame(InternetGaming::ref().get_local_clientname(), true);
+		netgame.run();
+	} catch (...) {
+		// Log out before going back to the main menu
+		InternetGaming::ref().logout("SERVER_CRASHED");
+		throw;
+	}
 }
