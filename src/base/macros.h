@@ -46,14 +46,16 @@
 
 /* Macros for disabling GCC 7 warnings and errors only, for flags not available in previous versions
  * of GCC */
-#define GCC7_DIAG_OFF(x)
 #if __GNUC__ >= 7
-GCC_DIAG_OFF(x)
-#endif
-
-#define GCC7_DIAG_ON(x)
-#if __GNUC__ >= 7
-GCC_DIAG_ON(x)
+#define GCC7_DIAG_DO_PRAGMA(x) _Pragma(#x)
+#define GCC7_DIAG_PRAGMA(x) GCC7_DIAG_DO_PRAGMA(GCC diagnostic x)
+#define GCC7_DIAG_OFF(x)                                                                            \
+	GCC7_DIAG_PRAGMA(push)                                                                           \
+	GCC7_DIAG_PRAGMA(ignored x)
+#define GCC7_DIAG_ON(x) GCC7_DIAG_PRAGMA(pop)
+#else
+#define GCC7_DIAG_ON(x) // Do nothing
+#define GCC7_DIAG_OFF(x) // Do nothing
 #endif
 
 /* Macros for disabling Clang warnings and errors
