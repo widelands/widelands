@@ -7,6 +7,7 @@ wl_library(logic_widelands_geometry
 wl_library(logic_game_settings
   SRCS
     game_settings.h
+    player_end_result.h
     single_player_game_settings_provider.cc
     single_player_game_settings_provider.h
   DEPENDS
