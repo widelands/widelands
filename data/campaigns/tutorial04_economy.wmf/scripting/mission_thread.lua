@@ -3,6 +3,8 @@
 -- ===============
 
 function introduction()
+   fields = get_sees_fields(plr)
+   reveal_randomly(plr, fields, 2000)
    sleep(1000)
    message_box_objective(plr, intro1)
    message_box_objective(plr, intro2)

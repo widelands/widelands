@@ -12,6 +12,7 @@ include "scripting/infrastructure.lua"
 include "scripting/messages.lua"
 include "scripting/table.lua"
 include "scripting/ui.lua"
+include "scripting/field_animations.lua"
 
 map = wl.Game().map
 mv = wl.ui.MapView()
