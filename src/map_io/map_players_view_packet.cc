@@ -469,7 +469,7 @@ void MapPlayersViewPacket::read(FileSystem& fs,
 		OPEN_INPUT_FILE(FileRead, survey_times_file, survey_times_filename,
 		                SURVEY_TIMES_FILENAME_TEMPLATE, kCurrentPacketVersionSurveyTimes);
 
-		OPEN_INPUT_FILE_NEW_VERSION_SILENT(FileRead, border_file, border_filename,
+		OPEN_INPUT_FILE_NEW_VERSION(FileRead, border_file, border_filename,
 		                                   border_file_version, BORDER_FILENAME_TEMPLATE,
 		                                   kCurrentPacketVersionBorder);
 
@@ -802,6 +802,8 @@ void MapPlayersViewPacket::read(FileSystem& fs,
 		CHECK_TRAILING_BYTES(surveys_file, surveys_filename);
 		CHECK_TRAILING_BYTES(survey_amounts_file, survey_amounts_filename);
 		CHECK_TRAILING_BYTES(survey_times_file, survey_times_filename);
+		CHECK_TRAILING_BYTES(border_file, border_filename);
+		CHECK_TRAILING_BYTES(hidden_file, hidden_filename);
 	}
 }
 
