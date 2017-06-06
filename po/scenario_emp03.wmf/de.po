@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-05-19 07:45+0000\n"
+"POT-Creation-Date: 2017-05-26 17:01+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>, 2017\n"
 "Language-Team: German (https://www.transifex.com/widelands/teams/35159/de/)\n"
@@ -170,7 +170,7 @@ msgid ""
 " there. Afterwards, let’s try to find some mining resources."
 msgstr ""
 "Wir sollten die Insel im Süden erkunden. Sende eine Expedition, um einen "
-"Hafen dort zu bauen. Danach probiere Rohstoffe zum Abbau zu finden."
+"Hafen dort zu bauen. Versuche dann, Rohstoffe zum Abbau zu finden."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:117
 msgid ""
@@ -465,7 +465,7 @@ msgid ""
 "I think we should try to reveal some building space by cutting up all the "
 "rocks in a quarry."
 msgstr ""
-"Ich denke, wir sollten Bauplätze freimachen, indem wir die Felsen durch "
+"Ich denke, wir sollten Bauplätze freimachen, indem wir alle Felsen durch "
 "einen Steinbruch abbauen lassen."
 
 #. TRANSLATORS: Amalea
@@ -587,7 +587,7 @@ msgid ""
 "port for loading our ships and starting an expedition."
 msgstr ""
 "Herr, ich habe über unseren Heimweg nachgedacht. Es ist von größter "
-"Wichtigkeit, einen Hafen zu bauen, um unsere Schiffe zu laden und eine "
+"Wichtigkeit, einen Hafen zu bauen, um unsere Schiffe zu beladen und eine "
 "Expedition zu starten."
 
 #. TRANSLATORS: Saledus
@@ -851,9 +851,9 @@ msgid ""
 "dismantle some military buildings to obtain more space for our economy."
 msgstr ""
 "Wenn es Schwierigkeiten gibt, alle diese Gebäude zu bauen, sollten wir uns "
-"alles in Erinnerung rufen, was wir bisher gelernt haben. Wir können die "
-"Felsen abbauen. Wir können auch unsere Straßenverläufe ändern und sogar "
-"Militärgebäude abreißen, um Bauplätze freizumachen."
+"alles in Erinnerung rufen, was wir bisher gelernt haben. Wir können alle "
+"Felsen abbauen. Wir können auch unsere Straßenverläufe optimieren und sogar "
+"Militärgebäude abreißen, um Bauplätze für unsere Wirtschaft freizumachen."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:451
 msgid "We Should Conquer All the Islands"
@@ -897,8 +897,8 @@ msgid ""
 "I’m just kidding. Of course we should spare as much gold as we can for "
 "building an arena and other buildings to train our soldiers."
 msgstr ""
-"Das war ein Witz. Natürlich müssen wir so viel Gold wie möglich für eine "
-"Arena und andere Trainingsgebäude aufsparen."
+"Das war nur ein Witz. Natürlich müssen wir so viel Gold wie möglich für eine"
+" Arena und andere Trainingsgebäude für unsere Soldaten aufsparen."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:476
 msgid "Amalea is Pleased"
@@ -1189,7 +1189,7 @@ msgid ""
 "should increase our efforts to train them to the highest level and to train "
 "more of them."
 msgstr ""
-"Herr, wir haben Trainingsgebäude für unsere Soldaten, aber wir sollten "
+"Herr, wir haben alle Trainingsgebäude für unsere Soldaten, aber wir sollten "
 "unsere Anstrengungen vergrößern, sie zur höchsten Stufe zu trainieren."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:595
@@ -1263,7 +1263,7 @@ msgstr ""
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:631
 msgid "We have discovered another piece of our shrine. Praise Neptune!"
 msgstr ""
-"Wir haben ein weiters Stück unseres Schreins gefunden. Lob sei Neptun!"
+"Wir haben ein weiteres Stück unseres Schreins gefunden. Lob sei Neptun!"
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:636

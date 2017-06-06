@@ -10,9 +10,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-05-18 21:30+0000\n"
-"PO-Revision-Date: 2017-05-18 21:33+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2017-05-26 17:01+0000\n"
+"PO-Revision-Date: 2017-05-29 23:38+0000\n"
+"Last-Translator: Omar Anwar <omaraglan91@yahoo.com>\n"
 "Language-Team: Arabic (http://www.transifex.com/widelands/widelands/language/ar/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -77,11 +77,11 @@ msgid ""
 "Some of your starting buildings didn’t have enough room and weren’t built. "
 "You are at a disadvantage with this; consider restarting this map with a "
 "fair starting condition."
-msgstr ""
+msgstr "بعض من مباني البدء ليس لديها مساحة للبناء ولم تُبني، أنت مع تراجع في هذا الوضع، خذ ي الحسبان إعادة الخريطة مع مكان بدء جيد."
 
 #: ../../data/scripting/infrastructure.lua:159
 msgid "Not enough space"
-msgstr "لامساحه كافية"
+msgstr "لا مساحة كافية"
 
 #. * TRANSLATORS: This is the name of an AI used in the game setup screens
 #: ../../src/ai/computer_player.cc:42
@@ -301,7 +301,7 @@ msgstr "ينشئ خريطة فارغة..."
 #. * TRANSLATORS: Default name for new map
 #: ../../src/editor/editorinteractive.cc:588
 #: ../../src/editor/ui_menus/main_menu_new_map.cc:151
-#: ../../src/editor/ui_menus/main_menu_random_map.cc:535
+#: ../../src/editor/ui_menus/main_menu_random_map.cc:533
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:133
 #: ../../src/logic/map.h:179 ../../src/wui/mapdata.cc:46
 msgid "No Name"
@@ -309,7 +309,7 @@ msgstr "بدون إسم"
 
 #: ../../src/editor/editorinteractive.cc:591
 #: ../../src/editor/ui_menus/main_menu_new_map.cc:152
-#: ../../src/editor/ui_menus/main_menu_random_map.cc:536
+#: ../../src/editor/ui_menus/main_menu_random_map.cc:534
 #: ../../src/logic/map.h:180
 msgctxt "author_name"
 msgid "Unknown"
@@ -423,7 +423,7 @@ msgid "Editor Category: %s"
 msgstr "فئة المُعدل: %s"
 
 #: ../../src/editor/tools/info_tool.cc:141
-#: ../../src/editor/ui_menus/main_menu_random_map.cc:121
+#: ../../src/editor/ui_menus/main_menu_random_map.cc:119
 msgid "Resources:"
 msgstr "الموارد:"
 
@@ -441,7 +441,7 @@ msgstr "كميةالمورد: %i"
 msgid "No resources"
 msgstr "لا موارد"
 
-#: ../../src/editor/tools/info_tool.cc:159 ../../src/wui/mapdetails.cc:133
+#: ../../src/editor/tools/info_tool.cc:159 ../../src/wui/mapdetails.cc:131
 msgid "Map:"
 msgstr "خريطة:"
 
@@ -473,7 +473,7 @@ msgstr "المالك: %s"
 #: ../../src/editor/tools/info_tool.cc:175
 #, c-format
 msgid "Descr: %s"
-msgstr ""
+msgstr "الوصف: %s"
 
 #. * TRANSLATORS: %s are the currently selected items in an editor tool
 #: ../../src/editor/ui_menus/categorized_item_selection_menu.h:192
@@ -552,9 +552,9 @@ msgid "Current Directory: %s"
 msgstr "المسار الحالي: %s"
 
 #: ../../src/editor/ui_menus/main_menu_load_or_save_map.cc:68
-#: ../../src/editor/ui_menus/main_menu_map_options.cc:62
+#: ../../src/editor/ui_menus/main_menu_map_options.cc:60
 #: ../../src/editor/ui_menus/main_menu_save_map_make_directory.cc:56
-#: ../../src/scripting/lua_game.cc:432 ../../src/ui_basic/messagebox.cc:87
+#: ../../src/scripting/lua_game.cc:432 ../../src/ui_basic/messagebox.cc:89
 #: ../../src/ui_fsmenu/helpwindow.cc:51
 #: ../../src/ui_fsmenu/load_map_or_game.cc:45
 #: ../../src/ui_fsmenu/options.cc:118
@@ -563,11 +563,11 @@ msgid "OK"
 msgstr "موافق"
 
 #: ../../src/editor/ui_menus/main_menu_load_or_save_map.cc:77
-#: ../../src/editor/ui_menus/main_menu_map_options.cc:70
+#: ../../src/editor/ui_menus/main_menu_map_options.cc:68
 #: ../../src/editor/ui_menus/main_menu_new_map.cc:92
-#: ../../src/editor/ui_menus/main_menu_random_map.cc:228
+#: ../../src/editor/ui_menus/main_menu_random_map.cc:226
 #: ../../src/editor/ui_menus/main_menu_save_map_make_directory.cc:64
-#: ../../src/ui_basic/messagebox.cc:93 ../../src/ui_fsmenu/launch_mpg.cc:77
+#: ../../src/ui_basic/messagebox.cc:95 ../../src/ui_fsmenu/launch_mpg.cc:77
 #: ../../src/ui_fsmenu/options.cc:109
 #: ../../src/wui/game_main_menu_save_game.cc:92 ../../src/wui/login_box.cc:61
 msgid "Cancel"
@@ -587,39 +587,39 @@ msgstr "أظهر الأسماء الطبيعية للخريطة"
 msgid "Show Filenames"
 msgstr "أظهر أسماء الملفات"
 
-#: ../../src/editor/ui_menus/main_menu_map_options.cc:111
-#: ../../src/ui_fsmenu/loadgame.cc:382
+#: ../../src/editor/ui_menus/main_menu_map_options.cc:109
+#: ../../src/ui_fsmenu/loadgame.cc:372
 #: ../../src/wui/game_main_menu_save_game.cc:75
 msgid "Map Name:"
 msgstr "إسم الخريطة:"
 
-#: ../../src/editor/ui_menus/main_menu_map_options.cc:115
+#: ../../src/editor/ui_menus/main_menu_map_options.cc:113
 msgid "Authors:"
 msgstr "المالكون:"
 
-#: ../../src/editor/ui_menus/main_menu_map_options.cc:119
+#: ../../src/editor/ui_menus/main_menu_map_options.cc:117
 #: ../../src/ui_fsmenu/campaign_select.cc:75
 #: ../../src/ui_fsmenu/campaign_select.cc:151
-#: ../../src/ui_fsmenu/campaign_select.cc:376 ../../src/wui/mapdetails.cc:174
+#: ../../src/ui_fsmenu/campaign_select.cc:376 ../../src/wui/mapdetails.cc:172
 msgid "Description:"
 msgstr "الوصف:"
 
-#: ../../src/editor/ui_menus/main_menu_map_options.cc:123
+#: ../../src/editor/ui_menus/main_menu_map_options.cc:121
 msgid "Hint (optional):"
 msgstr "تلميح (إختياري):"
 
-#: ../../src/editor/ui_menus/main_menu_map_options.cc:130
-#: ../../src/wui/mapdetails.cc:168
+#: ../../src/editor/ui_menus/main_menu_map_options.cc:128
+#: ../../src/wui/mapdetails.cc:166
 msgid "Tags:"
 msgstr "وسوم:"
 
 #. * TRANSLATORS: Label for the list of suggested teams when choosing a map
-#: ../../src/editor/ui_menus/main_menu_map_options.cc:138
+#: ../../src/editor/ui_menus/main_menu_map_options.cc:136
 #: ../../src/wui/suggested_teams_box.cc:92
 msgid "Suggested Teams:"
 msgstr "الفِرق المُقترحة:"
 
-#: ../../src/editor/ui_menus/main_menu_map_options.cc:147
+#: ../../src/editor/ui_menus/main_menu_map_options.cc:145
 #: ../../src/ui_fsmenu/launch_mpg.cc:566
 #: ../../src/wui/game_main_menu_save_game.cc:157
 #, c-format
@@ -632,29 +632,29 @@ msgstr[3] "%u اللاعبيين"
 msgstr[4] "%u اللاعبيين"
 msgstr[5] "%u اللاعبيين"
 
-#: ../../src/editor/ui_menus/main_menu_map_options.cc:152
+#: ../../src/editor/ui_menus/main_menu_map_options.cc:150
 msgid "Main Options"
 msgstr "إعدادات أساسية"
 
-#: ../../src/editor/ui_menus/main_menu_map_options.cc:154
+#: ../../src/editor/ui_menus/main_menu_map_options.cc:152
 msgid "Tags"
 msgstr "الوسوم"
 
-#: ../../src/editor/ui_menus/main_menu_map_options.cc:156
+#: ../../src/editor/ui_menus/main_menu_map_options.cc:154
 msgid "Teams"
 msgstr "الفِرق"
 
-#: ../../src/editor/ui_menus/main_menu_map_options.cc:180
+#: ../../src/editor/ui_menus/main_menu_map_options.cc:178
 msgid "Size: %1% x %2%"
 msgstr "الحجم: %1% في %2%"
 
 #: ../../src/editor/ui_menus/main_menu_new_map.cc:58
-#: ../../src/editor/ui_menus/main_menu_random_map.cc:68
+#: ../../src/editor/ui_menus/main_menu_random_map.cc:66
 msgid "Width:"
 msgstr "العرض:"
 
 #: ../../src/editor/ui_menus/main_menu_new_map.cc:70
-#: ../../src/editor/ui_menus/main_menu_random_map.cc:80
+#: ../../src/editor/ui_menus/main_menu_random_map.cc:78
 msgid "Height:"
 msgstr "الطول:"
 
@@ -662,101 +662,101 @@ msgstr "الطول:"
 msgid "Create Map"
 msgstr "إصنع خريطة"
 
-#: ../../src/editor/ui_menus/main_menu_random_map.cc:93
-#: ../../src/ui_fsmenu/loadgame.cc:384
+#: ../../src/editor/ui_menus/main_menu_random_map.cc:91
+#: ../../src/ui_fsmenu/loadgame.cc:374
 msgid "Players:"
 msgstr "اللاعبين:"
 
 #. * TRANSLATORS: A world name for the random map generator in the editor
-#: ../../src/editor/ui_menus/main_menu_random_map.cc:100
+#: ../../src/editor/ui_menus/main_menu_random_map.cc:98
 msgid "Summer"
 msgstr "الصيف"
 
 #. * TRANSLATORS: A world name for the random map generator in the editor
-#: ../../src/editor/ui_menus/main_menu_random_map.cc:102
+#: ../../src/editor/ui_menus/main_menu_random_map.cc:100
 msgid "Winter"
 msgstr "الشتاء"
 
 #. * TRANSLATORS: A world name for the random map generator in the editor
-#: ../../src/editor/ui_menus/main_menu_random_map.cc:104
+#: ../../src/editor/ui_menus/main_menu_random_map.cc:102
 msgid "Desert"
 msgstr "الصحراء"
 
 #. * TRANSLATORS: A world name for the random map generator in the editor
-#: ../../src/editor/ui_menus/main_menu_random_map.cc:106
+#: ../../src/editor/ui_menus/main_menu_random_map.cc:104
 msgid "Wasteland"
 msgstr "أرض خراب"
 
 #. * TRANSLATORS: Amount of resources in the random map generator in the
 #. editor
-#: ../../src/editor/ui_menus/main_menu_random_map.cc:111
+#: ../../src/editor/ui_menus/main_menu_random_map.cc:109
 msgid "Low"
 msgstr "منخفض"
 
 #. * TRANSLATORS: Amount of resources in the random map generator in the
 #. editor
-#: ../../src/editor/ui_menus/main_menu_random_map.cc:113
+#: ../../src/editor/ui_menus/main_menu_random_map.cc:111
 msgid "Medium"
 msgstr "متوسط"
 
 #. * TRANSLATORS: Amount of resources in the random map generator in the
 #. editor
-#: ../../src/editor/ui_menus/main_menu_random_map.cc:115
+#: ../../src/editor/ui_menus/main_menu_random_map.cc:113
 msgid "High"
 msgstr "مرتفع"
 
-#: ../../src/editor/ui_menus/main_menu_random_map.cc:120
+#: ../../src/editor/ui_menus/main_menu_random_map.cc:118
 msgid "Climate:"
 msgstr "المُناخ:"
 
-#: ../../src/editor/ui_menus/main_menu_random_map.cc:151
+#: ../../src/editor/ui_menus/main_menu_random_map.cc:149
 msgid "Water:"
 msgstr "الماء:"
 
-#: ../../src/editor/ui_menus/main_menu_random_map.cc:164
+#: ../../src/editor/ui_menus/main_menu_random_map.cc:162
 msgid "Land:"
 msgstr "الارض:"
 
-#: ../../src/editor/ui_menus/main_menu_random_map.cc:177
+#: ../../src/editor/ui_menus/main_menu_random_map.cc:175
 msgid "Wasteland:"
 msgstr "الارض الخربة:"
 
-#: ../../src/editor/ui_menus/main_menu_random_map.cc:183
+#: ../../src/editor/ui_menus/main_menu_random_map.cc:181
 msgid "Mountains:"
 msgstr "الجبال:"
 
 #. * TRANSLATORS: A spinbox unit
-#: ../../src/editor/ui_menus/main_menu_random_map.cc:189
-#: ../../src/editor/ui_menus/main_menu_random_map.cc:509
+#: ../../src/editor/ui_menus/main_menu_random_map.cc:187
+#: ../../src/editor/ui_menus/main_menu_random_map.cc:507
 #: ../../src/ui_basic/spinbox.cc:325
 #, c-format
 msgid "%i %%"
 msgstr "%i %%"
 
-#: ../../src/editor/ui_menus/main_menu_random_map.cc:191
+#: ../../src/editor/ui_menus/main_menu_random_map.cc:189
 msgid "Island mode"
 msgstr "وضع الجزيرة"
 
-#: ../../src/editor/ui_menus/main_menu_random_map.cc:194
+#: ../../src/editor/ui_menus/main_menu_random_map.cc:192
 msgid "Random Number:"
 msgstr "رقم عشوائي:"
 
-#: ../../src/editor/ui_menus/main_menu_random_map.cc:203
+#: ../../src/editor/ui_menus/main_menu_random_map.cc:201
 msgid "Map ID:"
 msgstr "معرف الخريطة:"
 
-#: ../../src/editor/ui_menus/main_menu_random_map.cc:220
+#: ../../src/editor/ui_menus/main_menu_random_map.cc:218
 msgid "Generate Map"
 msgstr "ولد خريطة"
 
-#: ../../src/editor/ui_menus/main_menu_random_map.cc:538
+#: ../../src/editor/ui_menus/main_menu_random_map.cc:536
 msgid "Generating random map…"
 msgstr "يولد خريطة عشوائية..."
 
 #. * TRANSLATORS: Window title. This is shown after a random map has been
 #. created in the
 #. editor.
-#: ../../src/editor/ui_menus/main_menu_random_map.cc:577
+#: ../../src/editor/ui_menus/main_menu_random_map.cc:575
 msgid "Random Map"
 msgstr "خريطة عشوائية"
 
@@ -766,12 +766,12 @@ msgstr "خريطة عشوائية"
 #. * TRANSLATORS: as long as the user understands that he needs to check the
 #. player
 #. positions.
-#: ../../src/editor/ui_menus/main_menu_random_map.cc:582
+#: ../../src/editor/ui_menus/main_menu_random_map.cc:580
 msgid ""
 "The map has been generated. Please double-check the player starting "
 "positions to make sure that your carriers won’t drown, or be stuck on an "
 "island or on top of a mountain."
-msgstr ""
+msgstr "الخريطة تم إنشائها. من فضلك تحقق مجداً من أماكن بدء اللاعبين لكي تتأكد من أنها ليس موضوعة جيداً، أو محجوزة في جزيرة أو في أعلي جبل ما.."
 
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:61
 #: ../../src/editor/ui_menus/main_menu_save_map_make_directory.cc:29
@@ -779,7 +779,7 @@ msgid "Make Directory"
 msgstr "إصنع مسار"
 
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:71
-#: ../../src/ui_fsmenu/loadgame.cc:305 ../../src/ui_fsmenu/loadgame.cc:471
+#: ../../src/ui_fsmenu/loadgame.cc:305 ../../src/ui_fsmenu/loadgame.cc:461
 msgid "Filename:"
 msgstr "أسم الملف:"
 
@@ -848,7 +848,7 @@ msgstr "اللاعب %u"
 msgid ""
 "Cannot remove player. It is referenced someplace. Remove all buildings and "
 "animals that depend on this player and try again."
-msgstr ""
+msgstr "لا يمكن مسح اللاعب. ربما لديه مراجع في مكان ما. إمسح كل المباني والحيوانات المرتبطة بهذا اللاعب وحاول مجدداً."
 
 #: ../../src/editor/ui_menus/tool_change_height_options_menu.cc:36
 msgid "Height Tools Options"
@@ -870,13 +870,13 @@ msgstr "ضَع القيمة:"
 msgid ""
 "Click on the map to increase, Shift + Click on the map to decrease terrain "
 "height"
-msgstr ""
+msgstr "إضغط علي الخريطة للزيادة، Shift + إضغط لكي تُخفض إرتفاع التربة."
 
 #. * TRANSLATORS: Editor set height access key. *
 #: ../../src/editor/ui_menus/tool_change_height_options_menu.cc:68
 #: ../../src/editor/ui_menus/tool_noise_height_options_menu.cc:86
 msgid "Ctrl + Click on the map to set terrain height"
-msgstr ""
+msgstr "Ctrl + إضغط علي الخريطة لكي تُحدد إرتفاع التربة"
 
 #: ../../src/editor/ui_menus/tool_change_resources_options_menu.cc:50
 #: ../../src/editor/ui_menus/tool_menu.cc:64
@@ -888,12 +888,12 @@ msgstr "الموارد"
 msgid ""
 "Click on the map to increase, Shift + Click on the map to decrease the "
 "amount of the selected resource"
-msgstr ""
+msgstr "إضغط علي الخريطة للزيادة، Shift + إضغط لكي تُخفض كمية الموارد المحددة."
 
 #. * TRANSLATORS: Editor set rseources access key. *
 #: ../../src/editor/ui_menus/tool_change_resources_options_menu.cc:86
 msgid "Ctrl + Click on the map to set the amount of the selected resource"
-msgstr ""
+msgstr "Ctrl + إضغط علي الخريطة لكي تُحدد كية الموارد المحددة"
 
 #: ../../src/editor/ui_menus/tool_menu.cc:59
 msgid "Change height"
@@ -947,7 +947,7 @@ msgstr "الإرتفاع الأقصي:"
 msgid ""
 "Click on the map to set terrain height to a random value within the "
 "specified range"
-msgstr ""
+msgstr "إضغط علي الخريطة لكي تُحدد إرتفاع التربة بيمة عشوائية من المجال المُحدد"
 
 #: ../../src/editor/ui_menus/tool_noise_height_options_menu.cc:96
 msgid "Random Height"
@@ -955,7 +955,7 @@ msgstr "إرتفاع عشوائي"
 
 #: ../../src/editor/ui_menus/tool_noise_height_options_menu.cc:103
 msgid "Fixed Height"
-msgstr ""
+msgstr "إرتفاع ثابت"
 
 #. * TRANSLATORS: %1% = terrain name, %2% = list of terrain types
 #. * TRANSLATORS: Label: Value.
@@ -1009,13 +1009,13 @@ msgstr "مواقع البدء مفقودة"
 msgid ""
 "Widelands could not start the game, because player %u has no starting position.\n"
 "You can manually add a starting position with the Widelands Editor to fix this problem."
-msgstr ""
+msgstr "اللعبة لا يمكنها أن تبدء، بسبب أن اللاعب %u ليس لديه مكان للبدء.\nيمكنك يدوياً إضافة مكان البدء مع \"مُعدل الأرض الواسعة\" لكي تُصلح هذه المشكلة."
 
 #: ../../src/logic/game_data_error.cc:48
 msgid ""
 "This game was saved using an older version of Widelands and cannot be loaded"
 " anymore, or it's a new version that can't be handled yet."
-msgstr ""
+msgstr "هذه اللعبة قد حُفظت بإستخدام نسخة قديمة من \"الأرض الواسعة\" ولايمكن تحميلها أكثر من ذلك، أو أنها نسخة جديدة و لا يمكنه التعامل معها بعد."
 
 #: ../../src/logic/map.h:181
 msgid "No description defined"
@@ -1030,21 +1030,42 @@ msgstr "%i%% بَني"
 #: ../../src/logic/map_objects/tribes/dismantlesite.cc:100
 #, c-format
 msgid "%u%% dismantled"
-msgstr ""
+msgstr "%u%% فُكك"
+
+#. * TRANSLATORS: Militarysite lost (taken/destroyed by enemy)
+#: ../../src/logic/map_objects/tribes/militarysite.cc:137
+msgctxt "building"
+msgid "Lost!"
+msgstr "خُسر!"
+
+#: ../../src/logic/map_objects/tribes/militarysite.cc:138
+msgid "Militarysite lost!"
+msgstr "منطقة عسكرية خُسرت!"
+
+#. * TRANSLATORS: Message title.
+#. * TRANSLATORS: If you run out of space, you can also translate this as
+#. "Success!"
+#: ../../src/logic/map_objects/tribes/militarysite.cc:179
+msgid "Enemy Defeated!"
+msgstr "هُزم الأعداء!"
+
+#: ../../src/logic/map_objects/tribes/militarysite.cc:179
+msgid "Enemy at site defeated!"
+msgstr "الأعداء في المنطقة هزموا!"
 
 #. * TRANSLATORS: %1% is the number of soldiers the plural refers to
 #. * TRANSLATORS: %2% is the maximum number of soldier slots in the building
-#: ../../src/logic/map_objects/tribes/militarysite.cc:122
+#: ../../src/logic/map_objects/tribes/militarysite.cc:263
 msgid "%1% soldier (+%2%)"
 msgid_plural "%1% soldiers (+%2%)"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
-msgstr[4] ""
-msgstr[5] ""
+msgstr[0] "%1% جندي (+%2%)"
+msgstr[1] "%1% جندي (+%2%)"
+msgstr[2] "%1% جندي (+%2%)"
+msgstr[3] "%1% جُند (+%2%)"
+msgstr[4] "%1% جنود (+%2%)"
+msgstr[5] "%1% جنود (+%2%)"
 
-#: ../../src/logic/map_objects/tribes/militarysite.cc:126
+#: ../../src/logic/map_objects/tribes/militarysite.cc:267
 #, c-format
 msgid "%u soldier"
 msgid_plural "%u soldiers"
@@ -1055,7 +1076,7 @@ msgstr[3] ""
 msgstr[4] ""
 msgstr[5] ""
 
-#: ../../src/logic/map_objects/tribes/militarysite.cc:134
+#: ../../src/logic/map_objects/tribes/militarysite.cc:275
 msgid "%1%(+%2%) soldier (+%3%)"
 msgid_plural "%1%(+%2%) soldiers (+%3%)"
 msgstr[0] ""
@@ -1067,7 +1088,7 @@ msgstr[5] ""
 
 #. * TRANSLATORS: %1% is the number of soldiers the plural refers to
 #. * TRANSLATORS: %2% are currently open soldier slots in the building
-#: ../../src/logic/map_objects/tribes/militarysite.cc:140
+#: ../../src/logic/map_objects/tribes/militarysite.cc:281
 msgid "%1%(+%2%) soldier"
 msgid_plural "%1%(+%2%) soldiers"
 msgstr[0] ""
@@ -1077,34 +1098,13 @@ msgstr[3] ""
 msgstr[4] ""
 msgstr[5] ""
 
-#. * TRANSLATORS: Militarysite lost (taken/destroyed by enemy)
-#: ../../src/logic/map_objects/tribes/militarysite.cc:775
-msgctxt "building"
-msgid "Lost!"
-msgstr "خُسر!"
-
-#: ../../src/logic/map_objects/tribes/militarysite.cc:776
-msgid "Militarysite lost!"
-msgstr ""
-
-#. * TRANSLATORS: Message title.
-#. * TRANSLATORS: If you run out of space, you can also translate this as
-#. "Success!"
-#: ../../src/logic/map_objects/tribes/militarysite.cc:816
-msgid "Enemy Defeated!"
-msgstr "هُزم الأعداء!"
-
-#: ../../src/logic/map_objects/tribes/militarysite.cc:816
-msgid "Enemy at site defeated!"
-msgstr ""
-
 #. * TRANSLATORS: Militarysite is being attacked
-#: ../../src/logic/map_objects/tribes/militarysite.cc:858
+#: ../../src/logic/map_objects/tribes/militarysite.cc:863
 msgctxt "building"
 msgid "Attack!"
 msgstr ""
 
-#: ../../src/logic/map_objects/tribes/militarysite.cc:858
+#: ../../src/logic/map_objects/tribes/militarysite.cc:863
 msgid "You are under attack"
 msgstr "أنت تحت الهجوم"
 
@@ -1401,20 +1401,20 @@ msgctxt "ship_state"
 msgid "Founding a Colony"
 msgstr ""
 
-#: ../../src/logic/map_objects/tribes/soldier.cc:1347
 #: ../../src/logic/map_objects/tribes/soldier.cc:1351
+#: ../../src/logic/map_objects/tribes/soldier.cc:1355
 msgid "Logic error"
 msgstr ""
 
-#: ../../src/logic/map_objects/tribes/warehouse.cc:423
+#: ../../src/logic/map_objects/tribes/warehouse.cc:476
 msgid "A new port was added to your economy."
 msgstr ""
 
-#: ../../src/logic/map_objects/tribes/warehouse.cc:426
+#: ../../src/logic/map_objects/tribes/warehouse.cc:479
 msgid "A new headquarters was added to your economy."
 msgstr ""
 
-#: ../../src/logic/map_objects/tribes/warehouse.cc:429
+#: ../../src/logic/map_objects/tribes/warehouse.cc:482
 msgid "A new warehouse was added to your economy."
 msgstr ""
 
@@ -2233,7 +2233,7 @@ msgstr "#"
 msgid "Tutorial:"
 msgstr "الدرس التعليمي:"
 
-#: ../../src/ui_fsmenu/campaign_select.cc:375 ../../src/wui/mapdetails.cc:133
+#: ../../src/ui_fsmenu/campaign_select.cc:375 ../../src/wui/mapdetails.cc:131
 msgid "Scenario:"
 msgstr ""
 
@@ -2262,7 +2262,7 @@ msgstr[3] ""
 msgstr[4] ""
 msgstr[5] ""
 
-#: ../../src/ui_fsmenu/campaign_select.cc:406 ../../src/wui/mapdetails.cc:158
+#: ../../src/ui_fsmenu/campaign_select.cc:406 ../../src/wui/mapdetails.cc:156
 msgid "Author:"
 msgid_plural "Authors:"
 msgstr[0] ""
@@ -2728,23 +2728,23 @@ msgstr[4] ""
 msgstr[5] ""
 
 #. * TRANSLATORS %1% = map name, %2% = save date.
-#: ../../src/ui_fsmenu/loadgame.cc:352
+#: ../../src/ui_fsmenu/loadgame.cc:342
 msgid "%1%, saved on %2%"
 msgstr ""
 
-#: ../../src/ui_fsmenu/loadgame.cc:383
+#: ../../src/ui_fsmenu/loadgame.cc:373
 msgid "Gametime:"
 msgstr "زمن اللعبة:"
 
-#: ../../src/ui_fsmenu/loadgame.cc:385
+#: ../../src/ui_fsmenu/loadgame.cc:375
 msgid "Win Condition:"
 msgstr ""
 
-#: ../../src/ui_fsmenu/loadgame.cc:415
+#: ../../src/ui_fsmenu/loadgame.cc:405
 msgid "Widelands Version:"
 msgstr ""
 
-#: ../../src/ui_fsmenu/loadgame.cc:492
+#: ../../src/ui_fsmenu/loadgame.cc:482
 #, c-format
 msgid "Selected %d file:"
 msgid_plural "Selected %d files:"
@@ -2755,15 +2755,15 @@ msgstr[3] ""
 msgstr[4] ""
 msgstr[5] ""
 
-#: ../../src/ui_fsmenu/loadgame.cc:579
+#: ../../src/ui_fsmenu/loadgame.cc:569
 msgid "Today, %1%:%2%"
 msgstr ""
 
-#: ../../src/ui_fsmenu/loadgame.cc:592
+#: ../../src/ui_fsmenu/loadgame.cc:582
 msgid "Yesterday, %1%:%2%"
 msgstr ""
 
-#: ../../src/ui_fsmenu/loadgame.cc:598
+#: ../../src/ui_fsmenu/loadgame.cc:588
 msgid "%2% %1%, %3%"
 msgstr ""
 
@@ -2772,33 +2772,33 @@ msgstr ""
 #. * TRANSLATORS: A tooltip will explain the abbreviation.
 #. * TRANSLATORS: Make sure that this translation is consistent with the
 #. tooltip.
-#: ../../src/ui_fsmenu/loadgame.cc:619
+#: ../../src/ui_fsmenu/loadgame.cc:609
 msgid "SP"
 msgstr ""
 
-#: ../../src/ui_fsmenu/loadgame.cc:628
+#: ../../src/ui_fsmenu/loadgame.cc:618
 msgid "H (%1%)"
 msgstr ""
 
-#: ../../src/ui_fsmenu/loadgame.cc:638
+#: ../../src/ui_fsmenu/loadgame.cc:628
 msgid "MP (%1%)"
 msgstr ""
 
 #. * TRANSLATORS: Error message introduction for when an old savegame can't be
 #. loaded
-#: ../../src/ui_fsmenu/loadgame.cc:655
+#: ../../src/ui_fsmenu/loadgame.cc:645
 msgid ""
 "This file has the wrong format and can’t be loaded. Maybe it was created "
 "with an older version of Widelands."
 msgstr ""
 
 #. * TRANSLATORS: This text is on a separate line with an error message below
-#: ../../src/ui_fsmenu/loadgame.cc:658
+#: ../../src/ui_fsmenu/loadgame.cc:648
 msgid "Error message:"
 msgstr ""
 
 #. * TRANSLATORS: Prefix for incompatible files in load game screens
-#: ../../src/ui_fsmenu/loadgame.cc:671 ../../src/ui_fsmenu/loadgame.cc:673
+#: ../../src/ui_fsmenu/loadgame.cc:661 ../../src/ui_fsmenu/loadgame.cc:663
 #, c-format
 msgid "Incompatible: %s"
 msgstr ""
@@ -3052,11 +3052,11 @@ msgstr "إبدأ لعبة جديدة"
 
 #: ../../src/ui_fsmenu/singleplayer.cc:48
 msgid "Campaigns"
-msgstr ""
+msgstr "الحملات"
 
 #: ../../src/ui_fsmenu/singleplayer.cc:56
 msgid "Load Game"
-msgstr ""
+msgstr "حمل اللعبة"
 
 #: ../../src/wlapplication.cc:1037
 msgid "Game data error"
@@ -3231,7 +3231,7 @@ msgstr "توقف"
 #: ../../src/wui/buildingwindow.cc:232
 #, c-format
 msgid "Enhance to %s"
-msgstr ""
+msgstr "عزز إلي %s"
 
 #: ../../src/wui/buildingwindow.cc:233 ../../src/wui/fieldaction.cc:99
 msgid "Construction costs:"
@@ -3247,11 +3247,11 @@ msgstr "فكك"
 
 #: ../../src/wui/buildingwindow.cc:265
 msgid "Returns:"
-msgstr ""
+msgstr "يُرجع:"
 
 #: ../../src/wui/buildingwindow.cc:293 ../../src/wui/buildingwindow.cc:458
 msgid "Hide work area"
-msgstr ""
+msgstr "إخفي منطقة العمل"
 
 #: ../../src/wui/buildingwindow.cc:305 ../../src/wui/fieldaction.cc:371
 #: ../../src/wui/shipwindow.cc:181
@@ -3264,15 +3264,15 @@ msgstr ""
 
 #: ../../src/wui/buildingwindow.cc:461
 msgid "Show work area"
-msgstr ""
+msgstr "أظهر منطقة عمل"
 
 #: ../../src/wui/buildingwindow.cc:494
 msgid "Start an expedition"
-msgstr ""
+msgstr "إبدء بعثة"
 
 #: ../../src/wui/buildingwindow.cc:498
 msgid "Cancel the expedition"
-msgstr ""
+msgstr "ألغي البعثة"
 
 #: ../../src/wui/constructionsitewindow.cc:55
 #: ../../src/wui/dismantlesitewindow.cc:52
@@ -3281,14 +3281,14 @@ msgstr "مواد البناء"
 
 #: ../../src/wui/economy_options_window.cc:38
 msgid "Economy options"
-msgstr ""
+msgstr "إعدادات الإقتصاد"
 
 #: ../../src/wui/economy_options_window.cc:48
 #: ../../src/wui/general_statistics_menu.cc:149
 #: ../../src/wui/productionsitewindow.cc:75
 #: ../../src/wui/warehousewindow.cc:188
 msgid "Wares"
-msgstr ""
+msgstr "سلع"
 
 #: ../../src/wui/economy_options_window.cc:49
 #: ../../src/wui/general_statistics_menu.cc:140
@@ -3298,35 +3298,35 @@ msgstr "العمال"
 
 #: ../../src/wui/economy_options_window.cc:142
 msgid "Decrease target"
-msgstr ""
+msgstr "قلل الهدف"
 
 #: ../../src/wui/economy_options_window.cc:150
 msgid "Increase target"
-msgstr ""
+msgstr "زد الهدف"
 
 #: ../../src/wui/economy_options_window.cc:158
 msgid "Reset to default"
-msgstr ""
+msgstr "أرجع إلي الإفتراضي"
 
 #: ../../src/wui/fieldaction.cc:219
 msgid "Build large building"
-msgstr ""
+msgstr "إبني مبني كبير"
 
 #: ../../src/wui/fieldaction.cc:219
 msgid "Build medium building"
-msgstr ""
+msgstr "إبني مبني متوسط"
 
 #: ../../src/wui/fieldaction.cc:219
 msgid "Build small building"
-msgstr ""
+msgstr "إبني مبني صغير"
 
 #: ../../src/wui/fieldaction.cc:220
 msgid "Build port building"
-msgstr ""
+msgstr "إبني مبني الميناء"
 
 #: ../../src/wui/fieldaction.cc:247
 msgid "Action"
-msgstr ""
+msgstr "الأفعال"
 
 #: ../../src/wui/fieldaction.cc:318 ../../src/wui/fieldaction.cc:375
 msgid "Build road"
@@ -3334,11 +3334,11 @@ msgstr "إبني طريق"
 
 #: ../../src/wui/fieldaction.cc:324
 msgid "Destroy this flag"
-msgstr ""
+msgstr "دمر هذا العلم"
 
 #: ../../src/wui/fieldaction.cc:329
 msgid "Configure economy"
-msgstr ""
+msgstr "تكوين الإقتصاد"
 
 #: ../../src/wui/fieldaction.cc:332
 msgid "Send geologist to explore site"
@@ -3366,29 +3366,29 @@ msgstr ""
 
 #: ../../src/wui/fieldaction.cc:377 ../../src/wui/watchwindow.cc:98
 msgid "Watch"
-msgstr ""
+msgstr "شاهد"
 
-#: ../../src/wui/fieldaction.cc:389
+#: ../../src/wui/fieldaction.cc:391
 msgid "Start attack"
 msgstr "إبدأ الهجوم"
 
-#: ../../src/wui/fieldaction.cc:394
+#: ../../src/wui/fieldaction.cc:397
 msgid "Attack"
 msgstr "هجوم"
 
-#: ../../src/wui/fieldaction.cc:472
+#: ../../src/wui/fieldaction.cc:475
 msgid "Build mines"
-msgstr ""
-
-#: ../../src/wui/fieldaction.cc:485
-msgid "Build flag"
-msgstr ""
+msgstr "إبني منجم"
 
 #: ../../src/wui/fieldaction.cc:488
-msgid "Cancel road"
-msgstr ""
+msgid "Build flag"
+msgstr "إبني علم"
 
 #: ../../src/wui/fieldaction.cc:491
+msgid "Cancel road"
+msgstr "إلغاء الطريق"
+
+#: ../../src/wui/fieldaction.cc:494
 msgid "Build roads"
 msgstr "إبني طريق"
 
@@ -3405,22 +3405,22 @@ msgstr ""
 #. on the map
 #: ../../src/wui/game_debug_ui.cc:211
 msgid "Debug Field"
-msgstr ""
+msgstr "مساحة التصحيح"
 
 #. * TRANSLATORS: Button tooltip
 #: ../../src/wui/game_main_menu_save_game.cc:61
 #: ../../src/wui/game_options_menu.cc:89
 #: ../../src/wui/interactive_spectator.cc:57
 msgid "Save Game"
-msgstr ""
+msgstr "حفظ اللعبة"
 
 #: ../../src/wui/game_main_menu_save_game.cc:77
 msgid "Game Time:"
-msgstr ""
+msgstr "وقت اللعبة:"
 
 #: ../../src/wui/game_main_menu_save_game.cc:80
 msgid "Win condition:"
-msgstr ""
+msgstr "شروط الفوز:"
 
 #: ../../src/wui/game_main_menu_save_game.cc:123
 #, c-format
@@ -3439,26 +3439,26 @@ msgid ""
 "Saved game file may be corrupt!\n"
 "\n"
 "Reason given:\n"
-msgstr ""
+msgstr "خطأ حفظ اللعبة!\nاللعبة المحفوظة ربما تكون عاطبة\n\nالسبب المُعطي:\n"
 
 #: ../../src/wui/game_main_menu_save_game.cc:226
 #: ../../src/wui/game_main_menu_save_game.cc:235
 msgid "Save Game Error!"
-msgstr ""
+msgstr "خطأ حفظ اللعبة!"
 
 #: ../../src/wui/game_main_menu_save_game.cc:288
 msgid "File deletion"
-msgstr ""
+msgstr "مسح الملف"
 
 #: ../../src/wui/game_main_menu_save_game.cc:289
 #, c-format
 msgid "Do you really want to delete the file %s?"
-msgstr ""
+msgstr "هل تريد حقاً مسح هذا الملف  %s؟"
 
 #: ../../src/wui/game_message_menu.cc:51
 #: ../../src/wui/game_message_menu.cc:599
 msgid "Messages: Inbox"
-msgstr ""
+msgstr "الرسائل:صندوق الوارد"
 
 #: ../../src/wui/game_message_menu.cc:68
 msgid "Title"
@@ -3467,11 +3467,11 @@ msgstr "العنوان"
 #: ../../src/wui/game_message_menu.cc:69
 msgctxt "message"
 msgid "Type"
-msgstr ""
+msgstr "النوع"
 
 #: ../../src/wui/game_message_menu.cc:70 ../../src/wui/game_summary.cc:102
 msgid "Status"
-msgstr "حالة"
+msgstr "الحالة"
 
 #. * TRANSLATORS: We have very little space here. You can also translate this
 #. as "Time" or "Time
@@ -3608,7 +3608,7 @@ msgstr[5] ""
 #. * TRANSLATORS: Tooltip in the messages window
 #: ../../src/wui/game_message_menu.cc:643
 msgid "Archive selected message"
-msgstr ""
+msgstr "أرشفة الرسالة المحددة"
 
 #. * TRANSLATORS: %s is a tooltip, Del is the corresponding hotkey
 #: ../../src/wui/game_message_menu.cc:648
@@ -3624,21 +3624,21 @@ msgstr "الأهداف"
 #. * TRANSLATORS: Window label when "Exit game" has been pressed
 #: ../../src/wui/game_options_menu.cc:45
 msgid "Exit Game Confirmation"
-msgstr ""
+msgstr "تأكيد الخروج من اللعبة"
 
 #: ../../src/wui/game_options_menu.cc:46
 msgid "Are you sure you wish to exit this game?"
-msgstr ""
+msgstr "هل تود أن تخرج من اللعبة؟"
 
 #: ../../src/wui/game_options_menu.cc:77
 #: ../../src/wui/game_options_sound_menu.cc:27
 msgid "Sound Options"
-msgstr ""
+msgstr "إعدادات الصوت"
 
 #. * TRANSLATORS: Button tooltip
 #: ../../src/wui/game_options_menu.cc:79
 msgid "Set sound effect and music options"
-msgstr ""
+msgstr "حدد إعدادات الموسيقي والمؤثرات الصوتية"
 
 #. * TRANSLATORS: Button tooltip
 #: ../../src/wui/game_options_menu.cc:99 ../../src/wui/game_summary.cc:91
@@ -3647,15 +3647,15 @@ msgstr "أخرج من اللعبة"
 
 #: ../../src/wui/game_options_sound_menu.cc:35
 msgid "Music Volume"
-msgstr ""
+msgstr "مستوي الموسيقي"
 
 #: ../../src/wui/game_options_sound_menu.cc:50
 msgid "Sound Effects Volume"
-msgstr ""
+msgstr "مستوي المؤثرات الصوتية"
 
 #: ../../src/wui/game_statistics_menu.cc:36
 msgid "Statistics Menu"
-msgstr ""
+msgstr "قائمة الإحصائيات"
 
 #: ../../src/wui/game_statistics_menu.cc:40
 #: ../../src/wui/general_statistics_menu.cc:51
@@ -3665,90 +3665,90 @@ msgstr "إحصائيات عامة"
 #: ../../src/wui/game_statistics_menu.cc:43
 #: ../../src/wui/ware_statistics_menu.cc:106
 msgid "Ware Statistics"
-msgstr ""
+msgstr "إحصائيات السلع"
 
 #: ../../src/wui/game_statistics_menu.cc:46 ../../src/wui/stock_menu.cc:36
 #: ../../src/wui/ware_statistics_menu.cc:148 ../../src/wui/waresdisplay.cc:68
 msgid "Stock"
-msgstr ""
+msgstr "مخزون"
 
 #: ../../src/wui/game_summary.cc:43
 msgid "Game over"
-msgstr ""
+msgstr "اللعبة أنتهت"
 
 #: ../../src/wui/game_summary.cc:61
 msgid "Player Info:"
-msgstr ""
+msgstr "معلومات اللاعب:"
 
 #: ../../src/wui/game_summary.cc:76
 msgid "Elapsed time:"
-msgstr ""
+msgstr "الوقت المنقضي:"
 
 #: ../../src/wui/game_summary.cc:86
 msgid "Continue playing"
-msgstr ""
+msgstr "أكمل اللعب"
 
 #: ../../src/wui/game_summary.cc:103
 msgid "Time"
-msgstr ""
+msgstr "وقت"
 
 #. * TRANSLATORS: This is shown in the game summary for the players who have
 #. lost.
 #: ../../src/wui/game_summary.cc:165
 msgid "Lost"
-msgstr ""
+msgstr "خسر"
 
 #. * TRANSLATORS: This is shown in the game summary for the players who have
 #. won.
 #: ../../src/wui/game_summary.cc:169
 msgid "Won"
-msgstr ""
+msgstr "فاز"
 
 #. * TRANSLATORS: This is shown in the game summary for the players who have
 #. resigned.
 #: ../../src/wui/game_summary.cc:178
 msgid "Resigned"
-msgstr ""
+msgstr "استقالة"
 
 #. * TRANSLATORS: This is shown in the game summary when we don't know
 #. * TRANSLATORS: if the player has lost or won.
 #: ../../src/wui/game_summary.cc:183
 msgctxt "player_won"
 msgid "Unknown"
-msgstr ""
+msgstr "غيرمعروف"
 
 #: ../../src/wui/game_summary.cc:193
 msgid "You won!"
-msgstr ""
+msgstr "أنت فُزت!"
 
 #: ../../src/wui/game_summary.cc:195
 msgid "You lost."
-msgstr ""
+msgstr "أنت خسرت."
 
 #: ../../src/wui/game_summary.cc:200
 #, c-format
 msgid "%s won!"
-msgstr ""
+msgstr "%s فاز!"
 
 #: ../../src/wui/game_summary.cc:203
 msgid "Team %|1$u| won!"
-msgstr ""
+msgstr "الفريق %|1$u| فاز!"
 
 #: ../../src/wui/game_summary.cc:248
 msgid "Score"
-msgstr ""
+msgstr "الدرجة"
 
 #: ../../src/wui/game_summary.cc:250
 msgid "Team Score"
-msgstr ""
+msgstr "درجة الفريق"
 
 #: ../../src/wui/general_statistics_menu.cc:135
 msgid "Land"
-msgstr ""
+msgstr "أرض"
 
 #: ../../src/wui/general_statistics_menu.cc:145 ../../src/wui/minimap.cc:165
 msgid "Buildings"
-msgstr ""
+msgstr "مباني"
 
 #: ../../src/wui/general_statistics_menu.cc:154
 msgid "Productivity"
@@ -3764,15 +3764,15 @@ msgstr "القتلى"
 
 #: ../../src/wui/general_statistics_menu.cc:168
 msgid "Military buildings lost"
-msgstr ""
+msgstr "مبني عسكري خُسر"
 
 #: ../../src/wui/general_statistics_menu.cc:173
 msgid "Military buildings defeated"
-msgstr ""
+msgstr "مبني عسكري هُزم"
 
 #: ../../src/wui/general_statistics_menu.cc:178
 msgid "Civilian buildings lost"
-msgstr ""
+msgstr "مبني مدني خُسر"
 
 #: ../../src/wui/general_statistics_menu.cc:183
 msgid "Military"
@@ -3792,11 +3792,11 @@ msgstr "أقل أولوية ممكنة"
 
 #: ../../src/wui/inputqueuedisplay.cc:236
 msgid "Decrease the number of wares you want to be stored here."
-msgstr ""
+msgstr "تقليل عدد السلع التي تريد تخزينها هنا."
 
 #: ../../src/wui/inputqueuedisplay.cc:245
 msgid "Increase the number of wares you want to be stored here."
-msgstr ""
+msgstr "زيادة عدد السلع التي تريد تخزينها هنا."
 
 #: ../../src/wui/interactive_gamebase.cc:52
 msgid "PAUSE"
@@ -3820,7 +3820,7 @@ msgstr "الرسائل"
 
 #: ../../src/wui/interactive_player.cc:110
 msgid "Tribal Encyclopedia"
-msgstr ""
+msgstr "موسوعة القبائل"
 
 #: ../../src/wui/interactive_player.cc:162
 #, c-format
@@ -3835,11 +3835,11 @@ msgstr[5] ""
 
 #: ../../src/wui/interactive_spectator.cc:53
 msgid "Exit Replay"
-msgstr ""
+msgstr "أخرج من الإعادة"
 
 #: ../../src/wui/login_box.cc:29
 msgid "Metaserver login"
-msgstr ""
+msgstr "تسجيل دخول ميتاسرفر"
 
 #: ../../src/wui/login_box.cc:34
 msgid "Nickname:"
@@ -3851,11 +3851,11 @@ msgstr "كلمة المرور:"
 
 #: ../../src/wui/login_box.cc:42
 msgid "WARNING: Password will be shown and saved readable!"
-msgstr ""
+msgstr "تحذير: كلمة المرور سوف تُحفظ وتُظهر مقرؤة!"
 
 #: ../../src/wui/login_box.cc:44
 msgid "Log in to a registered account"
-msgstr ""
+msgstr "سجل دخول إلي حساب مُسجل"
 
 #: ../../src/wui/login_box.cc:47
 msgid "Automatically use this login information from now on."
@@ -3887,27 +3887,27 @@ msgstr "خانه كلمة المرور فارغة"
 
 #: ../../src/wui/login_box.cc:90
 msgid "Please enter your password!"
-msgstr "من فضلك أدخل كلمة مرور!"
+msgstr "من فضلك أدخل كلمة مرورك!"
 
 #. * TRANSLATORS: This is a map tag
 #: ../../src/wui/map_tags.cc:28
 msgid "Official"
-msgstr ""
+msgstr "الرسمية"
 
 #. * TRANSLATORS: This is a map tag
 #: ../../src/wui/map_tags.cc:30
 msgid "Unbalanced"
-msgstr ""
+msgstr "غير متعادلة"
 
 #. * TRANSLATORS: This is a map tag
 #: ../../src/wui/map_tags.cc:32
 msgid "Seafaring"
-msgstr ""
+msgstr "الإبحار"
 
 #. * TRANSLATORS: This is a map tag
 #: ../../src/wui/map_tags.cc:34
 msgid "Artifacts"
-msgstr ""
+msgstr "الأثار"
 
 #. * TRANSLATORS: This is a map tag
 #: ../../src/wui/map_tags.cc:38
@@ -3936,48 +3936,48 @@ msgstr "فرق من 4"
 
 #: ../../src/wui/mapdata.cc:46
 msgid "No Author"
-msgstr ""
+msgstr "لا مالك"
 
 #. * TRANSLATORS: Parent directory/folder
 #: ../../src/wui/mapdata.cc:147
 msgid "parent"
-msgstr ""
+msgstr "أصل"
 
 #. * TRANSLATORS: This label is shown when a folder is empty
 #: ../../src/wui/mapdata.cc:153
 msgid "empty"
-msgstr ""
+msgstr "فارغ"
 
-#: ../../src/wui/mapdetails.cc:125
+#: ../../src/wui/mapdetails.cc:123
 msgid "Directory:"
-msgstr ""
+msgstr "المسار:"
 
 #. * TRANSLATORS: Tooltip in map description when translated map names are
 #. being
 #. displayed.
 #. * TRANSLATORS: %s is the English name of the map.
-#: ../../src/wui/mapdetails.cc:144
+#: ../../src/wui/mapdetails.cc:142
 #, c-format
 msgid "The original name of this map: %s"
-msgstr ""
+msgstr "الأسم الطبيعي للخريطة: %s"
 
 #. * TRANSLATORS: Tooltip in map description when map names are being
 #. displayed in
 #. English.
 #. * TRANSLATORS: %s is the localized name of the map.
-#: ../../src/wui/mapdetails.cc:150
+#: ../../src/wui/mapdetails.cc:148
 #, c-format
 msgid "The name of this map in your language: %s"
-msgstr ""
+msgstr "إسم الخريطة في لغتك: %s"
 
 #. * TRANSLATORS: Map hint header when selecting a map.
-#: ../../src/wui/mapdetails.cc:180
+#: ../../src/wui/mapdetails.cc:178
 msgid "Hint:"
-msgstr ""
+msgstr "تلميح:"
 
 #: ../../src/wui/maptable.cc:33
 msgid "Number of players"
-msgstr ""
+msgstr "عدد اللاعبين"
 
 #. * TRANSLATORS: Column title for number of players in map list
 #: ../../src/wui/maptable.cc:33
@@ -3986,19 +3986,19 @@ msgstr ""
 
 #: ../../src/wui/maptable.cc:34 ../../src/wui/maptable.cc:63
 msgid "Filename"
-msgstr ""
+msgstr "أسم الملف"
 
 #: ../../src/wui/maptable.cc:34
 msgid "The name of the map or scenario"
-msgstr ""
+msgstr "أسم الخريطة أو المشهد"
 
 #: ../../src/wui/maptable.cc:36
 msgid "Size"
-msgstr ""
+msgstr "الحجم"
 
 #: ../../src/wui/maptable.cc:36
 msgid "The size of the map (Width x Height)"
-msgstr ""
+msgstr "حجم الخريطة (الطول x الأرتفاع)"
 
 #: ../../src/wui/maptable.cc:67
 msgid "Map Name"
@@ -4014,7 +4014,7 @@ msgstr "المالك"
 
 #: ../../src/wui/minimap.cc:143
 msgid "Flags"
-msgstr ""
+msgstr "أعلام"
 
 #: ../../src/wui/minimap.cc:154
 msgid "Roads"
@@ -4026,7 +4026,7 @@ msgstr "تقريب"
 
 #: ../../src/wui/multiplayersetupgroup.cc:98
 msgid "free"
-msgstr ""
+msgstr "مجاناً"
 
 #: ../../src/wui/multiplayersetupgroup.cc:116
 msgid "Spectator"
@@ -4037,32 +4037,32 @@ msgstr "مشاهد"
 #: ../../src/wui/multiplayersetupgroup.cc:289
 #, c-format
 msgid "Shared in Player %u"
-msgstr ""
+msgstr "مشترك في اللاعب %u"
 
 #: ../../src/wui/multiplayersetupgroup.cc:310
 #: ../../src/wui/playerdescrgroup.cc:170
 msgctxt "tribe"
 msgid "Random"
-msgstr ""
+msgstr "عشوائي"
 
 #: ../../src/wui/multiplayersetupgroup.cc:312
 msgid "The tribe will be selected at random"
-msgstr ""
+msgstr "القبيلة سوف تُحدد عشوائياً"
 
 #: ../../src/wui/multiplayersetupgroup.cc:366
 msgid "Shared in"
-msgstr ""
+msgstr "مشترك في"
 
 #: ../../src/wui/multiplayersetupgroup.cc:384
 #: ../../src/wui/playerdescrgroup.cc:149
 msgid "Computer"
-msgstr ""
+msgstr "كمبيوتر"
 
 #. * TRANSLATORS: This is the name of an AI used in the game setup screens
 #: ../../src/wui/multiplayersetupgroup.cc:389
 #: ../../src/wui/playerdescrgroup.cc:152
 msgid "Random AI"
-msgstr ""
+msgstr "كمبيوتر عشوائي"
 
 #: ../../src/wui/multiplayersetupgroup.cc:399
 #: ../../src/wui/playerdescrgroup.cc:160
@@ -4088,11 +4088,11 @@ msgstr "نوع"
 #: ../../src/wui/multiplayersetupgroup.cc:499
 #: ../../src/wui/playerdescrgroup.cc:86
 msgid "Initialization"
-msgstr ""
+msgstr "التهيئة"
 
 #: ../../src/wui/playerdescrgroup.cc:171
 msgid "The tribe will be set at random."
-msgstr ""
+msgstr "القبيلة سوف تحدد عشوائياً"
 
 #. * TRANSLATORS: day(s). Keep this as short as possible. Used in statistics.
 #: ../../src/wui/plot_area.cc:114
@@ -4135,23 +4135,23 @@ msgstr[5] ""
 #: ../../src/wui/plot_area.cc:133
 msgctxt "unit_generic"
 msgid "days"
-msgstr ""
+msgstr "أيام"
 
 #. * TRANSLATORS: Generic unit label. Used in statistics.
 #: ../../src/wui/plot_area.cc:136
 msgctxt "unit_generic"
 msgid "hours"
-msgstr ""
+msgstr "ساعات"
 
 #. * TRANSLATORS: Generic unit label. Used in statistics.
 #: ../../src/wui/plot_area.cc:139
 msgctxt "unit_generic"
 msgid "minutes"
-msgstr ""
+msgstr "دقائق"
 
-#: ../../src/wui/plot_area.cc:333
+#: ../../src/wui/plot_area.cc:331
 msgid "game"
-msgstr ""
+msgstr "لعبة"
 
 #: ../../src/wui/productionsitewindow.cc:88
 msgid "Exp"
@@ -4163,95 +4163,95 @@ msgstr "المستوى التالى"
 
 #: ../../src/wui/productionsitewindow.cc:101
 msgid "Terminate the employment of the selected worker"
-msgstr ""
+msgstr "ألغي التوظيف للعامل المُحدد"
 
 #: ../../src/wui/productionsitewindow.cc:166
 msgid "(coming)"
-msgstr ""
+msgstr "(قادم)"
 
 #: ../../src/wui/productionsitewindow.cc:166
 msgid "(vacant)"
-msgstr ""
+msgstr "(شاغر)"
 
 #. * TRANSLATORS: Window label when an expedition can't be canceled
 #: ../../src/wui/shipwindow.cc:68
 msgid "Cancel expedition"
-msgstr ""
+msgstr "ألغي البعثة"
 
 #: ../../src/wui/shipwindow.cc:68
 msgid ""
 "This expedition can’t be canceled, because the ship has no port to return "
 "to."
-msgstr ""
+msgstr "البعثة لا يمكن إلغائها، بسبب أن السفينة ليس لديها ميناء لترجع إليه."
 
 #: ../../src/wui/shipwindow.cc:111
 msgid "Scout towards the north west"
-msgstr ""
+msgstr "إستكشف بإتجاه الشمال الغربي"
 
 #: ../../src/wui/shipwindow.cc:116
 msgid "Explore the island’s coast clockwise"
-msgstr ""
+msgstr "إستكشف ساحل الجزيرة مع عقارب الساعة"
 
 #: ../../src/wui/shipwindow.cc:121
 msgid "Scout towards the north east"
-msgstr ""
+msgstr "إستكشف بإتجاه الشمال الشرقي"
 
 #: ../../src/wui/shipwindow.cc:126
 msgid "Scout towards the west"
-msgstr ""
+msgstr "إستكشف بإتجاه الغرب"
 
 #: ../../src/wui/shipwindow.cc:131
 msgid "Construct a port at the current location"
-msgstr ""
+msgstr "إبني ميناء في المكان الحالي"
 
 #: ../../src/wui/shipwindow.cc:136
 msgid "Scout towards the east"
-msgstr ""
+msgstr "إستكشف بإتجاه الشرق"
 
 #: ../../src/wui/shipwindow.cc:141
 msgid "Scout towards the south west"
-msgstr ""
+msgstr "إستكشف بإتجاه الجنوب الغربي"
 
 #: ../../src/wui/shipwindow.cc:146
 msgid "Explore the island’s coast counter clockwise"
-msgstr ""
+msgstr "إستكشف سواحل الجزيرة عكس عقارب الساعه"
 
 #: ../../src/wui/shipwindow.cc:152
 msgid "Scout towards the south east"
-msgstr ""
+msgstr "إستكشف بإتجاه الجنوب الشرقي"
 
 #: ../../src/wui/shipwindow.cc:162
 msgid "Go to ship"
-msgstr ""
+msgstr "إذهب إلي السفينة"
 
 #: ../../src/wui/shipwindow.cc:164
 msgid "Go to destination"
-msgstr ""
+msgstr "إذهب إلي الوجهة"
 
 #: ../../src/wui/shipwindow.cc:170
 msgid "Sink the ship"
-msgstr ""
+msgstr "أغرق السفينة"
 
 #: ../../src/wui/shipwindow.cc:175
 msgid "Cancel the Expedition"
-msgstr ""
+msgstr "ألغي البعثة"
 
 #: ../../src/wui/soldiercapacitycontrol.cc:72
 msgid "Decrease capacity"
-msgstr ""
+msgstr "قلل السعة"
 
 #: ../../src/wui/soldiercapacitycontrol.cc:81
 msgid "Increase capacity"
-msgstr ""
+msgstr "زد السعة"
 
 #: ../../src/wui/soldiercapacitycontrol.cc:88
 msgid "Capacity"
-msgstr ""
+msgstr "السعة"
 
 #: ../../src/wui/soldierlist.cc:371 ../../src/wui/soldierlist.cc:392
 #: ../../src/wui/soldierlist.cc:453
 msgid "Click soldier to send away"
-msgstr ""
+msgstr "إضغط علي جندي لكي ترسله بعيداً"
 
 #: ../../src/wui/soldierlist.cc:387 ../../src/wui/soldierlist.cc:458
 #, c-format
@@ -4260,31 +4260,31 @@ msgstr ""
 
 #: ../../src/wui/soldierlist.cc:401
 msgid "Prefer Rookies"
-msgstr ""
+msgstr "فضل مجندين"
 
 #: ../../src/wui/soldierlist.cc:404
 msgid "Prefer Heroes"
-msgstr ""
+msgstr "فضل أبطال"
 
 #: ../../src/wui/stock_menu.cc:42
 msgid "Wares (total)"
-msgstr ""
+msgstr "السلع (المجموع)"
 
 #: ../../src/wui/stock_menu.cc:46
 msgid "Workers (total)"
-msgstr ""
+msgstr "العمال (المجموع)"
 
 #: ../../src/wui/stock_menu.cc:50
 msgid "Wares in warehouses"
-msgstr ""
+msgstr "السلع في مخزن السلع"
 
 #: ../../src/wui/stock_menu.cc:55
 msgid "Workers in warehouses"
-msgstr ""
+msgstr "العمال في مخزن السلع"
 
 #: ../../src/wui/trainingsitewindow.cc:44
 msgid "Soldiers in training"
-msgstr ""
+msgstr "الجنود في التدريب"
 
 #: ../../src/wui/ware_statistics_menu.cc:130
 msgid "Production"
@@ -4292,44 +4292,44 @@ msgstr "إنتاج"
 
 #: ../../src/wui/ware_statistics_menu.cc:136
 msgid "Consumption"
-msgstr ""
+msgstr "الإستهلاك"
 
 #: ../../src/wui/ware_statistics_menu.cc:143
 msgid "Economy Health"
-msgstr ""
+msgstr "صحة الإقتصاد"
 
 #: ../../src/wui/warehousewindow.cc:146
 msgid "Normal policy"
-msgstr ""
+msgstr "سياسة عادية"
 
 #: ../../src/wui/warehousewindow.cc:147
 msgid "Preferably store selected wares here"
-msgstr ""
+msgstr "خزن بأفضلية السلع المحددة هنا"
 
 #: ../../src/wui/warehousewindow.cc:148
 msgid "Do not store selected wares here"
-msgstr ""
+msgstr "لا تُخزن السلع المحددة هنا"
 
 #: ../../src/wui/warehousewindow.cc:149
 msgid "Remove selected wares from here"
-msgstr ""
+msgstr "إمسح السلع المحددة من هنا"
 
 #: ../../src/wui/warehousewindow.cc:197
 msgid "Wares waiting to be shipped"
-msgstr ""
+msgstr "السلع تنتظر أن تُشحن"
 
 #: ../../src/wui/warehousewindow.cc:200
 msgid "Workers waiting to embark"
-msgstr ""
+msgstr "العمال ينتظرون الركوب"
 
 #: ../../src/wui/warehousewindow.cc:204
 msgid "Expedition"
-msgstr ""
+msgstr "بعثة"
 
 #: ../../src/wui/watchwindow.cc:105
 msgid "Follow"
-msgstr ""
+msgstr "إتبع"
 
 #: ../../src/wui/watchwindow.cc:111
 msgid "Center the main view on this"
-msgstr ""
+msgstr "ضع منتصف المشهد عي هذا"
