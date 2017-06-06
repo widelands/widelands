@@ -79,7 +79,7 @@ void CampaignVisibilitySave::update_campvis(const std::string& savepath) {
 	int32_t i = 0;
 	int32_t imap = 0;
 	char csection[12];
-	char number[4];
+	char number[10];
 	std::string mapsection;
 	std::string cms;
 
