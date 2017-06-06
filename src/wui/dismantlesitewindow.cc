@@ -34,7 +34,7 @@ DismantleSiteWindow::DismantleSiteWindow(InteractiveGameBase& parent,
 
 void DismantleSiteWindow::init(bool avoid_fastclick) {
 	BuildingWindow::init(avoid_fastclick);
-	Widelands::DismantleSite* ds = dynamic_cast<Widelands::DismantleSite*>(building());
+	Widelands::DismantleSite& ds = dynamic_cast<Widelands::DismantleSite&>(building());
 	UI::Box& box = *new UI::Box(get_tabs(), 0, 0, UI::Box::Vertical);
 
 	// Add the progress bar
@@ -46,8 +46,8 @@ void DismantleSiteWindow::init(bool avoid_fastclick) {
 	box.add_space(8);
 
 	// Add the wares queue
-	for (uint32_t i = 0; i < ds->get_nrwaresqueues(); ++i)
-		BuildingWindow::create_input_queue_panel(&box, *ds, ds->get_waresqueue(i), true);
+	for (uint32_t i = 0; i < ds.get_nrwaresqueues(); ++i)
+		BuildingWindow::create_input_queue_panel(&box, ds, ds.get_waresqueue(i), true);
 
 	get_tabs()->add("wares", g_gr->images().get(pic_tab_wares), &box, _("Building materials"));
 	think();
@@ -61,7 +61,7 @@ Make sure the window is redrawn when necessary.
 void DismantleSiteWindow::think() {
 	BuildingWindow::think();
 
-	const Widelands::DismantleSite* ds = dynamic_cast<Widelands::DismantleSite*>(building());
+	const Widelands::DismantleSite& ds = dynamic_cast<Widelands::DismantleSite&>(building());
 
-	progress_->set_state(ds->get_built_per64k());
+	progress_->set_state(ds.get_built_per64k());
 }

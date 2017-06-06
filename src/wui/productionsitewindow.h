@@ -32,8 +32,8 @@ struct ProductionSiteWindow : public BuildingWindow {
 	                     Widelands::ProductionSite&,
 	                     bool avoid_fastclick);
 
-	Widelands::ProductionSite* productionsite() {
-		return dynamic_cast<Widelands::ProductionSite*>(building());
+	Widelands::ProductionSite& productionsite() {
+		return dynamic_cast<Widelands::ProductionSite&>(building());
 	}
 	void update_worker_table();
 

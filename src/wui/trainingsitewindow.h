@@ -33,8 +33,8 @@ struct TrainingSiteWindow : public ProductionSiteWindow {
 	                   Widelands::TrainingSite&,
 	                   bool avoid_fastclick);
 
-	Widelands::TrainingSite* trainingsite() {
-		return dynamic_cast<Widelands::TrainingSite*>(building());
+	Widelands::TrainingSite& trainingsite() {
+		return dynamic_cast<Widelands::TrainingSite&>(building());
 	}
 
 protected:

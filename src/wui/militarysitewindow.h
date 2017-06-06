@@ -32,8 +32,8 @@ struct MilitarySiteWindow : public BuildingWindow {
 	                   Widelands::MilitarySite&,
 	                   bool avoid_fastclick);
 
-	Widelands::MilitarySite* militarysite() {
-		return dynamic_cast<Widelands::MilitarySite*>(building());
+	Widelands::MilitarySite& militarysite() {
+		return dynamic_cast<Widelands::MilitarySite&>(building());
 	}
 
 protected:
