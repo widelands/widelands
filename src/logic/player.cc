@@ -1062,12 +1062,13 @@ Vision Player::unsee_node(MapIndex const i,
 void Player::hide_or_reveal_field(const uint32_t gametime, const Coords& coords, SeeUnseeNode mode) {
 	const Map& map = egbase().map();
 	FCoords fcoords = map.get_fcoords(coords);
+	const Widelands::MapIndex index = fcoords.field - &map[0];
+
 	switch (mode) {
 	// Reveal field
 	case SeeUnseeNode::kReveal: {
 		Widelands::Vision new_vision = see_node(map, fcoords, gametime);
 		// If the field was manually hidden, restore the original vision
-		const Widelands::MapIndex index = fcoords.field - &map[0];
 		if (hidden_fields_.count(index) == 1) {
 			auto iter = hidden_fields_.find(index);
 			Vision original_vision = iter->second;
@@ -1080,7 +1081,6 @@ void Player::hide_or_reveal_field(const uint32_t gametime, const Coords& coords,
 	// Hide field
 	case SeeUnseeNode::kUnsee:
 	case SeeUnseeNode::kUnexplore: {
-		const Widelands::MapIndex index = fcoords.field - &map[0];
 		const Widelands::Vision new_vision = unsee_node(index, gametime, mode);
 		// Remember the original vision so that we can unhide the fields again
 		if (hidden_fields_.count(index) != 1) {
@@ -1088,7 +1088,6 @@ void Player::hide_or_reveal_field(const uint32_t gametime, const Coords& coords,
 		}
 	} break;
 	}
-
 }
 
 /**

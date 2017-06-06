@@ -587,8 +587,8 @@ int LuaPlayer::add_objective(lua_State* L) {
 /* RST
    .. method:: reveal_fields(fields)
 
-      Make these fields visible for the current player. If the fields were previously hidden with
-      `hide_fields` before, restores the exact vision that they had before that was done.
+      Make these fields visible for the current player. If the fields were previously hidden via
+      `hide_fields`, restores the exact vision that they had before that was done.
 
       :arg fields: The fields to reveal
       :type fields: :class:`array` of :class:`wl.map.Fields`
@@ -623,7 +623,6 @@ int LuaPlayer::reveal_fields(lua_State* L) {
 
       :returns: :const:`nil`
 */
-// UNTESTED
 int LuaPlayer::hide_fields(lua_State* L) {
 	Game& game = get_game(L);
 	Player& p = get(L, game);

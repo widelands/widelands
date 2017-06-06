@@ -779,7 +779,7 @@ void MapPlayersViewPacket::read(FileSystem& fs,
 
 		// Read the number of explicitly hidden fields and then loop through them
 		if (hidden_file_version == kCurrentPacketVersionHidden) {
-			uint32_t no_of_hidden_fields = hidden_file.unsigned_32();
+			const uint32_t no_of_hidden_fields = hidden_file.unsigned_32();
 			for (uint32_t i = 0; i < no_of_hidden_fields; ++i) {
 				player->hidden_fields_.insert(std::make_pair(hidden_file.unsigned_32(), hidden_file.unsigned_16()));
 			}
