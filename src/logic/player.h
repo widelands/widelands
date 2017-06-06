@@ -639,7 +639,6 @@ private:
 	std::string name_;  // Player name
 	std::string ai_;    /**< Name of preferred AI implementation */
 
-	// NOCOM saveloading
 	// Fields that were explicitly hidden, with their vision at the time of hiding
 	std::map<MapIndex, Widelands::Vision> hidden_fields_;
 
