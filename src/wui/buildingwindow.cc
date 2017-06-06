@@ -147,15 +147,13 @@ Check the capabilities and setup the capsbutton panel in case they've changed.
 ===============
 */
 void BuildingWindow::think() {
-	 Widelands::Building* b = building();
-
-	if (!b || !b->get_owner() || !igbase()->can_see(b->owner().player_number())) {
+	if (!igbase()->can_see(building()->owner().player_number())) {
 		die();
 		return;
 	}
 
 	if (!caps_setup_ || capscache_player_number_ != igbase()->player_number() ||
-	    b->get_playercaps() != capscache_) {
+	    building()->get_playercaps() != capscache_) {
 		capsbuttons_->free_children();
 		create_capsbuttons(capsbuttons_);
 		if (!avoid_fastclick_) {
