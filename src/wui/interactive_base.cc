@@ -85,9 +85,9 @@ InteractiveBase::InteractiveBase(EditorGameBase& the_egbase, Section& global_s)
      edge_overlay_manager_(new EdgeOverlayManager()),
      egbase_(the_egbase),
 #ifndef NDEBUG  //  not in releases
-     display_flags_(dfDebug | dfShowSoldierHealthBars | kSoldierLevels),
+     display_flags_(dfDebug | kSoldierLevels),
 #else
-     display_flags_(dfShowSoldierHealthBars | kSoldierLevels),
+     display_flags_(kSoldierLevels),
 #endif
      lastframe_(SDL_GetTicks()),
      frametime_(0),

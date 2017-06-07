@@ -400,9 +400,6 @@ void MapView::draw(RenderTarget& dst) {
 	if (display_flags & InteractiveBase::dfShowStatistics) {
 		info_to_draw = info_to_draw | InfoToDraw::kStatistics;
 	}
-	if (display_flags & InteractiveBase::dfShowSoldierHealthBars) {
-		info_to_draw = info_to_draw | InfoToDraw::kSoldierHealthBars;
-	}
 	if (display_flags & InteractiveBase::dfShowSoldierLevels) {
 		info_to_draw = info_to_draw | InfoToDraw::kSoldierLevels;
 	}

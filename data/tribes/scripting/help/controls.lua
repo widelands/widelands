@@ -41,10 +41,8 @@ return {
                dl(help_format_hotkey("C"), _"Toggle census") ..
                -- TRANSLATORS: This is an access key combination. The hotkey is 's'
                dl(help_format_hotkey("S"), _"Toggle statistics") ..
-               -- TRANSLATORS: This is an access key combination. The hotkey is 'h'
-               dl(help_format_hotkey("H"), _"Toggle soldier health bars") ..
                -- TRANSLATORS: This is an access key combination. The hotkey is 'l'
-               dl(help_format_hotkey("L"), _"Toggle soldier level icons") ..
+               dl(help_format_hotkey("L"), _"Toggle soldier health bars and level icons") ..
                toggle_minimap_hotkey ..
                toggle_building_spaces_hotkey ..
                -- TRANSLATORS: This is an access key combination. The hotkey is 'o'

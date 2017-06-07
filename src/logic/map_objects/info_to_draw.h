@@ -24,8 +24,7 @@ enum InfoToDraw {
 	kNone = 0,
 	kCensus = 1,
 	kStatistics = 2,
-	kSoldierHealthBars = 4,
-	kSoldierLevels = 8,
+	kSoldierLevels = 4,
 };
 
 inline InfoToDraw operator|(InfoToDraw a, InfoToDraw b) {

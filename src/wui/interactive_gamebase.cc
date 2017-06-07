@@ -157,10 +157,6 @@ bool InteractiveGameBase::handle_key(bool down, SDL_Keysym code) {
 			set_display_flag(dfShowCensus, !get_display_flag(dfShowCensus));
 			return true;
 
-		case SDLK_h:
-			set_display_flag(dfShowSoldierHealthBars, !get_display_flag(dfShowSoldierHealthBars));
-			return true;
-
 		case SDLK_l:
 			set_display_flag(dfShowSoldierLevels, !get_display_flag(dfShowSoldierLevels));
 			return true;

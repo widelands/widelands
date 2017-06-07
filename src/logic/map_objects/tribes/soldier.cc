@@ -467,7 +467,7 @@ void Soldier::draw_info_icon(Vector2i draw_position,
                              const InfoMode draw_mode,
                              const InfoToDraw info_to_draw,
                              RenderTarget* dst) const {
-	if (!(info_to_draw & (InfoToDraw::kSoldierHealthBars | InfoToDraw::kSoldierLevels))) {
+	if (!(info_to_draw & InfoToDraw::kSoldierLevels)) {
 		return;
 	}
 
@@ -503,7 +503,9 @@ void Soldier::draw_info_icon(Vector2i draw_position,
 #endif
 
 	const int icon_size = get_health_level_pic()->height();
-	const bool draw_health_bar = draw_mode == InfoMode::kInBuilding || (info_to_draw & InfoToDraw::kSoldierHealthBars && current_health_ < get_max_health());
+
+	// Draw health info in building windows, or if kSoldierLevels is on.
+	const bool draw_health_bar = draw_mode == InfoMode::kInBuilding || (info_to_draw & InfoToDraw::kSoldierLevels);
 
 	switch (draw_mode) {
 	case InfoMode::kInBuilding:
@@ -541,23 +543,19 @@ void Soldier::draw_info_icon(Vector2i draw_position,
 		dst->fill_rect(energy_complement, complement_color);
 	}
 
-	if (info_to_draw & InfoToDraw::kSoldierLevels) {
-		// Draw level info in building windows, or if the soldier has at least 1 promotion.
-		if (draw_mode == InfoMode::kInBuilding || health_level_ > 0 || attack_level_ > 0 ||
-		    defense_level_ > 0 || evade_level_ > 0) {
+	// Draw level info in building windows, or if kSoldierLevels is on.
+	if (draw_mode == InfoMode::kInBuilding || (info_to_draw & InfoToDraw::kSoldierLevels)) {
+		const auto draw_level_image = [icon_size, scale, &draw_position, dst](
+			const Vector2i& offset, const Image* image) {
+			dst->blitrect_scale(Rectf(draw_position + offset * icon_size * scale, icon_size * scale,
+											  icon_size * scale),
+									  image, Recti(0, 0, icon_size, icon_size), 1.f, BlendMode::UseAlpha);
+		};
 
-			const auto draw_level_image = [icon_size, scale, &draw_position, dst](
-			   const Vector2i& offset, const Image* image) {
-				dst->blitrect_scale(Rectf(draw_position + offset * icon_size * scale, icon_size * scale,
-				                          icon_size * scale),
-				                    image, Recti(0, 0, icon_size, icon_size), 1.f, BlendMode::UseAlpha);
-			};
-
-			draw_level_image(Vector2i(-1, -2), get_attack_level_pic());
-			draw_level_image(Vector2i(0, -2), get_defense_level_pic());
-			draw_level_image(Vector2i(-1, -1), get_health_level_pic());
-			draw_level_image(Vector2i(0, -1), get_evade_level_pic());
-		}
+		draw_level_image(Vector2i(-1, -2), get_attack_level_pic());
+		draw_level_image(Vector2i(0, -2), get_defense_level_pic());
+		draw_level_image(Vector2i(-1, -1), get_health_level_pic());
+		draw_level_image(Vector2i(0, -1), get_evade_level_pic());
 	}
 }
 

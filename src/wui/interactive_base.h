@@ -61,9 +61,8 @@ public:
 	enum {
 		dfShowCensus = 1,             /// show census report on buildings
 		dfShowStatistics = 2,         /// show statistics report on buildings
-		dfShowSoldierHealthBars = 4,  /// show health bars above soldiers
-		dfShowSoldierLevels = 8,      /// show level information above soldiers
-		dfDebug = 16,                 /// general debugging info
+		dfShowSoldierLevels = 4,      /// show level information above soldiers
+		dfDebug = 8,                  /// general debugging info
 	};
 
 	// Manages all UniqueWindows.
