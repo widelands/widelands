@@ -238,7 +238,7 @@ bool Deserializer::write_packet(RecvPacket* packet) {
 }
 
 DisconnectException::DisconnectException(const char* fmt, ...) {
-	char buffer[512];
+	char buffer[kNetworkBufferSize];
 	{
 		va_list va;
 		va_start(va, fmt);

@@ -36,6 +36,8 @@
 class Deserializer;
 class FileRead;
 
+constexpr size_t kNetworkBufferSize = 512;
+
 /**
  * Simple structure to hold the IP address and port of a server.
  * This structure must not contain a hostname but only IP addresses.
@@ -43,7 +45,7 @@ class FileRead;
 struct NetAddress {
 	/**
 	 * Tries to resolve the given hostname to an IPv4 address.
-	 * \param[out] addr An NetAddress structure to write the result to,
+	 * \param[out] addr A NetAddress structure to write the result to,
 	 *                  if resolution succeeds.
 	 * \param hostname The name of the host.
 	 * \param port The port on the host.
@@ -53,7 +55,7 @@ struct NetAddress {
 
 	/**
 	 * Tries to resolve the given hostname to an IPv6 address.
-	 * \param[out] addr An NetAddress structure to write the result to,
+	 * \param[out] addr A NetAddress structure to write the result to,
 	 *                  if resolution succeeds.
 	 * \param hostname The name of the host.
 	 * \param port The port on the host.
@@ -63,7 +65,7 @@ struct NetAddress {
 
 	/**
 	 * Parses the given string to an IP address.
-	 * \param[out] addr An NetAddress structure to write the result to,
+	 * \param[out] addr A NetAddress structure to write the result to,
 	 *                  if parsing succeeds.
 	 * \param ip An IP address as string.
 	 * \param port The port on the host.

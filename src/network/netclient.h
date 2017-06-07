@@ -36,7 +36,7 @@ public:
 	/**
 	 * Tries to establish a connection to the given host.
 	 * \param host The host to connect to.
-	 * \return A pointer to a connected \c NetClient object or an invalid pointer if the connection failed.
+	 * \return A pointer to a connected \c NetClient object or a \c nullptr if the connection failed.
 	 */
 	static std::unique_ptr<NetClient> connect(const NetAddress& host);
 
@@ -82,7 +82,7 @@ private:
 	 */
 	NetClient(const NetAddress& host);
 
-	/// An io_service needed by boost.asio. Primary needed for asynchronous operations.
+	/// An io_service needed by boost.asio. Primarily needed for asynchronous operations.
 	boost::asio::io_service io_service_;
 
 	/// The socket that connects us to the host.

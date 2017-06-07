@@ -68,7 +68,7 @@ namespace {
  * Unfortunately, it isn't that easy and we need some platform specific code.
  * For IPv4, windows needs a special case: For Linux and Apple we have to iterate over all assigned IPv4
  * addresses (e.g. 192.168.1.68), transform them to broadcast addresses (e.g. 192.168.1.255) and send our
- * packets to those addresses. For windows, we simply can sent to 255.255.255.255.
+ * packets to those addresses. For windows, we simply can send to 255.255.255.255.
  * For IPv6, Apple requires special handling. On the other two operating systems we can send to the multicast
  * address ff02::1 (kind of a local broadcast) without specifying over which interface we want to send.
  * On Apple we have to specify the interface, forcing us to send our message over all interfaces we can find.

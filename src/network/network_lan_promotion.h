@@ -61,9 +61,6 @@ protected:
 	 */
 	LanBase(uint16_t port);
 
-	/**
-	 * Destructor.
-	 */
 	~LanBase();
 
 	/**

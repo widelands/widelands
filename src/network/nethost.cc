@@ -4,8 +4,6 @@
 
 #include "base/log.h"
 
-constexpr size_t kNetworkBufferSize = 512;
-
 namespace {
 
 	/**
@@ -96,7 +94,7 @@ bool NetHost::try_accept(ConnectionId* new_id) {
 			acceptor.accept(socket, ec);
 			if (ec == boost::asio::error::would_block) {
 				// No client wants to connect
-				// New socket don't need to be closed since it isn't open yet
+				// New socket doesn't need to be closed since it isn't open yet
 			} else if (ec) {
 				// Some other error, close the acceptor
 				log("[NetHost] No longer listening for IPv%d connections due to error: %s.\n",
@@ -144,11 +142,12 @@ bool NetHost::try_receive(const ConnectionId id, RecvPacket* packet) {
 		} else if (ec) {
 			assert(length == 0);
 			// Connection closed or some error, close the socket
-			// close() will remove the client from the map so we have to increment the iterator first
-			ConnectionId id_to_remove = it->first;
-			++it;
 			log("[NetHost] Error when receiving from a client, closing connection: %s.\n",
 				ec.message().c_str());
+			// close() will remove the client from the map so we have to increment the iterator first.
+			// Otherwise, it will point to unallocated memory after close() so we can't increase it
+			ConnectionId id_to_remove = it->first;
+			++it;
 			close(id_to_remove);
 			continue;
 		}

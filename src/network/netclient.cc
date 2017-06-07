@@ -43,12 +43,12 @@ bool NetClient::try_receive(RecvPacket* packet) {
 	if (!is_connected())
 		return false;
 
-	uint8_t buffer[512];
+	uint8_t buffer[kNetworkBufferSize];
 	boost::system::error_code ec;
-	size_t length = socket_.read_some(boost::asio::buffer(buffer, 512), ec);
+	size_t length = socket_.read_some(boost::asio::buffer(buffer, kNetworkBufferSize), ec);
 	if (!ec) {
 		assert(length > 0);
-		assert(length <= 512);
+		assert(length <= kNetworkBufferSize);
 		// Has read something
 		deserializer_.read_data(buffer, length);
 	}
