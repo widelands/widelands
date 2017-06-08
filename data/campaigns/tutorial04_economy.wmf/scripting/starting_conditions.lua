@@ -138,7 +138,6 @@ function init_player()
       {"empire_fortress",71,66},
       {"empire_fortress",75,72}
    )
-   plr:place_building("empire_quarry", map:get_field(87,36), true, true) -- a construction site
 
    plr:conquer(map:get_field(111,34),3) -- some remaining fields inside
 
@@ -162,17 +161,25 @@ function init_player()
    connected_road(plr,map:get_field(115,25).immovable,"bl,bl")
    connected_road(plr,map:get_field(97,54).immovable,"r,r,tr")
    connected_road(plr,map:get_field(97,54).immovable,"bl,br|br,bl,bl|bl,bl|bl,l|bl,bl|br,bl|bl,bl,l|l,l|l,l|l,l|l,l|l,l|l,l|l,l|l,l|l,l|l,tl|l,l|l,tl|tl,tl")
+   connected_road(plr,map:get_field(98,52).immovable,"br,r|r,r|tr,r,tr|tr,r|r,r|tr,tr|tr,tr|tr,tr|r,r|r,r|r,r|br,br")
+   connected_road(plr,map:get_field(99,53).immovable,"tr,tr|tr,tr|tl,tr|tr,tr|tr,tr|tr,tl")
+   connected_road(plr,map:get_field(95,40).immovable,"tr,r")
+   connected_road(plr,map:get_field(97,56).immovable,"r,br|br,r|r,r|r,tr|r,r|br,br")
+   connected_road(plr,map:get_field(94,42).immovable,"tl,l|tl,tl|l,l|l,tl,tl|tr,tr|tr,tr,tr")
+   connected_road(plr,map:get_field(102,45).immovable,"br,r|br,r|br,bl,bl")
+   connected_road(plr,map:get_field(116,44).immovable,"tr,tr|tr,tr")
+   connected_road(plr,map:get_field(106,59).immovable,"bl,bl|bl,br|bl,bl|l,bl,bl|bl,br|br,br|r,r|br,bl|br,br|br,br,bl|l,l|bl,bl|l,tl|tl,tl|tl,tl|tr,tr,tr|tr,r")
 end
 
-
--- These roads mess up the reveal code, so we add them later.
+-- Roads to mines and constructionsites mess up the hide field function, so we add them later
 function remaining_roads()
-connected_road(plr,map:get_field(98,52).immovable,"br,r|r,r|tr,r,tr|tr,r|r,r|tr,tr|tr,tr|tr,tr|r,r|r,r|r,r|br,br|r,r")
-connected_road(plr,map:get_field(99,53).immovable,"tr,tr|tr,tr|tl,tr|tr,tr|tr,tr|tr,tl|tl,tl|l,l|l,l|l,l|l,bl")
-connected_road(plr,map:get_field(97,56).immovable,"r,br|br,r|r,r|r,tr|r,r|br,br|br,r")
-connected_road(plr,map:get_field(94,42).immovable,"tl,l|tl,tl|l,l|l,tl,tl|tr,tr|tr,tr,tr")
-connected_road(plr,map:get_field(102,45).immovable,"br,r|br,r|br,bl,bl")
-connected_road(plr,map:get_field(116,44).immovable,"tr,tr|tr,tr|r,r")
-connected_road(plr,map:get_field(106,59).immovable,"bl,bl|bl,br|bl,bl|l,bl,bl|bl,br|br,br|r,r|br,bl|br,br|br,br,bl|l,l|bl,bl|l,tl|tl,tl|tl,tl|tr,tr,tr|tr,r")
+-- Mines
+connected_road(plr,map:get_field(119,46).immovable,"l,l")
+connected_road(plr,map:get_field(103,41).immovable,"tl,tl|l,l|l,l|l,l")
+connected_road(plr,map:get_field(108,60).immovable,"l,tl")
+connected_road(plr,map:get_field(120,40).immovable,"l,l")
+
+-- Constructionsite
+plr:place_building("empire_quarry", map:get_field(87,36), true, true)
 end
 
