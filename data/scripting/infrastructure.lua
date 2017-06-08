@@ -33,7 +33,10 @@
 --       the roads. Otherwise no carriers will be created.
 --    :type create_carriers: :class:`boolean`
 function connected_road(p, start, cmd, g_create_carriers)
-   create_carriers = g_create_carriers or true
+   create_carriers = true
+   if g_create_carriers ~= nil then
+      create_carriers = g_create_carriers
+   end
 
    if cmd:sub(-1) ~= "|" then
       cmd = cmd .. "|"
