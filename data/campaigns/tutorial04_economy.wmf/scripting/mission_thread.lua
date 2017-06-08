@@ -3,8 +3,11 @@
 -- ===============
 
 function introduction()
+   init_player()
    fields = get_sees_fields(plr)
    reveal_randomly(plr, fields, 2000)
+   remaining_roads()
+
    sleep(1000)
    message_box_objective(plr, intro1)
    message_box_objective(plr, intro2)
@@ -158,6 +161,4 @@ function conclude()
    message_box_objective(plr, conclusion)
 end
 
-
-run(init_player)
 run(introduction)
