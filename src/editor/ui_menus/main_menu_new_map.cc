@@ -57,7 +57,7 @@ MainMenuNewMap::MainMenuNewMap(EditorInteractive& parent)
             0,
             _("Width:"),
             UI::SpinBox::Units::kNone,
-            g_gr->images().get("images/ui_basic/but1.png"),
+            g_gr->images().get("images/wui/button_secondary.png"),
             UI::SpinBox::Type::kValueList),
      height_(&box_,
              0,
@@ -69,7 +69,7 @@ MainMenuNewMap::MainMenuNewMap(EditorInteractive& parent)
              0,
              _("Height:"),
              UI::SpinBox::Units::kNone,
-             g_gr->images().get("images/ui_basic/but1.png"),
+             g_gr->images().get("images/wui/button_secondary.png"),
              UI::SpinBox::Type::kValueList),
      list_(&box_, 0, 0, box_width_, 330),
      // Buttons
@@ -80,7 +80,7 @@ MainMenuNewMap::MainMenuNewMap(EditorInteractive& parent)
                 0,
                 box_width_ / 2 - margin_,
                 0,
-                g_gr->images().get("images/ui_basic/but5.png"),
+                g_gr->images().get("images/wui/button_main.png"),
                 _("Create Map")),
      cancel_button_(&button_box_,
                     "generate_map",
@@ -88,7 +88,7 @@ MainMenuNewMap::MainMenuNewMap(EditorInteractive& parent)
                     0,
                     box_width_ / 2 - margin_,
                     0,
-                    g_gr->images().get("images/ui_basic/but1.png"),
+                    g_gr->images().get("images/wui/button_secondary.png"),
                     _("Cancel")) {
 	width_.set_value_list(Widelands::kMapDimensions);
 	height_.set_value_list(Widelands::kMapDimensions);

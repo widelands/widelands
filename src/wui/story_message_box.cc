@@ -58,7 +58,7 @@ StoryMessageBox::StoryMessageBox(UI::Panel* const parent,
 	posy = get_inner_h() - 30;
 	posx += space;
 	UI::Button* okbtn = new UI::Button(this, "ok", posx, posy, but_width, 20,
-	                                   g_gr->images().get("images/ui_basic/but5.png"), button_text);
+	                                   g_gr->images().get("images/wui/button_main.png"), button_text);
 	okbtn->sigclicked.connect(boost::bind(&StoryMessageBox::clicked_ok, boost::ref(*this)));
 
 	center_to_parent();

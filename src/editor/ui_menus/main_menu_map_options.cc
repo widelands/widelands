@@ -58,7 +58,7 @@ MainMenuMapOptions::MainMenuMapOptions(EditorInteractive& parent, bool modal)
          get_inner_h() - padding_ - labelh_,
          butw_,
          labelh_,
-         g_gr->images().get("images/ui_basic/but5.png"),
+         g_gr->images().get("images/wui/button_main.png"),
          _("OK")),
      cancel_(this,
              "cancel",
@@ -66,7 +66,7 @@ MainMenuMapOptions::MainMenuMapOptions(EditorInteractive& parent, bool modal)
              get_inner_h() - padding_ - labelh_,
              butw_,
              labelh_,
-             g_gr->images().get("images/ui_basic/but1.png"),
+             g_gr->images().get("images/wui/button_secondary.png"),
              _("Cancel")),
      tab_box_(this, padding_, padding_, UI::Box::Vertical, max_w_, get_inner_h(), 0),
      tabs_(&tab_box_, 0, 0, nullptr),
@@ -75,8 +75,8 @@ MainMenuMapOptions::MainMenuMapOptions(EditorInteractive& parent, bool modal)
      tags_box_(&tabs_, padding_, padding_, UI::Box::Vertical, max_w_, get_inner_h(), 0),
      teams_box_(&tabs_, padding_, padding_, UI::Box::Vertical, max_w_, get_inner_h(), 0),
 
-     name_(&main_box_, 0, 0, max_w_, 0, 2, g_gr->images().get("images/ui_basic/but1.png")),
-     author_(&main_box_, 0, 0, max_w_, 0, 2, g_gr->images().get("images/ui_basic/but1.png")),
+     name_(&main_box_, 0, 0, max_w_),
+     author_(&main_box_, 0, 0, max_w_),
      size_(&main_box_, 0, 0, max_w_ - indent_, labelh_, ""),
 
      teams_list_(&teams_box_,
@@ -84,7 +84,7 @@ MainMenuMapOptions::MainMenuMapOptions(EditorInteractive& parent, bool modal)
                  0,
                  max_w_,
                  60,
-                 g_gr->images().get("images/ui_basic/but1.png"),
+                 g_gr->images().get("images/wui/button_secondary.png"),
                  UI::ListselectLayout::kShowCheck),
 
      modal_(modal) {
@@ -101,12 +101,8 @@ MainMenuMapOptions::MainMenuMapOptions(EditorInteractive& parent, bool modal)
 	// We need less space for the hint and the description, but it should at least have 1 line
 	// height.
 	hint_ =
-	   new UI::MultilineEditbox(&main_box_, 0, 0, max_w_, std::max(labelh_, remaining_space * 1 / 3),
-	                            "", g_gr->images().get("images/ui_basic/but1.png"),
-	                            g_gr->images().get("images/ui_basic/but1.png"));
-	descr_ = new UI::MultilineEditbox(&main_box_, 0, 0, max_w_, remaining_space - hint_->get_h(), "",
-	                                  g_gr->images().get("images/ui_basic/but1.png"),
-	                                  g_gr->images().get("images/ui_basic/but1.png"));
+	   new UI::MultilineEditbox(&main_box_, 0, 0, max_w_, std::max(labelh_, remaining_space * 1 / 3));
+	descr_ = new UI::MultilineEditbox(&main_box_, 0, 0, max_w_, remaining_space - hint_->get_h());
 
 	main_box_.add(new UI::Textarea(&main_box_, 0, 0, max_w_, labelh_, _("Map Name:")));
 	main_box_.add(&name_);

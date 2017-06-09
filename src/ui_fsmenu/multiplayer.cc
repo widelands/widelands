@@ -73,7 +73,7 @@ FullscreenMenuMultiPlayer::FullscreenMenuMultiPlayer()
 	auto_log_ = s.get_bool("auto_log", false);
 	if (auto_log_) {
 		showloginbox = new UI::Button(
-		   this, "login_dialog", 0, 0, 0, 0, g_gr->images().get("images/ui_basic/but1.png"),
+		   this, "login_dialog", 0, 0, 0, 0, g_gr->images().get("images/ui_fsmenu/button_secondary.png"),
 		   g_gr->images().get("images/ui_basic/continue.png"), _("Show login dialog"));
 		showloginbox->sigclicked.connect(
 		   boost::bind(&FullscreenMenuMultiPlayer::show_internet_login, boost::ref(*this)));

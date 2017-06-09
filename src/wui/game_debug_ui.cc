@@ -69,7 +69,7 @@ MapObjectDebugPanel::MapObjectDebugPanel(UI::Panel& parent,
           200,
           "",
           UI::Align::kLeft,
-          g_gr->images().get("images/ui_basic/but1.png"),
+          g_gr->images().get("images/wui/button_secondary.png"),
           UI::MultilineTextarea::ScrollMode::kScrollLog) {
 	obj.set_logsink(this);
 }
@@ -139,7 +139,7 @@ MapObjectDebugWindow::MapObjectDebugWindow(InteractiveBase& parent, Widelands::M
    : UI::Window(&parent, "map_object_debug", 0, 0, 100, 100, ""),
      log_general_info_(true),
      object_(&obj),
-     tabs_(this, 0, 0, g_gr->images().get("images/ui_basic/but4.png")) {
+     tabs_(this, 0, 0, g_gr->images().get("images/wui/window_background.png")) {
 	serial_ = obj.serial();
 	set_title(std::to_string(serial_));
 
@@ -216,7 +216,7 @@ FieldDebugWindow::FieldDebugWindow(InteractiveBase& parent, Widelands::Coords co
      ui_field_(this, 0, 0, 300, 280, ""),
 
      ui_immovable_(
-        this, "immovable", 0, 280, 300, 24, g_gr->images().get("images/ui_basic/but4.png"), ""),
+        this, "immovable", 0, 280, 300, 24, g_gr->images().get("images/wui/window_background.png"), ""),
 
      ui_bobs_(this, 0, 304, 300, 96) {
 	ui_immovable_.sigclicked.connect(boost::bind(&FieldDebugWindow::open_immovable, this));

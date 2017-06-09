@@ -163,7 +163,7 @@ template <typename Entry> struct Listselect : public BaseListselect {
 	           int32_t y,
 	           uint32_t w,
 	           uint32_t h,
-	           const Image* button_background = g_gr->images().get("images/ui_basic/but3.png"),
+	           const Image* button_background = g_gr->images().get("images/ui_fsmenu/button_menu.png"),
 	           ListselectLayout selection_mode = ListselectLayout::kPlain)
 	   : BaseListselect(parent, x, y, w, h, button_background, selection_mode) {
 	}
@@ -216,7 +216,7 @@ template <typename Entry> struct Listselect<Entry&> : public Listselect<Entry*> 
 	           int32_t y,
 	           uint32_t w,
 	           uint32_t h,
-	           const Image* button_background = g_gr->images().get("images/ui_basic/but3.png"),
+	           const Image* button_background = g_gr->images().get("images/ui_fsmenu/button_menu.png"),
 	           ListselectLayout selection_mode = ListselectLayout::kPlain)
 	   : Base(parent, x, y, w, h, button_background, selection_mode) {
 	}

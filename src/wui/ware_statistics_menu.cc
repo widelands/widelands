@@ -121,7 +121,7 @@ WareStatisticsMenu::WareStatisticsMenu(InteractivePlayer& parent,
 	// Setup plot widgets
 	// Create a tabbed environment for the different plots
 	UI::TabPanel* tabs =
-	   new UI::TabPanel(box, kSpacing, 0, g_gr->images().get("images/ui_basic/but1.png"));
+	   new UI::TabPanel(box, kSpacing, 0, g_gr->images().get("images/wui/button_secondary.png"));
 
 	plot_production_ = new WuiPlotArea(tabs, 0, 0, kPlotWidth, kPlotHeight + kSpacing,
 	                                   kStatisticsSampleTime, WuiPlotArea::Plotmode::kRelative);
@@ -184,7 +184,7 @@ WareStatisticsMenu::WareStatisticsMenu(InteractivePlayer& parent,
 	      boost::bind(&WareStatisticsMenu::cb_changed_to, boost::ref(*this), _1, _2), color_map_),
 	   UI::Box::Resizing::kFullSize);
 	box->add(new WuiPlotGenericAreaSlider(this, *plot_production_, this, 0, 0, kPlotWidth, 45,
-	                                      g_gr->images().get("images/ui_basic/but1.png")),
+	                                      g_gr->images().get("images/wui/button_secondary.png")),
 	         UI::Box::Resizing::kFullSize);
 }
 

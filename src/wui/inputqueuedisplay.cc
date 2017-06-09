@@ -231,7 +231,7 @@ void InputQueueDisplay::update_max_fill_buttons() {
 
 	decrease_max_fill_ =
 	   new UI::Button(this, "decrease_max_fill", x, y, WARE_MENU_PIC_WIDTH, WARE_MENU_PIC_HEIGHT,
-	                  g_gr->images().get("images/ui_basic/but4.png"),
+	                  g_gr->images().get("images/wui/window_background.png"),
 	                  g_gr->images().get("images/ui_basic/scrollbar_left.png"),
 	                  _("Decrease the number of wares you want to be stored here."));
 	decrease_max_fill_->sigclicked.connect(
@@ -240,7 +240,7 @@ void InputQueueDisplay::update_max_fill_buttons() {
 	x = Border + (cache_size_ + 1) * (CellWidth + CellSpacing);
 	increase_max_fill_ =
 	   new UI::Button(this, "increase_max_fill", x, y, WARE_MENU_PIC_WIDTH, WARE_MENU_PIC_HEIGHT,
-	                  g_gr->images().get("images/ui_basic/but4.png"),
+	                  g_gr->images().get("images/wui/window_background.png"),
 	                  g_gr->images().get("images/ui_basic/scrollbar_right.png"),
 	                  _("Increase the number of wares you want to be stored here."));
 	increase_max_fill_->sigclicked.connect(

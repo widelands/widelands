@@ -34,9 +34,9 @@ LoginBox::LoginBox(Panel& parent)
 	ta_nickname = new UI::Textarea(this, margin, margin, _("Nickname:"));
 	ta_password = new UI::Textarea(this, margin, 40, _("Password:"));
 	eb_nickname = new UI::EditBox(
-	   this, 150, margin, 330, 20, 2, g_gr->images().get("images/ui_basic/but2.png"));
+	   this, 150, margin, 330, 20);
 	eb_password =
-	   new UI::EditBox(this, 150, 40, 330, 20, 2, g_gr->images().get("images/ui_basic/but2.png"));
+	   new UI::EditBox(this, 150, 40, 330, 20);
 
 	pwd_warning = new UI::MultilineTextarea(
 	   this, margin, 65, 505, 50, _("WARNING: Password will be shown and saved readable!"));
@@ -52,13 +52,13 @@ LoginBox::LoginBox(Panel& parent)
 	                                    (get_inner_w() / 2 - 200) / 2 :
 	                                    (get_inner_w() / 2 - 200) / 2 + get_inner_w() / 2,
 	                  get_inner_h() - 20 - margin, 200, 20,
-	                  g_gr->images().get("images/ui_basic/but5.png"), _("Login"));
+	                  g_gr->images().get("images/wui/button_main.png"), _("Login"));
 	loginbtn->sigclicked.connect(boost::bind(&LoginBox::clicked_ok, boost::ref(*this)));
 	UI::Button* cancelbtn = new UI::Button(
 	   this, "cancel",
 	   UI::g_fh1->fontset()->is_rtl() ? (get_inner_w() / 2 - 200) / 2 + get_inner_w() / 2 :
 	                                    (get_inner_w() / 2 - 200) / 2,
-	   loginbtn->get_y(), 200, 20, g_gr->images().get("images/ui_basic/but1.png"), _("Cancel"));
+	   loginbtn->get_y(), 200, 20, g_gr->images().get("images/wui/button_secondary.png"), _("Cancel"));
 	cancelbtn->sigclicked.connect(boost::bind(&LoginBox::clicked_back, boost::ref(*this)));
 
 	Section& s = g_options.pull_section("global");

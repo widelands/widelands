@@ -38,7 +38,7 @@ EconomyOptionsWindow::EconomyOptionsWindow(UI::Panel* parent,
    : UI::Window(parent, "economy_options", 0, 0, 0, 0, _("Economy options")),
      economy_number_(economy->owner().get_economy_number(economy)),
      owner_(economy->owner()),
-     tabpanel_(this, 0, 0, g_gr->images().get("images/ui_basic/but1.png")),
+     tabpanel_(this, 0, 0, g_gr->images().get("images/wui/button_secondary.png")),
      ware_panel_(
         new EconomyOptionsPanel(&tabpanel_, can_act, Widelands::wwWARE, economy_number_, owner_)),
      worker_panel_(new EconomyOptionsPanel(
@@ -139,7 +139,7 @@ EconomyOptionsWindow::EconomyOptionsPanel::EconomyOptionsPanel(UI::Panel* parent
 
 	UI::Button* b =
 	   new UI::Button(buttons, "decrease_target", 0, 0, 34, 34,
-	                  g_gr->images().get("images/ui_basic/but4.png"), "-", _("Decrease target"));
+	                  g_gr->images().get("images/wui/window_background.png"), "-", _("Decrease target"));
 	b->set_enabled(can_act_);
 	b->sigclicked.connect(boost::bind(&EconomyOptionsPanel::change_target, this, -1));
 	buttons->add(b);
@@ -147,7 +147,7 @@ EconomyOptionsWindow::EconomyOptionsPanel::EconomyOptionsPanel(UI::Panel* parent
 	buttons->add_space(8);
 
 	b = new UI::Button(buttons, "increase_target", 0, 0, 34, 34,
-	                   g_gr->images().get("images/ui_basic/but4.png"), "+", _("Increase target"));
+	                   g_gr->images().get("images/wui/window_background.png"), "+", _("Increase target"));
 	b->set_enabled(can_act_);
 	b->sigclicked.connect(boost::bind(&EconomyOptionsPanel::change_target, this, 1));
 	buttons->add(b);
@@ -155,7 +155,7 @@ EconomyOptionsWindow::EconomyOptionsPanel::EconomyOptionsPanel(UI::Panel* parent
 	buttons->add_space(8);
 
 	b = new UI::Button(buttons, "reset_target", 0, 0, 34, 34,
-	                   g_gr->images().get("images/ui_basic/but4.png"), "R", _("Reset to default"));
+	                   g_gr->images().get("images/wui/window_background.png"), "R", _("Reset to default"));
 	b->set_enabled(can_act_);
 	b->sigclicked.connect(boost::bind(&EconomyOptionsPanel::reset_target, this));
 	buttons->add(b);

@@ -45,14 +45,14 @@ MainMenuSaveMapMakeDirectory::MainMenuSaveMapMakeDirectory(UI::Panel* const pare
            get_inner_w() - 2 * padding_,
            0,
            4,
-           g_gr->images().get("images/ui_basic/but1.png")),
+			  g_gr->images().get("images/wui/button_secondary.png")),
      ok_button_(this,
                 "ok",
                 UI::g_fh1->fontset()->is_rtl() ? padding_ : get_inner_w() - butw_ - padding_,
                 get_inner_h() - padding_ - buth_,
                 butw_,
                 buth_,
-                g_gr->images().get("images/ui_basic/but5.png"),
+                g_gr->images().get("images/wui/button_main.png"),
                 _("OK")),
      cancel_button_(this,
                     "cancel",
@@ -60,7 +60,7 @@ MainMenuSaveMapMakeDirectory::MainMenuSaveMapMakeDirectory(UI::Panel* const pare
                     get_inner_h() - padding_ - buth_,
                     butw_,
                     buth_,
-                    g_gr->images().get("images/ui_basic/but1.png"),
+                    g_gr->images().get("images/wui/button_secondary.png"),
                     _("Cancel")) {
 
 	vbox_.add(&label_);

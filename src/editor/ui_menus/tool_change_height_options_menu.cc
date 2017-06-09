@@ -46,7 +46,7 @@ EditorToolChangeHeightOptionsMenu::EditorToolChangeHeightOptionsMenu(
                 MAX_FIELD_HEIGHT_DIFF,
                 _("Increase/Decrease Value:"),
                 UI::SpinBox::Units::kNone,
-                g_gr->images().get("images/ui_basic/but1.png"),
+                g_gr->images().get("images/wui/button_secondary.png"),
                 UI::SpinBox::Type::kSmall),
      set_to_(&box_,
              0,
@@ -58,7 +58,7 @@ EditorToolChangeHeightOptionsMenu::EditorToolChangeHeightOptionsMenu(
              MAX_FIELD_HEIGHT,
              _("Set Value:"),
              UI::SpinBox::Units::kNone,
-             g_gr->images().get("images/ui_basic/but1.png"),
+             g_gr->images().get("images/wui/button_secondary.png"),
              UI::SpinBox::Type::kSmall) {
 	change_by_.set_tooltip(
 	   /** TRANSLATORS: Editor change height access keys. **/

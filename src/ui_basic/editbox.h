@@ -49,7 +49,7 @@ struct EditBox : public Panel {
 	        uint32_t w,
 	        uint32_t h = 0,
 	        int margin_y = 2,
-	        const Image* background = g_gr->images().get("images/ui_basic/but2.png"),
+	        const Image* background = g_gr->images().get("images/wui/button_secondary.png"),
 	        int font_size = UI_FONT_SIZE_SMALL);
 	virtual ~EditBox();
 

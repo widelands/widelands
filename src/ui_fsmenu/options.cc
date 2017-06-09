@@ -105,7 +105,7 @@ FullscreenMenuOptions::FullscreenMenuOptions(OptionsCtrl::OptionsStruct opt)
              0,
              0,
              0,
-             g_gr->images().get("images/ui_basic/but0.png"),
+             g_gr->images().get("images/ui_fsmenu/button_secondary.png"),
              _("Cancel")),
      apply_(&button_box_,
             "apply",
@@ -113,9 +113,9 @@ FullscreenMenuOptions::FullscreenMenuOptions(OptionsCtrl::OptionsStruct opt)
             0,
             0,
             0,
-            g_gr->images().get("images/ui_basic/but0.png"),
+            g_gr->images().get("images/ui_fsmenu/button_secondary.png"),
             _("Apply")),
-     ok_(&button_box_, "ok", 0, 0, 0, 0, g_gr->images().get("images/ui_basic/but2.png"), _("OK")),
+     ok_(&button_box_, "ok", 0, 0, 0, 0, g_gr->images().get("images/ui_fsmenu/button_main.png"), _("OK")),
 
      // Tabs
      tabs_(this,
@@ -123,7 +123,7 @@ FullscreenMenuOptions::FullscreenMenuOptions(OptionsCtrl::OptionsStruct opt)
            0,
            100,  // 100 is arbitrary, will be resized in layout().
            100,
-           g_gr->images().get("images/ui_basic/but1.png"),
+           g_gr->images().get("images/ui_fsmenu/background_light.png"),
            UI::TabPanel::Type::kBorder),
 
      box_interface_(&tabs_, 0, 0, UI::Box::Vertical, 0, 0, padding_),
@@ -194,7 +194,7 @@ FullscreenMenuOptions::FullscreenMenuOptions(OptionsCtrl::OptionsStruct opt)
                   100,
                   _("Save game automatically every:"),
                   UI::SpinBox::Units::kMinutes,
-                  g_gr->images().get("images/ui_basic/but3.png"),
+                  g_gr->images().get("images/ui_fsmenu/button_menu.png"),
                   UI::SpinBox::Type::kBig),
 
      sb_rolling_autosave_(&box_saving_,
@@ -207,7 +207,7 @@ FullscreenMenuOptions::FullscreenMenuOptions(OptionsCtrl::OptionsStruct opt)
                           20,
                           _("Maximum number of autosave files:"),
                           UI::SpinBox::Units::kNone,
-                          g_gr->images().get("images/ui_basic/but3.png"),
+                          g_gr->images().get("images/ui_fsmenu/button_menu.png"),
                           UI::SpinBox::Type::kBig),
 
      zip_(&box_saving_,

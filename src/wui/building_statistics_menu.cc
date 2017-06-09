@@ -65,7 +65,7 @@ BuildingStatisticsMenu::BuildingStatisticsMenu(InteractivePlayer& parent,
                       kWindowWidth,
                       kWindowHeight,
                       _("Building Statistics")),
-     tab_panel_(this, 0, 0, g_gr->images().get("images/ui_basic/but1.png")),
+     tab_panel_(this, 0, 0, g_gr->images().get("images/wui/button_secondary.png")),
      navigation_panel_(this, 0, 0, kWindowWidth, 4 * kButtonRowHeight),
      building_name_(
         &navigation_panel_, get_inner_w() / 2, 0, 0, kButtonHeight, "", UI::Align::kCenter),
@@ -89,7 +89,7 @@ BuildingStatisticsMenu::BuildingStatisticsMenu(InteractivePlayer& parent,
         35,
         0,
         1,
-        g_gr->images().get("images/ui_basic/but1.png"),
+        g_gr->images().get("images/wui/button_secondary.png"),
         kLabelFontSize - UI::g_fh1->fontset()->size_offset()),  // We need consistent height here
      unproductive_label2_(
         &unproductive_box_,
@@ -254,36 +254,36 @@ BuildingStatisticsMenu::BuildingStatisticsMenu(InteractivePlayer& parent,
 
 	navigation_buttons_[NavigationButton::PrevOwned] = new UI::Button(
 	   &navigation_panel_, "previous_owned", get_inner_w() - 2 * kButtonRowHeight, kButtonRowHeight,
-	   kButtonHeight, kButtonHeight, g_gr->images().get("images/ui_basic/but4.png"),
+	   kButtonHeight, kButtonHeight, g_gr->images().get("images/wui/window_background.png"),
 	   g_gr->images().get("images/ui_basic/scrollbar_left.png"), _("Show previous building"));
 
 	navigation_buttons_[NavigationButton::NextOwned] = new UI::Button(
 	   &navigation_panel_, "next_owned", get_inner_w() - kButtonRowHeight, kButtonRowHeight,
-	   kButtonHeight, kButtonHeight, g_gr->images().get("images/ui_basic/but4.png"),
+	   kButtonHeight, kButtonHeight, g_gr->images().get("images/wui/window_background.png"),
 	   g_gr->images().get("images/ui_basic/scrollbar_right.png"), _("Show next building"));
 
 	navigation_buttons_[NavigationButton::PrevConstruction] = new UI::Button(
 	   &navigation_panel_, "previous_constructed", get_inner_w() - 2 * kButtonRowHeight,
 	   2 * kButtonRowHeight, kButtonHeight, kButtonHeight,
-	   g_gr->images().get("images/ui_basic/but4.png"),
+	   g_gr->images().get("images/wui/window_background.png"),
 	   g_gr->images().get("images/ui_basic/scrollbar_left.png"), _("Show previous building"));
 
 	navigation_buttons_[NavigationButton::NextConstruction] = new UI::Button(
 	   &navigation_panel_, "next_constructed", get_inner_w() - kButtonRowHeight,
 	   2 * kButtonRowHeight, kButtonHeight, kButtonHeight,
-	   g_gr->images().get("images/ui_basic/but4.png"),
+	   g_gr->images().get("images/wui/window_background.png"),
 	   g_gr->images().get("images/ui_basic/scrollbar_right.png"), _("Show next building"));
 
 	navigation_buttons_[NavigationButton::PrevUnproductive] = new UI::Button(
 	   &navigation_panel_, "previous_unproductive", get_inner_w() - 2 * kButtonRowHeight,
 	   3 * kButtonRowHeight, kButtonHeight, kButtonHeight,
-	   g_gr->images().get("images/ui_basic/but4.png"),
+	   g_gr->images().get("images/wui/window_background.png"),
 	   g_gr->images().get("images/ui_basic/scrollbar_left.png"), _("Show previous building"));
 
 	navigation_buttons_[NavigationButton::NextUnproductive] = new UI::Button(
 	   &navigation_panel_, "next_unproductive", get_inner_w() - kButtonRowHeight,
 	   3 * kButtonRowHeight, kButtonHeight, kButtonHeight,
-	   g_gr->images().get("images/ui_basic/but4.png"),
+	   g_gr->images().get("images/wui/window_background.png"),
 	   g_gr->images().get("images/ui_basic/scrollbar_right.png"), _("Show next building"));
 
 	navigation_buttons_[NavigationButton::PrevOwned]->sigclicked.connect(boost::bind(
@@ -328,7 +328,7 @@ bool BuildingStatisticsMenu::add_button(
 	UI::Box* button_box = new UI::Box(&row, 0, 0, UI::Box::Vertical);
 	building_buttons_[id] = new UI::Button(
 	   button_box, (boost::format("building_button%s") % id).str(), 0, 0, kBuildGridCellWidth,
-	   kBuildGridCellHeight, g_gr->images().get("images/ui_basic/but1.png"),
+	   kBuildGridCellHeight, g_gr->images().get("images/wui/button_secondary.png"),
 	   descr.representative_image(&iplayer().get_player()->get_playercolor()), "",
 	   UI::Button::Style::kFlat);
 	button_box->add(building_buttons_[id]);

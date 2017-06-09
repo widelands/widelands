@@ -134,17 +134,17 @@ ActionConfirm::ActionConfirm(InteractivePlayer& parent,
 
 	UI::MultilineTextarea* textarea =
 	   new UI::MultilineTextarea(main_box, 0, 0, 200, 74, message, UI::Align::kCenter,
-	                             g_gr->images().get("images/ui_basic/but1.png"),
+	                             g_gr->images().get("images/wui/button_secondary.png"),
 	                             UI::MultilineTextarea::ScrollMode::kNoScrolling);
 	textarea->force_new_renderer();
 
 	UI::Button* okbtn =
-	   new UI::Button(button_box, "ok", 0, 0, 80, 34, g_gr->images().get("images/ui_basic/but4.png"),
+	   new UI::Button(button_box, "ok", 0, 0, 80, 34, g_gr->images().get("images/wui/window_background.png"),
 	                  g_gr->images().get("images/wui/menu_okay.png"));
 	okbtn->sigclicked.connect(boost::bind(&ActionConfirm::ok, this));
 
 	UI::Button* cancelbtn = new UI::Button(button_box, "abort", 0, 0, 80, 34,
-	                                       g_gr->images().get("images/ui_basic/but4.png"),
+	                                       g_gr->images().get("images/wui/window_background.png"),
 	                                       g_gr->images().get("images/wui/menu_abort.png"));
 	cancelbtn->sigclicked.connect(boost::bind(&ActionConfirm::die, this));
 

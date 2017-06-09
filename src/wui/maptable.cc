@@ -27,7 +27,7 @@
 #include "io/filesystem/filesystem.h"
 
 MapTable::MapTable(UI::Panel* parent, int32_t x, int32_t y, uint32_t w, uint32_t h)
-   : UI::Table<uintptr_t>(parent, x, y, w, h, g_gr->images().get("images/ui_basic/but3.png")) {
+   : UI::Table<uintptr_t>(parent, x, y, w, h, g_gr->images().get("images/ui_fsmenu/button_menu.png")) {
 
 	/** TRANSLATORS: Column title for number of players in map list */
 	add_column(35, _("Pl."), _("Number of players"), UI::Align::kCenter);

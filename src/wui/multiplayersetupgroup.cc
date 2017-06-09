@@ -60,7 +60,7 @@ struct MultiPlayerClientGroup : public UI::Box {
 		// Either Button if changeable OR text if not
 		if (id == settings->settings().usernum) {  // Our Client
 			type = new UI::Button(
-			   this, "client_type", 0, 0, h, h, g_gr->images().get("images/ui_basic/but1.png"), "");
+			   this, "client_type", 0, 0, h, h, g_gr->images().get("images/ui_fsmenu/button_secondary.png"), "");
 			type->sigclicked.connect(
 			   boost::bind(&MultiPlayerClientGroup::toggle_type, boost::ref(*this)));
 			add(type);
@@ -166,22 +166,22 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 		player = new UI::Icon(this, 0, 0, h, h, player_image);
 		add(player);
 		type = new UI::Button(
-		   this, "player_type", 0, 0, h, h, g_gr->images().get("images/ui_basic/but1.png"), "");
+		   this, "player_type", 0, 0, h, h, g_gr->images().get("images/ui_fsmenu/button_secondary.png"), "");
 		type->sigclicked.connect(
 		   boost::bind(&MultiPlayerPlayerGroup::toggle_type, boost::ref(*this)));
 		add(type);
 		tribe = new UI::Button(
-		   this, "player_tribe", 0, 0, h, h, g_gr->images().get("images/ui_basic/but1.png"), "");
+		   this, "player_tribe", 0, 0, h, h, g_gr->images().get("images/ui_fsmenu/button_secondary.png"), "");
 		tribe->sigclicked.connect(
 		   boost::bind(&MultiPlayerPlayerGroup::toggle_tribe, boost::ref(*this)));
 		add(tribe);
 		init = new UI::Button(this, "player_init", 0, 0, w - 4 * h, h,
-		                      g_gr->images().get("images/ui_basic/but1.png"), "");
+		                      g_gr->images().get("images/ui_fsmenu/button_secondary.png"), "");
 		init->sigclicked.connect(
 		   boost::bind(&MultiPlayerPlayerGroup::toggle_init, boost::ref(*this)));
 		add(init);
 		team = new UI::Button(
-		   this, "player_team", 0, 0, h, h, g_gr->images().get("images/ui_basic/but1.png"), "");
+		   this, "player_team", 0, 0, h, h, g_gr->images().get("images/ui_fsmenu/button_secondary.png"), "");
 		team->sigclicked.connect(
 		   boost::bind(&MultiPlayerPlayerGroup::toggle_team, boost::ref(*this)));
 		add(team);

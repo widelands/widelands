@@ -49,7 +49,7 @@ EditorToolNoiseHeightOptionsMenu::EditorToolNoiseHeightOptionsMenu(
             MAX_FIELD_HEIGHT,
             _("Minimum Height:"),
             UI::SpinBox::Units::kNone,
-            g_gr->images().get("images/ui_basic/but1.png"),
+            g_gr->images().get("images/wui/button_secondary.png"),
             UI::SpinBox::Type::kSmall),
      upper_(&box_,
             0,
@@ -61,7 +61,7 @@ EditorToolNoiseHeightOptionsMenu::EditorToolNoiseHeightOptionsMenu(
             MAX_FIELD_HEIGHT,
             _("Maximum Height:"),
             UI::SpinBox::Units::kNone,
-            g_gr->images().get("images/ui_basic/but1.png"),
+            g_gr->images().get("images/wui/button_secondary.png"),
             UI::SpinBox::Type::kSmall),
      set_to_(&box_,
              0,
@@ -73,7 +73,7 @@ EditorToolNoiseHeightOptionsMenu::EditorToolNoiseHeightOptionsMenu(
              MAX_FIELD_HEIGHT,
              _("Set Value:"),
              UI::SpinBox::Units::kNone,
-             g_gr->images().get("images/ui_basic/but1.png"),
+             g_gr->images().get("images/wui/button_secondary.png"),
              UI::SpinBox::Type::kSmall) {
 	lower_.set_tooltip(
 	   /** TRANSLATORS: Editor random height access key. **/

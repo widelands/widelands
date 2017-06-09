@@ -96,7 +96,7 @@ void ProductionSiteWindow::init(bool avoid_fastclick) {
 		if (igbase()->can_act(building().owner().player_number())) {
 			worker_caps_->add_inf_space();
 			UI::Button* evict_button = new UI::Button(
-			   worker_caps_, "evict", 0, 0, 34, 34, g_gr->images().get("images/ui_basic/but4.png"),
+			   worker_caps_, "evict", 0, 0, 34, 34, g_gr->images().get("images/wui/window_background.png"),
 			   g_gr->images().get("images/wui/buildings/menu_drop_soldier.png"),
 			   _("Terminate the employment of the selected worker"));
 			evict_button->sigclicked.connect(

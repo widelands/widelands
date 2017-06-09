@@ -145,8 +145,8 @@ public:
 	         uint32_t w,
 	         uint32_t h,
 	         const std::string& label,
-	         const Image* background = g_gr->images().get("images/ui_basic/but1.png"),
-	         const Image* button_background = g_gr->images().get("images/ui_basic/but3.png"))
+	         const Image* background = g_gr->images().get("images/ui_fsmenu/background_light.png"),
+	         const Image* button_background = g_gr->images().get("images/ui_fsmenu/button_menu.png"))
 	   : BaseDropdown(parent, x, y, w, h, label, background, button_background) {
 	}
 	~Dropdown() {

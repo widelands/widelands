@@ -60,7 +60,7 @@ EditorToolChangeResourcesOptionsMenu::EditorToolChangeResourcesOptionsMenu(
                 kMaxValue,
                 _("Increase/Decrease Value:"),
                 UI::SpinBox::Units::kNone,
-                g_gr->images().get("images/ui_basic/but1.png"),
+                g_gr->images().get("images/wui/button_secondary.png"),
                 UI::SpinBox::Type::kSmall),
      set_to_(&box_,
              0,
@@ -72,7 +72,7 @@ EditorToolChangeResourcesOptionsMenu::EditorToolChangeResourcesOptionsMenu(
              kMaxValue,
              _("Set Value:"),
              UI::SpinBox::Units::kNone,
-             g_gr->images().get("images/ui_basic/but1.png"),
+             g_gr->images().get("images/wui/button_secondary.png"),
              UI::SpinBox::Type::kSmall),
      resources_box_(&box_, 0, 0, UI::Box::Horizontal, 0, 0, 1),
      cur_selection_(&box_, 0, 0, "", UI::Align::kCenter) {

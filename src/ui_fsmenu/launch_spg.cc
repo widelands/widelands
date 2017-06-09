@@ -58,7 +58,7 @@ FullscreenMenuLaunchSPG::FullscreenMenuLaunchSPG(GameSettingsProvider* const set
                  get_h() * 3 / 10,
                  butw_,
                  buth_,
-                 g_gr->images().get("images/ui_basic/but1.png"),
+                 g_gr->images().get("images/ui_fsmenu/button_secondary.png"),
                  _("Select map")),
      win_condition_dropdown_(this,
                              get_w() * 7 / 10,
@@ -72,7 +72,7 @@ FullscreenMenuLaunchSPG::FullscreenMenuLaunchSPG(GameSettingsProvider* const set
            get_h() * 17 / 20,
            butw_,
            buth_,
-           g_gr->images().get("images/ui_basic/but0.png"),
+           g_gr->images().get("images/ui_fsmenu/button_secondary.png"),
            _("Back")),
      ok_(this,
          "ok",
@@ -80,7 +80,7 @@ FullscreenMenuLaunchSPG::FullscreenMenuLaunchSPG(GameSettingsProvider* const set
          get_h() * 9 / 10,
          butw_,
          buth_,
-         g_gr->images().get("images/ui_basic/but2.png"),
+         g_gr->images().get("images/ui_fsmenu/button_main.png"),
          _("Start game")),
 
      // Text labels
@@ -143,7 +143,7 @@ FullscreenMenuLaunchSPG::FullscreenMenuLaunchSPG(GameSettingsProvider* const set
 
 		pos_[i] =
 		   new UI::Button(this, "switch_to_position", get_w() / 100, y += buth_, get_h() * 17 / 500,
-		                  get_h() * 17 / 500, g_gr->images().get("images/ui_basic/but1.png"),
+		                  get_h() * 17 / 500, g_gr->images().get("images/ui_fsmenu/button_secondary.png"),
 		                  player_image, _("Switch to position"));
 		pos_[i]->sigclicked.connect(
 		   boost::bind(&FullscreenMenuLaunchSPG::switch_to_position, boost::ref(*this), i));

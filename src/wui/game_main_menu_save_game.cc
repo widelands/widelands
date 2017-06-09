@@ -62,16 +62,13 @@ GameMainMenuSaveGame::GameMainMenuSaveGame(InteractiveGameBase& parent,
      editbox_(this,
               HSPACING,
               EDITBOX_Y,
-              LIST_WIDTH,
-              0,
-              2,
-              g_gr->images().get("images/ui_basic/but1.png")),
+              LIST_WIDTH),
      ls_(this,
          HSPACING,
          VSPACING,
          LIST_WIDTH,
          LIST_HEIGHT - editbox_.get_h(),
-         g_gr->images().get("images/ui_basic/but1.png")),
+         g_gr->images().get("images/wui/button_secondary.png")),
      name_label_(this, DESCRIPTION_X, 5, 0, 20, _("Map Name:")),
      mapname_(this, DESCRIPTION_X, 20, 0, 20),
      gametime_label_(this, DESCRIPTION_X, 45, 0, 20, _("Game Time:")),
@@ -84,17 +81,17 @@ GameMainMenuSaveGame::GameMainMenuSaveGame(InteractiveGameBase& parent,
 	editbox_.ok.connect(boost::bind(&GameMainMenuSaveGame::ok, this));
 
 	button_ok_ = new UI::Button(this, "ok", DESCRIPTION_X, OK_Y, DESCRIPTION_WIDTH, BUTTON_HEIGHT,
-	                            g_gr->images().get("images/ui_basic/but4.png"), _("OK"));
+	                            g_gr->images().get("images/wui/window_background.png"), _("OK"));
 	button_ok_->sigclicked.connect(boost::bind(&GameMainMenuSaveGame::ok, this));
 
 	UI::Button* cancelbtn =
 	   new UI::Button(this, "cancel", DESCRIPTION_X, CANCEL_Y, DESCRIPTION_WIDTH, BUTTON_HEIGHT,
-	                  g_gr->images().get("images/ui_basic/but4.png"), _("Cancel"));
+	                  g_gr->images().get("images/wui/window_background.png"), _("Cancel"));
 	cancelbtn->sigclicked.connect(boost::bind(&GameMainMenuSaveGame::die, this));
 
 	UI::Button* deletebtn =
 	   new UI::Button(this, "delete", DESCRIPTION_X, DELETE_Y, DESCRIPTION_WIDTH, BUTTON_HEIGHT,
-	                  g_gr->images().get("images/ui_basic/but4.png"), _("Delete"));
+	                  g_gr->images().get("images/wui/window_background.png"), _("Delete"));
 	deletebtn->sigclicked.connect(boost::bind(&GameMainMenuSaveGame::delete_clicked, this));
 
 	ls_.selected.connect(boost::bind(&GameMainMenuSaveGame::selected, this, _1));

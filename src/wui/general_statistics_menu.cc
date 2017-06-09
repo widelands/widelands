@@ -113,7 +113,7 @@ GeneralStatisticsMenu::GeneralStatisticsMenu(InteractiveGameBase& parent,
 		                     g_gr->images().get("images/players/genstats_player_pc.png"));
 		assert(player_image);
 		UI::Button& cb = *new UI::Button(hbox1, "playerbutton", 0, 0, 25, 25,
-		                                 g_gr->images().get("images/ui_basic/but4.png"), player_image,
+		                                 g_gr->images().get("images/wui/window_background.png"), player_image,
 		                                 player->get_name().c_str());
 		cb.sigclicked.connect(boost::bind(&GeneralStatisticsMenu::cb_changed_to, this, p));
 		cb.set_perm_pressed(my_registry_->selected_players[p - 1]);
@@ -198,7 +198,7 @@ GeneralStatisticsMenu::GeneralStatisticsMenu(InteractiveGameBase& parent,
 	box_.add(hbox2, UI::Box::Resizing::kFullSize);
 
 	box_.add(new WuiPlotAreaSlider(
-	            &box_, plot_, 0, 0, 100, 45, g_gr->images().get("images/ui_basic/but1.png")),
+	            &box_, plot_, 0, 0, 100, 45, g_gr->images().get("images/wui/button_secondary.png")),
 	         UI::Box::Resizing::kFullSize);
 }
 
