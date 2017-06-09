@@ -247,6 +247,8 @@ void DefaultAI::think() {
 
 	const int32_t delay_time = gametime - taskPool.front().due_time;
 
+	Map& map = game().map();
+
 	// Here we decide how many jobs will be run now (none - 5)
 	// in case no job is due now, it can be zero
 	uint32_t jobs_to_run_count = (delay_time < 0) ? 0 : 1;
@@ -443,6 +445,16 @@ void DefaultAI::think() {
 			set_taskpool_task_time(gametime + 19 * 1000, SchedulerTaskId::kCheckEnemySites);
 			break;
 		case SchedulerTaskId::kManagementUpdate:
+			//statistics for spotted warehouses
+			{uint16_t conquered_wh = 0;
+			for (auto coords:enemy_warehouses) {
+				//printf ("Field owner %d\n", get_land_owner(map, coords));
+				//FCoords f = map.get_fcoords(Coords::unhash(coords));
+				if (get_land_owner(map, coords) == player_number()) {
+					conquered_wh += 1;
+					} 
+				};
+			if (!enemy_warehouses.empty()) printf ("Conquered warehouses: %d / %lu\n", conquered_wh, enemy_warehouses.size());
 			management_data.review(
 			   gametime, player_number(),
 			   player_statistics.get_player_land(player_number()),
@@ -451,9 +463,10 @@ void DefaultAI::think() {
 			   attackers_count_,
 			   soldier_trained_log.count(gametime),
 			   soldier_attacks_log.count(gametime),
-			   spots_avail.at(BUILDCAPS_BIG));
+			   conquered_wh);
 			set_taskpool_task_time(
 			   gametime + kManagementUpdateInterval, SchedulerTaskId::kManagementUpdate);
+			  }
 			break;
 		case SchedulerTaskId::kUpdateStats:
 			update_player_stat(gametime);
@@ -614,10 +627,12 @@ void DefaultAI::late_initialization() {
 
 				// populating mines_per_type map
 				if (mines_per_type.count(bo.mines) == 0) {
-					if (!strcmp(bh.get_mines(), "iron")) {
-						iron_ore_id = bo.mines;
-					}
-					mines_per_type[bo.mines] = MineTypesObserver();
+						mines_per_type[bo.mines] = MineTypesObserver();
+				}
+				if (!strcmp(bh.get_mines(), "iron")) {
+					iron_ore_id = bo.mines;
+					bo.set_is(BuildingAttribute::kIronMine);
+					mines_per_type[bo.mines].is_critical = true;
 				}
 			}
 
@@ -708,6 +723,7 @@ void DefaultAI::late_initialization() {
 					bo.set_is(BuildingAttribute::kBuildingMatProducer);
 					if (bo.type == BuildingObserver::Type::kMine) {
 						has_critical_mines = true;
+						mines_per_type[bo.mines].is_critical = true;
 					}
 				}
 			}
@@ -794,7 +810,7 @@ void DefaultAI::late_initialization() {
 		}
 	}
 
-	//printing identified basic buildings  NOCOM
+	//printing identified basic buildings
 	printf ("%2d: Starting the basic economy mode, required buildings:\n", player_number());
 	for (auto bb : remaining_basic_buildings) {
 		printf ("   %3d / %-25s,  target %d\n", bb.first, get_building_observer(bb.first).name, bb.second);
@@ -1439,6 +1455,7 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 	if (field.enemy_owned_land_nearby == 0) {
 		assert(field.enemy_nearby == false);
 	}
+	field.enemy_wh_nearby = false;
 	field.area_military_capacity = 0;
 	field.own_military_presence = 0;
 	field.ally_military_presence = 0;
@@ -1539,6 +1556,8 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 				if (upcast(Warehouse const, warehouse, building)) {
 					field.enemy_military_presence += warehouse->stationed_soldiers().size();
 					field.enemy_military_sites += 1;
+					field.enemy_wh_nearby = true;
+					enemy_warehouses.insert(building->get_position().hash());
 				}
 				continue;
 			} else {  // it is ally
@@ -1678,7 +1697,8 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 		score_parts[16] =  -5 * std::min<int16_t>(field.area_military_capacity, 20);	
 		score_parts[17] = 3 * management_data.get_military_number_at(28);	
 		score_parts[18] = (field.enemy_nearby) ? std::abs(management_data.get_military_number_at(68)) * 3 : 0; 
-	
+		score_parts[19] = (field.enemy_wh_nearby) ? std::abs(management_data.get_military_number_at(132)) * 3 : 0; 	
+		score_parts[58] = (field.enemy_wh_nearby) ? std::abs(management_data.get_military_number_at(135)) : -std::abs(management_data.get_military_number_at(135)); 	
 		
 	} else { // for expansion or inner land
 
@@ -3593,9 +3613,9 @@ bool DefaultAI::check_productionsites(uint32_t gametime) {
 	const DescriptionIndex enhancement = site.site->descr().enhancement();
 
 	bool considering_upgrade = enhancement != INVALID_INDEX;
-	//NOCOM
+
 	if (!basic_economy_established && management_data.f_neuron_pool[17].get_position(2)){
-		considering_upgrade = false; //NOCOM consider this
+		considering_upgrade = false;
 	}
 
 	// First we check for rare case when input wares are set to 0 but AI is not aware that
@@ -3619,12 +3639,12 @@ bool DefaultAI::check_productionsites(uint32_t gametime) {
 	if (site.upgrade_pending) {
 		// The site is in process of emptying its input queues
 		// Counting remaining wares in the site now
-		int32_t left_wares = 0;
-		for (auto& queue : site.site->inputqueues()) {
-			left_wares += queue->get_filled();
-		}
+		//int32_t left_wares = 0;
+		//for (auto& queue : site.site->inputqueues()) {
+			//left_wares += queue->get_filled();
+		//}
 		// Do nothing when some wares are left, but do not wait more then 4 minutes
-		if (site.bo->construction_decision_time + 4 * 60 * 1000 > gametime && left_wares > 0) {
+		if (site.bo->construction_decision_time + 4 * 60 * 1000 > gametime && set_inputs_to_zero(site) > 0) {
 			return false;
 		}
 		assert(site.bo->cnt_upgrade_pending == 1);
@@ -3706,10 +3726,11 @@ bool DefaultAI::check_productionsites(uint32_t gametime) {
 		if (doing_upgrade) {
 
 			// reducing input queues
-			for (auto& queue : site.site->inputqueues()) {
-				game().send_player_set_input_max_fill(
-				   *site.site, queue->get_index(), queue->get_type(), 0);
-			}
+			//for (auto& queue : site.site->inputqueues()) {
+				//game().send_player_set_input_max_fill(
+				   //*site.site, queue->get_index(), queue->get_type(), 0);
+			//}
+			set_inputs_to_zero(site);
 			site.bo->construction_decision_time = gametime;
 			en_bo.construction_decision_time = gametime;
 			site.upgrade_pending = true;
@@ -3747,7 +3768,10 @@ bool DefaultAI::check_productionsites(uint32_t gametime) {
 		inputs[19] = (expansion_type.get_expansion_type() == ExpansionMode::kEconomy) * 1;
 		inputs[20] = 1;
 		inputs[21] = 2;
-		inputs[22] = 3;			
+		inputs[22] = 3;	
+		inputs[23] = (ts_without_trainers_ > 0) ? -1 : 0;		
+		inputs[24] = (ts_without_trainers_ > 0) ? -2 : 0;	
+		inputs[25] = (ts_without_trainers_ > 0) ? -3 : 0;	
 		for (uint8_t i = 0; i < f_neuron_bit_size; i +=1) {
 			if (management_data.f_neuron_pool[24].get_position(i)){
 				tmp_score += inputs[i];
@@ -4068,17 +4092,51 @@ bool DefaultAI::check_mines_(uint32_t const gametime) {
 	ProductionSiteObserver& site = mines_.front();
 
 	const bool connected_to_wh = !site.site->get_economy()->warehouses().empty();
+	
+	//First we dismantle mines that are marked as such, generally we wait till all wares all gone
+    if(site.dismantle_pending_since != kNever) {
+		assert(site.dismantle_pending_since <= gametime);
+		printf ("DEBUG: Mine is dismantle pending for %d s\n", (gametime - site.dismantle_pending_since) / 1000);
+		if (set_inputs_to_zero(site) || site.dismantle_pending_since + 5 * 60 * 1000 < gametime ) {
+			flags_to_be_removed.push_back(site.site->base_flag().get_position());
+			if (connected_to_wh) {
+				game().send_player_dismantle(*site.site);
+			} else {
+				game().send_player_bulldoze(*site.site);
+			}
+			
+			printf("DEBUG: %2d: ... dismantling %-25s on %3dx%3d: %s left wares\n",
+			 player_number(),
+			 site.bo->name,
+			 site.site->get_position().x, site.site->get_position().y, set_inputs_to_zero(site)? "no" : "some");
+	
+			return true;
+		} else if (site.dismantle_pending_since + 3 * 60 * 1000 < gametime ){
+			stop_site(site);
+			return false;
+		} else {
+			//printf ("DEBUG  ...cannot dismantle yet\n");
+			return false;
+		}
+	} else if (site.site->can_start_working()){
+		set_inputs_to_max(site);
+	} else {
+		set_inputs_to_zero(site);
+		}
+
+    // Single _critical is a critical mine if it is only of its type, so it needs special treatment
+	bool single_critical = false; //NOCOM
+	if ((site.bo->is(BuildingAttribute::kBuildingMatProducer) || site.bo->mines == iron_ore_id) &&
+		mines_per_type[site.bo->mines].total_count() == 1) {
+			single_critical = true;
+	} 
 
 	// first get rid of mines that are missing workers for some time (6 minutes),
-	// released worker (if any) can be usefull elsewhere !
-	if (site.built_time + 6 * 60 * 1000 < gametime && !site.site->can_start_working()) {
-		flags_to_be_removed.push_back(site.site->base_flag().get_position());
-		if (connected_to_wh) {
-			game().send_player_dismantle(*site.site);
-		} else {
-			game().send_player_bulldoze(*site.site);
-		}
-		return true;
+	// released worker (if any) can be usefull elsewhere !	
+	if (!single_critical && site.built_time + 6 * 60 * 1000 < gametime && !site.site->can_start_working()) {
+ 		printf ("DEBUG - going to dismantle %-25s, no miner here\n", site.bo->name);
+        initiate_dismantlement(site, gametime);
+		return false;
 	}
 
 	// to avoid problems with uint underflow, we discourage considerations below
@@ -4086,9 +4144,27 @@ bool DefaultAI::check_mines_(uint32_t const gametime) {
 		return false;
 	}
 
+	//After 20 minutes in existence we check whether a miner is needed for a critical unoccupied mine elsewhere
+	if (site.built_time + 20 * 60 * 1000 < gametime && gametime % 5 == 0){
+		if (!mines_per_type[site.bo->mines].is_critical && critical_mine_unoccupied(gametime)){
+			printf ("DEBUG - going to dismantle %s, working but miner is needed for a critical mine\n", site.bo->name);
+            initiate_dismantlement(site, gametime);
+			return true;		
+		}
+	}
+
+
 	// if mine is working, doing nothing
 	if (site.no_resources_since > gametime - 5 * 60 * 1000) {
 		return false;
+	}
+
+	//Out of resources, first check whether a mines is not needed for critical mine
+	if (!mines_per_type[site.bo->mines].is_critical && critical_mine_unoccupied(gametime)){
+		printf ("DEBUG - going to dismantling %s, out of resources and miner is needed elsewhere\n", site.bo->name);
+        initiate_dismantlement(site, gametime);
+		return true;		
+		
 	}
 
 	// Check whether building is enhanceable. If yes consider an upgrade.
@@ -4111,23 +4187,13 @@ bool DefaultAI::check_mines_(uint32_t const gametime) {
 
 	// dismantling a mine
 	if (!has_upgrade) {  // if no upgrade, now
-		flags_to_be_removed.push_back(site.site->base_flag().get_position());
-		if (connected_to_wh) {
-			game().send_player_dismantle(*site.site);
-		} else {
-			game().send_player_bulldoze(*site.site);
-		}
-		site.bo->construction_decision_time = gametime;
+        initiate_dismantlement(site, gametime);
+        printf ("DEBUG - going to dismantling %s, has no enhancement (upgrade)\n", site.bo->name);
 		return true;
 		// if having an upgrade, after half hour
 	} else if (site.no_resources_since < gametime - 30 * 60 * 1000 && !forcing_upgrade) {
-		flags_to_be_removed.push_back(site.site->base_flag().get_position());
-		if (connected_to_wh) {
-			game().send_player_dismantle(*site.site);
-		} else {
-			game().send_player_bulldoze(*site.site);
-		}
-		site.bo->construction_decision_time = gametime;
+        initiate_dismantlement(site, gametime);
+        printf ("DEBUG - going to dismantling %s, too long out of resources and unupgraded\n", site.bo->name);
 		return true;
 	}
 
@@ -4166,6 +4232,10 @@ bool DefaultAI::check_mines_(uint32_t const gametime) {
 			// now verify that there are enough workers
 			if (site.site->has_workers(enhancement, game())) {  // enhancing
 				game().send_player_enhance_building(*site.site, enhancement);
+				printf("DEBUG: %2d: ... dismantling %-25s on %3dx%3d, remaining wares: %s\n",
+				player_number(),
+				site.bo->name,
+				site.site->get_position().x, site.site->get_position().y, set_inputs_to_zero(site)? "no" : "yes");
 				if (site.bo->max_needed_preciousness == 0) {
 					assert(mines_per_type[site.bo->mines].total_count() <= minimal_mines_count);
 				}
@@ -4522,7 +4592,7 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 			} else {
 				return BuildingNecessity::kAllowed;				
 			}
-		} else if (bo.is(BuildingAttribute::kRanger)) { //NOCOM
+		} else if (bo.is(BuildingAttribute::kRanger)) {
 			
 			//making sure we have one completed lumberjack
 			if (bo.total_count() > 0 && get_building_observer(BuildingAttribute::kLumberjack).cnt_built < 1){
@@ -4717,9 +4787,6 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 			if (mines_per_type[bo.mines].finished >= 1 && bo.current_stats < 50) {
 				return BuildingNecessity::kForbidden;
 			}
-			//if (bo.last_building_built == kNever) { //NOCOM
-				//printf ("%d: MASTERERROR: %s never built? but we have mines of such type already\n", player_number(), bo.name);
-			//}
 	
 			if (gametime < bo.last_building_built + 3 * 60 * 1000) {
 				return BuildingNecessity::kForbidden;
@@ -4756,10 +4823,12 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 			inputs[27] = (workers_on_stock) ? 0 : -2;
 			inputs[28] = (bo.is(BuildingAttribute::kBuildingMatProducer)) ? 1 : 0;
 			inputs[29] = (bo.is(BuildingAttribute::kBuildingMatProducer)) ? 3 : 0;
+			inputs[30] = (mines_per_type[bo.mines].is_critical) ? 1 : -1;
+			
 			int16_t tmp_score = management_data.get_military_number_at(83) / 5;
 			
 			
-			const int16_t basic_economy_score = 10 + std::abs(management_data.get_military_number_at(122) * 2);
+			const int16_t basic_economy_score = 25 + std::abs(management_data.get_military_number_at(122) * 2);
 
 			if (site_needed_for_economy == BasicEconomyBuildingStatus::kEncouraged) {
 				tmp_score += basic_economy_score;
@@ -5297,7 +5366,8 @@ bool DefaultAI::other_player_accessible(const uint32_t max_distance,
 			}
 
 			// if somebody but not me
-			if (type == WalkSearch::kOtherPlayers && f->get_owned_by() != pn) {
+			//if (type == WalkSearch::kOtherPlayers && f->get_owned_by() != pn) {
+			if (type == WalkSearch::kOtherPlayers && field_owner != pn) {
 				*tested_fields = done.size();
 				return true;
 			}
@@ -5387,9 +5457,9 @@ void DefaultAI::gain_building(Building& b, const bool found_on_load) {
 				productionsites.back().built_time = gametime;
 			}
 			productionsites.back().unoccupied_till = gametime;
-			productionsites.back().stats_zero = 0;
-			productionsites.back().no_resources_since = kNever;
-			productionsites.back().upgrade_pending = false;
+			//productionsites.back().stats_zero = 0;
+			//productionsites.back().no_resources_since = kNever;
+			//productionsites.back().upgrade_pending = false;
 			productionsites.back().bo->unoccupied_count += 1;
 			if (bo.is(BuildingAttribute::kShipyard)) {
 				marine_task_queue.push_back(kStopShipyard);
@@ -5413,7 +5483,10 @@ void DefaultAI::gain_building(Building& b, const bool found_on_load) {
 			mines_.back().site = &dynamic_cast<ProductionSite&>(b);
 			mines_.back().bo = &bo;
 			mines_.back().built_time = gametime;
-			mines_.back().no_resources_since = kNever;
+			assert(mines_.back().no_resources_since == kNever);
+			assert(mines_.back().upgrade_pending == false);
+			assert(mines_.back().dismantle_pending_since == kNever);
+			assert(productionsites.back().stats_zero == 0);
 			mines_.back().bo->unoccupied_count += 1;
 
 			for (uint32_t i = 0; i < bo.outputs.size(); ++i)
@@ -5427,6 +5500,8 @@ void DefaultAI::gain_building(Building& b, const bool found_on_load) {
 			if (bo.is(BuildingAttribute::kBuildingMatProducer)) {
 				buil_material_mines_count += 1;
 			}
+			
+			set_inputs_to_zero(mines_.back());
 
 		} else if (bo.type == BuildingObserver::Type::kMilitarysite) {
 			militarysites.push_back(MilitarySiteObserver());
@@ -5659,10 +5734,10 @@ void DefaultAI::update_player_stat(const uint32_t gametime) {
 				uint32_t old_land = 0;
 				uint32_t old60_land = 0;
 				uint32_t cass = 0;
-				uint32_t productivity = 0;
-				uint32_t NumbOfWares = 0;
-				uint32_t NumbOfBuildings = 0;				
-				uint32_t NumbOfWorkers = 0;					
+				//uint32_t productivity = 0;
+				//uint32_t NumbOfWares = 0;
+				//uint32_t NumbOfBuildings = 0;				
+				//uint32_t NumbOfWorkers = 0;					
 				if (vsize > 0) {
 					cur_strength = genstats.at(j - 1).miltary_strength.back();
 					cur_land = genstats.at(j - 1).land_size.back();
@@ -5682,17 +5757,17 @@ void DefaultAI::update_player_stat(const uint32_t gametime) {
 						old60_strength = genstats.at(j - 1).miltary_strength[0];
 						old60_land = genstats.at(j - 1).land_size[0];
 					}
-					productivity = genstats.at(j - 1).productivity.back();
-					NumbOfWares = genstats.at(j - 1).nr_wares.back();	
-					NumbOfBuildings = genstats.at(j - 1).nr_buildings.back();	
-					NumbOfWorkers = genstats.at(j - 1).nr_workers.back();					
+					//productivity = genstats.at(j - 1).productivity.back();
+					//NumbOfWares = genstats.at(j - 1).nr_wares.back();	
+					//NumbOfBuildings = genstats.at(j - 1).nr_buildings.back();	
+					//NumbOfWorkers = genstats.at(j - 1).nr_workers.back();					
 				}
 
 				player_statistics.add(pn, j, me->team_number(), this_player->team_number(),
 				                      cur_strength, old_strength, old60_strength, cass, cur_land,
 				                      old_land, old60_land);
 				//For Nordfriese Land:Productivity:Number of Wares:Number of Buildings:Number of Workers 
-				if (pn==j) printf ("STATISTICS %d %d %d:%d:%d:%d:%d\n", pn, (vsize-1) * 30,  cur_land, productivity, NumbOfWares, NumbOfBuildings, NumbOfWorkers);
+				//if (pn==j) printf ("STATISTICS %d %d %d:%d:%d:%d:%d\n", pn, (vsize-1) * 30,  cur_land, productivity, NumbOfWares, NumbOfBuildings, NumbOfWorkers);
 			} catch (const std::out_of_range&) {
 				log("ComputerPlayer(%d): genstats entry missing - size :%d\n",
 				    static_cast<unsigned int>(player_number()),
@@ -5999,4 +6074,77 @@ int32_t DefaultAI::limit_cnt_target(const int32_t current_cnt_target, const int3
 	assert(new_target <= ai_limit);
 
 	return new_target;
+}
+
+
+//Looking for situation that for a critical mine (iron, or marble) there is just one mine and it is unoccupied
+// probably we need to dismantle another one to release miner
+bool  DefaultAI::critical_mine_unoccupied(uint32_t gametime){
+	//resetting unoccupied
+	for (auto& mine : mines_per_type) {
+			mine.second.unoccupied = 0;
+	}
+	for (auto& mine : mines_) {
+		if (!mines_per_type[mine.bo->mines].is_critical) {continue;}
+		if (mine.built_time + 3 * 60 * 1000 < gametime && !mine.site->can_start_working()){
+			mines_per_type[mine.bo->mines].unoccupied += 1;
+		}
+	}
+	
+	//Now check that that there is single and unworking mine of critical type
+	for (auto& mine : mines_per_type) {
+		if (mine.second.is_critical && mine.second.total_count() == 1 && mine.second.unoccupied == 1){
+			printf ("MINEDEBUG - a single critical unoccupied mine here \n");
+			return true;
+		}
+		assert(mine.second.unoccupied <= mines_.size());
+		assert(mine.second.unoccupied <= mine.second.total_count());
+	}
+	return false;
+	
+}
+
+//Sets all inputs to zero and return true if inputs are already empty
+bool DefaultAI::set_inputs_to_zero(const Widelands::ProductionSiteObserver& site){
+	uint16_t remaining_wares = 0;
+	
+	for (auto& queue : site.site->inputqueues()) {
+		remaining_wares += queue->get_filled();
+		if (queue->get_max_fill() > 0) {
+			game().send_player_set_input_max_fill(
+			   *site.site, queue->get_index(), queue->get_type(), 0);
+		}
+	}
+	if (remaining_wares == 0) {
+		return true;
+	}
+	//printf ("DEBUG - %3dx%3d: %2d pieces of ware still here\n", site.site->get_position().x, site.site->get_position().y,remaining_wares);
+	return false;
+	}
+
+void DefaultAI::set_inputs_to_max(const Widelands::ProductionSiteObserver& site){
+	for (auto& queue : site.site->inputqueues()) {
+		if (queue->get_max_fill() <  queue->get_max_size()) {
+			game().send_player_set_input_max_fill(
+			   *site.site, queue->get_index(), queue->get_type(), queue->get_max_size());
+			//printf ("DEBUG - %3dx%3d: setting input queues to max %d->%d\n",
+			//site.site->get_position().x, site.site->get_position().y, queue->get_max_fill(),  queue->get_max_size());
+		}
+	}
+}
+void DefaultAI::stop_site(const Widelands::ProductionSiteObserver& site){
+	if(!site.site->is_stopped()) {
+			game().send_player_start_stop_building(*site.site);
+		}
+}
+
+void DefaultAI::initiate_dismantlement(Widelands::ProductionSiteObserver& site, uint32_t gametime){
+    site.dismantle_pending_since = gametime;
+    set_inputs_to_zero(site);
+    site.bo->construction_decision_time = gametime;
+}
+
+Widelands::PlayerNumber DefaultAI::get_land_owner(const Widelands::Map& map,const  uint32_t coords){
+	FCoords f = map.get_fcoords(Widelands::Coords::unhash(coords));
+	return f.field->get_owned_by();
 }

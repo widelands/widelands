@@ -74,7 +74,8 @@ enum class BuildingAttribute : uint8_t {
 	kBuildingMatProducer,
 	kUpgradeSubstitutes,
 	kUpgradeExtends,
-	kSaw
+	kSaw,
+	kIronMine
 };
 
 enum class AiType : uint8_t  {
@@ -311,6 +312,7 @@ struct BuildableField {
 	bool enemy_nearby;
 	bool enemy_accessible_;
 
+	bool enemy_wh_nearby;
 	uint16_t unowned_land_nearby;
 	uint16_t enemy_owned_land_nearby;
 	uint16_t unowned_buildable_spots_nearby;
@@ -478,12 +480,14 @@ struct BuildingObserver {
 };
 
 struct ProductionSiteObserver {
+	ProductionSiteObserver();
 	Widelands::ProductionSite* site;
 	uint32_t built_time;
 	uint32_t unoccupied_till;
 	uint8_t stats_zero;
 	uint32_t no_resources_since;
 	bool upgrade_pending;
+	uint32_t dismantle_pending_since;
 	BuildingObserver* bo;
 };
 
@@ -554,6 +558,8 @@ struct MineTypesObserver {
 
 	uint16_t in_construction;
 	uint16_t finished;
+	bool is_critical;
+	uint16_t unoccupied;
 };
 
 struct Neuron {
@@ -636,7 +642,7 @@ struct ManagementData {
 	            uint16_t,
 	            int16_t,
 	            int16_t,
-	            uint32_t);
+	            uint16_t);
 	void dump_data();
 	//void initialize(uint8_t, Widelands::AiType, bool reinitializing = false);
 	uint16_t new_neuron_id() {

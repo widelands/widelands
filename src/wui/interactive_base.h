@@ -42,6 +42,9 @@
 #include "wui/minimap.h"
 #include "wui/quicknavigation.h"
 
+#include <iostream> //NOCOM
+#include <fstream> //NOCOM
+
 namespace Widelands {
 struct CoordPath;
 }

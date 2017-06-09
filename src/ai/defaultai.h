@@ -241,6 +241,11 @@ private:
 	void lose_building(const Widelands::Building&);
 	void out_of_resources_site(const Widelands::ProductionSite&);
 	bool check_supply(const Widelands::BuildingObserver&);
+	bool set_inputs_to_zero(const Widelands::ProductionSiteObserver&);
+	void set_inputs_to_max(const Widelands::ProductionSiteObserver&);
+	void stop_site(const Widelands::ProductionSiteObserver&);
+    void initiate_dismantlement(Widelands::ProductionSiteObserver&, const uint32_t);
+	//bool set_inputs_to_zero(const Widelands::ProductionSite&);
 	void print_land_stats();
 
 	// Checks whether first value is in range, or lesser then...
@@ -256,6 +261,9 @@ private:
 	uint8_t spot_scoring(Widelands::Coords candidate_spot);
 	bool marine_main_decisions();
 	bool check_ships(uint32_t);
+	
+	//finding and owner
+	Widelands::PlayerNumber get_land_owner(const Widelands::Map&, const uint32_t);
 
 	// Functions used for war and training stuff / defaultai_warfare.cc
 	bool check_militarysites(uint32_t);
@@ -310,8 +318,10 @@ private:
 	// and no items are added/removed afterwards
 	std::vector<Widelands::SchedulerTask> taskPool;
 	std::map<uint32_t, Widelands::EnemySiteObserver> enemy_sites;
+	std::set<uint32_t> enemy_warehouses;
 	// it will map mined material to observer
 	std::map<int32_t, Widelands::MineTypesObserver> mines_per_type;
+	bool critical_mine_unoccupied(const uint32_t);
 	std::vector<uint32_t> spots_avail;
 
 	// used for statistics of buildings

@@ -400,7 +400,8 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 				inputs[92] = (site->second.attack_soldiers_competency < 20)  ? -2 : 0;	
 				inputs[93] = ((gametime - last_attack_time_) < kCampaignDuration) ? +2 : -2;
 				inputs[94] = ((gametime - last_attack_time_) < kCampaignDuration) ? +2 : -2;
-								
+				inputs[95] = -player_statistics.enemies_seen_lately_count(gametime);
+												
 				site->second.score = 0;
 				for (uint8_t j = 0; j < f_neuron_bit_size; j += 1) {
 					if (management_data.f_neuron_pool[47].get_position(j)) {
@@ -1008,9 +1009,9 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 	inputs[20] = (scores[size - 1] > total_score / 2) ? -1 : 0;
 	inputs[21] = (msites_in_constr() > msites_built() / 3) ? -1 : 0;
 	inputs[22] = (scores[size - 1] > total_score / 4) ? -1 : 0;
-	inputs[23] = (3 - size) * (msites_in_constr() < 1) ? +1 : 0;
-	inputs[24] = (3 - size) * (msites_in_constr() < 3) ? +1 : 0;
-	inputs[25] = (3 - size) * (msites_in_constr() < 5) ? +1 : 0;
+	inputs[23] = (((3 - size) * msites_in_constr()) < 1) ? +1 : 0;
+	inputs[24] = (3 - size) * ((msites_in_constr() < 3) ? +1 : 0);
+	inputs[25] = (((3 - size) * msites_in_constr()) < 5) ? +1 : 0;
 	inputs[26] = (msites_in_constr() < 7) ? +1 : 0;
 	inputs[27] = +5;
 	inputs[28] = -5;
@@ -1024,27 +1025,27 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 	inputs[34] =
 	   (player_statistics.get_player_land(pn) < player_statistics.get_enemies_max_land()) ? 1 : 0;
 	inputs[35] =
-	   (!player_statistics.any_enemy_seen_lately(gametime)) *
-	         (player_statistics.get_player_land(pn) < player_statistics.get_enemies_max_land()) ?
+	   (!player_statistics.any_enemy_seen_lately(gametime) &&
+	         (player_statistics.get_player_land(pn) < player_statistics.get_enemies_max_land())) ?
 	      2 :
 	      0;
 	inputs[36] =
-	   (!player_statistics.any_enemy_seen_lately(gametime)) *
+	   (!player_statistics.any_enemy_seen_lately(gametime)) &&
 	         (player_statistics.get_player_land(pn) < player_statistics.get_enemies_max_land() * 2) ?
 	      1 :
 	      0;
 	inputs[37] =
-	   (!player_statistics.any_enemy_seen_lately(gametime)) *
+	   (!player_statistics.any_enemy_seen_lately(gametime)) &&
 	         (player_statistics.get_player_land(pn) < player_statistics.get_enemies_max_land() / 2) ?
 	      1 :
 	      0;
 
-	inputs[38] = (!player_statistics.any_enemy_seen_lately(gametime)) *
+	inputs[38] = (!player_statistics.any_enemy_seen_lately(gametime)) &&
 	                   (player_statistics.get_player_land(pn) <
 	                    player_statistics.get_old_player_land(pn) * 105 / 100) ?
 	                2 :
 	                0;
-	inputs[39] = (!player_statistics.any_enemy_seen_lately(gametime)) *
+	inputs[39] = (!player_statistics.any_enemy_seen_lately(gametime)) &&
 	                   (player_statistics.get_player_land(pn) <
 	                    player_statistics.get_old_player_land(pn) + 110) ?
 	                3 :
@@ -1056,12 +1057,12 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 	inputs[41] =
 	   (player_statistics.get_player_power(pn) > player_statistics.get_old60_player_power(pn)) ? 1 :
 	                                                                                             0;
-	inputs[42] = (!player_statistics.any_enemy_seen_lately(gametime)) *
+	inputs[42] = (!player_statistics.any_enemy_seen_lately(gametime)) &&
 	                   (player_statistics.get_player_power(pn) <
 	                    player_statistics.get_old60_player_power(pn)) ?
 	                1 :
 	                0;
-	inputs[43] = (!player_statistics.any_enemy_seen_lately(gametime)) *
+	inputs[43] = (!player_statistics.any_enemy_seen_lately(gametime)) &&
 	                   (player_statistics.get_player_power(pn) >
 	                    player_statistics.get_old60_player_power(pn)) ?
 	                1 :
@@ -1075,12 +1076,12 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 	                                                                                            0;
 
 	inputs[46] =
-	   (!player_statistics.any_enemy_seen_lately(gametime)) *
+	   (!player_statistics.any_enemy_seen_lately(gametime)) &&
 	         (player_statistics.get_player_land(pn) < player_statistics.get_enemies_average_land()) ?
 	      2 :
 	      0;
 	inputs[47] =
-	   (!player_statistics.any_enemy_seen_lately(gametime)) *
+	   (!player_statistics.any_enemy_seen_lately(gametime)) &&
 	         (player_statistics.get_player_land(pn) > player_statistics.get_enemies_average_land()) ?
 	      2 :
 	      0;
@@ -1088,12 +1089,12 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 	inputs[48] = (soldier_status_ == SoldiersStatus::kBadShortage) ? -3 : 0;
 	inputs[49] = (soldier_status_ == SoldiersStatus::kShortage) ? -2 : 0;
 
-	inputs[50] = (!player_statistics.any_enemy_seen_lately(gametime)) *
+	inputs[50] = (!player_statistics.any_enemy_seen_lately(gametime)) &&
 	                   (player_statistics.get_player_land(pn) <
 	                    player_statistics.get_old_player_land(pn) * 110 / 100) ?
 	                1 :
 	                0;
-	inputs[51] = (!player_statistics.any_enemy_seen_lately(gametime)) *
+	inputs[51] = (!player_statistics.any_enemy_seen_lately(gametime)) &&
 	                   (player_statistics.get_player_land(pn) <
 	                    player_statistics.get_old_player_land(pn) * 105 / 100) ?
 	                2 :
@@ -1110,9 +1111,9 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 	   (player_statistics.get_player_land(pn) < player_statistics.get_enemies_max_land() / 2) ? 2 :
 	                                                                                            0;
 	inputs[56] =
-	   (!player_statistics.any_enemy_seen_lately(gametime)) * (spots_ < kSpotsTooLittle) ? +2 : 0;
+	   !player_statistics.any_enemy_seen_lately(gametime) && (spots_ < kSpotsTooLittle) ? +2 : 0;
 	inputs[57] =
-	   (player_statistics.any_enemy_seen_lately(gametime)) * (spots_ < kSpotsTooLittle) ? +2 : 0;
+	   player_statistics.any_enemy_seen_lately(gametime) && (spots_ < kSpotsTooLittle) ? +2 : 0;
 	inputs[58] =
 	   ((mines_per_type[iron_ore_id].in_construction + mines_per_type[iron_ore_id].finished) == 0) ?
 	      +3 :
@@ -1192,12 +1193,12 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 	              player_statistics.get_old_player_land(pn) * 140 / 100) ?
 	                2 :
 	                0;
-	inputs[94] = (!player_statistics.any_enemy_seen_lately(gametime)) *
+	inputs[94] = (!player_statistics.any_enemy_seen_lately(gametime)) &&
 	                   (player_statistics.get_player_land(pn) <
 	                    player_statistics.get_old_player_land(pn) * 120 / 100) ?
 	                2 :
 	                0;
-	inputs[95] = (!player_statistics.any_enemy_seen_lately(gametime)) *
+	inputs[95] = (!player_statistics.any_enemy_seen_lately(gametime)) &&
 	                   (player_statistics.get_player_land(pn) <
 	                    player_statistics.get_old_player_land(pn) * 140 / 100) ?
 	                2 :
