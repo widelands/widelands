@@ -94,7 +94,7 @@ void WarehouseWaresDisplay::draw_ware(RenderTarget& dst, Widelands::DescriptionI
 	}
 	assert(pic != nullptr);
 
-	dst.blit(ware_position(ware).cast<float>(), pic);
+	dst.blit(ware_position(ware), pic);
 }
 
 /**

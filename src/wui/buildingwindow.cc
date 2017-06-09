@@ -80,10 +80,6 @@ void BuildingWindow::on_building_note(const Widelands::NoteBuilding& note) {
 			igbase()->add_wanted_building_window(building().get_position(), get_pos(), is_minimal());
 		// Fallthrough intended
 		case Widelands::NoteBuilding::Action::kDeleted:
-			// Stop everybody from thinking to avoid segfaults
-			is_dying_ = true;
-			set_thinks(false);
-			vbox_.reset(nullptr);
 			die();
 			break;
 		default:
@@ -98,7 +94,7 @@ void BuildingWindow::init(bool avoid_fastclick) {
 	capscache_ = 0;
 	caps_setup_ = false;
 	toggle_workarea_ = nullptr;
-	avoid_fastclick_ = avoid_fastclick,
+	avoid_fastclick_ = avoid_fastclick;
 
 	vbox_.reset(new UI::Box(this, 0, 0, UI::Box::Vertical));
 
@@ -115,6 +111,14 @@ void BuildingWindow::init(bool avoid_fastclick) {
 	set_thinks(true);
 	set_fastclick_panel(this);
 	show_workarea();
+}
+
+// Stop everybody from thinking to avoid segfaults
+void BuildingWindow::die() {
+	is_dying_ = true;
+	set_thinks(false);
+	vbox_.reset(nullptr);
+	UniqueWindow::die();
 }
 
 /*
@@ -140,8 +144,10 @@ Check the capabilities and setup the capsbutton panel in case they've changed.
 ===============
 */
 void BuildingWindow::think() {
-	if (!igbase()->can_see(building().owner().player_number()))
+	if (!igbase()->can_see(building().owner().player_number())) {
 		die();
+		return;
+	}
 
 	if (!caps_setup_ || capscache_player_number_ != igbase()->player_number() ||
 	    building().get_playercaps() != capscache_) {

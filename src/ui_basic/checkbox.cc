@@ -45,8 +45,8 @@ Statebox::Statebox(Panel* const parent,
    : Panel(parent, p.x, p.y, kStateboxSize, kStateboxSize, tooltip_text),
      flags_(Is_Enabled),
      pic_graphics_(pic),
-     label_text_(""),
-     rendered_text_(nullptr) {
+     rendered_text_(nullptr),
+     label_text_("") {
 	uint16_t w = pic->width();
 	uint16_t h = pic->height();
 	set_desired_size(w, h);
@@ -63,8 +63,8 @@ Statebox::Statebox(Panel* const parent,
    : Panel(parent, p.x, p.y, std::max(width, kStateboxSize), kStateboxSize, tooltip_text),
      flags_(Is_Enabled),
      pic_graphics_(g_gr->images().get("images/ui_basic/checkbox_light.png")),
-     label_text_(label_text),
-     rendered_text_(nullptr) {
+     rendered_text_(nullptr),
+     label_text_(label_text) {
 	set_flags(Has_Text, !label_text_.empty());
 	layout();
 }
@@ -83,7 +83,7 @@ void Statebox::layout() {
 		rendered_text_ = label_text_.empty() ?
 		                    nullptr :
 		                    UI::g_fh1->render(as_uifont(label_text_), text_width(get_w(), pic_width));
-		if (rendered_text_) {
+		if (rendered_text_.get()) {
 			w = std::max(rendered_text_->width() + kPadding + pic_width, w);
 			h = std::max(rendered_text_->height(), h);
 		}
@@ -134,26 +134,26 @@ void Statebox::draw(RenderTarget& dst) {
 		const uint16_t w = pic_graphics_->width();
 		const uint16_t h = pic_graphics_->height();
 
-		dst.blit(Vector2f((get_inner_w() - w) / 2, (get_inner_h() - h) / 2), pic_graphics_);
+		dst.blit(Vector2i((get_inner_w() - w) / 2, (get_inner_h() - h) / 2), pic_graphics_);
 
 		if (flags_ & Is_Checked) {
-			dst.draw_rect(Rectf(0.f, 0.f, get_w(), get_h()), RGBColor(229, 116, 2));
+			dst.draw_rect(Recti(0, 0, get_w(), get_h()), RGBColor(229, 116, 2));
 		} else if (flags_ & Is_Highlighted) {
-			dst.draw_rect(Rectf(0.f, 0.f, get_w(), get_h()), RGBColor(100, 100, 80));
+			dst.draw_rect(Recti(0, 0, get_w(), get_h()), RGBColor(100, 100, 80));
 		}
 	} else {
 		static_assert(0 <= kStateboxSize, "assert(0 <= STATEBOX_WIDTH) failed.");
 		static_assert(0 <= kStateboxSize, "assert(0 <= STATEBOX_HEIGHT) failed.");
-		Vector2f image_anchor(0.f, 0.f);
-		Vector2f text_anchor(kStateboxSize + kPadding, 0);
+		Vector2i image_anchor = Vector2i::zero();
+		Vector2i text_anchor(kStateboxSize + kPadding, 0);
 
-		if (rendered_text_) {
+		if (rendered_text_.get()) {
 			if (UI::g_fh1->fontset()->is_rtl()) {
 				text_anchor.x = 0;
 				image_anchor.x = rendered_text_->width() + kPadding;
 				image_anchor.y = (get_h() - kStateboxSize) / 2;
 			}
-			dst.blit(text_anchor, rendered_text_, BlendMode::UseAlpha, UI::Align::kLeft);
+			rendered_text_->draw(dst, text_anchor);
 		}
 
 		dst.blitrect(
@@ -162,7 +162,7 @@ void Statebox::draw(RenderTarget& dst) {
 
 		if (flags_ & Is_Highlighted)
 			dst.draw_rect(
-			   Rectf(image_anchor, kStateboxSize + 1, kStateboxSize + 1), RGBColor(100, 100, 80));
+			   Recti(image_anchor, kStateboxSize + 1, kStateboxSize + 1), RGBColor(100, 100, 80));
 	}
 }
 

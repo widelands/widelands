@@ -332,19 +332,9 @@ void FullscreenMenuLoadGame::clicked_delete() {
 }
 
 std::string FullscreenMenuLoadGame::filename_list_string() {
-	std::set<uint32_t> selections = table_.selections();
 	boost::format message;
-	int counter = 0;
-	for (const uint32_t index : selections) {
-		++counter;
-		// TODO(GunChleoc): We can exceed the texture size for the font renderer,
-		// so we have to restrict this for now.
-		if (counter > 50) {
-			message = boost::format("%s\n%s") % message % "...";
-			break;
-		}
+	for (const uint32_t index : table_.selections()) {
 		const SavegameData& gamedata = games_data_[table_.get(table_.get_record(index))];
-
 		if (gamedata.errormessage.empty()) {
 			message =
 			   boost::format("%s\n%s") % message %

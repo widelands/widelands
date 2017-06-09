@@ -48,14 +48,16 @@ WLMessageBox::WLMessageBox(Panel* const parent,
 	const int margin = 5;
 	int width, height = 0;
 	{
-		const Image* temp_rendered_text = g_fh1->render(as_uifont(text), maxwidth);
+		std::shared_ptr<const UI::RenderedText> temp_rendered_text =
+		   g_fh1->render(as_uifont(text), maxwidth);
 		width = temp_rendered_text->width();
 		height = temp_rendered_text->height();
 	}
 
 	// Stupid heuristic to avoid excessively long lines
 	if (height < 2 * UI_FONT_SIZE_SMALL) {
-		const Image* temp_rendered_text = g_fh1->render(as_uifont(text), maxwidth / 2);
+		std::shared_ptr<const UI::RenderedText> temp_rendered_text =
+		   g_fh1->render(as_uifont(text), maxwidth / 2);
 		width = temp_rendered_text->width();
 		height = temp_rendered_text->height();
 	}

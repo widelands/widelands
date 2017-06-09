@@ -183,9 +183,12 @@ WareStatisticsMenu::WareStatisticsMenu(InteractivePlayer& parent,
 	      box, 0, 0, parent.get_player()->tribe(),
 	      boost::bind(&WareStatisticsMenu::cb_changed_to, boost::ref(*this), _1, _2), color_map_),
 	   UI::Box::Resizing::kFullSize);
-	box->add(new WuiPlotGenericAreaSlider(this, *plot_production_, this, 0, 0, kPlotWidth, 45,
-	                                      g_gr->images().get("images/wui/button_secondary.png")),
-	         UI::Box::Resizing::kFullSize);
+
+	WuiPlotAreaSlider* slider =
+	   new WuiPlotAreaSlider(this, *plot_production_, 0, 0, kPlotWidth, 45,
+	                         g_gr->images().get("images/wui/button_secondary.png"));
+	slider->changedto.connect(boost::bind(&WareStatisticsMenu::set_time, this, _1));
+	box->add(slider, UI::Box::Resizing::kFullSize);
 }
 
 /**

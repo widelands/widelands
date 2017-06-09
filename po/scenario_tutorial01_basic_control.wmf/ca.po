@@ -7,9 +7,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-03-03 06:24+0000\n"
-"PO-Revision-Date: 2017-03-03 06:27+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2017-03-05 10:46+0000\n"
+"PO-Revision-Date: 2017-03-09 20:47+0000\n"
+"Last-Translator: Juanjo\n"
 "Language-Team: Catalan (http://www.transifex.com/widelands/widelands/language/ca/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -279,7 +279,7 @@ msgid ""
 msgstr "Per tancar la finestra, simplement feu-hi clic dret. Totes les finestres del Widelands es poden tancar així, excepte les instruccions, com aquesta. Proveu-ho!"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:169
-msgid "Lumberjack is Done"
+msgid "The Lumberjack’s Hut is Done"
 msgstr "La cabana del llenyataire està llesta"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:172
@@ -760,7 +760,7 @@ msgstr "Un cop heu arxivat un missatge, se'n seleccionarà un altre de la llista
 msgid ""
 "You can also hold down the Ctrl or Shift key to select multiple messages, or"
 " press Ctrl + A to select them all."
-msgstr ""
+msgstr "També podeu prémer les tecles Ctrl o bé Maj per seleccionar múltiples missatges. Ctrl+A els selecciona tots."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:409
 msgid ""

@@ -10,9 +10,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-03-03 06:24+0000\n"
-"PO-Revision-Date: 2017-03-03 06:26+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2017-03-05 10:46+0000\n"
+"PO-Revision-Date: 2017-03-09 20:39+0000\n"
+"Last-Translator: Juanjo\n"
 "Language-Team: Catalan (http://www.transifex.com/widelands/widelands/language/ca/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1996,7 +1996,7 @@ msgstr "Disminueix el zoom"
 #: ../../data/tribes/scripting/help/controls.lua:66
 msgctxt "hotkey"
 msgid "Ctrl + 0"
-msgstr "Ctrl + 0"
+msgstr "Ctrl+0"
 
 #: ../../data/tribes/scripting/help/controls.lua:66
 msgid "Reset zoom"
@@ -2035,53 +2035,53 @@ msgstr "Mostra la consola de depuració (només en muntatges de depuració)"
 
 #: ../../data/tribes/scripting/help/controls.lua:76
 msgid "Table Control"
-msgstr ""
+msgstr "Control d'edició de taules"
 
 #: ../../data/tribes/scripting/help/controls.lua:77
 msgid ""
 "In tables that allow the selection of multiple entries, the following key "
 "combinations are available:"
-msgstr ""
+msgstr "En taules que permeten la selecció de múltiples entrades, disposeu de les combinacions de tecles següents:"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
 #: ../../data/tribes/scripting/help/controls.lua:80
 msgctxt "hotkey"
 msgid "Ctrl + Click"
-msgstr ""
+msgstr "Ctrl+Clic"
 
 #: ../../data/tribes/scripting/help/controls.lua:80
 msgctxt "table_control"
 msgid "Select multiple entries"
-msgstr ""
+msgstr "Selecció de múltiples entrades"
 
 #: ../../data/tribes/scripting/help/controls.lua:82
 msgctxt "table_control"
 msgid "Select a range of entries"
-msgstr ""
+msgstr "Selecció d'un rang d'entrades"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
 #: ../../data/tribes/scripting/help/controls.lua:82
 msgctxt "hotkey"
 msgid "Shift + Click"
-msgstr ""
+msgstr "Maj+Clic"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
 #: ../../data/tribes/scripting/help/controls.lua:84
 msgctxt "hotkey"
 msgid "Ctrl + A"
-msgstr ""
+msgstr "Ctrl+A"
 
 #: ../../data/tribes/scripting/help/controls.lua:84
 msgctxt "table_control"
 msgid "Select all entries"
-msgstr ""
+msgstr "Selecció de totes les entrades"
 
 #: ../../data/tribes/scripting/help/controls.lua:86
 msgid "Message Window"
-msgstr ""
+msgstr "Finestra de missatges"
 
 #: ../../data/tribes/scripting/help/controls.lua:87
 msgid ""
@@ -2092,7 +2092,7 @@ msgstr "A la finestra de missatges també estan disponibles aquestes dreceres de
 #: ../../data/tribes/scripting/help/controls.lua:90
 msgctxt "hotkey"
 msgid "Alt + 0"
-msgstr "Alt + 0"
+msgstr "Alt+0"
 
 #: ../../data/tribes/scripting/help/controls.lua:90
 msgid "Show all messages"
@@ -2102,7 +2102,7 @@ msgstr "Mostra tots els missatges"
 #: ../../data/tribes/scripting/help/controls.lua:92
 msgctxt "hotkey"
 msgid "Alt + 1"
-msgstr "Alt + 1"
+msgstr "Alt+1"
 
 #: ../../data/tribes/scripting/help/controls.lua:92
 msgid "Show geologists’ messages only"
@@ -2112,7 +2112,7 @@ msgstr "Mostra només els missatges dels geòlegs"
 #: ../../data/tribes/scripting/help/controls.lua:94
 msgctxt "hotkey"
 msgid "Alt + 2"
-msgstr "Alt + 2"
+msgstr "Alt+2"
 
 #: ../../data/tribes/scripting/help/controls.lua:94
 msgid "Show economy messages only"
@@ -2122,7 +2122,7 @@ msgstr "Mostra només els missatges de l'economia"
 #: ../../data/tribes/scripting/help/controls.lua:96
 msgctxt "hotkey"
 msgid "Alt + 3"
-msgstr "Alt + 3"
+msgstr "Alt+3"
 
 #: ../../data/tribes/scripting/help/controls.lua:96
 msgid "Show seafaring messages only"
@@ -2132,7 +2132,7 @@ msgstr "Mostra només els missatges de navegació marítima"
 #: ../../data/tribes/scripting/help/controls.lua:98
 msgctxt "hotkey"
 msgid "Alt + 4"
-msgstr "Alt + 4"
+msgstr "Alt+4"
 
 #: ../../data/tribes/scripting/help/controls.lua:98
 msgid "Show warfare messages only"
@@ -2142,7 +2142,7 @@ msgstr "Mostra només els missatges militars"
 #: ../../data/tribes/scripting/help/controls.lua:100
 msgctxt "hotkey"
 msgid "Alt + 5"
-msgstr "Alt + 5"
+msgstr "Alt+5"
 
 #: ../../data/tribes/scripting/help/controls.lua:100
 msgid "Show scenario messages only"

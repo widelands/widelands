@@ -2,15 +2,15 @@
 # Copyright (C) 2005-2017 Widelands Development Team
 # 
 # Translators:
-# Adam Piggott, 2016
+# Adam Piggott, 2016-2017
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-03-03 06:24+0000\n"
-"PO-Revision-Date: 2017-03-03 06:26+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2017-03-17 10:45+0000\n"
+"PO-Revision-Date: 2017-03-23 09:49+0000\n"
+"Last-Translator: Adam Piggott\n"
 "Language-Team: English (United Kingdom) (http://www.transifex.com/widelands/widelands/language/en_GB/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -488,19 +488,19 @@ msgid ""
 "Keep an eye on your fishers and build a fish breeder’s house. After fish "
 "resources are exhausted in their work area, the fish supply cannot be "
 "regenerated."
-msgstr ""
+msgstr "Keep an eye on your fishers and build a fish breeder’s house. After fish resources are exhausted in their work area, the fish supply cannot be regenerated."
 
 #: ../../data/txts/tips/atlanteans.lua:8
 msgid ""
 "Always build a forester’s and a woodcutter’s house, so you will not run out "
 "of logs."
-msgstr ""
+msgstr "Always build a forester’s and a Lumberjack’s house, so you will not run out of logs."
 
 #: ../../data/txts/tips/atlanteans.lua:12
 msgid ""
 "Atlanteans need spidercloth for many buildings. Build the needed "
 "infrastructure early before you run out."
-msgstr ""
+msgstr "Atlanteans need spidercloth for many buildings. Build the needed infrastructure early before you run out."
 
 #: ../../data/txts/tips/barbarians.lua:4 ../../data/txts/tips/empire.lua:4
 msgid ""
@@ -512,13 +512,13 @@ msgstr "Keep an eye on your fishers. After fish resources are exhausted in their
 msgid ""
 "Always build a ranger’s and a gamekeeper’s hut, so you will not run out of "
 "logs or game."
-msgstr ""
+msgstr "Always build a ranger’s and a gamekeeper’s hut, so you will not run out of logs or game."
 
 #: ../../data/txts/tips/barbarians.lua:12 ../../data/txts/tips/empire.lua:12
 msgid ""
-"Most upgraded buildings also need an upgraded worker. Do not upgrade a "
-"building unless you have the upgraded workers available."
-msgstr ""
+"Most enhanced buildings need experienced workers. Do not enhance a building "
+"unless you have the necessary workers available."
+msgstr "Most enhanced buildings need experienced workers. Do not enhance a building unless you have the necessary workers available."
 
 #: ../../data/txts/tips/editor.lua:4
 msgid ""
@@ -567,26 +567,26 @@ msgstr "Space key behaves like in normal game. It switches if building spaces ar
 msgid ""
 "When placing trees, use the help button to see which trees are more likely "
 "to survive on which terrain."
-msgstr ""
+msgstr "When placing trees, use the help button to see which trees are more likely to survive on which terrain."
 
 #: ../../data/txts/tips/editor.lua:36
 msgid ""
 "If you do not set water and fish resources, a default amount will be used."
-msgstr ""
+msgstr "If you do not set water and fish resources, a default amount will be used."
 
 #: ../../data/txts/tips/editor.lua:40
 msgid ""
 "You can place a medium building on any node where there is a slope no "
 "greater than 1 in the south-east direction and its height difference to all "
 "nodes in a radius of 2 is no greater than 2."
-msgstr ""
+msgstr "You can place a medium building on any node where there is a slope no greater than 1 in the south-east direction and its height difference to all nodes in a radius of 2 is no greater than 2."
 
 #: ../../data/txts/tips/editor.lua:44
 msgid ""
 "You can place a large building on any node where you could place a medium "
-"building if there is no obstacle or unbuildable terrain towards the west, "
+"building if there is no obstacle or non-arable terrain towards the west, "
 "northwest and northeast."
-msgstr ""
+msgstr "You can place a large building on any node where you could place a medium building if there is no obstacle or non-arable terrain towards the west, northwest and northeast."
 
 #: ../../data/txts/tips/empire.lua:8
 msgid "Always build a forester’s house so you will not run out of logs."
@@ -594,7 +594,7 @@ msgstr "Always build a forester’s house so you will not run out of logs."
 
 #: ../../data/txts/tips/empire.lua:16
 msgid "Empire needs a lot of marble. Keep looking for marble resources."
-msgstr ""
+msgstr "Empire needs a lot of marble. Keep looking for marble resources."
 
 #: ../../data/txts/tips/general_game.lua:4
 msgid ""
@@ -652,16 +652,16 @@ msgstr "Manage your messages more efficiently: press ‘N’ for News to access 
 #: ../../data/txts/tips/general_game.lua:40
 msgctxt "hotkey"
 msgid "1-9"
-msgstr ""
+msgstr "1-9"
 
 #: ../../data/txts/tips/general_game.lua:40
 msgctxt "hotkey"
 msgid "Ctrl+(1-9)"
-msgstr ""
+msgstr "Ctrl+(1-9)"
 
 #: ../../data/txts/tips/general_game.lua:40
 msgid "Press %1% to store important locations, then press %2% to recall them."
-msgstr ""
+msgstr "Press %1% to store important locations, then press %2% to recall them."
 
 #: ../../data/txts/tips/general_game.lua:44
 msgid ""
@@ -673,7 +673,7 @@ msgstr "Removing a road while holding Ctrl lets you remove all flags up to the f
 msgid ""
 "New soldiers are recruited in a barracks. Their abilities can then be "
 "improved in training sites."
-msgstr ""
+msgstr "New soldiers are recruited in a barracks. Their abilities can then be improved in training sites."
 
 #: ../../data/txts/tips/general_game.lua:52
 msgid ""
@@ -700,16 +700,16 @@ msgstr "Some buildings, such as the farm, have a very small work area. If the bu
 #: ../../data/txts/tips/general_game.lua:68
 msgctxt "hotkey"
 msgid "Ctrl+(+/-)"
-msgstr ""
+msgstr "Ctrl+(+/-)"
 
 #: ../../data/txts/tips/general_game.lua:68
 msgctxt "hotkey"
 msgid "Ctrl+0"
-msgstr ""
+msgstr "Ctrl+0"
 
 #: ../../data/txts/tips/general_game.lua:68
 msgid "Zoom in/out with the mouse wheel or %1%. Press %2% to reset the zoom."
-msgstr ""
+msgstr "Zoom in/out with the mouse wheel or %1%. Press %2% to reset the zoom."
 
 #: ../../data/txts/tips/general_game.lua:72
 msgid ""
@@ -717,7 +717,7 @@ msgid ""
 "flag from which they can move by road to a connected warehouse. If there are"
 " no such flags in the vicinity, they will keep wandering around and "
 "eventually die."
-msgstr ""
+msgstr "When a building is destroyed, its workers will start looking for a nearby flag from which they can move by road to a connected warehouse. If there are no such flags in the vicinity, they will keep wandering around and eventually die."
 
 #: ../../data/txts/tips/multiplayer.lua:4
 msgid ""
@@ -741,7 +741,7 @@ msgstr "Use ‘@name’ at the beginning of a chat message to send it to only on
 msgid ""
 "If the game should crash, don't worry! The game will be saved automatically "
 "so that you can reload it afterwards."
-msgstr ""
+msgstr "If the game should crash, don't worry! The game will be saved automatically so that you can reload it afterwards."
 
 #: ../../data/txts/tips/singleplayer.lua:4
 msgid ""

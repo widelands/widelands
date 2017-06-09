@@ -9,9 +9,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-03-03 06:24+0000\n"
-"PO-Revision-Date: 2017-03-03 06:27+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2017-04-13 13:07+0000\n"
+"PO-Revision-Date: 2017-03-30 15:31+0000\n"
+"Last-Translator: Joe Hansen <joedalton2@yahoo.dk>\n"
 "Language-Team: Danish (http://www.transifex.com/widelands/widelands/language/da/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -281,8 +281,8 @@ msgid ""
 msgstr "Du lukker vinduet ved at højreklikke på det. Alle vinduer i Widelands kan lukkes på den måde, undtagen dem med instruktioner, såsom denne. Prøv det!"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:169
-msgid "Lumberjack is Done"
-msgstr "Skovhugger er færdig"
+msgid "The Lumberjack’s Hut is Done"
+msgstr "Skovhuggerhytten er færdig"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:172
 msgid ""
@@ -762,7 +762,7 @@ msgstr "Når du har arkiveret en besked, vil en anden besked blive valgt automat
 msgid ""
 "You can also hold down the Ctrl or Shift key to select multiple messages, or"
 " press Ctrl + A to select them all."
-msgstr ""
+msgstr "Du kan også holde tasterne Ctrl eller Skift nede for at vælge flere beskeder, eller trykke på Ctrl + A for at vælge dem alle."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:409
 msgid ""

@@ -131,12 +131,12 @@ void InputQueueDisplay::draw(RenderTarget& dst) {
 	uint32_t nr_inputs_to_draw = std::min(queue_->get_filled(), cache_size_);
 	uint32_t nr_empty_to_draw = cache_size_ - nr_inputs_to_draw;
 
-	Vector2f point;
+	Vector2i point = Vector2i::zero();
 	point.x = Border + (show_only_ ? 0 : CellWidth + CellSpacing);
 	point.y = Border + (total_height_ - 2 * Border - WARE_MENU_PIC_HEIGHT) / 2;
 
 	for (; nr_inputs_to_draw; --nr_inputs_to_draw, point.x += CellWidth + CellSpacing) {
-		dst.blitrect(Vector2f(point.x, point.y), icon_, Recti(0, 0, icon_->width(), icon_->height()),
+		dst.blitrect(Vector2i(point.x, point.y), icon_, Recti(0, 0, icon_->width(), icon_->height()),
 		             BlendMode::UseAlpha);
 	}
 	for (; nr_empty_to_draw; --nr_empty_to_draw, point.x += CellWidth + CellSpacing) {

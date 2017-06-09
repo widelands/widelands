@@ -19,11 +19,16 @@
 #ifndef WL_GRAPHIC_WORDWRAP_H
 #define WL_GRAPHIC_WORDWRAP_H
 
+#include <memory>
 #include <string>
+#include <unicode/uchar.h>
+#include <vector>
 
 #include "base/vector.h"
 #include "graphic/align.h"
-#include "graphic/text_layout.h"
+#include "graphic/color.h"
+#include "graphic/text/sdl_ttf_font.h"
+#include "graphic/text_constants.h"
 
 class RenderTarget;
 
@@ -33,10 +38,10 @@ namespace UI {
  * Helper struct that provides word wrapping and related functionality.
  */
 struct WordWrap {
-	WordWrap();
-	WordWrap(const TextStyle& style, uint32_t wrapwidth = std::numeric_limits<uint32_t>::max());
+	WordWrap(int fontsize = UI_FONT_SIZE_SMALL,
+	         const RGBColor& color = UI_FONT_CLR_FG,
+	         uint32_t wrapwidth = std::numeric_limits<uint32_t>::max());
 
-	void set_style(const TextStyle& style);
 	void set_wrapwidth(uint32_t wrapwidth);
 
 	uint32_t wrapwidth() const;
@@ -77,9 +82,18 @@ private:
 
 	bool line_fits(const std::string& text, uint32_t safety_margin) const;
 
-	TextStyle style_;
+	uint32_t quick_width(const UChar& c) const;
+	uint32_t quick_width(const std::string& text) const;
+
 	uint32_t wrapwidth_;
 	bool draw_caret_;
+
+	// TODO(GunChleoc): We can tie these to constexpr once the old font renderer is gone.
+	const int fontsize_;
+	RGBColor color_;
+
+	// Editor font is sans bold.
+	std::unique_ptr<RT::IFont> font_;
 
 	std::vector<LineData> lines_;
 };

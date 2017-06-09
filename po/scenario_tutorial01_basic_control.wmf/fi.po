@@ -10,9 +10,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-03-03 06:24+0000\n"
-"PO-Revision-Date: 2017-03-03 06:27+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2017-05-19 07:45+0000\n"
+"PO-Revision-Date: 2017-05-21 05:56+0000\n"
+"Last-Translator: Jukka Pakarinen\n"
 "Language-Team: Finnish (http://www.transifex.com/widelands/widelands/language/fi/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -282,8 +282,8 @@ msgid ""
 msgstr "Sulkeaksesi ruudun, paina vain oikeaa näppäintä sen päällä. Kaikki Widelandsin ruudut voi sulkea sillä tavalla lukuun ottamatta ohjeruutuja, kuten tämä. Kokeile nyt!"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:169
-msgid "Lumberjack is Done"
-msgstr "Puunhakkaaja on valmis"
+msgid "The Lumberjack’s Hut is Done"
+msgstr "Puunhakkaajan Maja on Valmis"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:172
 msgid ""
@@ -763,7 +763,7 @@ msgstr "Kun olet arkistoinut viestin, toinen viesti valitaan automaattisesti lis
 msgid ""
 "You can also hold down the Ctrl or Shift key to select multiple messages, or"
 " press Ctrl + A to select them all."
-msgstr ""
+msgstr "Voit myös pitää Ctrl tai Shift näppäintä pohjassa valitaksesi useita viestejä tai paina Ctrl + A valitaksesi ne kaikki."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:409
 msgid ""
@@ -1034,5 +1034,5 @@ msgstr "“%s”"
 #: ../../data/scripting/format_scenario.lua:84
 msgid "New Objective"
 msgid_plural "New Objectives"
-msgstr[0] "Uudet tavoitteet"
-msgstr[1] "Uudet tavoitteet"
+msgstr[0] "Uusi Tavoite"
+msgstr[1] "Uudet Tavoitteet"
