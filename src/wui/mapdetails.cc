@@ -56,7 +56,7 @@ std::string as_content(const std::string& txt, MapDetails::Style style) {
 	switch (style) {
 	case MapDetails::Style::kFsMenu:
 		return (boost::format(
-		           "<p><font size=%i bold=1 color=D1D1D1 shadow=1><vspace gap=2>%s</font></p>") %
+		           "<p><font size=%i color=D1D1D1 shadow=1><vspace gap=2>%s</font></p>") %
 		        UI_FONT_SIZE_SMALL % richtext_escape(txt))
 		   .str();
 	case MapDetails::Style::kWui:
@@ -81,7 +81,7 @@ MapDetails::MapDetails(Panel* parent, int32_t x, int32_t y, int32_t w, int32_t h
                  0,
                  "",
                  UI::Align::kLeft,
-                 g_gr->images().get("images/ui_basic/but3.png"),
+                 g_gr->images().get("images/ui_fsmenu/button_menu.png"),
                  UI::MultilineTextarea::ScrollMode::kNoScrolling),
      descr_(&main_box_, 0, 0, UI::Scrollbar::kSize, 0, ""),
      suggested_teams_box_(
