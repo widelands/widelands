@@ -78,6 +78,8 @@ public:
 		pf_handle_textinput = 1024,
 	};
 
+	enum class Style { kFsMenu, kWui };
+
 	Panel(Panel* const nparent,
 	      int32_t const nx,
 	      int32_t const ny,

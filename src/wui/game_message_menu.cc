@@ -62,7 +62,7 @@ GameMessageMenu::GameMessageMenu(InteractivePlayer& plr, UI::UniqueWindow::Regis
 
 	list = new UI::Table<uintptr_t>(
 	   this, kPadding, kButtonSize + 2 * kPadding, kWindowWidth - 2 * kPadding, kTableHeight,
-	   g_gr->images().get("images/wui/button_secondary.png"), UI::TableRows::kMulti);
+	   UI::Panel::Style::kWui, UI::TableRows::kMulti);
 	list->selected.connect(boost::bind(&GameMessageMenu::selected, this, _1));
 	list->double_clicked.connect(boost::bind(&GameMessageMenu::double_clicked, this, _1));
 	list->add_column(kWindowWidth - 2 * kPadding - 60 - 60 - 75, _("Title"));

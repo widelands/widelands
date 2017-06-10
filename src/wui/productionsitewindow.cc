@@ -79,7 +79,7 @@ void ProductionSiteWindow::init(bool avoid_fastclick) {
 		worker_table_ = nullptr;
 	} else {
 		UI::Box* worker_box = new UI::Box(get_tabs(), 0, 0, UI::Box::Vertical);
-		worker_table_ = new UI::Table<uintptr_t>(worker_box, 0, 0, 0, 100);
+		worker_table_ = new UI::Table<uintptr_t>(worker_box, 0, 0, 0, 100, UI::Panel::Style::kWui);
 		worker_caps_ = new UI::Box(worker_box, 0, 0, UI::Box::Horizontal);
 
 		worker_table_->add_column(

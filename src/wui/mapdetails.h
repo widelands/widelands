@@ -31,16 +31,14 @@
  */
 class MapDetails : public UI::Panel {
 public:
-	enum class Style { kFsMenu, kWui };
-
-	MapDetails(Panel* parent, int32_t x, int32_t y, int32_t w, int32_t h, Style style);
+	MapDetails(UI::Panel* parent, int32_t x, int32_t y, int32_t w, int32_t h, UI::Panel::Style style);
 
 	void clear();
 	void update(const MapData& mapdata, bool localize_mapname);
 
 private:
 	void layout() override;
-	const Style style_;
+	const UI::Panel::Style style_;
 	const int padding_;
 
 	UI::Box main_box_;

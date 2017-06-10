@@ -51,7 +51,7 @@ GameSummaryScreen::GameSummaryScreen(InteractiveGameBase* parent, UI::UniqueWind
 	vbox->add_space(PADDING);
 
 	UI::Box* hbox1 = new UI::Box(this, 0, 0, UI::Box::Horizontal);
-	players_table_ = new UI::Table<uintptr_t const>(hbox1, 0, 0, 0, 0);
+	players_table_ = new UI::Table<uintptr_t const>(hbox1, 0, 0, 0, 0, UI::Panel::Style::kWui);
 	players_table_->fit_height(game_.player_manager()->get_players_end_status().size());
 	hbox1->add_space(PADDING);
 	hbox1->add(players_table_);

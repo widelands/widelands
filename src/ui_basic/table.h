@@ -58,7 +58,7 @@ public:
 	      int32_t y,
 	      uint32_t w,
 	      uint32_t h,
-	      const Image* button_background = g_gr->images().get("images/ui_fsmenu/button_menu.png"),
+	      Panel::Style style,
 	      TableRows rowtype = TableRows::kSingle);
 	~Table();
 
@@ -168,7 +168,7 @@ public:
 	      int32_t y,
 	      uint32_t w,
 	      uint32_t h,
-	      const Image* button_background = g_gr->images().get("images/ui_fsmenu/button_menu.png"),
+	      Panel::Style style,
 	      TableRows rowtype = TableRows::kSingle);
 	~Table();
 
@@ -328,9 +328,9 @@ public:
 	      int32_t y,
 	      uint32_t w,
 	      uint32_t h,
-	      const Image* button_background = g_gr->images().get("images/ui_fsmenu/button_menu.png"),
+	      Panel::Style style,
 	      TableRows rowtype = TableRows::kSingle)
-	   : Base(parent, x, y, w, h, button_background, rowtype) {
+	   : Base(parent, x, y, w, h, style, rowtype) {
 	}
 
 	EntryRecord& add(Entry const* const entry = 0, bool const select_this = false) {
@@ -358,9 +358,9 @@ public:
 	      int32_t y,
 	      uint32_t w,
 	      uint32_t h,
-	      const Image* button_background = g_gr->images().get("images/ui_fsmenu/button_menu.png"),
+	      Panel::Style style,
 	      TableRows rowtype = TableRows::kSingle)
-	   : Base(parent, x, y, w, h, button_background, rowtype) {
+	   : Base(parent, x, y, w, h, style, rowtype) {
 	}
 
 	EntryRecord& add(Entry* const entry = 0, bool const select_this = false) {
@@ -388,9 +388,9 @@ public:
 	      int32_t y,
 	      uint32_t w,
 	      uint32_t h,
-	      const Image* button_background = g_gr->images().get("images/ui_fsmenu/button_menu.png"),
+	      Panel::Style style,
 	      TableRows rowtype = TableRows::kSingle)
-	   : Base(parent, x, y, w, h, button_background, rowtype) {
+	   : Base(parent, x, y, w, h, style, rowtype) {
 	}
 
 	EntryRecord& add(const Entry& entry, bool const select_this = false) {
@@ -422,9 +422,9 @@ public:
 	      int32_t y,
 	      uint32_t w,
 	      uint32_t h,
-	      const Image* button_background = g_gr->images().get("images/ui_fsmenu/button_menu.png"),
+	      Panel::Style style,
 	      TableRows rowtype = TableRows::kSingle)
-	   : Base(parent, x, y, w, h, button_background, rowtype) {
+	   : Base(parent, x, y, w, h, style, rowtype) {
 	}
 
 	EntryRecord& add(Entry& entry, bool const select_this = false) {
@@ -458,9 +458,9 @@ public:
 	      int32_t y,
 	      uint32_t w,
 	      uint32_t h,
-	      const Image* button_background = g_gr->images().get("images/ui_fsmenu/button_menu.png"),
+	      Panel::Style style,
 	      TableRows rowtype = TableRows::kSingle)
-	   : Base(parent, x, y, w, h, button_background, rowtype) {
+	   : Base(parent, x, y, w, h, style, rowtype) {
 	}
 
 	EntryRecord& add(uintptr_t const entry, bool const select_this = false) {
@@ -490,9 +490,9 @@ public:
 	      int32_t y,
 	      uint32_t w,
 	      uint32_t h,
-	      const Image* button_background = g_gr->images().get("images/ui_fsmenu/button_menu.png"),
+	      Panel::Style style,
 	      TableRows rowtype = TableRows::kSingle)
-	   : Base(parent, x, y, w, h, button_background, rowtype) {
+	   : Base(parent, x, y, w, h, style, rowtype) {
 	}
 };
 }

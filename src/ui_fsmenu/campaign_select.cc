@@ -42,7 +42,7 @@
  */
 FullscreenMenuCampaignSelect::FullscreenMenuCampaignSelect()
    : FullscreenMenuLoadMapOrGame(),
-     table_(this, tablex_, tabley_, tablew_, tableh_),
+     table_(this, tablex_, tabley_, tablew_, tableh_, UI::Panel::Style::kFsMenu),
 
      // Main Title
      title_(this, get_w() / 2, tabley_ / 3, _("Choose a campaign"), UI::Align::kCenter),
@@ -265,7 +265,7 @@ bool FullscreenMenuCampaignSelect::compare_difficulty(uint32_t rowa, uint32_t ro
  */
 FullscreenMenuCampaignMapSelect::FullscreenMenuCampaignMapSelect(bool is_tutorial)
    : FullscreenMenuLoadMapOrGame(),
-     table_(this, tablex_, tabley_, tablew_, tableh_),
+     table_(this, tablex_, tabley_, tablew_, tableh_, UI::Panel::Style::kFsMenu),
 
      // Main title
      title_(this,

@@ -47,16 +47,16 @@ Table<void*>::Table(Panel* const parent,
                     int32_t y,
                     uint32_t w,
                     uint32_t h,
-                    const Image* button_background,
+                    Panel::Style style,
                     TableRows rowtype)
    : Panel(parent, x, y, w, h),
      total_width_(0),
      headerheight_(text_height() + 4),
      lineheight_(text_height()),
-     button_background_(button_background),
+     button_background_(style == Panel::Style::kFsMenu ? g_gr->images().get("images/ui_fsmenu/button_menu.png") : g_gr->images().get("images/wui/button_secondary.png")),
      scrollbar_(nullptr),
      scrollbar_filler_button_(
-        new Button(this, "", 0, 0, Scrollbar::kSize, headerheight_, button_background, "")),
+        new Button(this, "", 0, 0, Scrollbar::kSize, headerheight_, button_background_, "")),
      scrollpos_(0),
      selection_(no_selection_index()),
      last_multiselect_(no_selection_index()),
@@ -71,7 +71,7 @@ Table<void*>::Table(Panel* const parent,
 	set_can_focus(true);
 	scrollbar_filler_button_->set_visible(false);
 	scrollbar_ = new Scrollbar(this, get_w() - Scrollbar::kSize, headerheight_, Scrollbar::kSize,
-	                           get_h() - headerheight_, button_background);
+	                           get_h() - headerheight_, button_background_);
 	scrollbar_->moved.connect(boost::bind(&Table::set_scrollpos, this, _1));
 	scrollbar_->set_steps(1);
 	scrollbar_->set_singlestepsize(lineheight_);

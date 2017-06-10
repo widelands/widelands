@@ -90,7 +90,7 @@ FullscreenMenuLoadGame::FullscreenMenuLoadGame(Widelands::Game& g,
             tabley_,
             tablew_,
             tableh_,
-            g_gr->images().get("images/ui_fsmenu/button_menu.png"),
+            UI::Panel::Style::kFsMenu,
             UI::TableRows::kMultiDescending),
 
      is_replay_(is_replay),
