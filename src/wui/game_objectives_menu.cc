@@ -40,7 +40,7 @@ GameObjectivesMenu::GameObjectivesMenu(UI::Panel* parent, UI::UniqueWindow::Regi
                       580,
                       5 + OBJECTIVE_LIST + 5 + FULL_OBJECTIVE_TEXT + 5 + BUTTON_HEIGHT + 5,
                       _("Objectives")),
-     list(this, 5, 5, get_inner_w() - 10, OBJECTIVE_LIST, g_gr->images().get("images/wui/button_secondary.png")),
+     list(this, 5, 5, get_inner_w() - 10, OBJECTIVE_LIST, UI::Panel::Style::kWui),
      objectivetext(this,
                    5,
                    130,

@@ -91,7 +91,7 @@ FullscreenMenuInternetLobby::FullscreenMenuInternetLobby(char const* const nick,
 
      // List
      clientsonline_list_(this, get_w() * 4 / 125, get_h() / 5, lisw_, get_h() * 3 / 10, UI::Panel::Style::kFsMenu),
-     opengames_list_(this, get_w() * 17 / 25, get_h() / 5, butw_, get_h() * 7 / 20),
+     opengames_list_(this, get_w() * 17 / 25, get_h() / 5, butw_, get_h() * 7 / 20, UI::Panel::Style::kFsMenu),
 
      // The chat UI
      chat(this,

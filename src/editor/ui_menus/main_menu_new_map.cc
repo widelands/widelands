@@ -71,7 +71,7 @@ MainMenuNewMap::MainMenuNewMap(EditorInteractive& parent)
              UI::SpinBox::Units::kNone,
              g_gr->images().get("images/wui/button_secondary.png"),
              UI::SpinBox::Type::kValueList),
-     list_(&box_, 0, 0, box_width_, 330),
+     list_(&box_, 0, 0, box_width_, 330, UI::Panel::Style::kWui),
      // Buttons
      button_box_(&box_, 0, 0, UI::Box::Horizontal, 0, 0, margin_),
      ok_button_(&button_box_,

@@ -82,7 +82,7 @@ MainMenuMapOptions::MainMenuMapOptions(EditorInteractive& parent, bool modal)
                  0,
                  max_w_,
                  60,
-                 g_gr->images().get("images/wui/button_secondary.png"),
+                 UI::Panel::Style::kWui,
                  UI::ListselectLayout::kShowCheck),
 
      modal_(modal) {

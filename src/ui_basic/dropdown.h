@@ -48,8 +48,7 @@ protected:
 	/// dropdowns, this is both the width and the height of the button.
 	/// \param label              a label to prefix to the selected entry on the display button.
 	/// \param type               whether this is a textual or pictorial dropdown
-	/// \param background         the background image for this dropdown
-	/// \param button_background  the background image all buttons in this dropdown
+	/// \param style              the style used for buttons and background
 	BaseDropdown(Panel* parent,
 	             int32_t x,
 	             int32_t y,
@@ -58,8 +57,7 @@ protected:
 	             int button_dimension,
 	             const std::string& label,
 	             const DropdownType type,
-	             const Image* background,
-	             const Image* button_background);
+	             Panel::Style style);
 	~BaseDropdown();
 
 public:
@@ -175,8 +173,7 @@ public:
 	/// dropdowns, this is both the width and the height of the button.
 	/// \param label              a label to prefix to the selected entry on the display button.
 	/// \param type               whether this is a textual or pictorial dropdown
-	/// \param background         the background image for this dropdown
-	/// \param button_background  the background image all buttons in this dropdown
+	/// \param style              the style used for buttons and background
 	Dropdown(Panel* parent,
 	         int32_t x,
 	         int32_t y,
@@ -184,9 +181,8 @@ public:
 	         uint32_t list_h,
 	         int button_dimension,
 	         const std::string& label,
-	         const DropdownType type = DropdownType::kTextual,
-	         const Image* background = g_gr->images().get("images/ui_fsmenu/background_light.png"),
-	         const Image* button_background = g_gr->images().get("images/ui_fsmenu/button_menu.png"))
+	         const DropdownType type,
+				Panel::Style style)
 	   : BaseDropdown(parent,
 	                  x,
 	                  y,
@@ -195,8 +191,7 @@ public:
 	                  button_dimension,
 	                  label,
 	                  type,
-	                  background,
-	                  button_background) {
+	                  style) {
 	}
 	~Dropdown() {
 		entry_cache_.clear();
