@@ -54,7 +54,7 @@ BaseListselect::BaseListselect(Panel* const parent,
                                const ListselectLayout selection_mode)
    : Panel(parent, x, y, w, h),
      lineheight_(text_height() + kMargin),
-     scrollbar_(this, get_w() - Scrollbar::kSize, 0, Scrollbar::kSize, h, g_gr->images().get(style == Panel::Style::kFsMenu ? "images/ui_fsmenu/button_menu.png" : "images/wui/button_secondary.png")),
+     scrollbar_(this, get_w() - Scrollbar::kSize, 0, Scrollbar::kSize, h, style),
      scrollpos_(0),
      selection_(no_selection_index()),
      last_click_time_(-10000),

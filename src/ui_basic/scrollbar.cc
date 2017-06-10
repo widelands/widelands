@@ -43,7 +43,7 @@ Scrollbar::Scrollbar(Panel* const parent,
                      int32_t const y,
                      uint32_t const w,
                      uint32_t const h,
-                     const Image* button_background,
+                     Style style,
                      bool const horiz)
    : Panel(parent, x, y, w, h),
      horizontal_(horiz),
@@ -60,7 +60,7 @@ Scrollbar::Scrollbar(Panel* const parent,
                                            "images/ui_basic/scrollbar_up.png")),
      pic_plus_(g_gr->images().get(horiz ? "images/ui_basic/scrollbar_right.png" :
                                           "images/ui_basic/scrollbar_down.png")),
-     pic_buttons_(button_background) {
+     pic_buttons_(g_gr->images().get(style == Panel::Style::kFsMenu ? "images/ui_fsmenu/button_menu.png" : "images/wui/button_secondary.png")) {
 	set_thinks(true);
 	layout();
 }

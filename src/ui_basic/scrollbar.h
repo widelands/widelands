@@ -43,7 +43,7 @@ public:
 	          int32_t y,
 	          uint32_t w,
 	          uint32_t h,
-	          const Image* button_background = g_gr->images().get("images/ui_fsmenu/button_menu.png"),
+	          Style style,
 	          bool horiz = false);
 
 	boost::signals2::signal<void(int32_t)> moved;
@@ -91,7 +91,6 @@ private:
 	bool
 	handle_mousemove(uint8_t state, int32_t mx, int32_t my, int32_t xdiff, int32_t ydiff) override;
 
-private:
 	bool horizontal_;
 	bool force_draw_;  // draw this scrollbar, even if it can't do anything
 

@@ -47,7 +47,7 @@ MultilineTextarea::MultilineTextarea(Panel* const parent,
      align_(align),
      force_new_renderer_(false),
      use_old_renderer_(false),
-     scrollbar_(this, get_w() - Scrollbar::kSize, 0, Scrollbar::kSize, h, g_gr->images().get(style == Panel::Style::kFsMenu ? "images/ui_fsmenu/button_menu.png" : "images/wui/button_secondary.png"), false),
+     scrollbar_(this, get_w() - Scrollbar::kSize, 0, Scrollbar::kSize, h, style, false),
      scrollmode_(scroll_mode),
      pic_background_(nullptr) {
 	assert(scrollmode_ == MultilineTextarea::ScrollMode::kNoScrolling || Scrollbar::kSize <= w);
