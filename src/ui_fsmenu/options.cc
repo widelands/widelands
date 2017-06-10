@@ -155,7 +155,7 @@ FullscreenMenuOptions::FullscreenMenuOptions(OptionsCtrl::OptionsStruct opt)
      fullscreen_(&box_interface_, Vector2i::zero(), _("Fullscreen"), "", 0),
      inputgrab_(&box_interface_, Vector2i::zero(), _("Grab Input"), "", 0),
 
-     sb_maxfps_(&box_interface_, 0, 0, 0, 0, opt.maxfps, 0, 99, _("Maximum FPS:")),
+     sb_maxfps_(&box_interface_, 0, 0, 0, 0, opt.maxfps, 0, 99, UI::Panel::Style::kFsMenu, _("Maximum FPS:")),
 
      // Windows options
      snap_win_overlap_only_(
@@ -170,6 +170,7 @@ FullscreenMenuOptions::FullscreenMenuOptions(OptionsCtrl::OptionsStruct opt)
                    opt.panel_snap_distance,
                    0,
                    99,
+						 UI::Panel::Style::kFsMenu,
                    _("Distance for windows to snap to other panels:"),
                    UI::SpinBox::Units::kPixels),
 
@@ -181,6 +182,7 @@ FullscreenMenuOptions::FullscreenMenuOptions(OptionsCtrl::OptionsStruct opt)
                     opt.border_snap_distance,
                     0,
                     99,
+						  UI::Panel::Style::kFsMenu,
                     _("Distance for windows to snap to borders:"),
                     UI::SpinBox::Units::kPixels),
 
@@ -198,9 +200,9 @@ FullscreenMenuOptions::FullscreenMenuOptions(OptionsCtrl::OptionsStruct opt)
                   opt.autosave / 60,
                   0,
                   100,
+						UI::Panel::Style::kFsMenu,
                   _("Save game automatically every:"),
                   UI::SpinBox::Units::kMinutes,
-                  g_gr->images().get("images/ui_fsmenu/button_menu.png"),
                   UI::SpinBox::Type::kBig),
 
      sb_rolling_autosave_(&box_saving_,
@@ -211,9 +213,9 @@ FullscreenMenuOptions::FullscreenMenuOptions(OptionsCtrl::OptionsStruct opt)
                           opt.rolling_autosave,
                           1,
                           20,
+								  UI::Panel::Style::kFsMenu,
                           _("Maximum number of autosave files:"),
                           UI::SpinBox::Units::kNone,
-                          g_gr->images().get("images/ui_fsmenu/button_menu.png"),
                           UI::SpinBox::Type::kBig),
 
      zip_(&box_saving_,

@@ -56,9 +56,9 @@ public:
 	        int32_t startval,
 	        int32_t minval,
 	        int32_t maxval,
+			  Style style,
 	        const std::string& label_text = std::string(),
 	        const Units& unit = Units::kNone,
-	        const Image* button_background = g_gr->images().get("images/ui_fsmenu/button_menu.png"),
 	        SpinBox::Type = SpinBox::Type::kSmall,
 	        // The amount by which units are increased/decreased for small and big steps when a
 	        // button is pressed.
