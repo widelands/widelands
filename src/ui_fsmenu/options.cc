@@ -123,7 +123,7 @@ FullscreenMenuOptions::FullscreenMenuOptions(OptionsCtrl::OptionsStruct opt)
            0,
            100,  // 100 is arbitrary, will be resized in layout().
            100,
-           g_gr->images().get("images/ui_fsmenu/background_light.png"),
+           UI::TabPanel::Style::kFsMenu,
            UI::TabPanel::Type::kBorder),
 
      box_interface_(&tabs_, 0, 0, UI::Box::Vertical, 0, 0, padding_),

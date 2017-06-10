@@ -27,6 +27,7 @@
 #include "logic/map_objects/tribes/building.h"
 #include "notifications/notifications.h"
 #include "ui_basic/button.h"
+#include "ui_basic/tabpanel.h"
 #include "ui_basic/unique_window.h"
 #include "wui/field_overlay_manager.h"
 #include "wui/interactive_gamebase.h"

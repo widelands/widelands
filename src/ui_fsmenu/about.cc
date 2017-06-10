@@ -33,7 +33,7 @@ FullscreenMenuAbout::FullscreenMenuAbout()
            0,
            0,
            0,
-           g_gr->images().get("images/ui_fsmenu/background_light.png"),
+           UI::TabPanel::Style::kFsMenu,
            UI::TabPanel::Type::kBorder) {
 	title_.set_fontsize(UI_FONT_SIZE_BIG);
 	tabs_.add_tab("txts/README.lua");

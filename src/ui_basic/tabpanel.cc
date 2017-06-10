@@ -20,6 +20,7 @@
 #include "ui_basic/tabpanel.h"
 
 #include "graphic/font_handler1.h"
+#include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
 #include "graphic/text_layout.h"
 #include "ui_basic/mouse_constants.h"
@@ -92,26 +93,35 @@ bool Tab::handle_mousepress(uint8_t, int32_t, int32_t) {
 TabPanel::TabPanel(Panel* const parent,
                    int32_t const x,
                    int32_t const y,
-                   const Image* background,
+                   Style style,
                    TabPanel::Type border_type)
-   : Panel(parent, x, y, 0, 0),
-     border_type_(border_type),
-     active_(0),
-     highlight_(kNotFound),
-     pic_background_(background) {
+   : TabPanel(parent, x, y, 0, 0, style, border_type) {
 }
 TabPanel::TabPanel(Panel* const parent,
                    int32_t const x,
                    int32_t const y,
                    int32_t const w,
                    int32_t const h,
-                   const Image* background,
+                   Style style,
                    TabPanel::Type border_type)
    : Panel(parent, x, y, w, h),
      border_type_(border_type),
      active_(0),
-     highlight_(kNotFound),
-     pic_background_(background) {
+     highlight_(kNotFound) {
+	switch (style) {
+	case TabPanel::Style::kFsMenu:
+		pic_background_ = g_gr->images().get("images/wui/button_secondary.png");
+		break;
+	case TabPanel::Style::kWuiLight:
+		pic_background_ = g_gr->images().get("images/wui/window_background.png");
+		break;
+	case TabPanel::Style::kWuiMedium:
+		pic_background_ = g_gr->images().get("images/wui/window_background_dark.png");
+		break;
+	case TabPanel::Style::kWuiDark:
+		pic_background_ = g_gr->images().get("images/wui/button_secondary.png");
+		break;
+	}
 }
 
 /**
@@ -258,21 +268,20 @@ void TabPanel::draw(RenderTarget& dst) {
 	static_assert(2 < kTabPanelButtonHeight, "assert(2 < kTabPanelButtonSize) failed.");
 	static_assert(4 < kTabPanelButtonHeight, "assert(4 < kTabPanelButtonSize) failed.");
 
-	if (pic_background_) {
-		if (!tabs_.empty()) {
-			dst.tile(Recti(Vector2i::zero(), tabs_.back()->get_x() + tabs_.back()->get_w(),
-			               kTabPanelButtonHeight - 2),
-			         pic_background_, Vector2i(get_x(), get_y()));
-		}
-		assert(kTabPanelButtonHeight - 2 <= get_h());
-		dst.tile(Recti(Vector2i(0, kTabPanelButtonHeight - 2), get_w(),
-		               get_h() - kTabPanelButtonHeight + 2),
-		         pic_background_, Vector2i(get_x(), get_y() + kTabPanelButtonHeight - 2));
+	// Tile the background image
+	if (!tabs_.empty()) {
+		dst.tile(Recti(Vector2i::zero(), tabs_.back()->get_x() + tabs_.back()->get_w(),
+							kTabPanelButtonHeight - 2),
+					pic_background_, Vector2i(get_x(), get_y()));
 	}
+	assert(kTabPanelButtonHeight - 2 <= get_h());
+	dst.tile(Recti(Vector2i(0, kTabPanelButtonHeight - 2), get_w(),
+						get_h() - kTabPanelButtonHeight + 2),
+				pic_background_, Vector2i(get_x(), get_y() + kTabPanelButtonHeight - 2));
 
+
+	// Draw the buttons
 	RGBColor black(0, 0, 0);
-
-	// draw the buttons
 	float x = 0;
 	int tab_width = 0;
 	for (size_t idx = 0; idx < tabs_.size(); ++idx) {

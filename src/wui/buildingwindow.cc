@@ -98,7 +98,7 @@ void BuildingWindow::init(bool avoid_fastclick) {
 
 	vbox_.reset(new UI::Box(this, 0, 0, UI::Box::Vertical));
 
-	tabs_ = new UI::TabPanel(vbox_.get(), 0, 0, nullptr);
+	tabs_ = new UI::TabPanel(vbox_.get(), 0, 0, UI::TabPanel::Style::kWuiLight);
 	vbox_->add(tabs_, UI::Box::Resizing::kFullSize);
 
 	capsbuttons_ = new UI::Box(vbox_.get(), 0, 0, UI::Box::Horizontal);

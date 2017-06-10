@@ -84,13 +84,14 @@ private:
  */
 struct TabPanel : public Panel {
 	enum class Type { kNoBorder, kBorder };
+	enum class Style { kFsMenu, kWuiLight, kWuiMedium, kWuiDark };
 
 	friend struct Tab;
 
 	TabPanel(Panel* parent,
 	         int32_t x,
 	         int32_t y,
-	         const Image* background,
+	         TabPanel::Style style,
 	         TabPanel::Type border_type = TabPanel::Type::kNoBorder);
 	// For Fullscreen menus
 	TabPanel(Panel* parent,
@@ -98,7 +99,7 @@ struct TabPanel : public Panel {
 	         int32_t y,
 	         int32_t w,
 	         int32_t h,
-	         const Image* background,
+	         TabPanel::Style style,
 	         TabPanel::Type border_type = TabPanel::Type::kNoBorder);
 
 	/** Add textual tab */

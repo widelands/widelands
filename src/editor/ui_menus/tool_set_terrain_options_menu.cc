@@ -36,7 +36,6 @@
 #include "logic/map_objects/world/world.h"
 #include "ui_basic/checkbox.h"
 #include "ui_basic/panel.h"
-#include "ui_basic/tabpanel.h"
 
 namespace {
 

@@ -20,7 +20,6 @@
 #include "wui/dismantlesitewindow.h"
 
 #include "graphic/graphic.h"
-#include "ui_basic/tabpanel.h"
 
 static const char pic_tab_wares[] = "images/wui/buildings/menu_tab_wares.png";
 

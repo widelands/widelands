@@ -33,9 +33,9 @@ FileViewPanel::FileViewPanel(Panel* parent,
                              int32_t y,
                              int32_t w,
                              int32_t h,
-                             const Image* background,
+                             UI::TabPanel::Style style,
                              TabPanel::Type border_type)
-   : TabPanel(parent, x, y, w, h, background, border_type), padding_(5) {
+   : TabPanel(parent, x, y, w, h, style, border_type), padding_(5) {
 	layout();
 }
 

@@ -40,7 +40,7 @@ public:
 	              int32_t y,
 	              int32_t w,
 	              int32_t h,
-	              const Image* background,
+	              Style,
 	              TabPanel::Type border_type = TabPanel::Type::kNoBorder);
 
 	/// Adds a tab with the contents of 'lua_script'.
