@@ -22,23 +22,22 @@
 
 #include <memory>
 
-#include <SDL_net.h>
-
 #include "network/network.h"
 
 /**
  * NetClient manages the network connection for a network game in which this computer
  * participates as a client.
+ * This class only tries to create a single socket, either for IPv4 and IPv6.
+ * Which is used depends on what kind of address is given on call to connect().
  */
 class NetClient {
 public:
 	/**
 	 * Tries to establish a connection to the given host.
-	 * @param ip_address A hostname or an IPv4 address as string.
-	 * @param port The port to connect to.
-	 * @return A pointer to a connected \c NetClient object or a nullptr if the connection failed.
+	 * \param host The host to connect to.
+	 * \return A pointer to a connected \c NetClient object or a \c nullptr if the connection failed.
 	 */
-	static std::unique_ptr<NetClient> connect(const std::string& ip_address, const uint16_t port);
+	static std::unique_ptr<NetClient> connect(const NetAddress& host);
 
 	/**
 	 * Closes the connection.
@@ -48,7 +47,7 @@ public:
 
 	/**
 	 * Returns whether the client is connected.
-	 * @return \c true if the connection is open, \c false otherwise.
+	 * \return \c true if the connection is open, \c false otherwise.
 	 */
 	bool is_connected() const;
 
@@ -60,8 +59,8 @@ public:
 
 	/**
 	 * Tries to receive a packet.
-	 * @param packet A packet that should be overwritten with the received data.
-	 * @return \c true if a packet is available, \c false otherwise.
+	 * \param packet A packet that should be overwritten with the received data.
+	 * \return \c true if a packet is available, \c false otherwise.
 	 *   The given packet is only modified when \c true is returned.
 	 *   Calling this on a closed connection will return false.
 	 */
@@ -70,20 +69,25 @@ public:
 	/**
 	 * Sends a packet.
 	 * Calling this on a closed connection will silently fail.
-	 * @param packet The packet to send.
+	 * \param packet The packet to send.
 	 */
 	void send(const SendPacket& packet);
 
 private:
-	NetClient(const std::string& ip_address, const uint16_t port);
+	/**
+	 * Tries to establish a connection to the given host.
+	 * If the connection attempt failed, is_connected() will return \c false.
+	 * \param host The host to connect to.
+	 */
+	NetClient(const NetAddress& host);
 
-	/// The socket that connects us to the host
-	TCPsocket sock_;
+	/// An io_service needed by boost.asio. Primarily needed for asynchronous operations.
+	boost::asio::io_service io_service_;
 
-	/// Socket set used for selection
-	SDLNet_SocketSet sockset_;
+	/// The socket that connects us to the host.
+	boost::asio::ip::tcp::socket socket_;
 
-	/// Deserializer acts as a buffer for packets (reassembly/splitting up)
+	/// Deserializer acts as a buffer for packets (splitting stream to packets)
 	Deserializer deserializer_;
 };
 
