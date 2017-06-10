@@ -54,9 +54,9 @@ GameMessageMenu::GameMessageMenu(InteractivePlayer& plr, UI::UniqueWindow::Regis
                   kMessageBodyY,
                   kWindowWidth - 2 * kPadding,
                   get_inner_h() - kMessageBodyY - 2 * kPadding - kButtonSize,
+						UI::Panel::Style::kWui,
                   "",
                   UI::Align::kLeft,
-                  g_gr->images().get("images/wui/button_secondary.png"),
                   UI::MultilineTextarea::ScrollMode::kScrollNormalForced),
      mode(Inbox) {
 

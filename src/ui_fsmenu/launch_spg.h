@@ -26,7 +26,6 @@
 #include "graphic/playercolor.h"
 #include "logic/map.h"
 #include "ui_basic/button.h"
-#include "ui_basic/multilinetextarea.h"
 #include "ui_basic/textarea.h"
 #include "ui_fsmenu/launch_game.h"
 

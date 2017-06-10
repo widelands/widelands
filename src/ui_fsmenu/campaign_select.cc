@@ -53,21 +53,24 @@ FullscreenMenuCampaignSelect::FullscreenMenuCampaignSelect()
                   right_column_x_ + indent_,
                   get_y_from_preceding(label_campname_) + padding_,
                   get_right_column_w(right_column_x_) - indent_,
-                  label_height_),
+                  label_height_,
+						UI::Panel::Style::kFsMenu),
 
      label_tribename_(this, right_column_x_, get_y_from_preceding(ta_campname_) + 2 * padding_),
      ta_tribename_(this,
                    right_column_x_ + indent_,
                    get_y_from_preceding(label_tribename_) + padding_,
                    get_right_column_w(right_column_x_ + indent_),
-                   label_height_),
+                   label_height_,
+						 UI::Panel::Style::kFsMenu),
 
      label_difficulty_(this, right_column_x_, get_y_from_preceding(ta_tribename_) + 2 * padding_),
      ta_difficulty_(this,
                     right_column_x_ + indent_,
                     get_y_from_preceding(label_difficulty_) + padding_,
                     get_right_column_w(right_column_x_ + indent_),
-                    2 * label_height_ - padding_),
+                    2 * label_height_ - padding_,
+						  UI::Panel::Style::kFsMenu),
 
      label_description_(this,
                         right_column_x_,
@@ -77,7 +80,8 @@ FullscreenMenuCampaignSelect::FullscreenMenuCampaignSelect()
                      right_column_x_ + indent_,
                      get_y_from_preceding(label_description_) + padding_,
                      get_right_column_w(right_column_x_ + indent_),
-                     buty_ - get_y_from_preceding(label_description_) - 4 * padding_) {
+                     buty_ - get_y_from_preceding(label_description_) - 4 * padding_,
+							UI::Panel::Style::kFsMenu) {
 	title_.set_fontsize(UI_FONT_SIZE_BIG);
 	back_.set_tooltip(_("Return to the main menu"));
 	ok_.set_tooltip(_("Play this campaign"));
@@ -278,6 +282,7 @@ FullscreenMenuCampaignMapSelect::FullscreenMenuCampaignMapSelect(bool is_tutoria
                get_y_from_preceding(title_) + 6 * padding_,
                get_w() * 2 / 3,
                4 * label_height_,
+					UI::Panel::Style::kFsMenu,
                "",
                UI::Align::kCenter),
 
@@ -287,21 +292,24 @@ FullscreenMenuCampaignMapSelect::FullscreenMenuCampaignMapSelect(bool is_tutoria
                  right_column_x_ + indent_,
                  get_y_from_preceding(label_mapname_) + padding_,
                  get_right_column_w(right_column_x_ + indent_),
-                 label_height_),
+                 label_height_,
+					  UI::Panel::Style::kFsMenu),
 
      label_author_(this, right_column_x_, get_y_from_preceding(ta_mapname_) + 2 * padding_),
      ta_author_(this,
                 right_column_x_ + indent_,
                 get_y_from_preceding(label_author_) + padding_,
                 get_right_column_w(right_column_x_ + indent_),
-                2 * label_height_),
+                2 * label_height_,
+					 UI::Panel::Style::kFsMenu),
 
      label_description_(this, right_column_x_, get_y_from_preceding(ta_author_) + padding_),
      ta_description_(this,
                      right_column_x_ + indent_,
                      get_y_from_preceding(label_description_) + padding_,
                      get_right_column_w(right_column_x_ + indent_),
-                     buty_ - get_y_from_preceding(label_description_) - 4 * padding_),
+                     buty_ - get_y_from_preceding(label_description_) - 4 * padding_,
+							UI::Panel::Style::kFsMenu),
 
      is_tutorial_(is_tutorial) {
 	title_.set_fontsize(UI_FONT_SIZE_BIG);

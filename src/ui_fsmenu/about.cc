@@ -33,7 +33,7 @@ FullscreenMenuAbout::FullscreenMenuAbout()
            0,
            0,
            0,
-           UI::TabPanel::Style::kFsMenu,
+           UI::Panel::Style::kFsMenu,
            UI::TabPanel::Type::kBorder) {
 	title_.set_fontsize(UI_FONT_SIZE_BIG);
 	tabs_.add_tab("txts/README.lua");

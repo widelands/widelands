@@ -62,7 +62,7 @@ GameSummaryScreen::GameSummaryScreen(InteractiveGameBase* parent, UI::UniqueWind
 	info_box->add(info_area_label_);
 	info_area_ = new UI::MultilineTextarea(
 	   info_box, 0, 0, 130,
-	   std::max(130, players_table_->get_h() - info_area_label_->get_h() - PADDING), "");
+	   std::max(130, players_table_->get_h() - info_area_label_->get_h() - PADDING), UI::Panel::Style::kWui, "");
 	info_box->add(info_area_, UI::Box::Resizing::kFullSize);
 	info_box->add_space(PADDING);
 	hbox1->add(info_box);

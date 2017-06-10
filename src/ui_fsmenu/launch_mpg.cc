@@ -151,9 +151,9 @@ FullscreenMenuLaunchMPG::FullscreenMenuLaunchMPG(GameSettingsProvider* const set
                         UI::Align::kCenter),
 
      map_info_(
-        this, right_column_x_, get_h() * 2 / 10, butw_, get_h() * 23 / 80 - 2 * label_height_),
+        this, right_column_x_, get_h() * 2 / 10, butw_, get_h() * 23 / 80 - 2 * label_height_, UI::Panel::Style::kFsMenu),
      client_info_(
-        this, right_column_x_, get_h() * 13 / 20 - 2 * label_height_, butw_, 2 * label_height_),
+        this, right_column_x_, get_h() * 13 / 20 - 2 * label_height_, butw_, 2 * label_height_, UI::Panel::Style::kFsMenu),
      help_(nullptr),
 
      // Variables and objects used in the menu

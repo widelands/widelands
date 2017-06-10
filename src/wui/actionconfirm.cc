@@ -133,8 +133,7 @@ ActionConfirm::ActionConfirm(InteractivePlayer& parent,
 	UI::Box* button_box = new UI::Box(main_box, 0, 0, UI::Box::Horizontal);
 
 	UI::MultilineTextarea* textarea =
-	   new UI::MultilineTextarea(main_box, 0, 0, 200, 74, message, UI::Align::kCenter,
-	                             g_gr->images().get("images/wui/button_secondary.png"),
+	   new UI::MultilineTextarea(main_box, 0, 0, 200, 74, UI::Panel::Style::kWui, message, UI::Align::kCenter,
 	                             UI::MultilineTextarea::ScrollMode::kNoScrolling);
 	textarea->force_new_renderer();
 

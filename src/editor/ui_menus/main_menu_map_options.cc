@@ -31,7 +31,6 @@
 #include "logic/map.h"
 #include "ui_basic/editbox.h"
 #include "ui_basic/multilineeditbox.h"
-#include "ui_basic/multilinetextarea.h"
 #include "ui_basic/textarea.h"
 #include "wui/map_tags.h"
 

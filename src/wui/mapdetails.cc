@@ -79,11 +79,11 @@ MapDetails::MapDetails(Panel* parent, int32_t x, int32_t y, int32_t w, int32_t h
                  0,
                  UI::Scrollbar::kSize,
                  0,
+					  style,
                  "",
                  UI::Align::kLeft,
-                 g_gr->images().get("images/ui_fsmenu/button_menu.png"),
                  UI::MultilineTextarea::ScrollMode::kNoScrolling),
-     descr_(&main_box_, 0, 0, UI::Scrollbar::kSize, 0, ""),
+     descr_(&main_box_, 0, 0, UI::Scrollbar::kSize, 0, style, ""),
      suggested_teams_box_(
         new UI::SuggestedTeamsBox(this, 0, 0, UI::Box::Vertical, padding_, 0, w)) {
 	name_label_.force_new_renderer();

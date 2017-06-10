@@ -108,10 +108,10 @@ SpinBox::SpinBox(Panel* const parent,
 	sbi_->background = button_background;
 
 	box_ = new UI::Box(this, 0, 0, UI::Box::Horizontal, 0, 0, padding_);
-
+// NOCOM
 	sbi_->label =
-	   new UI::MultilineTextarea(box_, 0, 0, 0, 0, label_text, UI::Align::kLeft, button_background,
-	                             UI::MultilineTextarea::ScrollMode::kNoScrolling);
+	   new UI::MultilineTextarea(box_, 0, 0, 0, 0, UI::Panel::Style::kWui, label_text,
+	                             UI::Align::kLeft, UI::MultilineTextarea::ScrollMode::kNoScrolling);
 	box_->add(sbi_->label);
 
 	sbi_->text = new UI::Textarea(box_, "", UI::Align::kCenter);

@@ -40,7 +40,7 @@ public:
 	              int32_t y,
 	              int32_t w,
 	              int32_t h,
-	              Style,
+	              UI::Panel::Style style,
 	              TabPanel::Type border_type = TabPanel::Type::kNoBorder);
 
 	/// Adds a tab with the contents of 'lua_script'.
@@ -53,6 +53,7 @@ private:
 	const uint32_t padding_;
 	int contents_width_;
 	int contents_height_;
+	const UI::Panel::Style style_;
 
 	// Tab contents
 	std::vector<std::unique_ptr<Box>> boxes_;

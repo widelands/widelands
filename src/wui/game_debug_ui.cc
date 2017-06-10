@@ -67,9 +67,9 @@ MapObjectDebugPanel::MapObjectDebugPanel(UI::Panel& parent,
           0,
           350,
           200,
+			 UI::Panel::Style::kWui,
           "",
           UI::Align::kLeft,
-          g_gr->images().get("images/wui/button_secondary.png"),
           UI::MultilineTextarea::ScrollMode::kScrollLog) {
 	obj.set_logsink(this);
 }
@@ -213,7 +213,7 @@ FieldDebugWindow::FieldDebugWindow(InteractiveBase& parent, Widelands::Coords co
      coords_(map_.get_fcoords(coords)),
 
      //  setup child panels
-     ui_field_(this, 0, 0, 300, 280, ""),
+     ui_field_(this, 0, 0, 300, 280, UI::Panel::Style::kWui, ""),
 
      ui_immovable_(
         this, "immovable", 0, 280, 300, 24, g_gr->images().get("images/wui/window_background.png"), ""),

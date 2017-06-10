@@ -25,7 +25,6 @@
 #include "graphic/graphic.h"
 #include "io/filesystem/filesystem.h"
 #include "ui_basic/button.h"
-#include "ui_basic/multilinetextarea.h"
 #include "ui_basic/textarea.h"
 
 /// Select a Map, Saved Game or Replay in Fullscreen Mode.

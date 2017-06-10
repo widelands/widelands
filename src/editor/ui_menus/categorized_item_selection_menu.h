@@ -89,9 +89,9 @@ CategorizedItemSelectionMenu<DescriptionType, ToolType>::CategorizedItemSelectio
                               0,
                               20,
                               20,
+										UI::Panel::Style::kWui,
                               "",
                               UI::Align::kCenter,
-                              g_gr->images().get("images/wui/button_secondary.png"),
                               UI::MultilineTextarea::ScrollMode::kNoScrolling),
      tool_(tool) {
 	current_selection_names_.set_background(

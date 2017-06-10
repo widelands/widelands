@@ -73,8 +73,8 @@ WLMessageBox::WLMessageBox(Panel* const parent,
 		scrollmode = MultilineTextarea::ScrollMode::kScrollNormal;
 	}
 
-	textarea_.reset(new MultilineTextarea(this, margin, margin, width - 2 * margin, height, text,
-	                                      align, g_gr->images().get("images/wui/button_secondary.png"),
+	textarea_.reset(new MultilineTextarea(this, margin, margin, width - 2 * margin, height, UI::Panel::Style::kWui, text,
+	                                      align,
 	                                      scrollmode));
 
 	// Now add the buttons

@@ -45,7 +45,7 @@ StoryMessageBox::StoryMessageBox(UI::Panel* const parent,
 
 	set_inner_size(w, h);
 	message_text = new UI::MultilineTextarea(
-	   this, posx, posy, get_inner_w() - posx - spacing, get_inner_h() - posy - 2 * spacing - 50);
+	   this, posx, posy, get_inner_w() - posx - spacing, get_inner_h() - posy - 2 * spacing - 50, UI::Panel::Style::kWui);
 
 	if (message_text)
 		message_text->set_text(body);
