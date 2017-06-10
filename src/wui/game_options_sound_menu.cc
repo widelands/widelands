@@ -42,7 +42,7 @@ GameOptionsSoundMenu::GameOptionsSoundMenu(InteractiveGameBase& gb,
                          0,
                          g_sound_handler.get_max_volume(),
                          g_sound_handler.get_music_volume(),
-                         g_gr->images().get("images/wui/button_secondary.png")),
+                         UI::Panel::Style::kWui),
      ingame_sound_volume_label(this,
                                hmargin(),
                                vmargin() + 2 * (kStateboxSize + vspacing()) + vbigspacing() +
@@ -58,7 +58,7 @@ GameOptionsSoundMenu::GameOptionsSoundMenu(InteractiveGameBase& gb,
                          0,
                          g_sound_handler.get_max_volume(),
                          g_sound_handler.get_fx_volume(),
-                         g_gr->images().get("images/wui/button_secondary.png")) {
+                         UI::Panel::Style::kWui) {
 	ingame_music.set_state(!g_sound_handler.get_disable_music());
 	ingame_sound.set_state(!g_sound_handler.get_disable_fx());
 

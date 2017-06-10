@@ -185,8 +185,7 @@ WareStatisticsMenu::WareStatisticsMenu(InteractivePlayer& parent,
 	   UI::Box::Resizing::kFullSize);
 
 	WuiPlotAreaSlider* slider =
-	   new WuiPlotAreaSlider(this, *plot_production_, 0, 0, kPlotWidth, 45,
-	                         g_gr->images().get("images/wui/button_secondary.png"));
+	   new WuiPlotAreaSlider(this, *plot_production_, 0, 0, kPlotWidth, 45);
 	slider->changedto.connect(boost::bind(&WareStatisticsMenu::set_time, this, _1));
 	box->add(slider, UI::Box::Resizing::kFullSize);
 }

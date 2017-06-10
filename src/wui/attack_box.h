@@ -61,7 +61,6 @@ private:
 	                                                 uint32_t min,
 	                                                 uint32_t max,
 	                                                 uint32_t initial,
-	                                                 char const* picname,
 	                                                 char const* hint);
 	// TODO(GunChleoc): This should also return a unique_ptr
 	UI::Textarea& add_text(UI::Box& parent,
