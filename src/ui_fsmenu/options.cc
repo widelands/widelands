@@ -139,14 +139,18 @@ FullscreenMenuOptions::FullscreenMenuOptions(OptionsCtrl::OptionsStruct opt)
                         100,  // 100 is arbitrary, will be resized in layout().
                         100,  // 100 is arbitrary, will be resized in layout().
                         24,
-                        _("Language")),
+                        _("Language"),
+								UI::DropdownType::kTextual,
+								UI::Panel::Style::kFsMenu),
      resolution_dropdown_(&box_interface_,
                           0,
                           0,
                           100,  // 100 is arbitrary, will be resized in layout().
                           100,  // 100 is arbitrary, will be resized in layout().
                           24,
-                          _("In-game resolution")),
+                          _("In-game resolution"),
+								  UI::DropdownType::kTextual,
+								  UI::Panel::Style::kFsMenu),
 
      fullscreen_(&box_interface_, Vector2i::zero(), _("Fullscreen"), "", 0),
      inputgrab_(&box_interface_, Vector2i::zero(), _("Grab Input"), "", 0),

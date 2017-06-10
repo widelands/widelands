@@ -215,7 +215,7 @@ void FullscreenMenuLaunchMPG::layout() {
 void FullscreenMenuLaunchMPG::set_chat_provider(ChatProvider& chat) {
 	delete chat_;
 	chat_ = new GameChatPanel(
-	   this, get_w() / 50, get_h() * 13 / 20, get_w() * 57 / 80, get_h() * 3 / 10, chat);
+	   this, get_w() / 50, get_h() * 13 / 20, get_w() * 57 / 80, get_h() * 3 / 10, chat, UI::Panel::Style::kFsMenu);
 }
 
 /**

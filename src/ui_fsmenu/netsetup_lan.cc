@@ -85,7 +85,7 @@ FullscreenMenuNetSetupLAN::FullscreenMenuNetSetupLAN()
                 butw_,
                 buth_,
                 2,
-                g_gr->images().get("images/ui_fsmenu/button_main.png"),
+                Panel::Style::kFsMenu,
                 fs_small()),
      hostname(this,
               get_w() * 16 / 25,
@@ -93,7 +93,7 @@ FullscreenMenuNetSetupLAN::FullscreenMenuNetSetupLAN()
               get_w() * 17 / 80,
               buth_,
               2,
-              g_gr->images().get("images/ui_fsmenu/button_main.png"),
+              Panel::Style::kFsMenu,
               fs_small()),
 
      // List

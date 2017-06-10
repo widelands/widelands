@@ -34,9 +34,9 @@ LoginBox::LoginBox(Panel& parent)
 	ta_nickname = new UI::Textarea(this, margin, margin, _("Nickname:"));
 	ta_password = new UI::Textarea(this, margin, 40, _("Password:"));
 	eb_nickname = new UI::EditBox(
-	   this, 150, margin, 330, 20);
+	   this, 150, margin, 330, 20, 2, Panel::Style::kWui);
 	eb_password =
-	   new UI::EditBox(this, 150, 40, 330, 20);
+	   new UI::EditBox(this, 150, 40, 330, 20, 2, Panel::Style::kWui);
 
 	pwd_warning = new UI::MultilineTextarea(
 	   this, margin, 65, 505, 50, _("WARNING: Password will be shown and saved readable!"));

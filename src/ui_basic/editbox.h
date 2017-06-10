@@ -47,9 +47,9 @@ struct EditBox : public Panel {
 	        int32_t x,
 	        int32_t y,
 	        uint32_t w,
-	        uint32_t h = 0,
-	        int margin_y = 2,
-	        const Image* background = g_gr->images().get("images/wui/button_secondary.png"),
+	        uint32_t h,
+	        int margin_y,
+	        UI::Panel::Style style,
 	        int font_size = UI_FONT_SIZE_SMALL);
 	virtual ~EditBox();
 

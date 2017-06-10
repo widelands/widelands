@@ -86,7 +86,7 @@ FullscreenMenuInternetLobby::FullscreenMenuInternetLobby(char const* const nick,
                       butw_,
                       buth_,
                       2,
-                      g_gr->images().get("images/ui_fsmenu/button_main.png"),
+                      Panel::Style::kFsMenu,
                       fs_),
 
      // List
@@ -99,7 +99,8 @@ FullscreenMenuInternetLobby::FullscreenMenuInternetLobby(char const* const nick,
           get_h() * 51 / 100,
           lisw_,
           get_h() * 44 / 100,
-          InternetGaming::ref()),
+          InternetGaming::ref(),
+			 UI::Panel::Style::kFsMenu),
 
      // Login information
      nickname_(nick),

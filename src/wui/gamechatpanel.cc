@@ -32,7 +32,7 @@ GameChatPanel::GameChatPanel(UI::Panel* parent,
                              int32_t const y,
                              uint32_t const w,
                              uint32_t const h,
-                             ChatProvider& chat)
+                             ChatProvider& chat, Style style)
    : UI::Panel(parent, x, y, w, h),
      chat_(chat),
      chatbox(this,
@@ -44,7 +44,7 @@ GameChatPanel::GameChatPanel(UI::Panel* parent,
              UI::Align::kLeft,
              g_gr->images().get("images/wui/button_secondary.png"),
              UI::MultilineTextarea::ScrollMode::kScrollLogForced),
-     editbox(this, 0, h - 20, w, 20),
+     editbox(this, 0, h - 20, w, 20, 2, style),
      chat_message_counter(std::numeric_limits<uint32_t>::max()) {
 	editbox.ok.connect(boost::bind(&GameChatPanel::key_enter, this));
 	editbox.cancel.connect(boost::bind(&GameChatPanel::key_escape, this));

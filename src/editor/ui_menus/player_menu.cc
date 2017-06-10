@@ -144,7 +144,7 @@ void EditorPlayerMenu::update() {
 		int32_t posx = spacing;
 		if (!plr_names_[p - 1]) {
 			plr_names_[p - 1] = new UI::EditBox(
-			   this, posx, posy, 140, size);
+			   this, posx, posy, 140, size, 2, Panel::Style::kWui);
 			plr_names_[p - 1]->changed.connect(
 			   boost::bind(&EditorPlayerMenu::name_changed, this, p - 1));
 			posx += 140 + spacing;

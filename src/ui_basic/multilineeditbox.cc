@@ -87,7 +87,7 @@ MultilineEditbox::MultilineEditbox(Panel* parent,
                                    uint32_t w,
                                    uint32_t h)
    : Panel(parent, x, y, w, h), d_(new Data(*this, g_gr->images().get("images/wui/button_secondary.png"))) {
-	d_->background = g_gr->images().get("images/wui/button_secondary.png"); // NOCOM
+	d_->background = g_gr->images().get("images/wui/button_secondary.png");
 	d_->lineheight = text_height();
 	set_handle_mouse(true);
 	set_can_focus(true);

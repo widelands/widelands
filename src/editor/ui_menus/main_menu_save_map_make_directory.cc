@@ -45,7 +45,7 @@ MainMenuSaveMapMakeDirectory::MainMenuSaveMapMakeDirectory(UI::Panel* const pare
            get_inner_w() - 2 * padding_,
            0,
            4,
-			  g_gr->images().get("images/wui/button_secondary.png")),
+			  Panel::Style::kWui),
      ok_button_(this,
                 "ok",
                 UI::g_fh1->fontset()->is_rtl() ? padding_ : get_inner_w() - butw_ - padding_,

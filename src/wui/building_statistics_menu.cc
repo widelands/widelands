@@ -89,7 +89,7 @@ BuildingStatisticsMenu::BuildingStatisticsMenu(InteractivePlayer& parent,
         35,
         0,
         1,
-        g_gr->images().get("images/wui/button_secondary.png"),
+        Panel::Style::kWui,
         kLabelFontSize - UI::g_fh1->fontset()->size_offset()),  // We need consistent height here
      unproductive_label2_(
         &unproductive_box_,

@@ -73,8 +73,8 @@ MainMenuMapOptions::MainMenuMapOptions(EditorInteractive& parent, bool modal)
      tags_box_(&tabs_, padding_, padding_, UI::Box::Vertical, max_w_, get_inner_h(), 0),
      teams_box_(&tabs_, padding_, padding_, UI::Box::Vertical, max_w_, get_inner_h(), 0),
 
-     name_(&main_box_, 0, 0, max_w_),
-     author_(&main_box_, 0, 0, max_w_),
+     name_(&main_box_, 0, 0, max_w_, 0, 2, Panel::Style::kWui),
+     author_(&main_box_, 0, 0, max_w_, 0, 2, Panel::Style::kWui),
      size_(&main_box_, 0, 0, max_w_ - indent_, labelh_, ""),
 
      teams_list_(&teams_box_,
