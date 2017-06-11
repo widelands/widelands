@@ -65,7 +65,7 @@ BuildingStatisticsMenu::BuildingStatisticsMenu(InteractivePlayer& parent,
                       kWindowWidth,
                       kWindowHeight,
                       _("Building Statistics")),
-     tab_panel_(this, 0, 0, g_gr->images().get("images/ui_basic/but1.png")),
+     tab_panel_(this, g_gr->images().get("images/ui_basic/but1.png")),
      navigation_panel_(this, 0, 0, kWindowWidth, 4 * kButtonRowHeight),
      building_name_(
         &navigation_panel_, get_inner_w() / 2, 0, 0, kButtonHeight, "", UI::Align::kCenter),

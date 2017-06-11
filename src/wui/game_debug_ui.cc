@@ -139,7 +139,7 @@ MapObjectDebugWindow::MapObjectDebugWindow(InteractiveBase& parent, Widelands::M
    : UI::Window(&parent, "map_object_debug", 0, 0, 100, 100, ""),
      log_general_info_(true),
      object_(&obj),
-     tabs_(this, 0, 0, g_gr->images().get("images/ui_basic/but4.png")) {
+     tabs_(this, g_gr->images().get("images/ui_basic/but4.png")) {
 	serial_ = obj.serial();
 	set_title(std::to_string(serial_));
 

@@ -90,24 +90,9 @@ bool Tab::handle_mousepress(uint8_t, int32_t, int32_t) {
  * Initialize an empty TabPanel
 */
 TabPanel::TabPanel(Panel* const parent,
-                   int32_t const x,
-                   int32_t const y,
                    const Image* background,
                    TabPanel::Type border_type)
-   : Panel(parent, x, y, 0, 0),
-     border_type_(border_type),
-     active_(0),
-     highlight_(kNotFound),
-     pic_background_(background) {
-}
-TabPanel::TabPanel(Panel* const parent,
-                   int32_t const x,
-                   int32_t const y,
-                   int32_t const w,
-                   int32_t const h,
-                   const Image* background,
-                   TabPanel::Type border_type)
-   : Panel(parent, x, y, w, h),
+   : Panel(parent, 0, 0, kTabPanelButtonHeight + 2 * kTabPanelSeparatorHeight, kTabPanelButtonHeight + 2 * kTabPanelSeparatorHeight),
      border_type_(border_type),
      active_(0),
      highlight_(kNotFound),

@@ -83,7 +83,7 @@ CategorizedItemSelectionMenu<DescriptionType, ToolType>::CategorizedItemSelectio
      descriptions_(descriptions),
      select_correct_tool_(select_correct_tool),
      protect_against_recursive_select_(false),
-     tab_panel_(this, 0, 0, g_gr->images().get("images/wui/window_background_dark.png")),
+     tab_panel_(this, g_gr->images().get("images/wui/window_background_dark.png")),
      current_selection_names_(this,
                               0,
                               0,

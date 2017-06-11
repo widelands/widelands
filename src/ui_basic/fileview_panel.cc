@@ -31,7 +31,7 @@ namespace UI {
 FileViewPanel::FileViewPanel(Panel* parent,
                              const Image* background,
                              TabPanel::Type border_type)
-   : TabPanel(parent, 0, 0, 0, 0, background, border_type), padding_(5) {
+   : TabPanel(parent, background, border_type), padding_(5), contents_width_(0), contents_height_(0) {
 	layout();
 }
 
@@ -60,23 +60,24 @@ void FileViewPanel::add_tab(const std::string& lua_script) {
 }
 
 void FileViewPanel::update_tab_size(size_t index) {
+	assert(get_inner_w() >= 0 && get_inner_h() >= 0);
+	assert(contents_width_ >= 0 && contents_height_ >= 0);
+
 	boxes_.at(index)->set_size(get_inner_w(), get_inner_h());
 	textviews_.at(index)->set_size(contents_width_, contents_height_);
 }
 
 void FileViewPanel::layout() {
 	assert(boxes_.size() == textviews_.size());
-	if (get_inner_w() <= 0 || get_inner_h() <= 0) {
-		return;
-	}
+	assert(get_inner_w() >= 0 && get_inner_h() >= 0);
 
 	// If there is a border, we have less space for the contents
 	contents_width_ =
-	   border_type_ == TabPanel::Type::kNoBorder ? get_w() - padding_ : get_w() - 2 * padding_;
+	   std::max(0, border_type_ == TabPanel::Type::kNoBorder ? get_w() - padding_ : get_w() - 2 * padding_);
 
-	contents_height_ = border_type_ == TabPanel::Type::kNoBorder ?
+	contents_height_ = std::max(0, border_type_ == TabPanel::Type::kNoBorder ?
 	                      get_inner_h() - 2 * padding_ - UI::kTabPanelButtonHeight :
-	                      get_inner_h() - 3 * padding_ - UI::kTabPanelButtonHeight;
+	                      get_inner_h() - 3 * padding_ - UI::kTabPanelButtonHeight);
 
 	for (size_t i = 0; i < boxes_.size(); ++i) {
 		update_tab_size(i);
