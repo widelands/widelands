@@ -29,10 +29,6 @@ FullscreenMenuAbout::FullscreenMenuAbout()
      title_(this, 0, 0, _("About Widelands"), UI::Align::kCenter),
      close_(this, "close", 0, 0, 0, 0, g_gr->images().get("images/ui_basic/but2.png"), _("Close")),
      tabs_(this,
-           0,
-           0,
-           0,
-           0,
            g_gr->images().get("images/ui_basic/but1.png"),
            UI::TabPanel::Type::kBorder) {
 	title_.set_fontsize(UI_FONT_SIZE_BIG);

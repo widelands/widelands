@@ -29,13 +29,9 @@
 namespace UI {
 
 FileViewPanel::FileViewPanel(Panel* parent,
-                             int32_t x,
-                             int32_t y,
-                             int32_t w,
-                             int32_t h,
                              const Image* background,
                              TabPanel::Type border_type)
-   : TabPanel(parent, x, y, w, h, background, border_type), padding_(5) {
+   : TabPanel(parent, 0, 0, 0, 0, background, border_type), padding_(5) {
 	layout();
 }
 
@@ -70,7 +66,7 @@ void FileViewPanel::update_tab_size(size_t index) {
 
 void FileViewPanel::layout() {
 	assert(boxes_.size() == textviews_.size());
-	if (get_inner_w() == 0 && get_inner_h() == 0) {
+	if (get_inner_w() <= 0 || get_inner_h() <= 0) {
 		return;
 	}
 
