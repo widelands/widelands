@@ -27,7 +27,7 @@
 FullscreenMenuAbout::FullscreenMenuAbout()
    : FullscreenMenuBase(),
      title_(this, 0, 0, _("About Widelands"), UI::Align::kCenter),
-     close_(this, "close", 0, 0, 0, 0, g_gr->images().get("images/ui_fsmenu/button_main.png"), _("Close")),
+     close_(this, "close", 0, 0, 0, 0, UI::Button::Style::kFsMenuPrimary, _("Close")),
      tabs_(this,
            0,
            0,

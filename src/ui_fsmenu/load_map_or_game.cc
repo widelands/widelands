@@ -40,8 +40,8 @@ FullscreenMenuLoadMapOrGame::FullscreenMenuLoadMapOrGame()
      right_column_margin_(15),
 
      // Main buttons
-     back_(this, "back", 0, 0, 0, 0, g_gr->images().get("images/ui_fsmenu/button_secondary.png"), _("Back")),
-     ok_(this, "ok", 0, 0, 0, 0, g_gr->images().get("images/ui_fsmenu/button_main.png"), _("OK")) {
+     back_(this, "back", 0, 0, 0, 0, UI::Button::Style::kFsMenuSecondary, _("Back")),
+     ok_(this, "ok", 0, 0, 0, 0, UI::Button::Style::kFsMenuPrimary, _("OK")) {
 	layout();
 }
 

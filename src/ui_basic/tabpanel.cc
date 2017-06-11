@@ -110,7 +110,7 @@ TabPanel::TabPanel(Panel* const parent,
      highlight_(kNotFound) {
 	switch (style) {
 	case TabPanel::Style::kFsMenu:
-		pic_background_ = g_gr->images().get("images/wui/button_secondary.png");
+		pic_background_ = g_gr->images().get("images/ui_fsmenu/background_light.png");
 		break;
 	case TabPanel::Style::kWuiLight:
 		pic_background_ = g_gr->images().get("images/wui/window_background.png");

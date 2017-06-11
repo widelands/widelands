@@ -59,14 +59,14 @@ struct MapOrSaveSelectionWindow : public UI::Window {
 		uint32_t butw = get_inner_w() - 2 * space;
 		uint32_t buth = (get_inner_h() - 2 * space) / 5;
 		UI::Button* btn = new UI::Button(this, "map", space, y, butw, buth,
-		                                 g_gr->images().get("images/ui_fsmenu/button_secondary.png"), _("Map"),
+		                                 UI::Button::Style::kFsMenuSecondary, _("Map"),
 		                                 _("Select a map"));
 		btn->sigclicked.connect(boost::bind(&MapOrSaveSelectionWindow::pressedButton,
 		                                    boost::ref(*this),
 		                                    FullscreenMenuBase::MenuTarget::kNormalGame));
 
 		btn = new UI::Button(this, "saved_game", space, y + buth + space, butw, buth,
-		                     g_gr->images().get("images/ui_fsmenu/button_secondary.png"),
+		                     UI::Button::Style::kFsMenuSecondary,
 		                     /** Translators: This is a button to select a savegame */
 		                     _("Saved Game"), _("Select a saved game"));
 		btn->sigclicked.connect(boost::bind(&MapOrSaveSelectionWindow::pressedButton,
@@ -74,7 +74,7 @@ struct MapOrSaveSelectionWindow : public UI::Window {
 		                                    FullscreenMenuBase::MenuTarget::kScenarioGame));
 
 		btn = new UI::Button(this, "cancel", space + butw / 4, y + 3 * buth + 2 * space, butw / 2,
-		                     buth, g_gr->images().get("images/ui_fsmenu/button_secondary.png"), _("Cancel"),
+		                     buth, UI::Button::Style::kFsMenuSecondary, _("Cancel"),
 		                     _("Cancel selection"));
 		btn->sigclicked.connect(boost::bind(&MapOrSaveSelectionWindow::pressedButton,
 		                                    boost::ref(*this),
@@ -113,7 +113,7 @@ FullscreenMenuLaunchMPG::FullscreenMenuLaunchMPG(GameSettingsProvider* const set
                          get_h() * 3 / 20,
                          buth_,
                          buth_,
-                         g_gr->images().get("images/ui_fsmenu/button_secondary.png"),
+                         UI::Button::Style::kFsMenuSecondary,
                          g_gr->images().get("images/wui/menus/menu_toggle_minimap.png"),
                          _("Change map or saved game")),
      help_button_(this,
@@ -122,7 +122,7 @@ FullscreenMenuLaunchMPG::FullscreenMenuLaunchMPG(GameSettingsProvider* const set
                   get_h() / 100,
                   buth_,
                   buth_,
-                  g_gr->images().get("images/ui_fsmenu/button_secondary.png"),
+                  UI::Button::Style::kFsMenuSecondary,
                   g_gr->images().get("images/ui_basic/menu_help.png"),
                   _("Show the help window")),
 

@@ -123,7 +123,7 @@ MainMenuNewRandomMap::MainMenuNewRandomMap(EditorInteractive& parent)
             0,
             box_width_ - 2 * margin_ - std::max(world_label_.get_w(), resources_label_.get_w()),
             label_height_,
-            g_gr->images().get("images/wui/button_secondary.png"),
+            UI::Button::Style::kWuiSecondary,
             world_descriptions_[current_world_].descname),
      resources_(&resources_box_,
                 "resources",
@@ -131,7 +131,7 @@ MainMenuNewRandomMap::MainMenuNewRandomMap(EditorInteractive& parent)
                 0,
                 box_width_ - 2 * margin_ - std::max(world_label_.get_w(), resources_label_.get_w()),
                 label_height_,
-                g_gr->images().get("images/wui/button_secondary.png"),
+                UI::Button::Style::kWuiSecondary,
                 resource_amounts_[resource_amount_].c_str()),
      // Terrain
      waterval_(20),
@@ -208,7 +208,7 @@ MainMenuNewRandomMap::MainMenuNewRandomMap(EditorInteractive& parent)
                 0,
                 box_width_ / 2 - margin_,
                 0,
-                g_gr->images().get("images/wui/button_main.png"),
+                UI::Button::Style::kWuiPrimary,
                 _("Generate Map")),
      cancel_button_(&button_box_,
                     "generate_map",
@@ -216,7 +216,7 @@ MainMenuNewRandomMap::MainMenuNewRandomMap(EditorInteractive& parent)
                     0,
                     box_width_ / 2 - margin_,
                     0,
-                    g_gr->images().get("images/wui/button_secondary.png"),
+                    UI::Button::Style::kWuiSecondary,
                     _("Cancel")) {
 	int32_t box_height = 0;
 

@@ -40,7 +40,6 @@ protected:
 	uint32_t title_y_;
 	uint32_t padding_;
 
-	const std::string button_background_;
 	UI::Box vbox_;
 };
 

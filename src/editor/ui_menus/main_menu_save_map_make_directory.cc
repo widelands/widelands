@@ -52,7 +52,7 @@ MainMenuSaveMapMakeDirectory::MainMenuSaveMapMakeDirectory(UI::Panel* const pare
                 get_inner_h() - padding_ - buth_,
                 butw_,
                 buth_,
-                g_gr->images().get("images/wui/button_main.png"),
+                UI::Button::Style::kWuiPrimary,
                 _("OK")),
      cancel_button_(this,
                     "cancel",
@@ -60,7 +60,7 @@ MainMenuSaveMapMakeDirectory::MainMenuSaveMapMakeDirectory(UI::Panel* const pare
                     get_inner_h() - padding_ - buth_,
                     butw_,
                     buth_,
-                    g_gr->images().get("images/wui/button_secondary.png"),
+                    UI::Button::Style::kWuiSecondary,
                     _("Cancel")) {
 
 	vbox_.add(&label_);

@@ -86,13 +86,13 @@ WLMessageBox::WLMessageBox(Panel* const parent,
 	   this, "ok",
 	   type_ == MBoxType::kOk ? (width - button_w) / 2 :
 	                            UI::g_fh1->fontset()->is_rtl() ? left_button_x : right_button_x,
-	   button_y, button_w, 0, g_gr->images().get("images/wui/button_main.png"), _("OK")));
+	   button_y, button_w, 0, UI::Button::Style::kWuiPrimary, _("OK")));
 	ok_button_->sigclicked.connect(boost::bind(&WLMessageBox::clicked_ok, boost::ref(*this)));
 
 	if (type_ == MBoxType::kOkCancel) {
 		cancel_button_.reset(new Button(
 		   this, "cancel", UI::g_fh1->fontset()->is_rtl() ? right_button_x : left_button_x, button_y,
-		   button_w, 0, g_gr->images().get("images/wui/button_secondary.png"), _("Cancel")));
+		   button_w, 0, UI::Button::Style::kWuiSecondary, _("Cancel")));
 		cancel_button_->sigclicked.connect(
 		   boost::bind(&WLMessageBox::clicked_back, boost::ref(*this)));
 	}

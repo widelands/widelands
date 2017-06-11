@@ -64,7 +64,7 @@ MainMenuLoadOrSaveMap::MainMenuLoadOrSaveMap(EditorInteractive& parent,
          get_inner_h() - padding_ - buth_,
          butw_,
          buth_,
-         g_gr->images().get("images/wui/button_main.png"),
+         UI::Button::Style::kWuiPrimary,
          _("OK")),
      cancel_(this,
              "cancel",
@@ -73,7 +73,7 @@ MainMenuLoadOrSaveMap::MainMenuLoadOrSaveMap(EditorInteractive& parent,
              get_inner_h() - padding_ - buth_,
              butw_,
              buth_,
-             g_gr->images().get("images/wui/button_secondary.png"),
+             UI::Button::Style::kWuiSecondary,
              _("Cancel")),
      basedir_(basedir),
      has_translated_mapname_(false),
@@ -84,7 +84,7 @@ MainMenuLoadOrSaveMap::MainMenuLoadOrSaveMap(EditorInteractive& parent,
 	UI::Box* vbox = new UI::Box(this, tablex_, padding_, UI::Box::Horizontal, padding_, get_w());
 	show_mapnames_ =
 	   new UI::Button(vbox, "show_mapnames", 0, 0, 2 * butw_, buth_,
-	                  g_gr->images().get("images/wui/button_secondary.png"), _("Show Map Names"));
+	                  UI::Button::Style::kWuiSecondary, _("Show Map Names"));
 	vbox->add(show_mapnames_, UI::Box::Resizing::kFullSize);
 
 	/** TRANSLATORS: Checkbox title. If this checkbox is enabled, map names aren't translated. */

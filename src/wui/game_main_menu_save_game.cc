@@ -84,17 +84,17 @@ GameMainMenuSaveGame::GameMainMenuSaveGame(InteractiveGameBase& parent,
 	editbox_.ok.connect(boost::bind(&GameMainMenuSaveGame::ok, this));
 
 	button_ok_ = new UI::Button(this, "ok", DESCRIPTION_X, OK_Y, DESCRIPTION_WIDTH, BUTTON_HEIGHT,
-	                            g_gr->images().get("images/wui/window_background.png"), _("OK"));
+	                            UI::Button::Style::kWuiMenu, _("OK"));
 	button_ok_->sigclicked.connect(boost::bind(&GameMainMenuSaveGame::ok, this));
 
 	UI::Button* cancelbtn =
 	   new UI::Button(this, "cancel", DESCRIPTION_X, CANCEL_Y, DESCRIPTION_WIDTH, BUTTON_HEIGHT,
-	                  g_gr->images().get("images/wui/window_background.png"), _("Cancel"));
+	                  UI::Button::Style::kWuiMenu, _("Cancel"));
 	cancelbtn->sigclicked.connect(boost::bind(&GameMainMenuSaveGame::die, this));
 
 	UI::Button* deletebtn =
 	   new UI::Button(this, "delete", DESCRIPTION_X, DELETE_Y, DESCRIPTION_WIDTH, BUTTON_HEIGHT,
-	                  g_gr->images().get("images/wui/window_background.png"), _("Delete"));
+	                  UI::Button::Style::kWuiMenu, _("Delete"));
 	deletebtn->sigclicked.connect(boost::bind(&GameMainMenuSaveGame::delete_clicked, this));
 
 	ls_.selected.connect(boost::bind(&GameMainMenuSaveGame::selected, this, _1));

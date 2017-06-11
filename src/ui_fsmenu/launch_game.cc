@@ -62,7 +62,7 @@ FullscreenMenuLaunchGame::FullscreenMenuLaunchGame(GameSettingsProvider* const s
          0,
          butw_,
          buth_,
-         g_gr->images().get("images/ui_fsmenu/button_main.png"),
+         UI::Button::Style::kFsMenuPrimary,
          _("Start game")),
      back_(this,
            "back",
@@ -70,7 +70,7 @@ FullscreenMenuLaunchGame::FullscreenMenuLaunchGame(GameSettingsProvider* const s
            0,
            butw_,
            buth_,
-           g_gr->images().get("images/ui_fsmenu/button_secondary.png"),
+           UI::Button::Style::kFsMenuSecondary,
            _("Back")),
      // Text labels
      title_(this, get_w() / 2, get_h() / 25, "", UI::Align::kCenter),

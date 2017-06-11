@@ -29,7 +29,6 @@
 #include "graphic/text_constants.h"
 #include "graphic/text_layout.h"
 #include "graphic/texture.h"
-#include "ui_basic/button.h"
 #include "ui_basic/mouse_constants.h"
 #include "ui_basic/scrollbar.h"
 
@@ -53,10 +52,10 @@ Table<void*>::Table(Panel* const parent,
      total_width_(0),
      headerheight_(text_height() + 4),
      lineheight_(text_height()),
-     button_background_(g_gr->images().get(style == Panel::Style::kFsMenu ? "images/ui_fsmenu/button_menu.png" : "images/wui/button_secondary.png")),
+     button_style_(style == Panel::Style::kFsMenu ? UI::Button::Style::kFsMenuMenu : UI::Button::Style::kWuiSecondary),
      scrollbar_(nullptr),
      scrollbar_filler_button_(
-        new Button(this, "", 0, 0, Scrollbar::kSize, headerheight_, button_background_, "")),
+        new Button(this, "", 0, 0, Scrollbar::kSize, headerheight_, button_style_, "")),
      scrollpos_(0),
      selection_(no_selection_index()),
      last_multiselect_(no_selection_index()),
@@ -113,7 +112,7 @@ void Table<void*>::add_column(uint32_t const width,
 		Column c;
 		// All columns have a title button that is clickable for sorting.
 		// The title text can be empty.
-		c.btn = new Button(this, title, complete_width, 0, width, headerheight_, button_background_,
+		c.btn = new Button(this, title, complete_width, 0, width, headerheight_, button_style_,
 		                   title, tooltip_string);
 		c.btn->sigclicked.connect(
 		   boost::bind(&Table::header_button_clicked, boost::ref(*this), columns_.size()));

@@ -52,13 +52,13 @@ LoginBox::LoginBox(Panel& parent)
 	                                    (get_inner_w() / 2 - 200) / 2 :
 	                                    (get_inner_w() / 2 - 200) / 2 + get_inner_w() / 2,
 	                  get_inner_h() - 20 - margin, 200, 20,
-	                  g_gr->images().get("images/wui/button_main.png"), _("Login"));
+	                  UI::Button::Style::kWuiPrimary, _("Login"));
 	loginbtn->sigclicked.connect(boost::bind(&LoginBox::clicked_ok, boost::ref(*this)));
 	UI::Button* cancelbtn = new UI::Button(
 	   this, "cancel",
 	   UI::g_fh1->fontset()->is_rtl() ? (get_inner_w() / 2 - 200) / 2 + get_inner_w() / 2 :
 	                                    (get_inner_w() / 2 - 200) / 2,
-	   loginbtn->get_y(), 200, 20, g_gr->images().get("images/wui/button_secondary.png"), _("Cancel"));
+	   loginbtn->get_y(), 200, 20, UI::Button::Style::kWuiSecondary, _("Cancel"));
 	cancelbtn->sigclicked.connect(boost::bind(&LoginBox::clicked_back, boost::ref(*this)));
 
 	Section& s = g_options.pull_section("global");

@@ -94,6 +94,7 @@ CategorizedItemSelectionMenu<DescriptionType, ToolType>::CategorizedItemSelectio
                               UI::Align::kCenter,
                               UI::MultilineTextarea::ScrollMode::kNoScrolling),
      tool_(tool) {
+	// NOCOM can we get rid of set_background? It's the only remaining knowledge about the image filenames outside of ui_basic.
 	current_selection_names_.set_background(
 	   g_gr->images().get("images/wui/window_background_dark.png"));
 	add(&tab_panel_);

@@ -52,7 +52,7 @@ struct SpinBoxImpl {
 	UI::SpinBox::Units unit;
 
 	/// Background tile style of buttons.
-	const Image* background;
+	UI::Button::Style button_style;
 
 	/// Special names for specific values
 	std::map<int32_t, std::string> value_replacements;
@@ -104,7 +104,7 @@ SpinBox::SpinBox(Panel* const parent,
 	}
 	sbi_->value = startval;
 	sbi_->unit = unit;
-	sbi_->background = g_gr->images().get(style == Panel::Style::kFsMenu ? "images/ui_fsmenu/button_menu.png" : "images/wui/button_secondary.png");
+	sbi_->button_style = style == Panel::Style::kFsMenu ? Button::Style::kFsMenuMenu : Button::Style::kWuiSecondary;
 
 	box_ = new UI::Box(this, 0, 0, UI::Box::Horizontal, 0, 0, padding_);
 
@@ -118,23 +118,23 @@ SpinBox::SpinBox(Panel* const parent,
 	bool is_big = type_ == SpinBox::Type::kBig;
 
 	sbi_->button_minus =
-	   new Button(box_, "-", 0, 0, button_height_, button_height_, sbi_->background,
+	   new Button(box_, "-", 0, 0, button_height_, button_height_, sbi_->button_style,
 	              g_gr->images().get(is_big ? "images/ui_basic/scrollbar_left.png" :
 	                                          "images/ui_basic/scrollbar_down.png"),
 	              _("Decrease the value"));
 	sbi_->button_plus =
-	   new Button(box_, "+", 0, 0, button_height_, button_height_, sbi_->background,
+	   new Button(box_, "+", 0, 0, button_height_, button_height_, sbi_->button_style,
 	              g_gr->images().get(is_big ? "images/ui_basic/scrollbar_right.png" :
 	                                          "images/ui_basic/scrollbar_up.png"),
 	              _("Increase the value"));
 
 	if (is_big) {
 		sbi_->button_ten_minus =
-		   new Button(box_, "--", 0, 0, 2 * button_height_, button_height_, sbi_->background,
+		   new Button(box_, "--", 0, 0, 2 * button_height_, button_height_, sbi_->button_style,
 		              g_gr->images().get("images/ui_basic/scrollbar_left_fast.png"),
 		              _("Decrease the value by 10"));
 		sbi_->button_ten_plus =
-		   new Button(box_, "++", 0, 0, 2 * button_height_, button_height_, sbi_->background,
+		   new Button(box_, "++", 0, 0, 2 * button_height_, button_height_, sbi_->button_style,
 		              g_gr->images().get("images/ui_basic/scrollbar_right_fast.png"),
 		              _("Increase the value by 10"));
 

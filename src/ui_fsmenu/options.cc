@@ -105,7 +105,7 @@ FullscreenMenuOptions::FullscreenMenuOptions(OptionsCtrl::OptionsStruct opt)
              0,
              0,
              0,
-             g_gr->images().get("images/ui_fsmenu/button_secondary.png"),
+             UI::Button::Style::kFsMenuSecondary,
              _("Cancel")),
      apply_(&button_box_,
             "apply",
@@ -113,9 +113,9 @@ FullscreenMenuOptions::FullscreenMenuOptions(OptionsCtrl::OptionsStruct opt)
             0,
             0,
             0,
-            g_gr->images().get("images/ui_fsmenu/button_secondary.png"),
+            UI::Button::Style::kFsMenuSecondary,
             _("Apply")),
-     ok_(&button_box_, "ok", 0, 0, 0, 0, g_gr->images().get("images/ui_fsmenu/button_main.png"), _("OK")),
+     ok_(&button_box_, "ok", 0, 0, 0, 0, UI::Button::Style::kFsMenuPrimary, _("OK")),
 
      // Tabs
      tabs_(this,

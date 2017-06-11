@@ -80,7 +80,7 @@ MainMenuNewMap::MainMenuNewMap(EditorInteractive& parent)
                 0,
                 box_width_ / 2 - margin_,
                 0,
-                g_gr->images().get("images/wui/button_main.png"),
+                UI::Button::Style::kWuiPrimary,
                 _("Create Map")),
      cancel_button_(&button_box_,
                     "generate_map",
@@ -88,7 +88,7 @@ MainMenuNewMap::MainMenuNewMap(EditorInteractive& parent)
                     0,
                     box_width_ / 2 - margin_,
                     0,
-                    g_gr->images().get("images/wui/button_secondary.png"),
+                    UI::Button::Style::kWuiSecondary,
                     _("Cancel")) {
 	width_.set_value_list(Widelands::kMapDimensions);
 	height_.set_value_list(Widelands::kMapDimensions);

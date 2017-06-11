@@ -30,6 +30,7 @@
 #include "graphic/align.h"
 #include "graphic/color.h"
 #include "graphic/graphic.h"
+#include "ui_basic/button.h"
 #include "ui_basic/panel.h"
 
 namespace UI {
@@ -297,7 +298,7 @@ private:
 	int total_width_;
 	const uint32_t headerheight_;
 	int32_t lineheight_;
-	const Image* button_background_;
+	UI::Button::Style button_style_;
 	Scrollbar* scrollbar_;
 	// A disabled button that will fill the space above the scroll bar
 	UI::Button* scrollbar_filler_button_;

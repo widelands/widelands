@@ -49,6 +49,18 @@ inline ButtonDisableStyle operator|(ButtonDisableStyle a, ButtonDisableStyle b) 
 /// callback function to the button, there are some templates for that below.
 struct Button : public NamedPanel {
 	enum class Style {
+		kFsMenuMenu,
+		kFsMenuPrimary,
+		kFsMenuSecondary,
+		kFsMenuBackground,
+		kWuiMenu,
+		kWuiPrimary,
+		kWuiSecondary,
+		kWuiBackground,
+		kTransparent
+	};
+
+	enum class VisualState {
 		kRaised,       // Normal raised Button
 		kPermpressed,  // Button will appear pressed
 		kFlat          // Flat button with simple coloured outline
@@ -59,6 +71,22 @@ struct Button : public NamedPanel {
 		kUnscaled  // Show the foreground image without any scaling
 	};
 
+private:
+	Button  // Common constructor
+	   (Panel* const parent,
+	    const std::string& name,
+	    int32_t const x,
+	    int32_t const y,
+	    uint32_t const w,
+	    uint32_t const h,
+	    Button::Style style,
+		 const Image* foreground_picture_id,
+	    const std::string& title_text,
+	    const std::string& tooltip_text,
+	    UI::Button::VisualState state,
+		 UI::Button::ImageMode mode);
+
+public:
 	Button  /// for textual buttons
 	   (Panel* const parent,
 	    const std::string& name,
@@ -66,10 +94,10 @@ struct Button : public NamedPanel {
 	    int32_t const y,
 	    uint32_t const w,
 	    uint32_t const h,
-	    const Image* background_picture_id,
+	    Button::Style style,
 	    const std::string& title_text,
 	    const std::string& tooltip_text = std::string(),
-	    UI::Button::Style init_style = UI::Button::Style::kRaised);
+	    UI::Button::VisualState state = UI::Button::VisualState::kRaised);
 
 	Button  /// for pictorial buttons
 	   (Panel* const parent,
@@ -78,10 +106,10 @@ struct Button : public NamedPanel {
 	    const int32_t y,
 	    const uint32_t w,
 	    const uint32_t h,
-	    const Image* background_picture_id,
+	    Button::Style style,
 	    const Image* foreground_picture_id,
 	    const std::string& tooltip_text = std::string(),
-	    UI::Button::Style init_style = UI::Button::Style::kRaised,
+	    UI::Button::VisualState state = UI::Button::VisualState::kRaised,
 	    UI::Button::ImageMode mode = UI::Button::ImageMode::kShrink);
 	~Button();
 
@@ -112,9 +140,9 @@ struct Button : public NamedPanel {
 	bool handle_mousemove(uint8_t, int32_t, int32_t, int32_t, int32_t) override;
 
 	/// Sets the visual style of the button
-	void set_style(UI::Button::Style input_style);
-	UI::Button::Style style() const {
-		return style_;
+	void set_visual_state(UI::Button::VisualState state);
+	UI::Button::VisualState style() const {
+		return visual_state_;
 	}
 
 	/// Sets the visual style of the disabled button
@@ -137,7 +165,7 @@ protected:
 	bool highlighted_;  //  mouse is over the button
 	bool pressed_;      //  mouse is clicked over the button
 	bool enabled_;
-	UI::Button::Style style_;
+	UI::Button::VisualState visual_state_;
 	UI::ButtonDisableStyle disable_style_;
 	bool repeating_;
 	const UI::Button::ImageMode image_mode_;

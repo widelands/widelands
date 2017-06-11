@@ -57,7 +57,7 @@ MainMenuSaveMap::MainMenuSaveMap(EditorInteractive& parent)
                      tabley_ + tableh_ + 3 * padding_ - 1,
                      get_inner_w() - right_column_x_ - padding_,
                      buth_,
-                     g_gr->images().get("images/wui/button_secondary.png"),
+                     UI::Button::Style::kWuiSecondary,
                      _("Make Directory")),
      edit_options_(this,
                    "edit_options",
@@ -65,7 +65,7 @@ MainMenuSaveMap::MainMenuSaveMap(EditorInteractive& parent)
                    tabley_ + tableh_ - buth_,
                    get_inner_w() - right_column_x_ - padding_,
                    buth_,
-                   g_gr->images().get("images/wui/button_main.png"),
+                   UI::Button::Style::kWuiPrimary,
                    _("Map Options")),
      editbox_label_(
         this, padding_, tabley_ + tableh_ + 3 * padding_, butw_, buth_, _("Filename:")) {

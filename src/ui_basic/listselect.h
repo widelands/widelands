@@ -107,10 +107,6 @@ struct BaseListselect : public Panel {
 	const std::string& get_selected_tooltip() const;
 	const Image* get_selected_image() const;
 
-	void set_background(const Image* background) {
-		background_ = background;
-	}
-
 	///  Return the total height (text + spacing) occupied by a single line.
 	int get_lineheight() const;
 
@@ -194,10 +190,6 @@ template <typename Entry> struct Listselect : public BaseListselect {
 		return entry_cache_[BaseListselect::get_selected()];
 	}
 
-	void set_background(const Image* background) {
-		BaseListselect::set_background(background);
-	}
-
 private:
 	std::deque<Entry> entry_cache_;
 };
@@ -243,10 +235,6 @@ template <typename Entry> struct Listselect<Entry&> : public Listselect<Entry*> 
 
 	Entry& get_selected() const {
 		return *Base::get_selected();
-	}
-
-	void set_background(const Image* background) {
-		*Base::set_background(background);
 	}
 };
 }

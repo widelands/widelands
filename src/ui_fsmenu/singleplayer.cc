@@ -36,7 +36,7 @@ FullscreenMenuSinglePlayer::FullscreenMenuSinglePlayer()
               0,
               butw_,
               buth_,
-              g_gr->images().get(button_background_),
+              UI::Button::Style::kFsMenuMenu,
               _("New Game")),
      campaign(&vbox_,
               "campaigns",
@@ -44,7 +44,7 @@ FullscreenMenuSinglePlayer::FullscreenMenuSinglePlayer()
               0,
               butw_,
               buth_,
-              g_gr->images().get(button_background_),
+              UI::Button::Style::kFsMenuMenu,
               _("Campaigns")),
      load_game(&vbox_,
                "load_game",
@@ -52,9 +52,9 @@ FullscreenMenuSinglePlayer::FullscreenMenuSinglePlayer()
                0,
                butw_,
                buth_,
-               g_gr->images().get(button_background_),
+               UI::Button::Style::kFsMenuMenu,
                _("Load Game")),
-     back(&vbox_, "back", 0, 0, butw_, buth_, g_gr->images().get(button_background_), _("Back")) {
+     back(&vbox_, "back", 0, 0, butw_, buth_, UI::Button::Style::kFsMenuMenu, _("Back")) {
 	new_game.sigclicked.connect(
 	   boost::bind(&FullscreenMenuSinglePlayer::end_modal<FullscreenMenuBase::MenuTarget>,
 	               boost::ref(*this), FullscreenMenuBase::MenuTarget::kNewGame));

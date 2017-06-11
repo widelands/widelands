@@ -216,7 +216,7 @@ FieldDebugWindow::FieldDebugWindow(InteractiveBase& parent, Widelands::Coords co
      ui_field_(this, 0, 0, 300, 280, UI::Panel::Style::kWui, ""),
 
      ui_immovable_(
-        this, "immovable", 0, 280, 300, 24, g_gr->images().get("images/wui/window_background.png"), ""),
+        this, "immovable", 0, 280, 300, 24, UI::Button::Style::kWuiMenu, ""),
 
      ui_bobs_(this, 0, 304, 300, 96, UI::Panel::Style::kWui) {
 	ui_immovable_.sigclicked.connect(boost::bind(&FieldDebugWindow::open_immovable, this));

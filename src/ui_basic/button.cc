@@ -20,6 +20,7 @@
 #include "ui_basic/button.h"
 
 #include "graphic/font_handler1.h"
+#include "graphic/graphic.h"
 #include "graphic/image.h"
 #include "graphic/rendertarget.h"
 #include "graphic/text_constants.h"
@@ -32,6 +33,65 @@ namespace UI {
 // size.
 constexpr int kButtonImageMargin = 2;
 
+
+Button::Button  //  Common constructor
+   (Panel* const parent,
+    const std::string& name,
+    int32_t const x,
+    int32_t const y,
+    uint32_t const w,
+    uint32_t const h,
+    Style style,
+	 const Image* fg_pic,
+    const std::string& title_text,
+    const std::string& tooltip_text,
+    UI::Button::VisualState init_state,
+	 ImageMode mode)
+   : NamedPanel(parent, name, x, y, w, h, tooltip_text),
+     highlighted_(false),
+     pressed_(false),
+     enabled_(true),
+     visual_state_(init_state),
+     disable_style_(ButtonDisableStyle::kMonochrome),
+     repeating_(false),
+	  image_mode_(mode),
+     time_nextact_(0),
+     title_(title_text),
+     pic_custom_(fg_pic),
+     clr_down_(229, 161, 2) {
+	switch (style) {
+	case Button::Style::kFsMenuMenu:
+		pic_background_ = g_gr->images().get("images/ui_fsmenu/button_menu.png");
+		break;
+	case Button::Style::kFsMenuPrimary:
+		pic_background_ = g_gr->images().get("images/ui_fsmenu/button_main.png");
+		break;
+	case Button::Style::kFsMenuSecondary:
+		pic_background_ = g_gr->images().get("images/ui_fsmenu/button_secondary.png");
+		break;
+	case Button::Style::kFsMenuBackground:
+		pic_background_ = g_gr->images().get("images/ui_fsmenu/background_light.png");
+		break;
+	case Button::Style::kWuiMenu:
+		pic_background_ = g_gr->images().get("images/wui/window_background.png");
+		break;
+	case Button::Style::kWuiPrimary:
+		pic_background_ = g_gr->images().get("images/wui/button_main.png");
+		break;
+	case Button::Style::kWuiSecondary:
+		pic_background_ = g_gr->images().get("images/wui/button_secondary.png");
+		break;
+	case Button::Style::kWuiBackground:
+		pic_background_ = g_gr->images().get("images/wui/window_background_dark.png");
+		break;
+	case Button::Style::kTransparent:
+		pic_background_ = nullptr;
+		break;
+	}
+	set_thinks(false);
+	set_can_focus(true);
+}
+
 Button::Button  //  for textual buttons. If h = 0, h will resize according to the font's height.
    (Panel* const parent,
     const std::string& name,
@@ -39,31 +99,17 @@ Button::Button  //  for textual buttons. If h = 0, h will resize according to th
     int32_t const y,
     uint32_t const w,
     uint32_t const h,
-    const Image* bg_pic,
+    Style style,
     const std::string& title_text,
     const std::string& tooltip_text,
-    UI::Button::Style init_style)
-   : NamedPanel(parent, name, x, y, w, h, tooltip_text),
-     highlighted_(false),
-     pressed_(false),
-     enabled_(true),
-     style_(init_style),
-     disable_style_(ButtonDisableStyle::kMonochrome),
-     repeating_(false),
-     image_mode_(UI::Button::ImageMode::kShrink),
-     time_nextact_(0),
-     title_(title_text),
-     pic_background_(bg_pic),
-     pic_custom_(nullptr),
-     clr_down_(229, 161, 2) {
+    UI::Button::VisualState init_state)
+   : Button(parent, name, x, y, w, h, style, nullptr, title_text, tooltip_text, init_state, UI::Button::ImageMode::kShrink) {
 	// Automatically resize for font height and give it a margin.
 	if (h < 1) {
 		int new_height = text_height() + 4;
 		set_desired_size(w, new_height);
 		set_size(w, new_height);
 	}
-	set_thinks(false);
-	set_can_focus(true);
 }
 
 Button::Button  //  for pictorial buttons
@@ -73,25 +119,12 @@ Button::Button  //  for pictorial buttons
     const int32_t y,
     const uint32_t w,
     const uint32_t h,
-    const Image* bg_pic,
+    Style style,
     const Image* fg_pic,
     const std::string& tooltip_text,
-    UI::Button::Style init_style,
+    UI::Button::VisualState init_state,
     ImageMode mode)
-   : NamedPanel(parent, name, x, y, w, h, tooltip_text),
-     highlighted_(false),
-     pressed_(false),
-     enabled_(true),
-     style_(init_style),
-     disable_style_(ButtonDisableStyle::kMonochrome),
-     repeating_(false),
-     image_mode_(mode),
-     time_nextact_(0),
-     pic_background_(bg_pic),
-     pic_custom_(fg_pic),
-     clr_down_(229, 161, 2) {
-	set_thinks(false);
-	set_can_focus(true);
+   : Button(parent, name, x, y, w, h, style, fg_pic, "", tooltip_text, init_state, mode) {
 }
 
 Button::~Button() {
@@ -148,10 +181,10 @@ void Button::set_enabled(bool const on) {
  * Redraw the button
 */
 void Button::draw(RenderTarget& dst) {
-	const bool is_flat = (enabled_ && style_ == Style::kFlat) ||
+	const bool is_flat = (enabled_ && visual_state_ == VisualState::kFlat) ||
 	                     (!enabled_ && static_cast<int>(disable_style_ & ButtonDisableStyle::kFlat));
 	const bool is_permpressed =
-	   (enabled_ && style_ == Style::kPermpressed) ||
+	   (enabled_ && visual_state_ == VisualState::kPermpressed) ||
 	   (!enabled_ && static_cast<int>(disable_style_ & ButtonDisableStyle::kPermpressed));
 	const bool is_monochrome =
 	   !enabled_ && static_cast<int>(disable_style_ & ButtonDisableStyle::kMonochrome);
@@ -341,8 +374,8 @@ bool Button::handle_mousemove(const uint8_t, int32_t, int32_t, int32_t, int32_t)
 	return true;  // We handle this always by lighting up
 }
 
-void Button::set_style(UI::Button::Style input_style) {
-	style_ = input_style;
+void Button::set_visual_state(UI::Button::VisualState input_state) {
+	visual_state_ = input_state;
 }
 
 void Button::set_disable_style(UI::ButtonDisableStyle input_style) {
@@ -350,18 +383,18 @@ void Button::set_disable_style(UI::ButtonDisableStyle input_style) {
 }
 
 void Button::set_perm_pressed(bool pressed) {
-	set_style(pressed ? UI::Button::Style::kPermpressed : UI::Button::Style::kRaised);
+	set_visual_state(pressed ? UI::Button::VisualState::kPermpressed : UI::Button::VisualState::kRaised);
 }
 
 void Button::toggle() {
-	switch (style_) {
-	case UI::Button::Style::kRaised:
-		style_ = UI::Button::Style::kPermpressed;
+	switch (visual_state_) {
+	case UI::Button::VisualState::kRaised:
+		visual_state_ = UI::Button::VisualState::kPermpressed;
 		break;
-	case UI::Button::Style::kPermpressed:
-		style_ = UI::Button::Style::kRaised;
+	case UI::Button::VisualState::kPermpressed:
+		visual_state_ = UI::Button::VisualState::kRaised;
 		break;
-	case UI::Button::Style::kFlat:
+	case UI::Button::VisualState::kFlat:
 		break;  // Do nothing for flat buttons
 	}
 }

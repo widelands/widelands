@@ -48,7 +48,7 @@ FullscreenHelpWindow::FullscreenHelpWindow(Panel* const parent,
 	height = (height == 0) ? g_gr->get_yres() * 4 / 5 : height;
 
 	Button* btn = new Button(this, "ok", width / 3, 0, width / 3, 0,
-	                         g_gr->images().get("images/wui/button_main.png"), _("OK"));
+	                         UI::Button::Style::kWuiPrimary, _("OK"));
 
 	btn->sigclicked.connect(boost::bind(&FullscreenHelpWindow::clicked_ok, boost::ref(*this)));
 	btn->set_pos(Vector2i(btn->get_x(), height - margin - btn->get_h()));

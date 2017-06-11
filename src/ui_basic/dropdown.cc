@@ -70,7 +70,7 @@ BaseDropdown::BaseDropdown(UI::Panel* parent,
                                     0,
                                     button_dimension,
                                     get_h(),
-                                    g_gr->images().get(style == Panel::Style::kFsMenu ? "images/ui_fsmenu/button_menu.png" : "images/wui/button_secondary.png"),
+                                    style == Panel::Style::kFsMenu ? Button::Style::kFsMenuMenu : Button::Style::kWuiSecondary,
                                     g_gr->images().get("images/ui_basic/scrollbar_down.png"),
                                     pgettext("dropdown", "Select Item")) :
                      nullptr),
@@ -80,7 +80,7 @@ BaseDropdown::BaseDropdown(UI::Panel* parent,
                      0,
                      type == DropdownType::kTextual ? w - button_dimension : button_dimension,
                      get_h(),
-                     g_gr->images().get(style == Panel::Style::kFsMenu ? "images/ui_fsmenu/background_light.png" : "images/wui/window_background_dark.png"),
+                     style == Panel::Style::kFsMenu ? UI::Button::Style::kFsMenuBackground : UI::Button::Style::kWuiBackground,
                      label),
      label_(label),
      type_(type),
@@ -95,8 +95,6 @@ BaseDropdown::BaseDropdown(UI::Panel* parent,
 	   parent, 0, 0, w, 0, style, ListselectLayout::kDropdown);
 
 	list_->set_visible(false);
-	list_->set_background(g_gr->images().get(style == Panel::Style::kFsMenu ? "images/ui_fsmenu/background_light.png" : "images/wui/window_background_dark.png"));
-
 	button_box_.add(&display_button_);
 	display_button_.sigclicked.connect(boost::bind(&BaseDropdown::toggle_list, this));
 	if (push_button_ != nullptr) {

@@ -143,7 +143,7 @@ FullscreenMenuLoadGame::FullscreenMenuLoadGame(Widelands::Game& g,
              buty_ - buth_ - 2 * padding_,
              butw_,
              buth_,
-             g_gr->images().get("images/ui_fsmenu/button_secondary.png"),
+             UI::Button::Style::kFsMenuSecondary,
              _("Delete")),
 
      ta_long_generic_message_(this,
