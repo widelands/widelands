@@ -232,9 +232,9 @@ UI::Button* InteractiveBase::add_toolbar_button(const std::string& image_basenam
                                                 const std::string& tooltip_text,
                                                 UI::UniqueWindow::Registry* window,
                                                 bool bind_default_toggle) {
-	UI::Button* button = new UI::Button(
-	   &toolbar_, name, 0, 0, 34U, 34U, UI::Button::Style::kWuiPrimary,
-	   g_gr->images().get("images/" + image_basename + ".png"), tooltip_text);
+	UI::Button* button =
+	   new UI::Button(&toolbar_, name, 0, 0, 34U, 34U, UI::Button::Style::kWuiPrimary,
+	                  g_gr->images().get("images/" + image_basename + ".png"), tooltip_text);
 	toolbar_.add(button);
 	if (window) {
 		window->assign_toggle_button(button);

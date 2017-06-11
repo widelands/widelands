@@ -80,18 +80,14 @@ FullscreenMenuInternetLobby::FullscreenMenuInternetLobby(char const* const nick,
            _("Back")),
 
      // Edit boxes
-     edit_servername_(this,
-                      get_w() * 17 / 25,
-                      get_h() * 68 / 100,
-                      butw_,
-                      buth_,
-                      2,
-                      Panel::Style::kFsMenu,
-                      fs_),
+     edit_servername_(
+        this, get_w() * 17 / 25, get_h() * 68 / 100, butw_, buth_, 2, Panel::Style::kFsMenu, fs_),
 
      // List
-     clientsonline_list_(this, get_w() * 4 / 125, get_h() / 5, lisw_, get_h() * 3 / 10, UI::Panel::Style::kFsMenu),
-     opengames_list_(this, get_w() * 17 / 25, get_h() / 5, butw_, get_h() * 7 / 20, UI::Panel::Style::kFsMenu),
+     clientsonline_list_(
+        this, get_w() * 4 / 125, get_h() / 5, lisw_, get_h() * 3 / 10, UI::Panel::Style::kFsMenu),
+     opengames_list_(
+        this, get_w() * 17 / 25, get_h() / 5, butw_, get_h() * 7 / 20, UI::Panel::Style::kFsMenu),
 
      // The chat UI
      chat(this,
@@ -100,7 +96,7 @@ FullscreenMenuInternetLobby::FullscreenMenuInternetLobby(char const* const nick,
           lisw_,
           get_h() * 44 / 100,
           InternetGaming::ref(),
-			 UI::Panel::Style::kFsMenu),
+          UI::Panel::Style::kFsMenu),
 
      // Login information
      nickname_(nick),

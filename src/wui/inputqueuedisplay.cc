@@ -229,20 +229,18 @@ void InputQueueDisplay::update_max_fill_buttons() {
 	uint32_t x = Border;
 	uint32_t y = Border + (total_height_ - 2 * Border - WARE_MENU_PIC_WIDTH) / 2;
 
-	decrease_max_fill_ =
-	   new UI::Button(this, "decrease_max_fill", x, y, WARE_MENU_PIC_WIDTH, WARE_MENU_PIC_HEIGHT,
-	                  UI::Button::Style::kWuiMenu,
-	                  g_gr->images().get("images/ui_basic/scrollbar_left.png"),
-	                  _("Decrease the number of wares you want to be stored here."));
+	decrease_max_fill_ = new UI::Button(
+	   this, "decrease_max_fill", x, y, WARE_MENU_PIC_WIDTH, WARE_MENU_PIC_HEIGHT,
+	   UI::Button::Style::kWuiMenu, g_gr->images().get("images/ui_basic/scrollbar_left.png"),
+	   _("Decrease the number of wares you want to be stored here."));
 	decrease_max_fill_->sigclicked.connect(
 	   boost::bind(&InputQueueDisplay::decrease_max_fill_clicked, boost::ref(*this)));
 
 	x = Border + (cache_size_ + 1) * (CellWidth + CellSpacing);
-	increase_max_fill_ =
-	   new UI::Button(this, "increase_max_fill", x, y, WARE_MENU_PIC_WIDTH, WARE_MENU_PIC_HEIGHT,
-	                  UI::Button::Style::kWuiMenu,
-	                  g_gr->images().get("images/ui_basic/scrollbar_right.png"),
-	                  _("Increase the number of wares you want to be stored here."));
+	increase_max_fill_ = new UI::Button(
+	   this, "increase_max_fill", x, y, WARE_MENU_PIC_WIDTH, WARE_MENU_PIC_HEIGHT,
+	   UI::Button::Style::kWuiMenu, g_gr->images().get("images/ui_basic/scrollbar_right.png"),
+	   _("Increase the number of wares you want to be stored here."));
 	increase_max_fill_->sigclicked.connect(
 	   boost::bind(&InputQueueDisplay::increase_max_fill_clicked, boost::ref(*this)));
 

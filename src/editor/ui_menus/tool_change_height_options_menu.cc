@@ -43,7 +43,7 @@ EditorToolChangeHeightOptionsMenu::EditorToolChangeHeightOptionsMenu(
                 increase_tool_.get_change_by(),
                 1,
                 MAX_FIELD_HEIGHT_DIFF,
-					 UI::Panel::Style::kWui,
+                UI::Panel::Style::kWui,
                 _("Increase/Decrease Value:"),
                 UI::SpinBox::Units::kNone,
                 UI::SpinBox::Type::kSmall),
@@ -55,7 +55,7 @@ EditorToolChangeHeightOptionsMenu::EditorToolChangeHeightOptionsMenu(
              increase_tool_.set_tool().get_interval().min,
              0,
              MAX_FIELD_HEIGHT,
-				 UI::Panel::Style::kWui,
+             UI::Panel::Style::kWui,
              _("Set Value:"),
              UI::SpinBox::Units::kNone,
              UI::SpinBox::Type::kSmall) {

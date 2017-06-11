@@ -71,7 +71,8 @@ BaseDropdown::BaseDropdown(UI::Panel* parent,
                                     0,
                                     button_dimension,
                                     get_h(),
-                                    style == Panel::Style::kFsMenu ? Button::Style::kFsMenuMenu : Button::Style::kWuiSecondary,
+                                    style == Panel::Style::kFsMenu ? Button::Style::kFsMenuMenu :
+                                                                     Button::Style::kWuiSecondary,
                                     g_gr->images().get("images/ui_basic/scrollbar_down.png"),
                                     pgettext("dropdown", "Select Item")) :
                      nullptr),
@@ -81,7 +82,8 @@ BaseDropdown::BaseDropdown(UI::Panel* parent,
                      0,
                      type == DropdownType::kTextual ? w - button_dimension : button_dimension,
                      get_h(),
-                     style == Panel::Style::kFsMenu ? UI::Button::Style::kFsMenuBackground : UI::Button::Style::kWuiBackground,
+                     style == Panel::Style::kFsMenu ? UI::Button::Style::kFsMenuBackground :
+                                                      UI::Button::Style::kWuiBackground,
                      label),
      label_(label),
      type_(type),
@@ -92,8 +94,7 @@ BaseDropdown::BaseDropdown(UI::Panel* parent,
 	while (parent->get_parent() && !is_a(UI::TabPanel, parent->get_parent())) {
 		parent = parent->get_parent();
 	}
-	list_ = new UI::Listselect<uintptr_t>(
-	   parent, 0, 0, w, 0, style, ListselectLayout::kDropdown);
+	list_ = new UI::Listselect<uintptr_t>(parent, 0, 0, w, 0, style, ListselectLayout::kDropdown);
 
 	list_->set_visible(false);
 	button_box_.add(&display_button_);

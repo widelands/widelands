@@ -105,8 +105,8 @@ FullscreenMenuLaunchSPG::FullscreenMenuLaunchSPG(GameSettingsProvider* const set
 
 		pos_[i] =
 		   new UI::Button(this, "switch_to_position", get_w() / 100, y += buth_, get_h() * 17 / 500,
-		                  get_h() * 17 / 500, UI::Button::Style::kFsMenuSecondary,
-		                  player_image, _("Switch to position"));
+		                  get_h() * 17 / 500, UI::Button::Style::kFsMenuSecondary, player_image,
+		                  _("Switch to position"));
 		pos_[i]->sigclicked.connect(
 		   boost::bind(&FullscreenMenuLaunchSPG::switch_to_position, boost::ref(*this), i));
 		players_[i] = new PlayerDescriptionGroup(

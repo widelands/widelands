@@ -77,12 +77,9 @@ MainMenuSaveMap::MainMenuSaveMap(EditorInteractive& parent)
 	table_.double_clicked.connect(
 	   boost::bind(&MainMenuSaveMap::double_clicked_item, boost::ref(*this)));
 
-	editbox_ =
-	   new UI::EditBox(this, editbox_label_.get_x() + editbox_label_.get_w() + padding_,
-	                   editbox_label_.get_y(), tablew_ - editbox_label_.get_w() - padding_ + 1,
-	                   buth_,
-							 2,
-							 Panel::Style::kWui);
+	editbox_ = new UI::EditBox(
+	   this, editbox_label_.get_x() + editbox_label_.get_w() + padding_, editbox_label_.get_y(),
+	   tablew_ - editbox_label_.get_w() - padding_ + 1, buth_, 2, Panel::Style::kWui);
 
 	editbox_->set_text(parent.egbase().map().get_name());
 	editbox_->changed.connect(boost::bind(&MainMenuSaveMap::edit_box_changed, this));

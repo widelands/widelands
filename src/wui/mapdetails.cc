@@ -54,8 +54,7 @@ std::string as_header(const std::string& txt, UI::Panel::Style style, bool is_fi
 std::string as_content(const std::string& txt, UI::Panel::Style style) {
 	switch (style) {
 	case UI::Panel::Style::kFsMenu:
-		return (boost::format(
-		           "<p><font size=%i color=D1D1D1 shadow=1><vspace gap=2>%s</font></p>") %
+		return (boost::format("<p><font size=%i color=D1D1D1 shadow=1><vspace gap=2>%s</font></p>") %
 		        UI_FONT_SIZE_SMALL % richtext_escape(txt))
 		   .str();
 	case UI::Panel::Style::kWui:
@@ -78,7 +77,7 @@ MapDetails::MapDetails(Panel* parent, int32_t x, int32_t y, int32_t w, int32_t h
                  0,
                  UI::Scrollbar::kSize,
                  0,
-					  style,
+                 style,
                  "",
                  UI::Align::kLeft,
                  UI::MultilineTextarea::ScrollMode::kNoScrolling),

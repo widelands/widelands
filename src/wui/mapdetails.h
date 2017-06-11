@@ -31,7 +31,8 @@
  */
 class MapDetails : public UI::Panel {
 public:
-	MapDetails(UI::Panel* parent, int32_t x, int32_t y, int32_t w, int32_t h, UI::Panel::Style style);
+	MapDetails(
+	   UI::Panel* parent, int32_t x, int32_t y, int32_t w, int32_t h, UI::Panel::Style style);
 
 	void clear();
 	void update(const MapData& mapdata, bool localize_mapname);

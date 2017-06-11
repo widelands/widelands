@@ -83,7 +83,8 @@ SpinBox::SpinBox(Panel* const parent,
                  const uint32_t unit_w,
                  int32_t const startval,
                  int32_t const minval,
-                 int32_t const maxval, Style style,
+                 int32_t const maxval,
+                 Style style,
                  const std::string& label_text,
                  const SpinBox::Units& unit,
                  SpinBox::Type type,
@@ -105,13 +106,13 @@ SpinBox::SpinBox(Panel* const parent,
 	}
 	sbi_->value = startval;
 	sbi_->unit = unit;
-	sbi_->button_style = style == Panel::Style::kFsMenu ? Button::Style::kFsMenuMenu : Button::Style::kWuiSecondary;
+	sbi_->button_style =
+	   style == Panel::Style::kFsMenu ? Button::Style::kFsMenuMenu : Button::Style::kWuiSecondary;
 
 	box_ = new UI::Box(this, 0, 0, UI::Box::Horizontal, 0, 0, padding_);
 
-	sbi_->label =
-	   new UI::MultilineTextarea(box_, 0, 0, 0, 0, style, label_text,
-	                             UI::Align::kLeft, UI::MultilineTextarea::ScrollMode::kNoScrolling);
+	sbi_->label = new UI::MultilineTextarea(box_, 0, 0, 0, 0, style, label_text, UI::Align::kLeft,
+	                                        UI::MultilineTextarea::ScrollMode::kNoScrolling);
 	box_->add(sbi_->label);
 
 	sbi_->text = new UI::Textarea(box_, "", UI::Align::kCenter);

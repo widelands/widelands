@@ -54,15 +54,15 @@ GameMessageMenu::GameMessageMenu(InteractivePlayer& plr, UI::UniqueWindow::Regis
                   kMessageBodyY,
                   kWindowWidth - 2 * kPadding,
                   get_inner_h() - kMessageBodyY - 2 * kPadding - kButtonSize,
-						UI::Panel::Style::kWui,
+                  UI::Panel::Style::kWui,
                   "",
                   UI::Align::kLeft,
                   UI::MultilineTextarea::ScrollMode::kScrollNormalForced),
      mode(Inbox) {
 
-	list = new UI::Table<uintptr_t>(
-	   this, kPadding, kButtonSize + 2 * kPadding, kWindowWidth - 2 * kPadding, kTableHeight,
-	   UI::Panel::Style::kWui, UI::TableRows::kMulti);
+	list = new UI::Table<uintptr_t>(this, kPadding, kButtonSize + 2 * kPadding,
+	                                kWindowWidth - 2 * kPadding, kTableHeight,
+	                                UI::Panel::Style::kWui, UI::TableRows::kMulti);
 	list->selected.connect(boost::bind(&GameMessageMenu::selected, this, _1));
 	list->double_clicked.connect(boost::bind(&GameMessageMenu::double_clicked, this, _1));
 	list->add_column(kWindowWidth - 2 * kPadding - 60 - 60 - 75, _("Title"));
@@ -76,10 +76,9 @@ GameMessageMenu::GameMessageMenu(InteractivePlayer& plr, UI::UniqueWindow::Regis
 	list->focus();
 
 	// Buttons for message types
-	geologistsbtn_ =
-	   new UI::Button(this, "filter_geologists_messages", kPadding, kPadding, kButtonSize,
-	                  kButtonSize, UI::Button::Style::kWuiSecondary,
-	                  g_gr->images().get("images/wui/fieldaction/menu_geologist.png"));
+	geologistsbtn_ = new UI::Button(this, "filter_geologists_messages", kPadding, kPadding,
+	                                kButtonSize, kButtonSize, UI::Button::Style::kWuiSecondary,
+	                                g_gr->images().get("images/wui/fieldaction/menu_geologist.png"));
 	geologistsbtn_->sigclicked.connect(
 	   boost::bind(&GameMessageMenu::filter_messages, this, Widelands::Message::Type::kGeologists));
 
@@ -131,8 +130,7 @@ GameMessageMenu::GameMessageMenu(InteractivePlayer& plr, UI::UniqueWindow::Regis
 
 	centerviewbtn_ =
 	   new UI::Button(this, "center_main_mapview_on_location", kWindowWidth - kPadding - kButtonSize,
-	                  archivebtn_->get_y(), kButtonSize, kButtonSize,
-	                  UI::Button::Style::kWuiPrimary,
+	                  archivebtn_->get_y(), kButtonSize, kButtonSize, UI::Button::Style::kWuiPrimary,
 	                  g_gr->images().get("images/wui/menus/menu_goto.png"),
 	                  /** TRANSLATORS: %s is a tooltip, G is the corresponding hotkey */
 	                  (boost::format(_("G: %s"))

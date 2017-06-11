@@ -60,7 +60,9 @@ Scrollbar::Scrollbar(Panel* const parent,
                                            "images/ui_basic/scrollbar_up.png")),
      pic_plus_(g_gr->images().get(horiz ? "images/ui_basic/scrollbar_right.png" :
                                           "images/ui_basic/scrollbar_down.png")),
-     pic_buttons_(g_gr->images().get(style == Panel::Style::kFsMenu ? "images/ui_fsmenu/button_menu.png" : "images/wui/button_secondary.png")) {
+     pic_buttons_(g_gr->images().get(style == Panel::Style::kFsMenu ?
+                                        "images/ui_fsmenu/button_menu.png" :
+                                        "images/wui/button_secondary.png")) {
 	set_thinks(true);
 	layout();
 }

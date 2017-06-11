@@ -264,26 +264,22 @@ BuildingStatisticsMenu::BuildingStatisticsMenu(InteractivePlayer& parent,
 
 	navigation_buttons_[NavigationButton::PrevConstruction] = new UI::Button(
 	   &navigation_panel_, "previous_constructed", get_inner_w() - 2 * kButtonRowHeight,
-	   2 * kButtonRowHeight, kButtonHeight, kButtonHeight,
-	   UI::Button::Style::kWuiMenu,
+	   2 * kButtonRowHeight, kButtonHeight, kButtonHeight, UI::Button::Style::kWuiMenu,
 	   g_gr->images().get("images/ui_basic/scrollbar_left.png"), _("Show previous building"));
 
 	navigation_buttons_[NavigationButton::NextConstruction] = new UI::Button(
 	   &navigation_panel_, "next_constructed", get_inner_w() - kButtonRowHeight,
-	   2 * kButtonRowHeight, kButtonHeight, kButtonHeight,
-	   UI::Button::Style::kWuiMenu,
+	   2 * kButtonRowHeight, kButtonHeight, kButtonHeight, UI::Button::Style::kWuiMenu,
 	   g_gr->images().get("images/ui_basic/scrollbar_right.png"), _("Show next building"));
 
 	navigation_buttons_[NavigationButton::PrevUnproductive] = new UI::Button(
 	   &navigation_panel_, "previous_unproductive", get_inner_w() - 2 * kButtonRowHeight,
-	   3 * kButtonRowHeight, kButtonHeight, kButtonHeight,
-	   UI::Button::Style::kWuiMenu,
+	   3 * kButtonRowHeight, kButtonHeight, kButtonHeight, UI::Button::Style::kWuiMenu,
 	   g_gr->images().get("images/ui_basic/scrollbar_left.png"), _("Show previous building"));
 
 	navigation_buttons_[NavigationButton::NextUnproductive] = new UI::Button(
 	   &navigation_panel_, "next_unproductive", get_inner_w() - kButtonRowHeight,
-	   3 * kButtonRowHeight, kButtonHeight, kButtonHeight,
-	   UI::Button::Style::kWuiMenu,
+	   3 * kButtonRowHeight, kButtonHeight, kButtonHeight, UI::Button::Style::kWuiMenu,
 	   g_gr->images().get("images/ui_basic/scrollbar_right.png"), _("Show next building"));
 
 	navigation_buttons_[NavigationButton::PrevOwned]->sigclicked.connect(boost::bind(
@@ -326,11 +322,11 @@ bool BuildingStatisticsMenu::add_button(
    DescriptionIndex id, const BuildingDescr& descr, int tab_index, UI::Box& row, int* column) {
 
 	UI::Box* button_box = new UI::Box(&row, 0, 0, UI::Box::Vertical);
-	building_buttons_[id] = new UI::Button(
-	   button_box, (boost::format("building_button%s") % id).str(), 0, 0, kBuildGridCellWidth,
-	   kBuildGridCellHeight, UI::Button::Style::kTransparent,
-	   descr.representative_image(&iplayer().get_player()->get_playercolor()), "",
-	   UI::Button::VisualState::kFlat);
+	building_buttons_[id] =
+	   new UI::Button(button_box, (boost::format("building_button%s") % id).str(), 0, 0,
+	                  kBuildGridCellWidth, kBuildGridCellHeight, UI::Button::Style::kTransparent,
+	                  descr.representative_image(&iplayer().get_player()->get_playercolor()), "",
+	                  UI::Button::VisualState::kFlat);
 	building_buttons_[id]->set_disable_style(UI::ButtonDisableStyle::kMonochrome |
 	                                         UI::ButtonDisableStyle::kFlat);
 	button_box->add(building_buttons_[id]);

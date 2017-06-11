@@ -90,11 +90,8 @@ bool Tab::handle_mousepress(uint8_t, int32_t, int32_t) {
 /**
  * Initialize an empty TabPanel
 */
-TabPanel::TabPanel(Panel* const parent,
-                   int32_t const x,
-                   int32_t const y,
-                   Style style,
-                   TabPanel::Type border_type)
+TabPanel::TabPanel(
+   Panel* const parent, int32_t const x, int32_t const y, Style style, TabPanel::Type border_type)
    : TabPanel(parent, x, y, 0, 0, style, border_type) {
 }
 TabPanel::TabPanel(Panel* const parent,
@@ -104,10 +101,7 @@ TabPanel::TabPanel(Panel* const parent,
                    int32_t const h,
                    Style style,
                    TabPanel::Type border_type)
-   : Panel(parent, x, y, w, h),
-     border_type_(border_type),
-     active_(0),
-     highlight_(kNotFound) {
+   : Panel(parent, x, y, w, h), border_type_(border_type), active_(0), highlight_(kNotFound) {
 	switch (style) {
 	case TabPanel::Style::kFsMenu:
 		pic_background_ = g_gr->images().get("images/ui_fsmenu/background_light.png");
@@ -271,14 +265,13 @@ void TabPanel::draw(RenderTarget& dst) {
 	// Tile the background image
 	if (!tabs_.empty()) {
 		dst.tile(Recti(Vector2i::zero(), tabs_.back()->get_x() + tabs_.back()->get_w(),
-							kTabPanelButtonHeight - 2),
-					pic_background_, Vector2i(get_x(), get_y()));
+		               kTabPanelButtonHeight - 2),
+		         pic_background_, Vector2i(get_x(), get_y()));
 	}
 	assert(kTabPanelButtonHeight - 2 <= get_h());
-	dst.tile(Recti(Vector2i(0, kTabPanelButtonHeight - 2), get_w(),
-						get_h() - kTabPanelButtonHeight + 2),
-				pic_background_, Vector2i(get_x(), get_y() + kTabPanelButtonHeight - 2));
-
+	dst.tile(
+	   Recti(Vector2i(0, kTabPanelButtonHeight - 2), get_w(), get_h() - kTabPanelButtonHeight + 2),
+	   pic_background_, Vector2i(get_x(), get_y() + kTabPanelButtonHeight - 2));
 
 	// Draw the buttons
 	RGBColor black(0, 0, 0);

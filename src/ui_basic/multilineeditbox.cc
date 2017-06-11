@@ -81,11 +81,7 @@ private:
 /**
  * Initialize an editbox that supports multiline strings.
 */
-MultilineEditbox::MultilineEditbox(Panel* parent,
-                                   int32_t x,
-                                   int32_t y,
-                                   uint32_t w,
-                                   uint32_t h)
+MultilineEditbox::MultilineEditbox(Panel* parent, int32_t x, int32_t y, uint32_t w, uint32_t h)
    : Panel(parent, x, y, w, h), d_(new Data(*this)) {
 	d_->background = g_gr->images().get("images/wui/button_secondary.png");
 	d_->lineheight = text_height();
@@ -96,7 +92,8 @@ MultilineEditbox::MultilineEditbox(Panel* parent,
 }
 
 MultilineEditbox::Data::Data(MultilineEditbox& o)
-   : scrollbar(&o, o.get_w() - Scrollbar::kSize, 0, Scrollbar::kSize, o.get_h(), UI::Panel::Style::kWui),
+   : scrollbar(
+        &o, o.get_w() - Scrollbar::kSize, 0, Scrollbar::kSize, o.get_h(), UI::Panel::Style::kWui),
      cursor_pos(0),
      maxbytes(std::min(g_gr->max_texture_size() / UI_FONT_SIZE_SMALL, 0xffff)),
      ww_valid(false),

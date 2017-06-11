@@ -80,11 +80,11 @@ private:
 	    uint32_t const w,
 	    uint32_t const h,
 	    Button::Style style,
-		 const Image* foreground_picture_id,
+	    const Image* foreground_picture_id,
 	    const std::string& title_text,
 	    const std::string& tooltip_text,
 	    UI::Button::VisualState state,
-		 UI::Button::ImageMode mode);
+	    UI::Button::ImageMode mode);
 
 public:
 	Button  /// for textual buttons

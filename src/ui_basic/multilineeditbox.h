@@ -33,12 +33,7 @@ namespace UI {
  * @ref Editbox and @ref MultilineTextarea
  */
 struct MultilineEditbox : public Panel {
-	MultilineEditbox(
-	   Panel*,
-	   int32_t x,
-	   int32_t y,
-	   uint32_t w,
-	   uint32_t h);
+	MultilineEditbox(Panel*, int32_t x, int32_t y, uint32_t w, uint32_t h);
 
 	boost::signals2::signal<void()> changed;
 

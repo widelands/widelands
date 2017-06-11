@@ -86,7 +86,9 @@ EditBox::EditBox(Panel* const parent,
      history_position_(-1) {
 	set_thinks(false);
 
-	m_->background = g_gr->images().get(style == Panel::Style::kFsMenu ? "images/ui_fsmenu/button_main.png" : "images/wui/button_secondary.png");
+	m_->background =
+	   g_gr->images().get(style == Panel::Style::kFsMenu ? "images/ui_fsmenu/button_main.png" :
+	                                                       "images/wui/button_secondary.png");
 	m_->fontname = UI::g_fh1->fontset()->sans();
 	m_->fontsize = font_size;
 

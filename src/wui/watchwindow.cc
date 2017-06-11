@@ -100,27 +100,26 @@ WatchWindow::WatchWindow(InteractiveGameBase& parent,
      last_visit_(game().get_gametime()),
      single_window_(init_single_window),
      cur_index_(0) {
-	UI::Button* followbtn = new UI::Button(
-	   this, "follow", 0, h - 34, 34, 34, UI::Button::Style::kWuiSecondary,
-	   g_gr->images().get("images/wui/menus/menu_watch_follow.png"), _("Follow"));
+	UI::Button* followbtn =
+	   new UI::Button(this, "follow", 0, h - 34, 34, 34, UI::Button::Style::kWuiSecondary,
+	                  g_gr->images().get("images/wui/menus/menu_watch_follow.png"), _("Follow"));
 	followbtn->sigclicked.connect(boost::bind(&WatchWindow::do_follow, this));
 
-	UI::Button* gotobtn = new UI::Button(this, "center_mainview_here", 34, h - 34, 34, 34,
-	                                     UI::Button::Style::kWuiSecondary,
-	                                     g_gr->images().get("images/wui/menus/menu_goto.png"),
-	                                     _("Center the main view on this"));
+	UI::Button* gotobtn = new UI::Button(
+	   this, "center_mainview_here", 34, h - 34, 34, 34, UI::Button::Style::kWuiSecondary,
+	   g_gr->images().get("images/wui/menus/menu_goto.png"), _("Center the main view on this"));
 	gotobtn->sigclicked.connect(boost::bind(&WatchWindow::do_goto, this));
 
 	if (init_single_window) {
 		for (uint8_t i = 0; i < NUM_VIEWS; ++i) {
-			view_btns_[i] = new UI::Button(this, "view", 74 + (17 * i), 200 - 34, 17, 34,
-			                               UI::Button::Style::kWuiSecondary, "-");
+			view_btns_[i] = new UI::Button(
+			   this, "view", 74 + (17 * i), 200 - 34, 17, 34, UI::Button::Style::kWuiSecondary, "-");
 			view_btns_[i]->sigclicked.connect(boost::bind(&WatchWindow::view_button_clicked, this, i));
 		}
 
-		UI::Button* closebtn = new UI::Button(
-		   this, "close", w - 34, h - 34, 34, 34, UI::Button::Style::kWuiSecondary,
-		   g_gr->images().get("images/wui/menu_abort.png"), _("Close"));
+		UI::Button* closebtn =
+		   new UI::Button(this, "close", w - 34, h - 34, 34, 34, UI::Button::Style::kWuiSecondary,
+		                  g_gr->images().get("images/wui/menu_abort.png"), _("Close"));
 		closebtn->sigclicked.connect(boost::bind(&WatchWindow::close_cur_view, this));
 	}
 

@@ -70,7 +70,9 @@ Slider::Slider(Panel* const parent,
      highlighted_(false),
      pressed_(false),
      enabled_(enabled),
-     pic_background_(g_gr->images().get(style == Panel::Style::kFsMenu ? "images/ui_fsmenu/button_menu.png" : "images/wui/button_secondary.png")),
+     pic_background_(g_gr->images().get(style == Panel::Style::kFsMenu ?
+                                           "images/ui_fsmenu/button_menu.png" :
+                                           "images/wui/button_secondary.png")),
      x_gap_(x_gap),
      y_gap_(y_gap),
      bar_size_(bar_size),

@@ -512,9 +512,8 @@ UI::Button& FieldActionWindow::add_button(UI::Box* const box,
                                           void (FieldActionWindow::*fn)(),
                                           const std::string& tooltip_text,
                                           bool repeating) {
-	UI::Button& button =
-	   *new UI::Button(box, name, 0, 0, 34, 34, UI::Button::Style::kWuiPrimary,
-	                   g_gr->images().get(picname), tooltip_text);
+	UI::Button& button = *new UI::Button(box, name, 0, 0, 34, 34, UI::Button::Style::kWuiPrimary,
+	                                     g_gr->images().get(picname), tooltip_text);
 	button.sigclicked.connect(boost::bind(fn, this));
 	button.set_repeating(repeating);
 	box->add(&button);

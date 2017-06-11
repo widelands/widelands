@@ -33,7 +33,6 @@ namespace UI {
 // size.
 constexpr int kButtonImageMargin = 2;
 
-
 Button::Button  //  Common constructor
    (Panel* const parent,
     const std::string& name,
@@ -42,11 +41,11 @@ Button::Button  //  Common constructor
     uint32_t const w,
     uint32_t const h,
     Style style,
-	 const Image* fg_pic,
+    const Image* fg_pic,
     const std::string& title_text,
     const std::string& tooltip_text,
     UI::Button::VisualState init_state,
-	 ImageMode mode)
+    ImageMode mode)
    : NamedPanel(parent, name, x, y, w, h, tooltip_text),
      highlighted_(false),
      pressed_(false),
@@ -54,7 +53,7 @@ Button::Button  //  Common constructor
      visual_state_(init_state),
      disable_style_(ButtonDisableStyle::kMonochrome),
      repeating_(false),
-	  image_mode_(mode),
+     image_mode_(mode),
      time_nextact_(0),
      title_(title_text),
      pic_custom_(fg_pic),
@@ -103,7 +102,18 @@ Button::Button  //  for textual buttons. If h = 0, h will resize according to th
     const std::string& title_text,
     const std::string& tooltip_text,
     UI::Button::VisualState init_state)
-   : Button(parent, name, x, y, w, h, style, nullptr, title_text, tooltip_text, init_state, UI::Button::ImageMode::kShrink) {
+   : Button(parent,
+            name,
+            x,
+            y,
+            w,
+            h,
+            style,
+            nullptr,
+            title_text,
+            tooltip_text,
+            init_state,
+            UI::Button::ImageMode::kShrink) {
 	// Automatically resize for font height and give it a margin.
 	if (h < 1) {
 		int new_height = text_height() + 4;
@@ -383,7 +393,8 @@ void Button::set_disable_style(UI::ButtonDisableStyle input_style) {
 }
 
 void Button::set_perm_pressed(bool pressed) {
-	set_visual_state(pressed ? UI::Button::VisualState::kPermpressed : UI::Button::VisualState::kRaised);
+	set_visual_state(pressed ? UI::Button::VisualState::kPermpressed :
+	                           UI::Button::VisualState::kRaised);
 }
 
 void Button::toggle() {

@@ -155,7 +155,15 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 	     s(settings),
 	     n(npsb),
 	     id_(id),
-	     tribes_dropdown_(this, 0, 0, 50, 200, h, _("Tribe"), UI::DropdownType::kPictorial, UI::Panel::Style::kFsMenu),
+	     tribes_dropdown_(this,
+	                      0,
+	                      0,
+	                      50,
+	                      200,
+	                      h,
+	                      _("Tribe"),
+	                      UI::DropdownType::kPictorial,
+	                      UI::Panel::Style::kFsMenu),
 	     last_state_(PlayerSettings::stateClosed),
 	     last_player_amount_(0) {
 		set_size(w, h);
@@ -168,19 +176,19 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 		assert(player_image);
 		player = new UI::Icon(this, 0, 0, h, h, player_image);
 		add(player);
-		type = new UI::Button(
-		   this, "player_type", 0, 0, h, h, UI::Button::Style::kFsMenuSecondary, "");
+		type =
+		   new UI::Button(this, "player_type", 0, 0, h, h, UI::Button::Style::kFsMenuSecondary, "");
 		type->sigclicked.connect(
 		   boost::bind(&MultiPlayerPlayerGroup::toggle_type, boost::ref(*this)));
 		add(type);
 		add(&tribes_dropdown_);
-		init = new UI::Button(this, "player_init", 0, 0, w - 4 * h, h,
-		                      UI::Button::Style::kFsMenuSecondary, "");
+		init = new UI::Button(
+		   this, "player_init", 0, 0, w - 4 * h, h, UI::Button::Style::kFsMenuSecondary, "");
 		init->sigclicked.connect(
 		   boost::bind(&MultiPlayerPlayerGroup::toggle_init, boost::ref(*this)));
 		add(init);
-		team = new UI::Button(
-		   this, "player_team", 0, 0, h, h, UI::Button::Style::kFsMenuSecondary, "");
+		team =
+		   new UI::Button(this, "player_team", 0, 0, h, h, UI::Button::Style::kFsMenuSecondary, "");
 		team->sigclicked.connect(
 		   boost::bind(&MultiPlayerPlayerGroup::toggle_team, boost::ref(*this)));
 		add(team);

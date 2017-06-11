@@ -29,30 +29,12 @@ FullscreenMenuSinglePlayer::FullscreenMenuSinglePlayer()
      title(this, 0, 0, _("Single Player"), UI::Align::kCenter),
 
      // Buttons
-     new_game(&vbox_,
-              "new_game",
-              0,
-              0,
-              butw_,
-              buth_,
-              UI::Button::Style::kFsMenuMenu,
-              _("New Game")),
-     campaign(&vbox_,
-              "campaigns",
-              0,
-              0,
-              butw_,
-              buth_,
-              UI::Button::Style::kFsMenuMenu,
-              _("Campaigns")),
-     load_game(&vbox_,
-               "load_game",
-               0,
-               0,
-               butw_,
-               buth_,
-               UI::Button::Style::kFsMenuMenu,
-               _("Load Game")),
+     new_game(
+        &vbox_, "new_game", 0, 0, butw_, buth_, UI::Button::Style::kFsMenuMenu, _("New Game")),
+     campaign(
+        &vbox_, "campaigns", 0, 0, butw_, buth_, UI::Button::Style::kFsMenuMenu, _("Campaigns")),
+     load_game(
+        &vbox_, "load_game", 0, 0, butw_, buth_, UI::Button::Style::kFsMenuMenu, _("Load Game")),
      back(&vbox_, "back", 0, 0, butw_, buth_, UI::Button::Style::kFsMenuMenu, _("Back")) {
 	new_game.sigclicked.connect(
 	   boost::bind(&FullscreenMenuSinglePlayer::end_modal<FullscreenMenuBase::MenuTarget>,

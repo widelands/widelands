@@ -255,9 +255,8 @@ UI::Button* ShipWindow::make_button(UI::Panel* parent,
                                     const std::string& title,
                                     const std::string& picname,
                                     boost::function<void()> callback) {
-	UI::Button* btn =
-	   new UI::Button(parent, name, 0, 0, 34, 34, UI::Button::Style::kWuiMenu,
-	                  g_gr->images().get(picname), title);
+	UI::Button* btn = new UI::Button(
+	   parent, name, 0, 0, 34, 34, UI::Button::Style::kWuiMenu, g_gr->images().get(picname), title);
 	btn->sigclicked.connect(callback);
 	return btn;
 }

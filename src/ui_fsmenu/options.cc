@@ -99,22 +99,8 @@ FullscreenMenuOptions::FullscreenMenuOptions(OptionsCtrl::OptionsStruct opt)
 
      // Buttons
      button_box_(this, 0, 0, UI::Box::Horizontal),
-     cancel_(&button_box_,
-             "cancel",
-             0,
-             0,
-             0,
-             0,
-             UI::Button::Style::kFsMenuSecondary,
-             _("Cancel")),
-     apply_(&button_box_,
-            "apply",
-            0,
-            0,
-            0,
-            0,
-            UI::Button::Style::kFsMenuSecondary,
-            _("Apply")),
+     cancel_(&button_box_, "cancel", 0, 0, 0, 0, UI::Button::Style::kFsMenuSecondary, _("Cancel")),
+     apply_(&button_box_, "apply", 0, 0, 0, 0, UI::Button::Style::kFsMenuSecondary, _("Apply")),
      ok_(&button_box_, "ok", 0, 0, 0, 0, UI::Button::Style::kFsMenuPrimary, _("OK")),
 
      // Tabs
@@ -140,8 +126,8 @@ FullscreenMenuOptions::FullscreenMenuOptions(OptionsCtrl::OptionsStruct opt)
                         100,  // 100 is arbitrary, will be resized in layout().
                         24,
                         _("Language"),
-								UI::DropdownType::kTextual,
-								UI::Panel::Style::kFsMenu),
+                        UI::DropdownType::kTextual,
+                        UI::Panel::Style::kFsMenu),
      resolution_dropdown_(&box_interface_,
                           0,
                           0,
@@ -149,13 +135,22 @@ FullscreenMenuOptions::FullscreenMenuOptions(OptionsCtrl::OptionsStruct opt)
                           100,  // 100 is arbitrary, will be resized in layout().
                           24,
                           _("In-game resolution"),
-								  UI::DropdownType::kTextual,
-								  UI::Panel::Style::kFsMenu),
+                          UI::DropdownType::kTextual,
+                          UI::Panel::Style::kFsMenu),
 
      fullscreen_(&box_interface_, Vector2i::zero(), _("Fullscreen"), "", 0),
      inputgrab_(&box_interface_, Vector2i::zero(), _("Grab Input"), "", 0),
 
-     sb_maxfps_(&box_interface_, 0, 0, 0, 0, opt.maxfps, 0, 99, UI::Panel::Style::kFsMenu, _("Maximum FPS:")),
+     sb_maxfps_(&box_interface_,
+                0,
+                0,
+                0,
+                0,
+                opt.maxfps,
+                0,
+                99,
+                UI::Panel::Style::kFsMenu,
+                _("Maximum FPS:")),
 
      // Windows options
      snap_win_overlap_only_(
@@ -170,7 +165,7 @@ FullscreenMenuOptions::FullscreenMenuOptions(OptionsCtrl::OptionsStruct opt)
                    opt.panel_snap_distance,
                    0,
                    99,
-						 UI::Panel::Style::kFsMenu,
+                   UI::Panel::Style::kFsMenu,
                    _("Distance for windows to snap to other panels:"),
                    UI::SpinBox::Units::kPixels),
 
@@ -182,7 +177,7 @@ FullscreenMenuOptions::FullscreenMenuOptions(OptionsCtrl::OptionsStruct opt)
                     opt.border_snap_distance,
                     0,
                     99,
-						  UI::Panel::Style::kFsMenu,
+                    UI::Panel::Style::kFsMenu,
                     _("Distance for windows to snap to borders:"),
                     UI::SpinBox::Units::kPixels),
 
@@ -200,7 +195,7 @@ FullscreenMenuOptions::FullscreenMenuOptions(OptionsCtrl::OptionsStruct opt)
                   opt.autosave / 60,
                   0,
                   100,
-						UI::Panel::Style::kFsMenu,
+                  UI::Panel::Style::kFsMenu,
                   _("Save game automatically every:"),
                   UI::SpinBox::Units::kMinutes,
                   UI::SpinBox::Type::kBig),
@@ -213,7 +208,7 @@ FullscreenMenuOptions::FullscreenMenuOptions(OptionsCtrl::OptionsStruct opt)
                           opt.rolling_autosave,
                           1,
                           20,
-								  UI::Panel::Style::kFsMenu,
+                          UI::Panel::Style::kFsMenu,
                           _("Maximum number of autosave files:"),
                           UI::SpinBox::Units::kNone,
                           UI::SpinBox::Type::kBig),

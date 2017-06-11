@@ -184,10 +184,9 @@ void BuildingWindow::create_capsbuttons(UI::Box* capsbuttons) {
 		// Check if this is a port building and if yes show expedition button
 		if (upcast(Widelands::Warehouse const, warehouse, &building_)) {
 			if (Widelands::PortDock* pd = warehouse->get_portdock()) {
-				expeditionbtn_ =
-				   new UI::Button(capsbuttons, "start_or_cancel_expedition", 0, 0, 34, 34,
-				                  UI::Button::Style::kWuiMenu,
-				                  g_gr->images().get("images/wui/buildings/start_expedition.png"));
+				expeditionbtn_ = new UI::Button(
+				   capsbuttons, "start_or_cancel_expedition", 0, 0, 34, 34, UI::Button::Style::kWuiMenu,
+				   g_gr->images().get("images/wui/buildings/start_expedition.png"));
 				update_expedition_button(!pd->expedition_started());
 				expeditionbtn_->sigclicked.connect(
 				   boost::bind(&BuildingWindow::act_start_or_cancel_expedition, boost::ref(*this)));
@@ -239,9 +238,9 @@ void BuildingWindow::create_capsbuttons(UI::Box* capsbuttons) {
 				   "<br><font size=11>" + _("Construction costs:") + "</font><br>" +
 				   waremap_to_richtext(tribe, building_descr.enhancement_cost());
 
-				UI::Button* enhancebtn = new UI::Button(capsbuttons, "enhance", 0, 0, 34, 34,
-				                                        UI::Button::Style::kWuiMenu,
-				                                        building_descr.icon(), enhance_tooltip);
+				UI::Button* enhancebtn =
+				   new UI::Button(capsbuttons, "enhance", 0, 0, 34, 34, UI::Button::Style::kWuiMenu,
+				                  building_descr.icon(), enhance_tooltip);
 
 				//  button id = building id
 				enhancebtn->sigclicked.connect([this, enhancement] { act_enhance(enhancement); });
@@ -251,9 +250,9 @@ void BuildingWindow::create_capsbuttons(UI::Box* capsbuttons) {
 		}
 
 		if (capscache_ & Widelands::Building::PCap_Bulldoze) {
-			UI::Button* destroybtn = new UI::Button(capsbuttons, "destroy", 0, 0, 34, 34,
-			                                        UI::Button::Style::kWuiMenu,
-			                                        g_gr->images().get(pic_bulldoze), _("Destroy"));
+			UI::Button* destroybtn =
+			   new UI::Button(capsbuttons, "destroy", 0, 0, 34, 34, UI::Button::Style::kWuiMenu,
+			                  g_gr->images().get(pic_bulldoze), _("Destroy"));
 			destroybtn->sigclicked.connect(
 			   boost::bind(&BuildingWindow::act_bulldoze, boost::ref(*this)));
 			capsbuttons->add(destroybtn);
@@ -265,11 +264,11 @@ void BuildingWindow::create_capsbuttons(UI::Box* capsbuttons) {
 			const Widelands::Buildcost wares =
 			   Widelands::DismantleSite::count_returned_wares(&building_);
 			if (!wares.empty()) {
-				UI::Button* dismantlebtn = new UI::Button(
-				   capsbuttons, "dismantle", 0, 0, 34, 34,
-				   UI::Button::Style::kWuiMenu, g_gr->images().get(pic_dismantle),
-				   std::string(_("Dismantle")) + "<br><font size=11>" + _("Returns:") + "</font><br>" +
-				      waremap_to_richtext(owner.tribe(), wares));
+				UI::Button* dismantlebtn =
+				   new UI::Button(capsbuttons, "dismantle", 0, 0, 34, 34, UI::Button::Style::kWuiMenu,
+				                  g_gr->images().get(pic_dismantle),
+				                  std::string(_("Dismantle")) + "<br><font size=11>" + _("Returns:") +
+				                     "</font><br>" + waremap_to_richtext(owner.tribe(), wares));
 				dismantlebtn->sigclicked.connect(
 				   boost::bind(&BuildingWindow::act_dismantle, boost::ref(*this)));
 				capsbuttons->add(dismantlebtn);
@@ -306,9 +305,9 @@ void BuildingWindow::create_capsbuttons(UI::Box* capsbuttons) {
 		}
 
 		if (igbase()->get_display_flag(InteractiveBase::dfDebug)) {
-			UI::Button* debugbtn = new UI::Button(
-			   capsbuttons, "debug", 0, 0, 34, 34, UI::Button::Style::kWuiMenu,
-			   g_gr->images().get(pic_debug), _("Show Debug Window"));
+			UI::Button* debugbtn =
+			   new UI::Button(capsbuttons, "debug", 0, 0, 34, 34, UI::Button::Style::kWuiMenu,
+			                  g_gr->images().get(pic_debug), _("Show Debug Window"));
 			debugbtn->sigclicked.connect(boost::bind(&BuildingWindow::act_debug, boost::ref(*this)));
 			capsbuttons->add(debugbtn);
 		}
@@ -325,9 +324,9 @@ void BuildingWindow::create_capsbuttons(UI::Box* capsbuttons) {
 			capsbuttons->add_inf_space();
 		}
 
-		UI::Button* helpbtn = new UI::Button(
-		   capsbuttons, "help", 0, 0, 34, 34, UI::Button::Style::kWuiMenu,
-		   g_gr->images().get("images/ui_basic/menu_help.png"), _("Help"));
+		UI::Button* helpbtn =
+		   new UI::Button(capsbuttons, "help", 0, 0, 34, 34, UI::Button::Style::kWuiMenu,
+		                  g_gr->images().get("images/ui_basic/menu_help.png"), _("Help"));
 
 		UI::UniqueWindow::Registry& registry =
 		   igbase()->unique_windows().get_registry(building_.descr().name() + "_help");

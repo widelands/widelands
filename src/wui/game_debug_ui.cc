@@ -67,7 +67,7 @@ MapObjectDebugPanel::MapObjectDebugPanel(UI::Panel& parent,
           0,
           350,
           200,
-			 UI::Panel::Style::kWui,
+          UI::Panel::Style::kWui,
           "",
           UI::Align::kLeft,
           UI::MultilineTextarea::ScrollMode::kScrollLog) {
@@ -215,8 +215,7 @@ FieldDebugWindow::FieldDebugWindow(InteractiveBase& parent, Widelands::Coords co
      //  setup child panels
      ui_field_(this, 0, 0, 300, 280, UI::Panel::Style::kWui, ""),
 
-     ui_immovable_(
-        this, "immovable", 0, 280, 300, 24, UI::Button::Style::kWuiMenu, ""),
+     ui_immovable_(this, "immovable", 0, 280, 300, 24, UI::Button::Style::kWuiMenu, ""),
 
      ui_bobs_(this, 0, 304, 300, 96, UI::Panel::Style::kWui) {
 	ui_immovable_.sigclicked.connect(boost::bind(&FieldDebugWindow::open_immovable, this));

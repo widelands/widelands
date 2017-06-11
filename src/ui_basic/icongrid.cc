@@ -96,8 +96,8 @@ int32_t IconGrid::add(const std::string& name,
 	uint32_t x = (idx % columns_) * cell_width_;
 	uint32_t y = (idx / columns_) * cell_height_;
 
-	UI::Button* btn = new IconGridButton(
-	   *this, name, x, y, cell_width_, cell_height_, pic, idx, tooltip_text);
+	UI::Button* btn =
+	   new IconGridButton(*this, name, x, y, cell_width_, cell_height_, pic, idx, tooltip_text);
 	btn->sigclicked.connect(boost::bind(&IconGrid::clicked_button, this, idx));
 
 	return idx;

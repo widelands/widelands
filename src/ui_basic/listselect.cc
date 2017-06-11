@@ -60,7 +60,11 @@ BaseListselect::BaseListselect(Panel* const parent,
      last_click_time_(-10000),
      last_selection_(no_selection_index()),
      selection_mode_(selection_mode),
-     background_(selection_mode == ListselectLayout::kDropdown ? g_gr->images().get(style == Panel::Style::kFsMenu ? "images/ui_fsmenu/background_light.png" : "images/wui/window_background_dark.png") : nullptr) {
+     background_(selection_mode == ListselectLayout::kDropdown ?
+                    g_gr->images().get(style == Panel::Style::kFsMenu ?
+                                          "images/ui_fsmenu/background_light.png" :
+                                          "images/wui/window_background_dark.png") :
+                    nullptr) {
 	set_thinks(false);
 
 	scrollbar_.moved.connect(boost::bind(&BaseListselect::set_scrollpos, this, _1));

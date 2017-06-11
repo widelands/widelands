@@ -76,13 +76,8 @@ MainMenuMapOptions::MainMenuMapOptions(EditorInteractive& parent, bool modal)
      author_(&main_box_, 0, 0, max_w_, 0, 2, Panel::Style::kWui),
      size_(&main_box_, 0, 0, max_w_ - indent_, labelh_, ""),
 
-     teams_list_(&teams_box_,
-                 0,
-                 0,
-                 max_w_,
-                 60,
-                 UI::Panel::Style::kWui,
-                 UI::ListselectLayout::kShowCheck),
+     teams_list_(
+        &teams_box_, 0, 0, max_w_, 60, UI::Panel::Style::kWui, UI::ListselectLayout::kShowCheck),
 
      modal_(modal) {
 
@@ -97,8 +92,8 @@ MainMenuMapOptions::MainMenuMapOptions(EditorInteractive& parent, bool modal)
 
 	// We need less space for the hint and the description, but it should at least have 1 line
 	// height.
-	hint_ =
-	   new UI::MultilineEditbox(&main_box_, 0, 0, max_w_, std::max(labelh_, remaining_space * 1 / 3));
+	hint_ = new UI::MultilineEditbox(
+	   &main_box_, 0, 0, max_w_, std::max(labelh_, remaining_space * 1 / 3));
 	descr_ = new UI::MultilineEditbox(&main_box_, 0, 0, max_w_, remaining_space - hint_->get_h());
 
 	main_box_.add(new UI::Textarea(&main_box_, 0, 0, max_w_, labelh_, _("Map Name:")));

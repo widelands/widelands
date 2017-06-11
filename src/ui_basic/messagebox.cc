@@ -73,26 +73,25 @@ WLMessageBox::WLMessageBox(Panel* const parent,
 		scrollmode = MultilineTextarea::ScrollMode::kScrollNormal;
 	}
 
-	textarea_.reset(new MultilineTextarea(this, margin, margin, width - 2 * margin, height, UI::Panel::Style::kWui, text,
-	                                      align,
-	                                      scrollmode));
+	textarea_.reset(new MultilineTextarea(this, margin, margin, width - 2 * margin, height,
+	                                      UI::Panel::Style::kWui, text, align, scrollmode));
 
 	// Now add the buttons
 	const int button_y = textarea_->get_y() + textarea_->get_h() + 2 * margin;
 	const int left_button_x = width / 3 - button_w / 2;
 	const int right_button_x = width * 2 / 3 - button_w / 2;
 
-	ok_button_.reset(new Button(
-	   this, "ok",
-	   type_ == MBoxType::kOk ? (width - button_w) / 2 :
-	                            UI::g_fh1->fontset()->is_rtl() ? left_button_x : right_button_x,
-	   button_y, button_w, 0, UI::Button::Style::kWuiPrimary, _("OK")));
+	ok_button_.reset(new Button(this, "ok",
+	                            type_ == MBoxType::kOk ?
+	                               (width - button_w) / 2 :
+	                               UI::g_fh1->fontset()->is_rtl() ? left_button_x : right_button_x,
+	                            button_y, button_w, 0, UI::Button::Style::kWuiPrimary, _("OK")));
 	ok_button_->sigclicked.connect(boost::bind(&WLMessageBox::clicked_ok, boost::ref(*this)));
 
 	if (type_ == MBoxType::kOkCancel) {
-		cancel_button_.reset(new Button(
-		   this, "cancel", UI::g_fh1->fontset()->is_rtl() ? right_button_x : left_button_x, button_y,
-		   button_w, 0, UI::Button::Style::kWuiSecondary, _("Cancel")));
+		cancel_button_.reset(
+		   new Button(this, "cancel", UI::g_fh1->fontset()->is_rtl() ? right_button_x : left_button_x,
+		              button_y, button_w, 0, UI::Button::Style::kWuiSecondary, _("Cancel")));
 		cancel_button_->sigclicked.connect(
 		   boost::bind(&WLMessageBox::clicked_back, boost::ref(*this)));
 	}

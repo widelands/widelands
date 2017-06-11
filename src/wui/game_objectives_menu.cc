@@ -46,7 +46,7 @@ GameObjectivesMenu::GameObjectivesMenu(UI::Panel* parent, UI::UniqueWindow::Regi
                    130,
                    get_inner_w() - 10,
                    FULL_OBJECTIVE_TEXT,
-						 UI::Panel::Style::kWui,
+                   UI::Panel::Style::kWui,
                    "",
                    UI::Align::kLeft,
                    UI::MultilineTextarea::ScrollMode::kScrollNormalForced) {

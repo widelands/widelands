@@ -58,9 +58,9 @@ struct MapOrSaveSelectionWindow : public UI::Window {
 		uint32_t space = y;
 		uint32_t butw = get_inner_w() - 2 * space;
 		uint32_t buth = (get_inner_h() - 2 * space) / 5;
-		UI::Button* btn = new UI::Button(this, "map", space, y, butw, buth,
-		                                 UI::Button::Style::kFsMenuSecondary, _("Map"),
-		                                 _("Select a map"));
+		UI::Button* btn =
+		   new UI::Button(this, "map", space, y, butw, buth, UI::Button::Style::kFsMenuSecondary,
+		                  _("Map"), _("Select a map"));
 		btn->sigclicked.connect(boost::bind(&MapOrSaveSelectionWindow::pressedButton,
 		                                    boost::ref(*this),
 		                                    FullscreenMenuBase::MenuTarget::kNormalGame));
@@ -73,9 +73,9 @@ struct MapOrSaveSelectionWindow : public UI::Window {
 		                                    boost::ref(*this),
 		                                    FullscreenMenuBase::MenuTarget::kScenarioGame));
 
-		btn = new UI::Button(this, "cancel", space + butw / 4, y + 3 * buth + 2 * space, butw / 2,
-		                     buth, UI::Button::Style::kFsMenuSecondary, _("Cancel"),
-		                     _("Cancel selection"));
+		btn =
+		   new UI::Button(this, "cancel", space + butw / 4, y + 3 * buth + 2 * space, butw / 2, buth,
+		                  UI::Button::Style::kFsMenuSecondary, _("Cancel"), _("Cancel selection"));
 		btn->sigclicked.connect(boost::bind(&MapOrSaveSelectionWindow::pressedButton,
 		                                    boost::ref(*this),
 		                                    FullscreenMenuBase::MenuTarget::kBack));
@@ -150,10 +150,18 @@ FullscreenMenuLaunchMPG::FullscreenMenuLaunchMPG(GameSettingsProvider* const set
                         _("Type of game"),
                         UI::Align::kCenter),
 
-     map_info_(
-        this, right_column_x_, get_h() * 2 / 10, butw_, get_h() * 23 / 80 - 2 * label_height_, UI::Panel::Style::kFsMenu),
-     client_info_(
-        this, right_column_x_, get_h() * 13 / 20 - 2 * label_height_, butw_, 2 * label_height_, UI::Panel::Style::kFsMenu),
+     map_info_(this,
+               right_column_x_,
+               get_h() * 2 / 10,
+               butw_,
+               get_h() * 23 / 80 - 2 * label_height_,
+               UI::Panel::Style::kFsMenu),
+     client_info_(this,
+                  right_column_x_,
+                  get_h() * 13 / 20 - 2 * label_height_,
+                  butw_,
+                  2 * label_height_,
+                  UI::Panel::Style::kFsMenu),
      help_(nullptr),
 
      // Variables and objects used in the menu
@@ -214,8 +222,8 @@ void FullscreenMenuLaunchMPG::layout() {
  */
 void FullscreenMenuLaunchMPG::set_chat_provider(ChatProvider& chat) {
 	delete chat_;
-	chat_ = new GameChatPanel(
-	   this, get_w() / 50, get_h() * 13 / 20, get_w() * 57 / 80, get_h() * 3 / 10, chat, UI::Panel::Style::kFsMenu);
+	chat_ = new GameChatPanel(this, get_w() / 50, get_h() * 13 / 20, get_w() * 57 / 80,
+	                          get_h() * 3 / 10, chat, UI::Panel::Style::kFsMenu);
 }
 
 /**

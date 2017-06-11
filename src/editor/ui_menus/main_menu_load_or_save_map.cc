@@ -81,9 +81,8 @@ MainMenuLoadOrSaveMap::MainMenuLoadOrSaveMap(EditorInteractive& parent,
 	curdir_ = basedir_;
 
 	UI::Box* vbox = new UI::Box(this, tablex_, padding_, UI::Box::Horizontal, padding_, get_w());
-	show_mapnames_ =
-	   new UI::Button(vbox, "show_mapnames", 0, 0, 2 * butw_, buth_,
-	                  UI::Button::Style::kWuiSecondary, _("Show Map Names"));
+	show_mapnames_ = new UI::Button(vbox, "show_mapnames", 0, 0, 2 * butw_, buth_,
+	                                UI::Button::Style::kWuiSecondary, _("Show Map Names"));
 	vbox->add(show_mapnames_, UI::Box::Resizing::kFullSize);
 
 	/** TRANSLATORS: Checkbox title. If this checkbox is enabled, map names aren't translated. */

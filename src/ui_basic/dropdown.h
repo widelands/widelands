@@ -181,16 +181,8 @@ public:
 	         int button_dimension,
 	         const std::string& label,
 	         const DropdownType type,
-				Panel::Style style)
-	   : BaseDropdown(parent,
-	                  x,
-	                  y,
-	                  list_w,
-	                  list_h,
-	                  button_dimension,
-	                  label,
-	                  type,
-	                  style) {
+	         Panel::Style style)
+	   : BaseDropdown(parent, x, y, list_w, list_h, button_dimension, label, type, style) {
 	}
 	~Dropdown() {
 		entry_cache_.clear();

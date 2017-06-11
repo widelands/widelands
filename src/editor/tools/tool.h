@@ -27,8 +27,8 @@
 #include "graphic/graphic.h"
 #include "graphic/image.h"
 #include "logic/map.h"
-#include "logic/widelands_geometry.h"
 #include "logic/map_objects/world/world.h"
+#include "logic/widelands_geometry.h"
 
 class EditorInteractive;
 

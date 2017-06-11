@@ -84,14 +84,16 @@ void EncyclopediaWindow::init(InteractiveBase& parent, std::unique_ptr<LuaTable>
 
 			lists_.insert(std::make_pair(
 			   tab_name, std::unique_ptr<UI::Listselect<EncyclopediaEntry>>(
-			                new UI::Listselect<EncyclopediaEntry>(
-			                   boxes_.at(tab_name).get(), 0, 0, contents_width, contents_height, UI::Panel::Style::kWui))));
-			lists_.at(tab_name)
-			   ->selected.connect(boost::bind(&EncyclopediaWindow::entry_selected, this, tab_name));
+			                new UI::Listselect<EncyclopediaEntry>(boxes_.at(tab_name).get(), 0, 0,
+			                                                      contents_width, contents_height,
+			                                                      UI::Panel::Style::kWui))));
+			lists_.at(tab_name)->selected.connect(
+			   boost::bind(&EncyclopediaWindow::entry_selected, this, tab_name));
 
 			contents_.insert(std::make_pair(
-			   tab_name, std::unique_ptr<UI::MultilineTextarea>(new UI::MultilineTextarea(
-			                boxes_.at(tab_name).get(), 0, 0, contents_width, contents_height, UI::Panel::Style::kWui))));
+			   tab_name, std::unique_ptr<UI::MultilineTextarea>(
+			                new UI::MultilineTextarea(boxes_.at(tab_name).get(), 0, 0, contents_width,
+			                                          contents_height, UI::Panel::Style::kWui))));
 
 			boxes_.at(tab_name)->add(lists_.at(tab_name).get());
 			boxes_.at(tab_name)->add_space(kPadding);
@@ -125,8 +127,9 @@ void EncyclopediaWindow::init(InteractiveBase& parent, std::unique_ptr<LuaTable>
 					                 entry_name.c_str());
 				}
 
-				EncyclopediaEntry entry(entry_script, entry_table->get_table("script_parameters")
-				                                         ->array_entries<std::string>());
+				EncyclopediaEntry entry(
+				   entry_script,
+				   entry_table->get_table("script_parameters")->array_entries<std::string>());
 
 				if (entry_icon.empty()) {
 					lists_.at(tab_name)->add(entry_title, entry);

@@ -97,7 +97,12 @@ FullscreenMenuNetSetupLAN::FullscreenMenuNetSetupLAN()
               fs_small()),
 
      // List
-     opengames(this, get_w() * 3 / 50, get_h() * 3333 / 10000, listw_, get_h() * 5433 / 10000, UI::Panel::Style::kFsMenu) {
+     opengames(this,
+               get_w() * 3 / 50,
+               get_h() * 3333 / 10000,
+               listw_,
+               get_h() * 5433 / 10000,
+               UI::Panel::Style::kFsMenu) {
 	joingame.sigclicked.connect(
 	   boost::bind(&FullscreenMenuNetSetupLAN::clicked_joingame, boost::ref(*this)));
 	hostgame.sigclicked.connect(

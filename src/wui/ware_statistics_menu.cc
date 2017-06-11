@@ -120,8 +120,7 @@ WareStatisticsMenu::WareStatisticsMenu(InteractivePlayer& parent,
 
 	// Setup plot widgets
 	// Create a tabbed environment for the different plots
-	UI::TabPanel* tabs =
-	   new UI::TabPanel(box, kSpacing, 0, UI::TabPanel::Style::kWuiLight);
+	UI::TabPanel* tabs = new UI::TabPanel(box, kSpacing, 0, UI::TabPanel::Style::kWuiLight);
 
 	plot_production_ = new WuiPlotArea(tabs, 0, 0, kPlotWidth, kPlotHeight + kSpacing,
 	                                   kStatisticsSampleTime, WuiPlotArea::Plotmode::kRelative);
@@ -184,8 +183,7 @@ WareStatisticsMenu::WareStatisticsMenu(InteractivePlayer& parent,
 	      boost::bind(&WareStatisticsMenu::cb_changed_to, boost::ref(*this), _1, _2), color_map_),
 	   UI::Box::Resizing::kFullSize);
 
-	WuiPlotAreaSlider* slider =
-	   new WuiPlotAreaSlider(this, *plot_production_, 0, 0, kPlotWidth, 45);
+	WuiPlotAreaSlider* slider = new WuiPlotAreaSlider(this, *plot_production_, 0, 0, kPlotWidth, 45);
 	slider->changedto.connect(boost::bind(&WareStatisticsMenu::set_time, this, _1));
 	box->add(slider, UI::Box::Resizing::kFullSize);
 }

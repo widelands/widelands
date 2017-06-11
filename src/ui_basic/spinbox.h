@@ -55,7 +55,7 @@ public:
 	        int32_t startval,
 	        int32_t minval,
 	        int32_t maxval,
-			  Style style,
+	        Style style,
 	        const std::string& label_text = std::string(),
 	        const Units& unit = Units::kNone,
 	        SpinBox::Type = SpinBox::Type::kSmall,
