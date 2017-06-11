@@ -71,8 +71,10 @@ Slider::Slider(Panel* const parent,
      pressed_(false),
      enabled_(enabled),
      pic_background_(g_gr->images().get(style == Panel::Style::kFsMenu ?
-                                           "images/ui_fsmenu/button_menu.png" :
+                                           "images/ui_fsmenu/button.png" :
                                            "images/wui/button_secondary.png")),
+	  // NOCOM code duplication with button.cc
+	  button_color_(style == Panel::Style::kFsMenu ? RGBAColor(0, 24, 40, 0) : RGBAColor(0, 0, 0, 0)),
      x_gap_(x_gap),
      y_gap_(y_gap),
      bar_size_(bar_size),
@@ -150,12 +152,17 @@ void Slider::draw_cursor(
    RenderTarget& dst, int32_t const x, int32_t const y, int32_t const w, int32_t const h) {
 
 	RGBColor black(0, 0, 0);
+	const Recti background_rect(x, y, w, h);
 
 	dst.tile  //  background
-	   (Recti(Vector2i(x, y), w, h), pic_background_, Vector2i(get_x(), get_y()));
+	   (background_rect, pic_background_, Vector2i(get_x(), get_y()));
+	if (button_color_ != RGBAColor(0, 0, 0, 0)) {
+		dst.fill_rect(background_rect, button_color_, BlendMode::UseAlpha);
+	}
 
-	if (highlighted_)
-		dst.brighten_rect(Recti(x, y, w, h), MOUSE_OVER_BRIGHT_FACTOR);
+	if (highlighted_) {
+		dst.brighten_rect(background_rect, MOUSE_OVER_BRIGHT_FACTOR);
+	}
 
 	if (pressed_) {       //  draw border
 		dst.brighten_rect  //  bottom edge

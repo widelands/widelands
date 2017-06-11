@@ -61,8 +61,10 @@ Scrollbar::Scrollbar(Panel* const parent,
      pic_plus_(g_gr->images().get(horiz ? "images/ui_basic/scrollbar_right.png" :
                                           "images/ui_basic/scrollbar_down.png")),
      pic_buttons_(g_gr->images().get(style == Panel::Style::kFsMenu ?
-                                        "images/ui_fsmenu/button_menu.png" :
-                                        "images/wui/button_secondary.png")) {
+                                        "images/ui_fsmenu/button.png" :
+                                        "images/wui/button_secondary.png")),
+	  // NOCOM code duplication with button.cc
+	  button_color_(style == Panel::Style::kFsMenu ? RGBAColor(0, 24, 40, 0) : RGBAColor(0, 0, 0, 0)) {
 	set_thinks(true);
 	layout();
 }
@@ -236,6 +238,9 @@ void Scrollbar::action(Area const area) {
 
 void Scrollbar::draw_button(RenderTarget& dst, Area area, const Recti& r) {
 	dst.tile(r.cast<int>(), pic_buttons_, Vector2i(get_x(), get_y()));
+	if (button_color_ != RGBAColor(0, 0, 0, 0)) {
+		dst.fill_rect(r.cast<int>(), button_color_, BlendMode::UseAlpha);
+	}
 
 	// Draw the picture
 	const Image* pic = nullptr;

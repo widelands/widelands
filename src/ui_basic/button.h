@@ -80,7 +80,7 @@ private:
 	    uint32_t const w,
 	    uint32_t const h,
 	    Button::Style style,
-	    const Image* foreground_picture_id,
+	    const Image* title_image,
 	    const std::string& title_text,
 	    const std::string& tooltip_text,
 	    UI::Button::VisualState state,
@@ -107,7 +107,7 @@ public:
 	    const uint32_t w,
 	    const uint32_t h,
 	    Button::Style style,
-	    const Image* foreground_picture_id,
+	    const Image* title_image,
 	    const std::string& tooltip_text = std::string(),
 	    UI::Button::VisualState state = UI::Button::VisualState::kRaised,
 	    UI::Button::ImageMode mode = UI::Button::ImageMode::kShrink);
@@ -173,11 +173,12 @@ protected:
 	uint32_t time_nextact_;
 
 	std::string title_;  //  title string used when pic_custom_ == 0
+	const Image* title_image_;      //  custom icon on the button
 
-	const Image* pic_background_;  //  background texture (picture ID)
-	const Image* pic_custom_;      //  custom icon on the button
+	const Image* background_image_;  //  Background texture
+	RGBAColor background_color_;  //  Color tint for background texture
 
-	RGBColor clr_down_;  //  color of border while a flat button is "down"
+	RGBColor clr_down_;  //  color of border while a flat button is "down"	
 };
 
 }  // namespace UI

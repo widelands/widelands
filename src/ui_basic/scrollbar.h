@@ -101,6 +101,7 @@ private:
 	const Image* pic_minus_;  ///< left/up
 	const Image* pic_plus_;   ///< right/down
 	const Image* pic_buttons_;
+	RGBAColor button_color_;
 };
 }
 

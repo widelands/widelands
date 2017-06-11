@@ -24,6 +24,7 @@
 #include <SDL_keycode.h>
 #include <boost/format.hpp>
 
+#include "graphic/color.h"
 #include "graphic/font_handler1.h"
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
@@ -55,6 +56,7 @@ struct EditBoxImpl {
 
 	/// Background tile style.
 	const Image* background;
+	RGBAColor background_color;  //  Color tint for background texture
 
 	/// Maximum number of characters in the input
 	uint32_t maxLength;
@@ -87,8 +89,11 @@ EditBox::EditBox(Panel* const parent,
 	set_thinks(false);
 
 	m_->background =
-	   g_gr->images().get(style == Panel::Style::kFsMenu ? "images/ui_fsmenu/button_main.png" :
+	   g_gr->images().get(style == Panel::Style::kFsMenu ? "images/ui_fsmenu/button.png" :
 	                                                       "images/wui/button_secondary.png");
+	// NOCOM code duplication with button.cc
+   m_->background_color = style == Panel::Style::kFsMenu ? RGBAColor(10, 50, 0, 0) : RGBAColor(0, 0, 0, 0);
+
 	m_->fontname = UI::g_fh1->fontset()->sans();
 	m_->fontsize = font_size;
 
@@ -349,8 +354,13 @@ bool EditBox::handle_textinput(const std::string& input_text) {
 
 void EditBox::draw(RenderTarget& dst) {
 
+	const Recti background_rect(0, 0, get_w(), get_h());
+
 	// Draw the background
-	dst.tile(Recti(0, 0, get_w(), get_h()), m_->background, Vector2i(get_x(), get_y()));
+	dst.tile(background_rect, m_->background, Vector2i(get_x(), get_y()));
+	if (m_->background_color != RGBAColor(0, 0, 0, 0)) {
+		dst.fill_rect(background_rect, m_->background_color, BlendMode::UseAlpha);
+	}
 
 	// Draw border.
 	if (get_w() >= 2 && get_h() >= 2) {
@@ -369,7 +379,7 @@ void EditBox::draw(RenderTarget& dst) {
 	}
 
 	if (has_focus()) {
-		dst.brighten_rect(Recti(0, 0, get_w(), get_h()), MOUSE_OVER_BRIGHT_FACTOR);
+		dst.brighten_rect(background_rect, MOUSE_OVER_BRIGHT_FACTOR);
 	}
 
 	const int max_width = get_w() - 2 * kMarginX;

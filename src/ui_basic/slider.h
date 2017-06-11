@@ -116,6 +116,7 @@ private:
 	bool enabled_;      //  enabled widget
 
 	const Image* pic_background_;  //  background texture (picture ID)
+	RGBAColor button_color_;
 
 protected:
 	int32_t x_gap_;  //  draw positions

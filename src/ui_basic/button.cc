@@ -41,7 +41,7 @@ Button::Button  //  Common constructor
     uint32_t const w,
     uint32_t const h,
     Style style,
-    const Image* fg_pic,
+    const Image* title_image,
     const std::string& title_text,
     const std::string& tooltip_text,
     UI::Button::VisualState init_state,
@@ -56,35 +56,44 @@ Button::Button  //  Common constructor
      image_mode_(mode),
      time_nextact_(0),
      title_(title_text),
-     pic_custom_(fg_pic),
+     title_image_(title_image),
      clr_down_(229, 161, 2) {
 	switch (style) {
 	case Button::Style::kFsMenuMenu:
-		pic_background_ = g_gr->images().get("images/ui_fsmenu/button_menu.png");
+		background_image_ = g_gr->images().get("images/ui_fsmenu/button.png");
+		background_color_ = RGBAColor(0, 24, 40, 0);
 		break;
 	case Button::Style::kFsMenuPrimary:
-		pic_background_ = g_gr->images().get("images/ui_fsmenu/button_main.png");
+		background_image_ = g_gr->images().get("images/ui_fsmenu/button.png");
+		background_color_ = RGBAColor(10, 50, 0, 0);
 		break;
 	case Button::Style::kFsMenuSecondary:
-		pic_background_ = g_gr->images().get("images/ui_fsmenu/button_secondary.png");
+		background_image_ = g_gr->images().get("images/ui_fsmenu/button.png");
+		background_color_ = RGBAColor(40, 24, 0, 0);
 		break;
 	case Button::Style::kFsMenuBackground:
-		pic_background_ = g_gr->images().get("images/ui_fsmenu/background_light.png");
+		background_image_ = g_gr->images().get("images/ui_fsmenu/background_light.png");
+		background_color_ = RGBAColor(0, 0, 0, 0);
 		break;
 	case Button::Style::kWuiMenu:
-		pic_background_ = g_gr->images().get("images/wui/window_background.png");
+		background_image_ = g_gr->images().get("images/wui/window_background.png");
+		background_color_ = RGBAColor(0, 0, 0, 0);
 		break;
 	case Button::Style::kWuiPrimary:
-		pic_background_ = g_gr->images().get("images/wui/button_main.png");
+		background_image_ = g_gr->images().get("images/wui/button_main.png");
+		background_color_ = RGBAColor(0, 0, 0, 0);
 		break;
 	case Button::Style::kWuiSecondary:
-		pic_background_ = g_gr->images().get("images/wui/button_secondary.png");
+		background_image_ = g_gr->images().get("images/wui/button_secondary.png");
+		background_color_ = RGBAColor(0, 0, 0, 0);
 		break;
 	case Button::Style::kWuiBackground:
-		pic_background_ = g_gr->images().get("images/wui/window_background_dark.png");
+		background_image_ = g_gr->images().get("images/wui/window_background_dark.png");
+		background_color_ = RGBAColor(0, 0, 0, 0);
 		break;
 	case Button::Style::kTransparent:
-		pic_background_ = nullptr;
+		background_image_ = nullptr;
+		background_color_ = RGBAColor(0, 0, 0, 0);
 		break;
 	}
 	set_thinks(false);
@@ -130,11 +139,11 @@ Button::Button  //  for pictorial buttons
     const uint32_t w,
     const uint32_t h,
     Style style,
-    const Image* fg_pic,
+    const Image* title_image,
     const std::string& tooltip_text,
     UI::Button::VisualState init_state,
     ImageMode mode)
-   : Button(parent, name, x, y, w, h, style, fg_pic, "", tooltip_text, init_state, mode) {
+   : Button(parent, name, x, y, w, h, style, title_image, "", tooltip_text, init_state, mode) {
 }
 
 Button::~Button() {
@@ -146,10 +155,10 @@ Button::~Button() {
 void Button::set_pic(const Image* pic) {
 	title_.clear();
 
-	if (pic_custom_ == pic)
+	if (title_image_ == pic)
 		return;
 
-	pic_custom_ = pic;
+	title_image_ = pic;
 }
 
 /**
@@ -159,7 +168,7 @@ void Button::set_title(const std::string& title) {
 	if (title_ == title)
 		return;
 
-	pic_custom_ = nullptr;
+	title_image_ = nullptr;
 	title_ = title;
 }
 
@@ -199,49 +208,55 @@ void Button::draw(RenderTarget& dst) {
 	const bool is_monochrome =
 	   !enabled_ && static_cast<int>(disable_style_ & ButtonDisableStyle::kMonochrome);
 
+	const Recti background_rect(0, 0, get_w(), get_h());
+
 	// Draw the background
-	if (pic_background_) {
-		dst.fill_rect(Recti(0, 0, get_w(), get_h()), RGBAColor(0, 0, 0, 255));
+	if (background_image_) {
+		dst.fill_rect(background_rect, RGBAColor(0, 0, 0, 255));
 		dst.tile(
-		   Recti(Vector2i::zero(), get_w(), get_h()), pic_background_, Vector2i(get_x(), get_y()));
+			background_rect, background_image_, Vector2i(get_x(), get_y()));
+
+		if (background_color_ != RGBAColor(0, 0, 0, 0)) {
+			dst.fill_rect(background_rect, background_color_, BlendMode::UseAlpha);
+		}
 	}
 
 	if (is_flat && highlighted_)
-		dst.brighten_rect(Recti(0, 0, get_w(), get_h()), MOUSE_OVER_BRIGHT_FACTOR);
+		dst.brighten_rect(background_rect, MOUSE_OVER_BRIGHT_FACTOR);
 
 	//  If we've got a picture, draw it centered
-	if (pic_custom_) {
+	if (title_image_) {
 		if (image_mode_ == UI::Button::ImageMode::kUnscaled) {
 			if (!is_monochrome) {
-				dst.blit(Vector2i((get_w() - static_cast<int32_t>(pic_custom_->width())) / 2,
-				                  (get_h() - static_cast<int32_t>(pic_custom_->height())) / 2),
-				         pic_custom_);
+				dst.blit(Vector2i((get_w() - static_cast<int32_t>(title_image_->width())) / 2,
+				                  (get_h() - static_cast<int32_t>(title_image_->height())) / 2),
+				         title_image_);
 			} else {
 				dst.blit_monochrome(
-				   Vector2i((get_w() - static_cast<int32_t>(pic_custom_->width())) / 2,
-				            (get_h() - static_cast<int32_t>(pic_custom_->height())) / 2),
-				   pic_custom_, RGBAColor(255, 255, 255, 127));
+				   Vector2i((get_w() - static_cast<int32_t>(title_image_->width())) / 2,
+				            (get_h() - static_cast<int32_t>(title_image_->height())) / 2),
+				   title_image_, RGBAColor(255, 255, 255, 127));
 			}
 		} else {
 			const int max_image_w = get_w() - 2 * kButtonImageMargin;
 			const int max_image_h = get_h() - 2 * kButtonImageMargin;
 			const float image_scale =
-			   std::min(1.f, std::min(static_cast<float>(max_image_w) / pic_custom_->width(),
-			                          static_cast<float>(max_image_h) / pic_custom_->height()));
-			int blit_width = image_scale * pic_custom_->width();
-			int blit_height = image_scale * pic_custom_->height();
+			   std::min(1.f, std::min(static_cast<float>(max_image_w) / title_image_->width(),
+			                          static_cast<float>(max_image_h) / title_image_->height()));
+			int blit_width = image_scale * title_image_->width();
+			int blit_height = image_scale * title_image_->height();
 
 			if (!is_monochrome) {
 				dst.blitrect_scale(Rectf((get_w() - blit_width) / 2.f, (get_h() - blit_height) / 2.f,
 				                         blit_width, blit_height),
-				                   pic_custom_,
-				                   Recti(0, 0, pic_custom_->width(), pic_custom_->height()), 1.,
+				                   title_image_,
+				                   Recti(0, 0, title_image_->width(), title_image_->height()), 1.,
 				                   BlendMode::UseAlpha);
 			} else {
 				dst.blitrect_scale_monochrome(
 				   Rectf((get_w() - blit_width) / 2.f, (get_h() - blit_height) / 2.f, blit_width,
 				         blit_height),
-				   pic_custom_, Recti(0, 0, pic_custom_->width(), pic_custom_->height()),
+				   title_image_, Recti(0, 0, title_image_->width(), title_image_->height()),
 				   RGBAColor(255, 255, 255, 127));
 			}
 		}
