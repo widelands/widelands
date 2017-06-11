@@ -224,7 +224,6 @@ wl_library(logic
     base_time_string
     build_info
     economy
-    editor
     game_io
     graphic
     graphic_color

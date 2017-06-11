@@ -115,7 +115,6 @@ wl_library(graphic_surface
     base_geometry
     base_log
     base_macros
-    graphic
     graphic_color
     graphic_draw_programs
     graphic_gl_utils
@@ -196,7 +195,6 @@ wl_library(graphic_minimap_renderer
     base_geometry
     base_macros
     economy
-    graphic
     graphic_surface
     logic
     wui_mapview_pixelfunctions
@@ -216,7 +214,6 @@ wl_library(graphic_terrain_programs
     base_geometry
     base_log
     base_macros
-    graphic
     graphic_gl_utils
     graphic_image_io
     graphic_surface

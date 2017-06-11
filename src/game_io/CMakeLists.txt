@@ -8,7 +8,7 @@ wl_library(game_io
     game_interactive_player_packet.cc
     game_interactive_player_packet.h
     game_player_ai_persistent_packet.cc
-    game_player_ai_persistent_packet.h    
+    game_player_ai_persistent_packet.h
     game_loader.cc
     game_loader.h
     game_map_packet.cc
@@ -29,7 +29,6 @@ wl_library(game_io
     base_time_string
     build_info
     economy
-    graphic
     graphic_image_io
     graphic_minimap_renderer
     io_fileread

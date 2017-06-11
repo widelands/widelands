@@ -22,7 +22,6 @@ wl_library(sound
   DEPENDS
     base_i18n
     base_log
-    graphic
     helper
     io_fileread
     io_filesystem

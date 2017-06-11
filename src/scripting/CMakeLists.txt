@@ -104,7 +104,6 @@ wl_library(scripting_logic
     base_log
     base_macros
     economy
-    graphic
     io_fileread
     io_filesystem
     logic
