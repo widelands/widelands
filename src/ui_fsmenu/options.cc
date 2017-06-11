@@ -104,13 +104,7 @@ FullscreenMenuOptions::FullscreenMenuOptions(OptionsCtrl::OptionsStruct opt)
      ok_(&button_box_, "ok", 0, 0, 0, 0, UI::Button::Style::kFsMenuPrimary, _("OK")),
 
      // Tabs
-     tabs_(this,
-           0,
-           0,
-           100,  // 100 is arbitrary, will be resized in layout().
-           100,
-           UI::TabPanel::Style::kFsMenu,
-           UI::TabPanel::Type::kBorder),
+     tabs_(this, UI::TabPanel::Type::kBorder),
 
      box_interface_(&tabs_, 0, 0, UI::Box::Vertical, 0, 0, padding_),
      box_windows_(&tabs_, 0, 0, UI::Box::Vertical, 0, 0, padding_),

@@ -56,7 +56,7 @@ EncyclopediaWindow::EncyclopediaWindow(InteractiveBase& parent,
                                        LuaInterface* const lua)
    : UI::UniqueWindow(&parent, "encyclopedia", &registry, WINDOW_WIDTH, WINDOW_HEIGHT, ""),
      lua_(lua),
-     tabs_(this, 0, 0, UI::TabPanel::Style::kWuiLight) {
+     tabs_(this) {
 }
 
 void EncyclopediaWindow::init(InteractiveBase& parent, std::unique_ptr<LuaTable> table) {

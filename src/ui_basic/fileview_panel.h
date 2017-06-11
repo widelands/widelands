@@ -36,10 +36,6 @@ namespace UI {
 class FileViewPanel : public TabPanel {
 public:
 	FileViewPanel(Panel* parent,
-	              int32_t x,
-	              int32_t y,
-	              int32_t w,
-	              int32_t h,
 	              UI::Panel::Style style,
 	              TabPanel::Type border_type = TabPanel::Type::kNoBorder);
 

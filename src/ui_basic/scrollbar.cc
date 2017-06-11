@@ -62,9 +62,9 @@ Scrollbar::Scrollbar(Panel* const parent,
                                           "images/ui_basic/scrollbar_down.png")),
      pic_buttons_(g_gr->images().get(style == Panel::Style::kFsMenu ?
                                         "images/ui_fsmenu/button.png" :
-                                        "images/wui/button_secondary.png")),
+                                        "images/wui/button.png")),
 	  // NOCOM code duplication with button.cc
-	  button_color_(style == Panel::Style::kFsMenu ? RGBAColor(0, 24, 40, 0) : RGBAColor(0, 0, 0, 0)) {
+	  button_color_(style == Panel::Style::kFsMenu ? RGBAColor(0, 24, 40, 0) : RGBAColor(32, 20, 10, 0)) {
 	set_thinks(true);
 	layout();
 }

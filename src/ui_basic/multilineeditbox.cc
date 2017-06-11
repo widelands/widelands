@@ -42,6 +42,7 @@ struct MultilineEditbox::Data {
 
 	/// Background tile style.
 	const Image* background;
+	RGBAColor background_color;
 
 	/// Position of the cursor inside the text.
 	/// 0 indicates that the cursor is before the first character,
@@ -83,7 +84,9 @@ private:
 */
 MultilineEditbox::MultilineEditbox(Panel* parent, int32_t x, int32_t y, uint32_t w, uint32_t h)
    : Panel(parent, x, y, w, h), d_(new Data(*this)) {
-	d_->background = g_gr->images().get("images/wui/button_secondary.png");
+	d_->background = g_gr->images().get("images/wui/button.png");
+	// NOCOM code duplication with button.cc
+	d_->background_color = RGBAColor(32, 20, 10, 0);
 	d_->lineheight = text_height();
 	set_handle_mouse(true);
 	set_can_focus(true);
@@ -418,7 +421,11 @@ void MultilineEditbox::focus(bool topcaller) {
  */
 void MultilineEditbox::draw(RenderTarget& dst) {
 	// Draw the background
-	dst.tile(Recti(Vector2i::zero(), get_w(), get_h()), d_->background, Vector2i(get_x(), get_y()));
+	const Recti background_rect(Vector2i::zero(), get_w(), get_h());
+	dst.tile(background_rect, d_->background, Vector2i(get_x(), get_y()));
+	if (d_->background_color != RGBAColor(0, 0, 0, 0)) {
+		dst.fill_rect(background_rect, d_->background_color, BlendMode::UseAlpha);
+	}
 
 	// Draw border.
 	if (get_w() >= 4 && get_h() >= 4) {

@@ -29,20 +29,9 @@
 namespace UI {
 
 FileViewPanel::FileViewPanel(Panel* parent,
-                             int32_t x,
-                             int32_t y,
-                             int32_t w,
-                             int32_t h,
                              UI::Panel::Style style,
                              TabPanel::Type border_type)
-   : TabPanel(parent,
-              x,
-              y,
-              w,
-              h,
-              style == UI::Panel::Style::kFsMenu ? UI::TabPanel::Style::kFsMenu :
-                                                   UI::TabPanel::Style::kWuiLight,
-              border_type),
+   : TabPanel(parent, border_type),
      padding_(5),
      style_(style) {
 	layout();
@@ -79,9 +68,7 @@ void FileViewPanel::update_tab_size(size_t index) {
 
 void FileViewPanel::layout() {
 	assert(boxes_.size() == textviews_.size());
-	if (get_inner_w() == 0 && get_inner_h() == 0) {
-		return;
-	}
+	assert(get_inner_w() >= 0 && get_inner_h() >= 0);
 
 	// If there is a border, we have less space for the contents
 	contents_width_ =

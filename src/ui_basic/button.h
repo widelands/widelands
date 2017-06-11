@@ -52,11 +52,9 @@ struct Button : public NamedPanel {
 		kFsMenuMenu,
 		kFsMenuPrimary,
 		kFsMenuSecondary,
-		kFsMenuBackground,
 		kWuiMenu,
 		kWuiPrimary,
 		kWuiSecondary,
-		kWuiBackground,
 		kTransparent
 	};
 

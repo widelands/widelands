@@ -83,24 +83,11 @@ private:
  *
  */
 struct TabPanel : public Panel {
-	enum class Type { kNoBorder, kBorder };
-	enum class Style { kFsMenu, kWuiLight, kWuiMedium, kWuiDark };
+	enum class Type { kNoBorder, kNoBorderDark, kBorder };
 
 	friend struct Tab;
 
-	TabPanel(Panel* parent,
-	         int32_t x,
-	         int32_t y,
-	         TabPanel::Style style,
-	         TabPanel::Type border_type = TabPanel::Type::kNoBorder);
-	// For Fullscreen menus
-	TabPanel(Panel* parent,
-	         int32_t x,
-	         int32_t y,
-	         int32_t w,
-	         int32_t h,
-	         TabPanel::Style style,
-	         TabPanel::Type border_type = TabPanel::Type::kNoBorder);
+	TabPanel(Panel* parent, TabPanel::Type border_type = TabPanel::Type::kNoBorder);
 
 	/** Add textual tab */
 	uint32_t add(const std::string& name,
@@ -155,8 +142,6 @@ private:
 	TabList tabs_;
 	size_t active_;     ///< index of the currently active tab
 	size_t highlight_;  ///< index of the highlighted button
-
-	const Image* pic_background_;  ///< picture used to draw background
 };
 }
 

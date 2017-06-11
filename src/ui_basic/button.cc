@@ -69,27 +69,19 @@ Button::Button  //  Common constructor
 		break;
 	case Button::Style::kFsMenuSecondary:
 		background_image_ = g_gr->images().get("images/ui_fsmenu/button.png");
-		background_color_ = RGBAColor(40, 24, 0, 0);
-		break;
-	case Button::Style::kFsMenuBackground:
-		background_image_ = g_gr->images().get("images/ui_fsmenu/background_light.png");
-		background_color_ = RGBAColor(0, 0, 0, 0);
+		background_color_ = RGBAColor(45, 26, 18, 0);
 		break;
 	case Button::Style::kWuiMenu:
-		background_image_ = g_gr->images().get("images/wui/window_background.png");
-		background_color_ = RGBAColor(0, 0, 0, 0);
+		background_image_ = g_gr->images().get("images/wui/button.png");
+		background_color_ = RGBAColor(85, 63, 35, 0);
 		break;
 	case Button::Style::kWuiPrimary:
-		background_image_ = g_gr->images().get("images/wui/button_main.png");
-		background_color_ = RGBAColor(0, 0, 0, 0);
+		background_image_ = g_gr->images().get("images/wui/button.png");
+		background_color_ = RGBAColor(3, 15, 0, 0);
 		break;
 	case Button::Style::kWuiSecondary:
-		background_image_ = g_gr->images().get("images/wui/button_secondary.png");
-		background_color_ = RGBAColor(0, 0, 0, 0);
-		break;
-	case Button::Style::kWuiBackground:
-		background_image_ = g_gr->images().get("images/wui/window_background_dark.png");
-		background_color_ = RGBAColor(0, 0, 0, 0);
+		background_image_ = g_gr->images().get("images/wui/button.png");
+		background_color_ = RGBAColor(32, 20, 10, 0);
 		break;
 	case Button::Style::kTransparent:
 		background_image_ = nullptr;

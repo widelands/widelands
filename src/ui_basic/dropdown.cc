@@ -82,8 +82,8 @@ BaseDropdown::BaseDropdown(UI::Panel* parent,
                      0,
                      type == DropdownType::kTextual ? w - button_dimension : button_dimension,
                      get_h(),
-                     style == Panel::Style::kFsMenu ? UI::Button::Style::kFsMenuBackground :
-                                                      UI::Button::Style::kWuiBackground,
+                     style == Panel::Style::kFsMenu ? UI::Button::Style::kFsMenuSecondary :
+                                                      UI::Button::Style::kWuiSecondary,
                      label),
      label_(label),
      type_(type),

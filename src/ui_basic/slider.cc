@@ -72,9 +72,9 @@ Slider::Slider(Panel* const parent,
      enabled_(enabled),
      pic_background_(g_gr->images().get(style == Panel::Style::kFsMenu ?
                                            "images/ui_fsmenu/button.png" :
-                                           "images/wui/button_secondary.png")),
+                                           "images/wui/button.png")),
 	  // NOCOM code duplication with button.cc
-	  button_color_(style == Panel::Style::kFsMenu ? RGBAColor(0, 24, 40, 0) : RGBAColor(0, 0, 0, 0)),
+	  button_color_(style == Panel::Style::kFsMenu ? RGBAColor(0, 24, 40, 0) : RGBAColor(32, 20, 10, 0)),
      x_gap_(x_gap),
      y_gap_(y_gap),
      bar_size_(bar_size),

@@ -62,9 +62,15 @@ BaseListselect::BaseListselect(Panel* const parent,
      selection_mode_(selection_mode),
      background_(selection_mode == ListselectLayout::kDropdown ?
                     g_gr->images().get(style == Panel::Style::kFsMenu ?
-                                          "images/ui_fsmenu/background_light.png" :
-                                          "images/wui/window_background_dark.png") :
-                    nullptr) {
+                                          "images/ui_fsmenu/button.png" :
+                                          "images/wui/button.png") :
+                    nullptr),
+	  // NOCOM code duplication with button.cc
+	  background_color_(selection_mode == ListselectLayout::kDropdown ?
+								  (style == Panel::Style::kFsMenu ?
+										RGBAColor(45, 26, 18, 0) : // NOCOM own color
+										RGBAColor(32, 20, 10, 0)) :
+								  RGBAColor(0, 0, 0, 0)) {
 	set_thinks(false);
 
 	scrollbar_.moved.connect(boost::bind(&BaseListselect::set_scrollpos, this, _1));
@@ -357,7 +363,11 @@ void BaseListselect::draw(RenderTarget& dst) {
 	int y = 1 + idx * get_lineheight() - scrollpos_;
 
 	if (background_ != nullptr) {
-		dst.tile(Recti(Vector2i::zero(), get_w(), get_h()), background_, Vector2i::zero());
+		const Recti background_rect(Vector2i::zero(), get_w(), get_h());
+		dst.tile(background_rect, background_, Vector2i::zero());
+		if (background_color_ != RGBAColor(0, 0, 0, 0)) {
+			dst.fill_rect(background_rect, background_color_, BlendMode::UseAlpha);
+		}
 	}
 
 	if (selection_mode_ == ListselectLayout::kDropdown) {

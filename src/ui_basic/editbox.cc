@@ -90,9 +90,9 @@ EditBox::EditBox(Panel* const parent,
 
 	m_->background =
 	   g_gr->images().get(style == Panel::Style::kFsMenu ? "images/ui_fsmenu/button.png" :
-	                                                       "images/wui/button_secondary.png");
+	                                                       "images/wui/button.png");
 	// NOCOM code duplication with button.cc
-   m_->background_color = style == Panel::Style::kFsMenu ? RGBAColor(10, 50, 0, 0) : RGBAColor(0, 0, 0, 0);
+   m_->background_color = style == Panel::Style::kFsMenu ? RGBAColor(10, 50, 0, 0) : RGBAColor(32, 20, 10, 0);
 
 	m_->fontname = UI::g_fh1->fontset()->sans();
 	m_->fontsize = font_size;

@@ -150,6 +150,7 @@ private:
 	ListselectLayout selection_mode_;
 	const Image* check_pic_;
 	const Image* background_;
+	RGBAColor background_color_;
 	std::string current_tooltip_;
 };
 

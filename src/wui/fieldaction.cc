@@ -249,7 +249,7 @@ FieldActionWindow::FieldActionWindow(InteractiveBase* const ib,
      map_(&ib->egbase().map()),
      field_overlay_manager_(*ib->mutable_field_overlay_manager()),
      node_(ib->get_sel_pos().node, &(*map_)[ib->get_sel_pos().node]),
-     tabpanel_(this, 0, 0, UI::TabPanel::Style::kWuiDark),
+     tabpanel_(this, UI::TabPanel::Type::kNoBorderDark),
      fastclick_(true),
      best_tab_(0),
      workarea_preview_overlay_id_(0),
@@ -512,7 +512,7 @@ UI::Button& FieldActionWindow::add_button(UI::Box* const box,
                                           void (FieldActionWindow::*fn)(),
                                           const std::string& tooltip_text,
                                           bool repeating) {
-	UI::Button& button = *new UI::Button(box, name, 0, 0, 34, 34, UI::Button::Style::kWuiPrimary,
+	UI::Button& button = *new UI::Button(box, name, 0, 0, 34, 34, UI::Button::Style::kTransparent,
 	                                     g_gr->images().get(picname), tooltip_text);
 	button.sigclicked.connect(boost::bind(fn, this));
 	button.set_repeating(repeating);

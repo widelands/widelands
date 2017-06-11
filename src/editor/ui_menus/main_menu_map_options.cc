@@ -66,7 +66,7 @@ MainMenuMapOptions::MainMenuMapOptions(EditorInteractive& parent, bool modal)
              UI::Button::Style::kWuiSecondary,
              _("Cancel")),
      tab_box_(this, padding_, padding_, UI::Box::Vertical, max_w_, get_inner_h(), 0),
-     tabs_(&tab_box_, 0, 0, UI::TabPanel::Style::kWuiLight),
+     tabs_(&tab_box_),
 
      main_box_(&tabs_, padding_, padding_, UI::Box::Vertical, max_w_, get_inner_h(), 0),
      tags_box_(&tabs_, padding_, padding_, UI::Box::Vertical, max_w_, get_inner_h(), 0),

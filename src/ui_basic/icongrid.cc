@@ -39,7 +39,7 @@ struct IconGridButton : public Button {
 	            y,
 	            w,
 	            h,
-	            UI::Button::Style::kTransparent,
+	            UI::Button::Style::kWuiSecondary,
 	            foreground_picture_id,
 	            tooltip_text,
 	            UI::Button::VisualState::kFlat),

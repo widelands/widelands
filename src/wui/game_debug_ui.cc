@@ -139,7 +139,7 @@ MapObjectDebugWindow::MapObjectDebugWindow(InteractiveBase& parent, Widelands::M
    : UI::Window(&parent, "map_object_debug", 0, 0, 100, 100, ""),
      log_general_info_(true),
      object_(&obj),
-     tabs_(this, 0, 0, UI::TabPanel::Style::kWuiLight) {
+     tabs_(this) {
 	serial_ = obj.serial();
 	set_title(std::to_string(serial_));
 

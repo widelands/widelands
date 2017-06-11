@@ -83,7 +83,7 @@ CategorizedItemSelectionMenu<DescriptionType, ToolType>::CategorizedItemSelectio
      descriptions_(descriptions),
      select_correct_tool_(select_correct_tool),
      protect_against_recursive_select_(false),
-     tab_panel_(this, 0, 0, UI::TabPanel::Style::kWuiMedium),
+     tab_panel_(this),
      current_selection_names_(this,
                               0,
                               0,
@@ -94,10 +94,6 @@ CategorizedItemSelectionMenu<DescriptionType, ToolType>::CategorizedItemSelectio
                               UI::Align::kCenter,
                               UI::MultilineTextarea::ScrollMode::kNoScrolling),
      tool_(tool) {
-	// NOCOM can we get rid of set_background? It's the only remaining knowledge about the image
-	// filenames outside of ui_basic.
-	current_selection_names_.set_background(
-	   g_gr->images().get("images/wui/window_background_dark.png"));
 	add(&tab_panel_);
 
 	for (uint32_t category_index = 0; category_index < categories.size(); ++category_index) {
