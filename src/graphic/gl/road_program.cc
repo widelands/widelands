@@ -26,7 +26,6 @@
 #include "graphic/gl/coordinate_conversion.h"
 #include "graphic/gl/fields_to_draw.h"
 #include "graphic/gl/utils.h"
-#include "graphic/graphic.h"
 #include "graphic/image_io.h"
 #include "graphic/texture.h"
 #include "logic/roadtype.h"

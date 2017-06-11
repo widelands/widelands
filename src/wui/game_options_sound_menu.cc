@@ -19,7 +19,6 @@
 #include "wui/game_options_sound_menu.h"
 
 #include "base/i18n.h"
-#include "graphic/graphic.h"
 #include "sound/sound_handler.h"
 
 GameOptionsSoundMenu::GameOptionsSoundMenu(InteractiveGameBase& gb,

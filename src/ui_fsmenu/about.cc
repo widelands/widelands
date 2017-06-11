@@ -22,7 +22,6 @@
 #include <boost/format.hpp>
 
 #include "base/i18n.h"
-#include "graphic/graphic.h"
 
 FullscreenMenuAbout::FullscreenMenuAbout()
    : FullscreenMenuBase(),

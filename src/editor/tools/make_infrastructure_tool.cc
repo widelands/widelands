@@ -22,7 +22,6 @@
 #include "editor/editorinteractive.h"
 #include "logic/editor_game_base.h"
 #include "logic/field.h"
-#include "logic/map.h"
 #include "logic/player.h"
 #include "wui/fieldaction.h"
 

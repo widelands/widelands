@@ -26,7 +26,6 @@
 #include <boost/signals2.hpp>
 
 #include "graphic/align.h"
-#include "graphic/graphic.h"
 #include "ui_basic/button.h"
 
 #define CHAT_HISTORY_SIZE 5

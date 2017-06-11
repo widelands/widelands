@@ -32,7 +32,6 @@
 #include "editor/editorinteractive.h"
 #include "editor/map_generator.h"
 #include "graphic/font_handler1.h"
-#include "graphic/graphic.h"
 #include "logic/editor_game_base.h"
 #include "logic/map.h"
 #include "logic/map_objects/world/world.h"

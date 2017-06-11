@@ -32,7 +32,6 @@
 #include "base/time_string.h"
 #include "game_io/game_loader.h"
 #include "game_io/game_preload_packet.h"
-#include "graphic/graphic.h"
 #include "graphic/image_io.h"
 #include "graphic/text_constants.h"
 #include "graphic/texture.h"

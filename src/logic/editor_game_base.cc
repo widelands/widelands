@@ -30,7 +30,6 @@ rnrnrn * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #include "economy/flag.h"
 #include "economy/road.h"
 #include "graphic/color.h"
-#include "graphic/graphic.h"
 #include "logic/findimmovable.h"
 #include "logic/game.h"
 #include "logic/game_data_error.h"

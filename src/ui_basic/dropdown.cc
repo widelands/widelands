@@ -27,6 +27,7 @@
 #include "base/macros.h"
 #include "graphic/align.h"
 #include "graphic/font_handler1.h"
+#include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
 #include "ui_basic/mouse_constants.h"
 #include "ui_basic/tabpanel.h"

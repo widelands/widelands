@@ -24,7 +24,6 @@
 #include "base/macros.h"
 #include "economy/flag.h"
 #include "economy/road.h"
-#include "graphic/graphic.h"
 #include "logic/field.h"
 #include "logic/map_objects/world/terrain_description.h"
 #include "logic/map_objects/world/world.h"

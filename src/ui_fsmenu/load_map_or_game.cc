@@ -22,7 +22,6 @@
 #include <memory>
 
 #include "base/i18n.h"
-#include "graphic/graphic.h"
 #include "io/filesystem/filesystem.h"
 #include "ui_basic/button.h"
 #include "ui_basic/textarea.h"

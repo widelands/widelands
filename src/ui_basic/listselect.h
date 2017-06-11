@@ -26,7 +26,6 @@
 #include <boost/signals2.hpp>
 
 #include "graphic/color.h"
-#include "graphic/graphic.h"
 #include "ui_basic/panel.h"
 #include "ui_basic/scrollbar.h"
 

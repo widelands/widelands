@@ -29,7 +29,6 @@
 
 #include "graphic/align.h"
 #include "graphic/color.h"
-#include "graphic/graphic.h"
 #include "ui_basic/button.h"
 #include "ui_basic/panel.h"
 

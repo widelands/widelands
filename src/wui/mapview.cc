@@ -24,7 +24,6 @@
 #include "base/macros.h"
 #include "base/math.h"
 #include "graphic/game_renderer.h"
-#include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
 #include "logic/map.h"
 #include "logic/map_objects/draw_text.h"

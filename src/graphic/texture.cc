@@ -30,7 +30,6 @@
 #include "graphic/gl/draw_line_program.h"
 #include "graphic/gl/fill_rect_program.h"
 #include "graphic/gl/utils.h"
-#include "graphic/graphic.h"
 #include "graphic/sdl_utils.h"
 #include "graphic/surface.h"
 

@@ -22,7 +22,6 @@
 #include "base/i18n.h"
 #include "base/macros.h"
 #include "chat/chat.h"
-#include "graphic/graphic.h"
 #include "logic/game_controller.h"
 #include "logic/player.h"
 #include "profile/profile.h"

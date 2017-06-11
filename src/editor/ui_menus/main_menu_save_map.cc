@@ -33,7 +33,6 @@
 #include "editor/editorinteractive.h"
 #include "editor/ui_menus/main_menu_map_options.h"
 #include "editor/ui_menus/main_menu_save_map_make_directory.h"
-#include "graphic/graphic.h"
 #include "io/filesystem/filesystem.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "io/filesystem/zip_filesystem.h"

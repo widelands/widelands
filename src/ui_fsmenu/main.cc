@@ -23,7 +23,6 @@
 
 #include "base/i18n.h"
 #include "build_info.h"
-#include "graphic/graphic.h"
 
 FullscreenMenuMain::FullscreenMenuMain()
    : FullscreenMenuMainMenu(),

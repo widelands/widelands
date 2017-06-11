@@ -22,7 +22,6 @@
 #include <boost/bind.hpp>
 
 #include "graphic/font_handler1.h"
-#include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
 #include "graphic/text/bidi.h"
 #include "graphic/text/font_set.h"

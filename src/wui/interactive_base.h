@@ -24,7 +24,6 @@
 
 #include <SDL_keycode.h>
 
-#include "graphic/graphic.h"
 #include "logic/editor_game_base.h"
 #include "logic/map.h"
 #include "notifications/notifications.h"

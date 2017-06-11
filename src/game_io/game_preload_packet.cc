@@ -26,7 +26,6 @@
 
 #include "base/time_string.h"
 #include "build_info.h"
-#include "graphic/graphic.h"
 #include "graphic/image_io.h"
 #include "graphic/minimap_renderer.h"
 #include "logic/game.h"

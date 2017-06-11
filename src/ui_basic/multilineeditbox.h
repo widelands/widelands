@@ -24,7 +24,6 @@
 
 #include <boost/signals2.hpp>
 
-#include "graphic/graphic.h"
 #include "ui_basic/panel.h"
 
 namespace UI {

@@ -26,7 +26,6 @@
 #include "base/wexception.h"
 #include "editor/editorinteractive.h"
 #include "graphic/font_handler1.h"
-#include "graphic/graphic.h"
 #include "io/filesystem/filesystem.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "map_io/widelands_map_loader.h"

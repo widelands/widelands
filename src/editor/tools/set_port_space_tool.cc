@@ -21,7 +21,6 @@
 
 #include "editor/editorinteractive.h"
 #include "editor/tools/tool.h"
-#include "logic/map.h"
 #include "logic/map_objects/tribes/building.h"
 #include "logic/mapfringeregion.h"
 #include "logic/mapregion.h"

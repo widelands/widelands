@@ -24,7 +24,6 @@
 #include "base/i18n.h"
 #include "editor/editorinteractive.h"
 #include "editor/tools/place_critter_tool.h"
-#include "graphic/graphic.h"
 #include "logic/map.h"
 #include "logic/map_objects/world/critter.h"
 #include "logic/map_objects/world/world.h"

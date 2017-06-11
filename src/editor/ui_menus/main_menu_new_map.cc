@@ -29,7 +29,6 @@
 #include "base/macros.h"
 #include "editor/editorinteractive.h"
 #include "graphic/font_handler1.h"
-#include "graphic/graphic.h"
 #include "graphic/image.h"
 #include "graphic/texture.h"
 #include "logic/editor_game_base.h"

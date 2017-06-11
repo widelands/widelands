@@ -23,7 +23,6 @@
 
 #include "base/macros.h"
 #include "economy/request.h"
-#include "graphic/graphic.h"
 #include "io/fileread.h"
 #include "io/filewrite.h"
 #include "logic/editor_game_base.h"

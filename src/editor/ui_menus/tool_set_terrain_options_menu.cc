@@ -27,7 +27,6 @@
 #include "base/i18n.h"
 #include "editor/editorinteractive.h"
 #include "editor/tools/set_terrain_tool.h"
-#include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
 #include "graphic/texture.h"
 #include "logic/map.h"

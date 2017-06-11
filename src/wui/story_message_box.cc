@@ -19,7 +19,6 @@
 
 #include "wui/story_message_box.h"
 
-#include "graphic/graphic.h"
 #include "ui_basic/button.h"
 #include "ui_basic/multilinetextarea.h"
 #include "ui_basic/textarea.h"

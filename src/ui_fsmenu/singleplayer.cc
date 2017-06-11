@@ -20,7 +20,6 @@
 #include "ui_fsmenu/singleplayer.h"
 
 #include "base/i18n.h"
-#include "graphic/graphic.h"
 #include "graphic/text_constants.h"
 
 FullscreenMenuSinglePlayer::FullscreenMenuSinglePlayer()

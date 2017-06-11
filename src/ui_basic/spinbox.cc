@@ -29,6 +29,7 @@
 #include "base/macros.h"
 #include "base/wexception.h"
 #include "graphic/font_handler1.h"
+#include "graphic/graphic.h"
 #include "graphic/text/font_set.h"
 #include "graphic/text_constants.h"
 #include "ui_basic/button.h"

@@ -27,7 +27,6 @@
 #include "base/log.h"
 #include "base/wexception.h"
 #include "graphic/font_handler1.h"
-#include "graphic/graphic.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "logic/game_controller.h"
 #include "logic/game_settings.h"

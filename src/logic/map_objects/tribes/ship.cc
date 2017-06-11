@@ -30,7 +30,6 @@
 #include "economy/fleet.h"
 #include "economy/portdock.h"
 #include "economy/wares_queue.h"
-#include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
 #include "graphic/text_constants.h"
 #include "io/fileread.h"

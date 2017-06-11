@@ -25,7 +25,6 @@
 
 #include <boost/signals2.hpp>
 
-#include "graphic/graphic.h"
 #include "graphic/image.h"
 #include "ui_basic/box.h"
 #include "ui_basic/button.h"

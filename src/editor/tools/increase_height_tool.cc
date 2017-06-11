@@ -21,7 +21,6 @@
 
 #include "editor/editorinteractive.h"
 #include "logic/field.h"
-#include "logic/map.h"
 #include "logic/mapregion.h"
 
 /// Increases the heights by a value. Changes surrounding nodes if necessary.

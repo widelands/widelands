@@ -24,7 +24,6 @@
 #include "base/i18n.h"
 #include "base/vector.h"
 #include "base/wexception.h"
-#include "graphic/graphic.h"
 #include "logic/game_data_error.h"
 #include "logic/map_objects/tribes/carrier.h"
 #include "logic/map_objects/tribes/soldier.h"

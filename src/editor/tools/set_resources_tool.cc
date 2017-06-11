@@ -22,10 +22,8 @@
 #include "editor/editorinteractive.h"
 #include "editor/tools/decrease_resources_tool.h"
 #include "editor/tools/increase_resources_tool.h"
-#include "graphic/graphic.h"
 #include "logic/field.h"
 #include "logic/map_objects/world/resource_description.h"
-#include "logic/map_objects/world/world.h"
 #include "logic/mapregion.h"
 
 int32_t EditorSetResourcesTool::handle_click_impl(const Widelands::World& world,

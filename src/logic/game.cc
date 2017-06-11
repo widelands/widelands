@@ -40,7 +40,6 @@
 #include "economy/economy.h"
 #include "game_io/game_loader.h"
 #include "game_io/game_preload_packet.h"
-#include "graphic/graphic.h"
 #include "io/fileread.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "io/filewrite.h"

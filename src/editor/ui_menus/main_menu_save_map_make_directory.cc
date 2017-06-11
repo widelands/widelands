@@ -21,7 +21,6 @@
 
 #include "base/i18n.h"
 #include "graphic/font_handler1.h"
-#include "graphic/graphic.h"
 #include "io/filesystem/layered_filesystem.h"
 
 MainMenuSaveMapMakeDirectory::MainMenuSaveMapMakeDirectory(UI::Panel* const parent,

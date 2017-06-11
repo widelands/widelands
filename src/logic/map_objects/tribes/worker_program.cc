@@ -23,7 +23,6 @@
 #include <string>
 
 #include "base/log.h"
-#include "graphic/graphic.h"
 #include "helper.h"
 #include "logic/findnode.h"
 #include "logic/game_data_error.h"

@@ -26,7 +26,6 @@
 #include "editor/editorinteractive.h"
 #include "editor/tools/increase_height_tool.h"
 #include "editor/tools/set_height_tool.h"
-#include "graphic/graphic.h"
 #include "logic/widelands_geometry.h"
 
 EditorToolChangeHeightOptionsMenu::EditorToolChangeHeightOptionsMenu(
