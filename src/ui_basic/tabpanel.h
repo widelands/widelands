@@ -142,8 +142,7 @@ private:
 	size_t active_;     ///< index of the currently active tab
 	size_t highlight_;  ///< index of the highlighted button
 
-	const Image* background_image_;
-	RGBAColor background_color_;
+	const UI::PanelStyleInfo* background_style_; // Background color and texture. Not owned.
 };
 }
 

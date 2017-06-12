@@ -27,13 +27,13 @@
 
 namespace {
 // Read image filename and RGB color from LuaTable
-StyleManager::PanelStyleInfo* read_style(const LuaTable& table) {
+UI::PanelStyleInfo* read_style(const LuaTable& table) {
 	const std::string image = table.get_string("image");
 	std::vector<int> rgbcolor = table.get_table("color")->array_entries<int>();
 	if (rgbcolor.size() != 3) {
 		throw wexception("Expected 3 entries for RGB color, but got %" PRIuS ".", rgbcolor.size());
 	}
-	return new StyleManager::PanelStyleInfo(
+	return new UI::PanelStyleInfo(
 				image.empty() ? nullptr : g_gr->images().get(image),
 				RGBAColor(rgbcolor[0], rgbcolor[1], rgbcolor[2], 0));
 }
@@ -114,49 +114,49 @@ void StyleManager::init() {
 }
 
 // Return functions for the styles
-const StyleManager::PanelStyleInfo& StyleManager::button_style(UI::ButtonStyle style) const {
+const UI::PanelStyleInfo* StyleManager::button_style(UI::ButtonStyle style) const {
 	assert(buttonstyles_.count(style) == 1);
-	return *buttonstyles_.at(style).get();
+	return buttonstyles_.at(style).get();
 }
 
-const StyleManager::PanelStyleInfo& StyleManager::slider_style(UI::SliderStyle style) const {
+const UI::PanelStyleInfo* StyleManager::slider_style(UI::SliderStyle style) const {
 	assert(sliderstyles_.count(style) == 1);
-	return *sliderstyles_.at(style).get();
+	return sliderstyles_.at(style).get();
 }
 
-const StyleManager::PanelStyleInfo& StyleManager::tabpanel_style(UI::TabPanelStyle style) const {
+const UI::PanelStyleInfo* StyleManager::tabpanel_style(UI::TabPanelStyle style) const {
 	assert(tabpanelstyles_.count(style) == 1);
-	return *tabpanelstyles_.at(style).get();
+	return tabpanelstyles_.at(style).get();
 }
 
-const StyleManager::PanelStyleInfo& StyleManager::editbox_style(UI::PanelStyle style) const {
+const UI::PanelStyleInfo* StyleManager::editbox_style(UI::PanelStyle style) const {
 	assert(editboxstyles_.count(style) == 1);
-	return *editboxstyles_.at(style).get();
+	return editboxstyles_.at(style).get();
 }
 
-const StyleManager::PanelStyleInfo& StyleManager::dropdown_style(UI::PanelStyle style) const {
+const UI::PanelStyleInfo* StyleManager::dropdown_style(UI::PanelStyle style) const {
 	assert(dropdownstyles_.count(style) == 1);
-	return *dropdownstyles_.at(style).get();
+	return dropdownstyles_.at(style).get();
 }
 
-const StyleManager::PanelStyleInfo& StyleManager::scrollbar_style(UI::PanelStyle style) const {
+const UI::PanelStyleInfo* StyleManager::scrollbar_style(UI::PanelStyle style) const {
 	assert(scrollbarstyles_.count(style) == 1);
-	return *scrollbarstyles_.at(style).get();
+	return scrollbarstyles_.at(style).get();
 }
 
 // Fill the maps
 void StyleManager::add_button_style(UI::ButtonStyle style, const LuaTable& table) {
-	buttonstyles_.insert(std::make_pair(style, std::unique_ptr<StyleManager::PanelStyleInfo>(read_style(table))));
+	buttonstyles_.insert(std::make_pair(style, std::unique_ptr<UI::PanelStyleInfo>(read_style(table))));
 }
 
 void StyleManager::add_slider_style(UI::SliderStyle style, const LuaTable& table) {
-	sliderstyles_.insert(std::make_pair(style, std::unique_ptr<StyleManager::PanelStyleInfo>(read_style(table))));
+	sliderstyles_.insert(std::make_pair(style, std::unique_ptr<UI::PanelStyleInfo>(read_style(table))));
 }
 
 void StyleManager::add_tabpanel_style(UI::TabPanelStyle style, const LuaTable& table) {
-	tabpanelstyles_.insert(std::make_pair(style, std::unique_ptr<StyleManager::PanelStyleInfo>(read_style(table))));
+	tabpanelstyles_.insert(std::make_pair(style, std::unique_ptr<UI::PanelStyleInfo>(read_style(table))));
 }
 
-void StyleManager::add_style(UI::PanelStyle style, const LuaTable& table, std::map<UI::PanelStyle, std::unique_ptr<const PanelStyleInfo>>* map) {
-	map->insert(std::make_pair(style, std::unique_ptr<StyleManager::PanelStyleInfo>(read_style(table))));
+void StyleManager::add_style(UI::PanelStyle style, const LuaTable& table, PanelStyleMap* map) {
+	map->insert(std::make_pair(style, std::unique_ptr<UI::PanelStyleInfo>(read_style(table))));
 }

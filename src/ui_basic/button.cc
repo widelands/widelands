@@ -58,8 +58,7 @@ Button::Button  //  Common constructor
      time_nextact_(0),
      title_(title_text),
 	  title_image_(title_image),
-	  background_image_(g_gr->styles().button_style(style).image),
-	  background_color_(g_gr->styles().button_style(style).color),
+	  background_style_(g_gr->styles().button_style(style)),
      clr_down_(229, 161, 2) {
 	set_thinks(false);
 	set_can_focus(true);
@@ -173,21 +172,11 @@ void Button::draw(RenderTarget& dst) {
 	const bool is_monochrome =
 	   !enabled_ && static_cast<int>(disable_style_ & ButtonDisableStyle::kMonochrome);
 
-	const Recti background_rect(0, 0, get_w(), get_h());
-
 	// Draw the background
-	if (background_image_) {
-		dst.fill_rect(background_rect, RGBAColor(0, 0, 0, 255));
-		dst.tile(
-			background_rect, background_image_, Vector2i(get_x(), get_y()));
-
-		if (background_color_ != RGBAColor(0, 0, 0, 0)) {
-			dst.fill_rect(background_rect, background_color_, BlendMode::UseAlpha);
-		}
-	}
+	draw_background(dst, *background_style_);
 
 	if (is_flat && highlighted_)
-		dst.brighten_rect(background_rect, MOUSE_OVER_BRIGHT_FACTOR);
+		dst.brighten_rect(Recti(0, 0, get_w(), get_h()), MOUSE_OVER_BRIGHT_FACTOR);
 
 	//  If we've got a picture, draw it centered
 	if (title_image_) {

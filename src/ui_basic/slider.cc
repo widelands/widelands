@@ -71,8 +71,7 @@ Slider::Slider(Panel* const parent,
      highlighted_(false),
      pressed_(false),
      enabled_(enabled),
-     pic_background_(g_gr->styles().slider_style(style).image),
-	  button_color_(g_gr->styles().slider_style(style).color),
+	  cursor_style_(g_gr->styles().slider_style(style)),
      x_gap_(x_gap),
      y_gap_(y_gap),
      bar_size_(bar_size),
@@ -152,11 +151,7 @@ void Slider::draw_cursor(
 	RGBColor black(0, 0, 0);
 	const Recti background_rect(x, y, w, h);
 
-	dst.tile  //  background
-	   (background_rect, pic_background_, Vector2i(get_x(), get_y()));
-	if (button_color_ != RGBAColor(0, 0, 0, 0)) {
-		dst.fill_rect(background_rect, button_color_, BlendMode::UseAlpha);
-	}
+	draw_background(dst, background_rect, *cursor_style_);
 
 	if (highlighted_) {
 		dst.brighten_rect(background_rect, MOUSE_OVER_BRIGHT_FACTOR);

@@ -96,8 +96,7 @@ TabPanel::TabPanel(Panel* const parent, UI::TabPanelStyle style)
 	  style_(style),
 	  active_(0),
 	  highlight_(kNotFound),
-	  background_image_(g_gr->styles().tabpanel_style(style).image),
-	  background_color_(g_gr->styles().tabpanel_style(style).color) {
+	  background_style_(g_gr->styles().tabpanel_style(style)) {
 }
 
 /**
@@ -240,31 +239,18 @@ bool TabPanel::remove_last_tab(const std::string& tabname) {
  * Draw the buttons and the tab
 */
 void TabPanel::draw(RenderTarget& dst) {
-	// draw the background
-	static_assert(2 < kTabPanelButtonHeight, "assert(2 < kTabPanelButtonSize) failed.");
-	static_assert(4 < kTabPanelButtonHeight, "assert(4 < kTabPanelButtonSize) failed.");
-	assert(kTabPanelButtonHeight - 2 <= get_h());
 	if (tabs_.empty()) {
 		return;
 	}
 
-	// Draw the backgrounds
-	// NOCOM refactor out common function in Panel
-	const Recti tabs_rect(Vector2i::zero(), tabs_.back()->get_x() + tabs_.back()->get_w(),
-												kTabPanelButtonHeight - 2);
-	const Recti background_rect(0, kTabPanelButtonHeight, get_w(), get_h() - kTabPanelButtonHeight);
+	// Draw the background
+	static_assert(2 < kTabPanelButtonHeight, "assert(2 < kTabPanelButtonSize) failed.");
+	static_assert(4 < kTabPanelButtonHeight, "assert(4 < kTabPanelButtonSize) failed.");
+	assert(kTabPanelButtonHeight - 2 <= get_h());
 
-	if (background_image_) {
-		dst.fill_rect(tabs_rect, RGBAColor(0, 0, 0, 255));
-		dst.tile(tabs_rect, background_image_, Vector2i(get_x(), get_y()));
-
-		dst.fill_rect(background_rect, RGBAColor(0, 0, 0, 255));
-		dst.tile(background_rect, background_image_, Vector2i(get_x(), get_y()));
-	}
-	if (background_color_ != RGBAColor(0, 0, 0, 0)) {
-		dst.fill_rect(tabs_rect, background_color_, BlendMode::UseAlpha);
-		dst.fill_rect(background_rect, background_color_, BlendMode::UseAlpha);
-	}
+	draw_background(dst, Recti(0, 0, tabs_.back()->get_x() + tabs_.back()->get_w(),
+													 kTabPanelButtonHeight - 2), *background_style_);
+	draw_background(dst, Recti(0, kTabPanelButtonHeight - 2, get_w(), get_h() - kTabPanelButtonHeight + 2), *background_style_);
 
 	// Draw the buttons
 	RGBColor black(0, 0, 0);

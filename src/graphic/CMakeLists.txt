@@ -10,6 +10,9 @@ wl_library(graphic_styles
   SRCS
     panel_styles.cc
     panel_styles.h
+  DEPENDS
+    graphic_color
+    graphic_surface
 )
 
 wl_library(graphic_align

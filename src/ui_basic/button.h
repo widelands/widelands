@@ -163,9 +163,7 @@ protected:
 	std::string title_;  //  title string used when pic_custom_ == 0
 	const Image* title_image_;      //  custom icon on the button
 
-	const Image* background_image_;  //  Background texture
-	RGBAColor background_color_;  //  Color tint for background texture
-
+	const UI::PanelStyleInfo* background_style_; // Background color and texture. Not owned.
 	RGBColor clr_down_;  //  color of border while a flat button is "down"	
 };
 

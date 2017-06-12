@@ -20,6 +20,9 @@
 #ifndef WL_GRAPHIC_PANEL_STYLES_H
 #define WL_GRAPHIC_PANEL_STYLES_H
 
+#include "graphic/color.h"
+#include "graphic/image.h"
+
 namespace UI {
 
 // Buttons
@@ -37,6 +40,15 @@ enum class SliderStyle { kFsMenu, kWuiLight, kWuiDark };
 // Backgrounds
 enum class PanelStyle { kFsMenu, kWui };
 enum class TabPanelStyle { kFsMenu, kWuiLight, kWuiDark };
+
+struct PanelStyleInfo {
+	PanelStyleInfo(const Image* init_image, const RGBAColor& init_color) : image(init_image), color(init_color) {}
+	PanelStyleInfo() : PanelStyleInfo(nullptr, RGBAColor(0, 0, 0, 0)) {
+	}
+
+	const Image* image;
+	const RGBAColor color;
+};
 
 }  // namespace UI
 

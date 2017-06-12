@@ -23,8 +23,6 @@
 #include <map>
 #include <memory>
 
-#include "graphic/color.h"
-#include "graphic/image.h"
 #include "graphic/panel_styles.h"
 #include "scripting/lua_table.h"
 
@@ -32,37 +30,32 @@ static const std::string kTemplateDir = "templates/default/";
 
 class StyleManager {
 public:
-	struct PanelStyleInfo {
-		PanelStyleInfo(const Image* init_image, const RGBAColor& init_color) : image(init_image), color(init_color) {}
-		const Image* image;
-		const RGBAColor color;
-	};
-
 	StyleManager() = default;
 	~StyleManager() = default;
 
 	// Late initialization, because Graphics needs to load the image files first.
 	void init();
 
-	const PanelStyleInfo& button_style(UI::ButtonStyle) const;
-	const PanelStyleInfo& slider_style(UI::SliderStyle) const;
-	const PanelStyleInfo& tabpanel_style(UI::TabPanelStyle) const;
-	const PanelStyleInfo& editbox_style(UI::PanelStyle) const;
-	const PanelStyleInfo& dropdown_style(UI::PanelStyle) const;
-	const PanelStyleInfo& scrollbar_style(UI::PanelStyle) const;
+	const UI::PanelStyleInfo* button_style(UI::ButtonStyle) const;
+	const UI::PanelStyleInfo* slider_style(UI::SliderStyle) const;
+	const UI::PanelStyleInfo* tabpanel_style(UI::TabPanelStyle) const;
+	const UI::PanelStyleInfo* editbox_style(UI::PanelStyle) const;
+	const UI::PanelStyleInfo* dropdown_style(UI::PanelStyle) const;
+	const UI::PanelStyleInfo* scrollbar_style(UI::PanelStyle) const;
 
 private:
+	using PanelStyleMap = std::map<UI::PanelStyle, std::unique_ptr<const UI::PanelStyleInfo>>;
 	void add_button_style(UI::ButtonStyle style, const LuaTable& table);
 	void add_slider_style(UI::SliderStyle style, const LuaTable& table);
 	void add_tabpanel_style(UI::TabPanelStyle style, const LuaTable& table);
-	void add_style(UI::PanelStyle style, const LuaTable& table, std::map<UI::PanelStyle, std::unique_ptr<const PanelStyleInfo>>* map);
+	void add_style(UI::PanelStyle style, const LuaTable& table, PanelStyleMap* map);
 
-	std::map<UI::ButtonStyle, std::unique_ptr<const PanelStyleInfo>> buttonstyles_;
-	std::map<UI::SliderStyle, std::unique_ptr<const PanelStyleInfo>> sliderstyles_;
-	std::map<UI::TabPanelStyle, std::unique_ptr<const PanelStyleInfo>> tabpanelstyles_;
-	std::map<UI::PanelStyle, std::unique_ptr<const PanelStyleInfo>> editboxstyles_;
-	std::map<UI::PanelStyle, std::unique_ptr<const PanelStyleInfo>> dropdownstyles_;
-	std::map<UI::PanelStyle, std::unique_ptr<const PanelStyleInfo>> scrollbarstyles_;
+	std::map<UI::ButtonStyle, std::unique_ptr<const UI::PanelStyleInfo>> buttonstyles_;
+	std::map<UI::SliderStyle, std::unique_ptr<const UI::PanelStyleInfo>> sliderstyles_;
+	std::map<UI::TabPanelStyle, std::unique_ptr<const UI::PanelStyleInfo>> tabpanelstyles_;
+	PanelStyleMap editboxstyles_;
+	PanelStyleMap dropdownstyles_;
+	PanelStyleMap scrollbarstyles_;
 
 	DISALLOW_COPY_AND_ASSIGN(StyleManager);
 };

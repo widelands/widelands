@@ -61,12 +61,9 @@ BaseListselect::BaseListselect(Panel* const parent,
      last_click_time_(-10000),
      last_selection_(no_selection_index()),
      selection_mode_(selection_mode),
-     background_(selection_mode == ListselectLayout::kDropdown ?
-                    g_gr->styles().dropdown_style(style).image :
-                    nullptr),
-	  background_color_(selection_mode == ListselectLayout::kDropdown ?
-								  g_gr->styles().dropdown_style(style).color :
-								  RGBAColor(0, 0, 0, 0)) {
+	  background_style_(selection_mode == ListselectLayout::kDropdown ?
+                    g_gr->styles().dropdown_style(style) :
+                    new UI::PanelStyleInfo()) {
 	set_thinks(false);
 
 	scrollbar_.moved.connect(boost::bind(&BaseListselect::set_scrollpos, this, _1));
@@ -358,13 +355,7 @@ void BaseListselect::draw(RenderTarget& dst) {
 	uint32_t idx = scrollpos_ / get_lineheight();
 	int y = 1 + idx * get_lineheight() - scrollpos_;
 
-	if (background_ != nullptr) {
-		const Recti background_rect(Vector2i::zero(), get_w(), get_h());
-		dst.tile(background_rect, background_, Vector2i::zero());
-		if (background_color_ != RGBAColor(0, 0, 0, 0)) {
-			dst.fill_rect(background_rect, background_color_, BlendMode::UseAlpha);
-		}
-	}
+	draw_background(dst, *background_style_);
 
 	if (selection_mode_ == ListselectLayout::kDropdown) {
 		RGBAColor black(0, 0, 0, 255);

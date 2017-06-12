@@ -115,8 +115,7 @@ private:
 	bool pressed_;      //  the cursor is pressed
 	bool enabled_;      //  enabled widget
 
-	const Image* pic_background_;  //  background texture (picture ID)
-	RGBAColor button_color_;
+	const UI::PanelStyleInfo* cursor_style_; // Cursor color and texture. Not owned.
 
 protected:
 	int32_t x_gap_;  //  draw positions

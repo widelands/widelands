@@ -100,8 +100,7 @@ private:
 
 	const Image* pic_minus_;  ///< left/up
 	const Image* pic_plus_;   ///< right/down
-	const Image* pic_buttons_;
-	RGBAColor button_color_;
+	const UI::PanelStyleInfo* button_style_; // Background color and texture. Not owned.
 };
 }
 

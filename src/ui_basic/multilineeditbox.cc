@@ -41,9 +41,8 @@ struct MultilineEditbox::Data {
 	/// The text in the edit box
 	std::string text;
 
-	/// Background tile style.
-	const Image* background;
-	RGBAColor background_color;
+	/// Background color and texture
+	const UI::PanelStyleInfo* background_style;
 
 	/// Position of the cursor inside the text.
 	/// 0 indicates that the cursor is before the first character,
@@ -85,8 +84,7 @@ private:
 */
 MultilineEditbox::MultilineEditbox(Panel* parent, int32_t x, int32_t y, uint32_t w, uint32_t h, UI::PanelStyle style)
    : Panel(parent, x, y, w, h), d_(new Data(*this)) {
-	d_->background = g_gr->styles().editbox_style(style).image;
-	d_->background_color = g_gr->styles().editbox_style(style).color;
+	d_->background_style = g_gr->styles().editbox_style(style);
 	d_->lineheight = text_height();
 	set_handle_mouse(true);
 	set_can_focus(true);
@@ -420,12 +418,7 @@ void MultilineEditbox::focus(bool topcaller) {
  * Redraw the Editbox
  */
 void MultilineEditbox::draw(RenderTarget& dst) {
-	// Draw the background
-	const Recti background_rect(Vector2i::zero(), get_w(), get_h());
-	dst.tile(background_rect, d_->background, Vector2i(get_x(), get_y()));
-	if (d_->background_color != RGBAColor(0, 0, 0, 0)) {
-		dst.fill_rect(background_rect, d_->background_color, BlendMode::UseAlpha);
-	}
+	draw_background(dst, *d_->background_style);
 
 	// Draw border.
 	if (get_w() >= 4 && get_h() >= 4) {
