@@ -40,7 +40,7 @@ UI::PanelStyleInfo* read_style(const LuaTable& table) {
 // Stupid completeness check - enum classes weren't meant for iterating, so we just compare the size
 // to the last enum member. This assumes that there are no holes in the enum, and will need
 // adjusting if the last enum member changes.
-void check_completeness(const std::string name, size_t map_size, size_t last_enum_member) {
+void check_completeness(const std::string& name, size_t map_size, size_t last_enum_member) {
 	if (map_size != last_enum_member + 1) {
 		throw wexception("StyleManager: There is a definition missing for the '%s'.", name.c_str());
 	}
