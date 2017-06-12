@@ -22,7 +22,6 @@
 #include "base/macros.h"
 #include "base/time_string.h"
 #include "logic/map.h"
-#include "logic/map.h"
 #include "logic/player.h"
 
 // couple of constants for calculation of road interconnections
@@ -106,13 +105,11 @@ bool FindNodeEnemiesBuilding::accept(const Map&, const FCoords& fc) const {
 // When looking for unowned terrain to acquire, we are actually
 // only interested in fields we can walk on.
 // Fields should either be completely unowned or owned by an opposing player
-FindEnemyNodeWalkable::FindEnemyNodeWalkable(Player* p, Game& g)
-   : player(p), game(g) {
+FindEnemyNodeWalkable::FindEnemyNodeWalkable(Player* p, Game& g) : player(p), game(g) {
 }
 
 bool FindEnemyNodeWalkable::accept(const Map&, const FCoords& fc) const {
-	return ((fc.field->nodecaps() & MOVECAPS_WALK) &&
-	       (fc.field->get_owned_by() > 0) &&
+	return ((fc.field->nodecaps() & MOVECAPS_WALK) && (fc.field->get_owned_by() > 0) &&
 	        player->is_hostile(*game.get_player(fc.field->get_owned_by())));
 }
 
@@ -130,14 +127,16 @@ bool FindNodeAllyOwned::accept(const Map&, const FCoords& fc) const {
 // When looking for unowned terrain to acquire, we must
 // pay speciall attention to fields where mines can be built.
 // Fields should be completely unowned
-FindNodeUnownedMineable::FindNodeUnownedMineable(Player* p, Game& g, int32_t t) : player(p), game(g), ore_type(t) {
+FindNodeUnownedMineable::FindNodeUnownedMineable(Player* p, Game& g, int32_t t)
+   : player(p), game(g), ore_type(t) {
 }
 
 bool FindNodeUnownedMineable::accept(const Map&, const FCoords& fc) const {
 	if (ore_type == INVALID_INDEX) {
-		return (fc.field->nodecaps() & BUILDCAPS_MINE)  && (fc.field->get_owned_by() == 0);
+		return (fc.field->nodecaps() & BUILDCAPS_MINE) && (fc.field->get_owned_by() == 0);
 	}
-	return (fc.field->nodecaps() & BUILDCAPS_MINE)  && (fc.field->get_owned_by() == 0) && fc.field->get_resources() == ore_type;
+	return (fc.field->nodecaps() & BUILDCAPS_MINE) && (fc.field->get_owned_by() == 0) &&
+	       fc.field->get_resources() == ore_type;
 }
 
 FindNodeUnownedBuildable::FindNodeUnownedBuildable(Player* p, Game& g) : player(p), game(g) {
@@ -194,71 +193,71 @@ NearFlag::NearFlag(const Flag& f, int32_t const c, int32_t const d)
    : flag(&f), cost(c), distance(d) {
 }
 
-EventTimeQueue::EventTimeQueue()
-     {}
+EventTimeQueue::EventTimeQueue() {
+}
 
-void EventTimeQueue::push(const uint32_t production_time){
+void EventTimeQueue::push(const uint32_t production_time) {
 	queue.push(production_time);
 }
 
-uint32_t EventTimeQueue::count(const uint32_t current_time){
+uint32_t EventTimeQueue::count(const uint32_t current_time) {
 	strip_old(current_time);
 	return queue.size();
 }
 
-void EventTimeQueue::strip_old(const uint32_t current_time){
+void EventTimeQueue::strip_old(const uint32_t current_time) {
 	while (queue.size() > 0 && queue.front() < current_time - duration_) {
 		queue.pop();
 	}
 }
 
 BuildableField::BuildableField(const Widelands::FCoords& fc)
-	: coords(fc),
-	  field_info_expiration(20000),
-	  preferred(false),
-	  enemy_nearby(0),
-	  enemy_accessible_(false),
-	  enemy_wh_nearby(false),
-	  unowned_land_nearby(0),
-	  near_border(false),
-	  unowned_mines_spots_nearby(0),
-	  unowned_iron_mines_nearby(false),
-	  trees_nearby(0),
-	  // explanation of starting values
-	  // this is done to save some work for AI (CPU utilization)
-	  // base rules are:
-	  // count of rocks can only decrease, so  amount of rocks
-	  // is recalculated only when previous count is positive
-	  // count of water fields are stable, so if the current count is
-	  // non-negative, water is not recaldulated
-	  rocks_nearby(1),
-	  water_nearby(-1),
-	  open_water_nearby(-1),
-	  distant_water(0),
-	  fish_nearby(-1),
-	  critters_nearby(-1),
-	  ground_water(1),
-	  space_consumers_nearby(0),
-	  rangers_nearby(0),
-	  area_military_capacity(0),
-	  military_loneliness(1000),
-	  military_in_constr_nearby(0),
-	  own_military_presence(0),
-	  enemy_military_presence(0),
-	  ally_military_presence(0),
-	  military_stationed(0),
-	  unconnected_nearby(false),
-	  military_unstationed(0),
-	  own_non_military_nearby(0),
-	  is_portspace(Widelands::ExtendedBool::kUnset),
-	  port_nearby(false),
-	  portspace_nearby(Widelands::ExtendedBool::kUnset),
-	  max_buildcap_nearby(0),
-	  last_resources_check_time(0),
-	  military_score_(0),
-	  inland(false),
-	  local_soldier_capacity(0),
-      is_militarysite(false) {
+   : coords(fc),
+     field_info_expiration(20000),
+     preferred(false),
+     enemy_nearby(0),
+     enemy_accessible_(false),
+     enemy_wh_nearby(false),
+     unowned_land_nearby(0),
+     near_border(false),
+     unowned_mines_spots_nearby(0),
+     unowned_iron_mines_nearby(false),
+     trees_nearby(0),
+     // explanation of starting values
+     // this is done to save some work for AI (CPU utilization)
+     // base rules are:
+     // count of rocks can only decrease, so  amount of rocks
+     // is recalculated only when previous count is positive
+     // count of water fields are stable, so if the current count is
+     // non-negative, water is not recaldulated
+     rocks_nearby(1),
+     water_nearby(-1),
+     open_water_nearby(-1),
+     distant_water(0),
+     fish_nearby(-1),
+     critters_nearby(-1),
+     ground_water(1),
+     space_consumers_nearby(0),
+     rangers_nearby(0),
+     area_military_capacity(0),
+     military_loneliness(1000),
+     military_in_constr_nearby(0),
+     own_military_presence(0),
+     enemy_military_presence(0),
+     ally_military_presence(0),
+     military_stationed(0),
+     unconnected_nearby(false),
+     military_unstationed(0),
+     own_non_military_nearby(0),
+     is_portspace(Widelands::ExtendedBool::kUnset),
+     port_nearby(false),
+     portspace_nearby(Widelands::ExtendedBool::kUnset),
+     max_buildcap_nearby(0),
+     last_resources_check_time(0),
+     military_score_(0),
+     inland(false),
+     local_soldier_capacity(0),
+     is_militarysite(false) {
 }
 
 int32_t BuildableField::own_military_sites_nearby_() {
@@ -281,18 +280,18 @@ int32_t BuildingObserver::total_count() const {
 	return cnt_built + cnt_under_construction;
 }
 
-bool BuildingObserver::is(BuildingAttribute attribute) const{
+bool BuildingObserver::is(BuildingAttribute attribute) const {
 	return is_what.count(attribute);
-	}
+}
 
 void BuildingObserver::set_is(const BuildingAttribute attribute) {
 	is_what.insert(attribute);
-	}
+}
 
 void BuildingObserver::unset_is(const BuildingAttribute attribute) {
 	is_what.erase(attribute);
 	assert(is_what.count(attribute) == 0);
-	}
+}
 
 Widelands::AiModeBuildings BuildingObserver::aimode_limit_status() {
 	if (total_count() > cnt_limit_by_aimode) {
@@ -328,7 +327,8 @@ EnemySiteObserver::EnemySiteObserver()
 
 // as all mines have 3 levels, AI does not know total count of mines per mined material
 // so this observer will be used for this
-MineTypesObserver::MineTypesObserver() : in_construction(0), finished(0), is_critical(false), unoccupied(0) {
+MineTypesObserver::MineTypesObserver()
+   : in_construction(0), finished(0), is_critical(false), unoccupied(0) {
 }
 
 ExpansionType::ExpansionType() {
@@ -340,16 +340,15 @@ void ExpansionType::set_expantion_type(const ExpansionMode etype) {
 }
 
 ManagementData::ManagementData() {
-		score = 1;
-		primary_parent = 255;
-		next_neuron_id = 0;
-		performance_change = 0;
+	score = 1;
+	primary_parent = 255;
+	next_neuron_id = 0;
+	performance_change = 0;
 }
 
 // Initialization of neuron. Neuron is defined by curve (type) and weight (-100 - 100)
 // third argument is just id
-Neuron::Neuron(int8_t w, uint8_t f, uint16_t i) : 
-	weight(w),type(f), id(i) {
+Neuron::Neuron(int8_t w, uint8_t f, uint16_t i) : weight(w), type(f), id(i) {
 	assert(type < neuron_curves.size());
 	assert(weight >= -100 && weight <= 100);
 	lowest_pos = std::numeric_limits<uint8_t>::max();
@@ -357,12 +356,11 @@ Neuron::Neuron(int8_t w, uint8_t f, uint16_t i) :
 	recalculate();
 }
 
-
 // weigh, or rather value in range -100 - 100
 void Neuron::set_weight(int8_t w) {
 	if (w > 100) {
 		weight = 100;
-	}else if (w < -100) {
+	} else if (w < -100) {
 		weight = -100;
 	} else {
 		weight = w;
@@ -372,23 +370,27 @@ void Neuron::set_weight(int8_t w) {
 // Neuron stores calculated values in array of size 21
 // array has to be recalculated when weight or curve type changes
 void Neuron::recalculate() {
-	assert (neuron_curves.size() > type);
-	for (int8_t i = 0; i <= 20; i+=1) {
+	assert(neuron_curves.size() > type);
+	for (int8_t i = 0; i <= 20; i += 1) {
 		results[i] = weight * neuron_curves[type][i] / 100;
 	}
 }
 
 // Following two functions returns Neuron value on position
-int8_t Neuron::get_result(const uint8_t pos){
+int8_t Neuron::get_result(const uint8_t pos) {
 	assert(pos <= 20);
 	return results[pos];
 }
 
 // get value corresponding to input in range 0-20, if you are out of range
-// the input will be cropped 
-int8_t Neuron::get_result_safe(int32_t pos, const bool absolute){
-	if (pos > highest_pos) {highest_pos = pos;};
-	if (pos < lowest_pos) {lowest_pos = pos;};
+// the input will be cropped
+int8_t Neuron::get_result_safe(int32_t pos, const bool absolute) {
+	if (pos > highest_pos) {
+		highest_pos = pos;
+	};
+	if (pos < lowest_pos) {
+		lowest_pos = pos;
+	};
 	if (pos < 0) {
 		pos = 0;
 	}
@@ -396,65 +398,65 @@ int8_t Neuron::get_result_safe(int32_t pos, const bool absolute){
 		pos = 20;
 	}
 	assert(pos <= 20);
-	assert (results[pos] >= -100 && results[pos] <=100);
+	assert(results[pos] >= -100 && results[pos] <= 100);
 	if (absolute) {
 		return std::abs(results[pos]);
-	}	
+	}
 	return results[pos];
 }
 
 // Setting the type of curve
 void Neuron::set_type(uint8_t new_type) {
-	assert (new_type < neuron_curves.size());
+	assert(new_type < neuron_curves.size());
 	type = new_type;
 }
 
 // FNeuron is basically single uint32_t integer, and AI can quary every bit of that uint32_t
-FNeuron::FNeuron(uint32_t c, uint16_t i){
+FNeuron::FNeuron(uint32_t c, uint16_t i) {
 	core = c;
 	id = i;
 }
 
 // Returning result depending on combinations of 5 bools
-bool FNeuron::get_result(const bool bool1, const bool bool2, const bool bool3, const bool bool4, const bool bool5){
+bool FNeuron::get_result(
+   const bool bool1, const bool bool2, const bool bool3, const bool bool4, const bool bool5) {
 	return core.test(bool1 * 16 + bool2 * 8 + bool3 * 4 + bool4 * 2 + bool5);
 }
 
 // Returning bool on a position
 bool FNeuron::get_position(const uint8_t pos) {
-	assert (pos < f_neuron_bit_size);
+	assert(pos < f_neuron_bit_size);
 	return core.test(pos);
 }
 
 // Returning numerical value of FNeuron. Used for saving and priting into log
-uint32_t FNeuron::get_int(){
+uint32_t FNeuron::get_int() {
 	return core.to_ulong();
 }
 
 // This is basically mutation of FNeuron
-void FNeuron::flip_bit(const uint8_t pos){
-	assert (pos < f_neuron_bit_size);
+void FNeuron::flip_bit(const uint8_t pos) {
+	assert(pos < f_neuron_bit_size);
 	core.flip(pos);
 }
 
-
 // Shifting the value in range -100 to 100, if zero_align is true, it is now allowed to shift
 // from negative to positive and vice versa, 0 must be used.
-int8_t ManagementData::shift_weight_value(const int8_t old_value, const bool aggressive){
-	
+int8_t ManagementData::shift_weight_value(const int8_t old_value, const bool aggressive) {
+
 	int16_t halfVArRange = 50;
-	if (aggressive){
+	if (aggressive) {
 		halfVArRange = 200;
 	}
-	
+
 	const int16_t upper_limit = std::min<int16_t>(old_value + halfVArRange, 100);
-	const int16_t bottom_limit = std::max<int16_t>(old_value - halfVArRange, -100);	
- 	int16_t new_value = bottom_limit + std::rand() % (upper_limit - bottom_limit + 1);
-	
+	const int16_t bottom_limit = std::max<int16_t>(old_value - halfVArRange, -100);
+	int16_t new_value = bottom_limit + std::rand() % (upper_limit - bottom_limit + 1);
+
 	if (!aggressive && ((old_value > 0 && new_value < 0) || (old_value < 0 && new_value > 0))) {
 		new_value = 0;
 	}
-	
+
 	if (new_value < -100) {
 		new_value = -100;
 	}
@@ -464,57 +466,51 @@ int8_t ManagementData::shift_weight_value(const int8_t old_value, const bool agg
 	return static_cast<int8_t>(new_value);
 }
 
-
 // Used to score performance of AI
 // Should be disabled for "production"
-void ManagementData::review(const uint32_t gametime, PlayerNumber pn,
- const uint32_t land, const uint32_t max_e_land, const uint32_t old_land, const uint16_t attackers,
-   const int16_t trained_soldiers, const int16_t latest_attackers, const uint16_t conq_ws) {
+void ManagementData::review(const uint32_t gametime,
+                            PlayerNumber pn,
+                            const uint32_t land,
+                            const uint32_t max_e_land,
+                            const uint32_t old_land,
+                            const uint16_t attackers,
+                            const int16_t trained_soldiers,
+                            const int16_t latest_attackers,
+                            const uint16_t conq_ws) {
 	const int16_t current_land_divider = 2;
 	const int16_t land_delta_multiplier = 1;
 	const int16_t bonus = 1000;
 	const int16_t attackers_multiplicator = 1;
 	const int16_t attack_bonus = 100;
-	const int16_t trained_soldiers_score = 250;	
+	const int16_t trained_soldiers_score = 250;
 	const int16_t conquered_wh_bonus = 500;
-	
-	const int16_t main_bonus = ((static_cast<int32_t>(land-old_land) > 0 &&
-		land > max_e_land * 5 / 6 &&
-		attackers > 0 &&
-		trained_soldiers > 0 &&
-		latest_attackers > 0) ? bonus : 0);
+
+	const int16_t main_bonus =
+	   ((static_cast<int32_t>(land - old_land) > 0 && land > max_e_land * 5 / 6 && attackers > 0 &&
+	     trained_soldiers > 0 && latest_attackers > 0) ?
+	       bonus :
+	       0);
 
 	const int16_t land_delta_bonus = static_cast<int16_t>(land - old_land) * land_delta_multiplier;
-	
-	score = land / current_land_divider
-		+ land_delta_bonus
-		+ main_bonus
-		+ attackers * attackers_multiplicator
-		+ ((attackers > 0) ? attack_bonus : -attack_bonus)
-		+ trained_soldiers * trained_soldiers_score+
-		+ conquered_wh_bonus + conq_ws;
-		
-	printf (" %2d %s: reviewing AI mngm. data, sc: %5d Pr.p: %d (l: %4d / %4d / %4d, at:%4d(%3d),ts:%4d(%2d), ConqWH:%2d)\n",
-		pn, gamestring_with_leading_zeros(gametime), score,
-		primary_parent, 
-		land / current_land_divider,
-		main_bonus,
-		land_delta_bonus,
-		attackers * attackers_multiplicator,
-		latest_attackers,
-		trained_soldiers * trained_soldiers_score,
-		trained_soldiers,conq_ws);
 
-	
-	if (score < -10000 || score > 30000){
-		printf ("MASTERERROR %2d %s: reviewing AI mngm. data, score: %4d (land: %4d  attackers: %3d)\n",
-	pn, gamestring_with_leading_zeros(gametime), score,
-	land / 86, attackers);
+	score = land / current_land_divider + land_delta_bonus + main_bonus +
+	        attackers * attackers_multiplicator + ((attackers > 0) ? attack_bonus : -attack_bonus) +
+	        trained_soldiers * trained_soldiers_score + +conquered_wh_bonus + conq_ws;
+
+	printf(" %2d %s: reviewing AI mngm. data, sc: %5d Pr.p: %d (l: %4d / %4d / %4d, "
+	       "at:%4d(%3d),ts:%4d(%2d), ConqWH:%2d)\n",
+	       pn, gamestring_with_leading_zeros(gametime), score, primary_parent,
+	       land / current_land_divider, main_bonus, land_delta_bonus,
+	       attackers * attackers_multiplicator, latest_attackers,
+	       trained_soldiers * trained_soldiers_score, trained_soldiers, conq_ws);
+
+	if (score < -10000 || score > 30000) {
+		printf(
+		   "MASTERERROR %2d %s: reviewing AI mngm. data, score: %4d (land: %4d  attackers: %3d)\n",
+		   pn, gamestring_with_leading_zeros(gametime), score, land / 86, attackers);
 	}
-	assert (score > -10000 && score < 100000);
-
+	assert(score > -10000 && score < 100000);
 }
-
 
 // Here we generate new AI DNA (no mutation yet) and push them into persistent data
 // this can cause inconsistency between local and persistent
@@ -855,53 +851,50 @@ void ManagementData::new_dna_for_persistent( const uint8_t pn, const Widelands::
 	
 }
 
-
 // Mutating, but all done on persistent data
-void ManagementData::mutate(const uint8_t pn){
+void ManagementData::mutate(const uint8_t pn) {
 
 	const int8_t old_probability = get_military_number_at(MutationRatePosition);
 
-	int16_t probability = shift_weight_value(get_military_number_at(MutationRatePosition), false) + 101;
+	int16_t probability =
+	   shift_weight_value(get_military_number_at(MutationRatePosition), false) + 101;
 	if (probability > kUpperDefaultMutationLimit) {
-			probability = kUpperDefaultMutationLimit;
+		probability = kUpperDefaultMutationLimit;
 	}
 	if (probability < kLowerDefaultMutationLimit) {
-			probability = kLowerDefaultMutationLimit;
+		probability = kLowerDefaultMutationLimit;
 	}
 
 	set_military_number_at(MutationRatePosition, probability - 101);
 
 	// decreasing probability (or rather increasing probability of mutation) if weaker player
-    if (ai_type == Widelands::AiType::kWeak) {
-        probability /= 2;
-        printf (" Weak mode, increasing mutation probability to 1 / %d\n", probability);
-    } else if (ai_type == Widelands::AiType::kVeryWeak) {
-        probability /= 4;
-        printf (" Very weak mode, increasing mutation probability to 1 / %d\n", probability);
-    }
+	if (ai_type == Widelands::AiType::kWeak) {
+		probability /= 2;
+		printf(" Weak mode, increasing mutation probability to 1 / %d\n", probability);
+	} else if (ai_type == Widelands::AiType::kVeryWeak) {
+		probability /= 4;
+		printf(" Very weak mode, increasing mutation probability to 1 / %d\n", probability);
+	}
 
-
-	//Wild card
+	// Wild card
 	if (std::rand() % 8 == 0) {
 		probability /= 3;
-		printf ("Wild card new probability: %d \n", probability);
+		printf("Wild card new probability: %d \n", probability);
 	}
-	
-	assert(probability > 0 && probability <= 201 );
-	
-	printf (" %2d ... mutating, final prob.: 1 / %3d (old: 1 / %3d)\n",
-	pn,
-	probability,
-	old_probability + 101);
+
+	assert(probability > 0 && probability <= 201);
+
+	printf(" %2d ... mutating, final prob.: 1 / %3d (old: 1 / %3d)\n", pn, probability,
+	       old_probability + 101);
 
 	if (probability < 201) {
-		
+
 		// Modifying pool of Military numbers
 		{
-			std::set<int32_t>preferred_numbers = {};
-		
-			for (uint16_t i = 0; i < magic_numbers_size; i += 1){
-				if (i == MutationRatePosition) { //mutated above
+			std::set<int32_t> preferred_numbers = {};
+
+			for (uint16_t i = 0; i < magic_numbers_size; i += 1) {
+				if (i == MutationRatePosition) {  // mutated above
 					continue;
 				}
 				bool mutating = false;
@@ -912,23 +905,21 @@ void ManagementData::mutate(const uint8_t pn){
 				} else if (std::rand() % probability == 0) {
 					mutating = true;
 				}
-			   	if (mutating) {
+				if (mutating) {
 					const int16_t old_value = get_military_number_at(i);
 					const int16_t new_value = shift_weight_value(get_military_number_at(i), aggressive);
-					set_military_number_at(i,new_value);
-					printf ("      Magic number %3d: value changed: %4d -> %4d  %s\n", 
-						i, old_value,
-						new_value,
-						(aggressive) ? "aggressive" : "");
+					set_military_number_at(i, new_value);
+					printf("      Magic number %3d: value changed: %4d -> %4d  %s\n", i, old_value,
+					       new_value, (aggressive) ? "aggressive" : "");
 				}
 			}
 		}
-	
+
 		// Modifying pool of neurons
 		{
 			std::set<int32_t> preferred_neurons = {};
-			for (auto& item : neuron_pool){
-	
+			for (auto& item : neuron_pool) {
+
 				bool mutating = false;
 				bool aggressive = false;
 				if (preferred_neurons.count(item.get_id()) > 0) {
@@ -936,55 +927,54 @@ void ManagementData::mutate(const uint8_t pn){
 					aggressive = true;
 				} else if (std::rand() % probability == 0) {
 					mutating = true;
-				}			
+				}
 				if (mutating) {
 					const int16_t old_value = item.get_weight();
-					if (std::rand() % 4 == 0){
+					if (std::rand() % 4 == 0) {
 						assert(neuron_curves.size() > 0);
 						item.set_type(std::rand() % neuron_curves.size());
 						pd->neuron_functs[item.get_id()] = item.get_type();
 					} else {
 						int16_t new_value = shift_weight_value(item.get_weight(), aggressive);
-						item.set_weight(new_value);			
+						item.set_weight(new_value);
 						pd->neuron_weights[item.get_id()] = item.get_weight();
 					}
-					printf ("      Neuron %2d: weight: %4d -> %4d, new curve: %d   %s\n",
-					 item.get_id(), old_value, item.get_weight(), item.get_type(),
-					 (aggressive) ? "aggressive" : "");
-					
+					printf("      Neuron %2d: weight: %4d -> %4d, new curve: %d   %s\n", item.get_id(),
+					       old_value, item.get_weight(), item.get_type(),
+					       (aggressive) ? "aggressive" : "");
+
 					item.recalculate();
 				}
 			}
 		}
-	
+
 		// Modifying pool of f-neurons
 		{
 			std::set<int32_t> preferred_f_neurons = {};
-			for (auto& item : f_neuron_pool){
+			for (auto& item : f_neuron_pool) {
 				uint8_t changed_bits = 0;
-				//is this preferred neuron
+				// is this preferred neuron
 				if (preferred_f_neurons.count(item.get_id()) > 0) {
 					for (uint8_t i = 0; i < f_neuron_bit_size; i += 1) {
 						if (std::rand() % 5 == 0) {
 							item.flip_bit(i);
 							changed_bits += 1;
 						}
-					}					
-				} else {  //normal mutation
+					}
+				} else {  // normal mutation
 					for (uint8_t i = 0; i < f_neuron_bit_size; i += 1) {
-						if (std::rand() % (probability *3) == 0) {
+						if (std::rand() % (probability * 3) == 0) {
 							item.flip_bit(i);
 							changed_bits += 1;
 						}
 					}
 				}
-					
 
-		
 				if (changed_bits) {
 					pd->f_neurons[item.get_id()] = item.get_int();
-					printf ("      F-Neuron %2d: new value: %13ul, changed bits: %2d   %s\n",
-					item.get_id(), item.get_int(),changed_bits, (preferred_f_neurons.count(item.get_id()) > 0) ? "aggressive" : "");
+					printf("      F-Neuron %2d: new value: %13ul, changed bits: %2d   %s\n",
+					       item.get_id(), item.get_int(), changed_bits,
+					       (preferred_f_neurons.count(item.get_id()) > 0) ? "aggressive" : "");
 				}
 			}
 		}
@@ -993,61 +983,59 @@ void ManagementData::mutate(const uint8_t pn){
 	test_consistency();
 }
 
-//Now we copy persistent to loacl
+// Now we copy persistent to loacl
 void ManagementData::copy_persistent_to_local(const uint8_t pn) {
 
 	assert(pd->neuron_weights.size() == neuron_pool_size);
 	assert(pd->neuron_functs.size() == neuron_pool_size);
 	neuron_pool.clear();
-	for (uint32_t i = 0; i < neuron_pool_size; i = i+1){
-		neuron_pool.push_back(Neuron(pd->neuron_weights[i],pd->neuron_functs[i],i));	
+	for (uint32_t i = 0; i < neuron_pool_size; i = i + 1) {
+		neuron_pool.push_back(Neuron(pd->neuron_weights[i], pd->neuron_functs[i], i));
 	}
 
 	assert(pd->f_neurons.size() == f_neuron_pool_size);
 	f_neuron_pool.clear();
-	for (uint32_t i = 0; i < f_neuron_pool_size; i = i+1){
-		//pd->f_neurons.push_back(f_neuron_pool[i].get_int());
+	for (uint32_t i = 0; i < f_neuron_pool_size; i = i + 1) {
+		// pd->f_neurons.push_back(f_neuron_pool[i].get_int());
 		f_neuron_pool.push_back(FNeuron(pd->f_neurons[i], i));
 	}
-	
+
 	pd->magic_numbers_size = magic_numbers_size;
 	pd->neuron_pool_size = neuron_pool_size;
-	pd->f_neuron_pool_size = f_neuron_pool_size;	
-	
+	pd->f_neuron_pool_size = f_neuron_pool_size;
+
 	test_consistency();
-	printf (" %d: DNA initialized\n", pn);	
-	
-	
-	}
+	printf(" %d: DNA initialized\n", pn);
+}
 
 bool ManagementData::test_consistency(bool itemized) {
 
-	assert (pd->neuron_weights.size() == pd->neuron_pool_size);
-	assert (pd->neuron_functs.size() == pd->neuron_pool_size);
-	assert (neuron_pool.size() == pd->neuron_pool_size);
-	assert (neuron_pool.size() == neuron_pool_size);
-	
-	assert (pd->magic_numbers_size == magic_numbers_size);			
-	assert (pd->magic_numbers.size() == magic_numbers_size);
-	
-	assert (pd->f_neurons.size() == pd->f_neuron_pool_size);
-	assert (f_neuron_pool.size() == pd->f_neuron_pool_size);
-	assert (f_neuron_pool.size() == f_neuron_pool_size);
-	
+	assert(pd->neuron_weights.size() == pd->neuron_pool_size);
+	assert(pd->neuron_functs.size() == pd->neuron_pool_size);
+	assert(neuron_pool.size() == pd->neuron_pool_size);
+	assert(neuron_pool.size() == neuron_pool_size);
+
+	assert(pd->magic_numbers_size == magic_numbers_size);
+	assert(pd->magic_numbers.size() == magic_numbers_size);
+
+	assert(pd->f_neurons.size() == pd->f_neuron_pool_size);
+	assert(f_neuron_pool.size() == pd->f_neuron_pool_size);
+	assert(f_neuron_pool.size() == f_neuron_pool_size);
+
 	if (itemized) {
 		// comparing content of neuron and fneuron pools
-		for (uint16_t i = 0; i < neuron_pool_size; i += 1){
+		for (uint16_t i = 0; i < neuron_pool_size; i += 1) {
 			assert(pd->neuron_weights[i] == neuron_pool[i].get_weight());
 			assert(pd->neuron_functs[i] == neuron_pool[i].get_type());
 			assert(neuron_pool[i].get_id() == i);
 		}
-		for (uint16_t i = 0; i < f_neuron_pool_size; i += 1){
+		for (uint16_t i = 0; i < f_neuron_pool_size; i += 1) {
 			assert(pd->f_neurons[i] == f_neuron_pool[i].get_int());
 			assert(f_neuron_pool[i].get_id() == i);
-		}	
-	}	
-	
-	// There is no 'return false', because asserts above would take care of this	
+		}
+	}
+
+	// There is no 'return false', because asserts above would take care of this
 	return true;
 }
 
@@ -1055,77 +1043,76 @@ bool ManagementData::test_consistency(bool itemized) {
 // Once we will have AI dumped into files, this should be removed
 // Also, used only for training
 void ManagementData::dump_data() {
-	//dumping new numbers
-	printf ("     actual military_numbers (%lu):\n      {", pd->magic_numbers.size());
+	// dumping new numbers
+	printf("     actual military_numbers (%lu):\n      {", pd->magic_numbers.size());
 	uint16_t itemcounter = 1;
 	uint16_t line_counter = 1;
 	for (const auto& item : pd->magic_numbers) {
-		printf (" %3d %s",item,(&item != &pd->magic_numbers.back())?", ":"");
+		printf(" %3d %s", item, (&item != &pd->magic_numbers.back()) ? ", " : "");
 		if (itemcounter % 10 == 0) {
-			printf (" //AutoContent_%02d\n       ", line_counter);
-			line_counter +=1;
+			printf(" //AutoContent_%02d\n       ", line_counter);
+			line_counter += 1;
 		}
 		++itemcounter;
 	}
-	printf ("}\n");
-	
-	printf ("     actual neuron setup:\n      ");
-	printf ("{ ");
+	printf("}\n");
+
+	printf("     actual neuron setup:\n      ");
+	printf("{ ");
 	itemcounter = 1;
 	for (auto& item : neuron_pool) {
-		printf (" %3d %s",item.get_weight(),(&item != &neuron_pool.back())?", ":"");
+		printf(" %3d %s", item.get_weight(), (&item != &neuron_pool.back()) ? ", " : "");
 		if (itemcounter % 10 == 0) {
-			printf (" //AutoContent_%02d\n       ", line_counter);
-			line_counter +=1;
+			printf(" //AutoContent_%02d\n       ", line_counter);
+			line_counter += 1;
 		}
 		++itemcounter;
 	}
-	printf ("}\n      { ");
-	itemcounter = 1;	
+	printf("}\n      { ");
+	itemcounter = 1;
 	for (auto& item : neuron_pool) {
-		printf (" %3d %s",item.get_type(),(&item != &neuron_pool.back())?", ":"");
+		printf(" %3d %s", item.get_type(), (&item != &neuron_pool.back()) ? ", " : "");
 		if (itemcounter % 10 == 0) {
-			printf (" //AutoContent_%02d\n       ", line_counter);
-			line_counter +=1;
+			printf(" //AutoContent_%02d\n       ", line_counter);
+			line_counter += 1;
 		}
 		++itemcounter;
 	}
-	printf ("}\n");
+	printf("}\n");
 
-
-	printf ("     actual f-neuron setup:\n      ");
-	printf ("{ ");
+	printf("     actual f-neuron setup:\n      ");
+	printf("{ ");
 	itemcounter = 1;
 	for (auto& item : f_neuron_pool) {
-		printf (" %8u %s",item.get_int(),(&item != &f_neuron_pool.back())?", ":"");
+		printf(" %8u %s", item.get_int(), (&item != &f_neuron_pool.back()) ? ", " : "");
 		if (itemcounter % 10 == 0) {
-			printf (" //AutoContent_%02d\n       ", line_counter);
-			line_counter +=1;
+			printf(" //AutoContent_%02d\n       ", line_counter);
+			line_counter += 1;
 		}
 		++itemcounter;
 	}
-	printf ("}\n");
+	printf("}\n");
 }
 
 // querrying militarynumber at possition
 int16_t ManagementData::get_military_number_at(uint8_t pos) {
-	assert (pos < magic_numbers_size);
+	assert(pos < magic_numbers_size);
 	return pd->magic_numbers[pos];
 }
 
 // Setting military number (persistent are used also for local use)
 void ManagementData::set_military_number_at(const uint8_t pos, int16_t value) {
-	assert (pos < magic_numbers_size);
-	
+	assert(pos < magic_numbers_size);
+
 	while (pos >= pd->magic_numbers.size()) {
 		pd->magic_numbers.push_back(0);
 	}
-	
+
 	if (value < -100) {
-			value = -100;
+		value = -100;
 	}
 	if (value > 100) {
-			value = 100;
+		value = 100;
 	}
 	pd->magic_numbers[pos] = value;
 }
@@ -1330,36 +1317,67 @@ bool FlagsForRoads::get_winner(uint32_t* winner_hash) {
 	return false;
 }
 
-
-PlayersStrengths::PlayersStrengths() : update_time(0) {}
+PlayersStrengths::PlayersStrengths() : update_time(0) {
+}
 
 // Default constructor
-PlayersStrengths::PlayerStat::PlayerStat() : team_number(0), is_enemy(false), players_power(0), old_players_power(0), old60_players_power(0),players_casualities(0) {
+PlayersStrengths::PlayerStat::PlayerStat()
+   : team_number(0),
+     is_enemy(false),
+     players_power(0),
+     old_players_power(0),
+     old60_players_power(0),
+     players_casualities(0) {
 }
 
-//Constructor to be used
-PlayersStrengths::PlayerStat::PlayerStat(Widelands::TeamNumber tc, bool e, uint32_t pp, uint32_t op, uint32_t o60p, uint32_t cs, uint32_t land, uint32_t oland, uint32_t o60l)
-   : team_number(tc), is_enemy(e), players_power(pp),  old_players_power(op), old60_players_power(o60p), players_casualities(cs), players_land(land),
-	old_players_land(oland), old60_players_land(o60l)  {
-	 last_time_seen = kNever;
+// Constructor to be used
+PlayersStrengths::PlayerStat::PlayerStat(Widelands::TeamNumber tc,
+                                         bool e,
+                                         uint32_t pp,
+                                         uint32_t op,
+                                         uint32_t o60p,
+                                         uint32_t cs,
+                                         uint32_t land,
+                                         uint32_t oland,
+                                         uint32_t o60l)
+   : team_number(tc),
+     is_enemy(e),
+     players_power(pp),
+     old_players_power(op),
+     old60_players_power(o60p),
+     players_casualities(cs),
+     players_land(land),
+     old_players_land(oland),
+     old60_players_land(o60l) {
+	last_time_seen = kNever;
 }
-
 
 // Inserting/updating data
-void PlayersStrengths::add(Widelands::PlayerNumber pn, Widelands::PlayerNumber opn, Widelands::TeamNumber mytn,
-   Widelands::TeamNumber pltn, uint32_t pp, uint32_t op, uint32_t o60p, uint32_t cs, uint32_t land, uint32_t oland,  uint32_t o60l) {
+void PlayersStrengths::add(Widelands::PlayerNumber pn,
+                           Widelands::PlayerNumber opn,
+                           Widelands::TeamNumber mytn,
+                           Widelands::TeamNumber pltn,
+                           uint32_t pp,
+                           uint32_t op,
+                           uint32_t o60p,
+                           uint32_t cs,
+                           uint32_t land,
+                           uint32_t oland,
+                           uint32_t o60l) {
 	if (all_stats.count(opn) == 0) {
 		bool enemy = false;
-		if ( pn == opn ) {
+		if (pn == opn) {
 			;
 		} else if (pltn == 0 || mytn == 0) {
 			enemy = true;
 		} else if (pltn != mytn) {
-			enemy = true;			
+			enemy = true;
 		}
 		this_player_number = pn;
-		//printf (" %d PlayersStrengths: player %d / team: %d - is%s enemy\n", pn, opn, pltn, (enemy)?"":" not");
-		all_stats.insert(std::pair<Widelands::PlayerNumber, PlayerStat>(opn, PlayerStat(pltn, enemy, pp, op, o60p, cs, land, oland, o60l)));
+		// printf (" %d PlayersStrengths: player %d / team: %d - is%s enemy\n", pn, opn, pltn,
+		// (enemy)?"":" not");
+		all_stats.insert(std::pair<Widelands::PlayerNumber, PlayerStat>(
+		   opn, PlayerStat(pltn, enemy, pp, op, o60p, cs, land, oland, o60l)));
 	} else {
 		all_stats[opn].players_power = pp;
 		all_stats[opn].old_players_power = op;
@@ -1385,8 +1403,8 @@ void PlayersStrengths::recalculate_team_power() {
 	}
 }
 
-//This just goes over information about all enemies and where they were seen last time
-bool PlayersStrengths::any_enemy_seen_lately(const uint32_t gametime){
+// This just goes over information about all enemies and where they were seen last time
+bool PlayersStrengths::any_enemy_seen_lately(const uint32_t gametime) {
 	for (auto& item : all_stats) {
 		if (item.second.is_enemy && player_seen_lately(item.first, gametime)) {
 			return true;
@@ -1396,50 +1414,48 @@ bool PlayersStrengths::any_enemy_seen_lately(const uint32_t gametime){
 }
 
 // Returns count of nearby enemies
-uint8_t PlayersStrengths::enemies_seen_lately_count(const uint32_t gametime){
+uint8_t PlayersStrengths::enemies_seen_lately_count(const uint32_t gametime) {
 	uint8_t count = 0;
 	for (auto& item : all_stats) {
 		if (item.second.is_enemy && player_seen_lately(item.first, gametime)) {
-			count +=1;
+			count += 1;
 		}
 	}
 	return count;
 }
 
-//uint32_t PlayersStrengths::enemy_last_seen(){
-	//uint32_t time = 0;
-	//for (auto& item : all_stats) {
-		//if (item.second.last_time_seen == kNever){
-			//continue;
-		//}
-		//if (item.second.is_enemy && item.second.last_time_seen > time) {
-			//time = item.second.last_time_seen;
-		//}  
-	//}
-	//if (time == 0) {return kNever;}
-	//return time;
+// uint32_t PlayersStrengths::enemy_last_seen(){
+// uint32_t time = 0;
+// for (auto& item : all_stats) {
+// if (item.second.last_time_seen == kNever){
+// continue;
+//}
+// if (item.second.is_enemy && item.second.last_time_seen > time) {
+// time = item.second.last_time_seen;
+//}
+//}
+// if (time == 0) {return kNever;}
+// return time;
 //}
 
-
 // When we see enemy, we use this to store the time
-void PlayersStrengths::set_last_time_seen(const uint32_t seentime, Widelands::PlayerNumber pn){
+void PlayersStrengths::set_last_time_seen(const uint32_t seentime, Widelands::PlayerNumber pn) {
 	assert(all_stats.count(pn) > 0);
 	all_stats[pn].last_time_seen = seentime;
 }
 
-bool PlayersStrengths::get_is_enemy(Widelands::PlayerNumber pn){
+bool PlayersStrengths::get_is_enemy(Widelands::PlayerNumber pn) {
 	assert(all_stats.count(pn) > 0);
 	return all_stats[pn].is_enemy;
-
 }
 
 // Was the player seen less then 2 minutes ago
-bool PlayersStrengths::player_seen_lately( Widelands::PlayerNumber pn, const uint32_t gametime){
+bool PlayersStrengths::player_seen_lately(Widelands::PlayerNumber pn, const uint32_t gametime) {
 	assert(all_stats.count(pn) > 0);
-	if (all_stats[pn].last_time_seen == kNever){
+	if (all_stats[pn].last_time_seen == kNever) {
 		return false;
 	}
-	if (all_stats[pn].last_time_seen + static_cast<uint32_t>(2 * 60 * 1000) > gametime){
+	if (all_stats[pn].last_time_seen + static_cast<uint32_t>(2 * 60 * 1000) > gametime) {
 		return true;
 	}
 	return false;
@@ -1461,8 +1477,8 @@ uint32_t PlayersStrengths::get_player_land(Widelands::PlayerNumber pn) {
 	return 0;
 }
 
-//Calculates strenght of enemies seen within last 2 minutes
-uint32_t PlayersStrengths::get_visible_enemies_power(const uint32_t gametime){
+// Calculates strenght of enemies seen within last 2 minutes
+uint32_t PlayersStrengths::get_visible_enemies_power(const uint32_t gametime) {
 	uint32_t pw = 0;
 	for (auto& item : all_stats) {
 		if (get_is_enemy(item.first) && player_seen_lately(item.first, gametime)) {
@@ -1472,7 +1488,7 @@ uint32_t PlayersStrengths::get_visible_enemies_power(const uint32_t gametime){
 	return pw;
 }
 
-uint32_t PlayersStrengths::get_enemies_average_power(){
+uint32_t PlayersStrengths::get_enemies_average_power() {
 	uint32_t sum = 0;
 	uint8_t count = 0;
 	for (auto& item : all_stats) {
@@ -1482,12 +1498,12 @@ uint32_t PlayersStrengths::get_enemies_average_power(){
 		}
 	}
 	if (count > 0) {
-		return sum/count;
+		return sum / count;
 	}
 	return 0;
 }
 
-uint32_t PlayersStrengths::get_enemies_average_land(){
+uint32_t PlayersStrengths::get_enemies_average_land() {
 	uint32_t sum = 0;
 	uint8_t count = 0;
 	for (auto& item : all_stats) {
@@ -1497,27 +1513,27 @@ uint32_t PlayersStrengths::get_enemies_average_land(){
 		}
 	}
 	if (count > 0) {
-		return sum/count;
+		return sum / count;
 	}
 	return 0;
 }
 
 // Strength of stronger player
-uint32_t PlayersStrengths::get_enemies_max_power(){
+uint32_t PlayersStrengths::get_enemies_max_power() {
 	uint32_t power = 0;
 	for (auto& item : all_stats) {
 		if (get_is_enemy(item.first)) {
-			power=std::max<uint32_t>(power, item.second.players_power);
+			power = std::max<uint32_t>(power, item.second.players_power);
 		}
 	}
 	return power;
 }
 
-uint32_t PlayersStrengths::get_enemies_max_land(){
+uint32_t PlayersStrengths::get_enemies_max_land() {
 	uint32_t land = 0;
 	for (auto& item : all_stats) {
 		if (get_is_enemy(item.first)) {
-			land=std::max<uint32_t>(land, item.second.players_land);
+			land = std::max<uint32_t>(land, item.second.players_land);
 		}
 	}
 	return land;
@@ -1539,7 +1555,7 @@ uint32_t PlayersStrengths::get_old60_player_power(Widelands::PlayerNumber pn) {
 
 uint32_t PlayersStrengths::get_old_player_land(Widelands::PlayerNumber pn) {
 	if (all_stats.count(pn) == 0) {
-		printf (" %d: Players statistics are still empty\n", pn);
+		printf(" %d: Players statistics are still empty\n", pn);
 		return 0;
 	}
 	return all_stats[pn].old_players_land;
@@ -1547,14 +1563,13 @@ uint32_t PlayersStrengths::get_old_player_land(Widelands::PlayerNumber pn) {
 
 uint32_t PlayersStrengths::get_old60_player_land(Widelands::PlayerNumber pn) {
 	if (all_stats.count(pn) == 0) {
-		printf (" %d: Players statistics are still empty\n", pn);
+		printf(" %d: Players statistics are still empty\n", pn);
 		return 0;
 	}
 	return all_stats[pn].old60_players_land;
 }
 
-
-uint32_t PlayersStrengths::get_old_visible_enemies_power(const uint32_t gametime){
+uint32_t PlayersStrengths::get_old_visible_enemies_power(const uint32_t gametime) {
 	uint32_t pw = 0;
 	for (auto& item : all_stats) {
 		if (get_is_enemy(item.first) && player_seen_lately(item.first, gametime)) {
@@ -1586,7 +1601,7 @@ uint32_t PlayersStrengths::get_modified_player_power(Widelands::PlayerNumber pn)
 	return result;
 }
 
-//Are the player in the same team
+// Are the player in the same team
 bool PlayersStrengths::players_in_same_team(Widelands::PlayerNumber pl1,
                                             Widelands::PlayerNumber pl2) {
 	assert(all_stats.count(pl1) > 0);
@@ -1594,7 +1609,7 @@ bool PlayersStrengths::players_in_same_team(Widelands::PlayerNumber pl1,
 	if (pl1 == pl2) {
 		return false;
 	} else if (all_stats[pl1].team_number > 0 &&
-		       all_stats[pl1].team_number == all_stats[pl2].team_number) {
+	           all_stats[pl1].team_number == all_stats[pl2].team_number) {
 		// team number 0 = no team
 		return true;
 	} else {
@@ -1618,16 +1633,20 @@ bool PlayersStrengths::strong_enough(Widelands::PlayerNumber pl) {
 	return my_strength > strongest_opponent_strength + 50;
 }
 
-//Update_time is used to prevent too frequent updates of statistics
+// Update_time is used to prevent too frequent updates of statistics
 void PlayersStrengths::set_update_time(const uint32_t gametime) {
 	update_time = gametime;
 }
 
-uint32_t PlayersStrengths::get_update_time(){
+uint32_t PlayersStrengths::get_update_time() {
 	return update_time;
 }
 
-ProductionSiteObserver::ProductionSiteObserver() : stats_zero(0), no_resources_since(kNever), upgrade_pending(false), dismantle_pending_since(kNever) {}
-
+ProductionSiteObserver::ProductionSiteObserver()
+   : stats_zero(0),
+     no_resources_since(kNever),
+     upgrade_pending(false),
+     dismantle_pending_since(kNever) {
+}
 
 }  // namespace WIdelands

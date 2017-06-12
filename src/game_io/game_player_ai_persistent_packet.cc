@@ -49,18 +49,15 @@ void GamePlayerAiPersistentPacket::read(FileSystem& fs, Game& game, MapObjectLoa
 				player->ai_data.last_attacked_player = fr.signed_16();
 				player->ai_data.least_military_score = fr.unsigned_32();
 				player->ai_data.target_military_score = fr.unsigned_32();
-				player->ai_data.ai_personality_attack_margin = fr.signed_32();
 				player->ai_data.ai_productionsites_ratio = fr.unsigned_32();
 				player->ai_data.ai_personality_wood_difference = fr.signed_32();
-				player->ai_data.ai_personality_early_militarysites = fr.unsigned_32();
-				player->ai_data.last_soldier_trained = fr.unsigned_32();
 				player->ai_data.ai_personality_mil_upper_limit = fr.signed_32();
 				// Magic numbers
 				player->ai_data.magic_numbers_size = fr.unsigned_32();
 				for (uint16_t i = 0; i < player->ai_data.magic_numbers_size; i = i + 1) {
 					player->ai_data.magic_numbers.push_back(fr.signed_16());
 				}
-				assert (player->ai_data.magic_numbers_size ==  player->ai_data.magic_numbers.size());
+				assert(player->ai_data.magic_numbers_size == player->ai_data.magic_numbers.size());
 				// Neurons
 				player->ai_data.neuron_pool_size = fr.unsigned_32();
 				for (uint16_t i = 0; i < player->ai_data.neuron_pool_size; i = i + 1) {
@@ -69,17 +66,23 @@ void GamePlayerAiPersistentPacket::read(FileSystem& fs, Game& game, MapObjectLoa
 				for (uint16_t i = 0; i < player->ai_data.neuron_pool_size; i = i + 1) {
 					player->ai_data.neuron_functs.push_back(fr.signed_8());
 				}
-				assert (player->ai_data.neuron_pool_size == player->ai_data.neuron_weights.size());	
-				assert (player->ai_data.neuron_pool_size == player->ai_data.neuron_functs.size());
-				
-				//F-neurons
+				assert(player->ai_data.neuron_pool_size == player->ai_data.neuron_weights.size());
+				assert(player->ai_data.neuron_pool_size == player->ai_data.neuron_functs.size());
+
+				// F-neurons
 				player->ai_data.f_neuron_pool_size = fr.unsigned_32();
 				for (uint16_t i = 0; i < player->ai_data.f_neuron_pool_size; i = i + 1) {
 					player->ai_data.f_neurons.push_back(fr.unsigned_32());
-				}				
-				assert (player->ai_data.f_neuron_pool_size == player->ai_data.f_neurons.size());
+				}
+				assert(player->ai_data.f_neuron_pool_size == player->ai_data.f_neurons.size());
 
-				
+				// remaining buildings for basic economy
+				player->ai_data.remaining_buildings_size = fr.unsigned_32();
+				for (uint16_t i = 0; i < player->ai_data.remaining_buildings_size; i = i + 1) {
+					player->ai_data.remaining_basic_buildings[fr.unsigned_32()] = fr.unsigned_32();
+				}
+				assert(player->ai_data.remaining_buildings_size == player->ai_data.remaining_basic_buildings.size());
+
 			} catch (const WException& e) {
 				throw GameDataError("player %u: %s", p, e.what());
 			}
@@ -112,23 +115,20 @@ void GamePlayerAiPersistentPacket::write(FileSystem& fs, Game& game, MapObjectSa
 		fw.signed_16(player->ai_data.last_attacked_player);
 		fw.unsigned_32(player->ai_data.least_military_score);
 		fw.unsigned_32(player->ai_data.target_military_score);
-		fw.signed_32(player->ai_data.ai_personality_attack_margin);
 		fw.unsigned_32(player->ai_data.ai_productionsites_ratio);
 		fw.signed_32(player->ai_data.ai_personality_wood_difference);
-		fw.unsigned_32(player->ai_data.ai_personality_early_militarysites);
-		fw.unsigned_32(player->ai_data.last_soldier_trained);
 		fw.signed_32(player->ai_data.ai_personality_mil_upper_limit);
-		
+
 		// Magic numbers
 		fw.unsigned_32(player->ai_data.magic_numbers_size);
-		assert (player->ai_data.magic_numbers_size == player->ai_data.magic_numbers.size());
+		assert(player->ai_data.magic_numbers_size == player->ai_data.magic_numbers.size());
 		for (uint16_t i = 0; i < player->ai_data.magic_numbers_size; i = i + 1) {
 			fw.signed_16(player->ai_data.magic_numbers[i]);
 		}
 		// Neurons
 		fw.unsigned_32(player->ai_data.neuron_pool_size);
-		assert (player->ai_data.neuron_pool_size == player->ai_data.neuron_weights.size());	
-		assert (player->ai_data.neuron_pool_size == player->ai_data.neuron_functs.size());			
+		assert(player->ai_data.neuron_pool_size == player->ai_data.neuron_weights.size());
+		assert(player->ai_data.neuron_pool_size == player->ai_data.neuron_functs.size());
 		for (uint16_t i = 0; i < player->ai_data.neuron_pool_size; i = i + 1) {
 			fw.signed_8(player->ai_data.neuron_weights[i]);
 		}
@@ -138,12 +138,19 @@ void GamePlayerAiPersistentPacket::write(FileSystem& fs, Game& game, MapObjectSa
 
 		// F-Neurons
 		fw.unsigned_32(player->ai_data.f_neuron_pool_size);
-		assert (player->ai_data.f_neuron_pool_size == player->ai_data.f_neurons.size());	
-	
+		assert(player->ai_data.f_neuron_pool_size == player->ai_data.f_neurons.size());
+
 		for (uint16_t i = 0; i < player->ai_data.f_neuron_pool_size; i = i + 1) {
 			fw.unsigned_32(player->ai_data.f_neurons[i]);
 		}
 
+		// Remaining buildings for basic economy
+		assert(player->ai_data.remaining_buildings_size == player->ai_data.remaining_basic_buildings.size());
+		fw.unsigned_32(player->ai_data.remaining_buildings_size);
+		for (auto bb : player->ai_data.remaining_basic_buildings) {
+			fw.unsigned_32(bb.first);
+			fw.unsigned_32(bb.second);
+		}
 	}
 
 	fw.write(fs, "binary/player_ai");

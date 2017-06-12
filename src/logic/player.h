@@ -22,6 +22,7 @@
 
 #include <memory>
 #include <unordered_set>
+#include <unordered_map>
 
 #include "base/macros.h"
 #include "graphic/color.h"
@@ -155,24 +156,22 @@ public:
 	/// data
 	struct AiPersistentState {
 		AiPersistentState()
-			: initialized(0), // zero here is important, it means "~first time"
-			 colony_scan_area(0),
-			 trees_around_cutters(0),
-			 expedition_start_time(0),
-			 ships_utilization(0),
-			 no_more_expeditions(0),
-			 last_attacked_player(0),
-			 least_military_score(0),
-			 target_military_score(0),
-			 ai_personality_attack_margin(0),
-			 ai_productionsites_ratio(0),
-			 ai_personality_wood_difference(0),
-			 ai_personality_early_militarysites(0),
-			 last_soldier_trained(0),
-			 ai_personality_mil_upper_limit(0),
-			 magic_numbers_size(0),
-			 neuron_pool_size(0),
-			 f_neuron_pool_size(0) {
+		   : initialized(0),  // zero here is important, it means "~first time"
+		     colony_scan_area(0),
+		     trees_around_cutters(0),
+		     expedition_start_time(0),
+		     ships_utilization(0),
+		     no_more_expeditions(0),
+		     last_attacked_player(0),
+		     least_military_score(0),
+		     target_military_score(0),
+		     ai_productionsites_ratio(0),
+		     ai_personality_wood_difference(0),
+		     ai_personality_mil_upper_limit(0),
+		     magic_numbers_size(0),
+		     neuron_pool_size(0),
+		     f_neuron_pool_size(0),
+		     remaining_buildings_size(0) {
 		}
 
 		// Was initialized
@@ -186,19 +185,18 @@ public:
 		int16_t last_attacked_player;
 		int32_t least_military_score;
 		int32_t target_military_score;
-		int32_t ai_personality_attack_margin;
 		uint32_t ai_productionsites_ratio;
 		int32_t ai_personality_wood_difference;
-		uint32_t ai_personality_early_militarysites;
-		uint32_t last_soldier_trained;
 		int32_t ai_personality_mil_upper_limit;
 		uint32_t magic_numbers_size;
 		uint32_t neuron_pool_size;
-		uint32_t f_neuron_pool_size;			
+		uint32_t f_neuron_pool_size;
+		uint32_t remaining_buildings_size;
 		std::vector<int16_t> magic_numbers;
 		std::vector<int8_t> neuron_weights;
 		std::vector<int8_t> neuron_functs;
 		std::vector<uint32_t> f_neurons;
+		std::unordered_map<Widelands::DescriptionIndex, uint32_t>  remaining_basic_buildings;
 	} ai_data;
 
 	AiPersistentState* get_mutable_ai_persistent_state() {

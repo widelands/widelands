@@ -78,11 +78,7 @@ enum class BuildingAttribute : uint8_t {
 	kIronMine
 };
 
-enum class AiType : uint8_t  {
-	kVeryWeak,
-	kWeak,
-	kNormal
-};
+enum class AiType : uint8_t { kVeryWeak, kWeak, kNormal };
 
 enum class ExpansionMode : uint8_t { kResources = 0, kSpace = 1, kEconomy = 2, kBoth = 3 };
 
@@ -111,7 +107,7 @@ enum class SchedulerTaskId : uint8_t {
 	kUnset
 };
 
-//This is simplification of a curve, to avoid repeated calculation
+// This is simplification of a curve, to avoid repeated calculation
 const std::vector<std::vector<int8_t>> neuron_curves = {
    {0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80, 85, 90, 95, 100},
    {0, 0, 1, 2, 4, 6, 9, 12, 16, 20, 25, 30, 36, 42, 49, 56, 64, 72, 81, 90, 100},
@@ -125,7 +121,7 @@ constexpr int f_neuron_bit_size = 32;
 constexpr int MutationRatePosition = 42;
 // set this to false for trunk NOCOM
 // this is used only for training of AI
-constexpr bool kInitializeOnLoad = true;
+constexpr bool kAITrainingMode = true;
 
 constexpr uint32_t kNever = std::numeric_limits<uint32_t>::max();
 
@@ -416,7 +412,7 @@ struct BuildingObserver {
 
 	Type type;
 
-	//bool recruitment;  // is "producing" workers?
+	// bool recruitment;  // is "producing" workers?
 	Widelands::BuildingNecessity new_building;
 	uint32_t new_building_overdue;
 	int32_t primary_priority;
@@ -628,17 +624,10 @@ struct ManagementData {
 	void mutate(PlayerNumber = 0);
 	void new_dna_for_persistent(uint8_t, Widelands::AiType);
 	void copy_persistent_to_local(uint8_t);
-	void review(uint32_t,
-	            PlayerNumber,
-	            uint32_t,
-	            uint32_t,
-	            uint32_t,
-	            uint16_t,
-	            int16_t,
-	            int16_t,
-	            uint16_t);
+	void review(
+	   uint32_t, PlayerNumber, uint32_t, uint32_t, uint32_t, uint16_t, int16_t, int16_t, uint16_t);
 	void dump_data();
-	//void initialize(uint8_t, Widelands::AiType, bool reinitializing = false);
+	// void initialize(uint8_t, Widelands::AiType, bool reinitializing = false);
 	uint16_t new_neuron_id() {
 		next_neuron_id += 1;
 		return next_neuron_id - 1;
@@ -819,18 +808,18 @@ public:
 	bool get_is_enemy(Widelands::PlayerNumber);
 	uint8_t enemies_seen_lately_count(uint32_t);
 	bool any_enemy_seen_lately(uint32_t);
-	//uint32_t enemy_last_seen();
+	// uint32_t enemy_last_seen();
 	PlayerNumber this_player_number;
 	void set_update_time(uint32_t);
 	uint32_t get_update_time();
-	
+
 private:
 	// This is the core part of this struct
 	std::map<Widelands::PlayerNumber, PlayerStat> all_stats;
 
 	// Number of team, sum of players' strength
 	std::map<Widelands::TeamNumber, uint32_t> team_powers;
-	
+
 	uint32_t update_time;
 };
 }  // namespace Widelands

@@ -1274,7 +1274,6 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 void DefaultAI::soldier_trained(const TrainingSite& site) {
 
 	const uint32_t gametime = game().get_gametime();
-	persistent_data->last_soldier_trained = gametime;
 	soldier_trained_log.push(gametime);
 
 	for (TrainingSiteObserver& trainingsite_obs : trainingsites) {

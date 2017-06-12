@@ -23,8 +23,8 @@
 
 #include <map>
 #include <memory>
-#include <unordered_set>
 #include <unordered_map>
+#include <unordered_set>
 
 #include "ai/ai_help_structs.h"
 #include "ai/computer_player.h"
@@ -74,11 +74,6 @@ struct Flag;
 //   out, to have some more forces. Reincrease the number of soldiers that
 //   should be trained if inputs_ get filled again.).
 struct DefaultAI : ComputerPlayer {
-	//enum class Type {
-		//kVeryWeak,
-		//kWeak,
-		//kNormal,
-	//};
 
 	DefaultAI(Widelands::Game&, const Widelands::PlayerNumber, Widelands::AiType);
 	~DefaultAI();
@@ -89,16 +84,15 @@ struct DefaultAI : ComputerPlayer {
 	enum class NewShip : uint8_t { kBuilt, kFoundOnLoad };
 	enum class PerfEvaluation : uint8_t { kForConstruction, kForDismantle };
 	enum class BasicEconomyBuildingStatus : uint8_t { kEncouraged, kDiscouraged, kNeutral, kNone };
-	//enum class Attackable : uint8_t {
-		//kNotAttackable,
-		//kAttackable,
-		//kAttackableAndWeak,
-		//kAttackableVeryWeak
-	//};
 
-	enum class SoldiersStatus : uint8_t { kFull = 0, kEnough = 1, kShortage = 3, kBadShortage = 6 }; //NOCOM needed?
-	
-	enum class WareWorker : uint8_t { kWare, kWorker};
+	enum class SoldiersStatus : uint8_t {
+		kFull = 0,
+		kEnough = 1,
+		kShortage = 3,
+		kBadShortage = 6
+	};
+
+	enum class WareWorker : uint8_t { kWare, kWorker };
 
 	/// Implementation for Strong
 	struct NormalImpl : public ComputerPlayer::Implementation {
@@ -204,11 +198,10 @@ private:
 	void print_stats(uint32_t);
 
 	uint32_t get_stocklevel_by_hint(size_t);
-	uint32_t get_stocklevel(Widelands::BuildingObserver&, uint32_t, WareWorker  = WareWorker::kWare);
-	//uint32_t get_warehoused_stock(Widelands::DescriptionIndex wt);
-	//uint32_t get_stocklevel(Widelands::DescriptionIndex, WareWorker);  // count stock of inputs
-	uint32_t calculate_stocklevel(Widelands::BuildingObserver&, WareWorker  = WareWorker::kWare);
-	uint32_t calculate_stocklevel(Widelands::DescriptionIndex, WareWorker = WareWorker::kWare);  // count all direct outputs_
+	uint32_t get_stocklevel(Widelands::BuildingObserver&, uint32_t, WareWorker = WareWorker::kWare);
+	uint32_t calculate_stocklevel(Widelands::BuildingObserver&, WareWorker = WareWorker::kWare);
+	uint32_t calculate_stocklevel(Widelands::DescriptionIndex,
+	                              WareWorker = WareWorker::kWare);  // count all direct outputs_
 
 	void review_wares_targets(uint32_t);
 
@@ -234,7 +227,7 @@ private:
 	bool has_building_observer(char const*);
 	Widelands::BuildingObserver& get_building_observer(Widelands::BuildingAttribute);
 	Widelands::BuildingObserver& get_building_observer(Widelands::DescriptionIndex);
-	
+
 	void gain_immovable(Widelands::PlayerImmovable&, bool found_on_load = false);
 	void lose_immovable(const Widelands::PlayerImmovable&);
 	void gain_building(Widelands::Building&, bool found_on_load);
@@ -244,8 +237,8 @@ private:
 	bool set_inputs_to_zero(const Widelands::ProductionSiteObserver&);
 	void set_inputs_to_max(const Widelands::ProductionSiteObserver&);
 	void stop_site(const Widelands::ProductionSiteObserver&);
-    void initiate_dismantlement(Widelands::ProductionSiteObserver&, const uint32_t);
-	//bool set_inputs_to_zero(const Widelands::ProductionSite&);
+	void initiate_dismantlement(Widelands::ProductionSiteObserver&, const uint32_t);
+	// bool set_inputs_to_zero(const Widelands::ProductionSite&);
 	void print_land_stats();
 
 	// Checks whether first value is in range, or lesser then...
@@ -261,8 +254,8 @@ private:
 	uint8_t spot_scoring(Widelands::Coords candidate_spot);
 	bool marine_main_decisions();
 	bool check_ships(uint32_t);
-	
-	//finding and owner
+
+	// finding and owner
 	Widelands::PlayerNumber get_land_owner(const Widelands::Map&, const uint32_t);
 
 	// Functions used for war and training stuff / defaultai_warfare.cc
@@ -274,13 +267,12 @@ private:
 	// return single number of strength of vector of soldiers
 	int32_t calculate_strength(const std::vector<Widelands::Soldier*>&);
 	// for militarysites (overloading the function)
-	// Widelands::BuildingNecessity check_building_necessity(uint8_t, uint32_t);
 	Widelands::BuildingNecessity check_building_necessity(Widelands::BuildingObserver&, uint32_t);
 	void soldier_trained(const Widelands::TrainingSite&);
 	SoldiersStatus soldier_status_;
 	int32_t vacant_mil_positions_average_;
 	uint16_t attackers_count_;
-	//uint16_t overfilled_msites_count;
+	// uint16_t overfilled_msites_count;
 	Widelands::EventTimeQueue soldier_trained_log;
 	Widelands::EventTimeQueue soldier_attacks_log;
 
@@ -342,7 +334,7 @@ private:
 	uint32_t time_of_last_construction_;
 	uint32_t next_mine_construction_due_;
 	uint16_t fishers_count_;
-	uint16_t bakeries_count_;	
+	uint16_t bakeries_count_;
 
 	// for training sites per type
 	int16_t ts_finished_count_;
@@ -360,19 +352,17 @@ private:
 	uint32_t enemysites_check_delay_;
 
 	int32_t spots_;  // sum of buildable fields
-	
+
 	int16_t productionsites_ratio_;
 
 	bool resource_necessity_water_needed_;  // unless atlanteans
 
 	// This stores highest priority for new buildings except for militarysites
 	int32_t highest_nonmil_prio_;
-	
-	//list of basic buildings as defined by "is_basic" flag in lua conf file
-	//std::set<Widelands::DescriptionIndex> basic_buildings;
-	std::unordered_map<Widelands::DescriptionIndex, uint32_t> remaining_basic_buildings;
+
+    // if the basic economy is not established, there must be non-empty list of remaining basic buildings
 	bool basic_economy_established;
-	
+
 	// id of iron_ore to identify iron mines in mines_per_type map
 	int32_t iron_ore_id = -1;
 
