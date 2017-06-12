@@ -1,15 +1,16 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2016 Widelands Development Team
+# Copyright (C) 2005-2017 Widelands Development Team
 # 
 # Translators:
+# Daniel San <daniel1977.br@gmail.com>, 2017
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-10-15 08:42+0000\n"
-"PO-Revision-Date: 2016-08-26 10:15+0000\n"
-"Last-Translator: Holger Rapp <SirVer@gmx.de>\n"
+"POT-Creation-Date: 2017-06-02 11:07+0000\n"
+"PO-Revision-Date: 2017-06-04 18:10+0000\n"
+"Last-Translator: Daniel San <daniel1977.br@gmail.com>\n"
 "Language-Team: Portuguese (Brazil) (http://www.transifex.com/widelands/widelands/language/pt_BR/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -81,7 +82,7 @@ msgstr " --language=[de_DE|sv_SE|...]\n                      O local para uso."
 msgid ""
 " --write_syncstreams=[true|false]\n"
 "                      Create syncstream dump files to help debug network games."
-msgstr ""
+msgstr "--write_syncstreams=[true|false]\nCria arquivos syncstream dump para ajudar a depurar jogos em rede."
 
 #: ../../src/wlapplication_messages.cc:76
 msgid " --autosave=[...]     Automatically save each n minutes"
