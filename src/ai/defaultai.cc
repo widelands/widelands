@@ -1016,25 +1016,6 @@ void DefaultAI::late_initialization() {
 			persistent_data->least_military_score  = persistent_data->target_military_score;
 			}
 
-		//assert(persistent_data->magic_numbers_size == magic_numbers_size);
-		//assert(persistent_data->neuron_pool_size == neuron_pool_size);
-		//assert(persistent_data->magic_numbers.size() == magic_numbers_size);
-		//assert(persistent_data->neuron_weights.size() == neuron_pool_size);
-		//assert(persistent_data->neuron_functs.size() == neuron_pool_size);
-		//assert(persistent_data->f_neurons.size() == f_neuron_pool_size);
-
-		//for (uint32_t i = 0; i < persistent_data->magic_numbers_size; i = i + 1) {
-			//management_data.set_military_number_at(i, persistent_data->magic_numbers[i]);
-		//}
-		//for (uint32_t i = 0; i < persistent_data->neuron_pool_size; i = i + 1) {
-			//management_data.neuron_pool.push_back(Neuron(persistent_data->neuron_weights[i],
-			                                             //persistent_data->neuron_functs[i],
-			                                             //management_data.new_neuron_id()));
-		//}
-
-		//for (uint32_t i = 0; i < persistent_data->f_neuron_pool_size; i = i + 1) {
-			//management_data.f_neuron_pool.push_back(FNeuron(persistent_data->f_neurons[i], i));
-		//}
 
 		if (kInitializeOnLoad) {
 			printf ("%2d: reinitializing dna (kReinitializeOnLoad set ON)", player_number());
@@ -4415,11 +4396,18 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 		if (bo.total_count()>1) {
 			return BuildingNecessity::kForbidden;
 		}
-		const uint16_t min_roads_count = 50 + std::abs(management_data.get_military_number_at(142)) * 5;
+		if (critical_mine_unoccupied(gametime)) {
+			return BuildingNecessity::kForbidden;
+		}
+		if (!basic_economy_established) {
+			return BuildingNecessity::kForbidden;
+		}		
+		const uint16_t min_roads_count = 50 + std::abs(management_data.get_military_number_at(33));
 		if (roads.size() <  min_roads_count) {
 			return BuildingNecessity::kForbidden;
 		}
-		bo.primary_priority = (roads.size() - min_roads_count) * (1 + std::abs(management_data.get_military_number_at(143)) / 5);
+		bo.primary_priority = (roads.size() - min_roads_count) * (2 + std::abs(management_data.get_military_number_at(143)) / 5);
+		//printf ("Recruitment primary priority - %s: %d \n",bo.name, bo.primary_priority );
 		return BuildingNecessity::kNeeded;
 	}
 

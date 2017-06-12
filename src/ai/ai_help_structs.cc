@@ -29,8 +29,8 @@
 constexpr int kRoadNotFound = -1000;
 constexpr int kShortcutWithinSameEconomy = 1000;
 constexpr int kRoadToDifferentEconomy = 10000;
-constexpr int kUpperDefaultMutationLimit = 100;
-constexpr int kLowerDefaultMutationLimit = 45;
+constexpr int kUpperDefaultMutationLimit = 200;
+constexpr int kLowerDefaultMutationLimit = 70;
 
 namespace Widelands {
 
@@ -339,25 +339,15 @@ void ExpansionType::set_expantion_type(const ExpansionMode etype) {
 	type = etype;
 }
 
-//int16_t ExpansionType::get_proportions(const ScoreBlock block, bool dismantlement) {
-	//if (dismantlement) {
-		//return proportion_table[static_cast<uint8_t>(ScoreBlock::kDismantle)][static_cast<uint8_t>(block)];
-	//}
-	//return proportion_table[static_cast<uint8_t>(type)][static_cast<uint8_t>(block)];
-//}
-
-
-
 ManagementData::ManagementData() {
 		score = 1;
-		review_count = 0;
 		primary_parent = 255;
 		next_neuron_id = 0;
 		performance_change = 0;
 }
 
-
-
+// Initialization of neuron. Neuron is defined by curve (type) and weight (-100 - 100)
+// third argument is just id
 Neuron::Neuron(int8_t w, uint8_t f, uint16_t i) : 
 	weight(w),type(f), id(i) {
 	assert(type < neuron_curves.size());
@@ -368,6 +358,58 @@ Neuron::Neuron(int8_t w, uint8_t f, uint16_t i) :
 }
 
 
+// weigh, or rather value in range -100 - 100
+void Neuron::set_weight(int8_t w) {
+	if (w > 100) {
+		weight = 100;
+	}else if (w < -100) {
+		weight = -100;
+	} else {
+		weight = w;
+	}
+}
+
+// Neuron stores calculated values in array of size 21
+// array has to be recalculated when weight or curve type changes
+void Neuron::recalculate() {
+	assert (neuron_curves.size() > type);
+	for (int8_t i = 0; i <= 20; i+=1) {
+		results[i] = weight * neuron_curves[type][i] / 100;
+	}
+}
+
+// Following two functions returns Neuron value on position
+int8_t Neuron::get_result(const uint8_t pos){
+	assert(pos <= 20);
+	return results[pos];
+}
+
+// get value corresponding to input in range 0-20, if you are out of range
+// the input will be cropped 
+int8_t Neuron::get_result_safe(int32_t pos, const bool absolute){
+	if (pos > highest_pos) {highest_pos = pos;};
+	if (pos < lowest_pos) {lowest_pos = pos;};
+	if (pos < 0) {
+		pos = 0;
+	}
+	if (pos > 20) {
+		pos = 20;
+	}
+	assert(pos <= 20);
+	assert (results[pos] >= -100 && results[pos] <=100);
+	if (absolute) {
+		return std::abs(results[pos]);
+	}	
+	return results[pos];
+}
+
+// Setting the type of curve
+void Neuron::set_type(uint8_t new_type) {
+	assert (new_type < neuron_curves.size());
+	type = new_type;
+}
+
+// FNeuron is basically single uint32_t integer, and AI can quary every bit of that uint32_t
 FNeuron::FNeuron(uint32_t c, uint16_t i){
 	core = c;
 	id = i;
@@ -389,58 +431,12 @@ uint32_t FNeuron::get_int(){
 	return core.to_ulong();
 }
 
+// This is basically mutation of FNeuron
 void FNeuron::flip_bit(const uint8_t pos){
 	assert (pos < f_neuron_bit_size);
 	core.flip(pos);
 }
 
-// Normal neuron is defined by weight and curve
-void Neuron::set_weight(int8_t w) {
-	if (w > 100) {
-		weight = 100;
-	}else if (w < -100) {
-		weight = -100;
-	} else {
-		weight = w;
-	}
-}
-
-// Neuron stores calculated values in array
-void Neuron::recalculate() {
-	assert (neuron_curves.size() > type);
-	for (int8_t i = 0; i <= 20; i+=1) {
-		results[i] = weight * neuron_curves[type][i] / 100;
-	}
-}
-
-// Following two functions returns Neuron value on position
-int8_t Neuron::get_result(const uint8_t pos){
-	assert(pos <= 20);
-	return results[pos];
-}
-
-int8_t Neuron::get_result_safe(int32_t pos, const bool absolute){
-	if (pos > highest_pos) {highest_pos = pos;};
-	if (pos < lowest_pos) {lowest_pos = pos;};
-	if (pos < 0) {
-		pos = 0;
-	}
-	if (pos > 20) {
-		pos = 20;
-	}
-	assert(pos <= 20);
-	assert (results[pos] >= -100 && results[pos] <=100);
-	if (absolute) {
-		return std::abs(results[pos]);
-	}	
-	return results[pos];
-}
-
-// Setting the type of function
-void Neuron::set_type(uint8_t new_type) {
-	assert (new_type < neuron_curves.size());
-	type = new_type;
-}
 
 // Shifting the value in range -100 to 100, if zero_align is true, it is now allowed to shift
 // from negative to positive and vice versa, 0 must be used.
@@ -448,7 +444,6 @@ int8_t ManagementData::shift_weight_value(const int8_t old_value, const bool agg
 	
 	int16_t halfVArRange = 50;
 	if (aggressive){
-		//printf ("aggressive mode \n");
 		halfVArRange = 200;
 	}
 	
@@ -471,6 +466,7 @@ int8_t ManagementData::shift_weight_value(const int8_t old_value, const bool agg
 
 
 // Used to score performance of AI
+// Should be disabled for "production"
 void ManagementData::review(const uint32_t gametime, PlayerNumber pn,
  const uint32_t land, const uint32_t max_e_land, const uint32_t old_land, const uint16_t attackers,
    const int16_t trained_soldiers, const int16_t latest_attackers, const uint16_t conq_ws) {
@@ -481,7 +477,6 @@ void ManagementData::review(const uint32_t gametime, PlayerNumber pn,
 	const int16_t attack_bonus = 100;
 	const int16_t trained_soldiers_score = 250;	
 	const int16_t conquered_wh_bonus = 500;
-	//assert(ironmines_bonus <= ironmines_max_bonus);
 	
 	const int16_t main_bonus = ((static_cast<int32_t>(land-old_land) > 0 &&
 		land > max_e_land * 5 / 6 &&
@@ -511,15 +506,18 @@ void ManagementData::review(const uint32_t gametime, PlayerNumber pn,
 		trained_soldiers,conq_ws);
 
 	
-	if (score < -10000 || score > 20000){
+	if (score < -10000 || score > 30000){
 		printf ("MASTERERROR %2d %s: reviewing AI mngm. data, score: %4d (land: %4d  attackers: %3d)\n",
 	pn, gamestring_with_leading_zeros(gametime), score,
 	land / 86, attackers);
 	}
 	assert (score > -10000 && score < 100000);
 
-	review_count += 1;	
 }
+
+
+// Here we generate new AI DNA (no mutation yet) and push them into persistent data
+// this can cause inconsistency between local and persistent
 
 void ManagementData::new_dna_for_persistent( const uint8_t pn, const Widelands::AiType type){
 
@@ -529,21 +527,21 @@ void ManagementData::new_dna_for_persistent( const uint8_t pn, const Widelands::
 
    //AutoSCore_AIDNA_1
     const std::vector<int16_t> AI_initial_military_numbers_A =
-      {  18 ,    0 ,   21 ,   59 ,   -7 ,  -78 ,  -22 ,   81 ,   69 ,    0 ,  //AutoContent_01_AIDNA_1
-        -55 ,   55 ,  -96 ,   16 ,   70 ,  -30 ,   33 ,   30 ,  -78 ,  -42 ,  //AutoContent_02_AIDNA_1
-         79 ,  -16 ,   29 ,   46 ,  -22 ,  -10 ,    0 ,  -29 ,   36 ,    0 ,  //AutoContent_03_AIDNA_1
-         24 ,   47 ,  -27 ,  -77 ,  -86 ,   19 ,  -63 ,  -57 ,    0 ,  -92 ,  //AutoContent_04_AIDNA_1
-         78 ,   51 ,   -1 ,  -77 ,   20 ,   38 ,   44 ,   37 ,  -64 ,  -41 ,  //AutoContent_05_AIDNA_1
-        -14 ,  -55 ,   46 ,  -28 ,   64 ,  -92 ,    4 ,  -87 ,   71 ,  -60 ,  //AutoContent_06_AIDNA_1
+      {  18 ,  -42 ,   21 ,   82 ,   -7 ,  -78 ,  -22 ,   81 ,   48 ,    0 ,  //AutoContent_01_AIDNA_1
+        -55 ,   55 ,  -96 ,   16 ,   70 ,  -30 ,   33 ,   79 ,  -78 ,  -42 ,  //AutoContent_02_AIDNA_1
+         79 ,  -16 ,   34 ,   46 ,    0 ,    0 ,    0 ,  -29 ,   53 ,   51 ,  //AutoContent_03_AIDNA_1
+         24 ,   47 ,  -27 ,   42 ,  -86 ,   46 ,  -63 ,  -47 ,   20 ,  -63 ,  //AutoContent_04_AIDNA_1
+         78 ,   51 ,   46 ,  -73 ,   20 ,   38 ,   44 ,   37 ,  -64 ,  -41 ,  //AutoContent_05_AIDNA_1
+         -3 ,  -55 ,   67 ,    0 ,   64 ,  -92 ,    4 ,  -89 ,   71 ,  -60 ,  //AutoContent_06_AIDNA_1
         -87 ,   56 ,   17 ,  -34 ,  -69 ,   24 ,  -57 ,   50 ,   40 ,  -51 ,  //AutoContent_07_AIDNA_1
-        -25 ,   32 ,    0 ,   -2 ,  -11 ,   -3 ,  -54 ,  -35 ,  -29 ,  -16 ,  //AutoContent_08_AIDNA_1
+        -34 ,   44 ,    0 ,   -2 ,  -11 ,   -4 ,  -96 ,  -35 ,  -29 ,  -12 ,  //AutoContent_08_AIDNA_1
          68 ,  -98 ,  -25 ,   50 ,   97 ,   74 ,    0 ,   65 ,  -60 ,   23 ,  //AutoContent_09_AIDNA_1
-          1 ,   53 ,   74 ,    0 ,  -15 ,   39 ,   32 ,   19 ,    0 ,  -32 ,  //AutoContent_10_AIDNA_1
-         53 ,  -45 ,   19 ,  -94 ,  -65 ,   83 ,  -56 ,  -63 ,   16 ,  -41 ,  //AutoContent_11_AIDNA_1
-         74 ,  -24 ,    0 ,  -52 ,   14 ,    5 ,    4 ,    6 ,  -45 ,   62 ,  //AutoContent_12_AIDNA_1
-         85 ,   29 ,   58 ,    3 ,  -80 ,  -20 ,  -44 ,   71 ,   60 ,    7 ,  //AutoContent_13_AIDNA_1
-        -46 ,   64 ,   26 ,  -66 ,    0 ,  -29 ,  -57 ,   80 ,   64 ,  -47 ,  //AutoContent_14_AIDNA_1
-          0 ,   15 ,  -67 ,   56 ,  -21 ,   11 ,  -33 ,  -30 ,   76 ,  -90  //AutoContent_15_AIDNA_1
+         38 ,   53 ,   74 ,    0 ,  -15 ,   27 ,   32 ,   61 ,  -24 ,  -65 ,  //AutoContent_10_AIDNA_1
+         16 ,  -42 ,   19 ,  -94 ,  -65 ,   83 ,  -55 ,  -63 ,   16 ,  -41 ,  //AutoContent_11_AIDNA_1
+         74 ,  -24 ,    0 ,  -87 ,   32 ,    5 ,    4 ,    6 ,  -70 ,   62 ,  //AutoContent_12_AIDNA_1
+         85 ,    0 ,   58 ,   48 ,  -80 ,  -20 ,  -49 ,   71 ,   60 ,    8 ,  //AutoContent_13_AIDNA_1
+        -52 ,   30 ,   69 ,  -74 ,    0 ,  -36 ,  -57 ,   80 ,   64 ,  -67 ,  //AutoContent_14_AIDNA_1
+          0 ,   15 ,  -96 ,  -51 ,  -21 ,    0 ,  -33 ,  -30 ,   76 ,  -47  //AutoContent_15_AIDNA_1
        }
 		;
 	
@@ -551,58 +549,58 @@ void ManagementData::new_dna_for_persistent( const uint8_t pn, const Widelands::
 	
 	const std::vector<int8_t> input_weights_A =
 		//0		1		2		3	4		5		6		7		8	9
-      {   48 ,  -81 ,  -26 ,   47 ,  -65 ,  -19 ,  -91 ,   84 ,   50 ,  -12 ,  //AutoContent_16_AIDNA_1
-         98 ,  -17 ,  -89 ,   76 ,   81 ,   95 ,  -91 ,  -90 ,  -56 ,  -15 ,  //AutoContent_17_AIDNA_1
-        -65 ,  -18 ,   28 ,  -65 ,   17 ,   38 ,   47 ,  -45 ,   79 ,   23 ,  //AutoContent_18_AIDNA_1
-         16 ,   25 ,  -52 ,   36 ,  -38 ,  -85 ,  -60 ,  -42 ,    0 ,  -70 ,  //AutoContent_19_AIDNA_1
-        -78 ,  -86 ,  -87 ,  -55 ,   92 ,  -63 ,   -3 ,  -39 ,    4 ,   87 ,  //AutoContent_20_AIDNA_1
+      {   48 ,  -85 ,  -26 ,   47 ,  -65 ,  -19 ,  -91 ,   84 ,   92 ,  -12 ,  //AutoContent_16_AIDNA_1
+         78 ,  -59 ,  -89 ,   76 ,   81 ,   95 ,  -91 ,  -90 ,  -56 ,  -15 ,  //AutoContent_17_AIDNA_1
+        -65 ,  -18 ,    6 ,  -65 ,   41 ,   38 ,   47 ,  -45 ,   79 ,   23 ,  //AutoContent_18_AIDNA_1
+         16 ,   25 ,  -59 ,   36 ,  -38 ,  -85 ,  -60 ,  -42 ,    0 ,  -70 ,  //AutoContent_19_AIDNA_1
+        -78 ,  -86 ,  -87 ,  -55 ,   92 ,  -63 ,  -21 ,  -76 ,    4 ,   87 ,  //AutoContent_20_AIDNA_1
          58 ,  -40 ,   71 ,  -90 ,  -72 ,    0 ,  -47 ,  -94 ,  -15 ,   95 ,  //AutoContent_21_AIDNA_1
-        -32 ,    9 ,   67 ,  -47 ,  -59 ,  -76 ,  -53 ,   57 ,  -31 ,  -47 ,  //AutoContent_22_AIDNA_1
-          0 ,  -28 ,  -16 ,   41 ,   41 ,    0 ,   36 ,   -8 ,   63 ,  -49  //AutoContent_23_AIDNA_1
+        -32 ,    9 ,   67 ,  -47 ,  -44 ,  -76 ,  -53 ,   57 ,  -31 ,  -47 ,  //AutoContent_22_AIDNA_1
+          0 ,  -28 ,  -16 ,   48 ,   41 ,  -45 ,   36 ,   -8 ,   63 ,  -49  //AutoContent_23_AIDNA_1
 	}
 			;
 	const std::vector<int8_t> input_func_A =
       {    1 ,    0 ,    1 ,    2 ,    2 ,    1 ,    0 ,    0 ,    0 ,    0 ,  //AutoContent_24_AIDNA_1
-          2 ,    1 ,    2 ,    2 ,    2 ,    0 ,    2 ,    2 ,    2 ,    1 ,  //AutoContent_25_AIDNA_1
+          2 ,    1 ,    2 ,    2 ,    1 ,    1 ,    2 ,    2 ,    2 ,    1 ,  //AutoContent_25_AIDNA_1
           2 ,    2 ,    0 ,    2 ,    2 ,    1 ,    0 ,    1 ,    0 ,    2 ,  //AutoContent_26_AIDNA_1
           1 ,    2 ,    2 ,    1 ,    2 ,    1 ,    0 ,    1 ,    2 ,    1 ,  //AutoContent_27_AIDNA_1
           2 ,    1 ,    2 ,    0 ,    0 ,    1 ,    2 ,    0 ,    0 ,    0 ,  //AutoContent_28_AIDNA_1
           1 ,    0 ,    0 ,    1 ,    0 ,    2 ,    0 ,    0 ,    1 ,    1 ,  //AutoContent_29_AIDNA_1
           2 ,    0 ,    1 ,    2 ,    0 ,    2 ,    2 ,    2 ,    1 ,    0 ,  //AutoContent_30_AIDNA_1
-          0 ,    1 ,    0 ,    2 ,    1 ,    1 ,    0 ,    2 ,    2 ,    1  //AutoContent_31_AIDNA_1
+          2 ,    1 ,    2 ,    2 ,    1 ,    1 ,    0 ,    2 ,    2 ,    1  //AutoContent_31_AIDNA_1
 	}
 		;
 	assert(neuron_pool_size == input_func_A.size());
 	assert(neuron_pool_size == input_weights_A.size());
 
 	const std::vector<uint32_t> f_neurons_A =
-      {  68678283 ,  1255516853 ,  1155498158 ,  2177078715 ,  194456367 ,  18113649 ,  2947515462 ,  3410098412 ,  3371997518 ,  587256942 ,  //AutoContent_32_AIDNA_1
-        1258917780 ,  852214871 ,  3323444933 ,  1153240710 ,  1519497509 ,  1107910975 ,  736763865 ,  3031435694 ,  655607825 ,  611781620 ,  //AutoContent_33_AIDNA_1
-        1254489651 ,  2949492528 ,  3950232534 ,  2011315496 ,  2545329808 ,  410842293 ,  2148165999 ,  3034803694 ,  2134664439 ,  2248461462 ,  //AutoContent_34_AIDNA_1
-        146235319 ,  1181400350 ,  132270059 ,  2013709130 ,  4111718371 ,  898788447 ,  708037285 ,  2952748738 ,  1231376093 ,  3820430555 ,  //AutoContent_35_AIDNA_1
-        3225399566 ,  61056331 ,  2582591252 ,  4203887193 ,  1217670190 ,  3808590069 ,  1790000795 ,  2252675927 ,  2691777843 ,  2805551453 ,  //AutoContent_36_AIDNA_1
-        1554725016 ,  2060949028 ,  3458003506 ,  2862510177 ,  755617433 ,  634505904 ,  1398029009 ,  4079348937 ,  2601237729 ,  2859725299  //AutoContent_37_AIDNA_1
+      {  202826379 ,  1322625717 ,  1148682382 ,  2244191679 ,  194456367 ,  26493027 ,  2947490886 ,  3410163948 ,  3438582086 ,  855684206 ,  //AutoContent_32_AIDNA_1
+        1259048860 ,  986431571 ,  3457662709 ,  1962749574 ,  1523650869 ,  1376351039 ,  1223335901 ,  2997887278 ,  657706513 ,  645368824 ,  //AutoContent_33_AIDNA_1
+        1271222963 ,  2915927856 ,  3933717470 ,  2011479337 ,  2679418512 ,  410834609 ,  2282387823 ,  2968201710 ,  1597793527 ,  2248461494 ,  //AutoContent_34_AIDNA_1
+        161963959 ,  1147843615 ,  670058474 ,  2013712728 ,  4145271795 ,  496651102 ,  724812677 ,  2952748738 ,  1629834973 ,  3819381979 ,  //AutoContent_35_AIDNA_1
+        3233788172 ,  732007755 ,  2583635732 ,  4271028825 ,  1217670182 ,  4043323645 ,  1857109659 ,  2249005911 ,  2834367795 ,  3072909661 ,  //AutoContent_36_AIDNA_1
+        1278949528 ,  1792513063 ,  2384261688 ,  2866704864 ,  755615385 ,  835767184 ,  1393834640 ,  4012239945 ,  2601238115 ,  2859725282  //AutoContent_37_AIDNA_1
 	 };
 	assert(f_neuron_pool_size == f_neurons_A.size());
 
 		
     //AutoSCore_AIDNA_2
 	const std::vector<int16_t> AI_initial_military_numbers_B =
-      {  19 ,    0 ,   21 ,   59 ,   -7 ,  -78 ,  -22 ,   81 ,   69 ,    0 ,  //AutoContent_01_AIDNA_2
-        -55 ,   55 ,  -96 ,   16 ,   70 ,  -30 ,   33 ,   79 ,  -78 ,  -42 ,  //AutoContent_02_AIDNA_2
-         79 ,  -16 ,   34 ,   46 ,  -22 ,    0 ,    0 ,  -29 ,   36 ,    9 ,  //AutoContent_03_AIDNA_2
-         24 ,   47 ,  -27 ,  -47 ,  -86 ,   39 ,  -63 ,  -21 ,   20 ,  -63 ,  //AutoContent_04_AIDNA_2
-         78 ,   51 ,   -7 ,  -77 ,   20 ,   38 ,   44 ,   37 ,  -64 ,  -41 ,  //AutoContent_05_AIDNA_2
-         -3 ,  -20 ,   67 ,  -28 ,   64 ,  -92 ,    4 ,  -87 ,   71 ,  -60 ,  //AutoContent_06_AIDNA_2
-        -87 ,   56 ,   17 ,  -34 ,  -69 ,   24 ,  -57 ,   50 ,   40 ,  -51 ,  //AutoContent_07_AIDNA_2
-        -25 ,   44 ,    0 ,   -2 ,  -11 ,   -3 ,  -54 ,  -35 ,  -29 ,  -16 ,  //AutoContent_08_AIDNA_2
+      {  18 ,  -42 ,   21 ,   59 ,   -7 ,  -78 ,  -22 ,   81 ,   48 ,    0 ,  //AutoContent_01_AIDNA_2
+        -55 ,   45 ,  -96 ,   16 ,   70 ,  -30 ,   33 ,   79 ,  -78 ,  -42 ,  //AutoContent_02_AIDNA_2
+         79 ,  -16 ,   34 ,   46 ,  -22 ,    0 ,   45 ,  -29 ,   53 ,   51 ,  //AutoContent_03_AIDNA_2
+         24 ,   47 ,  -27 ,   42 ,  -86 ,   46 ,  -63 ,  -47 ,   20 ,  -63 ,  //AutoContent_04_AIDNA_2
+         78 ,   51 ,  -31 ,  -77 ,   20 ,   38 ,    6 ,   37 ,  -64 ,  -41 ,  //AutoContent_05_AIDNA_2
+         -3 ,  -55 ,   62 ,    0 ,   64 ,  -92 ,    4 ,  -89 ,   71 ,  -60 ,  //AutoContent_06_AIDNA_2
+        -87 ,   56 ,   17 ,  -34 ,  -69 ,   24 ,  -57 ,   84 ,   40 ,  -51 ,  //AutoContent_07_AIDNA_2
+          0 ,   44 ,    0 ,   -2 ,  -11 ,   -4 ,  -96 ,  -35 ,  -29 ,  -12 ,  //AutoContent_08_AIDNA_2
          68 ,  -98 ,  -25 ,   50 ,   97 ,   74 ,    0 ,   65 ,  -60 ,   23 ,  //AutoContent_09_AIDNA_2
-          0 ,   53 ,   74 ,    0 ,  -15 ,   39 ,   32 ,   61 ,    0 ,  -32 ,  //AutoContent_10_AIDNA_2
-         53 ,  -42 ,   19 ,  -94 ,  -65 ,   83 ,  -56 ,  -63 ,   16 ,  -41 ,  //AutoContent_11_AIDNA_2
-         74 ,  -24 ,    0 ,  -87 ,    0 ,    5 ,    4 ,    6 ,  -70 ,   62 ,  //AutoContent_12_AIDNA_2
-         85 ,   29 ,   58 ,    3 ,  -80 ,  -20 ,  -49 ,   71 ,   60 ,    7 ,  //AutoContent_13_AIDNA_2
-        -46 ,   64 ,   69 ,  -74 ,    0 ,  -36 ,  -57 ,   80 ,   64 ,  -67 ,  //AutoContent_14_AIDNA_2
-          0 ,   15 ,  -67 ,   56 ,  -67 ,   11 ,  -33 ,  -30 ,   76 ,  -90  //AutoContent_15_AIDNA_2
+         38 ,   53 ,   74 ,    0 ,  -15 ,   27 ,   32 ,   61 ,  -24 ,  -65 ,  //AutoContent_10_AIDNA_2
+         16 ,  -42 ,   19 ,  -94 ,  -65 ,   83 ,  -55 ,  -63 ,   16 ,  -41 ,  //AutoContent_11_AIDNA_2
+         28 ,  -24 ,    0 ,  -87 ,   32 ,    5 ,    4 ,    6 ,  -20 ,   62 ,  //AutoContent_12_AIDNA_2
+         85 ,    0 ,   58 ,   48 ,  -80 ,  -20 ,  -49 ,   71 ,   60 ,    8 ,  //AutoContent_13_AIDNA_2
+        -52 ,   59 ,  100 ,  -74 ,    0 ,  -36 ,   -9 ,   80 ,   41 ,  -67 ,  //AutoContent_14_AIDNA_2
+          0 ,   15 ,  -96 ,  -51 ,  -21 ,   11 ,  -27 ,  -30 ,   76 ,  -47  //AutoContent_15_AIDNA_2
 		}
 		;
 	assert(magic_numbers_size == AI_initial_military_numbers_B.size());
@@ -610,12 +608,12 @@ void ManagementData::new_dna_for_persistent( const uint8_t pn, const Widelands::
 	const std::vector<int8_t> input_weights_B =
       {   48 ,  -85 ,  -26 ,   47 ,  -65 ,  -19 ,  -91 ,   84 ,   50 ,  -12 ,  //AutoContent_16_AIDNA_2
          98 ,  -59 ,  -89 ,   76 ,   81 ,   95 ,  -91 ,  -90 ,  -56 ,  -15 ,  //AutoContent_17_AIDNA_2
-        -65 ,  -18 ,   28 ,  -65 ,   17 ,   38 ,   47 ,  -45 ,   79 ,   23 ,  //AutoContent_18_AIDNA_2
-         16 ,   25 ,  -52 ,   36 ,  -38 ,  -85 ,  -60 ,  -42 ,    0 ,  -70 ,  //AutoContent_19_AIDNA_2
-        -78 ,  -86 ,  -87 ,  -55 ,   92 ,  -63 ,  -21 ,  -39 ,    4 ,   87 ,  //AutoContent_20_AIDNA_2
+        -65 ,  -18 ,    6 ,  -65 ,   41 ,   38 ,   47 ,  -45 ,   79 ,   23 ,  //AutoContent_18_AIDNA_2
+         16 ,   25 ,  -59 ,   36 ,  -38 ,  -85 ,  -60 ,  -42 ,    0 ,  -70 ,  //AutoContent_19_AIDNA_2
+        -78 ,  -86 ,  -87 ,  -55 ,   92 ,  -63 ,  -21 ,  -76 ,    4 ,   87 ,  //AutoContent_20_AIDNA_2
          58 ,  -40 ,   71 ,  -90 ,  -72 ,    0 ,  -47 ,  -94 ,  -15 ,   95 ,  //AutoContent_21_AIDNA_2
         -32 ,    9 ,   67 ,  -47 ,  -44 ,  -76 ,  -53 ,   57 ,  -31 ,  -47 ,  //AutoContent_22_AIDNA_2
-          0 ,  -28 ,  -16 ,   41 ,   41 ,    0 ,   36 ,   -8 ,   63 ,  -49  //AutoContent_23_AIDNA_2
+          0 ,  -28 ,  -16 ,   48 ,   41 ,  -45 ,   36 ,   -8 ,   51 ,  -49  //AutoContent_23_AIDNA_2
 }
 	      ;
 	
@@ -627,7 +625,7 @@ void ManagementData::new_dna_for_persistent( const uint8_t pn, const Widelands::
           2 ,    1 ,    2 ,    0 ,    0 ,    1 ,    2 ,    0 ,    0 ,    0 ,  //AutoContent_28_AIDNA_2
           1 ,    0 ,    0 ,    1 ,    0 ,    2 ,    0 ,    0 ,    1 ,    1 ,  //AutoContent_29_AIDNA_2
           2 ,    0 ,    1 ,    2 ,    0 ,    2 ,    2 ,    2 ,    1 ,    0 ,  //AutoContent_30_AIDNA_2
-          0 ,    1 ,    0 ,    2 ,    1 ,    1 ,    0 ,    2 ,    2 ,    1  //AutoContent_31_AIDNA_2
+          2 ,    1 ,    2 ,    2 ,    1 ,    1 ,    0 ,    2 ,    2 ,    1  //AutoContent_31_AIDNA_2
 }
 		;
 		assert(neuron_pool_size == input_func_B.size());
@@ -635,33 +633,33 @@ void ManagementData::new_dna_for_persistent( const uint8_t pn, const Widelands::
 
       
 	const std::vector<uint32_t> f_neurons_B =
-      {  68608651 ,  1322560189 ,  1172275630 ,  2177078707 ,  194456367 ,  18637921 ,  2947523654 ,  3410032876 ,  3439106374 ,  855684206 ,  //AutoContent_32_AIDNA_2
-        1258917780 ,  852213847 ,  3323444933 ,  1962749574 ,  1523650869 ,  1124819263 ,  736796637 ,  3031441838 ,  657706513 ,  645336048 ,  //AutoContent_33_AIDNA_2
-        1271266867 ,  4022709808 ,  3950232534 ,  2011446568 ,  2679416464 ,  410834101 ,  2282416495 ,  2968218094 ,  2134664407 ,  2248461462 ,  //AutoContent_34_AIDNA_2
-        163012535 ,  1147843871 ,  132270059 ,  2013708632 ,  4145272819 ,  362441311 ,  2855520933 ,  2952781506 ,  1231376093 ,  3820430555 ,  //AutoContent_35_AIDNA_2
-        3225415948 ,  195372363 ,  2583639828 ,  4203886681 ,  1217670190 ,  4043340029 ,  1790000795 ,  2252675927 ,  2825995571 ,  2805551453 ,  //AutoContent_36_AIDNA_2
-        1277901464 ,  2060948516 ,  2384261690 ,  2866704736 ,  755617433 ,  567331472 ,  1393834705 ,  4146457801 ,  2601237729 ,  2859725298  //AutoContent_37_AIDNA_2
+      {  202826379 ,  1322756799 ,  1089962126 ,  2244191679 ,  194460463 ,  18113635 ,  2947490886 ,  3275946220 ,  3438582086 ,  856208494 ,  //AutoContent_32_AIDNA_2
+        1326156700 ,  986431571 ,  3456614141 ,  1962749574 ,  1523650869 ,  1376351039 ,  2347409357 ,  2962235694 ,  657706517 ,  645368824 ,  //AutoContent_33_AIDNA_2
+        1271255699 ,  2915927856 ,  3396846550 ,  2012003625 ,  2679416528 ,  410834609 ,  2282387823 ,  2968201710 ,  2134664375 ,  2248461478 ,  //AutoContent_34_AIDNA_2
+        161963959 ,  1147843871 ,  670058474 ,  2013712728 ,  4145271795 ,  496651103 ,  733203077 ,  2952748738 ,  1092701341 ,  3819381979 ,  //AutoContent_35_AIDNA_2
+        3225153804 ,  732007755 ,  2583635732 ,  4271028825 ,  1217670182 ,  4043340029 ,  1857126043 ,  2249005911 ,  2825979187 ,  3072909661 ,  //AutoContent_36_AIDNA_2
+        1277901016 ,  1255642150 ,  2384261690 ,  2866704864 ,  755617465 ,  835768208 ,  1394358929 ,  4012239945 ,  2602286691 ,  2859725298  //AutoContent_37_AIDNA_2
 	 };
 	assert(f_neuron_pool_size == f_neurons_B.size());
 
 
     //AutoSCore_AIDNA_3
 	const std::vector<int16_t> AI_initial_military_numbers_C =
-      {  18 ,    0 ,   21 ,   59 ,   -7 ,  -78 ,  -22 ,   81 ,   69 ,    0 ,  //AutoContent_01_AIDNA_3
-        -55 ,   55 ,  -96 ,   16 ,   70 ,  -30 ,   33 ,   30 ,  -78 ,  -42 ,  //AutoContent_02_AIDNA_3
-         79 ,  -16 ,   29 ,   46 ,  -22 ,  -10 ,    0 ,  -29 ,   36 ,    9 ,  //AutoContent_03_AIDNA_3
-         24 ,   47 ,  -27 ,  -77 ,  -72 ,   19 ,  -43 ,  -57 ,    0 ,  -92 ,  //AutoContent_04_AIDNA_3
-         78 ,   51 ,  -25 ,  -77 ,   20 ,   38 ,   44 ,   37 ,  -64 ,  -41 ,  //AutoContent_05_AIDNA_3
-        -14 ,  -55 ,   70 ,  -28 ,   64 ,  -92 ,    4 ,  -87 ,   71 ,  -60 ,  //AutoContent_06_AIDNA_3
-        -87 ,   61 ,   17 ,  -34 ,  -89 ,   24 ,  -57 ,   50 ,   40 ,  -51 ,  //AutoContent_07_AIDNA_3
-        -25 ,   44 ,    0 ,   -2 ,  -11 ,   -3 ,  -54 ,  -35 ,  -29 ,  -16 ,  //AutoContent_08_AIDNA_3
-         68 ,  -98 ,  -25 ,   50 ,   97 ,   74 ,    0 ,   28 ,  -60 ,   23 ,  //AutoContent_09_AIDNA_3
-          1 ,   53 ,   74 ,    0 ,  -15 ,   39 ,   32 ,   19 ,    0 ,  -32 ,  //AutoContent_10_AIDNA_3
-         53 ,  -45 ,   19 ,  -94 ,  -65 ,   43 ,  -56 ,  -63 ,   16 ,  -41 ,  //AutoContent_11_AIDNA_3
-         74 ,  -24 ,    0 ,  -52 ,    0 ,   20 ,    4 ,    6 ,  -65 ,   58 ,  //AutoContent_12_AIDNA_3
-         85 ,   29 ,   58 ,    3 ,  -80 ,  -20 ,  -44 ,   71 ,   60 ,    7 ,  //AutoContent_13_AIDNA_3
-        -46 ,   64 ,   26 ,  -66 ,    0 ,  -29 ,  -57 ,   80 ,   64 ,  -47 ,  //AutoContent_14_AIDNA_3
-          0 ,   15 ,  -67 ,   56 ,  -21 ,   11 ,  -33 ,  -30 ,   76 ,  -90  //AutoContent_15_AIDNA_3
+      {  18 ,  -42 ,   21 ,   59 ,   -7 ,  -78 ,  -22 ,   81 ,   31 ,    0 ,  //AutoContent_01_AIDNA_3
+        -55 ,   55 ,  -96 ,   16 ,   70 ,  -30 ,   33 ,   79 ,  -78 ,  -42 ,  //AutoContent_02_AIDNA_3
+         79 ,  -16 ,   34 ,   46 ,  -22 ,    0 ,    0 ,  -29 ,   53 ,   51 ,  //AutoContent_03_AIDNA_3
+         24 ,   47 ,  -27 ,   42 ,  -86 ,   46 ,  -63 ,  -47 ,   20 ,  -63 ,  //AutoContent_04_AIDNA_3
+         78 ,   51 ,   62 ,  -77 ,   20 ,   38 ,   44 ,   37 ,  -64 ,  -41 ,  //AutoContent_05_AIDNA_3
+         -3 ,  -55 ,   67 ,    0 ,   64 ,  -92 ,    4 ,  -89 ,   71 ,  -60 ,  //AutoContent_06_AIDNA_3
+        -87 ,   56 ,   17 ,  -34 ,  -96 ,   24 ,  -57 ,   50 ,   40 ,  -51 ,  //AutoContent_07_AIDNA_3
+        -34 ,   44 ,    0 ,   -2 ,  -11 ,   -4 ,  -96 ,  -35 ,  -29 ,  -12 ,  //AutoContent_08_AIDNA_3
+         68 ,  -98 ,  -25 ,   50 ,   97 ,   74 ,    0 ,   65 ,  -60 ,   23 ,  //AutoContent_09_AIDNA_3
+         38 ,   53 ,   74 ,    0 ,  -15 ,   27 ,   32 ,   61 ,  -24 ,  -65 ,  //AutoContent_10_AIDNA_3
+         16 ,  -42 ,   19 ,  -94 ,  -65 ,   83 ,  -55 ,  -63 ,   16 ,  -41 ,  //AutoContent_11_AIDNA_3
+         74 ,  -24 ,    0 ,  -87 ,   32 ,    5 ,    4 ,    6 ,  -70 ,   62 ,  //AutoContent_12_AIDNA_3
+         85 ,    0 ,   58 ,   48 ,  -80 ,  -20 ,  -49 ,   71 ,   60 ,    8 ,  //AutoContent_13_AIDNA_3
+        -52 ,   30 ,   69 ,  -74 ,    0 ,  -36 ,  -57 ,   80 ,   64 ,  -67 ,  //AutoContent_14_AIDNA_3
+          0 ,   15 ,  -96 ,  -51 ,  -21 ,    0 ,  -33 ,  -30 ,   76 ,  -47  //AutoContent_15_AIDNA_3
        }
 
 		;
@@ -669,95 +667,95 @@ void ManagementData::new_dna_for_persistent( const uint8_t pn, const Widelands::
 		assert(magic_numbers_size == AI_initial_military_numbers_C.size());
 	
 	const std::vector<int8_t> input_weights_C =
-      {   48 ,  -85 ,  -26 ,   47 ,  -65 ,  -19 ,  -62 ,   84 ,   50 ,  -12 ,  //AutoContent_16_AIDNA_3
-         98 ,  -59 ,  -89 ,   76 ,   81 ,   95 ,  -91 ,  -90 ,  -56 ,  -15 ,  //AutoContent_17_AIDNA_3
-        -65 ,  -25 ,    7 ,  -65 ,   17 ,   38 ,   47 ,  -45 ,   50 ,   23 ,  //AutoContent_18_AIDNA_3
-         16 ,   25 ,  -52 ,   36 ,  -38 ,  -85 ,  -60 ,  -42 ,    0 ,  -98 ,  //AutoContent_19_AIDNA_3
-        -78 ,  -86 ,  -87 ,  -55 ,   92 ,  -63 ,  -21 ,  -39 ,    4 ,   87 ,  //AutoContent_20_AIDNA_3
+      {   94 ,  -85 ,  -26 ,   47 ,  -65 ,  -19 ,  -91 ,   84 ,   92 ,  -12 ,  //AutoContent_16_AIDNA_3
+         78 ,  -59 ,  -89 ,   76 ,   81 ,   95 ,  -91 ,  -90 ,  -56 ,  -15 ,  //AutoContent_17_AIDNA_3
+        -65 ,  -18 ,    6 ,  -65 ,   17 ,   38 ,   47 ,  -45 ,   79 ,   23 ,  //AutoContent_18_AIDNA_3
+         16 ,   25 ,  -59 ,   36 ,  -38 ,  -85 ,  -60 ,  -42 ,    0 ,  -70 ,  //AutoContent_19_AIDNA_3
+        -78 ,  -86 ,  -87 ,  -55 ,   92 ,  -63 ,  -21 ,  -76 ,    4 ,   87 ,  //AutoContent_20_AIDNA_3
          58 ,  -40 ,   71 ,  -90 ,  -72 ,    0 ,  -47 ,  -94 ,  -15 ,   95 ,  //AutoContent_21_AIDNA_3
-        -32 ,    9 ,   67 ,  -47 ,  -59 ,  -76 ,  -53 ,   57 ,  -68 ,  -47 ,  //AutoContent_22_AIDNA_3
-          0 ,  -28 ,  -16 ,   41 ,   41 ,    0 ,   36 ,   -8 ,   63 ,  -49  //AutoContent_23_AIDNA_3
+        -32 ,    9 ,   67 ,  -47 ,  -44 ,  -76 ,  -53 ,   57 ,  -31 ,  -47 ,  //AutoContent_22_AIDNA_3
+          0 ,  -28 ,  -16 ,   48 ,   41 ,  -45 ,   36 ,   -8 ,   63 ,  -49  //AutoContent_23_AIDNA_3
        }
 			;
 	const std::vector<int8_t> input_func_C =
       {    1 ,    0 ,    1 ,    2 ,    2 ,    1 ,    0 ,    0 ,    0 ,    0 ,  //AutoContent_24_AIDNA_3
-          2 ,    1 ,    2 ,    2 ,    2 ,    0 ,    2 ,    2 ,    2 ,    1 ,  //AutoContent_25_AIDNA_3
+          2 ,    1 ,    2 ,    2 ,    2 ,    1 ,    2 ,    2 ,    2 ,    1 ,  //AutoContent_25_AIDNA_3
           2 ,    2 ,    0 ,    2 ,    2 ,    1 ,    0 ,    1 ,    0 ,    2 ,  //AutoContent_26_AIDNA_3
           1 ,    2 ,    2 ,    1 ,    2 ,    1 ,    0 ,    1 ,    2 ,    1 ,  //AutoContent_27_AIDNA_3
           2 ,    1 ,    2 ,    0 ,    0 ,    1 ,    2 ,    0 ,    0 ,    0 ,  //AutoContent_28_AIDNA_3
           1 ,    0 ,    0 ,    1 ,    0 ,    2 ,    0 ,    0 ,    1 ,    1 ,  //AutoContent_29_AIDNA_3
           2 ,    0 ,    1 ,    2 ,    0 ,    2 ,    2 ,    2 ,    1 ,    0 ,  //AutoContent_30_AIDNA_3
-          0 ,    1 ,    0 ,    2 ,    1 ,    1 ,    0 ,    2 ,    2 ,    1  //AutoContent_31_AIDNA_3
+          2 ,    1 ,    0 ,    2 ,    1 ,    1 ,    0 ,    2 ,    2 ,    1  //AutoContent_31_AIDNA_3
        }
 			;
 	assert(neuron_pool_size == input_func_C.size());
 	assert(neuron_pool_size == input_weights_C.size());
 	
 	const std::vector<uint32_t> f_neurons_C =
-      {  68678283 ,  1322560181 ,  1155498158 ,  2177044795 ,  194456381 ,  18113649 ,  3220145222 ,  3410032876 ,  3371997510 ,  589354094 ,  //AutoContent_32_AIDNA_3
-        1795788692 ,  852213847 ,  3860315845 ,  1421676166 ,  1519513893 ,  1376346431 ,  736796633 ,  3031435694 ,  655608337 ,  611781620 ,  //AutoContent_33_AIDNA_3
-        3418750497 ,  2949492528 ,  3950494678 ,  2011315624 ,  2662639256 ,  410834101 ,  2148165999 ,  3034803694 ,  2134664407 ,  2248461462 ,  //AutoContent_34_AIDNA_3
-        144138167 ,  1147843871 ,  132270059 ,  4160930650 ,  4111718371 ,  898788447 ,  708037285 ,  2919190226 ,  1231376089 ,  3820445915 ,  //AutoContent_35_AIDNA_3
-        3225399758 ,  2342626635 ,  2582591248 ,  4202830425 ,  1217670190 ,  3808458853 ,  1790000859 ,  2269453143 ,  2842772787 ,  2805551453 ,  //AutoContent_36_AIDNA_3
-        1286289560 ,  2061473316 ,  1309473330 ,  2862510177 ,  755551897 ,  558942864 ,  1364474577 ,  4079348937 ,  2601202913 ,  2859725299  //AutoContent_37_AIDNA_3
+      {  202826379 ,  1322625717 ,  1148682382 ,  2244707775 ,  194456367 ,  26502243 ,  2947490886 ,  3410163948 ,  3439106886 ,  855684206 ,  //AutoContent_32_AIDNA_3
+        1259048860 ,  986431571 ,  3457662709 ,  1962749574 ,  1523650865 ,  1376351039 ,  1223335901 ,  2997887278 ,  657706513 ,  645368824 ,  //AutoContent_33_AIDNA_3
+        1271222963 ,  2915927856 ,  3933717470 ,  2011479337 ,  2679418512 ,  410834609 ,  2282387823 ,  2968201710 ,  1597793527 ,  2248461494 ,  //AutoContent_34_AIDNA_3
+        161963959 ,  3295327519 ,  670058346 ,  2013712728 ,  4145271793 ,  362433359 ,  724812677 ,  2818531010 ,  1629834973 ,  3819381979 ,  //AutoContent_35_AIDNA_3
+        3225415948 ,  732006731 ,  2583635732 ,  4271028825 ,  1217670182 ,  4043323645 ,  1857109643 ,  2250054487 ,  2834367795 ,  3072909661 ,  //AutoContent_36_AIDNA_3
+        1278949528 ,  1792513063 ,  2384261690 ,  2866442720 ,  755615385 ,  835767184 ,  1393834640 ,  4012239945 ,  2601238115 ,  2859725298  //AutoContent_37_AIDNA_3
 	 };
 	assert(f_neuron_pool_size == f_neurons_C.size());
 
 		
     //AutoSCore_AIDNA_4
 	const std::vector<int16_t> AI_initial_military_numbers_D =
-      {  18 ,    0 ,   21 ,   59 ,   -7 ,  -78 ,  -22 ,   81 ,   69 ,    0 ,  //AutoContent_01_AIDNA_4
-        -55 ,   55 ,  -96 ,   16 ,   70 ,  -30 ,   33 ,   30 ,  -78 ,  -42 ,  //AutoContent_02_AIDNA_4
-         79 ,  -16 ,   29 ,   46 ,  -22 ,  -10 ,    0 ,  -29 ,   36 ,    0 ,  //AutoContent_03_AIDNA_4
-         24 ,   47 ,  -27 ,  -77 ,  -86 ,   19 ,  -63 ,  -57 ,   44 ,  -92 ,  //AutoContent_04_AIDNA_4
-         78 ,   51 ,  -11 ,  -77 ,   20 ,   38 ,   44 ,   37 ,  -64 ,  -41 ,  //AutoContent_05_AIDNA_4
-        -14 ,  -55 ,   46 ,  -28 ,   64 ,  -92 ,    4 ,  -87 ,   71 ,  -60 ,  //AutoContent_06_AIDNA_4
+      {  18 ,  -42 ,   21 ,   82 ,   -7 ,  -78 ,  -22 ,   81 ,   48 ,    0 ,  //AutoContent_01_AIDNA_4
+        -55 ,   55 ,  -96 ,   16 ,   70 ,  -30 ,   33 ,   79 ,  -78 ,  -42 ,  //AutoContent_02_AIDNA_4
+         79 ,  -16 ,   34 ,   46 ,  -22 ,    0 ,    0 ,  -29 ,   53 ,   51 ,  //AutoContent_03_AIDNA_4
+         24 ,   47 ,  -27 ,   42 ,  -86 ,   46 ,  -63 ,  -47 ,   20 ,  -63 ,  //AutoContent_04_AIDNA_4
+         78 ,   51 ,   42 ,  -77 ,   20 ,   38 ,   44 ,   37 ,  -64 ,  -41 ,  //AutoContent_05_AIDNA_4
+         -3 ,  -55 ,   67 ,    0 ,   64 ,  -92 ,    4 ,  -89 ,   71 ,  -60 ,  //AutoContent_06_AIDNA_4
         -87 ,   56 ,   17 ,  -34 ,  -69 ,   24 ,  -57 ,   50 ,   40 ,  -51 ,  //AutoContent_07_AIDNA_4
-        -25 ,   44 ,    0 ,   -2 ,  -11 ,   -3 ,  -54 ,  -35 ,  -29 ,  -16 ,  //AutoContent_08_AIDNA_4
+        -34 ,   44 ,    0 ,   -2 ,  -11 ,   -4 ,  -96 ,  -35 ,  -29 ,  -12 ,  //AutoContent_08_AIDNA_4
          68 ,  -98 ,  -25 ,   50 ,   97 ,   74 ,    0 ,   65 ,  -60 ,   23 ,  //AutoContent_09_AIDNA_4
-          1 ,   53 ,   74 ,    0 ,  -15 ,   39 ,   32 ,   19 ,    0 ,  -32 ,  //AutoContent_10_AIDNA_4
-         53 ,  -45 ,   19 ,  -94 ,  -65 ,   83 ,  -56 ,  -63 ,   16 ,  -41 ,  //AutoContent_11_AIDNA_4
-         74 ,  -24 ,    0 ,  -52 ,   14 ,    5 ,    4 ,    6 ,  -45 ,   62 ,  //AutoContent_12_AIDNA_4
-         85 ,   29 ,   58 ,    3 ,  -80 ,  -20 ,  -44 ,   71 ,   60 ,    7 ,  //AutoContent_13_AIDNA_4
-        -46 ,   64 ,   26 ,  -66 ,    0 ,  -29 ,  -57 ,   80 ,   64 ,  -47 ,  //AutoContent_14_AIDNA_4
-          0 ,   15 ,  -67 ,   56 ,  -21 ,   11 ,  -33 ,  -30 ,   76 ,  -90  //AutoContent_15_AIDNA_4
+         38 ,   71 ,   74 ,    0 ,  -15 ,   27 ,   32 ,   61 ,  -24 ,  -65 ,  //AutoContent_10_AIDNA_4
+         16 ,  -42 ,   19 ,  -94 ,  -65 ,   83 ,  -55 ,  -63 ,   16 ,  -41 ,  //AutoContent_11_AIDNA_4
+         74 ,  -24 ,    0 ,  -87 ,   32 ,    5 ,    4 ,    6 ,  -70 ,   62 ,  //AutoContent_12_AIDNA_4
+         85 ,    0 ,   58 ,   48 ,  -80 ,  -20 ,  -49 ,   71 ,   60 ,    8 ,  //AutoContent_13_AIDNA_4
+        -52 ,   30 ,   69 ,  -74 ,    0 ,  -36 ,  -57 ,   80 ,   64 ,  -67 ,  //AutoContent_14_AIDNA_4
+          0 ,   15 ,  -96 ,  -51 ,  -21 ,    0 ,  -33 ,  -30 ,   76 ,  -47  //AutoContent_15_AIDNA_4
 	}
 		;
 	assert(magic_numbers_size == AI_initial_military_numbers_D.size());
 		
 	const std::vector<int8_t> input_weights_D =
-      {   48 ,  -81 ,  -26 ,   47 ,  -65 ,  -19 ,  -91 ,   84 ,   50 ,  -12 ,  //AutoContent_16_AIDNA_4
-         98 ,  -17 ,  -89 ,   76 ,   81 ,   95 ,  -91 ,  -90 ,  -56 ,  -15 ,  //AutoContent_17_AIDNA_4
-        -65 ,  -18 ,   28 ,  -65 ,   17 ,   38 ,   47 ,  -45 ,   79 ,   23 ,  //AutoContent_18_AIDNA_4
-         16 ,   25 ,  -52 ,   36 ,  -38 ,  -85 ,  -60 ,  -42 ,    0 ,  -70 ,  //AutoContent_19_AIDNA_4
-        -78 ,  -86 ,  -87 ,  -55 ,   92 ,  -63 ,   -3 ,  -39 ,    4 ,   87 ,  //AutoContent_20_AIDNA_4
+      {   48 ,  -85 ,  -26 ,   47 ,  -65 ,  -19 ,  -91 ,   84 ,   92 ,  -12 ,  //AutoContent_16_AIDNA_4
+         78 ,  -59 ,  -89 ,   76 ,   81 ,   95 ,  -91 ,  -90 ,  -56 ,  -15 ,  //AutoContent_17_AIDNA_4
+        -65 ,  -18 ,    6 ,  -65 ,   17 ,   38 ,   47 ,  -45 ,   79 ,   23 ,  //AutoContent_18_AIDNA_4
+         16 ,   25 ,  -59 ,   36 ,  -38 ,  -85 ,  -60 ,  -42 ,    0 ,  -70 ,  //AutoContent_19_AIDNA_4
+        -78 ,  -86 ,  -87 ,  -55 ,   74 ,  -63 ,  -21 ,  -76 ,    4 ,   87 ,  //AutoContent_20_AIDNA_4
          58 ,  -40 ,   71 ,  -90 ,  -72 ,    0 ,  -47 ,  -94 ,  -15 ,   95 ,  //AutoContent_21_AIDNA_4
-        -32 ,    9 ,   67 ,  -47 ,  -59 ,  -76 ,  -53 ,   57 ,  -31 ,  -47 ,  //AutoContent_22_AIDNA_4
-          0 ,  -28 ,  -16 ,   41 ,   41 ,    0 ,   36 ,   -8 ,   63 ,  -49  //AutoContent_23_AIDNA_4
+        -32 ,    9 ,   67 ,  -47 ,  -44 ,  -76 ,  -53 ,   57 ,  -31 ,  -47 ,  //AutoContent_22_AIDNA_4
+          0 ,  -28 ,  -16 ,   48 ,   41 ,  -45 ,   36 ,   -8 ,   63 ,  -49  //AutoContent_23_AIDNA_4
 	}
 	      ;
 	
 	const std::vector<int8_t> input_func_D = 
       {    1 ,    0 ,    1 ,    2 ,    2 ,    1 ,    0 ,    0 ,    0 ,    0 ,  //AutoContent_24_AIDNA_4
-          2 ,    1 ,    2 ,    2 ,    2 ,    0 ,    2 ,    2 ,    2 ,    1 ,  //AutoContent_25_AIDNA_4
+          2 ,    1 ,    2 ,    2 ,    1 ,    1 ,    2 ,    2 ,    2 ,    1 ,  //AutoContent_25_AIDNA_4
           2 ,    2 ,    0 ,    2 ,    2 ,    1 ,    0 ,    1 ,    0 ,    2 ,  //AutoContent_26_AIDNA_4
           1 ,    2 ,    2 ,    1 ,    2 ,    1 ,    0 ,    1 ,    2 ,    1 ,  //AutoContent_27_AIDNA_4
           2 ,    1 ,    2 ,    0 ,    0 ,    1 ,    2 ,    0 ,    0 ,    0 ,  //AutoContent_28_AIDNA_4
           1 ,    0 ,    0 ,    1 ,    0 ,    2 ,    0 ,    0 ,    1 ,    1 ,  //AutoContent_29_AIDNA_4
           2 ,    0 ,    1 ,    2 ,    0 ,    2 ,    2 ,    2 ,    1 ,    0 ,  //AutoContent_30_AIDNA_4
-          0 ,    1 ,    0 ,    2 ,    1 ,    1 ,    0 ,    2 ,    2 ,    1  //AutoContent_31_AIDNA_4
+          2 ,    1 ,    0 ,    2 ,    1 ,    1 ,    0 ,    1 ,    2 ,    1  //AutoContent_31_AIDNA_4
 	}
 		;
 	assert(neuron_pool_size == input_func_D.size());
 	assert(neuron_pool_size == input_weights_D.size());
 
 	const std::vector<uint32_t> f_neurons_D =
-      {  68678283 ,  1255516853 ,  1155498158 ,  2177078715 ,  194456367 ,  18113649 ,  2947515462 ,  3410032876 ,  3371997518 ,  587256942 ,  //AutoContent_32_AIDNA_4
-        1258917780 ,  852214871 ,  3323444933 ,  1153240710 ,  1519497509 ,  34169151 ,  736780249 ,  3048212910 ,  655607825 ,  611781620 ,  //AutoContent_33_AIDNA_4
-        1271266867 ,  2949492528 ,  3950232534 ,  2011315496 ,  2545329872 ,  410834101 ,  2148165999 ,  3034803694 ,  2134664439 ,  2248461462 ,  //AutoContent_34_AIDNA_4
-        146235319 ,  1181400350 ,  132270059 ,  2013709146 ,  4111718371 ,  898788447 ,  708037285 ,  2952748738 ,  1231376093 ,  3820430555 ,  //AutoContent_35_AIDNA_4
-        3225399566 ,  195274059 ,  2582591252 ,  4203887193 ,  1217670190 ,  3808590069 ,  1790000795 ,  2252676951 ,  2691777843 ,  2805551453 ,  //AutoContent_36_AIDNA_4
-        1286289560 ,  2060949028 ,  3458003506 ,  2862510177 ,  755617433 ,  634505904 ,  1398029009 ,  4079348937 ,  2601237729 ,  2859725299  //AutoContent_37_AIDNA_4
+      {  202826379 ,  1322625717 ,  1148682382 ,  2244191679 ,  194456367 ,  26502243 ,  2947490886 ,  3410163948 ,  3439106886 ,  855684206 ,  //AutoContent_32_AIDNA_4
+        1259048860 ,  986431571 ,  3457662709 ,  1962749574 ,  1523650869 ,  1376351039 ,  1223335901 ,  2997887278 ,  657706513 ,  645368824 ,  //AutoContent_33_AIDNA_4
+        1271222963 ,  2916058928 ,  3933725662 ,  2011479337 ,  2679418512 ,  410834609 ,  2282387823 ,  2968201710 ,  1597793527 ,  2248461494 ,  //AutoContent_34_AIDNA_4
+        161963959 ,  1147843615 ,  670058474 ,  2013712728 ,  4145271795 ,  362433375 ,  993248133 ,  2952748738 ,  1629834973 ,  3819381979 ,  //AutoContent_35_AIDNA_4
+        3225399564 ,  732007755 ,  2583635732 ,  4271028825 ,  1217670182 ,  4043323645 ,  1857109659 ,  2249005911 ,  2834367795 ,  3072909661 ,  //AutoContent_36_AIDNA_4
+        1278949528 ,  1792513063 ,  2384261688 ,  2866704864 ,  755615385 ,  835767184 ,  1393834640 ,  4012239945 ,  2601238115 ,  2859725298  //AutoContent_37_AIDNA_4
 	 };
 	assert(f_neuron_pool_size == f_neurons_D.size());
 	
@@ -857,6 +855,8 @@ void ManagementData::new_dna_for_persistent( const uint8_t pn, const Widelands::
 	
 }
 
+
+// Mutating, but all done on persistent data
 void ManagementData::mutate(const uint8_t pn){
 
 	const int8_t old_probability = get_military_number_at(MutationRatePosition);
@@ -872,15 +872,14 @@ void ManagementData::mutate(const uint8_t pn){
 	set_military_number_at(MutationRatePosition, probability - 101);
 
 	// decreasing probability (or rather increasing probability of mutation) if weaker player
-	if (!kDisableHigherMutationForWeakerAI) { // Used for training of AI
-		if (ai_type == Widelands::AiType::kWeak) {
-			probability /= 2;
-			printf (" Weak mode, increasing mutation probability to 1 / %d\n", probability);
-		} else if (ai_type == Widelands::AiType::kVeryWeak) {
-			probability /= 4;
-			printf (" Very weak mode, increasing mutation probability to 1 / %d\n", probability);
-		}
-	}
+    if (ai_type == Widelands::AiType::kWeak) {
+        probability /= 2;
+        printf (" Weak mode, increasing mutation probability to 1 / %d\n", probability);
+    } else if (ai_type == Widelands::AiType::kVeryWeak) {
+        probability /= 4;
+        printf (" Very weak mode, increasing mutation probability to 1 / %d\n", probability);
+    }
+
 
 	//Wild card
 	if (std::rand() % 8 == 0) {
@@ -980,22 +979,7 @@ void ManagementData::mutate(const uint8_t pn){
 					}
 				}
 					
-				
-				////iteating over single bits within neuron
-				//bool fneuron_changed = false;
-				//for (uint8_t i = 0; i < f_neuron_bit_size; i += 1) {
-					//bool mutating = false;
-					//if (preferred_f_neurons.count(item.get_id()) > 0 && std::rand() % (probability * 3* 10 / preferred_ratio) == 0) {
-						//mutating = true;
-					//} else if (std::rand() % (probability *3) == 0) {
-						//mutating = true;
-					//}
-		
-					//if (mutating) {
-						//item.flip_bit(i);
-						//fneuron_changed = true;
-					//} 
-				//}
+
 		
 				if (changed_bits) {
 					pd->f_neurons[item.get_id()] = item.get_int();
@@ -1009,6 +993,7 @@ void ManagementData::mutate(const uint8_t pn){
 	test_consistency();
 }
 
+//Now we copy persistent to loacl
 void ManagementData::copy_persistent_to_local(const uint8_t pn) {
 
 	assert(pd->neuron_weights.size() == neuron_pool_size);
@@ -1062,11 +1047,13 @@ bool ManagementData::test_consistency(bool itemized) {
 		}	
 	}	
 	
-		
-	return true; //?
+	// There is no 'return false', because asserts above would take care of this	
+	return true;
 }
 
 // Print DNA data to console, used for training
+// Once we will have AI dumped into files, this should be removed
+// Also, used only for training
 void ManagementData::dump_data() {
 	//dumping new numbers
 	printf ("     actual military_numbers (%lu):\n      {", pd->magic_numbers.size());
@@ -1120,12 +1107,13 @@ void ManagementData::dump_data() {
 	printf ("}\n");
 }
 
-// Two functions to manipulate military number
+// querrying militarynumber at possition
 int16_t ManagementData::get_military_number_at(uint8_t pos) {
 	assert (pos < magic_numbers_size);
 	return pd->magic_numbers[pos];
 }
 
+// Setting military number (persistent are used also for local use)
 void ManagementData::set_military_number_at(const uint8_t pos, int16_t value) {
 	assert (pos < magic_numbers_size);
 	
@@ -1341,18 +1329,21 @@ bool FlagsForRoads::get_winner(uint32_t* winner_hash) {
 	}
 	return false;
 }
+
+
 PlayersStrengths::PlayersStrengths() : update_time(0) {}
-// This is an struct that stores strength of players, info on teams and provides some outputs from
-// these data
+
+// Default constructor
 PlayersStrengths::PlayerStat::PlayerStat() : team_number(0), is_enemy(false), players_power(0), old_players_power(0), old60_players_power(0),players_casualities(0) {
 }
+
+//Constructor to be used
 PlayersStrengths::PlayerStat::PlayerStat(Widelands::TeamNumber tc, bool e, uint32_t pp, uint32_t op, uint32_t o60p, uint32_t cs, uint32_t land, uint32_t oland, uint32_t o60l)
    : team_number(tc), is_enemy(e), players_power(pp),  old_players_power(op), old60_players_power(o60p), players_casualities(cs), players_land(land),
 	old_players_land(oland), old60_players_land(o60l)  {
 	 last_time_seen = kNever;
 }
 
-ProductionSiteObserver::ProductionSiteObserver() : stats_zero(0), no_resources_since(kNever), upgrade_pending(false), dismantle_pending_since(kNever) {}
 
 // Inserting/updating data
 void PlayersStrengths::add(Widelands::PlayerNumber pn, Widelands::PlayerNumber opn, Widelands::TeamNumber mytn,
@@ -1380,6 +1371,7 @@ void PlayersStrengths::add(Widelands::PlayerNumber pn, Widelands::PlayerNumber o
 	}
 }
 
+// After statistics for team members are updated, this calculation is needed
 void PlayersStrengths::recalculate_team_power() {
 	team_powers.clear();
 	for (auto& item : all_stats) {
@@ -1393,41 +1385,43 @@ void PlayersStrengths::recalculate_team_power() {
 	}
 }
 
+//This just goes over information about all enemies and where they were seen last time
 bool PlayersStrengths::any_enemy_seen_lately(const uint32_t gametime){
 	for (auto& item : all_stats) {
 		if (item.second.is_enemy && player_seen_lately(item.first, gametime)) {
 			return true;
-		}  // is a member of a team
+		}
 	}
 	return false;
 }
 
+// Returns count of nearby enemies
 uint8_t PlayersStrengths::enemies_seen_lately_count(const uint32_t gametime){
 	uint8_t count = 0;
 	for (auto& item : all_stats) {
 		if (item.second.is_enemy && player_seen_lately(item.first, gametime)) {
 			count +=1;
-		}  // is a member of a team
+		}
 	}
 	return count;
 }
 
-uint32_t PlayersStrengths::enemy_last_seen(){
-	uint32_t time = 0;
-	for (auto& item : all_stats) {
-		if (item.second.last_time_seen == kNever){
-			continue;
-		}
-		if (item.second.is_enemy && item.second.last_time_seen > time) {
-			time = item.second.last_time_seen;
-		}  
-	}
-	if (time == 0) {return kNever;}
-	return time;
-}
+//uint32_t PlayersStrengths::enemy_last_seen(){
+	//uint32_t time = 0;
+	//for (auto& item : all_stats) {
+		//if (item.second.last_time_seen == kNever){
+			//continue;
+		//}
+		//if (item.second.is_enemy && item.second.last_time_seen > time) {
+			//time = item.second.last_time_seen;
+		//}  
+	//}
+	//if (time == 0) {return kNever;}
+	//return time;
+//}
 
 
-
+// When we see enemy, we use this to store the time
 void PlayersStrengths::set_last_time_seen(const uint32_t seentime, Widelands::PlayerNumber pn){
 	assert(all_stats.count(pn) > 0);
 	all_stats[pn].last_time_seen = seentime;
@@ -1439,6 +1433,7 @@ bool PlayersStrengths::get_is_enemy(Widelands::PlayerNumber pn){
 
 }
 
+// Was the player seen less then 2 minutes ago
 bool PlayersStrengths::player_seen_lately( Widelands::PlayerNumber pn, const uint32_t gametime){
 	assert(all_stats.count(pn) > 0);
 	if (all_stats[pn].last_time_seen == kNever){
@@ -1466,6 +1461,7 @@ uint32_t PlayersStrengths::get_player_land(Widelands::PlayerNumber pn) {
 	return 0;
 }
 
+//Calculates strenght of enemies seen within last 2 minutes
 uint32_t PlayersStrengths::get_visible_enemies_power(const uint32_t gametime){
 	uint32_t pw = 0;
 	for (auto& item : all_stats) {
@@ -1506,6 +1502,7 @@ uint32_t PlayersStrengths::get_enemies_average_land(){
 	return 0;
 }
 
+// Strength of stronger player
 uint32_t PlayersStrengths::get_enemies_max_power(){
 	uint32_t power = 0;
 	for (auto& item : all_stats) {
@@ -1589,6 +1586,7 @@ uint32_t PlayersStrengths::get_modified_player_power(Widelands::PlayerNumber pn)
 	return result;
 }
 
+//Are the player in the same team
 bool PlayersStrengths::players_in_same_team(Widelands::PlayerNumber pl1,
                                             Widelands::PlayerNumber pl2) {
 	assert(all_stats.count(pl1) > 0);
@@ -1620,7 +1618,7 @@ bool PlayersStrengths::strong_enough(Widelands::PlayerNumber pl) {
 	return my_strength > strongest_opponent_strength + 50;
 }
 
-
+//Update_time is used to prevent too frequent updates of statistics
 void PlayersStrengths::set_update_time(const uint32_t gametime) {
 	update_time = gametime;
 }
@@ -1628,5 +1626,8 @@ void PlayersStrengths::set_update_time(const uint32_t gametime) {
 uint32_t PlayersStrengths::get_update_time(){
 	return update_time;
 }
+
+ProductionSiteObserver::ProductionSiteObserver() : stats_zero(0), no_resources_since(kNever), upgrade_pending(false), dismantle_pending_since(kNever) {}
+
 
 }  // namespace WIdelands

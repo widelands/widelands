@@ -85,7 +85,6 @@ enum class AiType : uint8_t  {
 };
 
 enum class ExpansionMode : uint8_t { kResources = 0, kSpace = 1, kEconomy = 2, kBoth = 3 };
-// enum class ScoreBlock : uint8_t {kResource = 0, kLand = 1, kEnemy = 2, kDismantle = 3};
 
 enum class AiModeBuildings : uint8_t { kAnotherAllowed, kOnLimit, kLimitExceeded };
 
@@ -112,6 +111,7 @@ enum class SchedulerTaskId : uint8_t {
 	kUnset
 };
 
+//This is simplification of a curve, to avoid repeated calculation
 const std::vector<std::vector<int8_t>> neuron_curves = {
    {0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80, 85, 90, 95, 100},
    {0, 0, 1, 2, 4, 6, 9, 12, 16, 20, 25, 30, 36, 42, 49, 56, 64, 72, 81, 90, 100},
@@ -123,8 +123,9 @@ constexpr int neuron_pool_size = 80;
 constexpr int f_neuron_pool_size = 60;
 constexpr int f_neuron_bit_size = 32;
 constexpr int MutationRatePosition = 42;
+// set this to false for trunk NOCOM
+// this is used only for training of AI
 constexpr bool kInitializeOnLoad = true;
-constexpr bool kDisableHigherMutationForWeakerAI = true;
 
 constexpr uint32_t kNever = std::numeric_limits<uint32_t>::max();
 
@@ -442,12 +443,6 @@ struct BuildingObserver {
 	std::vector<Widelands::DescriptionIndex> positions;
 	std::vector<Widelands::DescriptionIndex> critical_building_material;
 
-	// an enhancement to this building:
-	// produces all wares as current building, and perhaps more
-	//bool upgrade_substitutes;
-	// produces some additional wares
-	//bool upgrade_extends;
-
 	// It seems that fish and meat are subsitutes (for trainingsites), so
 	// when testing if a trainingsite is supplied enough
 	// we count the wares together
@@ -494,7 +489,6 @@ struct ProductionSiteObserver {
 struct MilitarySiteObserver {
 	Widelands::MilitarySite* site;
 	BuildingObserver* bo;
-	//uint8_t checks;
 	uint16_t understaffed;
 	uint32_t last_change;  // to prevent too fast switching ocupancy policy
 	uint32_t built_time;
@@ -667,7 +661,6 @@ struct ManagementData {
 private:
 	int32_t score;
 	uint8_t primary_parent;
-	uint16_t review_count;
 	uint16_t next_neuron_id;
 	uint16_t next_bi_neuron_id;
 	uint16_t performance_change;
@@ -826,7 +819,7 @@ public:
 	bool get_is_enemy(Widelands::PlayerNumber);
 	uint8_t enemies_seen_lately_count(uint32_t);
 	bool any_enemy_seen_lately(uint32_t);
-	uint32_t enemy_last_seen();
+	//uint32_t enemy_last_seen();
 	PlayerNumber this_player_number;
 	void set_update_time(uint32_t);
 	uint32_t get_update_time();
