@@ -62,8 +62,8 @@ struct MultiPlayerClientGroup : public UI::Box {
 		add(name);
 		// Either Button if changeable OR text if not
 		if (id == settings->settings().usernum) {  // Our Client
-			type = new UI::Button(
-			   this, "client_type", 0, 0, h, h, UI::ButtonStyle::kFsMenuSecondary, "");
+			type =
+			   new UI::Button(this, "client_type", 0, 0, h, h, UI::ButtonStyle::kFsMenuSecondary, "");
 			type->sigclicked.connect(
 			   boost::bind(&MultiPlayerClientGroup::toggle_type, boost::ref(*this)));
 			add(type);
@@ -176,8 +176,7 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 		assert(player_image);
 		player = new UI::Icon(this, 0, 0, h, h, player_image);
 		add(player);
-		type =
-		   new UI::Button(this, "player_type", 0, 0, h, h, UI::ButtonStyle::kFsMenuSecondary, "");
+		type = new UI::Button(this, "player_type", 0, 0, h, h, UI::ButtonStyle::kFsMenuSecondary, "");
 		type->sigclicked.connect(
 		   boost::bind(&MultiPlayerPlayerGroup::toggle_type, boost::ref(*this)));
 		add(type);
@@ -187,8 +186,7 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 		init->sigclicked.connect(
 		   boost::bind(&MultiPlayerPlayerGroup::toggle_init, boost::ref(*this)));
 		add(init);
-		team =
-		   new UI::Button(this, "player_team", 0, 0, h, h, UI::ButtonStyle::kFsMenuSecondary, "");
+		team = new UI::Button(this, "player_team", 0, 0, h, h, UI::ButtonStyle::kFsMenuSecondary, "");
 		team->sigclicked.connect(
 		   boost::bind(&MultiPlayerPlayerGroup::toggle_team, boost::ref(*this)));
 		add(team);

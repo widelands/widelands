@@ -57,8 +57,8 @@ Button::Button  //  Common constructor
      image_mode_(mode),
      time_nextact_(0),
      title_(title_text),
-	  title_image_(title_image),
-	  background_style_(g_gr->styles().button_style(style)),
+     title_image_(title_image),
+     background_style_(g_gr->styles().button_style(style)),
      clr_down_(229, 161, 2) {
 	set_thinks(false);
 	set_can_focus(true);

@@ -94,7 +94,8 @@ MainMenuMapOptions::MainMenuMapOptions(EditorInteractive& parent, bool modal)
 	// height.
 	hint_ = new UI::MultilineEditbox(
 	   &main_box_, 0, 0, max_w_, std::max(labelh_, remaining_space * 1 / 3), UI::PanelStyle::kWui);
-	descr_ = new UI::MultilineEditbox(&main_box_, 0, 0, max_w_, remaining_space - hint_->get_h(), UI::PanelStyle::kWui);
+	descr_ = new UI::MultilineEditbox(
+	   &main_box_, 0, 0, max_w_, remaining_space - hint_->get_h(), UI::PanelStyle::kWui);
 
 	main_box_.add(new UI::Textarea(&main_box_, 0, 0, max_w_, labelh_, _("Map Name:")));
 	main_box_.add(&name_);

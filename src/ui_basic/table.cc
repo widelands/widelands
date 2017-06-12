@@ -52,7 +52,7 @@ Table<void*>::Table(Panel* const parent,
      headerheight_(text_height() + 4),
      lineheight_(text_height()),
      button_style_(style == UI::PanelStyle::kFsMenu ? UI::ButtonStyle::kFsMenuMenu :
-                                                    UI::ButtonStyle::kWuiSecondary),
+                                                      UI::ButtonStyle::kWuiSecondary),
      scrollbar_(nullptr),
      scrollbar_filler_button_(
         new Button(this, "", 0, 0, Scrollbar::kSize, headerheight_, button_style_, "")),

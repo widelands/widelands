@@ -135,16 +135,8 @@ FullscreenMenuOptions::FullscreenMenuOptions(OptionsCtrl::OptionsStruct opt)
      fullscreen_(&box_interface_, Vector2i::zero(), _("Fullscreen"), "", 0),
      inputgrab_(&box_interface_, Vector2i::zero(), _("Grab Input"), "", 0),
 
-     sb_maxfps_(&box_interface_,
-                0,
-                0,
-                0,
-                0,
-                opt.maxfps,
-                0,
-                99,
-                UI::PanelStyle::kFsMenu,
-                _("Maximum FPS:")),
+     sb_maxfps_(
+        &box_interface_, 0, 0, 0, 0, opt.maxfps, 0, 99, UI::PanelStyle::kFsMenu, _("Maximum FPS:")),
 
      // Windows options
      snap_win_overlap_only_(

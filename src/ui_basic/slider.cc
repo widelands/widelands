@@ -22,8 +22,8 @@
 
 #include "graphic/font_handler1.h"
 #include "graphic/graphic.h"
-#include "graphic/style_manager.h"
 #include "graphic/rendertarget.h"
+#include "graphic/style_manager.h"
 #include "graphic/text_layout.h"
 #include "ui_basic/mouse_constants.h"
 
@@ -71,7 +71,7 @@ Slider::Slider(Panel* const parent,
      highlighted_(false),
      pressed_(false),
      enabled_(enabled),
-	  cursor_style_(g_gr->styles().slider_style(style)),
+     cursor_style_(g_gr->styles().slider_style(style)),
      x_gap_(x_gap),
      y_gap_(y_gap),
      bar_size_(bar_size),

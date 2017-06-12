@@ -82,7 +82,8 @@ private:
 /**
  * Initialize an editbox that supports multiline strings.
 */
-MultilineEditbox::MultilineEditbox(Panel* parent, int32_t x, int32_t y, uint32_t w, uint32_t h, UI::PanelStyle style)
+MultilineEditbox::MultilineEditbox(
+   Panel* parent, int32_t x, int32_t y, uint32_t w, uint32_t h, UI::PanelStyle style)
    : Panel(parent, x, y, w, h), d_(new Data(*this)) {
 	d_->background_style = g_gr->styles().editbox_style(style);
 	d_->lineheight = text_height();

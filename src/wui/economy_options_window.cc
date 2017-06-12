@@ -153,8 +153,8 @@ EconomyOptionsWindow::EconomyOptionsPanel::EconomyOptionsPanel(UI::Panel* parent
 	b->set_repeating(true);
 	buttons->add_space(8);
 
-	b = new UI::Button(buttons, "reset_target", 0, 0, 34, 34, UI::ButtonStyle::kWuiMenu, "R",
-	                   _("Reset to default"));
+	b = new UI::Button(
+	   buttons, "reset_target", 0, 0, 34, 34, UI::ButtonStyle::kWuiMenu, "R", _("Reset to default"));
 	b->set_enabled(can_act_);
 	b->sigclicked.connect(boost::bind(&EconomyOptionsPanel::reset_target, this));
 	buttons->add(b);

@@ -61,7 +61,7 @@ Scrollbar::Scrollbar(Panel* const parent,
                                            "images/ui_basic/scrollbar_up.png")),
      pic_plus_(g_gr->images().get(horiz ? "images/ui_basic/scrollbar_right.png" :
                                           "images/ui_basic/scrollbar_down.png")),
-	  button_style_(g_gr->styles().scrollbar_style(style)) {
+     button_style_(g_gr->styles().scrollbar_style(style)) {
 	set_thinks(true);
 	layout();
 }

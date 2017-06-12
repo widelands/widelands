@@ -37,8 +37,13 @@ struct Scrollbar : public Panel {
 	static constexpr int kSize = 24;
 
 public:
-	Scrollbar(
-	   Panel* parent, int32_t x, int32_t y, uint32_t w, uint32_t h, UI::PanelStyle style, bool horiz = false);
+	Scrollbar(Panel* parent,
+	          int32_t x,
+	          int32_t y,
+	          uint32_t w,
+	          uint32_t h,
+	          UI::PanelStyle style,
+	          bool horiz = false);
 
 	boost::signals2::signal<void(int32_t)> moved;
 
@@ -98,9 +103,9 @@ private:
 	uint32_t time_nextact_;
 	int32_t knob_grabdelta_;  ///< only while pressed_ == Knob
 
-	const Image* pic_minus_;  ///< left/up
-	const Image* pic_plus_;   ///< right/down
-	const UI::PanelStyleInfo* button_style_; // Background color and texture. Not owned.
+	const Image* pic_minus_;                  ///< left/up
+	const Image* pic_plus_;                   ///< right/down
+	const UI::PanelStyleInfo* button_style_;  // Background color and texture. Not owned.
 };
 }
 

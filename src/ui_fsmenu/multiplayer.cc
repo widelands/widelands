@@ -33,14 +33,8 @@ FullscreenMenuMultiPlayer::FullscreenMenuMultiPlayer()
      title(this, 0, 0, _("Choose game type"), UI::Align::kCenter),
 
      // Buttons
-     metaserver(&vbox_,
-                "metaserver",
-                0,
-                0,
-                butw_,
-                buth_,
-                UI::ButtonStyle::kFsMenuMenu,
-                _("Internet game")),
+     metaserver(
+        &vbox_, "metaserver", 0, 0, butw_, buth_, UI::ButtonStyle::kFsMenuMenu, _("Internet game")),
      showloginbox(nullptr),
      lan(&vbox_, "lan", 0, 0, butw_, buth_, UI::ButtonStyle::kFsMenuMenu, _("LAN / Direct IP")),
      back(&vbox_, "back", 0, 0, butw_, buth_, UI::ButtonStyle::kFsMenuMenu, _("Back")) {

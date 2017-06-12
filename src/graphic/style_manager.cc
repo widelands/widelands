@@ -33,18 +33,19 @@ UI::PanelStyleInfo* read_style(const LuaTable& table) {
 	if (rgbcolor.size() != 3) {
 		throw wexception("Expected 3 entries for RGB color, but got %" PRIuS ".", rgbcolor.size());
 	}
-	return new UI::PanelStyleInfo(
-				image.empty() ? nullptr : g_gr->images().get(image),
-				RGBAColor(rgbcolor[0], rgbcolor[1], rgbcolor[2], 0));
+	return new UI::PanelStyleInfo(image.empty() ? nullptr : g_gr->images().get(image),
+	                              RGBAColor(rgbcolor[0], rgbcolor[1], rgbcolor[2], 0));
 }
 
-// Stupid completeness check - enum classes weren't meant for iterating, so we just compare the size to the last enum member. This assumes that there are no holes in the enum, and will need adjusting if the last enum member changes.
+// Stupid completeness check - enum classes weren't meant for iterating, so we just compare the size
+// to the last enum member. This assumes that there are no holes in the enum, and will need
+// adjusting if the last enum member changes.
 void check_completeness(const std::string name, size_t map_size, size_t last_enum_member) {
 	if (map_size != last_enum_member + 1) {
 		throw wexception("StyleManager: There is a definition missing for the '%s'.", name.c_str());
 	}
 }
-} // namespace
+}  // namespace
 
 void StyleManager::init() {
 	buttonstyles_.clear();
@@ -67,8 +68,10 @@ void StyleManager::init() {
 	add_button_style(UI::ButtonStyle::kWuiMenu, *style_table->get_table("menu").get());
 	add_button_style(UI::ButtonStyle::kWuiPrimary, *style_table->get_table("primary").get());
 	add_button_style(UI::ButtonStyle::kWuiSecondary, *style_table->get_table("secondary").get());
-	add_button_style(UI::ButtonStyle::kWuiBuildingStats, *style_table->get_table("building_stats").get());
-	check_completeness("buttons", buttonstyles_.size(), static_cast<size_t>(UI::ButtonStyle::kWuiBuildingStats));
+	add_button_style(
+	   UI::ButtonStyle::kWuiBuildingStats, *style_table->get_table("building_stats").get());
+	check_completeness(
+	   "buttons", buttonstyles_.size(), static_cast<size_t>(UI::ButtonStyle::kWuiBuildingStats));
 
 	// Sliders
 	element_table = table->get_table("sliders");
@@ -77,7 +80,8 @@ void StyleManager::init() {
 	style_table = element_table->get_table("wui");
 	add_slider_style(UI::SliderStyle::kWuiLight, *style_table->get_table("light").get());
 	add_slider_style(UI::SliderStyle::kWuiDark, *style_table->get_table("dark").get());
-	check_completeness("sliders", sliderstyles_.size(), static_cast<size_t>(UI::SliderStyle::kWuiDark));
+	check_completeness(
+	   "sliders", sliderstyles_.size(), static_cast<size_t>(UI::SliderStyle::kWuiDark));
 
 	// Tabpanels
 	element_table = table->get_table("tabpanels");
@@ -86,7 +90,8 @@ void StyleManager::init() {
 	style_table = element_table->get_table("wui");
 	add_tabpanel_style(UI::TabPanelStyle::kWuiLight, *style_table->get_table("light").get());
 	add_tabpanel_style(UI::TabPanelStyle::kWuiDark, *style_table->get_table("dark").get());
-	check_completeness("tabpanels", tabpanelstyles_.size(), static_cast<size_t>(UI::TabPanelStyle::kWuiDark));
+	check_completeness(
+	   "tabpanels", tabpanelstyles_.size(), static_cast<size_t>(UI::TabPanelStyle::kWuiDark));
 
 	// Editboxes
 	element_table = table->get_table("editboxes");
@@ -94,7 +99,8 @@ void StyleManager::init() {
 	add_style(UI::PanelStyle::kFsMenu, *style_table->get_table("menu").get(), &editboxstyles_);
 	style_table = element_table->get_table("wui");
 	add_style(UI::PanelStyle::kWui, *style_table->get_table("menu").get(), &editboxstyles_);
-	check_completeness("editboxes", editboxstyles_.size(), static_cast<size_t>(UI::PanelStyle::kWui));
+	check_completeness(
+	   "editboxes", editboxstyles_.size(), static_cast<size_t>(UI::PanelStyle::kWui));
 
 	// Dropdowns
 	element_table = table->get_table("dropdowns");
@@ -102,7 +108,8 @@ void StyleManager::init() {
 	add_style(UI::PanelStyle::kFsMenu, *style_table->get_table("menu").get(), &dropdownstyles_);
 	style_table = element_table->get_table("wui");
 	add_style(UI::PanelStyle::kWui, *style_table->get_table("menu").get(), &dropdownstyles_);
-	check_completeness("dropdowns", dropdownstyles_.size(), static_cast<size_t>(UI::PanelStyle::kWui));
+	check_completeness(
+	   "dropdowns", dropdownstyles_.size(), static_cast<size_t>(UI::PanelStyle::kWui));
 
 	// Scrollbars
 	element_table = table->get_table("scrollbars");
@@ -110,7 +117,8 @@ void StyleManager::init() {
 	add_style(UI::PanelStyle::kFsMenu, *style_table->get_table("menu").get(), &scrollbarstyles_);
 	style_table = element_table->get_table("wui");
 	add_style(UI::PanelStyle::kWui, *style_table->get_table("menu").get(), &scrollbarstyles_);
-	check_completeness("scrollbars", scrollbarstyles_.size(), static_cast<size_t>(UI::PanelStyle::kWui));
+	check_completeness(
+	   "scrollbars", scrollbarstyles_.size(), static_cast<size_t>(UI::PanelStyle::kWui));
 }
 
 // Return functions for the styles
@@ -146,15 +154,18 @@ const UI::PanelStyleInfo* StyleManager::scrollbar_style(UI::PanelStyle style) co
 
 // Fill the maps
 void StyleManager::add_button_style(UI::ButtonStyle style, const LuaTable& table) {
-	buttonstyles_.insert(std::make_pair(style, std::unique_ptr<UI::PanelStyleInfo>(read_style(table))));
+	buttonstyles_.insert(
+	   std::make_pair(style, std::unique_ptr<UI::PanelStyleInfo>(read_style(table))));
 }
 
 void StyleManager::add_slider_style(UI::SliderStyle style, const LuaTable& table) {
-	sliderstyles_.insert(std::make_pair(style, std::unique_ptr<UI::PanelStyleInfo>(read_style(table))));
+	sliderstyles_.insert(
+	   std::make_pair(style, std::unique_ptr<UI::PanelStyleInfo>(read_style(table))));
 }
 
 void StyleManager::add_tabpanel_style(UI::TabPanelStyle style, const LuaTable& table) {
-	tabpanelstyles_.insert(std::make_pair(style, std::unique_ptr<UI::PanelStyleInfo>(read_style(table))));
+	tabpanelstyles_.insert(
+	   std::make_pair(style, std::unique_ptr<UI::PanelStyleInfo>(read_style(table))));
 }
 
 void StyleManager::add_style(UI::PanelStyle style, const LuaTable& table, PanelStyleMap* map) {

@@ -47,8 +47,7 @@ FullscreenWindow::FullscreenWindow()
 	set_frame_image(FullscreenWindow::Frames::kCornerTopLeft, "fsmenu/top_left.png");
 	set_frame_image(FullscreenWindow::Frames::kCornerTopRight, "fsmenu/top_right.png");
 	set_frame_image(FullscreenWindow::Frames::kCornerBottomLeft, "fsmenu/bottom_left.png");
-	set_frame_image(
-	   FullscreenWindow::Frames::kCornerBottomRight, "fsmenu/bottom_right.png");
+	set_frame_image(FullscreenWindow::Frames::kCornerBottomRight, "fsmenu/bottom_right.png");
 	set_frame_image(FullscreenWindow::Frames::kEdgeLeftTile, "fsmenu/left.png");
 	set_frame_image(FullscreenWindow::Frames::kEdgeRightTile, "fsmenu/right.png");
 	set_frame_image(FullscreenWindow::Frames::kEdgeTopTile, "fsmenu/top.png");

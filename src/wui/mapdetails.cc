@@ -66,7 +66,8 @@ std::string as_content(const std::string& txt, UI::PanelStyle style) {
 }
 }  // namespace
 
-MapDetails::MapDetails(Panel* parent, int32_t x, int32_t y, int32_t w, int32_t h, UI::PanelStyle style)
+MapDetails::MapDetails(
+   Panel* parent, int32_t x, int32_t y, int32_t w, int32_t h, UI::PanelStyle style)
    : UI::Panel(parent, x, y, w, h),
 
      style_(style),

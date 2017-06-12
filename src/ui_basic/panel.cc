@@ -445,7 +445,6 @@ void Panel::draw_overlay(RenderTarget&) {
  */
 void Panel::draw_background(RenderTarget& dst, const UI::PanelStyleInfo& info) {
 	draw_background(dst, Recti(0, 0, get_w(), get_h()), info);
-
 }
 void Panel::draw_background(RenderTarget& dst, Recti rect, const UI::PanelStyleInfo& info) {
 	if (info.image != nullptr) {

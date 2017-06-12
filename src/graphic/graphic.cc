@@ -60,7 +60,10 @@ void set_icon(SDL_Window* sdl_window) {
 
 }  // namespace
 
-Graphic::Graphic() : image_cache_(new ImageCache()), animation_manager_(new AnimationManager()), style_manager_(new StyleManager()) {
+Graphic::Graphic()
+   : image_cache_(new ImageCache()),
+     animation_manager_(new AnimationManager()),
+     style_manager_(new StyleManager()) {
 }
 
 /**

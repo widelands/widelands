@@ -106,8 +106,8 @@ SpinBox::SpinBox(Panel* const parent,
 	}
 	sbi_->value = startval;
 	sbi_->unit = unit;
-	sbi_->button_style =
-	   style == UI::PanelStyle::kFsMenu ? UI::ButtonStyle::kFsMenuMenu : UI::ButtonStyle::kWuiSecondary;
+	sbi_->button_style = style == UI::PanelStyle::kFsMenu ? UI::ButtonStyle::kFsMenuMenu :
+	                                                        UI::ButtonStyle::kWuiSecondary;
 
 	box_ = new UI::Box(this, 0, 0, UI::Box::Horizontal, 0, 0, padding_);
 

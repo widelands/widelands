@@ -92,11 +92,15 @@ bool Tab::handle_mousepress(uint8_t, int32_t, int32_t) {
  * Initialize an empty TabPanel
 */
 TabPanel::TabPanel(Panel* const parent, UI::TabPanelStyle style)
-   : Panel(parent, 0, 0, kTabPanelButtonHeight + 2 * kTabPanelSeparatorHeight, kTabPanelButtonHeight + 2 * kTabPanelSeparatorHeight),
-	  style_(style),
-	  active_(0),
-	  highlight_(kNotFound),
-	  background_style_(g_gr->styles().tabpanel_style(style)) {
+   : Panel(parent,
+           0,
+           0,
+           kTabPanelButtonHeight + 2 * kTabPanelSeparatorHeight,
+           kTabPanelButtonHeight + 2 * kTabPanelSeparatorHeight),
+     style_(style),
+     active_(0),
+     highlight_(kNotFound),
+     background_style_(g_gr->styles().tabpanel_style(style)) {
 }
 
 /**
@@ -248,9 +252,12 @@ void TabPanel::draw(RenderTarget& dst) {
 	static_assert(4 < kTabPanelButtonHeight, "assert(4 < kTabPanelButtonSize) failed.");
 	assert(kTabPanelButtonHeight - 2 <= get_h());
 
-	draw_background(dst, Recti(0, 0, tabs_.back()->get_x() + tabs_.back()->get_w(),
-													 kTabPanelButtonHeight - 2), *background_style_);
-	draw_background(dst, Recti(0, kTabPanelButtonHeight - 2, get_w(), get_h() - kTabPanelButtonHeight + 2), *background_style_);
+	draw_background(
+	   dst, Recti(0, 0, tabs_.back()->get_x() + tabs_.back()->get_w(), kTabPanelButtonHeight - 2),
+	   *background_style_);
+	draw_background(
+	   dst, Recti(0, kTabPanelButtonHeight - 2, get_w(), get_h() - kTabPanelButtonHeight + 2),
+	   *background_style_);
 
 	// Draw the buttons
 	RGBColor black(0, 0, 0);

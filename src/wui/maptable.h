@@ -32,8 +32,7 @@
  */
 class MapTable : public UI::Table<uintptr_t> {
 public:
-	MapTable(
-	   UI::Panel* parent, int32_t x, int32_t y, uint32_t w, uint32_t h, UI::PanelStyle style);
+	MapTable(UI::Panel* parent, int32_t x, int32_t y, uint32_t w, uint32_t h, UI::PanelStyle style);
 
 	/// Fill the table with maps and directories.
 	void fill(const std::vector<MapData>& entries, MapData::DisplayType type);

@@ -61,9 +61,9 @@ BaseListselect::BaseListselect(Panel* const parent,
      last_click_time_(-10000),
      last_selection_(no_selection_index()),
      selection_mode_(selection_mode),
-	  background_style_(selection_mode == ListselectLayout::kDropdown ?
-                    g_gr->styles().dropdown_style(style) :
-                    new UI::PanelStyleInfo()) {
+     background_style_(selection_mode == ListselectLayout::kDropdown ?
+                          g_gr->styles().dropdown_style(style) :
+                          new UI::PanelStyleInfo()) {
 	set_thinks(false);
 
 	scrollbar_.moved.connect(boost::bind(&BaseListselect::set_scrollpos, this, _1));
