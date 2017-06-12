@@ -38,7 +38,7 @@ struct Scrollbar : public Panel {
 
 public:
 	Scrollbar(
-	   Panel* parent, int32_t x, int32_t y, uint32_t w, uint32_t h, Style style, bool horiz = false);
+	   Panel* parent, int32_t x, int32_t y, uint32_t w, uint32_t h, UI::PanelStyle style, bool horiz = false);
 
 	boost::signals2::signal<void(int32_t)> moved;
 

@@ -59,13 +59,13 @@ InteractiveGameBase& GameMainMenuSaveGame::igbase() {
 GameMainMenuSaveGame::GameMainMenuSaveGame(InteractiveGameBase& parent,
                                            UI::UniqueWindow::Registry& registry)
    : UI::UniqueWindow(&parent, "save_game", &registry, WINDOW_WIDTH, WINDOW_HEIGHT, _("Save Game")),
-     editbox_(this, HSPACING, EDITBOX_Y, LIST_WIDTH, 0, 2, Panel::Style::kWui),
+     editbox_(this, HSPACING, EDITBOX_Y, LIST_WIDTH, 0, 2, UI::PanelStyle::kWui),
      ls_(this,
          HSPACING,
          VSPACING,
          LIST_WIDTH,
          LIST_HEIGHT - editbox_.get_h(),
-         UI::Panel::Style::kWui),
+         UI::PanelStyle::kWui),
      name_label_(this, DESCRIPTION_X, 5, 0, 20, _("Map Name:")),
      mapname_(this, DESCRIPTION_X, 20, 0, 20),
      gametime_label_(this, DESCRIPTION_X, 45, 0, 20, _("Game Time:")),
@@ -78,17 +78,17 @@ GameMainMenuSaveGame::GameMainMenuSaveGame(InteractiveGameBase& parent,
 	editbox_.ok.connect(boost::bind(&GameMainMenuSaveGame::ok, this));
 
 	button_ok_ = new UI::Button(this, "ok", DESCRIPTION_X, OK_Y, DESCRIPTION_WIDTH, BUTTON_HEIGHT,
-	                            UI::Button::Style::kWuiMenu, _("OK"));
+	                            UI::ButtonStyle::kWuiMenu, _("OK"));
 	button_ok_->sigclicked.connect(boost::bind(&GameMainMenuSaveGame::ok, this));
 
 	UI::Button* cancelbtn =
 	   new UI::Button(this, "cancel", DESCRIPTION_X, CANCEL_Y, DESCRIPTION_WIDTH, BUTTON_HEIGHT,
-	                  UI::Button::Style::kWuiMenu, _("Cancel"));
+	                  UI::ButtonStyle::kWuiMenu, _("Cancel"));
 	cancelbtn->sigclicked.connect(boost::bind(&GameMainMenuSaveGame::die, this));
 
 	UI::Button* deletebtn =
 	   new UI::Button(this, "delete", DESCRIPTION_X, DELETE_Y, DESCRIPTION_WIDTH, BUTTON_HEIGHT,
-	                  UI::Button::Style::kWuiMenu, _("Delete"));
+	                  UI::ButtonStyle::kWuiMenu, _("Delete"));
 	deletebtn->sigclicked.connect(boost::bind(&GameMainMenuSaveGame::delete_clicked, this));
 
 	ls_.selected.connect(boost::bind(&GameMainMenuSaveGame::selected, this, _1));

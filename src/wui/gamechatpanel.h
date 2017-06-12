@@ -39,7 +39,7 @@ struct GameChatPanel : public UI::Panel {
 	              uint32_t w,
 	              uint32_t h,
 	              ChatProvider&,
-	              UI::Panel::Style style);
+	              UI::PanelStyle style);
 
 	// Signal is called when a message has been sent by the user.
 	boost::signals2::signal<void()> sent;

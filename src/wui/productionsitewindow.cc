@@ -79,7 +79,7 @@ void ProductionSiteWindow::init(bool avoid_fastclick) {
 		worker_table_ = nullptr;
 	} else {
 		UI::Box* worker_box = new UI::Box(get_tabs(), 0, 0, UI::Box::Vertical);
-		worker_table_ = new UI::Table<uintptr_t>(worker_box, 0, 0, 0, 100, UI::Panel::Style::kWui);
+		worker_table_ = new UI::Table<uintptr_t>(worker_box, 0, 0, 0, 100, UI::PanelStyle::kWui);
 		worker_caps_ = new UI::Box(worker_box, 0, 0, UI::Box::Horizontal);
 
 		worker_table_->add_column(
@@ -95,7 +95,7 @@ void ProductionSiteWindow::init(bool avoid_fastclick) {
 		if (igbase()->can_act(building().owner().player_number())) {
 			worker_caps_->add_inf_space();
 			UI::Button* evict_button =
-			   new UI::Button(worker_caps_, "evict", 0, 0, 34, 34, UI::Button::Style::kWuiMenu,
+			   new UI::Button(worker_caps_, "evict", 0, 0, 34, 34, UI::ButtonStyle::kWuiMenu,
 			                  g_gr->images().get("images/wui/buildings/menu_drop_soldier.png"),
 			                  _("Terminate the employment of the selected worker"));
 			evict_button->sigclicked.connect(

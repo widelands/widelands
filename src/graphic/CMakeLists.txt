@@ -5,6 +5,13 @@ add_subdirectory(text)
 
 # Align and color
 
+
+wl_library(graphic_styles
+  SRCS
+    panel_styles.cc
+    panel_styles.h
+)
+
 wl_library(graphic_align
   SRCS
     align.h
@@ -316,6 +323,8 @@ wl_library(graphic
     diranimations.h
     graphic.cc
     graphic.h
+    style_manager.cc
+    style_manager.h
     rendertarget.cc
     rendertarget.h
   USES_SDL2
@@ -335,6 +344,7 @@ wl_library(graphic
     graphic_image_io
     graphic_playercolor
     graphic_render_queue
+    graphic_styles
     graphic_surface
     graphic_text_layout
     io_filesystem
@@ -342,6 +352,7 @@ wl_library(graphic
     logic_constants
     note_sound
     notifications
+    scripting_lua_interface
     scripting_lua_table
     sound
 )

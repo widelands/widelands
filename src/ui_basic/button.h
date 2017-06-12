@@ -48,16 +48,6 @@ inline ButtonDisableStyle operator|(ButtonDisableStyle a, ButtonDisableStyle b) 
 /// This is all that is needed in most cases, but if there is a need to give a
 /// callback function to the button, there are some templates for that below.
 struct Button : public NamedPanel {
-	enum class Style {
-		kFsMenuMenu,
-		kFsMenuPrimary,
-		kFsMenuSecondary,
-		kWuiMenu,
-		kWuiPrimary,
-		kWuiSecondary,
-		kTransparent
-	};
-
 	enum class VisualState {
 		kRaised,       // Normal raised Button
 		kPermpressed,  // Button will appear pressed
@@ -77,7 +67,7 @@ private:
 	    int32_t const y,
 	    uint32_t const w,
 	    uint32_t const h,
-	    Button::Style style,
+	    UI::ButtonStyle style,
 	    const Image* title_image,
 	    const std::string& title_text,
 	    const std::string& tooltip_text,
@@ -92,7 +82,7 @@ public:
 	    int32_t const y,
 	    uint32_t const w,
 	    uint32_t const h,
-	    Button::Style style,
+	    UI::ButtonStyle style,
 	    const std::string& title_text,
 	    const std::string& tooltip_text = std::string(),
 	    UI::Button::VisualState state = UI::Button::VisualState::kRaised);
@@ -104,7 +94,7 @@ public:
 	    const int32_t y,
 	    const uint32_t w,
 	    const uint32_t h,
-	    Button::Style style,
+	    UI::ButtonStyle style,
 	    const Image* title_image,
 	    const std::string& tooltip_text = std::string(),
 	    UI::Button::VisualState state = UI::Button::VisualState::kRaised,

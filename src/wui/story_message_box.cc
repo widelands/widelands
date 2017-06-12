@@ -45,7 +45,7 @@ StoryMessageBox::StoryMessageBox(UI::Panel* const parent,
 	set_inner_size(w, h);
 	message_text =
 	   new UI::MultilineTextarea(this, posx, posy, get_inner_w() - posx - spacing,
-	                             get_inner_h() - posy - 2 * spacing - 50, UI::Panel::Style::kWui);
+	                             get_inner_h() - posy - 2 * spacing - 50, UI::PanelStyle::kWui);
 
 	if (message_text)
 		message_text->set_text(body);
@@ -58,7 +58,7 @@ StoryMessageBox::StoryMessageBox(UI::Panel* const parent,
 	posy = get_inner_h() - 30;
 	posx += space;
 	UI::Button* okbtn = new UI::Button(
-	   this, "ok", posx, posy, but_width, 20, UI::Button::Style::kWuiPrimary, button_text);
+	   this, "ok", posx, posy, but_width, 20, UI::ButtonStyle::kWuiPrimary, button_text);
 	okbtn->sigclicked.connect(boost::bind(&StoryMessageBox::clicked_ok, boost::ref(*this)));
 
 	center_to_parent();

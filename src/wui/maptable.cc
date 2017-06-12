@@ -27,7 +27,7 @@
 #include "io/filesystem/filesystem.h"
 
 MapTable::MapTable(
-   UI::Panel* parent, int32_t x, int32_t y, uint32_t w, uint32_t h, UI::Panel::Style style)
+   UI::Panel* parent, int32_t x, int32_t y, uint32_t w, uint32_t h, UI::PanelStyle style)
    : UI::Table<uintptr_t>(parent, x, y, w, h, style) {
 
 	/** TRANSLATORS: Column title for number of players in map list */

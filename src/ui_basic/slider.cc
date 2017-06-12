@@ -22,6 +22,7 @@
 
 #include "graphic/font_handler1.h"
 #include "graphic/graphic.h"
+#include "graphic/style_manager.h"
 #include "graphic/rendertarget.h"
 #include "graphic/text_layout.h"
 #include "ui_basic/mouse_constants.h"
@@ -56,7 +57,7 @@ Slider::Slider(Panel* const parent,
                const int32_t min_value,
                const int32_t max_value,
                const int32_t value,
-               Style style,
+               SliderStyle style,
                const std::string& tooltip_text,
                const uint32_t cursor_size,
                const bool enabled,
@@ -70,11 +71,8 @@ Slider::Slider(Panel* const parent,
      highlighted_(false),
      pressed_(false),
      enabled_(enabled),
-     pic_background_(g_gr->images().get(style == Panel::Style::kFsMenu ?
-                                           "images/ui_fsmenu/button.png" :
-                                           "images/wui/button.png")),
-	  // NOCOM code duplication with button.cc
-	  button_color_(style == Panel::Style::kFsMenu ? RGBAColor(0, 24, 40, 0) : RGBAColor(32, 20, 10, 0)),
+     pic_background_(g_gr->styles().slider_style(style).image),
+	  button_color_(g_gr->styles().slider_style(style).color),
      x_gap_(x_gap),
      y_gap_(y_gap),
      bar_size_(bar_size),
@@ -508,7 +506,7 @@ DiscreteSlider::DiscreteSlider(Panel* const parent,
                                const uint32_t h,
                                const std::vector<std::string>& labels_in,
                                uint32_t value_,
-                               Style style,
+                               SliderStyle style,
                                const std::string& tooltip_text,
                                const uint32_t cursor_size,
                                const bool enabled)

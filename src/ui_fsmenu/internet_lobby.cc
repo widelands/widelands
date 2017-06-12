@@ -60,7 +60,7 @@ FullscreenMenuInternetLobby::FullscreenMenuInternetLobby(char const* const nick,
                get_h() * 55 / 100,
                butw_,
                buth_,
-               UI::Button::Style::kFsMenuSecondary,
+               UI::ButtonStyle::kFsMenuSecondary,
                _("Join this game")),
      hostgame_(this,
                "host_game",
@@ -68,7 +68,7 @@ FullscreenMenuInternetLobby::FullscreenMenuInternetLobby(char const* const nick,
                get_h() * 81 / 100,
                butw_,
                buth_,
-               UI::Button::Style::kFsMenuSecondary,
+               UI::ButtonStyle::kFsMenuSecondary,
                _("Open a new game")),
      back_(this,
            "back",
@@ -76,18 +76,18 @@ FullscreenMenuInternetLobby::FullscreenMenuInternetLobby(char const* const nick,
            get_h() * 90 / 100,
            butw_,
            buth_,
-           UI::Button::Style::kFsMenuSecondary,
+           UI::ButtonStyle::kFsMenuSecondary,
            _("Back")),
 
      // Edit boxes
      edit_servername_(
-        this, get_w() * 17 / 25, get_h() * 68 / 100, butw_, buth_, 2, Panel::Style::kFsMenu, fs_),
+        this, get_w() * 17 / 25, get_h() * 68 / 100, butw_, buth_, 2, UI::PanelStyle::kFsMenu, fs_),
 
      // List
      clientsonline_list_(
-        this, get_w() * 4 / 125, get_h() / 5, lisw_, get_h() * 3 / 10, UI::Panel::Style::kFsMenu),
+        this, get_w() * 4 / 125, get_h() / 5, lisw_, get_h() * 3 / 10, UI::PanelStyle::kFsMenu),
      opengames_list_(
-        this, get_w() * 17 / 25, get_h() / 5, butw_, get_h() * 7 / 20, UI::Panel::Style::kFsMenu),
+        this, get_w() * 17 / 25, get_h() / 5, butw_, get_h() * 7 / 20, UI::PanelStyle::kFsMenu),
 
      // The chat UI
      chat(this,
@@ -96,7 +96,7 @@ FullscreenMenuInternetLobby::FullscreenMenuInternetLobby(char const* const nick,
           lisw_,
           get_h() * 44 / 100,
           InternetGaming::ref(),
-          UI::Panel::Style::kFsMenu),
+          UI::PanelStyle::kFsMenu),
 
      // Login information
      nickname_(nick),

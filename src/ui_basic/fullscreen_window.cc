@@ -24,6 +24,7 @@
 #include "graphic/graphic.h"
 #include "graphic/image.h"
 #include "graphic/rendertarget.h"
+#include "graphic/style_manager.h"
 #include "graphic/text_constants.h"
 
 /*
@@ -37,22 +38,22 @@ namespace UI {
 
 FullscreenWindow::FullscreenWindow()
    : UI::Panel(nullptr, 0, 0, g_gr->get_xres(), g_gr->get_yres()),
-     background_image_("images/ui_fsmenu/background.png") {
+     background_image_(kTemplateDir + "fsmenu/background.png") {
 	graphic_resolution_changed_subscriber_ = Notifications::subscribe<GraphicResolutionChanged>(
 	   [this](const GraphicResolutionChanged& message) {
 		   set_size(message.width, message.height);
 		   layout();
 		});
-	set_frame_image(FullscreenWindow::Frames::kCornerTopLeft, "images/ui_fsmenu/top_left.png");
-	set_frame_image(FullscreenWindow::Frames::kCornerTopRight, "images/ui_fsmenu/top_right.png");
-	set_frame_image(FullscreenWindow::Frames::kCornerBottomLeft, "images/ui_fsmenu/bottom_left.png");
+	set_frame_image(FullscreenWindow::Frames::kCornerTopLeft, "fsmenu/top_left.png");
+	set_frame_image(FullscreenWindow::Frames::kCornerTopRight, "fsmenu/top_right.png");
+	set_frame_image(FullscreenWindow::Frames::kCornerBottomLeft, "fsmenu/bottom_left.png");
 	set_frame_image(
-	   FullscreenWindow::Frames::kCornerBottomRight, "images/ui_fsmenu/bottom_right.png");
-	set_frame_image(FullscreenWindow::Frames::kEdgeLeftTile, "images/ui_fsmenu/left.png");
-	set_frame_image(FullscreenWindow::Frames::kEdgeRightTile, "images/ui_fsmenu/right.png");
-	set_frame_image(FullscreenWindow::Frames::kEdgeTopTile, "images/ui_fsmenu/top.png");
-	set_frame_image(FullscreenWindow::Frames::kEdgeBottomTile, "images/ui_fsmenu/bottom.png");
-	add_overlay_image("images/ui_fsmenu/center.png",
+	   FullscreenWindow::Frames::kCornerBottomRight, "fsmenu/bottom_right.png");
+	set_frame_image(FullscreenWindow::Frames::kEdgeLeftTile, "fsmenu/left.png");
+	set_frame_image(FullscreenWindow::Frames::kEdgeRightTile, "fsmenu/right.png");
+	set_frame_image(FullscreenWindow::Frames::kEdgeTopTile, "fsmenu/top.png");
+	set_frame_image(FullscreenWindow::Frames::kEdgeBottomTile, "fsmenu/bottom.png");
+	add_overlay_image(kTemplateDir + "fsmenu/center.png",
 	                  FullscreenWindow::Alignment(UI::Align::kCenter, UI::Align::kCenter));
 }
 
@@ -70,7 +71,7 @@ void FullscreenWindow::clear_overlays() {
 }
 
 void FullscreenWindow::set_frame_image(FullscreenWindow::Frames id, const std::string& filename) {
-	frame_overlays_.insert(std::make_pair(id, g_gr->images().get(filename)));
+	frame_overlays_.insert(std::make_pair(id, g_gr->images().get(kTemplateDir + filename)));
 }
 
 const Image* FullscreenWindow::get_frame_image(FullscreenWindow::Frames id) const {

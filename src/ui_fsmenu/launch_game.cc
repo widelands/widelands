@@ -54,9 +54,9 @@ FullscreenMenuLaunchGame::FullscreenMenuLaunchGame(GameSettingsProvider* const s
                              buth_,
                              "",
                              UI::DropdownType::kTextual,
-                             UI::Panel::Style::kFsMenu),
-     ok_(this, "ok", 0, 0, butw_, buth_, UI::Button::Style::kFsMenuPrimary, _("Start game")),
-     back_(this, "back", 0, 0, butw_, buth_, UI::Button::Style::kFsMenuSecondary, _("Back")),
+                             UI::PanelStyle::kFsMenu),
+     ok_(this, "ok", 0, 0, butw_, buth_, UI::ButtonStyle::kFsMenuPrimary, _("Start game")),
+     back_(this, "back", 0, 0, butw_, buth_, UI::ButtonStyle::kFsMenuSecondary, _("Back")),
      // Text labels
      title_(this, get_w() / 2, get_h() / 25, "", UI::Align::kCenter),
      // Variables and objects used in the menu

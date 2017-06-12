@@ -56,7 +56,7 @@ MainMenuSaveMap::MainMenuSaveMap(EditorInteractive& parent)
                      tabley_ + tableh_ + 3 * padding_ - 1,
                      get_inner_w() - right_column_x_ - padding_,
                      buth_,
-                     UI::Button::Style::kWuiSecondary,
+                     UI::ButtonStyle::kWuiSecondary,
                      _("Make Directory")),
      edit_options_(this,
                    "edit_options",
@@ -64,7 +64,7 @@ MainMenuSaveMap::MainMenuSaveMap(EditorInteractive& parent)
                    tabley_ + tableh_ - buth_,
                    get_inner_w() - right_column_x_ - padding_,
                    buth_,
-                   UI::Button::Style::kWuiPrimary,
+                   UI::ButtonStyle::kWuiPrimary,
                    _("Map Options")),
      editbox_label_(
         this, padding_, tabley_ + tableh_ + 3 * padding_, butw_, buth_, _("Filename:")) {
@@ -79,7 +79,7 @@ MainMenuSaveMap::MainMenuSaveMap(EditorInteractive& parent)
 
 	editbox_ = new UI::EditBox(
 	   this, editbox_label_.get_x() + editbox_label_.get_w() + padding_, editbox_label_.get_y(),
-	   tablew_ - editbox_label_.get_w() - padding_ + 1, buth_, 2, Panel::Style::kWui);
+	   tablew_ - editbox_label_.get_w() - padding_ + 1, buth_, 2, UI::PanelStyle::kWui);
 
 	editbox_->set_text(parent.egbase().map().get_name());
 	editbox_->changed.connect(boost::bind(&MainMenuSaveMap::edit_box_changed, this));

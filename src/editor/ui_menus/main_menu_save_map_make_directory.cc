@@ -38,14 +38,14 @@ MainMenuSaveMapMakeDirectory::MainMenuSaveMapMakeDirectory(UI::Panel* const pare
            get_inner_h() - 3 * padding_ - buth_,
            padding_ / 2),
      label_(&vbox_, 0, 0, get_inner_w() - 2 * padding_, buth_, _("Enter Directory Name:")),
-     edit_(&vbox_, 0, 0, get_inner_w() - 2 * padding_, 0, 4, Panel::Style::kWui),
+     edit_(&vbox_, 0, 0, get_inner_w() - 2 * padding_, 0, 4, UI::PanelStyle::kWui),
      ok_button_(this,
                 "ok",
                 UI::g_fh1->fontset()->is_rtl() ? padding_ : get_inner_w() - butw_ - padding_,
                 get_inner_h() - padding_ - buth_,
                 butw_,
                 buth_,
-                UI::Button::Style::kWuiPrimary,
+                UI::ButtonStyle::kWuiPrimary,
                 _("OK")),
      cancel_button_(this,
                     "cancel",
@@ -53,7 +53,7 @@ MainMenuSaveMapMakeDirectory::MainMenuSaveMapMakeDirectory(UI::Panel* const pare
                     get_inner_h() - padding_ - buth_,
                     butw_,
                     buth_,
-                    UI::Button::Style::kWuiSecondary,
+                    UI::ButtonStyle::kWuiSecondary,
                     _("Cancel")) {
 
 	vbox_.add(&label_);

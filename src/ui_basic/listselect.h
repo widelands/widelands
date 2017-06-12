@@ -50,7 +50,7 @@ struct BaseListselect : public Panel {
 	               int32_t y,
 	               uint32_t w,
 	               uint32_t h,
-	               Panel::Style style,
+	               PanelStyle style,
 	               ListselectLayout selection_mode = ListselectLayout::kPlain);
 	~BaseListselect();
 
@@ -160,7 +160,7 @@ template <typename Entry> struct Listselect : public BaseListselect {
 	           int32_t y,
 	           uint32_t w,
 	           uint32_t h,
-	           UI::Panel::Style style,
+	           UI::PanelStyle style,
 	           ListselectLayout selection_mode = ListselectLayout::kPlain)
 	   : BaseListselect(parent, x, y, w, h, style, selection_mode) {
 	}
@@ -209,7 +209,7 @@ template <typename Entry> struct Listselect<Entry&> : public Listselect<Entry*> 
 	           int32_t y,
 	           uint32_t w,
 	           uint32_t h,
-	           UI::Panel::Style style,
+	           UI::PanelStyle style,
 	           ListselectLayout selection_mode = ListselectLayout::kPlain)
 	   : Base(parent, x, y, w, h, style, selection_mode) {
 	}

@@ -51,7 +51,7 @@ struct MultilineTextarea : public Panel {
 	   const int32_t y,
 	   const uint32_t w,
 	   const uint32_t h,
-	   UI::Panel::Style style,
+	   UI::PanelStyle style,
 	   const std::string& text = std::string(),
 	   const Align = UI::Align::kLeft,
 	   MultilineTextarea::ScrollMode scroll_mode = MultilineTextarea::ScrollMode::kScrollNormal);

@@ -26,8 +26,8 @@
 FullscreenMenuAbout::FullscreenMenuAbout()
    : FullscreenMenuBase(),
      title_(this, 0, 0, _("About Widelands"), UI::Align::kCenter),
-     close_(this, "close", 0, 0, 0, 0, UI::Button::Style::kFsMenuPrimary, _("Close")),
-     tabs_(this, UI::Panel::Style::kFsMenu, UI::TabPanel::Type::kBorder) {
+     close_(this, "close", 0, 0, 0, 0, UI::ButtonStyle::kFsMenuPrimary, _("Close")),
+     tabs_(this, UI::PanelStyle::kFsMenu, UI::TabPanelStyle::kFsMenu) {
 	title_.set_fontsize(UI_FONT_SIZE_BIG);
 	tabs_.add_tab("txts/README.lua");
 	tabs_.add_tab("txts/LICENSE.lua");

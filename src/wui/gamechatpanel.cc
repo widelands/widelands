@@ -33,7 +33,7 @@ GameChatPanel::GameChatPanel(UI::Panel* parent,
                              uint32_t const w,
                              uint32_t const h,
                              ChatProvider& chat,
-                             Style style)
+                             UI::PanelStyle style)
    : UI::Panel(parent, x, y, w, h),
      chat_(chat),
      chatbox(this,

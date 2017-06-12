@@ -48,13 +48,13 @@ FullscreenMenuMapSelect::FullscreenMenuMapSelect(GameSettingsProvider* const set
      // Main title
      title_(this, 0, 0, _("Choose a map"), UI::Align::kCenter),
      checkboxes_(this, 0, 0, UI::Box::Vertical, 0, 0, 2 * padding_),
-     table_(this, tablex_, tabley_, tablew_, tableh_, UI::Panel::Style::kFsMenu),
+     table_(this, tablex_, tabley_, tablew_, tableh_, UI::PanelStyle::kFsMenu),
      map_details_(this,
                   right_column_x_,
                   tabley_,
                   get_right_column_w(right_column_x_),
                   tableh_ - buth_ - 4 * padding_,
-                  UI::Panel::Style::kFsMenu),
+                  UI::PanelStyle::kFsMenu),
 
      basedir_("maps"),
      settings_(settings),

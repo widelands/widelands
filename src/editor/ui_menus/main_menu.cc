@@ -43,23 +43,23 @@ EditorMainMenu::EditorMainMenu(EditorInteractive& parent, UI::UniqueWindow::Regi
    : UI::UniqueWindow(&parent, "main_menu", &registry, 2 * margin + width, 0, _("Main Menu")),
      box_(this, margin, margin, UI::Box::Vertical, width, get_h() - 2 * margin, vspacing),
      button_new_map_(
-        &box_, "new_map", 0, 0, width, 0, UI::Button::Style::kWuiSecondary, _("New Map")),
+        &box_, "new_map", 0, 0, width, 0, UI::ButtonStyle::kWuiSecondary, _("New Map")),
      button_new_random_map_(&box_,
                             "new_random_map",
                             0,
                             0,
                             width,
                             0,
-                            UI::Button::Style::kWuiSecondary,
+                            UI::ButtonStyle::kWuiSecondary,
                             _("New Random Map")),
      button_load_map_(
-        &box_, "load_map", 0, 0, width, 0, UI::Button::Style::kWuiSecondary, _("Load Map")),
+        &box_, "load_map", 0, 0, width, 0, UI::ButtonStyle::kWuiSecondary, _("Load Map")),
      button_save_map_(
-        &box_, "save_map", 0, 0, width, 0, UI::Button::Style::kWuiSecondary, _("Save Map")),
+        &box_, "save_map", 0, 0, width, 0, UI::ButtonStyle::kWuiSecondary, _("Save Map")),
      button_map_options_(
-        &box_, "map_options", 0, 0, width, 0, UI::Button::Style::kWuiSecondary, _("Map Options")),
+        &box_, "map_options", 0, 0, width, 0, UI::ButtonStyle::kWuiSecondary, _("Map Options")),
      button_exit_editor_(
-        &box_, "exit", 0, 0, width, 0, UI::Button::Style::kWuiPrimary, _("Exit Editor")) {
+        &box_, "exit", 0, 0, width, 0, UI::ButtonStyle::kWuiPrimary, _("Exit Editor")) {
 	box_.add(&button_new_map_);
 	box_.add(&button_new_random_map_);
 	box_.add(&button_load_map_);

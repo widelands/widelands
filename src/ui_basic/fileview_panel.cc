@@ -29,11 +29,11 @@
 namespace UI {
 
 FileViewPanel::FileViewPanel(Panel* parent,
-                             UI::Panel::Style style,
-                             TabPanel::Type border_type)
-   : TabPanel(parent, border_type),
+                             UI::PanelStyle scrollbar_style,
+                             TabPanelStyle background_style)
+   : TabPanel(parent, background_style),
      padding_(5),
-     style_(style) {
+     style_(scrollbar_style) {
 	layout();
 }
 
@@ -72,11 +72,11 @@ void FileViewPanel::layout() {
 
 	// If there is a border, we have less space for the contents
 	contents_width_ =
-	   border_type_ == TabPanel::Type::kNoBorder ? get_w() - padding_ : get_w() - 2 * padding_;
+	   std::max(0, style_ == UI::PanelStyle::kFsMenu ? get_w() - 2 * padding_ : get_w() - padding_);
 
-	contents_height_ = border_type_ == TabPanel::Type::kNoBorder ?
-	                      get_inner_h() - 2 * padding_ - UI::kTabPanelButtonHeight :
-	                      get_inner_h() - 3 * padding_ - UI::kTabPanelButtonHeight;
+	contents_height_ = std::max(0, style_ == UI::PanelStyle::kFsMenu ?
+	                      get_inner_h() - 3 * padding_ - UI::kTabPanelButtonHeight :
+	                      get_inner_h() - 2 * padding_ - UI::kTabPanelButtonHeight);
 
 	for (size_t i = 0; i < boxes_.size(); ++i) {
 		update_tab_size(i);

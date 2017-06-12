@@ -34,7 +34,7 @@ static const char pic_tab_workers_warehouse[] = "images/wui/stats/menu_tab_worke
 
 StockMenu::StockMenu(InteractivePlayer& plr, UI::UniqueWindow::Registry& registry)
    : UI::UniqueWindow(&plr, "stock_menu", &registry, 480, 640, _("Stock")), player_(plr) {
-	UI::TabPanel* tabs = new UI::TabPanel(this);
+	UI::TabPanel* tabs = new UI::TabPanel(this, UI::TabPanelStyle::kWuiLight);
 	set_center_panel(tabs);
 
 	all_wares_ = new WaresDisplay(tabs, 0, 0, plr.player().tribe(), Widelands::wwWARE, false);

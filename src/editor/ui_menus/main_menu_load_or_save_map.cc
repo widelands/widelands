@@ -48,13 +48,13 @@ MainMenuLoadOrSaveMap::MainMenuLoadOrSaveMap(EditorInteractive& parent,
      right_column_x_(tablew_ + 2 * padding_),
      butw_((get_inner_w() - right_column_x_ - 2 * padding_) / 2),
 
-     table_(this, tablex_, tabley_, tablew_, tableh_, UI::Panel::Style::kWui),
+     table_(this, tablex_, tabley_, tablew_, tableh_, UI::PanelStyle::kWui),
      map_details_(this,
                   right_column_x_,
                   tabley_,
                   get_inner_w() - right_column_x_ - padding_,
                   tableh_,
-                  UI::Panel::Style::kWui),
+                  UI::PanelStyle::kWui),
      directory_info_(this, padding_, get_inner_h() - 2 * buth_ - 4 * padding_),
      ok_(this,
          "ok",
@@ -63,7 +63,7 @@ MainMenuLoadOrSaveMap::MainMenuLoadOrSaveMap(EditorInteractive& parent,
          get_inner_h() - padding_ - buth_,
          butw_,
          buth_,
-         UI::Button::Style::kWuiPrimary,
+         UI::ButtonStyle::kWuiPrimary,
          _("OK")),
      cancel_(this,
              "cancel",
@@ -72,7 +72,7 @@ MainMenuLoadOrSaveMap::MainMenuLoadOrSaveMap(EditorInteractive& parent,
              get_inner_h() - padding_ - buth_,
              butw_,
              buth_,
-             UI::Button::Style::kWuiSecondary,
+             UI::ButtonStyle::kWuiSecondary,
              _("Cancel")),
      basedir_(basedir),
      has_translated_mapname_(false),
@@ -82,7 +82,7 @@ MainMenuLoadOrSaveMap::MainMenuLoadOrSaveMap(EditorInteractive& parent,
 
 	UI::Box* vbox = new UI::Box(this, tablex_, padding_, UI::Box::Horizontal, padding_, get_w());
 	show_mapnames_ = new UI::Button(vbox, "show_mapnames", 0, 0, 2 * butw_, buth_,
-	                                UI::Button::Style::kWuiSecondary, _("Show Map Names"));
+	                                UI::ButtonStyle::kWuiSecondary, _("Show Map Names"));
 	vbox->add(show_mapnames_, UI::Box::Resizing::kFullSize);
 
 	/** TRANSLATORS: Checkbox title. If this checkbox is enabled, map names aren't translated. */

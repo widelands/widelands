@@ -83,11 +83,10 @@ private:
  *
  */
 struct TabPanel : public Panel {
-	enum class Type { kNoBorder, kNoBorderDark, kBorder };
 
 	friend struct Tab;
 
-	TabPanel(Panel* parent, TabPanel::Type border_type = TabPanel::Type::kNoBorder);
+	TabPanel(Panel* parent, UI::TabPanelStyle style);
 
 	/** Add textual tab */
 	uint32_t add(const std::string& name,
@@ -119,7 +118,7 @@ protected:
 	void layout() override;
 	void update_desired_size() override;
 
-	TabPanel::Type border_type_;  ///< whether there will be a border around the panels.
+	UI::TabPanelStyle style_;
 
 private:
 	// Common adding function for textual and pictorial tabs
@@ -142,6 +141,9 @@ private:
 	TabList tabs_;
 	size_t active_;     ///< index of the currently active tab
 	size_t highlight_;  ///< index of the highlighted button
+
+	const Image* background_image_;
+	RGBAColor background_color_;
 };
 }
 

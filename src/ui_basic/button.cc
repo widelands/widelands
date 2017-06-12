@@ -23,6 +23,7 @@
 #include "graphic/graphic.h"
 #include "graphic/image.h"
 #include "graphic/rendertarget.h"
+#include "graphic/style_manager.h"
 #include "graphic/text_constants.h"
 #include "graphic/text_layout.h"
 #include "ui_basic/mouse_constants.h"
@@ -40,7 +41,7 @@ Button::Button  //  Common constructor
     int32_t const y,
     uint32_t const w,
     uint32_t const h,
-    Style style,
+    UI::ButtonStyle style,
     const Image* title_image,
     const std::string& title_text,
     const std::string& tooltip_text,
@@ -56,38 +57,10 @@ Button::Button  //  Common constructor
      image_mode_(mode),
      time_nextact_(0),
      title_(title_text),
-     title_image_(title_image),
+	  title_image_(title_image),
+	  background_image_(g_gr->styles().button_style(style).image),
+	  background_color_(g_gr->styles().button_style(style).color),
      clr_down_(229, 161, 2) {
-	switch (style) {
-	case Button::Style::kFsMenuMenu:
-		background_image_ = g_gr->images().get("images/ui_fsmenu/button.png");
-		background_color_ = RGBAColor(0, 24, 40, 0);
-		break;
-	case Button::Style::kFsMenuPrimary:
-		background_image_ = g_gr->images().get("images/ui_fsmenu/button.png");
-		background_color_ = RGBAColor(10, 50, 0, 0);
-		break;
-	case Button::Style::kFsMenuSecondary:
-		background_image_ = g_gr->images().get("images/ui_fsmenu/button.png");
-		background_color_ = RGBAColor(45, 26, 18, 0);
-		break;
-	case Button::Style::kWuiMenu:
-		background_image_ = g_gr->images().get("images/wui/button.png");
-		background_color_ = RGBAColor(85, 63, 35, 0);
-		break;
-	case Button::Style::kWuiPrimary:
-		background_image_ = g_gr->images().get("images/wui/button.png");
-		background_color_ = RGBAColor(3, 15, 0, 0);
-		break;
-	case Button::Style::kWuiSecondary:
-		background_image_ = g_gr->images().get("images/wui/button.png");
-		background_color_ = RGBAColor(32, 20, 10, 0);
-		break;
-	case Button::Style::kTransparent:
-		background_image_ = nullptr;
-		background_color_ = RGBAColor(0, 0, 0, 0);
-		break;
-	}
 	set_thinks(false);
 	set_can_focus(true);
 }
@@ -99,7 +72,7 @@ Button::Button  //  for textual buttons. If h = 0, h will resize according to th
     int32_t const y,
     uint32_t const w,
     uint32_t const h,
-    Style style,
+    UI::ButtonStyle style,
     const std::string& title_text,
     const std::string& tooltip_text,
     UI::Button::VisualState init_state)
@@ -130,7 +103,7 @@ Button::Button  //  for pictorial buttons
     const int32_t y,
     const uint32_t w,
     const uint32_t h,
-    Style style,
+    UI::ButtonStyle style,
     const Image* title_image,
     const std::string& tooltip_text,
     UI::Button::VisualState init_state,

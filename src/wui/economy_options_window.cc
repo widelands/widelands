@@ -38,7 +38,7 @@ EconomyOptionsWindow::EconomyOptionsWindow(UI::Panel* parent,
    : UI::Window(parent, "economy_options", 0, 0, 0, 0, _("Economy options")),
      economy_number_(economy->owner().get_economy_number(economy)),
      owner_(economy->owner()),
-     tabpanel_(this),
+     tabpanel_(this, UI::TabPanelStyle::kWuiLight),
      ware_panel_(
         new EconomyOptionsPanel(&tabpanel_, can_act, Widelands::wwWARE, economy_number_, owner_)),
      worker_panel_(new EconomyOptionsPanel(
@@ -138,14 +138,14 @@ EconomyOptionsWindow::EconomyOptionsPanel::EconomyOptionsPanel(UI::Panel* parent
 	add(buttons);
 
 	UI::Button* b = new UI::Button(buttons, "decrease_target", 0, 0, 34, 34,
-	                               UI::Button::Style::kWuiMenu, "-", _("Decrease target"));
+	                               UI::ButtonStyle::kWuiMenu, "-", _("Decrease target"));
 	b->set_enabled(can_act_);
 	b->sigclicked.connect(boost::bind(&EconomyOptionsPanel::change_target, this, -1));
 	buttons->add(b);
 	b->set_repeating(true);
 	buttons->add_space(8);
 
-	b = new UI::Button(buttons, "increase_target", 0, 0, 34, 34, UI::Button::Style::kWuiMenu, "+",
+	b = new UI::Button(buttons, "increase_target", 0, 0, 34, 34, UI::ButtonStyle::kWuiMenu, "+",
 	                   _("Increase target"));
 	b->set_enabled(can_act_);
 	b->sigclicked.connect(boost::bind(&EconomyOptionsPanel::change_target, this, 1));
@@ -153,7 +153,7 @@ EconomyOptionsWindow::EconomyOptionsPanel::EconomyOptionsPanel(UI::Panel* parent
 	b->set_repeating(true);
 	buttons->add_space(8);
 
-	b = new UI::Button(buttons, "reset_target", 0, 0, 34, 34, UI::Button::Style::kWuiMenu, "R",
+	b = new UI::Button(buttons, "reset_target", 0, 0, 34, 34, UI::ButtonStyle::kWuiMenu, "R",
 	                   _("Reset to default"));
 	b->set_enabled(can_act_);
 	b->sigclicked.connect(boost::bind(&EconomyOptionsPanel::reset_target, this));

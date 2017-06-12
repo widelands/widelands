@@ -37,7 +37,7 @@ MultilineTextarea::MultilineTextarea(Panel* const parent,
                                      const int32_t y,
                                      const uint32_t w,
                                      const uint32_t h,
-                                     Style style,
+                                     UI::PanelStyle style,
                                      const std::string& text,
                                      const Align align,
                                      MultilineTextarea::ScrollMode scroll_mode)

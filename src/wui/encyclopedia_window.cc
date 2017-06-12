@@ -56,7 +56,7 @@ EncyclopediaWindow::EncyclopediaWindow(InteractiveBase& parent,
                                        LuaInterface* const lua)
    : UI::UniqueWindow(&parent, "encyclopedia", &registry, WINDOW_WIDTH, WINDOW_HEIGHT, ""),
      lua_(lua),
-     tabs_(this) {
+     tabs_(this, UI::TabPanelStyle::kWuiLight) {
 }
 
 void EncyclopediaWindow::init(InteractiveBase& parent, std::unique_ptr<LuaTable> table) {
@@ -86,14 +86,14 @@ void EncyclopediaWindow::init(InteractiveBase& parent, std::unique_ptr<LuaTable>
 			   tab_name, std::unique_ptr<UI::Listselect<EncyclopediaEntry>>(
 			                new UI::Listselect<EncyclopediaEntry>(boxes_.at(tab_name).get(), 0, 0,
 			                                                      contents_width, contents_height,
-			                                                      UI::Panel::Style::kWui))));
+			                                                      UI::PanelStyle::kWui))));
 			lists_.at(tab_name)->selected.connect(
 			   boost::bind(&EncyclopediaWindow::entry_selected, this, tab_name));
 
 			contents_.insert(std::make_pair(
 			   tab_name, std::unique_ptr<UI::MultilineTextarea>(
 			                new UI::MultilineTextarea(boxes_.at(tab_name).get(), 0, 0, contents_width,
-			                                          contents_height, UI::Panel::Style::kWui))));
+			                                          contents_height, UI::PanelStyle::kWui))));
 
 			boxes_.at(tab_name)->add(lists_.at(tab_name).get());
 			boxes_.at(tab_name)->add_space(kPadding);

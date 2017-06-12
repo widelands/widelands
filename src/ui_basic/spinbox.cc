@@ -53,7 +53,7 @@ struct SpinBoxImpl {
 	UI::SpinBox::Units unit;
 
 	/// Background tile style of buttons.
-	UI::Button::Style button_style;
+	UI::ButtonStyle button_style;
 
 	/// Special names for specific values
 	std::map<int32_t, std::string> value_replacements;
@@ -84,7 +84,7 @@ SpinBox::SpinBox(Panel* const parent,
                  int32_t const startval,
                  int32_t const minval,
                  int32_t const maxval,
-                 Style style,
+                 UI::PanelStyle style,
                  const std::string& label_text,
                  const SpinBox::Units& unit,
                  SpinBox::Type type,
@@ -107,7 +107,7 @@ SpinBox::SpinBox(Panel* const parent,
 	sbi_->value = startval;
 	sbi_->unit = unit;
 	sbi_->button_style =
-	   style == Panel::Style::kFsMenu ? Button::Style::kFsMenuMenu : Button::Style::kWuiSecondary;
+	   style == UI::PanelStyle::kFsMenu ? UI::ButtonStyle::kFsMenuMenu : UI::ButtonStyle::kWuiSecondary;
 
 	box_ = new UI::Box(this, 0, 0, UI::Box::Horizontal, 0, 0, padding_);
 

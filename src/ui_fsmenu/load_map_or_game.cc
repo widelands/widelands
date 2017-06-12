@@ -39,8 +39,8 @@ FullscreenMenuLoadMapOrGame::FullscreenMenuLoadMapOrGame()
      right_column_margin_(15),
 
      // Main buttons
-     back_(this, "back", 0, 0, 0, 0, UI::Button::Style::kFsMenuSecondary, _("Back")),
-     ok_(this, "ok", 0, 0, 0, 0, UI::Button::Style::kFsMenuPrimary, _("OK")) {
+     back_(this, "back", 0, 0, 0, 0, UI::ButtonStyle::kFsMenuSecondary, _("Back")),
+     ok_(this, "ok", 0, 0, 0, 0, UI::ButtonStyle::kFsMenuPrimary, _("OK")) {
 	layout();
 }
 

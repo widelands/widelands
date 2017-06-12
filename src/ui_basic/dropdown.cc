@@ -52,7 +52,7 @@ BaseDropdown::BaseDropdown(UI::Panel* parent,
                            int button_dimension,
                            const std::string& label,
                            const DropdownType type,
-                           Style style)
+                           UI::PanelStyle style)
    : UI::Panel(parent,
                x,
                y,
@@ -71,8 +71,8 @@ BaseDropdown::BaseDropdown(UI::Panel* parent,
                                     0,
                                     button_dimension,
                                     get_h(),
-                                    style == Panel::Style::kFsMenu ? Button::Style::kFsMenuMenu :
-                                                                     Button::Style::kWuiSecondary,
+                                    style == UI::PanelStyle::kFsMenu ? UI::ButtonStyle::kFsMenuMenu :
+                                                                     UI::ButtonStyle::kWuiSecondary,
                                     g_gr->images().get("images/ui_basic/scrollbar_down.png"),
                                     pgettext("dropdown", "Select Item")) :
                      nullptr),
@@ -82,8 +82,8 @@ BaseDropdown::BaseDropdown(UI::Panel* parent,
                      0,
                      type == DropdownType::kTextual ? w - button_dimension : button_dimension,
                      get_h(),
-                     style == Panel::Style::kFsMenu ? UI::Button::Style::kFsMenuSecondary :
-                                                      UI::Button::Style::kWuiSecondary,
+                     style == UI::PanelStyle::kFsMenu ? UI::ButtonStyle::kFsMenuSecondary :
+                                                      UI::ButtonStyle::kWuiSecondary,
                      label),
      label_(label),
      type_(type),

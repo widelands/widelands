@@ -22,6 +22,7 @@
 #include "graphic/font_handler1.h"
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
+#include "graphic/style_manager.h"
 #include "graphic/text_layout.h"
 #include "ui_basic/mouse_constants.h"
 
@@ -90,9 +91,13 @@ bool Tab::handle_mousepress(uint8_t, int32_t, int32_t) {
 /**
  * Initialize an empty TabPanel
 */
-TabPanel::TabPanel(
-   Panel* const parent, TabPanel::Type border_type)
-   : Panel(parent, 0, 0, kTabPanelButtonHeight + 2 * kTabPanelSeparatorHeight, kTabPanelButtonHeight + 2 * kTabPanelSeparatorHeight), border_type_(border_type), active_(0), highlight_(kNotFound) {
+TabPanel::TabPanel(Panel* const parent, UI::TabPanelStyle style)
+   : Panel(parent, 0, 0, kTabPanelButtonHeight + 2 * kTabPanelSeparatorHeight, kTabPanelButtonHeight + 2 * kTabPanelSeparatorHeight),
+	  style_(style),
+	  active_(0),
+	  highlight_(kNotFound),
+	  background_image_(g_gr->styles().tabpanel_style(style).image),
+	  background_color_(g_gr->styles().tabpanel_style(style).color) {
 }
 
 /**
@@ -106,7 +111,7 @@ void TabPanel::layout() {
 		// avoid excessive craziness in case there is a wraparound
 		h = std::min(h, h - (kTabPanelButtonHeight + kTabPanelSeparatorHeight));
 		// If we have a border, we will also want some margin to the bottom
-		if (border_type_ == TabPanel::Type::kBorder) {
+		if (style_ == UI::TabPanelStyle::kFsMenu) {
 			h = h - kTabPanelSeparatorHeight;
 		}
 		panel->set_size(get_w(), h);
@@ -177,7 +182,7 @@ uint32_t TabPanel::add_tab(const std::string& name,
 	tabs_.push_back(new Tab(this, id, x, name, title, pic, tooltip_text, panel));
 
 	// Add a margin if there is a border
-	if (border_type_ == TabPanel::Type::kBorder) {
+	if (style_ == UI::TabPanelStyle::kFsMenu) {
 		panel->set_border(kTabPanelSeparatorHeight + 1, kTabPanelSeparatorHeight + 1,
 		                  kTabPanelSeparatorHeight, kTabPanelSeparatorHeight);
 		panel->set_pos(Vector2i(0, kTabPanelButtonHeight));
@@ -239,26 +244,27 @@ void TabPanel::draw(RenderTarget& dst) {
 	static_assert(2 < kTabPanelButtonHeight, "assert(2 < kTabPanelButtonSize) failed.");
 	static_assert(4 < kTabPanelButtonHeight, "assert(4 < kTabPanelButtonSize) failed.");
 	assert(kTabPanelButtonHeight - 2 <= get_h());
-
-	if (border_type_ == TabPanel::Type::kBorder) {
-		// Lighten the background
-		constexpr int kBrightenFactor = 4;
-		if (!tabs_.empty()) {
-			dst.brighten_rect(Recti(Vector2i::zero(), tabs_.back()->get_x() + tabs_.back()->get_w(),
-											kTabPanelButtonHeight - 2), kBrightenFactor);
-		}
-		dst.brighten_rect(Recti(0, kTabPanelButtonHeight, get_w(), get_h() - kTabPanelButtonHeight), kBrightenFactor);
-	} else if (border_type_ == TabPanel::Type::kNoBorderDark) {
-		// Darken the background
-		constexpr int kBrightenFactor = -60;
-		// NOCOM this looks awful, we need the button texture after all.
-		if (!tabs_.empty()) {
-			dst.brighten_rect(Recti(Vector2i::zero(), tabs_.back()->get_x() + tabs_.back()->get_w(),
-											kTabPanelButtonHeight - 2), kBrightenFactor);
-		}
-		dst.brighten_rect(Recti(0, kTabPanelButtonHeight, get_w(), get_h() - kTabPanelButtonHeight), kBrightenFactor);
+	if (tabs_.empty()) {
+		return;
 	}
 
+	// Draw the backgrounds
+	// NOCOM refactor out common function in Panel
+	const Recti tabs_rect(Vector2i::zero(), tabs_.back()->get_x() + tabs_.back()->get_w(),
+												kTabPanelButtonHeight - 2);
+	const Recti background_rect(0, kTabPanelButtonHeight, get_w(), get_h() - kTabPanelButtonHeight);
+
+	if (background_image_) {
+		dst.fill_rect(tabs_rect, RGBAColor(0, 0, 0, 255));
+		dst.tile(tabs_rect, background_image_, Vector2i(get_x(), get_y()));
+
+		dst.fill_rect(background_rect, RGBAColor(0, 0, 0, 255));
+		dst.tile(background_rect, background_image_, Vector2i(get_x(), get_y()));
+	}
+	if (background_color_ != RGBAColor(0, 0, 0, 0)) {
+		dst.fill_rect(tabs_rect, background_color_, BlendMode::UseAlpha);
+		dst.fill_rect(background_rect, background_color_, BlendMode::UseAlpha);
+	}
 
 	// Draw the buttons
 	RGBColor black(0, 0, 0);
@@ -319,7 +325,7 @@ void TabPanel::draw(RenderTarget& dst) {
 	                  2 * BUTTON_EDGE_BRIGHT_FACTOR);
 
 	// Draw border around the main panel
-	if (border_type_ == TabPanel::Type::kBorder) {
+	if (style_ == UI::TabPanelStyle::kFsMenu) {
 		//  left edge
 		dst.brighten_rect(Recti(0, kTabPanelButtonHeight, 2, get_h() - 2), BUTTON_EDGE_BRIGHT_FACTOR);
 		//  bottom edge

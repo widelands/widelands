@@ -41,7 +41,7 @@ GameOptionsSoundMenu::GameOptionsSoundMenu(InteractiveGameBase& gb,
                          0,
                          g_sound_handler.get_max_volume(),
                          g_sound_handler.get_music_volume(),
-                         UI::Panel::Style::kWui),
+                         UI::SliderStyle::kWuiLight),
      ingame_sound_volume_label(this,
                                hmargin(),
                                vmargin() + 2 * (kStateboxSize + vspacing()) + vbigspacing() +
@@ -57,7 +57,7 @@ GameOptionsSoundMenu::GameOptionsSoundMenu(InteractiveGameBase& gb,
                          0,
                          g_sound_handler.get_max_volume(),
                          g_sound_handler.get_fx_volume(),
-                         UI::Panel::Style::kWui) {
+                         UI::SliderStyle::kWuiLight) {
 	ingame_music.set_state(!g_sound_handler.get_disable_music());
 	ingame_sound.set_state(!g_sound_handler.get_disable_fx());
 

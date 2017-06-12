@@ -25,6 +25,7 @@
 #include "graphic/font_handler1.h"
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
+#include "graphic/style_manager.h"
 #include "graphic/text_layout.h"
 
 namespace UI {
@@ -86,11 +87,11 @@ Window::Window(Panel* const parent,
      drag_start_win_y_(0),
      drag_start_mouse_x_(0),
      drag_start_mouse_y_(0),
-     pic_lborder_(g_gr->images().get("images/wui/left.png")),
-     pic_rborder_(g_gr->images().get("images/wui/right.png")),
-     pic_top_(g_gr->images().get("images/wui/top.png")),
-     pic_bottom_(g_gr->images().get("images/wui/bottom.png")),
-     pic_background_(g_gr->images().get("images/wui/background.png")),
+     pic_lborder_(g_gr->images().get(kTemplateDir + "wui/left.png")),
+     pic_rborder_(g_gr->images().get(kTemplateDir + "wui/right.png")),
+     pic_top_(g_gr->images().get(kTemplateDir + "wui/top.png")),
+     pic_bottom_(g_gr->images().get(kTemplateDir + "wui/bottom.png")),
+     pic_background_(g_gr->images().get(kTemplateDir + "wui/background.png")),
      center_panel_(nullptr),
      fastclick_panel_(nullptr) {
 	set_title(title);

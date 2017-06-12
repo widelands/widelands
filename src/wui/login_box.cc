@@ -33,11 +33,11 @@ LoginBox::LoginBox(Panel& parent)
 
 	ta_nickname = new UI::Textarea(this, margin, margin, _("Nickname:"));
 	ta_password = new UI::Textarea(this, margin, 40, _("Password:"));
-	eb_nickname = new UI::EditBox(this, 150, margin, 330, 20, 2, Panel::Style::kWui);
-	eb_password = new UI::EditBox(this, 150, 40, 330, 20, 2, Panel::Style::kWui);
+	eb_nickname = new UI::EditBox(this, 150, margin, 330, 20, 2, UI::PanelStyle::kWui);
+	eb_password = new UI::EditBox(this, 150, 40, 330, 20, 2, UI::PanelStyle::kWui);
 
 	pwd_warning =
-	   new UI::MultilineTextarea(this, margin, 65, 505, 50, UI::Panel::Style::kWui,
+	   new UI::MultilineTextarea(this, margin, 65, 505, 50, UI::PanelStyle::kWui,
 	                             _("WARNING: Password will be shown and saved readable!"));
 
 	cb_register = new UI::Checkbox(this, Vector2i(margin, 110), _("Log in to a registered account"),
@@ -50,13 +50,13 @@ LoginBox::LoginBox(Panel& parent)
 	   this, "login",
 	   UI::g_fh1->fontset()->is_rtl() ? (get_inner_w() / 2 - 200) / 2 :
 	                                    (get_inner_w() / 2 - 200) / 2 + get_inner_w() / 2,
-	   get_inner_h() - 20 - margin, 200, 20, UI::Button::Style::kWuiPrimary, _("Login"));
+	   get_inner_h() - 20 - margin, 200, 20, UI::ButtonStyle::kWuiPrimary, _("Login"));
 	loginbtn->sigclicked.connect(boost::bind(&LoginBox::clicked_ok, boost::ref(*this)));
 	UI::Button* cancelbtn =
 	   new UI::Button(this, "cancel", UI::g_fh1->fontset()->is_rtl() ?
 	                                     (get_inner_w() / 2 - 200) / 2 + get_inner_w() / 2 :
 	                                     (get_inner_w() / 2 - 200) / 2,
-	                  loginbtn->get_y(), 200, 20, UI::Button::Style::kWuiSecondary, _("Cancel"));
+	                  loginbtn->get_y(), 200, 20, UI::ButtonStyle::kWuiSecondary, _("Cancel"));
 	cancelbtn->sigclicked.connect(boost::bind(&LoginBox::clicked_back, boost::ref(*this)));
 
 	Section& s = g_options.pull_section("global");

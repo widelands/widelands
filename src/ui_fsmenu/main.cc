@@ -34,7 +34,7 @@ FullscreenMenuMain::FullscreenMenuMain()
                   0,
                   butw_,
                   buth_,
-                  UI::Button::Style::kFsMenuMenu,
+                  UI::ButtonStyle::kFsMenuMenu,
                   _("Play Tutorial")),
      singleplayer(&vbox_,
                   "single_player",
@@ -42,7 +42,7 @@ FullscreenMenuMain::FullscreenMenuMain()
                   0,
                   butw_,
                   buth_,
-                  UI::Button::Style::kFsMenuMenu,
+                  UI::ButtonStyle::kFsMenuMenu,
                   _("Single Player")),
      multiplayer(&vbox_,
                  "multi_player",
@@ -50,15 +50,15 @@ FullscreenMenuMain::FullscreenMenuMain()
                  0,
                  butw_,
                  buth_,
-                 UI::Button::Style::kFsMenuMenu,
+                 UI::ButtonStyle::kFsMenuMenu,
                  _("Multiplayer")),
      replay(
-        &vbox_, "replay", 0, 0, butw_, buth_, UI::Button::Style::kFsMenuMenu, _("Watch Replay")),
-     editor(&vbox_, "editor", 0, 0, butw_, buth_, UI::Button::Style::kFsMenuMenu, _("Editor")),
-     options(&vbox_, "options", 0, 0, butw_, buth_, UI::Button::Style::kFsMenuMenu, _("Options")),
+        &vbox_, "replay", 0, 0, butw_, buth_, UI::ButtonStyle::kFsMenuMenu, _("Watch Replay")),
+     editor(&vbox_, "editor", 0, 0, butw_, buth_, UI::ButtonStyle::kFsMenuMenu, _("Editor")),
+     options(&vbox_, "options", 0, 0, butw_, buth_, UI::ButtonStyle::kFsMenuMenu, _("Options")),
      about(
-        &vbox_, "about", 0, 0, butw_, buth_, UI::Button::Style::kFsMenuMenu, _("About Widelands")),
-     exit(&vbox_, "exit", 0, 0, butw_, buth_, UI::Button::Style::kFsMenuMenu, _("Exit Widelands")),
+        &vbox_, "about", 0, 0, butw_, buth_, UI::ButtonStyle::kFsMenuMenu, _("About Widelands")),
+     exit(&vbox_, "exit", 0, 0, butw_, buth_, UI::ButtonStyle::kFsMenuMenu, _("Exit Widelands")),
 
      // Textlabels
      version(

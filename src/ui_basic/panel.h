@@ -32,6 +32,7 @@
 #include "base/vector.h"
 #include "graphic/align.h"
 #include "graphic/font_handler1.h"
+#include "graphic/panel_styles.h"
 
 class RenderTarget;
 class Image;
@@ -77,8 +78,6 @@ public:
 		/// whether widget wants to receive unicode textinput messages
 		pf_handle_textinput = 1024,
 	};
-
-	enum class Style { kFsMenu, kWui };
 
 	Panel(Panel* const nparent,
 	      int32_t const nx,

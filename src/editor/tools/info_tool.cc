@@ -42,7 +42,7 @@ int32_t EditorInfoTool::handle_click_impl(const Widelands::World& world,
 	UI::Window* const w =
 	   new UI::Window(&parent, "field_information", 30, 30, 400, 200, _("Field Information"));
 	UI::MultilineTextarea* const multiline_textarea = new UI::MultilineTextarea(
-	   w, 0, 0, w->get_inner_w(), w->get_inner_h(), UI::Panel::Style::kWui);
+	   w, 0, 0, w->get_inner_w(), w->get_inner_h(), UI::PanelStyle::kWui);
 
 	Widelands::Field& f = (*map)[center.node];
 

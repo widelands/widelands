@@ -50,7 +50,7 @@ FullscreenMenuNetSetupLAN::FullscreenMenuNetSetupLAN()
               get_h() * 5333 / 10000,
               butw_,
               buth_,
-              UI::Button::Style::kFsMenuSecondary,
+              UI::ButtonStyle::kFsMenuSecondary,
               _("Join this game")),
      hostgame(this,
               "host_game",
@@ -58,7 +58,7 @@ FullscreenMenuNetSetupLAN::FullscreenMenuNetSetupLAN()
               get_h() * 6083 / 10000,
               butw_,
               buth_,
-              UI::Button::Style::kFsMenuSecondary,
+              UI::ButtonStyle::kFsMenuSecondary,
               _("Host a new game")),
      back(this,
           "back",
@@ -66,7 +66,7 @@ FullscreenMenuNetSetupLAN::FullscreenMenuNetSetupLAN()
           get_h() * 8333 / 10000,
           butw_,
           buth_,
-          UI::Button::Style::kFsMenuSecondary,
+          UI::ButtonStyle::kFsMenuSecondary,
           _("Back")),
      loadlasthost(this,
                   "load_previous_host",
@@ -74,7 +74,7 @@ FullscreenMenuNetSetupLAN::FullscreenMenuNetSetupLAN()
                   get_h() * 19 / 40,
                   buth_,
                   buth_,
-                  UI::Button::Style::kFsMenuSecondary,
+                  UI::ButtonStyle::kFsMenuSecondary,
                   g_gr->images().get("images/ui_fsmenu/menu_load_game.png"),
                   _("Load previous host")),
 
@@ -85,7 +85,7 @@ FullscreenMenuNetSetupLAN::FullscreenMenuNetSetupLAN()
                 butw_,
                 buth_,
                 2,
-                Panel::Style::kFsMenu,
+                UI::PanelStyle::kFsMenu,
                 fs_small()),
      hostname(this,
               get_w() * 16 / 25,
@@ -93,7 +93,7 @@ FullscreenMenuNetSetupLAN::FullscreenMenuNetSetupLAN()
               get_w() * 17 / 80,
               buth_,
               2,
-              Panel::Style::kFsMenu,
+              UI::PanelStyle::kFsMenu,
               fs_small()),
 
      // List
@@ -102,7 +102,7 @@ FullscreenMenuNetSetupLAN::FullscreenMenuNetSetupLAN()
                get_h() * 3333 / 10000,
                listw_,
                get_h() * 5433 / 10000,
-               UI::Panel::Style::kFsMenu) {
+               UI::PanelStyle::kFsMenu) {
 	joingame.sigclicked.connect(
 	   boost::bind(&FullscreenMenuNetSetupLAN::clicked_joingame, boost::ref(*this)));
 	hostgame.sigclicked.connect(

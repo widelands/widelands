@@ -48,7 +48,7 @@ struct EditBox : public Panel {
 	        uint32_t w,
 	        uint32_t h,
 	        int margin_y,
-	        UI::Panel::Style style,
+	        UI::PanelStyle style,
 	        int font_size = UI_FONT_SIZE_SMALL);
 	virtual ~EditBox();
 

@@ -65,7 +65,7 @@ BuildingStatisticsMenu::BuildingStatisticsMenu(InteractivePlayer& parent,
                       kWindowWidth,
                       kWindowHeight,
                       _("Building Statistics")),
-     tab_panel_(this, UI::TabPanel::Type::kNoBorderDark),
+     tab_panel_(this, UI::TabPanelStyle::kWuiDark),
      navigation_panel_(this, 0, 0, kWindowWidth, 4 * kButtonRowHeight),
      building_name_(
         &navigation_panel_, get_inner_w() / 2, 0, 0, kButtonHeight, "", UI::Align::kCenter),
@@ -89,7 +89,7 @@ BuildingStatisticsMenu::BuildingStatisticsMenu(InteractivePlayer& parent,
         35,
         0,
         1,
-        Panel::Style::kWui,
+        UI::PanelStyle::kWui,
         kLabelFontSize - UI::g_fh1->fontset()->size_offset()),  // We need consistent height here
      unproductive_label2_(
         &unproductive_box_,
@@ -254,32 +254,32 @@ BuildingStatisticsMenu::BuildingStatisticsMenu(InteractivePlayer& parent,
 
 	navigation_buttons_[NavigationButton::PrevOwned] = new UI::Button(
 	   &navigation_panel_, "previous_owned", get_inner_w() - 2 * kButtonRowHeight, kButtonRowHeight,
-	   kButtonHeight, kButtonHeight, UI::Button::Style::kWuiMenu,
+	   kButtonHeight, kButtonHeight, UI::ButtonStyle::kWuiMenu,
 	   g_gr->images().get("images/ui_basic/scrollbar_left.png"), _("Show previous building"));
 
 	navigation_buttons_[NavigationButton::NextOwned] = new UI::Button(
 	   &navigation_panel_, "next_owned", get_inner_w() - kButtonRowHeight, kButtonRowHeight,
-	   kButtonHeight, kButtonHeight, UI::Button::Style::kWuiMenu,
+	   kButtonHeight, kButtonHeight, UI::ButtonStyle::kWuiMenu,
 	   g_gr->images().get("images/ui_basic/scrollbar_right.png"), _("Show next building"));
 
 	navigation_buttons_[NavigationButton::PrevConstruction] = new UI::Button(
 	   &navigation_panel_, "previous_constructed", get_inner_w() - 2 * kButtonRowHeight,
-	   2 * kButtonRowHeight, kButtonHeight, kButtonHeight, UI::Button::Style::kWuiMenu,
+	   2 * kButtonRowHeight, kButtonHeight, kButtonHeight, UI::ButtonStyle::kWuiMenu,
 	   g_gr->images().get("images/ui_basic/scrollbar_left.png"), _("Show previous building"));
 
 	navigation_buttons_[NavigationButton::NextConstruction] = new UI::Button(
 	   &navigation_panel_, "next_constructed", get_inner_w() - kButtonRowHeight,
-	   2 * kButtonRowHeight, kButtonHeight, kButtonHeight, UI::Button::Style::kWuiMenu,
+	   2 * kButtonRowHeight, kButtonHeight, kButtonHeight, UI::ButtonStyle::kWuiMenu,
 	   g_gr->images().get("images/ui_basic/scrollbar_right.png"), _("Show next building"));
 
 	navigation_buttons_[NavigationButton::PrevUnproductive] = new UI::Button(
 	   &navigation_panel_, "previous_unproductive", get_inner_w() - 2 * kButtonRowHeight,
-	   3 * kButtonRowHeight, kButtonHeight, kButtonHeight, UI::Button::Style::kWuiMenu,
+	   3 * kButtonRowHeight, kButtonHeight, kButtonHeight, UI::ButtonStyle::kWuiMenu,
 	   g_gr->images().get("images/ui_basic/scrollbar_left.png"), _("Show previous building"));
 
 	navigation_buttons_[NavigationButton::NextUnproductive] = new UI::Button(
 	   &navigation_panel_, "next_unproductive", get_inner_w() - kButtonRowHeight,
-	   3 * kButtonRowHeight, kButtonHeight, kButtonHeight, UI::Button::Style::kWuiMenu,
+	   3 * kButtonRowHeight, kButtonHeight, kButtonHeight, UI::ButtonStyle::kWuiMenu,
 	   g_gr->images().get("images/ui_basic/scrollbar_right.png"), _("Show next building"));
 
 	navigation_buttons_[NavigationButton::PrevOwned]->sigclicked.connect(boost::bind(
@@ -324,7 +324,7 @@ bool BuildingStatisticsMenu::add_button(
 	UI::Box* button_box = new UI::Box(&row, 0, 0, UI::Box::Vertical);
 	building_buttons_[id] =
 	   new UI::Button(button_box, (boost::format("building_button%s") % id).str(), 0, 0,
-	                  kBuildGridCellWidth, kBuildGridCellHeight, UI::Button::Style::kTransparent,
+	                  kBuildGridCellWidth, kBuildGridCellHeight, UI::ButtonStyle::kWuiBuildingStats,
 	                  descr.representative_image(&iplayer().get_player()->get_playercolor()), "",
 	                  UI::Button::VisualState::kFlat);
 	building_buttons_[id]->set_disable_style(UI::ButtonDisableStyle::kMonochrome |

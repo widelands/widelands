@@ -54,7 +54,7 @@ GameMessageMenu::GameMessageMenu(InteractivePlayer& plr, UI::UniqueWindow::Regis
                   kMessageBodyY,
                   kWindowWidth - 2 * kPadding,
                   get_inner_h() - kMessageBodyY - 2 * kPadding - kButtonSize,
-                  UI::Panel::Style::kWui,
+                  UI::PanelStyle::kWui,
                   "",
                   UI::Align::kLeft,
                   UI::MultilineTextarea::ScrollMode::kScrollNormalForced),
@@ -62,7 +62,7 @@ GameMessageMenu::GameMessageMenu(InteractivePlayer& plr, UI::UniqueWindow::Regis
 
 	list = new UI::Table<uintptr_t>(this, kPadding, kButtonSize + 2 * kPadding,
 	                                kWindowWidth - 2 * kPadding, kTableHeight,
-	                                UI::Panel::Style::kWui, UI::TableRows::kMulti);
+	                                UI::PanelStyle::kWui, UI::TableRows::kMulti);
 	list->selected.connect(boost::bind(&GameMessageMenu::selected, this, _1));
 	list->double_clicked.connect(boost::bind(&GameMessageMenu::double_clicked, this, _1));
 	list->add_column(kWindowWidth - 2 * kPadding - 60 - 60 - 75, _("Title"));
@@ -77,35 +77,35 @@ GameMessageMenu::GameMessageMenu(InteractivePlayer& plr, UI::UniqueWindow::Regis
 
 	// Buttons for message types
 	geologistsbtn_ = new UI::Button(this, "filter_geologists_messages", kPadding, kPadding,
-	                                kButtonSize, kButtonSize, UI::Button::Style::kWuiSecondary,
+	                                kButtonSize, kButtonSize, UI::ButtonStyle::kWuiSecondary,
 	                                g_gr->images().get("images/wui/fieldaction/menu_geologist.png"));
 	geologistsbtn_->sigclicked.connect(
 	   boost::bind(&GameMessageMenu::filter_messages, this, Widelands::Message::Type::kGeologists));
 
 	economybtn_ =
 	   new UI::Button(this, "filter_economy_messages", 2 * kPadding + kButtonSize, kPadding,
-	                  kButtonSize, kButtonSize, UI::Button::Style::kWuiSecondary,
+	                  kButtonSize, kButtonSize, UI::ButtonStyle::kWuiSecondary,
 	                  g_gr->images().get("images/wui/stats/genstats_nrwares.png"));
 	economybtn_->sigclicked.connect(
 	   boost::bind(&GameMessageMenu::filter_messages, this, Widelands::Message::Type::kEconomy));
 
 	seafaringbtn_ =
 	   new UI::Button(this, "filter_seafaring_messages", 3 * kPadding + 2 * kButtonSize, kPadding,
-	                  kButtonSize, kButtonSize, UI::Button::Style::kWuiSecondary,
+	                  kButtonSize, kButtonSize, UI::ButtonStyle::kWuiSecondary,
 	                  g_gr->images().get("images/wui/buildings/start_expedition.png"));
 	seafaringbtn_->sigclicked.connect(
 	   boost::bind(&GameMessageMenu::filter_messages, this, Widelands::Message::Type::kSeafaring));
 
 	warfarebtn_ =
 	   new UI::Button(this, "filter_warfare_messages", 4 * kPadding + 3 * kButtonSize, kPadding,
-	                  kButtonSize, kButtonSize, UI::Button::Style::kWuiSecondary,
+	                  kButtonSize, kButtonSize, UI::ButtonStyle::kWuiSecondary,
 	                  g_gr->images().get("images/wui/messages/messages_warfare.png"));
 	warfarebtn_->sigclicked.connect(
 	   boost::bind(&GameMessageMenu::filter_messages, this, Widelands::Message::Type::kWarfare));
 
 	scenariobtn_ =
 	   new UI::Button(this, "filter_scenario_messages", 5 * kPadding + 4 * kButtonSize, kPadding,
-	                  kButtonSize, kButtonSize, UI::Button::Style::kWuiSecondary,
+	                  kButtonSize, kButtonSize, UI::ButtonStyle::kWuiSecondary,
 	                  g_gr->images().get("images/wui/menus/menu_objectives.png"));
 	scenariobtn_->sigclicked.connect(
 	   boost::bind(&GameMessageMenu::filter_messages, this, Widelands::Message::Type::kScenario));
@@ -116,7 +116,7 @@ GameMessageMenu::GameMessageMenu(InteractivePlayer& plr, UI::UniqueWindow::Regis
 
 	archivebtn_ = new UI::Button(this, "archive_or_restore_selected_messages", kPadding,
 	                             kWindowHeight - kPadding - kButtonSize, kButtonSize, kButtonSize,
-	                             UI::Button::Style::kWuiPrimary,
+	                             UI::ButtonStyle::kWuiPrimary,
 	                             g_gr->images().get("images/wui/messages/message_archive.png"));
 	update_archive_button_tooltip();
 	archivebtn_->sigclicked.connect(boost::bind(&GameMessageMenu::archive_or_restore, this));
@@ -124,13 +124,13 @@ GameMessageMenu::GameMessageMenu(InteractivePlayer& plr, UI::UniqueWindow::Regis
 	togglemodebtn_ = new UI::Button(
 	   this, "toggle_between_inbox_or_archive",
 	   archivebtn_->get_x() + archivebtn_->get_w() + kPadding, archivebtn_->get_y(), kButtonSize,
-	   kButtonSize, UI::Button::Style::kWuiPrimary,
+	   kButtonSize, UI::ButtonStyle::kWuiPrimary,
 	   g_gr->images().get("images/wui/messages/message_archived.png"), _("Show Archive"));
 	togglemodebtn_->sigclicked.connect(boost::bind(&GameMessageMenu::toggle_mode, this));
 
 	centerviewbtn_ =
 	   new UI::Button(this, "center_main_mapview_on_location", kWindowWidth - kPadding - kButtonSize,
-	                  archivebtn_->get_y(), kButtonSize, kButtonSize, UI::Button::Style::kWuiPrimary,
+	                  archivebtn_->get_y(), kButtonSize, kButtonSize, UI::ButtonStyle::kWuiPrimary,
 	                  g_gr->images().get("images/wui/menus/menu_goto.png"),
 	                  /** TRANSLATORS: %s is a tooltip, G is the corresponding hotkey */
 	                  (boost::format(_("G: %s"))

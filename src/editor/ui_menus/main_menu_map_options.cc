@@ -55,7 +55,7 @@ MainMenuMapOptions::MainMenuMapOptions(EditorInteractive& parent, bool modal)
          get_inner_h() - padding_ - labelh_,
          butw_,
          labelh_,
-         UI::Button::Style::kWuiPrimary,
+         UI::ButtonStyle::kWuiPrimary,
          _("OK")),
      cancel_(this,
              "cancel",
@@ -63,21 +63,21 @@ MainMenuMapOptions::MainMenuMapOptions(EditorInteractive& parent, bool modal)
              get_inner_h() - padding_ - labelh_,
              butw_,
              labelh_,
-             UI::Button::Style::kWuiSecondary,
+             UI::ButtonStyle::kWuiSecondary,
              _("Cancel")),
      tab_box_(this, padding_, padding_, UI::Box::Vertical, max_w_, get_inner_h(), 0),
-     tabs_(&tab_box_),
+     tabs_(&tab_box_, UI::TabPanelStyle::kWuiLight),
 
      main_box_(&tabs_, padding_, padding_, UI::Box::Vertical, max_w_, get_inner_h(), 0),
      tags_box_(&tabs_, padding_, padding_, UI::Box::Vertical, max_w_, get_inner_h(), 0),
      teams_box_(&tabs_, padding_, padding_, UI::Box::Vertical, max_w_, get_inner_h(), 0),
 
-     name_(&main_box_, 0, 0, max_w_, 0, 2, Panel::Style::kWui),
-     author_(&main_box_, 0, 0, max_w_, 0, 2, Panel::Style::kWui),
+     name_(&main_box_, 0, 0, max_w_, 0, 2, UI::PanelStyle::kWui),
+     author_(&main_box_, 0, 0, max_w_, 0, 2, UI::PanelStyle::kWui),
      size_(&main_box_, 0, 0, max_w_ - indent_, labelh_, ""),
 
      teams_list_(
-        &teams_box_, 0, 0, max_w_, 60, UI::Panel::Style::kWui, UI::ListselectLayout::kShowCheck),
+        &teams_box_, 0, 0, max_w_, 60, UI::PanelStyle::kWui, UI::ListselectLayout::kShowCheck),
 
      modal_(modal) {
 
@@ -93,8 +93,8 @@ MainMenuMapOptions::MainMenuMapOptions(EditorInteractive& parent, bool modal)
 	// We need less space for the hint and the description, but it should at least have 1 line
 	// height.
 	hint_ = new UI::MultilineEditbox(
-	   &main_box_, 0, 0, max_w_, std::max(labelh_, remaining_space * 1 / 3));
-	descr_ = new UI::MultilineEditbox(&main_box_, 0, 0, max_w_, remaining_space - hint_->get_h());
+	   &main_box_, 0, 0, max_w_, std::max(labelh_, remaining_space * 1 / 3), UI::PanelStyle::kWui);
+	descr_ = new UI::MultilineEditbox(&main_box_, 0, 0, max_w_, remaining_space - hint_->get_h(), UI::PanelStyle::kWui);
 
 	main_box_.add(new UI::Textarea(&main_box_, 0, 0, max_w_, labelh_, _("Map Name:")));
 	main_box_.add(&name_);

@@ -99,12 +99,12 @@ FullscreenMenuOptions::FullscreenMenuOptions(OptionsCtrl::OptionsStruct opt)
 
      // Buttons
      button_box_(this, 0, 0, UI::Box::Horizontal),
-     cancel_(&button_box_, "cancel", 0, 0, 0, 0, UI::Button::Style::kFsMenuSecondary, _("Cancel")),
-     apply_(&button_box_, "apply", 0, 0, 0, 0, UI::Button::Style::kFsMenuSecondary, _("Apply")),
-     ok_(&button_box_, "ok", 0, 0, 0, 0, UI::Button::Style::kFsMenuPrimary, _("OK")),
+     cancel_(&button_box_, "cancel", 0, 0, 0, 0, UI::ButtonStyle::kFsMenuSecondary, _("Cancel")),
+     apply_(&button_box_, "apply", 0, 0, 0, 0, UI::ButtonStyle::kFsMenuSecondary, _("Apply")),
+     ok_(&button_box_, "ok", 0, 0, 0, 0, UI::ButtonStyle::kFsMenuPrimary, _("OK")),
 
      // Tabs
-     tabs_(this, UI::TabPanel::Type::kBorder),
+     tabs_(this, UI::TabPanelStyle::kFsMenu),
 
      box_interface_(&tabs_, 0, 0, UI::Box::Vertical, 0, 0, padding_),
      box_windows_(&tabs_, 0, 0, UI::Box::Vertical, 0, 0, padding_),
@@ -121,7 +121,7 @@ FullscreenMenuOptions::FullscreenMenuOptions(OptionsCtrl::OptionsStruct opt)
                         24,
                         _("Language"),
                         UI::DropdownType::kTextual,
-                        UI::Panel::Style::kFsMenu),
+                        UI::PanelStyle::kFsMenu),
      resolution_dropdown_(&box_interface_,
                           0,
                           0,
@@ -130,7 +130,7 @@ FullscreenMenuOptions::FullscreenMenuOptions(OptionsCtrl::OptionsStruct opt)
                           24,
                           _("In-game resolution"),
                           UI::DropdownType::kTextual,
-                          UI::Panel::Style::kFsMenu),
+                          UI::PanelStyle::kFsMenu),
 
      fullscreen_(&box_interface_, Vector2i::zero(), _("Fullscreen"), "", 0),
      inputgrab_(&box_interface_, Vector2i::zero(), _("Grab Input"), "", 0),
@@ -143,7 +143,7 @@ FullscreenMenuOptions::FullscreenMenuOptions(OptionsCtrl::OptionsStruct opt)
                 opt.maxfps,
                 0,
                 99,
-                UI::Panel::Style::kFsMenu,
+                UI::PanelStyle::kFsMenu,
                 _("Maximum FPS:")),
 
      // Windows options
@@ -159,7 +159,7 @@ FullscreenMenuOptions::FullscreenMenuOptions(OptionsCtrl::OptionsStruct opt)
                    opt.panel_snap_distance,
                    0,
                    99,
-                   UI::Panel::Style::kFsMenu,
+                   UI::PanelStyle::kFsMenu,
                    _("Distance for windows to snap to other panels:"),
                    UI::SpinBox::Units::kPixels),
 
@@ -171,7 +171,7 @@ FullscreenMenuOptions::FullscreenMenuOptions(OptionsCtrl::OptionsStruct opt)
                     opt.border_snap_distance,
                     0,
                     99,
-                    UI::Panel::Style::kFsMenu,
+                    UI::PanelStyle::kFsMenu,
                     _("Distance for windows to snap to borders:"),
                     UI::SpinBox::Units::kPixels),
 
@@ -189,7 +189,7 @@ FullscreenMenuOptions::FullscreenMenuOptions(OptionsCtrl::OptionsStruct opt)
                   opt.autosave / 60,
                   0,
                   100,
-                  UI::Panel::Style::kFsMenu,
+                  UI::PanelStyle::kFsMenu,
                   _("Save game automatically every:"),
                   UI::SpinBox::Units::kMinutes,
                   UI::SpinBox::Type::kBig),
@@ -202,7 +202,7 @@ FullscreenMenuOptions::FullscreenMenuOptions(OptionsCtrl::OptionsStruct opt)
                           opt.rolling_autosave,
                           1,
                           20,
-                          UI::Panel::Style::kFsMenu,
+                          UI::PanelStyle::kFsMenu,
                           _("Maximum number of autosave files:"),
                           UI::SpinBox::Units::kNone,
                           UI::SpinBox::Type::kBig),

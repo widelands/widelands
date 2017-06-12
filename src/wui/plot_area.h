@@ -165,7 +165,7 @@ struct WuiPlotAreaSlider : public UI::DiscreteSlider {
 	                    h,
 	                    plot_area.get_labels(),
 	                    plot_area.get_time_id(),
-	                    UI::Panel::Style::kWui,
+	                    UI::SliderStyle::kWuiLight,
 	                    tooltip_text,
 	                    cursor_size,
 	                    enabled),

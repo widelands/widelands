@@ -28,6 +28,7 @@
 #include "graphic/font_handler1.h"
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
+#include "graphic/style_manager.h"
 #include "graphic/text/bidi.h"
 #include "graphic/text_constants.h"
 #include "graphic/text_layout.h"
@@ -50,7 +51,7 @@ BaseListselect::BaseListselect(Panel* const parent,
                                const int32_t y,
                                const uint32_t w,
                                const uint32_t h,
-                               UI::Panel::Style style,
+                               UI::PanelStyle style,
                                const ListselectLayout selection_mode)
    : Panel(parent, x, y, w, h),
      lineheight_(text_height() + kMargin),
@@ -61,15 +62,10 @@ BaseListselect::BaseListselect(Panel* const parent,
      last_selection_(no_selection_index()),
      selection_mode_(selection_mode),
      background_(selection_mode == ListselectLayout::kDropdown ?
-                    g_gr->images().get(style == Panel::Style::kFsMenu ?
-                                          "images/ui_fsmenu/button.png" :
-                                          "images/wui/button.png") :
+                    g_gr->styles().dropdown_style(style).image :
                     nullptr),
-	  // NOCOM code duplication with button.cc
 	  background_color_(selection_mode == ListselectLayout::kDropdown ?
-								  (style == Panel::Style::kFsMenu ?
-										RGBAColor(45, 26, 18, 0) : // NOCOM own color
-										RGBAColor(32, 20, 10, 0)) :
+								  g_gr->styles().dropdown_style(style).color :
 								  RGBAColor(0, 0, 0, 0)) {
 	set_thinks(false);
 

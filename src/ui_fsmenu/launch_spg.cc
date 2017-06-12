@@ -51,7 +51,7 @@ FullscreenMenuLaunchSPG::FullscreenMenuLaunchSPG(GameSettingsProvider* const set
                  get_h() * 3 / 10,
                  butw_,
                  buth_,
-                 UI::Button::Style::kFsMenuSecondary,
+                 UI::ButtonStyle::kFsMenuSecondary,
                  _("Select map")),
 
      // Text labels
@@ -105,7 +105,7 @@ FullscreenMenuLaunchSPG::FullscreenMenuLaunchSPG(GameSettingsProvider* const set
 
 		pos_[i] =
 		   new UI::Button(this, "switch_to_position", get_w() / 100, y += buth_, get_h() * 17 / 500,
-		                  get_h() * 17 / 500, UI::Button::Style::kFsMenuSecondary, player_image,
+		                  get_h() * 17 / 500, UI::ButtonStyle::kFsMenuSecondary, player_image,
 		                  _("Switch to position"));
 		pos_[i]->sigclicked.connect(
 		   boost::bind(&FullscreenMenuLaunchSPG::switch_to_position, boost::ref(*this), i));

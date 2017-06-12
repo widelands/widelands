@@ -54,7 +54,7 @@ MainMenuNewMap::MainMenuNewMap(EditorInteractive& parent)
             0,
             0,
             0,
-            UI::Panel::Style::kWui,
+            UI::PanelStyle::kWui,
             _("Width:"),
             UI::SpinBox::Units::kNone,
             UI::SpinBox::Type::kValueList),
@@ -66,11 +66,11 @@ MainMenuNewMap::MainMenuNewMap(EditorInteractive& parent)
              0,
              0,
              0,
-             UI::Panel::Style::kWui,
+             UI::PanelStyle::kWui,
              _("Height:"),
              UI::SpinBox::Units::kNone,
              UI::SpinBox::Type::kValueList),
-     list_(&box_, 0, 0, box_width_, 330, UI::Panel::Style::kWui),
+     list_(&box_, 0, 0, box_width_, 330, UI::PanelStyle::kWui),
      // Buttons
      button_box_(&box_, 0, 0, UI::Box::Horizontal, 0, 0, margin_),
      ok_button_(&button_box_,
@@ -79,7 +79,7 @@ MainMenuNewMap::MainMenuNewMap(EditorInteractive& parent)
                 0,
                 box_width_ / 2 - margin_,
                 0,
-                UI::Button::Style::kWuiPrimary,
+                UI::ButtonStyle::kWuiPrimary,
                 _("Create Map")),
      cancel_button_(&button_box_,
                     "generate_map",
@@ -87,7 +87,7 @@ MainMenuNewMap::MainMenuNewMap(EditorInteractive& parent)
                     0,
                     box_width_ / 2 - margin_,
                     0,
-                    UI::Button::Style::kWuiSecondary,
+                    UI::ButtonStyle::kWuiSecondary,
                     _("Cancel")) {
 	width_.set_value_list(Widelands::kMapDimensions);
 	height_.set_value_list(Widelands::kMapDimensions);

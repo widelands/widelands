@@ -58,7 +58,7 @@ public:
 	      int32_t y,
 	      uint32_t w,
 	      uint32_t h,
-	      Panel::Style style,
+	      UI::PanelStyle style,
 	      TableRows rowtype = TableRows::kSingle);
 	~Table();
 
@@ -168,7 +168,7 @@ public:
 	      int32_t y,
 	      uint32_t w,
 	      uint32_t h,
-	      Panel::Style style,
+	      UI::PanelStyle style,
 	      TableRows rowtype = TableRows::kSingle);
 	~Table();
 
@@ -297,7 +297,7 @@ private:
 	int total_width_;
 	const uint32_t headerheight_;
 	int32_t lineheight_;
-	UI::Button::Style button_style_;
+	UI::ButtonStyle button_style_;
 	Scrollbar* scrollbar_;
 	// A disabled button that will fill the space above the scroll bar
 	UI::Button* scrollbar_filler_button_;
@@ -328,7 +328,7 @@ public:
 	      int32_t y,
 	      uint32_t w,
 	      uint32_t h,
-	      Panel::Style style,
+	      UI::PanelStyle style,
 	      TableRows rowtype = TableRows::kSingle)
 	   : Base(parent, x, y, w, h, style, rowtype) {
 	}
@@ -358,7 +358,7 @@ public:
 	      int32_t y,
 	      uint32_t w,
 	      uint32_t h,
-	      Panel::Style style,
+	      UI::PanelStyle style,
 	      TableRows rowtype = TableRows::kSingle)
 	   : Base(parent, x, y, w, h, style, rowtype) {
 	}
@@ -388,7 +388,7 @@ public:
 	      int32_t y,
 	      uint32_t w,
 	      uint32_t h,
-	      Panel::Style style,
+	      UI::PanelStyle style,
 	      TableRows rowtype = TableRows::kSingle)
 	   : Base(parent, x, y, w, h, style, rowtype) {
 	}
@@ -422,7 +422,7 @@ public:
 	      int32_t y,
 	      uint32_t w,
 	      uint32_t h,
-	      Panel::Style style,
+	      UI::PanelStyle style,
 	      TableRows rowtype = TableRows::kSingle)
 	   : Base(parent, x, y, w, h, style, rowtype) {
 	}
@@ -458,7 +458,7 @@ public:
 	      int32_t y,
 	      uint32_t w,
 	      uint32_t h,
-	      Panel::Style style,
+	      UI::PanelStyle style,
 	      TableRows rowtype = TableRows::kSingle)
 	   : Base(parent, x, y, w, h, style, rowtype) {
 	}
@@ -490,7 +490,7 @@ public:
 	      int32_t y,
 	      uint32_t w,
 	      uint32_t h,
-	      Panel::Style style,
+	      UI::PanelStyle style,
 	      TableRows rowtype = TableRows::kSingle)
 	   : Base(parent, x, y, w, h, style, rowtype) {
 	}

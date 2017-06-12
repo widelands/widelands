@@ -56,7 +56,7 @@ protected:
 	             int button_dimension,
 	             const std::string& label,
 	             const DropdownType type,
-	             Panel::Style style);
+	             PanelStyle style);
 	~BaseDropdown();
 
 public:
@@ -181,7 +181,7 @@ public:
 	         int button_dimension,
 	         const std::string& label,
 	         const DropdownType type,
-	         Panel::Style style)
+	         PanelStyle style)
 	   : BaseDropdown(parent, x, y, list_w, list_h, button_dimension, label, type, style) {
 	}
 	~Dropdown() {

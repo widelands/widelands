@@ -31,7 +31,7 @@
 #include "logic/map_objects/tribes/soldier.h"
 
 constexpr int32_t kUpdateTimeInGametimeMs = 1000;  //  1 second, gametime
-// NOCOM button color was green
+
 AttackBox::AttackBox(UI::Panel* parent,
                      Widelands::Player* player,
                      Widelands::FCoords* target,
@@ -62,7 +62,7 @@ std::unique_ptr<UI::HorizontalSlider> AttackBox::add_slider(UI::Box& parent,
                                                             uint32_t initial,
                                                             char const* hint) {
 	std::unique_ptr<UI::HorizontalSlider> result(new UI::HorizontalSlider(
-	   &parent, 0, 0, width, height, min, max, initial, UI::Panel::Style::kWui, hint));
+	   &parent, 0, 0, width, height, min, max, initial, UI::SliderStyle::kWuiDark, hint));
 	parent.add(result.get());
 	return result;
 }
@@ -80,7 +80,7 @@ std::unique_ptr<UI::Button> AttackBox::add_button(UI::Box& parent,
                                                   void (AttackBox::*fn)(),
                                                   const std::string& tooltip_text) {
 	std::unique_ptr<UI::Button> button(new UI::Button(
-	   &parent, text, 8, 8, 26, 26, UI::Button::Style::kWuiPrimary, text, tooltip_text));
+	   &parent, text, 8, 8, 26, 26, UI::ButtonStyle::kWuiPrimary, text, tooltip_text));
 	button.get()->sigclicked.connect(boost::bind(fn, boost::ref(*this)));
 	parent.add(button.get());
 	return button;

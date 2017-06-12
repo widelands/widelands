@@ -68,7 +68,7 @@ UI::Button* GameStatisticsMenu::add_button(const std::string& image_basename,
                                            const std::string& tooltip_text,
                                            UI::UniqueWindow::Registry* window) {
 	UI::Button* button =
-	   new UI::Button(&box_, name, 0, 0, 34U, 34U, UI::Button::Style::kWuiMenu,
+	   new UI::Button(&box_, name, 0, 0, 34U, 34U, UI::ButtonStyle::kWuiMenu,
 	                  g_gr->images().get("images/" + image_basename + ".png"), tooltip_text);
 	box_.add(button);
 	if (window) {

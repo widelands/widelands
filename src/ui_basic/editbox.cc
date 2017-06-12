@@ -28,6 +28,7 @@
 #include "graphic/font_handler1.h"
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
+#include "graphic/style_manager.h"
 #include "graphic/text/bidi.h"
 #include "graphic/text/font_set.h"
 #include "graphic/text/rt_errors.h"
@@ -80,7 +81,7 @@ EditBox::EditBox(Panel* const parent,
                  uint32_t w,
                  uint32_t h,
                  int margin_y,
-                 Style style,
+                 UI::PanelStyle style,
                  int font_size)
    : Panel(parent, x, y, w, h > 0 ? h : text_height(font_size) + 2 * margin_y),
      m_(new EditBoxImpl),
@@ -88,11 +89,8 @@ EditBox::EditBox(Panel* const parent,
      history_position_(-1) {
 	set_thinks(false);
 
-	m_->background =
-	   g_gr->images().get(style == Panel::Style::kFsMenu ? "images/ui_fsmenu/button.png" :
-	                                                       "images/wui/button.png");
-	// NOCOM code duplication with button.cc
-   m_->background_color = style == Panel::Style::kFsMenu ? RGBAColor(10, 50, 0, 0) : RGBAColor(32, 20, 10, 0);
+	m_->background = g_gr->styles().editbox_style(style).image;
+   m_->background_color = g_gr->styles().editbox_style(style).color;
 
 	m_->fontname = UI::g_fh1->fontset()->sans();
 	m_->fontsize = font_size;
