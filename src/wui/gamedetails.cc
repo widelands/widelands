@@ -145,10 +145,6 @@ void GameDetails::update(const SavegameData& gamedata) {
 			    as_header_with_content(_("Map Name:"), gamedata.mapname, style_, true))
 			      .str());
 
-			name_label_.set_tooltip(mode_ == Mode::kReplay ?
-			                           _("The map that this replay is based on") :
-			                           _("The map that this game is based on"));
-
 			// Show game information
 			std::string description =
 			   as_header_with_content(
