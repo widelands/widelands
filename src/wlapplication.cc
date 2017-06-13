@@ -350,9 +350,6 @@ WLApplication::WLApplication(int const argc, char const* const* const argv)
 	// This might grab the input.
 	refresh_graphics();
 
-	if (SDLNet_Init() == -1)
-		throw wexception("SDLNet_Init failed: %s\n", SDLNet_GetError());
-
 	// seed random number generator used for random tribe selection
 	std::srand(time(nullptr));
 
@@ -377,8 +374,6 @@ WLApplication::~WLApplication() {
 	assert(UI::g_fh1);
 	delete UI::g_fh1;
 	UI::g_fh1 = nullptr;
-
-	SDLNet_Quit();
 
 	TTF_Quit();  // TODO(unknown): not here
 
@@ -1164,10 +1159,6 @@ void WLApplication::mainmenu_multiplayer() {
 			FullscreenMenuNetSetupLAN ns;
 			menu_result = ns.run<FullscreenMenuBase::MenuTarget>();
 			std::string playername = ns.get_playername();
-			// TODO(Notabilis): This has to be updated for IPv6
-			uint32_t addr;
-			uint16_t port;
-			bool const host_address = ns.get_host_address(addr, port);
 
 			switch (menu_result) {
 			case FullscreenMenuBase::MenuTarget::kHostgame: {
@@ -1176,18 +1167,17 @@ void WLApplication::mainmenu_multiplayer() {
 				break;
 			}
 			case FullscreenMenuBase::MenuTarget::kJoingame: {
-				if (!host_address)
-					throw WLWarning(
-					   "Invalid Address", "%s", "The address of the game server is invalid");
+				NetAddress addr;
+				if (!ns.get_host_address(&addr)) {
+					UI::WLMessageBox mmb(
+					   &ns, _("Invalid address"),
+					   _("The entered hostname or address is invalid and can’t be connected to."),
+					   UI::WLMessageBox::MBoxType::kOk);
+					mmb.run<UI::Panel::Returncodes>();
+					break;
+				}
 
-				// TODO(Notabilis): Make this prettier. I am aware that this is quite ugly but it should
-				// work
-				// for now and will be removed shortly when we switch to boost.asio
-				char ip_str[] = {"255.255.255.255"};
-				sprintf(ip_str, "%d.%d.%d.%d", (addr & 0x000000ff), (addr & 0x0000ff00) >> 8,
-				        (addr & 0x00ff0000) >> 16, (addr & 0xff000000) >> 24);
-				port = (port >> 8) | ((port & 0xFF) << 8);
-				GameClient netgame(ip_str, port, playername);
+				GameClient netgame(addr, playername);
 				netgame.run();
 				break;
 			}

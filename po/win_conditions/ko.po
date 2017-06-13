@@ -1,14 +1,15 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2016 Widelands Development Team
+# Copyright (C) 2005-2017 Widelands Development Team
 # 
 # Translators:
+# TaeMin An <kavern02@gmail.com>, 2017
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-12-02 08:04+0000\n"
-"PO-Revision-Date: 2016-12-02 08:07+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2017-06-02 11:07+0000\n"
+"PO-Revision-Date: 2017-06-03 02:24+0000\n"
+"Last-Translator: TaeMin An <kavern02@gmail.com>\n"
 "Language-Team: Korean (http://www.transifex.com/widelands/widelands/language/ko/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -18,220 +19,220 @@ msgstr ""
 
 #: ../../data/scripting/win_conditions/artifacts.lua:16
 msgid "Artifacts"
-msgstr ""
+msgstr "유물"
 
 #: ../../data/scripting/win_conditions/artifacts.lua:18
 msgid ""
 "Search for ancient artifacts. Once all of them are found, the team who owns "
 "most of them will win the game."
-msgstr ""
+msgstr "고대의 유물을 탐색하세요. 모든 유물들이 발견될 때, 가장 많은 유물을 보유한 팀이 게임에서 승리합니다."
 
 #: ../../data/scripting/win_conditions/artifacts.lua:56
 msgid "No Artifacts"
-msgstr ""
+msgstr "유물 없음"
 
 #: ../../data/scripting/win_conditions/artifacts.lua:56
 msgid ""
 "There are no artifacts on this map. This should not happen. Please file a "
 "bug report on https://launchpad.net/widelands and specify your Widelands "
 "version and the map you tried to load."
-msgstr ""
+msgstr "지도에 유물이 없습니다. 이는 발생해서는 안됩니다. https://launchpad.net/widelands 에 버그를 리포트하고 당신의 Widelands 버전과 불러오기를 시도한 지도를 표시해주세요."
 
 #. TRANSLATORS: Keep this as short as possible. You can also translate this as
 #. "New artifact"
 #: ../../data/scripting/win_conditions/artifacts.lua:63
 msgid "Artifact Found"
-msgstr ""
+msgstr "유물 발견"
 
 #: ../../data/scripting/win_conditions/artifacts.lua:64
 msgid "Your team found a new artifact."
-msgstr ""
+msgstr "당신의 팀이 새 유물을 발견했습니다."
 
 #. TRANSLATORS: Keep this as short as possible.
 #: ../../data/scripting/win_conditions/artifacts.lua:68
 msgid "Artifact Lost"
-msgstr ""
+msgstr "유물 분실"
 
 #: ../../data/scripting/win_conditions/artifacts.lua:69
 msgid "One of your team’s artifacts was stolen by an enemy."
-msgstr ""
+msgstr "당신 팀의 유물 중 하나가 적에게 탈취됐습니다."
 
 #. TRANSLATORS: Keep this as short as possible.
 #: ../../data/scripting/win_conditions/artifacts.lua:73
 msgid "Artifact Conquered"
-msgstr ""
+msgstr "유물 강탈"
 
 #: ../../data/scripting/win_conditions/artifacts.lua:74
 msgid "Your team stole an artifact from an enemy."
-msgstr ""
+msgstr "당신의 팀이 적에게서 유물을 탈취했습니다."
 
 #. TRANSLATORS: This is used to seperate players’ names in a list, e.g.
 #. "Steve, Robert, David"
 #: ../../data/scripting/win_conditions/artifacts.lua:144
 msgid ", "
-msgstr ""
+msgstr ","
 
 #: ../../data/scripting/win_conditions/artifacts.lua:151
 msgid "Overview:"
-msgstr ""
+msgstr "총계:"
 
 #: ../../data/scripting/win_conditions/artifacts.lua:154
 #: ../../data/scripting/win_conditions/artifacts.lua:167
 #, lua-format
 msgid "%i artifact"
 msgid_plural "%i artifacts"
-msgstr[0] ""
+msgstr[0] "%i 유물"
 
 #. TRANSLATORS: e.g. Team 1 owns 5 artifacts.
 #: ../../data/scripting/win_conditions/artifacts.lua:156
 msgid "%1$s owns %2$s."
-msgstr ""
+msgstr "%1$s 이 %2$s 을 소유합니다."
 
 #. TRANSLATORS: %1$i is the team's number; %2$s is a list of team members
 #. (e.g. "Steve, Robert, David"), %3$s is something like "x artifact(s)"
 #: ../../data/scripting/win_conditions/artifacts.lua:169
 msgid "Team %1$i (%2$s) owns %3$s."
-msgstr ""
+msgstr "팀 %1$i (%2$s) 이 %3$s 을 소유합니다."
 
 #: ../../data/scripting/win_conditions/collectors.lua:19
 msgid "Collectors"
-msgstr ""
+msgstr "수집가"
 
 #: ../../data/scripting/win_conditions/collectors.lua:22
 msgid ""
 "You get points for precious wares in your warehouses. The player with the "
 "highest number of wares at the end of 4 hours wins the game."
-msgstr ""
+msgstr "당신은 당신 창고의 귀중한 용품으로부터 점수를 얻습니다. 마지막 4시간에 가장 많은 용품을 가진 플레이어가 게임에서 승리합니다."
 
 #: ../../data/scripting/win_conditions/collectors.lua:25
 msgid "Points"
-msgstr ""
+msgstr "점수"
 
 #: ../../data/scripting/win_conditions/collectors.lua:111
 #, lua-format
 msgid "Status for %s"
-msgstr ""
+msgstr "%s 의 상태"
 
 #. TRANSLATORS: For example: 'gold (3 P) x 4 = 12 P', P meaning 'Points'
 #: ../../data/scripting/win_conditions/collectors.lua:124
 msgid "%1$s (%2$i P) x %3$i = %4$i P"
-msgstr ""
+msgstr "%1$s (%2$i P) x %3$i = %4$i P"
 
 #: ../../data/scripting/win_conditions/collectors.lua:128
 #, lua-format
 msgid "Total: %i point"
 msgid_plural "Total: %i points"
-msgstr[0] ""
+msgstr[0] "총계: %i 포인트"
 
 #: ../../data/scripting/win_conditions/collectors.lua:141
 msgid "The game has ended."
-msgstr ""
+msgstr "게임이 종료되었습니다."
 
 #. TRANSLATORS: Context: 'The game will end in (2 hours and) 30 minutes.'
 #: ../../data/scripting/win_conditions/collectors.lua:148
 #, lua-format
 msgid "%i minute"
 msgid_plural "%i minutes"
-msgstr[0] ""
+msgstr[0] "%i 분"
 
 #. TRANSLATORS: Context: 'The game will end in 2 hours and 30 minutes.'
 #: ../../data/scripting/win_conditions/collectors.lua:153
 msgid "%1% hour and %2%"
 msgid_plural "%1% hours and %2%"
-msgstr[0] ""
+msgstr[0] "%1% 시간 %2%"
 
 #. TRANSLATORS: Context: 'The game will end in 2 hours.'
 #: ../../data/scripting/win_conditions/collectors.lua:156
 msgid "%1% hour"
 msgid_plural "%1% hours"
-msgstr[0] ""
+msgstr[0] "%1% 시간"
 
 #. TRANSLATORS: Context: 'The game will end in 2 hours and 30 minutes.'
 #: ../../data/scripting/win_conditions/collectors.lua:160
 #, lua-format
 msgid "The game will end in %s."
-msgstr ""
+msgstr "게임이 %s 안에 종료합니다."
 
 #: ../../data/scripting/win_conditions/collectors.lua:173
 #, lua-format
 msgid "Status for Team %d"
-msgstr ""
+msgstr "팀 %d 의 상태"
 
 #: ../../data/scripting/win_conditions/collectors.lua:175
 #, lua-format
 msgid "Team Total: %i point"
 msgid_plural "Team Total: %i points"
-msgstr[0] ""
+msgstr[0] "팀 총계 : %i 포인트"
 
 #: ../../data/scripting/win_conditions/defeat_all.lua:15
 msgid "Autocrat"
-msgstr ""
+msgstr "전제군주"
 
 #: ../../data/scripting/win_conditions/defeat_all.lua:17
 msgid "The tribe or team that can defeat all others wins the game!"
-msgstr ""
+msgstr "다른 모두를 패배시키는 부족이나 팀이 게임에서 승리합니다!"
 
 #: ../../data/scripting/win_conditions/endless_game.lua:15
 msgid "Endless Game"
-msgstr ""
+msgstr "끝없는 게임"
 
 #: ../../data/scripting/win_conditions/endless_game.lua:17
 msgid "This is an endless game without rules."
-msgstr ""
+msgstr "무규칙의 끝없는 게임입니다."
 
 #: ../../data/scripting/win_conditions/endless_game_fogless.lua:15
 msgid "Endless Game (no fog)"
-msgstr ""
+msgstr "끝없는 게임 (안개 없음)"
 
 #: ../../data/scripting/win_conditions/endless_game_fogless.lua:16
 msgid "This is an endless game without rules. Fog of war is disabled."
-msgstr ""
+msgstr "무규칙의 끝없는 게임입니다. 전장의 안개가 비활성화합니다."
 
 #: ../../data/scripting/win_conditions/territorial_lord.lua:18
 msgid "Territorial Lord"
-msgstr ""
+msgstr "영토 대군주"
 
 #: ../../data/scripting/win_conditions/territorial_lord.lua:21
 msgid ""
 "Each player or team tries to obtain more than half of the map’s area. The "
 "winner will be the player or the team that is able to keep that area for at "
 "least 20 minutes."
-msgstr ""
+msgstr "각각의 플레이어 혹은 팀은 지도 지역의 반 이상을 확보해야 합니다. 승자는 적어도 20분 이상 지역을 사수하는 플레이어 혹은 팀입니다."
 
 #: ../../data/scripting/win_conditions/territorial_lord.lua:156
 #: ../../data/scripting/win_conditions/territorial_time.lua:31
 #, lua-format
 msgid "Team %i"
-msgstr ""
+msgstr "팀 %i"
 
 #: ../../data/scripting/win_conditions/territorial_lord.lua:158
 #: ../../data/scripting/win_conditions/territorial_time.lua:207
 #, lua-format
 msgid "%s owns more than half of the map’s area."
-msgstr ""
+msgstr "%s 이 지도 지역의 반 이상을 소유합니다."
 
 #: ../../data/scripting/win_conditions/territorial_lord.lua:160
 #: ../../data/scripting/win_conditions/territorial_time.lua:209
 #, lua-format
 msgid "You’ve still got %i minute to prevent a victory."
 msgid_plural "You’ve still got %i minutes to prevent a victory."
-msgstr[0] ""
+msgstr[0] "승리까지 아직 %i 분이 남아있습니다."
 
 #: ../../data/scripting/win_conditions/territorial_lord.lua:165
 #: ../../data/scripting/win_conditions/territorial_time.lua:215
 msgid "You own more than half of the map’s area."
-msgstr ""
+msgstr "당신은 지도 지역의 반 이상을 소유합니다."
 
 #: ../../data/scripting/win_conditions/territorial_lord.lua:167
 #: ../../data/scripting/win_conditions/territorial_time.lua:217
 #, lua-format
 msgid "Keep it for %i more minute to win the game."
 msgid_plural "Keep it for %i more minutes to win the game."
-msgstr[0] ""
+msgstr[0] "게임에서 승리하려면 %i 분 이상 사수하십시오."
 
 #: ../../data/scripting/win_conditions/territorial_time.lua:21
 msgid "Territorial Time"
-msgstr ""
+msgstr "영토 시간"
 
 #: ../../data/scripting/win_conditions/territorial_time.lua:24
 msgid ""
@@ -239,15 +240,15 @@ msgid ""
 "winner will be the player or the team that is able to keep that area for at "
 "least 20 minutes, or the one with the most territory after 4 hours, "
 "whichever comes first."
-msgstr ""
+msgstr "각각의 플레이어 혹은 팀은 지도 지역의 반 이상을 확보해야 합니다. 승자는 적어도 20분 이상 지역을 사수하는 조건 , 또는 4시간 뒤에 가장 넓은 지역을 차지하는 조건 중 먼저 달성한 플레이어 혹은 팀입니다."
 
 #: ../../data/scripting/win_conditions/territorial_time.lua:29
 msgid "%1$s has %2$3.0f%% of the land (%3$i of %4$i)."
-msgstr ""
+msgstr "%1$s 이 땅의 %2$3.0f%% 를 소유합니다 (%3$i 중 %4$i)."
 
 #: ../../data/scripting/win_conditions/territorial_time.lua:30
 msgid "%1$s had %2$3.0f%% of the land (%3$i of %4$i)."
-msgstr ""
+msgstr "%1$s 이 땅의 %2$3.0f%% 를 소유했습니다 (%3$i 중 %4$i)."
 
 #. TRANSLATORS: Refers to "You own more than half of the map’s area. Keep it
 #. for x more minute(s) to win the game."
@@ -255,92 +256,92 @@ msgstr ""
 #, lua-format
 msgid "Otherwise the game will end in %i minute."
 msgid_plural "Otherwise the game will end in %i minutes."
-msgstr[0] ""
+msgstr[0] "반면 게임이 %i 분 안에 끝날 예정입니다."
 
 #: ../../data/scripting/win_conditions/territorial_time.lua:238
-#: ../../data/scripting/win_conditions/wood_gnome.lua:87
+#: ../../data/scripting/win_conditions/wood_gnome.lua:93
 #, lua-format
 msgid "The game will end in %i minute."
 msgid_plural "The game will end in %i minutes."
-msgstr[0] ""
+msgstr[0] "게임이 %i 분 안에 끝날 예정입니다."
 
 #: ../../data/scripting/win_conditions/win_condition_texts.lua:4
 msgid "Congratulations!"
-msgstr ""
+msgstr "축하합니다!"
 
 #: ../../data/scripting/win_conditions/win_condition_texts.lua:5
 msgid "You have won this game!"
-msgstr ""
+msgstr "게임에서 승리했습니다!"
 
 #: ../../data/scripting/win_conditions/win_condition_texts.lua:9
 msgid "You are defeated!"
-msgstr ""
+msgstr "패배했습니다!"
 
 #: ../../data/scripting/win_conditions/win_condition_texts.lua:10
 msgid ""
 "You lost your last warehouse and are therefore defeated. You may continue as"
 " spectator if you want."
-msgstr ""
+msgstr "마지막 창고를 손실해서 패배했습니다. 원하신다면 관전자로 계속할 수 있습니다."
 
 #: ../../data/scripting/win_conditions/win_condition_texts.lua:14
 msgid "You won"
-msgstr ""
+msgstr "승리"
 
 #: ../../data/scripting/win_conditions/win_condition_texts.lua:15
 msgid "You are the winner!"
-msgstr ""
+msgstr "당신은 승리자입니다!"
 
 #: ../../data/scripting/win_conditions/win_condition_texts.lua:19
 msgid "You lost"
-msgstr ""
+msgstr "패배"
 
 #: ../../data/scripting/win_conditions/win_condition_texts.lua:20
 msgid "You’ve lost this game!"
-msgstr ""
+msgstr "게임에서 패배했습니다!"
 
 #: ../../data/scripting/win_conditions/win_condition_texts.lua:24
 msgid "Status"
-msgstr ""
+msgstr "상태"
 
 #. TRANSLATORS: This is an overview for all players.
 #: ../../data/scripting/win_conditions/win_condition_texts.lua:26
 msgid "Player overview:"
-msgstr ""
+msgstr "플레이어 총계"
 
 #: ../../data/scripting/win_conditions/wood_gnome.lua:17
 msgid "Wood Gnome"
-msgstr ""
+msgstr "숲 요정"
 
 #: ../../data/scripting/win_conditions/wood_gnome.lua:20
 msgid ""
 "As wood gnome you like big forests, so your task is to have more trees on "
 "your territory than any other player. The game will end after 4 hours of "
 "playing. The one with the most trees at that point will win the game."
-msgstr ""
+msgstr "당신은 숲 요정으로서 큰 숲을 좋아하기에, 다른 플레이어보다 당신의 영토에 더 많은 나무를 보유하는 것이 일입니다. 게임은 플레이 4시간 후에 종료합니다. 종료 시에 가장 많은 나무를 보유한 자가 게임에서 승리합니다."
 
 #: ../../data/scripting/win_conditions/wood_gnome.lua:23
 msgid "Trees owned"
-msgstr ""
+msgstr "보유한 나무"
 
-#: ../../data/scripting/win_conditions/wood_gnome.lua:91
-#: ../../data/scripting/win_conditions/wood_gnome.lua:143
-#: ../../data/scripting/win_conditions/wood_gnome.lua:148
+#: ../../data/scripting/win_conditions/wood_gnome.lua:97
+#: ../../data/scripting/win_conditions/wood_gnome.lua:149
+#: ../../data/scripting/win_conditions/wood_gnome.lua:154
 #, lua-format
 msgid "%i tree"
 msgid_plural "%i trees"
-msgstr[0] ""
+msgstr[0] "%i 나무"
 
 #. TRANSLATORS: %1$s = player name, %2$s = x tree(s)
-#: ../../data/scripting/win_conditions/wood_gnome.lua:94
+#: ../../data/scripting/win_conditions/wood_gnome.lua:100
 msgid "%1$s has %2$s at the moment."
-msgstr ""
-
-#. TRANSLATORS: %1$s = player name, %2$s = x tree(s)
-#: ../../data/scripting/win_conditions/wood_gnome.lua:145
-msgid "%1$s had %2$s."
-msgstr ""
+msgstr "지금 %1$s 이 %2$s 을 보유합니다."
 
 #. TRANSLATORS: %1$s = player name, %2$s = x tree(s)
 #: ../../data/scripting/win_conditions/wood_gnome.lua:151
+msgid "%1$s had %2$s."
+msgstr "%1$s 이 %2$s 을 보유했습니다."
+
+#. TRANSLATORS: %1$s = player name, %2$s = x tree(s)
+#: ../../data/scripting/win_conditions/wood_gnome.lua:157
 msgid "The winner is %1$s with %2$s."
-msgstr ""
+msgstr "승자는 %2$s 을 보유한 %1$s 입니다."
