@@ -48,7 +48,8 @@ public:
 		kEdgeLeftTile,
 		kEdgeRightTile,
 		kEdgeTopTile,
-		kEdgeBottomTile
+		kEdgeBottomTile,
+		kCenter
 	};
 	struct FramesHash {
 		template <typename T> int operator()(T t) const {
@@ -90,10 +91,13 @@ private:
 
 	enum class Tiling { kNone, kHorizontal, kVertical };
 
+	/// Calculate the rect that the image will be blitted to.
+	static Recti calculate_rect(const Image* image, Alignment align, Tiling tiling);
+
 	/**
 	 * Blit an image according to the given 'align'.
 	 * If 'tiling' is set to 'UI::Align::kVertical' or 'UI::Align::kHorizontal', the image will be
-	 * tiled.
+	 * tiled. If the image is bigger than the panel, it will get scaled down.
 	 */
 	void blit_image(RenderTarget& dst,
 	                const Image* image,
@@ -101,10 +105,17 @@ private:
 	                Tiling tiling = Tiling::kNone);
 
 	const std::string background_image_;
+
 	/// These overlay images will be blitted in the order they were added and according to the given
 	/// align.
-	std::vector<std::pair<const Image*, Alignment>> overlays_;
-	/// Images for the edges. They will be blitted in top of the overlays_.
+	struct Overlay {
+		Overlay(const Image* init_image, const FullscreenWindow::Alignment& init_align) : image(init_image), align(init_align) {}
+		const Image* image;
+		const FullscreenWindow::Alignment align;
+	};
+	std::vector<std::unique_ptr<const Overlay>> overlays_;
+
+	/// Images for the edges and the center. Except for the center one, they will be blitted on top of the overlays_.
 	std::unordered_map<FullscreenWindow::Frames, const Image*, FullscreenWindow::FramesHash>
 	   frame_overlays_;
 

@@ -52,8 +52,7 @@ FullscreenWindow::FullscreenWindow()
 	set_frame_image(FullscreenWindow::Frames::kEdgeRightTile, "fsmenu/right.png");
 	set_frame_image(FullscreenWindow::Frames::kEdgeTopTile, "fsmenu/top.png");
 	set_frame_image(FullscreenWindow::Frames::kEdgeBottomTile, "fsmenu/bottom.png");
-	add_overlay_image(kTemplateDir + "fsmenu/center.png",
-	                  FullscreenWindow::Alignment(UI::Align::kCenter, UI::Align::kCenter));
+	set_frame_image(FullscreenWindow::Frames::kCenter, "fsmenu/center.png");
 }
 
 FullscreenWindow::~FullscreenWindow() {
@@ -62,7 +61,7 @@ FullscreenWindow::~FullscreenWindow() {
 }
 
 void FullscreenWindow::add_overlay_image(const std::string& filename, Alignment align) {
-	overlays_.push_back(std::make_pair(g_gr->images().get(filename), align));
+	overlays_.push_back(std::unique_ptr<const Overlay>(new Overlay(g_gr->images().get(filename), align)));
 }
 
 void FullscreenWindow::clear_overlays() {
@@ -88,9 +87,13 @@ void FullscreenWindow::draw(RenderTarget& dst) {
 	// Overall background
 	dst.tile(Recti(0, 0, get_w(), get_h()), g_gr->images().get(background_image_), Vector2i::zero());
 
+	// Center background
+	blit_image(dst, get_frame_image(FullscreenWindow::Frames::kCenter),
+	           FullscreenWindow::Alignment(UI::Align::kCenter, UI::Align::kCenter));
+
 	// Optional overlays
 	for (const auto& overlay : overlays_) {
-		blit_image(dst, overlay.first, overlay.second);
+		blit_image(dst, overlay->image, overlay->align);
 	}
 
 	// Frame edges
@@ -114,54 +117,60 @@ void FullscreenWindow::draw(RenderTarget& dst) {
 	           FullscreenWindow::Alignment(UI::Align::kRight, UI::Align::kBottom));
 }
 
+Recti FullscreenWindow::calculate_rect(const Image* image, Alignment align, Tiling tiling) {
+	int x = 0;
+	int y = 0;
+	int w = image->width();
+	int h = image->height();
+	const int available_width = g_gr->get_xres();
+	const int available_height = g_gr->get_yres();
+
+	if (tiling != Tiling::kNone) {
+		w = (tiling == Tiling::kVertical) ? w : available_width;
+		h = (tiling == Tiling::kHorizontal) ? h : available_height;
+	} else {
+		const float scale =
+		   std::min(1.f, std::max(static_cast<float>(available_width) / image->width(), static_cast<float>(available_height) / image->height()));
+		w = scale * image->width();
+		h = scale * image->height();
+	}
+
+	// Adjust horizontal alignment
+	switch (align.halign) {
+	case UI::Align::kRight:
+		x = available_width - w;
+		break;
+	case UI::Align::kCenter:
+		x = (available_width - w) / 2;
+		break;
+	case UI::Align::kLeft:
+		break;
+	}
+
+	// Adjust vertical alignment
+	switch (align.valign) {
+	case UI::Align::kBottom:
+		y = available_height - h;
+		break;
+	case UI::Align::kCenter:
+		y = (available_height - h) / 2;
+		break;
+	case UI::Align::kTop:
+		break;
+	}
+	return Recti(x, y, w, h);
+}
+
 void FullscreenWindow::blit_image(RenderTarget& dst,
                                   const Image* image,
                                   Alignment align,
                                   Tiling tiling) {
 	if (image) {
-		int x = 0;
-		int y = 0;
-		int w = image->width();
-		int h = image->height();
-
+		const Recti dest = FullscreenWindow::calculate_rect(image, align, tiling);
 		if (tiling != Tiling::kNone) {
-			w = (tiling == Tiling::kVertical) ? w : get_w();
-			h = (tiling == Tiling::kHorizontal) ? h : get_h();
+			dst.tile(dest, image, Vector2i::zero());
 		} else {
-			const float scale =
-			   std::min(1.f, std::max<float>(get_w() / image->width(), get_h() / image->height()));
-			w = scale * image->width();
-			h = scale * image->height();
-		}
-
-		// Adjust horizontal alignment
-		switch (align.halign) {
-		case UI::Align::kRight:
-			x = get_w() - w;
-			break;
-		case UI::Align::kCenter:
-			x = (get_w() - w) / 2;
-			break;
-		case UI::Align::kLeft:
-			break;
-		}
-
-		// Adjust vertical alignment
-		switch (align.valign) {
-		case UI::Align::kBottom:
-			y = get_h() - h;
-			break;
-		case UI::Align::kCenter:
-			y = (get_h() - h) / 2;
-			break;
-		case UI::Align::kTop:
-			break;
-		}
-
-		if (tiling != Tiling::kNone) {
-			dst.tile(Recti(x, y, w, h), image, Vector2i::zero());
-		} else {
-			dst.blitrect_scale(Rectf(x, y, w, h), image, Recti(0, 0, image->width(), image->height()),
+			dst.blitrect_scale(dest.cast<float>(), image, Recti(0, 0, image->width(), image->height()),
 			                   1., BlendMode::UseAlpha);
 		}
 	}
