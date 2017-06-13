@@ -11,9 +11,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-05-18 21:30+0000\n"
-"PO-Revision-Date: 2017-05-18 21:32+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2017-05-19 07:45+0000\n"
+"PO-Revision-Date: 2017-05-21 05:51+0000\n"
+"Last-Translator: Jukka Pakarinen\n"
 "Language-Team: Finnish (http://www.transifex.com/widelands/widelands/language/fi/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -142,7 +142,7 @@ msgstr "Etuvartio Maanpakoon"
 
 #: ../../data/campaigns/campaigns.conf:88
 msgid "Neptune’s Revenge"
-msgstr ""
+msgstr "Neptunuksen Kosto"
 
 #: ../../data/campaigns/campaigns.conf:93
 #: ../../data/campaigns/campaigns.conf:105
@@ -179,7 +179,7 @@ msgstr "Lopulta laiva korjattiin, joten Lutius ja hänen kansansa palasivat etsi
 msgid ""
 "On their way home to defend the Empire, the crew of Lutius was surprised by "
 "the will of the gods."
-msgstr ""
+msgstr "Matkalla kotiin puolustamaan Keisarikuntaa, Lutiuksen miehistö yllättyi jumalien tahdosta."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/elemental:8
 #: ../../data/campaigns/tutorials.conf:15

@@ -4,8 +4,9 @@
 
 #include "base/log.h"
 
-std::unique_ptr<NetClient> NetClient::connect(const std::string& ip_address, const uint16_t port) {
-	std::unique_ptr<NetClient> ptr(new NetClient(ip_address, port));
+std::unique_ptr<NetClient> NetClient::connect(const NetAddress& host) {
+
+	std::unique_ptr<NetClient> ptr(new NetClient(host));
 	if (ptr->is_connected()) {
 		return ptr;
 	} else {
@@ -17,63 +18,82 @@ std::unique_ptr<NetClient> NetClient::connect(const std::string& ip_address, con
 NetClient::~NetClient() {
 	if (is_connected())
 		close();
-	if (sockset_ != nullptr)
-		SDLNet_FreeSocketSet(sockset_);
 }
 
 bool NetClient::is_connected() const {
-	return sock_ != nullptr;
+	return socket_.is_open();
 }
 
 void NetClient::close() {
 	if (!is_connected())
 		return;
-	SDLNet_TCP_DelSocket(sockset_, sock_);
-	SDLNet_TCP_Close(sock_);
-	sock_ = nullptr;
+	boost::system::error_code ec;
+	boost::asio::ip::tcp::endpoint remote = socket_.remote_endpoint(ec);
+	if (!ec) {
+		log("[NetClient] Closing network socket connected to %s:%i.\n",
+		    remote.address().to_string().c_str(), remote.port());
+	} else {
+		log("[NetClient] Closing network socket.\n");
+	}
+	socket_.shutdown(boost::asio::ip::tcp::socket::shutdown_both, ec);
+	socket_.close(ec);
 }
 
 bool NetClient::try_receive(RecvPacket* packet) {
 	if (!is_connected())
 		return false;
 
-	uint8_t buffer[512];
-	while (SDLNet_CheckSockets(sockset_, 0) > 0) {
+	uint8_t buffer[kNetworkBufferSize];
+	boost::system::error_code ec;
+	size_t length = socket_.read_some(boost::asio::buffer(buffer, kNetworkBufferSize), ec);
+	if (!ec) {
+		assert(length > 0);
+		assert(length <= kNetworkBufferSize);
+		// Has read something
+		deserializer_.read_data(buffer, length);
+	}
 
-		const int32_t bytes = SDLNet_TCP_Recv(sock_, buffer, sizeof(buffer));
-		if (bytes <= 0) {
-			// Error while receiving
-			close();
-			return false;
-		}
-
-		deserializer_.read_data(buffer, bytes);
+	if (ec && ec != boost::asio::error::would_block) {
+		// Connection closed or some error, close the socket
+		log("[NetClient] Error when trying to receive some data: %s.\n", ec.message().c_str());
+		close();
+		return false;
 	}
 	// Get one packet from the deserializer
 	return deserializer_.write_packet(packet);
 }
 
 void NetClient::send(const SendPacket& packet) {
-	if (is_connected()) {
-		SDLNet_TCP_Send(sock_, packet.get_data(), packet.get_size());
+	if (!is_connected())
+		return;
+
+	boost::system::error_code ec;
+	size_t written =
+	   boost::asio::write(socket_, boost::asio::buffer(packet.get_data(), packet.get_size()), ec);
+	// TODO(Notabilis): This one is an assertion of mine, I am not sure if it will hold
+	// If it doesn't, set the socket to blocking before writing
+	// If it does, remove this comment after build 20
+	assert(ec != boost::asio::error::would_block);
+	assert(written == packet.get_size() || ec);
+	if (ec) {
+		log("[NetClient] Error when trying to send some data: %s.\n", ec.message().c_str());
+		close();
 	}
 }
 
-NetClient::NetClient(const std::string& ip_address, const uint16_t port)
-   : sock_(nullptr), sockset_(nullptr), deserializer_() {
+NetClient::NetClient(const NetAddress& host)
+   : io_service_(), socket_(io_service_), deserializer_() {
 
-	IPaddress addr;
-	if (SDLNet_ResolveHost(&addr, ip_address.c_str(), port) != 0) {
-		log("[Client]: Failed to resolve host address %s:%u.\n", ip_address.c_str(), port);
-		return;
-	}
-	log("[Client]: Trying to connect to %s:%u ... ", ip_address.c_str(), port);
-	sock_ = SDLNet_TCP_Open(&addr);
-	if (is_connected()) {
-		log("success\n");
-		sockset_ = SDLNet_AllocSocketSet(1);
-		SDLNet_TCP_AddSocket(sockset_, sock_);
+	assert(host.is_valid());
+	const boost::asio::ip::tcp::endpoint destination(host.ip, host.port);
+
+	log("[NetClient]: Trying to connect to %s:%u ... ", host.ip.to_string().c_str(), host.port);
+	boost::system::error_code ec;
+	socket_.connect(destination, ec);
+	if (!ec && is_connected()) {
+		log("success.\n");
+		socket_.non_blocking(true);
 	} else {
-		log("failed\n");
+		log("failed.\n");
 	}
 }

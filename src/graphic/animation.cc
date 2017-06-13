@@ -41,9 +41,8 @@
 #include "sound/note_sound.h"
 #include "sound/sound_handler.h"
 
-using namespace std;
-
 namespace {
+
 // Parses an array { 12, 23 } into a point.
 void get_point(const LuaTable& table, Vector2i* p) {
 	std::vector<int> pts = table.array_entries<int>();
@@ -97,13 +96,13 @@ private:
 	std::vector<std::string> pc_mask_image_files_;
 	float scale_;
 
-	vector<const Image*> frames_;
-	vector<const Image*> pcmasks_;
+	std::vector<const Image*> frames_;
+	std::vector<const Image*> pcmasks_;
 
 	// name of sound effect that will be played at frame 0.
 	// TODO(sirver): this should be done using play_sound in a program instead of
 	// binding it to the animation.
-	string sound_effect_;
+	std::string sound_effect_;
 	bool play_once_;
 };
 
