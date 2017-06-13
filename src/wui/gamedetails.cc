@@ -216,19 +216,12 @@ void GameDetails::layout() {
 	} else {
 		descr_.set_scrollmode(UI::MultilineTextarea::ScrollMode::kNoScrolling);
 
-		// Scale the minimap image.
+		// Downscale the minimap image
 		const float available_width = get_w() - 4 * padding_;
 		const float available_height =
 		   get_h() - name_label_.get_h() - descr_.get_h() - button_box_->get_h() - 4 * padding_;
 
-		// Scale it
-		float scale = available_width / minimap_image_->width();
-		const float scale_y = available_height / minimap_image_->height();
-		if (scale_y < scale) {
-			scale = scale_y;
-		}
-		// Don't make the image too big; fuzziness will result
-		scale = std::min(1.f, scale);
+		const float scale = std::min(1.f, std::min<float>(available_width / minimap_image_->width(), available_height / minimap_image_->height()));
 
 		const int w = scale * minimap_image_->width();
 		const int h = scale * minimap_image_->height();
