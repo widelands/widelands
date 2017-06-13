@@ -95,13 +95,13 @@ void FullscreenWindow::draw(RenderTarget& dst) {
 
 	// Frame edges
 	blit_image(dst, get_frame_image(FullscreenWindow::Frames::kEdgeLeftTile),
-	           Alignment(UI::Align::kLeft, UI::Align::kTop), kVertical);
+	           Alignment(UI::Align::kLeft, UI::Align::kTop), Tiling::kVertical);
 	blit_image(dst, get_frame_image(FullscreenWindow::Frames::kEdgeRightTile),
-	           Alignment(UI::Align::kRight, UI::Align::kTop), kVertical);
+	           Alignment(UI::Align::kRight, UI::Align::kTop), Tiling::kVertical);
 	blit_image(dst, get_frame_image(FullscreenWindow::Frames::kEdgeTopTile),
-	           Alignment(UI::Align::kLeft, UI::Align::kTop), kHorizontal);
+	           Alignment(UI::Align::kLeft, UI::Align::kTop), Tiling::kHorizontal);
 	blit_image(dst, get_frame_image(FullscreenWindow::Frames::kEdgeBottomTile),
-	           Alignment(UI::Align::kLeft, UI::Align::kBottom), kHorizontal);
+	           Alignment(UI::Align::kLeft, UI::Align::kBottom), Tiling::kHorizontal);
 
 	// Frame corners
 	blit_image(dst, get_frame_image(FullscreenWindow::Frames::kCornerTopLeft),
@@ -121,13 +121,26 @@ void FullscreenWindow::blit_image(RenderTarget& dst,
 	if (image) {
 		int x = 0;
 		int y = 0;
+		int w = image->width();
+		int h = image->height();
+
+		if (tiling != Tiling::kNone) {
+			w = (tiling == Tiling::kVertical) ? w : get_w();
+			h = (tiling == Tiling::kHorizontal) ? h : get_h();
+		} else {
+			const float scale =
+			   std::min(1.f, std::max<float>(get_w() / image->width(), get_h() / image->height()));
+			w = scale * image->width();
+			h = scale * image->height();
+		}
+
 		// Adjust horizontal alignment
 		switch (align.halign) {
 		case UI::Align::kRight:
-			x = get_w() - image->width();
+			x = get_w() - w;
 			break;
 		case UI::Align::kCenter:
-			x = (get_w() - image->width()) / 2;
+			x = (get_w() - w) / 2;
 			break;
 		case UI::Align::kLeft:
 			break;
@@ -136,21 +149,20 @@ void FullscreenWindow::blit_image(RenderTarget& dst,
 		// Adjust vertical alignment
 		switch (align.valign) {
 		case UI::Align::kBottom:
-			y = get_h() - image->height();
+			y = get_h() - h;
 			break;
 		case UI::Align::kCenter:
-			y = (get_h() - image->height()) / 2;
+			y = (get_h() - h) / 2;
 			break;
 		case UI::Align::kTop:
 			break;
 		}
 
-		if (tiling != kNone) {
-			const int w = (tiling == kVertical) ? image->width() : get_w();
-			const int h = (tiling == kHorizontal) ? image->height() : get_h();
+		if (tiling != Tiling::kNone) {
 			dst.tile(Recti(x, y, w, h), image, Vector2i::zero());
 		} else {
-			dst.blit(Vector2i(x, y), image);
+			dst.blitrect_scale(Rectf(x, y, w, h), image, Recti(0, 0, image->width(), image->height()),
+			                   1., BlendMode::UseAlpha);
 		}
 	}
 }
