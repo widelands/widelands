@@ -464,22 +464,24 @@ void MapObject::do_draw_info(const InfoToDraw& info_to_draw,
 	}
 
 	// Rendering text is expensive, so let's just do it for only a few sizes.
-	// The forumla is a bit fancy to avoid too much text overlap.
-	scale = std::round(2.f * (scale > 1.f ? std::sqrt(scale) : std::pow(scale, 2.f))) / 2.f;
-	if (scale < 1.f) {
-		return;
-	}
-	const int font_size = scale * UI_FONT_SIZE_SMALL;
+	const float granularity = 4.f;
+	float text_scale = scale;
+	// The formula is a bit fancy to avoid too much text overlap.
+	text_scale = std::round(granularity * (text_scale > 1.f ? std::sqrt(text_scale) : std::pow(text_scale, 2.f))) / granularity;
+	text_scale = std::max(0.5f, text_scale); // Keep it legible
+
+	const int font_size = static_cast<int>(std::round(text_scale * UI_FONT_SIZE_SMALL));
 
 	// We always render this so we can have a stable position for the statistics string.
 	std::shared_ptr<const UI::RenderedText> rendered_census =
-	   UI::g_fh1->render(as_condensed(census, UI::Align::kCenter, font_size), 120 * scale);
+	   UI::g_fh1->render(as_condensed(census, UI::Align::kCenter, font_size), 120 * text_scale);
 	Vector2i position = field_on_dst.cast<int>() - Vector2i(0, 48) * scale;
 	if (info_to_draw & InfoToDraw::kCensus) {
 		rendered_census->draw(*dst, position, UI::Align::kCenter);
 	}
 
-	if (info_to_draw & InfoToDraw::kStatistics && !statictics.empty()) {
+	// Draw staistics if we want them, they are available and they fill fit
+	if (info_to_draw & InfoToDraw::kStatistics && !statictics.empty() && scale >= 0.5f) {
 		std::shared_ptr<const UI::RenderedText> rendered_statistics =
 		   UI::g_fh1->render(as_condensed(statictics, UI::Align::kCenter, font_size));
 		position.y += rendered_census->height() + text_height(font_size) / 4;

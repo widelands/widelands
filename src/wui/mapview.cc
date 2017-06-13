@@ -394,13 +394,13 @@ void MapView::draw(RenderTarget& dst) {
 
 	InfoToDraw info_to_draw = InfoToDraw::kNone;
 	auto display_flags = intbase().get_display_flags();
-	if (display_flags & InteractiveBase::dfShowCensus) {
+	if (display_flags & InteractiveBase::dfShowCensus && view_plans_.empty()) {
 		info_to_draw = info_to_draw | InfoToDraw::kCensus;
 	}
-	if (display_flags & InteractiveBase::dfShowStatistics) {
+	if (display_flags & InteractiveBase::dfShowStatistics && view_plans_.empty()) {
 		info_to_draw = info_to_draw | InfoToDraw::kStatistics;
 	}
-	if (display_flags & InteractiveBase::dfShowSoldierLevels) {
+	if (display_flags & InteractiveBase::dfShowSoldierLevels && view_plans_.empty()) {
 		info_to_draw = info_to_draw | InfoToDraw::kSoldierLevels;
 	}
 

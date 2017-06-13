@@ -472,11 +472,8 @@ void Soldier::draw_info_icon(Vector2i draw_position,
 	}
 
 	// Since the graphics below are all pixel perfect and scaling them as floats
-	// looks weird, we round to the nearest fullest integer.
-	scale = std::round(scale);
-	if (scale == 0.f) {
-		return;
-	}
+	// looks weird, we round to the nearest fullest integer. We do allow half size though.
+	scale = std::max(0.5f, std::round(scale));
 
 #ifndef NDEBUG
 	{
