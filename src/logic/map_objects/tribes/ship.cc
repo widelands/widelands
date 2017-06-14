@@ -275,7 +275,7 @@ void Ship::ship_update(Game& game, Bob::State& state) {
 			return;
 		}
 		log("Oh no... this ship has no sinking animation :(!\n");
-		FALLTHROUGH();
+		FALLTHROUGH
 	case ShipStates::kSinkAnimation:
 		// The sink animation has been played, so finally remove the ship from the map
 		pop_task(game);
@@ -685,7 +685,7 @@ void Ship::ship_update_idle(Game& game, Bob::State& state) {
 			return start_task_idle(game, descr().main_animation(), 1500);
 		}
 	}
-		FALLTHROUGH();
+		FALLTHROUGH
 	case ShipStates::kExpeditionWaiting:
 	case ShipStates::kExpeditionPortspaceFound:
 	case ShipStates::kSinkRequest:

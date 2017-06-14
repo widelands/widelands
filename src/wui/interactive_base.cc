@@ -757,7 +757,7 @@ bool InteractiveBase::handle_key(bool const down, SDL_Keysym const code) {
 			if (code.mod & KMOD_NUM) {
 				break;
 			}
-			FALLTHROUGH();
+			FALLTHROUGH
 		case SDLK_PAGEUP:
 			if (upcast(Game, game, &egbase_)) {
 				if (GameController* const ctrl = game->game_controller()) {
@@ -778,7 +778,7 @@ bool InteractiveBase::handle_key(bool const down, SDL_Keysym const code) {
 			if (code.mod & KMOD_NUM) {
 				break;
 			}
-			FALLTHROUGH();
+			FALLTHROUGH
 		case SDLK_PAGEDOWN:
 			if (upcast(Widelands::Game, game, &egbase_)) {
 				if (GameController* const ctrl = game->game_controller()) {

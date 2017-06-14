@@ -33,7 +33,7 @@ template <> bool MapFringeRegion<Area<FCoords>>::advance(const Map& map) {
 		} else {
 			return false;
 		}
-		FALLTHROUGH();
+		FALLTHROUGH
 	case 1:
 		map.get_trn(area_, &area_);
 		break;
@@ -73,7 +73,7 @@ template <> bool MapFringeRegion<Area<>>::advance(const Map& map) {
 		} else {
 			return false;
 		}
-		FALLTHROUGH();
+		FALLTHROUGH
 	case 1:
 		map.get_trn(area_, &area_);
 		break;

@@ -240,7 +240,7 @@ bool MultilineEditbox::handle_key(bool const down, SDL_Keysym const code) {
 			if (code.mod & KMOD_NUM) {
 				break;
 			}
-			FALLTHROUGH();
+			FALLTHROUGH
 		case SDLK_DELETE:
 			if (d_->cursor_pos < d_->text.size()) {
 				d_->erase_bytes(d_->cursor_pos, d_->next_char(d_->cursor_pos));
@@ -259,7 +259,7 @@ bool MultilineEditbox::handle_key(bool const down, SDL_Keysym const code) {
 			if (code.mod & KMOD_NUM) {
 				break;
 			}
-			FALLTHROUGH();
+			FALLTHROUGH
 		case SDLK_LEFT: {
 			if (code.mod & (KMOD_LCTRL | KMOD_RCTRL)) {
 				uint32_t newpos = d_->prev_char(d_->cursor_pos);
@@ -282,7 +282,7 @@ bool MultilineEditbox::handle_key(bool const down, SDL_Keysym const code) {
 			if (code.mod & KMOD_NUM) {
 				break;
 			}
-			FALLTHROUGH();
+			FALLTHROUGH
 		case SDLK_RIGHT:
 			if (code.mod & (KMOD_LCTRL | KMOD_RCTRL)) {
 				uint32_t newpos = d_->next_char(d_->cursor_pos);
@@ -300,7 +300,7 @@ bool MultilineEditbox::handle_key(bool const down, SDL_Keysym const code) {
 			if (code.mod & KMOD_NUM) {
 				break;
 			}
-			FALLTHROUGH();
+			FALLTHROUGH
 		case SDLK_DOWN:
 			if (d_->cursor_pos < d_->text.size()) {
 				d_->refresh_ww();
@@ -329,7 +329,7 @@ bool MultilineEditbox::handle_key(bool const down, SDL_Keysym const code) {
 			if (code.mod & KMOD_NUM) {
 				break;
 			}
-			FALLTHROUGH();
+			FALLTHROUGH
 		case SDLK_UP:
 			if (d_->cursor_pos > 0) {
 				d_->refresh_ww();
@@ -356,7 +356,7 @@ bool MultilineEditbox::handle_key(bool const down, SDL_Keysym const code) {
 			if (code.mod & KMOD_NUM) {
 				break;
 			}
-			FALLTHROUGH();
+			FALLTHROUGH
 		case SDLK_HOME:
 			if (code.mod & (KMOD_LCTRL | KMOD_RCTRL)) {
 				d_->set_cursor_pos(0);
@@ -374,7 +374,7 @@ bool MultilineEditbox::handle_key(bool const down, SDL_Keysym const code) {
 			if (code.mod & KMOD_NUM) {
 				break;
 			}
-			FALLTHROUGH();
+			FALLTHROUGH
 		case SDLK_END:
 			if (code.mod & (KMOD_LCTRL | KMOD_RCTRL)) {
 				d_->set_cursor_pos(d_->text.size());

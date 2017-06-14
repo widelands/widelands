@@ -986,7 +986,7 @@ ImmovableProgram::ActSeed::ActSeed(char* parameters, ImmovableDescr& descr) {
 				probability = value;
 				//  fallthrough
 			}
-			FALLTHROUGH();
+			FALLTHROUGH
 			case '\0':
 				goto end;
 			default:
