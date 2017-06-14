@@ -357,7 +357,7 @@ void InteractiveBase::draw_overlay(RenderTarget& dst) {
 		if (cur_fps > 15) {
 			speed_diff = +100;
 			}
-		if (false && speed_diff != 0) {
+		if (speed_diff != 0) { //NOCOM this has to be reverted to the state in trunk
 			
 			if (GameController* const ctrl = game->game_controller()) {
 				//printf ("desired speed: %d, current fps: %d\n", ctrl->desired_speed(), cur_fps);

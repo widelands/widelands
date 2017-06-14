@@ -452,8 +452,8 @@ void DefaultAI::think() {
 					}
 				};
 				if (!enemy_warehouses.empty())
-					printf("Conquered warehouses: %d / %lu\n", conquered_wh, enemy_warehouses.size());
-				management_data.review(gametime, player_number(),
+                    log("Conquered warehouses: %d / %lu\n", conquered_wh, enemy_warehouses.size()); 
+                    management_data.review(gametime, player_number(),
 				                       player_statistics.get_player_land(player_number()),
 				                       player_statistics.get_enemies_max_land(),
 				                       player_statistics.get_old60_player_land(player_number()),
@@ -558,7 +558,7 @@ void DefaultAI::late_initialization() {
 		}
 
 		if (kAITrainingMode) {
-			printf("%2d: reinitializing dna (kReinitializeOnLoad set ON)", player_number());
+			printf("%2d: reinitializing dna (kAITrainingMode set true)", player_number());
 			management_data.new_dna_for_persistent(player_number(), type_);
 			management_data.copy_persistent_to_local(player_number());
 			management_data.mutate(player_number());
@@ -572,7 +572,7 @@ void DefaultAI::late_initialization() {
 
 		printf(" %2d: %lu basic buildings in savegame file. %s\n",
 		       player_number(), persistent_data->remaining_basic_buildings.size(),
-               (create_basic_buildings_list)? "List will be recreated though" : "");
+               (create_basic_buildings_list)? "New list will be recreated though (kAITrainingMode is true)" : "");
 
 	} else {
 		throw wexception("Corrupted AI data");

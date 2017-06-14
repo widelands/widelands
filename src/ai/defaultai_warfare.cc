@@ -18,7 +18,6 @@
  */
 
 #include "ai/defaultai.h"
-//#include "ai/tmp_constants.h" //Import decreasor should be removed
 
 using namespace Widelands;
 
