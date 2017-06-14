@@ -68,7 +68,6 @@ BuildingWindow::~BuildingWindow() {
 
 void BuildingWindow::on_building_note(const Widelands::NoteBuilding& note) {
 	if (note.serial == building_.serial()) {
-		GCC7_DIAG_OFF("-Wimplicit-fallthrough")
 		switch (note.action) {
 		// The building's state has changed
 		case Widelands::NoteBuilding::Action::kChanged:
@@ -79,7 +78,7 @@ void BuildingWindow::on_building_note(const Widelands::NoteBuilding& note) {
 		// The building is no more
 		case Widelands::NoteBuilding::Action::kStartWarp:
 			igbase()->add_wanted_building_window(building().get_position(), get_pos(), is_minimal());
-		// Fallthrough intended
+		FALLTHROUGH();
 		case Widelands::NoteBuilding::Action::kDeleted:
 			// Stop everybody from thinking to avoid segfaults
 			is_dying_ = true;
@@ -90,7 +89,6 @@ void BuildingWindow::on_building_note(const Widelands::NoteBuilding& note) {
 		default:
 			break;
 		}
-		GCC7_DIAG_ON("-Wimplicit-fallthrough")
 	}
 }
 

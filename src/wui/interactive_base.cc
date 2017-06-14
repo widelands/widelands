@@ -752,12 +752,12 @@ bool InteractiveBase::handle_key(bool const down, SDL_Keysym const code) {
 		return true;
 
 	if (down) {
-		GCC7_DIAG_OFF("-Wimplicit-fallthrough")
 		switch (code.sym) {
 		case SDLK_KP_9:
-			if (code.mod & KMOD_NUM)
+			if (code.mod & KMOD_NUM) {
 				break;
-		/* no break */
+			}
+			FALLTHROUGH();
 		case SDLK_PAGEUP:
 			if (upcast(Game, game, &egbase_)) {
 				if (GameController* const ctrl = game->game_controller()) {
@@ -775,9 +775,10 @@ bool InteractiveBase::handle_key(bool const down, SDL_Keysym const code) {
 			return true;
 
 		case SDLK_KP_3:
-			if (code.mod & KMOD_NUM)
+			if (code.mod & KMOD_NUM) {
 				break;
-		/* no break */
+			}
+			FALLTHROUGH();
 		case SDLK_PAGEDOWN:
 			if (upcast(Widelands::Game, game, &egbase_)) {
 				if (GameController* const ctrl = game->game_controller()) {
@@ -795,7 +796,6 @@ bool InteractiveBase::handle_key(bool const down, SDL_Keysym const code) {
 		default:
 			break;
 		}
-		GCC7_DIAG_ON("-Wimplicit-fallthrough")
 	}
 
 	return MapView::handle_key(down, code);

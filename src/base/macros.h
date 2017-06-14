@@ -44,20 +44,6 @@
 #define GCC_DIAG_ON(x)
 #endif
 
-/* Macros for disabling GCC 7 warnings and errors only, for flags not available in previous versions
- * of GCC */
-#if __GNUC__ >= 7
-#define GCC7_DIAG_DO_PRAGMA(x) _Pragma(#x)
-#define GCC7_DIAG_PRAGMA(x) GCC7_DIAG_DO_PRAGMA(GCC diagnostic x)
-#define GCC7_DIAG_OFF(x)                                                                            \
-	GCC7_DIAG_PRAGMA(push)                                                                           \
-	GCC7_DIAG_PRAGMA(ignored x)
-#define GCC7_DIAG_ON(x) GCC7_DIAG_PRAGMA(pop)
-#else
-#define GCC7_DIAG_ON(x) // Do nothing
-#define GCC7_DIAG_OFF(x) // Do nothing
-#endif
-
 /* Macros for disabling Clang warnings and errors
  * From https://svn.boost.org/trac/boost/wiki/Guidelines/WarningsGuidelines and
  * slightly modified.
@@ -80,6 +66,10 @@
 
 #define DIAG_OFF(x) GCC_DIAG_OFF(x) CLANG_DIAG_OFF(x)
 #define DIAG_ON(x) GCC_DIAG_ON(x) CLANG_DIAG_ON(x)
+
+// For switch statements: Tell gcc7 that a fallthrough is intended
+// https://developers.redhat.com/blog/2017/03/10/wimplicit-fallthrough-in-gcc-7/
+#define FALLTHROUGH() [[gnu::fallthrough]]
 
 // disallow copying or assigning a class
 #define DISALLOW_COPY_AND_ASSIGN(TypeName)                                                         \

@@ -507,12 +507,12 @@ bool BaseListselect::handle_mousemove(uint8_t, int32_t, int32_t y, int32_t, int3
 bool BaseListselect::handle_key(bool const down, SDL_Keysym const code) {
 	if (down) {
 		uint32_t selected_idx;
-		GCC7_DIAG_OFF("-Wimplicit-fallthrough")
 		switch (code.sym) {
 		case SDLK_KP_2:
-			if (code.mod & KMOD_NUM)
+			if (code.mod & KMOD_NUM) {
 				break;
-		/* no break */
+			}
+			FALLTHROUGH();
 		case SDLK_DOWN:
 			selected_idx = selection_index() + 1;
 			if (selected_idx < size())
@@ -524,9 +524,10 @@ bool BaseListselect::handle_key(bool const down, SDL_Keysym const code) {
 			}
 			return true;
 		case SDLK_KP_8:
-			if (code.mod & KMOD_NUM)
+			if (code.mod & KMOD_NUM) {
 				break;
-		/* no break */
+			}
+			FALLTHROUGH();
 		case SDLK_UP:
 			selected_idx = selection_index();
 			if (selected_idx > 0)
@@ -539,7 +540,6 @@ bool BaseListselect::handle_key(bool const down, SDL_Keysym const code) {
 		default:
 			break;  // not handled
 		}
-		GCC7_DIAG_ON("-Wimplicit-fallthrough")
 	}
 
 	return UI::Panel::handle_key(down, code);

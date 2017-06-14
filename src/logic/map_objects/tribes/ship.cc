@@ -256,7 +256,6 @@ void Ship::ship_update(Game& game, Bob::State& state) {
 		}
 	}
 
-	GCC7_DIAG_OFF("-Wimplicit-fallthrough")
 	switch (ship_state_) {
 	case ShipStates::kTransport:
 		if (ship_update_transport(game, state))
@@ -276,15 +275,13 @@ void Ship::ship_update(Game& game, Bob::State& state) {
 			return;
 		}
 		log("Oh no... this ship has no sinking animation :(!\n");
-	// fall trough
+		FALLTHROUGH();
 	case ShipStates::kSinkAnimation:
 		// The sink animation has been played, so finally remove the ship from the map
 		pop_task(game);
 		remove(game);
 		return;
 	}
-	GCC7_DIAG_ON("-Wimplicit-fallthrough")
-
 	// if the real update function failed (e.g. nothing to transport), the ship goes idle
 	ship_update_idle(game, state);
 }
@@ -441,7 +438,6 @@ void Ship::ship_update_idle(Game& game, Bob::State& state) {
 
 	// If we are waiting for the next transport job, check if we should move away from ships and
 	// shores
-	GCC7_DIAG_OFF("-Wimplicit-fallthrough")
 	switch (ship_state_) {
 	case ShipStates::kTransport: {
 		FCoords position = get_position();
@@ -689,7 +685,6 @@ void Ship::ship_update_idle(Game& game, Bob::State& state) {
 			return start_task_idle(game, descr().main_animation(), 1500);
 		}
 	}
-
 	case ShipStates::kExpeditionWaiting:
 	case ShipStates::kExpeditionPortspaceFound:
 	case ShipStates::kSinkRequest:
@@ -699,7 +694,6 @@ void Ship::ship_update_idle(Game& game, Bob::State& state) {
 		return;
 	}
 	}
-	GCC7_DIAG_ON("-Wimplicit-fallthrough")
 	NEVER_HERE();
 }
 

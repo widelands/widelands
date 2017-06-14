@@ -249,7 +249,6 @@ void ProductionProgram::parse_ware_type_group(char*& parameters,
 			                    tribes.get_ware_descr(group.first.begin()->first)->name().c_str());
 		last_insert_pos = group.first.insert(last_insert_pos, std::make_pair(ware_index, type));
 		*parameters = terminator;
-		GCC7_DIAG_OFF("-Wimplicit-fallthrough")
 		switch (terminator) {
 		case ':': {
 			++parameters;
@@ -264,9 +263,8 @@ void ProductionProgram::parse_ware_type_group(char*& parameters,
 				                    "the specified ware type(s) is only %u, so the group can "
 				                    "never be fulfilled by the site",
 				                    count, count_max);
-			//  fallthrough
 		}
-		/* no break */
+		FALLTHROUGH();
 		case '\0':
 		case ' ':
 			group.second = count;
@@ -278,7 +276,6 @@ void ProductionProgram::parse_ware_type_group(char*& parameters,
 			// scan for terminator should ensure that this cannot happen
 			NEVER_HERE();
 		}
-		GCC7_DIAG_ON("-Wimplicit-fallthrough")
 	}
 }
 

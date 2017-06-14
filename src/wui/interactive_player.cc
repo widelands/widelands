@@ -225,7 +225,6 @@ void InteractivePlayer::node_action() {
 */
 bool InteractivePlayer::handle_key(bool const down, SDL_Keysym const code) {
 	if (down) {
-		GCC7_DIAG_OFF("-Wimplicit-fallthrough")
 		switch (code.sym) {
 		case SDLK_SPACE:
 			toggle_buildhelp();
@@ -273,7 +272,7 @@ bool InteractivePlayer::handle_key(bool const down, SDL_Keysym const code) {
 		case SDLK_KP_7:
 			if (code.mod & KMOD_NUM)
 				break;
-		/* no break */
+		FALLTHROUGH();
 		case SDLK_HOME:
 			scroll_to_field(game().map().get_starting_pos(player_number_), Transition::Smooth);
 			return true;
@@ -290,7 +289,6 @@ bool InteractivePlayer::handle_key(bool const down, SDL_Keysym const code) {
 		default:
 			break;
 		}
-		GCC7_DIAG_ON("-Wimplicit-fallthrough")
 	}
 
 	return InteractiveGameBase::handle_key(down, code);

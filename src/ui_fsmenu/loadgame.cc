@@ -676,19 +676,18 @@ bool FullscreenMenuLoadGame::handle_key(bool down, SDL_Keysym code) {
 	if (!down)
 		return false;
 
-	GCC7_DIAG_OFF("-Wimplicit-fallthrough")
 	switch (code.sym) {
 	case SDLK_KP_PERIOD:
-		if (code.mod & KMOD_NUM)
+		if (code.mod & KMOD_NUM) {
 			break;
-	/* no break */
+		}
+		FALLTHROUGH();
 	case SDLK_DELETE:
 		clicked_delete();
 		return true;
 	default:
 		break;
 	}
-	GCC7_DIAG_ON("-Wimplicit-fallthrough")
 
 	return FullscreenMenuLoadMapOrGame::handle_key(down, code);
 }
