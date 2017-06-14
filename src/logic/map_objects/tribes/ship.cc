@@ -685,6 +685,7 @@ void Ship::ship_update_idle(Game& game, Bob::State& state) {
 			return start_task_idle(game, descr().main_animation(), 1500);
 		}
 	}
+		FALLTHROUGH();
 	case ShipStates::kExpeditionWaiting:
 	case ShipStates::kExpeditionPortspaceFound:
 	case ShipStates::kSinkRequest:
