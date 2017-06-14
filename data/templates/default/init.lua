@@ -9,13 +9,13 @@ dirname = path.dirname(__file__)
 local fs_button = dirname .. "fsmenu/button.png"
 local wui_button = dirname .. "wui/button.png"
 
-local fs_blue =  {0, 24, 40}
+local fs_blue =  {0, 31, 40}
 local fs_green =  {10, 50, 0}
-local fs_brown =  {45, 26, 18}
+local fs_brown =  {45, 34, 18}
 
 local wui_light =  {85, 63, 35}
 local wui_green =  {3, 15, 0}
-local wui_brown =  {32, 20, 10}
+local wui_brown =  {32, 19, 8}
 
 -- These are the style definitions to be returned.
 -- Note: you have to keep all the keys intact, or Widelands will not be happy.
