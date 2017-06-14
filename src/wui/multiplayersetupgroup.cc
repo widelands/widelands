@@ -155,6 +155,7 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 	     s(settings),
 	     n(npsb),
 	     id_(id),
+	     type_dropdown_(this, 0, 0, 50, 200, h, _("Player Type"), UI::DropdownType::kPictorial),
 	     tribes_dropdown_(this, 0, 0, 50, 200, h, _("Tribe"), UI::DropdownType::kPictorial),
 	     last_state_(PlayerSettings::stateClosed),
 	     last_player_amount_(0) {
@@ -172,7 +173,13 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 		   this, "player_type", 0, 0, h, h, g_gr->images().get("images/ui_basic/but1.png"), "");
 		type->sigclicked.connect(
 		   boost::bind(&MultiPlayerPlayerGroup::toggle_type, boost::ref(*this)));
+
+		type_dropdown_.set_enabled(false);
+		type_dropdown_.selected.connect(
+		   boost::bind(&MultiPlayerPlayerGroup::set_type, boost::ref(*this)));
+
 		add(type);
+		add(&type_dropdown_);
 		add(&tribes_dropdown_);
 		init = new UI::Button(this, "player_init", 0, 0, w - 4 * h, h,
 		                      g_gr->images().get("images/ui_basic/but1.png"), "");
@@ -189,6 +196,94 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 	/// Toggle through the types
 	void toggle_type() {
 		n->toggle_type(id_);
+	}
+
+	/// This will update the game settings for the type with the value
+	/// currently selected in the type dropdown.
+	void set_type() {
+		n->set_block_type_selection(true);
+		if (type_dropdown_.has_selection()) {
+			// NOCOM implement
+			/*
+			   if (s->settings().players[id_].state == PlayerSettings::stateShared) {
+			      n->set_shared_in(
+			         id_, boost::lexical_cast<unsigned int>(tribes_dropdown_.get_selected()));
+			   } else {
+			      n->set_tribe(id_, tribes_dropdown_.get_selected());
+			   }
+			 * */
+		}
+		n->set_block_type_selection(false);
+	}
+
+	/// Update the type dropdown from the server settings if the server setting changed.
+	/// This will keep the host and client UIs in sync.
+	void update_type_dropdown(const PlayerSettings& player_setting) {
+		// NOCOM Update
+		if (!type_dropdown_.is_visible()) {
+			type_dropdown_.set_visible(true);
+		}
+		if (!n->type_selection_blocked && !type_dropdown_.is_expanded() &&
+		    type_dropdown_.has_selection()) {
+
+			if (player_setting.state == PlayerSettings::stateClosed) {
+				type_dropdown_.select("closed");
+			} else if (player_setting.state == PlayerSettings::stateOpen) {
+				type_dropdown_.select("open");
+			} else if (player_setting.state == PlayerSettings::stateShared) {
+				type_dropdown_.select("shared_in");
+			} else {
+				if (player_setting.state == PlayerSettings::stateComputer) {
+					if (player_setting.ai.empty()) {
+						type_dropdown_.set_label(_("Error"));
+						// NOCOM need a set_image function pic += "novalue.png";
+					} else {
+						if (player_setting.random_ai) {
+							type_dropdown_.select("ai_random");
+						} else {
+							const ComputerPlayer::Implementation* impl =
+							   ComputerPlayer::get_implementation(player_setting.ai);
+							type_dropdown_.select((boost::format("ai_%s") % impl->name).str());
+						}
+					}
+				} else {  // PlayerSettings::stateHuman
+					type_dropdown_.select("human");
+				}
+			}
+		}
+	}
+
+	/// Fill the type dropdown
+	void rebuild_type_dropdown(const PlayerSettings& player_setting) {
+		if (type_dropdown_.empty()) {
+			type_dropdown_.clear();
+
+			// Human
+			type_dropdown_.add(_("Human"), "human",
+			                   g_gr->images().get("images/wui/stats/genstats_nrworkers.png"), false,
+			                   _("Human"));
+			// AIs
+			for (const auto* impl : ComputerPlayer::get_implementations()) {
+				type_dropdown_.add(_(impl->descname), (boost::format("ai_%s") % impl->name).str(),
+				                   g_gr->images().get(impl->icon_filename), false, _(impl->descname));
+			}
+			/** TRANSLATORS: This is the name of an AI used in the game setup screens */
+			type_dropdown_.add(_("Random AI"), "ai_random",
+			                   g_gr->images().get("images/ai/ai_random.png"), false, _("Random AI"));
+
+			// Slot state
+			type_dropdown_.add(_("Shared in"), "shared_in",
+			                   g_gr->images().get("images/ui_fsmenu/shared_in.png"), false,
+			                   _("Shared in"));
+
+			type_dropdown_.add(_("Closed"), "closed", g_gr->images().get("images/ui_basic/stop.png"),
+			                   false, _("Closed"));
+
+			type_dropdown_.add(_("Open"), "open", g_gr->images().get("images/ui_basic/continue.png"),
+			                   false, _("Open"));
+
+			update_type_dropdown(player_setting);
+		}
 	}
 
 	/// This will update the game settings for the tribe or shared_in with the value
@@ -340,11 +435,16 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 		bool teamaccess = s->can_change_player_team(id_);
 		type->set_enabled(typeaccess);
 
+		rebuild_type_dropdown(player_setting);
 		rebuild_tribes_dropdown(settings);
+
+		update_type_dropdown(player_setting);
 
 		if (player_setting.state == PlayerSettings::stateClosed) {
 			type->set_tooltip(_("Closed"));
 			type->set_pic(g_gr->images().get("images/ui_basic/stop.png"));
+			type_dropdown_.set_tooltip(_("Closed"));
+			// NOCOM
 			team->set_visible(false);
 			team->set_enabled(false);
 			tribes_dropdown_.set_visible(false);
@@ -355,6 +455,7 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 		} else if (player_setting.state == PlayerSettings::stateOpen) {
 			type->set_tooltip(_("Open"));
 			type->set_pic(g_gr->images().get("images/ui_basic/continue.png"));
+			type_dropdown_.set_tooltip(_("Open"));
 			team->set_visible(false);
 			team->set_enabled(false);
 			tribes_dropdown_.set_visible(false);
@@ -365,6 +466,7 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 		} else if (player_setting.state == PlayerSettings::stateShared) {
 			type->set_tooltip(_("Shared in"));
 			type->set_pic(g_gr->images().get("images/ui_fsmenu/shared_in.png"));
+			type_dropdown_.set_tooltip(_("Shared in"));
 
 			update_tribes_dropdown(player_setting);
 
@@ -401,8 +503,13 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 			}
 			type->set_tooltip(title.c_str());
 			type->set_pic(g_gr->images().get(pic));
+			// NOCOM
 
 			update_tribes_dropdown(player_setting);
+
+			if (type_dropdown_.is_enabled() != typeaccess) {
+				type_dropdown_.set_enabled(typeaccess && !n->type_selection_blocked);
+			}
 
 			if (tribes_dropdown_.is_enabled() != tribeaccess) {
 				tribes_dropdown_.set_enabled(tribeaccess && !n->tribe_selection_blocked);
@@ -446,9 +553,15 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 	GameSettingsProvider* const s;
 	NetworkPlayerSettingsBackend* const n;
 	uint8_t const id_;
+	// NOCOM start work here
+	// 1. Type
+	// 2. Init
+	// 3. Team
+	UI::Dropdown<std::string>
+	   type_dropdown_;  /// Select who owns the slot (human, AI, open, closed, shared-in).
 	UI::Dropdown<std::string> tribes_dropdown_;  /// Select the tribe or shared_in player.
-	PlayerSettings::State last_state_;           /// The dropdown needs updating if this changes
-	size_t last_player_amount_;                  /// The dropdown needs rebuilding if this changes
+	PlayerSettings::State last_state_;  /// The tribes dropdown needs updating if this changes
+	size_t last_player_amount_;         /// The tribes dropdown needs rebuilding if this changes
 };
 
 MultiPlayerSetupGroup::MultiPlayerSetupGroup(UI::Panel* const parent,
