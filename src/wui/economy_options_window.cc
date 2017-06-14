@@ -38,7 +38,7 @@ EconomyOptionsWindow::EconomyOptionsWindow(UI::Panel* parent,
    : UI::Window(parent, "economy_options", 0, 0, 0, 0, _("Economy options")),
      economy_number_(economy->owner().get_economy_number(economy)),
      owner_(economy->owner()),
-     tabpanel_(this, UI::TabPanelStyle::kWuiLight),
+     tabpanel_(this, UI::TabPanelStyle::kWuiDark),
      ware_panel_(
         new EconomyOptionsPanel(&tabpanel_, can_act, Widelands::wwWARE, economy_number_, owner_)),
      worker_panel_(new EconomyOptionsPanel(

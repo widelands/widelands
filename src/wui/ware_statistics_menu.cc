@@ -120,7 +120,7 @@ WareStatisticsMenu::WareStatisticsMenu(InteractivePlayer& parent,
 
 	// Setup plot widgets
 	// Create a tabbed environment for the different plots
-	UI::TabPanel* tabs = new UI::TabPanel(box, UI::TabPanelStyle::kWuiLight);
+	UI::TabPanel* tabs = new UI::TabPanel(box, UI::TabPanelStyle::kWuiDark);
 
 	plot_production_ = new WuiPlotArea(tabs, 0, 0, kPlotWidth, kPlotHeight + kSpacing,
 	                                   kStatisticsSampleTime, WuiPlotArea::Plotmode::kRelative);
