@@ -27,22 +27,13 @@
 #include "logic/map_objects/tribes/tribe_descr.h"
 #include "logic/player.h"
 
-/// Toggle through the types
-/// // NOCOM
-void NetworkPlayerSettingsBackend::toggle_type(uint8_t id) {
-	if (id >= s->settings().players.size())
-		return;
-
-	s->next_player_state(id);
-}
-
 void NetworkPlayerSettingsBackend::set_player_state(uint8_t id, PlayerSettings::State state) {
 	if (id >= s->settings().players.size()) {
 		return;
 	}
 	// Do not close a player in savegames or scenarios
 	if (state == PlayerSettings::State::kClosed && ((s->settings().scenario && !s->settings().players.at(id).closeable) || s->settings().savegame)) {
-		 return;
+		 state = PlayerSettings::State::kOpen;
 	}
 
 	s->set_player_state(id, state);
@@ -132,7 +123,7 @@ void NetworkPlayerSettingsBackend::toggle_shared_in(uint8_t id) {
 		return;
 	} else {
 		// No fitting player found
-		return toggle_type(id);
+		set_player_state(id, PlayerSettings::State::kClosed);
 	}
 }
 

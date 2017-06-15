@@ -151,7 +151,6 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 	                       NetworkPlayerSettingsBackend* const npsb)
 	   : UI::Box(parent, 0, 0, UI::Box::Horizontal, w, h),
 	     player(nullptr),
-	     type(nullptr),
 	     init(nullptr),
 	     s(settings),
 	     n(npsb),
@@ -170,16 +169,11 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 		assert(player_image);
 		player = new UI::Icon(this, 0, 0, h, h, player_image);
 		add(player);
-		type = new UI::Button(
-		   this, "player_type", 0, 0, h, h, g_gr->images().get("images/ui_basic/but1.png"), "");
-		type->sigclicked.connect(
-		   boost::bind(&MultiPlayerPlayerGroup::toggle_type, boost::ref(*this)));
 
 		type_dropdown_.set_enabled(false);
 		type_dropdown_.selected.connect(
 		   boost::bind(&MultiPlayerPlayerGroup::set_type, boost::ref(*this)));
 
-		add(type);
 		add(&type_dropdown_);
 		add(&tribes_dropdown_);
 		init = new UI::Button(this, "player_init", 0, 0, w - 4 * h, h,
@@ -192,11 +186,6 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 		team->sigclicked.connect(
 		   boost::bind(&MultiPlayerPlayerGroup::toggle_team, boost::ref(*this)));
 		add(team);
-	}
-
-	/// Toggle through the types
-	void toggle_type() {
-		n->toggle_type(id_);
 	}
 
 	/// This will update the game settings for the type with the value
@@ -465,7 +454,6 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 		bool tribeaccess = s->can_change_player_tribe(id_);
 		bool const initaccess = s->can_change_player_init(id_);
 		bool teamaccess = s->can_change_player_team(id_);
-		type->set_enabled(typeaccess);
 
 		rebuild_type_dropdown(player_setting);
 		rebuild_tribes_dropdown(settings);
@@ -473,9 +461,6 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 		update_type_dropdown(player_setting);
 
 		if (player_setting.state == PlayerSettings::State::kClosed) {
-			type->set_tooltip(_("Closed"));
-			type->set_pic(g_gr->images().get("images/ui_basic/stop.png"));
-			// NOCOM
 			team->set_visible(false);
 			team->set_enabled(false);
 			tribes_dropdown_.set_visible(false);
@@ -484,8 +469,6 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 			init->set_enabled(false);
 			return;
 		} else if (player_setting.state == PlayerSettings::State::kOpen) {
-			type->set_tooltip(_("Open"));
-			type->set_pic(g_gr->images().get("images/ui_basic/continue.png"));
 			team->set_visible(false);
 			team->set_enabled(false);
 			tribes_dropdown_.set_visible(false);
@@ -494,46 +477,16 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 			init->set_enabled(false);
 			return;
 		} else if (player_setting.state == PlayerSettings::State::kShared) {
-			type->set_tooltip(_("Shared in"));
-			type->set_pic(g_gr->images().get("images/ui_fsmenu/shared_in.png"));
-
 			update_tribes_dropdown(player_setting);
 
 			if (tribes_dropdown_.is_enabled() != initaccess) {
 				tribes_dropdown_.set_enabled(initaccess && !n->tribe_selection_blocked &&
 				                             tribes_dropdown_.size() > 1);
 			}
-
 			team->set_visible(false);
 			team->set_enabled(false);
 
 		} else {
-			std::string title;
-			std::string pic = "images/";
-			if (player_setting.state == PlayerSettings::State::kComputer) {
-				if (player_setting.ai.empty()) {
-					title = _("Computer");
-					pic += "novalue.png";
-				} else {
-					if (player_setting.random_ai) {
-						/** TRANSLATORS: This is the name of an AI used in the game setup screens */
-						title = _("Random AI");
-						pic += "ai/ai_random.png";
-					} else {
-						const ComputerPlayer::Implementation* impl =
-						   ComputerPlayer::get_implementation(player_setting.ai);
-						title = _(impl->descname);
-						pic = impl->icon_filename;
-					}
-				}
-			} else {  // PlayerSettings::State::stateHuman
-				title = _("Human");
-				pic += "wui/stats/genstats_nrworkers.png";
-			}
-			type->set_tooltip(title.c_str());
-			type->set_pic(g_gr->images().get(pic));
-			// NOCOM
-
 			update_tribes_dropdown(player_setting);
 
 			if (type_dropdown_.is_enabled() != typeaccess) {
@@ -572,11 +525,11 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 				}
 			}
 		}
+		// NOCOM set this
 		last_state_ = player_setting.state;
 	}
 
 	UI::Icon* player;
-	UI::Button* type;
 	UI::Button* init;
 	UI::Button* team;
 	GameSettingsProvider* const s;

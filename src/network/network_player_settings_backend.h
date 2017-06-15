@@ -30,7 +30,6 @@ struct NetworkPlayerSettingsBackend {
 			shared_in_tribe[i] = std::string();
 	}
 
-	void toggle_type(uint8_t id);
 	void set_player_state(uint8_t id, PlayerSettings::State state);
 	void set_player_ai(uint8_t id, const std::string& name, bool random_ai);
 	void set_shared_in(uint8_t id, uint8_t shared_in);
