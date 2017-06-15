@@ -143,7 +143,7 @@ struct HostGameSettingsProvider : public GameSettingsProvider {
 				newstate = PlayerSettings::stateClosed;
 				break;
 			}  // else fall through
-		      FALLS_THROUGH
+		      FALLS_THROUGH;
 		case PlayerSettings::stateComputer: {
 			const ComputerPlayer::ImplementationVector& impls = ComputerPlayer::get_implementations();
 			ComputerPlayer::ImplementationVector::const_iterator it = impls.begin();
