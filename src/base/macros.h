@@ -72,9 +72,11 @@
 #ifdef __clang__
 #define FALLS_THROUGH /* Falls through */ \
 	[[clang::fallthrough]]
-#else
+#elif __GNUC__ >= 7
 #define FALLS_THROUGH /* Falls through */ \
 	[[gnu::fallthrough]]
+else
+#define FALLS_THROUGH /* Falls through */
 #endif
 
 // disallow copying or assigning a class
