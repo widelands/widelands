@@ -264,7 +264,7 @@ void ProductionProgram::parse_ware_type_group(char*& parameters,
 				                    "never be fulfilled by the site",
 				                    count, count_max);
 		}
-		FALLS_THROUGH
+		FALLS_THROUGH;
 		case '\0':
 		case ' ':
 			group.second = count;

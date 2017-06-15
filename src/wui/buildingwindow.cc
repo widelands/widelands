@@ -78,7 +78,7 @@ void BuildingWindow::on_building_note(const Widelands::NoteBuilding& note) {
 		// The building is no more
 		case Widelands::NoteBuilding::Action::kStartWarp:
 			igbase()->add_wanted_building_window(building().get_position(), get_pos(), is_minimal());
-		FALLS_THROUGH
+		FALLS_THROUGH;
 		case Widelands::NoteBuilding::Action::kDeleted:
 			// Stop everybody from thinking to avoid segfaults
 			is_dying_ = true;
