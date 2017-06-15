@@ -40,6 +40,11 @@ void NetworkPlayerSettingsBackend::set_player_state(uint8_t id, PlayerSettings::
 	if (id >= s->settings().players.size()) {
 		return;
 	}
+	// Do not close a player in savegames or scenarios
+	if (state == PlayerSettings::State::kClosed && ((s->settings().scenario && !s->settings().players.at(id).closeable) || s->settings().savegame)) {
+		 return;
+	}
+
 	s->set_player_state(id, state);
 	if (state == PlayerSettings::State::kShared) {
 		uint8_t shared = 0;

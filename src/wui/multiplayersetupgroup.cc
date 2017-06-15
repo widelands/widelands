@@ -299,15 +299,17 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 			                   g_gr->images().get("images/ai/ai_random.png"), false, _("Random AI"));
 
 			// Slot state
-			if (!s->settings().scenario && !s->settings().savegame) {
-				// NOCOM type dropdown inaccessible. Does not rebuild for shared_in on/off
-				type_dropdown_.add(_("Shared in"), "shared_in",
-										 g_gr->images().get("images/ui_fsmenu/shared_in.png"), false,
-										 _("Shared in"));
-			}
 
-			type_dropdown_.add(_("Closed"), "closed", g_gr->images().get("images/ui_basic/stop.png"),
-			                   false, _("Closed"));
+			// NOCOM type dropdown inaccessible. Does not rebuild for shared_in on/off
+			type_dropdown_.add(_("Shared in"), "shared_in",
+									 g_gr->images().get("images/ui_fsmenu/shared_in.png"), false,
+									 _("Shared in"));
+
+			// Do not close a player in savegames or scenarios
+			if (!s->settings().savegame && (!s->settings().scenario || s->settings().players.at(id_).closeable)) {
+				type_dropdown_.add(_("Closed"), "closed", g_gr->images().get("images/ui_basic/stop.png"),
+										 false, _("Closed"));
+			}
 
 			type_dropdown_.add(_("Open"), "open", g_gr->images().get("images/ui_basic/continue.png"),
 			                   false, _("Open"));
