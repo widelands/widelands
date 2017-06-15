@@ -191,8 +191,6 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 	/// This will update the game settings for the type with the value
 	/// currently selected in the type dropdown.
 	void set_type() {
-		// NOCOM tribe selection inaccessible.
-
 		n->set_block_type_selection(true);
 		if (type_dropdown_.has_selection()) {
 			const std::string& selected = type_dropdown_.get_selected();
@@ -235,12 +233,10 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 	/// Update the type dropdown from the server settings if the server setting changed.
 	/// This will keep the host and client UIs in sync.
 	void update_type_dropdown(const PlayerSettings& player_setting) {
-		// NOCOM Update
 		if (!type_dropdown_.is_visible()) {
 			type_dropdown_.set_visible(true);
 		}
-		if (!n->type_selection_blocked && !type_dropdown_.is_expanded() &&
-		    type_dropdown_.has_selection()) {
+		if (!n->type_selection_blocked && !type_dropdown_.is_expanded()) {
 
 			if (player_setting.state == PlayerSettings::State::kClosed) {
 				type_dropdown_.select("closed");
@@ -288,8 +284,6 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 			                   g_gr->images().get("images/ai/ai_random.png"), false, _("Random AI"));
 
 			// Slot state
-
-			// NOCOM type dropdown inaccessible. Does not rebuild for shared_in on/off
 			type_dropdown_.add(_("Shared in"), "shared_in",
 									 g_gr->images().get("images/ui_fsmenu/shared_in.png"), false,
 									 _("Shared in"));
@@ -458,17 +452,7 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 		rebuild_type_dropdown(player_setting);
 		rebuild_tribes_dropdown(settings);
 
-		update_type_dropdown(player_setting);
-
-		if (player_setting.state == PlayerSettings::State::kClosed) {
-			team->set_visible(false);
-			team->set_enabled(false);
-			tribes_dropdown_.set_visible(false);
-			tribes_dropdown_.set_enabled(false);
-			init->set_visible(false);
-			init->set_enabled(false);
-			return;
-		} else if (player_setting.state == PlayerSettings::State::kOpen) {
+		if (player_setting.state == PlayerSettings::State::kClosed || player_setting.state == PlayerSettings::State::kOpen) {
 			team->set_visible(false);
 			team->set_enabled(false);
 			tribes_dropdown_.set_visible(false);
@@ -525,7 +509,6 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 				}
 			}
 		}
-		// NOCOM set this
 		last_state_ = player_setting.state;
 	}
 
