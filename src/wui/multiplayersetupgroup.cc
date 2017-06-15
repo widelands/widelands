@@ -21,6 +21,7 @@
 
 #include <string>
 
+#include <boost/algorithm/string.hpp>
 #include <boost/format.hpp>
 #include <boost/lexical_cast.hpp>
 
@@ -82,8 +83,8 @@ struct MultiPlayerClientGroup : public UI::Box {
 			p = -1;
 
 		for (++p; p < static_cast<int16_t>(s->settings().players.size()); ++p) {
-			if (s->settings().players.at(p).state == PlayerSettings::stateHuman ||
-			    s->settings().players.at(p).state == PlayerSettings::stateOpen) {
+			if (s->settings().players.at(p).state == PlayerSettings::State::kHuman ||
+			    s->settings().players.at(p).state == PlayerSettings::State::kOpen) {
 				s->set_player_number(p);
 				return;
 			}
@@ -157,7 +158,7 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 	     id_(id),
 	     type_dropdown_(this, 0, 0, 50, 200, h, _("Player Type"), UI::DropdownType::kPictorial),
 	     tribes_dropdown_(this, 0, 0, 50, 200, h, _("Tribe"), UI::DropdownType::kPictorial),
-	     last_state_(PlayerSettings::stateClosed),
+	     last_state_(PlayerSettings::State::kClosed),
 	     last_player_amount_(0) {
 		set_size(w, h);
 		tribes_dropdown_.set_visible(false);
@@ -203,15 +204,32 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 	void set_type() {
 		n->set_block_type_selection(true);
 		if (type_dropdown_.has_selection()) {
-			// NOCOM implement
-			/*
-			   if (s->settings().players[id_].state == PlayerSettings::stateShared) {
-			      n->set_shared_in(
-			         id_, boost::lexical_cast<unsigned int>(tribes_dropdown_.get_selected()));
-			   } else {
-			      n->set_tribe(id_, tribes_dropdown_.get_selected());
-			   }
-			 * */
+			const std::string& selected = type_dropdown_.get_selected();
+			PlayerSettings::State state = PlayerSettings::State::kComputer;
+			if (selected == "closed") {
+				state = PlayerSettings::State::kClosed;
+			} else if (selected == "open") {
+				state = PlayerSettings::State::kOpen;
+			} else if (selected == "shared_in") {
+				state = PlayerSettings::State::kShared;
+			} else if (selected == "human") {
+				state = PlayerSettings::State::kHuman;
+			} else {
+				if (selected == "ai_random") {
+					n->set_player_ai(id_, "", true);
+				} else {
+					// NOCOM we should hand the dropdown a struct to avoid all this parsing.
+					if (boost::starts_with(selected, "ai_")) {
+						std::vector<std::string> parts;
+						boost::split(parts, selected, boost::is_any_of("_"));
+						assert(parts.size() == 2);
+						n->set_player_ai(id_, parts[1], false);
+					} else {
+						throw wexception("Unknown player state: %s\n", selected.c_str());
+					}
+				}
+			}
+			n->set_player_state(id_, state);
 		}
 		n->set_block_type_selection(false);
 	}
@@ -226,14 +244,14 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 		if (!n->type_selection_blocked && !type_dropdown_.is_expanded() &&
 		    type_dropdown_.has_selection()) {
 
-			if (player_setting.state == PlayerSettings::stateClosed) {
+			if (player_setting.state == PlayerSettings::State::kClosed) {
 				type_dropdown_.select("closed");
-			} else if (player_setting.state == PlayerSettings::stateOpen) {
+			} else if (player_setting.state == PlayerSettings::State::kOpen) {
 				type_dropdown_.select("open");
-			} else if (player_setting.state == PlayerSettings::stateShared) {
+			} else if (player_setting.state == PlayerSettings::State::kShared) {
 				type_dropdown_.select("shared_in");
 			} else {
-				if (player_setting.state == PlayerSettings::stateComputer) {
+				if (player_setting.state == PlayerSettings::State::kComputer) {
 					if (player_setting.ai.empty()) {
 						type_dropdown_.set_label(_("Error"));
 						// NOCOM need a set_image function pic += "novalue.png";
@@ -246,7 +264,7 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 							type_dropdown_.select((boost::format("ai_%s") % impl->name).str());
 						}
 					}
-				} else {  // PlayerSettings::stateHuman
+				} else {  // PlayerSettings::State::stateHuman
 					type_dropdown_.select("human");
 				}
 			}
@@ -291,11 +309,11 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 	void set_tribe_or_shared_in() {
 		n->set_block_tribe_selection(true);
 		tribes_dropdown_.set_disable_style(s->settings().players[id_].state ==
-		                                         PlayerSettings::stateShared ?
+		                                         PlayerSettings::State::kShared ?
 		                                      UI::ButtonDisableStyle::kPermpressed :
 		                                      UI::ButtonDisableStyle::kMonochrome);
 		if (tribes_dropdown_.has_selection()) {
-			if (s->settings().players[id_].state == PlayerSettings::stateShared) {
+			if (s->settings().players[id_].state == PlayerSettings::State::kShared) {
 				n->set_shared_in(
 				   id_, boost::lexical_cast<unsigned int>(tribes_dropdown_.get_selected()));
 			} else {
@@ -323,8 +341,8 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 	/// Update the tribes dropdown from the server settings if the server setting changed.
 	/// This will keep the host and client UIs in sync.
 	void update_tribes_dropdown(const PlayerSettings& player_setting) {
-		if (player_setting.state == PlayerSettings::stateClosed ||
-		    player_setting.state == PlayerSettings::stateOpen) {
+		if (player_setting.state == PlayerSettings::State::kClosed ||
+		    player_setting.state == PlayerSettings::State::kOpen) {
 			return;
 		}
 		if (!tribes_dropdown_.is_visible()) {
@@ -333,7 +351,7 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 		if (!tribes_dropdown_.is_expanded() && !n->tribe_selection_blocked &&
 		    tribes_dropdown_.has_selection()) {
 			const std::string selected_tribe = tribes_dropdown_.get_selected();
-			if (player_setting.state == PlayerSettings::stateShared) {
+			if (player_setting.state == PlayerSettings::State::kShared) {
 				const std::string shared_in = shared_in_as_string(player_setting.shared_in);
 				if (shared_in != selected_tribe) {
 					tribes_dropdown_.select(shared_in);
@@ -355,23 +373,23 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 	void rebuild_tribes_dropdown(const GameSettings& settings) {
 		const PlayerSettings& player_setting = settings.players[id_];
 
-		if (player_setting.state == PlayerSettings::stateClosed ||
-		    player_setting.state == PlayerSettings::stateOpen) {
+		if (player_setting.state == PlayerSettings::State::kClosed ||
+		    player_setting.state == PlayerSettings::State::kOpen) {
 			return;
 		}
 
 		if (tribes_dropdown_.empty() || last_player_amount_ != settings.players.size() ||
-		    ((player_setting.state == PlayerSettings::stateShared ||
-		      last_state_ == PlayerSettings::stateShared) &&
+		    ((player_setting.state == PlayerSettings::State::kShared ||
+		      last_state_ == PlayerSettings::State::kShared) &&
 		     player_setting.state != last_state_)) {
 			tribes_dropdown_.clear();
 
 			// We need to see the playercolor if setting shared_in is disabled
-			tribes_dropdown_.set_disable_style(player_setting.state == PlayerSettings::stateShared ?
+			tribes_dropdown_.set_disable_style(player_setting.state == PlayerSettings::State::kShared ?
 			                                      UI::ButtonDisableStyle::kPermpressed :
 			                                      UI::ButtonDisableStyle::kMonochrome);
 
-			if (player_setting.state == PlayerSettings::stateShared) {
+			if (player_setting.state == PlayerSettings::State::kShared) {
 				for (size_t i = 0; i < settings.players.size(); ++i) {
 					if (i != id_) {
 						// TODO(GunChleoc): Do not add players that are also shared_in.
@@ -440,10 +458,9 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 
 		update_type_dropdown(player_setting);
 
-		if (player_setting.state == PlayerSettings::stateClosed) {
+		if (player_setting.state == PlayerSettings::State::kClosed) {
 			type->set_tooltip(_("Closed"));
 			type->set_pic(g_gr->images().get("images/ui_basic/stop.png"));
-			type_dropdown_.set_tooltip(_("Closed"));
 			// NOCOM
 			team->set_visible(false);
 			team->set_enabled(false);
@@ -452,10 +469,9 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 			init->set_visible(false);
 			init->set_enabled(false);
 			return;
-		} else if (player_setting.state == PlayerSettings::stateOpen) {
+		} else if (player_setting.state == PlayerSettings::State::kOpen) {
 			type->set_tooltip(_("Open"));
 			type->set_pic(g_gr->images().get("images/ui_basic/continue.png"));
-			type_dropdown_.set_tooltip(_("Open"));
 			team->set_visible(false);
 			team->set_enabled(false);
 			tribes_dropdown_.set_visible(false);
@@ -463,10 +479,9 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 			init->set_visible(false);
 			init->set_enabled(false);
 			return;
-		} else if (player_setting.state == PlayerSettings::stateShared) {
+		} else if (player_setting.state == PlayerSettings::State::kShared) {
 			type->set_tooltip(_("Shared in"));
 			type->set_pic(g_gr->images().get("images/ui_fsmenu/shared_in.png"));
-			type_dropdown_.set_tooltip(_("Shared in"));
 
 			update_tribes_dropdown(player_setting);
 
@@ -481,7 +496,7 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 		} else {
 			std::string title;
 			std::string pic = "images/";
-			if (player_setting.state == PlayerSettings::stateComputer) {
+			if (player_setting.state == PlayerSettings::State::kComputer) {
 				if (player_setting.ai.empty()) {
 					title = _("Computer");
 					pic += "novalue.png";
@@ -497,7 +512,7 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 						pic = impl->icon_filename;
 					}
 				}
-			} else {  // PlayerSettings::stateHuman
+			} else {  // PlayerSettings::State::stateHuman
 				title = _("Human");
 				pic += "wui/stats/genstats_nrworkers.png";
 			}

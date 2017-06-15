@@ -402,8 +402,8 @@ void GameClient::set_player_number(uint8_t const number) {
 		return;
 	// Same if the player is not selectable
 	if (number < d->settings.players.size() &&
-	    (d->settings.players.at(number).state == PlayerSettings::stateClosed ||
-	     d->settings.players.at(number).state == PlayerSettings::stateComputer))
+	    (d->settings.players.at(number).state == PlayerSettings::State::kClosed ||
+	     d->settings.players.at(number).state == PlayerSettings::State::kComputer))
 		return;
 
 	// Send request

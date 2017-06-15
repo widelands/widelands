@@ -35,7 +35,7 @@ enum class PlayerEndResult : uint8_t;
 }
 
 struct PlayerSettings {
-	enum State { stateOpen, stateHuman, stateComputer, stateClosed, stateShared };
+	enum class State { kOpen, kHuman, kComputer, kClosed, kShared };
 
 	State state;
 	uint8_t initialization_index;

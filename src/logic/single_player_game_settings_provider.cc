@@ -81,14 +81,14 @@ void SinglePlayerGameSettingsProvider::set_map(const std::string& mapname,
 
 	while (oldplayers < maxplayers) {
 		PlayerSettings& player = s.players[oldplayers];
-		player.state = (oldplayers == 0) ? PlayerSettings::stateHuman : PlayerSettings::stateComputer;
+		player.state = (oldplayers == 0) ? PlayerSettings::State::kHuman : PlayerSettings::State::kComputer;
 		player.tribe = s.tribes.at(0).name;
 		player.random_tribe = false;
 		player.initialization_index = 0;
 		player.name = (boost::format(_("Player %u")) % (oldplayers + 1)).str();
 		player.team = 0;
 		// Set default computerplayer ai type
-		if (player.state == PlayerSettings::stateComputer) {
+		if (player.state == PlayerSettings::State::kComputer) {
 			const ComputerPlayer::ImplementationVector& impls = ComputerPlayer::get_implementations();
 			if (impls.size() > 1) {
 				player.ai = impls.at(0)->name;
@@ -107,8 +107,8 @@ void SinglePlayerGameSettingsProvider::set_player_state(uint8_t const number,
 	if (number == s.playernum || number >= s.players.size())
 		return;
 
-	if (state == PlayerSettings::stateOpen)
-		state = PlayerSettings::stateComputer;
+	if (state == PlayerSettings::State::kOpen)
+		state = PlayerSettings::State::kComputer;
 
 	s.players[number].state = state;
 }
@@ -147,7 +147,7 @@ void SinglePlayerGameSettingsProvider::next_player_state(uint8_t const number) {
 		s.players[number].ai = (*it)->name;
 	}
 
-	s.players[number].state = PlayerSettings::stateComputer;
+	s.players[number].state = PlayerSettings::State::kComputer;
 }
 
 void SinglePlayerGameSettingsProvider::set_player_tribe(uint8_t const number,
@@ -219,8 +219,8 @@ void SinglePlayerGameSettingsProvider::set_player_number(uint8_t const number) {
 		return;
 	PlayerSettings const position = settings().players.at(number);
 	PlayerSettings const player = settings().players.at(settings().playernum);
-	if (number < settings().players.size() && (position.state == PlayerSettings::stateOpen ||
-	                                           position.state == PlayerSettings::stateComputer)) {
+	if (number < settings().players.size() && (position.state == PlayerSettings::State::kOpen ||
+	                                           position.state == PlayerSettings::State::kComputer)) {
 		set_player(number, player);
 		set_player(settings().playernum, position);
 		s.playernum = number;

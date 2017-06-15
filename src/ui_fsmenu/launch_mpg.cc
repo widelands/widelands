@@ -448,11 +448,11 @@ void FullscreenMenuLaunchMPG::set_scenario_values() {
 		settings_->set_player_closeable(i, map.get_scenario_player_closeable(i + 1));
 		std::string ai(map.get_scenario_player_ai(i + 1));
 		if (!ai.empty()) {
-			settings_->set_player_state(i, PlayerSettings::stateComputer);
+			settings_->set_player_state(i, PlayerSettings::State::kComputer);
 			settings_->set_player_ai(i, ai);
-		} else if (settings.players.at(i).state != PlayerSettings::stateHuman &&
-		           settings.players.at(i).state != PlayerSettings::stateOpen) {
-			settings_->set_player_state(i, PlayerSettings::stateOpen);
+		} else if (settings.players.at(i).state != PlayerSettings::State::kHuman &&
+		           settings.players.at(i).state != PlayerSettings::State::kOpen) {
+			settings_->set_player_state(i, PlayerSettings::State::kOpen);
 		}
 	}
 }
@@ -485,7 +485,7 @@ void FullscreenMenuLaunchMPG::load_previous_playerdata() {
 			infotext += ":\n    ";
 			infotext += closed_string;
 			// Close the player
-			settings_->set_player_state(i - 1, PlayerSettings::stateClosed);
+			settings_->set_player_state(i - 1, PlayerSettings::State::kClosed);
 			continue;  // if tribe is empty, the player does not exist
 		}
 
@@ -495,10 +495,10 @@ void FullscreenMenuLaunchMPG::load_previous_playerdata() {
 
 		if (player_save_ai[i - 1].empty()) {
 			// Assure that player is open
-			if (settings_->settings().players.at(i - 1).state != PlayerSettings::stateHuman)
-				settings_->set_player_state(i - 1, PlayerSettings::stateOpen);
+			if (settings_->settings().players.at(i - 1).state != PlayerSettings::State::kHuman)
+				settings_->set_player_state(i - 1, PlayerSettings::State::kOpen);
 		} else {
-			settings_->set_player_state(i - 1, PlayerSettings::stateComputer);
+			settings_->set_player_state(i - 1, PlayerSettings::State::kComputer);
 			settings_->set_player_ai(i - 1, player_save_ai[i - 1]);
 		}
 

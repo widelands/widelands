@@ -272,10 +272,10 @@ void Game::init_newgame(UI::ProgressWindow* loader_ui, const GameSettings& setti
 	for (uint32_t i = 0; i < settings.players.size(); ++i) {
 		const PlayerSettings& playersettings = settings.players[i];
 
-		if (playersettings.state == PlayerSettings::stateClosed ||
-		    playersettings.state == PlayerSettings::stateOpen)
+		if (playersettings.state == PlayerSettings::State::kClosed ||
+		    playersettings.state == PlayerSettings::State::kOpen)
 			continue;
-		else if (playersettings.state == PlayerSettings::stateShared) {
+		else if (playersettings.state == PlayerSettings::State::kShared) {
 			shared.push_back(playersettings);
 			shared_num.push_back(i + 1);
 			continue;

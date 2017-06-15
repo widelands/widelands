@@ -210,8 +210,8 @@ void FullscreenMenuLaunchSPG::refresh() {
 	for (uint8_t i = 0; i < nr_players_; ++i) {
 		pos_[i]->set_visible(true);
 		const PlayerSettings& player = settings.players[i];
-		pos_[i]->set_enabled(!is_scenario_ && (player.state == PlayerSettings::stateOpen ||
-		                                       player.state == PlayerSettings::stateComputer));
+		pos_[i]->set_enabled(!is_scenario_ && (player.state == PlayerSettings::State::kOpen ||
+		                                       player.state == PlayerSettings::State::kComputer));
 	}
 	for (uint32_t i = nr_players_; i < kMaxPlayers; ++i)
 		pos_[i]->set_visible(false);
@@ -291,14 +291,14 @@ void FullscreenMenuLaunchSPG::safe_place_for_host(uint8_t const newplayernumber)
 	// Check if a still valid place is open.
 	for (uint8_t i = 0; i < newplayernumber; ++i) {
 		PlayerSettings position = settings.players.at(i);
-		if (position.state == PlayerSettings::stateOpen) {
+		if (position.state == PlayerSettings::State::kOpen) {
 			switch_to_position(i);
 			return;
 		}
 	}
 
 	// Kick player 1 and take the position
-	settings_->set_player_state(0, PlayerSettings::stateClosed);
-	settings_->set_player_state(0, PlayerSettings::stateOpen);
+	settings_->set_player_state(0, PlayerSettings::State::kClosed);
+	settings_->set_player_state(0, PlayerSettings::State::kOpen);
 	switch_to_position(0);
 }
