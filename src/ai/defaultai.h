@@ -85,12 +85,7 @@ struct DefaultAI : ComputerPlayer {
 	enum class PerfEvaluation : uint8_t { kForConstruction, kForDismantle };
 	enum class BasicEconomyBuildingStatus : uint8_t { kEncouraged, kDiscouraged, kNeutral, kNone };
 
-	enum class SoldiersStatus : uint8_t {
-		kFull = 0,
-		kEnough = 1,
-		kShortage = 3,
-		kBadShortage = 6
-	};
+	enum class SoldiersStatus : uint8_t { kFull = 0, kEnough = 1, kShortage = 3, kBadShortage = 6 };
 
 	enum class WareWorker : uint8_t { kWare, kWorker };
 
@@ -360,7 +355,8 @@ private:
 	// This stores highest priority for new buildings except for militarysites
 	int32_t highest_nonmil_prio_;
 
-    // if the basic economy is not established, there must be non-empty list of remaining basic buildings
+	// if the basic economy is not established, there must be non-empty list of remaining basic
+	// buildings
 	bool basic_economy_established;
 
 	// id of iron_ore to identify iron mines in mines_per_type map

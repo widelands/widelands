@@ -345,7 +345,6 @@ struct BuildableField {
 	int16_t ally_military_presence;
 	// stationed (manned) military buildings nearby
 	int16_t military_stationed;
-	// stationed (manned) military buildings nearby
 	// unconnected buildings nearby
 	bool unconnected_nearby;
 	int16_t military_unstationed;
@@ -357,8 +356,7 @@ struct BuildableField {
 	Widelands::ExtendedBool portspace_nearby;  // prefer military buildings closer to the portspace
 	int32_t max_buildcap_nearby;
 	// it is not necessary to check resources (stones, fish...) too frequently as they do not change
-	// fast
-	// this stores time of last check
+	// fast this stores time of last check
 	uint32_t last_resources_check_time;
 	int32_t military_score_;
 	bool inland;
@@ -412,7 +410,6 @@ struct BuildingObserver {
 
 	Type type;
 
-	// bool recruitment;  // is "producing" workers?
 	Widelands::BuildingNecessity new_building;
 	uint32_t new_building_overdue;
 	int32_t primary_priority;
@@ -808,7 +805,6 @@ public:
 	bool get_is_enemy(Widelands::PlayerNumber);
 	uint8_t enemies_seen_lately_count(uint32_t);
 	bool any_enemy_seen_lately(uint32_t);
-	// uint32_t enemy_last_seen();
 	PlayerNumber this_player_number;
 	void set_update_time(uint32_t);
 	uint32_t get_update_time();

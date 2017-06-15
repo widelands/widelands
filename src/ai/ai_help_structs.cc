@@ -497,7 +497,7 @@ void ManagementData::review(const uint32_t gametime,
 	        attackers * attackers_multiplicator + ((attackers > 0) ? attack_bonus : -attack_bonus) +
 	        trained_soldiers * trained_soldiers_score + +conquered_wh_bonus + conq_ws;
 
-	printf(" %2d %s: reviewing AI mngm. data, sc: %5d Pr.p: %d (l: %4d / %4d / %4d, "
+	log(" %2d %s: reviewing AI mngm. data, sc: %5d Pr.p: %d (l: %4d / %4d / %4d, "
 	       "at:%4d(%3d),ts:%4d(%2d), ConqWH:%2d)\n",
 	       pn, gamestring_with_leading_zeros(gametime), score, primary_parent,
 	       land / current_land_divider, main_bonus, land_delta_bonus,
@@ -505,9 +505,9 @@ void ManagementData::review(const uint32_t gametime,
 	       trained_soldiers * trained_soldiers_score, trained_soldiers, conq_ws);
 
 	if (score < -10000 || score > 30000) {
-		printf(
-		   "MASTERERROR %2d %s: reviewing AI mngm. data, score: %4d (land: %4d  attackers: %3d)\n",
-		   pn, gamestring_with_leading_zeros(gametime), score, land / 86, attackers);
+		log(
+		   "%2d %s: reviewing AI mngm. data, score too extreme: %4d\n",
+		   pn, gamestring_with_leading_zeros(gametime), score);
 	}
 	assert(score > -10000 && score < 100000);
 }
@@ -519,7 +519,7 @@ void ManagementData::new_dna_for_persistent( const uint8_t pn, const Widelands::
 
 	ai_type = type;
 	
-	printf (" %2d ... initialize starts\n", pn);
+	log (" %2d ... initialize starts\n", pn);
 
    //AutoSCore_AIDNA_1
     const std::vector<int16_t> AI_initial_military_numbers_A =
@@ -758,7 +758,7 @@ void ManagementData::new_dna_for_persistent( const uint8_t pn, const Widelands::
 	primary_parent = std::rand() % 4;
 	const uint8_t parent2 = std::rand() % 4;
 	
-	printf (" ... DNA initialization (primary parent: %d, secondary parent: %d)\n", primary_parent, parent2);
+	log (" ... DNA initialization (primary parent: %d, secondary parent: %d)\n", primary_parent, parent2);
 	
 	// First setting military numbers, they goes dirrectly to persistent data
 	for (uint16_t i = 0; i < magic_numbers_size; i += 1){
@@ -782,7 +782,7 @@ void ManagementData::new_dna_for_persistent( const uint8_t pn, const Widelands::
 				set_military_number_at(i,AI_initial_military_numbers_D[i]);
 				break;
 			default:
-				printf ("parent %d?\n", dna_donor);
+				log ("parent %d?\n", dna_donor);
 				NEVER_HERE();
 			}
 		}
@@ -791,7 +791,7 @@ void ManagementData::new_dna_for_persistent( const uint8_t pn, const Widelands::
 	pd->neuron_functs.clear();
 	pd->f_neurons.clear();	
 
-	for (uint16_t i = 0; i <neuron_pool_size; i += 1){ //NOCOM
+	for (uint16_t i = 0; i <neuron_pool_size; i += 1){
 		const uint8_t dna_donor = (std::rand() % 20 > 0) ? primary_parent : parent2;
 		
 		switch ( dna_donor ) {
@@ -812,7 +812,7 @@ void ManagementData::new_dna_for_persistent( const uint8_t pn, const Widelands::
 				pd->neuron_functs.push_back(input_func_D[i]);
 				break;
 			default:
-				printf ("parent %d?\n", dna_donor);
+				log ("parent %d?\n", dna_donor);
 				NEVER_HERE();
 		}
 	}
@@ -838,7 +838,7 @@ void ManagementData::new_dna_for_persistent( const uint8_t pn, const Widelands::
 				//f_neuron_pool.push_back(FNeuron(f_neurons_D[i], i));	
 				break;
 			default:
-				printf ("parent %d?\n", dna_donor);
+				log ("parent %d?\n", dna_donor);
 				NEVER_HERE();
 		}
 	}
@@ -870,27 +870,22 @@ void ManagementData::mutate(const uint8_t pn) {
 	// decreasing probability (or rather increasing probability of mutation) if weaker player
 	if (ai_type == Widelands::AiType::kWeak) {
 		probability /= 2;
-		printf(" Weak mode, increasing mutation probability to 1 / %d\n", probability);
+		log("%2d: Weak mode, increasing mutation probability to 1 / %d\n", pn, probability);
 	} else if (ai_type == Widelands::AiType::kVeryWeak) {
 		probability /= 4;
-		printf(" Very weak mode, increasing mutation probability to 1 / %d\n", probability);
-	}
-
-	// Wild card
-	if (std::rand() % 8 == 0) {
-		probability /= 3;
-		printf("Wild card new probability: %d \n", probability);
+		log("%2d: Very weak mode, increasing mutation probability to 1 / %d\n", pn, probability);
 	}
 
 	assert(probability > 0 && probability <= 201);
 
-	printf(" %2d ... mutating, final prob.: 1 / %3d (old: 1 / %3d)\n", pn, probability,
+	log(" %2d ... mutating, final prob.: 1 / %3d (old: 1 / %3d)\n", pn, probability,
 	       old_probability + 101);
 
 	if (probability < 201) {
 
 		// Modifying pool of Military numbers
 		{
+			// Preferred numbers are ones that will be mutated agressively in full range -100 - +100
 			std::set<int32_t> preferred_numbers = {};
 
 			for (uint16_t i = 0; i < magic_numbers_size; i += 1) {
@@ -909,7 +904,7 @@ void ManagementData::mutate(const uint8_t pn) {
 					const int16_t old_value = get_military_number_at(i);
 					const int16_t new_value = shift_weight_value(get_military_number_at(i), aggressive);
 					set_military_number_at(i, new_value);
-					printf("      Magic number %3d: value changed: %4d -> %4d  %s\n", i, old_value,
+					log("      Magic number %3d: value changed: %4d -> %4d  %s\n", i, old_value,
 					       new_value, (aggressive) ? "aggressive" : "");
 				}
 			}
@@ -917,6 +912,7 @@ void ManagementData::mutate(const uint8_t pn) {
 
 		// Modifying pool of neurons
 		{
+			//Neurons to be mutated more agressively
 			std::set<int32_t> preferred_neurons = {};
 			for (auto& item : neuron_pool) {
 
@@ -939,7 +935,7 @@ void ManagementData::mutate(const uint8_t pn) {
 						item.set_weight(new_value);
 						pd->neuron_weights[item.get_id()] = item.get_weight();
 					}
-					printf("      Neuron %2d: weight: %4d -> %4d, new curve: %d   %s\n", item.get_id(),
+					log("      Neuron %2d: weight: %4d -> %4d, new curve: %d   %s\n", item.get_id(),
 					       old_value, item.get_weight(), item.get_type(),
 					       (aggressive) ? "aggressive" : "");
 
@@ -950,6 +946,7 @@ void ManagementData::mutate(const uint8_t pn) {
 
 		// Modifying pool of f-neurons
 		{
+			//FNeurons to be mutated more agressively
 			std::set<int32_t> preferred_f_neurons = {};
 			for (auto& item : f_neuron_pool) {
 				uint8_t changed_bits = 0;
@@ -972,7 +969,7 @@ void ManagementData::mutate(const uint8_t pn) {
 
 				if (changed_bits) {
 					pd->f_neurons[item.get_id()] = item.get_int();
-					printf("      F-Neuron %2d: new value: %13ul, changed bits: %2d   %s\n",
+					log("      F-Neuron %2d: new value: %13ul, changed bits: %2d   %s\n",
 					       item.get_id(), item.get_int(), changed_bits,
 					       (preferred_f_neurons.count(item.get_id()) > 0) ? "aggressive" : "");
 				}
@@ -1005,7 +1002,7 @@ void ManagementData::copy_persistent_to_local(const uint8_t pn) {
 	pd->f_neuron_pool_size = f_neuron_pool_size;
 
 	test_consistency();
-	printf(" %d: DNA initialized\n", pn);
+	log(" %d: DNA initialized\n", pn);
 }
 
 bool ManagementData::test_consistency(bool itemized) {
@@ -1044,57 +1041,57 @@ bool ManagementData::test_consistency(bool itemized) {
 // Also, used only for training
 void ManagementData::dump_data() {
 	// dumping new numbers
-	printf("     actual military_numbers (%lu):\n      {", pd->magic_numbers.size());
+	log("     actual military_numbers (%lu):\n      {", pd->magic_numbers.size());
 	uint16_t itemcounter = 1;
 	uint16_t line_counter = 1;
 	for (const auto& item : pd->magic_numbers) {
-		printf(" %3d %s", item, (&item != &pd->magic_numbers.back()) ? ", " : "");
+		log(" %3d %s", item, (&item != &pd->magic_numbers.back()) ? ", " : "");
 		if (itemcounter % 10 == 0) {
-			printf(" //AutoContent_%02d\n       ", line_counter);
+			log(" //AutoContent_%02d\n       ", line_counter);
 			line_counter += 1;
 		}
 		++itemcounter;
 	}
-	printf("}\n");
+	log("}\n");
 
-	printf("     actual neuron setup:\n      ");
-	printf("{ ");
+	log("     actual neuron setup:\n      ");
+	log("{ ");
 	itemcounter = 1;
 	for (auto& item : neuron_pool) {
-		printf(" %3d %s", item.get_weight(), (&item != &neuron_pool.back()) ? ", " : "");
+		log(" %3d %s", item.get_weight(), (&item != &neuron_pool.back()) ? ", " : "");
 		if (itemcounter % 10 == 0) {
-			printf(" //AutoContent_%02d\n       ", line_counter);
+			log(" //AutoContent_%02d\n       ", line_counter);
 			line_counter += 1;
 		}
 		++itemcounter;
 	}
-	printf("}\n      { ");
+	log("}\n      { ");
 	itemcounter = 1;
 	for (auto& item : neuron_pool) {
-		printf(" %3d %s", item.get_type(), (&item != &neuron_pool.back()) ? ", " : "");
+		log(" %3d %s", item.get_type(), (&item != &neuron_pool.back()) ? ", " : "");
 		if (itemcounter % 10 == 0) {
-			printf(" //AutoContent_%02d\n       ", line_counter);
+			log(" //AutoContent_%02d\n       ", line_counter);
 			line_counter += 1;
 		}
 		++itemcounter;
 	}
-	printf("}\n");
+	log("}\n");
 
-	printf("     actual f-neuron setup:\n      ");
-	printf("{ ");
+	log("     actual f-neuron setup:\n      ");
+	log("{ ");
 	itemcounter = 1;
 	for (auto& item : f_neuron_pool) {
-		printf(" %8u %s", item.get_int(), (&item != &f_neuron_pool.back()) ? ", " : "");
+		log(" %8u %s", item.get_int(), (&item != &f_neuron_pool.back()) ? ", " : "");
 		if (itemcounter % 10 == 0) {
-			printf(" //AutoContent_%02d\n       ", line_counter);
+			log(" //AutoContent_%02d\n       ", line_counter);
 			line_counter += 1;
 		}
 		++itemcounter;
 	}
-	printf("}\n");
+	log("}\n");
 }
 
-// querrying militarynumber at possition
+// querrying military number at a possition
 int16_t ManagementData::get_military_number_at(uint8_t pos) {
 	assert(pos < magic_numbers_size);
 	return pd->magic_numbers[pos];
@@ -1374,8 +1371,6 @@ void PlayersStrengths::add(Widelands::PlayerNumber pn,
 			enemy = true;
 		}
 		this_player_number = pn;
-		// printf (" %d PlayersStrengths: player %d / team: %d - is%s enemy\n", pn, opn, pltn,
-		// (enemy)?"":" not");
 		all_stats.insert(std::pair<Widelands::PlayerNumber, PlayerStat>(
 		   opn, PlayerStat(pltn, enemy, pp, op, o60p, cs, land, oland, o60l)));
 	} else {
@@ -1555,7 +1550,7 @@ uint32_t PlayersStrengths::get_old60_player_power(Widelands::PlayerNumber pn) {
 
 uint32_t PlayersStrengths::get_old_player_land(Widelands::PlayerNumber pn) {
 	if (all_stats.count(pn) == 0) {
-		printf(" %d: Players statistics are still empty\n", pn);
+		log(" %d: Players statistics are still empty\n", pn);
 		return 0;
 	}
 	return all_stats[pn].old_players_land;
@@ -1563,7 +1558,7 @@ uint32_t PlayersStrengths::get_old_player_land(Widelands::PlayerNumber pn) {
 
 uint32_t PlayersStrengths::get_old60_player_land(Widelands::PlayerNumber pn) {
 	if (all_stats.count(pn) == 0) {
-		printf(" %d: Players statistics are still empty\n", pn);
+		log(" %d: Players statistics are still empty\n", pn);
 		return 0;
 	}
 	return all_stats[pn].old60_players_land;

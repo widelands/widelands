@@ -71,7 +71,7 @@ constexpr int32_t kSpotsEnough = 25;
 
 constexpr uint16_t kTargetQuantCap = 30;
 
-// this is intended for map developers, by default should be off
+// this is intended for map developers&testers, by default should be off
 constexpr bool kPrintStats = false;
 
 // for scheduler
@@ -90,7 +90,6 @@ DefaultAI::DefaultAI(Game& ggame, PlayerNumber const pid, Widelands::AiType cons
      player_(nullptr),
      tribe_(nullptr),
      attackers_count_(0),
-     // dismantled_msites_count(0),
      next_ai_think_(0),
      scheduler_delay_counter_(0),
      wood_policy_(WoodPolicy::kAllowRangers),
@@ -443,8 +442,8 @@ void DefaultAI::think() {
 			set_taskpool_task_time(gametime + 19 * 1000, SchedulerTaskId::kCheckEnemySites);
 			break;
 		case SchedulerTaskId::kManagementUpdate:
-			// statistics for spotted warehouses
-			{
+			// This task is used for training AI, so should be disabled usually
+			{  // statistics for spotted warehouses
 				uint16_t conquered_wh = 0;
 				for (auto coords : enemy_warehouses) {
 					if (get_land_owner(map, coords) == player_number()) {
@@ -452,8 +451,8 @@ void DefaultAI::think() {
 					}
 				};
 				if (!enemy_warehouses.empty())
-                    log("Conquered warehouses: %d / %lu\n", conquered_wh, enemy_warehouses.size()); 
-                    management_data.review(gametime, player_number(),
+					log("Conquered warehouses: %d / %lu\n", conquered_wh, enemy_warehouses.size());
+				management_data.review(gametime, player_number(),
 				                       player_statistics.get_player_land(player_number()),
 				                       player_statistics.get_enemies_max_land(),
 				                       player_statistics.get_old60_player_land(player_number()),
@@ -500,6 +499,9 @@ void DefaultAI::late_initialization() {
 	const DescriptionIndex& nr_buildings = game().tribes().nrbuildings();
 
 	// Collect information about the different buildings that our tribe can have
+	// parsing based on name is not optimal though
+	// the logic below will quarantee that one and only one such building will be
+	// identified
 	bool barracks_identified = false;
 	bool bakery_identified = false;
 	bool sawmill_identified = false;
@@ -507,7 +509,7 @@ void DefaultAI::late_initialization() {
 	// The data struct below is owned by Player object, the purpose is to have them saved therein
 	persistent_data = player_->get_mutable_ai_persistent_state();
 	management_data.pd = player_->get_mutable_ai_persistent_state();
-    const bool create_basic_buildings_list = (gametime < kRemainingBasicBuildingsResetTime);
+	const bool create_basic_buildings_list = (gametime < kRemainingBasicBuildingsResetTime);
 
 	if (persistent_data->initialized == kFalse) {
 		// As all data are initialized without given values, they must be populated with reasonable
@@ -558,7 +560,7 @@ void DefaultAI::late_initialization() {
 		}
 
 		if (kAITrainingMode) {
-			printf("%2d: reinitializing dna (kAITrainingMode set true)", player_number());
+			log("%2d: reinitializing dna (kAITrainingMode set true)", player_number());
 			management_data.new_dna_for_persistent(player_number(), type_);
 			management_data.copy_persistent_to_local(player_number());
 			management_data.mutate(player_number());
@@ -570,17 +572,19 @@ void DefaultAI::late_initialization() {
 		management_data.test_consistency(true);
 		management_data.dump_data();
 
-		printf(" %2d: %lu basic buildings in savegame file. %s\n",
-		       player_number(), persistent_data->remaining_basic_buildings.size(),
-               (create_basic_buildings_list)? "New list will be recreated though (kAITrainingMode is true)" : "");
+		log(" %2d: %lu basic buildings in savegame file. %s\n", player_number(),
+		    persistent_data->remaining_basic_buildings.size(),
+		    (create_basic_buildings_list) ?
+		       "New list will be recreated though (kAITrainingMode is true)" :
+		       "");
 
 	} else {
 		throw wexception("Corrupted AI data");
 	}
 
 	// Even if we have basic building from savefile, we ignore them and recreate based
-    // on lua conf file
-    if (create_basic_buildings_list) {
+	// on lua conf file
+	if (create_basic_buildings_list) {
 		persistent_data->remaining_basic_buildings.clear();
 		persistent_data->remaining_buildings_size = 0;
 	}
@@ -652,8 +656,6 @@ void DefaultAI::late_initialization() {
 			bo.is_what.insert(BuildingAttribute::kPort);
 		}
 		bo.max_ts_proportion = 100;
-		// bo.upgrade_substitutes = false;
-		// bo.upgrade_extends = false;
 		bo.max_preciousness = 0;
 		bo.max_needed_preciousness = 0;
 
@@ -880,9 +882,9 @@ void DefaultAI::late_initialization() {
 		}
 	}
 
-	assert(barracks_identified);  // To be sure we have barracks identified
-	assert(bakery_identified);    // To be sure we have bakery identified
-	assert(sawmill_identified);   // To be sure we have sawmill identified
+	assert(barracks_identified);  // Barracks were identified
+	assert(bakery_identified);    // Bakery was identified
+	assert(sawmill_identified);   // Sawmill was identified
 
 	// atlanteans they consider water as a resource
 	// (together with mines, rocks and wood)
@@ -1024,14 +1026,14 @@ void DefaultAI::late_initialization() {
 	}
 
 	// printing identified basic buildings if we are in the basic economy mode
-    basic_economy_established = persistent_data->remaining_basic_buildings.empty();
-	if (!basic_economy_established){
-        printf("%2d: Initializing in the basic economy mode, required buildings:\n", player_number());
-        for (auto bb : persistent_data->remaining_basic_buildings) {
-            printf(
-            "   %3d / %-25s,  target %d\n", bb.first, get_building_observer(bb.first).name, bb.second);
-        }
-    }
+	basic_economy_established = persistent_data->remaining_basic_buildings.empty();
+	if (!basic_economy_established) {
+		log("%2d: Initializing in the basic economy mode, required buildings:\n", player_number());
+		for (auto bb : persistent_data->remaining_basic_buildings) {
+			log("   %3d / %-25s,  target %d\n", bb.first, get_building_observer(bb.first).name,
+			    bb.second);
+		}
+	}
 	assert(persistent_data->remaining_basic_buildings.size() ==
 	       persistent_data->remaining_buildings_size);
 
@@ -1075,8 +1077,6 @@ void DefaultAI::late_initialization() {
 	trees_nearby_treshold_ = 3 + std::abs(management_data.get_military_number_at(121)) / 2;
 
 	last_road_dismantled_ = 0;
-
-	
 }
 
 /**
@@ -1226,8 +1226,6 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 	   enemy_check_area + std::abs(management_data.get_military_number_at(75)) / 10;
 	;
 	const uint16_t distant_resources_area = 20;
-
-	const bool verbose = false;
 
 	uint16_t actual_enemy_check_area = enemy_check_area;
 	field.is_militarysite = false;
@@ -1624,8 +1622,6 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 				   actual_enemy_check_area + 3, &unused1, &unused2, field.coords, WalkSearch::kEnemy);
 			}
 			field.local_soldier_capacity = ms->max_soldier_capacity();
-			if (verbose)
-				printf(" %3dx%3d - militarysite here\n", field.coords.x, field.coords.y);
 			field.is_militarysite = true;
 		} else {
 			assert(false);
@@ -1818,11 +1814,11 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 
 	if (kAITrainingMode) {
 		if (field.military_score_ < -5000 || field.military_score_ > 2000) {
-			printf("Warning field.military_score_ %5d, compounds: ", field.military_score_);
+			log("Warning field.military_score_ %5d, compounds: ", field.military_score_);
 			for (uint16_t i = 0; i < score_parts_size; i++) {
-				printf("%d, ", score_parts[i]);
+				log("%d, ", score_parts[i]);
 			}
-			printf("\n");
+			log("\n");
 		}
 	}
 
@@ -1961,20 +1957,14 @@ void DefaultAI::update_productionsite_stats() {
 //   is built.
 // * Buildings are split into categories
 // * The logic is complex but approximately:
-// - buildings producing building material are preferred
-// - buildings identified as basic are preferred
+// - some buildings belong to "basic economy" - these are preferred
+// - some small huts are exempt from basic economy logic
 // - first bulding of a type is preferred
-// - buildings identified as 'direct food supplier' are built after 15 min.
-//   from game start
-// - if a building is upgradeable, second building is also preferred
-//   (there should be no upgrade when there are not two buildings of the same type)
 // - algorithm is trying to take into account actual utlization of buildings
 //   (the one shown in GUI/game is not reliable, it calculates own statistics)
-// * military buildings have own strategy, split into two situations:
-// - there is no enemy
-// - there is an enemy
+// * military buildings use genetic algorithm logic to score fields
 //   Currently more military buildings are built than needed
-//   and "optimization" (dismantling not needed buildings) is done afterwards
+//   so there are always some vacant positions
 bool DefaultAI::construct_building(uint32_t gametime) {
 	if (buildable_fields.empty()) {
 		return false;
@@ -1983,7 +1973,6 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 	// Just used for easy checking whether a mine or something else was built.
 	bool mine = false;
 	uint32_t consumers_nearby_count = 0;
-	// std::vector<int32_t> spots_avail;
 
 	Map& map = game().map();
 
@@ -2016,18 +2005,18 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 
 	// Do we have basic economy established, informing that we just left the basic economy mode
 	if (!basic_economy_established && persistent_data->remaining_basic_buildings.empty()) {
-		printf("%2d: Player has achieved the basic economy at %s\n", player_number(),
-		       gamestring_with_leading_zeros(gametime));
+		log("%2d: Player has achieved the basic economy at %s\n", player_number(),
+		    gamestring_with_leading_zeros(gametime));
 		basic_economy_established = true;
-        assert(persistent_data->remaining_buildings_size == 0);
+		assert(persistent_data->remaining_buildings_size == 0);
 	}
 
 	if (!basic_economy_established && player_statistics.any_enemy_seen_lately(gametime) &&
 	    management_data.f_neuron_pool[17].get_position(0)) {
-		printf("%2d: Player has not all buildings for basic economy yet (%lu missing), but enemy is "
-		       "nearby, so quitting the mode at %s\n",
-		       player_number(), persistent_data->remaining_basic_buildings.size(),
-		       gamestring_with_leading_zeros(gametime));
+		log("%2d: Player has not all buildings for basic economy yet (%lu missing), but enemy is "
+		    "nearby, so quitting the mode at %s\n",
+		    player_number(), persistent_data->remaining_basic_buildings.size(),
+		    gamestring_with_leading_zeros(gametime));
 		basic_economy_established = true;
 	}
 
@@ -2040,9 +2029,6 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 	// score) and quickly falling down until it reaches the least_military_score
 	// this one (=target_military_score) is actually used to decide if building&field is allowed
 	// candidate
-	// least_military_score is allowed to get bellow 100 only if there is no military site in
-	// construction
-	// right now in order to (try to) avoid expansion lockup
 
 	const PlayerNumber pn = player_number();
 
@@ -3068,7 +3054,7 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 	}
 
 	if (best_building->is(BuildingAttribute::kRecruitment)) {
-		printf("Building a kRecruitment: %s\n", best_building->name);
+		log("%2d: Building a recruitment site: %s\n", player_number(), best_building->name);
 	}
 
 	if (!(best_building->type == BuildingObserver::Type::kMilitarysite)) {
@@ -4108,7 +4094,6 @@ bool DefaultAI::check_mines_(uint32_t const gametime) {
 			stop_site(site);
 			return false;
 		} else {
-			// printf ("DEBUG  ...cannot dismantle yet\n");
 			return false;
 		}
 	} else if (site.site->can_start_working()) {
@@ -4128,7 +4113,6 @@ bool DefaultAI::check_mines_(uint32_t const gametime) {
 	// released worker (if any) can be usefull elsewhere !
 	if (!single_critical && site.built_time + 6 * 60 * 1000 < gametime &&
 	    !site.site->can_start_working()) {
-		printf("DEBUG - going to dismantle %-25s, no miner here\n", site.bo->name);
 		initiate_dismantlement(site, gametime);
 		return false;
 	}
@@ -4142,8 +4126,6 @@ bool DefaultAI::check_mines_(uint32_t const gametime) {
 	// mine elsewhere
 	if (site.built_time + 20 * 60 * 1000 < gametime && gametime % 5 == 0) {
 		if (!mines_per_type[site.bo->mines].is_critical && critical_mine_unoccupied(gametime)) {
-			printf("DEBUG - going to dismantle %s, working but miner is needed for a critical mine\n",
-			       site.bo->name);
 			initiate_dismantlement(site, gametime);
 			return true;
 		}
@@ -4156,8 +4138,6 @@ bool DefaultAI::check_mines_(uint32_t const gametime) {
 
 	// Out of resources, first check whether a mines is not needed for critical mine
 	if (!mines_per_type[site.bo->mines].is_critical && critical_mine_unoccupied(gametime)) {
-		printf("DEBUG - going to dismantling %s, out of resources and miner is needed elsewhere\n",
-		       site.bo->name);
 		initiate_dismantlement(site, gametime);
 		return true;
 	}
@@ -4226,9 +4206,6 @@ bool DefaultAI::check_mines_(uint32_t const gametime) {
 			// now verify that there are enough workers
 			if (site.site->has_workers(enhancement, game())) {  // enhancing
 				game().send_player_enhance_building(*site.site, enhancement);
-				printf("DEBUG: %2d: ... dismantling %-25s on %3dx%3d, remaining wares: %s\n",
-				       player_number(), site.bo->name, site.site->get_position().x,
-				       site.site->get_position().y, set_inputs_to_zero(site) ? "no" : "yes");
 				if (site.bo->max_needed_preciousness == 0) {
 					assert(mines_per_type[site.bo->mines].total_count() <= minimal_mines_count);
 				}
@@ -5073,41 +5050,23 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 			inputs[99] = (wood_policy_ == WoodPolicy::kAllowRangers) ? -1 : 0;
 
 			int16_t tmp_score = 0;
-			const bool print_debug = (gametime % 500 == 0);
 			for (uint8_t i = 0; i < f_neuron_bit_size; i += 1) {
 				if (management_data.f_neuron_pool[8].get_position(i)) {
 					const int16_t partial_input = inputs[i];
 					if (kAITrainingMode && (partial_input < -10 || partial_input > 10)) {
-						if (print_debug)
-							printf("Partial input for posiion %2d too high: %3d\n", i, partial_input);
 					}
 					tmp_score += partial_input;
 				}
 				if (management_data.f_neuron_pool[11].get_position(i)) {
 					const int16_t partial_input = inputs[i + f_neuron_bit_size];
-					if (kAITrainingMode && (partial_input < -10 || partial_input > 10)) {
-						if (print_debug)
-							printf("Partial input for posiion %2d too high: %3d\n", i + f_neuron_bit_size,
-							       partial_input);
-					}
 					tmp_score += partial_input;
 				}
 				if (management_data.f_neuron_pool[59].get_position(i)) {
 					const int16_t partial_input = inputs[i + 2 * f_neuron_bit_size];
-					if (kAITrainingMode && (partial_input < -10 || partial_input > 10)) {
-						if (print_debug)
-							printf("Partial input for posiion %2d too high: %3d\n",
-							       i + 2 * f_neuron_bit_size, partial_input);
-					}
 					tmp_score += partial_input;
 				}
 				if (management_data.f_neuron_pool[12].get_position(i)) {
 					const int16_t partial_input = inputs[i + 3 * f_neuron_bit_size];
-					if (kAITrainingMode && (partial_input < -10 || partial_input > 10)) {
-						if (print_debug)
-							printf("Partial input for posiion %2d too high: %3d\n",
-							       i + 3 * f_neuron_bit_size, partial_input);
-					}
 					tmp_score += partial_input;
 				}
 			}
@@ -5453,7 +5412,6 @@ bool DefaultAI::other_player_accessible(const uint32_t max_distance,
 		// sometimes we search for any owned territory (f.e. when considering
 		// a port location), but when testing (starting from) own military building
 		// we must ignore own territory, of course
-		// NEW HERE
 		const PlayerNumber field_owner = f->get_owned_by();
 		if (field_owner > 0) {
 
@@ -5471,7 +5429,6 @@ bool DefaultAI::other_player_accessible(const uint32_t max_distance,
 
 			// if owned by enemy
 			if (type == WalkSearch::kEnemy && field_owner != pn) {
-				// NEW HERE
 				// if not in the same taem => it is enemy
 				if (!player_statistics.players_in_same_team(pn, field_owner)) {
 					*tested_fields = done.size();
@@ -5532,7 +5489,7 @@ void DefaultAI::gain_building(Building& b, const bool found_on_load) {
 		++bo.cnt_built;
 		const uint32_t gametime = game().get_gametime();
 		bo.last_building_built = gametime;
-        //erasing building from remaining_basic_buildings, but only not on saved game loading
+		// erasing building from remaining_basic_buildings, but only not on saved game loading
 		if (!found_on_load && persistent_data->remaining_basic_buildings.count(bo.id) > 0) {
 			if (persistent_data->remaining_basic_buildings[bo.id] > 1) {
 				persistent_data->remaining_basic_buildings[bo.id] -= 1;
@@ -5783,7 +5740,6 @@ void DefaultAI::lose_building(const Building& b) {
 // Recursively verify that all inputs have a producer.
 // TODO(unknown): this function leads to periodic freezes of ~1 second on big games on my system.
 // TODO(unknown): It needs profiling and optimization.
-// NOTE: This is not needed anymore and it seems it is not missed neither
 bool DefaultAI::check_supply(const BuildingObserver& bo) {
 	size_t supplied = 0;
 	for (const Widelands::DescriptionIndex& temp_inputs : bo.inputs) {
@@ -6031,14 +5987,14 @@ void DefaultAI::print_stats(uint32_t const gametime) {
 	}
 
 	if (false)
-		printf(" %1d: %s Buildings count: Pr:%3u, Ml:%3u, Mi:%2u, Wh:%2u, Po:%u.\n", pn,
-		       gamestring_with_leading_zeros(gametime), static_cast<uint32_t>(productionsites.size()),
-		       static_cast<uint32_t>(militarysites.size()), static_cast<uint32_t>(mines_.size()),
-		       static_cast<uint32_t>(warehousesites.size() - num_ports), num_ports);
+		log(" %1d: %s Buildings count: Pr:%3u, Ml:%3u, Mi:%2u, Wh:%2u, Po:%u.\n", pn,
+		    gamestring_with_leading_zeros(gametime), static_cast<uint32_t>(productionsites.size()),
+		    static_cast<uint32_t>(militarysites.size()), static_cast<uint32_t>(mines_.size()),
+		    static_cast<uint32_t>(warehousesites.size() - num_ports), num_ports);
 
 	if (false)
-		printf(" %1s %-30s   %5s(perf)  %6s %6s %6s %8s %5s %5s %5s %5s\n", "T", "Buildings", "work.",
-		       "const.", "unocc.", "uncon.", "needed", "prec.", "pprio", "stock", "targ.");
+		log(" %1s %-30s   %5s(perf)  %6s %6s %6s %8s %5s %5s %5s %5s\n", "T", "Buildings", "work.",
+		    "const.", "unocc.", "uncon.", "needed", "prec.", "pprio", "stock", "targ.");
 	for (uint32_t j = 0; j < buildings_.size(); ++j) {
 		BuildingObserver& bo = buildings_.at(j);
 		if ((bo.total_count() > 0 || bo.new_building == BuildingNecessity::kNeeded ||
@@ -6078,13 +6034,12 @@ void DefaultAI::print_stats(uint32_t const gametime) {
 			}
 
 			if (false)
-				printf(" %1s %-30s %5d(%3d%%)  %6d %6d %6d %8s %5d %5d %5d %5d\n", btype.c_str(),
-				       bo.name,
-				       bo.total_count() - bo.cnt_under_construction - bo.unoccupied_count -
-				          bo.unconnected_count,
-				       bo.current_stats, bo.cnt_under_construction, bo.unoccupied_count,
-				       bo.unconnected_count, needeness.c_str(), bo.max_needed_preciousness,
-				       bo.primary_priority, get_stocklevel(bo, gametime), bo.cnt_target);
+				log(" %1s %-30s %5d(%3d%%)  %6d %6d %6d %8s %5d %5d %5d %5d\n", btype.c_str(), bo.name,
+				    bo.total_count() - bo.cnt_under_construction - bo.unoccupied_count -
+				       bo.unconnected_count,
+				    bo.current_stats, bo.cnt_under_construction, bo.unoccupied_count,
+				    bo.unconnected_count, needeness.c_str(), bo.max_needed_preciousness,
+				    bo.primary_priority, get_stocklevel(bo, gametime), bo.cnt_target);
 		}
 	}
 
@@ -6105,19 +6060,18 @@ void DefaultAI::print_stats(uint32_t const gametime) {
 	}
 
 	if (false)
-		printf("Prodsites in constr: %2d, mines in constr: %2d %s %s\n", numof_psites_in_constr,
-		       mines_in_constr(),
-		       (expansion_type.get_expansion_type() != ExpansionMode::kEconomy) ?
-		          "NEW BUILDING STOP" :
-		          "",
-		       why.c_str());
+		log("Prodsites in constr: %2d, mines in constr: %2d %s %s\n", numof_psites_in_constr,
+		    mines_in_constr(),
+		    (expansion_type.get_expansion_type() != ExpansionMode::kEconomy) ? "NEW BUILDING STOP" :
+		                                                                       "",
+		    why.c_str());
 
 	if (false)
-		printf("Least military score: %5d/%3d, msites in constr: %3d,"
-		       "soldier st: %2d, strength: %3d\n",
-		       persistent_data->least_military_score, persistent_data->ai_personality_mil_upper_limit,
-		       msites_in_constr(), static_cast<int8_t>(soldier_status_),
-		       player_statistics.get_modified_player_power(player_number()));
+		log("Least military score: %5d/%3d, msites in constr: %3d,"
+		    "soldier st: %2d, strength: %3d\n",
+		    persistent_data->least_military_score, persistent_data->ai_personality_mil_upper_limit,
+		    msites_in_constr(), static_cast<int8_t>(soldier_status_),
+		    player_statistics.get_modified_player_power(player_number()));
 	std::string wpolicy = "";
 	switch (wood_policy_) {
 	case WoodPolicy::kDismantleRangers:
@@ -6132,9 +6086,6 @@ void DefaultAI::print_stats(uint32_t const gametime) {
 	default:
 		wpolicy = "unknown";
 	}
-	if (false)
-		printf("Trees around cutters: %4d/10, woodcutters policy: %s\n",
-		       persistent_data->trees_around_cutters, wpolicy.c_str());
 }
 
 template <typename T>
@@ -6170,8 +6121,7 @@ int32_t DefaultAI::limit_cnt_target(const int32_t current_cnt_target, const int3
 }
 
 // Looking for situation that for a critical mine (iron, or marble) there is just one mine and it is
-// unoccupied
-// probably we need to dismantle another one to release miner
+// unoccupied, probably we need to dismantle another one to release miner
 bool DefaultAI::critical_mine_unoccupied(uint32_t gametime) {
 	// resetting unoccupied
 	for (auto& mine : mines_per_type) {
@@ -6190,7 +6140,6 @@ bool DefaultAI::critical_mine_unoccupied(uint32_t gametime) {
 	for (auto& mine : mines_per_type) {
 		if (mine.second.is_critical && mine.second.total_count() == 1 &&
 		    mine.second.unoccupied == 1) {
-			printf("MINEDEBUG - a single critical unoccupied mine here \n");
 			return true;
 		}
 		assert(mine.second.unoccupied <= mines_.size());
@@ -6213,8 +6162,6 @@ bool DefaultAI::set_inputs_to_zero(const Widelands::ProductionSiteObserver& site
 	if (remaining_wares == 0) {
 		return true;
 	}
-	// printf ("DEBUG - %3dx%3d: %2d pieces of ware still here\n", site.site->get_position().x,
-	// site.site->get_position().y,remaining_wares);
 	return false;
 }
 
