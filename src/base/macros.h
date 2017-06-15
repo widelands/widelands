@@ -69,7 +69,11 @@
 
 // For switch statements: Tell gcc7 that a fallthrough is intended
 // https://developers.redhat.com/blog/2017/03/10/wimplicit-fallthrough-in-gcc-7/
+#ifdef __clang__
+#define FALLTHROUGH [[clang::fallthrough]]
+#else
 #define FALLTHROUGH [[gnu::fallthrough]]
+#endif
 
 // disallow copying or assigning a class
 #define DISALLOW_COPY_AND_ASSIGN(TypeName)                                                         \
