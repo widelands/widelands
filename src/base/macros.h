@@ -75,7 +75,7 @@
 #elif __GNUC__ >= 7
 #define FALLS_THROUGH /* Falls through */ \
 	[[gnu::fallthrough]]
-else
+#else
 #define FALLS_THROUGH /* Falls through */
 #endif
 
