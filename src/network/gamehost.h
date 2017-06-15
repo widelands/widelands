@@ -22,6 +22,7 @@
 
 #include "logic/game_controller.h"
 #include "logic/game_settings.h"
+#include "logic/player_end_result.h"
 #include "logic/widelands.h"
 #include "network/nethost.h"
 #include "network/network.h"
