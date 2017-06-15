@@ -681,7 +681,7 @@ bool FullscreenMenuLoadGame::handle_key(bool down, SDL_Keysym code) {
 		if (code.mod & KMOD_NUM) {
 			break;
 		}
-		FALLS_THROUGH;
+		FALLS_THROUGH
 	case SDLK_DELETE:
 		clicked_delete();
 		return true;
