@@ -70,9 +70,11 @@
 // For switch statements: Tell gcc7 and clang that a fallthrough is intended
 // https://developers.redhat.com/blog/2017/03/10/wimplicit-fallthrough-in-gcc-7/
 #ifdef __clang__
-#define FALLS_THROUGH [[clang::fallthrough]];
+#define FALLS_THROUGH [[clang::fallthrough]]; \
+	/* Falls through */
 #else
-#define FALLS_THROUGH [[gnu::fallthrough]]
+#define FALLS_THROUGH [[gnu::fallthrough]] \
+	/* Falls through */
 #endif
 
 // disallow copying or assigning a class
