@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-05-19 07:45+0000\n"
+"POT-Creation-Date: 2017-06-02 11:07+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Milan Fašina <matrix17@seznam.cz>, 2017\n"
 "Language-Team: Czech (https://www.transifex.com/widelands/teams/35159/cs/)\n"
@@ -47,6 +47,8 @@ msgid ""
 "Build a quarry close to the abundant rocks, so we can free some building "
 "plots and get some valuable resources."
 msgstr ""
+"Postav lom poblíž opuštěných kamenů, abychom uvolnili prostor pro budovy a "
+"získali cenné suroviny."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:57
 msgid "Build a lumberjack’s house, a sawmill and a stonemason’s house"
@@ -62,6 +64,8 @@ msgid ""
 "there is enough space for them. This will complete the basic building "
 "material supply chain."
 msgstr ""
+"Postav domek dřevorubce, pilu a domek kameníka, jakmile pro ně bude dostatek"
+" místa. Tím dokončíš výrobní proces všech stavebních materiálů."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:66
 msgid "Lower the demand for marble columns"
@@ -76,15 +80,19 @@ msgid ""
 "We should save some marble for buildings. So, please lower the demand for "
 "marble columns in the economy settings to four."
 msgstr ""
+"Měli bychom si schovat nějaký mramor na stavění. Sniž prosím požadavek na "
+"mramorové sloupy v nastavení hospodářství na čtyři."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:70
 msgid ""
 "Remember that you can access the economy settings by clicking on any flag."
 msgstr ""
+"Pamatuj, že do menu nastavení hospodářství se dostaneš klikem na libovolnou "
+"vlajku."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:76
 msgid "Find a port space on the small island"
-msgstr ""
+msgstr "Najdi místo pro přístav na malém ostrově"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:78
 msgid "Port Space"
@@ -93,7 +101,7 @@ msgstr "Místo na přístav"
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:79
 msgid ""
 "In order to regain access to the sea, we first must discover a port space."
-msgstr ""
+msgstr "Aby jsi získal přístup k moři, musíš nejprve najít místo pro přístav."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:85
 msgid "Build a port and a shipyard on the Island"
@@ -146,7 +154,7 @@ msgstr "Postav 2 přístavy na odlehlých ostrovech"
 #. them
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:115
 msgid "Build 2 Expedition Ports"
-msgstr ""
+msgstr "Postav 2 přístavy pro výpravy"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:116
 msgid ""
@@ -172,6 +180,7 @@ msgstr "Produkce zlata"
 msgid ""
 "We need to produce at least 6 gold to be able to colonize our vicinity."
 msgstr ""
+"Potřebujeme získat alespoň 6 zlata, abychom mohli kolonizovat naše okolí."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:132
 msgid "Defeat the Barbarians"
@@ -187,7 +196,7 @@ msgstr "Na tomto místě nemají barbaři, co pohledávat."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:141
 msgid "Explore further and build ports"
-msgstr ""
+msgstr "Pokračuj v průzkumu a postav přístavy"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:143
 msgid "Explore Additional Islands and Search for Port Spaces"
@@ -226,6 +235,8 @@ msgid ""
 "Build a training camp, some barracks and an arena or colosseum to train our "
 "soldiers."
 msgstr ""
+"Postav výcvikový tábor, kasárna a arénu nebo koloseum na výcvik našich "
+"vojáků."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:171
 msgid "The Journey Home"
@@ -250,7 +261,7 @@ msgstr ""
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:177
 msgid "But the gods themselves didn’t want us to get home so quickly!"
-msgstr ""
+msgstr "Ale sami bohové nechtěli, abychom se dostali domů tak rychle!"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:185
 msgid "The Wrath of Neptune"
@@ -263,6 +274,9 @@ msgid ""
 "But this time it felt even worse than last time. The waves were twice the "
 "height of our brave ship and the winds drove us into unsafe waters."
 msgstr ""
+"Postavil se proti nám sám Neptun a zavedl nás do temné a divoké bouře. Ale "
+"tentokrát mi to přišlo ještě horší než minule. Vlny byly dvakrát tak velké "
+"jako naše loď a vítr nás zavál do nebezpečných vod."
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:191
@@ -274,7 +288,7 @@ msgstr ""
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:198
 msgid "Shipwrecked Again"
-msgstr ""
+msgstr "Loď opět ztroskotala"
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:201
@@ -295,6 +309,8 @@ msgid ""
 "It really seems as if we have landed on a very small island with little "
 "space."
 msgstr ""
+"Opravdu to vypadá, že jsme přistáli na velmi malém ostrově s velmi omezeným "
+"prostorem."
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:210
@@ -316,7 +332,7 @@ msgstr ""
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:221
 msgid "Saledus looks around nervously…"
-msgstr ""
+msgstr "Saledus se nervozně rozhlíží..."
 
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:223
@@ -325,10 +341,13 @@ msgid ""
 "safe either. It would probably be reasonable to build a tower to explore the"
 " island and add some military strength."
 msgstr ""
+"Pane, o tomto ostrově vůbec nic nevíme. Navíc se domnívám, že tu nejsme v "
+"bezpečí. Bylo by zřejmě rozumné postavit věž na průzkum ostrova a zvýšit "
+"počet vojenských jednotek."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:230
 msgid "Amalea Interrupts"
-msgstr ""
+msgstr "Amalea přerušuje"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:231
 msgid "Amalea raises her hand…"
@@ -341,6 +360,9 @@ msgid ""
 "restrictive in spending them. Even for military buildings, we should be very"
 " careful."
 msgstr ""
+"Jelikož nevíme kolik surovin dokážeme natěžit, měli bychom být velmi opatrní"
+" v jejich využívání. Dokonce i stavbu vojenských budov bychom si měli dobře "
+"rozmyslet."
 
 #. TRANSLATORS: Message header - Saledus is advising to save resources
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:241
@@ -358,6 +380,8 @@ msgid ""
 "should only build an outpost as this is the most effective military "
 "building."
 msgstr ""
+"Pane, Amalea má o surovinách pravdu. Proto bych se rád opravil. Měli bychom "
+"postavit pouze hlásku, jelikož je to nejefektivnější vojenská budova."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:253
 msgid "Rocks, Nothing but Rocks"
@@ -365,7 +389,7 @@ msgstr "Kameny a nic než kameny"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:254
 msgid "Saledus speaks with a sigh of relief…"
-msgstr ""
+msgstr "Při Saledusově proslovu je v jeho hlasu znát úleva..."
 
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:256
@@ -415,12 +439,12 @@ msgstr ""
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:282
 msgid "Amalea’s New Instructions"
-msgstr ""
+msgstr "Nové instrukce od Amalei"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:283
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:357
 msgid "Amalea recommends…"
-msgstr ""
+msgstr "Amalea doporučuje..."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:285
@@ -443,12 +467,13 @@ msgstr "Amaleina doporučení"
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:297
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:314
 msgid "Amalea comes in…"
-msgstr ""
+msgstr "Amalea přichází..."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:299
 msgid "I’ve got important things to talk about… First the good news:"
 msgstr ""
+"Mám pár důležitých věcí, které bych chtěl probrat... Nejprve dobré zprávy:"
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:302
@@ -495,7 +520,7 @@ msgstr "Potřebujeme přístav"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:329
 msgid "Saledus is thoughtful…"
-msgstr ""
+msgstr "Saledus je zamyšlený…"
 
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:331
@@ -515,7 +540,7 @@ msgstr ""
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:342
 msgid "A Step Closer to Getting Home"
-msgstr ""
+msgstr "O krok blíže k domovu"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:343
 msgid "Saledus looks excited…"
@@ -535,6 +560,8 @@ msgid ""
 "Now we truly can look forward to building some ships. So, we should build a "
 "shipyard as well."
 msgstr ""
+"Teď už se opravdu můžeme pustit do stavby lodí. Proto bychom také měli "
+"postavit loděnici."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:356
 msgid "Amalea’s Wisdom"
@@ -546,6 +573,8 @@ msgid ""
 "I understand the euphoria of Saledus, but we have some serious problems to "
 "solve first."
 msgstr ""
+"Chápu Saledusovo nadšení, ale nejprve musíme vyřešit jiné, vážnější "
+"problémy."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:362
@@ -594,7 +623,7 @@ msgstr "Mořeplavectví je opět dostupné"
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:385
 msgid "Praise the gods. We finally have a ship industry."
-msgstr ""
+msgstr "Chvála bohům. Konečně můžeme stavět lodě."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:391
 msgid "Amalea is Proud"
@@ -641,6 +670,8 @@ msgid ""
 "Now that we have all resources ready for building a ship, we should explore "
 "the surrounding islands."
 msgstr ""
+"Teď, když máme všechny suroviny na stavbu lodě, měli bychom prozkoumat "
+"okolní ostrovy."
 
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:414
@@ -653,7 +684,7 @@ msgstr ""
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:417
 msgid "But the following objective is even more important:"
-msgstr ""
+msgstr "Ale tento úkol je ještě důležitější:"
 
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:420
@@ -712,7 +743,7 @@ msgstr ""
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:451
 msgid "We Should Conquer All the Islands"
-msgstr ""
+msgstr "Měli bychom dobýt všechny ostrovy"
 
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:454
@@ -775,7 +806,7 @@ msgstr ""
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:488
 msgid "Amalea’s Reminder"
-msgstr ""
+msgstr "Amalea připomíná"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:489
 msgid "Amalea is shaking her head…"
@@ -801,7 +832,7 @@ msgstr ""
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:497
 msgid "But be careful not to waste any bigger building spots."
-msgstr ""
+msgstr "Dávej si pozor, aby si nepřišel o velká stavební místa."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:503
 msgid "Amalea’s Excited"
@@ -831,6 +862,8 @@ msgid ""
 "It would be especially helpful to find more marble, either within fields of "
 "rock or in the mountains to mine it."
 msgstr ""
+"Bylo by nesmírně užitečné získat více mramoru, buď z kamenů nebo těžbou v "
+"horách."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:520
 msgid "Amalea is Very Content"
@@ -931,7 +964,7 @@ msgstr ""
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:570
 msgid "Praise, Praise, Praise"
-msgstr ""
+msgstr "Chvála, chvála, chvála"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:571
 msgid "Saledus is happily worshipping…"

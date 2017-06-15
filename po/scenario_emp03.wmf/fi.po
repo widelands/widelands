@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-05-19 07:45+0000\n"
+"POT-Creation-Date: 2017-06-02 11:07+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Jukka Pakarinen <flegmaatikko@gmail.com>, 2017\n"
 "Language-Team: Finnish (https://www.transifex.com/widelands/teams/35159/fi/)\n"
@@ -222,34 +222,38 @@ msgstr ""
 #. TRANSLATORS: Objective header
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:151
 msgid "Recover the shrine"
-msgstr ""
+msgstr "Kokoa alttari"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:153
 msgid "Find the Holy Shrine"
-msgstr ""
+msgstr "Etsi Pyhä Alttari"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:154
 msgid ""
 "We need to find and secure all six pieces of the holy shrine of Neptune."
 msgstr ""
+"Meidän täytyy löytää ja suojata kaikki kuusi Neptunuksen pyhää alttarin "
+"palasta."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:159
 msgid "Build a training infrastructure"
-msgstr ""
+msgstr "Rakenna koulutusinfrastuktuuri"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:161
 msgid "Training Infrastructure"
-msgstr ""
+msgstr "Koulutusinfrastuktuuri"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:162
 msgid ""
 "Build a training camp, some barracks and an arena or colosseum to train our "
 "soldiers."
 msgstr ""
+"Rakenna harjoitusleiri, kasarmeja ja Areena tai Colosseum sotilaittemme "
+"kouluttamiseksi."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:171
 msgid "The Journey Home"
-msgstr ""
+msgstr "Kotimatka"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:172
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:186
@@ -258,7 +262,7 @@ msgstr ""
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:615
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:643
 msgid "Diary of Lutius"
-msgstr ""
+msgstr "Lutiuksen päiväkirja"
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:174
@@ -266,15 +270,19 @@ msgid ""
 "Finally, we were set towards Fremil again. I couldn’t await the chance to "
 "clear my records of this big defeat by the Barbarians."
 msgstr ""
+"Viimeinkin, suuntasimme taas kohti Fremiliä. En voinut odottaa "
+"mahdollisuutta puhdistaa mainettani tästä suuresta Barbaarien "
+"kukistamisesta."
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:177
 msgid "But the gods themselves didn’t want us to get home so quickly!"
 msgstr ""
+"Mutta itse jumalat eivät halunneet meidän pääsevän kotiin kovin nopeasti!"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:185
 msgid "The Wrath of Neptune"
-msgstr ""
+msgstr "Neptunuksen Raivo"
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:188
@@ -283,6 +291,10 @@ msgid ""
 "But this time it felt even worse than last time. The waves were twice the "
 "height of our brave ship and the winds drove us into unsafe waters."
 msgstr ""
+"Itse Neptunus oli meitä vastaa ja ohjasi meidät taas synkkään myrskyyn. "
+"Mutta tällä kertaa se tuntui jopa pahemmalta kuin edellinen. Aallot olivat "
+"kaksi kertaa korkeammat kuin uljas aluksemme ja tuuli työnsi meidät "
+"vaarallisille vesille."
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:191
@@ -291,15 +303,18 @@ msgid ""
 "taking in more and more water. We would be glad to survive this black night "
 "with barely more than our lives."
 msgstr ""
+"Aluksemme vaurioitui pahoin. Masto on kadonnut yli laidan ja runkoon johtuu "
+"vettä koko ajan lisää. Iloitsisimme jos selviäisimm tästä pimeästä yöstä "
+"edes hengissä."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:198
 msgid "Shipwrecked Again"
-msgstr ""
+msgstr "Haaksirikkoutui Taas"
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:201
 msgid "Finally, the wrath of the gods and the ocean seems to be over."
-msgstr ""
+msgstr "Viimeinkin jumalten ja meren raivoaminen näyttäisi olevan ohi."
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:204
@@ -308,6 +323,9 @@ msgid ""
 "growing at the shore. But that is about as good as it gets. The truth is: "
 "when I woke up this morning, I saw nothing but sand and stone around us."
 msgstr ""
+"Rantauduimme tuntemattomalle rannikolle ja löysimme rauhallisen leposijan "
+"rannan palmupuiden alta. Totuus on: kun heräsin tänä aamuna, en nähnyt muuta"
+" kuin hiekkaa ja kiveä ympärillämme."
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:207
@@ -315,6 +333,8 @@ msgid ""
 "It really seems as if we have landed on a very small island with little "
 "space."
 msgstr ""
+"Näytää tosiaankin siltä, että olemme rantautuneen hyvin pienelle saarelle, "
+"jossa on vähän tilaa."
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:210
@@ -322,6 +342,9 @@ msgid ""
 "To make matters even worse, all the land we can see is blocked by rocks and "
 "trees. I fear we won’t find the resources we need to build a new ship."
 msgstr ""
+"Tilanteen tekee vielä pahemmaksi se, että maa jonka näemme on kivien ja "
+"puiden peitossa. Pelkään pahoin ettemme kykene löytämään tarvittavia "
+"resursseja uuden aluksen rakentamiseksi."
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:213
@@ -329,14 +352,17 @@ msgid ""
 "I really don’t know if and how we will get back home. And the war is going "
 "on without us. I hope my fellow soldiers are defending our empire well."
 msgstr ""
+"En todellakaan tiedä pääsemmekö ja miten, takaisin kotiin. Ja sota vain "
+"jatkuu ilman meitä. Toivottavasti sotilastoverimme puollustavat "
+"keisarikuntaamme hyvin."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:220
 msgid "No Sight"
-msgstr ""
+msgstr "Ei Näkymää"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:221
 msgid "Saledus looks around nervously…"
-msgstr ""
+msgstr "Saledus katselee ympärilleen levottomasti…"
 
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:223
@@ -345,14 +371,17 @@ msgid ""
 "safe either. It would probably be reasonable to build a tower to explore the"
 " island and add some military strength."
 msgstr ""
+"Herrani, emme tiedä mitään tästä saaresta. Ja uskon ettemme myöskään ole "
+"turvassa. Olisi järkevää rakentaa torni saaren tutkimiseksi ja lisätä jonkin"
+" verran sotilasvahvuutta. "
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:230
 msgid "Amalea Interrupts"
-msgstr ""
+msgstr "Amalea Keskeyttää"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:231
 msgid "Amalea raises her hand…"
-msgstr ""
+msgstr "Amalea kohottaa kättänsä…"
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:233
@@ -361,15 +390,18 @@ msgid ""
 "restrictive in spending them. Even for military buildings, we should be very"
 " careful."
 msgstr ""
+"Koska emme tiedä kuinka paljon resursseja voimme saada, meidän tulisi olla "
+"hyvin säästeliäitä niiden käytössä. Jopa sotilasrakennuksien kohdalla tulisi"
+" olla hyvin huolellinen."
 
 #. TRANSLATORS: Message header - Saledus is advising to save resources
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:241
 msgid "Save Resources"
-msgstr ""
+msgstr "Säästä Resursseja"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:242
 msgid "Saledus is nodding in agreement…"
-msgstr ""
+msgstr "Saledus nyökkää hyväksyvästi…"
 
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:244
@@ -378,14 +410,17 @@ msgid ""
 "should only build an outpost as this is the most effective military "
 "building."
 msgstr ""
+"Herrani, Amalea on oikeassa resurssien suhteen. Siksi oikaisen sanomisiani. "
+"Meidän pitäisi rakentaa vain etuvartioasema koska se on kaikkein tehokkain "
+"sotilasrakennus."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:253
 msgid "Rocks, Nothing but Rocks"
-msgstr ""
+msgstr "Kivikkoa, Ja Vain Kivikkoa"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:254
 msgid "Saledus speaks with a sigh of relief…"
-msgstr ""
+msgstr "Saledus puhuu helpottuneena…"
 
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:256
@@ -393,6 +428,8 @@ msgid ""
 "Sire, I saw that the construction of the outpost was completed, so I have "
 "assigned some of my best soldiers to it to keep the watch."
 msgstr ""
+"Herrani, huomasin etuvartioaseman rannustöiden päättyneen, joten olen "
+"määrännyt joitakin parhaita sotilaita pitämään siellä vahtia."
 
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:259
@@ -402,14 +439,18 @@ msgid ""
 "new ship or even have some basic infrastructure to make our lives more "
 "comfortable?"
 msgstr ""
+"Vaikka tämä onkin hyvä askel eteenpäin, en kykene näkemään juurikaan tilaa "
+"rakennuksille. Koko saari on täynnä kivikkoa. Kuinka voisimme koskaan "
+"rakentaa uutta alusta tai saada edes alkeellista infrastruktuuria "
+"tehdäksemme elämästämme miellyttävämmän."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:265
 msgid "Amalea’s Plan"
-msgstr ""
+msgstr "Amalean Suunnitelma"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:266
 msgid "Amalea smiles…"
-msgstr ""
+msgstr "Amalea hymyilee…"
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:268
@@ -417,6 +458,9 @@ msgid ""
 "Lutius, this may seem very tricky, but we can do it. First of all, we need "
 "patience as well as speed and a plan to succeed in this part of the world."
 msgstr ""
+"Lutius, tämä saattaa näyttää hyvin vaikealta, mutta me voimme tehdä sen. "
+"Ensinnäkin, me tarvitsemme kärsivällisyyttä kuten myös nopeutta ja tässä "
+"maailman kolkassa toimivan suunnitelman."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:271
@@ -424,6 +468,8 @@ msgid ""
 "I think we should try to reveal some building space by cutting up all the "
 "rocks in a quarry."
 msgstr ""
+"Luulempa meidän tarvitsevan paljastaa hieman rakennustilaa leikkaamalla "
+"kivikkoa kivilouhoksella."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:274
@@ -432,15 +478,18 @@ msgid ""
 "our new world. We can use them as soon as there will finally be enough space"
 " for buildings."
 msgstr ""
+"Lisäksi sillä saisimme graniittia ja jonkin verran marmoria uuden maailmamme"
+" rakentamiseen. Voimme käyttää niitä heti kun rakennuksille on riittävästi "
+"tilaa."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:282
 msgid "Amalea’s New Instructions"
-msgstr ""
+msgstr "Amalean Uudet Ohjeet"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:283
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:357
 msgid "Amalea recommends…"
-msgstr ""
+msgstr "Amalea kehoittaa…"
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:285
@@ -448,6 +497,8 @@ msgid ""
 "Good news from the people, Lutius. I got the message that our first quarry "
 "has started its work today."
 msgstr ""
+"Hyviä uutisia kansalta, Lutius. Sain viesti, että meidän ensimmäinen "
+"kivilouhos on aloittanut tänään toimintansa."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:288
@@ -455,20 +506,22 @@ msgid ""
 "Perhaps it would be a good idea to wait until it has cleared some space and "
 "then build up a basic construction material industry."
 msgstr ""
+"Ehkä on viisainta odottaa kunnes se on paljastanut jonkin verran tilaa ja "
+"sitten rakennetaan alkeellinen rakennusmateriaaliteollisuus."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:296
 msgid "Amalea’s Recommendations"
-msgstr ""
+msgstr "Amalean Suositukset"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:297
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:314
 msgid "Amalea comes in…"
-msgstr ""
+msgstr "Amalea tulee sisään…"
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:299
 msgid "I’ve got important things to talk about… First the good news:"
-msgstr ""
+msgstr "Minulla on tärkeää kerrottavaa… Ensin hyvät uutiset:"
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:302
@@ -476,6 +529,9 @@ msgid ""
 "I noticed that our stonemason has started his work, finally. He will cut the"
 " number of marble columns that we request in our basic economy settings."
 msgstr ""
+"Olen huomannut, että kivenhakkaaja on aloittanut työnsä, viimeinkin. Hän "
+"leikkaa niin monta marmoripylvästä kuin alkeellisen talouden asetuksissa "
+"pyydämme."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:305
@@ -485,15 +541,19 @@ msgid ""
 "settings to a smaller amount. I think a reserve of 4 columns might be "
 "sufficient for the moment being."
 msgstr ""
+"Mutta siinä on eräs hankaluus, jos kulutamme kaikki marmorimme pylväisiin, "
+"marmori loppuu. Joten meidän pitäisi pienentää marmoripylväiden määrää "
+"talouden asetuksissa. Arvelen, että 4 pylvään reservi saattaisi olla sopiva "
+"tilanteeseen."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:313
 msgid "Amalea Looks Happy"
-msgstr ""
+msgstr "Amalea Näyttää Iloiselta"
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:316
 msgid "I have excellent progress to report now."
-msgstr ""
+msgstr "Minulla on nyt loistavaa edistystä kerrottavana. "
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:319
@@ -501,6 +561,9 @@ msgid ""
 "I found out that the construction of the lumberjack’s house and the sawmill "
 "is complete, so we can begin to harvest logs and make planks out of them."
 msgstr ""
+"Minulle selvisi, että puunhakkaajan talon ja sahan rakennustyöt on saatu "
+"tehtyä, joten me voimme aloittaa tukkien hankkimisen ja tehdä niistä "
+"lautoja."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:322
@@ -508,14 +571,17 @@ msgid ""
 "This is a great step forward in constructing advanced buildings. And we can "
 "think of using some planks to build new ships."
 msgstr ""
+"Tämä on suuri askel eteenpäin kehittyneiden rakennuksien rakentamiseksi. "
+"Voimme jopa ajatella käyttävämme jonkin verran lautoja uusien aluksien "
+"rakentamiseen."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:328
 msgid "We Need a Port"
-msgstr ""
+msgstr "Tarvitsemme Sataman"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:329
 msgid "Saledus is thoughtful…"
-msgstr ""
+msgstr "Saledus on mietteliäs…"
 
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:331
@@ -535,11 +601,11 @@ msgstr ""
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:342
 msgid "A Step Closer to Getting Home"
-msgstr ""
+msgstr "Askel Lähemmäksi Kotiinpääsyä"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:343
 msgid "Saledus looks excited…"
-msgstr ""
+msgstr "Saledus näyttää innostuneelta…"
 
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:345
@@ -558,7 +624,7 @@ msgstr ""
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:356
 msgid "Amalea’s Wisdom"
-msgstr ""
+msgstr "Amalean Viisaus"
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:359
@@ -609,7 +675,7 @@ msgstr ""
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:382
 msgid "Seafaring is Possible Again"
-msgstr ""
+msgstr "Merenkäynti On Taas Mahdollista"
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:385
@@ -618,7 +684,7 @@ msgstr ""
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:391
 msgid "Amalea is Proud"
-msgstr ""
+msgstr "Amalea On Ylpeä"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:392
 msgid "Amalea cheers…"
@@ -648,12 +714,12 @@ msgstr ""
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:408
 msgid "We Should Explore the Islands"
-msgstr ""
+msgstr "Meidän Pitäisi Tutkia Saaret"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:409
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:452
 msgid "Saledus is excited…"
-msgstr ""
+msgstr "Saledus innostuu…"
 
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:411
@@ -685,11 +751,11 @@ msgstr ""
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:428
 msgid "Amalea Advises"
-msgstr ""
+msgstr "Amalea Neuvoo"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:429
 msgid "Amalea looks thoughtful…"
-msgstr ""
+msgstr "Amalea näyttää mietteliäältä…"
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:431
@@ -732,7 +798,7 @@ msgstr ""
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:451
 msgid "We Should Conquer All the Islands"
-msgstr ""
+msgstr "Meidän Pitäisi Valloittaa Kaikki Saaret"
 
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:454
@@ -747,7 +813,7 @@ msgstr ""
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:464
 msgid "Amalea’s Luck"
-msgstr ""
+msgstr "Amalean Onni"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:465
 msgid "Amalea is really proud of the achievements…"
@@ -825,7 +891,7 @@ msgstr ""
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:503
 msgid "Amalea’s Excited"
-msgstr ""
+msgstr "Amalean Innostus"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:504
 msgid "Amalea is looking forward to the exploration…"
@@ -942,6 +1008,10 @@ msgid ""
 "can’t worship him well. I think we should search the whole region to see if "
 "we can recover all six pieces of the shrine."
 msgstr ""
+"Valitettavasti olemme kadottaneet Neptunuksen pyhän alttarin suuressa "
+"myrskyssä, joten emme voi palvoa häntä kunnolla. Minusta tuntuu, että meidän"
+" pitäisi tutkia koko alue selvittääksemme voiko kaikki kuusi palaa "
+"alttarista koota yhteen."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:562
 msgid ""
@@ -1053,20 +1123,20 @@ msgstr ""
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:628
 msgid "Finally, we have discovered a piece of our shrine. Praise Neptune!"
-msgstr ""
+msgstr "Olemme viimeinkin löytäneet palan alttariamme. Ylistetty Neptunus!"
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:631
 msgid "We have discovered another piece of our shrine. Praise Neptune!"
-msgstr ""
+msgstr "Olemme löytäneet toisen palan alttariamme. Ylistetty Neptunus!"
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:636
 #, lua-format
 msgid "We still need to discover %d piece of our shrine."
 msgid_plural "We still need to discover %d pieces of our shrine."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Meidän täytyy vielä löytää %d pala alttaristamme."
+msgstr[1] "Meidän täytyy vielä löytää %d palaa alttaristamme."
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:639
@@ -1074,6 +1144,8 @@ msgid ""
 "Finally, we have discovered the last piece of our shrine. Now we can "
 "reassemble it to worship our god. Praise Neptune!"
 msgstr ""
+"Olemme viimeinkin löytäneet viimeisen palasen alttaristamme. Nyt voimme "
+"jälleen kokoontua sille palvomaan jumalaamme. Ylistetty Neptunus!"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:642
 msgid "Artifact Found"

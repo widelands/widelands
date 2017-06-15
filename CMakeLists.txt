@@ -41,6 +41,7 @@ SET(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${CMAKE_CURRENT_SOURCE_DIR}/cmake/Mod
 
 if (WIN32)
   set (Boost_USE_STATIC_LIBS  ON)
+  link_libraries(wsock32 ws2_32)
 else()
   set (Boost_USE_STATIC_LIBS  OFF)
 endif()
@@ -50,7 +51,8 @@ find_package(Boost 1.48
   COMPONENTS
     unit_test_framework
     regex
-  REQUIRED)
+  REQUIRED
+    system)
 
 find_package (PythonInterp REQUIRED)
 
@@ -60,7 +62,6 @@ find_package(PNG REQUIRED)
 find_package(SDL2 REQUIRED)
 find_package(SDL2_image REQUIRED)
 find_package(SDL2_mixer REQUIRED)
-find_package(SDL2_net REQUIRED)
 find_package(SDL2_ttf REQUIRED)
 find_package(ZLIB REQUIRED)
 find_package(ICU REQUIRED)
@@ -181,7 +182,7 @@ wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Werror=shadow")
 wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Werror=uninitialized")
 
 IF (WIN32)
-  add_definitions(-DMINGW_HAS_SECURE_API)
+  add_definitions(-DMINGW_HAS_SECURE_API -DWIN32_LEAN_AND_MEAN)
   if (CMAKE_SIZEOF_VOID_P EQUAL 4)
     set (CMAKE_EXE_LINKER_FLAGS "-Wl,--large-address-aware" CACHE STRING "Set by widelands CMakeLists.txt" FORCE)
     message (STATUS "Enabled large address awareness on mingw32")
