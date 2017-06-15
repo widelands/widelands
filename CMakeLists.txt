@@ -141,8 +141,9 @@ else()
   if(WIN32)
     # This is needed for getenv().
     wl_add_flag(WL_GENERIC_CXX_FLAGS "-std=gnu++11")
-    # SDL and MinGW both declare 'unsigned int __builtin_ia32_crc32qi(unsigned int, unsigned char)', resulting in lots of warnings.
-    wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wno-redundant-decls")
+  else()
+    # SDL and MinGW both declare 'unsigned int __builtin_ia32_crc32qi(unsigned int, unsigned char)', resulting in lots of warnings. So, we can't have this flag in Windows.
+    wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wredundant-decls")
   endif()
 
   # Because of: https://svn.boost.org/trac/boost/ticket/9240.
@@ -165,7 +166,6 @@ else()
   wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Woverlength-strings")
   wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wpacked")
   wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wpointer-arith")
-  wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wredundant-decls")
   wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wsign-promo")
   wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wsync-nand")
   wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wtrampolines")
