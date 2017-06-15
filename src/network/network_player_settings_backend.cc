@@ -19,6 +19,7 @@
 
 #include "network/network_player_settings_backend.h"
 
+#include "ai/computer_player.h"
 #include "base/i18n.h"
 #include "base/log.h"
 #include "base/wexception.h"
@@ -46,7 +47,19 @@ void NetworkPlayerSettingsBackend::set_player_ai(uint8_t id, const std::string& 
 	if (id >= s->settings().players.size()) {
 		return;
 	}
-	s->set_player_ai(id, name, random_ai);
+	if (random_ai) {
+		const ComputerPlayer::ImplementationVector& impls = ComputerPlayer::get_implementations();
+		ComputerPlayer::ImplementationVector::const_iterator it = impls.begin();
+		if (impls.size() > 1) {
+				do {
+					uint8_t random = (std::rand() % impls.size());  // Choose a random AI
+					it = impls.begin() + random;
+				} while ((*it)->type == ComputerPlayer::Implementation::Type::kEmpty);
+		}
+		s->set_player_ai(id, (*it)->name, random_ai);
+	} else {
+		s->set_player_ai(id, name, random_ai);
+	}
 }
 
 void NetworkPlayerSettingsBackend::set_tribe(uint8_t id, const std::string& tribename) {
