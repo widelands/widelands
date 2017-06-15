@@ -512,7 +512,7 @@ bool BaseListselect::handle_key(bool const down, SDL_Keysym const code) {
 			if (code.mod & KMOD_NUM) {
 				break;
 			}
-			FALLTHROUGH
+			FALLS_THROUGH
 		case SDLK_DOWN:
 			selected_idx = selection_index() + 1;
 			if (selected_idx < size())
@@ -527,7 +527,7 @@ bool BaseListselect::handle_key(bool const down, SDL_Keysym const code) {
 			if (code.mod & KMOD_NUM) {
 				break;
 			}
-			FALLTHROUGH
+			FALLS_THROUGH
 		case SDLK_UP:
 			selected_idx = selection_index();
 			if (selected_idx > 0)
