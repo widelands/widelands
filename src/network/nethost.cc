@@ -4,7 +4,25 @@
 
 #include "base/log.h"
 
-NetHost::Client::Client(TCPsocket sock) : socket(sock), deserializer() {
+namespace {
+
+/**
+ * Returns the IP version.
+ * \param acceptor The acceptor socket to get the IP version for.
+ * \return Either 4 or 6, depending on the version of the given acceptor.
+ */
+int get_ip_version(const boost::asio::ip::tcp::acceptor& acceptor) {
+	assert(acceptor.is_open());
+	if (acceptor.local_endpoint().protocol() == boost::asio::ip::tcp::v4()) {
+		return 4;
+	} else {
+		return 6;
+	}
+}
+}
+
+NetHost::Client::Client(boost::asio::ip::tcp::socket&& sock)
+   : socket(std::move(sock)), deserializer() {
 }
 
 std::unique_ptr<NetHost> NetHost::listen(const uint16_t port) {
@@ -22,11 +40,10 @@ NetHost::~NetHost() {
 	while (!clients_.empty()) {
 		close(clients_.begin()->first);
 	}
-	SDLNet_FreeSocketSet(sockset_);
 }
 
 bool NetHost::is_listening() const {
-	return svrsock_ != nullptr;
+	return acceptor_v4_.is_open() || acceptor_v6_.is_open();
 }
 
 bool NetHost::is_connected(const ConnectionId id) const {
@@ -34,11 +51,17 @@ bool NetHost::is_connected(const ConnectionId id) const {
 }
 
 void NetHost::stop_listening() {
-	if (!is_listening())
-		return;
-	SDLNet_TCP_DelSocket(sockset_, svrsock_);
-	SDLNet_TCP_Close(svrsock_);
-	svrsock_ = nullptr;
+	static const auto do_stop = [](boost::asio::ip::tcp::acceptor& acceptor) {
+		boost::system::error_code ec;
+		if (acceptor.is_open()) {
+			log("[NetHost]: Closing a listening IPv%d socket.\n", get_ip_version(acceptor));
+			acceptor.close(ec);
+		}
+		// Ignore errors
+	};
+
+	do_stop(acceptor_v4_);
+	do_stop(acceptor_v6_);
 }
 
 void NetHost::close(const ConnectionId id) {
@@ -47,68 +70,149 @@ void NetHost::close(const ConnectionId id) {
 		// Not connected anyway
 		return;
 	}
-	SDLNet_TCP_DelSocket(sockset_, iter_client->second.socket);
-	SDLNet_TCP_Close(iter_client->second.socket);
+	boost::system::error_code ec;
+	boost::asio::ip::tcp::endpoint remote = iter_client->second.socket.remote_endpoint(ec);
+	if (!ec) {
+		log("[NetHost] Closing network connection to %s:%i.\n", remote.address().to_string().c_str(),
+		    remote.port());
+	} else {
+		log("[NetHost] Closing network connection to some client.\n");
+	}
+	iter_client->second.socket.shutdown(boost::asio::ip::tcp::socket::shutdown_both, ec);
+	iter_client->second.socket.close(ec);
 	clients_.erase(iter_client);
 }
 
 bool NetHost::try_accept(ConnectionId* new_id) {
 	if (!is_listening())
 		return false;
+	boost::asio::ip::tcp::socket socket(io_service_);
 
-	TCPsocket sock = SDLNet_TCP_Accept(svrsock_);
-	// No client wants to connect
-	if (sock == nullptr)
+	const auto do_try_accept = [&socket](boost::asio::ip::tcp::acceptor& acceptor) {
+		boost::system::error_code ec;
+		if (acceptor.is_open()) {
+			acceptor.accept(socket, ec);
+			if (ec == boost::asio::error::would_block) {
+				// No client wants to connect
+				// New socket doesn't need to be closed since it isn't open yet
+			} else if (ec) {
+				// Some other error, close the acceptor
+				log("[NetHost] No longer listening for IPv%d connections due to error: %s.\n",
+				    get_ip_version(acceptor), ec.message().c_str());
+				acceptor.close(ec);
+			} else {
+				log("[NetHost]: Accepting IPv%d connection from %s.\n", get_ip_version(acceptor),
+				    socket.remote_endpoint().address().to_string().c_str());
+			}
+		}
+	};
+
+	do_try_accept(acceptor_v4_);
+	if (!socket.is_open())
+		do_try_accept(acceptor_v6_);
+
+	if (!socket.is_open()) {
+		// No new connection
 		return false;
-	SDLNet_TCP_AddSocket(sockset_, sock);
+	}
+
+	socket.non_blocking(true);
+
 	ConnectionId id = next_id_++;
 	assert(id > 0);
 	assert(clients_.count(id) == 0);
-	clients_.insert(std::make_pair(id, Client(sock)));
+	clients_.insert(std::make_pair(id, Client(std::move(socket))));
 	assert(clients_.count(id) == 1);
 	*new_id = id;
 	return true;
 }
 
 bool NetHost::try_receive(const ConnectionId id, RecvPacket* packet) {
-
 	// Always read all available data into buffers
-	uint8_t buffer[512];
-	while (SDLNet_CheckSockets(sockset_, 0) > 0) {
-		for (auto& e : clients_) {
-			if (SDLNet_SocketReady(e.second.socket)) {
-				const int32_t bytes = SDLNet_TCP_Recv(e.second.socket, buffer, sizeof(buffer));
-				if (bytes <= 0) {
-					// Error while receiving
-					close(e.first);
-					// We have to run the for-loop again since we modified the map
-					break;
-				}
+	uint8_t buffer[kNetworkBufferSize];
 
-				e.second.deserializer.read_data(buffer, bytes);
-			}
+	boost::system::error_code ec;
+	for (auto it = clients_.begin(); it != clients_.end();) {
+		size_t length =
+		   it->second.socket.read_some(boost::asio::buffer(buffer, kNetworkBufferSize), ec);
+		if (ec == boost::asio::error::would_block) {
+			// Nothing to read
+			assert(length == 0);
+			++it;
+			continue;
+		} else if (ec) {
+			assert(length == 0);
+			// Connection closed or some error, close the socket
+			log("[NetHost] Error when receiving from a client, closing connection: %s.\n",
+			    ec.message().c_str());
+			// close() will remove the client from the map so we have to increment the iterator first.
+			// Otherwise, it will point to unallocated memory after close() so we can't increase it
+			ConnectionId id_to_remove = it->first;
+			++it;
+			close(id_to_remove);
+			continue;
 		}
+		assert(length > 0);
+		assert(length <= kNetworkBufferSize);
+		// Read something
+		it->second.deserializer.read_data(buffer, length);
+		++it;
 	}
 
 	// Now check whether there is data for the requested client
 	if (!is_connected(id))
 		return false;
 
-	// Get one packet from the deserializer
+	// Try to get one packet from the deserializer
 	return clients_.at(id).deserializer.write_packet(packet);
 }
 
 void NetHost::send(const ConnectionId id, const SendPacket& packet) {
+	boost::system::error_code ec;
 	if (is_connected(id)) {
-		SDLNet_TCP_Send(clients_.at(id).socket, packet.get_data(), packet.get_size());
+		size_t written = boost::asio::write(
+		   clients_.at(id).socket, boost::asio::buffer(packet.get_data(), packet.get_size()), ec);
+		// TODO(Notabilis): This one is an assertion of mine, I am not sure if it will hold
+		// If it doesn't, set the socket to blocking before writing
+		// If it does, remove this comment after build 20
+		assert(ec != boost::asio::error::would_block);
+		assert(written == packet.get_size() || ec);
+		if (ec) {
+			log("[NetHost] Error when sending to a client, closing connection: %s.\n",
+			    ec.message().c_str());
+			close(id);
+		}
 	}
 }
 
-NetHost::NetHost(const uint16_t port) : svrsock_(nullptr), sockset_(nullptr), next_id_(1) {
+NetHost::NetHost(const uint16_t port)
+   : clients_(), next_id_(1), io_service_(), acceptor_v4_(io_service_), acceptor_v6_(io_service_) {
 
-	IPaddress myaddr;
-	SDLNet_ResolveHost(&myaddr, nullptr, port);
-	svrsock_ = SDLNet_TCP_Open(&myaddr);
-	// Maximal 16 sockets! This mean we can have at most 15 clients_ in our game (+ metaserver)
-	sockset_ = SDLNet_AllocSocketSet(16);
+	if (open_acceptor(
+	       &acceptor_v4_, boost::asio::ip::tcp::endpoint(boost::asio::ip::tcp::v4(), port))) {
+		log("[NetHost]: Opening a listening IPv4 socket on TCP port %u\n", port);
+	}
+	if (open_acceptor(
+	       &acceptor_v6_, boost::asio::ip::tcp::endpoint(boost::asio::ip::tcp::v6(), port))) {
+		log("[NetHost]: Opening a listening IPv6 socket on TCP port %u\n", port);
+	}
+}
+
+bool NetHost::open_acceptor(boost::asio::ip::tcp::acceptor* acceptor,
+                            const boost::asio::ip::tcp::endpoint& endpoint) {
+	try {
+		acceptor->open(endpoint.protocol());
+		acceptor->non_blocking(true);
+		const boost::asio::socket_base::reuse_address option_reuse(true);
+		acceptor->set_option(option_reuse);
+		if (endpoint.protocol() == boost::asio::ip::tcp::v6()) {
+			const boost::asio::ip::v6_only option_v6only(true);
+			acceptor->set_option(option_v6only);
+		}
+		acceptor->bind(endpoint);
+		acceptor->listen(boost::asio::socket_base::max_connections);
+		return true;
+	} catch (const boost::system::system_error&) {
+		return false;
+	}
 }

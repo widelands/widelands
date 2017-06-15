@@ -40,10 +40,8 @@ struct GameClient : public GameController,
                     public GameSettingsProvider,
                     private SyncCallback,
                     public ChatProvider {
-	GameClient(const std::string& host,
-	           const uint16_t port,
-	           const std::string& playername,
-	           bool internet = false);
+	GameClient(const NetAddress& host, const std::string& playername, bool internet = false);
+
 	virtual ~GameClient();
 
 	void run();
