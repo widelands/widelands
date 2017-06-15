@@ -2,13 +2,14 @@
 # Copyright (C) 2005-2017 Widelands Development Team
 # 
 # Translators:
+# TaeMin An <kavern02@gmail.com>, 2017
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-01-21 14:22+0000\n"
-"PO-Revision-Date: 2017-01-21 14:25+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2017-06-02 11:07+0000\n"
+"PO-Revision-Date: 2017-06-08 15:37+0000\n"
+"Last-Translator: TaeMin An <kavern02@gmail.com>\n"
 "Language-Team: Korean (http://www.transifex.com/widelands/widelands/language/ko/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -18,11 +19,11 @@ msgstr ""
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:24
 msgid "Introduction"
-msgstr ""
+msgstr "소개"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:26
 msgid "Soldiers, Training and Warfare"
-msgstr ""
+msgstr "군인, 훈련과 전투"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:27
 msgid ""
@@ -31,18 +32,18 @@ msgid ""
 "burning down, there is an enemy you sometimes have to defeat. Yet warfare is"
 " mainly focused on economics, not on military strategies, and its mechanics "
 "deserve explanation."
-msgstr ""
+msgstr "이번 시나리오에서는, 군인들과, 군인들의 훈련 그리고 군인들의 임무인 전투에 대해 알려드리겠습니다. 비록 Widelands는 파괴보다는 건설이 주력이지만, 때때로 패배시켜야 할 적이 있습니다. 그렇지만 전투는 주로 군사적인 전략이 아니라, 경제학에 중점을 두고, 그 역학은 설명을 필요로 합니다."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:28
 msgid ""
 "I’ve set up a small village that contains the most important buildings. You "
 "also have enough wares, so you do not have to take care of your weapons "
 "production. In a real game, you will not have this luxury."
-msgstr ""
+msgstr "가장 중요한 건물들이 세워진 작은 마을을 보여드리겠습니다. 충분한 용품들을 가지고 있어서, 무기 생산에 대해 걱정하지 않으셔도 됩니다. 실제 게임에서는, 이런 사치를 누리지 못할 겁니다."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:35
 msgid "Soldiers’ abilities"
-msgstr ""
+msgstr "군인들의 능력"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:37
 msgid ""
@@ -50,7 +51,7 @@ msgid ""
 " from a warehouse (or your headquarters) to the barracks where they will "
 "receive some basic training and become soldiers. Basic Barbarian soldiers do"
 " not use armor, they only need an ax."
-msgstr ""
+msgstr "새로운 군인들은 일반적인 일꾼들과는 다르게 생성됩니다: 신병들은 창고 (혹은 본부) 에서 기초 훈련을 받을 병영으로 이동해서 군인이 됩니다. 야만인들의 기초 병사들은 갑옷을 사용하지 않고, 오직 도끼만 필요합니다."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:38
 msgid ""
@@ -59,7 +60,7 @@ msgid ""
 "head that displays their remaining health, and they have four symbols, which"
 " symbolize the individual soldier’s current levels in the four different "
 "categories: health, attack, defense and evade."
-msgstr ""
+msgstr "군사 건물들로 향하는 군인들을 보십시오. 일반적인 일꾼들과는 다르게 보일 겁니다: 그들의 머리 위에 남은 체력을 표시하는 체력 막대가 있고, 네 가지 다른 카테고리에 대한 개개인 군인들의 현재 수준을 형상화하는 네 개의 기호가 있습니다: 체력, 공격, 방어, 회피."
 
 #. TRANSLATORS: the current stats are: 3 health, 5 attack, 0 defense, 2 evade.
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:40
@@ -67,22 +68,22 @@ msgid ""
 "If a Barbarian soldier is fully trained, he has level %1% health, level %2% "
 "attack, level %3% defense and level %4% evade. This is one fearsome warrior "
 "then! The individual abilities have the following meaning:"
-msgstr ""
+msgstr "야만인 군인이 완벽하게 훈련받으면, 그는 %1% 레벨의 체력과, %2% 레벨의 공격, %3% 레벨의 방어와 %4% 레벨의 회피를 갖습니다. 정말 두려운 군인이 아닙니까! 각각의 능력은 다음 의미를 지닙니다:"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:42
 msgid "Health:"
-msgstr ""
+msgstr "체력:"
 
 #. TRANSLATORS: the current stats are: 13000 health, 2800 health gain.
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:44
 msgid ""
 "The total life of a soldier. A Barbarian soldier starts with %1% health, and"
 " he will gain %2% health with each health level."
-msgstr ""
+msgstr "군인의 총 체력입니다. 야만인 군인은 %1% 체력으로 시작해서, 각 체력 레벨마다 %2% 체력을 얻습니다."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:45
 msgid "Attack:"
-msgstr ""
+msgstr "공격:"
 
 #. TRANSLATORS: the current stats are: 1400 damage, gains 850 damage points.
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:47
@@ -91,11 +92,11 @@ msgid ""
 "successful. A Barbarian soldier with attack level 0 inflicts ~%1% points of "
 "health damage when he succeeds in hitting an enemy. For each attack level, "
 "he gains %2% damage points."
-msgstr ""
+msgstr "공격이 성공했을 때 적에게 입히는 피해의 양입니다. 야만인 군인은 공격 레벨 0일 때 적을 치는데 성공하면 %1% 포인트 만큼의 체력 피해를 입힙니다. 각 공격 레벨에서, %2% 피해 포인트를 얻습니다."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:49
 msgid "Defense:"
-msgstr ""
+msgstr "방어:"
 
 #. TRANSLATORS: the current stats are: 3%. The calculated health value is 3395
 #. TRANSLATORS: The last two %% after the placeholder are the percent symbol.
@@ -106,11 +107,11 @@ msgid ""
 "level 0, which means that the damage is always reduced by %1%%%. If an "
 "attacker with an attack value of 3500 points hits a Barbarian soldier, the "
 "Barbarian will lose 3500·%2%%% = %3% health."
-msgstr ""
+msgstr "방어는 공격값에서 빠지는 비율입니다. 야만인들은 이 능력을 훈련할 수 없기에 언제나 방어 레벨 0이고, 이는 데미지가 언제나 %1%%% 만큼 감소하는 것을 의미합니다. 공격자가 3500 포인트의 공격 값으로 야만인 군인을 친다면, 야만인은 3500 - %2%%% = %3% 체력을 잃습니다."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:53
 msgid "Evade:"
-msgstr ""
+msgstr "회피:"
 
 #. TRANSLATORS: the current stats are: 25% evade, increases in steps of 15%.
 #. TRANSLATORS: The last two %% after the placeholder are the percent symbol.
@@ -119,22 +120,22 @@ msgid ""
 "Evade is the chance that the soldier is able to dodge an attack. A level 0 "
 "Barbarian has a %1%%% chance to evade an attack, and this increases in steps"
 " of %2%%% for each level."
-msgstr ""
+msgstr "회피는 군인이 공격을 회피할 수 있는 확률을 말합니다. 레벨 0의 야만인은 %1%%% 만큼 공격을 회피할 수 있고, 각 레벨마다 %2%%% 만큼 증가합니다."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:61
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:83
 msgid "The Battle Arena"
-msgstr ""
+msgstr "전투 경기장"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:63
 msgid "Now I have talked about training and levels. Let me elaborate on that."
-msgstr ""
+msgstr "이제 훈련과 레벨에 대해서 얘기할 겁니다. 자세히 알아보도록 하겠습니다."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:64
 msgid ""
 "A newly created soldier has no experience and is not very good at fighting. "
 "To make him stronger, you can build training sites."
-msgstr ""
+msgstr "새롭게 만들어진 군인은 경험이 없고 전투에 썩 좋지는 않습니다. 그런 군인을 강하게 만드려면, 훈련 장소를 건설해야 합니다."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:65
 msgid ""
@@ -142,127 +143,127 @@ msgid ""
 "building, and it trains soldiers in evade. Since soldiers get very hungry "
 "during their workout, this building needs a lot of food and strong beer. In "
 "a real game, you should have a good infrastructure before you build it."
-msgstr ""
+msgstr "이런 훈련 장소들 중 하나가 전투 경기장입니다. 이 크고 비싼 건물에서, 군인들은 회피를 훈련합니다. 훈련 과정 도중에 군인들이 매우 배고파하기 때문에, 건물은 많은 양의 음식과 고도 맥주를 필요로 합니다. 실제 게임에서는, 훈련 장소를 건설하기 전에 좋은 기반 시설을 확립해야만 합니다."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:67
 msgid "To see evade training in action, build a battle arena."
-msgstr ""
+msgstr "회피 훈련을 시키려면, 전투 경기장을 건설하십시오."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:69
 msgid ""
 "While we’re waiting for the battle arena, you’ll probably notice some "
 "soldiers walking around. They are automatically exchanged from time to time."
 " I’ll teach you about that later."
-msgstr ""
+msgstr "전투 경기장 건설을 기다리는 동안, 아마도 주변에 돌아다니는 몇 군인들을 볼 수 있을 겁니다. 매 시간마다 자동으로 교대하는 것입니다. 이에 대해서는 나중에 알려드리겠습니다."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:73
 msgid "Build a battle arena"
-msgstr ""
+msgstr "전투 경기장을 건설하십시오"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:76
 msgid "Build a battle arena. It is a big building."
-msgstr ""
+msgstr "전투 경기장은 건설하십시오. 대형 건물입니다."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:77
 msgid ""
 "Since the construction will take some time, you can change the game speed "
 "using Page Up and Page Down."
-msgstr ""
+msgstr "건설하는데 시간이 좀 걸리기 때문에, Page Up 과 Page Down 으로 게임 속도를 조정할 수 있습니다."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:85
 msgid "The Battle Arena Has Been Constructed"
-msgstr ""
+msgstr "전투 경기장이 건설되었습니다"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:86
 msgid ""
 "Very good. Our battle arena has been finished, and the soldiers are already "
 "walking towards it."
-msgstr ""
+msgstr "아주 좋습니다. 건설 경기장이 완성돼서, 군인들이 이미 거기를 향해 가고 있습니다."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:88
 msgid ""
 "The needed wares are also delivered there. For successful training, you need"
 " pitta bread and strong beer, as well as either fish or meat."
-msgstr ""
+msgstr "필요한 용품들 또한 운반되고 있습니다. 성공적으로 훈련시키려면, 물고기나 고기뿐만 아니라 피타 빵과 고도 맥주가 필요합니다."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:89
 msgid ""
 "For more information, you can have a look at the building’s help window, "
 "accessible via the question mark in every building’s window."
-msgstr ""
+msgstr "더 많은 정보들은, 모든 건물들의 창에 있는 물음표 표시를 통해 접근할 수 있는, 건물의 도움 창에서 확인할 수 있습니다."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:90
 msgid ""
 "To learn how far your soldiers have progressed in their training, you can "
 "have a look at their icons. They are modified by red dots:"
-msgstr ""
+msgstr "얼마나 당신의 군인들의 훈련이 진행됐는지 알려면, 기호를 확인하시면 됩니다. 빨간 점으로 조정되고 있습니다:"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:92
 msgid ""
 "No red dots means that the soldier is not trained, so he has level 0. All "
 "your new recruits have this."
-msgstr ""
+msgstr "빨간 점이 없다면 군인이 훈련받지 않아서, 레벨 0이라는 걸 의미합니다 모든 새로운 신병들이 그렇습니다."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:93
 msgid ""
 "With every successful training step, your soldier becomes stronger. This is "
 "indicated by a red dot. This soldier is on level 1 in evade training."
-msgstr ""
+msgstr "매번 훈련이 성공할 때마다, 군인은 점점 더 강해집니다. 이는 빨간 점으로 표시됩니다. 이 군인은 회피 훈련에서 레벨 1에 올랐습니다."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:94
 msgid ""
 "When your soldier has reached the highest possible level (in this case level"
 " 2), this is indicated by a white background color."
-msgstr ""
+msgstr "군인이 가능한 최고 레벨에 다다랐을 때 (이 경우에 레벨 2), 하얀 배경색으로 표시됩니다."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:100
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:102
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:119
 msgid "The Training Camp"
-msgstr ""
+msgstr "훈련소"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:103
 msgid ""
 "There is a second training site: the training camp. It is a big building "
 "too, and to complement the battle arena, it trains attack and health "
 "(remember, the Barbarian soldiers cannot be trained in defense)."
-msgstr ""
+msgstr "두번째 훈련 장소는: 훈련소입니다. 여기도 대형 건물이고, 전투 경기장과는 다르게, 공격과 체력을 훈련합니다 (야만인 군인들은 방어를 훈련할 수 없다는 것을, 기억하십시오)."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:105
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:113
 msgid "Build a training camp."
-msgstr ""
+msgstr "훈련소를 건설하십시오."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:109
 msgid "Build a training camp"
-msgstr ""
+msgstr "훈련소를 건설하십시오"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:111
 msgid ""
 "The battle arena only trains the soldiers in evade. To get the strongest "
 "possible soldier, you also need to build a training camp, which trains them "
 "in attack and health."
-msgstr ""
+msgstr "전투 경기장은 군인들에게 오직 회피만을 훈련시킵니다. 최고로 강한 군인을 육성하려면, 공격과 체력을 훈련시킬 수 있는, 훈련소를 건설할 필요가 있습니다."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:121
 msgid ""
 "Great, our training camp has now been finished, too. Now nothing will hinder"
 " us from getting the strongest warriors the world has ever seen."
-msgstr ""
+msgstr "훌륭하게, 우리의 훈련소도 완성되었습니다. 더 이상 아무도 여태껏 볼 수 없었던 최강의 군인들을 육성하는 것을 방해하지 못합니다."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:122
 msgid ""
 "To train in the training camp, our soldiers need food like in the battle "
 "arena, but no strong beer. Instead, they need different axes for attack "
 "training and helmets for health training."
-msgstr ""
+msgstr "훈련소에서 훈련하려면, 군인들은 전투 경기장과 같이 음식이 필요하지만, 고도 맥주는 아닙니다. 대신, 공격 훈련을 위해 각각의 도끼들과 체력 훈련을 위해 투구들이 필요합니다."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:123
 msgid ""
 "This equipment is produced in smithies out of coal, iron, and sometimes "
 "gold. You will learn more about this in the second scenario of the Barbarian"
 " campaign."
-msgstr ""
+msgstr "이런 장비들은 제작소에서 석탄과 철, 그리고 때때로 금을 이용해서 생산됩니다. 이에 대한 더 많은 것들은 야만인 캠페인의 두번째 시나리오에서 배울 것입니다."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:124
 msgid ""
@@ -271,17 +272,17 @@ msgid ""
 " ability levels cannot be compared: an Imperial soldier has a base attack of"
 " %1% at level 0, while a Barbarian soldier at the same level only has a base"
 " attack of %2%."
-msgstr ""
+msgstr "당신은 또한 Widelands 의 세 부족들이 각자만의 훈련 방식이 있고, 그래서 건물과 용품이 다르다는 것을 명심해야 합니다. 또한 능력 레벨도 비교할 수 없습니다: 야만인 군인들이 레벨 0에서 %2%의 기초 공격을 가하는 동안, 제국 군인은 같은 레벨에서 %1% 의 기초 공격을 가합니다."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:130
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:132
 msgid "Heroes and Rookies"
-msgstr ""
+msgstr "영웅들과 신병들"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:133
 msgid ""
 "While our soldiers are training, let me tell you what we can do with them."
-msgstr ""
+msgstr "군인들이 훈련하는 동안, 우리가 할 수 있는 것들에 대해 알려드리겠습니다."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:134
 msgid ""
@@ -289,29 +290,29 @@ msgid ""
 "soldiers) or rookies. From time to time, a soldier will walk out of the "
 "building and be replaced by a stronger/weaker one automatically – this is "
 "what you saw earlier."
-msgstr ""
+msgstr "모든 군사 건물에서, 당신은 영웅들 (훈련된 군인들) 또는 신병들의 선호도를 결정할 수 있습니다. 일정한 주기로, 군인들은 자동으로 건물을 나와 더 강한/약한 이들로 대체됩니다 - 이것이 일찍이 봤던 그것입니다."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:135
 msgid ""
 "The initial setting depends on the type of the building. For the Barbarians,"
 " the sentry is the only building that prefers rookies by default. You should"
 " change this setting to fit your current needs."
-msgstr ""
+msgstr "초기 설정은 건물의 종류에 따라 다릅니다. 야만인들에게, 초소는 기본적으로 신병을 선호하는 유일한 건물입니다. 당신은 현재의 필요에 맞춰 설정을 변경해야만 합니다."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:136
 msgid ""
 "When you are expanding into no man’s land, you can make your buildings "
 "prefer rookies. When you are planning to attack, send heroes into that "
 "region. Conquered buildings always prefer heroes."
-msgstr ""
+msgstr "무주지로 확장할 경우에는, 신병을 선호하도록 건물을 설정할 수 있습니다. 공격 계획이 있을 때에는, 지역에 영웅들을 보냅니다. 정복된 건물들은 언제나 영웅들을 선호합니다."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:142
 msgid "Soldier capacity"
-msgstr ""
+msgstr "군인 주둔 수"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:144
 msgid "Adjusting the number of soldiers"
-msgstr ""
+msgstr "군인들의 수를 적용하기"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:145
 msgid ""
@@ -320,48 +321,48 @@ msgid ""
 " buttons to decrease or increase the desired number of soldiers. Every "
 "building has a maximum capacity. In case of the barrier, it is five, for "
 "example."
-msgstr ""
+msgstr "군사 건물의 힘을 제어하는 또다른 방법이 있습니다: 주둔하는 군인들의 수를 이용해서. 원하는 군인의 수를 감소시키거나 증가시키려면 화살표 버튼을 클릭하십시오. 모든 건물들은 최대 주둔 수를 갖습니다. 예를 들어, 방벽의 경우에는, 다섯입니다."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:146
 msgid ""
 "If you wish to send a certain soldier away, you can simply click on it. It "
 "will then be replaced by another soldier."
-msgstr ""
+msgstr "특정한 군인을 치우려면, 그냥 클릭하십시오. 그러면 다른 군인들로 대체될 것입니다."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:147
 msgid ""
 "Let me also describe what the numbers in the statistics string mean. This "
 "string can contain up to three numbers, e.g. ‘1 (+5) soldier (+2)’."
-msgstr ""
+msgstr "또한 통계 문자열의 숫자들이 의미하는 것에 대해 설명해드리겠습니다. 예를 들어, 이 문자열은 세 개의 숫자를 포함합니다. '1 (+5) 군인들 (+2)'."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:149
 msgid ""
 "The first number describes how many soldiers are currently in this building."
 " In this example, only one soldier is left inside (each military building is"
 " always guarded by at least one soldier)."
-msgstr ""
+msgstr "첫번째 숫자는 얼마나 많은 군인들이 건물에 지금 주둔하는지 보여줍니다. 이 예제에서는, 오직 한 명의 군인이 안에 남아 있습니다 (각각의 군사 건물은 언제나 적어도 한 명의 군인이 지키고 있습니다)."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:150
 msgid ""
 "The second number tells you how many additional soldiers reside in this "
 "building, but are currently outside. The five soldiers may be attacking an "
 "enemy. They will return when they have been successful."
-msgstr ""
+msgstr "두번째 숫자는 얼마나 많은 추가적인 군인들이 지금은 밖에 있지만, 건물에 배치될 지를 알려줍니다. 다섯 명의 군인들이 적에게 공격받고 있습니다. 일이 잘 풀리면 다시 돌아올 것입니다. "
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:151
 msgid ""
 "The third number indicates the missing soldiers. From the eight soldiers (1 "
 "+ 5 + 2) you wish to have here, two may have died. They will be replaced by "
 "new soldiers from your warehouse, if possible."
-msgstr ""
+msgstr "세번째 숫자는 사라진 군인들을 표시합니다. 여덟 명의 군인들을 (1 + 5 +2) 주둔시키려 했었다면, 둘은 아마 죽었을 겁니다. 창고에서 새로운 군인들로, 가능하다면 대체될 겁니다."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:157
 msgid "Dismantle your sentry"
-msgstr ""
+msgstr "초소를 해체하십시오"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:159
 msgid "Dismantling military buildings"
-msgstr ""
+msgstr "군사 건물들을 해체하기"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:160
 msgid ""
@@ -369,7 +370,7 @@ msgid ""
 "building will never come out (unless this building is attacked). If you want"
 " to have your soldier elsewhere, you will have to dismantle or burn down the"
 " building."
-msgstr ""
+msgstr "군인의 수는 오직 1까지밖에 줄일 수 없습니다. 마지막 군인은 절대로 건물에서 나오지 않을 겁니다 (건물이 공격받지 않는 한). 만약 당신의 군인을 다른 곳으로 보내고 싶다면, 건물을 해체하거나 불태워버려야 합니다."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:161
 msgid ""
@@ -380,28 +381,28 @@ msgid ""
 " be hidden under the fog of war. You should therefore only dismantle "
 "military buildings deep inside your territory where you are safe from "
 "enemies."
-msgstr ""
+msgstr "하지만, 군사 건물을 파괴하는 것에는 언제나 위험이 따릅니다. 땅은 아직 당신 것이지만, 더 이상 보호받지는 못합니다. 어떤 적이든 군사 건물을 건설해서 싸움 없이 땅을 차지할 수 있을 것이고, 당신의 건물들을 불태워 버릴 것입니다. 더 나아가서, 땅의 일부분은 전장의 안개에 가려 숨겨질 것입니다. 그러므로 오직 군사 건물이 영토 깊숙히에 위치해서 적으로부터 안전할 경우에만 해체하십시오."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:162
 msgid ""
 "Have you seen your sentry? Since it cannot contain many soldiers and is next"
 " to a stronger barrier, it is rather useless."
-msgstr ""
+msgstr "초소를 확인하셨습니까? 많은 군인을 수용할 수 없고 더 강한 방격이 옆에 있기 때문에, 더 이상 쓸모가 없습니다."
 
 #. TRANSLATORS: 'it' refers to the Barbarian sentry
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:165
 msgid "Dismantle it."
-msgstr ""
+msgstr "해체하십시오."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:167
 msgid ""
 "You can also use this opportunity to become familiar with the other options:"
 " the heroes/rookies preference and the capacity."
-msgstr ""
+msgstr "또한 다른 선택지들과 친숙해지는 기회이기도 합니다: 영웅/신병 선호도와 주둔 수."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:169
 msgid "Dismantle your north-western sentry"
-msgstr ""
+msgstr "북서쪽의 초소를 해체하십시오"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:171
 msgid ""
@@ -409,59 +410,59 @@ msgid ""
 " arrow buttons. If you want to get even your last soldier out, you will have"
 " to destroy it. However, it then will no longer protect your territory, "
 "which will make it vulnerable to hostile attacks."
-msgstr ""
+msgstr "군사 건물에 주둔하고 있는 군인의 수를 화살표 버튼으로 조정할 수 있습니다. 마지막 군인을 밖으로 빼내고 싶다면, 건물을 파괴해야만 할 겁니다. 하지만, 이는 더 이상 당신의 영토를 보호하지 못해서, 적대적인 공격으로부터 무방비로 될 것입니다."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:173
 msgid "Dismantle your sentry in the north-west, next to the barrier."
-msgstr ""
+msgstr "방벽 옆에 있는, 북서쪽의 초소를 해체하십시오."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:179
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:191
 msgid "Enhance Your Fortress"
-msgstr ""
+msgstr "요새를 항상시키십시오"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:181
 msgid "Enhancing Buildings"
-msgstr ""
+msgstr "건물 향상하기"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:182
 msgid ""
 "Well done. Now you know how to draw back your soldiers from the places where"
 " you don’t need them. It is time to tell you how to reinforce your front "
 "line."
-msgstr ""
+msgstr "잘하셨습니다. 이제 어떻게 군인들을 필요로 하지 않는 곳에서 군인들을 빼낼 지 알았으니까, 최전선을 강화하는 방법에 대해 말할 차례입니다."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:183
 msgid ""
 "Your fortress is already quite strong and conquers a lot of space. But there"
 " is an even bigger building: the citadel."
-msgstr ""
+msgstr "당신의 요새는 이미 매우 강하고 많은 공간을 차지하고 있습니다. 하지만 아직 더 큰 건물이 있습니다: 성채."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:184
 msgid ""
 "Citadels can’t be built directly. Instead, you’ll have to construct a "
 "fortress first and then enhance it to a citadel. To do so, click on the "
 "fortress, then choose the ‘Enhance to Citadel’ button."
-msgstr ""
+msgstr "성채는 직접적으로 건설할 수 없습니다. 대신, 요새를 먼저 건설하고 성채로 향상시켜야만 합니다. 그렇게 하려면, 요새를 클릭하시고, '성채로 향상' 버튼을 선택하십시오"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:185
 msgid ""
 "Your soldiers will leave the fortress while the construction is going on. "
 "This means that your fortress will lose its military influence, as I "
 "described above."
-msgstr ""
+msgstr "당신의 군인들은 건설이 이루어지는 동안 요새를 떠날 것입니다. 이는 위에서 말했듯이, 당신의 요새가 군사적 영향력을 상실할 것을 의미합니다."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:186
 msgid "Enhance your fortress to a citadel now."
-msgstr ""
+msgstr "지금 요새를 성채로 향상시키십시오."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:189
 msgid "Enhance your fortress to a citadel"
-msgstr ""
+msgstr "요새를 성채로 향상시키십시오"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:193
 msgid "Enhance your fortress to a mighty citadel."
-msgstr ""
+msgstr "요새를 강력한 성채로 향상시키십시오."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:194
 msgid ""
@@ -469,15 +470,15 @@ msgid ""
 "the Barbarians can build. It also costs a lot of resources and takes a long "
 "time to build. It is most suited to guard strategically important points "
 "like constricted points or mountains."
-msgstr ""
+msgstr "성채는 12명의 군인들을 수용할 수 있는, 야만인들이 건설할 수 있는 가장 대형의 군사 건물입니다. 이는 또한 많은 자원을 필요로 하고 건설에 긴 시간이 걸립니다. 격전지나 산맥과 같은 전략적으로 중요한 위치를 방어하는데 가장 적합합니다."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:201
 msgid "Defeat your Enemy"
-msgstr ""
+msgstr "적을 패배시키십시오"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:203
 msgid "Defeat the Enemy"
-msgstr ""
+msgstr "적을 패배시키십시오"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:204
 msgid ""
@@ -486,44 +487,44 @@ msgid ""
 "they took away a part of our land? And our lumberjack has now lost his place"
 " of work. This is what I was talking about. Let’s take our land back and "
 "defeat the enemy!"
-msgstr ""
+msgstr "훌륭합니다, 성채가 완성되었습니다. 하지만 이게 뭡니까? 적대적인 부족이 성채가 건설되는 중에 우리 옆에 자리잡았습니다. 어떻게 그들이 우리 땅의 일부를 강탈하는지 보셨습니까? 그리고 우리 나무꾼은 이제 일할 공간을 잃어버렸습니다. 제가 할 말은 다 했습니다. 우리의 땅을 되찾고 적을 물리칩시다!"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:205
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:216
 msgid ""
 "To attack a building, click on its doors, choose the number of soldiers that"
 " you wish to send and click on the ‘Attack’ button."
-msgstr ""
+msgstr "건물을 공격하려면, 문을 클릭하시고, 파견할 군인의 숫자를 선택한 다음 '공격' 버튼을 클릭하십시오."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:205
 msgid ""
 "Your soldiers will come from all nearby military buildings. Likewise, the "
 "defenders will come from all nearby military buildings of the enemy and "
 "intercept your forces."
-msgstr ""
+msgstr "근처의 모든 군사 건물에서 당신의 군인들이 올 것입니다. 비슷하게, 근처의 적의 모든 군사 건물에서 방어자들이 나와서 당신의 군대를 요격할 것입니다."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:207
 msgid ""
 "Attack and conquer all military buildings of the enemy and destroy their "
 "headquarters."
-msgstr ""
+msgstr "적의 모든 군사 건물을 공격하고 정복한 다음 그들의 본부를 파괴하십시오."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:211
 msgid "Defeat the enemy tribe"
-msgstr ""
+msgstr "적 부족을 패배시키십시오"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:213
 msgid "Defeat Your Enemy"
-msgstr ""
+msgstr "적을 패배시키십시오"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:215
 msgid "Defeat the nearby enemy."
-msgstr ""
+msgstr "근처의 적을 패배시키십시오."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:221
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:223
 msgid "Conclusion"
-msgstr ""
+msgstr "결론"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:224
 msgid ""
@@ -531,28 +532,28 @@ msgid ""
 "how to create and train soldiers, how to control where they go and how to "
 "defeat an enemy. Did you see how easily you could overwhelm your enemy? "
 "Having trained soldiers is a huge advantage."
-msgstr ""
+msgstr "이 튜토리얼을 플레이해주셔서 감사합니다. 당신이 어떻게 군인을 만들고 훈련시키는지, 어떻게 이동하고 어떻게 적을 패배시키는지 배우면서 즐겼을 거라 바랍니다. 얼마나 쉽게 당신이 적을 압도하는지 보셨습니까? 훈련된 군인들이 있다는 것은 매우 큰 이점입니다."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:225
 msgid ""
 "But a war is expensive, and not always the path leading to the goal. When "
 "setting up a new game, you can also choose peaceful win conditions. You "
 "should definitely try them out, they’re worth it."
-msgstr ""
+msgstr "하지만 전쟁은 비싸고, 항상 목표로 향하는 길만은 아닙니다. 새로운 게임을 설정할 때, 당신은 평화로운 승리 조건을 선택할 수도 있습니다. 그것들도 시도할 가치가 분명히 있습니다."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:226
 msgid ""
 "You are now ready to play the campaigns. They will teach you about the "
 "different economies of the tribes. You can also play the remaining "
 "tutorials, but they are not crucial for succeeding in the campaigns."
-msgstr ""
+msgstr "이제 캠페인을 플레이하실 준비가 되셨습니다. 거기서는 부족들의 각각 다른 경제에 대해 알려줄 것입니다. 또한 남은 튜토리얼을 플레이하셔도 되지만, 캠페인에서 승리하는데 꼭 필요한 것은 아닙니다."
 
 #: ../../data/scripting/format_scenario.lua:36
 #, lua-format
 msgid "“%s”"
-msgstr ""
+msgstr "\"%s\""
 
-#: ../../data/scripting/format_scenario.lua:96
+#: ../../data/scripting/format_scenario.lua:84
 msgid "New Objective"
 msgid_plural "New Objectives"
-msgstr[0] ""
+msgstr[0] "새 목표"

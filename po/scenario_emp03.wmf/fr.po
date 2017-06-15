@@ -5,13 +5,14 @@
 # Translators:
 # Jaypad <ju-ju@nataju.fr>, 2017
 # zecas <jjorge@free.fr>, 2017
+# Renaud Bouchard <renaud.bouchard@gmail.com>, 2017
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-05-26 17:01+0000\n"
+"POT-Creation-Date: 2017-06-02 11:07+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: zecas <jjorge@free.fr>, 2017\n"
+"Last-Translator: Renaud Bouchard <renaud.bouchard@gmail.com>, 2017\n"
 "Language-Team: French (https://www.transifex.com/widelands/teams/35159/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -479,6 +480,9 @@ msgid ""
 "our new world. We can use them as soon as there will finally be enough space"
 " for buildings."
 msgstr ""
+"Additionnellement, ceci nous permettrais de gagner du granit et du marbre "
+"pour construire notre nouveau monde. Nous pourrons les utiliser dès que nous"
+" aurons finalement assez d'espace pour les bâtiments."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:282
 msgid "Amalea’s New Instructions"
