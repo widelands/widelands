@@ -3,6 +3,7 @@
 -- =======================================================================
 
 include "scripting/messages.lua"
+include "scripting/field_animations.lua"
 
 game = wl.Game()
 -- Mountain and frontier fields
@@ -10,6 +11,9 @@ mountain = game.map:get_field(71,14)
 fr1 = game.map:get_field(81,108)
 fr2 = game.map:get_field(85,1)
 fr3 = game.map:get_field(85,11)
+
+-- Starting field
+sf = game.map.player_slots[1].starting_field
 
 function check_conquered_footprints()
     if p1:seen_field(game.map:get_field(65, 28))
@@ -35,6 +39,7 @@ function remember_cattlefarm()
 end
 
 function initial_message_and_small_food_economy()
+   reveal_concentric(p1, sf, 14)
    wake_me(2000)
    campaign_message_box(story_msg_1)
 
@@ -95,10 +100,13 @@ function foottracks()
       game.map:get_field(65, 19):region(2),
       game.map:get_field(69, 18):region(2)
    )
-   p1:reveal_fields(fields)
 
    local prior_center = scroll_to_field(game.map:get_field(67,19))
-
+   sleep(1000)
+   reveal_concentric(p1, game.map:get_field(67, 19):region(2))
+   reveal_concentric(p1, game.map:get_field(65, 19):region(2))
+   reveal_concentric(p1, game.map:get_field(69, 19):region(2))
+   
    campaign_message_box(order_msg_2_build_a_tower)
    local o = add_campaign_objective(obj_build_a_tower)
    p1:forbid_buildings{"barbarians_sentry"}

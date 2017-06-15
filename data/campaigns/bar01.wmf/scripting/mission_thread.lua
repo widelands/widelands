@@ -29,7 +29,6 @@ function introduction_thread()
    scroll_to_field(sf)
    sleep(1000)
    scroll_to_field(grave)
-   -- plr:reveal_fields(grave:region(4))
    reveal_concentric(plr, grave, 4)
    message_box_objective(plr, briefing_msg_03) -- grave, Boldreth
    message_box_objective(plr, briefing_msg_04) -- wait
@@ -59,8 +58,8 @@ function introduction_thread()
 
    -- Reveal the rocks
    local rocks = wl.Game().map:get_field(27, 48)
-   plr:reveal_fields(rocks:region(6))
    local prior_center = scroll_to_field(rocks)
+   reveal_concentric(plr, rocks, 6)
    message_box_objective(plr, order_msg_3)
    obj = add_campaign_objective(obj_claim_northeastern_rocks)
    message_box_objective(plr, order_msg_4)
