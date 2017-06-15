@@ -9,6 +9,7 @@ function introduction()
    remaining_roads()
 
    sleep(1000)
+   
    message_box_objective(plr, intro1)
    message_box_objective(plr, intro2)
 

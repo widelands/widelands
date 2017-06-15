@@ -1,6 +1,6 @@
 -- RST
--- animations.lua
--- --------------
+-- field_animations.lua
+-- --------------------
 --
 -- This script contain some animations to reveal and hide fields seen 
 -- by a player. This functions are currently used in the campaigns and scenarios
@@ -20,6 +20,9 @@
 --               Defaults to 1000 (1 sec)
 
 function reveal_randomly(plr, region, time)
+   -- If no 'time' is given use a default
+   time = time or 1000
+
    -- Make sure the region is hidden
    plr:hide_fields(region, true)
 
@@ -29,9 +32,6 @@ function reveal_randomly(plr, region, time)
       wl.ui.MapView().buildhelp = false
    end
    
-   -- If no 'time' is given use a default
-   if not time then time = 1000 end
-
    -- Calculate delay as integer
    local delay = math.floor(time / #region)
    -- Make sure 'delay' is valid
@@ -64,9 +64,9 @@ end
 --               Defaults to 1000 (1 sec)
 
 function hide_randomly(plr, region, time)
+   time = time or 1000
    -- Turn off buildhelp
    wl.ui.MapView().buildhelp = false
-   if not time then time = 1000 end
 
    local delay = math.floor(time / #region)
    if delay < 1 then delay = 1 end
@@ -91,13 +91,13 @@ end
 --                revealed
 
 function reveal_concentric(plr, center, max_radius, delay)
+   delay = delay or 100
    local buildhelp_state = wl.ui.MapView().buildhelp
    if buildhelp_state then
       -- Turn off buildhelp during animation
       wl.ui.MapView().buildhelp = false
    end
    plr:hide_fields(center:region(max_radius), true)
-   if not delay then delay = 100 end
    local radius = 0
    while radius < max_radius do
       plr:reveal_fields(center:region(radius))
@@ -120,9 +120,9 @@ end
 --                revealed
 
 function hide_concentric(plr, center, max_radius, delay)
+   delay = delay or 100
    -- Turn off buildhelp
    wl.ui.MapView().buildhelp = false
-   if not delay then delay = 100 end
    while max_radius > 0 do
       local to_hide = center:region(max_radius, max_radius - 1)
       plr:hide_fields(to_hide, true)
