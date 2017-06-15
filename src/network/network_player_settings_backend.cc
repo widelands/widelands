@@ -41,6 +41,19 @@ void NetworkPlayerSettingsBackend::set_player_state(uint8_t id, PlayerSettings::
 		return;
 	}
 	s->set_player_state(id, state);
+	if (state == PlayerSettings::State::kShared) {
+		uint8_t shared = 0;
+		for (; shared < s->settings().players.size(); ++shared) {
+			if (s->settings().players.at(shared).state != PlayerSettings::State::kClosed &&
+				 s->settings().players.at(shared).state != PlayerSettings::State::kShared)
+				break;
+		}
+		if (shared < s->settings().players.size()) {
+			s->set_player_shared(id, shared + 1);
+		} else {
+			s->set_player_state(id, PlayerSettings::State::kClosed);
+		}
+	}
 }
 
 void NetworkPlayerSettingsBackend::set_player_ai(uint8_t id, const std::string& name, bool random_ai) {

@@ -202,6 +202,8 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 	/// This will update the game settings for the type with the value
 	/// currently selected in the type dropdown.
 	void set_type() {
+		// NOCOM tribe selection inaccessible.
+
 		n->set_block_type_selection(true);
 		if (type_dropdown_.has_selection()) {
 			const std::string& selected = type_dropdown_.get_selected();
@@ -230,6 +232,13 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 				}
 			}
 			n->set_player_state(id_, state);
+
+			// Trigger update for the other players for shared_in mode when slots open and close
+			for (uint8_t p = 0; p < s->settings().players.size(); ++p) {
+				if (p != id_) {
+					update_type_dropdown(s->settings().players[p]);
+				}
+			}
 		}
 		n->set_block_type_selection(false);
 	}
@@ -290,9 +299,12 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 			                   g_gr->images().get("images/ai/ai_random.png"), false, _("Random AI"));
 
 			// Slot state
-			type_dropdown_.add(_("Shared in"), "shared_in",
-			                   g_gr->images().get("images/ui_fsmenu/shared_in.png"), false,
-			                   _("Shared in"));
+			if (!s->settings().scenario && !s->settings().savegame) {
+				// NOCOM type dropdown inaccessible. Does not rebuild for shared_in on/off
+				type_dropdown_.add(_("Shared in"), "shared_in",
+										 g_gr->images().get("images/ui_fsmenu/shared_in.png"), false,
+										 _("Shared in"));
+			}
 
 			type_dropdown_.add(_("Closed"), "closed", g_gr->images().get("images/ui_basic/stop.png"),
 			                   false, _("Closed"));
