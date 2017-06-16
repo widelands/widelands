@@ -163,12 +163,14 @@ AttackTarget::AttackResult MilitarySite::AttackTarget::attack(Soldier* enemy) co
 	Player* enemyplayer = enemy->get_owner();
 
 	// Now we destroy the old building before we place the new one.
+	// Waiting for the destroy playercommand causes crashes with the building window, so we need to
+	// close it right away.
+	Notifications::publish(NoteBuilding(military_site_->serial(), NoteBuilding::Action::kDeleted));
 	military_site_->set_defeating_player(enemyplayer->player_number());
 	military_site_->schedule_destroy(game);
 
-	enemyplayer->force_building(coords, former_buildings);
-	BaseImmovable* const newimm = game.map()[coords].get_immovable();
-	upcast(MilitarySite, newsite, newimm);
+	Building* const newbuilding = &enemyplayer->force_building(coords, former_buildings);
+	upcast(MilitarySite, newsite, newbuilding);
 	newsite->reinit_after_conqueration(game);
 
 	// Of course we should inform the victorious player as well

@@ -24,6 +24,7 @@
   <summary xml:lang="nl">Een realtime opbouwend strategiespel</summary>
   <summary xml:lang="pl">Strategia czasu rzeczywistego skupiona na rozbudowie</summary>
   <summary xml:lang="pt">Um jogo de construção estratégica em tempo real</summary>
+  <summary xml:lang="pt_BR">Um jogo em tempo real de estratégia e evolução</summary>
   <summary xml:lang="ro">Un joc strategic de construire în timp real</summary>
   <summary xml:lang="ru">Стратегия развития в реальном времени</summary>
   <summary xml:lang="sk">Budovateľská stretegická hra v reálnom čase</summary>
@@ -157,6 +158,12 @@
     </p>
     <p xml:lang="pt">
       Widelands propõe um modo de jogo solitário com campanhas que contam as histórias das tribus e as suas interações no universo do Widelands. No entanto, a verdadeira dificuldade começa quando se une com amigos através da rede para construir novos impérios juntos - ou para se afrontar nas poeiras da guerra. Widelands também propõe uma inteligencia artificial para o desafiar.
+    </p>
+    <p xml:lang="pt_BR">
+      Você é o governante de um pequeno clã. Sua meta é construir um assentamento em constante crescimento. Cada membro do seu clã fará sua parte para produzir recursos de forma a sustentar esse crescimento.
+    </p>
+    <p xml:lang="pt_BR">
+      Widelands têm um modo de único jogador com campanhas que contam estórias das tribos e sua luta no universo Widelands. No entanto, o verdadeiro jogo começa quando se une os amigos pela Internet ou pela LAN para construir novos impérios juntos - ou aniquilar uns aos outros. Widelands também disponibiliza uma inteligência artificial para desafiar você.
     </p>
     <p xml:lang="ro">
       Eşti conducătorul unui clan mic. Obiectivul tău este să construieşti o aşezare în continuă creştere. Fiecare membru al clanului îşi va face partea lui pentru a produce cât mai multe resurse pentru dezvoltarea viitoare.

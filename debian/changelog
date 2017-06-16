@@ -1,6 +1,10 @@
 widelands (1:19+repack-3widelands1) UNRELEASED; urgency=medium
 
-
+  * Changed build dependencies:
+      - New build dependencies required:
+        libboost-system-dev
+      - No longer needed;
+        libsdl2-net-dev
   * Merged Debian packaging of Widelands 1:19+repack-3. Remaining changes:
     - Disabled all Debian-patches since applying them might cause conflicts as
       development moves along in latest trunk. They mostly concern 

@@ -754,9 +754,10 @@ bool InteractiveBase::handle_key(bool const down, SDL_Keysym const code) {
 	if (down) {
 		switch (code.sym) {
 		case SDLK_KP_9:
-			if (code.mod & KMOD_NUM)
+			if (code.mod & KMOD_NUM) {
 				break;
-		/* no break */
+			}
+			FALLS_THROUGH;
 		case SDLK_PAGEUP:
 			if (upcast(Game, game, &egbase_)) {
 				if (GameController* const ctrl = game->game_controller()) {
@@ -774,9 +775,10 @@ bool InteractiveBase::handle_key(bool const down, SDL_Keysym const code) {
 			return true;
 
 		case SDLK_KP_3:
-			if (code.mod & KMOD_NUM)
+			if (code.mod & KMOD_NUM) {
 				break;
-		/* no break */
+			}
+			FALLS_THROUGH;
 		case SDLK_PAGEDOWN:
 			if (upcast(Widelands::Game, game, &egbase_)) {
 				if (GameController* const ctrl = game->game_controller()) {
