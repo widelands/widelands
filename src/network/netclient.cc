@@ -476,8 +476,7 @@ void NetClient::receive_one_user(uint32_t const number, StreamRead& packet) {
 
 	// This might happen, if a users connects after the game starts.
 	if (number == d->settings.users.size()) {
-		UserSettings newuser;
-		d->settings.users.push_back(newuser);
+		d->settings.users.push_back(*new UserSettings());
 	}
 
 	d->settings.users.at(number).name = packet.string();

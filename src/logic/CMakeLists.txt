@@ -4,19 +4,28 @@ wl_library(logic_widelands_geometry
     widelands_geometry.h
 )
 
-wl_library(logic_game_settings
+ wl_library(logic_game_settings
   SRCS
+    game_settings.cc
     game_settings.h
-    single_player_game_settings_provider.cc
-    single_player_game_settings_provider.h
+    player_end_result.h
   DEPENDS
-    ai
-    base_exceptions
     io_filesystem
     logic
     scripting_lua_interface
     scripting_lua_table
 )
+
+wl_library(logic_single_player_game_settings
+  SRCS
+    single_player_game_settings_provider.cc
+    single_player_game_settings_provider.h
+  DEPENDS
+    ai
+    base_exceptions
+    logic
+    logic_game_settings
+ )
 
 wl_library(logic_game_controller
   SRCS
@@ -28,6 +37,7 @@ wl_library(logic_game_controller
   DEPENDS
     ai
     logic
+    logic_game_settings
     profile
     ui_basic
     widelands_ball_of_mud
