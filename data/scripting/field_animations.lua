@@ -1,4 +1,6 @@
 -- RST
+-- .. _field_animations:
+--
 -- field_animations.lua
 -- --------------------
 --
@@ -16,6 +18,7 @@
 --
 --    :arg player: The player who get sight to the region
 --    :arg region: The region that has to be revealed
+--    :type region: :class:`array` of :class:`wl.map.Fields`
 --    :arg time: Optional. The time the whole animation will run. 
 --               Defaults to 1000 (1 sec)
 
@@ -60,6 +63,7 @@ end
 --
 --    :arg player: The player who's sight get hidden
 --    :arg region: The region that has to be hidden
+--    :type region: :class:`array` of :class:`wl.map.Fields`
 --    :arg time: Optional. The time the whole animation will run. 
 --               Defaults to 1000 (1 sec)
 
@@ -79,25 +83,30 @@ function hide_randomly(plr, region, time)
 end
 
 -- RST
--- .. function:: reveal_concentric(player, center, max_radius, delay)
+-- .. function:: reveal_concentric(player, center, max_radius, hide, delay)
 --
 --    Reveal a part of the map in a concentric way beginning from center onto
---    max_radius. The region get hidden prior revealing.
+--    max_radius. The region get hidden prior revealing as default.
 --
 --    :arg player: The player who get sight to the region
 --    :arg center: The field from where the animation should start revealing
 --    :arg max_radius: The last ring to reveal
+--    :arg hide: Optional, if `false` automatic hiding is disabled
+--    :type hide: :class:`boolean`
 --    :arg delay: Optional, defaults to 100. The delay between each ring is 
---                revealed
+--                revealed. If you want to set the delay, you must also set `hide`
 
-function reveal_concentric(plr, center, max_radius, delay)
+function reveal_concentric(plr, center, max_radius, hide, delay)
    delay = delay or 100
+   hide = hide or true
    local buildhelp_state = wl.ui.MapView().buildhelp
    if buildhelp_state then
       -- Turn off buildhelp during animation
       wl.ui.MapView().buildhelp = false
    end
-   plr:hide_fields(center:region(max_radius), true)
+   if not hide then
+      plr:hide_fields(center:region(max_radius), true)
+   end
    local radius = 0
    while radius < max_radius do
       plr:reveal_fields(center:region(radius))

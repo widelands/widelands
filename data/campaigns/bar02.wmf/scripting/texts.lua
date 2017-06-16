@@ -259,6 +259,7 @@ story_note_1 = {
 
 order_msg_2_build_a_tower = {
    posy = 1,
+   posx = 1,
    title = _"Tracks",
    body = boldreth(_"Boldreth says:",
       -- TRANSLATORS: Boldreth
