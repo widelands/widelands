@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-05-18 21:30+0000\n"
+"POT-Creation-Date: 2017-06-02 11:07+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>, 2017\n"
 "Language-Team: German (https://www.transifex.com/widelands/teams/35159/de/)\n"
@@ -82,7 +82,7 @@ msgid ""
 "We should save some marble for buildings. So, please lower the demand for "
 "marble columns in the economy settings to four."
 msgstr ""
-"Wir sollten uns etwas Marmor für Gebäude sichern. Deshalb senke bitte den "
+"Wir sollten uns etwas Marmor für Gebäude aufheben. Deshalb senke bitte den "
 "Bedarf von Marmorsäulen in den Wirtschaftseinstellungen auf vier. "
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:70
@@ -151,8 +151,8 @@ msgid ""
 "Now let’s turn all the wheat into wool (at least 50 bales) and then use the "
 "wool to weave cloth in order to build a ship."
 msgstr ""
-"Nun lasst uns aus dem ganzen Weizen (mindestens 50 Ballen) Wolle machen, aus"
-" der wir dann Stoff weben, um ein Schiff zu bauen."
+"Nun lasst uns aus dem ganzen Weizen mindestens 50 Ballen Wolle machen, aus "
+"der wir dann Stoff weben, um ein Schiff zu bauen."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:112
 msgid "Build 2 ports on distant islands"
@@ -170,21 +170,20 @@ msgid ""
 " there. Afterwards, let’s try to find some mining resources."
 msgstr ""
 "Wir sollten die Insel im Süden erkunden. Sende eine Expedition, um einen "
-"Hafen dort zu bauen. Danach können wir versuchen, Rohstoffe zum Abbau zu "
-"finden."
+"Hafen dort zu bauen. Versuche dann, Rohstoffe zum Abbau zu finden."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:117
 msgid ""
 "We should send a ship nothwards to gather some intelligence about the "
 "Barbarians. Try to build a port on the island and found an outpost."
 msgstr ""
-"Wir sollten ein Schiff nördlich schicken, um Informationen über die Barbaren"
-" zu sammeln. Versuche, einen Hafen und einen Außenposten auf der Insel zu "
-"errichten."
+"Wir sollten ein Schiff gen Norden schicken, um Informationen über die "
+"Barbaren zu sammeln. Versuche, einen Hafen und einen Außenposten auf der "
+"Insel zu errichten."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:123
 msgid "Produce gold to send out expeditions"
-msgstr "Stelle Gold her um Expeditionen auszusenden"
+msgstr "Stelle Gold her, um Expeditionen auszusenden"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:125
 msgid "Gold Production"
@@ -224,7 +223,7 @@ msgstr "Wir sollten mehr Land entdecken und so viele Häfen bauen wie möglich."
 #. TRANSLATORS: Objective header
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:151
 msgid "Recover the shrine"
-msgstr "Den Schrein wiederherstellen"
+msgstr "Rette den Schrein"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:153
 msgid "Find the Holy Shrine"
@@ -466,7 +465,7 @@ msgid ""
 "I think we should try to reveal some building space by cutting up all the "
 "rocks in a quarry."
 msgstr ""
-"Ich denke, wir sollten Bauplätze freimachen, indem wir die Felsen durch "
+"Ich denke, wir sollten Bauplätze freimachen, indem wir alle Felsen durch "
 "einen Steinbruch abbauen lassen."
 
 #. TRANSLATORS: Amalea
@@ -588,7 +587,7 @@ msgid ""
 "port for loading our ships and starting an expedition."
 msgstr ""
 "Herr, ich habe über unseren Heimweg nachgedacht. Es ist von größter "
-"Wichtigkeit, einen Hafen zu bauen, um unsere Schiffe zu laden und eine "
+"Wichtigkeit, einen Hafen zu bauen, um unsere Schiffe zu beladen und eine "
 "Expedition zu starten."
 
 #. TRANSLATORS: Saledus
@@ -653,7 +652,7 @@ msgid ""
 msgstr ""
 "Um ein Expeditionsschiff auszusenden, brauchen wir zuerst ein Schiff. "
 "Unglücklicherweise haben wir lediglich fünf Ballen Stoff übrig, die wir für "
-"den Hafen und die Werft brauchen werden."
+"den Bau des Hafens und der Werft brauchen werden."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:365
@@ -674,9 +673,10 @@ msgid ""
 "farm. The sheepfarm itself needs wheat and water to work. So, let’s find a "
 "space for a big building and build a farm first."
 msgstr ""
-"Lasst uns drüber nachdenken. Um Stoff zu weben, brauchen wir Wolle aus einer"
-" Schäferei. Die Schäferei wiederum braucht Weizen und Wasser. Also lasst uns"
-" einen großen Bauplatz finden und zuerst einen Bauernhof bauen."
+"Nun lasst uns das genau durchdenken. Um Stoff zu weben, brauchen wir Wolle "
+"aus einer Schäferei. Die Schäferei wiederum braucht Weizen und Wasser. Also "
+"müssen wir jetzt einen großen Bauplatz finden und zuerst einen Bauernhof "
+"bauen."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:371
@@ -750,7 +750,7 @@ msgstr ""
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:408
 msgid "We Should Explore the Islands"
-msgstr "Wie sollten die Inseln erkunden"
+msgstr "Wir sollten die Inseln erkunden"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:409
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:452
@@ -851,13 +851,13 @@ msgid ""
 "dismantle some military buildings to obtain more space for our economy."
 msgstr ""
 "Wenn es Schwierigkeiten gibt, alle diese Gebäude zu bauen, sollten wir uns "
-"alles in Erinnerung rufen, was wir bisher gelernt haben. Wir können die "
-"Felsen abbauen. Wir können auch unsere Straßenverläufe ändern und sogar "
-"Militärgebäude abreißen, um Bauplätze freizumachen."
+"alles in Erinnerung rufen, was wir bisher gelernt haben. Wir können alle "
+"Felsen abbauen. Wir können auch unsere Straßenverläufe optimieren und sogar "
+"Militärgebäude abreißen, um Bauplätze für unsere Wirtschaft freizumachen."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:451
 msgid "We Should Conquer All the Islands"
-msgstr "Wie sollten alle Inseln erobern"
+msgstr "Wir sollten alle Inseln erobern"
 
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:454
@@ -897,8 +897,8 @@ msgid ""
 "I’m just kidding. Of course we should spare as much gold as we can for "
 "building an arena and other buildings to train our soldiers."
 msgstr ""
-"Das war ein Witz. Natürlich müssen wir so viel Gold wie möglich für eine "
-"Arena und andere Trainigsgebäude aufsparen."
+"Das war nur ein Witz. Natürlich müssen wir so viel Gold wie möglich für eine"
+" Arena und andere Trainingsgebäude für unsere Soldaten aufsparen."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:476
 msgid "Amalea is Pleased"
@@ -1105,9 +1105,9 @@ msgid ""
 "As we have seen on our last journey, it is of great importance to put the "
 "gods and especially Neptune in a good mood to safeguard our journey."
 msgstr ""
-"Wie wir auf unseren letzten Reisen gesehen haben, ist es von großer "
-"Wichtigkeit, dass die Götter und ganz besonders Neptun uns gewogen sind, "
-"damit die Reise gelingt."
+"Wie wir auf unseren Reisen gesehen haben, ist es von großer Wichtigkeit, "
+"dass die Götter und ganz besonders Neptun uns gewogen sind, damit die Fahrt "
+"gelingt."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:560
 msgid ""
@@ -1172,7 +1172,7 @@ msgid ""
 msgstr ""
 "Herr, wir haben die Ruinen einer alten Barbarenfestung und eines Dorfes "
 "gefunden. Ich habe die Befürchtung, dass wir gegen sie kämpfen müssen, bevor"
-" wir fertig sind."
+" wir dazu bereit sind."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:590
 msgid "Train Faster, Train Harder"
@@ -1189,16 +1189,16 @@ msgid ""
 "should increase our efforts to train them to the highest level and to train "
 "more of them."
 msgstr ""
-"Herr, wir haben Trainigsgebäude für unsere Soldaten, aber wir sollten unsere"
-" Anstrengungen vergrößern, sie zur höchsten Stufe zu trainieren."
+"Herr, wir haben alle Trainingsgebäude für unsere Soldaten, aber wir sollten "
+"unsere Anstrengungen vergrößern, sie zur höchsten Stufe zu trainieren."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:595
 msgid ""
 "We need a lot of food, a lot of iron and a lot of gold to do so. So, we have"
 " lots of challenges to cope with."
 msgstr ""
-"Wir benötigen eine Menge Nahrung, eine Menge Eisen und eine Menge Gold um "
-"dies zu schaffen. Wir haben einige Herausforderungen zu meistern."
+"Wir benötigen dafür eine Menge Nahrung, eine Menge Eisen und eine Menge "
+"Gold. Wir haben einige Herausforderungen zu meistern."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:601
 msgid "Training Infrastructure is Needed"
@@ -1225,7 +1225,7 @@ msgid ""
 "limited space available. We need some barracks, a training camp and an arena"
 " or a colosseum."
 msgstr ""
-"Daher brauchen wir eine komplette Traningsinfrastruktur, trotz des "
+"Daher brauchen wir eine komplette Trainingsinfrastruktur, trotz des "
 "Platzmangels. Wir benötigen eine Kaserne, ein Ausbildungslager und eine "
 "Arena oder ein Kolosseum."
 
@@ -1241,7 +1241,7 @@ msgid ""
 "sail as soon as possible to help defend the Empire from the Barbarian tribe."
 msgstr ""
 "Ja, Kameraden, wir haben es geschafft! Wir haben alle Herausforderungen "
-"gemeistert, die vor uns lagen. Doch mein Herz schlägt immer noch für unsere "
+"gemeistert, die vor uns lagen. Doch mein Herz schlägt noch immer für unsere "
 "Heimat. Sobald wir können, werden wir in See stechen, um das Imperium gegen "
 "den Barbarenstamm zu verteidigen."
 
@@ -1263,7 +1263,7 @@ msgstr ""
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:631
 msgid "We have discovered another piece of our shrine. Praise Neptune!"
 msgstr ""
-"Wir haben ein weiters Stück unseres Schreins gefunden. Lob sei Neptun!"
+"Wir haben ein weiteres Stück unseres Schreins gefunden. Lob sei Neptun!"
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:636
@@ -1279,6 +1279,9 @@ msgid ""
 "Finally, we have discovered the last piece of our shrine. Now we can "
 "reassemble it to worship our god. Praise Neptune!"
 msgstr ""
+"Endlich haben wir das letzte Stück unseres Schreins gefunden. Jetzt können "
+"wir ihn wieder zusammensetzen, um unseren Gott würdig anzubeten. Lob sei "
+"Neptun!"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:642
 msgid "Artifact Found"

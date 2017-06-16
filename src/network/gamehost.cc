@@ -54,7 +54,6 @@
 #include "network/network_lan_promotion.h"
 #include "network/network_player_settings_backend.h"
 #include "network/network_protocol.h"
-#include "network/network_system.h"
 #include "profile/profile.h"
 #include "scripting/lua_interface.h"
 #include "ui_basic/progresswindow.h"
@@ -144,7 +143,7 @@ struct HostGameSettingsProvider : public GameSettingsProvider {
 				newstate = PlayerSettings::stateClosed;
 				break;
 			}  // else fall through
-		      /* no break */
+			FALLS_THROUGH;
 		case PlayerSettings::stateComputer: {
 			const ComputerPlayer::ImplementationVector& impls = ComputerPlayer::get_implementations();
 			ComputerPlayer::ImplementationVector::const_iterator it = impls.begin();
@@ -1593,14 +1592,14 @@ void GameHost::welcome_client(uint32_t const number, std::string& playername) {
 		for (uint32_t i = 0; i < d->settings.users.size(); ++i)
 			if (d->settings.users[i].position == UserSettings::not_connected()) {
 				client.usernum = i;
-				d->settings.users[i].result = Widelands::PlayerEndResult::UNDEFINED;
+				d->settings.users[i].result = Widelands::PlayerEndResult::kUndefined;
 				d->settings.users[i].ready = true;
 				break;
 			}
 	if (client.usernum == -1) {
 		client.usernum = d->settings.users.size();
 		UserSettings newuser;
-		newuser.result = Widelands::PlayerEndResult::UNDEFINED;
+		newuser.result = Widelands::PlayerEndResult::kUndefined;
 		newuser.ready = true;
 		d->settings.users.push_back(newuser);
 	}
@@ -2372,7 +2371,7 @@ void GameHost::report_result(uint8_t p_nr,
 		if (user.position == p_nr - 1) {
 			user.result = result;
 			user.win_condition_string = info;
-			if (result == Widelands::PlayerEndResult::PLAYER_LOST) {
+			if (result == Widelands::PlayerEndResult::kLost) {
 				send_system_message_code("PLAYER_DEFEATED", user.name);
 			}
 		}

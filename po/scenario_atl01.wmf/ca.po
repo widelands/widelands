@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-02-19 19:34+0000\n"
-"PO-Revision-Date: 2017-02-25 18:12+0000\n"
+"POT-Creation-Date: 2017-05-19 07:45+0000\n"
+"PO-Revision-Date: 2017-05-20 20:43+0000\n"
 "Last-Translator: Juanjo\n"
 "Language-Team: Catalan (http://www.transifex.com/widelands/widelands/language/ca/)\n"
 "MIME-Version: 1.0\n"
@@ -216,7 +216,7 @@ msgstr "Construïu un taller d'eines"
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:99
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:103
 msgid "Build a barracks"
-msgstr "Construïu uns barracons"
+msgstr "Construïu un quarter"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:101
 msgid "Recruiting new soldiers"
@@ -228,7 +228,7 @@ msgid ""
 "we need to deliver light tridents and tabards to the barracks. Recruits will"
 " arrive from the warehouse and receive one of each and some basic training "
 "to become a soldier."
-msgstr "Un cop ja estem forjant armes, podem reclutar nous soldats. Per això, cal enviar tridents i tabards als barracons. Els reclutes arribaran des d'algun magatzem i en rebran un de cada. Després se'ls entrenarà per convertir-se en soldats."
+msgstr "Un cop ja estem forjant armes, podem reclutar nous soldats. Per això, cal enviar tridents i tabards al quarter. Els reclutes arribaran des d'algun magatzem i en rebran un de cada. Després se'ls entrenarà per convertir-se en soldats."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:109
 msgid "Build training sites for soldiers"
@@ -684,14 +684,14 @@ msgid ""
 "I have received word that our mining industry started working. Now that we "
 "are forging weapons, I will send a letter to Sidolus informing him that it’s"
 " time to build a barracks and start recruiting soldiers."
-msgstr "He rebut notícies de que la nostra indústria minera ha començat a funcionar. Ara que forjarem armes, escriuré una carta a en Sidolus per informar-lo que ja és hora de construir barracons i reclutar soldats."
+msgstr "He rebut notícies de que la nostra indústria minera ha començat a funcionar. Ara que forjarem armes, escriuré una carta a en Sidolus per informar-lo que ja és hora de construir un quarter i reclutar soldats."
 
 #. TRANSLATORS: Jundlina
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:330
 msgid ""
 "Today I saw the first recruits gathering in front of the new barracks. If "
 "everything goes well, they should receive their training soon."
-msgstr "Avui he vist els primers reclutes davant dels barracons. Si tot va bé, aviat començaran a entrenar-se."
+msgstr "Avui he vist els primers reclutes davant del quarter. Si tot va bé, aviat començaran a entrenar-se."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:336
 msgid "Jundlina Summons Sidolus"
