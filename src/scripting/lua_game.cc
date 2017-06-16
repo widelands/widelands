@@ -32,6 +32,7 @@
 #include "logic/objective.h"
 #include "logic/path.h"
 #include "logic/player.h"
+#include "logic/player_end_result.h"
 #include "logic/playersmanager.h"
 #include "scripting/globals.h"
 #include "scripting/lua_interface.h"

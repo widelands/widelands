@@ -67,6 +67,16 @@
 #define DIAG_OFF(x) GCC_DIAG_OFF(x) CLANG_DIAG_OFF(x)
 #define DIAG_ON(x) GCC_DIAG_ON(x) CLANG_DIAG_ON(x)
 
+// For switch statements: Tell gcc7 and clang that a fallthrough is intended
+// https://developers.redhat.com/blog/2017/03/10/wimplicit-fallthrough-in-gcc-7/
+#ifdef __clang__
+#define FALLS_THROUGH /* Falls through */ [[clang::fallthrough]]
+#elif __GNUC__ >= 7
+#define FALLS_THROUGH /* Falls through */ [[gnu::fallthrough]]
+#else
+#define FALLS_THROUGH /* Falls through */
+#endif
+
 // disallow copying or assigning a class
 #define DISALLOW_COPY_AND_ASSIGN(TypeName)                                                         \
 	TypeName(const TypeName&) = delete;                                                             \
