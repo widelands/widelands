@@ -528,11 +528,11 @@ void DefaultAI::late_initialization() {
 		persistent_data->ai_personality_mil_upper_limit = 100;
 
 		// all zeroes
-		assert(persistent_data->neuron_weights.size() == 0);
-		assert(persistent_data->neuron_functs.size() == 0);
+		assert(persistent_data->neuron_weights.empty());
+		assert(persistent_data->neuron_functs.empty());
 		assert(persistent_data->magic_numbers_size == 0);
 		assert(persistent_data->neuron_pool_size == 0);
-		assert(persistent_data->magic_numbers.size() == 0);
+		assert(persistent_data->magic_numbers.empty());
 
 		// AI's DNA population
 		management_data.new_dna_for_persistent(player_number(), type_);
@@ -1434,7 +1434,7 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 	      true :
 	      false;
 	if (field.enemy_owned_land_nearby == 0) {
-		assert(field.enemy_nearby == false);
+		assert(!field.enemy_nearby);
 	}
 
 	// resetting bunch of values for the field
@@ -1624,7 +1624,7 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 			field.local_soldier_capacity = ms->max_soldier_capacity();
 			field.is_militarysite = true;
 		} else {
-			assert(false);
+			NEVER_HERE();
 		}
 	}
 
@@ -5540,7 +5540,7 @@ void DefaultAI::gain_building(Building& b, const bool found_on_load) {
 			mines_.back().bo = &bo;
 			mines_.back().built_time = gametime;
 			assert(mines_.back().no_resources_since == kNever);
-			assert(mines_.back().upgrade_pending == false);
+			assert!mines_.back().upgrade_pending);
 			assert(mines_.back().dismantle_pending_since == kNever);
 			assert(productionsites.back().stats_zero == 0);
 			mines_.back().bo->unoccupied_count += 1;
@@ -5757,7 +5757,7 @@ bool DefaultAI::check_supply(const BuildingObserver& bo) {
 	return supplied == bo.inputs.size();
 }
 
-// TODO (tiborb) - should be called from scheduler, once in 60s is enough
+// TODO(tiborb): - should be called from scheduler, once in 60s is enough
 void DefaultAI::update_player_stat(const uint32_t gametime) {
 	if (player_statistics.get_update_time() > 0 &&
 	    player_statistics.get_update_time() + 15 * 1000 > gametime) {

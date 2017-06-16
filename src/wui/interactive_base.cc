@@ -347,7 +347,7 @@ void InteractiveBase::draw_overlay(RenderTarget& dst) {
 	frametime_ = curframe - lastframe_;
 	avg_usframetime_ = ((avg_usframetime_ * 15) + (frametime_ * 1000)) / 16;
 	lastframe_ = curframe;
-	
+
 	if (upcast(Game, game, &egbase())) {
 		uint32_t cur_fps = 1000000 / avg_usframetime_;
 		int32_t speed_diff = 0;
@@ -357,19 +357,19 @@ void InteractiveBase::draw_overlay(RenderTarget& dst) {
 		if (cur_fps > 15) {
 			speed_diff = +100;
 			}
-		if (speed_diff != 0) { //NOCOM this has to be reverted to the state in trunk
-			
+		if (speed_diff != 0) { // NOCOM this has to be reverted to the state in trunk
+
 			if (GameController* const ctrl = game->game_controller()) {
-				//printf ("desired speed: %d, current fps: %d\n", ctrl->desired_speed(), cur_fps);
-				if ((ctrl->desired_speed() > 950 and ctrl->desired_speed() < 30000) ||
-				(ctrl->desired_speed() <1000 and speed_diff > 0) ||
-				(ctrl->desired_speed() >29999 and speed_diff < 0)) {
+				// NOCOM printf ("desired speed: %d, current fps: %d\n", ctrl->desired_speed(), cur_fps);
+				if ((ctrl->desired_speed() > 950 && ctrl->desired_speed() < 30000) ||
+				(ctrl->desired_speed() <1000 && speed_diff > 0) ||
+				(ctrl->desired_speed() >29999 && speed_diff < 0)) {
 					ctrl->set_desired_speed(ctrl->desired_speed() + speed_diff);
-					//printf ("speed diff %d, currently: %d\n", speed_diff,ctrl->desired_speed());
+					// NOCOM printf ("speed diff %d, currently: %d\n", speed_diff,ctrl->desired_speed());
 				}
 			}
 		}
-	}  
+	}
 
 	const Map& map = egbase().map();
 	const bool is_game = dynamic_cast<const Game*>(&egbase());

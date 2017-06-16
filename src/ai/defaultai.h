@@ -232,7 +232,7 @@ private:
 	bool set_inputs_to_zero(const Widelands::ProductionSiteObserver&);
 	void set_inputs_to_max(const Widelands::ProductionSiteObserver&);
 	void stop_site(const Widelands::ProductionSiteObserver&);
-	void initiate_dismantlement(Widelands::ProductionSiteObserver&, const uint32_t);
+	void initiate_dismantlement(Widelands::ProductionSiteObserver&, uint32_t);
 	// bool set_inputs_to_zero(const Widelands::ProductionSite&);
 	void print_land_stats();
 
@@ -251,7 +251,7 @@ private:
 	bool check_ships(uint32_t);
 
 	// finding and owner
-	Widelands::PlayerNumber get_land_owner(const Widelands::Map&, const uint32_t);
+	Widelands::PlayerNumber get_land_owner(const Widelands::Map&, uint32_t);
 
 	// Functions used for war and training stuff / defaultai_warfare.cc
 	bool check_militarysites(uint32_t);
@@ -308,7 +308,7 @@ private:
 	std::set<uint32_t> enemy_warehouses;
 	// it will map mined material to observer
 	std::map<int32_t, Widelands::MineTypesObserver> mines_per_type;
-	bool critical_mine_unoccupied(const uint32_t);
+	bool critical_mine_unoccupied(uint32_t);
 	std::vector<uint32_t> spots_avail;
 
 	// used for statistics of buildings
