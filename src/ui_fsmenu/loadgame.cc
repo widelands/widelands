@@ -142,9 +142,10 @@ bool FullscreenMenuLoadGame::handle_key(bool down, SDL_Keysym code) {
 
 	switch (code.sym) {
 	case SDLK_KP_PERIOD:
-		if (code.mod & KMOD_NUM)
+		if (code.mod & KMOD_NUM) {
 			break;
-	/* no break */
+		}
+		FALLS_THROUGH;
 	case SDLK_DELETE:
 		load_or_save_.clicked_delete();
 		return true;
