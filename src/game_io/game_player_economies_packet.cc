@@ -78,7 +78,7 @@ void GamePlayerEconomiesPacket::read(FileSystem& fs, Game& game, MapObjectLoader
 				if (packet_version > 3) {
 					const size_t num_economies = fr.unsigned_16();
 					if (num_economies != economies.size()) {
-						throw GameDataError("Num economies on save (%ld) != Num economies on load (%ld)",
+						throw GameDataError("Num economies on save (%" PRIuS ") != Num economies on load (%" PRIuS ")",
 						                    num_economies, economies.size());
 					}
 				}

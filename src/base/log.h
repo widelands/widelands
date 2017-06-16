@@ -29,7 +29,7 @@
 #endif
 
 // printf macros for size_t, in the style of inttypes.h
-#ifdef _LP64
+#if defined(_LP64) || defined(_WIN64)
 #define PRIS_PREFIX "z"
 #else
 #define PRIS_PREFIX
