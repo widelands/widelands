@@ -550,30 +550,37 @@ struct MineTypesObserver {
 };
 
 struct Neuron {
+	static constexpr int kWeightLimit = 100;
+	static constexpr size_t kMaxPosition = 20;
+
+	static int clip_weight_to_range(int w) {
+		return std::min(-kWeightLimit, std::max(kWeightLimit, w));
+	}
+
 	Neuron(int8_t, uint8_t, uint16_t);
 	void recalculate();
 	void set_weight(int8_t w);
 	int8_t get_weight() {
 		return weight;
-	};
-	int8_t get_result(uint8_t);
+	}
+	int8_t get_result(const size_t);
 	int8_t get_result_safe(int32_t, bool = false);
 	void set_type(uint8_t);
 	uint8_t get_type() {
 		return type;
-	};
+	}
 	uint16_t get_id() {
 		return id;
-	};
+	}
 	int32_t get_lowest_pos() {
 		return lowest_pos;
-	};
+	}
 	int32_t get_highest_pos() {
 		return highest_pos;
-	};
+	}
 
 private:
-	int8_t results[21];
+	int8_t results[21]; // kPositions + 1
 	int8_t weight;
 	uint8_t type;
 	uint16_t id;

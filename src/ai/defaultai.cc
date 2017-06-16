@@ -502,9 +502,11 @@ void DefaultAI::late_initialization() {
 	// parsing based on name is not optimal though
 	// the logic below will quarantee that one and only one such building will be
 	// identified
+#ifndef NDEBUG
 	bool barracks_identified = false;
 	bool bakery_identified = false;
 	bool sawmill_identified = false;
+#endif
 
 	// The data struct below is owned by Player object, the purpose is to have them saved therein
 	persistent_data = player_->get_mutable_ai_persistent_state();
@@ -729,7 +731,9 @@ void DefaultAI::late_initialization() {
 				// there can be only one building type identified as barracks
 				assert(!barracks_identified);
 				bo.set_is(BuildingAttribute::kBarracks);
+#ifndef NDEBUG
 				barracks_identified = true;
+#endif
 			}
 
 			// is it bakery - finding out by name
@@ -737,7 +741,9 @@ void DefaultAI::late_initialization() {
 				// there can be only one building type identified as barracks
 				assert(!bakery_identified);
 				bo.is_what.insert(BuildingAttribute::kBakery);
+#ifndef NDEBUG
 				bakery_identified = true;
+#endif
 			}
 
 			// is it sawmill - finding out by name
@@ -746,7 +752,9 @@ void DefaultAI::late_initialization() {
 				// there can be only one building type identified as sawmill
 				assert(!sawmill_identified);
 				bo.is_what.insert(BuildingAttribute::kSaw);
+#ifndef NDEBUG
 				sawmill_identified = true;
+#endif
 			}
 
 			if (bh.is_shipyard()) {
@@ -1229,7 +1237,7 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 
 	uint16_t actual_enemy_check_area = enemy_check_area;
 	field.is_militarysite = false;
-	if (upcast(MilitarySite, ms, field.coords.field->get_immovable())) {
+	if (field.coords.field->get_immovable()->descr().type() == Widelands::MapObjectType::MILITARYSITE) {
 		field.is_militarysite = true;
 		actual_enemy_check_area = ms_enemy_check_area;
 	}
@@ -5540,7 +5548,7 @@ void DefaultAI::gain_building(Building& b, const bool found_on_load) {
 			mines_.back().bo = &bo;
 			mines_.back().built_time = gametime;
 			assert(mines_.back().no_resources_since == kNever);
-			assert!mines_.back().upgrade_pending);
+			assert(!mines_.back().upgrade_pending);
 			assert(mines_.back().dismantle_pending_since == kNever);
 			assert(productionsites.back().stats_zero == 0);
 			mines_.back().bo->unoccupied_count += 1;

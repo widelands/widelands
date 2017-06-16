@@ -133,9 +133,9 @@ FindNodeUnownedMineable::FindNodeUnownedMineable(Player* p, Game& g, int32_t t)
 
 bool FindNodeUnownedMineable::accept(const Map&, const FCoords& fc) const {
 	if (ore_type == INVALID_INDEX) {
-		return (fc.field->nodecaps() & BUILDCAPS_MINE) && (fc.field->get_owned_by() == 0);
+		return (fc.field->nodecaps() & BUILDCAPS_MINE) && (fc.field->get_owned_by() == neutral());
 	}
-	return (fc.field->nodecaps() & BUILDCAPS_MINE) && (fc.field->get_owned_by() == 0) &&
+	return (fc.field->nodecaps() & BUILDCAPS_MINE) && (fc.field->get_owned_by() == neutral()) &&
 	       fc.field->get_resources() == ore_type;
 }
 
@@ -143,7 +143,7 @@ FindNodeUnownedBuildable::FindNodeUnownedBuildable(Player* p, Game& g) : player(
 }
 
 bool FindNodeUnownedBuildable::accept(const Map&, const FCoords& fc) const {
-	return (fc.field->nodecaps() & BUILDCAPS_SIZEMASK) && (fc.field->get_owned_by() == 0);
+	return (fc.field->nodecaps() & BUILDCAPS_SIZEMASK) && (fc.field->get_owned_by() == neutral());
 }
 
 // Unowned but walkable fields nearby
@@ -151,7 +151,7 @@ FindNodeUnownedWalkable::FindNodeUnownedWalkable(Player* p, Game& g) : player(p)
 }
 
 bool FindNodeUnownedWalkable::accept(const Map&, const FCoords& fc) const {
-	return (fc.field->nodecaps() & MOVECAPS_WALK) && (fc.field->get_owned_by() == 0);
+	return (fc.field->nodecaps() & MOVECAPS_WALK) && (fc.field->get_owned_by() == neutral());
 }
 
 // Looking only for mines-capable fields nearby
@@ -346,39 +346,34 @@ ManagementData::ManagementData() {
 	performance_change = 0;
 }
 
-// Initialization of neuron. Neuron is defined by curve (type) and weight (-100 - 100)
+// Initialization of neuron. Neuron is defined by curve (type) and weight [-kWeightRange, kWeightRange]
 // third argument is just id
 Neuron::Neuron(int8_t w, uint8_t f, uint16_t i) : weight(w), type(f), id(i) {
 	assert(type < neuron_curves.size());
-	assert(weight >= -100 && weight <= 100);
+	assert(weight >= -kWeightLimit && weight <= kWeightLimit);
 	lowest_pos = std::numeric_limits<uint8_t>::max();
 	highest_pos = std::numeric_limits<uint8_t>::min();
 	recalculate();
 }
 
-// weigh, or rather value in range -100 - 100
+// Weight, or rather value in range [-kWeightRange, kWeightRange]. Automatically adjusts the weight to the range in case of
+// overflow.
 void Neuron::set_weight(int8_t w) {
-	if (w > 100) {
-		weight = 100;
-	} else if (w < -100) {
-		weight = -100;
-	} else {
-		weight = w;
-	}
+	weight = Neuron::clip_weight_to_range(w);
 }
 
-// Neuron stores calculated values in array of size 21
-// array has to be recalculated when weight or curve type changes
+// Neuron stores calculated values in an array of size 21.
+// This has to be recalculated when the weight or curve type change
 void Neuron::recalculate() {
 	assert(neuron_curves.size() > type);
-	for (int8_t i = 0; i <= 20; i += 1) {
-		results[i] = weight * neuron_curves[type][i] / 100;
+	for (uint8_t i = 0; i <= kMaxPosition; i += 1) {
+		results[i] = weight * neuron_curves[type][i] / kWeightLimit;
 	}
 }
 
-// Following two functions returns Neuron value on position
-int8_t Neuron::get_result(const uint8_t pos) {
-	assert(pos <= 20);
+// The Following two functions return Neuron values on position
+int8_t Neuron::get_result(const size_t pos) {
+	assert(pos <= kMaxPosition);
 	return results[pos];
 }
 
@@ -391,14 +386,12 @@ int8_t Neuron::get_result_safe(int32_t pos, const bool absolute) {
 	if (pos < lowest_pos) {
 		lowest_pos = pos;
 	};
-	if (pos < 0) {
-		pos = 0;
-	}
-	if (pos > 20) {
-		pos = 20;
-	}
-	assert(pos <= 20);
-	assert(results[pos] >= -100 && results[pos] <= 100);
+
+	// NOCOM(#codereview): Should this be adjusted before the lowest/highest pos is set?
+	pos = std::min(0, std::max(static_cast<int>(kMaxPosition), pos));
+
+	assert(pos <= kMaxPosition);
+	assert(results[pos] >= -kWeightLimit && results[pos] <= kWeightLimit);
 	if (absolute) {
 		return std::abs(results[pos]);
 	}
@@ -411,13 +404,15 @@ void Neuron::set_type(uint8_t new_type) {
 	type = new_type;
 }
 
-// FNeuron is basically single uint32_t integer, and AI can quary every bit of that uint32_t
+// FNeuron is basically a single uint32_t integer, and the AI can query every bit of that uint32_t
 FNeuron::FNeuron(uint32_t c, uint16_t i) {
 	core = c;
 	id = i;
 }
 
 // Returning result depending on combinations of 5 bools
+// NOCOM(#codereview): Do the bools have any speacial meaning, or is it just abstract stuff?
+// If they have a meaning, this should be commented.
 bool FNeuron::get_result(
    const bool bool1, const bool bool2, const bool bool3, const bool bool4, const bool bool5) {
 	return core.test(bool1 * 16 + bool2 * 8 + bool3 * 4 + bool4 * 2 + bool5);
@@ -434,13 +429,13 @@ uint32_t FNeuron::get_int() {
 	return core.to_ulong();
 }
 
-// This is basically mutation of FNeuron
+// This is basically a mutation of FNeuron
 void FNeuron::flip_bit(const uint8_t pos) {
 	assert(pos < f_neuron_bit_size);
 	core.flip(pos);
 }
 
-// Shifting the value in range -100 to 100, if zero_align is true, it is now allowed to shift
+// Shifting the value in range -kWeightRange to kWeightRange, if zero_align is true, it is now allowed to shift
 // from negative to positive and vice versa, 0 must be used.
 int8_t ManagementData::shift_weight_value(const int8_t old_value, const bool aggressive) {
 
@@ -449,20 +444,15 @@ int8_t ManagementData::shift_weight_value(const int8_t old_value, const bool agg
 		halfVArRange = 200;
 	}
 
-	const int16_t upper_limit = std::min<int16_t>(old_value + halfVArRange, 100);
-	const int16_t bottom_limit = std::max<int16_t>(old_value - halfVArRange, -100);
+	const int16_t upper_limit = std::min<int16_t>(old_value + halfVArRange, Neuron::kWeightLimit);
+	const int16_t bottom_limit = std::max<int16_t>(old_value - halfVArRange, -Neuron::kWeightLimit);
 	int16_t new_value = bottom_limit + std::rand() % (upper_limit - bottom_limit + 1);
 
 	if (!aggressive && ((old_value > 0 && new_value < 0) || (old_value < 0 && new_value > 0))) {
 		new_value = 0;
 	}
 
-	if (new_value < -100) {
-		new_value = -100;
-	}
-	if (new_value > 100) {
-		new_value = 100;
-	}
+	new_value = Neuron::clip_weight_to_range(new_value);
 	return static_cast<int8_t>(new_value);
 }
 
@@ -477,6 +467,7 @@ void ManagementData::review(const uint32_t gametime,
                             const int16_t trained_soldiers,
                             const int16_t latest_attackers,
                             const uint16_t conq_ws) {
+	// NOCOM(#codereview): Turn these into constexpr so that they can be assigned at compile time.
 	const int16_t current_land_divider = 2;
 	const int16_t land_delta_multiplier = 1;
 	const int16_t bonus = 1000;
@@ -791,8 +782,8 @@ void ManagementData::new_dna_for_persistent(const uint8_t pn, const Widelands::A
 	pd->neuron_functs.clear();
 	pd->f_neurons.clear();
 
-	for (uint16_t i = 0; i <neuron_pool_size; i += 1) {
-		const uint8_t dna_donor = (std::rand() % 20 > 0) ? primary_parent : parent2;
+	for (uint16_t i = 0; i < neuron_pool_size; i += 1) {
+		const uint8_t dna_donor = (std::rand() % Neuron::kMaxPosition > 0) ? primary_parent : parent2;
 
 		switch (dna_donor) {
 			case 0 :
@@ -818,8 +809,8 @@ void ManagementData::new_dna_for_persistent(const uint8_t pn, const Widelands::A
 	}
 
 
-	for (uint16_t i = 0; i <f_neuron_pool_size; i += 1) {
-		const uint8_t dna_donor = (std::rand() % 20 > 0) ? primary_parent : parent2;
+	for (uint16_t i = 0; i < f_neuron_pool_size; i += 1) {
+		const uint8_t dna_donor = (std::rand() % Neuron::kMaxPosition > 0) ? primary_parent : parent2;
 		switch (dna_donor) {
 			case 0 :
 				pd->f_neurons.push_back(f_neurons_A[i]);
@@ -884,7 +875,7 @@ void ManagementData::mutate(const uint8_t pn) {
 
 		// Modifying pool of Military numbers
 		{
-			// Preferred numbers are ones that will be mutated agressively in full range -100 - +100
+			// Preferred numbers are ones that will be mutated agressively in full range [-kWeightRange, kWeightRange]
 			std::set<int32_t> preferred_numbers = {};
 
 			for (uint16_t i = 0; i < magic_numbers_size; i += 1) {
@@ -1104,12 +1095,7 @@ void ManagementData::set_military_number_at(const uint8_t pos, int16_t value) {
 		pd->magic_numbers.push_back(0);
 	}
 
-	if (value < -100) {
-		value = -100;
-	}
-	if (value > 100) {
-		value = 100;
-	}
+	value = Neuron::clip_weight_to_range(value);
 	pd->magic_numbers[pos] = value;
 }
 

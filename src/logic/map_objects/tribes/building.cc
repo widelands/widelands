@@ -189,6 +189,10 @@ bool BuildingDescr::suitability(const Map&, const FCoords& fc) const {
 	               size_ <= (fc.field->nodecaps() & Widelands::BUILDCAPS_SIZEMASK);
 }
 
+const BuildingHints& BuildingDescr::hints() const {
+	return hints_;
+}
+
 void BuildingDescr::set_hints_trainingsites_max_percent(int percent) {
 	hints_.set_trainingsites_max_percent(percent);
 }

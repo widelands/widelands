@@ -364,12 +364,13 @@ DescriptionIndex TribeDescr::port() const {
 	assert(tribes_.building_exists(port_));
 	return port_;
 }
-const std::vector<DescriptionIndex>& TribeDescr::trainingsites() const {
-	return trainingsites_;
-}
 DescriptionIndex TribeDescr::barracks() const {
 	assert(tribes_.building_exists(barracks_));
 	return barracks_;
+}
+
+const std::vector<DescriptionIndex>& TribeDescr::trainingsites() const {
+	return trainingsites_;
 }
 const std::vector<DescriptionIndex>& TribeDescr::worker_types_without_cost() const {
 	return worker_types_without_cost_;

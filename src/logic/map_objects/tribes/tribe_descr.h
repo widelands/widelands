@@ -104,8 +104,9 @@ public:
 	DescriptionIndex ship() const;
 	DescriptionIndex headquarters() const;
 	DescriptionIndex port() const;
-	const std::vector<DescriptionIndex>& trainingsites() const;
 	DescriptionIndex barracks() const;
+
+	const std::vector<DescriptionIndex>& trainingsites() const;
 	const std::vector<DescriptionIndex>& worker_types_without_cost() const;
 
 	uint32_t frontier_animation() const;
