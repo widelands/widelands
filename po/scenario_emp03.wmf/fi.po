@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-06-02 11:07+0000\n"
+"POT-Creation-Date: 2017-06-09 16:49+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Jukka Pakarinen <flegmaatikko@gmail.com>, 2017\n"
 "Language-Team: Finnish (https://www.transifex.com/widelands/teams/35159/fi/)\n"
@@ -614,6 +614,9 @@ msgid ""
 "military has spotted a space to build a port on. We should start to build a "
 "port quickly."
 msgstr ""
+"Herra, tänään olemme päässeet paljon lähemmäksi kotiin palaamista. "
+"Sotilaamme ovat havainneet paikan satamalle. Meidän pitäisi aloittaa sataman"
+" rakentaminen pian."
 
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:348
@@ -621,6 +624,8 @@ msgid ""
 "Now we truly can look forward to building some ships. So, we should build a "
 "shipyard as well."
 msgstr ""
+"Nyt me todellakin voisimme olla kaukonäköisiä ja rakentaa aluksia. Joten, "
+"meidän pitäisi rakentaa myös satama."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:356
 msgid "Amalea’s Wisdom"
@@ -632,6 +637,8 @@ msgid ""
 "I understand the euphoria of Saledus, but we have some serious problems to "
 "solve first."
 msgstr ""
+"Ymmärrän Saleduksen euforian, mutta meillä on ensin joitakin vakavia "
+"ongelmia ratkaistavana."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:362
@@ -640,6 +647,9 @@ msgid ""
 "have only 5 bales of cloth left, which we will need to build the port and "
 "the shipyard."
 msgstr ""
+"Lähettääksemme tutkimusmatka-aluksen, me tarvitsemme ensin laivan. "
+"Valitettavasti meillä on jäljellä vain 5 paalia kangasta, jotka me "
+"tarvitsemme sataman ja telakan rakentamiseksi."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:365
@@ -648,6 +658,10 @@ msgid ""
 "space on the island for building a whole economy to produce cloth. "
 "Therefore, we need to build the necessary wares step by step."
 msgstr ""
+"Siksi me tarvitsemme lisää kangasta pystyäksemme rakentamaan aluksia. Mutta "
+"saarella ei ole tilaa kokonaisen kankaan tuotantoon tarvittavan talouden "
+"rakentamiseen. Siksi meidän täytyy rakentaa tarvittavat tavarat askel "
+"kerrallaan."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:368
@@ -656,6 +670,9 @@ msgid ""
 "farm. The sheepfarm itself needs wheat and water to work. So, let’s find a "
 "space for a big building and build a farm first."
 msgstr ""
+"Mietitäämpä asia läpi. Kutoaksemme kangasta tarvitsemme villaa "
+"lammastilalta. Lammastila itse tarvitsee vehnää ja vettä toimiakseen. Joten "
+"etsitään tilaa suurelle rakennukselle ja rakennetaan ensin maatila."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:371
@@ -665,6 +682,10 @@ msgid ""
 "same spot to use our wool for weaving cloth. But for the moment being, let’s"
 " start by producing a reasonable amount of wheat."
 msgstr ""
+"Sen jälkeen kun meilä on riittävästi vehnää, voimme purkaa maatilan ja "
+"rakentaa lammastilan tuottaaksemme villaa. Myöhemmin voisimme rakentaa "
+"kutomon samalle paikalle, kutoaksemme villasta kangasta. Mutta ensin "
+"aloitamme tuottamaan riittävän määrän vehnää. "
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:374
@@ -672,6 +693,8 @@ msgid ""
 "I think a stock of 50 wheat would be enough for starters. Perhaps we will "
 "have to adjust the target quantity for wheat to achieve this."
 msgstr ""
+"Arvelen, että 50 vehnän varastossa olisi aluksi riittävästi. Mahdollisesti "
+"meidän täytyy säätää tarvittava vehnän määrä, jotta se toteutuisi."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:382
 msgid "Seafaring is Possible Again"
@@ -680,7 +703,7 @@ msgstr "Merenkäynti On Taas Mahdollista"
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:385
 msgid "Praise the gods. We finally have a ship industry."
-msgstr ""
+msgstr "Ylistetyt jumalat. Meillä on viimeinkin laivateollisuus."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:391
 msgid "Amalea is Proud"
@@ -688,7 +711,7 @@ msgstr "Amalea On Ylpeä"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:392
 msgid "Amalea cheers…"
-msgstr ""
+msgstr "Amalea kiittää…"
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:394
@@ -696,6 +719,8 @@ msgid ""
 "Well done so far. We have produced enough wheat. Now dismantle the farm and "
 "build the next building in the production chain."
 msgstr ""
+"Hyvin tehty, toistaiseksi.  Olemme tuottaneet riittävästi vehnää. Sitten "
+"pura maatila ja rakenna seuraava rakennus tuotantoketjusta."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:397
@@ -704,6 +729,9 @@ msgid ""
 "settings. We need to turn all the wheat into wool and then the all the wool "
 "into cloth."
 msgstr ""
+"Älä unohda tarkistaa tavote määrää villalle ja kankaalle talouden "
+"asetuksista. Meidän täytyy muuttaa kaikki vehnä villaksi ja sitten kaikki "
+"villa kankaaksi."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:400
@@ -711,6 +739,9 @@ msgid ""
 "Perhaps it would be a good idea to stop the shipyard’s production until we "
 "have some cloth available in order to not waste any logs or planks."
 msgstr ""
+"Voisi olla viisainta pysäyttää telakan tuotanto siihen saakka kunnes meillä "
+"on jonkin verran kangasta saatavilla, ettei hukattaisi yhtään kaadettua "
+"puuta tai lautoja."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:408
 msgid "We Should Explore the Islands"
@@ -727,6 +758,8 @@ msgid ""
 "Now that we have all resources ready for building a ship, we should explore "
 "the surrounding islands."
 msgstr ""
+"Nyt kun meillä on kaikki tarvittavat resurssit laivan rakentamiseksi, meidän"
+" pitäisi tutkia ympärillä olevia saaria."
 
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:414
@@ -735,11 +768,14 @@ msgid ""
 " have spotted an island with some mountains in the south. Perhaps we can "
 "find some valuable resources like iron there."
 msgstr ""
+"Ensin meidä tarvitsee löytää jonkin verran lisää resursseja varmistaaksemme "
+"taloutemme kasvun. Olen havainnut vuoristoisen saaren etelässä. Ehkäpä "
+"voisimme löytää sieltä joitakin arvokkaita resursseja kuten rautaa."
 
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:417
 msgid "But the following objective is even more important:"
-msgstr ""
+msgstr "Mutta seuraava tavoite on sitäkin tärkeämpää."
 
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:420
@@ -748,6 +784,10 @@ msgid ""
 " the north. If I’m not totally wrong, I have heard some Barbarian war drums."
 " So, we should better go and have a look at what is going on up there."
 msgstr ""
+"Luulempa, että tuulen mukana on pohjoisesta kantautunut kummallista mutta "
+"jotenkin tuttuja ääniä. Ellen ole täysin väärässä, olen kuullut Barbaarien "
+"sotarummutusta. Joten meidän on pitäisi varmaankin mennä sinne ja tarkistaa "
+"mitä siellä on tekeillä."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:428
 msgid "Amalea Advises"
@@ -836,7 +876,7 @@ msgstr ""
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:476
 msgid "Amalea is Pleased"
-msgstr ""
+msgstr "Amalea On Mielissään"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:477
 msgid "Amalea is content that we will manage all our challenges"
