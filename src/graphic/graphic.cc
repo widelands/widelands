@@ -41,8 +41,6 @@
 #include "io/streamwrite.h"
 #include "notifications/notifications.h"
 
-using namespace std;
-
 Graphic* g_gr;
 
 namespace {
@@ -232,6 +230,6 @@ void Graphic::refresh() {
 /**
  * Save a screenshot to the given file.
 */
-void Graphic::screenshot(const string& fname) {
+void Graphic::screenshot(const std::string& fname) {
 	screenshot_filename_ = fname;
 }

@@ -32,8 +32,6 @@
 #include "graphic/text_layout.h"
 #include "ui_basic/panel.h"
 
-using namespace std;
-
 namespace {
 
 constexpr int32_t kUpdateTimeInGametimeMs = 1000;  //  1 second, gametime
@@ -66,7 +64,7 @@ enum class Units {
 	kDayGeneric
 };
 
-string ytick_text_style(const string& text, const RGBColor& clr) {
+std::string ytick_text_style(const std::string& text, const RGBColor& clr) {
 	static boost::format f(
 	   "<rt keep_spaces=1><p><font face=condensed size=13 color=%02x%02x%02x>%s</font></p></rt>");
 	f % int(clr.r) % int(clr.g) % int(clr.b);
@@ -74,7 +72,7 @@ string ytick_text_style(const string& text, const RGBColor& clr) {
 	return f.str();
 }
 
-string xtick_text_style(const string& text) {
+std::string xtick_text_style(const std::string& text) {
 	return ytick_text_style(text, RGBColor(255, 0, 0));
 }
 
@@ -174,7 +172,7 @@ int32_t calc_how_many(uint32_t time_ms, uint32_t sample_rate) {
 /**
  * print the string into the RenderTarget.
  */
-void draw_value(const string& value,
+void draw_value(const std::string& value,
                 const RGBColor& color,
                 const Vector2i& pos,
                 RenderTarget& dst) {

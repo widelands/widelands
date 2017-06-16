@@ -24,11 +24,6 @@
 #include <string>
 #include <vector>
 
-#ifdef _WIN32
-#include <io.h>
-#include <winsock2.h>
-#endif
-
 #include "build_info.h"
 #include "chat/chat.h"
 #include "network/internet_gaming_protocol.h"
@@ -170,7 +165,7 @@ private:
 	std::string pwd_;
 	bool reg_;
 	std::string meta_;
-	uint32_t port_;
+	uint16_t port_;
 
 	/// local clients name and rights
 	std::string clientname_;

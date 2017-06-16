@@ -4,13 +4,15 @@
 # 
 # Translators:
 # Jaypad <ju-ju@nataju.fr>, 2017
+# zecas <jjorge@free.fr>, 2017
+# Renaud Bouchard <renaud.bouchard@gmail.com>, 2017
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-05-18 21:30+0000\n"
+"POT-Creation-Date: 2017-06-09 16:49+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: Jaypad <ju-ju@nataju.fr>, 2017\n"
+"Last-Translator: Renaud Bouchard <renaud.bouchard@gmail.com>, 2017\n"
 "Language-Team: French (https://www.transifex.com/widelands/teams/35159/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -180,75 +182,85 @@ msgid ""
 "We should send a ship nothwards to gather some intelligence about the "
 "Barbarians. Try to build a port on the island and found an outpost."
 msgstr ""
+"Nous devrions envoyer un navire au nord pour espionner les Barbares. Essayez"
+" de construire un port sur l'île et construisez un poste avancé."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:123
 msgid "Produce gold to send out expeditions"
-msgstr ""
+msgstr "Produire de l'or pour financer des expéditions"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:125
 msgid "Gold Production"
-msgstr ""
+msgstr "Production d'Or"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:126
 msgid ""
 "We need to produce at least 6 gold to be able to colonize our vicinity."
 msgstr ""
+"Nous devons produire au moins 6 lingots d'or pour pouvoir coloniser le "
+"voisinage."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:132
 msgid "Defeat the Barbarians"
-msgstr ""
+msgstr "Battre les Barbares"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:134
 msgid "Defeat the Enemy"
-msgstr ""
+msgstr "Battre l'Ennemi"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:135
 msgid "We should end the Barbarians’ existence in this part of the world."
-msgstr ""
+msgstr "Nous devrions supprimer les Barbares de cette partie du monde."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:141
 msgid "Explore further and build ports"
-msgstr ""
+msgstr "Explorer plus loin et construire des ports"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:143
 msgid "Explore Additional Islands and Search for Port Spaces"
-msgstr ""
+msgstr "Explorer d'autres îles et chercher de zones portuaires"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:144
 msgid "We should discover more land and build as many ports as we can."
 msgstr ""
+"Nous devrions découvrir plus de terres et construire autant de ports que "
+"possible."
 
 #. TRANSLATORS: Objective header
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:151
 msgid "Recover the shrine"
-msgstr ""
+msgstr "Retrouver le tombeau"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:153
 msgid "Find the Holy Shrine"
-msgstr ""
+msgstr "Trouvez le Saint Tombeau"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:154
 msgid ""
 "We need to find and secure all six pieces of the holy shrine of Neptune."
 msgstr ""
+"Nous devons trouver et mettre en sécurité les six morceaux du saint tombeau "
+"de Neptune."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:159
 msgid "Build a training infrastructure"
-msgstr ""
+msgstr "Construisez une infrastructure d’entraînement"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:161
 msgid "Training Infrastructure"
-msgstr ""
+msgstr "Infrastructure d’Entraînement"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:162
 msgid ""
 "Build a training camp, some barracks and an arena or colosseum to train our "
 "soldiers."
 msgstr ""
+"Construisez une infrastructure d’entraînement, quelques casernes et une "
+"arène ou un colisée pour entraîner nos soldats."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:171
 msgid "The Journey Home"
-msgstr ""
+msgstr "La Quête du Retour"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:172
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:186
@@ -257,7 +269,7 @@ msgstr ""
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:615
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:643
 msgid "Diary of Lutius"
-msgstr ""
+msgstr "Journal de Lutius"
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:174
@@ -265,15 +277,17 @@ msgid ""
 "Finally, we were set towards Fremil again. I couldn’t await the chance to "
 "clear my records of this big defeat by the Barbarians."
 msgstr ""
+"Enfin, nous visons Fremil à nouveau. Je suis impatient de faire oublier "
+"cette grande défaite contre les Barbares."
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:177
 msgid "But the gods themselves didn’t want us to get home so quickly!"
-msgstr ""
+msgstr "Mais les dieux eux-mêmes ne voulaient pas que nous rentrions si vite!"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:185
 msgid "The Wrath of Neptune"
-msgstr ""
+msgstr "La Colère de Neptune"
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:188
@@ -282,6 +296,10 @@ msgid ""
 "But this time it felt even worse than last time. The waves were twice the "
 "height of our brave ship and the winds drove us into unsafe waters."
 msgstr ""
+"Neptune lui-même s'opposait à nous et nous a envoyés à nouveau dans une "
+"tempête noire et sauvage. Mais ce fut encore pire que la dernière fois. Les "
+"vagues étaient deux fois plus hautes que notre brave navire et les vents "
+"nous ont entraînés dans des eaux dangereuses."
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:191
@@ -290,15 +308,17 @@ msgid ""
 "taking in more and more water. We would be glad to survive this black night "
 "with barely more than our lives."
 msgstr ""
+"Notre navire est gravement endommagé. Il a démâté et prend l'eau. Nous "
+"voudrions survivre à cette sombre nuit."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:198
 msgid "Shipwrecked Again"
-msgstr ""
+msgstr "Encore Naufragés"
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:201
 msgid "Finally, the wrath of the gods and the ocean seems to be over."
-msgstr ""
+msgstr "Enfin, la colère des dieux et de l'océan semble calmée."
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:204
@@ -307,6 +327,10 @@ msgid ""
 "growing at the shore. But that is about as good as it gets. The truth is: "
 "when I woke up this morning, I saw nothing but sand and stone around us."
 msgstr ""
+"Nous avons accosté sur une terre inconnue, et trouvé un repos paisible sous "
+"les palmiers poussant sur la berge. Mais c'est tout le bien qu'il y ait là. "
+"Voici la vérité : quand je me suis réveillé ce matin, je n'ai rien vu "
+"d'autre que du sable et des rochers autour de nous."
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:207
@@ -314,6 +338,8 @@ msgid ""
 "It really seems as if we have landed on a very small island with little "
 "space."
 msgstr ""
+"Il semble vraiment que nous ayons atterri sur une très petite île avec peu "
+"d'espace."
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:210
@@ -321,6 +347,9 @@ msgid ""
 "To make matters even worse, all the land we can see is blocked by rocks and "
 "trees. I fear we won’t find the resources we need to build a new ship."
 msgstr ""
+"De plus, toute la terre que nous voyons est couverte de rochers et d'arbres."
+" Je crains que nous ne trouvions pas les ressources nécessaires pour "
+"construire un nouveau navire."
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:213
@@ -328,14 +357,16 @@ msgid ""
 "I really don’t know if and how we will get back home. And the war is going "
 "on without us. I hope my fellow soldiers are defending our empire well."
 msgstr ""
+"Je me demande si nous parviendrons à rentrer un jour. Et la guerre continue "
+"sans nous. J'espère que mes braves soldats défendent l'Empire."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:220
 msgid "No Sight"
-msgstr ""
+msgstr "Sans Espoir"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:221
 msgid "Saledus looks around nervously…"
-msgstr ""
+msgstr "Saledus regarde nerveusement les environs"
 
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:223
@@ -344,14 +375,17 @@ msgid ""
 "safe either. It would probably be reasonable to build a tower to explore the"
 " island and add some military strength."
 msgstr ""
+"Sire, nous ne connaissons pas cette île. Et je ne nous crois pas en "
+"sécurité. Il serait raisonnable de construire une tour pour explorer l'île "
+"tout en nous renforçant."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:230
 msgid "Amalea Interrupts"
-msgstr ""
+msgstr "L'Irruption d'Amalea"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:231
 msgid "Amalea raises her hand…"
-msgstr ""
+msgstr "Amalea lève sa main..."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:233
@@ -360,15 +394,18 @@ msgid ""
 "restrictive in spending them. Even for military buildings, we should be very"
 " careful."
 msgstr ""
+"Comme nous ne savons pas quelle ressources nous pourrons extraire, nous "
+"devrions être très économes. Même pour les bâtiments militaires, nous "
+"devrions être très attentifs."
 
 #. TRANSLATORS: Message header - Saledus is advising to save resources
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:241
 msgid "Save Resources"
-msgstr ""
+msgstr "Économiser les Ressources"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:242
 msgid "Saledus is nodding in agreement…"
-msgstr ""
+msgstr "Saledus acquiesce..."
 
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:244
@@ -377,14 +414,16 @@ msgid ""
 "should only build an outpost as this is the most effective military "
 "building."
 msgstr ""
+"Sire, Amalea a raison. Pour le coup, je me corrige. Nous devrions seulement "
+"construire un poste avancé car c'est le bâtiment militaire le moins coûteux."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:253
 msgid "Rocks, Nothing but Rocks"
-msgstr ""
+msgstr "Des Roches, Rien que des Roches"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:254
 msgid "Saledus speaks with a sigh of relief…"
-msgstr ""
+msgstr "Saledus parle avec un soupir de soulagement ..."
 
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:256
@@ -392,6 +431,8 @@ msgid ""
 "Sire, I saw that the construction of the outpost was completed, so I have "
 "assigned some of my best soldiers to it to keep the watch."
 msgstr ""
+"Sire, J'ai vu que la construction de la caserne était terminée. J'y ai donc "
+"assigné un de mes meilleurs soldat afin de garder la zone."
 
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:259
@@ -401,14 +442,17 @@ msgid ""
 "new ship or even have some basic infrastructure to make our lives more "
 "comfortable?"
 msgstr ""
+"Mais bien que ce soit un bon point, je ne vois pas de place pour construire "
+"des bâtiments. Toute l'île est couverte de rochers. Comment pourrons-nous "
+"construire un navire, ou même seulement améliorer nos conditions de vie?"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:265
 msgid "Amalea’s Plan"
-msgstr ""
+msgstr "L'Idée d'Amalea"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:266
 msgid "Amalea smiles…"
-msgstr ""
+msgstr "Amalea sourit..."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:268
@@ -416,6 +460,9 @@ msgid ""
 "Lutius, this may seem very tricky, but we can do it. First of all, we need "
 "patience as well as speed and a plan to succeed in this part of the world."
 msgstr ""
+"Lutius, cela peut sembler difficile, mais nous pouvons y arriver. D'abord, "
+"nous devons être patients et rapides et un plan pour réussir dans ces "
+"contrées."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:271
@@ -423,6 +470,8 @@ msgid ""
 "I think we should try to reveal some building space by cutting up all the "
 "rocks in a quarry."
 msgstr ""
+"Je pense que nous devrions essayer de libérer de l'espace en minant tous ces"
+" rochiers avec une carrière."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:274
@@ -431,15 +480,18 @@ msgid ""
 "our new world. We can use them as soon as there will finally be enough space"
 " for buildings."
 msgstr ""
+"Additionnellement, ceci nous permettrais de gagner du granit et du marbre "
+"pour construire notre nouveau monde. Nous pourrons les utiliser dès que nous"
+" aurons finalement assez d'espace pour les bâtiments."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:282
 msgid "Amalea’s New Instructions"
-msgstr ""
+msgstr "Les Nouvelles Instructions d'Amalea"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:283
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:357
 msgid "Amalea recommends…"
-msgstr ""
+msgstr "Amalea recommande..."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:285
@@ -492,7 +544,7 @@ msgstr ""
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:316
 msgid "I have excellent progress to report now."
-msgstr ""
+msgstr "J'ai de bonnes nouvelles à vous annoncer."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:319
