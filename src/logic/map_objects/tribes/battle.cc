@@ -130,7 +130,6 @@ bool Battle::locked(Game& game) {
 }
 
 Soldier* Battle::opponent(const Soldier& soldier) const {
-	assert(&soldier != nullptr);
 	assert(first_ == &soldier || second_ == &soldier);
 	Soldier* other_soldier = first_ == &soldier ? second_ : first_;
 	return other_soldier;
