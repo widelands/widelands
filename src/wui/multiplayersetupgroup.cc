@@ -186,6 +186,13 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 		team->sigclicked.connect(
 		   boost::bind(&MultiPlayerPlayerGroup::toggle_team, boost::ref(*this)));
 		add(team);
+		layout();
+	}
+
+	void layout() override {
+		type_dropdown_.set_height(g_gr->get_yres() * 3/ 4);
+		tribes_dropdown_.set_height(g_gr->get_yres() / 2);
+		UI::Box::layout();
 	}
 
 	/// This will update the game settings for the type with the value
@@ -446,6 +453,7 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 		bool const initaccess = s->can_change_player_init(id_);
 		bool teamaccess = s->can_change_player_team(id_);
 
+		// NOCOM tribes dropdown keeps autoclosing in fullscreen mode.
 		rebuild_and_update_type_dropdown(player_setting);
 		rebuild_tribes_dropdown(settings);
 

@@ -61,6 +61,8 @@ BaseDropdown::BaseDropdown(UI::Panel* parent,
                base_height(button_dimension)),
      max_list_height_(h - 2 * get_h()),
      list_width_(w),
+	  list_offset_x_(type == DropdownType::kTextual ? 0 : button_dimension),
+	  list_offset_y_(0),
      button_dimension_(button_dimension),
      mouse_tolerance_(50),
      button_box_(this, 0, 0, UI::Box::Horizontal, w, h),
@@ -137,14 +139,29 @@ void BaseDropdown::layout() {
 	// Update list position. The list is hooked into the highest parent that we can get so that we
 	// can drop down outside the panel. Positioning breaks down with TabPanels, so we exclude them.
 	UI::Panel* parent = get_parent();
-	int new_list_y = get_y() + get_h() + parent->get_y();
+	int new_list_y = get_y() + parent->get_y();
 	int new_list_x = get_x() + parent->get_x();
 	while (parent->get_parent() && !is_a(UI::TabPanel, parent->get_parent())) {
 		parent = parent->get_parent();
 		new_list_y += parent->get_y();
 		new_list_x += parent->get_x();
 	}
-	list_->set_pos(Vector2i(new_list_x, new_list_y));
+
+	// Dynamic position of list according to position in panel and list size
+	list_offset_y_ = 0;
+	// Drop up instead of down if it doesn't fit
+	if (new_list_y + list_->get_h() > g_gr->get_yres()) {
+		if (list_offset_x_ == 0) {
+			list_offset_y_ = - list_->get_h();
+		} else {
+			list_offset_y_ = display_button_.get_h() - list_->get_h();
+		}
+	} else if (list_offset_x_ == 0) {
+		// We're expanding straight down
+		list_offset_y_ = display_button_.get_h();
+	}
+
+	list_->set_pos(Vector2i(new_list_x + list_offset_x_, new_list_y + list_offset_y_));
 }
 
 void BaseDropdown::add(const std::string& name,
@@ -286,10 +303,10 @@ void BaseDropdown::toggle_list() {
 }
 
 bool BaseDropdown::is_mouse_away() const {
-	return (get_mouse_position().x + mouse_tolerance_) < 0 ||
-	       get_mouse_position().x > (list_->get_w() + mouse_tolerance_) ||
-	       (get_mouse_position().y + mouse_tolerance_ / 2) < 0 ||
-	       get_mouse_position().y > (get_h() + list_->get_h() + mouse_tolerance_);
+	return (get_mouse_position().x + mouse_tolerance_) < list_offset_x_ ||
+	        get_mouse_position().x > (list_offset_x_ + list_->get_w() + mouse_tolerance_) ||
+	        (get_mouse_position().y + mouse_tolerance_ / 2) < list_offset_y_ ||
+	       get_mouse_position().y > (list_offset_y_ + get_h() + list_->get_h() + mouse_tolerance_);
 }
 
 bool BaseDropdown::handle_key(bool down, SDL_Keysym code) {

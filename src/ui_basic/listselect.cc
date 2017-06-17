@@ -361,9 +361,9 @@ void BaseListselect::draw(RenderTarget& dst) {
 	if (selection_mode_ == ListselectLayout::kDropdown) {
 		RGBAColor black(0, 0, 0, 255);
 		//  top edge
-		dst.brighten_rect(Recti(0, 0, get_w(), 2), BUTTON_EDGE_BRIGHT_FACTOR / 4);
+		dst.brighten_rect(Recti(0, 0, get_w(), 2), BUTTON_EDGE_BRIGHT_FACTOR);
 		//  left edge
-		dst.brighten_rect(Recti(0, 0, 2, get_h()), BUTTON_EDGE_BRIGHT_FACTOR);
+		dst.brighten_rect(Recti(0, 2, 2, get_h()), BUTTON_EDGE_BRIGHT_FACTOR);
 		//  bottom edge
 		dst.fill_rect(Recti(2, get_h() - 2, get_eff_w() - 2, 1), black);
 		dst.fill_rect(Recti(1, get_h() - 1, get_eff_w() - 1, 1), black);
