@@ -206,7 +206,6 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 				if (selected == "ai_random") {
 					n->set_player_ai(id_, "", true);
 				} else {
-					// NOCOM we should hand the dropdown a struct to avoid all this parsing.
 					if (boost::starts_with(selected, "ai_")) {
 						std::vector<std::string> parts;
 						boost::split(parts, selected, boost::is_any_of("_"));
@@ -512,10 +511,7 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 	GameSettingsProvider* const s;
 	NetworkPlayerSettingsBackend* const n;
 	uint8_t const id_;
-	// NOCOM start work here
-	// 1. Type
-	// 2. Init
-	// 3. Team
+
 	UI::Dropdown<std::string>
 	   type_dropdown_;  /// Select who owns the slot (human, AI, open, closed, shared-in).
 	UI::Dropdown<std::string> tribes_dropdown_;  /// Select the tribe or shared_in player.
