@@ -157,9 +157,8 @@ public:
 	WorkareaInfo workarea_info_;
 
 	bool suitability(const Map&, const FCoords&) const;
-	const BuildingHints& hints() const {
-		return hints_;
-	}
+	const BuildingHints& hints() const;
+	void set_hints_trainingsites_max_percent(int percent);
 
 protected:
 	virtual Building& create_object() const = 0;
