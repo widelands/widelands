@@ -72,6 +72,9 @@ public:
 	/// and displayed on the display button.
 	void set_label(const std::string& text);
 
+	/// Displays an error message on the button instead of the current selection.
+	void set_errored(const std::string& error_message);
+
 	/// Sets the tooltip for the display button.
 	void set_tooltip(const std::string& text);
 

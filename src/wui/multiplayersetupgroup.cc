@@ -231,7 +231,7 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 	/// Update the type dropdown from the server settings if the server setting changed.
 	/// This will keep the host and client UIs in sync.
 	void update_type_dropdown(const PlayerSettings& player_setting) {
-		if (!type_dropdown_.is_expanded()) {
+		if (!type_dropdown_.is_expanded()) { // NOCOM test whether we need this with 2 machines
 
 			if (player_setting.state == PlayerSettings::State::kClosed) {
 				type_dropdown_.select("closed");
@@ -242,8 +242,7 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 			} else {
 				if (player_setting.state == PlayerSettings::State::kComputer) {
 					if (player_setting.ai.empty()) {
-						type_dropdown_.set_label(_("Error"));
-						// NOCOM need a set_image function pic += "novalue.png";
+						type_dropdown_.set_errored(_("No AI"));
 					} else {
 						if (player_setting.random_ai) {
 							type_dropdown_.select("ai_random");
@@ -253,7 +252,7 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 							type_dropdown_.select((boost::format("ai_%s") % impl->name).str());
 						}
 					}
-				} else {  // PlayerSettings::State::stateHuman
+				} else {  // PlayerSettings::State::kHuman
 					type_dropdown_.select("human");
 				}
 			}
