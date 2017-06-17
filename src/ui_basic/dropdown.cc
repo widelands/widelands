@@ -166,6 +166,14 @@ void BaseDropdown::layout() {
 		list_offset_y_ = display_button_.get_h();
 	}
 
+	// Right align instead of left align if it doesn't fit
+	if (new_list_x + list_->get_w() > g_gr->get_xres()) {
+		list_offset_x_ = display_button_.get_w() - list_->get_w();
+		if (push_button_ != nullptr) {
+			list_offset_x_ += push_button_->get_w();
+		}
+	}
+
 	list_->set_pos(Vector2i(new_list_x + list_offset_x_, new_list_y + list_offset_y_));
 }
 
