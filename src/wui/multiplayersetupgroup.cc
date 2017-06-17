@@ -450,6 +450,7 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 
 		const PlayerSettings& player_setting = settings.players[id_];
 
+		// NOCOM toggling through stuff still creates problems with updating the states.
 		rebuild_and_update_type_dropdown(player_setting);
 		rebuild_tribes_dropdown(settings);
 

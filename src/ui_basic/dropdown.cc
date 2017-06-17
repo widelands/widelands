@@ -64,7 +64,7 @@ BaseDropdown::BaseDropdown(UI::Panel* parent,
 	  id_(next_id_++),
      max_list_height_(h - 2 * get_h()),
      list_width_(w),
-	  list_offset_x_(type == DropdownType::kTextual ? 0 : button_dimension),
+	  list_offset_x_(0),
 	  list_offset_y_(0),
      button_dimension_(button_dimension),
      mouse_tolerance_(50),
@@ -159,17 +159,10 @@ void BaseDropdown::layout() {
 		new_list_x += parent->get_x();
 	}
 
-	// Dynamic position of list according to position in panel and list size
-	list_offset_y_ = 0;
 	// Drop up instead of down if it doesn't fit
 	if (new_list_y + list_->get_h() > g_gr->get_yres()) {
-		if (list_offset_x_ == 0) {
-			list_offset_y_ = - list_->get_h();
-		} else {
-			list_offset_y_ = display_button_.get_h() - list_->get_h();
-		}
-	} else if (list_offset_x_ == 0) {
-		// We're expanding straight down
+		list_offset_y_ = -list_->get_h();
+	} else {
 		list_offset_y_ = display_button_.get_h();
 	}
 
@@ -306,6 +299,9 @@ void BaseDropdown::toggle_list() {
 		return;
 	}
 	list_->set_visible(!list_->is_visible());
+	if (type_ == DropdownType::kPictorial) {
+		display_button_.set_perm_pressed(list_->is_visible());
+	}
 	if (list_->is_visible()) {
 		list_->move_to_top();
 		focus();
