@@ -238,7 +238,7 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 	/// Update the type dropdown from the server settings if the server setting changed.
 	/// This will keep the host and client UIs in sync.
 	void update_type_dropdown(const PlayerSettings& player_setting) {
-		if (!type_dropdown_.is_expanded()) { // NOCOM test whether we need this with 2 machines
+		// if (!type_dropdown_.is_expanded()) { // NOCOM test whether we need this with 2 machines
 
 			if (player_setting.state == PlayerSettings::State::kClosed) {
 				type_dropdown_.select("closed");
@@ -263,7 +263,7 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 					type_dropdown_.select("human");
 				}
 			}
-		}
+		// NOCOM }
 	}
 
 	/// Fill the type dropdown
@@ -343,7 +343,10 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 
 	/// Update the tribes dropdown from the server settings if the server setting changed.
 	/// This will keep the host and client UIs in sync.
-	void update_tribes_dropdown(const PlayerSettings& player_setting) {
+	void update_tribes_dropdown(const PlayerSettings& player_setting, bool has_access) {
+		if (tribes_dropdown_.is_enabled() != has_access) {
+			tribes_dropdown_.set_enabled(has_access && !n->tribe_selection_blocked && tribes_dropdown_.size() > 1);
+		}
 		if (player_setting.state == PlayerSettings::State::kClosed ||
 		    player_setting.state == PlayerSettings::State::kOpen) {
 			return;
@@ -352,7 +355,7 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 			tribes_dropdown_.set_visible(true);
 		}
 		if (!tribes_dropdown_.is_expanded() && !n->tribe_selection_blocked &&
-		    tribes_dropdown_.has_selection()) {
+			 tribes_dropdown_.has_selection()) {
 			const std::string selected_tribe = tribes_dropdown_.get_selected();
 			if (player_setting.state == PlayerSettings::State::kShared) {
 				const std::string shared_in = shared_in_as_string(player_setting.shared_in);
@@ -454,7 +457,7 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 		bool const initaccess = s->can_change_player_init(id_);
 		bool teamaccess = s->can_change_player_team(id_);
 
-		// NOCOM tribes dropdown keeps autoclosing in fullscreen mode.
+		// NOCOM dropdowns broken when loading first a savegame, then a map.
 		rebuild_and_update_type_dropdown(player_setting);
 		rebuild_tribes_dropdown(settings);
 
@@ -467,26 +470,16 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 			init->set_enabled(false);
 			return;
 		} else if (player_setting.state == PlayerSettings::State::kShared) {
-			update_tribes_dropdown(player_setting);
-
-			if (tribes_dropdown_.is_enabled() != initaccess) {
-				tribes_dropdown_.set_enabled(initaccess && !n->tribe_selection_blocked &&
-				                             tribes_dropdown_.size() > 1);
-			}
+			update_tribes_dropdown(player_setting, initaccess);
 			team->set_visible(false);
 			team->set_enabled(false);
 
 		} else {
-			update_tribes_dropdown(player_setting);
-
-			if (tribes_dropdown_.is_enabled() != tribeaccess) {
-				tribes_dropdown_.set_enabled(tribeaccess && !n->tribe_selection_blocked);
-			}
-
+			update_tribes_dropdown(player_setting, tribeaccess);
 			if (player_setting.team) {
 				team->set_title(std::to_string(static_cast<unsigned int>(player_setting.team)));
 			} else {
-				team->set_title("--");
+				team->set_title("–");
 			}
 			team->set_visible(true);
 			team->set_enabled(teamaccess);
