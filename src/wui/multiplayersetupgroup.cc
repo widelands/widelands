@@ -191,7 +191,6 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 	/// This will update the game settings for the type with the value
 	/// currently selected in the type dropdown.
 	void set_type() {
-		n->set_block_type_selection(true);
 		if (type_dropdown_.has_selection()) {
 			const std::string& selected = type_dropdown_.get_selected();
 			PlayerSettings::State state = PlayerSettings::State::kComputer;
@@ -227,13 +226,12 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 				}
 			}
 		}
-		n->set_block_type_selection(false);
 	}
 
 	/// Update the type dropdown from the server settings if the server setting changed.
 	/// This will keep the host and client UIs in sync.
 	void update_type_dropdown(const PlayerSettings& player_setting) {
-		if (!n->type_selection_blocked && !type_dropdown_.is_expanded()) {
+		if (!type_dropdown_.is_expanded()) {
 
 			if (player_setting.state == PlayerSettings::State::kClosed) {
 				type_dropdown_.select("closed");

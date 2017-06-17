@@ -35,9 +35,6 @@ struct NetworkPlayerSettingsBackend {
 	void set_shared_in(uint8_t id, uint8_t shared_in);
 	void set_tribe(uint8_t id, const std::string& tribename);
 
-	void set_block_type_selection(bool blocked) {
-		type_selection_blocked = blocked;
-	}
 	void set_block_tribe_selection(bool blocked) {
 		tribe_selection_blocked = blocked;
 	}
@@ -48,7 +45,6 @@ struct NetworkPlayerSettingsBackend {
 
 	GameSettingsProvider* const s;
 	std::string shared_in_tribe[kMaxPlayers];
-	bool type_selection_blocked;
 	bool tribe_selection_blocked;
 
 private:
