@@ -43,6 +43,8 @@ int base_height(int button_dimension) {
 
 namespace UI {
 
+int BaseDropdown::next_id_ = 0;
+
 BaseDropdown::BaseDropdown(UI::Panel* parent,
                            int32_t x,
                            int32_t y,
@@ -59,6 +61,7 @@ BaseDropdown::BaseDropdown(UI::Panel* parent,
                type == DropdownType::kTextual ? w : button_dimension,
                // Height only to fit the button, so we can use this in Box layout.
                base_height(button_dimension)),
+	  id_(next_id_++),
      max_list_height_(h - 2 * get_h()),
      list_width_(w),
 	  list_offset_x_(type == DropdownType::kTextual ? 0 : button_dimension),
@@ -88,6 +91,15 @@ BaseDropdown::BaseDropdown(UI::Panel* parent,
      label_(label),
      type_(type),
      is_enabled_(true) {
+
+	// Close whenever another dropdown is opened
+	subscriber_ =
+			Notifications::subscribe<NoteDropdown>([this](const NoteDropdown& note) {
+		if (id_ != note.id) {
+			close();
+		}
+	});
+
 	assert(max_list_height_ > 0);
 	// Hook into highest parent that we can get so that we can drop down outside the panel.
 	// Positioning breaks down with TabPanels, so we exclude them.
@@ -297,9 +309,16 @@ void BaseDropdown::toggle_list() {
 	if (list_->is_visible()) {
 		list_->move_to_top();
 		focus();
+		Notifications::publish(NoteDropdown(id_));
 	}
 	// Make sure that the list covers and deactivates the elements below it
 	set_layout_toplevel(list_->is_visible());
+}
+
+void BaseDropdown::close() {
+	if (is_expanded()) {
+		toggle_list();
+	}
 }
 
 bool BaseDropdown::is_mouse_away() const {

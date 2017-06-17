@@ -33,6 +33,16 @@
 #include "ui_basic/panel.h"
 
 namespace UI {
+// We use this to make sure that only 1 dropdown is open at the same time.
+struct NoteDropdown {
+	CAN_BE_SENT_AS_NOTE(NoteId::Dropdown)
+
+	int id;
+
+	explicit NoteDropdown(int init_id)
+	   :  id(init_id) {
+	}
+};
 
 enum class DropdownType { kTextual, kPictorial };
 
@@ -63,6 +73,7 @@ protected:
 	~BaseDropdown();
 
 public:
+	/// An entry was selected
 	boost::signals2::signal<void()> selected;
 
 	/// \return true if an element has been selected from the list
@@ -145,10 +156,18 @@ private:
 	void set_value();
 	/// Toggles the dropdown list on and off.
 	void toggle_list();
+	/// Toggle the list closed if the dropdown is currently expanded.
+	void close();
 
 	/// Returns true if the mouse pointer left the vicinity of the dropdown.
 	bool is_mouse_away() const;
 
+	/// Give each dropdown a unique ID
+	static int next_id_;
+	const int id_;
+	std::unique_ptr<Notifications::Subscriber<NoteDropdown>> subscriber_;
+
+	// Dimensions
 	int max_list_height_;
 	int list_width_;
 	int list_offset_x_;
