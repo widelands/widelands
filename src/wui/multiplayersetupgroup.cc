@@ -233,9 +233,6 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 	/// Update the type dropdown from the server settings if the server setting changed.
 	/// This will keep the host and client UIs in sync.
 	void update_type_dropdown(const PlayerSettings& player_setting) {
-		if (!type_dropdown_.is_visible()) {
-			type_dropdown_.set_visible(true);
-		}
 		if (!n->type_selection_blocked && !type_dropdown_.is_expanded()) {
 
 			if (player_setting.state == PlayerSettings::State::kClosed) {
@@ -266,7 +263,7 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 	}
 
 	/// Fill the type dropdown
-	void rebuild_type_dropdown(const PlayerSettings& player_setting) {
+	void rebuild_and_update_type_dropdown(const PlayerSettings& player_setting) {
 		if (type_dropdown_.empty()) {
 			type_dropdown_.clear();
 
@@ -297,6 +294,11 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 			type_dropdown_.add(_("Open"), "open", g_gr->images().get("images/ui_basic/continue.png"),
 			                   false, _("Open"));
 
+			update_type_dropdown(player_setting);
+			type_dropdown_.set_enabled(s->can_change_player_state(id_));
+		}
+		if (last_state_ != player_setting.state) {
+			// A client was reassigned
 			update_type_dropdown(player_setting);
 		}
 	}
@@ -444,12 +446,11 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 		set_visible(true);
 
 		const PlayerSettings& player_setting = settings.players[id_];
-		bool typeaccess = s->can_change_player_state(id_);
 		bool tribeaccess = s->can_change_player_tribe(id_);
 		bool const initaccess = s->can_change_player_init(id_);
 		bool teamaccess = s->can_change_player_team(id_);
 
-		rebuild_type_dropdown(player_setting);
+		rebuild_and_update_type_dropdown(player_setting);
 		rebuild_tribes_dropdown(settings);
 
 		if (player_setting.state == PlayerSettings::State::kClosed || player_setting.state == PlayerSettings::State::kOpen) {
@@ -472,10 +473,6 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 
 		} else {
 			update_tribes_dropdown(player_setting);
-
-			if (type_dropdown_.is_enabled() != typeaccess) {
-				type_dropdown_.set_enabled(typeaccess && !n->type_selection_blocked);
-			}
 
 			if (tribes_dropdown_.is_enabled() != tribeaccess) {
 				tribes_dropdown_.set_enabled(tribeaccess && !n->tribe_selection_blocked);
