@@ -239,7 +239,7 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 	/// Update the type dropdown from the server settings if the server setting changed.
 	/// This will keep the host and client UIs in sync.
 	void update_type_dropdown(const PlayerSettings& player_setting) {
-		// if (!type_dropdown_.is_expanded()) { // NOCOM test whether we need this with 2 machines
+		if (!type_dropdown_.is_expanded()) {
 
 			if (player_setting.state == PlayerSettings::State::kClosed) {
 				type_dropdown_.select("closed");
@@ -264,7 +264,7 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 					type_dropdown_.select("human");
 				}
 			}
-		// NOCOM }
+		}
 	}
 
 	/// Fill the type dropdown
