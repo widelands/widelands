@@ -159,7 +159,8 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 	     type_dropdown_(this, 0, 0, 50, 200, h, _("Player Type"), UI::DropdownType::kPictorial),
 	     tribes_dropdown_(this, 0, 0, 50, 200, h, _("Tribe"), UI::DropdownType::kPictorial),
 	     last_state_(PlayerSettings::State::kClosed),
-	     last_player_amount_(0) {
+	     last_player_amount_(0),
+		  last_map_name_(s->settings().mapfilename) {
 		set_size(w, h);
 		tribes_dropdown_.set_visible(false);
 		tribes_dropdown_.set_enabled(false);
@@ -301,8 +302,8 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 			update_type_dropdown(player_setting);
 			type_dropdown_.set_enabled(s->can_change_player_state(id_));
 		}
-		if (last_state_ != player_setting.state) {
-			// A client was reassigned
+		if (last_state_ != player_setting.state || last_map_name_ != s->settings().mapfilename) {
+			// A client was reassigned or the map was changed
 			update_type_dropdown(player_setting);
 		}
 	}
@@ -345,7 +346,7 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 	/// This will keep the host and client UIs in sync.
 	void update_tribes_dropdown(const PlayerSettings& player_setting, bool has_access) {
 		if (tribes_dropdown_.is_enabled() != has_access) {
-			tribes_dropdown_.set_enabled(has_access && !n->tribe_selection_blocked && tribes_dropdown_.size() > 1);
+			tribes_dropdown_.set_enabled(has_access && tribes_dropdown_.size() > 1);
 		}
 		if (player_setting.state == PlayerSettings::State::kClosed ||
 		    player_setting.state == PlayerSettings::State::kOpen) {
@@ -379,12 +380,7 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 	void rebuild_tribes_dropdown(const GameSettings& settings) {
 		const PlayerSettings& player_setting = settings.players[id_];
 
-		if (player_setting.state == PlayerSettings::State::kClosed ||
-		    player_setting.state == PlayerSettings::State::kOpen) {
-			return;
-		}
-
-		if (tribes_dropdown_.empty() || last_player_amount_ != settings.players.size() ||
+		if (tribes_dropdown_.empty() || last_map_name_ != s->settings().mapfilename || last_player_amount_ != settings.players.size() ||
 		    ((player_setting.state == PlayerSettings::State::kShared ||
 		      last_state_ == PlayerSettings::State::kShared) &&
 		     player_setting.state != last_state_)) {
@@ -453,14 +449,11 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 		set_visible(true);
 
 		const PlayerSettings& player_setting = settings.players[id_];
-		bool tribeaccess = s->can_change_player_tribe(id_);
-		bool const initaccess = s->can_change_player_init(id_);
-		bool teamaccess = s->can_change_player_team(id_);
 
-		// NOCOM dropdowns broken when loading first a savegame, then a map.
 		rebuild_and_update_type_dropdown(player_setting);
 		rebuild_tribes_dropdown(settings);
 
+		const bool initaccess = s->can_change_player_init(id_);
 		if (player_setting.state == PlayerSettings::State::kClosed || player_setting.state == PlayerSettings::State::kOpen) {
 			team->set_visible(false);
 			team->set_enabled(false);
@@ -475,14 +468,14 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 			team->set_enabled(false);
 
 		} else {
-			update_tribes_dropdown(player_setting, tribeaccess);
+			update_tribes_dropdown(player_setting, s->can_change_player_tribe(id_));
 			if (player_setting.team) {
 				team->set_title(std::to_string(static_cast<unsigned int>(player_setting.team)));
 			} else {
 				team->set_title("–");
 			}
 			team->set_visible(true);
-			team->set_enabled(teamaccess);
+			team->set_enabled(s->can_change_player_team(id_));
 		}
 		init->set_enabled(initaccess);
 		init->set_visible(true);
@@ -505,6 +498,7 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 			}
 		}
 		last_state_ = player_setting.state;
+		last_map_name_ = s->settings().mapfilename;
 	}
 
 	UI::Icon* player;
@@ -517,8 +511,9 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 	UI::Dropdown<std::string>
 	   type_dropdown_;  /// Select who owns the slot (human, AI, open, closed, shared-in).
 	UI::Dropdown<std::string> tribes_dropdown_;  /// Select the tribe or shared_in player.
-	PlayerSettings::State last_state_;  /// The tribes dropdown needs updating if this changes
+	PlayerSettings::State last_state_;  /// The dropdowns need updating if this changes
 	size_t last_player_amount_;         /// The tribes dropdown needs rebuilding if this changes
+	std::string last_map_name_;         /// The dropdowns need updating if this changes
 };
 
 MultiPlayerSetupGroup::MultiPlayerSetupGroup(UI::Panel* const parent,
