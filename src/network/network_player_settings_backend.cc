@@ -27,7 +27,7 @@
 #include "logic/map_objects/tribes/tribe_descr.h"
 #include "logic/player.h"
 
-void NetworkPlayerSettingsBackend::set_player_state(uint8_t id, PlayerSettings::State state) {
+void NetworkPlayerSettingsBackend::set_player_state(Widelands::PlayerNumber id, PlayerSettings::State state) {
 	if (id >= s->settings().players.size()) {
 		return;
 	}
@@ -38,7 +38,7 @@ void NetworkPlayerSettingsBackend::set_player_state(uint8_t id, PlayerSettings::
 
 	s->set_player_state(id, state);
 	if (state == PlayerSettings::State::kShared) {
-		uint8_t shared = 0;
+		Widelands::PlayerNumber shared = 0;
 		for (; shared < s->settings().players.size(); ++shared) {
 			if (s->settings().players.at(shared).state != PlayerSettings::State::kClosed &&
 				 s->settings().players.at(shared).state != PlayerSettings::State::kShared)
@@ -52,7 +52,7 @@ void NetworkPlayerSettingsBackend::set_player_state(uint8_t id, PlayerSettings::
 	}
 }
 
-void NetworkPlayerSettingsBackend::set_player_ai(uint8_t id, const std::string& name, bool random_ai) {
+void NetworkPlayerSettingsBackend::set_player_ai(Widelands::PlayerNumber id, const std::string& name, bool random_ai) {
 	if (id >= s->settings().players.size()) {
 		return;
 	}
@@ -61,7 +61,7 @@ void NetworkPlayerSettingsBackend::set_player_ai(uint8_t id, const std::string& 
 		ComputerPlayer::ImplementationVector::const_iterator it = impls.begin();
 		if (impls.size() > 1) {
 				do {
-					uint8_t random = (std::rand() % impls.size());  // Choose a random AI
+					size_t random = (std::rand() % impls.size());  // Choose a random AI
 					it = impls.begin() + random;
 				} while ((*it)->type == ComputerPlayer::Implementation::Type::kEmpty);
 		}
@@ -71,7 +71,7 @@ void NetworkPlayerSettingsBackend::set_player_ai(uint8_t id, const std::string& 
 	}
 }
 
-void NetworkPlayerSettingsBackend::set_tribe(uint8_t id, const std::string& tribename) {
+void NetworkPlayerSettingsBackend::set_tribe(Widelands::PlayerNumber id, const std::string& tribename) {
 	const GameSettings& settings = s->settings();
 
 	if (id >= settings.players.size() || tribename.empty())
@@ -83,7 +83,7 @@ void NetworkPlayerSettingsBackend::set_tribe(uint8_t id, const std::string& trib
 }
 
 /// Set the shared in player for the given id
-void NetworkPlayerSettingsBackend::set_shared_in(uint8_t id, uint8_t shared_in) {
+void NetworkPlayerSettingsBackend::set_shared_in(Widelands::PlayerNumber id, Widelands::PlayerNumber shared_in) {
 	const GameSettings& settings = s->settings();
 	if (id > settings.players.size() || shared_in > settings.players.size())
 		return;
@@ -93,14 +93,14 @@ void NetworkPlayerSettingsBackend::set_shared_in(uint8_t id, uint8_t shared_in) 
 }
 
 /// Toggle through shared in players
-void NetworkPlayerSettingsBackend::toggle_shared_in(uint8_t id) {
+void NetworkPlayerSettingsBackend::toggle_shared_in(Widelands::PlayerNumber id) {
 	const GameSettings& settings = s->settings();
 
 	if (id >= settings.players.size() ||
 	    settings.players.at(id).state != PlayerSettings::State::kShared)
 		return;
 
-	uint8_t sharedplr = settings.players.at(id).shared_in;
+	Widelands::PlayerNumber sharedplr = settings.players.at(id).shared_in;
 	for (; sharedplr < settings.players.size(); ++sharedplr) {
 		if (settings.players.at(sharedplr).state != PlayerSettings::State::kClosed &&
 		    settings.players.at(sharedplr).state != PlayerSettings::State::kShared)
@@ -128,7 +128,7 @@ void NetworkPlayerSettingsBackend::toggle_shared_in(uint8_t id) {
 }
 
 /// Toggle through the initializations
-void NetworkPlayerSettingsBackend::toggle_init(uint8_t id) {
+void NetworkPlayerSettingsBackend::toggle_init(Widelands::PlayerNumber id) {
 	const GameSettings& settings = s->settings();
 
 	if (id >= settings.players.size())
@@ -145,7 +145,7 @@ void NetworkPlayerSettingsBackend::toggle_init(uint8_t id) {
 }
 
 /// Toggle through the teams
-void NetworkPlayerSettingsBackend::toggle_team(uint8_t id) {
+void NetworkPlayerSettingsBackend::toggle_team(Widelands::PlayerNumber id) {
 	const GameSettings& settings = s->settings();
 
 	if (id >= settings.players.size())
@@ -164,7 +164,7 @@ void NetworkPlayerSettingsBackend::toggle_team(uint8_t id) {
 }
 
 /// Check if all settings for the player are still valid
-void NetworkPlayerSettingsBackend::refresh(uint8_t id) {
+void NetworkPlayerSettingsBackend::refresh(Widelands::PlayerNumber id) {
 	const GameSettings& settings = s->settings();
 
 	if (id >= settings.players.size())

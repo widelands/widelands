@@ -22,33 +22,34 @@
 
 #include "graphic/playercolor.h"
 #include "logic/game_settings.h"
+#include "logic/widelands.h"
 
 struct NetworkPlayerSettingsBackend {
 
 	NetworkPlayerSettingsBackend(GameSettingsProvider* const settings) : s(settings) {
-		for (uint8_t i = 0; i < kMaxPlayers; ++i)
+		for (Widelands::PlayerNumber i = 0; i < kMaxPlayers; ++i)
 			shared_in_tribe[i] = std::string();
 	}
 
-	void set_player_state(uint8_t id, PlayerSettings::State state);
-	void set_player_ai(uint8_t id, const std::string& name, bool random_ai);
-	void set_shared_in(uint8_t id, uint8_t shared_in);
-	void set_tribe(uint8_t id, const std::string& tribename);
+	void set_player_state(Widelands::PlayerNumber id, PlayerSettings::State state);
+	void set_player_ai(Widelands::PlayerNumber id, const std::string& name, bool random_ai);
+	void set_shared_in(Widelands::PlayerNumber id, Widelands::PlayerNumber shared_in);
+	void set_tribe(Widelands::PlayerNumber id, const std::string& tribename);
 
 	void set_block_tribe_selection(bool blocked) {
 		tribe_selection_blocked = blocked;
 	}
 
-	void toggle_init(uint8_t id);
-	void toggle_team(uint8_t id);
-	void refresh(uint8_t id);
+	void toggle_init(Widelands::PlayerNumber id);
+	void toggle_team(Widelands::PlayerNumber id);
+	void refresh(Widelands::PlayerNumber id);
 
 	GameSettingsProvider* const s;
 	std::string shared_in_tribe[kMaxPlayers];
 	bool tribe_selection_blocked;
 
 private:
-	void toggle_shared_in(uint8_t id);
+	void toggle_shared_in(Widelands::PlayerNumber id);
 };
 
 #endif  // end of include guard: WL_NETWORK_NETWORK_PLAYER_SETTINGS_BACKEND_H

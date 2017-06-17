@@ -37,6 +37,7 @@
 #include "logic/map_objects/tribes/tribe_descr.h"
 #include "logic/map_objects/tribes/tribes.h"
 #include "logic/player.h"
+#include "logic/widelands.h"
 #include "ui_basic/button.h"
 #include "ui_basic/checkbox.h"
 #include "ui_basic/dropdown.h"
@@ -46,7 +47,7 @@
 
 struct MultiPlayerClientGroup : public UI::Box {
 	MultiPlayerClientGroup(UI::Panel* const parent,
-	                       uint8_t id,
+	                       Widelands::PlayerNumber id,
 	                       int32_t const /* x */,
 	                       int32_t const /* y */,
 	                       int32_t const w,
@@ -136,13 +137,13 @@ struct MultiPlayerClientGroup : public UI::Box {
 	UI::Icon* type_icon;
 	UI::Button* type;
 	GameSettingsProvider* const s;
-	uint8_t const id_;
+	Widelands::PlayerNumber const id_;
 	int16_t save_;  // saved position to check rewrite need.
 };
 
 struct MultiPlayerPlayerGroup : public UI::Box {
 	MultiPlayerPlayerGroup(UI::Panel* const parent,
-	                       uint8_t id,
+	                       Widelands::PlayerNumber id,
 	                       int32_t const /* x */,
 	                       int32_t const /* y */,
 	                       int32_t const w,
@@ -226,7 +227,7 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 			n->set_player_state(id_, state);
 
 			// Trigger update for the other players for shared_in mode when slots open and close
-			for (uint8_t p = 0; p < s->settings().players.size(); ++p) {
+			for (Widelands::PlayerNumber p = 0; p < s->settings().players.size(); ++p) {
 				if (p != id_) {
 					update_type_dropdown(s->settings().players[p]);
 				}
@@ -336,7 +337,7 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 	}
 
 	/// Helper function to cast shared_in for use in the dropdown.
-	const std::string shared_in_as_string(uint8_t shared_in) {
+	const std::string shared_in_as_string(Widelands::PlayerNumber shared_in) {
 		return boost::lexical_cast<std::string>(static_cast<unsigned int>(shared_in));
 	}
 
@@ -518,7 +519,7 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 	UI::Button* team;
 	GameSettingsProvider* const s;
 	NetworkPlayerSettingsBackend* const n;
-	uint8_t const id_;
+	Widelands::PlayerNumber const id_;
 
 	UI::Dropdown<std::string>
 	   type_dropdown_;  /// Select who owns the slot (human, AI, open, closed, shared-in).
@@ -581,7 +582,7 @@ MultiPlayerSetupGroup::MultiPlayerSetupGroup(UI::Panel* const parent,
 
 	playerbox.set_size(w * 9 / 15, h - buth);
 	multi_player_player_groups.resize(kMaxPlayers);
-	for (uint8_t i = 0; i < multi_player_player_groups.size(); ++i) {
+	for (Widelands::PlayerNumber i = 0; i < multi_player_player_groups.size(); ++i) {
 		multi_player_player_groups.at(i) =
 		   new MultiPlayerPlayerGroup(&playerbox, i, 0, 0, playerbox.get_w(), buth, s, npsb.get());
 		playerbox.add(multi_player_player_groups.at(i));
