@@ -33,6 +33,10 @@
 #include "scripting/lua_interface.h"
 #include "scripting/lua_table.h"
 
+// Player slot 0 will give us PlayerNumber 1 etc., so we rename it to avoid confusion
+// TODO(GunChleoc): Rename all uint8_t to PlayerSlot or Widelands::PlayerNumber
+using PlayerSlot = Widelands::PlayerNumber;
+
 struct NoteGameSettings {
 	CAN_BE_SENT_AS_NOTE(NoteId::GameSettings)
 

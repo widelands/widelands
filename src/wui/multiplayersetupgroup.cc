@@ -50,7 +50,7 @@
 
 struct MultiPlayerClientGroup : public UI::Box {
 	MultiPlayerClientGroup(UI::Panel* const parent,
-	                       Widelands::PlayerNumber id,
+	                       PlayerSlot id,
 	                       int32_t const /* x */,
 	                       int32_t const /* y */,
 	                       int32_t const w,
@@ -140,13 +140,13 @@ struct MultiPlayerClientGroup : public UI::Box {
 	UI::Icon* type_icon;
 	UI::Button* type;
 	GameSettingsProvider* const s;
-	Widelands::PlayerNumber const id_;
+	PlayerSlot const id_;
 	int16_t save_;  // saved position to check rewrite need.
 };
 
 struct MultiPlayerPlayerGroup : public UI::Box {
 	MultiPlayerPlayerGroup(UI::Panel* const parent,
-	                       Widelands::PlayerNumber id,
+	                       PlayerSlot id,
 	                       int32_t const /* x */,
 	                       int32_t const /* y */,
 	                       int32_t const w,
@@ -323,7 +323,7 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 	}
 
 	/// Helper function to cast shared_in for use in the dropdown.
-	const std::string shared_in_as_string(Widelands::PlayerNumber shared_in) {
+	const std::string shared_in_as_string(PlayerSlot shared_in) {
 		return boost::lexical_cast<std::string>(static_cast<unsigned int>(shared_in));
 	}
 
@@ -416,9 +416,9 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 		// Trigger update for the other players for shared_in mode when slots open and close
 		if (last_state_ != player_setting.state) {
 			last_state_ = player_setting.state;
-			 for (Widelands::PlayerNumber p = 0; p < s->settings().players.size(); ++p) {
-				 if (p != id_) {
-					 Notifications::publish(NoteGameSettings(p));
+			 for (PlayerSlot slot = 0; slot < s->settings().players.size(); ++slot) {
+				 if (slot != id_) {
+					 Notifications::publish(NoteGameSettings(slot));
 				 }
 			 }
 		}
@@ -471,7 +471,7 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 	UI::Button* team;
 	GameSettingsProvider* const s;
 	NetworkPlayerSettingsBackend* const n;
-	Widelands::PlayerNumber const id_;
+	PlayerSlot const id_;
 
 	UI::Dropdown<std::string>
 	   type_dropdown_;  /// Select who owns the slot (human, AI, open, closed, shared-in).
@@ -535,14 +535,14 @@ MultiPlayerSetupGroup::MultiPlayerSetupGroup(UI::Panel* const parent,
 
 	playerbox.set_size(w * 9 / 15, h - buth);
 	multi_player_player_groups.resize(kMaxPlayers);
-	for (Widelands::PlayerNumber i = 0; i < multi_player_player_groups.size(); ++i) {
+	for (PlayerSlot i = 0; i < multi_player_player_groups.size(); ++i) {
 		multi_player_player_groups.at(i) =
 		   new MultiPlayerPlayerGroup(&playerbox, i, 0, 0, playerbox.get_w(), buth, s, npsb.get());
 		playerbox.add(multi_player_player_groups.at(i));
 	}
 	subscriber_ = Notifications::subscribe<NoteGameSettings>([this](const NoteGameSettings& /* note */) {
 		// Keep track of who is visible
-		for (Widelands::PlayerNumber i = 0; i < multi_player_player_groups.size(); ++i) {
+		for (PlayerSlot i = 0; i < multi_player_player_groups.size(); ++i) {
 			const bool should_be_visible = i < s->settings().players.size();
 			const bool is_visible = multi_player_player_groups.at(i)->is_visible();
 			if (should_be_visible != is_visible) {

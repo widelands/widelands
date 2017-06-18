@@ -27,7 +27,7 @@
 #include "logic/map_objects/tribes/tribe_descr.h"
 #include "logic/player.h"
 
-void NetworkPlayerSettingsBackend::set_player_state(Widelands::PlayerNumber id, PlayerSettings::State state) {
+void NetworkPlayerSettingsBackend::set_player_state(PlayerSlot id, PlayerSettings::State state) {
 	if (id >= s->settings().players.size()) {
 		return;
 	}
@@ -38,7 +38,7 @@ void NetworkPlayerSettingsBackend::set_player_state(Widelands::PlayerNumber id, 
 
 	s->set_player_state(id, state);
 	if (state == PlayerSettings::State::kShared) {
-		Widelands::PlayerNumber shared = 0;
+		PlayerSlot shared = 0;
 		for (; shared < s->settings().players.size(); ++shared) {
 			if (s->settings().players.at(shared).state != PlayerSettings::State::kClosed &&
 				 s->settings().players.at(shared).state != PlayerSettings::State::kShared)
@@ -52,7 +52,7 @@ void NetworkPlayerSettingsBackend::set_player_state(Widelands::PlayerNumber id, 
 	}
 }
 
-void NetworkPlayerSettingsBackend::set_player_ai(Widelands::PlayerNumber id, const std::string& name, bool random_ai) {
+void NetworkPlayerSettingsBackend::set_player_ai(PlayerSlot id, const std::string& name, bool random_ai) {
 	if (id >= s->settings().players.size()) {
 		return;
 	}
@@ -71,7 +71,7 @@ void NetworkPlayerSettingsBackend::set_player_ai(Widelands::PlayerNumber id, con
 	}
 }
 
-void NetworkPlayerSettingsBackend::set_tribe(Widelands::PlayerNumber id, const std::string& tribename) {
+void NetworkPlayerSettingsBackend::set_tribe(PlayerSlot id, const std::string& tribename) {
 	const GameSettings& settings = s->settings();
 
 	if (id >= settings.players.size() || tribename.empty())
@@ -83,7 +83,7 @@ void NetworkPlayerSettingsBackend::set_tribe(Widelands::PlayerNumber id, const s
 }
 
 /// Set the shared in player for the given id
-void NetworkPlayerSettingsBackend::set_shared_in(Widelands::PlayerNumber id, Widelands::PlayerNumber shared_in) {
+void NetworkPlayerSettingsBackend::set_shared_in(PlayerSlot id, Widelands::PlayerNumber shared_in) {
 	const GameSettings& settings = s->settings();
 	if (id > settings.players.size() || shared_in > settings.players.size())
 		return;
@@ -92,8 +92,8 @@ void NetworkPlayerSettingsBackend::set_shared_in(Widelands::PlayerNumber id, Wid
 	}
 }
 
-/// Toggle through shared in players
-Widelands::PlayerNumber NetworkPlayerSettingsBackend::find_next_shared_in(Widelands::PlayerNumber id) {
+/// Toggle through shared in players. We don't set them here yet to avoid triggering extra notifications from the server. If '0' is returned, no suitable player was found.
+Widelands::PlayerNumber NetworkPlayerSettingsBackend::find_next_shared_in(PlayerSlot id) {
 	const GameSettings& settings = s->settings();
 
 	if (id >= settings.players.size() ||
@@ -123,7 +123,7 @@ Widelands::PlayerNumber NetworkPlayerSettingsBackend::find_next_shared_in(Widela
 }
 
 /// Toggle through the initializations
-void NetworkPlayerSettingsBackend::toggle_init(Widelands::PlayerNumber id) {
+void NetworkPlayerSettingsBackend::toggle_init(PlayerSlot id) {
 	const GameSettings& settings = s->settings();
 
 	if (id >= settings.players.size())
@@ -140,7 +140,7 @@ void NetworkPlayerSettingsBackend::toggle_init(Widelands::PlayerNumber id) {
 }
 
 /// Toggle through the teams
-void NetworkPlayerSettingsBackend::toggle_team(Widelands::PlayerNumber id) {
+void NetworkPlayerSettingsBackend::toggle_team(PlayerSlot id) {
 	const GameSettings& settings = s->settings();
 
 	if (id >= settings.players.size())
@@ -159,7 +159,7 @@ void NetworkPlayerSettingsBackend::toggle_team(Widelands::PlayerNumber id) {
 }
 
 /// Check if all settings for the player are still valid
-void NetworkPlayerSettingsBackend::refresh(Widelands::PlayerNumber id) {
+void NetworkPlayerSettingsBackend::refresh(PlayerSlot id) {
 	const GameSettings& settings = s->settings();
 
 	if (id >= settings.players.size())
