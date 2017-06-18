@@ -58,7 +58,7 @@ BaseDropdown::BaseDropdown(UI::Panel* parent,
    : UI::Panel(parent,
                x,
                y,
-               type == DropdownType::kTextual ? w : button_dimension,
+               type == DropdownType::kPictorial ? button_dimension : w,
                // Height only to fit the button, so we can use this in Box layout.
                base_height(button_dimension)),
      id_(next_id_++),
@@ -84,7 +84,7 @@ BaseDropdown::BaseDropdown(UI::Panel* parent,
                      "dropdown_label",
                      0,
                      0,
-                     type == DropdownType::kTextual ? w - button_dimension : button_dimension,
+                     type == DropdownType::kTextual ? w - button_dimension : type == DropdownType::kTextualNarrow ? w : button_dimension,
                      get_h(),
                      background,
                      label),
@@ -138,13 +138,13 @@ void BaseDropdown::set_height(int height) {
 
 void BaseDropdown::layout() {
 	const int base_h = base_height(button_dimension_);
-	const int w = type_ == DropdownType::kTextual ? get_w() : button_dimension_;
+	const int w = type_ == DropdownType::kPictorial ? button_dimension_ : get_w();
 	button_box_.set_size(w, base_h);
 	display_button_.set_desired_size(
 	   type_ == DropdownType::kTextual ? w - button_dimension_ : w, base_h);
 	int new_list_height =
 	   std::min(static_cast<int>(list_->size()) * list_->get_lineheight(), max_list_height_);
-	list_->set_size(type_ == DropdownType::kTextual ? w : list_width_, new_list_height);
+	list_->set_size(type_ != DropdownType::kPictorial ? w : list_width_, new_list_height);
 	set_desired_size(w, base_h);
 
 	// Update list position. The list is hooked into the highest parent that we can get so that we
@@ -207,7 +207,7 @@ void BaseDropdown::select(uint32_t entry) {
 
 void BaseDropdown::set_label(const std::string& text) {
 	label_ = text;
-	if (type_ == DropdownType::kTextual) {
+	if (type_ != DropdownType::kPictorial) {
 		display_button_.set_title(label_);
 	}
 }
@@ -223,7 +223,7 @@ void BaseDropdown::set_tooltip(const std::string& text) {
 
 void BaseDropdown::set_errored(const std::string& error_message) {
 	set_tooltip((boost::format(_("%1%: %2%")) % _("Error") % error_message).str());
-	if (type_ == DropdownType::kTextual) {
+	if (type_ != DropdownType::kPictorial) {
 		set_label(_("Error"));
 	} else {
 		set_image(g_gr->images().get("images/ui_basic/different.png"));
@@ -282,7 +282,7 @@ void BaseDropdown::update() {
 	                            /** TRANSLATORS: Selection in Dropdown menus. */
 	                            pgettext("dropdown", "Not Selected");
 
-	if (type_ == DropdownType::kTextual) {
+	if (type_ != DropdownType::kPictorial) {
 		if (label_.empty()) {
 			display_button_.set_title(name);
 		} else {
@@ -311,7 +311,7 @@ void BaseDropdown::toggle_list() {
 		return;
 	}
 	list_->set_visible(!list_->is_visible());
-	if (type_ == DropdownType::kPictorial) {
+	if (type_ != DropdownType::kTextual) {
 		display_button_.set_perm_pressed(list_->is_visible());
 	}
 	if (list_->is_visible()) {

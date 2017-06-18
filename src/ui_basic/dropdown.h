@@ -45,7 +45,8 @@ struct NoteDropdown {
 	}
 };
 
-enum class DropdownType { kTextual, kPictorial };
+/// The narrow textual dropdown omits the extra push button
+enum class DropdownType { kTextual, kTextualNarrow, kPictorial };
 
 /// Implementation for a dropdown menu that lets the user select a value.
 class BaseDropdown : public Panel {

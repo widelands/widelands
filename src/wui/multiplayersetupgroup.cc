@@ -160,7 +160,7 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 	     id_(id),
 	     type_dropdown_(this, 0, 0, 50, 200, h, _("Player Type"), UI::DropdownType::kPictorial),
 	     tribes_dropdown_(this, 0, 0, 50, 200, h, _("Tribe"), UI::DropdownType::kPictorial),
-		  init_dropdown_(this, 0, 0, w - 4 * h, 200, h, "", UI::DropdownType::kTextual),
+		  init_dropdown_(this, 0, 0, w - 4 * h, 200, h, "", UI::DropdownType::kTextualNarrow),
 	     last_state_(PlayerSettings::State::kClosed),
 		  tribe_selection_locked_(false),
 		  init_selection_locked_(false) {
