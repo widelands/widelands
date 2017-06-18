@@ -127,7 +127,8 @@ static const std::string IGPCMD_DISCONNECT = "DISCONNECT";
  * \li string:    client name
  * \li string:    build_id of the client
  * \li string:    whether the client wants to login in to a registered account (0 = false, 1 = true)
- * \li string:    password in clear text - only valid if previous was 1
+ * \li string:    for registered accounts: password in clear text
+ *                for unregistered users a random nonce to recognized the matching IPv4 and IPv6 connections
  *
  * If the metaserver accepts, it replies with a LOGIN command with the following payload:
  * \li string:    client name (might be different to the previously chosen one, if the client did
@@ -172,12 +173,24 @@ static const std::string IGPCMD_LOGIN = "LOGIN";
  * answer"
  *
  * For the case, that the metaserver does not accept the login, it sends a \ref IGPCMD_ERROR "LOGIN"
- *
- * In the case the client already has a connection over IPv6 and tries to establish a secondary
- * connection over IPv4, this message should be immediately followed by a DISCONNECT
- * and no answer from the server should be expected.
  */
 static const std::string IGPCMD_RELOGIN = "RELOGIN";
+
+/**
+ * Tells the metaserver about a secondary IP address.
+ *
+ * Assuming the client already has a connection over IPv6 and tries to establish a secondary
+ * connection over IPv4, this is the only message send.
+ * It should be send as soon as a connection is established, immediately followed by closing
+ * the connection. No answer from the server should be expected.
+ *
+ * Is sent by the client, with the following payload:
+ * \li string:    protocol version
+ * \li string:    client name - the one the metaserver replied at the first login
+ * \li string:    for registered accounts: password in clear text
+ *                for unregistered users the random nonce used on login
+ */
+static const std::string IGPCMD_TELL_IP = "TELL_IP";
 
 /**
  * This command is sent by the metaserver if something went wrong.

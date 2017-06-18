@@ -374,16 +374,10 @@ void InternetGaming::create_second_connection() {
 
 	// Okay, we have a connection. Send the login message and terminate the connection
 	SendPacket s;
-	s.string(IGPCMD_RELOGIN);
+	s.string(IGPCMD_TELL_IP);
 	s.string(boost::lexical_cast<std::string>(INTERNET_GAMING_PROTOCOL_VERSION));
 	s.string(clientname_);
-	s.string(build_id());
-	s.string(bool2str(reg_));
 	s.string(pwd_);
-	tmpNet->send(s);
-
-	s.reset();
-	s.string(IGPCMD_DISCONNECT);
 	tmpNet->send(s);
 
 	// Close the connection
