@@ -24,11 +24,6 @@
 #include <string>
 #include <vector>
 
-#ifdef _WIN32
-#include <io.h>
-#include <winsock2.h>
-#endif
-
 #include "build_info.h"
 #include "chat/chat.h"
 #include "network/internet_gaming_protocol.h"

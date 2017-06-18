@@ -373,8 +373,10 @@ void FullscreenMenuInternetLobby::clicked_joingame() {
 		}
 		std::string ip = InternetGaming::ref().ip();
 
-		GameClient netgame(NetAddress{ip, WIDELANDS_PORT},
-							InternetGaming::ref().get_local_clientname(), true);
+		NetAddress addr;
+		NetAddress::parse_ip(&addr, ip, WIDELANDS_PORT);
+		assert(addr.is_valid());
+		GameClient netgame(addr, InternetGaming::ref().get_local_clientname(), true);
 		netgame.run();
 	} else
 		throw wexception("No server selected! That should not happen!");
@@ -397,6 +399,12 @@ void FullscreenMenuInternetLobby::clicked_hostgame() {
 	InternetGaming::ref().set_local_servername(servername_ui);
 
 	// Start the game
-	GameHost netgame(InternetGaming::ref().get_local_clientname(), true);
-	netgame.run();
+	try {
+		GameHost netgame(InternetGaming::ref().get_local_clientname(), true);
+		netgame.run();
+	} catch (...) {
+		// Log out before going back to the main menu
+		InternetGaming::ref().logout("SERVER_CRASHED");
+		throw;
+	}
 }

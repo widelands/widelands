@@ -1169,9 +1169,10 @@ void WLApplication::mainmenu_multiplayer() {
 			case FullscreenMenuBase::MenuTarget::kJoingame: {
 				NetAddress addr;
 				if (!ns.get_host_address(&addr)) {
-					UI::WLMessageBox mmb(&ns, _("Invalid address"),
-								_("The entered hostname or address is invalid and can’t be connected to."),
-								UI::WLMessageBox::MBoxType::kOk);
+					UI::WLMessageBox mmb(
+					   &ns, _("Invalid address"),
+					   _("The entered hostname or address is invalid and can’t be connected to."),
+					   UI::WLMessageBox::MBoxType::kOk);
 					mmb.run<UI::Panel::Returncodes>();
 					break;
 				}

@@ -20,7 +20,6 @@
 #ifndef WL_NETWORK_NETWORK_LAN_PROMOTION_H
 #define WL_NETWORK_NETWORK_LAN_PROMOTION_H
 
-#include <boost/asio.hpp>
 #include <list>
 #include <set>
 
@@ -62,9 +61,6 @@ protected:
 	 */
 	LanBase(uint16_t port);
 
-	/**
-	 * Destructor.
-	 */
 	~LanBase();
 
 	/**
@@ -89,7 +85,7 @@ protected:
 	 * \return How many bytes have been written to \c buf. If 0 is returned there either was no data
 	 *         available (check before with avail()) or there was some error (check with is_open())
 	 */
-	ssize_t receive(void *buf, size_t len, NetAddress *addr);
+	ssize_t receive(void* buf, size_t len, NetAddress* addr);
 
 	/**
 	 * Sends data to a specified address.
@@ -97,7 +93,7 @@ protected:
 	 * \param len The length of the buffer.
 	 * \param addr The address to send to.
 	 */
-	bool send(void const *buf, size_t len, const NetAddress& addr);
+	bool send(void const* buf, size_t len, const NetAddress& addr);
 
 	/**
 	 * Broadcast some data in the local network.
@@ -116,7 +112,6 @@ protected:
 	void report_network_error();
 
 private:
-
 	/**
 	 * Opens a listening UDP socket.
 	 * \param[out] The socket to open. The object has to be created but the socket not opened before.
@@ -124,24 +119,29 @@ private:
 	 * \param version Whether a IPv4 or IPv6 socket should be opened.
 	 * \param port The port to listen on.
 	 */
-	void start_socket(boost::asio::ip::udp::socket *socket, boost::asio::ip::udp version, uint16_t port);
+	void
+	start_socket(boost::asio::ip::udp::socket* socket, boost::asio::ip::udp version, uint16_t port);
 
 	/**
 	 * Closes the given socket.
 	 * Does nothing if the socket already has been closed.
 	 * \param socket The socket to close.
 	 */
-	void close_socket(boost::asio::ip::udp::socket *socket);
+	void close_socket(boost::asio::ip::udp::socket* socket);
 
 	/// No idea what this does. I think it is only really used when asynchronous operations are done.
-    boost::asio::io_service io_service;
-    /// The socket for IPv4.
-    boost::asio::ip::udp::socket socket_v4;
-    /// The socket for IPv6.
-    boost::asio::ip::udp::socket socket_v6;
-    /// The found broadcast addresses for IPv4.
-    /// No addresses for v6, there is only one fixed address
+	boost::asio::io_service io_service;
+	/// The socket for IPv4.
+	boost::asio::ip::udp::socket socket_v4;
+	/// The socket for IPv6.
+	boost::asio::ip::udp::socket socket_v6;
+	/// The found broadcast addresses for IPv4.
+	/// No addresses for v6, there is only one fixed address.
 	std::set<std::string> broadcast_addresses_v4;
+#ifdef __APPLE__
+	/// Apple forces us to define which interface to broadcast through.
+	std::set<unsigned int> interface_indices_v6;
+#endif  // __APPLE__
 };
 
 /**

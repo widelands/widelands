@@ -135,7 +135,7 @@ void FullscreenMenuNetSetupLAN::think() {
 	discovery.run();
 }
 
-bool FullscreenMenuNetSetupLAN::get_host_address(NetAddress *addr) {
+bool FullscreenMenuNetSetupLAN::get_host_address(NetAddress* addr) {
 	const std::string& host = hostname.text();
 
 	const uint32_t opengames_size = opengames.size();
@@ -153,7 +153,7 @@ bool FullscreenMenuNetSetupLAN::get_host_address(NetAddress *addr) {
 		return true;
 	if (NetAddress::resolve_to_v4(addr, host, WIDELANDS_PORT))
 		return true;
-    return false;
+	return false;
 }
 
 const std::string& FullscreenMenuNetSetupLAN::get_playername() {

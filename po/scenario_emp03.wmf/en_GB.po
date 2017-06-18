@@ -4,13 +4,14 @@
 # 
 # Translators:
 # Rhian G <rhianmarie@gmail.com>, 2017
+# Adam Piggott <aD@simplypeachy.co.uk>, 2017
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-05-18 21:30+0000\n"
+"POT-Creation-Date: 2017-06-09 16:49+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: Rhian G <rhianmarie@gmail.com>, 2017\n"
+"Last-Translator: Adam Piggott <aD@simplypeachy.co.uk>, 2017\n"
 "Language-Team: English (United Kingdom) (https://www.transifex.com/widelands/teams/35159/en_GB/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -20,31 +21,35 @@ msgstr ""
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:39
 msgid "Build your first outpost"
-msgstr ""
+msgstr "Build your first outpost"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:41
 msgid "First Outpost"
-msgstr ""
+msgstr "First Outpost"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:42
 msgid ""
 "Build an outpost at the yellow house symbol to the east of your provisional "
 "headquarters."
 msgstr ""
+"Build an outpost at the yellow house symbol to the east of your provisional "
+"headquarters."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:48
 msgid "Build a quarry"
-msgstr ""
+msgstr "Build a quarry"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:50
 msgid "Quarry"
-msgstr ""
+msgstr "Quarry"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:51
 msgid ""
 "Build a quarry close to the abundant rocks, so we can free some building "
 "plots and get some valuable resources."
 msgstr ""
+"Build a quarry close to the abundant rocks, so we can free some building "
+"plots and get some valuable resources."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:57
 msgid "Build a lumberjack’s house, a sawmill and a stonemason’s house"

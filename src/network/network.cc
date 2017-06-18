@@ -20,48 +20,61 @@
 #include "network/network.h"
 
 #include <SDL.h>
-#include <boost/asio.hpp>
 
 #include "base/log.h"
 
-
 namespace {
 
-bool do_resolve(const boost::asio::ip::tcp& protocol, NetAddress *addr, const std::string& hostname, uint16_t port) {
+bool do_resolve(const boost::asio::ip::tcp& protocol,
+                NetAddress* addr,
+                const std::string& hostname,
+                uint16_t port) {
 	assert(addr != nullptr);
 	try {
 		boost::asio::io_service io_service;
 		boost::asio::ip::tcp::resolver resolver(io_service);
-		boost::asio::ip::tcp::resolver::query query(protocol, hostname, boost::lexical_cast<std::string>(port));
+		boost::asio::ip::tcp::resolver::query query(
+		   protocol, hostname, boost::lexical_cast<std::string>(port));
 		boost::asio::ip::tcp::resolver::iterator iter = resolver.resolve(query);
 		if (iter == boost::asio::ip::tcp::resolver::iterator()) {
 			// Resolution failed
 			return false;
 		}
-		addr->ip = iter->endpoint().address().to_string();
+		addr->ip = iter->endpoint().address();
 		addr->port = port;
 		return true;
-	} catch (const boost::system::system_error&) {
+	} catch (const boost::system::system_error& ec) {
 		// Resolution failed
+		log("Could not resolve network name: %s", ec.what());
 		return false;
 	}
 }
-
 }
 
-bool NetAddress::resolve_to_v4(NetAddress *addr, const std::string& hostname, uint16_t port) {
+bool NetAddress::resolve_to_v4(NetAddress* addr, const std::string& hostname, uint16_t port) {
 	return do_resolve(boost::asio::ip::tcp::v4(), addr, hostname, port);
 }
 
-bool NetAddress::resolve_to_v6(NetAddress *addr, const std::string& hostname, uint16_t port) {
+bool NetAddress::resolve_to_v6(NetAddress* addr, const std::string& hostname, uint16_t port) {
 	return do_resolve(boost::asio::ip::tcp::v6(), addr, hostname, port);
 }
 
+bool NetAddress::parse_ip(NetAddress* addr, const std::string& ip, uint16_t port) {
+	boost::system::error_code ec;
+	boost::asio::ip::address new_addr = boost::asio::ip::address::from_string(ip, ec);
+	if (ec)
+		return false;
+	addr->ip = new_addr;
+	addr->port = port;
+	return true;
+}
+
 bool NetAddress::is_ipv6() const {
-	// Don't catch errors. If the stored address is no valid IP address,
-	// we have a coding error somewhere
-	boost::asio::ip::address addr = boost::asio::ip::address::from_string(ip);
-	return addr.is_v6();
+	return ip.is_v6();
+}
+
+bool NetAddress::is_valid() const {
+	return port != 0 && !ip.is_unspecified();
 }
 
 CmdNetCheckSync::CmdNetCheckSync(uint32_t const dt, SyncCallback* const cb)
@@ -227,7 +240,7 @@ bool Deserializer::write_packet(RecvPacket* packet) {
 }
 
 DisconnectException::DisconnectException(const char* fmt, ...) {
-	char buffer[512];
+	char buffer[kNetworkBufferSize];
 	{
 		va_list va;
 		va_start(va, fmt);

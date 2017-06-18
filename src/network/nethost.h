@@ -23,8 +23,6 @@
 #include <map>
 #include <memory>
 
-#include <boost/asio.hpp>
-
 #include "network/network.h"
 
 /**
@@ -109,8 +107,8 @@ private:
 	 */
 	NetHost(const uint16_t port);
 
-	bool open_acceptor(boost::asio::ip::tcp::acceptor *acceptor,
-						const boost::asio::ip::tcp::endpoint& endpoint);
+	bool open_acceptor(boost::asio::ip::tcp::acceptor* acceptor,
+	                   const boost::asio::ip::tcp::endpoint& endpoint);
 
 	/**
 	 * Helper structure to store variables about a connected client.
@@ -129,7 +127,8 @@ private:
 		Deserializer deserializer;
 	};
 
-	/// A map of connected clients.
+	/// A map linking client ids to the respective data about the clients.
+	/// Client ids not in this map should be considered invalid.
 	std::map<NetHost::ConnectionId, Client> clients_;
 	/// The next client id that will be used
 	NetHost::ConnectionId next_id_;

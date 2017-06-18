@@ -284,6 +284,10 @@ const BuildingDescr* Tribes::get_building_descr(DescriptionIndex buildingindex) 
 	return buildings_->get_mutable(buildingindex);
 }
 
+BuildingDescr* Tribes::get_mutable_building_descr(DescriptionIndex buildingindex) const {
+	return buildings_->get_mutable(buildingindex);
+}
+
 const ImmovableDescr* Tribes::get_immovable_descr(DescriptionIndex immovableindex) const {
 	return immovables_->get_mutable(immovableindex);
 }

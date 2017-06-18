@@ -23,6 +23,7 @@
 #include "chat/chat.h"
 #include "logic/game_controller.h"
 #include "logic/game_settings.h"
+#include "logic/player_end_result.h"
 #include "network/netclient.h"
 
 struct GameClientImpl;
@@ -36,9 +37,9 @@ struct GameClientImpl;
  * launch, as well as dealing with the actual network protocol.
  */
 struct GameClient : public GameController,
-					public GameSettingsProvider,
-					private SyncCallback,
-					public ChatProvider {
+                    public GameSettingsProvider,
+                    private SyncCallback,
+                    public ChatProvider {
 	GameClient(const NetAddress& host, const std::string& playername, bool internet = false);
 
 	virtual ~GameClient();

@@ -32,8 +32,6 @@
 #include "graphic/text_layout.h"
 #include "ui_basic/panel.h"
 
-using namespace std;
-
 namespace {
 
 constexpr int32_t kUpdateTimeInGametimeMs = 1000;  //  1 second, gametime
@@ -66,7 +64,7 @@ enum class Units {
 	kDayGeneric
 };
 
-string ytick_text_style(const string& text, const RGBColor& clr) {
+std::string ytick_text_style(const std::string& text, const RGBColor& clr) {
 	static boost::format f(
 	   "<rt keep_spaces=1><p><font face=condensed size=13 color=%02x%02x%02x>%s</font></p></rt>");
 	f % int(clr.r) % int(clr.g) % int(clr.b);
@@ -74,7 +72,7 @@ string ytick_text_style(const string& text, const RGBColor& clr) {
 	return f.str();
 }
 
-string xtick_text_style(const string& text) {
+std::string xtick_text_style(const std::string& text) {
 	return ytick_text_style(text, RGBColor(255, 0, 0));
 }
 
@@ -174,21 +172,19 @@ int32_t calc_how_many(uint32_t time_ms, uint32_t sample_rate) {
 /**
  * print the string into the RenderTarget.
  */
-void draw_value(const string& value,
+void draw_value(const std::string& value,
                 const RGBColor& color,
                 const Vector2i& pos,
                 RenderTarget& dst) {
-	const Image* pic = UI::g_fh1->render(ytick_text_style(value, color));
+	std::shared_ptr<const UI::RenderedText> tick = UI::g_fh1->render(ytick_text_style(value, color));
 	Vector2i point(pos);  // Un-const this
-	UI::correct_for_align(UI::Align::kRight, pic->width(), &point);
-	UI::center_vertically(pic->height(), &point);
-	dst.blit(point, pic, BlendMode::UseAlpha);
+	UI::center_vertically(tick->height(), &point);
+	tick->draw(dst, point, UI::Align::kRight);
 }
 
 uint32_t calc_plot_x_max_ticks(int32_t plot_width) {
 	// Render a number with 3 digits (maximal length which should appear)
-	const Image* pic = UI::g_fh1->render(ytick_text_style(" -888 ", kAxisLineColor));
-	return plot_width / pic->width();
+	return plot_width / UI::g_fh1->render(ytick_text_style(" -888 ", kAxisLineColor))->width();
 }
 
 int calc_slider_label_width(const std::string& label) {
@@ -264,12 +260,11 @@ void draw_diagram(uint32_t time_ms,
 
 		// The space at the end is intentional to have the tick centered
 		// over the number, not to the left
-		const Image* xtick = UI::g_fh1->render(
+		std::shared_ptr<const UI::RenderedText> xtick = UI::g_fh1->render(
 		   xtick_text_style((boost::format("-%u ") % (max_x / how_many_ticks * i)).str()));
 		Vector2i pos(posx, inner_h - kSpaceBottom + 10);
-		UI::correct_for_align(UI::Align::kCenter, xtick->width(), &pos);
 		UI::center_vertically(xtick->height(), &pos);
-		dst.blit(pos, xtick, BlendMode::UseAlpha);
+		xtick->draw(dst, pos, UI::Align::kCenter);
 
 		posx -= sub;
 	}
@@ -284,10 +279,11 @@ void draw_diagram(uint32_t time_ms,
 	   kAxisLineColor, kAxisLinesWidth);
 
 	//  print the used unit
-	const Image* xtick = UI::g_fh1->render(xtick_text_style(get_generic_unit_name(unit)));
+	std::shared_ptr<const UI::RenderedText> xtick =
+	   UI::g_fh1->render(xtick_text_style(get_generic_unit_name(unit)));
 	Vector2i pos(2, kSpacing + 2);
 	UI::center_vertically(xtick->height(), &pos);
-	dst.blit(pos, xtick, BlendMode::UseAlpha);
+	xtick->draw(dst, pos);
 }
 
 }  // namespace
