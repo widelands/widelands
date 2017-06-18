@@ -46,6 +46,8 @@
 #include "ui_basic/scrollbar.h"
 #include "ui_basic/textarea.h"
 
+#define AI_NAME_PREFIX "ai" AI_NAME_SEPARATOR
+
 struct MultiPlayerClientGroup : public UI::Box {
 	MultiPlayerClientGroup(UI::Panel* const parent,
 	                       Widelands::PlayerNumber id,
@@ -219,12 +221,12 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 			} else if (selected == "shared_in") {
 				state = PlayerSettings::State::kShared;
 			} else {
-				if (selected == "ai|random") {
+				if (selected == AI_NAME_PREFIX "random") {
 					n->set_player_ai(id_, "", true);
 				} else {
-					if (boost::starts_with(selected, "ai|")) {
+					if (boost::starts_with(selected, AI_NAME_PREFIX)) {
 						std::vector<std::string> parts;
-						boost::split(parts, selected, boost::is_any_of("|"));
+						boost::split(parts, selected, boost::is_any_of(AI_NAME_SEPARATOR));
 						assert(parts.size() == 2);
 						n->set_player_ai(id_, parts[1], false);
 					} else {
@@ -257,11 +259,11 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 					type_dropdown_.set_errored(_("No AI"));
 				} else {
 					if (player_setting.random_ai) {
-						type_dropdown_.select("ai|random");
+						type_dropdown_.select(AI_NAME_PREFIX "random");
 					} else {
 						const ComputerPlayer::Implementation* impl =
 							ComputerPlayer::get_implementation(player_setting.ai);
-						type_dropdown_.select((boost::format("ai|%s") % impl->name).str());
+						type_dropdown_.select((boost::format(AI_NAME_PREFIX "%s") % impl->name).str());
 					}
 				}
 			}
@@ -274,11 +276,11 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 			type_dropdown_.clear();
 			// AIs
 			for (const auto* impl : ComputerPlayer::get_implementations()) {
-				type_dropdown_.add(_(impl->descname), (boost::format("ai|%s") % impl->name).str(),
+				type_dropdown_.add(_(impl->descname), (boost::format(AI_NAME_PREFIX "%s") % impl->name).str(),
 				                   g_gr->images().get(impl->icon_filename), false, _(impl->descname));
 			}
 			/** TRANSLATORS: This is the name of an AI used in the game setup screens */
-			type_dropdown_.add(_("Random AI"), "ai|random",
+			type_dropdown_.add(_("Random AI"), AI_NAME_PREFIX "random",
 			                   g_gr->images().get("images/ai/ai_random.png"), false, _("Random AI"));
 
 			// Slot state
