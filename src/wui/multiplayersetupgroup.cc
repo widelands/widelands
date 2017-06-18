@@ -238,40 +238,8 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 		}
 	}
 
-	/// Update the type dropdown from the server settings if the server setting changed.
-	/// This will keep the host and client UIs in sync.
-	void update_type_dropdown(const PlayerSettings& player_setting) {
-		if (type_dropdown_.is_expanded() || type_dropdown_.empty()) {
-			return;
-		}
-		if (player_setting.state == PlayerSettings::State::kHuman) {
-			type_dropdown_.set_image(g_gr->images().get("images/wui/stats/genstats_nrworkers.png"));
-			type_dropdown_.set_tooltip(_("Human"));
-		} else if (player_setting.state == PlayerSettings::State::kClosed) {
-			type_dropdown_.select("closed");
-		} else if (player_setting.state == PlayerSettings::State::kOpen) {
-			type_dropdown_.select("open");
-		} else if (player_setting.state == PlayerSettings::State::kShared) {
-			type_dropdown_.select("shared_in");
-		} else {
-			if (player_setting.state == PlayerSettings::State::kComputer) {
-				if (player_setting.ai.empty()) {
-					type_dropdown_.set_errored(_("No AI"));
-				} else {
-					if (player_setting.random_ai) {
-						type_dropdown_.select(AI_NAME_PREFIX "random");
-					} else {
-						const ComputerPlayer::Implementation* impl =
-							ComputerPlayer::get_implementation(player_setting.ai);
-						type_dropdown_.select((boost::format(AI_NAME_PREFIX "%s") % impl->name).str());
-					}
-				}
-			}
-		}
-	}
-
-	/// Fill the type dropdown
-	void rebuild_and_update_type_dropdown(const PlayerSettings& player_setting) {
+	/// Rebuild the type dropdown from the server settings. This will keep the host and client UIs in sync.
+	void rebuild_type_dropdown(const PlayerSettings& player_setting) {
 		if (type_dropdown_.empty()) {
 			type_dropdown_.clear();
 			// AIs
@@ -299,7 +267,32 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 
 			type_dropdown_.set_enabled(s->can_change_player_state(id_));
 		}
-		update_type_dropdown(player_setting);
+
+		// Now select the entry according to server settings
+		if (player_setting.state == PlayerSettings::State::kHuman) {
+			type_dropdown_.set_image(g_gr->images().get("images/wui/stats/genstats_nrworkers.png"));
+			type_dropdown_.set_tooltip(_("Human"));
+		} else if (player_setting.state == PlayerSettings::State::kClosed) {
+			type_dropdown_.select("closed");
+		} else if (player_setting.state == PlayerSettings::State::kOpen) {
+			type_dropdown_.select("open");
+		} else if (player_setting.state == PlayerSettings::State::kShared) {
+			type_dropdown_.select("shared_in");
+		} else {
+			if (player_setting.state == PlayerSettings::State::kComputer) {
+				if (player_setting.ai.empty()) {
+					type_dropdown_.set_errored(_("No AI"));
+				} else {
+					if (player_setting.random_ai) {
+						type_dropdown_.select(AI_NAME_PREFIX "random");
+					} else {
+						const ComputerPlayer::Implementation* impl =
+							ComputerPlayer::get_implementation(player_setting.ai);
+						type_dropdown_.select((boost::format(AI_NAME_PREFIX "%s") % impl->name).str());
+					}
+				}
+			}
+		}
 	}
 
 	/// This will update the game settings for the tribe or shared_in with the value
@@ -417,7 +410,7 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 
 		const PlayerSettings& player_setting = settings.players[id_];
 
-		rebuild_and_update_type_dropdown(player_setting);
+		rebuild_type_dropdown(player_setting);
 		rebuild_tribes_dropdown(settings);
 
 		// Trigger update for the other players for shared_in mode when slots open and close
