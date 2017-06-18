@@ -296,8 +296,8 @@ bool GameClient::can_change_player_team(uint8_t number) {
 	return (number == d->settings.playernum) && !d->settings.scenario && !d->settings.savegame;
 }
 
-bool GameClient::can_change_player_init(uint8_t) {
-	return false;
+bool GameClient::can_change_player_init(uint8_t number) {
+	return can_change_player_team(number);
 }
 
 bool GameClient::can_launch() {
