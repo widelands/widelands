@@ -134,7 +134,8 @@ struct HostGameSettingsProvider : public GameSettingsProvider {
 		if (number == settings().playernum ||
 		    settings().players.at(number).state == PlayerSettings::State::kComputer ||
 		    settings().players.at(number).state == PlayerSettings::State::kShared ||
-		    settings().players.at(number).state == PlayerSettings::State::kOpen)  // For savegame loading
+		    settings().players.at(number).state ==
+		       PlayerSettings::State::kOpen)  // For savegame loading
 			host_->set_player_tribe(number, tribe, random_tribe);
 	}
 

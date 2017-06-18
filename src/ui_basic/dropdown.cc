@@ -61,11 +61,11 @@ BaseDropdown::BaseDropdown(UI::Panel* parent,
                type == DropdownType::kTextual ? w : button_dimension,
                // Height only to fit the button, so we can use this in Box layout.
                base_height(button_dimension)),
-	  id_(next_id_++),
+     id_(next_id_++),
      max_list_height_(h - 2 * get_h()),
      list_width_(w),
-	  list_offset_x_(0),
-	  list_offset_y_(0),
+     list_offset_x_(0),
+     list_offset_y_(0),
      button_dimension_(button_dimension),
      mouse_tolerance_(50),
      button_box_(this, 0, 0, UI::Box::Horizontal, w, h),
@@ -93,8 +93,7 @@ BaseDropdown::BaseDropdown(UI::Panel* parent,
      is_enabled_(true) {
 
 	// Close whenever another dropdown is opened
-	subscriber_ =
-			Notifications::subscribe<NoteDropdown>([this](const NoteDropdown& note) {
+	subscriber_ = Notifications::subscribe<NoteDropdown>([this](const NoteDropdown& note) {
 		if (id_ != note.id) {
 			close();
 		}
@@ -332,8 +331,8 @@ void BaseDropdown::close() {
 
 bool BaseDropdown::is_mouse_away() const {
 	return (get_mouse_position().x + mouse_tolerance_) < list_offset_x_ ||
-	        get_mouse_position().x > (list_offset_x_ + list_->get_w() + mouse_tolerance_) ||
-	        (get_mouse_position().y + mouse_tolerance_ / 2) < list_offset_y_ ||
+	       get_mouse_position().x > (list_offset_x_ + list_->get_w() + mouse_tolerance_) ||
+	       (get_mouse_position().y + mouse_tolerance_ / 2) < list_offset_y_ ||
 	       get_mouse_position().y > (list_offset_y_ + get_h() + list_->get_h() + mouse_tolerance_);
 }
 

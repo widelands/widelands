@@ -32,8 +32,10 @@ void NetworkPlayerSettingsBackend::set_player_state(PlayerSlot id, PlayerSetting
 		return;
 	}
 	// Do not close a player in savegames or scenarios
-	if (state == PlayerSettings::State::kClosed && ((s->settings().scenario && !s->settings().players.at(id).closeable) || s->settings().savegame)) {
-		 state = PlayerSettings::State::kOpen;
+	if (state == PlayerSettings::State::kClosed &&
+	    ((s->settings().scenario && !s->settings().players.at(id).closeable) ||
+	     s->settings().savegame)) {
+		state = PlayerSettings::State::kOpen;
 	}
 
 	s->set_player_state(id, state);
@@ -41,7 +43,7 @@ void NetworkPlayerSettingsBackend::set_player_state(PlayerSlot id, PlayerSetting
 		PlayerSlot shared = 0;
 		for (; shared < s->settings().players.size(); ++shared) {
 			if (s->settings().players.at(shared).state != PlayerSettings::State::kClosed &&
-				 s->settings().players.at(shared).state != PlayerSettings::State::kShared)
+			    s->settings().players.at(shared).state != PlayerSettings::State::kShared)
 				break;
 		}
 		if (shared < s->settings().players.size()) {
@@ -52,7 +54,9 @@ void NetworkPlayerSettingsBackend::set_player_state(PlayerSlot id, PlayerSetting
 	}
 }
 
-void NetworkPlayerSettingsBackend::set_player_ai(PlayerSlot id, const std::string& name, bool random_ai) {
+void NetworkPlayerSettingsBackend::set_player_ai(PlayerSlot id,
+                                                 const std::string& name,
+                                                 bool random_ai) {
 	if (id >= s->settings().players.size()) {
 		return;
 	}
@@ -60,10 +64,10 @@ void NetworkPlayerSettingsBackend::set_player_ai(PlayerSlot id, const std::strin
 		const ComputerPlayer::ImplementationVector& impls = ComputerPlayer::get_implementations();
 		ComputerPlayer::ImplementationVector::const_iterator it = impls.begin();
 		if (impls.size() > 1) {
-				do {
-					size_t random = (std::rand() % impls.size());  // Choose a random AI
-					it = impls.begin() + random;
-				} while ((*it)->type == ComputerPlayer::Implementation::Type::kEmpty);
+			do {
+				size_t random = (std::rand() % impls.size());  // Choose a random AI
+				it = impls.begin() + random;
+			} while ((*it)->type == ComputerPlayer::Implementation::Type::kEmpty);
 		}
 		s->set_player_ai(id, (*it)->name, random_ai);
 	} else {
@@ -92,7 +96,8 @@ void NetworkPlayerSettingsBackend::set_shared_in(PlayerSlot id, Widelands::Playe
 	}
 }
 
-/// Toggle through shared in players. We don't set them here yet to avoid triggering extra notifications from the server. If '0' is returned, no suitable player was found.
+/// Toggle through shared in players. We don't set them here yet to avoid triggering extra
+/// notifications from the server. If '0' is returned, no suitable player was found.
 Widelands::PlayerNumber NetworkPlayerSettingsBackend::find_next_shared_in(PlayerSlot id) {
 	const GameSettings& settings = s->settings();
 
@@ -180,7 +185,7 @@ void NetworkPlayerSettingsBackend::refresh(PlayerSlot id) {
 		}
 
 		if (settings.players.at(new_shared_in - 1).state == PlayerSettings::State::kClosed ||
-			 settings.players.at(new_shared_in - 1).state == PlayerSettings::State::kShared) {
+		    settings.players.at(new_shared_in - 1).state == PlayerSettings::State::kShared) {
 			new_shared_in = find_next_shared_in(id);
 			if (new_shared_in == 0) {
 				// No fitting player found
@@ -189,10 +194,12 @@ void NetworkPlayerSettingsBackend::refresh(PlayerSlot id) {
 			}
 		}
 
-		if (new_shared_in != old_shared_in && settings.players.at(new_shared_in - 1).state != PlayerSettings::State::kClosed && settings.players.at(new_shared_in - 1).state != PlayerSettings::State::kShared) {
+		if (new_shared_in != old_shared_in &&
+		    settings.players.at(new_shared_in - 1).state != PlayerSettings::State::kClosed &&
+		    settings.players.at(new_shared_in - 1).state != PlayerSettings::State::kShared) {
 			if (shared_in_tribe[id] != settings.players.at(new_shared_in - 1).tribe) {
 				s->set_player_tribe(id, settings.players.at(new_shared_in - 1).tribe,
-										  settings.players.at(new_shared_in - 1).random_tribe);
+				                    settings.players.at(new_shared_in - 1).random_tribe);
 				shared_in_tribe[id] = settings.players.at(id).tribe;
 			}
 			set_shared_in(id, new_shared_in);

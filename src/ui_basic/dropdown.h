@@ -41,8 +41,7 @@ struct NoteDropdown {
 
 	int id;
 
-	explicit NoteDropdown(int init_id)
-	   :  id(init_id) {
+	explicit NoteDropdown(int init_id) : id(init_id) {
 	}
 };
 

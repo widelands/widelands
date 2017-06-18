@@ -42,8 +42,7 @@ struct NoteGameSettings {
 
 	Widelands::PlayerNumber position;
 
-	explicit NoteGameSettings(Widelands::PlayerNumber init_position)
-	   :  position(init_position) {
+	explicit NoteGameSettings(Widelands::PlayerNumber init_position) : position(init_position) {
 	}
 };
 
@@ -170,7 +169,9 @@ struct GameSettingsProvider {
 	                     bool savegame = false) = 0;
 	virtual void set_player_state(uint8_t number, PlayerSettings::State) = 0;
 	virtual void set_player_ai(uint8_t number, const std::string&, bool const random_ai = false) = 0;
-	virtual void next_player_state(uint8_t /* number */) {} // Multiplayer no longer toggles per button
+	// Multiplayer no longer toggles per button
+	virtual void next_player_state(uint8_t /* number */) {
+	}
 	virtual void
 	set_player_tribe(uint8_t number, const std::string&, bool const random_tribe = false) = 0;
 	virtual void set_player_init(uint8_t number, uint8_t index) = 0;

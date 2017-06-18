@@ -201,8 +201,8 @@ FullscreenMenuLaunchGame::win_condition_if_valid(const std::string& win_conditio
 			}
 		}
 	} catch (LuaTableKeyError& e) {
-		log(
-		   "Launch Game: Error loading win condition: %s %s\n", win_condition_script.c_str(), e.what());
+		log("Launch Game: Error loading win condition: %s %s\n", win_condition_script.c_str(),
+		    e.what());
 	}
 	if (!is_usable) {
 		t.reset(nullptr);
