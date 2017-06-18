@@ -104,5 +104,7 @@ NetClient::NetClient(const NetAddress& host)
 		socket_.non_blocking(true);
 	} else {
 		log("failed.\n");
+		socket_.close();
+		assert(!is_connected());
 	}
 }
