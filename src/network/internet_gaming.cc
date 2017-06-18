@@ -101,8 +101,10 @@ void InternetGaming::initialize_connection() {
 	net.reset();
 	if (NetAddress::resolve_to_v6(&addr, meta_, port_)) {
 		net = NetClient::connect(addr);
-	} else if ((!net || !net->is_connected()) && NetAddress::resolve_to_v4(&addr, meta_, port_)) {
-		net = NetClient::connect(addr);
+	}
+	if ((!net || !net->is_connected()) && NetAddress::resolve_to_v4(&addr, meta_, port_)) {
+			net = NetClient::connect(addr);
+		}
 	}
 	if (!net || !net->is_connected())
 		throw WLWarning(_("Could not establish connection to host"),
