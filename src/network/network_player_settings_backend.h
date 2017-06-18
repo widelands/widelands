@@ -36,20 +36,15 @@ struct NetworkPlayerSettingsBackend {
 	void set_shared_in(Widelands::PlayerNumber id, Widelands::PlayerNumber shared_in);
 	void set_tribe(Widelands::PlayerNumber id, const std::string& tribename);
 
-	void set_block_tribe_selection(bool blocked) {
-		tribe_selection_blocked = blocked;
-	}
-
 	void toggle_init(Widelands::PlayerNumber id);
 	void toggle_team(Widelands::PlayerNumber id);
 	void refresh(Widelands::PlayerNumber id);
 
 	GameSettingsProvider* const s;
 	std::string shared_in_tribe[kMaxPlayers];
-	bool tribe_selection_blocked;
 
 private:
-	void toggle_shared_in(Widelands::PlayerNumber id);
+	Widelands::PlayerNumber find_next_shared_in(Widelands::PlayerNumber id);
 };
 
 #endif  // end of include guard: WL_NETWORK_NETWORK_PLAYER_SETTINGS_BACKEND_H

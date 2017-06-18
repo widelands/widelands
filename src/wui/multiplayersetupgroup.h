@@ -62,6 +62,8 @@ private:
 	std::unique_ptr<NetworkPlayerSettingsBackend> npsb;
 	std::vector<MultiPlayerClientGroup*> multi_player_client_groups;  // not owned
 	std::vector<MultiPlayerPlayerGroup*> multi_player_player_groups;  // not owned
+	std::unique_ptr<Notifications::Subscriber<NoteGameSettings>> subscriber_;
+
 	UI::Box clientbox, playerbox;
 	std::vector<UI::Textarea*> labels;
 

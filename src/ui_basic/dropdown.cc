@@ -213,18 +213,22 @@ void BaseDropdown::set_label(const std::string& text) {
 	}
 }
 
-void BaseDropdown::set_errored(const std::string& error_message) {
-	set_tooltip((boost::format(_("%1%: %2%")) % _("Error") % error_message).str());
-	if (type_ == DropdownType::kTextual) {
-		display_button_.set_title(_("Error"));
-	} else {
-		display_button_.set_pic(g_gr->images().get("images/ui_basic/different.png"));
-	}
+void BaseDropdown::set_image(const Image* image) {
+	display_button_.set_pic(image);
 }
 
 void BaseDropdown::set_tooltip(const std::string& text) {
 	tooltip_ = text;
 	display_button_.set_tooltip(tooltip_);
+}
+
+void BaseDropdown::set_errored(const std::string& error_message) {
+	set_tooltip((boost::format(_("%1%: %2%")) % _("Error") % error_message).str());
+	if (type_ == DropdownType::kTextual) {
+		set_label(_("Error"));
+	} else {
+		set_image(g_gr->images().get("images/ui_basic/different.png"));
+	}
 }
 
 void BaseDropdown::set_enabled(bool on) {
@@ -252,6 +256,7 @@ void BaseDropdown::set_pos(Vector2i point) {
 }
 
 void BaseDropdown::clear() {
+	close();
 	list_->clear();
 	current_selection_ = list_->selection_index();
 	list_->set_size(list_->get_w(), 0);

@@ -27,6 +27,8 @@
 
 #include "graphic/graphic.h"
 #include "graphic/image.h"
+#include "notifications/note_ids.h"
+#include "notifications/notifications.h"
 #include "ui_basic/box.h"
 #include "ui_basic/button.h"
 #include "ui_basic/listselect.h"
@@ -83,11 +85,14 @@ public:
 	/// and displayed on the display button.
 	void set_label(const std::string& text);
 
-	/// Displays an error message on the button instead of the current selection.
-	void set_errored(const std::string& error_message);
+	/// Sets the image for the display button (for pictorial dropdowns).
+	void set_image(const Image* image);
 
 	/// Sets the tooltip for the display button.
 	void set_tooltip(const std::string& text);
+
+	/// Displays an error message on the button instead of the current selection.
+	void set_errored(const std::string& error_message);
 
 	/// Enables/disables the dropdown selection.
 	void set_enabled(bool on);

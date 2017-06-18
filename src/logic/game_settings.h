@@ -27,12 +27,24 @@
 #include "io/filesystem/layered_filesystem.h"
 #include "logic/map_objects/tribes/tribe_basic_info.h"
 #include "logic/widelands.h"
+#include "notifications/note_ids.h"
+#include "notifications/notifications.h"
 #include "scripting/lua_interface.h"
 #include "scripting/lua_table.h"
 
 namespace Widelands {
 enum class PlayerEndResult : uint8_t;
 }
+
+struct NoteGameSettings {
+	CAN_BE_SENT_AS_NOTE(NoteId::GameSettings)
+
+	Widelands::PlayerNumber position;
+
+	explicit NoteGameSettings(Widelands::PlayerNumber init_position)
+	   :  position(init_position) {
+	}
+};
 
 struct PlayerSettings {
 	enum class State { kOpen, kHuman, kComputer, kClosed, kShared };

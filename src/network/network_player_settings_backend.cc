@@ -93,12 +93,12 @@ void NetworkPlayerSettingsBackend::set_shared_in(Widelands::PlayerNumber id, Wid
 }
 
 /// Toggle through shared in players
-void NetworkPlayerSettingsBackend::toggle_shared_in(Widelands::PlayerNumber id) {
+Widelands::PlayerNumber NetworkPlayerSettingsBackend::find_next_shared_in(Widelands::PlayerNumber id) {
 	const GameSettings& settings = s->settings();
 
 	if (id >= settings.players.size() ||
 	    settings.players.at(id).state != PlayerSettings::State::kShared)
-		return;
+		return 0;
 
 	Widelands::PlayerNumber sharedplr = settings.players.at(id).shared_in;
 	for (; sharedplr < settings.players.size(); ++sharedplr) {
@@ -108,8 +108,7 @@ void NetworkPlayerSettingsBackend::toggle_shared_in(Widelands::PlayerNumber id) 
 	}
 	if (sharedplr < settings.players.size()) {
 		// We have already found the next player
-		set_shared_in(id, sharedplr + 1);
-		return;
+		return ++sharedplr;
 	}
 	sharedplr = 0;
 	for (; sharedplr < settings.players.at(id).shared_in; ++sharedplr) {
@@ -118,13 +117,9 @@ void NetworkPlayerSettingsBackend::toggle_shared_in(Widelands::PlayerNumber id) 
 			break;
 	}
 	if (sharedplr < settings.players.at(id).shared_in) {
-		// We have found the next player
-		set_shared_in(id, sharedplr + 1);
-		return;
-	} else {
-		// No fitting player found
-		set_player_state(id, PlayerSettings::State::kClosed);
+		++sharedplr;
 	}
+	return sharedplr;
 }
 
 /// Toggle through the initializations
@@ -171,19 +166,36 @@ void NetworkPlayerSettingsBackend::refresh(Widelands::PlayerNumber id) {
 		return;
 
 	const PlayerSettings& player = settings.players[id];
-
 	if (player.state == PlayerSettings::State::kShared) {
+		const Widelands::PlayerNumber old_shared_in = player.shared_in;
+		Widelands::PlayerNumber new_shared_in = player.shared_in;
 		// ensure that the shared_in player is able to use this starting position
-		if (player.shared_in > settings.players.size())
-			toggle_shared_in(id);
-		if (settings.players.at(player.shared_in - 1).state == PlayerSettings::State::kClosed ||
-		    settings.players.at(player.shared_in - 1).state == PlayerSettings::State::kShared)
-			toggle_shared_in(id);
+		if (new_shared_in == 0 || new_shared_in > settings.players.size()) {
+			new_shared_in = find_next_shared_in(id);
+			if (new_shared_in == 0) {
+				// No fitting player found
+				set_player_state(id, PlayerSettings::State::kClosed);
+				return;
+			}
+		}
 
-		if (shared_in_tribe[id] != settings.players.at(player.shared_in - 1).tribe) {
-			s->set_player_tribe(id, settings.players.at(player.shared_in - 1).tribe,
-			                    settings.players.at(player.shared_in - 1).random_tribe);
-			shared_in_tribe[id] = settings.players.at(id).tribe;
+		if (settings.players.at(new_shared_in - 1).state == PlayerSettings::State::kClosed ||
+			 settings.players.at(new_shared_in - 1).state == PlayerSettings::State::kShared) {
+			new_shared_in = find_next_shared_in(id);
+			if (new_shared_in == 0) {
+				// No fitting player found
+				set_player_state(id, PlayerSettings::State::kClosed);
+				return;
+			}
+		}
+
+		if (new_shared_in != old_shared_in && settings.players.at(new_shared_in - 1).state != PlayerSettings::State::kClosed && settings.players.at(new_shared_in - 1).state != PlayerSettings::State::kShared) {
+			if (shared_in_tribe[id] != settings.players.at(new_shared_in - 1).tribe) {
+				s->set_player_tribe(id, settings.players.at(new_shared_in - 1).tribe,
+										  settings.players.at(new_shared_in - 1).random_tribe);
+				shared_in_tribe[id] = settings.players.at(id).tribe;
+			}
+			set_shared_in(id, new_shared_in);
 		}
 	}
 }
