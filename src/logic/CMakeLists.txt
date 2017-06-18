@@ -6,17 +6,26 @@ wl_library(logic_widelands_geometry
 
 wl_library(logic_game_settings
   SRCS
+    game_settings.cc
     game_settings.h
-    single_player_game_settings_provider.cc
-    single_player_game_settings_provider.h
+    player_end_result.h
   DEPENDS
-    ai
-    base_exceptions
     io_filesystem
     logic
     logic_constants
     scripting_lua_interface
     scripting_lua_table
+)
+
+wl_library(logic_single_player_game_settings
+  SRCS
+    single_player_game_settings_provider.cc
+    single_player_game_settings_provider.h
+  DEPENDS
+    ai
+    base_exceptions
+    logic
+    logic_game_settings
 )
 
 wl_library(logic_game_controller
@@ -30,6 +39,7 @@ wl_library(logic_game_controller
     ai
     logic
     logic_constants
+    logic_game_settings
     profile
     ui_basic
     wui
@@ -127,14 +137,13 @@ wl_library(logic
     save_handler.h
     widelands_geometry_io.cc
     widelands_geometry_io.h
-    map_objects/draw_text.h
-    map_objects/attackable.h
     map_objects/bob.cc
     map_objects/bob.h
     map_objects/buildcost.cc
     map_objects/buildcost.h
     map_objects/checkstep.cc
     map_objects/checkstep.h
+    map_objects/draw_text.h
     map_objects/immovable.cc
     map_objects/immovable.h
     map_objects/immovable_program.h
@@ -142,6 +151,7 @@ wl_library(logic
     map_objects/map_object.h
     map_objects/terrain_affinity.cc
     map_objects/terrain_affinity.h
+    map_objects/tribes/attack_target.h
     map_objects/tribes/battle.cc
     map_objects/tribes/battle.h
     map_objects/tribes/bill_of_materials.h

@@ -22,16 +22,11 @@
 #define WL_GRAPHIC_FONT_HANDLER1_H
 
 #include <memory>
-#include <string>
 
 #include "base/macros.h"
-#include "base/vector.h"
-#include "graphic/align.h"
+#include "graphic/image_cache.h"
 #include "graphic/text/font_set.h"
-
-class FileSystem;
-class Image;
-class ImageCache;
+#include "graphic/text/rendered_text.h"
 
 namespace UI {
 
@@ -44,11 +39,10 @@ public:
 	virtual ~IFontHandler1() {
 	}
 
-	/*
-	 * Renders the given text into an image. The image is cached and therefore
-	 * ownership remains with this class. Will throw on error.
-	 */
-	virtual const Image* render(const std::string& text, uint16_t w = 0) = 0;
+	/// Renders the given text into a set of images. The images are cached in a transient cache,
+	/// so we share the ownership. Will throw on error.
+	virtual std::shared_ptr<const UI::RenderedText> render(const std::string& text,
+	                                                       uint16_t w = 0) = 0;
 
 	/// Returns the font handler's current FontSet
 	virtual UI::FontSet const* fontset() const = 0;
@@ -61,7 +55,7 @@ public:
 	DISALLOW_COPY_AND_ASSIGN(IFontHandler1);
 };
 
-// Create a new FontHandler1.
+/// Create a new FontHandler1.
 IFontHandler1* create_fonthandler(ImageCache* image_cache, const std::string& locale);
 
 extern IFontHandler1* g_fh1;

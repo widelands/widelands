@@ -30,6 +30,7 @@
 #include "base/macros.h"
 #include "logic/map_objects/buildcost.h"
 #include "logic/map_objects/immovable.h"
+#include "logic/map_objects/tribes/attack_target.h"
 #include "logic/map_objects/tribes/bill_of_materials.h"
 #include "logic/map_objects/tribes/wareworker.h"
 #include "logic/map_objects/tribes/workarea_info.h"
@@ -156,9 +157,8 @@ public:
 	WorkareaInfo workarea_info_;
 
 	bool suitability(const Map&, const FCoords&) const;
-	const BuildingHints& hints() const {
-		return hints_;
-	}
+	const BuildingHints& hints() const;
+	void set_hints_trainingsites_max_percent(int percent);
 
 protected:
 	virtual Building& create_object() const = 0;
@@ -293,6 +293,13 @@ public:
 	void add_worker(Worker&) override;
 	void remove_worker(Worker&) override;
 
+	// Returns the AttackTarget object associated with this building. If the
+	// building can never be attacked (for example productionsites) this will be
+	// nullptr.
+	const AttackTarget* attack_target() const {
+		return attack_target_;
+	}
+
 	void send_message(Game& game,
 	                  const Message::Type msgtype,
 	                  const std::string& title,
@@ -324,6 +331,7 @@ protected:
 	draw_info(TextToDraw draw_text, const Vector2f& point_on_dst, float scale, RenderTarget* dst);
 
 	void set_seeing(bool see);
+	void set_attack_target(AttackTarget* new_attack_target);
 
 	Coords position_;
 	Flag* flag_;
@@ -350,6 +358,7 @@ protected:
 
 private:
 	std::string statistics_string_;
+	AttackTarget* attack_target_;  // owned by the base classes, set by 'set_attack_target'.
 };
 }
 

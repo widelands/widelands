@@ -172,6 +172,11 @@ TribeDescr::TribeDescr(const LuaTable& table, const TribeBasicInfo& info, const 
 				}
 				buildings_.push_back(index);
 
+				// Register trainigsites
+				if (get_building_descr(index)->type() == MapObjectType::TRAININGSITE) {
+					trainingsites_.push_back(index);
+				}
+
 				// Register construction materials
 				for (const auto& build_cost : get_building_descr(index)->buildcost()) {
 					if (!is_construction_material(build_cost.first)) {
@@ -186,6 +191,36 @@ TribeDescr::TribeDescr(const LuaTable& table, const TribeBasicInfo& info, const 
 			} catch (const WException& e) {
 				throw GameDataError("Failed adding building '%s': %s", buildingname.c_str(), e.what());
 			}
+		}
+
+		// Set default trainingsites proportions for AI. Make sure that we get a sum of ca. 100
+		float trainingsites_without_percent = 0.f;
+		int used_percent = 0;
+		for (const DescriptionIndex& index : trainingsites_) {
+			const BuildingDescr& descr = *tribes_.get_building_descr(index);
+			if (descr.hints().trainingsites_max_percent() == 0) {
+				++trainingsites_without_percent;
+			} else {
+				used_percent += descr.hints().trainingsites_max_percent();
+			}
+		}
+		if (trainingsites_without_percent > 0.f && used_percent > 100) {
+			throw GameDataError("Predefined training sites proportions add up to > 100%%: %d", used_percent);
+		} else if (trainingsites_without_percent > 0) {
+			const int percent_to_use = std::ceil((100 - used_percent) / trainingsites_without_percent);
+			if (percent_to_use < 1) {
+				throw GameDataError("Training sites without predefined proportions add up to < 1%% and will never be built: %d", used_percent);
+			}
+			for (const DescriptionIndex& index : trainingsites_) {
+				BuildingDescr* descr = tribes_.get_mutable_building_descr(index);
+				if (descr->hints().trainingsites_max_percent() == 0) {
+					descr->set_hints_trainingsites_max_percent(percent_to_use);
+				used_percent += percent_to_use;
+				}
+			}
+		}
+		if (used_percent < 100) {
+			throw GameDataError("Final training sites proportions add up to < 100%%: %d", used_percent);
 		}
 
 		// Special types
@@ -332,6 +367,10 @@ DescriptionIndex TribeDescr::port() const {
 DescriptionIndex TribeDescr::barracks() const {
 	assert(tribes_.building_exists(barracks_));
 	return barracks_;
+}
+
+const std::vector<DescriptionIndex>& TribeDescr::trainingsites() const {
+	return trainingsites_;
 }
 const std::vector<DescriptionIndex>& TribeDescr::worker_types_without_cost() const {
 	return worker_types_without_cost_;

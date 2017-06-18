@@ -115,6 +115,10 @@ struct BuildingHints {
 		return trainingsite_type_;
 	}
 
+	void set_trainingsites_max_percent(uint8_t percent);
+
+	uint8_t trainingsites_max_percent() const;
+
 private:
 	std::string renews_map_resource_;
 	std::string mines_;
@@ -134,6 +138,7 @@ private:
 	int16_t very_weak_ai_limit_;
 	int16_t weak_ai_limit_;
 	TrainingSiteType trainingsite_type_;
+	int trainingsites_max_percent_;
 
 	DISALLOW_COPY_AND_ASSIGN(BuildingHints);
 };

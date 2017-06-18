@@ -23,14 +23,16 @@
 #include <vector>
 
 #include "economy/iroute.h"
+#include "io/fileread.h"
+#include "io/filewrite.h"
 #include "logic/map_objects/map_object.h"
 
 namespace Widelands {
 
-struct Flag;
 class EditorGameBase;
-struct MapObjectSaver;
 class MapObjectLoader;
+struct Flag;
+struct MapObjectSaver;
 struct RoutingNode;
 
 /**

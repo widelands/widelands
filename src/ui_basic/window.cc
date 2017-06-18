@@ -27,9 +27,8 @@
 #include "graphic/rendertarget.h"
 #include "graphic/text_layout.h"
 
-using namespace std;
-
 namespace UI {
+
 /// Width the horizontal border graphics must have.
 #define HZ_B_TOTAL_PIXMAP_LEN 100
 
@@ -66,12 +65,12 @@ namespace UI {
  * \param title string to display in the window title
  */
 Window::Window(Panel* const parent,
-               const string& name,
+               const std::string& name,
                int32_t const x,
                int32_t const y,
                uint32_t const w,
                uint32_t const h,
-               const string& title)
+               const std::string& title)
    : NamedPanel(parent,
                 name,
                 x,
@@ -105,7 +104,7 @@ Window::Window(Panel* const parent,
 /**
  * Replace the current title with a new one
 */
-void Window::set_title(const string& text) {
+void Window::set_title(const std::string& text) {
 	assert(!is_richtext(text));
 	title_ = text;
 }
@@ -272,14 +271,13 @@ void Window::draw_border(RenderTarget& dst) {
 	// draw the title if we have one
 	if (!title_.empty()) {
 		// The title shouldn't be richtext, but we escape it just to make sure.
-		const Image* text =
+		std::shared_ptr<const UI::RenderedText> text =
 		   autofit_ui_text(richtext_escape(title_), get_inner_w(), UI_FONT_CLR_FG, 13);
 
 		// Blit on pixel boundary (not float), so that the text is blitted pixel perfect.
 		Vector2i pos(get_lborder() + get_inner_w() / 2, TP_B_PIXMAP_THICKNESS / 2);
-		UI::correct_for_align(UI::Align::kCenter, text->width(), &pos);
 		UI::center_vertically(text->height(), &pos);
-		dst.blit(pos, text, BlendMode::UseAlpha);
+		text->draw(dst, pos, UI::Align::kCenter);
 	}
 
 	if (!is_minimal_) {
@@ -455,10 +453,11 @@ bool Window::handle_mousemove(const uint8_t, int32_t mx, int32_t my, int32_t, in
 			const int32_t max_x = parent->get_inner_w();
 			const int32_t max_y = parent->get_inner_h();
 
-			left = min<int32_t>(max_x - get_lborder(), left);
-			top = min<int32_t>(max_y - get_tborder(), top);
-			left = max<int32_t>(get_rborder() - w, left);
-			top = max(-static_cast<int32_t>(h - ((is_minimal_) ? get_tborder() : get_bborder())), top);
+			left = std::min<int32_t>(max_x - get_lborder(), left);
+			top = std::min<int32_t>(max_y - get_tborder(), top);
+			left = std::max<int32_t>(get_rborder() - w, left);
+			top = std::max(
+			   -static_cast<int32_t>(h - ((is_minimal_) ? get_tborder() : get_bborder())), top);
 			new_left = left;
 			new_top = top;
 
@@ -501,13 +500,13 @@ bool Window::handle_mousemove(const uint8_t, int32_t mx, int32_t my, int32_t, in
 				nearest_snap_distance_x = psnap;
 			else {
 				assert(nearest_snap_distance_x < bsnap);
-				nearest_snap_distance_x = min(nearest_snap_distance_x, psnap);
+				nearest_snap_distance_x = std::min(nearest_snap_distance_x, psnap);
 			}
 			if (nearest_snap_distance_y == bsnap)
 				nearest_snap_distance_y = psnap;
 			else {
 				assert(nearest_snap_distance_y < bsnap);
-				nearest_snap_distance_y = min(nearest_snap_distance_y, psnap);
+				nearest_snap_distance_y = std::min(nearest_snap_distance_y, psnap);
 			}
 
 			{  //  Snap to other Panels.

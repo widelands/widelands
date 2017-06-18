@@ -26,15 +26,12 @@
 
 #include "io/filesystem/layered_filesystem.h"
 #include "logic/map_objects/tribes/tribe_basic_info.h"
+#include "logic/player_end_result.h"
 #include "logic/widelands.h"
 #include "notifications/note_ids.h"
 #include "notifications/notifications.h"
 #include "scripting/lua_interface.h"
 #include "scripting/lua_table.h"
-
-namespace Widelands {
-enum class PlayerEndResult : uint8_t;
-}
 
 struct NoteGameSettings {
 	CAN_BE_SENT_AS_NOTE(NoteId::GameSettings)
@@ -70,6 +67,12 @@ struct UserSettings {
 	}
 	static uint8_t highest_playernum() {
 		return not_connected() - 1;
+	}
+
+	UserSettings(Widelands::PlayerEndResult init_result, bool init_ready)
+	   : position(0), name(""), result(init_result), win_condition_string(""), ready(init_ready) {
+	}
+	UserSettings() : UserSettings(Widelands::PlayerEndResult::kUndefined, false) {
 	}
 
 	uint8_t position;

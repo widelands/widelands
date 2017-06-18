@@ -356,8 +356,9 @@ void InteractiveBase::draw_overlay(RenderTarget& dst) {
 		std::string node_text;
 		if (is_game) {
 			const std::string gametime(gametimestring(egbase().get_gametime(), true));
-			const std::string gametime_text = as_condensed(gametime);
-			dst.blit(Vector2i(5, 5), UI::g_fh1->render(gametime_text), BlendMode::UseAlpha);
+			std::shared_ptr<const UI::RenderedText> rendered_text =
+			   UI::g_fh1->render(as_condensed(gametime));
+			rendered_text->draw(dst, Vector2i(5, 5));
 
 			static boost::format node_format("(%i, %i)");
 			node_text = as_condensed((node_format % sel_.pos.node.x % sel_.pos.node.y).str());
@@ -366,20 +367,17 @@ void InteractiveBase::draw_overlay(RenderTarget& dst) {
 			const int32_t height = map[sel_.pos.node].get_height();
 			node_text = as_condensed((node_format % sel_.pos.node.x % sel_.pos.node.y % height).str());
 		}
-
-		const Image* rendered_text = UI::g_fh1->render(node_text);
-		Vector2i point(get_w() - 5, get_h() - rendered_text->height() - 5);
-		UI::correct_for_align(UI::Align::kRight, rendered_text->width(), &point);
-		dst.blit(point, rendered_text, BlendMode::UseAlpha);
+		std::shared_ptr<const UI::RenderedText> rendered_text = UI::g_fh1->render(node_text);
+		rendered_text->draw(
+		   dst, Vector2i(get_w() - 5, get_h() - rendered_text->height() - 5), UI::Align::kRight);
 	}
 
 	// Blit FPS when playing a game in debug mode.
 	if (get_display_flag(dfDebug) && is_game) {
 		static boost::format fps_format("%5.1f fps (avg: %5.1f fps)");
-		const Image* rendered_text = UI::g_fh1->render(as_condensed(
+		std::shared_ptr<const UI::RenderedText> rendered_text = UI::g_fh1->render(as_condensed(
 		   (fps_format % (1000.0 / frametime_) % (1000.0 / (avg_usframetime_ / 1000))).str()));
-		dst.blit(
-		   Vector2i((get_w() - rendered_text->width()) / 2, 5), rendered_text, BlendMode::UseAlpha);
+		rendered_text->draw(dst, Vector2i((get_w() - rendered_text->width()) / 2, 5));
 	}
 }
 
@@ -756,9 +754,10 @@ bool InteractiveBase::handle_key(bool const down, SDL_Keysym const code) {
 	if (down) {
 		switch (code.sym) {
 		case SDLK_KP_9:
-			if (code.mod & KMOD_NUM)
+			if (code.mod & KMOD_NUM) {
 				break;
-		/* no break */
+			}
+			FALLS_THROUGH;
 		case SDLK_PAGEUP:
 			if (upcast(Game, game, &egbase_)) {
 				if (GameController* const ctrl = game->game_controller()) {
@@ -776,9 +775,10 @@ bool InteractiveBase::handle_key(bool const down, SDL_Keysym const code) {
 			return true;
 
 		case SDLK_KP_3:
-			if (code.mod & KMOD_NUM)
+			if (code.mod & KMOD_NUM) {
 				break;
-		/* no break */
+			}
+			FALLS_THROUGH;
 		case SDLK_PAGEDOWN:
 			if (upcast(Widelands::Game, game, &egbase_)) {
 				if (GameController* const ctrl = game->game_controller()) {

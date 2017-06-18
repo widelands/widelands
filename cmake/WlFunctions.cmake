@@ -12,7 +12,6 @@ macro(_parse_common_args ARGS)
     USES_SDL2
     USES_SDL2_IMAGE
     USES_SDL2_MIXER
-    USES_SDL2_NET
     USES_SDL2_TTF
     USES_ZLIB
     USES_ICU
@@ -125,11 +124,6 @@ macro(_common_compile_tasks)
   if(ARG_USES_SDL2_MIXER)
     wl_include_system_directories(${NAME} ${SDL2MIXER_INCLUDE_DIR})
     target_link_libraries(${NAME} ${SDL2MIXER_LIBRARY})
-  endif()
-
-  if(ARG_USES_SDL2_NET)
-    wl_include_system_directories(${NAME} ${SDL2NET_INCLUDE_DIR})
-    target_link_libraries(${NAME} ${SDL2NET_LIBRARY})
   endif()
 
   if(ARG_USES_SDL2_IMAGE)
