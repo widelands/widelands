@@ -161,7 +161,9 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 	     type_dropdown_(this, 0, 0, 50, 200, h, _("Player Type"), UI::DropdownType::kPictorial),
 	     tribes_dropdown_(this, 0, 0, 50, 200, h, _("Tribe"), UI::DropdownType::kPictorial),
 		  init_dropdown_(this, 0, 0, w - 4 * h, 200, h, "", UI::DropdownType::kTextual),
-	     last_state_(PlayerSettings::State::kClosed) {
+	     last_state_(PlayerSettings::State::kClosed),
+		  tribe_selection_locked_(false),
+		  init_selection_locked_(false) {
 		set_size(w, h);
 		const Image* player_image = playercolor_image(id, "images/players/player_position_menu.png");
 		assert(player_image);
@@ -304,14 +306,17 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 	/// This will update the game settings for the initialization with the value
 	/// currently selected in the initialization dropdown.
 	void set_initialization() {
+		init_selection_locked_ = true;
 		if (init_dropdown_.has_selection()) {
 			n->set_init(id_, init_dropdown_.get_selected());
 		}
+		init_selection_locked_ = false;
 	}
 
 	/// This will update the game settings for the tribe or shared_in with the value
 	/// currently selected in the tribes dropdown.
 	void set_tribe_or_shared_in() {
+		tribe_selection_locked_ = true;
 		tribes_dropdown_.set_disable_style(s->settings().players[id_].state ==
 		                                         PlayerSettings::State::kShared ?
 		                                      UI::ButtonDisableStyle::kPermpressed :
@@ -324,6 +329,7 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 				n->set_tribe(id_, tribes_dropdown_.get_selected());
 			}
 		}
+		tribe_selection_locked_ = false;
 	}
 
 	/// Toggle through the teams
@@ -339,6 +345,9 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 	/// Rebuild the tribes dropdown from the server settings. This will keep the host and client UIs
 	/// in sync.
 	void rebuild_tribes_dropdown(const GameSettings& settings) {
+		if (tribe_selection_locked_) {
+			return;
+		}
 		const PlayerSettings& player_setting = settings.players[id_];
 		tribes_dropdown_.clear();
 
@@ -410,6 +419,9 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 	/// Rebuild the init dropdown from the server settings. This will keep the host and client UIs in
 	/// sync.
 	void rebuild_init_dropdown(const GameSettings& settings) {
+		if (init_selection_locked_) {
+			return;
+		}
 		init_dropdown_.clear();
 		const PlayerSettings& player_setting = settings.players[id_];
 		if (settings.scenario) {
@@ -498,6 +510,9 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 	UI::Dropdown<uintptr_t> init_dropdown_;  /// Select the initialization (Headquarters, Fortified Village etc.)
 	PlayerSettings::State
 	   last_state_;  /// The dropdowns for the other slots need updating if this changes
+	/// Lock rebuilding dropdowns so that they can close on selection
+	bool tribe_selection_locked_;
+	bool init_selection_locked_;
 
 	std::unique_ptr<Notifications::Subscriber<NoteGameSettings>> subscriber_;
 };
