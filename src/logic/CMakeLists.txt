@@ -13,6 +13,7 @@ wl_library(logic_game_settings
     io_filesystem
     logic
     logic_constants
+    notifications
     scripting_lua_interface
     scripting_lua_table
 )

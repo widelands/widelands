@@ -85,7 +85,7 @@ struct GameClient : public GameController,
 	virtual void set_player_tribe(uint8_t number,
 	                              const std::string& tribe,
 	                              bool const random_tribe = false) override;
-	void set_player_init(uint8_t number, uint8_t index) override;
+	void set_player_init(uint8_t number, uint8_t initialization_index) override;
 	void set_player_name(uint8_t number, const std::string& name) override;
 	void set_player(uint8_t number, const PlayerSettings& ps) override;
 	void set_player_number(uint8_t number) override;

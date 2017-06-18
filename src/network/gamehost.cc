@@ -2031,7 +2031,8 @@ void GameHost::handle_packet(uint32_t const i, RecvPacket& r) {
 			uint8_t num = r.unsigned_8();
 			if (num != client.playernum)
 				throw DisconnectException("NO_ACCESS_TO_PLAYER");
-			d->npsb.toggle_init(num);
+			uint8_t initialization_index = r.unsigned_8();
+			d->npsb.set_init(num, initialization_index);
 		}
 		break;
 

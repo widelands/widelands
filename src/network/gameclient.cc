@@ -360,14 +360,14 @@ void GameClient::set_player_shared(uint8_t number, uint8_t player) {
 	d->net->send(s);
 }
 
-void GameClient::set_player_init(uint8_t number, uint8_t) {
+void GameClient::set_player_init(uint8_t number, uint8_t initialization_index) {
 	if ((number != d->settings.playernum))
 		return;
 
-	// Host will decide what to change, therefore the init is not send, just the request to change
 	SendPacket s;
 	s.unsigned_8(NETCMD_SETTING_CHANGEINIT);
 	s.unsigned_8(number);
+	s.unsigned_8(initialization_index);
 	d->net->send(s);
 }
 

@@ -127,21 +127,13 @@ Widelands::PlayerNumber NetworkPlayerSettingsBackend::find_next_shared_in(Player
 	return sharedplr;
 }
 
-/// Toggle through the initializations
-void NetworkPlayerSettingsBackend::toggle_init(PlayerSlot id) {
+/// Sets the initialization for the player slot (Headquarters, Fortified Village etc.)
+void NetworkPlayerSettingsBackend::set_init(PlayerSlot id, uint8_t initialization_index) {
 	const GameSettings& settings = s->settings();
-
-	if (id >= settings.players.size())
+	if (id >= settings.players.size()) {
 		return;
-
-	const PlayerSettings& player = settings.players[id];
-	for (const TribeBasicInfo& temp_tribeinfo : settings.tribes) {
-		if (temp_tribeinfo.name == player.tribe) {
-			return s->set_player_init(
-			   id, (player.initialization_index + 1) % temp_tribeinfo.initializations.size());
-		}
 	}
-	NEVER_HERE();
+	s->set_player_init(id, initialization_index);
 }
 
 /// Toggle through the teams

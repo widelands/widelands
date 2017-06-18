@@ -155,19 +155,14 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 	                       NetworkPlayerSettingsBackend* const npsb)
 	   : UI::Box(parent, 0, 0, UI::Box::Horizontal, w, h),
 	     player(nullptr),
-	     init(nullptr),
 	     s(settings),
 	     n(npsb),
 	     id_(id),
 	     type_dropdown_(this, 0, 0, 50, 200, h, _("Player Type"), UI::DropdownType::kPictorial),
 	     tribes_dropdown_(this, 0, 0, 50, 200, h, _("Tribe"), UI::DropdownType::kPictorial),
+		  init_dropdown_(this, 0, 0, w - 4 * h, 200, h, "", UI::DropdownType::kTextual),
 	     last_state_(PlayerSettings::State::kClosed) {
 		set_size(w, h);
-		tribes_dropdown_.set_visible(false);
-		tribes_dropdown_.set_enabled(false);
-		tribes_dropdown_.selected.connect(
-		   boost::bind(&MultiPlayerPlayerGroup::set_tribe_or_shared_in, boost::ref(*this)));
-
 		const Image* player_image = playercolor_image(id, "images/players/player_position_menu.png");
 		assert(player_image);
 		player = new UI::Icon(this, 0, 0, h, h, player_image);
@@ -177,13 +172,19 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 		type_dropdown_.selected.connect(
 		   boost::bind(&MultiPlayerPlayerGroup::set_type, boost::ref(*this)));
 
+		tribes_dropdown_.set_visible(false);
+		tribes_dropdown_.set_enabled(false);
+		tribes_dropdown_.selected.connect(
+		   boost::bind(&MultiPlayerPlayerGroup::set_tribe_or_shared_in, boost::ref(*this)));
+
+		init_dropdown_.set_visible(false);
+		init_dropdown_.set_enabled(false);
+		init_dropdown_.selected.connect(
+		   boost::bind(&MultiPlayerPlayerGroup::set_initialization, boost::ref(*this)));
+
 		add(&type_dropdown_);
 		add(&tribes_dropdown_);
-		init = new UI::Button(this, "player_init", 0, 0, w - 4 * h, h,
-		                      g_gr->images().get("images/ui_basic/but1.png"), "");
-		init->sigclicked.connect(
-		   boost::bind(&MultiPlayerPlayerGroup::toggle_init, boost::ref(*this)));
-		add(init);
+		add(&init_dropdown_);
 		team = new UI::Button(
 		   this, "player_team", 0, 0, h, h, g_gr->images().get("images/ui_basic/but1.png"), "");
 		team->sigclicked.connect(
@@ -206,6 +207,7 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 		const int max_height = g_gr->get_yres() * 3 / 4;
 		type_dropdown_.set_height(max_height);
 		tribes_dropdown_.set_height(max_height);
+		init_dropdown_.set_height(max_height);
 		UI::Box::layout();
 	}
 
@@ -299,6 +301,14 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 		}
 	}
 
+	/// This will update the game settings for the initialization with the value
+	/// currently selected in the initialization dropdown.
+	void set_initialization() {
+		if (init_dropdown_.has_selection()) {
+			n->set_init(id_, init_dropdown_.get_selected());
+		}
+	}
+
 	/// This will update the game settings for the tribe or shared_in with the value
 	/// currently selected in the tribes dropdown.
 	void set_tribe_or_shared_in() {
@@ -314,11 +324,6 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 				n->set_tribe(id_, tribes_dropdown_.get_selected());
 			}
 		}
-	}
-
-	/// Toggle through the initializations
-	void toggle_init() {
-		n->toggle_init(id_);
 	}
 
 	/// Toggle through the teams
@@ -402,6 +407,33 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 		}
 	}
 
+	/// Rebuild the init dropdown from the server settings. This will keep the host and client UIs in
+	/// sync.
+	void rebuild_init_dropdown(const GameSettings& settings) {
+		init_dropdown_.clear();
+		const PlayerSettings& player_setting = settings.players[id_];
+		if (settings.scenario) {
+			init_dropdown_.set_label(_("Scenario"));
+		} else if (settings.savegame) {
+			/** Translators: This is a game type */
+			init_dropdown_.set_label(_("Saved Game"));
+		} else {
+			i18n::Textdomain td("tribes");  // for translated initialisation
+			for (const TribeBasicInfo& tribeinfo : settings.tribes) {
+				if (tribeinfo.name == player_setting.tribe) {
+					for (size_t i = 0; i < tribeinfo.initializations.size(); ++i) {
+						const TribeBasicInfo::Initialization& addme = tribeinfo.initializations[i];
+						init_dropdown_.add(_(addme.descname), i, nullptr, i == player_setting.initialization_index, _(addme.tooltip));
+					}
+					break;
+				}
+			}
+		}
+
+		init_dropdown_.set_visible(true);
+		init_dropdown_.set_enabled(s->can_change_player_init(id_));
+	}
+
 	/// Refresh all user interfaces
 	void refresh() {
 		const GameSettings& settings = s->settings();
@@ -419,6 +451,7 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 
 		rebuild_type_dropdown(player_setting);
 		rebuild_tribes_dropdown(settings);
+		rebuild_init_dropdown(settings);
 
 		// Trigger update for the other players for shared_in mode when slots open and close
 		if (last_state_ != player_setting.state) {
@@ -430,15 +463,14 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 			}
 		}
 
-		const bool initaccess = s->can_change_player_init(id_);
 		if (player_setting.state == PlayerSettings::State::kClosed ||
 		    player_setting.state == PlayerSettings::State::kOpen) {
 			team->set_visible(false);
 			team->set_enabled(false);
 			tribes_dropdown_.set_visible(false);
 			tribes_dropdown_.set_enabled(false);
-			init->set_visible(false);
-			init->set_enabled(false);
+			init_dropdown_.set_visible(false);
+			init_dropdown_.set_enabled(false);
 			return;
 		} else if (player_setting.state == PlayerSettings::State::kShared) {
 			team->set_visible(false);
@@ -452,30 +484,9 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 			team->set_visible(true);
 			team->set_enabled(s->can_change_player_team(id_));
 		}
-		init->set_enabled(initaccess);
-		init->set_visible(true);
-
-		if (settings.scenario)
-			init->set_title(_("Scenario"));
-		else if (settings.savegame)
-			/** Translators: This is a game type */
-			init->set_title(_("Saved Game"));
-		else {
-			i18n::Textdomain td("tribes");  // for translated initialisation
-			for (const TribeBasicInfo& tribeinfo : settings.tribes) {
-				if (tribeinfo.name == player_setting.tribe) {
-					init->set_title(
-					   _(tribeinfo.initializations.at(player_setting.initialization_index).descname));
-					init->set_tooltip(
-					   _(tribeinfo.initializations.at(player_setting.initialization_index).tooltip));
-					break;
-				}
-			}
-		}
 	}
 
 	UI::Icon* player;
-	UI::Button* init;
 	UI::Button* team;
 	GameSettingsProvider* const s;
 	NetworkPlayerSettingsBackend* const n;
@@ -484,6 +495,7 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 	UI::Dropdown<std::string>
 	   type_dropdown_;  /// Select who owns the slot (human, AI, open, closed, shared-in).
 	UI::Dropdown<std::string> tribes_dropdown_;  /// Select the tribe or shared_in player.
+	UI::Dropdown<uintptr_t> init_dropdown_;  /// Select the initialization (Headquarters, Fortified Village etc.)
 	PlayerSettings::State
 	   last_state_;  /// The dropdowns for the other slots need updating if this changes
 
