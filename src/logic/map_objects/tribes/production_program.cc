@@ -1276,8 +1276,9 @@ ProductionProgram::ActCheckSoldier::ActCheckSoldier(char* parameters) {
 }
 
 void ProductionProgram::ActCheckSoldier::execute(Game& game, ProductionSite& ps) const {
-	SoldierControl& ctrl = dynamic_cast<SoldierControl&>(ps);
-	const std::vector<Soldier*> soldiers = ctrl.present_soldiers();
+	SoldierControl* ctrl = ps.soldier_control();
+	assert(ctrl != nullptr);
+	const std::vector<Soldier*> soldiers = ctrl->present_soldiers();
 	if (soldiers.empty()) {
 		ps.set_production_result(_("No soldier to train!"));
 		return ps.program_end(game, Skipped);

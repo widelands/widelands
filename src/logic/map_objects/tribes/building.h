@@ -32,6 +32,7 @@
 #include "logic/map_objects/immovable.h"
 #include "logic/map_objects/tribes/attack_target.h"
 #include "logic/map_objects/tribes/bill_of_materials.h"
+#include "logic/map_objects/tribes/soldiercontrol.h"
 #include "logic/map_objects/tribes/wareworker.h"
 #include "logic/map_objects/tribes/workarea_info.h"
 #include "logic/message.h"
@@ -293,11 +294,16 @@ public:
 	void add_worker(Worker&) override;
 	void remove_worker(Worker&) override;
 
-	// Returns the AttackTarget object associated with this building. If the
-	// building can never be attacked (for example productionsites) this will be
-	// nullptr.
+	// AttackTarget object associated with this building. If the building can
+	// never be attacked (for example productionsites) this will be nullptr.
 	const AttackTarget* attack_target() const {
 		return attack_target_;
+	}
+
+	// SoldierControl object associated with this building. If the building can
+	// not house soldiers (for example productionsites) this will be nullptr.
+	SoldierControl* soldier_control() {
+		return soldier_control_;
 	}
 
 	void send_message(Game& game,
@@ -332,6 +338,7 @@ protected:
 
 	void set_seeing(bool see);
 	void set_attack_target(AttackTarget* new_attack_target);
+	void set_soldier_control(SoldierControl* new_soldier_control);
 
 	Coords position_;
 	Flag* flag_;
@@ -359,6 +366,7 @@ protected:
 private:
 	std::string statistics_string_;
 	AttackTarget* attack_target_;  // owned by the base classes, set by 'set_attack_target'.
+	SoldierControl* soldier_control_; // owned by the base classes, set by 'set_soldier_control'.
 };
 }
 

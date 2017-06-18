@@ -41,7 +41,8 @@ class Soldier;
  * the two concepts are equal. However, they're different for a MilitarySite,
  * where soldiers can be outside in combat.
  */
-struct SoldierControl {
+class SoldierControl {
+public:
 	/**
 	 * \return a list of soldiers that are currently present in the building.
 	 */
@@ -78,6 +79,7 @@ struct SoldierControl {
 	 */
 	virtual void set_soldier_capacity(Quantity capacity) = 0;
 
+	// NOCOM(#sirver): who is calling this?
 	void changeSoldierCapacity(int32_t const difference) {
 		Widelands::Quantity const old_capacity = soldier_capacity();
 		Widelands::Quantity const new_capacity = std::min(
@@ -108,7 +110,7 @@ struct SoldierControl {
 	 * informed by the soldier when it is removed, but WareHouses for example
 	 * will not.
 	 */
-	virtual int outcorporate_soldier(EditorGameBase&, Soldier&) {
+	virtual int outcorporate_soldier(Soldier&) {
 		return 0;
 	}
 
@@ -116,6 +118,7 @@ protected:
 	virtual ~SoldierControl() {
 	}
 };
+
 }
 
 #endif  // end of include guard: WL_LOGIC_MAP_OBJECTS_TRIBES_SOLDIERCONTROL_H

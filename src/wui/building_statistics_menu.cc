@@ -422,8 +422,9 @@ void BuildingStatisticsMenu::jump_building(JumpTarget target, bool reverse) {
 				if (!stats_vector[last_building_index_].is_constructionsite) {
 					if (upcast(MilitarySite, militarysite,
 					           map[stats_vector[last_building_index_].pos].get_immovable())) {
-						if (militarysite->stationed_soldiers().size() <
-						    militarysite->soldier_capacity()) {
+						auto* soldier_control = militarysite->soldier_control();
+						if (soldier_control->stationed_soldiers().size() <
+						    soldier_control->soldier_capacity()) {
 							found = true;
 							break;
 						}
@@ -442,8 +443,10 @@ void BuildingStatisticsMenu::jump_building(JumpTarget target, bool reverse) {
 				if (!stats_vector[last_building_index_].is_constructionsite) {
 					if (upcast(MilitarySite, militarysite,
 					           map[stats_vector[last_building_index_].pos].get_immovable())) {
-						if (militarysite->stationed_soldiers().size() <
-						    militarysite->soldier_capacity()) {
+						auto* soldier_control = militarysite->soldier_control();
+						assert(soldier_control != nullptr);
+						if (soldier_control->stationed_soldiers().size() <
+						    soldier_control->soldier_capacity()) {
 							found = true;
 							break;
 						}
@@ -461,7 +464,9 @@ void BuildingStatisticsMenu::jump_building(JumpTarget target, bool reverse) {
 		if (!found) {  // Now look at the old
 			if (upcast(MilitarySite, militarysite,
 			           map[stats_vector[last_building_index_].pos].get_immovable())) {
-				if (militarysite->stationed_soldiers().size() < militarysite->soldier_capacity()) {
+				auto* soldier_control = militarysite->soldier_control();
+				assert(soldier_control != nullptr);
+				if (soldier_control->stationed_soldiers().size() < soldier_control->soldier_capacity()) {
 					found = true;
 				}
 			} else if (upcast(ProductionSite, productionsite,
@@ -585,9 +590,10 @@ void BuildingStatisticsMenu::update() {
 						++nr_unproductive;
 					}
 				} else if (building.type() == MapObjectType::MILITARYSITE) {
-					MilitarySite& militarysite = dynamic_cast<MilitarySite&>(immovable);
-					total_soldier_capacity += militarysite.soldier_capacity();
-					total_stationed_soldiers += militarysite.stationed_soldiers().size();
+					SoldierControl* soldier_control = dynamic_cast<Building&>(immovable).soldier_control();
+					assert(soldier_control != nullptr);
+					total_soldier_capacity += soldier_control->soldier_capacity();
+					total_stationed_soldiers += soldier_control->stationed_soldiers().size();
 					if (total_stationed_soldiers < total_soldier_capacity) {
 						++nr_unproductive;
 					}
