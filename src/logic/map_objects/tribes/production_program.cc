@@ -1276,7 +1276,7 @@ ProductionProgram::ActCheckSoldier::ActCheckSoldier(char* parameters) {
 }
 
 void ProductionProgram::ActCheckSoldier::execute(Game& game, ProductionSite& ps) const {
-	SoldierControl* ctrl = ps.soldier_control();
+	const SoldierControl* ctrl = ps.soldier_control();
 	assert(ctrl != nullptr);
 	const std::vector<Soldier*> soldiers = ctrl->present_soldiers();
 	if (soldiers.empty()) {
@@ -1356,8 +1356,8 @@ ProductionProgram::ActTrain::ActTrain(char* parameters) {
 }
 
 void ProductionProgram::ActTrain::execute(Game& game, ProductionSite& ps) const {
-	SoldierControl& ctrl = dynamic_cast<SoldierControl&>(ps);
-	const std::vector<Soldier*> soldiers = ctrl.present_soldiers();
+	const SoldierControl* ctrl = ps.soldier_control();;
+	const std::vector<Soldier*> soldiers = ctrl->present_soldiers();
 	const std::vector<Soldier*>::const_iterator soldiers_end = soldiers.end();
 	std::vector<Soldier*>::const_iterator it = soldiers.begin();
 

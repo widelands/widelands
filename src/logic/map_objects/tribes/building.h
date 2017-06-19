@@ -302,7 +302,10 @@ public:
 
 	// SoldierControl object associated with this building. If the building can
 	// not house soldiers (for example productionsites) this will be nullptr.
-	SoldierControl* soldier_control() {
+	const SoldierControl* soldier_control() const {
+		return soldier_control_;
+	}
+	SoldierControl* mutable_soldier_control() {
 		return soldier_control_;
 	}
 

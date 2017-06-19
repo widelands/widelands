@@ -4660,7 +4660,7 @@ int LuaWarehouse::get_soldiers(lua_State* L) {
 // documented in parent class
 int LuaWarehouse::set_soldiers(lua_State* L) {
 	Warehouse* wh = get(L, get_egbase(L));
-	return do_set_soldiers(L, wh->get_position(), wh->soldier_control(), wh->get_owner());
+	return do_set_soldiers(L, wh->get_position(), wh->mutable_soldier_control(), wh->get_owner());
 }
 
 /* RST
@@ -4942,7 +4942,7 @@ int LuaMilitarySite::get_soldiers(lua_State* L) {
 // documented in parent class
 int LuaMilitarySite::set_soldiers(lua_State* L) {
 	MilitarySite* ms = get(L, get_egbase(L));
-	return do_set_soldiers(L, ms->get_position(), ms->soldier_control(), ms->get_owner());
+	return do_set_soldiers(L, ms->get_position(), ms->mutable_soldier_control(), ms->get_owner());
 }
 
 /*
@@ -4996,7 +4996,7 @@ int LuaTrainingSite::get_soldiers(lua_State* L) {
 // documented in parent class
 int LuaTrainingSite::set_soldiers(lua_State* L) {
 	TrainingSite* ts = get(L, get_egbase(L));
-	return do_set_soldiers(L, ts->get_position(), ts->soldier_control(), ts->get_owner());
+	return do_set_soldiers(L, ts->get_position(), ts->mutable_soldier_control(), ts->get_owner());
 }
 
 /*

@@ -19,8 +19,8 @@
 
 #include "logic/player.h"
 
-#include <memory>
 #include <cassert>
+#include <memory>
 
 #include <boost/bind.hpp>
 #include <boost/signals2.hpp>
@@ -807,8 +807,12 @@ void Player::drop_soldier(PlayerImmovable& imm, Soldier& soldier) {
 		return;
 	if (soldier.descr().type() != MapObjectType::SOLDIER)
 		return;
-	if (upcast(SoldierControl, ctrl, &imm))
-		ctrl->drop_soldier(soldier);
+	if (upcast(Building, building, &imm)) {
+		SoldierControl* soldier_control = building->mutable_soldier_control();
+		if (soldier_control != nullptr) {
+			soldier_control->drop_soldier(soldier);
+		}
+	}
 }
 
 /*

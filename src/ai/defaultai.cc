@@ -1306,11 +1306,10 @@ void DefaultAI::update_buildable_field(BuildableField& field, uint16_t range, bo
 				const int32_t radius = militarysite->descr().get_conquers() + 4;
 
 				if (radius > dist) {
+					field.area_military_capacity += militarysite->soldier_control()->max_soldier_capacity();
+					field.area_military_presence += militarysite->soldier_control()->stationed_soldiers().size();
 
-					field.area_military_capacity += militarysite->max_soldier_capacity();
-					field.area_military_presence += militarysite->stationed_soldiers().size();
-
-					if (militarysite->stationed_soldiers().empty()) {
+					if (militarysite->soldier_control()->stationed_soldiers().empty()) {
 						field.military_unstationed += 1;
 					} else {
 						field.military_stationed += 1;
@@ -2811,7 +2810,7 @@ bool DefaultAI::create_shortcut_road(const Flag& flag,
 		bool occupied_military_ = false;
 		Building* b = flag.get_building();
 		if (upcast(MilitarySite, militb, b)) {
-			if (militb->stationed_soldiers().size() > 0) {
+			if (militb->soldier_control()->stationed_soldiers().size() > 0) {
 				occupied_military_ = true;
 			}
 		}

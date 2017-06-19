@@ -590,7 +590,7 @@ void BuildingStatisticsMenu::update() {
 						++nr_unproductive;
 					}
 				} else if (building.type() == MapObjectType::MILITARYSITE) {
-					SoldierControl* soldier_control = dynamic_cast<Building&>(immovable).soldier_control();
+					const SoldierControl* soldier_control = dynamic_cast<Building&>(immovable).soldier_control();
 					assert(soldier_control != nullptr);
 					total_soldier_capacity += soldier_control->soldier_capacity();
 					total_stationed_soldiers += soldier_control->stationed_soldiers().size();

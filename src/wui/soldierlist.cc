@@ -94,7 +94,7 @@ private:
 	};
 
 	Widelands::EditorGameBase& egbase_;
-	SoldierControl* soldier_control_;
+	const SoldierControl* soldier_control_;
 
 	SoldierFn mouseover_fn_;
 	SoldierFn click_fn_;
@@ -348,7 +348,7 @@ bool SoldierPanel::handle_mousepress(uint8_t btn, int32_t x, int32_t y) {
 struct SoldierList : UI::Box {
 	SoldierList(UI::Panel& parent, InteractiveGameBase& igb, Widelands::Building& building);
 
-	SoldierControl& soldiers() const;
+	const SoldierControl* soldiers() const;
 
 private:
 	void mouseover(const Soldier* soldier);
@@ -425,8 +425,8 @@ SoldierList::SoldierList(UI::Panel& parent, InteractiveGameBase& igb, Widelands:
 	add(buttons, UI::Box::Resizing::kFullSize);
 }
 
-SoldierControl& SoldierList::soldiers() const {
-	return *dynamic_cast<SoldierControl*>(&building_);
+const SoldierControl* SoldierList::soldiers() const {
+	return building_.soldier_control();
 }
 
 void SoldierList::think() {
@@ -465,9 +465,9 @@ void SoldierList::mouseover(const Soldier* soldier) {
 }
 
 void SoldierList::eject(const Soldier* soldier) {
-	uint32_t const capacity_min = soldiers().min_soldier_capacity();
+	uint32_t const capacity_min = soldiers()->min_soldier_capacity();
 	bool can_act = igbase_.can_act(building_.owner().player_number());
-	bool over_min = capacity_min < soldiers().present_soldiers().size();
+	bool over_min = capacity_min < soldiers()->present_soldiers().size();
 
 	if (can_act && over_min)
 		igbase_.game().send_player_drop_soldier(building_, soldier->serial());
