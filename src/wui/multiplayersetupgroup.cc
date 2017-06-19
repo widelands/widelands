@@ -458,7 +458,7 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 		   "images/players/team_02.png", "images/players/team_03.png",
 		   "images/players/team_04.png", "images/players/team_05.png",
 		   "images/players/team_06.png", "images/players/team_07.png", "images/players/team_08.png"};
-		assert(team_pictures.size() == kMaxPlayers / 2);
+		assert(team_pictures.size() == kMaxPlayers / 2 + 1);
 
 		const PlayerSettings& player_setting = settings.players[id_];
 		team_dropdown_.clear();
