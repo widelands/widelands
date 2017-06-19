@@ -158,10 +158,10 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 	     n(npsb),
 	     id_(id),
 		  player(this, 0, 0, h, h, playercolor_image(id, "images/players/player_position_menu.png")),
-	     type_dropdown_(this, 0, 0, 50, 200, h, _("Player Type"), UI::DropdownType::kPictorial),
+	     type_dropdown_(this, 0, 0, 50, 200, h, _("Type"), UI::DropdownType::kPictorial),
 	     tribes_dropdown_(this, 0, 0, 50, 200, h, _("Tribe"), UI::DropdownType::kPictorial),
 		  init_dropdown_(this, 0, 0, w - 4 * h, 200, h, "", UI::DropdownType::kTextualNarrow),
-		  team_dropdown_(this, 0, 0, h, 200, h, "", UI::DropdownType::kTextualNarrow), // NOCOM
+		  team_dropdown_(this, 0, 0, h, 200, h, _("Team"), UI::DropdownType::kPictorial),
 	     last_state_(PlayerSettings::State::kClosed),
 		  tribe_selection_locked_(false),
 		  init_selection_locked_(false),
@@ -448,11 +448,18 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 			return;
 		}
 
+		static char const* const team_pictures[] = {
+		   "images/players/team_00.png", "images/players/team_01.png",
+		   "images/players/team_02.png", "images/players/team_03.png",
+		   "images/players/team_04.png", "images/players/team_05.png",
+		   "images/players/team_06.png", "images/players/team_07.png", "images/players/team_08.png"};
+		assert(team_pictures.size() == kMaxPlayers / 2);
+
 		const PlayerSettings& player_setting = settings.players[id_];
 		team_dropdown_.clear();
-		team_dropdown_.add("–", 0, nullptr, false, _("No Team"));
+		team_dropdown_.add(_("No Team"), 0, g_gr->images().get(team_pictures[0]));
 		for (Widelands::TeamNumber t = 1; t <= settings.players.size() / 2; ++t) {
-			team_dropdown_.add(boost::lexical_cast<std::string>(cast_unsigned(t)), t, nullptr, false, (boost::format(_("Team %d")) % cast_unsigned(t)).str());
+			team_dropdown_.add((boost::format(_("Team %d")) % cast_unsigned(t)).str(), t, g_gr->images().get(team_pictures[t]));
 		}
 		team_dropdown_.select(player_setting.team);
 		team_dropdown_.set_visible(true);
