@@ -99,14 +99,17 @@ end
 function reveal_concentric(plr, center, max_radius, hide, delay)
    delay = delay or 100
    hide = hide or true
+
    local buildhelp_state = wl.ui.MapView().buildhelp
    if buildhelp_state then
       -- Turn off buildhelp during animation
       wl.ui.MapView().buildhelp = false
    end
-   if not hide then
+
+   if hide then
       plr:hide_fields(center:region(max_radius), true)
    end
+
    local radius = 0
    while radius < max_radius do
       plr:reveal_fields(center:region(radius))
