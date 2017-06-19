@@ -136,23 +136,12 @@ void NetworkPlayerSettingsBackend::set_init(PlayerSlot id, uint8_t initializatio
 	s->set_player_init(id, initialization_index);
 }
 
-/// Toggle through the teams
-void NetworkPlayerSettingsBackend::toggle_team(PlayerSlot id) {
+/// Sets the team for the player slot
+void NetworkPlayerSettingsBackend::set_team(PlayerSlot id, Widelands::TeamNumber team) {
 	const GameSettings& settings = s->settings();
-
 	if (id >= settings.players.size())
 		return;
-
-	Widelands::TeamNumber currentteam = settings.players.at(id).team;
-	Widelands::TeamNumber maxteam = settings.players.size() / 2;
-	Widelands::TeamNumber newteam;
-
-	if (currentteam >= maxteam)
-		newteam = 0;
-	else
-		newteam = currentteam + 1;
-
-	s->set_player_team(id, newteam);
+	s->set_player_team(id, team);
 }
 
 /// Check if all settings for the player are still valid

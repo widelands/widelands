@@ -36,8 +36,8 @@ struct NetworkPlayerSettingsBackend {
 	void set_shared_in(PlayerSlot id, Widelands::PlayerNumber shared_in);
 	void set_tribe(PlayerSlot id, const std::string& tribename);
 	void set_init(PlayerSlot id, uint8_t initialization_index);
+	void set_team(PlayerSlot id, Widelands::TeamNumber team);
 
-	void toggle_team(PlayerSlot id);
 	void refresh(PlayerSlot id);
 
 	GameSettingsProvider* const s;
