@@ -51,7 +51,6 @@ struct MultiPlayerSetupGroup : public UI::Panel {
 	                      int32_t w,
 	                      int32_t h,
 	                      GameSettingsProvider* settings,
-	                      uint32_t butw,
 	                      uint32_t buth);
 	~MultiPlayerSetupGroup();
 
@@ -65,7 +64,6 @@ private:
 	std::unique_ptr<Notifications::Subscriber<NoteGameSettings>> subscriber_;
 
 	UI::Box clientbox, playerbox;
-	std::vector<UI::Textarea*> labels;
 
 	uint32_t buth_;
 

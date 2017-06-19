@@ -275,7 +275,7 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 		// Now select the entry according to server settings
 		if (player_setting.state == PlayerSettings::State::kHuman) {
 			type_dropdown_.set_image(g_gr->images().get("images/wui/stats/genstats_nrworkers.png"));
-			type_dropdown_.set_tooltip(_("Human"));
+			type_dropdown_.set_tooltip((boost::format(_("%1%: %2%")) % _("Type") % _("Human")).str());
 		} else if (player_setting.state == PlayerSettings::State::kClosed) {
 			type_dropdown_.select("closed");
 		} else if (player_setting.state == PlayerSettings::State::kOpen) {
@@ -542,57 +542,22 @@ MultiPlayerSetupGroup::MultiPlayerSetupGroup(UI::Panel* const parent,
                                              int32_t const w,
                                              int32_t const h,
                                              GameSettingsProvider* const settings,
-                                             uint32_t /* butw */,
                                              uint32_t buth)
    : UI::Panel(parent, x, y, w, h),
      s(settings),
      npsb(new NetworkPlayerSettingsBackend(s)),
-     clientbox(this, 0, buth, UI::Box::Vertical, w / 3, h - buth),
-     playerbox(this, w * 6 / 15, buth, UI::Box::Vertical, w * 9 / 15, h - buth),
+     clientbox(this, 0, 0, UI::Box::Vertical, w / 3, h),
+     playerbox(this, w * 6 / 15, 0, UI::Box::Vertical, w * 9 / 15, h),
      buth_(buth) {
-	int small_font = UI_FONT_SIZE_SMALL * 3 / 4;
-
-	// Clientbox and labels
-	labels.push_back(new UI::Textarea(
-	   this, UI::Scrollbar::kSize * 6 / 5, buth / 3, w / 3 - buth - UI::Scrollbar::kSize * 2, buth));
-	labels.back()->set_text(_("Client name"));
-	labels.back()->set_fontsize(small_font);
-
-	labels.push_back(new UI::Textarea(
-	   this, w / 3 - buth - UI::Scrollbar::kSize * 6 / 5, buth / 3, buth * 2, buth));
-	labels.back()->set_text(_("Role"));
-	labels.back()->set_fontsize(small_font);
-
-	clientbox.set_size(w / 3, h - buth);
+	clientbox.set_size(w / 3, h);
 	clientbox.set_scrolling(true);
 
-	// Playerbox and labels
-	labels.push_back(new UI::Textarea(this, w * 6 / 15, buth / 3, buth, buth));
-	labels.back()->set_text(_("Start"));
-	labels.back()->set_fontsize(small_font);
-
-	labels.push_back(new UI::Textarea(this, w * 6 / 15 + buth, buth / 3 - 10, buth, buth));
-	labels.back()->set_text(_("Type"));
-	labels.back()->set_fontsize(small_font);
-
-	labels.push_back(new UI::Textarea(this, w * 6 / 15 + buth * 2, buth / 3, buth, buth));
-	labels.back()->set_text(_("Tribe"));
-	labels.back()->set_fontsize(small_font);
-
-	labels.push_back(new UI::Textarea(
-	   this, w * 6 / 15 + buth * 3, buth / 3, w * 9 / 15 - 4 * buth, buth, UI::Align::kCenter));
-	labels.back()->set_text(_("Initialization"));
-	labels.back()->set_fontsize(small_font);
-
-	labels.push_back(new UI::Textarea(this, w - buth, buth / 3, buth, buth, UI::Align::kRight));
-	labels.back()->set_text(_("Team"));
-	labels.back()->set_fontsize(small_font);
-
-	playerbox.set_size(w * 9 / 15, h - buth);
+	// Playerbox
+	playerbox.set_size(w * 9 / 15, h);
 	multi_player_player_groups.resize(kMaxPlayers);
 	for (PlayerSlot i = 0; i < multi_player_player_groups.size(); ++i) {
 		multi_player_player_groups.at(i) =
-		   new MultiPlayerPlayerGroup(&playerbox, i, 0, 0, playerbox.get_w(), buth, s, npsb.get());
+		   new MultiPlayerPlayerGroup(&playerbox, i, 0, 0, playerbox.get_w(), buth_, s, npsb.get());
 		playerbox.add(multi_player_player_groups.at(i));
 	}
 	subscriber_ =

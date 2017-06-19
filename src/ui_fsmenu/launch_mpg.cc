@@ -181,7 +181,7 @@ FullscreenMenuLaunchMPG::FullscreenMenuLaunchMPG(GameSettingsProvider* const set
 	map_info_.set_text(_("The host has not yet selected a map or saved game."));
 
 	mpsg_ = new MultiPlayerSetupGroup(
-	   this, get_w() / 50, get_h() / 8, get_w() * 57 / 80, get_h(), settings, butw_, buth_);
+	   this, get_w() / 50, change_map_or_save_.get_y(), get_w() * 57 / 80, get_h(), settings, buth_);
 
 	// If we are the host, open the map or save selection menu at startup
 	if (settings_->settings().usernum == 0 && settings_->settings().mapname.empty()) {
@@ -563,7 +563,7 @@ void FullscreenMenuLaunchMPG::load_map_info() {
 	            "\n";
 	infotext +=
 	   std::string("• ") +
-	   (boost::format(ngettext("%u Player", "%u Players", nr_players_)) % nr_players_).str() + "\n";
+	   (boost::format(ngettext("%u Player", "%u Players", nr_players_)) % cast_unsigned(nr_players_)).str() + "\n";
 	if (settings_->settings().scenario)
 		infotext += std::string("• ") + (boost::format(_("Scenario mode selected"))).str() + "\n";
 	infotext += "\n";
