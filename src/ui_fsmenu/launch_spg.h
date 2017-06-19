@@ -52,7 +52,7 @@ public:
 	FullscreenMenuLaunchSPG(GameSettingsProvider*, GameController* = nullptr);
 	~FullscreenMenuLaunchSPG();
 
-	void start();
+	void start() override;
 	void refresh() override;
 
 protected:

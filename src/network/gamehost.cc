@@ -65,7 +65,7 @@
 
 struct HostGameSettingsProvider : public GameSettingsProvider {
 	HostGameSettingsProvider(GameHost* const init_host)
-	   : host_(init_host), current_wincondition_(0) {
+	   : host_(init_host) {
 	}
 	~HostGameSettingsProvider() {
 	}
@@ -275,7 +275,6 @@ struct HostGameSettingsProvider : public GameSettingsProvider {
 
 private:
 	GameHost* host_;
-	int16_t current_wincondition_;
 	std::vector<std::string> wincondition_scripts_;
 };
 

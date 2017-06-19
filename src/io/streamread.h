@@ -75,7 +75,8 @@ public:
 
 	///  Base of all exceptions that are caused by errors in the data that is
 	///  read.
-	struct DataError : public WException {
+	class DataError : public WException {
+      public:
 		DataError(char const* const fmt, ...) PRINTF_FORMAT(2, 3);
 	};
 #define data_error(...) DataError(__VA_ARGS__)

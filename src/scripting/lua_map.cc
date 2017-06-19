@@ -4458,7 +4458,7 @@ inline Warehouse::StockPolicy string_to_wh_policy(lua_State* L, uint32_t index) 
 		report_error(L, "<%s> is no valid warehouse policy!", str.c_str());
 }
 
-bool do_set_ware_policy(Warehouse* wh, const DescriptionIndex idx, const Warehouse::StockPolicy p) {
+inline bool do_set_ware_policy(Warehouse* wh, const DescriptionIndex idx, const Warehouse::StockPolicy p) {
 	wh->set_ware_policy(idx, p);
 	return true;
 }
@@ -4467,7 +4467,7 @@ bool do_set_ware_policy(Warehouse* wh, const DescriptionIndex idx, const Warehou
  * Sets the given policy for the given ware in the given warehouse and return true.
  * If the no ware with the given name exists for the tribe of the warehouse, return false.
  */
-bool do_set_ware_policy(Warehouse* wh, const std::string& name, const Warehouse::StockPolicy p) {
+inline bool do_set_ware_policy(Warehouse* wh, const std::string& name, const Warehouse::StockPolicy p) {
 	const TribeDescr& tribe = wh->owner().tribe();
 	DescriptionIndex idx = tribe.ware_index(name);
 	if (!tribe.has_ware(idx)) {
@@ -4476,7 +4476,7 @@ bool do_set_ware_policy(Warehouse* wh, const std::string& name, const Warehouse:
 	return do_set_ware_policy(wh, idx, p);
 }
 
-bool do_set_worker_policy(Warehouse* wh,
+inline bool do_set_worker_policy(Warehouse* wh,
                           const DescriptionIndex idx,
                           const Warehouse::StockPolicy p) {
 	const TribeDescr& tribe = wh->owner().tribe();
@@ -4496,7 +4496,7 @@ bool do_set_worker_policy(Warehouse* wh,
  * policy.
  * If no worker with the given name exists for the tribe of the warehouse, return false.
  */
-bool do_set_worker_policy(Warehouse* wh, const std::string& name, const Warehouse::StockPolicy p) {
+inline bool do_set_worker_policy(Warehouse* wh, const std::string& name, const Warehouse::StockPolicy p) {
 	const TribeDescr& tribe = wh->owner().tribe();
 	DescriptionIndex idx = tribe.worker_index(name);
 	if (!tribe.has_worker(idx)) {
@@ -4566,11 +4566,11 @@ int LuaWarehouse::set_warehouse_policies(lua_State* L) {
 
 // Gets the warehouse policy by ware/worker-name or id
 #define WH_GET_POLICY(type)                                                                        \
-	void do_get_##type##_policy(lua_State* L, Warehouse* wh, const DescriptionIndex idx) {          \
+	inline void do_get_##type##_policy(lua_State* L, Warehouse* wh, const DescriptionIndex idx) {          \
 		wh_policy_to_string(L, wh->get_##type##_policy(idx));                                        \
 	}                                                                                               \
                                                                                                    \
-	bool do_get_##type##_policy(lua_State* L, Warehouse* wh, const std::string& name) {             \
+	inline bool do_get_##type##_policy(lua_State* L, Warehouse* wh, const std::string& name) {             \
 		const TribeDescr& tribe = wh->owner().tribe();                                               \
 		DescriptionIndex idx = tribe.type##_index(name);                                             \
 		if (!tribe.has_##type(idx)) {                                                                \

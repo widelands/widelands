@@ -1329,10 +1329,14 @@ void PlayerImmovable::receive_worker(Game&, Worker& worker) {
 void PlayerImmovable::log_general_info(const EditorGameBase& egbase) {
 	BaseImmovable::log_general_info(egbase);
 
+	DIAG_OFF("-Wformat");
 	molog("this: %p\n", this);
 	molog("owner_: %p\n", owner_);
+	DIAG_ON("-Wformat");
 	molog("player_number: %i\n", owner_->player_number());
+	DIAG_OFF("-Wformat");
 	molog("economy_: %p\n", economy_);
+	DIAG_ON("-Wformat");
 }
 
 constexpr uint8_t kCurrentPacketVersionPlayerImmovable = 1;

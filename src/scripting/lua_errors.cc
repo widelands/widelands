@@ -25,3 +25,4 @@ LuaError::LuaError(const std::string& reason) : wexception("%s", reason.c_str())
 LuaScriptNotExistingError::LuaScriptNotExistingError(const std::string& name)
    : LuaError("The script '" + name + "' was not found!") {
 }
+

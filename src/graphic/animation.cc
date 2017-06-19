@@ -150,7 +150,7 @@ NonPackedAnimation::NonPackedAnimation(const LuaTable& table)
 		if (table.has_key("scale")) {
 			scale_ = table.get_double("scale");
 			if (scale_ <= 0.0f) {
-				throw wexception("Animation scale needs to be > 0.0f, but it is %f. The first image of "
+				throw wexception("Animation scale needs to be > 0.0f, but it is %2.2f. The first image of "
 				                 "this animation is %s",
 				                 scale_, image_files_[0].c_str());
 			}

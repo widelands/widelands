@@ -68,8 +68,13 @@ void NetClient::send(const SendPacket& packet) {
 		return;
 
 	boost::system::error_code ec;
+#ifdef NDEBUG
+   boost::asio::write(socket_, boost::asio::buffer(packet.get_data(), packet.get_size()), ec);
+#else
 	size_t written =
 	   boost::asio::write(socket_, boost::asio::buffer(packet.get_data(), packet.get_size()), ec);
+#endif
+
 	// TODO(Notabilis): This one is an assertion of mine, I am not sure if it will hold
 	// If it doesn't, set the socket to blocking before writing
 	// If it does, remove this comment after build 20

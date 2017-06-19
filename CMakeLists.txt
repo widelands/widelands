@@ -127,9 +127,17 @@ if("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
   wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wno-padded")
   wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wno-sign-conversion")
   wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wno-missing-noreturn")
+  # NOCOM wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wno-disabled-macro-expansion")
+  # NOCOM wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wno-format-pedantic")
+
+  # It is impossible to write code that both GCC and Clang will like,
+  # so we have to switch off the warning for one of them.
+  # http://clang-developers.42468.n3.nabble.com/Question-on-Wswitch-enum-td4025927.html
+  wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wno-switch-enum")
 
   # TODO(sirver): weak-vtables should be enabled, but leads to lot of errors right now.
   wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wno-weak-vtables")
+
   wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wno-unreachable-code")
   wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wno-documentation")
 
