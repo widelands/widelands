@@ -3,15 +3,6 @@
 -- ================
 
 function intro()
-   local center_field = wl.Game().map:get_field(32, 62)
-   local max_radius = 16
-   plr:hide_fields(center_field:region(max_radius), true)
-   local steps = 0
-   while steps < max_radius do
-      plr:reveal_fields(center_field:region(steps), true)
-      steps = steps + 1
-      sleep(800)
-   end
    sleep(1000)
    message_box_objective(plr, introduction)
 
