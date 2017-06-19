@@ -114,7 +114,7 @@ struct MultiPlayerClientGroup : public UI::Box {
 					position_image =
 					   playercolor_image(us.position, "images/players/genstats_player.png");
 					temp_tooltip =
-					   (boost::format(_("Player %u")) % static_cast<unsigned int>(us.position + 1))
+					   (boost::format(_("Player %u")) % cast_unsigned(us.position + 1))
 					      .str();
 				} else {
 					position_image = g_gr->images().get("images/wui/fieldaction/menu_tab_watch.png");
@@ -157,7 +157,9 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 	     s(settings),
 	     n(npsb),
 	     id_(id),
-		  player(this, 0, 0, h, h, playercolor_image(id, "images/players/player_position_menu.png")),
+		  // NOCOM 2 players on the same slot will crash the client
+		  player(this, "player", 0, 0, h, h, nullptr, playercolor_image(id, "images/players/player_position_menu.png"),
+					(boost::format(_("Player %u")) % cast_unsigned(id_ + 1)).str(), UI::Button::Style::kFlat),
 	     type_dropdown_(this, 0, 0, 50, 200, h, _("Type"), UI::DropdownType::kPictorial),
 	     tribes_dropdown_(this, 0, 0, 50, 200, h, _("Tribe"), UI::DropdownType::kPictorial),
 		  init_dropdown_(this, 0, 0, w - 4 * h, 200, h, "", UI::DropdownType::kTextualNarrow),
@@ -167,6 +169,9 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 		  init_selection_locked_(false),
 		  team_selection_locked_(false) {
 		set_size(w, h);
+
+		player.set_disable_style(UI::ButtonDisableStyle::kFlat);
+		player.set_enabled(false);
 
 		type_dropdown_.selected.connect(
 		   boost::bind(&MultiPlayerPlayerGroup::set_type, boost::ref(*this)));
@@ -315,7 +320,7 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 
 	/// Helper function to cast shared_in for use in the dropdown.
 	const std::string shared_in_as_string(PlayerSlot shared_in) {
-		return boost::lexical_cast<std::string>(static_cast<unsigned int>(shared_in));
+		return boost::lexical_cast<std::string>(cast_unsigned(shared_in));
 	}
 
 	/// Rebuild the tribes dropdown from the server settings. This will keep the host and client UIs
@@ -348,7 +353,7 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 					const std::string player_name =
 					   /** TRANSLATORS: This is an option in multiplayer setup for sharing
 					      another player's starting position. */
-					   (boost::format(_("Shared in Player %u")) % static_cast<unsigned int>(i + 1))
+					   (boost::format(_("Shared in Player %u")) % cast_unsigned(i + 1))
 					      .str();
 					tribes_dropdown_.add(
 					   player_name, shared_in_as_string(i + 1), player_image, false, player_name);
@@ -515,7 +520,7 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 	NetworkPlayerSettingsBackend* const n;
 	PlayerSlot const id_;
 
-	UI::Icon player;
+	UI::Button player;
 	UI::Dropdown<std::string>
 	   type_dropdown_;  /// Select who owns the slot (human, AI, open, closed, shared-in).
 	UI::Dropdown<std::string> tribes_dropdown_;  /// Select the tribe or shared_in player.
