@@ -470,17 +470,14 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 			return;
 		}
 
-		static char const* const team_pictures[] = {
-		   "images/players/team_00.png", "images/players/team_01.png",
-		   "images/players/team_02.png", "images/players/team_03.png",
-		   "images/players/team_04.png", "images/players/team_05.png",
-		   "images/players/team_06.png", "images/players/team_07.png", "images/players/team_08.png"};
-		assert(sizeof(team_pictures) / sizeof(team_pictures[0]) == kMaxPlayers / 2 + 1);
-
 		team_dropdown_.clear();
-		team_dropdown_.add(_("No Team"), 0, g_gr->images().get(team_pictures[0]));
+		team_dropdown_.add(_("No Team"), 0, g_gr->images().get("images/players/no_team.png"));
+#ifndef NDEBUG
+		const size_t no_of_team_colors = sizeof(kTeamColors) / sizeof(kTeamColors[0]);
+#endif
 		for (Widelands::TeamNumber t = 1; t <= settings.players.size() / 2; ++t) {
-			team_dropdown_.add((boost::format(_("Team %d")) % cast_unsigned(t)).str(), t, g_gr->images().get(team_pictures[t]));
+			assert(t < no_of_team_colors);
+			team_dropdown_.add((boost::format(_("Team %d")) % cast_unsigned(t)).str(), t, playercolor_image(kTeamColors[t], "images/players/team.png"));
 		}
 		team_dropdown_.select(player_setting.team);
 		team_dropdown_.set_visible(true);

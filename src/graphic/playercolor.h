@@ -49,6 +49,19 @@ const RGBColor kPlayerColors[kMaxPlayers] = {
    RGBColor(144, 144, 144),  // light gray
 };
 
+// Hard coded team colors
+const RGBColor kTeamColors[kMaxPlayers / 2 + 1] = {
+	RGBColor(100, 100, 100),  // No team
+   RGBColor(2, 2, 198),      // blue
+   RGBColor(255, 41, 0),     // red
+   RGBColor(255, 232, 0),    // yellow
+   RGBColor(59, 223, 3),     // green
+   RGBColor(57, 57, 57),     // black/dark gray
+   RGBColor(255, 172, 0),    // orange
+   RGBColor(215, 0, 218),    // purple
+   RGBColor(255, 255, 255),  // white
+};
+
 /// Looks for a player color mask image, and if it finds one,
 /// returns the image with added playercolor. If no player color
 /// image file is found, gets the image from 'image_filename'
