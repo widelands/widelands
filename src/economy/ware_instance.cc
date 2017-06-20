@@ -187,9 +187,9 @@ WareInstance::WareInstance(DescriptionIndex const i, const WareDescr* const ware
 
 WareInstance::~WareInstance() {
 	if (supply_) {
-		DIAG_OFF("-Wformat");
+		FORMAT_WARNINGS_OFF;
 		molog("Ware %u still has supply %p\n", descr_index_, supply_);
-		DIAG_ON("-Wformat");
+		FORMAT_WARNINGS_ON;
 		delete supply_;
 	}
 }

@@ -977,34 +977,34 @@ void Worker::log_general_info(const EditorGameBase& egbase) {
 	Bob::log_general_info(egbase);
 
 	if (upcast(PlayerImmovable, loc, location_.get(egbase))) {
-		DIAG_OFF("-Wformat");
+		FORMAT_WARNINGS_OFF;
 		molog("* Owner: (%p)\n", &loc->owner());
-		DIAG_ON("-Wformat");
+		FORMAT_WARNINGS_ON;
 		molog("** Owner (plrnr): %i\n", loc->owner().player_number());
-		DIAG_OFF("-Wformat");
+		FORMAT_WARNINGS_OFF;
 		molog("* Economy: %p\n", loc->get_economy());
-		DIAG_ON("-Wformat");
+		FORMAT_WARNINGS_ON;
 	}
 
 	PlayerImmovable* imm = location_.get(egbase);
 	molog("location: %u\n", imm ? imm->serial() : 0);
-	DIAG_OFF("-Wformat");
+	FORMAT_WARNINGS_OFF;
 	molog("Economy: %p\n", economy_);
 	molog("transfer: %p\n", transfer_);
-	DIAG_ON("-Wformat");
+	FORMAT_WARNINGS_ON;
 
 	if (upcast(WareInstance, ware, carried_ware_.get(egbase))) {
 		molog("* carried_ware->get_ware() (id): %i\n", ware->descr_index());
-		DIAG_OFF("-Wformat");
+		FORMAT_WARNINGS_OFF;
 		molog("* carried_ware->get_economy() (): %p\n", ware->get_economy());
-		DIAG_ON("-Wformat");
+		FORMAT_WARNINGS_ON;
 	}
 
 	molog("current_exp: %i / %i\n", current_exp_, descr().get_needed_experience());
 
-	DIAG_OFF("-Wformat");
+	FORMAT_WARNINGS_OFF;
 	molog("supply: %p\n", supply_);
-	DIAG_ON("-Wformat");
+	FORMAT_WARNINGS_ON;
 }
 
 /**

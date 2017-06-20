@@ -901,9 +901,9 @@ void Bob::set_position(EditorGameBase& egbase, const Coords& coords) {
 
 /// Give debug information.
 void Bob::log_general_info(const EditorGameBase& egbase) {
-	DIAG_OFF("-Wformat"); // GCC warnings can't handle polymorphy with void*
+	FORMAT_WARNINGS_OFF;
 	molog("Owner: %p\n", owner_);
-	DIAG_ON("-Wformat");
+	FORMAT_WARNINGS_ON;
 	molog("Postition: (%i, %i)\n", position_.x, position_.y);
 	molog("ActID: %i\n", actid_);
 	molog("ActScheduled: %s\n", actscheduled_ ? "true" : "false");
@@ -928,9 +928,9 @@ void Bob::log_general_info(const EditorGameBase& egbase) {
 		molog("* ivar2: %i\n", stack_[i].ivar2);
 		molog("* ivar3: %i\n", stack_[i].ivar3);
 
-		DIAG_OFF("-Wformat");
+		FORMAT_WARNINGS_OFF;
 		molog("* object pointer: %p\n", stack_[i].objvar1.get(egbase));
-		DIAG_ON("-Wformat");
+		FORMAT_WARNINGS_ON;
 		molog("* svar1: %s\n", stack_[i].svar1.c_str());
 
 		molog("* coords: (%i, %i)\n", stack_[i].coords.x, stack_[i].coords.y);
@@ -938,9 +938,9 @@ void Bob::log_general_info(const EditorGameBase& egbase) {
 		for (Direction dir = FIRST_DIRECTION; dir <= LAST_DIRECTION; ++dir) {
 			molog(" %d", stack_[i].diranims.get_animation(dir));
 		}
-		DIAG_OFF("-Wformat");
+		FORMAT_WARNINGS_OFF;
 		molog("\n* path: %p\n", stack_[i].path);
-		DIAG_ON("-Wformat");
+		FORMAT_WARNINGS_ON;
 		if (stack_[i].path) {
 			const Path& path = *stack_[i].path;
 			Path::StepVector::size_type nr_steps = path.get_nsteps();
@@ -953,10 +953,10 @@ void Bob::log_general_info(const EditorGameBase& egbase) {
 				molog("*  (%i, %i)\n", coords.x, coords.y);
 			}
 		}
-		DIAG_OFF("-Wformat");
+		FORMAT_WARNINGS_OFF;
 		molog("* route: %p\n", stack_[i].route);
 		molog("* program: %p\n", stack_[i].route);
-		DIAG_ON("-Wformat");
+		FORMAT_WARNINGS_ON;
 	}
 }
 
