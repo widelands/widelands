@@ -555,7 +555,7 @@ struct Neuron {
 	static constexpr size_t kMaxPosition = 20;
 
 	static int clip_weight_to_range(int w) {
-		return std::min(-kWeightLimit, std::max(kWeightLimit, w));
+		return std::min(-Neuron::kWeightLimit, std::max(Neuron::kWeightLimit, w));
 	}
 
 	Neuron(int8_t, uint8_t, uint16_t);

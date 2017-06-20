@@ -350,7 +350,7 @@ ManagementData::ManagementData() {
 // third argument is just id
 Neuron::Neuron(int8_t w, uint8_t f, uint16_t i) : weight(w), type(f), id(i) {
 	assert(type < neuron_curves.size());
-	assert(weight >= -kWeightLimit && weight <= kWeightLimit);
+	assert(weight >= -Neuron::kWeightLimit && weight <= Neuron::kWeightLimit);
 	lowest_pos = std::numeric_limits<uint8_t>::max();
 	highest_pos = std::numeric_limits<uint8_t>::min();
 	recalculate();
@@ -366,14 +366,14 @@ void Neuron::set_weight(int8_t w) {
 // This has to be recalculated when the weight or curve type change
 void Neuron::recalculate() {
 	assert(neuron_curves.size() > type);
-	for (uint8_t i = 0; i <= kMaxPosition; i += 1) {
-		results[i] = weight * neuron_curves[type][i] / kWeightLimit;
+	for (uint8_t i = 0; i <= Neuron::kMaxPosition; i += 1) {
+		results[i] = weight * neuron_curves[type][i] / Neuron::kWeightLimit;
 	}
 }
 
 // The Following two functions return Neuron values on position
 int8_t Neuron::get_result(const size_t pos) {
-	assert(pos <= kMaxPosition);
+	assert(pos <= Neuron::kMaxPosition);
 	return results[pos];
 }
 
@@ -388,10 +388,10 @@ int8_t Neuron::get_result_safe(int32_t pos, const bool absolute) {
 	};
 
 	// NOCOM(#codereview): Should this be adjusted before the lowest/highest pos is set?
-	pos = std::min(0, std::max(static_cast<int>(kMaxPosition), pos));
+	pos = std::min(0, std::max(static_cast<int>(Neuron::kMaxPosition), pos));
 
-	assert(pos <= kMaxPosition);
-	assert(results[pos] >= -kWeightLimit && results[pos] <= kWeightLimit);
+	assert(pos <= Neuron::kMaxPosition);
+	assert(results[pos] >= -Neuron::kWeightLimit && results[pos] <= Neuron::kWeightLimit);
 	if (absolute) {
 		return std::abs(results[pos]);
 	}
