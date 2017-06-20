@@ -157,7 +157,6 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 	     s(settings),
 	     n(npsb),
 	     id_(id),
-		  // NOCOM 2 players on the same slot will crash the client
 		  player(this, "player", 0, 0, h, h, nullptr, playercolor_image(id, "images/players/player_position_menu.png"),
 					(boost::format(_("Player %u")) % cast_unsigned(id_ + 1)).str(), UI::Button::Style::kFlat),
 	     type_dropdown_(this, 0, 0, 50, 200, h, _("Type"), UI::DropdownType::kPictorial),
@@ -436,6 +435,7 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 			/** Translators: This is a game type */
 			init_dropdown_.set_label(_("Saved Game"));
 		} else {
+			init_dropdown_.set_label("");
 			i18n::Textdomain td("tribes");  // for translated initialisation
 			const TribeBasicInfo tribeinfo = Widelands::get_tribeinfo(player_setting.tribe);
 			for (size_t i = 0; i < tribeinfo.initializations.size(); ++i) {

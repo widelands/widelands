@@ -2028,11 +2028,11 @@ void GameHost::handle_packet(uint32_t const i, RecvPacket& r) {
 
 	case NETCMD_SETTING_CHANGEINIT:
 		if (!d->game) {
+			// TODO(GunChleoc): For some nebulous reason, we don't receive the num that the client is sending when a player changes slot. So, keeping the access to the client off for now. Would be nice to have though.
 			uint8_t num = r.unsigned_8();
 			if (num != client.playernum)
 				throw DisconnectException("NO_ACCESS_TO_PLAYER");
-			uint8_t initialization_index = r.unsigned_8();
-			d->npsb.set_init(num, initialization_index);
+			set_player_init(num, r.unsigned_8());
 		}
 		break;
 
