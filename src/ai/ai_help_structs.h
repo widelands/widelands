@@ -564,7 +564,7 @@ struct Neuron {
 	int8_t get_weight() {
 		return weight;
 	}
-	int8_t get_result(const size_t);
+	int8_t get_result(size_t);
 	int8_t get_result_safe(int32_t, bool = false);
 	void set_type(uint8_t);
 	uint8_t get_type() {
