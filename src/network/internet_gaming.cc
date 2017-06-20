@@ -30,6 +30,7 @@
 #include "base/warning.h"
 #include "io/fileread.h"
 #include "io/filesystem/layered_filesystem.h"
+#include "network/constants.h"
 #include "network/internet_gaming_messages.h"
 
 /// Private constructor by purpose: NEVER call directly. Always call InternetGaming::ref(), this
@@ -41,7 +42,7 @@ InternetGaming::InternetGaming()
      reg_(false),
      port_(INTERNET_GAMING_PORT),
      clientrights_(INTERNET_CLIENT_UNREGISTERED),
-     gameip_(""),
+     gameips_(),
      clientupdateonmetaserver_(true),
      gameupdateonmetaserver_(true),
      clientupdate_(false),
@@ -68,7 +69,7 @@ void InternetGaming::reset() {
 	clientname_ = "";
 	clientrights_ = INTERNET_CLIENT_UNREGISTERED;
 	gamename_ = "";
-	gameip_ = "";
+	gameips_ = std::make_pair(NetAddress(), NetAddress());
 	clientupdateonmetaserver_ = true;
 	gameupdateonmetaserver_ = true;
 	clientupdate_ = false;
@@ -103,14 +104,14 @@ void InternetGaming::initialize_connection() {
 		net = NetClient::connect(addr);
 	}
 	if ((!net || !net->is_connected()) && NetAddress::resolve_to_v4(&addr, meta_, port_)) {
-			net = NetClient::connect(addr);
-		}
+		net = NetClient::connect(addr);
 	}
-	if (!net || !net->is_connected())
+	if (!net || !net->is_connected()) {
 		throw WLWarning(_("Could not establish connection to host"),
 		                _("Widelands could not establish a connection to the given address.\n"
 		                  "Either there was no metaserver running at the supposed port or\n"
 		                  "your network setup is broken."));
+	}
 
 	// Of course not 100% true, but we just care about an answer at all, so we reset this tracker
 	lastping_ = time(nullptr);
@@ -603,8 +604,12 @@ void InternetGaming::handle_packet(RecvPacket& packet) {
 			assert(waitcmd_ == IGPCMD_GAME_CONNECT);
 			waitcmd_ = "";
 			// save the received ip, so the client cann connect to the game
-			gameip_ = packet.string();
-			log("InternetGaming: Received ip of the game to join: %s.\n", gameip_.c_str());
+			NetAddress::parse_ip(&gameips_.first, packet.string(), WIDELANDS_PORT);
+			if (packet.string() == "1") {
+				NetAddress::parse_ip(&gameips_.second, packet.string(), WIDELANDS_PORT);
+			}
+			log("InternetGaming: Received ips of the game to join: %s %s.\n",
+				gameips_.first.ip.to_string().c_str(), gameips_.second.ip.to_string().c_str());
 		}
 
 		else if (cmd == IGPCMD_GAME_START) {
@@ -652,10 +657,10 @@ void InternetGaming::handle_packet(RecvPacket& packet) {
 	}
 }
 
-/// \returns the ip of the game the client is on or wants to join (or the client is hosting)
-///          or 0, if no ip available.
-const std::string& InternetGaming::ip() {
-	return gameip_;
+/// \returns Up to two NetAdress with ips of the game the client is on or wants to join
+///          (or the client is hosting) or invalid addresses, if no ip available.
+const std::pair<NetAddress, NetAddress>& InternetGaming::ips() {
+	return gameips_;
 }
 
 /// called by a client to join the game \arg gamename
@@ -720,7 +725,7 @@ void InternetGaming::set_game_done() {
 	s.string(IGPCMD_GAME_DISCONNECT);
 	net->send(s);
 
-	gameip_ = "";
+	gameips_ = std::make_pair(NetAddress(), NetAddress());
 	state_ = LOBBY;
 
 	log("InternetGaming: Client announced the disconnect from the game %s.\n", gamename_.c_str());

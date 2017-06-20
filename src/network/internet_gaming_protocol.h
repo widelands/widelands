@@ -340,7 +340,9 @@ static const std::string IGPCMD_GAME_OPEN = "GAME_OPEN";
  *       client finally closes the connection.
  *
  * Sent by the metaserver to acknowledge the connection request and to submit the ip of the game
- * \li string:    ip of the game.
+ * \li string:    primary ip of the game.
+ * \li string:    whether a secondary ip for the game follows (0 = false, 1 = true)
+ * \li string:    secondary ip of the game - only valid if previous was 1
  * \note as soon as this message is sent, the metaserver will list the client as connected to the
  * game.
  */

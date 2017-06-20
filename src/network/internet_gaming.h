@@ -82,7 +82,7 @@ struct InternetGaming : public ChatProvider {
 	void handle_metaserver_communication();
 
 	// Game specific functions
-	const std::string& ip();
+	const std::pair<NetAddress, NetAddress>& ips();
 	void join_game(const std::string& gamename);
 	void open_game();
 	void set_game_playing();
@@ -187,7 +187,7 @@ private:
 
 	/// information of the clients game
 	std::string gamename_;
-	std::string gameip_;
+	std::pair<NetAddress, NetAddress> gameips_;
 
 	/// Metaserver information
 	bool clientupdateonmetaserver_;
