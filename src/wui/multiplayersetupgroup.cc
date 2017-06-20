@@ -212,6 +212,9 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 	/// This will update the game settings for the type with the value
 	/// currently selected in the type dropdown.
 	void set_type() {
+		if (!s->can_change_player_state(id_)) {
+			return;
+		}
 		if (type_dropdown_.has_selection()) {
 			const std::string& selected = type_dropdown_.get_selected();
 			PlayerSettings::State state = PlayerSettings::State::kComputer;
@@ -299,9 +302,19 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 		}
 	}
 
+	bool has_tribe_access() {
+		return s->settings().players[id_].state == PlayerSettings::State::kShared ?
+					s->can_change_player_init(id_) :
+               s->can_change_player_tribe(id_);
+	}
+
 	/// This will update the game settings for the tribe or shared_in with the value
 	/// currently selected in the tribes dropdown.
 	void set_tribe_or_shared_in() {
+		if (!has_tribe_access()) {
+			return;
+		}
+
 		tribe_selection_locked_ = true;
 		tribes_dropdown_.set_disable_style(s->settings().players[id_].state ==
 		                                         PlayerSettings::State::kShared ?
@@ -382,9 +395,7 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 				tribes_dropdown_.select(player_setting.tribe);
 			}
 		}
-		const bool has_access = player_setting.state == PlayerSettings::State::kShared ?
-		                           s->can_change_player_init(id_) :
-		                           s->can_change_player_tribe(id_);
+		const bool has_access = has_tribe_access();
 		if (tribes_dropdown_.is_enabled() != has_access) {
 			tribes_dropdown_.set_enabled(has_access && tribes_dropdown_.size() > 1);
 		}
@@ -400,6 +411,9 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 	/// This will update the game settings for the initialization with the value
 	/// currently selected in the initialization dropdown.
 	void set_init() {
+		if (!s->can_change_player_init(id_)) {
+			return;
+		}
 		init_selection_locked_ = true;
 		if (init_dropdown_.has_selection()) {
 			n->set_init(id_, init_dropdown_.get_selected());
@@ -413,6 +427,7 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 		if (init_selection_locked_) {
 			return;
 		}
+
 		init_dropdown_.clear();
 		const PlayerSettings& player_setting = settings.players[id_];
 		if (settings.scenario) {
@@ -422,14 +437,10 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 			init_dropdown_.set_label(_("Saved Game"));
 		} else {
 			i18n::Textdomain td("tribes");  // for translated initialisation
-			for (const TribeBasicInfo& tribeinfo : settings.tribes) {
-				if (tribeinfo.name == player_setting.tribe) {
-					for (size_t i = 0; i < tribeinfo.initializations.size(); ++i) {
-						const TribeBasicInfo::Initialization& addme = tribeinfo.initializations[i];
-						init_dropdown_.add(_(addme.descname), i, nullptr, i == player_setting.initialization_index, _(addme.tooltip));
-					}
-					break;
-				}
+			const TribeBasicInfo tribeinfo = Widelands::get_tribeinfo(player_setting.tribe);
+			for (size_t i = 0; i < tribeinfo.initializations.size(); ++i) {
+				const TribeBasicInfo::Initialization& addme = tribeinfo.initializations[i];
+				init_dropdown_.add(_(addme.descname), i, nullptr, i == player_setting.initialization_index, _(addme.tooltip));
 			}
 		}
 
@@ -452,15 +463,20 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 		if (team_selection_locked_) {
 			return;
 		}
+		const PlayerSettings& player_setting = settings.players[id_];
+		if (player_setting.state == PlayerSettings::State::kShared) {
+			team_dropdown_.set_visible(false);
+			team_dropdown_.set_enabled(false);
+			return;
+		}
 
 		static char const* const team_pictures[] = {
 		   "images/players/team_00.png", "images/players/team_01.png",
 		   "images/players/team_02.png", "images/players/team_03.png",
 		   "images/players/team_04.png", "images/players/team_05.png",
 		   "images/players/team_06.png", "images/players/team_07.png", "images/players/team_08.png"};
-		assert(team_pictures.size() == kMaxPlayers / 2 + 1);
+		assert(sizeof(team_pictures) / sizeof(team_pictures[0]) == kMaxPlayers / 2 + 1);
 
-		const PlayerSettings& player_setting = settings.players[id_];
 		team_dropdown_.clear();
 		team_dropdown_.add(_("No Team"), 0, g_gr->images().get(team_pictures[0]));
 		for (Widelands::TeamNumber t = 1; t <= settings.players.size() / 2; ++t) {
@@ -487,19 +503,6 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 		const PlayerSettings& player_setting = settings.players[id_];
 
 		rebuild_type_dropdown(player_setting);
-		rebuild_tribes_dropdown(settings);
-		rebuild_init_dropdown(settings);
-		rebuild_team_dropdown(settings);
-
-		// Trigger update for the other players for shared_in mode when slots open and close
-		if (last_state_ != player_setting.state) {
-			last_state_ = player_setting.state;
-			for (PlayerSlot slot = 0; slot < s->settings().players.size(); ++slot) {
-				if (slot != id_) {
-					Notifications::publish(NoteGameSettings(slot));
-				}
-			}
-		}
 
 		if (player_setting.state == PlayerSettings::State::kClosed ||
 		    player_setting.state == PlayerSettings::State::kOpen) {
@@ -509,10 +512,20 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 			tribes_dropdown_.set_enabled(false);
 			init_dropdown_.set_visible(false);
 			init_dropdown_.set_enabled(false);
-			return;
-		} else if (player_setting.state == PlayerSettings::State::kShared) {
-			team_dropdown_.set_visible(false);
-			team_dropdown_.set_enabled(false);
+		} else {
+			rebuild_tribes_dropdown(settings);
+			rebuild_init_dropdown(settings);
+			rebuild_team_dropdown(settings);
+		}
+
+		// Trigger update for the other players for shared_in mode when slots open and close
+		if (last_state_ != player_setting.state) {
+			last_state_ = player_setting.state;
+			for (PlayerSlot slot = 0; slot < s->settings().players.size(); ++slot) {
+				if (slot != id_) {
+					Notifications::publish(NoteGameSettings(slot));
+				}
+			}
 		}
 	}
 
