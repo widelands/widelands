@@ -79,8 +79,18 @@
 
 // Compilers can't handle polymorphy with printf %p, expecting void* only.
 // Surround ONLY printf statements that contain %p with these macros.
-#define FORMAT_WARNINGS_OFF GCC_DIAG_OFF("-Wformat") CLANG_DIAG_OFF("-Wformat-pedantic")
-#define FORMAT_WARNINGS_ON GCC_DIAG_ON("-Wformat") CLANG_DIAG_ON("-Wformat-pedantic")
+#ifdef __clang__
+#if __has_warning("-Wformat-pedantic") // Older Clang versions don't have -Wformat-pedantic
+#define FORMAT_WARNINGS_OFF CLANG_DIAG_OFF("-Wformat") CLANG_DIAG_OFF("-Wformat-pedantic")
+#define FORMAT_WARNINGS_ON CLANG_DIAG_ON("-Wformat") CLANG_DIAG_ON("-Wformat-pedantic")
+#else
+#define FORMAT_WARNINGS_OFF CLANG_DIAG_OFF("-Wformat")
+#define FORMAT_WARNINGS_ON CLANG_DIAG_ON("-Wformat")
+#endif
+#else
+#define FORMAT_WARNINGS_OFF GCC_DIAG_OFF("-Wformat")
+#define FORMAT_WARNINGS_ON GCC_DIAG_ON("-Wformat")
+#endif
 
 // disallow copying or assigning a class
 #define DISALLOW_COPY_AND_ASSIGN(TypeName)                                                         \
