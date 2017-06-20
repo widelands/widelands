@@ -23,9 +23,13 @@
 
 #include <boost/test/unit_test.hpp>
 
+#include "base/macros.h"
 #include "scripting/lua.h"
 #include "scripting/luna.h"
 #include "scripting/luna_impl.h"
+
+// Triggered by BOOST_AUTO_TEST_CASE
+CLANG_DIAG_OFF("-Wdisabled-macro-expansion")
 
 #ifndef BEGIN_LUNA_PROPERTIES
 #define BEGIN_LUNA_PROPERTIES(klass) const PropertyType<klass> klass::Properties[] = {
