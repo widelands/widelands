@@ -249,7 +249,7 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 					                      player_statistics.get_old60_player_land(pn);
 				}
 
-				int16_t inputs[3 * f_neuron_bit_size] = {0};
+				int16_t inputs[3 * kFNeuronBitSize] = {0};
 				inputs[0] = (site->second.attack_soldiers_strength - site->second.defenders_strength) *
 				            std::abs(management_data.get_military_number_at(114)) / 30;
 				inputs[1] = (site->second.attack_soldiers_strength - site->second.defenders_strength) *
@@ -399,7 +399,7 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 				inputs[95] = -player_statistics.enemies_seen_lately_count(gametime);
 
 				site->second.score = 0;
-				for (uint8_t j = 0; j < f_neuron_bit_size; j += 1) {
+				for (uint8_t j = 0; j < kFNeuronBitSize; j += 1) {
 					if (management_data.f_neuron_pool[47].get_position(j)) {
 						site->second.score += inputs[j];
 						if (inputs[j] < -10 || inputs[j] > 10) {
@@ -407,18 +407,18 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 						}
 					}
 					if (management_data.f_neuron_pool[0].get_position(j)) {
-						site->second.score += inputs[j + f_neuron_bit_size];
-						if (inputs[j + f_neuron_bit_size] < -10 || inputs[j + f_neuron_bit_size] > 10) {
-							log(" pos: %d - value %d\n", j + f_neuron_bit_size,
-							    inputs[j + f_neuron_bit_size]);
+						site->second.score += inputs[j + kFNeuronBitSize];
+						if (inputs[j + kFNeuronBitSize] < -10 || inputs[j + kFNeuronBitSize] > 10) {
+							log(" pos: %d - value %d\n", j + kFNeuronBitSize,
+							    inputs[j + kFNeuronBitSize]);
 						}
 					}
 					if (management_data.f_neuron_pool[16].get_position(j)) {
-						site->second.score += inputs[j + 2 * f_neuron_bit_size];
-						if (inputs[j + 2 * f_neuron_bit_size] < -10 ||
-						    inputs[j + 2 * f_neuron_bit_size] > 10) {
-							log(" pos: %d - value %d\n", j + 2 * f_neuron_bit_size,
-							    inputs[j + 2 * f_neuron_bit_size]);
+						site->second.score += inputs[j + 2 * kFNeuronBitSize];
+						if (inputs[j + 2 * kFNeuronBitSize] < -10 ||
+						    inputs[j + 2 * kFNeuronBitSize] > 10) {
+							log(" pos: %d - value %d\n", j + 2 * kFNeuronBitSize,
+							    inputs[j + 2 * kFNeuronBitSize]);
 						}
 					}
 				}
@@ -652,7 +652,7 @@ bool DefaultAI::check_trainingsites(uint32_t gametime) {
 
 		if (shortage <= 3) {  // training only if supplied
 
-			int16_t inputs[f_neuron_bit_size] = {0};
+			int16_t inputs[kFNeuronBitSize] = {0};
 			inputs[0] = -shortage;
 			inputs[1] = (player_statistics.get_visible_enemies_power(gametime) >
 			             player_statistics.get_old_visible_enemies_power(gametime)) ?
@@ -735,7 +735,7 @@ bool DefaultAI::check_trainingsites(uint32_t gametime) {
 			}
 
 			int16_t tmp_score = 0;
-			for (uint8_t i = 0; i < f_neuron_bit_size; i += 1) {
+			for (uint8_t i = 0; i < kFNeuronBitSize; i += 1) {
 				if (management_data.f_neuron_pool[29].get_position(i)) {
 					tmp_score += inputs[i];
 				}
@@ -950,7 +950,7 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 	                         3)};
 	const uint16_t total_score = scores[0] + scores[1] + scores[2];
 
-	int32_t inputs[4 * f_neuron_bit_size] = {0};
+	int32_t inputs[4 * kFNeuronBitSize] = {0};
 	inputs[0] = (msites_total < 1) ? 1 : 0;
 	inputs[1] = (msites_total < 2) ? 1 : 0;
 	inputs[2] = (msites_total < 3) ? 1 : 0;
@@ -1199,25 +1199,25 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 		inputs[114] = -10;
 	}
 
-	for (int i = 0; i < 4 * f_neuron_bit_size; i = i + 1) {
+	for (int i = 0; i < 4 * kFNeuronBitSize; i = i + 1) {
 		if (inputs[i] < -35 || inputs[i] > 6) {
 			log("Warning check_building_necessity score on position %2d too high %2d\n", i, inputs[i]);
 		}
 	}
 
 	int32_t final_score = 0;
-	for (int i = 0; i < f_neuron_bit_size; i = i + 1) {
+	for (int i = 0; i < kFNeuronBitSize; i = i + 1) {
 		if (management_data.f_neuron_pool[56].get_position(i)) {
 			final_score += inputs[i];
 		}
 		if (management_data.f_neuron_pool[57].get_position(i)) {
-			final_score += inputs[f_neuron_bit_size + i];
+			final_score += inputs[kFNeuronBitSize + i];
 		}
 		if (management_data.f_neuron_pool[58].get_position(i)) {
-			final_score += inputs[2 * f_neuron_bit_size + i];
+			final_score += inputs[2 * kFNeuronBitSize + i];
 		}
 		if (management_data.f_neuron_pool[13].get_position(i)) {
-			final_score += inputs[3 * f_neuron_bit_size + i];
+			final_score += inputs[3 * kFNeuronBitSize + i];
 		}
 	}
 

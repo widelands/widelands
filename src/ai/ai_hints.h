@@ -93,8 +93,8 @@ struct BuildingHints {
 		return prohibited_till_;
 	}
 
-	uint32_t get_is_basic() const {
-		return is_basic_;
+	uint32_t basic_amount() const {
+		return basic_amount_;
 	}
 
 	uint32_t get_forced_after() const {
@@ -131,7 +131,7 @@ private:
 	bool mountain_conqueror_;
 	bool shipyard_;
 	int32_t prohibited_till_;
-	uint32_t is_basic_;
+	uint32_t basic_amount_;
 	int32_t forced_after_;
 	int8_t mines_percent_;
 	int16_t very_weak_ai_limit_;

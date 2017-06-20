@@ -420,7 +420,7 @@ bool FNeuron::get_result(
 
 // Returning bool on a position
 bool FNeuron::get_position(const uint8_t pos) {
-	assert(pos < f_neuron_bit_size);
+	assert(pos < kFNeuronBitSize);
 	return core.test(pos);
 }
 
@@ -431,7 +431,7 @@ uint32_t FNeuron::get_int() {
 
 // This is basically a mutation of FNeuron
 void FNeuron::flip_bit(const uint8_t pos) {
-	assert(pos < f_neuron_bit_size);
+	assert(pos < kFNeuronBitSize);
 	core.flip(pos);
 }
 
@@ -505,7 +505,6 @@ void ManagementData::review(const uint32_t gametime,
 
 // Here we generate new AI DNA (no mutation yet) and push them into persistent data
 // this can cause inconsistency between local and persistent
-
 void ManagementData::new_dna_for_persistent(const uint8_t pn, const Widelands::AiType type) {
 
 	ai_type = type;
@@ -532,7 +531,7 @@ void ManagementData::new_dna_for_persistent(const uint8_t pn, const Widelands::A
        }
 		;
 
-	assert(magic_numbers_size == AI_initial_military_numbers_A.size());
+	assert(kMagicNumbersSize == AI_initial_military_numbers_A.size());
 
 	const std::vector<int8_t> input_weights_A =
 		//  0     1     2     3     4     5     6     7     8     9
@@ -557,8 +556,8 @@ void ManagementData::new_dna_for_persistent(const uint8_t pn, const Widelands::A
           2,    1,    2,    2,    1,    1,    0,    2,    2,    1   //  AutoContent_31_AIDNA_1
 	}
 		;
-	assert(neuron_pool_size == input_func_A.size());
-	assert(neuron_pool_size == input_weights_A.size());
+	assert(kNeuronPoolSize == input_func_A.size());
+	assert(kNeuronPoolSize == input_weights_A.size());
 
 	const std::vector<uint32_t> f_neurons_A =
       { 471130763,  1322756799,  1148682382,  2713953719,  194460207,  18113635,  2947490886,  3275944172,  3438582086,  856208494,  //  AutoContent_32_AIDNA_1
@@ -568,7 +567,7 @@ void ManagementData::new_dna_for_persistent(const uint8_t pn, const Widelands::A
         3233788172,  715230539,  2583635732,  4271028953,  1217674278,  4043323645,  1857109651,  2181897047,  2825979187,  3081298269,  //  AutoContent_36_AIDNA_1
         1277901018,  1255642150,  2384261818,  2866704864,  755617465,  835768208,  1394358417,  4012239945,  2601238115,  3933467106  //  AutoContent_37_AIDNA_1
 	 };
-	assert(f_neuron_pool_size == f_neurons_A.size());
+	assert(kFNeuronPoolSize == f_neurons_A.size());
 
 
     // AutoSCore_AIDNA_2
@@ -590,7 +589,7 @@ void ManagementData::new_dna_for_persistent(const uint8_t pn, const Widelands::A
           0,   15,  -96,  -51,  -21,   11,  -27,  -30,   76,  -47   //  AutoContent_15_AIDNA_2
 		}
 		;
-	assert(magic_numbers_size == AI_initial_military_numbers_B.size());
+	assert(kMagicNumbersSize == AI_initial_military_numbers_B.size());
 
 	const std::vector<int8_t> input_weights_B =
       {  48,  -85,  -26,   47,  -93,  -22,  -91,   84,   50,  -12,  //  AutoContent_16_AIDNA_2
@@ -615,8 +614,8 @@ void ManagementData::new_dna_for_persistent(const uint8_t pn, const Widelands::A
           2,    1,    2,    2,    1,    1,    0,    2,    2,    1   //  AutoContent_31_AIDNA_2
 }
 		;
-		assert(neuron_pool_size == input_func_B.size());
-		assert(neuron_pool_size == input_weights_B.size());
+		assert(kNeuronPoolSize == input_func_B.size());
+		assert(kNeuronPoolSize == input_weights_B.size());
 
 
 	const std::vector<uint32_t> f_neurons_B =
@@ -627,7 +626,7 @@ void ManagementData::new_dna_for_persistent(const uint8_t pn, const Widelands::A
         3225153820,  732007755,  2583635732,  4271028825,  1217674278,  4043323645,  1857109651,  2249005911,  2825979187,  3081298269,  //  AutoContent_36_AIDNA_2
         1277901018,  1255642150,  2384261818,  2866704864,  755617465,  835768208,  1394096273,  4012239945,  2609626723,  3932418530  //  AutoContent_37_AIDNA_2
 	 };
-	assert(f_neuron_pool_size == f_neurons_B.size());
+	assert(kFNeuronPoolSize == f_neurons_B.size());
 
 
     // AutoSCore_AIDNA_3
@@ -651,7 +650,7 @@ void ManagementData::new_dna_for_persistent(const uint8_t pn, const Widelands::A
 
 		;
 
-		assert(magic_numbers_size == AI_initial_military_numbers_C.size());
+		assert(kMagicNumbersSize == AI_initial_military_numbers_C.size());
 
 	const std::vector<int8_t> input_weights_C =
       {  48,  -85,  -26,   47,  -65,  -19,  -91,   84,   92,  -12,  //  AutoContent_16_AIDNA_3
@@ -675,8 +674,8 @@ void ManagementData::new_dna_for_persistent(const uint8_t pn, const Widelands::A
           2,    1,    2,    2,    1,    1,    0,    2,    2,    1   //  AutoContent_31_AIDNA_3
        }
 			;
-	assert(neuron_pool_size == input_func_C.size());
-	assert(neuron_pool_size == input_weights_C.size());
+	assert(kNeuronPoolSize == input_func_C.size());
+	assert(kNeuronPoolSize == input_weights_C.size());
 
 	const std::vector<uint32_t> f_neurons_C =
       {  202828425,  1322625717,  1148682382,  2244191679,  194456367,  26493027,  2947491014,  3410163948,  3438582086,  856208494,  //  AutoContent_32_AIDNA_3
@@ -686,7 +685,7 @@ void ManagementData::new_dna_for_persistent(const uint8_t pn, const Widelands::A
         3233788172,  732007755,  2583635734,  4271028825,  1217670182,  4043323645,  1857109659,  2249005911,  2834367795,  3072909661,  //  AutoContent_36_AIDNA_3
         1278949528,  1792513063,  2384261690,  2732487136,  755615385,  835767184,  1393834641,  4012239945,  2601238115,  2859725290  //  AutoContent_37_AIDNA_3
 	 };
-	assert(f_neuron_pool_size == f_neurons_C.size());
+	assert(kFNeuronPoolSize == f_neurons_C.size());
 
 
     // AutoSCore_AIDNA_4
@@ -708,7 +707,7 @@ void ManagementData::new_dna_for_persistent(const uint8_t pn, const Widelands::A
           0,   15,  -96,  -51,  -21,   11,  -27,  -30,   76,  -47   //  AutoContent_15_AIDNA_4
 	}
 		;
-	assert(magic_numbers_size == AI_initial_military_numbers_D.size());
+	assert(kMagicNumbersSize == AI_initial_military_numbers_D.size());
 
 	const std::vector<int8_t> input_weights_D =
       {  48,  -85,  -26,   47,  -93,  -22,  -91,   84,   50,  -12,  //  AutoContent_16_AIDNA_4
@@ -733,8 +732,8 @@ void ManagementData::new_dna_for_persistent(const uint8_t pn, const Widelands::A
           2,    1,    2,    2,    1,    1,    0,    2,    2,    1   //  AutoContent_31_AIDNA_4
 	}
 		;
-	assert(neuron_pool_size == input_func_D.size());
-	assert(neuron_pool_size == input_weights_D.size());
+	assert(kNeuronPoolSize == input_func_D.size());
+	assert(kNeuronPoolSize == input_weights_D.size());
 
 	const std::vector<uint32_t> f_neurons_D =
       { 471130763,  1322756799,  1148682382,  2713953719,  194460175,  18113635,  2947490886,  3275944172,  3438582214,  856208494,  //  AutoContent_32_AIDNA_4
@@ -744,18 +743,18 @@ void ManagementData::new_dna_for_persistent(const uint8_t pn, const Widelands::A
         3225153820,  732007755,  2583635732,  4271028825,  1217674278,  4043323645,  1857109651,  2248481623,  3899721011,  3081298269,  //  AutoContent_36_AIDNA_4
         1277901016,  1255642150,  2384261818,  2866704864,  755617465,  835768208,  1394358417,  4012239945,  2601238115,  3933467106  //  AutoContent_37_AIDNA_4
 	 };
-	assert(f_neuron_pool_size == f_neurons_D.size());
+	assert(kFNeuronPoolSize == f_neurons_D.size());
 
 	primary_parent = std::rand() % 4;
 	const uint8_t parent2 = std::rand() % 4;
 
 	log (" ... DNA initialization (primary parent: %d, secondary parent: %d)\n", primary_parent, parent2);
 
-	// First setting military numbers, they goes dirrectly to persistent data
-	for (uint16_t i = 0; i < magic_numbers_size; i += 1) {
-		// Child inherites DNA with probability 5:1 from main parent
+	// First setting of military numbers, they go directly to persistent data
+	for (uint16_t i = 0; i < kMagicNumbersSize; i += 1) {
+		// Child inherits DNA with probability 5:1 from main parent
 		uint8_t dna_donor = (std::rand() % 50 > 0) ? primary_parent : parent2;
-		if (i == MutationRatePosition) { // Overwriting
+		if (i == kMutationRatePosition) { // Overwriting
 			dna_donor = primary_parent;
 		}
 
@@ -782,7 +781,7 @@ void ManagementData::new_dna_for_persistent(const uint8_t pn, const Widelands::A
 	pd->neuron_functs.clear();
 	pd->f_neurons.clear();
 
-	for (uint16_t i = 0; i < neuron_pool_size; i += 1) {
+	for (uint16_t i = 0; i < kNeuronPoolSize; i += 1) {
 		const uint8_t dna_donor = (std::rand() % Neuron::kMaxPosition > 0) ? primary_parent : parent2;
 
 		switch (dna_donor) {
@@ -809,7 +808,7 @@ void ManagementData::new_dna_for_persistent(const uint8_t pn, const Widelands::A
 	}
 
 
-	for (uint16_t i = 0; i < f_neuron_pool_size; i += 1) {
+	for (uint16_t i = 0; i < kFNeuronPoolSize; i += 1) {
 		const uint8_t dna_donor = (std::rand() % Neuron::kMaxPosition > 0) ? primary_parent : parent2;
 		switch (dna_donor) {
 			case 0 :
@@ -834,9 +833,9 @@ void ManagementData::new_dna_for_persistent(const uint8_t pn, const Widelands::A
 		}
 	}
 
-	pd->magic_numbers_size = magic_numbers_size;
-	pd->neuron_pool_size = neuron_pool_size;
-	pd->f_neuron_pool_size = f_neuron_pool_size;
+	pd->magic_numbers_size = kMagicNumbersSize;
+	pd->neuron_pool_size = kNeuronPoolSize;
+	pd->f_neuron_pool_size = kFNeuronPoolSize;
 
 	// NOCOM test_consistency(); might not be consistent yet
 }
@@ -844,10 +843,10 @@ void ManagementData::new_dna_for_persistent(const uint8_t pn, const Widelands::A
 // Mutating, but all done on persistent data
 void ManagementData::mutate(const uint8_t pn) {
 
-	const int8_t old_probability = get_military_number_at(MutationRatePosition);
+	const int8_t old_probability = get_military_number_at(kMutationRatePosition);
 
 	int16_t probability =
-	   shift_weight_value(get_military_number_at(MutationRatePosition), false) + 101;
+	   shift_weight_value(get_military_number_at(kMutationRatePosition), false) + 101;
 	if (probability > kUpperDefaultMutationLimit) {
 		probability = kUpperDefaultMutationLimit;
 	}
@@ -855,7 +854,7 @@ void ManagementData::mutate(const uint8_t pn) {
 		probability = kLowerDefaultMutationLimit;
 	}
 
-	set_military_number_at(MutationRatePosition, probability - 101);
+	set_military_number_at(kMutationRatePosition, probability - 101);
 
 	// decreasing probability (or rather increasing probability of mutation) if weaker player
 	if (ai_type == Widelands::AiType::kWeak) {
@@ -878,10 +877,11 @@ void ManagementData::mutate(const uint8_t pn) {
 			// Preferred numbers are ones that will be mutated agressively in full range [-kWeightRange, kWeightRange]
 			std::set<int32_t> preferred_numbers = {};
 
-			for (uint16_t i = 0; i < magic_numbers_size; i += 1) {
-				if (i == MutationRatePosition) {  // mutated above
+			for (uint16_t i = 0; i < kMagicNumbersSize; i += 1) {
+				if (i == kMutationRatePosition) {  // mutated above
 					continue;
 				}
+				// NOCOM(#codereview): We have this code again below, pull out a helper function.
 				bool mutating = false;
 				bool aggressive = false;
 				if (preferred_numbers.count(i) > 0) {
@@ -940,16 +940,16 @@ void ManagementData::mutate(const uint8_t pn) {
 			std::set<int32_t> preferred_f_neurons = {};
 			for (auto& item : f_neuron_pool) {
 				uint8_t changed_bits = 0;
-				// is this preferred neuron
+				// is this a preferred neuron
 				if (preferred_f_neurons.count(item.get_id()) > 0) {
-					for (uint8_t i = 0; i < f_neuron_bit_size; i += 1) {
+					for (uint8_t i = 0; i < kFNeuronBitSize; i += 1) {
 						if (std::rand() % 5 == 0) {
 							item.flip_bit(i);
 							changed_bits += 1;
 						}
 					}
 				} else {  // normal mutation
-					for (uint8_t i = 0; i < f_neuron_bit_size; i += 1) {
+					for (uint8_t i = 0; i < kFNeuronBitSize; i += 1) {
 						if (std::rand() % (probability * 3) == 0) {
 							item.flip_bit(i);
 							changed_bits += 1;
@@ -970,26 +970,26 @@ void ManagementData::mutate(const uint8_t pn) {
 	test_consistency();
 }
 
-// Now we copy persistent to loacl
+// Now we copy persistent to local
 void ManagementData::copy_persistent_to_local(const uint8_t pn) {
 
-	assert(pd->neuron_weights.size() == neuron_pool_size);
-	assert(pd->neuron_functs.size() == neuron_pool_size);
+	assert(pd->neuron_weights.size() == kNeuronPoolSize);
+	assert(pd->neuron_functs.size() == kNeuronPoolSize);
 	neuron_pool.clear();
-	for (uint32_t i = 0; i < neuron_pool_size; i = i + 1) {
+	for (uint32_t i = 0; i < kNeuronPoolSize; i = i + 1) {
 		neuron_pool.push_back(Neuron(pd->neuron_weights[i], pd->neuron_functs[i], i));
 	}
 
-	assert(pd->f_neurons.size() == f_neuron_pool_size);
+	assert(pd->f_neurons.size() == kFNeuronPoolSize);
 	f_neuron_pool.clear();
-	for (uint32_t i = 0; i < f_neuron_pool_size; i = i + 1) {
-		// pd->f_neurons.push_back(f_neuron_pool[i].get_int());
+	for (uint32_t i = 0; i < kFNeuronPoolSize; i = i + 1) {
+		// NOCOM pd->f_neurons.push_back(f_neuron_pool[i].get_int());
 		f_neuron_pool.push_back(FNeuron(pd->f_neurons[i], i));
 	}
 
-	pd->magic_numbers_size = magic_numbers_size;
-	pd->neuron_pool_size = neuron_pool_size;
-	pd->f_neuron_pool_size = f_neuron_pool_size;
+	pd->magic_numbers_size = kMagicNumbersSize;
+	pd->neuron_pool_size = kNeuronPoolSize;
+	pd->f_neuron_pool_size = kFNeuronPoolSize;
 
 	test_consistency();
 	log(" %d: DNA initialized\n", pn);
@@ -1000,34 +1000,35 @@ bool ManagementData::test_consistency(bool itemized) {
 	assert(pd->neuron_weights.size() == pd->neuron_pool_size);
 	assert(pd->neuron_functs.size() == pd->neuron_pool_size);
 	assert(neuron_pool.size() == pd->neuron_pool_size);
-	assert(neuron_pool.size() == neuron_pool_size);
+	assert(neuron_pool.size() == kNeuronPoolSize);
 
-	assert(pd->magic_numbers_size == magic_numbers_size);
-	assert(pd->magic_numbers.size() == magic_numbers_size);
+	assert(pd->magic_numbers_size == kMagicNumbersSize);
+	assert(pd->magic_numbers.size() == kMagicNumbersSize);
 
 	assert(pd->f_neurons.size() == pd->f_neuron_pool_size);
 	assert(f_neuron_pool.size() == pd->f_neuron_pool_size);
-	assert(f_neuron_pool.size() == f_neuron_pool_size);
+	assert(f_neuron_pool.size() == kFNeuronPoolSize);
 
 	if (itemized) {
-		// comparing content of neuron and fneuron pools
-		for (uint16_t i = 0; i < neuron_pool_size; i += 1) {
+		// comparing contents of neuron and fneuron pools
+		for (uint16_t i = 0; i < kNeuronPoolSize; i += 1) {
 			assert(pd->neuron_weights[i] == neuron_pool[i].get_weight());
 			assert(pd->neuron_functs[i] == neuron_pool[i].get_type());
 			assert(neuron_pool[i].get_id() == i);
 		}
-		for (uint16_t i = 0; i < f_neuron_pool_size; i += 1) {
+		for (uint16_t i = 0; i < kFNeuronPoolSize; i += 1) {
 			assert(pd->f_neurons[i] == f_neuron_pool[i].get_int());
 			assert(f_neuron_pool[i].get_id() == i);
 		}
 	}
 
 	// There is no 'return false', because asserts above would take care of this
+	// NOCOM(#codereview): Make this a void function then - the return value is always true and never used.
 	return true;
 }
 
 // Print DNA data to console, used for training
-// Once we will have AI dumped into files, this should be removed
+// TODO(tiborb): Once we will have AI dumped into files, this should be removed
 // Also, used only for training
 void ManagementData::dump_data() {
 	// dumping new numbers
@@ -1083,13 +1084,13 @@ void ManagementData::dump_data() {
 
 // Querying military number at a possition
 int16_t ManagementData::get_military_number_at(uint8_t pos) {
-	assert(pos < magic_numbers_size);
+	assert(pos < kMagicNumbersSize);
 	return pd->magic_numbers[pos];
 }
 
-// Setting military number (persistent are used also for local use)
+// Setting military number (persistent numbers are used also for local use)
 void ManagementData::set_military_number_at(const uint8_t pos, int16_t value) {
-	assert(pos < magic_numbers_size);
+	assert(pos < kMagicNumbersSize);
 
 	while (pos >= pd->magic_numbers.size()) {
 		pd->magic_numbers.push_back(0);
@@ -1335,6 +1336,8 @@ PlayersStrengths::PlayerStat::PlayerStat(Widelands::TeamNumber tc,
 }
 
 // Inserting/updating data
+// NOCOM(#codereview): I find the parameters hard to read. Can you give them more obvious names?
+// I also generally don't understand the "60" variants are for - add a comment some place to explain what it does?
 void PlayersStrengths::add(Widelands::PlayerNumber pn,
                            Widelands::PlayerNumber opn,
                            Widelands::TeamNumber mytn,
@@ -1356,7 +1359,7 @@ void PlayersStrengths::add(Widelands::PlayerNumber pn,
 			enemy = true;
 		}
 		this_player_number = pn;
-		all_stats.insert(std::pair<Widelands::PlayerNumber, PlayerStat>(
+		all_stats.insert(std::make_pair(
 		   opn, PlayerStat(pltn, enemy, pp, op, o60p, cs, land, oland, o60l)));
 	} else {
 		all_stats[opn].players_power = pp;
@@ -1383,7 +1386,7 @@ void PlayersStrengths::recalculate_team_power() {
 	}
 }
 
-// This just goes over information about all enemies and where they were seen last time
+// This just goes over information about all enemies and where they were seen the last time
 bool PlayersStrengths::any_enemy_seen_lately(const uint32_t gametime) {
 	for (auto& item : all_stats) {
 		if (item.second.is_enemy && player_seen_lately(item.first, gametime)) {
@@ -1421,13 +1424,13 @@ bool PlayersStrengths::player_seen_lately(Widelands::PlayerNumber pn, const uint
 	if (all_stats[pn].last_time_seen == kNever) {
 		return false;
 	}
-	if (all_stats[pn].last_time_seen + static_cast<uint32_t>(2 * 60 * 1000) > gametime) {
+	if (all_stats[pn].last_time_seen + (2U * 60U * 1000U) > gametime) {
 		return true;
 	}
 	return false;
 }
 
-// This is strength of player
+// This is the strength of a player
 uint32_t PlayersStrengths::get_player_power(Widelands::PlayerNumber pn) {
 	if (all_stats.count(pn) > 0) {
 		return all_stats[pn].players_power;
@@ -1435,7 +1438,7 @@ uint32_t PlayersStrengths::get_player_power(Widelands::PlayerNumber pn) {
 	return 0;
 }
 
-// This is land size owned by player
+// This is the land size owned by player
 uint32_t PlayersStrengths::get_player_land(Widelands::PlayerNumber pn) {
 	if (all_stats.count(pn) > 0) {
 		return all_stats[pn].players_land;
@@ -1443,7 +1446,7 @@ uint32_t PlayersStrengths::get_player_land(Widelands::PlayerNumber pn) {
 	return 0;
 }
 
-// Calculates strenght of enemies seen within last 2 minutes
+// Calculates the strength of the enemies seen within the last 2 minutes
 uint32_t PlayersStrengths::get_visible_enemies_power(const uint32_t gametime) {
 	uint32_t pw = 0;
 	for (auto& item : all_stats) {
@@ -1460,7 +1463,7 @@ uint32_t PlayersStrengths::get_enemies_average_power() {
 	for (auto& item : all_stats) {
 		if (get_is_enemy(item.first)) {
 			sum += item.second.players_power;
-			count += 1;
+			++count;
 		}
 	}
 	if (count > 0) {
@@ -1475,7 +1478,7 @@ uint32_t PlayersStrengths::get_enemies_average_land() {
 	for (auto& item : all_stats) {
 		if (get_is_enemy(item.first)) {
 			sum += item.second.players_land;
-			count += 1;
+			++count;
 		}
 	}
 	if (count > 0) {
@@ -1508,14 +1511,14 @@ uint32_t PlayersStrengths::get_enemies_max_land() {
 uint32_t PlayersStrengths::get_old_player_power(Widelands::PlayerNumber pn) {
 	if (all_stats.count(pn) > 0) {
 		return all_stats[pn].old_players_power;
-	};
+	}
 	return 0;
 }
 
 uint32_t PlayersStrengths::get_old60_player_power(Widelands::PlayerNumber pn) {
 	if (all_stats.count(pn) > 0) {
 		return all_stats[pn].old60_players_power;
-	};
+	}
 	return 0;
 }
 
@@ -1549,7 +1552,7 @@ uint32_t PlayersStrengths::get_old_visible_enemies_power(const uint32_t gametime
 uint32_t PlayersStrengths::get_player_casualities(Widelands::PlayerNumber pn) {
 	if (all_stats.count(pn) > 0) {
 		return all_stats[pn].players_casualities;
-	};
+	}
 	return 0;
 }
 
@@ -1560,10 +1563,10 @@ uint32_t PlayersStrengths::get_modified_player_power(Widelands::PlayerNumber pn)
 	if (all_stats.count(pn) > 0) {
 		result = all_stats[pn].players_power;
 		team = all_stats[pn].team_number;
-	};
+	}
 	if (team > 0 && team_powers.count(team) > 0) {
 		result = result + (team_powers[team] - result) / 3;
-	};
+	}
 	return result;
 }
 
@@ -1615,4 +1618,4 @@ ProductionSiteObserver::ProductionSiteObserver()
      dismantle_pending_since(kNever) {
 }
 
-}  // namespace WIdelands
+}  // namespace Widelands

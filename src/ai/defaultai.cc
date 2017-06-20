@@ -71,7 +71,7 @@ constexpr int32_t kSpotsEnough = 25;
 
 constexpr uint16_t kTargetQuantCap = 30;
 
-// this is intended for map developers&testers, by default should be off
+// this is intended for map developers & testers, should be off by default
 constexpr bool kPrintStats = false;
 
 // for scheduler
@@ -442,7 +442,7 @@ void DefaultAI::think() {
 			set_taskpool_task_time(gametime + 19 * 1000, SchedulerTaskId::kCheckEnemySites);
 			break;
 		case SchedulerTaskId::kManagementUpdate:
-			// This task is used for training AI, so should be disabled usually
+			// This task is used for training the AI, so it should be usually disabled
 			{  // statistics for spotted warehouses
 				uint16_t conquered_wh = 0;
 				for (auto coords : enemy_warehouses) {
@@ -498,10 +498,7 @@ void DefaultAI::late_initialization() {
 
 	const DescriptionIndex& nr_buildings = game().tribes().nrbuildings();
 
-	// Collect information about the different buildings that our tribe can have
-	// parsing based on name is not optimal though
-	// the logic below will quarantee that one and only one such building will be
-	// identified
+	// Collect information about the different buildings that our tribe can have. Parsing based on name is not optimal though. The logic below will guarantee that one and only one such building will be identified.
 #ifndef NDEBUG
 	bool barracks_identified = false;
 	bool bakery_identified = false;
@@ -544,7 +541,7 @@ void DefaultAI::late_initialization() {
 
 		management_data.test_consistency(true);
 		assert(management_data.get_military_number_at(42) ==
-		       management_data.get_military_number_at(MutationRatePosition));
+		       management_data.get_military_number_at(kMutationRatePosition));
 
 	} else if (persistent_data->initialized == kTrue) {
 		// Doing some consistency checks
@@ -584,8 +581,8 @@ void DefaultAI::late_initialization() {
 		throw wexception("Corrupted AI data");
 	}
 
-	// Even if we have basic building from savefile, we ignore them and recreate based
-	// on lua conf file
+	// Even if we have basic buildings from savefile, we ignore them and recreate them based
+	// on lua conf files
 	if (create_basic_buildings_list) {
 		persistent_data->remaining_basic_buildings.clear();
 		persistent_data->remaining_buildings_size = 0;
@@ -633,8 +630,8 @@ void DefaultAI::late_initialization() {
 		if (bh.is_graniteproducer()) {
 			bo.set_is(BuildingAttribute::kNeedsRocks);
 		}
-		if (create_basic_buildings_list && bh.get_is_basic() > 0) {  // This is very begining of game
-			persistent_data->remaining_basic_buildings[bo.id] = bh.get_is_basic();
+		if (create_basic_buildings_list && bh.basic_amount() > 0) {  // This is the very begining of the game
+			persistent_data->remaining_basic_buildings[bo.id] = bh.basic_amount();
 			persistent_data->remaining_buildings_size += 1;
 		}
 		if (bh.get_needs_water()) {
@@ -657,7 +654,7 @@ void DefaultAI::late_initialization() {
 		if (bld.get_isport()) {
 			bo.is_what.insert(BuildingAttribute::kPort);
 		}
-		bo.max_ts_proportion = 100;
+		bo.max_trainingsites_proportion = 100;
 		bo.max_preciousness = 0;
 		bo.max_needed_preciousness = 0;
 
@@ -709,6 +706,7 @@ void DefaultAI::late_initialization() {
 				if (mines_per_type.count(bo.mines) == 0) {
 					mines_per_type[bo.mines] = MineTypesObserver();
 				}
+				// NOCOM(#codereview): Do not hard code like this do it the same way that you did for the hunters and fishers, or add an AI hint to the lua files.
 				if (!strcmp(bh.get_mines(), "iron")) {
 					iron_ore_id = bo.mines;
 					bo.set_is(BuildingAttribute::kIronMine);
@@ -727,6 +725,7 @@ void DefaultAI::late_initialization() {
 			}
 
 			// is it barracks - finding out by name
+			// NOCOM(#codereview): use TribeDescr::barracks()
 			if (building_name.find("barracks") != std::string::npos) {
 				// there can be only one building type identified as barracks
 				assert(!barracks_identified);
@@ -737,8 +736,10 @@ void DefaultAI::late_initialization() {
 			}
 
 			// is it bakery - finding out by name
+			// NOCOM(#codereview): Do not hard-code stuff like this. We better add a new table to the init.lua files to define these
+			// Also, do not assume there is only 1 of them - one could theoretically have upgraded buildings here.
 			if (building_name.find("bakery") != std::string::npos) {
-				// there can be only one building type identified as barracks
+				// there can be only one building type identified as bakery
 				assert(!bakery_identified);
 				bo.is_what.insert(BuildingAttribute::kBakery);
 #ifndef NDEBUG
@@ -747,11 +748,12 @@ void DefaultAI::late_initialization() {
 			}
 
 			// is it sawmill - finding out by name
+			// NOCOM(#codereview): Do not hard-code
 			if (building_name.find("saw") != std::string::npos ||
 			    building_name.find("hardener") != std::string::npos) {
 				// there can be only one building type identified as sawmill
 				assert(!sawmill_identified);
-				bo.is_what.insert(BuildingAttribute::kSaw);
+				bo.is_what.insert(BuildingAttribute::kLogRefiner);
 #ifndef NDEBUG
 				sawmill_identified = true;
 #endif
@@ -788,7 +790,7 @@ void DefaultAI::late_initialization() {
 				for (const DescriptionIndex& ware : bo.outputs) {
 					cur_outputs.insert(ware);
 				}
-				// bo.set_is(kUpgradeExtends)lse;
+				// NOCOM bo.set_is(kUpgradeExtends)lse;
 				for (DescriptionIndex ware : enh_outputs) {
 					if (cur_outputs.count(ware) == 0) {
 						bo.set_is(BuildingAttribute::kUpgradeExtends);
@@ -799,6 +801,7 @@ void DefaultAI::late_initialization() {
 
 			// now we identify producers of critical build materials
 			for (DescriptionIndex ware : bo.outputs) {
+				// NOCOM use tribe_->is_construction_material(ware) and ignore the granite and logs? This would add thatch reed to the list, but we can probably live with that.
 				// iterating over wares subsitutes
 				if (tribe_->ware_index("wood") == ware || tribe_->ware_index("blackwood") == ware ||
 				    tribe_->ware_index("marble") == ware || tribe_->ware_index("planks") == ware ||
@@ -815,7 +818,9 @@ void DefaultAI::late_initialization() {
 			}
 
 			for (const auto& temp_buildcosts : prod.buildcost()) {
-				// bellow are non-critical wares (well, various types of wood)
+				// NOCOM use tribe_->is_construction_material(temp_buildcosts.first) and ignore the granite and logs.
+				// Since we have the same thing a few lines above, pull out a helper function.
+				// below are critical wares
 				if (tribe_->ware_index("blackwood") == temp_buildcosts.first ||
 				    tribe_->ware_index("planks") == temp_buildcosts.first ||
 				    tribe_->ware_index("marble") == temp_buildcosts.first ||
@@ -839,7 +844,8 @@ void DefaultAI::late_initialization() {
 			bo.type = BuildingObserver::Type::kMilitarysite;
 			const MilitarySiteDescr& milit = dynamic_cast<const MilitarySiteDescr&>(bld);
 			for (const auto& temp_buildcosts : milit.buildcost()) {
-				// bellow are non-critical wares (well, various types of wood)
+				// Below are non-critical wares (well, various types of wood)
+				// NOCOM(codereview): blackwood as well?
 				if (tribe_->ware_index("log") == temp_buildcosts.first ||
 				    tribe_->ware_index("planks") == temp_buildcosts.first)
 					continue;
@@ -856,8 +862,8 @@ void DefaultAI::late_initialization() {
 
 		if (bld.type() == MapObjectType::TRAININGSITE) {
 			bo.type = BuildingObserver::Type::kTrainingsite;
-			bo.max_ts_proportion = bh.trainingsites_max_percent();
-			assert(bo.max_ts_proportion <= 100);
+			bo.max_trainingsites_proportion = bh.trainingsites_max_percent();
+			assert(bo.max_trainingsites_proportion <= 100);
 			const TrainingSiteDescr& train = dynamic_cast<const TrainingSiteDescr&>(bld);
 			for (const auto& temp_input : train.input_wares()) {
 				bo.inputs.push_back(temp_input.first);
@@ -871,6 +877,8 @@ void DefaultAI::late_initialization() {
 				}
 
 				for (const auto& temp_buildcosts : train.buildcost()) {
+					// NOCOM(#codereview): Hard coding can be avoided here. Get the trainingsites from the tribe then get descr().buildcost() for the building
+					// And ignore the logs and granite again - maybe we can refactor this stuff into a function.
 					// critical wares for trainingsites
 					if (tribe_->ware_index("spidercloth") == temp_buildcosts.first ||
 					    tribe_->ware_index("gold") == temp_buildcosts.first ||
@@ -1079,11 +1087,8 @@ void DefaultAI::late_initialization() {
 	// Just to be initialized
 	soldier_status_ = SoldiersStatus::kEnough;
 	vacant_mil_positions_average_ = 0;
-
 	spots_avail.resize(4);
-
 	trees_nearby_treshold_ = 3 + std::abs(management_data.get_military_number_at(121)) / 2;
-
 	last_road_dismantled_ = 0;
 }
 
@@ -2041,7 +2046,7 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 	const PlayerNumber pn = player_number();
 
 	// Genetic algorithm is used here
-	bool inputs[2 * f_neuron_bit_size] = {0};
+	bool inputs[2 * kFNeuronBitSize] = {0};
 	inputs[0] = (pow(msites_in_constr(), 2) > militarysites.size() + 2);
 	inputs[1] = !(pow(msites_in_constr(), 2) > militarysites.size() + 2);
 	inputs[2] =
@@ -2131,7 +2136,7 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 	int16_t needs_boost_economy_score = management_data.get_military_number_at(61) / 5;
 	int16_t increase_score_limit_score = 0;
 
-	for (uint8_t i = 0; i < f_neuron_bit_size; i += 1) {
+	for (uint8_t i = 0; i < kFNeuronBitSize; i += 1) {
 		if (management_data.f_neuron_pool[51].get_position(i)) {
 			needs_boost_economy_score += (inputs[i]) ? 1 : -1;
 		}
@@ -2139,10 +2144,10 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 			increase_score_limit_score += (inputs[i]) ? 1 : -1;
 		}
 		if (management_data.f_neuron_pool[21].get_position(i)) {
-			needs_boost_economy_score += (inputs[f_neuron_bit_size + i]) ? 1 : -1;
+			needs_boost_economy_score += (inputs[kFNeuronBitSize + i]) ? 1 : -1;
 		}
 		if (management_data.f_neuron_pool[22].get_position(i)) {
-			increase_score_limit_score += (inputs[f_neuron_bit_size + i]) ? 1 : -1;
+			increase_score_limit_score += (inputs[kFNeuronBitSize + i]) ? 1 : -1;
 		}
 	}
 
@@ -3767,7 +3772,7 @@ bool DefaultAI::check_productionsites(uint32_t gametime) {
 
 		// AI takes multiple inputs into account and makes decision if barracks to be stopped/started
 		int16_t tmp_score = 0;
-		int16_t inputs[f_neuron_bit_size] = {0};
+		int16_t inputs[kFNeuronBitSize] = {0};
 		tmp_score += (soldier_status_ == SoldiersStatus::kBadShortage) * 8;
 		tmp_score += (soldier_status_ == SoldiersStatus::kShortage) * 4;
 		tmp_score += (soldier_status_ == SoldiersStatus::kEnough) * 2;
@@ -3795,7 +3800,7 @@ bool DefaultAI::check_productionsites(uint32_t gametime) {
 		inputs[23] = (ts_without_trainers_ > 0) ? -1 : 0;
 		inputs[24] = (ts_without_trainers_ > 0) ? -2 : 0;
 		inputs[25] = (ts_without_trainers_ > 0) ? -3 : 0;
-		for (uint8_t i = 0; i < f_neuron_bit_size; i += 1) {
+		for (uint8_t i = 0; i < kFNeuronBitSize; i += 1) {
 			if (management_data.f_neuron_pool[24].get_position(i)) {
 				tmp_score += inputs[i];
 			}
@@ -4371,8 +4376,8 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 		// Special bonus for very first site of type
 		if (bo.total_count() == 0) {
 			bo.primary_priority += std::abs(management_data.get_military_number_at(56)) +
-			                       bo.max_ts_proportion - current_proportion;
-		} else if (bo.max_ts_proportion < current_proportion) {
+			                       bo.max_trainingsites_proportion - current_proportion;
+		} else if (bo.max_trainingsites_proportion < current_proportion) {
 			bo.primary_priority -= std::abs(management_data.get_military_number_at(128) * 3);
 		}
 
@@ -4590,7 +4595,7 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 
 			// genetic algorithm to decide whether new rangers are needed
 			int16_t tmp_target = 2;
-			int16_t inputs[2 * f_neuron_bit_size] = {0};
+			int16_t inputs[2 * kFNeuronBitSize] = {0};
 			inputs[0] = (persistent_data->trees_around_cutters < 10) * 2;
 			inputs[1] = (persistent_data->trees_around_cutters < 20) * 2;
 			inputs[2] = (persistent_data->trees_around_cutters < 30) * 2;
@@ -4681,14 +4686,14 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 			inputs[62] = (basic_economy_established) ? 0 : -2;
 			inputs[63] = (spots_ < kSpotsTooLittle) ? 0 : -2;
 
-			for (uint8_t i = 0; i < f_neuron_bit_size; i += 1) {
+			for (uint8_t i = 0; i < kFNeuronBitSize; i += 1) {
 				if (management_data.f_neuron_pool[14].get_position(i)) {
 					assert(inputs[i] >= -2 && inputs[i] <= 2);
 					tmp_target += inputs[i];
 				}
 				if (management_data.f_neuron_pool[15].get_position(i)) {
-					tmp_target += inputs[f_neuron_bit_size + i];
-					assert(inputs[f_neuron_bit_size + i] >= -2 && inputs[f_neuron_bit_size + i] <= 2);
+					tmp_target += inputs[kFNeuronBitSize + i];
+					assert(inputs[kFNeuronBitSize + i] >= -2 && inputs[kFNeuronBitSize + i] <= 2);
 				}
 			}
 
@@ -4794,7 +4799,7 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 				return BuildingNecessity::kForbidden;
 			}
 
-			int16_t inputs[f_neuron_bit_size] = {0};
+			int16_t inputs[kFNeuronBitSize] = {0};
 			inputs[0] = (gametime < 15 * 60 * 1000) ? -2 : 0;
 			inputs[1] = (gametime < 30 * 60 * 1000) ? -2 : 0;
 			inputs[2] = (gametime < 45 * 60 * 1000) ? -2 : 0;
@@ -4861,7 +4866,7 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 				tmp_score -= basic_economy_score;
 			}
 
-			for (uint8_t i = 0; i < f_neuron_bit_size; i += 1) {
+			for (uint8_t i = 0; i < kFNeuronBitSize; i += 1) {
 				if (management_data.f_neuron_pool[36].get_position(i)) {
 					tmp_score += inputs[i];
 				}
@@ -4876,7 +4881,7 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 
 		} else if (bo.max_needed_preciousness > 0) {
 
-			int16_t inputs[4 * f_neuron_bit_size] = {0};
+			int16_t inputs[4 * kFNeuronBitSize] = {0};
 			inputs[0] = (bo.total_count() <= 1) ?
 			               std::abs(management_data.get_military_number_at(110)) / 10 :
 			               0;
@@ -5058,7 +5063,7 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 			inputs[99] = (wood_policy_ == WoodPolicy::kAllowRangers) ? -1 : 0;
 
 			int16_t tmp_score = 0;
-			for (uint8_t i = 0; i < f_neuron_bit_size; i += 1) {
+			for (uint8_t i = 0; i < kFNeuronBitSize; i += 1) {
 				if (management_data.f_neuron_pool[8].get_position(i)) {
 					const int16_t partial_input = inputs[i];
 					if (kAITrainingMode && (partial_input < -10 || partial_input > 10)) {
@@ -5066,15 +5071,15 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 					tmp_score += partial_input;
 				}
 				if (management_data.f_neuron_pool[11].get_position(i)) {
-					const int16_t partial_input = inputs[i + f_neuron_bit_size];
+					const int16_t partial_input = inputs[i + kFNeuronBitSize];
 					tmp_score += partial_input;
 				}
 				if (management_data.f_neuron_pool[59].get_position(i)) {
-					const int16_t partial_input = inputs[i + 2 * f_neuron_bit_size];
+					const int16_t partial_input = inputs[i + 2 * kFNeuronBitSize];
 					tmp_score += partial_input;
 				}
 				if (management_data.f_neuron_pool[12].get_position(i)) {
-					const int16_t partial_input = inputs[i + 3 * f_neuron_bit_size];
+					const int16_t partial_input = inputs[i + 3 * kFNeuronBitSize];
 					tmp_score += partial_input;
 				}
 			}

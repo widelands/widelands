@@ -74,7 +74,7 @@ enum class BuildingAttribute : uint8_t {
 	kBuildingMatProducer,
 	kUpgradeSubstitutes,
 	kUpgradeExtends,
-	kSaw,
+	kLogRefiner,
 	kIronMine
 };
 
@@ -107,20 +107,21 @@ enum class SchedulerTaskId : uint8_t {
 	kUnset
 };
 
-// This is simplification of a curve, to avoid repeated calculation
+// This is a simplification of a curve, to avoid repeated calculation
 const std::vector<std::vector<int8_t>> neuron_curves = {
    {0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80, 85, 90, 95, 100},
    {0, 0, 1, 2, 4, 6, 9, 12, 16, 20, 25, 30, 36, 42, 49, 56, 64, 72, 81, 90, 100},
    {0, 17, 25, 32, 38, 44, 49, 53, 58, 62, 66, 70, 74, 78, 81, 84, 88, 91, 94, 97, 100},
 };
 
-constexpr int magic_numbers_size = 150;
-constexpr int neuron_pool_size = 80;
-constexpr int f_neuron_pool_size = 60;
-constexpr int f_neuron_bit_size = 32;
-constexpr int MutationRatePosition = 42;
+constexpr int kMagicNumbersSize = 150;
+constexpr int kNeuronPoolSize = 80;
+constexpr int kFNeuronPoolSize = 60;
+constexpr int kFNeuronBitSize = 32;
+constexpr int kMutationRatePosition = 42;
 // set this to false for trunk NOCOM
 // this is used only for training of AI
+// NOCOM(#codereview): Would we benefit from a command line switch here?
 constexpr bool kAITrainingMode = true;
 
 constexpr uint32_t kNever = std::numeric_limits<uint32_t>::max();
@@ -355,8 +356,8 @@ struct BuildableField {
 	// especially for new colonies
 	Widelands::ExtendedBool portspace_nearby;  // prefer military buildings closer to the portspace
 	int32_t max_buildcap_nearby;
-	// it is not necessary to check resources (stones, fish...) too frequently as they do not change
-	// fast this stores time of last check
+	// It is not necessary to check resources (stones, fish...) too frequently as they do not change
+	// fast. This stores the time of the last check.
 	uint32_t last_resources_check_time;
 	int32_t military_score_;
 	bool inland;
@@ -423,7 +424,7 @@ struct BuildingObserver {
 	bool mountain_conqueror;   // military building built near mountains
 	uint32_t prohibited_till;  // do not build before (ms)
 	uint32_t forced_after;     // do not wait until ware is needed
-	uint8_t max_ts_proportion;
+	uint8_t max_trainingsites_proportion;
 
 	uint16_t unconnected_count;  // to any warehouse (count of such buildings)
 
@@ -483,7 +484,7 @@ struct MilitarySiteObserver {
 	Widelands::MilitarySite* site;
 	BuildingObserver* bo;
 	uint16_t understaffed;
-	uint32_t last_change;  // to prevent too fast switching ocupancy policy
+	uint32_t last_change;  // to prevent switching the occupancy policy too fast
 	uint32_t built_time;
 };
 
@@ -592,7 +593,7 @@ struct FNeuron {
 	FNeuron(uint32_t, uint16_t);
 
 	void flip_bit(uint8_t);
-	// void set(uint8_t);
+	// NOCOM void set(uint8_t);
 	bool get_result(bool, bool, bool, bool bool4 = true, bool bool5 = true);
 	bool get_position(uint8_t);
 	uint32_t get_int();
@@ -601,7 +602,7 @@ struct FNeuron {
 	};
 
 private:
-	std::bitset<f_neuron_bit_size> core;
+	std::bitset<kFNeuronBitSize> core;
 	uint16_t id;
 };
 
