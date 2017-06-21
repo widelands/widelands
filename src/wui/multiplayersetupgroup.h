@@ -44,7 +44,7 @@ struct MultiPlayerPlayerGroup;
  * clients, computers and closed players.
  *
  */
-struct MultiPlayerSetupGroup : public UI::Panel {
+struct MultiPlayerSetupGroup : public UI::Box {
 	MultiPlayerSetupGroup(UI::Panel* parent,
 	                      int32_t x,
 	                      int32_t y,

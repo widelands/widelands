@@ -40,9 +40,7 @@
 #include "logic/player.h"
 #include "logic/widelands.h"
 #include "ui_basic/button.h"
-#include "ui_basic/checkbox.h"
 #include "ui_basic/dropdown.h"
-#include "ui_basic/icon.h"
 #include "ui_basic/scrollbar.h"
 #include "ui_basic/textarea.h"
 
@@ -52,11 +50,9 @@ constexpr int kPadding = 4;
 
 struct MultiPlayerClientGroup : public UI::Box {
 	MultiPlayerClientGroup(UI::Panel* const parent,
-	                       PlayerSlot id,
-	                       int32_t const /* x */,
-	                       int32_t const /* y */,
 	                       int32_t const w,
 	                       int32_t const h,
+	                       PlayerSlot id,
 	                       GameSettingsProvider* const settings)
 	   : UI::Box(parent, 0, 0, UI::Box::Horizontal, w, h, kPadding),
 		  slot_dropdown_(this, 0, 0, h, 200, h, _("Role"), UI::DropdownType::kPictorial),
@@ -83,7 +79,6 @@ struct MultiPlayerClientGroup : public UI::Box {
 				if (id_ == note.usernum || note.usernum == UserSettings::none()) {
 					refresh();
 				}
-				layout();
 				break;
 			case NoteGameSettings::Action::kPlayer:
 				break;
@@ -92,9 +87,8 @@ struct MultiPlayerClientGroup : public UI::Box {
 	}
 
 	void layout() override {
-		// NOCOM list positioning broken & mouse will be away with upper entries.
-		slot_dropdown_.set_height(g_gr->get_yres() * 3 / 4);
 		UI::Box::layout();
+		slot_dropdown_.set_height(g_gr->get_yres() * 3 / 4);
 	}
 
 	/// This will update the client's player slot with the value currently selected in the slot dropdown.
@@ -570,14 +564,17 @@ MultiPlayerSetupGroup::MultiPlayerSetupGroup(UI::Panel* const parent,
                                              int32_t const h,
                                              GameSettingsProvider* const settings,
                                              uint32_t buth)
-   : UI::Panel(parent, x, y, w, h),
+   : UI::Box(parent, x, y, UI::Box::Horizontal, w, h, 8 * kPadding),
      s(settings),
      npsb(new NetworkPlayerSettingsBackend(s)),
-     clientbox(this, 0, 0, UI::Box::Vertical, w / 3, h),
-     playerbox(this, w * 6 / 15, 0, UI::Box::Vertical, w * 9 / 15, h),
+     clientbox(this, 0, 0, UI::Box::Vertical),
+     playerbox(this, 0, 0, UI::Box::Vertical, w * 9 / 15, h),
      buth_(buth) {
 	clientbox.set_size(w / 3, h);
 	clientbox.set_scrolling(true);
+
+	add(&clientbox, UI::Box::Resizing::kExpandBoth);
+	add(&playerbox);
 
 	// Playerbox
 	playerbox.set_size(w * 9 / 15, h);
@@ -598,6 +595,7 @@ MultiPlayerSetupGroup::MultiPlayerSetupGroup(UI::Panel* const parent,
 			   }
 		   }
 		});
+	set_size(w, h);
 	refresh();
 }
 
@@ -617,9 +615,9 @@ void MultiPlayerSetupGroup::refresh() {
 	for (uint32_t i = 0; i < settings.users.size(); ++i) {
 		if (!multi_player_client_groups.at(i)) {
 			multi_player_client_groups.at(i) =
-			   new MultiPlayerClientGroup(&clientbox, i, 0, 0, clientbox.get_w(), buth_, s);
-			clientbox.add(
-			   &*multi_player_client_groups.at(i), UI::Box::Resizing::kFullSize);
+			   new MultiPlayerClientGroup(&clientbox, clientbox.get_w(), buth_, i, s);
+			clientbox.add(multi_player_client_groups.at(i), UI::Box::Resizing::kFullSize);
+			multi_player_client_groups.at(i)->layout();
 		}
 	}
 }
