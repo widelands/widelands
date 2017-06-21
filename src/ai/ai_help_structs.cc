@@ -1116,7 +1116,7 @@ SchedulerTask::SchedulerTask(const uint32_t time,
    : due_time(time), id(t), priority(p), descr(d) {
 }
 
-bool SchedulerTask::operator<(SchedulerTask other) const {
+bool SchedulerTask::operator<(const SchedulerTask& other) const {
 	return priority > other.priority;
 }
 

@@ -555,6 +555,7 @@ constexpr size_t kNeuronMaxPosition = 20;
 
 struct Neuron {
 	static int clip_weight_to_range(int w) {
+		// NOCOM(#codereview): Please double-check that I didn't mess this up.
 		return std::min(-kNeuronWeightLimit, std::max(kNeuronWeightLimit, w));
 	}
 
@@ -676,7 +677,7 @@ struct SchedulerTask {
 	              const uint8_t p,
 	              const char* d);
 
-	bool operator<(SchedulerTask other) const;
+	bool operator<(const SchedulerTask& other) const;
 
 	uint32_t due_time;
 	Widelands::SchedulerTaskId id;

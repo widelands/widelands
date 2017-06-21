@@ -1232,15 +1232,14 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 	PlayerNumber const pn = player_->player_number();
 	const World& world = game().world();
 
-	const uint16_t production_area = 6;
-	const uint16_t buildable_spots_check_area = 10;
-	const uint16_t enemy_check_area = 16;
+	constexpr uint16_t kProductionArea = 6;
+	constexpr uint16_t kBuildableSpotsCheckArea = 10;
+	constexpr uint16_t kEnemyCheckArea = 16;
 	const uint16_t ms_enemy_check_area =
-	   enemy_check_area + std::abs(management_data.get_military_number_at(75)) / 10;
-	;
-	const uint16_t distant_resources_area = 20;
+	   kEnemyCheckArea + std::abs(management_data.get_military_number_at(75)) / 10;
+	constexpr uint16_t kDistantResourcesArea = 20;
 
-	uint16_t actual_enemy_check_area = enemy_check_area;
+	uint16_t actual_enemy_check_area = kEnemyCheckArea;
 	field.is_militarysite = false;
 	if (field.coords.field->get_immovable()->descr().type() == Widelands::MapObjectType::MILITARYSITE) {
 		field.is_militarysite = true;
@@ -1258,7 +1257,7 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 		std::vector<Coords> found_buildable_fields;
 
 		field.unowned_buildable_spots_nearby =
-		   map.find_fields(Area<FCoords>(field.coords, buildable_spots_check_area),
+		   map.find_fields(Area<FCoords>(field.coords, kBuildableSpotsCheckArea),
 		                   &found_buildable_fields, find_unowned_buildable);
 		// Now iterate over fields to get nearest one
 		for (auto& coords : found_buildable_fields) {
@@ -1267,12 +1266,11 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 				field.nearest_buildable_spot_nearby = cur_distance;
 			}
 		}
-
 	} else {
 		field.unowned_buildable_spots_nearby = 0;
 	}
 
-	// Is this near border  // get rid of allyownedfields
+	// Is this near the border? Get rid of fields owned by ally
 	if (map.find_fields(Area<FCoords>(field.coords, 3), nullptr, find_ally) ||
 	    map.find_fields(Area<FCoords>(field.coords, 3), nullptr, find_unowned_walkable)) {
 		field.near_border = true;
@@ -1292,9 +1290,9 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 	// testing mines
 	if (resource_count_now) {
 		uint32_t close_mines = map.find_fields(
-		   Area<FCoords>(field.coords, production_area), nullptr, find_unowned_mines_pots);
+		   Area<FCoords>(field.coords, kProductionArea), nullptr, find_unowned_mines_pots);
 		uint32_t distant_mines =
-		   map.find_fields(Area<FCoords>(field.coords, distant_resources_area), nullptr,
+		   map.find_fields(Area<FCoords>(field.coords, kDistantResourcesArea), nullptr,
 
 		                   find_unowned_mines_pots);
 		distant_mines = distant_mines - close_mines;
@@ -1309,7 +1307,7 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 		       1) {
 			// counting iron mines, if we have less than two iron mines
 			field.unowned_iron_mines_nearby = map.find_fields(
-			   Area<FCoords>(field.coords, distant_resources_area), nullptr, find_unowned_iron_mines);
+			   Area<FCoords>(field.coords, kDistantResourcesArea), nullptr, find_unowned_iron_mines);
 		} else {
 			field.unowned_iron_mines_nearby = 0;
 		}
@@ -1369,41 +1367,28 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 	assert((player_->get_buildcaps(field.coords) & BUILDCAPS_SIZEMASK) <= field.max_buildcap_nearby);
 
 	// Testing surface water (once only)
+	// TODO(GunChleoc): We can change the terrain by scripting, so we should work with notifications here.
+	// Let's leave this as it is for now for performance reasons - terrain change of water is currently only
+	// used in the Atlantean scenario.
 	if (field.water_nearby == kUncalculated) {
 		assert(field.open_water_nearby == kUncalculated);
 
 		FindNodeWater find_water(game().world());
 		field.water_nearby =
-		   map.find_fields(Area<FCoords>(field.coords, production_area), nullptr, find_water);
+		   map.find_fields(Area<FCoords>(field.coords, kProductionArea), nullptr, find_water);
 
 		if (field.water_nearby > 0) {
 			FindNodeOpenWater find_open_water(game().world());
 			field.open_water_nearby =
-			   map.find_fields(Area<FCoords>(field.coords, production_area), nullptr, find_open_water);
+			   map.find_fields(Area<FCoords>(field.coords, kProductionArea), nullptr, find_open_water);
 		}
 
 		if (resource_necessity_water_needed_) {  // for atlanteans
-			field.distant_water = map.find_fields(Area<FCoords>(field.coords, distant_resources_area),
+			field.distant_water = map.find_fields(Area<FCoords>(field.coords, kDistantResourcesArea),
 			                                      nullptr, find_water) -
 			                      field.water_nearby;
 			assert(field.open_water_nearby <= field.water_nearby);
 		}
-	}
-
-	// counting fields with fish
-	if (field.water_nearby > 0 && (field.fish_nearby == kUncalculated || resource_count_now)) {
-		field.fish_nearby = map.find_fields(Area<FCoords>(field.coords, production_area), nullptr,
-		                                    FindNodeResource(world.get_resource("fish")));
-		;
-	}
-
-	// counting fields with critters (game)
-	// not doing this always, this does not change fast
-	if (resource_count_now) {
-
-		field.critters_nearby =
-		   map.find_bobs(Area<FCoords>(field.coords, production_area), nullptr, FindBobCritter());
-		;
 	}
 
 	FCoords fse;
@@ -1416,28 +1401,38 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 		}
 	}
 
-	// Rocks are not renewable, we will count them only if previous state is nonzero
-	if (field.rocks_nearby > 0 && resource_count_now) {
-
-		field.rocks_nearby =
-		   map.find_immovables(Area<FCoords>(map.get_fcoords(field.coords), production_area), nullptr,
-		                       FindImmovableAttribute(MapObjectDescr::get_attribute_id("rocks")));
-
-		// adding 5 if rocks found
-		field.rocks_nearby = (field.rocks_nearby > 0) ? field.rocks_nearby + 2 : 0;
+	// counting fields with fish
+	if (field.water_nearby > 0 && (field.fish_nearby == kUncalculated || resource_count_now)) {
+		field.fish_nearby = map.find_fields(Area<FCoords>(field.coords, kProductionArea), nullptr,
+		                                    FindNodeResource(world.get_resource("fish")));
 	}
 
-	// ground water is not renewable and its amount can only fall, we will count them only if
-	// previous state is nonzero
-	if (field.ground_water > 0 && resource_count_now) {
-		field.ground_water = field.coords.field->get_resources_amount();
-	}
-
-	// Counting trees nearby
+	// Counting resources that do not change fast
 	if (resource_count_now) {
+		// Counting fields with critters (game)
+		field.critters_nearby =
+			map.find_bobs(Area<FCoords>(field.coords, kProductionArea), nullptr, FindBobCritter());
+
+		// Rocks are not renewable, we will count them only if previous state is nonzero
+		if (field.rocks_nearby > 0) {
+			field.rocks_nearby =
+				map.find_immovables(Area<FCoords>(map.get_fcoords(field.coords), kProductionArea), nullptr,
+										  FindImmovableAttribute(MapObjectDescr::get_attribute_id("rocks")));
+
+			// adding 5 if rocks found
+			field.rocks_nearby = (field.rocks_nearby > 0) ? field.rocks_nearby + 2 : 0;
+		}
+
+		// ground water is not renewable and its amount can only fall, we will count them only if
+		// previous state is nonzero
+		if (field.ground_water > 0) {
+			field.ground_water = field.coords.field->get_resources_amount();
+		}
+
+		// Counting trees nearby
 		int32_t const tree_attr = MapObjectDescr::get_attribute_id("tree");
 		field.trees_nearby =
-		   map.find_immovables(Area<FCoords>(map.get_fcoords(field.coords), production_area), nullptr,
+		   map.find_immovables(Area<FCoords>(map.get_fcoords(field.coords), kProductionArea), nullptr,
 		                       FindImmovableAttribute(tree_attr));
 	}
 
@@ -1450,7 +1445,7 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 		assert(!field.enemy_nearby);
 	}
 
-	// resetting bunch of values for the field
+	// resetting a bunch of values for the field
 	field.ally_military_presence = 0;
 	field.area_military_capacity = 0;
 	field.consumers_nearby.clear();
@@ -1475,31 +1470,30 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 	// collect information about productionsites nearby
 	std::vector<ImmovableFound> immovables;
 	// Search in a radius of range
-	map.find_immovables(Area<FCoords>(field.coords, production_area + 2), &immovables);
+	map.find_immovables(Area<FCoords>(field.coords, kProductionArea + 2), &immovables);
 
-	// functions seems to return duplicates, so we will use serial numbers to filter them out
+	// function seems to return duplicates, so we will use serial numbers to filter them out
 	std::set<uint32_t> unique_serials;
 
 	for (uint32_t i = 0; i < immovables.size(); ++i) {
 		const BaseImmovable& base_immovable = *immovables.at(i).object;
 		if (!unique_serials.insert(base_immovable.serial()).second) {
-			continue;  // serial was not inserted in the set, so this is duplicate
+			continue;  // serial was not inserted in the set, so this is a duplicate
 		}
 
 		if (upcast(PlayerImmovable const, player_immovable, &base_immovable)) {
 
-			// TODO(unknown): Only continue; if this is an opposing site
+			// TODO(unknown): Only continue if this is an opposing site
 			// allied sites should be counted for military influence
 			if (player_immovable->owner().player_number() != pn) {
 				continue;
 			}
 			// here we identify the buiding (including expected building if constructionsite)
 			// and calculate some statistics about nearby buildings
-			if (upcast(ProductionSite const, productionsite, player_immovable)) {
-				BuildingObserver& bo = get_building_observer(productionsite->descr().name().c_str());
+			if (player_immovable->descr().type() == MapObjectType::PRODUCTIONSITE) {
+				BuildingObserver& bo = get_building_observer(player_immovable->descr().name().c_str());
 				consider_productionsite_influence(field, immovables.at(i).coords, bo);
-			}
-			if (upcast(ConstructionSite const, constructionsite, player_immovable)) {
+			} else if (upcast(ConstructionSite const, constructionsite, player_immovable)) {
 				const BuildingDescr& target_descr = constructionsite->building();
 				BuildingObserver& bo = get_building_observer(target_descr.name().c_str());
 				consider_productionsite_influence(field, immovables.at(i).coords, bo);
@@ -1517,7 +1511,6 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 	unique_serials.clear();
 
 	for (uint32_t i = 0; i < immovables.size(); ++i) {
-
 		const BaseImmovable& base_immovable = *immovables.at(i).object;
 
 		if (!unique_serials.insert(base_immovable.serial()).second) {
@@ -1528,10 +1521,8 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 		if (upcast(Building const, building, &base_immovable)) {
 
 			const PlayerNumber bpn = building->owner().player_number();
-			if (bpn == pn) {
-				;
-			} else if (!player_statistics.players_in_same_team(bpn, pn)) {  // it is enemy
-				assert(player_statistics.get_is_enemy(bpn));
+			if (player_statistics.get_is_enemy(bpn)) {  // owned by enemy
+				assert(!player_statistics.players_in_same_team(bpn, pn));
 				field.enemy_nearby = true;
 				if (upcast(MilitarySite const, militarysite, building)) {
 					field.enemy_military_presence += militarysite->stationed_soldiers().size();
@@ -1552,21 +1543,18 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 					enemy_warehouses.insert(building->get_position().hash());
 				}
 				continue;
-			} else {  // it is ally
+			} else if (bpn != pn) {  // it is an ally
 				assert(!player_statistics.get_is_enemy(bpn));
 				if (upcast(MilitarySite const, militarysite, building)) {
 					field.ally_military_presence += militarysite->stationed_soldiers().size();
 				}
 				continue;
 			}
-		}
 
-		// if we are here, immovable is ours
-		if (upcast(Building const, building, &base_immovable)) {
-
+			// if we are here, the immovable is ours
 			assert(building->owner().player_number() == pn);
 
-			// connected to warehouse
+			// connected to a warehouse
 			bool connected = !building->get_economy()->warehouses().empty();
 			if (connected) {
 				any_connected_imm = true;
@@ -1588,7 +1576,7 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 					}
 				}
 			} else if (!connected) {
-				// we dont care about unconnected constructionsites
+				// we don't care about unconnected constructionsites
 				any_unconnected_imm = true;
 			}
 
@@ -1597,7 +1585,6 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 				const int32_t radius = militarysite->descr().get_conquers() + 4;
 
 				if (radius > dist) {
-
 					field.area_military_capacity += militarysite->max_soldier_capacity();
 					field.own_military_presence += militarysite->stationed_soldiers().size();
 
@@ -1623,7 +1610,7 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 		field.unconnected_nearby = true;
 	}
 
-	// if there is a militarysite on field, we try to walk to enemy
+	// if there is a militarysite on the field, we try to walk to enemy
 	field.enemy_accessible_ = false;
 	field.local_soldier_capacity = 0;
 	if (field.is_militarysite) {
@@ -1701,9 +1688,9 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 		score_parts[16] = -5 * std::min<int16_t>(field.area_military_capacity, 20);
 		score_parts[17] = 3 * management_data.get_military_number_at(28);
 		score_parts[18] =
-		   (field.enemy_nearby) ? std::abs(management_data.get_military_number_at(68)) * 3 : 0;
+		   (field.enemy_nearby) ? 3 * std::abs(management_data.get_military_number_at(68)) : 0;
 		score_parts[19] =
-		   (field.enemy_wh_nearby) ? std::abs(management_data.get_military_number_at(132)) * 3 : 0;
+		   (field.enemy_wh_nearby) ? 3 * std::abs(management_data.get_military_number_at(132)) : 0;
 		score_parts[58] = (field.enemy_wh_nearby) ?
 		                     std::abs(management_data.get_military_number_at(135)) :
 		                     -std::abs(management_data.get_military_number_at(135));
@@ -1749,11 +1736,11 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 		score_parts[30] =
 		   -10 *
 		   management_data.neuron_pool[8].get_result_safe(
-		      (field.military_in_constr_nearby + field.military_unstationed) * 3, kAbsValue);
+		      3 * (field.military_in_constr_nearby + field.military_unstationed), kAbsValue);
 		score_parts[31] =
 		   -10 *
 		   management_data.neuron_pool[31].get_result_safe(
-		      (field.military_in_constr_nearby + field.military_unstationed) * 3, kAbsValue);
+		      3 * (field.military_in_constr_nearby + field.military_unstationed), kAbsValue);
 		score_parts[32] = -4 * field.military_in_constr_nearby *
 		                  std::abs(management_data.get_military_number_at(82));
 		score_parts[33] = (field.military_in_constr_nearby > 0) ?
@@ -1808,7 +1795,7 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 	   -1 * management_data.neuron_pool[55].get_result_safe(field.ally_military_presence, kAbsValue);
 	score_parts[47] =
 	   -1 *
-	   management_data.neuron_pool[53].get_result_safe(field.ally_military_presence * 2, kAbsValue);
+	   management_data.neuron_pool[53].get_result_safe(2 * field.ally_military_presence, kAbsValue);
 	score_parts[48] = -2 *
 	                  management_data.neuron_pool[4].get_result_safe(
 	                     (field.area_military_capacity + 4) / 5, kAbsValue);
@@ -1816,10 +1803,10 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 	                     -std::abs(management_data.get_military_number_at(81)) :
 	                     0;
 	score_parts[55] = (field.military_loneliness < 10) ?
-	                     std::abs(management_data.get_military_number_at(141)) * 2 :
+	                     2 * std::abs(management_data.get_military_number_at(141)) :
 	                     0;
 	score_parts[56] =
-	   (any_unconnected_imm) ? std::abs(management_data.get_military_number_at(23)) * 2 : 0;
+	   (any_unconnected_imm) ? 2 * std::abs(management_data.get_military_number_at(23)) : 0;
 
 	for (uint16_t i = 0; i < score_parts_size; i++) {
 		field.military_score_ += score_parts[i];
@@ -2016,7 +2003,7 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 	}
 	const bool has_enough_space = (spots_ > needed_spots);
 
-	// Do we have basic economy established, informing that we just left the basic economy mode
+	// Do we have basic economy established? Informing that we just left the basic economy mode.
 	if (!basic_economy_established && persistent_data->remaining_basic_buildings.empty()) {
 		log("%2d: Player has achieved the basic economy at %s\n", player_number(),
 		    gamestring_with_leading_zeros(gametime));
@@ -2195,7 +2182,7 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 		}
 	} else {
 
-		uint16_t divider = 1;  // this is to slow down least military score decreasion
+		uint16_t divider = 1;  // this is to slow down decrementing the least military score
 		switch (expansion_type.get_expansion_type()) {
 		case ExpansionMode::kEconomy:
 			divider = 3;
@@ -2596,7 +2583,7 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 					// They have no own primary priority
 					assert(bo.primary_priority == 0);
 
-					if (bo.is_what.count(BuildingAttribute::kRanger)) {  // RANGERS
+					if (bo.is_what.count(BuildingAttribute::kRanger)) {
 
 						assert(bo.new_building == BuildingNecessity::kNeeded);
 
@@ -2802,6 +2789,7 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 					continue;
 				}
 				assert(bf->is_portspace != ExtendedBool::kUnset);
+				// NOCOM continue code review here
 				if (bf->is_portspace != ExtendedBool::kTrue && bo.is(BuildingAttribute::kPort)) {
 					continue;
 				}
