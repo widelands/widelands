@@ -48,6 +48,8 @@
 
 #define AI_NAME_PREFIX "ai" AI_NAME_SEPARATOR
 
+constexpr int kPadding = 4;
+
 struct MultiPlayerClientGroup : public UI::Box {
 	MultiPlayerClientGroup(UI::Panel* const parent,
 	                       PlayerSlot id,
@@ -56,7 +58,7 @@ struct MultiPlayerClientGroup : public UI::Box {
 	                       int32_t const w,
 	                       int32_t const h,
 	                       GameSettingsProvider* const settings)
-	   : UI::Box(parent, 0, 0, UI::Box::Horizontal, w, h),
+	   : UI::Box(parent, 0, 0, UI::Box::Horizontal, w, h, kPadding),
 		  slot_dropdown_(this, 0, 0, h, 200, h, _("Role"), UI::DropdownType::kPictorial),
 		  slot_selection_locked_(false),
 		  // Name needs to be initialized after the dropdown, otherwise the layout function will crash.
@@ -65,9 +67,8 @@ struct MultiPlayerClientGroup : public UI::Box {
 	     id_(id) {
 		set_size(w, h);
 
-		add(name);
-		add_inf_space(); // NOCOM
 		add(&slot_dropdown_);
+		add(name, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 
 		slot_dropdown_.set_disable_style(UI::ButtonDisableStyle::kFlat);
 		slot_dropdown_.selected.connect(boost::bind(&MultiPlayerClientGroup::set_slot, boost::ref(*this)));
@@ -618,7 +619,7 @@ void MultiPlayerSetupGroup::refresh() {
 			multi_player_client_groups.at(i) =
 			   new MultiPlayerClientGroup(&clientbox, i, 0, 0, clientbox.get_w(), buth_, s);
 			clientbox.add(
-			   &*multi_player_client_groups.at(i), UI::Box::Resizing::kAlign, UI::Align::kCenter);
+			   &*multi_player_client_groups.at(i), UI::Box::Resizing::kFullSize);
 		}
 	}
 }
