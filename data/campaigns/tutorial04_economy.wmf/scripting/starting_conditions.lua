@@ -174,12 +174,12 @@ end
 -- Roads to mines and constructionsites mess up the hide field function, so we add them later
 function remaining_roads()
 -- Mines
-connected_road(plr,map:get_field(119,46).immovable,"l,l")
-connected_road(plr,map:get_field(103,41).immovable,"tl,tl|l,l|l,l|l,l")
-connected_road(plr,map:get_field(108,60).immovable,"l,tl")
-connected_road(plr,map:get_field(120,40).immovable,"l,l")
+   connected_road(plr,map:get_field(119,46).immovable,"l,l")
+   connected_road(plr,map:get_field(103,41).immovable,"tl,tl|l,l|l,l|l,l")
+   connected_road(plr,map:get_field(108,60).immovable,"l,tl")
+   connected_road(plr,map:get_field(120,40).immovable,"l,l")
 
 -- Constructionsite
-plr:place_building("empire_quarry", map:get_field(87,36), true, true)
+   plr:place_building("empire_quarry", map:get_field(87,36), true, true)
 end
 
