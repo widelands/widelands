@@ -134,10 +134,11 @@ bool InternetGaming::login(const std::string& nick,
 	// to send as password. Used so the metaserver can match our IPv4 and IPv6 connections
 	if (!reg_) {
 		// Admittedly this is a pretty stupid generator. But it should be fine for us
-        static const char random_chars[] = "0123456789ABCDEF";
+		static const char random_chars[] = "0123456789ABCDEF";
 		pwd_ = "";
-		while (pwd_.length() < 8)
+		while (pwd_.length() < 8) {
 			pwd_.push_back(random_chars[rand() % (sizeof(random_chars) - 1)]);
+		}
 	}
 
 	initialize_connection();
@@ -605,7 +606,8 @@ void InternetGaming::handle_packet(RecvPacket& packet) {
 			waitcmd_ = "";
 			// save the received ip, so the client cann connect to the game
 			NetAddress::parse_ip(&gameips_.first, packet.string(), WIDELANDS_PORT);
-			if (packet.string() == "1") {
+			// If the next value is true, a secondary IP follows
+			if (packet.string() == bool2str(true)) {
 				NetAddress::parse_ip(&gameips_.second, packet.string(), WIDELANDS_PORT);
 			}
 			log("InternetGaming: Received ips of the game to join: %s %s.\n",

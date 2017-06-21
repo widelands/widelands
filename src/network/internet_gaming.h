@@ -155,8 +155,8 @@ private:
 	 * The established connection does a login, then the connection is
 	 * immediately closed.
 	 *
-	 * If the primary connection already is IPv4, this method
-	 * does nothing.
+	 * If the primary connection already is IPv4, this method does nothing.
+	 * Since we first try to connect with IPv6, another try is futile.
 	 */
 	void create_second_connection();
 

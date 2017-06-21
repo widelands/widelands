@@ -126,7 +126,7 @@ static const std::string IGPCMD_DISCONNECT = "DISCONNECT";
  * \li string:    protocol version
  * \li string:    client name
  * \li string:    build_id of the client
- * \li string:    whether the client wants to login in to a registered account (0 = false, 1 = true)
+ * \li string:    whether the client wants to login in to a registered account ("true" or "false" as string)
  * \li string:    for registered accounts: password in clear text
  *                for unregistered users a random nonce to recognized the matching IPv4 and IPv6 connections
  *
@@ -341,7 +341,7 @@ static const std::string IGPCMD_GAME_OPEN = "GAME_OPEN";
  *
  * Sent by the metaserver to acknowledge the connection request and to submit the ip of the game
  * \li string:    primary ip of the game.
- * \li string:    whether a secondary ip for the game follows (0 = false, 1 = true)
+ * \li string:    whether a secondary ip for the game follows ("true" or "false" as string)
  * \li string:    secondary ip of the game - only valid if previous was 1
  * \note as soon as this message is sent, the metaserver will list the client as connected to the
  * game.
