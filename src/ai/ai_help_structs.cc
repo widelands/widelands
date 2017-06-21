@@ -350,7 +350,7 @@ ManagementData::ManagementData() {
 // third argument is just id
 Neuron::Neuron(int8_t w, uint8_t f, uint16_t i) : weight(w), type(f), id(i) {
 	assert(type < neuron_curves.size());
-	assert(weight >= -Neuron::kWeightLimit && weight <= Neuron::kWeightLimit);
+	assert(weight >= -kNeuronWeightLimit && weight <= kNeuronWeightLimit);
 	lowest_pos = std::numeric_limits<uint8_t>::max();
 	highest_pos = std::numeric_limits<uint8_t>::min();
 	recalculate();
@@ -366,14 +366,14 @@ void Neuron::set_weight(int8_t w) {
 // This has to be recalculated when the weight or curve type change
 void Neuron::recalculate() {
 	assert(neuron_curves.size() > type);
-	for (uint8_t i = 0; i <= Neuron::kMaxPosition; i += 1) {
-		results[i] = weight * neuron_curves[type][i] / Neuron::kWeightLimit;
+	for (uint8_t i = 0; i <= kNeuronMaxPosition; i += 1) {
+		results[i] = weight * neuron_curves[type][i] / kNeuronWeightLimit;
 	}
 }
 
 // The Following two functions return Neuron values on position
 int8_t Neuron::get_result(const size_t pos) {
-	assert(pos <= Neuron::kMaxPosition);
+	assert(pos <= kNeuronMaxPosition);
 	return results[pos];
 }
 
@@ -388,10 +388,10 @@ int8_t Neuron::get_result_safe(int32_t pos, const bool absolute) {
 	};
 
 	// NOCOM(#codereview): Should this be adjusted before the lowest/highest pos is set?
-	pos = std::min(0, std::max(static_cast<int>(Neuron::kMaxPosition), pos));
+	pos = std::min(0, std::max(static_cast<int>(kNeuronMaxPosition), pos));
 
-	assert(pos <= Neuron::kMaxPosition);
-	assert(results[pos] >= -Neuron::kWeightLimit && results[pos] <= Neuron::kWeightLimit);
+	assert(pos <= kNeuronMaxPosition);
+	assert(results[pos] >= -kNeuronWeightLimit && results[pos] <= kNeuronWeightLimit);
 	if (absolute) {
 		return std::abs(results[pos]);
 	}
@@ -444,8 +444,8 @@ int8_t ManagementData::shift_weight_value(const int8_t old_value, const bool agg
 		halfVArRange = 200;
 	}
 
-	const int16_t upper_limit = std::min<int16_t>(old_value + halfVArRange, Neuron::kWeightLimit);
-	const int16_t bottom_limit = std::max<int16_t>(old_value - halfVArRange, -Neuron::kWeightLimit);
+	const int16_t upper_limit = std::min<int16_t>(old_value + halfVArRange, kNeuronWeightLimit);
+	const int16_t bottom_limit = std::max<int16_t>(old_value - halfVArRange, -kNeuronWeightLimit);
 	int16_t new_value = bottom_limit + std::rand() % (upper_limit - bottom_limit + 1);
 
 	if (!aggressive && ((old_value > 0 && new_value < 0) || (old_value < 0 && new_value > 0))) {
@@ -782,7 +782,7 @@ void ManagementData::new_dna_for_persistent(const uint8_t pn, const Widelands::A
 	pd->f_neurons.clear();
 
 	for (uint16_t i = 0; i < kNeuronPoolSize; i += 1) {
-		const uint8_t dna_donor = (std::rand() % Neuron::kMaxPosition > 0) ? primary_parent : parent2;
+		const uint8_t dna_donor = (std::rand() % kNeuronMaxPosition > 0) ? primary_parent : parent2;
 
 		switch (dna_donor) {
 			case 0 :
@@ -809,7 +809,7 @@ void ManagementData::new_dna_for_persistent(const uint8_t pn, const Widelands::A
 
 
 	for (uint16_t i = 0; i < kFNeuronPoolSize; i += 1) {
-		const uint8_t dna_donor = (std::rand() % Neuron::kMaxPosition > 0) ? primary_parent : parent2;
+		const uint8_t dna_donor = (std::rand() % kNeuronMaxPosition > 0) ? primary_parent : parent2;
 		switch (dna_donor) {
 			case 0 :
 				pd->f_neurons.push_back(f_neurons_A[i]);

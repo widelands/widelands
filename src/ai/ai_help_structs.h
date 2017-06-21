@@ -550,12 +550,12 @@ struct MineTypesObserver {
 	uint16_t unoccupied;
 };
 
-struct Neuron {
-	static constexpr int kWeightLimit = 100;
-	static constexpr size_t kMaxPosition = 20;
+constexpr int kNeuronWeightLimit = 100;
+constexpr size_t kNeuronMaxPosition = 20;
 
+struct Neuron {
 	static int clip_weight_to_range(int w) {
-		return std::min(-Neuron::kWeightLimit, std::max(Neuron::kWeightLimit, w));
+		return std::min(-kNeuronWeightLimit, std::max(kNeuronWeightLimit, w));
 	}
 
 	Neuron(int8_t, uint8_t, uint16_t);
