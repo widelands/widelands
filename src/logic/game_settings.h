@@ -33,18 +33,9 @@
 #include "scripting/lua_interface.h"
 #include "scripting/lua_table.h"
 
-// Player slot 0 will give us PlayerNumber 1 etc., so we rename it to avoid confusion
+// Player slot 0 will give us PlayerNumber 1 etc., so we rename it to avoid confusion.
 // TODO(GunChleoc): Rename all uint8_t to PlayerSlot or Widelands::PlayerNumber
 using PlayerSlot = Widelands::PlayerNumber;
-
-struct NoteGameSettings {
-	CAN_BE_SENT_AS_NOTE(NoteId::GameSettings)
-
-	Widelands::PlayerNumber position;
-
-	explicit NoteGameSettings(Widelands::PlayerNumber init_position) : position(init_position) {
-	}
-};
 
 struct PlayerSettings {
 	enum class State { kOpen, kHuman, kComputer, kClosed, kShared };
@@ -85,6 +76,20 @@ struct UserSettings {
 	bool ready;  // until now only used as a check for whether user is currently receiving a file or
 	             // not
 };
+
+struct NoteGameSettings {
+	CAN_BE_SENT_AS_NOTE(NoteId::GameSettings)
+
+	enum class Action { kUser, kPlayer };
+
+	PlayerSlot position;
+	Action action;
+	uint8_t usernum;
+
+	explicit NoteGameSettings(PlayerSlot init_position, Action init_action, uint8_t init_usernum = UserSettings::none()) : position(init_position), action(init_action), usernum(init_usernum) {
+	}
+};
+
 
 /**
  * Holds all settings about a game that can be configured before the

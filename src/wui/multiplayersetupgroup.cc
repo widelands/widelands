@@ -57,91 +57,107 @@ struct MultiPlayerClientGroup : public UI::Box {
 	                       int32_t const h,
 	                       GameSettingsProvider* const settings)
 	   : UI::Box(parent, 0, 0, UI::Box::Horizontal, w, h),
-	     type_icon(nullptr),
-	     type(nullptr),
+		  slot_dropdown_(this, 0, 0, h, 200, h, _("Role"), UI::DropdownType::kPictorial),
+		  slot_selection_locked_(false),
+		  // Name needs to be initialized after the dropdown, otherwise the layout function will crash.
+		  name(new UI::Textarea(this, 0, 0, w - h - UI::Scrollbar::kSize * 11 / 5, h)),
 	     s(settings),
-	     id_(id),
-	     save_(-2) {
+	     id_(id) {
 		set_size(w, h);
-		name = new UI::Textarea(this, 0, 0, w - h - UI::Scrollbar::kSize * 11 / 5, h);
+
 		add(name);
-		// Either Button if changeable OR text if not
-		if (id == settings->settings().usernum) {  // Our Client
-			type = new UI::Button(
-			   this, "client_type", 0, 0, h, h, g_gr->images().get("images/ui_basic/but1.png"), "");
-			type->sigclicked.connect(
-			   boost::bind(&MultiPlayerClientGroup::toggle_type, boost::ref(*this)));
-			add(type);
-		} else {  // just a shown client
-			type_icon = new UI::Icon(
-			   this, 0, 0, h, h, g_gr->images().get("images/wui/fieldaction/menu_tab_watch.png"));
-			add(type_icon);
-		}
+		add_inf_space(); // NOCOM
+		add(&slot_dropdown_);
+
+		slot_dropdown_.set_disable_style(UI::ButtonDisableStyle::kFlat);
+		slot_dropdown_.selected.connect(boost::bind(&MultiPlayerClientGroup::set_slot, boost::ref(*this)));
+
+		refresh();
+		layout();
+
+		subscriber_ =
+		   Notifications::subscribe<NoteGameSettings>([this](const NoteGameSettings& note) {
+			switch (note.action) {
+			case NoteGameSettings::Action::kUser:
+				if (id_ == note.usernum || note.usernum == UserSettings::none()) {
+					refresh();
+				}
+				layout();
+				break;
+			case NoteGameSettings::Action::kPlayer:
+				break;
+			}
+		});
 	}
 
-	/// Switch human players and spectator
-	void toggle_type() {
-		UserSettings us = s->settings().users.at(id_);
-		int16_t p = us.position;
-		if (p == UserSettings::none())
-			p = -1;
+	void layout() override {
+		// NOCOM list positioning broken & mouse will be away with upper entries.
+		slot_dropdown_.set_height(g_gr->get_yres() * 3 / 4);
+		UI::Box::layout();
+	}
 
-		for (++p; p < static_cast<int16_t>(s->settings().players.size()); ++p) {
-			if (s->settings().players.at(p).state == PlayerSettings::State::kHuman ||
-			    s->settings().players.at(p).state == PlayerSettings::State::kOpen) {
-				s->set_player_number(p);
-				return;
+	/// This will update the client's player slot with the value currently selected in the slot dropdown.
+	void set_slot() {
+		const GameSettings& settings = s->settings();
+		if (id_ != settings.usernum) {
+			return;
+		}
+		slot_selection_locked_ = true;
+		if (slot_dropdown_.has_selection()) {
+			const uint8_t new_slot = slot_dropdown_.get_selected();
+			if (new_slot != settings.users.at(id_).position) {
+				s->set_player_number(slot_dropdown_.get_selected());
 			}
 		}
-		s->set_player_number(UserSettings::none());
+		slot_selection_locked_ = false;
 	}
 
-	/// Care about visibility and current values
+	/// Rebuild the slot dropdown from the server settings. This will keep the host and client UIs in sync.
+	void rebuild_slot_dropdown(const GameSettings& settings) {
+		if (slot_selection_locked_) {
+			return;
+		}
+
+		const UserSettings& user_setting = settings.users.at(id_);
+
+		slot_dropdown_.clear();
+		for (PlayerSlot slot = 0; slot < settings.players.size(); ++slot) {
+			if (settings.players.at(slot).state == PlayerSettings::State::kHuman ||
+			    settings.players.at(slot).state == PlayerSettings::State::kOpen) {
+				slot_dropdown_.add((boost::format(_("Player %u")) % cast_unsigned(slot + 1)).str(),
+										 slot,
+										 playercolor_image(slot, "images/players/genstats_player.png"),
+										 slot == user_setting.position);
+			}
+		}
+		slot_dropdown_.add(_("Spectator"),
+								 UserSettings::none(),
+								 g_gr->images().get("images/wui/fieldaction/menu_tab_watch.png"),
+								 user_setting.position == UserSettings::none());
+		slot_dropdown_.set_visible(true);
+		slot_dropdown_.set_enabled(id_ == settings.usernum);
+	}
+
+	/// Take care of visibility and current values
 	void refresh() {
-		UserSettings us = s->settings().users.at(id_);
-		if (us.position == UserSettings::not_connected()) {
-			name->set_text((boost::format("<%s>") % _("free")).str());
-			if (type)
-				type->set_visible(false);
-			else
-				type_icon->set_visible(false);
-		} else {
-			name->set_text(us.name);
-			if (save_ != us.position) {
-				const Image* position_image;
-				std::string temp_tooltip;
-				if (us.position < UserSettings::highest_playernum()) {
-					position_image =
-					   playercolor_image(us.position, "images/players/genstats_player.png");
-					temp_tooltip =
-					   (boost::format(_("Player %u")) % cast_unsigned(us.position + 1))
-					      .str();
-				} else {
-					position_image = g_gr->images().get("images/wui/fieldaction/menu_tab_watch.png");
-					temp_tooltip = _("Spectator");
-				}
+		const GameSettings& settings = s->settings();
+		const UserSettings& user_setting = settings.users.at(id_);
 
-				// Either Button if changeable OR text if not
-				if (id_ == s->settings().usernum) {
-					type->set_pic(position_image);
-					type->set_tooltip(temp_tooltip);
-					type->set_visible(true);
-				} else {
-					type_icon->set_icon(position_image);
-					type_icon->set_tooltip(temp_tooltip);
-					type_icon->set_visible(true);
-				}
-				save_ = us.position;
-			}
+		if (user_setting.position == UserSettings::not_connected()) {
+			set_visible(false);
+			return;
 		}
+
+		name->set_text(user_setting.name);
+		rebuild_slot_dropdown(settings);
 	}
 
-	UI::Textarea* name;
-	UI::Icon* type_icon;
-	UI::Button* type;
+	UI::Dropdown<uintptr_t> slot_dropdown_;  /// Select the player slot.
+	bool slot_selection_locked_; /// Lock rebuilding the dropdown so that it can close on selection
+	UI::Textarea* name; /// Client nick name
 	GameSettingsProvider* const s;
-	PlayerSlot const id_;
-	int16_t save_;  // saved position to check rewrite need.
+	uint8_t const id_; /// User number
+	std::unique_ptr<Notifications::Subscriber<NoteGameSettings>> subscriber_;
 };
 
 struct MultiPlayerPlayerGroup : public UI::Box {
@@ -520,7 +536,7 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 			last_state_ = player_setting.state;
 			for (PlayerSlot slot = 0; slot < s->settings().players.size(); ++slot) {
 				if (slot != id_) {
-					Notifications::publish(NoteGameSettings(slot));
+					Notifications::publish(NoteGameSettings(slot, NoteGameSettings::Action::kUser));
 				}
 			}
 		}
@@ -604,6 +620,5 @@ void MultiPlayerSetupGroup::refresh() {
 			clientbox.add(
 			   &*multi_player_client_groups.at(i), UI::Box::Resizing::kAlign, UI::Align::kCenter);
 		}
-		multi_player_client_groups.at(i)->refresh();
 	}
 }

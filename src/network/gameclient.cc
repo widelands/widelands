@@ -452,7 +452,7 @@ void GameClient::receive_one_player(uint8_t const number, StreamRead& packet) {
 	player.random_ai = packet.unsigned_8() == 1;
 	player.team = packet.unsigned_8();
 	player.shared_in = packet.unsigned_8();
-	Notifications::publish(NoteGameSettings(number));
+	Notifications::publish(NoteGameSettings(number, NoteGameSettings::Action::kPlayer));
 }
 
 void GameClient::receive_one_user(uint32_t const number, StreamRead& packet) {
@@ -470,7 +470,7 @@ void GameClient::receive_one_user(uint32_t const number, StreamRead& packet) {
 	if (static_cast<int32_t>(number) == d->settings.usernum) {
 		d->localplayername = d->settings.users.at(number).name;
 		d->settings.playernum = d->settings.users.at(number).position;
-		Notifications::publish(NoteGameSettings(d->settings.playernum));
+		Notifications::publish(NoteGameSettings(d->settings.playernum, NoteGameSettings::Action::kUser, number));
 	}
 }
 
