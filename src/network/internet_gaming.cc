@@ -604,7 +604,7 @@ void InternetGaming::handle_packet(RecvPacket& packet) {
 			// Client received the ip for the game it wants to join
 			assert(waitcmd_ == IGPCMD_GAME_CONNECT);
 			waitcmd_ = "";
-			// save the received ip, so the client cann connect to the game
+			// Save the received IP(s), so the client can connect to the game
 			NetAddress::parse_ip(&gameips_.first, packet.string(), WIDELANDS_PORT);
 			// If the next value is true, a secondary IP follows
 			if (packet.string() == bool2str(true)) {
