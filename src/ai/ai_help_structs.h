@@ -186,7 +186,7 @@ struct FindNodeAllyOwned {
 // pay speciall attention to fields where mines can be built.
 // Fields should be completely unowned
 struct FindNodeUnownedMineable {
-	FindNodeUnownedMineable(Player* p, Game& g, const int32_t t = INVALID_INDEX);
+	FindNodeUnownedMineable(Player* p, Game& g, int32_t t = INVALID_INDEX);
 
 	bool accept(const Map&, const FCoords& fc) const;
 
@@ -405,6 +405,11 @@ struct BuildingObserver {
 	Widelands::AiModeBuildings aimode_limit_status();
 	bool buildable(Widelands::Player& p);
 
+	// Convenience functions for is_what
+	bool is(BuildingAttribute) const;
+	void set_is(BuildingAttribute);
+	void unset_is(BuildingAttribute);
+
 	char const* name;
 	Widelands::DescriptionIndex id;
 	Widelands::BuildingDescr const* desc;
@@ -414,11 +419,7 @@ struct BuildingObserver {
 	Widelands::BuildingNecessity new_building;
 	uint32_t new_building_overdue;
 	int32_t primary_priority;
-	std::set<BuildingAttribute> is_what;
-	// this is a "shortcut" to above
-	bool is(BuildingAttribute) const;
-	void set_is(BuildingAttribute);
-	void unset_is(BuildingAttribute);
+
 	bool expansion_type;       // military building used that can be used to control area
 	bool fighting_type;        // military building built near enemies
 	bool mountain_conqueror;   // military building built near mountains
@@ -466,6 +467,9 @@ struct BuildingObserver {
 	uint32_t unoccupied_count;
 
 	bool build_material_shortage;
+
+private:
+	std::set<BuildingAttribute> is_what;
 };
 
 struct ProductionSiteObserver {
@@ -633,16 +637,16 @@ struct ManagementData {
 	void review(
 	   uint32_t, PlayerNumber, uint32_t, uint32_t, uint32_t, uint16_t, int16_t, int16_t, uint16_t);
 	void dump_data();
-	// void initialize(uint8_t, Widelands::AiType, bool reinitializing = false);
+	// NOCOM void initialize(uint8_t, Widelands::AiType, bool reinitializing = false);
 	uint16_t new_neuron_id() {
-		next_neuron_id += 1;
+		++next_neuron_id;
 		return next_neuron_id - 1;
 	};
 	void reset_neuron_id() {
 		next_neuron_id = 0;
 	}
 	uint16_t new_bi_neuron_id() {
-		next_bi_neuron_id += 1;
+		++next_bi_neuron_id;
 		return next_bi_neuron_id - 1;
 	};
 	void reset_bi_neuron_id() {

@@ -281,7 +281,7 @@ int32_t BuildingObserver::total_count() const {
 }
 
 bool BuildingObserver::is(BuildingAttribute attribute) const {
-	return is_what.count(attribute);
+	return is_what.count(attribute) == 1;
 }
 
 void BuildingObserver::set_is(const BuildingAttribute attribute) {
@@ -290,7 +290,7 @@ void BuildingObserver::set_is(const BuildingAttribute attribute) {
 
 void BuildingObserver::unset_is(const BuildingAttribute attribute) {
 	is_what.erase(attribute);
-	assert(is_what.count(attribute) == 0);
+	assert(!is(attribute));
 }
 
 Widelands::AiModeBuildings BuildingObserver::aimode_limit_status() {
@@ -303,7 +303,7 @@ Widelands::AiModeBuildings BuildingObserver::aimode_limit_status() {
 	}
 }
 bool BuildingObserver::buildable(Widelands::Player& p) {
-	return is_what.count(BuildingAttribute::kBuildable) && p.is_building_type_allowed(id);
+	return is(BuildingAttribute::kBuildable) && p.is_building_type_allowed(id);
 }
 
 // Computer player does not get notification messages about enemy militarysites

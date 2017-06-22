@@ -117,6 +117,7 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 			disappeared_sites.push_back(site->first);
 		}
 	}
+// NOCOM(#codereview): Why not just erase them straight away and get rid of the disappeared_sites vector?
 	while (!disappeared_sites.empty()) {
 		enemy_sites.erase(disappeared_sites.back());
 		disappeared_sites.pop_back();
@@ -399,7 +400,7 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 				inputs[95] = -player_statistics.enemies_seen_lately_count(gametime);
 
 				site->second.score = 0;
-				for (uint8_t j = 0; j < kFNeuronBitSize; j += 1) {
+				for (uint8_t j = 0; j < kFNeuronBitSize; ++j) {
 					if (management_data.f_neuron_pool[47].get_position(j)) {
 						site->second.score += inputs[j];
 						if (inputs[j] < -10 || inputs[j] > 10) {
@@ -433,7 +434,7 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 				}
 			}
 
-		} else {  // we dont have a flag = site does not exists anymore, let remove the site from out
+		} else {  // we don't have a flag = site does not exist anymore, let#s remove the site from our
 		          // observer list
 			disappeared_sites.push_back(site->first);
 		}
@@ -499,7 +500,7 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 	enemy_sites[best_target].attack_counter += 1;
 
 	last_attack_time_ = gametime;
-	for (int j = 0; j < attackers; j += 1) {
+	for (int j = 0; j < attackers; ++j) {
 		soldier_attacks_log.push(gametime);
 	}
 	persistent_data->last_attacked_player = flag->owner().player_number();
@@ -609,7 +610,7 @@ bool DefaultAI::check_trainingsites(uint32_t gametime) {
 		}
 	}
 
-	// are we willing to train another soldier
+	// are we willing to train another soldier?
 	// bool want_train = true;
 	const PlayerNumber pn = player_number();
 
@@ -735,7 +736,7 @@ bool DefaultAI::check_trainingsites(uint32_t gametime) {
 			}
 
 			int16_t tmp_score = 0;
-			for (uint8_t i = 0; i < kFNeuronBitSize; i += 1) {
+			for (uint8_t i = 0; i < kFNeuronBitSize; ++i) {
 				if (management_data.f_neuron_pool[29].get_position(i)) {
 					tmp_score += inputs[i];
 				}
@@ -778,7 +779,7 @@ bool DefaultAI::check_militarysites(uint32_t gametime) {
 	Map& map = game().map();
 	MilitarySite* ms = militarysites.front().site;
 
-	// Dont do anything if last change took place lately
+	// Don't do anything if last change took place lately
 	if (militarysites.front().last_change + 2 * 60 * 1000 > gametime) {
 		militarysites.push_back(militarysites.front());
 		militarysites.pop_front();
@@ -904,7 +905,7 @@ int32_t DefaultAI::calculate_strength(const std::vector<Widelands::Soldier*>& so
 	for (Soldier* soldier : soldiers) {
 		const SoldierDescr& descr = soldier->descr();
 		health = soldier->get_current_health();
-		// descr.get_base_health() + descr.get_health_incr_per_level() * soldier->get_health_level();
+		// NOCOM descr.get_base_health() + descr.get_health_incr_per_level() * soldier->get_health_level();
 		attack = (descr.get_base_max_attack() - descr.get_base_min_attack()) / 2.f +
 		         descr.get_base_min_attack() +
 		         descr.get_attack_incr_per_level() * soldier->get_attack_level();

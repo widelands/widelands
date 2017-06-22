@@ -232,8 +232,8 @@ private:
 	bool set_inputs_to_zero(const Widelands::ProductionSiteObserver&);
 	void set_inputs_to_max(const Widelands::ProductionSiteObserver&);
 	void stop_site(const Widelands::ProductionSiteObserver&);
-	void initiate_dismantlement(Widelands::ProductionSiteObserver&, uint32_t);
-	// bool set_inputs_to_zero(const Widelands::ProductionSite&);
+	void initiate_dismantling(Widelands::ProductionSiteObserver&, uint32_t);
+	// NOCOM bool set_inputs_to_zero(const Widelands::ProductionSite&);
 	void print_land_stats();
 
 	// Checks whether first value is in range, or lesser then...
@@ -264,10 +264,11 @@ private:
 	// for militarysites (overloading the function)
 	Widelands::BuildingNecessity check_building_necessity(Widelands::BuildingObserver&, uint32_t);
 	void soldier_trained(const Widelands::TrainingSite&);
+	bool critical_mine_unoccupied(uint32_t);
 	SoldiersStatus soldier_status_;
 	int32_t vacant_mil_positions_average_;
 	uint16_t attackers_count_;
-	// uint16_t overfilled_msites_count;
+	// NOCOM uint16_t overfilled_msites_count;
 	Widelands::EventTimeQueue soldier_trained_log;
 	Widelands::EventTimeQueue soldier_attacks_log;
 
@@ -308,7 +309,6 @@ private:
 	std::set<uint32_t> enemy_warehouses;
 	// it will map mined material to observer
 	std::map<int32_t, Widelands::MineTypesObserver> mines_per_type;
-	bool critical_mine_unoccupied(uint32_t);
 	std::vector<uint32_t> spots_avail;
 
 	// used for statistics of buildings
@@ -324,7 +324,7 @@ private:
 	uint32_t msites_built() const;
 	uint32_t military_last_dismantle_;
 	uint32_t military_last_build_;  // sometimes expansions just stops, this is time of last military
-	                                // building build
+	                                // building built
 	int32_t limit_cnt_target(int32_t, int32_t);
 	uint32_t time_of_last_construction_;
 	uint32_t next_mine_construction_due_;
@@ -341,7 +341,7 @@ private:
 	uint32_t last_road_dismantled_;  // uses to prevent too frequent road dismantling
 
 	uint32_t enemy_last_seen_;
-	// int32_t vacant_mil_positions_;  // sum of vacant positions in militarysites and training sites
+	// NOCOM int32_t vacant_mil_positions_;  // sum of vacant positions in militarysites and training sites
 	uint32_t last_attack_time_;
 	// check ms in this interval - will auto-adjust
 	uint32_t enemysites_check_delay_;
@@ -355,12 +355,12 @@ private:
 	// This stores highest priority for new buildings except for militarysites
 	int32_t highest_nonmil_prio_;
 
-	// if the basic economy is not established, there must be non-empty list of remaining basic
+	// if the basic economy is not established, there must be a non-empty list of remaining basic
 	// buildings
 	bool basic_economy_established;
 
 	// id of iron_ore to identify iron mines in mines_per_type map
-	int32_t iron_ore_id = -1;
+	int32_t iron_ore_id = Widelands::INVALID_INDEX;
 
 	// this is a bunch of patterns that have to identify weapons and armors for input queues of
 	// trainingsites
