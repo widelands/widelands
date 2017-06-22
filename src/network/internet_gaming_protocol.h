@@ -89,9 +89,9 @@ static const std::string INTERNET_CLIENT_BOT = "BOT";
  *
  * \note ALL PAYLOADS SHALL BE STRINGS - this is for easier handling and debugging of the
  * communication
- *       between metaserver and client. If an unsigned or signed value has to be send, convert it
+ *       between metaserver and client. If an unsigned or signed value has to be sent, convert it
  * with
- *       boost::lexical_cast<std::string>. Boolean values should be send in form of "true" or
+ *       boost::lexical_cast<std::string>. Boolean values should be sent in form of "true" or
  * "false".
  */
 
@@ -151,7 +151,7 @@ static const std::string IGPCMD_LOGIN = "LOGIN";
  * the
  * place it was before - so if the user was in a running game and only lost connection to the
  * metaserver,
- * but not to the game itself, statistics for that game can still be send and saved.
+ * but not to the game itself, statistics for that game can still be sent and saved.
  * To ensure everything is fine, the login information will still be checked + if a client with the
  * name
  * is still listed as online, the metaserver will ping the client and if the client does not answer
@@ -180,8 +180,8 @@ static const std::string IGPCMD_RELOGIN = "RELOGIN";
  * Tells the metaserver about a secondary IP address.
  *
  * Assuming the client already has a connection over IPv6 and tries to establish a secondary
- * connection over IPv4, this is the only message send.
- * It should be send as soon as a connection is established, immediately followed by closing
+ * connection over IPv4, this is the only message sent.
+ * It should be sent as soon as a connection is established, immediately followed by closing
  * the connection. No answer from the server should be expected.
  *
  * Is sent by the client, with the following payload:
@@ -207,13 +207,13 @@ static const std::string IGPCMD_TELL_IP = "TELL_IP";
 static const std::string IGPCMD_ERROR = "ERROR";
 
 /**
- * This is send by the metaserver to inform the client, about the metaserver time = time(0). Payload
+ * This is sent by the metaserver to inform the client, about the metaserver time = time(0). Payload
  * \li string:    the server time
  */
 static const std::string IGPCMD_TIME = "TIME";
 
 /**
- * This is send by a superuser client to change the motd. The server has to check the permissions
+ * This is sent by a superuser client to change the motd. The server has to check the permissions
  * and if those
  * allow a motd change has to change the motd and afterwards to broadcast the new motd to all
  * clients.
@@ -225,7 +225,7 @@ static const std::string IGPCMD_TIME = "TIME";
 static const std::string IGPCMD_MOTD = "MOTD";
 
 /**
- * This is send by a superuser client as announcement. The server has to check the permissions and
+ * This is sent by a superuser client as announcement. The server has to check the permissions and
  * if those
  * allow an announcement, the server broadcasts the announcement as system chat to all clients.
  * If the client has no right to change the motd, the server disconnects the client with a
@@ -264,7 +264,7 @@ static const std::string IGPCMD_PONG = "PONG";
  * \li string:    the message
  * \li string:    type ("public", "private", "system")
  *
- * \note system messages are the motd (Send by the metaserver to the client, after login (but not
+ * \note system messages are the motd (Sent by the metaserver to the client, after login (but not
  * relogin)
  *       and after the motd got changed) and announcements by superusers.
  */
@@ -369,7 +369,7 @@ static const std::string IGPCMD_GAME_DISCONNECT = "GAME_DISCONNECT";
  * even
  *       retries are not answered, the connection to the metaserver will be closed and a message
  * shall be
- *       send in the newly started game.
+ *       sent in the newly started game.
  *
  * Sent by the metaserver to acknowledge the start without payload.
  */
