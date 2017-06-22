@@ -42,7 +42,6 @@
 #include "network/internet_gaming.h"
 #include "network/network_gaming_messages.h"
 #include "network/network_protocol.h"
-#include "network/network_system.h"
 #include "scripting/lua_interface.h"
 #include "scripting/lua_table.h"
 #include "ui_basic/messagebox.h"
@@ -89,17 +88,13 @@ struct GameClientImpl {
 	std::vector<ChatMessage> chatmessages;
 };
 
-GameClient::GameClient(const std::string& host,
-                       const uint16_t port,
-                       const std::string& playername,
-                       bool internet)
+GameClient::GameClient(const NetAddress& host, const std::string& playername, bool internet)
    : d(new GameClientImpl), internet_(internet) {
-	d->net = NetClient::connect(host, port);
+	d->net = NetClient::connect(host);
 	if (!d->net || !d->net->is_connected()) {
 		throw WLWarning(_("Could not establish connection to host"),
-		                _("Widelands could not establish a connection to the given "
-		                  "address.\n"
-		                  "Either no Widelands server was running at the supposed port or\n"
+		                _("Widelands could not establish a connection to the given address. "
+		                  "Either no Widelands server was running at the supposed port or "
 		                  "the server shut down as you tried to connect."));
 	}
 
@@ -465,8 +460,7 @@ void GameClient::receive_one_user(uint32_t const number, StreamRead& packet) {
 
 	// This might happen, if a users connects after the game starts.
 	if (number == d->settings.users.size()) {
-		UserSettings newuser;
-		d->settings.users.push_back(newuser);
+		d->settings.users.push_back(*new UserSettings());
 	}
 
 	d->settings.users.at(number).name = packet.string();

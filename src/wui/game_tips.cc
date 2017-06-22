@@ -99,20 +99,17 @@ void GameTips::stop() {
 }
 
 void GameTips::show_tip(int32_t index) {
-	// try to load a background
-	const Image* pic_background = g_gr->images().get(BG_IMAGE);
-	assert(pic_background);
-
 	RenderTarget& rt = *g_gr->get_render_target();
 
-	uint16_t w = pic_background->width();
-	uint16_t h = pic_background->height();
+	const Image* pic_background = g_gr->images().get(BG_IMAGE);
+	const int w = pic_background->width();
+	const int h = pic_background->height();
 	Vector2i pt((g_gr->get_xres() - w) / 2, (g_gr->get_yres() - h) / 2);
-	Recti tips_area(pt, w, h);
 	rt.blit(pt, pic_background);
 
-	const Image* rendered_text = UI::g_fh1->render(as_game_tip(tips_[index].text), tips_area.w);
-	rt.blit(tips_area.center().cast<int>() -
-	           Vector2i(rendered_text->width() / 2, rendered_text->height() / 2),
-	        rendered_text);
+	std::shared_ptr<const UI::RenderedText> rendered_text =
+	   UI::g_fh1->render(as_game_tip(tips_[index].text), w);
+	pt = Vector2i((g_gr->get_xres() - rendered_text->width()) / 2,
+	              (g_gr->get_yres() - rendered_text->height()) / 2);
+	rendered_text->draw(rt, pt);
 }

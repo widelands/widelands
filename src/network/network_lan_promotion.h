@@ -21,20 +21,14 @@
 #define WL_NETWORK_NETWORK_LAN_PROMOTION_H
 
 #include <list>
+#include <set>
 
-#ifndef _WIN32
-#include <sys/socket.h>
-#endif
-#include <sys/types.h>
-
-#include "network/network_system.h"
+#include "network/network.h"
 
 #define LAN_PROMOTION_PROTOCOL_VERSION 1
 
 #define LAN_GAME_CLOSED 0
 #define LAN_GAME_OPEN 1
-
-// TODO(Notabilis): Update file for IPv6
 
 struct NetGameInfo {
 	char magic[6];
@@ -47,31 +41,112 @@ struct NetGameInfo {
 };
 
 struct NetOpenGame {
-	in_addr_t address;
-	in_port_t port;
+	NetAddress address;
 	NetGameInfo info;
 };
 
+/**
+ * Base class for UDP networking.
+ * This class is used by derived classes to find open games on the
+ * local network and to announce a just opened game on the local network.
+ * This class tries to create sockets for IPv4 and IPv6.
+ */
 struct LanBase {
 protected:
-	LanBase();
+	/**
+	 * Tries to start a socket on the given port.
+	 * Sockets for IPv4 and IPv6 are started.
+	 * When both fail, report_network_error() is called.
+	 * \param port The port to listen on.
+	 */
+	LanBase(uint16_t port);
+
 	~LanBase();
 
-	void bind(uint16_t);
+	/**
+	 * Returns whether data is available to be read.
+	 * \return \c True when receive() will return data, \c false otherwise.
+	 */
+	bool is_available();
 
-	bool avail();
+	/**
+	 * Returns whether at least one of the sockets is open.
+	 * If this returns \c false, you probably have a problem.
+	 * \return \c True when a socket is ready, \c false otherwise.
+	 */
+	bool is_open();
 
-	ssize_t receive(void*, size_t, sockaddr_in*);
+	/**
+	 * Tries to receive some data.
+	 * \param[out] buf The buffer to read data into.
+	 * \param len The length of the buffer.
+	 * \param[out] addr The address we received data from. Since UDP is a connection-less
+	 *                  protocol, each receive() might receive data from another address.
+	 * \return How many bytes have been written to \c buf. If 0 is returned there either was no data
+	 *         available (check before with avail()) or there was some error (check with is_open())
+	 */
+	ssize_t receive(void* buf, size_t len, NetAddress* addr);
 
-	void send(void const*, size_t, sockaddr_in const*);
-	void broadcast(void const*, size_t, uint16_t);
+	/**
+	 * Sends data to a specified address.
+	 * \param buf The data to send.
+	 * \param len The length of the buffer.
+	 * \param addr The address to send to.
+	 */
+	bool send(void const* buf, size_t len, const NetAddress& addr);
+
+	/**
+	 * Broadcast some data in the local network.
+	 * \param buf The data to send.
+	 * \param len The length of the buffer.
+	 * \param port The port to send to. No address is required.
+	 */
+	bool broadcast(void const* buf, size_t len, uint16_t port);
+
+	/**
+	 * Throws a WLWarning exception to jump back to the main menu.
+	 * Calling this on network errors is in the responsibility of derived classes.
+	 * (Most of the time, aborting makes sense when an error occurred. But e.g. in
+	 * the destructor simply ignoring the error is okay.)
+	 */
+	void report_network_error();
 
 private:
-	int32_t sock;
+	/**
+	 * Opens a listening UDP socket.
+	 * \param[out] The socket to open. The object has to be created but the socket not opened before.
+	 *             If it already has been opened before, nothing will be done.
+	 * \param version Whether a IPv4 or IPv6 socket should be opened.
+	 * \param port The port to listen on.
+	 */
+	void
+	start_socket(boost::asio::ip::udp::socket* socket, boost::asio::ip::udp version, uint16_t port);
 
-	std::list<in_addr_t> broadcast_addresses;
+	/**
+	 * Closes the given socket.
+	 * Does nothing if the socket already has been closed.
+	 * \param socket The socket to close.
+	 */
+	void close_socket(boost::asio::ip::udp::socket* socket);
+
+	/// No idea what this does. I think it is only really used when asynchronous operations are done.
+	boost::asio::io_service io_service;
+	/// The socket for IPv4.
+	boost::asio::ip::udp::socket socket_v4;
+	/// The socket for IPv6.
+	boost::asio::ip::udp::socket socket_v6;
+	/// The found broadcast addresses for IPv4.
+	/// No addresses for v6, there is only one fixed address.
+	std::set<std::string> broadcast_addresses_v4;
+#ifdef __APPLE__
+	/// Apple forces us to define which interface to broadcast through.
+	std::set<unsigned int> interface_indices_v6;
+#endif  // __APPLE__
 };
 
+/**
+ * Used to promote opened games locally.
+ */
 struct LanGamePromoter : public LanBase {
 	LanGamePromoter();
 	~LanGamePromoter();
@@ -85,6 +160,9 @@ private:
 	bool needupdate;
 };
 
+/**
+ * Used to listen for open games while in the LAN-screen.
+ */
 struct LanGameFinder : LanBase {
 	enum { GameOpened, GameClosed, GameUpdated };
 

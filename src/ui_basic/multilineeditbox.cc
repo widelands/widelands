@@ -91,7 +91,7 @@ MultilineEditbox::MultilineEditbox(Panel* parent,
                                    const Image* button_background)
    : Panel(parent, x, y, w, h), d_(new Data(*this, button_background)) {
 	d_->background = background;
-	d_->lineheight = text_height(g_fh1->fontset()->representative_character(), UI_FONT_SIZE_SMALL);
+	d_->lineheight = text_height();
 	set_handle_mouse(true);
 	set_can_focus(true);
 	set_thinks(false);
@@ -237,9 +237,10 @@ bool MultilineEditbox::handle_key(bool const down, SDL_Keysym const code) {
 			// Let the panel handle the tab key
 			return get_parent()->handle_key(true, code);
 		case SDLK_KP_PERIOD:
-			if (code.mod & KMOD_NUM)
+			if (code.mod & KMOD_NUM) {
 				break;
-		/* no break */
+			}
+			FALLS_THROUGH;
 		case SDLK_DELETE:
 			if (d_->cursor_pos < d_->text.size()) {
 				d_->erase_bytes(d_->cursor_pos, d_->next_char(d_->cursor_pos));
@@ -258,7 +259,7 @@ bool MultilineEditbox::handle_key(bool const down, SDL_Keysym const code) {
 			if (code.mod & KMOD_NUM) {
 				break;
 			}
-		/* no break */
+			FALLS_THROUGH;
 		case SDLK_LEFT: {
 			if (code.mod & (KMOD_LCTRL | KMOD_RCTRL)) {
 				uint32_t newpos = d_->prev_char(d_->cursor_pos);
@@ -281,7 +282,7 @@ bool MultilineEditbox::handle_key(bool const down, SDL_Keysym const code) {
 			if (code.mod & KMOD_NUM) {
 				break;
 			}
-		/* no break */
+			FALLS_THROUGH;
 		case SDLK_RIGHT:
 			if (code.mod & (KMOD_LCTRL | KMOD_RCTRL)) {
 				uint32_t newpos = d_->next_char(d_->cursor_pos);
@@ -299,7 +300,7 @@ bool MultilineEditbox::handle_key(bool const down, SDL_Keysym const code) {
 			if (code.mod & KMOD_NUM) {
 				break;
 			}
-		/* no break */
+			FALLS_THROUGH;
 		case SDLK_DOWN:
 			if (d_->cursor_pos < d_->text.size()) {
 				d_->refresh_ww();
@@ -328,7 +329,7 @@ bool MultilineEditbox::handle_key(bool const down, SDL_Keysym const code) {
 			if (code.mod & KMOD_NUM) {
 				break;
 			}
-		/* no break */
+			FALLS_THROUGH;
 		case SDLK_UP:
 			if (d_->cursor_pos > 0) {
 				d_->refresh_ww();
@@ -355,7 +356,7 @@ bool MultilineEditbox::handle_key(bool const down, SDL_Keysym const code) {
 			if (code.mod & KMOD_NUM) {
 				break;
 			}
-		/* no break */
+			FALLS_THROUGH;
 		case SDLK_HOME:
 			if (code.mod & (KMOD_LCTRL | KMOD_RCTRL)) {
 				d_->set_cursor_pos(0);
@@ -373,7 +374,7 @@ bool MultilineEditbox::handle_key(bool const down, SDL_Keysym const code) {
 			if (code.mod & KMOD_NUM) {
 				break;
 			}
-		/* no break */
+			FALLS_THROUGH;
 		case SDLK_END:
 			if (code.mod & (KMOD_LCTRL | KMOD_RCTRL)) {
 				d_->set_cursor_pos(d_->text.size());

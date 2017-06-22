@@ -882,8 +882,8 @@ void Player::enemyflagaction(Flag& flag, PlayerNumber const attacker, uint32_t c
 		log("enemyflagaction: count is 0\n");
 	else if (is_hostile(flag.owner())) {
 		if (Building* const building = flag.get_building()) {
-			if (upcast(Attackable, attackable, building)) {
-				if (attackable->can_attack()) {
+			if (const AttackTarget* attack_target = building->attack_target()) {
+				if (attack_target->can_be_attacked()) {
 					std::vector<Soldier*> attackers;
 					find_attack_soldiers(flag, &attackers, count);
 					assert(attackers.size() <= count);
@@ -982,6 +982,7 @@ void Player::rediscover_node(const Map& map,
 			tr_field.terrains.d = tr.field->terrain_d();
 			tr_field.roads &= ~(RoadType::kMask << RoadType::kSouthWest);
 			tr_field.roads |= RoadType::kMask << RoadType::kSouthWest & tr.field->get_roads();
+			tr_field.owner = tr.field->get_owned_by();
 		}
 	}
 	{  //  discover both triangles and the SE edge of the top left  neighbour
@@ -991,6 +992,7 @@ void Player::rediscover_node(const Map& map,
 			tl_field.terrains = tl.field->get_terrains();
 			tl_field.roads &= ~(RoadType::kMask << RoadType::kSouthEast);
 			tl_field.roads |= RoadType::kMask << RoadType::kSouthEast & tl.field->get_roads();
+			tl_field.owner = tl.field->get_owned_by();
 		}
 	}
 	{  //  discover the R triangle and the  E edge of the     left  neighbour
@@ -1000,6 +1002,7 @@ void Player::rediscover_node(const Map& map,
 			l_field.terrains.r = l.field->terrain_r();
 			l_field.roads &= ~(RoadType::kMask << RoadType::kEast);
 			l_field.roads |= RoadType::kMask << RoadType::kEast & l.field->get_roads();
+			l_field.owner = l.field->get_owned_by();
 		}
 	}
 }

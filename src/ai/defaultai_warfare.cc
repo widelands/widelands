@@ -122,7 +122,7 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 		// get list of immovable around this our military site
 		std::vector<ImmovableFound> immovables;
 		map.find_immovables(Area<FCoords>(f, (vision + 3 < 13) ? 13 : vision + 3), &immovables,
-		                    FindImmovableAttackable());
+		                    FindImmovableAttackTarget());
 
 		for (uint32_t j = 0; j < immovables.size(); ++j) {
 			if (upcast(MilitarySite const, bld, immovables.at(j).object)) {
@@ -229,7 +229,7 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 				defenders_strength = calculate_strength(defenders);
 
 				flag = &bld->base_flag();
-				if (is_visible && bld->can_attack()) {
+				if (is_visible && bld->attack_target()->can_be_attacked()) {
 					is_attackable = true;
 				}
 				owner_number = bld->owner().player_number();
@@ -244,7 +244,7 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 
 				flag = &Wh->base_flag();
 				is_warehouse = true;
-				if (is_visible && Wh->can_attack()) {
+				if (is_visible && Wh->attack_target()->can_be_attacked()) {
 					is_attackable = true;
 				}
 				owner_number = Wh->owner().player_number();

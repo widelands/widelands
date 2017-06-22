@@ -281,7 +281,7 @@ bool InteractivePlayer::handle_key(bool const down, SDL_Keysym const code) {
 		case SDLK_KP_7:
 			if (code.mod & KMOD_NUM)
 				break;
-		/* no break */
+			FALLS_THROUGH;
 		case SDLK_HOME:
 			scroll_to_field(game().map().get_starting_pos(player_number_), Transition::Smooth);
 			return true;

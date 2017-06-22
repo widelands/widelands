@@ -43,6 +43,147 @@
 
 namespace Widelands {
 
+bool MilitarySite::AttackTarget::can_be_attacked() const {
+	return military_site_->didconquer_;
+}
+
+void MilitarySite::AttackTarget::enemy_soldier_approaches(const Soldier& enemy) const {
+	auto& owner = military_site_->owner();
+	Game& game = dynamic_cast<Game&>(owner.egbase());
+	Map& map = game.map();
+	if (enemy.get_owner() == &owner || enemy.get_battle() ||
+	    military_site_->descr().get_conquers() <=
+	       map.calc_distance(enemy.get_position(), military_site_->get_position()))
+		return;
+
+	if (map.find_bobs(Area<FCoords>(map.get_fcoords(military_site_->base_flag().get_position()), 2),
+	                  nullptr, FindBobEnemySoldier(&owner)))
+		return;
+
+	// We're dealing with a soldier that we might want to keep busy
+	// Now would be the time to implement some player-definable
+	// policy as to how many soldiers are allowed to leave as defenders
+	std::vector<Soldier*> present = military_site_->present_soldiers();
+
+	if (1 < present.size()) {
+		for (Soldier* temp_soldier : present) {
+			if (!military_site_->has_soldier_job(*temp_soldier)) {
+				SoldierJob sj;
+				sj.soldier = temp_soldier;
+				sj.enemy = &enemy;
+				sj.stayhome = false;
+				military_site_->soldierjobs_.push_back(sj);
+				temp_soldier->update_task_buildingwork(game);
+				return;
+			}
+		}
+	}
+
+	// Inform the player, that we are under attack by adding a new entry to the
+	// message queue - a sound will automatically be played.
+	military_site_->notify_player(game, true);
+}
+
+AttackTarget::AttackResult MilitarySite::AttackTarget::attack(Soldier* enemy) const {
+	Game& game = dynamic_cast<Game&>(military_site_->owner().egbase());
+
+	std::vector<Soldier*> present = military_site_->present_soldiers();
+	Soldier* defender = nullptr;
+
+	if (!present.empty()) {
+		// Find soldier with greatest health
+		uint32_t current_max = 0;
+		for (Soldier* temp_soldier : present) {
+			if (temp_soldier->get_current_health() > current_max) {
+				defender = temp_soldier;
+				current_max = defender->get_current_health();
+			}
+		}
+	} else {
+		// If one of our stationed soldiers is currently walking into the
+		// building, give us another chance.
+		std::vector<Soldier*> stationed = military_site_->stationed_soldiers();
+		for (Soldier* temp_soldier : stationed) {
+			if (temp_soldier->get_position() == military_site_->get_position()) {
+				defender = temp_soldier;
+				break;
+			}
+		}
+	}
+
+	if (defender) {
+		military_site_->pop_soldier_job(defender);  // defense overrides all other jobs
+
+		SoldierJob sj;
+		sj.soldier = defender;
+		sj.enemy = enemy;
+		sj.stayhome = true;
+		military_site_->soldierjobs_.push_back(sj);
+
+		defender->update_task_buildingwork(game);
+
+		// Inform the player, that we are under attack by adding a new entry to
+		// the message queue - a sound will automatically be played.
+		military_site_->notify_player(game);
+
+		return AttackTarget::AttackResult::DefenderLaunched;
+	}
+
+	// The enemy has defeated our forces, we should inform the player
+	const Coords coords = military_site_->get_position();
+	{
+		military_site_->send_message(game, Message::Type::kWarfareSiteLost,
+		                             /** TRANSLATORS: Militarysite lost (taken/destroyed by enemy) */
+		                             pgettext("building", "Lost!"),
+		                             military_site_->descr().icon_filename(), _("Militarysite lost!"),
+		                             military_site_->descr().defeated_enemy_str_, false);
+	}
+
+	// Now let's see whether the enemy conquers our militarysite, or whether
+	// we still hold the bigger military presence in that area (e.g. if there
+	// is a fortress one or two points away from our sentry, the fortress has
+	// a higher presence and thus the enemy can just burn down the sentry.
+	if (military_site_->military_presence_kept(game)) {
+		// Okay we still got the higher military presence, so the attacked
+		// militarysite will be destroyed.
+		military_site_->set_defeating_player(enemy->owner().player_number());
+		military_site_->schedule_destroy(game);
+		return AttackTarget::AttackResult::Defenseless;
+	}
+
+	// The enemy conquers the building
+	// In fact we do not conquer it, but place a new building of same type at
+	// the old location.
+
+	Building::FormerBuildings former_buildings = military_site_->old_buildings_;
+
+	// The enemy conquers the building
+	// In fact we do not conquer it, but place a new building of same type at
+	// the old location.
+	Player* enemyplayer = enemy->get_owner();
+
+	// Now we destroy the old building before we place the new one.
+	// Waiting for the destroy playercommand causes crashes with the building window, so we need to
+	// close it right away.
+	Notifications::publish(NoteBuilding(military_site_->serial(), NoteBuilding::Action::kDeleted));
+	military_site_->set_defeating_player(enemyplayer->player_number());
+	military_site_->schedule_destroy(game);
+
+	Building* const newbuilding = &enemyplayer->force_building(coords, former_buildings);
+	upcast(MilitarySite, newsite, newbuilding);
+	newsite->reinit_after_conqueration(game);
+
+	// Of course we should inform the victorious player as well
+	newsite->send_message(
+	   game, Message::Type::kWarfareSiteDefeated,
+	   /** TRANSLATORS: Message title. */
+	   /** TRANSLATORS: If you run out of space, you can also translate this as "Success!" */
+	   _("Enemy Defeated!"), newsite->descr().icon_filename(), _("Enemy at site defeated!"),
+	   newsite->descr().defeated_you_str_, true);
+
+	return AttackTarget::AttackResult::Defenseless;
+}
+
 /**
   * The contents of 'table' are documented in
   * /data/tribes/buildings/militarysites/atlanteans/castle/init.lua
@@ -91,6 +232,7 @@ class MilitarySite
 
 MilitarySite::MilitarySite(const MilitarySiteDescr& ms_descr)
    : Building(ms_descr),
+     attack_target_(this),
      didconquer_(false),
      capacity_(ms_descr.get_max_number_of_soldiers()),
      nexthealtime_(0),
@@ -98,6 +240,7 @@ MilitarySite::MilitarySite(const MilitarySiteDescr& ms_descr)
      soldier_upgrade_try_(false),
      doing_upgrade_request_(false) {
 	next_swap_soldiers_time_ = 0;
+	set_attack_target(&attack_target_);
 }
 
 MilitarySite::~MilitarySite() {
@@ -682,142 +825,6 @@ void MilitarySite::conquer_area(EditorGameBase& egbase) {
 	   owner().player_number(),
 	   Area<FCoords>(egbase.map().get_fcoords(get_position()), descr().get_conquers())));
 	didconquer_ = true;
-}
-
-bool MilitarySite::can_attack() {
-	return didconquer_;
-}
-
-void MilitarySite::aggressor(Soldier& enemy) {
-	Game& game = dynamic_cast<Game&>(owner().egbase());
-	Map& map = game.map();
-	if (enemy.get_owner() == &owner() || enemy.get_battle() ||
-	    descr().get_conquers() <= map.calc_distance(enemy.get_position(), get_position()))
-		return;
-
-	if (map.find_bobs(Area<FCoords>(map.get_fcoords(base_flag().get_position()), 2), nullptr,
-	                  FindBobEnemySoldier(&owner())))
-		return;
-
-	// We're dealing with a soldier that we might want to keep busy
-	// Now would be the time to implement some player-definable
-	// policy as to how many soldiers are allowed to leave as defenders
-	std::vector<Soldier*> present = present_soldiers();
-
-	if (1 < present.size()) {
-		for (Soldier* temp_soldier : present) {
-			if (!has_soldier_job(*temp_soldier)) {
-				SoldierJob sj;
-				sj.soldier = temp_soldier;
-				sj.enemy = &enemy;
-				sj.stayhome = false;
-				soldierjobs_.push_back(sj);
-				temp_soldier->update_task_buildingwork(game);
-				return;
-			}
-		}
-	}
-
-	// Inform the player, that we are under attack by adding a new entry to the
-	// message queue - a sound will automatically be played.
-	notify_player(game, true);
-}
-
-bool MilitarySite::attack(Soldier& enemy) {
-	Game& game = dynamic_cast<Game&>(owner().egbase());
-
-	std::vector<Soldier*> present = present_soldiers();
-	Soldier* defender = nullptr;
-
-	if (!present.empty()) {
-		// Find soldier with greatest health
-		uint32_t current_max = 0;
-		for (Soldier* temp_soldier : present) {
-			if (temp_soldier->get_current_health() > current_max) {
-				defender = temp_soldier;
-				current_max = defender->get_current_health();
-			}
-		}
-	} else {
-		// If one of our stationed soldiers is currently walking into the
-		// building, give us another chance.
-		std::vector<Soldier*> stationed = stationed_soldiers();
-		for (Soldier* temp_soldier : stationed) {
-			if (temp_soldier->get_position() == get_position()) {
-				defender = temp_soldier;
-				break;
-			}
-		}
-	}
-
-	if (defender) {
-		pop_soldier_job(defender);  // defense overrides all other jobs
-
-		SoldierJob sj;
-		sj.soldier = defender;
-		sj.enemy = &enemy;
-		sj.stayhome = true;
-		soldierjobs_.push_back(sj);
-
-		defender->update_task_buildingwork(game);
-
-		// Inform the player, that we are under attack by adding a new entry to
-		// the message queue - a sound will automatically be played.
-		notify_player(game);
-
-		return true;
-	} else {
-		// The enemy has defeated our forces, we should inform the player
-		const Coords coords = get_position();
-		{
-			send_message(game, Message::Type::kWarfareSiteLost,
-			             /** TRANSLATORS: Militarysite lost (taken/destroyed by enemy) */
-			             pgettext("building", "Lost!"), descr().icon_filename(),
-			             _("Militarysite lost!"), descr().defeated_enemy_str_, false);
-		}
-
-		// Now let's see whether the enemy conquers our militarysite, or whether
-		// we still hold the bigger military presence in that area (e.g. if there
-		// is a fortress one or two points away from our sentry, the fortress has
-		// a higher presence and thus the enemy can just burn down the sentry.
-		if (military_presence_kept(game)) {
-			// Okay we still got the higher military presence, so the attacked
-			// militarysite will be destroyed.
-			set_defeating_player(enemy.owner().player_number());
-			schedule_destroy(game);
-			return false;
-		}
-
-		// The enemy conquers the building
-		// In fact we do not conquer it, but place a new building of same type at
-		// the old location.
-
-		Building::FormerBuildings former_buildings = old_buildings_;
-
-		// The enemy conquers the building
-		// In fact we do not conquer it, but place a new building of same type at
-		// the old location.
-		Player* enemyplayer = enemy.get_owner();
-
-		// Now we destroy the old building before we place the new one.
-		set_defeating_player(enemyplayer->player_number());
-		schedule_destroy(game);
-
-		enemyplayer->force_building(coords, former_buildings);
-		BaseImmovable* const newimm = game.map()[coords].get_immovable();
-		upcast(MilitarySite, newsite, newimm);
-		newsite->reinit_after_conqueration(game);
-
-		// Of course we should inform the victorious player as well
-		newsite->send_message(
-		   game, Message::Type::kWarfareSiteDefeated,
-		   /** TRANSLATORS: Message title. */
-		   /** TRANSLATORS: If you run out of space, you can also translate this as "Success!" */
-		   _("Enemy Defeated!"), newsite->descr().icon_filename(), _("Enemy at site defeated!"),
-		   newsite->descr().defeated_you_str_, true);
-
-		return false;
-	}
 }
 
 /// Initialises the militarysite after it was "conquered" (the old was replaced)

@@ -3,14 +3,14 @@
 # 
 # Translators:
 # xno, 2016
-# Guybrush88 <erpizzo@alice.it>, 2016
+# Guybrush88 <erpizzo@alice.it>, 2016-2017
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-01-28 21:57+0000\n"
-"PO-Revision-Date: 2017-01-28 21:59+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2017-05-12 13:53+0000\n"
+"PO-Revision-Date: 2017-05-15 15:16+0000\n"
+"Last-Translator: Guybrush88 <erpizzo@alice.it>\n"
 "Language-Team: Italian (http://www.transifex.com/widelands/widelands/language/it/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -155,7 +155,7 @@ msgstr "Introduzione"
 #: ../../data/scripting/editor/editor_help.lua:71
 #: ../../data/scripting/editor/tips.lua:16
 msgid "Tips"
-msgstr ""
+msgstr "Suggerimenti"
 
 #: ../../data/scripting/editor/editor_help.lua:81
 msgid "Terrains"

@@ -25,7 +25,6 @@
 #include "graphic/text_constants.h"
 #include "graphic/text_layout.h"
 #include "ui_basic/mouse_constants.h"
-#include "wlapplication.h"
 
 namespace UI {
 
@@ -59,9 +58,7 @@ Button::Button  //  for textual buttons. If h = 0, h will resize according to th
      clr_down_(229, 161, 2) {
 	// Automatically resize for font height and give it a margin.
 	if (h < 1) {
-		int new_height =
-		   UI::g_fh1->render(as_uifont(UI::g_fh1->fontset()->representative_character()))->height() +
-		   4;
+		int new_height = text_height() + 4;
 		set_desired_size(w, new_height);
 		set_size(w, new_height);
 	}
@@ -208,13 +205,12 @@ void Button::draw(RenderTarget& dst) {
 
 	} else if (title_.length()) {
 		//  Otherwise draw title string centered
-		const Image* entry_text_im =
+		std::shared_ptr<const UI::RenderedText> rendered_text =
 		   autofit_ui_text(title_, get_inner_w() - 2 * kButtonImageMargin,
 		                   is_monochrome ? UI_FONT_CLR_DISABLED : UI_FONT_CLR_FG);
 		// Blit on pixel boundary (not float), so that the text is blitted pixel perfect.
-		dst.blit(
-		   Vector2i((get_w() - entry_text_im->width()) / 2, (get_h() - entry_text_im->height()) / 2),
-		   entry_text_im);
+		rendered_text->draw(dst, Vector2i((get_w() - rendered_text->width()) / 2,
+		                                  (get_h() - rendered_text->height()) / 2));
 	}
 
 	//  draw border

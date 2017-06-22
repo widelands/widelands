@@ -95,7 +95,10 @@ InternetGaming& InternetGaming::ref() {
 void InternetGaming::initialize_connection() {
 	// First of all try to connect to the metaserver
 	log("InternetGaming: Connecting to the metaserver.\n");
-	net = NetClient::connect(meta_, port_);
+	NetAddress addr;
+	net.reset();
+	if (NetAddress::resolve_to_v4(&addr, meta_, port_))
+		net = NetClient::connect(addr);
 	if (!net || !net->is_connected())
 		throw WLWarning(_("Could not establish connection to host"),
 		                _("Widelands could not establish a connection to the given address.\n"
@@ -216,10 +219,12 @@ bool InternetGaming::relogin() {
 void InternetGaming::logout(const std::string& msgcode) {
 
 	// Just in case the metaserver is listening on the socket - tell him we break up with him ;)
-	SendPacket s;
-	s.string(IGPCMD_DISCONNECT);
-	s.string(msgcode);
-	net->send(s);
+	if (net && net->is_connected()) {
+		SendPacket s;
+		s.string(IGPCMD_DISCONNECT);
+		s.string(msgcode);
+		net->send(s);
+	}
 
 	const std::string& msg = InternetGamingMessages::get_message(msgcode);
 	log("InternetGaming: logout(%s)\n", msg.c_str());
@@ -262,16 +267,20 @@ void InternetGaming::handle_metaserver_communication() {
 	if (error())
 		return;
 	try {
-		assert(net != nullptr);
-		// Check if the connection is still open
-		if (!net->is_connected()) {
-			handle_failed_read();
-			return;
-		}
-		// Process all available packets
-		RecvPacket packet;
-		while (net->try_receive(&packet)) {
-			handle_packet(packet);
+		while (net != nullptr) {
+			// Check if the connection is still open
+			if (!net->is_connected()) {
+				handle_failed_read();
+				return;
+			}
+			// Process all available packets
+			RecvPacket packet;
+			if (net->try_receive(&packet)) {
+				handle_packet(packet);
+			} else {
+				// Nothing more to receive
+				break;
+			}
 		}
 	} catch (const std::exception& e) {
 		logout((boost::format(_("Something went wrong: %s")) % e.what()).str());

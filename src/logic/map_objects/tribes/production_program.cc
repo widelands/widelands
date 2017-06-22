@@ -263,9 +263,8 @@ void ProductionProgram::parse_ware_type_group(char*& parameters,
 				                    "the specified ware type(s) is only %u, so the group can "
 				                    "never be fulfilled by the site",
 				                    count, count_max);
-			//  fallthrough
 		}
-		/* no break */
+			FALLS_THROUGH;
 		case '\0':
 		case ' ':
 			group.second = count;

@@ -119,7 +119,7 @@ void WordWrap::compute_end_of_line(const std::string& text,
 	}
 
 	// Optimism: perhaps the entire line fits?
-	if (text_width(text.substr(line_start, orig_end - line_start), fontsize_) <=
+	if (uint32_t(text_width(text.substr(line_start, orig_end - line_start), fontsize_)) <=
 	    wrapwidth_ - safety_margin) {
 		line_end = orig_end;
 		next_line_start = orig_end + 1;
@@ -192,7 +192,8 @@ void WordWrap::compute_end_of_line(const std::string& text,
 	// Now make sure that it really fits.
 	std::string::size_type test_cutoff = line_start + end * 2 / 3;
 	while ((end > 0) && (static_cast<uint32_t>(line_start + end) > test_cutoff)) {
-		if (text_width(text.substr(line_start, end), fontsize_) > wrapwidth_ - safety_margin) {
+		if (uint32_t(text_width(text.substr(line_start, end), fontsize_)) >
+		    wrapwidth_ - safety_margin) {
 			--end;
 		} else {
 			break;
@@ -223,7 +224,7 @@ bool WordWrap::line_fits(const std::string& text, uint32_t safety_margin) const 
 	// calc_width_for_wrapping is fast, but it will underestimate the width.
 	// So, we test again with text_width to make sure that the line really fits.
 	return quick_width(i18n::make_ligatures(text.c_str())) <= wrapwidth_ - safety_margin &&
-	       text_width(text, fontsize_) <= wrapwidth_ - safety_margin;
+	       uint32_t(text_width(text, fontsize_)) <= wrapwidth_ - safety_margin;
 }
 
 /**
@@ -247,12 +248,7 @@ uint32_t WordWrap::width() const {
  * Compute the total height of the word-wrapped text.
  */
 uint32_t WordWrap::height() const {
-	uint16_t fontheight = 0;
-	if (!lines_.empty()) {
-		fontheight = text_height(lines_[0].text, fontsize_);
-	}
-
-	return fontheight * (lines_.size()) + 2 * kLineMargin;
+	return text_height(fontsize_) * (lines_.size()) + 2 * kLineMargin;
 }
 
 /**
@@ -305,9 +301,9 @@ void WordWrap::draw(RenderTarget& dst, Vector2i where, Align align, uint32_t car
 
 	Align alignment = mirror_alignment(align);
 
-	uint16_t fontheight = text_height(lines_[0].text, fontsize_);
+	const int fontheight = text_height(fontsize_);
 	for (uint32_t line = 0; line < lines_.size(); ++line, where.y += fontheight) {
-		if (where.y >= dst.height() || int32_t(where.y + fontheight) <= 0)
+		if (where.y >= dst.height() || (where.y + fontheight) <= 0)
 			continue;
 
 		Vector2i point(where.x, where.y);
@@ -316,10 +312,10 @@ void WordWrap::draw(RenderTarget& dst, Vector2i where, Align align, uint32_t car
 			point.x += wrapwidth_ - kLineMargin;
 		}
 
-		const Image* entry_text_im = UI::g_fh1->render(
+		std::shared_ptr<const UI::RenderedText> rendered_text = UI::g_fh1->render(
 		   as_editorfont(lines_[line].text, fontsize_ - UI::g_fh1->fontset()->size_offset(), color_));
-		UI::correct_for_align(alignment, entry_text_im->width(), &point);
-		dst.blit(point, entry_text_im);
+		UI::correct_for_align(alignment, rendered_text->width(), &point);
+		rendered_text->draw(dst, point);
 
 		if (draw_caret_ && line == caretline) {
 			std::string line_to_caret = lines_[line].text.substr(0, caretpos);
