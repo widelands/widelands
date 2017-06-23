@@ -67,6 +67,31 @@
 #define DIAG_OFF(x) GCC_DIAG_OFF(x) CLANG_DIAG_OFF(x)
 #define DIAG_ON(x) GCC_DIAG_ON(x) CLANG_DIAG_ON(x)
 
+// For switch statements: Tell gcc7 and clang that a fallthrough is intended
+// https://developers.redhat.com/blog/2017/03/10/wimplicit-fallthrough-in-gcc-7/
+#ifdef __clang__
+#define FALLS_THROUGH /* Falls through */ [[clang::fallthrough]]
+#elif __GNUC__ >= 7
+#define FALLS_THROUGH /* Falls through */ [[gnu::fallthrough]]
+#else
+#define FALLS_THROUGH /* Falls through */
+#endif
+
+// Compilers can't handle polymorphy with printf %p, expecting void* only.
+// Surround ONLY printf statements that contain %p with these macros.
+#ifdef __clang__
+#if __has_warning("-Wformat-pedantic")  // Older Clang versions don't have -Wformat-pedantic
+#define FORMAT_WARNINGS_OFF CLANG_DIAG_OFF("-Wformat") CLANG_DIAG_OFF("-Wformat-pedantic")
+#define FORMAT_WARNINGS_ON CLANG_DIAG_ON("-Wformat") CLANG_DIAG_ON("-Wformat-pedantic")
+#else
+#define FORMAT_WARNINGS_OFF CLANG_DIAG_OFF("-Wformat")
+#define FORMAT_WARNINGS_ON CLANG_DIAG_ON("-Wformat")
+#endif
+#else
+#define FORMAT_WARNINGS_OFF GCC_DIAG_OFF("-Wformat")
+#define FORMAT_WARNINGS_ON GCC_DIAG_ON("-Wformat")
+#endif
+
 // disallow copying or assigning a class
 #define DISALLOW_COPY_AND_ASSIGN(TypeName)                                                         \
 	TypeName(const TypeName&) = delete;                                                             \

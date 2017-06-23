@@ -1,13 +1,13 @@
-include "scripting/formatting.lua"
+include "scripting/richtext.lua"
 
 won_game = {
   title = _"Congratulations!",
-  body = rt(p(_"You have won this game!"))
+  body = p(_"You have won this game!")
 }
 
 lost_game = {
   title = _"You are defeated!",
-  body = rt(p(_"You lost your last warehouse and are therefore defeated. You may continue as spectator if you want."))
+  body = p(_"You lost your last warehouse and are therefore defeated. You may continue as spectator if you want.")
 }
 
 won_game_over = {
@@ -23,5 +23,5 @@ lost_game_over = {
 game_status = {
   title = _"Status",
   -- TRANSLATORS: This is an overview for all players.
-  body = h3(_"Player overview:")
+  body = h2(_"Player overview:")
 }
