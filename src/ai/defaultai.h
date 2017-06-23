@@ -218,6 +218,7 @@ private:
 	                                       const Widelands::BuildingObserver&);
 
 	Widelands::EconomyObserver* get_economy_observer(Widelands::Economy&);
+	uint8_t count_buildings_with_attribute(Widelands::BuildingAttribute);
 	Widelands::BuildingObserver& get_building_observer(char const*);
 	bool has_building_observer(char const*);
 	Widelands::BuildingObserver& get_building_observer(Widelands::BuildingAttribute);

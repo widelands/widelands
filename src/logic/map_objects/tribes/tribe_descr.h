@@ -105,6 +105,8 @@ public:
 	DescriptionIndex headquarters() const;
 	DescriptionIndex port() const;
 	DescriptionIndex barracks() const;
+	DescriptionIndex bakery() const;
+	DescriptionIndex logrefiner() const;
 
 	const std::vector<DescriptionIndex>& trainingsites() const;
 	const std::vector<DescriptionIndex>& worker_types_without_cost() const;
@@ -187,6 +189,8 @@ private:
 	DescriptionIndex headquarters_;  // The tribe's default headquarters, needed by the editor
 	DescriptionIndex port_;          // The port that this tribe uses
 	DescriptionIndex barracks_;      // The barracks to create soldiers
+	DescriptionIndex bakery_;        // The bakery to prepare bread
+	DescriptionIndex logrefiner_;    // The log processor to cut wood to plants
 	std::vector<DescriptionIndex> worker_types_without_cost_;
 	std::vector<DescriptionIndex> trainingsites_;
 	// Order and positioning of wares in the warehouse display

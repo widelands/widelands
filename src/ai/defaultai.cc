@@ -498,13 +498,6 @@ void DefaultAI::late_initialization() {
 
 	const DescriptionIndex& nr_buildings = game().tribes().nrbuildings();
 
-	// Collect information about the different buildings that our tribe can have. Parsing based on name is not optimal though. The logic below will guarantee that one and only one such building will be identified.
-#ifndef NDEBUG
-	bool barracks_identified = false;
-	bool bakery_identified = false;
-	bool sawmill_identified = false;
-#endif
-
 	// The data struct below is owned by Player object, the purpose is to have them saved therein
 	persistent_data = player_->get_mutable_ai_persistent_state();
 	management_data.pd = player_->get_mutable_ai_persistent_state();
@@ -723,45 +716,19 @@ void DefaultAI::late_initialization() {
 				bo.set_is(BuildingAttribute::kFisher);
 			}
 
-			// is it barracks - finding out by name
-			// NOCOM(#codereview): use TribeDescr::barracks()
-			if (building_name.find("barracks") != std::string::npos) {
-				// there can be only one building type identified as barracks
-				assert(!barracks_identified);
-				bo.set_is(BuildingAttribute::kBarracks);
-#ifndef NDEBUG
-				barracks_identified = true;
-#endif
-			}
-
-			// is it bakery - finding out by name
-			// NOCOM(#codereview): Do not hard-code stuff like this. We better add a new table to the init.lua files to define these
-			// Also, do not assume there is only 1 of them - one could theoretically have upgraded buildings here.
-			if (building_name.find("bakery") != std::string::npos) {
-				// there can be only one building type identified as bakery
-				assert(!bakery_identified);
-				bo.set_is(BuildingAttribute::kBakery);
-#ifndef NDEBUG
-				bakery_identified = true;
-#endif
-			}
-
-			// is it sawmill - finding out by name
-			// NOCOM(#codereview): Do not hard-code
-			if (building_name.find("saw") != std::string::npos ||
-			    building_name.find("hardener") != std::string::npos) {
-				// there can be only one building type identified as sawmill
-				assert(!sawmill_identified);
-				bo.set_is(BuildingAttribute::kLogRefiner);
-#ifndef NDEBUG
-				sawmill_identified = true;
-#endif
-			}
-
 			if (bh.is_shipyard()) {
 				bo.set_is(BuildingAttribute::kShipyard);
 			}
-
+			if (building_index == tribe_->barracks()) {
+				bo.set_is(BuildingAttribute::kBarracks);
+			}
+			if (building_index == tribe_->logrefiner()) {
+				bo.set_is(BuildingAttribute::kLogRefiner);
+			}
+			if (building_index == tribe_->bakery()) {
+				bo.set_is(BuildingAttribute::kBakery);
+			}
+			
 			// now we find out if the upgrade of the building is a full substitution
 			// (produces all wares as current one)
 			const DescriptionIndex enhancement = bld.enhancement();
@@ -897,9 +864,10 @@ void DefaultAI::late_initialization() {
 		}
 	}
 
-	assert(barracks_identified);  // Barracks were identified
-	assert(bakery_identified);    // Bakery was identified
-	assert(sawmill_identified);   // Sawmill was identified
+	// We must verify that some buildings has been identified
+	assert(count_buildings_with_attribute(BuildingAttribute::kBarracks) == 1);
+	assert(count_buildings_with_attribute(BuildingAttribute::kBakery) == 1);
+	assert(count_buildings_with_attribute(BuildingAttribute::kLogRefiner) == 1);
 
 	// atlanteans they consider water as a resource
 	// (together with mines, rocks and wood)
@@ -5244,6 +5212,22 @@ EconomyObserver* DefaultAI::get_economy_observer(Economy& economy) {
 
 	economies.push_front(new EconomyObserver(economy));
 	return economies.front();
+}
+
+// counts buildings with the BuildingAttribute
+uint8_t DefaultAI::count_buildings_with_attribute(BuildingAttribute attribute) {
+	uint8_t count = 0;
+	if (tribe_ == nullptr) {
+		late_initialization();
+	}
+
+	for (BuildingObserver& bo : buildings_) {
+		if (bo.is(attribute)) {
+			count += 1;
+		}
+	}
+
+	return count;
 }
 
 // \returns the building observer

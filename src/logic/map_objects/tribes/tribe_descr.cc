@@ -244,6 +244,8 @@ TribeDescr::TribeDescr(const LuaTable& table, const TribeBasicInfo& info, const 
 		headquarters_ = add_special_building(table.get_string("headquarters"));
 		port_ = add_special_building(table.get_string("port"));
 		barracks_ = add_special_building(table.get_string("barracks"));
+		bakery_ = add_special_building(table.get_string("bakery"));
+		logrefiner_ = add_special_building(table.get_string("logrefiner"));
 
 	} catch (const GameDataError& e) {
 		throw GameDataError("tribe %s: %s", name_.c_str(), e.what());
@@ -371,6 +373,14 @@ DescriptionIndex TribeDescr::port() const {
 DescriptionIndex TribeDescr::barracks() const {
 	assert(tribes_.building_exists(barracks_));
 	return barracks_;
+}
+DescriptionIndex TribeDescr::bakery() const {
+	assert(tribes_.building_exists(bakery_));
+	return bakery_;
+}
+DescriptionIndex TribeDescr::logrefiner() const {
+	assert(tribes_.building_exists(logrefiner_));
+	return logrefiner_;
 }
 
 const std::vector<DescriptionIndex>& TribeDescr::trainingsites() const {
