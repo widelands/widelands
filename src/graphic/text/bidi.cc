@@ -492,7 +492,9 @@ const std::map<UI::FontSets::Selector, std::set<UBlockCode>> kRTLCodeBlocks = {
 
 // True if the character is in one of the script's code blocks
 bool is_script_character(UChar32 c, UI::FontSets::Selector script) {
+	CLANG_DIAG_OFF("-Wdisabled-macro-expansion")
 	UBlockCode code = ublock_getCode(c);
+	CLANG_DIAG_ON("-Wdisabled-macro-expansion")
 	if (kRTLCodeBlocks.count(script) == 1 && kRTLCodeBlocks.at(script).count(code) == 1) {
 		return true;
 	}
@@ -503,7 +505,9 @@ bool is_script_character(UChar32 c, UI::FontSets::Selector script) {
 }
 
 bool is_rtl_character(UChar32 c) {
+	CLANG_DIAG_OFF("-Wdisabled-macro-expansion")
 	UBlockCode code = ublock_getCode(c);
+	CLANG_DIAG_ON("-Wdisabled-macro-expansion")
 	for (UI::FontSets::Selector script : kRTLScripts) {
 		assert(kRTLCodeBlocks.count(script) == 1);
 		if ((kRTLCodeBlocks.at(script).count(code) == 1)) {
