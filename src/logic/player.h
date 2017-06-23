@@ -166,7 +166,6 @@ public:
 		     least_military_score(0),
 		     target_military_score(0),
 		     ai_productionsites_ratio(0),
-		     ai_personality_wood_difference(0),
 		     ai_personality_mil_upper_limit(0),
 		     magic_numbers_size(0),
 		     neuron_pool_size(0),
@@ -186,7 +185,6 @@ public:
 		int32_t least_military_score;
 		int32_t target_military_score;
 		uint32_t ai_productionsites_ratio;
-		int32_t ai_personality_wood_difference;
 		int32_t ai_personality_mil_upper_limit;
 		uint32_t magic_numbers_size;
 		uint32_t neuron_pool_size;

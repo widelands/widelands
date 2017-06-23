@@ -41,27 +41,37 @@ void GamePlayerAiPersistentPacket::read(FileSystem& fs, Game& game, MapObjectLoa
 		// TODO(GunChleoc): Savegame compatibility, remove after Build20
 		if (packet_version >= 2 && packet_version <= kCurrentPacketVersion) {
 			iterate_players_existing(p, nr_players, game, player) try {
-				player->ai_data.initialized = fr.unsigned_8();
-				player->ai_data.colony_scan_area = fr.unsigned_32();
-				player->ai_data.trees_around_cutters = fr.unsigned_32();
-				player->ai_data.expedition_start_time = fr.unsigned_32();
-				player->ai_data.ships_utilization = fr.unsigned_16();
-				player->ai_data.no_more_expeditions = fr.unsigned_8();
-				player->ai_data.last_attacked_player = fr.signed_16();
-				player->ai_data.least_military_score = fr.unsigned_32();
-				player->ai_data.target_military_score = fr.unsigned_32();
 				if (packet_version == 2) {
+
+					// zero here says the AI has not be initialized
+					player->ai_data.initialized = 0;
+					// we will just read other variables
+					fr.unsigned_8();
+					fr.unsigned_32();
+					fr.unsigned_32();
+					fr.unsigned_32();
+					fr.unsigned_16();
+					fr.unsigned_8();
+					fr.signed_16();
+					fr.unsigned_32();
+					fr.unsigned_32();
 					fr.signed_16();
 					fr.signed_32();
-				}
-				player->ai_data.ai_productionsites_ratio = fr.unsigned_32();
-				player->ai_data.ai_personality_wood_difference = fr.signed_32();
-				if (packet_version == 2) {
+					fr.unsigned_32();
+					fr.signed_32();
 					fr.unsigned_32();
 					fr.unsigned_32();
-					// NOCOM(GunChleoc): Loading an old savegame works, but the AI crashes after a bit. Probably due to lack of initialization.
-				}
-				if (packet_version > 2) {
+				} else {
+					player->ai_data.initialized = fr.unsigned_8();
+					player->ai_data.colony_scan_area = fr.unsigned_32();
+					player->ai_data.trees_around_cutters = fr.unsigned_32();
+					player->ai_data.expedition_start_time = fr.unsigned_32();
+					player->ai_data.ships_utilization = fr.unsigned_16();
+					player->ai_data.no_more_expeditions = fr.unsigned_8();
+					player->ai_data.last_attacked_player = fr.signed_16();
+					player->ai_data.least_military_score = fr.unsigned_32();
+					player->ai_data.target_military_score = fr.unsigned_32();
+					player->ai_data.ai_productionsites_ratio = fr.unsigned_32();
 					player->ai_data.ai_personality_mil_upper_limit = fr.signed_32();
 					// Magic numbers
 					player->ai_data.magic_numbers_size = fr.unsigned_32();
@@ -92,9 +102,9 @@ void GamePlayerAiPersistentPacket::read(FileSystem& fs, Game& game, MapObjectLoa
 					for (uint16_t i = 0; i < player->ai_data.remaining_buildings_size; ++i) {
 						player->ai_data.remaining_basic_buildings[fr.unsigned_32()] = fr.unsigned_32();
 					}
-					assert(player->ai_data.remaining_buildings_size == player->ai_data.remaining_basic_buildings.size());
+					assert(player->ai_data.remaining_buildings_size ==
+					       player->ai_data.remaining_basic_buildings.size());
 				}
-
 			} catch (const WException& e) {
 				throw GameDataError("player %u: %s", p, e.what());
 			}
@@ -128,7 +138,6 @@ void GamePlayerAiPersistentPacket::write(FileSystem& fs, Game& game, MapObjectSa
 		fw.unsigned_32(player->ai_data.least_military_score);
 		fw.unsigned_32(player->ai_data.target_military_score);
 		fw.unsigned_32(player->ai_data.ai_productionsites_ratio);
-		fw.signed_32(player->ai_data.ai_personality_wood_difference);
 		fw.signed_32(player->ai_data.ai_personality_mil_upper_limit);
 
 		// Magic numbers
@@ -157,7 +166,8 @@ void GamePlayerAiPersistentPacket::write(FileSystem& fs, Game& game, MapObjectSa
 		}
 
 		// Remaining buildings for basic economy
-		assert(player->ai_data.remaining_buildings_size == player->ai_data.remaining_basic_buildings.size());
+		assert(player->ai_data.remaining_buildings_size ==
+		       player->ai_data.remaining_basic_buildings.size());
 		fw.unsigned_32(player->ai_data.remaining_buildings_size);
 		for (auto bb : player->ai_data.remaining_basic_buildings) {
 			fw.unsigned_32(bb.first);

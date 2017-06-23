@@ -555,7 +555,9 @@ struct MineTypesObserver {
 };
 
 constexpr int kNeuronWeightLimit = 100;
+// NOCOM @Gun size_t is signed? we need unsigned here
 constexpr size_t kNeuronMaxPosition = 20;
+constexpr size_t kSecondParentProbability = 50;
 
 struct Neuron {
 	static int clip_weight_to_range(int w) {
@@ -578,20 +580,12 @@ struct Neuron {
 	uint16_t get_id() {
 		return id;
 	}
-	int32_t get_lowest_pos() {
-		return lowest_pos;
-	}
-	int32_t get_highest_pos() {
-		return highest_pos;
-	}
 
 private:
 	int8_t results[21]; // kPositions + 1
 	int8_t weight;
 	uint8_t type;
 	uint16_t id;
-	int32_t lowest_pos;
-	int32_t highest_pos;
 };
 
 struct FNeuron {

@@ -523,7 +523,6 @@ void DefaultAI::late_initialization() {
 		persistent_data->target_military_score = 100;
 		persistent_data->least_military_score = 0;
 		persistent_data->ai_productionsites_ratio = std::rand() % 5 + 7;
-		persistent_data->ai_personality_wood_difference = std::rand() % 40 - 20;
 		persistent_data->ai_personality_mil_upper_limit = 100;
 
 		// all zeroes
@@ -1241,9 +1240,11 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 
 	uint16_t actual_enemy_check_area = kEnemyCheckArea;
 	field.is_militarysite = false;
-	if (field.coords.field->get_immovable()->descr().type() == Widelands::MapObjectType::MILITARYSITE) {
-		field.is_militarysite = true;
-		actual_enemy_check_area = ms_enemy_check_area;
+	if (field.coords.field->get_immovable()) {
+		if (field.coords.field->get_immovable()->descr().type() == Widelands::MapObjectType::MILITARYSITE) {
+			field.is_militarysite = true;
+			actual_enemy_check_area = ms_enemy_check_area;
+		}
 	}
 
 	field.unowned_land_nearby = map.find_fields(

@@ -351,8 +351,6 @@ ManagementData::ManagementData() {
 Neuron::Neuron(int8_t w, uint8_t f, uint16_t i) : weight(w), type(f), id(i) {
 	assert(type < neuron_curves.size());
 	assert(weight >= -kNeuronWeightLimit && weight <= kNeuronWeightLimit);
-	lowest_pos = std::numeric_limits<uint8_t>::max();
-	highest_pos = std::numeric_limits<uint8_t>::min();
 	recalculate();
 }
 
@@ -380,17 +378,12 @@ int8_t Neuron::get_result(const size_t pos) {
 // get value corresponding to input in range 0-20, if you are out of range
 // the input will be cropped
 int8_t Neuron::get_result_safe(int32_t pos, const bool absolute) {
-	if (pos > highest_pos) {
-		highest_pos = pos;
-	};
-	if (pos < lowest_pos) {
-		lowest_pos = pos;
-	};
-
 	// NOCOM(#codereview): Should this be adjusted before the lowest/highest pos is set?
-	pos = std::min(0, std::max(static_cast<int>(kNeuronMaxPosition), pos));
+	// pos has to be normalized into range 0 - 20(kNeuronMaxPosition)
+	pos = std::max(0, std::min(static_cast<int>(kNeuronMaxPosition), pos));
 
-	assert(pos <= kNeuronMaxPosition);
+	assert(pos <= static_cast<int32_t>(kNeuronMaxPosition));
+	assert(pos >= 0);
 	assert(results[pos] >= -kNeuronWeightLimit && results[pos] <= kNeuronWeightLimit);
 	if (absolute) {
 		return std::abs(results[pos]);
@@ -753,7 +746,7 @@ void ManagementData::new_dna_for_persistent(const uint8_t pn, const Widelands::A
 	// First setting of military numbers, they go directly to persistent data
 	for (uint16_t i = 0; i < kMagicNumbersSize; i += 1) {
 		// Child inherits DNA with probability 5:1 from main parent
-		uint8_t dna_donor = (std::rand() % 50 > 0) ? primary_parent : parent2;
+		uint8_t dna_donor = (std::rand() % kSecondParentProbability > 0) ? primary_parent : parent2;
 		if (i == kMutationRatePosition) { // Overwriting
 			dna_donor = primary_parent;
 		}
@@ -782,7 +775,7 @@ void ManagementData::new_dna_for_persistent(const uint8_t pn, const Widelands::A
 	pd->f_neurons.clear();
 
 	for (uint16_t i = 0; i < kNeuronPoolSize; i += 1) {
-		const uint8_t dna_donor = (std::rand() % kNeuronMaxPosition > 0) ? primary_parent : parent2;
+		const uint8_t dna_donor = (std::rand() % kSecondParentProbability > 0) ? primary_parent : parent2;
 
 		switch (dna_donor) {
 			case 0 :
@@ -809,7 +802,7 @@ void ManagementData::new_dna_for_persistent(const uint8_t pn, const Widelands::A
 
 
 	for (uint16_t i = 0; i < kFNeuronPoolSize; i += 1) {
-		const uint8_t dna_donor = (std::rand() % kNeuronMaxPosition > 0) ? primary_parent : parent2;
+		const uint8_t dna_donor = (std::rand() % kSecondParentProbability > 0) ? primary_parent : parent2;
 		switch (dna_donor) {
 			case 0 :
 				pd->f_neurons.push_back(f_neurons_A[i]);
@@ -1409,18 +1402,28 @@ uint8_t PlayersStrengths::enemies_seen_lately_count(const uint32_t gametime) {
 
 // When we see enemy, we use this to store the time
 void PlayersStrengths::set_last_time_seen(const uint32_t seentime, Widelands::PlayerNumber pn) {
-	assert(all_stats.count(pn) > 0);
+	if (all_stats.count(pn) == 0) {
+		return;
+	}
 	all_stats[pn].last_time_seen = seentime;
 }
 
 bool PlayersStrengths::get_is_enemy(Widelands::PlayerNumber pn) {
-	assert(all_stats.count(pn) > 0);
+	if (all_stats.count(pn) == 0) {
+		//Should happen only rarely so we print a warning here
+		log("%d: WARNING: player has not statiscs yet\n", this_player_number);
+		return false;
+	}
 	return all_stats[pn].is_enemy;
 }
 
 // Was the player seen less then 2 minutes ago
 bool PlayersStrengths::player_seen_lately(Widelands::PlayerNumber pn, const uint32_t gametime) {
-	assert(all_stats.count(pn) > 0);
+	if (all_stats.count(pn) == 0) {
+		//Should happen only rarely so we print a warning here
+		log("%d: WARNING: player has not statiscs yet\n", this_player_number);
+		return false;
+	}
 	if (all_stats[pn].last_time_seen == kNever) {
 		return false;
 	}

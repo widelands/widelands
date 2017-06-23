@@ -361,7 +361,7 @@ void InteractiveBase::draw_overlay(RenderTarget& dst) {
 
 			if (GameController* const ctrl = game->game_controller()) {
 				// NOCOM printf ("desired speed: %d, current fps: %d\n", ctrl->desired_speed(), cur_fps);
-				if ((ctrl->desired_speed() > 950 && ctrl->desired_speed() < 30000) ||
+				if ((false && ctrl->desired_speed() > 950 && ctrl->desired_speed() < 30000) ||
 				(ctrl->desired_speed() <1000 && speed_diff > 0) ||
 				(ctrl->desired_speed() >29999 && speed_diff < 0)) {
 					ctrl->set_desired_speed(ctrl->desired_speed() + speed_diff);
