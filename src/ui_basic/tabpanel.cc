@@ -97,6 +97,7 @@ TabPanel::TabPanel(Panel* const parent,
      active_(0),
      highlight_(kNotFound),
      pic_background_(background) {
+	update_desired_size();
 }
 
 /**
@@ -133,13 +134,12 @@ void TabPanel::update_desired_size() {
 		panel->get_desired_size(&panelw, &panelh);
 		// TODO(unknown):  the panel might be bigger -> add a scrollbar in that case
 
-		if (panelw > w) {
-			w = panelw;
-		}
+		w = std::max(w, panelw);
 		h += panelh;
 	}
 
-	set_desired_size(w, h);
+	set_size(w, h); // Make sure that we have the correct size
+	set_desired_size(w, h); // Trigger relayout of any boxes
 
 	// This is not redundant, because even if all this doesn't change our
 	// desired size, we were typically called because of a child window that
@@ -258,7 +258,7 @@ void TabPanel::draw(RenderTarget& dst) {
 	RGBColor black(0, 0, 0);
 
 	// draw the buttons
-	float x = 0;
+	int x = 0;
 	int tab_width = 0;
 	for (size_t idx = 0; idx < tabs_.size(); ++idx) {
 		x = tabs_[idx]->get_x();
