@@ -977,24 +977,34 @@ void Worker::log_general_info(const EditorGameBase& egbase) {
 	Bob::log_general_info(egbase);
 
 	if (upcast(PlayerImmovable, loc, location_.get(egbase))) {
+		FORMAT_WARNINGS_OFF;
 		molog("* Owner: (%p)\n", &loc->owner());
+		FORMAT_WARNINGS_ON;
 		molog("** Owner (plrnr): %i\n", loc->owner().player_number());
+		FORMAT_WARNINGS_OFF;
 		molog("* Economy: %p\n", loc->get_economy());
+		FORMAT_WARNINGS_ON;
 	}
 
 	PlayerImmovable* imm = location_.get(egbase);
 	molog("location: %u\n", imm ? imm->serial() : 0);
+	FORMAT_WARNINGS_OFF;
 	molog("Economy: %p\n", economy_);
 	molog("transfer: %p\n", transfer_);
+	FORMAT_WARNINGS_ON;
 
 	if (upcast(WareInstance, ware, carried_ware_.get(egbase))) {
 		molog("* carried_ware->get_ware() (id): %i\n", ware->descr_index());
+		FORMAT_WARNINGS_OFF;
 		molog("* carried_ware->get_economy() (): %p\n", ware->get_economy());
+		FORMAT_WARNINGS_ON;
 	}
 
 	molog("current_exp: %i / %i\n", current_exp_, descr().get_needed_experience());
 
+	FORMAT_WARNINGS_OFF;
 	molog("supply: %p\n", supply_);
+	FORMAT_WARNINGS_ON;
 }
 
 /**

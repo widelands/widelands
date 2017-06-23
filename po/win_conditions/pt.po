@@ -1,19 +1,19 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2016 Widelands Development Team
+# Copyright (C) 2005-2017 Widelands Development Team
 # 
 # Translators:
 # GunChleoc, 2015
 # GunChleoc, 2016
 # GunChleoc, 2014
 # GunChleoc, 2014
-# zecas <jjorge@free.fr>, 2016
+# zecas <jjorge@free.fr>, 2016-2017
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-12-02 08:04+0000\n"
-"PO-Revision-Date: 2016-12-02 08:07+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2017-06-16 07:17+0000\n"
+"PO-Revision-Date: 2017-06-18 14:50+0000\n"
+"Last-Translator: zecas <jjorge@free.fr>\n"
 "Language-Team: Portuguese (http://www.transifex.com/widelands/widelands/language/pt/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -46,7 +46,7 @@ msgstr "Este mapa não tem artefactos. Isto não devia acontecer. Por favor repo
 #. "New artifact"
 #: ../../data/scripting/win_conditions/artifacts.lua:63
 msgid "Artifact Found"
-msgstr ""
+msgstr "Artefacto Achado"
 
 #: ../../data/scripting/win_conditions/artifacts.lua:64
 msgid "Your team found a new artifact."
@@ -132,7 +132,7 @@ msgstr[1] "Total: %i pontos"
 
 #: ../../data/scripting/win_conditions/collectors.lua:141
 msgid "The game has ended."
-msgstr ""
+msgstr "O jogo terminou."
 
 #. TRANSLATORS: Context: 'The game will end in (2 hours and) 30 minutes.'
 #: ../../data/scripting/win_conditions/collectors.lua:148
@@ -272,7 +272,7 @@ msgstr[0] "Ou o jogo terminará em %i minuto."
 msgstr[1] "Ou o jogo terminará em %i minutos."
 
 #: ../../data/scripting/win_conditions/territorial_time.lua:238
-#: ../../data/scripting/win_conditions/wood_gnome.lua:87
+#: ../../data/scripting/win_conditions/wood_gnome.lua:93
 #, lua-format
 msgid "The game will end in %i minute."
 msgid_plural "The game will end in %i minutes."
@@ -337,9 +337,9 @@ msgstr "Agora que és um gnomo de madeira que gosta de grandes florestas, a tua 
 msgid "Trees owned"
 msgstr "Árvores que possuis"
 
-#: ../../data/scripting/win_conditions/wood_gnome.lua:91
-#: ../../data/scripting/win_conditions/wood_gnome.lua:143
-#: ../../data/scripting/win_conditions/wood_gnome.lua:148
+#: ../../data/scripting/win_conditions/wood_gnome.lua:97
+#: ../../data/scripting/win_conditions/wood_gnome.lua:149
+#: ../../data/scripting/win_conditions/wood_gnome.lua:154
 #, lua-format
 msgid "%i tree"
 msgid_plural "%i trees"
@@ -347,16 +347,16 @@ msgstr[0] "%i das árvores"
 msgstr[1] "%i das árvores"
 
 #. TRANSLATORS: %1$s = player name, %2$s = x tree(s)
-#: ../../data/scripting/win_conditions/wood_gnome.lua:94
+#: ../../data/scripting/win_conditions/wood_gnome.lua:100
 msgid "%1$s has %2$s at the moment."
 msgstr "%1$s já plantou %2$s de momento."
 
 #. TRANSLATORS: %1$s = player name, %2$s = x tree(s)
-#: ../../data/scripting/win_conditions/wood_gnome.lua:145
+#: ../../data/scripting/win_conditions/wood_gnome.lua:151
 msgid "%1$s had %2$s."
 msgstr "%1$s teve %2$s."
 
 #. TRANSLATORS: %1$s = player name, %2$s = x tree(s)
-#: ../../data/scripting/win_conditions/wood_gnome.lua:151
+#: ../../data/scripting/win_conditions/wood_gnome.lua:157
 msgid "The winner is %1$s with %2$s."
 msgstr "%1$s ganhou com %2$s."
