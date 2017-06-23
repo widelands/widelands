@@ -28,6 +28,9 @@
 #include "logic/map_objects/map_object.h"
 #include "logic/player.h"
 
+// Triggered by BOOST_AUTO_TEST_CASE
+CLANG_DIAG_OFF("-Wdisabled-macro-expansion")
+
 namespace Widelands {
 class World;
 }  // namespace Widelands

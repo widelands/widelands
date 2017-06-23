@@ -1,16 +1,16 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2016 Widelands Development Team
+# Copyright (C) 2005-2017 Widelands Development Team
 # 
 # Translators:
 # GunChleoc, 2015-2016
-# zecas <jjorge@free.fr>, 2016
+# zecas <jjorge@free.fr>, 2016-2017
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-11-30 12:41+0000\n"
-"PO-Revision-Date: 2016-11-30 12:43+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2017-06-16 07:17+0000\n"
+"PO-Revision-Date: 2017-06-19 09:55+0000\n"
+"Last-Translator: zecas <jjorge@free.fr>\n"
 "Language-Team: Portuguese (http://www.transifex.com/widelands/widelands/language/pt/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -40,28 +40,28 @@ msgstr "Mas deixe-me primeiro dar-lhe uma visão do território : aqui no sul, t
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:32
 msgid "The Northern Part"
-msgstr ""
+msgstr "A Zona Norte"
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:34
 msgid ""
 "Here in the northern part, you only have a goldmine and a warehouse. While "
 "the miners are supplied well with food, there is no way to transport the "
 "gold ore to our smelting works in the southern part."
-msgstr ""
+msgstr "Aqui na zona norte, só tem uma mina de ouro e um armazém. Enquanto os mineiros têm comida que chegue, não há caminho para transportar o minério de ouro para a nossa fundição na zona sul."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:35
 msgid ""
 "We have tried to build a road, but the mountain is too wide and too steep. "
 "We therefore have only one possibility: we need to establish a sea lane "
 "between these two parts."
-msgstr ""
+msgstr "Tentamos construir uma estrada mas a serra é demasiado grande e inclinada. Portanto só há uma solução : temos de estabelecer uma linha marítima entre estas duas zonas."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:36
 msgid ""
 "But I don’t want to rush you: you have just arrived here and you would "
 "probably like to have a closer look at your camp. I will also take a short "
 "break and be back soon."
-msgstr ""
+msgstr "Mas não o quero chatear : chegou agora mesmo e quer provavelmente dar uma lista ao seu campo. Vou voltar mais tarde."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:43
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:45
@@ -418,7 +418,7 @@ msgstr ""
 msgid "“%s”"
 msgstr "«&nbsp;%s&nbsp»"
 
-#: ../../data/scripting/format_scenario.lua:96
+#: ../../data/scripting/format_scenario.lua:84
 msgid "New Objective"
 msgid_plural "New Objectives"
 msgstr[0] "Novo objetivo"

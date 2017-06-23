@@ -33,7 +33,7 @@ NotificationsManager::NotificationsManager() : next_subscriber_id_(1), num_subsc
 
 NotificationsManager::~NotificationsManager() {
 	if (num_subscribers_ != 0) {
-		log("ERROR: NotificationsManager is destroyed, but there are still subscribers.");
+		log("ERROR: NotificationsManager is destroyed, but there are still subscribers.\n");
 	}
 }
 

@@ -1,0 +1,1285 @@
+# Widelands PATH/TO/FILE.PO
+# Copyright (C) 2005-2017 Widelands Development Team
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# 
+# Translators:
+# Любомир Василев <lyubomirv@abv.bg>, 2017
+msgid ""
+msgstr ""
+"Project-Id-Version: Widelands svnVERSION\n"
+"Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
+"POT-Creation-Date: 2017-06-16 07:17+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: Любомир Василев <lyubomirv@abv.bg>, 2017\n"
+"Language-Team: Bulgarian (https://www.transifex.com/widelands/teams/35159/bg/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: bg\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:39
+msgid "Build your first outpost"
+msgstr "Постройте първия си преден пост"
+
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:41
+msgid "First Outpost"
+msgstr "Първи преден пост"
+
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:42
+msgid ""
+"Build an outpost at the yellow house symbol to the east of your provisional "
+"headquarters."
+msgstr ""
+"Постройте преден пост върху жълтия символ за къща, източно от Вашия временен"
+" щаб."
+
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:48
+msgid "Build a quarry"
+msgstr "Постройте кариера"
+
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:50
+msgid "Quarry"
+msgstr "Кариера"
+
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:51
+msgid ""
+"Build a quarry close to the abundant rocks, so we can free some building "
+"plots and get some valuable resources."
+msgstr ""
+"Постройте кариера близо до изобилните скали, за да можем да освободим малко "
+"място за строеж и да добием ценни ресурси."
+
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:57
+msgid "Build a lumberjack’s house, a sawmill and a stonemason’s house"
+msgstr "Постройте дърварска къща, дъскорезница и каменоделска къща"
+
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:59
+msgid "Lumberjack, Sawmill and Stonemason"
+msgstr "Дървар, дъскорезница и каменоделец"
+
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:60
+msgid ""
+"Build a lumberjack’s house, a sawmill and a stonemason’s house as soon as "
+"there is enough space for them. This will complete the basic building "
+"material supply chain."
+msgstr ""
+"Постройте дърварска къща, дъскорезница и каменоделска къща веднага, щом има "
+"достатъчно място за тях. Това ще завърши веригата за осигуряване на "
+"основните строителни материали."
+
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:66
+msgid "Lower the demand for marble columns"
+msgstr "Намалете търсенето на мраморни колони"
+
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:68
+msgid "Lower Demand for Marble Columns"
+msgstr "Намалете търсенето на мраморни колони"
+
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:69
+msgid ""
+"We should save some marble for buildings. So, please lower the demand for "
+"marble columns in the economy settings to four."
+msgstr ""
+"Трябва да запазим малко мрамор за сградите. Затова, намалете търсенето на "
+"мраморни колони в настройките на икономика до стойност от четири."
+
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:70
+msgid ""
+"Remember that you can access the economy settings by clicking on any flag."
+msgstr ""
+"Винаги можете да отворите настройките на икономиката като щракнете върху "
+"някой флаг."
+
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:76
+msgid "Find a port space on the small island"
+msgstr "Намерете място за пристанище на малкия остров"
+
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:78
+msgid "Port Space"
+msgstr "Място за пристанище"
+
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:79
+msgid ""
+"In order to regain access to the sea, we first must discover a port space."
+msgstr ""
+"За да възстановим достъпа си до морето, трябва първо да открием място за "
+"пристанище."
+
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:85
+msgid "Build a port and a shipyard on the Island"
+msgstr "Постройте пристанище и корабостроителница на острова"
+
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:87
+msgid "Ship Industry"
+msgstr "Корабна индустрия"
+
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:88
+msgid "Build a port to set sail from this island."
+msgstr "Постройте пристанище, за да отплавате от този остров."
+
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:89
+msgid "Build a shipyard to produce the ships to sail on."
+msgstr ""
+"Постройте корабостроителница, за да произвеждате кораби, с които да плавате."
+
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:94
+msgid "Produce at least 50 sheaves of wheat"
+msgstr "Произведете поне 50 снопа пршеница"
+
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:96
+msgid "Wheat Production"
+msgstr "Производство на пшеница "
+
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:97
+msgid ""
+"To get our wool production started, we need at least 50 sheaves of wheat."
+msgstr ""
+"За да започнем да произвеждаме вълна, трябва първо да разполагаме с поне 50 "
+"снопа пшеница."
+
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:103
+msgid "Produce cloth for building our first ship"
+msgstr "Произведете плат за строежа на първия си кораб"
+
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:105
+msgid "Cloth Production"
+msgstr "Производство на платове"
+
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:106
+msgid ""
+"Now let’s turn all the wheat into wool (at least 50 bales) and then use the "
+"wool to weave cloth in order to build a ship."
+msgstr ""
+"А сега да превърнем пшеницата във вълна (поне 50 бали) и след това да "
+"използваме вълната, за да изтъчем плат, с който да построим кораб."
+
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:112
+msgid "Build 2 ports on distant islands"
+msgstr "Постройте 2 пристанища на отдалечени острови"
+
+#. TRANSLATORS: Objective - create 2 expeditions and found new colonies with
+#. them
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:115
+msgid "Build 2 Expedition Ports"
+msgstr "Постройте 2 пристанища за експедиции"
+
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:116
+msgid ""
+"We should explore the island in the south. Use an expedition to build a port"
+" there. Afterwards, let’s try to find some mining resources."
+msgstr ""
+"Трябва да проучим острова на юг. Започнете експедиция, за да построите "
+"пристанища там. А след това се опитайте да намерите ресурси за добив."
+
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:117
+msgid ""
+"We should send a ship nothwards to gather some intelligence about the "
+"Barbarians. Try to build a port on the island and found an outpost."
+msgstr ""
+"Трябва да изпратим кораб на север, за да се сдобием с информация относно "
+"варварите. Опитайте се да построите пристанище на острова и да установете "
+"преден пост."
+
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:123
+msgid "Produce gold to send out expeditions"
+msgstr "Произведете злато за провеждане на експедиции"
+
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:125
+msgid "Gold Production"
+msgstr "Производство на злато"
+
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:126
+msgid ""
+"We need to produce at least 6 gold to be able to colonize our vicinity."
+msgstr ""
+"Трябва да произведем поне 6 злато, зад а можем да колонизираме околностите "
+"си."
+
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:132
+msgid "Defeat the Barbarians"
+msgstr "Победете варварите"
+
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:134
+msgid "Defeat the Enemy"
+msgstr "Победете врага"
+
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:135
+msgid "We should end the Barbarians’ existence in this part of the world."
+msgstr "Трябва да унищожим варварите в тази част на света."
+
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:141
+msgid "Explore further and build ports"
+msgstr "Изследвайте по-далеч и постройте пристанища"
+
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:143
+msgid "Explore Additional Islands and Search for Port Spaces"
+msgstr "Изследвайте още острови и търсете места за пристанища"
+
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:144
+msgid "We should discover more land and build as many ports as we can."
+msgstr ""
+"Трябва да открием още земя и да построим колкото можем повече пристанища."
+
+#. TRANSLATORS: Objective header
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:151
+msgid "Recover the shrine"
+msgstr "Открийте олтара"
+
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:153
+msgid "Find the Holy Shrine"
+msgstr "Открийте свещения олтар"
+
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:154
+msgid ""
+"We need to find and secure all six pieces of the holy shrine of Neptune."
+msgstr ""
+"Трябва да намерим и съхраним всички части от свещения олтар на Нептун."
+
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:159
+msgid "Build a training infrastructure"
+msgstr "Изградете условия за трениране"
+
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:161
+msgid "Training Infrastructure"
+msgstr "Условия за трениране"
+
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:162
+msgid ""
+"Build a training camp, some barracks and an arena or colosseum to train our "
+"soldiers."
+msgstr ""
+"Постройте тренировъчен лагер, няколко казарми и арена или колизей, за да "
+"тренирате войници."
+
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:171
+msgid "The Journey Home"
+msgstr "Пътят към дома"
+
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:172
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:186
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:199
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:383
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:615
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:643
+msgid "Diary of Lutius"
+msgstr "Дневникът на Луций"
+
+#. TRANSLATORS: Lutius - Diary
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:174
+msgid ""
+"Finally, we were set towards Fremil again. I couldn’t await the chance to "
+"clear my records of this big defeat by the Barbarians."
+msgstr ""
+"Най-после се отправихме обратно към Фремил. Нямах търпение да изчистя името "
+"си след поражението от онези варвари."
+
+#. TRANSLATORS: Lutius - Diary
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:177
+msgid "But the gods themselves didn’t want us to get home so quickly!"
+msgstr "Но боговете не искаха да се завърнем у дома толкова бързо!"
+
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:185
+msgid "The Wrath of Neptune"
+msgstr "Гневът на Нептун"
+
+#. TRANSLATORS: Lutius - Diary
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:188
+msgid ""
+"Neptune himself was against us and drove us into a dark, wild storm again. "
+"But this time it felt even worse than last time. The waves were twice the "
+"height of our brave ship and the winds drove us into unsafe waters."
+msgstr ""
+"Самият Нептун беше против нас и отново ни изпрати мрачна, неукротима буря. "
+"Но този път беше по-лошо и от преди. Вълните бяха два пъти по-високи от "
+"смелия ни кораб, а ветровете ни запратиха в опасни води."
+
+#. TRANSLATORS: Lutius - Diary
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:191
+msgid ""
+"Our ship is heavily damaged. The mast has gone overboard and the hull is "
+"taking in more and more water. We would be glad to survive this black night "
+"with barely more than our lives."
+msgstr ""
+"Корабът ни е сериозно повреден. Мачтата падна, а корпусът е пробит и се "
+"пълним с вода. Ще се радваме, ако изобщо оцелеем след тази черна нощ."
+
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:198
+msgid "Shipwrecked Again"
+msgstr "Ново корабокрушение"
+
+#. TRANSLATORS: Lutius - Diary
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:201
+msgid "Finally, the wrath of the gods and the ocean seems to be over."
+msgstr "Най-после гневът на боговете и океана изглежда се успокои."
+
+#. TRANSLATORS: Lutius - Diary
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:204
+msgid ""
+"We landed on an unknown coast and found some rest under the palm trees "
+"growing at the shore. But that is about as good as it gets. The truth is: "
+"when I woke up this morning, I saw nothing but sand and stone around us."
+msgstr ""
+"Слязохме на непознат бряг и си отпочинахме под палмовите дървета, растящи по"
+" крайбрежието. Но това са единствените добри новини. Когато се събудих тази "
+"сутрин, не видях нищо друго освен пясък и камъни около нас."
+
+#. TRANSLATORS: Lutius - Diary
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:207
+msgid ""
+"It really seems as if we have landed on a very small island with little "
+"space."
+msgstr ""
+"Изглежда сме попаднали на много малък остров с ограничено пространство."
+
+#. TRANSLATORS: Lutius - Diary
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:210
+msgid ""
+"To make matters even worse, all the land we can see is blocked by rocks and "
+"trees. I fear we won’t find the resources we need to build a new ship."
+msgstr ""
+"Не стига това, ами и цялата земя, която виждаме, е задръстена от камъни и "
+"дървета. Опасявам се, че няма да успеем да намерим нужните ни ресурси, за да"
+" построим нов кораб."
+
+#. TRANSLATORS: Lutius - Diary
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:213
+msgid ""
+"I really don’t know if and how we will get back home. And the war is going "
+"on without us. I hope my fellow soldiers are defending our empire well."
+msgstr ""
+"Наистина не знам дали и кок ще се върнем у дома. А войната продължава без "
+"нас. надявам се, че другарите ми защитават добре нашата империя."
+
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:220
+msgid "No Sight"
+msgstr "Няма видимост"
+
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:221
+msgid "Saledus looks around nervously…"
+msgstr "Саледий се оглежда нервно…"
+
+#. TRANSLATORS: Saledus
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:223
+msgid ""
+"Sire, we do not know anything about the island. And I believe we are not "
+"safe either. It would probably be reasonable to build a tower to explore the"
+" island and add some military strength."
+msgstr ""
+"Ваше величество, не знаем нищо за острова. И смятаме, че не сме в "
+"безопасност. Може би няма да е лошо да постоим кула и да изследваме острова,"
+" както и да се подготвим за битка, за всеки случай."
+
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:230
+msgid "Amalea Interrupts"
+msgstr "Амалея прекъсва разговора…"
+
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:231
+msgid "Amalea raises her hand…"
+msgstr "Амалея вдига ръка…"
+
+#. TRANSLATORS: Amalea
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:233
+msgid ""
+"As we don’t know how many resources we can get, we should be very "
+"restrictive in spending them. Even for military buildings, we should be very"
+" careful."
+msgstr ""
+"Тъй като не знаем колко ресурси ще можем да съберем, трябва да сме много "
+"пестеливи. Дори и за военни сгради, трябва да внимаваме с харченето."
+
+#. TRANSLATORS: Message header - Saledus is advising to save resources
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:241
+msgid "Save Resources"
+msgstr "Пестене на ресурси"
+
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:242
+msgid "Saledus is nodding in agreement…"
+msgstr "Саледий кима одобрително…"
+
+#. TRANSLATORS: Saledus
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:244
+msgid ""
+"Sire, Amalea is right about the resources. Therefore I correct myself. We "
+"should only build an outpost as this is the most effective military "
+"building."
+msgstr ""
+"Ваше величество, Амалея е права относно ресурсите. Затова ще се поправя. "
+"Трябва да построим само преден пост, тъй като това е най-ефективната военна "
+"сграда."
+
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:253
+msgid "Rocks, Nothing but Rocks"
+msgstr "Скали, само скали"
+
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:254
+msgid "Saledus speaks with a sigh of relief…"
+msgstr "Саледий въздъхва с облекчение и проговаря…"
+
+#. TRANSLATORS: Saledus
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:256
+msgid ""
+"Sire, I saw that the construction of the outpost was completed, so I have "
+"assigned some of my best soldiers to it to keep the watch."
+msgstr ""
+"Ваше величество, видях, че предният пост е готов, така че назначих няколко "
+"от най-добрите си войници там, за да наблюдават."
+
+#. TRANSLATORS: Saledus
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:259
+msgid ""
+"But although this is a good step forward, I can’t see much space for "
+"buildings. The whole island is littered with rocks. How can we ever build a "
+"new ship or even have some basic infrastructure to make our lives more "
+"comfortable?"
+msgstr ""
+"Но въпреки, че това е добра стъпка напред, не мога да видя много място за "
+"сгради. Целият остров е затрупан от скали. Как бихме могли да построим нов "
+"кораб, или дори да изградим някакви условия, за да бъде по-лесен животът ни?"
+
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:265
+msgid "Amalea’s Plan"
+msgstr "Планът на Амалея"
+
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:266
+msgid "Amalea smiles…"
+msgstr "Амалея се усмихва…"
+
+#. TRANSLATORS: Amalea
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:268
+msgid ""
+"Lutius, this may seem very tricky, but we can do it. First of all, we need "
+"patience as well as speed and a plan to succeed in this part of the world."
+msgstr ""
+"Луций, това може да изглежда много трудно, но можем да се справим. Първо, ще"
+" ни трябва търпение, както и бързина, а и план, за да успеем в тази част на "
+"света."
+
+#. TRANSLATORS: Amalea
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:271
+msgid ""
+"I think we should try to reveal some building space by cutting up all the "
+"rocks in a quarry."
+msgstr ""
+"Мисля, че трябва да опитаме да освободим малко място за строежи, като "
+"разбием скалите в кариера."
+
+#. TRANSLATORS: Amalea
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:274
+msgid ""
+"Additionally, this would gain us some granite and some marble to build up "
+"our new world. We can use them as soon as there will finally be enough space"
+" for buildings."
+msgstr ""
+"Освен място, това ще ни осигури и гранит и мрамор, с които да изградим "
+"новото си убежище. Ще можем да ги използваме веднага, щом имаме достатъчно "
+"място за сгради."
+
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:282
+msgid "Amalea’s New Instructions"
+msgstr "Новите инструкции на Амалея"
+
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:283
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:357
+msgid "Amalea recommends…"
+msgstr "Амалея препоръчва…"
+
+#. TRANSLATORS: Amalea
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:285
+msgid ""
+"Good news from the people, Lutius. I got the message that our first quarry "
+"has started its work today."
+msgstr ""
+"Имаме добри новини от хората, Луций. Разбрах, че първата ни кариера е "
+"започнала да работи днес."
+
+#. TRANSLATORS: Amalea
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:288
+msgid ""
+"Perhaps it would be a good idea to wait until it has cleared some space and "
+"then build up a basic construction material industry."
+msgstr ""
+"Може би ще е добре да почакаме, докато тя прочисти малко място и след това "
+"да изградим промишлеността за основните строителни материали."
+
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:296
+msgid "Amalea’s Recommendations"
+msgstr "Препоръките на Амалея"
+
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:297
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:314
+msgid "Amalea comes in…"
+msgstr "Амалея влиза…"
+
+#. TRANSLATORS: Amalea
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:299
+msgid "I’ve got important things to talk about… First the good news:"
+msgstr ""
+"Искам да поговорим за няколко много важни неща… Първо, добрата новина:"
+
+#. TRANSLATORS: Amalea
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:302
+msgid ""
+"I noticed that our stonemason has started his work, finally. He will cut the"
+" number of marble columns that we request in our basic economy settings."
+msgstr ""
+"Забелязах, че каменоделецът ни най-после е започнал да работи. Той ще "
+"произведе толкова мраморни колони, колкото са ни нужни, според настройките "
+"на икономиката."
+
+#. TRANSLATORS: Amalea
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:305
+msgid ""
+"But here’s the rub, if we use up all of our marble for columns, we might run"
+" out. So, we should lower the settings for marble columns in the economy "
+"settings to a smaller amount. I think a reserve of 4 columns might be "
+"sufficient for the moment being."
+msgstr ""
+"Но има и проблем. Ако използваме всичкия мрамор за колони, може да не ни "
+"остане никакъв запас. Затова трябва да намалим настройките за мраморни "
+"колони в настройките на икономиката. Мисля, че стойност от 4 колони би била "
+"подходяща засега."
+
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:313
+msgid "Amalea Looks Happy"
+msgstr "Амалея изглежда щастлива"
+
+#. TRANSLATORS: Amalea
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:316
+msgid "I have excellent progress to report now."
+msgstr "Имам страхотни новини за напредъка."
+
+#. TRANSLATORS: Amalea
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:319
+msgid ""
+"I found out that the construction of the lumberjack’s house and the sawmill "
+"is complete, so we can begin to harvest logs and make planks out of them."
+msgstr ""
+"Разбрах, че строежа на дърводелската къща и дъскорезницата е приключил, така"
+" че можем да започнем да добиваме дървени трупи и да правим дъски от тях."
+
+#. TRANSLATORS: Amalea
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:322
+msgid ""
+"This is a great step forward in constructing advanced buildings. And we can "
+"think of using some planks to build new ships."
+msgstr ""
+"Това е огромна крачка напред към строежа на по-сериозни сгради. И дори може "
+"да имаме достатъчно дъски, за да построим нови кораби."
+
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:328
+msgid "We Need a Port"
+msgstr "Трябва ни пристанище"
+
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:329
+msgid "Saledus is thoughtful…"
+msgstr "Саледий е замислен…"
+
+#. TRANSLATORS: Saledus
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:331
+msgid ""
+"Sire, I just pondered our way home. It is of utmost importance to build a "
+"port for loading our ships and starting an expedition."
+msgstr ""
+"Ваше величество, мислех върху това как да се завърне у дома. За нас е от "
+"изключително значение да построим пристанище, където да зареждаме корабите "
+"си и да започнем експедиция."
+
+#. TRANSLATORS: Saledus
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:334
+msgid ""
+"The problem is that a port is a building which needs a very special place to"
+" be built. So, while building our economy, we should nevertheless expand "
+"further to discover the whole island. Let’s try to find such a valuable "
+"construction site."
+msgstr ""
+"Проблемът е, че пристанището е сграда, която се нуждае от много специално "
+"място за строеж. Така че, докато изграждаме икономиката си, трябва и да "
+"проучим останалата част от острова. Трябва да потърсим подходящо място за "
+"строеж на пристанище."
+
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:342
+msgid "A Step Closer to Getting Home"
+msgstr "Малка крачка към дома"
+
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:343
+msgid "Saledus looks excited…"
+msgstr "Саледий изглежда развълнуван…"
+
+#. TRANSLATORS: Saledus
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:345
+msgid ""
+"Sire, today we got a lot closer to finally returning home again. Our "
+"military has spotted a space to build a port on. We should start to build a "
+"port quickly."
+msgstr ""
+"Ваше величество, днес се доближихме още повече до завръщането у дома. "
+"Военните ни забелязаха място за пристанище. Трябва веднага да започнем "
+"строежа му."
+
+#. TRANSLATORS: Saledus
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:348
+msgid ""
+"Now we truly can look forward to building some ships. So, we should build a "
+"shipyard as well."
+msgstr ""
+"Сега вече можем да мислим за строежа на кораби. Затова ще трябва първо да "
+"построим и корабостроителница."
+
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:356
+msgid "Amalea’s Wisdom"
+msgstr "Мъдростта на Амалея"
+
+#. TRANSLATORS: Amalea
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:359
+msgid ""
+"I understand the euphoria of Saledus, but we have some serious problems to "
+"solve first."
+msgstr ""
+"Разбирам въодушевлението на Саледий, но трябва първо да разрешим някои "
+"сериозни проблеми."
+
+#. TRANSLATORS: Amalea
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:362
+msgid ""
+"To send out an expeditionary ship, we first need a ship. Unfortunately, we "
+"have only 5 bales of cloth left, which we will need to build the port and "
+"the shipyard."
+msgstr ""
+"За да изпратим корабна експедиция, се нуждаем от кораб. За съжаление "
+"разполагаме само с 5 бали плат, които ще отидат за строежа на пристанището и"
+" корабостроителницата."
+
+#. TRANSLATORS: Amalea
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:365
+msgid ""
+"So, we need more cloth to finally be able to build ships. But there is no "
+"space on the island for building a whole economy to produce cloth. "
+"Therefore, we need to build the necessary wares step by step."
+msgstr ""
+"Така че, за да строим кораби, ще ни трябва още плат. Но на острова няма "
+"място за изграждане на всички условия за производство на платове. Затова, ще"
+" трябва да произведем нужните стоки стъпка по стъпка."
+
+#. TRANSLATORS: Amalea
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:368
+msgid ""
+"So, let’s think this over. To weave cloth we need some wool from a sheep "
+"farm. The sheepfarm itself needs wheat and water to work. So, let’s find a "
+"space for a big building and build a farm first."
+msgstr ""
+"Да помислим. За да изтъчем плат ни трябва вълна от ферма за овце. Самата "
+"ферма за овце се нуждае от пшеница и вода. Значи трябва първо да намерим "
+"място за голяма сграда и да построим ферма върху него."
+
+#. TRANSLATORS: Amalea
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:371
+msgid ""
+"After the production of enough wheat, we can dismantle the farm and build a "
+"sheep farm to produce wool. Later on, we could build a weaving mill in the "
+"same spot to use our wool for weaving cloth. But for the moment being, let’s"
+" start by producing a reasonable amount of wheat."
+msgstr ""
+"След като произведем достатъчно пшеница, можем да демонтираме фермата и да "
+"построим ферма за овце, където да произведем вълна. По-късно на същото място"
+" ще можем да построим тъкачница, където от вълната да изтъчем плат. Но "
+"засега, да започнем с производството на достатъчно пшеница."
+
+#. TRANSLATORS: Amalea
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:374
+msgid ""
+"I think a stock of 50 wheat would be enough for starters. Perhaps we will "
+"have to adjust the target quantity for wheat to achieve this."
+msgstr ""
+"Мисля, че запас от 50 пшеница ще бъде достатъчно за начало. Може би ще "
+"трябва да настроим целевото количество на пшеницата, за да постигнем това."
+
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:382
+msgid "Seafaring is Possible Again"
+msgstr "Мореплаването отново е възможно"
+
+#. TRANSLATORS: Lutius - Diary
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:385
+msgid "Praise the gods. We finally have a ship industry."
+msgstr "Слава на боговете. Най-после можем отново да произвеждаме кораби."
+
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:391
+msgid "Amalea is Proud"
+msgstr "Амалея е горда"
+
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:392
+msgid "Amalea cheers…"
+msgstr "Амалея се радва…"
+
+#. TRANSLATORS: Amalea
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:394
+msgid ""
+"Well done so far. We have produced enough wheat. Now dismantle the farm and "
+"build the next building in the production chain."
+msgstr ""
+"Добра работа. Успяхме да произведем достатъчно пшеница. Сега да демонтираме "
+"фермата и да построим следващата сграда в производствената верига."
+
+#. TRANSLATORS: Amalea
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:397
+msgid ""
+"Don’t forget to check the target quantity of wool and cloth in the economy "
+"settings. We need to turn all the wheat into wool and then the all the wool "
+"into cloth."
+msgstr ""
+"Не забравяйте да проверите целевото количество на вълната и платовете в "
+"настройките на икономиката. Трябва да превърнем всичката пшеница във вълна и"
+" след това всичката вълна — в плат."
+
+#. TRANSLATORS: Amalea
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:400
+msgid ""
+"Perhaps it would be a good idea to stop the shipyard’s production until we "
+"have some cloth available in order to not waste any logs or planks."
+msgstr ""
+"Може би ще е добре да спрем производството в корабостроителницата, докато не"
+" се сдобием с плат, така че да не похабяваме дървените трупи и дъските."
+
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:408
+msgid "We Should Explore the Islands"
+msgstr "Трябва да изследваме островите"
+
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:409
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:452
+msgid "Saledus is excited…"
+msgstr "Саледий е развълнуван…"
+
+#. TRANSLATORS: Saledus
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:411
+msgid ""
+"Now that we have all resources ready for building a ship, we should explore "
+"the surrounding islands."
+msgstr ""
+"Щом вече имаме всичко необходимо, за да построим кораб, трябва да изследваме"
+" околните острови."
+
+#. TRANSLATORS: Saledus
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:414
+msgid ""
+"First, we need to find some more resources to back up our growing economy. I"
+" have spotted an island with some mountains in the south. Perhaps we can "
+"find some valuable resources like iron there."
+msgstr ""
+"Първо, трябва да намерим още ресурси, с които да подкрепим разрастващата ни "
+"се икономика. Забелязах остров с планини на юг. Възможно е там да можем да "
+"открием някои ценни ресурси, като например желязо."
+
+#. TRANSLATORS: Saledus
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:417
+msgid "But the following objective is even more important:"
+msgstr "Но има нещо, което е дори по-важно:"
+
+#. TRANSLATORS: Saledus
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:420
+msgid ""
+"I think I have heard the wind carrying some weird but well known sounds from"
+" the north. If I’m not totally wrong, I have heard some Barbarian war drums."
+" So, we should better go and have a look at what is going on up there."
+msgstr ""
+"Мисля, че чух вятъра да носи странни, но добре познати звуци от север. Ако "
+"не се бъркам, трябва да са били варварски бойни тъпани. Затова би било добре"
+" да погледнем какво става там."
+
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:428
+msgid "Amalea Advises"
+msgstr "Съветът на Амалея"
+
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:429
+msgid "Amalea looks thoughtful…"
+msgstr "Амалея изглежда замислена…"
+
+#. TRANSLATORS: Amalea
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:431
+msgid ""
+"Salve Lutius. While talking to all our brave builders, they told me that "
+"they had to use up all our remaining gold for building the port. Now we "
+"don’t have any gold left."
+msgstr ""
+"Хвала, Луций. Докато говорех с нашите смели строители, те ми казаха, че е "
+"трябвало да използват всичкото ни останало злато за строежа на пристанището."
+" Сега нямаме злато."
+
+#. TRANSLATORS: Amalea
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:434
+msgid ""
+"But the problem is that for sending out an expedition, we need some gold."
+msgstr "Проблемът е там, че за да изпратим експедиция, се нуждаем от злато."
+
+#. TRANSLATORS: Amalea
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:437
+msgid ""
+"Fortunately, I spotted a mountain which looks very promising and seems to "
+"have some mining resources. Perhaps we should send some geologists to "
+"explore the hidden resources."
+msgstr ""
+"За щастие забелязах планина, която изглежда доста обещаваща и може да има "
+"ресурси за добив. Може би трябва да изпратим геолози, които да проучат дали "
+"там има скрити богатства."
+
+#. TRANSLATORS: Amalea
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:440
+msgid ""
+"I strongly recommend building a production chain for mining and melting some"
+" gold. I think we need a vineyard, a winery, a tavern, a fisher’s house or a"
+" hunter’s house and a smelting works. And the mines themselves of course."
+msgstr ""
+"Силно препоръчвам да изградим производствена верига за добиване на ресурси и"
+" претопяване на злато. Мисля, че ще ни трябва лозе, винарна, механа, "
+"рибарска или ловджийска къща, и топилна. И мини, разбира се."
+
+#. TRANSLATORS: Amalea
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:443
+msgid ""
+"If there are difficulties with building all the buildings needed, we should "
+"think about all we have learned so far. We can cut down all the rocks. We "
+"should perhaps optimize our roads to free up some building sites, or even "
+"dismantle some military buildings to obtain more space for our economy."
+msgstr ""
+"Ако има проблеми със строежа на всички нужни сгради, трябва да използваме "
+"опита си досега. Можем да изсечем скалите. Може би трябва да променим "
+"пътищата си, за да освободим място за строежи, или дори да демонтираме някои"
+" военни сгради, за да имаме повече място за промишлеността."
+
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:451
+msgid "We Should Conquer All the Islands"
+msgstr "Трябва да завладеем всички острови"
+
+#. TRANSLATORS: Saledus
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:454
+msgid "Now it is time to conquer the islands."
+msgstr "Вече е време да завладеем островите."
+
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:456
+msgid ""
+"Let’s finish the Barbarians off and provide a nice colony to the caesar of "
+"our empire."
+msgstr ""
+"Да довършим варварите и да създадем силна колония за владетеля на империята."
+
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:464
+msgid "Amalea’s Luck"
+msgstr "Късметът на Амалея"
+
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:465
+msgid "Amalea is really proud of the achievements…"
+msgstr "Амалея е наистина горда от постигнатото…"
+
+#. TRANSLATORS: Amalea
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:467
+msgid ""
+"Lutius, we have just solved another problem. We managed to melt enough gold "
+"to send out at least three expeditions. Perhaps we might even keep some gold"
+" to make some jewelry."
+msgstr ""
+"Луций, току-що разрешихме още един проблем. Успяхме да претопим достатъчно "
+"злато, за да изпратим поне три експедиции. Може би ще можем дори да си "
+"запазим малко злато за бижута."
+
+#. TRANSLATORS: Amalea
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:470
+msgid ""
+"I’m just kidding. Of course we should spare as much gold as we can for "
+"building an arena and other buildings to train our soldiers."
+msgstr ""
+"Шегувам се. Разбира се, трябва да пестим златото, за да можем с него да "
+"построим арена и други сгради за трениране на войниците ни."
+
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:476
+msgid "Amalea is Pleased"
+msgstr "Амалея е доволна"
+
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:477
+msgid "Amalea is content that we will manage all our challenges"
+msgstr "Амалея е уверена, че ще се справим с всички предизвикателства"
+
+#. TRANSLATORS: Amalea
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:479
+msgid ""
+"Well done so far. Now we will not produce more marble columns than needed. I"
+" really think we will need this economy feature quite often to adjust our "
+"economy. Remember, our industry will only be working until the given amount "
+"in the economy settings is reached."
+msgstr ""
+"Досега свършихме добра работа. Сеща няма да произвеждаме повече мраморни "
+"колони, отколкото са ни нужни. Мисля, че ще ни се наложи да използваме тази "
+"функционалност на икономиката доста често, за да правим настройки. "
+"Запомнете: промишлеността ни ще работи само докато се достигне нужната "
+"стойност в настройките на икономиката."
+
+#. TRANSLATORS: Amalea
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:482
+msgid ""
+"For example, it might be a good idea to produce a reasonable amount of a "
+"ware and afterwards dismantle the building to gain space for another "
+"building."
+msgstr ""
+"Например, можем да произведем нужното ни количество от дадена стока, а след "
+"това да демонтираме сградата, за да имаме място за друга."
+
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:488
+msgid "Amalea’s Reminder"
+msgstr "Напомнянето на Амалея"
+
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:489
+msgid "Amalea is shaking her head…"
+msgstr "Амалея клати глава…"
+
+#. TRANSLATORS: Amalea
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:491
+msgid ""
+"Lutius. I really appreciate that you and Saledus are so concerned about our "
+"security. But I think we could use the little space on this island better "
+"than by building a lot of military buildings."
+msgstr ""
+"Луций, наистина оценявам това, че със Саледий сте толкова заинтересовани от "
+"сигурността ни. Но смятам, че можем да използваме ограниченото място на "
+"острова за по-добри цели от това да строим военни сгради."
+
+#. TRANSLATORS: Amalea
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:494
+msgid ""
+"I strongly recommend dismantling most of them to be able to build industrial"
+" buildings. I don’t think there is much danger on this island, but if you "
+"want to be cautious, you can keep some sentries or blockhouses near the "
+"coastline."
+msgstr ""
+"Силно препоръчвам да демонтираме повечето от тях, за да можем да построим "
+"индустриални сгради. Мисля, че този остров не е особено опасен, но ако искаш"
+" да бъдеш предпазлив, може да поставиш караули и блокпостове по брега."
+
+#. TRANSLATORS: Amalea
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:497
+msgid "But be careful not to waste any bigger building spots."
+msgstr "Но поне внимавайте да не използвате големи места за строеж."
+
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:503
+msgid "Amalea’s Excited"
+msgstr "Амалея е развълнувана"
+
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:504
+msgid "Amalea is looking forward to the exploration…"
+msgstr "Амалея очаква с нетърпение експедицията…"
+
+#. TRANSLATORS: Amalea
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:506
+msgid ""
+"Lutius. We have made so much progress so far. I am glad to hear that we have"
+" many ships now."
+msgstr ""
+"Луций! Имаме толкова много напредък досега. Радвам се да чуя, че вече имаме "
+"много кораби."
+
+#. TRANSLATORS: Amalea
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:509
+msgid ""
+"Now that our fleet is growing and growing we should discover the complete "
+"region. Let’s try to find more land and eventually get more resources."
+msgstr ""
+"Тъй като флотилията ни нараства все повече, смятам че трябва да проучим "
+"целия регион. Да опитаме да намерим още земя, за да се сдобием с повече "
+"ресурси."
+
+#. TRANSLATORS: Amalea
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:512
+msgid ""
+"It would be especially helpful to find more marble, either within fields of "
+"rock or in the mountains to mine it."
+msgstr ""
+"Би било особено полезно да намерим още мрамор, бил той наличен като купчина "
+"скали или заровен в планина, от която да го изкопаем"
+
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:520
+msgid "Amalea is Very Content"
+msgstr "Амалея е много доволна"
+
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:521
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:530
+msgid "Amalea is clapping her hands…"
+msgstr "Амалея пляска с ръце…"
+
+#. TRANSLATORS: Amalea
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:523
+msgid ""
+"Lutius. Well done. Well done. We have discovered all possible port locations"
+" in the complete region. Now we can strengthen our economy and we will "
+"manage to sail home soon."
+msgstr ""
+"Добра работа, Луций! Много добра! Открихме всички възможни места за "
+"пристанища в целия регион. Сега можем да подсилим икономиката си, което ще "
+"ни помогне да отплаваме към дома някой ден"
+
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:529
+msgid "Amalea’s Councel"
+msgstr "Съветът на Амалея"
+
+#. TRANSLATORS: Amalea
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:532
+msgid ""
+"Salve Lutius. We just completed our weaving mill. Now we are very close to "
+"taking to the sea again. However, I thought it would be helpful to remind "
+"you that ship production is not the only industry that needs cloth."
+msgstr ""
+"Хвала, Луций. Завършихме тъкачницата. Вече сме много близо до това да можем "
+"да плаваме отново. Въпреки това, бих искала да ти напомня, че производството"
+" на кораби не е единствената промишленост, която нуждае от платове."
+
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:534
+msgid ""
+"We need some cloth as well for producing armor in our armor smithy. We need "
+"it to build some of the training buildings for our soldiers. And most "
+"important and most imminent of all, we need it to send out expeditions."
+msgstr ""
+"Платовете са нужни и за изработката на брони в ковачницата за брони. Както и"
+" за строежа на някои тренировъчни сгради за войниците. А най-важното и най-"
+"непосредственото, за което ни трябва, е за да можем да изпратим експедиции."
+
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:536
+msgid ""
+"Therefore, I really recommend that we check our stock of cloth quite "
+"regularly to ensure that we keep enough cloth in reserve to send out some "
+"expeditions at least. As one expedition needs 3 bales of cloth, I think a "
+"reserve of 6 to 9 bales giving us 2 to 3 expeditions would be sufficient."
+msgstr ""
+"Затова, препоръчвам да проверяваме запасите си от платове често, за да сме "
+"сигурни, че имаме достатъчно в резерв, така че да можем да изпращаме "
+"експедиции, когато поискаме. Тъй като една експедиция изисква 3 бали плат, "
+"смятам че трябва да поддържаме запаси от 6-9 бали плат, така че да можем да "
+"изпратим 2-3 експедиции."
+
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:542
+msgid "Victory is Ours"
+msgstr "Победата е наша"
+
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:543
+msgid "Saledus is cheering…"
+msgstr "Саледий се радва…"
+
+#. TRANSLATORS: Saledus
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:545
+msgid ""
+"Sire, finally we have defeated the Barbarians in this region. And "
+"furthermore, we have built a nice colony for our empire."
+msgstr ""
+"Ваше величество, победихме варварите в този регион. Освен това построихме "
+"чудесна колония на империята."
+
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:547
+msgid "The king will be very pleased with our victory."
+msgstr "Кралят ще е много доволен от победата ни."
+
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:553
+msgid "Pleasing Neptune"
+msgstr "Омилостивяването на Нептун"
+
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:554
+msgid "Saledus is Very Sad and Anxious…"
+msgstr "Саледий е много тъжен и разтревожен…"
+
+#. TRANSLATORS: Saledus
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:556
+msgid ""
+"Sire, we are making good progress towards getting home eventually. But there"
+" is one thing I need to talk about:"
+msgstr ""
+"Ваше величество, имаме добър напредък към това да се завърнем у дома. Но има"
+" нещо, за което трябва да поговорим:"
+
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:558
+msgid ""
+"As we have seen on our last journey, it is of great importance to put the "
+"gods and especially Neptune in a good mood to safeguard our journey."
+msgstr ""
+"Както разбрахме при последното си пътуване, много е важно боговете, и "
+"особено Нептун, да са благоразположени към нас, за да ни пазят по време на "
+"пътуването ни."
+
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:560
+msgid ""
+"Unfortunately, we lost our holy shrine of Neptune in the great storm, so we "
+"can’t worship him well. I think we should search the whole region to see if "
+"we can recover all six pieces of the shrine."
+msgstr ""
+"За нещастие в голямата буря загубихме свещения си олтар на Нептун, така че "
+"не можем да го почетем както трябва. Мисля, че трябва да претърсим целия "
+"регион и да се опитаме да открием шестте части на олтара."
+
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:562
+msgid ""
+"To ease the search, I have crafted some models of the pieces as you can see."
+" You can give them to our soldiers and sailors to look for them."
+msgstr ""
+"За да е по-лесно търсенето ни, изработех няколко модела на частите, както "
+"виждаш. Може да ги дадем на войниците и моряците си, за да знаят какво "
+"търсят."
+
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:570
+msgid "Praise, Praise, Praise"
+msgstr "Слава, почит, възхвала"
+
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:571
+msgid "Saledus is happily worshipping…"
+msgstr "Саледий възхвалява боговете…"
+
+#. TRANSLATORS: Saledus
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:573
+msgid ""
+"Sire, we recovered the holy shrine of Neptune. Now we can seek his "
+"protection for our journey."
+msgstr ""
+"Ваше величество, върнахме си свещения олтар на Нептун. Сега ще можем да "
+"разчитаме на защитата му по време на пътуването."
+
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:575
+msgid ""
+"Oh great Neptune, safeguard our journey! Oh great Neptune, let the winds be "
+"friendly to our course! Oh great Neptune, save us from the creatures of the "
+"sea! Oh great Neptune, …"
+msgstr ""
+"О, велики Нептуне, пази ни по време на пътуването ни! О, велики Нептуне, "
+"нека ветровете бъдат благосклонни към нас и посоката ни! О, велики Нептуне, "
+"пази ни от съществата на морето! О, велики Нептуне,…"
+
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:581
+msgid "Unpleasant Discoveries"
+msgstr "Неприятни открития"
+
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:582
+msgid "Saledus looks very worried…"
+msgstr "Саледий изглежда много притеснен…"
+
+#. TRANSLATORS: Saledus
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:584
+msgid ""
+"Sire, we found the ruins of a former Barbarian fortress and village. I’m "
+"somewhat worried that we will have to fight against them before we are "
+"ready."
+msgstr ""
+"Ваше величество, открихме останките на някогашна крепост и село на "
+"варварите. Притеснявам се, че ще трябва да се бием с тях преди да сме "
+"готови."
+
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:590
+msgid "Train Faster, Train Harder"
+msgstr "По-бързи, по-усърдни тренировки"
+
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:591
+msgid "Saledus is demanding some discipline"
+msgstr "Саледий изисква дисциплина"
+
+#. TRANSLATORS: Saledus
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:593
+msgid ""
+"Sire, we have all buildings available for training our soldiers, but we "
+"should increase our efforts to train them to the highest level and to train "
+"more of them."
+msgstr ""
+"Ваше величество, всички сгради за трениране на войниците са готови, но "
+"трябва да увеличим усилията си и да ги тренираме до последно ниво, както и "
+"да обучаваме още."
+
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:595
+msgid ""
+"We need a lot of food, a lot of iron and a lot of gold to do so. So, we have"
+" lots of challenges to cope with."
+msgstr ""
+"Трябва ни много храна, желязо и злато, за да успеем. Така че трябва да се "
+"справим с много предизвикателства."
+
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:601
+msgid "Training Infrastructure is Needed"
+msgstr "Нужни са условия за трениране"
+
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:602
+msgid "Saledus has security concerns"
+msgstr "Саледий е притеснен за сигурността"
+
+#. TRANSLATORS: Saledus
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:604
+msgid ""
+"Sire, we need to train some of our people to serve in your great army. It is"
+" important to increase the number of our soldiers as fast as we can. And we "
+"should train them well to improve their fighting abilities."
+msgstr ""
+"Ваше величество, трябва да обучим някои от хората си да служат във великата "
+"Ви войска. Важно е да увеличим броя на войниците колкото се може по-бързо. И"
+" трябва да ги тренираме добре, за да подобрим бойните им способности."
+
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:606
+msgid ""
+"Therefore, we need to build a full training infrastructure despite the "
+"limited space available. We need some barracks, a training camp and an arena"
+" or a colosseum."
+msgstr ""
+"Затова ще трябва да построим всички нужни тренировъчни сгради, въпреки "
+"малкото място. Ще ни трябват няколко казарми, тренировъчен лагер и арена или"
+" колизей."
+
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:614
+msgid "Time to get Home Again"
+msgstr "Време е да се завърнем у дома"
+
+#. TRANSLATORS: Lutius - Diary
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:617
+msgid ""
+"Yes my fellow soldiers, we have done it! We have met all the challenges that"
+" were put in front of us. But my heart is still with our home. We shall set "
+"sail as soon as possible to help defend the Empire from the Barbarian tribe."
+msgstr ""
+"Да, мои войници, ние успяхме! Справихме се с всички предизвикателства. Но "
+"сърцето ми все още копнее за дома. Трябва да отплаваме възможно най-скоро, "
+"за да помогнем в защитата на империята от варварското племе."
+
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:619
+msgid ""
+"You have completed this mission. You may continue playing if you wish, "
+"otherwise move on to the next mission."
+msgstr ""
+"Вие завършихте тази мисия. Ако искате, можете да продължите да играете, или "
+"да преминете на следващата мисия."
+
+#. TRANSLATORS: Lutius - Diary
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:628
+msgid "Finally, we have discovered a piece of our shrine. Praise Neptune!"
+msgstr "Най-после открихме част от олтара. Слава на Нептун!"
+
+#. TRANSLATORS: Lutius - Diary
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:631
+msgid "We have discovered another piece of our shrine. Praise Neptune!"
+msgstr "Открихме още една част от олтара. Слава на Нептун!"
+
+#. TRANSLATORS: Lutius - Diary
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:636
+#, lua-format
+msgid "We still need to discover %d piece of our shrine."
+msgid_plural "We still need to discover %d pieces of our shrine."
+msgstr[0] "Трябва да открием още %d част от олтара."
+msgstr[1] "Трябва да открием още %d части от олтара."
+
+#. TRANSLATORS: Lutius - Diary
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:639
+msgid ""
+"Finally, we have discovered the last piece of our shrine. Now we can "
+"reassemble it to worship our god. Praise Neptune!"
+msgstr ""
+"Най-после открихме последната част от олтара. Сега можем да го сглобим и да "
+"отдадем почитта си на бога. Слава на Нептун!"
+
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:642
+msgid "Artifact Found"
+msgstr "Нов артефакт"
+
+#: ../../data/scripting/format_scenario.lua:36
+#, lua-format
+msgid "“%s”"
+msgstr "„%s“"
+
+#: ../../data/scripting/format_scenario.lua:84
+msgid "New Objective"
+msgid_plural "New Objectives"
+msgstr[0] "Нова задача"
+msgstr[1] "Нови задачи"

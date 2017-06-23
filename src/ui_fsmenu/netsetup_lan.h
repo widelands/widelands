@@ -41,12 +41,11 @@ public:
 	void think() override;
 
 	/**
-	 * \param[out] addr filled in with the IP address of the chosen server
-	 * \param[out] port filled in with the port of the chosen server
-	 * \return \c true if a valid server has been chosen. If \c false is
-	 * returned, the values of \p addr and \p port are undefined.
+	 * \param[out] addr filled in with the host name or IP address and port of the chosen server
+	 * \return \c True if the address is valid, \c false otherwise. In that case \c addr is not
+	 * modified
 	 */
-	bool get_host_address(uint32_t& addr, uint16_t& port);
+	bool get_host_address(NetAddress* addr);
 
 	/**
 	 * \return the name chosen by the player
