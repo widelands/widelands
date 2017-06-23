@@ -105,6 +105,8 @@ public:
 	DescriptionIndex headquarters() const;
 	DescriptionIndex port() const;
 	DescriptionIndex barracks() const;
+
+	const std::vector<DescriptionIndex>& trainingsites() const;
 	const std::vector<DescriptionIndex>& worker_types_without_cost() const;
 
 	uint32_t frontier_animation() const;
@@ -186,6 +188,7 @@ private:
 	DescriptionIndex port_;          // The port that this tribe uses
 	DescriptionIndex barracks_;      // The barracks to create soldiers
 	std::vector<DescriptionIndex> worker_types_without_cost_;
+	std::vector<DescriptionIndex> trainingsites_;
 	// Order and positioning of wares in the warehouse display
 	WaresOrder wares_order_;
 	WaresOrderCoords wares_order_coords_;
