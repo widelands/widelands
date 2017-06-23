@@ -4,14 +4,14 @@
 # Translators:
 # GunChleoc, 2015-2016
 # GunChleoc, 2014-2015
-# zecas <jjorge@free.fr>, 2016
+# zecas <jjorge@free.fr>, 2016-2017
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-03-03 06:24+0000\n"
-"PO-Revision-Date: 2017-03-03 06:26+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2017-06-16 07:17+0000\n"
+"PO-Revision-Date: 2017-06-19 09:54+0000\n"
+"Last-Translator: zecas <jjorge@free.fr>\n"
 "Language-Team: Portuguese (http://www.transifex.com/widelands/widelands/language/pt/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -40,7 +40,7 @@ msgstr ""
 #: ../../data/tribes/buildings/militarysites/empire/tower/helptexts.lua:16
 msgctxt "building"
 msgid "Garrisons soldiers to expand your territory."
-msgstr ""
+msgstr "Envia soldados para expandir o seu território"
 
 #. TRANSLATORS: Note helptext for a building
 #: ../../data/tribes/buildings/militarysites/atlanteans/castle/helptexts.lua:24
@@ -81,7 +81,7 @@ msgid ""
 "A building is being dismantled at this dismantlesite, returning some of the "
 "resources that were used during this building’s construction to your tribe’s"
 " stores."
-msgstr ""
+msgstr "Um edifício é desmontado no seu sítio, recuperando alguns dos recursos que foram utilizados para o construir."
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/atlanteans/armorsmithy/helptexts.lua:16
@@ -89,13 +89,13 @@ msgctxt "atlanteans_building"
 msgid ""
 "Forges shields that are used for training soldiers’ defense in the "
 "labyrinth."
-msgstr ""
+msgstr "Funde escudos que servem para treinar a defesa dos soldados no labirinto."
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/atlanteans/bakery/helptexts.lua:16
 msgctxt "atlanteans_building"
 msgid "Bakes bread to feed the scouts and miners and to train soldiers."
-msgstr ""
+msgstr "Coze pão para alimentar os escuteiros, os mineiros e os soldados."
 
 #. TRANSLATORS: Lore helptext for a building
 #. TRANSLATORS: Lore author helptext for a building
@@ -103,7 +103,7 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/atlanteans/barracks/helptexts.lua:16
 msgctxt "atlanteans_building"
 msgid "Equips recruits and trains them as soldiers."
-msgstr ""
+msgstr "Equipa os recrutas e os treina em soldados."
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/atlanteans/blackroot_farm/helptexts.lua:16
@@ -3516,7 +3516,7 @@ msgid "Wool is the hair of sheep. Weaving mills use it to make cloth."
 msgstr ""
 
 #. TRANSLATORS: Helptext for a worker: Armorsmith
-#: ../../data/tribes/workers/atlanteans/armorsmith/helptexts.lua:3
+#: ../../data/tribes/workers/atlanteans/armorsmith/helptexts.lua:5
 msgctxt "atlanteans_worker"
 msgid "Produces armor for the soldiers."
 msgstr "Produz armaduras para os soldados."
