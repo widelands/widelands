@@ -32,13 +32,13 @@ click     click          clicking | clicked  'click', 'clicking', 'clicked'
 
 from collections import defaultdict
 from subprocess import call, CalledProcessError, Popen, PIPE
-import csv
 import os.path
 import re
 import subprocess
 import sys
 import time
 import traceback
+from file_utils import read_csv_file, make_path, delete_path
 
 #############################################################################
 # Data Containers                                                           #
@@ -88,47 +88,6 @@ class HunspellLocale:
 hunspell_locales = defaultdict(list)
 """ Hunspell needs specific locales"""
 
-#############################################################################
-# File System Functions                                                     #
-#############################################################################
-
-
-def read_csv_file(filepath):
-    """Parses a CSV file into a 2-dimensional array."""
-    result = []
-    with open(filepath) as csvfile:
-        csvreader = csv.reader(csvfile, delimiter=',', quotechar='"')
-        for row in csvreader:
-            result.append(row)
-    return result
-
-
-def make_path(base_path, subdir):
-    """Creates the correct form of the path and makes sure that it exists."""
-    result = os.path.abspath(os.path.join(base_path, subdir))
-    if not os.path.exists(result):
-        os.makedirs(result)
-    return result
-
-
-def delete_path(path):
-    """Deletes the directory specified by 'path' and all its subdirectories and
-    file contents."""
-    if os.path.exists(path) and not os.path.isfile(path):
-        files = sorted(os.listdir(path), key=str.lower)
-        for deletefile in files:
-            deleteme = os.path.abspath(os.path.join(path, deletefile))
-            if os.path.isfile(deleteme):
-                try:
-                    os.remove(deleteme)
-                except Exception:
-                    print('Failed to delete file ' + deleteme)
-            else:
-                delete_path(deleteme)
-        try:
-            os.rmdir(path)
-        except Exception:
-            print('Failed to delete path ' + deleteme)
 
 #############################################################################
 # Glossary Loading                                                          #
@@ -363,7 +322,7 @@ def load_glossary(glossary_file, locale):
 def contains_term(string, term):
     """Checks whether 'string' contains 'term' as a whole word.
 
-    This check is case-ionsensitive.
+    This check is case-insensitive.
 
     """
     result = False
@@ -451,6 +410,9 @@ def check_file(csv_file, glossaries, locale, po_file):
                 # Filter out superstrings, e.g. we don't want to check
                 # "arena" against "battle arena"
                 if source_contains_term(row[source_index], entry, glossaries[locale][0]):
+                    # Skip empty translations
+                    if row[target_index] == "":
+                        continue;
                     # Now verify the translation against all translation
                     # variations from the glossary
                     term_found = translation_has_term(entry, row[target_index])
