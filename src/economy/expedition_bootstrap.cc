@@ -26,12 +26,12 @@
 #include "economy/portdock.h"
 #include "economy/wares_queue.h"
 #include "economy/workers_queue.h"
+#include "io/fileread.h"
 #include "io/filewrite.h"
 #include "logic/map_objects/tribes/warehouse.h"
 #include "logic/player.h"
 #include "map_io/map_object_loader.h"
 #include "map_io/map_object_saver.h"
-#include "wui/interactive_gamebase.h"
 
 namespace Widelands {
 
@@ -87,11 +87,14 @@ void ExpeditionBootstrap::start() {
 	queues_[buildcost_size]->set_callback(input_callback, this);
 
 	// Update the user interface
-	if (upcast(InteractiveGameBase, igb, warehouse->owner().egbase().get_ibase()))
-		warehouse->refresh_options(*igb);
+	Notifications::publish(NoteBuilding(warehouse->serial(), NoteBuilding::Action::kChanged));
 }
 
+/**
+ * Cancel the Expediton by putting back all wares and workers.
+‚ */
 void ExpeditionBootstrap::cancel(Game& game) {
+
 	// Put all wares from the WaresQueues back into the warehouse
 	Warehouse* const warehouse = portdock_->get_warehouse();
 	for (std::unique_ptr<InputQueue>& iq : queues_) {
@@ -109,9 +112,7 @@ void ExpeditionBootstrap::cancel(Game& game) {
 	queues_.clear();
 
 	// Update the user interface
-	if (upcast(InteractiveGameBase, igb, warehouse->owner().egbase().get_ibase())) {
-		warehouse->refresh_options(*igb);
-	}
+	Notifications::publish(NoteBuilding(warehouse->serial(), NoteBuilding::Action::kChanged));
 	Notifications::publish(NoteExpeditionCanceled(this));
 }
 

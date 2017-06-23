@@ -26,6 +26,7 @@
 #include "graphic/rendertarget.h"
 #include "graphic/text/font_set.h"
 #include "graphic/text_constants.h"
+#include "graphic/text_layout.h"
 
 namespace UI {
 
@@ -43,6 +44,7 @@ MultilineTextarea::MultilineTextarea(Panel* const parent,
    : Panel(parent, x, y, w, h),
      text_(text),
      color_(UI_FONT_CLR_FG),
+     align_(align),
      force_new_renderer_(false),
      use_old_renderer_(false),
      scrollbar_(this, get_w() - Scrollbar::kSize, 0, Scrollbar::kSize, h, button_background, false),
@@ -51,15 +53,9 @@ MultilineTextarea::MultilineTextarea(Panel* const parent,
 	assert(scrollmode_ == MultilineTextarea::ScrollMode::kNoScrolling || Scrollbar::kSize <= w);
 	set_thinks(false);
 
-	//  do not allow vertical alignment as it does not make sense
-	align_ = align & UI::Align::kHorizontal;
-
 	scrollbar_.moved.connect(boost::bind(&MultilineTextarea::scrollpos_changed, this, _1));
 
-	scrollbar_.set_singlestepsize(
-	   UI::g_fh1->render(
-	               as_uifont(UI::g_fh1->fontset()->representative_character(), UI_FONT_SIZE_SMALL))
-	      ->height());
+	scrollbar_.set_singlestepsize(text_height());
 	scrollbar_.set_steps(1);
 	scrollbar_.set_force_draw(scrollmode_ == ScrollMode::kScrollNormalForced ||
 	                          scrollmode_ == ScrollMode::kScrollLogForced);
@@ -81,7 +77,7 @@ void MultilineTextarea::set_text(const std::string& text) {
  * and adjust scrollbar settings accordingly.
  */
 void MultilineTextarea::recompute() {
-	uint32_t height;
+	int height = 0;
 
 	// We wrap the text twice. We need to do this to account for the presence/absence of the
 	// scollbar.
@@ -89,13 +85,10 @@ void MultilineTextarea::recompute() {
 	for (int i = 0; i < 2; ++i) {
 		if (!is_richtext(text_)) {
 			use_old_renderer_ = false;
-			const Image* text_im =
-			   UI::g_fh1->render(make_richtext(), get_eff_w() - 2 * RICHTEXT_MARGIN);
-			height = text_im->height();
+			height = UI::g_fh1->render(make_richtext(), get_eff_w() - 2 * RICHTEXT_MARGIN)->height();
 		} else if (force_new_renderer_) {
 			use_old_renderer_ = false;
-			const Image* text_im = UI::g_fh1->render(text_, get_eff_w() - 2 * RICHTEXT_MARGIN);
-			height = text_im->height();
+			height = UI::g_fh1->render(text_, get_eff_w() - 2 * RICHTEXT_MARGIN)->height();
 		} else {
 			use_old_renderer_ = true;
 			rt.set_width(get_eff_w() - 2 * RICHTEXT_MARGIN);
@@ -146,38 +139,31 @@ void MultilineTextarea::layout() {
  */
 void MultilineTextarea::draw(RenderTarget& dst) {
 	if (pic_background_) {
-		dst.tile(Recti(0, 0, get_inner_w(), get_inner_h()), pic_background_, Vector2i(0, 0));
+		dst.tile(Recti(0, 0, get_inner_w(), get_inner_h()), pic_background_, Vector2i::zero());
 	}
 	if (use_old_renderer_) {
 		rt.draw(dst, Vector2i(RICHTEXT_MARGIN, RICHTEXT_MARGIN - scrollbar_.get_scrollpos()));
 	} else {
-		const Image* text_im;
-		if (!is_richtext(text_)) {
-			text_im = UI::g_fh1->render(make_richtext(), get_eff_w() - 2 * RICHTEXT_MARGIN);
-		} else {
-			text_im = UI::g_fh1->render(text_, get_eff_w() - 2 * RICHTEXT_MARGIN);
-		}
-
-		uint32_t blit_width = std::min(text_im->width(), static_cast<int>(get_eff_w()));
-		uint32_t blit_height = std::min(text_im->height(), static_cast<int>(get_inner_h()));
+		std::shared_ptr<const UI::RenderedText> rendered_text = UI::g_fh1->render(
+		   is_richtext(text_) ? text_ : make_richtext(), get_eff_w() - 2 * RICHTEXT_MARGIN);
+		uint32_t blit_width = std::min(rendered_text->width(), static_cast<int>(get_eff_w()));
+		uint32_t blit_height = std::min(rendered_text->height(), get_inner_h());
 
 		if (blit_width > 0 && blit_height > 0) {
 			int anchor = 0;
-			Align alignment = mirror_alignment(align_);
-			switch (alignment & UI::Align::kHorizontal) {
-			case UI::Align::kHCenter:
+			Align alignment = mirror_alignment(align_, text_);
+			switch (alignment) {
+			case UI::Align::kCenter:
 				anchor = (get_eff_w() - blit_width) / 2;
 				break;
 			case UI::Align::kRight:
 				anchor = get_eff_w() - blit_width - RICHTEXT_MARGIN;
 				break;
-			default:
+			case UI::Align::kLeft:
 				anchor = RICHTEXT_MARGIN;
 			}
-
-			dst.blitrect(Vector2f(anchor, 0), text_im,
-			             Recti(0, scrollbar_.get_scrollpos(), blit_width, blit_height),
-			             BlendMode::UseAlpha);
+			rendered_text->draw(dst, Vector2i(anchor, 0),
+			                    Recti(0, scrollbar_.get_scrollpos(), blit_width, blit_height));
 		}
 	}
 }

@@ -99,7 +99,7 @@ GeneralStatisticsMenu::GeneralStatisticsMenu(InteractiveGameBase& parent,
 	plot_.set_time(my_registry_->time);
 
 	// Setup Widgets
-	box_.add(&plot_, UI::Align::kTop);
+	box_.add(&plot_);
 
 	UI::Box* hbox1 = new UI::Box(&box_, 0, 0, UI::Box::Horizontal, 0, 0, 1);
 
@@ -108,9 +108,7 @@ GeneralStatisticsMenu::GeneralStatisticsMenu(InteractiveGameBase& parent,
 	iterate_players_existing_novar(p, nr_players, game)++ plr_in_game;
 
 	iterate_players_existing_const(p, nr_players, game, player) {
-		const Image* player_image =
-		   playercolor_image(p - 1, g_gr->images().get("images/players/genstats_player.png"),
-		                     g_gr->images().get("images/players/genstats_player_pc.png"));
+		const Image* player_image = playercolor_image(p - 1, "images/players/genstats_player.png");
 		assert(player_image);
 		UI::Button& cb = *new UI::Button(hbox1, "playerbutton", 0, 0, 25, 25,
 		                                 g_gr->images().get("images/ui_basic/but4.png"), player_image,
@@ -120,86 +118,85 @@ GeneralStatisticsMenu::GeneralStatisticsMenu(InteractiveGameBase& parent,
 
 		cbs_[p - 1] = &cb;
 
-		hbox1->add(&cb, UI::Align::kLeft, false, true);
+		hbox1->add(&cb, UI::Box::Resizing::kFillSpace);
 	}
 	else  //  player nr p does not exist
 	   cbs_[p - 1] = nullptr;
 
-	box_.add(hbox1, UI::Align::kTop, true);
+	box_.add(hbox1, UI::Box::Resizing::kFullSize);
 
 	UI::Box* hbox2 = new UI::Box(&box_, 0, 0, UI::Box::Horizontal, 0, 0, 1);
 
 	UI::Radiobutton* btn;
 
-	radiogroup_.add_button(hbox2, Vector2i(0, 0),
-	                       g_gr->images().get("images/wui/stats/genstats_landsize.png"), _("Land"),
-	                       &btn);
-	hbox2->add(btn, UI::Align::kLeft, false, true);
+	const Vector2i zero = Vector2i::zero();
 
-	radiogroup_.add_button(hbox2, Vector2i(0, 0),
+	radiogroup_.add_button(
+	   hbox2, zero, g_gr->images().get("images/wui/stats/genstats_landsize.png"), _("Land"), &btn);
+	hbox2->add(btn, UI::Box::Resizing::kFillSpace);
+
+	radiogroup_.add_button(hbox2, zero,
 	                       g_gr->images().get("images/wui/stats/genstats_nrworkers.png"),
 	                       _("Workers"), &btn);
-	hbox2->add(btn, UI::Align::kLeft, false, true);
+	hbox2->add(btn, UI::Box::Resizing::kFillSpace);
 
-	radiogroup_.add_button(hbox2, Vector2i(0, 0),
+	radiogroup_.add_button(hbox2, zero,
 	                       g_gr->images().get("images/wui/stats/genstats_nrbuildings.png"),
 	                       _("Buildings"), &btn);
-	hbox2->add(btn, UI::Align::kLeft, false, true);
+	hbox2->add(btn, UI::Box::Resizing::kFillSpace);
 
-	radiogroup_.add_button(hbox2, Vector2i(0, 0),
-	                       g_gr->images().get("images/wui/stats/genstats_nrwares.png"), _("Wares"),
-	                       &btn);
-	hbox2->add(btn, UI::Align::kLeft, false, true);
+	radiogroup_.add_button(
+	   hbox2, zero, g_gr->images().get("images/wui/stats/genstats_nrwares.png"), _("Wares"), &btn);
+	hbox2->add(btn, UI::Box::Resizing::kFillSpace);
 
-	radiogroup_.add_button(hbox2, Vector2i(0, 0),
+	radiogroup_.add_button(hbox2, zero,
 	                       g_gr->images().get("images/wui/stats/genstats_productivity.png"),
 	                       _("Productivity"), &btn);
-	hbox2->add(btn, UI::Align::kLeft, false, true);
+	hbox2->add(btn, UI::Box::Resizing::kFillSpace);
 
-	radiogroup_.add_button(hbox2, Vector2i(0, 0),
+	radiogroup_.add_button(hbox2, zero,
 	                       g_gr->images().get("images/wui/stats/genstats_casualties.png"),
 	                       _("Casualties"), &btn);
-	hbox2->add(btn, UI::Align::kLeft, false, true);
+	hbox2->add(btn, UI::Box::Resizing::kFillSpace);
 
-	radiogroup_.add_button(hbox2, Vector2i(0, 0),
-	                       g_gr->images().get("images/wui/stats/genstats_kills.png"), _("Kills"),
-	                       &btn);
-	hbox2->add(btn, UI::Align::kLeft, false, true);
+	radiogroup_.add_button(
+	   hbox2, zero, g_gr->images().get("images/wui/stats/genstats_kills.png"), _("Kills"), &btn);
+	hbox2->add(btn, UI::Box::Resizing::kFillSpace);
 
-	radiogroup_.add_button(hbox2, Vector2i(0, 0),
+	radiogroup_.add_button(hbox2, zero,
 	                       g_gr->images().get("images/wui/stats/genstats_msites_lost.png"),
 	                       _("Military buildings lost"), &btn);
-	hbox2->add(btn, UI::Align::kLeft, false, true);
+	hbox2->add(btn, UI::Box::Resizing::kFillSpace);
 
-	radiogroup_.add_button(hbox2, Vector2i(0, 0),
+	radiogroup_.add_button(hbox2, zero,
 	                       g_gr->images().get("images/wui/stats/genstats_msites_defeated.png"),
 	                       _("Military buildings defeated"), &btn);
-	hbox2->add(btn, UI::Align::kLeft, false, true);
+	hbox2->add(btn, UI::Box::Resizing::kFillSpace);
 
-	radiogroup_.add_button(hbox2, Vector2i(0, 0),
+	radiogroup_.add_button(hbox2, zero,
 	                       g_gr->images().get("images/wui/stats/genstats_civil_blds_lost.png"),
 	                       _("Civilian buildings lost"), &btn);
-	hbox2->add(btn, UI::Align::kLeft, false, true);
+	hbox2->add(btn, UI::Box::Resizing::kFillSpace);
 
-	radiogroup_.add_button(hbox2, Vector2i(0, 0),
+	radiogroup_.add_button(hbox2, zero,
 	                       g_gr->images().get("images/wui/stats/genstats_militarystrength.png"),
 	                       _("Military"), &btn);
-	hbox2->add(btn, UI::Align::kLeft, false, true);
+	hbox2->add(btn, UI::Box::Resizing::kFillSpace);
 
 	if (hook) {
-		radiogroup_.add_button(
-		   hbox2, Vector2i(0, 0), g_gr->images().get(cs_pic), cs_name.c_str(), &btn);
-		hbox2->add(btn, UI::Align::kLeft, false, true);
+		radiogroup_.add_button(hbox2, zero, g_gr->images().get(cs_pic), cs_name.c_str(), &btn);
+		hbox2->add(btn, UI::Box::Resizing::kFillSpace);
 	}
 
 	radiogroup_.set_state(selected_information_);
 	radiogroup_.changedto.connect(boost::bind(&GeneralStatisticsMenu::radiogroup_changed, this, _1));
 
-	box_.add(hbox2, UI::Align::kTop, true);
+	box_.add(hbox2, UI::Box::Resizing::kFullSize);
 
-	box_.add(new WuiPlotAreaSlider(
-	            &box_, plot_, 0, 0, 100, 45, g_gr->images().get("images/ui_basic/but1.png")),
-	         UI::Align::kTop, true);
+	WuiPlotAreaSlider* slider = new WuiPlotAreaSlider(
+	   &box_, plot_, 0, 0, 100, 45, g_gr->images().get("images/ui_basic/but1.png"));
+	slider->changedto.connect(boost::bind(&WuiPlotArea::set_time_id, &plot_, _1));
+	box_.add(slider, UI::Box::Resizing::kFullSize);
 }
 
 GeneralStatisticsMenu::~GeneralStatisticsMenu() {

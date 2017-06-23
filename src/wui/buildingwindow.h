@@ -24,8 +24,10 @@
 #include <memory>
 
 #include "economy/expedition_bootstrap.h"
+#include "logic/map_objects/tribes/building.h"
+#include "notifications/notifications.h"
 #include "ui_basic/button.h"
-#include "ui_basic/window.h"
+#include "ui_basic/unique_window.h"
 #include "wui/field_overlay_manager.h"
 #include "wui/interactive_gamebase.h"
 #include "wui/waresdisplay.h"
@@ -35,14 +37,17 @@
  *
  * This class is sub-classed for all building types to provide something useful.
  */
-struct BuildingWindow : public UI::Window {
+struct BuildingWindow : public UI::UniqueWindow {
 	friend struct TrainingSiteWindow;
 	friend struct MilitarySiteWindow;
 	enum {
 		Width = 4 * 34  //  4 normally sized buttons
 	};
 
-	BuildingWindow(InteractiveGameBase& parent, Widelands::Building&, UI::Window*& registry);
+	BuildingWindow(InteractiveGameBase& parent,
+	               UI::UniqueWindow::Registry& reg,
+	               Widelands::Building&,
+	               bool avoid_fastclick);
 
 	virtual ~BuildingWindow();
 
@@ -50,17 +55,17 @@ struct BuildingWindow : public UI::Window {
 		return building_;
 	}
 
-	InteractiveGameBase& igbase() const {
-		return dynamic_cast<InteractiveGameBase&>(*get_parent());
+	InteractiveGameBase* igbase() const {
+		return parent_;
 	}
 
 	void draw(RenderTarget&) override;
 	void think() override;
-	void set_avoid_fastclick(bool afc) {
-		avoid_fastclick_ = afc;
-	}
 
 protected:
+	virtual void init(bool avoid_fastclick);
+	void die() override;
+
 	UI::TabPanel* get_tabs() {
 		return tabs_;
 	}
@@ -82,10 +87,15 @@ protected:
 
 	virtual void create_capsbuttons(UI::Box* buttons);
 
-	UI::Window*& registry_;
+	bool is_dying_;
 
 private:
+	InteractiveGameBase* parent_;
+	/// Actions performed when a NoteBuilding is received.
+	void on_building_note(const Widelands::NoteBuilding& note);
 	Widelands::Building& building_;
+
+	std::unique_ptr<UI::Box> vbox_;
 
 	UI::TabPanel* tabs_;
 
@@ -106,6 +116,8 @@ private:
 	UI::Button* expeditionbtn_;
 	std::unique_ptr<Notifications::Subscriber<Widelands::NoteExpeditionCanceled>>
 	   expedition_canceled_subscriber_;
+	std::unique_ptr<Notifications::Subscriber<Widelands::NoteBuilding>> buildingnotes_subscriber_;
+	DISALLOW_COPY_AND_ASSIGN(BuildingWindow);
 };
 
 #endif  // end of include guard: WL_WUI_BUILDINGWINDOW_H

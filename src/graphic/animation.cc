@@ -38,11 +38,11 @@
 #include "graphic/texture.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "scripting/lua_table.h"
+#include "sound/note_sound.h"
 #include "sound/sound_handler.h"
 
-using namespace std;
-
 namespace {
+
 // Parses an array { 12, 23 } into a point.
 void get_point(const LuaTable& table, Vector2i* p) {
 	std::vector<int> pts = table.array_entries<int>();
@@ -90,19 +90,19 @@ private:
 	uint32_t current_frame(uint32_t time) const;
 
 	uint32_t frametime_;
-	Vector2i hotspot_;
+	Vector2i hotspot_ = Vector2i::zero();
 	bool hasplrclrs_;
 	std::vector<std::string> image_files_;
 	std::vector<std::string> pc_mask_image_files_;
 	float scale_;
 
-	vector<const Image*> frames_;
-	vector<const Image*> pcmasks_;
+	std::vector<const Image*> frames_;
+	std::vector<const Image*> pcmasks_;
 
 	// name of sound effect that will be played at frame 0.
 	// TODO(sirver): this should be done using play_sound in a program instead of
 	// binding it to the animation.
-	string sound_effect_;
+	std::string sound_effect_;
 	bool play_once_;
 };
 
@@ -138,7 +138,7 @@ NonPackedAnimation::NonPackedAnimation(const LuaTable& table)
 		}
 
 		for (std::string image_file : image_files_) {
-			boost::replace_all(image_file, ".png", "_pc.png");
+			boost::replace_last(image_file, ".png", "_pc.png");
 			if (g_fs->file_exists(image_file)) {
 				hasplrclrs_ = true;
 				pc_mask_image_files_.push_back(image_file);
@@ -152,7 +152,7 @@ NonPackedAnimation::NonPackedAnimation(const LuaTable& table)
 			if (scale_ <= 0.0f) {
 				throw wexception("Animation scale needs to be > 0.0f, but it is %f. The first image of "
 				                 "this animation is %s",
-				                 scale_, image_files_[0].c_str());
+				                 static_cast<double>(scale_), image_files_[0].c_str());
 			}
 		}
 
@@ -220,14 +220,14 @@ uint32_t NonPackedAnimation::frametime() const {
 
 const Image* NonPackedAnimation::representative_image(const RGBColor* clr) const {
 	assert(!image_files_.empty());
-	const Image* image = g_gr->images().get(image_files_[0]);
-	if (hasplrclrs_ && clr) {
-		image = playercolor_image(clr, image, g_gr->images().get(pc_mask_image_files_[0]));
-	}
+	const Image* image = (hasplrclrs_ && clr) ? playercolor_image(*clr, image_files_[0]) :
+	                                            g_gr->images().get(image_files_[0]);
+
 	const int w = image->width();
 	const int h = image->height();
 	Texture* rv = new Texture(w / scale_, h / scale_);
-	rv->blit(Rectf(0, 0, w / scale_, h / scale_), *image, Rectf(0, 0, w, h), 1., BlendMode::Copy);
+	rv->blit(
+	   Rectf(0.f, 0.f, w / scale_, h / scale_), *image, Rectf(0.f, 0.f, w, h), 1., BlendMode::Copy);
 	return rv;
 }
 
@@ -253,7 +253,7 @@ void NonPackedAnimation::trigger_sound(uint32_t time, uint32_t stereo_position) 
 	const uint32_t framenumber = current_frame(time);
 
 	if (framenumber == 0) {
-		g_sound_handler.play_fx(sound_effect_, stereo_position, 1);
+		Notifications::publish(NoteSound(sound_effect_, stereo_position, 1));
 	}
 }
 
@@ -287,6 +287,8 @@ void NonPackedAnimation::blit(uint32_t time,
 		target->blit_blended(
 		   destination_rect, *frames_.at(idx), *pcmasks_.at(idx), source_rect, *clr);
 	}
+	// TODO(GunChleoc): Stereo position would be nice.
+	trigger_sound(time, 128);
 }
 
 }  // namespace
@@ -330,10 +332,11 @@ const Animation& AnimationManager::get_animation(uint32_t id) const {
 }
 
 const Image* AnimationManager::get_representative_image(uint32_t id, const RGBColor* clr) {
-	if (representative_images_.count(id) != 1) {
-		representative_images_.insert(
-		   std::make_pair(id, std::unique_ptr<const Image>(
-		                         g_gr->animations().get_animation(id).representative_image(clr))));
+	const auto hash = std::make_pair(id, clr);
+	if (representative_images_.count(hash) != 1) {
+		representative_images_.insert(std::make_pair(
+		   hash, std::unique_ptr<const Image>(
+		            std::move(g_gr->animations().get_animation(id).representative_image(clr)))));
 	}
-	return representative_images_.at(id).get();
+	return representative_images_.at(hash).get();
 }

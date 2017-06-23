@@ -1,16 +1,16 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2016 Widelands Development Team
+# Copyright (C) 2005-2017 Widelands Development Team
 # 
 # Translators:
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2013
-# Jukka Pakarinen, 2016
+# Jukka Pakarinen, 2016-2017
 # Markus Hällfors <markus@hallfors.com>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-12-18 17:02+0000\n"
-"PO-Revision-Date: 2016-12-24 15:41+0000\n"
+"POT-Creation-Date: 2017-05-19 07:45+0000\n"
+"PO-Revision-Date: 2017-05-21 05:55+0000\n"
 "Last-Translator: Jukka Pakarinen\n"
 "Language-Team: Finnish (http://www.transifex.com/widelands/widelands/language/fi/)\n"
 "MIME-Version: 1.0\n"
@@ -268,7 +268,7 @@ msgid ""
 "Although it might take long and be expensive and not without dangers – who "
 "knows what monsters live in the sea? – I see no other possibility: we will "
 "have to undertake an expedition to the unknown seas."
-msgstr "Vaikka se saattaa kestää kauan ja olla tyyristä ja vaarallista – kuka tietää millaisia hirviöitä meressä elääkään? – En näe muuta vaihtoehtoa: meidän täytyy aloittaa tutkimusretki tuntemattomille merille."
+msgstr "Vaikka se saattaa kestää kauan ja olla tyyristä ja vaarallista – kuka tietää millaisia hirviöitä meressä elääkään? – En näe muuta vaihtoehtoa: meidän täytyy aloittaa tutkimusmatka tuntemattomille merille."
 
 #. TRANSLATORS: This shall be the beginning of a poem
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:138
@@ -337,7 +337,7 @@ msgid ""
 " ship in any of the six main directions of the Widelands map. When it has "
 "reached a coastline, you can make it travel around the coast, where it will "
 "look for suitable places for landing."
-msgstr "Tutkimusmatkalaivasi on valmis. Se odottaa käskyäsi satamasi edustalla. Se ei enää kuljeta tavaroita. Käytä sen painikkeita lähettääksesi laivasi mihin tahansa kuudesta Widelandsin kartan pääsuunnista. Kun se on saavuttanut rannikkoviivan, voit laitta sen matkustamaan pitkin rannikkoa, josta se etsii sopivan paikan rantautumiseen."
+msgstr "Tutkimusmatka-aluksesi on valmis. Se odottaa käskyäsi satamasi edustalla. Se ei enää kuljeta tavaroita. Käytä sen painikkeita lähettääksesi laivasi mihin tahansa kuudesta Widelandsin kartan pääsuunnista. Kun se on saavuttanut rannikkoviivan, voit laittaa sen matkustamaan pitkin rannikkoa, josta se etsii sopivan paikan rantautumiseen."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:165
 msgid ""
@@ -370,7 +370,7 @@ msgstr "Navigoi laivasi saareen, joka voisi olla rautamalmia."
 msgid ""
 "When you click on the expedition ship, a window opens where you can control "
 "your ship."
-msgstr "Kun klikkaat tutkimusmatkalaivaa, avautuu ruutu, jolla voit hallita laivaasi."
+msgstr "Kun klikkaat tutkimusmatka-alusta, avautuu ruutu, jolla voit hallita laivaasi."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:176
 msgid "When you have found a suitable port space, build a port there."
@@ -419,8 +419,8 @@ msgstr "Tällä kartalla ei ole vihollisia, joita pelätä. Kuten aina, voit jat
 msgid "“%s”"
 msgstr "“%s”"
 
-#: ../../data/scripting/format_scenario.lua:96
+#: ../../data/scripting/format_scenario.lua:84
 msgid "New Objective"
 msgid_plural "New Objectives"
-msgstr[0] "Uusi tavoite"
-msgstr[1] "Uudet tavoitteet"
+msgstr[0] "Uusi Tavoite"
+msgstr[1] "Uudet Tavoitteet"

@@ -61,7 +61,7 @@
 #include "map_io/map_object_loader.h"
 #include "map_io/map_object_saver.h"
 #include "map_io/tribes_legacy_lookup_table.h"
-#include "sound/sound_handler.h"
+#include "sound/note_sound.h"
 
 namespace Widelands {
 
@@ -916,7 +916,7 @@ bool Worker::run_geologist_find(Game& game, State& state, const Action&) {
  * Whether the effect actually gets played is decided only by the sound server.
  */
 bool Worker::run_play_sound(Game& game, State& state, const Action& action) {
-	g_sound_handler.play_fx(action.sparam1, get_position(), action.iparam1);
+	Notifications::publish(NoteSound(action.sparam1, get_position(), action.iparam1));
 
 	++state.ivar1;
 	schedule_act(game, 10);
@@ -977,24 +977,34 @@ void Worker::log_general_info(const EditorGameBase& egbase) {
 	Bob::log_general_info(egbase);
 
 	if (upcast(PlayerImmovable, loc, location_.get(egbase))) {
+		FORMAT_WARNINGS_OFF;
 		molog("* Owner: (%p)\n", &loc->owner());
+		FORMAT_WARNINGS_ON;
 		molog("** Owner (plrnr): %i\n", loc->owner().player_number());
+		FORMAT_WARNINGS_OFF;
 		molog("* Economy: %p\n", loc->get_economy());
+		FORMAT_WARNINGS_ON;
 	}
 
 	PlayerImmovable* imm = location_.get(egbase);
 	molog("location: %u\n", imm ? imm->serial() : 0);
+	FORMAT_WARNINGS_OFF;
 	molog("Economy: %p\n", economy_);
 	molog("transfer: %p\n", transfer_);
+	FORMAT_WARNINGS_ON;
 
 	if (upcast(WareInstance, ware, carried_ware_.get(egbase))) {
 		molog("* carried_ware->get_ware() (id): %i\n", ware->descr_index());
+		FORMAT_WARNINGS_OFF;
 		molog("* carried_ware->get_economy() (): %p\n", ware->get_economy());
+		FORMAT_WARNINGS_ON;
 	}
 
 	molog("current_exp: %i / %i\n", current_exp_, descr().get_needed_experience());
 
+	FORMAT_WARNINGS_OFF;
 	molog("supply: %p\n", supply_);
+	FORMAT_WARNINGS_ON;
 }
 
 /**
@@ -1071,7 +1081,7 @@ void Worker::set_economy(Economy* const economy) {
 /**
  * Initialize the worker
  */
-void Worker::init(EditorGameBase& egbase) {
+bool Worker::init(EditorGameBase& egbase) {
 	Bob::init(egbase);
 
 	// a worker should always start out at a fixed location
@@ -1081,6 +1091,7 @@ void Worker::init(EditorGameBase& egbase) {
 
 	if (upcast(Game, game, &egbase))
 		create_needed_experience(*game);
+	return true;
 }
 
 /**
@@ -1678,12 +1689,10 @@ void Worker::return_update(Game& game, State& state) {
 		    descr().descname().c_str())
 		      .str();
 
-		owner().add_message(
-		   game, *new Message(Message::Type::kGameLogic, game.get_gametime(), _("Worker"),
-		                      "images/ui_basic/menu_help.png", _("Worker got lost!"),
-		                      (boost::format("<rt><p font-size=12>%s</p></rt>") % message).str(),
-		                      get_position()),
-		   serial_);
+		owner().add_message(game, *new Message(Message::Type::kGameLogic, game.get_gametime(),
+		                                       _("Worker"), "images/ui_basic/menu_help.png",
+		                                       _("Worker got lost!"), message, get_position()),
+		                    serial_);
 		set_location(nullptr);
 		return pop_task(game);
 	}
@@ -2550,14 +2559,6 @@ void Worker::draw_inner(const EditorGameBase& game,
 
 	dst->blit_animation(
 	   point_on_dst, scale, get_current_anim(), game.get_gametime() - get_animstart(), player_color);
-
-	if (WareInstance const* const carried_ware = get_carried_ware(game)) {
-		const Vector2f hotspot = descr().get_ware_hotspot().cast<float>();
-		const Vector2f location(
-		   point_on_dst.x - hotspot.x * scale, point_on_dst.y - hotspot.y * scale);
-		dst->blit_animation(
-		   location, scale, carried_ware->descr().get_animation("idle"), 0, player_color);
-	}
 }
 
 /**

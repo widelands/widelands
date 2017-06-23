@@ -1,3 +1,27 @@
+wl_library(ui_fsmenu_options
+  SRCS
+    options.cc
+    options.h
+  DEPENDS
+    base_exceptions
+    base_i18n
+    base_log
+    graphic
+    graphic_fonthandler
+    graphic_text
+    graphic_text_constants
+    helper
+    io_filesystem
+    logic_constants
+    scripting_lua_interface
+    scripting_lua_table
+    ui_basic
+    ui_fsmenu
+    profile
+    sound
+    widelands_ball_of_mud
+)
+
 wl_library(ui_fsmenu
   SRCS
     about.cc
@@ -12,6 +36,8 @@ wl_library(ui_fsmenu
     internet_lobby.h
     intro.cc
     intro.h
+    launch_game.cc
+    launch_game.h
     launch_mpg.cc
     launch_mpg.h
     launch_spg.cc
@@ -30,8 +56,6 @@ wl_library(ui_fsmenu
     multiplayer.h
     netsetup_lan.cc
     netsetup_lan.h
-    options.cc
-    options.h
     singleplayer.cc
     singleplayer.h
   DEPENDS
@@ -43,11 +67,11 @@ wl_library(ui_fsmenu
     build_info
     game_io
     graphic
+    graphic_fonthandler
     graphic_image_io
     graphic_playercolor
     graphic_surface
-    graphic_text
-    graphic_text_layout
+    graphic_text_constants
     helper
     io_filesystem
     logic
@@ -60,9 +84,7 @@ wl_library(ui_fsmenu
     scripting_coroutine
     scripting_lua_interface
     scripting_lua_table
-    sound
     ui_basic
-    widelands_ball_of_mud
     wui
     wui_chat_ui
     wui_common

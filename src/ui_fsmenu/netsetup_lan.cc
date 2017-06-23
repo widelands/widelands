@@ -37,7 +37,7 @@ FullscreenMenuNetSetupLAN::FullscreenMenuNetSetupLAN()
      listw_(get_w() * 9 / 16),
 
      // Text labels
-     title(this, get_w() / 2, get_h() / 10, _("Begin Network Game"), UI::Align::kHCenter),
+     title(this, get_w() / 2, get_h() / 10, _("Begin Network Game"), UI::Align::kCenter),
      opengames_(
         this, get_w() * 3 / 50, get_h() * 27 / 100, _("List of games in your local network:")),
      playername_(this, get_w() * 16 / 25, get_h() * 27 / 100, _("Your nickname:")),
@@ -126,6 +126,7 @@ FullscreenMenuNetSetupLAN::FullscreenMenuNetSetupLAN()
 
 void FullscreenMenuNetSetupLAN::layout() {
 	// TODO(GunChleoc): Box layout and then implement
+	opengames.layout();
 }
 
 void FullscreenMenuNetSetupLAN::think() {
@@ -134,7 +135,7 @@ void FullscreenMenuNetSetupLAN::think() {
 	discovery.run();
 }
 
-bool FullscreenMenuNetSetupLAN::get_host_address(uint32_t& addr, uint16_t& port) {
+bool FullscreenMenuNetSetupLAN::get_host_address(NetAddress* addr) {
 	const std::string& host = hostname.text();
 
 	const uint32_t opengames_size = opengames.size();
@@ -142,20 +143,17 @@ bool FullscreenMenuNetSetupLAN::get_host_address(uint32_t& addr, uint16_t& port)
 		const NetOpenGame& game = *opengames[i];
 
 		if (!strcmp(game.info.hostname, host.c_str())) {
-			addr = game.address;
-			port = game.port;
+			*addr = game.address;
 			return true;
 		}
 	}
 
-	if (hostent* const he = gethostbyname(host.c_str())) {
-		addr = (reinterpret_cast<in_addr*>(he->h_addr_list[0]))->s_addr;
-		DIAG_OFF("-Wold-style-cast")
-		port = htons(WIDELANDS_PORT);
-		DIAG_ON("-Wold-style-cast")
+	// The user probably entered a hostname on his own. Try to resolve it
+	if (NetAddress::resolve_to_v6(addr, host, WIDELANDS_PORT))
 		return true;
-	} else
-		return false;
+	if (NetAddress::resolve_to_v4(addr, host, WIDELANDS_PORT))
+		return true;
+	return false;
 }
 
 const std::string& FullscreenMenuNetSetupLAN::get_playername() {

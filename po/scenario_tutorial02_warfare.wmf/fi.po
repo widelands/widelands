@@ -6,14 +6,14 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
 # GunChleoc, 2014
 # Joonas Tamminen <hippimunqqi@gmail.com>, 2015
-# Jukka Pakarinen, 2016
+# Jukka Pakarinen, 2016-2017
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-01-21 14:22+0000\n"
-"PO-Revision-Date: 2017-01-21 14:25+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2017-05-19 07:45+0000\n"
+"PO-Revision-Date: 2017-05-21 05:55+0000\n"
+"Last-Translator: Jukka Pakarinen\n"
 "Language-Team: Finnish (http://www.transifex.com/widelands/widelands/language/fi/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -36,7 +36,7 @@ msgid ""
 "burning down, there is an enemy you sometimes have to defeat. Yet warfare is"
 " mainly focused on economics, not on military strategies, and its mechanics "
 "deserve explanation."
-msgstr "Tässä skenaariossa, miinä kerron teille sotilaista, heidän koulutuksestaan ja heidän ammatistaan: sodankäynnistä. Vaikka Widelands on pääasiassa rakentamista, ei hajottamista, täällä on vastustaja, joka sinun joskus pitää voittaa. Silti sodankäynti keskittyy pääasiassa talouteen, ei sotilaallisiin strategioihin, ja sen mekaniikat ovat selvityksen arvoisia."
+msgstr "Tässä skenaariossa kerron teille sotilaista, heidän koulutuksestaan ja heidän ammatistaan: sodankäynnistä. Vaikka Widelands on pääasiassa rakentamista eikä hajottamista, pelissä on vastustaja, joka sinun joskus pitää voittaa. Silti sodankäynti keskittyy pääasiassa talouteen eikä sotilaallisiin strategioihin ja siksi sen mekaniikat ovat selvityksen arvoisia."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:28
 msgid ""
@@ -55,7 +55,7 @@ msgid ""
 " from a warehouse (or your headquarters) to the barracks where they will "
 "receive some basic training and become soldiers. Basic Barbarian soldiers do"
 " not use armor, they only need an ax."
-msgstr ""
+msgstr "Uudet sotilaat luodaan eritavalla tavallisista työntekijöistä: rekrytoidut kävelevät varastolta (tai sinun päämajasta) kasarmille, missä he saavat peruskoulutuksen ja muuttuvat sotilaiksi. Tavalliset Barbaarisotilaat eivät käytä haarniskoja, he tarvitsevat ainoastaan kirveitä."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:38
 msgid ""
@@ -111,7 +111,7 @@ msgid ""
 "level 0, which means that the damage is always reduced by %1%%%. If an "
 "attacker with an attack value of 3500 points hits a Barbarian soldier, the "
 "Barbarian will lose 3500·%2%%% = %3% health."
-msgstr "Puolustus on prosenttimäärä, joka vähenee hyökkäysarvosta. Barbaari ei voi harjoitella tätä taitoa ja siksi hänellä on aina puolustustaso 0, mikä tarkoitta puolustustason vähenemistä %1%%%. Jos 3500 pisteen hyökkääjä iskee Barbaarisotilasta, hän menettää 3500·%2%%% = %3% terveyttä."
+msgstr "Puolustus on prosenttimäärä, joka vähenee hyökkäysarvosta. Barbaari ei voi harjoitella tätä taitoa ja siksi hänellä on aina puolustustaso 0, mikä tarkoitta, että vanhingosta vähennetään aina %1%%%. Jos 3500 pisteen hyökkääjä iskee Barbaarisotilasta, hän menettää 3500·%2%%% = %3% terveyttä."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:53
 msgid "Evade:"
@@ -139,7 +139,7 @@ msgstr "Nyt olen puhunut harjoittelemisesta ja tasoista. Täsmennän vielä asia
 msgid ""
 "A newly created soldier has no experience and is not very good at fighting. "
 "To make him stronger, you can build training sites."
-msgstr "Vasta luodulla sotilaalla ei ole kokemusta eikä ole kovin hyvä taistelemaan. Vahvistaakseen hänen taitojaan, voit rakentaa harjoittelupaikan."
+msgstr "Vasta luodulla sotilaalla ei ole kokemusta eikä ole kovin hyvä taistelemaan. Vahvistaakseen hänen taitojaan, voit rakentaa harjoittelupaikkoja."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:65
 msgid ""
@@ -308,7 +308,7 @@ msgid ""
 "When you are expanding into no man’s land, you can make your buildings "
 "prefer rookies. When you are planning to attack, send heroes into that "
 "region. Conquered buildings always prefer heroes."
-msgstr "Kun olet laajentamassa ei-kenenkään-maalle, voit tehdä rakennuksia etusijassa alokkaille. Kun suunnittelet hyökätä, lähetä ammattisotilaita sille alueelle. Valloitetuissa rakennuksissa suositaan aina ammattisotilaita."
+msgstr "Kun olet laajentamassa ei-kenenkään-maalle, voit tehdä rakennuksia etusijassa alokkaille. Kun suunnittelet hyökäystä, lähetä ammattisotilaita sille alueelle. Valloitetuissa rakennuksissa suositaan aina ammattisotilaita."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:142
 msgid "Soldier capacity"
@@ -557,8 +557,8 @@ msgstr "Olet nyt valmis pelaamaan kampanjoita. Ne opettavat sinulle erilaisista 
 msgid "“%s”"
 msgstr "\"%s\""
 
-#: ../../data/scripting/format_scenario.lua:96
+#: ../../data/scripting/format_scenario.lua:84
 msgid "New Objective"
 msgid_plural "New Objectives"
-msgstr[0] "Uudet tavoitteet"
-msgstr[1] "Uudet tavoitteet"
+msgstr[0] "Uusi Tavoite"
+msgstr[1] "Uudet Tavoitteet"

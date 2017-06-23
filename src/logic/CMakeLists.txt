@@ -6,16 +6,26 @@ wl_library(logic_widelands_geometry
 
 wl_library(logic_game_settings
   SRCS
+    game_settings.cc
     game_settings.h
+    player_end_result.h
+  DEPENDS
+    io_filesystem
+    logic
+    logic_constants
+    scripting_lua_interface
+    scripting_lua_table
+)
+
+wl_library(logic_single_player_game_settings
+  SRCS
     single_player_game_settings_provider.cc
     single_player_game_settings_provider.h
   DEPENDS
     ai
     base_exceptions
-    io_filesystem
     logic
-    scripting_lua_interface
-    scripting_lua_table
+    logic_game_settings
 )
 
 wl_library(logic_game_controller
@@ -28,9 +38,10 @@ wl_library(logic_game_controller
   DEPENDS
     ai
     logic
+    logic_constants
+    logic_game_settings
     profile
     ui_basic
-    widelands_ball_of_mud
     wui
 )
 
@@ -48,6 +59,9 @@ wl_library(logic_constants
   SRCS
     constants.h
     constants.cc
+    widelands.h
+  DEPENDS
+    base_macros
 )
 
 wl_library(logic
@@ -123,15 +137,13 @@ wl_library(logic
     save_handler.h
     widelands_geometry_io.cc
     widelands_geometry_io.h
-    widelands.h
-    map_objects/draw_text.h
-    map_objects/attackable.h
     map_objects/bob.cc
     map_objects/bob.h
     map_objects/buildcost.cc
     map_objects/buildcost.h
     map_objects/checkstep.cc
     map_objects/checkstep.h
+    map_objects/draw_text.h
     map_objects/immovable.cc
     map_objects/immovable.h
     map_objects/immovable_program.h
@@ -139,6 +151,7 @@ wl_library(logic
     map_objects/map_object.h
     map_objects/terrain_affinity.cc
     map_objects/terrain_affinity.h
+    map_objects/tribes/attack_target.h
     map_objects/tribes/battle.cc
     map_objects/tribes/battle.h
     map_objects/tribes/bill_of_materials.h
@@ -225,9 +238,11 @@ wl_library(logic
     game_io
     graphic
     graphic_color
+    graphic_fonthandler
     graphic_image_io
     graphic_playercolor
     graphic_surface
+    graphic_text_constants
     graphic_text_layout
     helper
     io_fileread
@@ -240,6 +255,7 @@ wl_library(logic
     map_io
     map_io_map_loader
     network
+    note_sound
     notifications
     random
     scripting_coroutine
@@ -248,7 +264,6 @@ wl_library(logic
     scripting_lua_table
     sound
     ui_basic
-    widelands_ball_of_mud
     wui
     wui_mapview_pixelfunctions
 )

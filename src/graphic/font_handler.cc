@@ -30,10 +30,12 @@
 
 #include "base/log.h"
 #include "base/wexception.h"
+#include "graphic/font.h"
 #include "graphic/font_handler1.h"  // We need the fontset for the BiDi algorithm
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
 #include "graphic/text/bidi.h"
+#include "graphic/text_layout.h"
 #include "graphic/texture.h"
 #include "graphic/wordwrap.h"
 
@@ -52,9 +54,9 @@ void draw_caret(RenderTarget& dst,
 	int caret_x = style.calc_bare_width(text.substr(0, caret_offset));
 
 	const Image* caret_image = g_gr->images().get("images/ui_basic/caret.png");
-	Vector2f caretpt;
+	Vector2i caretpt = Vector2i::zero();
 	caretpt.x = dstpoint.x + caret_x + LINE_MARGIN - caret_image->width();
-	caretpt.y = dstpoint.y + (style.font->height() - caret_image->height()) / 2.f;
+	caretpt.y = dstpoint.y + (style.font->height() - caret_image->height()) / 2;
 	dst.blit(caretpt, caret_image);
 }
 
@@ -201,7 +203,7 @@ void FontHandler::Data::render_line(LineCacheEntry& lce) {
  */
 void FontHandler::draw_text(RenderTarget& dst,
                             const TextStyle& style,
-                            Vector2i dstpoint_i,
+                            Vector2i dstpoint,
                             const std::string& text,
                             Align align,
                             uint32_t caret) {
@@ -211,14 +213,13 @@ void FontHandler::draw_text(RenderTarget& dst,
 	copytext = i18n::make_ligatures(copytext.c_str());
 	const LineCacheEntry& lce = d->get_line(style, copytext);
 
-	Vector2f dstpoint = dstpoint_i.cast<float>();
-	UI::correct_for_align(align, lce.width + 2 * LINE_MARGIN, lce.height, &dstpoint);
+	UI::correct_for_align(align, lce.width + 2 * LINE_MARGIN, &dstpoint);
 
 	if (lce.image)
-		dst.blit(Vector2f(dstpoint.x + LINE_MARGIN, dstpoint.y), lce.image.get());
+		dst.blit(Vector2i(dstpoint.x + LINE_MARGIN, dstpoint.y), lce.image.get());
 
 	if (caret <= copytext.size())
-		draw_caret(dst, style, dstpoint, copytext, caret);
+		draw_caret(dst, style, dstpoint.cast<float>(), copytext, caret);
 }
 
 /**
@@ -231,7 +232,7 @@ uint32_t FontHandler::draw_text_raw(RenderTarget& dst,
 	const LineCacheEntry& lce = d->get_line(style, text);
 
 	if (lce.image) {
-		dst.blit(dstpoint.cast<float>(), lce.image.get());
+		dst.blit(dstpoint, lce.image.get());
 	}
 
 	return lce.width;
@@ -243,7 +244,7 @@ uint32_t FontHandler::draw_text_raw(RenderTarget& dst,
  */
 void FontHandler::get_size(
    const TextStyle& textstyle, const std::string& text, uint32_t& w, uint32_t& h, uint32_t wrap) {
-	WordWrap ww(textstyle, wrap);
+	WordWrap ww(textstyle.font->size(), textstyle.fg, wrap);
 	ww.wrap(text);
 	w = ww.width();
 	h = ww.height();

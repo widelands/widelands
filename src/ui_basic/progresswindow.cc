@@ -45,7 +45,8 @@ namespace {
 
 namespace UI {
 
-ProgressWindow::ProgressWindow(const std::string& background) : UI::FullscreenWindow() {
+ProgressWindow::ProgressWindow(const std::string& background)
+   : UI::FullscreenWindow(), label_center_(Vector2i::zero()) {
 	set_background(background);
 	step(_("Loading…"));
 }
@@ -58,19 +59,18 @@ ProgressWindow::~ProgressWindow() {
 
 void ProgressWindow::draw(RenderTarget& rt) {
 	FullscreenWindow::draw(rt);
+	// No float division to avoid Texture subsampling.
 	label_center_.x = get_w() / 2;
 	label_center_.y = get_h() * PROGRESS_LABEL_POSITION_Y / 100;
-	Recti wnd_rect(Vector2i(0, 0), get_w(), get_h());
 
-	const uint32_t h =
-	   UI::g_fh1->render(as_uifont(UI::g_fh1->fontset()->representative_character()))->height();
+	const uint32_t h = text_height();
 
-	label_rectangle_.x = get_w() / 4.f;
-	label_rectangle_.w = get_w() / 2.f;
-	label_rectangle_.y = label_center_.y - h / 2.f - PROGRESS_STATUS_RECT_PADDING;
-	label_rectangle_.h = h + 2.f * PROGRESS_STATUS_RECT_PADDING;
+	label_rectangle_.x = get_w() / 4;
+	label_rectangle_.w = get_w() / 2;
+	label_rectangle_.y = label_center_.y - h / 2 - PROGRESS_STATUS_RECT_PADDING;
+	label_rectangle_.h = h + 2 * PROGRESS_STATUS_RECT_PADDING;
 
-	Rectf border_rect = label_rectangle_;
+	Recti border_rect = label_rectangle_;
 	border_rect.x -= PROGRESS_STATUS_BORDER_X;
 	border_rect.y -= PROGRESS_STATUS_BORDER_Y;
 	border_rect.w += 2 * PROGRESS_STATUS_BORDER_X;
@@ -83,9 +83,11 @@ void ProgressWindow::draw(RenderTarget& rt) {
 void ProgressWindow::set_background(const std::string& file_name) {
 	clear_overlays();
 	if (!file_name.empty() && g_fs->file_exists(file_name)) {
-		add_overlay_image(file_name, UI::Align::kCenter);
+		add_overlay_image(
+		   file_name, FullscreenWindow::Alignment(UI::Align::kCenter, UI::Align::kCenter));
 	} else {
-		add_overlay_image("images/loadscreens/progress.png", UI::Align::kBottomLeft);
+		add_overlay_image("images/loadscreens/progress.png",
+		                  FullscreenWindow::Alignment(UI::Align::kLeft, UI::Align::kBottom));
 	}
 	draw(*g_gr->get_render_target());
 }
@@ -96,9 +98,10 @@ void ProgressWindow::step(const std::string& description) {
 	draw(rt);
 
 	rt.fill_rect(label_rectangle_, PROGRESS_FONT_COLOR_BG);
-	rt.blit(label_center_.cast<float>(),
-	        UI::g_fh1->render(as_uifont(description, UI_FONT_SIZE_SMALL, PROGRESS_FONT_COLOR_FG)),
-	        BlendMode::UseAlpha, UI::Align::kCenter);
+	std::shared_ptr<const UI::RenderedText> rendered_text =
+	   UI::g_fh1->render(as_uifont(description, UI_FONT_SIZE_SMALL, PROGRESS_FONT_COLOR_FG));
+	UI::center_vertically(rendered_text->height(), &label_center_);
+	rendered_text->draw(rt, label_center_, UI::Align::kCenter);
 
 #ifdef _WIN32
 	// Pump events to prevent "not responding" on windows

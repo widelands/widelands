@@ -195,8 +195,10 @@ void InteractivePlayer::node_action() {
 	if (1 < player().vision(Map::get_index(get_sel_pos().node, map.get_width()))) {
 		// Special case for buildings
 		if (upcast(Building, building, map.get_immovable(get_sel_pos().node)))
-			if (can_see(building->owner().player_number()))
-				return building->show_options(*this);
+			if (can_see(building->owner().player_number())) {
+				show_building_window(get_sel_pos().node, false);
+				return;
+			}
 
 		if (!is_building_road()) {
 			if (try_show_ship_window())
@@ -270,7 +272,7 @@ bool InteractivePlayer::handle_key(bool const down, SDL_Keysym const code) {
 		case SDLK_KP_7:
 			if (code.mod & KMOD_NUM)
 				break;
-		/* no break */
+			FALLS_THROUGH;
 		case SDLK_HOME:
 			scroll_to_field(game().map().get_starting_pos(player_number_), Transition::Smooth);
 			return true;

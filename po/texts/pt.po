@@ -4,14 +4,14 @@
 # Translators:
 # GunChleoc, 2016
 # GunChleoc, 2015-2016
-# zecas <jjorge@free.fr>, 2016
+# zecas <jjorge@free.fr>, 2016-2017
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-01-28 21:57+0000\n"
-"PO-Revision-Date: 2017-01-28 21:58+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2017-06-16 07:17+0000\n"
+"PO-Revision-Date: 2017-06-19 09:53+0000\n"
+"Last-Translator: zecas <jjorge@free.fr>\n"
 "Language-Team: Portuguese (http://www.transifex.com/widelands/widelands/language/pt/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -50,7 +50,7 @@ msgstr "Este jogo é Grátis e de Código Aberto (FOSS), licenciado com a Licen�
 msgid ""
 "You can find more information on FOSS and the GPL by visiting the following "
 "webpage: %s"
-msgstr ""
+msgstr "Podes encontrar mais informação sobre FOSS e GPL visitando a página seguinte : %s"
 
 #: ../../data/txts/LICENSE.lua:27
 msgid ""
@@ -497,6 +497,12 @@ msgid ""
 "of logs."
 msgstr ""
 
+#: ../../data/txts/tips/atlanteans.lua:12
+msgid ""
+"Atlanteans need spidercloth for many buildings. Build the needed "
+"infrastructure early before you run out."
+msgstr ""
+
 #: ../../data/txts/tips/barbarians.lua:4 ../../data/txts/tips/empire.lua:4
 msgid ""
 "Keep an eye on your fishers. After fish resources are exhausted in their "
@@ -506,7 +512,13 @@ msgstr "Presta bem atenção aos pescadores. Assim que os recursos piscícolas s
 #: ../../data/txts/tips/barbarians.lua:8
 msgid ""
 "Always build a ranger’s and a gamekeeper’s hut, so you will not run out of "
-"logs."
+"logs or game."
+msgstr ""
+
+#: ../../data/txts/tips/barbarians.lua:12 ../../data/txts/tips/empire.lua:12
+msgid ""
+"Most enhanced buildings need experienced workers. Do not enhance a building "
+"unless you have the necessary workers available."
 msgstr ""
 
 #: ../../data/txts/tips/editor.lua:4
@@ -552,9 +564,38 @@ msgid ""
 "shown on or off."
 msgstr "A tecla ESPAÇO comporta-se como no jogo normal. Ela mostra ou esconde os lotes de construção."
 
+#: ../../data/txts/tips/editor.lua:32
+msgid ""
+"When placing trees, use the help button to see which trees are more likely "
+"to survive on which terrain."
+msgstr ""
+
+#: ../../data/txts/tips/editor.lua:36
+msgid ""
+"If you do not set water and fish resources, a default amount will be used."
+msgstr ""
+
+#: ../../data/txts/tips/editor.lua:40
+msgid ""
+"You can place a medium building on any node where there is a slope no "
+"greater than 1 in the south-east direction and its height difference to all "
+"nodes in a radius of 2 is no greater than 2."
+msgstr ""
+
+#: ../../data/txts/tips/editor.lua:44
+msgid ""
+"You can place a large building on any node where you could place a medium "
+"building if there is no obstacle or non-arable terrain towards the west, "
+"northwest and northeast."
+msgstr ""
+
 #: ../../data/txts/tips/empire.lua:8
 msgid "Always build a forester’s house so you will not run out of logs."
 msgstr "Constrói sempre uma casa do silvicultor para evitar ficar sem madeira."
+
+#: ../../data/txts/tips/empire.lua:16
+msgid "Empire needs a lot of marble. Keep looking for marble resources."
+msgstr ""
 
 #: ../../data/txts/tips/general_game.lua:4
 msgid ""
@@ -610,10 +651,18 @@ msgid ""
 msgstr "Gere as mensagens com mais eficiência: pressione ‘N’ para abrir a janela das mensagens, depois pressione ‘G’ para ir à sua localização e a pressione a tecla Delete para arquivar a mensagem."
 
 #: ../../data/txts/tips/general_game.lua:40
-msgid ""
-"Press Ctrl+(0-9) to store important locations, then press 0-9 to recall "
-"them."
-msgstr "Pressione CTRL+(0-9) para guardar locais importantes, e pressione 0-9 para revisitá-los."
+msgctxt "hotkey"
+msgid "1-9"
+msgstr ""
+
+#: ../../data/txts/tips/general_game.lua:40
+msgctxt "hotkey"
+msgid "Ctrl+(1-9)"
+msgstr ""
+
+#: ../../data/txts/tips/general_game.lua:40
+msgid "Press %1% to store important locations, then press %2% to recall them."
+msgstr ""
 
 #: ../../data/txts/tips/general_game.lua:44
 msgid ""
@@ -649,6 +698,28 @@ msgid ""
 "building is surrounded with trees or roads, production will stop."
 msgstr "Alguns edifícios, como as quintas, usam uma pequena área de trabalho à sua volta. Se o edifício estiver rodeado de árvores ou estradas, a produção parará porque não há espaço para as plantações."
 
+#: ../../data/txts/tips/general_game.lua:68
+msgctxt "hotkey"
+msgid "Ctrl+(+/-)"
+msgstr ""
+
+#: ../../data/txts/tips/general_game.lua:68
+msgctxt "hotkey"
+msgid "Ctrl+0"
+msgstr ""
+
+#: ../../data/txts/tips/general_game.lua:68
+msgid "Zoom in/out with the mouse wheel or %1%. Press %2% to reset the zoom."
+msgstr ""
+
+#: ../../data/txts/tips/general_game.lua:72
+msgid ""
+"When a building is destroyed, its workers will start looking for a nearby "
+"flag from which they can move by road to a connected warehouse. If there are"
+" no such flags in the vicinity, they will keep wandering around and "
+"eventually die."
+msgstr ""
+
 #: ../../data/txts/tips/multiplayer.lua:4
 msgid ""
 "You can use the ’Page up’ and ‘Page down’ keys to adjust your desired speed "
@@ -666,6 +737,12 @@ msgid ""
 "Use ‘@name’ at the beginning of a chat message to send it to only one "
 "player."
 msgstr "Usa ‘@nome’ no início de uma mensagem de chat para só enviar a esse jogador."
+
+#: ../../data/txts/tips/multiplayer.lua:16
+msgid ""
+"If the game should crash, don't worry! The game will be saved automatically "
+"so that you can reload it afterwards."
+msgstr ""
 
 #: ../../data/txts/tips/singleplayer.lua:4
 msgid ""

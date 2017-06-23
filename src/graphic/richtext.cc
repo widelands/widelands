@@ -61,7 +61,7 @@ struct ImageElement : Element {
 	}
 
 	void draw(RenderTarget& dst) override {
-		dst.blit(Vector2f(0, 0), image);
+		dst.blit(Vector2i::zero(), image);
 	}
 
 	const Image* image;
@@ -107,7 +107,7 @@ struct TextlineElement : Element {
 			}
 		}
 		// Now render
-		uint32_t x = g_fh->draw_text_raw(dst, style, Vector2i(0, 0), result_words[0]);
+		uint32_t x = g_fh->draw_text_raw(dst, style, Vector2i::zero(), result_words[0]);
 
 		it = result_words.begin() + 1;
 		if (it != result_words.end()) {
@@ -280,8 +280,7 @@ struct TextBuilder {
 			int32_t alignref_right = rti.width;
 
 			if (text_y < rti.height + images_height) {
-				if ((mirror_alignment(richtext->get_image_align()) & UI::Align::kHorizontal) ==
-				    UI::Align::kRight) {
+				if (mirror_alignment(richtext->get_image_align()) == UI::Align::kRight) {
 					alignref_right -= images_width + h_space;
 				} else {
 					// Note: center image alignment with text is not properly supported
@@ -290,16 +289,16 @@ struct TextBuilder {
 				}
 			}
 
-			int32_t textleft;
+			int32_t textleft = 0;
 
-			switch (mirror_alignment(richtext->get_text_align()) & UI::Align::kHorizontal) {
+			switch (mirror_alignment(richtext->get_text_align())) {
 			case UI::Align::kRight:
 				textleft = alignref_right - int32_t(linewidth);
 				break;
-			case UI::Align::kHCenter:
+			case UI::Align::kCenter:
 				textleft = alignref_left + (alignref_right - alignref_left - int32_t(linewidth)) / 2;
 				break;
-			default:
+			case UI::Align::kLeft:
 				textleft = alignref_left;
 				break;
 			}
@@ -372,11 +371,15 @@ void RichText::parse(const std::string& rtext) {
 		// Fix up the alignment
 		int32_t imagealigndelta = 0;
 
-		if ((text.richtext->get_image_align() & UI::Align::kHorizontal) == UI::Align::kHCenter) {
+		switch (mirror_alignment(text.richtext->get_image_align())) {
+		case UI::Align::kCenter:
 			imagealigndelta = (int32_t(m->width) - int32_t(text.images_width)) / 2;
-		} else if ((mirror_alignment(text.richtext->get_image_align()) & UI::Align::kHorizontal) ==
-		           UI::Align::kRight) {
+			break;
+		case UI::Align::kRight:
 			imagealigndelta = int32_t(m->width) - int32_t(text.images_width);
+			break;
+		case UI::Align::kLeft:
+			break;
 		}
 
 		for (uint32_t idx = firstimageelement; idx < m->elements.size(); ++idx)
@@ -490,12 +493,12 @@ void RichText::draw(RenderTarget& dst, const Vector2i& offset, bool background) 
 	for (std::vector<Element*>::const_iterator elt = m->elements.begin(); elt != m->elements.end();
 	     ++elt) {
 		Recti oldbox;
-		Vector2i oldofs;
+		Vector2i oldofs = Vector2i::zero();
 		Recti bbox((*elt)->bbox.origin() + offset, (*elt)->bbox.w, (*elt)->bbox.h);
 
 		if (dst.enter_window(bbox, &oldbox, &oldofs)) {
 			if (background)
-				dst.fill_rect(Rectf(0.f, 0.f, bbox.w, bbox.h), m->background_color);
+				dst.fill_rect(Recti(0, 0, bbox.w, bbox.h), m->background_color);
 			(*elt)->draw(dst);
 			dst.set_window(oldbox, oldofs);
 		}

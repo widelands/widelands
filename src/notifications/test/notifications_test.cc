@@ -23,7 +23,11 @@
 #define BOOST_TEST_MODULE Notifications
 #include <boost/test/unit_test.hpp>
 
+#include "base/macros.h"
 #include "notifications/notifications.h"
+
+// Triggered by BOOST_AUTO_TEST_CASE
+CLANG_DIAG_OFF("-Wdisabled-macro-expansion")
 
 struct SimpleNote {
 	CAN_BE_SENT_AS_NOTE(100)

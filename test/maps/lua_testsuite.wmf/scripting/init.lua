@@ -40,6 +40,7 @@ include "map:scripting/tribes_descriptions.lua"
 if not wl.editor then
    include "map:scripting/game.lua"
 
+   include "map:scripting/geconomy.lua"
    include "map:scripting/gplayer.lua"
    include "map:scripting/gfield.lua"
    include "map:scripting/gplr_access.lua"

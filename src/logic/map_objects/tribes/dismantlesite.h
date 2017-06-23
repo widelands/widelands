@@ -74,7 +74,7 @@ public:
 	              Building::FormerBuildings& former_buildings);
 
 	bool burn_on_destroy() override;
-	void init(EditorGameBase&) override;
+	bool init(EditorGameBase&) override;
 
 	bool get_building_work(Game&, Worker&, bool success) override;
 
@@ -86,8 +86,6 @@ protected:
 	uint32_t build_step_time() const override {
 		return DISMANTLESITE_STEP_TIME;
 	}
-
-	void create_options_window(InteractiveGameBase&, UI::Window*& registry) override;
 
 	void draw(uint32_t gametime,
 	          TextToDraw draw_text,

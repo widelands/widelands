@@ -68,8 +68,16 @@ struct MultilineTextarea : public Panel {
 	void set_color(RGBColor fg) {
 		color_ = fg;
 	}
-	void force_new_renderer() {
-		force_new_renderer_ = true;
+
+	// Most MultilineTextareas that contain richtext markup still use the old
+	// font renderer, but some are already switched over the the new font
+	// renderer. The markup is incompatible, so we need to be able to tell the
+	// MultilineTextarea which one to use. MultilineTextareas without markup
+	// automatically use the new font renderer.
+	// TODO(GunChleoc): Remove this function once the switchover to the new font
+	// renderer is complete.
+	void force_new_renderer(bool force = true) {
+		force_new_renderer_ = force;
 	}
 
 	// Drawing and event handlers
@@ -95,7 +103,7 @@ private:
 
 	std::string text_;
 	RGBColor color_;
-	Align align_;
+	const Align align_;
 
 	bool force_new_renderer_;
 	bool use_old_renderer_;

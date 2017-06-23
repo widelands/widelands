@@ -52,7 +52,8 @@ FullscreenWindow::FullscreenWindow()
 	set_frame_image(FullscreenWindow::Frames::kEdgeRightTile, "images/ui_fsmenu/right.png");
 	set_frame_image(FullscreenWindow::Frames::kEdgeTopTile, "images/ui_fsmenu/top.png");
 	set_frame_image(FullscreenWindow::Frames::kEdgeBottomTile, "images/ui_fsmenu/bottom.png");
-	add_overlay_image("images/ui_fsmenu/center.png", UI::Align::kCenter);
+	add_overlay_image("images/ui_fsmenu/center.png",
+	                  FullscreenWindow::Alignment(UI::Align::kCenter, UI::Align::kCenter));
 }
 
 FullscreenWindow::~FullscreenWindow() {
@@ -60,7 +61,7 @@ FullscreenWindow::~FullscreenWindow() {
 	frame_overlays_.clear();
 }
 
-void FullscreenWindow::add_overlay_image(const std::string& filename, UI::Align align) {
+void FullscreenWindow::add_overlay_image(const std::string& filename, Alignment align) {
 	overlays_.push_back(std::make_pair(g_gr->images().get(filename), align));
 }
 
@@ -85,7 +86,7 @@ const Image* FullscreenWindow::get_frame_image(FullscreenWindow::Frames id) cons
 */
 void FullscreenWindow::draw(RenderTarget& dst) {
 	// Overall background
-	dst.tile(Recti(0, 0, get_w(), get_h()), g_gr->images().get(background_image_), Vector2i(0, 0));
+	dst.tile(Recti(0, 0, get_w(), get_h()), g_gr->images().get(background_image_), Vector2i::zero());
 
 	// Optional overlays
 	for (const auto& overlay : overlays_) {
@@ -93,49 +94,63 @@ void FullscreenWindow::draw(RenderTarget& dst) {
 	}
 
 	// Frame edges
-	blit_image(dst, get_frame_image(FullscreenWindow::Frames::kEdgeLeftTile), UI::Align::kTopLeft,
-	           UI::Align::kVertical);
-	blit_image(dst, get_frame_image(FullscreenWindow::Frames::kEdgeRightTile), UI::Align::kTopRight,
-	           UI::Align::kVertical);
-	blit_image(dst, get_frame_image(FullscreenWindow::Frames::kEdgeTopTile), UI::Align::kTopLeft,
-	           UI::Align::kHorizontal);
+	blit_image(dst, get_frame_image(FullscreenWindow::Frames::kEdgeLeftTile),
+	           Alignment(UI::Align::kLeft, UI::Align::kTop), kVertical);
+	blit_image(dst, get_frame_image(FullscreenWindow::Frames::kEdgeRightTile),
+	           Alignment(UI::Align::kRight, UI::Align::kTop), kVertical);
+	blit_image(dst, get_frame_image(FullscreenWindow::Frames::kEdgeTopTile),
+	           Alignment(UI::Align::kLeft, UI::Align::kTop), kHorizontal);
 	blit_image(dst, get_frame_image(FullscreenWindow::Frames::kEdgeBottomTile),
-	           UI::Align::kBottomLeft, UI::Align::kHorizontal);
+	           Alignment(UI::Align::kLeft, UI::Align::kBottom), kHorizontal);
 
 	// Frame corners
-	blit_image(dst, get_frame_image(FullscreenWindow::Frames::kCornerTopLeft), UI::Align::kTopLeft);
-	blit_image(
-	   dst, get_frame_image(FullscreenWindow::Frames::kCornerTopRight), UI::Align::kTopRight);
-	blit_image(
-	   dst, get_frame_image(FullscreenWindow::Frames::kCornerBottomLeft), UI::Align::kBottomLeft);
-	blit_image(
-	   dst, get_frame_image(FullscreenWindow::Frames::kCornerBottomRight), UI::Align::kBottomRight);
+	blit_image(dst, get_frame_image(FullscreenWindow::Frames::kCornerTopLeft),
+	           FullscreenWindow::Alignment(UI::Align::kLeft, UI::Align::kTop));
+	blit_image(dst, get_frame_image(FullscreenWindow::Frames::kCornerTopRight),
+	           FullscreenWindow::Alignment(UI::Align::kRight, UI::Align::kTop));
+	blit_image(dst, get_frame_image(FullscreenWindow::Frames::kCornerBottomLeft),
+	           FullscreenWindow::Alignment(UI::Align::kLeft, UI::Align::kBottom));
+	blit_image(dst, get_frame_image(FullscreenWindow::Frames::kCornerBottomRight),
+	           FullscreenWindow::Alignment(UI::Align::kRight, UI::Align::kBottom));
 }
 
 void FullscreenWindow::blit_image(RenderTarget& dst,
                                   const Image* image,
-                                  UI::Align align,
-                                  UI::Align tiling) {
+                                  Alignment align,
+                                  Tiling tiling) {
 	if (image) {
 		int x = 0;
 		int y = 0;
-		if (static_cast<int>(align & UI::Align::kRight)) {
+		// Adjust horizontal alignment
+		switch (align.halign) {
+		case UI::Align::kRight:
 			x = get_w() - image->width();
-		} else if (static_cast<int>(align & UI::Align::kHCenter)) {
+			break;
+		case UI::Align::kCenter:
 			x = (get_w() - image->width()) / 2;
+			break;
+		case UI::Align::kLeft:
+			break;
 		}
-		if (static_cast<int>(align & UI::Align::kBottom)) {
+
+		// Adjust vertical alignment
+		switch (align.valign) {
+		case UI::Align::kBottom:
 			y = get_h() - image->height();
-		} else if (static_cast<int>(align & UI::Align::kVCenter)) {
+			break;
+		case UI::Align::kCenter:
 			y = (get_h() - image->height()) / 2;
+			break;
+		case UI::Align::kTop:
+			break;
 		}
-		if (static_cast<int>(tiling & (UI::Align::kVertical | UI::Align::kHorizontal))) {
-			const int w = (static_cast<int>(tiling & UI::Align::kVertical)) ? image->width() : get_w();
-			const int h =
-			   (static_cast<int>(tiling & UI::Align::kHorizontal)) ? image->height() : get_h();
-			dst.tile(Recti(x, y, w, h), image, Vector2i(0, 0));
+
+		if (tiling != kNone) {
+			const int w = (tiling == kVertical) ? image->width() : get_w();
+			const int h = (tiling == kHorizontal) ? image->height() : get_h();
+			dst.tile(Recti(x, y, w, h), image, Vector2i::zero());
 		} else {
-			dst.blit(Vector2f(x, y), image);
+			dst.blit(Vector2i(x, y), image);
 		}
 	}
 }

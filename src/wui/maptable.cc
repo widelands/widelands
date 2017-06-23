@@ -26,16 +26,14 @@
 #include "graphic/graphic.h"
 #include "io/filesystem/filesystem.h"
 
-MapTable::MapTable(
-   UI::Panel* parent, int32_t x, int32_t y, uint32_t w, uint32_t h, const bool descending)
-   : UI::Table<uintptr_t>(
-        parent, x, y, w, h, g_gr->images().get("images/ui_basic/but3.png"), descending) {
+MapTable::MapTable(UI::Panel* parent, int32_t x, int32_t y, uint32_t w, uint32_t h)
+   : UI::Table<uintptr_t>(parent, x, y, w, h, g_gr->images().get("images/ui_basic/but3.png")) {
 
 	/** TRANSLATORS: Column title for number of players in map list */
-	add_column(35, _("Pl."), _("Number of players"), UI::Align::kHCenter);
+	add_column(35, _("Pl."), _("Number of players"), UI::Align::kCenter);
 	add_column(0, _("Filename"), _("The name of the map or scenario"), UI::Align::kLeft,
 	           UI::TableColumnType::kFlexible);
-	add_column(115, _("Size"), _("The size of the map (Width x Height)"), UI::Align::kLeft);
+	add_column(90, _("Size"), _("The size of the map (Width x Height)"));
 	set_sort_column(0);
 }
 
@@ -78,4 +76,5 @@ void MapTable::fill(const std::vector<MapData>& entries, MapData::DisplayType ty
 		}
 	}
 	sort();
+	layout();
 }

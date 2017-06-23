@@ -38,7 +38,7 @@
 #include "graphic/text_constants.h"
 #include "helper.h"
 #include "io/filesystem/layered_filesystem.h"
-#include "logic/save_handler.h"
+#include "logic/constants.h"
 #include "profile/profile.h"
 #include "scripting/lua_interface.h"
 #include "scripting/lua_table.h"
@@ -95,7 +95,7 @@ FullscreenMenuOptions::FullscreenMenuOptions(OptionsCtrl::OptionsStruct opt)
      padding_(10),
 
      // Title
-     title_(this, 0, 0, _("Options"), UI::Align::kHCenter),
+     title_(this, 0, 0, _("Options"), UI::Align::kCenter),
 
      // Buttons
      button_box_(this, 0, 0, UI::Box::Horizontal),
@@ -138,23 +138,25 @@ FullscreenMenuOptions::FullscreenMenuOptions(OptionsCtrl::OptionsStruct opt)
                         0,
                         100,  // 100 is arbitrary, will be resized in layout().
                         100,  // 100 is arbitrary, will be resized in layout().
+                        24,
                         _("Language")),
      resolution_dropdown_(&box_interface_,
                           0,
                           0,
                           100,  // 100 is arbitrary, will be resized in layout().
                           100,  // 100 is arbitrary, will be resized in layout().
+                          24,
                           _("In-game resolution")),
 
-     fullscreen_(&box_interface_, Vector2i(0, 0), _("Fullscreen"), "", 0),
-     inputgrab_(&box_interface_, Vector2i(0, 0), _("Grab Input"), "", 0),
+     fullscreen_(&box_interface_, Vector2i::zero(), _("Fullscreen"), "", 0),
+     inputgrab_(&box_interface_, Vector2i::zero(), _("Grab Input"), "", 0),
 
      sb_maxfps_(&box_interface_, 0, 0, 0, 0, opt.maxfps, 0, 99, _("Maximum FPS:")),
 
      // Windows options
      snap_win_overlap_only_(
-        &box_windows_, Vector2i(0, 0), _("Snap windows only when overlapping"), "", 0),
-     dock_windows_to_edges_(&box_windows_, Vector2i(0, 0), _("Dock windows to edges"), "", 0),
+        &box_windows_, Vector2i::zero(), _("Snap windows only when overlapping"), "", 0),
+     dock_windows_to_edges_(&box_windows_, Vector2i::zero(), _("Dock windows to edges"), "", 0),
 
      sb_dis_panel_(&box_windows_,
                    0,
@@ -179,9 +181,9 @@ FullscreenMenuOptions::FullscreenMenuOptions(OptionsCtrl::OptionsStruct opt)
                     UI::SpinBox::Units::kPixels),
 
      // Sound options
-     music_(&box_sound_, Vector2i(0, 0), _("Enable Music"), "", 0),
-     fx_(&box_sound_, Vector2i(0, 0), _("Enable Sound Effects"), "", 0),
-     message_sound_(&box_sound_, Vector2i(0, 0), _("Play a sound at message arrival"), "", 0),
+     music_(&box_sound_, Vector2i::zero(), _("Enable Music"), "", 0),
+     fx_(&box_sound_, Vector2i::zero(), _("Enable Sound Effects"), "", 0),
+     message_sound_(&box_sound_, Vector2i::zero(), _("Play a sound at message arrival"), "", 0),
 
      // Saving options
      sb_autosave_(&box_saving_,
@@ -211,36 +213,36 @@ FullscreenMenuOptions::FullscreenMenuOptions(OptionsCtrl::OptionsStruct opt)
                           UI::SpinBox::Type::kBig),
 
      zip_(&box_saving_,
-          Vector2i(0, 0),
+          Vector2i::zero(),
           _("Compress widelands data files (maps, replays and savegames)"),
           "",
           0),
      write_syncstreams_(&box_saving_,
-                        Vector2i(0, 0),
+                        Vector2i::zero(),
                         _("Write syncstreams in network games to debug desyncs"),
                         "",
                         0),
 
      // Game options
      auto_roadbuild_mode_(
-        &box_game_, Vector2i(0, 0), _("Start building road after placing a flag")),
-     show_workarea_preview_(&box_game_, Vector2i(0, 0), _("Show buildings area preview")),
+        &box_game_, Vector2i::zero(), _("Start building road after placing a flag")),
+     show_workarea_preview_(&box_game_, Vector2i::zero(), _("Show buildings area preview")),
      transparent_chat_(
-        &box_game_, Vector2i(0, 0), _("Show in-game chat with transparent background"), "", 0),
+        &box_game_, Vector2i::zero(), _("Show in-game chat with transparent background"), "", 0),
 
      /** TRANSLATORS: A watchwindow is a window where you keep watching an object or a map region,*/
      /** TRANSLATORS: and it also lets you jump to it on the map. */
-     single_watchwin_(&box_game_, Vector2i(0, 0), _("Use single watchwindow mode")),
+     single_watchwin_(&box_game_, Vector2i::zero(), _("Use single watchwindow mode")),
      os_(opt) {
 	// Set up UI Elements
 	title_.set_fontsize(UI_FONT_SIZE_BIG);
 
 	// Buttons
-	button_box_.add(UI::g_fh1->fontset()->is_rtl() ? &ok_ : &cancel_, UI::Align::kHCenter);
+	button_box_.add(UI::g_fh1->fontset()->is_rtl() ? &ok_ : &cancel_);
 	button_box_.add_inf_space();
-	button_box_.add(&apply_, UI::Align::kHCenter);
+	button_box_.add(&apply_);
 	button_box_.add_inf_space();
-	button_box_.add(UI::g_fh1->fontset()->is_rtl() ? &cancel_ : &ok_, UI::Align::kHCenter);
+	button_box_.add(UI::g_fh1->fontset()->is_rtl() ? &cancel_ : &ok_);
 
 	// Tabs
 	tabs_.add("options_interface", _("Interface"), &box_interface_, "");
@@ -261,34 +263,34 @@ FullscreenMenuOptions::FullscreenMenuOptions(OptionsCtrl::OptionsStruct opt)
 	box_game_.set_size(tabs_.get_inner_w(), tabs_.get_inner_h());
 
 	// Interface
-	box_interface_.add(&language_dropdown_, UI::Align::kLeft);
-	box_interface_.add(&resolution_dropdown_, UI::Align::kLeft);
-	box_interface_.add(&fullscreen_, UI::Align::kLeft);
-	box_interface_.add(&inputgrab_, UI::Align::kLeft);
-	box_interface_.add(&sb_maxfps_, UI::Align::kLeft);
+	box_interface_.add(&language_dropdown_);
+	box_interface_.add(&resolution_dropdown_);
+	box_interface_.add(&fullscreen_);
+	box_interface_.add(&inputgrab_);
+	box_interface_.add(&sb_maxfps_);
 
 	// Windows
-	box_windows_.add(&snap_win_overlap_only_, UI::Align::kLeft);
-	box_windows_.add(&dock_windows_to_edges_, UI::Align::kLeft);
-	box_windows_.add(&sb_dis_panel_, UI::Align::kLeft);
-	box_windows_.add(&sb_dis_border_, UI::Align::kLeft);
+	box_windows_.add(&snap_win_overlap_only_);
+	box_windows_.add(&dock_windows_to_edges_);
+	box_windows_.add(&sb_dis_panel_);
+	box_windows_.add(&sb_dis_border_);
 
 	// Sound
-	box_sound_.add(&music_, UI::Align::kLeft);
-	box_sound_.add(&fx_, UI::Align::kLeft);
-	box_sound_.add(&message_sound_, UI::Align::kLeft);
+	box_sound_.add(&music_);
+	box_sound_.add(&fx_);
+	box_sound_.add(&message_sound_);
 
 	// Saving
-	box_saving_.add(&sb_autosave_, UI::Align::kLeft);
-	box_saving_.add(&sb_rolling_autosave_, UI::Align::kLeft);
-	box_saving_.add(&zip_, UI::Align::kLeft);
-	box_saving_.add(&write_syncstreams_, UI::Align::kLeft);
+	box_saving_.add(&sb_autosave_);
+	box_saving_.add(&sb_rolling_autosave_);
+	box_saving_.add(&zip_);
+	box_saving_.add(&write_syncstreams_);
 
 	// Game
-	box_game_.add(&auto_roadbuild_mode_, UI::Align::kLeft);
-	box_game_.add(&show_workarea_preview_, UI::Align::kLeft);
-	box_game_.add(&transparent_chat_, UI::Align::kLeft);
-	box_game_.add(&single_watchwin_, UI::Align::kLeft);
+	box_game_.add(&auto_roadbuild_mode_);
+	box_game_.add(&show_workarea_preview_);
+	box_game_.add(&transparent_chat_);
+	box_game_.add(&single_watchwin_);
 
 	// Bind actions
 	cancel_.sigclicked.connect(boost::bind(&FullscreenMenuOptions::clicked_back, this));
@@ -574,7 +576,7 @@ OptionsCtrl::OptionsStruct OptionsCtrl::options_struct(uint32_t active_tab) {
 	opt.message_sound = opt_section_.get_bool("sound_at_message", true);
 
 	// Saving options
-	opt.autosave = opt_section_.get_int("autosave", DEFAULT_AUTOSAVE_INTERVAL * 60);
+	opt.autosave = opt_section_.get_int("autosave", kDefaultAutosaveInterval * 60);
 	opt.rolling_autosave = opt_section_.get_int("rolling_autosave", 5);
 	opt.zip = !opt_section_.get_bool("nozip", false);
 	opt.write_syncstreams = opt_section_.get_bool("write_syncstreams", true);
@@ -631,7 +633,7 @@ void OptionsCtrl::save_options() {
 
 	WLApplication::get()->set_input_grab(opt.inputgrab);
 	i18n::set_locale(opt.language);
-	UI::g_fh1->reinitialize_fontset();
+	UI::g_fh1->reinitialize_fontset(i18n::get_locale());
 	g_sound_handler.set_disable_music(!opt.music);
 	g_sound_handler.set_disable_fx(!opt.fx);
 }

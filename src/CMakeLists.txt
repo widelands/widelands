@@ -97,6 +97,7 @@ wl_library(widelands_ball_of_mud
     wlapplication_messages.h
   USES_SDL2
   USES_SDL2_IMAGE
+  USES_SDL2_TTF
   DEPENDS
     base_exceptions
     base_geometry
@@ -106,19 +107,23 @@ wl_library(widelands_ball_of_mud
     build_info
     editor
     graphic
+    graphic_fonthandler
+    graphic_fonthandler_legacy
     graphic_text
-    graphic_text_layout
+    graphic_text_constants
     helper
     io_filesystem
     logic
     logic_game_controller
     logic_game_settings
+    logic_single_player_game_settings
     map_io_map_loader
     network
     profile
     sound
     ui_basic
     ui_fsmenu
+    ui_fsmenu_options
     wui
 )
 

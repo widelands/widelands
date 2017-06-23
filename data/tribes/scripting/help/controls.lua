@@ -56,13 +56,14 @@ return {
                -- TRANSLATORS: This is an access key combination. Localize, but do not change the key.
                dl(help_format_hotkey(pgettext("hotkey", "Home")), _"Center main mapview on starting location") ..
                -- TRANSLATORS: This is an access key combination. Localize, but do not change the key.
-               dl(help_format_hotkey(pgettext("hotkey", "(Ctrl +) 1-9")), _"Remember and go to previously remembered locations") ..
+               dl(help_format_hotkey(pgettext("hotkey", "Ctrl + 1-9")), _"Remember current location") ..
+               dl(help_format_hotkey(pgettext("hotkey", "1-9")), _"Go to previously remembered location") ..
                -- TRANSLATORS: This is an access key combination. Localize, but do not change the key.
-               dl(help_format_hotkey(pgettext("hotkey", "(Ctrl +) +")), _"Increase zoom") ..
+               dl(help_format_hotkey(pgettext("hotkey", "Ctrl + +")), _"Increase zoom") ..
                -- TRANSLATORS: This is an access key combination. Localize, but do not change the key.
-               dl(help_format_hotkey(pgettext("hotkey", "(Ctrl +) -")), _"Decrease zoom") ..
+               dl(help_format_hotkey(pgettext("hotkey", "Ctrl + -")), _"Decrease zoom") ..
                -- TRANSLATORS: This is an access key combination. Localize, but do not change the key.
-               dl(help_format_hotkey(pgettext("hotkey", "(Ctrl +) 0")), _"Reset zoom") ..
+               dl(help_format_hotkey(pgettext("hotkey", "Ctrl + 0")), _"Reset zoom") ..
                -- TRANSLATORS: This is an access key combination. Localize, but do not change the key.
                dl(help_format_hotkey(pgettext("hotkey", "Ctrl + F11")), _"Take a screenshot") ..
                toggle_fullscreen_hotkey ..
@@ -72,6 +73,17 @@ return {
                dl(help_format_hotkey(pgettext("hotkey", "F6")), _"Show the debug console (only in debug-builds)")
          ) ..
 
+         h2(_"Table Control") ..
+         h3(_"In tables that allow the selection of multiple entries, the following key combinations are available:") ..
+         p(
+               -- TRANSLATORS: This is an access key combination. Localize, but do not change the key.
+               dl(help_format_hotkey(pgettext("hotkey", "Ctrl + Click")), pgettext("table_control", "Select multiple entries")) ..
+               -- TRANSLATORS: This is an access key combination. Localize, but do not change the key.
+               dl(help_format_hotkey(pgettext("hotkey", "Shift + Click")), pgettext("table_control", "Select a range of entries")) ..
+               -- TRANSLATORS: This is an access key combination. Localize, but do not change the key.
+               dl(help_format_hotkey(pgettext("hotkey", "Ctrl + A")), pgettext("table_control", "Select all entries"))) ..
+
+         h2(_"Message Window") ..
          h3(_"In the message window, the following additional shortcuts are available:") ..
          p(
                -- TRANSLATORS: This is the helptext for an access key combination.

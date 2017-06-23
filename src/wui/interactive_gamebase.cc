@@ -33,8 +33,15 @@
 #include "logic/map_objects/tribes/ship.h"
 #include "logic/player.h"
 #include "profile/profile.h"
+#include "wui/constructionsitewindow.h"
+#include "wui/dismantlesitewindow.h"
 #include "wui/game_summary.h"
+#include "wui/militarysitewindow.h"
+#include "wui/productionsitewindow.h"
 #include "wui/shipwindow.h"
+#include "wui/trainingsitewindow.h"
+#include "wui/unique_window_handler.h"
+#include "wui/warehousewindow.h"
 
 namespace {
 
@@ -55,6 +62,28 @@ InteractiveGameBase::InteractiveGameBase(Widelands::Game& g,
      chat_provider_(nullptr),
      multiplayer_(multiplayer),
      playertype_(pt) {
+	buildingnotes_subscriber_ = Notifications::subscribe<Widelands::NoteBuilding>(
+	   [this](const Widelands::NoteBuilding& note) {
+		   switch (note.action) {
+		   case Widelands::NoteBuilding::Action::kFinishWarp: {
+			   if (upcast(
+			          Widelands::Building const, building, game().objects().get_object(note.serial))) {
+				   const Widelands::Coords coords = building->get_position();
+				   // Check whether the window is wanted
+				   if (wanted_building_windows_.count(coords.hash()) == 1) {
+					   UI::UniqueWindow* building_window = show_building_window(coords, true);
+					   building_window->set_pos(wanted_building_windows_.at(coords.hash()).first);
+					   if (wanted_building_windows_.at(coords.hash()).second) {
+						   building_window->minimize();
+					   }
+					   wanted_building_windows_.erase(coords.hash());
+				   }
+			   }
+		   } break;
+		   default:
+			   break;
+		   }
+		});
 }
 
 /// \return a pointer to the running \ref Game instance.
@@ -97,8 +126,8 @@ void InteractiveGameBase::draw_overlay(RenderTarget& dst) {
 		}
 
 		if (!game_speed.empty()) {
-			dst.blit(Vector2f(get_w() - 5, 5), UI::g_fh1->render(game_speed), BlendMode::UseAlpha,
-			         UI::Align::kTopRight);
+			std::shared_ptr<const UI::RenderedText> rendered_text = UI::g_fh1->render(game_speed);
+			rendered_text->draw(dst, Vector2i(get_w() - 5, 5), UI::Align::kRight);
 		}
 	}
 }
@@ -128,6 +157,68 @@ void InteractiveGameBase::on_buildhelp_changed(const bool value) {
 	toggle_buildhelp_->set_perm_pressed(value);
 }
 
+void InteractiveGameBase::add_wanted_building_window(const Widelands::Coords& coords,
+                                                     const Vector2i point,
+                                                     bool was_minimal) {
+	wanted_building_windows_.insert(
+	   std::make_pair(coords.hash(), std::make_pair(point, was_minimal)));
+}
+
+UI::UniqueWindow* InteractiveGameBase::show_building_window(const Widelands::Coords& coord,
+                                                            bool avoid_fastclick) {
+	Widelands::BaseImmovable* immovable = game().map().get_immovable(coord);
+	upcast(Widelands::Building, building, immovable);
+	assert(building);
+	UI::UniqueWindow::Registry& registry =
+	   unique_windows().get_registry((boost::format("building_%d") % building->serial()).str());
+
+	switch (building->descr().type()) {
+	case Widelands::MapObjectType::CONSTRUCTIONSITE:
+		registry.open_window = [this, &registry, building, avoid_fastclick] {
+			new ConstructionSiteWindow(*this, registry,
+			                           *dynamic_cast<Widelands::ConstructionSite*>(building),
+			                           avoid_fastclick);
+		};
+		break;
+	case Widelands::MapObjectType::DISMANTLESITE:
+		registry.open_window = [this, &registry, building, avoid_fastclick] {
+			new DismantleSiteWindow(
+			   *this, registry, *dynamic_cast<Widelands::DismantleSite*>(building), avoid_fastclick);
+		};
+		break;
+	case Widelands::MapObjectType::MILITARYSITE:
+		registry.open_window = [this, &registry, building, avoid_fastclick] {
+			new MilitarySiteWindow(
+			   *this, registry, *dynamic_cast<Widelands::MilitarySite*>(building), avoid_fastclick);
+		};
+		break;
+	case Widelands::MapObjectType::PRODUCTIONSITE:
+		registry.open_window = [this, &registry, building, avoid_fastclick] {
+			new ProductionSiteWindow(
+			   *this, registry, *dynamic_cast<Widelands::ProductionSite*>(building), avoid_fastclick);
+		};
+		break;
+	case Widelands::MapObjectType::TRAININGSITE:
+		registry.open_window = [this, &registry, building, avoid_fastclick] {
+			new TrainingSiteWindow(
+			   *this, registry, *dynamic_cast<Widelands::TrainingSite*>(building), avoid_fastclick);
+		};
+		break;
+	case Widelands::MapObjectType::WAREHOUSE:
+		registry.open_window = [this, &registry, building, avoid_fastclick] {
+			new WarehouseWindow(
+			   *this, registry, *dynamic_cast<Widelands::Warehouse*>(building), avoid_fastclick);
+		};
+		break;
+	default:
+		log("Unable to show window for building '%s', type '%s'.\n", building->descr().name().c_str(),
+		    to_string(building->descr().type()).c_str());
+		NEVER_HERE();
+	}
+	registry.create();
+	return registry.window;
+}
+
 /**
  * See if we can reasonably open a ship window at the current selection position.
  * If so, do it and return true; otherwise, return false.
@@ -146,7 +237,12 @@ bool InteractiveGameBase::try_show_ship_window() {
 	for (Widelands::Bob* temp_ship : ships) {
 		if (upcast(Widelands::Ship, ship, temp_ship)) {
 			if (can_see(ship->get_owner()->player_number())) {
-				new ShipWindow(*this, *ship);
+				UI::UniqueWindow::Registry& registry =
+				   unique_windows().get_registry((boost::format("ship_%d") % ship->serial()).str());
+				registry.open_window = [this, &registry, ship] {
+					new ShipWindow(*this, registry, *ship);
+				};
+				registry.create();
 				return true;
 			}
 		}

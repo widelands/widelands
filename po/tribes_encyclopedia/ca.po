@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-01-28 21:57+0000\n"
-"PO-Revision-Date: 2017-01-29 00:13+0000\n"
+"POT-Creation-Date: 2017-03-05 10:46+0000\n"
+"PO-Revision-Date: 2017-03-09 20:39+0000\n"
 "Last-Translator: Juanjo\n"
 "Language-Team: Catalan (http://www.transifex.com/widelands/widelands/language/ca/)\n"
 "MIME-Version: 1.0\n"
@@ -400,9 +400,9 @@ msgstr "Produeix destrals normals, afilades i amples."
 msgctxt "barbarians_building"
 msgid ""
 "The Barbarian ax workshop is the intermediate production site in a series of"
-" three buildings. It is an upgrade from the metal workshop but doesn’t "
-"require additional qualification for the worker."
-msgstr "El taller de destrals dels bàrbars és l'intermedi de la sèrie de tres edificis de producció d'eines i armes. És la millora del taller de metall però el treballador no necessita qualificació addicional."
+" three buildings. It is enhanced from the metal workshop but doesn’t require"
+" additional qualification for the worker."
+msgstr "El taller de destrals dels bàrbars és l'intermedi de la sèrie de tres edificis de producció d'eines i armes. És l'ampliació del taller de metall però el treballador no necessita qualificació addicional."
 
 #: ../../data/tribes/buildings/productionsites/barbarians/ax_workshop/helptexts.lua:23
 #: ../../data/tribes/buildings/productionsites/barbarians/bakery/helptexts.lua:26
@@ -1069,7 +1069,7 @@ msgctxt "barbarians_building"
 msgid ""
 "The Barbarian war mill is their most advanced production site for weapons. "
 "As such it needs to be upgraded from an ax workshop."
-msgstr "El taller de guerra bàrbar és el seu edifici més avançat d'armes. Es construeix millorant un taller de destrals."
+msgstr "El taller de guerra bàrbar és el seu edifici més avançat d'armes. Es construeix ampliant un taller de destrals."
 
 #: ../../data/tribes/buildings/productionsites/barbarians/warmill/helptexts.lua:29
 msgctxt "barbarians_building"
@@ -1719,7 +1719,7 @@ msgstr "Desconegut"
 msgid ""
 "This building can either be built directly or obtained by enhancing another "
 "building."
-msgstr "Aquest edifici es pot obtenir construint-lo directament o millorant un altre tipus d'edifici."
+msgstr "Aquest edifici es pot obtenir construint-lo directament o ampliant un altre tipus d'edifici."
 
 #: ../../data/tribes/scripting/help/building_help.lua:452
 msgid "Direct build cost:"
@@ -1731,11 +1731,11 @@ msgstr "Cost de construcció:"
 
 #: ../../data/tribes/scripting/help/building_help.lua:465
 msgid "Or enhanced from:"
-msgstr "O millorat des de:"
+msgstr "O ampliat a partir de:"
 
 #: ../../data/tribes/scripting/help/building_help.lua:467
 msgid "Enhanced from:"
-msgstr "Millorat des de:"
+msgstr "Ampliat a partir de:"
 
 #: ../../data/tribes/scripting/help/building_help.lua:476
 msgid "Cumulative cost:"
@@ -1747,7 +1747,7 @@ msgstr "Si és construït directament, desmantellar-lo proporciona:"
 
 #: ../../data/tribes/scripting/help/building_help.lua:531
 msgid "If enhanced, dismantle yields:"
-msgstr "Si és millorat, desmantellar-lo proporciona:"
+msgstr "Si s'amplia, desmantellar-lo proporciona:"
 
 #. TRANSLATORS: This is a heading for the resources that you will get back
 #. when you dismantle a building of this type. What dismantling will give you.
@@ -1758,7 +1758,7 @@ msgstr "Desmantellar-lo proporciona:"
 
 #: ../../data/tribes/scripting/help/building_help.lua:584
 msgid "Can be enhanced to:"
-msgstr "Pot millorar-se a:"
+msgstr "Pot ampliar-se a:"
 
 #: ../../data/tribes/scripting/help/building_help.lua:614
 msgid "Crew required:"
@@ -1953,154 +1953,213 @@ msgstr "Inici"
 #. the key.
 #: ../../data/tribes/scripting/help/controls.lua:59
 msgctxt "hotkey"
-msgid "(Ctrl +) 1-9"
-msgstr "(Ctrl +) 1-9"
+msgid "Ctrl + 1-9"
+msgstr "Ctrl + 1-9"
 
 #: ../../data/tribes/scripting/help/controls.lua:59
-msgid "Remember and go to previously remembered locations"
-msgstr "Vés a les posicions recordades anteriorment (prement un número i la tecla Ctrl al mateix temps, recorda la posició)"
+msgid "Remember current location"
+msgstr "Registra la posició actual"
+
+#: ../../data/tribes/scripting/help/controls.lua:60
+msgctxt "hotkey"
+msgid "1-9"
+msgstr "1-9"
+
+#: ../../data/tribes/scripting/help/controls.lua:60
+msgid "Go to previously remembered location"
+msgstr "Vés a la posició registrada anterior"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
-#: ../../data/tribes/scripting/help/controls.lua:61
+#: ../../data/tribes/scripting/help/controls.lua:62
 msgctxt "hotkey"
-msgid "(Ctrl +) +"
-msgstr "(Ctrl +) +"
+msgid "Ctrl + +"
+msgstr "Ctrl + +"
 
-#: ../../data/tribes/scripting/help/controls.lua:61
+#: ../../data/tribes/scripting/help/controls.lua:62
 msgid "Increase zoom"
 msgstr "Augmenta el zoom"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
-#: ../../data/tribes/scripting/help/controls.lua:63
+#: ../../data/tribes/scripting/help/controls.lua:64
 msgctxt "hotkey"
-msgid "(Ctrl +) -"
-msgstr "(Ctrl +) -"
+msgid "Ctrl + -"
+msgstr "Ctrl + -"
 
-#: ../../data/tribes/scripting/help/controls.lua:63
+#: ../../data/tribes/scripting/help/controls.lua:64
 msgid "Decrease zoom"
 msgstr "Disminueix el zoom"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
-#: ../../data/tribes/scripting/help/controls.lua:65
+#: ../../data/tribes/scripting/help/controls.lua:66
 msgctxt "hotkey"
-msgid "(Ctrl +) 0"
-msgstr "(Ctrl +) 0"
+msgid "Ctrl + 0"
+msgstr "Ctrl+0"
 
-#: ../../data/tribes/scripting/help/controls.lua:65
+#: ../../data/tribes/scripting/help/controls.lua:66
 msgid "Reset zoom"
 msgstr "Restableix el zoom"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
-#: ../../data/tribes/scripting/help/controls.lua:67
+#: ../../data/tribes/scripting/help/controls.lua:68
 msgctxt "hotkey"
 msgid "Ctrl + F11"
 msgstr "Ctrl+F11"
 
-#: ../../data/tribes/scripting/help/controls.lua:67
+#: ../../data/tribes/scripting/help/controls.lua:68
 msgid "Take a screenshot"
 msgstr "Pren una captura de pantalla"
 
 #. TRANSLATORS: This is an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:70
+#: ../../data/tribes/scripting/help/controls.lua:71
 msgctxt "hotkey"
 msgid "Ctrl + F10"
 msgstr "Ctrl+F10"
 
-#: ../../data/tribes/scripting/help/controls.lua:70
+#: ../../data/tribes/scripting/help/controls.lua:71
 msgid "Quit the game immediately"
 msgstr "Surt del programa immediatament"
 
 #. TRANSLATORS: This is an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:72
+#: ../../data/tribes/scripting/help/controls.lua:73
 msgctxt "hotkey"
 msgid "F6"
 msgstr "F6"
 
-#: ../../data/tribes/scripting/help/controls.lua:72
+#: ../../data/tribes/scripting/help/controls.lua:73
 msgid "Show the debug console (only in debug-builds)"
 msgstr "Mostra la consola de depuració (només en muntatges de depuració)"
 
-#: ../../data/tribes/scripting/help/controls.lua:75
+#: ../../data/tribes/scripting/help/controls.lua:76
+msgid "Table Control"
+msgstr "Control d'edició de taules"
+
+#: ../../data/tribes/scripting/help/controls.lua:77
+msgid ""
+"In tables that allow the selection of multiple entries, the following key "
+"combinations are available:"
+msgstr "En taules que permeten la selecció de múltiples entrades, disposeu de les combinacions de tecles següents:"
+
+#. TRANSLATORS: This is an access key combination. Localize, but do not change
+#. the key.
+#: ../../data/tribes/scripting/help/controls.lua:80
+msgctxt "hotkey"
+msgid "Ctrl + Click"
+msgstr "Ctrl+Clic"
+
+#: ../../data/tribes/scripting/help/controls.lua:80
+msgctxt "table_control"
+msgid "Select multiple entries"
+msgstr "Selecció de múltiples entrades"
+
+#: ../../data/tribes/scripting/help/controls.lua:82
+msgctxt "table_control"
+msgid "Select a range of entries"
+msgstr "Selecció d'un rang d'entrades"
+
+#. TRANSLATORS: This is an access key combination. Localize, but do not change
+#. the key.
+#: ../../data/tribes/scripting/help/controls.lua:82
+msgctxt "hotkey"
+msgid "Shift + Click"
+msgstr "Maj+Clic"
+
+#. TRANSLATORS: This is an access key combination. Localize, but do not change
+#. the key.
+#: ../../data/tribes/scripting/help/controls.lua:84
+msgctxt "hotkey"
+msgid "Ctrl + A"
+msgstr "Ctrl+A"
+
+#: ../../data/tribes/scripting/help/controls.lua:84
+msgctxt "table_control"
+msgid "Select all entries"
+msgstr "Selecció de totes les entrades"
+
+#: ../../data/tribes/scripting/help/controls.lua:86
+msgid "Message Window"
+msgstr "Finestra de missatges"
+
+#: ../../data/tribes/scripting/help/controls.lua:87
 msgid ""
 "In the message window, the following additional shortcuts are available:"
 msgstr "A la finestra de missatges també estan disponibles aquestes dreceres de teclat:"
 
 #. TRANSLATORS: This is the helptext for an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:78
+#: ../../data/tribes/scripting/help/controls.lua:90
 msgctxt "hotkey"
 msgid "Alt + 0"
-msgstr "Alt + 0"
+msgstr "Alt+0"
 
-#: ../../data/tribes/scripting/help/controls.lua:78
+#: ../../data/tribes/scripting/help/controls.lua:90
 msgid "Show all messages"
 msgstr "Mostra tots els missatges"
 
 #. TRANSLATORS: This is the helptext for an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:80
+#: ../../data/tribes/scripting/help/controls.lua:92
 msgctxt "hotkey"
 msgid "Alt + 1"
-msgstr "Alt + 1"
+msgstr "Alt+1"
 
-#: ../../data/tribes/scripting/help/controls.lua:80
+#: ../../data/tribes/scripting/help/controls.lua:92
 msgid "Show geologists’ messages only"
 msgstr "Mostra només els missatges dels geòlegs"
 
 #. TRANSLATORS: This is the helptext for an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:82
+#: ../../data/tribes/scripting/help/controls.lua:94
 msgctxt "hotkey"
 msgid "Alt + 2"
-msgstr "Alt + 2"
+msgstr "Alt+2"
 
-#: ../../data/tribes/scripting/help/controls.lua:82
+#: ../../data/tribes/scripting/help/controls.lua:94
 msgid "Show economy messages only"
 msgstr "Mostra només els missatges de l'economia"
 
 #. TRANSLATORS: This is the helptext for an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:84
+#: ../../data/tribes/scripting/help/controls.lua:96
 msgctxt "hotkey"
 msgid "Alt + 3"
-msgstr "Alt + 3"
+msgstr "Alt+3"
 
-#: ../../data/tribes/scripting/help/controls.lua:84
+#: ../../data/tribes/scripting/help/controls.lua:96
 msgid "Show seafaring messages only"
 msgstr "Mostra només els missatges de navegació marítima"
 
 #. TRANSLATORS: This is the helptext for an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:86
+#: ../../data/tribes/scripting/help/controls.lua:98
 msgctxt "hotkey"
 msgid "Alt + 4"
-msgstr "Alt + 4"
+msgstr "Alt+4"
 
-#: ../../data/tribes/scripting/help/controls.lua:86
+#: ../../data/tribes/scripting/help/controls.lua:98
 msgid "Show warfare messages only"
 msgstr "Mostra només els missatges militars"
 
 #. TRANSLATORS: This is the helptext for an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:88
+#: ../../data/tribes/scripting/help/controls.lua:100
 msgctxt "hotkey"
 msgid "Alt + 5"
-msgstr "Alt + 5"
+msgstr "Alt+5"
 
-#: ../../data/tribes/scripting/help/controls.lua:88
+#: ../../data/tribes/scripting/help/controls.lua:100
 msgid "Show scenario messages only"
 msgstr "Mostra només els missatges d'escenari"
 
 #. TRANSLATORS: This is the helptext for an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:90
+#: ../../data/tribes/scripting/help/controls.lua:102
 msgid "Jump to the location corresponding to the current message"
 msgstr "Salta a la posició corresponent del missatge actual"
 
-#: ../../data/tribes/scripting/help/controls.lua:92
+#: ../../data/tribes/scripting/help/controls.lua:104
 msgid "Archive/Restore the current message"
 msgstr "Arxiva/restaura el missatge actual"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
-#: ../../data/tribes/scripting/help/controls.lua:92
+#: ../../data/tribes/scripting/help/controls.lua:104
 msgctxt "hotkey"
 msgid "Delete"
 msgstr "Esborra"
@@ -2519,7 +2578,7 @@ msgid ""
 "Bread paddles are produced in the metal workshop like all other tools (but "
 "cease to be produced by the building if it is enhanced to an ax workshop and"
 " war mill)."
-msgstr "Les pales de forner es produeixen al taller de metall com totes les altres eines (però no se'n faran més a l'edifici si es millora aquest a taller de destrals o de guerra)."
+msgstr "Les pales de forner es produeixen al taller de metall com totes les altres eines (però no se'n faran més a l'edifici si s'amplia a taller de destrals o de guerra)."
 
 #. TRANSLATORS: Helptext for a ware: Bread Paddle
 #: ../../data/tribes/wares/bread_paddle/helptexts.lua:10
@@ -2617,7 +2676,7 @@ msgctxt "barbarians_ware"
 msgid ""
 "Felling axes are produced in the metal workshop (but cease to be produced by"
 " the building if it is enhanced to an ax workshop and war mill)."
-msgstr "Les destrals per talar arbres es fabriquen al taller de metall (però no se'n faran més a l'edifici si es millora aquest a taller de destrals o de guerra)."
+msgstr "Les destrals per talar arbres es fabriquen al taller de metall (però no se'n faran més a l'edifici si s'amplia a taller de destrals o de guerra)."
 
 #. TRANSLATORS: Helptext for a ware: Felling Ax
 #: ../../data/tribes/wares/felling_ax/helptexts.lua:8
@@ -2644,7 +2703,7 @@ msgctxt "barbarians_ware"
 msgid ""
 "Produced by the metal workshop (but they cease to be produced by the "
 "building if it is enhanced to an ax workshop and war mill)."
-msgstr "Es fabriquen al taller de metall (però no se'n faran més a l'edifici si es millora aquest a taller de destrals o de guerra)."
+msgstr "Es fabriquen al taller de metall (però no se'n faran més a l'edifici si s'amplia a taller de destrals o de guerra)."
 
 #. TRANSLATORS: Helptext for a ware: Fire Tongs
 #: ../../data/tribes/wares/fire_tongs/helptexts.lua:10
@@ -2697,7 +2756,7 @@ msgid ""
 "They are one of the basic tools produced in a metal workshop (but cease to "
 "be produced by the building if it is enhanced to an ax workshop and war "
 "mill)."
-msgstr "Es fabriquen al taller de metall (però no se'n faran més a l'edifici si es millora aquest a taller de destrals o de guerra)."
+msgstr "Es fabriquen al taller de metall (però no se'n faran més a l'edifici si s'amplia a taller de destrals o de guerra)."
 
 #. TRANSLATORS: Helptext for a ware: Fishing Rod
 #: ../../data/tribes/wares/fishing_rod/helptexts.lua:8
@@ -2825,7 +2884,7 @@ msgid ""
 "sure you’ve always got some in reserve! They are one of the basic tools "
 "produced at the metal workshop (but cease to be produced by the building if "
 "it is enhanced to an ax workshop and war mill)."
-msgstr "Els geòlegs, constructors, forjadors i fabricants de cascos necessiten un martell per treballar. Assegureu-vos tenir-ne sempre alguns de reserva! Es produeixen al taller de metall  (però no se'n faran més a l'edifici si es millora aquest a taller de destrals o de guerra)."
+msgstr "Els geòlegs, constructors, forjadors i fabricants de cascos necessiten un martell per treballar. Assegureu-vos tenir-ne sempre alguns de reserva! Es produeixen al taller de metall  (però no se'n faran més a l'edifici si s'amplia a taller de destrals o de guerra)."
 
 #. TRANSLATORS: Helptext for a ware: Hammer
 #: ../../data/tribes/wares/hammer/helptexts.lua:10
@@ -2891,7 +2950,7 @@ msgctxt "barbarians_ware"
 msgid ""
 "Hunting spears are produced in the metal workshop (but cease to be produced "
 "by the building if it is enhanced to an ax workshop and war mill)."
-msgstr "Les llances de caçar es fabriquen al taller de metall (però no se'n faran més a l'edifici si es millora aquest a taller de destrals o de guerra)."
+msgstr "Les llances de caçar es fabriquen al taller de metall (però no se'n faran més a l'edifici si s'amplia a taller de destrals o de guerra)."
 
 #. TRANSLATORS: Helptext for a ware: Hunting Spear
 #: ../../data/tribes/wares/hunting_spear/helptexts.lua:8
@@ -2941,7 +3000,7 @@ msgid ""
 "Be sure to have a metal workshop to produce this basic tool (but it ceases "
 "to be produced by the building if it is enhanced to an ax workshop and war "
 "mill)."
-msgstr "No es poden preparar racions, aperitius i àpats sense estris de cuina. Assegureu-vos de tenir un taller de metall per produir aquesta i altres eines bàsiques (però recordeu que no es faran més eines a l'edifici si es millora aquest a taller de destrals o de guerra)."
+msgstr "No es poden preparar racions, aperitius i àpats sense estris de cuina. Assegureu-vos de tenir un taller de metall per produir aquesta i altres eines bàsiques (però recordeu que no es faran més eines a l'edifici si s'amplia a taller de destrals o de guerra)."
 
 #. TRANSLATORS: Helptext for a ware: Kitchen Tools
 #: ../../data/tribes/wares/kitchen_tools/helptexts.lua:6
@@ -3078,7 +3137,7 @@ msgid ""
 "Picks are used by stonemasons and miners. They are produced in the metal "
 "workshop (but cease to be produced by the building if it is enhanced to an "
 "ax workshop and war mill)."
-msgstr "El pic l'usen els miners i els pedrers. Es fabriquen al taller de metall (però no se'n faran més a l'edifici si es millora aquest a taller de destrals o de guerra)."
+msgstr "El pic l'usen els miners i els pedrers. Es fabriquen al taller de metall (però no se'n faran més a l'edifici si s'amplia a taller de destrals o de guerra)."
 
 #. TRANSLATORS: Helptext for a ware: Pick
 #: ../../data/tribes/wares/pick/helptexts.lua:8
@@ -3180,7 +3239,7 @@ msgctxt "barbarians_ware"
 msgid ""
 "Scythes are produced by the metal workshop (but cease to be produced by the "
 "building if it is enhanced to an ax workshop and war mill)."
-msgstr "Les dalles es fabriquen al taller de metall (però no se'n faran més a l'edifici si es millora aquest a taller de destrals o de guerra)."
+msgstr "Les dalles es fabriquen al taller de metall (però no se'n faran més a l'edifici si s'amplia a taller de destrals o de guerra)."
 
 #. TRANSLATORS: Helptext for a ware: Scythe
 #: ../../data/tribes/wares/scythe/helptexts.lua:10
@@ -3226,7 +3285,7 @@ msgid ""
 "Therefore the gardener and the ranger use them. Produced at the metal "
 "workshop (but cease to be produced by the building if it is enhanced to an "
 "ax workshop and war mill)."
-msgstr "Per això l'empren el jardiner i el guarda forestal. Les produeixen el taller de metall (però no se'n faran més a l'edifici si es millora aquest a fàbrica de destrals o taller de guerra)."
+msgstr "Per això l'empren el jardiner i el guarda forestal. Les produeixen el taller de metall (però no se'n faran més a l'edifici si s'amplia a fàbrica de destrals o taller de guerra)."
 
 #. TRANSLATORS: Helptext for a ware: Shovel
 #: ../../data/tribes/wares/shovel/helptexts.lua:10
@@ -3568,7 +3627,7 @@ msgstr "Treballa en mines profundes per obtenir carbó, pedres precioses o miner
 #. TRANSLATORS: Helptext for a worker: Recruit
 #: ../../data/tribes/workers/atlanteans/recruit/helptexts.lua:3
 msgctxt "atlanteans_worker"
-msgid "Eager to become a soldier and defend your tribe!"
+msgid "Eager to become a soldier and defend his tribe!"
 msgstr "Amb ganes de convertir-se en soldat i defensar el clan!"
 
 #. TRANSLATORS: Helptext for a worker: Sawyer
@@ -3641,8 +3700,8 @@ msgstr "Produeix armes per als soldats."
 #. TRANSLATORS: Helptext for a worker: Weaver
 #: ../../data/tribes/workers/atlanteans/weaver/helptexts.lua:3
 msgctxt "atlanteans_worker"
-msgid "Produces cloth for buildings, ships and soldiers."
-msgstr "Fabrica tela per a edificis, vaixells i soldats."
+msgid "Produces spidercloth for buildings, ships and soldiers."
+msgstr "Fabrica tela de seda d'aranya per a edificis, vaixells i soldats."
 
 #. TRANSLATORS: Helptext for a worker: Woodcutter
 #: ../../data/tribes/workers/atlanteans/woodcutter/helptexts.lua:3
@@ -3789,7 +3848,7 @@ msgstr "Planta arbres."
 #. TRANSLATORS: Helptext for a worker: Recruit
 #: ../../data/tribes/workers/barbarians/recruit/helptexts.lua:3
 msgctxt "barbarians_worker"
-msgid "Eager to become a soldier and defend your tribe!"
+msgid "Eager to become a soldier and defend his tribe!"
 msgstr "Amb ganes de convertir-se en soldat i defensar el clan!"
 
 #. TRANSLATORS: Helptext for a worker: Scout
@@ -3958,7 +4017,7 @@ msgstr "Cria porcs."
 #. TRANSLATORS: Helptext for a worker: Recruit
 #: ../../data/tribes/workers/empire/recruit/helptexts.lua:3
 msgctxt "empire_worker"
-msgid "Eager to become a soldier and defend your tribe!"
+msgid "Eager to become a soldier and defend his tribe!"
 msgstr "Amb ganes de convertir-se en soldat i defensar el clan!"
 
 #. TRANSLATORS: Helptext for a worker: Scout

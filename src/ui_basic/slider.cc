@@ -152,34 +152,34 @@ void Slider::draw_cursor(
 	   (Recti(Vector2i(x, y), w, h), pic_background_, Vector2i(get_x(), get_y()));
 
 	if (highlighted_)
-		dst.brighten_rect(Rectf(x, y, w, h), MOUSE_OVER_BRIGHT_FACTOR);
+		dst.brighten_rect(Recti(x, y, w, h), MOUSE_OVER_BRIGHT_FACTOR);
 
 	if (pressed_) {       //  draw border
 		dst.brighten_rect  //  bottom edge
-		   (Rectf(x, y + h - 2, w, 2), BUTTON_EDGE_BRIGHT_FACTOR);
+		   (Recti(x, y + h - 2, w, 2), BUTTON_EDGE_BRIGHT_FACTOR);
 		dst.brighten_rect  //  right edge
-		   (Rectf(x + w - 2, y, 2, h - 2), BUTTON_EDGE_BRIGHT_FACTOR);
+		   (Recti(x + w - 2, y, 2, h - 2), BUTTON_EDGE_BRIGHT_FACTOR);
 
 		//  top edge
-		dst.fill_rect(Rectf(x, y, w - 1, 1), black);
-		dst.fill_rect(Rectf(x, y + 1, w - 2, 1), black);
+		dst.fill_rect(Recti(x, y, w - 1, 1), black);
+		dst.fill_rect(Recti(x, y + 1, w - 2, 1), black);
 
 		//  left edge
-		dst.fill_rect(Rectf(x, y, 1, h - 1), black);
-		dst.fill_rect(Rectf(x + 1, y, 1, h - 2), black);
+		dst.fill_rect(Recti(x, y, 1, h - 1), black);
+		dst.fill_rect(Recti(x + 1, y, 1, h - 2), black);
 	} else {
 		dst.brighten_rect  //  top edge
-		   (Rectf(x, y, w, 2), BUTTON_EDGE_BRIGHT_FACTOR);
+		   (Recti(x, y, w, 2), BUTTON_EDGE_BRIGHT_FACTOR);
 		dst.brighten_rect  //  left edge
-		   (Rectf(x, y + 2, 2, h - 2), BUTTON_EDGE_BRIGHT_FACTOR);
+		   (Recti(x, y + 2, 2, h - 2), BUTTON_EDGE_BRIGHT_FACTOR);
 
 		//  bottom edge
-		dst.fill_rect(Rectf(x + 2, y + h - 2, w - 2, 1), black);
-		dst.fill_rect(Rectf(x + 1, y + h - 1, w - 1, 1), black);
+		dst.fill_rect(Recti(x + 2, y + h - 2, w - 2, 1), black);
+		dst.fill_rect(Recti(x + 1, y + h - 1, w - 1, 1), black);
 
 		//  right edge
-		dst.fill_rect(Rectf(x + w - 2, y + 2, 1, h - 2), black);
-		dst.fill_rect(Rectf(x + w - 1, y + 1, 1, h - 1), black);
+		dst.fill_rect(Recti(x + w - 2, y + 2, 1, h - 2), black);
+		dst.fill_rect(Recti(x + w - 1, y + 1, 1, h - 1), black);
 	}
 }
 
@@ -362,18 +362,18 @@ void HorizontalSlider::draw(RenderTarget& dst) {
 
 	if (get_bar_size() > 0) {
 		dst.brighten_rect  //  bottom edge
-		   (Rectf(get_x_gap(), get_h() / 2.f, get_bar_size(), 2), BUTTON_EDGE_BRIGHT_FACTOR);
+		   (Recti(get_x_gap(), get_h() / 2, get_bar_size(), 2), BUTTON_EDGE_BRIGHT_FACTOR);
 		dst.brighten_rect  //  right edge
-		   (Rectf(get_x_gap() + get_bar_size() - 2, get_y_gap(), 2, 2), BUTTON_EDGE_BRIGHT_FACTOR);
+		   (Recti(get_x_gap() + get_bar_size() - 2, get_y_gap(), 2, 2), BUTTON_EDGE_BRIGHT_FACTOR);
 
 		//  top edge
-		dst.fill_rect(Rectf(get_x_gap(), get_y_gap(), get_bar_size() - 1, 1), black);
-		dst.fill_rect(Rectf(get_x_gap(), get_y_gap() + 1, get_bar_size() - 2, 1), black);
+		dst.fill_rect(Recti(get_x_gap(), get_y_gap(), get_bar_size() - 1, 1), black);
+		dst.fill_rect(Recti(get_x_gap(), get_y_gap() + 1, get_bar_size() - 2, 1), black);
 	}
 
 	//  left edge
-	dst.fill_rect(Rectf(get_x_gap(), get_y_gap(), 1, 4), black);
-	dst.fill_rect(Rectf(get_x_gap() + 1, get_y_gap(), 1, 3), black);
+	dst.fill_rect(Recti(get_x_gap(), get_y_gap(), 1, 4), black);
+	dst.fill_rect(Recti(get_x_gap() + 1, get_y_gap(), 1, 3), black);
 
 	draw_cursor(dst, cursor_pos_, 0, cursor_size_, get_h());
 }
@@ -435,17 +435,17 @@ void VerticalSlider::draw(RenderTarget& dst) {
 	RGBAColor black(0, 0, 0, 255);
 
 	dst.brighten_rect  //  right edge
-	   (Rectf(get_w() / 2.f, get_y_gap(), 2, get_bar_size()), BUTTON_EDGE_BRIGHT_FACTOR);
+	   (Recti(get_w() / 2, get_y_gap(), 2, get_bar_size()), BUTTON_EDGE_BRIGHT_FACTOR);
 	dst.brighten_rect  //  bottom edge
-	   (Rectf(get_x_gap(), get_y_gap() + get_bar_size() - 2, 2, 2), BUTTON_EDGE_BRIGHT_FACTOR);
+	   (Recti(get_x_gap(), get_y_gap() + get_bar_size() - 2, 2, 2), BUTTON_EDGE_BRIGHT_FACTOR);
 
 	//  left edge
-	dst.fill_rect(Rectf(get_x_gap(), get_y_gap(), 1, get_bar_size() - 1), black);
-	dst.fill_rect(Rectf(get_x_gap() + 1, get_y_gap(), 1, get_bar_size() - 2), black);
+	dst.fill_rect(Recti(get_x_gap(), get_y_gap(), 1, get_bar_size() - 1), black);
+	dst.fill_rect(Recti(get_x_gap() + 1, get_y_gap(), 1, get_bar_size() - 2), black);
 
 	//  top edge
-	dst.fill_rect(Rectf(get_x_gap(), get_y_gap(), 4, 1), black);
-	dst.fill_rect(Rectf(get_x_gap(), get_y_gap() + 1, 3, 1), black);
+	dst.fill_rect(Recti(get_x_gap(), get_y_gap(), 4, 1), black);
+	dst.fill_rect(Recti(get_x_gap(), get_y_gap() + 1, 3, 1), black);
 
 	draw_cursor(dst, 0, cursor_pos_, get_w(), cursor_size_);
 }
@@ -508,12 +508,7 @@ DiscreteSlider::DiscreteSlider(Panel* const parent,
             w / (2 * labels_in.size()) - cursor_size / 2,
             0,
             w - (w / labels_in.size()) + cursor_size,
-            h -
-               UI::g_fh1->render(as_condensed(UI::g_fh1->fontset()->representative_character(),
-                                              UI::Align::kLeft,
-                                              UI_FONT_SIZE_SMALL - 2))
-                  ->height() -
-               2,
+            h - text_height(UI_FONT_SIZE_SMALL - 2, UI::FontSet::Face::kCondensed) - 2,
             0,
             labels_in.size() - 1,
             value_,
@@ -538,10 +533,10 @@ void DiscreteSlider::draw(RenderTarget& dst) {
 	uint32_t gap_n = get_w() / labels.size();
 
 	for (uint32_t i = 0; i < labels.size(); i++) {
-		dst.blit(Vector2f(gap_1 + i * gap_n, get_h()),
-		         UI::g_fh1->render(
-		            as_condensed(labels[i], UI::Align::kBottomCenter, UI_FONT_SIZE_SMALL - 2)),
-		         BlendMode::UseAlpha, UI::Align::kBottomCenter);
+		std::shared_ptr<const UI::RenderedText> rendered_text =
+		   UI::g_fh1->render(as_condensed(labels[i], UI::Align::kCenter, UI_FONT_SIZE_SMALL - 2));
+		rendered_text->draw(
+		   dst, Vector2i(gap_1 + i * gap_n, get_h() - rendered_text->height()), UI::Align::kCenter);
 	}
 }
 
@@ -556,13 +551,8 @@ void DiscreteSlider::layout() {
 	uint32_t h = get_h();
 	assert(labels.size());
 	slider.set_pos(Vector2i(w / (2 * labels.size()) - slider.cursor_size_ / 2, 0));
-	slider.set_size(
-	   w - (w / labels.size()) + slider.cursor_size_,
-	   h -
-	      UI::g_fh1->render(as_condensed(UI::g_fh1->fontset()->representative_character(),
-	                                     UI::Align::kLeft, UI_FONT_SIZE_SMALL - 2))
-	         ->height() +
-	      2);
+	slider.set_size(w - (w / labels.size()) + slider.cursor_size_,
+	                h - text_height(UI_FONT_SIZE_SMALL - 2, UI::FontSet::Face::kCondensed) + 2);
 	Panel::layout();
 }
 }

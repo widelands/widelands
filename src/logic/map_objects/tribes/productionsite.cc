@@ -182,9 +182,16 @@ ProductionSiteDescr::ProductionSiteDescr(const std::string& init_descname,
 				throw wexception("this program has already been declared");
 			}
 			std::unique_ptr<LuaTable> program_table = items_table->get_table(program_name);
-			programs_[program_name] = std::unique_ptr<ProductionProgram>(
-			   new ProductionProgram(program_name, _(program_table->get_string("descname")),
-			                         program_table->get_table("actions"), egbase, this));
+
+			// Allow use of both gettext and pgettext. This way, we can have a lower workload on
+			// translators and disambiguate at the same time.
+			const std::string program_descname_unlocalized = program_table->get_string("descname");
+			std::string program_descname = _(program_descname_unlocalized);
+			if (program_descname == program_descname_unlocalized) {
+				program_descname = pgettext_expr(msgctxt.c_str(), program_descname_unlocalized.c_str());
+			}
+			programs_[program_name] = std::unique_ptr<ProductionProgram>(new ProductionProgram(
+			   program_name, program_descname, program_table->get_table("actions"), egbase, this));
 		} catch (const std::exception& e) {
 			throw wexception("program %s: %s", program_name.c_str(), e.what());
 		}
@@ -404,7 +411,7 @@ void ProductionSite::calc_statistics() {
 /**
  * Initialize the production site.
  */
-void ProductionSite::init(EditorGameBase& egbase) {
+bool ProductionSite::init(EditorGameBase& egbase) {
 	Building::init(egbase);
 
 	const BillOfMaterials& input_wares = descr().input_wares();
@@ -433,6 +440,7 @@ void ProductionSite::init(EditorGameBase& egbase) {
 
 	if (upcast(Game, game, &egbase))
 		try_start_working(*game);
+	return true;
 }
 
 /**
@@ -636,7 +644,7 @@ void ProductionSite::request_worker_callback(
 	// the last one we need to start working.
 	w->start_task_idle(game, 0, -1);
 	psite.try_start_working(game);
-	psite.workers_changed();
+	Notifications::publish(NoteBuilding(psite.serial(), NoteBuilding::Action::kWorkersChanged));
 }
 
 /**
@@ -716,6 +724,7 @@ void ProductionSite::log_general_info(const EditorGameBase& egbase) {
 void ProductionSite::set_stopped(bool const stopped) {
 	is_stopped_ = stopped;
 	get_economy()->rebalance_supply();
+	Notifications::publish(NoteBuilding(serial(), NoteBuilding::Action::kChanged));
 }
 
 /**
@@ -918,7 +927,7 @@ void ProductionSite::program_end(Game& game, ProgramResult const result) {
 void ProductionSite::train_workers(Game& game) {
 	for (uint32_t i = descr().nr_working_positions(); i;)
 		working_positions_[--i].worker->gain_experience(game);
-	Building::workers_changed();
+	Notifications::publish(NoteBuilding(serial(), NoteBuilding::Action::kWorkersChanged));
 }
 
 void ProductionSite::notify_player(Game& game, uint8_t minutes, FailNotificationType type) {

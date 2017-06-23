@@ -89,9 +89,9 @@ MapDetails::MapDetails(Panel* parent, int32_t x, int32_t y, int32_t w, int32_t h
 	name_label_.force_new_renderer();
 	descr_.force_new_renderer();
 
-	main_box_.add(&name_label_, UI::Align::kLeft);
+	main_box_.add(&name_label_);
 	main_box_.add_space(padding_);
-	main_box_.add(&descr_, UI::Align::kLeft);
+	main_box_.add(&descr_);
 	layout();
 }
 
@@ -102,9 +102,7 @@ void MapDetails::clear() {
 }
 
 void MapDetails::layout() {
-	name_label_.set_size(
-	   get_w() - padding_,
-	   UI::g_fh1->render(as_uifont(UI::g_fh1->fontset()->representative_character()))->height() + 2);
+	name_label_.set_size(get_w() - padding_, text_height() + 2);
 
 	// Adjust sizes for show / hide suggested teams
 	if (suggested_teams_box_->is_visible()) {

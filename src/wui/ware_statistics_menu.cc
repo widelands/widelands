@@ -150,7 +150,7 @@ WareStatisticsMenu::WareStatisticsMenu(InteractivePlayer& parent,
 	tabs->activate(0);
 
 	// Add tabbed environment to box
-	box->add(tabs, UI::Align::kLeft, true);
+	box->add(tabs, UI::Box::Resizing::kFullSize);
 
 	// Register statistics data
 	for (Widelands::DescriptionIndex cur_ware = 0; cur_ware < nr_wares; ++cur_ware) {
@@ -182,10 +182,13 @@ WareStatisticsMenu::WareStatisticsMenu(InteractivePlayer& parent,
 	   new StatisticWaresDisplay(
 	      box, 0, 0, parent.get_player()->tribe(),
 	      boost::bind(&WareStatisticsMenu::cb_changed_to, boost::ref(*this), _1, _2), color_map_),
-	   UI::Align::kLeft, true);
-	box->add(new WuiPlotGenericAreaSlider(this, *plot_production_, this, 0, 0, kPlotWidth, 45,
-	                                      g_gr->images().get("images/ui_basic/but1.png")),
-	         UI::Align::kLeft, true);
+	   UI::Box::Resizing::kFullSize);
+
+	WuiPlotAreaSlider* slider =
+	   new WuiPlotAreaSlider(this, *plot_production_, 0, 0, kPlotWidth, 45,
+	                         g_gr->images().get("images/ui_basic/but1.png"));
+	slider->changedto.connect(boost::bind(&WareStatisticsMenu::set_time, this, _1));
+	box->add(slider, UI::Box::Resizing::kFullSize);
 }
 
 /**

@@ -28,9 +28,6 @@
 #include "graphic/align.h"
 #include "graphic/animation.h"
 #include "graphic/build_texture_atlas.h"
-#include "graphic/font.h"
-#include "graphic/font_handler.h"
-#include "graphic/font_handler1.h"
 #include "graphic/gl/initialize.h"
 #include "graphic/gl/system_headers.h"
 #include "graphic/image.h"
@@ -43,8 +40,6 @@
 #include "io/filesystem/layered_filesystem.h"
 #include "io/streamwrite.h"
 #include "notifications/notifications.h"
-
-using namespace std;
 
 Graphic* g_gr;
 
@@ -120,10 +115,6 @@ void Graphic::initialize(const TraceGl& trace_gl,
 }
 
 Graphic::~Graphic() {
-	// TODO(unknown): this should really not be needed, but currently is :(
-	if (UI::g_fh)
-		UI::g_fh->flush();
-
 	if (sdl_window_) {
 		SDL_DestroyWindow(sdl_window_);
 		sdl_window_ = nullptr;
@@ -239,6 +230,6 @@ void Graphic::refresh() {
 /**
  * Save a screenshot to the given file.
 */
-void Graphic::screenshot(const string& fname) {
+void Graphic::screenshot(const std::string& fname) {
 	screenshot_filename_ = fname;
 }

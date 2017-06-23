@@ -29,6 +29,8 @@
 #include "logic/map.h"
 #include "notifications/notifications.h"
 #include "profile/profile.h"
+#include "sound/note_sound.h"
+#include "sound/sound_handler.h"
 #include "ui_basic/box.h"
 #include "ui_basic/textarea.h"
 #include "ui_basic/unique_window.h"
@@ -211,6 +213,7 @@ protected:
 	UI::Box toolbar_;
 
 private:
+	int32_t stereo_position(Widelands::Coords position_map);
 	void resize_chat_overlay();
 	void roadb_add_overlay();
 	void roadb_remove_overlay();
@@ -243,6 +246,7 @@ private:
 
 	std::unique_ptr<Notifications::Subscriber<GraphicResolutionChanged>>
 	   graphic_resolution_changed_subscriber_;
+	std::unique_ptr<Notifications::Subscriber<NoteSound>> sound_subscriber_;
 	Widelands::EditorGameBase& egbase_;
 	uint32_t display_flags_;
 	uint32_t lastframe_;        //  system time (milliseconds)

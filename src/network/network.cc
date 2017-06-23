@@ -19,8 +19,63 @@
 
 #include "network/network.h"
 
+#include <SDL.h>
+
 #include "base/log.h"
-#include "wlapplication.h"
+
+namespace {
+
+bool do_resolve(const boost::asio::ip::tcp& protocol,
+                NetAddress* addr,
+                const std::string& hostname,
+                uint16_t port) {
+	assert(addr != nullptr);
+	try {
+		boost::asio::io_service io_service;
+		boost::asio::ip::tcp::resolver resolver(io_service);
+		boost::asio::ip::tcp::resolver::query query(
+		   protocol, hostname, boost::lexical_cast<std::string>(port));
+		boost::asio::ip::tcp::resolver::iterator iter = resolver.resolve(query);
+		if (iter == boost::asio::ip::tcp::resolver::iterator()) {
+			// Resolution failed
+			return false;
+		}
+		addr->ip = iter->endpoint().address();
+		addr->port = port;
+		return true;
+	} catch (const boost::system::system_error& ec) {
+		// Resolution failed
+		log("Could not resolve network name: %s", ec.what());
+		return false;
+	}
+}
+}
+
+bool NetAddress::resolve_to_v4(NetAddress* addr, const std::string& hostname, uint16_t port) {
+	return do_resolve(boost::asio::ip::tcp::v4(), addr, hostname, port);
+}
+
+bool NetAddress::resolve_to_v6(NetAddress* addr, const std::string& hostname, uint16_t port) {
+	return do_resolve(boost::asio::ip::tcp::v6(), addr, hostname, port);
+}
+
+bool NetAddress::parse_ip(NetAddress* addr, const std::string& ip, uint16_t port) {
+	boost::system::error_code ec;
+	boost::asio::ip::address new_addr = boost::asio::ip::address::from_string(ip, ec);
+	if (ec)
+		return false;
+	addr->ip = new_addr;
+	addr->port = port;
+	return true;
+}
+
+bool NetAddress::is_ipv6() const {
+	return ip.is_v6();
+}
+
+bool NetAddress::is_valid() const {
+	return port != 0 && !ip.is_unspecified();
+}
 
 CmdNetCheckSync::CmdNetCheckSync(uint32_t const dt, SyncCallback* const cb)
    : Command(dt), callback_(cb) {
@@ -117,11 +172,21 @@ void SendPacket::data(const void* const packet_data, const size_t size) {
 		buffer.push_back(0);  //  this will finally be the length of the packet
 		buffer.push_back(0);
 	}
+
 	for (size_t idx = 0; idx < size; ++idx)
 		buffer.push_back(static_cast<const uint8_t*>(packet_data)[idx]);
 }
 
-void SendPacket::send(TCPsocket sock) {
+void SendPacket::reset() {
+	buffer.clear();
+}
+
+size_t SendPacket::get_size() const {
+	return buffer.size();
+}
+
+uint8_t* SendPacket::get_data() const {
+
 	uint32_t const length = buffer.size();
 
 	assert(length < 0x10000);
@@ -130,28 +195,10 @@ void SendPacket::send(TCPsocket sock) {
 	buffer[0] = length >> 8;
 	buffer[1] = length & 0xFF;
 
-	if (sock)
-		SDLNet_TCP_Send(sock, &(buffer[0]), buffer.size());
-}
-
-void SendPacket::reset() {
-	buffer.clear();
+	return &(buffer[0]);
 }
 
 /*** class RecvPacket ***/
-
-RecvPacket::RecvPacket(Deserializer& des) {
-	uint16_t const size = des.queue_[0] << 8 | des.queue_[1];
-
-	// The following should be caught by Deserializer::read and ::avail
-	assert(des.queue_.size() >= static_cast<size_t>(size));
-	assert(size >= 2);
-
-	buffer.insert(buffer.end(), des.queue_.begin() + 2, des.queue_.begin() + size);
-	index_ = 0;
-
-	des.queue_.erase(des.queue_.begin(), des.queue_.begin() + size);
-}
 
 size_t RecvPacket::data(void* const packet_data, size_t const bufsize) {
 	if (index_ + bufsize > buffer.size())
@@ -167,33 +214,33 @@ bool RecvPacket::end_of_file() const {
 	return index_ < buffer.size();
 }
 
-bool Deserializer::read(TCPsocket sock) {
-	uint8_t buffer[512];
-	const int32_t bytes = SDLNet_TCP_Recv(sock, buffer, sizeof(buffer));
-	if (bytes <= 0)
-		return false;
+void Deserializer::read_data(const uint8_t* data, const int32_t len) {
 
-	queue_.insert(queue_.end(), &buffer[0], &buffer[bytes]);
-
-	return queue_.size() < 2 || 2 <= (queue_[0] << 8 | queue_[1]);
+	queue_.insert(queue_.end(), &data[0], &data[len]);
 }
 
-/**
- * Returns true if an entire packet is available
- */
-bool Deserializer::avail() const {
+bool Deserializer::write_packet(RecvPacket* packet) {
+	// No data at all
 	if (queue_.size() < 2)
 		return false;
 
-	const uint16_t size = queue_[0] << 8 | queue_[1];
-	if (size < 2)
+	uint16_t const size = queue_[0] << 8 | queue_[1];
+	assert(size >= 2);
+
+	// Not enough data for a complete packet
+	if (queue_.size() < static_cast<size_t>(size))
 		return false;
 
-	return queue_.size() >= static_cast<size_t>(size);
+	packet->buffer.clear();
+	packet->buffer.insert(packet->buffer.end(), queue_.begin() + 2, queue_.begin() + size);
+	packet->index_ = 0;
+
+	queue_.erase(queue_.begin(), queue_.begin() + size);
+	return true;
 }
 
 DisconnectException::DisconnectException(const char* fmt, ...) {
-	char buffer[512];
+	char buffer[kNetworkBufferSize];
 	{
 		va_list va;
 		va_start(va, fmt);

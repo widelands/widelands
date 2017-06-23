@@ -50,7 +50,6 @@ rnrnrn * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #include "logic/roadtype.h"
 #include "scripting/logic.h"
 #include "scripting/lua_table.h"
-#include "sound/sound_handler.h"
 #include "ui_basic/progresswindow.h"
 #include "wui/interactive_base.h"
 #include "wui/interactive_gamebase.h"
@@ -73,14 +72,11 @@ EditorGameBase::EditorGameBase(LuaInterface* lua_interface)
      lasttrackserial_(0) {
 	if (!lua_)  // TODO(SirVer): this is sooo ugly, I can't say
 		lua_.reset(new LuaEditorInterface(this));
-
-	g_sound_handler.egbase_ = this;
 }
 
 EditorGameBase::~EditorGameBase() {
 	delete map_;
 	delete player_manager_.release();
-	g_sound_handler.egbase_ = nullptr;
 }
 
 void EditorGameBase::think() {

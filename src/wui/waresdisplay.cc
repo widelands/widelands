@@ -320,22 +320,22 @@ void AbstractWaresDisplay::draw_ware(RenderTarget& dst, Widelands::DescriptionIn
 	                                                        "images/wui/ware_list_bg.png");
 	uint16_t w = bgpic->width();
 
-	const Vector2f p = ware_position(id).cast<float>();
+	const Vector2i p = ware_position(id);
 	dst.blit(p, bgpic);
 
 	const Image* icon = type_ == Widelands::wwWORKER ? tribe_.get_worker_descr(id)->icon() :
 	                                                   tribe_.get_ware_descr(id)->icon();
 
-	dst.blit(p + Vector2f((w - WARE_MENU_PIC_WIDTH) / 2.f, 1.f), icon);
+	dst.blit(p + Vector2i((w - WARE_MENU_PIC_WIDTH) / 2, 1), icon);
 
-	dst.fill_rect(Rectf(p + Vector2f(0.f, WARE_MENU_PIC_HEIGHT), w, WARE_MENU_INFO_SIZE),
+	dst.fill_rect(Recti(p + Vector2i(0, WARE_MENU_PIC_HEIGHT), w, WARE_MENU_INFO_SIZE),
 	              info_color_for_ware(id));
 
-	const Image* text = UI::g_fh1->render(as_waresinfo(info_for_ware(id)));
-	if (text)  // might be zero when there is no info text.
-		dst.blit(p + Vector2f(w - text->width() - 1,
-		                      WARE_MENU_PIC_HEIGHT + WARE_MENU_INFO_SIZE + 1 - text->height()),
-		         text);
+	std::shared_ptr<const UI::RenderedText> rendered_text =
+	   UI::g_fh1->render(as_waresinfo(info_for_ware(id)));
+	rendered_text->draw(dst, Vector2i(p.x + w - rendered_text->width() - 1,
+	                                  p.y + WARE_MENU_PIC_HEIGHT + WARE_MENU_INFO_SIZE + 1 -
+	                                     rendered_text->height()));
 }
 
 // Wares highlighting/selecting
@@ -426,12 +426,12 @@ std::string waremap_to_richtext(const Widelands::TribeDescr& tribe,
 	for (i = order.begin(); i != order.end(); ++i)
 		for (j = i->begin(); j != i->end(); ++j)
 			if ((c = map.find(*j)) != map.end()) {
-				ret += "<sub width=30 padding=2><p align=center>"
-				       "<sub width=26 background=454545><p align=center><img src=\"" +
+				ret += "<div width=30 padding=2><p align=center>"
+				       "<div width=26 background=454545><p align=center><img src=\"" +
 				       tribe.get_ware_descr(c->first)->icon_filename() +
-				       "\"></p></sub><sub width=26 background=000000><p><font size=9>" +
+				       "\"></p></div><div width=26 background=000000><p><font size=9>" +
 				       boost::lexical_cast<std::string>(static_cast<int32_t>(c->second)) +
-				       "</font></p></sub></p></sub>";
+				       "</font></p></div></p></div>";
 			}
 	return ret;
 }

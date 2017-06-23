@@ -24,7 +24,6 @@
 
 #include "base/macros.h"
 #include "economy/request.h"
-#include "logic/map_objects/attackable.h"
 #include "logic/map_objects/tribes/building.h"
 #include "logic/map_objects/tribes/requirements.h"
 #include "logic/map_objects/tribes/soldiercontrol.h"
@@ -69,7 +68,7 @@ private:
 	DISALLOW_COPY_AND_ASSIGN(MilitarySiteDescr);
 };
 
-class MilitarySite : public Building, public SoldierControl, public Attackable {
+class MilitarySite : public Building, public SoldierControl {
 	friend class MapBuildingdataPacket;
 	MO_DESCR(MilitarySiteDescr)
 
@@ -84,7 +83,7 @@ public:
 	MilitarySite(const MilitarySiteDescr&);
 	virtual ~MilitarySite();
 
-	void init(EditorGameBase&) override;
+	bool init(EditorGameBase&) override;
 	void cleanup(EditorGameBase&) override;
 	void act(Game&, uint32_t data) override;
 	void remove_worker(Worker&) override;
@@ -101,15 +100,6 @@ public:
 	void set_soldier_capacity(Quantity capacity) override;
 	void drop_soldier(Soldier&) override;
 	int incorporate_soldier(EditorGameBase& game, Soldier& s) override;
-
-	// Begin implementation of Attackable
-	Player& owner() const override {
-		return Building::owner();
-	}
-	bool can_attack() override;
-	void aggressor(Soldier&) override;
-	bool attack(Soldier&) override;
-	// End implementation of Attackable
 
 	/// Launch the given soldier on an attack towards the given
 	/// target building.
@@ -134,8 +124,6 @@ public:
 protected:
 	void conquer_area(EditorGameBase&);
 
-	void create_options_window(InteractiveGameBase&, UI::Window*& registry) override;
-
 private:
 	void update_statistics_string(std::string*) override;
 
@@ -155,6 +143,21 @@ private:
 	bool drop_least_suited_soldier(bool new_has_arrived, Soldier* s);
 
 private:
+	// We can be attacked if we have stationed soldiers.
+	class AttackTarget : public Widelands::AttackTarget {
+	public:
+		explicit AttackTarget(MilitarySite* military_site) : military_site_(military_site) {
+		}
+
+		bool can_be_attacked() const override;
+		void enemy_soldier_approaches(const Soldier&) const override;
+		Widelands::AttackTarget::AttackResult attack(Soldier*) const override;
+
+	private:
+		MilitarySite* const military_site_;
+	};
+
+	AttackTarget attack_target_;
 	Requirements soldier_requirements_;  // This is used to grab a bunch of soldiers: Anything goes
 	RequireAttribute soldier_upgrade_requirements_;     // This is used when exchanging soldiers.
 	std::unique_ptr<Request> normal_soldier_request_;   // filling the site

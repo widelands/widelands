@@ -6,6 +6,10 @@ wl_library(network
     internet_gaming_messages.cc
     internet_gaming_messages.h
     internet_gaming_protocol.h
+    gameclient.cc
+    gameclient.h
+    gamehost.cc
+    gamehost.h
     netclient.cc
     netclient.h
     nethost.cc
@@ -19,8 +23,6 @@ wl_library(network
     network_player_settings_backend.cc
     network_player_settings_backend.h
     network_protocol.h
-    network_system.h
-  USES_SDL2_NET
   DEPENDS
     ai
     base_exceptions
@@ -37,6 +39,7 @@ wl_library(network
     io_filesystem
     io_stream
     logic
+    logic_constants
     logic_game_controller
     logic_game_settings
     map_io_map_loader

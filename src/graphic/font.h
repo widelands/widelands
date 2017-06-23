@@ -21,11 +21,14 @@
 #define WL_GRAPHIC_FONT_H
 
 #include <SDL_ttf.h>
+#include <unicode/uchar.h>
 
 #include "graphic/color.h"
 #include "io/fileread.h"
 
 namespace UI {
+
+struct TextStyle;
 
 /**
  * Margin around text that is kept to make space for the caret.
@@ -68,6 +71,43 @@ private:
 	int32_t computed_typical_maxy_;
 
 	int size_;
+};
+
+/**
+ * Text style combines font with other characteristics like color
+ * and style (italics, bold).
+ */
+// TODO(GunChleoc): This struct will disappear with the old font handler
+struct TextStyle {
+	TextStyle();
+
+	static TextStyle makebold(Font* font, RGBColor fg) {
+		TextStyle ts;
+		ts.font = font;
+		ts.bold = true;
+		ts.fg = fg;
+		return ts;
+	}
+
+	uint32_t calc_bare_width(const std::string& text) const;
+	uint32_t calc_width_for_wrapping(const UChar& c) const;
+	uint32_t calc_width_for_wrapping(const std::string& text) const;
+	void calc_bare_height_heuristic(const std::string& text, int32_t& miny, int32_t& maxy) const;
+	void setup() const;
+
+	Font* font;
+	RGBColor fg;
+	bool bold : 1;
+	bool italics : 1;
+	bool underline : 1;
+
+	bool operator==(const TextStyle& o) const {
+		return font == o.font && fg == o.fg && bold == o.bold && italics == o.italics &&
+		       underline == o.underline;
+	}
+	bool operator!=(const TextStyle& o) const {
+		return !(*this == o);
+	}
 };
 
 }  // namespace UI

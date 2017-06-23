@@ -24,7 +24,7 @@
 #include <string>
 #include <vector>
 
-#include <SDL_net.h>
+#include <boost/asio.hpp>
 #include <boost/lexical_cast.hpp>
 
 #include "base/wexception.h"
@@ -36,6 +36,60 @@
 class Deserializer;
 class FileRead;
 
+constexpr size_t kNetworkBufferSize = 512;
+
+/**
+ * Simple structure to hold the IP address and port of a server.
+ * This structure must not contain a hostname but only IP addresses.
+ */
+struct NetAddress {
+	/**
+	 * Tries to resolve the given hostname to an IPv4 address.
+	 * \param[out] addr A NetAddress structure to write the result to,
+	 *                  if resolution succeeds.
+	 * \param hostname The name of the host.
+	 * \param port The port on the host.
+	 * \return \c True if the resolution succeeded, \c false otherwise.
+	 */
+	static bool resolve_to_v4(NetAddress* addr, const std::string& hostname, uint16_t port);
+
+	/**
+	 * Tries to resolve the given hostname to an IPv6 address.
+	 * \param[out] addr A NetAddress structure to write the result to,
+	 *                  if resolution succeeds.
+	 * \param hostname The name of the host.
+	 * \param port The port on the host.
+	 * \return \c True if the resolution succeeded, \c false otherwise.
+	 */
+	static bool resolve_to_v6(NetAddress* addr, const std::string& hostname, uint16_t port);
+
+	/**
+	 * Parses the given string to an IP address.
+	 * \param[out] addr A NetAddress structure to write the result to,
+	 *                  if parsing succeeds.
+	 * \param ip An IP address as string.
+	 * \param port The port on the host.
+	 * \return \c True if the parsing succeeded, \c false otherwise.
+	 */
+	static bool parse_ip(NetAddress* addr, const std::string& ip, uint16_t port);
+
+	/**
+	 * Returns whether the stored IP is in IPv6 format.
+	 * @return \c true if the stored IP is in IPv6 format, \c false otherwise.
+	 *   If it isn't an IPv6 address, it is an IPv4 address.
+	 */
+	bool is_ipv6() const;
+
+	/**
+	 * Returns whether valid IP address and port are stored.
+	 * @return \c true if valid, \c false otherwise.
+	 */
+	bool is_valid() const;
+
+	boost::asio::ip::address ip;
+	uint16_t port;
+};
+
 struct SyncCallback {
 	virtual ~SyncCallback() {
 	}
@@ -43,7 +97,7 @@ struct SyncCallback {
 };
 
 /**
- * This non-gamelogic command is used by \ref NetHost and \ref NetClient
+ * This non-gamelogic command is used by \ref GameHost and \ref GameClient
  * to schedule taking a synchronization hash.
  */
 struct CmdNetCheckSync : public Widelands::Command {
@@ -92,18 +146,22 @@ private:
 
 /**
  * Buffered StreamWrite object for assembling a packet that will be
- * sent via the \ref send() function.
+ * sent over the network.
  */
 struct SendPacket : public StreamWrite {
 	SendPacket();
 
-	void send(TCPsocket);
 	void reset();
 
 	void data(void const* data, size_t size) override;
 
+	size_t get_size() const;
+
+	uint8_t* get_data() const;
+
 private:
-	std::vector<uint8_t> buffer;
+	// First two bytes are overwritten on call to get_data()
+	mutable std::vector<uint8_t> buffer;
 };
 
 /**
@@ -111,12 +169,11 @@ private:
  */
 struct RecvPacket : public StreamRead {
 public:
-	RecvPacket(Deserializer&);
-
 	size_t data(void* data, size_t bufsize) override;
 	bool end_of_file() const override;
 
 private:
+	friend class Deserializer;
 	std::vector<uint8_t> buffer;
 	size_t index_;
 };
@@ -135,21 +192,17 @@ struct NetTransferFile {
 class Deserializer {
 public:
 	/**
-	 * Read data from the given socket.
-	 * \return \c false if the socket was disconnected or another error
-	 * occurred.
-	 * \c true if some data could be read (this does not imply that \ref avail
-	 * will return \c true !)
+	 * Adds the given data to the internal buffer.
 	 */
-	bool read(TCPsocket sock);
+	void read_data(const uint8_t* data, int32_t len);
 
 	/**
-	 * \return \c true if an entire packet has been received.
+	 * \param packet The packet to fill with the received data.
+	 * \return \c true if an entire packet has been received and written to the given packet.
 	 */
-	bool avail() const;
+	bool write_packet(RecvPacket* packet);
 
 private:
-	friend struct RecvPacket;
 	std::vector<uint8_t> queue_;
 };
 

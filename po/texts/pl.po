@@ -5,20 +5,20 @@
 # Andrzej 'Endrju' Krentosz <endrjux@gmail.com>, 2006
 # Wesmania <ikk_pl@yahoo.co.uk>, 2015
 # Wesmania <ikk_pl@yahoo.co.uk>, 2016-2017
-# Tomasz Pudło <wptom@wp.pl>, 2015-2016
+# Tomasz Pudło <wptom@wp.pl>, 2015-2017
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-01-28 21:57+0000\n"
-"PO-Revision-Date: 2017-01-29 09:48+0000\n"
+"POT-Creation-Date: 2017-06-02 11:07+0000\n"
+"PO-Revision-Date: 2017-06-03 18:37+0000\n"
 "Last-Translator: Wesmania <ikk_pl@yahoo.co.uk>\n"
 "Language-Team: Polish (http://www.transifex.com/widelands/widelands/language/pl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: pl\n"
-"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"Plural-Forms: nplurals=4; plural=(n==1 ? 0 : (n%10>=2 && n%10<=4) && (n%100<12 || n%100>=14) ? 1 : n!=1 && (n%10>=0 && n%10<=1) || (n%10>=5 && n%10<=9) || (n%100>=12 && n%100<=14) ? 2 : 3);\n"
 
 #: ../../data/txts/AUTHORS.lua:27
 msgid "Developers"
@@ -498,6 +498,12 @@ msgid ""
 "of logs."
 msgstr "Zawsze buduj leśniczówkę i chatę drwala, aby nigdy nie wyczerpać swoich zapasów drewna."
 
+#: ../../data/txts/tips/atlanteans.lua:12
+msgid ""
+"Atlanteans need spidercloth for many buildings. Build the needed "
+"infrastructure early before you run out."
+msgstr "Atlantydzi potrzebują pajęczej tkaniny do budowy wielu budynków. Wcześnie zorganizuj jej produkcję, zanim ci się skończy."
+
 #: ../../data/txts/tips/barbarians.lua:4 ../../data/txts/tips/empire.lua:4
 msgid ""
 "Keep an eye on your fishers. After fish resources are exhausted in their "
@@ -507,8 +513,14 @@ msgstr "Miej oko na swoich rybaków. Gdy w ich obszarze pracy skończą się ryb
 #: ../../data/txts/tips/barbarians.lua:8
 msgid ""
 "Always build a ranger’s and a gamekeeper’s hut, so you will not run out of "
-"logs."
+"logs or game."
 msgstr "Zawsze buduj leśniczówkę i gajówkę, żeby zapewnić sobie stałe dostawy drewna i jedzenia."
+
+#: ../../data/txts/tips/barbarians.lua:12 ../../data/txts/tips/empire.lua:12
+msgid ""
+"Most enhanced buildings need experienced workers. Do not enhance a building "
+"unless you have the necessary workers available."
+msgstr "Większość ulepszonych budynków wymaga doświadczonych pracowników. Nie ulepszaj budynku, dopóki nie będziesz miał pracowników potrzebnych do jego prowadzenia."
 
 #: ../../data/txts/tips/editor.lua:4
 msgid ""
@@ -553,9 +565,38 @@ msgid ""
 "shown on or off."
 msgstr "Klawisz Spacja zachowuje się tak samo jak w normalnej grze - włącza/wyłącza pomoc budowy."
 
+#: ../../data/txts/tips/editor.lua:32
+msgid ""
+"When placing trees, use the help button to see which trees are more likely "
+"to survive on which terrain."
+msgstr "Podczas sadzenia drzew możesz użyć przycisku pomocy aby zobaczyć, jakie drzewa najlepiej przyjmują się na jakim terenie."
+
+#: ../../data/txts/tips/editor.lua:36
+msgid ""
+"If you do not set water and fish resources, a default amount will be used."
+msgstr "Jeśli nie ustawisz zasobów wody i ryb, użyta będzie domyślna ilość."
+
+#: ../../data/txts/tips/editor.lua:40
+msgid ""
+"You can place a medium building on any node where there is a slope no "
+"greater than 1 in the south-east direction and its height difference to all "
+"nodes in a radius of 2 is no greater than 2."
+msgstr "Średni budynek może być postawiony na każdym węźle o nachyleniu w stronę południowo-wschodnią nie większym niż 1 i różnicy wysokości do dowolnego innego węzła w promieniu 2 nie większej niż 2."
+
+#: ../../data/txts/tips/editor.lua:44
+msgid ""
+"You can place a large building on any node where you could place a medium "
+"building if there is no obstacle or non-arable terrain towards the west, "
+"northwest and northeast."
+msgstr "Duży budynek może być postawiony na każdym polu, na którym można postawić średni budynek jeśli na zachodzie, północnym zachodzie i północnym wschodzie nie ma przeszkód ani terenu niezdatnego pod uprawę."
+
 #: ../../data/txts/tips/empire.lua:8
 msgid "Always build a forester’s house so you will not run out of logs."
 msgstr "Zawsze buduj leśniczówkę, żeby zapewnić sobie stałe dostawy drewna."
+
+#: ../../data/txts/tips/empire.lua:16
+msgid "Empire needs a lot of marble. Keep looking for marble resources."
+msgstr "Imperium potrzebuje dużo marmuru. Szukaj złóż marmuru."
 
 #: ../../data/txts/tips/general_game.lua:4
 msgid ""
@@ -611,10 +652,18 @@ msgid ""
 msgstr "Organizuj wiadomości efektywnie: klawisz \"N\" otwiera okno wiadomości, klawisze \"G\" (go to) razem z Delete archiwizują wiadomości."
 
 #: ../../data/txts/tips/general_game.lua:40
-msgid ""
-"Press Ctrl+(0-9) to store important locations, then press 0-9 to recall "
-"them."
-msgstr "Kombinacja Ctrl+(0-9) zapisuje miejsca na mapie, do których można się szybko przenieść używając klawiszy 0-9."
+msgctxt "hotkey"
+msgid "1-9"
+msgstr "1-9"
+
+#: ../../data/txts/tips/general_game.lua:40
+msgctxt "hotkey"
+msgid "Ctrl+(1-9)"
+msgstr "Ctrl+(1-9)"
+
+#: ../../data/txts/tips/general_game.lua:40
+msgid "Press %1% to store important locations, then press %2% to recall them."
+msgstr "Naciśnij %1%, aby zachować ważne lokacje, naciśnij %2%, aby je przywołać."
 
 #: ../../data/txts/tips/general_game.lua:44
 msgid ""
@@ -650,6 +699,28 @@ msgid ""
 "building is surrounded with trees or roads, production will stop."
 msgstr "Niektóre budynki, jak na przykład farma, mają bardzo mały promień pracy. Jeśli budynek jest otoczony drzewami albo drogami, produkcja się zatrzyma."
 
+#: ../../data/txts/tips/general_game.lua:68
+msgctxt "hotkey"
+msgid "Ctrl+(+/-)"
+msgstr "Ctrl+(+/-)"
+
+#: ../../data/txts/tips/general_game.lua:68
+msgctxt "hotkey"
+msgid "Ctrl+0"
+msgstr "Ctrl+0"
+
+#: ../../data/txts/tips/general_game.lua:68
+msgid "Zoom in/out with the mouse wheel or %1%. Press %2% to reset the zoom."
+msgstr "Przybliż/oddal widok kółkiem myszy lub %1%. Naciśnij %2%, aby zresetować przybliżenie."
+
+#: ../../data/txts/tips/general_game.lua:72
+msgid ""
+"When a building is destroyed, its workers will start looking for a nearby "
+"flag from which they can move by road to a connected warehouse. If there are"
+" no such flags in the vicinity, they will keep wandering around and "
+"eventually die."
+msgstr "Po zniszczeniu budynku jego pracownicy zaczną szukać w pobliżu flagi, z której mogliby dojść do połączonego z nią magazynu. Jeśli nie ma takiej flagi, będą włóczyć się po okolicy i prędzej czy później zginą."
+
 #: ../../data/txts/tips/multiplayer.lua:4
 msgid ""
 "You can use the ’Page up’ and ‘Page down’ keys to adjust your desired speed "
@@ -667,6 +738,12 @@ msgid ""
 "Use ‘@name’ at the beginning of a chat message to send it to only one "
 "player."
 msgstr "Użyj \"@imię\" na początku wiadomości w czacie, aby wysłać ją tylko danemu graczowi."
+
+#: ../../data/txts/tips/multiplayer.lua:16
+msgid ""
+"If the game should crash, don't worry! The game will be saved automatically "
+"so that you can reload it afterwards."
+msgstr "Jeśli gra uległa awarii, nie przejmuj się! Gra zostanie zapisana automatycznie, byś mógł ją potem wczytać."
 
 #: ../../data/txts/tips/singleplayer.lua:4
 msgid ""

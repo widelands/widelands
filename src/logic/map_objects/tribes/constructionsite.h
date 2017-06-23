@@ -96,7 +96,7 @@ public:
 		return *building_;
 	}
 
-	void init(EditorGameBase&) override;
+	bool init(EditorGameBase&) override;
 	void cleanup(EditorGameBase&) override;
 
 	bool burn_on_destroy() override;
@@ -110,7 +110,6 @@ protected:
 	uint32_t build_step_time() const override {
 		return CONSTRUCTIONSITE_STEP_TIME;
 	}
-	void create_options_window(InteractiveGameBase&, UI::Window*& registry) override;
 
 	static void wares_queue_callback(Game&, InputQueue*, DescriptionIndex, Worker*, void* data);
 

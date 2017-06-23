@@ -38,6 +38,7 @@ tribes:new_trainingsite_type {
 
    aihints = {
       trainingsite_type = "basic",
+      trainingsites_max_percent = 20,
       prohibited_till = 900,
       very_weak_ai_limit = 1,
       weak_ai_limit = 2,
@@ -78,7 +79,7 @@ tribes:new_trainingsite_type {
       },
       upgrade_soldier_evade_0 = {
          -- TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-         descname = _"upgrading soldier evade from level 0 to level 1",
+         descname = pgettext("empire_building", "upgrading soldier evade from level 0 to level 1"),
          actions = {
             "check_soldier=soldier evade 0", -- Fails when aren't any soldier of level 0 evade
             "sleep=30000",

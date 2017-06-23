@@ -26,7 +26,7 @@
 #include "economy/road.h"
 #include "graphic/graphic.h"
 #include "logic/cmd_queue.h"
-#include "logic/map_objects/attackable.h"
+#include "logic/map_objects/tribes/attack_target.h"
 #include "logic/map_objects/tribes/soldier.h"
 #include "logic/map_objects/tribes/tribe_descr.h"
 #include "logic/map_objects/tribes/warehouse.h"
@@ -192,7 +192,7 @@ private:
 	                       void (FieldActionWindow::*fn)(),
 	                       const std::string& tooltip_text,
 	                       bool repeating = false);
-	void okdialog();
+	void reset_mouse_and_die();
 
 	Widelands::Player* player_;
 	Widelands::Map* map_;
@@ -380,13 +380,16 @@ void FieldActionWindow::add_buttons_auto() {
 void FieldActionWindow::add_buttons_attack() {
 	UI::Box& a_box = *new UI::Box(&tabpanel_, 0, 0, UI::Box::Horizontal);
 
-	if (upcast(Widelands::Attackable, attackable, map_->get_immovable(node_))) {
-		if (player_ && player_->is_hostile(attackable->owner()) && attackable->can_attack()) {
-			attack_box_ = new AttackBox(&a_box, player_, &node_, 0, 0);
-			a_box.add(attack_box_, UI::Align::kTop);
+	if (upcast(Widelands::Building, building, map_->get_immovable(node_))) {
+		if (const Widelands::AttackTarget* attack_target = building->attack_target()) {
+			if (player_ && player_->is_hostile(building->owner()) &&
+			    attack_target->can_be_attacked()) {
+				attack_box_ = new AttackBox(&a_box, player_, &node_, 0, 0);
+				a_box.add(attack_box_);
 
-			set_fastclick_panel(&add_button(
-			   &a_box, "attack", pic_attack, &FieldActionWindow::act_attack, _("Start attack")));
+				set_fastclick_panel(&add_button(
+				   &a_box, "attack", pic_attack, &FieldActionWindow::act_attack, _("Start attack")));
+			}
 		}
 	}
 
@@ -514,7 +517,7 @@ UI::Button& FieldActionWindow::add_button(UI::Box* const box,
 	                   g_gr->images().get(picname), tooltip_text);
 	button.sigclicked.connect(boost::bind(fn, this));
 	button.set_repeating(repeating);
-	box->add(&button, UI::Align::kTop);
+	box->add(&button);
 
 	return button;
 }
@@ -525,7 +528,7 @@ Call this from the button handlers.
 It resets the mouse to its original position and closes the window
 ===============
 */
-void FieldActionWindow::okdialog() {
+void FieldActionWindow::reset_mouse_and_die() {
 	ibase().mouse_to_field(node_, MapView::Transition::Jump);
 	die();
 }
@@ -538,7 +541,7 @@ Open a watch window for the given field and delete self.
 void FieldActionWindow::act_watch() {
 	upcast(InteractiveGameBase, igbase, &ibase());
 	show_watch_window(*igbase, node_);
-	okdialog();
+	reset_mouse_and_die();
 }
 
 /*
@@ -549,13 +552,13 @@ Toggle display of census and statistics for buildings, respectively.
 void FieldActionWindow::act_show_census() {
 	ibase().set_display_flag(
 	   InteractiveBase::dfShowCensus, !ibase().get_display_flag(InteractiveBase::dfShowCensus));
-	okdialog();
+	reset_mouse_and_die();
 }
 
 void FieldActionWindow::act_show_statistics() {
 	ibase().set_display_flag(InteractiveBase::dfShowStatistics,
 	                         !ibase().get_display_flag(InteractiveBase::dfShowStatistics));
-	okdialog();
+	reset_mouse_and_die();
 }
 
 /*
@@ -586,7 +589,7 @@ void FieldActionWindow::act_buildflag() {
 		iaplayer->set_flag_to_connect(node_);
 	}
 
-	okdialog();
+	reset_mouse_and_die();
 }
 
 void FieldActionWindow::act_configure_economy() {
@@ -598,6 +601,7 @@ void FieldActionWindow::act_configure_economy() {
 			new EconomyOptionsWindow(dynamic_cast<UI::Panel*>(&ibase()), economy, can_act);
 		}
 	}
+	die();
 }
 
 /*
@@ -606,7 +610,7 @@ Remove the flag at this field
 ===============
 */
 void FieldActionWindow::act_ripflag() {
-	okdialog();
+	reset_mouse_and_die();
 	Widelands::EditorGameBase& egbase = ibase().egbase();
 	upcast(Game, game, &egbase);
 	upcast(InteractivePlayer, iaplayer, &ibase());
@@ -636,7 +640,7 @@ void FieldActionWindow::act_buildroad() {
 	// If we area already building a road just ignore this
 	if (!ibase().is_building_road()) {
 		ibase().start_build_road(node_, player_->player_number());
-		okdialog();
+		reset_mouse_and_die();
 	}
 }
 
@@ -650,7 +654,7 @@ void FieldActionWindow::act_abort_buildroad() {
 		return;
 
 	ibase().abort_build_road();
-	okdialog();
+	reset_mouse_and_die();
 }
 
 /*
@@ -664,7 +668,7 @@ void FieldActionWindow::act_removeroad() {
 		upcast(Game, game, &ibase().egbase());
 		game->send_player_bulldoze(*road, SDL_GetModState() & KMOD_CTRL);
 	}
-	okdialog();
+	reset_mouse_and_die();
 }
 
 /*
@@ -679,7 +683,7 @@ void FieldActionWindow::act_build(Widelands::DescriptionIndex idx) {
 	game->send_player_build(iaplayer->player_number(), node_, Widelands::DescriptionIndex(idx));
 	ibase().reference_player_tribe(player_->player_number(), &player_->tribe());
 	iaplayer->set_flag_to_connect(game->map().br_n(node_));
-	okdialog();
+	reset_mouse_and_die();
 }
 
 void FieldActionWindow::building_icon_mouse_out(Widelands::DescriptionIndex) {
@@ -707,7 +711,7 @@ void FieldActionWindow::act_geologist() {
 	if (upcast(Widelands::Flag, flag, game->map().get_immovable(node_))) {
 		game->send_player_flagaction(*flag);
 	}
-	okdialog();
+	reset_mouse_and_die();
 }
 
 /**
@@ -725,7 +729,7 @@ void FieldActionWindow::act_attack() {
 			game->send_player_enemyflagaction(building->base_flag(), iaplayer->player_number(),
 			                                  attack_box_->soldiers() /*  number of soldiers */);
 		}
-	okdialog();
+	reset_mouse_and_die();
 }
 
 /*
@@ -781,14 +785,9 @@ void show_field_action(InteractiveBase* const ibase,
 		}
 		if (finish) {
 			ibase->finish_build_road();
+			// We are done, so we close the window.
+			registry->destroy();
 			return;
 		}
 	}
-
-	// If we are here, no new window was opened yet - otherwise we would have
-	// returned already. A new window uses the same registry, so the old window
-	// will be closed. So this means the old window is still open, but but we
-	// still desire to close it. This can happen for example connecting the road
-	// we are building to an existing flag).
-	registry->destroy();
 }

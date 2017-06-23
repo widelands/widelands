@@ -1,9 +1,12 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2016 Widelands Development Team
+# Copyright (C) 2005-2017 Widelands Development Team
 # 
 # Translators:
-# Bouchard Renaud <renaud.bouchard@gmail.com>, 2014
+# Renaud Bouchard, 2014
 # GunChleoc, 2016
+# GunChleoc, 2016
+# GwendalD <samuel.weber@gresille.org>, 2017
+# Gwendal D <samuel.weber@normalesup.org>, 2017
 # Jaypad <ju-ju@nataju.fr>, 2016
 # Renaud Bouchard, 2015-2016
 # Tubuntu <tubuntu@testimonium.be>, 2015
@@ -11,9 +14,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-10-15 08:42+0000\n"
-"PO-Revision-Date: 2016-09-14 20:21+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2017-04-28 06:01+0000\n"
+"PO-Revision-Date: 2017-05-02 11:21+0000\n"
+"Last-Translator: Gwendal D <samuel.weber@normalesup.org>\n"
 "Language-Team: French (http://www.transifex.com/widelands/widelands/language/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -29,31 +32,31 @@ msgstr "Vous êtes dans Widelands version %s"
 
 #: ../../src/wlapplication_messages.cc:43
 msgid "Usage: widelands <option0>=<value0> ... <optionN>=<valueN>"
-msgstr "Utilisation: widelands <option0>=<value0> ... <optionN>=<valueN>"
+msgstr "Utilisation : widelands <option0>=<valeur0> ... <optionN>=<valeurN>"
 
 #: ../../src/wlapplication_messages.cc:44
 msgid "Options:"
-msgstr "Options:"
+msgstr "Options :"
 
 #: ../../src/wlapplication_messages.cc:45
 msgid " --<config-entry-name>=value overwrites any config file setting"
-msgstr " --<config-entry-name>=value Ré-écris tous les paramètres des fichiers de configuration"
+msgstr " --<config-entry-name>=value \n\tRé-écris tous les paramètres des fichiers de configuration."
 
 #: ../../src/wlapplication_messages.cc:47
 msgid ""
 " --datadir=DIRNAME    Use specified directory for the widelands\n"
 "                      data files"
-msgstr " --datadir=DIRNAME    Utilise le dossier spécifié pour les données\n                      de Widelands"
+msgstr " --datadir=DIRNAME\n\tUtilise le dossier spécifié pour les données de Widelands."
 
 #: ../../src/wlapplication_messages.cc:50
 msgid ""
 " --homedir=DIRNAME    Use specified directory for widelands config\n"
 "                      files, savegames and replays"
-msgstr " --homedir=DIRNAME    Utilise le dossier spécifié pour la sauvegarde\n                      des fichiers de configuration de Widelands, sauvegardes et replays"
+msgstr " --homedir=DIRNAME\n\tUtilise le dossier spécifié pour la sauvegarde des fichiers de\n\tconfiguration de Widelands, sauvegardes et replays."
 
 #: ../../src/wlapplication_messages.cc:54
 msgid "                      Default is ~/.widelands"
-msgstr "                      Par défaut est ~/.widelands"
+msgstr "\tPar défaut est ~/.widelands"
 
 #. * TRANSLATORS: You may translate true/false, also as on/off or yes/no, but
 #. * TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the
@@ -64,13 +67,13 @@ msgid ""
 " --coredump=[true|false]\n"
 "                      Generates a core dump on segfaults instead of\n"
 "                      using the SDL"
-msgstr "--coredump=[true|false]\nGénère un dump du noyau au lieu\nd'utiliser SDL"
+msgstr " --coredump=[true|false]\n\tGénère un dump du noyau au lieu d'utiliser SDL."
 
 #: ../../src/wlapplication_messages.cc:64
 msgid ""
 " --language=[de_DE|sv_SE|...]\n"
 "                      The locale to use."
-msgstr " --language=[de_DE|sv_SE|...]\n                      Locales à utiliser."
+msgstr " --language=[de_DE|sv_SE|...]\n\tLocales à utiliser."
 
 #. * TRANSLATORS: You may translate true/false, also as on/off or yes/no, but
 #. * TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the
@@ -85,60 +88,60 @@ msgstr " --language=[de_DE|sv_SE|...]\n                      Locales à utiliser
 msgid ""
 " --write_syncstreams=[true|false]\n"
 "                      Create syncstream dump files to help debug network games."
-msgstr "--write_syncstreams=[true|false]\nCréé des fichiers journaux des flux de synchronisation pour aider à déboguer les parties en réseau."
+msgstr " --write_syncstreams=[true|false]\n\tCréé des fichiers journaux des flux de synchronisation pour aider à\n\tdéboguer les parties en réseau."
 
 #: ../../src/wlapplication_messages.cc:76
 msgid " --autosave=[...]     Automatically save each n minutes"
-msgstr " --autosave=[...]     Sauvegarde automatique toutes les n minutes"
+msgstr " --autosave=[...]\n\tSauvegarde automatique toutes les n minutes."
 
 #: ../../src/wlapplication_messages.cc:77
 msgid ""
 " --rolling_autosave=[...]\n"
 "                      Use this many files for rolling autosaves"
-msgstr " --rolling_autosave=[...]\n                      Utilise ce nombre de fichiers pour le roullement de sauvegardes automatiques"
+msgstr " --rolling_autosave=[...]\n\tUtilise ce nombre de fichiers pour le roullement de sauvegardes\n\tautomatiques."
 
 #: ../../src/wlapplication_messages.cc:82
 msgid "Sound options:"
-msgstr "Options sonores:"
+msgstr "Options sonores :"
 
 #: ../../src/wlapplication_messages.cc:83
 msgid " --nosound            Starts the game with sound disabled."
-msgstr " --nosound            Démarre le jeu avec le son désactivé."
+msgstr " --nosound\n\tDémarre le jeu avec le son désactivé."
 
 #: ../../src/wlapplication_messages.cc:84
 msgid " --disable_fx         Disable sound effects."
-msgstr " --disable_fx         Désactive les effets sonores."
+msgstr " --disable_fx\n\tDésactive les effets sonores."
 
 #: ../../src/wlapplication_messages.cc:85
 msgid " --disable_music      Disable music."
-msgstr " --disable_music      Désactive la musique."
+msgstr " --disable_music\n\tDésactive la musique."
 
 #: ../../src/wlapplication_messages.cc:87
 msgid " --nozip              Do not save files as binary zip archives."
-msgstr " --nozip              Ne pas sauver les fichiers en archives zip binaires."
+msgstr " --nozip\n\tNe pas sauver les fichiers en archives zip binaires."
 
 #: ../../src/wlapplication_messages.cc:89
 msgid ""
 " --editor             Directly starts the Widelands editor.\n"
 "                      You can add a =FILENAME to directly load\n"
 "                      the map FILENAME in editor."
-msgstr " --editor             Démarre directement l'éditeur de Widelands.\n                      Vous pouvez ajouter =FILENAME pour charger directement\n                      la carte FILENAME dans l'éditeur."
+msgstr " --editor\n\tDémarre directement l'éditeur de Widelands.\n\tVous pouvez ajouter =FILENAME pour charger directement la carte FILENAME\n\tdans l'éditeur."
 
 #: ../../src/wlapplication_messages.cc:93
 msgid ""
 " --scenario=FILENAME  Directly starts the map FILENAME as scenario\n"
 "                      map."
-msgstr " --scenario=FILENAME  Démarre directement la carte FILENAME comme carte de\n                      scénario."
+msgstr " --scenario=FILENAME\n\tDémarre directement la carte FILENAME comme carte de scénario."
 
 #: ../../src/wlapplication_messages.cc:96
 msgid " --loadgame=FILENAME  Directly loads the savegame FILENAME."
-msgstr " --loadgame=FILENAME  Charge directement la sauvegarde FILENAME."
+msgstr " --loadgame=FILENAME\n\tCharge directement la sauvegarde FILENAME."
 
 #: ../../src/wlapplication_messages.cc:97
 msgid ""
 " --script=FILENAME    Run the given Lua script after initialization.\n"
 "                      Only valid with --scenario, --loadgame, or --editor."
-msgstr " --script=FILENAME    Exécute le script LUA donné après l'initialisation.\n                      Seulement valide avec --scenario, --loadgame, ou --editor."
+msgstr " --script=FILENAME\n\tExécute le script LUA donné après l'initialisation.\n\tSeulement valide avec --scenario, --loadgame, ou --editor."
 
 #. * TRANSLATORS: You may translate true/false, also as on/off or yes/no, but
 #. * TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the
@@ -150,11 +153,11 @@ msgid ""
 "                      Whether to enter roadbuilding mode\n"
 "                      automatically after placing a flag that is\n"
 "                      not connected to a road."
-msgstr "--auto_roadbuild_mode=[true|false]\nPour passer en mode construction de route\nautomatiquement après avoir placé un drapeau qui n'\nest pas connecté à une route."
+msgstr " --auto_roadbuild_mode=[true|false]\n\tPour passer en mode construction de route automatiquement après avoir\n\tplacé un drapeau qui n'est pas connecté à une route."
 
 #: ../../src/wlapplication_messages.cc:109
 msgid "Graphic options:"
-msgstr "Options graphiques:"
+msgstr "Options graphiques :"
 
 #. * TRANSLATORS: You may translate true/false, also as on/off or yes/no, but
 #. * TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the
@@ -165,19 +168,19 @@ msgid ""
 " --fullscreen=[true|false]\n"
 "                      Whether to use the whole display for the\n"
 "                      game screen."
-msgstr "--fullscreen=[true|false]\nPour utiliser tout l'écran pour l'\nécran de jeu."
+msgstr " --fullscreen=[true|false]\n\tPour utiliser tout l'écran pour l'écran de jeu."
 
 #: ../../src/wlapplication_messages.cc:117
 msgid " --xres=[...]         Width of the window in pixel."
-msgstr " --xres=[...]         Largeur de la fenêtre en pixels."
+msgstr " --xres=[...]\n\tLargeur de la fenêtre en pixels."
 
 #: ../../src/wlapplication_messages.cc:118
 msgid " --yres=[...]         Height of the window in pixel."
-msgstr " --yres=[...]         Hauteur de la fenêtre en pixels."
+msgstr " --yres=[...]\n\tHauteur de la fenêtre en pixels."
 
 #: ../../src/wlapplication_messages.cc:123
 msgid "Options for the internal window manager:"
-msgstr "Options pour le gestionnaire de fenêtre interne:"
+msgstr "Options pour le gestionnaire de fenêtre interne :"
 
 #: ../../src/wlapplication_messages.cc:124
 msgid ""
@@ -185,7 +188,7 @@ msgid ""
 "                      Move a window to the edge of the screen\n"
 "                      when the edge of the window comes within\n"
 "                      this distance from the edge of the screen."
-msgstr " --border_snap_distance=[0 ...]\n                      Bouge une fenêtre vers le bord de l'écran\n                      Quand le bord de la fenêtre rentre dans\n                      cette distance du bord de l'écran."
+msgstr " --border_snap_distance=[0 ...]\n\tBouge une fenêtre vers le bord de l'écran quand le bord de la fenêtre\n\trentre dans cette distance du bord de l'écran."
 
 #. * TRANSLATORS: You may translate true/false, also as on/off or yes/no, but
 #. * TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the
@@ -197,7 +200,7 @@ msgid ""
 "                      Eliminate a window's border towards the\n"
 "                      edge of the screen when the edge of the\n"
 "                      window is next to the edge of the screen."
-msgstr "--dock_windows_to_edges=[true|false]\nElimine le bord d'une fenêtre du coté\ndu bord de l'écran lorsque le bord de la\nfenêtre est à coté du bord de l'écran."
+msgstr " --dock_windows_to_edges=[true|false]\n\tElimine le bord d'une fenêtre du coté du bord de l'écran lorsque \n\tle bord de la fenêtre est à coté du bord de l'écran."
 
 #: ../../src/wlapplication_messages.cc:137
 msgid ""
@@ -205,7 +208,7 @@ msgid ""
 "                      Move a window to the edge of the panel when\n"
 "                      the edge of the window comes within this\n"
 "                      distance from the edge of the panel."
-msgstr " --panel_snap_distance=[0 ...]\n                      Bouge une fenêtre vers le bord du panneau quand\n                      le bord de la fenêtre entre dans cette\n                      distance du bord du panneau."
+msgstr " --panel_snap_distance=[0 ...]\n\tBouge une fenêtre vers le bord du panneau quand le bord\n\tde la fenêtre entre dans cette distance du bord du panneau."
 
 #: ../../src/wlapplication_messages.cc:142
 msgid ""
@@ -213,15 +216,15 @@ msgid ""
 "                      Only move a window to the edge of a panel\n"
 "                      if the window is overlapping with the\n"
 "                      panel."
-msgstr " --snap_windows_only_when_overlapping=[yes|no]\n                      Bouge seulement la fenêtre vers le bord du panneau\n                      si la fenêtre est au dessus du\n                      panneau."
+msgstr " --snap_windows_only_when_overlapping=[yes|no]\n\tBouge seulement la fenêtre vers le bord du panneau si la fenêtre\n\test au dessus du panneau."
 
 #: ../../src/wlapplication_messages.cc:148
 msgid " --verbose            Enable verbose debug messages"
-msgstr " --verbose            Active les messages verbeux de debogage"
+msgstr " --verbose\n\tActive les messages verbeux de debogage."
 
 #: ../../src/wlapplication_messages.cc:149
 msgid " --help               Show this help"
-msgstr " --help               Montre cette aide"
+msgstr " --help\n\tMontre cette aide."
 
 #: ../../src/wlapplication_messages.cc:150
 msgid ""
@@ -229,4 +232,4 @@ msgid ""
 "        https://launchpad.net/widelands\n"
 "\n"
 "Hope you enjoy this game!"
-msgstr "Rapport de bug ? Suggestions ? Visitez le site web de notre projet:\n        https://launchpad.net/widelands\n\nNous espérons que vous avez aimez ce jeu!"
+msgstr "Rapport de bug ? Suggestions ? Visitez le site web de notre projet :\n        https://launchpad.net/widelands\n\nNous espérons que vous avez aimez ce jeu !"

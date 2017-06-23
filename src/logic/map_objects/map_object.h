@@ -400,7 +400,7 @@ protected:
 	/// Called only when the oject is logically created in the simulation. If
 	/// called again, such as when the object is loaded from a savegame, it will
 	/// cause bugs.
-	virtual void init(EditorGameBase&);
+	virtual bool init(EditorGameBase&);
 
 	virtual void cleanup(EditorGameBase&);
 
@@ -490,12 +490,12 @@ struct ObjectPointer {
 	ObjectPointer() {
 		serial_ = 0;
 	}
-	ObjectPointer(MapObject* const obj) {
+	ObjectPointer(const MapObject* const obj) {
 		serial_ = obj ? obj->serial_ : 0;
 	}
 	// can use standard copy constructor and assignment operator
 
-	ObjectPointer& operator=(MapObject* const obj) {
+	ObjectPointer& operator=(const MapObject* const obj) {
 		serial_ = obj ? obj->serial_ : 0;
 		return *this;
 	}

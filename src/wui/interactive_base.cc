@@ -45,7 +45,6 @@
 #include "logic/player.h"
 #include "profile/profile.h"
 #include "scripting/lua_interface.h"
-#include "wlapplication.h"
 #include "wui/edge_overlay_manager.h"
 #include "wui/field_overlay_manager.h"
 #include "wui/game_chat_menu.h"
@@ -114,6 +113,13 @@ InteractiveBase::InteractiveBase(EditorGameBase& the_egbase, Section& global_s)
 		   resize_chat_overlay();
 		   adjust_toolbar_position();
 		});
+	sound_subscriber_ = Notifications::subscribe<NoteSound>([this](const NoteSound& note) {
+		if (note.stereo_position != std::numeric_limits<uint32_t>::max()) {
+			g_sound_handler.play_fx(note.fx, note.stereo_position, note.priority);
+		} else if (note.coords != Widelands::Coords(-1, -1)) {
+			g_sound_handler.play_fx(note.fx, stereo_position(note.coords), note.priority);
+		}
+	});
 
 	toolbar_.set_layout_toplevel(true);
 	changeview.connect([this] { mainview_move(); });
@@ -229,7 +235,7 @@ UI::Button* InteractiveBase::add_toolbar_button(const std::string& image_basenam
 	UI::Button* button = new UI::Button(
 	   &toolbar_, name, 0, 0, 34U, 34U, g_gr->images().get("images/ui_basic/but2.png"),
 	   g_gr->images().get("images/" + image_basename + ".png"), tooltip_text);
-	toolbar_.add(button, UI::Align::kLeft);
+	toolbar_.add(button);
 	if (window) {
 		window->assign_toggle_button(button);
 		registries_.push_back(*window);
@@ -350,9 +356,9 @@ void InteractiveBase::draw_overlay(RenderTarget& dst) {
 		std::string node_text;
 		if (is_game) {
 			const std::string gametime(gametimestring(egbase().get_gametime(), true));
-			const std::string gametime_text = as_condensed(gametime);
-			dst.blit(Vector2f(5, 5), UI::g_fh1->render(gametime_text), BlendMode::UseAlpha,
-			         UI::Align::kTopLeft);
+			std::shared_ptr<const UI::RenderedText> rendered_text =
+			   UI::g_fh1->render(as_condensed(gametime));
+			rendered_text->draw(dst, Vector2i(5, 5));
 
 			static boost::format node_format("(%i, %i)");
 			node_text = as_condensed((node_format % sel_.pos.node.x % sel_.pos.node.y).str());
@@ -361,18 +367,17 @@ void InteractiveBase::draw_overlay(RenderTarget& dst) {
 			const int32_t height = map[sel_.pos.node].get_height();
 			node_text = as_condensed((node_format % sel_.pos.node.x % sel_.pos.node.y % height).str());
 		}
-
-		dst.blit(Vector2f(get_w() - 5, get_h() - 5), UI::g_fh1->render(node_text),
-		         BlendMode::UseAlpha, UI::Align::kBottomRight);
+		std::shared_ptr<const UI::RenderedText> rendered_text = UI::g_fh1->render(node_text);
+		rendered_text->draw(
+		   dst, Vector2i(get_w() - 5, get_h() - rendered_text->height() - 5), UI::Align::kRight);
 	}
 
 	// Blit FPS when playing a game in debug mode.
 	if (get_display_flag(dfDebug) && is_game) {
 		static boost::format fps_format("%5.1f fps (avg: %5.1f fps)");
-		const Image* rendered_text = UI::g_fh1->render(as_condensed(
+		std::shared_ptr<const UI::RenderedText> rendered_text = UI::g_fh1->render(as_condensed(
 		   (fps_format % (1000.0 / frametime_) % (1000.0 / (avg_usframetime_ / 1000))).str()));
-		dst.blit(Vector2f((get_w() - rendered_text->width()) / 2, 5), rendered_text,
-		         BlendMode::UseAlpha, UI::Align::kLeft);
+		rendered_text->draw(dst, Vector2i((get_w() - rendered_text->width()) / 2, 5));
 	}
 }
 
@@ -612,6 +617,27 @@ void InteractiveBase::log_message(const std::string& message) const {
 	Notifications::publish(lm);
 }
 
+/** Calculate  the position of an effect in relation to the visible part of the
+ * screen.
+ * \param position  where the event happened (map coordinates)
+ * \return position in widelands' game window: left=0, right=254, not in
+ * viewport = -1
+ * \note This function can also be used to check whether a logical coordinate is
+ * visible at all
+*/
+int32_t InteractiveBase::stereo_position(Widelands::Coords const position_map) {
+	assert(position_map);
+
+	// Viewpoint is the point of the map in pixel which is shown in the upper
+	// left corner of window or fullscreen
+	const MapView::ViewArea area = view_area();
+	if (!area.contains(position_map)) {
+		return -1;
+	}
+	const Vector2f position_pix = area.move_inside(position_map);
+	return static_cast<int>((position_pix.x - area.rect().x) * 254 / area.rect().w);
+}
+
 // Repositions the chat overlay
 void InteractiveBase::resize_chat_overlay() {
 	// 34 is the button height of the bottom menu
@@ -728,9 +754,10 @@ bool InteractiveBase::handle_key(bool const down, SDL_Keysym const code) {
 	if (down) {
 		switch (code.sym) {
 		case SDLK_KP_9:
-			if (code.mod & KMOD_NUM)
+			if (code.mod & KMOD_NUM) {
 				break;
-		/* no break */
+			}
+			FALLS_THROUGH;
 		case SDLK_PAGEUP:
 			if (upcast(Game, game, &egbase_)) {
 				if (GameController* const ctrl = game->game_controller()) {
@@ -748,9 +775,10 @@ bool InteractiveBase::handle_key(bool const down, SDL_Keysym const code) {
 			return true;
 
 		case SDLK_KP_3:
-			if (code.mod & KMOD_NUM)
+			if (code.mod & KMOD_NUM) {
 				break;
-		/* no break */
+			}
+			FALLS_THROUGH;
 		case SDLK_PAGEDOWN:
 			if (upcast(Widelands::Game, game, &egbase_)) {
 				if (GameController* const ctrl = game->game_controller()) {

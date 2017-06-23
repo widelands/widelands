@@ -32,7 +32,6 @@
 #include "graphic/text_constants.h"
 #include "graphic/text_layout.h"
 #include "ui_basic/mouse_constants.h"
-#include "wlapplication.h"
 
 constexpr int kMargin = 2;
 
@@ -54,9 +53,7 @@ BaseListselect::BaseListselect(Panel* const parent,
                                const Image* button_background,
                                const ListselectLayout selection_mode)
    : Panel(parent, x, y, w, h),
-     lineheight_(
-        UI::g_fh1->render(as_uifont(UI::g_fh1->fontset()->representative_character()))->height() +
-        kMargin),
+     lineheight_(text_height() + kMargin),
      scrollbar_(this, get_w() - Scrollbar::kSize, 0, Scrollbar::kSize, h, button_background),
      scrollpos_(0),
      selection_(no_selection_index()),
@@ -69,10 +66,9 @@ BaseListselect::BaseListselect(Panel* const parent,
 	scrollbar_.moved.connect(boost::bind(&BaseListselect::set_scrollpos, this, _1));
 
 	if (selection_mode_ == ListselectLayout::kShowCheck) {
-		int pic_h;
 		check_pic_ = g_gr->images().get("images/ui_basic/list_selected.png");
 		max_pic_width_ = check_pic_->width();
-		pic_h = check_pic_->height();
+		int pic_h = check_pic_->height();
 		if (pic_h > lineheight_)
 			lineheight_ = pic_h;
 	} else {
@@ -306,6 +302,14 @@ const std::string& BaseListselect::get_selected_tooltip() const {
 	return entry_records_[selection_]->tooltip;
 }
 
+/**
+ * \return The image for the currently selected entry. Requires an entry to have been selected.
+ */
+const Image* BaseListselect::get_selected_image() const {
+	assert(selection_ < entry_records_.size());
+	return entry_records_[selection_]->pic;
+}
+
 int BaseListselect::get_lineheight() const {
 	return lineheight_ + kMargin;
 }
@@ -323,6 +327,19 @@ void BaseListselect::layout() {
 	if (scrollbar_.is_enabled() && selection_mode_ == ListselectLayout::kDropdown) {
 		scrollbar_.set_steps(steps + kMargin);
 	}
+	// For dropdowns, autoincrease width
+	if (selection_mode_ == ListselectLayout::kDropdown) {
+		for (size_t i = 0; i < entry_records_.size(); ++i) {
+			const EntryRecord& er = *entry_records_[i];
+			std::shared_ptr<const UI::RenderedText> rendered_text = UI::g_fh1->render(as_uifont(
+			   richtext_escape(er.name), UI_FONT_SIZE_SMALL, er.use_clr ? er.clr : UI_FONT_CLR_FG));
+			int picw = max_pic_width_ ? max_pic_width_ + 10 : 0;
+			int difference = rendered_text->width() + picw + 8 - get_eff_w();
+			if (difference > 0) {
+				set_size(get_w() + difference, get_h());
+			}
+		}
+	}
 }
 
 /**
@@ -336,31 +353,33 @@ void BaseListselect::draw(RenderTarget& dst) {
 	int y = 1 + idx * get_lineheight() - scrollpos_;
 
 	if (background_ != nullptr) {
-		dst.tile(Recti(Vector2i(0, 0), get_w(), get_h()), background_, Vector2i(0, 0));
+		dst.tile(Recti(Vector2i::zero(), get_w(), get_h()), background_, Vector2i::zero());
 	}
 
 	if (selection_mode_ == ListselectLayout::kDropdown) {
 		RGBAColor black(0, 0, 0, 255);
+		//  top edge
+		dst.brighten_rect(Recti(0, 0, get_w(), 2), BUTTON_EDGE_BRIGHT_FACTOR / 4);
 		//  left edge
-		dst.brighten_rect(Rectf(0.f, 0.f, 2.f, get_h()), BUTTON_EDGE_BRIGHT_FACTOR);
+		dst.brighten_rect(Recti(0, 0, 2, get_h()), BUTTON_EDGE_BRIGHT_FACTOR);
 		//  bottom edge
-		dst.fill_rect(Rectf(2.f, get_h() - 2.f, get_eff_w() - 2.f, 1.f), black);
-		dst.fill_rect(Rectf(1.f, get_h() - 1.f, get_eff_w() - 1.f, 1.f), black);
+		dst.fill_rect(Recti(2, get_h() - 2, get_eff_w() - 2, 1), black);
+		dst.fill_rect(Recti(1, get_h() - 1, get_eff_w() - 1, 1), black);
 		//  right edge
-		dst.fill_rect(Rectf(get_w() - 2.f, 1.f, 1.f, get_h() - 1.f), black);
-		dst.fill_rect(Rectf(get_w() - 1.f, 0.f, 1.f, get_h()), black);
+		dst.fill_rect(Recti(get_w() - 2, 1, 1, get_h() - 1), black);
+		dst.fill_rect(Recti(get_w() - 1, 0, 1, get_h()), black);
 	} else {
-		dst.brighten_rect(Rectf(0.f, 0.f, get_eff_w(), get_h()), ms_darken_value);
+		dst.brighten_rect(Recti(0, 0, get_eff_w(), get_h()), ms_darken_value);
 	}
 
 	while (idx < entry_records_.size()) {
 		assert(eff_h < std::numeric_limits<int32_t>::max());
 
 		const EntryRecord& er = *entry_records_[idx];
-		const Image* entry_text_im = UI::g_fh1->render(as_uifont(
+		std::shared_ptr<const UI::RenderedText> rendered_text = UI::g_fh1->render(as_uifont(
 		   richtext_escape(er.name), UI_FONT_SIZE_SMALL, er.use_clr ? er.clr : UI_FONT_CLR_FG));
 
-		int lineheight = std::max(get_lineheight(), entry_text_im->height());
+		int lineheight = std::max(get_lineheight(), rendered_text->height());
 
 		// Don't draw over the bottom edge
 		lineheight = std::min(eff_h - y, lineheight);
@@ -368,14 +387,14 @@ void BaseListselect::draw(RenderTarget& dst) {
 			break;
 		}
 
-		Vector2f point(selection_mode_ == ListselectLayout::kDropdown ? 3.f : 1.f, y);
+		Vector2i point(selection_mode_ == ListselectLayout::kDropdown ? 3 : 1, y);
 		uint32_t maxw =
 		   get_eff_w() -
 		   (selection_mode_ == ListselectLayout::kDropdown ? scrollbar_.is_enabled() ? 4 : 5 : 2);
 
 		// Highlight the current selected entry
 		if (idx == selection_) {
-			Rectf r(point, maxw, lineheight_);
+			Recti r(point, maxw, lineheight_);
 			if (r.x < 0) {
 				r.w += r.x;
 				r.x = 0;
@@ -395,18 +414,16 @@ void BaseListselect::draw(RenderTarget& dst) {
 
 		// Now draw pictures
 		if (er.pic) {
-			dst.blit(Vector2f(UI::g_fh1->fontset()->is_rtl() ? get_eff_w() - er.pic->width() - 1 : 1,
+			dst.blit(Vector2i(UI::g_fh1->fontset()->is_rtl() ? get_eff_w() - er.pic->width() - 1 : 1,
 			                  y + (get_lineheight() - er.pic->height()) / 2),
 			         er.pic);
 		}
 
-		Align alignment =
-		   i18n::has_rtl_character(er.name.c_str(), 20) ? UI::Align::kRight : UI::Align::kLeft;
-		if (static_cast<int>(alignment & UI::Align::kRight)) {
+		// Position the text according to alignment
+		Align alignment = i18n::has_rtl_character(er.name.c_str(), 20) ? Align::kRight : Align::kLeft;
+		if (alignment == UI::Align::kRight) {
 			point.x += maxw - picw;
 		}
-
-		UI::correct_for_align(alignment, entry_text_im->width(), entry_text_im->height(), &point);
 
 		// Shift for image width
 		if (!UI::g_fh1->fontset()->is_rtl()) {
@@ -414,10 +431,10 @@ void BaseListselect::draw(RenderTarget& dst) {
 		}
 
 		// Fix vertical position for mixed font heights
-		if (get_lineheight() > entry_text_im->height()) {
-			point.y += (lineheight_ - entry_text_im->height()) / 2;
+		if (get_lineheight() > rendered_text->height()) {
+			point.y += (lineheight_ - rendered_text->height()) / 2;
 		} else {
-			point.y -= (entry_text_im->height() - lineheight_) / 2;
+			point.y -= (rendered_text->height() - lineheight_) / 2;
 		}
 
 		// Don't draw over the bottom edge
@@ -425,21 +442,8 @@ void BaseListselect::draw(RenderTarget& dst) {
 		if (lineheight < 0) {
 			break;
 		}
-
-		// Crop to column width while blitting
-		if (static_cast<int>(alignment & UI::Align::kRight) &&
-		    (maxw + picw) < static_cast<uint32_t>(entry_text_im->width())) {
-			// Fix positioning for BiDi languages.
-			point.x = 0;
-
-			// We want this always on, e.g. for mixed language savegame filenames, or the languages
-			// list
-			dst.blitrect(point, entry_text_im, Recti(entry_text_im->width() - maxw + picw, 0, maxw,
-			                                         entry_text_im->height()));
-		} else {
-			dst.blitrect(point, entry_text_im, Recti(0, 0, maxw, lineheight));
-		}
-
+		rendered_text->draw(
+		   dst, point, Recti(0, 0, maxw, lineheight), alignment, RenderedText::CropMode::kSelf);
 		y += get_lineheight();
 		++idx;
 	}
@@ -505,9 +509,10 @@ bool BaseListselect::handle_key(bool const down, SDL_Keysym const code) {
 		uint32_t selected_idx;
 		switch (code.sym) {
 		case SDLK_KP_2:
-			if (code.mod & KMOD_NUM)
+			if (code.mod & KMOD_NUM) {
 				break;
-		/* no break */
+			}
+			FALLS_THROUGH;
 		case SDLK_DOWN:
 			selected_idx = selection_index() + 1;
 			if (selected_idx < size())
@@ -519,9 +524,10 @@ bool BaseListselect::handle_key(bool const down, SDL_Keysym const code) {
 			}
 			return true;
 		case SDLK_KP_8:
-			if (code.mod & KMOD_NUM)
+			if (code.mod & KMOD_NUM) {
 				break;
-		/* no break */
+			}
+			FALLS_THROUGH;
 		case SDLK_UP:
 			selected_idx = selection_index();
 			if (selected_idx > 0)

@@ -58,22 +58,22 @@ public:
 	int32_t height() const;
 
 	void draw_line_strip(const std::vector<Vector2f>& points, const RGBColor& color, float width);
-	void draw_rect(const Rectf&, const RGBColor&);
-	void fill_rect(const Rectf&, const RGBAColor&, BlendMode blend_mode = BlendMode::Copy);
-	void brighten_rect(const Rectf&, int32_t factor);
+	void draw_rect(const Recti&, const RGBColor&);
+	void fill_rect(const Recti&, const RGBAColor&, BlendMode blend_mode = BlendMode::Copy);
+	void brighten_rect(const Recti&, int32_t factor);
 
-	void blit(const Vector2f& dst,
+	void blit(const Vector2i& dst,
 	          const Image* image,
 	          BlendMode blend_mode = BlendMode::UseAlpha,
-	          UI::Align = UI::Align::kTopLeft);
+	          UI::Align = UI::Align::kLeft);
 
 	// Like blit. See MonochromeBlitProgram for details.
-	void blit_monochrome(const Vector2f& dst,
+	void blit_monochrome(const Vector2i& dst,
 	                     const Image* image,
 	                     const RGBAColor& blend_mode,
-	                     UI::Align = UI::Align::kTopLeft);
+	                     UI::Align = UI::Align::kLeft);
 
-	void blitrect(const Vector2f& dst,
+	void blitrect(const Vector2i& dst,
 	              const Image* image,
 	              const Recti& src,
 	              BlendMode blend_mode = BlendMode::UseAlpha);
@@ -147,7 +147,7 @@ protected:
 	/// The current clip rectangle
 	Recti rect_;
 	/// Drawing offset
-	Vector2i offset_;
+	Vector2i offset_ = Vector2i::zero();
 };
 
 #endif  // end of include guard: WL_GRAPHIC_RENDERTARGET_H

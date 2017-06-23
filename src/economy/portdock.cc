@@ -38,7 +38,6 @@
 #include "logic/widelands_geometry_io.h"
 #include "map_io/map_object_loader.h"
 #include "map_io/map_object_saver.h"
-#include "wui/interactive_gamebase.h"
 
 namespace Widelands {
 
@@ -145,7 +144,7 @@ void PortDock::draw(uint32_t, const TextToDraw, const Vector2f&, float, RenderTa
 	// do nothing
 }
 
-void PortDock::init(EditorGameBase& egbase) {
+bool PortDock::init(EditorGameBase& egbase) {
 	PlayerImmovable::init(egbase);
 
 	for (const Coords& coords : dockpoints_) {
@@ -153,6 +152,7 @@ void PortDock::init(EditorGameBase& egbase) {
 	}
 
 	init_fleet(egbase);
+	return true;
 }
 
 /**

@@ -96,11 +96,8 @@ private:
 
 FullscreenMenuLaunchMPG::FullscreenMenuLaunchMPG(GameSettingsProvider* const settings,
                                                  GameController* const ctrl)
-   : FullscreenMenuBase(),
-
+   : FullscreenMenuLaunchGame(settings, ctrl),
      // Values for alignment and size
-     butw_(get_w() / 4),
-     buth_(get_h() * 9 / 200),
      fs_(fs_small()),
      // TODO(GunChleoc): We still need to use these consistently. Just getting them in for now
      // so we can have the SuggestedTeamsBox
@@ -119,30 +116,6 @@ FullscreenMenuLaunchMPG::FullscreenMenuLaunchMPG(GameSettingsProvider* const set
                          g_gr->images().get("images/ui_basic/but1.png"),
                          g_gr->images().get("images/wui/menus/menu_toggle_minimap.png"),
                          _("Change map or saved game")),
-     ok_(this,
-         "ok",
-         right_column_x_,
-         get_h() * 12 / 20 - 2 * label_height_,
-         butw_,
-         buth_,
-         g_gr->images().get("images/ui_basic/but2.png"),
-         _("Start game")),
-     back_(this,
-           "back",
-           right_column_x_,
-           get_h() * 218 / 240,
-           butw_,
-           buth_,
-           g_gr->images().get("images/ui_basic/but0.png"),
-           _("Back")),
-     wincondition_(this,
-                   "win_condition",
-                   right_column_x_,
-                   get_h() * 11 / 20 - 2 * label_height_,
-                   butw_,
-                   buth_,
-                   g_gr->images().get("images/ui_basic/but1.png"),
-                   ""),
      help_button_(this,
                   "help",
                   right_column_x_ + butw_ - buth_,
@@ -154,7 +127,6 @@ FullscreenMenuLaunchMPG::FullscreenMenuLaunchMPG(GameSettingsProvider* const set
                   _("Show the help window")),
 
      // Text labels
-     title_(this, get_w() / 2, get_h() / 25, _("Multiplayer Game Setup"), UI::Align::kHCenter),
      mapname_(this, right_column_x_, get_h() * 3 / 20, std::string()),
      clients_(this,
               // (get_w() * 57 / 80) is the width of the MultiPlayerSetupGroup
@@ -163,20 +135,20 @@ FullscreenMenuLaunchMPG::FullscreenMenuLaunchMPG(GameSettingsProvider* const set
               (get_w() * 57 / 80) / 3,
               get_h() / 10,
               _("Clients"),
-              UI::Align::kHCenter),
+              UI::Align::kCenter),
      players_(this,
               get_w() / 50 + (get_w() * 57 / 80) * 6 / 15,
               get_h() / 10,
               (get_w() * 57 / 80) * 9 / 15,
               get_h() / 10,
               _("Players"),
-              UI::Align::kHCenter),
-     map_(this, right_column_x_, get_h() / 10, butw_, get_h() / 10, _("Map"), UI::Align::kHCenter),
+              UI::Align::kCenter),
+     map_(this, right_column_x_, get_h() / 10, butw_, get_h() / 10, _("Map"), UI::Align::kCenter),
      wincondition_type_(this,
                         right_column_x_ + (butw_ / 2),
                         get_h() * 10 / 20 - 1.5 * label_height_,
                         _("Type of game"),
-                        UI::Align::kHCenter),
+                        UI::Align::kCenter),
 
      map_info_(
         this, right_column_x_, get_h() * 2 / 10, butw_, get_h() * 23 / 80 - 2 * label_height_),
@@ -185,22 +157,17 @@ FullscreenMenuLaunchMPG::FullscreenMenuLaunchMPG(GameSettingsProvider* const set
      help_(nullptr),
 
      // Variables and objects used in the menu
-     settings_(settings),
-     ctrl_(ctrl),
      chat_(nullptr) {
+	ok_.set_pos(Vector2i(right_column_x_, get_h() * 12 / 20 - 2 * label_height_));
+	back_.set_pos(Vector2i(right_column_x_, get_h() * 218 / 240));
+	win_condition_dropdown_.set_pos(
+	   Vector2i(right_column_x_, get_h() * 11 / 20 - 2 * label_height_));
+	title_.set_text(_("Multiplayer Game Setup"));
 	change_map_or_save_.sigclicked.connect(
 	   boost::bind(&FullscreenMenuLaunchMPG::change_map_or_save, boost::ref(*this)));
-	ok_.sigclicked.connect(boost::bind(&FullscreenMenuLaunchMPG::clicked_ok, boost::ref(*this)));
-	back_.sigclicked.connect(boost::bind(&FullscreenMenuLaunchMPG::clicked_back, boost::ref(*this)));
-	wincondition_.sigclicked.connect(
-	   boost::bind(&FullscreenMenuLaunchMPG::win_condition_clicked, boost::ref(*this)));
 	help_button_.sigclicked.connect(
 	   boost::bind(&FullscreenMenuLaunchMPG::help_clicked, boost::ref(*this)));
 
-	lua_ = new LuaInterface();
-	win_condition_clicked();
-
-	title_.set_fontsize(fs_big());
 	mapname_.set_fontsize(fs_);
 	mapname_.set_color(RGBColor(255, 255, 127));
 	clients_.set_fontsize(fs_);
@@ -232,20 +199,12 @@ FullscreenMenuLaunchMPG::FullscreenMenuLaunchMPG(GameSettingsProvider* const set
 }
 
 FullscreenMenuLaunchMPG::~FullscreenMenuLaunchMPG() {
-	delete lua_;
 	delete mpsg_;
 	delete chat_;
 }
 
 void FullscreenMenuLaunchMPG::layout() {
 	// TODO(GunChleoc): Implement when we have redesigned this
-}
-
-void FullscreenMenuLaunchMPG::think() {
-	if (ctrl_)
-		ctrl_->think();
-
-	refresh();
 }
 
 /**
@@ -266,68 +225,10 @@ void FullscreenMenuLaunchMPG::clicked_back() {
 	end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kBack);
 }
 
-/**
- * WinCondition button has been pressed
- */
-void FullscreenMenuLaunchMPG::win_condition_clicked() {
-	settings_->next_win_condition();
-	win_condition_update();
-}
-
-/**
- * update win conditions information
- */
-void FullscreenMenuLaunchMPG::win_condition_update() {
-	if (settings_->settings().scenario) {
-		wincondition_.set_title(_("Scenario"));
-		wincondition_.set_tooltip(_("Win condition is set through the scenario"));
-	} else if (settings_->settings().savegame) {
-		/** Translators: This is a game type */
-		wincondition_.set_title(_("Saved Game"));
-		wincondition_.set_tooltip(_("The game is a saved game – the win condition was set before."));
-	} else {
-		win_condition_load();
-	}
-}
-
-/**
- * Loads the current win condition script from the settings provider.
- * Calls win_condition_clicked() if the current map can't handle the win condition.
- */
-void FullscreenMenuLaunchMPG::win_condition_load() {
-	bool is_usable = true;
-	try {
-		std::unique_ptr<LuaTable> t = lua_->run_script(settings_->get_win_condition_script());
-		t->do_not_warn_about_unaccessed_keys();
-
-		// Skip this win condition if the map doesn't have all the required tags
-		if (t->has_key("map_tags") && !settings_->settings().mapfilename.empty()) {
-			Widelands::Map map;
-			std::unique_ptr<Widelands::MapLoader> ml =
-			   map.get_correct_loader(settings_->settings().mapfilename);
-			ml->preload_map(true);
-			for (const std::string& map_tag : t->get_table("map_tags")->array_entries<std::string>()) {
-				if (!map.has_tag(map_tag)) {
-					is_usable = false;
-					break;
-				}
-			}
-		}
-
-		std::string name = t->get_string("name");
-		std::string descr = t->get_string("description");
-
-		{
-			i18n::Textdomain td("win_conditions");
-			wincondition_.set_title(_(name));
-		}
-		wincondition_.set_tooltip(descr.c_str());
-	} catch (LuaTableKeyError&) {
-		// might be that this is not a win condition after all.
-		is_usable = false;
-	}
-	if (!is_usable) {
-		win_condition_clicked();
+void FullscreenMenuLaunchMPG::win_condition_selected() {
+	if (settings_->can_change_map() && win_condition_dropdown_.has_selection()) {
+		settings_->set_win_condition_script(win_condition_dropdown_.get_selected());
+		last_win_condition_ = win_condition_dropdown_.get_selected();
 	}
 }
 
@@ -343,6 +244,7 @@ void FullscreenMenuLaunchMPG::change_map_or_save() {
 	} else if (result == FullscreenMenuBase::MenuTarget::kScenarioGame) {
 		select_saved_game();
 	}
+	update_win_conditions();
 }
 
 /**
@@ -440,8 +342,12 @@ void FullscreenMenuLaunchMPG::clicked_ok() {
 		                  "from the host to you, but perhaps the transfer was not yet "
 		                  "finished!?!"),
 		                settings_->settings().mapfilename.c_str());
-	if (settings_->can_launch())
+	if (settings_->can_launch()) {
+		if (win_condition_dropdown_.has_selection()) {
+			settings_->set_win_condition_script(win_condition_dropdown_.get_selected());
+		}
 		end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kNormalGame);
+	}
 }
 
 /**
@@ -496,11 +402,29 @@ void FullscreenMenuLaunchMPG::refresh() {
 	change_map_or_save_.set_enabled(settings_->can_change_map());
 	change_map_or_save_.set_visible(settings_->can_change_map());
 
-	wincondition_.set_enabled(settings_->can_change_map() && !settings.savegame &&
-	                          !settings.scenario);
+	if (!settings_->can_change_map() && !init_win_condition_label()) {
+		try {
+			// We do not validate the scripts for the client - it's only a label.
+			std::unique_ptr<LuaTable> t = lua_->run_script(settings_->get_win_condition_script());
+			t->do_not_warn_about_unaccessed_keys();
+			if (t) {
+				i18n::Textdomain td("win_conditions");
+				win_condition_dropdown_.set_label(_(t->get_string("name")));
+				win_condition_dropdown_.set_tooltip(_(t->get_string("description")));
+			}
+		} catch (LuaScriptNotExistingError&) {
+			win_condition_dropdown_.set_label(_("Error"));
+			win_condition_dropdown_.set_tooltip(
+			   (boost::format(_("Unable to load the win condition script file '%s'.")) %
+			    settings_->get_win_condition_script())
+			      .str());
 
-	win_condition_update();
-
+		} catch (LuaTableKeyError& e) {
+			log("LaunchMPG: Error loading win condition: %s %s\n",
+			    settings_->get_win_condition_script().c_str(), e.what());
+		}
+		win_condition_dropdown_.set_enabled(false);
+	}
 	// Update the multi player setup group
 	mpsg_->refresh();
 }

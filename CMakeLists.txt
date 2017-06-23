@@ -41,6 +41,7 @@ SET(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${CMAKE_CURRENT_SOURCE_DIR}/cmake/Mod
 
 if (WIN32)
   set (Boost_USE_STATIC_LIBS  ON)
+  link_libraries(wsock32 ws2_32)
 else()
   set (Boost_USE_STATIC_LIBS  OFF)
 endif()
@@ -50,7 +51,8 @@ find_package(Boost 1.48
   COMPONENTS
     unit_test_framework
     regex
-  REQUIRED)
+  REQUIRED
+    system)
 
 find_package (PythonInterp REQUIRED)
 
@@ -60,7 +62,6 @@ find_package(PNG REQUIRED)
 find_package(SDL2 REQUIRED)
 find_package(SDL2_image REQUIRED)
 find_package(SDL2_mixer REQUIRED)
-find_package(SDL2_net REQUIRED)
 find_package(SDL2_ttf REQUIRED)
 find_package(ZLIB REQUIRED)
 find_package(ICU REQUIRED)
@@ -93,11 +94,21 @@ endif (NOT CMAKE_BUILD_TYPE OR CMAKE_BUILD_TYPE STREQUAL "")
 if(CMAKE_BUILD_TYPE STREQUAL "Debug")
   set(WL_DEBUG_FLAGS "-g -DDEBUG")
 elseif(CMAKE_BUILD_TYPE STREQUAL "Release")
-  set(WL_OPTIMIZE_FLAGS "-O3")
+  if(("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU") AND (CMAKE_CXX_COMPILER_VERSION VERSION_EQUAL 6.3))
+    message(STATUS "GCC 6.3.0 breaks -03, setting -02")
+    set(WL_OPTIMIZE_FLAGS "-O2")
+  else()
+    set(WL_OPTIMIZE_FLAGS "-O3")
+  endif ()
   set(WL_DEBUG_FLAGS "-DNDEBUG -DNOPARACHUTE")
 elseif(CMAKE_BUILD_TYPE STREQUAL "RelWithDebInfo")
-  set(WL_OPTIMIZE_FLAGS "-O3")
-  set(WL_DEBUG_FLAGS "-g -DNDEBUG -DNOPARACHUTE")
+  if(("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU") AND (CMAKE_CXX_COMPILER_VERSION VERSION_EQUAL 6.3))
+    message(STATUS "GCC 6.3.0 breaks -03, setting -02")
+    set(WL_OPTIMIZE_FLAGS "-O2")
+  else()
+    set(WL_OPTIMIZE_FLAGS "-O3")
+  endif ()
+  set(WL_DEBUG_FLAGS "-DNDEBUG -DNOPARACHUTE")
 else()
   message(FATAL_ERROR "Unknown CMAKE_BUILD_TYPE: ${CMAKE_BUILD_TYPE}")
 endif()
@@ -116,10 +127,15 @@ if("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
   wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wno-padded")
   wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wno-sign-conversion")
   wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wno-missing-noreturn")
-  wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wno-implicit-fallthrough")
+
+  # It is impossible to write code that both GCC and Clang will like,
+  # so we have to switch off the warning for one of them.
+  # http://clang-developers.42468.n3.nabble.com/Question-on-Wswitch-enum-td4025927.html
+  wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wno-switch-enum")
 
   # TODO(sirver): weak-vtables should be enabled, but leads to lot of errors right now.
   wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wno-weak-vtables")
+
   wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wno-unreachable-code")
   wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wno-documentation")
 
@@ -132,6 +148,9 @@ else()
   if(WIN32)
     # This is needed for getenv().
     wl_add_flag(WL_GENERIC_CXX_FLAGS "-std=gnu++11")
+  else()
+    # SDL and MinGW both declare 'unsigned int __builtin_ia32_crc32qi(unsigned int, unsigned char)', resulting in lots of warnings. So, we can't have this flag in Windows.
+    wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wredundant-decls")
   endif()
 
   # Because of: https://svn.boost.org/trac/boost/ticket/9240.
@@ -154,7 +173,6 @@ else()
   wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Woverlength-strings")
   wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wpacked")
   wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wpointer-arith")
-  wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wredundant-decls")
   wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wsign-promo")
   wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wsync-nand")
   wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wtrampolines")
@@ -171,7 +189,7 @@ wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Werror=shadow")
 wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Werror=uninitialized")
 
 IF (WIN32)
-  add_definitions(-DMINGW_HAS_SECURE_API)
+  add_definitions(-DMINGW_HAS_SECURE_API -DWIN32_LEAN_AND_MEAN)
   if (CMAKE_SIZEOF_VOID_P EQUAL 4)
     set (CMAKE_EXE_LINKER_FLAGS "-Wl,--large-address-aware" CACHE STRING "Set by widelands CMakeLists.txt" FORCE)
     message (STATUS "Enabled large address awareness on mingw32")

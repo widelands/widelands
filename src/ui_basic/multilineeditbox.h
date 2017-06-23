@@ -29,8 +29,6 @@
 
 namespace UI {
 
-struct TextStyle;
-
 /**
  * A panel that allows entering multi-line string, i.e. like a hybrid between
  * @ref Editbox and @ref MultilineTextarea

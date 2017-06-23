@@ -51,6 +51,7 @@
 #include "logic/mapregion.h"
 #include "logic/message_queue.h"
 #include "logic/player.h"
+#include "sound/note_sound.h"
 #include "sound/sound_handler.h"
 
 namespace Widelands {
@@ -262,9 +263,8 @@ void ProductionProgram::parse_ware_type_group(char*& parameters,
 				                    "the specified ware type(s) is only %u, so the group can "
 				                    "never be fulfilled by the site",
 				                    count, count_max);
-			//  fallthrough
 		}
-		/* no break */
+			FALLS_THROUGH;
 		case '\0':
 		case ' ':
 			group.second = count;
@@ -1430,7 +1430,7 @@ ProductionProgram::ActPlaySound::ActPlaySound(char* parameters) {
 }
 
 void ProductionProgram::ActPlaySound::execute(Game& game, ProductionSite& ps) const {
-	g_sound_handler.play_fx(name, ps.position_, priority);
+	Notifications::publish(NoteSound(name, ps.position_, priority));
 	return ps.program_step(game);
 }
 

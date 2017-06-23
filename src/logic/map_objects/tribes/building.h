@@ -30,18 +30,16 @@
 #include "base/macros.h"
 #include "logic/map_objects/buildcost.h"
 #include "logic/map_objects/immovable.h"
+#include "logic/map_objects/tribes/attack_target.h"
 #include "logic/map_objects/tribes/bill_of_materials.h"
 #include "logic/map_objects/tribes/wareworker.h"
 #include "logic/map_objects/tribes/workarea_info.h"
 #include "logic/message.h"
 #include "logic/widelands.h"
+#include "notifications/notifications.h"
 #include "scripting/lua_table.h"
 
-namespace UI {
-class Window;
-}
 struct BuildingHints;
-class InteractiveGameBase;
 class Image;
 
 namespace Widelands {
@@ -158,10 +156,9 @@ public:
 
 	WorkareaInfo workarea_info_;
 
-	virtual int32_t suitability(const Map&, const FCoords&) const;
-	const BuildingHints& hints() const {
-		return hints_;
-	}
+	bool suitability(const Map&, const FCoords&) const;
+	const BuildingHints& hints() const;
+	void set_hints_trainingsites_max_percent(int percent);
 
 protected:
 	virtual Building& create_object() const = 0;
@@ -191,6 +188,19 @@ private:
 	DISALLOW_COPY_AND_ASSIGN(BuildingDescr);
 };
 
+struct NoteBuilding {
+	CAN_BE_SENT_AS_NOTE(NoteId::Building)
+
+	Serial serial;
+
+	enum class Action { kChanged, kDeleted, kStartWarp, kFinishWarp, kWorkersChanged };
+	const Action action;
+
+	NoteBuilding(Serial init_serial, const Action& init_action)
+	   : serial(init_serial), action(init_action) {
+	}
+};
+
 class Building : public PlayerImmovable {
 	friend class BuildingDescr;
 	friend class MapBuildingdataPacket;
@@ -211,7 +221,6 @@ public:
 	enum class InfoStringFormat { kCensus, kStatistics, kTooltip };
 
 	Building(const BuildingDescr&);
-	virtual ~Building();
 
 	void load_finish(EditorGameBase&) override;
 
@@ -240,12 +249,6 @@ public:
 
 	virtual bool burn_on_destroy();
 	void destroy(EditorGameBase&) override;
-
-	void show_options(InteractiveGameBase&,
-	                  bool avoid_fastclick = false,
-	                  Vector2i pos = Vector2i(-1, -1));
-	void hide_options();
-	void refresh_options(InteractiveGameBase&);
 
 	virtual bool fetch_from_flag(Game&);
 	virtual bool get_building_work(Game&, Worker&, bool success);
@@ -289,7 +292,13 @@ public:
 
 	void add_worker(Worker&) override;
 	void remove_worker(Worker&) override;
-	mutable boost::signals2::signal<void()> workers_changed;
+
+	// Returns the AttackTarget object associated with this building. If the
+	// building can never be attacked (for example productionsites) this will be
+	// nullptr.
+	const AttackTarget* attack_target() const {
+		return attack_target_;
+	}
 
 	void send_message(Game& game,
 	                  const Message::Type msgtype,
@@ -309,7 +318,7 @@ protected:
 
 	void start_animation(EditorGameBase&, uint32_t anim);
 
-	void init(EditorGameBase&) override;
+	bool init(EditorGameBase&) override;
 	void cleanup(EditorGameBase&) override;
 	void act(Game&, uint32_t data) override;
 
@@ -321,11 +330,9 @@ protected:
 	void
 	draw_info(TextToDraw draw_text, const Vector2f& point_on_dst, float scale, RenderTarget* dst);
 
-	virtual void create_options_window(InteractiveGameBase&, UI::Window*& registry) = 0;
-
 	void set_seeing(bool see);
+	void set_attack_target(AttackTarget* new_attack_target);
 
-	UI::Window* optionswindow_;
 	Coords position_;
 	Flag* flag_;
 
@@ -346,14 +353,12 @@ protected:
 	/// Whether we see our vision_range area based on workers in the building
 	bool seeing_;
 
-	// Signals connected for the option window
-	std::vector<boost::signals2::connection> options_window_connections;
-
 	// The former buildings names, with the current one in last position.
 	FormerBuildings old_buildings_;
 
 private:
 	std::string statistics_string_;
+	AttackTarget* attack_target_;  // owned by the base classes, set by 'set_attack_target'.
 };
 }
 

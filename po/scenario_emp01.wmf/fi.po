@@ -1,15 +1,15 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2016 Widelands Development Team
+# Copyright (C) 2005-2017 Widelands Development Team
 # 
 # Translators:
 # GunChleoc, 2014
-# Jukka Pakarinen, 2016
+# Jukka Pakarinen, 2016-2017
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-10-15 08:42+0000\n"
-"PO-Revision-Date: 2016-09-15 18:08+0000\n"
+"POT-Creation-Date: 2017-05-19 07:45+0000\n"
+"PO-Revision-Date: 2017-05-21 05:55+0000\n"
 "Last-Translator: Jukka Pakarinen\n"
 "Language-Team: Finnish (http://www.transifex.com/widelands/widelands/language/fi/)\n"
 "MIME-Version: 1.0\n"
@@ -62,16 +62,16 @@ msgstr "Rakenna kaksi puunhakkaajan mökkiä lisää ja saha, sitä mukaa kun ni
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:55
 msgid "Build a forester’s house"
-msgstr "Rakenna puunistuttajan mökki"
+msgstr "Rakenna metsänhoitajan mökki"
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:57
 msgid "Forester’s House"
-msgstr "Metsänvartijan talo"
+msgstr "Metsänhoitajan Mökki"
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:58
 msgid ""
 "Build a forester’s house to preserve the wood resources of this island."
-msgstr "Rakenna puunistuttajan mökki ylläpitääksesi saaren puuvarantoja."
+msgstr "Rakenna metsänhoitajan mökki ylläpitääksesi saaren puuvarantoja."
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:64
 msgid "Build a quarry"
@@ -432,8 +432,8 @@ msgstr "Herra, olet tehnyt tästä niemimaasta hyvin turvallisen paikan. On aika
 msgid "“%s”"
 msgstr "“%s”"
 
-#: ../../data/scripting/format_scenario.lua:96
+#: ../../data/scripting/format_scenario.lua:84
 msgid "New Objective"
 msgid_plural "New Objectives"
-msgstr[0] "Uudet tavoitteet"
-msgstr[1] "Uudet tavoitteet"
+msgstr[0] "Uusi Tavoite"
+msgstr[1] "Uudet Tavoitteet"

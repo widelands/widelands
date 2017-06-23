@@ -60,7 +60,7 @@ struct FieldOverlayManager {
 		}
 
 		const Image* pic;
-		Vector2i hotspot;
+		Vector2i hotspot = Vector2i::zero();
 	};
 
 	/// A function returning Field::nodecaps() for the build overlay. This can be
@@ -118,7 +118,7 @@ private:
 		}
 		std::set<OverlayId> overlay_ids;
 		const Image* pic;
-		Vector2i hotspot;
+		Vector2i hotspot = Vector2i::zero();
 		int level;
 	};
 

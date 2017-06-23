@@ -18,5 +18,6 @@ wl_library(ai
     base_time_string
     economy
     logic
+    logic_constants
     scripting_lua_table
 )

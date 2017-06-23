@@ -90,8 +90,8 @@ EditorToolChangeResourcesOptionsMenu::EditorToolChangeResourcesOptionsMenu(
 	set_to_.changed.connect(
 	   boost::bind(&EditorToolChangeResourcesOptionsMenu::update_set_to, boost::ref(*this)));
 
-	box_.add(&change_by_, UI::Align::kLeft);
-	box_.add(&set_to_, UI::Align::kLeft);
+	box_.add(&change_by_);
+	box_.add(&set_to_);
 	box_.set_size(get_inner_w() - 2 * hmargin(), change_by_.get_h() + set_to_.get_h() + vspacing());
 
 	// Add resource buttons
@@ -100,14 +100,14 @@ EditorToolChangeResourcesOptionsMenu::EditorToolChangeResourcesOptionsMenu(
 
 	for (Widelands::DescriptionIndex i = 0; i < nr_resources; ++i) {
 		const Widelands::ResourceDescription& resource = *world.get_resource(i);
-		radiogroup_.add_button(&resources_box_, Vector2i(0, 0),
+		radiogroup_.add_button(&resources_box_, Vector2i::zero(),
 		                       g_gr->images().get(resource.representative_image()),
 		                       resource.descname());
-		resources_box_.add(radiogroup_.get_first_button(), UI::Align::kLeft, false, true);
+		resources_box_.add(radiogroup_.get_first_button(), UI::Box::Resizing::kFillSpace);
 	}
 
 	box_.add_space(vspacing());
-	box_.add(&resources_box_, UI::Align::kLeft, true);
+	box_.add(&resources_box_, UI::Box::Resizing::kFullSize);
 	box_.set_size(box_.get_w(), box_.get_h() + 4 * vspacing() + resources_box_.get_h());
 
 	radiogroup_.set_state(increase_tool_.get_cur_res());
@@ -119,7 +119,7 @@ EditorToolChangeResourcesOptionsMenu::EditorToolChangeResourcesOptionsMenu(
 
 	// Add label
 	cur_selection_.set_fixed_width(box_.get_inner_w());
-	box_.add(&cur_selection_, UI::Align::kLeft);
+	box_.add(&cur_selection_);
 
 	box_.set_size(box_.get_w(), box_.get_h() + vspacing() + cur_selection_.get_h());
 	set_inner_size(get_inner_w(), box_.get_h() + 1 * vmargin());

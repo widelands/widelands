@@ -30,8 +30,6 @@
 #include "sound/sound_handler.h"
 #include "wlapplication.h"
 
-using namespace std;
-
 namespace UI {
 
 Panel* Panel::modal_ = nullptr;
@@ -191,7 +189,7 @@ int Panel::do_run() {
 			RenderTarget& rt = *g_gr->get_render_target();
 			forefather->do_draw(rt);
 			rt.blit(
-			   (app->get_mouse_position() - Vector2i(3, 7)).cast<float>(),
+			   (app->get_mouse_position() - Vector2i(3, 7)),
 			   WLApplication::get()->is_mouse_pressed() ? default_cursor_click_ : default_cursor_);
 			forefather->do_tooltip();
 			g_gr->refresh();
@@ -240,8 +238,12 @@ void Panel::set_size(const int nw, const int nh) {
 	if (nw == w_ && nh == h_)
 		return;
 
-	w_ = nw;
-	h_ = nh;
+	assert(nw >= 0);
+	assert(nh >= 0);
+
+	// Make sure that we never get negative width/height in release builds.
+	w_ = std::max(0, nw);
+	h_ = std::max(0, nh);
 
 	if (parent_)
 		move_inside_parent();
@@ -282,9 +284,12 @@ void Panel::set_desired_size(int w, int h) {
 
 	assert(w < 3000);
 	assert(h < 3000);
+	assert(w >= 0);
+	assert(h >= 0);
 
-	desired_w_ = w;
-	desired_h_ = h;
+	// Make sure that we never get negative width/height in release builds.
+	desired_w_ = std::max(0, w);
+	desired_h_ = std::max(0, h);
 	if (!get_layout_toplevel() && parent_) {
 		parent_->update_desired_size();
 	} else {
@@ -351,6 +356,7 @@ void Panel::layout() {
  * Set the size of the inner area (total area minus border)
  */
 void Panel::set_inner_size(int const nw, int const nh) {
+	assert(nw >= 0 && nh >= 0);
 	set_size(nw + lborder_ + rborder_, nh + tborder_ + bborder_);
 }
 
@@ -364,6 +370,15 @@ void Panel::set_border(int l, int r, int t, int b) {
 	rborder_ = r;
 	tborder_ = t;
 	bborder_ = b;
+}
+
+int Panel::get_inner_w() const {
+	assert(w_ == 0 || lborder_ + rborder_ <= w_);
+	return (w_ == 0 ? 0 : w_ - (lborder_ + rborder_));
+}
+int Panel::get_inner_h() const {
+	assert(h_ == 0 || tborder_ + bborder_ <= h_);
+	return (h_ == 0 ? 0 : h_ - (tborder_ + bborder_));
 }
 
 /**
@@ -729,7 +744,7 @@ void Panel::do_draw(RenderTarget& dst) {
 		return;
 
 	Recti outerrc;
-	Vector2i outerofs;
+	Vector2i outerofs = Vector2i::zero();
 
 	if (!dst.enter_window(Recti(Vector2i(x_, y_), w_, h_), &outerrc, &outerofs))
 		return;
@@ -1043,17 +1058,19 @@ bool Panel::draw_tooltip(RenderTarget& dst, const std::string& text) {
 		text_to_render = as_tooltip(text);
 	}
 
-	static const uint32_t TIP_WIDTH_MAX = 360;
-	const Image* rendered_text = g_fh1->render(text_to_render, TIP_WIDTH_MAX);
-	if (!rendered_text) {
+	constexpr uint32_t kTipWidthMax = 360;
+	std::shared_ptr<const UI::RenderedText> rendered_text =
+	   g_fh1->render(text_to_render, kTipWidthMax);
+	if (rendered_text->rects.empty()) {
 		return false;
 	}
-	uint16_t tip_width = rendered_text->width() + 4;
-	uint16_t tip_height = rendered_text->height() + 4;
 
-	Rectf r(WLApplication::get()->get_mouse_position() + Vector2i(2, 32), tip_width, tip_height);
-	const Vector2f tooltip_bottom_right = r.opposite_of_origin();
-	const Vector2f screen_bottom_right(g_gr->get_xres(), g_gr->get_yres());
+	const uint16_t tip_width = rendered_text->width() + 4;
+	const uint16_t tip_height = rendered_text->height() + 4;
+
+	Recti r(WLApplication::get()->get_mouse_position() + Vector2i(2, 32), tip_width, tip_height);
+	const Vector2i tooltip_bottom_right = r.opposite_of_origin();
+	const Vector2i screen_bottom_right(g_gr->get_xres(), g_gr->get_yres());
 	if (screen_bottom_right.x < tooltip_bottom_right.x)
 		r.x -= 4 + r.w;
 	if (screen_bottom_right.y < tooltip_bottom_right.y)
@@ -1061,7 +1078,7 @@ bool Panel::draw_tooltip(RenderTarget& dst, const std::string& text) {
 
 	dst.fill_rect(r, RGBColor(63, 52, 34));
 	dst.draw_rect(r, RGBColor(0, 0, 0));
-	dst.blit(r.origin() + Vector2f(2.f, 2.f), rendered_text);
+	rendered_text->draw(dst, r.origin() + Vector2i(2, 2));
 	return true;
 }
 }

@@ -128,7 +128,8 @@ public:
 
 private:
 	std::vector<std::unique_ptr<Animation>> animations_;
-	std::map<uint32_t, std::unique_ptr<const Image>> representative_images_;
+	std::map<std::pair<uint32_t, const RGBColor*>, std::unique_ptr<const Image>>
+	   representative_images_;
 };
 
 #endif  // end of include guard: WL_GRAPHIC_ANIMATION_H

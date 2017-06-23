@@ -50,7 +50,7 @@
 #include "logic/map_objects/tribes/warehouse.h"
 #include "logic/playercommand.h"
 #include "scripting/lua_table.h"
-#include "sound/sound_handler.h"
+#include "sound/note_sound.h"
 #include "wui/interactive_player.h"
 
 namespace {
@@ -278,15 +278,14 @@ void Player::update_team_players() {
 void Player::play_message_sound(const Message::Type& msgtype) {
 #define MAYBE_PLAY(type, file)                                                                     \
 	if (msgtype == type) {                                                                          \
-		g_sound_handler.play_fx(file, 200, PRIO_ALWAYS_PLAY);                                        \
+		Notifications::publish(NoteSound(file, 200, PRIO_ALWAYS_PLAY));                              \
 		return;                                                                                      \
 	}
 
 	if (g_options.pull_section("global").get_bool("sound_at_message", true)) {
 		MAYBE_PLAY(Message::Type::kEconomySiteOccupied, "military/site_occupied");
 		MAYBE_PLAY(Message::Type::kWarfareUnderAttack, "military/under_attack");
-
-		g_sound_handler.play_fx("message", 200, PRIO_ALWAYS_PLAY);
+		Notifications::publish(NoteSound("message", 200, PRIO_ALWAYS_PLAY));
 	}
 }
 
@@ -693,6 +692,8 @@ void Player::enhance_or_dismantle(Building* building,
 			workers = building->get_workers();
 		}
 
+		// Register whether the window was open
+		Notifications::publish(NoteBuilding(building->serial(), NoteBuilding::Action::kStartWarp));
 		building->remove(egbase());  //  no fire or stuff
 		//  Hereafter the old building does not exist and building is a dangling
 		//  pointer.
@@ -701,6 +702,10 @@ void Player::enhance_or_dismantle(Building* building,
 			   position, player_number_, index_of_new_building, false, former_buildings);
 		else
 			building = &egbase().warp_dismantlesite(position, player_number_, false, former_buildings);
+
+		// Open the new building window if needed
+		Notifications::publish(NoteBuilding(building->serial(), NoteBuilding::Action::kFinishWarp));
+
 		//  Hereafter building points to the new building.
 
 		// Reassign the workers and soldiers.
@@ -864,8 +869,8 @@ void Player::enemyflagaction(Flag& flag, PlayerNumber const attacker, uint32_t c
 		log("enemyflagaction: count is 0\n");
 	else if (is_hostile(flag.owner())) {
 		if (Building* const building = flag.get_building()) {
-			if (upcast(Attackable, attackable, building)) {
-				if (attackable->can_attack()) {
+			if (const AttackTarget* attack_target = building->attack_target()) {
+				if (attack_target->can_be_attacked()) {
 					std::vector<Soldier*> attackers;
 					find_attack_soldiers(flag, &attackers, count);
 					assert(attackers.size() <= count);
@@ -964,6 +969,7 @@ void Player::rediscover_node(const Map& map,
 			tr_field.terrains.d = tr.field->terrain_d();
 			tr_field.roads &= ~(RoadType::kMask << RoadType::kSouthWest);
 			tr_field.roads |= RoadType::kMask << RoadType::kSouthWest & tr.field->get_roads();
+			tr_field.owner = tr.field->get_owned_by();
 		}
 	}
 	{  //  discover both triangles and the SE edge of the top left  neighbour
@@ -973,6 +979,7 @@ void Player::rediscover_node(const Map& map,
 			tl_field.terrains = tl.field->get_terrains();
 			tl_field.roads &= ~(RoadType::kMask << RoadType::kSouthEast);
 			tl_field.roads |= RoadType::kMask << RoadType::kSouthEast & tl.field->get_roads();
+			tl_field.owner = tl.field->get_owned_by();
 		}
 	}
 	{  //  discover the R triangle and the  E edge of the     left  neighbour
@@ -982,6 +989,7 @@ void Player::rediscover_node(const Map& map,
 			l_field.terrains.r = l.field->terrain_r();
 			l_field.roads &= ~(RoadType::kMask << RoadType::kEast);
 			l_field.roads |= RoadType::kMask << RoadType::kEast & l.field->get_roads();
+			l_field.owner = l.field->get_owned_by();
 		}
 	}
 }
@@ -1019,9 +1027,15 @@ void Player::see_node(const Map& map,
 	field.vision = fvision;
 }
 
-void Player::unsee_node(MapIndex const i, Time const gametime, bool const forward) {
+/// If 'mode' = UnseeMode::kUnexplore, fields will be marked as unexplored. Else, player no longer
+/// sees what's currently going on.
+void Player::unsee_node(MapIndex const i,
+                        Time const gametime,
+                        const UnseeNodeMode mode,
+                        bool const forward) {
 	Field& field = fields_[i];
-	if (field.vision <= 1)  //  Already does not see this
+	if ((mode == UnseeNodeMode::kUnsee && field.vision <= 1) ||
+	    field.vision < 1)  //  Already does not see this
 		return;
 
 	//  If this is not already a forwarded call, we should inform allied players
@@ -1030,13 +1044,18 @@ void Player::unsee_node(MapIndex const i, Time const gametime, bool const forwar
 		update_team_players();
 	if (!forward && !team_player_.empty()) {
 		for (uint8_t j = 0; j < team_player_.size(); ++j)
-			team_player_[j]->unsee_node(i, gametime, true);
+			team_player_[j]->unsee_node(i, gametime, mode, true);
 	}
 
-	--field.vision;
-	if (field.vision == 1)
+	if (mode == UnseeNodeMode::kUnexplore) {
+		field.vision = 0;
+	} else {
+		--field.vision;
+		assert(1 <= field.vision);
+	}
+	if (field.vision < 2) {
 		field.time_node_last_unseen = gametime;
-	assert(1 <= field.vision);
+	}
 }
 
 /**
@@ -1221,6 +1240,8 @@ const std::string Player::pick_shipname() {
  * \param fr source stream
  */
 void Player::read_remaining_shipnames(FileRead& fr) {
+	// First get rid of default shipnames
+	remaining_shipnames_.clear();
 	const uint16_t count = fr.unsigned_16();
 	for (uint16_t i = 0; i < count; ++i) {
 		remaining_shipnames_.insert(fr.string());

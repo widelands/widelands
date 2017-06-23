@@ -1688,9 +1688,9 @@ int LuaImmovableDescription::get_build_cost(lua_State* L) {
 }
 
 /* RST
-	.. attribute:: the name and descname of the editor category of this immovable
+   .. attribute:: the name and descname of the editor category of this immovable
 
-			(RO) a table with "name" and "descname" entries for the editor category, or nil if it has none.
+         (RO) a table with "name" and "descname" entries for the editor category, or nil if it has none.
 */
 int LuaImmovableDescription::get_editor_category(lua_State* L) {
 	const EditorCategory* editor_category = get()->editor_category();
@@ -1709,11 +1709,11 @@ int LuaImmovableDescription::get_editor_category(lua_State* L) {
 }
 
 /* RST
-	.. attribute:: returns the terrain affinity values for this immovable
+   .. attribute:: returns the terrain affinity values for this immovable
 
-			(RO) a table containing numbers labeled as pickiness (double), preferred_fertility (double),
-				  preferred_humidity (double), and preferred_temperature (uint),
-				  or nil if the immovable has no terrain affinity.
+         (RO) a table containing numbers labeled as pickiness (double), preferred_fertility (double),
+         preferred_humidity (double), and preferred_temperature (uint),
+         or nil if the immovable has no terrain affinity.
 */
 int LuaImmovableDescription::get_terrain_affinity(lua_State* L) {
 	if (get()->has_terrain_affinity()) {
@@ -2129,6 +2129,7 @@ const PropertyType<LuaProductionSiteDescription> LuaProductionSiteDescription::P
 
 /* RST
    .. attribute:: inputs
+
       (RO) An array with :class:`LuaWareDescription` containing the wares that
       the productionsite needs for its production.
 */
@@ -2146,6 +2147,7 @@ int LuaProductionSiteDescription::get_inputs(lua_State* L) {
 
 /* RST
    .. attribute:: output_ware_types
+
       (RO) An array with :class:`LuaWareDescription` containing the wares that
       the productionsite can produce.
 */
@@ -2164,6 +2166,7 @@ int LuaProductionSiteDescription::get_output_ware_types(lua_State* L) {
 
 /* RST
    .. attribute:: output_worker_types
+
       (RO) An array with :class:`LuaWorkerDescription` containing the workers that
       the productionsite can produce.
 */
@@ -2198,6 +2201,7 @@ int LuaProductionSiteDescription::get_production_programs(lua_State* L) {
 
 /* RST
    .. attribute:: working_positions
+
       (RO) An array with :class:`WorkerDescription` containing the workers that
       can work here with their multiplicity, i.e. for a atlantean mine this
       would be { miner, miner, miner }.
@@ -2219,13 +2223,13 @@ int LuaProductionSiteDescription::get_working_positions(lua_State* L) {
 }
 
 /* RST
-	.. attribute:: consumed_wares_workers
+   .. attribute:: consumed_wares_workers
 
-		:arg program_name: the name of the production program that we want to get the consumed wares for
-		:type tribename: :class:`string`
+      :arg program_name: the name of the production program that we want to get the consumed wares for
+      :type tribename: :class:`string`
 
-		(RO) Returns a table of {{ware name}, ware amount} for the wares consumed by this production program.
-			  Multiple entries in {ware name} are alternatives (OR logic)).
+      (RO) Returns a table of {{ware name}, ware amount} for the wares consumed by this production program.
+      Multiple entries in {ware name} are alternatives (OR logic)).
 */
 int LuaProductionSiteDescription::consumed_wares_workers(lua_State* L) {
 	std::string program_name = luaL_checkstring(L, -1);
@@ -2253,12 +2257,12 @@ int LuaProductionSiteDescription::consumed_wares_workers(lua_State* L) {
 }
 
 /* RST
-	.. attribute:: produced_wares
+   .. attribute:: produced_wares
 
-		:arg program_name: the name of the production program that we want to get the produced wares for
-		:type tribename: :class:`string`
+      :arg program_name: the name of the production program that we want to get the produced wares for
+      :type tribename: :class:`string`
 
-		(RO) Returns a table of {ware name, ware amount} for the wares produced by this production program
+         (RO) Returns a table of {ware name, ware amount} for the wares produced by this production program
 */
 int LuaProductionSiteDescription::produced_wares(lua_State* L) {
 	std::string program_name = luaL_checkstring(L, -1);
@@ -2271,13 +2275,13 @@ int LuaProductionSiteDescription::produced_wares(lua_State* L) {
 }
 
 /* RST
-	.. attribute:: recruited_workers
+   .. attribute:: recruited_workers
 
-		:arg program_name: the name of the production program that we want to get the recruited workers for
-		:type tribename: :class:`string`
+      :arg program_name: the name of the production program that we want to get the recruited workers for
+      :type tribename: :class:`string`
 
-		(RO) Returns a table of {worker name, worker amount} for the workers recruited
-			  by this production program
+         (RO) Returns a table of {worker name, worker amount} for the workers recruited
+         by this production program
 */
 int LuaProductionSiteDescription::recruited_workers(lua_State* L) {
 	std::string program_name = luaL_checkstring(L, -1);
@@ -2344,10 +2348,10 @@ TrainingSiteDescription
 
 .. class:: TrainingSiteDescription
 
-	A static description of a tribe's trainingsite, so it can be used in help files
-	without having to access an actual building on the map.
-	A training site can train some or all of a soldier's properties (Attack, Defense, Evade and Health).
-	See also :class:`ProductionSiteDescription` and :class:`MapObjectDescription` for more properties.
+   A static description of a tribe's trainingsite, so it can be used in help files
+   without having to access an actual building on the map.
+   A training site can train some or all of a soldier's properties (Attack, Defense, Evade and Health).
+   See also :class:`ProductionSiteDescription` and :class:`MapObjectDescription` for more properties.
 */
 const char LuaTrainingSiteDescription::className[] = "TrainingSiteDescription";
 const MethodType<LuaTrainingSiteDescription> LuaTrainingSiteDescription::Methods[] = {
@@ -2686,6 +2690,7 @@ void LuaWareDescription::__unpersist(lua_State* L) {
 
 /* RST
    .. attribute:: consumers
+
       (RO) An array with :class:`LuaBuildingDescription` with buildings that
       need this ware for their production.
 */
@@ -2712,7 +2717,7 @@ int LuaWareDescription::get_helptext_script(lua_State* L) {
 }
 
 /* RST
-   .. .. method:: is_construction_material
+   .. method:: is_construction_material
 
       :arg tribename: the name of the tribe that this ware gets checked for
       :type tribename: :class:`string`
@@ -2734,6 +2739,7 @@ int LuaWareDescription::is_construction_material(lua_State* L) {
 
 /* RST
    .. attribute:: producers
+
       (RO) An array with :class:`LuaBuildingDescription` with buildings that
       can procude this ware.
 */
@@ -2828,6 +2834,7 @@ int LuaWorkerDescription::get_buildcost(lua_State* L) {
 
 /* RST
    .. attribute:: employers
+
       (RO) An array with :class:`LuaBuildingDescription` with buildings where
       this worker can be employed.
 */
@@ -3140,11 +3147,11 @@ int LuaResourceDescription::get_representative_image(lua_State* L) {
  */
 
 /* RST
-	.. method:: editor_image(amount)
+   .. method:: editor_image(amount)
 
-		:arg amount: The amount of the resource what we want an overlay image for
+      :arg amount: The amount of the resource what we want an overlay image for
 
-			(RO) the :class:`string` path to the image representing the specified amount of this resource
+         (RO) the :class:`string` path to the image representing the specified amount of this resource
 */
 int LuaResourceDescription::editor_image(lua_State* L) {
 	if (lua_gettop(L) != 2) {
@@ -3220,10 +3227,10 @@ int LuaTerrainDescription::get_descname(lua_State* L) {
 }
 
 /* RST
-	.. attribute:: get_default_resource
+   .. attribute:: get_default_resource
 
-			(RO) the :class:`wl.map.ResourceDescription` for the default resource provided by this terrain, or
-				  nil if the terrain has no default resource.
+         (RO) the :class:`wl.map.ResourceDescription` for the default resource provided by this terrain, or
+         nil if the terrain has no default resource.
 */
 
 int LuaTerrainDescription::get_default_resource(lua_State* L) {
@@ -3241,7 +3248,7 @@ int LuaTerrainDescription::get_default_resource(lua_State* L) {
 /* RST
    .. attribute:: default_resource_amount
 
-         (RO) the int amount of the default resource provided by this terrain.
+      (RO) the int amount of the default resource provided by this terrain.
 */
 
 int LuaTerrainDescription::get_default_resource_amount(lua_State* L) {
@@ -3250,9 +3257,9 @@ int LuaTerrainDescription::get_default_resource_amount(lua_State* L) {
 }
 
 /* RST
-	.. attribute:: the name and descname of the editor category of this terrain
+   .. attribute:: the name and descname of the editor category of this terrain
 
-			(RO) a table with "name" and "descname" entries for the editor category, or nil if it has none.
+      (RO) a table with "name" and "descname" entries for the editor category, or nil if it has none.
 */
 int LuaTerrainDescription::get_editor_category(lua_State* L) {
 	const EditorCategory* editor_category = get()->editor_category();
@@ -3315,9 +3322,9 @@ int LuaTerrainDescription::get_temperature(lua_State* L) {
 }
 
 /* RST
-	.. attribute:: valid_resources
+   .. attribute:: valid_resources
 
-			(RO) a list of :class:`wl.map.ResourceDescription` with all valid resources for this terrain.
+         (RO) a list of :class:`wl.map.ResourceDescription` with all valid resources for this terrain.
 */
 
 int LuaTerrainDescription::get_valid_resources(lua_State* L) {
@@ -3340,6 +3347,134 @@ int LuaTerrainDescription::get_valid_resources(lua_State* L) {
  METHODS
  ==========================================================
  */
+
+/* RST
+Economy
+-------
+.. class:: LuaEconomy
+
+   Provides access to an economy. A player can have multiple economies;
+   you can get an economy from a :class:`Flag`.
+*/
+const char LuaEconomy::className[] = "Economy";
+const MethodType<LuaEconomy> LuaEconomy::Methods[] = {
+   METHOD(LuaEconomy, ware_target_quantity),
+   METHOD(LuaEconomy, worker_target_quantity),
+   METHOD(LuaEconomy, set_ware_target_quantity),
+   METHOD(LuaEconomy, set_worker_target_quantity),
+   {nullptr, nullptr},
+};
+const PropertyType<LuaEconomy> LuaEconomy::Properties[] = {
+   {nullptr, nullptr, nullptr},
+};
+
+void LuaEconomy::__persist(lua_State* L) {
+	const Widelands::Economy* economy = get();
+	const Widelands::Player& player = economy->owner();
+	PERS_UINT32("player", player.player_number());
+	PERS_UINT32("economy", player.get_economy_number(economy));
+}
+
+void LuaEconomy::__unpersist(lua_State* L) {
+	Widelands::PlayerNumber player_number;
+	size_t economy_number;
+	UNPERS_UINT32("player", player_number);
+	UNPERS_UINT32("economy", economy_number);
+	const Widelands::Player& player = get_egbase(L).player(player_number);
+	set_economy_pointer(player.get_economy_by_number(economy_number));
+}
+
+/* RST
+   .. method:: ware_target_quantity(warename)
+
+      Returns the amount of the given ware that should be kept in stock for this economy.
+
+      :arg warename: the name of the ware.
+      :type warename: :class:`string`
+*/
+int LuaEconomy::ware_target_quantity(lua_State* L) {
+	const std::string warename = luaL_checkstring(L, 2);
+	const Widelands::DescriptionIndex index = get_egbase(L).tribes().ware_index(warename);
+	if (get_egbase(L).tribes().ware_exists(index)) {
+		const Widelands::Economy::TargetQuantity& quantity = get()->ware_target_quantity(index);
+		lua_pushinteger(L, quantity.permanent);
+	} else {
+		report_error(L, "There is no ware '%s'.", warename.c_str());
+	}
+	return 1;
+}
+
+/* RST
+   .. method:: worker_target_quantity(workername)
+
+      Returns the amount of the given worker that should be kept in stock for this economy.
+
+      :arg workername: the name of the worker.
+      :type workername: :class:`string`
+*/
+int LuaEconomy::worker_target_quantity(lua_State* L) {
+	const std::string workername = luaL_checkstring(L, 2);
+	const Widelands::DescriptionIndex index = get_egbase(L).tribes().worker_index(workername);
+	if (get_egbase(L).tribes().worker_exists(index)) {
+		const Widelands::Economy::TargetQuantity& quantity = get()->worker_target_quantity(index);
+		lua_pushinteger(L, quantity.permanent);
+	} else {
+		report_error(L, "There is no worker '%s'.", workername.c_str());
+	}
+	return 1;
+}
+
+/* RST
+   .. method:: set_ware_target_quantity(warename)
+
+      Sets the amount of the given ware type that should be kept in stock for this economy.
+
+      :arg warename: the name of the ware type.
+      :type warename: :class:`string`
+
+      :arg amount: the new target amount for the ware. Needs to be >= 0.
+      :type amount: :class:`integer`
+*/
+int LuaEconomy::set_ware_target_quantity(lua_State* L) {
+	const std::string warename = luaL_checkstring(L, 2);
+	const Widelands::DescriptionIndex index = get_egbase(L).tribes().ware_index(warename);
+	if (get_egbase(L).tribes().ware_exists(index)) {
+		const int quantity = luaL_checkinteger(L, 3);
+		if (quantity < 0) {
+			report_error(L, "Target ware quantity needs to be >= 0 but was '%d'.", quantity);
+		}
+		get()->set_ware_target_quantity(index, quantity, get_egbase(L).get_gametime());
+	} else {
+		report_error(L, "There is no ware '%s'.", warename.c_str());
+	}
+	return 1;
+}
+
+/* RST
+   .. method:: set_worker_target_quantity(workername)
+
+      Sets the amount of the given worker type that should be kept in stock for this economy.
+
+      :arg workername: the name of the worker type.
+      :type workername: :class:`string`
+
+      :arg amount: the new target amount for the worker. Needs to be >= 0.
+      :type amount: :class:`integer`
+*/
+int LuaEconomy::set_worker_target_quantity(lua_State* L) {
+	const std::string workername = luaL_checkstring(L, 2);
+	const Widelands::DescriptionIndex index = get_egbase(L).tribes().worker_index(workername);
+	if (get_egbase(L).tribes().worker_exists(index)) {
+		const int quantity = luaL_checkinteger(L, 3);
+		if (quantity < 0) {
+			report_error(L, "Target worker quantity needs to be >= 0 but was '%d'.", quantity);
+		}
+		get()->set_worker_target_quantity(index, quantity, get_egbase(L).get_gametime());
+	} else {
+		report_error(L, "There is no worker '%s'.", workername.c_str());
+	}
+	return 1;
+}
 
 /* RST
 MapObject
@@ -3400,8 +3535,7 @@ int LuaMapObject::get___hash(lua_State* L) {
 /* RST
    .. attribute:: serial
 
-      (RO)
-      The serial number of this object. Note that this value does not stay
+      (RO) The serial number of this object. Note that this value does not stay
       constant after saving/loading.
 */
 int LuaMapObject::get_serial(lua_State* L) {
@@ -3414,9 +3548,9 @@ int LuaMapObject::get_serial(lua_State* L) {
 	to_lua<lua_klass>(L, new lua_klass(static_cast<const klass*>(desc)))
 
 /* RST
-    .. attribute:: descr
+   .. attribute:: descr
 
-        (RO) The description object for this immovable, e.g. BuildingDescription.
+      (RO) The description object for this immovable, e.g. BuildingDescription.
 */
 int LuaMapObject::get_descr(lua_State* L) {
 	const MapObjectDescr* desc = &get(L, get_egbase(L))->descr();
@@ -3682,7 +3816,10 @@ const MethodType<LuaFlag> LuaFlag::Methods[] = {
    METHOD(LuaFlag, set_wares), METHOD(LuaFlag, get_wares), {nullptr, nullptr},
 };
 const PropertyType<LuaFlag> LuaFlag::Properties[] = {
-   PROP_RO(LuaFlag, roads), PROP_RO(LuaFlag, building), {nullptr, nullptr, nullptr},
+   PROP_RO(LuaFlag, economy),
+   PROP_RO(LuaFlag, roads),
+   PROP_RO(LuaFlag, building),
+   {nullptr, nullptr, nullptr},
 };
 
 /*
@@ -3690,6 +3827,18 @@ const PropertyType<LuaFlag> LuaFlag::Properties[] = {
  PROPERTIES
  ==========================================================
  */
+/* RST
+   .. attribute:: economy
+
+      (RO) Returns the economy that this flag belongs to.
+
+      :returns: The :class:`Economy` associated with the flag.
+*/
+int LuaFlag::get_economy(lua_State* L) {
+	const Flag* f = get(L, get_egbase(L));
+	return to_lua<LuaEconomy>(L, new LuaEconomy(f->get_economy()));
+}
+
 /* RST
    .. attribute:: roads
 
@@ -4309,7 +4458,8 @@ inline Warehouse::StockPolicy string_to_wh_policy(lua_State* L, uint32_t index) 
 		report_error(L, "<%s> is no valid warehouse policy!", str.c_str());
 }
 
-bool do_set_ware_policy(Warehouse* wh, const DescriptionIndex idx, const Warehouse::StockPolicy p) {
+inline bool
+do_set_ware_policy(Warehouse* wh, const DescriptionIndex idx, const Warehouse::StockPolicy p) {
 	wh->set_ware_policy(idx, p);
 	return true;
 }
@@ -4318,7 +4468,8 @@ bool do_set_ware_policy(Warehouse* wh, const DescriptionIndex idx, const Warehou
  * Sets the given policy for the given ware in the given warehouse and return true.
  * If the no ware with the given name exists for the tribe of the warehouse, return false.
  */
-bool do_set_ware_policy(Warehouse* wh, const std::string& name, const Warehouse::StockPolicy p) {
+inline bool
+do_set_ware_policy(Warehouse* wh, const std::string& name, const Warehouse::StockPolicy p) {
 	const TribeDescr& tribe = wh->owner().tribe();
 	DescriptionIndex idx = tribe.ware_index(name);
 	if (!tribe.has_ware(idx)) {
@@ -4327,9 +4478,8 @@ bool do_set_ware_policy(Warehouse* wh, const std::string& name, const Warehouse:
 	return do_set_ware_policy(wh, idx, p);
 }
 
-bool do_set_worker_policy(Warehouse* wh,
-                          const DescriptionIndex idx,
-                          const Warehouse::StockPolicy p) {
+inline bool
+do_set_worker_policy(Warehouse* wh, const DescriptionIndex idx, const Warehouse::StockPolicy p) {
 	const TribeDescr& tribe = wh->owner().tribe();
 	// If the worker does not cost anything, ignore it
 	// Otherwise, an unlimited stream of carriers might leave the warehouse
@@ -4347,7 +4497,8 @@ bool do_set_worker_policy(Warehouse* wh,
  * policy.
  * If no worker with the given name exists for the tribe of the warehouse, return false.
  */
-bool do_set_worker_policy(Warehouse* wh, const std::string& name, const Warehouse::StockPolicy p) {
+inline bool
+do_set_worker_policy(Warehouse* wh, const std::string& name, const Warehouse::StockPolicy p) {
 	const TribeDescr& tribe = wh->owner().tribe();
 	DescriptionIndex idx = tribe.worker_index(name);
 	if (!tribe.has_worker(idx)) {
@@ -4417,11 +4568,11 @@ int LuaWarehouse::set_warehouse_policies(lua_State* L) {
 
 // Gets the warehouse policy by ware/worker-name or id
 #define WH_GET_POLICY(type)                                                                        \
-	void do_get_##type##_policy(lua_State* L, Warehouse* wh, const DescriptionIndex idx) {          \
+	inline void do_get_##type##_policy(lua_State* L, Warehouse* wh, const DescriptionIndex idx) {   \
 		wh_policy_to_string(L, wh->get_##type##_policy(idx));                                        \
 	}                                                                                               \
                                                                                                    \
-	bool do_get_##type##_policy(lua_State* L, Warehouse* wh, const std::string& name) {             \
+	inline bool do_get_##type##_policy(lua_State* L, Warehouse* wh, const std::string& name) {      \
 		const TribeDescr& tribe = wh->owner().tribe();                                               \
 		DescriptionIndex idx = tribe.type##_index(name);                                             \
 		if (!tribe.has_##type(idx)) {                                                                \
@@ -6075,6 +6226,7 @@ void luaopen_wlmap(lua_State* L) {
 
 	register_class<LuaField>(L, "map");
 	register_class<LuaPlayerSlot>(L, "map");
+	register_class<LuaEconomy>(L, "map");
 	register_class<LuaMapObject>(L, "map");
 
 	register_class<LuaBob>(L, "map", true);

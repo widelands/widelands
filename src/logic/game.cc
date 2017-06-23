@@ -62,9 +62,7 @@
 #include "network/network.h"
 #include "scripting/logic.h"
 #include "scripting/lua_table.h"
-#include "sound/sound_handler.h"
 #include "ui_basic/progresswindow.h"
-#include "wlapplication.h"
 #include "wui/game_tips.h"
 #include "wui/interactive_player.h"
 

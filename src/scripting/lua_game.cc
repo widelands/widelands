@@ -32,6 +32,7 @@
 #include "logic/objective.h"
 #include "logic/path.h"
 #include "logic/player.h"
+#include "logic/player_end_result.h"
 #include "logic/playersmanager.h"
 #include "scripting/globals.h"
 #include "scripting/lua_interface.h"
@@ -617,6 +618,9 @@ int LuaPlayer::reveal_fields(lua_State* L) {
       :arg fields: The fields to hide
       :type fields: :class:`array` of :class:`wl.map.Fields`
 
+      :arg hide_completely: *Optional*. The fields will be marked as unexplored.
+      :type hide_completely: :class:`boolean`
+
       :returns: :const:`nil`
 */
 int LuaPlayer::hide_fields(lua_State* L) {
@@ -625,11 +629,13 @@ int LuaPlayer::hide_fields(lua_State* L) {
 	Map& m = egbase.map();
 
 	luaL_checktype(L, 2, LUA_TTABLE);
+	const bool mode = !lua_isnone(L, 3) && luaL_checkboolean(L, 3);
 
 	lua_pushnil(L); /* first key */
 	while (lua_next(L, 2) != 0) {
-		p.unsee_node(
-		   (*get_user_class<LuaField>(L, -1))->fcoords(L).field - &m[0], egbase.get_gametime());
+		p.unsee_node((*get_user_class<LuaField>(L, -1))->fcoords(L).field - &m[0],
+		             egbase.get_gametime(),
+		             mode ? Player::UnseeNodeMode::kUnexplore : Player::UnseeNodeMode::kUnsee);
 		lua_pop(L, 1);
 	}
 
@@ -777,17 +783,17 @@ int LuaPlayer::get_buildings(lua_State* L) {
 /* RST
    .. method:: get_suitability(building, field)
 
-      Returns the suitability that this building has for this field. This
-      is mainly useful in initialization where buildings must be placed
+      Returns whether this building type can be placed on this field. This
+      is mainly useful in initializations where buildings must be placed
       automatically.
 
-      :arg building: name of the building to check for
+      :arg building: name of the building description to check for
       :type building: :class:`string`
       :arg field: where the suitability should be checked
       :type field: :class:`wl.map.Field`
 
-      :returns: the suitability
-      :rtype: :class:`integer`
+      :returns: whether the field has a suitable building plot for this building type
+      :rtype: :class:`boolean`
 */
 // UNTESTED
 int LuaPlayer::get_suitability(lua_State* L) {
@@ -799,8 +805,8 @@ int LuaPlayer::get_suitability(lua_State* L) {
 	if (!tribes.building_exists(i))
 		report_error(L, "Unknown building type: <%s>", name);
 
-	lua_pushint32(L, tribes.get_building_descr(i)->suitability(
-	                    game.map(), (*get_user_class<LuaField>(L, 3))->fcoords(L)));
+	lua_pushboolean(L, tribes.get_building_descr(i)->suitability(
+	                      game.map(), (*get_user_class<LuaField>(L, 3))->fcoords(L)));
 	return 1;
 }
 
@@ -1228,8 +1234,6 @@ int LuaMessage::get_status(lua_State* L) {
 	case Message::Status::kArchived:
 		lua_pushstring(L, "archived");
 		break;
-	default:
-		NEVER_HERE();
 	}
 	return 1;
 }
