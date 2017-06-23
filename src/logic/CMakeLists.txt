@@ -6,17 +6,26 @@ wl_library(logic_widelands_geometry
 
 wl_library(logic_game_settings
   SRCS
+    game_settings.cc
     game_settings.h
-    single_player_game_settings_provider.cc
-    single_player_game_settings_provider.h
+    player_end_result.h
   DEPENDS
-    ai
-    base_exceptions
     io_filesystem
     logic
     logic_constants
     scripting_lua_interface
     scripting_lua_table
+)
+
+wl_library(logic_single_player_game_settings
+  SRCS
+    single_player_game_settings_provider.cc
+    single_player_game_settings_provider.h
+  DEPENDS
+    ai
+    base_exceptions
+    logic
+    logic_game_settings
 )
 
 wl_library(logic_game_controller
@@ -30,6 +39,7 @@ wl_library(logic_game_controller
     ai
     logic
     logic_constants
+    logic_game_settings
     profile
     ui_basic
     wui
