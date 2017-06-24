@@ -969,7 +969,7 @@ class TagHandler {
 public:
 	TagHandler(Tag& tag,
 	           FontCache& fc,
-	           NodeStyle& ns,
+	           NodeStyle ns,
 	           ImageCache* image_cache,
 	           RendererStyle& renderer_style,
 	           const UI::FontSets& fontsets)
@@ -1100,7 +1100,7 @@ class FontTagHandler : public TagHandler {
 public:
 	FontTagHandler(Tag& tag,
 	               FontCache& fc,
-	               NodeStyle& ns,
+	               NodeStyle ns,
 	               ImageCache* image_cache,
 	               RendererStyle& init_renderer_style,
 	               const UI::FontSets& fontsets)
@@ -1132,7 +1132,7 @@ class PTagHandler : public TagHandler {
 public:
 	PTagHandler(Tag& tag,
 	            FontCache& fc,
-	            NodeStyle& ns,
+	            NodeStyle ns,
 	            ImageCache* image_cache,
 	            RendererStyle& init_renderer_style,
 	            const UI::FontSets& fontsets)
@@ -1186,7 +1186,7 @@ class ImgTagHandler : public TagHandler {
 public:
 	ImgTagHandler(Tag& tag,
 	              FontCache& fc,
-	              NodeStyle& ns,
+	              NodeStyle ns,
 	              ImageCache* image_cache,
 	              RendererStyle& init_renderer_style,
 	              const UI::FontSets& fontsets)
@@ -1231,7 +1231,7 @@ class VspaceTagHandler : public TagHandler {
 public:
 	VspaceTagHandler(Tag& tag,
 	                 FontCache& fc,
-	                 NodeStyle& ns,
+	                 NodeStyle ns,
 	                 ImageCache* image_cache,
 	                 RendererStyle& init_renderer_style,
 	                 const UI::FontSets& fontsets)
@@ -1256,7 +1256,7 @@ class HspaceTagHandler : public TagHandler {
 public:
 	HspaceTagHandler(Tag& tag,
 	                 FontCache& fc,
-	                 NodeStyle& ns,
+	                 NodeStyle ns,
 	                 ImageCache* image_cache,
 	                 RendererStyle& init_renderer_style,
 	                 const UI::FontSets& fontsets)
@@ -1317,7 +1317,7 @@ class BrTagHandler : public TagHandler {
 public:
 	BrTagHandler(Tag& tag,
 	             FontCache& fc,
-	             NodeStyle& ns,
+	             NodeStyle ns,
 	             ImageCache* image_cache,
 	             RendererStyle& init_renderer_style,
 	             const UI::FontSets& fontsets)
@@ -1333,7 +1333,7 @@ class DivTagHandler : public TagHandler {
 public:
 	DivTagHandler(Tag& tag,
 	              FontCache& fc,
-	              NodeStyle& ns,
+	              NodeStyle ns,
 	              ImageCache* image_cache,
 	              RendererStyle& init_renderer_style,
 	              const UI::FontSets& fontsets,
@@ -1503,7 +1503,7 @@ class RTTagHandler : public DivTagHandler {
 public:
 	RTTagHandler(Tag& tag,
 	             FontCache& fc,
-	             NodeStyle& ns,
+	             NodeStyle ns,
 	             ImageCache* image_cache,
 	             RendererStyle& init_renderer_style,
 	             const UI::FontSets& fontsets,
