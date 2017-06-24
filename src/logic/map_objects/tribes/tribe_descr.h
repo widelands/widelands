@@ -107,6 +107,10 @@ public:
 	DescriptionIndex barracks() const;
 	DescriptionIndex bakery() const;
 	DescriptionIndex logrefiner() const;
+	DescriptionIndex ironore() const;
+	DescriptionIndex rawlog() const;
+	DescriptionIndex refinedlog() const;
+	DescriptionIndex stones() const;
 
 	const std::vector<DescriptionIndex>& trainingsites() const;
 	const std::vector<DescriptionIndex>& worker_types_without_cost() const;
@@ -161,7 +165,9 @@ private:
 	DescriptionIndex add_special_worker(const std::string& workername);
 	// Helper function for adding a special building type (port etc.)
 	DescriptionIndex add_special_building(const std::string& buildingname);
-
+	// Helper function to identify special wares across tribes (iron ore etc.)
+	DescriptionIndex add_special_ware(const std::string& warename);
+	
 	const std::string name_;
 	const std::string descname_;
 	const Tribes& tribes_;
@@ -191,6 +197,10 @@ private:
 	DescriptionIndex barracks_;      // The barracks to create soldiers
 	DescriptionIndex bakery_;        // The bakery to prepare bread
 	DescriptionIndex logrefiner_;    // The log processor to cut wood to plants
+	DescriptionIndex ironore_;       // Iron ore
+	DescriptionIndex rawlog_;       // Iron ore
+	DescriptionIndex refinedlog_;       // Iron ore
+	DescriptionIndex stones_;       // Iron ore
 	std::vector<DescriptionIndex> worker_types_without_cost_;
 	std::vector<DescriptionIndex> trainingsites_;
 	// Order and positioning of wares in the warehouse display

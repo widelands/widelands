@@ -246,6 +246,11 @@ TribeDescr::TribeDescr(const LuaTable& table, const TribeBasicInfo& info, const 
 		barracks_ = add_special_building(table.get_string("barracks"));
 		bakery_ = add_special_building(table.get_string("bakery"));
 		logrefiner_ = add_special_building(table.get_string("logrefiner"));
+		
+		ironore_ = add_special_ware(table.get_string("ironore"));
+		rawlog_ = add_special_ware(table.get_string("rawlog"));
+		refinedlog_ = add_special_ware(table.get_string("refinedlog"));
+		stones_ = add_special_ware(table.get_string("stones"));
 
 	} catch (const GameDataError& e) {
 		throw GameDataError("tribe %s: %s", name_.c_str(), e.what());
@@ -381,6 +386,22 @@ DescriptionIndex TribeDescr::bakery() const {
 DescriptionIndex TribeDescr::logrefiner() const {
 	assert(tribes_.building_exists(logrefiner_));
 	return logrefiner_;
+}
+DescriptionIndex TribeDescr::ironore() const {
+	assert(tribes_.ware_exists(ironore_));
+	return ironore_;
+}
+DescriptionIndex TribeDescr::rawlog() const {
+	assert(tribes_.ware_exists(rawlog_));
+	return rawlog_;
+}
+DescriptionIndex TribeDescr::refinedlog() const {
+	assert(tribes_.ware_exists(refinedlog_));
+	return refinedlog_;
+}
+DescriptionIndex TribeDescr::stones() const {
+	assert(tribes_.ware_exists(stones_));
+	return stones_;
 }
 
 const std::vector<DescriptionIndex>& TribeDescr::trainingsites() const {
@@ -521,6 +542,18 @@ DescriptionIndex TribeDescr::add_special_building(const std::string& buildingnam
 	} catch (const WException& e) {
 		throw GameDataError(
 		   "Failed adding special building '%s': %s", buildingname.c_str(), e.what());
+	}
+}
+DescriptionIndex TribeDescr::add_special_ware(const std::string& warename) {
+	try {
+		DescriptionIndex ware = tribes_.safe_ware_index(warename);
+		if (!has_ware(ware)) {
+			throw GameDataError("This tribe doesn't have the ware '%s'", warename.c_str());
+		}
+		return ware;
+	} catch (const WException& e) {
+		throw GameDataError(
+		   "Failed adding special ware '%s': %s", warename.c_str(), e.what());
 	}
 }
 }

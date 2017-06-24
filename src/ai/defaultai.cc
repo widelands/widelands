@@ -686,6 +686,8 @@ void DefaultAI::late_initialization() {
 				bo.positions.push_back(temp_position.first);
 			}
 
+			iron_ore_id = tribe_->ironore();
+
 			if (bo.type == BuildingObserver::Type::kMine) {
 				// get the resource needed by the mine
 				if (bh.get_mines()) {
@@ -699,8 +701,7 @@ void DefaultAI::late_initialization() {
 					mines_per_type[bo.mines] = MineTypesObserver();
 				}
 				// NOCOM(#codereview): Do not hard code like this do it the same way that you did for the hunters and fishers, or add an AI hint to the lua files.
-				if (!strcmp(bh.get_mines(), "iron")) {
-					iron_ore_id = bo.mines;
+				if (bo.outputs[0] == iron_ore_id) {
 					bo.set_is(BuildingAttribute::kIronMine);
 					mines_per_type[bo.mines].is_critical = true;
 				}
@@ -768,13 +769,16 @@ void DefaultAI::late_initialization() {
 			// now we identify producers of critical build materials
 			for (DescriptionIndex ware : bo.outputs) {
 				// NOCOM use tribe_->is_construction_material(ware) and ignore the granite and logs? This would add thatch reed to the list, but we can probably live with that.
-				// iterating over wares subsitutes
-				if (tribe_->ware_index("wood") == ware || tribe_->ware_index("blackwood") == ware ||
-				    tribe_->ware_index("marble") == ware || tribe_->ware_index("planks") == ware ||
-				    tribe_->ware_index("diamond") == ware || tribe_->ware_index("quartz") == ware ||
-				    tribe_->ware_index("marble_column") == ware ||
-				    tribe_->ware_index("cloth") == ware || tribe_->ware_index("spidercloth") == ware ||
-				    tribe_->ware_index("gold") == ware || tribe_->ware_index("grout") == ware) {
+
+				// building material except for trivial material
+				if (!(ware == tribe_->rawlog() || ware == tribe_->stones())) {
+				
+				//if (tribe_->ware_index("wood") == ware || tribe_->ware_index("blackwood") == ware ||
+				    //tribe_->ware_index("marble") == ware || tribe_->ware_index("planks") == ware ||
+				    //tribe_->ware_index("diamond") == ware || tribe_->ware_index("quartz") == ware ||
+				    //tribe_->ware_index("marble_column") == ware ||
+				    //tribe_->ware_index("cloth") == ware || tribe_->ware_index("spidercloth") == ware ||
+				    //tribe_->ware_index("gold") == ware || tribe_->ware_index("grout") == ware) {
 					bo.set_is(BuildingAttribute::kBuildingMatProducer);
 					if (bo.type == BuildingObserver::Type::kMine) {
 						has_critical_mines = true;
@@ -786,16 +790,17 @@ void DefaultAI::late_initialization() {
 			for (const auto& temp_buildcosts : prod.buildcost()) {
 				// NOCOM use tribe_->is_construction_material(temp_buildcosts.first) and ignore the granite and logs.
 				// Since we have the same thing a few lines above, pull out a helper function.
-				// below are critical wares
-				if (tribe_->ware_index("blackwood") == temp_buildcosts.first ||
-				    tribe_->ware_index("planks") == temp_buildcosts.first ||
-				    tribe_->ware_index("marble") == temp_buildcosts.first ||
-				    tribe_->ware_index("marble_column") == temp_buildcosts.first ||
-				    tribe_->ware_index("quartz") == temp_buildcosts.first ||
-				    tribe_->ware_index("diamond") == temp_buildcosts.first ||
-				    tribe_->ware_index("cloth") == temp_buildcosts.first ||
-				    tribe_->ware_index("grout") == temp_buildcosts.first ||
-				    tribe_->ware_index("gold") == temp_buildcosts.first) {
+				// building material except for trivial material
+				if (!(temp_buildcosts.first == tribe_->rawlog() || temp_buildcosts.first == tribe_->stones())) {
+				//if (tribe_->ware_index("blackwood") == temp_buildcosts.first ||
+				    //tribe_->ware_index("planks") == temp_buildcosts.first ||
+				    //tribe_->ware_index("marble") == temp_buildcosts.first ||
+				    //tribe_->ware_index("marble_column") == temp_buildcosts.first ||
+				    //tribe_->ware_index("quartz") == temp_buildcosts.first ||
+				    //tribe_->ware_index("diamond") == temp_buildcosts.first ||
+				    //tribe_->ware_index("cloth") == temp_buildcosts.first ||
+				    //tribe_->ware_index("grout") == temp_buildcosts.first ||
+				    //tribe_->ware_index("gold") == temp_buildcosts.first) {
 					bo.critical_building_material.push_back(temp_buildcosts.first);
 				}
 			}
@@ -812,8 +817,7 @@ void DefaultAI::late_initialization() {
 			for (const auto& temp_buildcosts : milit.buildcost()) {
 				// Below are non-critical wares (well, various types of wood)
 				// NOCOM(codereview): blackwood as well?
-				if (tribe_->ware_index("log") == temp_buildcosts.first ||
-				    tribe_->ware_index("planks") == temp_buildcosts.first)
+				if (temp_buildcosts.first == tribe_->rawlog() || temp_buildcosts.first == tribe_->refinedlog())
 					continue;
 
 				bo.critical_building_material.push_back(temp_buildcosts.first);
@@ -845,12 +849,13 @@ void DefaultAI::late_initialization() {
 				for (const auto& temp_buildcosts : train.buildcost()) {
 					// NOCOM(#codereview): Hard coding can be avoided here. Get the trainingsites from the tribe then get descr().buildcost() for the building
 					// And ignore the logs and granite again - maybe we can refactor this stuff into a function.
-					// critical wares for trainingsites
-					if (tribe_->ware_index("spidercloth") == temp_buildcosts.first ||
-					    tribe_->ware_index("gold") == temp_buildcosts.first ||
-					    tribe_->ware_index("grout") == temp_buildcosts.first ||
-					    tribe_->ware_index("marble_column") == temp_buildcosts.first ||
-					    tribe_->ware_index("cloth") == temp_buildcosts.first) {
+					// building material except for trivial material
+					if (!(temp_buildcosts.first == tribe_->rawlog() || temp_buildcosts.first == tribe_->refinedlog() || temp_buildcosts.first == tribe_->stones())) {
+					//if (tribe_->ware_index("spidercloth") == temp_buildcosts.first ||
+					    //tribe_->ware_index("gold") == temp_buildcosts.first ||
+					    //tribe_->ware_index("grout") == temp_buildcosts.first ||
+					    //tribe_->ware_index("marble_column") == temp_buildcosts.first ||
+					    //tribe_->ware_index("cloth") == temp_buildcosts.first) {
 						bo.critical_building_material.push_back(temp_buildcosts.first);
 					}
 				}
@@ -868,6 +873,8 @@ void DefaultAI::late_initialization() {
 	assert(count_buildings_with_attribute(BuildingAttribute::kBarracks) == 1);
 	assert(count_buildings_with_attribute(BuildingAttribute::kBakery) == 1);
 	assert(count_buildings_with_attribute(BuildingAttribute::kLogRefiner) == 1);
+	assert(count_buildings_with_attribute(BuildingAttribute::kIronMine) >= 1);
+	assert(count_buildings_with_attribute(BuildingAttribute::kIronMine) <= 3);
 
 	// atlanteans they consider water as a resource
 	// (together with mines, rocks and wood)
