@@ -56,7 +56,6 @@ struct MultiPlayerClientGroup : public UI::Box {
 	                       GameSettingsProvider* const settings)
 	   : UI::Box(parent, 0, 0, UI::Box::Horizontal, w, h, kPadding),
 		  slot_dropdown_(this, 0, 0, h, 200, h, _("Role"), UI::DropdownType::kPictorial),
-		  slot_selection_locked_(false),
 		  // Name needs to be initialized after the dropdown, otherwise the layout function will crash.
 		  name(new UI::Textarea(this, 0, 0, w - h - UI::Scrollbar::kSize * 11 / 5, h)),
 	     s(settings),
@@ -69,7 +68,7 @@ struct MultiPlayerClientGroup : public UI::Box {
 		slot_dropdown_.set_disable_style(UI::ButtonDisableStyle::kFlat);
 		slot_dropdown_.selected.connect(boost::bind(&MultiPlayerClientGroup::set_slot, boost::ref(*this)));
 
-		refresh();
+		update();
 		layout();
 
 		subscriber_ =
@@ -77,7 +76,7 @@ struct MultiPlayerClientGroup : public UI::Box {
 			switch (note.action) {
 			case NoteGameSettings::Action::kUser:
 				if (id_ == note.usernum || note.usernum == UserSettings::none()) {
-					refresh();
+					update();
 				}
 				break;
 			case NoteGameSettings::Action::kPlayer:
@@ -97,22 +96,16 @@ struct MultiPlayerClientGroup : public UI::Box {
 		if (id_ != settings.usernum) {
 			return;
 		}
-		slot_selection_locked_ = true;
 		if (slot_dropdown_.has_selection()) {
 			const uint8_t new_slot = slot_dropdown_.get_selected();
 			if (new_slot != settings.users.at(id_).position) {
 				s->set_player_number(slot_dropdown_.get_selected());
 			}
 		}
-		slot_selection_locked_ = false;
 	}
 
 	/// Rebuild the slot dropdown from the server settings. This will keep the host and client UIs in sync.
 	void rebuild_slot_dropdown(const GameSettings& settings) {
-		if (slot_selection_locked_) {
-			return;
-		}
-
 		const UserSettings& user_setting = settings.users.at(id_);
 
 		slot_dropdown_.clear();
@@ -134,7 +127,7 @@ struct MultiPlayerClientGroup : public UI::Box {
 	}
 
 	/// Take care of visibility and current values
-	void refresh() {
+	void update() {
 		const GameSettings& settings = s->settings();
 		const UserSettings& user_setting = settings.users.at(id_);
 
@@ -148,7 +141,6 @@ struct MultiPlayerClientGroup : public UI::Box {
 	}
 
 	UI::Dropdown<uintptr_t> slot_dropdown_;  /// Select the player slot.
-	bool slot_selection_locked_; /// Lock rebuilding the dropdown so that it can close on selection
 	UI::Textarea* name; /// Client nick name
 	GameSettingsProvider* const s;
 	uint8_t const id_; /// User number
@@ -180,6 +172,7 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 		  team_selection_locked_(false) {
 		set_size(w, h);
 
+		// NOCOM fix disable styles for dropdowns. Shared-in not reacting when slot is opened
 		player.set_disable_style(UI::ButtonDisableStyle::kFlat);
 		player.set_enabled(false);
 
@@ -201,12 +194,12 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 		subscriber_ =
 		   Notifications::subscribe<NoteGameSettings>([this](const NoteGameSettings& note) {
 			   if (id_ == note.position) {
-				   refresh();
+				   update();
 			   }
 			});
 
 		// Init dropdowns
-		refresh();
+		update();
 		layout();
 	}
 
@@ -324,18 +317,17 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 		if (!has_tribe_access()) {
 			return;
 		}
-
+		const PlayerSettings& player_settings = s->settings().players[id_];
 		tribe_selection_locked_ = true;
-		tribes_dropdown_.set_disable_style(s->settings().players[id_].state ==
+		tribes_dropdown_.set_disable_style(player_settings.state ==
 		                                         PlayerSettings::State::kShared ?
 		                                      UI::ButtonDisableStyle::kPermpressed :
 		                                      UI::ButtonDisableStyle::kMonochrome);
 		if (tribes_dropdown_.has_selection()) {
-			if (s->settings().players[id_].state == PlayerSettings::State::kShared) {
-				n->set_shared_in(
-				   id_, boost::lexical_cast<unsigned int>(tribes_dropdown_.get_selected()));
+			if (player_settings.state == PlayerSettings::State::kShared) {
+				n->set_player_shared(id_, boost::lexical_cast<unsigned int>(tribes_dropdown_.get_selected()));
 			} else {
-				n->set_tribe(id_, tribes_dropdown_.get_selected());
+				n->set_player_tribe(id_, tribes_dropdown_.get_selected());
 			}
 		}
 		tribe_selection_locked_ = false;
@@ -426,7 +418,7 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 		}
 		init_selection_locked_ = true;
 		if (init_dropdown_.has_selection()) {
-			n->set_init(id_, init_dropdown_.get_selected());
+			n->set_player_init(id_, init_dropdown_.get_selected());
 		}
 		init_selection_locked_ = false;
 	}
@@ -463,7 +455,7 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 	void set_team() {
 		team_selection_locked_ = true;
 		if (team_dropdown_.has_selection()) {
-			n->set_team(id_, team_dropdown_.get_selected());
+			n->set_player_team(id_, team_dropdown_.get_selected());
 		}
 		team_selection_locked_ = false;
 	}
@@ -496,16 +488,14 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 	}
 
 	/// Refresh all user interfaces
-	void refresh() {
+	void update() {
 		const GameSettings& settings = s->settings();
 
 		if (id_ >= settings.players.size()) {
 			set_visible(false);
 			return;
 		}
-
-		n->refresh(id_);
-
+		// NOCOM player slot in client doesn't notice shared-in assignment change
 		set_visible(true);
 
 		const PlayerSettings& player_setting = settings.players[id_];
@@ -531,7 +521,7 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 			last_state_ = player_setting.state;
 			for (PlayerSlot slot = 0; slot < s->settings().players.size(); ++slot) {
 				if (slot != id_) {
-					Notifications::publish(NoteGameSettings(slot, NoteGameSettings::Action::kUser));
+					n->set_player_state(slot, settings.players[slot].state);
 				}
 			}
 		}
@@ -585,7 +575,7 @@ MultiPlayerSetupGroup::MultiPlayerSetupGroup(UI::Panel* const parent,
 		playerbox.add(multi_player_player_groups.at(i));
 	}
 	subscriber_ =
-	   Notifications::subscribe<NoteGameSettings>([this](const NoteGameSettings& /* note */) {
+	   Notifications::subscribe<NoteGameSettings>([this](const NoteGameSettings&) {
 		   // Keep track of who is visible
 		   for (PlayerSlot i = 0; i < multi_player_player_groups.size(); ++i) {
 			   const bool should_be_visible = i < s->settings().players.size();

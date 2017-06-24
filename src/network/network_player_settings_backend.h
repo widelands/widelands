@@ -20,31 +20,22 @@
 #ifndef WL_NETWORK_NETWORK_PLAYER_SETTINGS_BACKEND_H
 #define WL_NETWORK_NETWORK_PLAYER_SETTINGS_BACKEND_H
 
-#include "graphic/playercolor.h"
 #include "logic/game_settings.h"
 #include "logic/widelands.h"
 
 struct NetworkPlayerSettingsBackend {
 
 	NetworkPlayerSettingsBackend(GameSettingsProvider* const settings) : s(settings) {
-		for (PlayerSlot i = 0; i < kMaxPlayers; ++i)
-			shared_in_tribe[i] = std::string();
 	}
 
 	void set_player_state(PlayerSlot id, PlayerSettings::State state);
 	void set_player_ai(PlayerSlot id, const std::string& name, bool random_ai);
-	void set_shared_in(PlayerSlot id, Widelands::PlayerNumber shared_in);
-	void set_tribe(PlayerSlot id, const std::string& tribename);
-	void set_init(PlayerSlot id, uint8_t initialization_index);
-	void set_team(PlayerSlot id, Widelands::TeamNumber team);
-
-	void refresh(PlayerSlot id);
+	void set_player_shared(PlayerSlot id, Widelands::PlayerNumber shared_in);
+	void set_player_tribe(PlayerSlot id, const std::string& tribename);
+	void set_player_init(PlayerSlot id, uint8_t initialization_index);
+	void set_player_team(PlayerSlot id, Widelands::TeamNumber team);
 
 	GameSettingsProvider* const s;
-	std::string shared_in_tribe[kMaxPlayers];
-
-private:
-	Widelands::PlayerNumber find_next_shared_in(PlayerSlot id);
 };
 
 #endif  // end of include guard: WL_NETWORK_NETWORK_PLAYER_SETTINGS_BACKEND_H

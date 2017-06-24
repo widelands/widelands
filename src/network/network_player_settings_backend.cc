@@ -20,12 +20,6 @@
 #include "network/network_player_settings_backend.h"
 
 #include "ai/computer_player.h"
-#include "base/i18n.h"
-#include "base/log.h"
-#include "base/wexception.h"
-#include "logic/game_settings.h"
-#include "logic/map_objects/tribes/tribe_descr.h"
-#include "logic/player.h"
 
 void NetworkPlayerSettingsBackend::set_player_state(PlayerSlot id, PlayerSettings::State state) {
 	if (id >= s->settings().players.size()) {
@@ -75,19 +69,18 @@ void NetworkPlayerSettingsBackend::set_player_ai(PlayerSlot id,
 	}
 }
 
-void NetworkPlayerSettingsBackend::set_tribe(PlayerSlot id, const std::string& tribename) {
+void NetworkPlayerSettingsBackend::set_player_tribe(PlayerSlot id, const std::string& tribename) {
 	const GameSettings& settings = s->settings();
-
-	if (id >= settings.players.size() || tribename.empty())
+	if (id >= settings.players.size() || tribename.empty()) {
 		return;
-
+	}
 	if (settings.players.at(id).state != PlayerSettings::State::kShared) {
 		s->set_player_tribe(id, tribename, tribename == "random");
 	}
 }
 
 /// Set the shared in player for the given id
-void NetworkPlayerSettingsBackend::set_shared_in(PlayerSlot id, Widelands::PlayerNumber shared_in) {
+void NetworkPlayerSettingsBackend::set_player_shared(PlayerSlot id, Widelands::PlayerNumber shared_in) {
 	const GameSettings& settings = s->settings();
 	if (id > settings.players.size() || shared_in > settings.players.size())
 		return;
@@ -96,94 +89,18 @@ void NetworkPlayerSettingsBackend::set_shared_in(PlayerSlot id, Widelands::Playe
 	}
 }
 
-/// Toggle through shared in players. We don't set them here yet to avoid triggering extra
-/// notifications from the server. If '0' is returned, no suitable player was found.
-Widelands::PlayerNumber NetworkPlayerSettingsBackend::find_next_shared_in(PlayerSlot id) {
-	const GameSettings& settings = s->settings();
-
-	if (id >= settings.players.size() ||
-	    settings.players.at(id).state != PlayerSettings::State::kShared)
-		return 0;
-
-	Widelands::PlayerNumber sharedplr = settings.players.at(id).shared_in;
-	for (; sharedplr < settings.players.size(); ++sharedplr) {
-		if (settings.players.at(sharedplr).state != PlayerSettings::State::kClosed &&
-		    settings.players.at(sharedplr).state != PlayerSettings::State::kShared)
-			break;
-	}
-	if (sharedplr < settings.players.size()) {
-		// We have already found the next player
-		return ++sharedplr;
-	}
-	sharedplr = 0;
-	for (; sharedplr < settings.players.at(id).shared_in; ++sharedplr) {
-		if (settings.players.at(sharedplr).state != PlayerSettings::State::kClosed &&
-		    settings.players.at(sharedplr).state != PlayerSettings::State::kShared)
-			break;
-	}
-	if (sharedplr < settings.players.at(id).shared_in) {
-		++sharedplr;
-	}
-	return sharedplr;
-}
-
 /// Sets the initialization for the player slot (Headquarters, Fortified Village etc.)
-void NetworkPlayerSettingsBackend::set_init(PlayerSlot id, uint8_t initialization_index) {
-	const GameSettings& settings = s->settings();
-	if (id >= settings.players.size()) {
+void NetworkPlayerSettingsBackend::set_player_init(PlayerSlot id, uint8_t initialization_index) {
+	if (id >= s->settings().players.size()) {
 		return;
 	}
 	s->set_player_init(id, initialization_index);
 }
 
 /// Sets the team for the player slot
-void NetworkPlayerSettingsBackend::set_team(PlayerSlot id, Widelands::TeamNumber team) {
-	const GameSettings& settings = s->settings();
-	if (id >= settings.players.size())
+void NetworkPlayerSettingsBackend::set_player_team(PlayerSlot id, Widelands::TeamNumber team) {
+	if (id >= s->settings().players.size()) {
 		return;
-	s->set_player_team(id, team);
-}
-
-/// Check if all settings for the player are still valid
-void NetworkPlayerSettingsBackend::refresh(PlayerSlot id) {
-	const GameSettings& settings = s->settings();
-
-	if (id >= settings.players.size())
-		return;
-
-	const PlayerSettings& player = settings.players[id];
-	if (player.state == PlayerSettings::State::kShared) {
-		const Widelands::PlayerNumber old_shared_in = player.shared_in;
-		Widelands::PlayerNumber new_shared_in = player.shared_in;
-		// ensure that the shared_in player is able to use this starting position
-		if (new_shared_in == 0 || new_shared_in > settings.players.size()) {
-			new_shared_in = find_next_shared_in(id);
-			if (new_shared_in == 0) {
-				// No fitting player found
-				set_player_state(id, PlayerSettings::State::kClosed);
-				return;
-			}
-		}
-
-		if (settings.players.at(new_shared_in - 1).state == PlayerSettings::State::kClosed ||
-		    settings.players.at(new_shared_in - 1).state == PlayerSettings::State::kShared) {
-			new_shared_in = find_next_shared_in(id);
-			if (new_shared_in == 0) {
-				// No fitting player found
-				set_player_state(id, PlayerSettings::State::kClosed);
-				return;
-			}
-		}
-
-		if (new_shared_in != old_shared_in &&
-		    settings.players.at(new_shared_in - 1).state != PlayerSettings::State::kClosed &&
-		    settings.players.at(new_shared_in - 1).state != PlayerSettings::State::kShared) {
-			if (shared_in_tribe[id] != settings.players.at(new_shared_in - 1).tribe) {
-				s->set_player_tribe(id, settings.players.at(new_shared_in - 1).tribe,
-				                    settings.players.at(new_shared_in - 1).random_tribe);
-				shared_in_tribe[id] = settings.players.at(id).tribe;
-			}
-			set_shared_in(id, new_shared_in);
-		}
 	}
+	s->set_player_team(id, team);
 }

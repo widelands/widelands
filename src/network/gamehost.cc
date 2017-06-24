@@ -1077,8 +1077,6 @@ void GameHost::set_player_state(uint8_t const number,
 	if (player.state == state)
 		return;
 
-	SendPacket s;
-
 	if (player.state == PlayerSettings::State::kHuman) {
 		//  0 is host and has no client
 		if (d->settings.users.at(0).position == number) {
@@ -1109,7 +1107,8 @@ void GameHost::set_player_state(uint8_t const number,
 	if (player.state == PlayerSettings::State::kComputer)
 		player.name = get_computer_player_name(number);
 
-	// Broadcast change
+	// Broadcast change to player
+	SendPacket s;
 	s.reset();
 	s.unsigned_8(NETCMD_SETTING_PLAYER);
 	s.unsigned_8(number);
