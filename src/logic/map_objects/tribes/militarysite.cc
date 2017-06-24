@@ -236,7 +236,7 @@ MilitarySite::MilitarySite(const MilitarySiteDescr& ms_descr)
      didconquer_(false),
      capacity_(ms_descr.get_max_number_of_soldiers()),
      nexthealtime_(0),
-     soldier_preference_(ms_descr.prefers_heroes_at_start_ ? kPrefersHeroes : kPrefersRookies),
+     soldier_preference_(ms_descr.prefers_heroes_at_start_ ? SoldierPreference::kHeroes : SoldierPreference::kRookies),
      soldier_upgrade_try_(false),
      doing_upgrade_request_(false) {
 	next_swap_soldiers_time_ = 0;
@@ -410,7 +410,7 @@ int MilitarySite::incorporate_soldier(EditorGameBase& egbase, Soldier& s) {
 
 Soldier* MilitarySite::find_least_suited_soldier() {
 	const std::vector<Soldier*> present = present_soldiers();
-	const int32_t multiplier = kPrefersHeroes == soldier_preference_ ? -1 : 1;
+	const int32_t multiplier = SoldierPreference::kHeroes == soldier_preference_ ? -1 : 1;
 	int worst_soldier_level = INT_MIN;
 	Soldier* worst_soldier = nullptr;
 	for (Soldier* sld : present) {
@@ -449,9 +449,9 @@ bool MilitarySite::drop_least_suited_soldier(bool new_soldier_has_arrived, Soldi
 		if (nullptr != newguy && nullptr != kickoutCandidate) {
 			int32_t old_level = kickoutCandidate->get_level(TrainingAttribute::kTotal);
 			int32_t new_level = newguy->get_level(TrainingAttribute::kTotal);
-			if (kPrefersHeroes == soldier_preference_ && old_level >= new_level) {
+			if (SoldierPreference::kHeroes == soldier_preference_ && old_level >= new_level) {
 				return false;
-			} else if (kPrefersRookies == soldier_preference_ && old_level <= new_level) {
+			} else if (SoldierPreference::kRookies == soldier_preference_ && old_level <= new_level) {
 				return false;
 			}
 		}
@@ -836,7 +836,7 @@ void MilitarySite::reinit_after_conqueration(Game& game) {
 
 	// feature request 1247384 in launchpad bugs: Conquered buildings tend to
 	// be in a hostile area; typically players want heroes there.
-	set_soldier_preference(kPrefersHeroes);
+	set_soldier_preference(SoldierPreference::kHeroes);
 }
 
 /// Calculates whether the military presence is still kept and \returns true if.
@@ -938,9 +938,8 @@ bool MilitarySite::update_upgrade_requirements() {
 	int32_t soldier_upgrade_required_min = soldier_upgrade_requirements_.get_min();
 	int32_t soldier_upgrade_required_max = soldier_upgrade_requirements_.get_max();
 
-	if (kPrefersHeroes != soldier_preference_ && kPrefersRookies != soldier_preference_) {
-		log(
-		   "MilitarySite::swapSoldiers: error: Unknown player preference %d.\n", soldier_preference_);
+	if (soldier_preference_ == SoldierPreference::kNotSet) {
+		log("MilitarySite::swapSoldiers: error: SoldierPreference has not been set.\n");
 		soldier_upgrade_try_ = false;
 		return false;
 	}
@@ -956,7 +955,7 @@ bool MilitarySite::update_upgrade_requirements() {
 	// Micro-optimization: I assume that the majority of military sites have only level-zero
 	// soldiers and prefer rookies. Handle them separately.
 	soldier_upgrade_try_ = true;
-	if (kPrefersRookies == soldier_preference_) {
+	if (SoldierPreference::kRookies == soldier_preference_) {
 		if (0 == wg_level) {
 			soldier_upgrade_try_ = false;
 			return false;
@@ -964,8 +963,8 @@ bool MilitarySite::update_upgrade_requirements() {
 	}
 
 	// Now I actually build the new requirements.
-	int32_t reqmin = kPrefersHeroes == soldier_preference_ ? 1 + wg_level : 0;
-	int32_t reqmax = kPrefersHeroes == soldier_preference_ ? SHRT_MAX : wg_level - 1;
+	int32_t reqmin = SoldierPreference::kHeroes == soldier_preference_ ? 1 + wg_level : 0;
+	int32_t reqmax = SoldierPreference::kHeroes == soldier_preference_ ? SHRT_MAX : wg_level - 1;
 
 	bool maxchanged = reqmax != soldier_upgrade_required_max;
 	bool minchanged = reqmin != soldier_upgrade_required_min;
@@ -984,8 +983,8 @@ bool MilitarySite::update_upgrade_requirements() {
 
 // setters
 
-void MilitarySite::set_soldier_preference(MilitarySite::SoldierPreference p) {
-	assert(kPrefersHeroes == p || kPrefersRookies == p);
+void MilitarySite::set_soldier_preference(SoldierPreference p) {
+	assert(SoldierPreference::kHeroes == p || SoldierPreference::kRookies == p);
 	soldier_preference_ = p;
 	next_swap_soldiers_time_ = 0;
 }

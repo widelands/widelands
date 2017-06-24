@@ -42,10 +42,11 @@ class PlayerCommand;
 class GameController {
 public:
 	enum class GameType : uint8_t {
-		SINGLEPLAYER = 1,  // we don't want SINGLEPLAYER just because a value is empty
-		NETCLIENT,
-		NETHOST,
-		REPLAY
+		kUndefined = 0,
+		kSingleplayer,
+		kNetClient,
+		kNetHost,
+		kReplay
 	};
 
 	virtual ~GameController() {

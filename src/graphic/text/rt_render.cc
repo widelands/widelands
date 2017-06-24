@@ -779,6 +779,8 @@ public:
 	DivTagRenderNode(NodeStyle& ns)
 	   : RenderNode(ns),
 	     desired_width_(),
+		  w_(0),
+		  h_(0),
 	     background_color_(0, 0, 0),
 	     is_background_color_set_(false),
 	     background_image_(nullptr) {

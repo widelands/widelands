@@ -143,6 +143,8 @@ SoldierPanel::SoldierPanel(UI::Panel& parent,
 		icon.row = row;
 		icon.col = col;
 		icon.pos = calc_pos(row, col);
+		icon.cache_health = 0;
+		icon.cache_level = 0;
 		icons_.push_back(icon);
 
 		if (++col >= cols_) {
@@ -409,7 +411,7 @@ SoldierList::SoldierList(UI::Panel& parent, InteractiveGameBase& igb, Widelands:
 		}
 
 		soldier_preference_.set_state(0);
-		if (ms->get_soldier_preference() == Widelands::MilitarySite::kPrefersHeroes) {
+		if (ms->get_soldier_preference() == Widelands::SoldierPreference::kHeroes) {
 			soldier_preference_.set_state(1);
 		}
 		if (can_act) {
@@ -435,13 +437,13 @@ void SoldierList::think() {
 	}
 	if (upcast(Widelands::MilitarySite, ms, &building_)) {
 		switch (ms->get_soldier_preference()) {
-		case Widelands::MilitarySite::kPrefersRookies:
+		case Widelands::SoldierPreference::kRookies:
 			soldier_preference_.set_state(0);
 			break;
-		case Widelands::MilitarySite::kPrefersHeroes:
+		case Widelands::SoldierPreference::kHeroes:
 			soldier_preference_.set_state(1);
 			break;
-		case Widelands::MilitarySite::kNoPreference:
+		case Widelands::SoldierPreference::kNotSet:
 			soldier_preference_.set_state(-1);
 			break;
 		}
@@ -478,8 +480,8 @@ void SoldierList::set_soldier_preference(int32_t changed_to) {
 	assert(ms);
 #endif
 	igbase_.game().send_player_militarysite_set_soldier_preference(
-	   building_, changed_to == 0 ? Widelands::MilitarySite::kPrefersRookies :
-	                                Widelands::MilitarySite::kPrefersHeroes);
+	   building_, changed_to == 0 ? Widelands::SoldierPreference::kRookies :
+	                                Widelands::SoldierPreference::kHeroes);
 }
 
 UI::Panel*

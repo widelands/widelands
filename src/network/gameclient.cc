@@ -256,7 +256,7 @@ int32_t GameClient::get_frametime() {
 }
 
 GameController::GameType GameClient::get_game_type() {
-	return GameController::GameType::NETCLIENT;
+	return GameController::GameType::kNetClient;
 }
 
 void GameClient::report_result(uint8_t player_nr,

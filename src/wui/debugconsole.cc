@@ -25,6 +25,7 @@
 
 #include "base/log.h"
 #include "chat/chat.h"
+#include "logic/widelands.h"
 
 namespace DebugConsole {
 
@@ -90,6 +91,7 @@ struct Console : public ChatProvider, public Handler {
 		ChatMessage cm;
 
 		cm.time = time(nullptr);
+		cm.playern = Widelands::neutral();
 		cm.msg = msg;
 		messages.push_back(cm);
 

@@ -78,6 +78,7 @@ public:
 	};
 
 	FieldsToDraw() {
+		reset(0, 0, 0, 0);
 	}
 
 	// Resize this fields to draw for reuse.

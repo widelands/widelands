@@ -612,9 +612,9 @@ bool DefaultAI::check_militarysites(uint32_t gametime) {
 		if (ms->economy().warehouses().size()) {
 			uint32_t const j = ms->soldier_capacity();
 
-			if (MilitarySite::kPrefersRookies != ms->get_soldier_preference()) {
+			if (SoldierPreference::kRookies != ms->get_soldier_preference()) {
 				game().send_player_militarysite_set_soldier_preference(
-				   *ms, MilitarySite::kPrefersRookies);
+				   *ms, SoldierPreference::kRookies);
 			} else if (j > 1) {
 				game().send_player_change_soldier_capacity(*ms, (j > 2) ? -2 : -1);
 			}
@@ -672,9 +672,9 @@ bool DefaultAI::check_militarysites(uint32_t gametime) {
 			changed = true;
 
 			// and also set preference to Heroes
-			if (MilitarySite::kPrefersHeroes != ms->get_soldier_preference()) {
+			if (SoldierPreference::kHeroes != ms->get_soldier_preference()) {
 				game().send_player_militarysite_set_soldier_preference(
-				   *ms, MilitarySite::kPrefersHeroes);
+				   *ms, SoldierPreference::kHeroes);
 				changed = true;
 			}
 
@@ -683,9 +683,9 @@ bool DefaultAI::check_militarysites(uint32_t gametime) {
 		} else {  // otherwise decrease soldiers
 			uint32_t const j = ms->soldier_capacity();
 
-			if (MilitarySite::kPrefersRookies != ms->get_soldier_preference()) {
+			if (SoldierPreference::kRookies != ms->get_soldier_preference()) {
 				game().send_player_militarysite_set_soldier_preference(
-				   *ms, MilitarySite::kPrefersRookies);
+				   *ms, SoldierPreference::kRookies);
 			} else if (j > 1) {
 				game().send_player_change_soldier_capacity(*ms, (j > 2) ? -2 : -1);
 			}

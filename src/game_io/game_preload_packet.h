@@ -36,6 +36,8 @@ namespace Widelands {
  */
 
 struct GamePreloadPacket : public GameDataPacket {
+	GamePreloadPacket();
+
 	void read(FileSystem&, Game&, MapObjectLoader* = nullptr) override;
 	void write(FileSystem&, Game&, MapObjectSaver* = nullptr) override;
 

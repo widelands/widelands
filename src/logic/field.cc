@@ -23,6 +23,9 @@
 
 namespace Widelands {
 
+Field::Field() : bobs(nullptr), immovable(nullptr) , caps(7), roads(6), height(0), brightness(0), owner_info_and_selections(Widelands::neutral()), resources(INVALID_INDEX), initial_res_amount(0), res_amount(0), terrains{INVALID_INDEX, INVALID_INDEX} {
+}
+
 /**
  * Set the field's brightness based upon the slopes.
  * Slopes are calulated as this field's height - neighbour's height.

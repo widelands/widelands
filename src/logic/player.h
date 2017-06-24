@@ -506,7 +506,7 @@ public:
 	void bulldoze(PlayerImmovable&, bool recurse = false);
 	void flagaction(Flag&);
 	void start_stop_building(PlayerImmovable&);
-	void military_site_set_soldier_preference(PlayerImmovable&, uint8_t soldier_preference);
+	void military_site_set_soldier_preference(PlayerImmovable&, SoldierPreference soldier_preference);
 	void start_or_cancel_expedition(Warehouse&);
 	void enhance_building(Building*, DescriptionIndex index_of_new_building);
 	void dismantle_building(Building*);

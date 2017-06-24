@@ -59,7 +59,7 @@ void set_icon(SDL_Window* sdl_window) {
 
 }  // namespace
 
-Graphic::Graphic() : image_cache_(new ImageCache()), animation_manager_(new AnimationManager()) {
+Graphic::Graphic() : window_mode_width_(0), window_mode_height_(0), sdl_window_(nullptr), max_texture_size_(kMinimumSizeForTextures), image_cache_(new ImageCache()), animation_manager_(new AnimationManager()) {
 }
 
 /**

@@ -69,7 +69,6 @@ private:
 	std::vector<DescriptionIndex> terrains3_;  //  shallow, upper, snow
 
 	uint32_t weight_;
-	MapGenAreaType areaType_;
 };
 
 struct MapGenBobCategory {

@@ -32,6 +32,9 @@ struct CritterAction {
 		walkCoords,  //  walk to coords
 	};
 
+	CritterAction() : iparam1(0), iparam2(0), sparam1("") {
+	}
+
 	CritterExecuteActionFn function;
 	int32_t iparam1;
 	int32_t iparam2;

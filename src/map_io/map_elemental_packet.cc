@@ -33,6 +33,9 @@ namespace Widelands {
 constexpr int32_t kEightPlayersPacketVersion = 1;
 constexpr int32_t kSixteenPlayersPacketVersion = 2;
 
+MapElementalPacket::MapElementalPacket() : old_world_name_(""), version_(0) {
+}
+
 void MapElementalPacket::pre_read(FileSystem& fs, Map* map) {
 	Profile prof;
 	prof.read("elemental", nullptr, fs);

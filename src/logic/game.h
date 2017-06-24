@@ -45,6 +45,7 @@ struct Path;
 struct PlayerImmovable;
 enum class IslandExploreDirection;
 enum class ScoutingDirection;
+enum class SoldierPreference : uint8_t;
 struct Ship;
 struct PlayerEndStatus;
 class TrainingSite;
@@ -185,7 +186,7 @@ public:
 	void send_player_build_road(int32_t, Path&);
 	void send_player_flagaction(Flag&);
 	void send_player_start_stop_building(Building&);
-	void send_player_militarysite_set_soldier_preference(Building&, uint8_t preference);
+	void send_player_militarysite_set_soldier_preference(Building&, SoldierPreference preference);
 	void send_player_start_or_cancel_expedition(Building&);
 
 	void send_player_enhance_building(Building&, DescriptionIndex);

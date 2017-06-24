@@ -59,7 +59,7 @@ struct MultilineEditbox::Data {
 	WordWrap ww;
 	/*@}*/
 
-	Data(MultilineEditbox&, const Image* button_background);
+	Data(MultilineEditbox&, const Image* init_background, const Image* button_background);
 	void refresh_ww();
 
 	void update();
@@ -89,8 +89,7 @@ MultilineEditbox::MultilineEditbox(Panel* parent,
                                    const std::string& text,
                                    const Image* background,
                                    const Image* button_background)
-   : Panel(parent, x, y, w, h), d_(new Data(*this, button_background)) {
-	d_->background = background;
+   : Panel(parent, x, y, w, h), d_(new Data(*this, background, button_background)) {
 	d_->lineheight = text_height();
 	set_handle_mouse(true);
 	set_can_focus(true);
@@ -100,8 +99,9 @@ MultilineEditbox::MultilineEditbox(Panel* parent,
 	set_text(text);
 }
 
-MultilineEditbox::Data::Data(MultilineEditbox& o, const Image* button_background)
+MultilineEditbox::Data::Data(MultilineEditbox& o, const Image* init_background, const Image* button_background)
    : scrollbar(&o, o.get_w() - Scrollbar::kSize, 0, Scrollbar::kSize, o.get_h(), button_background),
+	  background(init_background),
      cursor_pos(0),
      maxbytes(std::min(g_gr->max_texture_size() / UI_FONT_SIZE_SMALL, 0xffff)),
      ww_valid(false),

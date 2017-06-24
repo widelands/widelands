@@ -26,7 +26,7 @@
 #include "graphic/graphic.h"
 #include "logic/field.h"
 
-FieldOverlayManager::FieldOverlayManager() : current_overlay_id_(0) {
+FieldOverlayManager::FieldOverlayManager() : buildhelp_(false), current_overlay_id_(0) {
 	OverlayInfo* buildhelp_info = buildhelp_infos_;
 	const char* filenames[] = {"images/wui/overlays/set_flag.png", "images/wui/overlays/small.png",
 	                           "images/wui/overlays/medium.png",   "images/wui/overlays/big.png",

@@ -506,7 +506,7 @@ void MapBuildingdataPacket::read_militarysite(MilitarySite& militarysite,
 			militarysite.soldier_upgrade_requirements_ =
 			   RequireAttribute(TrainingAttribute::kTotal, reqmin, reqmax);
 			militarysite.soldier_preference_ =
-			   static_cast<MilitarySite::SoldierPreference>(fr.unsigned_8());
+			   static_cast<SoldierPreference>(fr.unsigned_8());
 			militarysite.next_swap_soldiers_time_ = fr.signed_32();
 			militarysite.soldier_upgrade_try_ = 0 != fr.unsigned_8() ? true : false;
 			militarysite.doing_upgrade_request_ = 0 != fr.unsigned_8() ? true : false;
@@ -1083,7 +1083,7 @@ void MapBuildingdataPacket::write_militarysite(const MilitarySite& militarysite,
 	}
 	fw.unsigned_16(militarysite.soldier_upgrade_requirements_.get_min());
 	fw.unsigned_16(militarysite.soldier_upgrade_requirements_.get_max());
-	fw.unsigned_8(militarysite.soldier_preference_);
+	fw.unsigned_8(static_cast<uint8_t>(militarysite.soldier_preference_));
 	fw.signed_32(militarysite.next_swap_soldiers_time_);
 	fw.unsigned_8(militarysite.soldier_upgrade_try_ ? 1 : 0);
 	fw.unsigned_8(militarysite.doing_upgrade_request_ ? 1 : 0);

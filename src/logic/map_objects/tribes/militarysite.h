@@ -34,6 +34,13 @@ namespace Widelands {
 class Soldier;
 class World;
 
+// I assume elsewhere, that enum SoldierPreference fits to uint8_t.
+enum class SoldierPreference : uint8_t {
+	kNotSet,
+	kRookies,
+	kHeroes,
+};
+
 class MilitarySiteDescr : public BuildingDescr {
 public:
 	MilitarySiteDescr(const std::string& init_descname,
@@ -73,13 +80,6 @@ class MilitarySite : public Building, public SoldierControl {
 	MO_DESCR(MilitarySiteDescr)
 
 public:
-	// I assume elsewhere, that enum SoldierPreference fits to uint8_t.
-	enum SoldierPreference : uint8_t {
-		kNoPreference,
-		kPrefersRookies,
-		kPrefersHeroes,
-	};
-
 	MilitarySite(const MilitarySiteDescr&);
 	virtual ~MilitarySite();
 

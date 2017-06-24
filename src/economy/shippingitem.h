@@ -59,6 +59,8 @@ struct ShippingItem {
 	void remove(EditorGameBase&);
 
 	struct Loader {
+		Loader () : serial_(0U) {
+		}
 		void load(FileRead& fr);
 		ShippingItem get(MapObjectLoader& mol);
 

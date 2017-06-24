@@ -84,7 +84,7 @@ MapGenLandResource::MapGenLandResource(const LuaTable& table, MapGenInfo& mapGen
 
 MapGenAreaInfo::MapGenAreaInfo(const LuaTable& table,
                                const World& world,
-                               MapGenAreaType const areaType) {
+                               MapGenAreaType const area_type) {
 	weight_ = get_positive_int(table, "weight");
 
 	const auto read_terrains = [this, &table, &world](
@@ -97,7 +97,7 @@ MapGenAreaInfo::MapGenAreaInfo(const LuaTable& table,
 		}
 	};
 
-	switch (areaType) {
+	switch (area_type) {
 	case atWater:
 		read_terrains("ocean_terrains", &terrains1_);
 		read_terrains("shelf_terrains", &terrains2_);

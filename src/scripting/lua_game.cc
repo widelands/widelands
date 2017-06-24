@@ -422,7 +422,7 @@ int LuaPlayer::send_message(lua_State* L) {
 int LuaPlayer::message_box(lua_State* L) {
 	Game& game = get_game(L);
 	// don't show message boxes in replays, cause they crash the game
-	if (game.game_controller()->get_game_type() == GameController::GameType::REPLAY) {
+	if (game.game_controller()->get_game_type() == GameController::GameType::kReplay) {
 		return 1;
 	}
 

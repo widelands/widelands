@@ -169,6 +169,8 @@ private:
  */
 struct RecvPacket : public StreamRead {
 public:
+	RecvPacket() : index_(0) {
+	}
 	size_t data(void* data, size_t bufsize) override;
 	bool end_of_file() const override;
 

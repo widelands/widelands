@@ -113,7 +113,7 @@ public:
 	};
 
 	struct TerrainArguments {
-		TerrainArguments() {
+		TerrainArguments() : gametime(0), renderbuffer_width(0), renderbuffer_height(0), fields_to_draw(nullptr), scale(1.f) {
 		}
 
 		int gametime;

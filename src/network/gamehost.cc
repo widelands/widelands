@@ -999,7 +999,7 @@ int32_t GameHost::get_frametime() {
 }
 
 GameController::GameType GameHost::get_game_type() {
-	return GameController::GameType::NETHOST;
+	return GameController::GameType::kNetHost;
 }
 
 const GameSettings& GameHost::settings() {

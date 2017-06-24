@@ -60,6 +60,8 @@ struct Field {
 	friend class Bob;
 	friend struct BaseImmovable;
 
+	Field();
+
 	enum BuildhelpIndex {
 		Buildhelp_Flag = 0,
 		Buildhelp_Small = 1,
@@ -236,8 +238,8 @@ private:
 	Bob* bobs;
 	BaseImmovable* immovable;
 
-	uint8_t caps : 7;
-	uint8_t roads : 6;
+	uint8_t caps;
+	uint8_t roads;
 
 	Height height;
 	int8_t brightness;

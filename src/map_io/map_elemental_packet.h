@@ -35,6 +35,8 @@ class Map;
  * like number of players, map size, world name, magic bytes and so on
  */
 struct MapElementalPacket {
+	MapElementalPacket();
+
 	void read(FileSystem&, EditorGameBase&, bool, MapObjectLoader&);
 	void write(FileSystem&, EditorGameBase&, MapObjectSaver&);
 

@@ -24,6 +24,7 @@
 
 #include "economy/flag.h"
 #include "logic/cmd_queue.h"
+#include "logic/map_objects/tribes/militarysite.h"
 #include "logic/map_objects/tribes/ship.h"
 #include "logic/map_objects/tribes/trainingsite.h"
 #include "logic/map_objects/tribes/warehouse.h"
@@ -218,12 +219,12 @@ private:
 };
 
 struct CmdMilitarySiteSetSoldierPreference : public PlayerCommand {
-	CmdMilitarySiteSetSoldierPreference() : PlayerCommand(), serial(0) {
+	CmdMilitarySiteSetSoldierPreference() : PlayerCommand(), serial(0), preference(SoldierPreference::kNotSet) {
 	}  // For savegame loading
 	CmdMilitarySiteSetSoldierPreference(const uint32_t t,
 	                                    const PlayerNumber p,
 	                                    Building& b,
-	                                    uint8_t prefs)
+	                                    SoldierPreference prefs)
 	   : PlayerCommand(t, p), serial(b.serial()), preference(prefs) {
 	}
 
@@ -241,7 +242,7 @@ struct CmdMilitarySiteSetSoldierPreference : public PlayerCommand {
 
 private:
 	Serial serial;
-	uint8_t preference;
+	Widelands::SoldierPreference preference;
 };
 struct CmdStartOrCancelExpedition : public PlayerCommand {
 	CmdStartOrCancelExpedition() : PlayerCommand() {
@@ -343,7 +344,7 @@ private:
 };
 
 struct CmdShipScoutDirection : public PlayerCommand {
-	CmdShipScoutDirection() : PlayerCommand(), serial(0) {
+	CmdShipScoutDirection() : PlayerCommand(), serial(0), dir(WalkingDir::IDLE) {
 	}  // For savegame loading
 	CmdShipScoutDirection(uint32_t const t, PlayerNumber const p, Serial s, WalkingDir direction)
 	   : PlayerCommand(t, p), serial(s), dir(direction) {
@@ -391,7 +392,7 @@ private:
 };
 
 struct CmdShipExploreIsland : public PlayerCommand {
-	CmdShipExploreIsland() : PlayerCommand(), serial(0) {
+	CmdShipExploreIsland() : PlayerCommand(), serial(0), island_explore_direction(IslandExploreDirection::kNotSet) {
 	}  // For savegame loading
 	CmdShipExploreIsland(uint32_t const t,
 	                     PlayerNumber const p,
