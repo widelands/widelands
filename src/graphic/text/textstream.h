@@ -28,7 +28,7 @@ namespace RT {
 
 class TextStream {
 public:
-	TextStream(std::string text) : text_(text), line_(1), col_(0), pos_(0), end_(text.size()) {
+	TextStream(const std::string& text) : text_(text), line_(1), col_(0), pos_(0), end_(text.size()) {
 	}
 
 	size_t line() const {
@@ -45,7 +45,7 @@ public:
 	void expect(std::string, bool = true);
 
 	std::string till_any(std::string);
-	std::string till_any_or_end(std::string);
+	std::string till_any_or_end(const std::string&);
 	std::string parse_string();
 
 	void skip(size_t d) {

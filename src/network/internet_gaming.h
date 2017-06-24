@@ -153,7 +153,7 @@ private:
 	bool str2bool(std::string);
 	std::string bool2str(bool);
 
-	void format_and_add_chat(std::string from, std::string to, bool system, std::string msg);
+	void format_and_add_chat(const std::string& from, const std::string& to, bool system, const std::string& msg);
 
 	/// The connection to the metaserver
 	std::unique_ptr<NetClient> net;
