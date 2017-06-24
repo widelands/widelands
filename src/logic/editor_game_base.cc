@@ -68,8 +68,7 @@ EditorGameBase::EditorGameBase(LuaInterface* lua_interface)
      lua_(lua_interface),
      player_manager_(new PlayersManager(*this)),
      ibase_(nullptr),
-     map_(nullptr),
-     lasttrackserial_(0) {
+     map_(nullptr) {
 	if (!lua_)  // TODO(SirVer): this is sooo ugly, I can't say
 		lua_.reset(new LuaEditorInterface(this));
 }
@@ -403,21 +402,6 @@ Player* EditorGameBase::get_safe_player(PlayerNumber const n) {
 	return get_player(n);
 }
 
-/*
-===============
-Add a registered pointer.
-Returns the serial number that can be used to retrieve or remove the pointer.
-===============
-*/
-uint32_t EditorGameBase::add_trackpointer(void* const ptr) {
-	++lasttrackserial_;
-
-	if (!lasttrackserial_)
-		throw wexception("Dude, you play too long. Track serials exceeded.");
-
-	trackpointers_[lasttrackserial_] = ptr;
-	return lasttrackserial_;
-}
 
 /**
  * Cleanup for load
