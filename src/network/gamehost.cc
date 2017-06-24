@@ -1099,13 +1099,6 @@ void GameHost::set_player_state(uint8_t const number,
 						break;
 					}
 				}
-
-				//  broadcast change
-				s.unsigned_8(NETCMD_SETTING_USER);
-				s.unsigned_32(i);
-				write_setting_user(s, i);
-				broadcast(s);
-
 				break;
 			}
 		}
@@ -1121,6 +1114,12 @@ void GameHost::set_player_state(uint8_t const number,
 	s.unsigned_8(NETCMD_SETTING_PLAYER);
 	s.unsigned_8(number);
 	write_setting_player(s, number);
+	broadcast(s);
+
+	// Let clients know whether their slot has changed
+	s.reset();
+	s.unsigned_8(NETCMD_SETTING_ALLUSERS);
+	write_setting_all_users(s);
 	broadcast(s);
 }
 
