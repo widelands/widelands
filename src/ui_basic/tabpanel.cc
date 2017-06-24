@@ -92,18 +92,20 @@ bool Tab::handle_mousepress(uint8_t, int32_t, int32_t) {
 TabPanel::TabPanel(Panel* const parent,
                    const Image* background,
                    TabPanel::Type border_type)
-   : Panel(parent, 0, 0, kTabPanelButtonHeight + 2 * kTabPanelSeparatorHeight, kTabPanelButtonHeight + 2 * kTabPanelSeparatorHeight),
+   : Panel(parent, 0, 0, 0, 0),
      border_type_(border_type),
      active_(0),
      highlight_(kNotFound),
      pic_background_(background) {
-	update_desired_size();
 }
 
 /**
  * Resize the visible tab based on our actual size.
  */
 void TabPanel::layout() {
+	if (get_w() == 0) {
+		return;
+	}
 	if (active_ < tabs_.size()) {
 		Panel* const panel = tabs_[active_]->panel;
 		uint32_t h = get_h();
@@ -112,7 +114,7 @@ void TabPanel::layout() {
 		h = std::min(h, h - (kTabPanelButtonHeight + kTabPanelSeparatorHeight));
 		// If we have a border, we will also want some margin to the bottom
 		if (border_type_ == TabPanel::Type::kBorder) {
-			h = h - kTabPanelSeparatorHeight;
+			h -= kTabPanelSeparatorHeight;
 		}
 		panel->set_size(get_w(), h);
 	}
@@ -138,8 +140,7 @@ void TabPanel::update_desired_size() {
 		h += panelh;
 	}
 
-	set_size(w, h); // Make sure that we have the correct size
-	set_desired_size(w, h); // Trigger relayout of any boxes
+	set_desired_size(w, h);
 
 	// This is not redundant, because even if all this doesn't change our
 	// desired size, we were typically called because of a child window that
@@ -239,6 +240,10 @@ bool TabPanel::remove_last_tab(const std::string& tabname) {
  * Draw the buttons and the tab
 */
 void TabPanel::draw(RenderTarget& dst) {
+	if (get_w() == 0) {
+		return;
+	}
+
 	// draw the background
 	static_assert(2 < kTabPanelButtonHeight, "assert(2 < kTabPanelButtonSize) failed.");
 	static_assert(4 < kTabPanelButtonHeight, "assert(4 < kTabPanelButtonSize) failed.");
