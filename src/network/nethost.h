@@ -105,7 +105,7 @@ private:
 	 * If it fails, is_listening() will return \c false.
 	 * \param port The port to listen on.
 	 */
-	explicit NetHost(const uint16_t port);
+	explicit NetHost(uint16_t port);
 
 	bool open_acceptor(boost::asio::ip::tcp::acceptor* acceptor,
 	                   const boost::asio::ip::tcp::endpoint& endpoint);
