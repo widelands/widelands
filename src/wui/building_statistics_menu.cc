@@ -423,6 +423,7 @@ void BuildingStatisticsMenu::jump_building(JumpTarget target, bool reverse) {
 					if (upcast(MilitarySite, militarysite,
 					           map[stats_vector[last_building_index_].pos].get_immovable())) {
 						auto* soldier_control = militarysite->soldier_control();
+						assert(soldier_control != nullptr);
 						if (soldier_control->stationed_soldiers().size() <
 						    soldier_control->soldier_capacity()) {
 							found = true;

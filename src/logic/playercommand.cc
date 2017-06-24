@@ -1524,8 +1524,9 @@ void CmdChangeSoldierCapacity::execute(Game& game) {
 			               std::max(static_cast<int32_t>(old_capacity) + val,
 			                        static_cast<int32_t>(soldier_control->min_soldier_capacity()))),
 			            soldier_control->max_soldier_capacity());
-			if (old_capacity != new_capacity)
+			if (old_capacity != new_capacity) {
 				soldier_control->set_soldier_capacity(new_capacity);
+			}
 		}
 	}
 }

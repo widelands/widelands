@@ -43,7 +43,6 @@
 
 namespace Widelands {
 
-// TODO(sirver): This method should probably return a const reference.
 std::vector<Soldier*> MilitarySite::SoldierControl::present_soldiers() const {
 	std::vector<Soldier*> soldiers;
 
@@ -57,7 +56,6 @@ std::vector<Soldier*> MilitarySite::SoldierControl::present_soldiers() const {
 	return soldiers;
 }
 
-// TODO(sirver): This method should probably return a const reference.
 std::vector<Soldier*> MilitarySite::SoldierControl::stationed_soldiers() const {
 	std::vector<Soldier*> soldiers;
 

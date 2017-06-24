@@ -178,6 +178,8 @@ void TrainingSiteDescr::add_training_inputs(const LuaTable& table,
 	}
 }
 
+// TODO(sirver): This SoldierControl looks very similar to te one in
+// MilitarySite. Pull out a class to reuse code.
 std::vector<Soldier*> TrainingSite::SoldierControl::present_soldiers() const {
 	return training_site_->soldiers_;
 }

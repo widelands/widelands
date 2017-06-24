@@ -20,6 +20,7 @@
 #include "logic/map_objects/tribes/warehouse.h"
 
 #include <algorithm>
+#include <limits>
 
 #include <boost/format.hpp>
 
@@ -326,7 +327,7 @@ Quantity Warehouse::SoldierControl::min_soldier_capacity() const {
 }
 
 Quantity Warehouse::SoldierControl::max_soldier_capacity() const {
-	return 4294967295U;
+	return std::numeric_limits<Quantity>::max();
 }
 
 Quantity Warehouse::SoldierControl::soldier_capacity() const {

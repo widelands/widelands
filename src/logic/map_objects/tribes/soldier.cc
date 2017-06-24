@@ -866,6 +866,7 @@ void Soldier::attack_update(Game& game, State& state) {
 			upcast(MilitarySite, newsite, newimm);
 			if (newsite && (&newsite->owner() == &owner())) {
 				const SoldierControl* soldier_control = newsite->soldier_control();
+				assert(soldier_control != nullptr); // 'newsite' is a military site
 				state.objvar1 = nullptr;
 				// We may also have our location destroyed in between
 				if (soldier_control->stationed_soldiers().size() <
