@@ -87,7 +87,7 @@ bool Tab::handle_mousepress(uint8_t, int32_t, int32_t) {
  * =================
  */
 /**
- * Initialize an empty TabPanel
+ * Initialize an empty TabPanel. We use width == 0 as an indicator that the size hasn't been set yet.
 */
 TabPanel::TabPanel(Panel* const parent,
                    const Image* background,
@@ -104,6 +104,7 @@ TabPanel::TabPanel(Panel* const parent,
  */
 void TabPanel::layout() {
 	if (get_w() == 0) {
+		// The size hasn't been set yet
 		return;
 	}
 	if (active_ < tabs_.size()) {
@@ -241,6 +242,7 @@ bool TabPanel::remove_last_tab(const std::string& tabname) {
 */
 void TabPanel::draw(RenderTarget& dst) {
 	if (get_w() == 0) {
+		// The size hasn't been set yet
 		return;
 	}
 
