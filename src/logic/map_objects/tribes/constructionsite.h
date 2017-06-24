@@ -83,7 +83,7 @@ class ConstructionSite : public PartiallyFinishedBuilding {
 	MO_DESCR(ConstructionSiteDescr)
 
 public:
-	ConstructionSite(const ConstructionSiteDescr& descr);
+	explicit ConstructionSite(const ConstructionSiteDescr& descr);
 
 	const ConstructionsiteInformation& get_info() {
 		return info_;

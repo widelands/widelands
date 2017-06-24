@@ -65,8 +65,8 @@ class DismantleSite : public PartiallyFinishedBuilding {
 	MO_DESCR(DismantleSiteDescr)
 
 public:
-	DismantleSite(const DismantleSiteDescr& descr);
-	DismantleSite(const DismantleSiteDescr& descr,
+	explicit DismantleSite(const DismantleSiteDescr& descr);
+	explicit DismantleSite(const DismantleSiteDescr& descr,
 	              EditorGameBase&,
 	              Coords const,
 	              Player&,

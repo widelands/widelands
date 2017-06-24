@@ -25,7 +25,7 @@
 
 struct NetworkPlayerSettingsBackend {
 
-	NetworkPlayerSettingsBackend(GameSettingsProvider* const settings) : s(settings) {
+	explicit NetworkPlayerSettingsBackend(GameSettingsProvider* const settings) : s(settings) {
 		for (uint8_t i = 0; i < kMaxPlayers; ++i)
 			shared_in_tribe[i] = std::string();
 	}

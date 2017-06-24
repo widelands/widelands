@@ -27,7 +27,7 @@
 namespace Widelands {
 
 struct MapAStarBase {
-	MapAStarBase(Map& m) : map(m), pathfields(m.pathfieldmgr_->allocate()) {
+	explicit MapAStarBase(Map& m) : map(m), pathfields(m.pathfieldmgr_->allocate()) {
 	}
 
 	bool empty() const {
@@ -49,7 +49,7 @@ protected:
 };
 
 struct StepEvalAStar {
-	StepEvalAStar(Coords target)
+	explicit StepEvalAStar(Coords target)
 	   : target_(target), estimator_bias_(0), conservative_(true), swim_(false) {
 	}
 

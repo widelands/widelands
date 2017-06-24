@@ -182,11 +182,11 @@ class Profile {
 public:
 	enum { err_ignore = 0, err_log, err_throw };
 
-	Profile(int32_t error_level = err_throw);
-	Profile(char const* filename,
+	explicit Profile(int32_t error_level = err_throw);
+	explicit Profile(char const* filename,
 	        char const* global_section = nullptr,
 	        int32_t error_level = err_throw);
-	Profile(char const* filename,
+	explicit Profile(char const* filename,
 	        char const* global_section,
 	        const std::string& textdomain,
 	        int32_t error_level = err_throw);

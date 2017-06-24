@@ -33,7 +33,7 @@ namespace Widelands {
 /// distinction and not a logical one.
 class EditorCategory {
 public:
-	EditorCategory(const LuaTable& table);
+	explicit EditorCategory(const LuaTable& table);
 
 	/// Internal name.
 	const std::string& name() const;

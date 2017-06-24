@@ -28,7 +28,7 @@ namespace RT {
 
 class Exception : public std::exception {
 public:
-	Exception(std::string msg) : std::exception(), msg_(msg) {
+	explicit Exception(const std::string& msg) : std::exception(), msg_(msg) {
 	}
 	const char* what() const noexcept override {
 		return msg_.c_str();
@@ -41,7 +41,7 @@ private:
 #define DEF_ERR(Name)                                                                              \
 	class Name : public Exception {                                                                 \
 	public:                                                                                         \
-		Name(std::string msg) : Exception(msg) {                                                     \
+		explicit Name(const std::string& msg) : Exception(msg) {                                                     \
 		}                                                                                            \
 	};
 

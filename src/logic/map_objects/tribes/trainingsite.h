@@ -167,7 +167,7 @@ class TrainingSite : public ProductionSite, public SoldierControl {
 	};
 
 public:
-	TrainingSite(const TrainingSiteDescr&);
+	explicit TrainingSite(const TrainingSiteDescr&);
 
 	bool init(EditorGameBase&) override;
 	void cleanup(EditorGameBase&) override;
