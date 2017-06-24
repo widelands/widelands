@@ -332,9 +332,8 @@ int32_t Soldier::get_training_attribute(TrainingAttribute const attr) const {
 		return evade_level_;
 	case TrainingAttribute::kTotal:
 		return health_level_ + attack_level_ + defense_level_ + evade_level_;
-	default:
-		return Worker::get_training_attribute(attr);
 	}
+	return Worker::get_training_attribute(attr);
 }
 
 uint32_t Soldier::get_max_health() const {

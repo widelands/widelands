@@ -4,6 +4,7 @@ wl_test(test_economy
     test_road.cc
     test_routing.cc
   DEPENDS
+    base_macros
     economy
     io_filesystem
     logic
