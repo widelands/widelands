@@ -41,6 +41,7 @@
 #include "logic/widelands.h"
 #include "ui_basic/button.h"
 #include "ui_basic/dropdown.h"
+#include "ui_basic/mouse_constants.h"
 #include "ui_basic/scrollbar.h"
 #include "ui_basic/textarea.h"
 
@@ -156,15 +157,15 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 	                       int32_t const h,
 	                       GameSettingsProvider* const settings,
 	                       NetworkPlayerSettingsBackend* const npsb)
-	   : UI::Box(parent, 0, 0, UI::Box::Horizontal, w, h),
+	   : UI::Box(parent, 0, 0, UI::Box::Horizontal, w, h, kPadding / 2),
 	     s(settings),
 	     n(npsb),
 	     id_(id),
-		  player(this, "player", 0, 0, h, h, nullptr, playercolor_image(id, "images/players/player_position_menu.png"),
+		  player(this, "player", 0, 0, h, h, g_gr->images().get("images/ui_basic/but1.png"), playercolor_image(id, "images/players/player_position_menu.png"),
 					(boost::format(_("Player %u")) % cast_unsigned(id_ + 1)).str(), UI::Button::Style::kFlat),
 	     type_dropdown_(this, 0, 0, 50, 200, h, _("Type"), UI::DropdownType::kPictorial),
 	     tribes_dropdown_(this, 0, 0, 50, 200, h, _("Tribe"), UI::DropdownType::kPictorial),
-		  init_dropdown_(this, 0, 0, w - 4 * h, 200, h, "", UI::DropdownType::kTextualNarrow),
+		  init_dropdown_(this, 0, 0, w - 4 * h - 3 * kPadding, 200, h, "", UI::DropdownType::kTextualNarrow),
 		  team_dropdown_(this, 0, 0, h, 200, h, _("Team"), UI::DropdownType::kPictorial),
 	     last_state_(PlayerSettings::State::kClosed),
 		  tribe_selection_locked_(false),
@@ -172,9 +173,13 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 		  team_selection_locked_(false) {
 		set_size(w, h);
 
-		// NOCOM fix disable styles for dropdowns. Shared-in not reacting when slot is opened
 		player.set_disable_style(UI::ButtonDisableStyle::kFlat);
 		player.set_enabled(false);
+
+		type_dropdown_.set_disable_style(UI::ButtonDisableStyle::kFlat);
+		tribes_dropdown_.set_disable_style(UI::ButtonDisableStyle::kFlat);
+		init_dropdown_.set_disable_style(UI::ButtonDisableStyle::kFlat);
+		team_dropdown_.set_disable_style(UI::ButtonDisableStyle::kFlat);
 
 		type_dropdown_.selected.connect(
 		   boost::bind(&MultiPlayerPlayerGroup::set_type, boost::ref(*this)));
@@ -185,11 +190,13 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 		team_dropdown_.selected.connect(
 		   boost::bind(&MultiPlayerPlayerGroup::set_team, boost::ref(*this)));
 
+		add_space(0);
 		add(&player);
 		add(&type_dropdown_);
 		add(&tribes_dropdown_);
 		add(&init_dropdown_);
 		add(&team_dropdown_);
+		add_space(0);
 
 		subscriber_ =
 		   Notifications::subscribe<NoteGameSettings>([this](const NoteGameSettings& note) {
@@ -346,12 +353,6 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 		}
 		const PlayerSettings& player_setting = settings.players[id_];
 		tribes_dropdown_.clear();
-
-		// We need to see the playercolor if setting shared_in is disabled
-		tribes_dropdown_.set_disable_style(player_setting.state == PlayerSettings::State::kShared ?
-		                                      UI::ButtonDisableStyle::kPermpressed :
-		                                      UI::ButtonDisableStyle::kMonochrome);
-
 		if (player_setting.state == PlayerSettings::State::kShared) {
 			for (size_t i = 0; i < settings.players.size(); ++i) {
 				if (i != id_) {
@@ -496,6 +497,7 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 			return;
 		}
 		// NOCOM player slot in client doesn't notice shared-in assignment change
+		// NOCOM Shared-in not reacting when slot is opened
 		set_visible(true);
 
 		const PlayerSettings& player_setting = settings.players[id_];
@@ -558,7 +560,7 @@ MultiPlayerSetupGroup::MultiPlayerSetupGroup(UI::Panel* const parent,
      s(settings),
      npsb(new NetworkPlayerSettingsBackend(s)),
      clientbox(this, 0, 0, UI::Box::Vertical),
-     playerbox(this, 0, 0, UI::Box::Vertical, w * 9 / 15, h),
+     playerbox(this, 0, 0, UI::Box::Vertical, w * 9 / 15, h, kPadding),
      buth_(buth) {
 	clientbox.set_size(w / 3, h);
 	clientbox.set_scrolling(true);
@@ -568,12 +570,15 @@ MultiPlayerSetupGroup::MultiPlayerSetupGroup(UI::Panel* const parent,
 
 	// Playerbox
 	playerbox.set_size(w * 9 / 15, h);
+	playerbox.add_space(0);
 	multi_player_player_groups.resize(kMaxPlayers);
 	for (PlayerSlot i = 0; i < multi_player_player_groups.size(); ++i) {
 		multi_player_player_groups.at(i) =
 		   new MultiPlayerPlayerGroup(&playerbox, i, 0, 0, playerbox.get_w(), buth_, s, npsb.get());
 		playerbox.add(multi_player_player_groups.at(i));
 	}
+	playerbox.add_space(0);
+
 	subscriber_ =
 	   Notifications::subscribe<NoteGameSettings>([this](const NoteGameSettings&) {
 		   // Keep track of who is visible
@@ -608,6 +613,14 @@ void MultiPlayerSetupGroup::refresh() {
 			   new MultiPlayerClientGroup(&clientbox, clientbox.get_w(), buth_, i, s);
 			clientbox.add(multi_player_client_groups.at(i), UI::Box::Resizing::kFullSize);
 			multi_player_client_groups.at(i)->layout();
+		}
+	}
+}
+
+void MultiPlayerSetupGroup::draw(RenderTarget& dst) {
+	for (MultiPlayerPlayerGroup* player_group : multi_player_player_groups) {
+		if (player_group->is_visible()) {
+			dst.brighten_rect(Recti(playerbox.get_x(), playerbox.get_y() + player_group->get_y() - kPadding / 2, playerbox.get_w() + kPadding, player_group->get_h() + kPadding), -MOUSE_OVER_BRIGHT_FACTOR);
 		}
 	}
 }

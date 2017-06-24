@@ -57,6 +57,8 @@ struct MultiPlayerSetupGroup : public UI::Box {
 	void refresh();
 
 private:
+	void draw(RenderTarget& dst) override;
+
 	GameSettingsProvider* const s;
 	std::unique_ptr<NetworkPlayerSettingsBackend> npsb;
 	std::vector<MultiPlayerClientGroup*> multi_player_client_groups;  // not owned
