@@ -47,6 +47,7 @@ def read_csv_file(filepath):
             result.append(row)
     return result
 
+
 def make_path(base_path, subdir):
     """Creates the correct form of the path and makes sure that it exists."""
     result = os.path.abspath(os.path.join(base_path, subdir))
