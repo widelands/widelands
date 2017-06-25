@@ -43,7 +43,7 @@ public:
 
 	LuaEditorGameBase() {
 	}
-	LuaEditorGameBase(lua_State* L) {
+	explicit LuaEditorGameBase(lua_State* L) {
 		report_error(L, "Cannot instantiate a 'EditorGameBase' directly!");
 	}
 	virtual ~LuaEditorGameBase() {
@@ -83,10 +83,10 @@ public:
 
 	LuaPlayerBase() : player_number_(NONE) {
 	}
-	LuaPlayerBase(lua_State* L) : player_number_(NONE) {
+	explicit LuaPlayerBase(lua_State* L) : player_number_(NONE) {
 		report_error(L, "Cannot instantiate a 'PlayerBase' directly!");
 	}
-	LuaPlayerBase(Widelands::PlayerNumber n) {
+	explicit LuaPlayerBase(Widelands::PlayerNumber n) {
 		player_number_ = n;
 	}
 	virtual ~LuaPlayerBase() {

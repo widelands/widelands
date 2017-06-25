@@ -462,7 +462,7 @@ bool Worker::run_findobject(Game& game, State& state, const Action& action) {
 // fields, trees, rocks and such on triangles and keep the nodes
 // passable. See code structure issue #1096824.
 struct FindNodeSpace {
-	FindNodeSpace(BaseImmovable* const ignoreimm) : ignoreimmovable(ignoreimm) {
+	explicit FindNodeSpace(BaseImmovable* const ignoreimm) : ignoreimmovable(ignoreimm) {
 	}
 
 	bool accept(const Map& map, const FCoords& coords) const {
@@ -2213,7 +2213,7 @@ void Worker::start_task_fugitive(Game& game) {
 }
 
 struct FindFlagWithPlayersWarehouse {
-	FindFlagWithPlayersWarehouse(const Player& owner) : owner_(owner) {
+	explicit FindFlagWithPlayersWarehouse(const Player& owner) : owner_(owner) {
 	}
 	bool accept(const BaseImmovable& imm) const {
 		if (upcast(Flag const, flag, &imm))

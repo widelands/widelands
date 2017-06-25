@@ -80,7 +80,7 @@ public:
 		kPrefersHeroes,
 	};
 
-	MilitarySite(const MilitarySiteDescr&);
+	explicit MilitarySite(const MilitarySiteDescr&);
 	virtual ~MilitarySite();
 
 	bool init(EditorGameBase&) override;

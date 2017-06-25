@@ -36,7 +36,7 @@ struct EditorToolAction;
 /// Class to save important and changeable properties of classes needed for actions
 // Implementations in editor_history.cc
 struct EditorActionArgs {
-	EditorActionArgs(EditorInteractive& base);
+	explicit EditorActionArgs(EditorInteractive& base);
 
 	// TODO(sirver): This class does its own reference counting. This design is
 	// brittle and on a quick overview I have a feeling that it might not be

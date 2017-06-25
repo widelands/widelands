@@ -221,7 +221,7 @@ public:
 public:
 	enum class InfoStringFormat { kCensus, kStatistics, kTooltip };
 
-	Building(const BuildingDescr&);
+	explicit Building(const BuildingDescr&);
 
 	void load_finish(EditorGameBase&) override;
 

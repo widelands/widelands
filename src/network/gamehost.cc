@@ -64,7 +64,7 @@
 #include "wui/interactive_spectator.h"
 
 struct HostGameSettingsProvider : public GameSettingsProvider {
-	HostGameSettingsProvider(GameHost* const init_host) : host_(init_host) {
+	explicit HostGameSettingsProvider(GameHost* const init_host) : host_(init_host) {
 	}
 	~HostGameSettingsProvider() {
 	}
@@ -278,7 +278,7 @@ private:
 };
 
 struct HostChatProvider : public ChatProvider {
-	HostChatProvider(GameHost* const init_host) : h(init_host), kickClient(0) {
+	explicit HostChatProvider(GameHost* const init_host) : h(init_host), kickClient(0) {
 	}
 
 	void send(const std::string& msg) override {
@@ -527,7 +527,7 @@ struct GameHostImpl {
 	Md5Checksum syncreport;
 	bool syncreport_arrived;
 
-	GameHostImpl(GameHost* const h)
+	explicit GameHostImpl(GameHost* const h)
 	   : localdesiredspeed(0),
 	     chat(h),
 	     hp(h),

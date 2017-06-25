@@ -32,7 +32,7 @@
  * Choose a filename and save your brand new created map
 */
 struct MainMenuSaveMap : public MainMenuLoadOrSaveMap {
-	MainMenuSaveMap(EditorInteractive& parent);
+	explicit MainMenuSaveMap(EditorInteractive& parent);
 
 protected:
 	// Sets the current dir and updates labels.

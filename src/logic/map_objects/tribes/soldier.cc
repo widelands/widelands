@@ -649,7 +649,7 @@ void Soldier::init_auto_task(Game& game) {
 }
 
 struct FindNodeOwned {
-	FindNodeOwned(PlayerNumber owner) : owner_(owner) {
+	explicit FindNodeOwned(PlayerNumber owner) : owner_(owner) {
 	}
 	bool accept(const Map&, const FCoords& coords) const {
 		return (coords.field->get_owned_by() == owner_);

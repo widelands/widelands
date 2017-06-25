@@ -46,7 +46,7 @@ class Trackable {
 		Trackable* ptr_;
 
 	public:
-		Tracker(Trackable* const p) : refcount_(0), ptr_(p) {
+		explicit Tracker(Trackable* const p) : refcount_(0), ptr_(p) {
 		}
 
 		void addref() {
@@ -104,7 +104,7 @@ protected:
 		if (tracker_)
 			tracker_->deref();
 	}
-	BaseTrackPtr(Trackable* const t) {
+	explicit BaseTrackPtr(Trackable* const t) {
 		if (t) {
 			tracker_ = t->tracker_;
 			tracker_->addref();
@@ -160,7 +160,7 @@ template <class T> struct TrackPtr : BaseTrackPtr {
 	TrackPtr() {
 	}
 
-	TrackPtr(T* ptr) : BaseTrackPtr(ptr) {
+	explicit TrackPtr(T* ptr) : BaseTrackPtr(ptr) {
 	}
 	TrackPtr(const TrackPtr<T>& o) : BaseTrackPtr(o) {
 	}

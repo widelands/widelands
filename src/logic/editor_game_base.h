@@ -81,7 +81,7 @@ public:
 	friend class FullscreenMenuLaunchGame;
 	friend struct GameClassPacket;
 
-	EditorGameBase(LuaInterface* lua);
+	explicit EditorGameBase(LuaInterface* lua);
 	virtual ~EditorGameBase();
 
 	void set_map(Map*);
