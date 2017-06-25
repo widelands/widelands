@@ -111,7 +111,7 @@ function reveal_concentric(plr, center, max_radius, hide, delay)
    end
 
    local radius = 0
-   while radius < max_radius do
+   while radius <= max_radius do
       plr:reveal_fields(center:region(radius))
       radius = radius + 1
       sleep(delay)

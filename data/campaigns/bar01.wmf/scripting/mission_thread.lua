@@ -15,7 +15,7 @@ cattle_farm_done = false
 -- =====================================================
 
 function introduction_thread()
-   reveal_concentric(plr, sf, 15)
+   reveal_concentric(plr, sf, 13)
    sleep(2000)
 
    message_box_objective(plr, briefing_msg_01)
@@ -59,7 +59,7 @@ function introduction_thread()
    -- Reveal the rocks
    local rocks = wl.Game().map:get_field(27, 48)
    local prior_center = scroll_to_field(rocks)
-   reveal_concentric(plr, rocks, 6)
+   reveal_concentric(plr, rocks, 5)
    message_box_objective(plr, order_msg_3)
    obj = add_campaign_objective(obj_claim_northeastern_rocks)
    message_box_objective(plr, order_msg_4)

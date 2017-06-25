@@ -1,6 +1,6 @@
 include "scripting/messages.lua"
 include "map:scripting/helper_functions.lua"
-include "scripting/animations.lua"
+include "scripting/field_animations.lua"
 
 function mission_thread()
    sleep(1000)
@@ -15,13 +15,11 @@ function mission_thread()
    sleep(200)
 
    -- Show the sea
-   reveal_concentric(p1, sea, 6)
-   --random_reveal(p1, sea:region(6))
+   reveal_concentric(p1, sea, 5)
    sleep(1000)
    campaign_message_box(diary_page_2)
    sleep(500)
-   hide_concentric(p1, sea, 6)
-   --hide_randomly(p1, sea:region(6))
+   hide_concentric(p1, sea, 5)
    ship:remove()
 
    -- Back home
@@ -31,7 +29,6 @@ function mission_thread()
    campaign_message_box(diary_page_3)
    sleep(1000)
    reveal_concentric(p1, wl.Game().map.player_slots[1].starting_field, 13)
-   --reveal_randomly(p1, wl.Game().map.player_slots[1].starting_field:region(13))
    sleep(400)
 
    -- Check for trees and remove them

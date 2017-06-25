@@ -39,7 +39,7 @@ function remember_cattlefarm()
 end
 
 function initial_message_and_small_food_economy()
-   reveal_concentric(p1, sf, 14)
+   reveal_concentric(p1, sf, 13)
    wake_me(2000)
    campaign_message_box(story_msg_1)
 
@@ -105,11 +105,11 @@ function foottracks()
    local prior_center = scroll_to_field(game.map:get_field(65,19))
    -- reveal the tracks one by one from right to left
    sleep(1000)
-   reveal_concentric(p1, game.map:get_field(69, 19), 2, false)
+   reveal_concentric(p1, game.map:get_field(69, 19), 1, false)
    sleep(1000)
-   reveal_concentric(p1, game.map:get_field(67, 19), 2, false)
+   reveal_concentric(p1, game.map:get_field(67, 19), 1, false)
    sleep(1000)
-   reveal_concentric(p1, game.map:get_field(65, 19), 2, false)
+   reveal_concentric(p1, game.map:get_field(65, 19), 1, false)
    sleep(1000)
    campaign_message_box(order_msg_2_build_a_tower)
    local o = add_campaign_objective(obj_build_a_tower)

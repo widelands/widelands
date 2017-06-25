@@ -3,8 +3,10 @@
 -- =======================================================================
 
 include "scripting/messages.lua"
+include "scripting/field_animations.lua"
 
 function building_materials()
+   reveal_concentric(p1, wl.Game().map.player_slots[1].starting_field, 13)
    sleep(1000)
    campaign_message_box(diary_page_5)
 
