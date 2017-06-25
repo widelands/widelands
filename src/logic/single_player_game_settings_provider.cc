@@ -200,7 +200,7 @@ void SinglePlayerGameSettingsProvider::set_player_closeable(uint8_t, bool) {
 	// nothing to do
 }
 
-void SinglePlayerGameSettingsProvider::set_player_shared(uint8_t, uint8_t) {
+void SinglePlayerGameSettingsProvider::set_player_shared(PlayerSlot, Widelands::PlayerNumber) {
 	// nothing to do
 }
 

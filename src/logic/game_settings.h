@@ -24,6 +24,8 @@
 #include <string>
 #include <vector>
 
+#include "base/log.h" // NOCOM
+#include "base/macros.h" // NOCOM
 #include "io/filesystem/layered_filesystem.h"
 #include "logic/map_objects/tribes/tribe_basic_info.h"
 #include "logic/player_end_result.h"
@@ -39,6 +41,11 @@ using PlayerSlot = Widelands::PlayerNumber;
 
 struct PlayerSettings {
 	enum class State { kOpen, kHuman, kComputer, kClosed, kShared };
+
+	/// Returns whether the given state allows sharing a slot at all
+	static bool can_be_shared(PlayerSettings::State state) {
+	   return state != PlayerSettings::State::kClosed && state != PlayerSettings::State::kShared;
+	}
 
 	State state;
 	uint8_t initialization_index;
@@ -87,8 +94,10 @@ struct NoteGameSettings {
 	uint8_t usernum;
 
 	explicit NoteGameSettings(PlayerSlot init_position, Action init_action, uint8_t init_usernum = UserSettings::none()) : position(init_position), action(init_action), usernum(init_usernum) {
+		log("NOCOM Sending %s note for usernum %d, position %d\n", action == Action::kPlayer ? "player" : "user", cast_unsigned(usernum), cast_unsigned(position));
 	}
 };
+
 
 
 /**
@@ -111,6 +120,11 @@ struct GameSettings {
 			}
 		}
 	}
+
+	/// Find a player number that the slot could share in. Does not guarantee that a viable slot was actually found.
+	Widelands::PlayerNumber find_shared(PlayerSlot slot) const;
+	/// Check if the player number returned by find_shared is usable
+	bool is_shared_usable(PlayerSlot slot, Widelands::PlayerNumber shared) const;
 
 	/// Number of player position
 	int16_t playernum;
@@ -185,10 +199,11 @@ struct GameSettingsProvider {
 	virtual void set_player_number(uint8_t number) = 0;
 	virtual void set_player_team(uint8_t number, Widelands::TeamNumber team) = 0;
 	virtual void set_player_closeable(uint8_t number, bool closeable) = 0;
-	virtual void set_player_shared(uint8_t number, uint8_t shared) = 0;
+	virtual void set_player_shared(PlayerSlot number, Widelands::PlayerNumber shared) = 0;
 	virtual void set_win_condition_script(const std::string& wc) = 0;
 	virtual std::string get_win_condition_script() = 0;
 
+	// For retrieveing tips texts
 	struct NoTribe {};
 	const std::string& get_players_tribe() {
 		if (UserSettings::highest_playernum() < settings().playernum)

@@ -349,14 +349,14 @@ void GameClient::set_player_closeable(uint8_t, bool) {
 	//  client is not allowed to do this
 }
 
-void GameClient::set_player_shared(uint8_t number, uint8_t player) {
+void GameClient::set_player_shared(PlayerSlot number, Widelands::PlayerNumber shared) {
 	if ((number != d->settings.playernum))
 		return;
 
 	SendPacket s;
 	s.unsigned_8(NETCMD_SETTING_CHANGESHARED);
 	s.unsigned_8(number);
-	s.unsigned_8(player);
+	s.unsigned_8(shared);
 	d->net->send(s);
 }
 

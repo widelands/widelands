@@ -91,7 +91,7 @@ struct GameClient : public GameController,
 	void set_player_number(uint8_t number) override;
 	void set_player_team(uint8_t number, Widelands::TeamNumber team) override;
 	void set_player_closeable(uint8_t number, bool closeable) override;
-	void set_player_shared(uint8_t number, uint8_t shared) override;
+	void set_player_shared(PlayerSlot number, Widelands::PlayerNumber shared) override;
 	void set_win_condition_script(const std::string&) override;
 	std::string get_win_condition_script() override;
 

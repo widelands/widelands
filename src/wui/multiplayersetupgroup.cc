@@ -77,6 +77,7 @@ struct MultiPlayerClientGroup : public UI::Box {
 		   Notifications::subscribe<NoteGameSettings>([this](const NoteGameSettings& note) {
 			switch (note.action) {
 			case NoteGameSettings::Action::kUser:
+				// NOCOM Update on map change
 				if (id_ == note.usernum || note.usernum == UserSettings::none()) {
 					update();
 				}
@@ -175,6 +176,7 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 		  init_dropdown_(this, 0, 0, w - 4 * h - 3 * kPadding, 200, h, "", UI::DropdownType::kTextualNarrow),
 		  team_dropdown_(this, 0, 0, h, 200, h, _("Team"), UI::DropdownType::kPictorial),
 	     last_state_(PlayerSettings::State::kClosed),
+		  type_selection_locked_(false),
 		  tribe_selection_locked_(false),
 		  init_selection_locked_(false),
 		  team_selection_locked_(false) {
@@ -232,6 +234,7 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 		if (!s->can_change_player_state(id_)) {
 			return;
 		}
+		type_selection_locked_ = true;
 		if (type_dropdown_.has_selection()) {
 			const std::string& selected = type_dropdown_.get_selected();
 			PlayerSettings::State state = PlayerSettings::State::kComputer;
@@ -257,42 +260,47 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 			}
 			n->set_player_state(id_, state);
 		}
+		type_selection_locked_ = false;
 	}
 
 	/// Rebuild the type dropdown from the server settings. This will keep the host and client UIs in
 	/// sync.
-	void rebuild_type_dropdown(const PlayerSettings& player_setting) {
-		if (type_dropdown_.empty()) {
-			type_dropdown_.clear();
-			// AIs
-			for (const auto* impl : ComputerPlayer::get_implementations()) {
-				type_dropdown_.add(_(impl->descname),
-				                   (boost::format(AI_NAME_PREFIX "%s") % impl->name).str(),
-				                   g_gr->images().get(impl->icon_filename), false, _(impl->descname));
-			}
-			/** TRANSLATORS: This is the name of an AI used in the game setup screens */
-			type_dropdown_.add(_("Random AI"), AI_NAME_PREFIX "random",
-			                   g_gr->images().get("images/ai/ai_random.png"), false, _("Random AI"));
+	void rebuild_type_dropdown(const GameSettings& settings) {
+		if (type_selection_locked_) {
+			return;
+		}
+		type_dropdown_.clear();
+		// AIs
+		for (const auto* impl : ComputerPlayer::get_implementations()) {
+			type_dropdown_.add(_(impl->descname),
+									 (boost::format(AI_NAME_PREFIX "%s") % impl->name).str(),
+									 g_gr->images().get(impl->icon_filename), false, _(impl->descname));
+		}
+		/** TRANSLATORS: This is the name of an AI used in the game setup screens */
+		type_dropdown_.add(_("Random AI"), AI_NAME_PREFIX "random",
+								 g_gr->images().get("images/ai/ai_random.png"), false, _("Random AI"));
 
-			// Slot state
+		// Slot state. Only add shared_in if there are viable slots
+		if (settings.is_shared_usable(id_, settings.find_shared(id_))) {
 			type_dropdown_.add(_("Shared in"), "shared_in",
-			                   g_gr->images().get("images/ui_fsmenu/shared_in.png"), false,
-			                   _("Shared in"));
-
-			// Do not close a player in savegames or scenarios
-			if (!s->settings().savegame &&
-			    (!s->settings().scenario || s->settings().players.at(id_).closeable)) {
-				type_dropdown_.add(_("Closed"), "closed",
-				                   g_gr->images().get("images/ui_basic/stop.png"), false, _("Closed"));
-			}
-
-			type_dropdown_.add(_("Open"), "open", g_gr->images().get("images/ui_basic/continue.png"),
-			                   false, _("Open"));
-
-			type_dropdown_.set_enabled(s->can_change_player_state(id_));
+									 g_gr->images().get("images/ui_fsmenu/shared_in.png"), false,
+									 _("Shared in"));
 		}
 
+		// Do not close a player in savegames or scenarios
+		if (!settings.savegame &&
+			 (!settings.scenario || settings.players.at(id_).closeable)) {
+			type_dropdown_.add(_("Closed"), "closed",
+									 g_gr->images().get("images/ui_basic/stop.png"), false, _("Closed"));
+		}
+
+		type_dropdown_.add(_("Open"), "open", g_gr->images().get("images/ui_basic/continue.png"),
+								 false, _("Open"));
+
+		type_dropdown_.set_enabled(s->can_change_player_state(id_));
+
 		// Now select the entry according to server settings
+		const PlayerSettings& player_setting = settings.players[id_];
 		if (player_setting.state == PlayerSettings::State::kHuman) {
 			type_dropdown_.set_image(g_gr->images().get("images/wui/stats/genstats_nrworkers.png"));
 			type_dropdown_.set_tooltip((boost::format(_("%1%: %2%")) % _("Type") % _("Human")).str());
@@ -336,7 +344,7 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 		tribes_dropdown_.set_disable_style(player_settings.state ==
 		                                         PlayerSettings::State::kShared ?
 		                                      UI::ButtonDisableStyle::kPermpressed :
-		                                      UI::ButtonDisableStyle::kMonochrome);
+		                                      UI::ButtonDisableStyle::kFlat);
 		if (tribes_dropdown_.has_selection()) {
 			if (player_settings.state == PlayerSettings::State::kShared) {
 				n->set_player_shared(id_, boost::lexical_cast<unsigned int>(tribes_dropdown_.get_selected()));
@@ -365,8 +373,7 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 				if (i != id_) {
 					// Do not add players that are also shared_in or closed.
 					const PlayerSettings& other_setting = settings.players[i];
-					if (other_setting.state == PlayerSettings::State::kShared ||
-					    other_setting.state == PlayerSettings::State::kClosed) {
+					if (!PlayerSettings::can_be_shared(other_setting.state)) {
 						continue;
 					}
 
@@ -499,7 +506,7 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 		}
 
 		const PlayerSettings& player_setting = settings.players[id_];
-		rebuild_type_dropdown(player_setting);
+		rebuild_type_dropdown(settings);
 		set_visible(true);
 
 		if (player_setting.state == PlayerSettings::State::kClosed ||
@@ -540,6 +547,7 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 	PlayerSettings::State
 	   last_state_;  /// The dropdowns for the other slots need updating if this changes
 	/// Lock rebuilding dropdowns so that they can close on selection
+	bool type_selection_locked_;
 	bool tribe_selection_locked_;
 	bool init_selection_locked_;
 	bool team_selection_locked_;

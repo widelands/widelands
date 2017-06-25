@@ -26,26 +26,13 @@ void NetworkPlayerSettingsBackend::set_player_state(PlayerSlot id, PlayerSetting
 		return;
 	}
 	// Do not close a player in savegames or scenarios
+	// NOCOM move this to the host. Can we get rid of this class completely?
 	if (state == PlayerSettings::State::kClosed &&
 	    ((s->settings().scenario && !s->settings().players.at(id).closeable) ||
 	     s->settings().savegame)) {
 		state = PlayerSettings::State::kOpen;
 	}
-
 	s->set_player_state(id, state);
-	if (state == PlayerSettings::State::kShared) {
-		PlayerSlot shared = 0;
-		for (; shared < s->settings().players.size(); ++shared) {
-			if (s->settings().players.at(shared).state != PlayerSettings::State::kClosed &&
-			    s->settings().players.at(shared).state != PlayerSettings::State::kShared)
-				break;
-		}
-		if (shared < s->settings().players.size()) {
-			s->set_player_shared(id, shared + 1);
-		} else {
-			s->set_player_state(id, PlayerSettings::State::kClosed);
-		}
-	}
 }
 
 void NetworkPlayerSettingsBackend::set_player_ai(PlayerSlot id,
@@ -80,12 +67,12 @@ void NetworkPlayerSettingsBackend::set_player_tribe(PlayerSlot id, const std::st
 }
 
 /// Set the shared in player for the given id
-void NetworkPlayerSettingsBackend::set_player_shared(PlayerSlot id, Widelands::PlayerNumber shared_in) {
+void NetworkPlayerSettingsBackend::set_player_shared(PlayerSlot id, Widelands::PlayerNumber shared) {
 	const GameSettings& settings = s->settings();
-	if (id > settings.players.size() || shared_in > settings.players.size())
+	if (id > settings.players.size() || shared > settings.players.size())
 		return;
 	if (settings.players.at(id).state == PlayerSettings::State::kShared) {
-		s->set_player_shared(id, shared_in);
+		s->set_player_shared(id, shared);
 	}
 }
 

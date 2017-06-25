@@ -30,7 +30,7 @@ struct NetworkPlayerSettingsBackend {
 
 	void set_player_state(PlayerSlot id, PlayerSettings::State state);
 	void set_player_ai(PlayerSlot id, const std::string& name, bool random_ai);
-	void set_player_shared(PlayerSlot id, Widelands::PlayerNumber shared_in);
+	void set_player_shared(PlayerSlot id, Widelands::PlayerNumber shared);
 	void set_player_tribe(PlayerSlot id, const std::string& tribename);
 	void set_player_init(PlayerSlot id, uint8_t initialization_index);
 	void set_player_team(PlayerSlot id, Widelands::TeamNumber team);

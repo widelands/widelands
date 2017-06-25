@@ -473,6 +473,7 @@ void FullscreenMenuLaunchMPG::load_previous_playerdata() {
 	uint8_t i = 1;
 	for (; i <= nr_players_; ++i) {
 		infotext += "\n* ";
+		// NOCOM Client crash on savegame change when number of players goes down.
 		Section& s =
 		   prof.get_safe_section((boost::format("player_%u") % static_cast<unsigned int>(i)).str());
 		player_save_name[i - 1] = s.get_string("name");

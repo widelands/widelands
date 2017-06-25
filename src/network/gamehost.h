@@ -76,7 +76,7 @@ struct GameHost : public GameController, private SyncCallback {
 	void set_player_number(uint8_t number);
 	void set_player_team(uint8_t number, Widelands::TeamNumber team);
 	void set_player_closeable(uint8_t number, bool closeable);
-	void set_player_shared(uint8_t number, uint8_t shared);
+	void set_player_shared(PlayerSlot number, Widelands::PlayerNumber shared);
 	void switch_to_player(uint32_t user, uint8_t number);
 	void set_win_condition_script(const std::string& wc);
 
