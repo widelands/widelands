@@ -67,16 +67,6 @@ void ItemWaresDisplay::set_capacity(uint32_t cap) {
 	}
 }
 
-/**
- * Set the items shown per row of the panel.
- */
-void ItemWaresDisplay::set_items_per_row(uint32_t nr) {
-	if (nr != items_per_row_) {
-		items_per_row_ = nr;
-		recalc_desired_size();
-	}
-}
-
 void ItemWaresDisplay::recalc_desired_size() {
 	uint32_t nrrows = (capacity_ + items_per_row_ - 1) / items_per_row_;
 	uint32_t rowitems = capacity_ >= items_per_row_ ? items_per_row_ : capacity_;

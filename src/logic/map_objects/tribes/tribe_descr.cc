@@ -261,9 +261,6 @@ const std::string& TribeDescr::descname() const {
 	return descname_;
 }
 
-size_t TribeDescr::get_nrbuildings() const {
-	return buildings_.size();
-}
 size_t TribeDescr::get_nrwares() const {
 	return wares_.size();
 }

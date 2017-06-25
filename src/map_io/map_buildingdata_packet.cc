@@ -525,20 +525,20 @@ void MapBuildingdataPacket::read_militarysite(MilitarySite& militarysite,
 		//  Cmd_ChangeSoldierCapacity to the beginning of the game's command
 		//  queue. But that would not work because the command queue is not read
 		//  yet and will be cleared before it is read.
-		if (militarysite.capacity_ < militarysite.min_soldier_capacity()) {
+		if (militarysite.capacity_ < militarysite.soldier_control()->min_soldier_capacity()) {
 			log("WARNING: militarysite %u of player %u at (%i, %i) has capacity "
 			    "set to %u but it must be at least %u. Changing to that value.\n",
 			    militarysite.serial(), militarysite.owner().player_number(),
 			    militarysite.get_position().x, militarysite.get_position().y, militarysite.capacity_,
-			    militarysite.min_soldier_capacity());
-			militarysite.capacity_ = militarysite.min_soldier_capacity();
-		} else if (militarysite.max_soldier_capacity() < militarysite.capacity_) {
+			    militarysite.soldier_control()->min_soldier_capacity());
+			militarysite.capacity_ = militarysite.soldier_control()->min_soldier_capacity();
+		} else if (militarysite.soldier_control()->max_soldier_capacity() < militarysite.capacity_) {
 			log("WARNING: militarysite %u of player %u at (%i, %i) has capacity "
 			    "set to %u but it can be at most %u. Changing to that value.\n",
 			    militarysite.serial(), militarysite.owner().player_number(),
 			    militarysite.get_position().x, militarysite.get_position().y, militarysite.capacity_,
-			    militarysite.max_soldier_capacity());
-			militarysite.capacity_ = militarysite.max_soldier_capacity();
+			    militarysite.soldier_control()->max_soldier_capacity());
+			militarysite.capacity_ = militarysite.soldier_control()->max_soldier_capacity();
 		}
 	} catch (const WException& e) {
 		throw GameDataError("militarysite: %s", e.what());
@@ -800,20 +800,20 @@ void MapBuildingdataPacket::read_trainingsite(TrainingSite& trainingsite,
 		//  Cmd_ChangeSoldierCapacity to the beginning of the game's command
 		//  queue. But that would not work because the command queue is not read
 		//  yet and will be cleared before it is read.
-		if (trainingsite.capacity_ < trainingsite.min_soldier_capacity()) {
+		if (trainingsite.capacity_ < trainingsite.soldier_control()->min_soldier_capacity()) {
 			log("WARNING: trainingsite %u of player %u at (%i, %i) has capacity "
 			    "set to %u but it must be at least %u. Changing to that value.\n",
 			    trainingsite.serial(), trainingsite.owner().player_number(),
 			    trainingsite.get_position().x, trainingsite.get_position().y, trainingsite.capacity_,
-			    trainingsite.min_soldier_capacity());
-			trainingsite.capacity_ = trainingsite.min_soldier_capacity();
-		} else if (trainingsite.max_soldier_capacity() < trainingsite.capacity_) {
+			    trainingsite.soldier_control()->min_soldier_capacity());
+			trainingsite.capacity_ = trainingsite.soldier_control()->min_soldier_capacity();
+		} else if (trainingsite.soldier_control()->max_soldier_capacity() < trainingsite.capacity_) {
 			log("WARNING: trainingsite %u of player %u at (%i, %i) has capacity "
 			    "set to %u but it can be at most %u. Changing to that value.\n",
 			    trainingsite.serial(), trainingsite.owner().player_number(),
 			    trainingsite.get_position().x, trainingsite.get_position().y, trainingsite.capacity_,
-			    trainingsite.max_soldier_capacity());
-			trainingsite.capacity_ = trainingsite.max_soldier_capacity();
+			    trainingsite.soldier_control()->max_soldier_capacity());
+			trainingsite.capacity_ = trainingsite.soldier_control()->max_soldier_capacity();
 		}
 	} catch (const WException& e) {
 		throw GameDataError("trainingsite: %s", e.what());
