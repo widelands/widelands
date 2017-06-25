@@ -161,13 +161,6 @@ public:
 		return ibase_.get();
 	}
 
-	// safe system for storing pointers to non-MapObject C++ objects
-	// unlike objects in the ObjectManager, these pointers need not be
-	// synchronized across the network, and they are not saved in savegames
-	uint32_t add_trackpointer(void*);
-	void* get_trackpointer(uint32_t serial);
-	void remove_trackpointer(uint32_t serial);
-
 	void inform_players_about_ownership(MapIndex, PlayerNumber);
 	void inform_players_about_immovable(MapIndex, MapObjectDescr const*);
 	void inform_players_about_road(FCoords, MapObjectDescr const*);
@@ -266,9 +259,6 @@ private:
 	std::unique_ptr<Tribes> tribes_;
 	std::unique_ptr<InteractiveBase> ibase_;
 	Map* map_;
-
-	uint32_t lasttrackserial_;
-	std::map<uint32_t, void*> trackpointers_;
 
 	DISALLOW_COPY_AND_ASSIGN(EditorGameBase);
 };
