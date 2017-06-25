@@ -201,7 +201,7 @@ diary_page_3 = {
       _([[Finally, the wrath of the gods and the ocean seems to be over.]])
       .. paragraphdivider() ..
       -- TRANSLATORS: Lutius - Diary
-      _([[Again, we stranded on an unknown coast and slept in the shade under some palm trees until the sun was risen high up in the sky. I’ afraid that when we awoke at noon, nobody was really surprised that all we could see was sand… although the amount of rocks near our camp was astonishing.]])
+      _([[Again, we stranded on an unknown coast and slept in the shade under some palm trees until the sun was risen high up in the sky. I’m afraid that when we awoke at noon, nobody was really surprised that all we could see was sand… although the amount of rocks near our camp was astonishing.]])
       .. paragraphdivider() ..
       -- TRANSLATORS: Lutius - Diary
       _([[It really seems as if we have landed on a very small island with little space.]])
