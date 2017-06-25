@@ -43,6 +43,112 @@
 
 namespace Widelands {
 
+std::vector<Soldier*> MilitarySite::SoldierControl::present_soldiers() const {
+	std::vector<Soldier*> soldiers;
+
+	for (Worker* worker : military_site_->get_workers()) {
+		if (upcast(Soldier, soldier, worker)) {
+			if (military_site_->is_present(*soldier)) {
+				soldiers.push_back(soldier);
+			}
+		}
+	}
+	return soldiers;
+}
+
+std::vector<Soldier*> MilitarySite::SoldierControl::stationed_soldiers() const {
+	std::vector<Soldier*> soldiers;
+
+	for (Worker* worker : military_site_->get_workers()) {
+		if (upcast(Soldier, soldier, worker)) {
+			soldiers.push_back(soldier);
+		}
+	}
+	return soldiers;
+}
+
+Quantity MilitarySite::SoldierControl::min_soldier_capacity() const {
+	return 1;
+}
+
+Quantity MilitarySite::SoldierControl::max_soldier_capacity() const {
+	return military_site_->descr().get_max_number_of_soldiers();
+}
+
+Quantity MilitarySite::SoldierControl::soldier_capacity() const {
+	return military_site_->capacity_;
+}
+
+void MilitarySite::SoldierControl::set_soldier_capacity(uint32_t const capacity) {
+	assert(min_soldier_capacity() <= capacity);
+	assert(capacity <= max_soldier_capacity());
+	assert(military_site_->capacity_ != capacity);
+	military_site_->capacity_ = capacity;
+	military_site_->update_soldier_request();
+}
+
+void MilitarySite::SoldierControl::drop_soldier(Soldier& soldier) {
+	Game& game = dynamic_cast<Game&>(military_site_->owner().egbase());
+
+	if (!military_site_->is_present(soldier)) {
+		// This can happen when the "drop soldier" player command is delayed
+		// by network delay or a client has bugs.
+		military_site_->molog("MilitarySite::drop_soldier(%u): not present\n", soldier.serial());
+		return;
+	}
+	if (present_soldiers().size() <= min_soldier_capacity()) {
+		military_site_->molog("cannot drop last soldier(s)\n");
+		return;
+	}
+
+	soldier.reset_tasks(game);
+	soldier.start_task_leavebuilding(game, true);
+
+	military_site_->update_soldier_request();
+}
+
+int MilitarySite::SoldierControl::incorporate_soldier(EditorGameBase& egbase, Soldier& s) {
+	if (s.get_location(egbase) != military_site_) {
+		s.set_location(military_site_);
+	}
+
+	// Soldier upgrade is done once the site is full. In soldier upgrade, we
+	// request one new soldier who is better suited than the existing ones.
+	// Normally, I kick out one existing soldier as soon as a new guy starts walking
+	// towards here. However, since that is done via infrequent polling, a new soldier
+	// can sometimes reach the site before such kick-out happens. In those cases, we
+	// should either drop one of the existing soldiers or reject the new guy, to
+	// avoid overstocking this site.
+
+	if (stationed_soldiers().size() > military_site_->descr().get_max_number_of_soldiers()) {
+		return military_site_->incorporate_upgraded_soldier(egbase, s) ? 0 : -1;
+	}
+
+	if (!military_site_->didconquer_) {
+		military_site_->conquer_area(egbase);
+		// Building is now occupied - idle animation should be played
+		military_site_->start_animation(egbase, military_site_->descr().get_animation("idle"));
+
+		if (upcast(Game, game, &egbase)) {
+			military_site_->send_message(
+			   *game, Message::Type::kEconomySiteOccupied, military_site_->descr().descname(),
+			   military_site_->descr().icon_filename(), military_site_->descr().descname(),
+			   military_site_->descr().occupied_str_, true);
+		}
+	}
+
+	if (upcast(Game, game, &egbase)) {
+		// Bind the worker into this house, hide him on the map
+		s.reset_tasks(*game);
+		s.start_task_buildingwork(*game);
+	}
+
+	// Make sure the request count is reduced or the request is deleted.
+	military_site_->update_soldier_request(true);
+
+	return 0;
+}
+
 bool MilitarySite::AttackTarget::can_be_attacked() const {
 	return military_site_->didconquer_;
 }
@@ -63,7 +169,7 @@ void MilitarySite::AttackTarget::enemy_soldier_approaches(const Soldier& enemy) 
 	// We're dealing with a soldier that we might want to keep busy
 	// Now would be the time to implement some player-definable
 	// policy as to how many soldiers are allowed to leave as defenders
-	std::vector<Soldier*> present = military_site_->present_soldiers();
+	std::vector<Soldier*> present = military_site_->soldier_control_.present_soldiers();
 
 	if (1 < present.size()) {
 		for (Soldier* temp_soldier : present) {
@@ -87,7 +193,7 @@ void MilitarySite::AttackTarget::enemy_soldier_approaches(const Soldier& enemy) 
 AttackTarget::AttackResult MilitarySite::AttackTarget::attack(Soldier* enemy) const {
 	Game& game = dynamic_cast<Game&>(military_site_->owner().egbase());
 
-	std::vector<Soldier*> present = military_site_->present_soldiers();
+	std::vector<Soldier*> present = military_site_->soldier_control_.present_soldiers();
 	Soldier* defender = nullptr;
 
 	if (!present.empty()) {
@@ -102,7 +208,7 @@ AttackTarget::AttackResult MilitarySite::AttackTarget::attack(Soldier* enemy) co
 	} else {
 		// If one of our stationed soldiers is currently walking into the
 		// building, give us another chance.
-		std::vector<Soldier*> stationed = military_site_->stationed_soldiers();
+		std::vector<Soldier*> stationed = military_site_->soldier_control_.stationed_soldiers();
 		for (Soldier* temp_soldier : stationed) {
 			if (temp_soldier->get_position() == military_site_->get_position()) {
 				defender = temp_soldier;
@@ -233,6 +339,7 @@ class MilitarySite
 MilitarySite::MilitarySite(const MilitarySiteDescr& ms_descr)
    : Building(ms_descr),
      attack_target_(this),
+     soldier_control_(this),
      didconquer_(false),
      capacity_(ms_descr.get_max_number_of_soldiers()),
      nexthealtime_(0),
@@ -241,6 +348,7 @@ MilitarySite::MilitarySite(const MilitarySiteDescr& ms_descr)
      doing_upgrade_request_(false) {
 	next_swap_soldiers_time_ = 0;
 	set_attack_target(&attack_target_);
+	set_soldier_control(&soldier_control_);
 }
 
 MilitarySite::~MilitarySite() {
@@ -255,8 +363,8 @@ Display number of soldiers.
 */
 void MilitarySite::update_statistics_string(std::string* s) {
 	s->clear();
-	Quantity present = present_soldiers().size();
-	Quantity stationed = stationed_soldiers().size();
+	Quantity present = soldier_control_.present_soldiers().size();
+	Quantity stationed = soldier_control_.stationed_soldiers().size();
 
 	if (present == stationed) {
 		if (capacity_ > stationed) {
@@ -356,60 +464,12 @@ void MilitarySite::cleanup(EditorGameBase& egbase) {
 }
 
 /*
-===============
-Takes one soldier and adds him to ours
-
-returns 0 on succes, -1 if there was no room for this soldier
-===============
-*/
-int MilitarySite::incorporate_soldier(EditorGameBase& egbase, Soldier& s) {
-
-	if (s.get_location(egbase) != this) {
-		s.set_location(this);
-	}
-
-	// Soldier upgrade is done once the site is full. In soldier upgrade, we
-	// request one new soldier who is better suited than the existing ones.
-	// Normally, I kick out one existing soldier as soon as a new guy starts walking
-	// towards here. However, since that is done via infrequent polling, a new soldier
-	// can sometimes reach the site before such kick-out happens. In those cases, we
-	// should either drop one of the existing soldiers or reject the new guy, to
-	// avoid overstocking this site.
-
-	if (stationed_soldiers().size() > descr().get_max_number_of_soldiers()) {
-		return incorporate_upgraded_soldier(egbase, s) ? 0 : -1;
-	}
-
-	if (!didconquer_) {
-		conquer_area(egbase);
-		// Building is now occupied - idle animation should be played
-		start_animation(egbase, descr().get_animation("idle"));
-
-		if (upcast(Game, game, &egbase)) {
-			send_message(*game, Message::Type::kEconomySiteOccupied, descr().descname(),
-			             descr().icon_filename(), descr().descname(), descr().occupied_str_, true);
-		}
-	}
-
-	if (upcast(Game, game, &egbase)) {
-		// Bind the worker into this house, hide him on the map
-		s.reset_tasks(*game);
-		s.start_task_buildingwork(*game);
-	}
-
-	// Make sure the request count is reduced or the request is deleted.
-	update_soldier_request(true);
-
-	return 0;
-}
-
-/*
  * Returns the least wanted soldier -- If player prefers zero-level guys,
  * the most trained soldier is the "weakest guy".
  */
 
 Soldier* MilitarySite::find_least_suited_soldier() {
-	const std::vector<Soldier*> present = present_soldiers();
+	const std::vector<Soldier*> present = soldier_control_.present_soldiers();
 	const int32_t multiplier = SoldierPreference::kHeroes == soldier_preference_ ? -1 : 1;
 	int worst_soldier_level = INT_MIN;
 	Soldier* worst_soldier = nullptr;
@@ -439,7 +499,7 @@ Soldier* MilitarySite::find_least_suited_soldier() {
  */
 
 bool MilitarySite::drop_least_suited_soldier(bool new_soldier_has_arrived, Soldier* newguy) {
-	const std::vector<Soldier*> present = present_soldiers();
+	const std::vector<Soldier*> present = soldier_control_.present_soldiers();
 
 	// If I have only one soldier, and the  new guy is not here yet, I can't release.
 	if (new_soldier_has_arrived || 1 < present.size()) {
@@ -474,7 +534,8 @@ bool MilitarySite::drop_least_suited_soldier(bool new_soldier_has_arrived, Soldi
  */
 bool MilitarySite::incorporate_upgraded_soldier(EditorGameBase& egbase, Soldier& s) {
 	// Call to drop_least routine has side effects: it tries to drop a soldier. Order is important!
-	if (stationed_soldiers().size() < capacity_ || drop_least_suited_soldier(true, &s)) {
+	if (soldier_control_.stationed_soldiers().size() < capacity_ ||
+	    drop_least_suited_soldier(true, &s)) {
 		Game& game = dynamic_cast<Game&>(egbase);
 		s.set_location(this);
 		s.reset_tasks(game);
@@ -494,7 +555,7 @@ void MilitarySite::request_soldier_callback(
 	MilitarySite& msite = dynamic_cast<MilitarySite&>(target);
 	Soldier& s = dynamic_cast<Soldier&>(*w);
 
-	msite.incorporate_soldier(game, s);
+	msite.soldier_control_.incorporate_soldier(game, s);
 }
 
 /**
@@ -502,8 +563,8 @@ void MilitarySite::request_soldier_callback(
  * as appropriate.
  */
 void MilitarySite::update_normal_soldier_request() {
-	std::vector<Soldier*> present = present_soldiers();
-	Quantity const stationed = stationed_soldiers().size();
+	std::vector<Soldier*> present = soldier_control_.present_soldiers();
+	Quantity const stationed = soldier_control_.stationed_soldiers().size();
 
 	if (stationed < capacity_) {
 		if (!normal_soldier_request_) {
@@ -582,8 +643,8 @@ void MilitarySite::update_upgrade_soldier_request() {
  */
 
 void MilitarySite::update_soldier_request(bool incd) {
-	const uint32_t capacity = soldier_capacity();
-	const uint32_t stationed = stationed_soldiers().size();
+	const uint32_t capacity = soldier_control_.soldier_capacity();
+	const uint32_t stationed = soldier_control_.stationed_soldiers().size();
 
 	if (doing_upgrade_request_) {
 		if (incd && upgrade_soldier_request_)  // update requests always ask for one soldier at time!
@@ -625,7 +686,7 @@ void MilitarySite::update_soldier_request(bool incd) {
 			update_normal_soldier_request();
 
 		if ((capacity == stationed) && (!normal_soldier_request_)) {
-			if (present_soldiers().size() == capacity) {
+			if (soldier_control_.present_soldiers().size() == capacity) {
 				doing_upgrade_request_ = true;
 				update_upgrade_soldier_request();
 			}
@@ -668,7 +729,7 @@ void MilitarySite::act(Game& game, uint32_t const data) {
 
 	if (nexthealtime_ <= timeofgame) {
 		uint32_t total_heal = descr().get_heal_per_second();
-		std::vector<Soldier*> soldiers = present_soldiers();
+		std::vector<Soldier*> soldiers = soldier_control_.present_soldiers();
 		uint32_t max_total_level = 0;
 		float max_health = 0;
 		Soldier* soldier_to_heal = 0;
@@ -720,7 +781,7 @@ void MilitarySite::remove_worker(Worker& w) {
 bool MilitarySite::get_building_work(Game& game, Worker& worker, bool) {
 	if (upcast(Soldier, soldier, &worker)) {
 		// Evict soldiers that have returned home if the capacity is too low
-		if (capacity_ < present_soldiers().size()) {
+		if (capacity_ < soldier_control_.present_soldiers().size()) {
 			worker.reset_tasks(game);
 			worker.start_task_leavebuilding(game, true);
 			return true;
@@ -753,70 +814,6 @@ bool MilitarySite::is_present(Soldier& soldier) const {
 	return soldier.get_location(owner().egbase()) == this &&
 	       soldier.get_state() == soldier.get_state(Worker::taskBuildingwork) &&
 	       soldier.get_position() == get_position();
-}
-
-// TODO(sirver): This method should probably return a const reference.
-std::vector<Soldier*> MilitarySite::present_soldiers() const {
-	std::vector<Soldier*> soldiers;
-
-	for (Worker* worker : get_workers()) {
-		if (upcast(Soldier, soldier, worker)) {
-			if (is_present(*soldier)) {
-				soldiers.push_back(soldier);
-			}
-		}
-	}
-	return soldiers;
-}
-
-// TODO(sirver): This method should probably return a const reference.
-std::vector<Soldier*> MilitarySite::stationed_soldiers() const {
-	std::vector<Soldier*> soldiers;
-
-	for (Worker* worker : get_workers()) {
-		if (upcast(Soldier, soldier, worker)) {
-			soldiers.push_back(soldier);
-		}
-	}
-	return soldiers;
-}
-
-Quantity MilitarySite::min_soldier_capacity() const {
-	return 1;
-}
-Quantity MilitarySite::max_soldier_capacity() const {
-	return descr().get_max_number_of_soldiers();
-}
-Quantity MilitarySite::soldier_capacity() const {
-	return capacity_;
-}
-
-void MilitarySite::set_soldier_capacity(uint32_t const capacity) {
-	assert(min_soldier_capacity() <= capacity);
-	assert(capacity <= max_soldier_capacity());
-	assert(capacity_ != capacity);
-	capacity_ = capacity;
-	update_soldier_request();
-}
-
-void MilitarySite::drop_soldier(Soldier& soldier) {
-	Game& game = dynamic_cast<Game&>(owner().egbase());
-
-	if (!is_present(soldier)) {
-		// This can happen when the "drop soldier" player command is delayed
-		// by network delay or a client has bugs.
-		molog("MilitarySite::drop_soldier(%u): not present\n", soldier.serial());
-		return;
-	}
-	if (present_soldiers().size() <= min_soldier_capacity()) {
-		molog("cannot drop last soldier(s)\n");
-		return;
-	}
-
-	soldier.reset_tasks(game);
-	soldier.start_task_leavebuilding(game, true);
-
-	update_soldier_request();
 }
 
 void MilitarySite::conquer_area(EditorGameBase& egbase) {

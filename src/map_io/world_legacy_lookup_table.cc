@@ -127,7 +127,7 @@ std::string PostOneWorldLegacyLookupTable::lookup_immovable(const std::string& i
 
 class OneWorldLegacyLookupTable : public WorldLegacyLookupTable {
 public:
-	OneWorldLegacyLookupTable(const std::string& old_world_name);
+	explicit OneWorldLegacyLookupTable(const std::string& old_world_name);
 
 	// Implements OneWorldLegacyLookupTable.
 	std::string lookup_resource(const std::string& resource) const override;

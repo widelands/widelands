@@ -102,9 +102,9 @@ private:
 struct Child {
 	Child() : tag(nullptr), text() {
 	}
-	Child(Tag* t) : tag(t) {
+	explicit Child(Tag* t) : tag(t) {
 	}
-	Child(std::string t) : tag(nullptr), text(t) {
+	explicit Child(std::string t) : tag(nullptr), text(t) {
 	}
 	~Child() {
 		if (tag)

@@ -68,7 +68,7 @@ public:
 
 private:
 	struct Node {
-		Node(const Recti& init_r);
+		explicit Node(const Recti& init_r);
 		void split(int w, int h);
 
 		bool used;

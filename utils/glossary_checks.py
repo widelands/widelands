@@ -411,8 +411,8 @@ def check_file(csv_file, glossaries, locale, po_file):
                 # "arena" against "battle arena"
                 if source_contains_term(row[source_index], entry, glossaries[locale][0]):
                     # Skip empty translations
-                    if row[target_index] == "":
-                        continue;
+                    if row[target_index] == '':
+                        continue
                     # Now verify the translation against all translation
                     # variations from the glossary
                     term_found = translation_has_term(entry, row[target_index])

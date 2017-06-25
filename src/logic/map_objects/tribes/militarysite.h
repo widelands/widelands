@@ -75,12 +75,12 @@ private:
 	DISALLOW_COPY_AND_ASSIGN(MilitarySiteDescr);
 };
 
-class MilitarySite : public Building, public SoldierControl {
+class MilitarySite : public Building {
 	friend class MapBuildingdataPacket;
 	MO_DESCR(MilitarySiteDescr)
 
 public:
-	MilitarySite(const MilitarySiteDescr&);
+	explicit MilitarySite(const MilitarySiteDescr&);
 	virtual ~MilitarySite();
 
 	bool init(EditorGameBase&) override;
@@ -90,16 +90,6 @@ public:
 
 	void set_economy(Economy*) override;
 	bool get_building_work(Game&, Worker&, bool success) override;
-
-	// Begin implementation of SoldierControl
-	std::vector<Soldier*> present_soldiers() const override;
-	std::vector<Soldier*> stationed_soldiers() const override;
-	Quantity min_soldier_capacity() const override;
-	Quantity max_soldier_capacity() const override;
-	Quantity soldier_capacity() const override;
-	void set_soldier_capacity(Quantity capacity) override;
-	void drop_soldier(Soldier&) override;
-	int incorporate_soldier(EditorGameBase& game, Soldier& s) override;
 
 	/// Launch the given soldier on an attack towards the given
 	/// target building.
@@ -157,7 +147,26 @@ private:
 		MilitarySite* const military_site_;
 	};
 
+	class SoldierControl : public Widelands::SoldierControl {
+	public:
+		explicit SoldierControl(MilitarySite* military_site) : military_site_(military_site) {
+		}
+
+		std::vector<Soldier*> present_soldiers() const override;
+		std::vector<Soldier*> stationed_soldiers() const override;
+		Quantity min_soldier_capacity() const override;
+		Quantity max_soldier_capacity() const override;
+		Quantity soldier_capacity() const override;
+		void set_soldier_capacity(Quantity capacity) override;
+		void drop_soldier(Soldier&) override;
+		int incorporate_soldier(EditorGameBase& game, Soldier& s) override;
+
+	private:
+		MilitarySite* const military_site_;
+	};
+
 	AttackTarget attack_target_;
+	SoldierControl soldier_control_;
 	Requirements soldier_requirements_;  // This is used to grab a bunch of soldiers: Anything goes
 	RequireAttribute soldier_upgrade_requirements_;     // This is used when exchanging soldiers.
 	std::unique_ptr<Request> normal_soldier_request_;   // filling the site

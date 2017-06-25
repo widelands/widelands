@@ -48,7 +48,6 @@ struct ItemWaresDisplay : UI::Panel {
 	uint32_t items_per_row() const {
 		return items_per_row_;
 	}
-	void set_items_per_row(uint32_t nr);
 
 	void clear();
 	void add(bool worker, Widelands::DescriptionIndex index);

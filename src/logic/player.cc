@@ -19,6 +19,7 @@
 
 #include "logic/player.h"
 
+#include <cassert>
 #include <memory>
 
 #include <boost/bind.hpp>
@@ -805,8 +806,12 @@ void Player::drop_soldier(PlayerImmovable& imm, Soldier& soldier) {
 		return;
 	if (soldier.descr().type() != MapObjectType::SOLDIER)
 		return;
-	if (upcast(SoldierControl, ctrl, &imm))
-		ctrl->drop_soldier(soldier);
+	if (upcast(Building, building, &imm)) {
+		SoldierControl* soldier_control = building->mutable_soldier_control();
+		if (soldier_control != nullptr) {
+			soldier_control->drop_soldier(soldier);
+		}
+	}
 }
 
 /*
@@ -841,9 +846,10 @@ Player::find_attack_soldiers(Flag& flag, std::vector<Soldier*>* soldiers, uint32
 
 	for (BaseImmovable* temp_flag : flags) {
 		upcast(Flag, attackerflag, temp_flag);
-		upcast(MilitarySite, ms, attackerflag->get_building());
-		std::vector<Soldier*> const present = ms->present_soldiers();
-		uint32_t const nr_staying = ms->min_soldier_capacity();
+		const SoldierControl* soldier_control = attackerflag->get_building()->soldier_control();
+		assert(soldier_control != nullptr);
+		std::vector<Soldier*> const present = soldier_control->present_soldiers();
+		uint32_t const nr_staying = soldier_control->min_soldier_capacity();
 		uint32_t const nr_present = present.size();
 		if (nr_staying < nr_present) {
 			uint32_t const nr_taken = std::min(nr_wanted, nr_present - nr_staying);

@@ -44,7 +44,7 @@ struct QuickNavigation {
 		}
 	};
 
-	QuickNavigation(MapView* map_view);
+	explicit QuickNavigation(MapView* map_view);
 
 	// Set the landmark for 'index' to 'view'. 'index' must be < 10.
 	void set_landmark(size_t index, const MapView::View& view);

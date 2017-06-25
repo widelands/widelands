@@ -72,7 +72,7 @@ private:
 };
 
 struct MapGenBobCategory {
-	MapGenBobCategory(const LuaTable& table);
+	explicit MapGenBobCategory(const LuaTable& table);
 
 	size_t num_immovables() const {
 		return immovables_.size();
