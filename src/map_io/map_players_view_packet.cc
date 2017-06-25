@@ -168,7 +168,7 @@ namespace {
 
 // Errors for the Read* functions.
 struct TribeImmovableNonexistent : public FileRead::DataError {
-	TribeImmovableNonexistent(const std::string& Name)
+	explicit TribeImmovableNonexistent(const std::string& Name)
 	   : DataError("immovable type \"%s\" does not seem to be a tribe immovable", Name.c_str()),
 	     name(Name) {
 	}
@@ -176,13 +176,13 @@ struct TribeImmovableNonexistent : public FileRead::DataError {
 	std::string name;
 };
 struct WorldImmovableNonexistent : public FileRead::DataError {
-	WorldImmovableNonexistent(char const* const Name)
+	explicit WorldImmovableNonexistent(char const* const Name)
 	   : DataError("world does not define immovable type \"%s\"", Name), name(Name) {
 	}
 	char const* const name;
 };
 struct BuildingNonexistent : public FileRead::DataError {
-	BuildingNonexistent(char const* const Name)
+	explicit BuildingNonexistent(char const* const Name)
 	   : DataError("tribes do not define building type \"%s\"", Name), name(Name) {
 	}
 	char const* const name;

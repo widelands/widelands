@@ -32,7 +32,7 @@ struct SDL_Surface;
 
 class ImageNotFound : public WException {
 public:
-	ImageNotFound(const std::string& fn) : wexception("Image not found: %s", fn.c_str()) {
+	explicit ImageNotFound(const std::string& fn) : wexception("Image not found: %s", fn.c_str()) {
 	}
 };
 

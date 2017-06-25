@@ -252,7 +252,7 @@ public:
 	virtual const Image* representative_image() const;
 
 protected:
-	MapObject(MapObjectDescr const* descr);
+	explicit MapObject(MapObjectDescr const* descr);
 	virtual ~MapObject() {
 	}
 

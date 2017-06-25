@@ -43,7 +43,7 @@ void release_textdomain();
 /// released when the object goes out of scope. This is exception-safe, unlike
 /// calling grab_textdomain and release_textdomain directly.
 struct Textdomain {
-	Textdomain(const std::string& name) {
+	explicit Textdomain(const std::string& name) {
 		grab_textdomain(name);
 	}
 	~Textdomain() {

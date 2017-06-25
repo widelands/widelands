@@ -41,7 +41,7 @@ private:
 #define DEF_ERR(Name)                                                                              \
 	class Name : public Exception {                                                                 \
 	public:                                                                                         \
-		explicit Name(const std::string& msg) : Exception(msg) {                                                     \
+		explicit Name(const std::string& msg) : Exception(msg) {                                     \
 		}                                                                                            \
 	};
 
