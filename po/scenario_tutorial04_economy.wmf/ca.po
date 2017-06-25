@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-01-21 21:10+0000\n"
-"PO-Revision-Date: 2017-01-28 12:57+0000\n"
+"POT-Creation-Date: 2017-05-26 17:01+0000\n"
+"PO-Revision-Date: 2017-05-27 07:11+0000\n"
 "Last-Translator: Juanjo\n"
 "Language-Team: Catalan (http://www.transifex.com/widelands/widelands/language/ca/)\n"
 "MIME-Version: 1.0\n"
@@ -43,7 +43,7 @@ msgstr "La part principal del Widelands és aixecar una economia i fer-la funcio
 msgid ""
 "This is what I’ll show you in this tutorial: what actions can you take to "
 "define those general conditions?"
-msgstr "En aquest tutorial us mostraré quines accions pots fer per definir aquelles condicions generals."
+msgstr "En aquest tutorial us mostraré quines accions podeu fer per definir condicions generals."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:31
 msgid "A Peaceful Land"
@@ -841,7 +841,7 @@ msgstr "Aquest era l'últim tutorial que us tenia preparat. Us he ensenyat tot e
 msgid "“%s”"
 msgstr "“%s”"
 
-#: ../../data/scripting/format_scenario.lua:96
+#: ../../data/scripting/format_scenario.lua:84
 msgid "New Objective"
 msgid_plural "New Objectives"
 msgstr[0] "Objectiu"

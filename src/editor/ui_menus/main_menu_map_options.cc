@@ -46,9 +46,7 @@ MainMenuMapOptions::MainMenuMapOptions(EditorInteractive& parent, bool modal)
    : UI::Window(&parent, "map_options", 0, 0, 350, parent.get_inner_h() - 80, _("Map Options")),
      padding_(4),
      indent_(10),
-     labelh_(
-        UI::g_fh1->render(as_uifont(UI::g_fh1->fontset()->representative_character()))->height() +
-        4),
+     labelh_(text_height() + 4),
      checkbox_space_(25),
      butw_((get_inner_w() - 3 * padding_) / 2),
      max_w_(get_inner_w() - 2 * padding_),
@@ -230,7 +228,7 @@ void MainMenuMapOptions::add_tag_checkbox(UI::Box* parent,
                                           std::string tag,
                                           std::string displ_name) {
 	UI::Box* box = new UI::Box(parent, 0, 0, UI::Box::Horizontal, max_w_, checkbox_space_, 0);
-	UI::Checkbox* cb = new UI::Checkbox(box, Vector2i(0, 0), displ_name);
+	UI::Checkbox* cb = new UI::Checkbox(box, Vector2i::zero(), displ_name);
 	box->add(cb, UI::Box::Resizing::kFullSize);
 	box->add_space(checkbox_space_);
 	parent->add(box);

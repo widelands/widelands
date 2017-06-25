@@ -35,7 +35,7 @@ set -x
 # Pull translations from Transifex into local trunk and add new translation files
 bzr pull
 tx pull -a
-bzr add po/*/*.po data/i18n/locales/*.json debian/translations/*.json || true
+bzr add po/*/*.po po/*/*.pot data/i18n/locales/*.json debian/translations/*.json || true
 
 # Update authors file
 utils/update_authors.py

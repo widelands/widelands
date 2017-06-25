@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-02-19 19:34+0000\n"
-"PO-Revision-Date: 2017-02-20 08:07+0000\n"
+"POT-Creation-Date: 2017-03-05 10:46+0000\n"
+"PO-Revision-Date: 2017-03-05 13:05+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Gaelic, Scottish (http://www.transifex.com/widelands/widelands/language/gd/)\n"
 "MIME-Version: 1.0\n"
@@ -497,6 +497,12 @@ msgid ""
 "of logs."
 msgstr "Tog taigh planntair-choille is taigh buaineadair-fhiodha an-còmhnaidh ach nach ruith am fiodh ort."
 
+#: ../../data/txts/tips/atlanteans.lua:12
+msgid ""
+"Atlanteans need spidercloth for many buildings. Build the needed "
+"infrastructure early before you run out."
+msgstr "Feumaidh iomadh togalach nan Atlantach sìoda gus a thogail. Tog am bun-structar a bhios a dhìth mus ruith an sìoda ort."
+
 #: ../../data/txts/tips/barbarians.lua:4 ../../data/txts/tips/empire.lua:4
 msgid ""
 "Keep an eye on your fishers. After fish resources are exhausted in their "
@@ -508,6 +514,12 @@ msgid ""
 "Always build a ranger’s and a gamekeeper’s hut, so you will not run out of "
 "logs or game."
 msgstr "Tog bothan maoir-choille is bothan-geamair an-còmhnaidh ach nach ruith am fiodh no sitheann ort."
+
+#: ../../data/txts/tips/barbarians.lua:12 ../../data/txts/tips/empire.lua:12
+msgid ""
+"Most enhanced buildings need experienced workers. Do not enhance a building "
+"unless you have the necessary workers available."
+msgstr "Tha a’ mhòrchuid a thogalaichean leasaichte feumach air luchd-obrach eòlach. Na leasaich togalach mur eil an luchd-obrach a dh’fheumas iad ri fhaighinn."
 
 #: ../../data/txts/tips/editor.lua:4
 msgid ""
@@ -552,9 +564,38 @@ msgid ""
 "shown on or off."
 msgstr "Nì an iuchair Space na nì e ann an geama àbhaisteach. Nochdaidh no falaichidh e na h-ionadan togail."
 
+#: ../../data/txts/tips/editor.lua:32
+msgid ""
+"When placing trees, use the help button to see which trees are more likely "
+"to survive on which terrain."
+msgstr "Nuair a chuireas tu craobhan ann, cleachd putan na cobharach a shealltainn dè na craobhan a mhaireas air seòrsa tìre."
+
+#: ../../data/txts/tips/editor.lua:36
+msgid ""
+"If you do not set water and fish resources, a default amount will be used."
+msgstr "Mura suidhich thu stòras uisge no iasg, thèid uiread bunaiteach a chleachdadh."
+
+#: ../../data/txts/tips/editor.lua:40
+msgid ""
+"You can place a medium building on any node where there is a slope no "
+"greater than 1 in the south-east direction and its height difference to all "
+"nodes in a radius of 2 is no greater than 2."
+msgstr "’S urrainn dhut togalach meadhanach a chur air nòd mur eil an sliabh gu ear-dheas air nas motha na 1 agus mur eil diofar na h-àirde an coimeas gach nòid am broinn rèideis de 2 nas motha na 2."
+
+#: ../../data/txts/tips/editor.lua:44
+msgid ""
+"You can place a large building on any node where you could place a medium "
+"building if there is no obstacle or non-arable terrain towards the west, "
+"northwest and northeast."
+msgstr "’S urrainn ghut togalach mòr a chur air nòd sam bith far am b’ urrainn dhut togalach meadhanach a chur ann agus mur eil cnap-starra no tìr nach eil ’na thalamh-àitich gu iar, iar-thuath no ear-thuath air."
+
 #: ../../data/txts/tips/empire.lua:8
 msgid "Always build a forester’s house so you will not run out of logs."
-msgstr "Tog taigh planntair-coille an-còmhnaidh ach nach ruith am fiodh ort."
+msgstr "Tog taigh planntair-choille an-còmhnaidh ach nach ruith am fiodh ort."
+
+#: ../../data/txts/tips/empire.lua:16
+msgid "Empire needs a lot of marble. Keep looking for marble resources."
+msgstr "Tha an Impireachd feumach air grunn marmoir. Cum a’ sireadh stòrasan marmoir."
 
 #: ../../data/txts/tips/general_game.lua:4
 msgid ""
@@ -610,10 +651,18 @@ msgid ""
 msgstr "Stiùirich na teachdaireachdan agad nas èifeachdaiche: brùth air “N” airson naidheachdan gus uinneag nan teachdaireachdan inntrigeadh is an uairsin cleachd “G” airson dol gu teachdaireachd is an iuchair Delete gus teachdaireachdan a chur dhan tasglann."
 
 #: ../../data/txts/tips/general_game.lua:40
-msgid ""
-"Press Ctrl+(0-9) to store important locations, then press 0-9 to recall "
-"them."
-msgstr "Brùth Ctrl+(0-9) gus ionadan cudromach a stòradh is brùth air 0-9 an uairsin gus dol ann."
+msgctxt "hotkey"
+msgid "1-9"
+msgstr "1-9"
+
+#: ../../data/txts/tips/general_game.lua:40
+msgctxt "hotkey"
+msgid "Ctrl+(1-9)"
+msgstr "Ctrl+(1-9)"
+
+#: ../../data/txts/tips/general_game.lua:40
+msgid "Press %1% to store important locations, then press %2% to recall them."
+msgstr "Brùth air %1% gus ionadan cudromach a stòradh is brùth air %2% an uairsin gus dol ann."
 
 #: ../../data/txts/tips/general_game.lua:44
 msgid ""
@@ -649,6 +698,28 @@ msgid ""
 "building is surrounded with trees or roads, production will stop."
 msgstr "Tha raon-obrach glè bheag aig cuid a thogalaichean, can an tuathanas. Ma thèid an togalach a chuairteachadh le craobhan no rathaidean, cha shaothraich e bathar tuilleadh."
 
+#: ../../data/txts/tips/general_game.lua:68
+msgctxt "hotkey"
+msgid "Ctrl+(+/-)"
+msgstr "Ctrl+(+/-)"
+
+#: ../../data/txts/tips/general_game.lua:68
+msgctxt "hotkey"
+msgid "Ctrl+0"
+msgstr "Ctrl+0"
+
+#: ../../data/txts/tips/general_game.lua:68
+msgid "Zoom in/out with the mouse wheel or %1%. Press %2% to reset the zoom."
+msgstr "Sùm a-steach/a-mach le cuibhle na luchaige no le %1%. Brùth air %2% gus an sùm ath-shuidheachadh."
+
+#: ../../data/txts/tips/general_game.lua:72
+msgid ""
+"When a building is destroyed, its workers will start looking for a nearby "
+"flag from which they can move by road to a connected warehouse. If there are"
+" no such flags in the vicinity, they will keep wandering around and "
+"eventually die."
+msgstr "Nuair a bhios togalach air a mhilleadh, bidh an luchd-obrach a’ sireadh bratach faisg orra aig a bheil rathad a bheir gu taigh-stòrais iad. Mur eil bratach dhen leithid am fagas, thèid iad air seachran gus am faigh iad bàs air deireadh na sgeòil."
+
 #: ../../data/txts/tips/multiplayer.lua:4
 msgid ""
 "You can use the ’Page up’ and ‘Page down’ keys to adjust your desired speed "
@@ -666,6 +737,12 @@ msgid ""
 "Use ‘@name’ at the beginning of a chat message to send it to only one "
 "player."
 msgstr "Cleachd “@name” aig toiseach teachdaireachd na cabadaich gus a cur gu aonar chluicheadair a-mhàin."
+
+#: ../../data/txts/tips/multiplayer.lua:16
+msgid ""
+"If the game should crash, don't worry! The game will be saved automatically "
+"so that you can reload it afterwards."
+msgstr "Na gabh dragh ma thuislicheas an geama! Thèid an geama a shàbhaladh gu fèin-obrachail ach an urrainn dhut a luchdadh a-rithist an uairsin."
 
 #: ../../data/txts/tips/singleplayer.lua:4
 msgid ""

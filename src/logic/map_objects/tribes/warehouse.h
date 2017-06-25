@@ -24,7 +24,6 @@
 #include "base/wexception.h"
 #include "economy/request.h"
 #include "economy/wares_queue.h"
-#include "logic/map_objects/attackable.h"
 #include "logic/map_objects/tribes/building.h"
 #include "logic/map_objects/tribes/soldiercontrol.h"
 #include "logic/map_objects/tribes/wareworker.h"
@@ -71,7 +70,7 @@ private:
 	DISALLOW_COPY_AND_ASSIGN(WarehouseDescr);
 };
 
-class Warehouse : public Building, public Attackable, public SoldierControl {
+class Warehouse : public Building {
 	friend class PortDock;
 	friend class MapBuildingdataPacket;
 
@@ -147,7 +146,7 @@ public:
 	/// * Conquers land if the the warehouse type is configured to do that.
 	/// * Sends a message to the player about the creation of this warehouse.
 	/// * Sets up @ref PortDock for ports
-	void init(EditorGameBase&) override;
+	bool init(EditorGameBase&) override;
 
 	void cleanup(EditorGameBase&) override;
 
@@ -172,29 +171,6 @@ public:
 	void remove_wares(DescriptionIndex, Quantity count);
 	void insert_workers(DescriptionIndex, Quantity count);
 	void remove_workers(DescriptionIndex, Quantity count);
-
-	/* SoldierControl implementation */
-	std::vector<Soldier*> present_soldiers() const override;
-	std::vector<Soldier*> stationed_soldiers() const override {
-		return present_soldiers();
-	}
-	Quantity min_soldier_capacity() const override {
-		return 0;
-	}
-	Quantity max_soldier_capacity() const override {
-		return 4294967295U;
-	}
-	Quantity soldier_capacity() const override {
-		return max_soldier_capacity();
-	}
-	void set_soldier_capacity(Quantity /* capacity */) override {
-		throw wexception("Not implemented for a Warehouse!");
-	}
-	void drop_soldier(Soldier&) override {
-		throw wexception("Not implemented for a Warehouse!");
-	}
-	int outcorporate_soldier(EditorGameBase&, Soldier&) override;
-	int incorporate_soldier(EditorGameBase&, Soldier& soldier) override;
 
 	bool fetch_from_flag(Game&) override;
 
@@ -221,15 +197,6 @@ public:
 	void enable_spawn(Game&, uint8_t worker_types_without_cost_index);
 	void disable_spawn(uint8_t worker_types_without_cost_index);
 
-	// Begin Attackable implementation
-	Player& owner() const override {
-		return Building::owner();
-	}
-	bool can_attack() override;
-	void aggressor(Soldier&) override;
-	bool attack(Soldier&) override;
-	// End Attackable implementation
-
 	void receive_ware(Game&, DescriptionIndex ware) override;
 	void receive_worker(Game&, Worker& worker) override;
 
@@ -250,12 +217,44 @@ public:
 
 	void log_general_info(const EditorGameBase&) override;
 
-protected:
+private:
+	class SoldierControl : public Widelands::SoldierControl {
+	public:
+		explicit SoldierControl(Warehouse* warehouse) : warehouse_(warehouse) {
+		}
+
+		std::vector<Soldier*> present_soldiers() const override;
+		std::vector<Soldier*> stationed_soldiers() const override;
+		Quantity min_soldier_capacity() const override;
+		Quantity max_soldier_capacity() const override;
+		Quantity soldier_capacity() const override;
+		void set_soldier_capacity(Quantity capacity) override;
+		void drop_soldier(Soldier&) override;
+		int incorporate_soldier(EditorGameBase& game, Soldier& s) override;
+		int outcorporate_soldier(Soldier&) override;
+
+	private:
+		Warehouse* const warehouse_;
+	};
+
+	// A warehouse that conquers space can also be attacked.
+	class AttackTarget : public Widelands::AttackTarget {
+	public:
+		AttackTarget(Warehouse* warehouse) : warehouse_(warehouse) {
+		}
+
+		bool can_be_attacked() const override;
+		void enemy_soldier_approaches(const Soldier&) const override;
+		Widelands::AttackTarget::AttackResult attack(Soldier*) const override;
+
+	private:
+		Warehouse* const warehouse_;
+	};
+
+	void init_portdock(EditorGameBase& egbase);
+
 	/// Initializes the container sizes for the owner's tribe.
 	void init_containers(Player& owner);
-
-private:
-	void init_portdock(EditorGameBase& egbase);
 
 	/**
 	 * Plan to produce a certain worker type in this warehouse. This means
@@ -282,6 +281,8 @@ private:
 	void update_planned_workers(Game&, PlannedWorkers& pw);
 	void update_all_planned_workers(Game&);
 
+	AttackTarget attack_target_;
+	SoldierControl soldier_control_;
 	WarehouseSupply* supply_;
 
 	std::vector<StockPolicy> ware_policy_;

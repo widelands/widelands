@@ -31,6 +31,7 @@
 #include "graphic/text/font_set.h"
 #include "graphic/text/rt_errors.h"
 #include "graphic/text_constants.h"
+#include "graphic/text_layout.h"
 #include "ui_basic/mouse_constants.h"
 
 // TODO(GunChleoc): Arabic: Fix positioning for Arabic
@@ -79,15 +80,7 @@ EditBox::EditBox(Panel* const parent,
                  int margin_y,
                  const Image* background,
                  int font_size)
-   : Panel(parent,
-           x,
-           y,
-           w,
-           h > 0 ? h :
-                   UI::g_fh1->render(as_editorfont(UI::g_fh1->fontset()->representative_character(),
-                                                   font_size))
-                         ->height() +
-                      2 * margin_y),
+   : Panel(parent, x, y, w, h > 0 ? h : text_height(font_size) + 2 * margin_y),
      m_(new EditBoxImpl),
      history_active_(false),
      history_position_(-1) {
@@ -216,15 +209,16 @@ bool EditBox::handle_key(bool const down, SDL_Keysym const code) {
 			if (code.mod & KMOD_NUM) {
 				break;
 			}
-		/* no break */
+			FALLS_THROUGH;
 		case SDLK_DELETE:
 			if (m_->caret < m_->text.size()) {
 				while ((m_->text[++m_->caret] & 0xc0) == 0x80) {
 				};
-				// now handle it like Backspace
-			} else
+				// Now fallthrough to handle it like Backspace
+			} else {
 				return true;
-		/* no break */
+			}
+			FALLS_THROUGH;
 		case SDLK_BACKSPACE:
 			if (m_->caret > 0) {
 				while ((m_->text[--m_->caret] & 0xc0) == 0x80)
@@ -239,7 +233,7 @@ bool EditBox::handle_key(bool const down, SDL_Keysym const code) {
 			if (code.mod & KMOD_NUM) {
 				break;
 			}
-		/* no break */
+			FALLS_THROUGH;
 		case SDLK_LEFT:
 			if (m_->caret > 0) {
 				while ((m_->text[--m_->caret] & 0xc0) == 0x80) {
@@ -257,7 +251,7 @@ bool EditBox::handle_key(bool const down, SDL_Keysym const code) {
 			if (code.mod & KMOD_NUM) {
 				break;
 			}
-		/* no break */
+			FALLS_THROUGH;
 		case SDLK_RIGHT:
 			if (m_->caret < m_->text.size()) {
 				while ((m_->text[++m_->caret] & 0xc0) == 0x80) {
@@ -277,7 +271,7 @@ bool EditBox::handle_key(bool const down, SDL_Keysym const code) {
 			if (code.mod & KMOD_NUM) {
 				break;
 			}
-		/* no break */
+			FALLS_THROUGH;
 		case SDLK_HOME:
 			if (m_->caret != 0) {
 				m_->caret = 0;
@@ -290,7 +284,7 @@ bool EditBox::handle_key(bool const down, SDL_Keysym const code) {
 			if (code.mod & KMOD_NUM) {
 				break;
 			}
-		/* no break */
+			FALLS_THROUGH;
 		case SDLK_END:
 			if (m_->caret != m_->text.size()) {
 				m_->caret = m_->text.size();
@@ -302,7 +296,7 @@ bool EditBox::handle_key(bool const down, SDL_Keysym const code) {
 			if (code.mod & KMOD_NUM) {
 				break;
 			}
-		/* no break */
+			FALLS_THROUGH;
 		case SDLK_UP:
 			// Load entry from history if active and text is not empty
 			if (history_active_) {
@@ -320,7 +314,7 @@ bool EditBox::handle_key(bool const down, SDL_Keysym const code) {
 			if (code.mod & KMOD_NUM) {
 				break;
 			}
-		/* no break */
+			FALLS_THROUGH;
 		case SDLK_DOWN:
 			// Load entry from history if active and text is not equivalent to the current one
 			if (history_active_) {
@@ -362,34 +356,30 @@ void EditBox::draw(RenderTarget& dst) {
 		static const RGBColor black(0, 0, 0);
 
 		// bottom edge
-		dst.brighten_rect(Rectf(0, get_h() - 2, get_w(), 2), BUTTON_EDGE_BRIGHT_FACTOR);
+		dst.brighten_rect(Recti(0, get_h() - 2, get_w(), 2), BUTTON_EDGE_BRIGHT_FACTOR);
 		// right edge
-		dst.brighten_rect(Rectf(get_w() - 2, 0, 2, get_h() - 2), BUTTON_EDGE_BRIGHT_FACTOR);
+		dst.brighten_rect(Recti(get_w() - 2, 0, 2, get_h() - 2), BUTTON_EDGE_BRIGHT_FACTOR);
 		// top edge
-		dst.fill_rect(Rectf(0.f, 0.f, get_w() - 1, 1), black);
-		dst.fill_rect(Rectf(0.f, 1.f, get_w() - 2, 1), black);
+		dst.fill_rect(Recti(0, 0, get_w() - 1, 1), black);
+		dst.fill_rect(Recti(0, 1, get_w() - 2, 1), black);
 		// left edge
-		dst.fill_rect(Rectf(0.f, 0.f, 1, get_h() - 1), black);
-		dst.fill_rect(Rectf(1.f, 0.f, 1, get_h() - 2), black);
+		dst.fill_rect(Recti(0, 0, 1, get_h() - 1), black);
+		dst.fill_rect(Recti(1, 0, 1, get_h() - 2), black);
 	}
 
 	if (has_focus()) {
-		dst.brighten_rect(Rectf(0.f, 0.f, get_w(), get_h()), MOUSE_OVER_BRIGHT_FACTOR);
+		dst.brighten_rect(Recti(0, 0, get_w(), get_h()), MOUSE_OVER_BRIGHT_FACTOR);
 	}
 
 	const int max_width = get_w() - 2 * kMarginX;
 
-	const Image* entry_text_im = UI::g_fh1->render(as_editorfont(m_->text, m_->fontsize));
+	std::shared_ptr<const UI::RenderedText> rendered_text =
+	   UI::g_fh1->render(as_editorfont(m_->text, m_->fontsize));
 
-	const int linewidth = entry_text_im->width();
-	const int lineheight =
-	   m_->text.empty() ?
-	      UI::g_fh1->render(
-	                  as_editorfont(UI::g_fh1->fontset()->representative_character(), m_->fontsize))
-	         ->height() :
-	      entry_text_im->height();
+	const int linewidth = rendered_text->width();
+	const int lineheight = m_->text.empty() ? text_height(m_->fontsize) : rendered_text->height();
 
-	Vector2f point(kMarginX, get_h() / 2);
+	Vector2i point(kMarginX, get_h() / 2);
 	if (m_->align == UI::Align::kRight) {
 		point.x += max_width - linewidth;
 	}
@@ -404,18 +394,18 @@ void EditBox::draw(RenderTarget& dst) {
 		// We want this always on, e.g. for mixed language savegame filenames
 		if (i18n::has_rtl_character(m_->text.c_str(), 100)) {  // Restrict check for efficiency
 			// TODO(GunChleoc): Arabic: Fix scrolloffset
-			dst.blitrect(point, entry_text_im, Recti(linewidth - max_width, 0, linewidth, lineheight));
+			rendered_text->draw(dst, point, Recti(linewidth - max_width, 0, linewidth, lineheight));
 		} else {
 			if (m_->align == UI::Align::kRight) {
 				// TODO(GunChleoc): Arabic: Fix scrolloffset
-				dst.blitrect(point, entry_text_im,
-				             Recti(point.x + m_->scrolloffset + kMarginX, 0, max_width, lineheight));
+				rendered_text->draw(
+				   dst, point, Recti(point.x + m_->scrolloffset + kMarginX, 0, max_width, lineheight));
 			} else {
-				dst.blitrect(point, entry_text_im, Recti(-m_->scrolloffset, 0, max_width, lineheight));
+				rendered_text->draw(dst, point, Recti(-m_->scrolloffset, 0, max_width, lineheight));
 			}
 		}
 	} else {
-		dst.blitrect(point, entry_text_im, Recti(0, 0, max_width, lineheight));
+		rendered_text->draw(dst, point, Recti(0, 0, max_width, lineheight));
 	}
 
 	if (has_focus()) {
@@ -424,12 +414,12 @@ void EditBox::draw(RenderTarget& dst) {
 		// TODO(GunChleoc): Arabic: Fix cursor position for BIDI text.
 		int caret_x = text_width(line_to_caret, m_->fontsize);
 
-		const uint16_t fontheight = text_height(m_->text, m_->fontsize);
+		const uint16_t fontheight = text_height(m_->fontsize);
 
 		const Image* caret_image = g_gr->images().get("images/ui_basic/caret.png");
-		Vector2f caretpt;
-		caretpt.x = point.x + m_->scrolloffset + caret_x - caret_image->width() + LINE_MARGIN;
-		caretpt.y = point.y + (fontheight - caret_image->height()) / 2.f;
+		Vector2i caretpt = Vector2i::zero();
+		caretpt.x = point.x + m_->scrolloffset + caret_x - caret_image->width() + kLineMargin;
+		caretpt.y = point.y + (fontheight - caret_image->height()) / 2;
 		dst.blit(caretpt, caret_image);
 	}
 }

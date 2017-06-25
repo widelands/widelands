@@ -1,8 +1,8 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2016 Widelands Development Team
+# Copyright (C) 2005-2017 Widelands Development Team
 # 
 # Translators:
-# Balázs Meskó <meskobalazs@gmail.com>, 2016
+# Balázs Meskó <meskobalazs@gmail.com>, 2016-2017
 # GunChleoc, 2016
 # GunChleoc, 2014
 # litoll <litoll@freemail.hu>, 2016
@@ -12,8 +12,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-12-15 15:23+0000\n"
-"PO-Revision-Date: 2016-12-15 15:32+0000\n"
+"POT-Creation-Date: 2017-05-18 21:30+0000\n"
+"PO-Revision-Date: 2017-05-18 21:32+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Hungarian (http://www.transifex.com/widelands/widelands/language/hu/)\n"
 "MIME-Version: 1.0\n"
@@ -23,7 +23,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: ../../data/campaigns/atl01.wmf/elemental:9
-#: ../../data/campaigns/campaigns.conf:95
+#: ../../data/campaigns/campaigns.conf:100
 msgid "From Nemesis to Genesis"
 msgstr "Pusztulásból teremtésbe"
 
@@ -142,7 +142,11 @@ msgid "An Outpost for Exile"
 msgstr "A száműzetés előőrse"
 
 #: ../../data/campaigns/campaigns.conf:88
-#: ../../data/campaigns/campaigns.conf:100
+msgid "Neptune’s Revenge"
+msgstr ""
+
+#: ../../data/campaigns/campaigns.conf:93
+#: ../../data/campaigns/campaigns.conf:105
 #: ../../data/campaigns/dummy.wmf/elemental:7
 msgid "Not yet implemented"
 msgstr "Még nem készült el"
@@ -171,6 +175,12 @@ msgid ""
 "land on a green, Mediterranean island, looking like paradise. Overjoyed, "
 "they set out to explore this new living space."
 msgstr "Végül megjavították a hajót, így Lutius és emberei folytatták útjukat, jó helyet keresve egy új kezdethez. Csak pár nap telik el, mire kikötnek egy zöld, mediterrán, paradicsomi szigeten. Elragadtatva felfedezőútra indulnak ezen az új lakhelyen."
+
+#: ../../data/campaigns/emp03.wmf/elemental:10
+msgid ""
+"On their way home to defend the Empire, the crew of Lutius was surprised by "
+"the will of the gods."
+msgstr ""
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/elemental:8
 #: ../../data/campaigns/tutorials.conf:15
@@ -532,11 +542,11 @@ msgid ""
 "range where the amount of gold and the space to live merely suffice for one "
 "tribe – only two opposite paths lead. But remember, be careful… this last "
 "living space is also a hard and small place to live."
-msgstr ""
+msgstr "A szeszélyes Istenek nem hallgatták meg imáinkat, helyette az ezerszer melegebb Nap felhevítette a földet, elolvasztotta a gleccsereket, és a tenger elárasztotta a vidéket. Most, a fenséges hegyekben, az utolsó darabka földön, két életben maradt törzs keresett menedéket. Noha az Istenek megkönyörültek rajtuk, és az időjárást hűvösebbre változtatták, a víz továbbra is emelkedik és emelkedik. Az utolsó biztonságos helyre, a legmagasabb hegyláncra – ahol az arany és a hely alig elegendő egy törzsnek – csak két szembemenő útvonal vezet. Légy nagyon óvatos… ez az utolsó föld kicsi, és nehéz életben maradni rajta."
 
 #: ../../data/maps/Last_Bastion_v2.wmf/elemental:11
 msgid "Don’t forget to take care of your timber supplies, you’ll need them."
-msgstr ""
+msgstr "Ne feledkezz meg gondoskodni a fautánpótlásról – szükséged lesz rá."
 
 #: ../../data/maps/Last_Survivors.wmf/elemental:8
 msgid "Last Survivors"
@@ -590,13 +600,13 @@ msgid ""
 "Only a small hill in the centre of the map connects these four competing "
 "tribes. Lead your army to this hill right away and build a giant stronghold "
 "as a sign of your superiority!"
-msgstr ""
+msgstr "Csak egy kis domb köti össze a térkép közepén a négy versengő törzset. Vezesd seregedet egyenesen a dombra, és építs egy hatalmas erődöt, hogy megmutasd felsőbbségedet!"
 
 #: ../../data/maps/Rendez-Vous.wmf/elemental:11
 msgid ""
 "There is space for only one stronghold in the centre. Water can be found "
 "everywhere, so there is no need to send out geologists."
-msgstr ""
+msgstr "Középen csak egyetlen erődnek van hely. Vizet bárhol találni, nem kell geológusokat kiküldeni."
 
 #: ../../data/maps/River_Explorers.wmf/elemental:8
 msgid "River Explorers"

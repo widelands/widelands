@@ -1,3 +1,41 @@
+widelands (1:19+repack-3widelands1) UNRELEASED; urgency=medium
+
+  * Changed build dependencies:
+      - New build dependencies required:
+        libboost-system-dev
+      - No longer needed;
+        libsdl2-net-dev
+  * Merged Debian packaging of Widelands 1:19+repack-3. Remaining changes:
+    - Disabled all Debian-patches since applying them might cause conflicts as
+      development moves along in latest trunk. They mostly concern 
+      architectures which we don't have access to build/test with normally, so
+      they would be hard to maintain.
+    - Dropped patches:
+        system-wide_minizip
+          (Should be included in trunk once we iron out the remaining bugs)
+    - Build using embedded minizip since we support older Ubuntu releases where
+      the package is not available.
+    - .stub-files to make widelands.desktop and appdata localizable.
+    - Additional translations for appdata and desktop file.
+    - Re-added font entries to copyright file, since we will most likely be using
+      the embedded fonts.
+    - Modified rules to use our embedded fonts and install all binaries.
+    - Comment out get-orig-source. We just want to build current trunk
+    - Try to install appdata file in regular package instead of the -data one.
+      Though neither seem to work :(
+
+ -- Widelands <widelands-dev@lists.launchpad.net>  Sun, 12 Mar 2017 12:18:30 +0100
+
+widelands (1:19+repack-3) unstable; urgency=medium
+
+  * Pick a new appdata file from upstream, so that widelands appears
+    back in the software center.
+  * Fix path to amiri-font (Closes: #845660) 
+    Thanks to eingousef for the report and Nobuhiro Ban for the patch.
+  * Forget commented patches: they are actually useless now.
+
+ -- Martin Quinson <mquinson@debian.org>  Sat, 11 Mar 2017 09:14:22 +0100
+
 widelands (1:19+repack-2widelands1) UNRELEASED; urgency=medium
 
   * Merged Debian packaging of Widelands 1:19+repack-2. Remaining changes:

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-03-03 06:24+0000\n"
+"POT-Creation-Date: 2017-06-23 12:21+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -2117,7 +2117,7 @@ msgstr ""
 #: ../../data/tribes/buildings/trainingsites/atlanteans/labyrinth/init.lua:94
 #: ../../data/tribes/buildings/trainingsites/barbarians/battlearena/init.lua:83
 #: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:102
-#: ../../data/tribes/buildings/trainingsites/empire/arena/init.lua:73
+#: ../../data/tribes/buildings/trainingsites/empire/arena/init.lua:74
 #: ../../data/tribes/buildings/trainingsites/empire/colosseum/init.lua:68
 #: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:96
 msgid "sleeping"
@@ -2262,7 +2262,7 @@ msgid "Arena"
 msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/empire/arena/init.lua:81
+#: ../../data/tribes/buildings/trainingsites/empire/arena/init.lua:82
 #: ../../data/tribes/buildings/trainingsites/empire/colosseum/init.lua:76
 msgctxt "empire_building"
 msgid "upgrading soldier evade from level 0 to level 1"
@@ -2730,7 +2730,7 @@ msgid "Ship"
 msgstr ""
 
 #. TRANSLATORS: This is a ware name used in lists of wares
-#: ../../data/tribes/wares/armor/init.lua:50
+#: ../../data/tribes/wares/armor/init.lua:53
 msgctxt "ware"
 msgid "Armor"
 msgstr ""
@@ -3240,7 +3240,7 @@ msgid "Wool"
 msgstr ""
 
 #. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../data/tribes/workers/atlanteans/armorsmith/init.lua:17
+#: ../../data/tribes/workers/atlanteans/armorsmith/init.lua:19
 msgctxt "atlanteans_worker"
 msgid "Armorsmith"
 msgstr ""
@@ -3264,7 +3264,7 @@ msgid "Builder"
 msgstr ""
 
 #. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../data/tribes/workers/atlanteans/carrier/init.lua:19
+#: ../../data/tribes/workers/atlanteans/carrier/init.lua:49
 msgctxt "atlanteans_worker"
 msgid "Carrier"
 msgstr ""
@@ -3372,7 +3372,7 @@ msgid "Smoker"
 msgstr ""
 
 #. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../data/tribes/workers/atlanteans/soldier/init.lua:67
+#: ../../data/tribes/workers/atlanteans/soldier/init.lua:198
 msgctxt "atlanteans_worker"
 msgid "Soldier"
 msgstr ""

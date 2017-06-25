@@ -30,7 +30,9 @@
 #include "base/macros.h"
 #include "logic/map_objects/buildcost.h"
 #include "logic/map_objects/immovable.h"
+#include "logic/map_objects/tribes/attack_target.h"
 #include "logic/map_objects/tribes/bill_of_materials.h"
+#include "logic/map_objects/tribes/soldiercontrol.h"
 #include "logic/map_objects/tribes/wareworker.h"
 #include "logic/map_objects/tribes/workarea_info.h"
 #include "logic/message.h"
@@ -155,10 +157,9 @@ public:
 
 	WorkareaInfo workarea_info_;
 
-	virtual int32_t suitability(const Map&, const FCoords&) const;
-	const BuildingHints& hints() const {
-		return hints_;
-	}
+	bool suitability(const Map&, const FCoords&) const;
+	const BuildingHints& hints() const;
+	void set_hints_trainingsites_max_percent(int percent);
 
 protected:
 	virtual Building& create_object() const = 0;
@@ -293,6 +294,21 @@ public:
 	void add_worker(Worker&) override;
 	void remove_worker(Worker&) override;
 
+	// AttackTarget object associated with this building. If the building can
+	// never be attacked (for example productionsites) this will be nullptr.
+	const AttackTarget* attack_target() const {
+		return attack_target_;
+	}
+
+	// SoldierControl object associated with this building. If the building can
+	// not house soldiers (for example productionsites) this will be nullptr.
+	const SoldierControl* soldier_control() const {
+		return soldier_control_;
+	}
+	SoldierControl* mutable_soldier_control() {
+		return soldier_control_;
+	}
+
 	void send_message(Game& game,
 	                  const Message::Type msgtype,
 	                  const std::string& title,
@@ -311,7 +327,7 @@ protected:
 
 	void start_animation(EditorGameBase&, uint32_t anim);
 
-	void init(EditorGameBase&) override;
+	bool init(EditorGameBase&) override;
 	void cleanup(EditorGameBase&) override;
 	void act(Game&, uint32_t data) override;
 
@@ -324,6 +340,8 @@ protected:
 	draw_info(TextToDraw draw_text, const Vector2f& point_on_dst, float scale, RenderTarget* dst);
 
 	void set_seeing(bool see);
+	void set_attack_target(AttackTarget* new_attack_target);
+	void set_soldier_control(SoldierControl* new_soldier_control);
 
 	Coords position_;
 	Flag* flag_;
@@ -350,6 +368,8 @@ protected:
 
 private:
 	std::string statistics_string_;
+	AttackTarget* attack_target_;      // owned by the base classes, set by 'set_attack_target'.
+	SoldierControl* soldier_control_;  // owned by the base classes, set by 'set_soldier_control'.
 };
 }
 

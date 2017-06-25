@@ -224,7 +224,7 @@ public:
 		increment_program_pointer();
 	}
 
-	void init(EditorGameBase&) override;
+	bool init(EditorGameBase&) override;
 	void cleanup(EditorGameBase&) override;
 	void act(Game&, uint32_t data) override;
 	void draw(uint32_t gametime,
@@ -383,7 +383,7 @@ struct PlayerImmovable : public BaseImmovable {
 	void set_owner(Player*) override;
 
 protected:
-	void init(EditorGameBase&) override;
+	bool init(EditorGameBase&) override;
 	void cleanup(EditorGameBase&) override;
 
 private:

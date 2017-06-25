@@ -19,6 +19,7 @@
 
 #include "logic/player.h"
 
+#include <cassert>
 #include <memory>
 
 #include <boost/bind.hpp>
@@ -806,8 +807,12 @@ void Player::drop_soldier(PlayerImmovable& imm, Soldier& soldier) {
 		return;
 	if (soldier.descr().type() != MapObjectType::SOLDIER)
 		return;
-	if (upcast(SoldierControl, ctrl, &imm))
-		ctrl->drop_soldier(soldier);
+	if (upcast(Building, building, &imm)) {
+		SoldierControl* soldier_control = building->mutable_soldier_control();
+		if (soldier_control != nullptr) {
+			soldier_control->drop_soldier(soldier);
+		}
+	}
 }
 
 /*
@@ -842,9 +847,10 @@ Player::find_attack_soldiers(Flag& flag, std::vector<Soldier*>* soldiers, uint32
 
 	for (BaseImmovable* temp_flag : flags) {
 		upcast(Flag, attackerflag, temp_flag);
-		upcast(MilitarySite, ms, attackerflag->get_building());
-		std::vector<Soldier*> const present = ms->present_soldiers();
-		uint32_t const nr_staying = ms->min_soldier_capacity();
+		const SoldierControl* soldier_control = attackerflag->get_building()->soldier_control();
+		assert(soldier_control != nullptr);
+		std::vector<Soldier*> const present = soldier_control->present_soldiers();
+		uint32_t const nr_staying = soldier_control->min_soldier_capacity();
 		uint32_t const nr_present = present.size();
 		if (nr_staying < nr_present) {
 			uint32_t const nr_taken = std::min(nr_wanted, nr_present - nr_staying);
@@ -869,8 +875,8 @@ void Player::enemyflagaction(Flag& flag, PlayerNumber const attacker, uint32_t c
 		log("enemyflagaction: count is 0\n");
 	else if (is_hostile(flag.owner())) {
 		if (Building* const building = flag.get_building()) {
-			if (upcast(Attackable, attackable, building)) {
-				if (attackable->can_attack()) {
+			if (const AttackTarget* attack_target = building->attack_target()) {
+				if (attack_target->can_be_attacked()) {
 					std::vector<Soldier*> attackers;
 					find_attack_soldiers(flag, &attackers, count);
 					assert(attackers.size() <= count);
@@ -969,6 +975,7 @@ void Player::rediscover_node(const Map& map,
 			tr_field.terrains.d = tr.field->terrain_d();
 			tr_field.roads &= ~(RoadType::kMask << RoadType::kSouthWest);
 			tr_field.roads |= RoadType::kMask << RoadType::kSouthWest & tr.field->get_roads();
+			tr_field.owner = tr.field->get_owned_by();
 		}
 	}
 	{  //  discover both triangles and the SE edge of the top left  neighbour
@@ -978,6 +985,7 @@ void Player::rediscover_node(const Map& map,
 			tl_field.terrains = tl.field->get_terrains();
 			tl_field.roads &= ~(RoadType::kMask << RoadType::kSouthEast);
 			tl_field.roads |= RoadType::kMask << RoadType::kSouthEast & tl.field->get_roads();
+			tl_field.owner = tl.field->get_owned_by();
 		}
 	}
 	{  //  discover the R triangle and the  E edge of the     left  neighbour
@@ -987,6 +995,7 @@ void Player::rediscover_node(const Map& map,
 			l_field.terrains.r = l.field->terrain_r();
 			l_field.roads &= ~(RoadType::kMask << RoadType::kEast);
 			l_field.roads |= RoadType::kMask << RoadType::kEast & l.field->get_roads();
+			l_field.owner = l.field->get_owned_by();
 		}
 	}
 }
@@ -1024,9 +1033,15 @@ void Player::see_node(const Map& map,
 	field.vision = fvision;
 }
 
-void Player::unsee_node(MapIndex const i, Time const gametime, bool const forward) {
+/// If 'mode' = UnseeMode::kUnexplore, fields will be marked as unexplored. Else, player no longer
+/// sees what's currently going on.
+void Player::unsee_node(MapIndex const i,
+                        Time const gametime,
+                        const UnseeNodeMode mode,
+                        bool const forward) {
 	Field& field = fields_[i];
-	if (field.vision <= 1)  //  Already does not see this
+	if ((mode == UnseeNodeMode::kUnsee && field.vision <= 1) ||
+	    field.vision < 1)  //  Already does not see this
 		return;
 
 	//  If this is not already a forwarded call, we should inform allied players
@@ -1035,13 +1050,18 @@ void Player::unsee_node(MapIndex const i, Time const gametime, bool const forwar
 		update_team_players();
 	if (!forward && !team_player_.empty()) {
 		for (uint8_t j = 0; j < team_player_.size(); ++j)
-			team_player_[j]->unsee_node(i, gametime, true);
+			team_player_[j]->unsee_node(i, gametime, mode, true);
 	}
 
-	--field.vision;
-	if (field.vision == 1)
+	if (mode == UnseeNodeMode::kUnexplore) {
+		field.vision = 0;
+	} else {
+		--field.vision;
+		assert(1 <= field.vision);
+	}
+	if (field.vision < 2) {
 		field.time_node_last_unseen = gametime;
-	assert(1 <= field.vision);
+	}
 }
 
 /**
