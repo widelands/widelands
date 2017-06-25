@@ -467,11 +467,12 @@ void GameClient::receive_one_user(uint32_t const number, StreamRead& packet) {
 	d->settings.users.at(number).name = packet.string();
 	d->settings.users.at(number).position = packet.signed_32();
 	d->settings.users.at(number).ready = packet.unsigned_8() == 1;
+
 	if (static_cast<int32_t>(number) == d->settings.usernum) {
 		d->localplayername = d->settings.users.at(number).name;
 		d->settings.playernum = d->settings.users.at(number).position;
-		Notifications::publish(NoteGameSettings(d->settings.playernum, NoteGameSettings::Action::kUser, number));
 	}
+	Notifications::publish(NoteGameSettings(d->settings.playernum, NoteGameSettings::Action::kUser, number));
 }
 
 void GameClient::send(const std::string& msg) {
