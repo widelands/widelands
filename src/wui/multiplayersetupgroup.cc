@@ -60,7 +60,8 @@ struct MultiPlayerClientGroup : public UI::Box {
 		  // Name needs to be initialized after the dropdown, otherwise the layout function will crash.
 		  name(new UI::Textarea(this, 0, 0, w - h - UI::Scrollbar::kSize * 11 / 5, h)),
 	     s(settings),
-	     id_(id) {
+	     id_(id),
+		  slot_selection_locked_(false) {
 		set_size(w, h);
 
 		add(&slot_dropdown_);
@@ -97,16 +98,21 @@ struct MultiPlayerClientGroup : public UI::Box {
 		if (id_ != settings.usernum) {
 			return;
 		}
+		slot_selection_locked_ = true;
 		if (slot_dropdown_.has_selection()) {
 			const uint8_t new_slot = slot_dropdown_.get_selected();
 			if (new_slot != settings.users.at(id_).position) {
 				s->set_player_number(slot_dropdown_.get_selected());
 			}
 		}
+		slot_selection_locked_ = false;
 	}
 
 	/// Rebuild the slot dropdown from the server settings. This will keep the host and client UIs in sync.
 	void rebuild_slot_dropdown(const GameSettings& settings) {
+		if (slot_selection_locked_) {
+			return;
+		}
 		const UserSettings& user_setting = settings.users.at(id_);
 
 		slot_dropdown_.clear();
@@ -145,6 +151,7 @@ struct MultiPlayerClientGroup : public UI::Box {
 	UI::Textarea* name; /// Client nick name
 	GameSettingsProvider* const s;
 	uint8_t const id_; /// User number
+	bool slot_selection_locked_;
 	std::unique_ptr<Notifications::Subscriber<NoteGameSettings>> subscriber_;
 };
 
