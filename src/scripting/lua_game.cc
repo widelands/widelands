@@ -455,9 +455,6 @@ int LuaPlayer::message_box(lua_State* L) {
 	}
 #undef CHECK_ARG
 
-	std::string title = luaL_checkstring(L, 2);
-	std::string body = luaL_checkstring(L, 3);
-
 	uint32_t cspeed = game.game_controller()->desired_speed();
 	game.game_controller()->set_desired_speed(0);
 
@@ -1237,8 +1234,6 @@ int LuaMessage::get_status(lua_State* L) {
 	case Message::Status::kArchived:
 		lua_pushstring(L, "archived");
 		break;
-	default:
-		NEVER_HERE();
 	}
 	return 1;
 }

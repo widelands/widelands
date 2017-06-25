@@ -573,7 +573,7 @@ int do_set_soldiers(lua_State* L,
 					                   s->get_defense_level(), s->get_evade_level());
 
 					if (is == sp.first) {
-						sc->outcorporate_soldier(egbase, *s);
+						sc->outcorporate_soldier(*s);
 						s->remove(egbase);
 						++d;
 						break;
@@ -4458,7 +4458,8 @@ inline Warehouse::StockPolicy string_to_wh_policy(lua_State* L, uint32_t index) 
 		report_error(L, "<%s> is no valid warehouse policy!", str.c_str());
 }
 
-bool do_set_ware_policy(Warehouse* wh, const DescriptionIndex idx, const Warehouse::StockPolicy p) {
+inline bool
+do_set_ware_policy(Warehouse* wh, const DescriptionIndex idx, const Warehouse::StockPolicy p) {
 	wh->set_ware_policy(idx, p);
 	return true;
 }
@@ -4467,7 +4468,8 @@ bool do_set_ware_policy(Warehouse* wh, const DescriptionIndex idx, const Warehou
  * Sets the given policy for the given ware in the given warehouse and return true.
  * If the no ware with the given name exists for the tribe of the warehouse, return false.
  */
-bool do_set_ware_policy(Warehouse* wh, const std::string& name, const Warehouse::StockPolicy p) {
+inline bool
+do_set_ware_policy(Warehouse* wh, const std::string& name, const Warehouse::StockPolicy p) {
 	const TribeDescr& tribe = wh->owner().tribe();
 	DescriptionIndex idx = tribe.ware_index(name);
 	if (!tribe.has_ware(idx)) {
@@ -4476,9 +4478,8 @@ bool do_set_ware_policy(Warehouse* wh, const std::string& name, const Warehouse:
 	return do_set_ware_policy(wh, idx, p);
 }
 
-bool do_set_worker_policy(Warehouse* wh,
-                          const DescriptionIndex idx,
-                          const Warehouse::StockPolicy p) {
+inline bool
+do_set_worker_policy(Warehouse* wh, const DescriptionIndex idx, const Warehouse::StockPolicy p) {
 	const TribeDescr& tribe = wh->owner().tribe();
 	// If the worker does not cost anything, ignore it
 	// Otherwise, an unlimited stream of carriers might leave the warehouse
@@ -4496,7 +4497,8 @@ bool do_set_worker_policy(Warehouse* wh,
  * policy.
  * If no worker with the given name exists for the tribe of the warehouse, return false.
  */
-bool do_set_worker_policy(Warehouse* wh, const std::string& name, const Warehouse::StockPolicy p) {
+inline bool
+do_set_worker_policy(Warehouse* wh, const std::string& name, const Warehouse::StockPolicy p) {
 	const TribeDescr& tribe = wh->owner().tribe();
 	DescriptionIndex idx = tribe.worker_index(name);
 	if (!tribe.has_worker(idx)) {
@@ -4566,11 +4568,11 @@ int LuaWarehouse::set_warehouse_policies(lua_State* L) {
 
 // Gets the warehouse policy by ware/worker-name or id
 #define WH_GET_POLICY(type)                                                                        \
-	void do_get_##type##_policy(lua_State* L, Warehouse* wh, const DescriptionIndex idx) {          \
+	inline void do_get_##type##_policy(lua_State* L, Warehouse* wh, const DescriptionIndex idx) {   \
 		wh_policy_to_string(L, wh->get_##type##_policy(idx));                                        \
 	}                                                                                               \
                                                                                                    \
-	bool do_get_##type##_policy(lua_State* L, Warehouse* wh, const std::string& name) {             \
+	inline bool do_get_##type##_policy(lua_State* L, Warehouse* wh, const std::string& name) {      \
 		const TribeDescr& tribe = wh->owner().tribe();                                               \
 		DescriptionIndex idx = tribe.type##_index(name);                                             \
 		if (!tribe.has_##type(idx)) {                                                                \
@@ -4654,13 +4656,13 @@ int LuaWarehouse::get_warehouse_policies(lua_State* L) {
 // documented in parent class
 int LuaWarehouse::get_soldiers(lua_State* L) {
 	Warehouse* wh = get(L, get_egbase(L));
-	return do_get_soldiers(L, *wh, wh->owner().tribe());
+	return do_get_soldiers(L, *wh->soldier_control(), wh->owner().tribe());
 }
 
 // documented in parent class
 int LuaWarehouse::set_soldiers(lua_State* L) {
 	Warehouse* wh = get(L, get_egbase(L));
-	return do_set_soldiers(L, wh->get_position(), wh, wh->get_owner());
+	return do_set_soldiers(L, wh->get_position(), wh->mutable_soldier_control(), wh->get_owner());
 }
 
 /* RST
@@ -4923,7 +4925,7 @@ const PropertyType<LuaMilitarySite> LuaMilitarySite::Properties[] = {
 
 // documented in parent class
 int LuaMilitarySite::get_max_soldiers(lua_State* L) {
-	lua_pushuint32(L, get(L, get_egbase(L))->soldier_capacity());
+	lua_pushuint32(L, get(L, get_egbase(L))->soldier_control()->soldier_capacity());
 	return 1;
 }
 
@@ -4936,13 +4938,13 @@ int LuaMilitarySite::get_max_soldiers(lua_State* L) {
 // documented in parent class
 int LuaMilitarySite::get_soldiers(lua_State* L) {
 	MilitarySite* ms = get(L, get_egbase(L));
-	return do_get_soldiers(L, *ms, ms->owner().tribe());
+	return do_get_soldiers(L, *ms->soldier_control(), ms->owner().tribe());
 }
 
 // documented in parent class
 int LuaMilitarySite::set_soldiers(lua_State* L) {
 	MilitarySite* ms = get(L, get_egbase(L));
-	return do_set_soldiers(L, ms->get_position(), ms, ms->get_owner());
+	return do_set_soldiers(L, ms->get_position(), ms->mutable_soldier_control(), ms->get_owner());
 }
 
 /*
@@ -4977,7 +4979,7 @@ const PropertyType<LuaTrainingSite> LuaTrainingSite::Properties[] = {
 
 // documented in parent class
 int LuaTrainingSite::get_max_soldiers(lua_State* L) {
-	lua_pushuint32(L, get(L, get_egbase(L))->soldier_capacity());
+	lua_pushuint32(L, get(L, get_egbase(L))->soldier_control()->soldier_capacity());
 	return 1;
 }
 
@@ -4990,13 +4992,13 @@ int LuaTrainingSite::get_max_soldiers(lua_State* L) {
 // documented in parent class
 int LuaTrainingSite::get_soldiers(lua_State* L) {
 	TrainingSite* ts = get(L, get_egbase(L));
-	return do_get_soldiers(L, *ts, ts->owner().tribe());
+	return do_get_soldiers(L, *ts->soldier_control(), ts->owner().tribe());
 }
 
 // documented in parent class
 int LuaTrainingSite::set_soldiers(lua_State* L) {
 	TrainingSite* ts = get(L, get_egbase(L));
-	return do_set_soldiers(L, ts->get_position(), ts, ts->get_owner());
+	return do_set_soldiers(L, ts->get_position(), ts->mutable_soldier_control(), ts->get_owner());
 }
 
 /*

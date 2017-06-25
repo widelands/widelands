@@ -332,9 +332,8 @@ int32_t Soldier::get_training_attribute(TrainingAttribute const attr) const {
 		return evade_level_;
 	case TrainingAttribute::kTotal:
 		return health_level_ + attack_level_ + defense_level_ + evade_level_;
-	default:
-		return Worker::get_training_attribute(attr);
 	}
+	return Worker::get_training_attribute(attr);
 }
 
 uint32_t Soldier::get_max_health() const {
@@ -832,8 +831,8 @@ void Soldier::attack_update(Game& game, State& state) {
 
 	// Count remaining defenders
 	if (enemy) {
-		if (upcast(MilitarySite, ms, enemy)) {
-			defenders = ms->present_soldiers().size();
+		if (enemy->soldier_control() != nullptr) {
+			defenders = enemy->soldier_control()->present_soldiers().size();
 		}
 		if (upcast(Warehouse, wh, enemy)) {
 			Requirements noreq;
@@ -865,18 +864,19 @@ void Soldier::attack_update(Game& game, State& state) {
 			BaseImmovable* const newimm = game.map()[state.coords].get_immovable();
 			upcast(MilitarySite, newsite, newimm);
 			if (newsite && (&newsite->owner() == &owner())) {
-				if (upcast(SoldierControl, ctrl, newsite)) {
-					state.objvar1 = nullptr;
-					// We may also have our location destroyed in between
-					if (ctrl->stationed_soldiers().size() < ctrl->soldier_capacity() &&
-					    (!location ||
-					     location->base_flag().get_position() != newsite->base_flag().get_position())) {
-						molog("[attack] enemy belongs to us now, move in\n");
-						pop_task(game);
-						set_location(newsite);
-						newsite->update_soldier_request();
-						return schedule_act(game, 10);
-					}
+				const SoldierControl* soldier_control = newsite->soldier_control();
+				assert(soldier_control != nullptr);  // 'newsite' is a military site
+				state.objvar1 = nullptr;
+				// We may also have our location destroyed in between
+				if (soldier_control->stationed_soldiers().size() <
+				       soldier_control->soldier_capacity() &&
+				    (!location ||
+				     location->base_flag().get_position() != newsite->base_flag().get_position())) {
+					molog("[attack] enemy belongs to us now, move in\n");
+					pop_task(game);
+					set_location(newsite);
+					newsite->update_soldier_request();
+					return schedule_act(game, 10);
 				}
 			}
 		}
