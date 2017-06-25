@@ -160,6 +160,7 @@ diary_page_7 = {
 
 saledus_1 = {
    title =_ "Dangerous Ship Parts",
+   posx = 1,
    posy = 1,
    body= saledus(_"Saledus looks unhappy",
       -- TRANSLATORS: Saledus
@@ -174,6 +175,8 @@ saledus_1 = {
 }
 
 saledus_2 = {
+   posx = 1,
+   posy = 1,
    title =_ "Marble on the Mountain",
    body= saledus(_"Saledus smiles",
       -- TRANSLATORS: Saledus
@@ -188,6 +191,8 @@ saledus_2 = {
 }
 
 saledus_3 = {
+   posx = 1,
+   posy = 1,
    title =_ "Further Mountains",
    body= saledus(_"Saledus is excited",
       -- TRANSLATORS: Saledus

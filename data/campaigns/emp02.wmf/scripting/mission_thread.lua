@@ -113,15 +113,15 @@ function mining_infrastructure()
    -- Reveal the other mountains
    local coal_mountain = wl.Game().map:get_field(49,22)
    local iron_mountain = wl.Game().map:get_field(38,37)
-   p1:reveal_fields(coal_mountain:region(6))
+
+   --local move_point = wl.Game().map:get_field(49,22)
+   wait_for_roadbuilding_and_scroll(coal_mountain)
+   reveal_concentric(p1, coal_mountain, 6, false)
    p1:reveal_fields(iron_mountain:region(6))
    run(function() sleep(5000)
       p1:hide_fields(coal_mountain:region(6))
       p1:hide_fields(iron_mountain:region(6))
    end)
-
-   local move_point = wl.Game().map:get_field(49,22)
-   wait_for_roadbuilding_and_scroll(move_point)
 
    campaign_message_box(saledus_3)
    p1:allow_buildings{
@@ -168,13 +168,11 @@ end
 function expand_and_build_marblemine()
    sleep(40000)
 
-   local shipparts = wl.Game().map:get_field(15,46)
-   p1:reveal_fields(shipparts:region(5))
-   run(function() sleep(10000) p1:hide_fields(shipparts:region(5)) end)
-
    -- Move to the shipparts
-   local prior_center = wait_for_roadbuilding_and_scroll(shipparts)
-
+   local shipparts = wl.Game().map:get_field(15,46)
+   local prior_center = wait_for_roadbuilding_and_scroll(wl.Game().map:get_field(12,43))
+   reveal_concentric(p1, shipparts, 5)
+   run(function() sleep(10000) p1:hide_fields(shipparts:region(5)) end)
    campaign_message_box(saledus_1)
    local o = add_campaign_objective(obj_build_military_buildings)
    p1:allow_buildings{"empire_blockhouse", "empire_sentry"}
@@ -188,10 +186,10 @@ function expand_and_build_marblemine()
 
    -- Marble Mountains
    local marblemountains = wl.Game().map:get_field(35,19)
-   p1:reveal_fields(marblemountains:region(5))
-   run(function() sleep(10000) p1:hide_fields(marblemountains:region(5)) end)
 
    prior_center = wait_for_roadbuilding_and_scroll(marblemountains)
+   reveal_concentric(p1, marblemountains, 5, false)
+   run(function() sleep(10000) p1:hide_fields(marblemountains:region(5)) end)
 
    campaign_message_box(saledus_2)
    p1:allow_buildings{"empire_marblemine", "empire_marblemine_deep"}
