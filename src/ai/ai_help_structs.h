@@ -555,14 +555,23 @@ struct MineTypesObserver {
 };
 
 constexpr int kNeuronWeightLimit = 100;
-// NOCOM @Gun size_t is signed? we need unsigned here
 constexpr size_t kNeuronMaxPosition = 20;
 constexpr size_t kSecondParentProbability = 50;
 
+// bunch of parameters used for trainig AI (for calculation of fitness function result)
+constexpr int16_t current_land_divider = 2;
+constexpr int16_t land_delta_multiplier = 1;
+constexpr int16_t bonus = 1000;
+constexpr int16_t attackers_multiplicator = 1;
+constexpr int16_t attack_bonus = 100;
+constexpr int16_t trained_soldiers_score = 250;
+constexpr int16_t conquered_wh_bonus = 500;
+
 struct Neuron {
 	static int clip_weight_to_range(int w) {
-		// NOCOM(#codereview): Please double-check that I didn't mess this up.
-		return std::min(-kNeuronWeightLimit, std::max(kNeuronWeightLimit, w));
+		assert(w < 125);
+		assert(w > -125);		
+		return std::max(-kNeuronWeightLimit, std::min(kNeuronWeightLimit, w));
 	}
 
 	Neuron(int8_t, uint8_t, uint16_t);
@@ -582,7 +591,7 @@ struct Neuron {
 	}
 
 private:
-	int8_t results[21]; // kPositions + 1
+	int8_t results[21];  // kPositions + 1
 	int8_t weight;
 	uint8_t type;
 	uint16_t id;
@@ -592,7 +601,6 @@ struct FNeuron {
 	FNeuron(uint32_t, uint16_t);
 
 	void flip_bit(uint8_t);
-	// NOCOM void set(uint8_t);
 	bool get_result(bool, bool, bool, bool bool4 = true, bool bool5 = true);
 	bool get_position(uint8_t);
 	uint32_t get_int();
@@ -631,7 +639,6 @@ struct ManagementData {
 	void review(
 	   uint32_t, PlayerNumber, uint32_t, uint32_t, uint32_t, uint16_t, int16_t, int16_t, uint16_t);
 	void dump_data();
-	// NOCOM void initialize(uint8_t, Widelands::AiType, bool reinitializing = false);
 	uint16_t new_neuron_id() {
 		++next_neuron_id;
 		return next_neuron_id - 1;
@@ -649,7 +656,7 @@ struct ManagementData {
 	int16_t get_military_number_at(uint8_t);
 	void set_military_number_at(uint8_t, int16_t);
 	int8_t shift_weight_value(int8_t, bool = true);
-	bool test_consistency(bool = false);
+	void test_consistency(bool = false);
 
 private:
 	int32_t score;

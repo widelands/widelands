@@ -622,7 +622,8 @@ void DefaultAI::late_initialization() {
 		if (bh.is_graniteproducer()) {
 			bo.set_is(BuildingAttribute::kNeedsRocks);
 		}
-		if (create_basic_buildings_list && bh.basic_amount() > 0) {  // This is the very begining of the game
+		if (create_basic_buildings_list &&
+		    bh.basic_amount() > 0) {  // This is the very begining of the game
 			persistent_data->remaining_basic_buildings[bo.id] = bh.basic_amount();
 			++persistent_data->remaining_buildings_size;
 		}
@@ -700,7 +701,7 @@ void DefaultAI::late_initialization() {
 				if (mines_per_type.count(bo.mines) == 0) {
 					mines_per_type[bo.mines] = MineTypesObserver();
 				}
-				// NOCOM(#codereview): Do not hard code like this do it the same way that you did for the hunters and fishers, or add an AI hint to the lua files.
+				// Identify iron mines based on output
 				if (bo.outputs[0] == iron_ore_id) {
 					bo.set_is(BuildingAttribute::kIronMine);
 					mines_per_type[bo.mines].is_critical = true;
@@ -729,7 +730,7 @@ void DefaultAI::late_initialization() {
 			if (building_index == tribe_->bakery()) {
 				bo.set_is(BuildingAttribute::kBakery);
 			}
-			
+
 			// now we find out if the upgrade of the building is a full substitution
 			// (produces all wares as current one)
 			const DescriptionIndex enhancement = bld.enhancement();
@@ -757,7 +758,7 @@ void DefaultAI::late_initialization() {
 				for (const DescriptionIndex& ware : bo.outputs) {
 					cur_outputs.insert(ware);
 				}
-				// NOCOM bo.set_is(kUpgradeExtends)lse;
+				// Does upgraded building produce any different outputs?
 				for (DescriptionIndex ware : enh_outputs) {
 					if (cur_outputs.count(ware) == 0) {
 						bo.set_is(BuildingAttribute::kUpgradeExtends);
@@ -768,17 +769,10 @@ void DefaultAI::late_initialization() {
 
 			// now we identify producers of critical build materials
 			for (DescriptionIndex ware : bo.outputs) {
-				// NOCOM use tribe_->is_construction_material(ware) and ignore the granite and logs? This would add thatch reed to the list, but we can probably live with that.
-
+				// NOCOM @Gun: I presume is_construction_material() is reliable, I didnot check the code
 				// building material except for trivial material
-				if (!(ware == tribe_->rawlog() || ware == tribe_->stones())) {
-				
-				//if (tribe_->ware_index("wood") == ware || tribe_->ware_index("blackwood") == ware ||
-				    //tribe_->ware_index("marble") == ware || tribe_->ware_index("planks") == ware ||
-				    //tribe_->ware_index("diamond") == ware || tribe_->ware_index("quartz") == ware ||
-				    //tribe_->ware_index("marble_column") == ware ||
-				    //tribe_->ware_index("cloth") == ware || tribe_->ware_index("spidercloth") == ware ||
-				    //tribe_->ware_index("gold") == ware || tribe_->ware_index("grout") == ware) {
+				if (tribe_->is_construction_material(ware) &&
+				    !(ware == tribe_->rawlog() || ware == tribe_->stones())) {
 					bo.set_is(BuildingAttribute::kBuildingMatProducer);
 					if (bo.type == BuildingObserver::Type::kMine) {
 						has_critical_mines = true;
@@ -788,19 +782,13 @@ void DefaultAI::late_initialization() {
 			}
 
 			for (const auto& temp_buildcosts : prod.buildcost()) {
-				// NOCOM use tribe_->is_construction_material(temp_buildcosts.first) and ignore the granite and logs.
+				// NOCOM use tribe_->is_construction_material(temp_buildcosts.first) and ignore the
+				// granite and logs.
 				// Since we have the same thing a few lines above, pull out a helper function.
 				// building material except for trivial material
-				if (!(temp_buildcosts.first == tribe_->rawlog() || temp_buildcosts.first == tribe_->stones())) {
-				//if (tribe_->ware_index("blackwood") == temp_buildcosts.first ||
-				    //tribe_->ware_index("planks") == temp_buildcosts.first ||
-				    //tribe_->ware_index("marble") == temp_buildcosts.first ||
-				    //tribe_->ware_index("marble_column") == temp_buildcosts.first ||
-				    //tribe_->ware_index("quartz") == temp_buildcosts.first ||
-				    //tribe_->ware_index("diamond") == temp_buildcosts.first ||
-				    //tribe_->ware_index("cloth") == temp_buildcosts.first ||
-				    //tribe_->ware_index("grout") == temp_buildcosts.first ||
-				    //tribe_->ware_index("gold") == temp_buildcosts.first) {
+				if (tribe_->is_construction_material(temp_buildcosts.first) &&
+				    !(temp_buildcosts.first == tribe_->rawlog() ||
+				      temp_buildcosts.first == tribe_->stones())) {
 					bo.critical_building_material.push_back(temp_buildcosts.first);
 				}
 			}
@@ -816,10 +804,9 @@ void DefaultAI::late_initialization() {
 			const MilitarySiteDescr& milit = dynamic_cast<const MilitarySiteDescr&>(bld);
 			for (const auto& temp_buildcosts : milit.buildcost()) {
 				// Below are non-critical wares (well, various types of wood)
-				// NOCOM(codereview): blackwood as well?
-				if (temp_buildcosts.first == tribe_->rawlog() || temp_buildcosts.first == tribe_->refinedlog())
+				if (temp_buildcosts.first == tribe_->rawlog() ||
+				    temp_buildcosts.first == tribe_->refinedlog())
 					continue;
-
 				bo.critical_building_material.push_back(temp_buildcosts.first);
 			}
 			continue;
@@ -847,15 +834,14 @@ void DefaultAI::late_initialization() {
 				}
 
 				for (const auto& temp_buildcosts : train.buildcost()) {
-					// NOCOM(#codereview): Hard coding can be avoided here. Get the trainingsites from the tribe then get descr().buildcost() for the building
-					// And ignore the logs and granite again - maybe we can refactor this stuff into a function.
+					// NOCOM(#codereview): Hard coding can be avoided here. Get the trainingsites from
+					// the tribe then get descr().buildcost() for the building
+					// And ignore the logs and granite again - maybe we can refactor this stuff into a
+					// function.
 					// building material except for trivial material
-					if (!(temp_buildcosts.first == tribe_->rawlog() || temp_buildcosts.first == tribe_->refinedlog() || temp_buildcosts.first == tribe_->stones())) {
-					//if (tribe_->ware_index("spidercloth") == temp_buildcosts.first ||
-					    //tribe_->ware_index("gold") == temp_buildcosts.first ||
-					    //tribe_->ware_index("grout") == temp_buildcosts.first ||
-					    //tribe_->ware_index("marble_column") == temp_buildcosts.first ||
-					    //tribe_->ware_index("cloth") == temp_buildcosts.first) {
+					if (!(temp_buildcosts.first == tribe_->rawlog() ||
+					      temp_buildcosts.first == tribe_->refinedlog() ||
+					      temp_buildcosts.first == tribe_->stones())) {
 						bo.critical_building_material.push_back(temp_buildcosts.first);
 					}
 				}
@@ -1216,7 +1202,8 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 	uint16_t actual_enemy_check_area = kEnemyCheckArea;
 	field.is_militarysite = false;
 	if (field.coords.field->get_immovable()) {
-		if (field.coords.field->get_immovable()->descr().type() == Widelands::MapObjectType::MILITARYSITE) {
+		if (field.coords.field->get_immovable()->descr().type() ==
+		    Widelands::MapObjectType::MILITARYSITE) {
 			field.is_militarysite = true;
 			actual_enemy_check_area = ms_enemy_check_area;
 		}
@@ -1343,8 +1330,10 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 	assert((player_->get_buildcaps(field.coords) & BUILDCAPS_SIZEMASK) <= field.max_buildcap_nearby);
 
 	// Testing surface water (once only)
-	// TODO(GunChleoc): We can change the terrain by scripting, so we should work with notifications here.
-	// Let's leave this as it is for now for performance reasons - terrain change of water is currently only
+	// TODO(GunChleoc): We can change the terrain by scripting, so we should work with notifications
+	// here.
+	// Let's leave this as it is for now for performance reasons - terrain change of water is
+	// currently only
 	// used in the Atlantean scenario.
 	if (field.water_nearby == kUncalculated) {
 		assert(field.open_water_nearby == kUncalculated);
@@ -1387,13 +1376,13 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 	if (resource_count_now) {
 		// Counting fields with critters (game)
 		field.critters_nearby =
-			map.find_bobs(Area<FCoords>(field.coords, kProductionArea), nullptr, FindBobCritter());
+		   map.find_bobs(Area<FCoords>(field.coords, kProductionArea), nullptr, FindBobCritter());
 
 		// Rocks are not renewable, we will count them only if previous state is nonzero
 		if (field.rocks_nearby > 0) {
-			field.rocks_nearby =
-				map.find_immovables(Area<FCoords>(map.get_fcoords(field.coords), kProductionArea), nullptr,
-										  FindImmovableAttribute(MapObjectDescr::get_attribute_id("rocks")));
+			field.rocks_nearby = map.find_immovables(
+			   Area<FCoords>(map.get_fcoords(field.coords), kProductionArea), nullptr,
+			   FindImmovableAttribute(MapObjectDescr::get_attribute_id("rocks")));
 
 			// adding 5 if rocks found
 			field.rocks_nearby = (field.rocks_nearby > 0) ? field.rocks_nearby + 2 : 0;
@@ -2943,7 +2932,8 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 					}
 
 					// applying nearnest penalty
-					// NOCOM(#codereview): Is it possible to give numbers like 126 here names, e.g. via an enum (class), or are these too abstract for that?
+					// NOCOM(@Gun): These numbers are completely anonymous. Creating 150 names/enum does
+					// not make sense for me
 					prio -= mf->mines_nearby * std::abs(management_data.get_military_number_at(126));
 
 					// applying max needed
@@ -3898,7 +3888,7 @@ bool DefaultAI::check_productionsites(uint32_t gametime) {
 	}
 
 	// All other SPACE_CONSUMERS without input and above target_count
-	if (site.bo->inputs.empty()            // does not consume anything
+	if (site.bo->inputs.empty()                       // does not consume anything
 	    && site.bo->production_hint == kUncalculated  // not a renewing building (forester...)
 	    && site.bo->is(BuildingAttribute::kSpaceConsumer) &&
 	    !site.bo->is(BuildingAttribute::kRanger)) {
@@ -4077,7 +4067,8 @@ bool DefaultAI::check_mines_(uint32_t const gametime) {
 		set_inputs_to_zero(site);
 	}
 
-	// Single _critical is a critical mine if it is the only one of its type, so it needs special treatment
+	// Single _critical is a critical mine if it is the only one of its type, so it needs special
+	// treatment
 	bool single_critical = false;
 	if ((site.bo->is(BuildingAttribute::kBuildingMatProducer) || site.bo->mines == iron_ore_id) &&
 	    mines_per_type[site.bo->mines].total_count() == 1) {
@@ -4231,8 +4222,7 @@ BuildingNecessity DefaultAI::check_warehouse_necessity(BuildingObserver& bo,
 		++needed_count;
 	}
 
-	if (bo.is(BuildingAttribute::kPort) &&
-	    (productionsites.size() + mines_.size()) > 10) {
+	if (bo.is(BuildingAttribute::kPort) && (productionsites.size() + mines_.size()) > 10) {
 		++needed_count;
 	}
 
@@ -4389,9 +4379,10 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 			// at least  1
 			target = std::max<uint16_t>(target, 1);
 
-			// it seems there are wares with 0 preciousness (no entry in init files?), but we need positive value here.
-			// NOCOM double-check that I didn't mess this up
-			const uint16_t preciousness = std::max<uint16_t>(wares.at(bo.outputs.at(m)).preciousness, 1);
+			// it seems there are wares with 0 preciousness (no entry in init files?), but we need
+			// positive value here.
+			const uint16_t preciousness =
+			   std::max<uint16_t>(wares.at(bo.outputs.at(m)).preciousness, 1);
 
 			if (calculate_stocklevel(wt) < target ||
 			    site_needed_for_economy == BasicEconomyBuildingStatus::kEncouraged) {
@@ -4662,7 +4653,6 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 				tmp_target -= std::abs(management_data.get_military_number_at(145) / 10);
 			}
 
-			// NOCOM double-check that I didn't mess this up
 			tmp_target = std::max<int16_t>(tmp_target, 2);
 
 			bo.cnt_target = tmp_target;
@@ -5096,7 +5086,8 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 // if multiple outputs, it returns lowest value
 uint32_t DefaultAI::calculate_stocklevel(BuildingObserver& bo, const WareWorker what) {
 	uint32_t count = std::numeric_limits<uint32_t>::max();
-	std::vector<Widelands::DescriptionIndex>* items = (what == WareWorker::kWare ? &bo.outputs : &bo.positions);
+	std::vector<Widelands::DescriptionIndex>* items =
+	   (what == WareWorker::kWare ? &bo.outputs : &bo.positions);
 
 	for (uint32_t m = 0; m < items->size(); ++m) {
 		DescriptionIndex wt(static_cast<size_t>(items->at(m)));
@@ -5548,7 +5539,7 @@ void DefaultAI::gain_building(Building& b, const bool found_on_load) {
 			} else {
 				militarysites.back().built_time = gametime;
 			}
-			militarysites.back().last_change = 0;  // NOCOM(#codereview): has ths question been resolved? If not, should be a TODO comment. or gametime?
+			militarysites.back().last_change = 0;
 			msites_per_size[bo.desc->get_size()].finished += 1;
 
 		} else if (bo.type == BuildingObserver::Type::kTrainingsite) {
@@ -6097,9 +6088,18 @@ int32_t DefaultAI::limit_cnt_target(const int32_t current_cnt_target, const int3
 	return new_target;
 }
 
-// Looking for situation where for a critical mine (iron, or marble) there is just one mine and it is
+// Looking for situation where for a critical mine (iron, or marble) there is just one mine and it
+// is
 // unoccupied, probably we need to dismantle another one to release a miner
-// NOCOM(#codereview): Why not just kick out the worker(s)? Check ProductionSiteWindow::evict_worker() for how it's done.
+// NOCOM: Why not just kick out the worker(s)? Check ProductionSiteWindow::evict_worker() for how
+// it's done.
+// @Gun: Could be possible, but the logic of AI is not to keep unstaffed mines, because building new
+// ones is not that expensive
+// and AI always test for availability of workers for a new mine. Though critical mine (e.g first
+// iron mine) is preferred
+// regardless. AI also dismantles mines that are not fully occupied within some time from
+// construction, this would interfere
+// and would need complex re-think
 bool DefaultAI::critical_mine_unoccupied(uint32_t gametime) {
 	// resetting unoccupied
 	for (auto& mine : mines_per_type) {

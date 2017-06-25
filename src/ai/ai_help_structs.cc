@@ -378,13 +378,13 @@ int8_t Neuron::get_result(const size_t pos) {
 // get value corresponding to input in range 0-20, if you are out of range
 // the input will be cropped
 int8_t Neuron::get_result_safe(int32_t pos, const bool absolute) {
-	// NOCOM(#codereview): Should this be adjusted before the lowest/highest pos is set?
 	// pos has to be normalized into range 0 - 20(kNeuronMaxPosition)
 	pos = std::max(0, std::min(static_cast<int>(kNeuronMaxPosition), pos));
 
 	assert(pos <= static_cast<int32_t>(kNeuronMaxPosition));
 	assert(pos >= 0);
 	assert(results[pos] >= -kNeuronWeightLimit && results[pos] <= kNeuronWeightLimit);
+	
 	if (absolute) {
 		return std::abs(results[pos]);
 	}
@@ -403,9 +403,21 @@ FNeuron::FNeuron(uint32_t c, uint16_t i) {
 	id = i;
 }
 
-// Returning result depending on combinations of 5 bools
+// Returning a result depending on combinations of 5 bools
+// Bools are completely anonymous, but can present any yes/no inputs, e.g. imagine the AI that is
+// to figure out if it should attack from a militarysite. The inputs can be:
+// bool1 - are we stronger then enemy?
+// bool2 - do we have basic economy established?
+// bool3 - do we have local predominance?
+// bool4 - has our strenght grown up in last 60 minutes?
+// bool5 - are there mines in vicitiny?
+// these five bools can create 32 combinations = yes/no answers.
+// In fact this can be perceived as a complicated if..then structure, but the one that can
+// adjust automatically as a part of training.
+// Or rather is 5-dimensional table with 2 columns in every dimension :)
+// In fact this concept if very demanding for training so we dont use it much
 // NOCOM(#codereview): Do the bools have any speacial meaning, or is it just abstract stuff?
-// If they have a meaning, this should be commented.
+// @Gun: Is explanation sufficient?
 bool FNeuron::get_result(
    const bool bool1, const bool bool2, const bool bool3, const bool bool4, const bool bool5) {
 	return core.test(bool1 * 16 + bool2 * 8 + bool3 * 4 + bool4 * 2 + bool5);
@@ -460,14 +472,6 @@ void ManagementData::review(const uint32_t gametime,
                             const int16_t trained_soldiers,
                             const int16_t latest_attackers,
                             const uint16_t conq_ws) {
-	// NOCOM(#codereview): Turn these into constexpr so that they can be assigned at compile time.
-	const int16_t current_land_divider = 2;
-	const int16_t land_delta_multiplier = 1;
-	const int16_t bonus = 1000;
-	const int16_t attackers_multiplicator = 1;
-	const int16_t attack_bonus = 100;
-	const int16_t trained_soldiers_score = 250;
-	const int16_t conquered_wh_bonus = 500;
 
 	const int16_t main_bonus =
 	   ((static_cast<int32_t>(land - old_land) > 0 && land > max_e_land * 5 / 6 && attackers > 0 &&
@@ -806,19 +810,15 @@ void ManagementData::new_dna_for_persistent(const uint8_t pn, const Widelands::A
 		switch (dna_donor) {
 			case 0 :
 				pd->f_neurons.push_back(f_neurons_A[i]);
-				// NOCOM f_neuron_pool.push_back(FNeuron(f_neurons_A[i], i));
 				break;
 			case 1 :
 				pd->f_neurons.push_back(f_neurons_B[i]);
-				// NOCOM f_neuron_pool.push_back(FNeuron(f_neurons_B[i], i));
 				break;
 			case 2 :
 				pd->f_neurons.push_back(f_neurons_C[i]);
-				// NOCOM f_neuron_pool.push_back(FNeuron(f_neurons_C[i], i));
 				break;
 			case 3 :
 				pd->f_neurons.push_back(f_neurons_D[i]);
-				// NOCOM f_neuron_pool.push_back(FNeuron(f_neurons_D[i], i));
 				break;
 			default:
 				log ("parent %d?\n", dna_donor);
@@ -830,7 +830,6 @@ void ManagementData::new_dna_for_persistent(const uint8_t pn, const Widelands::A
 	pd->neuron_pool_size = kNeuronPoolSize;
 	pd->f_neuron_pool_size = kFNeuronPoolSize;
 
-	// NOCOM test_consistency(); might not be consistent yet
 }
 
 // Mutating, but all done on persistent data
@@ -976,7 +975,6 @@ void ManagementData::copy_persistent_to_local(const uint8_t pn) {
 	assert(pd->f_neurons.size() == kFNeuronPoolSize);
 	f_neuron_pool.clear();
 	for (uint32_t i = 0; i < kFNeuronPoolSize; i = i + 1) {
-		// NOCOM pd->f_neurons.push_back(f_neuron_pool[i].get_int());
 		f_neuron_pool.push_back(FNeuron(pd->f_neurons[i], i));
 	}
 
@@ -988,7 +986,7 @@ void ManagementData::copy_persistent_to_local(const uint8_t pn) {
 	log(" %d: DNA initialized\n", pn);
 }
 
-bool ManagementData::test_consistency(bool itemized) {
+void ManagementData::test_consistency(bool itemized) {
 
 	assert(pd->neuron_weights.size() == pd->neuron_pool_size);
 	assert(pd->neuron_functs.size() == pd->neuron_pool_size);
@@ -1015,9 +1013,7 @@ bool ManagementData::test_consistency(bool itemized) {
 		}
 	}
 
-	// There is no 'return false', because asserts above would take care of this
-	// NOCOM(#codereview): Make this a void function then - the return value is always true and never used.
-	return true;
+	return;
 }
 
 // Print DNA data to console, used for training
@@ -1329,8 +1325,16 @@ PlayersStrengths::PlayerStat::PlayerStat(Widelands::TeamNumber tc,
 }
 
 // Inserting/updating data
-// NOCOM(#codereview): I find the parameters hard to read. Can you give them more obvious names?
-// I also generally don't understand the "60" variants are for - add a comment some place to explain what it does?
+// We keep information for
+// - player strength / power
+// - player casualties
+// - player land
+// We store actual values, but for some of them we store also
+// - old = 15 mins ago
+// - old60 = 60 mins ago
+// e.g. players_power / old_players_power / old60_players_power
+// we recieve also player and team numbers to figure out if we are enemies, or in the team
+// NOCOM @Gun: Is explanation above enough?
 void PlayersStrengths::add(Widelands::PlayerNumber pn,
                            Widelands::PlayerNumber opn,
                            Widelands::TeamNumber mytn,
