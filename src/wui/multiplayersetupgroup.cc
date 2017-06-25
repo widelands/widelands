@@ -288,8 +288,7 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 		}
 
 		// Do not close a player in savegames or scenarios
-		if (!settings.savegame &&
-			 (!settings.scenario || settings.players.at(id_).closeable)) {
+		if (!settings.uncloseable(id_)) {
 			type_dropdown_.add(_("Closed"), "closed",
 									 g_gr->images().get("images/ui_basic/stop.png"), false, _("Closed"));
 		}

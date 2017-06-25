@@ -125,6 +125,8 @@ struct GameSettings {
 	Widelands::PlayerNumber find_shared(PlayerSlot slot) const;
 	/// Check if the player number returned by find_shared is usable
 	bool is_shared_usable(PlayerSlot slot, Widelands::PlayerNumber shared) const;
+	/// Savegame slots and certain scenario slots can't be closed
+	bool uncloseable(PlayerSlot slot) const;
 
 	/// Number of player position
 	int16_t playernum;

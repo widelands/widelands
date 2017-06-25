@@ -1131,6 +1131,11 @@ void GameHost::set_player_state(uint8_t const number,
 		}
 	}
 
+	// Make sure that slots that are not closeable stay open
+	if (player.state == PlayerSettings::State::kClosed && d->settings.uncloseable(number)) {
+		player.state = PlayerSettings::State::kOpen;
+	}
+
 	if (player.state == PlayerSettings::State::kComputer)
 		player.name = get_computer_player_name(number);
 

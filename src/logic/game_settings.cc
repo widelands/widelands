@@ -32,3 +32,7 @@ Widelands::PlayerNumber GameSettings::find_shared(PlayerSlot slot) const {
 bool GameSettings::is_shared_usable(PlayerSlot slot, Widelands::PlayerNumber shared) const {
 	return shared <= players.size() && (shared - 1) != slot;
 }
+
+bool GameSettings::uncloseable(PlayerSlot slot) const {
+	return (scenario && !players.at(slot).closeable) || savegame;
+}
