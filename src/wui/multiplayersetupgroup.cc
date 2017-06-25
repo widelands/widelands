@@ -200,7 +200,7 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 
 		subscriber_ =
 		   Notifications::subscribe<NoteGameSettings>([this](const NoteGameSettings& note) {
-			   if (id_ == note.position) {
+			   if (id_ == note.position || s->settings().players[id_].state == PlayerSettings::State::kShared) {
 				   update();
 			   }
 			});
@@ -372,14 +372,9 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 					   (boost::format(_("Shared in Player %u")) % cast_unsigned(i + 1))
 					      .str();
 					tribes_dropdown_.add(
-					   player_name, shared_in_as_string(i + 1), player_image, false, player_name);
+					   player_name, shared_in_as_string(i + 1), player_image, (i + 1) == player_setting.shared_in, player_name);
 				}
 			}
-			int shared_in = 0;
-			while (shared_in == id_) {
-				++shared_in;
-			}
-			tribes_dropdown_.select(shared_in_as_string(shared_in + 1));
 			tribes_dropdown_.set_enabled(tribes_dropdown_.size() > 1);
 		} else {
 			{
@@ -491,18 +486,14 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 	/// Refresh all user interfaces
 	void update() {
 		const GameSettings& settings = s->settings();
-
 		if (id_ >= settings.players.size()) {
 			set_visible(false);
 			return;
 		}
-		// NOCOM player slot in client doesn't notice shared-in assignment change
-		// NOCOM Shared-in not reacting when slot is opened
-		set_visible(true);
 
 		const PlayerSettings& player_setting = settings.players[id_];
-
 		rebuild_type_dropdown(player_setting);
+		set_visible(true);
 
 		if (player_setting.state == PlayerSettings::State::kClosed ||
 		    player_setting.state == PlayerSettings::State::kOpen) {

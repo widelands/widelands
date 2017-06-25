@@ -1104,6 +1104,30 @@ void GameHost::set_player_state(uint8_t const number,
 
 	player.state = state;
 
+	 auto can_be_shared = [] (PlayerSettings::State compareme) {
+		 return compareme != PlayerSettings::State::kClosed && compareme != PlayerSettings::State::kShared;
+	 };
+
+	// Update shared positions for other players
+	for (size_t i = 0; i < d->settings.players.size(); ++i) {
+		if (i == number) {
+			// Don't set own state
+			continue;
+		}
+		PlayerSettings& other_player = d->settings.players.at(i);
+		if (other_player.state == PlayerSettings::State::kShared) {
+			if (!can_be_shared(player.state)) {
+				PlayerSlot shared_in = 0;
+				for (;shared_in < d->settings.players.size(); ++shared_in) {
+					if (can_be_shared(d->settings.players.at(shared_in + 1).state) && shared_in != i) {
+						set_player_shared(i, shared_in + 1);
+						break;
+					}
+				}
+			}
+		}
+	}
+
 	if (player.state == PlayerSettings::State::kComputer)
 		player.name = get_computer_player_name(number);
 
