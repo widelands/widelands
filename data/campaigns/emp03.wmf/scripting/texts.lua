@@ -114,7 +114,7 @@ obj_build_expedition_ports = {
    -- TRANSLATORS: Objective - create 2 expeditions and found new colonies with them
    body = objective_text(_"Build 2 Expedition Ports",
       listitem_bullet(_[[We should explore the island in the south. Use an expedition to build a port there. Afterwards, let’s try to find some mining resources.]]) ..
-     listitem_bullet(_[[We should send a ship nothwards to gather some intelligence about the Barbarians. Try to build a port on the island and found an outpost.]])
+     listitem_bullet(_[[We should send a ship northwards to gather some intelligence about the Barbarians. Try to build a port on the island and found an outpost.]])
    ),
 }
 
@@ -201,7 +201,7 @@ diary_page_3 = {
       _([[Finally, the wrath of the gods and the ocean seems to be over.]])
       .. paragraphdivider() ..
       -- TRANSLATORS: Lutius - Diary
-      _([[We landed on an unknown coast and found some rest under the palm trees growing at the shore. But that is about as good as it gets. The truth is: when I woke up this morning, I saw nothing but sand and stone around us.]])
+      _([[Again, we stranded on an unknown coast and slept in the shade under some palm trees until the sun was risen high up in the sky. I’ afraid that when we awoke at noon, nobody was really surprised that all we could see was sand… although the amount of rocks near our camp was astonishing.]])
       .. paragraphdivider() ..
       -- TRANSLATORS: Lutius - Diary
       _([[It really seems as if we have landed on a very small island with little space.]])
@@ -526,7 +526,7 @@ amalea_12 = {
 }
 
 amalea_13 = {
-   title=_"Amalea’s Councel",
+   title=_"Amalea’s Counsel",
    body= amalea1(_"Amalea is clapping her hands…",
       -- TRANSLATORS: Amalea
       _([[Salve Lutius. We just completed our weaving mill. Now we are very close to taking to the sea again. However, I thought it would be helpful to remind you that ship production is not the only industry that needs cloth.]])
@@ -555,7 +555,7 @@ saledus_8 = {
       -- TRANSLATORS: Saledus
       _([[Sire, we are making good progress towards getting home eventually. But there is one thing I need to talk about:]])
       .. paragraphdivider() ..
-      _([[As we have seen on our last journey, it is of great importance to put the gods and especially Neptune in a good mood to safeguard our journey.]])
+      _([[As we have seen on our journeys, it is of great importance to put the gods and especially Neptune in a good mood to safeguard our journey.]])
       .. paragraphdivider() ..
       _([[Unfortunately, we lost our holy shrine of Neptune in the great storm, so we can’t worship him well. I think we should search the whole region to see if we can recover all six pieces of the shrine.]])
       .. paragraphdivider() ..
@@ -581,7 +581,7 @@ saledus_12 = {
    title=_"Unpleasant Discoveries",
    body= saledus3(_"Saledus looks very worried…",
       -- TRANSLATORS: Saledus
-      _([[Sire, we found the ruins of a former Barbarian fortress and village. I’m somewhat worried that we will have to fight against them before we are ready.]])),
+      _([[Sire, we found the ruins of a former Barbarian fortress and village. I’m somewhat worried that we will have to fight against them before we are ready to do so.]])),
    posy=1,
    w=500,
 }
