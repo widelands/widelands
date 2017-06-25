@@ -1117,10 +1117,10 @@ void GameHost::set_player_state(uint8_t const number,
 		PlayerSettings& other_player = d->settings.players.at(i);
 		if (other_player.state == PlayerSettings::State::kShared) {
 			if (!can_be_shared(player.state)) {
-				PlayerSlot shared_in = 0;
-				for (;shared_in < d->settings.players.size(); ++shared_in) {
-					if (can_be_shared(d->settings.players.at(shared_in + 1).state) && shared_in != i) {
-						set_player_shared(i, shared_in + 1);
+				PlayerSlot shared_in = 1;
+				for (;shared_in <= d->settings.players.size(); ++shared_in) {
+					if (can_be_shared(d->settings.players.at(shared_in - 1).state) && (shared_in - 1U) != i) {
+						set_player_shared(i, shared_in);
 						break;
 					}
 				}
