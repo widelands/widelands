@@ -44,6 +44,8 @@ class MilitarySite;
 
 enum class ExtendedBool : uint8_t { kUnset, kTrue, kFalse };
 
+enum class MutatingIntensity : uint8_t { kNo, kNormal, kAgressive };
+
 enum class BuildingNecessity : uint8_t {
 	kForced,
 	kNeeded,
@@ -477,7 +479,6 @@ struct ProductionSiteObserver {
 	Widelands::ProductionSite* site;
 	uint32_t built_time;
 	uint32_t unoccupied_till;
-	uint8_t stats_zero;
 	uint32_t no_resources_since;
 	bool upgrade_pending;
 	uint32_t dismantle_pending_since;
@@ -655,6 +656,7 @@ struct ManagementData {
 	}
 	int16_t get_military_number_at(uint8_t);
 	void set_military_number_at(uint8_t, int16_t);
+	MutatingIntensity do_mutate(uint8_t, int16_t);
 	int8_t shift_weight_value(int8_t, bool = true);
 	void test_consistency(bool = false);
 

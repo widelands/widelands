@@ -416,9 +416,6 @@ FNeuron::FNeuron(uint32_t c, uint16_t i) {
 // adjust automatically as a part of training.
 // Or rather it is a 5-dimensional table with 2 columns in every dimension :)
 // In fact this concept if very demanding for training so we don't use it much
-// NOCOM(#codereview): Do the bools have any speacial meaning, or is it just abstract stuff?
-// @Gun: Is explanation sufficient?
-// NOCOM(#codereview): COnsidering that things are very abstrace, it is, thanks!
 bool FNeuron::get_result(
    const bool bool1, const bool bool2, const bool bool3, const bool bool4, const bool bool5) {
 	return core.test(bool1 * 16 + bool2 * 8 + bool3 * 4 + bool4 * 2 + bool5);
@@ -832,6 +829,16 @@ void ManagementData::new_dna_for_persistent(const uint8_t pn, const Widelands::A
 	pd->f_neuron_pool_size = kFNeuronPoolSize;
 
 }
+// Decides if mutation takes place and how intensive it will be
+MutatingIntensity ManagementData::do_mutate(const uint8_t is_preferred, const int16_t mutation_probability) {
+	if (is_preferred > 0) {
+		return MutatingIntensity::kAgressive;
+	}
+	if (std::rand() % mutation_probability == 0) {
+		return MutatingIntensity::kNormal;
+	}
+	return MutatingIntensity::kNo;
+}
 
 // Mutating, but all done on persistent data
 void ManagementData::mutate(const uint8_t pn) {
@@ -874,21 +881,15 @@ void ManagementData::mutate(const uint8_t pn) {
 				if (i == kMutationRatePosition) {  // mutated above
 					continue;
 				}
-				// NOCOM(#codereview): We have this code again below, pull out a helper function.
-				bool mutating = false;
-				bool aggressive = false;
-				if (preferred_numbers.count(i) > 0) {
-					mutating = true;
-					aggressive = true;
-				} else if (std::rand() % probability == 0) {
-					mutating = true;
-				}
-				if (mutating) {
+
+				const MutatingIntensity mutating_intensity = do_mutate(preferred_numbers.count(i) > 0, probability);
+
+				if (mutating_intensity != MutatingIntensity::kNo) {
 					const int16_t old_value = get_military_number_at(i);
-					const int16_t new_value = shift_weight_value(get_military_number_at(i), aggressive);
+					const int16_t new_value = shift_weight_value(get_military_number_at(i), mutating_intensity == MutatingIntensity::kAgressive);
 					set_military_number_at(i, new_value);
 					log("      Magic number %3d: value changed: %4d -> %4d  %s\n", i, old_value,
-					       new_value, (aggressive) ? "aggressive" : "");
+					       new_value, (mutating_intensity == MutatingIntensity::kAgressive) ? "aggressive" : "");
 				}
 			}
 		}
@@ -899,28 +900,22 @@ void ManagementData::mutate(const uint8_t pn) {
 			std::set<int32_t> preferred_neurons = {};
 			for (auto& item : neuron_pool) {
 
-				bool mutating = false;
-				bool aggressive = false;
-				if (preferred_neurons.count(item.get_id()) > 0) {
-					mutating = true;
-					aggressive = true;
-				} else if (std::rand() % probability == 0) {
-					mutating = true;
-				}
-				if (mutating) {
+				const MutatingIntensity mutating_intensity = do_mutate(preferred_neurons.count(item.get_id()) > 0, probability);
+
+				if (mutating_intensity != MutatingIntensity::kNo) {
 					const int16_t old_value = item.get_weight();
 					if (std::rand() % 4 == 0) {
 						assert(!neuron_curves.empty());
 						item.set_type(std::rand() % neuron_curves.size());
 						pd->neuron_functs[item.get_id()] = item.get_type();
 					} else {
-						int16_t new_value = shift_weight_value(item.get_weight(), aggressive);
+						int16_t new_value = shift_weight_value(item.get_weight(), mutating_intensity == MutatingIntensity::kAgressive);
 						item.set_weight(new_value);
 						pd->neuron_weights[item.get_id()] = item.get_weight();
 					}
 					log("      Neuron %2d: weight: %4d -> %4d, new curve: %d   %s\n", item.get_id(),
 					       old_value, item.get_weight(), item.get_type(),
-					       (aggressive) ? "aggressive" : "");
+					       (mutating_intensity == MutatingIntensity::kAgressive) ? "aggressive" : "");
 
 					item.recalculate();
 				}
@@ -1335,8 +1330,6 @@ PlayersStrengths::PlayerStat::PlayerStat(Widelands::TeamNumber tc,
 // - old60 = 60 mins ago
 // e.g. players_power / old_players_power / old60_players_power
 // we recieve also player and team numbers to figure out if we are enemies, or in the team
-// NOCOM @Gun: Is explanation above enough?
-// NOCOM(#codereview): It is, thanks!
 void PlayersStrengths::add(Widelands::PlayerNumber pn,
                            Widelands::PlayerNumber opn,
                            Widelands::TeamNumber mytn,
@@ -1621,8 +1614,7 @@ uint32_t PlayersStrengths::get_update_time() {
 }
 
 ProductionSiteObserver::ProductionSiteObserver()
-   : stats_zero(0),
-     no_resources_since(kNever),
+   : no_resources_since(kNever),
      upgrade_pending(false),
      dismantle_pending_since(kNever) {
 }

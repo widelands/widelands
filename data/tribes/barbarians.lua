@@ -286,7 +286,6 @@ tribes:new_tribe {
    port = "barbarians_port",
    barracks = "barbarians_barracks",
    bakery = "barbarians_bakery",
-   logrefiner = "barbarians_wood_hardener",
    ironore = "iron_ore",
    rawlog = "log",
    refinedlog = "blackwood",

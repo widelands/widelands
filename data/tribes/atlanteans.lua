@@ -353,7 +353,6 @@ tribes:new_tribe {
    port = "atlanteans_port",
    barracks = "atlanteans_barracks",
    bakery = "atlanteans_bakery",
-   logrefiner = "atlanteans_sawmill",
    ironore = "iron_ore",
    rawlog = "log",
    refinedlog = "planks",

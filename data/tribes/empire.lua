@@ -327,7 +327,6 @@ tribes:new_tribe {
    port = "empire_port",
    barracks = "empire_barracks",
    bakery = "empire_bakery",
-   logrefiner = "empire_sawmill",
    ironore = "iron_ore",
    rawlog = "log",
    refinedlog = "planks",

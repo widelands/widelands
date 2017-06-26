@@ -39,7 +39,7 @@ tribes:new_productionsite_type {
       mines = "stones",
       mines_percent = 50,
       prohibited_till = 450,
-      is_basic = 1
+      basic_amount = 1
    },
 
    working_positions = {

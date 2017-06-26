@@ -33,7 +33,7 @@ tribes:new_productionsite_type {
 
    aihints = {
       mines_water = true,
-      is_basic = 1
+      basic_amount = 1
    },
 
    working_positions = {

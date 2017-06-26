@@ -724,11 +724,12 @@ void DefaultAI::late_initialization() {
 			if (building_index == tribe_->barracks()) {
 				bo.set_is(BuildingAttribute::kBarracks);
 			}
-			if (building_index == tribe_->logrefiner()) {
-				bo.set_is(BuildingAttribute::kLogRefiner);
-			}
 			if (building_index == tribe_->bakery()) {
 				bo.set_is(BuildingAttribute::kBakery);
+			}
+			// Identify refined log producer
+			if (bo.outputs.size() == 1 && bo.outputs[0] == tribe_->refinedlog()) {
+				bo.set_is(BuildingAttribute::kLogRefiner);
 			}
 
 			// now we find out if the upgrade of the building is a full substitution
@@ -769,9 +770,7 @@ void DefaultAI::late_initialization() {
 
 			// now we identify producers of critical build materials
 			for (DescriptionIndex ware : bo.outputs) {
-				// NOCOM @Gun: I presume is_construction_material() is reliable, I didnot check the code
 				// building material except for trivial material
-				// NOCOM(#codereview): Yes, is is reliable - the engine automatically calculates it from the buildings' build cost for each tribe.
 				if (tribe_->is_construction_material(ware) &&
 				    !(ware == tribe_->rawlog() || ware == tribe_->granite())) {
 					bo.set_is(BuildingAttribute::kBuildingMatProducer);
@@ -857,10 +856,13 @@ void DefaultAI::late_initialization() {
 	}
 
 	// We must verify that some buildings has been identified
+	// Also note that AI just presume that some buildings are unique, if you want to
+	// create e.g. two baracks or bakeries inpact on AI must be considered
 	assert(count_buildings_with_attribute(BuildingAttribute::kBarracks) == 1);
 	assert(count_buildings_with_attribute(BuildingAttribute::kBakery) == 1);
 	assert(count_buildings_with_attribute(BuildingAttribute::kLogRefiner) == 1);
 	assert(count_buildings_with_attribute(BuildingAttribute::kIronMine) >= 1);
+	// If there will be a tribe with more than 3 mines of same type, just increase the number
 	assert(count_buildings_with_attribute(BuildingAttribute::kIronMine) <= 3);
 
 	// atlanteans they consider water as a resource
@@ -5511,7 +5513,6 @@ void DefaultAI::gain_building(Building& b, const bool found_on_load) {
 			assert(mines_.back().no_resources_since == kNever);
 			assert(!mines_.back().upgrade_pending);
 			assert(mines_.back().dismantle_pending_since == kNever);
-			assert(productionsites.back().stats_zero == 0);
 			mines_.back().bo->unoccupied_count += 1;
 
 			for (uint32_t i = 0; i < bo.outputs.size(); ++i)

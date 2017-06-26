@@ -105,7 +105,6 @@ public:
 	DescriptionIndex port() const;
 	DescriptionIndex barracks() const;
 	DescriptionIndex bakery() const;
-	DescriptionIndex logrefiner() const;
 	DescriptionIndex ironore() const;
 	DescriptionIndex rawlog() const;
 	DescriptionIndex refinedlog() const;
@@ -195,7 +194,6 @@ private:
 	DescriptionIndex port_;          // The port that this tribe uses
 	DescriptionIndex barracks_;      // The barracks to create soldiers
 	DescriptionIndex bakery_;        // The bakery to prepare bread
-	DescriptionIndex logrefiner_;    // The log processor to cut wood to plants
 	DescriptionIndex ironore_;       // Iron ore
 	DescriptionIndex rawlog_;        // Simple log
 	DescriptionIndex refinedlog_;    // Refined log, e.g. wood or blackwood
