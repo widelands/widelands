@@ -639,6 +639,7 @@ void MultiPlayerSetupGroup::update() {
 			clientbox.add(multi_player_client_groups.at(i), UI::Box::Resizing::kFullSize);
 			multi_player_client_groups.at(i)->layout();
 		}
+		multi_player_client_groups.at(i)->set_visible(true);
 	}
 
 	// Keep track of which player slots are visible
