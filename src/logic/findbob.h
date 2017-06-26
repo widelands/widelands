@@ -27,7 +27,7 @@ namespace Widelands {
 class Player;
 
 struct FindBobAttribute : public FindBob {
-	FindBobAttribute(uint32_t const init_attrib) : attrib(init_attrib) {
+	explicit FindBobAttribute(uint32_t const init_attrib) : attrib(init_attrib) {
 	}
 
 	bool accept(Bob*) const override;
@@ -42,7 +42,7 @@ struct FindBobAttribute : public FindBob {
  * if player is 0).
  */
 struct FindBobEnemySoldier : public FindBob {
-	FindBobEnemySoldier(Player* init_player) : player(init_player) {
+	explicit FindBobEnemySoldier(Player* init_player) : player(init_player) {
 	}
 
 	bool accept(Bob*) const override;

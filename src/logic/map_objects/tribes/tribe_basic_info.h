@@ -42,7 +42,7 @@ struct TribeBasicInfo {
 		std::string tooltip;
 	};
 
-	TribeBasicInfo(std::unique_ptr<LuaTable> table);
+	explicit TribeBasicInfo(std::unique_ptr<LuaTable> table);
 
 	/// Internal name to reference this tribe
 	std::string name;

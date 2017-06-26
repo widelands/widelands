@@ -29,7 +29,7 @@
 /// Unsets a buildspace for ports.
 class EditorUnsetPortSpaceTool : public EditorTool {
 public:
-	EditorUnsetPortSpaceTool();
+	explicit EditorUnsetPortSpaceTool();
 
 	int32_t handle_click_impl(const Widelands::World& world,
 	                          const Widelands::NodeAndTriangle<>& center,

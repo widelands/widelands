@@ -37,7 +37,7 @@ struct FontSet {
 	static constexpr const char* kFallbackFont = "DejaVu/DejaVuSans.ttf";
 
 	/// Create a fontset from i18n/fonts.lua
-	FontSet(const std::string& fontset_name);
+	explicit FontSet(const std::string& fontset_name);
 
 	// The fontset's name
 	const std::string& name() const;

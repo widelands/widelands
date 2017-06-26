@@ -1490,7 +1490,7 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 				assert(!player_statistics.players_in_same_team(bpn, pn));
 				field.enemy_nearby = true;
 				if (upcast(MilitarySite const, militarysite, building)) {
-					field.enemy_military_presence += militarysite->stationed_soldiers().size();
+					field.enemy_military_presence += militarysite->soldier_control()->stationed_soldiers().size();
 					++field.enemy_military_sites;
 				}
 				if (upcast(ConstructionSite const, constructionsite, building)) {
@@ -1502,7 +1502,7 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 
 				// Warehouses are counted here too as they can host soldiers as well
 				if (upcast(Warehouse const, warehouse, building)) {
-					field.enemy_military_presence += warehouse->stationed_soldiers().size();
+					field.enemy_military_presence += warehouse->soldier_control()->stationed_soldiers().size();
 					++field.enemy_military_sites;
 					field.enemy_wh_nearby = true;
 					enemy_warehouses.insert(building->get_position().hash());
@@ -1511,7 +1511,7 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 			} else if (bpn != pn) {  // it is an ally
 				assert(!player_statistics.get_is_enemy(bpn));
 				if (upcast(MilitarySite const, militarysite, building)) {
-					field.ally_military_presence += militarysite->stationed_soldiers().size();
+					field.ally_military_presence += militarysite->soldier_control()->stationed_soldiers().size();
 				}
 				continue;
 			}
@@ -1550,10 +1550,10 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 				const int32_t radius = militarysite->descr().get_conquers() + 4;
 
 				if (radius > dist) {
-					field.area_military_capacity += militarysite->max_soldier_capacity();
-					field.own_military_presence += militarysite->stationed_soldiers().size();
+					field.area_military_capacity += militarysite->soldier_control()->max_soldier_capacity();
+					field.own_military_presence += militarysite->soldier_control()->stationed_soldiers().size();
 
-					if (militarysite->stationed_soldiers().empty()) {
+					if (militarysite->soldier_control()->stationed_soldiers().empty()) {
 						field.military_unstationed += 1;
 					} else {
 						field.military_stationed += 1;
@@ -1586,7 +1586,7 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 				field.enemy_accessible_ = other_player_accessible(
 				   actual_enemy_check_area + 3, &unused1, &unused2, field.coords, WalkSearch::kEnemy);
 			}
-			field.local_soldier_capacity = ms->max_soldier_capacity();
+			field.local_soldier_capacity = ms->soldier_control()->max_soldier_capacity();
 			field.is_militarysite = true;
 		} else {
 			NEVER_HERE();
@@ -3294,7 +3294,7 @@ bool DefaultAI::create_shortcut_road(const Flag& flag,
 		bool occupied_military_ = false;
 		Building* b = flag.get_building();
 		if (upcast(MilitarySite, militb, b)) {
-			if (militb->stationed_soldiers().size() > 0) {
+			if (militb->soldier_control()->stationed_soldiers().size() > 0) {
 				occupied_military_ = true;
 			}
 		}

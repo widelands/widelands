@@ -229,7 +229,7 @@ struct FindNodeMineable {
 
 // Fishers and fishbreeders must be built near water
 struct FindNodeWater {
-	FindNodeWater(const World& world);
+	explicit FindNodeWater(const World& world);
 
 	bool accept(const Map& /* map */, const FCoords& coord) const;
 
@@ -241,7 +241,7 @@ private:
 // Open water is a field where all 6 adjacent triangles are water
 struct FindNodeOpenWater {
 	// 'world' is unused, but we need to fit the template.
-	FindNodeOpenWater(const World& /* world */) {
+	explicit FindNodeOpenWater(const World& /* world */) {
 	}
 
 	bool accept(const Map& /* map */, const FCoords& coord) const;
@@ -298,7 +298,7 @@ struct WalkableSpot {
 };
 
 struct BuildableField {
-	BuildableField(const Widelands::FCoords& fc);
+	explicit BuildableField(const Widelands::FCoords& fc);
 
 	int32_t own_military_sites_nearby_();
 
@@ -371,7 +371,7 @@ struct BuildableField {
 };
 
 struct MineableField {
-	MineableField(const Widelands::FCoords& fc);
+	explicit MineableField(const Widelands::FCoords& fc);
 
 	Widelands::FCoords coords;
 	uint32_t field_info_expiration;
@@ -382,7 +382,7 @@ struct MineableField {
 };
 
 struct EconomyObserver {
-	EconomyObserver(Widelands::Economy& e);
+	explicit EconomyObserver(Widelands::Economy& e);
 
 	Widelands::Economy& economy;
 	std::list<Widelands::Flag const*> flags;
@@ -707,7 +707,7 @@ private:
 // list of candidate flags to build roads, with some additional logic
 struct FlagsForRoads {
 
-	FlagsForRoads(int32_t mr) : min_reduction(mr) {
+	explicit FlagsForRoads(int32_t mr) : min_reduction(mr) {
 	}
 
 	struct Candidate {

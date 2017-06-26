@@ -75,7 +75,7 @@ public:
 
 	LuaMap() {
 	}
-	LuaMap(lua_State* L) {
+	explicit LuaMap(lua_State* L) {
 		report_error(L, "Cannot instantiate a 'Map' directly!");
 	}
 
@@ -111,9 +111,10 @@ public:
 
 	LuaTribeDescription() : tribedescr_(nullptr) {
 	}
-	LuaTribeDescription(const Widelands::TribeDescr* const tribedescr) : tribedescr_(tribedescr) {
+	explicit LuaTribeDescription(const Widelands::TribeDescr* const tribedescr)
+	   : tribedescr_(tribedescr) {
 	}
-	LuaTribeDescription(lua_State* L) : tribedescr_(nullptr) {
+	explicit LuaTribeDescription(lua_State* L) : tribedescr_(nullptr) {
 		report_error(L, "Cannot instantiate a 'LuaTribeDescription' directly!");
 	}
 
@@ -169,10 +170,10 @@ public:
 
 	LuaMapObjectDescription() : mapobjectdescr_(nullptr) {
 	}
-	LuaMapObjectDescription(const Widelands::MapObjectDescr* const mapobjectdescr)
+	explicit LuaMapObjectDescription(const Widelands::MapObjectDescr* const mapobjectdescr)
 	   : mapobjectdescr_(mapobjectdescr) {
 	}
-	LuaMapObjectDescription(lua_State* L) : mapobjectdescr_(nullptr) {
+	explicit LuaMapObjectDescription(lua_State* L) : mapobjectdescr_(nullptr) {
 		report_error(L, "Cannot instantiate a 'MapObjectDescription' directly!");
 	}
 
@@ -223,10 +224,10 @@ public:
 
 	LuaImmovableDescription() {
 	}
-	LuaImmovableDescription(const Widelands::ImmovableDescr* const immovabledescr)
+	explicit LuaImmovableDescription(const Widelands::ImmovableDescr* const immovabledescr)
 	   : LuaMapObjectDescription(immovabledescr) {
 	}
-	LuaImmovableDescription(lua_State* L) : LuaMapObjectDescription(L) {
+	explicit LuaImmovableDescription(lua_State* L) : LuaMapObjectDescription(L) {
 	}
 
 	void __persist(lua_State* L) override;
@@ -265,10 +266,10 @@ public:
 
 	LuaBuildingDescription() {
 	}
-	LuaBuildingDescription(const Widelands::BuildingDescr* const buildingdescr)
+	explicit LuaBuildingDescription(const Widelands::BuildingDescr* const buildingdescr)
 	   : LuaMapObjectDescription(buildingdescr) {
 	}
-	LuaBuildingDescription(lua_State* L) : LuaMapObjectDescription(L) {
+	explicit LuaBuildingDescription(lua_State* L) : LuaMapObjectDescription(L) {
 	}
 
 	void __persist(lua_State* L) override;
@@ -316,11 +317,11 @@ public:
 
 	LuaConstructionSiteDescription() {
 	}
-	LuaConstructionSiteDescription(
+	explicit LuaConstructionSiteDescription(
 	   const Widelands::ConstructionSiteDescr* const constructionsitedescr)
 	   : LuaBuildingDescription(constructionsitedescr) {
 	}
-	LuaConstructionSiteDescription(lua_State* L) : LuaBuildingDescription(L) {
+	explicit LuaConstructionSiteDescription(lua_State* L) : LuaBuildingDescription(L) {
 	}
 
 private:
@@ -336,10 +337,11 @@ public:
 
 	LuaDismantleSiteDescription() {
 	}
-	LuaDismantleSiteDescription(const Widelands::DismantleSiteDescr* const dismantlesitedescr)
+	explicit LuaDismantleSiteDescription(
+	   const Widelands::DismantleSiteDescr* const dismantlesitedescr)
 	   : LuaBuildingDescription(dismantlesitedescr) {
 	}
-	LuaDismantleSiteDescription(lua_State* L) : LuaBuildingDescription(L) {
+	explicit LuaDismantleSiteDescription(lua_State* L) : LuaBuildingDescription(L) {
 	}
 
 private:
@@ -355,10 +357,11 @@ public:
 
 	LuaProductionSiteDescription() {
 	}
-	LuaProductionSiteDescription(const Widelands::ProductionSiteDescr* const productionsitedescr)
+	explicit LuaProductionSiteDescription(
+	   const Widelands::ProductionSiteDescr* const productionsitedescr)
 	   : LuaBuildingDescription(productionsitedescr) {
 	}
-	LuaProductionSiteDescription(lua_State* L) : LuaBuildingDescription(L) {
+	explicit LuaProductionSiteDescription(lua_State* L) : LuaBuildingDescription(L) {
 	}
 
 	/*
@@ -395,10 +398,10 @@ public:
 
 	LuaMilitarySiteDescription() {
 	}
-	LuaMilitarySiteDescription(const Widelands::MilitarySiteDescr* const militarysitedescr)
+	explicit LuaMilitarySiteDescription(const Widelands::MilitarySiteDescr* const militarysitedescr)
 	   : LuaBuildingDescription(militarysitedescr) {
 	}
-	LuaMilitarySiteDescription(lua_State* L) : LuaBuildingDescription(L) {
+	explicit LuaMilitarySiteDescription(lua_State* L) : LuaBuildingDescription(L) {
 	}
 
 	/*
@@ -428,10 +431,10 @@ public:
 
 	LuaTrainingSiteDescription() {
 	}
-	LuaTrainingSiteDescription(const Widelands::TrainingSiteDescr* const trainingsitedescr)
+	explicit LuaTrainingSiteDescription(const Widelands::TrainingSiteDescr* const trainingsitedescr)
 	   : LuaProductionSiteDescription(trainingsitedescr) {
 	}
-	LuaTrainingSiteDescription(lua_State* L) : LuaProductionSiteDescription(L) {
+	explicit LuaTrainingSiteDescription(lua_State* L) : LuaProductionSiteDescription(L) {
 	}
 
 	/*
@@ -476,10 +479,10 @@ public:
 
 	LuaWarehouseDescription() {
 	}
-	LuaWarehouseDescription(const Widelands::WarehouseDescr* const warehousedescr)
+	explicit LuaWarehouseDescription(const Widelands::WarehouseDescr* const warehousedescr)
 	   : LuaBuildingDescription(warehousedescr) {
 	}
-	LuaWarehouseDescription(lua_State* L) : LuaBuildingDescription(L) {
+	explicit LuaWarehouseDescription(lua_State* L) : LuaBuildingDescription(L) {
 	}
 
 	/*
@@ -508,10 +511,10 @@ public:
 
 	LuaWareDescription() {
 	}
-	LuaWareDescription(const Widelands::WareDescr* const waredescr)
+	explicit LuaWareDescription(const Widelands::WareDescr* const waredescr)
 	   : LuaMapObjectDescription(waredescr) {
 	}
-	LuaWareDescription(lua_State* L) : LuaMapObjectDescription(L) {
+	explicit LuaWareDescription(lua_State* L) : LuaMapObjectDescription(L) {
 	}
 
 	void __persist(lua_State* L) override;
@@ -546,10 +549,10 @@ public:
 
 	LuaWorkerDescription() {
 	}
-	LuaWorkerDescription(const Widelands::WorkerDescr* const workerdescr)
+	explicit LuaWorkerDescription(const Widelands::WorkerDescr* const workerdescr)
 	   : LuaMapObjectDescription(workerdescr) {
 	}
-	LuaWorkerDescription(lua_State* L) : LuaMapObjectDescription(L) {
+	explicit LuaWorkerDescription(lua_State* L) : LuaMapObjectDescription(L) {
 	}
 
 	void __persist(lua_State* L) override;
@@ -586,10 +589,10 @@ public:
 
 	LuaSoldierDescription() {
 	}
-	LuaSoldierDescription(const Widelands::SoldierDescr* const soldierdescr)
+	explicit LuaSoldierDescription(const Widelands::SoldierDescr* const soldierdescr)
 	   : LuaWorkerDescription(soldierdescr) {
 	}
-	LuaSoldierDescription(lua_State* L) : LuaWorkerDescription(L) {
+	explicit LuaSoldierDescription(lua_State* L) : LuaWorkerDescription(L) {
 	}
 
 	/*
@@ -632,10 +635,10 @@ public:
 
 	LuaResourceDescription() : resourcedescr_(nullptr) {
 	}
-	LuaResourceDescription(const Widelands::ResourceDescription* const resourcedescr)
+	explicit LuaResourceDescription(const Widelands::ResourceDescription* const resourcedescr)
 	   : resourcedescr_(resourcedescr) {
 	}
-	LuaResourceDescription(lua_State* L) : resourcedescr_(nullptr) {
+	explicit LuaResourceDescription(lua_State* L) : resourcedescr_(nullptr) {
 		report_error(L, "Cannot instantiate a 'LuaResourceDescription' directly!");
 	}
 
@@ -683,10 +686,10 @@ public:
 
 	LuaTerrainDescription() : terraindescr_(nullptr) {
 	}
-	LuaTerrainDescription(const Widelands::TerrainDescription* const terraindescr)
+	explicit LuaTerrainDescription(const Widelands::TerrainDescription* const terraindescr)
 	   : terraindescr_(terraindescr) {
 	}
-	LuaTerrainDescription(lua_State* L) : terraindescr_(nullptr) {
+	explicit LuaTerrainDescription(lua_State* L) : terraindescr_(nullptr) {
 		report_error(L, "Cannot instantiate a 'LuaTerrainDescription' directly!");
 	}
 
@@ -738,9 +741,9 @@ public:
 
 	LuaEconomy() : economy_(nullptr) {
 	}
-	LuaEconomy(Widelands::Economy* economy) : economy_(economy) {
+	explicit LuaEconomy(Widelands::Economy* economy) : economy_(economy) {
 	}
-	LuaEconomy(lua_State* L) : economy_(nullptr) {
+	explicit LuaEconomy(lua_State* L) : economy_(nullptr) {
 		report_error(L, "Cannot instantiate a 'LuaEconomy' directly!");
 	}
 
@@ -790,10 +793,10 @@ public:
 
 	LuaMapObject() : ptr_(nullptr) {
 	}
-	LuaMapObject(Widelands::MapObject& mo) {
+	explicit LuaMapObject(Widelands::MapObject& mo) {
 		ptr_ = &mo;
 	}
-	LuaMapObject(lua_State* L) : ptr_(nullptr) {
+	explicit LuaMapObject(lua_State* L) : ptr_(nullptr) {
 		report_error(L, "Cannot instantiate a '%s' directly!", className);
 	}
 	virtual ~LuaMapObject() {
@@ -831,9 +834,9 @@ public:
 
 	LuaBaseImmovable() {
 	}
-	LuaBaseImmovable(Widelands::BaseImmovable& mo) : LuaMapObject(mo) {
+	explicit LuaBaseImmovable(Widelands::BaseImmovable& mo) : LuaMapObject(mo) {
 	}
-	LuaBaseImmovable(lua_State* L) : LuaMapObject(L) {
+	explicit LuaBaseImmovable(lua_State* L) : LuaMapObject(L) {
 	}
 	virtual ~LuaBaseImmovable() {
 	}
@@ -859,9 +862,9 @@ public:
 
 	LuaPlayerImmovable() {
 	}
-	LuaPlayerImmovable(Widelands::PlayerImmovable& mo) : LuaBaseImmovable(mo) {
+	explicit LuaPlayerImmovable(Widelands::PlayerImmovable& mo) : LuaBaseImmovable(mo) {
 	}
-	LuaPlayerImmovable(lua_State* L) : LuaBaseImmovable(L) {
+	explicit LuaPlayerImmovable(lua_State* L) : LuaBaseImmovable(L) {
 	}
 	virtual ~LuaPlayerImmovable() {
 	}
@@ -888,9 +891,9 @@ public:
 
 	LuaPortDock() {
 	}
-	LuaPortDock(Widelands::PortDock& mo) : LuaPlayerImmovable(mo) {
+	explicit LuaPortDock(Widelands::PortDock& mo) : LuaPlayerImmovable(mo) {
 	}
-	LuaPortDock(lua_State* L) : LuaPlayerImmovable(L) {
+	explicit LuaPortDock(lua_State* L) : LuaPlayerImmovable(L) {
 	}
 	virtual ~LuaPortDock() {
 	}
@@ -915,9 +918,9 @@ public:
 
 	LuaBuilding() {
 	}
-	LuaBuilding(Widelands::Building& mo) : LuaPlayerImmovable(mo) {
+	explicit LuaBuilding(Widelands::Building& mo) : LuaPlayerImmovable(mo) {
 	}
-	LuaBuilding(lua_State* L) : LuaPlayerImmovable(L) {
+	explicit LuaBuilding(lua_State* L) : LuaPlayerImmovable(L) {
 	}
 	virtual ~LuaBuilding() {
 	}
@@ -943,9 +946,9 @@ public:
 
 	LuaFlag() {
 	}
-	LuaFlag(Widelands::Flag& mo) : LuaPlayerImmovable(mo) {
+	explicit LuaFlag(Widelands::Flag& mo) : LuaPlayerImmovable(mo) {
 	}
-	LuaFlag(lua_State* L) : LuaPlayerImmovable(L) {
+	explicit LuaFlag(lua_State* L) : LuaPlayerImmovable(L) {
 	}
 	virtual ~LuaFlag() {
 	}
@@ -974,9 +977,9 @@ public:
 
 	LuaRoad() {
 	}
-	LuaRoad(Widelands::Road& mo) : LuaPlayerImmovable(mo) {
+	explicit LuaRoad(Widelands::Road& mo) : LuaPlayerImmovable(mo) {
 	}
-	LuaRoad(lua_State* L) : LuaPlayerImmovable(L) {
+	explicit LuaRoad(lua_State* L) : LuaPlayerImmovable(L) {
 	}
 	virtual ~LuaRoad() {
 	}
@@ -1011,9 +1014,9 @@ public:
 
 	LuaConstructionSite() {
 	}
-	LuaConstructionSite(Widelands::ConstructionSite& mo) : LuaBuilding(mo) {
+	explicit LuaConstructionSite(Widelands::ConstructionSite& mo) : LuaBuilding(mo) {
 	}
-	LuaConstructionSite(lua_State* L) : LuaBuilding(L) {
+	explicit LuaConstructionSite(lua_State* L) : LuaBuilding(L) {
 	}
 	virtual ~LuaConstructionSite() {
 	}
@@ -1039,9 +1042,9 @@ public:
 
 	LuaWarehouse() {
 	}
-	LuaWarehouse(Widelands::Warehouse& mo) : LuaBuilding(mo) {
+	explicit LuaWarehouse(Widelands::Warehouse& mo) : LuaBuilding(mo) {
 	}
-	LuaWarehouse(lua_State* L) : LuaBuilding(L) {
+	explicit LuaWarehouse(lua_State* L) : LuaBuilding(L) {
 	}
 	virtual ~LuaWarehouse() {
 	}
@@ -1078,9 +1081,9 @@ public:
 
 	LuaProductionSite() {
 	}
-	LuaProductionSite(Widelands::ProductionSite& mo) : LuaBuilding(mo) {
+	explicit LuaProductionSite(Widelands::ProductionSite& mo) : LuaBuilding(mo) {
 	}
-	LuaProductionSite(lua_State* L) : LuaBuilding(L) {
+	explicit LuaProductionSite(lua_State* L) : LuaBuilding(L) {
 	}
 	virtual ~LuaProductionSite() {
 	}
@@ -1114,9 +1117,9 @@ public:
 
 	LuaMilitarySite() {
 	}
-	LuaMilitarySite(Widelands::MilitarySite& mo) : LuaBuilding(mo) {
+	explicit LuaMilitarySite(Widelands::MilitarySite& mo) : LuaBuilding(mo) {
 	}
-	LuaMilitarySite(lua_State* L) : LuaBuilding(L) {
+	explicit LuaMilitarySite(lua_State* L) : LuaBuilding(L) {
 	}
 	virtual ~LuaMilitarySite() {
 	}
@@ -1144,9 +1147,9 @@ public:
 
 	LuaTrainingSite() {
 	}
-	LuaTrainingSite(Widelands::TrainingSite& mo) : LuaProductionSite(mo) {
+	explicit LuaTrainingSite(Widelands::TrainingSite& mo) : LuaProductionSite(mo) {
 	}
-	LuaTrainingSite(lua_State* L) : LuaProductionSite(L) {
+	explicit LuaTrainingSite(lua_State* L) : LuaProductionSite(L) {
 	}
 	virtual ~LuaTrainingSite() {
 	}
@@ -1174,9 +1177,9 @@ public:
 
 	LuaBob() {
 	}
-	LuaBob(Widelands::Bob& mo) : LuaMapObject(mo) {
+	explicit LuaBob(Widelands::Bob& mo) : LuaMapObject(mo) {
 	}
-	LuaBob(lua_State* L) : LuaMapObject(L) {
+	explicit LuaBob(lua_State* L) : LuaMapObject(L) {
 	}
 	virtual ~LuaBob() {
 	}
@@ -1203,9 +1206,9 @@ public:
 
 	LuaWorker() {
 	}
-	LuaWorker(Widelands::Worker& w) : LuaBob(w) {
+	explicit LuaWorker(Widelands::Worker& w) : LuaBob(w) {
 	}
-	LuaWorker(lua_State* L) : LuaBob(L) {
+	explicit LuaWorker(lua_State* L) : LuaBob(L) {
 	}
 	virtual ~LuaWorker() {
 	}
@@ -1232,9 +1235,9 @@ public:
 
 	LuaSoldier() {
 	}
-	LuaSoldier(Widelands::Soldier& w) : LuaWorker(w) {
+	explicit LuaSoldier(Widelands::Soldier& w) : LuaWorker(w) {
 	}
-	LuaSoldier(lua_State* L) : LuaWorker(L) {
+	explicit LuaSoldier(lua_State* L) : LuaWorker(L) {
 	}
 	virtual ~LuaSoldier() {
 	}
@@ -1263,9 +1266,9 @@ public:
 
 	LuaShip() {
 	}
-	LuaShip(Widelands::Ship& s) : LuaBob(s) {
+	explicit LuaShip(Widelands::Ship& s) : LuaBob(s) {
 	}
-	LuaShip(lua_State* L) : LuaBob(L) {
+	explicit LuaShip(lua_State* L) : LuaBob(L) {
 	}
 	virtual ~LuaShip() {
 	}
@@ -1304,11 +1307,11 @@ public:
 
 	LuaField() {
 	}
-	LuaField(int16_t x, int16_t y) : coords_(Widelands::Coords(x, y)) {
+	explicit LuaField(int16_t x, int16_t y) : coords_(Widelands::Coords(x, y)) {
 	}
-	LuaField(Widelands::Coords c) : coords_(c) {
+	explicit LuaField(Widelands::Coords c) : coords_(c) {
 	}
-	LuaField(lua_State* L) {
+	explicit LuaField(lua_State* L) {
 		report_error(L, "Cannot instantiate a 'Field' directly!");
 	}
 	virtual ~LuaField() {
@@ -1378,9 +1381,9 @@ public:
 
 	LuaPlayerSlot() : player_number_(0) {
 	}
-	LuaPlayerSlot(Widelands::PlayerNumber plr) : player_number_(plr) {
+	explicit LuaPlayerSlot(Widelands::PlayerNumber plr) : player_number_(plr) {
 	}
-	LuaPlayerSlot(lua_State* L) : player_number_(0) {
+	explicit LuaPlayerSlot(lua_State* L) : player_number_(0) {
 		report_error(L, "Cannot instantiate a 'PlayerSlot' directly!");
 	}
 	virtual ~LuaPlayerSlot() {

@@ -65,13 +65,13 @@ class DismantleSite : public PartiallyFinishedBuilding {
 	MO_DESCR(DismantleSiteDescr)
 
 public:
-	DismantleSite(const DismantleSiteDescr& descr);
-	DismantleSite(const DismantleSiteDescr& descr,
-	              EditorGameBase&,
-	              Coords const,
-	              Player&,
-	              bool,
-	              Building::FormerBuildings& former_buildings);
+	explicit DismantleSite(const DismantleSiteDescr& descr);
+	explicit DismantleSite(const DismantleSiteDescr& descr,
+	                       EditorGameBase&,
+	                       Coords const,
+	                       Player&,
+	                       bool,
+	                       Building::FormerBuildings& former_buildings);
 
 	bool burn_on_destroy() override;
 	bool init(EditorGameBase&) override;
