@@ -60,7 +60,8 @@ void NetworkPlayerSettingsBackend::set_player_tribe(PlayerSlot id, const std::st
 }
 
 /// Set the shared in player for the given id
-void NetworkPlayerSettingsBackend::set_player_shared(PlayerSlot id, Widelands::PlayerNumber shared) {
+void NetworkPlayerSettingsBackend::set_player_shared(PlayerSlot id,
+                                                     Widelands::PlayerNumber shared) {
 	const GameSettings& settings = s->settings();
 	if (id >= settings.players.size() || shared > settings.players.size())
 		return;

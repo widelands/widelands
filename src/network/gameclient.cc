@@ -472,7 +472,8 @@ void GameClient::receive_one_user(uint32_t const number, StreamRead& packet) {
 		d->localplayername = d->settings.users.at(number).name;
 		d->settings.playernum = d->settings.users.at(number).position;
 	}
-	Notifications::publish(NoteGameSettings(NoteGameSettings::Action::kUser, d->settings.playernum, number));
+	Notifications::publish(
+	   NoteGameSettings(NoteGameSettings::Action::kUser, d->settings.playernum, number));
 }
 
 void GameClient::send(const std::string& msg) {

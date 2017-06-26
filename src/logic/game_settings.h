@@ -24,8 +24,6 @@
 #include <string>
 #include <vector>
 
-#include "base/log.h" // NOCOM
-#include "base/macros.h" // NOCOM
 #include "io/filesystem/layered_filesystem.h"
 #include "logic/map_objects/tribes/tribe_basic_info.h"
 #include "logic/player_end_result.h"
@@ -35,7 +33,7 @@
 #include "scripting/lua_interface.h"
 #include "scripting/lua_table.h"
 
-// Player slot 0 will give us PlayerNumber 1 etc., so we rename it to avoid confusion.
+// PlayerSlot 0 will give us Widelands::PlayerNumber 1 etc., so we rename it to avoid confusion.
 // TODO(GunChleoc): Rename all uint8_t to PlayerSlot or Widelands::PlayerNumber
 using PlayerSlot = Widelands::PlayerNumber;
 
@@ -44,7 +42,7 @@ struct PlayerSettings {
 
 	/// Returns whether the given state allows sharing a slot at all
 	static bool can_be_shared(PlayerSettings::State state) {
-	   return state != PlayerSettings::State::kClosed && state != PlayerSettings::State::kShared;
+		return state != PlayerSettings::State::kClosed && state != PlayerSettings::State::kShared;
 	}
 
 	State state;
@@ -84,21 +82,27 @@ struct UserSettings {
 	             // not
 };
 
+/// The gamehost/gameclient are sending those to notify about status ghanges, which are then picked
+/// up by the UI.
 struct NoteGameSettings {
 	CAN_BE_SENT_AS_NOTE(NoteId::GameSettings)
 
-	enum class Action { kUser, kPlayer, kMap };
+	enum class Action {
+		kUser,    // A client has picked a different player slot / become an observer
+		kPlayer,  // A player slot has changed its status (type, tribe etc.)
+		kMap      // An new map/savegame was selected
+	};
 
 	Action action;
 	PlayerSlot position;
 	uint8_t usernum;
 
-	explicit NoteGameSettings(Action init_action, PlayerSlot init_position = std::numeric_limits<uint8_t>::max(), uint8_t init_usernum = UserSettings::none()) : action(init_action), position(init_position), usernum(init_usernum) {
-		log("NOCOM Sending %s note for usernum %d, position %d\n", action == Action::kPlayer ? "player" : "user", cast_unsigned(usernum), cast_unsigned(position));
+	explicit NoteGameSettings(Action init_action,
+	                          PlayerSlot init_position = std::numeric_limits<uint8_t>::max(),
+	                          uint8_t init_usernum = UserSettings::none())
+	   : action(init_action), position(init_position), usernum(init_usernum) {
 	}
 };
-
-
 
 /**
  * Holds all settings about a game that can be configured before the
@@ -121,7 +125,8 @@ struct GameSettings {
 		}
 	}
 
-	/// Find a player number that the slot could share in. Does not guarantee that a viable slot was actually found.
+	/// Find a player number that the slot could share in. Does not guarantee that a viable slot was
+	/// actually found.
 	Widelands::PlayerNumber find_shared(PlayerSlot slot) const;
 	/// Check if the player number returned by find_shared is usable
 	bool is_shared_usable(PlayerSlot slot, Widelands::PlayerNumber shared) const;

@@ -84,7 +84,9 @@ BaseDropdown::BaseDropdown(UI::Panel* parent,
                      "dropdown_label",
                      0,
                      0,
-                     type == DropdownType::kTextual ? w - button_dimension : type == DropdownType::kTextualNarrow ? w : button_dimension,
+                     type == DropdownType::kTextual ?
+                        w - button_dimension :
+                        type == DropdownType::kTextualNarrow ? w : button_dimension,
                      get_h(),
                      background,
                      label),

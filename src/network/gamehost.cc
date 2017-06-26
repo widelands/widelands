@@ -1465,7 +1465,8 @@ void GameHost::write_setting_user(SendPacket& packet, uint32_t const number) {
 	packet.string(d->settings.users.at(number).name);
 	packet.signed_32(d->settings.users.at(number).position);
 	packet.unsigned_8(d->settings.users.at(number).ready ? 1 : 0);
-	Notifications::publish(NoteGameSettings(NoteGameSettings::Action::kUser, d->settings.users.at(number).position, number));
+	Notifications::publish(NoteGameSettings(
+	   NoteGameSettings::Action::kUser, d->settings.users.at(number).position, number));
 }
 
 void GameHost::write_setting_all_users(SendPacket& packet) {
@@ -2059,7 +2060,9 @@ void GameHost::handle_packet(uint32_t const i, RecvPacket& r) {
 
 	case NETCMD_SETTING_CHANGEINIT:
 		if (!d->game) {
-			// TODO(GunChleoc): For some nebulous reason, we don't receive the num that the client is sending when a player changes slot. So, keeping the access to the client off for now. Would be nice to have though.
+			// TODO(GunChleoc): For some nebulous reason, we don't receive the num that the client is
+			// sending when a player changes slot. So, keeping the access to the client off for now.
+			// Would be nice to have though.
 			uint8_t num = r.unsigned_8();
 			if (num != client.playernum)
 				throw DisconnectException("NO_ACCESS_TO_PLAYER");

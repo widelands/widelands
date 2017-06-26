@@ -355,7 +355,8 @@ void FullscreenMenuLaunchMPG::clicked_ok() {
  * buttons and text.
  */
 void FullscreenMenuLaunchMPG::refresh() {
-	// TODO(GunChleoc): Investigate what we can handle with NoteGameSettings. Maybe we can get rid of refresh() and thus think().
+	// TODO(GunChleoc): Investigate what we can handle with NoteGameSettings. Maybe we can get rid of
+	// refresh() and thus think().
 	const GameSettings& settings = settings_->settings();
 
 	if (settings.mapfilename != filename_proof_) {
@@ -443,7 +444,8 @@ void FullscreenMenuLaunchMPG::set_scenario_values() {
 	ml->preload_map(true);
 	Widelands::PlayerNumber const nrplayers = map.get_nrplayers();
 	if (settings.players.size() != nrplayers) {
-		// Due to asynchronous notifications, the client can crash when and update is missing and the number of players is wrong.
+		// Due to asynchronous notifications, the client can crash when and update is missing and the
+		// number of players is wrong.
 		return;
 	}
 	for (uint8_t i = 0; i < nrplayers; ++i) {
@@ -476,7 +478,8 @@ void FullscreenMenuLaunchMPG::load_previous_playerdata() {
 	for (uint8_t i = 1; i <= nr_players_; ++i) {
 		Section* s = prof.get_section((boost::format("player_%u") % cast_unsigned(i)).str());
 		if (s == nullptr) {
-			// Due to asynchronous notifications, the client can crash on savegame change when number of players goes down. So, we abort if the section does not exists to prevent crashes.
+			// Due to asynchronous notifications, the client can crash on savegame change when number
+			// of players goes down. So, we abort if the section does not exists to prevent crashes.
 			return;
 		}
 		player_save_name[i - 1] = s->get_string("name");
@@ -568,7 +571,9 @@ void FullscreenMenuLaunchMPG::load_map_info() {
 	            "\n";
 	infotext +=
 	   std::string("• ") +
-	   (boost::format(ngettext("%u Player", "%u Players", nr_players_)) % cast_unsigned(nr_players_)).str() + "\n";
+	   (boost::format(ngettext("%u Player", "%u Players", nr_players_)) % cast_unsigned(nr_players_))
+	      .str() +
+	   "\n";
 	if (settings_->settings().scenario)
 		infotext += std::string("• ") + (boost::format(_("Scenario mode selected"))).str() + "\n";
 	infotext += "\n";
