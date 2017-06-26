@@ -355,6 +355,7 @@ void FullscreenMenuLaunchMPG::clicked_ok() {
  * buttons and text.
  */
 void FullscreenMenuLaunchMPG::refresh() {
+	// TODO(GunChleoc): Investigate what we can handle with NoteGameSettings. Maybe we can get rid of refresh() and thus think().
 	const GameSettings& settings = settings_->settings();
 
 	if (settings.mapfilename != filename_proof_) {
@@ -425,8 +426,6 @@ void FullscreenMenuLaunchMPG::refresh() {
 		}
 		win_condition_dropdown_.set_enabled(false);
 	}
-	// Update the multi player setup group
-	mpsg_->refresh();
 }
 
 /**

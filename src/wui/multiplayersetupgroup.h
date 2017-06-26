@@ -54,9 +54,8 @@ struct MultiPlayerSetupGroup : public UI::Box {
 	                      uint32_t buth);
 	~MultiPlayerSetupGroup();
 
-	void refresh();
-
 private:
+	void update();
 	void draw(RenderTarget& dst) override;
 
 	GameSettingsProvider* const s;

@@ -213,9 +213,13 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 		   Notifications::subscribe<NoteGameSettings>([this](const NoteGameSettings& note) {
 			switch (note.action) {
 			case NoteGameSettings::Action::kMap:
-				return;
+				// We don't care about map updates, since we receive enough notifications for the slots.
 				break;
 			default:
+				if (s->settings().players.empty()) {
+					// No map/savegame yet
+					return;
+				}
 				if (id_ == note.position || s->settings().players[id_].state == PlayerSettings::State::kShared) {
 				   update();
 			   }
@@ -593,24 +597,11 @@ MultiPlayerSetupGroup::MultiPlayerSetupGroup(UI::Panel* const parent,
 	playerbox.add_space(0);
 
 	subscriber_ =
-	   Notifications::subscribe<NoteGameSettings>([this](const NoteGameSettings& note) {
-			switch (note.action) {
-			case NoteGameSettings::Action::kMap:
-				refresh();
-				FALLS_THROUGH;
-			default:
-				// Keep track of which player slots are visible
-				for (PlayerSlot i = 0; i < multi_player_player_groups.size(); ++i) {
-					const bool should_be_visible = i < s->settings().players.size();
-					const bool is_visible = multi_player_player_groups.at(i)->is_visible();
-					if (should_be_visible != is_visible) {
-						multi_player_player_groups.at(i)->set_visible(should_be_visible);
-					}
-				}
-			}
+	   Notifications::subscribe<NoteGameSettings>([this](const NoteGameSettings&) {
+			update();
 		});
 	set_size(w, h);
-	refresh();
+	update();
 }
 
 MultiPlayerSetupGroup::~MultiPlayerSetupGroup() {
@@ -619,7 +610,7 @@ MultiPlayerSetupGroup::~MultiPlayerSetupGroup() {
 /**
  * Update display and enabled buttons based on current settings.
  */
-void MultiPlayerSetupGroup::refresh() {
+void MultiPlayerSetupGroup::update() {
 	const GameSettings& settings = s->settings();
 
 	// Update / initialize client groups
@@ -632,6 +623,15 @@ void MultiPlayerSetupGroup::refresh() {
 			   new MultiPlayerClientGroup(&clientbox, clientbox.get_w(), buth_, i, s);
 			clientbox.add(multi_player_client_groups.at(i), UI::Box::Resizing::kFullSize);
 			multi_player_client_groups.at(i)->layout();
+		}
+	}
+
+	// Keep track of which player slots are visible
+	for (PlayerSlot i = 0; i < multi_player_player_groups.size(); ++i) {
+		const bool should_be_visible = i < settings.players.size();
+		const bool is_visible = multi_player_player_groups.at(i)->is_visible();
+		if (should_be_visible != is_visible) {
+			multi_player_player_groups.at(i)->set_visible(should_be_visible);
 		}
 	}
 }
