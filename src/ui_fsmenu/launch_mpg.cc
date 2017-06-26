@@ -443,6 +443,10 @@ void FullscreenMenuLaunchMPG::set_scenario_values() {
 	map.set_filename(settings.mapfilename);
 	ml->preload_map(true);
 	Widelands::PlayerNumber const nrplayers = map.get_nrplayers();
+	if (settings.players.size() != nrplayers) {
+		// Due to asynchronous notifications, the client can crash when and update is missing and the number of players is wrong.
+		return;
+	}
 	for (uint8_t i = 0; i < nrplayers; ++i) {
 		settings_->set_player_tribe(i, map.get_scenario_player_tribe(i + 1));
 		settings_->set_player_closeable(i, map.get_scenario_player_closeable(i + 1));
@@ -470,16 +474,17 @@ void FullscreenMenuLaunchMPG::load_previous_playerdata() {
 	std::string player_save_tribe[kMaxPlayers];
 	std::string player_save_ai[kMaxPlayers];
 
-	uint8_t i = 1;
-	for (; i <= nr_players_; ++i) {
-		infotext += "\n* ";
-		// NOCOM Client crash on savegame change when number of players goes down.
-		Section& s =
-		   prof.get_safe_section((boost::format("player_%u") % static_cast<unsigned int>(i)).str());
-		player_save_name[i - 1] = s.get_string("name");
-		player_save_tribe[i - 1] = s.get_string("tribe");
-		player_save_ai[i - 1] = s.get_string("ai");
+	for (uint8_t i = 1; i <= nr_players_; ++i) {
+		Section* s = prof.get_section((boost::format("player_%u") % cast_unsigned(i)).str());
+		if (s == nullptr) {
+			// Due to asynchronous notifications, the client can crash on savegame change when number of players goes down. So, we abort if the section does not exists to prevent crashes.
+			return;
+		}
+		player_save_name[i - 1] = s->get_string("name");
+		player_save_tribe[i - 1] = s->get_string("tribe");
+		player_save_ai[i - 1] = s->get_string("ai");
 
+		infotext += "\n* ";
 		infotext += (boost::format(_("Player %u")) % static_cast<unsigned int>(i)).str();
 		if (player_save_tribe[i - 1].empty()) {
 			std::string closed_string = (boost::format("<%s>") % _("closed")).str();

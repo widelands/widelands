@@ -87,13 +87,13 @@ struct UserSettings {
 struct NoteGameSettings {
 	CAN_BE_SENT_AS_NOTE(NoteId::GameSettings)
 
-	enum class Action { kUser, kPlayer };
+	enum class Action { kUser, kPlayer, kMap };
 
-	PlayerSlot position;
 	Action action;
+	PlayerSlot position;
 	uint8_t usernum;
 
-	explicit NoteGameSettings(PlayerSlot init_position, Action init_action, uint8_t init_usernum = UserSettings::none()) : position(init_position), action(init_action), usernum(init_usernum) {
+	explicit NoteGameSettings(Action init_action, PlayerSlot init_position = std::numeric_limits<uint8_t>::max(), uint8_t init_usernum = UserSettings::none()) : action(init_action), position(init_position), usernum(init_usernum) {
 		log("NOCOM Sending %s note for usernum %d, position %d\n", action == Action::kPlayer ? "player" : "user", cast_unsigned(usernum), cast_unsigned(position));
 	}
 };

@@ -76,8 +76,10 @@ struct MultiPlayerClientGroup : public UI::Box {
 		subscriber_ =
 		   Notifications::subscribe<NoteGameSettings>([this](const NoteGameSettings& note) {
 			switch (note.action) {
+			case NoteGameSettings::Action::kMap:
+				update();
+				break;
 			case NoteGameSettings::Action::kUser:
-				// NOCOM Update on map change
 				if (id_ == note.usernum || note.usernum == UserSettings::none()) {
 					update();
 				}
@@ -209,9 +211,15 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 
 		subscriber_ =
 		   Notifications::subscribe<NoteGameSettings>([this](const NoteGameSettings& note) {
-			   if (id_ == note.position || s->settings().players[id_].state == PlayerSettings::State::kShared) {
+			switch (note.action) {
+			case NoteGameSettings::Action::kMap:
+				return;
+				break;
+			default:
+				if (id_ == note.position || s->settings().players[id_].state == PlayerSettings::State::kShared) {
 				   update();
 			   }
+			}
 			});
 
 		// Init dropdowns
@@ -585,15 +593,21 @@ MultiPlayerSetupGroup::MultiPlayerSetupGroup(UI::Panel* const parent,
 	playerbox.add_space(0);
 
 	subscriber_ =
-	   Notifications::subscribe<NoteGameSettings>([this](const NoteGameSettings&) {
-		   // Keep track of who is visible
-		   for (PlayerSlot i = 0; i < multi_player_player_groups.size(); ++i) {
-			   const bool should_be_visible = i < s->settings().players.size();
-			   const bool is_visible = multi_player_player_groups.at(i)->is_visible();
-			   if (should_be_visible != is_visible) {
-				   multi_player_player_groups.at(i)->set_visible(should_be_visible);
-			   }
-		   }
+	   Notifications::subscribe<NoteGameSettings>([this](const NoteGameSettings& note) {
+			switch (note.action) {
+			case NoteGameSettings::Action::kMap:
+				refresh();
+				FALLS_THROUGH;
+			default:
+				// Keep track of which player slots are visible
+				for (PlayerSlot i = 0; i < multi_player_player_groups.size(); ++i) {
+					const bool should_be_visible = i < s->settings().players.size();
+					const bool is_visible = multi_player_player_groups.at(i)->is_visible();
+					if (should_be_visible != is_visible) {
+						multi_player_player_groups.at(i)->set_visible(should_be_visible);
+					}
+				}
+			}
 		});
 	set_size(w, h);
 	refresh();

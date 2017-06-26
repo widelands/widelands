@@ -1438,6 +1438,7 @@ void GameHost::write_setting_map(SendPacket& packet) {
 	packet.string(d->settings.mapfilename);
 	packet.unsigned_8(d->settings.savegame ? 1 : 0);
 	packet.unsigned_8(d->settings.scenario ? 1 : 0);
+	Notifications::publish(NoteGameSettings(NoteGameSettings::Action::kMap));
 }
 
 void GameHost::write_setting_player(SendPacket& packet, uint8_t const number) {
@@ -1451,7 +1452,7 @@ void GameHost::write_setting_player(SendPacket& packet, uint8_t const number) {
 	packet.unsigned_8(player.random_ai ? 1 : 0);
 	packet.unsigned_8(player.team);
 	packet.unsigned_8(player.shared_in);
-	Notifications::publish(NoteGameSettings(number, NoteGameSettings::Action::kPlayer));
+	Notifications::publish(NoteGameSettings(NoteGameSettings::Action::kPlayer, number));
 }
 
 void GameHost::write_setting_all_players(SendPacket& packet) {
@@ -1464,7 +1465,7 @@ void GameHost::write_setting_user(SendPacket& packet, uint32_t const number) {
 	packet.string(d->settings.users.at(number).name);
 	packet.signed_32(d->settings.users.at(number).position);
 	packet.unsigned_8(d->settings.users.at(number).ready ? 1 : 0);
-	Notifications::publish(NoteGameSettings(d->settings.users.at(number).position, NoteGameSettings::Action::kUser, number));
+	Notifications::publish(NoteGameSettings(NoteGameSettings::Action::kUser, d->settings.users.at(number).position, number));
 }
 
 void GameHost::write_setting_all_users(SendPacket& packet) {

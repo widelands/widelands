@@ -452,7 +452,7 @@ void GameClient::receive_one_player(uint8_t const number, StreamRead& packet) {
 	player.random_ai = packet.unsigned_8() == 1;
 	player.team = packet.unsigned_8();
 	player.shared_in = packet.unsigned_8();
-	Notifications::publish(NoteGameSettings(number, NoteGameSettings::Action::kPlayer));
+	Notifications::publish(NoteGameSettings(NoteGameSettings::Action::kPlayer, number));
 }
 
 void GameClient::receive_one_user(uint32_t const number, StreamRead& packet) {
@@ -472,7 +472,7 @@ void GameClient::receive_one_user(uint32_t const number, StreamRead& packet) {
 		d->localplayername = d->settings.users.at(number).name;
 		d->settings.playernum = d->settings.users.at(number).position;
 	}
-	Notifications::publish(NoteGameSettings(d->settings.playernum, NoteGameSettings::Action::kUser, number));
+	Notifications::publish(NoteGameSettings(NoteGameSettings::Action::kUser, d->settings.playernum, number));
 }
 
 void GameClient::send(const std::string& msg) {
@@ -563,6 +563,7 @@ void GameClient::handle_packet(RecvPacket& packet) {
 		// New map was set, so we clean up the buffer of a previously requested file
 		if (file_)
 			delete file_;
+		Notifications::publish(NoteGameSettings(NoteGameSettings::Action::kMap));
 		break;
 	}
 

@@ -23,6 +23,7 @@
 #include <memory>
 #include <string>
 
+#include "logic/game_settings.h"
 #include "ui_basic/button.h"
 #include "ui_basic/dropdown.h"
 #include "ui_basic/multilinetextarea.h"
