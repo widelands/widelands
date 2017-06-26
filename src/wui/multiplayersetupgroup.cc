@@ -85,7 +85,8 @@ struct MultiPlayerClientGroup : public UI::Box {
 				   update();
 				   break;
 			   case NoteGameSettings::Action::kUser:
-				   /// Player slot might have been closed, bumping the client to observer status. Also, take note if another player changed their position.
+				   /// Player slot might have been closed, bumping the client to observer status. Also,
+				   /// take note if another player changed their position.
 				   if (id_ == note.usernum || note.usernum == UserSettings::none()) {
 					   update();
 				   }
@@ -168,11 +169,9 @@ struct MultiPlayerClientGroup : public UI::Box {
 /// Holds the dropdown menus for a player slot
 struct MultiPlayerPlayerGroup : public UI::Box {
 	MultiPlayerPlayerGroup(UI::Panel* const parent,
-	                       PlayerSlot id,
-	                       int32_t const /* x */,
-	                       int32_t const /* y */,
 	                       int32_t const w,
 	                       int32_t const h,
+	                       PlayerSlot id,
 	                       GameSettingsProvider* const settings,
 	                       NetworkPlayerSettingsBackend* const npsb)
 	   : UI::Box(parent, 0, 0, UI::Box::Horizontal, w, h, kPadding / 2),
@@ -610,7 +609,7 @@ MultiPlayerSetupGroup::MultiPlayerSetupGroup(UI::Panel* const parent,
 	multi_player_player_groups.resize(kMaxPlayers);
 	for (PlayerSlot i = 0; i < multi_player_player_groups.size(); ++i) {
 		multi_player_player_groups.at(i) =
-		   new MultiPlayerPlayerGroup(&playerbox, i, 0, 0, playerbox.get_w(), buth_, s, npsb.get());
+		   new MultiPlayerPlayerGroup(&playerbox, playerbox.get_w(), buth_, i, s, npsb.get());
 		playerbox.add(multi_player_player_groups.at(i));
 	}
 	playerbox.add_space(0);
