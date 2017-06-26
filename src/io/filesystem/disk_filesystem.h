@@ -28,7 +28,7 @@
 // TODO(unknown): const correctness
 class RealFSImpl : public FileSystem {
 public:
-	RealFSImpl(const std::string& Directory);
+	explicit RealFSImpl(const std::string& Directory);
 
 	std::set<std::string> list_directory(const std::string& path) override;
 

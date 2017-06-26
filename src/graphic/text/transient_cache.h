@@ -44,7 +44,7 @@ template <typename T> class TransientCache {
 public:
 	/// Create a new cache in which the combined data size for all transient entries is always below
 	/// the 'max_size_in_arbitrary_unit'.
-	TransientCache(uint32_t max_size_in_arbitrary_unit);
+	explicit TransientCache(uint32_t max_size_in_arbitrary_unit);
 	virtual ~TransientCache();
 
 	/// Deletes all entries in the cache, leaving it as if it were just created.

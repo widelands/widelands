@@ -25,7 +25,7 @@
 
 struct NetworkPlayerSettingsBackend {
 
-	NetworkPlayerSettingsBackend(GameSettingsProvider* const settings) : s(settings) {
+	explicit NetworkPlayerSettingsBackend(GameSettingsProvider* const settings) : s(settings) {
 	}
 
 	void set_player_state(PlayerSlot id, PlayerSettings::State state);

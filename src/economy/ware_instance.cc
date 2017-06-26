@@ -46,7 +46,7 @@ namespace Widelands {
  */
 // TODO(unknown): This maybe shouldn't be here.
 struct IdleWareSupply : public Supply {
-	IdleWareSupply(WareInstance&);
+	explicit IdleWareSupply(WareInstance&);
 	virtual ~IdleWareSupply();
 
 	void set_economy(Economy*);
