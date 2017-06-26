@@ -85,7 +85,7 @@ struct MultiPlayerClientGroup : public UI::Box {
 				   update();
 				   break;
 			   case NoteGameSettings::Action::kUser:
-				   /// Player slot might have been closed, bumping the client to observer status
+				   /// Player slot might have been closed, bumping the client to observer status. Also, take note if another player changed their position.
 				   if (id_ == note.usernum || note.usernum == UserSettings::none()) {
 					   update();
 				   }

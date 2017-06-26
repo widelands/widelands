@@ -444,7 +444,7 @@ void FullscreenMenuLaunchMPG::set_scenario_values() {
 	ml->preload_map(true);
 	Widelands::PlayerNumber const nrplayers = map.get_nrplayers();
 	if (settings.players.size() != nrplayers) {
-		// Due to asynchronous notifications, the client can crash when and update is missing and the
+		// Due to asynchronous notifications, the client can crash when an update is missing and the
 		// number of players is wrong.
 		return;
 	}
@@ -479,7 +479,7 @@ void FullscreenMenuLaunchMPG::load_previous_playerdata() {
 		Section* s = prof.get_section((boost::format("player_%u") % cast_unsigned(i)).str());
 		if (s == nullptr) {
 			// Due to asynchronous notifications, the client can crash on savegame change when number
-			// of players goes down. So, we abort if the section does not exists to prevent crashes.
+			// of players goes down. So, we abort if the section does not exist to prevent crashes.
 			return;
 		}
 		player_save_name[i - 1] = s->get_string("name");

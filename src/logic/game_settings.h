@@ -82,7 +82,7 @@ struct UserSettings {
 	             // not
 };
 
-/// The gamehost/gameclient are sending those to notify about status ghanges, which are then picked
+/// The gamehost/gameclient are sending those to notify about status changes, which are then picked
 /// up by the UI.
 struct NoteGameSettings {
 	CAN_BE_SENT_AS_NOTE(NoteId::GameSettings)
@@ -90,7 +90,7 @@ struct NoteGameSettings {
 	enum class Action {
 		kUser,    // A client has picked a different player slot / become an observer
 		kPlayer,  // A player slot has changed its status (type, tribe etc.)
-		kMap      // An new map/savegame was selected
+		kMap      // A new map/savegame was selected
 	};
 
 	Action action;
@@ -210,7 +210,7 @@ struct GameSettingsProvider {
 	virtual void set_win_condition_script(const std::string& wc) = 0;
 	virtual std::string get_win_condition_script() = 0;
 
-	// For retrieveing tips texts
+	// For retrieving tips texts
 	struct NoTribe {};
 	const std::string& get_players_tribe() {
 		if (UserSettings::highest_playernum() < settings().playernum)
