@@ -771,6 +771,7 @@ void DefaultAI::late_initialization() {
 			for (DescriptionIndex ware : bo.outputs) {
 				// NOCOM @Gun: I presume is_construction_material() is reliable, I didnot check the code
 				// building material except for trivial material
+				// NOCOM(#codereview): Yes, is is reliable - the engine automatically calculates it from the buildings' build cost for each tribe.
 				if (tribe_->is_construction_material(ware) &&
 				    !(ware == tribe_->rawlog() || ware == tribe_->stones())) {
 					bo.set_is(BuildingAttribute::kBuildingMatProducer);
@@ -2932,8 +2933,6 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 					}
 
 					// applying nearnest penalty
-					// NOCOM(@Gun): These numbers are completely anonymous. Creating 150 names/enum does
-					// not make sense for me
 					prio -= mf->mines_nearby * std::abs(management_data.get_military_number_at(126));
 
 					// applying max needed
@@ -6091,15 +6090,6 @@ int32_t DefaultAI::limit_cnt_target(const int32_t current_cnt_target, const int3
 // Looking for situation where for a critical mine (iron, or marble) there is just one mine and it
 // is
 // unoccupied, probably we need to dismantle another one to release a miner
-// NOCOM: Why not just kick out the worker(s)? Check ProductionSiteWindow::evict_worker() for how
-// it's done.
-// @Gun: Could be possible, but the logic of AI is not to keep unstaffed mines, because building new
-// ones is not that expensive
-// and AI always test for availability of workers for a new mine. Though critical mine (e.g first
-// iron mine) is preferred
-// regardless. AI also dismantles mines that are not fully occupied within some time from
-// construction, this would interfere
-// and would need complex re-think
 bool DefaultAI::critical_mine_unoccupied(uint32_t gametime) {
 	// resetting unoccupied
 	for (auto& mine : mines_per_type) {

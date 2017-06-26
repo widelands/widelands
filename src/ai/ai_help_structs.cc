@@ -406,18 +406,19 @@ FNeuron::FNeuron(uint32_t c, uint16_t i) {
 // Returning a result depending on combinations of 5 bools
 // Bools are completely anonymous, but can present any yes/no inputs, e.g. imagine the AI that is
 // to figure out if it should attack from a militarysite. The inputs can be:
-// bool1 - are we stronger then enemy?
-// bool2 - do we have basic economy established?
+// bool1 - are we stronger than the enemy?
+// bool2 - do we have a basic economy established?
 // bool3 - do we have local predominance?
-// bool4 - has our strenght grown up in last 60 minutes?
-// bool5 - are there mines in vicitiny?
-// these five bools can create 32 combinations = yes/no answers.
-// In fact this can be perceived as a complicated if..then structure, but the one that can
+// bool4 - has our strength grown during the last 60 minutes?
+// bool5 - are there mines in the vicinity?
+// These five bools can create 32 combinations = yes/no answers.
+// In fact this can be perceived as a complicated if..then structure, but one that can
 // adjust automatically as a part of training.
-// Or rather is 5-dimensional table with 2 columns in every dimension :)
-// In fact this concept if very demanding for training so we dont use it much
+// Or rather it is a 5-dimensional table with 2 columns in every dimension :)
+// In fact this concept if very demanding for training so we don't use it much
 // NOCOM(#codereview): Do the bools have any speacial meaning, or is it just abstract stuff?
 // @Gun: Is explanation sufficient?
+// NOCOM(#codereview): COnsidering that things are very abstrace, it is, thanks!
 bool FNeuron::get_result(
    const bool bool1, const bool bool2, const bool bool3, const bool bool4, const bool bool5) {
 	return core.test(bool1 * 16 + bool2 * 8 + bool3 * 4 + bool4 * 2 + bool5);
@@ -1335,6 +1336,7 @@ PlayersStrengths::PlayerStat::PlayerStat(Widelands::TeamNumber tc,
 // e.g. players_power / old_players_power / old60_players_power
 // we recieve also player and team numbers to figure out if we are enemies, or in the team
 // NOCOM @Gun: Is explanation above enough?
+// NOCOM(#codereview): It is, thanks!
 void PlayersStrengths::add(Widelands::PlayerNumber pn,
                            Widelands::PlayerNumber opn,
                            Widelands::TeamNumber mytn,
