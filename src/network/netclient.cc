@@ -16,13 +16,15 @@ std::unique_ptr<NetClient> NetClient::connect(const NetAddress& host) {
 }
 
 NetClient::~NetClient() {
-	if (is_connected())
+	if (is_connected()) {
 		close();
+	}
 }
 
 bool NetClient::get_remote_address(NetAddress *addr) const {
-	if (!is_connected())
+	if (!is_connected()) {
 		return false;
+	}
 	boost::asio::ip::tcp::endpoint remote = socket_.remote_endpoint();
 	addr->ip = remote.address();
 	addr->port = remote.port();
@@ -34,8 +36,9 @@ bool NetClient::is_connected() const {
 }
 
 void NetClient::close() {
-	if (!is_connected())
+	if (!is_connected()) {
 		return;
+	}
 	boost::system::error_code ec;
 	boost::asio::ip::tcp::endpoint remote = socket_.remote_endpoint(ec);
 	if (!ec) {
@@ -49,8 +52,9 @@ void NetClient::close() {
 }
 
 bool NetClient::try_receive(RecvPacket* packet) {
-	if (!is_connected())
+	if (!is_connected()) {
 		return false;
+	}
 
 	uint8_t buffer[kNetworkBufferSize];
 	boost::system::error_code ec;
@@ -73,8 +77,9 @@ bool NetClient::try_receive(RecvPacket* packet) {
 }
 
 void NetClient::send(const SendPacket& packet) {
-	if (!is_connected())
+	if (!is_connected()) {
 		return;
+	}
 
 	boost::system::error_code ec;
 	size_t written =

@@ -20,6 +20,7 @@
 #include "network/internet_gaming.h"
 
 #include <memory>
+#include <random>
 
 #include <boost/format.hpp>
 #include <boost/lexical_cast.hpp>
@@ -131,13 +132,17 @@ bool InternetGaming::login(const std::string& nick,
 	port_ = port;
 
 	// If we are not connecting to a registered account, create a random value
-	// to send as password. Used so the metaserver can match our IPv4 and IPv6 connections
+	// to send as password. Used so the metaserver can match our IPv4 and IPv6 connections.
+	// See internet_gaming_protocol.h for more information
 	if (!reg_) {
 		// Admittedly this is a pretty stupid generator. But it should be fine for us
-		static const char random_chars[] = "0123456789ABCDEF";
+		static const std::string random_chars = "0123456789ABCDEF";
 		pwd_ = "";
+		std::random_device rd;
+		std::mt19937 gen(rd());
+		std::uniform_int_distribution<> dist(0, random_chars.length() - 1);
 		while (pwd_.length() < 8) {
-			pwd_.push_back(random_chars[rand() % (sizeof(random_chars) - 1)]);
+			pwd_.push_back(random_chars[dist(gen)]);
 		}
 	}
 
@@ -357,8 +362,6 @@ void InternetGaming::handle_metaserver_communication() {
 }
 
 void InternetGaming::create_second_connection() {
-	// TODO(Notabilis): This method could probably be executed by a separate thread. Do we want to do so?
-	// Of course, we would have to be carefully that the main thread might call disconnect while doing so
 	NetAddress addr;
 	net->get_remote_address(&addr);
 	if (!addr.is_ipv6()) {
@@ -372,7 +375,6 @@ void InternetGaming::create_second_connection() {
 	}
 
 	std::unique_ptr<NetClient> tmpNet = NetClient::connect(addr);
-
 	if (!tmpNet || !tmpNet->is_connected()) {
 		// Connecting by IPv4 doesn't work? Well, nothing to do then
 		return;
