@@ -104,7 +104,7 @@ struct Child {
 	}
 	explicit Child(Tag* t) : tag(t) {
 	}
-	explicit Child(std::string t) : tag(nullptr), text(t) {
+	explicit Child(const std::string& t) : tag(nullptr), text(t) {
 	}
 	~Child() {
 		if (tag)
