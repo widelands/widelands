@@ -328,8 +328,8 @@ tribes:new_tribe {
    barracks = "empire_barracks",
    bakery = "empire_bakery",
    logrefiner = "empire_sawmill",
-   ironore = 'iron_ore',
-   rawlog = 'log',
-   refinedlog = 'planks',
-   stones = 'granite',
+   ironore = "iron_ore",
+   rawlog = "log",
+   refinedlog = "planks",
+   granite = "granite",
 }

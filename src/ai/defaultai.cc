@@ -773,7 +773,7 @@ void DefaultAI::late_initialization() {
 				// building material except for trivial material
 				// NOCOM(#codereview): Yes, is is reliable - the engine automatically calculates it from the buildings' build cost for each tribe.
 				if (tribe_->is_construction_material(ware) &&
-				    !(ware == tribe_->rawlog() || ware == tribe_->stones())) {
+				    !(ware == tribe_->rawlog() || ware == tribe_->granite())) {
 					bo.set_is(BuildingAttribute::kBuildingMatProducer);
 					if (bo.type == BuildingObserver::Type::kMine) {
 						has_critical_mines = true;
@@ -789,7 +789,7 @@ void DefaultAI::late_initialization() {
 				// building material except for trivial material
 				if (tribe_->is_construction_material(temp_buildcosts.first) &&
 				    !(temp_buildcosts.first == tribe_->rawlog() ||
-				      temp_buildcosts.first == tribe_->stones())) {
+				      temp_buildcosts.first == tribe_->granite())) {
 					bo.critical_building_material.push_back(temp_buildcosts.first);
 				}
 			}
@@ -842,7 +842,7 @@ void DefaultAI::late_initialization() {
 					// building material except for trivial material
 					if (!(temp_buildcosts.first == tribe_->rawlog() ||
 					      temp_buildcosts.first == tribe_->refinedlog() ||
-					      temp_buildcosts.first == tribe_->stones())) {
+					      temp_buildcosts.first == tribe_->granite())) {
 						bo.critical_building_material.push_back(temp_buildcosts.first);
 					}
 				}

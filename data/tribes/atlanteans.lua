@@ -354,8 +354,8 @@ tribes:new_tribe {
    barracks = "atlanteans_barracks",
    bakery = "atlanteans_bakery",
    logrefiner = "atlanteans_sawmill",
-   ironore = 'iron_ore',
-   rawlog = 'log',
-   refinedlog = 'planks',
-   stones = 'granite',
+   ironore = "iron_ore",
+   rawlog = "log",
+   refinedlog = "planks",
+   granite = "granite",
 }

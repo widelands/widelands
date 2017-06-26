@@ -250,7 +250,7 @@ TribeDescr::TribeDescr(const LuaTable& table, const TribeBasicInfo& info, const 
 		ironore_ = add_special_ware(table.get_string("ironore"));
 		rawlog_ = add_special_ware(table.get_string("rawlog"));
 		refinedlog_ = add_special_ware(table.get_string("refinedlog"));
-		stones_ = add_special_ware(table.get_string("stones"));
+		granite_ = add_special_ware(table.get_string("granite"));
 
 	} catch (const GameDataError& e) {
 		throw GameDataError("tribe %s: %s", name_.c_str(), e.what());
@@ -396,9 +396,9 @@ DescriptionIndex TribeDescr::refinedlog() const {
 	assert(tribes_.ware_exists(refinedlog_));
 	return refinedlog_;
 }
-DescriptionIndex TribeDescr::stones() const {
-	assert(tribes_.ware_exists(stones_));
-	return stones_;
+DescriptionIndex TribeDescr::granite() const {
+	assert(tribes_.ware_exists(granite_));
+	return granite_;
 }
 
 const std::vector<DescriptionIndex>& TribeDescr::trainingsites() const {

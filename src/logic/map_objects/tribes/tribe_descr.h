@@ -109,7 +109,7 @@ public:
 	DescriptionIndex ironore() const;
 	DescriptionIndex rawlog() const;
 	DescriptionIndex refinedlog() const;
-	DescriptionIndex stones() const;
+	DescriptionIndex granite() const;
 
 	const std::vector<DescriptionIndex>& trainingsites() const;
 	const std::vector<DescriptionIndex>& worker_types_without_cost() const;
@@ -184,7 +184,7 @@ private:
 	std::set<DescriptionIndex> wares_;
 	// The wares that are used by construction sites
 	std::set<DescriptionIndex> construction_materials_;
-	// Special units
+	// Special units. Some of them are used by the engine, some are only used by the AI.
 	DescriptionIndex builder_;       // The builder for this tribe
 	DescriptionIndex carrier_;       // The basic carrier for this tribe
 	DescriptionIndex carrier2_;      // Additional carrier for busy roads
@@ -197,9 +197,9 @@ private:
 	DescriptionIndex bakery_;        // The bakery to prepare bread
 	DescriptionIndex logrefiner_;    // The log processor to cut wood to plants
 	DescriptionIndex ironore_;       // Iron ore
-	DescriptionIndex rawlog_;       // Iron ore
-	DescriptionIndex refinedlog_;       // Iron ore
-	DescriptionIndex stones_;       // Iron ore
+	DescriptionIndex rawlog_;        // Simple log
+	DescriptionIndex refinedlog_;    // Refined log, e.g. wood or blackwood
+	DescriptionIndex granite_;       // Granite
 	std::vector<DescriptionIndex> worker_types_without_cost_;
 	std::vector<DescriptionIndex> trainingsites_;
 	// Order and positioning of wares in the warehouse display
