@@ -32,7 +32,7 @@
 #ifdef _LP64
 #define PRIS_PREFIX "z"
 #elif defined(_WIN64)
-#define PRIS_PREFIX "l"
+#define PRIS_PREFIX "I64"
 #else
 #define PRIS_PREFIX
 #endif
