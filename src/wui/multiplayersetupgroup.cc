@@ -644,8 +644,7 @@ void MultiPlayerSetupGroup::update() {
 	// Keep track of which player slots are visible
 	for (PlayerSlot i = 0; i < multi_player_player_groups.size(); ++i) {
 		const bool should_be_visible = i < settings.players.size();
-		const bool is_visible = multi_player_player_groups.at(i)->is_visible();
-		if (should_be_visible != is_visible) {
+		if (should_be_visible != multi_player_player_groups.at(i)->is_visible()) {
 			multi_player_player_groups.at(i)->set_visible(should_be_visible);
 		}
 	}
