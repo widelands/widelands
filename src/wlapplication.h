@@ -46,7 +46,7 @@ class Game;
 struct ParameterError : public std::runtime_error {
 	explicit ParameterError() : std::runtime_error("") {
 	}
-	explicit ParameterError(std::string text) : std::runtime_error(text) {
+	explicit ParameterError(const std::string& text) : std::runtime_error(text) {
 	}
 };
 
