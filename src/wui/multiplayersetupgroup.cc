@@ -60,14 +60,14 @@ struct MultiPlayerClientGroup : public UI::Box {
 	     slot_dropdown_(this, 0, 0, h, 200, h, _("Role"), UI::DropdownType::kPictorial),
 	     // Name needs to be initialized after the dropdown, otherwise the layout function will
 	     // crash.
-	     name(new UI::Textarea(this, 0, 0, w - h - UI::Scrollbar::kSize * 11 / 5, h)),
+	     name(this, 0, 0, w - h - UI::Scrollbar::kSize * 11 / 5, h),
 	     s(settings),
 	     id_(id),
 	     slot_selection_locked_(false) {
 		set_size(w, h);
 
 		add(&slot_dropdown_);
-		add(name, UI::Box::Resizing::kAlign, UI::Align::kCenter);
+		add(&name, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 
 		slot_dropdown_.set_disable_style(UI::ButtonDisableStyle::kFlat);
 		slot_dropdown_.selected.connect(
@@ -153,12 +153,12 @@ struct MultiPlayerClientGroup : public UI::Box {
 			return;
 		}
 
-		name->set_text(user_setting.name);
+		name.set_text(user_setting.name);
 		rebuild_slot_dropdown(settings);
 	}
 
 	UI::Dropdown<uintptr_t> slot_dropdown_;  /// Select the player slot.
-	UI::Textarea* name;                      /// Client nick name
+	UI::Textarea name;                       /// Client nick name
 	GameSettingsProvider* const s;
 	uint8_t const id_;            /// User number
 	bool slot_selection_locked_;  // Ensure that dropdowns will close on selection.
