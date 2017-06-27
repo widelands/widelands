@@ -117,7 +117,9 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 			disappeared_sites.push_back(site->first);
 		}
 	}
-// NOCOM(#codereview): Why not just erase them straight away and get rid of the disappeared_sites vector?
+	// NOCOM(#codereview): Why not just erase them straight away and get rid of the disappeared_sites
+	// vector?
+	// @Gun: erasing from enemy_sites makes the iterator invalid
 	while (!disappeared_sites.empty()) {
 		enemy_sites.erase(disappeared_sites.back());
 		disappeared_sites.pop_back();
@@ -410,8 +412,7 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 					if (management_data.f_neuron_pool[0].get_position(j)) {
 						site->second.score += inputs[j + kFNeuronBitSize];
 						if (inputs[j + kFNeuronBitSize] < -10 || inputs[j + kFNeuronBitSize] > 10) {
-							log(" pos: %d - value %d\n", j + kFNeuronBitSize,
-							    inputs[j + kFNeuronBitSize]);
+							log(" pos: %d - value %d\n", j + kFNeuronBitSize, inputs[j + kFNeuronBitSize]);
 						}
 					}
 					if (management_data.f_neuron_pool[16].get_position(j)) {
@@ -434,8 +435,9 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 				}
 			}
 
-		} else {  // we don't have a flag = site does not exist anymore, let#s remove the site from our
-		          // observer list
+		} else {  // we don't have a flag = site does not exist anymore, let#s remove the site from
+		          // our
+			       // observer list
 			disappeared_sites.push_back(site->first);
 		}
 	}
@@ -515,11 +517,13 @@ void DefaultAI::count_military_vacant_positions() {
 	int32_t on_stock_ = 0;
 	for (TrainingSiteObserver tso : trainingsites) {
 		vacant_mil_positions_ +=
-		   5 * std::min<int32_t>(
-		          (tso.site->soldier_control()->soldier_capacity() - tso.site->soldier_control()->stationed_soldiers().size()), 2);
+		   5 * std::min<int32_t>((tso.site->soldier_control()->soldier_capacity() -
+		                          tso.site->soldier_control()->stationed_soldiers().size()),
+		                         2);
 	}
 	for (MilitarySiteObserver mso : militarysites) {
-		vacant_mil_positions_ += mso.site->soldier_control()->soldier_capacity() - mso.site->soldier_control()->stationed_soldiers().size();
+		vacant_mil_positions_ += mso.site->soldier_control()->soldier_capacity() -
+		                         mso.site->soldier_control()->stationed_soldiers().size();
 		understaffed_ += mso.understaffed;
 	}
 	vacant_mil_positions_ += understaffed_;
@@ -906,7 +910,6 @@ int32_t DefaultAI::calculate_strength(const std::vector<Widelands::Soldier*>& so
 	for (Soldier* soldier : soldiers) {
 		const SoldierDescr& descr = soldier->descr();
 		health = soldier->get_current_health();
-		// NOCOM descr.get_base_health() + descr.get_health_incr_per_level() * soldier->get_health_level();
 		attack = (descr.get_base_max_attack() - descr.get_base_min_attack()) / 2.f +
 		         descr.get_base_min_attack() +
 		         descr.get_attack_incr_per_level() * soldier->get_attack_level();

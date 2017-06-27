@@ -234,7 +234,6 @@ private:
 	void set_inputs_to_max(const Widelands::ProductionSiteObserver&);
 	void stop_site(const Widelands::ProductionSiteObserver&);
 	void initiate_dismantling(Widelands::ProductionSiteObserver&, uint32_t);
-	// NOCOM bool set_inputs_to_zero(const Widelands::ProductionSite&);
 	void print_land_stats();
 
 	// Checks whether first value is in range, or lesser then...
@@ -269,7 +268,6 @@ private:
 	SoldiersStatus soldier_status_;
 	int32_t vacant_mil_positions_average_;
 	uint16_t attackers_count_;
-	// NOCOM uint16_t overfilled_msites_count;
 	Widelands::EventTimeQueue soldier_trained_log;
 	Widelands::EventTimeQueue soldier_attacks_log;
 
@@ -342,8 +340,6 @@ private:
 	uint32_t last_road_dismantled_;  // uses to prevent too frequent road dismantling
 
 	uint32_t enemy_last_seen_;
-	// NOCOM int32_t vacant_mil_positions_;  // sum of vacant positions in militarysites and training
-	// sites
 	uint32_t last_attack_time_;
 	// check ms in this interval - will auto-adjust
 	uint32_t enemysites_check_delay_;

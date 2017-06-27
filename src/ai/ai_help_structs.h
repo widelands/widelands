@@ -121,9 +121,7 @@ constexpr int kNeuronPoolSize = 80;
 constexpr int kFNeuronPoolSize = 60;
 constexpr int kFNeuronBitSize = 32;
 constexpr int kMutationRatePosition = 42;
-// set this to false for trunk NOCOM
-// this is used only for training of AI
-// NOCOM(#codereview): Would we benefit from a command line switch here?
+// TODO(tiborb): this should be replaced by command line switch
 constexpr bool kAITrainingMode = false;
 
 constexpr uint32_t kNever = std::numeric_limits<uint32_t>::max();
