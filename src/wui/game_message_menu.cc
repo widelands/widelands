@@ -550,7 +550,7 @@ void GameMessageMenu::set_filter_messages_tooltips() {
 /**
  * Get the filename for a message category's icon
  */
-std::string GameMessageMenu::display_message_type_icon(Widelands::Message message) {
+std::string GameMessageMenu::display_message_type_icon(const Widelands::Message& message) {
 	switch (message.message_type_category()) {
 	case Widelands::Message::Type::kGeologists:
 		return "images/wui/fieldaction/menu_geologist.png";

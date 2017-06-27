@@ -58,7 +58,6 @@ struct EditBox : public Panel {
 
 	const std::string& text() const;
 	void set_text(const std::string&);
-	uint32_t max_length() const;
 	void set_max_length(uint32_t);
 
 	void activate_history(bool activate) {

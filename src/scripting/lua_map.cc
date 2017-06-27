@@ -572,7 +572,7 @@ int do_set_soldiers(lua_State* L,
 					                   s->get_defense_level(), s->get_evade_level());
 
 					if (is == sp.first) {
-						sc->outcorporate_soldier(egbase, *s);
+						sc->outcorporate_soldier(*s);
 						s->remove(egbase);
 						++d;
 						break;
@@ -4655,13 +4655,13 @@ int LuaWarehouse::get_warehouse_policies(lua_State* L) {
 // documented in parent class
 int LuaWarehouse::get_soldiers(lua_State* L) {
 	Warehouse* wh = get(L, get_egbase(L));
-	return do_get_soldiers(L, *wh, wh->owner().tribe());
+	return do_get_soldiers(L, *wh->soldier_control(), wh->owner().tribe());
 }
 
 // documented in parent class
 int LuaWarehouse::set_soldiers(lua_State* L) {
 	Warehouse* wh = get(L, get_egbase(L));
-	return do_set_soldiers(L, wh->get_position(), wh, wh->get_owner());
+	return do_set_soldiers(L, wh->get_position(), wh->mutable_soldier_control(), wh->get_owner());
 }
 
 /* RST
@@ -4924,7 +4924,7 @@ const PropertyType<LuaMilitarySite> LuaMilitarySite::Properties[] = {
 
 // documented in parent class
 int LuaMilitarySite::get_max_soldiers(lua_State* L) {
-	lua_pushuint32(L, get(L, get_egbase(L))->soldier_capacity());
+	lua_pushuint32(L, get(L, get_egbase(L))->soldier_control()->soldier_capacity());
 	return 1;
 }
 
@@ -4937,13 +4937,13 @@ int LuaMilitarySite::get_max_soldiers(lua_State* L) {
 // documented in parent class
 int LuaMilitarySite::get_soldiers(lua_State* L) {
 	MilitarySite* ms = get(L, get_egbase(L));
-	return do_get_soldiers(L, *ms, ms->owner().tribe());
+	return do_get_soldiers(L, *ms->soldier_control(), ms->owner().tribe());
 }
 
 // documented in parent class
 int LuaMilitarySite::set_soldiers(lua_State* L) {
 	MilitarySite* ms = get(L, get_egbase(L));
-	return do_set_soldiers(L, ms->get_position(), ms, ms->get_owner());
+	return do_set_soldiers(L, ms->get_position(), ms->mutable_soldier_control(), ms->get_owner());
 }
 
 /*
@@ -4978,7 +4978,7 @@ const PropertyType<LuaTrainingSite> LuaTrainingSite::Properties[] = {
 
 // documented in parent class
 int LuaTrainingSite::get_max_soldiers(lua_State* L) {
-	lua_pushuint32(L, get(L, get_egbase(L))->soldier_capacity());
+	lua_pushuint32(L, get(L, get_egbase(L))->soldier_control()->soldier_capacity());
 	return 1;
 }
 
@@ -4991,13 +4991,13 @@ int LuaTrainingSite::get_max_soldiers(lua_State* L) {
 // documented in parent class
 int LuaTrainingSite::get_soldiers(lua_State* L) {
 	TrainingSite* ts = get(L, get_egbase(L));
-	return do_get_soldiers(L, *ts, ts->owner().tribe());
+	return do_get_soldiers(L, *ts->soldier_control(), ts->owner().tribe());
 }
 
 // documented in parent class
 int LuaTrainingSite::set_soldiers(lua_State* L) {
 	TrainingSite* ts = get(L, get_egbase(L));
-	return do_set_soldiers(L, ts->get_position(), ts, ts->get_owner());
+	return do_set_soldiers(L, ts->get_position(), ts->mutable_soldier_control(), ts->get_owner());
 }
 
 /*

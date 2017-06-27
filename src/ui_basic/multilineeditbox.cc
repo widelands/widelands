@@ -156,13 +156,6 @@ void MultilineEditbox::set_maximum_bytes(const uint32_t n) {
 }
 
 /**
- * Return the currently set maximum number of bytes.
- */
-uint32_t MultilineEditbox::get_maximum_bytes() const {
-	return d_->maxbytes;
-}
-
-/**
  * Erase the given range of bytes, adjust the cursor position, and update.
  */
 void MultilineEditbox::Data::erase_bytes(uint32_t start, uint32_t end) {

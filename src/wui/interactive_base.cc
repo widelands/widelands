@@ -70,7 +70,7 @@ struct InteractiveBaseInternals {
 	MiniMap::Registry minimap;
 	std::unique_ptr<QuickNavigation> quicknavigation;
 
-	InteractiveBaseInternals(QuickNavigation* qnav) : mm(nullptr), quicknavigation(qnav) {
+	explicit InteractiveBaseInternals(QuickNavigation* qnav) : mm(nullptr), quicknavigation(qnav) {
 	}
 };
 

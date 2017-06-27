@@ -78,7 +78,7 @@ public:
 		uint32_t active_tab;
 	};
 
-	OptionsCtrl(Section&);
+	explicit OptionsCtrl(Section&);
 	void handle_menu();
 	OptionsCtrl::OptionsStruct options_struct(uint32_t active_tab);
 	void save_options();
@@ -94,7 +94,7 @@ private:
 
 class FullscreenMenuOptions : public FullscreenMenuBase {
 public:
-	FullscreenMenuOptions(OptionsCtrl::OptionsStruct opt);
+	explicit FullscreenMenuOptions(OptionsCtrl::OptionsStruct opt);
 	OptionsCtrl::OptionsStruct get_values();
 
 private:

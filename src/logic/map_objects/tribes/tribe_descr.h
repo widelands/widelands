@@ -63,7 +63,6 @@ public:
 	const std::string& name() const;
 	const std::string& descname() const;
 
-	size_t get_nrbuildings() const;
 	size_t get_nrwares() const;
 	size_t get_nrworkers() const;
 

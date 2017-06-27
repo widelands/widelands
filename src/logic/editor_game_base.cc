@@ -67,8 +67,7 @@ EditorGameBase::EditorGameBase(LuaInterface* lua_interface)
      lua_(lua_interface),
      player_manager_(new PlayersManager(*this)),
      ibase_(nullptr),
-     map_(nullptr),
-     lasttrackserial_(0) {
+     map_(nullptr) {
 	if (!lua_)  // TODO(SirVer): this is sooo ugly, I can't say
 		lua_.reset(new LuaEditorInterface(this));
 }
@@ -400,47 +399,6 @@ zero it means that this player is disabled in the game.
 */
 Player* EditorGameBase::get_safe_player(PlayerNumber const n) {
 	return get_player(n);
-}
-
-/*
-===============
-Add a registered pointer.
-Returns the serial number that can be used to retrieve or remove the pointer.
-===============
-*/
-uint32_t EditorGameBase::add_trackpointer(void* const ptr) {
-	++lasttrackserial_;
-
-	if (!lasttrackserial_)
-		throw wexception("Dude, you play too long. Track serials exceeded.");
-
-	trackpointers_[lasttrackserial_] = ptr;
-	return lasttrackserial_;
-}
-
-/*
-===============
-Retrieve a previously stored pointer using the serial number.
-Returns 0 if the pointer has been removed.
-===============
-*/
-void* EditorGameBase::get_trackpointer(uint32_t const serial) {
-	std::map<uint32_t, void*>::iterator it = trackpointers_.find(serial);
-
-	if (it != trackpointers_.end())
-		return it->second;
-
-	return nullptr;
-}
-
-/*
-===============
-Remove the registered track pointer. Subsequent calls to get_trackpointer()
-using this serial number will return 0.
-===============
-*/
-void EditorGameBase::remove_trackpointer(uint32_t serial) {
-	trackpointers_.erase(serial);
 }
 
 /**

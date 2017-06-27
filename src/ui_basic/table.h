@@ -123,7 +123,7 @@ public:
 template <> class Table<void*> : public Panel {
 public:
 	struct EntryRecord {
-		EntryRecord(void* entry);
+		explicit EntryRecord(void* entry);
 
 		void set_picture(uint8_t col, const Image* pic, const std::string& = std::string());
 		void set_string(uint8_t col, const std::string&);

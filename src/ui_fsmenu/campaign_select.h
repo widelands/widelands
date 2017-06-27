@@ -93,7 +93,7 @@ private:
  */
 class FullscreenMenuCampaignMapSelect : public FullscreenMenuLoadMapOrGame {
 public:
-	FullscreenMenuCampaignMapSelect(bool is_tutorial = false);
+	explicit FullscreenMenuCampaignMapSelect(bool is_tutorial = false);
 
 	std::string get_map();
 	void set_campaign(uint32_t);

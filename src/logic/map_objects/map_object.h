@@ -135,7 +135,6 @@ struct MapObjectDescr {
 	std::string get_animation_name(uint32_t) const;  ///< needed for save, debug
 	bool has_attribute(uint32_t) const;
 	static uint32_t get_attribute_id(const std::string& name, bool add_if_not_exists = false);
-	static std::string get_attribute_name(uint32_t id);
 
 	bool is_animation_known(const std::string& name) const;
 	void add_animation(const std::string& name, uint32_t anim);
@@ -240,7 +239,7 @@ public:
 	};
 
 	struct LogSink {
-		virtual void log(std::string str) = 0;
+		virtual void log(const std::string& str) = 0;
 		virtual ~LogSink() {
 		}
 	};
@@ -251,7 +250,7 @@ public:
 	virtual const Image* representative_image() const;
 
 protected:
-	MapObject(MapObjectDescr const* descr);
+	explicit MapObject(MapObjectDescr const* descr);
 	virtual ~MapObject() {
 	}
 

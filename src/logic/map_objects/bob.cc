@@ -471,7 +471,7 @@ struct BlockedTracker {
 };
 
 struct CheckStepBlocked {
-	CheckStepBlocked(BlockedTracker& tracker) : tracker_(tracker) {
+	explicit CheckStepBlocked(BlockedTracker& tracker) : tracker_(tracker) {
 	}
 
 	bool allowed(Map&, FCoords, FCoords end, int32_t, CheckStep::StepId) const {

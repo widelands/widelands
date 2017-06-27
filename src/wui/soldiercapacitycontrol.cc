@@ -97,9 +97,8 @@ SoldierCapacityControl::SoldierCapacityControl(UI::Panel* parent,
 }
 
 void SoldierCapacityControl::think() {
-
-	SoldierControl* soldiers = dynamic_cast<SoldierControl*>(&building_);
-
+	const SoldierControl* soldiers = building_.soldier_control();
+	assert(soldiers != nullptr);
 	uint32_t const capacity = soldiers->soldier_capacity();
 	value_.set_text(boost::lexical_cast<std::string>(capacity));
 

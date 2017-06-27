@@ -243,7 +243,8 @@ Building::Building(const BuildingDescr& building_descr)
      leave_time_(0),
      defeating_player_(0),
      seeing_(false),
-     attack_target_(nullptr) {
+     attack_target_(nullptr),
+     soldier_control_(nullptr) {
 }
 
 void Building::load_finish(EditorGameBase& egbase) {
@@ -707,6 +708,11 @@ void Building::remove_worker(Worker& worker) {
 void Building::set_attack_target(AttackTarget* new_attack_target) {
 	assert(attack_target_ == nullptr);
 	attack_target_ = new_attack_target;
+}
+
+void Building::set_soldier_control(SoldierControl* new_soldier_control) {
+	assert(soldier_control_ == nullptr);
+	soldier_control_ = new_soldier_control;
 }
 
 /**

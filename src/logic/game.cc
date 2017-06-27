@@ -138,13 +138,6 @@ void Game::sync_reset() {
 }
 
 /**
- * Returns true if cheat codes have been activated (single-player only)
- */
-bool Game::get_allow_cheats() {
-	return true;
-}
-
-/**
  * \return a pointer to the \ref InteractivePlayer if any.
  * \note This function may return 0 (in particular, it will return 0 during
  * playback or if player is spectator)

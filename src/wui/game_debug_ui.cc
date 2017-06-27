@@ -47,7 +47,7 @@ struct MapObjectDebugPanel : public UI::Panel, public Widelands::MapObject::LogS
 	MapObjectDebugPanel(UI::Panel& parent, const Widelands::EditorGameBase&, Widelands::MapObject&);
 	~MapObjectDebugPanel();
 
-	void log(std::string str) override;
+	void log(const std::string& str) override;
 
 private:
 	const Widelands::EditorGameBase& egbase_;
@@ -85,7 +85,7 @@ MapObjectDebugPanel::~MapObjectDebugPanel() {
 Append the string to the log textarea.
 ===============
 */
-void MapObjectDebugPanel::log(std::string str) {
+void MapObjectDebugPanel::log(const std::string& str) {
 	log_.set_text((log_.get_text() + str).c_str());
 }
 
