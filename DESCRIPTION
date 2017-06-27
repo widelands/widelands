@@ -1,0 +1,129 @@
+FRISIAN TRIBE
+A new tribe for Widelands
+
+******** LIST OF NEXT TODOS ********
+* – Write helptexts for buildings  *
+* – Draw all images                *
+* – Write worker helptexts         *
+************************************
+
+BUILDINGS               1   2
+    Production          +   +
+    Warehouse           +   +
+    Training            +   +
+    Military            +   +
+WARES                   +   +
+SHIPS                   +   
+STARTING CONDITIONS     +   
+IMMOVABLES              +   
+WORKERS                 +   
+IMAGES                  +   
+init.lua                +   
+preload.lua             +   +
+frisians.lua            +   +
+
+*** LIST OF NEW IMMOVABLES ***
+Shipconstruction    +
+Berry bushes        
+    tiny            +
+    small           +
+    mature          +
+    ripe            +
+Barley fields
+    tiny            +
+    small           +
+    medium          +
+    ripe            +
+    harvested       +
+
+*** LIST OF WARES ***
+
++   Log, Granite, Mud, Clay, Brick, Reet
++   Water, Meat, Fish, Smoked Meat, Smoked Fish, Fruit, Honey, Grain, Bread, Sweet Bread, Beer, Mead, Ration, Meal
++   Coal, Iron ore, Gold ore, Iron, Gold
++   Fur, Cloth, Fur Clothes, Silver Fur clothes, Golden fur clothes, Helmet, Golden Helmet
++   Basic Sword, Long Sword, Curved Sword, Double-edged Sword
++   Felling Ax, Pick, Shovel, Scythe, Basket, Hunting Spear, Fishing Net, Hammer, Bread Paddle, Kitchen Tools, Fire Tongs, Needles
+
+*** LIST OF BUILDINGS ***
+NAME                    SIZE        INPUT               OUTPUT                      WORKER              init.lua    times+cost
+Woodcutter´s House      small       <trees>             Log                         Woodcutter          +
+Forester´s House        small       –                   <trees>                     Forester            +
+Quarry                  small       <rocks>             Granite                     Stonemason          +
+Well                    small       <water>             Water                       Carrier             +
+Scout´s House           small       Ration              –                           Scout               +
+Mud Mine                medium      Ration              Earth                       Digger              +
+Clay Burner´s House     medium      1×Water + 1×Earth   1×Clay                      Clay Burner         +
+Brick Burner´s House    medium      2×Clay + 2×Granite  3×Brick                     Clay Burner         +
+Charcoal Kiln           medium      6×Log               1×Coal                      Charcoal Burner     +
+Hunter´s House          small       <game>              Meat                        Hunter              +
+Fisher´s House          small       <fish>              Fish                        Fisher              +
+Reet Farm               medium      –                   Reet                        Reet Farmer         +
+Aqua Farm               big         ???                 Fish                        Fish Breeder        +
+Farm                    big         –                   Grain                       Farmer              +
+Bakery                  medium      1×Grain + 1×Water   1×Bread                     Baker               +
+Sweetbread Bakery       <Bakery>    1×Bread + 1×Honey   1×Sweetbread                Baker               +
+Brewery                 medium      1×Grain + 1×Water   1×Beer                      Brewer              +
+Mead Brewery            <Brewery>   1×Grain + 1×Water   1×Beer                      Master Brewer       +
+                                    1×Grain + 1×Water + 1×Honey = 1×Mead                                "
+Tannery                 medium      1×Meat + 1×Log      1×Smoked Meat               Tanner              +
+                                    1×Fish + 1×Log      1×Smoked Fish                                   "
+Tavern                  medium      1×Beer + 1×Fruit,SMeat,SFish,Bread = 1×Ration   Landlady            +
+Drinking Hall           <Tavern>    1×Beer + 1×Fruit,SMeat,SFish,Bread = 1×Ration   Landlady            +
+                                    1×Mead + 1×Bread + 1×Fruit,SMeat,SFish = 1×Meal                     "
+Bee-keeper´s House      medium      –                   Honey                       Bee-keeper          +
+Reindeer Farm           big         1×Grain + 1×Water   Reindeer                    Reindeer Breeder    +
+                                    1×Grain + 1×Water   Fur                                             "
+Weaving Mill            big         1×Fur               1×Fur Clothes               Seamstress          +
+                                    2×Fur               1×Cloth                                         "
+Seamstress              medium      1×FurCloth + 1×Iron 1×Silver Fur Cloth          Seamstress          +
+                                    1×FurCloth + 1×Iron + 1×Gold = 1×GoldenFurCloth                     "
+Berry Farm              small       –                   <bushes>                    Berry Farmer        +
+Fruit Collector´s House small       <bushes,small tree> Fruit                       Fruit Collector     +
+Furnace                 medium      1×Coal + 1×Iron ore 1×Iron                      Smelter             +
+                                    1×Coal + 1×Gold ore 1×Gold                                          "
+Blacksmithy             medium      1×Log + 1×Iron      1×(Tool)                    Blacksmith          +
+Armour Smithy           medium      1×Coal + 1×Iron     1×Basic Sword               Blacksmith          +
+                                    1×Coal + 2×Iron     1×Long Sword                                    "
+                                    2×Coal + 1×Iron + 1×Gold = 1×Curved Sword                           "
+                                    2×Coal + 2×Iron + 2×Gold = 1×Double-edged Sword                     "
+                                    1×Coal + 2×Iron     1×Helmet                                        "
+                                    2×Coal + 2×Iron + 1×Gold = 1×Golden Helmet                          "
+
+Barracks                medium      1×FurCloth + 1×BasicSword = 1×Soldier           Trainer             +
+HQ, Warehouse, Port, Mines etc;                                                                         +
+Military: Wooden Tower (s), Sentinel (s), Outpost (m), Tower (b), Fortress (b)                          +
+Training camp and Training arena                                                                        +
+
+*** LIST OF WORKERS ***
+
+NAME            USES                    NEXT LEVEL      TRAINED AT
+Woodcutter      Felling Ax
+Stonemason      Pick
+Miner           Pick                    Master Miner
+Trainer         Basic Sword, Fur Cloth
+Warrior         Basic Sword, Fur Cloth                  Barracks
+Seamstress      Needle
+Baker           Bread Paddle
+Brewer                                  Master Brewer
+Reindeer Breeder
+Smelter         Fire Tongs
+Builder         Hammer
+Blacksmith      Hammer
+Fruit Collector Basket
+Berry Farmer    Shovel
+Forester        Shovel
+Hunter          Hunting Spear
+Fisher          Fishing Rod
+Landlady        Kitchen Tools
+Tanner          Kitchen Tools
+Bee-keeper
+Reet Farmer     Shovel
+Farmer          Scythe
+Digger          Shovel
+Scout
+Clay Burner     Fire Tongs
+Charcoal Burner
+Carrier
+Reindeer                                                Reindeer Farm
+Geologist       Hammer
