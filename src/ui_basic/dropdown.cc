@@ -334,7 +334,7 @@ void BaseDropdown::close() {
 bool BaseDropdown::is_mouse_away() const {
 	return (get_mouse_position().x + mouse_tolerance_) < list_offset_x_ ||
 	       get_mouse_position().x > (list_offset_x_ + list_->get_w() + mouse_tolerance_) ||
-	       (get_mouse_position().y + mouse_tolerance_ / 2) < list_offset_y_ ||
+	       (get_mouse_position().y + mouse_tolerance_) < list_offset_y_ ||
 	       get_mouse_position().y > (list_offset_y_ + get_h() + list_->get_h() + mouse_tolerance_);
 }
 
