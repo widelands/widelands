@@ -31,8 +31,6 @@
 // printf macros for size_t, in the style of inttypes.h
 #ifdef _LP64
 #define PRIS_PREFIX "z"
-#elif defined(_WIN64)
-#define PRIS_PREFIX "I64"
 #else
 #define PRIS_PREFIX
 #endif
@@ -44,7 +42,13 @@
 
 #define PRIdS PRIS_PREFIX "d"
 #define PRIxS PRIS_PREFIX "x"
+// Win64 is finicky:
+// https://stackoverflow.com/questions/44382862/how-to-printf-a-size-t-without-warning-in-mingw-w64-gcc-7-1
+#ifdef _WIN64
+#define PRIuS PRIu64
+#else
 #define PRIuS PRIS_PREFIX "u"
+#endif
 #define PRIXS PRIS_PREFIX "X"
 #define PRIoS PRIS_PREFIX "o"
 
