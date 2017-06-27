@@ -634,7 +634,7 @@ struct ManagementData {
 
 	void mutate(PlayerNumber = 0);
 	void new_dna_for_persistent(uint8_t, Widelands::AiType);
-	void copy_persistent_to_local(uint8_t);
+	void copy_persistent_to_local();
 	void review(
 	   uint32_t, PlayerNumber, uint32_t, uint32_t, uint32_t, uint16_t, int16_t, int16_t, uint16_t);
 	void dump_data();

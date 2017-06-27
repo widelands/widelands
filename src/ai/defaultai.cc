@@ -527,7 +527,7 @@ void DefaultAI::late_initialization() {
 
 		// AI's DNA population
 		management_data.new_dna_for_persistent(player_number(), type_);
-		management_data.copy_persistent_to_local(player_number());
+		management_data.copy_persistent_to_local();
 		management_data.mutate(player_number());
 		if (kAITrainingMode) {
 			management_data.dump_data();
@@ -555,11 +555,11 @@ void DefaultAI::late_initialization() {
 		if (kAITrainingMode) {
 			log("%2d: reinitializing dna (kAITrainingMode set true)", player_number());
 			management_data.new_dna_for_persistent(player_number(), type_);
-			management_data.copy_persistent_to_local(player_number());
+			management_data.copy_persistent_to_local();
 			management_data.mutate(player_number());
 
 		} else {
-			management_data.copy_persistent_to_local(player_number());
+			management_data.copy_persistent_to_local();
 		}
 
 		management_data.test_consistency(true);
@@ -913,14 +913,14 @@ void DefaultAI::late_initialization() {
 	                                 "count military vacant"));
 	taskPool.push_back(SchedulerTask(std::max<uint32_t>(gametime, 10 * 60 * 1000),
 	                                 SchedulerTaskId::kCheckEnemySites, 6, "check enemy sites"));
-	taskPool.push_back(SchedulerTask(
-	   std::max<uint32_t>(gametime, 10 * 1000), SchedulerTaskId::kManagementUpdate, 8, "reviewing"));
+	if (kAITrainingMode) {
+		taskPool.push_back(SchedulerTask(std::max<uint32_t>(gametime, 10 * 1000),
+		                                 SchedulerTaskId::kManagementUpdate, 8, "reviewing"));
+	}
 	taskPool.push_back(SchedulerTask(std::max<uint32_t>(gametime, 9 * 1000),
 	                                 SchedulerTaskId::kUpdateStats, 6, "update player stats"));
-	if (kAITrainingMode) {
-		taskPool.push_back(SchedulerTask(
-		   std::max<uint32_t>(gametime, 10 * 1000), SchedulerTaskId::kUpdateStats, 15, "review"));
-	}
+	taskPool.push_back(SchedulerTask(
+	   std::max<uint32_t>(gametime, 10 * 1000), SchedulerTaskId::kUpdateStats, 15, "review"));
 
 	Map& map = game().map();
 

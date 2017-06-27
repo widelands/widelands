@@ -843,8 +843,6 @@ MutatingIntensity ManagementData::do_mutate(const uint8_t is_preferred, const in
 // Mutating, but all done on persistent data
 void ManagementData::mutate(const uint8_t pn) {
 
-	const int8_t old_probability = get_military_number_at(kMutationRatePosition);
-
 	int16_t probability =
 	   shift_weight_value(get_military_number_at(kMutationRatePosition), false) + 101;
 	if (probability > kUpperDefaultMutationLimit) {
@@ -958,7 +956,7 @@ void ManagementData::mutate(const uint8_t pn) {
 }
 
 // Now we copy persistent to local
-void ManagementData::copy_persistent_to_local(const uint8_t pn) {
+void ManagementData::copy_persistent_to_local() {
 
 	assert(pd->neuron_weights.size() == kNeuronPoolSize);
 	assert(pd->neuron_functs.size() == kNeuronPoolSize);
@@ -978,7 +976,7 @@ void ManagementData::copy_persistent_to_local(const uint8_t pn) {
 	pd->f_neuron_pool_size = kFNeuronPoolSize;
 
 	test_consistency();
-	log("    ... DNA initialized\n", pn);
+	log("    ... DNA initialized\n");
 }
 
 void ManagementData::test_consistency(bool itemized) {
