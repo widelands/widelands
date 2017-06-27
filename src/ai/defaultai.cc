@@ -529,7 +529,9 @@ void DefaultAI::late_initialization() {
 		management_data.new_dna_for_persistent(player_number(), type_);
 		management_data.copy_persistent_to_local(player_number());
 		management_data.mutate(player_number());
-		management_data.dump_data();
+		if (kAITrainingMode) {
+			management_data.dump_data();
+		}
 
 		management_data.test_consistency(true);
 		assert(management_data.get_military_number_at(42) ==
@@ -561,7 +563,9 @@ void DefaultAI::late_initialization() {
 		}
 
 		management_data.test_consistency(true);
-		management_data.dump_data();
+		if (kAITrainingMode) {
+			management_data.dump_data();
+		}
 
 		log(" %2d: %lu basic buildings in savegame file. %s\n", player_number(),
 		    persistent_data->remaining_basic_buildings.size(),
@@ -782,9 +786,6 @@ void DefaultAI::late_initialization() {
 			}
 
 			for (const auto& temp_buildcosts : prod.buildcost()) {
-				// NOCOM use tribe_->is_construction_material(temp_buildcosts.first) and ignore the
-				// granite and logs.
-				// Since we have the same thing a few lines above, pull out a helper function.
 				// building material except for trivial material
 				if (tribe_->is_construction_material(temp_buildcosts.first) &&
 				    !(temp_buildcosts.first == tribe_->rawlog() ||
@@ -798,7 +799,6 @@ void DefaultAI::late_initialization() {
 
 		// now for every military building, we fill critical_building_material vector
 		// with critical construction wares
-		// non critical are excluded (see below)
 		if (bld.type() == MapObjectType::MILITARYSITE) {
 			bo.type = BuildingObserver::Type::kMilitarysite;
 			const MilitarySiteDescr& milit = dynamic_cast<const MilitarySiteDescr&>(bld);
@@ -833,11 +833,9 @@ void DefaultAI::late_initialization() {
 					bo.substitute_inputs.insert(temp_input.first);
 				}
 
+				// Creating vector with critical material, to be used to discourage
+				// building of new sites if ware is lacking
 				for (const auto& temp_buildcosts : train.buildcost()) {
-					// NOCOM(#codereview): Hard coding can be avoided here. Get the trainingsites from
-					// the tribe then get descr().buildcost() for the building
-					// And ignore the logs and granite again - maybe we can refactor this stuff into a
-					// function.
 					// building material except for trivial material
 					if (!(temp_buildcosts.first == tribe_->rawlog() ||
 					      temp_buildcosts.first == tribe_->refinedlog() ||
@@ -1009,7 +1007,7 @@ void DefaultAI::late_initialization() {
 	if (!basic_economy_established) {
 		log("%2d: Initializing in the basic economy mode, required buildings:\n", player_number());
 		for (auto bb : persistent_data->remaining_basic_buildings) {
-			log("   %3d / %-25s,  target %d\n", bb.first, get_building_observer(bb.first).name,
+			log("   %3d / %-25s- target %d\n", bb.first, get_building_observer(bb.first).name,
 			    bb.second);
 		}
 	}
@@ -1493,7 +1491,8 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 				assert(!player_statistics.players_in_same_team(bpn, pn));
 				field.enemy_nearby = true;
 				if (upcast(MilitarySite const, militarysite, building)) {
-					field.enemy_military_presence += militarysite->soldier_control()->stationed_soldiers().size();
+					field.enemy_military_presence +=
+					   militarysite->soldier_control()->stationed_soldiers().size();
 					++field.enemy_military_sites;
 				}
 				if (upcast(ConstructionSite const, constructionsite, building)) {
@@ -1505,7 +1504,8 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 
 				// Warehouses are counted here too as they can host soldiers as well
 				if (upcast(Warehouse const, warehouse, building)) {
-					field.enemy_military_presence += warehouse->soldier_control()->stationed_soldiers().size();
+					field.enemy_military_presence +=
+					   warehouse->soldier_control()->stationed_soldiers().size();
 					++field.enemy_military_sites;
 					field.enemy_wh_nearby = true;
 					enemy_warehouses.insert(building->get_position().hash());
@@ -1514,7 +1514,8 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 			} else if (bpn != pn) {  // it is an ally
 				assert(!player_statistics.get_is_enemy(bpn));
 				if (upcast(MilitarySite const, militarysite, building)) {
-					field.ally_military_presence += militarysite->soldier_control()->stationed_soldiers().size();
+					field.ally_military_presence +=
+					   militarysite->soldier_control()->stationed_soldiers().size();
 				}
 				continue;
 			}
@@ -1553,8 +1554,10 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 				const int32_t radius = militarysite->descr().get_conquers() + 4;
 
 				if (radius > dist) {
-					field.area_military_capacity += militarysite->soldier_control()->max_soldier_capacity();
-					field.own_military_presence += militarysite->soldier_control()->stationed_soldiers().size();
+					field.area_military_capacity +=
+					   militarysite->soldier_control()->max_soldier_capacity();
+					field.own_military_presence +=
+					   militarysite->soldier_control()->stationed_soldiers().size();
 
 					if (militarysite->soldier_control()->stationed_soldiers().empty()) {
 						field.military_unstationed += 1;
@@ -5013,8 +5016,6 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 			for (uint8_t i = 0; i < kFNeuronBitSize; ++i) {
 				if (management_data.f_neuron_pool[8].get_position(i)) {
 					const int16_t partial_input = inputs[i];
-					if (kAITrainingMode && (partial_input < -10 || partial_input > 10)) {
-					}
 					tmp_score += partial_input;
 				}
 				if (management_data.f_neuron_pool[11].get_position(i)) {

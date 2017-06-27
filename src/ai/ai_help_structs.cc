@@ -29,7 +29,7 @@ constexpr int kRoadNotFound = -1000;
 constexpr int kShortcutWithinSameEconomy = 1000;
 constexpr int kRoadToDifferentEconomy = 10000;
 constexpr int kUpperDefaultMutationLimit = 200;
-constexpr int kLowerDefaultMutationLimit = 70;
+constexpr int kLowerDefaultMutationLimit = 150;
 
 namespace Widelands {
 
@@ -504,7 +504,7 @@ void ManagementData::new_dna_for_persistent(const uint8_t pn, const Widelands::A
 
 	ai_type = type;
 
-	log (" %2d ... initialize starts\n", pn);
+	log ("%2d: DNA initialization... \n", pn);
 
    // AutoSCore_AIDNA_1
     const std::vector<int16_t> AI_initial_military_numbers_A =
@@ -743,7 +743,7 @@ void ManagementData::new_dna_for_persistent(const uint8_t pn, const Widelands::A
 	primary_parent = std::rand() % 4;
 	const uint8_t parent2 = std::rand() % 4;
 
-	log (" ... DNA initialization (primary parent: %d, secondary parent: %d)\n", primary_parent, parent2);
+	log ("    ... Primary parent: %d, secondary parent: %d\n", primary_parent, parent2);
 
 	// First setting of military numbers, they go directly to persistent data
 	for (uint16_t i = 0; i < kMagicNumbersSize; i += 1) {
@@ -867,8 +867,7 @@ void ManagementData::mutate(const uint8_t pn) {
 
 	assert(probability > 0 && probability <= 201);
 
-	log(" %2d ... mutating, final prob.: 1 / %3d (old: 1 / %3d)\n", pn, probability,
-	       old_probability + 101);
+	log("%2d: mutating DNA with probability 1 / %3d:\n", pn, probability);
 
 	if (probability < 201) {
 
@@ -979,7 +978,7 @@ void ManagementData::copy_persistent_to_local(const uint8_t pn) {
 	pd->f_neuron_pool_size = kFNeuronPoolSize;
 
 	test_consistency();
-	log(" %d: DNA initialized\n", pn);
+	log("    ... DNA initialized\n", pn);
 }
 
 void ManagementData::test_consistency(bool itemized) {

@@ -342,7 +342,8 @@ private:
 	uint32_t last_road_dismantled_;  // uses to prevent too frequent road dismantling
 
 	uint32_t enemy_last_seen_;
-	// NOCOM int32_t vacant_mil_positions_;  // sum of vacant positions in militarysites and training sites
+	// NOCOM int32_t vacant_mil_positions_;  // sum of vacant positions in militarysites and training
+	// sites
 	uint32_t last_attack_time_;
 	// check ms in this interval - will auto-adjust
 	uint32_t enemysites_check_delay_;

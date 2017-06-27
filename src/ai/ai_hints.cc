@@ -38,7 +38,6 @@ BuildingHints::BuildingHints(std::unique_ptr<LuaTable> table)
         table->has_key("mountain_conqueror") ? table->get_bool("mountain_conqueror") : false),
      shipyard_(table->has_key("shipyard") ? table->get_bool("shipyard") : false),
      prohibited_till_(table->has_key("prohibited_till") ? table->get_int("prohibited_till") : 0),
-	  // NOCOM(#codereview): This is not a Boolean any more - rename "is_basic"
      basic_amount_(table->has_key("basic_amount") ? table->get_int("basic_amount") : 0),
      // 10 days default
      forced_after_(table->has_key("forced_after") ? table->get_int("forced_after") : 864000),

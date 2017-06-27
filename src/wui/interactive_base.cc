@@ -56,6 +56,9 @@
 #include "wui/minimap.h"
 #include "wui/unique_window_handler.h"
 
+// This constant is temporarily and should be replaced by command line switch
+constexpr bool AItrainingMode = false;
+
 using Widelands::Area;
 using Widelands::CoordPath;
 using Widelands::Coords;
@@ -348,24 +351,26 @@ void InteractiveBase::draw_overlay(RenderTarget& dst) {
 	avg_usframetime_ = ((avg_usframetime_ * 15) + (frametime_ * 1000)) / 16;
 	lastframe_ = curframe;
 
-	if (upcast(Game, game, &egbase())) {
-		uint32_t cur_fps = 1000000 / avg_usframetime_;
-		int32_t speed_diff = 0;
-		if (cur_fps < 13) {
-			speed_diff = -100;
+	// This portion of code keeps the speeed of game so that FPS are kept within
+	// range 13 - 15, this is used for training of AI
+	if (AItrainingMode) {
+		if (upcast(Game, game, &egbase())) {
+			uint32_t cur_fps = 1000000 / avg_usframetime_;
+			int32_t speed_diff = 0;
+			if (cur_fps < 13) {
+				speed_diff = -100;
 			}
-		if (cur_fps > 15) {
-			speed_diff = +100;
+			if (cur_fps > 15) {
+				speed_diff = +100;
 			}
-		if (speed_diff != 0) { // NOCOM this has to be reverted to the state in trunk
+			if (speed_diff != 0) {
 
-			if (GameController* const ctrl = game->game_controller()) {
-				// NOCOM printf ("desired speed: %d, current fps: %d\n", ctrl->desired_speed(), cur_fps);
-				if ((false && ctrl->desired_speed() > 950 && ctrl->desired_speed() < 30000) ||
-				(ctrl->desired_speed() <1000 && speed_diff > 0) ||
-				(ctrl->desired_speed() >29999 && speed_diff < 0)) {
-					ctrl->set_desired_speed(ctrl->desired_speed() + speed_diff);
-					// NOCOM printf ("speed diff %d, currently: %d\n", speed_diff,ctrl->desired_speed());
+				if (GameController* const ctrl = game->game_controller()) {
+					if ((ctrl->desired_speed() > 950 && ctrl->desired_speed() < 30000) ||
+					    (ctrl->desired_speed() < 1000 && speed_diff > 0) ||
+					    (ctrl->desired_speed() > 29999 && speed_diff < 0)) {
+						ctrl->set_desired_speed(ctrl->desired_speed() + speed_diff);
+					}
 				}
 			}
 		}

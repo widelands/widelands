@@ -124,7 +124,7 @@ constexpr int kMutationRatePosition = 42;
 // set this to false for trunk NOCOM
 // this is used only for training of AI
 // NOCOM(#codereview): Would we benefit from a command line switch here?
-constexpr bool kAITrainingMode = true;
+constexpr bool kAITrainingMode = false;
 
 constexpr uint32_t kNever = std::numeric_limits<uint32_t>::max();
 
