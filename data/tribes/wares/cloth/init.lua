@@ -9,11 +9,13 @@ tribes:new_ware_type {
    icon = dirname .. "menu.png",
    default_target_quantity = {
       barbarians = 10,
-      empire = 15
+      empire = 15,
+      frisians = 10
    },
    preciousness = {
       barbarians = 0,
-      empire = 1
+      empire = 1,
+      frisians = 0
    },
 
    animations = {

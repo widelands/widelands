@@ -1,7 +1,8 @@
 function ware_helptext(tribe)
    local helptext = {
       -- TRANSLATORS: Helptext for a ware: Thatch Reed
-      barbarians = pgettext("barbarians_ware", "Thatch reed is produced in a reed yard and used to make the roofs of buildings waterproof.")
+      barbarians = pgettext("barbarians_ware", "Thatch reed is produced in a reed yard and used to make the roofs of buildings waterproof."),
+      frisians = pgettext("frisians_ware", "Thatch reed is a special kind of reed that is grown in a reed farm. Nothing is better suited to make roofs waterproof." );
    }
    local result = ""
    if tribe then

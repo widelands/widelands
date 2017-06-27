@@ -5,7 +5,8 @@ function ware_helptext(tribe)
       -- TRANSLATORS: Helptext for a ware: Ration
       barbarians = pgettext("barbarians_ware", "Rations are produced in a tavern, an inn or a big inn out of fish or meat or pitta bread."),
       -- TRANSLATORS: Helptext for a ware: Ration
-      empire = pgettext("empire_ware", "Rations are produced in a tavern out of fish or meat or bread.")
+      empire = pgettext("empire_ware", "Rations are produced in a tavern out of fish or meat or bread."),
+      frisians = pgettext("frisians_ware", "They are produced in taverns and drinking halls out of beer and something to eat: Fruit, smoked meat or fish or bread.")
    }
    local result = ""
    if tribe then

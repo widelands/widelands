@@ -9,6 +9,20 @@ dirname = path.dirname(__file__)
 set_textdomain("tribes")
 
 return {
+   -- Basic information for the Frisian tribe
+   {
+      name = "frisians",
+      author = _"Nordfriese",
+      -- TRANSLATORS: This is a tribe name
+      descname = _"Frisians",
+      tooltip = _"The inhabitants of the rough North Sea shore.",
+      icon = dirname .. "images/frisians/icon.png",
+
+      starting_conditions = {
+         dirname .. "scripting/starting_conditions/frisians/headquarters.lua";
+      }
+   },
+
    -- Basic information for the Barbarian tribe
    {
       name = "barbarians",

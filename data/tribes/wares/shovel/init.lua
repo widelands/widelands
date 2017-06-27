@@ -11,10 +11,12 @@ tribes:new_ware_type {
       atlanteans = 2,
       barbarians = 1,
       empire = 1,
+      frisians = 3,
    },
    preciousness = {
       atlanteans = 0,
       barbarians = 0,
+      frisians = 0,
       empire = 0
    },
 

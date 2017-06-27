@@ -11,7 +11,8 @@ tribes:new_ware_type {
    preciousness = {
       atlanteans = 7,
       barbarians = 8,
-      empire = 7
+      frisians = 7,
+      empire = 7,
    },
 
    animations = {

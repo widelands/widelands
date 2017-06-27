@@ -10,11 +10,13 @@ tribes:new_ware_type {
    default_target_quantity = {
       atlanteans = 20,
       barbarians = 20,
+      frisians = 20,
       empire = 20
    },
    preciousness = {
       atlanteans = 2,
       barbarians = 2,
+      frisians = 2,
       empire = 2
    },
 
