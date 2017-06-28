@@ -48,9 +48,9 @@ public:
 
 	LuaPanel() : panel_(nullptr) {
 	}
-	LuaPanel(UI::Panel* p) : panel_(p) {
+	explicit LuaPanel(UI::Panel* p) : panel_(p) {
 	}
-	LuaPanel(lua_State* L) : panel_(nullptr) {
+	explicit LuaPanel(lua_State* L) : panel_(nullptr) {
 		report_error(L, "Cannot instantiate a '%s' directly!", className);
 	}
 	virtual ~LuaPanel() {
@@ -95,9 +95,9 @@ public:
 
 	LuaButton() : LuaPanel() {
 	}
-	LuaButton(UI::Panel* p) : LuaPanel(p) {
+	explicit LuaButton(UI::Panel* p) : LuaPanel(p) {
 	}
-	LuaButton(lua_State* L) : LuaPanel(L) {
+	explicit LuaButton(lua_State* L) : LuaPanel(L) {
 	}
 	virtual ~LuaButton() {
 	}
@@ -127,9 +127,9 @@ public:
 
 	LuaTab() : LuaPanel() {
 	}
-	LuaTab(UI::Panel* p) : LuaPanel(p) {
+	explicit LuaTab(UI::Panel* p) : LuaPanel(p) {
 	}
-	LuaTab(lua_State* L) : LuaPanel(L) {
+	explicit LuaTab(lua_State* L) : LuaPanel(L) {
 	}
 	virtual ~LuaTab() {
 	}
@@ -159,9 +159,9 @@ public:
 
 	LuaWindow() : LuaPanel() {
 	}
-	LuaWindow(UI::Panel* p) : LuaPanel(p) {
+	explicit LuaWindow(UI::Panel* p) : LuaPanel(p) {
 	}
-	LuaWindow(lua_State* L) : LuaPanel(L) {
+	explicit LuaWindow(lua_State* L) : LuaPanel(L) {
 	}
 	virtual ~LuaWindow() {
 	}
@@ -190,9 +190,9 @@ public:
 
 	LuaMapView() : LuaPanel() {
 	}
-	LuaMapView(MapView* p) : LuaPanel(p) {
+	explicit LuaMapView(MapView* p) : LuaPanel(p) {
 	}
-	LuaMapView(lua_State* L);
+	explicit LuaMapView(lua_State* L);
 	virtual ~LuaMapView() {
 	}
 

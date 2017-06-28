@@ -38,6 +38,9 @@ struct GameMainMenuSaveGame : public UI::UniqueWindow {
 	friend struct SaveWarnMessageBox;
 	GameMainMenuSaveGame(InteractiveGameBase&, UI::UniqueWindow::Registry& registry);
 
+	void fill_list();
+	void select_by_name(const std::string& name);
+
 protected:
 	void die() override;
 

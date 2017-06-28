@@ -34,7 +34,7 @@ enum class TrainingSiteType : uint8_t { kNoTS = 0, kBasic = 1, kAdvanced = 2 };
 /// buildings conf file. It is used to tell the computer player about the
 /// special properties of a building.
 struct BuildingHints {
-	BuildingHints(std::unique_ptr<LuaTable>);
+	explicit BuildingHints(std::unique_ptr<LuaTable>);
 	~BuildingHints() {
 	}
 
