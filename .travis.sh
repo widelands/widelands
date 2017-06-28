@@ -23,7 +23,10 @@ fi
 
 until sudo apt-get install -qq --force-yes -y \
    cmake \
-   libboost-all-dev \
+   libboost-dev \
+   libboost-regex-dev \
+   libboost-system-dev \
+   libboost-test-dev \
    libglew-dev \
    libicu-dev \
    libpng-dev \

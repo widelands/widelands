@@ -5,6 +5,9 @@ widelands (1:19+repack-3widelands1) UNRELEASED; urgency=medium
         libboost-system-dev
       - No longer needed;
         libsdl2-net-dev
+      - Also dropped version-specific glew alternative.
+        1.6 doesn't seem to be around anymore and the versionless one
+        seems to work across the different distro releases we build for
   * Merged Debian packaging of Widelands 1:19+repack-3. Remaining changes:
     - Disabled all Debian-patches since applying them might cause conflicts as
       development moves along in latest trunk. They mostly concern 

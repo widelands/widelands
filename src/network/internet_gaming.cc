@@ -803,10 +803,10 @@ std::string InternetGaming::bool2str(bool b) {
 }
 
 /// formates a chat message and adds it to the list of chat messages
-void InternetGaming::format_and_add_chat(std::string from,
-                                         std::string to,
+void InternetGaming::format_and_add_chat(const std::string& from,
+                                         const std::string& to,
                                          bool system,
-                                         std::string msg) {
+                                         const std::string& msg) {
 	ChatMessage c;
 	if (!system && from.empty()) {
 		std::string unkown_string = (boost::format("<%s>") % _("unknown")).str();
