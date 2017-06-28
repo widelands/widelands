@@ -112,6 +112,7 @@ tribes:new_tribe {
          "frisians_woodcutter",
          "frisians_forester",
          "frisians_builder",
+         "frisians_digger",
          "frisians_clay_burner",
          "frisians_reed_farmer",
          "frisians_seamstress",

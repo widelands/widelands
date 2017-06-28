@@ -76,20 +76,20 @@ tribes:new_soldier_type {
    -- Battle attributes - initial values and per level increase
    health = {
       max_level = 2,
-      base = 9000,
+      base = 12000,
       increase_per_level = 5000,
       pictures = path.list_files(dirname .. "health_level?.png"),
    },
    attack = {
       max_level = 6,
-      base = 800,
-      increase_per_level = 1100,
+      base = 1500,
+      increase_per_level = 1000,
       pictures = path.list_files(dirname .. "attack_level?.png"),
    },
    defense = {
       max_level = 2,
       base = 5,
-      increase_per_level = 15,
+      increase_per_level = 20,
       pictures = path.list_files(dirname .. "defense_level?.png"),
    },
    evade = {
