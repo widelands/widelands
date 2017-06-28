@@ -36,7 +36,7 @@ struct GameMainMenuSaveGame : public UI::UniqueWindow {
 	GameMainMenuSaveGame(InteractiveGameBase&, UI::UniqueWindow::Registry& registry);
 
 	void fill_list();
-	void select_by_name(std::string name);
+	void select_by_name(const std::string& name);
 
 protected:
 	void die() override;

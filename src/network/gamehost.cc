@@ -909,7 +909,7 @@ void GameHost::send(ChatMessage msg) {
  *   -   -1 if no client was found
  *   -   -2 if the host is the client (has no client number)
  */
-int32_t GameHost::check_client(std::string name) {
+int32_t GameHost::check_client(const std::string& name) {
 	// Check if the client is the host him-/herself
 	if (d->localplayername == name) {
 		return -2;
@@ -939,7 +939,7 @@ int32_t GameHost::check_client(std::string name) {
 * If the host sends a chat message with formation /kick <name> <reason>
 * This function will handle this command and try to kick the user.
 */
-void GameHost::kick_user(uint32_t client, std::string reason) {
+void GameHost::kick_user(uint32_t client, const std::string& reason) {
 	disconnect_client(client, "KICKED", true, reason);
 }
 

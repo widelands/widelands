@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-03-03 06:24+0000\n"
-"PO-Revision-Date: 2017-03-05 08:26+0000\n"
+"POT-Creation-Date: 2017-06-23 12:21+0000\n"
+"PO-Revision-Date: 2017-06-23 17:07+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Gaelic, Scottish (http://www.transifex.com/widelands/widelands/language/gd/)\n"
 "MIME-Version: 1.0\n"
@@ -1071,7 +1071,7 @@ msgctxt "barbarians_building"
 msgid ""
 "The Barbarian war mill is their most advanced production site for weapons. "
 "As such it needs to be upgraded from an ax workshop."
-msgstr "’S e an togalach saothrachaidh as adhartaiche airson airm nan Tùsanach a th’ anns a’ cheàrdach-cogaidh. Feumaidh tu ceàrdach thuaghan a leasachadh gus tè fhaighinn."
+msgstr "’S e an togalach saothrachaidh as adhartaiche airson airm nan Tùsanach a th’ anns a’ cheàrdach-chogaidh. Feumaidh tu ceàrdach thuaghan a leasachadh gus tè fhaighinn."
 
 #: ../../data/tribes/buildings/productionsites/barbarians/warmill/helptexts.lua:29
 msgctxt "barbarians_building"
@@ -2460,7 +2460,7 @@ msgid ""
 "The broad ax is produced by the ax workshop and the war mill. It is used in "
 "the training camp – together with food – to train soldiers with a "
 "fundamental fighting knowledge from attack level 1 to attack level 2."
-msgstr "Saothraichidh a’ cheàrdach thuaghan is a’ cheàrdach-cogaidh tuaghan mòra. Thèid an cleachdadh sa champa oideachaidh – le biadh – gus ionnsaigh nan saighdearan aig a bheil eòlas sabaide bunasach oideachadh o leibheil 1 gu leibheil 2."
+msgstr "Saothraichidh a’ cheàrdach thuaghan is a’ cheàrdach-chogaidh tuaghan mòra. Thèid an cleachdadh sa champa oideachaidh – le biadh – gus ionnsaigh nan saighdearan aig a bheil eòlas sabaide bunasach oideachadh o leibheil 1 gu leibheil 2."
 
 #. TRANSLATORS: Helptext for a ware: Bronze Ax
 #: ../../data/tribes/wares/ax_bronze/helptexts.lua:4
@@ -2490,7 +2490,7 @@ msgid ""
 "soldiers ever were able to handle this huge and powerful ax. It is produced "
 "in a war mill and used – together with food – in a training camp to train "
 "soldiers from attack level 4 to level 5."
-msgstr "Is an tuagh-ghaisgich an arm as cunnartaiche aig na Tùsanaich. ’S gann na saighdearan a bhios comasach air an tuagh làidir mhòr seo a làimhseachadh. Saothraichidh tu sa cheàrdach-cogaidh i is thèid a cleachdadh sa champa oideachaidh – le biadh – gus ionnsaigh nan saighdearan oideachadh o leibheil 4 gu leibheil 5."
+msgstr "Is an tuagh-ghaisgich an arm as cunnartaiche aig na Tùsanaich. ’S gann na saighdearan a bhios comasach air an tuagh làidir mhòr seo a làimhseachadh. Saothraichidh tu sa cheàrdach-chogaidh i is thèid a cleachdadh sa champa oideachaidh – le biadh – gus ionnsaigh nan saighdearan oideachadh o leibheil 4 gu leibheil 5."
 
 #. TRANSLATORS: Helptext for a ware: Basket
 #: ../../data/tribes/wares/basket/helptexts.lua:4
@@ -2649,7 +2649,7 @@ msgid ""
 "The fires of the Barbarians are usually fed with coal. Consumers are several"
 " buildings: lime kiln, smelting works, ax workshop, war mill, and helm "
 "smithy."
-msgstr "Thèid teintean nan Tùsanach a bhiadhadh le gual mar as trice. Cleachdaidh caochladh de thogalaichean i: an àth-aoil, a’ cheàrdach leaghadair, a’ cheàrdach thuaghan, a’ cheàrdach-cogaidh is a’ cheàrdach chlogaidean."
+msgstr "Thèid teintean nan Tùsanach a bhiadhadh le gual mar as trice. Cleachdaidh caochladh de thogalaichean i: an àth-aoil, a’ cheàrdach leaghadair, a’ cheàrdach thuaghan, a’ cheàrdach-chogaidh is a’ cheàrdach chlogaidean."
 
 #. TRANSLATORS: Helptext for a ware: Coal
 #: ../../data/tribes/wares/coal/helptexts.lua:10
@@ -2815,7 +2815,7 @@ msgid ""
 "Only very important things are embellished with gold. It is used as a "
 "precious building material and to produce different axes (in the war mill) "
 "and different parts of armor (in the helm smithy)."
-msgstr "Cha dèid ach nithean fìor chudromach a sgeadachadh le òr. Cleachdaidh tu mar stuth togail uasal e is nì thu caochladh de thuaghan (sa cheàrdach-cogaidh) is armachd (sa cheàrdach chlogaidean) leis."
+msgstr "Cha dèid ach nithean fìor chudromach a sgeadachadh le òr. Cleachdaidh tu mar stuth togail uasal e is nì thu caochladh de thuaghan (sa cheàrdach-chogaidh) is armachd (sa cheàrdach chlogaidean) leis."
 
 #. TRANSLATORS: Helptext for a ware: Gold
 #: ../../data/tribes/wares/gold/helptexts.lua:10
@@ -2996,7 +2996,7 @@ msgctxt "barbarians_ware"
 msgid ""
 "It is used to produce weapons and tools in the metal workshop, ax workshop, "
 "war mill and helm smithy."
-msgstr "Cleachdaidh do threubh e gus airm is acainnean a dhèanamh sa cheàrdach meatailt, sa cheàrdach thuaghan, sa cheàrdach-cogaidh is sa cheàrdach chlogaidean."
+msgstr "Cleachdaidh do threubh e gus airm is acainnean a dhèanamh sa cheàrdach meatailt, sa cheàrdach thuaghan, sa cheàrdach-chogaidh is sa cheàrdach chlogaidean."
 
 #. TRANSLATORS: Helptext for a ware: Iron
 #: ../../data/tribes/wares/iron/helptexts.lua:10
@@ -3537,7 +3537,7 @@ msgid "Wool is the hair of sheep. Weaving mills use it to make cloth."
 msgstr "’S e gaoisid nan caora a th’ anns a’ chlòimh. Cleachdaidh taighean nam beart i gus clò a dhèanamh."
 
 #. TRANSLATORS: Helptext for a worker: Armorsmith
-#: ../../data/tribes/workers/atlanteans/armorsmith/helptexts.lua:3
+#: ../../data/tribes/workers/atlanteans/armorsmith/helptexts.lua:5
 msgctxt "atlanteans_worker"
 msgid "Produces armor for the soldiers."
 msgstr "Nì e armachd airson nan saighdearan."
