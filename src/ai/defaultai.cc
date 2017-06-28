@@ -854,13 +854,13 @@ void DefaultAI::late_initialization() {
 	}
 
 	// We must verify that some buildings has been identified
-	// Also note that AI just presume that some buildings are unique, if you want to
-	// create e.g. two baracks or bakeries inpact on AI must be considered
+	// Also note that the AI assumes that some buildings are unique, if you want to
+	// create e.g. two barracks or bakeries, the impact on the AI must be considered
 	assert(count_buildings_with_attribute(BuildingAttribute::kBarracks) == 1);
 	assert(count_buildings_with_attribute(BuildingAttribute::kBakery) == 1);
 	assert(count_buildings_with_attribute(BuildingAttribute::kLogRefiner) == 1);
 	assert(count_buildings_with_attribute(BuildingAttribute::kIronMine) >= 1);
-	// If there will be a tribe with more than 3 mines of same type, just increase the number
+	// If there will be a tribe with more than 3 mines of the same type, just increase the number
 	assert(count_buildings_with_attribute(BuildingAttribute::kIronMine) <= 3);
 
 	// atlanteans they consider water as a resource

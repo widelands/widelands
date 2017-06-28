@@ -474,21 +474,21 @@ void ManagementData::review(const uint32_t gametime,
 	const int16_t main_bonus =
 	   ((static_cast<int32_t>(land - old_land) > 0 && land > max_e_land * 5 / 6 && attackers > 0 &&
 	     trained_soldiers > 0 && latest_attackers > 0) ?
-	       bonus :
+	       kBonus :
 	       0);
 
-	const int16_t land_delta_bonus = static_cast<int16_t>(land - old_land) * land_delta_multiplier;
+	const int16_t land_delta_bonus = static_cast<int16_t>(land - old_land) * kLandDeltaMultiplier;
 
-	score = land / current_land_divider + land_delta_bonus + main_bonus +
-	        attackers * attackers_multiplicator + ((attackers > 0) ? attack_bonus : -attack_bonus) +
-	        trained_soldiers * trained_soldiers_score + +conquered_wh_bonus + conq_ws;
+	score = land / kCurrentLandDivider + land_delta_bonus + main_bonus +
+	        attackers * kAttackersMultiplier + ((attackers > 0) ? kAttackBonus : -kAttackBonus) +
+	        trained_soldiers * kTrainedSoldiersScore + +kConqueredWhBonus + conq_ws;
 
 	log(" %2d %s: reviewing AI mngm. data, sc: %5d Pr.p: %d (l: %4d / %4d / %4d, "
 	       "at:%4d(%3d), ts:%4d(%2d), ConqWH:%2d)\n",
 	       pn, gamestring_with_leading_zeros(gametime), score, primary_parent,
-	       land / current_land_divider, main_bonus, land_delta_bonus,
-	       attackers * attackers_multiplicator, latest_attackers,
-	       trained_soldiers * trained_soldiers_score, trained_soldiers, conq_ws);
+	       land / kCurrentLandDivider, main_bonus, land_delta_bonus,
+	       attackers * kAttackersMultiplier, latest_attackers,
+	       trained_soldiers * kTrainedSoldiersScore, trained_soldiers, conq_ws);
 
 	if (score < -10000 || score > 30000) {
 		log(
@@ -1407,7 +1407,7 @@ void PlayersStrengths::set_last_time_seen(const uint32_t seentime, Widelands::Pl
 bool PlayersStrengths::get_is_enemy(Widelands::PlayerNumber pn) {
 	if (all_stats.count(pn) == 0) {
 		//Should happen only rarely so we print a warning here
-		log("%d: WARNING: player has not statiscs yet\n", this_player_number);
+		log("%d: WARNING: player has no statistics yet\n", this_player_number);
 		return false;
 	}
 	return all_stats[pn].is_enemy;
@@ -1417,7 +1417,7 @@ bool PlayersStrengths::get_is_enemy(Widelands::PlayerNumber pn) {
 bool PlayersStrengths::player_seen_lately(Widelands::PlayerNumber pn, const uint32_t gametime) {
 	if (all_stats.count(pn) == 0) {
 		//Should happen only rarely so we print a warning here
-		log("%d: WARNING: player has not statiscs yet\n", this_player_number);
+		log("%d: WARNING: player has no statistics yet\n", this_player_number);
 		return false;
 	}
 	if (all_stats[pn].last_time_seen == kNever) {

@@ -43,7 +43,7 @@ void GamePlayerAiPersistentPacket::read(FileSystem& fs, Game& game, MapObjectLoa
 			iterate_players_existing(p, nr_players, game, player) try {
 				if (packet_version == 2) {
 
-					// zero here says the AI has not be initialized
+					// zero here says the AI has not been initialized
 					player->ai_data.initialized = 0;
 					// we will just read other variables
 					fr.unsigned_8();

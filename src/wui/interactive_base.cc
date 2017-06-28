@@ -56,7 +56,7 @@
 #include "wui/minimap.h"
 #include "wui/unique_window_handler.h"
 
-// This constant is temporarily and should be replaced by command line switch
+// TODO(tiborb): This constant is temporary and should be replaced by command line switch
 constexpr bool AItrainingMode = false;
 
 using Widelands::Area;
@@ -351,7 +351,7 @@ void InteractiveBase::draw_overlay(RenderTarget& dst) {
 	avg_usframetime_ = ((avg_usframetime_ * 15) + (frametime_ * 1000)) / 16;
 	lastframe_ = curframe;
 
-	// This portion of code keeps the speeed of game so that FPS are kept within
+	// This portion of code keeps the speed of game so that FPS are kept within
 	// range 13 - 15, this is used for training of AI
 	if (AItrainingMode) {
 		if (upcast(Game, game, &egbase())) {

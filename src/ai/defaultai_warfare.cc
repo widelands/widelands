@@ -117,9 +117,6 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 			disappeared_sites.push_back(site->first);
 		}
 	}
-	// NOCOM(#codereview): Why not just erase them straight away and get rid of the disappeared_sites
-	// vector?
-	// @Gun: erasing from enemy_sites makes the iterator invalid
 	while (!disappeared_sites.empty()) {
 		enemy_sites.erase(disappeared_sites.back());
 		disappeared_sites.pop_back();
@@ -435,9 +432,7 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 				}
 			}
 
-		} else {  // we don't have a flag = site does not exist anymore, let#s remove the site from
-		          // our
-			       // observer list
+		} else {  // we don't have a flag = site does not exist anymore, let's remove the site from our observer list
 			disappeared_sites.push_back(site->first);
 		}
 	}

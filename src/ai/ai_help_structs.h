@@ -557,14 +557,14 @@ constexpr int kNeuronWeightLimit = 100;
 constexpr size_t kNeuronMaxPosition = 20;
 constexpr size_t kSecondParentProbability = 50;
 
-// bunch of parameters used for trainig AI (for calculation of fitness function result)
-constexpr int16_t current_land_divider = 2;
-constexpr int16_t land_delta_multiplier = 1;
-constexpr int16_t bonus = 1000;
-constexpr int16_t attackers_multiplicator = 1;
-constexpr int16_t attack_bonus = 100;
-constexpr int16_t trained_soldiers_score = 250;
-constexpr int16_t conquered_wh_bonus = 500;
+// A bunch of parameters used for trainig AI (for calculation of fitness function result)
+constexpr int16_t kCurrentLandDivider = 2;
+constexpr int16_t kLandDeltaMultiplier = 1;
+constexpr int16_t kBonus = 1000;
+constexpr int16_t kAttackersMultiplier = 1;
+constexpr int16_t kAttackBonus = 100;
+constexpr int16_t kTrainedSoldiersScore = 250;
+constexpr int16_t kConqueredWhBonus = 500;
 
 struct Neuron {
 	static int clip_weight_to_range(int w) {
