@@ -110,7 +110,7 @@ public:
 		Time last_modified;
 	};
 
-	Economy(Player&);
+	explicit Economy(Player&);
 	~Economy();
 
 	Player& owner() const {

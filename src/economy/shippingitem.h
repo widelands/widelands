@@ -44,8 +44,8 @@ class Worker;
 struct ShippingItem {
 	ShippingItem() {
 	}
-	ShippingItem(WareInstance& ware);
-	ShippingItem(Worker& worker);
+	explicit ShippingItem(WareInstance& ware);
+	explicit ShippingItem(Worker& worker);
 
 	// Unboxes the item that is shipped which might be either a ware or a
 	// worker. It is safe to pass nullptr for 'ware' or 'worker' in case you are
