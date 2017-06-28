@@ -58,7 +58,7 @@ private:
 	};
 
 	template <typename T> struct Capsule : public BaseCapsule {
-		Capsule(const T& init_m) : m(init_m) {
+		explicit Capsule(const T& init_m) : m(init_m) {
 		}
 
 		bool check(const MapObject& obj) const override {

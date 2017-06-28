@@ -79,7 +79,7 @@ private:
 	 * If the connection attempt failed, is_connected() will return \c false.
 	 * \param host The host to connect to.
 	 */
-	NetClient(const NetAddress& host);
+	explicit NetClient(const NetAddress& host);
 
 	/// An io_service needed by boost.asio. Primarily needed for asynchronous operations.
 	boost::asio::io_service io_service_;

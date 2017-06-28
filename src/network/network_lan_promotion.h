@@ -59,7 +59,7 @@ protected:
 	 * When both fail, report_network_error() is called.
 	 * \param port The port to listen on.
 	 */
-	LanBase(uint16_t port);
+	explicit LanBase(uint16_t port);
 
 	~LanBase();
 

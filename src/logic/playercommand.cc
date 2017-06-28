@@ -1514,10 +1514,21 @@ CmdChangeSoldierCapacity::CmdChangeSoldierCapacity(StreamRead& des)
 }
 
 void CmdChangeSoldierCapacity::execute(Game& game) {
-	if (upcast(Building, building, game.objects().get_object(serial)))
-		if (&building->owner() == game.get_player(sender()))
-			if (upcast(SoldierControl, ctrl, building))
-				ctrl->changeSoldierCapacity(val);
+	if (upcast(Building, building, game.objects().get_object(serial))) {
+		if (&building->owner() == game.get_player(sender()) &&
+		    building->soldier_control() != nullptr) {
+			SoldierControl* soldier_control = building->mutable_soldier_control();
+			Widelands::Quantity const old_capacity = soldier_control->soldier_capacity();
+			Widelands::Quantity const new_capacity =
+			   std::min(static_cast<Widelands::Quantity>(
+			               std::max(static_cast<int32_t>(old_capacity) + val,
+			                        static_cast<int32_t>(soldier_control->min_soldier_capacity()))),
+			            soldier_control->max_soldier_capacity());
+			if (old_capacity != new_capacity) {
+				soldier_control->set_soldier_capacity(new_capacity);
+			}
+		}
+	}
 }
 
 void CmdChangeSoldierCapacity::serialize(StreamWrite& ser) {

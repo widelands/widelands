@@ -225,7 +225,7 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 		if (upcast(MilitarySite, bld, f.field->get_immovable())) {
 			if (player_->is_hostile(bld->owner())) {
 				std::vector<Soldier*> defenders;
-				defenders = bld->present_soldiers();
+				defenders = bld->soldier_control()->present_soldiers();
 				defenders_strength = calculate_strength(defenders);
 
 				flag = &bld->base_flag();
@@ -239,7 +239,7 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 			if (player_->is_hostile(Wh->owner())) {
 
 				std::vector<Soldier*> defenders;
-				defenders = Wh->present_soldiers();
+				defenders = Wh->soldier_control()->present_soldiers();
 				defenders_strength = calculate_strength(defenders);
 
 				flag = &Wh->base_flag();
@@ -434,12 +434,13 @@ void DefaultAI::count_military_vacant_positions() {
 	// counting vacant positions
 	vacant_mil_positions_ = 0;
 	for (TrainingSiteObserver tso : trainingsites) {
-		vacant_mil_positions_ +=
-		   10 * (tso.site->soldier_capacity() - tso.site->stationed_soldiers().size());
+		vacant_mil_positions_ += 10 * (tso.site->soldier_control()->soldier_capacity() -
+		                               tso.site->soldier_control()->stationed_soldiers().size());
 		vacant_mil_positions_ += (tso.site->can_start_working()) ? 0 : 10;
 	}
 	for (MilitarySiteObserver mso : militarysites) {
-		vacant_mil_positions_ += mso.site->soldier_capacity() - mso.site->stationed_soldiers().size();
+		vacant_mil_positions_ += mso.site->soldier_control()->soldier_capacity() -
+		                         mso.site->soldier_control()->stationed_soldiers().size();
 	}
 }
 
@@ -470,8 +471,9 @@ bool DefaultAI::check_trainingsites(uint32_t gametime) {
 	}
 
 	// changing capacity to 0 - this will happen only once.....
-	if (tso.site->soldier_capacity() > 1) {
-		game().send_player_change_soldier_capacity(*ts, -tso.site->soldier_capacity());
+	if (tso.site->soldier_control()->soldier_capacity() > 1) {
+		game().send_player_change_soldier_capacity(
+		   *ts, -tso.site->soldier_control()->soldier_capacity());
 		return true;
 	}
 
@@ -512,7 +514,7 @@ bool DefaultAI::check_trainingsites(uint32_t gametime) {
 
 	// if soldier capacity is set to 0, we need to find out if the site is
 	// supplied enough to incrase the capacity to 1
-	if (tso.site->soldier_capacity() == 0) {
+	if (tso.site->soldier_control()->soldier_capacity() == 0) {
 
 		// First subsitute wares
 		int32_t filled = 0;
@@ -610,7 +612,7 @@ bool DefaultAI::check_militarysites(uint32_t gametime) {
 		// same economy where the thrown out soldiers can go to.
 
 		if (ms->economy().warehouses().size()) {
-			uint32_t const j = ms->soldier_capacity();
+			uint32_t const j = ms->soldier_control()->soldier_capacity();
 
 			if (MilitarySite::kPrefersRookies != ms->get_soldier_preference()) {
 				game().send_player_militarysite_set_soldier_preference(
@@ -665,8 +667,8 @@ bool DefaultAI::check_militarysites(uint32_t gametime) {
 		if (other_player_accessible(
 		       vision + 4, &unused1, &unused2, ms->get_position(), WalkSearch::kEnemy)) {
 
-			Quantity const total_capacity = ms->max_soldier_capacity();
-			Quantity const target_capacity = ms->soldier_capacity();
+			Quantity const total_capacity = ms->soldier_control()->max_soldier_capacity();
+			Quantity const target_capacity = ms->soldier_control()->soldier_capacity();
 
 			game().send_player_change_soldier_capacity(*ms, total_capacity - target_capacity);
 			changed = true;
@@ -681,7 +683,7 @@ bool DefaultAI::check_militarysites(uint32_t gametime) {
 			mso.enemies_nearby = true;
 			enemy_last_seen_ = gametime;
 		} else {  // otherwise decrease soldiers
-			uint32_t const j = ms->soldier_capacity();
+			uint32_t const j = ms->soldier_control()->soldier_capacity();
 
 			if (MilitarySite::kPrefersRookies != ms->get_soldier_preference()) {
 				game().send_player_militarysite_set_soldier_preference(
@@ -785,9 +787,10 @@ void DefaultAI::soldier_trained(const TrainingSite& site) {
 
 	for (TrainingSiteObserver& trainingsite_obs : trainingsites) {
 		if (trainingsite_obs.site == &site) {
-			if (trainingsite_obs.site->soldier_capacity() > 0) {
+			if (trainingsite_obs.site->soldier_control()->soldier_capacity() > 0) {
 				game().send_player_change_soldier_capacity(
-				   *trainingsite_obs.site, -trainingsite_obs.site->soldier_capacity());
+				   *trainingsite_obs.site,
+				   -trainingsite_obs.site->soldier_control()->soldier_capacity());
 			}
 			return;
 		}

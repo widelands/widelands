@@ -87,8 +87,8 @@ struct GameHost : public GameController, private SyncCallback {
 	void send(ChatMessage msg);
 
 	//  Host command related stuff
-	int32_t check_client(std::string name);
-	void kick_user(uint32_t, std::string);
+	int32_t check_client(const std::string& name);
+	void kick_user(uint32_t, const std::string&);
 	void split_command_array(const std::string& cmdarray,
 	                         std::string& cmd,
 	                         std::string& arg1,
