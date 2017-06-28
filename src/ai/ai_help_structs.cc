@@ -384,7 +384,7 @@ int8_t Neuron::get_result_safe(int32_t pos, const bool absolute) {
 	assert(pos <= static_cast<int32_t>(kNeuronMaxPosition));
 	assert(pos >= 0);
 	assert(results[pos] >= -kNeuronWeightLimit && results[pos] <= kNeuronWeightLimit);
-	
+
 	if (absolute) {
 		return std::abs(results[pos]);
 	}
@@ -1406,7 +1406,7 @@ void PlayersStrengths::set_last_time_seen(const uint32_t seentime, Widelands::Pl
 
 bool PlayersStrengths::get_is_enemy(Widelands::PlayerNumber pn) {
 	if (all_stats.count(pn) == 0) {
-		//Should happen only rarely so we print a warning here
+		// Should happen only rarely so we print a warning here
 		log("%d: WARNING: player has no statistics yet\n", this_player_number);
 		return false;
 	}
@@ -1416,7 +1416,7 @@ bool PlayersStrengths::get_is_enemy(Widelands::PlayerNumber pn) {
 // Was the player seen less then 2 minutes ago
 bool PlayersStrengths::player_seen_lately(Widelands::PlayerNumber pn, const uint32_t gametime) {
 	if (all_stats.count(pn) == 0) {
-		//Should happen only rarely so we print a warning here
+		// Should happen only rarely so we print a warning here
 		log("%d: WARNING: player has no statistics yet\n", this_player_number);
 		return false;
 	}

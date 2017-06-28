@@ -569,7 +569,7 @@ constexpr int16_t kConqueredWhBonus = 500;
 struct Neuron {
 	static int clip_weight_to_range(int w) {
 		assert(w < 125);
-		assert(w > -125);		
+		assert(w > -125);
 		return std::max(-kNeuronWeightLimit, std::min(kNeuronWeightLimit, w));
 	}
 
