@@ -56,9 +56,9 @@ public:
 
 	LuaPlayer() : LuaBases::LuaPlayerBase() {
 	}
-	LuaPlayer(Widelands::PlayerNumber n) : LuaBases::LuaPlayerBase(n) {
+	explicit LuaPlayer(Widelands::PlayerNumber n) : LuaBases::LuaPlayerBase(n) {
 	}
-	LuaPlayer(lua_State* L) {
+	explicit LuaPlayer(lua_State* L) {
 		report_error(L, "Cannot instantiate a 'Player' directly!");
 	}
 
@@ -117,10 +117,10 @@ public:
 	virtual ~LuaObjective() {
 	}
 
-	LuaObjective(const Widelands::Objective& n);
+	explicit LuaObjective(const Widelands::Objective& n);
 	LuaObjective() : name_("") {
 	}
-	LuaObjective(lua_State* L) {
+	explicit LuaObjective(lua_State* L) {
 		report_error(L, "Cannot instantiate a '%s' directly!", className);
 	}
 
@@ -161,10 +161,10 @@ public:
 	virtual ~LuaMessage() {
 	}
 
-	LuaMessage(uint8_t, Widelands::MessageId);
+	explicit LuaMessage(uint8_t, Widelands::MessageId);
 	LuaMessage() : player_number_(0), message_id_(0) {
 	}
-	LuaMessage(lua_State* L) {
+	explicit LuaMessage(lua_State* L) {
 		report_error(L, "Cannot instantiate a '%s' directly!", className);
 	}
 

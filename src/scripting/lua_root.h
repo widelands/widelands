@@ -45,7 +45,7 @@ public:
 
 	LuaGame() {
 	}
-	LuaGame(lua_State* L);
+	explicit LuaGame(lua_State* L);
 
 	void __persist(lua_State* L) override;
 	void __unpersist(lua_State* L) override;
@@ -82,7 +82,7 @@ public:
 
 	LuaEditor() {
 	}
-	LuaEditor(lua_State* L);
+	explicit LuaEditor(lua_State* L);
 	virtual ~LuaEditor() {
 	}
 
@@ -111,7 +111,7 @@ public:
 
 	LuaWorld() {
 	}
-	LuaWorld(lua_State* L);
+	explicit LuaWorld(lua_State* L);
 
 	void __persist(lua_State* L) override;
 	void __unpersist(lua_State* L) override;
@@ -147,7 +147,7 @@ public:
 
 	LuaTribes() {
 	}
-	LuaTribes(lua_State* L);
+	explicit LuaTribes(lua_State* L);
 
 	void __persist(lua_State* L) override;
 	void __unpersist(lua_State* L) override;

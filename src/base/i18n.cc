@@ -76,7 +76,7 @@ char const* translate(const std::string& str) {
 /**
  * Set the localedir. This should usually only be done once
  */
-void set_localedir(std::string dname) {
+void set_localedir(const std::string& dname) {
 	localedir = dname;
 }
 
@@ -157,7 +157,7 @@ void init_locale() {
  * Set the locale to the given string.
  * Code inspired by wesnoth.org
  */
-void set_locale(std::string name) {
+void set_locale(const std::string& name) {
 	const std::map<std::string, std::string> kAlternatives = {
 	   {"ar", "ar,ar_AR,ar_AE,ar_BH,ar_DZ,ar_EG,ar_IN,ar_IQ,ar_JO,ar_KW,ar_LB,ar_LY,ar_MA,ar_OM,ar_"
 	          "QA,ar_SA,ar_SD,ar_SY,ar_TN,ar_YE"},

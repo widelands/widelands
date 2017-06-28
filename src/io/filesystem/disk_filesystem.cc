@@ -53,7 +53,7 @@ struct FileSystemPath : public std::string {
 	bool exists_;
 	bool is_directory_;
 
-	FileSystemPath(const std::string& path) : std::string(path) {
+	explicit FileSystemPath(const std::string& path) : std::string(path) {
 		struct stat st;
 
 		exists_ = (stat(c_str(), &st) != -1);
@@ -450,7 +450,7 @@ Implementation of OpenStreamRead
 namespace {
 
 struct RealFSStreamRead : public StreamRead {
-	RealFSStreamRead(const std::string& fname) : file_(fopen(fname.c_str(), "rb")) {
+	explicit RealFSStreamRead(const std::string& fname) : file_(fopen(fname.c_str(), "rb")) {
 		if (!file_)
 			throw wexception("could not open %s for reading", fname.c_str());
 	}
@@ -487,7 +487,7 @@ Implementation of OpenStreamWrite
 namespace {
 
 struct RealFSStreamWrite : public StreamWrite {
-	RealFSStreamWrite(const std::string& fname) : filename_(fname) {
+	explicit RealFSStreamWrite(const std::string& fname) : filename_(fname) {
 		file_ = fopen(fname.c_str(), "wb");
 		if (!file_)
 			throw wexception("could not open %s for writing", fname.c_str());

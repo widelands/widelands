@@ -34,7 +34,9 @@ struct TribeBasicInfo {
 
 	/// Script path and localized name for a starting condition
 	struct Initialization {
-		Initialization(std::string init_script, std::string init_descname, std::string init_tooltip)
+		Initialization(const std::string& init_script,
+		               const std::string& init_descname,
+		               const std::string& init_tooltip)
 		   : script(init_script), descname(init_descname), tooltip(init_tooltip) {
 		}
 		std::string script;
@@ -42,7 +44,7 @@ struct TribeBasicInfo {
 		std::string tooltip;
 	};
 
-	TribeBasicInfo(std::unique_ptr<LuaTable> table);
+	explicit TribeBasicInfo(std::unique_ptr<LuaTable> table);
 
 	/// Internal name to reference this tribe
 	std::string name;

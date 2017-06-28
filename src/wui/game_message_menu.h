@@ -67,7 +67,7 @@ private:
 	void filter_messages(Widelands::Message::Type);
 	void toggle_filter_messages_button(UI::Button&, Widelands::Message::Type);
 	void set_filter_messages_tooltips();
-	std::string display_message_type_icon(Widelands::Message);
+	std::string display_message_type_icon(const Widelands::Message&);
 	void update_record(UI::Table<uintptr_t>::EntryRecord& er, const Widelands::Message&);
 	void update_archive_button_tooltip();
 
