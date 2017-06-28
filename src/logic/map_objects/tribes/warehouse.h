@@ -127,7 +127,7 @@ public:
 		kCompatible
 	};
 
-	Warehouse(const WarehouseDescr&);
+	explicit Warehouse(const WarehouseDescr&);
 	virtual ~Warehouse();
 
 	void load_finish(EditorGameBase&) override;
@@ -240,7 +240,7 @@ private:
 	// A warehouse that conquers space can also be attacked.
 	class AttackTarget : public Widelands::AttackTarget {
 	public:
-		AttackTarget(Warehouse* warehouse) : warehouse_(warehouse) {
+		explicit AttackTarget(Warehouse* warehouse) : warehouse_(warehouse) {
 		}
 
 		bool can_be_attacked() const override;
