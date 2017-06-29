@@ -914,7 +914,7 @@ int32_t DefaultAI::calculate_strength(const std::vector<Widelands::Soldier*>& so
 		final += (attack * health) / (defense * evade);
 	}
 	assert(final >= 0);
-	assert(final <= 10000 * soldiers.size());
+	assert(final <= 25000 * soldiers.size());
 	// 2500 is aproximate strength of one unpromoted soldier
 	return static_cast<int32_t>(final / 2500);
 }
