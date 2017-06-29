@@ -53,8 +53,8 @@ tribes:new_trainingsite_type {
    },
    outputs = {
       "frisians_soldier",
-      "iron_ore",
-      "gold_ore",
+      "scrap_metal_iron",
+      "scrap_metal_mixed",
    },
 
    ["soldier attack"] = {
@@ -114,7 +114,7 @@ tribes:new_trainingsite_type {
             "check_soldier=soldier attack 3", -- Because the soldier can be expelled by the player
             "consume=sword_long:2 smoked_fish,smoked_meat mead sweetbread",
             "train=soldier attack 3 4",
-            "produce=iron_ore:2 gold_ore:2"
+            "produce=scrap_metal_mixed:2"
          }
       },
       upgrade_soldier_attack_4 = {
@@ -126,7 +126,7 @@ tribes:new_trainingsite_type {
             "check_soldier=soldier attack 4", -- Because the soldier can be expelled by the player
             "consume=sword_curved:2 smoked_fish,smoked_meat mead sweetbread",
             "train=soldier attack 4 5",
-            "produce=iron_ore:4"
+            "produce=scrap_metal_iron:4"
          }
       },
       upgrade_soldier_attack_5 = {
@@ -138,7 +138,7 @@ tribes:new_trainingsite_type {
             "check_soldier=soldier attack 5", -- Because the soldier can be expelled by the player
             "consume=sword_double:2 smoked_fish,smoked_meat mead sweetbread",
             "train=soldier attack 5 6",
-            "produce=iron_ore:2 gold_ore:2"
+            "produce=scrap_metal_mixed:2"
          }
       },
       upgrade_soldier_defense_1 = {
@@ -150,7 +150,7 @@ tribes:new_trainingsite_type {
             "check_soldier=soldier defense 1", -- Because the soldier can be expelled by the player
             "consume=fur_clothes_golden smoked_fish,smoked_meat mead sweetbread",
             "train=soldier defense 1 2",
-            "produce=iron_ore"
+            "produce=scrap_metal_iron"
          }
       },
       upgrade_soldier_health_1 = {
@@ -162,7 +162,7 @@ tribes:new_trainingsite_type {
             "check_soldier=soldier health 1", -- Because the soldier can be expelled by the player
             "consume=helmet_golden smoked_fish,smoked_meat mead sweetbread",
             "train=soldier health 1 2",
-            "produce=iron_ore:2"
+            "produce=scrap_metal_iron:2"
          }
       },
    },

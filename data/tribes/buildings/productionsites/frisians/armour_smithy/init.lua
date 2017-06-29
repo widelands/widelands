@@ -97,7 +97,7 @@ tribes:new_productionsite_type {
          actions = {
             "sleep=14000",
             "return=skipped unless economy needs sword_curved",
-            "consume=coal:2 iron gold",
+            "consume=coal iron:2 gold",
             "animate=working 25000",
             "produce=sword_curved"
          },

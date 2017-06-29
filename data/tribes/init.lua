@@ -122,7 +122,6 @@ print_loading_message("┗━ took", function()
       include "tribes/wares/wine/init.lua"
       include "tribes/wares/wool/init.lua"
       
-      --include "tribes/wares/mud/init.lua"
       include "tribes/wares/clay/init.lua"
       include "tribes/wares/brick/init.lua"
       include "tribes/wares/fruit/init.lua"
@@ -131,7 +130,8 @@ print_loading_message("┗━ took", function()
       include "tribes/wares/bread_frisians/init.lua"
       include "tribes/wares/sweetbread/init.lua"
       include "tribes/wares/mead/init.lua"
-      --include "tribes/wares/scrap_metal/init.lua"
+      include "tribes/wares/scrap_metal_iron/init.lua"
+      include "tribes/wares/scrap_metal_mixed/init.lua"
       include "tribes/wares/fur/init.lua"
       include "tribes/wares/fur_clothes/init.lua"
       include "tribes/wares/fur_clothes_silver/init.lua"
@@ -523,13 +523,12 @@ print_loading_message("┗━ took", function()
       include "tribes/buildings/productionsites/frisians/tannery/init.lua"
       include "tribes/buildings/productionsites/frisians/shipyard/init.lua"
       include "tribes/buildings/productionsites/frisians/furnace/init.lua"
-      --include "tribes/buildings/productionsites/frisians/recycling_centre/init.lua"
+      include "tribes/buildings/productionsites/frisians/recycling_centre/init.lua"
       include "tribes/buildings/productionsites/frisians/blacksmithy/init.lua"
       include "tribes/buildings/productionsites/frisians/armour_smithy/init.lua"
       include "tribes/buildings/productionsites/frisians/charcoal_kiln/init.lua"
       include "tribes/buildings/productionsites/frisians/brick_burners_house/init.lua"
       include "tribes/buildings/productionsites/frisians/clay_burners_house/init.lua"
-      --include "tribes/buildings/productionsites/frisians/mud_mine/init.lua"
       include "tribes/buildings/productionsites/frisians/barracks/init.lua"
    end)
 

@@ -10,13 +10,13 @@ tribes:new_productionsite_type {
    size = "medium",
 
    buildcost = {
-      brick = 2,
-      granite = 3,
+      brick = 3,
+      granite = 4,
       log = 5,
       thatch_reed = 2
    },
    return_on_dismantle = {
-      brick = 1,
+      brick = 2,
       granite = 2,
       log = 2,
       thatch_reed = 1
@@ -34,9 +34,9 @@ tribes:new_productionsite_type {
    },
 
    aihints = {
-      forced_after = 1000,
-      very_weak_ai_limit = 1,
-      weak_ai_limit = 3
+      prohibited_till = 10000,
+      very_weak_ai_limit = 0,
+      weak_ai_limit = 1
    },
 
    working_positions = {
@@ -44,23 +44,45 @@ tribes:new_productionsite_type {
    },
 
    inputs = {
-      { name = "scrap_metal", amount = 8 },
       { name = "coal", amount = 8 },
+      { name = "scrap_metal_iron", amount = 8 },
+      { name = "scrap_metal_mixed", amount = 8 },
    },
    outputs = {
       "iron",
+      "gold"
    },
 
    programs = {
       work = {
          -- TRANSLATORS: Completed/Skipped/Did not start recruiting soldier because ...
-         descname = pgettext("frisians_building", "recycling metal"),
+         descname = pgettext("frisians_building", "working"),
          actions = {
-            "sleep=32000",
+            "call=smelt_iron",
+            "call=smelt_mixed",
+            "return=skipped"
+         }
+      },
+      smelt_iron = {
+         -- TRANSLATORS: Completed/Skipped/Did not start recruiting soldier because ...
+         descname = pgettext("frisians_building", "recycling iron"),
+         actions = {
+            "sleep=8000",
             "return=skipped unless economy needs iron",
-            "consume=scrap_metal:3 coal",
-            "animate=working 15000",
+            "consume=scrap_metal_iron:2 coal",
+            "animate=working 22000",
             "produce=iron:2"
+         }
+      },
+      smelt_mixed = {
+         -- TRANSLATORS: Completed/Skipped/Did not start recruiting soldier because ...
+         descname = pgettext("frisians_building", "recycling iron and gold"),
+         actions = {
+            "sleep=8000",
+            "return=skipped unless economy needs iron or economy needs gold",
+            "consume=scrap_metal_mixed:2 coal",
+            "animate=working 30000",
+            "produce=iron gold"
          }
       },
    }

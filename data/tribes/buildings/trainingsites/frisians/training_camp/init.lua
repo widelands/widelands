@@ -53,8 +53,8 @@ tribes:new_trainingsite_type {
    },
    outputs = {
       "frisians_soldier",
-      "iron_ore",
-      "gold_ore",
+      "scrap_metal_mixed",
+      "scrap_metal_iron",
    },
 
    ["soldier attack"] = {
@@ -114,7 +114,7 @@ tribes:new_trainingsite_type {
             "check_soldier=soldier attack 0", -- Because the soldier can be expelled by the player
             "consume=sword_long smoked_fish,smoked_meat beer,bread_frisians",
             "train=soldier attack 0 1",
-            "produce=iron_ore"
+            "produce=scrap_metal_iron"
          }
       },
       upgrade_soldier_attack_1 = {
@@ -126,7 +126,7 @@ tribes:new_trainingsite_type {
             "check_soldier=soldier attack 1",
             "consume=sword_curved smoked_fish,smoked_meat beer,bread_frisians",
             "train=soldier attack 1 2",
-            "produce=iron_ore:2"
+            "produce=scrap_metal_iron:2"
          }
       },
       upgrade_soldier_attack_2 = {
@@ -138,7 +138,7 @@ tribes:new_trainingsite_type {
             "check_soldier=soldier attack 2",
             "consume=sword_double smoked_fish,smoked_meat beer,bread_frisians",
             "train=soldier attack 2 3",
-            "produce=iron_ore gold_ore"
+            "produce=scrap_metal_mixed"
          }
       },
       upgrade_soldier_health_0 = {

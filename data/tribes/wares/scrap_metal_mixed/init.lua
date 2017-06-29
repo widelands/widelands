@@ -2,9 +2,9 @@ dirname = path.dirname(__file__)
 
 tribes:new_ware_type {
    msgctxt = "ware",
-   name = "scrap_metal",
+   name = "scrap_metal_mixed",
    -- TRANSLATORS: This is a ware name used in lists of wares
-   descname = pgettext("ware", "Scrap Metal"),
+   descname = pgettext("ware", "Scrap Metal (Mixed)"),
    helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    default_target_quantity = {},

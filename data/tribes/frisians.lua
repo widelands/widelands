@@ -34,7 +34,6 @@ tribes:new_tribe {
          -- Building Materials
          "log",
          "granite",
-         --"mud",
          "clay",
          "brick",
          "thatch_reed",
@@ -65,7 +64,8 @@ tribes:new_tribe {
           "iron",
           "gold_ore",
           "gold",
-          --"scrap_metal",
+          "scrap_metal_iron",
+          "scrap_metal_mixed",
       },
       {
          -- Tools
@@ -206,6 +206,7 @@ tribes:new_tribe {
       "frisians_clay_burners_house",
       "frisians_brick_burners_house",
       "frisians_furnace",
+      "frisians_recycling_centre",
       "frisians_blacksmithy",
       "frisians_armour_smithy",
       "frisians_charcoal_kiln",
