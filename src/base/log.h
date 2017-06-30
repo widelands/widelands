@@ -45,7 +45,6 @@
 // Win64 is finicky:
 // https://stackoverflow.com/questions/44382862/how-to-printf-a-size-t-without-warning-in-mingw-w64-gcc-7-1
 #ifdef _WIN32
-#  define __STDC_FORMAT_MACROS
 #  ifdef _WIN64
 #    define PRIuS PRIu64
 #  else
