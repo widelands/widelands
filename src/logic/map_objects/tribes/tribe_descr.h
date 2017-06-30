@@ -165,7 +165,7 @@ private:
 	DescriptionIndex add_special_building(const std::string& buildingname);
 	// Helper function to identify special wares across tribes (iron ore etc.)
 	DescriptionIndex add_special_ware(const std::string& warename);
-	
+
 	const std::string name_;
 	const std::string descname_;
 	const Tribes& tribes_;

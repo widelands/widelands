@@ -245,7 +245,7 @@ TribeDescr::TribeDescr(const LuaTable& table, const TribeBasicInfo& info, const 
 		port_ = add_special_building(table.get_string("port"));
 		barracks_ = add_special_building(table.get_string("barracks"));
 		bakery_ = add_special_building(table.get_string("bakery"));
-		
+
 		ironore_ = add_special_ware(table.get_string("ironore"));
 		rawlog_ = add_special_ware(table.get_string("rawlog"));
 		refinedlog_ = add_special_ware(table.get_string("refinedlog"));
