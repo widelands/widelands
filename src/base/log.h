@@ -44,10 +44,15 @@
 #define PRIxS PRIS_PREFIX "x"
 // Win64 is finicky:
 // https://stackoverflow.com/questions/44382862/how-to-printf-a-size-t-without-warning-in-mingw-w64-gcc-7-1
-#ifdef _WIN64
-#define PRIuS PRIu64
+#ifdef _WIN32
+#  define __STDC_FORMAT_MACROS
+#  ifdef _WIN64
+#    define PRIuS PRIu64
+#  else
+#    define PRIuS PRIu32
+#  endif
 #else
-#define PRIuS PRIS_PREFIX "u"
+#  define PRIuS PRIS_PREFIX "u"
 #endif
 #define PRIXS PRIS_PREFIX "X"
 #define PRIoS PRIS_PREFIX "o"
