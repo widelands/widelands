@@ -15,7 +15,7 @@ tribes:new_ware_type {
    preciousness = {
       barbarians = 0,
       empire = 1,
-      frisians = 0
+      frisians = 1
    },
 
    animations = {

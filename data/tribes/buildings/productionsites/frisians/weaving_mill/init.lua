@@ -30,7 +30,7 @@ tribes:new_productionsite_type {
       },
       working = {
          pictures = path.list_files(dirname .. "working_??.png"),
-         hotspot = { 57, 88 },
+         hotspot = { 50, 84 },
       },
    },
 

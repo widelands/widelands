@@ -23,15 +23,15 @@ tribes:new_productionsite_type {
    animations = {
       idle = {
          pictures = path.list_files(dirname .. "idle_??.png"),
-         hotspot = { 21, 36 },
+         hotspot = { 49, 52 },
       },
       working = {
          pictures = path.list_files(dirname .. "working_??.png"),
-         hotspot = { 60, 37 },
+         hotspot = { 49, 52 },
       },
       empty = {
          pictures = path.list_files(dirname .. "empty_??.png"),
-         hotspot = { 60, 37 },
+         hotspot = { 49, 52 },
       }
    },
 

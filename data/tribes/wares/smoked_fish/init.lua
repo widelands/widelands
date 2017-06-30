@@ -9,11 +9,11 @@ tribes:new_ware_type {
    icon = dirname .. "menu.png",
    default_target_quantity = {
       atlanteans = 30,
-      frisians = 30
+      frisians = 20
    },
    preciousness = {
       atlanteans = 3,
-      frisians = 3
+      frisians = 4
    },
 
    animations = {

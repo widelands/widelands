@@ -13,7 +13,7 @@ tribes:new_ware_type {
       empire = 3
    },
    preciousness = {
-      frisians = 3,
+      frisians = 0,
       empire = 1
    },
 

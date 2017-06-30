@@ -24,11 +24,11 @@ tribes:new_productionsite_type {
    animations = {
       idle = {
          pictures = path.list_files(dirname .. "idle_??.png"),
-         hotspot = { 57, 88 },
+         hotspot = { 43, 63 },
       },
       working = {
          pictures = path.list_files(dirname .. "working_??.png"),
-         hotspot = { 57, 88 },
+         hotspot = { 43, 63 },
       },
    },
 
@@ -54,7 +54,7 @@ tribes:new_productionsite_type {
          actions = {
             "sleep=37000",
             "return=skipped unless economy needs coal",
-            "consume=log:6",
+            "consume=log:5",
             "animate=working 20000",
             "produce=coal"
          },

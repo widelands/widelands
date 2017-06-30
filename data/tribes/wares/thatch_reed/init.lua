@@ -9,7 +9,7 @@ tribes:new_ware_type {
    icon = dirname .. "menu.png",
    default_target_quantity = {},
    preciousness = {
-      frisians = 5,
+      frisians = 4,
       barbarians = 5
    },
 

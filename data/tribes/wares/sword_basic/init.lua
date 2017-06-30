@@ -11,7 +11,7 @@ tribes:new_ware_type {
       frisians = 30
    },
    preciousness = {
-      frisians = 3
+      frisians = 4
    },
 
    animations = {
