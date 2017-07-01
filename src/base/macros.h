@@ -122,7 +122,7 @@
 #define PRIuS PRIu32
 #endif
 #else
-#define PRIuS PRIS_PREFIX "u"
+#define PRIuS "u"
 #endif
 
 #endif  // end of include guard: WL_BASE_MACROS_H
