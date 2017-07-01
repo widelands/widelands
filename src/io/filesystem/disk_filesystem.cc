@@ -386,7 +386,7 @@ void* RealFSImpl::load(const std::string& fname, size_t& length) {
 		data = malloc(size + 1);  //  TODO(unknown): memory leak!
 		int result = fread(data, size, 1, file);
 		if (size && (result != 1)) {
-			throw wexception("RealFSImpl::load: read failed for %s (%s) with size %" PRIu64 "",
+			throw wexception("RealFSImpl::load: read failed for %s (%s) with size %" PRIuS "",
 			                 fname.c_str(), fullname.c_str(), size);
 		}
 		static_cast<int8_t*>(data)[size] = 0;

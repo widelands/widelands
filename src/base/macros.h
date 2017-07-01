@@ -106,9 +106,23 @@
 
 // consistency check for printf arguments
 #ifdef __GNUC__
+#ifdef _WIN32
 #define PRINTF_FORMAT(b, c) __attribute__((__format__(gnu_printf, b, c)))
 #else
+#define PRINTF_FORMAT(b, c) __attribute__((__format__(__printf__, b, c)))
+#endif
+#else
 #define PRINTF_FORMAT(b, c)
+#endif
+
+#ifdef _WIN32
+#ifdef _WIN64
+#define PRIuS PRIu64
+#else
+#define PRIuS PRIu32
+#endif
+#else
+#define PRIuS PRIS_PREFIX "u"
 #endif
 
 #endif  // end of include guard: WL_BASE_MACROS_H

@@ -412,7 +412,11 @@ protected:
 	                  const float scale,
 	                  RenderTarget* dst) const;
 
+	#ifdef _WIN32
 	void molog(char const* fmt, ...) const __attribute__((format(gnu_printf, 2, 3)));
+	#else
+	void molog(char const* fmt, ...) const __attribute__((format(__printf__, 2, 3)));
+	#endif
 
 	const MapObjectDescr* descr_;
 	Serial serial_;
