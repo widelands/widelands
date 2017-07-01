@@ -10,8 +10,8 @@ tribes:new_militarysite_type {
    size = "small",
 
    buildcost = {
-      brick = 3,
-      log = 1,
+      brick = 4,
+      log = 2,
       thatch_reed = 1
    },
    return_on_dismantle = {

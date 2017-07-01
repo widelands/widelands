@@ -11,7 +11,7 @@ tribes:new_militarysite_type {
    vision_range = 14,
 
    buildcost = {
-      log = 6,
+      log = 4,
       thatch_reed = 1
    },
    return_on_dismantle = {
@@ -34,7 +34,7 @@ tribes:new_militarysite_type {
 
    max_soldiers = 1,
    heal_per_second = 70,
-   conquers = 6,
+   conquers = 5,
    prefer_heroes = false,
 
    messages = {
