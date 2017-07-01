@@ -97,11 +97,18 @@
 	TypeName(const TypeName&) = delete;                                                             \
 	void operator=(const TypeName&) = delete
 
-/// Wrapper macro around a dynamic_cast.
+// Wrapper macro around a dynamic_cast.
 #define upcast(type, identifier, source) type* const identifier = dynamic_cast<type*>(source)
 
 // Useful when you want to know if [typeid(source) == typeof(type)*], without
 // the side-effect upcast has of creating a new identifier which won't be used.
 #define is_a(type, source) (dynamic_cast<const type*>(source) != nullptr)
+
+// consistency check for printf arguments
+#ifdef __GNUC__
+#define PRINTF_FORMAT(b, c) __attribute__((__format__(__printf__, b, c)))
+#else
+#define PRINTF_FORMAT(b, c)
+#endif
 
 #endif  // end of include guard: WL_BASE_MACROS_H

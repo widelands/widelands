@@ -856,7 +856,7 @@ void Fleet::act(Game& game, uint32_t /* data */) {
 	}
 
 	if (!waiting_ports.empty()) {
-		molog("... there are %" PRIuS " ports requesting ship(s) we cannot satisfy yet\n",
+		molog("... there are %" PRIu64 " ports requesting ship(s) we cannot satisfy yet\n",
 		      waiting_ports.size());
 		schedule_act(game, 5000);  // retry next time
 		act_pending_ = true;
@@ -866,7 +866,7 @@ void Fleet::act(Game& game, uint32_t /* data */) {
 void Fleet::log_general_info(const EditorGameBase& egbase) {
 	MapObject::log_general_info(egbase);
 
-	molog("%" PRIuS " ships and %" PRIuS " ports\n", ships_.size(), ports_.size());
+	molog("%" PRIu64 " ships and %" PRIu64 " ports\n", ships_.size(), ports_.size());
 }
 
 constexpr uint8_t kCurrentPacketVersion = 4;

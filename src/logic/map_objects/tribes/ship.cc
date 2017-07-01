@@ -714,7 +714,7 @@ void Ship::set_economy(Game& game, Economy* e) {
  * @note This is supposed to be called only from the scheduling code of @ref Fleet.
  */
 void Ship::set_destination(Game& game, PortDock& pd) {
-	molog("set_destination / sending to portdock %u (carrying %" PRIuS " items)\n", pd.serial(),
+	molog("set_destination / sending to portdock %u (carrying %" PRIu64 " items)\n", pd.serial(),
 	      items_.size());
 	destination_ = &pd;
 	send_signal(game, "wakeup");
@@ -1030,7 +1030,7 @@ void Ship::log_general_info(const EditorGameBase& egbase) {
 		molog("Currently in destination portdock\n");
 	}
 
-	molog("Carrying %" PRIuS " items%s\n", items_.size(), (items_.empty()) ? "." : ":");
+	molog("Carrying %" PRIu64 " items%s\n", items_.size(), (items_.empty()) ? "." : ":");
 
 	for (const ShippingItem& shipping_item : items_) {
 		molog("  * %u (%s), destination: %s\n", shipping_item.object_.serial(),

@@ -1227,7 +1227,7 @@ PlayerImmovable::PlayerImmovable(const MapObjectDescr& mo_descr)
 */
 PlayerImmovable::~PlayerImmovable() {
 	if (workers_.size())
-		log("PlayerImmovable::~PlayerImmovable: %" PRIuS " workers left!\n",
+		log("PlayerImmovable::~PlayerImmovable: %" PRIu64 " workers left!\n",
 		    workers_.size());
 }
 

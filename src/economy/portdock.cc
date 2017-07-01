@@ -446,12 +446,12 @@ void PortDock::log_general_info(const EditorGameBase& egbase) {
 
 	if (warehouse_) {
 		Coords pos(warehouse_->get_position());
-		molog("PortDock for warehouse %u (at %i,%i) in fleet %u, need_ship: %s, waiting: %" PRIuS
+		molog("PortDock for warehouse %u (at %i,%i) in fleet %u, need_ship: %s, waiting: %" PRIu64
 		      "\n",
 		      warehouse_->serial(), pos.x, pos.y, fleet_ ? fleet_->serial() : 0,
 		      need_ship_ ? "true" : "false", waiting_.size());
 	} else {
-		molog("PortDock without a warehouse in fleet %u, need_ship: %s, waiting: %" PRIuS "\n",
+		molog("PortDock without a warehouse in fleet %u, need_ship: %s, waiting: %" PRIu64 "\n",
 		      fleet_ ? fleet_->serial() : 0, need_ship_ ? "true" : "false", waiting_.size());
 	}
 

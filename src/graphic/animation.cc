@@ -47,7 +47,7 @@ namespace {
 void get_point(const LuaTable& table, Vector2i* p) {
 	std::vector<int> pts = table.array_entries<int>();
 	if (pts.size() != 2) {
-		throw wexception("Expected 2 entries, but got %" PRIuS ".", pts.size());
+		throw wexception("Expected 2 entries, but got %" PRIu64 ".", pts.size());
 	}
 	p->x = pts[0];
 	p->y = pts[1];
@@ -175,7 +175,7 @@ void NonPackedAnimation::load_graphics() {
 		throw wexception("animation without pictures.");
 
 	if (pc_mask_image_files_.size() && pc_mask_image_files_.size() != image_files_.size())
-		throw wexception("animation has %" PRIuS " frames but playercolor mask has %" PRIuS " frames",
+		throw wexception("animation has %" PRIu64 " frames but playercolor mask has %" PRIu64 " frames",
 		                 image_files_.size(), pc_mask_image_files_.size());
 
 	for (const std::string& filename : image_files_) {
