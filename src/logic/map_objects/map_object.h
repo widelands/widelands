@@ -412,7 +412,7 @@ protected:
 	                  const float scale,
 	                  RenderTarget* dst) const;
 
-	void molog(char const* fmt, ...) const __attribute__((format(printf, 2, 3)));
+	void molog(char const* fmt, ...) const __attribute__((format(gnu_printf, 2, 3)));
 
 	const MapObjectDescr* descr_;
 	Serial serial_;

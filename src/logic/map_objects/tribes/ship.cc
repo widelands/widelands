@@ -1030,7 +1030,7 @@ void Ship::log_general_info(const EditorGameBase& egbase) {
 		molog("Currently in destination portdock\n");
 	}
 
-	molog("Carrying %" PRIu64 " items%" PRIu64 "\n", items_.size(), (items_.empty()) ? "." : ":");
+	molog("Carrying %" PRIu64 " items%s\n", items_.size(), (items_.empty()) ? "." : ":");
 
 	for (const ShippingItem& shipping_item : items_) {
 		molog("  * %u (%s), destination: %s\n", shipping_item.object_.serial(),
