@@ -82,7 +82,15 @@ struct InternetGaming : public ChatProvider {
 	void handle_metaserver_communication();
 
 	// Game specific functions
-	const std::string& ip();
+	/**
+	 * Returns a pair containing up to two NetAddress'es of the game host to connect to.
+	 * Contains two addresses when the host supports IPv4 and IPv6, one address when the host
+	 * only supports one of the protocols, no addresses when no join-request was sent to
+	 * the metaserver. "No address" means a default constructed address.
+	 * Use NetAddress::is_valid() to check whether a NetAddress has been default constructed.
+	 * @return The addresses.
+	 */
+	const std::pair<NetAddress, NetAddress>& ips();
 	void join_game(const std::string& gamename);
 	void open_game();
 	void set_game_playing();
@@ -146,6 +154,20 @@ struct InternetGaming : public ChatProvider {
 private:
 	InternetGaming();
 
+	/**
+	 * Temporarily creates a second connection to the metaserver.
+	 * If the primary connection is an IPv6 connection, we also try
+	 * an IPv4 connection to tell the metaserver our IP.
+	 * This way, when we host a game later on, the metaserver
+	 * knows how to reach us for both protocol versions.
+	 * The established connection does a login, then the connection is
+	 * immediately closed.
+	 *
+	 * If the primary connection already is IPv4, this method does nothing.
+	 * Since we first try to connect with IPv6, another try is futile.
+	 */
+	void create_second_connection();
+
 	void handle_packet(RecvPacket& packet);
 	void handle_failed_read();
 
@@ -176,7 +198,9 @@ private:
 
 	/// information of the clients game
 	std::string gamename_;
-	std::string gameip_;
+	/// The IPv4/v6 addresses of the game host we are / will be connected to.
+	/// See InternetGaming::ips().
+	std::pair<NetAddress, NetAddress> gameips_;
 
 	/// Metaserver information
 	bool clientupdateonmetaserver_;
