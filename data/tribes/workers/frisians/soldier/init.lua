@@ -77,7 +77,7 @@ tribes:new_soldier_type {
    health = {
       max_level = 2,
       base = 12250,
-      increase_per_level = 3500,
+      increase_per_level = 3000,
       pictures = path.list_files(dirname .. "health_level?.png"),
    },
    attack = {
@@ -90,7 +90,7 @@ tribes:new_soldier_type {
    defense = {
       max_level = 2,
       base = 4,
-      increase_per_level = 25,
+      increase_per_level = 15,
       pictures = path.list_files(dirname .. "defense_level?.png"),
    },
    evade = {

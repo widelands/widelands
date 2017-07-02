@@ -57,6 +57,7 @@ tribes:new_productionsite_type {
          actions = {
             "call=make_fur",
             "call=recruit_deer",
+            "call=make_fur",
             "return=skipped",
          }
       },
@@ -75,10 +76,10 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start rearing cattle because ...
          descname = pgettext("frisians_building", "producing fur"),
          actions = {
-            "sleep=5000",
+            "sleep=15000",
             "return=skipped unless economy needs fur",
             "consume=barley water",
-            "animate=working 30000",
+            "animate=working 20000",
             "produce=fur"
          }
       },
