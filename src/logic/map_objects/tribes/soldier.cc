@@ -1346,14 +1346,15 @@ void Soldier::battle_update(Game& game, State&) {
 					    descr().descname().c_str())
 					      .str();
 					owner().add_message(
-					   game, *new Message(Message::Type::kGameLogic, game.get_gametime(),
-					                      descr().descname(), "images/ui_basic/menu_help.png",
-					                      _("Logic error"), messagetext, get_position(), serial_));
+					   game, std::unique_ptr<Message>(
+					            new Message(Message::Type::kGameLogic, game.get_gametime(),
+					                        descr().descname(), "images/ui_basic/menu_help.png",
+					                        _("Logic error"), messagetext, get_position(), serial_)));
 					opponent.owner().add_message(
-					   game,
-					   *new Message(Message::Type::kGameLogic, game.get_gametime(), descr().descname(),
-					                "images/ui_basic/menu_help.png", _("Logic error"), messagetext,
-					                opponent.get_position(), serial_));
+					   game, std::unique_ptr<Message>(new Message(
+					            Message::Type::kGameLogic, game.get_gametime(), descr().descname(),
+					            "images/ui_basic/menu_help.png", _("Logic error"), messagetext,
+					            opponent.get_position(), serial_)));
 					game.game_controller()->set_desired_speed(0);
 					return pop_task(game);
 				}
