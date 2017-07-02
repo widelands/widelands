@@ -31,7 +31,7 @@ tribes:new_worker_type {
 
    programs = {
       bees = {
-         "findobject attrib:flowering radius:7",
+         "findobject attrib:flowering radius:5",
          "walk object",
          "animation beeswarm 4000",
          "createware honey",

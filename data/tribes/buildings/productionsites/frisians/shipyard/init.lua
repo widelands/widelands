@@ -33,6 +33,7 @@ tribes:new_productionsite_type {
       working = {
          pictures = path.list_files(dirname .. "working_??.png"),
          hotspot = { 62, 48 },
+         scale = 3.26
       },
    },
 

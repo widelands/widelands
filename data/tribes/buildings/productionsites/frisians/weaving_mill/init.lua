@@ -26,11 +26,11 @@ tribes:new_productionsite_type {
    animations = {
       idle = {
          pictures = path.list_files(dirname .. "idle_??.png"),
-         hotspot = { 57, 88 },
+         hotspot = { 57, 85 },
       },
       working = {
          pictures = path.list_files(dirname .. "working_??.png"),
-         hotspot = { 50, 84 },
+         hotspot = { 57, 85 },
       },
    },
 
@@ -43,8 +43,8 @@ tribes:new_productionsite_type {
    },
 
    inputs = {
-      { name = "fur", amount = 4 },
-      { name = "thatch_reed", amount = 4 },
+      { name = "fur", amount = 6 },
+      { name = "thatch_reed", amount = 6 },
    },
    outputs = {
       "cloth",

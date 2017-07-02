@@ -55,9 +55,8 @@ tribes:new_productionsite_type {
          actions = {
             "sleep=8000",
             "return=skipped unless economy needs clay",
-            --"consume=mud water",
             "consume=water",
-            "animate=working 32000",
+            "animate=working 12000",
             "produce=clay"
          },
       },

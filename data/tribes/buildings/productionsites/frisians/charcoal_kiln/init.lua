@@ -42,7 +42,7 @@ tribes:new_productionsite_type {
 
    inputs = {
       { name = "log", amount = 8 },
-      { name = "clay", amount = 8 },
+      { name = "clay", amount = 4 },
    },
    outputs = {
       "coal"
@@ -53,11 +53,11 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start preparing a ration because ...
          descname = _"burning charcoal",
          actions = {
-            "sleep=50000",
+            "sleep=30000",
             "return=skipped unless economy needs coal",
-            "consume=log:5 clay:2",
-            "animate=working 40000",
-            "produce=coal:2"
+            "consume=log:3 clay",
+            "animate=working 15000",
+            "produce=coal"
          },
       },
    },

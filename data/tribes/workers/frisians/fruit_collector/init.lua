@@ -32,7 +32,7 @@ tribes:new_worker_type {
 
    programs = {
       harvest = {
-         "findobject attrib:ripe_bush radius:9",
+         "findobject attrib:ripe_bush radius:6",
          "walk object",
          "animation gather 8000",
          "object harvest",
