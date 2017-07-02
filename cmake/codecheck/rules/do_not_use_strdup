@@ -1,21 +1,16 @@
 #!/usr/bin/python
 
-"""
-strdup isn't available on win32
-"""
+error_msg = 'Do not use private inheritance. Favor composition instead.'
 
-error_msg = 'Do not use strdup/strndup. Use std::string instead.'
-
-regexp = r'\bstrn?dup\s*\('
+strip_comments_and_strings = True
+regexp = r':.*private '
 
 allowed = [
-    'y = std::string(x)',
-
-    'y = new char[strlen(x)+1]',
-    'std::copy(x, x+strlen(x)+1, y)',
+    'y = private palu',
+    ' class Foo : public A',
 ]
 
 forbidden = [
-    'y = strdup(x)',
-    'y = strndup(x)',
+    ' class Foo : private A',
+    ' class Foo : public A, private B',
 ]
