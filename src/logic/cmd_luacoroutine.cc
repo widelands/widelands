@@ -21,6 +21,8 @@
 
 #include <boost/format.hpp>
 
+#include <memory>
+
 #include "base/log.h"
 #include "base/macros.h"
 #include "io/fileread.h"

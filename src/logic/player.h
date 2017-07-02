@@ -95,7 +95,7 @@ public:
 		return messages_;
 	}
 
-	/// Adds the message to the queue. 
+	/// Adds the message to the queue.
 	MessageId add_message(Game&, std::unique_ptr<Message> message, bool popup = false);
 
 	/// Like add_message, but if there has been a message from the same sender
