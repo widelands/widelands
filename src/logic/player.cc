@@ -291,22 +291,21 @@ void Player::play_message_sound(const Message::Type& msgtype) {
 }
 
 MessageId Player::add_message(Game& game, std::unique_ptr<Message> new_message, bool const popup) {
-	const auto message_serial = message->serial();
 	MessageId id = messages().add_message(std::move(new_message));
-	Message* message = messages()[id];
+	const Message* message = messages()[id];
 
 	// MapObject connection
-	if (message_serial > 0) {
-		MapObject* mo = egbase().objects().get_object(message_serial);
+	if (message->serial() > 0) {
+		MapObject* mo = egbase().objects().get_object(message->serial());
 		mo->removed.connect(boost::bind(&Player::message_object_removed, this, id));
 	}
 
 	// Sound & popup
 	if (InteractivePlayer* const iplayer = game.get_ipl()) {
 		if (&iplayer->player() == this) {
-			play_message_sound(message.type());
+			play_message_sound(message->type());
 			if (popup)
-				iplayer->popup_message(id, message);
+				iplayer->popup_message(id, *message);
 		}
 	}
 
@@ -320,7 +319,7 @@ MessageId Player::add_message_with_timeout(Game& game,
 	const Map& map = game.map();
 	uint32_t const gametime = game.get_gametime();
 	Coords const position = message->position();
-	for (auto tmp_message : messages()) {
+	for (const auto& tmp_message : messages()) {
 		if (tmp_message.second->type() == message->type() &&
 		    gametime < tmp_message.second->sent() + timeout &&
 		    map.calc_distance(tmp_message.second->position(), position) <= radius) {

@@ -899,11 +899,12 @@ bool Worker::run_geologist_find(Game& game, State& state, const Action&) {
 
 			//  We should add a message to the player's message queue - but only,
 			//  if there is not already a similar one in list.
-			owner().add_message_with_timeout(
-			   game, *new Message(message_type, game.get_gametime(), rdescr->descname(),
-			                      ri.descr().representative_image_filename(), rdescr->descname(),
-			                      message, position, serial_),
-			   300000, 8);
+			owner().add_message_with_timeout(game,
+			                                 std::unique_ptr<Message>(new Message(
+			                                    message_type, game.get_gametime(), rdescr->descname(),
+			                                    ri.descr().representative_image_filename(),
+			                                    rdescr->descname(), message, position, serial_)),
+			                                 300000, 8);
 		}
 	}
 
@@ -1690,7 +1691,7 @@ void Worker::return_update(Game& game, State& state) {
 		      .str();
 
 		owner().add_message(
-		   game, std::unique_ptr<Mesage>(new Message(Message::Type::kGameLogic, game.get_gametime(),
+		   game, std::unique_ptr<Message>(new Message(Message::Type::kGameLogic, game.get_gametime(),
 		                                             _("Worker"), "images/ui_basic/menu_help.png",
 		                                             _("Worker got lost!"), message, get_position())),
 		   serial_);

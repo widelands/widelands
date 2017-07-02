@@ -19,9 +19,9 @@
 
 #include "map_io/map_players_messages_packet.h"
 
-#include <boost/format.hpp>
-
 #include <memory>
+
+#include <boost/format.hpp>
 
 #include "logic/game_data_error.h"
 #include "logic/message.h"

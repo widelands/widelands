@@ -19,9 +19,9 @@
 
 #include "logic/cmd_luacoroutine.h"
 
-#include <boost/format.hpp>
-
 #include <memory>
+
+#include <boost/format.hpp>
 
 #include "base/log.h"
 #include "base/macros.h"
