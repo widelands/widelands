@@ -5,10 +5,30 @@
 Comments should all start with a blank space
 """
 
-error_msg = "Comments need to start with a space."
 
 strip_comments_and_strings = False
 regexp = r"""((^|\s)//[^\s/<!])|((^|\s)//<[^\s])|((^|\s)//!<[^\s])"""
+
+def evaluate_matches(lines, fn):
+   errors = []
+   for lineno, line in enumerate(lines):
+      line = line.strip()
+      if not line.startswith('//'):
+          continue
+      if line.startswith('///!<') and line[5] == " ":
+          continue
+      if line.startswith('//!<') and line[4] == " ":
+          continue
+      if line.startswith('///<') and line[4] == " ":
+          continue
+      if line.startswith('///') and line[3] == " ":
+          continue
+      if line.startswith('//<') and line[3] == " ":
+          continue
+      if line.startswith('//') and line[2] == " ":
+          continue
+      errors.append((fn, lineno+1, "Comments need to start with a space."))
+   return errors
 
 
 forbidden = [
