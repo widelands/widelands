@@ -14,13 +14,12 @@ def evaluate_matches(lines, fn):
          continue
 
       words = line.strip().split()
-      if len(words) < 2 or words[0] not in ["class", "struct", "enum", "using"]:
+      if (len(words) < 2 or words[0] not in ["class", "struct", "enum", "using"]
+              or words[1] == "{"):
          continue
-      if words[0] == "using" and words[1] == "namespace":
+      if words[0] == "using" and words[1] == "namespace" or words[1].startswith('std::'):
          continue
       if words[0] == "enum":
-         if words[1] == "{":
-            continue;
          if words[1] == "class":
             words.pop(1)
             if len(words) < 2:
