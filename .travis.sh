@@ -30,6 +30,7 @@ until sudo apt-get install -qq --force-yes -y \
    libglew-dev \
    libicu-dev \
    libpng-dev \
+   python-sphinx \
    libsdl2-dev \
    libsdl2-image-dev \
    libsdl2-mixer-dev \
@@ -42,8 +43,17 @@ mkdir build
 cd build
 cmake .. -DCMAKE_BUILD_TYPE:STRING="$BUILD_TYPE"
 
-# Any codecheck warning is an error in Debug builds. Keep the codebase clean!!
 if [ "$BUILD_TYPE" == "Debug" ]; then
+   # Build the documentation. Any warning is an error.
+   ./extract_rst.py
+   sphinx-build -n -W -b json -d build/doctrees source build/json
+
+   # Run the codecheck test suite.
+   pushd cmake/codecheck
+   ./run_tests.py
+   popd
+
+   # Any codecheck warning is an error in Debug builds. Keep the codebase clean!!
    # Suppress color output.
    TERM=dumb make -j1 codecheck 2>&1 | tee codecheck.out
    if grep '^[/_.a-zA-Z]\+:[0-9]\+:' codecheck.out; then 
