@@ -23,6 +23,7 @@ fi
 
 until sudo apt-get install -qq --force-yes -y \
    cmake \
+   dvipng \
    libboost-dev \
    libboost-regex-dev \
    libboost-system-dev \
@@ -30,11 +31,12 @@ until sudo apt-get install -qq --force-yes -y \
    libglew-dev \
    libicu-dev \
    libpng-dev \
-   python-pip \
    libsdl2-dev \
    libsdl2-image-dev \
    libsdl2-mixer-dev \
    libsdl2-ttf-dev \
+   python-pip \
+   texlive-latex-recommended \
    zlib1g-dev \
 ; do sleep 10; done
 
