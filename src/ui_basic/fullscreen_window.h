@@ -70,7 +70,7 @@ public:
 	FullscreenWindow();
 	virtual ~FullscreenWindow();
 
-	///\return the size for texts fitting to current resolution
+	/// \return the size for texts fitting to current resolution
 	int fs_small();
 	int fs_big();
 
