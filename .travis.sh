@@ -45,13 +45,13 @@ cmake .. -DCMAKE_BUILD_TYPE:STRING="$BUILD_TYPE"
 
 if [ "$BUILD_TYPE" == "Debug" ]; then
    # Build the documentation. Any warning is an error.
-   pushd doc/sphinx
+   pushd ../doc/sphinx
    ./extract_rst.py
    sphinx-build -n -W -b json -d build/doctrees source build/json
    popd
 
    # Run the codecheck test suite.
-   pushd cmake/codecheck
+   pushd ../cmake/codecheck
    ./run_tests.py
    popd
 
