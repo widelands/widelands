@@ -48,6 +48,7 @@ if [ "$BUILD_TYPE" == "Debug" ]; then
    # Build the documentation. Any warning is an error.
    sudo pip install sphinx
    pushd ../doc/sphinx
+   mkdir source/_static
    ./extract_rst.py
    sphinx-build -W -b json -d build/doctrees source build/json
    popd
