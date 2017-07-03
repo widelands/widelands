@@ -51,7 +51,7 @@ if [ "$BUILD_TYPE" == "Debug" ]; then
    sudo pip install sphinx
    pushd ../doc/sphinx
    ./extract_rst.py
-   sphinx-build -n -W -b json -d build/doctrees source build/json
+   sphinx-build -W -b json -d build/doctrees source build/json
    popd
 
    # Run the codecheck test suite.
