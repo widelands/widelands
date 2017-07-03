@@ -88,9 +88,16 @@ struct GameClientImpl {
 	std::vector<ChatMessage> chatmessages;
 };
 
-GameClient::GameClient(const NetAddress& host, const std::string& playername, bool internet)
+GameClient::GameClient(const std::pair<NetAddress, NetAddress>& host,
+                       const std::string& playername,
+                       bool internet)
    : d(new GameClientImpl), internet_(internet) {
-	d->net = NetClient::connect(host);
+
+	d->net = NetClient::connect(host.first);
+	if ((!d->net || !d->net->is_connected()) && host.second.is_valid()) {
+		// First IP did not work? Try the second IP
+		d->net = NetClient::connect(host.second);
+	}
 	if (!d->net || !d->net->is_connected()) {
 		throw WLWarning(_("Could not establish connection to host"),
 		                _("Widelands could not establish a connection to the given address. "

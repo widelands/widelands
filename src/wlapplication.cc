@@ -1177,7 +1177,7 @@ void WLApplication::mainmenu_multiplayer() {
 					break;
 				}
 
-				GameClient netgame(addr, playername);
+				GameClient netgame(std::make_pair(addr, NetAddress()), playername);
 				netgame.run();
 				break;
 			}
