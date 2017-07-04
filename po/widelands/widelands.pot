@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-06-28 07:11+0000\n"
+"POT-Creation-Date: 2017-07-04 08:57+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -1323,8 +1323,8 @@ msgctxt "ship_state"
 msgid "Founding a Colony"
 msgstr ""
 
-#: ../../src/logic/map_objects/tribes/soldier.cc:1351
-#: ../../src/logic/map_objects/tribes/soldier.cc:1355
+#: ../../src/logic/map_objects/tribes/soldier.cc:1352
+#: ../../src/logic/map_objects/tribes/soldier.cc:1356
 msgid "Logic error"
 msgstr ""
 
@@ -1430,39 +1430,39 @@ msgstr ""
 msgid "Bluebyte Settlers II Map. No comment defined!"
 msgstr ""
 
-#: ../../src/network/gameclient.cc:95 ../../src/network/internet_gaming.cc:103
+#: ../../src/network/gameclient.cc:102 ../../src/network/internet_gaming.cc:111
 msgid "Could not establish connection to host"
 msgstr ""
 
-#: ../../src/network/gameclient.cc:96
+#: ../../src/network/gameclient.cc:103
 msgid ""
 "Widelands could not establish a connection to the given address. Either no "
 "Widelands server was running at the supposed port or the server shut down as "
 "you tried to connect."
 msgstr ""
 
-#: ../../src/network/gameclient.cc:164 ../../src/network/gamehost.cc:682
+#: ../../src/network/gameclient.cc:171 ../../src/network/gamehost.cc:682
 #: ../../src/wlapplication.cc:1234
 msgid "Preparing game"
 msgstr ""
 
-#: ../../src/network/gameclient.cc:683
+#: ../../src/network/gameclient.cc:690
 msgid "/me 's file failed md5 checksumming."
 msgstr ""
 
-#: ../../src/network/gameclient.cc:711
+#: ../../src/network/gameclient.cc:718
 msgid ""
 "/me checked the received file. Although md5 check summing succeeded, I can "
 "not handle the file."
 msgstr ""
 
 #. * TRANSLATORS: %s contains an error message.
-#: ../../src/network/gameclient.cc:916
+#: ../../src/network/gameclient.cc:923
 #, c-format
 msgid "%s An automatic savegame will be created."
 msgstr ""
 
-#: ../../src/network/gameclient.cc:920
+#: ../../src/network/gameclient.cc:927
 msgid "Disconnected from Host"
 msgstr ""
 
@@ -1586,121 +1586,121 @@ msgid_plural "%li seconds"
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../../src/network/internet_gaming.cc:104
+#: ../../src/network/internet_gaming.cc:112
 msgid ""
 "Widelands could not establish a connection to the given address.\n"
 "Either there was no metaserver running at the supposed port or\n"
 "your network setup is broken."
 msgstr ""
 
-#: ../../src/network/internet_gaming.cc:150
+#: ../../src/network/internet_gaming.cc:173
 msgid "For hosting a game, please take a look at the notes at:"
 msgstr ""
 
-#: ../../src/network/internet_gaming.cc:286
+#: ../../src/network/internet_gaming.cc:313
 #: ../../src/network/network_gaming_messages.cc:129
 #, c-format
 msgid "Something went wrong: %s"
 msgstr ""
 
-#: ../../src/network/internet_gaming.cc:371
+#: ../../src/network/internet_gaming.cc:429
 msgid "Successfully reconnected to the metaserver!"
 msgstr ""
 
-#: ../../src/network/internet_gaming.cc:379
+#: ../../src/network/internet_gaming.cc:437
 msgid "Mixed up"
 msgstr ""
 
-#: ../../src/network/internet_gaming.cc:379
+#: ../../src/network/internet_gaming.cc:437
 msgid "The metaserver sent a strange ERROR during connection"
 msgstr ""
 
-#: ../../src/network/internet_gaming.cc:390
+#: ../../src/network/internet_gaming.cc:448
 msgid "Unexpected packet"
 msgstr ""
 
-#: ../../src/network/internet_gaming.cc:391
+#: ../../src/network/internet_gaming.cc:449
 #, c-format
 msgid ""
 "Expected a LOGIN, RELOGIN or REJECTED packet from server, but received "
 "command %s. Maybe the metaserver is using a different protocol version ?"
 msgstr ""
 
-#: ../../src/network/internet_gaming.cc:404
+#: ../../src/network/internet_gaming.cc:462
 #, c-format
 msgid "WARNING: Received a %s command although we are not in CONNECTING state."
 msgstr ""
 
-#: ../../src/network/internet_gaming.cc:415
+#: ../../src/network/internet_gaming.cc:473
 #, c-format
 msgid "Server time offset is %d second."
 msgid_plural "Server time offset is %d seconds."
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../../src/network/internet_gaming.cc:439
+#: ../../src/network/internet_gaming.cc:497
 #, c-format
 msgid "Invalid chat message type \"%s\"."
 msgstr ""
 
-#: ../../src/network/internet_gaming.cc:439
+#: ../../src/network/internet_gaming.cc:497
 msgid "Invalid message type"
-msgstr ""
-
-#: ../../src/network/internet_gaming.cc:477
-#, c-format
-msgid "The game %s is now available"
-msgstr ""
-
-#: ../../src/network/internet_gaming.cc:487
-#, c-format
-msgid "The game %s has been closed"
-msgstr ""
-
-#: ../../src/network/internet_gaming.cc:526
-#, c-format
-msgid "%s joined the lobby"
 msgstr ""
 
 #: ../../src/network/internet_gaming.cc:535
 #, c-format
-msgid "%s left the lobby"
+msgid "The game %s is now available"
 msgstr ""
 
-#: ../../src/network/internet_gaming.cc:570
-msgid "Chat message could not be sent."
+#: ../../src/network/internet_gaming.cc:545
+#, c-format
+msgid "The game %s has been closed"
 msgstr ""
 
 #: ../../src/network/internet_gaming.cc:584
 #, c-format
+msgid "%s joined the lobby"
+msgstr ""
+
+#: ../../src/network/internet_gaming.cc:593
+#, c-format
+msgid "%s left the lobby"
+msgstr ""
+
+#: ../../src/network/internet_gaming.cc:633
+msgid "Chat message could not be sent."
+msgstr ""
+
+#: ../../src/network/internet_gaming.cc:647
+#, c-format
 msgid "ERROR: %s"
 msgstr ""
 
-#: ../../src/network/internet_gaming.cc:594
+#: ../../src/network/internet_gaming.cc:657
 #, c-format
 msgid "Received an unknown command from the metaserver: %s"
 msgstr ""
 
-#: ../../src/network/internet_gaming.cc:705
+#: ../../src/network/internet_gaming.cc:768
 msgid "Message could not be sent: You are not connected to the metaserver!"
 msgstr ""
 
-#: ../../src/network/internet_gaming.cc:718
+#: ../../src/network/internet_gaming.cc:781
 msgid "Message could not be sent: Was this supposed to be a private message?"
 msgstr ""
 
-#: ../../src/network/internet_gaming.cc:792
+#: ../../src/network/internet_gaming.cc:855
 msgid "Conversion error"
 msgstr ""
 
 #. * TRANSLATORS: Geeky message from the metaserver
 #. * TRANSLATORS: This message is shown if %s isn't "true" or "false"
-#: ../../src/network/internet_gaming.cc:795
+#: ../../src/network/internet_gaming.cc:858
 #, c-format
 msgid "Unable to determine truth value for \"%s\""
 msgstr ""
 
-#: ../../src/network/internet_gaming.cc:812
+#: ../../src/network/internet_gaming.cc:875
 msgid "unknown"
 msgstr ""
 
@@ -2181,32 +2181,32 @@ msgstr ""
 msgid "Help: %s"
 msgstr ""
 
-#: ../../src/ui_fsmenu/internet_lobby.cc:51
+#: ../../src/ui_fsmenu/internet_lobby.cc:50
 msgid "Metaserver Lobby"
 msgstr ""
 
-#: ../../src/ui_fsmenu/internet_lobby.cc:52
+#: ../../src/ui_fsmenu/internet_lobby.cc:51
 msgid "Clients online:"
 msgstr ""
 
-#: ../../src/ui_fsmenu/internet_lobby.cc:53
+#: ../../src/ui_fsmenu/internet_lobby.cc:52
 msgid "List of games:"
 msgstr ""
 
-#: ../../src/ui_fsmenu/internet_lobby.cc:54
+#: ../../src/ui_fsmenu/internet_lobby.cc:53
 msgid "Name of your server:"
 msgstr ""
 
-#: ../../src/ui_fsmenu/internet_lobby.cc:64
+#: ../../src/ui_fsmenu/internet_lobby.cc:63
 #: ../../src/ui_fsmenu/netsetup_lan.cc:54
 msgid "Join this game"
 msgstr ""
 
-#: ../../src/ui_fsmenu/internet_lobby.cc:72
+#: ../../src/ui_fsmenu/internet_lobby.cc:71
 msgid "Open a new game"
 msgstr ""
 
-#: ../../src/ui_fsmenu/internet_lobby.cc:80
+#: ../../src/ui_fsmenu/internet_lobby.cc:79
 #: ../../src/ui_fsmenu/launch_game.cc:72
 #: ../../src/ui_fsmenu/load_map_or_game.cc:44
 #: ../../src/ui_fsmenu/multiplayer.cc:53 ../../src/ui_fsmenu/netsetup_lan.cc:70
@@ -2214,50 +2214,50 @@ msgstr ""
 msgid "Back"
 msgstr ""
 
-#: ../../src/ui_fsmenu/internet_lobby.cc:129
+#: ../../src/ui_fsmenu/internet_lobby.cc:128
 msgid "User Status"
 msgstr ""
 
-#: ../../src/ui_fsmenu/internet_lobby.cc:130
+#: ../../src/ui_fsmenu/internet_lobby.cc:129
 msgid "Registered"
 msgstr ""
 
-#: ../../src/ui_fsmenu/internet_lobby.cc:131
+#: ../../src/ui_fsmenu/internet_lobby.cc:130
 msgid "Administrator"
 msgstr ""
 
-#: ../../src/ui_fsmenu/internet_lobby.cc:132
+#: ../../src/ui_fsmenu/internet_lobby.cc:131
 msgid "Unregistered"
 msgstr ""
 
 #. * TRANSLATORS: Player Name
-#: ../../src/ui_fsmenu/internet_lobby.cc:136
+#: ../../src/ui_fsmenu/internet_lobby.cc:135
 msgctxt "player"
 msgid "Name"
 msgstr ""
 
-#: ../../src/ui_fsmenu/internet_lobby.cc:137
+#: ../../src/ui_fsmenu/internet_lobby.cc:136
 msgid "Version"
 msgstr ""
 
-#: ../../src/ui_fsmenu/internet_lobby.cc:139 ../../src/ui_fsmenu/options.cc:252
+#: ../../src/ui_fsmenu/internet_lobby.cc:138 ../../src/ui_fsmenu/options.cc:252
 msgid "Game"
 msgstr ""
 
-#: ../../src/ui_fsmenu/internet_lobby.cc:365
+#: ../../src/ui_fsmenu/internet_lobby.cc:364
 msgid ""
 "Widelands was unable to get the IP address of the server in time.\n"
 "There seems to be a network problem, either on your side or on the side\n"
 "of the server.\n"
 msgstr ""
 
-#: ../../src/ui_fsmenu/internet_lobby.cc:368
+#: ../../src/ui_fsmenu/internet_lobby.cc:367
 msgid "Connection timed out"
 msgstr ""
 
 #. * TRANSLATORS: This is shown for multiplayer games when no host
 #. * TRANSLATORS: server to connect to has been specified yet.
-#: ../../src/ui_fsmenu/internet_lobby.cc:393
+#: ../../src/ui_fsmenu/internet_lobby.cc:389
 msgctxt "server_name"
 msgid "unnamed"
 msgstr ""

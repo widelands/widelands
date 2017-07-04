@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-04-06 19:07+0000\n"
-"PO-Revision-Date: 2017-04-10 10:00+0000\n"
+"POT-Creation-Date: 2017-06-28 07:11+0000\n"
+"PO-Revision-Date: 2017-04-18 13:42+0000\n"
 "Last-Translator: Omar Anwar <omaraglan91@yahoo.com>\n"
 "Language-Team: Arabic (http://www.transifex.com/widelands/widelands/language/ar/)\n"
 "MIME-Version: 1.0\n"
@@ -321,7 +321,7 @@ msgstr "القصة تحدث في عصر حكم الملك \"أسكندور\"، �
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:155
 msgid "Disgraced Before the God"
-msgstr "المنكر قبل الاله"
+msgstr "المٌنكر من قبل الإله"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:157
 msgid "The God’s Punishment"
@@ -334,7 +334,7 @@ msgid ""
 "During the nights, they went crazy and were full of fear. It was not long "
 "before the horse breeder Xydra figured out what was wrong with them: the sea"
 " level in front of their stable was rising with ever increasing speed."
-msgstr ""
+msgstr " لكن كل شئ كان يبدو جيداً. فقط الأحصنة تبدو أنها تَحسُ أن شئ ما خاطئ. في خلال الليل، أصابهم الجنون وأصبحوا ملئيين بالخوف. لم يطول الأمر حتي إكتشف مُربي الأحصنة \"زيدرا\" ماذا يحصل مع الأحصنة: مستوي البحر أمام الإسطبل كان يرتفع بشكل متسارع."
 
 #. TRANSLATORS: Foreword
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:161
@@ -344,15 +344,15 @@ msgid ""
 " of the boldness of their king. He decided to withdraw the rights that were "
 "granted to King Ajanthul and his children. And so, he called them back below"
 " the sea again."
-msgstr ""
+msgstr "رجال الدين رجعوا إلي إلي التفكير والسبب في إرتفاع الماء سرعان ما وُجد: الإله \"لوتاس\" فقد إيمانه في الأطلانطيين بسبب وقاحة ملكهم. الإله قرر أن يسحب الحقوق التي مُنحت إلي الملك \"أجانثول\" و أطفاله. وهكذا، هو إستدعاهم لتحت الماء مجدداً."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:165
 msgid "Uproar and Confusion"
-msgstr ""
+msgstr "ضجة وإرتباك"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:167
 msgid "Emerging Chaos…"
-msgstr ""
+msgstr "الفوضي الناشئة..."
 
 #. TRANSLATORS: Foreword
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:169
@@ -696,7 +696,7 @@ msgstr ""
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:337
 msgid "Jundlina is Angry"
-msgstr ""
+msgstr "\"جوندلينا\" غاضب"
 
 #. TRANSLATORS: Jundlina
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:339
@@ -733,7 +733,7 @@ msgstr ""
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:358
 msgid "Jundlina Received a Letter"
-msgstr ""
+msgstr "\"جوندلينا\" إستقبل رسالة"
 
 #. TRANSLATORS: Jundlina
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:361
@@ -850,7 +850,7 @@ msgstr ""
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:433
 msgid "A Young Man Approaches"
-msgstr ""
+msgstr "رجل شاب يقترب"
 
 #. TRANSLATORS: Ostur
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:436
@@ -867,11 +867,11 @@ msgid ""
 "Ostur, we have no time. The water rises too fast, and if we build the ships "
 "on the shore they will vanish in the sea before they can float. I fear we "
 "are doomed!"
-msgstr ""
+msgstr "\"أوستر\"، نحن ليس لدينا وقت، الماء يرتفع بسرعة جداً، و إذا بنينا السفن علي الشاطئ هي سوف تنتهي في البحر قبل أن تُبحر. أنا أخاف أن نكون محكومين بالهلاك!"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:447
 msgid "Ostur Seems Confident"
-msgstr ""
+msgstr "\"أوستر\" يبدو واثقاً"
 
 #. TRANSLATORS: Ostur
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:456
@@ -880,14 +880,14 @@ msgid ""
 " at the top of the mountain. I suggest we build the ships in this lake and "
 "wait until the island drowns beneath us. Then we can sail away. It is a bold"
 " plan, but I think it could work."
-msgstr ""
+msgstr "صديق لي تَفحص الجزيرة مع نفسه و أخبرني عن بحيرة كبيرة في أعلي الجبل. أنا أقترح أن نبني السفن في هذه البحيرة و ننتظر حتي تغرق الجزيرة تحتنا. حتي يمكننا أن نبحر بعيداً. هي خطه جريئة، ولكن أظن أنها من الممكن أن تنجح."
 
 #. TRANSLATORS: Jundlina
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:462
 msgid ""
 "Your red hair is a signal from the fire god. I will trust you and support "
 "your plan. Our survival lies in your hands now, Ostur."
-msgstr ""
+msgstr "شعرك الأحمر إشارة من إله النار. أنا سوف أثق بك أدعم خِطتك. نجاتنا في يديك الأن ،\"أوستر\"."
 
 #. TRANSLATORS: Jundlina
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:465
@@ -896,11 +896,11 @@ msgid ""
 "logs and spidercloth for the construction there. Forget about everything "
 "else, we need those wares on top of the mountain before our warehouses are "
 "all swallowed by the sea."
-msgstr ""
+msgstr "بسرعة الأن، نحن نحتاج منزل لـ\"أوستر\" بجانب البحيرة، ونحن نحتاج ألواح، وقطع من الخشب وملابس العنكبوت من أجل الإنتاج هناك. إنسي أي شئ أخر، نحن نحتاج هذه السلع في أعلي الجبل قبل أن يَبتلع  البحر المخزن."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:472
 msgid "Jundlina is Relieved"
-msgstr ""
+msgstr "\"جوندلينا\" مُرتاح"
 
 #. TRANSLATORS: Jundlina
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:475
@@ -910,7 +910,7 @@ msgid ""
 "some wares too. And this rescue came just in time: Lutas is about to swallow"
 " the rest of this island, the water rises faster by the hour. But we can "
 "make our escape now and start over in some country farther away…"
-msgstr ""
+msgstr "مَجد \"ساتول\"!، بنای السفن الصغير فعلها. لدينا ثلاثة سفن -- لم أري أفضل منها -- مع مساحة كافية لحملنا جميعاً وبعض السلع أيضاً. وهذا الإنقاذ جاء فی الوقت: \"لوتاس\" علی وشك إبتلاع بقية الجزيرة، الماء يرتفع أسرع مع الوقت. لكننا يمكننا الهرب والبدء من جديد فی مدينة أبعد قليلاً..."
 
 #. TRANSLATORS: Jundlina
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:478
