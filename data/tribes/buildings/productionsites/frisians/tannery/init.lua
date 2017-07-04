@@ -23,12 +23,13 @@ tribes:new_productionsite_type {
    animations = {
       idle = {
          pictures = path.list_files(dirname .. "idle_??.png"),
-         hotspot = { 68, 66 },
+         hotspot = { 53, 68 },
       },
       working = {
          pictures = path.list_files(dirname .. "working_??.png"),
-         hotspot = { 68, 66 },
-      },
+         hotspot = { 53, 68 },
+         fps = 20
+      }
    },
 
    aihints = {
@@ -74,8 +75,8 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start preparing a ration because ...
          descname = _"smoking meat",
          actions = {
-            "sleep=6000",
             "return=skipped when site has fish and economy needs smoked_fish and not economy needs smoked_meat",
+            "sleep=6000",
             "return=skipped unless economy needs smoked_meat",
             "consume=meat log",
             "animate=working 19000",

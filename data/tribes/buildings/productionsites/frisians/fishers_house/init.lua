@@ -24,7 +24,7 @@ tribes:new_productionsite_type {
    animations = {
       idle = {
          pictures = path.list_files(dirname .. "idle_??.png"),
-         hotspot = { 58, 66 },
+         hotspot = { 34, 42 },
       }
    },
 

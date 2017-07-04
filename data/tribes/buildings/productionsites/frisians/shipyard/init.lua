@@ -30,10 +30,17 @@ tribes:new_productionsite_type {
          hotspot = { 62, 48 },
          scale = 3.26
       },
+      build = {
+         pictures = path.list_files(dirname .. "build_??.png"),
+         hotspot = { 62, 48 },
+      },
+      unoccupied = {
+         pictures = path.list_files(dirname .. "unoccupied_??.png"),
+         hotspot = { 62, 48 },
+      },
       working = {
          pictures = path.list_files(dirname .. "working_??.png"),
          hotspot = { 62, 48 },
-         scale = 3.26
       },
    },
 

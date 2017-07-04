@@ -10,12 +10,12 @@ tribes:new_militarysite_type {
    size = "small",
 
    buildcost = {
-      brick = 4,
+      brick = 3,
       log = 2,
       thatch_reed = 1
    },
    return_on_dismantle = {
-      brick = 1,
+      brick = 2,
       log = 1
    },
 
@@ -35,7 +35,7 @@ tribes:new_militarysite_type {
 
    max_soldiers = 3,
    heal_per_second = 100,
-   conquers = 7,
+   conquers = 6,
    prefer_heroes = true,
 
    messages = {

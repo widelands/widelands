@@ -23,16 +23,20 @@ tribes:new_productionsite_type {
    animations = {
       idle = {
          pictures = path.list_files(dirname .. "idle_??.png"),
-         hotspot = { 26, 39 },
+         hotspot = { 21, 36 },
+      },
+      build = {
+         pictures = path.list_files(dirname .. "build_??.png"),
+         hotspot = { 21, 36 },
       },
       working = {
          pictures = path.list_files(dirname .. "working_??.png"),
-         hotspot = { 26, 39 },
+         hotspot = { 21, 36 },
       },
       empty = {
          pictures = path.list_files(dirname .. "empty_??.png"),
-         hotspot = { 26, 39 },
-      }
+         hotspot = { 21, 36 },
+      },
    },
 
    aihints = {
@@ -57,12 +61,12 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start mining coal because ...
          descname = _"mining coal",
          actions = {
-            "sleep=16000",
+            "sleep=24000",
             "return=skipped unless economy needs coal",
             "consume=ration",
-            "animate=working 16000",
+            "animate=working 24000",
             "mine=coal 3 50 5 20",
-            "produce=coal"
+            "produce=coal:2"
          }
       },
    },

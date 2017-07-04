@@ -24,15 +24,19 @@ tribes:new_productionsite_type {
    animations = {
       idle = {
          pictures = path.list_files(dirname .. "idle_??.png"),
-         hotspot = { 62, 41 },
+         hotspot = { 60, 37 },
       },
       working = {
          pictures = path.list_files(dirname .. "working_??.png"),
-         hotspot = { 62, 41 },
+         hotspot = { 60, 37 },
+      },
+      build = {
+         pictures = path.list_files(dirname .. "build_??.png"),
+         hotspot = { 60, 37 },
       },
       empty = {
          pictures = path.list_files(dirname .. "empty_??.png"),
-         hotspot = { 62, 41 },
+         hotspot = { 60, 37 },
       }
    },
 
@@ -63,6 +67,9 @@ tribes:new_productionsite_type {
             "animate=working 10000",
             "mine=coal 3 100 10 5",
             "produce=coal",
+            "animate=working 10000",
+            "mine=coal 3 100 10 5",
+            "produce=coal"
             "animate=working 10000",
             "mine=coal 3 100 10 5",
             "produce=coal"
