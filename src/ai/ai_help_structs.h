@@ -21,6 +21,7 @@
 #define WL_AI_AI_HELP_STRUCTS_H
 
 #include <list>
+#include <queue>
 #include <unordered_set>
 
 #include "ai/ai_hints.h"
@@ -43,6 +44,8 @@ class MilitarySite;
 
 enum class ExtendedBool : uint8_t { kUnset, kTrue, kFalse };
 
+enum class MutatingIntensity : uint8_t { kNo, kNormal, kAgressive };
+
 enum class BuildingNecessity : uint8_t {
 	kForced,
 	kNeeded,
@@ -53,6 +56,33 @@ enum class BuildingNecessity : uint8_t {
 	kNeededPending,
 	kForbidden
 };
+
+// A building type can have no, one or multiple of these attributes
+enum class BuildingAttribute : uint8_t {
+	kBakery,
+	kRanger,
+	kBuildable,
+	kLumberjack,
+	kPort,
+	kNeedsRocks,
+	kWell,
+	kNeedsCoast,
+	kHunter,
+	kFisher,
+	kShipyard,
+	kBarracks,
+	kSpaceConsumer,
+	kRecruitment,
+	kBuildingMatProducer,
+	kUpgradeSubstitutes,
+	kUpgradeExtends,
+	kLogRefiner,
+	kIronMine
+};
+
+enum class AiType : uint8_t { kVeryWeak, kWeak, kNormal };
+
+enum class ExpansionMode : uint8_t { kResources = 0, kSpace = 1, kEconomy = 2, kBoth = 3 };
 
 enum class AiModeBuildings : uint8_t { kAnotherAllowed, kOnLimit, kLimitExceeded };
 
@@ -74,8 +104,27 @@ enum class SchedulerTaskId : uint8_t {
 	kCheckTrainingsites,
 	kCountMilitaryVacant,
 	kCheckEnemySites,
+	kManagementUpdate,
+	kUpdateStats,
 	kUnset
 };
+
+// This is a simplification of a curve, to avoid repeated calculation
+const std::vector<std::vector<int8_t>> neuron_curves = {
+   {0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80, 85, 90, 95, 100},
+   {0, 0, 1, 2, 4, 6, 9, 12, 16, 20, 25, 30, 36, 42, 49, 56, 64, 72, 81, 90, 100},
+   {0, 17, 25, 32, 38, 44, 49, 53, 58, 62, 66, 70, 74, 78, 81, 84, 88, 91, 94, 97, 100},
+};
+
+constexpr int kMagicNumbersSize = 150;
+constexpr int kNeuronPoolSize = 80;
+constexpr int kFNeuronPoolSize = 60;
+constexpr int kFNeuronBitSize = 32;
+constexpr int kMutationRatePosition = 42;
+// TODO(tiborb): this should be replaced by command line switch
+constexpr bool kAITrainingMode = false;
+
+constexpr uint32_t kNever = std::numeric_limits<uint32_t>::max();
 
 struct CheckStepRoadAI {
 	CheckStepRoadAI(Player* const pl, uint8_t const mc, bool const oe);
@@ -112,17 +161,14 @@ struct FindNodeEnemiesBuilding {
 	Game& game;
 };
 
-// When looking for unowned terrain to acquire, we are actually
-// only interested in fields we can walk on.
-// Fields should either be completely unowned or owned by an opposing player_
-struct FindNodeUnowned {
-	FindNodeUnowned(Player* p, Game& g, bool oe = false);
+// We need to count walkable fields owned by enemy
+struct FindEnemyNodeWalkable {
+	FindEnemyNodeWalkable(Player* p, Game& g);
 
 	bool accept(const Map&, const FCoords& fc) const;
 
 	Player* player;
 	Game& game;
-	bool only_enemies;
 };
 
 // Sometimes we need to know how many nodes our allies owns
@@ -140,7 +186,19 @@ struct FindNodeAllyOwned {
 // pay speciall attention to fields where mines can be built.
 // Fields should be completely unowned
 struct FindNodeUnownedMineable {
-	FindNodeUnownedMineable(Player* p, Game& g);
+	FindNodeUnownedMineable(Player* p, Game& g, int32_t t = INVALID_INDEX);
+
+	bool accept(const Map&, const FCoords& fc) const;
+
+	Player* player;
+	Game& game;
+	int32_t ore_type;
+};
+
+// When looking for unowned terrain to acquire, we must
+// consider if any buildings can be built on unowned land.
+struct FindNodeUnownedBuildable {
+	FindNodeUnownedBuildable(Player* p, Game& g);
 
 	bool accept(const Map&, const FCoords& fc) const;
 
@@ -216,6 +274,18 @@ struct NearFlag {
 	int32_t distance;
 };
 
+struct EventTimeQueue {
+	EventTimeQueue();
+
+	void push(uint32_t);
+	uint32_t count(uint32_t);
+	void strip_old(uint32_t);
+
+private:
+	uint32_t duration_ = 20 * 60 * 1000;
+	std::queue<uint32_t> queue;
+};
+
 struct WalkableSpot {
 	Coords coords;
 	bool has_flag;
@@ -238,11 +308,17 @@ struct BuildableField {
 
 	bool preferred;
 	bool enemy_nearby;
+	bool enemy_accessible_;
 
-	uint8_t unowned_land_nearby;
+	bool enemy_wh_nearby;
+	uint16_t unowned_land_nearby;
+	uint16_t enemy_owned_land_nearby;
+	uint16_t unowned_buildable_spots_nearby;
+	uint16_t nearest_buildable_spot_nearby;
 	// to identify that field is too close to border and no production building should be built there
 	bool near_border;
-	uint8_t unowned_mines_spots_nearby;
+	uint16_t unowned_mines_spots_nearby;
+	uint16_t unowned_iron_mines_nearby;
 	uint8_t trees_nearby;
 	uint8_t rocks_nearby;
 	int16_t water_nearby;
@@ -264,22 +340,29 @@ struct BuildableField {
 	// are construction sites that will change this once they are built
 	int16_t military_in_constr_nearby;
 	// actual count of soldiers in nearby buldings
-	int16_t area_military_presence;
+	int16_t own_military_presence;
+	int16_t enemy_military_presence;
+	int16_t enemy_military_sites;  // Including unfinished
+	int16_t ally_military_presence;
 	// stationed (manned) military buildings nearby
 	int16_t military_stationed;
-	// stationed (manned) military buildings nearby
 	// unconnected buildings nearby
 	bool unconnected_nearby;
 	int16_t military_unstationed;
-	bool is_portspace;
+	int16_t own_non_military_nearby;
+	bool defense_msite_allowed;
+	Widelands::ExtendedBool is_portspace;
 	bool port_nearby;  // to increase priority if a port is nearby,
 	// especially for new colonies
 	Widelands::ExtendedBool portspace_nearby;  // prefer military buildings closer to the portspace
 	int32_t max_buildcap_nearby;
-	// it is not necessary to check resources (stones, fish...) too frequently as they do not change
-	// fast
-	// this stores time of last check
+	// It is not necessary to check resources (stones, fish...) too frequently as they do not change
+	// fast. This stores the time of the last check.
 	uint32_t last_resources_check_time;
+	int32_t military_score_;
+	bool inland;
+	uint16_t local_soldier_capacity;
+	bool is_militarysite;
 
 	std::vector<uint8_t> consumers_nearby;
 	std::vector<uint8_t> producers_nearby;
@@ -322,33 +405,27 @@ struct BuildingObserver {
 	Widelands::AiModeBuildings aimode_limit_status();
 	bool buildable(Widelands::Player& p);
 
+	// Convenience functions for is_what
+	bool is(BuildingAttribute) const;
+	void set_is(BuildingAttribute);
+	void unset_is(BuildingAttribute);
+
 	char const* name;
 	Widelands::DescriptionIndex id;
 	Widelands::BuildingDescr const* desc;
 
 	Type type;
 
-	bool plants_trees;
-	bool recruitment;  // is "producing" workers?
 	Widelands::BuildingNecessity new_building;
 	uint32_t new_building_overdue;
 	int32_t primary_priority;
-	bool is_buildable;
-	bool need_trees;   // lumberjack = true
-	bool need_rocks;   // quarry = true
-	bool mines_water;  // wells
-	bool need_water;   // fisher, fish_breeder = true
-	bool is_hunter;    // need to identify hunters
-	bool is_fisher;    // need to identify fishers
-	bool is_port;
-	bool is_shipyard;
-	bool space_consumer;       // farm, vineyard... = true
+
 	bool expansion_type;       // military building used that can be used to control area
 	bool fighting_type;        // military building built near enemies
 	bool mountain_conqueror;   // military building built near mountains
 	uint32_t prohibited_till;  // do not build before (ms)
 	uint32_t forced_after;     // do not wait until ware is needed
-	TrainingSiteType trainingsite_type;
+	uint8_t max_trainingsites_proportion;
 
 	uint16_t unconnected_count;  // to any warehouse (count of such buildings)
 
@@ -358,15 +435,8 @@ struct BuildingObserver {
 
 	std::vector<Widelands::DescriptionIndex> inputs;
 	std::vector<Widelands::DescriptionIndex> outputs;
+	std::vector<Widelands::DescriptionIndex> positions;
 	std::vector<Widelands::DescriptionIndex> critical_building_material;
-
-	bool produces_building_material;
-
-	// an enhancement to this building:
-	// produces all wares as current building, and perhaps more
-	bool upgrade_substitutes;
-	// produces some additional wares
-	bool upgrade_extends;
 
 	// It seems that fish and meat are subsitutes (for trainingsites), so
 	// when testing if a trainingsite is supplied enough
@@ -388,7 +458,7 @@ struct BuildingObserver {
 	int32_t cnt_upgrade_pending;  // number of buildings that are to be upgraded
 
 	// used to track amount of wares produced by building
-	uint32_t stocklevel;
+	uint32_t stocklevel_count;
 	uint32_t stocklevel_time;  // time when stocklevel_ was last time recalculated
 	uint32_t last_dismantle_time;
 	uint32_t construction_decision_time;
@@ -397,25 +467,27 @@ struct BuildingObserver {
 	uint32_t unoccupied_count;
 
 	bool build_material_shortage;
+
+private:
+	std::set<BuildingAttribute> is_what;
 };
 
 struct ProductionSiteObserver {
+	ProductionSiteObserver();
 	Widelands::ProductionSite* site;
 	uint32_t built_time;
 	uint32_t unoccupied_till;
-	uint8_t stats_zero;
 	uint32_t no_resources_since;
 	bool upgrade_pending;
+	uint32_t dismantle_pending_since;
 	BuildingObserver* bo;
 };
 
 struct MilitarySiteObserver {
 	Widelands::MilitarySite* site;
 	BuildingObserver* bo;
-	uint8_t checks;
-	// when considering attack most military sites are inside territory and should be skipped during
-	// evaluation
-	bool enemies_nearby;
+	uint16_t understaffed;
+	uint32_t last_change;  // to prevent switching the occupancy policy too fast
 	uint32_t built_time;
 };
 
@@ -457,13 +529,15 @@ struct EnemySiteObserver {
 
 	bool is_warehouse;
 	int32_t attack_soldiers_strength;
+	int32_t attack_soldiers_competency;
 	int32_t defenders_strength;
 	uint8_t stationed_soldiers;
-	uint32_t last_time_attackable;
+	uint32_t last_time_seen;
 	uint32_t last_tested;
 	int16_t score;
 	Widelands::ExtendedBool mines_nearby;
-	int16_t no_attack_counter;
+	uint32_t last_time_attacked;
+	uint32_t attack_counter;
 };
 
 // as all mines have 3 levels, AI does not know total count of mines per mined material
@@ -475,6 +549,122 @@ struct MineTypesObserver {
 
 	uint16_t in_construction;
 	uint16_t finished;
+	bool is_critical;
+	uint16_t unoccupied;
+};
+
+constexpr int kNeuronWeightLimit = 100;
+constexpr size_t kNeuronMaxPosition = 20;
+constexpr size_t kSecondParentProbability = 50;
+
+// A bunch of parameters used for trainig AI (for calculation of fitness function result)
+constexpr int16_t kCurrentLandDivider = 2;
+constexpr int16_t kLandDeltaMultiplier = 1;
+constexpr int16_t kBonus = 1000;
+constexpr int16_t kAttackersMultiplier = 1;
+constexpr int16_t kAttackBonus = 100;
+constexpr int16_t kTrainedSoldiersScore = 250;
+constexpr int16_t kConqueredWhBonus = 500;
+
+struct Neuron {
+	static int clip_weight_to_range(int w) {
+		assert(w < 125);
+		assert(w > -125);
+		return std::max(-kNeuronWeightLimit, std::min(kNeuronWeightLimit, w));
+	}
+
+	Neuron(int8_t, uint8_t, uint16_t);
+	void recalculate();
+	void set_weight(int8_t w);
+	int8_t get_weight() {
+		return weight;
+	}
+	int8_t get_result(size_t);
+	int8_t get_result_safe(int32_t, bool = false);
+	void set_type(uint8_t);
+	uint8_t get_type() {
+		return type;
+	}
+	uint16_t get_id() {
+		return id;
+	}
+
+private:
+	int8_t results[21];  // kPositions + 1
+	int8_t weight;
+	uint8_t type;
+	uint16_t id;
+};
+
+struct FNeuron {
+	FNeuron(uint32_t, uint16_t);
+
+	void flip_bit(uint8_t);
+	bool get_result(bool, bool, bool, bool bool4 = true, bool bool5 = true);
+	bool get_position(uint8_t);
+	uint32_t get_int();
+	uint16_t get_id() {
+		return id;
+	};
+
+private:
+	std::bitset<kFNeuronBitSize> core;
+	uint16_t id;
+};
+
+struct ExpansionType {
+	ExpansionType();
+
+	void set_expantion_type(ExpansionMode);
+	ExpansionMode get_expansion_type() {
+		return type;
+	};
+
+private:
+	ExpansionMode type;
+};
+
+// This is to keep all data related to AI magic numbers
+struct ManagementData {
+	ManagementData();
+
+	std::vector<Neuron> neuron_pool;
+	std::vector<FNeuron> f_neuron_pool;
+	Widelands::Player::AiPersistentState* pd;
+
+	void mutate(PlayerNumber = 0);
+	void new_dna_for_persistent(uint8_t, Widelands::AiType);
+	void copy_persistent_to_local();
+	void review(
+	   uint32_t, PlayerNumber, uint32_t, uint32_t, uint32_t, uint16_t, int16_t, int16_t, uint16_t);
+	void dump_data();
+	uint16_t new_neuron_id() {
+		++next_neuron_id;
+		return next_neuron_id - 1;
+	};
+	void reset_neuron_id() {
+		next_neuron_id = 0;
+	}
+	uint16_t new_bi_neuron_id() {
+		++next_bi_neuron_id;
+		return next_bi_neuron_id - 1;
+	};
+	void reset_bi_neuron_id() {
+		next_bi_neuron_id = 0;
+	}
+	int16_t get_military_number_at(uint8_t);
+	void set_military_number_at(uint8_t, int16_t);
+	MutatingIntensity do_mutate(uint8_t, int16_t);
+	int8_t shift_weight_value(int8_t, bool = true);
+	void test_consistency(bool = false);
+
+private:
+	int32_t score;
+	uint8_t primary_parent;
+	uint16_t next_neuron_id;
+	uint16_t next_bi_neuron_id;
+	uint16_t performance_change;
+	Widelands::AiType ai_type;
 };
 
 // this is used to count militarysites by their size
@@ -492,7 +682,7 @@ struct SchedulerTask {
 	              const uint8_t p,
 	              const char* d);
 
-	bool operator<(SchedulerTask other) const;
+	bool operator<(const SchedulerTask& other) const;
 
 	uint32_t due_time;
 	Widelands::SchedulerTaskId id;
@@ -560,34 +750,87 @@ struct FlagsForRoads {
 	// Updating walking distance over existing roads
 	void set_road_distance(Widelands::Coords coords, int32_t distance);
 	// Finally we query the flag that we will build a road to
-	bool get_winner(uint32_t* winner_hash, uint32_t pos);
+	bool get_winner(uint32_t* winner_hash);
 };
 
 // This is a struct that stores strength of players, info on teams and provides some outputs from
 // these data
 struct PlayersStrengths {
+private:
 	struct PlayerStat {
 		PlayerStat();
-		PlayerStat(Widelands::TeamNumber tc, uint32_t pp);
+		PlayerStat(Widelands::TeamNumber tc,
+		           bool en,
+		           uint32_t pp,
+		           uint32_t op,
+		           uint32_t o60p,
+		           uint32_t cs,
+		           uint32_t land,
+		           uint32_t oland,
+		           uint32_t o60l);
 
 		Widelands::TeamNumber team_number;
+		bool is_enemy;
 		uint32_t players_power;
+		uint32_t old_players_power;
+		uint32_t old60_players_power;
+		uint32_t players_casualities;
+		uint32_t last_time_seen;
+		uint32_t players_land;
+		uint32_t old_players_land;
+		uint32_t old60_players_land;
 	};
 
+public:
+	PlayersStrengths();
 	// Inserting/updating data
-	void add(Widelands::PlayerNumber pn, Widelands::TeamNumber tn, uint32_t pp);
+	void add(Widelands::PlayerNumber pn,
+	         Widelands::PlayerNumber opn,
+	         Widelands::TeamNumber mytn,
+	         Widelands::TeamNumber pltn,
+	         uint32_t pp,
+	         uint32_t op,
+	         uint32_t o60p,
+	         uint32_t cs,
+	         uint32_t land,
+	         uint32_t oland,
+	         uint32_t o60l);
 	void recalculate_team_power();
 
 	// This is strength of player plus third of strength of other members of his team
 	uint32_t get_modified_player_power(Widelands::PlayerNumber pn);
+	uint32_t get_player_power(Widelands::PlayerNumber pn);
+	uint32_t get_old_player_power(Widelands::PlayerNumber pn);
+	uint32_t get_old60_player_power(Widelands::PlayerNumber pn);
+	uint32_t get_player_land(Widelands::PlayerNumber pn);
+	uint32_t get_old_player_land(Widelands::PlayerNumber pn);
+	uint32_t get_old60_player_land(Widelands::PlayerNumber pn);
+	uint32_t get_visible_enemies_power(uint32_t);
+	uint32_t get_enemies_average_power();
+	uint32_t get_enemies_average_land();
+	uint32_t get_enemies_max_power();
+	uint32_t get_enemies_max_land();
+	uint32_t get_old_visible_enemies_power(uint32_t);
+	uint32_t get_player_casualities(Widelands::PlayerNumber pn);
 	bool players_in_same_team(Widelands::PlayerNumber pl1, Widelands::PlayerNumber pl2);
 	bool strong_enough(Widelands::PlayerNumber pl);
+	void set_last_time_seen(uint32_t, Widelands::PlayerNumber);
+	bool player_seen_lately(Widelands::PlayerNumber, uint32_t);
+	bool get_is_enemy(Widelands::PlayerNumber);
+	uint8_t enemies_seen_lately_count(uint32_t);
+	bool any_enemy_seen_lately(uint32_t);
+	PlayerNumber this_player_number;
+	void set_update_time(uint32_t);
+	uint32_t get_update_time();
 
+private:
 	// This is the core part of this struct
 	std::map<Widelands::PlayerNumber, PlayerStat> all_stats;
 
 	// Number of team, sum of players' strength
 	std::map<Widelands::TeamNumber, uint32_t> team_powers;
+
+	uint32_t update_time;
 };
 }  // namespace Widelands
 

@@ -35,7 +35,8 @@ tribes:new_productionsite_type {
 
    aihints = {
       renews_map_resource = "meat",
-      prohibited_till = 900
+      prohibited_till = 900,
+      basic_amount = 1
    },
 
    working_positions = {
