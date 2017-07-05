@@ -45,6 +45,8 @@ struct MessageQueue {
 	}
 
 	//  Make some selected inherited members public.
+	//  TODO(sirver): This is weird design. Instead pass out a const ref& to
+	//  'messages_'?
 	MessageMap::const_iterator begin() const {
 		return messages_.begin();
 	}

@@ -62,7 +62,6 @@ void MapPlayersMessagesPacket::read(FileSystem& fs,
 			MessageQueue& messages = player->messages();
 
 			{
-				// NOCOM(#sirver): weird design
 				const auto begin = messages.begin();
 				if (begin != messages.end()) {
 					log("ERROR: The message queue for player %u contains a message "
