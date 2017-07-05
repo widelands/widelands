@@ -481,6 +481,7 @@ void DefaultAI::think() {
 void DefaultAI::late_initialization() {
 	player_ = game().get_player(player_number());
 	tribe_ = &player_->tribe();
+	const bool ai_training_mode_ = game().is_ai_training_mode();
 	const uint32_t gametime = game().get_gametime();
 
 	log("ComputerPlayer(%d): initializing as type %u\n", player_number(),
@@ -529,7 +530,7 @@ void DefaultAI::late_initialization() {
 		management_data.new_dna_for_persistent(player_number(), type_);
 		management_data.copy_persistent_to_local();
 		management_data.mutate(player_number());
-		if (kAITrainingMode) {
+		if (ai_training_mode_) {
 			management_data.dump_data();
 		}
 
@@ -552,7 +553,7 @@ void DefaultAI::late_initialization() {
 			persistent_data->least_military_score = persistent_data->target_military_score;
 		}
 
-		if (kAITrainingMode) {
+		if (ai_training_mode_) {
 			log("%2d: reinitializing dna (kAITrainingMode set true)", player_number());
 			management_data.new_dna_for_persistent(player_number(), type_);
 			management_data.copy_persistent_to_local();
@@ -563,7 +564,7 @@ void DefaultAI::late_initialization() {
 		}
 
 		management_data.test_consistency(true);
-		if (kAITrainingMode) {
+		if (ai_training_mode_) {
 			management_data.dump_data();
 		}
 
@@ -913,7 +914,7 @@ void DefaultAI::late_initialization() {
 	                                 "count military vacant"));
 	taskPool.push_back(SchedulerTask(std::max<uint32_t>(gametime, 10 * 60 * 1000),
 	                                 SchedulerTaskId::kCheckEnemySites, 6, "check enemy sites"));
-	if (kAITrainingMode) {
+	if (game().is_ai_training_mode()) {
 		taskPool.push_back(SchedulerTask(std::max<uint32_t>(gametime, 10 * 1000),
 		                                 SchedulerTaskId::kManagementUpdate, 8, "reviewing"));
 	}
@@ -1783,7 +1784,7 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 		field.military_score_ += score_parts[i];
 	}
 
-	if (kAITrainingMode) {
+	if (game().is_ai_training_mode()) {
 		if (field.military_score_ < -5000 || field.military_score_ > 2000) {
 			log("Warning field.military_score_ %5d, compounds: ", field.military_score_);
 			for (uint16_t i = 0; i < score_parts_size; i++) {

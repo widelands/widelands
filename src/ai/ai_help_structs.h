@@ -122,7 +122,7 @@ constexpr int kFNeuronPoolSize = 60;
 constexpr int kFNeuronBitSize = 32;
 constexpr int kMutationRatePosition = 42;
 // TODO(tiborb): this should be replaced by command line switch
-constexpr bool kAITrainingMode = false;
+//constexpr bool kAITrainingMode = false; NOCOM
 
 constexpr uint32_t kNever = std::numeric_limits<uint32_t>::max();
 

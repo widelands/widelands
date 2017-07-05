@@ -113,7 +113,8 @@ public:
 	         StartGameType,
 	         const std::string& script_to_run,
 	         bool replay,
-	         const std::string& prefix_for_replays);
+	         const std::string& prefix_for_replays,
+	         const bool ai_training_mode = false);
 
 	// Returns the upcasted lua interface.
 	LuaGameInterface& lua() override;
@@ -126,7 +127,9 @@ public:
 	// Run a single player loaded game directly via --loadgame on the cmdline. Will
 	// run the 'script_to_run' directly after the game was loaded.
 	// Returns the result of run().
-	bool run_load_game(const std::string& filename, const std::string& script_to_run);
+	bool run_load_game(const std::string& filename,
+		const std::string& script_to_run,
+	    const bool ai_training_mode = false);
 
 	void postload() override;
 
@@ -231,6 +234,10 @@ public:
 		return replay_;
 	}
 
+	bool is_ai_training_mode() const {
+		return ai_training_mode_;
+	}
+
 private:
 	void sync_reset();
 
@@ -296,6 +303,7 @@ private:
 	/// For save games and statistics generation
 	std::string win_condition_displayname_;
 	bool replay_;
+	bool ai_training_mode_;
 };
 
 inline Coords Game::random_location(Coords location, uint8_t radius) {

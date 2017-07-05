@@ -281,6 +281,7 @@ WLApplication* WLApplication::get(int const argc, char const** argv) {
 WLApplication::WLApplication(int const argc, char const* const* const argv)
    : commandline_(std::map<std::string, std::string>()),
      game_type_(NONE),
+     ai_training_mode_(false),
      mouse_swapped_(false),
      faking_middle_mouse_button_(false),
      mouse_position_(Vector2i::zero()),
@@ -409,7 +410,7 @@ void WLApplication::run() {
 	} else if (game_type_ == LOADGAME) {
 		Widelands::Game game;
 		try {
-			game.run_load_game(filename_, script_to_run_);
+			game.run_load_game(filename_, script_to_run_, ai_training_mode_);
 		} catch (const Widelands::GameDataError& e) {
 			log("Game not loaded: Game data error: %s\n", e.what());
 		} catch (const std::exception& e) {
@@ -967,6 +968,10 @@ void WLApplication::handle_commandline_parameters() {
 	if (commandline_.count("help") || commandline_.count("version")) {
 		init_language();
 		throw ParameterError();  // No message on purpose
+	}
+	if (commandline_.count("ai_training")) {
+		ai_training_mode_ = true;
+		commandline_.erase("ai_training");
 	}
 }
 

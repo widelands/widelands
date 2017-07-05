@@ -233,6 +233,10 @@ private:
 
 	GameType game_type_;
 
+	/// Game to be run in ai_training mode
+	bool ai_training_mode_;
+
+
 	/// True if left and right mouse button should be swapped
 	bool mouse_swapped_;
 
