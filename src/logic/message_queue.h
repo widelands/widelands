@@ -77,7 +77,7 @@ struct MessageQueue {
 	/// The loading code calls this function to add messages form the map file.
 	MessageId add_message(std::unique_ptr<Message> message) {
 		assert_counts();
-		assert(static_cast<int>(message.status()) < 3);
+		assert(static_cast<int>(message->status()) < 3);
 		++counts_[static_cast<int>(message->status())];
 		messages_[++current_message_id_] = std::move(message);
 		assert_counts();
