@@ -112,8 +112,9 @@ SoldierDescr::BattleAttribute::BattleAttribute(std::unique_ptr<LuaTable> table) 
 	std::vector<std::string> image_filenames =
 	   table->get_table("pictures")->array_entries<std::string>();
 	if (image_filenames.size() != max_level + 1) {
-		throw GameDataError("Soldier needs to have %d pictures for battle attribute, but found %lu",
-		                    max_level + 1, image_filenames.size());
+		throw GameDataError(
+		   "Soldier needs to have %u pictures for battle attribute, but found %" PRIuS, max_level + 1,
+		   image_filenames.size());
 	}
 	for (const std::string& image_filename : image_filenames) {
 		images.push_back(g_gr->images().get(image_filename));

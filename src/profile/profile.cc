@@ -65,7 +65,8 @@ static char const* falseWords[FALSE_WORDS] = {
 
 Profile g_options(Profile::err_log);
 
-Section::Value::Value(const std::string& nname, const char* const nval) : used_(false), name_(nname) {
+Section::Value::Value(const std::string& nname, const char* const nval)
+   : used_(false), name_(nname) {
 	set_string(nval);
 }
 

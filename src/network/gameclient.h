@@ -37,7 +37,9 @@ struct GameClientImpl;
  * launch, as well as dealing with the actual network protocol.
  */
 struct GameClient : public GameController, public GameSettingsProvider, public ChatProvider {
-	GameClient(const NetAddress& host, const std::string& playername, bool internet = false);
+	GameClient(const std::pair<NetAddress, NetAddress>& host,
+	           const std::string& playername,
+	           bool internet = false);
 
 	virtual ~GameClient();
 

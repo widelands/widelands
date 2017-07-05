@@ -22,6 +22,7 @@
 
 #include <memory>
 #include <unordered_set>
+#include <unordered_map>
 
 #include "base/macros.h"
 #include "graphic/color.h"
@@ -34,11 +35,6 @@
 #include "logic/mapregion.h"
 #include "logic/message_queue.h"
 #include "logic/widelands.h"
-
-// there are three arrays to be used by AI
-// their size is defined here
-// (all are of the same size)
-constexpr int kAIDataSize = 8;
 
 class Node;
 namespace Widelands {
@@ -169,12 +165,12 @@ public:
 		     last_attacked_player(0),
 		     least_military_score(0),
 		     target_military_score(0),
-		     ai_personality_military_loneliness(0),
-		     ai_personality_attack_margin(0),
 		     ai_productionsites_ratio(0),
-		     ai_personality_wood_difference(0),
-		     ai_personality_early_militarysites(0),
-		     last_soldier_trained(0) {
+		     ai_personality_mil_upper_limit(0),
+		     magic_numbers_size(0),
+		     neuron_pool_size(0),
+		     f_neuron_pool_size(0),
+		     remaining_buildings_size(0) {
 		}
 
 		// Was initialized
@@ -188,12 +184,17 @@ public:
 		int16_t last_attacked_player;
 		int32_t least_military_score;
 		int32_t target_military_score;
-		int16_t ai_personality_military_loneliness;
-		int32_t ai_personality_attack_margin;
 		uint32_t ai_productionsites_ratio;
-		int32_t ai_personality_wood_difference;
-		uint32_t ai_personality_early_militarysites;
-		uint32_t last_soldier_trained;
+		int32_t ai_personality_mil_upper_limit;
+		uint32_t magic_numbers_size;
+		uint32_t neuron_pool_size;
+		uint32_t f_neuron_pool_size;
+		uint32_t remaining_buildings_size;
+		std::vector<int16_t> magic_numbers;
+		std::vector<int8_t> neuron_weights;
+		std::vector<int8_t> neuron_functs;
+		std::vector<uint32_t> f_neurons;
+		std::unordered_map<Widelands::DescriptionIndex, uint32_t> remaining_basic_buildings;
 	} ai_data;
 
 	AiPersistentState* get_mutable_ai_persistent_state() {

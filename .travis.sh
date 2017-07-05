@@ -34,6 +34,7 @@ until sudo apt-get install -qq --force-yes -y \
    libsdl2-image-dev \
    libsdl2-mixer-dev \
    libsdl2-ttf-dev \
+   python-pip \
    zlib1g-dev \
 ; do sleep 10; done
 
@@ -42,8 +43,22 @@ mkdir build
 cd build
 cmake .. -DCMAKE_BUILD_TYPE:STRING="$BUILD_TYPE"
 
-# Any codecheck warning is an error in Debug builds. Keep the codebase clean!!
 if [ "$BUILD_TYPE" == "Debug" ]; then
+
+   # Build the documentation. Any warning is an error.
+   sudo pip install sphinx
+   pushd ../doc/sphinx
+   mkdir source/_static
+   ./extract_rst.py
+   sphinx-build -W -b json -d build/doctrees source build/json
+   popd
+
+   # Run the codecheck test suite.
+   pushd ../cmake/codecheck
+   ./run_tests.py
+   popd
+
+   # Any codecheck warning is an error in Debug builds. Keep the codebase clean!!
    # Suppress color output.
    TERM=dumb make -j1 codecheck 2>&1 | tee codecheck.out
    if grep '^[/_.a-zA-Z]\+:[0-9]\+:' codecheck.out; then 

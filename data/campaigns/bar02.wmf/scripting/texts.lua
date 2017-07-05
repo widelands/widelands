@@ -205,7 +205,7 @@ story_msg_6 = {
    title = _"The Story Continues",
    body = thron(_"Thron says:",
       -- TRANSLATORS: Thron
-      _([[I have sent men to meet with Kalitath in his fortress. He has barricaded the former main entrance to the capital and is trying to set up a siege ring around Al’thunran. He will not let anyone enter or leave the city while the ring is intact. Until now, he has not answered any of my messages. But the time I spend waiting won’t be lost. I will further upgrade my soldiers and prepare for battle.]]))
+      _([[I have sent men to meet with Kalitath in his fortress. He has barricaded the former main entrance to the capital and is trying to set up a siege ring around Al’thunran. He will not let anyone enter or leave the city while the ring is intact. Until now, he has not answered any of my messages. But the time I spend waiting won’t be lost. I will train my soldiers further and prepare for battle.]]))
 }
 
 order_msg_7_destroy_kalitaths_army = {
