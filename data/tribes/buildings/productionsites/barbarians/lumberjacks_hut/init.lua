@@ -59,6 +59,6 @@ tribes:new_productionsite_type {
       title = _"No Trees",
       heading = _"Out of Trees",
       message = pgettext("barbarians_building", "The lumberjack working at this lumberjack’s hut can’t find any trees in his work area. You should consider dismantling or destroying the building or building a ranger’s hut."),
-      productivity_threshold = 66
+      productivity_threshold = 60
    },
 }
