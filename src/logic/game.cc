@@ -720,7 +720,6 @@ void Game::send_player_change_soldier_capacity(Building& b, int32_t const val) {
 	   *new CmdChangeSoldierCapacity(get_gametime(), b.owner().player_number(), b, val));
 }
 
-/////////////////////// TESTING STUFF
 void Game::send_player_enemyflagaction(const Flag& flag,
                                        PlayerNumber const who_attacks,
                                        uint32_t const num_soldiers) {

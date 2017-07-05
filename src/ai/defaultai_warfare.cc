@@ -433,7 +433,7 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 			}
 
 		} else {  // we don't have a flag = site does not exist anymore, let's remove the site from
-		          // our observer list
+			       // our observer list
 			disappeared_sites.push_back(site->first);
 		}
 	}
