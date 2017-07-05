@@ -50,8 +50,8 @@ tribes:new_productionsite_type {
    },
 
    inputs = {
-      { name = "coal", amount = 8 },
-      { name = "iron", amount = 8 },
+      { name = "coal", amount = 12 },
+      { name = "iron", amount = 12 },
       { name = "gold", amount = 8 },
    },
    outputs = {

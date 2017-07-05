@@ -69,7 +69,7 @@ tribes:new_productionsite_type {
             "produce=coal",
             "animate=working 10000",
             "mine=coal 3 100 10 5",
-            "produce=coal"
+            "produce=coal",
             "animate=working 10000",
             "mine=coal 3 100 10 5",
             "produce=coal"
