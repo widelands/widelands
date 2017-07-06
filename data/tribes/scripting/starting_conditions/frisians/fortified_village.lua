@@ -22,7 +22,7 @@ return {
       end
 
       local h = plr:place_building("frisians_fortress", sf, false, true)
-      h:set_soldiers{[{0,0,0,0}] = 12}
+      h:set_soldiers{[{0,0,0,0}] = 10}
 
       place_building_in_region(plr, "frisians_warehouse", sf:region(7), {
          wares = {
@@ -95,14 +95,14 @@ return {
 
       place_building_in_region(plr, "frisians_training_camp", sf:region(11), {
          inputs = {
-            frisians_bread = 4,
+            bread_frisians = 4,
             beer = 4,
             smoked_fish = 4,
             smoked_meat = 4,
             sword_long = 1,
             sword_curved = 1,
             sword_double = 1,
-            fur_clothes_studded = 1,
+            fur_clothes_silver = 1,
             helmet = 1
          },
       })

@@ -108,8 +108,8 @@ return {
 
       place_building_in_region(player, "frisians_brick_burners_house", sf:region(11), {
          inputs = {
-            clay = 8,
-            granite = 8,
+            clay = 6,
+            granite = 6,
             coal = 4
          }
       })

@@ -41,7 +41,6 @@ tribes:new_productionsite_type {
    },
 
    inputs = {
-      --{ name = "mud", amount = 8 },
       { name = "water", amount = 8 },
    },
    outputs = {
