@@ -8,6 +8,7 @@ function ware_helptext(tribe)
       barbarians = pgettext("barbarians_ware", "It is used to produce weapons and tools in the metal workshop, ax workshop, war mill and helm smithy."),
       -- TRANSLATORS: Helptext for a ware: Iron
       empire = pgettext("empire_ware", "Weapons, armor and tools are made of iron."),
+      -- TRANSLATORS: Helptext for a ware: Iron
       frisians = pgettext("frisians_ware", "Tools and weapons are made of iron. It is also used as jewellery for fur cloth armour to give it a silver shine.")
    }
    local result = ""

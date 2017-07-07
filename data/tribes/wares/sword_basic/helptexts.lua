@@ -1,7 +1,7 @@
 function ware_helptext(tribe)
    local helptext = {
       -- TRANSLATORS: Helptext for a ware: Basic sword
-      frisians = pgettext("frisians_ware", "The long sword is the weapon used by level 0 warriors. All new warriors are equipped with it in a barracks.")
+      frisians = pgettext("frisians_ware", "The basic sword is the weapon used by level 0 soldiers. All new soldiers are equipped with it in a barracks.")
    }
    local result = ""
    if tribe then

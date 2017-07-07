@@ -1,25 +1,24 @@
 function building_helptext_lore()
    -- TRANSLATORS: Lore helptext for a building
-   return pgettext("barbarians_building", [[‘He loves the animals and to breed them<br>
-         as we love to cook and eat them.’]])
+   return pgettext("frisians_building", "")
 end
 
 function building_helptext_lore_author()
    -- TRANSLATORS: Lore author helptext for a building
-   return pgettext("barbarians_building", "Barbarian nursery rhyme")
+   return pgettext("frisians_building", "")
 end
 
 function building_helptext_purpose()
    -- TRANSLATORS: Purpose helptext for a building
-   return pgettext("barbarians_building", "Releases animals into the wild to steady the meat production.")
+   return pgettext("frisians_building", "Keeps bees and lets them swarm over flowering fields to produce honey.")
 end
 
 function building_helptext_note()
-   -- TRANSLATORS#: Note helptext for a building
-   return ""
+   -- TRANSLATORS: Note helptext for a building
+   return "Needs medium-sized fields and bushes nearby."
 end
 
 function building_helptext_performance()
    -- TRANSLATORS: Performance helptext for a building
-   return pgettext("barbarians_building", "The gamekeeper pauses 52.5 seconds before going to work again.")
+   return pgettext("frisians_building", "Calculation needed")
 end

@@ -2,7 +2,8 @@ function ware_helptext(tribe)
    local helptext = {
       -- TRANSLATORS: Helptext for a ware: Cloth
       barbarians = pgettext("barbarians_ware", "Cloth is needed for Barbarian ships. It is produced out of thatch reed."),
-      barbarians = pgettext("frisians_ware", "Cloth is needed for ships. It is produced out of reindeer fur."),
+      -- TRANSLATORS: Helptext for a ware: Cloth
+      frisians = pgettext("frisians_ware", "Cloth is needed for ships. It is produced out of reindeer fur and reed."),
       -- TRANSLATORS: Helptext for a ware: Cloth
       empire = pgettext("empire_ware", "Cloth is needed to build several buildings. It is also consumed in the armor smithy.")
    }

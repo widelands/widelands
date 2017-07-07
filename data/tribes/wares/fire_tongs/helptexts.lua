@@ -5,6 +5,8 @@ function ware_helptext(tribe)
       -- TRANSLATORS: Helptext for a ware: Fire Tongs
       atlanteans = pgettext("atlanteans_ware_fire_tongs", "They are produced by the toolsmith."),
       -- TRANSLATORS: Helptext for a ware: Fire Tongs
+      frisians = pgettext("frisians_ware", "They are produced by the blacksmithy."),
+      -- TRANSLATORS: Helptext for a ware: Fire Tongs
       barbarians = pgettext("barbarians_ware", "Produced by the metal workshop (but they cease to be produced by the building if it is enhanced to an ax workshop and war mill)."),
       -- TRANSLATORS: Helptext for a ware: Fire Tongs
       empire = pgettext("empire_ware_fire_tongs", "They are produced by the toolsmith.")

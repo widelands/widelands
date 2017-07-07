@@ -8,6 +8,7 @@ function ware_helptext(tribe)
       barbarians = pgettext("barbarians_ware", "Therefore the gardener and the ranger use them. Produced at the metal workshop (but cease to be produced by the building if it is enhanced to an ax workshop and war mill)."),
       -- TRANSLATORS: Helptext for a ware: Shovel
       empire = pgettext("empire_ware", "Therefore the forester and the vine farmer use them. They are produced by the toolsmith."),
+      -- TRANSLATORS: Helptext for a ware: Shovel
       frisians = pgettext("frisians_ware", "They are used by berry and reed farmers as well as foresters. Diggers also need them to dig mud out of hard soil.")
    }
    local result = ""

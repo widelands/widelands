@@ -5,6 +5,8 @@ function ware_helptext(tribe)
       -- TRANSLATORS: Helptext for a ware: Water
       atlanteans = pgettext("atlanteans_ware", "Water is used in the bakery and the horse and spider farms."),
       -- TRANSLATORS: Helptext for a ware: Water
+      frisians = pgettext("frisians_ware", "Water is used to bake bread and brew beer. Reindeer Farms and Aqua Farms also consume it."),
+      -- TRANSLATORS: Helptext for a ware: Water
       barbarians = pgettext("barbarians_ware", "Water is used in the bakery, the micro brewery and the brewery. The lime kiln and the cattle farm also need to be supplied with water."),
       -- TRANSLATORS: Helptext for a ware: Water
       empire =  pgettext("empire_ware", "Water is used in the bakery and the brewery. The donkey farm, the sheep farm and the piggery also need to be supplied with water.")

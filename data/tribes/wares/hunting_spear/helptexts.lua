@@ -5,6 +5,8 @@ function ware_helptext(tribe)
       -- TRANSLATORS: Helptext for a ware: Hunting Spear
       barbarians = pgettext("barbarians_ware", "Hunting spears are produced in the metal workshop (but cease to be produced by the building if it is enhanced to an ax workshop and war mill)."),
       -- TRANSLATORS: Helptext for a ware: Hunting Spear
+      frisians = pgettext("frisians_ware", "Hunting spears are produced by the blacksmithy"),
+      -- TRANSLATORS: Helptext for a ware: Hunting Spear
       empire = pgettext("empire_ware_hunting_spear", "They are produced by the toolsmith.")
    }
    local result = ""

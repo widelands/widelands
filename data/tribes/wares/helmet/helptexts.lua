@@ -3,7 +3,7 @@ function ware_helptext(tribe)
       -- TRANSLATORS: Helptext for a ware: Helmet
       barbarians = pgettext("barbarians_ware", "A helmet is a basic tool to protect soldiers. It is produced in the helm smithy and used in the training camp – together with food – to train soldiers from health level 0 to level 1."),
       -- TRANSLATORS: Helptext for a ware: Helmet
-      frisians = pgettext("frisians_ware", "A helmet is a basic tool to protect warriors. It is produced in the armour smithy and used to train warriors from health level 0 to level 1.")
+      frisians = pgettext("frisians_ware", "A helmet is a basic tool to protect warriors. It is produced in the armoursmithy and used to train warriors from health level 0 to level 1.")
    }
    local result = ""
    if tribe then

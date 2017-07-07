@@ -13,7 +13,7 @@ end
 
 function building_helptext_purpose()
    -- TRANSLATORS: Purpose helptext for a building
-   return pgettext("building", "Prepares rations to feed the scouts and miners.")
+   return pgettext("building", "Digs up earth and uses water to turn it into clay. Clay is used to make bricks, reinforce the charcoal kiln and to build ships.")
 end
 
 function building_helptext_note()

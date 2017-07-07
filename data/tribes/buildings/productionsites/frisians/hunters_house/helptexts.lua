@@ -1,11 +1,11 @@
 function building_helptext_lore()
    -- TRANSLATORS: Lore helptext for a building
-   return pgettext("barbarians_building", [[‘As silent as a panther,<br> as deft as a weasel,<br> as swift as an arrow,<br> as deadly as a viper.’]])
+   return pgettext("frisians_building", "")
 end
 
 function building_helptext_lore_author()
    -- TRANSLATORS: Lore author helptext for a building
-   return pgettext("barbarians_building", "‘The Art of Hunting’")
+   return pgettext("frisians_building", "")
 end
 
 function building_helptext_purpose()
@@ -15,10 +15,10 @@ end
 
 function building_helptext_note()
    -- TRANSLATORS: Note helptext for a building
-   return pgettext("barbarians_building", "The hunter’s hut needs animals to hunt within the work area.")
+   return pgettext("frisians_building", "The hunter’s hut needs animals to hunt within the work area.")
 end
 
 function building_helptext_performance()
    -- TRANSLATORS: Performance helptext for a building
-   return pgettext("barbarians_building", "The hunter pauses %s before going to work again."):bformat(ngettext("%d second", "%d seconds", 35):bformat(35))
+   return pgettext("frisians_building", "Calculation needed")
 end

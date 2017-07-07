@@ -7,6 +7,8 @@ function ware_helptext(tribe)
       -- TRANSLATORS: Helptext for a ware: Bread Paddle
       barbarians = pgettext("barbarians_ware", "Bread paddles are produced in the metal workshop like all other tools (but cease to be produced by the building if it is enhanced to an ax workshop and war mill)."),
       -- TRANSLATORS: Helptext for a ware: Bread Paddle
+      frisians = pgettext("frisians_ware", "Bread paddles are produced by the blacksmithy."),
+      -- TRANSLATORS: Helptext for a ware: Bread Paddle
       empire = pgettext("empire_ware", "Bread paddles are produced by the toolsmith.")
    }
    local result = ""

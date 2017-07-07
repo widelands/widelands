@@ -64,7 +64,7 @@ tribes:new_soldier_type {
    msgctxt = "frisians_worker",
    name = "frisians_soldier",
    -- TRANSLATORS: This is a worker name used in lists of workers
-   descname = pgettext("frisians_worker", "Warrior"),
+   descname = pgettext("frisians_worker", "Soldier"),
    helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    vision_range = 2,

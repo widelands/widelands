@@ -13,7 +13,7 @@ end
 
 function building_helptext_purpose()
    -- TRANSLATORS: Purpose helptext for a building
-   return pgettext("barbarians_building", "Breeds strong oxen for adding them to the transportation system.")
+   return pgettext("frisians_building", "Breeds strong reindeer for adding them to the transportation system. Also keeps them for their fur, which is turned into armour and cloth.")
 end
 
 function building_helptext_note()
@@ -23,5 +23,5 @@ end
 
 function building_helptext_performance()
    -- TRANSLATORS: Performance helptext for a building
-   return pgettext("barbarians_building", "If all needed wares are delivered in time, this building can produce an ox in %s on average."):bformat(ngettext("%d second", "%d seconds", 30):bformat(30))
+   return pgettext("frisians_building", "Calculation needed")
 end

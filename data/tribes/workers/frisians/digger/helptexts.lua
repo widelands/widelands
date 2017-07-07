@@ -1,4 +1,4 @@
 function worker_helptext()
-   -- TRANSLATORS: Helptext for a worker: Blacksmith
-   return pgettext("barbarians_worker", "Produces weapons for soldiers and tools for workers.")
+   -- TRANSLATORS: Helptext for a worker: Digger
+   return pgettext("frisians_worker", "Digs earth out of the ground at a clay pit.")
 end

@@ -1,24 +1,24 @@
 function building_helptext_lore()
    -- TRANSLATORS: Lore helptext for a building
-   return pgettext("barbarians_building", [[‘Soft and supple.<br> And yet untouched by time and weather.<br> Rays of sun, wrought into eternity…’]])
+   return pgettext("frisians_building", "")
 end
 
 function building_helptext_lore_author()
    -- TRANSLATORS: Lore author helptext for a building
-   return pgettext("barbarians_building", [[Excerpt from ‘Our Treasures Underground’,<br> a traditional Barbarian song.]])
+   return pgettext("frisians_building", "")
 end
 
 function building_helptext_purpose()
    -- TRANSLATORS: Purpose helptext for a building
-   return pgettext("building", "Digs gold ore out of the ground in mountain terrain.")
+   return pgettext("building", "Digs iron ore out of the ground in mountain terrain.")
 end
 
 function building_helptext_note()
    -- TRANSLATORS: Note helptext for a building
-   return pgettext("barbarians_building", "This mine exploits all of the resource down to the deepest level. But even after having done so, it will still have a %s chance of finding some more gold ore."):bformat("10%")
+   return pgettext("frisians_building", "This mine exploits all of the resource down to the deepest level. But even after having done so, it will still have a %s chance of finding some more iron ore."):bformat("10%")
 end
 
 function building_helptext_performance()
    -- TRANSLATORS: Performance helptext for a building
-   return pgettext("barbarians_building", "If the food supply is steady, this mine can produce gold ore in 18.5 seconds on average.")
+   return pgettext("frisians_building", "Calculation needed")
 end

@@ -1,27 +1,27 @@
 function building_helptext_lore()
    -- TRANSLATORS: Lore helptext for a building
-   return pgettext("barbarians_building", "‘He who is strong shall neither forgive nor forget, but revenge injustice suffered – in the past and for all future.’")
+   return pgettext("frisians_building", "")
 end
 
 function building_helptext_lore_author()
    -- TRANSLATORS: Lore author helptext for a building
-   return pgettext("barbarians_building", "Chief Chat’Karuth in a speech to his army.")
+   return pgettext("frisians_building", "")
 end
 
 function building_helptext_purpose()
    -- TRANSLATORS: Purpose helptext for a building
    return
-      pgettext("barbarians_building", "Trains soldiers in ‘Attack’ and in ‘Health’.")
+      pgettext("frisians_building", "Trains soldiers in Attack up to level 3 as well as in Defence and Health to level 1.")
       .. " " ..
-      pgettext("barbarians_building", "Equips the soldiers with all necessary weapons and armor parts.")
+      pgettext("frisians_building", "Equips the soldiers with all necessary weapons and armour parts.")
 end
 
 function building_helptext_note()
    -- TRANSLATORS: Note helptext for a building
-   return pgettext("barbarians_building", "Barbarian soldiers cannot be trained in ‘Defense’ and will remain at their initial level.")
+   return pgettext("frisians_building", "Frisian soldiers cannot be trained in Evade and will remain at their initial level.")
 end
 
 function building_helptext_performance()
-   -- TRANSLATORS: Performance helptext for a building. Placeholders are for "4 minutes" and "40 seconds"
-   return pgettext("barbarians_building", "If all needed wares are delivered in time, a training camp can train one new soldier in attack and health to the final level in %1$s and %2$s on average."):bformat(ngettext("%d minute", "%d minutes", 4):bformat(4), ngettext("%d second", "%d seconds", 40):bformat(40))
+   -- TRANSLATORS: Performance helptext for a building. Placeholders are for "X minutes" and "Y seconds"
+   return pgettext("frisians_building", "Calculation needed")
 end

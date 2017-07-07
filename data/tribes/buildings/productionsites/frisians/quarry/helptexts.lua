@@ -13,15 +13,15 @@ end
 
 function building_helptext_purpose()
    -- TRANSLATORS: Purpose helptext for a building
-   return pgettext("barbarians_building", "Cuts raw pieces of granite out of rocks in the vicinity.")
+   return pgettext("frisians_building", "Cuts raw pieces of granite out of rocks in the vicinity.")
 end
 
 function building_helptext_note()
    -- TRANSLATORS: Note helptext for a building
-   return pgettext("barbarians_building", "The quarry needs rocks to cut within the work area.")
+   return pgettext("frisians_building", "The quarry needs rocks to cut within the work area.")
 end
 
 function building_helptext_performance()
    -- TRANSLATORS: Performance helptext for a building
-   return pgettext("barbarians_building", "The stonemason pauses %s before going back to work again."):bformat(ngettext("%d second", "%d seconds", 65):bformat(65))
+   return pgettext("frisians_building", "Calculation needed")
 end
