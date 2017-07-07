@@ -167,7 +167,7 @@ return {
             added = added + 1
          end
          if wh:get_wares("coal") < 100 then
-            wh:set_wares("coal", wh:get_wares("coal") + 5)
+            wh:set_wares("coal", wh:get_wares("coal") + 10)
             added = added + 1
          end
          if wh:get_wares("iron_ore") < 100 then
@@ -184,10 +184,6 @@ return {
          end
          if wh:get_wares("gold") < 50 then
             wh:set_wares("gold", wh:get_wares("gold") + 1)
-            added = added + 1
-         end
-         if wh:get_wares("clay") < 50 then
-            wh:set_wares("clay", wh:get_wares("clay") + 20)
             added = added + 1
          end
          if player:get_wares("barley") < 60 then

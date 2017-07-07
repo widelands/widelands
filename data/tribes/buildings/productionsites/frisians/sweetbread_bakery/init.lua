@@ -32,7 +32,9 @@ tribes:new_productionsite_type {
       },
    },
 
-   aihints = {},
+   aihints = {
+      prohibited_till = 1200
+   },
 
    working_positions = {
       frisians_baker = 1,

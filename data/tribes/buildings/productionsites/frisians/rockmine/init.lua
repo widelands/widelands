@@ -39,7 +39,7 @@ tribes:new_productionsite_type {
    aihints = {
       mines = "stones",
       mines_percent = 50,
-      prohibited_till = 1200
+      prohibited_till = 600
    },
 
    working_positions = {

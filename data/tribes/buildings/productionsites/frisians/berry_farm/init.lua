@@ -31,7 +31,7 @@ tribes:new_productionsite_type {
    aihints = {
       renews_map_resource = "fruit",
       space_consumer = true,
-      prohibited_till = 200
+      prohibited_till = 500
    },
 
    working_positions = {

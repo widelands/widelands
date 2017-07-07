@@ -32,7 +32,7 @@ tribes:new_productionsite_type {
    },
 
    aihints = {
-      forced_after = 900
+      forced_after = 400
    },
 
    working_positions = {

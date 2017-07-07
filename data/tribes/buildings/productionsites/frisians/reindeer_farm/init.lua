@@ -34,7 +34,8 @@ tribes:new_productionsite_type {
    },
 
    aihints = {
-      recruitment = true
+      recruitment = true,
+      forced_after = 500
    },
 
    working_positions = {

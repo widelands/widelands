@@ -20,6 +20,11 @@ function get_empire_tips()
    return tips
 end
 
+function get_frisian_tips()
+   include "txts/tips/frisians.lua"
+   return tips
+end
+
 function get_singleplayer_tips()
    include "txts/tips/singleplayer.lua"
    return tips
@@ -55,6 +60,9 @@ return {
       elseif (tribename == "empire") then
          text = text .. h2(_"Empire")
          text = text .. format_tips(get_empire_tips())
+      elseif (tribename == "frisians") then
+         text = text .. h2(_"Frisians")
+         text = text .. format_tips(get_frisian_tips())
       end
 
       set_textdomain("tribes_encyclopedia")

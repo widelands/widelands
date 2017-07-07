@@ -37,7 +37,10 @@ tribes:new_productionsite_type {
       },
    },
 
-   aihints = {},
+   aihints = {
+      prohibited_till = 700,
+      forced_after = 1000
+   },
 
    working_positions = {
       frisians_landlady = 1
