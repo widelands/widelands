@@ -53,7 +53,7 @@ void CmdLuaCoroutine::execute(Game& game) {
 		log("%s\n", e.what());
 		log("Send message to all players and pause game\n");
 		for (int i = 1; i <= game.map().get_nrplayers(); i++) {
-			std::unique_ptr<Message >msg(new Widelands::Message(
+			std::unique_ptr<Message> msg(new Widelands::Message(
 			   Message::Type::kGameLogic, game.get_gametime(), "Coroutine",
 			   "images/ui_basic/menu_help.png", "Lua Coroutine Failed",
 			   (boost::format("<rt><p font-size=12>%s</p></rt>") % e.what()).str()));

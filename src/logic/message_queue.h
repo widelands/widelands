@@ -36,10 +36,10 @@ struct MessageQueue {
 	friend class MapPlayersMessagesPacket;
 
 	MessageQueue() {
-		counts_[static_cast<int>(Message::Status::kNew)] = 0;       //  C++0x:
-		counts_[static_cast<int>(Message::Status::kRead)] = 0;      //  C++0x:
-		counts_[static_cast<int>(Message::Status::kArchived)] = 0;  //  C++0x:
-	}                                                              //  C++0x:
+		counts_[static_cast<int>(Message::Status::kNew)] = 0;
+		counts_[static_cast<int>(Message::Status::kRead)] = 0;
+		counts_[static_cast<int>(Message::Status::kArchived)] = 0;
+	}
 
 	~MessageQueue() {
 	}
@@ -58,7 +58,7 @@ struct MessageQueue {
 		return messages_.count(MessageId(i));
 	}
 
-	/// \returns a pointer to the message if it exists, otherwise 0.
+	/// \returns a pointer to the message if it exists, otherwise nullptr.
 	Message const* operator[](const MessageId& id) const {
 		assert_counts();
 		const auto it = messages_.find(MessageId(id));
