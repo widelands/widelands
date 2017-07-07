@@ -504,7 +504,7 @@ void GameClient::send_time() {
 	d->lasttimestamp_realtime = SDL_GetTicks();
 }
 
-void GameClient::syncreport() {
+void GameClient::sync_report_callback() {
 	assert(d->net != nullptr);
 	if (d->net->is_connected()) {
 		SendPacket s;
@@ -815,7 +815,7 @@ void GameClient::handle_packet(RecvPacket& packet) {
 			throw DisconnectException("SYNCREQUEST_WO_GAME");
 		int32_t const time = packet.signed_32();
 		d->time.receive(time);
-		d->game->enqueue_command(new CmdNetCheckSync(time, this));
+		d->game->enqueue_command(new CmdNetCheckSync(time, [this] { sync_report_callback(); }));
 		break;
 	}
 

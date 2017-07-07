@@ -375,10 +375,10 @@ int LuaPlayer::send_message(lua_State* L) {
 		}
 	}
 
-	MessageId const message =
-	   plr.add_message(game, *new Message(Message::Type::kScenario, game.get_gametime(), title, icon,
-	                                      heading, body, c, 0, st),
-	                   popup);
+	MessageId const message = plr.add_message(
+	   game, std::unique_ptr<Message>(new Message(Message::Type::kScenario, game.get_gametime(),
+	                                              title, icon, heading, body, c, 0, st)),
+	   popup);
 
 	return to_lua<LuaMessage>(L, new LuaMessage(player_number(), message));
 }

@@ -36,10 +36,7 @@ struct GameClientImpl;
  * This includes running the game setup screen and the actual game after
  * launch, as well as dealing with the actual network protocol.
  */
-struct GameClient : public GameController,
-                    public GameSettingsProvider,
-                    private SyncCallback,
-                    public ChatProvider {
+struct GameClient : public GameController, public GameSettingsProvider, public ChatProvider {
 	GameClient(const std::pair<NetAddress, NetAddress>& host,
 	           const std::string& playername,
 	           bool internet = false);
@@ -110,7 +107,7 @@ private:
 		return path + "~backup";
 	}
 
-	void syncreport() override;
+	void sync_report_callback();
 
 	void handle_packet(RecvPacket&);
 	void handle_network();

@@ -91,16 +91,16 @@ public:
 		return messages_;
 	}
 
-	/// Adds the message to the queue. Takes ownership of the message. Assumes
-	/// that it has been allocated in a separate memory block (not as a
-	/// component of an array or struct) with operator new, so that it can be
-	/// deallocated with operator delete.
-	MessageId add_message(Game&, Message&, bool popup = false);
+	/// Adds the message to the queue.
+	MessageId add_message(Game&, std::unique_ptr<Message> message, bool popup = false);
 
 	/// Like add_message, but if there has been a message from the same sender
 	/// in the last timeout milliseconds in a radius r around the coordinates
 	/// of m, the message deallocated instead.
-	MessageId add_message_with_timeout(Game&, Message&, uint32_t timeout, uint32_t radius);
+	MessageId add_message_with_timeout(Game&,
+	                                   std::unique_ptr<Message> message,
+	                                   uint32_t timeout,
+	                                   uint32_t radius);
 
 	/// Indicates that the object linked to the message has been removed
 	/// from the game. This implementation deletes the message.
