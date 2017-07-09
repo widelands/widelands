@@ -172,6 +172,11 @@ TribeDescr::TribeDescr(const LuaTable& table, const TribeBasicInfo& info, const 
 				}
 				buildings_.push_back(index);
 
+				// Register trainigsites
+				if (get_building_descr(index)->type() == MapObjectType::TRAININGSITE) {
+					trainingsites_.push_back(index);
+				}
+
 				// Register construction materials
 				for (const auto& build_cost : get_building_descr(index)->buildcost()) {
 					if (!is_construction_material(build_cost.first)) {
@@ -186,6 +191,40 @@ TribeDescr::TribeDescr(const LuaTable& table, const TribeBasicInfo& info, const 
 			} catch (const WException& e) {
 				throw GameDataError("Failed adding building '%s': %s", buildingname.c_str(), e.what());
 			}
+		}
+
+		// Set default trainingsites proportions for AI. Make sure that we get a sum of ca. 100
+		float trainingsites_without_percent = 0.f;
+		int used_percent = 0;
+		for (const DescriptionIndex& index : trainingsites_) {
+			const BuildingDescr& descr = *tribes_.get_building_descr(index);
+			if (descr.hints().trainingsites_max_percent() == 0) {
+				++trainingsites_without_percent;
+			} else {
+				used_percent += descr.hints().trainingsites_max_percent();
+			}
+		}
+		if (trainingsites_without_percent > 0.f && used_percent > 100) {
+			throw GameDataError(
+			   "Predefined training sites proportions add up to > 100%%: %d", used_percent);
+		} else if (trainingsites_without_percent > 0) {
+			const int percent_to_use = std::ceil((100 - used_percent) / trainingsites_without_percent);
+			if (percent_to_use < 1) {
+				throw GameDataError("Training sites without predefined proportions add up to < 1%% and "
+				                    "will never be built: %d",
+				                    used_percent);
+			}
+			for (const DescriptionIndex& index : trainingsites_) {
+				BuildingDescr* descr = tribes_.get_mutable_building_descr(index);
+				if (descr->hints().trainingsites_max_percent() == 0) {
+					descr->set_hints_trainingsites_max_percent(percent_to_use);
+					used_percent += percent_to_use;
+				}
+			}
+		}
+		if (used_percent < 100) {
+			throw GameDataError(
+			   "Final training sites proportions add up to < 100%%: %d", used_percent);
 		}
 
 		// Special types
@@ -205,6 +244,12 @@ TribeDescr::TribeDescr(const LuaTable& table, const TribeBasicInfo& info, const 
 		headquarters_ = add_special_building(table.get_string("headquarters"));
 		port_ = add_special_building(table.get_string("port"));
 		barracks_ = add_special_building(table.get_string("barracks"));
+		bakery_ = add_special_building(table.get_string("bakery"));
+
+		ironore_ = add_special_ware(table.get_string("ironore"));
+		rawlog_ = add_special_ware(table.get_string("rawlog"));
+		refinedlog_ = add_special_ware(table.get_string("refinedlog"));
+		granite_ = add_special_ware(table.get_string("granite"));
 
 	} catch (const GameDataError& e) {
 		throw GameDataError("tribe %s: %s", name_.c_str(), e.what());
@@ -222,9 +267,6 @@ const std::string& TribeDescr::descname() const {
 	return descname_;
 }
 
-size_t TribeDescr::get_nrbuildings() const {
-	return buildings_.size();
-}
 size_t TribeDescr::get_nrwares() const {
 	return wares_.size();
 }
@@ -332,6 +374,30 @@ DescriptionIndex TribeDescr::port() const {
 DescriptionIndex TribeDescr::barracks() const {
 	assert(tribes_.building_exists(barracks_));
 	return barracks_;
+}
+DescriptionIndex TribeDescr::bakery() const {
+	assert(tribes_.building_exists(bakery_));
+	return bakery_;
+}
+DescriptionIndex TribeDescr::ironore() const {
+	assert(tribes_.ware_exists(ironore_));
+	return ironore_;
+}
+DescriptionIndex TribeDescr::rawlog() const {
+	assert(tribes_.ware_exists(rawlog_));
+	return rawlog_;
+}
+DescriptionIndex TribeDescr::refinedlog() const {
+	assert(tribes_.ware_exists(refinedlog_));
+	return refinedlog_;
+}
+DescriptionIndex TribeDescr::granite() const {
+	assert(tribes_.ware_exists(granite_));
+	return granite_;
+}
+
+const std::vector<DescriptionIndex>& TribeDescr::trainingsites() const {
+	return trainingsites_;
 }
 const std::vector<DescriptionIndex>& TribeDescr::worker_types_without_cost() const {
 	return worker_types_without_cost_;
@@ -468,6 +534,17 @@ DescriptionIndex TribeDescr::add_special_building(const std::string& buildingnam
 	} catch (const WException& e) {
 		throw GameDataError(
 		   "Failed adding special building '%s': %s", buildingname.c_str(), e.what());
+	}
+}
+DescriptionIndex TribeDescr::add_special_ware(const std::string& warename) {
+	try {
+		DescriptionIndex ware = tribes_.safe_ware_index(warename);
+		if (!has_ware(ware)) {
+			throw GameDataError("This tribe doesn't have the ware '%s'", warename.c_str());
+		}
+		return ware;
+	} catch (const WException& e) {
+		throw GameDataError("Failed adding special ware '%s': %s", warename.c_str(), e.what());
 	}
 }
 }

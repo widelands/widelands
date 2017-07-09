@@ -139,13 +139,6 @@ void Game::sync_reset() {
 }
 
 /**
- * Returns true if cheat codes have been activated (single-player only)
- */
-bool Game::get_allow_cheats() {
-	return true;
-}
-
-/**
  * \return a pointer to the \ref InteractivePlayer if any.
  * \note This function may return 0 (in particular, it will return 0 during
  * playback or if player is spectator)
@@ -727,7 +720,6 @@ void Game::send_player_change_soldier_capacity(Building& b, int32_t const val) {
 	   *new CmdChangeSoldierCapacity(get_gametime(), b.owner().player_number(), b, val));
 }
 
-/////////////////////// TESTING STUFF
 void Game::send_player_enemyflagaction(const Flag& flag,
                                        PlayerNumber const who_attacks,
                                        uint32_t const num_soldiers) {

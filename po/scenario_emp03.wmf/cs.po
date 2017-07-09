@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-06-02 11:07+0000\n"
+"POT-Creation-Date: 2017-06-23 12:21+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Milan Fašina <matrix17@seznam.cz>, 2017\n"
 "Language-Team: Czech (https://www.transifex.com/widelands/teams/35159/cs/)\n"
@@ -145,6 +145,8 @@ msgid ""
 "Now let’s turn all the wheat into wool (at least 50 bales) and then use the "
 "wool to weave cloth in order to build a ship."
 msgstr ""
+"Teď proměníme všechnu pšenici na vlnu (alespoň 50 balíků) a pak z vlny "
+"upředeme látku na stavbu lodi."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:112
 msgid "Build 2 ports on distant islands"
@@ -161,12 +163,16 @@ msgid ""
 "We should explore the island in the south. Use an expedition to build a port"
 " there. Afterwards, let’s try to find some mining resources."
 msgstr ""
+"Měli bychom prozkoumat ostrov na jihu. Využij výpravu, aby jsi tam postavil "
+"přístav. Následně se pokus najít nějaké nerostné suroviny."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:117
 msgid ""
 "We should send a ship nothwards to gather some intelligence about the "
 "Barbarians. Try to build a port on the island and found an outpost."
 msgstr ""
+"Měli bychom poslat loď na sever, abychom získali informace o barbarech. "
+"Pokus se na tom ostrově postavit přístav a hlásku."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:123
 msgid "Produce gold to send out expeditions"
@@ -285,6 +291,9 @@ msgid ""
 "taking in more and more water. We would be glad to survive this black night "
 "with barely more than our lives."
 msgstr ""
+"Naše loď je těžce poškozena. Stěžeň se zlomil a spadl do vody a loď nabírá "
+"čím dál více vody. Měli bychom být rádi, že jsme si té temné noci zachránili"
+" vlastní životy."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:198
 msgid "Shipwrecked Again"
@@ -371,7 +380,7 @@ msgstr "Šetři surovinami"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:242
 msgid "Saledus is nodding in agreement…"
-msgstr ""
+msgstr "Saledus souhlasně přikyvuje... "
 
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:244
@@ -397,6 +406,8 @@ msgid ""
 "Sire, I saw that the construction of the outpost was completed, so I have "
 "assigned some of my best soldiers to it to keep the watch."
 msgstr ""
+"Pane, všiml jsem si, že je stavba hlásky dokončena a tak jsem tam poslal na "
+"hlídku pár mých nejlepších mužů."
 
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:259
@@ -428,6 +439,8 @@ msgid ""
 "I think we should try to reveal some building space by cutting up all the "
 "rocks in a quarry."
 msgstr ""
+"Myslím, že bychom měli uvolnit stavební místa odstraněním všech kamenů v "
+"lomu."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:274
@@ -452,6 +465,8 @@ msgid ""
 "Good news from the people, Lutius. I got the message that our first quarry "
 "has started its work today."
 msgstr ""
+"Lidé nám sdělili dobré zprávy, Lutiusi. Dostala se ke mně zpráva, že dnes "
+"začal těžit náš první lom."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:288
@@ -459,6 +474,8 @@ msgid ""
 "Perhaps it would be a good idea to wait until it has cleared some space and "
 "then build up a basic construction material industry."
 msgstr ""
+"Možná by bylo dobré počkat až uděláme prostor a pak postavit budovy na "
+"produkci základních věcí."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:296
 msgid "Amalea’s Recommendations"
@@ -498,7 +515,7 @@ msgstr "Amalea vypadá šťastně"
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:316
 msgid "I have excellent progress to report now."
-msgstr ""
+msgstr "Zrovna se ke mně donesly výborné zprávy."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:319

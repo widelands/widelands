@@ -24,6 +24,7 @@
 #include <vector>
 
 #include "graphic/playercolor.h"
+#include "logic/player_end_result.h"
 #include "logic/widelands.h"
 
 namespace Widelands {
@@ -31,13 +32,6 @@ namespace Widelands {
 class EditorGameBase;
 class Player;
 class Player;
-
-enum class PlayerEndResult : uint8_t {
-	PLAYER_LOST = 0,
-	PLAYER_WON = 1,
-	PLAYER_RESIGNED = 2,
-	UNDEFINED = 255
-};
 
 /**
  * Hold data once a player left the game, or on game ends.
@@ -57,7 +51,7 @@ struct PlayerEndStatus {
 
 class PlayersManager {
 public:
-	PlayersManager(EditorGameBase& egbase);
+	explicit PlayersManager(EditorGameBase& egbase);
 	virtual ~PlayersManager();
 
 	void cleanup();

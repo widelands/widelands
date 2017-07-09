@@ -28,13 +28,11 @@
 #include "base/macros.h"
 #include "scripting/lua_table.h"
 
-enum class TrainingSiteType : uint8_t { kNoTS = 0, kBasic = 1, kAdvanced = 2 };
-
 /// This struct is used to read out the data given in [aihints] section of a
 /// buildings conf file. It is used to tell the computer player about the
 /// special properties of a building.
 struct BuildingHints {
-	BuildingHints(std::unique_ptr<LuaTable>);
+	explicit BuildingHints(std::unique_ptr<LuaTable>);
 	~BuildingHints() {
 	}
 
@@ -95,6 +93,10 @@ struct BuildingHints {
 		return prohibited_till_;
 	}
 
+	uint32_t basic_amount() const {
+		return basic_amount_;
+	}
+
 	uint32_t get_forced_after() const {
 		return forced_after_;
 	}
@@ -111,9 +113,9 @@ struct BuildingHints {
 		return weak_ai_limit_;
 	}
 
-	TrainingSiteType get_trainingsite_type() const {
-		return trainingsite_type_;
-	}
+	void set_trainingsites_max_percent(int percent);
+
+	uint8_t trainingsites_max_percent() const;
 
 private:
 	std::string renews_map_resource_;
@@ -129,11 +131,12 @@ private:
 	bool mountain_conqueror_;
 	bool shipyard_;
 	int32_t prohibited_till_;
+	uint32_t basic_amount_;
 	int32_t forced_after_;
 	int8_t mines_percent_;
 	int16_t very_weak_ai_limit_;
 	int16_t weak_ai_limit_;
-	TrainingSiteType trainingsite_type_;
+	int trainingsites_max_percent_;
 
 	DISALLOW_COPY_AND_ASSIGN(BuildingHints);
 };

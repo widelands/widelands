@@ -32,6 +32,7 @@
 #include "logic/objective.h"
 #include "logic/path.h"
 #include "logic/player.h"
+#include "logic/player_end_result.h"
 #include "logic/playersmanager.h"
 #include "scripting/globals.h"
 #include "scripting/lua_interface.h"
@@ -374,10 +375,10 @@ int LuaPlayer::send_message(lua_State* L) {
 		}
 	}
 
-	MessageId const message =
-	   plr.add_message(game, *new Message(Message::Type::kScenario, game.get_gametime(), title, icon,
-	                                      heading, body, c, 0, st),
-	                   popup);
+	MessageId const message = plr.add_message(
+	   game, std::unique_ptr<Message>(new Message(Message::Type::kScenario, game.get_gametime(),
+	                                              title, icon, heading, body, c, 0, st)),
+	   popup);
 
 	return to_lua<LuaMessage>(L, new LuaMessage(player_number(), message));
 }
@@ -453,9 +454,6 @@ int LuaPlayer::message_box(lua_State* L) {
 		lua_pop(L, 1);
 	}
 #undef CHECK_ARG
-
-	std::string title = luaL_checkstring(L, 2);
-	std::string body = luaL_checkstring(L, 3);
 
 	uint32_t cspeed = game.game_controller()->desired_speed();
 	game.game_controller()->set_desired_speed(0);
@@ -1238,8 +1236,6 @@ int LuaMessage::get_status(lua_State* L) {
 	case Message::Status::kArchived:
 		lua_pushstring(L, "archived");
 		break;
-	default:
-		NEVER_HERE();
 	}
 	return 1;
 }

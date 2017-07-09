@@ -181,7 +181,7 @@ struct ProductionProgram {
 
 		/// Tests whether the economy needs a ware of type ware_type.
 		struct EconomyNeedsWare : public Condition {
-			EconomyNeedsWare(const DescriptionIndex& i) : ware_type(i) {
+			explicit EconomyNeedsWare(const DescriptionIndex& i) : ware_type(i) {
 			}
 			bool evaluate(const ProductionSite&) const override;
 			std::string description(const Tribes& tribes) const override;
@@ -193,7 +193,7 @@ struct ProductionProgram {
 
 		/// Tests whether the economy needs a worker of type worker_type.
 		struct EconomyNeedsWorker : public Condition {
-			EconomyNeedsWorker(const DescriptionIndex& i) : worker_type(i) {
+			explicit EconomyNeedsWorker(const DescriptionIndex& i) : worker_type(i) {
 			}
 			bool evaluate(const ProductionSite&) const override;
 			std::string description(const Tribes& tribes) const override;
@@ -303,7 +303,7 @@ struct ProductionProgram {
 	///
 	/// Blocks the execution of the program for the specified duration.
 	struct ActSleep : public Action {
-		ActSleep(char* parameters);
+		explicit ActSleep(char* parameters);
 		void execute(Game&, ProductionSite&) const override;
 
 	private:
@@ -321,7 +321,7 @@ struct ProductionProgram {
 	///
 	/// Ends the program if the feature is not enabled.
 	struct ActCheckMap : public Action {
-		ActCheckMap(char* parameters);
+		explicit ActCheckMap(char* parameters);
 		void execute(Game&, ProductionSite&) const override;
 
 	private:
@@ -460,7 +460,7 @@ struct ProductionProgram {
 	};
 
 	struct ActCheckSoldier : public Action {
-		ActCheckSoldier(char* parameters);
+		explicit ActCheckSoldier(char* parameters);
 		void execute(Game&, ProductionSite&) const override;
 
 	private:
@@ -469,7 +469,7 @@ struct ProductionProgram {
 	};
 
 	struct ActTrain : public Action {
-		ActTrain(char* parameters);
+		explicit ActTrain(char* parameters);
 		void execute(Game&, ProductionSite&) const override;
 
 	private:
@@ -493,7 +493,7 @@ struct ProductionProgram {
 	/// Plays the specified sound effect with the specified priority. Whether the
 	/// sound effect is actually played is determined by the sound handler.
 	struct ActPlaySound : public Action {
-		ActPlaySound(char* parameters);
+		explicit ActPlaySound(char* parameters);
 		void execute(Game&, ProductionSite&) const override;
 
 	private:

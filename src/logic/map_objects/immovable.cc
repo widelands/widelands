@@ -986,7 +986,7 @@ ImmovableProgram::ActSeed::ActSeed(char* parameters, ImmovableDescr& descr) {
 				probability = value;
 				//  fallthrough
 			}
-			/* no break */
+				FALLS_THROUGH;
 			case '\0':
 				goto end;
 			default:
@@ -1227,8 +1227,7 @@ PlayerImmovable::PlayerImmovable(const MapObjectDescr& mo_descr)
 */
 PlayerImmovable::~PlayerImmovable() {
 	if (workers_.size())
-		log("PlayerImmovable::~PlayerImmovable: %lu workers left!\n",
-		    static_cast<long unsigned int>(workers_.size()));
+		log("PlayerImmovable::~PlayerImmovable: %" PRIuS " workers left!\n", workers_.size());
 }
 
 /**
@@ -1329,10 +1328,14 @@ void PlayerImmovable::receive_worker(Game&, Worker& worker) {
 void PlayerImmovable::log_general_info(const EditorGameBase& egbase) {
 	BaseImmovable::log_general_info(egbase);
 
+	FORMAT_WARNINGS_OFF;
 	molog("this: %p\n", this);
 	molog("owner_: %p\n", owner_);
+	FORMAT_WARNINGS_ON;
 	molog("player_number: %i\n", owner_->player_number());
+	FORMAT_WARNINGS_OFF;
 	molog("economy_: %p\n", economy_);
+	FORMAT_WARNINGS_ON;
 }
 
 constexpr uint8_t kCurrentPacketVersionPlayerImmovable = 1;

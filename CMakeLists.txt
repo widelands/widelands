@@ -127,10 +127,15 @@ if("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
   wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wno-padded")
   wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wno-sign-conversion")
   wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wno-missing-noreturn")
-  wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wno-implicit-fallthrough")
+
+  # It is impossible to write code that both GCC and Clang will like,
+  # so we have to switch off the warning for one of them.
+  # http://clang-developers.42468.n3.nabble.com/Question-on-Wswitch-enum-td4025927.html
+  wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wno-switch-enum")
 
   # TODO(sirver): weak-vtables should be enabled, but leads to lot of errors right now.
   wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wno-weak-vtables")
+
   wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wno-unreachable-code")
   wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wno-documentation")
 
@@ -143,6 +148,9 @@ else()
   if(WIN32)
     # This is needed for getenv().
     wl_add_flag(WL_GENERIC_CXX_FLAGS "-std=gnu++11")
+  else()
+    # SDL and MinGW both declare 'unsigned int __builtin_ia32_crc32qi(unsigned int, unsigned char)', resulting in lots of warnings. So, we can't have this flag in Windows.
+    wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wredundant-decls")
   endif()
 
   # Because of: https://svn.boost.org/trac/boost/ticket/9240.
@@ -165,7 +173,6 @@ else()
   wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Woverlength-strings")
   wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wpacked")
   wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wpointer-arith")
-  wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wredundant-decls")
   wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wsign-promo")
   wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wsync-nand")
   wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wtrampolines")
@@ -182,7 +189,7 @@ wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Werror=shadow")
 wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Werror=uninitialized")
 
 IF (WIN32)
-  add_definitions(-DMINGW_HAS_SECURE_API -DWIN32_LEAN_AND_MEAN)
+  add_definitions(-DMINGW_HAS_SECURE_API -DWIN32_LEAN_AND_MEAN -D__STDC_FORMAT_MACROS -D__USE_MINGW_ANSI_STDIO)
   if (CMAKE_SIZEOF_VOID_P EQUAL 4)
     set (CMAKE_EXE_LINKER_FLAGS "-Wl,--large-address-aware" CACHE STRING "Set by widelands CMakeLists.txt" FORCE)
     message (STATUS "Enabled large address awareness on mingw32")

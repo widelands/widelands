@@ -431,7 +431,9 @@ void Economy::remove_request(Request& req) {
 	RequestList::iterator const it = std::find(requests_.begin(), requests_.end(), &req);
 
 	if (it == requests_.end()) {
+		FORMAT_WARNINGS_OFF;
 		log("WARNING: remove_request(%p) not in list\n", &req);
+		FORMAT_WARNINGS_ON;
 		return;
 	}
 

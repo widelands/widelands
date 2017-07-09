@@ -63,7 +63,6 @@ public:
 	const std::string& name() const;
 	const std::string& descname() const;
 
-	size_t get_nrbuildings() const;
 	size_t get_nrwares() const;
 	size_t get_nrworkers() const;
 
@@ -105,6 +104,13 @@ public:
 	DescriptionIndex headquarters() const;
 	DescriptionIndex port() const;
 	DescriptionIndex barracks() const;
+	DescriptionIndex bakery() const;
+	DescriptionIndex ironore() const;
+	DescriptionIndex rawlog() const;
+	DescriptionIndex refinedlog() const;
+	DescriptionIndex granite() const;
+
+	const std::vector<DescriptionIndex>& trainingsites() const;
 	const std::vector<DescriptionIndex>& worker_types_without_cost() const;
 
 	uint32_t frontier_animation() const;
@@ -157,6 +163,8 @@ private:
 	DescriptionIndex add_special_worker(const std::string& workername);
 	// Helper function for adding a special building type (port etc.)
 	DescriptionIndex add_special_building(const std::string& buildingname);
+	// Helper function to identify special wares across tribes (iron ore etc.)
+	DescriptionIndex add_special_ware(const std::string& warename);
 
 	const std::string name_;
 	const std::string descname_;
@@ -175,7 +183,7 @@ private:
 	std::set<DescriptionIndex> wares_;
 	// The wares that are used by construction sites
 	std::set<DescriptionIndex> construction_materials_;
-	// Special units
+	// Special units. Some of them are used by the engine, some are only used by the AI.
 	DescriptionIndex builder_;       // The builder for this tribe
 	DescriptionIndex carrier_;       // The basic carrier for this tribe
 	DescriptionIndex carrier2_;      // Additional carrier for busy roads
@@ -185,7 +193,13 @@ private:
 	DescriptionIndex headquarters_;  // The tribe's default headquarters, needed by the editor
 	DescriptionIndex port_;          // The port that this tribe uses
 	DescriptionIndex barracks_;      // The barracks to create soldiers
+	DescriptionIndex bakery_;        // The bakery to prepare bread
+	DescriptionIndex ironore_;       // Iron ore
+	DescriptionIndex rawlog_;        // Simple log
+	DescriptionIndex refinedlog_;    // Refined log, e.g. wood or blackwood
+	DescriptionIndex granite_;       // Granite
 	std::vector<DescriptionIndex> worker_types_without_cost_;
+	std::vector<DescriptionIndex> trainingsites_;
 	// Order and positioning of wares in the warehouse display
 	WaresOrder wares_order_;
 	WaresOrderCoords wares_order_coords_;

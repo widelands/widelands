@@ -405,9 +405,10 @@ bool GameMessageMenu::handle_key(bool down, SDL_Keysym code) {
 			return true;
 		case SDL_SCANCODE_KP_PERIOD:
 		case SDLK_KP_PERIOD:
-			if (code.mod & KMOD_NUM)
+			if (code.mod & KMOD_NUM) {
 				break;
-		/* no break */
+			}
+			FALLS_THROUGH;
 		default:
 			break;  // not handled
 		}
@@ -554,7 +555,7 @@ void GameMessageMenu::set_filter_messages_tooltips() {
 /**
  * Get the filename for a message category's icon
  */
-std::string GameMessageMenu::display_message_type_icon(Widelands::Message message) {
+std::string GameMessageMenu::display_message_type_icon(const Widelands::Message& message) {
 	switch (message.message_type_category()) {
 	case Widelands::Message::Type::kGeologists:
 		return "images/wui/fieldaction/menu_geologist.png";

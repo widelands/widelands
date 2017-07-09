@@ -16,8 +16,19 @@ std::unique_ptr<NetClient> NetClient::connect(const NetAddress& host) {
 }
 
 NetClient::~NetClient() {
-	if (is_connected())
+	if (is_connected()) {
 		close();
+	}
+}
+
+bool NetClient::get_remote_address(NetAddress* addr) const {
+	if (!is_connected()) {
+		return false;
+	}
+	boost::asio::ip::tcp::endpoint remote = socket_.remote_endpoint();
+	addr->ip = remote.address();
+	addr->port = remote.port();
+	return true;
 }
 
 bool NetClient::is_connected() const {
@@ -25,8 +36,9 @@ bool NetClient::is_connected() const {
 }
 
 void NetClient::close() {
-	if (!is_connected())
+	if (!is_connected()) {
 		return;
+	}
 	boost::system::error_code ec;
 	boost::asio::ip::tcp::endpoint remote = socket_.remote_endpoint(ec);
 	if (!ec) {
@@ -40,8 +52,9 @@ void NetClient::close() {
 }
 
 bool NetClient::try_receive(RecvPacket* packet) {
-	if (!is_connected())
+	if (!is_connected()) {
 		return false;
+	}
 
 	uint8_t buffer[kNetworkBufferSize];
 	boost::system::error_code ec;
@@ -64,12 +77,18 @@ bool NetClient::try_receive(RecvPacket* packet) {
 }
 
 void NetClient::send(const SendPacket& packet) {
-	if (!is_connected())
+	if (!is_connected()) {
 		return;
+	}
 
 	boost::system::error_code ec;
+#ifdef NDEBUG
+	boost::asio::write(socket_, boost::asio::buffer(packet.get_data(), packet.get_size()), ec);
+#else
 	size_t written =
 	   boost::asio::write(socket_, boost::asio::buffer(packet.get_data(), packet.get_size()), ec);
+#endif
+
 	// TODO(Notabilis): This one is an assertion of mine, I am not sure if it will hold
 	// If it doesn't, set the socket to blocking before writing
 	// If it does, remove this comment after build 20
@@ -95,5 +114,7 @@ NetClient::NetClient(const NetAddress& host)
 		socket_.non_blocking(true);
 	} else {
 		log("failed.\n");
+		socket_.close();
+		assert(!is_connected());
 	}
 }

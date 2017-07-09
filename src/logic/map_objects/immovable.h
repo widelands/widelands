@@ -81,7 +81,7 @@ struct BaseImmovable : public MapObject {
 		BIG        ///< big building
 	};
 
-	BaseImmovable(const MapObjectDescr&);
+	explicit BaseImmovable(const MapObjectDescr&);
 
 	virtual int32_t get_size() const = 0;
 	virtual bool get_passable() const = 0;
@@ -329,7 +329,7 @@ private:
  * also adjusted automatically.
  */
 struct PlayerImmovable : public BaseImmovable {
-	PlayerImmovable(const MapObjectDescr&);
+	explicit PlayerImmovable(const MapObjectDescr&);
 	virtual ~PlayerImmovable();
 
 	Player* get_owner() const {

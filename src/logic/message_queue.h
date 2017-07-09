@@ -22,6 +22,7 @@
 
 #include <cassert>
 #include <map>
+#include <memory>
 
 #include "base/macros.h"
 #include "logic/message.h"
@@ -29,39 +30,39 @@
 
 namespace Widelands {
 
-struct MessageQueue : private std::map<MessageId, Message*> {
+struct MessageQueue {
+	using MessageMap = std::map<MessageId, std::unique_ptr<Message>>;
+
 	friend class MapPlayersMessagesPacket;
 
 	MessageQueue() {
-		counts_[static_cast<int>(Message::Status::kNew)] = 0;       //  C++0x:
-		counts_[static_cast<int>(Message::Status::kRead)] = 0;      //  C++0x:
-		counts_[static_cast<int>(Message::Status::kArchived)] = 0;  //  C++0x:
-	}                                                              //  C++0x:
+		counts_[static_cast<int>(Message::Status::kNew)] = 0;
+		counts_[static_cast<int>(Message::Status::kRead)] = 0;
+		counts_[static_cast<int>(Message::Status::kArchived)] = 0;
+	}
 
 	~MessageQueue() {
-		while (size()) {
-			delete begin()->second;
-			erase(begin());
-		}
 	}
 
 	//  Make some selected inherited members public.
-	MessageQueue::const_iterator begin() const {
-		return std::map<MessageId, Message*>::begin();
+	//  TODO(sirver): This is weird design. Instead pass out a const ref& to
+	//  'messages_'?
+	MessageMap::const_iterator begin() const {
+		return messages_.begin();
 	}
-	MessageQueue::const_iterator end() const {
-		return std::map<MessageId, Message*>::end();
+	MessageMap::const_iterator end() const {
+		return messages_.end();
 	}
-	size_type count(uint32_t const i) const {
+	size_t count(uint32_t const i) const {
 		assert_counts();
-		return std::map<MessageId, Message*>::count(MessageId(i));
+		return messages_.count(MessageId(i));
 	}
 
-	/// \returns a pointer to the message if it exists, otherwise 0.
+	/// \returns a pointer to the message if it exists, otherwise nullptr.
 	Message const* operator[](const MessageId& id) const {
 		assert_counts();
-		MessageQueue::const_iterator const it = find(MessageId(id));
-		return it != end() ? it->second : nullptr;
+		const auto it = messages_.find(MessageId(id));
+		return it != end() ? it->second.get() : nullptr;
 	}
 
 	/// \returns the number of messages with the given status.
@@ -71,20 +72,14 @@ struct MessageQueue : private std::map<MessageId, Message*> {
 		return counts_[static_cast<int>(status)];
 	}
 
-	/// Adds the message. Takes ownership of the message. Assumes that it has
-	/// been allocated in a separate memory block (not as a component of an
-	/// array or struct) with operator new, so that it can be deallocated with
-	/// operator delete.
-	///
 	/// \returns the id of the added message.
 	///
 	/// The loading code calls this function to add messages form the map file.
-	MessageId add_message(Message& message) {
+	MessageId add_message(std::unique_ptr<Message> message) {
 		assert_counts();
-		assert(static_cast<int>(message.status()) < 3);
-		++counts_[static_cast<int>(message.status())];
-		insert(std::map<MessageId, Message*>::end(),
-		       std::pair<MessageId, Message*>(++current_message_id_, &message));
+		assert(static_cast<int>(message->status()) < 3);
+		++counts_[static_cast<int>(message->status())];
+		messages_[++current_message_id_] = std::move(message);
 		assert_counts();
 		return current_message_id_;
 	}
@@ -93,10 +88,10 @@ struct MessageQueue : private std::map<MessageId, Message*> {
 	void set_message_status(const MessageId& id, Message::Status const status) {
 		assert_counts();
 		assert(static_cast<int>(status) < 3);
-		MessageQueue::iterator const it = find(id);
-		if (it != end()) {
+		const auto it = messages_.find(id);
+		if (it != messages_.end()) {
 			Message& message = *it->second;
-			assert(static_cast<int>(it->second->status()) < 3);
+			assert(static_cast<int>(message.status()) < 3);
 			assert(counts_[static_cast<int>(message.status())]);
 			--counts_[static_cast<int>(message.status())];
 			++counts_[static_cast<int>(message.set_status(status))];
@@ -108,8 +103,8 @@ struct MessageQueue : private std::map<MessageId, Message*> {
 	/// Assumes that a message with the given id exists.
 	void delete_message(const MessageId& id) {
 		assert_counts();
-		MessageQueue::iterator const it = find(id);
-		if (it == end()) {
+		const auto it = messages_.find(id);
+		if (it == messages_.end()) {
 			// Messages can be deleted when the linked MapObject is removed. Two delete commands
 			// will be executed, and the message will not be present for the second one.
 			// So we assume here that the message was removed from an earlier delete cmd.
@@ -119,8 +114,7 @@ struct MessageQueue : private std::map<MessageId, Message*> {
 		assert(static_cast<int>(message.status()) < 3);
 		assert(counts_[static_cast<int>(message.status())]);
 		--counts_[static_cast<int>(message.status())];
-		delete &message;
-		erase(it);
+		messages_.erase(it);
 		assert_counts();
 	}
 
@@ -133,7 +127,7 @@ struct MessageQueue : private std::map<MessageId, Message*> {
 	/// file/savegame but the simulation has not started to run yet.
 	bool is_continuous() const {
 		assert_counts();
-		return current_message_id().value() == size();
+		return current_message_id().value() == messages_.size();
 	}
 
 private:
@@ -147,9 +141,11 @@ private:
 		counts_[static_cast<int>(Message::Status::kNew)] = 0;
 		counts_[static_cast<int>(Message::Status::kRead)] = 0;
 		counts_[static_cast<int>(Message::Status::kArchived)] = 0;
-		std::map<MessageId, Message*>::clear();
+		messages_.clear();
 		assert_counts();
 	}
+
+	MessageMap messages_;
 
 	/// The id of the most recently added message, or null if none has been
 	/// added yet.
@@ -160,7 +156,7 @@ private:
 	uint32_t counts_[3];
 
 	void assert_counts() const {
-		assert(size() ==
+		assert(messages_.size() ==
 		       counts_[static_cast<int>(Message::Status::kNew)] +
 		          counts_[static_cast<int>(Message::Status::kRead)] +
 		          counts_[static_cast<int>(Message::Status::kArchived)]);

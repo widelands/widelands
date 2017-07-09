@@ -81,7 +81,7 @@ const char* gl_error_to_string(const GLenum err) {
 // Thin wrapper around a Shader object to ensure proper cleanup.
 class Shader {
 public:
-	Shader(GLenum type);
+	explicit Shader(GLenum type);
 	~Shader();
 
 	GLuint object() const {

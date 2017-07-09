@@ -6,7 +6,6 @@
 -- here. Pull that out into a separate script and reuse.
 
 include "scripting/coroutine.lua" -- for sleep
-include "scripting/formatting.lua"
 include "scripting/messages.lua"
 include "scripting/table.lua"
 include "scripting/win_conditions/win_condition_functions.lua"
@@ -179,10 +178,9 @@ return {
       local function _status(points, has_had)
          local msg = ""
          for i=1,#points do
-            msg = msg .. "\n"
             if (has_had == "has") then
                msg = msg ..
-                  listitem_bullet(
+                  li(
                      (wc_has_territory):bformat(
                         points[i][1],
                         _percent(points[i][2], #fields),
@@ -190,7 +188,7 @@ return {
                         #fields))
             else
                msg = msg ..
-                  listitem_bullet(
+                  li(
                      (wc_had_territory):bformat(
                         points[i][1],
                         _percent(points[i][2], #fields),
@@ -204,17 +202,15 @@ return {
 
       local function _send_state(points)
          set_textdomain("win_conditions")
-         local msg1 = (_"%s owns more than half of the map’s area."):format(currentcandidate)
-         msg1 = msg1 .. "<br>"
-         msg1 = msg1 .. (ngettext("You’ve still got %i minute to prevent a victory.",
+         local msg1 = p(_"%s owns more than half of the map’s area."):format(currentcandidate)
+         msg1 = msg1 .. p(ngettext("You’ve still got %i minute to prevent a victory.",
                    "You’ve still got %i minutes to prevent a victory.",
                    remaining_time // 60))
                :format(remaining_time // 60)
          msg1 = p(msg1)
 
-         local msg2 = _"You own more than half of the map’s area."
-         msg2 = msg2 .. "<br>"
-         msg2 = msg2 .. (ngettext("Keep it for %i more minute to win the game.",
+         local msg2 = p(_"You own more than half of the map’s area.")
+         msg2 = msg2 .. p(ngettext("Keep it for %i more minute to win the game.",
                    "Keep it for %i more minutes to win the game.",
                    remaining_time // 60))
                :format(remaining_time // 60)
@@ -225,9 +221,9 @@ return {
             if remaining_time < remaining_max_time and _maxpoints(points) > ( #fields / 2 ) then
                if candidateisteam and currentcandidate == team_str:format(pl.team)
                   or not candidateisteam and currentcandidate == pl.name then
-                  msg = msg .. msg2 .. "\n\n"
+                  msg = msg .. msg2 .. vspace(8)
                else
-                  msg = msg .. msg1 .. "\n\n"
+                  msg = msg .. msg1 .. vspace(8)
                end
                -- TRANSLATORS: Refers to "You own more than half of the map’s area. Keep it for x more minute(s) to win the game."
                msg = msg .. p((ngettext("Otherwise the game will end in %i minute.",
@@ -240,10 +236,8 @@ return {
                             remaining_max_time // 60))
                   :format(remaining_max_time // 60))
             end
-            msg = msg .. "\n\n"
-            msg = msg .. "</rt>" .. rt(game_status.body) .. "<rt>"
-            msg = msg .. _status(points, "has")
-            send_message(pl, game_status.title, rt(msg), {popup = true})
+            msg = msg .. vspace(8) .. game_status.body .. _status(points, "has")
+            send_message(pl, game_status.title, msg, {popup = true})
          end
       end
 
@@ -295,10 +289,10 @@ return {
          for i=1,#points do
             if points[i][1] == team_str:format(pl.team) or points[i][1] == pl.name then
                if points[i][2] >= maxpoints then
-                  pl:send_message(won_game_over.title, wonmsg .. rt(_status(points, "had")))
+                  pl:send_message(won_game_over.title, wonmsg .. _status(points, "had"))
                   wl.game.report_result(pl, 1, make_extra_data(pl, wc_descname, wc_version, {score=_landsizes[pl.number]}))
                else
-                  pl:send_message(lost_game_over.title, lostmsg .. rt(_status(points, "had")))
+                  pl:send_message(lost_game_over.title, lostmsg .. _status(points, "had"))
                   wl.game.report_result(pl, 0, make_extra_data(pl, wc_descname, wc_version, {score=_landsizes[pl.number]}))
                end
             end

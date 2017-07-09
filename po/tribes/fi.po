@@ -9,13 +9,13 @@
 # Max, 2015
 # Pekka Järvinen <pekka.jarvinen@gmail.com>, 2007
 # Sini Ruohomaa <sini.ruohomaa@iki.fi>, 2009
-# Teppo Mäenpää <teppo@runbox.com>, 2015-2016
+# Teppo Mäenpää <teppo@runbox.com>, 2015-2017
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-02-18 09:49+0000\n"
-"PO-Revision-Date: 2017-02-19 14:09+0000\n"
+"POT-Creation-Date: 2017-06-23 12:21+0000\n"
+"PO-Revision-Date: 2017-06-24 08:22+0000\n"
 "Last-Translator: Jukka Pakarinen\n"
 "Language-Team: Finnish (http://www.transifex.com/widelands/widelands/language/fi/)\n"
 "MIME-Version: 1.0\n"
@@ -697,7 +697,7 @@ msgstr "Kalavedet ovat kalaisia"
 #: ../../data/tribes/buildings/productionsites/atlanteans/fishers_house/init.lua:7
 msgctxt "atlanteans_building"
 msgid "Fisher’s House"
-msgstr "Kalastakjatorppa"
+msgstr "Kalastajatorppa"
 
 #. TRANSLATORS: Completed/Skipped/Did not start fishing because ...
 #: ../../data/tribes/buildings/productionsites/atlanteans/fishers_house/init.lua:43
@@ -2091,7 +2091,7 @@ msgctxt "empire_building"
 msgid ""
 "The vine farmer working at this vineyard has no cleared soil to plant his "
 "grapevines."
-msgstr "Maanviljelijällä ei ole viljelyskelpoista maata käytössään."
+msgstr "Viinin viljelijä työskentelee viinitarhassaan, eikä hänellä ole viljelyskelpoista maata viiniköynnöksien istuttamiseksi."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/empire/weaponsmithy/init.lua:7
@@ -2167,7 +2167,7 @@ msgstr "Tyrmä"
 #: ../../data/tribes/buildings/trainingsites/atlanteans/labyrinth/init.lua:94
 #: ../../data/tribes/buildings/trainingsites/barbarians/battlearena/init.lua:83
 #: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:102
-#: ../../data/tribes/buildings/trainingsites/empire/arena/init.lua:73
+#: ../../data/tribes/buildings/trainingsites/empire/arena/init.lua:74
 #: ../../data/tribes/buildings/trainingsites/empire/colosseum/init.lua:68
 #: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:96
 msgid "sleeping"
@@ -2312,7 +2312,7 @@ msgid "Arena"
 msgstr "Areena"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/empire/arena/init.lua:81
+#: ../../data/tribes/buildings/trainingsites/empire/arena/init.lua:82
 #: ../../data/tribes/buildings/trainingsites/empire/colosseum/init.lua:76
 msgctxt "empire_building"
 msgid "upgrading soldier evade from level 0 to level 1"
@@ -2322,7 +2322,7 @@ msgstr "sotilaan väistelykyvyn korotus tasolta 0 tasolle 1"
 #: ../../data/tribes/buildings/trainingsites/empire/colosseum/init.lua:7
 msgctxt "empire_building"
 msgid "Colosseum"
-msgstr "Kolosseumi"
+msgstr "Colosseumi"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../data/tribes/buildings/trainingsites/empire/colosseum/init.lua:87
@@ -2783,7 +2783,7 @@ msgid "Ship"
 msgstr "Laiva"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
-#: ../../data/tribes/wares/armor/init.lua:50
+#: ../../data/tribes/wares/armor/init.lua:53
 msgctxt "ware"
 msgid "Armor"
 msgstr "Haarniska"
@@ -3293,7 +3293,7 @@ msgid "Wool"
 msgstr "Villa"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../data/tribes/workers/atlanteans/armorsmith/init.lua:17
+#: ../../data/tribes/workers/atlanteans/armorsmith/init.lua:19
 msgctxt "atlanteans_worker"
 msgid "Armorsmith"
 msgstr "Haarniskaseppä"
@@ -3317,7 +3317,7 @@ msgid "Builder"
 msgstr "Rakentaja"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../data/tribes/workers/atlanteans/carrier/init.lua:19
+#: ../../data/tribes/workers/atlanteans/carrier/init.lua:49
 msgctxt "atlanteans_worker"
 msgid "Carrier"
 msgstr "Kantaja"
@@ -3425,7 +3425,7 @@ msgid "Smoker"
 msgstr "Savustaja"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../data/tribes/workers/atlanteans/soldier/init.lua:67
+#: ../../data/tribes/workers/atlanteans/soldier/init.lua:198
 msgctxt "atlanteans_worker"
 msgid "Soldier"
 msgstr "Sotilas"

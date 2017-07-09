@@ -201,7 +201,7 @@ public:
 	 * \see class Bob for in-depth explanation
 	 */
 	struct State {
-		State(const Task* const the_task = nullptr)
+		explicit State(const Task* const the_task = nullptr)
 		   : task(the_task),
 		     ivar1(0),
 		     ivar2(0),
@@ -349,7 +349,7 @@ public:
 	}
 
 protected:
-	Bob(const BobDescr& descr);
+	explicit Bob(const BobDescr& descr);
 	virtual ~Bob();
 
 private:

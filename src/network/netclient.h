@@ -46,6 +46,14 @@ public:
 	~NetClient();
 
 	/**
+	 * Returns the ip and port of the remote host we are connected to.
+	 * \param addr A pointer to a NetAddress structure to write the address to.
+	 * \return Returns \c false when addr could not be filled in.
+	 *  This should only happen when the client is not connected.
+	 */
+	bool get_remote_address(NetAddress* addr) const;
+
+	/**
 	 * Returns whether the client is connected.
 	 * \return \c true if the connection is open, \c false otherwise.
 	 */
@@ -79,7 +87,7 @@ private:
 	 * If the connection attempt failed, is_connected() will return \c false.
 	 * \param host The host to connect to.
 	 */
-	NetClient(const NetAddress& host);
+	explicit NetClient(const NetAddress& host);
 
 	/// An io_service needed by boost.asio. Primarily needed for asynchronous operations.
 	boost::asio::io_service io_service_;
