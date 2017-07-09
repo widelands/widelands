@@ -1,5 +1,7 @@
 include "scripting/messages.lua"
 include "map:scripting/helper_functions.lua"
+include "scripting/field_animations.lua"
+
 
 -- Some objectives need to be waited for in separate threads
 local obj_build_port_and_shipyard_done = false
@@ -275,9 +277,7 @@ function soldiers()
 
    while not p1:sees_field(ruins) do sleep(3000) end
    scroll_to_field(ruin_fortress,5)
-   sleep(500)
-   random_reveal(p1, ruin_fortress:region(5), 1000)
-   sleep(500)
+   sleep(1000)
    campaign_message_box(saledus_12)
 
    -- If we don't have enough training sites yet, add a message and objective to complete them.
@@ -307,7 +307,7 @@ function mission_thread()
    campaign_message_box(diary_page_1)
 
    -- Show the sea
-   random_reveal(p1, sea:region(5), 1000)
+   reveal_randomly(p1, sea:region(5), 1000)
    sleep(100)
    local ship = p1:place_ship(sea)
    sleep(2500)
@@ -317,15 +317,14 @@ function mission_thread()
    sleep(400)
    ship:remove()
    sleep(300)
-   random_hide(p1, sea:region(6), 1000)
+   hide_randomly(p1, sea:region(6), 1000)
    sleep(300)
 
    -- Scroll to the place where the ship is finally stranded
    scroll_to_field(sf)
    -- Now we place the shipwreck headquarters and fill it with workers and wares
    include "map:scripting/starting_conditions.lua"
-   p1:hide_fields(sf:region(13), true)
-   concentric_reveal(p1, sf, 13, 100)
+   reveal_concentric(p1, sf, 13, 100)
    campaign_message_box(diary_page_3)
    sleep(400)
    campaign_message_box(saledus)
