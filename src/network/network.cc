@@ -45,7 +45,7 @@ bool do_resolve(const boost::asio::ip::tcp& protocol,
 		return true;
 	} catch (const boost::system::system_error& ec) {
 		// Resolution failed
-		log("Could not resolve network name: %s", ec.what());
+		log("Could not resolve network name: %s\n", ec.what());
 		return false;
 	}
 }
@@ -77,12 +77,12 @@ bool NetAddress::is_valid() const {
 	return port != 0 && !ip.is_unspecified();
 }
 
-CmdNetCheckSync::CmdNetCheckSync(uint32_t const dt, SyncCallback* const cb)
+CmdNetCheckSync::CmdNetCheckSync(uint32_t const dt, SyncReportCallback cb)
    : Command(dt), callback_(cb) {
 }
 
 void CmdNetCheckSync::execute(Widelands::Game&) {
-	callback_->syncreport();
+	callback_();
 }
 
 NetworkTime::NetworkTime() {

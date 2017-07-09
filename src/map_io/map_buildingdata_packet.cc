@@ -122,7 +122,7 @@ void MapBuildingdataPacket::read(FileSystem& fs,
 									*queue_iter = &mol.get<Worker>(leaver_serial);
 								} catch (const WException& e) {
 									throw GameDataError(
-									   "leave queue item #%lu (%u): %s",
+									   "leave queue item #%li (%u): %s",
 									   static_cast<long int>(queue_iter - leave_queue.begin()),
 									   leaver_serial, e.what());
 								}

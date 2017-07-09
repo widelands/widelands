@@ -112,8 +112,9 @@ SoldierDescr::BattleAttribute::BattleAttribute(std::unique_ptr<LuaTable> table) 
 	std::vector<std::string> image_filenames =
 	   table->get_table("pictures")->array_entries<std::string>();
 	if (image_filenames.size() != max_level + 1) {
-		throw GameDataError("Soldier needs to have %d pictures for battle attribute, but found %lu",
-		                    max_level + 1, image_filenames.size());
+		throw GameDataError(
+		   "Soldier needs to have %u pictures for battle attribute, but found %" PRIuS, max_level + 1,
+		   image_filenames.size());
 	}
 	for (const std::string& image_filename : image_filenames) {
 		images.push_back(g_gr->images().get(image_filename));
@@ -1346,14 +1347,15 @@ void Soldier::battle_update(Game& game, State&) {
 					    descr().descname().c_str())
 					      .str();
 					owner().add_message(
-					   game, *new Message(Message::Type::kGameLogic, game.get_gametime(),
-					                      descr().descname(), "images/ui_basic/menu_help.png",
-					                      _("Logic error"), messagetext, get_position(), serial_));
+					   game, std::unique_ptr<Message>(
+					            new Message(Message::Type::kGameLogic, game.get_gametime(),
+					                        descr().descname(), "images/ui_basic/menu_help.png",
+					                        _("Logic error"), messagetext, get_position(), serial_)));
 					opponent.owner().add_message(
-					   game,
-					   *new Message(Message::Type::kGameLogic, game.get_gametime(), descr().descname(),
-					                "images/ui_basic/menu_help.png", _("Logic error"), messagetext,
-					                opponent.get_position(), serial_));
+					   game, std::unique_ptr<Message>(new Message(
+					            Message::Type::kGameLogic, game.get_gametime(), descr().descname(),
+					            "images/ui_basic/menu_help.png", _("Logic error"), messagetext,
+					            opponent.get_position(), serial_)));
 					game.game_controller()->set_desired_speed(0);
 					return pop_task(game);
 				}

@@ -32,7 +32,7 @@ tribes:new_productionsite_type {
    },
 
    aihints = {
-      forced_after = 1200,
+      basic_amount = 1,
       prohibited_till = 900
    },
 

@@ -27,7 +27,6 @@
 #include "base/macros.h"
 #include "graphic/graphic.h"
 #include "graphic/text_constants.h"
-#include "network/constants.h"
 #include "network/gameclient.h"
 #include "network/gamehost.h"
 #include "network/internet_gaming.h"
@@ -356,7 +355,7 @@ void FullscreenMenuInternetLobby::clicked_joingame() {
 		InternetGaming::ref().join_game(opengames_list_.get_selected().name);
 
 		uint32_t const secs = time(nullptr);
-		while (InternetGaming::ref().ip().size() < 1) {
+		while (!InternetGaming::ref().ips().first.is_valid()) {
 			InternetGaming::ref().handle_metaserver_communication();
 			// give some time for the answer + for a relogin, if a problem occurs.
 			if ((INTERNET_GAMING_TIMEOUT * 5 / 3) < time(nullptr) - secs) {
@@ -371,12 +370,9 @@ void FullscreenMenuInternetLobby::clicked_joingame() {
 				return InternetGaming::ref().set_error();
 			}
 		}
-		std::string ip = InternetGaming::ref().ip();
+		const std::pair<NetAddress, NetAddress>& ips = InternetGaming::ref().ips();
 
-		NetAddress addr;
-		NetAddress::parse_ip(&addr, ip, WIDELANDS_PORT);
-		assert(addr.is_valid());
-		GameClient netgame(addr, InternetGaming::ref().get_local_clientname(), true);
+		GameClient netgame(ips, InternetGaming::ref().get_local_clientname(), true);
 		netgame.run();
 	} else
 		throw wexception("No server selected! That should not happen!");
