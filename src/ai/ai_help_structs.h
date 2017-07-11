@@ -27,6 +27,7 @@
 #include "ai/ai_hints.h"
 #include "economy/flag.h"
 #include "economy/road.h"
+#include "logic/ai_dna_handler.h"
 #include "logic/findnode.h"
 #include "logic/game.h"
 #include "logic/map.h"
@@ -122,7 +123,7 @@ constexpr int kFNeuronPoolSize = 60;
 constexpr int kFNeuronBitSize = 32;
 constexpr int kMutationRatePosition = 42;
 // TODO(tiborb): this should be replaced by command line switch
-constexpr bool kAITrainingMode = false;
+constexpr bool kAITrainingMode = true;
 
 constexpr uint32_t kNever = std::numeric_limits<uint32_t>::max();
 
@@ -657,6 +658,7 @@ struct ManagementData {
 	MutatingIntensity do_mutate(uint8_t, int16_t);
 	int8_t shift_weight_value(int8_t, bool = true);
 	void test_consistency(bool = false);
+	AiDnaHandler ai_dna_handler;
 
 private:
 	int32_t score;
@@ -665,6 +667,8 @@ private:
 	uint16_t next_bi_neuron_id;
 	uint16_t performance_change;
 	Widelands::AiType ai_type;
+	void dump_output(Widelands::Player::AiPersistentState, PlayerNumber);
+
 };
 
 // this is used to count militarysites by their size
