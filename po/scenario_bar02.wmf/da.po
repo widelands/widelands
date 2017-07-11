@@ -8,9 +8,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-01-21 21:10+0000\n"
-"PO-Revision-Date: 2017-01-27 22:18+0000\n"
-"Last-Translator: Joe Hansen <joedalton2@yahoo.dk>\n"
+"POT-Creation-Date: 2017-07-04 08:57+0000\n"
+"PO-Revision-Date: 2017-07-04 08:58+0000\n"
+"Last-Translator: GunChleoc\n"
 "Language-Team: Danish (http://www.transifex.com/widelands/widelands/language/da/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -359,9 +359,9 @@ msgid ""
 " former main entrance to the capital and is trying to set up a siege ring "
 "around Al’thunran. He will not let anyone enter or leave the city while the "
 "ring is intact. Until now, he has not answered any of my messages. But the "
-"time I spend waiting won’t be lost. I will further upgrade my soldiers and "
+"time I spend waiting won’t be lost. I will train my soldiers further and "
 "prepare for battle."
-msgstr "Jeg har sendt mænd til et møde med Kalitath i hans fæstning. Han har barrikeret den tidligere hovedindgang til hovedstaden og forsøger at opsætte en belejring omkring Al'thunran. Han vil ikke lade nogen komme ind eller ud af byen mens ringen er intakt. Indtil nu har han ikke besvaret nogen af mine beskeder. Men tiden, jeg venter, vil ikke være spildt. Jeg vil træne mine soldater og forberede kampen."
+msgstr ""
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:212
 msgid "Your Loyal Companion"
@@ -649,7 +649,7 @@ msgstr "Høvding, husk på vores stakkels bærere. Vores veje bliver længere og
 msgid "“%s”"
 msgstr "“%s”"
 
-#: ../../data/scripting/format_scenario.lua:96
+#: ../../data/scripting/format_scenario.lua:84
 msgid "New Objective"
 msgid_plural "New Objectives"
 msgstr[0] "Nyt mål"

@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-01-21 14:22+0000\n"
-"PO-Revision-Date: 2017-01-21 14:23+0000\n"
+"POT-Creation-Date: 2017-07-04 08:57+0000\n"
+"PO-Revision-Date: 2017-07-04 08:58+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Dutch (http://www.transifex.com/widelands/widelands/language/nl/)\n"
 "MIME-Version: 1.0\n"
@@ -361,9 +361,9 @@ msgid ""
 " former main entrance to the capital and is trying to set up a siege ring "
 "around Al’thunran. He will not let anyone enter or leave the city while the "
 "ring is intact. Until now, he has not answered any of my messages. But the "
-"time I spend waiting won’t be lost. I will further upgrade my soldiers and "
+"time I spend waiting won’t be lost. I will train my soldiers further and "
 "prepare for battle."
-msgstr "Ik heb mensen gestuurd om met Kalitath te praten in zijn burcht. Hij heeft de voormalige toegang tot de hoofdstad gebarricadeerd en probeert een belegeringsring rond Al’thunran op te zetten. Hij zal niemand de stad in of uit laten gaan zolang de ring intact is. Tot nu heeft hij nog geen van mijn berichten beantwoord. Maar de tijd die ik wacht zal niet verloren zijn. Ik zal mijn soldaten verder verbeteren en me klaar maken voor de strijd.<b"
+msgstr ""
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:212
 msgid "Your Loyal Companion"
@@ -651,7 +651,7 @@ msgstr "Opperhoofd, denk aan de arme dragers: Onze wegen worden langer en langer
 msgid "“%s”"
 msgstr "\"%s\""
 
-#: ../../data/scripting/format_scenario.lua:96
+#: ../../data/scripting/format_scenario.lua:84
 msgid "New Objective"
 msgid_plural "New Objectives"
 msgstr[0] "Nieuwe Doelstelling"

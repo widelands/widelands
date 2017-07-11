@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-01-21 14:22+0000\n"
-"PO-Revision-Date: 2017-01-21 14:51+0000\n"
+"POT-Creation-Date: 2017-07-04 08:57+0000\n"
+"PO-Revision-Date: 2017-07-05 19:39+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Gaelic, Scottish (http://www.transifex.com/widelands/widelands/language/gd/)\n"
 "MIME-Version: 1.0\n"
@@ -361,9 +361,9 @@ msgid ""
 " former main entrance to the capital and is trying to set up a siege ring "
 "around Al’thunran. He will not let anyone enter or leave the city while the "
 "ring is intact. Until now, he has not answered any of my messages. But the "
-"time I spend waiting won’t be lost. I will further upgrade my soldiers and "
+"time I spend waiting won’t be lost. I will train my soldiers further and "
 "prepare for battle."
-msgstr "Tha mi air daoine a chur airson coinneamh ri Kalitath san dùn aige. Tha e air an t-seann phrìomh-dhoras dhan chathair-bhaile a bhacadh agus tha e a’ feuchainn ri sèist a chur ri Al’tùnran. Cha leig e le duine beò tighinn a-steach no falbh on bhaile fhad ’s a tha an cearcall aige slàn. Cha d’ fhuair mi freagairt uaithe dha na teachdaireachdan agam fhathast. Ach chan eil sinn a’ call ùine fhad ’s a tha sinn a’ feitheamh. Cumaidh mi orm le àrdachadh nan saighdearan agam is an t-ullachadh airson a’ chogaidh."
+msgstr "Tha mi air daoine a chur airson coinneamh ri Kalitath san dùn aige. Tha e air an t-seann phrìomh-dhoras dhan chathair-bhaile a bhacadh agus tha e a’ feuchainn ri sèist a chur ri Al’tùnran. Cha leig e le duine beò tighinn a-steach no falbh on bhaile fhad ’s a tha an cearcall aige slàn. Cha d’ fhuair mi freagairt uaithe dha na teachdaireachdan agam fhathast. Ach chan eil sinn a’ call ùine fhad ’s a tha sinn a’ feitheamh. Cumaidh mi orm le trèanadh nan saighdearan agam gus an t-ullachadh airson a’ chogaidh."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:212
 msgid "Your Loyal Companion"
@@ -651,7 +651,7 @@ msgstr "A cheannaird, cuimhnichibh air na giùlanairean bochda: Tha na rathaidea
 msgid "“%s”"
 msgstr "“%s”"
 
-#: ../../data/scripting/format_scenario.lua:96
+#: ../../data/scripting/format_scenario.lua:84
 msgid "New Objective"
 msgid_plural "New Objectives"
 msgstr[0] "Amas ùr"
