@@ -25,15 +25,10 @@
 #include <boost/algorithm/string.hpp>
 #include <boost/format.hpp>
 
-//#include "base/log.h"
 #include "base/macros.h"
-//#include "base/scoped_timer.h"
-//#include "base/time_string.h"
 #include "base/wexception.h"
-//#include "game_io/game_saver.h"
 #include "io/filesystem/filesystem.h"
 #include "logic/constants.h"
-//#include "logic/game_controller.h"
 #include "wui/interactive_base.h"
 
 AiDnaHandler::AiDnaHandler() {
@@ -50,9 +45,11 @@ void AiDnaHandler::fetch_dna(std::vector<int16_t> military_numbers,
 
 	std::string full_path = get_base_dir();
 	// Make a filesystem out of this
+	// NOCOM the line below crashes the game with:
+	//  what():  FileSystem::create: could not find file or directory: ai
 	FileSystem* ai_dir = &FileSystem::create(full_path);
 
-	std::string filename = "ai_dna_" + std::to_string(static_cast<int16_t>(slot)) + "." + AI_SUFFIX;
+	std::string filename = "ai_input_" + std::to_string(static_cast<int16_t>(slot-1)) + "." + AI_SUFFIX;
 
 	Profile prof;
 	prof.read(filename.c_str(), nullptr, *ai_dir);
