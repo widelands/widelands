@@ -4,7 +4,7 @@
 -- field_animations.lua
 -- --------------------
 --
--- This script contain some animations to reveal and hide fields seen 
+-- This script contains some animations to reveal and hide fields seen 
 -- by a player. This functions are currently used in the campaigns and scenarios
 -- to tell the prologue to a story.
 
@@ -12,11 +12,11 @@
 -- .. function:: reveal_randomly(player, region, time)
 --
 --    Reveal a given region field by field, where the fields 
---    are chosen randomly. The region get hidden prior revealing.
+--    are chosen randomly. The region will be hidden before being revealed.
 --    The animation runs the specified time.
 --    See also :meth:`wl.map.Field.region`
 --
---    :arg player: The player who get sight to the region
+--    :arg player: The player who gets sight to the region
 --    :arg region: The region that has to be revealed
 --    :type region: :class:`array` of :class:`wl.map.Fields`
 --    :arg time: Optional. The time the whole animation will run. 
@@ -61,8 +61,8 @@ end
 --    how big the given region is. So region(6) and region(13) will take
 --    the same time. See also :meth:`wl.map.Field.region`
 --
---    :arg player: The player who's sight get hidden
---    :arg region: The region that has to be hidden
+--    :arg player: The player whose sight gets hidden
+--    :arg region: The region that will be hidden
 --    :type region: :class:`array` of :class:`wl.map.Fields`
 --    :arg time: Optional. The time the whole animation will run. 
 --               Defaults to 1000 (1 sec)
@@ -88,13 +88,13 @@ end
 --    Reveal a part of the map in a concentric way beginning from center onto
 --    max_radius. The region get hidden prior revealing as default.
 --
---    :arg player: The player who get sight to the region
+--    :arg player: The player who gets sight to the region
 --    :arg center: The field from where the animation should start revealing
 --    :arg max_radius: The last ring to reveal
 --    :arg hide: Optional, if `false` automatic hiding is disabled
 --    :type hide: :class:`boolean`
---    :arg delay: Optional, defaults to 100. The delay between each ring is 
---                revealed. If you want to set the delay, you must also set `hide`
+--    :arg delay: Optional, defaults to 100. The delay between revealing each
+--                ring. If you want to set the delay, you must also set `hide`
 
 function reveal_concentric(plr, center, max_radius, hide, delay)
    delay = delay or 100
@@ -125,11 +125,11 @@ end
 --    Hide a part of the map in a concentric way beginning from max_radius onto
 --    center.
 --
---    :arg player: The player who's sight get hidden
+--    :arg player: The player whose sight gets hidden
 --    :arg center: The field where the animation should end hiding
 --    :arg max_radius: The first ring to hide
---    :arg delay: Optional, defaults to 100. The delay between each ring is 
---                revealed
+--    :arg delay: Optional, defaults to 100. The delay between revealing each
+--                ring
 
 function hide_concentric(plr, center, max_radius, delay)
    delay = delay or 100
@@ -159,7 +159,7 @@ end
 function get_sees_fields(plr)
    local sees_fields = {}
    for x=0, wl.Game().map.width-1 do
-      for y=0, wl.Game().map.height-1  do
+      for y=0, wl.Game().map.height-1 do
          f = wl.Game().map:get_field(x,y)
          if wl.ui.MapView():is_visible(f) then
             -- Gather only fields which are seen in the view

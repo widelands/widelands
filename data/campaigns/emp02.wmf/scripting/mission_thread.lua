@@ -114,7 +114,6 @@ function mining_infrastructure()
    local coal_mountain = wl.Game().map:get_field(49,22)
    local iron_mountain = wl.Game().map:get_field(38,37)
 
-   --local move_point = wl.Game().map:get_field(49,22)
    wait_for_roadbuilding_and_scroll(coal_mountain)
    reveal_concentric(p1, coal_mountain, 6, false)
    p1:reveal_fields(iron_mountain:region(6))

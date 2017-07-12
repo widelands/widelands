@@ -22,7 +22,6 @@ function introduction_thread()
    -- these buildings are still burning, but only for a while
    map:place_immovable("destroyed_building",map:get_field(7,41),"tribes")
    map:place_immovable("destroyed_building",map:get_field(5,52),"tribes")
-   -- plr:reveal_fields(al_thunran:region(8))
    scroll_to_field(al_thunran)
    reveal_concentric(plr, al_thunran, 8, true, 50)
    message_box_objective(plr, briefing_msg_02) -- Al'thunran

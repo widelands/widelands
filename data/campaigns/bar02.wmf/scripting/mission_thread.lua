@@ -5,15 +5,15 @@
 include "scripting/messages.lua"
 include "scripting/field_animations.lua"
 
-game = wl.Game()
+local game = wl.Game()
 -- Mountain and frontier fields
-mountain = game.map:get_field(71,14)
-fr1 = game.map:get_field(81,108)
-fr2 = game.map:get_field(85,1)
-fr3 = game.map:get_field(85,11)
+local mountain = game.map:get_field(71,14)
+local fr1 = game.map:get_field(81,108)
+local fr2 = game.map:get_field(85,1)
+local fr3 = game.map:get_field(85,11)
 
 -- Starting field
-sf = game.map.player_slots[1].starting_field
+local sf = game.map.player_slots[1].starting_field
 
 function check_conquered_footprints()
     if p1:seen_field(game.map:get_field(65, 28))
