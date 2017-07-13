@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-06-23 12:21+0000\n"
+"POT-Creation-Date: 2017-07-04 08:57+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Language-Team: Serbian (https://www.transifex.com/widelands/teams/35159/sr/)\n"
 "MIME-Version: 1.0\n"
@@ -151,7 +151,7 @@ msgstr ""
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:117
 msgid ""
-"We should send a ship nothwards to gather some intelligence about the "
+"We should send a ship northwards to gather some intelligence about the "
 "Barbarians. Try to build a port on the island and found an outpost."
 msgstr ""
 
@@ -277,9 +277,10 @@ msgstr ""
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:204
 msgid ""
-"We landed on an unknown coast and found some rest under the palm trees "
-"growing at the shore. But that is about as good as it gets. The truth is: "
-"when I woke up this morning, I saw nothing but sand and stone around us."
+"Again, we stranded on an unknown coast and slept in the shade under some "
+"palm trees until the sun was risen high up in the sky. I’m afraid that when "
+"we awoke at noon, nobody was really surprised that all we could see was "
+"sand… although the amount of rocks near our camp was astonishing."
 msgstr ""
 
 #. TRANSLATORS: Lutius - Diary
@@ -843,7 +844,7 @@ msgid ""
 msgstr ""
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:529
-msgid "Amalea’s Councel"
+msgid "Amalea’s Counsel"
 msgstr ""
 
 #. TRANSLATORS: Amalea
@@ -905,8 +906,8 @@ msgstr ""
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:558
 msgid ""
-"As we have seen on our last journey, it is of great importance to put the "
-"gods and especially Neptune in a good mood to safeguard our journey."
+"As we have seen on our journeys, it is of great importance to put the gods "
+"and especially Neptune in a good mood to safeguard our journey."
 msgstr ""
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:560
@@ -956,8 +957,8 @@ msgstr ""
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:584
 msgid ""
 "Sire, we found the ruins of a former Barbarian fortress and village. I’m "
-"somewhat worried that we will have to fight against them before we are "
-"ready."
+"somewhat worried that we will have to fight against them before we are ready"
+" to do so."
 msgstr ""
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:590

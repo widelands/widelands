@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-03-03 06:24+0000\n"
-"PO-Revision-Date: 2017-03-03 14:14+0000\n"
+"POT-Creation-Date: 2017-07-04 08:57+0000\n"
+"PO-Revision-Date: 2017-07-04 12:12+0000\n"
 "Last-Translator: Любомир Василев\n"
 "Language-Team: Bulgarian (http://www.transifex.com/widelands/widelands/language/bg/)\n"
 "MIME-Version: 1.0\n"
@@ -120,6 +120,7 @@ msgid ""
 "blackroot."
 msgstr "Фермерът на черен корен има нужда средно от %1%, за да засее и събере една връзка черен корен."
 
+#. TRANSLATORS: Purpose helptext for a building
 #. TRANSLATORS: Note helptext for a building
 #. TRANSLATORS: Performance helptext for a building
 #. This include can be removed when all help texts have been defined.
@@ -718,8 +719,8 @@ msgstr "Тази мина оползотворява всички ресурси
 #. TRANSLATORS: 'It' is a mine
 #: ../../data/tribes/buildings/productionsites/barbarians/granitemine/helptexts.lua:21
 msgctxt "barbarians_building"
-msgid "It cannot be upgraded."
-msgstr "Не може да бъде подобрена."
+msgid "It cannot be enhanced."
+msgstr "Не може да бъде подобрено."
 
 #. TRANSLATORS: Performance helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/granitemine/helptexts.lua:26
@@ -1068,7 +1069,7 @@ msgstr "Произвежда всички брадви, които варвар�
 msgctxt "barbarians_building"
 msgid ""
 "The Barbarian war mill is their most advanced production site for weapons. "
-"As such it needs to be upgraded from an ax workshop."
+"As such you will need to enhance an ax workshop in order to get one."
 msgstr "Оръжейната на варварите е най-развитата сграда за производство на оръжия. Като такава, тя трябва да бъде надградена от работилница за брадви."
 
 #: ../../data/tribes/buildings/productionsites/barbarians/warmill/helptexts.lua:29
@@ -3517,7 +3518,7 @@ msgid "Wool is the hair of sheep. Weaving mills use it to make cloth."
 msgstr "Вълната идва от овцете. Тъкачниците я използват за производство на платове."
 
 #. TRANSLATORS: Helptext for a worker: Armorsmith
-#: ../../data/tribes/workers/atlanteans/armorsmith/helptexts.lua:3
+#: ../../data/tribes/workers/atlanteans/armorsmith/helptexts.lua:5
 msgctxt "atlanteans_worker"
 msgid "Produces armor for the soldiers."
 msgstr "Произвежда брони за войниците."

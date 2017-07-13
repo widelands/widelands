@@ -9,15 +9,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-01-21 21:10+0000\n"
-"PO-Revision-Date: 2017-01-22 09:39+0000\n"
-"Last-Translator: Wesmania <ikk_pl@yahoo.co.uk>\n"
+"POT-Creation-Date: 2017-07-04 08:57+0000\n"
+"PO-Revision-Date: 2017-07-04 08:58+0000\n"
+"Last-Translator: GunChleoc\n"
 "Language-Team: Polish (http://www.transifex.com/widelands/widelands/language/pl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: pl\n"
-"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"Plural-Forms: nplurals=4; plural=(n==1 ? 0 : (n%10>=2 && n%10<=4) && (n%100<12 || n%100>14) ? 1 : n!=1 && (n%10>=0 && n%10<=1) || (n%10>=5 && n%10<=9) || (n%100>=12 && n%100<=14) ? 2 : 3);\n"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:21
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:23
@@ -360,9 +360,9 @@ msgid ""
 " former main entrance to the capital and is trying to set up a siege ring "
 "around Al’thunran. He will not let anyone enter or leave the city while the "
 "ring is intact. Until now, he has not answered any of my messages. But the "
-"time I spend waiting won’t be lost. I will further upgrade my soldiers and "
+"time I spend waiting won’t be lost. I will train my soldiers further and "
 "prepare for battle."
-msgstr "Wysłałem kilku ludzi, aby spotkali się z Kalitathem w jego fortecy. Zabarykadował się w dawnym głównym wejściu do stolicy i próbuje oblegać Al’thunran. Nie pozwoli nikomu wejść ani wyjść z miasta, dopóki pierścień jest cały. Póki co jeszcze nie odpowiedział na żadną z moich wiadomości. Ale nie będę tracił czasu czekając. Zdążę lepiej wytrenować moich żołnierzy i przygotuję się do bitwy."
+msgstr ""
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:212
 msgid "Your Loyal Companion"
@@ -650,9 +650,10 @@ msgstr "Wodzu, pamiętaj o biednych tragarzach. Nasze drogi się cały czas wyd�
 msgid "“%s”"
 msgstr "\"%s\""
 
-#: ../../data/scripting/format_scenario.lua:96
+#: ../../data/scripting/format_scenario.lua:84
 msgid "New Objective"
 msgid_plural "New Objectives"
 msgstr[0] "Nowy cel"
 msgstr[1] "Nowe cele"
 msgstr[2] "Nowe cele"
+msgstr[3] "Nowe cele"

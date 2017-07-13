@@ -7,9 +7,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-06-02 11:07+0000\n"
-"PO-Revision-Date: 2017-06-04 15:20+0000\n"
-"Last-Translator: TaeMin An <kavern02@gmail.com>\n"
+"POT-Creation-Date: 2017-07-04 08:57+0000\n"
+"PO-Revision-Date: 2017-07-04 09:00+0000\n"
+"Last-Translator: GunChleoc\n"
 "Language-Team: Korean (http://www.transifex.com/widelands/widelands/language/ko/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -117,6 +117,7 @@ msgid ""
 "blackroot."
 msgstr "검은뿌리 농부는 한 다발의 검은뿌리를 파종하고 수확하는데 평균적으로 %1% 가 필요합니다."
 
+#. TRANSLATORS: Purpose helptext for a building
 #. TRANSLATORS: Note helptext for a building
 #. TRANSLATORS: Performance helptext for a building
 #. This include can be removed when all help texts have been defined.
@@ -714,8 +715,8 @@ msgstr "이 광산은 가장 깊은 층에 내려가서 모든 자원을 개발�
 #. TRANSLATORS: 'It' is a mine
 #: ../../data/tribes/buildings/productionsites/barbarians/granitemine/helptexts.lua:21
 msgctxt "barbarians_building"
-msgid "It cannot be upgraded."
-msgstr "더 이상 업그레이드할 수 없습니다."
+msgid "It cannot be enhanced."
+msgstr ""
 
 #. TRANSLATORS: Performance helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/granitemine/helptexts.lua:26
@@ -1064,8 +1065,8 @@ msgstr "야만인들이 전투에 사용할 모든 도끼들을 제작하세요.
 msgctxt "barbarians_building"
 msgid ""
 "The Barbarian war mill is their most advanced production site for weapons. "
-"As such it needs to be upgraded from an ax workshop."
-msgstr "야만인의 전쟁 공장은 무기를 위한 가장 발전된 생산 기지이다. 늘 그렇듯이 도끼 제작소에서 업그레이드 되어야 한다."
+"As such you will need to enhance an ax workshop in order to get one."
+msgstr ""
 
 #: ../../data/tribes/buildings/productionsites/barbarians/warmill/helptexts.lua:29
 msgctxt "barbarians_building"

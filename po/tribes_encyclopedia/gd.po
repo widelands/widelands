@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-06-23 12:21+0000\n"
-"PO-Revision-Date: 2017-06-23 17:07+0000\n"
+"POT-Creation-Date: 2017-07-04 08:57+0000\n"
+"PO-Revision-Date: 2017-07-05 19:42+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Gaelic, Scottish (http://www.transifex.com/widelands/widelands/language/gd/)\n"
 "MIME-Version: 1.0\n"
@@ -120,6 +120,7 @@ msgid ""
 "blackroot."
 msgstr "Feumaidh an tuathanach fhreumhagan %1% sa chuibheas gus bad fhreumhagan a chur ’s a bhuain."
 
+#. TRANSLATORS: Purpose helptext for a building
 #. TRANSLATORS: Note helptext for a building
 #. TRANSLATORS: Performance helptext for a building
 #. This include can be removed when all help texts have been defined.
@@ -720,8 +721,8 @@ msgstr "Togaidh a’ mhèinn seo a h-uile stòras gu ruige an doimhne as motha. 
 #. TRANSLATORS: 'It' is a mine
 #: ../../data/tribes/buildings/productionsites/barbarians/granitemine/helptexts.lua:21
 msgctxt "barbarians_building"
-msgid "It cannot be upgraded."
-msgstr "Cha ghabh a h-àrdachadh."
+msgid "It cannot be enhanced."
+msgstr "Cha ghabh a leasachadh."
 
 #. TRANSLATORS: Performance helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/granitemine/helptexts.lua:26
@@ -1070,7 +1071,7 @@ msgstr "Nì e na tuaghan uile a chleachdas na Tùsanaich air a’ bhlàr."
 msgctxt "barbarians_building"
 msgid ""
 "The Barbarian war mill is their most advanced production site for weapons. "
-"As such it needs to be upgraded from an ax workshop."
+"As such you will need to enhance an ax workshop in order to get one."
 msgstr "’S e an togalach saothrachaidh as adhartaiche airson airm nan Tùsanach a th’ anns a’ cheàrdach-chogaidh. Feumaidh tu ceàrdach thuaghan a leasachadh gus tè fhaighinn."
 
 #: ../../data/tribes/buildings/productionsites/barbarians/warmill/helptexts.lua:29
