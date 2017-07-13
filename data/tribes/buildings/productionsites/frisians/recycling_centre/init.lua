@@ -55,7 +55,7 @@ tribes:new_productionsite_type {
 
    programs = {
       work = {
-         -- TRANSLATORS: Completed/Skipped/Did not start recruiting soldier because ...
+         -- TRANSLATORS: Completed/Skipped/Did not start working because ...
          descname = pgettext("frisians_building", "working"),
          actions = {
             "call=smelt_iron",
@@ -64,22 +64,22 @@ tribes:new_productionsite_type {
          }
       },
       smelt_iron = {
-         -- TRANSLATORS: Completed/Skipped/Did not start recruiting soldier because ...
+         -- TRANSLATORS: Completed/Skipped/Did not start recycling iron because ...
          descname = pgettext("frisians_building", "recycling iron"),
          actions = {
-            "sleep=14000",
             "return=skipped unless economy needs iron",
+            "sleep=14000",
             "consume=scrap_metal_iron:2 coal",
             "animate=working 18000",
             "produce=iron:2"
          }
       },
       smelt_mixed = {
-         -- TRANSLATORS: Completed/Skipped/Did not start recruiting soldier because ...
+         -- TRANSLATORS: Completed/Skipped/Did not start recycling iron and gold because ...
          descname = pgettext("frisians_building", "recycling iron and gold"),
          actions = {
-            "sleep=14000",
             "return=skipped unless economy needs iron or economy needs gold",
+            "sleep=14000",
             "consume=scrap_metal_mixed:2 coal",
             "animate=working 24000",
             "produce=iron gold"

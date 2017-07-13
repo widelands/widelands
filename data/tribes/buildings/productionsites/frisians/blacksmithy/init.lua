@@ -71,7 +71,7 @@ tribes:new_productionsite_type {
 
    programs = {
       work = {
-         -- TRANSLATORS: Completed/Skipped/Did not start preparing a ration because ...
+         -- TRANSLATORS: Completed/Skipped/Did not start working because ...
          descname = _"working",
          actions = {
             "call=produce_1",
@@ -90,132 +90,132 @@ tribes:new_productionsite_type {
          },
       },
       produce_1 = {
-         -- TRANSLATORS: Completed/Skipped/Did not start preparing a ration because ...
+         -- TRANSLATORS: Completed/Skipped/Did not start forging a felling ax because ...
          descname = _"forging a felling ax",
          actions = {
-            "sleep=12000",
             "return=skipped unless economy needs felling_ax",
+            "sleep=12000",
             "consume=log iron",
             "animate=working 19000",
             "produce=felling_ax"
          },
       },
       produce_2 = {
-         -- TRANSLATORS: Completed/Skipped/Did not start preparing a ration because ...
+         -- TRANSLATORS: Completed/Skipped/Did not start forging a pick because ...
          descname = _"forging a pick",
          actions = {
-            "sleep=12000",
             "return=skipped unless economy needs pick",
+            "sleep=12000",
             "consume=log iron",
             "animate=working 19000",
             "produce=pick"
          },
       },
       produce_3 = {
-         -- TRANSLATORS: Completed/Skipped/Did not start preparing a ration because ...
+         -- TRANSLATORS: Completed/Skipped/Did not start forging a scythe because ...
          descname = _"forging a scythe",
          actions = {
-            "sleep=12000",
             "return=skipped unless economy needs scythe",
+            "sleep=12000",
             "consume=log iron",
             "animate=working 19000",
             "produce=scythe"
          },
       },
       produce_4 = {
-         -- TRANSLATORS: Completed/Skipped/Did not start preparing a ration because ...
+         -- TRANSLATORS: Completed/Skipped/Did not start forging a shovel because ...
          descname = _"forging a shovel",
          actions = {
-            "sleep=12000",
             "return=skipped unless economy needs shovel",
+            "sleep=12000",
             "consume=log iron",
             "animate=working 19000",
             "produce=shovel"
          },
       },
       produce_5 = {
-         -- TRANSLATORS: Completed/Skipped/Did not start preparing a ration because ...
-         descname = _"forging a basket",
+         -- TRANSLATORS: Completed/Skipped/Did not start making a basket because ...
+         descname = _"making a basket",
          actions = {
-            "sleep=12000",
             "return=skipped unless economy needs basket",
+            "sleep=12000",
             "consume=log iron",
             "animate=working 19000",
             "produce=basket"
          },
       },
       produce_6 = {
-         -- TRANSLATORS: Completed/Skipped/Did not start preparing a ration because ...
+         -- TRANSLATORS: Completed/Skipped/Did not start forging a hunting spear because ...
          descname = _"forging a hunting spear",
          actions = {
-            "sleep=12000",
             "return=skipped unless economy needs hunting_spear",
+            "sleep=12000",
             "consume=log iron",
             "animate=working 19000",
             "produce=hunting_spear"
          },
       },
       produce_7 = {
-         -- TRANSLATORS: Completed/Skipped/Did not start preparing a ration because ...
-         descname = _"forging a fishing net",
+         -- TRANSLATORS: Completed/Skipped/Did not start making a fishing net because ...
+         descname = _"making a fishing net",
          actions = {
-            "sleep=12000",
             "return=skipped unless economy needs fishing_net",
+            "sleep=12000",
             "consume=log iron",
             "animate=working 19000",
             "produce=fishing_net"
          },
       },
       produce_8 = {
-         -- TRANSLATORS: Completed/Skipped/Did not start preparing a ration because ...
-         descname = _"forging a bread paddle",
+         -- TRANSLATORS: Completed/Skipped/Did not start making a bread paddle because ...
+         descname = _"making a bread paddle",
          actions = {
-            "sleep=12000",
             "return=skipped unless economy needs bread_paddle",
+            "sleep=12000",
             "consume=log iron",
             "animate=working 19000",
             "produce=bread_paddle"
          },
       },
       produce_9 = {
-         -- TRANSLATORS: Completed/Skipped/Did not start preparing a ration because ...
-         descname = _"forging kitchen tools",
+         -- TRANSLATORS: Completed/Skipped/Did not start making kitchen tools because ...
+         descname = _"making kitchen tools",
          actions = {
-            "sleep=12000",
             "return=skipped unless economy needs kitchen_tools",
+            "sleep=12000",
             "consume=log iron",
             "animate=working 19000",
             "produce=kitchen_tools"
          },
       },
       produce_10 = {
-         -- TRANSLATORS: Completed/Skipped/Did not start preparing a ration because ...
+         -- TRANSLATORS: Completed/Skipped/Did not start forging a hammer because ...
          descname = _"forging a hammer",
          actions = {
-            "sleep=12000",
             "return=skipped unless economy needs hammer",
+            "sleep=12000",
             "consume=log iron",
             "animate=working 19000",
             "produce=hammer"
          },
       },
       produce_11 = {
-         -- TRANSLATORS: Completed/Skipped/Did not start preparing a ration because ...
+         -- TRANSLATORS: Completed/Skipped/Did not start forging fire tongs because ...
          descname = _"forging fire tongs",
          actions = {
-            "sleep=12000",
             "return=skipped unless economy needs fire_tongs",
+            "sleep=12000",
             "consume=log iron",
             "animate=working 19000",
             "produce=fire_tongs"
          },
       },
       produce_12 = {
-         -- TRANSLATORS: Completed/Skipped/Did not start preparing a ration because ...
+         -- TRANSLATORS: Completed/Skipped/Did not start forging needles because ...
          descname = _"forging needles",
          actions = {
-            "sleep=12000",
             "return=skipped unless economy needs needles",
+            "sleep=12000",
             "consume=log iron",
             "animate=working 19000",
             "produce=needles"

@@ -55,7 +55,7 @@ tribes:new_productionsite_type {
    programs = {
       work = {
          -- TRANSLATORS: Completed/Skipped/Did not start recruiting soldier because ...
-         descname = pgettext("frisians_building", "recruiting warrior"),
+         descname = pgettext("frisians_building", "recruiting soldier"),
          actions = {
             "sleep=10000",
             "return=skipped unless economy needs frisians_soldier",

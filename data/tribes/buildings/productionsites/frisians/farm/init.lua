@@ -66,7 +66,7 @@ tribes:new_productionsite_type {
          }
       },
       plant_barley = {
-         -- TRANSLATORS: Completed/Skipped/Did not start planting wheat because ...
+         -- TRANSLATORS: Completed/Skipped/Did not start planting barley because ...
          descname = _"planting barley",
          actions = {
             "sleep=42000",
@@ -74,7 +74,7 @@ tribes:new_productionsite_type {
          }
       },
       harvest_barley = {
-         -- TRANSLATORS: Completed/Skipped/Did not start harvesting wheat because ...
+         -- TRANSLATORS: Completed/Skipped/Did not start harvesting barley because ...
          descname = _"harvesting barley",
          actions = {
             "sleep=12000",

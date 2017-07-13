@@ -79,66 +79,66 @@ tribes:new_productionsite_type {
          },
       },
       produce_s1 = {
-         -- TRANSLATORS: Completed/Skipped/Did not start preparing a ration because ...
+         -- TRANSLATORS: Completed/Skipped/Did not start forging a basic sword because ...
          descname = _"forging a basic sword",
          actions = {
-            "sleep=14000",
             "return=skipped unless economy needs sword_basic",
+            "sleep=14000",
             "consume=coal iron",
             "animate=working 16000",
             "produce=sword_basic"
          },
       },
       produce_s2 = {
-         -- TRANSLATORS: Completed/Skipped/Did not start preparing a ration because ...
+         -- TRANSLATORS: Completed/Skipped/Did not start forging a long sword because ...
          descname = _"forging a long sword",
          actions = {
-            "sleep=14000",
             "return=skipped unless economy needs sword_long",
+            "sleep=14000",
             "consume=coal iron:2",
             "animate=working 19000",
             "produce=sword_long"
          },
       },
       produce_s3 = {
-         -- TRANSLATORS: Completed/Skipped/Did not start preparing a ration because ...
+         -- TRANSLATORS: Completed/Skipped/Did not start forging a curved sword because ...
          descname = _"forging a curved sword",
          actions = {
-            "sleep=14000",
             "return=skipped unless economy needs sword_curved",
+            "sleep=14000",
             "consume=coal iron:2 gold",
             "animate=working 25000",
             "produce=sword_curved"
          },
       },
       produce_s4 = {
-         -- TRANSLATORS: Completed/Skipped/Did not start preparing a ration because ...
+         -- TRANSLATORS: Completed/Skipped/Did not start forging a double-edged sword because ...
          descname = _"forging a double-edged sword",
          actions = {
-            "sleep=14000",
             "return=skipped unless economy needs sword_double",
+            "sleep=14000",
             "consume=coal:2 iron:2 gold:2",
             "animate=working 38000",
             "produce=sword_double"
          },
       },
       produce_h1 = {
-         -- TRANSLATORS: Completed/Skipped/Did not start preparing a ration because ...
+         -- TRANSLATORS: Completed/Skipped/Did not start forging a helmet because ...
          descname = _"forging a helmet",
          actions = {
-            "sleep=14000",
             "return=skipped unless economy needs helmet",
+            "sleep=14000",
             "consume=coal iron:2",
             "animate=working 21000",
             "produce=helmet"
          },
       },
       produce_h2 = {
-         -- TRANSLATORS: Completed/Skipped/Did not start preparing a ration because ...
+         -- TRANSLATORS: Completed/Skipped/Did not start forging a golden helmet because ...
          descname = _"forging a golden helmet",
          actions = {
-            "sleep=14000",
             "return=skipped unless economy needs helmet_golden",
+            "sleep=14000",
             "consume=coal:2 iron:2 gold",
             "animate=working 32000",
             "produce=helmet_golden"

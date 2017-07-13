@@ -57,7 +57,7 @@ tribes:new_productionsite_type {
 
    programs = {
       work = {
-         -- TRANSLATORS: Completed/Skipped/Did not start preparing a ration because ...
+         -- TRANSLATORS: Completed/Skipped/Did not start working because ...
          descname = _"working",
          actions = {
             "call=produce_fast",
@@ -69,19 +69,19 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start preparing a ration because ...
          descname = _"preparing a ration",
          actions = {
-            "sleep=12000",
             "return=skipped unless economy needs ration",
+            "sleep=12000",
             "consume=smoked_fish,smoked_meat,fruit,bread_frisians",
             "animate=working 14000",
             "produce=ration"
          },
       },
       produce_fast = {
-         -- TRANSLATORS: Completed/Skipped/Did not start preparing a ration because ...
+         -- TRANSLATORS: Completed/Skipped/Did not start preparing rations because ...
          descname = _"preparing rations",
          actions = {
-            "sleep=6000",
             "return=skipped unless economy needs ration",
+            "sleep=6000",
             "consume=smoked_fish,smoked_meat fruit,bread_frisians",
             "animate=working 18000",
             "produce=ration:2"

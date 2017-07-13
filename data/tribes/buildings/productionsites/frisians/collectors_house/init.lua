@@ -40,8 +40,8 @@ tribes:new_productionsite_type {
 
    programs = {
       work = {
-         -- TRANSLATORS: Completed/Skipped/Did not start felling trees because ...
-         descname = _"working",
+         -- TRANSLATORS: Completed/Skipped/Did not start gathering berries because ...
+         descname = _"gathering berries",
          actions = {
             "sleep=18000",
             "worker=harvest",

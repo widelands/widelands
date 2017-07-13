@@ -48,33 +48,12 @@ tribes:new_productionsite_type {
       { name = "honey", amount = 6 },
    },
    outputs = {
-      "beer",
       "mead"
    },
 
    programs = {
       work = {
-         -- TRANSLATORS: Completed/Skipped/Did not start working because ...
-         descname = _"working",
-         actions = {
-            "call=produce_mead",
-            "call=produce_beer",
-            "return=skipped"
-         }
-      },
-      produce_beer = {
-         -- TRANSLATORS: Completed/Skipped/Did not start preparing a ration because ...
-         descname = _"brewing beer",
-         actions = {
-            "sleep=20000",
-            "return=skipped unless economy needs beer or workers need experience",
-            "consume=barley water",
-            "animate=working 25000",
-            "produce=beer"
-         }
-      },
-      produce_mead = {
-         -- TRANSLATORS: Completed/Skipped/Did not start preparing a snack because ...
+         -- TRANSLATORS: Completed/Skipped/Did not start brewing mead because ...
          descname = _"brewing mead",
          actions = {
             "sleep=20000",

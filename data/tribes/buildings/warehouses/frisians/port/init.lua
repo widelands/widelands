@@ -14,12 +14,14 @@ tribes:new_warehouse_type {
       granite = 4,
       log = 6,
       cloth = 2,
+      gold = 2,
       thatch_reed = 6
    },
    return_on_dismantle = {
       brick = 3,
       granite = 2,
       log = 3,
+      gold = 1,
       cloth = 1,
       thatch_reed = 3
    },

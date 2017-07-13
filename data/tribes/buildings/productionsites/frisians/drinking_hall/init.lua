@@ -73,19 +73,19 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start preparing a ration because ...
          descname = _"preparing a ration",
          actions = {
-            "sleep=8000",
             "return=skipped unless economy needs ration",
+            "sleep=8000",
             "consume=smoked_fish,smoked_meat,fruit",
             "animate=working 16000",
             "produce=ration"
          }
       },
       produce_meal = {
-         -- TRANSLATORS: Completed/Skipped/Did not start preparing a snack because ...
+         -- TRANSLATORS: Completed/Skipped/Did not start preparing a meal because ...
          descname = _"preparing a meal",
          actions = {
-            "sleep=8000",
             "return=skipped unless economy needs meal",
+            "sleep=8000",
             "consume=beer sweetbread smoked_fish,smoked_meat,fruit",
             "animate=working 20000",
             "produce=meal"

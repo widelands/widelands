@@ -56,7 +56,7 @@ tribes:new_productionsite_type {
 
    programs = {
       work = {
-         -- TRANSLATORS: Completed/Skipped/Did not start preparing a ration because ...
+         -- TRANSLATORS: Completed/Skipped/Did not start working because ...
          descname = _"working",
          actions = {
             "call=smelt_iron",
@@ -65,22 +65,22 @@ tribes:new_productionsite_type {
          },
       },
       smelt_iron = {
-         -- TRANSLATORS: Completed/Skipped/Did not start preparing a ration because ...
+         -- TRANSLATORS: Completed/Skipped/Did not start smelting iron because ...
          descname = _"smelting iron",
          actions = {
-            "sleep=8000",
             "return=skipped unless economy needs iron",
+            "sleep=8000",
             "consume=coal iron_ore",
             "animate=working 28000",
             "produce=iron"
          },
       },
       smelt_gold = {
-         -- TRANSLATORS: Completed/Skipped/Did not start preparing a ration because ...
+         -- TRANSLATORS: Completed/Skipped/Did not start smelting gold because ...
          descname = _"smelting gold",
          actions = {
-            "sleep=8000",
             "return=skipped unless economy needs gold",
+            "sleep=8000",
             "consume=coal gold_ore",
             "animate=working 30000",
             "produce=gold"

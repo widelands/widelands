@@ -52,8 +52,8 @@ tribes:new_productionsite_type {
 
    programs = {
       work = {
-         -- TRANSLATORS: Completed/Skipped/Did not start preparing a ration because ...
-         descname = _"working",
+         -- TRANSLATORS: Completed/Skipped/Did not start weaving cloth because ...
+         descname = _"weaving cloth",
          actions = {
             "sleep=16000",
             "return=skipped unless economy needs cloth",

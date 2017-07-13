@@ -12,13 +12,15 @@ tribes:new_trainingsite_type {
    buildcost = {
       brick = 8,
       granite = 6,
-      log = 8,
+      log = 6,
+      gold = 3,
       thatch_reed = 6
    },
    return_on_dismantle = {
       brick = 4,
       granite = 3,
-      log = 4,
+      log = 3,
+      gold = 1,
       thatch_reed = 3
    },
 

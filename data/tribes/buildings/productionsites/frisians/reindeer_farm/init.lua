@@ -53,7 +53,7 @@ tribes:new_productionsite_type {
 
    programs = {
       work = {
-         -- TRANSLATORS: Completed/Skipped/Did not start rearing cattle because ...
+         -- TRANSLATORS: Completed/Skipped/Did not start working because ...
          descname = pgettext("frisians_building", "working"),
          actions = {
             "call=make_fur",
@@ -66,19 +66,19 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start rearing cattle because ...
          descname = pgettext("frisians_building", "rearing reindeer"),
          actions = {
-            "sleep=5000",
             "return=skipped unless economy needs frisians_reindeer",
+            "sleep=5000",
             "consume=barley water",
             "animate=working 25000",
             "recruit=frisians_reindeer"
          }
       },
       make_fur = {
-         -- TRANSLATORS: Completed/Skipped/Did not start rearing cattle because ...
+         -- TRANSLATORS: Completed/Skipped/Did not start producing fur because ...
          descname = pgettext("frisians_building", "producing fur"),
          actions = {
-            "sleep=15000",
             "return=skipped unless economy needs fur",
+            "sleep=15000",
             "consume=barley water",
             "animate=working 20000",
             "produce=fur"

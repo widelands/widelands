@@ -50,7 +50,7 @@ tribes:new_productionsite_type {
 
    programs = {
       work = {
-         -- TRANSLATORS: Completed/Skipped/Did not start preparing a ration because ...
+         -- TRANSLATORS: Completed/Skipped/Did not start sewing fur clothes because ...
          descname = _"sewing fur clothes",
          actions = {
             "sleep=5000",

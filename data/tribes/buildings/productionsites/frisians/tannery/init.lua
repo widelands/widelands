@@ -53,7 +53,7 @@ tribes:new_productionsite_type {
 
    programs = {
       work = {
-         -- TRANSLATORS: Completed/Skipped/Did not start preparing a ration because ...
+         -- TRANSLATORS: Completed/Skipped/Did not start working because ...
          descname = _"working",
          actions = {
             "call=smoke_meat",
@@ -62,27 +62,26 @@ tribes:new_productionsite_type {
          },
       },
       smoke_fish = {
-         -- TRANSLATORS: Completed/Skipped/Did not start preparing a ration because ...
+         -- TRANSLATORS: Completed/Skipped/Did not start smoking fish because ...
          descname = _"smoking fish",
          actions = {
-            "sleep=12000",
             "return=skipped unless economy needs smoked_fish",
+            "sleep=12000",
             "consume=fish log",
             "animate=working 19000",
             "produce=smoked_fish"
          },
       },
       smoke_meat = {
-         -- TRANSLATORS: Completed/Skipped/Did not start preparing a ration because ...
+         -- TRANSLATORS: Completed/Skipped/Did not start smoking meat because ...
          descname = _"smoking meat",
          actions = {
-            "return=skipped when site has fish and economy needs smoked_fish and not economy needs smoked_meat",
-            "sleep=6000",
+            "return=skipped when site has fish and economy needs smoked_fish",
             "return=skipped unless economy needs smoked_meat",
+            "sleep=12000",
             "consume=meat log",
             "animate=working 19000",
-            "produce=smoked_meat",
-            "sleep=6000"
+            "produce=smoked_meat"
          },
       },
    },

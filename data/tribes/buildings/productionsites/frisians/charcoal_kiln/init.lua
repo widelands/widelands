@@ -54,7 +54,7 @@ tribes:new_productionsite_type {
 
    programs = {
       work = {
-         -- TRANSLATORS: Completed/Skipped/Did not start preparing a ration because ...
+         -- TRANSLATORS: Completed/Skipped/Did not start burning charcoal because ...
          descname = _"burning charcoal",
          actions = {
             "sleep=30000",

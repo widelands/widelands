@@ -53,7 +53,7 @@ tribes:new_productionsite_type {
 
    programs = {
       work = {
-         -- TRANSLATORS: Completed/Skipped/Did not start preparing a ration because ...
+         -- TRANSLATORS: Completed/Skipped/Did not start working because ...
          descname = _"working",
          actions = {
             "call=weave_silver",
@@ -62,22 +62,22 @@ tribes:new_productionsite_type {
          },
       },
       weave_silver = {
-         -- TRANSLATORS: Completed/Skipped/Did not start preparing a ration because ...
+         -- TRANSLATORS: Completed/Skipped/Did not start sewing studded fur clothes because ...
          descname = _"sewing studded fur clothes",
          actions = {
-            "sleep=8000",
             "return=skipped unless economy needs fur_clothes_silver",
+            "sleep=8000",
             "consume=fur_clothes iron",
             "animate=working 28000",
             "produce=fur_clothes_silver"
          },
       },
       weave_gold = {
-         -- TRANSLATORS: Completed/Skipped/Did not start preparing a ration because ...
+         -- TRANSLATORS: Completed/Skipped/Did not start sewing golden fur clothes because ...
          descname = _"sewing golden fur clothes",
          actions = {
-            "sleep=8000",
             "return=skipped unless economy needs fur_clothes_golden",
+            "sleep=8000",
             "consume=fur_clothes iron gold",
             "animate=working 34000",
             "produce=fur_clothes_golden"
