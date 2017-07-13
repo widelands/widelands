@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-07-04 08:57+0000\n"
+"POT-Creation-Date: 2017-07-11 11:40+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -27,7 +27,7 @@ msgstr[1] ""
 
 #. * TRANSLATORS: Concatenate the last 2 items on a list.
 #. * TRANSLATORS: RTL languages might want to change the word order here.
-#: ../../data/scripting/formatting.lua:37 ../../data/scripting/richtext.lua:37
+#: ../../data/scripting/formatting.lua:37 ../../data/scripting/richtext.lua:38
 #: ../../src/base/i18n.cc:333
 #, c-format
 msgid "%1$s & %2$s"
@@ -35,7 +35,7 @@ msgstr ""
 
 #. * TRANSLATORS: Join the last 2 items on a list with "or".
 #. * TRANSLATORS: RTL languages might want to change the word order here.
-#: ../../data/scripting/formatting.lua:39 ../../data/scripting/richtext.lua:39
+#: ../../data/scripting/formatting.lua:39 ../../data/scripting/richtext.lua:40
 #: ../../src/base/i18n.cc:337
 #, c-format
 msgid "%1$s or %2$s"
@@ -46,8 +46,8 @@ msgstr ""
 #. * TRANSLATORS: Concatenate 2 items at in the middle of a list.
 #. * TRANSLATORS: RTL languages might want to change the word order here.
 #: ../../data/scripting/formatting.lua:41
-#: ../../data/scripting/formatting.lua:46 ../../data/scripting/richtext.lua:41
-#: ../../data/scripting/richtext.lua:46 ../../src/base/i18n.cc:341
+#: ../../data/scripting/formatting.lua:46 ../../data/scripting/richtext.lua:42
+#: ../../data/scripting/richtext.lua:47 ../../src/base/i18n.cc:341
 #: ../../src/base/i18n.cc:350
 #, c-format
 msgid "%1$s, %2$s"
@@ -55,7 +55,7 @@ msgstr ""
 
 #. * TRANSLATORS: Concatenate the last 2 items on a list.
 #. * TRANSLATORS: RTL languages might want to change the word order here.
-#: ../../data/scripting/formatting.lua:43 ../../data/scripting/richtext.lua:43
+#: ../../data/scripting/formatting.lua:43 ../../data/scripting/richtext.lua:44
 #: ../../src/base/i18n.cc:345
 #, c-format
 msgid "%1$s and %2$s"
@@ -83,17 +83,17 @@ msgid "No AI"
 msgstr ""
 
 #. * TRANSLATORS: This is the name of an AI used in the game setup screens
-#: ../../src/ai/defaultai.h:102
+#: ../../src/ai/defaultai.h:97
 msgid "Normal AI"
 msgstr ""
 
 #. * TRANSLATORS: This is the name of an AI used in the game setup screens
-#: ../../src/ai/defaultai.h:116
+#: ../../src/ai/defaultai.h:111
 msgid "Weak AI"
 msgstr ""
 
 #. * TRANSLATORS: This is the name of an AI used in the game setup screens
-#: ../../src/ai/defaultai.h:130
+#: ../../src/ai/defaultai.h:125
 msgid "Very Weak AI"
 msgstr ""
 
@@ -1323,8 +1323,8 @@ msgctxt "ship_state"
 msgid "Founding a Colony"
 msgstr ""
 
-#: ../../src/logic/map_objects/tribes/soldier.cc:1352
-#: ../../src/logic/map_objects/tribes/soldier.cc:1356
+#: ../../src/logic/map_objects/tribes/soldier.cc:1353
+#: ../../src/logic/map_objects/tribes/soldier.cc:1357
 msgid "Logic error"
 msgstr ""
 
@@ -1358,12 +1358,12 @@ msgstr ""
 msgid "A geologist found resources."
 msgstr ""
 
-#: ../../src/logic/map_objects/tribes/worker.cc:1688
+#: ../../src/logic/map_objects/tribes/worker.cc:1689
 #, c-format
 msgid "Your %s can't find a way home and will likely die."
 msgstr ""
 
-#: ../../src/logic/map_objects/tribes/worker.cc:1693
+#: ../../src/logic/map_objects/tribes/worker.cc:1695
 #: ../../src/wui/productionsitewindow.cc:87
 #: ../../src/wui/productionsitewindow.cc:112
 msgid "Worker"
@@ -1371,7 +1371,7 @@ msgid_plural "Workers"
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../../src/logic/map_objects/tribes/worker.cc:1694
+#: ../../src/logic/map_objects/tribes/worker.cc:1696
 msgid "Worker got lost!"
 msgstr ""
 
