@@ -277,7 +277,9 @@ function soldiers()
 
    while not p1:sees_field(ruins) do sleep(3000) end
    scroll_to_field(ruin_fortress,5)
-   sleep(1000)
+   sleep(500)
+   p1:reveal_fields(ruin_fortress:region(5))
+   sleep(500)
    campaign_message_box(saledus_12)
 
    -- If we don't have enough training sites yet, add a message and objective to complete them.
