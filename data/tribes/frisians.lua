@@ -112,7 +112,6 @@ tribes:new_tribe {
          "frisians_woodcutter",
          "frisians_forester",
          "frisians_builder",
-         --"frisians_digger",
          "frisians_clay_burner",
          "frisians_reed_farmer",
          "frisians_seamstress",
@@ -282,4 +281,9 @@ tribes:new_tribe {
    headquarters = "frisians_headquarters",
    port = "frisians_port",
    barracks = "frisians_barracks",
+   bakery = "frisians_bakery",
+   ironore = "iron_ore",
+   rawlog = "log",
+   refinedlog = "brick",
+   granite = "granite",
 }

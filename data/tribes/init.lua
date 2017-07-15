@@ -325,7 +325,6 @@ print_loading_message("┗━ took", function()
       include "tribes/workers/frisians/landlady/init.lua"
       include "tribes/workers/frisians/clay_burner/init.lua"
       include "tribes/workers/frisians/charcoal_burner/init.lua"
-      --include "tribes/workers/frisians/digger/init.lua"
       include "tribes/workers/frisians/seamstress_master/init.lua"
       include "tribes/workers/frisians/seamstress/init.lua"
       include "tribes/workers/frisians/trainer/init.lua"
