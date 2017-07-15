@@ -4,19 +4,20 @@ tribes:new_productionsite_type {
    msgctxt = "frisians_building",
    name = "frisians_clay_burners_house",
    -- TRANSLATORS: This is a building name used in lists of buildings
-   descname = pgettext("frisians_building", "Clay Burner´s House"),
+   descname = pgettext("frisians_building", "Clay Pit"),
    helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
-   size = "medium",
+   size = "small",
 
    buildcost = {
-      brick = 5,
-      granite = 3,
+      brick = 2,
+      granite = 1,
+      log = 1,
       thatch_reed = 2
    },
    return_on_dismantle = {
-      brick = 2,
-      granite = 2,
+      brick = 1,
+      granite = 1,
       thatch_reed = 1
    },
 
@@ -36,12 +37,11 @@ tribes:new_productionsite_type {
    },
 
    working_positions = {
-      frisians_digger = 1,
       frisians_clay_burner = 1
    },
 
    inputs = {
-      { name = "water", amount = 8 },
+      { name = "water", amount = 3 },
    },
    outputs = {
       "clay"
@@ -52,10 +52,11 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start making clay because ...
          descname = _"making clay",
          actions = {
-            "sleep=8000",
+            "sleep=4000",
             "return=skipped unless economy needs clay",
+            "worker=dig",
             "consume=water",
-            "animate=working 12000",
+            "animate=working 10000",
             "produce=clay"
          },
       },

@@ -4,6 +4,10 @@ animations = {
    idle = {
       pictures = path.list_files(dirname .. "idle_??.png"),
       hotspot = { 6, 28 },
+   },
+   dig = {
+      pictures = path.list_files(dirname .. "dig_??.png"),
+      hotspot = { 6, 28 },
    }
 }
 add_walking_animations(animations, "walk", dirname, "walk", {11, 24}, 15)
@@ -21,7 +25,17 @@ tribes:new_worker_type {
 
    buildcost = {
       frisians_carrier = 1,
-      fire_tongs = 1
+      fire_tongs = 1,
+      shovel = 1
+   },
+
+   programs = {
+      dig = {
+         "findspace size:any radius:3",
+         "walk object",
+         "animation dig 8000",
+         "return"
+      }
    },
 
    animations = animations,

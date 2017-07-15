@@ -7,7 +7,7 @@ tribes:new_productionsite_type {
    descname = pgettext("frisians_building", "Reed Farm"),
    helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
-   size = "small",
+   size = "medium",
 
    buildcost = {
       brick = 5,

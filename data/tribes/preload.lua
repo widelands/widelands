@@ -12,7 +12,7 @@ return {
    -- Basic information for the Frisian tribe
    {
       name = "frisians",
-      author = _"Nordfriese",
+      author = _"The Widelands Development Team",
       -- TRANSLATORS: This is a tribe name
       descname = _"Frisians",
       tooltip = _"The inhabitants of the rough North Sea shore.",

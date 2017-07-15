@@ -7,7 +7,7 @@ tribes:new_productionsite_type {
    descname = pgettext("frisians_building", "Seamstress"),
    helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
-   size = "small",
+   size = "medium",
    enhancement = "frisians_seamstress_master",
 
    buildcost = {
