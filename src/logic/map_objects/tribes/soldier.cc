@@ -112,8 +112,9 @@ SoldierDescr::BattleAttribute::BattleAttribute(std::unique_ptr<LuaTable> table) 
 	std::vector<std::string> image_filenames =
 	   table->get_table("pictures")->array_entries<std::string>();
 	if (image_filenames.size() != max_level + 1) {
-		throw GameDataError("Soldier needs to have %d pictures for battle attribute, but found %lu",
-		                    max_level + 1, image_filenames.size());
+		throw GameDataError(
+		   "Soldier needs to have %u pictures for battle attribute, but found %" PRIuS, max_level + 1,
+		   image_filenames.size());
 	}
 	for (const std::string& image_filename : image_filenames) {
 		images.push_back(g_gr->images().get(image_filename));
@@ -649,7 +650,7 @@ void Soldier::init_auto_task(Game& game) {
 }
 
 struct FindNodeOwned {
-	FindNodeOwned(PlayerNumber owner) : owner_(owner) {
+	explicit FindNodeOwned(PlayerNumber owner) : owner_(owner) {
 	}
 	bool accept(const Map&, const FCoords& coords) const {
 		return (coords.field->get_owned_by() == owner_);
@@ -831,8 +832,8 @@ void Soldier::attack_update(Game& game, State& state) {
 
 	// Count remaining defenders
 	if (enemy) {
-		if (upcast(MilitarySite, ms, enemy)) {
-			defenders = ms->present_soldiers().size();
+		if (enemy->soldier_control() != nullptr) {
+			defenders = enemy->soldier_control()->present_soldiers().size();
 		}
 		if (upcast(Warehouse, wh, enemy)) {
 			Requirements noreq;
@@ -864,18 +865,19 @@ void Soldier::attack_update(Game& game, State& state) {
 			BaseImmovable* const newimm = game.map()[state.coords].get_immovable();
 			upcast(MilitarySite, newsite, newimm);
 			if (newsite && (&newsite->owner() == &owner())) {
-				if (upcast(SoldierControl, ctrl, newsite)) {
-					state.objvar1 = nullptr;
-					// We may also have our location destroyed in between
-					if (ctrl->stationed_soldiers().size() < ctrl->soldier_capacity() &&
-					    (!location ||
-					     location->base_flag().get_position() != newsite->base_flag().get_position())) {
-						molog("[attack] enemy belongs to us now, move in\n");
-						pop_task(game);
-						set_location(newsite);
-						newsite->update_soldier_request();
-						return schedule_act(game, 10);
-					}
+				const SoldierControl* soldier_control = newsite->soldier_control();
+				assert(soldier_control != nullptr);  // 'newsite' is a military site
+				state.objvar1 = nullptr;
+				// We may also have our location destroyed in between
+				if (soldier_control->stationed_soldiers().size() <
+				       soldier_control->soldier_capacity() &&
+				    (!location ||
+				     location->base_flag().get_position() != newsite->base_flag().get_position())) {
+					molog("[attack] enemy belongs to us now, move in\n");
+					pop_task(game);
+					set_location(newsite);
+					newsite->update_soldier_request();
+					return schedule_act(game, 10);
 				}
 			}
 		}
@@ -1345,14 +1347,15 @@ void Soldier::battle_update(Game& game, State&) {
 					    descr().descname().c_str())
 					      .str();
 					owner().add_message(
-					   game, *new Message(Message::Type::kGameLogic, game.get_gametime(),
-					                      descr().descname(), "images/ui_basic/menu_help.png",
-					                      _("Logic error"), messagetext, get_position(), serial_));
+					   game, std::unique_ptr<Message>(
+					            new Message(Message::Type::kGameLogic, game.get_gametime(),
+					                        descr().descname(), "images/ui_basic/menu_help.png",
+					                        _("Logic error"), messagetext, get_position(), serial_)));
 					opponent.owner().add_message(
-					   game,
-					   *new Message(Message::Type::kGameLogic, game.get_gametime(), descr().descname(),
-					                "images/ui_basic/menu_help.png", _("Logic error"), messagetext,
-					                opponent.get_position(), serial_));
+					   game, std::unique_ptr<Message>(new Message(
+					            Message::Type::kGameLogic, game.get_gametime(), descr().descname(),
+					            "images/ui_basic/menu_help.png", _("Logic error"), messagetext,
+					            opponent.get_position(), serial_)));
 					game.game_controller()->set_desired_speed(0);
 					return pop_task(game);
 				}

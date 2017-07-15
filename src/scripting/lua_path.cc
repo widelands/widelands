@@ -32,7 +32,7 @@ namespace {
 /// A class that makes iteration over filename_?.png templates easy.
 class NumberGlob {
 public:
-	NumberGlob(const std::string& file_template);
+	explicit NumberGlob(const std::string& file_template);
 
 	/// If there is a next filename, puts it in 's' and returns true.
 	bool next(std::string* s);

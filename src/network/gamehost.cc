@@ -64,7 +64,7 @@
 #include "wui/interactive_spectator.h"
 
 struct HostGameSettingsProvider : public GameSettingsProvider {
-	HostGameSettingsProvider(GameHost* const init_host) : host_(init_host) {
+	explicit HostGameSettingsProvider(GameHost* const init_host) : host_(init_host) {
 	}
 	~HostGameSettingsProvider() {
 	}
@@ -278,7 +278,7 @@ private:
 };
 
 struct HostChatProvider : public ChatProvider {
-	HostChatProvider(GameHost* const init_host) : h(init_host), kickClient(0) {
+	explicit HostChatProvider(GameHost* const init_host) : h(init_host), kickClient(0) {
 	}
 
 	void send(const std::string& msg) override {
@@ -527,7 +527,7 @@ struct GameHostImpl {
 	Md5Checksum syncreport;
 	bool syncreport_arrived;
 
-	GameHostImpl(GameHost* const h)
+	explicit GameHostImpl(GameHost* const h)
 	   : localdesiredspeed(0),
 	     chat(h),
 	     hp(h),
@@ -909,7 +909,7 @@ void GameHost::send(ChatMessage msg) {
  *   -   -1 if no client was found
  *   -   -2 if the host is the client (has no client number)
  */
-int32_t GameHost::check_client(std::string name) {
+int32_t GameHost::check_client(const std::string& name) {
 	// Check if the client is the host him-/herself
 	if (d->localplayername == name) {
 		return -2;
@@ -939,7 +939,7 @@ int32_t GameHost::check_client(std::string name) {
 * If the host sends a chat message with formation /kick <name> <reason>
 * This function will handle this command and try to kick the user.
 */
-void GameHost::kick_user(uint32_t client, std::string reason) {
+void GameHost::kick_user(uint32_t client, const std::string& reason) {
 	disconnect_client(client, "KICKED", true, reason);
 }
 
@@ -1875,7 +1875,8 @@ void GameHost::request_sync_reports() {
 	s.signed_32(d->syncreport_time);
 	broadcast(s);
 
-	d->game->enqueue_command(new CmdNetCheckSync(d->syncreport_time, this));
+	d->game->enqueue_command(
+	   new CmdNetCheckSync(d->syncreport_time, [this] { sync_report_callback(); }));
 
 	committed_network_time(d->syncreport_time);
 }
@@ -1923,7 +1924,7 @@ void GameHost::check_sync_reports() {
 	}
 }
 
-void GameHost::syncreport() {
+void GameHost::sync_report_callback() {
 	assert(d->game->get_gametime() == static_cast<uint32_t>(d->syncreport_time));
 
 	d->syncreport = d->game->get_sync_hash();

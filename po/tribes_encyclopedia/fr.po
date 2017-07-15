@@ -14,8 +14,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-03-17 10:45+0000\n"
-"PO-Revision-Date: 2017-03-23 18:26+0000\n"
+"POT-Creation-Date: 2017-07-04 08:57+0000\n"
+"PO-Revision-Date: 2017-07-04 11:44+0000\n"
 "Last-Translator: Renaud Bouchard\n"
 "Language-Team: French (http://www.transifex.com/widelands/widelands/language/fr/)\n"
 "MIME-Version: 1.0\n"
@@ -124,6 +124,7 @@ msgid ""
 "blackroot."
 msgstr "Le fermier de racines noires a besoin en moyenne de %1% pour semer et récolter un ballot de racines noires."
 
+#. TRANSLATORS: Purpose helptext for a building
 #. TRANSLATORS: Note helptext for a building
 #. TRANSLATORS: Performance helptext for a building
 #. This include can be removed when all help texts have been defined.
@@ -722,8 +723,8 @@ msgstr "Cette mine exploite toute les ressources jusqu'au plus bas des niveaux. 
 #. TRANSLATORS: 'It' is a mine
 #: ../../data/tribes/buildings/productionsites/barbarians/granitemine/helptexts.lua:21
 msgctxt "barbarians_building"
-msgid "It cannot be upgraded."
-msgstr "Cela ne peux pas être amélioré."
+msgid "It cannot be enhanced."
+msgstr "Cela ne peut pas être amélioré."
 
 #. TRANSLATORS: Performance helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/granitemine/helptexts.lua:26
@@ -1072,8 +1073,8 @@ msgstr "Fabrique toutes les haches dont les barbares ont besoin pour faire la gu
 msgctxt "barbarians_building"
 msgid ""
 "The Barbarian war mill is their most advanced production site for weapons. "
-"As such it needs to be upgraded from an ax workshop."
-msgstr "Le moulin de guerre barbare est le site de fabrication d'armes le plus avancé. Il doit être amélioré à partir d'une fabrique de hache."
+"As such you will need to enhance an ax workshop in order to get one."
+msgstr "Le moulin de guerre des barbares est le site de production le plus avancé. En temps que tel vous devrez améliorer une fabrique de hache afin d'en obtenir un."
 
 #: ../../data/tribes/buildings/productionsites/barbarians/warmill/helptexts.lua:29
 msgctxt "barbarians_building"
@@ -3521,7 +3522,7 @@ msgid "Wool is the hair of sheep. Weaving mills use it to make cloth."
 msgstr "La laine est le poil du mouton. Les ateliers de tissage l'utilisent pour créer du tissu."
 
 #. TRANSLATORS: Helptext for a worker: Armorsmith
-#: ../../data/tribes/workers/atlanteans/armorsmith/helptexts.lua:3
+#: ../../data/tribes/workers/atlanteans/armorsmith/helptexts.lua:5
 msgctxt "atlanteans_worker"
 msgid "Produces armor for the soldiers."
 msgstr "Produit des armures pour les soldats."

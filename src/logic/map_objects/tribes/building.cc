@@ -244,7 +244,8 @@ Building::Building(const BuildingDescr& building_descr)
      leave_time_(0),
      defeating_player_(0),
      seeing_(false),
-     attack_target_(nullptr) {
+     attack_target_(nullptr),
+     soldier_control_(nullptr) {
 }
 
 void Building::load_finish(EditorGameBase& egbase) {
@@ -710,6 +711,11 @@ void Building::set_attack_target(AttackTarget* new_attack_target) {
 	attack_target_ = new_attack_target;
 }
 
+void Building::set_soldier_control(SoldierControl* new_soldier_control) {
+	assert(soldier_control_ == nullptr);
+	soldier_control_ = new_soldier_control;
+}
+
 /**
  * Change whether this building sees its vision range based on workers
  * inside the building.
@@ -766,13 +772,14 @@ void Building::send_message(Game& game,
 	    width % img % owner().get_playercolor().hex_value() % UI_FONT_SIZE_MESSAGE % description)
 	      .str();
 
-	Message* msg =
-	   new Message(msgtype, game.get_gametime(), title, icon_filename, heading, rt_description,
-	               get_position(), (link_to_building_lifetime ? serial_ : 0));
+	std::unique_ptr<Message> msg(new Message(msgtype, game.get_gametime(), title, icon_filename,
+	                                         heading, rt_description, get_position(),
+	                                         (link_to_building_lifetime ? serial_ : 0)));
 
-	if (throttle_time)
-		owner().add_message_with_timeout(game, *msg, throttle_time, throttle_radius);
-	else
-		owner().add_message(game, *msg);
+	if (throttle_time) {
+		owner().add_message_with_timeout(game, std::move(msg), throttle_time, throttle_radius);
+	} else {
+		owner().add_message(game, std::move(msg));
+	}
 }
 }

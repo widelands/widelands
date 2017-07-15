@@ -105,7 +105,7 @@ private:
 	 * If it fails, is_listening() will return \c false.
 	 * \param port The port to listen on.
 	 */
-	NetHost(const uint16_t port);
+	explicit NetHost(uint16_t port);
 
 	bool open_acceptor(boost::asio::ip::tcp::acceptor* acceptor,
 	                   const boost::asio::ip::tcp::endpoint& endpoint);
@@ -119,7 +119,7 @@ private:
 		 * \param sock The socket to listen on. The socket is moved by this
 		 *             constructor so the given socket is no longer valid.
 		 */
-		Client(boost::asio::ip::tcp::socket&& sock);
+		explicit Client(boost::asio::ip::tcp::socket&& sock);
 
 		/// The socket to send/receive with.
 		boost::asio::ip::tcp::socket socket;

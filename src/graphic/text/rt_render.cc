@@ -199,7 +199,7 @@ struct Reference {
 
 class RefMap : public IRefMap {
 public:
-	RefMap(const std::vector<Reference>& refs) : refs_(refs) {
+	explicit RefMap(const std::vector<Reference>& refs) : refs_(refs) {
 	}
 	std::string query(int16_t x, int16_t y) override {
 		// Should this linear algorithm proof to be too slow (doubtful), the
@@ -221,7 +221,7 @@ public:
 		FLOAT_RIGHT,
 		FLOAT_LEFT,
 	};
-	RenderNode(NodeStyle& ns)
+	explicit RenderNode(NodeStyle& ns)
 	   : floating_(NO_FLOAT), halign_(ns.halign), valign_(ns.valign), x_(0), y_(0) {
 	}
 	virtual ~RenderNode() {
@@ -315,7 +315,7 @@ private:
 
 class Layout {
 public:
-	Layout(std::vector<RenderNode*>& all) : h_(0), idx_(0), all_nodes_(all) {
+	explicit Layout(std::vector<RenderNode*>& all) : h_(0), idx_(0), all_nodes_(all) {
 	}
 	virtual ~Layout() {
 	}
@@ -668,7 +668,7 @@ bool WordSpacerNode::show_spaces_;
  */
 class NewlineNode : public RenderNode {
 public:
-	NewlineNode(NodeStyle& ns) : RenderNode(ns) {
+	explicit NewlineNode(NodeStyle& ns) : RenderNode(ns) {
 	}
 
 	std::string debug_info() const override {
@@ -776,7 +776,7 @@ private:
  */
 class DivTagRenderNode : public RenderNode {
 public:
-	DivTagRenderNode(NodeStyle& ns)
+	explicit DivTagRenderNode(NodeStyle& ns)
 	   : RenderNode(ns),
 	     desired_width_(),
 	     background_color_(0, 0, 0),

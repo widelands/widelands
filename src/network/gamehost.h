@@ -38,7 +38,7 @@ struct Client;
  * This includes running the game setup screen and the actual game after
  * launch, as well as dealing with the actual network protocol.
  */
-struct GameHost : public GameController, private SyncCallback {
+struct GameHost : public GameController {
 	GameHost(const std::string& playername, bool internet = false);
 	virtual ~GameHost();
 
@@ -87,8 +87,8 @@ struct GameHost : public GameController, private SyncCallback {
 	void send(ChatMessage msg);
 
 	//  Host command related stuff
-	int32_t check_client(std::string name);
-	void kick_user(uint32_t, std::string);
+	int32_t check_client(const std::string& name);
+	void kick_user(uint32_t, const std::string&);
 	void split_command_array(const std::string& cmdarray,
 	                         std::string& cmd,
 	                         std::string& arg1,
@@ -119,7 +119,7 @@ private:
 	                              const std::string& c = "");
 	void request_sync_reports();
 	void check_sync_reports();
-	void syncreport() override;
+	void sync_report_callback();
 
 	void clear_computer_players();
 	void init_computer_player(Widelands::PlayerNumber p);

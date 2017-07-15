@@ -19,6 +19,7 @@
 
 #include "logic/player.h"
 
+#include <cassert>
 #include <memory>
 
 #include <boost/bind.hpp>
@@ -289,21 +290,22 @@ void Player::play_message_sound(const Message::Type& msgtype) {
 	}
 }
 
-MessageId Player::add_message(Game& game, Message& message, bool const popup) {
-	MessageId id = messages().add_message(message);
+MessageId Player::add_message(Game& game, std::unique_ptr<Message> new_message, bool const popup) {
+	MessageId id = messages().add_message(std::move(new_message));
+	const Message* message = messages()[id];
 
 	// MapObject connection
-	if (message.serial() > 0) {
-		MapObject* mo = egbase().objects().get_object(message.serial());
+	if (message->serial() > 0) {
+		MapObject* mo = egbase().objects().get_object(message->serial());
 		mo->removed.connect(boost::bind(&Player::message_object_removed, this, id));
 	}
 
 	// Sound & popup
 	if (InteractivePlayer* const iplayer = game.get_ipl()) {
 		if (&iplayer->player() == this) {
-			play_message_sound(message.type());
+			play_message_sound(message->type());
 			if (popup)
-				iplayer->popup_message(id, message);
+				iplayer->popup_message(id, *message);
 		}
 	}
 
@@ -311,21 +313,20 @@ MessageId Player::add_message(Game& game, Message& message, bool const popup) {
 }
 
 MessageId Player::add_message_with_timeout(Game& game,
-                                           Message& m,
+                                           std::unique_ptr<Message> message,
                                            uint32_t const timeout,
                                            uint32_t const radius) {
 	const Map& map = game.map();
 	uint32_t const gametime = game.get_gametime();
-	Coords const position = m.position();
-	for (auto tmp_message : messages()) {
-		if (tmp_message.second->type() == m.type() &&
+	Coords const position = message->position();
+	for (const auto& tmp_message : messages()) {
+		if (tmp_message.second->type() == message->type() &&
 		    gametime < tmp_message.second->sent() + timeout &&
 		    map.calc_distance(tmp_message.second->position(), position) <= radius) {
-			delete &m;
 			return MessageId::null();
 		}
 	}
-	return add_message(game, m);
+	return add_message(game, std::move(message));
 }
 
 void Player::message_object_removed(MessageId message_id) const {
@@ -806,8 +807,12 @@ void Player::drop_soldier(PlayerImmovable& imm, Soldier& soldier) {
 		return;
 	if (soldier.descr().type() != MapObjectType::SOLDIER)
 		return;
-	if (upcast(SoldierControl, ctrl, &imm))
-		ctrl->drop_soldier(soldier);
+	if (upcast(Building, building, &imm)) {
+		SoldierControl* soldier_control = building->mutable_soldier_control();
+		if (soldier_control != nullptr) {
+			soldier_control->drop_soldier(soldier);
+		}
+	}
 }
 
 /*
@@ -842,9 +847,10 @@ Player::find_attack_soldiers(Flag& flag, std::vector<Soldier*>* soldiers, uint32
 
 	for (BaseImmovable* temp_flag : flags) {
 		upcast(Flag, attackerflag, temp_flag);
-		upcast(MilitarySite, ms, attackerflag->get_building());
-		std::vector<Soldier*> const present = ms->present_soldiers();
-		uint32_t const nr_staying = ms->min_soldier_capacity();
+		const SoldierControl* soldier_control = attackerflag->get_building()->soldier_control();
+		assert(soldier_control != nullptr);
+		std::vector<Soldier*> const present = soldier_control->present_soldiers();
+		uint32_t const nr_staying = soldier_control->min_soldier_capacity();
 		uint32_t const nr_present = present.size();
 		if (nr_staying < nr_present) {
 			uint32_t const nr_taken = std::min(nr_wanted, nr_present - nr_staying);
