@@ -45,6 +45,7 @@ fi
 
 if [[ "$TRAVIS_OS_NAME" == "osx" ]];
 # Install osx dependencies
+brew install boost glew sdl2 sdl2image sdl2mixer sdl2ttf
 fi
 
 
