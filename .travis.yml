@@ -20,6 +20,15 @@ addons:
   apt:
     sources:
       - ubuntu-toolchain-r-test
+    packages:
+      - cmake
+      - libboost-dev
+      - libboost-regex-dev
+      - libboost-system-dev
+      - libboost-test-dev
+      - libglew-dev
+      - libicu-dev
+      - libpng-dev
 
 matrix:
   include:

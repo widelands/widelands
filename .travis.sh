@@ -10,6 +10,7 @@ if [ "$CXX" = "clang++" ]; then
   until sudo add-apt-repository "deb http://llvm.org/apt/trusty/ llvm-toolchain-trusty-$CLANG_VERSION main"; do sleep 10; done;
   wget -O - http://llvm.org/apt/llvm-snapshot.gpg.key | sudo apt-key add -
 fi
+#TODO(code review) Figure out why (and if) we need to install snapshots
 until sudo add-apt-repository ppa:zoogie/sdl2-snapshots -y; do sleep 10; done
 until sudo apt-get update -qq --force-yes -y; do sleep 10; done
 
@@ -23,14 +24,6 @@ if [ "$CXX" = "clang++" ]; then
 fi
 
 until sudo apt-get install -qq --force-yes -y \
-   cmake \
-   libboost-dev \
-   libboost-regex-dev \
-   libboost-system-dev \
-   libboost-test-dev \
-   libglew-dev \
-   libicu-dev \
-   libpng-dev \
    libsdl2-dev \
    libsdl2-image-dev \
    libsdl2-mixer-dev \
