@@ -1468,6 +1468,7 @@ void GameHost::set_paused(bool /* paused */) {
 }
 
 // Send the packet to all properly connected clients
+// TODO(Notabilis): Make this a function of NetHost/NetRelay
 void GameHost::broadcast(SendPacket& packet) {
 	for (const Client& client : d->clients) {
 		if (client.playernum != UserSettings::not_connected()) {

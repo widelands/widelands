@@ -48,22 +48,11 @@ public:
 	~NetHost();
 
 	/**
-	 * Returns whether the server is started and is listening.
-	 * \return \c true if the server is listening, \c false otherwise.
-	 */
-	bool is_listening() const;
-
-	/**
 	 * Returns whether the given client is connected.
 	 * \param The id of the client to check.
 	 * \return \c true if the connection is open, \c false otherwise.
 	 */
 	bool is_connected(ConnectionId id) const;
-
-	/**
-	 * Stops listening for connections.
-	 */
-	void stop_listening();
 
 	/**
 	 * Closes the connection to the given client.
@@ -100,6 +89,20 @@ public:
 	void send(ConnectionId id, const SendPacket& packet);
 
 private:
+
+	/**
+	 * Returns whether the server is started and is listening.
+	 * \return \c true if the server is listening, \c false otherwise.
+	 */
+	// Feel free to make this method public if you need it
+	bool is_listening() const;
+
+	/**
+	 * Stops listening for connections.
+	 */
+	// Feel free to make this method public if you need it
+	void stop_listening();
+
 	/**
 	 * Tries to listen on the given port.
 	 * If it fails, is_listening() will return \c false.
