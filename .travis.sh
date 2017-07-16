@@ -1,12 +1,12 @@
 set -ex
 
-# Some of these commands fail transiently. We keep retrying them until they
-# succeed.
 if [ "$CXX" = "g++" ]; then
    sudo apt-get install -qq --force-yes -y g++-$GCC_VERSION;
    export CXX="g++-$GCC_VERSION" CC="gcc-$GCC_VERSION";
 fi
 if [ "$CXX" = "clang++" ]; then
+  # Some of these commands fail transiently. We keep retrying them until they
+  # succeed.
   until sudo add-apt-repository "deb http://llvm.org/apt/trusty/ llvm-toolchain-trusty-$CLANG_VERSION main"; do sleep 10; done;
   wget -O - http://llvm.org/apt/llvm-snapshot.gpg.key | sudo apt-key add -
 
