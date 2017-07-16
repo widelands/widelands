@@ -2,23 +2,18 @@ set -ex
 
 # Some of these commands fail transiently. We keep retrying them until they
 # succeed.
-# Already done in the yml file now...
-#if [ "$CXX" = "g++" ]; then
-#   until sudo add-apt-repository ppa:ubuntu-toolchain-r/test -y; do sleep 10; done
-#fi
-if [ "$CXX" = "clang++" ]; then
-  until sudo add-apt-repository "deb http://llvm.org/apt/trusty/ llvm-toolchain-trusty-$CLANG_VERSION main"; do sleep 10; done;
-  wget -O - http://llvm.org/apt/llvm-snapshot.gpg.key | sudo apt-key add -
-fi
-until sudo apt-get update -qq --force-yes -y; do sleep 10; done
-
 if [ "$CXX" = "g++" ]; then
    sudo apt-get install -qq --force-yes -y g++-$GCC_VERSION;
    export CXX="g++-$GCC_VERSION" CC="gcc-$GCC_VERSION";
 fi
 if [ "$CXX" = "clang++" ]; then
-   sudo apt-get install -qq --force-yes -y clang-$CLANG_VERSION;
-   export CXX="clang++-$CLANG_VERSION" CC="clang-$CLANG_VERSION";
+  until sudo add-apt-repository "deb http://llvm.org/apt/trusty/ llvm-toolchain-trusty-$CLANG_VERSION main"; do sleep 10; done;
+  wget -O - http://llvm.org/apt/llvm-snapshot.gpg.key | sudo apt-key add -
+
+  until sudo apt-get update -qq --force-yes -y; do sleep 10; done
+
+  sudo apt-get install -qq --force-yes -y clang-$CLANG_VERSION;
+  export CXX="clang++-$CLANG_VERSION" CC="clang-$CLANG_VERSION";
 fi
 
 # Configure the build
