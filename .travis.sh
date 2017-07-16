@@ -1,6 +1,7 @@
 set -ex
 
-if [[ "$TRAVIS_OS_NAME" == "linux" ]];
+#TODO yes, i'll fix indentation at some point :)
+if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
 #Install linux dependencies
 
 # Some of these commands fail transiently. We keep retrying them until they
@@ -43,7 +44,7 @@ until sudo apt-get install -qq --force-yes -y \
 
 fi
 
-if [[ "$TRAVIS_OS_NAME" == "osx" ]];
+if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
 # Install osx dependencies
 brew install boost glew sdl2 sdl2image sdl2mixer sdl2ttf
 fi
@@ -56,7 +57,7 @@ cmake .. -DCMAKE_BUILD_TYPE:STRING="$BUILD_TYPE"
 
 if [ "$BUILD_TYPE" == "Debug" ]; then
 
-if [[ "$TRAVIS_OS_NAME" == "linux" ]];
+if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
 #FIXME(codereview) Start easy, add complicated things to osx later...
    # Build the documentation. Any warning is an error.
    sudo pip install sphinx
