@@ -11,7 +11,6 @@ tribes:new_tribe {
       flag = {
          pictures = path.list_files(dirname .. "images/frisians/flag_??.png"),
          hotspot = { 13, 36 },
-         --fps = 5
       }
    },
 
@@ -190,24 +189,24 @@ tribes:new_tribe {
       "frisians_quarry",
       "frisians_woodcutters_house",
       "frisians_foresters_house",
-      "frisians_reed_farm",
       "frisians_hunters_house",
       "frisians_fishers_house",
       "frisians_well",
+      "frisians_clay_burners_house",
       "frisians_berry_farm",
       "frisians_collectors_house",
       "frisians_beekeepers_house",
-      "frisians_seamstress",
-      "frisians_seamstress_master",
       "frisians_scouts_house",
 
       -- Medium
-      "frisians_clay_burners_house",
+      "frisians_reed_farm",
       "frisians_brick_burners_house",
       "frisians_furnace",
       "frisians_recycling_centre",
       "frisians_blacksmithy",
       "frisians_armour_smithy",
+      "frisians_seamstress",
+      "frisians_seamstress_master",
       "frisians_charcoal_kiln",
       "frisians_tannery",
       "frisians_bakery",
