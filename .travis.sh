@@ -1,8 +1,8 @@
 set -ex
 
 if [ "$CXX" = "g++" ]; then
-   sudo apt-get install -qq --force-yes -y g++-$GCC_VERSION;
-   export CXX="g++-$GCC_VERSION" CC="gcc-$GCC_VERSION";
+  sudo apt-get install -qq --force-yes -y g++-$GCC_VERSION;
+  export CXX="g++-$GCC_VERSION" CC="gcc-$GCC_VERSION";
 fi
 if [ "$CXX" = "clang++" ]; then
   sudo apt-get install -qq --force-yes -y clang-$CLANG_VERSION;
