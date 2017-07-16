@@ -13,12 +13,19 @@ branches:
   except:
     - _widelands_dev_widelands_trunk
 
-# Let travis add additional repos for us (https://docs.travis-ci.com/user/migrating-from-legacy/#Adding-APT-Sources)
-# These are based on a whitelist, see https://github.com/travis-ci/apt-source-whitelist for details
+# Let travis add additional repos and install packages for us (https://docs.travis-ci.com/user/migrating-from-legacy/#Adding-APT-Sources)
 addons:
   apt:
+    # The aliases used are based on a whitelist, see https://github.com/travis-ci/apt-source-whitelist for details. 
+    # Clang 3.4 and 3.5 are too old (presumably) to have gotten official aliases
     sources:
       - ubuntu-toolchain-r-test
+      - sourceline: "deb http://apt.llvm.org/trusty/ llvm-toolchain-trusty-3.4 main"
+        key_url: "http://apt.llvm.org/llvm-snapshot.gpg.key"
+      - sourceline: "deb http://apt.llvm.org/trusty/ llvm-toolchain-trusty-3.5 main"
+        key_url: "http://apt.llvm.org/llvm-snapshot.gpg.key"
+      - llvm-toolchain-trusty-3.9
+      - llvm-toolchain-trusty-4.0
     packages:
       - cmake
       - libboost-dev
