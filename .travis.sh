@@ -48,7 +48,7 @@ fi
 if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
   # Install osx dependencies
   # boost and cmake are preinstalled :)
-  brew install gettext glew sdl2 sdl2_image sdl2_mixer sdl2_ttf zlib
+  brew install gettext glew icu4c sdl2 sdl2_image sdl2_mixer sdl2_ttf zlib
   # brew doesn't add a link by default for gettext
   brew link --force gettext
 fi
@@ -62,7 +62,8 @@ cmake .. -DCMAKE_BUILD_TYPE:STRING="$BUILD_TYPE"
 if [ "$BUILD_TYPE" == "Debug" ]; then
 
 if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
-#FIXME(codereview) Start easy, add complicated things to osx later...
+# FIXME(codereview) Start easy, add complicated things to osx later...
+# Probably need to install python via brew to enable this...
    # Build the documentation. Any warning is an error.
    sudo pip install sphinx
    pushd ../doc/sphinx
