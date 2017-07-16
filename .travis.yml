@@ -29,6 +29,12 @@ addons:
       - libglew-dev
       - libicu-dev
       - libpng-dev
+      - libsdl2-dev
+      - libsdl2-image-dev
+      - libsdl2-mixer-dev
+      - libsdl2-ttf-dev
+      - python-pip
+      - zlib1g-dev
 
 matrix:
   include:
