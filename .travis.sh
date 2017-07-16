@@ -3,6 +3,7 @@ set -ex
 #TODO yes, i'll fix indentation at some point :)
 if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
 #Install linux dependencies
+exit #FIXME try to short-circuit linux-builds to reduce long build times. I don't really need to know the result of all these builds at this point
 
 # Some of these commands fail transiently. We keep retrying them until they
 # succeed.
