@@ -46,9 +46,11 @@ until sudo apt-get install -qq --force-yes -y \
 fi
 
 if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
-# Install osx dependencies
-# boost and cmake are preinstalled :)
-brew install gettext glew sdl2 sdl2_image sdl2_mixer sdl2_ttf zlib
+  # Install osx dependencies
+  # boost and cmake are preinstalled :)
+  brew install gettext glew sdl2 sdl2_image sdl2_mixer sdl2_ttf zlib
+  # brew doesn't add a link by default for gettext
+  brew link --force gettext
 fi
 
 
