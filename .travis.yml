@@ -13,37 +13,46 @@ branches:
   except:
     - _widelands_dev_widelands_trunk
 
+
+# Let travis add additional repos for us (https://docs.travis-ci.com/user/migrating-from-legacy/#Adding-APT-Sources)
+# These are based on a whitelist, see https://github.com/travis-ci/apt-source-whitelist for details
+addons:
+  apt:
+    sources:
+      - ubuntu-toolchain-r-test
+
 matrix:
   include:
-     - compiler: clang
-       env: CLANG_VERSION="3.4" BUILD_TYPE="Debug"
-     - compiler: clang
-       env: CLANG_VERSION="3.5" BUILD_TYPE="Debug"
-     - compiler: clang
-       env: CLANG_VERSION="3.9" BUILD_TYPE="Debug"
+# Reduce number of builds for faster feedback
+#     - compiler: clang
+#       env: CLANG_VERSION="3.4" BUILD_TYPE="Debug"
+#     - compiler: clang
+#       env: CLANG_VERSION="3.5" BUILD_TYPE="Debug"
+#     - compiler: clang
+#       env: CLANG_VERSION="3.9" BUILD_TYPE="Debug"
      - compiler: clang
        env: CLANG_VERSION="4.0" BUILD_TYPE="Debug"
-     - compiler: clang
-       env: CLANG_VERSION="3.4" BUILD_TYPE="Release"
-     - compiler: clang
-       env: CLANG_VERSION="3.5" BUILD_TYPE="Release"
-     - compiler: clang
-       env: CLANG_VERSION="3.9" BUILD_TYPE="Release"
-     - compiler: clang
-       env: CLANG_VERSION="4.0" BUILD_TYPE="Release"
-     - compiler: gcc
-       env: GCC_VERSION="4.8" BUILD_TYPE="Debug"
-     - compiler: gcc
-       env: GCC_VERSION="4.9" BUILD_TYPE="Debug"
-     - compiler: gcc
-       env: GCC_VERSION="6" BUILD_TYPE="Debug"
+#     - compiler: clang
+#       env: CLANG_VERSION="3.4" BUILD_TYPE="Release"
+#     - compiler: clang
+#       env: CLANG_VERSION="3.5" BUILD_TYPE="Release"
+#     - compiler: clang
+#       env: CLANG_VERSION="3.9" BUILD_TYPE="Release"
+#     - compiler: clang
+#       env: CLANG_VERSION="4.0" BUILD_TYPE="Release"
+#     - compiler: gcc
+#       env: GCC_VERSION="4.8" BUILD_TYPE="Debug"
+#     - compiler: gcc
+#       env: GCC_VERSION="4.9" BUILD_TYPE="Debug"
+#     - compiler: gcc
+#       env: GCC_VERSION="6" BUILD_TYPE="Debug"
      - compiler: gcc
        env: GCC_VERSION="7" BUILD_TYPE="Debug"
-     - compiler: gcc
-       env: GCC_VERSION="4.8" BUILD_TYPE="Release"
-     - compiler: gcc
-       env: GCC_VERSION="4.9" BUILD_TYPE="Release"
-     - compiler: gcc
-       env: GCC_VERSION="6" BUILD_TYPE="Release"
-     - compiler: gcc
-       env: GCC_VERSION="7" BUILD_TYPE="Release"
+#     - compiler: gcc
+#       env: GCC_VERSION="4.8" BUILD_TYPE="Release"
+#     - compiler: gcc
+#       env: GCC_VERSION="4.9" BUILD_TYPE="Release"
+#     - compiler: gcc
+#       env: GCC_VERSION="6" BUILD_TYPE="Release"
+#     - compiler: gcc
+#       env: GCC_VERSION="7" BUILD_TYPE="Release"

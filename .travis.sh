@@ -2,9 +2,10 @@ set -ex
 
 # Some of these commands fail transiently. We keep retrying them until they
 # succeed.
-if [ "$CXX" = "g++" ]; then
-   until sudo add-apt-repository ppa:ubuntu-toolchain-r/test -y; do sleep 10; done
-fi
+# Already done in the yml file now...
+#if [ "$CXX" = "g++" ]; then
+#   until sudo add-apt-repository ppa:ubuntu-toolchain-r/test -y; do sleep 10; done
+#fi
 if [ "$CXX" = "clang++" ]; then
   until sudo add-apt-repository "deb http://llvm.org/apt/trusty/ llvm-toolchain-trusty-$CLANG_VERSION main"; do sleep 10; done;
   wget -O - http://llvm.org/apt/llvm-snapshot.gpg.key | sudo apt-key add -
