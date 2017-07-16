@@ -23,6 +23,7 @@ wl_library(network
     network_player_settings_backend.cc
     network_player_settings_backend.h
     network_protocol.h
+    relay_protocol.h
   DEPENDS
     ai
     base_exceptions
