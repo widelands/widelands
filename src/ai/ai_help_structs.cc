@@ -885,22 +885,24 @@ void ManagementData::new_dna_for_persistent(const uint8_t pn, const Widelands::A
     std::vector<int8_t> input_weights_P1(kNeuronPoolSize);
     std::vector<int8_t> input_func_P1(kNeuronPoolSize);
     std::vector<uint32_t> f_neurons_P1(kFNeuronPoolSize);
-    ai_dna_handler.fetch_dna(AI_military_numbers_P1, input_weights_P1, input_func_P1, f_neurons_P1, primary_parent);
+    ai_dna_handler.fetch_dna(AI_military_numbers_P1, input_weights_P1, input_func_P1, f_neurons_P1, primary_parent + 1);
 
 	std::vector<int16_t> AI_military_numbers_P2(kMagicNumbersSize);
     std::vector<int8_t> input_weights_P2(kNeuronPoolSize);
     std::vector<int8_t> input_func_P2(kNeuronPoolSize);
     std::vector<uint32_t> f_neurons_P2(kFNeuronPoolSize);
-    ai_dna_handler.fetch_dna(AI_military_numbers_P2, input_weights_P2, input_func_P2, f_neurons_P2, primary_parent);
+    ai_dna_handler.fetch_dna(AI_military_numbers_P2, input_weights_P2, input_func_P2, f_neurons_P2, parent2 + 1);
+
+    //printf ("First military number: %d\n", AI_military_numbers_P1[0]); NOCOM
 
     log("    ... Primary parent: %d, secondary parent: %d\n", primary_parent, parent2);
 
     // First setting of military numbers, they go directly to persistent data
     for (uint16_t i = 0; i < kMagicNumbersSize; i += 1) {
         // Child inherits DNA with probability 5:1 from main parent
-        uint8_t dna_donor = (std::rand() % kSecondParentProbability > 0) ? 0 : 1;
+        uint8_t dna_donor = ((std::rand() % kSecondParentProbability) > 0) ? 0 : 1;
         if (i == kMutationRatePosition) {  // Overwriting
-            dna_donor = primary_parent;
+            dna_donor = 0;
         }
 
         switch (dna_donor) {
@@ -911,7 +913,7 @@ void ManagementData::new_dna_for_persistent(const uint8_t pn, const Widelands::A
             set_military_number_at(i, AI_military_numbers_P2[i]);
             break;
         default:
-            log("parent %d?\n", dna_donor);
+            log("Invalid dna_donor for military numbers: %d?\n", dna_donor);
             NEVER_HERE();
         }
     }
@@ -922,7 +924,7 @@ void ManagementData::new_dna_for_persistent(const uint8_t pn, const Widelands::A
 
     for (uint16_t i = 0; i < kNeuronPoolSize; i += 1) {
         const uint8_t dna_donor =
-           (std::rand() % kSecondParentProbability > 0) ? 0 : 1;
+           ((std::rand() % kSecondParentProbability) > 0) ? 0 : 1;
 
         switch (dna_donor) {
         case 0:
@@ -934,7 +936,7 @@ void ManagementData::new_dna_for_persistent(const uint8_t pn, const Widelands::A
             pd->neuron_functs.push_back(input_func_P2[i]);
             break;
         default:
-            log("parent %d?\n", dna_donor);
+            log("Invalid dna_donor for neurons:  %d?\n", dna_donor);
             NEVER_HERE();
         }
     }
@@ -950,7 +952,7 @@ void ManagementData::new_dna_for_persistent(const uint8_t pn, const Widelands::A
             pd->f_neurons.push_back(f_neurons_P2[i]);
             break;
         default:
-            log("parent %d?\n", dna_donor);
+            log("Invalid dna_donor for f-neurons:  %d?\n", dna_donor);
             NEVER_HERE();
         }
     }
@@ -1097,7 +1099,7 @@ void ManagementData::mutate(const uint8_t pn) {
     }
 
     test_consistency();
-    ai_dna_handler.dump_output(pd, pn);
+
 }
 
 // Now we copy persistent to local
@@ -1154,60 +1156,64 @@ void ManagementData::test_consistency(bool itemized) {
     return;
 }
 
-// Print DNA data to console, used for training
-// TODO(tiborb): Once we will have AI dumped into files, this should be removed
-// Also, used only for training
-void ManagementData::dump_data() {
-    // dumping new numbers
-    log("     actual military_numbers (%lu):\n      {", pd->magic_numbers.size());
-    uint16_t itemcounter = 1;
-    uint16_t line_counter = 1;
-    for (const auto& item : pd->magic_numbers) {
-        log(" %3d%s", item, (&item != &pd->magic_numbers.back()) ? ", " : "  ");
-        if (itemcounter % 10 == 0) {
-            log(" //  AutoContent_%02d\n       ", line_counter);
-            line_counter += 1;
-        }
-        ++itemcounter;
-    }
-    log("}\n");
-
-    log("     actual neuron setup:\n      ");
-    log("{ ");
-    itemcounter = 1;
-    for (auto& item : neuron_pool) {
-        log(" %3d%s", item.get_weight(), (&item != &neuron_pool.back()) ? ", " : "  ");
-        if (itemcounter % 10 == 0) {
-            log(" //  AutoContent_%02d\n       ", line_counter);
-            line_counter += 1;
-        }
-        ++itemcounter;
-    }
-    log("}\n      { ");
-    itemcounter = 1;
-    for (auto& item : neuron_pool) {
-        log(" %3d%s", item.get_type(), (&item != &neuron_pool.back()) ? ", " : "  ");
-        if (itemcounter % 10 == 0) {
-            log(" //  AutoContent_%02d\n       ", line_counter);
-            line_counter += 1;
-        }
-        ++itemcounter;
-    }
-    log("}\n");
-
-    log("     actual f-neuron setup:\n      ");
-    log("{ ");
-    itemcounter = 1;
-    for (auto& item : f_neuron_pool) {
-        log(" %8u%s", item.get_int(), (&item != &f_neuron_pool.back()) ? ", " : "  ");
-        if (itemcounter % 10 == 0) {
-            log(" //  AutoContent_%02d\n       ", line_counter);
-            line_counter += 1;
-        }
-        ++itemcounter;
-    }
-    log("}\n");
+void ManagementData::dump_data(const PlayerNumber pn) {
+	ai_dna_handler.dump_output(pd, pn);
 }
+
+//// Print DNA data to console, used for training NOCOM no needed anymore
+//// TODO(tiborb): Once we will have AI dumped into files, this should be removed
+//// Also, used only for training
+//void ManagementData::dump_data() {
+    //// dumping new numbers
+    //log("     actual military_numbers (%lu):\n      {", pd->magic_numbers.size());
+    //uint16_t itemcounter = 1;
+    //uint16_t line_counter = 1;
+    //for (const auto& item : pd->magic_numbers) {
+        //log(" %3d%s", item, (&item != &pd->magic_numbers.back()) ? ", " : "  ");
+        //if (itemcounter % 10 == 0) {
+            //log(" //  AutoContent_%02d\n       ", line_counter);
+            //line_counter += 1;
+        //}
+        //++itemcounter;
+    //}
+    //log("}\n");
+
+    //log("     actual neuron setup:\n      ");
+    //log("{ ");
+    //itemcounter = 1;
+    //for (auto& item : neuron_pool) {
+        //log(" %3d%s", item.get_weight(), (&item != &neuron_pool.back()) ? ", " : "  ");
+        //if (itemcounter % 10 == 0) {
+            //log(" //  AutoContent_%02d\n       ", line_counter);
+            //line_counter += 1;
+        //}
+        //++itemcounter;
+    //}
+    //log("}\n      { ");
+    //itemcounter = 1;
+    //for (auto& item : neuron_pool) {
+        //log(" %3d%s", item.get_type(), (&item != &neuron_pool.back()) ? ", " : "  ");
+        //if (itemcounter % 10 == 0) {
+            //log(" //  AutoContent_%02d\n       ", line_counter);
+            //line_counter += 1;
+        //}
+        //++itemcounter;
+    //}
+    //log("}\n");
+
+    //log("     actual f-neuron setup:\n      ");
+    //log("{ ");
+    //itemcounter = 1;
+    //for (auto& item : f_neuron_pool) {
+        //log(" %8u%s", item.get_int(), (&item != &f_neuron_pool.back()) ? ", " : "  ");
+        //if (itemcounter % 10 == 0) {
+            //log(" //  AutoContent_%02d\n       ", line_counter);
+            //line_counter += 1;
+        //}
+        //++itemcounter;
+    //}
+    //log("}\n");
+//}
 
 // Querying military number at a possition
 int16_t ManagementData::get_military_number_at(uint8_t pos) {

@@ -638,7 +638,7 @@ struct ManagementData {
 	void copy_persistent_to_local();
 	void review(
 	   uint32_t, PlayerNumber, uint32_t, uint32_t, uint32_t, uint16_t, int16_t, int16_t, uint16_t);
-	void dump_data();
+	void dump_data(PlayerNumber);
 	uint16_t new_neuron_id() {
 		++next_neuron_id;
 		return next_neuron_id - 1;

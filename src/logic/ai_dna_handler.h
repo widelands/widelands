@@ -35,6 +35,7 @@
 #include <stdint.h>
 
 #include "io/filesystem/filesystem.h"
+#include "io/filesystem/layered_filesystem.h"
 #include "logic/game.h"
 #include "logic/player.h"
 
@@ -58,10 +59,10 @@ public:
 		return "ai";
 	}
 
-	void fetch_dna(std::vector<int16_t>,
-	               std::vector<int8_t>,
-	               std::vector<int8_t>,
-	               std::vector<uint32_t>,
+	void fetch_dna(std::vector<int16_t>&,
+	               std::vector<int8_t>&,
+	               std::vector<int8_t>&,
+	               std::vector<uint32_t>&,
 	               uint8_t);
 	void dump_output(Widelands::Player::AiPersistentState* pd, uint8_t);
 

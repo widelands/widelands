@@ -530,7 +530,7 @@ void DefaultAI::late_initialization() {
         management_data.copy_persistent_to_local();
         management_data.mutate(player_number());
         if (kAITrainingMode) {
-            management_data.dump_data();
+            management_data.dump_data(player_number());
         }
 
         //void ai_dump_file = management_data.ai_dna_handler.dump_output(&persistent_data, player_number());
@@ -561,15 +561,16 @@ void DefaultAI::late_initialization() {
             management_data.new_dna_for_persistent(player_number(), type_);
             management_data.copy_persistent_to_local();
             management_data.mutate(player_number());
+            management_data.dump_data(player_number());
 
         } else {
             management_data.copy_persistent_to_local();
         }
 
         management_data.test_consistency(true);
-        if (kAITrainingMode) {
-            management_data.dump_data();
-        }
+        //if (kAITrainingMode) { NOCOM - no mutating no saving data
+            //management_data.dump_data();
+        //}
 
         log(" %2d: %lu basic buildings in savegame file. %s\n", player_number(),
             persistent_data->remaining_basic_buildings.size(),

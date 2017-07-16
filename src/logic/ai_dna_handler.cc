@@ -36,23 +36,20 @@ AiDnaHandler::AiDnaHandler() {
 	fs_type_ = FileSystem::DIR;
 }
 
-void AiDnaHandler::fetch_dna(std::vector<int16_t> military_numbers,
-                             std::vector<int8_t> input_weights,
-                             std::vector<int8_t> input_func,
-                             std::vector<uint32_t> f_neurons,
+// this reads AI file for particular slot (position) and populate numbers into passed vectors
+void AiDnaHandler::fetch_dna(std::vector<int16_t>& military_numbers,
+                             std::vector<int8_t>& input_weights,
+                             std::vector<int8_t>& input_func,
+                             std::vector<uint32_t>& f_neurons,
                              uint8_t slot) {
-	assert(slot < 4);
 
-	std::string full_path = get_base_dir();
-	// Make a filesystem out of this
-	// NOCOM the line below crashes the game with:
-	//  what():  FileSystem::create: could not find file or directory: ai
-	FileSystem* ai_dir = &FileSystem::create(full_path);
+	// AI files are in range 1-4
+	assert(slot > 0 && slot < 5);
 
-	std::string filename = "ai_input_" + std::to_string(static_cast<int16_t>(slot-1)) + "." + AI_SUFFIX;
+	std::string full_filename = get_base_dir() + g_fs->file_separator() + "ai_input_" + std::to_string(static_cast<int16_t>(slot)) + "." + AI_SUFFIX;
 
 	Profile prof;
-	prof.read(filename.c_str(), nullptr, *ai_dir);
+	prof.read(full_filename.c_str(), nullptr, *g_fs);
 	Section& mn = prof.get_safe_section("magic_numbers");
 	for (uint16_t i = 0; i < military_numbers.size(); i++) {
 		int32_t value = mn.get_int(std::to_string(static_cast<int32_t>(i)).c_str());
@@ -86,15 +83,16 @@ void AiDnaHandler::fetch_dna(std::vector<int16_t> military_numbers,
 
 		f_neurons[i] = value;
 	}
+	//printf ("First military number (output): %d\n", military_numbers[0]);
 }
 
+//this generate new file with AI data in ai folder
 void AiDnaHandler::dump_output(Widelands::Player::AiPersistentState* pd, uint8_t pn) {
-	std::string full_path = get_base_dir();
-	std::string filename = "ai_player_" + std::to_string(static_cast<int16_t>(pn)) + "." + AI_SUFFIX;
-	printf(" %d: AI to be dumped to %s %s\n", pn, full_path.c_str(), filename.c_str());
 
-	// Make a filesystem out of this
-	FileSystem* ai_dir = &FileSystem::create(full_path);
+	std::string full_filename = get_base_dir() + g_fs->file_separator() + "ai_player_" + std::to_string(static_cast<int16_t>(pn)) + "." + AI_SUFFIX;
+
+
+	printf(" %d: AI to be dumped to %s\n", pn, full_filename.c_str());
 
 	Profile prof;
 
@@ -119,7 +117,7 @@ void AiDnaHandler::dump_output(Widelands::Player::AiPersistentState* pd, uint8_t
 	Section& fn = prof.create_section("fneurons");
 	assert(pd->f_neuron_pool_size == pd->f_neurons.size());
 	for (uint16_t i = 0; i < pd->f_neuron_pool_size; ++i) {
-		fn.set_int(std::to_string(static_cast<int64_t>(i)).c_str(), pd->f_neurons[i]);
+		fn.set_natural(std::to_string(static_cast<int64_t>(i)).c_str(), pd->f_neurons[i]);
 	}
-	prof.write(filename.c_str(), false, *ai_dir);
+	prof.write(full_filename.c_str(), false, *g_fs);
 }
