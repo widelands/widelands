@@ -3,10 +3,6 @@ script: bash -e .travis.sh
 sudo: required
 dist: trusty
 
-os:
-  - linux #TODO(code review) Is this just adding some extra linux build which isn't matched up with the compiler matrix. Should they be combined somehow?
-  - osx
-
 before_script:
   - export DISPLAY=:99.0
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sh -e /etc/init.d/xvfb start ; fi
@@ -19,14 +15,21 @@ branches:
 
 matrix:
   include:
-# Reduce number of builds for faster feedback
+     ### MAC OSX BUILDS
+     - os: osx
+       env: BUILD_TYPE="Debug"
+     - os: osx
+       env: BUILD_TYPE="Release"
+     ### LINUX + CLANG BUILDS
+# TODO Temporarily reduce number of builds for faster feedback
 #     - compiler: clang
 #       env: CLANG_VERSION="3.4" BUILD_TYPE="Debug"
 #     - compiler: clang
 #       env: CLANG_VERSION="3.5" BUILD_TYPE="Debug"
 #     - compiler: clang
 #       env: CLANG_VERSION="3.9" BUILD_TYPE="Debug"
-     - compiler: clang
+     - os: linux
+       compiler: clang
        env: CLANG_VERSION="4.0" BUILD_TYPE="Debug"
 #     - compiler: clang
 #       env: CLANG_VERSION="3.4" BUILD_TYPE="Release"
@@ -36,6 +39,7 @@ matrix:
 #       env: CLANG_VERSION="3.9" BUILD_TYPE="Release"
 #     - compiler: clang
 #       env: CLANG_VERSION="4.0" BUILD_TYPE="Release"
+#     ### LINUX + GCC BUILDS
 #     - compiler: gcc
 #       env: GCC_VERSION="4.8" BUILD_TYPE="Debug"
 #     - compiler: gcc
