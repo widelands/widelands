@@ -1,5 +1,8 @@
 set -ex
 
+if [[ "$TRAVIS_OS_NAME" == "linux" ]];
+#Install linux dependencies
+
 # Some of these commands fail transiently. We keep retrying them until they
 # succeed.
 if [ "$CXX" = "g++" ]; then
@@ -38,6 +41,13 @@ until sudo apt-get install -qq --force-yes -y \
    zlib1g-dev \
 ; do sleep 10; done
 
+fi
+
+if [[ "$TRAVIS_OS_NAME" == "osx" ]];
+# Install osx dependencies
+fi
+
+
 # Configure the build
 mkdir build
 cd build
@@ -45,6 +55,8 @@ cmake .. -DCMAKE_BUILD_TYPE:STRING="$BUILD_TYPE"
 
 if [ "$BUILD_TYPE" == "Debug" ]; then
 
+if [[ "$TRAVIS_OS_NAME" == "linux" ]];
+#FIXME(codereview) Start easy, add complicated things to osx later...
    # Build the documentation. Any warning is an error.
    sudo pip install sphinx
    pushd ../doc/sphinx
@@ -65,6 +77,7 @@ if [ "$BUILD_TYPE" == "Debug" ]; then
       echo "You have codecheck warnings (see above) Please fix."
       exit 1 # CodeCheck warnings.
    fi
+fi
 fi
 
 # Do the actual build.
