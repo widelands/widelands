@@ -32,7 +32,7 @@ tribes:new_worker_type {
    programs = {
       dig = {
          "findspace size:any radius:3",
-         "walk object",
+         "walk coords",
          "animation dig 8000",
          "return"
       }

@@ -22,11 +22,11 @@ init = {
 
    hq = prefilled_buildings(player, { "frisians_headquarters", sf.x, sf.y,
       wares = {
-         log = 80,
-         granite = 100,
-         thatch_reed = 100,
-         brick = 150,
-         clay = 50,
+         log = 40,
+         granite = 50,
+         thatch_reed = 50,
+         brick = 80,
+         clay = 30,
          water = 10,
          fish = 10,
          meat = 10,
