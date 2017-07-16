@@ -47,7 +47,8 @@ fi
 
 if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
 # Install osx dependencies
-brew install boost glew sdl2 sdl2_image sdl2_mixer sdl2_ttf
+# boost and cmake are preinstalled :)
+brew install glew sdl2 sdl2_image sdl2_mixer sdl2_ttf
 fi
 
 
