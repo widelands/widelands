@@ -4,15 +4,14 @@ sudo: required
 dist: trusty
 
 before_script:
-  - "export DISPLAY=:99.0"
-  - "sh -e /etc/init.d/xvfb start"
+  - export DISPLAY=:99.0
+  - sh -e /etc/init.d/xvfb start
   - sleep 3 # give xvfb some time to start
 
 # ignore this branch because it is only a mirror of master
 branches:
   except:
     - _widelands_dev_widelands_trunk
-
 
 # Let travis add additional repos for us (https://docs.travis-ci.com/user/migrating-from-legacy/#Adding-APT-Sources)
 # These are based on a whitelist, see https://github.com/travis-ci/apt-source-whitelist for details
