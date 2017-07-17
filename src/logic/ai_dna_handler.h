@@ -34,6 +34,7 @@
 
 #include <stdint.h>
 
+#include "base/time_string.h"
 #include "io/filesystem/filesystem.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "logic/game.h"
