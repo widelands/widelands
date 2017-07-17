@@ -62,9 +62,6 @@ cmake .. -DCMAKE_BUILD_TYPE:STRING="$BUILD_TYPE"
 
 if [ "$BUILD_TYPE" == "Debug" ]; then
 
-if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
-# FIXME(codereview) Start easy, add complicated things to osx later...
-# Probably need to install python via brew to enable this...
    # Build the documentation. Any warning is an error.
    sudo pip install sphinx
    pushd ../doc/sphinx
@@ -85,7 +82,6 @@ if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
       echo "You have codecheck warnings (see above) Please fix."
       exit 1 # CodeCheck warnings.
    fi
-fi
 fi
 
 # Do the actual build.
