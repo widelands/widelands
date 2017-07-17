@@ -89,4 +89,5 @@ make -k -j3
 
 # Run the regression suite.
 cd ..
+#TODO(code review): Fails on osx, probably need to set up xvfb or something similar.
 ./regression_test.py -b build/src/widelands
