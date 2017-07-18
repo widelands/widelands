@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-07-04 08:57+0000\n"
+"POT-Creation-Date: 2017-07-11 11:40+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Milan Fašina <matrix17@seznam.cz>, 2017\n"
 "Language-Team: Czech (https://www.transifex.com/widelands/teams/35159/cs/)\n"
@@ -171,6 +171,8 @@ msgid ""
 "We should send a ship northwards to gather some intelligence about the "
 "Barbarians. Try to build a port on the island and found an outpost."
 msgstr ""
+"Měli bychom poslat loď na sever, abychom získali nějaké informace o "
+"barbarech. Pokus se tam na ostrově postavit přístav a nalézt hlásku."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:123
 msgid "Produce gold to send out expeditions"
@@ -219,7 +221,7 @@ msgstr ""
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:153
 msgid "Find the Holy Shrine"
-msgstr "Najdi posvátný chrám"
+msgstr ""
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:154
 msgid ""
@@ -310,6 +312,10 @@ msgid ""
 "we awoke at noon, nobody was really surprised that all we could see was "
 "sand… although the amount of rocks near our camp was astonishing."
 msgstr ""
+"Stále jsme ztraceni na neznámém pobřeží a spíme ve stínu palem, dokud slunce"
+" nevystoupí vysoko nad horizont. Obávám se, že až se v poledne probudíme, "
+"nebude nikdo příliš překvapen, že je písek, kam až oko dohlédne... ačkoliv "
+"bylo to množství skal poblíž našeho tábořiště dech beroucí."
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:207
@@ -336,7 +342,7 @@ msgstr ""
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:220
 msgid "No Sight"
-msgstr ""
+msgstr "Není nic vidět"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:221
 msgid "Saledus looks around nervously…"
@@ -1099,9 +1105,9 @@ msgstr ""
 #, lua-format
 msgid "We still need to discover %d piece of our shrine."
 msgid_plural "We still need to discover %d pieces of our shrine."
-msgstr[0] "Stále musíme najít %d kus naší svatyně."
-msgstr[1] "Stále musíme najít %d kusy naší svatyně."
-msgstr[2] "Stále musíme najít %d kusů naší svatyně."
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:639
