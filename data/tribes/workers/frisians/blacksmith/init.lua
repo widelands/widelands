@@ -24,5 +24,8 @@ tribes:new_worker_type {
       hammer = 1
    },
 
+   experience = 22,
+   becomes = "frisians_blacksmith_master",
+
    animations = animations,
 }

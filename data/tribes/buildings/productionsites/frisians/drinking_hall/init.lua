@@ -38,8 +38,7 @@ tribes:new_productionsite_type {
    },
 
    aihints = {
-      prohibited_till = 700,
-      forced_after = 1000
+      prohibited_till = 700
    },
 
    working_positions = {
@@ -51,7 +50,7 @@ tribes:new_productionsite_type {
       { name = "smoked_fish", amount = 4 },
       { name = "smoked_meat", amount = 4 },
       { name = "fruit", amount = 4 },
-      { name = "sweetbread", amount = 4 },
+      { name = "honey_bread", amount = 4 },
       { name = "beer", amount = 4 },
    },
    outputs = {
@@ -86,7 +85,7 @@ tribes:new_productionsite_type {
          actions = {
             "return=skipped unless economy needs meal",
             "sleep=8000",
-            "consume=beer sweetbread smoked_fish,smoked_meat,fruit",
+            "consume=beer honey_bread smoked_fish,smoked_meat,fruit",
             "animate=working 20000",
             "produce=meal"
          }

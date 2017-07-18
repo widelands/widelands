@@ -8,7 +8,7 @@ tribes:new_productionsite_type {
    helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "medium",
-   enhancement = "frisians_sweetbread_bakery",
+   enhancement = "frisians_honey_bread_bakery",
 
    buildcost = {
       brick = 5,
@@ -39,8 +39,7 @@ tribes:new_productionsite_type {
    },
 
    aihints = {
-      prohibited_till = 700,
-      forced_after = 900
+      prohibited_till = 700
    },
 
    working_positions = {

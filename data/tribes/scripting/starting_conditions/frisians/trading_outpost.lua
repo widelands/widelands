@@ -45,7 +45,7 @@ return {
              iron_ore = 10,
              gold_ore = 2,
              bread_frisians = 15,
-             sweetbread = 5,
+             honey_bread = 5,
              beer = 5,
              cloth = 5,
              fur = 10,
@@ -99,9 +99,9 @@ return {
          }
       })
 
-      place_building_in_region(player, "frisians_clay_burners_house", sf:region(11), {
+      place_building_in_region(player, "frisians_claypit", sf:region(11), {
          inputs = {
-            water = 8
+            water = 4
          }
       })
 

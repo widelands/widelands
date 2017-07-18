@@ -36,8 +36,8 @@ tribes:new_productionsite_type {
 
    aihints = {
       mines_water = true,
-      prohibited_till = 800,
-      forced_after = 800
+      prohibited_till = 300,
+      basic_amount = 1
    },
 
    working_positions = {

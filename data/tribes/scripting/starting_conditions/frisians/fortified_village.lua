@@ -48,7 +48,7 @@ return {
              iron_ore = 10,
              gold_ore = 2,
              bread_frisians = 10,
-             sweetbread = 5,
+             honey_bread = 5,
              beer = 5,
              cloth = 5,
              fur = 10,
@@ -108,7 +108,7 @@ return {
 
       place_building_in_region(plr, "frisians_training_arena", sf:region(11), {
          inputs = {
-            sweetbread = 4,
+            honey_bread = 4,
             mead = 4,
             smoked_fish = 4,
             smoked_meat = 4,
@@ -120,11 +120,18 @@ return {
          },
       })
 
-      place_building_in_region(plr, "frisians_armour_smithy", sf:region(11), {
+      place_building_in_region(plr, "frisians_armour_smithy_small", sf:region(11), {
+         inputs = {
+            coal = 6,
+            iron = 6,
+         }
+      })
+
+      place_building_in_region(plr, "frisians_armour_smithy_large", sf:region(11), {
          inputs = {
             gold = 4,
-            coal = 8,
-            iron = 8,
+            coal = 4,
+            iron = 4,
          }
       })
 
@@ -135,7 +142,7 @@ return {
          }
       })
 
-      place_building_in_region(plr, "frisians_clay_burners_house", sf:region(11), {
+      place_building_in_region(plr, "frisians_claypit", sf:region(11), {
          inputs = {
             water = 2,
          }
