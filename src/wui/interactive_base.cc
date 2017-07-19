@@ -57,7 +57,7 @@
 #include "wui/unique_window_handler.h"
 
 // TODO(tiborb): This constant is temporary and should be replaced by command line switch
-constexpr bool AItrainingMode = true;
+constexpr bool AItrainingMode = false;
 
 using Widelands::Area;
 using Widelands::CoordPath;

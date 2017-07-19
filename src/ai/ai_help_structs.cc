@@ -29,8 +29,8 @@
 constexpr int kRoadNotFound = -1000;
 constexpr int kShortcutWithinSameEconomy = 1000;
 constexpr int kRoadToDifferentEconomy = 10000;
-constexpr int kUpperDefaultMutationLimit = 200;
-constexpr int kLowerDefaultMutationLimit = 150;
+constexpr int kUpperDefaultMutationLimit = 125;
+constexpr int kLowerDefaultMutationLimit = 50;
 
 namespace Widelands {
 
@@ -474,7 +474,9 @@ void ManagementData::review(const uint32_t gametime,
                             const uint16_t attackers,
                             const int16_t trained_soldiers,
                             const int16_t latest_attackers,
-                            const uint16_t conq_ws) {
+                            const uint16_t conq_ws,
+                            const uint16_t m_strength,
+                            const uint32_t existing_ps) {
 
     const int16_t main_bonus =
        ((static_cast<int32_t>(land - old_land) > 0 && land > max_e_land * 5 / 6 && attackers > 0 &&
@@ -484,15 +486,20 @@ void ManagementData::review(const uint32_t gametime,
 
     const int16_t land_delta_bonus = static_cast<int16_t>(land - old_land) * kLandDeltaMultiplier;
 
+    const uint32_t ps_sites_bonus = kPSitesRatioMultiplier * existing_ps * existing_ps * existing_ps / 1000 / 1000;
+
     score = land / kCurrentLandDivider + land_delta_bonus + main_bonus +
             attackers * kAttackersMultiplier + ((attackers > 0) ? kAttackBonus : -kAttackBonus) +
-            trained_soldiers * kTrainedSoldiersScore + +kConqueredWhBonus + conq_ws;
+            trained_soldiers * kTrainedSoldiersScore + kConqueredWhBonus * conq_ws +
+            m_strength * kStrengthMultiplier +
+            ps_sites_bonus - 500 * kPSitesRatioMultiplier;
 
-    log(" %2d %s: reviewing AI mngm. data, sc: %5d Pr.p: %d (l: %4d / %4d / %4d, "
-        "at:%4d(%3d), ts:%4d(%2d), ConqWH:%2d)\n",
+    log(" %2d %s: reviewing AI mngm. data, sc: %5d Pr.p: %d (l:%4d/%s/%4d, "
+        "at:%4d(%3d),ts:%4d/%2d,cWH:%2d,str:%2d/%4d,ps:%4d/%4d)\n",
         pn, gamestring_with_leading_zeros(gametime), score, primary_parent,
-        land / kCurrentLandDivider, main_bonus, land_delta_bonus, attackers * kAttackersMultiplier,
-        latest_attackers, trained_soldiers * kTrainedSoldiersScore, trained_soldiers, conq_ws);
+        land / kCurrentLandDivider, (main_bonus) ? "*" : " ", land_delta_bonus, attackers * kAttackersMultiplier,
+        latest_attackers, trained_soldiers * kTrainedSoldiersScore, trained_soldiers, conq_ws,
+        m_strength, m_strength * kStrengthMultiplier, existing_ps, ps_sites_bonus);
 
     if (score < -10000 || score > 30000) {
         log("%2d %s: reviewing AI mngm. data, score too extreme: %4d\n", pn,
@@ -1003,6 +1010,11 @@ void ManagementData::mutate(const uint8_t pn) {
         log("%2d: Very weak mode, increasing mutation probability to 1 / %d\n", pn, probability);
     }
 
+	//Widlcard for ai trainingmode
+	if (kAITrainingMode && std::rand() % 8 == 0) {
+		probability /= 3;
+	}
+
     assert(probability > 0 && probability <= 201);
 
     log("%2d: mutating DNA with probability 1 / %3d:\n", pn, probability);
@@ -1013,7 +1025,7 @@ void ManagementData::mutate(const uint8_t pn) {
         {
             // Preferred numbers are ones that will be mutated agressively in full range
             // [-kWeightRange, kWeightRange]
-            std::set<int32_t> preferred_numbers = {};
+            std::set<int32_t> preferred_numbers = {std::rand() % kMagicNumbersSize * kPrefNumberProbability};
 
             for (uint16_t i = 0; i < kMagicNumbersSize; i += 1) {
                 if (i == kMutationRatePosition) {  // mutated above
@@ -1038,7 +1050,7 @@ void ManagementData::mutate(const uint8_t pn) {
         // Modifying pool of neurons
         {
             // Neurons to be mutated more agressively
-            std::set<int32_t> preferred_neurons = {};
+            std::set<int32_t> preferred_neurons = {std::rand() % kNeuronPoolSize * kPrefNumberProbability};
             for (auto& item : neuron_pool) {
 
                 const MutatingIntensity mutating_intensity =
@@ -1068,7 +1080,7 @@ void ManagementData::mutate(const uint8_t pn) {
         // Modifying pool of f-neurons
         {
             // FNeurons to be mutated more agressively
-            std::set<int32_t> preferred_f_neurons = {};
+            std::set<int32_t> preferred_f_neurons = {std::rand() % kFNeuronPoolSize * kPrefNumberProbability};
             for (auto& item : f_neuron_pool) {
                 uint8_t changed_bits = 0;
                 // is this a preferred neuron

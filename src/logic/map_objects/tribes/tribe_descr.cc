@@ -244,7 +244,6 @@ TribeDescr::TribeDescr(const LuaTable& table, const TribeBasicInfo& info, const 
 		headquarters_ = add_special_building(table.get_string("headquarters"));
 		port_ = add_special_building(table.get_string("port"));
 		barracks_ = add_special_building(table.get_string("barracks"));
-		bakery_ = add_special_building(table.get_string("bakery"));
 
 		ironore_ = add_special_ware(table.get_string("ironore"));
 		rawlog_ = add_special_ware(table.get_string("rawlog"));
@@ -374,10 +373,6 @@ DescriptionIndex TribeDescr::port() const {
 DescriptionIndex TribeDescr::barracks() const {
 	assert(tribes_.building_exists(barracks_));
 	return barracks_;
-}
-DescriptionIndex TribeDescr::bakery() const {
-	assert(tribes_.building_exists(bakery_));
-	return bakery_;
 }
 DescriptionIndex TribeDescr::ironore() const {
 	assert(tribes_.ware_exists(ironore_));

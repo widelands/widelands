@@ -60,7 +60,6 @@ enum class BuildingNecessity : uint8_t {
 
 // A building type can have no, one or multiple of these attributes
 enum class BuildingAttribute : uint8_t {
-	kBakery,
 	kRanger,
 	kBuildable,
 	kLumberjack,
@@ -78,7 +77,7 @@ enum class BuildingAttribute : uint8_t {
 	kUpgradeSubstitutes,
 	kUpgradeExtends,
 	kLogRefiner,
-	kIronMine
+	kIronMine,
 };
 
 enum class AiType : uint8_t { kVeryWeak, kWeak, kNormal };
@@ -117,13 +116,13 @@ const std::vector<std::vector<int8_t>> neuron_curves = {
    {0, 17, 25, 32, 38, 44, 49, 53, 58, 62, 66, 70, 74, 78, 81, 84, 88, 91, 94, 97, 100},
 };
 
+// TODO(tiborb): this should be replaced by command line switch
+constexpr bool kAITrainingMode = false;
 constexpr int kMagicNumbersSize = 150;
 constexpr int kNeuronPoolSize = 80;
 constexpr int kFNeuronPoolSize = 60;
 constexpr int kFNeuronBitSize = 32;
 constexpr int kMutationRatePosition = 42;
-// TODO(tiborb): this should be replaced by command line switch
-constexpr bool kAITrainingMode = true;
 
 constexpr uint32_t kNever = std::numeric_limits<uint32_t>::max();
 
@@ -565,7 +564,10 @@ constexpr int16_t kBonus = 1000;
 constexpr int16_t kAttackersMultiplier = 1;
 constexpr int16_t kAttackBonus = 100;
 constexpr int16_t kTrainedSoldiersScore = 250;
-constexpr int16_t kConqueredWhBonus = 500;
+constexpr int16_t kConqueredWhBonus = 300;
+constexpr int16_t kStrengthMultiplier = 30;
+constexpr int16_t kPSitesRatioMultiplier = 1;
+constexpr int16_t kPrefNumberProbability = (kAITrainingMode) ? 5 : 100;
 
 struct Neuron {
 	static int clip_weight_to_range(int w) {
@@ -637,7 +639,7 @@ struct ManagementData {
 	void new_dna_for_persistent(uint8_t, Widelands::AiType);
 	void copy_persistent_to_local();
 	void review(
-	   uint32_t, PlayerNumber, uint32_t, uint32_t, uint32_t, uint16_t, int16_t, int16_t, uint16_t);
+	   uint32_t, PlayerNumber, uint32_t, uint32_t, uint32_t, uint16_t, int16_t, int16_t, uint16_t, uint16_t, uint32_t);
 	void dump_data(PlayerNumber);
 	uint16_t new_neuron_id() {
 		++next_neuron_id;

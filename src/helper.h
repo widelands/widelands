@@ -54,4 +54,5 @@ ContainerType filter(const ContainerType& container, UnaryPredicate test) {
 	}
 	return filtered;
 }
+bool to_long(const std::string&, long*);
 #endif  // end of include guard: WL_HELPER_H

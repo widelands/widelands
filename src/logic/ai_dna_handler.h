@@ -40,18 +40,9 @@
 #include "logic/game.h"
 #include "logic/player.h"
 
-//#define REPLAY_DIR "ai_dna"
 #define SUFFIX ".wai"
 
-// struct Md5Checksum;
-
-// class StreamRead;
-// class StreamWrite;
-
-// namespace Widelands {
-// class Player;
-//}
-
+namespace Widelands {
 class AiDnaHandler {
 public:
 	AiDnaHandler();
@@ -68,7 +59,8 @@ public:
 	void dump_output(Widelands::Player::AiPersistentState* pd, uint8_t);
 
 private:
+	//bool extract_day(const std::string&, tm*);
 	FileSystem::Type fs_type_;
 };
-
+}
 #endif  // end of include guard: WL_LOGIC_AI_DUMP_H
