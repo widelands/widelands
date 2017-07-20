@@ -56,10 +56,10 @@ tribes:new_productionsite_type {
       work = {
          -- TRANSLATORS: Completed/Skipped/Did not start burning bricks because ...
          descname = _"burning bricks",
-         actions = { --total time: 28s for 2 bricks
+         actions = {
             "sleep=9000",
             "return=skipped unless economy needs brick",
-            "consume=granite:2 clay:2 coal",
+            "consume=granite clay:2 coal",
             "animate=working 17000",
             "produce=brick:2"
          },

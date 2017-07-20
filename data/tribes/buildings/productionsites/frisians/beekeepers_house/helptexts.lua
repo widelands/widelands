@@ -15,7 +15,7 @@ end
 
 function building_helptext_note()
    -- TRANSLATORS: Note helptext for a building
-   return "Needs medium-sized fields and bushes nearby."
+   return "Needs medium-sized fields (barley, wheat, corn or blackroot) or bushes (berry bushes, thatch reed or grapevines) nearby."
 end
 
 function building_helptext_performance()
