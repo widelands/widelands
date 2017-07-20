@@ -567,7 +567,7 @@ constexpr int16_t kTrainedSoldiersScore = 250;
 constexpr int16_t kConqueredWhBonus = 300;
 constexpr int16_t kStrengthMultiplier = 30;
 constexpr int16_t kPSitesRatioMultiplier = 1;
-constexpr int16_t kPrefNumberProbability = (kAITrainingMode) ? 5 : 100;
+
 
 struct Neuron {
 	static int clip_weight_to_range(int w) {

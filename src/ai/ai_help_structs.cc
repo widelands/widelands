@@ -25,14 +25,17 @@
 #include "logic/map.h"
 #include "logic/player.h"
 
+
+
+namespace Widelands {
+
 // couple of constants for calculation of road interconnections
 constexpr int kRoadNotFound = -1000;
 constexpr int kShortcutWithinSameEconomy = 1000;
 constexpr int kRoadToDifferentEconomy = 10000;
-constexpr int kUpperDefaultMutationLimit = 125;
-constexpr int kLowerDefaultMutationLimit = 50;
-
-namespace Widelands {
+constexpr int kUpperDefaultMutationLimit = 150;
+constexpr int kLowerDefaultMutationLimit = 75;
+constexpr int16_t kPrefNumberProbability = (kAITrainingMode) ? 5 : 100;
 
 // CheckStepRoadAI
 CheckStepRoadAI::CheckStepRoadAI(Player* const pl, uint8_t const mc, bool const oe)

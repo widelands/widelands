@@ -139,7 +139,7 @@ void AiDnaHandler::dump_output(Widelands::Player::AiPersistentState* pd, uint8_t
 	time(&t);
 	struct tm* currenttime = localtime(&t);
 
-	std::string timestamp = str(boost::format("%d-%02d-%02d_%02d.%02d.%02d")
+	std::string timestamp = str(boost::format("%d-%02d-%02dT%02d.%02d.%02d")
 	% (1900 + currenttime->tm_year) % (currenttime->tm_mon + 1) % currenttime->tm_mday % currenttime->tm_hour % currenttime->tm_min % currenttime->tm_sec);
 	//printf ("%s\n", timestamp.c_str()); // NOCOM
 
