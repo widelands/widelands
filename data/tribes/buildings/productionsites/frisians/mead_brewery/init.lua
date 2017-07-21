@@ -10,15 +10,15 @@ tribes:new_productionsite_type {
    size = "medium",
 
    enhancement_cost = {
+      brick = 3,
+      granite = 2,
+      log = 1,
+      thatch_reed = 3
+   },
+   return_on_dismantle_on_enhanced = {
       brick = 4,
       granite = 1,
       log = 1,
-      thatch_reed = 2
-   },
-   return_on_dismantle_on_enhanced = {
-      brick = 5,
-      granite = 2,
-      log = 2,
       thatch_reed = 2
    },
 
@@ -48,19 +48,40 @@ tribes:new_productionsite_type {
       { name = "honey", amount = 6 },
    },
    outputs = {
-      "mead"
+      "mead",
+      "beer"
    },
 
    programs = {
       work = {
+         -- TRANSLATORS: Completed/Skipped/Did not start working because ...
+         descname = _"working",
+         actions = {
+            "call=brew_mead",
+            "call=brew_beer",
+            "return=skipped"
+         }
+      },
+      brew_mead = {
          -- TRANSLATORS: Completed/Skipped/Did not start brewing mead because ...
          descname = _"brewing mead",
          actions = {
-            "sleep=20000",
             "return=skipped unless economy needs mead or workers need experience",
+            "sleep=10000",
             "consume=barley water honey",
-            "animate=working 32000",
+            "animate=working 44000",
             "produce=mead"
+         }
+      },
+      brew_beer = {
+         -- TRANSLATORS: Completed/Skipped/Did not start brewing mead because ...
+         descname = _"brewing beer",
+         actions = {
+            "return=skipped unless economy needs beer or workers need experience",
+            "sleep=10000",
+            "consume=barley water",
+            "animate=working 35000",
+            "produce=beer"
          }
       },
    },

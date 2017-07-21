@@ -10,13 +10,14 @@ tribes:new_productionsite_type {
    size = "medium",
 
    enhancement_cost = {
-      brick = 5,
+      brick = 3,
       log = 1,
-      thatch_reed = 1
+      granite = 1,
+      thatch_reed = 3
    },
    return_on_dismantle_on_enhanced = {
-      brick = 5,
-      granite = 2,
+      brick = 3,
+      granite = 1,
       log = 2,
       thatch_reed = 2
    },
@@ -42,26 +43,45 @@ tribes:new_productionsite_type {
    },
 
    inputs = {
-      { name = "honey", amount = 8 },
-      { name = "barley", amount = 6 },
-      { name = "water", amount = 6 },
+      { name = "barley", amount = 8 },
+      { name = "water", amount = 8 },
+      { name = "honey", amount = 6 },
    },
    outputs = {
-      "honey_bread"
+      "honey_bread",
+      "bread_frisians"
    },
 
    programs = {
       work = {
+         -- TRANSLATORS: Completed/Skipped/Did not start working because ...
+         descname = _"working",
+         actions = {
+            "call=bake_honey",
+            "call=bake_normal",
+            "return=skipped"
+         }
+      },
+      bake_honey = {
          -- TRANSLATORS: Completed/Skipped/Did not start baking honey bread because ...
          descname = _"baking honey bread",
          actions = {
-            "sleep=10000",
             "return=skipped unless economy needs honey_bread or workers need experience",
-            "consume=barley:2 water:2 honey:3",
-            "animate=working 2500",
-            "produce=honey_bread",
-            "animate=working 25000",
+            "sleep=10000",
+            "consume=barley water honey",
+            "animate=working 51000",
             "produce=honey_bread"
+         }
+      },
+      bake_normal = {
+         -- TRANSLATORS: Completed/Skipped/Did not start baking bread because ...
+         descname = _"baking bread",
+         actions = {
+            "return=skipped unless economy needs bread_frisians or workers need experience",
+            "sleep=10000",
+            "consume=barley water",
+            "animate=working 40000",
+            "produce=bread_frisians"
          }
       },
    },

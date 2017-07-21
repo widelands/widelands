@@ -42,10 +42,10 @@ tribes:new_militarysite_type {
    prefer_heroes = true,
 
    messages = {
-      occupied = _"Your warriors have occupied your fortress.",
+      occupied = _"Your soldiers have occupied your fortress.",
       aggressor = _"Your fortress discovered an aggressor.",
       attack = _"Your fortress is under attack.",
-      defeated_enemy = _"The enemy defeated your warriors at the fortress.",
-      defeated_you = _"Your warriors defeated the enemy at the fortress."
+      defeated_enemy = _"The enemy defeated your soldiers at the fortress.",
+      defeated_you = _"Your soldiers defeated the enemy at the fortress."
    },
 }

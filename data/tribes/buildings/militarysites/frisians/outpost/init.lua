@@ -41,10 +41,10 @@ tribes:new_militarysite_type {
    prefer_heroes = true,
 
    messages = {
-      occupied = _"Your warriors have occupied your outpost.",
+      occupied = _"Your soldiers have occupied your outpost.",
       aggressor = _"Your outpost discovered an aggressor.",
       attack = _"Your outpost is under attack.",
-      defeated_enemy = _"The enemy defeated your warriors at the outpost.",
-      defeated_you = _"Your warriors defeated the enemy at the outpost."
+      defeated_enemy = _"The enemy defeated your soldiers at the outpost.",
+      defeated_you = _"Your soldiers defeated the enemy at the outpost."
    },
 }

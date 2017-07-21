@@ -11,13 +11,16 @@ tribes:new_warehouse_type {
    size = "medium",
 
    buildcost = {
-      brick = 10,
-      log = 1,
-      thatch_reed = 6
+      brick = 5,
+      granite = 2,
+      log = 2,
+      thatch_reed = 3
    },
    return_on_dismantle = {
-      brick = 5,
-      thatch_reed = 3
+      brick = 3,
+      granite = 1,
+      log = 1,
+      thatch_reed = 1
    },
 
    animations = {

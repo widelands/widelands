@@ -63,6 +63,9 @@ tribes:new_productionsite_type {
             "consume=ration",
             "animate=working 16000",
             "mine=stones 3 50 5 20",
+            "produce=granite",
+            "animate=working 16000",
+            "mine=stones 3 50 5 20",
             "produce=granite"
          }
       },

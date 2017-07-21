@@ -10,15 +10,14 @@ tribes:new_productionsite_type {
    size = "medium",
 
    buildcost = {
-      brick = 6,
-      granite = 3,
-      log = 3,
-      thatch_reed = 3
+      brick = 2,
+      granite = 1,
+      log = 1,
+      thatch_reed = 2
    },
    return_on_dismantle = {
-      brick = 3,
-      granite = 2,
-      log = 1,
+      brick = 1,
+      granite = 1,
       thatch_reed = 1
    },
 
@@ -53,8 +52,9 @@ tribes:new_productionsite_type {
    },
 
    inputs = {
-      { name = "log", amount = 8 },
       { name = "iron", amount = 8 },
+      { name = "log", amount = 7 },
+      { name = "thatch_reed", amount = 4 }
    },
    outputs = {
       "felling_ax",
@@ -163,7 +163,7 @@ tribes:new_productionsite_type {
          actions = {
             "return=skipped unless economy needs fishing_net",
             "sleep=12000",
-            "consume=log iron",
+            "consume=thatch_reed:2",
             "animate=working 19000",
             "produce=fishing_net"
          },
@@ -207,7 +207,7 @@ tribes:new_productionsite_type {
          actions = {
             "return=skipped unless economy needs fire_tongs",
             "sleep=12000",
-            "consume=log iron",
+            "consume=iron",
             "animate=working 19000",
             "produce=fire_tongs"
          },
@@ -218,9 +218,9 @@ tribes:new_productionsite_type {
          actions = {
             "return=skipped unless economy needs needles",
             "sleep=12000",
-            "consume=log iron",
+            "consume=iron",
             "animate=working 19000",
-            "produce=needles"
+            "produce=needles:2"
          },
       },
    },

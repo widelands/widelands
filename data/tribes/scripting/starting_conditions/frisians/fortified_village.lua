@@ -101,7 +101,7 @@ return {
             sword_long = 1,
             sword_curved = 1,
             sword_double = 1,
-            fur_clothes_silver = 1,
+            fur_clothes_studded = 1,
             helmet = 1
          },
       })
@@ -137,8 +137,9 @@ return {
 
       place_building_in_region(plr, "frisians_blacksmithy", sf:region(11), {
          inputs = {
-            iron = 8,
-            log = 8
+            iron = 6,
+            log = 6,
+            thatch_reed = 3,
          }
       })
 

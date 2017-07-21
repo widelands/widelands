@@ -85,12 +85,12 @@ return {
          helmet = 3,
          helmet_golden = 6,
          fur_clothes = 1,
-         fur_clothes_silver = 3,
+         fur_clothes_studded = 3,
          fur_clothes_golden = 6,
       },
       frisians_order = {
          "gold", "sword_basic", "sword_long", "sword_curved", "sword_double",
-         "helmet", "helmet_golden", "fur_clothes", "fur_clothes_silver", "fur_clothes_golden"
+         "helmet", "helmet_golden", "fur_clothes", "fur_clothes_studded", "fur_clothes_golden"
       },
 
       atlanteans = {

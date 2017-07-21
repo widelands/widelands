@@ -51,7 +51,7 @@ tribes:new_trainingsite_type {
       { name = "sword_curved", amount = 2 },
       { name = "sword_double", amount = 2 },
       { name = "helmet", amount = 2 },
-      { name = "fur_clothes_silver", amount = 2 },
+      { name = "fur_clothes_studded", amount = 2 },
    },
    outputs = {
       "frisians_soldier",
@@ -94,7 +94,7 @@ tribes:new_trainingsite_type {
          {"bread_frisians"}
       },
       weapons = {
-         "fur_clothes_silver",
+         "fur_clothes_studded",
       }
    },
 
@@ -161,7 +161,7 @@ tribes:new_trainingsite_type {
             "check_soldier=soldier defense 0",
             "sleep=30000",
             "check_soldier=soldier defense 0",
-            "consume=fur_clothes_silver smoked_fish,smoked_meat beer,bread_frisians",
+            "consume=fur_clothes_studded smoked_fish,smoked_meat beer,bread_frisians",
             "train=soldier defense 0 1"
          }
       },

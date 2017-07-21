@@ -8,14 +8,15 @@ tribes:new_militarysite_type {
    helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "small",
+   vision_range = 8,
 
    buildcost = {
-      brick = 3,
-      log = 2,
+      brick = 1,
+      log = 1,
       thatch_reed = 1
    },
    return_on_dismantle = {
-      brick = 2,
+      brick = 1,
       log = 1
    },
 
@@ -33,16 +34,16 @@ tribes:new_militarysite_type {
       prohibited_till = 1200
    },
 
-   max_soldiers = 3,
+   max_soldiers = 2,
    heal_per_second = 100,
    conquers = 6,
-   prefer_heroes = true,
+   prefer_heroes = false,
 
    messages = {
-      occupied = _"Your warriors have occupied your sentinel.",
+      occupied = _"Your soldiers have occupied your sentinel.",
       aggressor = _"Your sentinel discovered an aggressor.",
       attack = _"Your sentinel is under attack.",
-      defeated_enemy = _"The enemy defeated your warriors at the sentinel.",
-      defeated_you = _"Your warriors defeated the enemy at the sentinel."
+      defeated_enemy = _"The enemy defeated your soldiers at the sentinel.",
+      defeated_you = _"Your soldiers defeated the enemy at the sentinel."
    },
 }

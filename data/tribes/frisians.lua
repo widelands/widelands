@@ -88,7 +88,7 @@ tribes:new_tribe {
           "sword_curved",
           "sword_double",
           "fur_clothes",
-          "fur_clothes_silver",
+          "fur_clothes_studded",
           "fur_clothes_golden",
           "helmet",
           "helmet_golden",
@@ -162,6 +162,9 @@ tribes:new_tribe {
       "field_medium",
       "field_ripe",
       "field_harvested",
+      "pond_dry",
+      "pond_growing",
+      "pond_mature",
       "reed_tiny",
       "reed_small",
       "reed_medium",
@@ -192,15 +195,16 @@ tribes:new_tribe {
       "frisians_foresters_house",
       "frisians_hunters_house",
       "frisians_fishers_house",
+      "frisians_reed_farm",
       "frisians_well",
       "frisians_claypit",
       "frisians_berry_farm",
       "frisians_collectors_house",
       "frisians_beekeepers_house",
+      "frisians_aqua_farm",
       "frisians_scouts_house",
 
       -- Medium
-      "frisians_reed_farm",
       "frisians_brick_burners_house",
       "frisians_furnace",
       "frisians_recycling_centre",
@@ -224,7 +228,6 @@ tribes:new_tribe {
       -- Big
       "frisians_reindeer_farm",
       "frisians_farm",
-      "frisians_aqua_farm",
 
       -- Mines
       "frisians_rockmine",

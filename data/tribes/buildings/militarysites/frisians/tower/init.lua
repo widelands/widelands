@@ -43,10 +43,10 @@ tribes:new_militarysite_type {
    prefer_heroes = true,
 
    messages = {
-      occupied = _"Your warriors have occupied your tower.",
+      occupied = _"Your soldiers have occupied your tower.",
       aggressor = _"Your tower discovered an aggressor.",
       attack = _"Your tower is under attack.",
-      defeated_enemy = _"The enemy defeated your warriors at the tower.",
-      defeated_you = _"Your warriors defeated the enemy at the tower."
+      defeated_enemy = _"The enemy defeated your soldiers at the tower.",
+      defeated_you = _"Your soldiers defeated the enemy at the tower."
    },
 }

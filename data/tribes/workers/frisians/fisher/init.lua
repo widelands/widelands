@@ -9,6 +9,11 @@ animations = {
       pictures = path.list_files(dirname .. "fishing_??.png"),
       hotspot = { 9, 39 },
       fps = 10
+   },
+   release = {
+      pictures = path.list_files(dirname .. "fishing_??.png"), --TODO no animation yet
+      hotspot = { 9, 39 },
+      fps = 10
    }
 }
 add_walking_animations(animations, "walk", dirname, "walk", {10, 38}, 10)
@@ -36,6 +41,21 @@ tribes:new_worker_type {
          "mine fish 1",
          "animation fishing 3000",
          "createware fish",
+         "return"
+      },
+      fish_in_pond = {
+         "findobject attrib:pond_mature radius:8",
+         "walk object",
+         "animation fishing 3000",
+         "object fall_dry",
+         "createware fish",
+         "return"
+      },
+      breed_in_pond = {
+         "findobject attrib:pond_dry radius:8",
+         "walk object",
+         "animation release 3000",
+         "object with_fish",
          "return"
       }
    },

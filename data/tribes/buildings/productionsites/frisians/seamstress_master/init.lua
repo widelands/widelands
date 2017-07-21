@@ -47,7 +47,7 @@ tribes:new_productionsite_type {
       { name = "gold", amount = 4 },
    },
    outputs = {
-      "fur_clothes_silver",
+      "fur_clothes_studded",
       "fur_clothes_golden"
    },
 
@@ -56,20 +56,20 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
          descname = _"working",
          actions = {
-            "call=weave_silver",
+            "call=weave_studded",
             "call=weave_gold",
             "return=skipped",
          },
       },
-      weave_silver = {
+      weave_studded = {
          -- TRANSLATORS: Completed/Skipped/Did not start sewing studded fur clothes because ...
          descname = _"sewing studded fur clothes",
          actions = {
-            "return=skipped unless economy needs fur_clothes_silver",
+            "return=skipped unless economy needs fur_clothes_studded",
             "sleep=8000",
             "consume=fur_clothes iron",
             "animate=working 28000",
-            "produce=fur_clothes_silver"
+            "produce=fur_clothes_studded"
          },
       },
       weave_gold = {

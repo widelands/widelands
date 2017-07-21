@@ -11,14 +11,12 @@ tribes:new_productionsite_type {
    enhancement = "frisians_mead_brewery",
 
    buildcost = {
-      brick = 5,
-      granite = 3,
-      log = 3,
+      brick = 3,
+      log = 2,
       thatch_reed = 3
    },
    return_on_dismantle = {
-      brick = 3,
-      granite = 2,
+      brick = 2,
       log = 1,
       thatch_reed = 1
    },

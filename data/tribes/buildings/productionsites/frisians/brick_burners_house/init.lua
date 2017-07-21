@@ -10,14 +10,14 @@ tribes:new_productionsite_type {
    size = "medium",
 
    buildcost = {
-      brick = 3,
-      granite = 4,
+      brick = 2,
+      granite = 2,
       log = 1,
       thatch_reed = 2
    },
    return_on_dismantle = {
       brick = 1,
-      granite = 2,
+      granite = 1,
       log = 1,
       thatch_reed = 1
    },
@@ -44,8 +44,8 @@ tribes:new_productionsite_type {
    },
 
    inputs = {
-      { name = "granite", amount = 6 },
-      { name = "clay", amount = 6 },
+      { name = "granite", amount = 8 },
+      { name = "clay", amount = 8 },
       { name = "coal", amount = 4 },
    },
    outputs = {
@@ -59,7 +59,7 @@ tribes:new_productionsite_type {
          actions = {
             "sleep=9000",
             "return=skipped unless economy needs brick",
-            "consume=granite clay:2 coal",
+            "consume=granite:2 clay:2 coal",
             "animate=working 17000",
             "produce=brick:2"
          },

@@ -7,27 +7,21 @@ tribes:new_productionsite_type {
    descname = pgettext("frisians_building", "Aqua Farm"),
    helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
-   size = "big",
+   size = "small",
 
    buildcost = {
-      brick = 8,
-      water = 20,
-      log = 5,
-      thatch_reed = 5
+      brick = 2,
+      log = 2,
+      thatch_reed = 1
    },
    return_on_dismantle = {
-      brick = 4,
-      log = 3,
-      thatch_reed = 1
+      brick = 1,
+      log = 1
    },
 
    animations = {
       idle = {
          pictures = path.list_files(dirname .. "idle_??.png"),
-         hotspot = { 68, 76 },
-      },
-      working = {
-         pictures = path.list_files(dirname .. "working_??.png"),
          hotspot = { 68, 76 },
       },
    },
@@ -37,7 +31,7 @@ tribes:new_productionsite_type {
    },
 
    working_positions = {
-      frisians_fisher = 2
+      frisians_fisher = 1
    },
 
    inputs = {
@@ -50,14 +44,27 @@ tribes:new_productionsite_type {
 
    programs = {
       work = {
+         -- TRANSLATORS: Completed/Skipped/Did not start working because ...
+         descname = _"working",
+         actions = {
+            "call=plant",
+            "call=fish",
+            "return=skipped",
+         },
+      },
+      plant = {
          -- TRANSLATORS: Completed/Skipped/Did not start breeding fish because ...
          descname = _"breeding fish",
          actions = {
-            "sleep=30000",
-            "return=skipped unless economy needs fish",
             "consume=fruit water:3",
-            "animate=working 30000",
-            "produce=fish"
+            "worker=breed_in_pond"
+         },
+      },
+      fish = {
+         -- TRANSLATORS: Completed/Skipped/Did not start fishing because ...
+         descname = _"fishing",
+         actions = {
+            "worker=fish_in_pond"
          },
       },
    },

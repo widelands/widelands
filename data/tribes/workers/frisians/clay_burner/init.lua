@@ -31,9 +31,10 @@ tribes:new_worker_type {
 
    programs = {
       dig = {
-         "findspace size:any radius:3",
+         "findspace size:any radius:4",
          "walk coords",
          "animation dig 8000",
+         "plant tribe:pond_dry",
          "return"
       }
    },
