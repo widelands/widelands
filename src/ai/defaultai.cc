@@ -2466,7 +2466,7 @@ bool DefaultAI::construct_building(uint32_t gametime) {
                         prio += 200;
                     }
 
-                    prio += -10 + 2 * bf->ground_water;
+                    prio += -10 + std::abs(management_data.get_military_number_at(59) / 5) * bf->ground_water;
 
                 } else if (bo.is(BuildingAttribute::kLumberjack)) {
 
@@ -4274,19 +4274,16 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 
     BasicEconomyBuildingStatus site_needed_for_economy = BasicEconomyBuildingStatus::kNone;
     if (gametime > 2 * 60 * 1000 && gametime < 120 * 60 * 1000 && !basic_economy_established) {
-        if (persistent_data->remaining_basic_buildings.count(bo.id)) {
-            if (static_cast<uint32_t>(bo.total_count()) >=
-                persistent_data->remaining_basic_buildings[bo.id]) {  // exeption for sawmill
-                site_needed_for_economy = BasicEconomyBuildingStatus::kDiscouraged;
-
-            } else if (spots_ < kSpotsTooLittle && bo.type != BuildingObserver::Type::kMine) {
+        if (persistent_data->remaining_basic_buildings.count(bo.id) && bo.cnt_under_construction == 0) {
+			assert(persistent_data->remaining_basic_buildings.count(bo.id) > 0);
+			if (spots_ < kSpotsTooLittle && bo.type != BuildingObserver::Type::kMine) {
                 site_needed_for_economy = BasicEconomyBuildingStatus::kNeutral;
             } else {
                 site_needed_for_economy = BasicEconomyBuildingStatus::kEncouraged;
             }
 
-        } else if (persistent_data->remaining_basic_buildings.count(bo.id) == 0) {
-            site_needed_for_economy = BasicEconomyBuildingStatus::kNone;
+        } else {
+            site_needed_for_economy = BasicEconomyBuildingStatus::kDiscouraged;
         }
     }
 
@@ -4512,27 +4509,84 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 
             bo.cnt_target = 1 + static_cast<int32_t>(mines_.size() + productionsites.size()) / 25;
 
-            if (bo.max_needed_preciousness == 0) {
-                return BuildingNecessity::kNotNeeded;
-            } else if (bo.cnt_under_construction + bo.unoccupied_count > 0) {
+            if (bo.cnt_under_construction + bo.unoccupied_count > 0) {
                 return BuildingNecessity::kForbidden;
-            } else if (bo.total_count() > 0 &&
-                       !(expansion_type.get_expansion_type() == ExpansionMode::kEconomy ||
-                         expansion_type.get_expansion_type() == ExpansionMode::kBoth)) {
-                return BuildingNecessity::kForbidden;
-            } else if (bo.total_count() >= bo.cnt_target) {
-                if (get_stocklevel(bo, gametime) > 1 ||
-                    bo.last_building_built + 10 * 60 * 100 > gametime) {
-                    return BuildingNecessity::kForbidden;
-                } else {
-                    bo.primary_priority = std::abs(management_data.get_military_number_at(137)) / 2;
-                    return BuildingNecessity::kNeeded;
-                }
-            } else {
-                bo.primary_priority = (bo.cnt_target - bo.total_count()) *
-                                      std::abs(management_data.get_military_number_at(111)) / 2;
-                return BuildingNecessity::kNeeded;
-            }
+			}
+
+			//NOCOM
+			int16_t inputs[kFNeuronBitSize] = {0};
+            inputs[0] = (bo.max_needed_preciousness == 0) ? -1 : 0;
+            inputs[1] = (bo.max_needed_preciousness > 0) ? 2 : 0;
+            inputs[2] = (bo.max_needed_preciousness == 0) ? -3 : 0;
+            inputs[3] = (bo.total_count() > 0) ? -1 : 0;
+            inputs[4] = (bo.total_count() > 1) ? -1 : 0;
+            inputs[5] = (bo.total_count() > 0) ? -1 : 0;
+            inputs[6] = (expansion_type.get_expansion_type() == ExpansionMode::kEconomy) ? +1 : 0;
+            inputs[7] = (expansion_type.get_expansion_type() == ExpansionMode::kEconomy) ? +2 : 0;
+            inputs[8] = (expansion_type.get_expansion_type() == ExpansionMode::kEconomy) ? +3 : 0;
+            inputs[9] = (expansion_type.get_expansion_type() == ExpansionMode::kBoth) ? +1 : 0;
+            inputs[10] = (expansion_type.get_expansion_type() == ExpansionMode::kBoth) ? +1 : 0;
+            inputs[11] = (bo.last_building_built + 5 * 60 * 100 > gametime) ? +1 : 0;
+            inputs[12] = (bo.last_building_built + 10 * 60 * 100 > gametime) ? +1 : 0;
+            inputs[13] = (bo.last_building_built + 20 * 60 * 100 > gametime) ? +1 : 0;
+            inputs[14] = (bo.total_count() >= bo.cnt_target) ? -1 : 0;
+            inputs[15] = (bo.total_count() >= bo.cnt_target) ? -2 : 0;
+            inputs[16] = (bo.total_count() < bo.cnt_target) ? -1 : 0;
+            inputs[17] = (bo.total_count() < bo.cnt_target) ? -2 : 0;
+            inputs[18] = +1;
+            inputs[19] = +2;
+            inputs[20] = -1;
+            inputs[21] = -2;
+            inputs[22] = -3;
+            inputs[23] = -4;
+            inputs[24] = -5;
+            inputs[25] = (basic_economy_established) ? 1 : -1;
+            inputs[26] = (basic_economy_established) ? 1 : -1;
+
+			int16_t tmp_score = 0;
+            for (uint8_t i = 0; i < kFNeuronBitSize; ++i) {
+				if (management_data.f_neuron_pool[53].get_position(i)) {
+					tmp_score += inputs[1];
+				}
+			}
+			if (site_needed_for_economy == BasicEconomyBuildingStatus::kEncouraged) {
+				tmp_score += 4;
+			}
+			if (site_needed_for_economy == BasicEconomyBuildingStatus::kDiscouraged) {
+				tmp_score -= 2;
+			}
+
+			if (tmp_score < 0) {
+				return BuildingNecessity::kForbidden;
+			} else  {
+				if (bo.max_needed_preciousness <= 0) {
+					bo.max_needed_preciousness = 1;
+				}
+				bo.primary_priority = 1 + tmp_score * std::abs(management_data.get_military_number_at(137));
+				return BuildingNecessity::kNeeded;
+			}
+
+            //if (bo.max_needed_preciousness == 0) {
+                //return BuildingNecessity::kNotNeeded;
+            //} else if (bo.cnt_under_construction + bo.unoccupied_count > 0) {
+                //return BuildingNecessity::kForbidden;
+            //} else if (bo.total_count() > 0 &&
+                       //!(expansion_type.get_expansion_type() == ExpansionMode::kEconomy ||
+                         //expansion_type.get_expansion_type() == ExpansionMode::kBoth)) {
+                //return BuildingNecessity::kForbidden;
+            //} else if (bo.total_count() >= bo.cnt_target) {
+                //if (get_stocklevel(bo, gametime) > 1 ||
+                    //bo.last_building_built + 10 * 60 * 100 > gametime) {
+                    //return BuildingNecessity::kForbidden;
+                //} else {
+                    //bo.primary_priority = std::abs(management_data.get_military_number_at(137)) / 2;
+                    //return BuildingNecessity::kNeeded;
+                //}
+            //} else {
+                //bo.primary_priority = (bo.cnt_target - bo.total_count()) *
+                                      //std::abs(management_data.get_military_number_at(111)) / 2;
+                //return BuildingNecessity::kNeeded;
+            //}
         } else if (bo.is(BuildingAttribute::kLumberjack)) {
             if (bo.total_count() > 1 && (bo.cnt_under_construction + bo.unoccupied_count > 0)) {
                 return BuildingNecessity::kForbidden;
