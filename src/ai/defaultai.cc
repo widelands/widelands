@@ -720,7 +720,7 @@ void DefaultAI::late_initialization() {
             }
 
             // here we identify hunters
-            if (bo.outputs.size() == 1 && tribe_->safe_ware_index("meat") == bo.outputs.at(0)) {
+            if (bo.inputs.size() == 0 && bo.outputs.size() == 1 && tribe_->safe_ware_index("meat") == bo.outputs.at(0)) {
                 bo.set_is(BuildingAttribute::kHunter);
             }
 
@@ -862,6 +862,9 @@ void DefaultAI::late_initialization() {
     // create e.g. two barracks or bakeries, the impact on the AI must be considered
     assert(count_buildings_with_attribute(BuildingAttribute::kBarracks) == 1);
     assert(count_buildings_with_attribute(BuildingAttribute::kLogRefiner) == 1);
+   	assert(count_buildings_with_attribute(BuildingAttribute::kWell) == 1);
+	assert(count_buildings_with_attribute(BuildingAttribute::kLumberjack) == 1);
+	assert(count_buildings_with_attribute(BuildingAttribute::kHunter) == 1);
     assert(count_buildings_with_attribute(BuildingAttribute::kIronMine) >= 1);
     // If there will be a tribe with more than 3 mines of the same type, just increase the number
     assert(count_buildings_with_attribute(BuildingAttribute::kIronMine) <= 3);
@@ -3836,6 +3839,11 @@ bool DefaultAI::check_productionsites(uint32_t gametime) {
 
     // Wells handling
     if (site.bo->is(BuildingAttribute::kWell)) {
+		// Never get bellow target count of wells
+		if (site.bo->total_count() <= site.bo->cnt_target){
+			return false;
+		}
+
         if (site.unoccupied_till + 6 * 60 * 1000 < gametime &&
             site.site->get_statistics_percent() == 0) {
             site.bo->last_dismantle_time = gametime;
