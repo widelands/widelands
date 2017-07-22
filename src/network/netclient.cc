@@ -69,7 +69,6 @@ bool NetClient::try_receive(RecvPacket* packet) {
 			// Connection closed or some error, close the socket
 			log("[NetClient] Error when trying to receive some data: %s.\n", ec.message().c_str());
 			close();
-		//	return false;
 		}
 	}
 	// Try to get one packet from the deserializer
