@@ -117,7 +117,7 @@ const std::vector<std::vector<int8_t>> neuron_curves = {
 };
 
 // TODO(tiborb): this should be replaced by command line switch
-constexpr bool kAITrainingMode = false;
+constexpr bool kAITrainingMode = true;
 constexpr int kMagicNumbersSize = 150;
 constexpr int kNeuronPoolSize = 80;
 constexpr int kFNeuronPoolSize = 60;
