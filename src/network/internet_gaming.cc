@@ -598,8 +598,11 @@ void InternetGaming::handle_packet(RecvPacket& packet) {
 
 		else if (cmd == IGPCMD_GAME_OPEN) {
 			// Client received the acknowledgment, that the game was opened
-			assert(waitcmd_ == IGPCMD_GAME_OPEN);
-			waitcmd_ = "";
+			// We can't use an assert here since this message might arrive after the game already
+			// started
+			if (waitcmd_ == IGPCMD_GAME_OPEN) {
+				waitcmd_ = "";
+			}
 		}
 
 		else if (cmd == IGPCMD_GAME_CONNECT) {
