@@ -117,7 +117,7 @@ const std::vector<std::vector<int8_t>> neuron_curves = {
 };
 
 // TODO(tiborb): this should be replaced by command line switch
-constexpr bool kAITrainingMode = false;
+constexpr bool kAITrainingMode = true;
 constexpr int kMagicNumbersSize = 150;
 constexpr int kNeuronPoolSize = 80;
 constexpr int kFNeuronPoolSize = 60;
@@ -568,7 +568,6 @@ constexpr int16_t kConqueredWhBonus = 300;
 constexpr int16_t kStrengthMultiplier = 30;
 constexpr int16_t kPSitesRatioMultiplier = 1;
 
-
 struct Neuron {
 	static int clip_weight_to_range(int w) {
 		assert(w < 125);
@@ -638,8 +637,17 @@ struct ManagementData {
 	void mutate(PlayerNumber = 0);
 	void new_dna_for_persistent(uint8_t, Widelands::AiType);
 	void copy_persistent_to_local();
-	void review(
-	   uint32_t, PlayerNumber, uint32_t, uint32_t, uint32_t, uint16_t, int16_t, int16_t, uint16_t, uint16_t, uint32_t);
+	void review(uint32_t,
+	            PlayerNumber,
+	            uint32_t,
+	            uint32_t,
+	            uint32_t,
+	            uint16_t,
+	            int16_t,
+	            int16_t,
+	            uint16_t,
+	            uint16_t,
+	            uint32_t);
 	void dump_data(PlayerNumber);
 	uint16_t new_neuron_id() {
 		++next_neuron_id;
@@ -670,7 +678,6 @@ private:
 	uint16_t performance_change;
 	Widelands::AiType ai_type;
 	void dump_output(Widelands::Player::AiPersistentState, PlayerNumber);
-
 };
 
 // this is used to count militarysites by their size

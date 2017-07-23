@@ -20,29 +20,22 @@
 #ifndef WL_LOGIC_AI_DUMP_H
 #define WL_LOGIC_AI_DUMP_H
 
-#define AI_SUFFIX "wai"
-
-/**
- * Saves newly generated AI DNA to a text files
- *
- * Allows to use file with AI DNA as a basis for DNA mutation and initialization
- * playercommands.
- */
-
 #include <cstring>
 #include <string>
 
 #include <stdint.h>
 
 #include "base/time_string.h"
-#include "io/filesystem/filesystem.h"
-#include "io/filesystem/layered_filesystem.h"
 #include "logic/game.h"
 #include "logic/player.h"
 
-#define SUFFIX ".wai"
-
 namespace Widelands {
+
+/**
+ * This handles reading and saving AI DNA to files
+ * - reading when initializing new AI
+ * - saving AI into files (with timestamp and player number) after mutation
+ */
 class AiDnaHandler {
 public:
 	AiDnaHandler();
@@ -57,10 +50,6 @@ public:
 	               std::vector<uint32_t>&,
 	               uint8_t);
 	void dump_output(Widelands::Player::AiPersistentState* pd, uint8_t);
-
-private:
-	//bool extract_day(const std::string&, tm*);
-	FileSystem::Type fs_type_;
 };
 }
 #endif  // end of include guard: WL_LOGIC_AI_DUMP_H
