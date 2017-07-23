@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-06-23 12:21+0000\n"
+"POT-Creation-Date: 2017-07-11 11:40+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Juanjo <juanjo.ng.83@gmail.com>, 2017\n"
 "Language-Team: Catalan (https://www.transifex.com/widelands/teams/35159/ca/)\n"
@@ -174,7 +174,7 @@ msgstr ""
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:117
 msgid ""
-"We should send a ship nothwards to gather some intelligence about the "
+"We should send a ship northwards to gather some intelligence about the "
 "Barbarians. Try to build a port on the island and found an outpost."
 msgstr ""
 "Hauríem d'enviar un vaixell al nord per aconseguir informació sobre els "
@@ -315,14 +315,16 @@ msgstr "Per fi! Sembla que s'ha acabat la ira dels déus i dels oceans."
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:204
 msgid ""
-"We landed on an unknown coast and found some rest under the palm trees "
-"growing at the shore. But that is about as good as it gets. The truth is: "
-"when I woke up this morning, I saw nothing but sand and stone around us."
+"Again, we stranded on an unknown coast and slept in the shade under some "
+"palm trees until the sun was risen high up in the sky. I’m afraid that when "
+"we awoke at noon, nobody was really surprised that all we could see was "
+"sand… although the amount of rocks near our camp was astonishing."
 msgstr ""
-"Hem arribat a una costa desconeguda i hem pogut descansar sota les palmeres "
-"que creixen a la costa. Però aquí s'acaben les coses bones. La veritat és "
-"que, quan m'he despertat aquest matí, no he vist res més que sorra i pedra "
-"als voltants."
+"Hem embarrancat un altre cop en una costa desconeguda i hem dormit a l'ombra"
+" d'algunes palmeres fins que el sol ha arribat ben amunt del cel. Em temo "
+"que quan ens hem despertat al migdia, ningú s'ha sorprès quan tot el que "
+"podíem veure era sorra... i una quantitat de roques enorme prop del nostre "
+"campament."
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:207
@@ -1014,7 +1016,7 @@ msgstr ""
 "aconseguirem fer-nos a la mar ben aviat."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:529
-msgid "Amalea’s Councel"
+msgid "Amalea’s Counsel"
 msgstr "El consell de l'Amalea"
 
 #. TRANSLATORS: Amalea
@@ -1090,8 +1092,8 @@ msgstr ""
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:558
 msgid ""
-"As we have seen on our last journey, it is of great importance to put the "
-"gods and especially Neptune in a good mood to safeguard our journey."
+"As we have seen on our journeys, it is of great importance to put the gods "
+"and especially Neptune in a good mood to safeguard our journey."
 msgstr ""
 "Tal com hem vist durant els nostres viatges, és molt important tenir "
 "contents als déus, en especial en Neptú, perquè ens protegeixin durant el "
@@ -1154,8 +1156,8 @@ msgstr "En Saledus sembla molt preocupat…"
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:584
 msgid ""
 "Sire, we found the ruins of a former Barbarian fortress and village. I’m "
-"somewhat worried that we will have to fight against them before we are "
-"ready."
+"somewhat worried that we will have to fight against them before we are ready"
+" to do so."
 msgstr ""
 "Senyor, hem trobat les ruïnes d'una antiga fortalesa bàrbara i d'una vila. "
 "Estic una mica preocupat per si hem de lluitar contra ells abans que "

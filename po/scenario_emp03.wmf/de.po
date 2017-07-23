@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-06-23 12:21+0000\n"
+"POT-Creation-Date: 2017-07-11 11:40+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>, 2017\n"
 "Language-Team: German (https://www.transifex.com/widelands/teams/35159/de/)\n"
@@ -174,12 +174,9 @@ msgstr ""
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:117
 msgid ""
-"We should send a ship nothwards to gather some intelligence about the "
+"We should send a ship northwards to gather some intelligence about the "
 "Barbarians. Try to build a port on the island and found an outpost."
 msgstr ""
-"Wir sollten ein Schiff gen Norden schicken, um Informationen über die "
-"Barbaren zu sammeln. Versuche, einen Hafen und einen Außenposten auf der "
-"Insel zu errichten."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:123
 msgid "Produce gold to send out expeditions"
@@ -318,13 +315,11 @@ msgstr "Endlich scheint der Zorn der Götter und des Meeres vorbei zu sein."
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:204
 msgid ""
-"We landed on an unknown coast and found some rest under the palm trees "
-"growing at the shore. But that is about as good as it gets. The truth is: "
-"when I woke up this morning, I saw nothing but sand and stone around us."
+"Again, we stranded on an unknown coast and slept in the shade under some "
+"palm trees until the sun was risen high up in the sky. I’m afraid that when "
+"we awoke at noon, nobody was really surprised that all we could see was "
+"sand… although the amount of rocks near our camp was astonishing."
 msgstr ""
-"Wir landeten an einer unbekannten Küste und fanden ein bissen Ruhe unter den"
-" Palmen am Strand. Aber dies war nur ein Traum. Die Wahrheit ist: Als ich an"
-" diesem Morgen aufwachte, sah ich nichts als Sand und Steine um uns."
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:207
@@ -1026,8 +1021,8 @@ msgstr ""
 "heimsegeln können."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:529
-msgid "Amalea’s Councel"
-msgstr "Amaleas Rat"
+msgid "Amalea’s Counsel"
+msgstr ""
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:532
@@ -1102,12 +1097,9 @@ msgstr ""
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:558
 msgid ""
-"As we have seen on our last journey, it is of great importance to put the "
-"gods and especially Neptune in a good mood to safeguard our journey."
+"As we have seen on our journeys, it is of great importance to put the gods "
+"and especially Neptune in a good mood to safeguard our journey."
 msgstr ""
-"Wie wir auf unseren Reisen gesehen haben, ist es von großer Wichtigkeit, "
-"dass die Götter und ganz besonders Neptun uns gewogen sind, damit die Fahrt "
-"gelingt."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:560
 msgid ""
@@ -1167,12 +1159,9 @@ msgstr "Saledus sieht besorgt aus …"
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:584
 msgid ""
 "Sire, we found the ruins of a former Barbarian fortress and village. I’m "
-"somewhat worried that we will have to fight against them before we are "
-"ready."
+"somewhat worried that we will have to fight against them before we are ready"
+" to do so."
 msgstr ""
-"Herr, wir haben die Ruinen einer alten Barbarenfestung und eines Dorfes "
-"gefunden. Ich habe die Befürchtung, dass wir gegen sie kämpfen müssen, bevor"
-" wir dazu bereit sind."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:590
 msgid "Train Faster, Train Harder"
