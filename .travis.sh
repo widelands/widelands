@@ -2,7 +2,7 @@ set -ex
 
 if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
   #Install linux dependencies
-  exit #FIXME try to short-circuit linux-builds to reduce long build times. I don't really need to know the result of all these builds at this point
+  exit -1 #FIXME try to short-circuit linux-builds to reduce long build times. I don't really need to know the result of all these builds at this point
 
   if [ "$CXX" = "g++" ]; then
     sudo apt-get install -qq g++-$GCC_VERSION;
