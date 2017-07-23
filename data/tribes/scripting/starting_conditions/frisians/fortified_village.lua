@@ -139,7 +139,7 @@ return {
          inputs = {
             iron = 6,
             log = 6,
-            thatch_reed = 3,
+            thatch_reed = 4,
          }
       })
 

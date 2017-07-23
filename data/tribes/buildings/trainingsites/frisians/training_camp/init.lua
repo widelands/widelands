@@ -18,9 +18,9 @@ tribes:new_trainingsite_type {
    },
    return_on_dismantle = {
       brick = 2,
-      granite = 2,
+      granite = 1,
       log = 1,
-      gold = 1,
+      gold = 2,
       thatch_reed = 2
    },
 
@@ -109,7 +109,7 @@ tribes:new_trainingsite_type {
       },
       upgrade_soldier_attack_0 = {
          -- TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-         descname = pgettext("frisians_building", "upgrading warrior attack from level 0 to level 1"),
+         descname = pgettext("frisians_building", "upgrading soldier attack from level 0 to level 1"),
          actions = {
             "check_soldier=soldier attack 0", -- Fails when aren't any soldier of level 0 attack
             "sleep=30000",
@@ -121,7 +121,7 @@ tribes:new_trainingsite_type {
       },
       upgrade_soldier_attack_1 = {
          -- TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-         descname = pgettext("frisians_building", "upgrading warrior attack from level 1 to level 2"),
+         descname = pgettext("frisians_building", "upgrading soldier attack from level 1 to level 2"),
          actions = {
             "check_soldier=soldier attack 1",
             "sleep=30000",
@@ -133,7 +133,7 @@ tribes:new_trainingsite_type {
       },
       upgrade_soldier_attack_2 = {
          -- TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-         descname = pgettext("frisians_building", "upgrading warrior attack from level 2 to level 3"),
+         descname = pgettext("frisians_building", "upgrading soldier attack from level 2 to level 3"),
          actions = {
             "check_soldier=soldier attack 2",
             "sleep=30000",
@@ -145,7 +145,7 @@ tribes:new_trainingsite_type {
       },
       upgrade_soldier_health_0 = {
          -- TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-         descname = pgettext("frisians_building", "upgrading warrior health from level 0 to level 1"),
+         descname = pgettext("frisians_building", "upgrading soldier health from level 0 to level 1"),
          actions = {
             "check_soldier=soldier health 0",
             "sleep=30000",
@@ -156,7 +156,7 @@ tribes:new_trainingsite_type {
       },
       upgrade_soldier_defense_0 = {
          -- TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-         descname = pgettext("frisians_building", "upgrading warrior defense from level 0 to level 1"),
+         descname = pgettext("frisians_building", "upgrading soldier defense from level 0 to level 1"),
          actions = {
             "check_soldier=soldier defense 0",
             "sleep=30000",

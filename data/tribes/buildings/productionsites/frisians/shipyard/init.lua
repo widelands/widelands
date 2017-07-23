@@ -12,16 +12,16 @@ tribes:new_productionsite_type {
    needs_seafaring = true,
 
    buildcost = {
-      brick = 7,
-      granite = 1,
-      log = 2,
-      thatch_reed = 4
+      brick = 4,
+      granite = 2,
+      log = 3,
+      thatch_reed = 3
    },
    return_on_dismantle = {
-      brick = 3,
+      brick = 2,
       granite = 1,
-      log = 1,
-      thatch_reed = 2
+      log = 2,
+      thatch_reed = 1
    },
 
    animations = {

@@ -11,12 +11,13 @@ tribes:new_productionsite_type {
    enhancement = "frisians_drinking_hall",
 
    buildcost = {
-      brick = 4,
-      log = 1,
+      brick = 3,
+      log = 2,
       thatch_reed = 2
    },
    return_on_dismantle = {
       brick = 2,
+      log = 1,
       thatch_reed = 1
    },
 

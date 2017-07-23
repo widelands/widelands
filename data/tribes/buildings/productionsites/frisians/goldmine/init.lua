@@ -11,12 +11,14 @@ tribes:new_productionsite_type {
    enhancement = "frisians_goldmine_deep",
 
    buildcost = {
-      brick = 3,
-      log = 3,
+      brick = 1,
+      granite = 2,
+      log = 2,
       thatch_reed = 1
    },
    return_on_dismantle = {
-      brick = 2,
+      brick = 1,
+      granite = 1,
       log = 1
    },
 

@@ -12,14 +12,14 @@ tribes:new_productionsite_type {
    enhancement_cost = {
       brick = 2,
       granite = 2,
-      log = 2,
+      log = 1,
       thatch_reed = 3
    },
    return_on_dismantle_on_enhanced = {
-      brick = 2,
+      brick = 3,
       granite = 1,
-      log = 2,
-      thatch_reed = 3
+      log = 1,
+      thatch_reed = 2
    },
 
    animations = {

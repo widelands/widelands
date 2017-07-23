@@ -94,9 +94,9 @@ return {
 
       place_building_in_region(player, "frisians_blacksmithy", sf:region(11), {
          inputs = {
-            iron = 8,
+            iron = 7,
             log = 7,
-            thatch_reed = 4,
+            thatch_reed = 7,
          }
       })
 

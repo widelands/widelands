@@ -2,20 +2,20 @@ dirname = path.dirname(__file__)
 
 tribes:new_productionsite_type {
    msgctxt = "frisians_building",
-   name = "frisians_tannery",
+   name = "frisians_smokery",
    -- TRANSLATORS: This is a building name used in lists of buildings
-   descname = pgettext("frisians_building", "Tannery"),
+   descname = pgettext("frisians_building", "Smokery"),
    helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "medium",
 
    buildcost = {
-      brick = 2,
-      log = 3,
+      brick = 4,
+      log = 1,
       thatch_reed = 2
    },
    return_on_dismantle = {
-      brick = 1,
+      brick = 2,
       log = 1,
       thatch_reed = 1
    },
@@ -40,12 +40,12 @@ tribes:new_productionsite_type {
    },
 
    working_positions = {
-      frisians_tanner = 1
+      frisians_smoker = 1
    },
 
    inputs = {
-      { name = "meat", amount = 4 },
-      { name = "fish", amount = 4 },
+      { name = "meat", amount = 6 },
+      { name = "fish", amount = 6 },
       { name = "log", amount = 6 },
    },
    outputs = {
@@ -69,21 +69,21 @@ tribes:new_productionsite_type {
          actions = {
             "return=skipped unless economy needs smoked_fish",
             "sleep=12000",
-            "consume=fish log",
+            "consume=fish:2 log",
             "animate=working 19000",
-            "produce=smoked_fish"
+            "produce=smoked_fish:2"
          },
       },
       smoke_meat = {
          -- TRANSLATORS: Completed/Skipped/Did not start smoking meat because ...
          descname = _"smoking meat",
          actions = {
-            "return=skipped when site has fish and economy needs smoked_fish",
+            "return=skipped when site has fish:2 and economy needs smoked_fish",
             "return=skipped unless economy needs smoked_meat",
             "sleep=12000",
-            "consume=meat log",
+            "consume=meat:2 log",
             "animate=working 19000",
-            "produce=smoked_meat"
+            "produce=smoked_meat:2"
          },
       },
    },

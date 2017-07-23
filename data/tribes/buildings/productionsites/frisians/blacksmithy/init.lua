@@ -52,9 +52,9 @@ tribes:new_productionsite_type {
    },
 
    inputs = {
-      { name = "iron", amount = 8 },
+      { name = "iron", amount = 7 },
       { name = "log", amount = 7 },
-      { name = "thatch_reed", amount = 4 }
+      { name = "thatch_reed", amount = 7 }
    },
    outputs = {
       "felling_ax",
@@ -141,7 +141,7 @@ tribes:new_productionsite_type {
          actions = {
             "return=skipped unless economy needs basket",
             "sleep=12000",
-            "consume=log iron",
+            "consume=thatch_reed log",
             "animate=working 19000",
             "produce=basket"
          },
