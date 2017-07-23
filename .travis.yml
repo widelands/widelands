@@ -51,37 +51,52 @@ matrix:
      env: BUILD_TYPE="Release"
    ### LINUX + CLANG BUILDS
 # TODO Temporarily reduce number of builds for faster feedback
-#   - compiler: clang
+#   - os: linux
+#     compiler: clang
 #     env: CLANG_VERSION="3.4" BUILD_TYPE="Debug"
-#   - compiler: clang
+#   - os: linux
+#     compiler: clang
 #     env: CLANG_VERSION="3.5" BUILD_TYPE="Debug"
-#   - compiler: clang
+#   - os: linux
+#     compiler: clang
 #     env: CLANG_VERSION="3.9" BUILD_TYPE="Debug"
    - os: linux
      compiler: clang
      env: CLANG_VERSION="4.0" BUILD_TYPE="Debug"
-#   - compiler: clang
+#   - os: linux
+#     compiler: clang
 #     env: CLANG_VERSION="3.4" BUILD_TYPE="Release"
-#   - compiler: clang
+#   - os: linux
+#     compiler: clang
 #     env: CLANG_VERSION="3.5" BUILD_TYPE="Release"
-#   - compiler: clang
+#   - os: linux
+#     compiler: clang
 #     env: CLANG_VERSION="3.9" BUILD_TYPE="Release"
-#   - compiler: clang
+#   - os: linux
+#     compiler: clang
 #     env: CLANG_VERSION="4.0" BUILD_TYPE="Release"
 #   ### LINUX + GCC BUILDS
-#   - compiler: gcc
+#   - os: linux
+#     compiler: gcc
 #     env: GCC_VERSION="4.8" BUILD_TYPE="Debug"
-#   - compiler: gcc
+#   - os: linux
+#     compiler: gcc
 #     env: GCC_VERSION="4.9" BUILD_TYPE="Debug"
-#   - compiler: gcc
+#   - os: linux
+#     compiler: gcc
 #     env: GCC_VERSION="6" BUILD_TYPE="Debug"
-   - compiler: gcc
+   - os: linux
+     compiler: gcc
      env: GCC_VERSION="7" BUILD_TYPE="Debug"
-#   - compiler: gcc
+#   - os: linux
+#     compiler: gcc
 #     env: GCC_VERSION="4.8" BUILD_TYPE="Release"
-#   - compiler: gcc
+#   - os: linux
+#     compiler: gcc
 #     env: GCC_VERSION="4.9" BUILD_TYPE="Release"
-#   - compiler: gcc
+#   - os: linux
+#     compiler: gcc
 #     env: GCC_VERSION="6" BUILD_TYPE="Release"
-#   - compiler: gcc
+#   - os: linux
+#     compiler: gcc
 #     env: GCC_VERSION="7" BUILD_TYPE="Release"
