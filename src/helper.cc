@@ -54,14 +54,5 @@ end:
 	throw wexception("expected word");
 }
 
-// Extracts a long from 'text' into 'val' returning true if all of the string
-// was valid. If not, the content of 'val' is undefined.
-bool to_long(const std::string& text, long* val) {
-	const char* start = text.c_str();
-	char* end;
-	*val = strtol(start, &end, 10);
-	return *end == '\0';
-}
-
 
 

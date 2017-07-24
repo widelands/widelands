@@ -712,7 +712,7 @@ void DefaultAI::late_initialization() {
 			}
 
 			// here we identify hunters
-			if (bo.inputs.size() == 0 && bo.outputs.size() == 1 &&
+			if (bo.inputs.empty() && bo.outputs.size() == 1 &&
 			    tribe_->safe_ware_index("meat") == bo.outputs.at(0)) {
 				bo.set_is(BuildingAttribute::kHunter);
 			}
@@ -2352,7 +2352,7 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 		}
 
 		if (kAITrainingMode && bo.type == BuildingObserver::Type::kProductionsite) {
-			printf(
+			log(
 			   "%2d: %-35s(%2d now) %-11s: max prec: %2d/%2d, primary priority: %4d, overdue: %3d\n",
 			   player_number(), bo.name, bo.total_count(),
 			   (bo.new_building == BuildingNecessity::kAllowed ||
@@ -2462,8 +2462,8 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 						prio += 200;
 					}
 
-					prio +=
-					   -10 + std::abs(management_data.get_military_number_at(59) / 50) * bf->ground_water;
+					prio += -10 +
+					        std::abs(management_data.get_military_number_at(59) / 50) * bf->ground_water;
 
 				} else if (bo.is(BuildingAttribute::kLumberjack)) {
 
@@ -5283,8 +5283,9 @@ uint8_t DefaultAI::count_buildings_with_attribute(BuildingAttribute attribute) {
 	return count;
 }
 
-// counts share of productionsites (as type) with zero buildings of type
-// returns portion * 1000, so 1000=100%
+// Calculates ratio of building that the player has in comparison to all buildings that are
+// buildable by the player
+// In range 0 - 1000, to avoid floats
 uint32_t DefaultAI::count_productionsites_without_buildings() {
 	uint32_t total = 0;
 	uint32_t existing = 0;

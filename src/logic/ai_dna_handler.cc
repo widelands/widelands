@@ -28,7 +28,6 @@
 
 #include "base/macros.h"
 #include "base/wexception.h"
-#include "helper.h"
 #include "logic/constants.h"
 #include "wui/interactive_base.h"
 
