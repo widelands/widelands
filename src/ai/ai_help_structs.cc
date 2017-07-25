@@ -33,7 +33,7 @@ constexpr int kShortcutWithinSameEconomy = 1000;
 constexpr int kRoadToDifferentEconomy = 10000;
 constexpr int kUpperDefaultMutationLimit = 150;
 constexpr int kLowerDefaultMutationLimit = 75;
-constexpr int16_t kPrefNumberProbability = (kAITrainingMode) ? 5 : 100;
+constexpr int16_t kPrefNumberProbability = kAITrainingMode ? 5 : 100;
 
 // CheckStepRoadAI
 CheckStepRoadAI::CheckStepRoadAI(Player* const pl, uint8_t const mc, bool const oe)
@@ -476,7 +476,7 @@ void ManagementData::review(const uint32_t gametime,
                             const int16_t trained_soldiers,
                             const int16_t latest_attackers,
                             const uint16_t conq_ws,
-                            const uint16_t m_strength,
+                            const uint16_t strength,
                             const uint32_t existing_ps) {
 
 	const int16_t main_bonus =
@@ -487,20 +487,19 @@ void ManagementData::review(const uint32_t gametime,
 
 	const int16_t land_delta_bonus = static_cast<int16_t>(land - old_land) * kLandDeltaMultiplier;
 
-	const uint32_t ps_sites_bonus =
-	   kPSitesRatioMultiplier * existing_ps * existing_ps * existing_ps / 1000 / 1000;
+	const uint32_t ps_sites_bonus = kPSitesRatioMultiplier * std::pow(existing_ps, 3) / 1000 / 1000;
 
 	score = land / kCurrentLandDivider + land_delta_bonus + main_bonus +
 	        attackers * kAttackersMultiplier + ((attackers > 0) ? kAttackBonus : -kAttackBonus) +
 	        trained_soldiers * kTrainedSoldiersScore + kConqueredWhBonus * conq_ws +
-	        m_strength * kStrengthMultiplier + ps_sites_bonus - 500 * kPSitesRatioMultiplier;
+	        strength * kStrengthMultiplier + ps_sites_bonus - 500 * kPSitesRatioMultiplier;
 
 	log(" %2d %s: reviewing AI mngm. data, sc: %5d Pr.p: %d (l:%4d/%s/%4d, "
 	    "at:%4d(%3d),ts:%4d/%2d,cWH:%2d,str:%2d/%4d,ps:%4d/%4d)\n",
 	    pn, gamestring_with_leading_zeros(gametime), score, primary_parent,
 	    land / kCurrentLandDivider, (main_bonus) ? "*" : " ", land_delta_bonus,
 	    attackers * kAttackersMultiplier, latest_attackers, trained_soldiers * kTrainedSoldiersScore,
-	    trained_soldiers, conq_ws, m_strength, m_strength * kStrengthMultiplier, existing_ps,
+	    trained_soldiers, conq_ws, strength, strength * kStrengthMultiplier, existing_ps,
 	    ps_sites_bonus);
 
 	if (score < -10000 || score > 30000) {
@@ -540,64 +539,69 @@ void ManagementData::new_dna_for_persistent(const uint8_t pn, const Widelands::A
 	// First setting of military numbers, they go directly to persistent data
 	for (uint16_t i = 0; i < kMagicNumbersSize; i += 1) {
 		// Child inherits DNA with probability 1/kSecondParentProbability from main parent
-		uint8_t dna_donor = ((std::rand() % kSecondParentProbability) > 0) ? 0 : 1;
+		DnaParent dna_donor = ((std::rand() % kSecondParentProbability) > 0) ? DnaParent::kPrimary :
+		                                                                       DnaParent::kSecondary;
 		if (i == kMutationRatePosition) {  // Overwriting
-			dna_donor = 0;
+			dna_donor = DnaParent::kPrimary;
 		}
 
 		switch (dna_donor) {
-		case 0:
+		case DnaParent::kPrimary:
 			set_military_number_at(i, AI_military_numbers_P1[i]);
 			break;
-		case 1:
+		case DnaParent::kSecondary:
 			set_military_number_at(i, AI_military_numbers_P2[i]);
 			break;
 		default:
-			log("Invalid dna_donor for military numbers: %d?\n", dna_donor);
+			log("Invalid dna_donor for military numbers\n");
 			NEVER_HERE();
 		}
 	}
 
-	pd->neuron_weights.clear();
-	pd->neuron_functs.clear();
-	pd->f_neurons.clear();
+	_persistent_data->neuron_weights.clear();
+	_persistent_data->neuron_functs.clear();
+	_persistent_data->f_neurons.clear();
 
 	for (uint16_t i = 0; i < kNeuronPoolSize; i += 1) {
-		const uint8_t dna_donor = ((std::rand() % kSecondParentProbability) > 0) ? 0 : 1;
+		const DnaParent dna_donor = ((std::rand() % kSecondParentProbability) > 0) ?
+		                               DnaParent::kPrimary :
+		                               DnaParent::kSecondary;
 
 		switch (dna_donor) {
-		case 0:
-			pd->neuron_weights.push_back(input_weights_P1[i]);
-			pd->neuron_functs.push_back(input_func_P1[i]);
+		case DnaParent::kPrimary:
+			_persistent_data->neuron_weights.push_back(input_weights_P1[i]);
+			_persistent_data->neuron_functs.push_back(input_func_P1[i]);
 			break;
-		case 1:
-			pd->neuron_weights.push_back(input_weights_P2[i]);
-			pd->neuron_functs.push_back(input_func_P2[i]);
+		case DnaParent::kSecondary:
+			_persistent_data->neuron_weights.push_back(input_weights_P2[i]);
+			_persistent_data->neuron_functs.push_back(input_func_P2[i]);
 			break;
 		default:
-			log("Invalid dna_donor for neurons:  %d?\n", dna_donor);
+			log("Invalid dna_donor for neurons\n");
 			NEVER_HERE();
 		}
 	}
 
 	for (uint16_t i = 0; i < kFNeuronPoolSize; i += 1) {
-		const uint8_t dna_donor = (std::rand() % kSecondParentProbability > 0) ? 0 : 1;
+		const DnaParent dna_donor = ((std::rand() % kSecondParentProbability) > 0) ?
+		                               DnaParent::kPrimary :
+		                               DnaParent::kSecondary;
 		switch (dna_donor) {
-		case 0:
-			pd->f_neurons.push_back(f_neurons_P1[i]);
+		case DnaParent::kPrimary:
+			_persistent_data->f_neurons.push_back(f_neurons_P1[i]);
 			break;
-		case 1:
-			pd->f_neurons.push_back(f_neurons_P2[i]);
+		case DnaParent::kSecondary:
+			_persistent_data->f_neurons.push_back(f_neurons_P2[i]);
 			break;
 		default:
-			log("Invalid dna_donor for f-neurons:  %d?\n", dna_donor);
+			log("Invalid dna_donor for f-neurons\n");
 			NEVER_HERE();
 		}
 	}
 
-	pd->magic_numbers_size = kMagicNumbersSize;
-	pd->neuron_pool_size = kNeuronPoolSize;
-	pd->f_neuron_pool_size = kFNeuronPoolSize;
+	_persistent_data->magic_numbers_size = kMagicNumbersSize;
+	_persistent_data->neuron_pool_size = kNeuronPoolSize;
+	_persistent_data->f_neuron_pool_size = kFNeuronPoolSize;
 }
 // Decides if mutation takes place and how intensive it will be
 MutatingIntensity ManagementData::do_mutate(const uint8_t is_preferred,
@@ -634,7 +638,7 @@ void ManagementData::mutate(const uint8_t pn) {
 		log("%2d: Very weak mode, increasing mutation probability to 1 / %d\n", pn, probability);
 	}
 
-	// Widlcard for ai trainingmode
+	// Wildcard for ai trainingmode
 	if (kAITrainingMode && std::rand() % 8 == 0) {
 		probability /= 3;
 	}
@@ -687,12 +691,12 @@ void ManagementData::mutate(const uint8_t pn) {
 					if (std::rand() % 4 == 0) {
 						assert(!neuron_curves.empty());
 						item.set_type(std::rand() % neuron_curves.size());
-						pd->neuron_functs[item.get_id()] = item.get_type();
+						_persistent_data->neuron_functs[item.get_id()] = item.get_type();
 					} else {
 						int16_t new_value = shift_weight_value(
 						   item.get_weight(), mutating_intensity == MutatingIntensity::kAgressive);
 						item.set_weight(new_value);
-						pd->neuron_weights[item.get_id()] = item.get_weight();
+						_persistent_data->neuron_weights[item.get_id()] = item.get_weight();
 					}
 					log("      Neuron %2d: weight: %4d -> %4d, new curve: %d   %s\n", item.get_id(),
 					    old_value, item.get_weight(), item.get_type(),
@@ -728,7 +732,7 @@ void ManagementData::mutate(const uint8_t pn) {
 				}
 
 				if (changed_bits) {
-					pd->f_neurons[item.get_id()] = item.get_int();
+					_persistent_data->f_neurons[item.get_id()] = item.get_int();
 					log("      F-Neuron %2d: new value: %13ul, changed bits: %2d   %s\n", item.get_id(),
 					    item.get_int(), changed_bits,
 					    (preferred_f_neurons.count(item.get_id()) > 0) ? "aggressive" : "");
@@ -743,22 +747,23 @@ void ManagementData::mutate(const uint8_t pn) {
 // Now we copy persistent to local
 void ManagementData::copy_persistent_to_local() {
 
-	assert(pd->neuron_weights.size() == kNeuronPoolSize);
-	assert(pd->neuron_functs.size() == kNeuronPoolSize);
+	assert(_persistent_data->neuron_weights.size() == kNeuronPoolSize);
+	assert(_persistent_data->neuron_functs.size() == kNeuronPoolSize);
 	neuron_pool.clear();
 	for (uint32_t i = 0; i < kNeuronPoolSize; i = i + 1) {
-		neuron_pool.push_back(Neuron(pd->neuron_weights[i], pd->neuron_functs[i], i));
+		neuron_pool.push_back(
+		   Neuron(_persistent_data->neuron_weights[i], _persistent_data->neuron_functs[i], i));
 	}
 
-	assert(pd->f_neurons.size() == kFNeuronPoolSize);
+	assert(_persistent_data->f_neurons.size() == kFNeuronPoolSize);
 	f_neuron_pool.clear();
 	for (uint32_t i = 0; i < kFNeuronPoolSize; i = i + 1) {
-		f_neuron_pool.push_back(FNeuron(pd->f_neurons[i], i));
+		f_neuron_pool.push_back(FNeuron(_persistent_data->f_neurons[i], i));
 	}
 
-	pd->magic_numbers_size = kMagicNumbersSize;
-	pd->neuron_pool_size = kNeuronPoolSize;
-	pd->f_neuron_pool_size = kFNeuronPoolSize;
+	_persistent_data->magic_numbers_size = kMagicNumbersSize;
+	_persistent_data->neuron_pool_size = kNeuronPoolSize;
+	_persistent_data->f_neuron_pool_size = kFNeuronPoolSize;
 
 	test_consistency();
 	log("    ... DNA initialized\n");
@@ -766,27 +771,27 @@ void ManagementData::copy_persistent_to_local() {
 
 void ManagementData::test_consistency(bool itemized) {
 
-	assert(pd->neuron_weights.size() == pd->neuron_pool_size);
-	assert(pd->neuron_functs.size() == pd->neuron_pool_size);
-	assert(neuron_pool.size() == pd->neuron_pool_size);
+	assert(_persistent_data->neuron_weights.size() == _persistent_data->neuron_pool_size);
+	assert(_persistent_data->neuron_functs.size() == _persistent_data->neuron_pool_size);
+	assert(neuron_pool.size() == _persistent_data->neuron_pool_size);
 	assert(neuron_pool.size() == kNeuronPoolSize);
 
-	assert(pd->magic_numbers_size == kMagicNumbersSize);
-	assert(pd->magic_numbers.size() == kMagicNumbersSize);
+	assert(_persistent_data->magic_numbers_size == kMagicNumbersSize);
+	assert(_persistent_data->magic_numbers.size() == kMagicNumbersSize);
 
-	assert(pd->f_neurons.size() == pd->f_neuron_pool_size);
-	assert(f_neuron_pool.size() == pd->f_neuron_pool_size);
+	assert(_persistent_data->f_neurons.size() == _persistent_data->f_neuron_pool_size);
+	assert(f_neuron_pool.size() == _persistent_data->f_neuron_pool_size);
 	assert(f_neuron_pool.size() == kFNeuronPoolSize);
 
 	if (itemized) {
 		// comparing contents of neuron and fneuron pools
 		for (uint16_t i = 0; i < kNeuronPoolSize; i += 1) {
-			assert(pd->neuron_weights[i] == neuron_pool[i].get_weight());
-			assert(pd->neuron_functs[i] == neuron_pool[i].get_type());
+			assert(_persistent_data->neuron_weights[i] == neuron_pool[i].get_weight());
+			assert(_persistent_data->neuron_functs[i] == neuron_pool[i].get_type());
 			assert(neuron_pool[i].get_id() == i);
 		}
 		for (uint16_t i = 0; i < kFNeuronPoolSize; i += 1) {
-			assert(pd->f_neurons[i] == f_neuron_pool[i].get_int());
+			assert(_persistent_data->f_neurons[i] == f_neuron_pool[i].get_int());
 			assert(f_neuron_pool[i].get_id() == i);
 		}
 	}
@@ -795,25 +800,25 @@ void ManagementData::test_consistency(bool itemized) {
 }
 
 void ManagementData::dump_data(const PlayerNumber pn) {
-	ai_dna_handler.dump_output(pd, pn);
+	ai_dna_handler.dump_output(_persistent_data, pn);
 }
 
 // Querying military number at a possition
 int16_t ManagementData::get_military_number_at(uint8_t pos) {
 	assert(pos < kMagicNumbersSize);
-	return pd->magic_numbers[pos];
+	return _persistent_data->magic_numbers[pos];
 }
 
 // Setting military number (persistent numbers are used also for local use)
 void ManagementData::set_military_number_at(const uint8_t pos, int16_t value) {
 	assert(pos < kMagicNumbersSize);
 
-	while (pos >= pd->magic_numbers.size()) {
-		pd->magic_numbers.push_back(0);
+	while (pos >= _persistent_data->magic_numbers.size()) {
+		_persistent_data->magic_numbers.push_back(0);
 	}
 
 	value = Neuron::clip_weight_to_range(value);
-	pd->magic_numbers[pos] = value;
+	_persistent_data->magic_numbers[pos] = value;
 }
 
 uint16_t MineTypesObserver::total_count() const {

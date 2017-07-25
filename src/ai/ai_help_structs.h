@@ -109,6 +109,8 @@ enum class SchedulerTaskId : uint8_t {
 	kUnset
 };
 
+enum class DnaParent : uint8_t { kPrimary, kSecondary };
+
 // This is a simplification of a curve, to avoid repeated calculation
 const std::vector<std::vector<int8_t>> neuron_curves = {
    {0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80, 85, 90, 95, 100},
@@ -632,22 +634,22 @@ struct ManagementData {
 
 	std::vector<Neuron> neuron_pool;
 	std::vector<FNeuron> f_neuron_pool;
-	Widelands::Player::AiPersistentState* pd;
+	Widelands::Player::AiPersistentState* _persistent_data;
 
 	void mutate(PlayerNumber = 0);
 	void new_dna_for_persistent(uint8_t, Widelands::AiType);
 	void copy_persistent_to_local();
-	void review(uint32_t,
-	            PlayerNumber,
-	            uint32_t,
-	            uint32_t,
-	            uint32_t,
-	            uint16_t,
-	            int16_t,
-	            int16_t,
-	            uint16_t,
-	            uint16_t,
-	            uint32_t);
+	void review(const uint32_t gametime,
+	            PlayerNumber pn,
+	            uint32_t land,
+	            uint32_t max_e_land,
+	            uint32_t old_land,
+	            uint16_t attackers,
+	            int16_t trained_soldiers,
+	            int16_t latest_attackers,
+	            uint16_t conq_ws,
+	            uint16_t strength,
+	            uint32_t existing_ps);
 	void dump_data(PlayerNumber);
 	uint16_t new_neuron_id() {
 		++next_neuron_id;

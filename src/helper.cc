@@ -53,6 +53,3 @@ end:
 		return result;
 	throw wexception("expected word");
 }
-
-
-

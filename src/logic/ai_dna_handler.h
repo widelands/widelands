@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007-2017 by the Widelands Development Team
+ * Copyright (C) 2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef WL_LOGIC_AI_DUMP_H
-#define WL_LOGIC_AI_DUMP_H
+#ifndef WL_LOGIC_AI_DNA_HANDLER_H
+#define WL_LOGIC_AI_DNA_HANDLER_H
 
 #include <cstring>
 #include <string>
@@ -26,6 +26,7 @@
 #include <stdint.h>
 
 #include "base/time_string.h"
+#include "logic/constants.h"
 #include "logic/game.h"
 #include "logic/player.h"
 
@@ -40,8 +41,12 @@ class AiDnaHandler {
 public:
 	AiDnaHandler();
 
-	static std::string get_base_dir() {
+	static std::string get_ai_dir() {
 		return "ai";
+	}
+
+	static std::string get_ai_suffix() {
+		return "wai";
 	}
 
 	void fetch_dna(std::vector<int16_t>&,
@@ -52,4 +57,4 @@ public:
 	void dump_output(Widelands::Player::AiPersistentState* pd, uint8_t);
 };
 }
-#endif  // end of include guard: WL_LOGIC_AI_DUMP_H
+#endif  // end of include guard: WL_LOGIC_AI_DNA_HANDLER_H

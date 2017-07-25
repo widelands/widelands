@@ -501,7 +501,7 @@ void DefaultAI::late_initialization() {
 
 	// The data struct below is owned by Player object, the purpose is to have them saved therein
 	persistent_data = player_->get_mutable_ai_persistent_state();
-	management_data.pd = player_->get_mutable_ai_persistent_state();
+	management_data._persistent_data = player_->get_mutable_ai_persistent_state();
 	const bool create_basic_buildings_list = (gametime < kRemainingBasicBuildingsResetTime);
 
 	if (persistent_data->initialized == kFalse) {
@@ -3833,7 +3833,7 @@ bool DefaultAI::check_productionsites(uint32_t gametime) {
 
 	// Wells handling
 	if (site.bo->is(BuildingAttribute::kWell)) {
-		// Never get bellow target count of wells
+		// Never get below target count of wells
 		if (site.bo->total_count() <= site.bo->cnt_target) {
 			return false;
 		}
@@ -5283,8 +5283,8 @@ uint8_t DefaultAI::count_buildings_with_attribute(BuildingAttribute attribute) {
 	return count;
 }
 
-// Calculates ratio of building that the player has in comparison to all buildings that are
-// buildable by the player
+// Calculates ratio of the buildings that the player has in comparison to all buildings that
+// are buildable by the player
 // In range 0 - 1000, to avoid floats
 uint32_t DefaultAI::count_productionsites_without_buildings() {
 	uint32_t total = 0;
