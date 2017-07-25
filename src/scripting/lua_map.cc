@@ -1616,9 +1616,18 @@ int LuaMapObjectDescription::get_representative_image(lua_State* L) {
 }
 
 /* RST
-   .. attribute:: type
+   .. attribute:: type_name
 
-         (RO) the name of the building, e.g. building.
+         (RO) the map object's type as a string. Possible values are:
+
+         * Bobs: ``bob``, ``critter``, ``ship``, ``worker``, ``carrier``, ``soldier``
+         * Wares: ``ware``
+         * Immovables: ``immovable``
+
+            * Buildings: ``building``, ``constructionsite``, ``dismantlesite``, ``warehouse``, ``productionsite``, ``militarysite``, ``trainingsite``
+            * Other: ``flag``, ``road``, ``portdock``
+
+         * Other: ``battle``, ``fleet``
 */
 int LuaMapObjectDescription::get_type_name(lua_State* L) {
 	lua_pushstring(L, to_string(get()->type()));
