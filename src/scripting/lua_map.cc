@@ -1628,6 +1628,8 @@ int LuaMapObjectDescription::get_representative_image(lua_State* L) {
             * Other: ``flag``, ``road``, ``portdock``
 
          * Other: ``battle``, ``fleet``
+
+         ``critter`` are the animals on the map. Not including Donkey, Horse, Oxen, as they are ``carriers``.
 */
 int LuaMapObjectDescription::get_type_name(lua_State* L) {
 	lua_pushstring(L, to_string(get()->type()));
