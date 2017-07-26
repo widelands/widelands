@@ -22,6 +22,10 @@ if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
   brew link --force icu4c
 fi
 
+#debug
+echo "#x?############################################"
+cat x.log
+
 # Configure the build
 mkdir build
 cd build
