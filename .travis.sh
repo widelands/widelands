@@ -24,6 +24,7 @@ fi
 
 #Debug
 glxinfo
+man Xvfb | cat
 
 # Configure the build
 mkdir build
