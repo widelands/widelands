@@ -1618,18 +1618,78 @@ int LuaMapObjectDescription::get_representative_image(lua_State* L) {
 /* RST
    .. attribute:: type_name
 
-         (RO) the map object's type as a string. Possible values are:
+         (RO) the map object's type as a string. Map object types are
+         organized in a hierarchy, where an element that's lower in the
+         hierarchy has all the properties of the higher-placed types,
+         as well as its own additional properties. Any map object's
+         description that isn't linked below can be accessed via its
+         higher types, e.g. a ``bob`` is a 
+         :class:`general map object <MapObjectDescription>`, and a
+         ``carrier`` is a :class:`worker <WorkerDescription>` as well as a
+         general map object. Possible values are:
 
-         * Bobs: ``bob``, ``critter``, ``ship``, ``worker``, ``carrier``, ``soldier``
-         * Wares: ``ware``
-         * Immovables: ``immovable``
+         * **Bobs:** Bobs are map objects that can move around the map.
+           Bob types are:
 
-            * Buildings: ``building``, ``constructionsite``, ``dismantlesite``, ``warehouse``, ``productionsite``, ``militarysite``, ``trainingsite``
-            * Other: ``flag``, ``road``, ``portdock``
+           * :class:`bob <BobDescription>`, the abstract base type for 
+             all bobs,
+           * :class:`critter <CritterDescription>`, animals that aren't
+             controlled by any tribe,
+           * :class:`ship <ShipDescription>`, a sea-going vessel
+             belonging to a tribe that can ferry wares or an expedition,
+           * :class:`worker <WorkerDescription>`, a worker belonging to
+             a tribe,
+           * :class:`carrier <CarrierDescription>`, a specialized 
+             worker for carrying items along a road,
+           * :class:`soldier <SoldierDescription>`, a specialized worker
+             that will fight for its tribe.
 
-         * Other: ``battle``, ``fleet``
+         * **Wares:** :class:`ware <WareDescription>`, a ware used by 
+           buildings to produce other wares, workers or ships
+         * **Immovables:** Immovables are map objects that have a fixed
+           position on the map, like buildings or trees. Immovable types are:
 
-         ``critter`` are the animals on the map. Not including Donkey, Horse, Oxen, as they are ``carriers``.
+           * :class:`immovable <ImmovableDescription>` General immovables
+             that can belong to a tribe (e.g. a wheat field) or to the 
+             world (e.g. trees or rocks).
+
+           * **Buildings:** Buildings always belong to a tribe. Building
+             types are:
+
+             * :class:`building <BuildingDescription>`, the base class 
+               for all buildings
+             * :class:`constructionsite <ConstructionSiteDescription>`, 
+               an actual building is being constructed here,
+             * :class:`dismantlesite <DismantleSiteDescription>`, an
+               actual building is being dismantled here,
+             * :class:`warehouse <WarehouseDescription>`, a warehouse
+               can store wares and workers. Headquarters and ports are 
+               special tapes of warehouses, but they belong to the same
+               class,
+             * :class:`militarysite <MilitarySiteDescription>`, a 
+               building manned by soldiers to expand a tribe's territory,
+             * :class:`productionsite <ProductionSiteDescription>`, the 
+               most common type of building, which can produce wares,
+             * :class:`trainingsite <TrainingSiteDescription>`, a 
+               specialized productionsite for improving soldiers.
+           
+           * **Other Immovables:** Specialized immovables that aren't buildings:
+
+             * :class:`flag <FlagDescription>`, a flag that can hold 
+               wares for transport,
+             * :class:`road <RoadDescription>`, a road connecting two
+               flags,
+             * :class:`portdock <PortdockDescription>`, a 'parking space'
+               on water terrain where ships can load/unload wares and
+               workers. A portdock is invisible to the player and one is
+               automatically placed next to each port building.
+
+         * **Abstract:** These types are abstract map objects that are used by the engine and are not visible on the map.
+
+           * :class:`battle <BattleDescription>`, holds information 
+             about two soldiers in a fight,
+           * :class:`fleet <FleetDescription>`, holds information for
+             managing ships.
 */
 int LuaMapObjectDescription::get_type_name(lua_State* L) {
 	lua_pushstring(L, to_string(get()->type()));
