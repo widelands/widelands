@@ -1702,9 +1702,11 @@ ImmovableDescription
 
 .. class:: ImmovableDescription
 
+   Child of: :class:`MapObjectDescription`
+
    A static description of a :class:`base immovable <BaseImmovable>`, so it can be used in help files
    without having to access an actual immovable on the map.
-   See also class MapObjectDescription for more properties.
+   See also :class:`MapObjectDescription` for more properties.
 */
 const char LuaImmovableDescription::className[] = "ImmovableDescription";
 const MethodType<LuaImmovableDescription> LuaImmovableDescription::Methods[] = {
@@ -1908,11 +1910,13 @@ BuildingDescription
 
 .. class:: BuildingDescription
 
+   Child of: :class:`MapObjectDescription`, :class:`ImmovableDescription`
+
    A static description of a tribe's building, so it can be used in help files
    without having to access an actual building on the map.
    This class contains the properties that are common to all buildings.
    Further properties are implemented in the subclasses.
-   See also class MapObjectDescription for more properties.
+   See the parent classes for more properties.
 */
 const char LuaBuildingDescription::className[] = "BuildingDescription";
 const MethodType<LuaBuildingDescription> LuaBuildingDescription::Methods[] = {
@@ -2144,9 +2148,11 @@ ConstructionSiteDescription
 
 .. class:: ConstructionSiteDescription
 
-    A static description of a tribe's constructionsite, so it can be used in help files
-    without having to access an actual building on the map.
-    See also class BuildingDescription and class MapObjectDescription for more properties.
+   Child of: :class:`MapObjectDescription`, :class:`ImmovableDescription`, :class:`BuildingDescription`
+
+   A static description of a tribe's constructionsite, so it can be used in help files
+   without having to access an actual building on the map.
+   See the parent classes for more properties.
 */
 const char LuaConstructionSiteDescription::className[] = "ConstructionSiteDescription";
 const MethodType<LuaConstructionSiteDescription> LuaConstructionSiteDescription::Methods[] = {
@@ -2162,9 +2168,11 @@ DismantleSiteDescription
 
 .. class:: DismantleSiteDescription
 
-    A static description of a tribe's dismantlesite, so it can be used in help files
-    without having to access an actual building on the map.
-    See also class BuildingDescription and class MapObjectDescription for more properties.
+   Child of: :class:`MapObjectDescription`, :class:`ImmovableDescription`, :class:`BuildingDescription`
+
+   A static description of a tribe's dismantlesite, so it can be used in help files
+   without having to access an actual building on the map.
+   See the parent classes for more properties.
 */
 const char LuaDismantleSiteDescription::className[] = "DismantleSiteDescription";
 const MethodType<LuaDismantleSiteDescription> LuaDismantleSiteDescription::Methods[] = {
@@ -2180,11 +2188,13 @@ ProductionSiteDescription
 
 .. class:: ProductionSiteDescription
 
+   Child of: :class:`MapObjectDescription`, :class:`ImmovableDescription`, :class:`BuildingDescription`
+
    A static description of a tribe's productionsite, so it can be used in help files
    without having to access an actual building on the map.
    This class contains the properties for productionsites that have workers.
    For militarysites and trainingsites, please use the subclasses.
-   See also class BuildingDescription and class MapObjectDescription for more properties.
+   See the parent classes for more properties.
 */
 const char LuaProductionSiteDescription::className[] = "ProductionSiteDescription";
 const MethodType<LuaProductionSiteDescription> LuaProductionSiteDescription::Methods[] = {
@@ -2380,10 +2390,12 @@ MilitarySiteDescription
 
 .. class:: MilitarySiteDescription
 
+   Child of: :class:`MapObjectDescription`, :class:`ImmovableDescription`, :class:`BuildingDescription`
+
    A static description of a tribe's militarysite, so it can be used in help files
    without having to access an actual building on the map.
    A militarysite can garrison and heal soldiers, and it will expand your territory.
-   See also class BuildingDescription and class MapObjectDescription for more properties.
+   See the parent classes for more properties.
 */
 const char LuaMilitarySiteDescription::className[] = "MilitarySiteDescription";
 const MethodType<LuaMilitarySiteDescription> LuaMilitarySiteDescription::Methods[] = {
@@ -2429,10 +2441,12 @@ TrainingSiteDescription
 
 .. class:: TrainingSiteDescription
 
+   Child of: :class:`MapObjectDescription`, :class:`ImmovableDescription`, :class:`BuildingDescription`, :class:`ProductionSiteDescription`
+
    A static description of a tribe's trainingsite, so it can be used in help files
    without having to access an actual building on the map.
    A training site can train some or all of a soldier's properties (Attack, Defense, Evade and Health).
-   See also :class:`ProductionSiteDescription` and :class:`MapObjectDescription` for more properties.
+   See the parent classes for more properties.
 */
 const char LuaTrainingSiteDescription::className[] = "TrainingSiteDescription";
 const MethodType<LuaTrainingSiteDescription> LuaTrainingSiteDescription::Methods[] = {
@@ -2698,11 +2712,13 @@ WarehouseDescription
 
 .. class:: WarehouseDescription
 
+   Child of: :class:`MapObjectDescription`, :class:`ImmovableDescription`, :class:`BuildingDescription`
+
    A static description of a tribe's warehouse, so it can be used in help files
    without having to access an actual building on the map.
    Note that headquarters are also warehouses.
    A warehouse keeps people, animals and wares.
-   See also class BuildingDescription and class MapObjectDescription for more properties.
+   See the parent classes for more properties.
 */
 const char LuaWarehouseDescription::className[] = "WarehouseDescription";
 const MethodType<LuaWarehouseDescription> LuaWarehouseDescription::Methods[] = {
@@ -2735,9 +2751,11 @@ WareDescription
 
 .. class:: WareDescription
 
+   Child of: :class:`MapObjectDescription`
+
    A static description of a tribe's ware, so it can be used in help files
    without having to access an actual instance of the ware on the map.
-   See also class MapObjectDescription for more properties.
+   See also :class:`MapObjectDescription` for more properties.
 */
 const char LuaWareDescription::className[] = "WareDescription";
 const MethodType<LuaWareDescription> LuaWareDescription::Methods[] = {
@@ -2842,9 +2860,11 @@ WorkerDescription
 
 .. class:: WorkerDescription
 
+   Child of: :class:`MapObjectDescription`
+
    A static description of a tribe's worker, so it can be used in help files
    without having to access an actual instance of the worker on the map.
-   See also class MapObjectDescription for more properties.
+   See also :class:`MapObjectDescription` for more properties.
 */
 const char LuaWorkerDescription::className[] = "WorkerDescription";
 const MethodType<LuaWorkerDescription> LuaWorkerDescription::Methods[] = {
@@ -2967,9 +2987,11 @@ SoldierDescription
 
 .. class:: SoldierDescription
 
+   Child of: :class:`MapObjectDescription`, :class:`WorkerDescription`
+
    A static description of a tribe's soldier, so it can be used in help files
    without having to access an actual instance of the worker on the map.
-   See also class WorkerDescription for more properties.
+   See the parent classes for more properties.
 */
 const char LuaSoldierDescription::className[] = "SoldierDescription";
 const MethodType<LuaSoldierDescription> LuaSoldierDescription::Methods[] = {
