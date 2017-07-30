@@ -639,7 +639,7 @@ struct ManagementData {
 	void mutate(PlayerNumber = 0);
 	void new_dna_for_persistent(uint8_t, Widelands::AiType);
 	void copy_persistent_to_local();
-	void review(const uint32_t gametime,
+	void review(uint32_t gametime,
 	            PlayerNumber pn,
 	            uint32_t land,
 	            uint32_t max_e_land,
