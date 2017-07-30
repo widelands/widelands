@@ -1739,7 +1739,9 @@ void LuaImmovableDescription::__unpersist(lua_State* L) {
 }
 
 /* RST
-   .. attribute:: the species name of a tree for editor lists
+   .. attribute:: species
+
+         the species name of a tree for editor lists
 
          (RO) the localized species name of the immovable, or an empty string if it has none.
 */
@@ -1759,7 +1761,9 @@ int LuaImmovableDescription::get_build_cost(lua_State* L) {
 }
 
 /* RST
-   .. attribute:: the name and descname of the editor category of this immovable
+   .. attribute:: editor_category
+
+         the name and descname of the editor category of this immovable
 
          (RO) a table with "name" and "descname" entries for the editor category, or nil if it has none.
 */
@@ -1780,7 +1784,9 @@ int LuaImmovableDescription::get_editor_category(lua_State* L) {
 }
 
 /* RST
-   .. attribute:: returns the terrain affinity values for this immovable
+   .. attribute:: terrain_affinity
+
+         returns the terrain affinity values for this immovable
 
          (RO) a table containing numbers labeled as pickiness (double), preferred_fertility (double),
          preferred_humidity (double), and preferred_temperature (uint),
@@ -1809,7 +1815,9 @@ int LuaImmovableDescription::get_terrain_affinity(lua_State* L) {
 }
 
 /* RST
-   .. attribute:: the owner type of this immovable
+   .. attribute:: owner_type
+
+         the owner type of this immovable
 
          (RO) "world" for world immovables and "tribe" for tribe immovables.
 */
@@ -1853,7 +1861,9 @@ int LuaImmovableDescription::get_size(lua_State* L) {
  */
 
 /* RST
-   .. method:: whether the immovable has the given attribute
+   .. method:: has_attribute
+
+      whether the immovable has the given attribute
 
       :arg attribute_name: The attribute that we are checking for.
       :type attribute_name: :class:`string`
