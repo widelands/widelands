@@ -54,7 +54,8 @@ fi
 # Do the actual build.
 make -k -j3
 
-# Run the regression suite.
-cd ..
-#TODO(code review): Fails on osx, probably need to set up xvfb or something similar.
-./regression_test.py -b build/src/widelands
+if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
+  # Run the regression suite. Haven't gotten it working on osx, due to problems with xvfb and/or opengl support.
+  cd ..
+  ./regression_test.py -b build/src/widelands
+fi
