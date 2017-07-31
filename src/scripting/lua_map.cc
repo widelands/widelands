@@ -3589,8 +3589,8 @@ MapObject
    and Bobs. This class can't be instantiated directly, but provides the base
    for all others.
 
-   You can access further properties via its
-   :class:`descr <MapObjectDescription>`.
+   Further properties are documented in
+   :class:`MapObjectDescription`, which you can access via :class:`MapObject` ``:descr``.
 */
 const char LuaMapObject::className[] = "MapObject";
 const MethodType<LuaMapObject> LuaMapObject::Methods[] = {
