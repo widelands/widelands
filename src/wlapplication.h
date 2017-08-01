@@ -23,7 +23,9 @@
 // Workaround for bug http://sourceforge.net/p/mingw/bugs/2152/
 #ifdef __MINGW32__
 #ifndef _WIN64
+#ifndef _USE_32BIT_TIME_T
 #define _USE_32BIT_TIME_T 1
+#endif
 #endif
 #endif
 

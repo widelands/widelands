@@ -57,9 +57,7 @@ public:
 	friend class Profile;
 
 	struct Value {
-		using string = std::string;
-
-		Value(const string& name, const char* const value);
+		Value(const std::string& name, const char* const value);
 		Value(const Value&);
 		Value(Value&& other);
 
@@ -93,7 +91,7 @@ public:
 
 	private:
 		bool used_;
-		string name_;
+		std::string name_;
 		std::unique_ptr<char[]> value_;
 
 		Value() = default;

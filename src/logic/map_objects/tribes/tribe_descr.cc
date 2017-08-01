@@ -244,6 +244,12 @@ TribeDescr::TribeDescr(const LuaTable& table, const TribeBasicInfo& info, const 
 		headquarters_ = add_special_building(table.get_string("headquarters"));
 		port_ = add_special_building(table.get_string("port"));
 		barracks_ = add_special_building(table.get_string("barracks"));
+		bakery_ = add_special_building(table.get_string("bakery"));
+
+		ironore_ = add_special_ware(table.get_string("ironore"));
+		rawlog_ = add_special_ware(table.get_string("rawlog"));
+		refinedlog_ = add_special_ware(table.get_string("refinedlog"));
+		granite_ = add_special_ware(table.get_string("granite"));
 
 	} catch (const GameDataError& e) {
 		throw GameDataError("tribe %s: %s", name_.c_str(), e.what());
@@ -368,6 +374,26 @@ DescriptionIndex TribeDescr::port() const {
 DescriptionIndex TribeDescr::barracks() const {
 	assert(tribes_.building_exists(barracks_));
 	return barracks_;
+}
+DescriptionIndex TribeDescr::bakery() const {
+	assert(tribes_.building_exists(bakery_));
+	return bakery_;
+}
+DescriptionIndex TribeDescr::ironore() const {
+	assert(tribes_.ware_exists(ironore_));
+	return ironore_;
+}
+DescriptionIndex TribeDescr::rawlog() const {
+	assert(tribes_.ware_exists(rawlog_));
+	return rawlog_;
+}
+DescriptionIndex TribeDescr::refinedlog() const {
+	assert(tribes_.ware_exists(refinedlog_));
+	return refinedlog_;
+}
+DescriptionIndex TribeDescr::granite() const {
+	assert(tribes_.ware_exists(granite_));
+	return granite_;
 }
 
 const std::vector<DescriptionIndex>& TribeDescr::trainingsites() const {
@@ -508,6 +534,17 @@ DescriptionIndex TribeDescr::add_special_building(const std::string& buildingnam
 	} catch (const WException& e) {
 		throw GameDataError(
 		   "Failed adding special building '%s': %s", buildingname.c_str(), e.what());
+	}
+}
+DescriptionIndex TribeDescr::add_special_ware(const std::string& warename) {
+	try {
+		DescriptionIndex ware = tribes_.safe_ware_index(warename);
+		if (!has_ware(ware)) {
+			throw GameDataError("This tribe doesn't have the ware '%s'", warename.c_str());
+		}
+		return ware;
+	} catch (const WException& e) {
+		throw GameDataError("Failed adding special ware '%s': %s", warename.c_str(), e.what());
 	}
 }
 }
