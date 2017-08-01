@@ -444,6 +444,10 @@ void Section::set_int(char const* const name, int32_t const value) {
 	set_string(name, std::to_string(value));
 }
 
+void Section::set_natural(char const* const name, uint32_t const value) {
+	set_string(name, std::to_string(static_cast<int64_t>(value)));
+}
+
 void Section::set_string(char const* const name, char const* string) {
 	create_val(name, string).mark_used();
 }
