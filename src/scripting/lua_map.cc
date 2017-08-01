@@ -3585,12 +3585,13 @@ MapObject
 
 .. class:: MapObject
 
-   This is the base class for all Objects in widelands, including immovables
-   and Bobs. This class can't be instantiated directly, but provides the base
-   for all others.
+   This is the base class for all objects in Widelands, including
+   :class:`immovables <BaseImmovable>` and :class:`bobs <Bob>`. This
+   class can't be instantiated directly, but provides the base for all
+   others.
 
-   Further properties are documented in
-   :class:`MapObjectDescription`, which you can access via :class:`MapObject` ``:descr``.
+   More properties are available through this object's
+   :class:`MapObjectDescription`, which you can access via :any:`MapObject.descr`.
 */
 const char LuaMapObject::className[] = "MapObject";
 const MethodType<LuaMapObject> LuaMapObject::Methods[] = {
@@ -3804,8 +3805,9 @@ BaseImmovable
    Child of: :class:`MapObject`
 
    This is the base class for all immovables in Widelands.
-   You can access further properties via its
-   :class:`descr <ImmovableDescription>`.
+
+   More properties are available through this object's
+   :class:`ImmovableDescription`, which you can access via :any:`MapObject.descr`.
 */
 const char LuaBaseImmovable::className[] = "BaseImmovable";
 const MethodType<LuaBaseImmovable> LuaBaseImmovable::Methods[] = {
@@ -3866,8 +3868,8 @@ PlayerImmovable
    All Immovables that belong to a Player (Buildings, Flags, ...) are based on
    this Class.
 
-   You can access further properties via its
-   :class:`descr <ImmovableDescription>`.
+   More properties are available through this object's
+   :class:`ImmovableDescription`, which you can access via :any:`MapObject.descr`.
 */
 const char LuaPlayerImmovable::className[] = "PlayerImmovable";
 const MethodType<LuaPlayerImmovable> LuaPlayerImmovable::Methods[] = {
@@ -3922,8 +3924,8 @@ Flag
 
    One flag in the economy of this Player.
 
-   You can access further properties via its
-   :class:`descr <ImmovableDescription>`.
+   More properties are available through this object's
+   :class:`ImmovableDescription`, which you can access via :any:`MapObject.descr`.
 */
 const char LuaFlag::className[] = "Flag";
 const MethodType<LuaFlag> LuaFlag::Methods[] = {
@@ -4127,8 +4129,8 @@ Road
 
    A road connecting two flags in the economy of this Player.
 
-   You can access further properties via its
-   :class:`descr <ImmovableDescription>`.
+   More properties are available through this object's
+   :class:`ImmovableDescription`, which you can access via :any:`MapObject.descr`.
 */
 const char LuaRoad::className[] = "Road";
 const MethodType<LuaRoad> LuaRoad::Methods[] = {
@@ -4261,8 +4263,8 @@ PortDock
    it. The PortDock is an immovable that also occupies a field on
    the water near the port.
 
-   You can access further properties via its
-   :class:`descr <ImmovableDescription>`.
+   More properties are available through this object's
+   :class:`ImmovableDescription`, which you can access via :any:`MapObject.descr`.
 */
 
 const char LuaPortDock::className[] = "PortDock";
@@ -4301,8 +4303,8 @@ Building
 
    This represents a building owned by a player.
 
-   You can access further properties via its
-   :class:`descr <BuildingDescription>`.
+   More properties are available through this object's
+   :class:`BuildingDescription`, which you can access via :any:`MapObject.descr`.
 */
 const char LuaBuilding::className[] = "Building";
 const MethodType<LuaBuilding> LuaBuilding::Methods[] = {
@@ -4352,8 +4354,8 @@ ConstructionSite
    A ConstructionSite as it appears in Game. This is only a minimal wrapping at
    the moment.
 
-   You can access further properties via its
-   :class:`descr <ConstructionSiteDescription>`.
+   More properties are available through this object's
+   :class:`ConstructionSiteDescription`, which you can access via :any:`MapObject.descr`.
 */
 const char LuaConstructionSite::className[] = "ConstructionSite";
 const MethodType<LuaConstructionSite> LuaConstructionSite::Methods[] = {
@@ -4401,8 +4403,8 @@ Warehouse
 
    Every Headquarter, Port or Warehouse on the Map is of this type.
 
-   You can access further properties via its
-   :class:`descr <WarehouseDescription>`.
+   More properties are available through this object's
+   :class:`WarehouseDescription`, which you can access via :any:`MapObject.descr`.
 */
 const char LuaWarehouse::className[] = "Warehouse";
 const MethodType<LuaWarehouse> LuaWarehouse::Methods[] = {
@@ -4872,8 +4874,8 @@ ProductionSite
 
    Every building that produces anything.
 
-   You can access further properties via its
-   :class:`descr <ProductionSiteDescription>`.
+   More properties are available through this object's
+   :class:`ProductionSiteDescription`, which you can access via :any:`MapObject.descr`.
 */
 const char LuaProductionSite::className[] = "ProductionSite";
 const MethodType<LuaProductionSite> LuaProductionSite::Methods[] = {
@@ -5041,8 +5043,8 @@ MilitarySite
 
    Miltary Buildings
 
-   You can access further properties via its
-   :class:`descr <MilitarySiteDescription>`.
+   More properties are available through this object's
+   :class:`MilitarySiteDescription`, which you can access via :any:`MapObject.descr`.
 */
 const char LuaMilitarySite::className[] = "MilitarySite";
 const MethodType<LuaMilitarySite> LuaMilitarySite::Methods[] = {
@@ -5098,8 +5100,8 @@ TrainingSite
 
    A specialized production site for training soldiers.
 
-   You can access further properties via its
-   :class:`descr <TrainingSiteDescription>`.
+   More properties are available through this object's
+   :class:`TrainingSiteDescription`, which you can access via :any:`MapObject.descr`.
 */
 const char LuaTrainingSite::className[] = "TrainingSite";
 const MethodType<LuaTrainingSite> LuaTrainingSite::Methods[] = {
@@ -5155,8 +5157,8 @@ Bob
 
    This is the base class for all Bobs in widelands.
 
-   You can access further properties via its
-   :class:`descr <MapObjectDescription>`.
+   More properties are available through this object's
+   :class:`MapObjectDescription`, which you can access via :any:`MapObject.descr`.
 */
 const char LuaBob::className[] = "Bob";
 const MethodType<LuaBob> LuaBob::Methods[] = {
@@ -5232,8 +5234,8 @@ Ship
 
    This represents a ship in game.
 
-   You can access further properties via its
-   :class:`descr <MapObjectDescription>`.
+   More properties are available through this object's
+   :class:`MapObjectDescription`, which you can access via :any:`MapObject.descr`.
 */
 
 const char LuaShip::className[] = "Ship";
@@ -5536,8 +5538,8 @@ Worker
 
    All workers that are visible on the map are of this kind.
 
-   You can access further properties via its
-   :class:`descr <WorkerDescription>`.
+   More properties are available through this object's
+   :class:`WorkerDescription`, which you can access via :any:`MapObject.descr`.
 */
 
 const char LuaWorker::className[] = "Worker";
@@ -5604,8 +5606,8 @@ Soldier
 
    All soldiers that are on the map are represented by this class.
 
-   You can access further properties via its
-   :class:`descr <SoldierDescription>`.
+   More properties are available through this object's
+   :class:`SoldierDescription`, which you can access via :any:`MapObject.descr`.
 */
 
 const char LuaSoldier::className[] = "Soldier";
