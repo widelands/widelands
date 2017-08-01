@@ -4643,6 +4643,7 @@ do_set_worker_policy(Warehouse* wh, const std::string& name, const Warehouse::St
       Sets the policies how the warehouse should handle the given wares and workers.
 
       Usage example:
+
       .. code-block:: lua
 
          wh:set_warehouse_policies("coal", "prefer")
@@ -4724,6 +4725,7 @@ WH_GET_POLICY(worker)
       The method to handle is one of the strings "normal", "prefer", "dontstock", "remove".
 
       Usage example:
+
       .. code-block:: lua
 
          wh:get_warehouse_policies({"ax", "coal"})
@@ -4799,7 +4801,7 @@ int LuaWarehouse::set_soldiers(lua_State* L) {
 /* RST
    .. method:: start_expedition(port)
 
-      :arg port
+      :arg: port
 
       Starts preparation for expedition
 
@@ -4830,7 +4832,7 @@ int LuaWarehouse::start_expedition(lua_State* L) {
 /* RST
    .. method:: cancel_expedition(port)
 
-      :arg port
+      :arg: port
 
       Cancels an expedition if in progress
 
