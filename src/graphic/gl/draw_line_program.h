@@ -28,8 +28,12 @@
 #include "graphic/color.h"
 #include "graphic/gl/utils.h"
 
-// TODO(sirver): This program actually now only draws Triangles. Merge with
-// DrawRect program.
+// This program actually only draws Triangles, which are tesselations of the lines to 
+// draw. It uses the alpha value of each point to fade out the lines and achieve good looking 
+// anti-aliasing. 
+// Though it is conceptually quite similar to the 'FillRectProgram', the
+// differences in the fragment shader make this require a separate OpenGl
+// program, though probably some code could be shared.
 class DrawLineProgram {
 public:
 	struct PerVertexData {
