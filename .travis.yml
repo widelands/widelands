@@ -4,8 +4,8 @@ sudo: required
 dist: trusty
 
 before_script:
-  - "export DISPLAY=:99.0"
-  - "sh -e /etc/init.d/xvfb start"
+  - export DISPLAY=:99.0
+  - sh -e /etc/init.d/xvfb start
   - sleep 3 # give xvfb some time to start
 
 # ignore this branch because it is only a mirror of master
@@ -13,37 +13,66 @@ branches:
   except:
     - _widelands_dev_widelands_trunk
 
+# Let travis add additional repos and install packages for us (https://docs.travis-ci.com/user/migrating-from-legacy/#Adding-APT-Sources)
+addons:
+  apt:
+    # The aliases used are based on a whitelist, see https://github.com/travis-ci/apt-source-whitelist for details. 
+    # Clang 3.4 and 3.5 are too old (presumably) to have gotten official aliases
+    sources:
+      - ubuntu-toolchain-r-test
+      - sourceline: "deb http://apt.llvm.org/trusty/ llvm-toolchain-trusty-3.4 main"
+        key_url: "http://apt.llvm.org/llvm-snapshot.gpg.key"
+      - sourceline: "deb http://apt.llvm.org/trusty/ llvm-toolchain-trusty-3.5 main"
+        key_url: "http://apt.llvm.org/llvm-snapshot.gpg.key"
+      - llvm-toolchain-trusty-3.9
+      - llvm-toolchain-trusty-4.0
+    packages:
+      - cmake
+      - libboost-dev
+      - libboost-regex-dev
+      - libboost-system-dev
+      - libboost-test-dev
+      - libglew-dev
+      - libicu-dev
+      - libpng-dev
+      - libsdl2-dev
+      - libsdl2-image-dev
+      - libsdl2-mixer-dev
+      - libsdl2-ttf-dev
+      - python-pip
+      - zlib1g-dev
+
 matrix:
   include:
-     - compiler: clang
-       env: CLANG_VERSION="3.4" BUILD_TYPE="Debug"
-     - compiler: clang
-       env: CLANG_VERSION="3.5" BUILD_TYPE="Debug"
-     - compiler: clang
-       env: CLANG_VERSION="3.9" BUILD_TYPE="Debug"
-     - compiler: clang
-       env: CLANG_VERSION="4.0" BUILD_TYPE="Debug"
-     - compiler: clang
-       env: CLANG_VERSION="3.4" BUILD_TYPE="Release"
-     - compiler: clang
-       env: CLANG_VERSION="3.5" BUILD_TYPE="Release"
-     - compiler: clang
-       env: CLANG_VERSION="3.9" BUILD_TYPE="Release"
-     - compiler: clang
-       env: CLANG_VERSION="4.0" BUILD_TYPE="Release"
-     - compiler: gcc
-       env: GCC_VERSION="4.8" BUILD_TYPE="Debug"
-     - compiler: gcc
-       env: GCC_VERSION="4.9" BUILD_TYPE="Debug"
-     - compiler: gcc
-       env: GCC_VERSION="6" BUILD_TYPE="Debug"
-     - compiler: gcc
-       env: GCC_VERSION="7" BUILD_TYPE="Debug"
-     - compiler: gcc
-       env: GCC_VERSION="4.8" BUILD_TYPE="Release"
-     - compiler: gcc
-       env: GCC_VERSION="4.9" BUILD_TYPE="Release"
-     - compiler: gcc
-       env: GCC_VERSION="6" BUILD_TYPE="Release"
-     - compiler: gcc
-       env: GCC_VERSION="7" BUILD_TYPE="Release"
+    - compiler: clang
+      env: CLANG_VERSION="3.4" BUILD_TYPE="Debug"
+    - compiler: clang
+      env: CLANG_VERSION="3.5" BUILD_TYPE="Debug"
+    - compiler: clang
+      env: CLANG_VERSION="3.9" BUILD_TYPE="Debug"
+    - compiler: clang
+      env: CLANG_VERSION="4.0" BUILD_TYPE="Debug"
+    - compiler: clang
+      env: CLANG_VERSION="3.4" BUILD_TYPE="Release"
+    - compiler: clang
+      env: CLANG_VERSION="3.5" BUILD_TYPE="Release"
+    - compiler: clang
+      env: CLANG_VERSION="3.9" BUILD_TYPE="Release"
+    - compiler: clang
+      env: CLANG_VERSION="4.0" BUILD_TYPE="Release"
+    - compiler: gcc
+      env: GCC_VERSION="4.8" BUILD_TYPE="Debug"
+    - compiler: gcc
+      env: GCC_VERSION="4.9" BUILD_TYPE="Debug"
+    - compiler: gcc
+      env: GCC_VERSION="6" BUILD_TYPE="Debug"
+    - compiler: gcc
+      env: GCC_VERSION="7" BUILD_TYPE="Debug"
+    - compiler: gcc
+      env: GCC_VERSION="4.8" BUILD_TYPE="Release"
+    - compiler: gcc
+      env: GCC_VERSION="4.9" BUILD_TYPE="Release"
+    - compiler: gcc
+      env: GCC_VERSION="6" BUILD_TYPE="Release"
+    - compiler: gcc
+      env: GCC_VERSION="7" BUILD_TYPE="Release"

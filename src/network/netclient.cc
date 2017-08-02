@@ -52,27 +52,26 @@ void NetClient::close() {
 }
 
 bool NetClient::try_receive(RecvPacket* packet) {
-	if (!is_connected()) {
-		return false;
-	}
+	if (is_connected()) {
+		// If we are connected, try to receive some data
 
-	uint8_t buffer[kNetworkBufferSize];
-	boost::system::error_code ec;
-	size_t length = socket_.read_some(boost::asio::buffer(buffer, kNetworkBufferSize), ec);
-	if (!ec) {
-		assert(length > 0);
-		assert(length <= kNetworkBufferSize);
-		// Has read something
-		deserializer_.read_data(buffer, length);
-	}
+		uint8_t buffer[kNetworkBufferSize];
+		boost::system::error_code ec;
+		size_t length = socket_.read_some(boost::asio::buffer(buffer, kNetworkBufferSize), ec);
+		if (!ec) {
+			assert(length > 0);
+			assert(length <= kNetworkBufferSize);
+			// Has read something
+			deserializer_.read_data(buffer, length);
+		}
 
-	if (ec && ec != boost::asio::error::would_block) {
-		// Connection closed or some error, close the socket
-		log("[NetClient] Error when trying to receive some data: %s.\n", ec.message().c_str());
-		close();
-		return false;
+		if (ec && ec != boost::asio::error::would_block) {
+			// Connection closed or some error, close the socket
+			log("[NetClient] Error when trying to receive some data: %s.\n", ec.message().c_str());
+			close();
+		}
 	}
-	// Get one packet from the deserializer
+	// Try to get one packet from the deserializer
 	return deserializer_.write_packet(packet);
 }
 
