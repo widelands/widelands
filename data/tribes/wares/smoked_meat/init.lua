@@ -13,7 +13,7 @@ tribes:new_ware_type {
    },
    preciousness = {
       atlanteans = 2,
-      frisians = 5
+      frisians = 7
    },
 
    animations = {
