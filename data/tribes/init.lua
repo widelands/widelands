@@ -36,6 +36,28 @@ print_loading_message("┗━ took", function()
    -- ===================================
 
    print_loading_message("┃    Wares", function()
+      
+      include "tribes/wares/clay/init.lua"
+      include "tribes/wares/brick/init.lua"
+      include "tribes/wares/fruit/init.lua"
+      include "tribes/wares/honey/init.lua"
+      include "tribes/wares/barley/init.lua"
+      include "tribes/wares/bread_frisians/init.lua"
+      include "tribes/wares/honey_bread/init.lua"
+      include "tribes/wares/mead/init.lua"
+      include "tribes/wares/scrap_metal_iron/init.lua"
+      include "tribes/wares/scrap_metal_mixed/init.lua"
+      include "tribes/wares/fur/init.lua"
+      include "tribes/wares/fur_clothes/init.lua"
+      include "tribes/wares/fur_clothes_studded/init.lua"
+      include "tribes/wares/fur_clothes_golden/init.lua"
+      include "tribes/wares/helmet_golden/init.lua"
+      include "tribes/wares/sword_basic/init.lua"
+      include "tribes/wares/sword_long/init.lua"
+      include "tribes/wares/sword_curved/init.lua"
+      include "tribes/wares/sword_double/init.lua"
+      include "tribes/wares/needles/init.lua"
+      
       include "tribes/wares/armor/init.lua"
       include "tribes/wares/armor_chain/init.lua"
       include "tribes/wares/armor_gilded/init.lua"
@@ -122,26 +144,6 @@ print_loading_message("┗━ took", function()
       include "tribes/wares/wine/init.lua"
       include "tribes/wares/wool/init.lua"
       
-      include "tribes/wares/clay/init.lua"
-      include "tribes/wares/brick/init.lua"
-      include "tribes/wares/fruit/init.lua"
-      include "tribes/wares/honey/init.lua"
-      include "tribes/wares/barley/init.lua"
-      include "tribes/wares/bread_frisians/init.lua"
-      include "tribes/wares/honey_bread/init.lua"
-      include "tribes/wares/mead/init.lua"
-      include "tribes/wares/scrap_metal_iron/init.lua"
-      include "tribes/wares/scrap_metal_mixed/init.lua"
-      include "tribes/wares/fur/init.lua"
-      include "tribes/wares/fur_clothes/init.lua"
-      include "tribes/wares/fur_clothes_studded/init.lua"
-      include "tribes/wares/fur_clothes_golden/init.lua"
-      include "tribes/wares/helmet_golden/init.lua"
-      include "tribes/wares/sword_basic/init.lua"
-      include "tribes/wares/sword_long/init.lua"
-      include "tribes/wares/sword_curved/init.lua"
-      include "tribes/wares/sword_double/init.lua"
-      include "tribes/wares/needles/init.lua"
    end)
 
    -- ===================================

@@ -111,7 +111,7 @@ tribes:new_trainingsite_type {
             "check_soldier=soldier attack 3", -- Fails when aren't any soldier of level 0 attack
             "sleep=30000",
             "check_soldier=soldier attack 3", -- Because the soldier can be expelled by the player
-            "consume=sword_long:2 smoked_fish,smoked_meat mead honey_bread",
+            "consume=sword_long:2 honey_bread mead smoked_fish,smoked_meat",
             "train=soldier attack 3 4",
             "produce=scrap_metal_mixed:2"
          }
@@ -123,7 +123,7 @@ tribes:new_trainingsite_type {
             "check_soldier=soldier attack 4", -- Fails when aren't any soldier of level 0 attack
             "sleep=30000",
             "check_soldier=soldier attack 4", -- Because the soldier can be expelled by the player
-            "consume=sword_curved:2 smoked_fish,smoked_meat mead honey_bread",
+            "consume=sword_curved:2 honey_bread mead smoked_fish,smoked_meat",
             "train=soldier attack 4 5",
             "produce=scrap_metal_iron:4"
          }
@@ -135,7 +135,7 @@ tribes:new_trainingsite_type {
             "check_soldier=soldier attack 5", -- Fails when aren't any soldier of level 0 attack
             "sleep=30000",
             "check_soldier=soldier attack 5", -- Because the soldier can be expelled by the player
-            "consume=sword_double:2 smoked_fish,smoked_meat mead honey_bread",
+            "consume=sword_double:2 honey_bread mead smoked_fish,smoked_meat",
             "train=soldier attack 5 6",
             "produce=scrap_metal_mixed:2"
          }
@@ -147,7 +147,7 @@ tribes:new_trainingsite_type {
             "check_soldier=soldier defense 1", -- Fails when aren't any soldier of level 0 attack
             "sleep=30000",
             "check_soldier=soldier defense 1", -- Because the soldier can be expelled by the player
-            "consume=fur_clothes_golden smoked_fish,smoked_meat honey_bread,mead",
+            "consume=fur_clothes_golden honey_bread,mead smoked_fish,smoked_meat",
             "train=soldier defense 1 2",
             "produce=scrap_metal_iron"
          }
@@ -159,7 +159,7 @@ tribes:new_trainingsite_type {
             "check_soldier=soldier health 1", -- Fails when aren't any soldier of level 0 attack
             "sleep=30000",
             "check_soldier=soldier health 1", -- Because the soldier can be expelled by the player
-            "consume=helmet_golden smoked_fish,smoked_meat honey_bread,mead",
+            "consume=helmet_golden honey_bread,mead smoked_fish,smoked_meat",
             "train=soldier health 1 2",
             "produce=scrap_metal_iron:2"
          }
