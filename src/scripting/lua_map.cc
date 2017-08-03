@@ -5693,8 +5693,8 @@ Field
    immovables like Flags or Buildings and can be connected via Roads. Every
    Field has two Triangles associated with itself: the right and the down one.
 
-   You cannot instantiate this class directly, instead use
-   :meth:`wl.map.Map.get_field`.
+   You cannot instantiate this directly, access it via
+   wl.Game().map.get_field() instead.
 */
 
 const char LuaField::className[] = "Field";
