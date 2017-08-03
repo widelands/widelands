@@ -24,7 +24,7 @@ tribes:new_worker_type {
       bread_paddle = 1
    },
 
-   experience = 23,
+   experience = 16,
    becomes = "frisians_baker_master",
 
    animations = animations,

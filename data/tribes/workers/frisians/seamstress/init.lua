@@ -24,7 +24,7 @@ tribes:new_worker_type {
       needles = 1
    },
 
-   experience = 16,
+   experience = 14,
    becomes = "frisians_seamstress_master",
 
    animations = animations,
