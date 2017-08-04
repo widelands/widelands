@@ -5,7 +5,7 @@
 # Aleksandr Gladkov <djanticisco@gmail.com>, 2016
 # Alexander Bikmeyev <bikmeyev@freemail.ru>, 2006
 # Alexander Bikmeyev <bikmeyev@gmail.com>, 2016
-# Anton Khabarov <2233009@gmail.com>, 2015
+# Anton Khabarov <2233009@gmail.com>, 2015,2017
 # GunChleoc, 2016
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2014
 # CupIvan <mail@cupivan.ru>, 2015
@@ -17,9 +17,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-07-04 08:57+0000\n"
-"PO-Revision-Date: 2017-07-04 09:00+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2017-07-24 07:12+0000\n"
+"PO-Revision-Date: 2017-07-29 03:00+0000\n"
+"Last-Translator: Anton Khabarov <2233009@gmail.com>\n"
 "Language-Team: Russian (http://www.transifex.com/widelands/widelands/language/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -729,7 +729,7 @@ msgstr "Эта шахта вырабатывает весь ресурс до с
 #: ../../data/tribes/buildings/productionsites/barbarians/granitemine/helptexts.lua:21
 msgctxt "barbarians_building"
 msgid "It cannot be enhanced."
-msgstr ""
+msgstr "Это не может быть улучшено."
 
 #. TRANSLATORS: Performance helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/granitemine/helptexts.lua:26
@@ -1079,7 +1079,7 @@ msgctxt "barbarians_building"
 msgid ""
 "The Barbarian war mill is their most advanced production site for weapons. "
 "As such you will need to enhance an ax workshop in order to get one."
-msgstr ""
+msgstr "Варварская Военная фабрика является их самой передовой производственной площадкой для оружия. Таким образом, вам нужно улучшить Топорную мастерскую, чтобы получить ее."
 
 #: ../../data/tribes/buildings/productionsites/barbarians/warmill/helptexts.lua:29
 msgctxt "barbarians_building"
