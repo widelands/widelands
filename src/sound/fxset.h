@@ -45,7 +45,7 @@ class SoundHandler;
  */
 struct FXset {
 	friend class SoundHandler;
-	FXset(uint8_t priority = PRIO_MEDIUM);
+	explicit FXset(uint8_t priority = PRIO_MEDIUM);
 	~FXset();
 
 	void add_fx(Mix_Chunk* fx, uint8_t prio = PRIO_MEDIUM);

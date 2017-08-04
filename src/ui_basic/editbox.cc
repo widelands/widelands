@@ -138,13 +138,6 @@ void EditBox::set_text(const std::string& t) {
 }
 
 /**
- * \return the maximum length of the input string
- */
-uint32_t EditBox::max_length() const {
-	return m_->maxLength;
-}
-
-/**
  * Set the maximum length of the input string.
  *
  * If the current string is longer than the new maximum length,
@@ -209,15 +202,16 @@ bool EditBox::handle_key(bool const down, SDL_Keysym const code) {
 			if (code.mod & KMOD_NUM) {
 				break;
 			}
-		/* no break */
+			FALLS_THROUGH;
 		case SDLK_DELETE:
 			if (m_->caret < m_->text.size()) {
 				while ((m_->text[++m_->caret] & 0xc0) == 0x80) {
 				};
-				// now handle it like Backspace
-			} else
+				// Now fallthrough to handle it like Backspace
+			} else {
 				return true;
-		/* no break */
+			}
+			FALLS_THROUGH;
 		case SDLK_BACKSPACE:
 			if (m_->caret > 0) {
 				while ((m_->text[--m_->caret] & 0xc0) == 0x80)
@@ -232,7 +226,7 @@ bool EditBox::handle_key(bool const down, SDL_Keysym const code) {
 			if (code.mod & KMOD_NUM) {
 				break;
 			}
-		/* no break */
+			FALLS_THROUGH;
 		case SDLK_LEFT:
 			if (m_->caret > 0) {
 				while ((m_->text[--m_->caret] & 0xc0) == 0x80) {
@@ -250,7 +244,7 @@ bool EditBox::handle_key(bool const down, SDL_Keysym const code) {
 			if (code.mod & KMOD_NUM) {
 				break;
 			}
-		/* no break */
+			FALLS_THROUGH;
 		case SDLK_RIGHT:
 			if (m_->caret < m_->text.size()) {
 				while ((m_->text[++m_->caret] & 0xc0) == 0x80) {
@@ -270,7 +264,7 @@ bool EditBox::handle_key(bool const down, SDL_Keysym const code) {
 			if (code.mod & KMOD_NUM) {
 				break;
 			}
-		/* no break */
+			FALLS_THROUGH;
 		case SDLK_HOME:
 			if (m_->caret != 0) {
 				m_->caret = 0;
@@ -283,7 +277,7 @@ bool EditBox::handle_key(bool const down, SDL_Keysym const code) {
 			if (code.mod & KMOD_NUM) {
 				break;
 			}
-		/* no break */
+			FALLS_THROUGH;
 		case SDLK_END:
 			if (m_->caret != m_->text.size()) {
 				m_->caret = m_->text.size();
@@ -295,7 +289,7 @@ bool EditBox::handle_key(bool const down, SDL_Keysym const code) {
 			if (code.mod & KMOD_NUM) {
 				break;
 			}
-		/* no break */
+			FALLS_THROUGH;
 		case SDLK_UP:
 			// Load entry from history if active and text is not empty
 			if (history_active_) {
@@ -313,7 +307,7 @@ bool EditBox::handle_key(bool const down, SDL_Keysym const code) {
 			if (code.mod & KMOD_NUM) {
 				break;
 			}
-		/* no break */
+			FALLS_THROUGH;
 		case SDLK_DOWN:
 			// Load entry from history if active and text is not equivalent to the current one
 			if (history_active_) {

@@ -2,6 +2,7 @@
 # Copyright (C) 2005-2017 Widelands Development Team
 # 
 # Translators:
+# Daniel San <daniel1977.br@gmail.com>, 2017
 # GunChleoc, 2016
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
 # GunChleoc, 2014
@@ -12,9 +13,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-02-19 19:34+0000\n"
-"PO-Revision-Date: 2017-02-19 19:35+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2017-06-02 11:07+0000\n"
+"PO-Revision-Date: 2017-06-04 18:36+0000\n"
+"Last-Translator: Daniel San <daniel1977.br@gmail.com>\n"
 "Language-Team: Portuguese (Brazil) (http://www.transifex.com/widelands/widelands/language/pt_BR/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -27,7 +28,7 @@ msgstr ""
 #: ../../data/campaigns/atl01.wmf/scripting/init.lua:75
 msgctxt "message_short_title"
 msgid "Building lost!"
-msgstr ""
+msgstr "Edifício perdido!"
 
 #: ../../data/campaigns/atl01.wmf/scripting/init.lua:77
 msgid "We lost a building to the ocean!"
@@ -36,7 +37,7 @@ msgstr "Nós perdemos uma construção para o oceano!"
 #: ../../data/campaigns/atl01.wmf/scripting/init.lua:83
 msgctxt "message_heading"
 msgid "Building lost!"
-msgstr ""
+msgstr "Edifício perdido!"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:32
 msgid "Ensure the supply of building wares"
@@ -117,7 +118,7 @@ msgstr "Construa uma fazenda e uma fazenda de raiz escura"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:61
 msgid "Build a mill to make cornmeal and blackroot flour"
-msgstr ""
+msgstr "Construa um moinho para fazer farinha de milho e de raiz escura"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:62
 msgid "Build a well"
@@ -125,7 +126,7 @@ msgstr "Construa um poço"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:63
 msgid "Build a bakery to bake bread from cornmeal, blackroot flour and water"
-msgstr ""
+msgstr "Construa uma Padaria para assar pães com farinha de milho, farinha de raiz escura e água"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:64
 msgid "Build a hunter’s house to get raw meat"
@@ -160,7 +161,7 @@ msgid ""
 "tabards are the uniforms of soldiers. The weaving mill needs gold thread and"
 " spider silk as raw material. Spider silk is produced by the spider farm, "
 "while gold thread is produced by the gold spinning mill out of gold."
-msgstr ""
+msgstr "Os tecelões produzem tecidos e e panos na tecelagem. Tecido é necessário para a construção de alguns edifícios e vestuário, enquanto panos são os uniformes dos soldados. A tecelagem necessita de fio de ouro e teia de aranha como matéria-prima. A teia de aranha é produzido pela fazenda de aranha, enquanto fio de ouro é produzido pela fábrica de fiação de ouro."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:77
 msgid "Build a weaving mill"

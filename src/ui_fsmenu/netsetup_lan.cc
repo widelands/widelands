@@ -135,7 +135,7 @@ void FullscreenMenuNetSetupLAN::think() {
 	discovery.run();
 }
 
-bool FullscreenMenuNetSetupLAN::get_host_address(uint32_t& addr, uint16_t& port) {
+bool FullscreenMenuNetSetupLAN::get_host_address(NetAddress* addr) {
 	const std::string& host = hostname.text();
 
 	const uint32_t opengames_size = opengames.size();
@@ -143,20 +143,17 @@ bool FullscreenMenuNetSetupLAN::get_host_address(uint32_t& addr, uint16_t& port)
 		const NetOpenGame& game = *opengames[i];
 
 		if (!strcmp(game.info.hostname, host.c_str())) {
-			addr = game.address;
-			port = game.port;
+			*addr = game.address;
 			return true;
 		}
 	}
 
-	if (hostent* const he = gethostbyname(host.c_str())) {
-		addr = (reinterpret_cast<in_addr*>(he->h_addr_list[0]))->s_addr;
-		DIAG_OFF("-Wold-style-cast")
-		port = htons(WIDELANDS_PORT);
-		DIAG_ON("-Wold-style-cast")
+	// The user probably entered a hostname on his own. Try to resolve it
+	if (NetAddress::resolve_to_v6(addr, host, WIDELANDS_PORT))
 		return true;
-	} else
-		return false;
+	if (NetAddress::resolve_to_v4(addr, host, WIDELANDS_PORT))
+		return true;
+	return false;
 }
 
 const std::string& FullscreenMenuNetSetupLAN::get_playername() {

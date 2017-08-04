@@ -2,6 +2,7 @@
 # encoding: utf-8
 #
 
+import sys
 import unittest
 
 from CodeCheck import CodeChecker, Preprocessor
@@ -53,7 +54,7 @@ class CommentsTest(unittest.TestCase):
         unittest.TestCase.__init__(self)
         self.before = before
         self.after = after
-        
+
     def runTest(self):
         preprocessor = Preprocessor()
         after = preprocessor.get_preprocessed_data("test", self.before, True, False)
@@ -61,7 +62,7 @@ class CommentsTest(unittest.TestCase):
             "Stripping comments from %r failed. Expected %r, got %r"
             % (self.before, self.after, after)
             )
-        
+
 comment_tests = [
     # Let's get the basics right.
     ("a b c",
@@ -97,5 +98,5 @@ if __name__ == '__main__':
 
     for before, after in comment_tests:
         suite.addTest(CommentsTest(before, after.splitlines(True)))
-
-    unittest.TextTestRunner(verbosity=1).run(suite)
+    success = unittest.TextTestRunner(verbosity=1).run(suite).wasSuccessful()
+    sys.exit(0 if success else 1)

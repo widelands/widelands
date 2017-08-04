@@ -41,7 +41,7 @@ struct CritterAction {
 };
 
 struct CritterProgram : public BobProgramBase {
-	CritterProgram(const std::string& name) : name_(name) {
+	explicit CritterProgram(const std::string& name) : name_(name) {
 	}
 	virtual ~CritterProgram() {
 	}

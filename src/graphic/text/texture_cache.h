@@ -27,7 +27,7 @@
 
 class TextureCache : public TransientCache<Image> {
 public:
-	TextureCache(uint32_t max_size_in_bytes) : TransientCache<Image>(max_size_in_bytes) {
+	explicit TextureCache(uint32_t max_size_in_bytes) : TransientCache<Image>(max_size_in_bytes) {
 	}
 
 	std::shared_ptr<const Image> insert(const std::string& hash,

@@ -21,7 +21,7 @@
 
 #include <vector>
 
-#include "base/log.h"
+#include "base/macros.h"
 #include "base/wexception.h"
 
 // static
@@ -66,7 +66,7 @@ void FillRectProgram::draw(const std::vector<Arguments>& arguments) {
 		switch (template_args.blend_mode) {
 		case BlendMode::Subtract:
 			glBlendEquation(GL_FUNC_REVERSE_SUBTRACT);
-		/* fallthrough intended */
+			FALLS_THROUGH;
 		case BlendMode::UseAlpha:
 			glBlendFunc(GL_ONE, GL_ONE);
 			break;
@@ -132,7 +132,7 @@ void FillRectProgram::draw(const std::vector<Arguments>& arguments) {
 		switch (template_args.blend_mode) {
 		case BlendMode::Subtract:
 			glBlendEquation(GL_FUNC_ADD);
-		/* fallthrough intended */
+			FALLS_THROUGH;
 		case BlendMode::UseAlpha:
 			glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 			break;

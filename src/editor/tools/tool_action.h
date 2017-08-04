@@ -46,7 +46,7 @@ struct EditorToolAction {
 	                 Widelands::Map& m,
 	                 Widelands::NodeAndTriangle<> c,
 	                 EditorInteractive& p,
-	                 EditorActionArgs nargs)
+	                 const EditorActionArgs& nargs)
 	   : tool(t), i(ind), map(m), center(c), parent(p) {
 		args = new EditorActionArgs(parent);
 		*args = nargs;

@@ -275,14 +275,13 @@ void Ship::ship_update(Game& game, Bob::State& state) {
 			return;
 		}
 		log("Oh no... this ship has no sinking animation :(!\n");
-	// fall trough
+		FALLS_THROUGH;
 	case ShipStates::kSinkAnimation:
 		// The sink animation has been played, so finally remove the ship from the map
 		pop_task(game);
 		remove(game);
 		return;
 	}
-
 	// if the real update function failed (e.g. nothing to transport), the ship goes idle
 	ship_update_idle(game, state);
 }
@@ -686,7 +685,7 @@ void Ship::ship_update_idle(Game& game, Bob::State& state) {
 			return start_task_idle(game, descr().main_animation(), 1500);
 		}
 	}
-
+		FALLS_THROUGH;
 	case ShipStates::kExpeditionWaiting:
 	case ShipStates::kExpeditionPortspaceFound:
 	case ShipStates::kSinkRequest:
@@ -1069,10 +1068,9 @@ void Ship::send_message(Game& game,
 	    picture % UI_FONT_SIZE_MESSAGE % description)
 	      .str();
 
-	Message* msg = new Message(Message::Type::kSeafaring, game.get_gametime(), title, picture,
-	                           heading, rt_description, get_position(), serial_);
-
-	get_owner()->add_message(game, *msg);
+	get_owner()->add_message(game, std::unique_ptr<Message>(new Message(
+	                                  Message::Type::kSeafaring, game.get_gametime(), title, picture,
+	                                  heading, rt_description, get_position(), serial_)));
 }
 
 /*

@@ -47,7 +47,7 @@ public:
 	// and can be deleted.
 	enum { DONE = 0, YIELDED = LUA_YIELD };
 
-	LuaCoroutine(lua_State* L);
+	explicit LuaCoroutine(lua_State* L);
 	virtual ~LuaCoroutine();
 
 	// Returns either 'DONE' or 'YIELDED'.

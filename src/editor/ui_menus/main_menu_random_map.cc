@@ -551,8 +551,6 @@ void MainMenuNewRandomMap::clicked_create_map() {
 	case UniqueRandomMapInfo::ResourceAmount::raHigh:
 		log("Resources:     high\n");
 		break;
-	default:
-		NEVER_HERE();
 	}
 	log("Land: %0.2f  Water: %0.2f  Wasteland: %0.2f\n", map_info.landRatio, map_info.waterRatio,
 	    map_info.wastelandRatio);

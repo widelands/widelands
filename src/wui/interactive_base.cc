@@ -56,6 +56,9 @@
 #include "wui/minimap.h"
 #include "wui/unique_window_handler.h"
 
+// TODO(tiborb): This constant is temporary and should be replaced by command line switch
+constexpr bool AItrainingMode = false;
+
 using Widelands::Area;
 using Widelands::CoordPath;
 using Widelands::Coords;
@@ -70,7 +73,7 @@ struct InteractiveBaseInternals {
 	MiniMap::Registry minimap;
 	std::unique_ptr<QuickNavigation> quicknavigation;
 
-	InteractiveBaseInternals(QuickNavigation* qnav) : mm(nullptr), quicknavigation(qnav) {
+	explicit InteractiveBaseInternals(QuickNavigation* qnav) : mm(nullptr), quicknavigation(qnav) {
 	}
 };
 
@@ -347,6 +350,31 @@ void InteractiveBase::draw_overlay(RenderTarget& dst) {
 	frametime_ = curframe - lastframe_;
 	avg_usframetime_ = ((avg_usframetime_ * 15) + (frametime_ * 1000)) / 16;
 	lastframe_ = curframe;
+
+	// This portion of code keeps the speed of game so that FPS are kept within
+	// range 13 - 15, this is used for training of AI
+	if (AItrainingMode) {
+		if (upcast(Game, game, &egbase())) {
+			uint32_t cur_fps = 1000000 / avg_usframetime_;
+			int32_t speed_diff = 0;
+			if (cur_fps < 13) {
+				speed_diff = -100;
+			}
+			if (cur_fps > 15) {
+				speed_diff = +100;
+			}
+			if (speed_diff != 0) {
+
+				if (GameController* const ctrl = game->game_controller()) {
+					if ((ctrl->desired_speed() > 950 && ctrl->desired_speed() < 30000) ||
+					    (ctrl->desired_speed() < 1000 && speed_diff > 0) ||
+					    (ctrl->desired_speed() > 29999 && speed_diff < 0)) {
+						ctrl->set_desired_speed(ctrl->desired_speed() + speed_diff);
+					}
+				}
+			}
+		}
+	}
 
 	const Map& map = egbase().map();
 	const bool is_game = dynamic_cast<const Game*>(&egbase());
@@ -754,9 +782,10 @@ bool InteractiveBase::handle_key(bool const down, SDL_Keysym const code) {
 	if (down) {
 		switch (code.sym) {
 		case SDLK_KP_9:
-			if (code.mod & KMOD_NUM)
+			if (code.mod & KMOD_NUM) {
 				break;
-		/* no break */
+			}
+			FALLS_THROUGH;
 		case SDLK_PAGEUP:
 			if (upcast(Game, game, &egbase_)) {
 				if (GameController* const ctrl = game->game_controller()) {
@@ -774,9 +803,10 @@ bool InteractiveBase::handle_key(bool const down, SDL_Keysym const code) {
 			return true;
 
 		case SDLK_KP_3:
-			if (code.mod & KMOD_NUM)
+			if (code.mod & KMOD_NUM) {
 				break;
-		/* no break */
+			}
+			FALLS_THROUGH;
 		case SDLK_PAGEDOWN:
 			if (upcast(Widelands::Game, game, &egbase_)) {
 				if (GameController* const ctrl = game->game_controller()) {

@@ -98,7 +98,7 @@ private:
 struct Ship : Bob {
 	MO_DESCR(ShipDescr)
 
-	Ship(const ShipDescr& descr);
+	explicit Ship(const ShipDescr& descr);
 	virtual ~Ship();
 
 	// Returns the fleet the ship is a part of.

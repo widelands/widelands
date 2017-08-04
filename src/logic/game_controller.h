@@ -22,12 +22,12 @@
 
 #include <string>
 
+#include "logic/player_end_result.h"
 #include "logic/widelands.h"
 
 namespace Widelands {
 class Game;
 class PlayerCommand;
-enum class PlayerEndResult : uint8_t;
 }
 
 /**

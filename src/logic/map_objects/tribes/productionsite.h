@@ -162,7 +162,7 @@ class ProductionSite : public Building {
 	MO_DESCR(ProductionSiteDescr)
 
 public:
-	ProductionSite(const ProductionSiteDescr& descr);
+	explicit ProductionSite(const ProductionSiteDescr& descr);
 	virtual ~ProductionSite();
 
 	void log_general_info(const EditorGameBase&) override;

@@ -29,7 +29,7 @@ using namespace boost;
 namespace RT {
 
 struct EndOfTextImpl : public EndOfText {
-	EndOfTextImpl(size_t pos, std::string text)
+	EndOfTextImpl(size_t pos, const std::string& text)
 	   : EndOfText(
 	        (format("Unexpected End of Text, starting at %1%. Text is: '%2%'") % pos % text).str()) {
 	}
@@ -133,7 +133,7 @@ std::string TextStream::till_any(std::string chars) {
 /*
  * Parse till any of the chars is found or the end of the string has been hit.
  */
-std::string TextStream::till_any_or_end(std::string chars) {
+std::string TextStream::till_any_or_end(const std::string& chars) {
 	std::string rv;
 	try {
 		rv = till_any(chars);

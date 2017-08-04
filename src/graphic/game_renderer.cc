@@ -128,10 +128,10 @@ void draw_objects_for_visible_field(const EditorGameBase& egbase,
 	}
 }
 
-void draw_objets_for_formerly_visible_field(const FieldsToDraw::Field& field,
-                                            const Player::Field& player_field,
-                                            const float zoom,
-                                            RenderTarget* dst) {
+void draw_objects_for_formerly_visible_field(const FieldsToDraw::Field& field,
+                                             const Player::Field& player_field,
+                                             const float zoom,
+                                             RenderTarget* dst) {
 	if (const MapObjectDescr* const map_object_descr =
 	       player_field.map_object_descr[TCoords<>::None]) {
 		if (player_field.constructionsite.becomes) {
@@ -246,7 +246,7 @@ void draw_objects(const EditorGameBase& egbase,
 			const Map& map = egbase.map();
 			const Player::Field& player_field =
 			   player->fields()[map.get_index(field.fcoords, map.get_width())];
-			draw_objets_for_formerly_visible_field(field, player_field, zoom, dst);
+			draw_objects_for_formerly_visible_field(field, player_field, zoom, dst);
 		}
 
 		const FieldOverlayManager& overlay_manager = egbase.get_ibase()->field_overlay_manager();

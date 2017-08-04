@@ -86,7 +86,7 @@ public:
 		EditorSetOriginTool set_origin;
 		EditorMakeInfrastructureTool make_infrastructure;
 	};
-	EditorInteractive(Widelands::EditorGameBase&);
+	explicit EditorInteractive(Widelands::EditorGameBase&);
 
 	// Runs the Editor via the commandline --editor flag. Will load 'filename' as a
 	// map and run 'script_to_run' directly after all initialization is done.

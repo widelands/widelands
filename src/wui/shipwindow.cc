@@ -82,8 +82,6 @@ ShipWindow::ShipWindow(InteractiveGameBase& igb, UniqueWindow::Registry& reg, Sh
 				set_thinks(false);
 				die();
 				break;
-			default:
-				break;
 			}
 		}
 	});

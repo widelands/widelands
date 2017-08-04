@@ -27,7 +27,7 @@ class Worker;
 class Economy;
 
 struct IdleWorkerSupply : public Supply {
-	IdleWorkerSupply(Worker&);
+	explicit IdleWorkerSupply(Worker&);
 	~IdleWorkerSupply();
 
 	void set_economy(Economy*);

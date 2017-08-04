@@ -37,7 +37,7 @@ public:
 		int upper_limit;
 	};
 
-	ResourceDescription(const LuaTable& table);
+	explicit ResourceDescription(const LuaTable& table);
 
 	/// Returns the in engine name of this resource.
 	const std::string& name() const;
