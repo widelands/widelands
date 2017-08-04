@@ -214,6 +214,8 @@ private:
 
 	void cleanup_replays();
 
+	void cleanup_ai_files();
+
 	bool redirect_output(std::string path = "");
 
 	// Handle the given pressed key. Returns true when key was

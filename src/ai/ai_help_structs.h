@@ -27,6 +27,7 @@
 #include "ai/ai_hints.h"
 #include "economy/flag.h"
 #include "economy/road.h"
+#include "logic/ai_dna_handler.h"
 #include "logic/findnode.h"
 #include "logic/game.h"
 #include "logic/map.h"
@@ -59,7 +60,6 @@ enum class BuildingNecessity : uint8_t {
 
 // A building type can have no, one or multiple of these attributes
 enum class BuildingAttribute : uint8_t {
-	kBakery,
 	kRanger,
 	kBuildable,
 	kLumberjack,
@@ -77,7 +77,7 @@ enum class BuildingAttribute : uint8_t {
 	kUpgradeSubstitutes,
 	kUpgradeExtends,
 	kLogRefiner,
-	kIronMine
+	kIronMine,
 };
 
 enum class AiType : uint8_t { kVeryWeak, kWeak, kNormal };
@@ -109,6 +109,8 @@ enum class SchedulerTaskId : uint8_t {
 	kUnset
 };
 
+enum class DnaParent : uint8_t { kPrimary, kSecondary };
+
 // This is a simplification of a curve, to avoid repeated calculation
 const std::vector<std::vector<int8_t>> neuron_curves = {
    {0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80, 85, 90, 95, 100},
@@ -116,13 +118,13 @@ const std::vector<std::vector<int8_t>> neuron_curves = {
    {0, 17, 25, 32, 38, 44, 49, 53, 58, 62, 66, 70, 74, 78, 81, 84, 88, 91, 94, 97, 100},
 };
 
+// TODO(tiborb): this should be replaced by command line switch
+constexpr bool kAITrainingMode = false;
 constexpr int kMagicNumbersSize = 150;
 constexpr int kNeuronPoolSize = 80;
 constexpr int kFNeuronPoolSize = 60;
 constexpr int kFNeuronBitSize = 32;
 constexpr int kMutationRatePosition = 42;
-// TODO(tiborb): this should be replaced by command line switch
-constexpr bool kAITrainingMode = false;
 
 constexpr uint32_t kNever = std::numeric_limits<uint32_t>::max();
 
@@ -564,7 +566,9 @@ constexpr int16_t kBonus = 1000;
 constexpr int16_t kAttackersMultiplier = 1;
 constexpr int16_t kAttackBonus = 100;
 constexpr int16_t kTrainedSoldiersScore = 250;
-constexpr int16_t kConqueredWhBonus = 500;
+constexpr int16_t kConqueredWhBonus = 300;
+constexpr int16_t kStrengthMultiplier = 30;
+constexpr int16_t kPSitesRatioMultiplier = 1;
 
 struct Neuron {
 	static int clip_weight_to_range(int w) {
@@ -630,14 +634,23 @@ struct ManagementData {
 
 	std::vector<Neuron> neuron_pool;
 	std::vector<FNeuron> f_neuron_pool;
-	Widelands::Player::AiPersistentState* pd;
+	Widelands::Player::AiPersistentState* _persistent_data;
 
 	void mutate(PlayerNumber = 0);
 	void new_dna_for_persistent(uint8_t, Widelands::AiType);
 	void copy_persistent_to_local();
-	void review(
-	   uint32_t, PlayerNumber, uint32_t, uint32_t, uint32_t, uint16_t, int16_t, int16_t, uint16_t);
-	void dump_data();
+	void review(uint32_t gametime,
+	            PlayerNumber pn,
+	            uint32_t land,
+	            uint32_t max_e_land,
+	            uint32_t old_land,
+	            uint16_t attackers,
+	            int16_t trained_soldiers,
+	            int16_t latest_attackers,
+	            uint16_t conq_ws,
+	            uint16_t strength,
+	            uint32_t existing_ps);
+	void dump_data(PlayerNumber);
 	uint16_t new_neuron_id() {
 		++next_neuron_id;
 		return next_neuron_id - 1;
@@ -657,6 +670,7 @@ struct ManagementData {
 	MutatingIntensity do_mutate(uint8_t, int16_t);
 	int8_t shift_weight_value(int8_t, bool = true);
 	void test_consistency(bool = false);
+	AiDnaHandler ai_dna_handler;
 
 private:
 	int32_t score;
@@ -665,6 +679,7 @@ private:
 	uint16_t next_bi_neuron_id;
 	uint16_t performance_change;
 	Widelands::AiType ai_type;
+	void dump_output(Widelands::Player::AiPersistentState, PlayerNumber);
 };
 
 // this is used to count militarysites by their size
