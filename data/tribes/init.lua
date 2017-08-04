@@ -49,6 +49,7 @@ print_loading_message("┗━ took", function()
       include "tribes/wares/scrap_metal_mixed/init.lua"
       include "tribes/wares/fur/init.lua"
       include "tribes/wares/fur_clothes/init.lua"
+      include "tribes/wares/fur_clothes_old/init.lua"
       include "tribes/wares/fur_clothes_studded/init.lua"
       include "tribes/wares/fur_clothes_golden/init.lua"
       include "tribes/wares/helmet_golden/init.lua"

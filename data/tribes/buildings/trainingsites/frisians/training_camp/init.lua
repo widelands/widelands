@@ -57,6 +57,7 @@ tribes:new_trainingsite_type {
       "frisians_soldier",
       "scrap_metal_mixed",
       "scrap_metal_iron",
+      "fur_clothes_old",
    },
 
    ["soldier attack"] = {
@@ -114,7 +115,7 @@ tribes:new_trainingsite_type {
             "check_soldier=soldier attack 0", -- Fails when aren't any soldier of level 0 attack
             "sleep=30000",
             "check_soldier=soldier attack 0", -- Because the soldier can be expelled by the player
-            "consume=sword_long bread_frisians,beer smoked_fish,smoked_meat",
+            "consume=sword_long bread_frisians,beer,smoked_fish,smoked_meat",
             "train=soldier attack 0 1",
             "produce=scrap_metal_iron"
          }
@@ -126,7 +127,7 @@ tribes:new_trainingsite_type {
             "check_soldier=soldier attack 1",
             "sleep=30000",
             "check_soldier=soldier attack 1",
-            "consume=sword_curved bread_frisians,beer smoked_fish,smoked_meat",
+            "consume=sword_curved bread_frisians beer smoked_fish,smoked_meat",
             "train=soldier attack 1 2",
             "produce=scrap_metal_iron:2"
          }
@@ -138,7 +139,7 @@ tribes:new_trainingsite_type {
             "check_soldier=soldier attack 2",
             "sleep=30000",
             "check_soldier=soldier attack 2",
-            "consume=sword_double bread_frisians,beer smoked_fish,smoked_meat",
+            "consume=sword_double bread_frisians beer smoked_fish,smoked_meat",
             "train=soldier attack 2 3",
             "produce=scrap_metal_mixed"
          }
@@ -162,7 +163,8 @@ tribes:new_trainingsite_type {
             "sleep=30000",
             "check_soldier=soldier defense 0",
             "consume=fur_clothes_studded bread_frisians,beer smoked_fish,smoked_meat",
-            "train=soldier defense 0 1"
+            "train=soldier defense 0 1",
+            "produce=fur_clothes_old"
          }
       },
    },

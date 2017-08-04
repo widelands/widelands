@@ -47,10 +47,12 @@ tribes:new_productionsite_type {
       { name = "coal", amount = 8 },
       { name = "scrap_metal_iron", amount = 8 },
       { name = "scrap_metal_mixed", amount = 8 },
+      { name = "fur_clothes_old", amount = 8 },
    },
    outputs = {
       "iron",
-      "gold"
+      "gold",
+      "fur"
    },
 
    programs = {
@@ -60,7 +62,19 @@ tribes:new_productionsite_type {
          actions = {
             "call=smelt_iron",
             "call=smelt_mixed",
+            "call=make_fur",
             "return=skipped"
+         }
+      },
+      make_fur = {
+         -- TRANSLATORS: Completed/Skipped/Did not start recycling fur because ...
+         descname = pgettext("frisians_building", "recycling fur"),
+         actions = {
+            "return=skipped unless economy needs fur",
+            "sleep=14000",
+            "consume=fur_clothes_old",
+            "animate=working 15000",
+            "produce=fur"
          }
       },
       smelt_iron = {

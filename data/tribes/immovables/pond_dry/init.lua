@@ -20,7 +20,7 @@ tribes:new_immovable_type {
    animations = {
       idle = {
          pictures = path.list_files(dirname .. "idle_??.png"),
-         hotspot = { 12, 8 },
+         hotspot = { 12, 12 },
       },
    }
 }

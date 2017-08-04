@@ -49,7 +49,8 @@ tribes:new_productionsite_type {
    },
    outputs = {
       "frisians_reindeer",
-      "fur"
+      "fur",
+      "meat",
    },
 
    programs = {
@@ -82,7 +83,7 @@ tribes:new_productionsite_type {
             "sleep=15000",
             "consume=barley water",
             "animate=working 20000",
-            "produce=fur"
+            "produce=fur meat"
          }
       },
    },

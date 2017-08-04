@@ -65,6 +65,7 @@ tribes:new_tribe {
           "gold",
           "scrap_metal_iron",
           "scrap_metal_mixed",
+          "fur_clothes_old",
       },
       {
          -- Tools
