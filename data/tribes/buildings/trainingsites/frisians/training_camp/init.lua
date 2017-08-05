@@ -141,7 +141,7 @@ tribes:new_trainingsite_type {
             "check_soldier=soldier attack 2",
             "consume=sword_double bread_frisians beer smoked_fish,smoked_meat",
             "train=soldier attack 2 3",
-            "produce=scrap_metal_mixed"
+            "produce=scrap_metal_iron scrap_metal_mixed"
          }
       },
       upgrade_soldier_health_0 = {

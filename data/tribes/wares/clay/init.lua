@@ -17,7 +17,7 @@ tribes:new_ware_type {
    animations = {
       idle = {
          pictures = path.list_files(dirname .. "idle.png"),
-         hotspot = { 12, 18 },
+         hotspot = { 7, 10 },
       },
    }
 }

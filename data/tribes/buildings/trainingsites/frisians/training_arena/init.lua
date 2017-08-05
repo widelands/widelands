@@ -138,7 +138,7 @@ tribes:new_trainingsite_type {
             "check_soldier=soldier attack 5", -- Because the soldier can be expelled by the player
             "consume=sword_double:2 honey_bread mead:2 smoked_fish,smoked_meat",
             "train=soldier attack 5 6",
-            "produce=scrap_metal_mixed:2"
+            "produce=scrap_metal_iron:2 scrap_metal_mixed:2"
          }
       },
       upgrade_soldier_defense_1 = {
