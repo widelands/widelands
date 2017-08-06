@@ -462,7 +462,7 @@ private:
 };
 
 struct Client {
-	NetHost::ConnectionId sock_id;
+	NetHostInterface::ConnectionId sock_id;
 	uint8_t playernum;
 	int16_t usernum;
 	std::string build_id;
@@ -2240,7 +2240,7 @@ void GameHost::handle_packet(uint32_t const i, RecvPacket& r) {
 	}
 }
 
-void GameHost::send_file_part(NetHost::ConnectionId csock_id, uint32_t part) {
+void GameHost::send_file_part(NetHostInterface::ConnectionId csock_id, uint32_t part) {
 	assert(part < file_->parts.size());
 
 	uint32_t left = file_->bytes - NETFILEPARTSIZE * part;

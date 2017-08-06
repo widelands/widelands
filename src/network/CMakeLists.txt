@@ -12,6 +12,7 @@ wl_library(network
     gamehost.h
     netclient.cc
     netclient.h
+    nethost_interface.h
     nethost.cc
     nethost.h
     network.cc

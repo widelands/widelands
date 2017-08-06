@@ -63,7 +63,7 @@
  * Used versions:
  * 1: Initial version between build 19 and build 20
  */
-constexpr uint8_t kRelayProtocolVersion = 1; 
+constexpr uint8_t kRelayProtocolVersion = 1;
 
 // This protocol does not need to care about timeouts, keep-alives, or reconnects
 // since higher layers (GameHost, GameClient) deal with it.
@@ -76,9 +76,9 @@ constexpr uint8_t kRelayProtocolVersion = 1;
  * Exceptions are described at the respective commands.
  *
  * Parameter types:
- * 
+ *
  * Strings are NULL-terminated.
- * 
+ *
  * Transmitting data packets:
  *
  * The main work of the relay consists of passing unstructured data packets between GameHost
@@ -190,6 +190,8 @@ enum class RelayCommand : uint8_t {
 	/**
 	 * Allows the GameHost to send a message to all connected clients.
 	 * \li packet: The SendPacket to broadcast.
+	 * \note Not implemented in NetHostProxy since not used.
+	 *       Check whether GameHost::broadcast() can use this.
 	 */
 	kBroadcast = 15,
 	/// \}

@@ -23,17 +23,16 @@
 #include <map>
 #include <memory>
 
+#include "network/nethost_interface.h"
 #include "network/network.h"
 
 /**
  * NetHost manages the client connections of a network game in which this computer
  * participates as a server.
- * This class tries to create sockets for IPv4 and IPv6.
+ * This class tries to create sockets for IPv4 and IPv6 for gaming in the local network.
  */
-class NetHost {
+class NetHost : NetHostInterface {
 public:
-	/// IDs used to enumerate the clients.
-	using ConnectionId = uint32_t;
 
 	/**
 	 * Tries to listen on the given port.
@@ -47,46 +46,12 @@ public:
 	 */
 	~NetHost();
 
-	/**
-	 * Returns whether the given client is connected.
-	 * \param The id of the client to check.
-	 * \return \c true if the connection is open, \c false otherwise.
-	 */
-	bool is_connected(ConnectionId id) const;
-
-	/**
-	 * Closes the connection to the given client.
-	 * \param id The id of the client to close the connection to.
-	 */
-	void close(ConnectionId id);
-
-	/**
-	 * Tries to accept a new client.
-	 * \param new_id The connection id of the new client will be stored here.
-	 * \return \c true if a client has connected, \c false otherwise.
-	 *   The given id is only modified when \c true is returned.
-	 *   Calling this on a closed server will return false.
-	 *   The returned id is always greater than 0.
-	 */
-	bool try_accept(ConnectionId* new_id);
-
-	/**
-	 * Tries to receive a packet.
-	 * \param id The connection id of the client that should be received.
-	 * \param packet A packet that should be overwritten with the received data.
-	 * \return \c true if a packet is available, \c false otherwise.
-	 *   The given packet is only modified when \c true is returned.
-	 *   Calling this on a closed connection will return false.
-	 */
-	bool try_receive(ConnectionId id, RecvPacket* packet);
-
-	/**
-	 * Sends a packet.
-	 * Calling this on a closed connection will silently fail.
-	 * \param id The connection id of the client that should be sent to.
-	 * \param packet The packet to send.
-	 */
-	void send(ConnectionId id, const SendPacket& packet);
+	// Inherited from NetHostInterface
+	bool is_connected(ConnectionId id) const override;
+	void close(ConnectionId id) override;
+	bool try_accept(ConnectionId* new_id) override;
+	bool try_receive(ConnectionId id, RecvPacket* packet) override;
+	void send(ConnectionId id, const SendPacket& packet) override;
 
 private:
 

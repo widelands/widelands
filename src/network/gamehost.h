@@ -127,7 +127,7 @@ private:
 
 	void handle_packet(uint32_t i, RecvPacket&);
 	void handle_network();
-	void send_file_part(NetHost::ConnectionId client_sock_id, uint32_t part);
+	void send_file_part(NetHostInterface::ConnectionId client_sock_id, uint32_t part);
 
 	void check_hung_clients();
 	void broadcast_real_speed(uint32_t speed);
