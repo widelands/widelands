@@ -17,8 +17,8 @@ function building_helptext_purpose()
 end
 
 function building_helptext_note()
-   -- TRANSLATORS#: Note helptext for a building
-   return ""
+   -- TRANSLATORS: Note helptext for a building
+   return "The aqua farm needs holes in the ground as dug by a clay digger nearby to use as fishing ponds."
 end
 
 function building_helptext_performance()

@@ -3,7 +3,7 @@ dirname = path.dirname(__file__)
 animations = {
    idle = {
       pictures = path.list_files(dirname .. "idle_??.png"),
-      hotspot = { 10, 25 },
+      hotspot = { 20, 22 },
       fps = 20
    }
 }
@@ -22,7 +22,7 @@ tribes:new_carrier_type {
    vision_range = 2,
 
    default_target_quantity = 10,
-   ware_hotspot = { -2, 13 },
+   --ware_hotspot = { 16, 25 },
 
    animations = animations,
 }
