@@ -514,8 +514,6 @@ print_loading_message("┗━ took", function()
       include "tribes/buildings/productionsites/frisians/well/init.lua"
       include "tribes/buildings/productionsites/frisians/hunters_house/init.lua"
       include "tribes/buildings/productionsites/frisians/fishers_house/init.lua"
-      include "tribes/buildings/productionsites/frisians/seamstress_master/init.lua"
-      include "tribes/buildings/productionsites/frisians/seamstress/init.lua"
       include "tribes/buildings/productionsites/frisians/berry_farm/init.lua"
       include "tribes/buildings/productionsites/frisians/collectors_house/init.lua"
       
@@ -533,6 +531,8 @@ print_loading_message("┗━ took", function()
       include "tribes/buildings/productionsites/frisians/blacksmithy/init.lua"
       include "tribes/buildings/productionsites/frisians/armour_smithy_large/init.lua"
       include "tribes/buildings/productionsites/frisians/armour_smithy_small/init.lua"
+      include "tribes/buildings/productionsites/frisians/seamstress_master/init.lua"
+      include "tribes/buildings/productionsites/frisians/seamstress/init.lua"
       include "tribes/buildings/productionsites/frisians/charcoal_kiln/init.lua"
       include "tribes/buildings/productionsites/frisians/brick_burners_house/init.lua"
       include "tribes/buildings/productionsites/frisians/claypit/init.lua"

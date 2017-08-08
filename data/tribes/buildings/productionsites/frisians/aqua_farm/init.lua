@@ -56,6 +56,7 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start breeding fish because ...
          descname = _"breeding fish",
          actions = {
+            "return=skipped unless economy needs fish",
             "consume=fruit water:3",
             "worker=breed_in_pond"
          },
