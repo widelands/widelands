@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-07-18 10:50+0000\n"
+"POT-Creation-Date: 2017-07-24 07:12+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Milan Fašina <matrix17@seznam.cz>, 2017\n"
 "Language-Team: Czech (https://www.transifex.com/widelands/teams/35159/cs/)\n"
@@ -422,6 +422,9 @@ msgid ""
 "new ship or even have some basic infrastructure to make our lives more "
 "comfortable?"
 msgstr ""
+"I když je to krok správným směrem, není tu moc místa na budovy. Celý ostrov "
+"je posetý skálami. Jak vůbec budeme schopni postavit novou loď nebo alespoň "
+"základní infrastrukturu, abychom si žili lépe?"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:265
 msgid "Amalea’s Plan"
@@ -437,6 +440,9 @@ msgid ""
 "Lutius, this may seem very tricky, but we can do it. First of all, we need "
 "patience as well as speed and a plan to succeed in this part of the world."
 msgstr ""
+"Lutiusi, může to vypadat velmi obtížně ale my to zvládneme. Nejvíce ze všeho"
+" potřebujeme trpělivost, stejně jako rychlost a dobrý plán, který nás dovede"
+" k úspěchu."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:271
