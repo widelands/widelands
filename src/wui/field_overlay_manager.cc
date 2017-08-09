@@ -97,16 +97,16 @@ int FieldOverlayManager::get_buildhelp_overlay(const Widelands::FCoords& fc) con
 	Widelands::NodeCaps const caps =
 	   callback_ ? static_cast<Widelands::NodeCaps>(callback_(fc)) : fc.field->nodecaps();
 
-	const int value = caps & Widelands::BUILDCAPS_MINE ?
+	const int value = (caps & Widelands::BUILDCAPS_MINE) ?
 	                     Widelands::Field::Buildhelp_Mine :
 	                     (caps & Widelands::BUILDCAPS_SIZEMASK) == Widelands::BUILDCAPS_BIG ?
-	                     (caps & Widelands::BUILDCAPS_PORT ? Widelands::Field::Buildhelp_Port :
+	                     ((caps & Widelands::BUILDCAPS_PORT) ? Widelands::Field::Buildhelp_Port :
 	                                                         Widelands::Field::Buildhelp_Big) :
 	                     (caps & Widelands::BUILDCAPS_SIZEMASK) == Widelands::BUILDCAPS_MEDIUM ?
 	                     Widelands::Field::Buildhelp_Medium :
 	                     (caps & Widelands::BUILDCAPS_SIZEMASK) == Widelands::BUILDCAPS_SMALL ?
 	                     Widelands::Field::Buildhelp_Small :
-	                     caps & Widelands::BUILDCAPS_FLAG ? Widelands::Field::Buildhelp_Flag :
+	                     (caps & Widelands::BUILDCAPS_FLAG) ? Widelands::Field::Buildhelp_Flag :
 	                                                        Widelands::Field::Buildhelp_None;
 	return value;
 }
