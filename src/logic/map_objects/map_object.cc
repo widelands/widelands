@@ -619,6 +619,9 @@ void MapObject::save(EditorGameBase&, MapObjectSaver& mos, FileWrite& fw) {
 }
 
 std::string to_string(const MapObjectType type) {
+	// The types are documented in scripting/lua_map.cc -> LuaMapObjectDescription::get_type_name for
+	// the Lua interface, so make sure to change the documentation there when changing anything in
+	// this function.
 	switch (type) {
 	case MapObjectType::BOB:
 		return "bob";
