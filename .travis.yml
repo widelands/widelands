@@ -53,7 +53,7 @@ matrix:
     ### LINUX + CLANG BUILDS
     - os: linux
       compiler: clang
-     env: CLANG_VERSION="3.4" BUILD_TYPE="Debug"
+      env: CLANG_VERSION="3.4" BUILD_TYPE="Debug"
     - os: linux
       compiler: clang
       env: CLANG_VERSION="3.5" BUILD_TYPE="Debug"
