@@ -349,10 +349,6 @@ void VerticalSlider::layout() {
 	Slider::layout();
 }
 
-////////////////////////////////////////////////////////////////////////////////
-//                               HORIZONTAL                                   //
-////////////////////////////////////////////////////////////////////////////////
-
 /**
  * \brief Redraw the slide bar. The horizontal bar is painted.
  *
@@ -423,10 +419,6 @@ void HorizontalSlider::layout() {
 	Slider::layout();
 }
 
-////////////////////////////////////////////////////////////////////////////////
-//                               VERTICAL                                     //
-////////////////////////////////////////////////////////////////////////////////
-
 /**
  * \brief Redraw the slide bar. The vertical bar is painted.
  *
@@ -487,10 +479,6 @@ bool VerticalSlider::handle_mousepress(const uint8_t btn, int32_t x, int32_t y) 
 	} else
 		return false;
 }
-
-////////////////////////////////////////////////////////////////////////////////
-//                               DISCRETE                                     //
-////////////////////////////////////////////////////////////////////////////////
 
 DiscreteSlider::DiscreteSlider(Panel* const parent,
                                const int32_t x,

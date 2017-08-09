@@ -730,7 +730,6 @@ private:
 	int32_t val;
 };
 
-/////////////TESTING STUFF
 struct CmdEnemyFlagAction : public PlayerCommand {
 	CmdEnemyFlagAction() : PlayerCommand(), serial(0), number(0) {
 	}  // For savegame loading

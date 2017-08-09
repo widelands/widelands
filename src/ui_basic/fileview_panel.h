@@ -36,10 +36,6 @@ namespace UI {
 class FileViewPanel : public TabPanel {
 public:
 	FileViewPanel(Panel* parent,
-	              int32_t x,
-	              int32_t y,
-	              int32_t w,
-	              int32_t h,
 	              const Image* background,
 	              TabPanel::Type border_type = TabPanel::Type::kNoBorder);
 
@@ -50,7 +46,7 @@ public:
 private:
 	void update_tab_size(size_t index);
 	void layout() override;
-	const uint32_t padding_;
+	const int padding_;
 	int contents_width_;
 	int contents_height_;
 

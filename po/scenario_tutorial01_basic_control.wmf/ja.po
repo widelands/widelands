@@ -4,13 +4,14 @@
 # Translators:
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2012
 # Gonta Ultra (Ulgon) <ultgonta@gmail.com>, 2016
+# satow yoshi <yoshiyuki.sato.rabbit@gmail.com>, 2017
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-03-05 10:46+0000\n"
-"PO-Revision-Date: 2017-03-05 10:48+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2017-06-28 07:11+0000\n"
+"PO-Revision-Date: 2017-05-19 16:05+0000\n"
+"Last-Translator: satow yoshi <yoshiyuki.sato.rabbit@gmail.com>\n"
 "Language-Team: Japanese (http://www.transifex.com/widelands/widelands/language/ja/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -43,7 +44,7 @@ msgid ""
 "Widelands is a slow-paced build-up strategy game with an emphasis on "
 "construction rather than destruction. This tutorial will guide you through "
 "the basics of the game."
-msgstr "Wilderlandは破壊ではなく建設的な事に重点を置いた建築ストラテジーです。このチュートリアルではゲームの基本的な部分を紹介します。"
+msgstr "Wildlandsは破壊ではなく建設的な事に重点を置いた建築ストラテジーです。\nこのチュートリアルではゲームの基本的な部分を紹介します。"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:31
 msgid "Dismiss this box by left-clicking on the button below."
@@ -63,7 +64,7 @@ msgid ""
 "and the Atlanteans. All tribes have a different economy, strength and "
 "weaknesses, but the general gameplay is the same for all. We will play the "
 "Barbarians for now."
-msgstr ""
+msgstr "Wildlandsには3つの部族がいます。バーバリアン、帝国、アトランティアンです。\nこれらの部族はそれぞれ異なる経済的特徴と様々な長所や欠点をもっていますが、\n基本操作は全く同じです。今回はバーバリアンを操作します。"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:43
 msgid ""

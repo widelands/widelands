@@ -12,6 +12,7 @@
 
 -- RST
 -- .. function:: localize_list(items, listtype, former_textdomain)
+--    :noindex:
 --
 --    Turns an array of string items into a localized string list with
 --    appropriate concatenation.
@@ -53,6 +54,7 @@ end
 
 -- RST
 -- .. function:: rt(text_or_attributes[, text = nil])
+--    :noindex:
 --
 --    Wraps a block of text into Lua rich text.
 --    Only call this once for the whole text that gets sent to the backend.
@@ -83,6 +85,7 @@ end
 
 -- RST
 -- .. function:: img(src[, attributes = nil])
+--    :noindex:
 --
 --    Turns an image src path into an image tag for richtext.
 --
@@ -113,6 +116,7 @@ end
 
 -- RST
 -- .. function:: h1(text_or_color[, text = nil])
+--    :noindex:
 --
 --    Returns a paragraph formatted as a big heading with a small gap after it.
 --    The mnemonic comes from HTML.
@@ -128,6 +132,7 @@ end
 
 -- RST
 -- .. function:: h2(text)
+--    :noindex:
 --
 --    Like :func:`h1` but smaller.
 --
@@ -138,6 +143,7 @@ end
 
 -- RST
 -- .. function:: h3(text)
+--    :noindex:
 --
 --    Like :func:`h2` but smaller.
 --
@@ -149,6 +155,7 @@ end
 
 -- RST
 -- .. function:: h4(text)
+--    :noindex:
 --
 --    Like :func:`h3` but smaller.
 --
@@ -160,6 +167,7 @@ end
 
 -- RST
 -- .. function:: p(text_or_attributes[, text = nil])
+--    :noindex:
 --
 --    Returns one paragraph with text followed by a small vertical gap. Options
 --    can be given as first argument similar to :func:`rt`.
@@ -177,7 +185,7 @@ end
 
 
 -- RST
--- .. function:: p(text_or_attributes[, text = nil])
+-- .. function:: p_font(text_or_attributes[, text = nil])
 --
 --    Returns one paragraph with text followed by a small vertical gap. Options
 --    can be given as first argument similar to :func:`rt`.
@@ -275,6 +283,7 @@ end
 
 -- RST
 -- .. function:: dl(dt, dd)
+--    :noindex:
 --
 -- This function imitates a HTML description list
 --    :arg dt: "description term", will be rendered in bold.
@@ -337,6 +346,7 @@ end
 
 -- RST
 -- .. function:: a(link)
+--    :noindex:
 --
 -- This function imitates a HTML link. We can't do real links yet, so the text just gets underlines.
 --    :arg link: the text to format
@@ -349,6 +359,7 @@ end
 
 -- RST
 -- .. function:: b(link)
+--    :noindex:
 --
 -- This makes the text bold.
 --    :arg link: the text to format
@@ -361,6 +372,7 @@ end
 
 -- RST
 -- .. function:: i(link)
+--    :noindex:
 --
 -- This makes the text italic.
 --    :arg link: the text to format
