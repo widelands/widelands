@@ -975,7 +975,6 @@ bool MilitarySite::update_upgrade_requirements() {
 // setters
 
 void MilitarySite::set_soldier_preference(SoldierPreference p) {
-	assert(SoldierPreference::kHeroes == p || SoldierPreference::kRookies == p);
 	soldier_preference_ = p;
 	next_swap_soldiers_time_ = 0;
 }
