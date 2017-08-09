@@ -845,8 +845,8 @@ bool DefaultAI::check_militarysites(uint32_t gametime) {
 			game().send_player_change_soldier_capacity(*ms, -1);
 			changed = true;
 		}
-		if (ms->get_soldier_preference() == MilitarySite::SoldierPreference::kRookies) {
-			game().send_player_militarysite_set_soldier_preference(*ms, MilitarySite::SoldierPreference::kHeroes);
+		if (ms->get_soldier_preference() == SoldierPreference::kRookies) {
+			game().send_player_militarysite_set_soldier_preference(*ms, SoldierPreference::kHeroes);
 			changed = true;
 		}
 	} else if (should_be_dismantled && can_be_dismantled) {
@@ -864,8 +864,8 @@ bool DefaultAI::check_militarysites(uint32_t gametime) {
 			game().send_player_change_soldier_capacity(*ms, -1);
 			changed = true;
 		}
-		if (ms->get_soldier_preference() == MilitarySite::SoldierPreference::kHeroes) {
-			game().send_player_militarysite_set_soldier_preference(*ms, MilitarySite::SoldierPreference::kRookies);
+		if (ms->get_soldier_preference() == SoldierPreference::kHeroes) {
+			game().send_player_militarysite_set_soldier_preference(*ms, SoldierPreference::kRookies);
 			changed = true;
 		}
 	}
