@@ -59,13 +59,11 @@ struct ShippingItem {
 	void remove(EditorGameBase&);
 
 	struct Loader {
-		Loader () : serial_(0U) {
-		}
 		void load(FileRead& fr);
 		ShippingItem get(MapObjectLoader& mol);
 
 	private:
-		uint32_t serial_;
+		uint32_t serial_ = 0U;
 	};
 
 	void save(EditorGameBase& egbase, MapObjectSaver& mos, FileWrite& fw);

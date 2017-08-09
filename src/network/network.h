@@ -169,15 +169,13 @@ private:
  */
 struct RecvPacket : public StreamRead {
 public:
-	RecvPacket() : index_(0) {
-	}
 	size_t data(void* data, size_t bufsize) override;
 	bool end_of_file() const override;
 
 private:
 	friend class Deserializer;
 	std::vector<uint8_t> buffer;
-	size_t index_;
+	size_t index_ = 0U;
 };
 
 struct FilePart {

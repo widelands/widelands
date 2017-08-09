@@ -135,7 +135,7 @@ Game::~Game() {
 void Game::sync_reset() {
 	syncwrapper_.counter_ = 0;
 
-	synchash_.Reset();
+	synchash_.reset();
 	log("[sync] Reset\n");
 }
 

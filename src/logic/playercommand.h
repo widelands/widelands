@@ -219,7 +219,7 @@ private:
 };
 
 struct CmdMilitarySiteSetSoldierPreference : public PlayerCommand {
-	CmdMilitarySiteSetSoldierPreference() : PlayerCommand(), serial(0), preference(SoldierPreference::kNotSet) {
+	CmdMilitarySiteSetSoldierPreference() : PlayerCommand(), serial(0), preference(SoldierPreference::kRookies) {
 	}  // For savegame loading
 	CmdMilitarySiteSetSoldierPreference(const uint32_t t,
 	                                    const PlayerNumber p,

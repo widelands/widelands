@@ -36,7 +36,7 @@ class World;
 
 // I assume elsewhere, that enum SoldierPreference fits to uint8_t.
 enum class SoldierPreference : uint8_t {
-	kNotSet,
+	kNotSet, // For savegame compatibility only.
 	kRookies,
 	kHeroes,
 };

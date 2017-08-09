@@ -60,8 +60,6 @@ struct Field {
 	friend class Bob;
 	friend struct BaseImmovable;
 
-	Field();
-
 	enum BuildhelpIndex {
 		Buildhelp_Flag = 0,
 		Buildhelp_Small = 1,
@@ -233,24 +231,24 @@ private:
 	   Player_Number_Bitmask + Border_Bitmask;
 	static_assert(kMaxPlayers <= Player_Number_Bitmask, "Bitmask is too big.");
 
-	// Data Members
+	// Data Members. Initialize everything to make cppcheck happy.
 	/** linked list, \sa Bob::linknext_ */
-	Bob* bobs;
-	BaseImmovable* immovable;
+	Bob* bobs = nullptr;
+	BaseImmovable* immovable = nullptr;
 
-	uint8_t caps;
-	uint8_t roads;
+	uint8_t caps = 0U;
+	uint8_t roads = 0U;
 
-	Height height;
-	int8_t brightness;
+	Height height = 0U;
+	int8_t brightness = 0;
 
-	OwnerInfoAndSelectionsType owner_info_and_selections;
+	OwnerInfoAndSelectionsType owner_info_and_selections = Widelands::neutral();
 
-	DescriptionIndex resources;         ///< Resource type on this field, if any
-	ResourceAmount initial_res_amount;  ///< Initial amount of resources
-	ResourceAmount res_amount;          ///< Current amount of resources
+	DescriptionIndex resources = INVALID_INDEX; ///< Resource type on this field, if any
+	ResourceAmount initial_res_amount = 0U;     ///< Initial amount of resources
+	ResourceAmount res_amount = 0U;             ///< Current amount of resources
 
-	Terrains terrains;
+	Terrains terrains = Terrains{INVALID_INDEX, INVALID_INDEX};
 };
 #pragma pack(pop)
 

@@ -1084,9 +1084,6 @@ Load / Save implementation
 
 constexpr uint8_t kCurrentPacketVersion = 6;
 
-Ship::Loader::Loader() : lastdock_(0), destination_(0), ship_state_(ShipStates::kTransport) {
-}
-
 const Bob::Task* Ship::Loader::get_task(const std::string& name) {
 	if (name == "shipidle" || name == "ship")
 		return &taskShip;

@@ -935,12 +935,6 @@ bool MilitarySite::update_upgrade_requirements() {
 	int32_t soldier_upgrade_required_min = soldier_upgrade_requirements_.get_min();
 	int32_t soldier_upgrade_required_max = soldier_upgrade_requirements_.get_max();
 
-	if (soldier_preference_ == SoldierPreference::kNotSet) {
-		log("MilitarySite::swapSoldiers: error: SoldierPreference has not been set.\n");
-		soldier_upgrade_try_ = false;
-		return false;
-	}
-
 	// Find the level of the soldier that is currently least-suited.
 	Soldier* worst_guy = find_least_suited_soldier();
 	if (worst_guy == nullptr) {

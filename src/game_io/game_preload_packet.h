@@ -36,7 +36,6 @@ namespace Widelands {
  */
 
 struct GamePreloadPacket : public GameDataPacket {
-	GamePreloadPacket();
 
 	void read(FileSystem&, Game&, MapObjectLoader* = nullptr) override;
 	void write(FileSystem&, Game&, MapObjectSaver* = nullptr) override;
@@ -76,16 +75,17 @@ struct GamePreloadPacket : public GameDataPacket {
 	}
 
 private:
-	std::string minimap_path_;
-	std::string mapname_;
-	std::string background_;
-	std::string win_condition_;
-	uint32_t gametime_;
-	uint8_t player_nr_;  // The local player idx
-	uint8_t number_of_players_;
-	std::string version_;
-	time_t savetimestamp_;
-	GameController::GameType gametype_;
+	// Initializing everything to make cppcheck happy.
+	std::string minimap_path_ = "";
+	std::string mapname_ = "";
+	std::string background_ = "";
+	std::string win_condition_ = "";
+	uint32_t gametime_ = 0U;
+	uint8_t player_nr_ = 0U;  // The local player idx
+	uint8_t number_of_players_ = 0U;
+	std::string version_ = "";
+	time_t savetimestamp_ = 0;
+	GameController::GameType gametype_ = GameController::GameType::kUndefined;
 };
 }
 

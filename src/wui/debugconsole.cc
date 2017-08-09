@@ -88,11 +88,7 @@ struct Console : public ChatProvider, public Handler {
 	}
 
 	void write(const std::string& msg) {
-		ChatMessage cm;
-
-		cm.time = time(nullptr);
-		cm.playern = Widelands::neutral();
-		cm.msg = msg;
+		ChatMessage cm(msg);
 		messages.push_back(cm);
 
 		log("*** %s\n", msg.c_str());
