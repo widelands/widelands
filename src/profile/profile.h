@@ -136,6 +136,7 @@ public:
 	char const* get_next_bool(char const* name, bool* value);
 
 	void set_int(char const* name, int32_t value);
+	void set_natural(char const* name, uint32_t value);
 	void set_bool(char const* const name, bool const value) {
 		set_string(name, value ? "true" : "false");
 	}

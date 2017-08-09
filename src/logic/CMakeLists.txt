@@ -66,6 +66,8 @@ wl_library(logic_constants
 
 wl_library(logic
   SRCS
+    ai_dna_handler.cc
+    ai_dna_handler.h
     backtrace.cc
     backtrace.h
     cmd_calculate_statistics.cc

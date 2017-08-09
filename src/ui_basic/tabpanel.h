@@ -88,16 +88,6 @@ struct TabPanel : public Panel {
 	friend struct Tab;
 
 	TabPanel(Panel* parent,
-	         int32_t x,
-	         int32_t y,
-	         const Image* background,
-	         TabPanel::Type border_type = TabPanel::Type::kNoBorder);
-	// For Fullscreen menus
-	TabPanel(Panel* parent,
-	         int32_t x,
-	         int32_t y,
-	         int32_t w,
-	         int32_t h,
 	         const Image* background,
 	         TabPanel::Type border_type = TabPanel::Type::kNoBorder);
 

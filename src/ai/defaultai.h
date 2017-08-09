@@ -219,6 +219,7 @@ private:
 
 	Widelands::EconomyObserver* get_economy_observer(Widelands::Economy&);
 	uint8_t count_buildings_with_attribute(Widelands::BuildingAttribute);
+	uint32_t count_productionsites_without_buildings();
 	Widelands::BuildingObserver& get_building_observer(char const*);
 	bool has_building_observer(char const*);
 	Widelands::BuildingObserver& get_building_observer(Widelands::BuildingAttribute);
