@@ -118,13 +118,7 @@ FullscreenMenuOptions::FullscreenMenuOptions(OptionsCtrl::OptionsStruct opt)
      ok_(&button_box_, "ok", 0, 0, 0, 0, g_gr->images().get("images/ui_basic/but2.png"), _("OK")),
 
      // Tabs
-     tabs_(this,
-           0,
-           0,
-           100,  // 100 is arbitrary, will be resized in layout().
-           100,
-           g_gr->images().get("images/ui_basic/but1.png"),
-           UI::TabPanel::Type::kBorder),
+     tabs_(this, g_gr->images().get("images/ui_basic/but1.png"), UI::TabPanel::Type::kBorder),
 
      box_interface_(&tabs_, 0, 0, UI::Box::Vertical, 0, 0, padding_),
      box_windows_(&tabs_, 0, 0, UI::Box::Vertical, 0, 0, padding_),

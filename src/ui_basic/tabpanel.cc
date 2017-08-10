@@ -87,27 +87,11 @@ bool Tab::handle_mousepress(uint8_t, int32_t, int32_t) {
  * =================
  */
 /**
- * Initialize an empty TabPanel
+ * Initialize an empty TabPanel. We use width == 0 as an indicator that the size hasn't been set
+ * yet.
 */
-TabPanel::TabPanel(Panel* const parent,
-                   int32_t const x,
-                   int32_t const y,
-                   const Image* background,
-                   TabPanel::Type border_type)
-   : Panel(parent, x, y, 0, 0),
-     border_type_(border_type),
-     active_(0),
-     highlight_(kNotFound),
-     pic_background_(background) {
-}
-TabPanel::TabPanel(Panel* const parent,
-                   int32_t const x,
-                   int32_t const y,
-                   int32_t const w,
-                   int32_t const h,
-                   const Image* background,
-                   TabPanel::Type border_type)
-   : Panel(parent, x, y, w, h),
+TabPanel::TabPanel(Panel* const parent, const Image* background, TabPanel::Type border_type)
+   : Panel(parent, 0, 0, 0, 0),
      border_type_(border_type),
      active_(0),
      highlight_(kNotFound),
@@ -118,6 +102,10 @@ TabPanel::TabPanel(Panel* const parent,
  * Resize the visible tab based on our actual size.
  */
 void TabPanel::layout() {
+	if (get_w() == 0) {
+		// The size hasn't been set yet
+		return;
+	}
 	if (active_ < tabs_.size()) {
 		Panel* const panel = tabs_[active_]->panel;
 		uint32_t h = get_h();
@@ -126,7 +114,7 @@ void TabPanel::layout() {
 		h = std::min(h, h - (kTabPanelButtonHeight + kTabPanelSeparatorHeight));
 		// If we have a border, we will also want some margin to the bottom
 		if (border_type_ == TabPanel::Type::kBorder) {
-			h = h - kTabPanelSeparatorHeight;
+			h -= kTabPanelSeparatorHeight;
 		}
 		panel->set_size(get_w(), h);
 	}
@@ -148,9 +136,7 @@ void TabPanel::update_desired_size() {
 		panel->get_desired_size(&panelw, &panelh);
 		// TODO(unknown):  the panel might be bigger -> add a scrollbar in that case
 
-		if (panelw > w) {
-			w = panelw;
-		}
+		w = std::max(w, panelw);
 		h += panelh;
 	}
 
@@ -254,6 +240,11 @@ bool TabPanel::remove_last_tab(const std::string& tabname) {
  * Draw the buttons and the tab
 */
 void TabPanel::draw(RenderTarget& dst) {
+	if (get_w() == 0) {
+		// The size hasn't been set yet
+		return;
+	}
+
 	// draw the background
 	static_assert(2 < kTabPanelButtonHeight, "assert(2 < kTabPanelButtonSize) failed.");
 	static_assert(4 < kTabPanelButtonHeight, "assert(4 < kTabPanelButtonSize) failed.");
@@ -273,7 +264,7 @@ void TabPanel::draw(RenderTarget& dst) {
 	RGBColor black(0, 0, 0);
 
 	// draw the buttons
-	float x = 0;
+	int x = 0;
 	int tab_width = 0;
 	for (size_t idx = 0; idx < tabs_.size(); ++idx) {
 		x = tabs_[idx]->get_x();
