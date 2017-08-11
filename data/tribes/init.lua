@@ -464,7 +464,27 @@ print_loading_message("┗━ took", function()
       include "tribes/buildings/partially_finished/constructionsite/init.lua"
       include "tribes/buildings/partially_finished/dismantlesite/init.lua"
    end)
+   
+   
+   -- ===================================
+   --    Campaign Specific Data
+   -- ===================================
+   print_loading_message("┃    Campaigns", function()
+      -- ===================================
+      --    Empire Mission 4
+      -- ===================================   
+      include "campaigns/emp04.wmf/scripting/Custom_entities/new_well1.lua" 
+      include "campaigns/emp04.wmf/scripting/Custom_entities/new_well.lua" 	  
+      include "campaigns/emp04.wmf/scripting/Custom_entities/new_farm.lua"
+      include "campaigns/emp04.wmf/scripting/Custom_entities/new_lumberjacks_house1.lua"
+      include "campaigns/emp04.wmf/scripting/Custom_entities/new_lumberjacks_house.lua"
+      include "campaigns/emp04.wmf/scripting/Custom_entities/new_foresters_house.lua"
+      include "campaigns/emp04.wmf/scripting/Custom_entities/new_trainingcamp.lua"
+      include "campaigns/emp04.wmf/scripting/Custom_entities/new_mill.lua"
+      include "campaigns/emp04.wmf/scripting/Custom_entities/new_brewery.lua"
+   end)
 
+   
    -- ===================================
    --    Tribes
    -- ===================================
@@ -473,4 +493,6 @@ print_loading_message("┗━ took", function()
       include "tribes/barbarians.lua"
       include "tribes/empire.lua"
    end)
+   
+
 end)

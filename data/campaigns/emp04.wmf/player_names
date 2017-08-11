@@ -1,0 +1,16 @@
+# Automatically created by Widelands bzr8409[trunk] (Release)
+
+[global]
+packet_version="2"
+
+[player_1]
+name="Lutius"
+tribe="empire"
+ai=
+closeable="false"
+
+[player_2]
+name="Runeth"
+tribe="barbarians"
+ai=
+closeable="false"

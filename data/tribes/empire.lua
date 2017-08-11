@@ -147,7 +147,8 @@ tribes:new_tribe {
          "empire_weaponsmith",
          "empire_armorsmith",
          "empire_scout"
-      }
+      },
+
    },
 
    immovables = {
@@ -245,6 +246,13 @@ tribes:new_tribe {
       -- Partially Finished Buildings - these are the same 2 buildings for all tribes
       "constructionsite",
       "dismantlesite",
+      "empire_farm1",
+      "empire_mill1",
+      "empire_well2",
+      "empire_lumberjacks_house2",
+      "empire_foresters_house1",
+      "empire_trainingcamp1",
+      "empire_brewery1",
    },
 
    ship_names = {
@@ -331,3 +339,4 @@ tribes:new_tribe {
    refinedlog = "planks",
    granite = "granite",
 }
+--wl.Game().players["all"]:forbid_buildings{"empire_farm1", "empire_well1"}
