@@ -265,6 +265,7 @@ add_subdirectory(src)
 # install files to the correct locations here
 install(
   DIRECTORY
+    data/ai
     data/campaigns
     data/i18n
     data/images
