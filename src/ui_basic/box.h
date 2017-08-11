@@ -70,6 +70,8 @@ struct Box : public Panel {
 protected:
 	void layout() override;
 	void update_desired_size() override;
+	bool handle_mousewheel(uint32_t which, int32_t x, int32_t y) override;
+	bool handle_key(bool down, SDL_Keysym code) override;
 
 private:
 	void get_item_desired_size(uint32_t idx, int* depth, int* breadth);
