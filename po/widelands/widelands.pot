@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-08-01 11:56+0000\n"
+"POT-Creation-Date: 2017-08-11 11:44+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -962,7 +962,7 @@ msgid "Loading map…"
 msgstr ""
 
 #: ../../src/logic/game.cc:330 ../../src/logic/game.cc:365
-#: ../../src/ui_basic/progresswindow.cc:51 ../../src/wlapplication.cc:1341
+#: ../../src/ui_basic/progresswindow.cc:51 ../../src/wlapplication.cc:1346
 msgid "Loading…"
 msgstr ""
 
@@ -1442,7 +1442,7 @@ msgid ""
 msgstr ""
 
 #: ../../src/network/gameclient.cc:171 ../../src/network/gamehost.cc:682
-#: ../../src/wlapplication.cc:1234
+#: ../../src/wlapplication.cc:1239
 msgid "Preparing game"
 msgstr ""
 
@@ -2240,7 +2240,7 @@ msgstr ""
 msgid "Version"
 msgstr ""
 
-#: ../../src/ui_fsmenu/internet_lobby.cc:138 ../../src/ui_fsmenu/options.cc:252
+#: ../../src/ui_fsmenu/internet_lobby.cc:138 ../../src/ui_fsmenu/options.cc:246
 msgid "Game"
 msgstr ""
 
@@ -2805,117 +2805,117 @@ msgstr ""
 msgid "Apply"
 msgstr ""
 
-#: ../../src/ui_fsmenu/options.cc:142
+#: ../../src/ui_fsmenu/options.cc:136
 msgid "Language"
 msgstr ""
 
-#: ../../src/ui_fsmenu/options.cc:149
+#: ../../src/ui_fsmenu/options.cc:143
 msgid "In-game resolution"
 msgstr ""
 
-#: ../../src/ui_fsmenu/options.cc:151
+#: ../../src/ui_fsmenu/options.cc:145
 msgid "Fullscreen"
 msgstr ""
 
-#: ../../src/ui_fsmenu/options.cc:152
+#: ../../src/ui_fsmenu/options.cc:146
 msgid "Grab Input"
 msgstr ""
 
-#: ../../src/ui_fsmenu/options.cc:154
+#: ../../src/ui_fsmenu/options.cc:148
 msgid "Maximum FPS:"
 msgstr ""
 
-#: ../../src/ui_fsmenu/options.cc:158
+#: ../../src/ui_fsmenu/options.cc:152
 msgid "Snap windows only when overlapping"
 msgstr ""
 
-#: ../../src/ui_fsmenu/options.cc:159
+#: ../../src/ui_fsmenu/options.cc:153
 msgid "Dock windows to edges"
 msgstr ""
 
-#: ../../src/ui_fsmenu/options.cc:169
+#: ../../src/ui_fsmenu/options.cc:163
 msgid "Distance for windows to snap to other panels:"
 msgstr ""
 
-#: ../../src/ui_fsmenu/options.cc:180
+#: ../../src/ui_fsmenu/options.cc:174
 msgid "Distance for windows to snap to borders:"
 msgstr ""
 
-#: ../../src/ui_fsmenu/options.cc:184
+#: ../../src/ui_fsmenu/options.cc:178
 #: ../../src/wui/game_options_sound_menu.cc:28
 msgid "Enable Music"
 msgstr ""
 
-#: ../../src/ui_fsmenu/options.cc:185
+#: ../../src/ui_fsmenu/options.cc:179
 #: ../../src/wui/game_options_sound_menu.cc:31
 msgid "Enable Sound Effects"
 msgstr ""
 
-#: ../../src/ui_fsmenu/options.cc:186
+#: ../../src/ui_fsmenu/options.cc:180
 msgid "Play a sound at message arrival"
 msgstr ""
 
-#: ../../src/ui_fsmenu/options.cc:197
+#: ../../src/ui_fsmenu/options.cc:191
 msgid "Save game automatically every:"
 msgstr ""
 
-#: ../../src/ui_fsmenu/options.cc:210
+#: ../../src/ui_fsmenu/options.cc:204
 msgid "Maximum number of autosave files:"
 msgstr ""
 
-#: ../../src/ui_fsmenu/options.cc:217
+#: ../../src/ui_fsmenu/options.cc:211
 msgid "Compress widelands data files (maps, replays and savegames)"
 msgstr ""
 
-#: ../../src/ui_fsmenu/options.cc:222
+#: ../../src/ui_fsmenu/options.cc:216
 msgid "Write syncstreams in network games to debug desyncs"
 msgstr ""
 
-#: ../../src/ui_fsmenu/options.cc:228
+#: ../../src/ui_fsmenu/options.cc:222
 msgid "Start building road after placing a flag"
 msgstr ""
 
-#: ../../src/ui_fsmenu/options.cc:229
+#: ../../src/ui_fsmenu/options.cc:223
 msgid "Show buildings area preview"
 msgstr ""
 
-#: ../../src/ui_fsmenu/options.cc:231
+#: ../../src/ui_fsmenu/options.cc:225
 msgid "Show in-game chat with transparent background"
 msgstr ""
 
 #. * TRANSLATORS: A watchwindow is a window where you keep watching an object or a map region,
 #. * TRANSLATORS: and it also lets you jump to it on the map.
-#: ../../src/ui_fsmenu/options.cc:235
+#: ../../src/ui_fsmenu/options.cc:229
 msgid "Use single watchwindow mode"
 msgstr ""
 
-#: ../../src/ui_fsmenu/options.cc:248
+#: ../../src/ui_fsmenu/options.cc:242
 msgid "Interface"
 msgstr ""
 
-#: ../../src/ui_fsmenu/options.cc:249
+#: ../../src/ui_fsmenu/options.cc:243
 msgid "Windows"
 msgstr ""
 
-#: ../../src/ui_fsmenu/options.cc:250
+#: ../../src/ui_fsmenu/options.cc:244
 msgid "Sound"
 msgstr ""
 
-#: ../../src/ui_fsmenu/options.cc:251
+#: ../../src/ui_fsmenu/options.cc:245
 msgid "Saving"
 msgstr ""
 
 #. * TRANSLATORS Options: Save game automatically every:
-#: ../../src/ui_fsmenu/options.cc:301
+#: ../../src/ui_fsmenu/options.cc:295
 msgid "Off"
 msgstr ""
 
 #. * TRANSLATORS: Screen resolution, e.g. 800 x 600
-#: ../../src/ui_fsmenu/options.cc:327 ../../src/ui_fsmenu/options.cc:336
+#: ../../src/ui_fsmenu/options.cc:321 ../../src/ui_fsmenu/options.cc:330
 msgid "%1% x %2%"
 msgstr ""
 
-#: ../../src/ui_fsmenu/options.cc:433
+#: ../../src/ui_fsmenu/options.cc:427
 msgid "Try system language"
 msgstr ""
 
@@ -2931,11 +2931,11 @@ msgstr ""
 msgid "Load Game"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1032
+#: ../../src/wlapplication.cc:1037
 msgid "Game data error"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1040
+#: ../../src/wlapplication.cc:1045
 #, c-format
 msgid ""
 "Please report this problem to help us improve Widelands. You will find "
@@ -2943,7 +2943,7 @@ msgid ""
 "using build %1$s (%2$s)."
 msgstr ""
 
-#: ../../src/wlapplication.cc:1047
+#: ../../src/wlapplication.cc:1052
 msgid ""
 "Please add this information to your report.\n"
 "\n"
@@ -2951,11 +2951,11 @@ msgid ""
 "It is often – though not always – possible to load it and continue playing."
 msgstr ""
 
-#: ../../src/wlapplication.cc:1173
+#: ../../src/wlapplication.cc:1178
 msgid "Invalid address"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1174
+#: ../../src/wlapplication.cc:1179
 msgid "The entered hostname or address is invalid and can’t be connected to."
 msgstr ""
 
@@ -3533,7 +3533,7 @@ msgid "Ware Statistics"
 msgstr ""
 
 #: ../../src/wui/game_statistics_menu.cc:46 ../../src/wui/stock_menu.cc:36
-#: ../../src/wui/ware_statistics_menu.cc:148 ../../src/wui/waresdisplay.cc:68
+#: ../../src/wui/ware_statistics_menu.cc:147 ../../src/wui/waresdisplay.cc:68
 msgid "Stock"
 msgstr ""
 
@@ -4108,19 +4108,19 @@ msgstr ""
 msgid "Prefer Heroes"
 msgstr ""
 
-#: ../../src/wui/stock_menu.cc:42
+#: ../../src/wui/stock_menu.cc:41
 msgid "Wares (total)"
 msgstr ""
 
-#: ../../src/wui/stock_menu.cc:46
+#: ../../src/wui/stock_menu.cc:45
 msgid "Workers (total)"
 msgstr ""
 
-#: ../../src/wui/stock_menu.cc:50
+#: ../../src/wui/stock_menu.cc:49
 msgid "Wares in warehouses"
 msgstr ""
 
-#: ../../src/wui/stock_menu.cc:55
+#: ../../src/wui/stock_menu.cc:54
 msgid "Workers in warehouses"
 msgstr ""
 
@@ -4128,15 +4128,15 @@ msgstr ""
 msgid "Soldiers in training"
 msgstr ""
 
-#: ../../src/wui/ware_statistics_menu.cc:130
+#: ../../src/wui/ware_statistics_menu.cc:129
 msgid "Production"
 msgstr ""
 
-#: ../../src/wui/ware_statistics_menu.cc:136
+#: ../../src/wui/ware_statistics_menu.cc:135
 msgid "Consumption"
 msgstr ""
 
-#: ../../src/wui/ware_statistics_menu.cc:143
+#: ../../src/wui/ware_statistics_menu.cc:142
 msgid "Economy Health"
 msgstr ""
 
