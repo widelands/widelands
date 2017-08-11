@@ -438,6 +438,75 @@ bool Scrollbar::handle_mousemove(uint8_t, int32_t const mx, int32_t const my, in
 	return true;
 }
 
+bool Scrollbar::handle_key(bool down, SDL_Keysym code) {
+	if (down) {
+		if (horizontal_) {
+			switch (code.sym) {
+			case SDLK_KP_6:
+				if (code.mod & KMOD_NUM) {
+					break;
+				}
+				FALLS_THROUGH;
+			case SDLK_RIGHT:
+				action(Plus);
+				return true;
+
+			case SDLK_KP_4:
+				if (code.mod & KMOD_NUM) {
+					break;
+				}
+				FALLS_THROUGH;
+			case SDLK_LEFT:
+				action(Minus);
+				return true;
+			default:
+				break;  // not handled
+			}
+		} else {
+			switch (code.sym) {
+			case SDLK_KP_2:
+				if (code.mod & KMOD_NUM) {
+					break;
+				}
+				FALLS_THROUGH;
+			case SDLK_DOWN:
+				action(Plus);
+				return true;
+
+			case SDLK_KP_8:
+				if (code.mod & KMOD_NUM) {
+					break;
+				}
+				FALLS_THROUGH;
+			case SDLK_UP:
+				action(Minus);
+				return true;
+
+			case SDLK_KP_3:
+				if (code.mod & KMOD_NUM) {
+					break;
+				}
+				FALLS_THROUGH;
+			case SDLK_PAGEDOWN:
+				action(PlusPage);
+				return true;
+
+			case SDLK_KP_9:
+				if (code.mod & KMOD_NUM) {
+					break;
+				}
+				FALLS_THROUGH;
+			case SDLK_PAGEUP:
+				action(MinusPage);
+				return true;
+			default:
+				break;  // not handled
+			}
+		}
+	}
+	return Panel::handle_key(down, code);
+}
+
 void Scrollbar::layout() {
 	if ((2 * kSize + get_knob_size()) > static_cast<uint32_t>((horizontal_ ? get_w() : get_h()))) {
 		buttonsize_ = kSize / 2;
