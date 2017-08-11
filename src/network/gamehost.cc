@@ -1875,7 +1875,8 @@ void GameHost::request_sync_reports() {
 	s.signed_32(d->syncreport_time);
 	broadcast(s);
 
-	d->game->enqueue_command(new CmdNetCheckSync(d->syncreport_time, this));
+	d->game->enqueue_command(
+	   new CmdNetCheckSync(d->syncreport_time, [this] { sync_report_callback(); }));
 
 	committed_network_time(d->syncreport_time);
 }
@@ -1923,7 +1924,7 @@ void GameHost::check_sync_reports() {
 	}
 }
 
-void GameHost::syncreport() {
+void GameHost::sync_report_callback() {
 	assert(d->game->get_gametime() == static_cast<uint32_t>(d->syncreport_time));
 
 	d->syncreport = d->game->get_sync_hash();

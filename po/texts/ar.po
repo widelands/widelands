@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-04-06 19:07+0000\n"
-"PO-Revision-Date: 2017-04-12 16:16+0000\n"
+"POT-Creation-Date: 2017-06-28 07:11+0000\n"
+"PO-Revision-Date: 2017-04-18 14:22+0000\n"
 "Last-Translator: Omar Anwar <omaraglan91@yahoo.com>\n"
 "Language-Team: Arabic (http://www.transifex.com/widelands/widelands/language/ar/)\n"
 "MIME-Version: 1.0\n"
@@ -56,7 +56,7 @@ msgstr "يمكنك معرفة تفاصيل أكثر عن رخصة FOSS ورخص�
 msgid ""
 "You can find the full text of the license there as well as further "
 "information about its philosophy and the legal implications."
-msgstr ""
+msgstr "يمكنك إيجاد التفاصيل الكاملة للتراخيص و أيضاً معلومات حول فلسفتها و الآثار القانونية."
 
 #: ../../data/txts/LICENSE.lua:29
 msgid "We are also shipping the GPL as a text document with Widelands itself."
@@ -85,7 +85,7 @@ msgid ""
 "This game comes as-is and without any warranty. For more information and "
 "support you can find us at %1% (Website, Wiki, Forum for questions or "
 "general support), %2% (Bugtracker), and %3% (Translations)."
-msgstr ""
+msgstr "هذه اللعبة تأتي من غير أي ضمان. لمعلومات أكثر وللدعم يُمكنك إيجادنا علي %1% (الموقع الإلكتروني، الويكي، المنتدي من أجل الأسئلة أو الدعم العام)، %2% (متتبع الأخطاء)، و %3% (الترجمة)."
 
 #: ../../data/txts/README.lua:7
 msgid "Readme"
@@ -103,7 +103,7 @@ msgstr "تفقد صفحة مشروع \"الأرض الواسعة\" على الش
 msgid ""
 "Widelands is licensed under the GNU General Public License (GPL). For more "
 "information, see the file ‘COPYING’."
-msgstr ""
+msgstr "\"الأرض الواسعة\" مرخصة تحت رخصة \"GNU\" العمومية (GPL). لمعلومات أكثر، أنظر إلي الملف \"COPYING\"."
 
 #: ../../data/txts/README.lua:18
 msgid "Status"
@@ -328,7 +328,7 @@ msgid ""
 "campaigns and a multiplayer mode. The game was inspired by Settlers II but "
 "has significantly more variety and depth to it. Still, it is easy to get "
 "started through playable tutorials."
-msgstr ""
+msgstr "الأرض الواسعة هي لعبة إستراتيجية في الوقت الحقيقي، مجانية،مفتوحة المصدر مع طور اللعب الفردي والجماعي. اللعبة مبنية إستناداً إلي \"Settlers II\" لكنها لديها تنوع وعُمق أكثر منها بكثير. ما يزال، إنه من السهل البدء من خلال الدروس التعليمية."
 
 #: ../../data/txts/help/common_helptexts.lua:19
 msgid ""
@@ -337,7 +337,7 @@ msgid ""
 "inhabitants. On your way towards this goal, you will have to establish an "
 "economic infrastructure, explore the land around you and face rivaling "
 "tribes."
-msgstr ""
+msgstr "في هذه اللعبة، أنت سوف تبدأ علي قطعة صغيرة من الأرض مع موارد قليلة. بأستخدام هذه الموارد، أنت سوف تُنشئ إمبراطورية مع الألاف من السكان. في طريقك إلي الهدف، أنت سوف تحتاج أن تُنشئ بنية تحتية إقتصادية، إكتشاف الأراضي ومحاربة القبائل الأخري."
 
 #: ../../data/txts/help/common_helptexts.lua:25
 msgid "Replays"
@@ -387,25 +387,25 @@ msgstr "Space"
 
 #: ../../data/txts/help/common_helptexts.lua:42
 msgid "Toggle building spaces"
-msgstr ""
+msgstr "تبديل مساحة البناء"
 
 #. TRANSLATORS: This is an access key combination. The hotkey is 'f'
 #: ../../data/txts/help/common_helptexts.lua:49
 msgid "Toggle fullscreen (if supported by the OS)"
-msgstr ""
+msgstr "تبديل الحجم الكامل للشاشة (إذا كان مدعوماً من نظام التشغيل)"
 
 #. TRANSLATORS: This is an access key combination. The hotkey is 'm'
 #: ../../data/txts/help/common_helptexts.lua:56
 msgid "Toggle minimap"
-msgstr "بدل الخريطة المصغرة"
+msgstr "تبديل الخريطة المصغرة"
 
 #: ../../data/txts/help/multiplayer_help.lua:10
 msgid "Multiplayer Game Setup"
-msgstr ""
+msgstr "إعداد اللعبة الجماعية"
 
 #: ../../data/txts/help/multiplayer_help.lua:11
 msgid "You are in the multiplayer launch game menu."
-msgstr ""
+msgstr "أنت في قائمة اللعبة الجماعية."
 
 #: ../../data/txts/help/multiplayer_help.lua:13
 msgid "Client settings"
@@ -415,13 +415,13 @@ msgstr "إعدادات العميل"
 msgid ""
 "On the left side is a list of all clients including you. You can set your "
 "role with the button following your nickname. Available roles are:"
-msgstr ""
+msgstr "في الجهة الشمالية هناك قائمة بكل العملاء بما فيهم أنت. يُمكنك تغير دورك في اللعبة من خلال الزر بعد إسمك. الأدوار المتاحة هي:"
 
 #: ../../data/txts/help/multiplayer_help.lua:15
 msgid ""
 "The player with the color of the flag. If more than one client selected the "
 "same color, these share control over the player (‘shared kingdom mode’)."
-msgstr ""
+msgstr "اللاعب مع لون العّلم. إذا إختار أكثر من عميل نفس اللون، هولاء يتشاركون التحكم في لاعب واحد (طور المملكة المشتركة)."
 
 #: ../../data/txts/help/multiplayer_help.lua:16
 msgid ""
@@ -437,7 +437,7 @@ msgstr "إعدادات اللاعب"
 msgid ""
 "In the middle are the settings for the players. To start a game, each player"
 " must be one of the following:"
-msgstr ""
+msgstr "فى الوسط هناك إعدادات اللاعب. لكي تبدأ اللعبة، يجب أن يكون كل لاعب واحد من الأتي:"
 
 #: ../../data/txts/help/multiplayer_help.lua:20
 msgid "Connected to one or more clients (see ‘Client settings’)."
@@ -591,11 +591,11 @@ msgstr ""
 
 #: ../../data/txts/tips/empire.lua:8
 msgid "Always build a forester’s house so you will not run out of logs."
-msgstr ""
+msgstr "دائماً إبني منزل الحارس حتي لا تنفذ الألواح الخشبية منك."
 
 #: ../../data/txts/tips/empire.lua:16
 msgid "Empire needs a lot of marble. Keep looking for marble resources."
-msgstr ""
+msgstr "أي إمبراطورية تحتاج الكثير من الرخام، دائماً إبحث عن مورد الرخام."
 
 #: ../../data/txts/tips/general_game.lua:4
 msgid ""
@@ -613,11 +613,11 @@ msgstr "إحرص دائماً على إرسال عالم جيولجيا لفحص
 msgid ""
 "Your territory can be expanded by building various military buildings – "
 "Sentry, Fortress, Blockhouse, etc."
-msgstr ""
+msgstr "منطقة نفوذك يمكن توسيعها ببناء عدة مباني حربية -- مبني حراسة، القلعة، المعقل، إلخ."
 
 #: ../../data/txts/tips/general_game.lua:16
 msgid "Miners will work only if supplied with food."
-msgstr ""
+msgstr "عمال المناجم سوف يعملون فقط إذا تم تزويدهم بالطعام."
 
 #: ../../data/txts/tips/general_game.lua:20
 msgid ""
@@ -662,7 +662,7 @@ msgstr "Ctrl+(1-9)"
 
 #: ../../data/txts/tips/general_game.lua:40
 msgid "Press %1% to store important locations, then press %2% to recall them."
-msgstr ""
+msgstr "إضغط %1% لكي تخزن الأماكن الهامة، ومن ثم إضغط  %2% لكي تذهب إليها مجدداً."
 
 #: ../../data/txts/tips/general_game.lua:44
 msgid ""
@@ -684,7 +684,7 @@ msgstr ""
 
 #: ../../data/txts/tips/general_game.lua:56
 msgid "Press I to quickly toggle the display of your stock inventory."
-msgstr ""
+msgstr "إضغط 1 بسرعة لكي تُظهر قائمة المخزن."
 
 #: ../../data/txts/tips/general_game.lua:60
 msgid ""
@@ -701,16 +701,16 @@ msgstr ""
 #: ../../data/txts/tips/general_game.lua:68
 msgctxt "hotkey"
 msgid "Ctrl+(+/-)"
-msgstr ""
+msgstr "Ctrl+(+/-)"
 
 #: ../../data/txts/tips/general_game.lua:68
 msgctxt "hotkey"
 msgid "Ctrl+0"
-msgstr ""
+msgstr "Ctrl+0"
 
 #: ../../data/txts/tips/general_game.lua:68
 msgid "Zoom in/out with the mouse wheel or %1%. Press %2% to reset the zoom."
-msgstr ""
+msgstr "تقريب/تبعيد الصورة بواسطة الزر الأوسط للفارة أو %1%. إضغط  %2% لكي تُرجع التقريب الأصلي."
 
 #: ../../data/txts/tips/general_game.lua:72
 msgid ""
@@ -748,4 +748,4 @@ msgstr ""
 msgid ""
 "Our computer players are too boring? Visit our website at www.widelands.org "
 "and meet other players to play online."
-msgstr "أامللت من اللعب ضد الذكاء الصناعي؟ تفضل بزياره موقعنا على الشبكة العنكبوتية www.widelands.org وتعرف على لاعبين \"الارض الواسعة\" من حول العالم وإلعب ضدهم!"
+msgstr "أامللت من اللعب ضد الذكاء الصناعي؟ تفضل بزيارة موقعنا على الشبكة العنكبوتية www.widelands.org وتعرف على لاعبين \"الأرض الواسعة\" من حول العالم وإلعب ضدهم!"

@@ -9,9 +9,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-01-21 21:10+0000\n"
-"PO-Revision-Date: 2017-01-25 20:50+0000\n"
-"Last-Translator: D M <hunter12@home.se>\n"
+"POT-Creation-Date: 2017-07-04 08:57+0000\n"
+"PO-Revision-Date: 2017-07-04 08:58+0000\n"
+"Last-Translator: GunChleoc\n"
 "Language-Team: Swedish (http://www.transifex.com/widelands/widelands/language/sv/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -360,9 +360,9 @@ msgid ""
 " former main entrance to the capital and is trying to set up a siege ring "
 "around Al’thunran. He will not let anyone enter or leave the city while the "
 "ring is intact. Until now, he has not answered any of my messages. But the "
-"time I spend waiting won’t be lost. I will further upgrade my soldiers and "
+"time I spend waiting won’t be lost. I will train my soldiers further and "
 "prepare for battle."
-msgstr "Jag har skickat män för att möta Kalitath i hans fästning. Han har barrikaderat huvudstadens tidigare huvudingång och försöker bygga upp en belägringsmur runt Al'thunran. Han kommer inte att låta någon komma vare sig in i eller ut ur staden medan ringen står fast. Tills nu har han inte svarat på några av mina meddelanden, men tiden jag väntar kommer inte att gå till spillo. Jag kommer att fortsätta uppgradera mina soldater och förbereda oss för strid."
+msgstr ""
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:212
 msgid "Your Loyal Companion"
@@ -650,7 +650,7 @@ msgstr "Hövding, tänk på de stackars bärarna. Våra vägar blir längre och 
 msgid "“%s”"
 msgstr "“%s”"
 
-#: ../../data/scripting/format_scenario.lua:96
+#: ../../data/scripting/format_scenario.lua:84
 msgid "New Objective"
 msgid_plural "New Objectives"
 msgstr[0] "Nytt uppdrag"

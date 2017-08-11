@@ -19,6 +19,8 @@
 
 #include "game_io/game_loader.h"
 
+#include <memory>
+
 #include <boost/bind.hpp>
 #include <boost/signals2.hpp>
 
@@ -122,8 +124,8 @@ int32_t GameLoader::load_game(bool const multiplayer) {
 	iterate_players_existing_const(p, nr_players, game_, player) {
 		const MessageQueue& messages = player->messages();
 		for (const auto& temp_message : messages) {
-			Message* message = temp_message.second;
-			MessageId message_id = temp_message.first;
+			const std::unique_ptr<Message>& message = temp_message.second;
+			const MessageId message_id = temp_message.first;
 
 			// Renew MapObject connections
 			if (message->serial() > 0) {
