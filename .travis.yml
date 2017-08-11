@@ -5,7 +5,8 @@ dist: trusty
 
 before_script:
   - export DISPLAY=:99.0
-  - sh -e /etc/init.d/xvfb start
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sh -e /etc/init.d/xvfb start ; fi
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then ( sudo Xvfb :99 -ac -screen 0 1024x768x8; echo ok )& fi
   - sleep 3 # give xvfb some time to start
 
 # ignore this branch because it is only a mirror of master
@@ -44,35 +45,58 @@ addons:
 
 matrix:
   include:
-    - compiler: clang
+    ### MAC OSX BUILDS
+    - os: osx
+      env: BUILD_TYPE="Debug"
+    - os: osx
+      env: BUILD_TYPE="Release"
+    ### LINUX + CLANG BUILDS
+    - os: linux
+      compiler: clang
       env: CLANG_VERSION="3.4" BUILD_TYPE="Debug"
-    - compiler: clang
+    - os: linux
+      compiler: clang
       env: CLANG_VERSION="3.5" BUILD_TYPE="Debug"
-    - compiler: clang
+    - os: linux
+      compiler: clang
       env: CLANG_VERSION="3.9" BUILD_TYPE="Debug"
-    - compiler: clang
+    - os: linux
+      compiler: clang
       env: CLANG_VERSION="4.0" BUILD_TYPE="Debug"
-    - compiler: clang
+    - os: linux
+      compiler: clang
       env: CLANG_VERSION="3.4" BUILD_TYPE="Release"
-    - compiler: clang
+    - os: linux
+      compiler: clang
       env: CLANG_VERSION="3.5" BUILD_TYPE="Release"
-    - compiler: clang
+    - os: linux
+      compiler: clang
       env: CLANG_VERSION="3.9" BUILD_TYPE="Release"
-    - compiler: clang
+    - os: linux
+      compiler: clang
       env: CLANG_VERSION="4.0" BUILD_TYPE="Release"
-    - compiler: gcc
+    ### LINUX + GCC BUILDS
+    - os: linux
+      compiler: gcc
       env: GCC_VERSION="4.8" BUILD_TYPE="Debug"
-    - compiler: gcc
+    - os: linux
+      compiler: gcc
       env: GCC_VERSION="4.9" BUILD_TYPE="Debug"
-    - compiler: gcc
+    - os: linux
+      compiler: gcc
       env: GCC_VERSION="6" BUILD_TYPE="Debug"
-    - compiler: gcc
+    - os: linux
+      compiler: gcc
       env: GCC_VERSION="7" BUILD_TYPE="Debug"
-    - compiler: gcc
+    - os: linux
+      compiler: gcc
       env: GCC_VERSION="4.8" BUILD_TYPE="Release"
-    - compiler: gcc
+    - os: linux
+      compiler: gcc
       env: GCC_VERSION="4.9" BUILD_TYPE="Release"
-    - compiler: gcc
+    - os: linux
+      compiler: gcc
       env: GCC_VERSION="6" BUILD_TYPE="Release"
-    - compiler: gcc
+    - os: linux
+      compiler: gcc
       env: GCC_VERSION="7" BUILD_TYPE="Release"
