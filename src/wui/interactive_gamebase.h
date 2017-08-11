@@ -54,6 +54,7 @@ public:
 	                    Section& global_s,
 	                    PlayerType pt = NONE,
 	                    bool multiplayer = false);
+	~InteractiveGameBase() override {}
 	Widelands::Game* get_game() const;
 	Widelands::Game& game() const;
 

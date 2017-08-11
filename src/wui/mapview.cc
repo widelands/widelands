@@ -402,11 +402,13 @@ void MapView::draw(RenderTarget& dst) {
 	}
 
 	if (upcast(InteractivePlayer const, interactive_player, &intbase())) {
+		const GameRenderer::Overlays overlays{draw_text, interactive_player->road_building_preview()};
 		renderer_->rendermap(
-		   egbase, view_.viewpoint, view_.zoom, interactive_player->player(), draw_text, &dst);
+		   egbase, view_.viewpoint, view_.zoom, interactive_player->player(), overlays, &dst);
 	} else {
+		const GameRenderer::Overlays overlays{static_cast<TextToDraw>(draw_text), {}};
 		renderer_->rendermap(
-		   egbase, view_.viewpoint, view_.zoom, static_cast<TextToDraw>(draw_text), &dst);
+		   egbase, view_.viewpoint, view_.zoom, overlays, &dst);
 	}
 }
 
