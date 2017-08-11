@@ -97,7 +97,7 @@
 	TypeName(const TypeName&) = delete;                                                             \
 	void operator=(const TypeName&) = delete
 
-/// Wrapper macro around a dynamic_cast.
+// Wrapper macro around a dynamic_cast.
 #define upcast(type, identifier, source) type* const identifier = dynamic_cast<type*>(source)
 
 // Useful when you want to know if [typeid(source) == typeof(type)*], without
@@ -107,5 +107,26 @@
 // For printf placeholders, we need to cast int8_t/uint8_t to avoid confusion with char
 #define cast_unsigned(u) static_cast<unsigned int>(u)
 #define cast_signed(i) static_cast<int>(i)
+
+// consistency check for printf arguments
+#ifdef __GNUC__
+#ifdef _WIN32
+#define PRINTF_FORMAT(b, c) __attribute__((__format__(gnu_printf, b, c)))
+#else
+#define PRINTF_FORMAT(b, c) __attribute__((__format__(__printf__, b, c)))
+#endif
+#else
+#define PRINTF_FORMAT(b, c)
+#endif
+
+#ifdef _WIN32
+#ifdef _WIN64
+#define PRIuS PRIu64
+#else
+#define PRIuS PRIu32
+#endif
+#else
+#define PRIuS "lu"
+#endif
 
 #endif  // end of include guard: WL_BASE_MACROS_H

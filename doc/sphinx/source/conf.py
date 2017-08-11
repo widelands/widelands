@@ -25,7 +25,7 @@ import sys, os
 
 # Add any Sphinx extension module names here, as strings. They can be extensions
 # coming with Sphinx (named 'sphinx.ext.*') or your custom ones.
-extensions = ['sphinx.ext.imgmath']
+extensions = ['sphinx.ext.mathjax']
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
@@ -231,18 +231,3 @@ texinfo_documents = [
    u'The Widelands Development Team', 'Widelands', 'One line description of project.',
    'Miscellaneous'),
 ]
-
-# Documents to append as an appendix to all manuals.
-#texinfo_appendices = []
-
-# If false, no module index is generated.
-#texinfo_domain_indices = True
-
-# How to display URL addresses: 'footnote', 'no', or 'inline'.
-#texinfo_show_urls = 'footnote'
-
-# Options for displaying formulas
-# http://www.nongnu.org/dvipng/dvipng_4.html#Command_002dline-options
-# Use one of 'dvispnames' or 'svgnames' for coloring from
-# http://mirrors.ctan.org/macros/latex/contrib/xcolor/xcolor.pdf
-imgmath_dvipng_args = ['-gamma', '1.5', '-D', '110', '-bg', 'Transparent', '-fg', 'Cerulean']
