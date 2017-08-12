@@ -42,7 +42,7 @@ protected:
 	               GameDetails::Style style,
 	               bool localize_autosave);
 
-	//// Update gamedetails and tooltips and return information about the current selection
+	/// Update gamedetails and tooltips and return information about the current selection
 	const SavegameData* entry_selected();
 
 	/// Whether the table has a selection
