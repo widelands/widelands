@@ -59,6 +59,7 @@ tribes:new_productionsite_type {
          actions = {
             "call=brew_mead",
             "call=brew_beer",
+            "call=brew_mead",
             "return=skipped"
          }
       },

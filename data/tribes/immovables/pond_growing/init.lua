@@ -9,7 +9,7 @@ tribes:new_immovable_type {
    attributes = { "pond_growing", "pond" },
    programs = {
       program = {
-         "animate=idle 60000",
+         "animate=idle 120000",
          "transform=pond_mature",
       },
    },

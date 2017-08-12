@@ -11,7 +11,7 @@ tribes:new_militarysite_type {
    vision_range = 17,
 
    buildcost = {
-      log = 6,
+      log = 5,
       thatch_reed = 1
    },
    return_on_dismantle = {

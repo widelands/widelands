@@ -70,7 +70,7 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start recycling fur because ...
          descname = pgettext("frisians_building", "recycling fur"),
          actions = {
-            "return=skipped unless economy needs fur",
+            "return=skipped unless site has fur_clothes_old",
             "sleep=14000",
             "consume=fur_clothes_old",
             "animate=working 15000",

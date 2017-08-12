@@ -57,6 +57,7 @@ tribes:new_productionsite_type {
          descname = _"breeding fish",
          actions = {
             "return=skipped unless economy needs fish",
+            "sleep=20000",
             "consume=fruit water:3",
             "worker=breed_in_pond"
          },
@@ -65,6 +66,8 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start fishing because ...
          descname = _"fishing",
          actions = {
+            "return=skipped unless economy needs fish",
+            "sleep=10000",
             "worker=fish_in_pond"
          },
       },

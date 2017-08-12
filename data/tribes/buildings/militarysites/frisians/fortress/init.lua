@@ -37,7 +37,7 @@ tribes:new_militarysite_type {
    },
 
    max_soldiers = 10,
-   heal_per_second = 260,
+   heal_per_second = 220,
    conquers = 12,
    prefer_heroes = true,
 

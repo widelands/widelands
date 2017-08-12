@@ -28,12 +28,8 @@ tribes:new_productionsite_type {
          pictures = path.list_files(dirname .. "idle_??.png"),
          hotspot = { 42, 65 },
       },
-      build = {
-         pictures = path.list_files(dirname .. "build_??.png"),
-         hotspot = { 42, 65 },
-      },
       working = {
-         pictures = path.list_files(dirname .. "working_??.png"),
+         pictures = path.list_files(dirname .. "idle_??.png"), --TODO no animation yet
          hotspot = { 42, 65 },
       },
    },
