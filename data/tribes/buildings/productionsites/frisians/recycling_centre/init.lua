@@ -28,7 +28,7 @@ tribes:new_productionsite_type {
          hotspot = { 57, 86 },
       },
       working = {
-         pictures = path.list_files(dirname .. "working_??.png"),
+         pictures = path.list_files(dirname .. "idle_??.png"), --TODO no animation yet
          hotspot = { 57, 86 },
       }
    },

@@ -26,11 +26,11 @@ tribes:new_productionsite_type {
    animations = {
       idle = {
          pictures = path.list_files(dirname .. "idle_??.png"),
-         hotspot = { 42, 65 },
+         hotspot = { 53, 54 },
       },
       working = {
          pictures = path.list_files(dirname .. "idle_??.png"), --TODO no animation yet
-         hotspot = { 42, 65 },
+         hotspot = { 53, 54 },
       },
    },
 
@@ -43,8 +43,8 @@ tribes:new_productionsite_type {
    },
 
    inputs = {
-      { name = "barley", amount = 6 },
-      { name = "water", amount = 6 },
+      { name = "barley", amount = 7 },
+      { name = "water", amount = 7 },
    },
    outputs = {
       "bread_frisians"

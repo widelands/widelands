@@ -24,11 +24,11 @@ tribes:new_productionsite_type {
    animations = {
       idle = {
          pictures = path.list_files(dirname .. "idle_??.png"),
-         hotspot = { 44, 47 },
+         hotspot = { 53, 54 },
       },
       working = {
-         pictures = path.list_files(dirname .. "working_??.png"),
-         hotspot = { 44, 47 },
+         pictures = path.list_files(dirname .. "idle_??.png"), --TODO no animation yet
+         hotspot = { 53, 54 },
       },
    },
 
@@ -53,7 +53,7 @@ tribes:new_productionsite_type {
          descname = _"sewing fur clothes",
          actions = {
             "sleep=5000",
-            "return=skipped unless economy needs fur_clothes",
+            "return=skipped unless economy needs fur_clothes or workers need experience",
             "consume=fur:2",
             "animate=working 40000",
             "produce=fur_clothes"
