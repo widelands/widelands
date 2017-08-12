@@ -1966,11 +1966,11 @@ for each other - then the map is seafaring.
 bool Map::allows_seafaring() {
 	Map::PortSpacesSet port_spaces = get_port_spaces();
 	std::vector<Coords> portdocks;
-	std::set<Coords, Coords::OrderingFunctor> swim_coords;
+	std::set<Coords> swim_coords;
 
 	for (const Coords& c : port_spaces) {
 		std::queue<Coords> q_positions;
-		std::set<Coords, Coords::OrderingFunctor> visited_positions;
+		std::set<Coords> visited_positions;
 		FCoords fc = get_fcoords(c);
 		portdocks = find_portdock(fc);
 
