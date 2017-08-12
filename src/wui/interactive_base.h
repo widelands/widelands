@@ -167,7 +167,7 @@ public:
 	// Sets the landmark for the keyboard 'key' to 'point'
 	void set_landmark(size_t key, const MapView::View& view);
 
-	std::map<Widelands::Coords, uint8_t> road_building_preview() const {
+	const std::map<Widelands::Coords, uint8_t>& road_building_preview() const {
 		return road_building_preview_;
 	}
 
@@ -212,7 +212,6 @@ protected:
 
 	UI::Box toolbar_;
 
-
 private:
 	int32_t stereo_position(Widelands::Coords position_map);
 	void resize_chat_overlay();
@@ -246,8 +245,7 @@ private:
 
 	// The roads that are displayed while a road is being build. They are not
 	// yet logically in the game, but need to be displayed for the user as
-	// visual guide. The data type is the same as for Field::road. logically in
-	// the game yet, instead they are a preview to the player.
+	// visual guide. The data type is the same as for Field::road. 
 	std::map<Widelands::Coords, uint8_t> road_building_preview_;
 
 	std::unique_ptr<Notifications::Subscriber<GraphicResolutionChanged>>

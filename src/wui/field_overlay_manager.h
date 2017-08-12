@@ -122,9 +122,7 @@ private:
 		int level;
 	};
 
-	using RegisteredOverlaysMap = std::multimap<const Widelands::Coords,
-	                                            RegisteredOverlays,
-	                                            Widelands::Coords::OrderingFunctor>;
+	using RegisteredOverlaysMap = std::multimap<const Widelands::Coords, RegisteredOverlays>;
 
 	// Returns the index into buildhelp_infos_ for the correct fieldcaps for
 	// 'fc' according to the current 'callback_'.

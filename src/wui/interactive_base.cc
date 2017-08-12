@@ -692,7 +692,7 @@ void InteractiveBase::roadb_add_overlay() {
 			dir = Widelands::get_reverse_dir(dir);
 		}
 		int32_t const shift = 2 * (dir - Widelands::WALK_E);
-		road_building_preview_[c] = (Widelands::RoadType::kNormal << shift);
+		road_building_preview_[c] |= (Widelands::RoadType::kNormal << shift);
 	}
 
 	// build hints
