@@ -45,7 +45,6 @@
 #include "logic/player.h"
 #include "profile/profile.h"
 #include "scripting/lua_interface.h"
-#include "wui/edge_overlay_manager.h"
 #include "wui/field_overlay_manager.h"
 #include "wui/game_chat_menu.h"
 #include "wui/game_debug_ui.h"
@@ -85,7 +84,6 @@ InteractiveBase::InteractiveBase(EditorGameBase& the_egbase, Section& global_s)
      toolbar_(this, 0, 0, UI::Box::Horizontal),
      m(new InteractiveBaseInternals(new QuickNavigation(this))),
      field_overlay_manager_(new FieldOverlayManager()),
-     edge_overlay_manager_(new EdgeOverlayManager()),
      egbase_(the_egbase),
 #ifndef NDEBUG  //  not in releases
      display_flags_(dfDebug),
@@ -95,7 +93,6 @@ InteractiveBase::InteractiveBase(EditorGameBase& the_egbase, Section& global_s)
      lastframe_(SDL_GetTicks()),
      frametime_(0),
      avg_usframetime_(0),
-     jobid_(0),
      road_buildhelp_overlay_jobid_(0),
      buildroad_(nullptr),
      road_build_player_(0),
@@ -119,7 +116,7 @@ InteractiveBase::InteractiveBase(EditorGameBase& the_egbase, Section& global_s)
 	sound_subscriber_ = Notifications::subscribe<NoteSound>([this](const NoteSound& note) {
 		if (note.stereo_position != std::numeric_limits<uint32_t>::max()) {
 			g_sound_handler.play_fx(note.fx, note.stereo_position, note.priority);
-		} else if (note.coords != Widelands::Coords(-1, -1)) {
+		} else if (note.coords != Widelands::Coords::null()) {
 			g_sound_handler.play_fx(note.fx, stereo_position(note.coords), note.priority);
 		}
 	});
@@ -680,12 +677,11 @@ Add road building data to the road overlay
 */
 void InteractiveBase::roadb_add_overlay() {
 	assert(buildroad_);
+	assert(road_building_preview_.empty());
 
 	Map& map = egbase().map();
 
 	// preview of the road
-	assert(!jobid_);
-	jobid_ = field_overlay_manager_->next_overlay_id();
 	const CoordPath::StepVector::size_type nr_steps = buildroad_->get_nsteps();
 	for (CoordPath::StepVector::size_type idx = 0; idx < nr_steps; ++idx) {
 		Widelands::Direction dir = (*buildroad_)[idx];
@@ -695,12 +691,8 @@ void InteractiveBase::roadb_add_overlay() {
 			map.get_neighbour(c, dir, &c);
 			dir = Widelands::get_reverse_dir(dir);
 		}
-
 		int32_t const shift = 2 * (dir - Widelands::WALK_E);
-
-		uint8_t set_to = edge_overlay_manager_->get_overlay(c);
-		set_to |= Widelands::RoadType::kNormal << shift;
-		edge_overlay_manager_->register_overlay(c, set_to, jobid_);
+		road_building_preview_[c] |= (Widelands::RoadType::kNormal << shift);
 	}
 
 	// build hints
@@ -762,11 +754,7 @@ Remove road building data from road overlay
 void InteractiveBase::roadb_remove_overlay() {
 	assert(buildroad_);
 
-	//  preview of the road
-	if (jobid_) {
-		edge_overlay_manager_->remove_overlay(jobid_);
-	}
-	jobid_ = 0;
+	road_building_preview_.clear();
 
 	// build hints
 	if (road_buildhelp_overlay_jobid_) {

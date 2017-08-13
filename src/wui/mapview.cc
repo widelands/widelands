@@ -392,21 +392,23 @@ void MapView::draw(RenderTarget& dst) {
 			return;
 	}
 
-	TextToDraw draw_text = TextToDraw::kNone;
+	TextToDraw text_to_draw = TextToDraw::kNone;
 	auto display_flags = intbase().get_display_flags();
 	if (display_flags & InteractiveBase::dfShowCensus) {
-		draw_text = draw_text | TextToDraw::kCensus;
+		text_to_draw = text_to_draw | TextToDraw::kCensus;
 	}
 	if (display_flags & InteractiveBase::dfShowStatistics) {
-		draw_text = draw_text | TextToDraw::kStatistics;
+		text_to_draw = text_to_draw | TextToDraw::kStatistics;
 	}
 
 	if (upcast(InteractivePlayer const, interactive_player, &intbase())) {
+		const GameRenderer::Overlays overlays{
+		   text_to_draw, interactive_player->road_building_preview()};
 		renderer_->rendermap(
-		   egbase, view_.viewpoint, view_.zoom, interactive_player->player(), draw_text, &dst);
+		   egbase, view_.viewpoint, view_.zoom, interactive_player->player(), overlays, &dst);
 	} else {
-		renderer_->rendermap(
-		   egbase, view_.viewpoint, view_.zoom, static_cast<TextToDraw>(draw_text), &dst);
+		const GameRenderer::Overlays overlays{static_cast<TextToDraw>(text_to_draw), {}};
+		renderer_->rendermap(egbase, view_.viewpoint, view_.zoom, overlays, &dst);
 	}
 }
 

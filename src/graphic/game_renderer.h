@@ -21,6 +21,7 @@
 #define WL_GRAPHIC_GAME_RENDERER_H
 
 #include <memory>
+#include <map>
 
 #include "base/macros.h"
 #include "base/vector.h"
@@ -37,6 +38,11 @@ class RenderTarget;
 // Renders the MapView on screen.
 class GameRenderer {
 public:
+	struct Overlays {
+		TextToDraw text_to_draw;
+		std::map<Widelands::Coords, uint8_t> road_building_preview;
+	};
+
 	GameRenderer();
 	~GameRenderer();
 
@@ -47,7 +53,7 @@ public:
 	               const Vector2f& viewpoint,
 	               float scale,
 	               const Widelands::Player& player,
-	               TextToDraw draw_text,
+	               const Overlays& overlays,
 	               RenderTarget* dst);
 
 	// Renders the map from an omniscient perspective. This is used
@@ -55,7 +61,7 @@ public:
 	void rendermap(const Widelands::EditorGameBase& egbase,
 	               const Vector2f& viewpoint,
 	               float scale,
-	               TextToDraw draw_text,
+	               const Overlays& overlays,
 	               RenderTarget* dst);
 
 private:
@@ -64,7 +70,7 @@ private:
 	void draw(const Widelands::EditorGameBase& egbase,
 	          const Vector2f& viewpoint,
 	          float scale,
-	          TextToDraw draw_text,
+	          const Overlays& overlays,
 	          const Widelands::Player* player,
 	          RenderTarget* dst);
 

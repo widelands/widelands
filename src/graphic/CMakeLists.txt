@@ -183,7 +183,6 @@ wl_library(graphic_game_renderer
     graphic_terrain_programs
     logic
     wui
-    wui_edge_overlay_manager
     wui_field_overlay_manager
     wui_mapview_pixelfunctions
 )
