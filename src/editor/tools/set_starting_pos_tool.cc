@@ -31,8 +31,7 @@ static int32_t current_player_;
 /*
  * static callback function for overlay calculation
  */
-int32_t editor_tool_set_starting_pos_callback(const Widelands::TCoords<Widelands::FCoords>& c,
-                                              Widelands::Map& map) {
+int32_t editor_tool_set_starting_pos_callback(const Widelands::FCoords& c, Widelands::Map& map) {
 	// Area around already placed players
 	Widelands::PlayerNumber const nr_players = map.get_nrplayers();
 	for (Widelands::PlayerNumber p = 1, last = current_player_ - 1;; ++p) {

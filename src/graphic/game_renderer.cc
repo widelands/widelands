@@ -260,43 +260,6 @@ void draw_objects(const EditorGameBase& egbase,
 				   BlendMode::UseAlpha);
 			}
 		}
-
-		{
-			// Render overlays on the right triangle
-			overlay_info.clear();
-			overlay_manager.get_overlays(TCoords<>(field.fcoords, TCoords<>::R), &overlay_info);
-
-			Vector2f tripos(
-			   (field.rendertarget_pixel.x + rn.rendertarget_pixel.x + brn.rendertarget_pixel.x) / 3.f,
-			   (field.rendertarget_pixel.y + rn.rendertarget_pixel.y + brn.rendertarget_pixel.y) /
-			      3.f);
-			for (const auto& overlay : overlay_info) {
-				dst->blitrect_scale(Rectf(tripos - overlay.hotspot.cast<float>() * zoom,
-				                          overlay.pic->width() * zoom, overlay.pic->height() * zoom),
-				                    overlay.pic,
-				                    Recti(0, 0, overlay.pic->width(), overlay.pic->height()), 1.f,
-				                    BlendMode::UseAlpha);
-			}
-		}
-
-		{
-			// Render overlays on the D triangle
-			overlay_info.clear();
-			overlay_manager.get_overlays(TCoords<>(field.fcoords, TCoords<>::D), &overlay_info);
-
-			Vector2f tripos(
-			   (field.rendertarget_pixel.x + bln.rendertarget_pixel.x + brn.rendertarget_pixel.x) /
-			      3.f,
-			   (field.rendertarget_pixel.y + bln.rendertarget_pixel.y + brn.rendertarget_pixel.y) /
-			      3.f);
-			for (const auto& overlay : overlay_info) {
-				dst->blitrect_scale(Rectf(tripos - overlay.hotspot.cast<float>() * zoom,
-				                          overlay.pic->width() * zoom, overlay.pic->height() * zoom),
-				                    overlay.pic,
-				                    Recti(0, 0, overlay.pic->width(), overlay.pic->height()), 1.f,
-				                    BlendMode::UseAlpha);
-			}
-		}
 	}
 }
 
