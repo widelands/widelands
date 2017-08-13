@@ -101,8 +101,9 @@ void EditorSetStartingPosTool::set_starting_pos(EditorInteractive& eia,
 	const Image* player_image = playercolor_image(plnum - 1, "images/players/player_position.png");
 	assert(player_image);
 
-	overlay_manager->register_overlay(
-	   c, player_image, 8, Vector2i(player_image->width() / 2, STARTING_POS_HOTSPOT_Y), overlay_id);
+	overlay_manager->register_overlay(c, player_image, OverlayLevel::kPlayerStartingPosition,
+	                                  Vector2i(player_image->width() / 2, STARTING_POS_HOTSPOT_Y),
+	                                  overlay_id);
 
 	//  set new player pos
 	map->set_starting_pos(plnum, c);

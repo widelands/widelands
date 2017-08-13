@@ -168,13 +168,13 @@ void InteractiveBase::set_sel_pos(Widelands::NodeAndTriangle<> const center) {
 		Widelands::MapTriangleRegion<> mr(map, Area<TCoords<>>(center.triangle, sel_.radius));
 		do
 			field_overlay_manager_->register_overlay(
-			   mr.location(), sel_.pic, 7, Vector2i::invalid(), jobid);
+			   mr.location(), sel_.pic, OverlayLevel::kSelection, Vector2i::invalid(), jobid);
 		while (mr.advance(map));
 	} else {
 		Widelands::MapRegion<> mr(map, Area<>(center.node, sel_.radius));
 		do
 			field_overlay_manager_->register_overlay(
-			   mr.location(), sel_.pic, 7, Vector2i::invalid(), jobid);
+			   mr.location(), sel_.pic, OverlayLevel::kSelection, Vector2i::invalid(), jobid);
 		while (mr.advance(map));
 		if (upcast(InteractiveGameBase const, igbase, this))
 			if (upcast(Widelands::ProductionSite, productionsite, map[center.node].get_immovable())) {
@@ -281,8 +281,9 @@ FieldOverlayManager::OverlayId InteractiveBase::show_work_area(const WorkareaInf
 		hollow_area.radius = it->first;
 		Widelands::MapHollowRegion<> mr(map, hollow_area);
 		do
-			field_overlay_manager_->register_overlay(
-			   mr.location(), workarea_pics_[wa_index], 0, Vector2i::invalid(), overlay_id);
+			field_overlay_manager_->register_overlay(mr.location(), workarea_pics_[wa_index],
+			                                         OverlayLevel::kWorkAreaPreview,
+			                                         Vector2i::invalid(), overlay_id);
 		while (mr.advance(map));
 		wa_index++;
 		hollow_area.hole_radius = hollow_area.radius;
@@ -742,7 +743,7 @@ void InteractiveBase::roadb_add_overlay() {
 			name = "images/wui/overlays/roadb_red.png";
 
 		field_overlay_manager_->register_overlay(
-		   neighb, g_gr->images().get(name), 7, Vector2i::invalid(), road_buildhelp_overlay_jobid_);
+		   neighb, g_gr->images().get(name), OverlayLevel::kRoadBuildSlope, Vector2i::invalid(), road_buildhelp_overlay_jobid_);
 	}
 }
 

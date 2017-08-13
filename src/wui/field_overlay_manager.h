@@ -47,7 +47,18 @@ class Image;
  *     with the overlay_id can be called and all overlays created in the
  *     job are removed.
  */
-constexpr int kLevelForBuildHelp = 5;
+
+// Levels for the overlay registers. This defines in which order they will be
+// drawn. Buildhelp is special and has the value 5, i.e. every smaller will be
+// drawn below the buildhelp, everything higher above.
+enum class OverlayLevel {
+	kWorkAreaPreview = 0,
+	kResource = 4,
+	kSelection = 7,
+	kRoadBuildSlope = 8,
+	kPlayerStartingPosition= 9,
+};
+
 struct FieldOverlayManager {
 	/// A unique id identifying a registered overlay.
 	using OverlayId = uint32_t;
@@ -87,7 +98,7 @@ struct FieldOverlayManager {
 	/// Vector2i::invalid(), the center of the picture will be used as hotspot.
 	void register_overlay(const Widelands::Coords& coords,
 	                      const Image* pic,
-	                      int32_t level,
+								 const OverlayLevel& overlay_level,
 	                      Vector2i hotspot = Vector2i::invalid(),
 	                      OverlayId overlay_id = 0);
 
@@ -109,14 +120,14 @@ private:
 		RegisteredOverlays(const OverlayId init_overlay_id,
 		                   const Image* init_pic,
 		                   const Vector2i init_hotspot,
-		                   const int init_level)
+		                   const OverlayLevel& init_level)
 		   : pic(init_pic), hotspot(init_hotspot), level(init_level) {
 			overlay_ids.insert(init_overlay_id);
 		}
 		std::set<OverlayId> overlay_ids;
 		const Image* pic;
 		Vector2i hotspot = Vector2i::zero();
-		int level;
+		OverlayLevel level;
 	};
 
 	// Returns the index into buildhelp_infos_ for the correct fieldcaps for

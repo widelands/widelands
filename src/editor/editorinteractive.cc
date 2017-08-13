@@ -80,7 +80,7 @@ void update_resource_overlay(const Widelands::NoteFieldResourceChanged& note,
 		const std::string str =
 		   world.get_resource(note.fc.field->get_resources())->editor_image(amount);
 		const Image* pic = g_gr->images().get(str);
-		field_overlay_manager->register_overlay(note.fc, pic, 4);
+		field_overlay_manager->register_overlay(note.fc, pic, OverlayLevel::kResource);
 	}
 }
 
@@ -181,7 +181,8 @@ void EditorInteractive::register_overlays() {
 			const std::string& immname =
 			   egbase().world().get_resource(fc.field->get_resources())->editor_image(amount);
 			if (immname.size()) {
-				mutable_field_overlay_manager()->register_overlay(fc, g_gr->images().get(immname), 4);
+				mutable_field_overlay_manager()->register_overlay(
+				   fc, g_gr->images().get(immname), OverlayLevel::kResource);
 			}
 		}
 	}

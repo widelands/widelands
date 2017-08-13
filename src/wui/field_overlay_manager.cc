@@ -26,6 +26,12 @@
 #include "graphic/graphic.h"
 #include "logic/field.h"
 
+namespace  {
+
+constexpr int kLevelForBuildHelp = 5;
+
+}  // namespace
+
 FieldOverlayManager::FieldOverlayManager() : current_overlay_id_(0) {
 	OverlayInfo* buildhelp_info = buildhelp_infos_;
 	const char* filenames[] = {"images/wui/overlays/set_flag.png", "images/wui/overlays/small.png",
@@ -61,7 +67,8 @@ void FieldOverlayManager::show_buildhelp(const bool value) {
 void FieldOverlayManager::get_overlays(const Widelands::FCoords& c,
                                        std::vector<OverlayInfo>* result) const {
 	auto it = overlays_.lower_bound(c);
-	while (it != overlays_.end() && it->first == c && it->second.level <= kLevelForBuildHelp) {
+	while (it != overlays_.end() && it->first == c &&
+	       static_cast<int>(it->second.level) <= kLevelForBuildHelp) {
 		result->emplace_back(it->second.pic, it->second.hotspot);
 		++it;
 	}
@@ -106,11 +113,9 @@ int FieldOverlayManager::get_buildhelp_overlay(const Widelands::FCoords& fc) con
 
 void FieldOverlayManager::register_overlay(const Widelands::Coords& c,
                                            const Image* pic,
-                                           int32_t const level,
+														 const OverlayLevel& level,
                                            Vector2i hotspot,
                                            OverlayId const overlay_id) {
-	assert(level != 5);  //  level == 5 is undefined behavior
-
 	if (hotspot == Vector2i::invalid()) {
 		hotspot = Vector2i(pic->width() / 2, pic->height() / 2);
 	}
