@@ -25,18 +25,18 @@ tribes:new_productionsite_type {
    animations = {
       idle = {
          pictures = path.list_files(dirname .. "idle_??.png"),
-         hotspot = { 69, 64 },
+         hotspot = { 81, 66 },
       },
       working = {
-         pictures = path.list_files(dirname .. "working_??.png"),
-         hotspot = { 69, 64 },
+         pictures = path.list_files(dirname .. "idle_??.png"), --TODO no animation yet
+         hotspot = { 81, 66 },
       },
    },
 
    aihints = {
       recruitment = true,
       prohibited_till = 500,
-      basic_amount = 1
+      basic_amount = 1 --TODO this is not a basic building
    },
 
    working_positions = {
