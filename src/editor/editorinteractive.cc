@@ -115,16 +115,27 @@ EditorInteractive::EditorInteractive(Widelands::EditorGameBase& e)
 
 	toolbar_.add_space(15);
 
+	toggle_buildhelp_ = add_toolbar_button(
+	   "wui/menus/menu_toggle_buildhelp", "buildhelp", _("Show Building Spaces (on/off)"));
+	toggle_buildhelp_->sigclicked.connect(boost::bind(&EditorInteractive::toggle_buildhelp, this));
+	auto toggle_resources = add_toolbar_button(
+	   "wui/menus/menu_toggle_resources", "resources", _("Show Resources (on/off)"));
+	toggle_resources->set_perm_pressed(true);
+	toggle_resources->sigclicked.connect([this, toggle_resources]() {
+		auto* overlay_manager = mutable_field_overlay_manager();
+		const bool value = !overlay_manager->is_enabled(OverlayLevel::kResource);
+		overlay_manager->set_enabled(OverlayLevel::kResource, value);
+		toggle_resources->set_perm_pressed(value);
+	});
+
+	toolbar_.add_space(15);
+
 	add_toolbar_button(
 	   "wui/menus/menu_toggle_minimap", "minimap", _("Minimap"), &minimap_registry(), true);
 	minimap_registry().open_window = [this] { toggle_minimap(); };
 
-	toggle_buildhelp_ = add_toolbar_button(
-	   "wui/menus/menu_toggle_buildhelp", "buildhelp", _("Show Building Spaces (on/off)"));
-	toggle_buildhelp_->sigclicked.connect(boost::bind(&EditorInteractive::toggle_buildhelp, this));
-
-	reset_zoom_ = add_toolbar_button("wui/menus/menu_reset_zoom", "reset_zoom", _("Reset zoom"));
-	reset_zoom_->sigclicked.connect([this] {
+	auto zoom = add_toolbar_button("wui/menus/menu_reset_zoom", "reset_zoom", _("Reset zoom"));
+	zoom->sigclicked.connect([this] {
 		zoom_around(1.f, Vector2f(get_w() / 2.f, get_h() / 2.f), MapView::Transition::Smooth);
 	});
 

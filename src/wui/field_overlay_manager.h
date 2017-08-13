@@ -56,23 +56,12 @@ enum class OverlayLevel {
 	kResource = 4,
 	kSelection = 7,
 	kRoadBuildSlope = 8,
-	kPlayerStartingPosition= 9,
+	kPlayerStartingPosition = 9,
 };
 
 struct FieldOverlayManager {
 	/// A unique id identifying a registered overlay.
 	using OverlayId = uint32_t;
-
-	/// A overlay as drawn onto the screen.
-	struct OverlayInfo {
-		OverlayInfo() = default;
-		OverlayInfo(const Image* init_pic, const Vector2i& init_hotspot)
-		   : pic(init_pic), hotspot(init_hotspot) {
-		}
-
-		const Image* pic;
-		Vector2i hotspot = Vector2i::zero();
-	};
 
 	/// A function returning Field::nodecaps() for the build overlay. This can be
 	/// registered to hide or change some of the nodecaps during rendering.
@@ -89,6 +78,10 @@ struct FieldOverlayManager {
 
 	/// Register callback function.
 	void register_overlay_callback_function(CallbackFn function);
+
+	/// Like 'buildhelp', but for an individual layer.
+	bool is_enabled(const OverlayLevel& level) const;
+	void set_enabled(const OverlayLevel& level, bool value);
 
 	/// Get a unique, unused id that can be passed to register_overlay.
 	OverlayId next_overlay_id();
@@ -112,10 +105,44 @@ struct FieldOverlayManager {
 	// TODO(sirver): It would be preferable to just delete and recreate the object.
 	void remove_all_overlays();
 
-	/// Returns the currently registered overlays and the buildhelp for a node.
-	void get_overlays(const Widelands::FCoords& c, std::vector<OverlayInfo>* result) const;
+	/// Calls 'func' for each of the the currently registered and enabled
+	/// overlays and the buildhelp.
+	template <typename T> void foreach_overlay(const Widelands::FCoords& c, T func) const {
+		auto it = overlays_.lower_bound(c);
+		while (it != overlays_.end() && it->first == c &&
+		       static_cast<int>(it->second.level) <= kLevelForBuildHelp) {
+			if (is_enabled(it->second.level)) {
+				func(it->second.pic, it->second.hotspot);
+			}
+			++it;
+		}
+
+		if (buildhelp_) {
+			int buildhelp_overlay_index = get_buildhelp_overlay(c);
+			if (buildhelp_overlay_index < Widelands::Field::Buildhelp_None) {
+				auto& overlay_info = buildhelp_infos_[buildhelp_overlay_index];
+				func(overlay_info.pic, overlay_info.hotspot);
+			}
+		}
+
+		while (it != overlays_.end() && it->first == c) {
+			if (is_enabled(it->second.level)) {
+				func(it->second.pic, it->second.hotspot);
+			}
+			++it;
+		}
+}
+
 
 private:
+	static constexpr int kLevelForBuildHelp = 5;
+
+	/// A overlay as drawn onto the screen.
+	struct OverlayInfo {
+		const Image* pic = nullptr;
+		Vector2i hotspot = Vector2i::zero();
+	};
+
 	struct RegisteredOverlays {
 		RegisteredOverlays(const OverlayId init_overlay_id,
 		                   const Image* init_pic,
@@ -138,6 +165,9 @@ private:
 
 	OverlayInfo buildhelp_infos_[Widelands::Field::Buildhelp_None];
 	bool buildhelp_;
+	// We are inverting the logic here, since new layers should be by default
+	// enabled and we only support to toggle some of them off.
+	std::set<OverlayLevel> disabled_layers_;
 
 	// this callback is used to define where overlays are drawn.
 	CallbackFn callback_;
