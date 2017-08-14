@@ -165,8 +165,10 @@ private:
 
 	OverlayInfo buildhelp_infos_[Widelands::Field::Buildhelp_None];
 	bool buildhelp_;
-	// We are inverting the logic here, since new layers should be by default
-	// enabled and we only support to toggle some of them off.
+	// We are inverting the logic here, since new layers are by default enabled
+	// and we only support to toggle some of them off. Otherwise whenever a new
+	// layer is added in 'OverlayLevel' we would also need to add it to the
+	// 'enabled_layers_' set on construction.
 	std::set<OverlayLevel> disabled_layers_;
 
 	// this callback is used to define where overlays are drawn.

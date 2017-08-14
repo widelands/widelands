@@ -118,15 +118,10 @@ EditorInteractive::EditorInteractive(Widelands::EditorGameBase& e)
 	toggle_buildhelp_ = add_toolbar_button(
 	   "wui/menus/menu_toggle_buildhelp", "buildhelp", _("Show Building Spaces (on/off)"));
 	toggle_buildhelp_->sigclicked.connect(boost::bind(&EditorInteractive::toggle_buildhelp, this));
-	auto toggle_resources = add_toolbar_button(
+	toggle_resources_ = add_toolbar_button(
 	   "wui/menus/menu_toggle_resources", "resources", _("Show Resources (on/off)"));
-	toggle_resources->set_perm_pressed(true);
-	toggle_resources->sigclicked.connect([this, toggle_resources]() {
-		auto* overlay_manager = mutable_field_overlay_manager();
-		const bool value = !overlay_manager->is_enabled(OverlayLevel::kResource);
-		overlay_manager->set_enabled(OverlayLevel::kResource, value);
-		toggle_resources->set_perm_pressed(value);
-	});
+	toggle_resources_->set_perm_pressed(true);
+	toggle_resources_->sigclicked.connect([this]() { toggle_resources(); });
 
 	toolbar_.add_space(15);
 
@@ -337,6 +332,13 @@ void EditorInteractive::on_buildhelp_changed(const bool value) {
 	toggle_buildhelp_->set_perm_pressed(value);
 }
 
+void EditorInteractive::toggle_resources() {
+	auto* overlay_manager = mutable_field_overlay_manager();
+	const bool value = !overlay_manager->is_enabled(OverlayLevel::kResource);
+	overlay_manager->set_enabled(OverlayLevel::kResource, value);
+	toggle_resources_->set_perm_pressed(value);
+}
+
 bool EditorInteractive::handle_key(bool const down, SDL_Keysym const code) {
 	bool handled = InteractiveBase::handle_key(down, code);
 
@@ -427,19 +429,24 @@ bool EditorInteractive::handle_key(bool const down, SDL_Keysym const code) {
 			handled = true;
 			break;
 
-		case SDLK_m:
-			minimap_registry().toggle();
-			handled = true;
-			break;
-
 		case SDLK_l:
 			if (code.mod & (KMOD_LCTRL | KMOD_RCTRL))
 				new MainMenuLoadMap(*this);
 			handled = true;
 			break;
 
+		case SDLK_m:
+			minimap_registry().toggle();
+			handled = true;
+			break;
+
 		case SDLK_p:
 			playermenu_.toggle();
+			handled = true;
+			break;
+
+		case SDLK_q:
+			toggle_resources();
 			handled = true;
 			break;
 
@@ -454,17 +461,17 @@ bool EditorInteractive::handle_key(bool const down, SDL_Keysym const code) {
 			handled = true;
 			break;
 
+		case SDLK_y:
+			if (code.mod & (KMOD_LCTRL | KMOD_RCTRL))
+				history_->redo_action(egbase().world());
+			handled = true;
+			break;
+
 		case SDLK_z:
 			if ((code.mod & (KMOD_LCTRL | KMOD_RCTRL)) && (code.mod & (KMOD_LSHIFT | KMOD_RSHIFT)))
 				history_->redo_action(egbase().world());
 			else if (code.mod & (KMOD_LCTRL | KMOD_RCTRL))
 				history_->undo_action(egbase().world());
-			handled = true;
-			break;
-
-		case SDLK_y:
-			if (code.mod & (KMOD_LCTRL | KMOD_RCTRL))
-				history_->redo_action(egbase().world());
 			handled = true;
 			break;
 
