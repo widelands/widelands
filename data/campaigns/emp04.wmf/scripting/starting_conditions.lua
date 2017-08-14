@@ -2,6 +2,7 @@
 --                                 Player 1
 -- =======================================================================
 p1.see_all = true
+p1:forbid_buildings{"empire_farm"}
 
 
  prefilled_buildings(p1, { "empire_headquarters", sf.x, sf.y,

@@ -34,21 +34,30 @@ end
 -- ===========
 -- objectives
 -- ===========
-obj_build_first_outpost = {
-    name = "build_a_first_outpost",
-    title=_"Build a first outpost",
+obj_dismantle_buildings = {
+    name = "dismantle_unproductive_buildings",
+    title=_"Dismantle the unproductive Buildings",
     number = 1,
-    body = objective_text(_"First Outpost",
-       listitem_bullet(_[[Build a outpost at the yellow house symbol to the east of your provisional headquarters.]])
+    body = objective_text(_"Dismantle Buildings",
+       listitem_bullet(_[[We should dismantle all the unproductive buildings to get some ressources for new buildings.]])
     ),
 }
 
-obj_build_quarry = {
-   name = "build_quarry",
-   title=_"Build a quarry",
+obj_clear_roads = {
+   name = "clear_roads",
+   title=_"Clear all unnecessary roads",
    number = 1,
-   body = objective_text(_"Quarry",
-      listitem_bullet(_[[Build a quarry close to the lots of stone. So we can free some building lots and get some valueable resources.]])
+   body = objective_text(_"Clear road network",
+      listitem_bullet(_[[Resolve the chaotic road network by clearing all unnecessary roads.]])
+   ),
+}
+
+obj_find_farm_plans = {
+   name = "find_farm_construction_plans",
+   title=_"Find the construction plans for our farm",
+   number = 1,
+   body = objective_text(_"Find our construction plans",
+      listitem_bullet(_[[We need to recover our plans how to construct a farm.]])
    ),
 }
 
@@ -181,10 +190,10 @@ diary_page_2 = {
    title=_"The wrath of Neptune",
    body= lutius(_"Diary of Lutius",
       -- TRANSLATORS: Lutius - Diary
-      _([[Neptune himself was against us and drove us into a dark, wild storm again. This time it felt even worse than last time. The waves were double the height of our brave ship and the winds drove us into unsafe waters.]])
+      _([[Oh no. Amalea is right. In fact I can't see any productivity overall. And our road network seems to be a complete mess as well. Who might be responsible for this chaos?]])
       .. paragraphdivider() ..
       -- TRANSLATORS: Lutius - Diary
-      _([[Our ship is heavily damaged. The mast has gone overboard and the hull is taking in more and more water. We would be glad to survive this black night with barely more than our lives.]])),
+      _([[I am really afraid we could be totally unprepared if the babarians will attack us.]])),
 
    posy=1,
 }
@@ -254,30 +263,33 @@ saledus_2 = {
 }
 
 amalea_1 = {
-   title=_"Amalea's plan",
-   body= amalea2(_"Amalea smiles…",
+   title=_"Amalea investigating",
+   body= amalea2(_"Amalea is nodding thougtful…",
       -- TRANSLATORS: Amalea
-      _([[Lutius this can be very tricky but it is possible. First of all we need patience as well as speed and a plan to succeed in this part of the world.]])
+      _([[Lutius this will be very tricky again, but I'm afraid we're doomed to manage this situation. To make things even worse I had a look into our warehouses. There is hardly some grain of dust left in there. No Wares, no tools, no workers and no soldiers as well.]])
       .. paragraphdivider() ..
       -- TRANSLATORS: Amalea
-      _([[I think we should try to reveal some building space by cutting all the stone in a quarry.]])
+      _([[So, first of all we need some building material to start correcting the mistakes made.I think we should try to dismantle the unproductive buildings and collect the ressources which we will regain in our headquarters.]])
       .. paragraphdivider() ..
       -- TRANSLATORS: Amalea
-      _([[Additionally this would gain us some stone and some marble to build up our new base. We can use them as soon as there is enough space for buildings.]]))
-      .. new_objectives(obj_build_quarry),
+      _([[Additionally we should restrict the input to all builidngs which consume any of our building material to zero.]]))
+      .. new_objectives(obj_dismantle_buildings),
    posy=1,
    h=500,
 }
 
 amalea_2 = {
-   title=_"Amalea's new instructions",
+   title=_"Amalea's bad news",
    body= amalea3(_"Amalea recommends…",
       -- TRANSLATORS: Amalea
-      _([[Good news from the people, Lutius. I got the message that our first quarry has started working today.]])
+      _([[Lutius, I'm really worried to deliver bad news again. As you might have noticed we couldn't dismantle our farm, but just destroy it.]])
       .. paragraphdivider() ..
       -- TRANSLATORS: Amalea
-      _([[Perhaps it would be a good idea to wait until enough space has been cleared to build up a basic construction material industry.]]))
-	  .. new_objectives(obj_build_sawmill_stonemason_and_lumberjacks),
+      _([[This is caused by the sad fact that our constructors have lost the plans how to construct a farm. for this reason they don't know how to diamantle it either.]])
+	  .. paragraphdivider() ..
+      -- TRANSLATORS: Amalea
+      _([[So we need to recover our construction plans for a farm. One older constructor told me that they might have been concealed in a cave in the northern mountains.]]))
+	  .. new_objectives(obj_find_farm_plans ),
    posy=1,
    h=500,
 }

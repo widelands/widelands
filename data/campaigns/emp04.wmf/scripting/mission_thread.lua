@@ -1,8 +1,23 @@
 include "scripting/messages.lua"
 include "map:scripting/helper_functions.lua"
 
+function dismantle()
+   local o = add_campaign_objective(obj_dismantle_buildings)
+   
+   sleep(5000)
+   while count_buildings(p1, {"empire_fishers_house", "empire_quarry", "empire_lumberjacks_house2", "empire_well2", "empire_farm1"}) > 0 do
+   sleep(4000)
+   end
+   o.done = true
+   campaign_message_box(amalea_3)
+end
 
-
+function farm_plans()
+   while #p1:get_buildings("empire_farm1") > 1 do sleep(3249) end
+   campaign_message_box(amalea_2)
+   local o = add_campaign_objective(obj_find_farm_plans)
+   
+end   
 
 function mission_thread()
    sleep(1000)
@@ -12,24 +27,29 @@ function mission_thread()
 
    --Initial messages
    campaign_message_box(diary_page_1)
+   sleep(1000)
    campaign_message_box(saledus)
+   sleep(1000)
    campaign_message_box(amalea)
 
+   -- let's start with dismantling the unproductive buildings 
+   sleep(1000)
+   campaign_message_box(diary_page_2)
+   sleep(1000)
+   campaign_message_box(amalea_1)
+   run(dismantle)
+   run(farm_plans)
 
-   -- campaign_message_box(diary_page_3)
    -- sleep(400)
-   -- 
-   -- sleep(400)
-   -- campaign_message_box(amalea)
+
    -- sleep(400)
    -- campaign_message_box(saledus_1)
    -- o = add_campaign_objective(obj_build_first_outpost)
-   -- while #p1:get_buildings("empire_outpost") < 1 do sleep(3249) end
-   -- o.done = true
+
 
    -- -- Outpost is completed now
    -- campaign_message_box(saledus_2)
-   -- o1 = add_campaign_objective(obj_build_quarry)
+
    -- 
    -- while #p1:get_buildings("empire_quarry") < 1 do sleep(3000) end
    -- o1.done = true
