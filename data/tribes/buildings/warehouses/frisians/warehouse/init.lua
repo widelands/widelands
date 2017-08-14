@@ -7,7 +7,6 @@ tribes:new_warehouse_type {
    descname = pgettext("frisians_building", "Warehouse"),
    helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
-   representative_image = dirname .. "representative_image.png",
    size = "medium",
 
    buildcost = {
@@ -26,13 +25,8 @@ tribes:new_warehouse_type {
    animations = {
       idle = {
          pictures = path.list_files(dirname .. "idle_??.png"),
-         hotspot = { 60, 78 },
-         scale = 3.62
+         hotspot = { 51, 83 },
       },
-      build = {
-         pictures = path.list_files(dirname .. "build_??.png"),
-         hotspot = { 60, 78 },
-      }
    },
 
    aihints = {},

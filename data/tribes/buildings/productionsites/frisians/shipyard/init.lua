@@ -7,7 +7,6 @@ tribes:new_productionsite_type {
    descname = pgettext("frisians_building", "Shipyard"),
    helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
-   representative_image = dirname .. "representative_image.png",
    size = "medium",
    needs_seafaring = true,
 
@@ -27,20 +26,11 @@ tribes:new_productionsite_type {
    animations = {
       idle = {
          pictures = path.list_files(dirname .. "idle_??.png"),
-         hotspot = { 62, 48 },
-         scale = 3.26
-      },
-      build = {
-         pictures = path.list_files(dirname .. "build_??.png"),
-         hotspot = { 62, 48 },
-      },
-      unoccupied = {
-         pictures = path.list_files(dirname .. "unoccupied_??.png"),
-         hotspot = { 62, 48 },
+         hotspot = { 51, 53 },
       },
       working = {
-         pictures = path.list_files(dirname .. "working_??.png"),
-         hotspot = { 62, 48 },
+         pictures = path.list_files(dirname .. "idle_??.png"), --TODO no animation yet
+         hotspot = { 51, 53 },
       },
    },
 
