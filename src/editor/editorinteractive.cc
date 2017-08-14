@@ -122,6 +122,14 @@ EditorInteractive::EditorInteractive(Widelands::EditorGameBase& e)
 	   "wui/menus/menu_toggle_resources", "resources", _("Show Resources (on/off)"));
 	toggle_resources_->set_perm_pressed(true);
 	toggle_resources_->sigclicked.connect([this]() { toggle_resources(); });
+	toggle_immovables_ = add_toolbar_button(
+	   "wui/menus/menu_toggle_immovables", "immovables", _("Show Immovables (on/off)"));
+	toggle_immovables_->set_perm_pressed(true);
+	toggle_immovables_->sigclicked.connect([this]() { toggle_immovables(); });
+	toggle_bobs_ = add_toolbar_button(
+	   "wui/menus/menu_toggle_bobs", "animals", _("Show Animals (on/off)"));
+	toggle_bobs_->set_perm_pressed(true);
+	toggle_bobs_->sigclicked.connect([this]() { toggle_bobs(); });
 
 	toolbar_.add_space(15);
 
@@ -339,6 +347,18 @@ void EditorInteractive::toggle_resources() {
 	toggle_resources_->set_perm_pressed(value);
 }
 
+void EditorInteractive::toggle_immovables() {
+	const bool value = !draw_immovables();
+	set_draw_immovables(value);
+	toggle_immovables_->set_perm_pressed(value);
+}
+
+void EditorInteractive::toggle_bobs() {
+	const bool value = !draw_bobs();
+	set_draw_bobs(value);
+	toggle_bobs_->set_perm_pressed(value);
+}
+
 bool EditorInteractive::handle_key(bool const down, SDL_Keysym const code) {
 	bool handled = InteractiveBase::handle_key(down, code);
 
@@ -413,6 +433,11 @@ bool EditorInteractive::handle_key(bool const down, SDL_Keysym const code) {
 			handled = true;
 			break;
 
+		case SDLK_a:
+			toggle_bobs();
+			handled = true;
+			break;
+
 		case SDLK_c:
 			set_display_flag(
 			   InteractiveBase::dfShowCensus, !get_display_flag(InteractiveBase::dfShowCensus));
@@ -458,6 +483,11 @@ bool EditorInteractive::handle_key(bool const down, SDL_Keysym const code) {
 
 		case SDLK_t:
 			toolmenu_.toggle();
+			handled = true;
+			break;
+
+		case SDLK_w:
+			toggle_immovables();
 			handled = true;
 			break;
 

@@ -43,6 +43,9 @@ public:
 		std::map<Widelands::Coords, uint8_t> road_building_preview;
 	};
 
+	enum class DrawImmovables { kNo, kYes };
+	enum class DrawBobs { kNo, kYes };
+
 	GameRenderer();
 	~GameRenderer();
 
@@ -57,11 +60,14 @@ public:
 	               RenderTarget* dst);
 
 	// Renders the map from an omniscient perspective. This is used
-	// for spectators, players that see all, and in the editor.
+	// for spectators, players that see all, and in the editor. Only in the editor we allow toggling
+	// of immovables and bobs.
 	void rendermap(const Widelands::EditorGameBase& egbase,
 	               const Vector2f& viewpoint,
 	               float scale,
 	               const Overlays& overlays,
+						const DrawImmovables& draw_immovables,
+						const DrawBobs& draw_bobs,
 	               RenderTarget* dst);
 
 private:
@@ -71,6 +77,8 @@ private:
 	          const Vector2f& viewpoint,
 	          float scale,
 	          const Overlays& overlays,
+	          const DrawImmovables& draw_immovables,
+	          const DrawBobs& draw_bobs,
 	          const Widelands::Player* player,
 	          RenderTarget* dst);
 

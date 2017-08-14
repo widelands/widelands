@@ -96,7 +96,7 @@ float field_brightness(const FCoords& fcoords,
 	return brightness / 255.;
 }
 
-void draw_objects_for_visible_field(const EditorGameBase& egbase,
+void draw_immovables_for_visible_field(const EditorGameBase& egbase,
                                     const FieldsToDraw::Field& field,
                                     const float zoom,
                                     const TextToDraw text_to_draw,
@@ -111,10 +111,17 @@ void draw_objects_for_visible_field(const EditorGameBase& egbase,
 			draw_text_for_this_immovable =
 			   static_cast<TextToDraw>(draw_text_for_this_immovable & ~TextToDraw::kStatistics);
 		}
-
 		imm->draw(
 		   egbase.get_gametime(), draw_text_for_this_immovable, field.rendertarget_pixel, zoom, dst);
 	}
+}
+
+void draw_bobs_for_visible_field(const EditorGameBase& egbase,
+                                    const FieldsToDraw::Field& field,
+                                    const float zoom,
+                                    const TextToDraw text_to_draw,
+                                    const Player* player,
+                                    RenderTarget* dst) {
 	for (Bob* bob = field.fcoords.field->get_first_bob(); bob; bob = bob->get_next_bob()) {
 		TextToDraw draw_text_for_this_bob = text_to_draw;
 		const Player* owner = bob->get_owner();
@@ -127,7 +134,7 @@ void draw_objects_for_visible_field(const EditorGameBase& egbase,
 	}
 }
 
-void draw_objects_for_formerly_visible_field(const FieldsToDraw::Field& field,
+void draw_immovables_for_formerly_visible_field(const FieldsToDraw::Field& field,
                                              const Player::Field& player_field,
                                              const float zoom,
                                              RenderTarget* dst) {
@@ -209,6 +216,8 @@ void draw_objects(const EditorGameBase& egbase,
                   const FieldsToDraw& fields_to_draw,
                   const Player* player,
                   const TextToDraw text_to_draw,
+						const GameRenderer::DrawImmovables& draw_immovables,
+						const GameRenderer::DrawBobs& draw_bobs,
                   RenderTarget* dst) {
 	for (size_t current_index = 0; current_index < fields_to_draw.size(); ++current_index) {
 		const FieldsToDraw::Field& field = fields_to_draw.at(current_index);
@@ -220,7 +229,7 @@ void draw_objects(const EditorGameBase& egbase,
 		const FieldsToDraw::Field& bln = fields_to_draw.at(field.bln_index);
 		const FieldsToDraw::Field& brn = fields_to_draw.at(field.brn_index);
 
-		if (field.is_border) {
+		if (field.is_border && draw_immovables == GameRenderer::DrawImmovables::kYes) {
 			assert(field.owner != nullptr);
 			uint32_t const anim_idx = field.owner->tribe().frontier_animation();
 			if (field.vision) {
@@ -237,14 +246,19 @@ void draw_objects(const EditorGameBase& egbase,
 		}
 
 		if (1 < field.vision) {  // Render stuff that belongs to the node.
-			draw_objects_for_visible_field(egbase, field, zoom, text_to_draw, player, dst);
-		} else if (field.vision == 1) {
+			if (draw_immovables == GameRenderer::DrawImmovables::kYes) {
+				draw_immovables_for_visible_field(egbase, field, zoom, text_to_draw, player, dst);
+			}
+			if (draw_bobs == GameRenderer::DrawBobs::kYes) {
+				draw_bobs_for_visible_field(egbase, field, zoom, text_to_draw, player, dst);
+			}
+		} else if (field.vision == 1 && draw_immovables == GameRenderer::DrawImmovables::kYes) {
 			// We never show census or statistics for objects in the fog.
 			assert(player != nullptr);
 			const Map& map = egbase.map();
 			const Player::Field& player_field =
 			   player->fields()[map.get_index(field.fcoords, map.get_width())];
-			draw_objects_for_formerly_visible_field(field, player_field, zoom, dst);
+			draw_immovables_for_formerly_visible_field(field, player_field, zoom, dst);
 		}
 
 		egbase.get_ibase()->field_overlay_manager().foreach_overlay(
@@ -271,21 +285,25 @@ void GameRenderer::rendermap(const Widelands::EditorGameBase& egbase,
                              const Widelands::Player& player,
                              const Overlays& overlays,
                              RenderTarget* dst) {
-	draw(egbase, viewpoint, zoom, overlays, &player, dst);
+	draw(egbase, viewpoint, zoom, overlays, DrawImmovables::kYes, DrawBobs::kYes, &player, dst);
 }
 
 void GameRenderer::rendermap(const Widelands::EditorGameBase& egbase,
                              const Vector2f& viewpoint,
                              const float zoom,
                              const Overlays& overlays,
+                             const DrawImmovables& draw_immovables,
+                             const DrawBobs& draw_bobs,
                              RenderTarget* dst) {
-	draw(egbase, viewpoint, zoom, overlays, nullptr, dst);
+	draw(egbase, viewpoint, zoom, overlays, draw_immovables, draw_bobs, nullptr, dst);
 }
 
 void GameRenderer::draw(const EditorGameBase& egbase,
                         const Vector2f& viewpoint,
                         const float zoom,
                         const Overlays& overlays,
+                        const DrawImmovables& draw_immovables,
+                        const DrawBobs& draw_bobs,
                         const Player* player,
                         RenderTarget* dst) {
 	assert(viewpoint.x >= 0);  // divisions involving negative numbers are bad
@@ -410,5 +428,6 @@ void GameRenderer::draw(const EditorGameBase& egbase,
 	i.program_id = RenderQueue::Program::kTerrainRoad;
 	RenderQueue::instance().enqueue(i);
 
-	draw_objects(egbase, scale, fields_to_draw_, player, overlays.text_to_draw, dst);
+	draw_objects(egbase, scale, fields_to_draw_, player, overlays.text_to_draw, draw_immovables,
+	             draw_bobs, dst);
 }

@@ -407,8 +407,13 @@ void MapView::draw(RenderTarget& dst) {
 		renderer_->rendermap(
 		   egbase, view_.viewpoint, view_.zoom, interactive_player->player(), overlays, &dst);
 	} else {
+		const auto draw_immovables = intbase().draw_immovables() ?
+		                                  GameRenderer::DrawImmovables::kYes :
+		                                  GameRenderer::DrawImmovables::kNo;
+		const auto draw_bobs =
+		   intbase().draw_bobs() ? GameRenderer::DrawBobs::kYes : GameRenderer::DrawBobs::kNo;
 		const GameRenderer::Overlays overlays{static_cast<TextToDraw>(text_to_draw), {}};
-		renderer_->rendermap(egbase, view_.viewpoint, view_.zoom, overlays, &dst);
+		renderer_->rendermap(egbase, view_.viewpoint, view_.zoom, overlays, draw_immovables, draw_bobs, &dst);
 	}
 }
 
