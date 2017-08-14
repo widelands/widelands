@@ -122,6 +122,7 @@ Game::Game()
      ctrl_(nullptr),
      writereplay_(true),
      writesyncstream_(false),
+     ai_training_mode_(false),
      state_(gs_notrunning),
      cmdqueue_(*this),
      /** TRANSLATORS: Win condition for this game has not been set. */
@@ -149,6 +150,10 @@ InteractivePlayer* Game::get_ipl() {
 
 void Game::set_game_controller(GameController* const ctrl) {
 	ctrl_ = ctrl;
+}
+
+void Game::set_ai_training_mode(const bool mode) {
+	ai_training_mode_ = mode;
 }
 
 GameController* Game::game_controller() {
@@ -334,15 +339,13 @@ void Game::init_savegame(UI::ProgressWindow* loader_ui, const GameSettings& sett
 	}
 }
 
-bool Game::run_load_game(const std::string& filename, const std::string& script_to_run, const bool ai_training_mode) {
+bool Game::run_load_game(const std::string& filename, const std::string& script_to_run) {
 	UI::ProgressWindow loader_ui;
 	std::vector<std::string> tipstext;
 	tipstext.push_back("general_game");
 	tipstext.push_back("singleplayer");
 	GameTips tips(loader_ui, tipstext);
 	int8_t player_nr;
-
-	ai_training_mode_ = ai_training_mode;
 
 	loader_ui.step(_("Preloading map"));
 
@@ -373,7 +376,7 @@ bool Game::run_load_game(const std::string& filename, const std::string& script_
 
 	set_game_controller(new SinglePlayerGameController(*this, true, player_nr));
 	try {
-		bool const result = run(&loader_ui, Loaded, script_to_run, false, "single_player", ai_training_mode_);
+		bool const result = run(&loader_ui, Loaded, script_to_run, false, "single_player");
 		delete ctrl_;
 		ctrl_ = nullptr;
 		return result;

@@ -214,6 +214,8 @@ private:
 
 	void cleanup_replays();
 
+	void cleanup_ai_files();
+
 	bool redirect_output(std::string path = "");
 
 	// Handle the given pressed key. Returns true when key was
@@ -232,10 +234,6 @@ private:
 	std::string script_to_run_;
 
 	GameType game_type_;
-
-	/// Game to be run in ai_training mode
-	bool ai_training_mode_;
-
 
 	/// True if left and right mouse button should be swapped
 	bool mouse_swapped_;

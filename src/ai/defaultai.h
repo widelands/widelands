@@ -219,6 +219,7 @@ private:
 
 	Widelands::EconomyObserver* get_economy_observer(Widelands::Economy&);
 	uint8_t count_buildings_with_attribute(Widelands::BuildingAttribute);
+	uint32_t count_productionsites_without_buildings();
 	Widelands::BuildingObserver& get_building_observer(char const*);
 	bool has_building_observer(char const*);
 	Widelands::BuildingObserver& get_building_observer(Widelands::BuildingAttribute);
@@ -393,6 +394,8 @@ private:
 
 	bool has_critical_mines = false;
 	uint16_t buil_material_mines_count = 0;
+
+	bool ai_training_mode_ = false;
 
 	// Notification subscribers
 	std::unique_ptr<Notifications::Subscriber<Widelands::NoteFieldPossession>>

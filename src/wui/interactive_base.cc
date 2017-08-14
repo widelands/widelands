@@ -56,9 +56,6 @@
 #include "wui/minimap.h"
 #include "wui/unique_window_handler.h"
 
-// TODO(tiborb): This constant is temporary and should be replaced by command line switch
-//constexpr bool AItrainingMode = false;NOCOM
-
 using Widelands::Area;
 using Widelands::CoordPath;
 using Widelands::Coords;
@@ -119,7 +116,7 @@ InteractiveBase::InteractiveBase(EditorGameBase& the_egbase, Section& global_s)
 	sound_subscriber_ = Notifications::subscribe<NoteSound>([this](const NoteSound& note) {
 		if (note.stereo_position != std::numeric_limits<uint32_t>::max()) {
 			g_sound_handler.play_fx(note.fx, note.stereo_position, note.priority);
-		} else if (note.coords != Widelands::Coords(-1, -1)) {
+		} else if (note.coords != Widelands::Coords::null()) {
 			g_sound_handler.play_fx(note.fx, stereo_position(note.coords), note.priority);
 		}
 	});
@@ -358,7 +355,7 @@ void InteractiveBase::draw_overlay(RenderTarget& dst) {
 	// range 13 - 15, this is used for training of AI
 	if (is_game) {
 		if (upcast(Game, game, &egbase())) {
-				if (game->is_ai_training_mode()){
+				if (game->is_ai_training_mode()) {
 				uint32_t cur_fps = 1000000 / avg_usframetime_;
 				int32_t speed_diff = 0;
 				if (cur_fps < 13) {

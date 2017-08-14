@@ -1,42 +1,26 @@
 set -ex
 
-# Some of these commands fail transiently. We keep retrying them until they
-# succeed.
-if [ "$CXX" = "g++" ]; then
-   until sudo add-apt-repository ppa:ubuntu-toolchain-r/test -y; do sleep 10; done
-fi
-if [ "$CXX" = "clang++" ]; then
-  until sudo add-apt-repository "deb http://llvm.org/apt/trusty/ llvm-toolchain-trusty-$CLANG_VERSION main"; do sleep 10; done;
-  wget -O - http://llvm.org/apt/llvm-snapshot.gpg.key | sudo apt-key add -
-fi
-until sudo add-apt-repository ppa:zoogie/sdl2-snapshots -y; do sleep 10; done
-until sudo apt-get update -qq --force-yes -y; do sleep 10; done
+if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
+  #Install requested compiler version for linux
 
-if [ "$CXX" = "g++" ]; then
-   sudo apt-get install -qq --force-yes -y g++-$GCC_VERSION;
-   export CXX="g++-$GCC_VERSION" CC="gcc-$GCC_VERSION";
-fi
-if [ "$CXX" = "clang++" ]; then
-   sudo apt-get install -qq --force-yes -y clang-$CLANG_VERSION;
-   export CXX="clang++-$CLANG_VERSION" CC="clang-$CLANG_VERSION";
+  if [ "$CXX" = "g++" ]; then
+    sudo apt-get install -qq g++-$GCC_VERSION;
+    export CXX="g++-$GCC_VERSION" CC="gcc-$GCC_VERSION";
+  fi
+  if [ "$CXX" = "clang++" ]; then
+    sudo apt-get install -qq clang-$CLANG_VERSION;
+    export CXX="clang++-$CLANG_VERSION" CC="clang-$CLANG_VERSION";
+  fi
 fi
 
-until sudo apt-get install -qq --force-yes -y \
-   cmake \
-   libboost-dev \
-   libboost-regex-dev \
-   libboost-system-dev \
-   libboost-test-dev \
-   libglew-dev \
-   libicu-dev \
-   libpng-dev \
-   libsdl2-dev \
-   libsdl2-image-dev \
-   libsdl2-mixer-dev \
-   libsdl2-ttf-dev \
-   python-pip \
-   zlib1g-dev \
-; do sleep 10; done
+if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
+  # Install osx dependencies
+  # boost and cmake are preinstalled :)
+  brew install gettext glew icu4c sdl2 sdl2_image sdl2_mixer sdl2_ttf zlib
+  # brew doesn't add a link by default
+  brew link --force gettext
+  brew link --force icu4c
+fi
 
 # Configure the build
 mkdir build
@@ -70,6 +54,8 @@ fi
 # Do the actual build.
 make -k -j3
 
-# Run the regression suite.
-cd ..
-./regression_test.py -b build/src/widelands
+if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
+  # Run the regression suite. Haven't gotten it working on osx, due to problems with xvfb and/or opengl support.
+  cd ..
+  ./regression_test.py -b build/src/widelands
+fi
