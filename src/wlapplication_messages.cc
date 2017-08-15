@@ -90,9 +90,9 @@ void show_usage(const std::string& build_id, const std::string& build_type) {
 	               "                      You can add a =FILENAME to directly load\n"
 	               "                      the map FILENAME in editor.")
 	          << endl
-	          << _(" --ai_training        Starts in AI training mode: wai files are generated,\n"
-	               "                      autospeed is activated, and higher mutation rates are\n"
-	               "                      used.")
+	          << _(" --ai_training        Starts Widelands in AI training mode: wai files will\n"
+	               "                      be generated, autospeed activated, and higher AI\n"
+	               "                      mutation rates used.")
 	          << endl
 	          << _(" --scenario=FILENAME  Directly starts the map FILENAME as scenario\n"
 	               "                      map.")

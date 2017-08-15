@@ -489,6 +489,7 @@ void DefaultAI::late_initialization() {
 	const uint32_t gametime = game().get_gametime();
 
 	log("ComputerPlayer(%d): initializing as type %u%s\n", player_number(),
+		 // NOCOM(#codereview): Please add blank spaces.
 	    static_cast<unsigned int>(type_), (ai_training_mode_)?", in ai training mode":"");
 	if (player_->team_number() > 0) {
 		log("    ... member of team %d\n", player_->team_number());

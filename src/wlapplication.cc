@@ -958,6 +958,9 @@ void WLApplication::handle_commandline_parameters() {
 
 	// NOCOM why non-existing section returns 'true' by default? It does not make sense to me....
 	// to be sure I set value in both alternatives
+	// NOCOM(#codereview): That decision is probably lost in the mists of time now.
+	// I agree that "false" would be better, but if we change this, we will probably miss something and break
+	// the saveloading code.
 	if (commandline_.count("ai_training")) {
 		g_options.pull_section("global").create_val("ai_training", "true");
 		commandline_.erase("ai_training");

@@ -348,42 +348,36 @@ void InteractiveBase::draw_overlay(RenderTarget& dst) {
 	avg_usframetime_ = ((avg_usframetime_ * 15) + (frametime_ * 1000)) / 16;
 	lastframe_ = curframe;
 
-	const Map& map = egbase().map();
-	const bool is_game = dynamic_cast<const Game*>(&egbase());
+	Game* game = dynamic_cast<Game*>(&egbase());
 
 	// This portion of code keeps the speed of game so that FPS are kept within
 	// range 13 - 15, this is used for training of AI
-	if (is_game) {
-		if (upcast(Game, game, &egbase())) {
-				if (game->is_ai_training_mode()) {
-				uint32_t cur_fps = 1000000 / avg_usframetime_;
-				int32_t speed_diff = 0;
-				if (cur_fps < 13) {
-					speed_diff = -100;
-				}
-				if (cur_fps > 15) {
-					speed_diff = +100;
-				}
-				if (speed_diff != 0) {
-
-					if (GameController* const ctrl = game->game_controller()) {
-						if ((ctrl->desired_speed() > 950 && ctrl->desired_speed() < 30000) ||
-						    (ctrl->desired_speed() < 1000 && speed_diff > 0) ||
-						    (ctrl->desired_speed() > 29999 && speed_diff < 0)) {
-							ctrl->set_desired_speed(ctrl->desired_speed() + speed_diff);
-						}
+	if (game != nullptr) {
+		if (game->is_ai_training_mode()) {
+			uint32_t cur_fps = 1000000 / avg_usframetime_;
+			int32_t speed_diff = 0;
+			if (cur_fps < 13) {
+				speed_diff = -100;
+			}
+			if (cur_fps > 15) {
+				speed_diff = +100;
+			}
+			if (speed_diff != 0) {
+				if (GameController* const ctrl = game->game_controller()) {
+					if ((ctrl->desired_speed() > 950 && ctrl->desired_speed() < 30000) ||
+						 (ctrl->desired_speed() < 1000 && speed_diff > 0) ||
+						 (ctrl->desired_speed() > 29999 && speed_diff < 0)) {
+						ctrl->set_desired_speed(ctrl->desired_speed() + speed_diff);
 					}
 				}
 			}
 		}
 	}
 
-
-
 	// Blit node information when in debug mode.
-	if (get_display_flag(dfDebug) || !is_game) {
+	if (get_display_flag(dfDebug) || game == nullptr) {
 		std::string node_text;
-		if (is_game) {
+		if (game != nullptr) {
 			const std::string gametime(gametimestring(egbase().get_gametime(), true));
 			std::shared_ptr<const UI::RenderedText> rendered_text =
 			   UI::g_fh1->render(as_condensed(gametime));
@@ -393,7 +387,7 @@ void InteractiveBase::draw_overlay(RenderTarget& dst) {
 			node_text = as_condensed((node_format % sel_.pos.node.x % sel_.pos.node.y).str());
 		} else {  // This is an editor
 			static boost::format node_format("(%i, %i, %i)");
-			const int32_t height = map[sel_.pos.node].get_height();
+			const int32_t height = egbase().map()[sel_.pos.node].get_height();
 			node_text = as_condensed((node_format % sel_.pos.node.x % sel_.pos.node.y % height).str());
 		}
 		std::shared_ptr<const UI::RenderedText> rendered_text = UI::g_fh1->render(node_text);
@@ -402,7 +396,7 @@ void InteractiveBase::draw_overlay(RenderTarget& dst) {
 	}
 
 	// Blit FPS when playing a game in debug mode.
-	if (get_display_flag(dfDebug) && is_game) {
+	if (get_display_flag(dfDebug) && game != nullptr) {
 		static boost::format fps_format("%5.1f fps (avg: %5.1f fps)");
 		std::shared_ptr<const UI::RenderedText> rendered_text = UI::g_fh1->render(as_condensed(
 		   (fps_format % (1000.0 / frametime_) % (1000.0 / (avg_usframetime_ / 1000))).str()));
