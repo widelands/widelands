@@ -67,7 +67,7 @@ int FieldOverlayManager::get_buildhelp_overlay(const Widelands::FCoords& fc) con
 	}
 	if ((caps & Widelands::BUILDCAPS_SIZEMASK) == Widelands::BUILDCAPS_BIG) {
 		if (caps & Widelands::BUILDCAPS_PORT) {
-			return  Widelands::Field::Buildhelp_Port;
+			return Widelands::Field::Buildhelp_Port;
 		}
 		return Widelands::Field::Buildhelp_Big;
 	}
@@ -85,15 +85,14 @@ int FieldOverlayManager::get_buildhelp_overlay(const Widelands::FCoords& fc) con
 
 void FieldOverlayManager::register_overlay(const Widelands::Coords& c,
                                            const Image* pic,
-														 const OverlayLevel& level,
+                                           const OverlayLevel& level,
                                            Vector2i hotspot,
                                            OverlayId const overlay_id) {
 	if (hotspot == Vector2i::invalid()) {
 		hotspot = Vector2i(pic->width() / 2, pic->height() / 2);
 	}
 
-	for (auto it = overlays_.find(c);
-	     it != overlays_.end() && it->first == c; ++it)
+	for (auto it = overlays_.find(c); it != overlays_.end() && it->first == c; ++it)
 		if (it->second.pic == pic && it->second.hotspot == hotspot && it->second.level == level) {
 			it->second.overlay_ids.insert(overlay_id);
 			return;
@@ -180,4 +179,3 @@ void FieldOverlayManager::set_enabled(const OverlayLevel& level, const bool enab
 		disabled_layers_.insert(level);
 	}
 }
-

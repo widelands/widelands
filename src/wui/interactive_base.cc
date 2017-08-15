@@ -760,8 +760,9 @@ void InteractiveBase::roadb_add_overlay() {
 		else
 			name = "images/wui/overlays/roadb_red.png";
 
-		field_overlay_manager_->register_overlay(
-		   neighb, g_gr->images().get(name), OverlayLevel::kRoadBuildSlope, Vector2i::invalid(), road_buildhelp_overlay_jobid_);
+		field_overlay_manager_->register_overlay(neighb, g_gr->images().get(name),
+		                                         OverlayLevel::kRoadBuildSlope, Vector2i::invalid(),
+		                                         road_buildhelp_overlay_jobid_);
 	}
 }
 

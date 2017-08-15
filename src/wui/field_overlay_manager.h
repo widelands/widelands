@@ -65,8 +65,7 @@ struct FieldOverlayManager {
 
 	/// A function returning Field::nodecaps() for the build overlay. This can be
 	/// registered to hide or change some of the nodecaps during rendering.
-	using CallbackFn =
-	   std::function<int32_t(const Widelands::FCoords& coordinates)>;
+	using CallbackFn = std::function<int32_t(const Widelands::FCoords& coordinates)>;
 
 	FieldOverlayManager();
 
@@ -91,7 +90,7 @@ struct FieldOverlayManager {
 	/// Vector2i::invalid(), the center of the picture will be used as hotspot.
 	void register_overlay(const Widelands::Coords& coords,
 	                      const Image* pic,
-								 const OverlayLevel& overlay_level,
+	                      const OverlayLevel& overlay_level,
 	                      Vector2i hotspot = Vector2i::invalid(),
 	                      OverlayId overlay_id = 0);
 
@@ -131,8 +130,7 @@ struct FieldOverlayManager {
 			}
 			++it;
 		}
-}
-
+	}
 
 private:
 	static constexpr int kLevelForBuildHelp = 5;
