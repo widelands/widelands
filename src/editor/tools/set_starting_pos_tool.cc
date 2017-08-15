@@ -31,8 +31,7 @@ static int32_t current_player_;
 /*
  * static callback function for overlay calculation
  */
-int32_t editor_tool_set_starting_pos_callback(const Widelands::TCoords<Widelands::FCoords>& c,
-                                              Widelands::Map& map) {
+int32_t editor_tool_set_starting_pos_callback(const Widelands::FCoords& c, Widelands::Map& map) {
 	// Area around already placed players
 	Widelands::PlayerNumber const nr_players = map.get_nrplayers();
 	for (Widelands::PlayerNumber p = 1, last = current_player_ - 1;; ++p) {
@@ -102,8 +101,9 @@ void EditorSetStartingPosTool::set_starting_pos(EditorInteractive& eia,
 	const Image* player_image = playercolor_image(plnum - 1, "images/players/player_position.png");
 	assert(player_image);
 
-	overlay_manager->register_overlay(
-	   c, player_image, 8, Vector2i(player_image->width() / 2, STARTING_POS_HOTSPOT_Y), overlay_id);
+	overlay_manager->register_overlay(c, player_image, OverlayLevel::kPlayerStartingPosition,
+	                                  Vector2i(player_image->width() / 2, STARTING_POS_HOTSPOT_Y),
+	                                  overlay_id);
 
 	//  set new player pos
 	map->set_starting_pos(plnum, c);

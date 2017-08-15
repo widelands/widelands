@@ -59,7 +59,6 @@ private:
 	std::vector<FieldOverlayManager::OverlayId> overlay_ids_;
 };
 
-int32_t editor_tool_set_starting_pos_callback(const Widelands::TCoords<Widelands::FCoords>& c,
-                                              Widelands::Map& map);
+int32_t editor_tool_set_starting_pos_callback(const Widelands::FCoords& c, Widelands::Map& map);
 
 #endif  // end of include guard: WL_EDITOR_TOOLS_SET_STARTING_POS_TOOL_H

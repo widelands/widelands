@@ -47,7 +47,18 @@ class Image;
  *     with the overlay_id can be called and all overlays created in the
  *     job are removed.
  */
-constexpr int kLevelForBuildHelp = 5;
+
+// Levels for the overlay registers. This defines in which order they will be
+// drawn. Buildhelp is special and has the value 5, i.e. every smaller will be
+// drawn below the buildhelp, everything higher above.
+enum class OverlayLevel {
+	kWorkAreaPreview = 0,
+	kResource = 4,
+	kSelection = 7,
+	kRoadBuildSlope = 8,
+	kPlayerStartingPosition = 9,
+};
+
 struct FieldOverlayManager {
 	/// A unique id identifying a registered overlay.
 	using OverlayId = uint32_t;
@@ -65,8 +76,7 @@ struct FieldOverlayManager {
 
 	/// A function returning Field::nodecaps() for the build overlay. This can be
 	/// registered to hide or change some of the nodecaps during rendering.
-	using CallbackFn =
-	   std::function<int32_t(const Widelands::TCoords<Widelands::FCoords>& coordinates)>;
+	using CallbackFn = std::function<int32_t(const Widelands::FCoords& coordinates)>;
 
 	FieldOverlayManager();
 
@@ -85,14 +95,14 @@ struct FieldOverlayManager {
 	/// Register an overlay at a location (node or triangle). hotspot is the point
 	/// of the picture that will be exactly over the location. If hotspot is
 	/// Vector2i::invalid(), the center of the picture will be used as hotspot.
-	void register_overlay(const Widelands::TCoords<>& coords,
+	void register_overlay(const Widelands::Coords& coords,
 	                      const Image* pic,
-	                      int32_t level,
+	                      const OverlayLevel& overlay_level,
 	                      Vector2i hotspot = Vector2i::invalid(),
 	                      OverlayId overlay_id = 0);
 
 	/// removes all overlays when pic is nullptr.
-	void remove_overlay(Widelands::TCoords<>, const Image* pic);
+	void remove_overlay(const Widelands::Coords& coords, const Image* pic);
 
 	/// remove all overlays with this overlay_id
 	void remove_overlay(OverlayId overlay_id);
@@ -102,34 +112,28 @@ struct FieldOverlayManager {
 	void remove_all_overlays();
 
 	/// Returns the currently registered overlays and the buildhelp for a node.
-	void get_overlays(Widelands::FCoords c, std::vector<OverlayInfo>* result) const;
-
-	/// Returns the currently registered overlays for a triangle.
-	void get_overlays(Widelands::TCoords<>, std::vector<OverlayInfo>* result) const;
+	void get_overlays(const Widelands::FCoords& c, std::vector<OverlayInfo>* result) const;
 
 private:
 	struct RegisteredOverlays {
 		RegisteredOverlays(const OverlayId init_overlay_id,
 		                   const Image* init_pic,
 		                   const Vector2i init_hotspot,
-		                   const int init_level)
+		                   const OverlayLevel& init_level)
 		   : pic(init_pic), hotspot(init_hotspot), level(init_level) {
 			overlay_ids.insert(init_overlay_id);
 		}
 		std::set<OverlayId> overlay_ids;
 		const Image* pic;
 		Vector2i hotspot = Vector2i::zero();
-		int level;
+		OverlayLevel level;
 	};
-
-	using RegisteredOverlaysMap = std::multimap<const Widelands::Coords, RegisteredOverlays>;
 
 	// Returns the index into buildhelp_infos_ for the correct fieldcaps for
 	// 'fc' according to the current 'callback_'.
 	int get_buildhelp_overlay(const Widelands::FCoords& fc) const;
 
-	//  indexed by TCoords<>::TriangleIndex
-	RegisteredOverlaysMap overlays_[3];
+	std::multimap<const Widelands::Coords, RegisteredOverlays> overlays_;
 
 	OverlayInfo buildhelp_infos_[Widelands::Field::Buildhelp_None];
 	bool buildhelp_;
