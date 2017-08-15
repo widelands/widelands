@@ -360,11 +360,7 @@ void EditorInteractive::toggle_bobs() {
 }
 
 bool EditorInteractive::handle_key(bool const down, SDL_Keysym const code) {
-	bool handled = InteractiveBase::handle_key(down, code);
-
 	if (down) {
-		// only on down events
-
 		switch (code.sym) {
 		// Sel radius
 		case SDLK_1:
@@ -373,56 +369,47 @@ bool EditorInteractive::handle_key(bool const down, SDL_Keysym const code) {
 			} else {
 				set_sel_radius_and_update_menu(0);
 			}
-			handled = true;
-			break;
+			return true;
 		case SDLK_2:
 			if (code.mod & (KMOD_CTRL)) {
 				toggle_resources();
 			} else {
 				set_sel_radius_and_update_menu(1);
 			}
-			handled = true;
-			break;
+			return true;
 		case SDLK_3:
 			if (code.mod & (KMOD_CTRL)) {
 				toggle_immovables();
 			} else {
 				set_sel_radius_and_update_menu(2);
 			}
-			handled = true;
-			break;
+			return true;
 		case SDLK_4:
 			if (code.mod & (KMOD_CTRL)) {
 				toggle_bobs();
 			} else {
 				set_sel_radius_and_update_menu(3);
 			}
-			handled = true;
-			break;
+			return true;
 		case SDLK_5:
 			set_sel_radius_and_update_menu(4);
-			handled = true;
-			break;
+			return true;
 		case SDLK_6:
 			set_sel_radius_and_update_menu(5);
-			handled = true;
-			break;
+			return true;
 		case SDLK_7:
 			set_sel_radius_and_update_menu(6);
-			handled = true;
-			break;
+			return true;
 		case SDLK_8:
 			set_sel_radius_and_update_menu(7);
-			handled = true;
-			break;
+			return true;
 		case SDLK_9:
 			set_sel_radius_and_update_menu(8);
-			handled = true;
-			break;
+			return true;
 		case SDLK_0:
 			if (!(code.mod & KMOD_CTRL)) {
 				set_sel_radius_and_update_menu(9);
-				handled = true;
+				return true;
 			}
 			break;
 
@@ -430,8 +417,7 @@ bool EditorInteractive::handle_key(bool const down, SDL_Keysym const code) {
 		case SDLK_RSHIFT:
 			if (tools_->use_tool == EditorTool::First)
 				select_tool(tools_->current(), EditorTool::Second);
-			handled = true;
-			break;
+			return true;
 
 		case SDLK_LCTRL:
 		case SDLK_RCTRL:
@@ -441,75 +427,62 @@ bool EditorInteractive::handle_key(bool const down, SDL_Keysym const code) {
 		case SDLK_MODE:
 			if (tools_->use_tool == EditorTool::First)
 				select_tool(tools_->current(), EditorTool::Third);
-			handled = true;
-			break;
+			return true;
 
 		case SDLK_SPACE:
 			toggle_buildhelp();
-			handled = true;
-			break;
+			return true;
 
 		case SDLK_c:
 			set_display_flag(
 			   InteractiveBase::dfShowCensus, !get_display_flag(InteractiveBase::dfShowCensus));
-			handled = true;
-			break;
+			return true;
 
 		case SDLK_h:
 			mainmenu_.toggle();
-			handled = true;
-			break;
+			return true;
 
 		case SDLK_i:
 			select_tool(tools_->info, EditorTool::First);
-			handled = true;
-			break;
+			return true;
 
 		case SDLK_l:
 			if (code.mod & (KMOD_LCTRL | KMOD_RCTRL))
 				new MainMenuLoadMap(*this);
-			handled = true;
-			break;
+			return true;
 
 		case SDLK_m:
 			minimap_registry().toggle();
-			handled = true;
-			break;
+			return true;
 
 		case SDLK_p:
 			playermenu_.toggle();
-			handled = true;
-			break;
+			return true;
 
 		case SDLK_s:
 			if (code.mod & (KMOD_LCTRL | KMOD_RCTRL))
 				new MainMenuSaveMap(*this);
-			handled = true;
-			break;
+			return true;
 
 		case SDLK_t:
 			toolmenu_.toggle();
-			handled = true;
-			break;
+			return true;
 
 		case SDLK_y:
 			if (code.mod & (KMOD_LCTRL | KMOD_RCTRL))
 				history_->redo_action(egbase().world());
-			handled = true;
-			break;
+			return true;
 
 		case SDLK_z:
 			if ((code.mod & (KMOD_LCTRL | KMOD_RCTRL)) && (code.mod & (KMOD_LSHIFT | KMOD_RSHIFT)))
 				history_->redo_action(egbase().world());
 			else if (code.mod & (KMOD_LCTRL | KMOD_RCTRL))
 				history_->undo_action(egbase().world());
-			handled = true;
-			break;
+			return true;
 
 		case SDLK_F1:
 			helpmenu_.toggle();
-			handled = true;
-			break;
+			return true;
 
 		default:
 			break;
@@ -527,13 +500,12 @@ bool EditorInteractive::handle_key(bool const down, SDL_Keysym const code) {
 		case SDLK_MODE:
 			if (tools_->use_tool != EditorTool::First)
 				select_tool(tools_->current(), EditorTool::First);
-			handled = true;
-			break;
+			return true;
 		default:
 			break;
 		}
 	}
-	return handled;
+	return InteractiveBase::handle_key(down, code);
 }
 
 void EditorInteractive::select_tool(EditorTool& primary, EditorTool::ToolIndex const which) {
