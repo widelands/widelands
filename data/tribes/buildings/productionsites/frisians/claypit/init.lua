@@ -63,4 +63,11 @@ tribes:new_productionsite_type {
          },
       },
    },
+   out_of_resource_notification = {
+      -- Translators: Short for "Out of Earth" for clay pits
+      title = _"No flat earth",
+      heading = _"Out of Earth",
+      message = pgettext("frisians_building", "The clay burner working at this clay pit can’t find any flat earth in his work area. Consider dismantling this clay pit and rebuilding it somewhere else."),
+      productivity_threshold = 33
+   },
 }

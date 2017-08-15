@@ -48,11 +48,4 @@ tribes:new_productionsite_type {
          }
       },
    },
-   out_of_resource_notification = {
-      -- Translators: Short for "Out of ..." for a resource
-      title = _"No Fruit",
-      heading = _"Out of Berries",
-      message = pgettext("frisians_building", "The fruit collector working at this collector´s house can’t find any berries in his work area. You should consider dismantling or destroying the building or building a berry farm."),
-      productivity_threshold = 66
-   },
 }
