@@ -236,7 +236,13 @@ public:
 		return ai_training_mode_;
 	}
 
+	bool is_auto_speed() const {
+		return auto_speed_;
+	}
+
 	void set_ai_training_mode(bool);
+
+	void set_auto_speed(bool);
 
 private:
 	void sync_reset();
@@ -289,6 +295,7 @@ private:
 	bool writesyncstream_;
 
 	bool ai_training_mode_;
+	bool auto_speed_;
 
 	int32_t state_;
 

@@ -353,7 +353,7 @@ void InteractiveBase::draw_overlay(RenderTarget& dst) {
 	// This portion of code keeps the speed of game so that FPS are kept within
 	// range 13 - 15, this is used for training of AI
 	if (game != nullptr) {
-		if (game->is_ai_training_mode()) {
+		if (game->is_auto_speed()) {
 			uint32_t cur_fps = 1000000 / avg_usframetime_;
 			int32_t speed_diff = 0;
 			if (cur_fps < 13) {

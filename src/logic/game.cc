@@ -123,6 +123,7 @@ Game::Game()
      writereplay_(true),
      writesyncstream_(false),
      ai_training_mode_(false),
+     auto_speed_(false),
      state_(gs_notrunning),
      cmdqueue_(*this),
      /** TRANSLATORS: Win condition for this game has not been set. */
@@ -154,6 +155,10 @@ void Game::set_game_controller(GameController* const ctrl) {
 
 void Game::set_ai_training_mode(const bool mode) {
 	ai_training_mode_ = mode;
+}
+
+void Game::set_auto_speed(const bool mode) {
+	auto_speed_ = mode;
 }
 
 GameController* Game::game_controller() {
