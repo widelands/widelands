@@ -118,10 +118,6 @@ EditorInteractive::EditorInteractive(Widelands::EditorGameBase& e)
 	toggle_buildhelp_ = add_toolbar_button(
 	   "wui/menus/menu_toggle_buildhelp", "buildhelp", _("Show Building Spaces (on/off)"));
 	toggle_buildhelp_->sigclicked.connect(boost::bind(&EditorInteractive::toggle_buildhelp, this));
-	toggle_resources_ = add_toolbar_button(
-	   "wui/menus/menu_toggle_resources", "resources", _("Show Resources (on/off)"));
-	toggle_resources_->set_perm_pressed(true);
-	toggle_resources_->sigclicked.connect([this]() { toggle_resources(); });
 	toggle_immovables_ = add_toolbar_button(
 	   "wui/menus/menu_toggle_immovables", "immovables", _("Show Immovables (on/off)"));
 	toggle_immovables_->set_perm_pressed(true);
@@ -130,6 +126,10 @@ EditorInteractive::EditorInteractive(Widelands::EditorGameBase& e)
 	   "wui/menus/menu_toggle_bobs", "animals", _("Show Animals (on/off)"));
 	toggle_bobs_->set_perm_pressed(true);
 	toggle_bobs_->sigclicked.connect([this]() { toggle_bobs(); });
+	toggle_resources_ = add_toolbar_button(
+	   "wui/menus/menu_toggle_resources", "resources", _("Show Resources (on/off)"));
+	toggle_resources_->set_perm_pressed(true);
+	toggle_resources_->sigclicked.connect([this]() { toggle_resources(); });
 
 	toolbar_.add_space(15);
 
@@ -372,21 +372,21 @@ bool EditorInteractive::handle_key(bool const down, SDL_Keysym const code) {
 			return true;
 		case SDLK_2:
 			if (code.mod & (KMOD_CTRL)) {
-				toggle_resources();
+				toggle_immovables();
 			} else {
 				set_sel_radius_and_update_menu(1);
 			}
 			return true;
 		case SDLK_3:
 			if (code.mod & (KMOD_CTRL)) {
-				toggle_immovables();
+				toggle_bobs();
 			} else {
 				set_sel_radius_and_update_menu(2);
 			}
 			return true;
 		case SDLK_4:
 			if (code.mod & (KMOD_CTRL)) {
-				toggle_bobs();
+				toggle_resources();
 			} else {
 				set_sel_radius_and_update_menu(3);
 			}
