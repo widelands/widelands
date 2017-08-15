@@ -368,19 +368,35 @@ bool EditorInteractive::handle_key(bool const down, SDL_Keysym const code) {
 		switch (code.sym) {
 		// Sel radius
 		case SDLK_1:
-			set_sel_radius_and_update_menu(0);
+			if (code.mod & (KMOD_CTRL)) {
+				toggle_buildhelp();
+			} else {
+				set_sel_radius_and_update_menu(0);
+			}
 			handled = true;
 			break;
 		case SDLK_2:
-			set_sel_radius_and_update_menu(1);
+			if (code.mod & (KMOD_CTRL)) {
+				toggle_resources();
+			} else {
+				set_sel_radius_and_update_menu(1);
+			}
 			handled = true;
 			break;
 		case SDLK_3:
-			set_sel_radius_and_update_menu(2);
+			if (code.mod & (KMOD_CTRL)) {
+				toggle_immovables();
+			} else {
+				set_sel_radius_and_update_menu(2);
+			}
 			handled = true;
 			break;
 		case SDLK_4:
-			set_sel_radius_and_update_menu(3);
+			if (code.mod & (KMOD_CTRL)) {
+				toggle_bobs();
+			} else {
+				set_sel_radius_and_update_menu(3);
+			}
 			handled = true;
 			break;
 		case SDLK_5:
@@ -433,11 +449,6 @@ bool EditorInteractive::handle_key(bool const down, SDL_Keysym const code) {
 			handled = true;
 			break;
 
-		case SDLK_a:
-			toggle_bobs();
-			handled = true;
-			break;
-
 		case SDLK_c:
 			set_display_flag(
 			   InteractiveBase::dfShowCensus, !get_display_flag(InteractiveBase::dfShowCensus));
@@ -470,11 +481,6 @@ bool EditorInteractive::handle_key(bool const down, SDL_Keysym const code) {
 			handled = true;
 			break;
 
-		case SDLK_q:
-			toggle_resources();
-			handled = true;
-			break;
-
 		case SDLK_s:
 			if (code.mod & (KMOD_LCTRL | KMOD_RCTRL))
 				new MainMenuSaveMap(*this);
@@ -483,11 +489,6 @@ bool EditorInteractive::handle_key(bool const down, SDL_Keysym const code) {
 
 		case SDLK_t:
 			toolmenu_.toggle();
-			handled = true;
-			break;
-
-		case SDLK_w:
-			toggle_immovables();
 			handled = true;
 			break;
 
