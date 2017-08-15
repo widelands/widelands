@@ -26,12 +26,6 @@
 #include "graphic/graphic.h"
 #include "logic/field.h"
 
-namespace {
-
-constexpr int kLevelForBuildHelp = 5;
-
-}  // namespace
-
 FieldOverlayManager::FieldOverlayManager() : current_overlay_id_(0) {
 	OverlayInfo* buildhelp_info = buildhelp_infos_;
 	const char* filenames[] = {"images/wui/overlays/set_flag.png", "images/wui/overlays/small.png",
@@ -62,28 +56,6 @@ bool FieldOverlayManager::buildhelp() const {
 
 void FieldOverlayManager::show_buildhelp(const bool value) {
 	buildhelp_ = value;
-}
-
-void FieldOverlayManager::get_overlays(const Widelands::FCoords& c,
-                                       std::vector<OverlayInfo>* result) const {
-	auto it = overlays_.lower_bound(c);
-	while (it != overlays_.end() && it->first == c &&
-	       static_cast<int>(it->second.level) <= kLevelForBuildHelp) {
-		result->emplace_back(it->second.pic, it->second.hotspot);
-		++it;
-	}
-
-	if (buildhelp_) {
-		int buildhelp_overlay_index = get_buildhelp_overlay(c);
-		if (buildhelp_overlay_index < Widelands::Field::Buildhelp_None) {
-			result->emplace_back(buildhelp_infos_[buildhelp_overlay_index]);
-		}
-	}
-
-	while (it != overlays_.end() && it->first == c) {
-		result->emplace_back(it->second.pic, it->second.hotspot);
-		++it;
-	}
 }
 
 int FieldOverlayManager::get_buildhelp_overlay(const Widelands::FCoords& fc) const {
@@ -194,4 +166,16 @@ void FieldOverlayManager::register_overlay_callback_function(CallbackFn function
 FieldOverlayManager::OverlayId FieldOverlayManager::next_overlay_id() {
 	++current_overlay_id_;
 	return current_overlay_id_;
+}
+
+bool FieldOverlayManager::is_enabled(const OverlayLevel& level) const {
+	return disabled_layers_.count(level) == 0;
+}
+
+void FieldOverlayManager::set_enabled(const OverlayLevel& level, const bool enabled) {
+	if (enabled) {
+		disabled_layers_.erase(level);
+	} else {
+		disabled_layers_.insert(level);
+	}
 }
