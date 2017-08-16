@@ -104,8 +104,7 @@ int32_t EditorInfoTool::handle_click_impl(const Widelands::World& world,
 		buf += std::string("• ") + _("Owned by: —") + "\n";
 	}
 
-	std::string temp = "";
-	temp = f.get_immovable() ? _("Has immovable") : _("No immovable");
+	std::string temp = f.get_immovable() ? _("Has immovable") : _("No immovable");
 	buf += "• " + temp + "\n";
 
 	temp = f.get_first_bob() ? _("Has animals") : _("No animals");

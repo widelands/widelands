@@ -801,11 +801,10 @@ void Fleet::act(Game& game, uint32_t /* data */) {
 	// looking for best scores and sending ships accordingly
 	uint16_t best_ship = 0;
 	uint16_t best_port = 0;
-	uint16_t best_score;
 
 	// after sending a ship we will remove one or more items from scores
 	while (!scores.empty()) {
-		best_score = 0;
+		uint16_t best_score = 0;
 
 		// searching for combination with highest score
 		for (const auto& combination : scores) {

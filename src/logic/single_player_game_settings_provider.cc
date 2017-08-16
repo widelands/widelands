@@ -45,7 +45,7 @@ bool SinglePlayerGameSettingsProvider::can_change_map() {
 }
 
 bool SinglePlayerGameSettingsProvider::can_change_player_state(uint8_t number) {
-	return (!s.scenario & (number != s.playernum));
+	return ((!s.scenario) && (number != s.playernum));
 }
 
 bool SinglePlayerGameSettingsProvider::can_change_player_tribe(uint8_t) {

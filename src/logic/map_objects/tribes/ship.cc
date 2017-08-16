@@ -447,7 +447,7 @@ void Ship::ship_update_idle(Game& game, Bob::State& state) {
 
 		for (Direction dir = 0; dir <= LAST_DIRECTION; ++dir) {
 			FCoords node = dir ? map.get_neighbour(position, dir) : position;
-			dirs[dir] = node.field->nodecaps() & MOVECAPS_WALK ? 10 : 0;
+			dirs[dir] = (node.field->nodecaps() & MOVECAPS_WALK) ? 10 : 0;
 
 			Area<FCoords> area(node, 0);
 			std::vector<Bob*> ships;
