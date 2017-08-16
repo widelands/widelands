@@ -34,7 +34,6 @@ tribes:new_trainingsite_type {
 
    aihints = {
       prohibited_till = 1200,
-      trainingsite_type = "basic",
       forced_after = 1800,
       very_weak_ai_limit = 1,
       weak_ai_limit = 2

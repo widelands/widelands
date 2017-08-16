@@ -772,13 +772,14 @@ void Building::send_message(Game& game,
 	    width % img % owner().get_playercolor().hex_value() % UI_FONT_SIZE_MESSAGE % description)
 	      .str();
 
-	Message* msg =
-	   new Message(msgtype, game.get_gametime(), title, icon_filename, heading, rt_description,
-	               get_position(), (link_to_building_lifetime ? serial_ : 0));
+	std::unique_ptr<Message> msg(new Message(msgtype, game.get_gametime(), title, icon_filename,
+	                                         heading, rt_description, get_position(),
+	                                         (link_to_building_lifetime ? serial_ : 0)));
 
-	if (throttle_time)
-		owner().add_message_with_timeout(game, *msg, throttle_time, throttle_radius);
-	else
-		owner().add_message(game, *msg);
+	if (throttle_time) {
+		owner().add_message_with_timeout(game, std::move(msg), throttle_time, throttle_radius);
+	} else {
+		owner().add_message(game, std::move(msg));
+	}
 }
 }

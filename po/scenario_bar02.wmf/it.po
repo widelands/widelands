@@ -16,8 +16,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-01-21 14:22+0000\n"
-"PO-Revision-Date: 2017-01-21 14:23+0000\n"
+"POT-Creation-Date: 2017-07-04 08:57+0000\n"
+"PO-Revision-Date: 2017-07-04 08:58+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Italian (http://www.transifex.com/widelands/widelands/language/it/)\n"
 "MIME-Version: 1.0\n"
@@ -367,9 +367,9 @@ msgid ""
 " former main entrance to the capital and is trying to set up a siege ring "
 "around Al’thunran. He will not let anyone enter or leave the city while the "
 "ring is intact. Until now, he has not answered any of my messages. But the "
-"time I spend waiting won’t be lost. I will further upgrade my soldiers and "
+"time I spend waiting won’t be lost. I will train my soldiers further and "
 "prepare for battle."
-msgstr "Ho inviato degli uomini a incontrare Kalitath nella sua fortezza. Ha barricato la precedente entrata principale della capitale e sta provando a creare un assedio attorno ad Al'thunrar. Non lascerà entrare o uscire dalla città nessuno finché l'assedio è in atto. Fino ad ora non ha risposto a nessuno dei messaggi. Ma il tempo che aspetto non sarà perso. Continuerò a potenziare i miei soldati e preparare la battaglia."
+msgstr ""
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:212
 msgid "Your Loyal Companion"
@@ -657,7 +657,7 @@ msgstr "Capo, ricordi i poveri trasportatori: le nostre strade diventano sempre 
 msgid "“%s”"
 msgstr "“%s”"
 
-#: ../../data/scripting/format_scenario.lua:96
+#: ../../data/scripting/format_scenario.lua:84
 msgid "New Objective"
 msgid_plural "New Objectives"
 msgstr[0] "Nuovo obiettivo"

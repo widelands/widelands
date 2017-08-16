@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-04-06 19:07+0000\n"
-"PO-Revision-Date: 2017-04-12 16:27+0000\n"
+"POT-Creation-Date: 2017-06-28 07:11+0000\n"
+"PO-Revision-Date: 2017-04-16 10:56+0000\n"
 "Last-Translator: Omar Anwar <omaraglan91@yahoo.com>\n"
 "Language-Team: Arabic (http://www.transifex.com/widelands/widelands/language/ar/)\n"
 "MIME-Version: 1.0\n"
@@ -19,7 +19,7 @@ msgstr ""
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:24
 msgid "Introduction"
-msgstr "التقديم"
+msgstr "مُقدمة"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:26
 msgid "Soldiers, Training and Warfare"
@@ -72,7 +72,7 @@ msgstr ""
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:42
 msgid "Health:"
-msgstr "الصحة"
+msgstr "الصحة:"
 
 #. TRANSLATORS: the current stats are: 13000 health, 2800 health gain.
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:44
@@ -220,7 +220,7 @@ msgstr ""
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:102
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:119
 msgid "The Training Camp"
-msgstr "مخيم التدريب"
+msgstr "مُخيم التدريب"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:103
 msgid ""
@@ -232,7 +232,7 @@ msgstr ""
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:105
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:113
 msgid "Build a training camp."
-msgstr "إبني مخيم تدريب"
+msgstr "إبني مخيم تدريب."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:109
 msgid "Build a training camp"
@@ -462,7 +462,7 @@ msgstr "عزز قلعتك إلى حصن"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:193
 msgid "Enhance your fortress to a mighty citadel."
-msgstr "عزز قلعتك إلى حصن جبار"
+msgstr "عزز قلعتك إلى حصن جبار."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:194
 msgid ""

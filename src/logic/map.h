@@ -146,7 +146,7 @@ public:
 	friend struct MapElementalPacket;
 	friend struct WidelandsMapLoader;
 
-	using PortSpacesSet = std::set<Coords, Coords::OrderingFunctor>;
+	using PortSpacesSet = std::set<Coords>;
 	using Objectives = std::map<std::string, std::unique_ptr<Objective>>;
 	using SuggestedTeam = std::vector<PlayerNumber>;  // Players in a team
 	using SuggestedTeamLineup =

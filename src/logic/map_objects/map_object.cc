@@ -564,7 +564,7 @@ void MapObject::Loader::load(FileRead& fr) {
 			throw wexception("header is %u, expected %u", header, HeaderMapObject);
 
 		uint8_t const packet_version = fr.unsigned_8();
-		if (packet_version <= 0 || packet_version > kCurrentPacketVersionMapObject) {
+		if (packet_version < 1 || packet_version > kCurrentPacketVersionMapObject) {
 			throw UnhandledVersionError("MapObject", packet_version, kCurrentPacketVersionMapObject);
 		}
 
@@ -619,6 +619,9 @@ void MapObject::save(EditorGameBase&, MapObjectSaver& mos, FileWrite& fw) {
 }
 
 std::string to_string(const MapObjectType type) {
+	// The types are documented in scripting/lua_map.cc -> LuaMapObjectDescription::get_type_name for
+	// the Lua interface, so make sure to change the documentation there when changing anything in
+	// this function.
 	switch (type) {
 	case MapObjectType::BOB:
 		return "bob";

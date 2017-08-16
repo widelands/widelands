@@ -3,18 +3,18 @@
 # 
 # Translators:
 # Aleksandr Gladkov <djanticisco@gmail.com>, 2016
-# Anton Khabarov <2233009@gmail.com>, 2015
+# Anton Khabarov <2233009@gmail.com>, 2015,2017
 # Yuriy Sokolov <lention@mail.ru>, 2015
 # Владимир Куряев <istercul@gmail.com>, 2016
-# Олег Шевчеко <olegrock@gmail.com>, 2017
+# Олег Шевченко <olegrock@gmail.com>, 2017
 # Федор <Lunar-energy@ya.ru>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-02-14 20:31+0000\n"
-"PO-Revision-Date: 2017-02-15 06:10+0000\n"
-"Last-Translator: Олег Шевчеко <olegrock@gmail.com>\n"
+"POT-Creation-Date: 2017-07-24 07:12+0000\n"
+"PO-Revision-Date: 2017-07-29 02:52+0000\n"
+"Last-Translator: Anton Khabarov <2233009@gmail.com>\n"
 "Language-Team: Russian (http://www.transifex.com/widelands/widelands/language/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -363,9 +363,9 @@ msgid ""
 " former main entrance to the capital and is trying to set up a siege ring "
 "around Al’thunran. He will not let anyone enter or leave the city while the "
 "ring is intact. Until now, he has not answered any of my messages. But the "
-"time I spend waiting won’t be lost. I will further upgrade my soldiers and "
+"time I spend waiting won’t be lost. I will train my soldiers further and "
 "prepare for battle."
-msgstr "Я послал людей встретиться с Калитатом в его крепости. Он забаррикадировал главный вход в столицу и пытается создать кольцо осады вокруг Ал'тунрана. Он не позволит никому войти или выйти из города, пока кольцо цело. До сих пор, он не ответил ни на одно из моих писем. Но то время, что я провожу в ожидании ответа, не пройдёт даром. Я продолжу тренировать моих солдат и подготовлюсь к битве."
+msgstr "Я послал людей на встречу с Калитатом в его крепость. Он забаррикадировал бывший главный вход в столицу и пытается создать осадное кольцо вокруг Аль'тунрана. Он не позволит никому войти или покинуть город, пока осада не прорвана. До сих пор он не ответил ни на одно из моих сообщений. Но время в ожидании не пройдет бесполезно. Я буду тренировать своих солдат и готовиться к битве."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:212
 msgid "Your Loyal Companion"

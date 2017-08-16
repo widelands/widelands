@@ -618,7 +618,7 @@ std::string make_ligatures(const char* input) {
 					--i;
 					previous = (i > 0) ? parseme.charAt(i - 1) : not_a_character;
 				}
-			} catch (std::out_of_range e) {
+			} catch (const std::out_of_range& e) {
 				log("Error trying to fetch Arabic diacritic form: %s\n", e.what());
 				NEVER_HERE();
 			}
@@ -644,7 +644,7 @@ std::string make_ligatures(const char* input) {
 					}
 				}
 				c = find_arabic_letter_form(c, previous, next);
-			} catch (std::out_of_range e) {
+			} catch (const std::out_of_range& e) {
 				log("Error trying to fetch Arabic character form: %s\n", e.what());
 				NEVER_HERE();
 			}

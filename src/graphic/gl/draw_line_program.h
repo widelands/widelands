@@ -14,7 +14,6 @@
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
- *
  */
 
 #ifndef WL_GRAPHIC_GL_DRAW_LINE_PROGRAM_H
@@ -28,8 +27,12 @@
 #include "graphic/color.h"
 #include "graphic/gl/utils.h"
 
-// TODO(sirver): This program actually now only draws Triangles. Merge with
-// DrawRect program.
+// This program actually only draws Triangles, which are tesselations of the
+// lines to draw. It uses the alpha value of each point to fade out the lines
+// and achieve good looking anti-aliasing.
+// Though it is conceptually quite similar to the 'FillRectProgram', the
+// differences in the fragment shader make this require a separate OpenGl
+// program, though probably some code could be shared.
 class DrawLineProgram {
 public:
 	struct PerVertexData {

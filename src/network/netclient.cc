@@ -16,8 +16,19 @@ std::unique_ptr<NetClient> NetClient::connect(const NetAddress& host) {
 }
 
 NetClient::~NetClient() {
-	if (is_connected())
+	if (is_connected()) {
 		close();
+	}
+}
+
+bool NetClient::get_remote_address(NetAddress* addr) const {
+	if (!is_connected()) {
+		return false;
+	}
+	boost::asio::ip::tcp::endpoint remote = socket_.remote_endpoint();
+	addr->ip = remote.address();
+	addr->port = remote.port();
+	return true;
 }
 
 bool NetClient::is_connected() const {
@@ -25,8 +36,9 @@ bool NetClient::is_connected() const {
 }
 
 void NetClient::close() {
-	if (!is_connected())
+	if (!is_connected()) {
 		return;
+	}
 	boost::system::error_code ec;
 	boost::asio::ip::tcp::endpoint remote = socket_.remote_endpoint(ec);
 	if (!ec) {
@@ -40,32 +52,33 @@ void NetClient::close() {
 }
 
 bool NetClient::try_receive(RecvPacket* packet) {
-	if (!is_connected())
-		return false;
+	if (is_connected()) {
+		// If we are connected, try to receive some data
 
-	uint8_t buffer[kNetworkBufferSize];
-	boost::system::error_code ec;
-	size_t length = socket_.read_some(boost::asio::buffer(buffer, kNetworkBufferSize), ec);
-	if (!ec) {
-		assert(length > 0);
-		assert(length <= kNetworkBufferSize);
-		// Has read something
-		deserializer_.read_data(buffer, length);
-	}
+		uint8_t buffer[kNetworkBufferSize];
+		boost::system::error_code ec;
+		size_t length = socket_.read_some(boost::asio::buffer(buffer, kNetworkBufferSize), ec);
+		if (!ec) {
+			assert(length > 0);
+			assert(length <= kNetworkBufferSize);
+			// Has read something
+			deserializer_.read_data(buffer, length);
+		}
 
-	if (ec && ec != boost::asio::error::would_block) {
-		// Connection closed or some error, close the socket
-		log("[NetClient] Error when trying to receive some data: %s.\n", ec.message().c_str());
-		close();
-		return false;
+		if (ec && ec != boost::asio::error::would_block) {
+			// Connection closed or some error, close the socket
+			log("[NetClient] Error when trying to receive some data: %s.\n", ec.message().c_str());
+			close();
+		}
 	}
-	// Get one packet from the deserializer
+	// Try to get one packet from the deserializer
 	return deserializer_.write_packet(packet);
 }
 
 void NetClient::send(const SendPacket& packet) {
-	if (!is_connected())
+	if (!is_connected()) {
 		return;
+	}
 
 	boost::system::error_code ec;
 #ifdef NDEBUG
@@ -100,5 +113,7 @@ NetClient::NetClient(const NetAddress& host)
 		socket_.non_blocking(true);
 	} else {
 		log("failed.\n");
+		socket_.close();
+		assert(!is_connected());
 	}
 }
