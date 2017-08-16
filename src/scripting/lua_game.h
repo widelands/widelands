@@ -118,8 +118,7 @@ public:
 	}
 
 	explicit LuaObjective(const Widelands::Objective& n);
-	LuaObjective() : name_("") {
-	}
+	LuaObjective() = default;
 	explicit LuaObjective(lua_State* L) {
 		report_error(L, "Cannot instantiate a '%s' directly!", className);
 	}

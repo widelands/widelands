@@ -967,7 +967,7 @@ void Ship::draw(const EditorGameBase& egbase,
 	Bob::draw(egbase, draw_text, field_on_dst, scale, dst);
 
 	// Show ship name and current activity
-	std::string statistics_string = "";
+	std::string statistics_string;
 	if (draw_text & TextToDraw::kStatistics) {
 		switch (ship_state_) {
 		case (ShipStates::kTransport):
@@ -1082,9 +1082,6 @@ Load / Save implementation
 */
 
 constexpr uint8_t kCurrentPacketVersion = 6;
-
-Ship::Loader::Loader() : lastdock_(0), destination_(0) {
-}
 
 const Bob::Task* Ship::Loader::get_task(const std::string& name) {
 	if (name == "shipidle" || name == "ship")
