@@ -627,8 +627,6 @@ private:
 
 // This is to keep all data related to AI magic numbers
 struct ManagementData {
-	ManagementData();
-
 	void mutate(PlayerNumber = 0);
 	void new_dna_for_persistent(uint8_t, Widelands::AiType);
 	void copy_persistent_to_local();
@@ -667,16 +665,17 @@ struct ManagementData {
 	std::vector<Neuron> neuron_pool;
 	std::vector<FNeuron> f_neuron_pool;
 	Widelands::Player::AiPersistentState* persistent_data;
-	AiDnaHandler ai_dna_handler;
 
 private:
+	void dump_output(Widelands::Player::AiPersistentState, PlayerNumber);
+
 	int32_t score = 1;
 	uint8_t primary_parent = 255;
 	uint16_t next_neuron_id = 0U;
 	uint16_t next_bi_neuron_id = 0U;
 	uint16_t performance_change = 0U;
 	Widelands::AiType ai_type = Widelands::AiType::kNormal;
-	void dump_output(Widelands::Player::AiPersistentState, PlayerNumber);
+	AiDnaHandler ai_dna_handler;
 };
 
 // this is used to count militarysites by their size

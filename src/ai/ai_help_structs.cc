@@ -327,8 +327,6 @@ void ExpansionType::set_expantion_type(const ExpansionMode etype) {
 	type = etype;
 }
 
-ManagementData::ManagementData() : persistent_data() {
-}
 
 // Initialization of neuron. Neuron is defined by curve (type) and weight [-kWeightRange,
 // kWeightRange]
