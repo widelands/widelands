@@ -157,6 +157,8 @@ private:
 	void on_buildhelp_changed(const bool value) override;
 
 	void toggle_resources();
+	void toggle_immovables();
+	void toggle_bobs();
 
 	//  state variables
 	bool need_save_;
@@ -181,6 +183,8 @@ private:
 
 	UI::Button* toggle_buildhelp_;
 	UI::Button* toggle_resources_;
+	UI::Button* toggle_immovables_;
+	UI::Button* toggle_bobs_;
 	UI::Button* undo_;
 	UI::Button* redo_;
 
