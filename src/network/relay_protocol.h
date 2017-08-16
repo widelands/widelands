@@ -174,10 +174,10 @@ enum class RelayCommand : uint8_t {
 	/**
 	 * The NetHostProxy sends a message to a connected client over the relay.
 	 * Payload:
-	 * \li unsigned_8: The id of the client.
+	 * \li NULL terminated list of unsigned_8: The ids of the clients.
 	 * \li packet: The SendPacket to relay.
 	 */
-	kToClient = 13,
+	kToClients = 13,
 
 	/**
 	 * The relay transmits a packet from a client to the NetHostProxy.
@@ -186,14 +186,6 @@ enum class RelayCommand : uint8_t {
 	 * \li packet: The SendPacket to relay.
 	 */
 	kFromClient = 14,
-
-	/**
-	 * Allows the GameHost to send a message to all connected clients.
-	 * \li packet: The SendPacket to broadcast.
-	 * \note Not implemented in NetHostProxy since not used.
-	 *       Check whether GameHost::broadcast() can use this.
-	 */
-	kBroadcast = 15,
 	/// \}
 
 	/**
@@ -217,3 +209,5 @@ enum class RelayCommand : uint8_t {
 	kFromHost = 22
 	/// \}
 };
+
+#endif  // end of include guard: WL_NETWORK_RELAY_PROTOCOL_H

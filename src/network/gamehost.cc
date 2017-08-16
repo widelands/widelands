@@ -50,6 +50,8 @@
 #include "map_io/widelands_map_loader.h"
 #include "network/constants.h"
 #include "network/internet_gaming.h"
+#include "network/nethost.h"
+#include "network/nethostproxy.h"
 #include "network/network_gaming_messages.h"
 #include "network/network_lan_promotion.h"
 #include "network/network_player_settings_backend.h"
@@ -486,7 +488,7 @@ struct GameHostImpl {
 	NetworkPlayerSettingsBackend npsb;
 
 	LanGamePromoter* promoter;
-	std::unique_ptr<NetHost> net;
+	std::unique_ptr<NetHostInterface> net;
 
 	/// List of connected clients. Note that clients are not in the same
 	/// order as players. In fact, a client must not be assigned to a player.
@@ -559,7 +561,13 @@ GameHost::GameHost(const std::string& playername, bool internet)
 	d->localplayername = playername;
 
 	// create a listening socket
-	d->net = NetHost::listen(WIDELANDS_PORT);
+	if (internet) {
+		// No real listening socket. Instead, connect to the relay server
+		d->net = NetHostProxy::connect(InternetGaming::ref().ips(),
+						InternetGaming::ref().get_local_servername(), InternetGaming::ref().relay_password());
+	} else {
+		d->net = NetHost::listen(WIDELANDS_PORT);
+	}
 	if (d->net == nullptr) {
 		// This might happen when the widelands socket is already in use
 		throw WLWarning(_("Failed to start the server!"),
@@ -1468,14 +1476,15 @@ void GameHost::set_paused(bool /* paused */) {
 }
 
 // Send the packet to all properly connected clients
-// TODO(Notabilis): Make this a function of NetHost/NetRelay
 void GameHost::broadcast(SendPacket& packet) {
+	std::vector<NetHostInterface::ConnectionId> receivers;
 	for (const Client& client : d->clients) {
 		if (client.playernum != UserSettings::not_connected()) {
 			assert(client.sock_id > 0);
-			d->net->send(client.sock_id, packet);
+			receivers.push_back(client.sock_id);
 		}
 	}
+	d->net->send(receivers, packet);
 }
 
 void GameHost::write_setting_map(SendPacket& packet) {

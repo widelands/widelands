@@ -10,11 +10,18 @@ wl_library(network
     gameclient.h
     gamehost.cc
     gamehost.h
+    netclient_interface.h
     netclient.cc
     netclient.h
+    netclientproxy.cc
+    netclientproxy.h
     nethost_interface.h
     nethost.cc
     nethost.h
+    nethostproxy.cc
+    nethostproxy.h
+    netrelayconnection.cc
+    netrelayconnection.h
     network.cc
     network.h
     network_gaming_messages.cc

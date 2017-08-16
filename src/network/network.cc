@@ -202,6 +202,17 @@ uint8_t* SendPacket::get_data() const {
 
 /*** class RecvPacket ***/
 
+RecvPacket::RecvPacket(RecvPacket&& other) {
+	index_ = other.index_;
+	buffer.swap(other.buffer);
+}
+
+RecvPacket& RecvPacket::operator=(RecvPacket&& other) {
+	index_ = other.index_;
+	buffer.swap(other.buffer);
+	return *this;
+}
+
 size_t RecvPacket::data(void* const packet_data, size_t const bufsize) {
 	if (index_ + bufsize > buffer.size())
 		throw wexception("Packet too short");

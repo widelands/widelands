@@ -667,6 +667,11 @@ const std::pair<NetAddress, NetAddress>& InternetGaming::ips() {
 	return gameips_;
 }
 
+const std::string InternetGaming::relay_password() {
+	/// NOCOM(Notabilis): Get this from the metaserver
+	return "pwd";
+}
+
 /// called by a client to join the game \arg gamename
 void InternetGaming::join_game(const std::string& gamename) {
 	if (!logged_in())
@@ -701,6 +706,14 @@ void InternetGaming::open_game() {
 	// From now on we wait for a reply from the metaserver
 	waitcmd_ = IGPCMD_GAME_OPEN;
 	waittimeout_ = time(nullptr) + INTERNET_GAMING_TIMEOUT;
+
+	/// NOCOM(Notabilis): Get this from the metaserver, as well as the password. Or use hardcoded address
+	/// and select and send password ourself? Otherwise, we have to wait here until we get the
+	/// information from the metaserver
+	NetAddress addr;
+	net->get_remote_address(&addr);
+	addr.port = 7397; // Just temporary, see relay server code
+	gameips_ = std::make_pair(addr, addr);
 }
 
 /// called by a client that is host of a game to inform the metaserver, that the game started

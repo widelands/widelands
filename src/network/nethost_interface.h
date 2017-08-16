@@ -32,7 +32,7 @@
 class NetHostInterface {
 public:
 	/// IDs used to enumerate the clients.
-	using ConnectionId = uint32_t;
+	using ConnectionId = uint8_t;
 
 	/**
 	 * Closes the server.
@@ -80,6 +80,14 @@ public:
 	 * \param packet The packet to send.
 	 */
 	virtual void send(ConnectionId id, const SendPacket& packet) = 0;
+
+	/**
+	 * Sends a packet to a group of clients.
+	 * Calling this on a closed connection will silently fail.
+	 * \param ids The connection ids of the clients that should be sent to.
+	 * \param packet The packet to send.
+	 */
+	virtual void send(const std::vector<ConnectionId>& ids, const SendPacket& packet) = 0;
 };
 
 #endif  // end of include guard: WL_NETWORK_NETHOST_INTERFACE_H

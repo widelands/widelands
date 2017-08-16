@@ -24,14 +24,13 @@
 #include <memory>
 
 #include "network/nethost_interface.h"
-#include "network/network.h"
 
 /**
  * NetHost manages the client connections of a network game in which this computer
  * participates as a server.
  * This class tries to create sockets for IPv4 and IPv6 for gaming in the local network.
  */
-class NetHost : NetHostInterface {
+class NetHost : public NetHostInterface {
 public:
 
 	/**
@@ -52,6 +51,7 @@ public:
 	bool try_accept(ConnectionId* new_id) override;
 	bool try_receive(ConnectionId id, RecvPacket* packet) override;
 	void send(ConnectionId id, const SendPacket& packet) override;
+	void send(const std::vector<ConnectionId>& ids, const SendPacket& packet) override;
 
 private:
 
@@ -97,9 +97,9 @@ private:
 
 	/// A map linking client ids to the respective data about the clients.
 	/// Client ids not in this map should be considered invalid.
-	std::map<NetHost::ConnectionId, Client> clients_;
+	std::map<NetHostInterface::ConnectionId, Client> clients_;
 	/// The next client id that will be used
-	NetHost::ConnectionId next_id_;
+	NetHostInterface::ConnectionId next_id_;
 	/// An io_service needed by boost.asio. Primary needed for async operations.
 	boost::asio::io_service io_service_;
 	/// The acceptor we get IPv4 connection requests to.

@@ -372,7 +372,8 @@ void FullscreenMenuInternetLobby::clicked_joingame() {
 		}
 		const std::pair<NetAddress, NetAddress>& ips = InternetGaming::ref().ips();
 
-		GameClient netgame(ips, InternetGaming::ref().get_local_clientname(), true);
+		GameClient netgame(ips, InternetGaming::ref().get_local_clientname(),
+							true, opengames_list_.get_selected().name);
 		netgame.run();
 	} else
 		throw wexception("No server selected! That should not happen!");
