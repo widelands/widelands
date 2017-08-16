@@ -562,7 +562,7 @@ void MapObject::Loader::load(FileRead& fr) {
 			throw wexception("header is %u, expected %u", header, HeaderMapObject);
 
 		uint8_t const packet_version = fr.unsigned_8();
-		if (packet_version <= 0 || packet_version > kCurrentPacketVersionMapObject) {
+		if (packet_version < 1 || packet_version > kCurrentPacketVersionMapObject) {
 			throw UnhandledVersionError("MapObject", packet_version, kCurrentPacketVersionMapObject);
 		}
 

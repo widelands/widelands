@@ -80,7 +80,7 @@ void update_resource_overlay(const Widelands::NoteFieldResourceChanged& note,
 		const std::string str =
 		   world.get_resource(note.fc.field->get_resources())->editor_image(amount);
 		const Image* pic = g_gr->images().get(str);
-		field_overlay_manager->register_overlay(note.fc, pic, 0);
+		field_overlay_manager->register_overlay(note.fc, pic, OverlayLevel::kResource);
 	}
 }
 
@@ -115,16 +115,22 @@ EditorInteractive::EditorInteractive(Widelands::EditorGameBase& e)
 
 	toolbar_.add_space(15);
 
+	toggle_buildhelp_ = add_toolbar_button(
+	   "wui/menus/menu_toggle_buildhelp", "buildhelp", _("Show Building Spaces (on/off)"));
+	toggle_buildhelp_->sigclicked.connect(boost::bind(&EditorInteractive::toggle_buildhelp, this));
+	toggle_resources_ = add_toolbar_button(
+	   "wui/menus/menu_toggle_resources", "resources", _("Show Resources (on/off)"));
+	toggle_resources_->set_perm_pressed(true);
+	toggle_resources_->sigclicked.connect([this]() { toggle_resources(); });
+
+	toolbar_.add_space(15);
+
 	add_toolbar_button(
 	   "wui/menus/menu_toggle_minimap", "minimap", _("Minimap"), &minimap_registry(), true);
 	minimap_registry().open_window = [this] { toggle_minimap(); };
 
-	toggle_buildhelp_ = add_toolbar_button(
-	   "wui/menus/menu_toggle_buildhelp", "buildhelp", _("Show Building Spaces (on/off)"));
-	toggle_buildhelp_->sigclicked.connect(boost::bind(&EditorInteractive::toggle_buildhelp, this));
-
-	reset_zoom_ = add_toolbar_button("wui/menus/menu_reset_zoom", "reset_zoom", _("Reset zoom"));
-	reset_zoom_->sigclicked.connect([this] {
+	auto zoom = add_toolbar_button("wui/menus/menu_reset_zoom", "reset_zoom", _("Reset zoom"));
+	zoom->sigclicked.connect([this] {
 		zoom_around(1.f, Vector2f(get_w() / 2.f, get_h() / 2.f), MapView::Transition::Smooth);
 	});
 
@@ -180,8 +186,10 @@ void EditorInteractive::register_overlays() {
 		if (uint8_t const amount = fc.field->get_resources_amount()) {
 			const std::string& immname =
 			   egbase().world().get_resource(fc.field->get_resources())->editor_image(amount);
-			if (immname.size())
-				mutable_field_overlay_manager()->register_overlay(fc, g_gr->images().get(immname), 4);
+			if (immname.size()) {
+				mutable_field_overlay_manager()->register_overlay(
+				   fc, g_gr->images().get(immname), OverlayLevel::kResource);
+			}
 		}
 	}
 }
@@ -324,6 +332,13 @@ void EditorInteractive::on_buildhelp_changed(const bool value) {
 	toggle_buildhelp_->set_perm_pressed(value);
 }
 
+void EditorInteractive::toggle_resources() {
+	auto* overlay_manager = mutable_field_overlay_manager();
+	const bool value = !overlay_manager->is_enabled(OverlayLevel::kResource);
+	overlay_manager->set_enabled(OverlayLevel::kResource, value);
+	toggle_resources_->set_perm_pressed(value);
+}
+
 bool EditorInteractive::handle_key(bool const down, SDL_Keysym const code) {
 	bool handled = InteractiveBase::handle_key(down, code);
 
@@ -414,19 +429,24 @@ bool EditorInteractive::handle_key(bool const down, SDL_Keysym const code) {
 			handled = true;
 			break;
 
-		case SDLK_m:
-			minimap_registry().toggle();
-			handled = true;
-			break;
-
 		case SDLK_l:
 			if (code.mod & (KMOD_LCTRL | KMOD_RCTRL))
 				new MainMenuLoadMap(*this);
 			handled = true;
 			break;
 
+		case SDLK_m:
+			minimap_registry().toggle();
+			handled = true;
+			break;
+
 		case SDLK_p:
 			playermenu_.toggle();
+			handled = true;
+			break;
+
+		case SDLK_q:
+			toggle_resources();
 			handled = true;
 			break;
 
@@ -441,17 +461,17 @@ bool EditorInteractive::handle_key(bool const down, SDL_Keysym const code) {
 			handled = true;
 			break;
 
+		case SDLK_y:
+			if (code.mod & (KMOD_LCTRL | KMOD_RCTRL))
+				history_->redo_action(egbase().world());
+			handled = true;
+			break;
+
 		case SDLK_z:
 			if ((code.mod & (KMOD_LCTRL | KMOD_RCTRL)) && (code.mod & (KMOD_LSHIFT | KMOD_RSHIFT)))
 				history_->redo_action(egbase().world());
 			else if (code.mod & (KMOD_LCTRL | KMOD_RCTRL))
 				history_->undo_action(egbase().world());
-			handled = true;
-			break;
-
-		case SDLK_y:
-			if (code.mod & (KMOD_LCTRL | KMOD_RCTRL))
-				history_->redo_action(egbase().world());
 			handled = true;
 			break;
 

@@ -88,8 +88,8 @@ private:
 		 * so that we can update when its status changes.
 		 */
 		/*@{*/
-		uint32_t cache_level;
-		uint32_t cache_health;
+		uint32_t cache_level = 0;
+		uint32_t cache_health = 0;
 		/*@}*/
 	};
 
@@ -229,9 +229,6 @@ void SoldierPanel::think() {
 
 			icon.pos.x = std::max<int32_t>(icon.pos.x, icon_iter->pos.x + icon_width_);
 		}
-
-		icon.cache_health = 0;
-		icon.cache_level = 0;
 
 		icons_.insert(insertpos, icon);
 		changes = true;

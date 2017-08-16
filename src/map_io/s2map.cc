@@ -49,9 +49,8 @@ using std::setiosflags;
 namespace {
 
 struct S2MapDescrHeader {
-	char magic[10];  // "WORLD_V1.0"
-	char name[20];   // We need fixed char arrays rather than strings here. Otherwise, this will
-	                 // segfault.
+	char name[20];  // We need fixed char arrays rather than strings here. Otherwise, this will
+	                // segfault.
 	int16_t w;
 	int16_t h;
 	int8_t uses_world;  // 0 = green, 1 =black, 2 = winter
@@ -1047,8 +1046,6 @@ void S2MapLoader::postload_fix_conversion(Widelands::EditorGameBase& egbase) {
 	 * 1: Try to fix port spaces
 	 */
 	const Widelands::Map::PortSpacesSet ports(map_.get_port_spaces());
-	uint16_t num_failed = 0;
-
 	const Widelands::World& world = egbase.world();
 
 	// Check if port spaces are valid
@@ -1074,7 +1071,6 @@ void S2MapLoader::postload_fix_conversion(Widelands::EditorGameBase& egbase) {
 				}
 			} while (mr.advance(map_) && !fixed);
 			if (!fixed) {
-				++num_failed;
 				log("FAILED! No alternative port buildspace for (%i, %i) found!\n", fc.x, fc.y);
 			} else
 				log("Fixed!\n");

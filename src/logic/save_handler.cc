@@ -178,7 +178,6 @@ void SaveHandler::think(Widelands::Game& game) {
 			g_fs->fs_rename(complete_filename, backup_filename);
 		}
 
-		std::string error;
 		if (!save_and_handle_error(game, complete_filename, backup_filename)) {
 			return;
 		}
