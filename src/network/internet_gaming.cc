@@ -629,7 +629,7 @@ void InternetGaming::handle_packet(RecvPacket& packet) {
 			// Client received an ERROR message - seems something went wrong
 			std::string subcmd(packet.string());
 			std::string reason(packet.string());
-			std::string message = "";
+			std::string message;
 
 			if (subcmd == IGPCMD_CHAT) {
 				// Something went wrong with the chat message the user sent.

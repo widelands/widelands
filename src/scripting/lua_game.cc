@@ -1322,7 +1322,7 @@ const Message& LuaMessage::get(lua_State* L, Widelands::Game& game) {
 */
 // TODO(sirver): this should be a method of wl.Game(). Fix for b19.
 static int L_report_result(lua_State* L) {
-	std::string info = "";
+	std::string info;
 	if (lua_gettop(L) >= 3)
 		info = luaL_checkstring(L, 3);
 

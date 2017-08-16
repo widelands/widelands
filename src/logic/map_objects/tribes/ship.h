@@ -307,7 +307,7 @@ protected:
 		uint32_t lastdock_ = 0U;
 		uint32_t destination_ = 0U;
 		ShipStates ship_state_ = ShipStates::kTransport;
-		std::string shipname_ = "";
+		std::string shipname_;
 		std::unique_ptr<Expedition> expedition_;
 		std::vector<ShippingItem::Loader> items_;
 	};

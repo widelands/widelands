@@ -967,7 +967,7 @@ void Ship::draw(const EditorGameBase& egbase,
 	Bob::draw(egbase, draw_text, field_on_dst, scale, dst);
 
 	// Show ship name and current activity
-	std::string statistics_string = "";
+	std::string statistics_string;
 	if (draw_text & TextToDraw::kStatistics) {
 		switch (ship_state_) {
 		case (ShipStates::kTransport):

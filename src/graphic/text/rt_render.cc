@@ -702,7 +702,6 @@ public:
 	     w_(w),
 	     h_(h),
 	     background_image_(nullptr),
-	     filename_(""),
 	     is_expanding_(expanding) {
 		check_size();
 	}
@@ -1264,7 +1263,6 @@ public:
 	                 const UI::FontSets& fontsets)
 	   : TagHandler(tag, fc, ns, image_cache, init_renderer_style, fontsets),
 	     background_image_(nullptr),
-	     image_filename_(""),
 	     space_(0) {
 	}
 

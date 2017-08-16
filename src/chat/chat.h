@@ -47,13 +47,13 @@ struct ChatMessage {
 	// This is a string instead of an ID because the backlog of
 	// chat messages might contain chat from a player who has since left
 	// the game.
-	std::string sender = "";
+	std::string sender;
 
 	// A string identifying the recipient of the message. This string should
 	// only be filled for personal messages. This is a string instead of an ID
 	// because the backlog of chat messages might contain chat from a player who
 	// has since left the game.
-	std::string recipient = "";
+	std::string recipient;
 
 	// The actual chat message
 	std::string msg;

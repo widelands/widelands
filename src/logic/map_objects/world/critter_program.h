@@ -35,7 +35,7 @@ struct CritterAction {
 	CritterExecuteActionFn function;
 	int32_t iparam1 = 0;
 	int32_t iparam2 = 0;
-	std::string sparam1 = "";
+	std::string sparam1;
 
 	std::vector<std::string> sparamv;
 };

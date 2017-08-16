@@ -218,9 +218,7 @@ MapObjectDescr::MapObjectDescr(const MapObjectType init_type,
                                const std::string& init_descname)
    : type_(init_type),
      name_(init_name),
-     descname_(init_descname),
-     representative_image_filename_(""),
-     icon_filename_("") {
+     descname_(init_descname) {
 }
 MapObjectDescr::MapObjectDescr(const MapObjectType init_type,
                                const std::string& init_name,
