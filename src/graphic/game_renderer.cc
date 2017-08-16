@@ -210,7 +210,6 @@ void draw_objects(const EditorGameBase& egbase,
                   const Player* player,
                   const TextToDraw text_to_draw,
                   RenderTarget* dst) {
-	std::vector<FieldOverlayManager::OverlayInfo> overlay_info;
 	for (size_t current_index = 0; current_index < fields_to_draw.size(); ++current_index) {
 		const FieldsToDraw::Field& field = fields_to_draw.at(current_index);
 		if (!field.all_neighbors_valid()) {
@@ -248,55 +247,13 @@ void draw_objects(const EditorGameBase& egbase,
 			draw_objects_for_formerly_visible_field(field, player_field, zoom, dst);
 		}
 
-		const FieldOverlayManager& overlay_manager = egbase.get_ibase()->field_overlay_manager();
-		{
-			overlay_info.clear();
-			overlay_manager.get_overlays(field.fcoords, &overlay_info);
-			for (const auto& overlay : overlay_info) {
-				dst->blitrect_scale(
-				   Rectf(field.rendertarget_pixel - overlay.hotspot.cast<float>() * zoom,
-				         overlay.pic->width() * zoom, overlay.pic->height() * zoom),
-				   overlay.pic, Recti(0, 0, overlay.pic->width(), overlay.pic->height()), 1.f,
-				   BlendMode::UseAlpha);
-			}
-		}
-
-		{
-			// Render overlays on the right triangle
-			overlay_info.clear();
-			overlay_manager.get_overlays(TCoords<>(field.fcoords, TCoords<>::R), &overlay_info);
-
-			Vector2f tripos(
-			   (field.rendertarget_pixel.x + rn.rendertarget_pixel.x + brn.rendertarget_pixel.x) / 3.f,
-			   (field.rendertarget_pixel.y + rn.rendertarget_pixel.y + brn.rendertarget_pixel.y) /
-			      3.f);
-			for (const auto& overlay : overlay_info) {
-				dst->blitrect_scale(Rectf(tripos - overlay.hotspot.cast<float>() * zoom,
-				                          overlay.pic->width() * zoom, overlay.pic->height() * zoom),
-				                    overlay.pic,
-				                    Recti(0, 0, overlay.pic->width(), overlay.pic->height()), 1.f,
-				                    BlendMode::UseAlpha);
-			}
-		}
-
-		{
-			// Render overlays on the D triangle
-			overlay_info.clear();
-			overlay_manager.get_overlays(TCoords<>(field.fcoords, TCoords<>::D), &overlay_info);
-
-			Vector2f tripos(
-			   (field.rendertarget_pixel.x + bln.rendertarget_pixel.x + brn.rendertarget_pixel.x) /
-			      3.f,
-			   (field.rendertarget_pixel.y + bln.rendertarget_pixel.y + brn.rendertarget_pixel.y) /
-			      3.f);
-			for (const auto& overlay : overlay_info) {
-				dst->blitrect_scale(Rectf(tripos - overlay.hotspot.cast<float>() * zoom,
-				                          overlay.pic->width() * zoom, overlay.pic->height() * zoom),
-				                    overlay.pic,
-				                    Recti(0, 0, overlay.pic->width(), overlay.pic->height()), 1.f,
-				                    BlendMode::UseAlpha);
-			}
-		}
+		egbase.get_ibase()->field_overlay_manager().foreach_overlay(
+		   field.fcoords, [dst, &field, zoom](const Image* pic, const Vector2i& hotspot) {
+			   dst->blitrect_scale(Rectf(field.rendertarget_pixel - hotspot.cast<float>() * zoom,
+			                             pic->width() * zoom, pic->height() * zoom),
+			                       pic, Recti(0, 0, pic->width(), pic->height()), 1.f,
+			                       BlendMode::UseAlpha);
+			});
 	}
 }
 
