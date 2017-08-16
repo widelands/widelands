@@ -475,14 +475,13 @@ private:
 };
 
 struct ProductionSiteObserver {
-	ProductionSiteObserver();
-	Widelands::ProductionSite* site;
-	uint32_t built_time;
-	uint32_t unoccupied_till;
-	uint32_t no_resources_since;
-	bool upgrade_pending;
-	uint32_t dismantle_pending_since;
-	BuildingObserver* bo;
+	Widelands::ProductionSite* site = nullptr;
+	uint32_t built_time = 0U;
+	uint32_t unoccupied_till = 0U;
+	uint32_t no_resources_since = kNever;
+	bool upgrade_pending = false;
+	uint32_t dismantle_pending_since = kNever;
+	BuildingObserver* bo = nullptr;
 };
 
 struct MilitarySiteObserver {
@@ -527,19 +526,17 @@ struct WareObserver {
 // Also AI test more such targets when considering attack and calculated score is
 // is stored in the observer
 struct EnemySiteObserver {
-	EnemySiteObserver();
-
-	bool is_warehouse;
-	int32_t attack_soldiers_strength;
-	int32_t attack_soldiers_competency;
-	int32_t defenders_strength;
-	uint8_t stationed_soldiers;
-	uint32_t last_time_seen;
-	uint32_t last_tested;
-	int16_t score;
-	Widelands::ExtendedBool mines_nearby;
-	uint32_t last_time_attacked;
-	uint32_t attack_counter;
+	bool is_warehouse = false;
+	int32_t attack_soldiers_strength = 0;
+	int32_t attack_soldiers_competency = 0;
+	int32_t defenders_strength = 0;
+	uint8_t stationed_soldiers = 0U;
+	uint32_t last_time_seen = 0U;
+	uint32_t last_tested = 0U;
+	int16_t score = 0;
+	Widelands::ExtendedBool mines_nearby = Widelands::ExtendedBool::kUnset;
+	uint32_t last_time_attacked = 0U;
+	uint32_t attack_counter = 0U;
 };
 
 // as all mines have 3 levels, AI does not know total count of mines per mined material
@@ -632,10 +629,6 @@ private:
 struct ManagementData {
 	ManagementData();
 
-	std::vector<Neuron> neuron_pool;
-	std::vector<FNeuron> f_neuron_pool;
-	Widelands::Player::AiPersistentState* _persistent_data;
-
 	void mutate(PlayerNumber = 0);
 	void new_dna_for_persistent(uint8_t, Widelands::AiType);
 	void copy_persistent_to_local();
@@ -670,15 +663,19 @@ struct ManagementData {
 	MutatingIntensity do_mutate(uint8_t, int16_t);
 	int8_t shift_weight_value(int8_t, bool = true);
 	void test_consistency(bool = false);
+
+	std::vector<Neuron> neuron_pool;
+	std::vector<FNeuron> f_neuron_pool;
+	Widelands::Player::AiPersistentState* persistent_data;
 	AiDnaHandler ai_dna_handler;
 
 private:
-	int32_t score;
-	uint8_t primary_parent;
-	uint16_t next_neuron_id;
-	uint16_t next_bi_neuron_id;
-	uint16_t performance_change;
-	Widelands::AiType ai_type;
+	int32_t score = 1;
+	uint8_t primary_parent = 255;
+	uint16_t next_neuron_id = 0U;
+	uint16_t next_bi_neuron_id = 0U;
+	uint16_t performance_change = 0U;
+	Widelands::AiType ai_type = Widelands::AiType::kNormal;
 	void dump_output(Widelands::Player::AiPersistentState, PlayerNumber);
 };
 
@@ -773,7 +770,7 @@ struct FlagsForRoads {
 struct PlayersStrengths {
 private:
 	struct PlayerStat {
-		PlayerStat();
+		PlayerStat() = default;
 		PlayerStat(Widelands::TeamNumber tc,
 		           bool en,
 		           uint32_t pp,
@@ -784,16 +781,16 @@ private:
 		           uint32_t oland,
 		           uint32_t o60l);
 
-		Widelands::TeamNumber team_number;
-		bool is_enemy;
-		uint32_t players_power;
-		uint32_t old_players_power;
-		uint32_t old60_players_power;
-		uint32_t players_casualities;
-		uint32_t last_time_seen;
-		uint32_t players_land;
-		uint32_t old_players_land;
-		uint32_t old60_players_land;
+		Widelands::TeamNumber team_number = 0U;
+		bool is_enemy = false;
+		uint32_t players_power = 0U;
+		uint32_t old_players_power = 0U;
+		uint32_t old60_players_power = 0U;
+		uint32_t players_casualities = 0U;
+		uint32_t last_time_seen = 0U;
+		uint32_t players_land = 0U;
+		uint32_t old_players_land = 0U;
+		uint32_t old60_players_land = 0U;
 	};
 
 public:
