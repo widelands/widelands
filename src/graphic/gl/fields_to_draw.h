@@ -78,6 +78,8 @@ public:
 	};
 
 	FieldsToDraw() {
+		// Initialize everything to make cppcheck happy.
+		reset(0, 0, 0, 0);
 	}
 
 	// Resize this fields to draw for reuse.

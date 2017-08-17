@@ -263,7 +263,7 @@ int32_t GameClient::get_frametime() {
 }
 
 GameController::GameType GameClient::get_game_type() {
-	return GameController::GameType::NETCLIENT;
+	return GameController::GameType::kNetClient;
 }
 
 void GameClient::report_result(uint8_t player_nr,
@@ -820,8 +820,7 @@ void GameClient::handle_packet(RecvPacket& packet) {
 	}
 
 	case NETCMD_CHAT: {
-		ChatMessage c;
-		c.time = time(nullptr);
+		ChatMessage c("");
 		c.playern = packet.signed_16();
 		c.sender = packet.string();
 		c.msg = packet.string();
@@ -833,13 +832,11 @@ void GameClient::handle_packet(RecvPacket& packet) {
 	}
 
 	case NETCMD_SYSTEM_MESSAGE_CODE: {
-		ChatMessage c;
-		c.time = time(nullptr);
-		std::string code = packet.string();
-		std::string arg1 = packet.string();
-		std::string arg2 = packet.string();
-		std::string arg3 = packet.string();
-		c.msg = NetworkGamingMessages::get_message(code, arg1, arg2, arg3);
+		const std::string code = packet.string();
+		const std::string arg1 = packet.string();
+		const std::string arg2 = packet.string();
+		const std::string arg3 = packet.string();
+		ChatMessage c(NetworkGamingMessages::get_message(code, arg1, arg2, arg3));
 		c.playern = UserSettings::none();  //  == System message
 		// c.sender remains empty to indicate a system message
 		d->chatmessages.push_back(c);

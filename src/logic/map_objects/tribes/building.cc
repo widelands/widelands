@@ -458,7 +458,7 @@ void Building::destroy(EditorGameBase& egbase) {
 }
 
 std::string Building::info_string(const InfoStringFormat& format) {
-	std::string result = "";
+	std::string result;
 	switch (format) {
 	case InfoStringFormat::kCensus:
 		if (upcast(ConstructionSite const, constructionsite, this)) {

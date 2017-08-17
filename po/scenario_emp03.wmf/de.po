@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-07-24 07:12+0000\n"
+"POT-Creation-Date: 2017-08-11 11:44+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>, 2017\n"
 "Language-Team: German (https://www.transifex.com/widelands/teams/35159/de/)\n"
@@ -177,6 +177,9 @@ msgid ""
 "We should send a ship northwards to gather some intelligence about the "
 "Barbarians. Try to build a port on the island and found an outpost."
 msgstr ""
+"Wir sollten ein Schiff gen Norden schicken, um einige Informationen über die"
+" Barbaren zu sammeln. Versuche, einen Hafen auf der Insel zu errichten, um "
+"einen Außenposten zu gründen."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:123
 msgid "Produce gold to send out expeditions"
@@ -320,6 +323,11 @@ msgid ""
 "we awoke at noon, nobody was really surprised that all we could see was "
 "sand… although the amount of rocks near our camp was astonishing."
 msgstr ""
+"Abermals strandeten wir an einer unbekannten Küste und schliefen im Schatten"
+" einiger Palmen, bis die Sonne hoch am Himmel stand. Ich befürchte niemand "
+"war wirklich überrascht, dass das Einzige was wir sehen konnten, als wir "
+"gegen Mittag erwachten, Sand war ....obwohl die Berge von Steinen neben "
+"unserem Lager waren wirklich erstaunlich."
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:207
@@ -1022,7 +1030,7 @@ msgstr ""
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:529
 msgid "Amalea’s Counsel"
-msgstr ""
+msgstr "Amaleas Ratschlag"
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:532
@@ -1100,6 +1108,9 @@ msgid ""
 "As we have seen on our journeys, it is of great importance to put the gods "
 "and especially Neptune in a good mood to safeguard our journey."
 msgstr ""
+"Wie wir auf unseren Reisen gesehen haben, ist es von großer Wichtigkeit, "
+"dass die Götter und ganz besonders Neptun uns gewogen sind, damit uns die "
+"Überfahrt gelingt."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:560
 msgid ""
@@ -1162,6 +1173,9 @@ msgid ""
 "somewhat worried that we will have to fight against them before we are ready"
 " to do so."
 msgstr ""
+"Herr, wir haben die Ruinen einer alten Barbarenfestung und eines Dorfes "
+"gefunden. Ich habe die Befürchtung, dass wir gegen sie kämpfen müssen, bevor"
+" wir dazu bereit sind. "
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:590
 msgid "Train Faster, Train Harder"

@@ -698,12 +698,7 @@ public:
 class SpaceNode : public RenderNode {
 public:
 	SpaceNode(NodeStyle& ns, uint16_t w, uint16_t h = 0, bool expanding = false)
-	   : RenderNode(ns),
-	     w_(w),
-	     h_(h),
-	     background_image_(nullptr),
-	     filename_(""),
-	     is_expanding_(expanding) {
+	   : RenderNode(ns), w_(w), h_(h), background_image_(nullptr), is_expanding_(expanding) {
 		check_size();
 	}
 
@@ -779,6 +774,8 @@ public:
 	explicit DivTagRenderNode(NodeStyle& ns)
 	   : RenderNode(ns),
 	     desired_width_(),
+	     w_(0),
+	     h_(0),
 	     background_color_(0, 0, 0),
 	     is_background_color_set_(false),
 	     background_image_(nullptr) {
@@ -1262,7 +1259,6 @@ public:
 	                 const UI::FontSets& fontsets)
 	   : TagHandler(tag, fc, ns, image_cache, init_renderer_style, fontsets),
 	     background_image_(nullptr),
-	     image_filename_(""),
 	     space_(0) {
 	}
 
