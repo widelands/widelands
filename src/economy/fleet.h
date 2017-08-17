@@ -75,7 +75,7 @@ struct Fleet : MapObject {
 
 	const FleetDescr& descr() const;
 
-	Fleet(Player& player);
+	explicit Fleet(Player& player);
 
 	Player* get_owner() const {
 		return &owner_;

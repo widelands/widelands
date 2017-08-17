@@ -49,15 +49,6 @@ wl_library(wui_economy_options
 )
 
 
-wl_library(wui_edge_overlay_manager
-  SRCS
-    edge_overlay_manager.cc
-    edge_overlay_manager.h
-  DEPENDS
-    base_macros
-    logic_widelands_geometry
-)
-
 wl_library(wui_mapview_pixelfunctions
   SRCS
     mapviewpixelconstants.h
@@ -103,7 +94,6 @@ wl_library(wui_quicknavigation
     quicknavigation.h
   DEPENDS
     base_geometry
-    widelands_ball_of_mud
     wui_mapview
 )
 
@@ -272,10 +262,8 @@ wl_library(wui
     scripting_lua_table
     sound
     ui_basic
-    widelands_ball_of_mud
     wui_chat_ui
     wui_economy_options
-    wui_edge_overlay_manager
     wui_field_overlay_manager
     wui_mapview
     wui_mapview_pixelfunctions

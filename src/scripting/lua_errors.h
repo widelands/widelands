@@ -26,12 +26,12 @@
 
 class LuaError : public WException {
 public:
-	LuaError(const std::string& reason);
+	explicit LuaError(const std::string& reason);
 };
 
 class LuaScriptNotExistingError : public LuaError {
 public:
-	LuaScriptNotExistingError(const std::string& name);
+	explicit LuaScriptNotExistingError(const std::string& name);
 };
 
 #endif  // end of include guard: WL_SCRIPTING_LUA_ERRORS_H

@@ -25,4 +25,7 @@
 /// How often are statistics to be sampled.
 constexpr uint32_t kStatisticsSampleTime = 30000;
 
+/// Default autosave interval in minutes
+constexpr int kDefaultAutosaveInterval = 15;
+
 #endif  // end of include guard: WL_LOGIC_CONSTANTS_H

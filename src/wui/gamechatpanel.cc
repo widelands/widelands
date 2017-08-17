@@ -52,7 +52,7 @@ GameChatPanel::GameChatPanel(UI::Panel* parent,
              0,
              0,
              0,
-             text_height(UI::g_fh1->fontset()->representative_character(), UI_FONT_SIZE_SMALL) + 4,
+             text_height() + 4,
              2,
              style == Style::kFsMenu ? g_gr->images().get("images/ui_basic/but2.png") :
                                        g_gr->images().get("images/ui_basic/but1.png")),

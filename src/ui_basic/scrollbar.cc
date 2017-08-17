@@ -24,7 +24,6 @@
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
 #include "ui_basic/mouse_constants.h"
-#include "wlapplication.h"
 
 namespace UI {
 

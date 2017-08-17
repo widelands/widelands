@@ -45,8 +45,6 @@
 #include "logic/player.h"
 #include "profile/profile.h"
 #include "scripting/lua_interface.h"
-#include "wlapplication.h"
-#include "wui/edge_overlay_manager.h"
 #include "wui/field_overlay_manager.h"
 #include "wui/game_chat_menu.h"
 #include "wui/game_debug_ui.h"
@@ -56,6 +54,9 @@
 #include "wui/mapviewpixelfunctions.h"
 #include "wui/minimap.h"
 #include "wui/unique_window_handler.h"
+
+// TODO(tiborb): This constant is temporary and should be replaced by command line switch
+constexpr bool AItrainingMode = false;
 
 using Widelands::Area;
 using Widelands::CoordPath;
@@ -71,7 +72,7 @@ struct InteractiveBaseInternals {
 	MiniMap::Registry minimap;
 	std::unique_ptr<QuickNavigation> quicknavigation;
 
-	InteractiveBaseInternals(QuickNavigation* qnav) : mm(nullptr), quicknavigation(qnav) {
+	explicit InteractiveBaseInternals(QuickNavigation* qnav) : mm(nullptr), quicknavigation(qnav) {
 	}
 };
 
@@ -83,7 +84,6 @@ InteractiveBase::InteractiveBase(EditorGameBase& the_egbase, Section& global_s)
      toolbar_(this, 0, 0, UI::Box::Horizontal),
      m(new InteractiveBaseInternals(new QuickNavigation(this))),
      field_overlay_manager_(new FieldOverlayManager()),
-     edge_overlay_manager_(new EdgeOverlayManager()),
      egbase_(the_egbase),
 #ifndef NDEBUG  //  not in releases
      display_flags_(dfDebug),
@@ -93,7 +93,8 @@ InteractiveBase::InteractiveBase(EditorGameBase& the_egbase, Section& global_s)
      lastframe_(SDL_GetTicks()),
      frametime_(0),
      avg_usframetime_(0),
-     jobid_(0),
+     draw_immovables_(true),
+     draw_bobs_(true),
      road_buildhelp_overlay_jobid_(0),
      buildroad_(nullptr),
      road_build_player_(0),
@@ -117,7 +118,7 @@ InteractiveBase::InteractiveBase(EditorGameBase& the_egbase, Section& global_s)
 	sound_subscriber_ = Notifications::subscribe<NoteSound>([this](const NoteSound& note) {
 		if (note.stereo_position != std::numeric_limits<uint32_t>::max()) {
 			g_sound_handler.play_fx(note.fx, note.stereo_position, note.priority);
-		} else if (note.coords != Widelands::Coords(-1, -1)) {
+		} else if (note.coords != Widelands::Coords::null()) {
 			g_sound_handler.play_fx(note.fx, stereo_position(note.coords), note.priority);
 		}
 	});
@@ -169,13 +170,13 @@ void InteractiveBase::set_sel_pos(Widelands::NodeAndTriangle<> const center) {
 		Widelands::MapTriangleRegion<> mr(map, Area<TCoords<>>(center.triangle, sel_.radius));
 		do
 			field_overlay_manager_->register_overlay(
-			   mr.location(), sel_.pic, 7, Vector2i::invalid(), jobid);
+			   mr.location(), sel_.pic, OverlayLevel::kSelection, Vector2i::invalid(), jobid);
 		while (mr.advance(map));
 	} else {
 		Widelands::MapRegion<> mr(map, Area<>(center.node, sel_.radius));
 		do
 			field_overlay_manager_->register_overlay(
-			   mr.location(), sel_.pic, 7, Vector2i::invalid(), jobid);
+			   mr.location(), sel_.pic, OverlayLevel::kSelection, Vector2i::invalid(), jobid);
 		while (mr.advance(map));
 		if (upcast(InteractiveGameBase const, igbase, this))
 			if (upcast(Widelands::ProductionSite, productionsite, map[center.node].get_immovable())) {
@@ -222,6 +223,22 @@ bool InteractiveBase::buildhelp() const {
 void InteractiveBase::show_buildhelp(bool t) {
 	field_overlay_manager_->show_buildhelp(t);
 	on_buildhelp_changed(t);
+}
+
+bool InteractiveBase::draw_bobs() const {
+	return draw_bobs_;
+}
+
+void InteractiveBase::set_draw_bobs(const bool value) {
+	draw_bobs_ = value;
+}
+
+bool InteractiveBase::draw_immovables() const {
+	return draw_immovables_;
+}
+
+void InteractiveBase::set_draw_immovables(const bool value) {
+	draw_immovables_ = value;
 }
 
 void InteractiveBase::toggle_buildhelp() {
@@ -282,8 +299,9 @@ FieldOverlayManager::OverlayId InteractiveBase::show_work_area(const WorkareaInf
 		hollow_area.radius = it->first;
 		Widelands::MapHollowRegion<> mr(map, hollow_area);
 		do
-			field_overlay_manager_->register_overlay(
-			   mr.location(), workarea_pics_[wa_index], 0, Vector2i::invalid(), overlay_id);
+			field_overlay_manager_->register_overlay(mr.location(), workarea_pics_[wa_index],
+			                                         OverlayLevel::kWorkAreaPreview,
+			                                         Vector2i::invalid(), overlay_id);
 		while (mr.advance(map));
 		wa_index++;
 		hollow_area.hole_radius = hollow_area.radius;
@@ -349,6 +367,31 @@ void InteractiveBase::draw_overlay(RenderTarget& dst) {
 	avg_usframetime_ = ((avg_usframetime_ * 15) + (frametime_ * 1000)) / 16;
 	lastframe_ = curframe;
 
+	// This portion of code keeps the speed of game so that FPS are kept within
+	// range 13 - 15, this is used for training of AI
+	if (AItrainingMode) {
+		if (upcast(Game, game, &egbase())) {
+			uint32_t cur_fps = 1000000 / avg_usframetime_;
+			int32_t speed_diff = 0;
+			if (cur_fps < 13) {
+				speed_diff = -100;
+			}
+			if (cur_fps > 15) {
+				speed_diff = +100;
+			}
+			if (speed_diff != 0) {
+
+				if (GameController* const ctrl = game->game_controller()) {
+					if ((ctrl->desired_speed() > 950 && ctrl->desired_speed() < 30000) ||
+					    (ctrl->desired_speed() < 1000 && speed_diff > 0) ||
+					    (ctrl->desired_speed() > 29999 && speed_diff < 0)) {
+						ctrl->set_desired_speed(ctrl->desired_speed() + speed_diff);
+					}
+				}
+			}
+		}
+	}
+
 	const Map& map = egbase().map();
 	const bool is_game = dynamic_cast<const Game*>(&egbase());
 
@@ -357,8 +400,9 @@ void InteractiveBase::draw_overlay(RenderTarget& dst) {
 		std::string node_text;
 		if (is_game) {
 			const std::string gametime(gametimestring(egbase().get_gametime(), true));
-			const std::string gametime_text = as_condensed(gametime);
-			dst.blit(Vector2i(5, 5), UI::g_fh1->render(gametime_text), BlendMode::UseAlpha);
+			std::shared_ptr<const UI::RenderedText> rendered_text =
+			   UI::g_fh1->render(as_condensed(gametime));
+			rendered_text->draw(dst, Vector2i(5, 5));
 
 			static boost::format node_format("(%i, %i)");
 			node_text = as_condensed((node_format % sel_.pos.node.x % sel_.pos.node.y).str());
@@ -367,20 +411,17 @@ void InteractiveBase::draw_overlay(RenderTarget& dst) {
 			const int32_t height = map[sel_.pos.node].get_height();
 			node_text = as_condensed((node_format % sel_.pos.node.x % sel_.pos.node.y % height).str());
 		}
-
-		const Image* rendered_text = UI::g_fh1->render(node_text);
-		Vector2i point(get_w() - 5, get_h() - rendered_text->height() - 5);
-		UI::correct_for_align(UI::Align::kRight, rendered_text->width(), &point);
-		dst.blit(point, rendered_text, BlendMode::UseAlpha);
+		std::shared_ptr<const UI::RenderedText> rendered_text = UI::g_fh1->render(node_text);
+		rendered_text->draw(
+		   dst, Vector2i(get_w() - 5, get_h() - rendered_text->height() - 5), UI::Align::kRight);
 	}
 
 	// Blit FPS when playing a game in debug mode.
 	if (get_display_flag(dfDebug) && is_game) {
 		static boost::format fps_format("%5.1f fps (avg: %5.1f fps)");
-		const Image* rendered_text = UI::g_fh1->render(as_condensed(
+		std::shared_ptr<const UI::RenderedText> rendered_text = UI::g_fh1->render(as_condensed(
 		   (fps_format % (1000.0 / frametime_) % (1000.0 / (avg_usframetime_ / 1000))).str()));
-		dst.blit(
-		   Vector2i((get_w() - rendered_text->width()) / 2, 5), rendered_text, BlendMode::UseAlpha);
+		rendered_text->draw(dst, Vector2i((get_w() - rendered_text->width()) / 2, 5));
 	}
 }
 
@@ -655,12 +696,11 @@ Add road building data to the road overlay
 */
 void InteractiveBase::roadb_add_overlay() {
 	assert(buildroad_);
+	assert(road_building_preview_.empty());
 
 	Map& map = egbase().map();
 
 	// preview of the road
-	assert(!jobid_);
-	jobid_ = field_overlay_manager_->next_overlay_id();
 	const CoordPath::StepVector::size_type nr_steps = buildroad_->get_nsteps();
 	for (CoordPath::StepVector::size_type idx = 0; idx < nr_steps; ++idx) {
 		Widelands::Direction dir = (*buildroad_)[idx];
@@ -670,12 +710,8 @@ void InteractiveBase::roadb_add_overlay() {
 			map.get_neighbour(c, dir, &c);
 			dir = Widelands::get_reverse_dir(dir);
 		}
-
 		int32_t const shift = 2 * (dir - Widelands::WALK_E);
-
-		uint8_t set_to = edge_overlay_manager_->get_overlay(c);
-		set_to |= Widelands::RoadType::kNormal << shift;
-		edge_overlay_manager_->register_overlay(c, set_to, jobid_);
+		road_building_preview_[c] |= (Widelands::RoadType::kNormal << shift);
 	}
 
 	// build hints
@@ -724,8 +760,9 @@ void InteractiveBase::roadb_add_overlay() {
 		else
 			name = "images/wui/overlays/roadb_red.png";
 
-		field_overlay_manager_->register_overlay(
-		   neighb, g_gr->images().get(name), 7, Vector2i::invalid(), road_buildhelp_overlay_jobid_);
+		field_overlay_manager_->register_overlay(neighb, g_gr->images().get(name),
+		                                         OverlayLevel::kRoadBuildSlope, Vector2i::invalid(),
+		                                         road_buildhelp_overlay_jobid_);
 	}
 }
 
@@ -737,11 +774,7 @@ Remove road building data from road overlay
 void InteractiveBase::roadb_remove_overlay() {
 	assert(buildroad_);
 
-	//  preview of the road
-	if (jobid_) {
-		edge_overlay_manager_->remove_overlay(jobid_);
-	}
-	jobid_ = 0;
+	road_building_preview_.clear();
 
 	// build hints
 	if (road_buildhelp_overlay_jobid_) {
@@ -757,9 +790,10 @@ bool InteractiveBase::handle_key(bool const down, SDL_Keysym const code) {
 	if (down) {
 		switch (code.sym) {
 		case SDLK_KP_9:
-			if (code.mod & KMOD_NUM)
+			if (code.mod & KMOD_NUM) {
 				break;
-		/* no break */
+			}
+			FALLS_THROUGH;
 		case SDLK_PAGEUP:
 			if (upcast(Game, game, &egbase_)) {
 				if (GameController* const ctrl = game->game_controller()) {
@@ -777,9 +811,10 @@ bool InteractiveBase::handle_key(bool const down, SDL_Keysym const code) {
 			return true;
 
 		case SDLK_KP_3:
-			if (code.mod & KMOD_NUM)
+			if (code.mod & KMOD_NUM) {
 				break;
-		/* no break */
+			}
+			FALLS_THROUGH;
 		case SDLK_PAGEDOWN:
 			if (upcast(Widelands::Game, game, &egbase_)) {
 				if (GameController* const ctrl = game->game_controller()) {

@@ -64,9 +64,10 @@ protected:
 	/// Loads all win conditions that can be played with the map into the selection dropdown.
 	/// Disables the dropdown if the map is a scenario.
 	void update_win_conditions();
-	/// Reads the win conditions that are available for the given map and adds the entries to the
+	/// Reads the win conditions that are available for the given map tags and adds the entries to
+	/// the
 	/// dropdown.
-	void load_win_conditions(const Widelands::Map& map);
+	void load_win_conditions(const std::set<std::string>& tags);
 	/// Remembers the win condition that is currently selected in the dropdown.
 	virtual void win_condition_selected() = 0;
 	/// If the win condition in 'win_condition_script' can be played with the map tags,

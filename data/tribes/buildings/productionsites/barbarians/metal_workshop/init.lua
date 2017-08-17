@@ -44,7 +44,7 @@ tribes:new_productionsite_type {
    },
 
    aihints = {
-      forced_after = 400,
+      basic_amount = 2,
       prohibited_till = 400
    },
 

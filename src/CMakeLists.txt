@@ -116,12 +116,14 @@ wl_library(widelands_ball_of_mud
     logic
     logic_game_controller
     logic_game_settings
+    logic_single_player_game_settings
     map_io_map_loader
     network
     profile
     sound
     ui_basic
     ui_fsmenu
+    ui_fsmenu_options
     wui
 )
 

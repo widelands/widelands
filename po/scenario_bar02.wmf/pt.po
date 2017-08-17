@@ -6,12 +6,13 @@
 # GunChleoc, 2015-2016
 # GunChleoc, 2014-2015
 # GunChleoc, 2014
+# zecas <jjorge@free.fr>, 2017
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-01-21 14:22+0000\n"
-"PO-Revision-Date: 2017-01-21 14:23+0000\n"
+"POT-Creation-Date: 2017-07-04 08:57+0000\n"
+"PO-Revision-Date: 2017-07-04 08:58+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Portuguese (http://www.transifex.com/widelands/widelands/language/pt/)\n"
 "MIME-Version: 1.0\n"
@@ -147,7 +148,7 @@ msgstr "Construa infraestrutura de treinamento"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:96
 msgid "Build a barracks to train some basic soldiers."
-msgstr ""
+msgstr "Construa uma caserna militar para treinar alguns soldados."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:97
 msgid "Build a battle arena and a training camp to the west of the mountains."
@@ -196,7 +197,7 @@ msgstr "Construa os edifícios de treino militar"
 msgid ""
 "Build a barracks, a battle arena and a training camp to the west of the "
 "mountains."
-msgstr ""
+msgstr "Construa uma caserna, uma arena de combate e um campo de treinos a oeste das montanhas."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:118
 msgid ""
@@ -204,7 +205,7 @@ msgid ""
 " battle arena are used for training soldiers in their different attributes. "
 "These attributes are important in fights and the better a soldier is, the "
 "higher is the chance to win a fight."
-msgstr ""
+msgstr "As casernas preparam soldados simples enquanto os campos de treinos ou a arena de combate são utilizados para treinar os guerreiros nos seus diferentes atributos. Estes atributos são importantes nas batalhas pois quanto melhor for o guerreiro, melhor será a sua chances de ganhar essa escaramuça."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:120
 msgid "The attributes are: health, attack, defense and evade."
@@ -361,9 +362,9 @@ msgid ""
 " former main entrance to the capital and is trying to set up a siege ring "
 "around Al’thunran. He will not let anyone enter or leave the city while the "
 "ring is intact. Until now, he has not answered any of my messages. But the "
-"time I spend waiting won’t be lost. I will further upgrade my soldiers and "
+"time I spend waiting won’t be lost. I will train my soldiers further and "
 "prepare for battle."
-msgstr "Eu enviei alguns homens para se encontrarem com com o Kalitath na sua fortaleza. Ele barricou a antiga entrada principal para a capital Al’thunran e agora está a tentar fechar o cerco à cidade. Ele não irá deixar ninguém entrar ou sair da cidade enquanto não houver brechas no cerco. Até agora, ele não respondeu a nenhuma das minhas mensagens. Mas enquanto espero uma resposta, irei treinar os meus guerreiros para que estejam a bom nível para a batalha que ai vem."
+msgstr ""
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:212
 msgid "Your Loyal Companion"
@@ -469,7 +470,7 @@ msgid ""
 "settlement. He has instructed us to build a tower, to have a greater visual "
 "range over the area around our hall to protect our people from sudden "
 "attacks."
-msgstr ""
+msgstr "O Thron contou-me que descobriu trilhos na neve a nordeste do nosso acampamento. Ele deu instruções para que construíssemos uma torre, para termos mais alcance visual sobre a área à volta do nosso Quartel-general e assim protegermos o nosso povo de ataques surpresa."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:271
 msgid "Further Exploration"
@@ -651,7 +652,7 @@ msgstr "Grande-chefe, lembra-te dos pobre carregadores: As nossas estradas estã
 msgid "“%s”"
 msgstr "«&nbsp;%s&nbsp;»"
 
-#: ../../data/scripting/format_scenario.lua:96
+#: ../../data/scripting/format_scenario.lua:84
 msgid "New Objective"
 msgid_plural "New Objectives"
 msgstr[0] "Novo objetivo"

@@ -63,7 +63,7 @@ constexpr uint16_t kCurrentPacketVersionConstructionsite = 3;
 constexpr uint16_t kCurrentPacketPFBuilding = 1;
 // Responsible for warehouses and expedition bootstraps
 constexpr uint16_t kCurrentPacketVersionWarehouse = 7;
-constexpr uint16_t kCurrentPacketVersionMilitarysite = 5;
+constexpr uint16_t kCurrentPacketVersionMilitarysite = 6;
 constexpr uint16_t kCurrentPacketVersionProductionsite = 6;
 constexpr uint16_t kCurrentPacketVersionTrainingsite = 5;
 
@@ -122,7 +122,7 @@ void MapBuildingdataPacket::read(FileSystem& fs,
 									*queue_iter = &mol.get<Worker>(leaver_serial);
 								} catch (const WException& e) {
 									throw GameDataError(
-									   "leave queue item #%lu (%u): %s",
+									   "leave queue item #%li (%u): %s",
 									   static_cast<long int>(queue_iter - leave_queue.begin()),
 									   leaver_serial, e.what());
 								}
@@ -464,7 +464,7 @@ void MapBuildingdataPacket::read_militarysite(MilitarySite& militarysite,
                                               MapObjectLoader& mol) {
 	try {
 		uint16_t const packet_version = fr.unsigned_16();
-		if (packet_version == kCurrentPacketVersionMilitarysite) {
+		if (packet_version >= 5 && packet_version <= kCurrentPacketVersionMilitarysite) {
 			militarysite.normal_soldier_request_.reset();
 
 			if (fr.unsigned_8()) {
@@ -505,8 +505,11 @@ void MapBuildingdataPacket::read_militarysite(MilitarySite& militarysite,
 			uint16_t reqmax = fr.unsigned_16();
 			militarysite.soldier_upgrade_requirements_ =
 			   RequireAttribute(TrainingAttribute::kTotal, reqmin, reqmax);
-			militarysite.soldier_preference_ =
-			   static_cast<MilitarySite::SoldierPreference>(fr.unsigned_8());
+			militarysite.soldier_preference_ = static_cast<SoldierPreference>(fr.unsigned_8());
+			// TODO(GunChleoc): Savegame compatibility, remove kNotSet after Build 20.
+			if (militarysite.soldier_preference_ == SoldierPreference::kNotSet) {
+				militarysite.soldier_preference_ = SoldierPreference::kRookies;
+			}
 			militarysite.next_swap_soldiers_time_ = fr.signed_32();
 			militarysite.soldier_upgrade_try_ = 0 != fr.unsigned_8() ? true : false;
 			militarysite.doing_upgrade_request_ = 0 != fr.unsigned_8() ? true : false;
@@ -525,20 +528,20 @@ void MapBuildingdataPacket::read_militarysite(MilitarySite& militarysite,
 		//  Cmd_ChangeSoldierCapacity to the beginning of the game's command
 		//  queue. But that would not work because the command queue is not read
 		//  yet and will be cleared before it is read.
-		if (militarysite.capacity_ < militarysite.min_soldier_capacity()) {
+		if (militarysite.capacity_ < militarysite.soldier_control()->min_soldier_capacity()) {
 			log("WARNING: militarysite %u of player %u at (%i, %i) has capacity "
 			    "set to %u but it must be at least %u. Changing to that value.\n",
 			    militarysite.serial(), militarysite.owner().player_number(),
 			    militarysite.get_position().x, militarysite.get_position().y, militarysite.capacity_,
-			    militarysite.min_soldier_capacity());
-			militarysite.capacity_ = militarysite.min_soldier_capacity();
-		} else if (militarysite.max_soldier_capacity() < militarysite.capacity_) {
+			    militarysite.soldier_control()->min_soldier_capacity());
+			militarysite.capacity_ = militarysite.soldier_control()->min_soldier_capacity();
+		} else if (militarysite.soldier_control()->max_soldier_capacity() < militarysite.capacity_) {
 			log("WARNING: militarysite %u of player %u at (%i, %i) has capacity "
 			    "set to %u but it can be at most %u. Changing to that value.\n",
 			    militarysite.serial(), militarysite.owner().player_number(),
 			    militarysite.get_position().x, militarysite.get_position().y, militarysite.capacity_,
-			    militarysite.max_soldier_capacity());
-			militarysite.capacity_ = militarysite.max_soldier_capacity();
+			    militarysite.soldier_control()->max_soldier_capacity());
+			militarysite.capacity_ = militarysite.soldier_control()->max_soldier_capacity();
 		}
 	} catch (const WException& e) {
 		throw GameDataError("militarysite: %s", e.what());
@@ -800,20 +803,20 @@ void MapBuildingdataPacket::read_trainingsite(TrainingSite& trainingsite,
 		//  Cmd_ChangeSoldierCapacity to the beginning of the game's command
 		//  queue. But that would not work because the command queue is not read
 		//  yet and will be cleared before it is read.
-		if (trainingsite.capacity_ < trainingsite.min_soldier_capacity()) {
+		if (trainingsite.capacity_ < trainingsite.soldier_control()->min_soldier_capacity()) {
 			log("WARNING: trainingsite %u of player %u at (%i, %i) has capacity "
 			    "set to %u but it must be at least %u. Changing to that value.\n",
 			    trainingsite.serial(), trainingsite.owner().player_number(),
 			    trainingsite.get_position().x, trainingsite.get_position().y, trainingsite.capacity_,
-			    trainingsite.min_soldier_capacity());
-			trainingsite.capacity_ = trainingsite.min_soldier_capacity();
-		} else if (trainingsite.max_soldier_capacity() < trainingsite.capacity_) {
+			    trainingsite.soldier_control()->min_soldier_capacity());
+			trainingsite.capacity_ = trainingsite.soldier_control()->min_soldier_capacity();
+		} else if (trainingsite.soldier_control()->max_soldier_capacity() < trainingsite.capacity_) {
 			log("WARNING: trainingsite %u of player %u at (%i, %i) has capacity "
 			    "set to %u but it can be at most %u. Changing to that value.\n",
 			    trainingsite.serial(), trainingsite.owner().player_number(),
 			    trainingsite.get_position().x, trainingsite.get_position().y, trainingsite.capacity_,
-			    trainingsite.max_soldier_capacity());
-			trainingsite.capacity_ = trainingsite.max_soldier_capacity();
+			    trainingsite.soldier_control()->max_soldier_capacity());
+			trainingsite.capacity_ = trainingsite.soldier_control()->max_soldier_capacity();
 		}
 	} catch (const WException& e) {
 		throw GameDataError("trainingsite: %s", e.what());
@@ -1083,7 +1086,7 @@ void MapBuildingdataPacket::write_militarysite(const MilitarySite& militarysite,
 	}
 	fw.unsigned_16(militarysite.soldier_upgrade_requirements_.get_min());
 	fw.unsigned_16(militarysite.soldier_upgrade_requirements_.get_max());
-	fw.unsigned_8(militarysite.soldier_preference_);
+	fw.unsigned_8(static_cast<uint8_t>(militarysite.soldier_preference_));
 	fw.signed_32(militarysite.next_swap_soldiers_time_);
 	fw.unsigned_8(militarysite.soldier_upgrade_try_ ? 1 : 0);
 	fw.unsigned_8(militarysite.doing_upgrade_request_ ? 1 : 0);

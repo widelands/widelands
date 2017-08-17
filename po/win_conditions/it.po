@@ -1,5 +1,5 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2016 Widelands Development Team
+# Copyright (C) 2005-2017 Widelands Development Team
 # 
 # Translators:
 # Bananasoft <bananasoftservice@yahoo.it>, 2015
@@ -7,15 +7,15 @@
 # GunChleoc, 2016
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
 # GunChleoc, 2014
-# Guybrush88 <erpizzo@alice.it>, 2015-2016
+# Guybrush88 <erpizzo@alice.it>, 2015-2017
 # Luigi Lain <lainluigi86@tiscali.it>, 2015
 # Riccardo Di Maio <riccardodimaio11@gmail.com>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-12-10 10:58+0000\n"
-"PO-Revision-Date: 2016-12-09 17:46+0000\n"
+"POT-Creation-Date: 2017-05-12 13:53+0000\n"
+"PO-Revision-Date: 2017-05-15 15:28+0000\n"
 "Last-Translator: Guybrush88 <erpizzo@alice.it>\n"
 "Language-Team: Italian (http://www.transifex.com/widelands/widelands/language/it/)\n"
 "MIME-Version: 1.0\n"
@@ -26,7 +26,7 @@ msgstr ""
 
 #: ../../data/scripting/win_conditions/artifacts.lua:16
 msgid "Artifacts"
-msgstr "Artefatto"
+msgstr "Artefatti"
 
 #: ../../data/scripting/win_conditions/artifacts.lua:18
 msgid ""
@@ -49,7 +49,7 @@ msgstr "Non ci sono artefatti in questa mappa. Questo non dovrebbe accadere. Per
 #. "New artifact"
 #: ../../data/scripting/win_conditions/artifacts.lua:63
 msgid "Artifact Found"
-msgstr "Trovato un artifatto"
+msgstr "Trovato un artefatto"
 
 #: ../../data/scripting/win_conditions/artifacts.lua:64
 msgid "Your team found a new artifact."
@@ -275,7 +275,7 @@ msgstr[0] "Altrimenti la partita finirà in %i minuto."
 msgstr[1] "Altrimenti la partita finirà tra %i minuti."
 
 #: ../../data/scripting/win_conditions/territorial_time.lua:238
-#: ../../data/scripting/win_conditions/wood_gnome.lua:87
+#: ../../data/scripting/win_conditions/wood_gnome.lua:93
 #, lua-format
 msgid "The game will end in %i minute."
 msgid_plural "The game will end in %i minutes."
@@ -340,9 +340,9 @@ msgstr "Essendo uno gnomo del bosco, ti piacciono le grandi foreste, quindi il t
 msgid "Trees owned"
 msgstr "Alberi posseduti"
 
-#: ../../data/scripting/win_conditions/wood_gnome.lua:91
-#: ../../data/scripting/win_conditions/wood_gnome.lua:143
-#: ../../data/scripting/win_conditions/wood_gnome.lua:148
+#: ../../data/scripting/win_conditions/wood_gnome.lua:97
+#: ../../data/scripting/win_conditions/wood_gnome.lua:149
+#: ../../data/scripting/win_conditions/wood_gnome.lua:154
 #, lua-format
 msgid "%i tree"
 msgid_plural "%i trees"
@@ -350,16 +350,16 @@ msgstr[0] "%i albero"
 msgstr[1] "%i alberi"
 
 #. TRANSLATORS: %1$s = player name, %2$s = x tree(s)
-#: ../../data/scripting/win_conditions/wood_gnome.lua:94
+#: ../../data/scripting/win_conditions/wood_gnome.lua:100
 msgid "%1$s has %2$s at the moment."
 msgstr "%1$s ha %2$s al momento."
 
 #. TRANSLATORS: %1$s = player name, %2$s = x tree(s)
-#: ../../data/scripting/win_conditions/wood_gnome.lua:145
+#: ../../data/scripting/win_conditions/wood_gnome.lua:151
 msgid "%1$s had %2$s."
 msgstr "%1$s ha avuto %2$s."
 
 #. TRANSLATORS: %1$s = player name, %2$s = x tree(s)
-#: ../../data/scripting/win_conditions/wood_gnome.lua:151
+#: ../../data/scripting/win_conditions/wood_gnome.lua:157
 msgid "The winner is %1$s with %2$s."
 msgstr "Il vincitore è %1$s con %2$s."

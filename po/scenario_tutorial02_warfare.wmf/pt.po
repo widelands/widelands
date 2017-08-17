@@ -6,14 +6,14 @@
 # GunChleoc, 2015-2016
 # GunChleoc, 2014-2015
 # GunChleoc, 2014
-# zecas <jjorge@free.fr>, 2016
+# zecas <jjorge@free.fr>, 2016-2017
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-01-21 14:22+0000\n"
-"PO-Revision-Date: 2017-01-21 14:25+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2017-06-16 07:17+0000\n"
+"PO-Revision-Date: 2017-06-18 09:13+0000\n"
+"Last-Translator: zecas <jjorge@free.fr>\n"
 "Language-Team: Portuguese (http://www.transifex.com/widelands/widelands/language/pt/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -27,7 +27,7 @@ msgstr "Introdução"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:26
 msgid "Soldiers, Training and Warfare"
-msgstr ""
+msgstr "Soldados, Treino e Estratégia"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:27
 msgid ""
@@ -47,7 +47,7 @@ msgstr "Preparei uma pequena aldeia que já tem os edifícios mais importantes. 
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:35
 msgid "Soldiers’ abilities"
-msgstr ""
+msgstr "Capacidades dos soldados"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:37
 msgid ""
@@ -55,7 +55,7 @@ msgid ""
 " from a warehouse (or your headquarters) to the barracks where they will "
 "receive some basic training and become soldiers. Basic Barbarian soldiers do"
 " not use armor, they only need an ax."
-msgstr ""
+msgstr "Um soldado é criado diferentemente dos trabalhadores normais : os recrutas vão ir dum armazém (ou do quartel-general) até à caserna onde vão receber um treino básico para serem soldados. Os soldados básicos dos Bárbaros não usam armadura e só precisam de um machado."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:38
 msgid ""
@@ -64,7 +64,7 @@ msgid ""
 "head that displays their remaining health, and they have four symbols, which"
 " symbolize the individual soldier’s current levels in the four different "
 "categories: health, attack, defense and evade."
-msgstr ""
+msgstr "Observe os soldados que circulam. Eles são diferentes dos trabalhadores normais : têm uma barra de saúde acima da cabeça que indica os pontos de vida restantes, e quatro símbolos, que indicam o nível individual do soldado em quatro categorias diferentes : saúde, ataque, defesa e evasão."
 
 #. TRANSLATORS: the current stats are: 3 health, 5 attack, 0 defense, 2 evade.
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:40
@@ -133,13 +133,13 @@ msgstr "A arena de combate"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:63
 msgid "Now I have talked about training and levels. Let me elaborate on that."
-msgstr ""
+msgstr "Agora eu falei de treino e níveis. Deixe-me explicar mais isto."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:64
 msgid ""
 "A newly created soldier has no experience and is not very good at fighting. "
 "To make him stronger, you can build training sites."
-msgstr ""
+msgstr "Um novo soldado não tem nenhuma experiencia e não vale grande coisa no combate. Para o fortalecer, pode construir campos de treino."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:65
 msgid ""
@@ -147,107 +147,107 @@ msgid ""
 "building, and it trains soldiers in evade. Since soldiers get very hungry "
 "during their workout, this building needs a lot of food and strong beer. In "
 "a real game, you should have a good infrastructure before you build it."
-msgstr ""
+msgstr "Um destes campos de treino é a arena de combate. É um edifício grande e caro, que treina os soldados no evasão. Como os soldados ficam esfomeados no treino, este edifício precisa de muita alimentação e de cerveja forte. Num verdadeiro jogo, deveria ter uma boa economia antes de o construir."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:67
 msgid "To see evade training in action, build a battle arena."
-msgstr ""
+msgstr "Para ver os treinos de evasão, construa uma arena de combate."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:69
 msgid ""
 "While we’re waiting for the battle arena, you’ll probably notice some "
 "soldiers walking around. They are automatically exchanged from time to time."
 " I’ll teach you about that later."
-msgstr ""
+msgstr "Enquanto esperamos pela arena de combate, deve ter notado alguns soldados que vão e veem. Eles são trocados automaticamente de tempo em tempo. Falamos disto mais tarde."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:73
 msgid "Build a battle arena"
-msgstr ""
+msgstr "Construa uma arena de combate"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:76
 msgid "Build a battle arena. It is a big building."
-msgstr ""
+msgstr "Construa uma arena de combate. É um grande edifício."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:77
 msgid ""
 "Since the construction will take some time, you can change the game speed "
 "using Page Up and Page Down."
-msgstr ""
+msgstr "Como a construção vai tomar tempo, pode mudar a velocidade do jogo com as teclas Page Up e Page Down."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:85
 msgid "The Battle Arena Has Been Constructed"
-msgstr ""
+msgstr "A Arena de Combate Foi Terminada"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:86
 msgid ""
 "Very good. Our battle arena has been finished, and the soldiers are already "
 "walking towards it."
-msgstr ""
+msgstr "Muito bem. A nossa arena de combate está acabada, e os soldados já estão a caminho dela."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:88
 msgid ""
 "The needed wares are also delivered there. For successful training, you need"
 " pitta bread and strong beer, as well as either fish or meat."
-msgstr ""
+msgstr "As mercadorias necessárias também já estão a caminho. Para um bom treino, é preciso pão pita e cerveja forte, assim como peixe ou carne."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:89
 msgid ""
 "For more information, you can have a look at the building’s help window, "
 "accessible via the question mark in every building’s window."
-msgstr ""
+msgstr "Para mais detalhes, pode dar uma olhada na ajuda do edifício, acessível pelo ponto de interrogação de qualquer janela de edifício."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:90
 msgid ""
 "To learn how far your soldiers have progressed in their training, you can "
 "have a look at their icons. They are modified by red dots:"
-msgstr ""
+msgstr "Para ver quando os seus soldados progrediram no seu treino, pode observar os ícones. São mudados por pontos vermelhos:"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:92
 msgid ""
 "No red dots means that the soldier is not trained, so he has level 0. All "
 "your new recruits have this."
-msgstr ""
+msgstr "Sem ponto vermelho o soldado não treinou, portanto é o nível 0. Todos os novos recrutas estão assim."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:93
 msgid ""
 "With every successful training step, your soldier becomes stronger. This is "
 "indicated by a red dot. This soldier is on level 1 in evade training."
-msgstr ""
+msgstr "Com cada treinamento conseguido, o soldado fica mais forte. É indicado por um ponto vermelho. Este soldado está no nível 1 do treino de evasão."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:94
 msgid ""
 "When your soldier has reached the highest possible level (in this case level"
 " 2), this is indicated by a white background color."
-msgstr ""
+msgstr "Quando o seu soldado atingir o nível máximo (neste caso é 2), é indicado por um fundo branco."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:100
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:102
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:119
 msgid "The Training Camp"
-msgstr ""
+msgstr "O Campo de Treinos"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:103
 msgid ""
 "There is a second training site: the training camp. It is a big building "
 "too, and to complement the battle arena, it trains attack and health "
 "(remember, the Barbarian soldiers cannot be trained in defense)."
-msgstr ""
+msgstr "Há outro edifício de treinamento : o campo de treinos. Também é grande, e em complemento da arena de combate, treina o ataque e a defesa (lembra-te, os soldados Bárbaros não se podem treinar em defesa)."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:105
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:113
 msgid "Build a training camp."
-msgstr ""
+msgstr "Construa um campo de treinos."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:109
 msgid "Build a training camp"
-msgstr ""
+msgstr "Construa um campo de treinos"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:111
 msgid ""
 "The battle arena only trains the soldiers in evade. To get the strongest "
 "possible soldier, you also need to build a training camp, which trains them "
 "in attack and health."
-msgstr ""
+msgstr "A arena de combate só treina os soldados na evasão. Para obter os soldados mais fortes, também precisa de um campo de treinos, que treina o ataque e a defesa."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:121
 msgid ""
@@ -557,7 +557,7 @@ msgstr ""
 msgid "“%s”"
 msgstr "«&nbsp;%s&nbsp;»"
 
-#: ../../data/scripting/format_scenario.lua:96
+#: ../../data/scripting/format_scenario.lua:84
 msgid "New Objective"
 msgid_plural "New Objectives"
 msgstr[0] "Novo objetivo"

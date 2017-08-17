@@ -3,7 +3,6 @@
 -- =======================================================================
 
 include "scripting/coroutine.lua" -- for sleep
-include "scripting/formatting.lua"
 include "scripting/messages.lua"
 include "scripting/table.lua"
 include "scripting/win_conditions/win_condition_functions.lua"
@@ -155,16 +154,14 @@ return {
          if candidateisteam then
             candidate = (_"Team %i"):format(currentcandidate)
          end
-         local msg1 = (_"%s owns more than half of the map’s area."):format(candidate)
-         msg1 = msg1 .. "\n"
-         msg1 = msg1 .. (ngettext("You’ve still got %i minute to prevent a victory.",
+         local msg1 = p(_"%s owns more than half of the map’s area."):format(candidate)
+         msg1 = msg1 .. p(ngettext("You’ve still got %i minute to prevent a victory.",
                    "You’ve still got %i minutes to prevent a victory.",
                    remaining_time / 60))
                :format(remaining_time / 60)
 
-         local msg2 = _"You own more than half of the map’s area."
-         msg2 = msg2 .. "\n"
-         msg2 = msg2 .. (ngettext("Keep it for %i more minute to win the game.",
+         local msg2 = p(_"You own more than half of the map’s area.")
+         msg2 = msg2 .. p(ngettext("Keep it for %i more minute to win the game.",
                    "Keep it for %i more minutes to win the game.",
                    remaining_time / 60))
                :format(remaining_time / 60)
@@ -172,9 +169,9 @@ return {
          for idx, player in ipairs(plrs) do
             if candidateisteam and currentcandidate == player.team
                or not candidateisteam and currentcandidate == player.name then
-               send_message(player, game_status.title, rt(p(msg2)), {popup = true})
+               send_message(player, game_status.title, msg2, {popup = true})
             else
-               send_message(player, game_status.title, rt(p(msg1)), {popup = true})
+               send_message(player, game_status.title, msg1, {popup = true})
             end
          end
       end
@@ -201,10 +198,10 @@ return {
                p.see_all = 1
                if candidateisteam and currentcandidate == p.team
                   or not candidateisteam and currentcandidate == p.name then
-                  p:send_message(won_game_over.title, rt(won_game_over.body))
+                  p:send_message(won_game_over.title, won_game_over.body)
                   wl.game.report_result(p, 1, make_extra_data(p, wc_descname, wc_version, {score=_landsizes[p.number]}))
                else
-                  p:send_message(lost_game_over.title, rt(lost_game_over.body))
+                  p:send_message(lost_game_over.title, lost_game_over.body)
                   wl.game.report_result(p, 0, make_extra_data(p, wc_descname, wc_version, {score=_landsizes[p.number]}))
                end
             end

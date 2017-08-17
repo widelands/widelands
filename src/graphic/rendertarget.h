@@ -50,7 +50,7 @@ class Surface;
 // the old richtext renderer is gone.
 class RenderTarget {
 public:
-	RenderTarget(Surface*);
+	explicit RenderTarget(Surface*);
 	void set_window(const Recti& rc, const Vector2i& ofs);
 	bool enter_window(const Recti& rc, Recti* previous, Vector2i* prevofs);
 
@@ -62,10 +62,16 @@ public:
 	void fill_rect(const Recti&, const RGBAColor&, BlendMode blend_mode = BlendMode::Copy);
 	void brighten_rect(const Recti&, int32_t factor);
 
-	void blit(const Vector2i& dst, const Image* image, BlendMode blend_mode = BlendMode::UseAlpha);
+	void blit(const Vector2i& dst,
+	          const Image* image,
+	          BlendMode blend_mode = BlendMode::UseAlpha,
+	          UI::Align = UI::Align::kLeft);
 
 	// Like blit. See MonochromeBlitProgram for details.
-	void blit_monochrome(const Vector2i& dst, const Image* image, const RGBAColor& blend_mode);
+	void blit_monochrome(const Vector2i& dst,
+	                     const Image* image,
+	                     const RGBAColor& blend_mode,
+	                     UI::Align = UI::Align::kLeft);
 
 	void blitrect(const Vector2i& dst,
 	              const Image* image,

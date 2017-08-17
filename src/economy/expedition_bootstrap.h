@@ -49,7 +49,7 @@ class Worker;
 
 class ExpeditionBootstrap {
 public:
-	ExpeditionBootstrap(PortDock* const portdock);
+	explicit ExpeditionBootstrap(PortDock* const portdock);
 	virtual ~ExpeditionBootstrap();
 
 	// Start bootstrapping an expedition. This will request all wares and workers.
@@ -118,7 +118,8 @@ struct NoteExpeditionCanceled {
 
 	ExpeditionBootstrap* bootstrap;
 
-	NoteExpeditionCanceled(ExpeditionBootstrap* const init_bootstrap) : bootstrap(init_bootstrap) {
+	explicit NoteExpeditionCanceled(ExpeditionBootstrap* const init_bootstrap)
+	   : bootstrap(init_bootstrap) {
 	}
 };
 

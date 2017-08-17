@@ -29,8 +29,6 @@
 #include "io/streamwrite.h"
 #include "logic/game.h"
 #include "logic/map_objects/map_object.h"
-#include "logic/map_objects/tribes/militarysite.h"
-#include "logic/map_objects/tribes/ship.h"
 #include "logic/map_objects/tribes/soldier.h"
 #include "logic/map_objects/tribes/tribe_descr.h"
 #include "logic/player.h"
@@ -506,14 +504,14 @@ void CmdStartStopBuilding::write(FileWrite& fw, EditorGameBase& egbase, MapObjec
 CmdMilitarySiteSetSoldierPreference::CmdMilitarySiteSetSoldierPreference(StreamRead& des)
    : PlayerCommand(0, des.unsigned_8()) {
 	serial = des.unsigned_32();
-	preference = des.unsigned_8();
+	preference = static_cast<Widelands::SoldierPreference>(des.unsigned_8());
 }
 
 void CmdMilitarySiteSetSoldierPreference::serialize(StreamWrite& ser) {
 	ser.unsigned_8(PLCMD_MILITARYSITESETSOLDIERPREFERENCE);
 	ser.unsigned_8(sender());
 	ser.unsigned_32(serial);
-	ser.unsigned_8(preference);
+	ser.unsigned_8(static_cast<uint8_t>(preference));
 }
 
 void CmdMilitarySiteSetSoldierPreference::execute(Game& game) {
@@ -531,7 +529,7 @@ void CmdMilitarySiteSetSoldierPreference::write(FileWrite& fw,
 	// Write base classes
 	PlayerCommand::write(fw, egbase, mos);
 
-	fw.unsigned_8(preference);
+	fw.unsigned_8(static_cast<uint8_t>(preference));
 
 	// Now serial.
 	fw.unsigned_32(mos.get_object_file_index_or_zero(egbase.objects().get_object(serial)));
@@ -544,7 +542,7 @@ void CmdMilitarySiteSetSoldierPreference::read(FileRead& fr,
 		const uint16_t packet_version = fr.unsigned_16();
 		if (packet_version == kCurrentPacketVersionSoldierPreference) {
 			PlayerCommand::read(fr, egbase, mol);
-			preference = fr.unsigned_8();
+			preference = static_cast<Widelands::SoldierPreference>(fr.unsigned_8());
 			serial = get_object_serial_or_zero<MilitarySite>(fr.unsigned_32(), mol);
 		} else {
 			throw UnhandledVersionError("CmdMilitarySiteSetSoldierPreference", packet_version,
@@ -1514,10 +1512,21 @@ CmdChangeSoldierCapacity::CmdChangeSoldierCapacity(StreamRead& des)
 }
 
 void CmdChangeSoldierCapacity::execute(Game& game) {
-	if (upcast(Building, building, game.objects().get_object(serial)))
-		if (&building->owner() == game.get_player(sender()))
-			if (upcast(SoldierControl, ctrl, building))
-				ctrl->changeSoldierCapacity(val);
+	if (upcast(Building, building, game.objects().get_object(serial))) {
+		if (&building->owner() == game.get_player(sender()) &&
+		    building->soldier_control() != nullptr) {
+			SoldierControl* soldier_control = building->mutable_soldier_control();
+			Widelands::Quantity const old_capacity = soldier_control->soldier_capacity();
+			Widelands::Quantity const new_capacity =
+			   std::min(static_cast<Widelands::Quantity>(
+			               std::max(static_cast<int32_t>(old_capacity) + val,
+			                        static_cast<int32_t>(soldier_control->min_soldier_capacity()))),
+			            soldier_control->max_soldier_capacity());
+			if (old_capacity != new_capacity) {
+				soldier_control->set_soldier_capacity(new_capacity);
+			}
+		}
+	}
 }
 
 void CmdChangeSoldierCapacity::serialize(StreamWrite& ser) {
