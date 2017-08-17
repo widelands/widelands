@@ -462,7 +462,7 @@ bool Worker::run_findobject(Game& game, State& state, const Action& action) {
 // fields, trees, rocks and such on triangles and keep the nodes
 // passable. See code structure issue #1096824.
 struct FindNodeSpace {
-	FindNodeSpace(BaseImmovable* const ignoreimm) : ignoreimmovable(ignoreimm) {
+	explicit FindNodeSpace(BaseImmovable* const ignoreimm) : ignoreimmovable(ignoreimm) {
 	}
 
 	bool accept(const Map& map, const FCoords& coords) const {
@@ -899,11 +899,12 @@ bool Worker::run_geologist_find(Game& game, State& state, const Action&) {
 
 			//  We should add a message to the player's message queue - but only,
 			//  if there is not already a similar one in list.
-			owner().add_message_with_timeout(
-			   game, *new Message(message_type, game.get_gametime(), rdescr->descname(),
-			                      ri.descr().representative_image_filename(), rdescr->descname(),
-			                      message, position, serial_),
-			   300000, 8);
+			owner().add_message_with_timeout(game,
+			                                 std::unique_ptr<Message>(new Message(
+			                                    message_type, game.get_gametime(), rdescr->descname(),
+			                                    ri.descr().representative_image_filename(),
+			                                    rdescr->descname(), message, position, serial_)),
+			                                 300000, 8);
 		}
 	}
 
@@ -1689,10 +1690,11 @@ void Worker::return_update(Game& game, State& state) {
 		    descr().descname().c_str())
 		      .str();
 
-		owner().add_message(game, *new Message(Message::Type::kGameLogic, game.get_gametime(),
-		                                       _("Worker"), "images/ui_basic/menu_help.png",
-		                                       _("Worker got lost!"), message, get_position()),
-		                    serial_);
+		owner().add_message(
+		   game, std::unique_ptr<Message>(new Message(
+		            Message::Type::kGameLogic, game.get_gametime(), _("Worker"),
+		            "images/ui_basic/menu_help.png", _("Worker got lost!"), message, get_position())),
+		   serial_);
 		set_location(nullptr);
 		return pop_task(game);
 	}
@@ -2213,7 +2215,7 @@ void Worker::start_task_fugitive(Game& game) {
 }
 
 struct FindFlagWithPlayersWarehouse {
-	FindFlagWithPlayersWarehouse(const Player& owner) : owner_(owner) {
+	explicit FindFlagWithPlayersWarehouse(const Player& owner) : owner_(owner) {
 	}
 	bool accept(const BaseImmovable& imm) const {
 		if (upcast(Flag const, flag, &imm))

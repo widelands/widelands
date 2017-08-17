@@ -24,6 +24,7 @@
 
 #include "economy/flag.h"
 #include "logic/cmd_queue.h"
+#include "logic/map_objects/tribes/militarysite.h"
 #include "logic/map_objects/tribes/ship.h"
 #include "logic/map_objects/tribes/trainingsite.h"
 #include "logic/map_objects/tribes/warehouse.h"
@@ -82,7 +83,7 @@ struct CmdBulldoze : public PlayerCommand {
 	   : PlayerCommand(t, p), serial(pi.serial()), recurse(init_recurse) {
 	}
 
-	CmdBulldoze(StreamRead&);
+	explicit CmdBulldoze(StreamRead&);
 
 	void write(FileWrite&, EditorGameBase&, MapObjectSaver&) override;
 	void read(FileRead&, EditorGameBase&, MapObjectLoader&) override;
@@ -106,7 +107,7 @@ struct CmdBuild : public PlayerCommand {
 	   : PlayerCommand(init_duetime, p), coords(c), bi(i) {
 	}
 
-	CmdBuild(StreamRead&);
+	explicit CmdBuild(StreamRead&);
 
 	void write(FileWrite&, EditorGameBase&, MapObjectSaver&) override;
 	void read(FileRead&, EditorGameBase&, MapObjectLoader&) override;
@@ -130,7 +131,7 @@ struct CmdBuildFlag : public PlayerCommand {
 	   : PlayerCommand(t, p), coords(c) {
 	}
 
-	CmdBuildFlag(StreamRead&);
+	explicit CmdBuildFlag(StreamRead&);
 
 	void write(FileWrite&, EditorGameBase&, MapObjectSaver&) override;
 	void read(FileRead&, EditorGameBase&, MapObjectLoader&) override;
@@ -150,7 +151,7 @@ struct CmdBuildRoad : public PlayerCommand {
 	CmdBuildRoad() : PlayerCommand(), path(nullptr), start(), nsteps(0), steps(nullptr) {
 	}  // For savegame loading
 	CmdBuildRoad(uint32_t, int32_t, Path&);
-	CmdBuildRoad(StreamRead&);
+	explicit CmdBuildRoad(StreamRead&);
 
 	virtual ~CmdBuildRoad();
 
@@ -185,7 +186,7 @@ struct CmdFlagAction : public PlayerCommand {
 		return QueueCommandTypes::kFlagAction;
 	}
 
-	CmdFlagAction(StreamRead&);
+	explicit CmdFlagAction(StreamRead&);
 
 	void execute(Game&) override;
 	void serialize(StreamWrite&) override;
@@ -208,7 +209,7 @@ struct CmdStartStopBuilding : public PlayerCommand {
 		return QueueCommandTypes::kStopBuilding;
 	}
 
-	CmdStartStopBuilding(StreamRead&);
+	explicit CmdStartStopBuilding(StreamRead&);
 
 	void execute(Game&) override;
 	void serialize(StreamWrite&) override;
@@ -218,12 +219,13 @@ private:
 };
 
 struct CmdMilitarySiteSetSoldierPreference : public PlayerCommand {
-	CmdMilitarySiteSetSoldierPreference() : PlayerCommand(), serial(0) {
+	CmdMilitarySiteSetSoldierPreference()
+	   : PlayerCommand(), serial(0), preference(SoldierPreference::kRookies) {
 	}  // For savegame loading
 	CmdMilitarySiteSetSoldierPreference(const uint32_t t,
 	                                    const PlayerNumber p,
 	                                    Building& b,
-	                                    uint8_t prefs)
+	                                    SoldierPreference prefs)
 	   : PlayerCommand(t, p), serial(b.serial()), preference(prefs) {
 	}
 
@@ -234,14 +236,14 @@ struct CmdMilitarySiteSetSoldierPreference : public PlayerCommand {
 		return QueueCommandTypes::kMilitarysiteSetSoldierPreference;
 	}
 
-	CmdMilitarySiteSetSoldierPreference(StreamRead&);
+	explicit CmdMilitarySiteSetSoldierPreference(StreamRead&);
 
 	void execute(Game&) override;
 	void serialize(StreamWrite&) override;
 
 private:
 	Serial serial;
-	uint8_t preference;
+	Widelands::SoldierPreference preference;
 };
 struct CmdStartOrCancelExpedition : public PlayerCommand {
 	CmdStartOrCancelExpedition() : PlayerCommand() {
@@ -257,7 +259,7 @@ struct CmdStartOrCancelExpedition : public PlayerCommand {
 		return QueueCommandTypes::kPortStartExpedition;
 	}
 
-	CmdStartOrCancelExpedition(StreamRead&);
+	explicit CmdStartOrCancelExpedition(StreamRead&);
 
 	void execute(Game&) override;
 	void serialize(StreamWrite&) override;
@@ -284,7 +286,7 @@ struct CmdEnhanceBuilding : public PlayerCommand {
 		return QueueCommandTypes::kEnhanceBuilding;
 	}
 
-	CmdEnhanceBuilding(StreamRead&);
+	explicit CmdEnhanceBuilding(StreamRead&);
 
 	void execute(Game&) override;
 	void serialize(StreamWrite&) override;
@@ -309,7 +311,7 @@ struct CmdDismantleBuilding : public PlayerCommand {
 		return QueueCommandTypes::kDismantleBuilding;
 	}
 
-	CmdDismantleBuilding(StreamRead&);
+	explicit CmdDismantleBuilding(StreamRead&);
 
 	void execute(Game&) override;
 	void serialize(StreamWrite&) override;
@@ -333,7 +335,7 @@ struct CmdEvictWorker : public PlayerCommand {
 		return QueueCommandTypes::kEvictWorker;
 	}
 
-	CmdEvictWorker(StreamRead&);
+	explicit CmdEvictWorker(StreamRead&);
 
 	void execute(Game&) override;
 	void serialize(StreamWrite&) override;
@@ -343,7 +345,7 @@ private:
 };
 
 struct CmdShipScoutDirection : public PlayerCommand {
-	CmdShipScoutDirection() : PlayerCommand(), serial(0) {
+	CmdShipScoutDirection() : PlayerCommand(), serial(0), dir(WalkingDir::IDLE) {
 	}  // For savegame loading
 	CmdShipScoutDirection(uint32_t const t, PlayerNumber const p, Serial s, WalkingDir direction)
 	   : PlayerCommand(t, p), serial(s), dir(direction) {
@@ -356,7 +358,7 @@ struct CmdShipScoutDirection : public PlayerCommand {
 		return QueueCommandTypes::kShipScout;
 	}
 
-	CmdShipScoutDirection(StreamRead&);
+	explicit CmdShipScoutDirection(StreamRead&);
 
 	void execute(Game&) override;
 	void serialize(StreamWrite&) override;
@@ -380,7 +382,7 @@ struct CmdShipConstructPort : public PlayerCommand {
 		return QueueCommandTypes::kShipConstructPort;
 	}
 
-	CmdShipConstructPort(StreamRead&);
+	explicit CmdShipConstructPort(StreamRead&);
 
 	void execute(Game&) override;
 	void serialize(StreamWrite&) override;
@@ -391,7 +393,8 @@ private:
 };
 
 struct CmdShipExploreIsland : public PlayerCommand {
-	CmdShipExploreIsland() : PlayerCommand(), serial(0) {
+	CmdShipExploreIsland()
+	   : PlayerCommand(), serial(0), island_explore_direction(IslandExploreDirection::kNotSet) {
 	}  // For savegame loading
 	CmdShipExploreIsland(uint32_t const t,
 	                     PlayerNumber const p,
@@ -407,7 +410,7 @@ struct CmdShipExploreIsland : public PlayerCommand {
 		return QueueCommandTypes::kShipExplore;
 	}
 
-	CmdShipExploreIsland(StreamRead&);
+	explicit CmdShipExploreIsland(StreamRead&);
 
 	void execute(Game&) override;
 	void serialize(StreamWrite&) override;
@@ -430,7 +433,7 @@ struct CmdShipSink : public PlayerCommand {
 		return QueueCommandTypes::kSinkShip;
 	}
 
-	CmdShipSink(StreamRead&);
+	explicit CmdShipSink(StreamRead&);
 
 	void execute(Game&) override;
 	void serialize(StreamWrite&) override;
@@ -453,7 +456,7 @@ struct CmdShipCancelExpedition : public PlayerCommand {
 		return QueueCommandTypes::kShipCancelExpedition;
 	}
 
-	CmdShipCancelExpedition(StreamRead&);
+	explicit CmdShipCancelExpedition(StreamRead&);
 
 	void execute(Game&) override;
 	void serialize(StreamWrite&) override;
@@ -481,7 +484,7 @@ struct CmdSetWarePriority : public PlayerCommand {
 		return QueueCommandTypes::kSetWarePriority;
 	}
 
-	CmdSetWarePriority(StreamRead&);
+	explicit CmdSetWarePriority(StreamRead&);
 
 	void execute(Game&) override;
 	void serialize(StreamWrite&) override;
@@ -511,7 +514,7 @@ struct CmdSetInputMaxFill : public PlayerCommand {
 		return QueueCommandTypes::kSetInputMaxFill;
 	}
 
-	CmdSetInputMaxFill(StreamRead&);
+	explicit CmdSetInputMaxFill(StreamRead&);
 
 	void execute(Game&) override;
 	void serialize(StreamWrite&) override;
@@ -535,7 +538,7 @@ struct CmdChangeTargetQuantity : public PlayerCommand {
 	void write(FileWrite&, EditorGameBase&, MapObjectSaver&) override;
 	void read(FileRead&, EditorGameBase&, MapObjectLoader&) override;
 
-	CmdChangeTargetQuantity(StreamRead&);
+	explicit CmdChangeTargetQuantity(StreamRead&);
 
 	void serialize(StreamWrite&) override;
 
@@ -569,7 +572,7 @@ struct CmdSetWareTargetQuantity : public CmdChangeTargetQuantity {
 		return QueueCommandTypes::kSetWareTargetQuantity;
 	}
 
-	CmdSetWareTargetQuantity(StreamRead&);
+	explicit CmdSetWareTargetQuantity(StreamRead&);
 
 	void execute(Game&) override;
 	void serialize(StreamWrite&) override;
@@ -594,7 +597,7 @@ struct CmdResetWareTargetQuantity : public CmdChangeTargetQuantity {
 		return QueueCommandTypes::kResetWareTargetQuantity;
 	}
 
-	CmdResetWareTargetQuantity(StreamRead&);
+	explicit CmdResetWareTargetQuantity(StreamRead&);
 
 	void execute(Game&) override;
 	void serialize(StreamWrite&) override;
@@ -617,7 +620,7 @@ struct CmdSetWorkerTargetQuantity : public CmdChangeTargetQuantity {
 		return QueueCommandTypes::kSetWorkerTargetQuantity;
 	}
 
-	CmdSetWorkerTargetQuantity(StreamRead&);
+	explicit CmdSetWorkerTargetQuantity(StreamRead&);
 
 	void execute(Game&) override;
 	void serialize(StreamWrite&) override;
@@ -642,7 +645,7 @@ struct CmdResetWorkerTargetQuantity : public CmdChangeTargetQuantity {
 		return QueueCommandTypes::kResetWorkerTargetQuantity;
 	}
 
-	CmdResetWorkerTargetQuantity(StreamRead&);
+	explicit CmdResetWorkerTargetQuantity(StreamRead&);
 
 	void execute(Game&) override;
 	void serialize(StreamWrite&) override;
@@ -668,7 +671,7 @@ struct CmdChangeTrainingOptions : public PlayerCommand {
 		return QueueCommandTypes::kChangeTrainingOptions;
 	}
 
-	CmdChangeTrainingOptions(StreamRead&);
+	explicit CmdChangeTrainingOptions(StreamRead&);
 
 	void execute(Game&) override;
 	void serialize(StreamWrite&) override;
@@ -694,7 +697,7 @@ struct CmdDropSoldier : public PlayerCommand {
 		return QueueCommandTypes::kDropSoldier;
 	}
 
-	CmdDropSoldier(StreamRead&);
+	explicit CmdDropSoldier(StreamRead&);
 
 	void execute(Game&) override;
 	void serialize(StreamWrite&) override;
@@ -719,7 +722,7 @@ struct CmdChangeSoldierCapacity : public PlayerCommand {
 		return QueueCommandTypes::kChangeSoldierCapacity;
 	}
 
-	CmdChangeSoldierCapacity(StreamRead&);
+	explicit CmdChangeSoldierCapacity(StreamRead&);
 
 	void execute(Game&) override;
 	void serialize(StreamWrite&) override;
@@ -729,7 +732,6 @@ private:
 	int32_t val;
 };
 
-/////////////TESTING STUFF
 struct CmdEnemyFlagAction : public PlayerCommand {
 	CmdEnemyFlagAction() : PlayerCommand(), serial(0), number(0) {
 	}  // For savegame loading
@@ -745,7 +747,7 @@ struct CmdEnemyFlagAction : public PlayerCommand {
 		return QueueCommandTypes::kEnemyFlagAction;
 	}
 
-	CmdEnemyFlagAction(StreamRead&);
+	explicit CmdEnemyFlagAction(StreamRead&);
 
 	void execute(Game&) override;
 	void serialize(StreamWrite&) override;
@@ -766,7 +768,7 @@ struct PlayerMessageCommand : public PlayerCommand {
 	void write(FileWrite&, EditorGameBase&, MapObjectSaver&) override;
 	void read(FileRead&, EditorGameBase&, MapObjectLoader&) override;
 
-	PlayerMessageCommand(StreamRead&);
+	explicit PlayerMessageCommand(StreamRead&);
 
 	MessageId message_id() const {
 		return message_id_;
@@ -787,7 +789,7 @@ struct CmdMessageSetStatusRead : public PlayerMessageCommand {
 		return QueueCommandTypes::kMessageSetStatusRead;
 	}
 
-	CmdMessageSetStatusRead(StreamRead& des) : PlayerMessageCommand(des) {
+	explicit CmdMessageSetStatusRead(StreamRead& des) : PlayerMessageCommand(des) {
 	}
 
 	void execute(Game&) override;
@@ -805,7 +807,7 @@ struct CmdMessageSetStatusArchived : public PlayerMessageCommand {
 		return QueueCommandTypes::kMessageSetStatusArchived;
 	}
 
-	CmdMessageSetStatusArchived(StreamRead& des) : PlayerMessageCommand(des) {
+	explicit CmdMessageSetStatusArchived(StreamRead& des) : PlayerMessageCommand(des) {
 	}
 
 	void execute(Game&) override;
@@ -830,7 +832,7 @@ struct CmdSetStockPolicy : PlayerCommand {
 	void execute(Game& game) override;
 
 	// Network (de-)serialization
-	CmdSetStockPolicy(StreamRead& des);
+	explicit CmdSetStockPolicy(StreamRead& des);
 	void serialize(StreamWrite& ser) override;
 
 	// Savegame functions

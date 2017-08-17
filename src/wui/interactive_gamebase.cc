@@ -61,7 +61,7 @@ InteractiveGameBase::InteractiveGameBase(Widelands::Game& g,
                                          bool const multiplayer,
                                          ChatProvider* chat_provider)
    : InteractiveBase(g, global_s),
-     chat_provider_(nullptr),
+     chat_provider_(chat_provider),
      multiplayer_(multiplayer),
      playertype_(pt) {
 	buildingnotes_subscriber_ = Notifications::subscribe<Widelands::NoteBuilding>(
@@ -87,7 +87,6 @@ InteractiveGameBase::InteractiveGameBase(Widelands::Game& g,
 		   }
 		});
 
-	chat_provider_ = chat_provider;
 	chat_overlay_->set_chat_provider(*chat_provider);
 }
 

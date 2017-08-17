@@ -405,11 +405,19 @@ void MapView::draw(RenderTarget& dst) {
 	}
 
 	if (upcast(InteractivePlayer const, interactive_player, &intbase())) {
+		const GameRenderer::Overlays overlays{
+		   info_to_draw, interactive_player->road_building_preview()};
 		renderer_->rendermap(
-		   egbase, view_.viewpoint, view_.zoom, interactive_player->player(), info_to_draw, &dst);
+		   egbase, view_.viewpoint, view_.zoom, interactive_player->player(), overlays, &dst);
 	} else {
+		const auto draw_immovables = intbase().draw_immovables() ?
+		                                GameRenderer::DrawImmovables::kYes :
+		                                GameRenderer::DrawImmovables::kNo;
+		const auto draw_bobs =
+		   intbase().draw_bobs() ? GameRenderer::DrawBobs::kYes : GameRenderer::DrawBobs::kNo;
+		const GameRenderer::Overlays overlays{static_cast<InfoToDraw>(info_to_draw), {}};
 		renderer_->rendermap(
-		   egbase, view_.viewpoint, view_.zoom, static_cast<InfoToDraw>(info_to_draw), &dst);
+		   egbase, view_.viewpoint, view_.zoom, overlays, draw_immovables, draw_bobs, &dst);
 	}
 }
 

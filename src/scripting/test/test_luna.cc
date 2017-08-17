@@ -58,7 +58,7 @@ public:
 	LuaClass() : x(123), prop(246) {
 	}
 	virtual ~LuaClass();
-	LuaClass(lua_State* /* L */) : x(124), prop(248) {
+	explicit LuaClass(lua_State* /* L */) : x(124), prop(248) {
 	}
 	virtual int test(lua_State* L) {
 		lua_pushuint32(L, x);
@@ -98,7 +98,7 @@ public:
 	LUNA_CLASS_HEAD(LuaSubClass);
 	LuaSubClass() : y(1230) {
 	}
-	LuaSubClass(lua_State* L) : LuaClass(L), y(1240) {
+	explicit LuaSubClass(lua_State* L) : LuaClass(L), y(1240) {
 	}
 	virtual int subtest(lua_State* L);
 	void __persist(lua_State* /* L */) override {
@@ -125,7 +125,7 @@ public:
 	LUNA_CLASS_HEAD(LuaVirtualClass);
 	LuaVirtualClass() : z(12300) {
 	}
-	LuaVirtualClass(lua_State* L) : LuaClass(L), z(12400) {
+	explicit LuaVirtualClass(lua_State* L) : LuaClass(L), z(12400) {
 	}
 	virtual int virtualtest(lua_State* L);
 	void __persist(lua_State* /* L */) override {
@@ -168,7 +168,7 @@ public:
 	LUNA_CLASS_HEAD(LuaMultiClass);
 	LuaMultiClass() : z(12300) {
 	}
-	LuaMultiClass(lua_State* L) : LuaClass(L), z(12400) {
+	explicit LuaMultiClass(lua_State* L) : LuaClass(L), z(12400) {
 	}
 	virtual int virtualtest(lua_State* L);
 	void __persist(lua_State* /* L */) override {

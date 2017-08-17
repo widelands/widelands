@@ -58,7 +58,7 @@ private:
 	// A transient cache for the generated rendered texts
 	class RenderCache : public TransientCache<RenderedText> {
 	public:
-		RenderCache(uint32_t max_number_of_rects)
+		explicit RenderCache(uint32_t max_number_of_rects)
 		   : TransientCache<RenderedText>(max_number_of_rects) {
 		}
 

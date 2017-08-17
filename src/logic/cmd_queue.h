@@ -69,7 +69,7 @@ constexpr uint32_t kCommandQueueBucketSize = 65536;  // Make this a power of two
  * the same for all parallel simulation.
  */
 struct Command {
-	Command(const uint32_t init_duetime) : duetime_(init_duetime) {
+	explicit Command(const uint32_t init_duetime) : duetime_(init_duetime) {
 	}
 	virtual ~Command();
 
@@ -95,7 +95,7 @@ private:
  * for all instances of a game to ensure parallel simulation.
  */
 struct GameLogicCommand : public Command {
-	GameLogicCommand(uint32_t const init_duetime) : Command(init_duetime) {
+	explicit GameLogicCommand(uint32_t const init_duetime) : Command(init_duetime) {
 	}
 
 	// Write these commands to a file (for savegames)
@@ -130,7 +130,7 @@ class CmdQueue {
 	};
 
 public:
-	CmdQueue(Game&);
+	explicit CmdQueue(Game&);
 	~CmdQueue();
 
 	/// Add a command to the queue. Takes ownership.

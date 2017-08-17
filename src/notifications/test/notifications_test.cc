@@ -32,7 +32,7 @@ CLANG_DIAG_OFF("-Wdisabled-macro-expansion")
 struct SimpleNote {
 	CAN_BE_SENT_AS_NOTE(100)
 
-	SimpleNote(const std::string& init_text) : text(init_text) {
+	explicit SimpleNote(const std::string& init_text) : text(init_text) {
 	}
 
 	std::string text;

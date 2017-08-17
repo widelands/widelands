@@ -58,12 +58,12 @@ struct UserSettings {
 	}
 
 	UserSettings(Widelands::PlayerEndResult init_result, bool init_ready)
-	   : position(0), name(""), result(init_result), win_condition_string(""), ready(init_ready) {
+	   : result(init_result), ready(init_ready) {
 	}
 	UserSettings() : UserSettings(Widelands::PlayerEndResult::kUndefined, false) {
 	}
 
-	uint8_t position;
+	uint8_t position = 0;
 	std::string name;
 	Widelands::PlayerEndResult result;
 	std::string win_condition_string;

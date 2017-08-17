@@ -88,13 +88,13 @@ private:
 		 * so that we can update when its status changes.
 		 */
 		/*@{*/
-		uint32_t cache_level;
-		uint32_t cache_health;
+		uint32_t cache_level = 0;
+		uint32_t cache_health = 0;
 		/*@}*/
 	};
 
 	Widelands::EditorGameBase& egbase_;
-	SoldierControl& soldiers_;
+	const SoldierControl* soldier_control_;
 
 	SoldierFn mouseover_fn_;
 	SoldierFn click_fn_;
@@ -115,13 +115,14 @@ SoldierPanel::SoldierPanel(UI::Panel& parent,
                            Widelands::Building& building)
    : Panel(&parent, 0, 0, 0, 0),
      egbase_(gegbase),
-     soldiers_(*dynamic_cast<SoldierControl*>(&building)),
+     soldier_control_(building.soldier_control()),
      last_animate_time_(0) {
+	assert(soldier_control_ != nullptr);
 	Soldier::calc_info_icon_size(building.owner().tribe(), icon_width_, icon_height_);
 	icon_width_ += 2 * kIconBorder;
 	icon_height_ += 2 * kIconBorder;
 
-	Widelands::Quantity maxcapacity = soldiers_.max_soldier_capacity();
+	Widelands::Quantity maxcapacity = soldier_control_->max_soldier_capacity();
 	if (maxcapacity <= kMaxColumns) {
 		cols_ = maxcapacity;
 		rows_ = 1;
@@ -137,12 +138,14 @@ SoldierPanel::SoldierPanel(UI::Panel& parent,
 	// Initialize the icons
 	uint32_t row = 0;
 	uint32_t col = 0;
-	for (Soldier* soldier : soldiers_.present_soldiers()) {
+	for (Soldier* soldier : soldier_control_->present_soldiers()) {
 		Icon icon;
 		icon.soldier = soldier;
 		icon.row = row;
 		icon.col = col;
 		icon.pos = calc_pos(row, col);
+		icon.cache_health = 0;
+		icon.cache_level = 0;
 		icons_.push_back(icon);
 
 		if (++col >= cols_) {
@@ -168,10 +171,10 @@ void SoldierPanel::set_click(const SoldierPanel::SoldierFn& fn) {
 
 void SoldierPanel::think() {
 	bool changes = false;
-	uint32_t capacity = soldiers_.soldier_capacity();
+	uint32_t capacity = soldier_control_->soldier_capacity();
 
 	// Update soldier list and target row/col:
-	std::vector<Soldier*> soldierlist = soldiers_.present_soldiers();
+	std::vector<Soldier*> soldierlist = soldier_control_->present_soldiers();
 	std::vector<uint32_t> row_occupancy;
 	row_occupancy.resize(rows_);
 
@@ -227,9 +230,6 @@ void SoldierPanel::think() {
 			icon.pos.x = std::max<int32_t>(icon.pos.x, icon_iter->pos.x + icon_width_);
 		}
 
-		icon.cache_health = 0;
-		icon.cache_level = 0;
-
 		icons_.insert(insertpos, icon);
 		changes = true;
 	}
@@ -276,7 +276,7 @@ void SoldierPanel::think() {
 
 void SoldierPanel::draw(RenderTarget& dst) {
 	// Fill a region matching the current site capacity with black
-	uint32_t capacity = soldiers_.soldier_capacity();
+	uint32_t capacity = soldier_control_->soldier_capacity();
 	uint32_t fullrows = capacity / kMaxColumns;
 
 	if (fullrows) {
@@ -347,7 +347,7 @@ bool SoldierPanel::handle_mousepress(uint8_t btn, int32_t x, int32_t y) {
 struct SoldierList : UI::Box {
 	SoldierList(UI::Panel& parent, InteractiveGameBase& igb, Widelands::Building& building);
 
-	SoldierControl& soldiers() const;
+	const SoldierControl* soldiers() const;
 
 private:
 	void mouseover(const Soldier* soldier);
@@ -409,7 +409,7 @@ SoldierList::SoldierList(UI::Panel& parent, InteractiveGameBase& igb, Widelands:
 		}
 
 		soldier_preference_.set_state(0);
-		if (ms->get_soldier_preference() == Widelands::MilitarySite::kPrefersHeroes) {
+		if (ms->get_soldier_preference() == Widelands::SoldierPreference::kHeroes) {
 			soldier_preference_.set_state(1);
 		}
 		if (can_act) {
@@ -424,8 +424,8 @@ SoldierList::SoldierList(UI::Panel& parent, InteractiveGameBase& igb, Widelands:
 	add(buttons, UI::Box::Resizing::kFullSize);
 }
 
-SoldierControl& SoldierList::soldiers() const {
-	return *dynamic_cast<SoldierControl*>(&building_);
+const SoldierControl* SoldierList::soldiers() const {
+	return building_.soldier_control();
 }
 
 void SoldierList::think() {
@@ -435,14 +435,13 @@ void SoldierList::think() {
 	}
 	if (upcast(Widelands::MilitarySite, ms, &building_)) {
 		switch (ms->get_soldier_preference()) {
-		case Widelands::MilitarySite::kPrefersRookies:
+		case Widelands::SoldierPreference::kRookies:
+			FALLS_THROUGH;
+		case Widelands::SoldierPreference::kNotSet:
 			soldier_preference_.set_state(0);
 			break;
-		case Widelands::MilitarySite::kPrefersHeroes:
+		case Widelands::SoldierPreference::kHeroes:
 			soldier_preference_.set_state(1);
-			break;
-		case Widelands::MilitarySite::kNoPreference:
-			soldier_preference_.set_state(-1);
 			break;
 		}
 	}
@@ -464,9 +463,9 @@ void SoldierList::mouseover(const Soldier* soldier) {
 }
 
 void SoldierList::eject(const Soldier* soldier) {
-	uint32_t const capacity_min = soldiers().min_soldier_capacity();
+	uint32_t const capacity_min = soldiers()->min_soldier_capacity();
 	bool can_act = igbase_.can_act(building_.owner().player_number());
-	bool over_min = capacity_min < soldiers().present_soldiers().size();
+	bool over_min = capacity_min < soldiers()->present_soldiers().size();
 
 	if (can_act && over_min)
 		igbase_.game().send_player_drop_soldier(building_, soldier->serial());
@@ -478,8 +477,8 @@ void SoldierList::set_soldier_preference(int32_t changed_to) {
 	assert(ms);
 #endif
 	igbase_.game().send_player_militarysite_set_soldier_preference(
-	   building_, changed_to == 0 ? Widelands::MilitarySite::kPrefersRookies :
-	                                Widelands::MilitarySite::kPrefersHeroes);
+	   building_, changed_to == 0 ? Widelands::SoldierPreference::kRookies :
+	                                Widelands::SoldierPreference::kHeroes);
 }
 
 UI::Panel*

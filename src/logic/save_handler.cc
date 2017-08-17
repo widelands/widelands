@@ -46,7 +46,6 @@ SaveHandler::SaveHandler()
      allow_saving_(true),
      save_requested_(false),
      saving_next_tick_(false),
-     save_filename_(""),
      autosave_filename_("wl_autosave"),
      fs_type_(FileSystem::ZIP),
      autosave_interval_in_ms_(kDefaultAutosaveInterval * 60 * 1000),
@@ -179,7 +178,6 @@ void SaveHandler::think(Widelands::Game& game) {
 			g_fs->fs_rename(complete_filename, backup_filename);
 		}
 
-		std::string error;
 		if (!save_and_handle_error(game, complete_filename, backup_filename)) {
 			return;
 		}

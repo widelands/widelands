@@ -64,7 +64,7 @@
 #include "wui/interactive_spectator.h"
 
 struct HostGameSettingsProvider : public GameSettingsProvider {
-	HostGameSettingsProvider(GameHost* const init_host) : host_(init_host) {
+	explicit HostGameSettingsProvider(GameHost* const init_host) : host_(init_host) {
 	}
 	~HostGameSettingsProvider() {
 	}
@@ -278,15 +278,13 @@ private:
 };
 
 struct HostChatProvider : public ChatProvider {
-	HostChatProvider(GameHost* const init_host) : h(init_host), kickClient(0) {
+	explicit HostChatProvider(GameHost* const init_host) : h(init_host), kickClient(0) {
 	}
 
 	void send(const std::string& msg) override {
-		ChatMessage c;
-		c.time = time(nullptr);
+		ChatMessage c(msg);
 		c.playern = h->get_local_playerposition();
 		c.sender = h->get_local_playername();
-		c.msg = msg;
 		if (c.msg.size() && *c.msg.begin() == '@') {
 			// Personal message
 			std::string::size_type const space = c.msg.find(' ');
@@ -527,7 +525,7 @@ struct GameHostImpl {
 	Md5Checksum syncreport;
 	bool syncreport_arrived;
 
-	GameHostImpl(GameHost* const h)
+	explicit GameHostImpl(GameHost* const h)
 	   : localdesiredspeed(0),
 	     chat(h),
 	     hp(h),
@@ -854,12 +852,8 @@ void GameHost::send(ChatMessage msg) {
 
 				// is host the sender?
 				if (d->localplayername == msg.sender) {
-					ChatMessage err;
-					err.time = time(nullptr);
+					ChatMessage err(fail);
 					err.playern = -2;  // System message
-					err.sender = "";
-					err.msg = fail;
-					err.recipient = "";
 					d->chat.receive(err);
 					return;  // nothing left to do!
 				}
@@ -908,7 +902,7 @@ void GameHost::send(ChatMessage msg) {
  *   -   -1 if no client was found
  *   -   -2 if the host is the client (has no client number)
  */
-int32_t GameHost::check_client(std::string name) {
+int32_t GameHost::check_client(const std::string& name) {
 	// Check if the client is the host him-/herself
 	if (d->localplayername == name) {
 		return -2;
@@ -938,7 +932,7 @@ int32_t GameHost::check_client(std::string name) {
 * If the host sends a chat message with formation /kick <name> <reason>
 * This function will handle this command and try to kick the user.
 */
-void GameHost::kick_user(uint32_t client, std::string reason) {
+void GameHost::kick_user(uint32_t client, const std::string& reason) {
 	disconnect_client(client, "KICKED", true, reason);
 }
 
@@ -985,9 +979,7 @@ void GameHost::send_system_message_code(const std::string& code,
 	broadcast(s);
 
 	// Now add to our own chatbox
-	ChatMessage msg;
-	msg.time = time(nullptr);
-	msg.msg = NetworkGamingMessages::get_message(code, a, b, c);
+	ChatMessage msg(NetworkGamingMessages::get_message(code, a, b, c));
 	msg.playern = UserSettings::none();  //  == System message
 	// c.sender remains empty to indicate a system message
 	d->chat.receive(msg);
@@ -998,7 +990,7 @@ int32_t GameHost::get_frametime() {
 }
 
 GameController::GameType GameHost::get_game_type() {
-	return GameController::GameType::NETHOST;
+	return GameController::GameType::kNetHost;
 }
 
 const GameSettings& GameHost::settings() {
@@ -1874,7 +1866,8 @@ void GameHost::request_sync_reports() {
 	s.signed_32(d->syncreport_time);
 	broadcast(s);
 
-	d->game->enqueue_command(new CmdNetCheckSync(d->syncreport_time, this));
+	d->game->enqueue_command(
+	   new CmdNetCheckSync(d->syncreport_time, [this] { sync_report_callback(); }));
 
 	committed_network_time(d->syncreport_time);
 }
@@ -1922,7 +1915,7 @@ void GameHost::check_sync_reports() {
 	}
 }
 
-void GameHost::syncreport() {
+void GameHost::sync_report_callback() {
 	assert(d->game->get_gametime() == static_cast<uint32_t>(d->syncreport_time));
 
 	d->syncreport = d->game->get_sync_hash();
@@ -2162,11 +2155,9 @@ void GameHost::handle_packet(uint32_t const i, RecvPacket& r) {
 	}
 
 	case NETCMD_CHAT: {
-		ChatMessage c;
-		c.time = time(nullptr);
+		ChatMessage c(r.string());
 		c.playern = d->settings.users.at(client.usernum).position;
 		c.sender = d->settings.users.at(client.usernum).name;
-		c.msg = r.string();
 		if (c.msg.size() && *c.msg.begin() == '@') {
 			// Personal message
 			std::string::size_type const space = c.msg.find(' ');

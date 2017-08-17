@@ -172,7 +172,7 @@ char* gamestring_with_leading_zeros(uint32_t gametime) {
 	gamestringbuffer[4] = '0' + (time /= 10) % 6;
 	gamestringbuffer[2] = '0' + (time /= 6) % 10;
 	gamestringbuffer[1] = '0' + (time /= 10) % 10;
-	gamestringbuffer[0] = '0' + (time /= 10);
+	gamestringbuffer[0] = '0' + (time / 10);
 	return gamestringbuffer;
 }
 

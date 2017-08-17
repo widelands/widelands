@@ -24,6 +24,7 @@
 #include <string>
 #include <vector>
 
+#include "logic/widelands.h"
 #include "notifications/note_ids.h"
 #include "notifications/notifications.h"
 
@@ -31,12 +32,15 @@
 struct ChatMessage {
 	CAN_BE_SENT_AS_NOTE(NoteId::ChatMessage)
 
+	ChatMessage(const std::string& message) : msg(message) {
+	}
+
 	// The (real-)time at which the message was received.
-	time_t time;
+	time_t time = std::time(nullptr);
 
 	// The playercolor. Used to colorize the senders name; negative numbers
 	// indicate system messages for which richtext is allowed.
-	int16_t playern;
+	int16_t playern = Widelands::neutral();
 
 	// A string identifying the sender of the message.
 	// This string is empty for system-generated messages.

@@ -61,7 +61,7 @@ class NonPackedAnimation : public Animation {
 public:
 	virtual ~NonPackedAnimation() {
 	}
-	NonPackedAnimation(const LuaTable& table);
+	explicit NonPackedAnimation(const LuaTable& table);
 
 	// Implements Animation.
 	float height() const override;

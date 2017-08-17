@@ -447,7 +447,7 @@ void Ship::ship_update_idle(Game& game, Bob::State& state) {
 
 		for (Direction dir = 0; dir <= LAST_DIRECTION; ++dir) {
 			FCoords node = dir ? map.get_neighbour(position, dir) : position;
-			dirs[dir] = node.field->nodecaps() & MOVECAPS_WALK ? 10 : 0;
+			dirs[dir] = (node.field->nodecaps() & MOVECAPS_WALK) ? 10 : 0;
 
 			Area<FCoords> area(node, 0);
 			std::vector<Bob*> ships;
@@ -680,8 +680,6 @@ void Ship::ship_update_idle(Game& game, Bob::State& state) {
 			}
 
 			expedition_.reset(nullptr);
-
-			Notifications::publish(NoteShipWindow(serial(), NoteShipWindow::Action::kRefresh));
 			return start_task_idle(game, descr().main_animation(), 1500);
 		}
 	}
@@ -942,9 +940,6 @@ void Ship::exp_cancel(Game& game) {
 
 	// Delete the expedition and the economy it created.
 	expedition_.reset(nullptr);
-
-	// And finally update our ship window
-	Notifications::publish(NoteShipWindow(serial(), NoteShipWindow::Action::kRefresh));
 }
 
 /// Sinks the ship
@@ -967,7 +962,7 @@ void Ship::draw(const EditorGameBase& egbase,
 	Bob::draw(egbase, info_to_draw, field_on_dst, scale, dst);
 
 	// Show ship name and current activity
-	std::string statistics_string = "";
+	std::string statistics_string;
 	if (info_to_draw & InfoToDraw::kStatistics) {
 		switch (ship_state_) {
 		case (ShipStates::kTransport):
@@ -1068,10 +1063,9 @@ void Ship::send_message(Game& game,
 	    picture % UI_FONT_SIZE_MESSAGE % description)
 	      .str();
 
-	Message* msg = new Message(Message::Type::kSeafaring, game.get_gametime(), title, picture,
-	                           heading, rt_description, get_position(), serial_);
-
-	get_owner()->add_message(game, *msg);
+	get_owner()->add_message(game, std::unique_ptr<Message>(new Message(
+	                                  Message::Type::kSeafaring, game.get_gametime(), title, picture,
+	                                  heading, rt_description, get_position(), serial_)));
 }
 
 /*
@@ -1083,9 +1077,6 @@ Load / Save implementation
 */
 
 constexpr uint8_t kCurrentPacketVersion = 6;
-
-Ship::Loader::Loader() : lastdock_(0), destination_(0) {
-}
 
 const Bob::Task* Ship::Loader::get_task(const std::string& name) {
 	if (name == "shipidle" || name == "ship")

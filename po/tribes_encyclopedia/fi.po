@@ -15,8 +15,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-06-16 07:17+0000\n"
-"PO-Revision-Date: 2017-06-16 19:06+0000\n"
+"POT-Creation-Date: 2017-07-04 08:57+0000\n"
+"PO-Revision-Date: 2017-07-05 19:08+0000\n"
 "Last-Translator: Jukka Pakarinen\n"
 "Language-Team: Finnish (http://www.transifex.com/widelands/widelands/language/fi/)\n"
 "MIME-Version: 1.0\n"
@@ -125,6 +125,7 @@ msgid ""
 "blackroot."
 msgstr "Mustajuuriviljelijät tarvitsevat keskimäärin  %1% kylvämiseen ja mustajuurinipun korjaamiseen."
 
+#. TRANSLATORS: Purpose helptext for a building
 #. TRANSLATORS: Note helptext for a building
 #. TRANSLATORS: Performance helptext for a building
 #. This include can be removed when all help texts have been defined.
@@ -723,8 +724,8 @@ msgstr "Tämä kaivos hyödyntää kaikki resurssit syvimmälle tasolle asti. Jo
 #. TRANSLATORS: 'It' is a mine
 #: ../../data/tribes/buildings/productionsites/barbarians/granitemine/helptexts.lua:21
 msgctxt "barbarians_building"
-msgid "It cannot be upgraded."
-msgstr "Tämä ei ole laajennettavissa."
+msgid "It cannot be enhanced."
+msgstr "Sitä ei voi laajentaa."
 
 #. TRANSLATORS: Performance helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/granitemine/helptexts.lua:26
@@ -1073,8 +1074,8 @@ msgstr "Tuottaa kaikkia kirveitä, joita Barbaarit käyttävät sodankäynnissä
 msgctxt "barbarians_building"
 msgid ""
 "The Barbarian war mill is their most advanced production site for weapons. "
-"As such it needs to be upgraded from an ax workshop."
-msgstr "Barbaarien asetehdas on kaikkein edistyksellisin aseiden tuotantolaitos. Asetehdas saadaan vain päivittämällä kirvespajaa."
+"As such you will need to enhance an ax workshop in order to get one."
+msgstr "Barbaarien asetehdas on heidän kaikkein kehittynein aseiden tuotantopaikka. Niimpä sinun tarvitsee laajentaa kirvespajaa saadaksesi sellaisen."
 
 #: ../../data/tribes/buildings/productionsites/barbarians/warmill/helptexts.lua:29
 msgctxt "barbarians_building"
@@ -2740,7 +2741,7 @@ msgctxt "empire_ware"
 msgid ""
 "Besides bread and meat, fish is also a foodstuff for the Empire. Fish are "
 "used in taverns, inns and training sites (arena, colosseum, training camp)."
-msgstr "Leivän ja lihan lisäksi Keisarikunnassa syödään myös kalaa. Kalaa käytetään krouveissa, kestikievareissa ja harjoittelupaikoilla (areena, colosseum, harjoitteluleiri)."
+msgstr "Leivän ja lihan lisäksi Keisarikunnassa syödään myös kalaa. Kalaa käytetään krouveissa, kestikievareissa ja harjoittelupaikoilla (areena, colosseumi, harjoitteluleiri)."
 
 #. TRANSLATORS: Helptext for a ware: Fishing Net
 #: ../../data/tribes/wares/fishing_net/helptexts.lua:4
@@ -3117,7 +3118,7 @@ msgid ""
 "Meat can also be obtained as pork from piggeries. It is used in the inns and"
 " taverns to prepare lunch for the miners and is consumed at the training "
 "sites (arena, colosseum, training camp)."
-msgstr "Lihaa voidaan myös hankkia sikana sikalasta. Sitä kulutetaan kestikievareissa ja krouveissa lounaan varmistamiseksi kaivostyöläisille ja kulutetaan harjoittelupaikoilla (areena, kolosseumi, harjoitusleiri)."
+msgstr "Lihaa voidaan myös hankkia sikana sikalasta. Sitä kulutetaan kestikievareissa ja krouveissa lounaan varmistamiseksi kaivostyöläisille ja kulutetaan harjoittelupaikoilla (areena, colosseumi, harjoitusleiri)."
 
 #. TRANSLATORS: Helptext for a ware: Milking Tongs
 #: ../../data/tribes/wares/milking_tongs/helptexts.lua:4

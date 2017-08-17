@@ -71,7 +71,7 @@ class Worker : public Bob {
 	};
 
 public:
-	Worker(const WorkerDescr&);
+	explicit Worker(const WorkerDescr&);
 	virtual ~Worker();
 
 	Player& owner() const {

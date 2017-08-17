@@ -99,8 +99,8 @@ private:
 	void resolution_changed();
 
 	// The height & width of the window should we be in window mode.
-	int window_mode_width_;
-	int window_mode_height_;
+	int window_mode_width_ = 0;
+	int window_mode_height_ = 0;
 
 	/// This is the main screen Surface.
 	/// A RenderTarget for this can be retrieved with get_render_target()
@@ -109,11 +109,11 @@ private:
 	/// This saves a copy of the screen SDL_Surface. This is needed for
 	/// opengl rendering as the SurfaceOpenGL does not use it. It allows
 	/// manipulation the screen context.
-	SDL_Window* sdl_window_;
+	SDL_Window* sdl_window_ = nullptr;
 	SDL_GLContext gl_context_;
 
 	/// The maximum width or height a texture can have.
-	int max_texture_size_;
+	int max_texture_size_ = kMinimumSizeForTextures;
 
 	/// A RenderTarget for screen_. This is initialized during init()
 	std::unique_ptr<RenderTarget> render_target_;

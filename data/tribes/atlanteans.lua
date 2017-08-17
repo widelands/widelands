@@ -352,4 +352,8 @@ tribes:new_tribe {
    headquarters = "atlanteans_headquarters",
    port = "atlanteans_port",
    barracks = "atlanteans_barracks",
+   ironore = "iron_ore",
+   rawlog = "log",
+   refinedlog = "planks",
+   granite = "granite",
 }

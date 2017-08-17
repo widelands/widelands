@@ -199,7 +199,7 @@ struct Reference {
 
 class RefMap : public IRefMap {
 public:
-	RefMap(const std::vector<Reference>& refs) : refs_(refs) {
+	explicit RefMap(const std::vector<Reference>& refs) : refs_(refs) {
 	}
 	std::string query(int16_t x, int16_t y) override {
 		// Should this linear algorithm proof to be too slow (doubtful), the
@@ -221,7 +221,7 @@ public:
 		FLOAT_RIGHT,
 		FLOAT_LEFT,
 	};
-	RenderNode(NodeStyle& ns)
+	explicit RenderNode(NodeStyle& ns)
 	   : floating_(NO_FLOAT), halign_(ns.halign), valign_(ns.valign), x_(0), y_(0) {
 	}
 	virtual ~RenderNode() {
@@ -315,7 +315,7 @@ private:
 
 class Layout {
 public:
-	Layout(std::vector<RenderNode*>& all) : h_(0), idx_(0), all_nodes_(all) {
+	explicit Layout(std::vector<RenderNode*>& all) : h_(0), idx_(0), all_nodes_(all) {
 	}
 	virtual ~Layout() {
 	}
@@ -668,7 +668,7 @@ bool WordSpacerNode::show_spaces_;
  */
 class NewlineNode : public RenderNode {
 public:
-	NewlineNode(NodeStyle& ns) : RenderNode(ns) {
+	explicit NewlineNode(NodeStyle& ns) : RenderNode(ns) {
 	}
 
 	std::string debug_info() const override {
@@ -698,12 +698,7 @@ public:
 class SpaceNode : public RenderNode {
 public:
 	SpaceNode(NodeStyle& ns, uint16_t w, uint16_t h = 0, bool expanding = false)
-	   : RenderNode(ns),
-	     w_(w),
-	     h_(h),
-	     background_image_(nullptr),
-	     filename_(""),
-	     is_expanding_(expanding) {
+	   : RenderNode(ns), w_(w), h_(h), background_image_(nullptr), is_expanding_(expanding) {
 		check_size();
 	}
 
@@ -776,9 +771,11 @@ private:
  */
 class DivTagRenderNode : public RenderNode {
 public:
-	DivTagRenderNode(NodeStyle& ns)
+	explicit DivTagRenderNode(NodeStyle& ns)
 	   : RenderNode(ns),
 	     desired_width_(),
+	     w_(0),
+	     h_(0),
 	     background_color_(0, 0, 0),
 	     is_background_color_set_(false),
 	     background_image_(nullptr) {
@@ -1262,7 +1259,6 @@ public:
 	                 const UI::FontSets& fontsets)
 	   : TagHandler(tag, fc, ns, image_cache, init_renderer_style, fontsets),
 	     background_image_(nullptr),
-	     image_filename_(""),
 	     space_(0) {
 	}
 
