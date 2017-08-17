@@ -676,7 +676,7 @@ void BuildingStatisticsMenu::update() {
 			}
 		}
 
-		std::string owned_text = "";
+		std::string owned_text;
 		if (player.tribe().has_building(id) && (building.is_buildable() || building.is_enhanced())) {
 			/** TRANSLATORS Buildings: owned / under construction */
 			owned_text = (boost::format(_("%1%/%2%")) % nr_owned % nr_build).str();

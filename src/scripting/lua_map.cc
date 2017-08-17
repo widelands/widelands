@@ -1206,7 +1206,7 @@ int LuaMap::get_player_slots(lua_State* L) {
       :returns: The created immovable.
 */
 int LuaMap::place_immovable(lua_State* const L) {
-	std::string from_where = "";
+	std::string from_where;
 
 	const std::string objname = luaL_checkstring(L, 2);
 	LuaMaps::LuaField* c = *get_user_class<LuaMaps::LuaField>(L, 3);

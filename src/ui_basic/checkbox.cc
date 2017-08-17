@@ -45,8 +45,7 @@ Statebox::Statebox(Panel* const parent,
    : Panel(parent, p.x, p.y, kStateboxSize, kStateboxSize, tooltip_text),
      flags_(Is_Enabled),
      pic_graphics_(pic),
-     rendered_text_(nullptr),
-     label_text_("") {
+     rendered_text_(nullptr) {
 	uint16_t w = pic->width();
 	uint16_t h = pic->height();
 	set_desired_size(w, h);

@@ -91,10 +91,10 @@ void show_usage(const std::string& build_id, const std::string& build_type) {
 	               "                      the map FILENAME in editor.")
 	          << endl
 	          << _(" --ai_training        Starts Widelands in AI training mode: wai files will\n"
-	               "                      be generated, and higher AI mutation rates used.")
+	               "                      be generated, and higher AI mutation rates used.\n")
 	          << endl
-	          << _(" --auto_speed         Keeps adjusting the game speed automatically,\n"
-	               "                      depending on FPS.")
+	          << _(" --auto_speed         Keeps adjusting the game speed sutomatically, depending"
+	               "                      on FPS.\n")
 	          << endl
 	          << _(" --scenario=FILENAME  Directly starts the map FILENAME as scenario\n"
 	               "                      map.")

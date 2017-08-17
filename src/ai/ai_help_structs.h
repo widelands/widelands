@@ -610,7 +610,7 @@ struct FNeuron {
 	uint32_t get_int();
 	uint16_t get_id() {
 		return id;
-	};
+	}
 
 private:
 	std::bitset<kFNeuronBitSize> core;
@@ -623,7 +623,7 @@ struct ExpansionType {
 	void set_expantion_type(ExpansionMode);
 	ExpansionMode get_expansion_type() {
 		return type;
-	};
+	}
 
 private:
 	ExpansionMode type;
@@ -655,14 +655,14 @@ struct ManagementData {
 	uint16_t new_neuron_id() {
 		++next_neuron_id;
 		return next_neuron_id - 1;
-	};
+	}
 	void reset_neuron_id() {
 		next_neuron_id = 0;
 	}
 	uint16_t new_bi_neuron_id() {
 		++next_bi_neuron_id;
 		return next_bi_neuron_id - 1;
-	};
+	}
 	void reset_bi_neuron_id() {
 		next_bi_neuron_id = 0;
 	}
