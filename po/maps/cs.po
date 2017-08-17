@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-05-18 21:30+0000\n"
-"PO-Revision-Date: 2017-05-19 07:01+0000\n"
+"POT-Creation-Date: 2017-05-26 17:01+0000\n"
+"PO-Revision-Date: 2017-05-27 17:48+0000\n"
 "Last-Translator: Milan Fašina <matrix17@seznam.cz>\n"
 "Language-Team: Czech (http://www.transifex.com/widelands/widelands/language/cs/)\n"
 "MIME-Version: 1.0\n"
@@ -178,7 +178,7 @@ msgstr "Konečně byla loď opravena, tak se Lutius i se svým lidem opět vydal
 msgid ""
 "On their way home to defend the Empire, the crew of Lutius was surprised by "
 "the will of the gods."
-msgstr ""
+msgstr "Během své cesty domů, aby pomohli s obranou Císařství, byla posádka Lutiusu překvapena vůlí bohů."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/elemental:8
 #: ../../data/campaigns/tutorials.conf:15

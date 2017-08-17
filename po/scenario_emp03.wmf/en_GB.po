@@ -4,13 +4,14 @@
 # 
 # Translators:
 # Rhian G <rhianmarie@gmail.com>, 2017
+# Adam Piggott <aD@simplypeachy.co.uk>, 2017
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-05-18 21:30+0000\n"
+"POT-Creation-Date: 2017-07-24 07:12+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: Rhian G <rhianmarie@gmail.com>, 2017\n"
+"Last-Translator: Adam Piggott <aD@simplypeachy.co.uk>, 2017\n"
 "Language-Team: English (United Kingdom) (https://www.transifex.com/widelands/teams/35159/en_GB/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -20,31 +21,35 @@ msgstr ""
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:39
 msgid "Build your first outpost"
-msgstr ""
+msgstr "Build your first outpost"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:41
 msgid "First Outpost"
-msgstr ""
+msgstr "First Outpost"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:42
 msgid ""
 "Build an outpost at the yellow house symbol to the east of your provisional "
 "headquarters."
 msgstr ""
+"Build an outpost at the yellow house symbol to the east of your provisional "
+"headquarters."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:48
 msgid "Build a quarry"
-msgstr ""
+msgstr "Build a quarry"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:50
 msgid "Quarry"
-msgstr ""
+msgstr "Quarry"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:51
 msgid ""
 "Build a quarry close to the abundant rocks, so we can free some building "
 "plots and get some valuable resources."
 msgstr ""
+"Build a quarry close to the abundant rocks, so we can free some building "
+"plots and get some valuable resources."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:57
 msgid "Build a lumberjack’s house, a sawmill and a stonemason’s house"
@@ -158,7 +163,7 @@ msgstr ""
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:117
 msgid ""
-"We should send a ship nothwards to gather some intelligence about the "
+"We should send a ship northwards to gather some intelligence about the "
 "Barbarians. Try to build a port on the island and found an outpost."
 msgstr ""
 
@@ -287,13 +292,11 @@ msgstr ""
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:204
 msgid ""
-"We landed on an unknown coast and found some rest under the palm trees "
-"growing at the shore. But that is about as good as it gets. The truth is: "
-"when I woke up this morning, I saw nothing but sand and stone around us."
+"Again, we stranded on an unknown coast and slept in the shade under some "
+"palm trees until the sun was risen high up in the sky. I’m afraid that when "
+"we awoke at noon, nobody was really surprised that all we could see was "
+"sand… although the amount of rocks near our camp was astonishing."
 msgstr ""
-"We landed on an unknown coast and found some rest under the palm trees "
-"growing at the shore. But that is about as good as it gets. The truth is "
-"when I woke up this morning I saw nothing but sand and stone around us."
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:207
@@ -885,7 +888,7 @@ msgid ""
 msgstr ""
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:529
-msgid "Amalea’s Councel"
+msgid "Amalea’s Counsel"
 msgstr ""
 
 #. TRANSLATORS: Amalea
@@ -947,8 +950,8 @@ msgstr ""
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:558
 msgid ""
-"As we have seen on our last journey, it is of great importance to put the "
-"gods and especially Neptune in a good mood to safeguard our journey."
+"As we have seen on our journeys, it is of great importance to put the gods "
+"and especially Neptune in a good mood to safeguard our journey."
 msgstr ""
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:560
@@ -998,8 +1001,8 @@ msgstr ""
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:584
 msgid ""
 "Sire, we found the ruins of a former Barbarian fortress and village. I’m "
-"somewhat worried that we will have to fight against them before we are "
-"ready."
+"somewhat worried that we will have to fight against them before we are ready"
+" to do so."
 msgstr ""
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:590

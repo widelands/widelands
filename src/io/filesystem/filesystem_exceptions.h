@@ -26,7 +26,8 @@
 /**
  * Generic problem when dealing with a file or directory
  */
-struct FileError : public std::runtime_error {
+class FileError : public std::runtime_error {
+public:
 	explicit FileError(const std::string& thrower,
 	                   const std::string& filename,
 	                   const std::string& message = "problem with file/directory")
@@ -39,7 +40,8 @@ struct FileError : public std::runtime_error {
  * A file/directory could not be found. Either it really does not exist or there
  * are problems with the path, e.g. loops or nonexistent path components
  */
-struct FileNotFoundError : public FileError {
+class FileNotFoundError : public FileError {
+public:
 	explicit FileNotFoundError(const std::string& thrower,
 	                           const std::string& filename,
 	                           const std::string& message = "could not find file or directory")
@@ -51,7 +53,8 @@ struct FileNotFoundError : public FileError {
 /**
  * The file/directory is of an unexpected type. Reasons can be given via message
  */
-struct FileTypeError : public FileError {
+class FileTypeError : public FileError {
+public:
 	explicit FileTypeError(const std::string& thrower,
 	                       const std::string& filename,
 	                       const std::string& message = "file or directory has wrong type")
@@ -63,7 +66,8 @@ struct FileTypeError : public FileError {
 /**
  * The operating system denied access to the file/directory in question
  */
-struct FileAccessDeniedError : public FileError {
+class FileAccessDeniedError : public FileError {
+public:
 	explicit FileAccessDeniedError(const std::string& thrower,
 	                               const std::string& filename,
 	                               const std::string& message = "access denied on file or directory")
@@ -75,8 +79,8 @@ struct FileAccessDeniedError : public FileError {
 /**
  * The directory cannot be created
  */
-
-struct DirectoryCannotCreateError : public FileError {
+class DirectoryCannotCreateError : public FileError {
+public:
 	explicit DirectoryCannotCreateError(const std::string& thrower,
 	                                    const std::string& dirname,
 	                                    const std::string& message = "cannot create directory")

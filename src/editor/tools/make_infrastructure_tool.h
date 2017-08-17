@@ -57,7 +57,7 @@ private:
 	UI::UniqueWindow::Registry registry_;
 };
 
-int32_t editor_make_infrastructure_tool_callback(const Widelands::TCoords<Widelands::FCoords>& c,
+int32_t editor_make_infrastructure_tool_callback(const Widelands::FCoords& c,
                                                  Widelands::EditorGameBase& egbase,
                                                  int32_t const player);
 

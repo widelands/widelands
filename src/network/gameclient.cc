@@ -42,7 +42,6 @@
 #include "network/internet_gaming.h"
 #include "network/network_gaming_messages.h"
 #include "network/network_protocol.h"
-#include "network/network_system.h"
 #include "scripting/lua_interface.h"
 #include "scripting/lua_table.h"
 #include "ui_basic/messagebox.h"
@@ -89,17 +88,20 @@ struct GameClientImpl {
 	std::vector<ChatMessage> chatmessages;
 };
 
-GameClient::GameClient(const std::string& host,
-                       const uint16_t port,
+GameClient::GameClient(const std::pair<NetAddress, NetAddress>& host,
                        const std::string& playername,
                        bool internet)
    : d(new GameClientImpl), internet_(internet) {
-	d->net = NetClient::connect(host, port);
+
+	d->net = NetClient::connect(host.first);
+	if ((!d->net || !d->net->is_connected()) && host.second.is_valid()) {
+		// First IP did not work? Try the second IP
+		d->net = NetClient::connect(host.second);
+	}
 	if (!d->net || !d->net->is_connected()) {
 		throw WLWarning(_("Could not establish connection to host"),
-		                _("Widelands could not establish a connection to the given "
-		                  "address.\n"
-		                  "Either no Widelands server was running at the supposed port or\n"
+		                _("Widelands could not establish a connection to the given address. "
+		                  "Either no Widelands server was running at the supposed port or "
 		                  "the server shut down as you tried to connect."));
 	}
 
@@ -261,7 +263,7 @@ int32_t GameClient::get_frametime() {
 }
 
 GameController::GameType GameClient::get_game_type() {
-	return GameController::GameType::NETCLIENT;
+	return GameController::GameType::kNetClient;
 }
 
 void GameClient::report_result(uint8_t player_nr,
@@ -465,8 +467,7 @@ void GameClient::receive_one_user(uint32_t const number, StreamRead& packet) {
 
 	// This might happen, if a users connects after the game starts.
 	if (number == d->settings.users.size()) {
-		UserSettings newuser;
-		d->settings.users.push_back(newuser);
+		d->settings.users.push_back(*new UserSettings());
 	}
 
 	d->settings.users.at(number).name = packet.string();
@@ -503,7 +504,7 @@ void GameClient::send_time() {
 	d->lasttimestamp_realtime = SDL_GetTicks();
 }
 
-void GameClient::syncreport() {
+void GameClient::sync_report_callback() {
 	assert(d->net != nullptr);
 	if (d->net->is_connected()) {
 		SendPacket s;
@@ -814,13 +815,12 @@ void GameClient::handle_packet(RecvPacket& packet) {
 			throw DisconnectException("SYNCREQUEST_WO_GAME");
 		int32_t const time = packet.signed_32();
 		d->time.receive(time);
-		d->game->enqueue_command(new CmdNetCheckSync(time, this));
+		d->game->enqueue_command(new CmdNetCheckSync(time, [this] { sync_report_callback(); }));
 		break;
 	}
 
 	case NETCMD_CHAT: {
-		ChatMessage c;
-		c.time = time(nullptr);
+		ChatMessage c("");
 		c.playern = packet.signed_16();
 		c.sender = packet.string();
 		c.msg = packet.string();
@@ -832,13 +832,11 @@ void GameClient::handle_packet(RecvPacket& packet) {
 	}
 
 	case NETCMD_SYSTEM_MESSAGE_CODE: {
-		ChatMessage c;
-		c.time = time(nullptr);
-		std::string code = packet.string();
-		std::string arg1 = packet.string();
-		std::string arg2 = packet.string();
-		std::string arg3 = packet.string();
-		c.msg = NetworkGamingMessages::get_message(code, arg1, arg2, arg3);
+		const std::string code = packet.string();
+		const std::string arg1 = packet.string();
+		const std::string arg2 = packet.string();
+		const std::string arg3 = packet.string();
+		ChatMessage c(NetworkGamingMessages::get_message(code, arg1, arg2, arg3));
 		c.playern = UserSettings::none();  //  == System message
 		// c.sender remains empty to indicate a system message
 		d->chatmessages.push_back(c);

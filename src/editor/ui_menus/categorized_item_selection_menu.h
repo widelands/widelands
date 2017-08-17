@@ -83,7 +83,7 @@ CategorizedItemSelectionMenu<DescriptionType, ToolType>::CategorizedItemSelectio
      descriptions_(descriptions),
      select_correct_tool_(select_correct_tool),
      protect_against_recursive_select_(false),
-     tab_panel_(this, 0, 0, g_gr->images().get("images/wui/window_background_dark.png")),
+     tab_panel_(this, g_gr->images().get("images/wui/window_background_dark.png")),
      current_selection_names_(this,
                               0,
                               0,
@@ -175,7 +175,7 @@ void CategorizedItemSelectionMenu<DescriptionType, ToolType>::selected(const int
 template <typename DescriptionType, typename ToolType>
 void CategorizedItemSelectionMenu<DescriptionType, ToolType>::update_label() {
 	current_selection_names_.set_size(tab_panel_.get_inner_w(), 20);
-	std::string buf = "";
+	std::string buf;
 	constexpr int max_string_size = 100;
 	int j = tool_->get_nr_enabled();
 	for (int i = 0; j && buf.size() < max_string_size; ++i) {

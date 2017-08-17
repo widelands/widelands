@@ -4,7 +4,6 @@
 
 include "scripting/coroutine.lua" -- for sleep
 include "scripting/win_conditions/win_condition_functions.lua"
-include "scripting/formatting.lua"
 
 set_textdomain("win_conditions")
 
@@ -53,7 +52,7 @@ return {
       local plrs = wl.Game().players
       if #artifact_fields == 0 then
          for idx, plr in ipairs(plrs) do
-            send_message(plr, _"No Artifacts", rt(p(_"There are no artifacts on this map. This should not happen. Please file a bug report on https://launchpad.net/widelands and specify your Widelands version and the map you tried to load.")), {popup = true})
+            send_message(plr, _"No Artifacts", p(_"There are no artifacts on this map. This should not happen. Please file a bug report on https://launchpad.net/widelands and specify your Widelands version and the map you tried to load."), {popup = true})
          end
          return
       end
@@ -61,17 +60,17 @@ return {
       local found_artifact = {
          -- TRANSLATORS: Keep this as short as possible. You can also translate this as "New artifact"
          title = _"Artifact Found",
-         body = rt(p(_[[Your team found a new artifact.]]))
+         body = p(_[[Your team found a new artifact.]])
       }
       local lost_artifact = {
          -- TRANSLATORS: Keep this as short as possible.
          title = _"Artifact Lost",
-         body = rt(p(_[[One of your team’s artifacts was stolen by an enemy.]]))
+         body = p(_[[One of your team’s artifacts was stolen by an enemy.]])
       }
       local stole_artifact = {
          -- TRANSLATORS: Keep this as short as possible.
          title = _"Artifact Conquered",
-         body = rt(p(_[[Your team stole an artifact from an enemy.]]))
+         body = p(_[[Your team stole an artifact from an enemy.]])
       }
 
       local function _broadcast_to_team(player, msg, f)
@@ -174,10 +173,10 @@ return {
          local key = _getkey(plr)
          -- If two or more teams have the same amount of artifacts, they are all considered winners.
          if artifacts_per_team[key] == max_artifacts then
-            plr:send_message(won_game_over.title, rt(won_game_over.body .. msg))
+            plr:send_message(won_game_over.title, won_game_over.body .. msg)
             wl.game.report_result(plr, 1, make_extra_data(plr, wc_descname, wc_version, {score=artifacts_per_team[key]}))
          else
-            plr:send_message(lost_game_over.title, rt(lost_game_over.body .. msg))
+            plr:send_message(lost_game_over.title, lost_game_over.body .. msg)
             wl.game.report_result(plr, 0, make_extra_data(plr, wc_descname, wc_version, {score=artifacts_per_team[key]}))
          end
       end

@@ -1,3 +1,6 @@
+-- TODO(GunChleoc): This is for the legacy font renderer. Remove when we remove the old renderer.
+
+
 -- RST
 -- formatting.lua
 -- --------------

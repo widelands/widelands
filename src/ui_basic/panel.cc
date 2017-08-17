@@ -30,8 +30,6 @@
 #include "sound/sound_handler.h"
 #include "wlapplication.h"
 
-using namespace std;
-
 namespace UI {
 
 Panel* Panel::modal_ = nullptr;

@@ -32,7 +32,7 @@
  */
 class FullscreenMenuScenarioSelect : public FullscreenMenuLoadMapOrGame {
 public:
-	FullscreenMenuScenarioSelect(bool is_tutorial = false);
+	explicit FullscreenMenuScenarioSelect(bool is_tutorial = false);
 
 	std::string get_map();
 	void set_campaign(const std::string& campaign_name);

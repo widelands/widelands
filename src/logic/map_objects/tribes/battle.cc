@@ -57,9 +57,11 @@ Battle::Battle(Game& game, Soldier* first_soldier, Soldier* second_soldier)
    : MapObject(&g_battle_descr),
      first_(first_soldier),
      second_(second_soldier),
+     creationtime_(0),
      readyflags_(0),
      damage_(0),
-     first_strikes_(true) {
+     first_strikes_(true),
+     last_attack_hits_(false) {
 	assert(first_soldier->get_owner() != second_soldier->get_owner());
 	{
 		StreamWrite& ss = game.syncstream();
@@ -130,7 +132,6 @@ bool Battle::locked(Game& game) {
 }
 
 Soldier* Battle::opponent(const Soldier& soldier) const {
-	assert(&soldier != nullptr);
 	assert(first_ == &soldier || second_ == &soldier);
 	Soldier* other_soldier = first_ == &soldier ? second_ : first_;
 	return other_soldier;

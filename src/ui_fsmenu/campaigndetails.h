@@ -44,7 +44,7 @@ struct CampaignData {
  */
 class CampaignDetails : public UI::Box {
 public:
-	CampaignDetails(Panel* parent);
+	explicit CampaignDetails(Panel* parent);
 
 	void update(const CampaignData& campaigndata);
 

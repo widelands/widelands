@@ -4,7 +4,7 @@
 # Translators:
 # GunChleoc, 2014
 # Wesmania <ikk_pl@yahoo.co.uk>, 2015
-# Wesmania <ikk_pl@yahoo.co.uk>, 2016
+# Wesmania <ikk_pl@yahoo.co.uk>, 2016-2017
 # Jacek Wolszczak <shutdownrunner@o2.pl>, 2008
 # Tomasz Pudło <wptom@wp.pl>, 2016
 # Tomasz Pudło <wptom@wp.pl>, 2015
@@ -12,9 +12,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-05-18 21:30+0000\n"
-"PO-Revision-Date: 2017-05-18 21:32+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2017-06-02 11:07+0000\n"
+"PO-Revision-Date: 2017-06-03 18:38+0000\n"
+"Last-Translator: Wesmania <ikk_pl@yahoo.co.uk>\n"
 "Language-Team: Polish (http://www.transifex.com/widelands/widelands/language/pl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -143,7 +143,7 @@ msgstr "Strażnica dla wygnańca"
 
 #: ../../data/campaigns/campaigns.conf:88
 msgid "Neptune’s Revenge"
-msgstr ""
+msgstr "Zemsta Neptuna"
 
 #: ../../data/campaigns/campaigns.conf:93
 #: ../../data/campaigns/campaigns.conf:105
@@ -180,7 +180,7 @@ msgstr "Wreszcie statek został naprawiony, więc Lucjusz i jego ludzie wyruszyl
 msgid ""
 "On their way home to defend the Empire, the crew of Lutius was surprised by "
 "the will of the gods."
-msgstr ""
+msgstr "Na drodze do domu celem obrony Imperium załoga Lucjusza zaskoczona została przez wolę bogów."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/elemental:8
 #: ../../data/campaigns/tutorials.conf:15

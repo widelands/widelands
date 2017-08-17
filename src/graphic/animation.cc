@@ -41,9 +41,8 @@
 #include "sound/note_sound.h"
 #include "sound/sound_handler.h"
 
-using namespace std;
-
 namespace {
+
 // Parses an array { 12, 23 } into a point.
 void get_point(const LuaTable& table, Vector2i* p) {
 	std::vector<int> pts = table.array_entries<int>();
@@ -62,7 +61,7 @@ class NonPackedAnimation : public Animation {
 public:
 	virtual ~NonPackedAnimation() {
 	}
-	NonPackedAnimation(const LuaTable& table);
+	explicit NonPackedAnimation(const LuaTable& table);
 
 	// Implements Animation.
 	float height() const override;
@@ -97,13 +96,13 @@ private:
 	std::vector<std::string> pc_mask_image_files_;
 	float scale_;
 
-	vector<const Image*> frames_;
-	vector<const Image*> pcmasks_;
+	std::vector<const Image*> frames_;
+	std::vector<const Image*> pcmasks_;
 
 	// name of sound effect that will be played at frame 0.
 	// TODO(sirver): this should be done using play_sound in a program instead of
 	// binding it to the animation.
-	string sound_effect_;
+	std::string sound_effect_;
 	bool play_once_;
 };
 
@@ -153,7 +152,7 @@ NonPackedAnimation::NonPackedAnimation(const LuaTable& table)
 			if (scale_ <= 0.0f) {
 				throw wexception("Animation scale needs to be > 0.0f, but it is %f. The first image of "
 				                 "this animation is %s",
-				                 scale_, image_files_[0].c_str());
+				                 static_cast<double>(scale_), image_files_[0].c_str());
 			}
 		}
 

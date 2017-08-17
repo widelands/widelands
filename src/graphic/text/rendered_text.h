@@ -58,18 +58,18 @@ private:
 
 public:
 	/// RenderedRect will contain a background image that should be tiled
-	RenderedRect(const Recti& init_rect, const Image* init_image);
+	explicit RenderedRect(const Recti& init_rect, const Image* init_image);
 
 	/// RenderedRect will contain a background color that should be tiled
-	RenderedRect(const Recti& init_rect, const RGBColor& color);
+	explicit RenderedRect(const Recti& init_rect, const RGBColor& color);
 
 	/// RenderedRect will contain a normal image that is managed by a transient cache.
 	/// Use this if the image is managed by an instance of TextureCache.
-	RenderedRect(std::shared_ptr<const Image> init_image);
+	explicit RenderedRect(std::shared_ptr<const Image> init_image);
 
 	/// RenderedRect will contain a normal image that is managed by a permanent cache.
 	/// Use this if the image is managed by g_gr->images().
-	RenderedRect(const Image* init_image);
+	explicit RenderedRect(const Image* init_image);
 	~RenderedRect() {
 	}
 

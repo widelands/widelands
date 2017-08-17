@@ -42,7 +42,7 @@ struct ScenarioMapData {
  */
 class ScenarioDetails : public UI::Box {
 public:
-	ScenarioDetails(Panel* parent);
+	explicit ScenarioDetails(Panel* parent);
 
 	void update(const ScenarioMapData& scenariodata);
 
