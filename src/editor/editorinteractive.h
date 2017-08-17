@@ -156,6 +156,10 @@ private:
 
 	void on_buildhelp_changed(const bool value) override;
 
+	void toggle_resources();
+	void toggle_immovables();
+	void toggle_bobs();
+
 	//  state variables
 	bool need_save_;
 	std::vector<PlayerReferences> player_tribe_references_;
@@ -178,7 +182,9 @@ private:
 	UI::UniqueWindow::Registry helpmenu_;
 
 	UI::Button* toggle_buildhelp_;
-	UI::Button* reset_zoom_;
+	UI::Button* toggle_resources_;
+	UI::Button* toggle_immovables_;
+	UI::Button* toggle_bobs_;
 	UI::Button* undo_;
 	UI::Button* redo_;
 

@@ -113,16 +113,14 @@ public:
 	};
 
 	struct TerrainArguments {
-		TerrainArguments() {
-		}
-
-		int gametime;
-		int renderbuffer_width;
-		int renderbuffer_height;
-		const DescriptionMaintainer<Widelands::TerrainDescription>* terrains;
-		FieldsToDraw* fields_to_draw;
-		float scale;
-		Rectf destination_rect;
+		// Initialize everything to make cppcheck happy.
+		int gametime = 0;
+		int renderbuffer_width = 0;
+		int renderbuffer_height = 0;
+		const DescriptionMaintainer<Widelands::TerrainDescription>* terrains = nullptr;
+		FieldsToDraw* fields_to_draw = nullptr;
+		float scale = 1.f;
+		Rectf destination_rect = Rectf(0.f, 0.f, 0.f, 0.f);
 	};
 
 	// The union of all possible program arguments represents an Item that is

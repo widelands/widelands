@@ -3,5 +3,6 @@ wl_library(chat
     chat.h
     chat.cc
   DEPENDS
+    logic_constants
     notifications
 )

@@ -103,9 +103,9 @@ template <> struct MapTriangleRegion<FCoords> {
 private:
 	Area<TCoords<FCoords>> area_;
 	FCoords left_;
-	uint16_t rowwidth_;
-	uint16_t remaining_in_row_;
-	uint16_t remaining_rows_;
+	uint16_t rowwidth_ = 0;
+	uint16_t remaining_in_row_ = 0;
+	uint16_t remaining_rows_ = 0;
 };
 template <typename CoordsType> struct MapTriangleRegion<TCoords<CoordsType>> {
 	MapTriangleRegion(const Map&, Area<TCoords<CoordsType>, uint16_t>);
@@ -117,11 +117,11 @@ template <typename CoordsType> struct MapTriangleRegion<TCoords<CoordsType>> {
 	bool advance(const Map&);
 
 private:
-	const bool radius_is_odd_;
-	enum { Top, Upper, Lower, Bottom } phase_;
-	uint16_t remaining_rows_in_upper_phase_;
-	uint16_t remaining_rows_in_lower_phase_;
-	uint16_t row_length_, remaining_in_row_;
+	const bool radius_is_odd_ = false;
+	enum { Top, Upper, Lower, Bottom } phase_ = Top;
+	uint16_t remaining_rows_in_upper_phase_ = 0U;
+	uint16_t remaining_rows_in_lower_phase_ = 0U;
+	uint16_t row_length_, remaining_in_row_ = 0U;
 	CoordsType left_;
 	TCoords<CoordsType> location_;
 };
