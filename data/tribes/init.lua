@@ -582,6 +582,7 @@ print_loading_message("┗━ took", function()
       include "tribes/buildings/militarysites/empire/castle/init.lua"
       include "tribes/buildings/militarysites/empire/fortress/init.lua"
       
+      include "tribes/buildings/militarysites/frisians/wooden_tower_high/init.lua"
       include "tribes/buildings/militarysites/frisians/wooden_tower/init.lua"
       include "tribes/buildings/militarysites/frisians/sentinel/init.lua"
       include "tribes/buildings/militarysites/frisians/outpost/init.lua"

@@ -246,6 +246,7 @@ tribes:new_tribe {
 
       -- Military Sites
       "frisians_wooden_tower",
+      "frisians_wooden_tower_high",
       "frisians_sentinel",
       "frisians_outpost",
       "frisians_tower",

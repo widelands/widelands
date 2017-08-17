@@ -8,20 +8,21 @@ tribes:new_militarysite_type {
    helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "small",
-   vision_range = 17,
+   vision_range = 14,
+   enhancement = "frisians_wooden_tower_high",
 
    buildcost = {
-      log = 5,
+      log = 3,
       thatch_reed = 1
    },
    return_on_dismantle = {
-      log = 3
+      log = 2
    },
 
    animations = {
       idle = {
          pictures = path.list_files(dirname .. "idle_??.png"),
-         hotspot = { 40, 89 },
+         hotspot = { 41, 89 },
       }
    },
 
@@ -33,8 +34,8 @@ tribes:new_militarysite_type {
    },
 
    max_soldiers = 1,
-   heal_per_second = 60,
-   conquers = 6,
+   heal_per_second = 40,
+   conquers = 5,
    prefer_heroes = false,
 
    messages = {
