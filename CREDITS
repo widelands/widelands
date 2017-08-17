@@ -10,7 +10,6 @@ The Widelands Development Team thanks the following projects:
 
     libSDL2
     libSDL2_mixer
-    libSDL2_net
     libSDL2_image
     libSDL2_ttf
     * All files from SDL2-Project

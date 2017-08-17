@@ -63,7 +63,6 @@
 #include "scripting/logic.h"
 #include "scripting/lua_table.h"
 #include "ui_basic/progresswindow.h"
-#include "wlapplication.h"
 #include "wui/game_tips.h"
 #include "wui/interactive_player.h"
 
@@ -126,7 +125,8 @@ Game::Game()
      state_(gs_notrunning),
      cmdqueue_(*this),
      /** TRANSLATORS: Win condition for this game has not been set. */
-     win_condition_displayname_(_("Not set")) {
+     win_condition_displayname_(_("Not set")),
+     replay_(false) {
 }
 
 Game::~Game() {
@@ -135,15 +135,8 @@ Game::~Game() {
 void Game::sync_reset() {
 	syncwrapper_.counter_ = 0;
 
-	synchash_.Reset();
+	synchash_.reset();
 	log("[sync] Reset\n");
-}
-
-/**
- * Returns true if cheat codes have been activated (single-player only)
- */
-bool Game::get_allow_cheats() {
-	return true;
 }
 
 /**
@@ -674,7 +667,7 @@ void Game::send_player_start_stop_building(Building& building) {
 }
 
 void Game::send_player_militarysite_set_soldier_preference(Building& building,
-                                                           uint8_t my_preference) {
+                                                           SoldierPreference my_preference) {
 	send_player_command(*new CmdMilitarySiteSetSoldierPreference(
 	   get_gametime(), building.owner().player_number(), building, my_preference));
 }
@@ -728,7 +721,6 @@ void Game::send_player_change_soldier_capacity(Building& b, int32_t const val) {
 	   *new CmdChangeSoldierCapacity(get_gametime(), b.owner().player_number(), b, val));
 }
 
-/////////////////////// TESTING STUFF
 void Game::send_player_enemyflagaction(const Flag& flag,
                                        PlayerNumber const who_attacks,
                                        uint32_t const num_soldiers) {

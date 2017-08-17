@@ -22,12 +22,12 @@
 
 #include <string>
 
+#include "logic/player_end_result.h"
 #include "logic/widelands.h"
 
 namespace Widelands {
 class Game;
 class PlayerCommand;
-enum class PlayerEndResult : uint8_t;
 }
 
 /**
@@ -41,12 +41,7 @@ enum class PlayerEndResult : uint8_t;
  */
 class GameController {
 public:
-	enum class GameType : uint8_t {
-		SINGLEPLAYER = 1,  // we don't want SINGLEPLAYER just because a value is empty
-		NETCLIENT,
-		NETHOST,
-		REPLAY
-	};
+	enum class GameType : uint8_t { kUndefined = 0, kSingleplayer, kNetClient, kNetHost, kReplay };
 
 	virtual ~GameController() {
 	}

@@ -27,7 +27,7 @@
 #include "ui_basic/window.h"
 
 struct LoginBox : public UI::Window {
-	LoginBox(UI::Panel&);
+	explicit LoginBox(UI::Panel&);
 
 	std::string get_nickname() {
 		return eb_nickname->text();

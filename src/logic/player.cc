@@ -19,6 +19,7 @@
 
 #include "logic/player.h"
 
+#include <cassert>
 #include <memory>
 
 #include <boost/bind.hpp>
@@ -135,7 +136,6 @@ Player::Player(EditorGameBase& the_egbase,
      fields_(nullptr),
      allowed_worker_types_(the_egbase.tribes().nrworkers(), true),
      allowed_building_types_(the_egbase.tribes().nrbuildings(), true),
-     ai_(""),
      current_produced_statistics_(the_egbase.tribes().nrwares()),
      current_consumed_statistics_(the_egbase.tribes().nrwares()),
      ware_productions_(the_egbase.tribes().nrwares()),
@@ -289,21 +289,22 @@ void Player::play_message_sound(const Message::Type& msgtype) {
 	}
 }
 
-MessageId Player::add_message(Game& game, Message& message, bool const popup) {
-	MessageId id = messages().add_message(message);
+MessageId Player::add_message(Game& game, std::unique_ptr<Message> new_message, bool const popup) {
+	MessageId id = messages().add_message(std::move(new_message));
+	const Message* message = messages()[id];
 
 	// MapObject connection
-	if (message.serial() > 0) {
-		MapObject* mo = egbase().objects().get_object(message.serial());
+	if (message->serial() > 0) {
+		MapObject* mo = egbase().objects().get_object(message->serial());
 		mo->removed.connect(boost::bind(&Player::message_object_removed, this, id));
 	}
 
 	// Sound & popup
 	if (InteractivePlayer* const iplayer = game.get_ipl()) {
 		if (&iplayer->player() == this) {
-			play_message_sound(message.type());
+			play_message_sound(message->type());
 			if (popup)
-				iplayer->popup_message(id, message);
+				iplayer->popup_message(id, *message);
 		}
 	}
 
@@ -311,21 +312,20 @@ MessageId Player::add_message(Game& game, Message& message, bool const popup) {
 }
 
 MessageId Player::add_message_with_timeout(Game& game,
-                                           Message& m,
+                                           std::unique_ptr<Message> message,
                                            uint32_t const timeout,
                                            uint32_t const radius) {
 	const Map& map = game.map();
 	uint32_t const gametime = game.get_gametime();
-	Coords const position = m.position();
-	for (auto tmp_message : messages()) {
-		if (tmp_message.second->type() == m.type() &&
+	Coords const position = message->position();
+	for (const auto& tmp_message : messages()) {
+		if (tmp_message.second->type() == message->type() &&
 		    gametime < tmp_message.second->sent() + timeout &&
 		    map.calc_distance(tmp_message.second->position(), position) <= radius) {
-			delete &m;
 			return MessageId::null();
 		}
 	}
-	return add_message(game, m);
+	return add_message(game, std::move(message));
 }
 
 void Player::message_object_removed(MessageId message_id) const {
@@ -652,11 +652,10 @@ void Player::start_or_cancel_expedition(Warehouse& wh) {
 }
 
 void Player::military_site_set_soldier_preference(PlayerImmovable& imm,
-                                                  uint8_t soldier_preference) {
+                                                  SoldierPreference soldier_preference) {
 	if (&imm.owner() == this)
 		if (upcast(MilitarySite, milsite, &imm))
-			milsite->set_soldier_preference(
-			   static_cast<MilitarySite::SoldierPreference>(soldier_preference));
+			milsite->set_soldier_preference(soldier_preference);
 }
 
 /*
@@ -806,8 +805,12 @@ void Player::drop_soldier(PlayerImmovable& imm, Soldier& soldier) {
 		return;
 	if (soldier.descr().type() != MapObjectType::SOLDIER)
 		return;
-	if (upcast(SoldierControl, ctrl, &imm))
-		ctrl->drop_soldier(soldier);
+	if (upcast(Building, building, &imm)) {
+		SoldierControl* soldier_control = building->mutable_soldier_control();
+		if (soldier_control != nullptr) {
+			soldier_control->drop_soldier(soldier);
+		}
+	}
 }
 
 /*
@@ -842,9 +845,10 @@ Player::find_attack_soldiers(Flag& flag, std::vector<Soldier*>* soldiers, uint32
 
 	for (BaseImmovable* temp_flag : flags) {
 		upcast(Flag, attackerflag, temp_flag);
-		upcast(MilitarySite, ms, attackerflag->get_building());
-		std::vector<Soldier*> const present = ms->present_soldiers();
-		uint32_t const nr_staying = ms->min_soldier_capacity();
+		const SoldierControl* soldier_control = attackerflag->get_building()->soldier_control();
+		assert(soldier_control != nullptr);
+		std::vector<Soldier*> const present = soldier_control->present_soldiers();
+		uint32_t const nr_staying = soldier_control->min_soldier_capacity();
 		uint32_t const nr_present = present.size();
 		if (nr_staying < nr_present) {
 			uint32_t const nr_taken = std::min(nr_wanted, nr_present - nr_staying);
@@ -869,8 +873,8 @@ void Player::enemyflagaction(Flag& flag, PlayerNumber const attacker, uint32_t c
 		log("enemyflagaction: count is 0\n");
 	else if (is_hostile(flag.owner())) {
 		if (Building* const building = flag.get_building()) {
-			if (upcast(Attackable, attackable, building)) {
-				if (attackable->can_attack()) {
+			if (const AttackTarget* attack_target = building->attack_target()) {
+				if (attack_target->can_be_attacked()) {
 					std::vector<Soldier*> attackers;
 					find_attack_soldiers(flag, &attackers, count);
 					assert(attackers.size() <= count);
@@ -969,6 +973,7 @@ void Player::rediscover_node(const Map& map,
 			tr_field.terrains.d = tr.field->terrain_d();
 			tr_field.roads &= ~(RoadType::kMask << RoadType::kSouthWest);
 			tr_field.roads |= RoadType::kMask << RoadType::kSouthWest & tr.field->get_roads();
+			tr_field.owner = tr.field->get_owned_by();
 		}
 	}
 	{  //  discover both triangles and the SE edge of the top left  neighbour
@@ -978,6 +983,7 @@ void Player::rediscover_node(const Map& map,
 			tl_field.terrains = tl.field->get_terrains();
 			tl_field.roads &= ~(RoadType::kMask << RoadType::kSouthEast);
 			tl_field.roads |= RoadType::kMask << RoadType::kSouthEast & tl.field->get_roads();
+			tl_field.owner = tl.field->get_owned_by();
 		}
 	}
 	{  //  discover the R triangle and the  E edge of the     left  neighbour
@@ -987,6 +993,7 @@ void Player::rediscover_node(const Map& map,
 			l_field.terrains.r = l.field->terrain_r();
 			l_field.roads &= ~(RoadType::kMask << RoadType::kEast);
 			l_field.roads |= RoadType::kMask << RoadType::kEast & l.field->get_roads();
+			l_field.owner = l.field->get_owned_by();
 		}
 	}
 }

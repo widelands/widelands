@@ -35,7 +35,8 @@ namespace Notifications {
 // Subscribes to a notification type and unsubscribes on destruction.
 template <typename T> class Subscriber {
 public:
-	Subscriber(uint32_t id, std::function<void(const T&)> callback) : id_(id), callback_(callback) {
+	Subscriber(uint32_t id, const std::function<void(const T&)>& callback)
+	   : id_(id), callback_(callback) {
 	}
 
 	~Subscriber();

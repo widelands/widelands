@@ -31,7 +31,7 @@
 
 FullscreenMenuNetSetupLAN::FullscreenMenuNetSetupLAN()
    : FullscreenMenuLoadMapOrGame(),
-     labelh_(text_height(UI::g_fh1->fontset()->representative_character(), UI_FONT_SIZE_SMALL) + 8),
+     labelh_(text_height() + 8),
 
      // Main title
      title_(this, 0, 0, _("Begin Network Game"), UI::Align::kCenter),
@@ -162,28 +162,24 @@ void FullscreenMenuNetSetupLAN::think() {
 	discovery_.run();
 }
 
-bool FullscreenMenuNetSetupLAN::get_host_address(uint32_t& addr, uint16_t& port) {
+bool FullscreenMenuNetSetupLAN::get_host_address(NetAddress* addr) {
 	const std::string& host = hostname_.text();
 
-	const uint32_t opengames_size = table_.size();
-	for (uint32_t i = 0; i < opengames_size; ++i) {
+	for (uint32_t i = 0; i < table_.size(); ++i) {
 		const NetOpenGame& game = *table_[i];
 
 		if (!strcmp(game.info.hostname, host.c_str())) {
-			addr = game.address;
-			port = game.port;
+			*addr = game.address;
 			return true;
 		}
 	}
 
-	if (hostent* const he = gethostbyname(host.c_str())) {
-		addr = (reinterpret_cast<in_addr*>(he->h_addr_list[0]))->s_addr;
-		DIAG_OFF("-Wold-style-cast")
-		port = htons(WIDELANDS_PORT);
-		DIAG_ON("-Wold-style-cast")
+	// The user probably entered a hostname on his own. Try to resolve it
+	if (NetAddress::resolve_to_v6(addr, host, WIDELANDS_PORT))
 		return true;
-	} else
-		return false;
+	if (NetAddress::resolve_to_v4(addr, host, WIDELANDS_PORT))
+		return true;
+	return false;
 }
 
 const std::string& FullscreenMenuNetSetupLAN::get_playername() {

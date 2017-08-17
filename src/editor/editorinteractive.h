@@ -86,7 +86,7 @@ public:
 		EditorSetOriginTool set_origin;
 		EditorMakeInfrastructureTool make_infrastructure;
 	};
-	EditorInteractive(Widelands::EditorGameBase&);
+	explicit EditorInteractive(Widelands::EditorGameBase&);
 
 	// Runs the Editor via the commandline --editor flag. Will load 'filename' as a
 	// map and run 'script_to_run' directly after all initialization is done.
@@ -156,6 +156,10 @@ private:
 
 	void on_buildhelp_changed(const bool value) override;
 
+	void toggle_resources();
+	void toggle_immovables();
+	void toggle_bobs();
+
 	//  state variables
 	bool need_save_;
 	std::vector<PlayerReferences> player_tribe_references_;
@@ -178,7 +182,9 @@ private:
 	UI::UniqueWindow::Registry helpmenu_;
 
 	UI::Button* toggle_buildhelp_;
-	UI::Button* reset_zoom_;
+	UI::Button* toggle_resources_;
+	UI::Button* toggle_immovables_;
+	UI::Button* toggle_bobs_;
 	UI::Button* undo_;
 	UI::Button* redo_;
 

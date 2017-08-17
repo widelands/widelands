@@ -90,8 +90,8 @@ private:
 			flags_ |= flags;
 	}
 	const Image* pic_graphics_;
+	std::shared_ptr<const UI::RenderedText> rendered_text_;
 	const std::string label_text_;
-	const Image* rendered_text_;
 };
 
 /**

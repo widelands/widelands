@@ -162,7 +162,7 @@ void do_draw_minimap(Texture* texture,
 
 	for (uint32_t y = 0; y < surface_h; ++y) {
 		Widelands::FCoords f(
-		   Widelands::Coords(top_left.x, top_left.y + (layers & MiniMapLayer::Zoom2 ? y / 2 : y)));
+		   Widelands::Coords(top_left.x, top_left.y + ((layers & MiniMapLayer::Zoom2) ? y / 2 : y)));
 		map.normalize_coords(f);
 		f.field = &map[f];
 		Widelands::MapIndex i = Widelands::Map::get_index(f, mapwidth);
@@ -237,7 +237,8 @@ std::unique_ptr<Texture> draw_minimap(const EditorGameBase& egbase,
 
 	std::unique_ptr<Texture> texture(new Texture(map_w, map_h));
 
-	texture->fill_rect(Rectf(0, 0, texture->width(), texture->height()), RGBAColor(0, 0, 0, 255));
+	texture->fill_rect(
+	   Rectf(0.f, 0.f, texture->width(), texture->height()), RGBAColor(0, 0, 0, 255));
 
 	// Center the view on the middle of the 'view_area'.
 	const bool zoom = layers & MiniMapLayer::Zoom2;

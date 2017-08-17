@@ -1,3 +1,4 @@
+include "scripting/richtext.lua"
 include "scripting/messages.lua"
 
 -- RST

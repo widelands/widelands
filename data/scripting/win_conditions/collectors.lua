@@ -4,8 +4,6 @@
 
 include "scripting/coroutine.lua" -- for sleep
 include "scripting/messages.lua"
-include "scripting/formatting.lua"
-include "scripting/format_scenario.lua"
 include "scripting/table.lua"
 include "scripting/win_conditions/win_condition_functions.lua"
 
@@ -108,7 +106,7 @@ return {
             plr:get_buildings(plr.tribe_name .. "_headquarters"), plr:get_buildings(plr.tribe_name .. "_warehouse"), plr:get_buildings(plr.tribe_name .. "_port")
          )
 
-         descr = descr .. h2((_"Status for %s"):format(plr.name)) .. "<p line-spacing=3 font-size=12>"
+         descr = descr .. h2((_"Status for %s"):format(plr.name))
          local points = 0
          for idx, ware in ipairs(point_table[plr.tribe_name .. "_order"]) do
             local value = point_table[plr.tribe_name][ware]
@@ -121,11 +119,11 @@ return {
 
             local warename = wl.Game():get_ware_description(ware).descname
             -- TRANSLATORS: For example: 'gold (3 P) x 4 = 12 P', P meaning 'Points'
-            descr = descr .. listitem_bullet(_"%1$s (%2$i P) x %3$i = %4$i P"):bformat(
+            descr = descr .. li(_"%1$s (%2$i P) x %3$i = %4$i P"):bformat(
                warename, value, count, lpoints
             )
          end
-         descr = descr .. "</p>" .. h3(ngettext("Total: %i point", "Total: %i points", points)):format(points)
+         descr = descr .. h3(ngettext("Total: %i point", "Total: %i points", points)):format(points)
          team_points = team_points + points
       end
 
@@ -135,10 +133,10 @@ return {
 
    -- Send all players the momentary game state
    local function _send_state(remaining_time, plrs)
-      local msg = ""
+      local msg = vspace(8)
       set_textdomain("win_conditions")
       if remaining_time <= 0 then
-         msg = p(_"The game has ended.")
+         msg = p(_"The game has ended.") .. vspace(8)
       else
          local h = math.floor(remaining_time / 60)
          local m = remaining_time % 60
@@ -157,14 +155,14 @@ return {
             end
          end
          -- TRANSLATORS: Context: 'The game will end in 2 hours and 30 minutes.'
-         msg = p(_"The game will end in %s."):format(time)
+         msg = p(_"The game will end in %s."):format(time) .. vspace(8)
       end
 
       -- Points for players without team
       for idx, plr in ipairs(plrs) do
          if (plr.team == 0) then
             local points, pstat = _calc_points({plr})
-            msg = msg .. "<p font-size=8> <br></p>" .. pstat
+            msg = msg .. vspace(8) .. pstat
          end
       end
       -- Team points
@@ -173,11 +171,11 @@ return {
          local message = h1((_"Status for Team %d"):format(idx))
             .. pstat
             .. h2(ngettext("Team Total: %i point", "Team Total: %i points", points)):format(points)
-         msg = msg .. "<p font-size=8> <br></p>" .. message
+         msg = msg .. vspace(8) .. message
       end
 
       for idx, plr in ipairs(plrs) do
-         send_message(plr, game_status.title,  "<rt>" .. msg .. "</rt>", {popup = true})
+         send_message(plr, game_status.title, msg, {popup = true})
       end
    end
 
@@ -201,10 +199,10 @@ return {
          local lost_or_won = 0
          if (info[2] < win_points) then
             lost_or_won = 0
-            player:send_message(lost_game_over.title, rt(lost_game_over.body))
+            player:send_message(lost_game_over.title, lost_game_over.body)
          else
             lost_or_won = 1
-            player:send_message(won_game_over.title, rt(won_game_over.body))
+            player:send_message(won_game_over.title, won_game_over.body)
          end
          if (player.team == 0) then
             wl.game.report_result(player, lost_or_won, make_extra_data(player, wc_descname, wc_version, {score=info[2]}))

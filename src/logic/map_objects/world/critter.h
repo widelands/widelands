@@ -67,7 +67,7 @@ class Critter : public Bob {
 	MO_DESCR(CritterDescr)
 
 public:
-	Critter(const CritterDescr&);
+	explicit Critter(const CritterDescr&);
 
 	void init_auto_task(Game&) override;
 

@@ -28,13 +28,13 @@
 #include "logic/game.h"
 #include "logic/game_controller.h"
 #include "logic/player.h"
+#include "logic/player_end_result.h"
 #include "logic/playersmanager.h"
 #include "ui_basic/box.h"
 #include "ui_basic/button.h"
 #include "ui_basic/table.h"
 #include "ui_basic/textarea.h"
 #include "ui_basic/unique_window.h"
-#include "wlapplication.h"
 #include "wui/interactive_gamebase.h"
 #include "wui/interactive_player.h"
 
@@ -134,7 +134,7 @@ void GameSummaryScreen::fill_data() {
 	bool local_in_game = false;
 	bool local_won = false;
 	Widelands::Player* single_won = nullptr;
-	uint8_t teawon_ = 0;
+	Widelands::TeamNumber team_won = 0;
 	InteractivePlayer* ipl = game_.get_ipl();
 	// This defines a row to be selected, current player,
 	// if not then the first line
@@ -144,7 +144,7 @@ void GameSummaryScreen::fill_data() {
 		Widelands::PlayerEndStatus pes = players_status.at(i);
 		if (ipl && pes.player == ipl->player_number()) {
 			local_in_game = true;
-			local_won = pes.result == Widelands::PlayerEndResult::PLAYER_WON;
+			local_won = pes.result == Widelands::PlayerEndResult::kWon;
 			current_player_position = i;
 		}
 		Widelands::Player* p = game_.get_player(pes.player);
@@ -161,24 +161,24 @@ void GameSummaryScreen::fill_data() {
 		// Status
 		std::string stat_str;
 		switch (pes.result) {
-		case Widelands::PlayerEndResult::PLAYER_LOST:
+		case Widelands::PlayerEndResult::kLost:
 			/** TRANSLATORS: This is shown in the game summary for the players who have lost. */
 			stat_str = _("Lost");
 			break;
-		case Widelands::PlayerEndResult::PLAYER_WON:
+		case Widelands::PlayerEndResult::kWon:
 			/** TRANSLATORS: This is shown in the game summary for the players who have won. */
 			stat_str = _("Won");
 			if (!single_won) {
 				single_won = p;
 			} else {
-				teawon_ = p->team_number();
+				team_won = p->team_number();
 			}
 			break;
-		case Widelands::PlayerEndResult::PLAYER_RESIGNED:
+		case Widelands::PlayerEndResult::kResigned:
 			/** TRANSLATORS: This is shown in the game summary for the players who have resigned. */
 			stat_str = _("Resigned");
 			break;
-		case Widelands::PlayerEndResult::UNDEFINED:
+		case Widelands::PlayerEndResult::kUndefined:
 			/** TRANSLATORS: This is shown in the game summary when we don't know */
 			/** TRANSLATORS: if the player has lost or won. */
 			stat_str = pgettext("player_won", "Unknown");
@@ -196,12 +196,12 @@ void GameSummaryScreen::fill_data() {
 			title_area_->set_text(_("You lost."));
 		}
 	} else {
-		if (teawon_ <= 0) {
+		if (team_won == 0) {
 			assert(single_won);
 			title_area_->set_text((boost::format(_("%s won!")) % single_won->get_name()).str());
 		} else {
 			title_area_->set_text(
-			   (boost::format(_("Team %|1$u| won!")) % static_cast<unsigned int>(teawon_)).str());
+			   (boost::format(_("Team %|1$u| won!")) % static_cast<unsigned int>(team_won)).str());
 		}
 	}
 	if (!players_status.empty()) {

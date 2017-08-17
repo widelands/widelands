@@ -39,7 +39,7 @@ class PartiallyFinishedBuilding : public Building {
 	friend struct MapBuildingPacket;
 
 public:
-	PartiallyFinishedBuilding(const BuildingDescr& building_descr);
+	explicit PartiallyFinishedBuilding(const BuildingDescr& building_descr);
 
 	virtual void set_building(const BuildingDescr&);
 

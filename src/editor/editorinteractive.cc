@@ -50,7 +50,6 @@
 #include "scripting/lua_table.h"
 #include "ui_basic/messagebox.h"
 #include "ui_basic/progresswindow.h"
-#include "wlapplication.h"
 #include "wui/field_overlay_manager.h"
 #include "wui/game_tips.h"
 #include "wui/interactive_base.h"
@@ -81,7 +80,7 @@ void update_resource_overlay(const Widelands::NoteFieldResourceChanged& note,
 		const std::string str =
 		   world.get_resource(note.fc.field->get_resources())->editor_image(amount);
 		const Image* pic = g_gr->images().get(str);
-		field_overlay_manager->register_overlay(note.fc, pic, 0);
+		field_overlay_manager->register_overlay(note.fc, pic, OverlayLevel::kResource);
 	}
 }
 
@@ -116,16 +115,30 @@ EditorInteractive::EditorInteractive(Widelands::EditorGameBase& e)
 
 	toolbar_.add_space(15);
 
+	toggle_buildhelp_ = add_toolbar_button(
+	   "wui/menus/menu_toggle_buildhelp", "buildhelp", _("Show Building Spaces (on/off)"));
+	toggle_buildhelp_->sigclicked.connect(boost::bind(&EditorInteractive::toggle_buildhelp, this));
+	toggle_immovables_ = add_toolbar_button(
+	   "wui/menus/menu_toggle_immovables", "immovables", _("Show Immovables (on/off)"));
+	toggle_immovables_->set_perm_pressed(true);
+	toggle_immovables_->sigclicked.connect([this]() { toggle_immovables(); });
+	toggle_bobs_ =
+	   add_toolbar_button("wui/menus/menu_toggle_bobs", "animals", _("Show Animals (on/off)"));
+	toggle_bobs_->set_perm_pressed(true);
+	toggle_bobs_->sigclicked.connect([this]() { toggle_bobs(); });
+	toggle_resources_ = add_toolbar_button(
+	   "wui/menus/menu_toggle_resources", "resources", _("Show Resources (on/off)"));
+	toggle_resources_->set_perm_pressed(true);
+	toggle_resources_->sigclicked.connect([this]() { toggle_resources(); });
+
+	toolbar_.add_space(15);
+
 	add_toolbar_button(
 	   "wui/menus/menu_toggle_minimap", "minimap", _("Minimap"), &minimap_registry(), true);
 	minimap_registry().open_window = [this] { toggle_minimap(); };
 
-	toggle_buildhelp_ = add_toolbar_button(
-	   "wui/menus/menu_toggle_buildhelp", "buildhelp", _("Show Building Spaces (on/off)"));
-	toggle_buildhelp_->sigclicked.connect(boost::bind(&EditorInteractive::toggle_buildhelp, this));
-
-	reset_zoom_ = add_toolbar_button("wui/menus/menu_reset_zoom", "reset_zoom", _("Reset zoom"));
-	reset_zoom_->sigclicked.connect([this] {
+	auto zoom = add_toolbar_button("wui/menus/menu_reset_zoom", "reset_zoom", _("Reset zoom"));
+	zoom->sigclicked.connect([this] {
 		zoom_around(1.f, Vector2f(get_w() / 2.f, get_h() / 2.f), MapView::Transition::Smooth);
 	});
 
@@ -181,8 +194,10 @@ void EditorInteractive::register_overlays() {
 		if (uint8_t const amount = fc.field->get_resources_amount()) {
 			const std::string& immname =
 			   egbase().world().get_resource(fc.field->get_resources())->editor_image(amount);
-			if (immname.size())
-				mutable_field_overlay_manager()->register_overlay(fc, g_gr->images().get(immname), 4);
+			if (immname.size()) {
+				mutable_field_overlay_manager()->register_overlay(
+				   fc, g_gr->images().get(immname), OverlayLevel::kResource);
+			}
 		}
 	}
 }
@@ -325,54 +340,76 @@ void EditorInteractive::on_buildhelp_changed(const bool value) {
 	toggle_buildhelp_->set_perm_pressed(value);
 }
 
+void EditorInteractive::toggle_resources() {
+	auto* overlay_manager = mutable_field_overlay_manager();
+	const bool value = !overlay_manager->is_enabled(OverlayLevel::kResource);
+	overlay_manager->set_enabled(OverlayLevel::kResource, value);
+	toggle_resources_->set_perm_pressed(value);
+}
+
+void EditorInteractive::toggle_immovables() {
+	const bool value = !draw_immovables();
+	set_draw_immovables(value);
+	toggle_immovables_->set_perm_pressed(value);
+}
+
+void EditorInteractive::toggle_bobs() {
+	const bool value = !draw_bobs();
+	set_draw_bobs(value);
+	toggle_bobs_->set_perm_pressed(value);
+}
+
 bool EditorInteractive::handle_key(bool const down, SDL_Keysym const code) {
-	bool handled = InteractiveBase::handle_key(down, code);
-
 	if (down) {
-		// only on down events
-
 		switch (code.sym) {
 		// Sel radius
 		case SDLK_1:
-			set_sel_radius_and_update_menu(0);
-			handled = true;
-			break;
+			if (code.mod & (KMOD_CTRL)) {
+				toggle_buildhelp();
+			} else {
+				set_sel_radius_and_update_menu(0);
+			}
+			return true;
 		case SDLK_2:
-			set_sel_radius_and_update_menu(1);
-			handled = true;
-			break;
+			if (code.mod & (KMOD_CTRL)) {
+				toggle_immovables();
+			} else {
+				set_sel_radius_and_update_menu(1);
+			}
+			return true;
 		case SDLK_3:
-			set_sel_radius_and_update_menu(2);
-			handled = true;
-			break;
+			if (code.mod & (KMOD_CTRL)) {
+				toggle_bobs();
+			} else {
+				set_sel_radius_and_update_menu(2);
+			}
+			return true;
 		case SDLK_4:
-			set_sel_radius_and_update_menu(3);
-			handled = true;
-			break;
+			if (code.mod & (KMOD_CTRL)) {
+				toggle_resources();
+			} else {
+				set_sel_radius_and_update_menu(3);
+			}
+			return true;
 		case SDLK_5:
 			set_sel_radius_and_update_menu(4);
-			handled = true;
-			break;
+			return true;
 		case SDLK_6:
 			set_sel_radius_and_update_menu(5);
-			handled = true;
-			break;
+			return true;
 		case SDLK_7:
 			set_sel_radius_and_update_menu(6);
-			handled = true;
-			break;
+			return true;
 		case SDLK_8:
 			set_sel_radius_and_update_menu(7);
-			handled = true;
-			break;
+			return true;
 		case SDLK_9:
 			set_sel_radius_and_update_menu(8);
-			handled = true;
-			break;
+			return true;
 		case SDLK_0:
 			if (!(code.mod & KMOD_CTRL)) {
 				set_sel_radius_and_update_menu(9);
-				handled = true;
+				return true;
 			}
 			break;
 
@@ -380,8 +417,7 @@ bool EditorInteractive::handle_key(bool const down, SDL_Keysym const code) {
 		case SDLK_RSHIFT:
 			if (tools_->use_tool == EditorTool::First)
 				select_tool(tools_->current(), EditorTool::Second);
-			handled = true;
-			break;
+			return true;
 
 		case SDLK_LCTRL:
 		case SDLK_RCTRL:
@@ -391,75 +427,62 @@ bool EditorInteractive::handle_key(bool const down, SDL_Keysym const code) {
 		case SDLK_MODE:
 			if (tools_->use_tool == EditorTool::First)
 				select_tool(tools_->current(), EditorTool::Third);
-			handled = true;
-			break;
+			return true;
 
 		case SDLK_SPACE:
 			toggle_buildhelp();
-			handled = true;
-			break;
+			return true;
 
 		case SDLK_c:
 			set_display_flag(
 			   InteractiveBase::dfShowCensus, !get_display_flag(InteractiveBase::dfShowCensus));
-			handled = true;
-			break;
+			return true;
 
 		case SDLK_h:
 			mainmenu_.toggle();
-			handled = true;
-			break;
+			return true;
 
 		case SDLK_i:
 			select_tool(tools_->info, EditorTool::First);
-			handled = true;
-			break;
-
-		case SDLK_m:
-			minimap_registry().toggle();
-			handled = true;
-			break;
+			return true;
 
 		case SDLK_l:
 			if (code.mod & (KMOD_LCTRL | KMOD_RCTRL))
 				new MainMenuLoadMap(*this);
-			handled = true;
-			break;
+			return true;
+
+		case SDLK_m:
+			minimap_registry().toggle();
+			return true;
 
 		case SDLK_p:
 			playermenu_.toggle();
-			handled = true;
-			break;
+			return true;
 
 		case SDLK_s:
 			if (code.mod & (KMOD_LCTRL | KMOD_RCTRL))
 				new MainMenuSaveMap(*this);
-			handled = true;
-			break;
+			return true;
 
 		case SDLK_t:
 			toolmenu_.toggle();
-			handled = true;
-			break;
+			return true;
+
+		case SDLK_y:
+			if (code.mod & (KMOD_LCTRL | KMOD_RCTRL))
+				history_->redo_action(egbase().world());
+			return true;
 
 		case SDLK_z:
 			if ((code.mod & (KMOD_LCTRL | KMOD_RCTRL)) && (code.mod & (KMOD_LSHIFT | KMOD_RSHIFT)))
 				history_->redo_action(egbase().world());
 			else if (code.mod & (KMOD_LCTRL | KMOD_RCTRL))
 				history_->undo_action(egbase().world());
-			handled = true;
-			break;
-
-		case SDLK_y:
-			if (code.mod & (KMOD_LCTRL | KMOD_RCTRL))
-				history_->redo_action(egbase().world());
-			handled = true;
-			break;
+			return true;
 
 		case SDLK_F1:
 			helpmenu_.toggle();
-			handled = true;
-			break;
+			return true;
 
 		default:
 			break;
@@ -477,13 +500,12 @@ bool EditorInteractive::handle_key(bool const down, SDL_Keysym const code) {
 		case SDLK_MODE:
 			if (tools_->use_tool != EditorTool::First)
 				select_tool(tools_->current(), EditorTool::First);
-			handled = true;
-			break;
+			return true;
 		default:
 			break;
 		}
 	}
-	return handled;
+	return InteractiveBase::handle_key(down, code);
 }
 
 void EditorInteractive::select_tool(EditorTool& primary, EditorTool::ToolIndex const which) {

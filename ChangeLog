@@ -1,5 +1,209 @@
-## Build 19-rc1
+## Post Build 19 until bzr8352
 
+### Animations, Icons and Overlays
+
+  - Implemented scaling support for animations
+
+
+### Sounds and Music
+
+  - Added new sound files for Barbarians Inn + Big-Inn, Empire Inn,
+    Atlantean Mill, Toolsmith, Smelting-Works, all Weaving Mills, Atlantean
+    Woodcutter, Sawmill, Stonecutter, Goldspinner.
+  - Modified smithies sounds to dimmer versions; added tree-falling sounds,
+    substituted Timber shouting with tree-falling.
+  - New music tracks: "Silkweaver's Song", "Hypathia's Theme" and "We Work in
+    the Vineyards".
+  - Allocate 32 mixing channels instead of the default 8.
+
+
+### Tutorials and Campaigns
+
+  - Tweaked timings in tutorials and scenarios.
+  - Changes and additions to Lua methods and objects:
+    - New method player:get_produced_wares_count()
+    - New object LuaMap  -> LuaEconomy.
+    - Added option to Lua function player:hide_fields to mark them as unexplored.
+  - Remove unused parameters of message_box_objective.
+  - Fixed bug #1656192: Economy tutorial assumes window is open.
+  - Fixed bug #1670065: Random tree growth can block building sites needed to
+    progress in scenario.
+  - Fixed bug #1688655: lua func "place_building_in_region" not work for mines.
+    Removed unused parameter 'req_suitability' from function
+    place_building_in_region in infrastructure.lua.
+
+
+### Maps
+
+  - Map tags: Added "1v1" to Firegames, Islands at war and The Pass through
+    the Mountains. Removed "unbalanced" from The Pass through the Mountains.
+  - Moved hint texts from map descriptions to hints for the Last Bastion and
+    Rendez-vous maps.
+  - Increased maximum number of players from 8 to 16, to be used for testing
+    purposes.
+
+
+### Saveloading
+
+  - Old scenario save games will no longer work due to changes to the map
+    scrolling functions.
+  - Savehandler: Avoid reading config more than once per game
+
+### AI
+
+  - Improved ship exploration decisions for AI.
+  - AI also continues exploring when the last port is lost to prevent crashes.
+  - AI now calculates military strength based on the actual init.lua files
+    rather than hard-coding the values. This also removes the tribe name
+    restriction for modders.
+
+
+### Gameplay
+
+  - Improvements to various production sites' logic
+  - New "Barracks" (casern) building for recruiting soldiers. Solders are no
+    longer created by warehouses. Production sites can now have workers as input
+    to consume.
+  - When a Fish Breeder's fishing grounds are full, display a special tooltip
+    instead of sending an "Out of Resources" message.
+  - When a warehouse is destroyed, the maximum number of fleeing units is now
+    limited to 500 per unit type.
+  - Only cancel expedition if there is a reachable portdock. Show a warning
+    message to owner.
+  - Shifted ware hotspot definition from WorkerDescr to CarrierDescr.
+  - Fixed bug for Wood Gnome in which a destroyed player would gain infinite
+    points. Also, no longer calculate score for a defeated player.
+  - Fixed a bug where higher-level workers wouldn't occupy lower-level workers'
+    working position slots in productionsites.
+  - The port now conquers every location where its military influence is higher
+    than the influence of other players. This fixes a segfault when all
+    potential portdock fields are owned by another player, but there is a
+    portdock location available where the player owning the port has highest
+    influence.
+  - Fixed bug in collectors script where a broken message was sent after the
+    game ended.
+  - Fixed bug #1643209: No-cost workers are not removed correctly
+  - Fixed bug #1639444: Workers with wares inside ships can crash the game
+  - Fixed bug #1656671: Wares are not always transported to construction site.
+  - Fixed bug #1637386: Militarysites warn about allies.
+  - Fixed bug  #963799: shortsighted shipwright (ship in pond)
+  - Fixed bug  #1611323: ships can be built in non-floating spaces (shipyard)
+  - Fixed bug #1658456: Imperials: Soldier target quantity not changeable
+  - Fixed bug #1643284: Ships of a fleet can have the same name
+
+
+### User Interface
+
+  - Maps can now be zoomed using the mouse wheel or keyboard keys: CTRL+, CTRL-
+    to in-/decrease, and CTRL+0 to reset. This also removes 0 as a possible
+    landmark number.
+  - All map transitions like jumping in messages and in the buildings menu are
+    now animated.
+  - Moved smooth animation of cursor and MapView from Lua into C++. This fixes
+    the transitions in tutorials, which were broken when zoomed.
+  - Show census information on destroyed building with the former building's
+    name.
+  - Added supplementary warning to enhancement message for military sites.
+  - Fixed statistics label overlap. Ware statistics now update their plot range
+    correctly.
+  - Removed quick navigation with '.' and ','.
+  - The game summary window now restores the original desired speed when it's
+    closed.
+  - Productionsites no longer close their window when the stop/start button is
+    pressed.
+  - Minimized construction windows no longer get maximized when the construction
+    is finished.
+  - Window is no longer closed on enhance or dismantle.
+  - Let the user select multiple entries in a table using Ctrl/Shift + Click
+    (multiple/range selection) and Ctrl+A (select all) where appropriate.
+  - Implemented textual and pictorial dropdown menus. Dropdowns are used for win
+    condition and multiplayer tribe selection in the launch game screens.
+  - Fullscreen background images are now tiled rather than stretched.
+  - Stopped fullscreen toggle from flickering.
+  - The following menus now relayout themselves when fullscreen mode is toggled:
+    main, multiplayer, single player, about, map selection, options.
+  - Improved scrollbar and table header layout.
+  - Replaced get_key_state with SDL_GetModState() to fix keyboard mappings.
+  - Actionconfirm now uses Box layout and resizes according to text size.
+  - Display loading times on the console while loading the tribes.
+  - Simplified the UI::Align enum and various alignment-related cleanup and
+    fixes.
+  - Replaced booleans in UI::Box::add() with enum classes for better readability
+  - Fixed bug #1635808: Display of worker in training sites is not updated.
+  - Fixed bug #1191295: Seafaring: builder not listed in expedition list in port
+  - Fixed bug #1658489: Expedition tab in Port window messed up some times
+  - Fixed bug #1653460: UI::Panel::get_inner_h() const: Assertion `tborder_ +
+    bborder_ <= h_' failed
+  - Fixed bug #1653254: Action window of Road stays open under some
+    circumstances
+  - Fixed bug #1687043: Memory leak in Multilineeditbox
+  - Fixed bug #1644553: Crash when buildhelp icon is clicked twice
+
+
+### Internationalization
+
+  - Removed building names from confirmation messages, as they cause grammar
+    problems in some languages.
+  - Production program descnames can now be fetched by pgettext as well as plain
+    gettext.
+  - Deleted unused networking messages and unified the "Something went wrong"
+    message.
+  - Added a Python script to do automated glossary checks for translations. It
+    enlists the help of Hunspell and 'misuses' the Transifex note field in order
+    to reduce noise.
+  - Fixed various string issues and added some translators' comments.
+
+
+### Help and Documentation
+
+  - Convert editor/game tips to Lua and display them in the in-editor/in-game
+    help. Added new tips.
+  - Restructured, enhanced and added to the Lua scripting reference for Tribes.
+  - Fixed some wrong indentation for the documentation in the website.
+  - Added toptopple sound documentation in .ods spreadsheet format (LibreCalc)
+    into 'doc' folder
+
+
+### Editor
+
+  - Overhauled the selection menu for critters to give them categories
+  - Added an option "items per row" and rearranged the terrains and immovables
+  - Fixed bug #1627537: Release mouse button does not work when placing things
+    and mouse gets under a window
+
+
+### Graphics Engine
+
+  - Renamed "sub" tag to "div" in new font renderer.
+  - The new font renderer now sets the width properly and supports player color
+    for images. Added width property to img tag
+  - Buildings and ships now send their messages with the new font renderer.
+  - Messages try to render with the new font renderer first, then fall back to
+    the old font renderer for layouting messages that haven't been converted yet
+    (and from savegames).
+  - All images with player color now receive their color by a common
+    playercolor_image function. Available player colors are kept in an array.
+  - Split graphics into multiple Cmake libraries.
+
+
+### Other Issues
+
+  - Windows builds now have a unique app id for every build. This allows
+    parallel installation of several versions.
+  - Modernized how Mac OS X releases are done.
+  - Moved utils/fix_lua_tabs.py to utils/fix_formatting.py and added calls to
+    clang-format and pyformat.
+  - Fixed a series of compiler warnings for clang and Windows.
+  - The ProductionSiteDescr constructor still contained some checks from the
+    time when they used to inherit from MilitarysiteDescr. Removed this obsolete
+    code and made working_positions and programs mandatory.
+  - Moved website related binaries to base dir in compile.sh
+  - Used the Notification system to reduce some code interdependency.
+  - Various code cleanups to make the code more readable.
+  - Fixed bug #1648178: Fatal Exception: Bad Cast
+
+
+## Build 19
 
 ### Animations, Icons and Overlays
 
@@ -35,7 +239,7 @@
   - Fixed bug #1304638: Wrong sound played
 
 
-### Tutorials and Campaigns:
+### Tutorials and Campaigns
 
   - Split tutorial into "Basic Control" and "Warefare" and added encancements.
   - New "Seafaring" and "Economy" tutorials"
@@ -98,7 +302,7 @@
   - Fixed bug #979995:  Game crashes with large map when saving
 
 
-### AI:
+### AI
 
   - AI can now build and use ships
   - Improved placing, upgrading and dismantling buildings
@@ -335,7 +539,7 @@
     for updating the encyclopedia on the website.
 
 
-### Graphics Engine:
+### Graphics Engine
 
   - Fixed line drawing by replacing the broken use of GL_LINES with a
     tessellation algorithm for drawing lines.
@@ -392,7 +596,7 @@
   - Fixed bug #536317:  Graphics libraries still in memory when no longer needed
 
 
-### Other Issues:
+### Other Issues
 
   - Added build instructions for OpenBSD
   - Ships get debug window. Also its content are extended.

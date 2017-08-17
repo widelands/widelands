@@ -332,19 +332,9 @@ void FullscreenMenuLoadGame::clicked_delete() {
 }
 
 std::string FullscreenMenuLoadGame::filename_list_string() {
-	std::set<uint32_t> selections = table_.selections();
 	boost::format message;
-	int counter = 0;
-	for (const uint32_t index : selections) {
-		++counter;
-		// TODO(GunChleoc): We can exceed the texture size for the font renderer,
-		// so we have to restrict this for now.
-		if (counter > 50) {
-			message = boost::format("%s\n%s") % message % "...";
-			break;
-		}
+	for (const uint32_t index : table_.selections()) {
 		const SavegameData& gamedata = games_data_[table_.get(table_.get_record(index))];
-
 		if (gamedata.errormessage.empty()) {
 			message =
 			   boost::format("%s\n%s") % message %
@@ -541,10 +531,10 @@ void FullscreenMenuLoadGame::fill_table() {
 
 			if (!is_replay_) {
 				if (settings_->settings().multiplayer) {
-					if (gamedata.gametype == GameController::GameType::SINGLEPLAYER) {
+					if (gamedata.gametype == GameController::GameType::kSingleplayer) {
 						continue;
 					}
-				} else if (gamedata.gametype > GameController::GameType::SINGLEPLAYER) {
+				} else if (gamedata.gametype > GameController::GameType::kSingleplayer) {
 					continue;
 				}
 			}
@@ -611,14 +601,14 @@ void FullscreenMenuLoadGame::fill_table() {
 			if (is_replay_ || settings_->settings().multiplayer) {
 				std::string gametypestring;
 				switch (gamedata.gametype) {
-				case GameController::GameType::SINGLEPLAYER:
+				case GameController::GameType::kSingleplayer:
 					/** TRANSLATORS: "Single Player" entry in the Game Mode table column. */
 					/** TRANSLATORS: "Keep this to 6 letters maximum. */
 					/** TRANSLATORS: A tooltip will explain the abbreviation. */
 					/** TRANSLATORS: Make sure that this translation is consistent with the tooltip. */
 					gametypestring = _("SP");
 					break;
-				case GameController::GameType::NETHOST:
+				case GameController::GameType::kNetHost:
 					/** TRANSLATORS: "Multiplayer Host" entry in the Game Mode table column. */
 					/** TRANSLATORS: "Keep this to 2 letters maximum. */
 					/** TRANSLATORS: A tooltip will explain the abbreviation. */
@@ -628,7 +618,7 @@ void FullscreenMenuLoadGame::fill_table() {
 					   (boost::format(_("H (%1%)")) % static_cast<unsigned int>(gamedata.nrplayers))
 					      .str();
 					break;
-				case GameController::GameType::NETCLIENT:
+				case GameController::GameType::kNetClient:
 					/** TRANSLATORS: "Multiplayer" entry in the Game Mode table column. */
 					/** TRANSLATORS: "Keep this to 2 letters maximum. */
 					/** TRANSLATORS: A tooltip will explain the abbreviation. */
@@ -638,9 +628,11 @@ void FullscreenMenuLoadGame::fill_table() {
 					   (boost::format(_("MP (%1%)")) % static_cast<unsigned int>(gamedata.nrplayers))
 					      .str();
 					break;
-				case GameController::GameType::REPLAY:
+				case GameController::GameType::kReplay:
 					gametypestring = "";
 					break;
+				case GameController::GameType::kUndefined:
+					NEVER_HERE();
 				}
 				te.set_string(1, gametypestring);
 				te.set_string(2, map_filename(gamedata.filename, gamedata.mapname));
@@ -688,9 +680,10 @@ bool FullscreenMenuLoadGame::handle_key(bool down, SDL_Keysym code) {
 
 	switch (code.sym) {
 	case SDLK_KP_PERIOD:
-		if (code.mod & KMOD_NUM)
+		if (code.mod & KMOD_NUM) {
 			break;
-	/* no break */
+		}
+		FALLS_THROUGH;
 	case SDLK_DELETE:
 		clicked_delete();
 		return true;

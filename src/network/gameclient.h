@@ -23,6 +23,7 @@
 #include "chat/chat.h"
 #include "logic/game_controller.h"
 #include "logic/game_settings.h"
+#include "logic/player_end_result.h"
 #include "network/netclient.h"
 
 struct GameClientImpl;
@@ -35,14 +36,11 @@ struct GameClientImpl;
  * This includes running the game setup screen and the actual game after
  * launch, as well as dealing with the actual network protocol.
  */
-struct GameClient : public GameController,
-                    public GameSettingsProvider,
-                    private SyncCallback,
-                    public ChatProvider {
-	GameClient(const std::string& host,
-	           const uint16_t port,
+struct GameClient : public GameController, public GameSettingsProvider, public ChatProvider {
+	GameClient(const std::pair<NetAddress, NetAddress>& host,
 	           const std::string& playername,
 	           bool internet = false);
+
 	virtual ~GameClient();
 
 	void run();
@@ -109,7 +107,7 @@ private:
 		return path + "~backup";
 	}
 
-	void syncreport() override;
+	void sync_report_callback();
 
 	void handle_packet(RecvPacket&);
 	void handle_network();

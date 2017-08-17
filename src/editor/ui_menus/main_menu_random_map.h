@@ -45,7 +45,7 @@ template <typename T, typename ID> struct IDButton;
  * things like size, world ....
 */
 struct MainMenuNewRandomMap : public UI::Window {
-	MainMenuNewRandomMap(EditorInteractive&);
+	explicit MainMenuNewRandomMap(EditorInteractive&);
 
 	enum class ButtonId : uint8_t {
 		kNone,

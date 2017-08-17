@@ -649,7 +649,7 @@ int LuaMapView::close(lua_State* /* l */) {
 int LuaMapView::scroll_to_map_pixel(lua_State* L) {
 	Widelands::Game& game = get_game(L);
 	// don't move view in replays
-	if (game.game_controller()->get_game_type() == GameController::GameType::REPLAY) {
+	if (game.game_controller()->get_game_type() == GameController::GameType::kReplay) {
 		return 0;
 	}
 
