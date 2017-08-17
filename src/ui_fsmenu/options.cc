@@ -507,9 +507,15 @@ void FullscreenMenuOptions::update_language_stats(bool include_system_lang) {
 				Profile prof("i18n/translation_stats.conf");
 				Section& s = prof.get_safe_section(locale);
 				percent = floor(100.f * s.get_int("translated") / s.get_int("total"));
-				message = (boost::format(_("The translation into %s is %d%% complete.")) %
-				           entry.descname % percent)
-				             .str();
+				if (percent == 100) {
+					message = (boost::format(_("The translation into %s is complete.")) %
+								  entry.descname)
+									 .str();
+				} else {
+					message = (boost::format(_("The translation into %s is %d%% complete.")) %
+								  entry.descname % percent)
+									 .str();
+				}
 			} catch (...) {
 			}
 		}
