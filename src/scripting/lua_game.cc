@@ -422,7 +422,7 @@ int LuaPlayer::send_message(lua_State* L) {
 int LuaPlayer::message_box(lua_State* L) {
 	Game& game = get_game(L);
 	// don't show message boxes in replays, cause they crash the game
-	if (game.game_controller()->get_game_type() == GameController::GameType::REPLAY) {
+	if (game.game_controller()->get_game_type() == GameController::GameType::kReplay) {
 		return 1;
 	}
 
@@ -1322,7 +1322,7 @@ const Message& LuaMessage::get(lua_State* L, Widelands::Game& game) {
 */
 // TODO(sirver): this should be a method of wl.Game(). Fix for b19.
 static int L_report_result(lua_State* L) {
-	std::string info = "";
+	std::string info;
 	if (lua_gettop(L) >= 3)
 		info = luaL_checkstring(L, 3);
 

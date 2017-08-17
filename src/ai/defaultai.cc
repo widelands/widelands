@@ -6015,7 +6015,7 @@ void DefaultAI::print_stats(uint32_t const gametime) {
 		}
 	}
 
-	std::string summary = "";
+	std::string summary;
 	for (const auto material : materials) {
 		uint32_t stock = calculate_stocklevel(material);
 		if (stock == 0) {
@@ -6109,7 +6109,7 @@ void DefaultAI::print_stats(uint32_t const gametime) {
 		    persistent_data->least_military_score, persistent_data->ai_personality_mil_upper_limit,
 		    msites_in_constr(), static_cast<int8_t>(soldier_status_),
 		    player_statistics.get_modified_player_power(player_number()));
-	std::string wpolicy = "";
+	std::string wpolicy;
 	switch (wood_policy_) {
 	case WoodPolicy::kDismantleRangers:
 		wpolicy = "Dismantle rangers";
