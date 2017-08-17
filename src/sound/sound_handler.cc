@@ -72,7 +72,6 @@ SoundHandler::SoundHandler()
      music_volume_(MIX_MAX_VOLUME),
      fx_volume_(MIX_MAX_VOLUME),
      random_order_(true),
-     current_songset_(""),
      fx_lock_(nullptr) {
 }
 

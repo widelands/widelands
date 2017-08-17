@@ -51,7 +51,7 @@ struct PlayerEndStatus {
 
 class PlayersManager {
 public:
-	PlayersManager(EditorGameBase& egbase);
+	explicit PlayersManager(EditorGameBase& egbase);
 	virtual ~PlayersManager();
 
 	void cleanup();

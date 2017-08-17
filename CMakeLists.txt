@@ -128,8 +128,14 @@ if("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
   wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wno-sign-conversion")
   wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wno-missing-noreturn")
 
+  # It is impossible to write code that both GCC and Clang will like,
+  # so we have to switch off the warning for one of them.
+  # http://clang-developers.42468.n3.nabble.com/Question-on-Wswitch-enum-td4025927.html
+  wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wno-switch-enum")
+
   # TODO(sirver): weak-vtables should be enabled, but leads to lot of errors right now.
   wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wno-weak-vtables")
+
   wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wno-unreachable-code")
   wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wno-documentation")
 
@@ -183,7 +189,7 @@ wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Werror=shadow")
 wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Werror=uninitialized")
 
 IF (WIN32)
-  add_definitions(-DMINGW_HAS_SECURE_API -DWIN32_LEAN_AND_MEAN)
+  add_definitions(-DMINGW_HAS_SECURE_API -DWIN32_LEAN_AND_MEAN -D__STDC_FORMAT_MACROS -D__USE_MINGW_ANSI_STDIO)
   if (CMAKE_SIZEOF_VOID_P EQUAL 4)
     set (CMAKE_EXE_LINKER_FLAGS "-Wl,--large-address-aware" CACHE STRING "Set by widelands CMakeLists.txt" FORCE)
     message (STATUS "Enabled large address awareness on mingw32")
@@ -259,6 +265,7 @@ add_subdirectory(src)
 # install files to the correct locations here
 install(
   DIRECTORY
+    data/ai
     data/campaigns
     data/i18n
     data/images

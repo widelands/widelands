@@ -18,7 +18,7 @@ function building_helptext_note()
    return
       (pgettext("barbarians_building","This mine exploits all of the resource down to the deepest level. But even after having done so, it will still have a %s chance of finding some more granite."):bformat("5%") .. "<br>"
          -- TRANSLATORS: 'It' is a mine
-         .. pgettext("barbarians_building", "It cannot be upgraded."))
+         .. pgettext("barbarians_building", "It cannot be enhanced."))
 end
 
 function building_helptext_performance()

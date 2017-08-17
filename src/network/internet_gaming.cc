@@ -19,6 +19,9 @@
 
 #include "network/internet_gaming.h"
 
+#include <memory>
+#include <random>
+
 #include <boost/format.hpp>
 #include <boost/lexical_cast.hpp>
 
@@ -28,6 +31,7 @@
 #include "base/warning.h"
 #include "io/fileread.h"
 #include "io/filesystem/layered_filesystem.h"
+#include "network/constants.h"
 #include "network/internet_gaming_messages.h"
 
 /// Private constructor by purpose: NEVER call directly. Always call InternetGaming::ref(), this
@@ -39,7 +43,7 @@ InternetGaming::InternetGaming()
      reg_(false),
      port_(INTERNET_GAMING_PORT),
      clientrights_(INTERNET_CLIENT_UNREGISTERED),
-     gameip_(""),
+     gameips_(),
      clientupdateonmetaserver_(true),
      gameupdateonmetaserver_(true),
      clientupdate_(false),
@@ -66,7 +70,7 @@ void InternetGaming::reset() {
 	clientname_ = "";
 	clientrights_ = INTERNET_CLIENT_UNREGISTERED;
 	gamename_ = "";
-	gameip_ = "";
+	gameips_ = std::make_pair(NetAddress(), NetAddress());
 	clientupdateonmetaserver_ = true;
 	gameupdateonmetaserver_ = true;
 	clientupdate_ = false;
@@ -97,13 +101,18 @@ void InternetGaming::initialize_connection() {
 	log("InternetGaming: Connecting to the metaserver.\n");
 	NetAddress addr;
 	net.reset();
-	if (NetAddress::resolve_to_v4(&addr, meta_, port_))
+	if (NetAddress::resolve_to_v6(&addr, meta_, port_)) {
 		net = NetClient::connect(addr);
-	if (!net || !net->is_connected())
+	}
+	if ((!net || !net->is_connected()) && NetAddress::resolve_to_v4(&addr, meta_, port_)) {
+		net = NetClient::connect(addr);
+	}
+	if (!net || !net->is_connected()) {
 		throw WLWarning(_("Could not establish connection to host"),
 		                _("Widelands could not establish a connection to the given address.\n"
 		                  "Either there was no metaserver running at the supposed port or\n"
 		                  "your network setup is broken."));
+	}
 
 	// Of course not 100% true, but we just care about an answer at all, so we reset this tracker
 	lastping_ = time(nullptr);
@@ -122,6 +131,21 @@ bool InternetGaming::login(const std::string& nick,
 	meta_ = meta;
 	port_ = port;
 
+	// If we are not connecting to a registered account, create a random value
+	// to send as password. Used so the metaserver can match our IPv4 and IPv6 connections.
+	// See internet_gaming_protocol.h for more information
+	if (!reg_) {
+		// Admittedly this is a pretty stupid generator. But it should be fine for us
+		static const std::string random_chars = "0123456789ABCDEF";
+		pwd_ = "";
+		std::random_device rd;
+		std::mt19937 gen(rd());
+		std::uniform_int_distribution<> dist(0, random_chars.length() - 1);
+		while (pwd_.length() < 8) {
+			pwd_.push_back(random_chars[dist(gen)]);
+		}
+	}
+
 	initialize_connection();
 
 	// If we are here, a connection was established and we can send our login package through the
@@ -132,9 +156,8 @@ bool InternetGaming::login(const std::string& nick,
 	s.string(boost::lexical_cast<std::string>(INTERNET_GAMING_PROTOCOL_VERSION));
 	s.string(nick);
 	s.string(build_id());
-	s.string(bool2str(reg));
-	if (reg)
-		s.string(pwd);
+	s.string(bool2str(reg_));
+	s.string(pwd_);
 	net->send(s);
 
 	// Now let's see, whether the metaserver is answering
@@ -149,6 +172,9 @@ bool InternetGaming::login(const std::string& nick,
 				format_and_add_chat(
 				   "", "", true, _("For hosting a game, please take a look at the notes at:"));
 				format_and_add_chat("", "", true, "http://wl.widelands.org/wiki/InternetGaming");
+
+				// Try to establish a second connection to tell the metaserver about our IPv4 address
+				create_second_connection();
 				return true;
 			} else if (error())
 				return false;
@@ -176,8 +202,7 @@ bool InternetGaming::relogin() {
 	s.string(clientname_);
 	s.string(build_id());
 	s.string(bool2str(reg_));
-	if (reg_)
-		s.string(pwd_);
+	s.string(pwd_);
 	net->send(s);
 
 	// Now let's see, whether the metaserver is answering
@@ -199,6 +224,8 @@ bool InternetGaming::relogin() {
 		log("InternetGaming: No answer from metaserver!\n");
 		return false;
 	}
+
+	create_second_connection();
 
 	// Client is reconnected, so let's try resend the timeouted command.
 	if (waitcmd_ == IGPCMD_GAME_CONNECT)
@@ -332,6 +359,37 @@ void InternetGaming::handle_metaserver_communication() {
 			set_error();
 		}
 	}
+}
+
+void InternetGaming::create_second_connection() {
+	NetAddress addr;
+	net->get_remote_address(&addr);
+	if (!addr.is_ipv6()) {
+		// Primary connection already is IPv4, abort
+		return;
+	}
+
+	if (!NetAddress::resolve_to_v4(&addr, meta_, port_)) {
+		// Could not get the IPv4 address of the metaserver? Strange :-/
+		return;
+	}
+
+	std::unique_ptr<NetClient> tmpNet = NetClient::connect(addr);
+	if (!tmpNet || !tmpNet->is_connected()) {
+		// Connecting by IPv4 doesn't work? Well, nothing to do then
+		return;
+	}
+
+	// Okay, we have a connection. Send the login message and terminate the connection
+	SendPacket s;
+	s.string(IGPCMD_TELL_IP);
+	s.string(boost::lexical_cast<std::string>(INTERNET_GAMING_PROTOCOL_VERSION));
+	s.string(clientname_);
+	s.string(pwd_);
+	tmpNet->send(s);
+
+	// Close the connection
+	tmpNet->close();
 }
 
 /// Handle one packet received from the metaserver.
@@ -540,17 +598,25 @@ void InternetGaming::handle_packet(RecvPacket& packet) {
 
 		else if (cmd == IGPCMD_GAME_OPEN) {
 			// Client received the acknowledgment, that the game was opened
-			assert(waitcmd_ == IGPCMD_GAME_OPEN);
-			waitcmd_ = "";
+			// We can't use an assert here since this message might arrive after the game already
+			// started
+			if (waitcmd_ == IGPCMD_GAME_OPEN) {
+				waitcmd_ = "";
+			}
 		}
 
 		else if (cmd == IGPCMD_GAME_CONNECT) {
 			// Client received the ip for the game it wants to join
 			assert(waitcmd_ == IGPCMD_GAME_CONNECT);
 			waitcmd_ = "";
-			// save the received ip, so the client cann connect to the game
-			gameip_ = packet.string();
-			log("InternetGaming: Received ip of the game to join: %s.\n", gameip_.c_str());
+			// Save the received IP(s), so the client can connect to the game
+			NetAddress::parse_ip(&gameips_.first, packet.string(), WIDELANDS_PORT);
+			// If the next value is true, a secondary IP follows
+			if (packet.string() == bool2str(true)) {
+				NetAddress::parse_ip(&gameips_.second, packet.string(), WIDELANDS_PORT);
+			}
+			log("InternetGaming: Received ips of the game to join: %s %s.\n",
+			    gameips_.first.ip.to_string().c_str(), gameips_.second.ip.to_string().c_str());
 		}
 
 		else if (cmd == IGPCMD_GAME_START) {
@@ -563,7 +629,7 @@ void InternetGaming::handle_packet(RecvPacket& packet) {
 			// Client received an ERROR message - seems something went wrong
 			std::string subcmd(packet.string());
 			std::string reason(packet.string());
-			std::string message = "";
+			std::string message;
 
 			if (subcmd == IGPCMD_CHAT) {
 				// Something went wrong with the chat message the user sent.
@@ -598,10 +664,10 @@ void InternetGaming::handle_packet(RecvPacket& packet) {
 	}
 }
 
-/// \returns the ip of the game the client is on or wants to join (or the client is hosting)
-///          or 0, if no ip available.
-const std::string& InternetGaming::ip() {
-	return gameip_;
+/// \returns Up to two NetAdress with ips of the game the client is on or wants to join
+///          (or the client is hosting) or invalid addresses, if no ip available.
+const std::pair<NetAddress, NetAddress>& InternetGaming::ips() {
+	return gameips_;
 }
 
 /// called by a client to join the game \arg gamename
@@ -666,7 +732,7 @@ void InternetGaming::set_game_done() {
 	s.string(IGPCMD_GAME_DISCONNECT);
 	net->send(s);
 
-	gameip_ = "";
+	gameips_ = std::make_pair(NetAddress(), NetAddress());
 	state_ = LOBBY;
 
 	log("InternetGaming: Client announced the disconnect from the game %s.\n", gamename_.c_str());
@@ -803,20 +869,18 @@ std::string InternetGaming::bool2str(bool b) {
 }
 
 /// formates a chat message and adds it to the list of chat messages
-void InternetGaming::format_and_add_chat(std::string from,
-                                         std::string to,
+void InternetGaming::format_and_add_chat(const std::string& from,
+                                         const std::string& to,
                                          bool system,
-                                         std::string msg) {
-	ChatMessage c;
+                                         const std::string& msg) {
+	ChatMessage c(msg);
 	if (!system && from.empty()) {
 		std::string unkown_string = (boost::format("<%s>") % _("unknown")).str();
 		c.sender = unkown_string;
 	} else {
 		c.sender = from;
 	}
-	c.time = time(nullptr);
 	c.playern = system ? -1 : to.size() ? 3 : 7;
-	c.msg = msg;
 	c.recipient = to;
 
 	receive(c);

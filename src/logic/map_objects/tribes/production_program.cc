@@ -537,7 +537,7 @@ void ProductionProgram::ActReturn::execute(Game& game, ProductionSite& ps) const
 		std::string condition_string =
 		   i18n::localize_list(condition_list, i18n::ConcatenateWith::AND);
 
-		std::string result_string = "";
+		std::string result_string;
 		if (result_ == Failed) {
 			/** TRANSLATORS: "Did not start working because the economy needs the ware ‘%s’" */
 			result_string = (boost::format(_("Did not start %1$s because %2$s")) %
@@ -1276,8 +1276,9 @@ ProductionProgram::ActCheckSoldier::ActCheckSoldier(char* parameters) {
 }
 
 void ProductionProgram::ActCheckSoldier::execute(Game& game, ProductionSite& ps) const {
-	SoldierControl& ctrl = dynamic_cast<SoldierControl&>(ps);
-	const std::vector<Soldier*> soldiers = ctrl.present_soldiers();
+	const SoldierControl* ctrl = ps.soldier_control();
+	assert(ctrl != nullptr);
+	const std::vector<Soldier*> soldiers = ctrl->present_soldiers();
 	if (soldiers.empty()) {
 		ps.set_production_result(_("No soldier to train!"));
 		return ps.program_end(game, Skipped);
@@ -1355,8 +1356,9 @@ ProductionProgram::ActTrain::ActTrain(char* parameters) {
 }
 
 void ProductionProgram::ActTrain::execute(Game& game, ProductionSite& ps) const {
-	SoldierControl& ctrl = dynamic_cast<SoldierControl&>(ps);
-	const std::vector<Soldier*> soldiers = ctrl.present_soldiers();
+	const SoldierControl* ctrl = ps.soldier_control();
+	;
+	const std::vector<Soldier*> soldiers = ctrl->present_soldiers();
 	const std::vector<Soldier*>::const_iterator soldiers_end = soldiers.end();
 	std::vector<Soldier*>::const_iterator it = soldiers.begin();
 

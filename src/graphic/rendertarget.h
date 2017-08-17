@@ -50,7 +50,7 @@ class Surface;
 // the old richtext renderer is gone.
 class RenderTarget {
 public:
-	RenderTarget(Surface*);
+	explicit RenderTarget(Surface*);
 	void set_window(const Recti& rc, const Vector2i& ofs);
 	bool enter_window(const Recti& rc, Recti* previous, Vector2i* prevofs);
 

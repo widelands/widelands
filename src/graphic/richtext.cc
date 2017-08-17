@@ -239,7 +239,7 @@ struct TextBuilder {
 	/// parts of a line onto the same text baseline).
 	std::vector<Elt> elements;
 
-	TextBuilder(RichTextImpl& impl)
+	explicit TextBuilder(RichTextImpl& impl)
 	   : rti(impl),
 	     images_width(0),
 	     images_height(0),

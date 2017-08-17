@@ -170,8 +170,14 @@ bool NetHost::try_receive(const ConnectionId id, RecvPacket* packet) {
 void NetHost::send(const ConnectionId id, const SendPacket& packet) {
 	boost::system::error_code ec;
 	if (is_connected(id)) {
+#ifdef NDEBUG
+		boost::asio::write(
+		   clients_.at(id).socket, boost::asio::buffer(packet.get_data(), packet.get_size()), ec);
+#else
 		size_t written = boost::asio::write(
 		   clients_.at(id).socket, boost::asio::buffer(packet.get_data(), packet.get_size()), ec);
+#endif
+
 		// TODO(Notabilis): This one is an assertion of mine, I am not sure if it will hold
 		// If it doesn't, set the socket to blocking before writing
 		// If it does, remove this comment after build 20

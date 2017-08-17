@@ -46,7 +46,7 @@ struct NoteShip {
 
 	Ship* ship;
 
-	enum class Action { kStateChanged, kDestinationChanged, kWaitingForCommand, kNoPortLeft, kLost, kGained };
+	enum class Action { kDestinationChanged, kWaitingForCommand, kNoPortLeft, kLost, kGained };
 	Action action;
 
 	NoteShip(Ship* const init_ship, const Action& init_action)
@@ -85,7 +85,7 @@ private:
 struct Ship : Bob {
 	MO_DESCR(ShipDescr)
 
-	Ship(const ShipDescr& descr);
+	explicit Ship(const ShipDescr& descr);
 	virtual ~Ship();
 
 	// Returns the fleet the ship is a part of.
@@ -284,7 +284,6 @@ private:
 	// saving and loading
 protected:
 	struct Loader : Bob::Loader {
-		Loader();
 
 		const Task* get_task(const std::string& name) override;
 
@@ -293,9 +292,10 @@ protected:
 		void load_finish() override;
 
 	private:
-		uint32_t lastdock_;
-		uint32_t destination_;
-		ShipStates ship_state_;
+		// Initialize everything to make cppcheck happy.
+		uint32_t lastdock_ = 0U;
+		uint32_t destination_ = 0U;
+		ShipStates ship_state_ = ShipStates::kTransport;
 		std::string shipname_;
 		std::unique_ptr<Expedition> expedition_;
 		std::vector<ShippingItem::Loader> items_;

@@ -4,14 +4,14 @@
 # Translators:
 # GunChleoc, 2015
 # GunChleoc, 2015-2016
-# zecas <jjorge@free.fr>, 2016
+# zecas <jjorge@free.fr>, 2016-2017
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-05-18 21:30+0000\n"
-"PO-Revision-Date: 2017-05-18 21:33+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2017-06-16 07:17+0000\n"
+"PO-Revision-Date: 2017-06-18 20:00+0000\n"
+"Last-Translator: zecas <jjorge@free.fr>\n"
 "Language-Team: Portuguese (http://www.transifex.com/widelands/widelands/language/pt/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -260,7 +260,7 @@ msgid "Redo"
 msgstr "Refazer"
 
 #: ../../src/editor/editorinteractive.cc:141
-#: ../../src/wui/buildingwindow.cc:324
+#: ../../src/wui/buildingwindow.cc:330
 msgid "Help"
 msgstr "Ajuda"
 
@@ -296,7 +296,7 @@ msgstr "Criando um mapa vazido…"
 #. * TRANSLATORS: Default name for new map
 #: ../../src/editor/editorinteractive.cc:588
 #: ../../src/editor/ui_menus/main_menu_new_map.cc:151
-#: ../../src/editor/ui_menus/main_menu_random_map.cc:535
+#: ../../src/editor/ui_menus/main_menu_random_map.cc:533
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:133
 #: ../../src/logic/map.h:179 ../../src/wui/mapdata.cc:46
 msgid "No Name"
@@ -304,7 +304,7 @@ msgstr "Sem nome"
 
 #: ../../src/editor/editorinteractive.cc:591
 #: ../../src/editor/ui_menus/main_menu_new_map.cc:152
-#: ../../src/editor/ui_menus/main_menu_random_map.cc:536
+#: ../../src/editor/ui_menus/main_menu_random_map.cc:534
 #: ../../src/logic/map.h:180
 msgctxt "author_name"
 msgid "Unknown"
@@ -418,7 +418,7 @@ msgid "Editor Category: %s"
 msgstr "Categoria no editor: %s"
 
 #: ../../src/editor/tools/info_tool.cc:141
-#: ../../src/editor/ui_menus/main_menu_random_map.cc:121
+#: ../../src/editor/ui_menus/main_menu_random_map.cc:119
 msgid "Resources:"
 msgstr "Recursos:"
 
@@ -436,7 +436,7 @@ msgstr "Quantidade do recurso: %i"
 msgid "No resources"
 msgstr "Sem recursos"
 
-#: ../../src/editor/tools/info_tool.cc:159 ../../src/wui/mapdetails.cc:133
+#: ../../src/editor/tools/info_tool.cc:159 ../../src/wui/mapdetails.cc:131
 msgid "Map:"
 msgstr "Mapa:"
 
@@ -458,7 +458,7 @@ msgstr "Jogadores: %u"
 
 #: ../../src/editor/tools/info_tool.cc:171
 msgid "Players: –"
-msgstr ""
+msgstr "Jogadores: -"
 
 #: ../../src/editor/tools/info_tool.cc:174
 #, c-format
@@ -547,9 +547,9 @@ msgid "Current Directory: %s"
 msgstr "Diretório atual: %s"
 
 #: ../../src/editor/ui_menus/main_menu_load_or_save_map.cc:68
-#: ../../src/editor/ui_menus/main_menu_map_options.cc:62
+#: ../../src/editor/ui_menus/main_menu_map_options.cc:60
 #: ../../src/editor/ui_menus/main_menu_save_map_make_directory.cc:56
-#: ../../src/scripting/lua_game.cc:432 ../../src/ui_basic/messagebox.cc:87
+#: ../../src/scripting/lua_game.cc:433 ../../src/ui_basic/messagebox.cc:89
 #: ../../src/ui_fsmenu/helpwindow.cc:51
 #: ../../src/ui_fsmenu/load_map_or_game.cc:45
 #: ../../src/ui_fsmenu/options.cc:118
@@ -558,11 +558,11 @@ msgid "OK"
 msgstr "Aceitar"
 
 #: ../../src/editor/ui_menus/main_menu_load_or_save_map.cc:77
-#: ../../src/editor/ui_menus/main_menu_map_options.cc:70
+#: ../../src/editor/ui_menus/main_menu_map_options.cc:68
 #: ../../src/editor/ui_menus/main_menu_new_map.cc:92
-#: ../../src/editor/ui_menus/main_menu_random_map.cc:228
+#: ../../src/editor/ui_menus/main_menu_random_map.cc:226
 #: ../../src/editor/ui_menus/main_menu_save_map_make_directory.cc:64
-#: ../../src/ui_basic/messagebox.cc:93 ../../src/ui_fsmenu/launch_mpg.cc:77
+#: ../../src/ui_basic/messagebox.cc:95 ../../src/ui_fsmenu/launch_mpg.cc:77
 #: ../../src/ui_fsmenu/options.cc:109
 #: ../../src/wui/game_main_menu_save_game.cc:92 ../../src/wui/login_box.cc:61
 msgid "Cancel"
@@ -582,39 +582,39 @@ msgstr "Mostrar nomes originais do mapas"
 msgid "Show Filenames"
 msgstr "Mostrar nomes dos ficheiros"
 
-#: ../../src/editor/ui_menus/main_menu_map_options.cc:111
-#: ../../src/ui_fsmenu/loadgame.cc:382
+#: ../../src/editor/ui_menus/main_menu_map_options.cc:109
+#: ../../src/ui_fsmenu/loadgame.cc:372
 #: ../../src/wui/game_main_menu_save_game.cc:75
 msgid "Map Name:"
 msgstr "Nome do mapa:"
 
-#: ../../src/editor/ui_menus/main_menu_map_options.cc:115
+#: ../../src/editor/ui_menus/main_menu_map_options.cc:113
 msgid "Authors:"
 msgstr "Autores:"
 
-#: ../../src/editor/ui_menus/main_menu_map_options.cc:119
+#: ../../src/editor/ui_menus/main_menu_map_options.cc:117
 #: ../../src/ui_fsmenu/campaign_select.cc:75
 #: ../../src/ui_fsmenu/campaign_select.cc:151
-#: ../../src/ui_fsmenu/campaign_select.cc:376 ../../src/wui/mapdetails.cc:174
+#: ../../src/ui_fsmenu/campaign_select.cc:376 ../../src/wui/mapdetails.cc:172
 msgid "Description:"
 msgstr "Descrição:"
 
-#: ../../src/editor/ui_menus/main_menu_map_options.cc:123
+#: ../../src/editor/ui_menus/main_menu_map_options.cc:121
 msgid "Hint (optional):"
 msgstr "Dica (opcional):"
 
-#: ../../src/editor/ui_menus/main_menu_map_options.cc:130
-#: ../../src/wui/mapdetails.cc:168
+#: ../../src/editor/ui_menus/main_menu_map_options.cc:128
+#: ../../src/wui/mapdetails.cc:166
 msgid "Tags:"
 msgstr "Etiquetas:"
 
 #. * TRANSLATORS: Label for the list of suggested teams when choosing a map
-#: ../../src/editor/ui_menus/main_menu_map_options.cc:138
+#: ../../src/editor/ui_menus/main_menu_map_options.cc:136
 #: ../../src/wui/suggested_teams_box.cc:92
 msgid "Suggested Teams:"
 msgstr "Equipas recomendadas:"
 
-#: ../../src/editor/ui_menus/main_menu_map_options.cc:147
+#: ../../src/editor/ui_menus/main_menu_map_options.cc:145
 #: ../../src/ui_fsmenu/launch_mpg.cc:566
 #: ../../src/wui/game_main_menu_save_game.cc:157
 #, c-format
@@ -623,29 +623,29 @@ msgid_plural "%u Players"
 msgstr[0] "%u Jogador"
 msgstr[1] "%u Jogadores"
 
-#: ../../src/editor/ui_menus/main_menu_map_options.cc:152
+#: ../../src/editor/ui_menus/main_menu_map_options.cc:150
 msgid "Main Options"
 msgstr "Opções principais"
 
-#: ../../src/editor/ui_menus/main_menu_map_options.cc:154
+#: ../../src/editor/ui_menus/main_menu_map_options.cc:152
 msgid "Tags"
 msgstr "Etiquetas"
 
-#: ../../src/editor/ui_menus/main_menu_map_options.cc:156
+#: ../../src/editor/ui_menus/main_menu_map_options.cc:154
 msgid "Teams"
 msgstr "Equipas"
 
-#: ../../src/editor/ui_menus/main_menu_map_options.cc:180
+#: ../../src/editor/ui_menus/main_menu_map_options.cc:178
 msgid "Size: %1% x %2%"
 msgstr "Tamanho: %1% x %2%"
 
 #: ../../src/editor/ui_menus/main_menu_new_map.cc:58
-#: ../../src/editor/ui_menus/main_menu_random_map.cc:68
+#: ../../src/editor/ui_menus/main_menu_random_map.cc:66
 msgid "Width:"
 msgstr "Largura:"
 
 #: ../../src/editor/ui_menus/main_menu_new_map.cc:70
-#: ../../src/editor/ui_menus/main_menu_random_map.cc:80
+#: ../../src/editor/ui_menus/main_menu_random_map.cc:78
 msgid "Height:"
 msgstr "Elevação:"
 
@@ -653,101 +653,101 @@ msgstr "Elevação:"
 msgid "Create Map"
 msgstr "Criar mapa"
 
-#: ../../src/editor/ui_menus/main_menu_random_map.cc:93
-#: ../../src/ui_fsmenu/loadgame.cc:384
+#: ../../src/editor/ui_menus/main_menu_random_map.cc:91
+#: ../../src/ui_fsmenu/loadgame.cc:374
 msgid "Players:"
 msgstr "Jogadores:"
 
 #. * TRANSLATORS: A world name for the random map generator in the editor
-#: ../../src/editor/ui_menus/main_menu_random_map.cc:100
+#: ../../src/editor/ui_menus/main_menu_random_map.cc:98
 msgid "Summer"
 msgstr "Verão"
 
 #. * TRANSLATORS: A world name for the random map generator in the editor
-#: ../../src/editor/ui_menus/main_menu_random_map.cc:102
+#: ../../src/editor/ui_menus/main_menu_random_map.cc:100
 msgid "Winter"
 msgstr "Inverno"
 
 #. * TRANSLATORS: A world name for the random map generator in the editor
-#: ../../src/editor/ui_menus/main_menu_random_map.cc:104
+#: ../../src/editor/ui_menus/main_menu_random_map.cc:102
 msgid "Desert"
 msgstr "Deserto"
 
 #. * TRANSLATORS: A world name for the random map generator in the editor
-#: ../../src/editor/ui_menus/main_menu_random_map.cc:106
+#: ../../src/editor/ui_menus/main_menu_random_map.cc:104
 msgid "Wasteland"
 msgstr "Baldio"
 
 #. * TRANSLATORS: Amount of resources in the random map generator in the
 #. editor
-#: ../../src/editor/ui_menus/main_menu_random_map.cc:111
+#: ../../src/editor/ui_menus/main_menu_random_map.cc:109
 msgid "Low"
 msgstr "Poucos"
 
 #. * TRANSLATORS: Amount of resources in the random map generator in the
 #. editor
-#: ../../src/editor/ui_menus/main_menu_random_map.cc:113
+#: ../../src/editor/ui_menus/main_menu_random_map.cc:111
 msgid "Medium"
 msgstr "Médios"
 
 #. * TRANSLATORS: Amount of resources in the random map generator in the
 #. editor
-#: ../../src/editor/ui_menus/main_menu_random_map.cc:115
+#: ../../src/editor/ui_menus/main_menu_random_map.cc:113
 msgid "High"
 msgstr "Muitos"
 
-#: ../../src/editor/ui_menus/main_menu_random_map.cc:120
+#: ../../src/editor/ui_menus/main_menu_random_map.cc:118
 msgid "Climate:"
 msgstr "Clima:"
 
-#: ../../src/editor/ui_menus/main_menu_random_map.cc:151
+#: ../../src/editor/ui_menus/main_menu_random_map.cc:149
 msgid "Water:"
 msgstr "Água:"
 
-#: ../../src/editor/ui_menus/main_menu_random_map.cc:164
+#: ../../src/editor/ui_menus/main_menu_random_map.cc:162
 msgid "Land:"
 msgstr "Terra:"
 
-#: ../../src/editor/ui_menus/main_menu_random_map.cc:177
+#: ../../src/editor/ui_menus/main_menu_random_map.cc:175
 msgid "Wasteland:"
 msgstr "Baldio:"
 
-#: ../../src/editor/ui_menus/main_menu_random_map.cc:183
+#: ../../src/editor/ui_menus/main_menu_random_map.cc:181
 msgid "Mountains:"
 msgstr "Montanhas:"
 
 #. * TRANSLATORS: A spinbox unit
-#: ../../src/editor/ui_menus/main_menu_random_map.cc:189
-#: ../../src/editor/ui_menus/main_menu_random_map.cc:509
+#: ../../src/editor/ui_menus/main_menu_random_map.cc:187
+#: ../../src/editor/ui_menus/main_menu_random_map.cc:507
 #: ../../src/ui_basic/spinbox.cc:325
 #, c-format
 msgid "%i %%"
 msgstr "%i %%"
 
-#: ../../src/editor/ui_menus/main_menu_random_map.cc:191
+#: ../../src/editor/ui_menus/main_menu_random_map.cc:189
 msgid "Island mode"
 msgstr "Modo Ilha"
 
-#: ../../src/editor/ui_menus/main_menu_random_map.cc:194
+#: ../../src/editor/ui_menus/main_menu_random_map.cc:192
 msgid "Random Number:"
 msgstr "Número aleatório:"
 
-#: ../../src/editor/ui_menus/main_menu_random_map.cc:203
+#: ../../src/editor/ui_menus/main_menu_random_map.cc:201
 msgid "Map ID:"
 msgstr "ID do mapa:"
 
-#: ../../src/editor/ui_menus/main_menu_random_map.cc:220
+#: ../../src/editor/ui_menus/main_menu_random_map.cc:218
 msgid "Generate Map"
 msgstr "Gerar mapa"
 
-#: ../../src/editor/ui_menus/main_menu_random_map.cc:538
+#: ../../src/editor/ui_menus/main_menu_random_map.cc:536
 msgid "Generating random map…"
 msgstr "Gerando mapa aleatório …"
 
 #. * TRANSLATORS: Window title. This is shown after a random map has been
 #. created in the
 #. editor.
-#: ../../src/editor/ui_menus/main_menu_random_map.cc:577
+#: ../../src/editor/ui_menus/main_menu_random_map.cc:575
 msgid "Random Map"
 msgstr "Mapa aleatório"
 
@@ -757,7 +757,7 @@ msgstr "Mapa aleatório"
 #. * TRANSLATORS: as long as the user understands that he needs to check the
 #. player
 #. positions.
-#: ../../src/editor/ui_menus/main_menu_random_map.cc:582
+#: ../../src/editor/ui_menus/main_menu_random_map.cc:580
 msgid ""
 "The map has been generated. Please double-check the player starting "
 "positions to make sure that your carriers won’t drown, or be stuck on an "
@@ -770,7 +770,7 @@ msgid "Make Directory"
 msgstr "Criar diretório"
 
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:71
-#: ../../src/ui_fsmenu/loadgame.cc:305 ../../src/ui_fsmenu/loadgame.cc:471
+#: ../../src/ui_fsmenu/loadgame.cc:305 ../../src/ui_fsmenu/loadgame.cc:461
 msgid "Filename:"
 msgstr "Nome do ficheiro:"
 
@@ -808,7 +808,7 @@ msgstr "Erro a guardar mapa!\nO ficheiro pode estar corrupto!\n\nCausa:\n"
 
 #: ../../src/editor/ui_menus/main_menu_save_map_make_directory.cc:41
 msgid "Enter Directory Name:"
-msgstr ""
+msgstr "Digita o nome do diretório: "
 
 #: ../../src/editor/ui_menus/player_menu.cc:45
 msgid "Player Options"
@@ -829,7 +829,7 @@ msgstr "Número de jogadores"
 #: ../../src/editor/ui_menus/player_menu.cc:207 ../../src/logic/map.cc:309
 #: ../../src/logic/single_player_game_settings_provider.cc:88
 #: ../../src/map_io/map_player_names_and_tribes_packet.cc:94
-#: ../../src/network/gamehost.cc:1616 ../../src/ui_fsmenu/launch_mpg.cc:482
+#: ../../src/network/gamehost.cc:1615 ../../src/ui_fsmenu/launch_mpg.cc:482
 #: ../../src/wui/multiplayersetupgroup.cc:112
 #, c-format
 msgid "Player %u"
@@ -983,7 +983,7 @@ msgid "Loading map…"
 msgstr "Carregando o mapa …"
 
 #: ../../src/logic/game.cc:337 ../../src/logic/game.cc:372
-#: ../../src/ui_basic/progresswindow.cc:51 ../../src/wlapplication.cc:1351
+#: ../../src/ui_basic/progresswindow.cc:51 ../../src/wlapplication.cc:1341
 msgid "Loading…"
 msgstr "A carregar …"
 
@@ -1023,22 +1023,43 @@ msgstr "%i%% construído"
 msgid "%u%% dismantled"
 msgstr "%u%% desmanchado"
 
+#. * TRANSLATORS: Militarysite lost (taken/destroyed by enemy)
+#: ../../src/logic/map_objects/tribes/militarysite.cc:137
+msgctxt "building"
+msgid "Lost!"
+msgstr "Perdida!"
+
+#: ../../src/logic/map_objects/tribes/militarysite.cc:138
+msgid "Militarysite lost!"
+msgstr "Edificação militar perdida!"
+
+#. * TRANSLATORS: Message title.
+#. * TRANSLATORS: If you run out of space, you can also translate this as
+#. "Success!"
+#: ../../src/logic/map_objects/tribes/militarysite.cc:181
+msgid "Enemy Defeated!"
+msgstr "O Inimigo foi derrotado!"
+
+#: ../../src/logic/map_objects/tribes/militarysite.cc:181
+msgid "Enemy at site defeated!"
+msgstr "O Inimigo no local foi derrotado!"
+
 #. * TRANSLATORS: %1% is the number of soldiers the plural refers to
 #. * TRANSLATORS: %2% is the maximum number of soldier slots in the building
-#: ../../src/logic/map_objects/tribes/militarysite.cc:122
+#: ../../src/logic/map_objects/tribes/militarysite.cc:265
 msgid "%1% soldier (+%2%)"
 msgid_plural "%1% soldiers (+%2%)"
 msgstr[0] "%1% soldado (+%2%)"
 msgstr[1] "%1% soldados (+%2%)"
 
-#: ../../src/logic/map_objects/tribes/militarysite.cc:126
+#: ../../src/logic/map_objects/tribes/militarysite.cc:269
 #, c-format
 msgid "%u soldier"
 msgid_plural "%u soldiers"
 msgstr[0] "%u soldado"
 msgstr[1] "%u soldados"
 
-#: ../../src/logic/map_objects/tribes/militarysite.cc:134
+#: ../../src/logic/map_objects/tribes/militarysite.cc:277
 msgid "%1%(+%2%) soldier (+%3%)"
 msgid_plural "%1%(+%2%) soldiers (+%3%)"
 msgstr[0] "%1%(+%2%) soldado (+%3%)"
@@ -1046,47 +1067,26 @@ msgstr[1] "%1%(+%2%) soldados (+%3%)"
 
 #. * TRANSLATORS: %1% is the number of soldiers the plural refers to
 #. * TRANSLATORS: %2% are currently open soldier slots in the building
-#: ../../src/logic/map_objects/tribes/militarysite.cc:140
+#: ../../src/logic/map_objects/tribes/militarysite.cc:283
 msgid "%1%(+%2%) soldier"
 msgid_plural "%1%(+%2%) soldiers"
 msgstr[0] "%1%(+%2%) soldado"
 msgstr[1] "%1%(+%2%) soldados"
 
-#. * TRANSLATORS: Militarysite lost (taken/destroyed by enemy)
-#: ../../src/logic/map_objects/tribes/militarysite.cc:775
-msgctxt "building"
-msgid "Lost!"
-msgstr "Perdida!"
-
-#: ../../src/logic/map_objects/tribes/militarysite.cc:776
-msgid "Militarysite lost!"
-msgstr "Edificação militar perdida!"
-
-#. * TRANSLATORS: Message title.
-#. * TRANSLATORS: If you run out of space, you can also translate this as
-#. "Success!"
-#: ../../src/logic/map_objects/tribes/militarysite.cc:816
-msgid "Enemy Defeated!"
-msgstr "O Inimigo foi derrotado!"
-
-#: ../../src/logic/map_objects/tribes/militarysite.cc:816
-msgid "Enemy at site defeated!"
-msgstr "O Inimigo no local foi derrotado!"
-
 #. * TRANSLATORS: Militarysite is being attacked
-#: ../../src/logic/map_objects/tribes/militarysite.cc:858
+#: ../../src/logic/map_objects/tribes/militarysite.cc:865
 msgctxt "building"
 msgid "Attack!"
 msgstr "Ataque!"
 
-#: ../../src/logic/map_objects/tribes/militarysite.cc:858
+#: ../../src/logic/map_objects/tribes/militarysite.cc:865
 msgid "You are under attack"
 msgstr "Estás sob ataque"
 
 #. * TRANSLATORS: e.g. Completed/Skipped/Did not start ... because the economy
 #. needs the ware
 #. * ‘%s’
-#: ../../src/logic/map_objects/tribes/production_program.cc:310
+#: ../../src/logic/map_objects/tribes/production_program.cc:309
 #, c-format
 msgid "the economy needs the ware ‘%s’"
 msgstr "a economia não precisa da mercadoria ‘%s’"
@@ -1094,7 +1094,7 @@ msgstr "a economia não precisa da mercadoria ‘%s’"
 #. * TRANSLATORS: e.g. Completed/Skipped/Did not start ... because the economy
 #. doesn’t need the
 #. * ware ‘%s’
-#: ../../src/logic/map_objects/tribes/production_program.cc:319
+#: ../../src/logic/map_objects/tribes/production_program.cc:318
 #, c-format
 msgid "the economy doesn’t need the ware ‘%s’"
 msgstr "a economia não precisa da mercadoria ‘%s’"
@@ -1102,14 +1102,14 @@ msgstr "a economia não precisa da mercadoria ‘%s’"
 #. * TRANSLATORS: e.g. Completed/Skipped/Did not start ... because the economy
 #. needs the worker
 #. * ‘%s’
-#: ../../src/logic/map_objects/tribes/production_program.cc:332
+#: ../../src/logic/map_objects/tribes/production_program.cc:331
 #, c-format
 msgid "the economy needs the worker ‘%s’"
 msgstr "a economia precisa do trabalhador ‘%s’"
 
 #. * TRANSLATORS: e.g. Completed/Skipped/Did not start ...
 #. * TRANSLATORS:      ... because the economy doesn’t need the worker ‘%s’
-#: ../../src/logic/map_objects/tribes/production_program.cc:342
+#: ../../src/logic/map_objects/tribes/production_program.cc:341
 #, c-format
 msgid "the economy doesn’t need the worker ‘%s’"
 msgstr "a economia não precisa do trabalhador ‘%s’"
@@ -1127,34 +1127,34 @@ msgstr "a economia não precisa do trabalhador ‘%s’"
 #. Ox":
 #. * TRANSLATORS:    %1$i = "2"
 #. * TRANSLATORS:    %2$s = "Ox"
-#: ../../src/logic/map_objects/tribes/production_program.cc:389
-#: ../../src/logic/map_objects/tribes/production_program.cc:415
-#: ../../src/logic/map_objects/tribes/production_program.cc:878
-#: ../../src/logic/map_objects/tribes/production_program.cc:984
-#: ../../src/logic/map_objects/tribes/production_program.cc:1066
+#: ../../src/logic/map_objects/tribes/production_program.cc:388
+#: ../../src/logic/map_objects/tribes/production_program.cc:414
+#: ../../src/logic/map_objects/tribes/production_program.cc:877
+#: ../../src/logic/map_objects/tribes/production_program.cc:983
+#: ../../src/logic/map_objects/tribes/production_program.cc:1065
 #, c-format
 msgid "%1$ix %2$s"
 msgstr "%1$ix %2$s"
 
-#: ../../src/logic/map_objects/tribes/production_program.cc:395
+#: ../../src/logic/map_objects/tribes/production_program.cc:394
 #, c-format
 msgid "the building has the following wares: %s"
 msgstr "o prédio tem nas mercadorias seguintes: %s"
 
-#: ../../src/logic/map_objects/tribes/production_program.cc:421
+#: ../../src/logic/map_objects/tribes/production_program.cc:420
 #, c-format
 msgid "the building doesn’t have the following wares: %s"
 msgstr "o prédio não tem nas mercadorias seguintes: %s"
 
 #. * TRANSLATORS: 'Completed/Skipped/Did not start ... because a worker needs
 #. experience'.
-#: ../../src/logic/map_objects/tribes/production_program.cc:434
+#: ../../src/logic/map_objects/tribes/production_program.cc:433
 msgid "a worker needs experience"
 msgstr "há trabalhador que precisa de experiência"
 
 #. * TRANSLATORS: 'Completed/Skipped/Did not start ... because the workers
 #. need no experience'.
-#: ../../src/logic/map_objects/tribes/production_program.cc:440
+#: ../../src/logic/map_objects/tribes/production_program.cc:439
 msgid "the workers need no experience"
 msgstr "os trabalhadores não precisam de experiência"
 
@@ -1171,25 +1171,25 @@ msgstr "os trabalhadores não precisam de experiência"
 #. * TRANSLATORS: on a development build if you can, and let us know if there
 #. are any issues
 #. * TRANSLATORS: we need to address for your language.
-#: ../../src/logic/map_objects/tribes/production_program.cc:544
-#: ../../src/logic/map_objects/tribes/production_program.cc:902
+#: ../../src/logic/map_objects/tribes/production_program.cc:543
+#: ../../src/logic/map_objects/tribes/production_program.cc:901
 #, c-format
 msgid "Did not start %1$s because %2$s"
 msgstr "Não começou a %1$s porque %2$s"
 
 #. * TRANSLATORS: "Completed working because the economy needs the ware ‘%s’"
-#: ../../src/logic/map_objects/tribes/production_program.cc:549
+#: ../../src/logic/map_objects/tribes/production_program.cc:548
 #, c-format
 msgid "Completed %1$s because %2$s"
 msgstr "Completou %1$s porque %2$s"
 
 #. * TRANSLATORS: "Skipped working because the economy needs the ware ‘%s’"
-#: ../../src/logic/map_objects/tribes/production_program.cc:554
+#: ../../src/logic/map_objects/tribes/production_program.cc:553
 #, c-format
 msgid "Skipped %1$s because %2$s"
 msgstr "Omitiu %1$s porque %2$s"
 
-#: ../../src/logic/map_objects/tribes/production_program.cc:749
+#: ../../src/logic/map_objects/tribes/production_program.cc:748
 msgid "No use for ships on this map!"
 msgstr "Não se pode utilizar navios neste mapa !"
 
@@ -1197,7 +1197,7 @@ msgstr "Não se pode utilizar navios neste mapa !"
 #. are missing'
 #. * TRANSLATORS: e.g. 'Did not start working because fish, meat or pitta
 #. bread is missing'
-#: ../../src/logic/map_objects/tribes/production_program.cc:888
+#: ../../src/logic/map_objects/tribes/production_program.cc:887
 #, c-format
 msgid "%s is missing"
 msgid_plural "%s are missing"
@@ -1207,7 +1207,7 @@ msgstr[1] "faltam %s"
 #. * TRANSLATORS: %s is a list of wares. String is fetched according to total
 #. amount of
 #. wares.
-#: ../../src/logic/map_objects/tribes/production_program.cc:995
+#: ../../src/logic/map_objects/tribes/production_program.cc:994
 #, c-format
 msgid "Produced %s"
 msgid_plural "Produced %s"
@@ -1217,19 +1217,19 @@ msgstr[1] "Produzi %s"
 #. * TRANSLATORS: %s is a list of workers. String is fetched according to
 #. total amount of
 #. workers.
-#: ../../src/logic/map_objects/tribes/production_program.cc:1077
+#: ../../src/logic/map_objects/tribes/production_program.cc:1076
 #, c-format
 msgid "Recruited %s"
 msgid_plural "Recruited %s"
 msgstr[0] "Recrutou %s"
 msgstr[1] "Recrutou %s"
 
-#: ../../src/logic/map_objects/tribes/production_program.cc:1283
+#: ../../src/logic/map_objects/tribes/production_program.cc:1282
 msgid "No soldier to train!"
 msgstr "Não há soldados para treinar!"
 
-#: ../../src/logic/map_objects/tribes/production_program.cc:1292
-#: ../../src/logic/map_objects/tribes/production_program.cc:1369
+#: ../../src/logic/map_objects/tribes/production_program.cc:1291
+#: ../../src/logic/map_objects/tribes/production_program.cc:1368
 msgid "No soldier found for this training level!"
 msgstr "Não há soldados para treinar por este nível !"
 
@@ -1259,95 +1259,95 @@ msgstr "%i%%"
 msgid "Can’t find any more resources!"
 msgstr "Não podia precurar mais recursos!"
 
-#: ../../src/logic/map_objects/tribes/ship.cc:417
+#: ../../src/logic/map_objects/tribes/ship.cc:416
 msgid "Port Space"
 msgstr "Local para um porto"
 
-#: ../../src/logic/map_objects/tribes/ship.cc:417
+#: ../../src/logic/map_objects/tribes/ship.cc:416
 msgid "Port Space Found"
 msgstr "Encontrámos local para um porto"
 
-#: ../../src/logic/map_objects/tribes/ship.cc:418
+#: ../../src/logic/map_objects/tribes/ship.cc:417
 msgid "An expedition ship found a new port build space."
 msgstr "Um navio de expedição encontrou um bom local para construir um novo porto."
 
-#: ../../src/logic/map_objects/tribes/ship.cc:539
+#: ../../src/logic/map_objects/tribes/ship.cc:538
 msgid "Island Circumnavigated"
 msgstr "Ilha circum-navegada"
 
 #. * TRANSLATORS: A ship has circumnavigated an island and is waiting
 #. for orders
-#: ../../src/logic/map_objects/tribes/ship.cc:539
+#: ../../src/logic/map_objects/tribes/ship.cc:538
 msgctxt "ship"
 msgid "Waiting"
 msgstr "Esperando"
 
-#: ../../src/logic/map_objects/tribes/ship.cc:540
+#: ../../src/logic/map_objects/tribes/ship.cc:539
 msgid "An expedition ship sailed around its island without any events."
 msgstr "Um navio de expedição circum-navegou uma ilha sem eventos."
 
-#: ../../src/logic/map_objects/tribes/ship.cc:604
+#: ../../src/logic/map_objects/tribes/ship.cc:603
 msgid "Coast Reached"
 msgstr "Chegamos à costa"
 
 #. * TRANSLATORS: A ship has discovered land
-#: ../../src/logic/map_objects/tribes/ship.cc:604
+#: ../../src/logic/map_objects/tribes/ship.cc:603
 msgid "Land Ahoy!"
 msgstr "Terra!"
 
-#: ../../src/logic/map_objects/tribes/ship.cc:605
+#: ../../src/logic/map_objects/tribes/ship.cc:604
 msgid ""
 "An expedition ship reached a coast and is waiting for further commands."
 msgstr "Um navio de expedição chegou à costa e esta a espera das tuas ordens seguintes."
 
-#: ../../src/logic/map_objects/tribes/ship.cc:660
+#: ../../src/logic/map_objects/tribes/ship.cc:659
 msgid "New port construction site is gone"
 msgstr "Perdemos a construção do porto novo"
 
-#: ../../src/logic/map_objects/tribes/ship.cc:660
+#: ../../src/logic/map_objects/tribes/ship.cc:659
 msgid "Port Lost!"
 msgstr "Porto perdido!"
 
-#: ../../src/logic/map_objects/tribes/ship.cc:661
+#: ../../src/logic/map_objects/tribes/ship.cc:660
 msgid "Unloading of wares failed, expedition is cancelled now."
 msgstr "Não pudemos descarregar as mercadorias, cancelamos a expedição."
 
 #. * TRANSLATORS: Ship expedition ready
-#: ../../src/logic/map_objects/tribes/ship.cc:836
+#: ../../src/logic/map_objects/tribes/ship.cc:835
 msgctxt "ship"
 msgid "Expedition"
 msgstr "Expedição"
 
-#: ../../src/logic/map_objects/tribes/ship.cc:836
+#: ../../src/logic/map_objects/tribes/ship.cc:835
 msgid "Expedition Ready"
 msgstr "Expedição pronta"
 
-#: ../../src/logic/map_objects/tribes/ship.cc:837
+#: ../../src/logic/map_objects/tribes/ship.cc:836
 msgid "An expedition ship is waiting for your commands."
 msgstr "Um novo navio de expedição está a espera das tuas ordens."
 
 #. * TRANSLATORS: This is a ship state
-#: ../../src/logic/map_objects/tribes/ship.cc:976
+#: ../../src/logic/map_objects/tribes/ship.cc:975
 msgctxt "ship_state"
 msgid "Shipping"
 msgstr "Despachando"
 
 #. * TRANSLATORS: This is a ship state. An expedition is waiting for your
 #. commands.
-#: ../../src/logic/map_objects/tribes/ship.cc:980
+#: ../../src/logic/map_objects/tribes/ship.cc:979
 msgctxt "ship_state"
 msgid "Waiting"
 msgstr "Esperando"
 
 #. * TRANSLATORS: This is a ship state. An expedition is scouting for port
 #. spaces.
-#: ../../src/logic/map_objects/tribes/ship.cc:984
+#: ../../src/logic/map_objects/tribes/ship.cc:983
 msgctxt "ship_state"
 msgid "Scouting"
 msgstr "Explorando"
 
 #. * TRANSLATORS: This is a ship state. An expedition has found a port space.
-#: ../../src/logic/map_objects/tribes/ship.cc:988
+#: ../../src/logic/map_objects/tribes/ship.cc:987
 msgctxt "ship_state"
 msgid "Port Space Found"
 msgstr "Encontrámos local para um porto"
@@ -1355,25 +1355,25 @@ msgstr "Encontrámos local para um porto"
 #. * TRANSLATORS: This is a ship state. An expedition is unloading
 #. wares/workers to build a
 #. * port.
-#: ../../src/logic/map_objects/tribes/ship.cc:993
+#: ../../src/logic/map_objects/tribes/ship.cc:992
 msgctxt "ship_state"
 msgid "Founding a Colony"
 msgstr "A fundir colonia"
 
-#: ../../src/logic/map_objects/tribes/soldier.cc:1347
 #: ../../src/logic/map_objects/tribes/soldier.cc:1351
+#: ../../src/logic/map_objects/tribes/soldier.cc:1355
 msgid "Logic error"
 msgstr "Erro lógico"
 
-#: ../../src/logic/map_objects/tribes/warehouse.cc:423
+#: ../../src/logic/map_objects/tribes/warehouse.cc:476
 msgid "A new port was added to your economy."
 msgstr "Tem porto novo na tua economia."
 
-#: ../../src/logic/map_objects/tribes/warehouse.cc:426
+#: ../../src/logic/map_objects/tribes/warehouse.cc:479
 msgid "A new headquarters was added to your economy."
 msgstr "Tem quartel-general novo na tua economia."
 
-#: ../../src/logic/map_objects/tribes/warehouse.cc:429
+#: ../../src/logic/map_objects/tribes/warehouse.cc:482
 msgid "A new warehouse was added to your economy."
 msgstr "Tem armazém novo na tua economia."
 
@@ -1467,278 +1467,278 @@ msgstr "O jogo foi salvo"
 msgid "Bluebyte Settlers II Map. No comment defined!"
 msgstr "Mapa Bluebyte Settlers II. Sem comentário definido!"
 
-#: ../../src/network/gameclient.cc:99 ../../src/network/internet_gaming.cc:100
+#: ../../src/network/gameclient.cc:95 ../../src/network/internet_gaming.cc:103
 msgid "Could not establish connection to host"
 msgstr "Não conseguiu estabelecer ligação ao hospedeiro"
 
-#: ../../src/network/gameclient.cc:100
+#: ../../src/network/gameclient.cc:96
 msgid ""
-"Widelands could not establish a connection to the given address.\n"
-"Either no Widelands server was running at the supposed port or\n"
-"the server shut down as you tried to connect."
-msgstr "Não foi possível ao Widelands estabelecer uma ligação ao endereço fornecido.\nOu o servidor do Widelands estava em execução na suposta porta ou\no servidor desligou-se assim que tentou ligar."
+"Widelands could not establish a connection to the given address. Either no "
+"Widelands server was running at the supposed port or the server shut down as"
+" you tried to connect."
+msgstr "Não foi possível ao Widelands estabelecer uma ligação ao endereço indicado. Ou nenhum servidor do Widelands estava em execução na suposta porta ou o servidor desligou-se assim que tentou ligar."
 
-#: ../../src/network/gameclient.cc:169 ../../src/network/gamehost.cc:685
-#: ../../src/wlapplication.cc:1244
+#: ../../src/network/gameclient.cc:164 ../../src/network/gamehost.cc:684
+#: ../../src/wlapplication.cc:1234
 msgid "Preparing game"
 msgstr "Preparando jogo"
 
-#: ../../src/network/gameclient.cc:689
+#: ../../src/network/gameclient.cc:683
 msgid "/me 's file failed md5 checksumming."
 msgstr "/me tem ficheiro que falhou a verificação md5 checksumming."
 
-#: ../../src/network/gameclient.cc:717
+#: ../../src/network/gameclient.cc:711
 msgid ""
 "/me checked the received file. Although md5 check summing succeeded, I can "
 "not handle the file."
 msgstr "/me verificou o ficheiro que recebeu. Apesar da verificação md5 suceder, não posso manejar o ficheiro."
 
 #. * TRANSLATORS: %s contains an error message.
-#: ../../src/network/gameclient.cc:922
+#: ../../src/network/gameclient.cc:916
 #, c-format
 msgid "%s An automatic savegame will be created."
 msgstr "%s Será criada uma salvaguarda automática do jogo."
 
-#: ../../src/network/gameclient.cc:926
+#: ../../src/network/gameclient.cc:920
 msgid "Disconnected from Host"
 msgstr "O hospedeiro remoto desconectou-se"
 
-#: ../../src/network/gamehost.cc:332
+#: ../../src/network/gamehost.cc:331
 msgid "Available host commands are:"
 msgstr "Os comando de Anfitrião são:"
 
 #. * TRANSLATORS: Available host command
-#: ../../src/network/gamehost.cc:334
+#: ../../src/network/gamehost.cc:333
 msgid "/help  -  Shows this help"
 msgstr "/help  -  Mostra esta ajuda"
 
 #. * TRANSLATORS: Available host command
-#: ../../src/network/gamehost.cc:336
+#: ../../src/network/gamehost.cc:335
 msgid "/announce <msg>  -  Send a chatmessage as announcement (system chat)"
 msgstr "/announce <msg>  -  Enviar mensagem como um anúncio (chat do sistema)"
 
 #. * TRANSLATORS: Available host command
-#: ../../src/network/gamehost.cc:338
+#: ../../src/network/gamehost.cc:337
 msgid "/warn <name> <reason>  -  Warn the user <name> because of <reason>"
 msgstr "/warn <nome> <razão>  -  Avisar o utilizador <nome> por causa de <razão>"
 
 #. * TRANSLATORS: Available host command
-#: ../../src/network/gamehost.cc:340
+#: ../../src/network/gamehost.cc:339
 msgid "/kick <name> <reason>  -  Kick the user <name> because of <reason>"
 msgstr "/kick <nome> <razão>  -  Expulsar o utilizador <nome> por causa de <razão>"
 
 #. * TRANSLATORS: Available host command
-#: ../../src/network/gamehost.cc:342
+#: ../../src/network/gamehost.cc:341
 msgid "/forcePause            -  Force the game to pause."
 msgstr "/forcePause            -  Forçar a  pausa do jogo."
 
 #. * TRANSLATORS: Available host command
-#: ../../src/network/gamehost.cc:344
+#: ../../src/network/gamehost.cc:343
 msgid "/endForcedPause        -  Return game to normal speed."
 msgstr "/endForcedPause        -  Põe de novo o jogo à velocidade normal."
 
-#: ../../src/network/gamehost.cc:351
+#: ../../src/network/gamehost.cc:350
 msgid "Wrong use, should be: /announce <message>"
 msgstr "Uso errado, devia ser: /announce <texto da mensagem>"
 
-#: ../../src/network/gamehost.cc:362
+#: ../../src/network/gamehost.cc:361
 msgid "Wrong use, should be: /warn <name> <reason>"
 msgstr "Uso errado, devia ser: /warn <nome_do_jogador> <texto da mensagem>"
 
-#: ../../src/network/gamehost.cc:366 ../../src/network/gamehost.cc:389
+#: ../../src/network/gamehost.cc:365 ../../src/network/gamehost.cc:388
 #, c-format
 msgid "The client %s could not be found."
 msgstr "Não foi possível localizar o cliente %s."
 
-#: ../../src/network/gamehost.cc:377
+#: ../../src/network/gamehost.cc:376
 msgid "Wrong use, should be: /kick <name> <reason>"
 msgstr "Uso errado, devia ser: /kick <nome_do_jogador> <texto da mensagem>"
 
-#: ../../src/network/gamehost.cc:387
+#: ../../src/network/gamehost.cc:386
 msgid "You can not kick yourself!"
 msgstr "Não te podes expulsar a ti próprio !"
 
-#: ../../src/network/gamehost.cc:393
+#: ../../src/network/gamehost.cc:392
 #, c-format
 msgid "Are you sure you want to kick %s?"
 msgstr "Tens a certeza que queres expulsar %s?"
 
-#: ../../src/network/gamehost.cc:395
+#: ../../src/network/gamehost.cc:394
 #, c-format
 msgid "The stated reason was: %s"
 msgstr "A razão declarada foi : %s"
 
-#: ../../src/network/gamehost.cc:396
+#: ../../src/network/gamehost.cc:395
 #, c-format
 msgid "If yes, type: /ack_kick %s"
 msgstr "Se sim, escreve: /ack_kick %s"
 
-#: ../../src/network/gamehost.cc:404
+#: ../../src/network/gamehost.cc:403
 msgid "kick acknowledgement cancelled: No name given!"
 msgstr "Reconhecimento da expulsão cancelado: Nenhum nome dado!"
 
-#: ../../src/network/gamehost.cc:406
+#: ../../src/network/gamehost.cc:405
 msgid "Wrong use, should be: /ack_kick <name>"
 msgstr "Uso errado, devia ser: /ack_kick <nome>"
 
-#: ../../src/network/gamehost.cc:412
+#: ../../src/network/gamehost.cc:411
 msgid "kick acknowledgement cancelled: Wrong name given!"
 msgstr "Reconhecimento da expulsão cancelado: Nome errado !"
 
-#: ../../src/network/gamehost.cc:421
+#: ../../src/network/gamehost.cc:420
 msgid "Pause was already forced - game should be paused."
 msgstr "Já foi forçada a pausa - o jogo já devia estar em pausa."
 
-#: ../../src/network/gamehost.cc:431
+#: ../../src/network/gamehost.cc:430
 msgid "There is no forced pause - nothing to end."
 msgstr "Não houve nenhuma pausa forçada - nada a fazer."
 
-#: ../../src/network/gamehost.cc:440
+#: ../../src/network/gamehost.cc:439
 msgid "Invalid command! Type /help for a list of commands."
 msgstr "Comando inválido ! Escreve /help para ver a lista de comandos."
 
-#: ../../src/network/gamehost.cc:568
+#: ../../src/network/gamehost.cc:567
 msgid "Failed to start the server!"
-msgstr ""
+msgstr "Erro ao iniciar o servidor!"
 
-#: ../../src/network/gamehost.cc:569
+#: ../../src/network/gamehost.cc:568
 msgid ""
 "Widelands could not start a server.\n"
 "Probably some other process is already running a server on our port."
-msgstr ""
+msgstr "Widelands não conseguiu iniciar um servidor.\nProvavelmente já outro programa está a utilizar a mesma porta."
 
-#: ../../src/network/gamehost.cc:1553
+#: ../../src/network/gamehost.cc:1552
 #, c-format
 msgid "Computer %u"
 msgstr "Computador %u"
 
-#: ../../src/network/gamehost.cc:1610 ../../src/wui/game_summary.cc:100
+#: ../../src/network/gamehost.cc:1609 ../../src/wui/game_summary.cc:101
 msgid "Player"
 msgstr "Jogador"
 
-#: ../../src/network/gamehost.cc:1758
+#: ../../src/network/gamehost.cc:1757
 #, c-format
 msgid "%li second"
 msgid_plural "%li seconds"
 msgstr[0] "%li segundo"
 msgstr[1] "%li segundos"
 
-#: ../../src/network/internet_gaming.cc:101
+#: ../../src/network/internet_gaming.cc:104
 msgid ""
 "Widelands could not establish a connection to the given address.\n"
 "Either there was no metaserver running at the supposed port or\n"
 "your network setup is broken."
 msgstr "Não foi possível a Widelands estabelecer uma ligação ao endereço fornecido.\nOu o meta-servidor do Widelands estava em execução na suposta porta ou\nas tuas definições de Internet estão corruptas."
 
-#: ../../src/network/internet_gaming.cc:147
+#: ../../src/network/internet_gaming.cc:150
 msgid "For hosting a game, please take a look at the notes at:"
 msgstr "Para hospedar uma partida, por favor dê uma olhadela pelas notas em:"
 
-#: ../../src/network/internet_gaming.cc:281
+#: ../../src/network/internet_gaming.cc:286
 #: ../../src/network/network_gaming_messages.cc:129
 #, c-format
 msgid "Something went wrong: %s"
 msgstr "Alguma coisa correu mal:  %s"
 
-#: ../../src/network/internet_gaming.cc:366
+#: ../../src/network/internet_gaming.cc:371
 msgid "Successfully reconnected to the metaserver!"
 msgstr "Religado com sucesso ao meta-servidor!"
 
-#: ../../src/network/internet_gaming.cc:374
+#: ../../src/network/internet_gaming.cc:379
 msgid "Mixed up"
 msgstr "Misto"
 
-#: ../../src/network/internet_gaming.cc:374
+#: ../../src/network/internet_gaming.cc:379
 msgid "The metaserver sent a strange ERROR during connection"
 msgstr "O meta-servidor enviou um ERRO estranho durante a sessão"
 
-#: ../../src/network/internet_gaming.cc:385
+#: ../../src/network/internet_gaming.cc:390
 msgid "Unexpected packet"
 msgstr "Pacote inesperado"
 
-#: ../../src/network/internet_gaming.cc:386
+#: ../../src/network/internet_gaming.cc:391
 #, c-format
 msgid ""
 "Expected a LOGIN, RELOGIN or REJECTED packet from server, but received "
 "command %s. Maybe the metaserver is using a different protocol version ?"
 msgstr "Fora esperado um comando ENTRAR, REENTRAR ou REJEITADO vindo do servidor, mas foi recebido o comando %s. Talvez o meta-servidor esteja a correr uma versão diferente de Widelands?"
 
-#: ../../src/network/internet_gaming.cc:399
+#: ../../src/network/internet_gaming.cc:404
 #, c-format
 msgid ""
 "WARNING: Received a %s command although we are not in CONNECTING state."
 msgstr "AVISO: Fora recebido o comando %s apesar de não estar LIGADO."
 
-#: ../../src/network/internet_gaming.cc:410
+#: ../../src/network/internet_gaming.cc:415
 #, c-format
 msgid "Server time offset is %d second."
 msgid_plural "Server time offset is %d seconds."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "O atraso do Servidor é de %d segundo."
+msgstr[1] "O atraso do Servidor é de %d segundos."
 
-#: ../../src/network/internet_gaming.cc:434
+#: ../../src/network/internet_gaming.cc:439
 #, c-format
 msgid "Invalid chat message type \"%s\"."
 msgstr "Tipo inválido de mensagem instantânea «&nbsp;%s&nbsp;»."
 
-#: ../../src/network/internet_gaming.cc:434
+#: ../../src/network/internet_gaming.cc:439
 msgid "Invalid message type"
 msgstr "Tipo inválido de mensagem"
 
-#: ../../src/network/internet_gaming.cc:472
+#: ../../src/network/internet_gaming.cc:477
 #, c-format
 msgid "The game %s is now available"
 msgstr "O jogo %s está disponível agora"
 
-#: ../../src/network/internet_gaming.cc:482
+#: ../../src/network/internet_gaming.cc:487
 #, c-format
 msgid "The game %s has been closed"
 msgstr "O jogo %s foi fechado"
 
-#: ../../src/network/internet_gaming.cc:521
+#: ../../src/network/internet_gaming.cc:526
 #, c-format
 msgid "%s joined the lobby"
 msgstr "%s ligou-se à receção"
 
-#: ../../src/network/internet_gaming.cc:530
+#: ../../src/network/internet_gaming.cc:535
 #, c-format
 msgid "%s left the lobby"
 msgstr "%s deixou à receção"
 
-#: ../../src/network/internet_gaming.cc:565
+#: ../../src/network/internet_gaming.cc:570
 msgid "Chat message could not be sent."
 msgstr "Mensagem instantânea não pode ser enviada."
 
-#: ../../src/network/internet_gaming.cc:579
+#: ../../src/network/internet_gaming.cc:584
 #, c-format
 msgid "ERROR: %s"
 msgstr "ERRO: %s"
 
-#: ../../src/network/internet_gaming.cc:589
+#: ../../src/network/internet_gaming.cc:594
 #, c-format
 msgid "Received an unknown command from the metaserver: %s"
 msgstr "Recebi um comando desconhecido do metaservidor: %s"
 
-#: ../../src/network/internet_gaming.cc:700
+#: ../../src/network/internet_gaming.cc:705
 msgid "Message could not be sent: You are not connected to the metaserver!"
 msgstr "A mensagem não pode ser enviada: estás ligado ao meta-servidor!"
 
-#: ../../src/network/internet_gaming.cc:713
+#: ../../src/network/internet_gaming.cc:718
 msgid "Message could not be sent: Was this supposed to be a private message?"
 msgstr "A mensagem não pode ser enviada: Fora suposto ser privada?"
 
-#: ../../src/network/internet_gaming.cc:787
+#: ../../src/network/internet_gaming.cc:792
 msgid "Conversion error"
 msgstr "Erro durante a conversão"
 
 #. * TRANSLATORS: Geeky message from the metaserver
 #. * TRANSLATORS: This message is shown if %s isn't "true" or "false"
-#: ../../src/network/internet_gaming.cc:790
+#: ../../src/network/internet_gaming.cc:795
 #, c-format
 msgid "Unable to determine truth value for \"%s\""
 msgstr "Não se pude determinar o valor de verdade de «%s»"
 
-#: ../../src/network/internet_gaming.cc:807
+#: ../../src/network/internet_gaming.cc:812
 msgid "unknown"
 msgstr "desconhecido"
 
@@ -1958,6 +1958,18 @@ msgstr "O jogador «%s» fora derrotado e tornou-se um espectador."
 msgid "Client %1$s did not answer for more than %2$s."
 msgstr "O cliente %1$s ficou sem resposta perante mais que %2$s."
 
+#: ../../src/network/network_lan_promotion.cc:350
+msgid "Failed to use the local network!"
+msgstr "Erro no uso da rede local!"
+
+#: ../../src/network/network_lan_promotion.cc:351
+#, c-format
+msgid ""
+"Widelands was unable to use the local network. Maybe some other process is "
+"already running a server on port %d, %d or %d or your network setup is "
+"broken."
+msgstr "Widelands não conseguiu utilizar a rede local. Provavelmente já outro programa está a utilizar a porta %d, %d ou %d ou a sua configuração de rede está errada."
+
 #. * TRANSLATORS: A variant of the commandline parameter "true" value
 #. * TRANSLATORS: Needs to be consistent with the translations in widelands-
 #. console
@@ -2003,7 +2015,7 @@ msgstr "desligado"
 #. * TRANSLATORS: %1% is a filename, %2% a map's name.
 #. * TRANSLATORS: File name for saving objective achieved
 #. * TRANSLATORS: %1% = map name. %2% = achievement name
-#: ../../src/scripting/lua_game.cc:1089 ../../src/ui_fsmenu/loadgame.cc:76
+#: ../../src/scripting/lua_game.cc:1090 ../../src/ui_fsmenu/loadgame.cc:76
 msgid "%1% (%2%)"
 msgstr "%1% (%2%)"
 
@@ -2172,7 +2184,7 @@ msgstr "#"
 msgid "Tutorial:"
 msgstr "Tutorial:"
 
-#: ../../src/ui_fsmenu/campaign_select.cc:375 ../../src/wui/mapdetails.cc:133
+#: ../../src/ui_fsmenu/campaign_select.cc:375 ../../src/wui/mapdetails.cc:131
 msgid "Scenario:"
 msgstr "Cenário:"
 
@@ -2193,7 +2205,7 @@ msgid_plural "The designers of this scenario"
 msgstr[0] "O desenhista deste cenário"
 msgstr[1] "Os desenhistas deste cenário"
 
-#: ../../src/ui_fsmenu/campaign_select.cc:406 ../../src/wui/mapdetails.cc:158
+#: ../../src/ui_fsmenu/campaign_select.cc:406 ../../src/wui/mapdetails.cc:156
 msgid "Author:"
 msgid_plural "Authors:"
 msgstr[0] "Autor:"
@@ -2291,7 +2303,7 @@ msgstr "A ligação expirou"
 
 #. * TRANSLATORS: This is shown for multiplayer games when no host
 #. * TRANSLATORS: server to connect to has been specified yet.
-#: ../../src/ui_fsmenu/internet_lobby.cc:398
+#: ../../src/ui_fsmenu/internet_lobby.cc:393
 msgctxt "server_name"
 msgid "unnamed"
 msgstr "sem nome"
@@ -2429,7 +2441,7 @@ msgstr "Tu és um espetador."
 #: ../../src/ui_fsmenu/launch_mpg.cc:418
 #, c-format
 msgid "Unable to load the win condition script file '%s'."
-msgstr ""
+msgstr "Erro ao carregar o ficheiro de condição de vitória '%s'."
 
 #: ../../src/ui_fsmenu/launch_mpg.cc:468
 msgid "Saved players are:"
@@ -2464,7 +2476,7 @@ msgstr "Nome do jogador"
 msgid "Player’s type"
 msgstr "Tipo de jogador"
 
-#: ../../src/ui_fsmenu/launch_spg.cc:71 ../../src/wui/game_summary.cc:101
+#: ../../src/ui_fsmenu/launch_spg.cc:71 ../../src/wui/game_summary.cc:102
 #: ../../src/wui/multiplayersetupgroup.cc:503
 msgid "Team"
 msgstr "Equipa"
@@ -2614,15 +2626,15 @@ msgstr "O nome do ficheiro com o qual o jogo foi gravado seguido pelo nome do ma
 #, c-format
 msgid "Do you really want to delete this %d replay?"
 msgid_plural "Do you really want to delete these %d replays?"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Queres mesmo apagar esta %d repetição?"
+msgstr[1] "Queres mesmo apagar estas %d repetições?"
 
 #: ../../src/ui_fsmenu/loadgame.cc:277
 #, c-format
 msgid "Do you really want to delete this %d game?"
 msgid_plural "Do you really want to delete these %d games?"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Queres mesmo apagar este %d jogo?"
+msgstr[1] "Queres mesmo apagar estes %d jogos?"
 
 #: ../../src/ui_fsmenu/loadgame.cc:295
 msgid "Save Date:"
@@ -2639,42 +2651,42 @@ msgstr "Queres mesmo apagar este jogo?"
 #: ../../src/ui_fsmenu/loadgame.cc:319
 msgid "Confirm deleting file"
 msgid_plural "Confirm deleting files"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Confirma apagar o ficheiro"
+msgstr[1] "Confirma apagar os ficheiros"
 
 #. * TRANSLATORS %1% = map name, %2% = save date.
-#: ../../src/ui_fsmenu/loadgame.cc:352
+#: ../../src/ui_fsmenu/loadgame.cc:342
 msgid "%1%, saved on %2%"
-msgstr ""
+msgstr "%1%, gravado em %2%"
 
-#: ../../src/ui_fsmenu/loadgame.cc:383
+#: ../../src/ui_fsmenu/loadgame.cc:373
 msgid "Gametime:"
 msgstr "Tempo de jogo:"
 
-#: ../../src/ui_fsmenu/loadgame.cc:385
+#: ../../src/ui_fsmenu/loadgame.cc:375
 msgid "Win Condition:"
 msgstr "Condição de vitória:"
 
-#: ../../src/ui_fsmenu/loadgame.cc:415
+#: ../../src/ui_fsmenu/loadgame.cc:405
 msgid "Widelands Version:"
 msgstr "Versão de Widelands:"
 
-#: ../../src/ui_fsmenu/loadgame.cc:492
+#: ../../src/ui_fsmenu/loadgame.cc:482
 #, c-format
 msgid "Selected %d file:"
 msgid_plural "Selected %d files:"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Seleção de %d ficheiro:"
+msgstr[1] "Seleção de %d ficheiros:"
 
-#: ../../src/ui_fsmenu/loadgame.cc:579
+#: ../../src/ui_fsmenu/loadgame.cc:569
 msgid "Today, %1%:%2%"
 msgstr "Hoje, %1%:%2%"
 
-#: ../../src/ui_fsmenu/loadgame.cc:592
+#: ../../src/ui_fsmenu/loadgame.cc:582
 msgid "Yesterday, %1%:%2%"
 msgstr "Ontem, %1%:%2%"
 
-#: ../../src/ui_fsmenu/loadgame.cc:598
+#: ../../src/ui_fsmenu/loadgame.cc:588
 msgid "%2% %1%, %3%"
 msgstr "%1% %2% %3%"
 
@@ -2683,33 +2695,33 @@ msgstr "%1% %2% %3%"
 #. * TRANSLATORS: A tooltip will explain the abbreviation.
 #. * TRANSLATORS: Make sure that this translation is consistent with the
 #. tooltip.
-#: ../../src/ui_fsmenu/loadgame.cc:619
+#: ../../src/ui_fsmenu/loadgame.cc:609
 msgid "SP"
 msgstr "JI"
 
-#: ../../src/ui_fsmenu/loadgame.cc:628
+#: ../../src/ui_fsmenu/loadgame.cc:618
 msgid "H (%1%)"
 msgstr "H (%1%)"
 
-#: ../../src/ui_fsmenu/loadgame.cc:638
+#: ../../src/ui_fsmenu/loadgame.cc:628
 msgid "MP (%1%)"
 msgstr "MJ (%1%)"
 
 #. * TRANSLATORS: Error message introduction for when an old savegame can't be
 #. loaded
-#: ../../src/ui_fsmenu/loadgame.cc:655
+#: ../../src/ui_fsmenu/loadgame.cc:645
 msgid ""
 "This file has the wrong format and can’t be loaded. Maybe it was created "
 "with an older version of Widelands."
 msgstr "Este ficheiro tem formato incorreto e mão se pode carregar. Talvez que fosse criado com uma versão antiga de Widelands."
 
 #. * TRANSLATORS: This text is on a separate line with an error message below
-#: ../../src/ui_fsmenu/loadgame.cc:658
+#: ../../src/ui_fsmenu/loadgame.cc:648
 msgid "Error message:"
 msgstr "Mensagem do erro :"
 
 #. * TRANSLATORS: Prefix for incompatible files in load game screens
-#: ../../src/ui_fsmenu/loadgame.cc:671 ../../src/ui_fsmenu/loadgame.cc:673
+#: ../../src/ui_fsmenu/loadgame.cc:661 ../../src/ui_fsmenu/loadgame.cc:663
 #, c-format
 msgid "Incompatible: %s"
 msgstr "Incompatível: %s"
@@ -2822,18 +2834,18 @@ msgstr "Hospedeiro"
 msgid "State"
 msgstr "Estado"
 
-#: ../../src/ui_fsmenu/netsetup_lan.cc:194
+#: ../../src/ui_fsmenu/netsetup_lan.cc:191
 #: ../../src/wui/multiplayersetupgroup.cc:356
 #: ../../src/wui/playerdescrgroup.cc:136
 msgid "Open"
 msgstr "Aberto"
 
-#: ../../src/ui_fsmenu/netsetup_lan.cc:197
+#: ../../src/ui_fsmenu/netsetup_lan.cc:194
 #: ../../src/wui/multiplayersetupgroup.cc:346
 msgid "Closed"
 msgstr "Fechado"
 
-#: ../../src/ui_fsmenu/netsetup_lan.cc:201
+#: ../../src/ui_fsmenu/netsetup_lan.cc:198
 msgctxt "game_state"
 msgid "Unknown"
 msgstr "Desconhecido"
@@ -2969,24 +2981,32 @@ msgstr "Campanhas"
 msgid "Load Game"
 msgstr "Carregar jogo"
 
-#: ../../src/wlapplication.cc:1037
+#: ../../src/wlapplication.cc:1032
 msgid "Game data error"
 msgstr "Erro de dados de jogo"
 
-#: ../../src/wlapplication.cc:1045
+#: ../../src/wlapplication.cc:1040
 #, c-format
 msgid ""
 "Please report this problem to help us improve Widelands. You will find "
 "related messages in the standard output (stdout.txt on Windows). You are "
 "using build %1$s (%2$s)."
-msgstr ""
+msgstr "Por favor relata este problema para nos ajudar a melhorar o Widelands. Irás encontrar as mensagens relacionadas no ficheiro de saída standard (stdout.txt no Windows). Estás a usar a versão %1$s (%2$s). "
 
-#: ../../src/wlapplication.cc:1052
+#: ../../src/wlapplication.cc:1047
 msgid ""
 "Please add this information to your report.\n"
 "\n"
 "Widelands attempts to create a savegame when errors occur during the game. It is often – though not always – possible to load it and continue playing."
-msgstr ""
+msgstr "Por favor ajunta esta informação ao teu relatório.\n\nO Widelands tenta guardar o estado atual do jogo quando ocorrem erros durante o jogo. É frequente – embora nem sempre – ser possível voltar a carregá-lo e continuar a jogar."
+
+#: ../../src/wlapplication.cc:1173
+msgid "Invalid address"
+msgstr "Endereço inválido"
+
+#: ../../src/wlapplication.cc:1174
+msgid "The entered hostname or address is invalid and can’t be connected to."
+msgstr "O nome ou endereço indicado é inválido e não pode ser atingido."
 
 #: ../../src/wui/actionconfirm.cc:176
 msgid "Destroy building?"
@@ -2994,7 +3014,7 @@ msgstr "Destruir edifício ?"
 
 #: ../../src/wui/actionconfirm.cc:177
 msgid "Do you really want to destroy this building?"
-msgstr ""
+msgstr "Queres mesmo destruir este edifício?"
 
 #: ../../src/wui/actionconfirm.cc:221
 msgid "Dismantle building?"
@@ -3002,7 +3022,7 @@ msgstr "Desmanchar edifício ?"
 
 #: ../../src/wui/actionconfirm.cc:222
 msgid "Do you really want to dismantle this building?"
-msgstr ""
+msgstr "Queres mesmo desmanchar este edifício?"
 
 #: ../../src/wui/actionconfirm.cc:267
 msgid "Enhance building?"
@@ -3010,13 +3030,13 @@ msgstr "Melhorar edifício?"
 
 #: ../../src/wui/actionconfirm.cc:269 ../../src/wui/actionconfirm.cc:273
 msgid "Do you really want to enhance this building?"
-msgstr ""
+msgstr "Queres mesmo melhorar este edifício?"
 
 #. * TRANSLATORS: Warning message when player wants to enhance a military
 #. building
 #: ../../src/wui/actionconfirm.cc:271
 msgid "Be careful if the enemy is near!"
-msgstr ""
+msgstr "Cuidado que o inimigo está perto!"
 
 #: ../../src/wui/actionconfirm.cc:313
 msgid "Sink the ship?"
@@ -3074,7 +3094,7 @@ msgstr "Construindo:"
 #: ../../src/wui/building_statistics_menu.cc:84
 #: ../../src/wui/building_statistics_menu.cc:631
 msgid "Low Productivity"
-msgstr ""
+msgstr "Baixa Produtividade"
 
 #. * TRANSLATORS: This is the second part of productivity with input field
 #. * TRANSLATORS: Building statistics window -  'Low Productivity <input>%:'
@@ -3130,58 +3150,58 @@ msgid "Lacking Soldiers:"
 msgstr "Falta de soldados:"
 
 #. * TRANSLATORS: Stop/Continue toggle button for production sites.
-#: ../../src/wui/buildingwindow.cc:209
+#: ../../src/wui/buildingwindow.cc:215
 msgid "Continue"
 msgstr "Continua"
 
 #. * TRANSLATORS: Stop/Continue toggle button for production sites.
-#: ../../src/wui/buildingwindow.cc:211
+#: ../../src/wui/buildingwindow.cc:217
 msgid "Stop"
 msgstr "Parar"
 
-#: ../../src/wui/buildingwindow.cc:232
+#: ../../src/wui/buildingwindow.cc:238
 #, c-format
 msgid "Enhance to %s"
 msgstr "Melhorar para %s"
 
-#: ../../src/wui/buildingwindow.cc:233 ../../src/wui/fieldaction.cc:99
+#: ../../src/wui/buildingwindow.cc:239 ../../src/wui/fieldaction.cc:99
 msgid "Construction costs:"
 msgstr "Custos de construção:"
 
-#: ../../src/wui/buildingwindow.cc:250
+#: ../../src/wui/buildingwindow.cc:256
 msgid "Destroy"
 msgstr "Destruir"
 
-#: ../../src/wui/buildingwindow.cc:265
+#: ../../src/wui/buildingwindow.cc:271
 msgid "Dismantle"
 msgstr "Desmanchar"
 
-#: ../../src/wui/buildingwindow.cc:265
+#: ../../src/wui/buildingwindow.cc:271
 msgid "Returns:"
 msgstr "Voltar:"
 
-#: ../../src/wui/buildingwindow.cc:293 ../../src/wui/buildingwindow.cc:458
+#: ../../src/wui/buildingwindow.cc:299 ../../src/wui/buildingwindow.cc:464
 msgid "Hide work area"
 msgstr "Esconder a área de trabalho"
 
-#: ../../src/wui/buildingwindow.cc:305 ../../src/wui/fieldaction.cc:371
+#: ../../src/wui/buildingwindow.cc:311 ../../src/wui/fieldaction.cc:371
 #: ../../src/wui/shipwindow.cc:181
 msgid "Show Debug Window"
 msgstr "Mostrar a janela de depuração"
 
-#: ../../src/wui/buildingwindow.cc:312
+#: ../../src/wui/buildingwindow.cc:318
 msgid "Center view on this"
 msgstr "Centrar a vista nisto"
 
-#: ../../src/wui/buildingwindow.cc:461
+#: ../../src/wui/buildingwindow.cc:467
 msgid "Show work area"
 msgstr "Mostrar a área de trabalho"
 
-#: ../../src/wui/buildingwindow.cc:494
+#: ../../src/wui/buildingwindow.cc:500
 msgid "Start an expedition"
 msgstr "Começar uma nova expedição"
 
-#: ../../src/wui/buildingwindow.cc:498
+#: ../../src/wui/buildingwindow.cc:504
 msgid "Cancel the expedition"
 msgstr "Cancelar a expedição"
 
@@ -3279,27 +3299,27 @@ msgstr "Liga/desliga etiquetas do edifícios"
 msgid "Watch"
 msgstr "Observar"
 
-#: ../../src/wui/fieldaction.cc:389
+#: ../../src/wui/fieldaction.cc:391
 msgid "Start attack"
 msgstr "Inicia um ataque"
 
-#: ../../src/wui/fieldaction.cc:394
+#: ../../src/wui/fieldaction.cc:397
 msgid "Attack"
 msgstr "Ataque"
 
-#: ../../src/wui/fieldaction.cc:472
+#: ../../src/wui/fieldaction.cc:475
 msgid "Build mines"
 msgstr "Construir minas"
 
-#: ../../src/wui/fieldaction.cc:485
+#: ../../src/wui/fieldaction.cc:488
 msgid "Build flag"
 msgstr "Construir bandeira"
 
-#: ../../src/wui/fieldaction.cc:488
+#: ../../src/wui/fieldaction.cc:491
 msgid "Cancel road"
 msgstr "Cancelar estrada"
 
-#: ../../src/wui/fieldaction.cc:491
+#: ../../src/wui/fieldaction.cc:494
 msgid "Build roads"
 msgstr "Construir estradas"
 
@@ -3376,7 +3396,7 @@ msgctxt "message"
 msgid "Type"
 msgstr "Tipo"
 
-#: ../../src/wui/game_message_menu.cc:70 ../../src/wui/game_summary.cc:102
+#: ../../src/wui/game_message_menu.cc:70 ../../src/wui/game_summary.cc:103
 msgid "Status"
 msgstr "Estado"
 
@@ -3489,8 +3509,8 @@ msgstr "Mostrar a caixa de entrada"
 #, c-format
 msgid "Restore the selected %d message"
 msgid_plural "Restore the selected %d messages"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Restaurar a %d mensagem selecionada"
+msgstr[1] "Restaurar as %d mensagens selecionadas"
 
 #. * TRANSLATORS: Tooltip in the messages window
 #: ../../src/wui/game_message_menu.cc:629
@@ -3501,8 +3521,8 @@ msgstr "Restaurar a mensagen selecionada"
 #, c-format
 msgid "Archive the selected %d message"
 msgid_plural "Archive the selected %d messages"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Arquivar a %d mensagem selecionada"
+msgstr[1] "Arquivar as %d mensagens selecionadas"
 
 #. * TRANSLATORS: Tooltip in the messages window
 #: ../../src/wui/game_message_menu.cc:643
@@ -3540,7 +3560,7 @@ msgid "Set sound effect and music options"
 msgstr "Escolhe opções dos efeitos sonoros e da música"
 
 #. * TRANSLATORS: Button tooltip
-#: ../../src/wui/game_options_menu.cc:99 ../../src/wui/game_summary.cc:91
+#: ../../src/wui/game_options_menu.cc:99 ../../src/wui/game_summary.cc:92
 msgid "Exit Game"
 msgstr "Sair do jogo"
 
@@ -3571,73 +3591,73 @@ msgstr "Estatísticas da produção"
 msgid "Stock"
 msgstr "Provisão"
 
-#: ../../src/wui/game_summary.cc:43
+#: ../../src/wui/game_summary.cc:44
 msgid "Game over"
 msgstr "Fim do jogo"
 
-#: ../../src/wui/game_summary.cc:61
+#: ../../src/wui/game_summary.cc:62
 msgid "Player Info:"
 msgstr "Informação do jogador:"
 
-#: ../../src/wui/game_summary.cc:76
+#: ../../src/wui/game_summary.cc:77
 msgid "Elapsed time:"
 msgstr "Tempo decorrido :"
 
-#: ../../src/wui/game_summary.cc:86
+#: ../../src/wui/game_summary.cc:87
 msgid "Continue playing"
 msgstr "Continuar a jogar"
 
-#: ../../src/wui/game_summary.cc:103
+#: ../../src/wui/game_summary.cc:104
 msgid "Time"
 msgstr "Tempo"
 
 #. * TRANSLATORS: This is shown in the game summary for the players who have
 #. lost.
-#: ../../src/wui/game_summary.cc:165
+#: ../../src/wui/game_summary.cc:166
 msgid "Lost"
 msgstr "Perdeu"
 
 #. * TRANSLATORS: This is shown in the game summary for the players who have
 #. won.
-#: ../../src/wui/game_summary.cc:169
+#: ../../src/wui/game_summary.cc:170
 msgid "Won"
 msgstr "Venceu"
 
 #. * TRANSLATORS: This is shown in the game summary for the players who have
 #. resigned.
-#: ../../src/wui/game_summary.cc:178
+#: ../../src/wui/game_summary.cc:179
 msgid "Resigned"
 msgstr "Abandonou"
 
 #. * TRANSLATORS: This is shown in the game summary when we don't know
 #. * TRANSLATORS: if the player has lost or won.
-#: ../../src/wui/game_summary.cc:183
+#: ../../src/wui/game_summary.cc:184
 msgctxt "player_won"
 msgid "Unknown"
 msgstr "Desconhecido"
 
-#: ../../src/wui/game_summary.cc:193
+#: ../../src/wui/game_summary.cc:194
 msgid "You won!"
 msgstr "Venceste!"
 
-#: ../../src/wui/game_summary.cc:195
+#: ../../src/wui/game_summary.cc:196
 msgid "You lost."
 msgstr "Perdeste."
 
-#: ../../src/wui/game_summary.cc:200
+#: ../../src/wui/game_summary.cc:201
 #, c-format
 msgid "%s won!"
 msgstr "%s venceu!"
 
-#: ../../src/wui/game_summary.cc:203
+#: ../../src/wui/game_summary.cc:204
 msgid "Team %|1$u| won!"
 msgstr "Venceu a equipa %|1$u|!"
 
-#: ../../src/wui/game_summary.cc:248
+#: ../../src/wui/game_summary.cc:249
 msgid "Score"
 msgstr "Pontos"
 
-#: ../../src/wui/game_summary.cc:250
+#: ../../src/wui/game_summary.cc:251
 msgid "Team Score"
 msgstr "Pontos da equipe"
 
@@ -3843,7 +3863,7 @@ msgstr "pai"
 msgid "empty"
 msgstr "vazio"
 
-#: ../../src/wui/mapdetails.cc:125
+#: ../../src/wui/mapdetails.cc:123
 msgid "Directory:"
 msgstr "Diretório:"
 
@@ -3851,7 +3871,7 @@ msgstr "Diretório:"
 #. being
 #. displayed.
 #. * TRANSLATORS: %s is the English name of the map.
-#: ../../src/wui/mapdetails.cc:144
+#: ../../src/wui/mapdetails.cc:142
 #, c-format
 msgid "The original name of this map: %s"
 msgstr "O nome original deste mapa: %s"
@@ -3860,13 +3880,13 @@ msgstr "O nome original deste mapa: %s"
 #. displayed in
 #. English.
 #. * TRANSLATORS: %s is the localized name of the map.
-#: ../../src/wui/mapdetails.cc:150
+#: ../../src/wui/mapdetails.cc:148
 #, c-format
 msgid "The name of this map in your language: %s"
 msgstr "O nome deste mapa em português: %s"
 
 #. * TRANSLATORS: Map hint header when selecting a map.
-#: ../../src/wui/mapdetails.cc:180
+#: ../../src/wui/mapdetails.cc:178
 msgid "Hint:"
 msgstr "Dica:"
 
@@ -3932,7 +3952,7 @@ msgstr "Espetador"
 #: ../../src/wui/multiplayersetupgroup.cc:289
 #, c-format
 msgid "Shared in Player %u"
-msgstr ""
+msgstr "Partilhado no Jogador %u"
 
 #: ../../src/wui/multiplayersetupgroup.cc:310
 #: ../../src/wui/playerdescrgroup.cc:170
@@ -3942,7 +3962,7 @@ msgstr "Aleatório"
 
 #: ../../src/wui/multiplayersetupgroup.cc:312
 msgid "The tribe will be selected at random"
-msgstr ""
+msgstr "A tribo será escolhida aleatóriamente"
 
 #: ../../src/wui/multiplayersetupgroup.cc:366
 msgid "Shared in"
@@ -3990,7 +4010,7 @@ msgid "The tribe will be set at random."
 msgstr "A tribo será escolhida aleatóriamente."
 
 #. * TRANSLATORS: day(s). Keep this as short as possible. Used in statistics.
-#: ../../src/wui/plot_area.cc:114
+#: ../../src/wui/plot_area.cc:112
 msgctxt "unit_narrow"
 msgid "%1%d"
 msgid_plural "%1%d"
@@ -3998,7 +4018,7 @@ msgstr[0] "%1%D"
 msgstr[1] "%1%D"
 
 #. * TRANSLATORS: hour(s). Keep this as short as possible. Used in statistics.
-#: ../../src/wui/plot_area.cc:117
+#: ../../src/wui/plot_area.cc:115
 msgctxt "unit_narrow"
 msgid "%1%h"
 msgid_plural "%1%h"
@@ -4007,7 +4027,7 @@ msgstr[1] "%1%H"
 
 #. * TRANSLATORS: minute(s). Keep this as short as possible. Used in
 #. statistics.
-#: ../../src/wui/plot_area.cc:120
+#: ../../src/wui/plot_area.cc:118
 msgctxt "unit_narrow"
 msgid "%1%m"
 msgid_plural "%1%m"
@@ -4015,24 +4035,24 @@ msgstr[0] "%1%M"
 msgstr[1] "%1%M"
 
 #. * TRANSLATORS: Generic unit label. Used in statistics.
-#: ../../src/wui/plot_area.cc:133
+#: ../../src/wui/plot_area.cc:131
 msgctxt "unit_generic"
 msgid "days"
 msgstr "dias"
 
 #. * TRANSLATORS: Generic unit label. Used in statistics.
-#: ../../src/wui/plot_area.cc:136
+#: ../../src/wui/plot_area.cc:134
 msgctxt "unit_generic"
 msgid "hours"
 msgstr "horas"
 
 #. * TRANSLATORS: Generic unit label. Used in statistics.
-#: ../../src/wui/plot_area.cc:139
+#: ../../src/wui/plot_area.cc:137
 msgctxt "unit_generic"
 msgid "minutes"
 msgstr "minutos"
 
-#: ../../src/wui/plot_area.cc:333
+#: ../../src/wui/plot_area.cc:329
 msgid "game"
 msgstr "partida"
 
@@ -4059,13 +4079,13 @@ msgstr "(vago)"
 #. * TRANSLATORS: Window label when an expedition can't be canceled
 #: ../../src/wui/shipwindow.cc:68
 msgid "Cancel expedition"
-msgstr ""
+msgstr "Cancelar a expedição"
 
 #: ../../src/wui/shipwindow.cc:68
 msgid ""
 "This expedition can’t be canceled, because the ship has no port to return "
 "to."
-msgstr ""
+msgstr "Esta expedição não pode ser cancelada, pois o navio não tem porto onde retornar."
 
 #: ../../src/wui/shipwindow.cc:111
 msgid "Scout towards the north west"

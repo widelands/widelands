@@ -3,6 +3,7 @@ wl_test(test_scripting
    scripting_test_main.cc
    test_luna.cc
  DEPENDS
+   base_macros
    scripting_base
    scripting_luna
 )

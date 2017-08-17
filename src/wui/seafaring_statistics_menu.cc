@@ -190,7 +190,6 @@ SeafaringStatisticsMenu::SeafaringStatisticsMenu(InteractivePlayer& plr,
 	   Notifications::subscribe<Widelands::NoteShip>([this](const Widelands::NoteShip& note) {
 			if (iplayer().get_player() == note.ship->get_owner()) {
 				switch (note.action) {
-				case Widelands::NoteShip::Action::kStateChanged:
 				case Widelands::NoteShip::Action::kDestinationChanged:
 				case Widelands::NoteShip::Action::kWaitingForCommand:
 				case Widelands::NoteShip::Action::kGained:

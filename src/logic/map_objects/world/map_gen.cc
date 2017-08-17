@@ -36,8 +36,8 @@ MapGenBobCategory::MapGenBobCategory(const LuaTable& table)
 }
 
 const MapGenBobCategory*
-MapGenLandResource::get_bob_category(MapGenAreaInfo::MapGenTerrainType terrType) const {
-	switch (terrType) {
+MapGenLandResource::get_bob_category(MapGenAreaInfo::MapGenTerrainType terrain_type) const {
+	switch (terrain_type) {
 	case MapGenAreaInfo::ttLandCoast:
 		return land_coast_bob_category_;
 	case MapGenAreaInfo::ttLandLand:
@@ -59,20 +59,20 @@ MapGenLandResource::get_bob_category(MapGenAreaInfo::MapGenTerrainType terrType)
 	NEVER_HERE();
 }
 
-MapGenLandResource::MapGenLandResource(const LuaTable& table, MapGenInfo& mapGenInfo) {
+MapGenLandResource::MapGenLandResource(const LuaTable& table, MapGenInfo& map_gen_info) {
 	weight_ = get_uint(table, "weight");
 
 	immovable_density_ = static_cast<uint8_t>(get_uint(table, "immovable_density"));
 	critter_density_ = static_cast<uint8_t>(get_uint(table, "critter_density"));
 
-	const auto do_assign = [&table, &mapGenInfo](
+	const auto do_assign = [&table, &map_gen_info](
 	   const std::string& key, const MapGenBobCategory** our_pointer) {
 		const std::string value = table.get_string(key);
 		if (value.empty()) {
 			*our_pointer = nullptr;
 			return;
 		}
-		*our_pointer = mapGenInfo.get_bob_category(value);
+		*our_pointer = map_gen_info.get_bob_category(value);
 	};
 
 	do_assign("land_coast_bobs", &land_coast_bob_category_);
@@ -84,7 +84,7 @@ MapGenLandResource::MapGenLandResource(const LuaTable& table, MapGenInfo& mapGen
 
 MapGenAreaInfo::MapGenAreaInfo(const LuaTable& table,
                                const World& world,
-                               MapGenAreaType const areaType) {
+                               MapGenAreaType const area_type) {
 	weight_ = get_positive_int(table, "weight");
 
 	const auto read_terrains = [this, &table, &world](
@@ -97,7 +97,7 @@ MapGenAreaInfo::MapGenAreaInfo(const LuaTable& table,
 		}
 	};
 
-	switch (areaType) {
+	switch (area_type) {
 	case atWater:
 		read_terrains("ocean_terrains", &terrains1_);
 		read_terrains("shelf_terrains", &terrains2_);
@@ -120,8 +120,8 @@ MapGenAreaInfo::MapGenAreaInfo(const LuaTable& table,
 	}
 }
 
-size_t MapGenAreaInfo::get_num_terrains(MapGenTerrainType const terrType) const {
-	switch (terrType) {
+size_t MapGenAreaInfo::get_num_terrains(MapGenTerrainType const terrain_type) const {
+	switch (terrain_type) {
 	case ttWaterOcean:
 		return terrains1_.size();
 	case ttWaterShelf:
@@ -151,9 +151,9 @@ size_t MapGenAreaInfo::get_num_terrains(MapGenTerrainType const terrType) const 
 	NEVER_HERE();
 }
 
-DescriptionIndex MapGenAreaInfo::get_terrain(MapGenTerrainType const terrType,
+DescriptionIndex MapGenAreaInfo::get_terrain(MapGenTerrainType const terrain_type,
                                              uint32_t const index) const {
-	switch (terrType) {
+	switch (terrain_type) {
 	case ttWaterOcean:
 		return terrains1_[index];
 	case ttWaterShelf:
@@ -217,8 +217,8 @@ uint32_t MapGenInfo::get_sum_land_resource_weight() const {
 	return sum_bob_area_weights_;
 }
 
-size_t MapGenInfo::get_num_areas(MapGenAreaInfo::MapGenAreaType const areaType) const {
-	switch (areaType) {
+size_t MapGenInfo::get_num_areas(MapGenAreaInfo::MapGenAreaType const area_type) const {
+	switch (area_type) {
 	case MapGenAreaInfo::atWater:
 		return water_areas_.size();
 	case MapGenAreaInfo::atLand:
@@ -231,9 +231,9 @@ size_t MapGenInfo::get_num_areas(MapGenAreaInfo::MapGenAreaType const areaType) 
 	NEVER_HERE();
 }
 
-const MapGenAreaInfo& MapGenInfo::get_area(MapGenAreaInfo::MapGenAreaType const areaType,
+const MapGenAreaInfo& MapGenInfo::get_area(MapGenAreaInfo::MapGenAreaType const area_type,
                                            uint32_t const index) const {
-	switch (areaType) {
+	switch (area_type) {
 	case MapGenAreaInfo::atWater:
 		return water_areas_.at(index);
 	case MapGenAreaInfo::atLand:
@@ -246,12 +246,12 @@ const MapGenAreaInfo& MapGenInfo::get_area(MapGenAreaInfo::MapGenAreaType const 
 	NEVER_HERE();
 }
 
-const MapGenBobCategory* MapGenInfo::get_bob_category(const std::string& bobCategory) const {
-	if (bob_categories_.find(bobCategory) == bob_categories_.end())
-		throw wexception("invalid MapGenBobCategory %s", bobCategory.c_str());
+const MapGenBobCategory* MapGenInfo::get_bob_category(const std::string& bob_category) const {
+	if (bob_categories_.find(bob_category) == bob_categories_.end())
+		throw wexception("invalid MapGenBobCategory %s", bob_category.c_str());
 	// Ugly workaround because at is not defined for some systems
 	// and operator[] does not fare well with constants
-	return &bob_categories_.find(bobCategory)->second;
+	return &bob_categories_.find(bob_category)->second;
 }
 
 MapGenInfo::MapGenInfo(const LuaTable& table, const World& world) {

@@ -112,7 +112,7 @@ protected:
 private:
 	// Health, Attack, Defense and Evade values.
 	struct BattleAttribute {
-		BattleAttribute(std::unique_ptr<LuaTable> table);
+		explicit BattleAttribute(std::unique_ptr<LuaTable> table);
 
 		uint32_t base;                     // Base value
 		uint32_t maximum;                  // Maximum value for randomizing attack values
@@ -173,7 +173,7 @@ class Soldier : public Worker {
 	MO_DESCR(SoldierDescr)
 
 public:
-	Soldier(const SoldierDescr&);
+	explicit Soldier(const SoldierDescr&);
 
 	bool init(EditorGameBase&) override;
 	void cleanup(EditorGameBase&) override;

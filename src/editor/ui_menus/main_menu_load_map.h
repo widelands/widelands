@@ -29,7 +29,7 @@
  * Choose a filename and save your brand new created map
 */
 struct MainMenuLoadMap : public MainMenuLoadOrSaveMap {
-	MainMenuLoadMap(EditorInteractive& parent);
+	explicit MainMenuLoadMap(EditorInteractive& parent);
 
 protected:
 	void clicked_ok() override;
