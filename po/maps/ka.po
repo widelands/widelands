@@ -1,13 +1,13 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2016 Widelands Development Team
+# Copyright (C) 2005-2017 Widelands Development Team
 # 
 # Translators:
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-12-15 15:23+0000\n"
-"PO-Revision-Date: 2016-12-15 15:32+0000\n"
+"POT-Creation-Date: 2017-05-18 21:30+0000\n"
+"PO-Revision-Date: 2017-05-18 21:32+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Georgian (http://www.transifex.com/widelands/widelands/language/ka/)\n"
 "MIME-Version: 1.0\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 
 #: ../../data/campaigns/atl01.wmf/elemental:9
-#: ../../data/campaigns/campaigns.conf:95
+#: ../../data/campaigns/campaigns.conf:100
 msgid "From Nemesis to Genesis"
 msgstr ""
 
@@ -136,7 +136,11 @@ msgid "An Outpost for Exile"
 msgstr ""
 
 #: ../../data/campaigns/campaigns.conf:88
-#: ../../data/campaigns/campaigns.conf:100
+msgid "Neptune’s Revenge"
+msgstr ""
+
+#: ../../data/campaigns/campaigns.conf:93
+#: ../../data/campaigns/campaigns.conf:105
 #: ../../data/campaigns/dummy.wmf/elemental:7
 msgid "Not yet implemented"
 msgstr ""
@@ -164,6 +168,12 @@ msgid ""
 "quest to find a good place for a new beginning. Only a few days later, they "
 "land on a green, Mediterranean island, looking like paradise. Overjoyed, "
 "they set out to explore this new living space."
+msgstr ""
+
+#: ../../data/campaigns/emp03.wmf/elemental:10
+msgid ""
+"On their way home to defend the Empire, the crew of Lutius was surprised by "
+"the will of the gods."
 msgstr ""
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/elemental:8

@@ -39,10 +39,6 @@ namespace {
 // threshold, but not background pictures.
 constexpr int kMaxAreaForTextureAtlas = 240 * 240;
 
-// A graphics card must at least support this size for texture for Widelands to
-// run.
-constexpr int kMinimumSizeForTextures = 2048;
-
 // Returns true if 'filename' ends with an image extension.
 bool is_image(const std::string& filename) {
 	return boost::ends_with(filename, ".png") || boost::ends_with(filename, ".jpg");

@@ -66,7 +66,7 @@ struct Pathfields {
 	std::unique_ptr<Pathfield[]> fields;
 	uint16_t cycle;
 
-	Pathfields(uint32_t nrfields);
+	explicit Pathfields(uint32_t nrfields);
 };
 
 /**

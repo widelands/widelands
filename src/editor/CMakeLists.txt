@@ -108,7 +108,6 @@ wl_library(editor
     scripting_lua_interface
     scripting_lua_table
     ui_basic
-    widelands_ball_of_mud
     wui
     wui_common
     wui_field_overlay_manager

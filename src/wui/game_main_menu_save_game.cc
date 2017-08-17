@@ -197,7 +197,7 @@ void GameMainMenuSaveGame::fill_list() {
 	edit_box_changed();
 }
 
-void GameMainMenuSaveGame::select_by_name(std::string name) {
+void GameMainMenuSaveGame::select_by_name(const std::string& name) {
 	for (uint32_t idx = 0; idx < ls_.size(); idx++) {
 		const std::string val = ls_[idx];
 		if (name == val) {

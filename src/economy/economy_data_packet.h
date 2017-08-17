@@ -31,7 +31,7 @@ struct MapObjectSaver;
 
 class EconomyDataPacket {
 public:
-	EconomyDataPacket(Economy* e) : eco_(e) {
+	explicit EconomyDataPacket(Economy* e) : eco_(e) {
 	}
 
 	void read(FileRead&);

@@ -492,7 +492,9 @@ const std::map<UI::FontSets::Selector, std::set<UBlockCode>> kRTLCodeBlocks = {
 
 // True if the character is in one of the script's code blocks
 bool is_script_character(UChar32 c, UI::FontSets::Selector script) {
+	CLANG_DIAG_OFF("-Wdisabled-macro-expansion")
 	UBlockCode code = ublock_getCode(c);
+	CLANG_DIAG_ON("-Wdisabled-macro-expansion")
 	if (kRTLCodeBlocks.count(script) == 1 && kRTLCodeBlocks.at(script).count(code) == 1) {
 		return true;
 	}
@@ -503,7 +505,9 @@ bool is_script_character(UChar32 c, UI::FontSets::Selector script) {
 }
 
 bool is_rtl_character(UChar32 c) {
+	CLANG_DIAG_OFF("-Wdisabled-macro-expansion")
 	UBlockCode code = ublock_getCode(c);
+	CLANG_DIAG_ON("-Wdisabled-macro-expansion")
 	for (UI::FontSets::Selector script : kRTLScripts) {
 		assert(kRTLCodeBlocks.count(script) == 1);
 		if ((kRTLCodeBlocks.at(script).count(code) == 1)) {
@@ -614,7 +618,7 @@ std::string make_ligatures(const char* input) {
 					--i;
 					previous = (i > 0) ? parseme.charAt(i - 1) : not_a_character;
 				}
-			} catch (std::out_of_range e) {
+			} catch (const std::out_of_range& e) {
 				log("Error trying to fetch Arabic diacritic form: %s\n", e.what());
 				NEVER_HERE();
 			}
@@ -640,7 +644,7 @@ std::string make_ligatures(const char* input) {
 					}
 				}
 				c = find_arabic_letter_form(c, previous, next);
-			} catch (std::out_of_range e) {
+			} catch (const std::out_of_range& e) {
 				log("Error trying to fetch Arabic character form: %s\n", e.what());
 				NEVER_HERE();
 			}

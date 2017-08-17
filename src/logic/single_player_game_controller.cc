@@ -25,7 +25,6 @@
 #include "logic/playercommand.h"
 #include "logic/playersmanager.h"
 #include "profile/profile.h"
-#include "wlapplication.h"
 
 SinglePlayerGameController::SinglePlayerGameController(Widelands::Game& game,
                                                        bool const useai,
@@ -85,7 +84,7 @@ int32_t SinglePlayerGameController::get_frametime() {
 }
 
 GameController::GameType SinglePlayerGameController::get_game_type() {
-	return GameController::GameType::SINGLEPLAYER;
+	return GameController::GameType::kSingleplayer;
 }
 
 uint32_t SinglePlayerGameController::real_speed() {

@@ -54,6 +54,8 @@ public:
 	                    Section& global_s,
 	                    PlayerType pt = NONE,
 	                    bool multiplayer = false);
+	~InteractiveGameBase() override {
+	}
 	Widelands::Game* get_game() const;
 	Widelands::Game& game() const;
 
@@ -89,7 +91,7 @@ public:
 
 protected:
 	void draw_overlay(RenderTarget&) override;
-	virtual int32_t calculate_buildcaps(const Widelands::TCoords<Widelands::FCoords>& c) = 0;
+	virtual int32_t calculate_buildcaps(const Widelands::FCoords& c) = 0;
 
 	GameMainMenuWindows main_windows_;
 	ChatProvider* chat_provider_;

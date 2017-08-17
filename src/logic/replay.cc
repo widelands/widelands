@@ -185,7 +185,7 @@ bool ReplayReader::end_of_replay() {
  */
 class CmdReplaySyncWrite : public Command {
 public:
-	CmdReplaySyncWrite(const uint32_t init_duetime) : Command(init_duetime) {
+	explicit CmdReplaySyncWrite(const uint32_t init_duetime) : Command(init_duetime) {
 	}
 
 	QueueCommandTypes id() const override {

@@ -20,6 +20,7 @@
 #include "logic/map_objects/tribes/warehouse.h"
 
 #include <algorithm>
+#include <limits>
 
 #include <boost/format.hpp>
 
@@ -68,6 +69,57 @@ void remove_no_longer_existing_workers(Game& game, std::vector<Worker*>* workers
 }
 
 }  // namespace
+
+bool Warehouse::AttackTarget::can_be_attacked() const {
+	return warehouse_->descr().get_conquers() > 0;
+}
+
+void Warehouse::AttackTarget::enemy_soldier_approaches(const Soldier& enemy) const {
+	if (!warehouse_->descr().get_conquers())
+		return;
+
+	Player& owner = warehouse_->owner();
+	Game& game = dynamic_cast<Game&>(owner.egbase());
+	Map& map = game.map();
+	if (enemy.get_owner() == &owner || enemy.get_battle() ||
+	    warehouse_->descr().get_conquers() <=
+	       map.calc_distance(enemy.get_position(), warehouse_->get_position()))
+		return;
+
+	if (game.map().find_bobs(
+	       Area<FCoords>(map.get_fcoords(warehouse_->base_flag().get_position()), 2), nullptr,
+	       FindBobEnemySoldier(&owner)))
+		return;
+
+	DescriptionIndex const soldier_index = owner.tribe().soldier();
+	Requirements noreq;
+
+	if (!warehouse_->count_workers(game, soldier_index, noreq, Match::kCompatible))
+		return;
+
+	Soldier& defender =
+	   dynamic_cast<Soldier&>(warehouse_->launch_worker(game, soldier_index, noreq));
+	defender.start_task_defense(game, false);
+}
+
+AttackTarget::AttackResult Warehouse::AttackTarget::attack(Soldier* enemy) const {
+	Player& owner = warehouse_->owner();
+	Game& game = dynamic_cast<Game&>(owner.egbase());
+	DescriptionIndex const soldier_index = owner.tribe().soldier();
+	Requirements noreq;
+
+	if (warehouse_->count_workers(game, soldier_index, noreq, Match::kCompatible)) {
+		Soldier& defender =
+		   dynamic_cast<Soldier&>(warehouse_->launch_worker(game, soldier_index, noreq));
+		defender.start_task_defense(game, true);
+		enemy->send_signal(game, "sleep");
+		return AttackTarget::AttackResult::DefenderLaunched;
+	}
+
+	warehouse_->set_defeating_player(enemy->owner().player_number());
+	warehouse_->schedule_destroy(game);
+	return AttackTarget::AttackResult::Defenseless;
+}
 
 WarehouseSupply::~WarehouseSupply() {
 	if (economy_) {
@@ -252,19 +304,77 @@ WarehouseDescr::WarehouseDescr(const std::string& init_descname,
 	}
 }
 
-/*
-==============================
-IMPLEMENTATION
-==============================
-*/
+std::vector<Soldier*> Warehouse::SoldierControl::present_soldiers() const {
+	std::vector<Soldier*> rv;
+	DescriptionIndex const soldier_index = warehouse_->owner().tribe().soldier();
+	IncorporatedWorkers::const_iterator sidx = warehouse_->incorporated_workers_.find(soldier_index);
+
+	if (sidx != warehouse_->incorporated_workers_.end()) {
+		const WorkerList& soldiers = sidx->second;
+		for (Worker* temp_soldier : soldiers) {
+			rv.push_back(static_cast<Soldier*>(temp_soldier));
+		}
+	}
+	return rv;
+}
+
+std::vector<Soldier*> Warehouse::SoldierControl::stationed_soldiers() const {
+	return present_soldiers();
+}
+
+Quantity Warehouse::SoldierControl::min_soldier_capacity() const {
+	return 0;
+}
+
+Quantity Warehouse::SoldierControl::max_soldier_capacity() const {
+	return std::numeric_limits<Quantity>::max();
+}
+
+Quantity Warehouse::SoldierControl::soldier_capacity() const {
+	return max_soldier_capacity();
+}
+
+void Warehouse::SoldierControl::set_soldier_capacity(Quantity /* capacity */) {
+	throw wexception("Not implemented for a Warehouse!");
+}
+
+void Warehouse::SoldierControl::drop_soldier(Soldier&) {
+	throw wexception("Not implemented for a Warehouse!");
+}
+
+int Warehouse::SoldierControl::outcorporate_soldier(Soldier& soldier) {
+	DescriptionIndex const soldier_index = warehouse_->owner().tribe().soldier();
+	if (warehouse_->incorporated_workers_.count(soldier_index)) {
+		WorkerList& soldiers = warehouse_->incorporated_workers_[soldier_index];
+
+		WorkerList::iterator i = std::find(soldiers.begin(), soldiers.end(), &soldier);
+
+		soldiers.erase(i);
+		warehouse_->supply_->remove_workers(soldier_index, 1);
+	}
+#ifndef NDEBUG
+	else
+		throw wexception("outcorporate_soldier: soldier not in this warehouse!");
+#endif
+	return 0;
+}
+
+int Warehouse::SoldierControl::incorporate_soldier(EditorGameBase& egbase, Soldier& soldier) {
+	warehouse_->incorporate_worker(egbase, &soldier);
+	return 0;
+}
 
 Warehouse::Warehouse(const WarehouseDescr& warehouse_descr)
    : Building(warehouse_descr),
+     attack_target_(this),
+     soldier_control_(this),
      supply_(new WarehouseSupply(this)),
      next_military_act_(0),
      portdock_(nullptr) {
 	next_stock_remove_act_ = 0;
 	cleanup_in_progress_ = false;
+	set_attack_target(&attack_target_);
+	set_soldier_control(&soldier_control_);
 }
 
 Warehouse::~Warehouse() {
@@ -1165,51 +1275,6 @@ void Warehouse::disable_spawn(uint8_t const worker_types_without_cost_index) {
 	next_worker_without_cost_spawn_[worker_types_without_cost_index] = never();
 }
 
-bool Warehouse::can_attack() {
-	return descr().get_conquers() > 0;
-}
-
-void Warehouse::aggressor(Soldier& enemy) {
-	if (!descr().get_conquers())
-		return;
-
-	Game& game = dynamic_cast<Game&>(owner().egbase());
-	Map& map = game.map();
-	if (enemy.get_owner() == &owner() || enemy.get_battle() ||
-	    descr().get_conquers() <= map.calc_distance(enemy.get_position(), get_position()))
-		return;
-
-	if (game.map().find_bobs(Area<FCoords>(map.get_fcoords(base_flag().get_position()), 2), nullptr,
-	                         FindBobEnemySoldier(&owner())))
-		return;
-
-	DescriptionIndex const soldier_index = owner().tribe().soldier();
-	Requirements noreq;
-
-	if (!count_workers(game, soldier_index, noreq, Match::kCompatible))
-		return;
-
-	Soldier& defender = dynamic_cast<Soldier&>(launch_worker(game, soldier_index, noreq));
-	defender.start_task_defense(game, false);
-}
-
-bool Warehouse::attack(Soldier& enemy) {
-	Game& game = dynamic_cast<Game&>(owner().egbase());
-	DescriptionIndex const soldier_index = owner().tribe().soldier();
-	Requirements noreq;
-
-	if (count_workers(game, soldier_index, noreq, Match::kCompatible)) {
-		Soldier& defender = dynamic_cast<Soldier&>(launch_worker(game, soldier_index, noreq));
-		defender.start_task_defense(game, true);
-		enemy.send_signal(game, "sleep");
-		return true;
-	}
-
-	set_defeating_player(enemy.owner().player_number());
-	schedule_destroy(game);
-	return false;
-}
-
 void Warehouse::PlannedWorkers::cleanup() {
 	while (!requests.empty()) {
 		delete requests.back();
@@ -1277,49 +1342,6 @@ InputQueue& Warehouse::inputqueue(DescriptionIndex index, WareWorker type) {
 	assert(portdock_->expedition_bootstrap() != nullptr);
 
 	return portdock_->expedition_bootstrap()->inputqueue(index, type);
-}
-
-/*
- * SoldierControl implementations
- */
-std::vector<Soldier*> Warehouse::present_soldiers() const {
-	std::vector<Soldier*> rv;
-
-	DescriptionIndex const soldier_index = owner().tribe().soldier();
-	IncorporatedWorkers::const_iterator sidx = incorporated_workers_.find(soldier_index);
-
-	if (sidx != incorporated_workers_.end()) {
-		const WorkerList& soldiers = sidx->second;
-
-		for (Worker* temp_soldier : soldiers) {
-			rv.push_back(static_cast<Soldier*>(temp_soldier));
-		}
-	}
-
-	return rv;
-}
-int Warehouse::incorporate_soldier(EditorGameBase& egbase, Soldier& soldier) {
-	incorporate_worker(egbase, &soldier);
-	return 0;
-}
-
-int Warehouse::outcorporate_soldier(EditorGameBase& /* egbase */, Soldier& soldier) {
-
-	DescriptionIndex const soldier_index = owner().tribe().soldier();
-	if (incorporated_workers_.count(soldier_index)) {
-		WorkerList& soldiers = incorporated_workers_[soldier_index];
-
-		WorkerList::iterator i = std::find(soldiers.begin(), soldiers.end(), &soldier);
-
-		soldiers.erase(i);
-		supply_->remove_workers(soldier_index, 1);
-	}
-#ifndef NDEBUG
-	else
-		throw wexception("outcorporate_soldier: soldier not in this warehouse!");
-#endif
-
-	return 0;
 }
 
 void Warehouse::log_general_info(const EditorGameBase& egbase) {

@@ -29,9 +29,11 @@ template <> bool MapFringeRegion<Area<FCoords>>::advance(const Map& map) {
 		if (area_.radius) {
 			remaining_in_phase_ = area_.radius;
 			phase_ = 6;
-		} else
+			// Fallthrough
+		} else {
 			return false;
-	/* no break */
+		}
+		FALLS_THROUGH;
 	case 1:
 		map.get_trn(area_, &area_);
 		break;
@@ -53,6 +55,7 @@ template <> bool MapFringeRegion<Area<FCoords>>::advance(const Map& map) {
 	default:
 		NEVER_HERE();
 	}
+
 	if (--remaining_in_phase_ == 0) {
 		remaining_in_phase_ = area_.radius;
 		--phase_;
@@ -66,9 +69,11 @@ template <> bool MapFringeRegion<Area<>>::advance(const Map& map) {
 		if (area_.radius) {
 			remaining_in_phase_ = area_.radius;
 			phase_ = 6;
-		} else
+			// Fallthrough
+		} else {
 			return false;
-	/* no break */
+		}
+		FALLS_THROUGH;
 	case 1:
 		map.get_trn(area_, &area_);
 		break;
@@ -90,6 +95,7 @@ template <> bool MapFringeRegion<Area<>>::advance(const Map& map) {
 	default:
 		NEVER_HERE();
 	}
+
 	if (--remaining_in_phase_ == 0) {
 		remaining_in_phase_ = area_.radius;
 		--phase_;

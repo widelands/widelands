@@ -27,8 +27,8 @@
 #include "base/vector.h"
 #include "graphic/align.h"
 #include "graphic/color.h"
-#include "graphic/text_constants.h"
 #include "graphic/text/sdl_ttf_font.h"
+#include "graphic/text_constants.h"
 
 class RenderTarget;
 

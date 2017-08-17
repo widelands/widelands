@@ -47,7 +47,7 @@ struct MapObjectDebugPanel : public UI::Panel, public Widelands::MapObject::LogS
 	MapObjectDebugPanel(UI::Panel& parent, const Widelands::EditorGameBase&, Widelands::MapObject&);
 	~MapObjectDebugPanel();
 
-	void log(std::string str) override;
+	void log(const std::string& str) override;
 
 private:
 	const Widelands::EditorGameBase& egbase_;
@@ -85,7 +85,7 @@ MapObjectDebugPanel::~MapObjectDebugPanel() {
 Append the string to the log textarea.
 ===============
 */
-void MapObjectDebugPanel::log(std::string str) {
+void MapObjectDebugPanel::log(const std::string& str) {
 	log_.set_text((log_.get_text() + str).c_str());
 }
 
@@ -139,7 +139,7 @@ MapObjectDebugWindow::MapObjectDebugWindow(InteractiveBase& parent, Widelands::M
    : UI::Window(&parent, "map_object_debug", 0, 0, 100, 100, ""),
      log_general_info_(true),
      object_(&obj),
-     tabs_(this, 0, 0, g_gr->images().get("images/ui_basic/but4.png")) {
+     tabs_(this, g_gr->images().get("images/ui_basic/but4.png")) {
 	serial_ = obj.serial();
 	set_title(std::to_string(serial_));
 

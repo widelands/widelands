@@ -1,16 +1,16 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2016 Widelands Development Team
+# Copyright (C) 2005-2017 Widelands Development Team
 # 
 # Translators:
 # GunChleoc, 2015-2016
-# zecas <jjorge@free.fr>, 2016
+# zecas <jjorge@free.fr>, 2016-2017
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-11-30 12:41+0000\n"
-"PO-Revision-Date: 2016-11-30 12:43+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2017-06-16 07:17+0000\n"
+"PO-Revision-Date: 2017-06-19 09:53+0000\n"
+"Last-Translator: zecas <jjorge@free.fr>\n"
 "Language-Team: Portuguese (http://www.transifex.com/widelands/widelands/language/pt/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -20,7 +20,7 @@ msgstr ""
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:18
 msgid "Your Economy and its Settings"
-msgstr ""
+msgstr "A sua Economia e a sua Configuração"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:20
 msgid "Economy"
@@ -37,23 +37,23 @@ msgid ""
 "Building your economy up and making it work well and grow is the main part "
 "of Widelands. But you can’t control the workers directly – they will follow "
 "the general conditions you set."
-msgstr ""
+msgstr "Construir a sua economia e a equilibrar e o coração do Widelands. Mas não pode controlar individualmente os trabalhadores - eles seguem os pedidos gerais que você define."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:23
 msgid ""
 "This is what I’ll show you in this tutorial: what actions can you take to "
 "define those general conditions?"
-msgstr ""
+msgstr "É isto que vou mostrar-lhe neste tutorial : quais ações tem à sua disposição para definir as condições gerais?"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:31
 msgid "A Peaceful Land"
-msgstr ""
+msgstr "Uma Terra em Paz"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:33
 msgid ""
 "Now about the map: you have settled in a nice valley between two mountains, "
 "rich in marble, iron ore and coal. All were hoping for a peaceful life."
-msgstr ""
+msgstr "Agora acerca do mapa : instalou num lindo vale entre duas serras, ricas em mármore, minério de ferro e carvão. Todos esperam viver em paz."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:34
 msgid ""
@@ -841,7 +841,7 @@ msgstr ""
 msgid "“%s”"
 msgstr "«&nbsp;%s&nbsp»"
 
-#: ../../data/scripting/format_scenario.lua:96
+#: ../../data/scripting/format_scenario.lua:84
 msgid "New Objective"
 msgid_plural "New Objectives"
 msgstr[0] "Novo objetivo"

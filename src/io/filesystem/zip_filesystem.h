@@ -72,7 +72,7 @@ private:
 	// through 'make_sub_file_system'.
 	class ZipFile {
 	public:
-		ZipFile(const std::string& zipfile);
+		explicit ZipFile(const std::string& zipfile);
 
 		// Calls 'close()'.
 		~ZipFile();

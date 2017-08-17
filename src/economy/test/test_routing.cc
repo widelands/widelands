@@ -22,6 +22,7 @@
 #include <boost/bind.hpp>
 #include <boost/test/unit_test.hpp>
 
+#include "base/macros.h"
 #include "economy/flag.h"
 #include "economy/iroute.h"
 #include "economy/itransport_cost_calculator.h"
@@ -29,6 +30,9 @@
 #include "economy/routing_node.h"
 #include "logic/map_objects/tribes/wareworker.h"
 #include "logic/widelands_geometry.h"
+
+// Triggered by BOOST_AUTO_TEST_CASE
+CLANG_DIAG_OFF("-Wdisabled-macro-expansion")
 
 using namespace Widelands;
 

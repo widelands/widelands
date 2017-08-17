@@ -43,7 +43,7 @@ void release_textdomain();
 /// released when the object goes out of scope. This is exception-safe, unlike
 /// calling grab_textdomain and release_textdomain directly.
 struct Textdomain {
-	Textdomain(const std::string& name) {
+	explicit Textdomain(const std::string& name) {
 		grab_textdomain(name);
 	}
 	~Textdomain() {
@@ -52,10 +52,10 @@ struct Textdomain {
 };
 
 void init_locale();
-void set_locale(std::string);
+void set_locale(const std::string&);
 const std::string& get_locale();
 
-void set_localedir(std::string);
+void set_localedir(const std::string&);
 const std::string& get_localedir();
 
 // Localize a list of 'items'. The last 2 items are concatenated with "and" or

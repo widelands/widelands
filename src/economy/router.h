@@ -38,7 +38,7 @@ struct RoutingNode;
 struct Router {
 	using ResetCycleFn = boost::function<void()>;
 
-	Router(const ResetCycleFn& reset);
+	explicit Router(const ResetCycleFn& reset);
 
 	bool find_route(RoutingNode& start,
 	                RoutingNode& end,
