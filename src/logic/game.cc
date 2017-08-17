@@ -125,7 +125,8 @@ Game::Game()
      state_(gs_notrunning),
      cmdqueue_(*this),
      /** TRANSLATORS: Win condition for this game has not been set. */
-     win_condition_displayname_(_("Not set")) {
+     win_condition_displayname_(_("Not set")),
+     replay_(false) {
 }
 
 Game::~Game() {
@@ -134,7 +135,7 @@ Game::~Game() {
 void Game::sync_reset() {
 	syncwrapper_.counter_ = 0;
 
-	synchash_.Reset();
+	synchash_.reset();
 	log("[sync] Reset\n");
 }
 
@@ -666,7 +667,7 @@ void Game::send_player_start_stop_building(Building& building) {
 }
 
 void Game::send_player_militarysite_set_soldier_preference(Building& building,
-                                                           uint8_t my_preference) {
+                                                           SoldierPreference my_preference) {
 	send_player_command(*new CmdMilitarySiteSetSoldierPreference(
 	   get_gametime(), building.owner().player_number(), building, my_preference));
 }

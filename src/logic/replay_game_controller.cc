@@ -72,7 +72,7 @@ int32_t ReplayGameController::get_frametime() {
 }
 
 GameController::GameType ReplayGameController::get_game_type() {
-	return GameController::GameType::REPLAY;
+	return GameController::GameType::kReplay;
 }
 
 uint32_t ReplayGameController::real_speed() {

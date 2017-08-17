@@ -216,11 +216,7 @@ MapObjectDescr IMPLEMENTATION
 MapObjectDescr::MapObjectDescr(const MapObjectType init_type,
                                const std::string& init_name,
                                const std::string& init_descname)
-   : type_(init_type),
-     name_(init_name),
-     descname_(init_descname),
-     representative_image_filename_(""),
-     icon_filename_("") {
+   : type_(init_type), name_(init_name), descname_(init_descname) {
 }
 MapObjectDescr::MapObjectDescr(const MapObjectType init_type,
                                const std::string& init_name,
@@ -564,7 +560,7 @@ void MapObject::Loader::load(FileRead& fr) {
 			throw wexception("header is %u, expected %u", header, HeaderMapObject);
 
 		uint8_t const packet_version = fr.unsigned_8();
-		if (packet_version <= 0 || packet_version > kCurrentPacketVersionMapObject) {
+		if (packet_version < 1 || packet_version > kCurrentPacketVersionMapObject) {
 			throw UnhandledVersionError("MapObject", packet_version, kCurrentPacketVersionMapObject);
 		}
 
