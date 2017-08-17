@@ -491,7 +491,7 @@ void BuildingWindow::create_input_queue_panel(UI::Box* const box,
  * for the corresponding button.
  */
 void BuildingWindow::clicked_goto() {
-	igbase()->scroll_to_field(building().get_position(), MapView::Transition::Smooth);
+	igbase()->map_view()->scroll_to_field(building().get_position(), MapView::Transition::Smooth);
 }
 
 void BuildingWindow::update_expedition_button(bool expedition_was_canceled) {
