@@ -30,7 +30,8 @@ using BillOfMaterials = std::vector<WareAmount>;
 
 // range structure for iterating ware range with index
 struct WareRange {
-	WareRange(const BillOfMaterials& range) : i(0), current(range.begin()), end(range.end()) {
+	explicit WareRange(const BillOfMaterials& range)
+	   : i(0), current(range.begin()), end(range.end()) {
 	}
 	WareRange& operator++() {
 		++i;

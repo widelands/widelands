@@ -100,7 +100,7 @@ EditorToolChangeResourcesOptionsMenu::EditorToolChangeResourcesOptionsMenu(
 
 	for (Widelands::DescriptionIndex i = 0; i < nr_resources; ++i) {
 		const Widelands::ResourceDescription& resource = *world.get_resource(i);
-		radiogroup_.add_button(&resources_box_, Vector2i(0, 0),
+		radiogroup_.add_button(&resources_box_, Vector2i::zero(),
 		                       g_gr->images().get(resource.representative_image()),
 		                       resource.descname());
 		resources_box_.add(radiogroup_.get_first_button(), UI::Box::Resizing::kFillSpace);
@@ -156,10 +156,9 @@ void EditorToolChangeResourcesOptionsMenu::change_resource() {
 	Widelands::EditorGameBase& egbase = eia().egbase();
 	Widelands::Map& map = egbase.map();
 	eia().mutable_field_overlay_manager()->register_overlay_callback_function(
-	   [resource_index, &map,
-	    &egbase](const Widelands::TCoords<Widelands::FCoords>& coords) -> uint32_t {
-		   if (map.is_resource_valid(egbase.world(), coords, resource_index)) {
-			   return coords.field->nodecaps();
+	   [resource_index, &map, &egbase](const Widelands::FCoords& fc) -> uint32_t {
+		   if (map.is_resource_valid(egbase.world(), fc, resource_index)) {
+			   return fc.field->nodecaps();
 		   }
 		   return 0;
 		});

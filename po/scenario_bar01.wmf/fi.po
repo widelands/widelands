@@ -1,19 +1,19 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2016 Widelands Development Team
+# Copyright (C) 2005-2017 Widelands Development Team
 # 
 # Translators:
 # GunChleoc, 2016
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
 # GunChleoc, 2014
 # GunChleoc, 2014
-# Jukka Pakarinen, 2016
+# Jukka Pakarinen, 2016-2017
 # Teppo Mäenpää <teppo@runbox.com>, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-12-18 17:02+0000\n"
-"PO-Revision-Date: 2016-12-26 17:07+0000\n"
+"POT-Creation-Date: 2017-05-19 07:45+0000\n"
+"PO-Revision-Date: 2017-05-21 05:56+0000\n"
 "Last-Translator: Jukka Pakarinen\n"
 "Language-Team: Finnish (http://www.transifex.com/widelands/widelands/language/fi/)\n"
 "MIME-Version: 1.0\n"
@@ -1037,8 +1037,8 @@ msgstr "He kuitenkin pelkäävät sodan Al’thunranin ympärillä tuhoavan heid
 msgid "“%s”"
 msgstr "\"%s\""
 
-#: ../../data/scripting/format_scenario.lua:96
+#: ../../data/scripting/format_scenario.lua:84
 msgid "New Objective"
 msgid_plural "New Objectives"
-msgstr[0] "Uusi tavoite"
-msgstr[1] "Uudet tavoitteet"
+msgstr[0] "Uusi Tavoite"
+msgstr[1] "Uudet Tavoitteet"

@@ -10,9 +10,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-04-13 13:07+0000\n"
-"PO-Revision-Date: 2017-03-30 15:30+0000\n"
-"Last-Translator: Joe Hansen <joedalton2@yahoo.dk>\n"
+"POT-Creation-Date: 2017-07-04 08:57+0000\n"
+"PO-Revision-Date: 2017-07-04 09:00+0000\n"
+"Last-Translator: GunChleoc\n"
 "Language-Team: Danish (http://www.transifex.com/widelands/widelands/language/da/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -719,8 +719,8 @@ msgstr "Denne mine udnytter alle ressourserne ned til det dybeste niveau. Allige
 #. TRANSLATORS: 'It' is a mine
 #: ../../data/tribes/buildings/productionsites/barbarians/granitemine/helptexts.lua:21
 msgctxt "barbarians_building"
-msgid "It cannot be upgraded."
-msgstr "Den kan ikke opgraderes."
+msgid "It cannot be enhanced."
+msgstr ""
 
 #. TRANSLATORS: Performance helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/granitemine/helptexts.lua:26
@@ -1069,8 +1069,8 @@ msgstr "Fremstiller alle de økserne som barbarerne bruger i krig."
 msgctxt "barbarians_building"
 msgid ""
 "The Barbarian war mill is their most advanced production site for weapons. "
-"As such it needs to be upgraded from an ax workshop."
-msgstr "Barbarernes våbenmølle er deres mest avancerede våbenproduktionsenhed. Som sådan kræver den en opgradering fra et økseværksted."
+"As such you will need to enhance an ax workshop in order to get one."
+msgstr ""
 
 #: ../../data/tribes/buildings/productionsites/barbarians/warmill/helptexts.lua:29
 msgctxt "barbarians_building"
@@ -3518,7 +3518,7 @@ msgid "Wool is the hair of sheep. Weaving mills use it to make cloth."
 msgstr "Uld er håret fra får. Væverier bruger det til at fremstille klæde."
 
 #. TRANSLATORS: Helptext for a worker: Armorsmith
-#: ../../data/tribes/workers/atlanteans/armorsmith/helptexts.lua:3
+#: ../../data/tribes/workers/atlanteans/armorsmith/helptexts.lua:5
 msgctxt "atlanteans_worker"
 msgid "Produces armor for the soldiers."
 msgstr "Fremstil rustninger for soldaterne."

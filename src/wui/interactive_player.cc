@@ -184,7 +184,7 @@ Widelands::PlayerNumber InteractivePlayer::player_number() const {
 	return player_number_;
 }
 
-int32_t InteractivePlayer::calculate_buildcaps(const Widelands::TCoords<Widelands::FCoords>& c) {
+int32_t InteractivePlayer::calculate_buildcaps(const Widelands::FCoords& c) {
 	assert(get_player());
 	return get_player()->get_buildcaps(c);
 }
@@ -272,7 +272,7 @@ bool InteractivePlayer::handle_key(bool const down, SDL_Keysym const code) {
 		case SDLK_KP_7:
 			if (code.mod & KMOD_NUM)
 				break;
-		/* no break */
+			FALLS_THROUGH;
 		case SDLK_HOME:
 			scroll_to_field(game().map().get_starting_pos(player_number_), Transition::Smooth);
 			return true;

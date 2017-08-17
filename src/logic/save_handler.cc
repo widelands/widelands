@@ -32,9 +32,9 @@
 #include "base/wexception.h"
 #include "game_io/game_saver.h"
 #include "io/filesystem/filesystem.h"
+#include "logic/constants.h"
 #include "logic/game.h"
 #include "logic/game_controller.h"
-#include "wlapplication.h"
 #include "wui/interactive_base.h"
 
 // The actual work of saving is done by the GameSaver
@@ -46,10 +46,9 @@ SaveHandler::SaveHandler()
      allow_saving_(true),
      save_requested_(false),
      saving_next_tick_(false),
-     save_filename_(""),
      autosave_filename_("wl_autosave"),
      fs_type_(FileSystem::ZIP),
-     autosave_interval_in_ms_(DEFAULT_AUTOSAVE_INTERVAL * 60 * 1000),
+     autosave_interval_in_ms_(kDefaultAutosaveInterval * 60 * 1000),
      number_of_rolls_(5) {
 }
 
@@ -179,7 +178,6 @@ void SaveHandler::think(Widelands::Game& game) {
 			g_fs->fs_rename(complete_filename, backup_filename);
 		}
 
-		std::string error;
 		if (!save_and_handle_error(game, complete_filename, backup_filename)) {
 			return;
 		}
@@ -204,7 +202,7 @@ void SaveHandler::initialize(uint32_t realtime) {
 
 	fs_type_ = global.get_bool("nozip", false) ? FileSystem::DIR : FileSystem::ZIP;
 
-	autosave_interval_in_ms_ = global.get_int("autosave", DEFAULT_AUTOSAVE_INTERVAL * 60) * 1000;
+	autosave_interval_in_ms_ = global.get_int("autosave", kDefaultAutosaveInterval * 60) * 1000;
 
 	next_save_realtime_ = realtime + autosave_interval_in_ms_;
 

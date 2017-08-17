@@ -65,7 +65,8 @@ static char const* falseWords[FALSE_WORDS] = {
 
 Profile g_options(Profile::err_log);
 
-Section::Value::Value(const string& nname, const char* const nval) : used_(false), name_(nname) {
+Section::Value::Value(const std::string& nname, const char* const nval)
+   : used_(false), name_(nname) {
 	set_string(nval);
 }
 
@@ -441,6 +442,10 @@ char const* Section::get_next_bool(char const* const name, bool* const value) {
  */
 void Section::set_int(char const* const name, int32_t const value) {
 	set_string(name, std::to_string(value));
+}
+
+void Section::set_natural(char const* const name, uint32_t const value) {
+	set_string(name, std::to_string(static_cast<int64_t>(value)));
 }
 
 void Section::set_string(char const* const name, char const* string) {

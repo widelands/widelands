@@ -20,17 +20,14 @@
 #ifndef WL_NETWORK_INTERNET_GAMING_H
 #define WL_NETWORK_INTERNET_GAMING_H
 
+#include <memory>
 #include <string>
 #include <vector>
-
-#ifdef _WIN32
-#include <io.h>
-#include <winsock2.h>
-#endif
 
 #include "build_info.h"
 #include "chat/chat.h"
 #include "network/internet_gaming_protocol.h"
+#include "network/netclient.h"
 #include "network/network.h"
 #include "network/network_lan_promotion.h"
 
@@ -85,7 +82,15 @@ struct InternetGaming : public ChatProvider {
 	void handle_metaserver_communication();
 
 	// Game specific functions
-	const std::string& ip();
+	/**
+	 * Returns a pair containing up to two NetAddress'es of the game host to connect to.
+	 * Contains two addresses when the host supports IPv4 and IPv6, one address when the host
+	 * only supports one of the protocols, no addresses when no join-request was sent to
+	 * the metaserver. "No address" means a default constructed address.
+	 * Use NetAddress::is_valid() to check whether a NetAddress has been default constructed.
+	 * @return The addresses.
+	 */
+	const std::pair<NetAddress, NetAddress>& ips();
 	void join_game(const std::string& gamename);
 	void open_game();
 	void set_game_playing();
@@ -149,6 +154,20 @@ struct InternetGaming : public ChatProvider {
 private:
 	InternetGaming();
 
+	/**
+	 * Temporarily creates a second connection to the metaserver.
+	 * If the primary connection is an IPv6 connection, we also try
+	 * an IPv4 connection to tell the metaserver our IP.
+	 * This way, when we host a game later on, the metaserver
+	 * knows how to reach us for both protocol versions.
+	 * The established connection does a login, then the connection is
+	 * immediately closed.
+	 *
+	 * If the primary connection already is IPv4, this method does nothing.
+	 * Since we first try to connect with IPv6, another try is futile.
+	 */
+	void create_second_connection();
+
 	void handle_packet(RecvPacket& packet);
 	void handle_failed_read();
 
@@ -156,16 +175,13 @@ private:
 	bool str2bool(std::string);
 	std::string bool2str(bool);
 
-	void format_and_add_chat(std::string from, std::string to, bool system, std::string msg);
+	void format_and_add_chat(const std::string& from,
+	                         const std::string& to,
+	                         bool system,
+	                         const std::string& msg);
 
-	/// The socket that connects us to the host
-	TCPsocket sock_;
-
-	/// Socket set used for selection
-	SDLNet_SocketSet sockset_;
-
-	/// Deserializer acts as a buffer for packets (reassembly/splitting up)
-	Deserializer deserializer_;
+	/// The connection to the metaserver
+	std::unique_ptr<NetClient> net;
 
 	/// Current state of this class
 	enum { OFFLINE, CONNECTING, LOBBY, IN_GAME, COMMUNICATION_ERROR } state_;
@@ -174,7 +190,7 @@ private:
 	std::string pwd_;
 	bool reg_;
 	std::string meta_;
-	uint32_t port_;
+	uint16_t port_;
 
 	/// local clients name and rights
 	std::string clientname_;
@@ -182,7 +198,9 @@ private:
 
 	/// information of the clients game
 	std::string gamename_;
-	std::string gameip_;
+	/// The IPv4/v6 addresses of the game host we are / will be connected to.
+	/// See InternetGaming::ips().
+	std::pair<NetAddress, NetAddress> gameips_;
 
 	/// Metaserver information
 	bool clientupdateonmetaserver_;

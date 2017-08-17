@@ -1,8 +1,8 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2016 Widelands Development Team
+# Copyright (C) 2005-2017 Widelands Development Team
 # 
 # Translators:
-# Elisabeth Jäger, 2016
+# Elisabeth Jäger, 2016-2017
 # wl-zocker, 2014
 # millimarg, 2015
 # Mirian Margiani <mirian.margiani@gmail.com>, 2014
@@ -14,9 +14,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-12-15 15:23+0000\n"
-"PO-Revision-Date: 2016-12-15 20:26+0000\n"
-"Last-Translator: Elisabeth Jäger\n"
+"POT-Creation-Date: 2017-05-26 17:01+0000\n"
+"PO-Revision-Date: 2017-05-30 20:27+0000\n"
+"Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>\n"
 "Language-Team: German (http://www.transifex.com/widelands/widelands/language/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -25,7 +25,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: ../../data/campaigns/atl01.wmf/elemental:9
-#: ../../data/campaigns/campaigns.conf:95
+#: ../../data/campaigns/campaigns.conf:100
 msgid "From Nemesis to Genesis"
 msgstr "Von Untergang zum Neuanfang"
 
@@ -144,7 +144,11 @@ msgid "An Outpost for Exile"
 msgstr "Ein Außenposten fürs Exil"
 
 #: ../../data/campaigns/campaigns.conf:88
-#: ../../data/campaigns/campaigns.conf:100
+msgid "Neptune’s Revenge"
+msgstr "Neptuns Rache"
+
+#: ../../data/campaigns/campaigns.conf:93
+#: ../../data/campaigns/campaigns.conf:105
 #: ../../data/campaigns/dummy.wmf/elemental:7
 msgid "Not yet implemented"
 msgstr "Noch nicht fertiggestellt"
@@ -173,6 +177,12 @@ msgid ""
 "land on a green, Mediterranean island, looking like paradise. Overjoyed, "
 "they set out to explore this new living space."
 msgstr "Endlich war das Schiff repariert, sodass Lutius und seine Leute sich wieder der Aufgabe zuwandten, einen Ort für den Neuanfang zu finden. Nur einige Tage später landen sie an einer grünen, mediterranen Insel – anzusehen wie das Paradies. Heilfroh begannen sie die Erkundung des neu entdeckten Landes."
+
+#: ../../data/campaigns/emp03.wmf/elemental:10
+msgid ""
+"On their way home to defend the Empire, the crew of Lutius was surprised by "
+"the will of the gods."
+msgstr "Als Lutius sich mit seinen Truppen endlich auf den Weg machen kann, in der Heimat das Imperium zu verteidigen, wird er von den Launen der Götter überrascht."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/elemental:8
 #: ../../data/campaigns/tutorials.conf:15

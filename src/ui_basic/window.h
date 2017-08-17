@@ -109,7 +109,7 @@ private:
 	void on_resolution_changed_note(const GraphicResolutionChanged& note);
 
 	bool is_minimal_;
-	uint32_t oldh_;  // if it is, this is the old height
+	uint32_t oldh_;  // if it is minimized, this is the old height
 	bool dragging_, docked_left_, docked_right_, docked_bottom_;
 	int32_t drag_start_win_x_, drag_start_win_y_;
 	int32_t drag_start_mouse_x_, drag_start_mouse_y_;

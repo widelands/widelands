@@ -54,14 +54,11 @@ struct Coords {
 
 	bool operator==(const Coords& other) const;
 	bool operator!=(const Coords& other) const;
-	operator bool() const;
+	bool operator<(const Coords& other) const {
+		return std::forward_as_tuple(y, x) < std::forward_as_tuple(other.y, other.x);
+	}
 
-	// Ordering functor for use with std:: containers.
-	struct OrderingFunctor {
-		bool operator()(const Coords& a, const Coords& b) const {
-			return std::forward_as_tuple(a.y, a.x) < std::forward_as_tuple(b.y, b.x);
-		}
-	};
+	operator bool() const;
 
 	// Move the coords to the 'new_origin'.
 	void reorigin(Coords new_origin, const Extent& extent);

@@ -28,7 +28,10 @@
 template <typename T> struct Vector2 {
 	Vector2(const T& px, const T& py) : x(px), y(py) {
 	}
-	Vector2() : Vector2(T(0), T(0)) {
+	Vector2() = delete;
+
+	static Vector2 zero() {
+		return Vector2(T(0), T(0));
 	}
 
 	// Returns an invalid point.

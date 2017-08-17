@@ -126,8 +126,8 @@ void InteractiveGameBase::draw_overlay(RenderTarget& dst) {
 		}
 
 		if (!game_speed.empty()) {
-			dst.blit(Vector2f(get_w() - 5, 5), UI::g_fh1->render(game_speed), BlendMode::UseAlpha,
-			         UI::Align::kRight);
+			std::shared_ptr<const UI::RenderedText> rendered_text = UI::g_fh1->render(game_speed);
+			rendered_text->draw(dst, Vector2i(get_w() - 5, 5), UI::Align::kRight);
 		}
 	}
 }

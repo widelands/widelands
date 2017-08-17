@@ -31,7 +31,7 @@ class GameFactory;
 
 class LuaEditorInterface : public LuaInterface {
 public:
-	LuaEditorInterface(Widelands::EditorGameBase* g);
+	explicit LuaEditorInterface(Widelands::EditorGameBase* g);
 	virtual ~LuaEditorInterface();
 
 	std::unique_ptr<LuaTable> run_script(const std::string& script) override;
@@ -42,7 +42,7 @@ private:
 
 class LuaGameInterface : public LuaInterface {
 public:
-	LuaGameInterface(Widelands::Game* g);
+	explicit LuaGameInterface(Widelands::Game* g);
 	virtual ~LuaGameInterface();
 
 	// Returns a given hook if one is defined, otherwise returns 0

@@ -1,19 +1,19 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2016 Widelands Development Team
+# Copyright (C) 2005-2017 Widelands Development Team
 # 
 # Translators:
 # GunChleoc, 2015-2016
 # GunChleoc, 2016
 # GunChleoc, 2014-2016
 # GunChleoc, 2014
-# zecas <jjorge@free.fr>, 2016
+# zecas <jjorge@free.fr>, 2016-2017
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-12-15 15:23+0000\n"
-"PO-Revision-Date: 2016-12-15 15:32+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2017-06-16 07:17+0000\n"
+"PO-Revision-Date: 2017-06-19 10:05+0000\n"
+"Last-Translator: zecas <jjorge@free.fr>\n"
 "Language-Team: Portuguese (http://www.transifex.com/widelands/widelands/language/pt/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -22,7 +22,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: ../../data/campaigns/atl01.wmf/elemental:9
-#: ../../data/campaigns/campaigns.conf:95
+#: ../../data/campaigns/campaigns.conf:100
 msgid "From Nemesis to Genesis"
 msgstr "Da Nemésis ao Génesis"
 
@@ -141,7 +141,11 @@ msgid "An Outpost for Exile"
 msgstr "Um posto avançado para o exílio"
 
 #: ../../data/campaigns/campaigns.conf:88
-#: ../../data/campaigns/campaigns.conf:100
+msgid "Neptune’s Revenge"
+msgstr "A Vingança do Netuno"
+
+#: ../../data/campaigns/campaigns.conf:93
+#: ../../data/campaigns/campaigns.conf:105
 #: ../../data/campaigns/dummy.wmf/elemental:7
 msgid "Not yet implemented"
 msgstr "Ainda não implementado"
@@ -170,6 +174,12 @@ msgid ""
 "land on a green, Mediterranean island, looking like paradise. Overjoyed, "
 "they set out to explore this new living space."
 msgstr "Finalmente o navio fora reparado! Lutius e o seu povo pode novamente lançar-se na missão de encontrar um bom lugar para recomeçar. Uns dias depois desembarcaram numa ilha verde com clima mediterrâneo, um autêntico paraíso. Não cabendo em si de contentes, trataram de começar logo a explorar a sua nova terra."
+
+#: ../../data/campaigns/emp03.wmf/elemental:10
+msgid ""
+"On their way home to defend the Empire, the crew of Lutius was surprised by "
+"the will of the gods."
+msgstr "A caminho do regresso para defender o Império, a equipagem do Lutius foi surpreendida pelos deuses."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/elemental:8
 #: ../../data/campaigns/tutorials.conf:15
@@ -254,7 +264,7 @@ msgid ""
 "It’s a pleasure to settle in the beauty of this fissured countryside. But "
 "the ways to encompass these large territories are long and meandering, so it"
 " is easy to err into the land of the foreign clans."
-msgstr ""
+msgstr "É um prazer admirar a beleza desta costa desempenhada. Mas os caminhos para atravessar estes grandes territórios são longos e labirínticos, é fácil errar na terra dos clãs rivais."
 
 #: ../../data/maps/Checkmate.wmf/elemental:8
 msgid "Checkmate"
@@ -291,7 +301,7 @@ msgid ""
 "player has plenty of good land, but must move far from his starting position"
 " to find ores. Blue player takes the middle ground – he has some fertile "
 "land and is not too far away from the resources."
-msgstr ""
+msgstr "O jogador vermelho está perto dos minérios, mas tem pouco terreno fértil. O amarelo tem boa terra, mas tem de ir longe para atingir minas. O jogador azul está no meio - tem algumas terras férteis e está pouco longe dos recursos."
 
 #: ../../data/maps/Crater.wmf/elemental:8
 msgid "Crater"
@@ -333,7 +343,7 @@ msgid ""
 "reasonable reconstruction of the area delimited by Cortina d’Ampezzo in the "
 "north-east and Canazei in the south-west. If you have to be pitted in a duel"
 " to the death against your enemies, it may as well be in a beautiful place."
-msgstr ""
+msgstr "A joia dos Alpes, os Dolomitos foram declarados Património da Humanidade por sua beleza. Este mapa é uma tentativa de reconstrução da zona delimitada por Cortina d’Ampezzo no noroeste e Canazei no sudeste. Si tiveres entalhado num duelo à morte  contra os teus inimigos, mais vale ser num sítio bonito."
 
 #: ../../data/maps/Dolomites_v2.wmf/elemental:11
 msgid ""
@@ -368,7 +378,7 @@ msgid ""
 "This is a somewhat technical map, and it is best suited for two or three "
 "human players. Coal is hard to find – consider making some. There is gold "
 "near the starting point – do you see it?"
-msgstr ""
+msgstr "Este mapa é bastante técnico, perfeito para dois ou três jogadores humanos. O carvão é escasso - pense nele. Há ouro perto do ponto de início - consegue vê-lo?"
 
 #: ../../data/maps/Finnish_Lakes.wmf/elemental:8
 msgid "Finnish Lakes"
@@ -384,7 +394,7 @@ msgstr "Estes são as bonitas terras finlandesas, repletas de lagos, rios, flore
 msgid ""
 "Yellow player has a much easier starting position than the other two; this "
 "map is suited for 1v2."
-msgstr ""
+msgstr "O jogador amarelo tem uma bem melhor posição que os dois outros ; é um bom mapa para 1 contra 2."
 
 #: ../../data/maps/Firegames.wmf/elemental:8
 msgid "Firegames"
@@ -416,7 +426,7 @@ msgstr "Quatro montanhas"
 msgid ""
 "Each tribe is surrounded by four mighty mountains. Who will first conquer "
 "them and claim the resources for his own tribe?"
-msgstr ""
+msgstr "Cada tribo está cercada por quatro estranhas serras. Quem vai conquistá-las primeiro e obter os recursos para o seu povo?"
 
 #: ../../data/maps/Four_Mountains.wmf/elemental:11
 msgid ""

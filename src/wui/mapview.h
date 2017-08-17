@@ -71,6 +71,11 @@ public:
 	};
 
 	struct View {
+		View(Vector2f init_viewpoint, float init_zoom) : viewpoint(init_viewpoint), zoom(init_zoom) {
+		}
+		View() : View(Vector2f::zero(), 1.0f) {
+		}
+
 		// Mappixel of top-left pixel of this MapView.
 		Vector2f viewpoint;
 
@@ -87,8 +92,12 @@ public:
 	};
 
 	struct TimestampedMouse {
+		TimestampedMouse(uint32_t init_t, Vector2f init_pixel) : t(init_t), pixel(init_pixel) {
+		}
+		TimestampedMouse() : t(0), pixel(Vector2f::zero()) {
+		}
 		uint32_t t;
-		Vector2f pixel;
+		Vector2f pixel = Vector2f::zero();
 	};
 
 	MapView(UI::Panel* const parent,

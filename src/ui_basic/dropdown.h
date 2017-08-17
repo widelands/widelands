@@ -220,6 +220,7 @@ public:
 
 	/// \return the selected element
 	const Entry& get_selected() const {
+		assert(BaseDropdown::has_selection());
 		return *entry_cache_[BaseDropdown::get_selected()];
 	}
 

@@ -132,24 +132,19 @@ end
 --    :arg opts:  a table with prefill information (wares, soldiers, workers,
 --       see :func:`prefilled_buildings`) and the following options:
 --
---       req_suitability
---          The reguired suitability for this building. Default value is 1.
 --    :type opts: :class:`table`
 --
 --    :returns: the building created
-function place_building_in_region(
-   plr, building, fields, gargs
-)
+function place_building_in_region(plr, building, fields, gargs)
    local idx
    local f
    local args = gargs or {}
-   local req_suitability = args.req_suitability or 1
 
    while #fields > 0 do
       local idx = math.random(#fields)
       local f = fields[idx]
 
-      if plr:get_suitability(building, f) >= req_suitability then
+      if plr:get_suitability(building, f) then
          args[1] = building
          args[2] = f.x
          args[3] = f.y

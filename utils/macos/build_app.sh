@@ -109,7 +109,6 @@ function BuildWidelands() {
    export SDL2IMAGEDIR="$(brew --prefix sdl2_image)"
    export SDL2MIXERDIR="$(brew --prefix sdl2_mixer)"
    export SDL2TTFDIR="$(brew --prefix sdl2_ttf)"
-   export SDL2NETDIR="$(brew --prefix sdl2_net)"
    export BOOST_ROOT="$(brew --prefix boost)"
    export ICU_ROOT="$(brew --prefix icu4c)"
 

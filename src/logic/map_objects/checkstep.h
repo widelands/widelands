@@ -183,11 +183,10 @@ struct CheckStepLimited {
 	bool reachable_dest(Map&, FCoords dest) const;
 
 private:
-	// It is OK to use Coords::OrderingFunctor because the ordering of the set
-	// does not matter, as long as it is system independent (for parallel
-	// simulation).
+	// The ordering of the set does not matter, as long as it is system
+	// independent (for parallel simulation).
 	// The only thing that matters is whether a location is in the set.
-	std::set<Coords, Coords::OrderingFunctor> allowed_locations_;
+	std::set<Coords> allowed_locations_;
 };
 }
 

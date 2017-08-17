@@ -26,7 +26,6 @@
 #include "graphic/font_handler1.h"
 #include "graphic/text/font_set.h"
 #include "graphic/text_constants.h"
-#include "logic/map_objects/attackable.h"
 #include "logic/map_objects/bob.h"
 #include "logic/map_objects/tribes/soldier.h"
 #include "logic/player.h"

@@ -4,15 +4,15 @@
 # Translators:
 # GunChleoc, 2016
 # Gabriel Rota <gabriel.rota@gmail.com>, 2009
-# Guybrush88 <erpizzo@alice.it>, 2015-2016
+# Guybrush88 <erpizzo@alice.it>, 2015-2017
 # Luigi Lain <lainluigi86@tiscali.it>, 2015-2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-01-21 14:22+0000\n"
-"PO-Revision-Date: 2017-01-21 14:26+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2017-05-12 13:53+0000\n"
+"PO-Revision-Date: 2017-05-15 15:28+0000\n"
+"Last-Translator: Guybrush88 <erpizzo@alice.it>\n"
 "Language-Team: Italian (http://www.transifex.com/widelands/widelands/language/it/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -20,67 +20,67 @@ msgstr ""
 "Language: it\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: ../../data/world/critters/badger/init.lua:14
+#: ../../data/world/critters/badger/init.lua:15
 msgid "Badger"
 msgstr "Tasso"
 
-#: ../../data/world/critters/brownbear/init.lua:14
+#: ../../data/world/critters/brownbear/init.lua:15
 msgid "Brown bear"
 msgstr "Orso bruno"
 
-#: ../../data/world/critters/bunny/init.lua:13
+#: ../../data/world/critters/bunny/init.lua:14
 msgid "Bunny"
 msgstr "Coniglio"
 
-#: ../../data/world/critters/chamois/init.lua:14
+#: ../../data/world/critters/chamois/init.lua:15
 msgid "Chamois"
 msgstr "Camoscio"
 
-#: ../../data/world/critters/deer/init.lua:14
+#: ../../data/world/critters/deer/init.lua:15
 msgid "Deer"
 msgstr "Cervo"
 
-#: ../../data/world/critters/duck/init.lua:18
+#: ../../data/world/critters/duck/init.lua:19
 msgid "Duck"
 msgstr "Anatra"
 
-#: ../../data/world/critters/elk/init.lua:19
+#: ../../data/world/critters/elk/init.lua:20
 msgid "Elk"
 msgstr "Alce"
 
-#: ../../data/world/critters/fox/init.lua:19
+#: ../../data/world/critters/fox/init.lua:20
 msgid "Fox"
 msgstr "Volpe"
 
-#: ../../data/world/critters/lynx/init.lua:14
+#: ../../data/world/critters/lynx/init.lua:16
 msgid "Lynx"
 msgstr "Lince"
 
-#: ../../data/world/critters/marten/init.lua:14
+#: ../../data/world/critters/marten/init.lua:15
 msgid "Marten"
 msgstr "Martora"
 
-#: ../../data/world/critters/reindeer/init.lua:14
+#: ../../data/world/critters/reindeer/init.lua:16
 msgid "Reindeer"
 msgstr "Renna"
 
-#: ../../data/world/critters/sheep/init.lua:18
+#: ../../data/world/critters/sheep/init.lua:19
 msgid "Sheep"
 msgstr "Pecora"
 
-#: ../../data/world/critters/stag/init.lua:19
+#: ../../data/world/critters/stag/init.lua:20
 msgid "Stag"
 msgstr "Cervo maschio"
 
-#: ../../data/world/critters/wildboar/init.lua:18
+#: ../../data/world/critters/wildboar/init.lua:19
 msgid "Wild boar"
 msgstr "Cinghiale selvatico"
 
-#: ../../data/world/critters/wisent/init.lua:14
+#: ../../data/world/critters/wisent/init.lua:15
 msgid "Wisent"
 msgstr "Bisonte"
 
-#: ../../data/world/critters/wolf/init.lua:19
+#: ../../data/world/critters/wolf/init.lua:20
 msgid "Wolf"
 msgstr "Lupo"
 
@@ -191,7 +191,7 @@ msgstr "Pietre 6"
 #: ../../data/world/immovables/ruin4/init.lua:5
 #: ../../data/world/immovables/ruin5/init.lua:5
 msgid "Tombstone"
-msgstr ""
+msgstr "Pietra tombale"
 
 #: ../../data/world/immovables/skeleton1/init.lua:5
 #: ../../data/world/immovables/skeleton3/init.lua:5
@@ -726,64 +726,64 @@ msgstr "Albero ad ombrello rosso (vecchio)"
 msgid "Red Umbrella Tree"
 msgstr "Albero ad ombrello rosso"
 
-#: ../../data/world/init.lua:11
+#: ../../data/world/init.lua:19
 msgid "Miscellaneous"
 msgstr "Varie"
 
-#: ../../data/world/init.lua:18
+#: ../../data/world/init.lua:26
 msgid "Artifacts"
-msgstr "Artefatto"
+msgstr "Artefatti"
 
-#: ../../data/world/init.lua:18
+#: ../../data/world/init.lua:26
 msgid "These immovables are used by the win condition “Artifacts”."
 msgstr "Questi oggetti inamovibili sono usati nella condizione di vittoria \"artefatti\""
 
-#: ../../data/world/init.lua:25
+#: ../../data/world/init.lua:33
 msgid "Plants"
 msgstr "Piante"
 
-#: ../../data/world/init.lua:32
+#: ../../data/world/init.lua:40
 msgid "Standing Stones"
 msgstr "Megaliti"
 
-#: ../../data/world/init.lua:39
+#: ../../data/world/init.lua:47
 msgid "Rocks"
 msgstr "Pietre"
 
-#: ../../data/world/init.lua:46
+#: ../../data/world/init.lua:54
 msgid "Dead Trees"
 msgstr "Alberi morti"
 
-#: ../../data/world/init.lua:53
+#: ../../data/world/init.lua:61
 msgid "Coniferous Trees"
 msgstr "Alberi coniferi"
 
-#: ../../data/world/init.lua:60
+#: ../../data/world/init.lua:68
 msgid "Deciduous Trees"
 msgstr "Alberi caduci"
 
-#: ../../data/world/init.lua:67
+#: ../../data/world/init.lua:75
 msgid "Palm Trees"
 msgstr "Palme"
 
-#: ../../data/world/init.lua:74
+#: ../../data/world/init.lua:82
 msgid "Wasteland Trees"
 msgstr "Alberi della terra incolta"
 
 #. TRANSLATORS: A category in the editor for placing animals on the map.
-#: ../../data/world/init.lua:82
-msgid "Herbivores"
-msgstr ""
-
-#. TRANSLATORS: A category in the editor for placing animals on the map.
 #: ../../data/world/init.lua:90
-msgid "Carnivores"
-msgstr ""
+msgid "Herbivores"
+msgstr "Erbivori"
 
 #. TRANSLATORS: A category in the editor for placing animals on the map.
 #: ../../data/world/init.lua:98
+msgid "Carnivores"
+msgstr "Carnivori"
+
+#. TRANSLATORS: A category in the editor for placing animals on the map.
+#: ../../data/world/init.lua:106
 msgid "Aquatic"
-msgstr ""
+msgstr "Acquatici"
 
 #: ../../data/world/resources/init.lua:7
 msgid "Coal"

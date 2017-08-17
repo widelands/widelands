@@ -133,7 +133,7 @@ void do_plan_map_transition(uint32_t start_time,
 		const Vector2f center_point = center_point_t.value(dt);
 		const Vector2f viewpoint = center_point - Vector2f(width * zoom / 2.f, height * zoom / 2.f);
 		plan->push_back(MapView::TimestampedView{
-		   static_cast<uint32_t>(std::lround(start_time + dt)), MapView::View{viewpoint, zoom}});
+		   static_cast<uint32_t>(std::lround(start_time + dt)), MapView::View(viewpoint, zoom)});
 	}
 }
 
@@ -194,7 +194,7 @@ std::deque<MapView::TimestampedView> plan_map_transition(const uint32_t start_ti
 	                               Vector2f(width * end.zoom / 2.f, height * end.zoom / 2.f);
 	plan.push_back(
 	   MapView::TimestampedView{static_cast<uint32_t>(std::lround(start_time + duration_ms)),
-	                            MapView::View{end_viewpoint, end.zoom}});
+	                            MapView::View(end_viewpoint, end.zoom)});
 	return plan;
 }
 
@@ -233,11 +233,11 @@ std::deque<MapView::TimestampedMouse> plan_mouse_transition(const MapView::Times
 	plan.push_back(start);
 	for (int i = 1; i < kNumKeyFrames - 2; i++) {
 		float dt = (kShortAnimationMs / kNumKeyFrames) * i;
-		plan.push_back(MapView::TimestampedMouse{
-		   static_cast<uint32_t>(std::lround(start.t + dt)), mouse_t.value(dt)});
+		plan.push_back(MapView::TimestampedMouse(
+		   static_cast<uint32_t>(std::lround(start.t + dt)), mouse_t.value(dt)));
 	}
-	plan.push_back(MapView::TimestampedMouse{
-	   static_cast<uint32_t>(std::lround(start.t + kShortAnimationMs)), target.cast<float>()});
+	plan.push_back(MapView::TimestampedMouse(
+	   static_cast<uint32_t>(std::lround(start.t + kShortAnimationMs)), target.cast<float>()));
 	return plan;
 }
 
@@ -299,7 +299,8 @@ MapView::MapView(
    : UI::Panel(parent, x, y, w, h),
      renderer_(new GameRenderer()),
      intbase_(player),
-     view_{Vector2f(0.f, 0.f), 1.f},
+     view_(),
+     last_mouse_pos_(Vector2i::zero()),
      dragging_(false) {
 }
 
@@ -391,21 +392,29 @@ void MapView::draw(RenderTarget& dst) {
 			return;
 	}
 
-	TextToDraw draw_text = TextToDraw::kNone;
+	TextToDraw text_to_draw = TextToDraw::kNone;
 	auto display_flags = intbase().get_display_flags();
 	if (display_flags & InteractiveBase::dfShowCensus) {
-		draw_text = draw_text | TextToDraw::kCensus;
+		text_to_draw = text_to_draw | TextToDraw::kCensus;
 	}
 	if (display_flags & InteractiveBase::dfShowStatistics) {
-		draw_text = draw_text | TextToDraw::kStatistics;
+		text_to_draw = text_to_draw | TextToDraw::kStatistics;
 	}
 
 	if (upcast(InteractivePlayer const, interactive_player, &intbase())) {
+		const GameRenderer::Overlays overlays{
+		   text_to_draw, interactive_player->road_building_preview()};
 		renderer_->rendermap(
-		   egbase, view_.viewpoint, view_.zoom, interactive_player->player(), draw_text, &dst);
+		   egbase, view_.viewpoint, view_.zoom, interactive_player->player(), overlays, &dst);
 	} else {
+		const auto draw_immovables = intbase().draw_immovables() ?
+		                                GameRenderer::DrawImmovables::kYes :
+		                                GameRenderer::DrawImmovables::kNo;
+		const auto draw_bobs =
+		   intbase().draw_bobs() ? GameRenderer::DrawBobs::kYes : GameRenderer::DrawBobs::kNo;
+		const GameRenderer::Overlays overlays{static_cast<TextToDraw>(text_to_draw), {}};
 		renderer_->rendermap(
-		   egbase, view_.viewpoint, view_.zoom, static_cast<TextToDraw>(draw_text), &dst);
+		   egbase, view_.viewpoint, view_.zoom, overlays, draw_immovables, draw_bobs, &dst);
 	}
 }
 
@@ -446,7 +455,7 @@ void MapView::scroll_to_map_pixel(const Vector2f& pos, const Transition& transit
 	const TimestampedView current = animation_target_view();
 	const Rectf area = get_view_area(current.view, get_w(), get_h());
 	const Vector2f target_view = pos - Vector2f(area.w / 2.f, area.h / 2.f);
-	set_view(View{target_view, current.view.zoom}, transition);
+	set_view(View(target_view, current.view.zoom), transition);
 }
 
 MapView::ViewArea MapView::view_area() const {
@@ -605,7 +614,7 @@ MapView::TimestampedView MapView::animation_target_view() const {
 
 MapView::TimestampedMouse MapView::animation_target_mouse() const {
 	if (mouse_plans_.empty()) {
-		return TimestampedMouse{SDL_GetTicks(), get_mouse_position().cast<float>()};
+		return TimestampedMouse(SDL_GetTicks(), get_mouse_position().cast<float>());
 	}
 	return mouse_plans_.back().back();
 }

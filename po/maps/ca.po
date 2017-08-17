@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-02-19 19:34+0000\n"
-"PO-Revision-Date: 2017-02-25 18:12+0000\n"
+"POT-Creation-Date: 2017-05-19 07:45+0000\n"
+"PO-Revision-Date: 2017-05-20 20:21+0000\n"
 "Last-Translator: Juanjo\n"
 "Language-Team: Catalan (http://www.transifex.com/widelands/widelands/language/ca/)\n"
 "MIME-Version: 1.0\n"
@@ -20,7 +20,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: ../../data/campaigns/atl01.wmf/elemental:9
-#: ../../data/campaigns/campaigns.conf:95
+#: ../../data/campaigns/campaigns.conf:100
 msgid "From Nemesis to Genesis"
 msgstr "De la Nèmesi al Gènesi"
 
@@ -139,7 +139,11 @@ msgid "An Outpost for Exile"
 msgstr "Un post avançat per l'exili"
 
 #: ../../data/campaigns/campaigns.conf:88
-#: ../../data/campaigns/campaigns.conf:100
+msgid "Neptune’s Revenge"
+msgstr "La revenja de Neptú"
+
+#: ../../data/campaigns/campaigns.conf:93
+#: ../../data/campaigns/campaigns.conf:105
 #: ../../data/campaigns/dummy.wmf/elemental:7
 msgid "Not yet implemented"
 msgstr "Encara no s'ha implementat"
@@ -168,6 +172,12 @@ msgid ""
 "land on a green, Mediterranean island, looking like paradise. Overjoyed, "
 "they set out to explore this new living space."
 msgstr "Finalment, s'ha acabat de reparar el vaixell. Així que en Lutius i la seva gent tornen a la recerca d'un nou començament. Només uns dies després, arriben a illa mediterrània verda, que sembla el paradís. Plens de joia, comencen a explorar la seva nova llar."
+
+#: ../../data/campaigns/emp03.wmf/elemental:10
+msgid ""
+"On their way home to defend the Empire, the crew of Lutius was surprised by "
+"the will of the gods."
+msgstr "Durant el seu camí a casa per defensar l'imperi, els déus i els seus desitjos van sorprendre la tripulació d'en Lutius "
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/elemental:8
 #: ../../data/campaigns/tutorials.conf:15

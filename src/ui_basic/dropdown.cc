@@ -165,6 +165,7 @@ bool BaseDropdown::has_selection() const {
 }
 
 uint32_t BaseDropdown::get_selected() const {
+	assert(has_selection());
 	return list_->get_selected();
 }
 
@@ -290,6 +291,7 @@ bool BaseDropdown::handle_key(bool down, SDL_Keysym code) {
 			if (list_->is_visible()) {
 				set_value();
 			}
+			break;
 		case SDLK_ESCAPE:
 			if (list_->is_visible()) {
 				list_->select(current_selection_);

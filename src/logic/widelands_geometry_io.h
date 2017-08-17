@@ -34,7 +34,7 @@ struct DirectionIsNull : public FileRead::DataError {
 };
 
 struct DirectionInvalid : public FileRead::DataError {
-	DirectionInvalid(Direction const D)
+	explicit DirectionInvalid(Direction const D)
 	   : DataError("direction is %u but must be one of {0 (idle), 1 (northeast), 2 "
 	               "(east), 3 (southeast), 4 (southwest), 5 (west), 6 (northwest)}",
 	               D),
