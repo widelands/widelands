@@ -69,7 +69,7 @@ SavegameData::SavegameData()
    : gametime(""),
      nrplayers("0"),
      savetimestamp(0),
-     gametype(GameController::GameType::SINGLEPLAYER) {
+     gametype(GameController::GameType::kSingleplayer) {
 }
 
 void SavegameData::set_gametime(uint32_t input_gametime) {

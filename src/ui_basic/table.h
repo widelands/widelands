@@ -156,13 +156,6 @@ public:
 		std::vector<Data> data_;
 	};
 
-	/**
-	 * Compare the two items at the given indices in the list.
-	 *
-	 * return true if the first item is strictly less than the second
-	 */
-	using CompareFn = boost::function<bool(uint32_t, uint32_t)>;
-
 	Table(Panel* parent,
 	      int32_t x,
 	      int32_t y,
@@ -171,6 +164,13 @@ public:
 	      const Image* button_background = g_gr->images().get("images/ui_basic/but3.png"),
 	      TableRows rowtype = TableRows::kSingle);
 	~Table();
+
+	/**
+	 * Compare the two items at the given indices in the list.
+	 *
+	 * return true if the first item is strictly less than the second
+	 */
+	using CompareFn = boost::function<bool(uint32_t, uint32_t)>;
 
 	boost::signals2::signal<void(uint32_t)> selected;
 	boost::signals2::signal<void(uint32_t)> double_clicked;

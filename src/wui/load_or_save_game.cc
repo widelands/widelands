@@ -328,14 +328,14 @@ void LoadOrSaveGame::fill_table() {
 
 			if (filetype_ != FileType::kReplay) {
 				if (filetype_ == FileType::kGame) {
-					if (gamedata.gametype == GameController::GameType::REPLAY) {
+					if (gamedata.gametype == GameController::GameType::kReplay) {
 						continue;
 					}
 				} else if (filetype_ == FileType::kGameMultiPlayer) {
-					if (gamedata.gametype == GameController::GameType::SINGLEPLAYER) {
+					if (gamedata.gametype == GameController::GameType::kSingleplayer) {
 						continue;
 					}
-				} else if (gamedata.gametype > GameController::GameType::SINGLEPLAYER) {
+				} else if (gamedata.gametype > GameController::GameType::kSingleplayer) {
 					continue;
 				}
 			}
@@ -416,14 +416,14 @@ void LoadOrSaveGame::fill_table() {
 			if (filetype_ != FileType::kGameSinglePlayer) {
 				std::string gametypestring;
 				switch (gamedata.gametype) {
-				case GameController::GameType::SINGLEPLAYER:
+				case GameController::GameType::kSingleplayer:
 					/** TRANSLATORS: "Single Player" entry in the Game Mode table column. */
 					/** TRANSLATORS: "Keep this to 6 letters maximum. */
 					/** TRANSLATORS: A tooltip will explain the abbreviation. */
 					/** TRANSLATORS: Make sure that this translation is consistent with the tooltip. */
 					gametypestring = _("SP");
 					break;
-				case GameController::GameType::NETHOST:
+				case GameController::GameType::kNetHost:
 					/** TRANSLATORS: "Multiplayer Host" entry in the Game Mode table column. */
 					/** TRANSLATORS: "Keep this to 2 letters maximum. */
 					/** TRANSLATORS: A tooltip will explain the abbreviation. */
@@ -431,7 +431,7 @@ void LoadOrSaveGame::fill_table() {
 					/** TRANSLATORS: %1% is the number of players */
 					gametypestring = (boost::format(_("H (%1%)")) % gamedata.nrplayers).str();
 					break;
-				case GameController::GameType::NETCLIENT:
+				case GameController::GameType::kNetClient:
 					/** TRANSLATORS: "Multiplayer" entry in the Game Mode table column. */
 					/** TRANSLATORS: "Keep this to 2 letters maximum. */
 					/** TRANSLATORS: A tooltip will explain the abbreviation. */
@@ -439,9 +439,11 @@ void LoadOrSaveGame::fill_table() {
 					/** TRANSLATORS: %1% is the number of players */
 					gametypestring = (boost::format(_("MP (%1%)")) % gamedata.nrplayers).str();
 					break;
-				case GameController::GameType::REPLAY:
+				case GameController::GameType::kReplay:
 					gametypestring = "";
 					break;
+				case GameController::GameType::kUndefined:
+					NEVER_HERE();
 				}
 				te.set_string(1, gametypestring);
 				if (filetype_ == FileType::kReplay) {
