@@ -89,14 +89,15 @@ bool Tab::handle_mousepress(uint8_t, int32_t, int32_t) {
  * =================
  */
 /**
- * Initialize an empty TabPanel
+ * Initialize an empty TabPanel. We use width == 0 as an indicator that the size hasn't been set
+ * yet.
 */
 TabPanel::TabPanel(Panel* const parent, UI::TabPanelStyle style)
    : Panel(parent,
            0,
            0,
-           kTabPanelButtonHeight + 2 * kTabPanelSeparatorHeight,
-           kTabPanelButtonHeight + 2 * kTabPanelSeparatorHeight),
+           0,
+           0),
      style_(style),
      active_(0),
      highlight_(kNotFound),
@@ -107,6 +108,10 @@ TabPanel::TabPanel(Panel* const parent, UI::TabPanelStyle style)
  * Resize the visible tab based on our actual size.
  */
 void TabPanel::layout() {
+	if (get_w() == 0) {
+		// The size hasn't been set yet
+		return;
+	}
 	if (active_ < tabs_.size()) {
 		Panel* const panel = tabs_[active_]->panel;
 		uint32_t h = get_h();
@@ -115,7 +120,7 @@ void TabPanel::layout() {
 		h = std::min(h, h - (kTabPanelButtonHeight + kTabPanelSeparatorHeight));
 		// If we have a border, we will also want some margin to the bottom
 		if (style_ == UI::TabPanelStyle::kFsMenu) {
-			h = h - kTabPanelSeparatorHeight;
+			h -= kTabPanelSeparatorHeight;
 		}
 		panel->set_size(get_w(), h);
 	}
@@ -137,9 +142,7 @@ void TabPanel::update_desired_size() {
 		panel->get_desired_size(&panelw, &panelh);
 		// TODO(unknown):  the panel might be bigger -> add a scrollbar in that case
 
-		if (panelw > w) {
-			w = panelw;
-		}
+		w = std::max(w, panelw);
 		h += panelh;
 	}
 
@@ -243,7 +246,8 @@ bool TabPanel::remove_last_tab(const std::string& tabname) {
  * Draw the buttons and the tab
 */
 void TabPanel::draw(RenderTarget& dst) {
-	if (tabs_.empty()) {
+	if (get_w() == 0) {
+		// The size hasn't been set yet
 		return;
 	}
 
@@ -261,7 +265,9 @@ void TabPanel::draw(RenderTarget& dst) {
 
 	// Draw the buttons
 	RGBColor black(0, 0, 0);
-	float x = 0;
+
+	// draw the buttons
+	int x = 0;
 	int tab_width = 0;
 	for (size_t idx = 0; idx < tabs_.size(); ++idx) {
 		x = tabs_[idx]->get_x();

@@ -25,6 +25,7 @@
 
 #include "base/log.h"
 #include "chat/chat.h"
+#include "logic/widelands.h"
 
 namespace DebugConsole {
 
@@ -87,10 +88,7 @@ struct Console : public ChatProvider, public Handler {
 	}
 
 	void write(const std::string& msg) {
-		ChatMessage cm;
-
-		cm.time = time(nullptr);
-		cm.msg = msg;
+		ChatMessage cm(msg);
 		messages.push_back(cm);
 
 		log("*** %s\n", msg.c_str());

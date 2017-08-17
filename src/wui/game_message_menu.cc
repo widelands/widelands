@@ -608,7 +608,7 @@ void GameMessageMenu::update_archive_button_tooltip() {
 		return;
 	}
 	archivebtn_->set_enabled(true);
-	std::string button_tooltip = "";
+	std::string button_tooltip;
 	size_t no_selections = list->selections().size();
 	switch (mode) {
 	case Archive:

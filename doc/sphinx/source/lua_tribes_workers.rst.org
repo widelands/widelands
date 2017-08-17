@@ -73,7 +73,6 @@ Workers are defined with Lua functions called ``new_worker_type{table}``. The co
       programs that define which type of space or resource the worker has to find
       on the map in order to do his work, and what that work is, including any
       animations and sounds played.
-      See :doc:`worker_program`.
 
 TODO(GunChleoc): create Worker Program Reference
 

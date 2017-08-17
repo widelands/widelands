@@ -63,7 +63,7 @@ constexpr uint16_t kCurrentPacketVersionConstructionsite = 3;
 constexpr uint16_t kCurrentPacketPFBuilding = 1;
 // Responsible for warehouses and expedition bootstraps
 constexpr uint16_t kCurrentPacketVersionWarehouse = 7;
-constexpr uint16_t kCurrentPacketVersionMilitarysite = 5;
+constexpr uint16_t kCurrentPacketVersionMilitarysite = 6;
 constexpr uint16_t kCurrentPacketVersionProductionsite = 6;
 constexpr uint16_t kCurrentPacketVersionTrainingsite = 5;
 
@@ -122,7 +122,7 @@ void MapBuildingdataPacket::read(FileSystem& fs,
 									*queue_iter = &mol.get<Worker>(leaver_serial);
 								} catch (const WException& e) {
 									throw GameDataError(
-									   "leave queue item #%lu (%u): %s",
+									   "leave queue item #%li (%u): %s",
 									   static_cast<long int>(queue_iter - leave_queue.begin()),
 									   leaver_serial, e.what());
 								}
@@ -464,7 +464,7 @@ void MapBuildingdataPacket::read_militarysite(MilitarySite& militarysite,
                                               MapObjectLoader& mol) {
 	try {
 		uint16_t const packet_version = fr.unsigned_16();
-		if (packet_version == kCurrentPacketVersionMilitarysite) {
+		if (packet_version >= 5 && packet_version <= kCurrentPacketVersionMilitarysite) {
 			militarysite.normal_soldier_request_.reset();
 
 			if (fr.unsigned_8()) {
@@ -505,8 +505,11 @@ void MapBuildingdataPacket::read_militarysite(MilitarySite& militarysite,
 			uint16_t reqmax = fr.unsigned_16();
 			militarysite.soldier_upgrade_requirements_ =
 			   RequireAttribute(TrainingAttribute::kTotal, reqmin, reqmax);
-			militarysite.soldier_preference_ =
-			   static_cast<MilitarySite::SoldierPreference>(fr.unsigned_8());
+			militarysite.soldier_preference_ = static_cast<SoldierPreference>(fr.unsigned_8());
+			// TODO(GunChleoc): Savegame compatibility, remove kNotSet after Build 20.
+			if (militarysite.soldier_preference_ == SoldierPreference::kNotSet) {
+				militarysite.soldier_preference_ = SoldierPreference::kRookies;
+			}
 			militarysite.next_swap_soldiers_time_ = fr.signed_32();
 			militarysite.soldier_upgrade_try_ = 0 != fr.unsigned_8() ? true : false;
 			militarysite.doing_upgrade_request_ = 0 != fr.unsigned_8() ? true : false;
@@ -1083,7 +1086,7 @@ void MapBuildingdataPacket::write_militarysite(const MilitarySite& militarysite,
 	}
 	fw.unsigned_16(militarysite.soldier_upgrade_requirements_.get_min());
 	fw.unsigned_16(militarysite.soldier_upgrade_requirements_.get_max());
-	fw.unsigned_8(militarysite.soldier_preference_);
+	fw.unsigned_8(static_cast<uint8_t>(militarysite.soldier_preference_));
 	fw.signed_32(militarysite.next_swap_soldiers_time_);
 	fw.unsigned_8(militarysite.soldier_upgrade_try_ ? 1 : 0);
 	fw.unsigned_8(militarysite.doing_upgrade_request_ ? 1 : 0);

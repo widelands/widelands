@@ -19,6 +19,8 @@
 
 #include "map_io/map_players_messages_packet.h"
 
+#include <memory>
+
 #include <boost/format.hpp>
 
 #include "logic/game_data_error.h"
@@ -60,7 +62,7 @@ void MapPlayersMessagesPacket::read(FileSystem& fs,
 			MessageQueue& messages = player->messages();
 
 			{
-				MessageQueue::const_iterator const begin = messages.begin();
+				const auto begin = messages.begin();
 				if (begin != messages.end()) {
 					log("ERROR: The message queue for player %u contains a message "
 					    "before any messages have been loaded into it. This is a bug "
@@ -118,17 +120,17 @@ void MapPlayersMessagesPacket::read(FileSystem& fs,
 					// Compatibility code needed for map loading.
 					if (packet_version == 1) {
 						const std::string name = s->get_name();
-						messages.add_message(*new Message(
+						messages.add_message(std::unique_ptr<Message>(new Message(
 						   static_cast<Message::Type>(s->get_natural("type")), sent, name,
 						   "images/wui/fieldaction/menu_build_flag.png", name, s->get_safe_string("body"),
-						   get_coords("position", extent, Coords::null(), s), serial, status));
+						   get_coords("position", extent, Coords::null(), s), serial, status)));
 					} else {
 
-						messages.add_message(*new Message(
+						messages.add_message(std::unique_ptr<Message>(new Message(
 						   static_cast<Message::Type>(s->get_natural("type")), sent, s->get_name(),
 						   s->get_safe_string("icon"), s->get_safe_string("heading"),
 						   s->get_safe_string("body"), get_coords("position", extent, Coords::null(), s),
-						   serial, status));
+						   serial, status)));
 					}
 					previous_message_sent = sent;
 				} catch (const WException& e) {

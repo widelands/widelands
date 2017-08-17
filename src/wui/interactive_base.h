@@ -20,6 +20,7 @@
 #ifndef WL_WUI_INTERACTIVE_BASE_H
 #define WL_WUI_INTERACTIVE_BASE_H
 
+#include <map>
 #include <memory>
 
 #include <SDL_keycode.h>
@@ -35,7 +36,6 @@
 #include "ui_basic/unique_window.h"
 #include "wui/chatoverlay.h"
 #include "wui/debugconsole.h"
-#include "wui/edge_overlay_manager.h"
 #include "wui/field_overlay_manager.h"
 #include "wui/mapview.h"
 #include "wui/minimap.h"
@@ -99,6 +99,14 @@ public:
 	// Sets if the buildhelp should be displayed. Will also call on_buildhelp_changed().
 	void show_buildhelp(bool t);
 
+	// Returns true if bobs or immovables should be rendered.
+	bool draw_bobs() const;
+	bool draw_immovables() const;
+
+	// Sets if bobs or immovables should be rendered.
+	void set_draw_bobs(bool value);
+	void set_draw_immovables(bool value);
+
 	/**
 	 * sel_triangles determines whether the mouse pointer selects triangles.
 	 * (False meas that it selects nodes.)
@@ -157,10 +165,6 @@ public:
 		return field_overlay_manager_.get();
 	}
 
-	const EdgeOverlayManager& edge_overlay_manager() const {
-		return *edge_overlay_manager_;
-	}
-
 	void toggle_minimap();
 	void toggle_buildhelp();
 
@@ -169,6 +173,10 @@ public:
 
 	// Sets the landmark for the keyboard 'key' to 'point'
 	void set_landmark(size_t key, const MapView::View& view);
+
+	const std::map<Widelands::Coords, uint8_t>& road_building_preview() const {
+		return road_building_preview_;
+	}
 
 protected:
 	/// Adds a toolbar button to the toolbar
@@ -241,7 +249,11 @@ private:
 	std::unique_ptr<InteractiveBaseInternals> m;
 
 	std::unique_ptr<FieldOverlayManager> field_overlay_manager_;
-	std::unique_ptr<EdgeOverlayManager> edge_overlay_manager_;
+
+	// The roads that are displayed while a road is being build. They are not
+	// yet logically in the game, but need to be displayed for the user as
+	// visual guide. The data type is the same as for Field::road.
+	std::map<Widelands::Coords, uint8_t> road_building_preview_;
 
 	std::unique_ptr<Notifications::Subscriber<GraphicResolutionChanged>>
 	   graphic_resolution_changed_subscriber_;
@@ -251,8 +263,9 @@ private:
 	uint32_t lastframe_;        //  system time (milliseconds)
 	uint32_t frametime_;        //  in millseconds
 	uint32_t avg_usframetime_;  //  in microseconds!
+	bool draw_immovables_;
+	bool draw_bobs_;
 
-	EdgeOverlayManager::OverlayId jobid_;
 	FieldOverlayManager::OverlayId road_buildhelp_overlay_jobid_;
 	Widelands::CoordPath* buildroad_;  //  path for the new road
 	Widelands::PlayerNumber road_build_player_;

@@ -104,16 +104,14 @@ Widelands::Player* InteractiveSpectator::get_player() const {
 	return nullptr;
 }
 
-int32_t InteractiveSpectator::calculate_buildcaps(const Widelands::TCoords<Widelands::FCoords>& c) {
+int32_t InteractiveSpectator::calculate_buildcaps(const Widelands::FCoords& c) {
 	const Widelands::PlayerNumber nr_players = game().map().get_nrplayers();
-
 	iterate_players_existing(p, nr_players, game(), player) {
 		const Widelands::NodeCaps nc = player->get_buildcaps(c);
 		if (nc > Widelands::NodeCaps::CAPS_NONE) {
 			return nc;
 		}
 	}
-
 	return Widelands::NodeCaps::CAPS_NONE;
 }
 

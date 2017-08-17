@@ -31,7 +31,11 @@ namespace UI {
 FileViewPanel::FileViewPanel(Panel* parent,
                              UI::PanelStyle scrollbar_style,
                              TabPanelStyle background_style)
-   : TabPanel(parent, background_style), padding_(5), style_(scrollbar_style) {
+   : TabPanel(parent, background_style),
+	  padding_(5),
+	  contents_width_(0),
+	  contents_height_(0),
+	  style_(scrollbar_style) {
 	layout();
 }
 
@@ -60,6 +64,9 @@ void FileViewPanel::add_tab(const std::string& lua_script) {
 }
 
 void FileViewPanel::update_tab_size(size_t index) {
+	assert(get_inner_w() >= 0 && get_inner_h() >= 0);
+	assert(contents_width_ >= 0 && contents_height_ >= 0);
+
 	boxes_.at(index)->set_size(get_inner_w(), get_inner_h());
 	textviews_.at(index)->set_size(contents_width_, contents_height_);
 }
@@ -69,12 +76,12 @@ void FileViewPanel::layout() {
 	assert(get_inner_w() >= 0 && get_inner_h() >= 0);
 
 	// If there is a border, we have less space for the contents
-	contents_width_ =
-	   std::max(0, style_ == UI::PanelStyle::kFsMenu ? get_w() - 2 * padding_ : get_w() - padding_);
+	contents_width_ = std::max(
+	   0, style_ == UI::PanelStyle::kFsMenu ? get_w() - padding_ : get_w() - 2 * padding_);
 
 	contents_height_ = std::max(0, style_ == UI::PanelStyle::kFsMenu ?
-	                                  get_inner_h() - 3 * padding_ - UI::kTabPanelButtonHeight :
-	                                  get_inner_h() - 2 * padding_ - UI::kTabPanelButtonHeight);
+	                                  get_inner_h() - 2 * padding_ - UI::kTabPanelButtonHeight :
+	                                  get_inner_h() - 3 * padding_ - UI::kTabPanelButtonHeight);
 
 	for (size_t i = 0; i < boxes_.size(); ++i) {
 		update_tab_size(i);

@@ -136,7 +136,6 @@ Player::Player(EditorGameBase& the_egbase,
      fields_(nullptr),
      allowed_worker_types_(the_egbase.tribes().nrworkers(), true),
      allowed_building_types_(the_egbase.tribes().nrbuildings(), true),
-     ai_(""),
      current_produced_statistics_(the_egbase.tribes().nrwares()),
      current_consumed_statistics_(the_egbase.tribes().nrwares()),
      ware_productions_(the_egbase.tribes().nrwares()),
@@ -290,21 +289,22 @@ void Player::play_message_sound(const Message::Type& msgtype) {
 	}
 }
 
-MessageId Player::add_message(Game& game, Message& message, bool const popup) {
-	MessageId id = messages().add_message(message);
+MessageId Player::add_message(Game& game, std::unique_ptr<Message> new_message, bool const popup) {
+	MessageId id = messages().add_message(std::move(new_message));
+	const Message* message = messages()[id];
 
 	// MapObject connection
-	if (message.serial() > 0) {
-		MapObject* mo = egbase().objects().get_object(message.serial());
+	if (message->serial() > 0) {
+		MapObject* mo = egbase().objects().get_object(message->serial());
 		mo->removed.connect(boost::bind(&Player::message_object_removed, this, id));
 	}
 
 	// Sound & popup
 	if (InteractivePlayer* const iplayer = game.get_ipl()) {
 		if (&iplayer->player() == this) {
-			play_message_sound(message.type());
+			play_message_sound(message->type());
 			if (popup)
-				iplayer->popup_message(id, message);
+				iplayer->popup_message(id, *message);
 		}
 	}
 
@@ -312,21 +312,20 @@ MessageId Player::add_message(Game& game, Message& message, bool const popup) {
 }
 
 MessageId Player::add_message_with_timeout(Game& game,
-                                           Message& m,
+                                           std::unique_ptr<Message> message,
                                            uint32_t const timeout,
                                            uint32_t const radius) {
 	const Map& map = game.map();
 	uint32_t const gametime = game.get_gametime();
-	Coords const position = m.position();
-	for (auto tmp_message : messages()) {
-		if (tmp_message.second->type() == m.type() &&
+	Coords const position = message->position();
+	for (const auto& tmp_message : messages()) {
+		if (tmp_message.second->type() == message->type() &&
 		    gametime < tmp_message.second->sent() + timeout &&
 		    map.calc_distance(tmp_message.second->position(), position) <= radius) {
-			delete &m;
 			return MessageId::null();
 		}
 	}
-	return add_message(game, m);
+	return add_message(game, std::move(message));
 }
 
 void Player::message_object_removed(MessageId message_id) const {
@@ -653,11 +652,10 @@ void Player::start_or_cancel_expedition(Warehouse& wh) {
 }
 
 void Player::military_site_set_soldier_preference(PlayerImmovable& imm,
-                                                  uint8_t soldier_preference) {
+                                                  SoldierPreference soldier_preference) {
 	if (&imm.owner() == this)
 		if (upcast(MilitarySite, milsite, &imm))
-			milsite->set_soldier_preference(
-			   static_cast<MilitarySite::SoldierPreference>(soldier_preference));
+			milsite->set_soldier_preference(soldier_preference);
 }
 
 /*

@@ -21,6 +21,7 @@
 #define WL_NETWORK_NETWORK_H
 
 #include <exception>
+#include <functional>
 #include <string>
 #include <vector>
 
@@ -90,18 +91,14 @@ struct NetAddress {
 	uint16_t port;
 };
 
-struct SyncCallback {
-	virtual ~SyncCallback() {
-	}
-	virtual void syncreport() = 0;
-};
+using SyncReportCallback = std::function<void()>;
 
 /**
  * This non-gamelogic command is used by \ref GameHost and \ref GameClient
  * to schedule taking a synchronization hash.
  */
 struct CmdNetCheckSync : public Widelands::Command {
-	CmdNetCheckSync(uint32_t dt, SyncCallback*);
+	CmdNetCheckSync(uint32_t dt, SyncReportCallback);
 
 	void execute(Widelands::Game&) override;
 
@@ -110,7 +107,7 @@ struct CmdNetCheckSync : public Widelands::Command {
 	}
 
 private:
-	SyncCallback* callback_;
+	SyncReportCallback callback_;
 };
 
 /**
@@ -175,7 +172,7 @@ public:
 private:
 	friend class Deserializer;
 	std::vector<uint8_t> buffer;
-	size_t index_;
+	size_t index_ = 0U;
 };
 
 struct FilePart {

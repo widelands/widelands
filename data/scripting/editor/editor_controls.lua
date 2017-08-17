@@ -21,7 +21,15 @@ return {
             dl(help_format_hotkey("T"), _"Toggle tools menu") ..
             toggle_minimap_hotkey ..
             toggle_building_spaces_hotkey ..
+            -- TRANSLATORS: This is an access key combination. Localize, but do not change the key.
+            dl(help_format_hotkey("Ctrl + 1"), _"Toggle building spaces") ..
+            -- TRANSLATORS: This is an access key combination. Localize, but do not change the key.
+            dl(help_format_hotkey("Ctrl + 2"), _"Toggle immovables display") ..
+            -- TRANSLATORS: This is an access key combination. Localize, but do not change the key.
+            dl(help_format_hotkey("Ctrl + 3"), _"Toggle animals display") ..
             -- TRANSLATORS: This is an access key combination. The hotkey is 'p'
+            dl(help_format_hotkey("Ctrl + 4"), _"Toggle resources display") ..
+            -- TRANSLATORS: This is an access key combination. Localize, but do not change the key.
             dl(help_format_hotkey("P"), _"Toggle player menu") ..
             -- TRANSLATORS: This is an access key combination. Localize, but do not change the key.
             dl(help_format_hotkey("Ctrl + Z"), _"Undo") ..

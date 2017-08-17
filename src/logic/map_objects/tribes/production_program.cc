@@ -536,7 +536,7 @@ void ProductionProgram::ActReturn::execute(Game& game, ProductionSite& ps) const
 		std::string condition_string =
 		   i18n::localize_list(condition_list, i18n::ConcatenateWith::AND);
 
-		std::string result_string = "";
+		std::string result_string;
 		if (result_ == Failed) {
 			/** TRANSLATORS: "Did not start working because the economy needs the ware ‘%s’" */
 			result_string = (boost::format(_("Did not start %1$s because %2$s")) %

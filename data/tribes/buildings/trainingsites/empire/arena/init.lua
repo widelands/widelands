@@ -37,7 +37,6 @@ tribes:new_trainingsite_type {
    },
 
    aihints = {
-      trainingsite_type = "basic",
       trainingsites_max_percent = 20,
       prohibited_till = 900,
       very_weak_ai_limit = 1,
