@@ -157,7 +157,7 @@ void Statebox::draw(RenderTarget& dst) {
 
 		dst.blitrect(
 		   image_anchor, pic_graphics_,
-		   Recti(Vector2i(flags_ & Is_Checked ? kStateboxSize : 0, 0), kStateboxSize, kStateboxSize));
+		   Recti(Vector2i((flags_ & Is_Checked) ? kStateboxSize : 0, 0), kStateboxSize, kStateboxSize));
 
 		if (flags_ & Is_Highlighted)
 			dst.draw_rect(

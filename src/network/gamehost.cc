@@ -1836,7 +1836,7 @@ void GameHost::update_network_speed() {
 				speeds[1] = speeds[0] + 1000;
 		}
 
-		d->networkspeed = speeds.size() % 2 ?
+		d->networkspeed = (speeds.size() % 2) ?
 		                     speeds.at(speeds.size() / 2) :
 		                     (speeds.at(speeds.size() / 2) + speeds.at((speeds.size() / 2) - 1)) / 2;
 
