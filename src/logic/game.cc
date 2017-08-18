@@ -122,6 +122,8 @@ Game::Game()
      ctrl_(nullptr),
      writereplay_(true),
      writesyncstream_(false),
+     ai_training_mode_(false),
+     auto_speed_(false),
      state_(gs_notrunning),
      cmdqueue_(*this),
      /** TRANSLATORS: Win condition for this game has not been set. */
@@ -150,6 +152,14 @@ InteractivePlayer* Game::get_ipl() {
 
 void Game::set_game_controller(GameController* const ctrl) {
 	ctrl_ = ctrl;
+}
+
+void Game::set_ai_training_mode(const bool mode) {
+	ai_training_mode_ = mode;
+}
+
+void Game::set_auto_speed(const bool mode) {
+	auto_speed_ = mode;
 }
 
 GameController* Game::game_controller() {
@@ -446,9 +456,10 @@ bool Game::run(UI::ProgressWindow* loader_ui,
 			}
 		}
 
-		if (get_ipl())
-			get_ipl()->scroll_to_field(
+		if (get_ipl()) {
+			get_ipl()->map_view()->scroll_to_field(
 			   map().get_starting_pos(get_ipl()->player_number()), MapView::Transition::Jump);
+		}
 
 		// Prepare the map, set default textures
 		map().recalc_default_resources(world());

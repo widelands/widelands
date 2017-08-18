@@ -395,6 +395,8 @@ private:
 	bool has_critical_mines = false;
 	uint16_t buil_material_mines_count = 0;
 
+	bool ai_training_mode_ = false;
+
 	// Notification subscribers
 	std::unique_ptr<Notifications::Subscriber<Widelands::NoteFieldPossession>>
 	   field_possession_subscriber_;

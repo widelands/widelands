@@ -119,12 +119,12 @@ const std::vector<std::vector<int8_t>> neuron_curves = {
 };
 
 // TODO(tiborb): this should be replaced by command line switch
-constexpr bool kAITrainingMode = false;
 constexpr int kMagicNumbersSize = 150;
 constexpr int kNeuronPoolSize = 80;
 constexpr int kFNeuronPoolSize = 60;
 constexpr int kFNeuronBitSize = 32;
 constexpr int kMutationRatePosition = 42;
+constexpr int16_t AiPrefNumberProbability = 5;
 
 constexpr uint32_t kNever = std::numeric_limits<uint32_t>::max();
 
@@ -665,6 +665,11 @@ struct ManagementData {
 	void reset_bi_neuron_id() {
 		next_bi_neuron_id = 0;
 	}
+	void set_ai_training_mode() {
+		ai_training_mode_ = true;
+		pref_number_probability = AiPrefNumberProbability;
+	}
+
 	int16_t get_military_number_at(uint8_t);
 	void set_military_number_at(uint8_t, int16_t);
 	MutatingIntensity do_mutate(uint8_t, int16_t);
@@ -680,6 +685,8 @@ private:
 	uint16_t performance_change;
 	Widelands::AiType ai_type;
 	void dump_output(Widelands::Player::AiPersistentState, PlayerNumber);
+	bool ai_training_mode_;
+	uint16_t pref_number_probability;
 };
 
 // this is used to count militarysites by their size

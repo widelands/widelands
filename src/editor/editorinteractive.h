@@ -26,7 +26,6 @@
 #include "editor/tools/increase_height_tool.h"
 #include "editor/tools/increase_resources_tool.h"
 #include "editor/tools/info_tool.h"
-#include "editor/tools/make_infrastructure_tool.h"
 #include "editor/tools/noise_height_tool.h"
 #include "editor/tools/place_critter_tool.h"
 #include "editor/tools/place_immovable_tool.h"
@@ -84,7 +83,6 @@ public:
 		EditorSetPortSpaceTool set_port_space;
 		EditorUnsetPortSpaceTool unset_port_space;
 		EditorSetOriginTool set_origin;
-		EditorMakeInfrastructureTool make_infrastructure;
 	};
 	explicit EditorInteractive(Widelands::EditorGameBase&);
 
