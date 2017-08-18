@@ -287,7 +287,8 @@ bool InteractivePlayer::handle_key(bool const down, SDL_Keysym const code) {
 				break;
 			FALLS_THROUGH;
 		case SDLK_HOME:
-			map_view()->scroll_to_field(game().map().get_starting_pos(player_number_), MapView::Transition::Smooth);
+			map_view()->scroll_to_field(
+			   game().map().get_starting_pos(player_number_), MapView::Transition::Smooth);
 			return true;
 
 		case SDLK_KP_ENTER:

@@ -31,9 +31,9 @@ namespace Widelands {
 constexpr int kRoadNotFound = -1000;
 constexpr int kShortcutWithinSameEconomy = 1000;
 constexpr int kRoadToDifferentEconomy = 10000;
+constexpr int kNoAiTrainingMutation = 200;
 constexpr int kUpperDefaultMutationLimit = 150;
 constexpr int kLowerDefaultMutationLimit = 75;
-constexpr int16_t kPrefNumberProbability = kAITrainingMode ? 5 : 100;
 
 // CheckStepRoadAI
 CheckStepRoadAI::CheckStepRoadAI(Player* const pl, uint8_t const mc, bool const oe)
@@ -347,6 +347,8 @@ ManagementData::ManagementData() {
 	next_neuron_id = 0;
 	performance_change = 0;
 	AiDnaHandler ai_dna_handler();
+	ai_training_mode_ = false;
+	pref_number_probability = 100;
 }
 
 // Initialization of neuron. Neuron is defined by curve (type) and weight [-kWeightRange,
@@ -620,11 +622,17 @@ void ManagementData::mutate(const uint8_t pn) {
 
 	int16_t probability =
 	   shift_weight_value(get_military_number_at(kMutationRatePosition), false) + 101;
-	if (probability > kUpperDefaultMutationLimit) {
-		probability = kUpperDefaultMutationLimit;
-	}
-	if (probability < kLowerDefaultMutationLimit) {
-		probability = kLowerDefaultMutationLimit;
+
+	// When doing training mutation probability is to be bigger than not in training mode
+	if (ai_training_mode_) {
+		if (probability > kUpperDefaultMutationLimit) {
+			probability = kUpperDefaultMutationLimit;
+		}
+		if (probability < kLowerDefaultMutationLimit) {
+			probability = kLowerDefaultMutationLimit;
+		}
+	} else {
+		probability = kNoAiTrainingMutation;
 	}
 
 	set_military_number_at(kMutationRatePosition, probability - 101);
@@ -639,7 +647,7 @@ void ManagementData::mutate(const uint8_t pn) {
 	}
 
 	// Wildcard for ai trainingmode
-	if (kAITrainingMode && std::rand() % 8 == 0) {
+	if (ai_training_mode_ && std::rand() % 8 == 0) {
 		probability /= 3;
 	}
 
@@ -654,7 +662,7 @@ void ManagementData::mutate(const uint8_t pn) {
 			// Preferred numbers are ones that will be mutated agressively in full range
 			// [-kWeightRange, kWeightRange]
 			std::set<int32_t> preferred_numbers = {std::rand() % kMagicNumbersSize *
-			                                       kPrefNumberProbability};
+			                                       pref_number_probability};
 
 			for (uint16_t i = 0; i < kMagicNumbersSize; i += 1) {
 				if (i == kMutationRatePosition) {  // mutated above
@@ -680,7 +688,7 @@ void ManagementData::mutate(const uint8_t pn) {
 		{
 			// Neurons to be mutated more agressively
 			std::set<int32_t> preferred_neurons = {std::rand() % kNeuronPoolSize *
-			                                       kPrefNumberProbability};
+			                                       pref_number_probability};
 			for (auto& item : neuron_pool) {
 
 				const MutatingIntensity mutating_intensity =
@@ -711,7 +719,7 @@ void ManagementData::mutate(const uint8_t pn) {
 		{
 			// FNeurons to be mutated more agressively
 			std::set<int32_t> preferred_f_neurons = {std::rand() % kFNeuronPoolSize *
-			                                         kPrefNumberProbability};
+			                                         pref_number_probability};
 			for (auto& item : f_neuron_pool) {
 				uint8_t changed_bits = 0;
 				// is this a preferred neuron

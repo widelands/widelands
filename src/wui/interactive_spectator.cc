@@ -77,7 +77,8 @@ InteractiveSpectator::InteractiveSpectator(Widelands::Game& g,
 
 	reset_zoom_ = add_toolbar_button("wui/menus/menu_reset_zoom", "reset_zoom", _("Reset zoom"));
 	reset_zoom_->sigclicked.connect([this] {
-		map_view()->zoom_around(1.f, Vector2f(get_w() / 2.f, get_h() / 2.f), MapView::Transition::Smooth);
+		map_view()->zoom_around(
+		   1.f, Vector2f(get_w() / 2.f, get_h() / 2.f), MapView::Transition::Smooth);
 	});
 
 	toolbar()->add_space(15);

@@ -682,8 +682,8 @@ int LuaMapView::scroll_to_field(lua_State* L) {
       :type field: :class:`wl.map.Field`
 */
 int LuaMapView::is_visible(lua_State* L) {
-	lua_pushboolean(
-	   L, get()->map_view()->view_area().contains((*get_user_class<LuaMaps::LuaField>(L, 2))->coords()));
+	lua_pushboolean(L, get()->map_view()->view_area().contains(
+	                      (*get_user_class<LuaMaps::LuaField>(L, 2))->coords()));
 	return 1;
 }
 
