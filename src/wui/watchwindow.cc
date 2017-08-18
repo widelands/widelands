@@ -96,7 +96,7 @@ WatchWindow::WatchWindow(InteractiveGameBase& parent,
                          uint32_t const h,
                          bool const init_single_window)
    : UI::Window(&parent, "watch", x, y, w, h, _("Watch")),
-     mapview_(this, 0, 0, 200, 166, parent),
+     mapview_(this, game().map(), 0, 0, 200, 166),
      last_visit_(game().get_gametime()),
      single_window_(init_single_window),
      cur_index_(0) {

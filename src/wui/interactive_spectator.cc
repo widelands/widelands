@@ -97,6 +97,16 @@ InteractiveSpectator::InteractiveSpectator(Widelands::Game& g,
 	map_view()->fieldclicked.connect(boost::bind(&InteractiveSpectator::node_action, this));
 }
 
+void InteractiveSpectator::draw(RenderTarget& dst) {
+	// This fixes a crash with displaying an error dialog during loading.
+	if (!game().is_loaded())
+		return;
+
+	const GameRenderer::Overlays overlays{get_text_to_draw(), road_building_preview()};
+	map_view()->draw_map_view(egbase(), overlays, GameRenderer::DrawImmovables::kYes,
+	              GameRenderer::DrawBobs::kYes, nullptr, &dst);
+}
+
 /**
  * \return "our" player.
  *

@@ -169,6 +169,18 @@ void InteractivePlayer::think() {
 	}
 }
 
+void InteractivePlayer::draw(RenderTarget& dst) {
+	// Bail out if the game isn't actually loaded.
+	// This fixes a crash with displaying an error dialog during loading.
+	if (!game().is_loaded())
+		return;
+
+	// NOCOM(#sirver): move road building preview here?
+	const GameRenderer::Overlays overlays{get_text_to_draw(), road_building_preview()};
+	map_view()->draw_map_view(egbase(), overlays, GameRenderer::DrawImmovables::kYes,
+	              GameRenderer::DrawBobs::kYes, &player(), &dst);
+}
+
 void InteractivePlayer::popup_message(Widelands::MessageId const id,
                                       const Widelands::Message& message) {
 	message_menu_.create();

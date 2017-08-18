@@ -49,38 +49,19 @@ public:
 	GameRenderer();
 	~GameRenderer();
 
-	// Renders the map from a player's point of view into the given drawing
-	// window. The 'viewpoint' is the top left screens pixel map pixel and
-	// 'scale' is the magnification of the view.
-	void rendermap(const Widelands::EditorGameBase& egbase,
-	               const Vector2f& viewpoint,
-	               float scale,
-	               const Widelands::Player& player,
-	               const Overlays& overlays,
-	               RenderTarget* dst);
-
-	// Renders the map from an omniscient perspective. This is used
-	// for spectators, players that see all, and in the editor. Only in the editor we allow toggling
-	// of immovables and bobs.
-	void rendermap(const Widelands::EditorGameBase& egbase,
-	               const Vector2f& viewpoint,
-	               float scale,
-	               const Overlays& overlays,
-	               const DrawImmovables& draw_immovables,
-	               const DrawBobs& draw_bobs,
-	               RenderTarget* dst);
-
-private:
-	// Draw the map for the given parameters (see rendermap). 'player'
-	// can be nullptr in which case the whole map is drawn.
-	void draw(const Widelands::EditorGameBase& egbase,
+	// Renders the map from a 'player's point of view (or omniscient if nullptr)
+	// into the given drawing window. The 'viewpoint' is the top left screens
+	// pixel map pixel and 'scale' is the magnification of the view.
+	void render(const Widelands::EditorGameBase& egbase,
 	          const Vector2f& viewpoint,
-	          float scale,
+	          float zoom,
+	          const Widelands::Player* player,
 	          const Overlays& overlays,
 	          const DrawImmovables& draw_immovables,
 	          const DrawBobs& draw_bobs,
-	          const Widelands::Player* player,
 	          RenderTarget* dst);
+
+private:
 
 	// This is owned and handled by us, but handed to the RenderQueue, so we
 	// basically promise that this stays valid for one frame.

@@ -28,12 +28,12 @@
 
 #include "base/rect.h"
 #include "base/vector.h"
+#include "graphic/game_renderer.h"
 #include "logic/map.h"
 #include "logic/widelands_geometry.h"
 #include "ui_basic/panel.h"
 
 class GameRenderer;
-class InteractiveBase;
 
 /**
  * Implements a view of a map. It is used to render a valid map on the screen.
@@ -100,12 +100,18 @@ public:
 		Vector2f pixel = Vector2f::zero();
 	};
 
+	// If in 'track_selection', the selection freeze should be honored or
+	// ignored. For example, for a mouse click, the selection is always moved,
+	// even if a window is open.
+	// NOCOM(#sirver): this is a hack. Can this not be done by changin fieldclicked?
+	enum class HonorSelectionFreeze { kNo, kYes };
+
 	MapView(UI::Panel* const parent,
+	        const Widelands::Map& map,
 	        const int32_t x,
 	        const int32_t y,
 	        const uint32_t w,
-	        const uint32_t h,
-	        InteractiveBase&);
+	        const uint32_t h);
 	virtual ~MapView();
 
 	// Called whenever the view changed, also during automatic animations.
@@ -113,6 +119,10 @@ public:
 
 	// Called when the user clicked on a field.
 	boost::signals2::signal<void()> fieldclicked;
+
+	// Called when the field under the mouse cursor has changed.
+	boost::signals2::signal<void(const Widelands::NodeAndTriangle<>&, const HonorSelectionFreeze&)>
+	   track_selection;
 
 	// Defines if an animation should be immediate (one-frame) or nicely
 	// animated for the user to follow.
@@ -156,13 +166,18 @@ public:
 	// True if a 'Transition::Smooth' animation is playing.
 	bool is_animating() const;
 
-	void draw(RenderTarget&) override;
-	bool handle_mousepress(uint8_t btn, int32_t x, int32_t y) override;
-	bool handle_mouserelease(uint8_t btn, int32_t x, int32_t y) override;
-	bool
-	handle_mousemove(uint8_t state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff) override;
-	bool handle_mousewheel(uint32_t which, int32_t x, int32_t y) override;
-	bool handle_key(bool down, SDL_Keysym code) override;
+	// Not overriden from UI::Panel, instead we expect to be passed the data through.
+	void draw_map_view(const Widelands::EditorGameBase& egbase,
+	                   const GameRenderer::Overlays& overlays,
+	                   const GameRenderer::DrawImmovables& draw_immovables,
+	                   const GameRenderer::DrawBobs& draw_bobs,
+	                   const Widelands::Player* player,
+	                   RenderTarget* dst);
+	bool handle_mousepress(uint8_t btn, int32_t x, int32_t y);
+	bool handle_mouserelease(uint8_t btn, int32_t x, int32_t y);
+	bool handle_mousemove(uint8_t state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff);
+	bool handle_mousewheel(uint32_t which, int32_t x, int32_t y);
+	bool handle_key(bool down, SDL_Keysym code);
 
 private:
 	void stop_dragging();
@@ -176,13 +191,13 @@ private:
 	TimestampedMouse animation_target_mouse() const;
 
 	// Move the sel to the given mouse position. Does not honour sel freeze.
-	void track_sel(const Vector2i& m);
+	void track_sel(const Vector2i& m, const HonorSelectionFreeze& honor);
 
 	Vector2f to_panel(const Vector2f& map_pixel) const;
 	Vector2f to_map(const Vector2i& panel_pixel) const;
 
+	const Widelands::Map& map_;
 	std::unique_ptr<GameRenderer> renderer_;
-	InteractiveBase& intbase_;
 	View view_;
 	Vector2i last_mouse_pos_;
 	bool dragging_;

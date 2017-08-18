@@ -85,7 +85,6 @@ public:
 	virtual Widelands::Player* get_player() const = 0;
 
 	void think() override;
-	void draw(RenderTarget&) override;
 	bool handle_mousepress(uint8_t btn, int32_t x, int32_t y) override;
 	bool handle_mouserelease(uint8_t btn, int32_t x, int32_t y) override;
 	bool
@@ -97,9 +96,6 @@ public:
 	const Widelands::NodeAndTriangle<>& get_sel_pos() const {
 		return sel_.pos;
 	}
-	bool get_sel_freeze() const {
-		return sel_.freeze;
-	}
 
 	// Returns true if the buildhelp is currently displayed.
 	bool buildhelp() const;
@@ -108,6 +104,7 @@ public:
 	void show_buildhelp(bool t);
 
 	// Returns true if bobs or immovables should be rendered.
+	// NOCOM(#sirver): move to editor_interactive?
 	bool draw_bobs() const;
 	bool draw_immovables() const;
 
@@ -224,9 +221,13 @@ protected:
 	ChatOverlay* chat_overlay() {
 		return chat_overlay_;
 	}
+
 	UI::Box* toolbar() {
 		return &toolbar_;
 	}
+
+	// Returns the information which overlay text should currently be drawn.
+	TextToDraw get_text_to_draw() const;
 
 private:
 	int32_t stereo_position(Widelands::Coords position_map);

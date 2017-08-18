@@ -279,32 +279,13 @@ GameRenderer::GameRenderer() {
 GameRenderer::~GameRenderer() {
 }
 
-void GameRenderer::rendermap(const Widelands::EditorGameBase& egbase,
-                             const Vector2f& viewpoint,
-                             const float zoom,
-                             const Widelands::Player& player,
-                             const Overlays& overlays,
-                             RenderTarget* dst) {
-	draw(egbase, viewpoint, zoom, overlays, DrawImmovables::kYes, DrawBobs::kYes, &player, dst);
-}
-
-void GameRenderer::rendermap(const Widelands::EditorGameBase& egbase,
-                             const Vector2f& viewpoint,
-                             const float zoom,
-                             const Overlays& overlays,
-                             const DrawImmovables& draw_immovables,
-                             const DrawBobs& draw_bobs,
-                             RenderTarget* dst) {
-	draw(egbase, viewpoint, zoom, overlays, draw_immovables, draw_bobs, nullptr, dst);
-}
-
-void GameRenderer::draw(const EditorGameBase& egbase,
+void GameRenderer::render(const EditorGameBase& egbase,
                         const Vector2f& viewpoint,
                         const float zoom,
+                        const Player* player,
                         const Overlays& overlays,
                         const DrawImmovables& draw_immovables,
                         const DrawBobs& draw_bobs,
-                        const Player* player,
                         RenderTarget* dst) {
 	assert(viewpoint.x >= 0);  // divisions involving negative numbers are bad
 	assert(viewpoint.y >= 0);

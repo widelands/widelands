@@ -43,6 +43,7 @@ struct InteractiveSpectator : public InteractiveGameBase {
 	Widelands::Player* get_player() const override;
 
 	bool handle_key(bool down, SDL_Keysym) override;
+	void draw(RenderTarget& dst) override;
 
 private:
 	void exit_btn();

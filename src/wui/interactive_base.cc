@@ -70,8 +70,7 @@ using Widelands::TCoords;
 InteractiveBase::InteractiveBase(EditorGameBase& the_egbase, Section& global_s)
    : UI::Panel(nullptr, 0, 0, g_gr->get_xres(), g_gr->get_yres()),
      show_workarea_preview_(global_s.get_bool("workareapreview", true)),
-     // TODO(sirver): MapView should no longer have knowledge of InteractiveBase.
-     map_view_(this, 0, 0, g_gr->get_xres(), g_gr->get_yres(), *this),
+     map_view_(this, the_egbase.map(), 0, 0, g_gr->get_xres(), g_gr->get_yres()),
      // Initialize chatoveraly before the toolbar so it is below
      chat_overlay_(new ChatOverlay(this, 10, 25, get_w() / 2, get_h() - 25)),
      toolbar_(this, 0, 0, UI::Box::Horizontal),
@@ -118,6 +117,13 @@ InteractiveBase::InteractiveBase(EditorGameBase& the_egbase, Section& global_s)
 
 	toolbar_.set_layout_toplevel(true);
 	map_view_.changeview.connect([this] { mainview_move(); });
+	map_view_.track_selection.connect([this](const Widelands::NodeAndTriangle<>& node_and_triangle,
+	                                         const MapView::HonorSelectionFreeze freeze) {
+		if (freeze == HonorSelectionFreeze::kYes && sel_.freeze) {
+			return;
+		}
+		set_sel_pos(node_and_triangle);
+	});
 
 	set_border_snap_distance(global_s.get_int("border_snap_distance", 0));
 	set_panel_snap_distance(global_s.get_int("panel_snap_distance", 10));
@@ -205,6 +211,19 @@ void InteractiveBase::set_sel_picture(const Image* image) {
 	sel_.pic = image;
 	set_sel_pos(get_sel_pos());  //  redraw
 }
+
+TextToDraw InteractiveBase::get_text_to_draw() const {
+	TextToDraw text_to_draw = TextToDraw::kNone;
+	auto display_flags = get_display_flags();
+	if (display_flags & InteractiveBase::dfShowCensus) {
+		text_to_draw = text_to_draw | TextToDraw::kCensus;
+	}
+	if (display_flags & InteractiveBase::dfShowStatistics) {
+		text_to_draw = text_to_draw | TextToDraw::kStatistics;
+	}
+	return text_to_draw;
+}
+
 void InteractiveBase::unset_sel_picture() {
 	set_sel_picture(g_gr->images().get("images/ui_basic/fsel.png"));
 }
@@ -345,10 +364,6 @@ void InteractiveBase::think() {
 	egbase().think();  // Call game logic here. The game advances.
 
 	UI::Panel::think();
-}
-
-void InteractiveBase::draw(RenderTarget& dst) {
-	map_view_.draw(dst);
 }
 
 bool InteractiveBase::handle_mousepress(uint8_t btn, int32_t x, int32_t y) {
