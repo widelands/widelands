@@ -3643,7 +3643,7 @@ bool DefaultAI::check_productionsites(uint32_t gametime) {
 		// The site is in process of emptying its input queues
 		// Do nothing when some wares are left, but do not wait more then 4 minutes
 		if (site.bo->construction_decision_time + 4 * 60 * 1000 > gametime &&
-		    set_inputs_to_zero(site) > 0) {
+		    !set_inputs_to_zero(site)) {
 			return false;
 		}
 		assert(site.bo->cnt_upgrade_pending == 1);
