@@ -793,8 +793,7 @@ public:
 
 	LuaMapObject() : ptr_(nullptr) {
 	}
-	explicit LuaMapObject(Widelands::MapObject& mo) {
-		ptr_ = &mo;
+	explicit LuaMapObject(Widelands::MapObject& mo) : ptr_(&mo) {
 	}
 	explicit LuaMapObject(lua_State* L) : ptr_(nullptr) {
 		report_error(L, "Cannot instantiate a '%s' directly!", className);

@@ -401,9 +401,7 @@ void Neuron::set_type(uint8_t new_type) {
 }
 
 // FNeuron is basically a single uint32_t integer, and the AI can query every bit of that uint32_t
-FNeuron::FNeuron(uint32_t c, uint16_t i) {
-	core = c;
-	id = i;
+FNeuron::FNeuron(uint32_t c, uint16_t i) : core(c), id(i) {
 }
 
 // Returning a result depending on combinations of 5 bools
