@@ -259,7 +259,6 @@ private:
 	bool check_enemy_sites(uint32_t);
 	void count_military_vacant_positions();
 	bool check_trainingsites(uint32_t);
-	uint32_t barracks_count();
 	// return single number of strength of vector of soldiers
 	int32_t calculate_strength(const std::vector<Widelands::Soldier*>&);
 	// for militarysites (overloading the function)

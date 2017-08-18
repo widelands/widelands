@@ -224,7 +224,9 @@ void CookiePriorityQueue<_T, _Cw, _CA>::decrease_key(
 		swap(elt_cookie, parent_cookie);
 	}
 
-	// selftest();
+#ifndef NDEBUG
+	 selftest();
+#endif
 }
 
 template <typename _T, typename _Cw, typename _CA>
@@ -266,8 +268,9 @@ void CookiePriorityQueue<_T, _Cw, _CA>::increase_key(
 
 		break;
 	}
-
-	// selftest();
+#ifndef NDEBUG
+	 selftest();
+#endif
 }
 
 template <typename _T, typename _Cw, typename _CA>

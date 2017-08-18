@@ -149,19 +149,6 @@ void MultilineEditbox::set_text(const std::string& text) {
 	changed();
 }
 
-/**
- * Set the maximum number of bytes in the scrollbar text.
- *
- * This will shorten the currently stored text when necessary.
- */
-void MultilineEditbox::set_maximum_bytes(const uint32_t n) {
-	while (n < d_->text.size())
-		d_->erase_bytes(d_->prev_char(d_->text.size()), d_->text.size());
-	d_->maxbytes = n;
-
-	// do not need to update here, because erase() will
-	// update when necessary
-}
 
 /**
  * Erase the given range of bytes, adjust the cursor position, and update.

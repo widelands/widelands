@@ -262,10 +262,6 @@ BuildableField::BuildableField(const Widelands::FCoords& fc)
      is_militarysite(false) {
 }
 
-int32_t BuildableField::own_military_sites_nearby_() {
-	return military_stationed + military_unstationed;
-}
-
 MineableField::MineableField(const Widelands::FCoords& fc)
    : coords(fc),
      field_info_expiration(20000),
@@ -1292,14 +1288,6 @@ uint32_t PlayersStrengths::get_old_visible_enemies_power(const uint32_t gametime
 		}
 	}
 	return pw;
-}
-
-// This is casualities of player
-uint32_t PlayersStrengths::get_player_casualities(Widelands::PlayerNumber pn) {
-	if (all_stats.count(pn) > 0) {
-		return all_stats[pn].players_casualities;
-	}
-	return 0;
 }
 
 // This is strength of player plus third of strength of other members of his team
