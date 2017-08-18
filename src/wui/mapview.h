@@ -136,6 +136,9 @@ public:
 	// Jump, this behaves exactly like 'set_mouse_pos'.
 	void mouse_to_pixel(const Vector2i& pixel, const Transition& transition);
 
+	// Move the view by 'delta_pixels'.
+	void pan_by(Vector2i delta_pixels);
+
 	// The current view area visible in the MapView in map pixel coordinates.
 	// The returned value always has 'x' > 0 and 'y' > 0.
 	ViewArea view_area() const;
@@ -153,7 +156,6 @@ public:
 	// True if a 'Transition::Smooth' animation is playing.
 	bool is_animating() const;
 
-	// Implementing Panel.
 	void draw(RenderTarget&) override;
 	bool handle_mousepress(uint8_t btn, int32_t x, int32_t y) override;
 	bool handle_mouserelease(uint8_t btn, int32_t x, int32_t y) override;
@@ -161,14 +163,6 @@ public:
 	handle_mousemove(uint8_t state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff) override;
 	bool handle_mousewheel(uint32_t which, int32_t x, int32_t y) override;
 	bool handle_key(bool down, SDL_Keysym code) override;
-
-protected:
-	InteractiveBase& intbase() const {
-		return intbase_;
-	}
-
-	// Move the view by 'delta_pixels'.
-	void pan_by(Vector2i delta_pixels);
 
 private:
 	void stop_dragging();

@@ -456,9 +456,10 @@ bool Game::run(UI::ProgressWindow* loader_ui,
 			}
 		}
 
-		if (get_ipl())
-			get_ipl()->scroll_to_field(
+		if (get_ipl()) {
+			get_ipl()->map_view()->scroll_to_field(
 			   map().get_starting_pos(get_ipl()->player_number()), MapView::Transition::Jump);
+		}
 
 		// Prepare the map, set default textures
 		map().recalc_default_resources(world());

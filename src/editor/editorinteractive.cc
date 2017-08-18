@@ -113,7 +113,7 @@ EditorInteractive::EditorInteractive(Widelands::EditorGameBase& e)
 		new EditorPlayerMenu(*this, playermenu_);
 	};
 
-	toolbar_.add_space(15);
+	toolbar()->add_space(15);
 
 	toggle_buildhelp_ = add_toolbar_button(
 	   "wui/menus/menu_toggle_buildhelp", "buildhelp", _("Show Building Spaces (on/off)"));
@@ -131,7 +131,7 @@ EditorInteractive::EditorInteractive(Widelands::EditorGameBase& e)
 	toggle_resources_->set_perm_pressed(true);
 	toggle_resources_->sigclicked.connect([this]() { toggle_resources(); });
 
-	toolbar_.add_space(15);
+	toolbar()->add_space(15);
 
 	add_toolbar_button(
 	   "wui/menus/menu_toggle_minimap", "minimap", _("Minimap"), &minimap_registry(), true);
@@ -139,10 +139,11 @@ EditorInteractive::EditorInteractive(Widelands::EditorGameBase& e)
 
 	auto zoom = add_toolbar_button("wui/menus/menu_reset_zoom", "reset_zoom", _("Reset zoom"));
 	zoom->sigclicked.connect([this] {
-		zoom_around(1.f, Vector2f(get_w() / 2.f, get_h() / 2.f), MapView::Transition::Smooth);
+		map_view()->zoom_around(
+		   1.f, Vector2f(get_w() / 2.f, get_h() / 2.f), MapView::Transition::Smooth);
 	});
 
-	toolbar_.add_space(15);
+	toolbar()->add_space(15);
 
 	undo_ = add_toolbar_button("wui/editor/editor_undo", "undo", _("Undo"));
 	undo_->sigclicked.connect([this] { history_->undo_action(egbase().world()); });
@@ -150,7 +151,7 @@ EditorInteractive::EditorInteractive(Widelands::EditorGameBase& e)
 	redo_ = add_toolbar_button("wui/editor/editor_redo", "redo", _("Redo"));
 	redo_->sigclicked.connect([this] { history_->redo_action(egbase().world()); });
 
-	toolbar_.add_space(15);
+	toolbar()->add_space(15);
 
 	add_toolbar_button("ui_basic/menu_help", "help", _("Help"), &helpmenu_, true);
 	helpmenu_.open_window = [this] { new EditorHelp(*this, helpmenu_, &egbase().lua()); };
@@ -163,7 +164,7 @@ EditorInteractive::EditorInteractive(Widelands::EditorGameBase& e)
 	set_display_flag(InteractiveBase::dfDebug, false);
 #endif
 
-	fieldclicked.connect(boost::bind(&EditorInteractive::map_clicked, this, false));
+	map_view()->fieldclicked.connect(boost::bind(&EditorInteractive::map_clicked, this, false));
 
 	// Subscribe to changes of the resource type on a field..
 	field_resource_changed_subscriber_ =
@@ -658,7 +659,7 @@ void EditorInteractive::map_changed(const MapWas& action) {
 		}
 
 		// Make sure that we will start at coordinates (0,0).
-		set_view(MapView::View{Vector2f::zero(), 1.f}, Transition::Jump);
+		map_view()->set_view(MapView::View{Vector2f::zero(), 1.f}, MapView::Transition::Jump);
 		set_sel_pos(Widelands::NodeAndTriangle<>(
 		   Widelands::Coords(0, 0),
 		   Widelands::TCoords<>(Widelands::Coords(0, 0), Widelands::TCoords<>::D)));
