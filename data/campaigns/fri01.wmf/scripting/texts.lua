@@ -6,7 +6,7 @@ include "scripting/formatting.lua"
 include "scripting/format_scenario.lua"
 
 function reebaud(title, text)
-   return speech("map:reebaud.png", "AAFF44", title, text)
+   return speech("map:reebaud.png", "6622CC", title, text)
 end
 function hauke(title, text)
    return speech("map:hauke.png", "88CCCC", title, text)
@@ -28,7 +28,7 @@ obj_build_wood_economy = {
    title=_"Build a wood economy and a reed farm",
    number = 1,
    body = objective_text(_"Wood Economy",
-      listitem_bullet(_[[Build one woodcutter´s house and two forester´s houses to start producing logs, and a reed farm to start growing reed.]])
+      listitem_bullet(_[[Build at least one woodcutter´s house and two forester´s houses to start producing logs, and a reed farm to start growing reed.]])
    ),
 }
 obj_build_brick_economy = {
@@ -52,7 +52,7 @@ obj_build_food_economy_2 = {
    title=_"Enhance your food economy",
    number = 1,
    body = objective_text(_"Enhance Food Economy",
-      listitem_bullet(_[[Build two farms, a bee-keeper´s house, a bakery and a brewery. Enhance the tavern to a drinking hall and build another tavern.]])
+      listitem_bullet(_[[Build at least two farms, a bee-keeper´s house, a bakery, a brewery, and another tavern.]])
    ),
 }
 obj_build_mining = {
@@ -61,6 +61,14 @@ obj_build_mining = {
    number = 1,
    body = objective_text(_"Build mines and mining infrastructure",
       listitem_bullet(_[[Build an iron mine and a gold mine. Also build a furnace, a blacksmithy and a small armour smithy.]])
+   ),
+}
+obj_expand = {
+   name = "expand",
+   title=_"Discover more of the island",
+   number = 1,
+   body = objective_text(_"Expand and discover",
+      listitem_bullet(_[[Expand further and discover more of the island.]])
    ),
 }
 obj_recruit_soldiers = {
@@ -76,7 +84,7 @@ obj_train_soldiers = {
    title=_"Train your soldiers",
    number = 1,
    body = objective_text(_"Training Soldiers",
-      listitem_bullet(_[[Train a soldier to the highest possible level.]])
+      listitem_bullet(_[[Train a soldier to the highest possible level and send him to a military building.]])
    ),
 }
 obj_defeat_enemy = {
@@ -105,7 +113,7 @@ intro_1 = {
    title =_ "Introduction",
    body=reebaud(_"Welcome!",
       -- TRANSLATORS: Reebaud – Introduction 1
-      _([[Welcome to the beautiful island of Langeneß! I am Reebaud, the chieftain of this pristine island.]])
+      _([[Welcome to the beautiful isle of Langeneß! I am Reebaud, the chieftain of this pristine island.]])
       .. paragraphdivider() ..
       -- TRANSLATORS: Reebaud – Introduction 1
       _([[My tribe and I have just arrived from the mainland. There were fights with the Danes in the North, the Vikings in the East… So I decided to lead my tribe away to start a quiet, peaceful life on this untouched island.]])),
@@ -120,7 +128,7 @@ intro_2 = {
       _([[Like all Frisians, we build our houses mainly with bricks. We improve them by adding some wood and stones. The roofs are thatched with reed, naturally. Nothing is better suited to keep the rain out.]])
       .. paragraphdivider() ..
       -- TRANSLATORS: Reebaud – Introduction 2
-      _([[Let´s start by taking care of our wood production. Trees don´t seem to grow well on this island; better build two houses for foresters and one for a woodcutter.]])
+      _([[Let´s start by taking care of our wood production. Trees don´t seem to grow well on this island; better build at least two houses for foresters and one for a woodcutter.]])
       .. paragraphdivider() ..
       -- TRANSLATORS: Reebaud – Introduction 2
       _([[Also, we had better build a reed farm. Even reed farms need reed to be built, so we must take care not to run short before we can grow our own. Reed is easily cultivated, so the reed farmer doesn´t need anything more to start growing reed.]]))
@@ -130,13 +138,13 @@ intro_3 = {
    title =_ "Introduction",
    body=reebaud(_"Building our now home",
       -- TRANSLATORS: Reebaud – Introduction 3
-      _([[Our wood and reed supplies are ensured. Now, we must take care of our brick supply. Bricks are burned in a brick burner´s house out of stone and clay, so we first need to produce those. On the mainland, we used to cut granite out of rocks, but I don´t see any here. Perhaps these mountains contain enough stones to mine some granite.]])
+      _([[Our wood and reed supplies are ensured. Now, we must take care of our brick supply. Bricks are burned in a brick burner´s house out of stone and clay, so we first need to produce those. On the mainland, we used to cut granite out of rocks, but I don´t see any here. Perhaps these hills contain enough stones to mine some granite.]])
       .. paragraphdivider() ..
       -- TRANSLATORS: Reebaud – Introduction 3
       _([[Clay is easy to make: A clay burner simply digs up some earth and mixes it with water. Just make sure that he has plenty of space for digging around his clay pit.]])
       .. paragraphdivider() ..
       -- TRANSLATORS: Reebaud – Introduction 3
-      _([[To burn bricks, the brick burner needs a fire. We use coal as fuel. Build a coal mine to make sure we don´t run out. No coal means no bricks, no bricks means no mines, no mines mean no coal – you can see the problem.]])
+      _([[To burn bricks, the brick burner needs a fire. We use coal as fuel. Build a coal mine to make sure we don´t run out. No coal means no bricks, no bricks means no mines, no mines mean no coal… you can see the problem.]])
       .. paragraphdivider() ..
       -- TRANSLATORS: Reebaud – Introduction 3
       _([[Also, build a well – nobody likes to drink salt water, and it is no good for making clay.]]))
@@ -156,7 +164,7 @@ food_1 = {
       _([[Chieftain Reebaud! I bring bad news. The miners are working so hard that they have no time to prepare their own food. They demand to be supplied with it.]])
       .. paragraphdivider() ..
       -- TRANSLATORS: Hauke – no rations left
-      _([[You had better build a tavern to prepare rations. Also, build a fisher´s house, and as nobody likes raw fish, a smokery to smoke it. You should also build a berry farm, which plants berry bushes, and a fruit collector´s house, so the berries are harvested.]]))
+      _([[You had better build a tavern to prepare rations. Also, build a fisher´s house, and as nobody likes raw fish, a smokery to smoke it. You should also build a berry farm, which plants berry bushes, and a fruit collector´s house, so the bushes are harvested.]]))
       .. new_objectives(obj_build_food_economy),
 }
 food_2 = {
@@ -166,13 +174,13 @@ food_2 = {
       _([[Well done. The miners are satisfied and have started working again.]])
       .. paragraphdivider() ..
       -- TRANSLATORS: Hauke – better food
-      _([[But when the mines have to be expanded, rations won´t keep the miners happy. Better take precautions – build a second tavern and enhance the one you have to a drinking hall.]])
+      _([[But when the mines have to be expanded, rations won´t keep the miners happy. Better take precautions – build a second tavern and consider enhancing the one you have to a drinking hall.]])
       .. paragraphdivider() ..
       -- TRANSLATORS: Hauke – better food
       _([[A drinking hall needs better food. Build two farms to start growing barley, a bakery and a brewery.]])
       .. paragraphdivider() ..
       -- TRANSLATORS: Hauke – better food
-      _([[The bakery and brewery should be enhanced as soon as the workers have enough experience. They can then produce mead, and bread sweetened with honey. Build aa bee-keeper´s house next to the berry farm to ensure we have enough honey.]]))
+      _([[The bakery and brewery should be enhanced as soon as the workers have enough experience. They can then produce mead, and bread sweetened with honey. Build a bee-keeper´s house next to the berry farm to ensure we have enough honey.]]))
       .. new_objectives(obj_build_food_economy_2),
 }
 
@@ -180,11 +188,21 @@ mining_1 = {
    title =_ "Build a mining economy",
    body=reebaud(_"Mining economy",
       -- TRANSLATORS: Reebaud – mining economy
-      _([[We can now produce all the kinds of food we are used to. I wonder what treasures these hills might contains? We should find out.]])
+      _([[We can now produce all the kinds of food we are used to. I wonder what treasures these hills might contain? We should find out.]])
       .. paragraphdivider() ..
-      -- TRANSLATORS: Hauke – mining economy
-      _([[Build an iron mine and a gold mine. As they produce only ores, we will need a furnace to smelt them. Also build a blacksmithy to ensure we won´t run out of tools – and yes, a small armour smithy as well. We haven´t seen enemies yet, but it´s better to be prepared.]]))
+      -- TRANSLATORS: Reebaud – mining economy
+      _([[Build an iron mine and a gold mine. As they produce only ores, we will need a furnace to smelt them. Also build a blacksmithy to ensure we won´t run out of tools – and yes, a small armour smithy as well. I hope we won´t meet enemies here, but it´s better to be prepared.]]))
       .. new_objectives(obj_build_mining),
+}
+expand_1 = {
+   title =_ "Discover the island",
+   body=reebaud(_"Expanding",
+      -- TRANSLATORS: Reebaud – expand
+      _([[Our mines are working well. We can now produce all the tools we need, and some weapons as well.]])
+      .. paragraphdivider() ..
+      -- TRANSLATORS: Reebaud – expand
+      _([[But we can´t be sure we´re safe here yet. It would be better to expand further to find out whether we really are alone here.]]))
+      .. new_objectives(obj_expand),
 }
 
 recruiting_1 = {
@@ -196,8 +214,8 @@ recruiting_1 = {
 recruiting_2 = {
    title =_ "Enemies!",
    body=maukor(_"Enemy sighted!",
-      -- TRANSLATORS: Maukor – recruit soldiers
-      _([[This is MY island! YOU are the intruder here! I pray to God that we shall kil you all, and your souls shall be tormented in hell for ever!]])),
+      -- TRANSLATORS: Maukor – recruit soldiers. The great stormflood of 1362 was supposed to be a sign of the victory of the Christian God over the old northern gods
+      _([[This is MY island! YOU are the intruder here! I pray to the one and solely true God that we will kill you all, and your souls shall be tormented in hell for ever!]])),
 }
 recruiting_3 = {
    title =_ "Enemies!",
@@ -213,6 +231,9 @@ recruiting_4 = {
        .. paragraphdivider() ..
       -- TRANSLATORS: Reebaud – recruit soldiers
       _([[Build a reindeer farm to start producing fur, and a seamstress to sew the fur into clothes. And of course we must have a barracks.]]))
+       .. paragraphdivider() ..
+      -- TRANSLATORS: Reebaud – recruit soldiers
+      _([[The reindeer farm has the advantage that it not only produces fur, and meat as a by-product – it also trains some reindeer to help our carriers on busy roads.]])
       .. new_objectives(obj_recruit_soldiers),
 }
 
@@ -220,51 +241,51 @@ training_1 = {
    title =_ "Training Soldiers",
    body=reebaud(_"Stronger in battle",
       -- TRANSLATORS: Reebaud – train soldiers
-      _([[We recruit soldiers easily enough, but they are fairly weak. We must train our soldiers to beat the enemy.]])
+      _([[We recruit soldiers easily enough, but they are fairly weak. We must train our soldiers if they are to beat the enemy.]])
        .. paragraphdivider() ..
       -- TRANSLATORS: Reebaud – train soldiers
       _([[Soldiers are trained in the basics of attack, health and defence by a small training camp. They learn the finer points in a large training arena.]])
        .. paragraphdivider() ..
       -- TRANSLATORS: Reebaud – train soldiers
-      _([[We will need a master seamstress to sew better armour – and another seamstress to keep producing normal fur clothes. Also, enhance the small armour smithy to produce better weapons and helmets, and build a new small one so we still get more basic weapons.]])
+      _([[We will need a master seamstress to sew better armour, and another seamstress to keep producing normal fur clothes. Also, enhance the small armour smithy to produce better weapons and helmets, and build a new small one so we still get more basic weapons.]])
        .. paragraphdivider() ..
       -- TRANSLATORS: Reebaud – train soldiers
-      _([[I want to have at least one soldier who is trained to the highest possible level in all categories: Level 6 attack, level 2 health and level 2 defence. We do not train soldiers to evade attacks; they should be able to block blows instead of jumping away.]]))
+      _([[I want to have at least one soldier at the front who is trained to the highest possible level in all categories: Level 6 attack, level 2 health and level 2 defence. We do not train soldiers to evade attacks; a true warrior can block his opponent´s blows instead of jumping away like a coward.]]))
       .. new_objectives(obj_train_soldiers),
 }
 training_2 = {
    title =_ "Training soldiers",
    body=reebaud(_"Our soldiers are strong",
-      -- TRANSLATORS: Reebaud – enemy defeated
-      _([[We have out first fully trained soldier. Let´s attack!]]))
+      -- TRANSLATORS: Reebaud – attack enemy
+      _([[We finally have out first fully trained soldier. Let´s attack!]]))
       .. new_objectives(obj_defeat_enemy),
 }
-risingwater_1 = {
+rising_water_1 = {
    title =_ "Enemy defeated",
    body=reebaud(_"Enemy defeated!",
       -- TRANSLATORS: Reebaud – enemy defeated
       _([[They are defeated! I thank you, all my gods, for granting us victory over the unbelievers!]])),
 }
-risingwater_2 = {
+rising_water_2 = {
    title =_ "Enemy defeated",
    body=maukor(_"Enemy defeated!",
       -- TRANSLATORS: Maukor – enemy defeated
       _([[I pray to God to hear my last words. Let not the false fiend triumph! Punish them for this ignoble feat!]])),
 }
-risingwater_3 = {
+rising_water_3 = {
    title =_ "Stormflood",
    body=reebaud(_"The island is flooding!",
       -- TRANSLATORS: Reebaud – enemy defeated
       _([[His God has granted his wish! The ocean is rising! The island is almost flat – we will all drown!]])),
 }
-risingwater_4 = {
+rising_water_4 = {
    title =_ "Stormflood",
    body=hauke(_"The island is flooding!",
       -- TRANSLATORS: Hauke – rising water
       _([[Despair not, I spy some hope! The easternmost tip of the island seems well suited to build a port on. If we manage to construct a ship, and fill it with all we need to build a new settlement, we may be able to escape.]])
      .. paragraphdivider() ..
       -- TRANSLATORS: Hauke – rising water
-      _([[The stormflood seems to be coming from the west. If we hurry, we will just make it! We only need to build a port, a shipyard, and a weaving mill to weave cloth for the sails; then launch an expedition from the port. Pray to the gods and make haste!]]))
+      _([[The stormflood seems to be coming from the west. If we hurry, we will just make it! We only need to build a port and a shipyard – oh, and a weaving mill to weave cloth for the sails. Then we launch an expedition from the port. Pray to the gods and make haste!]]))
       .. new_objectives(obj_escape),
 }
 
@@ -272,7 +293,7 @@ victory_1 = {
    title =_ "Victory",
    body=reebaud(_"We escaped!",
       -- TRANSLATORS: Reebaud – victory
-      _([[The gods have heard our prayers. We will escape the island´s drowning, and I am confident we will be able to build a new home again in a more peaceful corner of this world!]]))
+      _([[The gods have answered our prayers. We will escape the island´s drowning, and I am confident we will be able to build a new home again in a more peaceful corner of this world!]]))
       .. objective_text(_"Congratulations",
       _[[You have completed this mission. You may move on to the next scenario now to help us build a new home, far from the false God´s vengeful reach…]]),
 }
