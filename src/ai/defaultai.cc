@@ -6020,14 +6020,6 @@ void DefaultAI::print_stats(uint32_t const gametime) {
 		}
 	}
 
-	std::string summary;
-	for (const auto material : materials) {
-		uint32_t stock = calculate_stocklevel(material);
-		if (stock == 0) {
-			summary = summary + game().tribes().get_ware_descr(material)->descname() + ", ";
-		}
-	}
-
 	if (false)
 		log(" %1d: %s Buildings count: Pr:%3u, Ml:%3u, Mi:%2u, Wh:%2u, Po:%u.\n", pn,
 		    gamestring_with_leading_zeros(gametime), static_cast<uint32_t>(productionsites.size()),
@@ -6101,32 +6093,20 @@ void DefaultAI::print_stats(uint32_t const gametime) {
 		why += ", less then 2 mines";
 	}
 
-	if (false)
+	if (false) {
 		log("Prodsites in constr: %2d, mines in constr: %2d %s %s\n", numof_psites_in_constr,
 		    mines_in_constr(),
 		    (expansion_type.get_expansion_type() != ExpansionMode::kEconomy) ? "NEW BUILDING STOP" :
 		                                                                       "",
 		    why.c_str());
+	}
 
-	if (false)
+	if (false) {
 		log("Least military score: %5d/%3d, msites in constr: %3d,"
 		    "soldier st: %2d, strength: %3d\n",
 		    persistent_data->least_military_score, persistent_data->ai_personality_mil_upper_limit,
 		    msites_in_constr(), static_cast<int8_t>(soldier_status_),
 		    player_statistics.get_modified_player_power(player_number()));
-	std::string wpolicy;
-	switch (wood_policy_) {
-	case WoodPolicy::kDismantleRangers:
-		wpolicy = "Dismantle rangers";
-		break;
-	case WoodPolicy::kAllowRangers:
-		wpolicy = "Allow rangers";
-		break;
-	case WoodPolicy::kStopRangers:
-		wpolicy = "Stop rangers";
-		break;
-	default:
-		wpolicy = "unknown";
 	}
 }
 

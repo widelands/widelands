@@ -56,7 +56,6 @@ struct S2MapDescrHeader {
 	int8_t uses_world;  // 0 = green, 1 =black, 2 = winter
 	int8_t nplayers;
 	char author[26];
-	char bulk[2290];  // unknown
 } /* size 2352 */;
 
 // TODO(unknown): the following bob types appear in S2 maps but are unknown
