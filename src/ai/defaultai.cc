@@ -4879,9 +4879,9 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 			if (tmp_score < 0) {
 				return BuildingNecessity::kNeededPending;
 			} else {
-				return BuildingNecessity::kNeeded;
 				bo.primary_priority +=
 				   tmp_score * std::abs(management_data.get_military_number_at(127) / 5);
+				return BuildingNecessity::kNeeded;
 			}
 
 		} else if (bo.max_needed_preciousness > 0) {
