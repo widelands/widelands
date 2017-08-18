@@ -198,18 +198,32 @@ NearFlag::NearFlag(const Flag& f, int32_t const c, int32_t const d)
 EventTimeQueue::EventTimeQueue() {
 }
 
-void EventTimeQueue::push(const uint32_t production_time) {
-	queue.push(production_time);
+void EventTimeQueue::push(const uint32_t production_time, const uint32_t additional_id) {
+	queue.push_front(std::make_pair(production_time, additional_id));
 }
 
-uint32_t EventTimeQueue::count(const uint32_t current_time) {
+// Return count of entries in log (deque), if id is provided, it counts corresponding
+// members. id here can be index of building, f.e. it count how many soldiers were
+// trained in particular type of training site
+uint32_t EventTimeQueue::count(const uint32_t current_time, const uint32_t additional_id) {
 	strip_old(current_time);
-	return queue.size();
+	if (additional_id == std::numeric_limits<uint32_t>::max()) {
+		return queue.size();
+	} else {
+		uint32_t cnt = 0;
+		// for (auto item : queue){
+		for (auto it : queue) {
+			if (it.second == additional_id) {
+				cnt += 1;
+			}
+		}
+		return cnt;
+	}
 }
 
 void EventTimeQueue::strip_old(const uint32_t current_time) {
-	while (!queue.empty() && queue.front() < current_time - duration_) {
-		queue.pop();
+	while (!queue.empty() && queue.back().first < current_time - duration_) {
+		queue.pop_back();
 	}
 }
 

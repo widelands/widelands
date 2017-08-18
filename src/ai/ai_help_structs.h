@@ -276,16 +276,20 @@ struct NearFlag {
 	int32_t distance;
 };
 
+// FIFO like structure for pairs <gametime,id>, where id is optional
+// used to count events within a time frame - duration_ (older ones are
+// stripped with strip_old function)
 struct EventTimeQueue {
 	EventTimeQueue();
 
-	void push(uint32_t);
-	uint32_t count(uint32_t);
+	void push(uint32_t, uint32_t = std::numeric_limits<uint32_t>::max());
+	uint32_t count(uint32_t, uint32_t = std::numeric_limits<uint32_t>::max());
 	void strip_old(uint32_t);
 
 private:
-	uint32_t duration_ = 20 * 60 * 1000;
-	std::queue<uint32_t> queue;
+	const uint32_t duration_ = 20 * 60 * 1000;
+	// FIFO contaner where newest goes to the front
+	std::deque<std::pair<uint32_t, uint32_t>> queue;
 };
 
 struct WalkableSpot {

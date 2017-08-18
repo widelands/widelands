@@ -489,7 +489,6 @@ void DefaultAI::late_initialization() {
 	const uint32_t gametime = game().get_gametime();
 
 	log("ComputerPlayer(%d): initializing as type %u%s\n", player_number(),
-	    // NOCOM(#codereview): Please add blank spaces.
 	    static_cast<unsigned int>(type_), (ai_training_mode_) ? ", in ai training mode" : "");
 	if (player_->team_number() > 0) {
 		log("    ... member of team %d\n", player_->team_number());
@@ -4314,6 +4313,10 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 			return BuildingNecessity::kNotNeeded;
 		} else if (ts_without_trainers_ > 1) {
 			return BuildingNecessity::kNotNeeded;
+		} else if (bo.total_count() > 0) {
+			if (soldier_trained_log.count(gametime, bo.id) / bo.total_count() < 5) {
+				return BuildingNecessity::kNotNeeded;
+			}
 		}
 
 		// It seems we might need it after all
