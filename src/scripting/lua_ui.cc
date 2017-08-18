@@ -486,7 +486,7 @@ void LuaMapView::__unpersist(lua_State* L) {
 		currently sees. This is a table containing 'x', 'y'.
 */
 int LuaMapView::get_center_map_pixel(lua_State* L) {
-	const Vector2f center = get()->view_area().rect().center();
+	const Vector2f center = get()->map_view()->view_area().rect().center();
 	lua_newtable(L);
 
 	lua_pushstring(L, "x");
@@ -558,7 +558,7 @@ int LuaMapView::get_is_building_road(lua_State* L) {
 		(RO) True if this MapView is currently paning or zooming.
 */
 int LuaMapView::get_is_animating(lua_State* L) {
-	lua_pushboolean(L, get()->is_animating());
+	lua_pushboolean(L, get()->map_view()->is_animating());
 	return 1;
 }
 /*
@@ -575,9 +575,9 @@ int LuaMapView::get_is_animating(lua_State* L) {
       :type field: :class:`wl.map.Field`
 */
 int LuaMapView::click(lua_State* L) {
-	get()->mouse_to_field(
+	get()->map_view()->mouse_to_field(
 	   (*get_user_class<LuaMaps::LuaField>(L, 2))->coords(), MapView::Transition::Jump);
-	get()->fieldclicked();
+	get()->map_view()->fieldclicked();
 	return 0;
 }
 
@@ -600,7 +600,7 @@ int LuaMapView::start_road_building(lua_State* L) {
 	Widelands::Coords starting_field =
 	   (*get_user_class<LuaMaps::LuaFlag>(L, 2))->get(L, get_egbase(L))->get_position();
 
-	me->mouse_to_field(starting_field, MapView::Transition::Jump);
+	me->map_view()->mouse_to_field(starting_field, MapView::Transition::Jump);
 	me->start_build_road(starting_field, me->get_player()->player_number());
 
 	return 0;
@@ -649,12 +649,12 @@ int LuaMapView::close(lua_State* /* l */) {
 int LuaMapView::scroll_to_map_pixel(lua_State* L) {
 	Widelands::Game& game = get_game(L);
 	// don't move view in replays
-	if (game.game_controller()->get_game_type() == GameController::GameType::REPLAY) {
+	if (game.game_controller()->get_game_type() == GameController::GameType::kReplay) {
 		return 0;
 	}
 
 	const Vector2f center(luaL_checkdouble(L, 2), luaL_checkdouble(L, 3));
-	get()->scroll_to_map_pixel(center, MapView::Transition::Smooth);
+	get()->map_view()->scroll_to_map_pixel(center, MapView::Transition::Smooth);
 	return 0;
 }
 
@@ -668,7 +668,7 @@ int LuaMapView::scroll_to_map_pixel(lua_State* L) {
       :type field: :class:`wl.map.Field`
 */
 int LuaMapView::scroll_to_field(lua_State* L) {
-	get()->scroll_to_field(
+	get()->map_view()->scroll_to_field(
 	   (*get_user_class<LuaMaps::LuaField>(L, 2))->coords(), MapView::Transition::Smooth);
 	return 0;
 }
@@ -682,8 +682,8 @@ int LuaMapView::scroll_to_field(lua_State* L) {
       :type field: :class:`wl.map.Field`
 */
 int LuaMapView::is_visible(lua_State* L) {
-	lua_pushboolean(
-	   L, get()->view_area().contains((*get_user_class<LuaMaps::LuaField>(L, 2))->coords()));
+	lua_pushboolean(L, get()->map_view()->view_area().contains(
+	                      (*get_user_class<LuaMaps::LuaField>(L, 2))->coords()));
 	return 1;
 }
 
@@ -701,7 +701,7 @@ int LuaMapView::is_visible(lua_State* L) {
 int LuaMapView::mouse_to_pixel(lua_State* L) {
 	int x = luaL_checkint32(L, 2);
 	int y = luaL_checkint32(L, 3);
-	get()->mouse_to_pixel(Vector2i(x, y), MapView::Transition::Smooth);
+	get()->map_view()->mouse_to_pixel(Vector2i(x, y), MapView::Transition::Smooth);
 	return 0;
 }
 
@@ -716,7 +716,7 @@ int LuaMapView::mouse_to_pixel(lua_State* L) {
       :type field: :class:`wl.map.Field`
 */
 int LuaMapView::mouse_to_field(lua_State* L) {
-	get()->mouse_to_field(
+	get()->map_view()->mouse_to_field(
 	   (*get_user_class<LuaMaps::LuaField>(L, 2))->coords(), MapView::Transition::Smooth);
 	return 0;
 }

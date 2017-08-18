@@ -65,7 +65,7 @@ InteractiveSpectator::InteractiveSpectator(Widelands::Game& g,
 		new GeneralStatisticsMenu(*this, main_windows_.general_stats);
 	};
 
-	toolbar_.add_space(15);
+	toolbar()->add_space(15);
 
 	add_toolbar_button(
 	   "wui/menus/menu_toggle_minimap", "minimap", _("Minimap"), &minimap_registry(), true);
@@ -77,10 +77,11 @@ InteractiveSpectator::InteractiveSpectator(Widelands::Game& g,
 
 	reset_zoom_ = add_toolbar_button("wui/menus/menu_reset_zoom", "reset_zoom", _("Reset zoom"));
 	reset_zoom_->sigclicked.connect([this] {
-		zoom_around(1.f, Vector2f(get_w() / 2.f, get_h() / 2.f), MapView::Transition::Smooth);
+		map_view()->zoom_around(
+		   1.f, Vector2f(get_w() / 2.f, get_h() / 2.f), MapView::Transition::Smooth);
 	});
 
-	toolbar_.add_space(15);
+	toolbar()->add_space(15);
 
 	if (is_multiplayer()) {
 		add_toolbar_button("wui/menus/menu_chat", "chat", _("Chat"), &chat_, true);
@@ -94,7 +95,7 @@ InteractiveSpectator::InteractiveSpectator(Widelands::Game& g,
 	adjust_toolbar_position();
 
 	// Setup all screen elements
-	fieldclicked.connect(boost::bind(&InteractiveSpectator::node_action, this));
+	map_view()->fieldclicked.connect(boost::bind(&InteractiveSpectator::node_action, this));
 }
 
 /**
@@ -107,16 +108,14 @@ Widelands::Player* InteractiveSpectator::get_player() const {
 	return nullptr;
 }
 
-int32_t InteractiveSpectator::calculate_buildcaps(const Widelands::TCoords<Widelands::FCoords>& c) {
+int32_t InteractiveSpectator::calculate_buildcaps(const Widelands::FCoords& c) {
 	const Widelands::PlayerNumber nr_players = game().map().get_nrplayers();
-
 	iterate_players_existing(p, nr_players, game(), player) {
 		const Widelands::NodeCaps nc = player->get_buildcaps(c);
 		if (nc > Widelands::NodeCaps::CAPS_NONE) {
 			return nc;
 		}
 	}
-
 	return Widelands::NodeCaps::CAPS_NONE;
 }
 

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-08-11 11:44+0000\n"
+"POT-Creation-Date: 2017-08-17 14:06+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -192,8 +192,8 @@ msgstr ""
 msgid "Dec"
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:62 ../../src/logic/game.cc:204
-#: ../../src/logic/game.cc:254
+#: ../../src/editor/editorinteractive.cc:62 ../../src/logic/game.cc:205
+#: ../../src/logic/game.cc:255
 msgid "Loading tribes"
 msgstr ""
 
@@ -220,75 +220,87 @@ msgid "Players"
 msgstr ""
 
 #: ../../src/editor/editorinteractive.cc:119
-#: ../../src/wui/interactive_player.cc:81
-#: ../../src/wui/interactive_spectator.cc:71
-msgid "Minimap"
-msgstr ""
-
-#: ../../src/editor/editorinteractive.cc:123
 #: ../../src/wui/interactive_player.cc:85
 #: ../../src/wui/interactive_spectator.cc:75
 msgid "Show Building Spaces (on/off)"
 msgstr ""
 
+#: ../../src/editor/editorinteractive.cc:122
+msgid "Show Immovables (on/off)"
+msgstr ""
+
 #: ../../src/editor/editorinteractive.cc:126
+msgid "Show Animals (on/off)"
+msgstr ""
+
+#: ../../src/editor/editorinteractive.cc:130
+msgid "Show Resources (on/off)"
+msgstr ""
+
+#: ../../src/editor/editorinteractive.cc:137
+#: ../../src/wui/interactive_player.cc:81
+#: ../../src/wui/interactive_spectator.cc:71
+msgid "Minimap"
+msgstr ""
+
+#: ../../src/editor/editorinteractive.cc:140
 #: ../../src/wui/interactive_player.cc:87
 #: ../../src/wui/interactive_spectator.cc:78
 msgid "Reset zoom"
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:133
+#: ../../src/editor/editorinteractive.cc:147
 msgid "Undo"
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:136
+#: ../../src/editor/editorinteractive.cc:150
 msgid "Redo"
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:141
+#: ../../src/editor/editorinteractive.cc:155
 #: ../../src/wui/buildingwindow.cc:330
 msgid "Help"
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:199
+#: ../../src/editor/editorinteractive.cc:215
 msgid "Unsupported format"
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:200
+#: ../../src/editor/editorinteractive.cc:216
 #, c-format
 msgid ""
 "Widelands could not load the file \"%s\". The file format seems to be "
 "incompatible."
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:213 ../../src/logic/game.cc:208
-#: ../../src/logic/game.cc:261
+#: ../../src/editor/editorinteractive.cc:229 ../../src/logic/game.cc:209
+#: ../../src/logic/game.cc:262
 msgid "Creating players"
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:263
+#: ../../src/editor/editorinteractive.cc:279
 msgid "Unsaved Map"
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:264
+#: ../../src/editor/editorinteractive.cc:280
 msgid "The map has not been saved, do you really want to quit?"
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:585
+#: ../../src/editor/editorinteractive.cc:608
 #: ../../src/editor/ui_menus/main_menu_new_map.cc:144
 msgid "Creating empty map…"
 msgstr ""
 
 #. * TRANSLATORS: Default name for new map
-#: ../../src/editor/editorinteractive.cc:588
+#: ../../src/editor/editorinteractive.cc:611
 #: ../../src/editor/ui_menus/main_menu_new_map.cc:151
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:533
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:133
-#: ../../src/logic/map.h:179 ../../src/wui/mapdata.cc:46
+#: ../../src/logic/map.h:179 ../../src/wui/mapdata.cc:44
 msgid "No Name"
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:591
+#: ../../src/editor/editorinteractive.cc:614
 #: ../../src/editor/ui_menus/main_menu_new_map.cc:152
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:534
 #: ../../src/logic/map.h:180
@@ -296,7 +308,7 @@ msgctxt "author_name"
 msgid "Unknown"
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:598
+#: ../../src/editor/editorinteractive.cc:621
 #, c-format
 msgid "Loading map “%s”…"
 msgstr ""
@@ -366,92 +378,92 @@ msgstr ""
 msgid "Owned by: —"
 msgstr ""
 
-#: ../../src/editor/tools/info_tool.cc:108
+#: ../../src/editor/tools/info_tool.cc:107
 msgid "Has immovable"
 msgstr ""
 
-#: ../../src/editor/tools/info_tool.cc:108
+#: ../../src/editor/tools/info_tool.cc:107
 msgid "No immovable"
 msgstr ""
 
-#: ../../src/editor/tools/info_tool.cc:111
+#: ../../src/editor/tools/info_tool.cc:110
 msgid "Has animals"
 msgstr ""
 
-#: ../../src/editor/tools/info_tool.cc:111
+#: ../../src/editor/tools/info_tool.cc:110
 msgid "No animals"
 msgstr ""
 
-#: ../../src/editor/tools/info_tool.cc:115
+#: ../../src/editor/tools/info_tool.cc:114
 #: ../../src/editor/ui_menus/main_menu_new_map.cc:115
 msgid "Terrain:"
 msgstr ""
 
-#: ../../src/editor/tools/info_tool.cc:122
+#: ../../src/editor/tools/info_tool.cc:121
 #, c-format
 msgctxt "terrain_name"
 msgid "Name: %s"
 msgstr ""
 
-#: ../../src/editor/tools/info_tool.cc:132
+#: ../../src/editor/tools/info_tool.cc:131
 #, c-format
 msgid "Is: %s"
 msgstr ""
 
-#: ../../src/editor/tools/info_tool.cc:137
+#: ../../src/editor/tools/info_tool.cc:136
 #, c-format
 msgid "Editor Category: %s"
 msgstr ""
 
-#: ../../src/editor/tools/info_tool.cc:141
+#: ../../src/editor/tools/info_tool.cc:140
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:119
 msgid "Resources:"
 msgstr ""
 
-#: ../../src/editor/tools/info_tool.cc:149
+#: ../../src/editor/tools/info_tool.cc:148
 #, c-format
 msgid "Resource name: %s"
 msgstr ""
 
-#: ../../src/editor/tools/info_tool.cc:152
+#: ../../src/editor/tools/info_tool.cc:151
 #, c-format
 msgid "Resource amount: %i"
 msgstr ""
 
-#: ../../src/editor/tools/info_tool.cc:155
+#: ../../src/editor/tools/info_tool.cc:154
 msgid "No resources"
 msgstr ""
 
-#: ../../src/editor/tools/info_tool.cc:159 ../../src/wui/mapdetails.cc:131
+#: ../../src/editor/tools/info_tool.cc:158 ../../src/wui/mapdetails.cc:131
 msgid "Map:"
 msgstr ""
 
-#: ../../src/editor/tools/info_tool.cc:160
+#: ../../src/editor/tools/info_tool.cc:159
 #, c-format
 msgctxt "map_name"
 msgid "Name: %s"
 msgstr ""
 
-#: ../../src/editor/tools/info_tool.cc:163
+#: ../../src/editor/tools/info_tool.cc:162
 #, c-format
 msgid "Size: %1$ix%2$i"
 msgstr ""
 
-#: ../../src/editor/tools/info_tool.cc:168
+#: ../../src/editor/tools/info_tool.cc:167
 #, c-format
 msgid "Players: %u"
 msgstr ""
 
-#: ../../src/editor/tools/info_tool.cc:171
+#: ../../src/editor/tools/info_tool.cc:170
 msgid "Players: –"
 msgstr ""
 
-#: ../../src/editor/tools/info_tool.cc:174
+#: ../../src/editor/tools/info_tool.cc:173
 #, c-format
 msgid "Author: %s"
 msgstr ""
 
-#: ../../src/editor/tools/info_tool.cc:175
+#: ../../src/editor/tools/info_tool.cc:174
 #, c-format
 msgid "Descr: %s"
 msgstr ""
@@ -469,7 +481,7 @@ msgstr ""
 
 #. * TRANSLATORS: %s are the currently selected items in an editor tool
 #: ../../src/editor/ui_menus/categorized_item_selection_menu.h:198
-#: ../../src/editor/ui_menus/tool_change_resources_options_menu.cc:177
+#: ../../src/editor/ui_menus/tool_change_resources_options_menu.cc:176
 #, c-format
 msgid "Current: %s"
 msgstr ""
@@ -515,13 +527,13 @@ msgstr ""
 #. * TRANSLATORS: Directory name for user maps in map selection
 #: ../../src/editor/ui_menus/main_menu_load_map.cc:69
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:223
-#: ../../src/wui/mapdata.cc:164
+#: ../../src/wui/mapdata.cc:162
 msgid "My Maps"
 msgstr ""
 
 #. * TRANSLATORS: Directory name for MP Scenarios in map selection
 #: ../../src/editor/ui_menus/main_menu_load_map.cc:71
-#: ../../src/wui/mapdata.cc:161
+#: ../../src/wui/mapdata.cc:159
 msgid "Multiplayer Scenarios"
 msgstr ""
 
@@ -808,7 +820,7 @@ msgstr ""
 #: ../../src/editor/ui_menus/player_menu.cc:207 ../../src/logic/map.cc:309
 #: ../../src/logic/single_player_game_settings_provider.cc:88
 #: ../../src/map_io/map_player_names_and_tribes_packet.cc:94
-#: ../../src/network/gamehost.cc:1613 ../../src/ui_fsmenu/launch_mpg.cc:482
+#: ../../src/network/gamehost.cc:1605 ../../src/ui_fsmenu/launch_mpg.cc:482
 #: ../../src/wui/multiplayersetupgroup.cc:112
 #, c-format
 msgid "Player %u"
@@ -948,33 +960,33 @@ msgstr ""
 msgid "Not set"
 msgstr ""
 
-#: ../../src/logic/game.cc:196 ../../src/logic/game.cc:242
-#: ../../src/logic/game.cc:315 ../../src/logic/game.cc:345
+#: ../../src/logic/game.cc:197 ../../src/logic/game.cc:243
+#: ../../src/logic/game.cc:316 ../../src/logic/game.cc:346
 msgid "Preloading map"
 msgstr ""
 
-#: ../../src/logic/game.cc:202 ../../src/logic/game.cc:251
+#: ../../src/logic/game.cc:203 ../../src/logic/game.cc:252
 msgid "Loading world"
 msgstr ""
 
-#: ../../src/logic/game.cc:218 ../../src/logic/game.cc:289
+#: ../../src/logic/game.cc:219 ../../src/logic/game.cc:290
 msgid "Loading map…"
 msgstr ""
 
-#: ../../src/logic/game.cc:330 ../../src/logic/game.cc:365
+#: ../../src/logic/game.cc:331 ../../src/logic/game.cc:366
 #: ../../src/ui_basic/progresswindow.cc:51 ../../src/wlapplication.cc:1346
 msgid "Loading…"
 msgstr ""
 
-#: ../../src/logic/game.cc:428
+#: ../../src/logic/game.cc:429
 msgid "Creating player infrastructure"
 msgstr ""
 
-#: ../../src/logic/game.cc:439 ../../src/logic/player.cc:220
+#: ../../src/logic/game.cc:440 ../../src/logic/player.cc:219
 msgid "Missing starting position"
 msgstr ""
 
-#: ../../src/logic/game.cc:440 ../../src/logic/player.cc:221
+#: ../../src/logic/game.cc:441 ../../src/logic/player.cc:220
 #, c-format
 msgid ""
 "Widelands could not start the game, because player %u has no starting "
@@ -1026,20 +1038,20 @@ msgstr ""
 
 #. * TRANSLATORS: %1% is the number of soldiers the plural refers to
 #. * TRANSLATORS: %2% is the maximum number of soldier slots in the building
-#: ../../src/logic/map_objects/tribes/militarysite.cc:373
+#: ../../src/logic/map_objects/tribes/militarysite.cc:374
 msgid "%1% soldier (+%2%)"
 msgid_plural "%1% soldiers (+%2%)"
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../../src/logic/map_objects/tribes/militarysite.cc:377
+#: ../../src/logic/map_objects/tribes/militarysite.cc:378
 #, c-format
 msgid "%u soldier"
 msgid_plural "%u soldiers"
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../../src/logic/map_objects/tribes/militarysite.cc:385
+#: ../../src/logic/map_objects/tribes/militarysite.cc:386
 msgid "%1%(+%2%) soldier (+%3%)"
 msgid_plural "%1%(+%2%) soldiers (+%3%)"
 msgstr[0] ""
@@ -1047,19 +1059,19 @@ msgstr[1] ""
 
 #. * TRANSLATORS: %1% is the number of soldiers the plural refers to
 #. * TRANSLATORS: %2% are currently open soldier slots in the building
-#: ../../src/logic/map_objects/tribes/militarysite.cc:391
+#: ../../src/logic/map_objects/tribes/militarysite.cc:392
 msgid "%1%(+%2%) soldier"
 msgid_plural "%1%(+%2%) soldiers"
 msgstr[0] ""
 msgstr[1] ""
 
 #. * TRANSLATORS: Militarysite is being attacked
-#: ../../src/logic/map_objects/tribes/militarysite.cc:862
+#: ../../src/logic/map_objects/tribes/militarysite.cc:863
 msgctxt "building"
 msgid "Attack!"
 msgstr ""
 
-#: ../../src/logic/map_objects/tribes/militarysite.cc:862
+#: ../../src/logic/map_objects/tribes/militarysite.cc:863
 msgid "You are under attack"
 msgstr ""
 
@@ -1200,29 +1212,29 @@ msgstr ""
 msgid "No soldier found for this training level!"
 msgstr ""
 
-#: ../../src/logic/map_objects/tribes/productionsite.cc:270
+#: ../../src/logic/map_objects/tribes/productionsite.cc:265
 msgid "(not occupied)"
 msgstr ""
 
-#: ../../src/logic/map_objects/tribes/productionsite.cc:277
+#: ../../src/logic/map_objects/tribes/productionsite.cc:272
 msgid "Worker missing"
 msgid_plural "Workers missing"
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../../src/logic/map_objects/tribes/productionsite.cc:284
+#: ../../src/logic/map_objects/tribes/productionsite.cc:279
 msgid "(stopped)"
 msgstr ""
 
 #. * TRANSLATORS: Percent in building statistics window, e.g. 85%
 #. * TRANSLATORS: If you wish to add a space, translate as '%i %%'
-#: ../../src/logic/map_objects/tribes/productionsite.cc:383
+#: ../../src/logic/map_objects/tribes/productionsite.cc:378
 #: ../../src/wui/building_statistics_menu.cc:628
 #, c-format
 msgid "%i%%"
 msgstr ""
 
-#: ../../src/logic/map_objects/tribes/productionsite.cc:944
+#: ../../src/logic/map_objects/tribes/productionsite.cc:939
 msgid "Can’t find any more resources!"
 msgstr ""
 
@@ -1279,46 +1291,46 @@ msgid "Unloading of wares failed, expedition is cancelled now."
 msgstr ""
 
 #. * TRANSLATORS: Ship expedition ready
-#: ../../src/logic/map_objects/tribes/ship.cc:835
+#: ../../src/logic/map_objects/tribes/ship.cc:833
 msgctxt "ship"
 msgid "Expedition"
 msgstr ""
 
-#: ../../src/logic/map_objects/tribes/ship.cc:835
+#: ../../src/logic/map_objects/tribes/ship.cc:833
 msgid "Expedition Ready"
 msgstr ""
 
-#: ../../src/logic/map_objects/tribes/ship.cc:836
+#: ../../src/logic/map_objects/tribes/ship.cc:834
 msgid "An expedition ship is waiting for your commands."
 msgstr ""
 
 #. * TRANSLATORS: This is a ship state
-#: ../../src/logic/map_objects/tribes/ship.cc:975
+#: ../../src/logic/map_objects/tribes/ship.cc:970
 msgctxt "ship_state"
 msgid "Shipping"
 msgstr ""
 
 #. * TRANSLATORS: This is a ship state. An expedition is waiting for your commands.
-#: ../../src/logic/map_objects/tribes/ship.cc:979
+#: ../../src/logic/map_objects/tribes/ship.cc:974
 msgctxt "ship_state"
 msgid "Waiting"
 msgstr ""
 
 #. * TRANSLATORS: This is a ship state. An expedition is scouting for port spaces.
-#: ../../src/logic/map_objects/tribes/ship.cc:983
+#: ../../src/logic/map_objects/tribes/ship.cc:978
 msgctxt "ship_state"
 msgid "Scouting"
 msgstr ""
 
 #. * TRANSLATORS: This is a ship state. An expedition has found a port space.
-#: ../../src/logic/map_objects/tribes/ship.cc:987
+#: ../../src/logic/map_objects/tribes/ship.cc:982
 msgctxt "ship_state"
 msgid "Port Space Found"
 msgstr ""
 
 #. * TRANSLATORS: This is a ship state. An expedition is unloading wares/workers to build a
 #. * port.
-#: ../../src/logic/map_objects/tribes/ship.cc:992
+#: ../../src/logic/map_objects/tribes/ship.cc:987
 msgctxt "ship_state"
 msgid "Founding a Colony"
 msgstr ""
@@ -1414,19 +1426,19 @@ msgid ""
 "unpause the game and continue watching if you want to."
 msgstr ""
 
-#: ../../src/logic/save_handler.cc:103
+#: ../../src/logic/save_handler.cc:102
 msgid "Saving game…"
 msgstr ""
 
-#: ../../src/logic/save_handler.cc:119
+#: ../../src/logic/save_handler.cc:118
 msgid "Saving failed!"
 msgstr ""
 
-#: ../../src/logic/save_handler.cc:188
+#: ../../src/logic/save_handler.cc:186
 msgid "Game saved"
 msgstr ""
 
-#: ../../src/map_io/s2map.cc:423
+#: ../../src/map_io/s2map.cc:422
 msgid "Bluebyte Settlers II Map. No comment defined!"
 msgstr ""
 
@@ -1441,7 +1453,7 @@ msgid ""
 "you tried to connect."
 msgstr ""
 
-#: ../../src/network/gameclient.cc:171 ../../src/network/gamehost.cc:682
+#: ../../src/network/gameclient.cc:171 ../../src/network/gamehost.cc:680
 #: ../../src/wlapplication.cc:1239
 msgid "Preparing game"
 msgstr ""
@@ -1457,129 +1469,129 @@ msgid ""
 msgstr ""
 
 #. * TRANSLATORS: %s contains an error message.
-#: ../../src/network/gameclient.cc:923
+#: ../../src/network/gameclient.cc:920
 #, c-format
 msgid "%s An automatic savegame will be created."
 msgstr ""
 
-#: ../../src/network/gameclient.cc:927
+#: ../../src/network/gameclient.cc:924
 msgid "Disconnected from Host"
 msgstr ""
 
-#: ../../src/network/gamehost.cc:329
+#: ../../src/network/gamehost.cc:327
 msgid "Available host commands are:"
 msgstr ""
 
 #. * TRANSLATORS: Available host command
-#: ../../src/network/gamehost.cc:331
+#: ../../src/network/gamehost.cc:329
 msgid "/help  -  Shows this help"
 msgstr ""
 
 #. * TRANSLATORS: Available host command
-#: ../../src/network/gamehost.cc:333
+#: ../../src/network/gamehost.cc:331
 msgid "/announce <msg>  -  Send a chatmessage as announcement (system chat)"
 msgstr ""
 
 #. * TRANSLATORS: Available host command
-#: ../../src/network/gamehost.cc:335
+#: ../../src/network/gamehost.cc:333
 msgid "/warn <name> <reason>  -  Warn the user <name> because of <reason>"
 msgstr ""
 
 #. * TRANSLATORS: Available host command
-#: ../../src/network/gamehost.cc:337
+#: ../../src/network/gamehost.cc:335
 msgid "/kick <name> <reason>  -  Kick the user <name> because of <reason>"
 msgstr ""
 
 #. * TRANSLATORS: Available host command
-#: ../../src/network/gamehost.cc:339
+#: ../../src/network/gamehost.cc:337
 msgid "/forcePause            -  Force the game to pause."
 msgstr ""
 
 #. * TRANSLATORS: Available host command
-#: ../../src/network/gamehost.cc:341
+#: ../../src/network/gamehost.cc:339
 msgid "/endForcedPause        -  Return game to normal speed."
 msgstr ""
 
-#: ../../src/network/gamehost.cc:348
+#: ../../src/network/gamehost.cc:346
 msgid "Wrong use, should be: /announce <message>"
 msgstr ""
 
-#: ../../src/network/gamehost.cc:359
+#: ../../src/network/gamehost.cc:357
 msgid "Wrong use, should be: /warn <name> <reason>"
 msgstr ""
 
-#: ../../src/network/gamehost.cc:363 ../../src/network/gamehost.cc:386
+#: ../../src/network/gamehost.cc:361 ../../src/network/gamehost.cc:384
 #, c-format
 msgid "The client %s could not be found."
 msgstr ""
 
-#: ../../src/network/gamehost.cc:374
+#: ../../src/network/gamehost.cc:372
 msgid "Wrong use, should be: /kick <name> <reason>"
 msgstr ""
 
-#: ../../src/network/gamehost.cc:384
+#: ../../src/network/gamehost.cc:382
 msgid "You can not kick yourself!"
 msgstr ""
 
-#: ../../src/network/gamehost.cc:390
+#: ../../src/network/gamehost.cc:388
 #, c-format
 msgid "Are you sure you want to kick %s?"
 msgstr ""
 
-#: ../../src/network/gamehost.cc:392
+#: ../../src/network/gamehost.cc:390
 #, c-format
 msgid "The stated reason was: %s"
 msgstr ""
 
-#: ../../src/network/gamehost.cc:393
+#: ../../src/network/gamehost.cc:391
 #, c-format
 msgid "If yes, type: /ack_kick %s"
 msgstr ""
 
-#: ../../src/network/gamehost.cc:401
+#: ../../src/network/gamehost.cc:399
 msgid "kick acknowledgement cancelled: No name given!"
 msgstr ""
 
-#: ../../src/network/gamehost.cc:403
+#: ../../src/network/gamehost.cc:401
 msgid "Wrong use, should be: /ack_kick <name>"
 msgstr ""
 
-#: ../../src/network/gamehost.cc:409
+#: ../../src/network/gamehost.cc:407
 msgid "kick acknowledgement cancelled: Wrong name given!"
 msgstr ""
 
-#: ../../src/network/gamehost.cc:418
+#: ../../src/network/gamehost.cc:416
 msgid "Pause was already forced - game should be paused."
 msgstr ""
 
-#: ../../src/network/gamehost.cc:428
+#: ../../src/network/gamehost.cc:426
 msgid "There is no forced pause - nothing to end."
 msgstr ""
 
-#: ../../src/network/gamehost.cc:437
+#: ../../src/network/gamehost.cc:435
 msgid "Invalid command! Type /help for a list of commands."
 msgstr ""
 
-#: ../../src/network/gamehost.cc:565
+#: ../../src/network/gamehost.cc:563
 msgid "Failed to start the server!"
 msgstr ""
 
-#: ../../src/network/gamehost.cc:566
+#: ../../src/network/gamehost.cc:564
 msgid ""
 "Widelands could not start a server.\n"
 "Probably some other process is already running a server on our port."
 msgstr ""
 
-#: ../../src/network/gamehost.cc:1550
+#: ../../src/network/gamehost.cc:1542
 #, c-format
 msgid "Computer %u"
 msgstr ""
 
-#: ../../src/network/gamehost.cc:1607 ../../src/wui/game_summary.cc:101
+#: ../../src/network/gamehost.cc:1599 ../../src/wui/game_summary.cc:101
 msgid "Player"
 msgstr ""
 
-#: ../../src/network/gamehost.cc:1755
+#: ../../src/network/gamehost.cc:1747
 #, c-format
 msgid "%li second"
 msgid_plural "%li seconds"
@@ -2660,19 +2672,19 @@ msgid "MP (%1%)"
 msgstr ""
 
 #. * TRANSLATORS: Error message introduction for when an old savegame can't be loaded
-#: ../../src/ui_fsmenu/loadgame.cc:645
+#: ../../src/ui_fsmenu/loadgame.cc:647
 msgid ""
 "This file has the wrong format and can’t be loaded. Maybe it was created "
 "with an older version of Widelands."
 msgstr ""
 
 #. * TRANSLATORS: This text is on a separate line with an error message below
-#: ../../src/ui_fsmenu/loadgame.cc:648
+#: ../../src/ui_fsmenu/loadgame.cc:650
 msgid "Error message:"
 msgstr ""
 
 #. * TRANSLATORS: Prefix for incompatible files in load game screens
-#: ../../src/ui_fsmenu/loadgame.cc:661 ../../src/ui_fsmenu/loadgame.cc:663
+#: ../../src/ui_fsmenu/loadgame.cc:663 ../../src/ui_fsmenu/loadgame.cc:665
 #, c-format
 msgid "Incompatible: %s"
 msgstr ""
@@ -3135,7 +3147,7 @@ msgid "Hide work area"
 msgstr ""
 
 #: ../../src/wui/buildingwindow.cc:311 ../../src/wui/fieldaction.cc:371
-#: ../../src/wui/shipwindow.cc:179
+#: ../../src/wui/shipwindow.cc:140
 msgid "Show Debug Window"
 msgstr ""
 
@@ -3792,17 +3804,17 @@ msgstr ""
 msgid "Teams of 4"
 msgstr ""
 
-#: ../../src/wui/mapdata.cc:46
+#: ../../src/wui/mapdata.cc:44
 msgid "No Author"
 msgstr ""
 
 #. * TRANSLATORS: Parent directory/folder
-#: ../../src/wui/mapdata.cc:147
+#: ../../src/wui/mapdata.cc:145
 msgid "parent"
 msgstr ""
 
 #. * TRANSLATORS: This label is shown when a folder is empty
-#: ../../src/wui/mapdata.cc:153
+#: ../../src/wui/mapdata.cc:151
 msgid "empty"
 msgstr ""
 
@@ -4016,66 +4028,66 @@ msgstr ""
 msgid "(vacant)"
 msgstr ""
 
-#. * TRANSLATORS: Window label when an expedition can't be canceled
-#: ../../src/wui/shipwindow.cc:68
-msgid "Cancel expedition"
-msgstr ""
-
-#: ../../src/wui/shipwindow.cc:68
-msgid ""
-"This expedition can’t be canceled, because the ship has no port to return to."
-msgstr ""
-
-#: ../../src/wui/shipwindow.cc:109
+#: ../../src/wui/shipwindow.cc:79
 msgid "Scout towards the north west"
 msgstr ""
 
-#: ../../src/wui/shipwindow.cc:114
+#: ../../src/wui/shipwindow.cc:84
 msgid "Explore the island’s coast clockwise"
 msgstr ""
 
-#: ../../src/wui/shipwindow.cc:119
+#: ../../src/wui/shipwindow.cc:89
 msgid "Scout towards the north east"
 msgstr ""
 
-#: ../../src/wui/shipwindow.cc:124
+#: ../../src/wui/shipwindow.cc:93
 msgid "Scout towards the west"
 msgstr ""
 
-#: ../../src/wui/shipwindow.cc:129
+#: ../../src/wui/shipwindow.cc:98
 msgid "Construct a port at the current location"
 msgstr ""
 
-#: ../../src/wui/shipwindow.cc:134
+#: ../../src/wui/shipwindow.cc:102
 msgid "Scout towards the east"
 msgstr ""
 
-#: ../../src/wui/shipwindow.cc:139
+#: ../../src/wui/shipwindow.cc:107
 msgid "Scout towards the south west"
 msgstr ""
 
-#: ../../src/wui/shipwindow.cc:144
+#: ../../src/wui/shipwindow.cc:112
 msgid "Explore the island’s coast counter clockwise"
 msgstr ""
 
-#: ../../src/wui/shipwindow.cc:150
+#: ../../src/wui/shipwindow.cc:118
 msgid "Scout towards the south east"
 msgstr ""
 
-#: ../../src/wui/shipwindow.cc:160
-msgid "Go to ship"
-msgstr ""
-
-#: ../../src/wui/shipwindow.cc:162
-msgid "Go to destination"
-msgstr ""
-
-#: ../../src/wui/shipwindow.cc:168
+#: ../../src/wui/shipwindow.cc:129
 msgid "Sink the ship"
 msgstr ""
 
-#: ../../src/wui/shipwindow.cc:173
+#: ../../src/wui/shipwindow.cc:133
 msgid "Cancel the Expedition"
+msgstr ""
+
+#: ../../src/wui/shipwindow.cc:146
+msgid "Go to destination"
+msgstr ""
+
+#: ../../src/wui/shipwindow.cc:152
+msgid "Go to ship"
+msgstr ""
+
+#. * TRANSLATORS: Window label when an expedition can't be canceled
+#: ../../src/wui/shipwindow.cc:172
+msgid "Cancel expedition"
+msgstr ""
+
+#: ../../src/wui/shipwindow.cc:172
+msgid ""
+"This expedition can’t be canceled, because the ship has no port to return to."
 msgstr ""
 
 #: ../../src/wui/soldiercapacitycontrol.cc:72
@@ -4090,21 +4102,21 @@ msgstr ""
 msgid "Capacity"
 msgstr ""
 
-#: ../../src/wui/soldierlist.cc:372 ../../src/wui/soldierlist.cc:393
-#: ../../src/wui/soldierlist.cc:454
+#: ../../src/wui/soldierlist.cc:371 ../../src/wui/soldierlist.cc:392
+#: ../../src/wui/soldierlist.cc:452
 msgid "Click soldier to send away"
 msgstr ""
 
-#: ../../src/wui/soldierlist.cc:388 ../../src/wui/soldierlist.cc:459
+#: ../../src/wui/soldierlist.cc:387 ../../src/wui/soldierlist.cc:457
 #, c-format
 msgid "HP: %1$u/%2$u  AT: %3$u/%4$u  DE: %5$u/%6$u  EV: %7$u/%8$u"
 msgstr ""
 
-#: ../../src/wui/soldierlist.cc:402
+#: ../../src/wui/soldierlist.cc:401
 msgid "Prefer Rookies"
 msgstr ""
 
-#: ../../src/wui/soldierlist.cc:405
+#: ../../src/wui/soldierlist.cc:404
 msgid "Prefer Heroes"
 msgstr ""
 

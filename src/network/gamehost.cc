@@ -209,11 +209,9 @@ struct HostChatProvider : public ChatProvider {
 	}
 
 	void send(const std::string& msg) override {
-		ChatMessage c;
-		c.time = time(nullptr);
+		ChatMessage c(msg);
 		c.playern = h->get_local_playerposition();
 		c.sender = h->get_local_playername();
-		c.msg = msg;
 		if (c.msg.size() && *c.msg.begin() == '@') {
 			// Personal message
 			std::string::size_type const space = c.msg.find(' ');
@@ -591,6 +589,8 @@ void GameHost::run() {
 	broadcast(s);
 
 	Widelands::Game game;
+	game.set_ai_training_mode(g_options.pull_section("global").get_bool("ai_training", false));
+	game.set_auto_speed(g_options.pull_section("global").get_bool("auto_speed", false));
 	game.set_write_syncstream(g_options.pull_section("global").get_bool("write_syncstreams", true));
 
 	try {
@@ -782,12 +782,8 @@ void GameHost::send(ChatMessage msg) {
 
 				// is host the sender?
 				if (d->localplayername == msg.sender) {
-					ChatMessage err;
-					err.time = time(nullptr);
+					ChatMessage err(fail);
 					err.playern = -2;  // System message
-					err.sender = "";
-					err.msg = fail;
-					err.recipient = "";
 					d->chat.receive(err);
 					return;  // nothing left to do!
 				}
@@ -913,9 +909,7 @@ void GameHost::send_system_message_code(const std::string& code,
 	broadcast(s);
 
 	// Now add to our own chatbox
-	ChatMessage msg;
-	msg.time = time(nullptr);
-	msg.msg = NetworkGamingMessages::get_message(code, a, b, c);
+	ChatMessage msg(NetworkGamingMessages::get_message(code, a, b, c));
 	msg.playern = UserSettings::none();  //  == System message
 	// c.sender remains empty to indicate a system message
 	d->chat.receive(msg);
@@ -926,7 +920,7 @@ int32_t GameHost::get_frametime() {
 }
 
 GameController::GameType GameHost::get_game_type() {
-	return GameController::GameType::NETHOST;
+	return GameController::GameType::kNetHost;
 }
 
 const GameSettings& GameHost::settings() {
@@ -2127,11 +2121,9 @@ void GameHost::handle_packet(uint32_t const i, RecvPacket& r) {
 	}
 
 	case NETCMD_CHAT: {
-		ChatMessage c;
-		c.time = time(nullptr);
+		ChatMessage c(r.string());
 		c.playern = d->settings.users.at(client.usernum).position;
 		c.sender = d->settings.users.at(client.usernum).name;
-		c.msg = r.string();
 		if (c.msg.size() && *c.msg.begin() == '@') {
 			// Personal message
 			std::string::size_type const space = c.msg.find(' ');

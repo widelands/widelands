@@ -134,7 +134,7 @@ void GameSummaryScreen::fill_data() {
 	bool local_in_game = false;
 	bool local_won = false;
 	Widelands::Player* single_won = nullptr;
-	uint8_t teawon_ = 0;
+	Widelands::TeamNumber team_won = 0;
 	InteractivePlayer* ipl = game_.get_ipl();
 	// This defines a row to be selected, current player,
 	// if not then the first line
@@ -171,7 +171,7 @@ void GameSummaryScreen::fill_data() {
 			if (!single_won) {
 				single_won = p;
 			} else {
-				teawon_ = p->team_number();
+				team_won = p->team_number();
 			}
 			break;
 		case Widelands::PlayerEndResult::kResigned:
@@ -196,12 +196,12 @@ void GameSummaryScreen::fill_data() {
 			title_area_->set_text(_("You lost."));
 		}
 	} else {
-		if (teawon_ <= 0) {
+		if (team_won == 0) {
 			assert(single_won);
 			title_area_->set_text((boost::format(_("%s won!")) % single_won->get_name()).str());
 		} else {
 			title_area_->set_text(
-			   (boost::format(_("Team %|1$u| won!")) % static_cast<unsigned int>(teawon_)).str());
+			   (boost::format(_("Team %|1$u| won!")) % static_cast<unsigned int>(team_won)).str());
 		}
 	}
 	if (!players_status.empty()) {

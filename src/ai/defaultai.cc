@@ -482,10 +482,15 @@ void DefaultAI::think() {
 void DefaultAI::late_initialization() {
 	player_ = game().get_player(player_number());
 	tribe_ = &player_->tribe();
+	if (game().is_ai_training_mode()) {
+		ai_training_mode_ = true;
+		management_data.set_ai_training_mode();
+	}
 	const uint32_t gametime = game().get_gametime();
 
-	log("ComputerPlayer(%d): initializing as type %u\n", player_number(),
-	    static_cast<unsigned int>(type_));
+	log("ComputerPlayer(%d): initializing as type %u%s\n", player_number(),
+	    // NOCOM(#codereview): Please add blank spaces.
+	    static_cast<unsigned int>(type_), (ai_training_mode_) ? ", in ai training mode" : "");
 	if (player_->team_number() > 0) {
 		log("    ... member of team %d\n", player_->team_number());
 	}
@@ -530,7 +535,7 @@ void DefaultAI::late_initialization() {
 		management_data.new_dna_for_persistent(player_number(), type_);
 		management_data.copy_persistent_to_local();
 		management_data.mutate(player_number());
-		if (kAITrainingMode) {
+		if (ai_training_mode_) {
 			management_data.dump_data(player_number());
 		}
 
@@ -553,7 +558,7 @@ void DefaultAI::late_initialization() {
 			persistent_data->least_military_score = persistent_data->target_military_score;
 		}
 
-		if (kAITrainingMode) {
+		if (ai_training_mode_) {
 			log("%2d: reinitializing dna (kAITrainingMode set true)", player_number());
 			management_data.new_dna_for_persistent(player_number(), type_);
 			management_data.copy_persistent_to_local();
@@ -912,7 +917,7 @@ void DefaultAI::late_initialization() {
 	                                 "count military vacant"));
 	taskPool.push_back(SchedulerTask(std::max<uint32_t>(gametime, 10 * 60 * 1000),
 	                                 SchedulerTaskId::kCheckEnemySites, 6, "check enemy sites"));
-	if (kAITrainingMode) {
+	if (ai_training_mode_) {
 		taskPool.push_back(SchedulerTask(std::max<uint32_t>(gametime, 10 * 1000),
 		                                 SchedulerTaskId::kManagementUpdate, 8, "reviewing"));
 	}
@@ -1782,7 +1787,7 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 		field.military_score_ += score_parts[i];
 	}
 
-	if (kAITrainingMode) {
+	if (ai_training_mode_) {
 		if (field.military_score_ < -5000 || field.military_score_ > 2000) {
 			log("Warning field.military_score_ %5d, compounds: ", field.military_score_);
 			for (uint16_t i = 0; i < score_parts_size; i++) {
@@ -2351,7 +2356,7 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 			bo.primary_priority = 0;
 		}
 
-		if (kAITrainingMode && bo.type == BuildingObserver::Type::kProductionsite) {
+		if (ai_training_mode_ && bo.type == BuildingObserver::Type::kProductionsite) {
 			log("%2d: %-35s(%2d now) %-11s: max prec: %2d/%2d, primary priority: %4d, overdue: %3d\n",
 			    player_number(), bo.name, bo.total_count(),
 			    (bo.new_building == BuildingNecessity::kAllowed ||
@@ -6015,7 +6020,7 @@ void DefaultAI::print_stats(uint32_t const gametime) {
 		}
 	}
 
-	std::string summary = "";
+	std::string summary;
 	for (const auto material : materials) {
 		uint32_t stock = calculate_stocklevel(material);
 		if (stock == 0) {
@@ -6109,7 +6114,7 @@ void DefaultAI::print_stats(uint32_t const gametime) {
 		    persistent_data->least_military_score, persistent_data->ai_personality_mil_upper_limit,
 		    msites_in_constr(), static_cast<int8_t>(soldier_status_),
 		    player_statistics.get_modified_player_power(player_number()));
-	std::string wpolicy = "";
+	std::string wpolicy;
 	switch (wood_policy_) {
 	case WoodPolicy::kDismantleRangers:
 		wpolicy = "Dismantle rangers";

@@ -122,10 +122,13 @@ Game::Game()
      ctrl_(nullptr),
      writereplay_(true),
      writesyncstream_(false),
+     ai_training_mode_(false),
+     auto_speed_(false),
      state_(gs_notrunning),
      cmdqueue_(*this),
      /** TRANSLATORS: Win condition for this game has not been set. */
-     win_condition_displayname_(_("Not set")) {
+     win_condition_displayname_(_("Not set")),
+     replay_(false) {
 }
 
 Game::~Game() {
@@ -134,7 +137,7 @@ Game::~Game() {
 void Game::sync_reset() {
 	syncwrapper_.counter_ = 0;
 
-	synchash_.Reset();
+	synchash_.reset();
 	log("[sync] Reset\n");
 }
 
@@ -149,6 +152,14 @@ InteractivePlayer* Game::get_ipl() {
 
 void Game::set_game_controller(GameController* const ctrl) {
 	ctrl_ = ctrl;
+}
+
+void Game::set_ai_training_mode(const bool mode) {
+	ai_training_mode_ = mode;
+}
+
+void Game::set_auto_speed(const bool mode) {
+	auto_speed_ = mode;
 }
 
 GameController* Game::game_controller() {
@@ -445,9 +456,10 @@ bool Game::run(UI::ProgressWindow* loader_ui,
 			}
 		}
 
-		if (get_ipl())
-			get_ipl()->scroll_to_field(
+		if (get_ipl()) {
+			get_ipl()->map_view()->scroll_to_field(
 			   map().get_starting_pos(get_ipl()->player_number()), MapView::Transition::Jump);
+		}
 
 		// Prepare the map, set default textures
 		map().recalc_default_resources(world());
@@ -666,7 +678,7 @@ void Game::send_player_start_stop_building(Building& building) {
 }
 
 void Game::send_player_militarysite_set_soldier_preference(Building& building,
-                                                           uint8_t my_preference) {
+                                                           SoldierPreference my_preference) {
 	send_player_command(*new CmdMilitarySiteSetSoldierPreference(
 	   get_gametime(), building.owner().player_number(), building, my_preference));
 }

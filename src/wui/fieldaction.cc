@@ -529,7 +529,7 @@ It resets the mouse to its original position and closes the window
 ===============
 */
 void FieldActionWindow::reset_mouse_and_die() {
-	ibase().mouse_to_field(node_, MapView::Transition::Jump);
+	ibase().map_view()->mouse_to_field(node_, MapView::Transition::Jump);
 	die();
 }
 

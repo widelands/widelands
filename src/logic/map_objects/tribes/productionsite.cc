@@ -65,10 +65,6 @@ ProductionSiteDescr::ProductionSiteDescr(const std::string& init_descname,
                                          const LuaTable& table,
                                          const EditorGameBase& egbase)
    : BuildingDescr(init_descname, init_type, table, egbase),
-     out_of_resource_title_(""),
-     out_of_resource_heading_(""),
-     out_of_resource_message_(""),
-     resource_not_needed_message_(""),
      out_of_resource_productivity_threshold_(100) {
 	i18n::Textdomain td("tribes");
 	std::unique_ptr<LuaTable> items_table;
@@ -241,8 +237,7 @@ ProductionSite::ProductionSite(const ProductionSiteDescr& ps_descr)
      last_stat_percent_(0),
      crude_percent_(0),
      is_stopped_(false),
-     default_anim_("idle"),
-     production_result_("") {
+     default_anim_("idle") {
 	calc_statistics();
 }
 
