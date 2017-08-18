@@ -10,14 +10,35 @@ function dismantle()
    end
    o.done = true
    campaign_message_box(amalea_3)
+   run (clear_roads)
+   run (quarries_lumberjacks)
 end
 
 function farm_plans()
+   local f = map:get_field(7, 168)
    while #p1:get_buildings("empire_farm1") > 1 do sleep(3249) end
    campaign_message_box(amalea_2)
    local o = add_campaign_objective(obj_find_farm_plans)
-   
-end   
+   while not (f.owner == p1) do 
+   sleep(4000)
+   end
+   if f.immovable then
+      f.immovable:remove()
+      sleep(2000)
+   else
+      print("Failed to remove artifact at (" .. f.x .. ", " .. f.y .. ")")
+   end
+   campaign_message_box(amalea_4)
+   p1:allow_buildings{"empire_farm"}
+end  
+
+function clear_roads()
+   local o = add_campaign_objective(obj_clear_roads)
+end 
+
+function quarries_lumberjacks()
+   local o = add_campaign_objective(obj_build_quarries_and_lumberjacks)
+end
 
 function mission_thread()
    sleep(1000)

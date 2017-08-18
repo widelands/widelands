@@ -61,12 +61,12 @@ obj_find_farm_plans = {
    ),
 }
 
-obj_build_sawmill_stonemason_and_lumberjacks = {
-   name = "build_sawmill_stonemason_and_lumberjacks",
-   title=_"Build at least a lumberjack’s house, a sawmill and a stonemason's house to complete the building material supply chain",
+obj_build_quarries_and_lumberjacks = {
+   name = "build_quarries_and_lumberjacks",
+   title=_"Build at least 3 lumberjack’s houses and 2 quarries to renew our building material supply chain",
    number = 3,
-   body = objective_text(_"Lumberjack’s House, Sawmill and Stonemason's house",
-      listitem_bullet(_[[Build at least a lumberjack’s house, a sawmill and a stonemason's house as soon as there is enough space for them.]])
+   body = objective_text(_"Quarries and Lumberjacks",
+      listitem_bullet(_[[Build at least 3 lumberjack’s houses and 2 quarries to renew our building material supply chain]])
    ),
 }
 
@@ -295,17 +295,18 @@ amalea_2 = {
 }
 
 amalea_3 = {
-   title=_"Amalea's recommendations",
-   body= amalea2(_"Amalea comes in…",
+   title=_"Amalea looking confident",
+   body= amalea2(_"Amalea is more confident",
       -- TRANSLATORS: Amalea
-      _([[I’ve got important things to talk about… First the good news:]])
+      _([[Lutiius now we have some options. As we have gained some construction material we can start to rebuild our economy.]])
       .. paragraphdivider() ..
       -- TRANSLATORS: Amalea
-      _([[I noticed that our stonemason has started his work finally. He will cut the number of marble columns defined in our basic economy settings.]])
+      _([[first of all we need more construction material. So we should build at least 3 lumberjack_houses and 2 quarries.]])
       .. paragraphdivider() ..
       -- TRANSLATORS: Amalea
-      _([[But here is the problem, if we use all of our marble for columns we might run out of it. So we should lower the settings for marble columns in the economy settings to a smaller amount. I think a reserve of 4 columns might be sufficient for the moment being.]]))
-      .. new_objectives(obj_lower_marble_column_demand),
+      _([[Oh before I forget this in the meantime while our builders are doing their job somebody should clear the mess in our road network. This is such a chaos wasting a lot of building lots.]]))
+      .. new_objectives(obj_build_quarries_and_lumberjacks)
+	  .. new_objectives(obj_clear_roads),
    posy=1,
    h=500,
 }
