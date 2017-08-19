@@ -214,7 +214,7 @@ void WatchWindow::think() {
 		   MapviewPixelFunctions::to_map_pixel(game().map(), bob->get_position());
 		const Vector2f pos = bob->calc_drawpos(game(), field_position, 1.f);
 
-		Widelands::Map& map = game().map();
+		const Widelands::Map& map = game().map();
 		// Drop the tracking if it leaves our vision range
 		InteractivePlayer* ipl = game().get_ipl();
 		if (ipl && 1 >= ipl->player().vision(map.get_index(bob->get_position(), map.get_width()))) {
@@ -253,7 +253,7 @@ void WatchWindow::do_follow() {
 		//  Find the nearest bob. Other object types can not move and are
 		//  therefore not of interest.
 		Vector2f center_map_pixel = mapview_.view_area().rect().center();
-		Widelands::Map& map = g.map();
+		const Widelands::Map& map = g.map();
 		MapviewPixelFunctions::normalize_pix(map, &center_map_pixel);
 		std::vector<Widelands::Bob*> bobs;
 		//  Scan progressively larger circles around the given position for

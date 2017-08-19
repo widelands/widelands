@@ -1138,7 +1138,7 @@ ProductionProgram::ActMine::ActMine(char* parameters,
 }
 
 void ProductionProgram::ActMine::execute(Game& game, ProductionSite& ps) const {
-	Map& map = game.map();
+	Map* map = game.mutable_map();
 
 	//  select one of the nodes randomly
 	uint32_t totalres = 0;
@@ -1147,7 +1147,7 @@ void ProductionProgram::ActMine::execute(Game& game, ProductionSite& ps) const {
 
 	{
 		MapRegion<Area<FCoords>> mr(
-		   map, Area<FCoords>(map.get_fcoords(ps.get_position()), distance_));
+		   *map, Area<FCoords>(map->get_fcoords(ps.get_position()), distance_));
 		do {
 			DescriptionIndex fres = mr.location().field->get_resources();
 			ResourceAmount amount = mr.location().field->get_resources_amount();
@@ -1172,7 +1172,7 @@ void ProductionProgram::ActMine::execute(Game& game, ProductionSite& ps) const {
 				totalchance += 4;
 			else if (amount <= 6)
 				totalchance += 2;
-		} while (mr.advance(map));
+		} while (mr.advance(*map));
 	}
 
 	//  how much is digged
@@ -1193,7 +1193,7 @@ void ProductionProgram::ActMine::execute(Game& game, ProductionSite& ps) const {
 
 		{
 			MapRegion<Area<FCoords>> mr(
-			   map, Area<FCoords>(map.get_fcoords(ps.get_position()), distance_));
+			   *map, Area<FCoords>(map->get_fcoords(ps.get_position()), distance_));
 			do {
 				DescriptionIndex fres = mr.location().field->get_resources();
 				ResourceAmount amount = mr.location().field->get_resources_amount();
@@ -1206,10 +1206,10 @@ void ProductionProgram::ActMine::execute(Game& game, ProductionSite& ps) const {
 					assert(amount > 0);
 
 					--amount;
-					map.set_resources(mr.location(), amount);
+					map->set_resources(mr.location(), amount);
 					break;
 				}
-			} while (mr.advance(map));
+			} while (mr.advance(*map));
 		}
 
 		if (pick >= 0) {
@@ -1502,7 +1502,7 @@ void ProductionProgram::ActConstruct::execute(Game& game, ProductionSite& psite)
 
 	// No object found, look for a field where we can build
 	std::vector<Coords> fields;
-	Map& map = game.map();
+	const Map& map = game.map();
 	FindNodeAnd fna;
 	// 10 is custom value to make sure the "water" is at least 10 nodes big
 	fna.add(FindNodeShore(10));

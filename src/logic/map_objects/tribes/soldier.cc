@@ -793,11 +793,11 @@ void Soldier::attack_update(Game& game, State& state) {
 					return pop_task(game);
 				}
 				// Try to find our land
-				Map* map = game.get_map();
+				const Map& map = game.map();
 				std::vector<Coords> coords;
 				uint32_t maxdist = descr().vision_range() * 2;
-				Area<FCoords> area(map->get_fcoords(get_position()), maxdist);
-				if (map->find_reachable_fields(area, &coords, CheckStepDefault(descr().movecaps()),
+				Area<FCoords> area(map.get_fcoords(get_position()), maxdist);
+				if (map.find_reachable_fields(area, &coords, CheckStepDefault(descr().movecaps()),
 				                               FindNodeOwned(get_owner()->player_number()))) {
 					// Found home land
 					target = coords.front();
@@ -1182,7 +1182,7 @@ void Soldier::start_task_move_in_battle(Game& game, CombatWalkingDir dir) {
 		throw GameDataError("bad direction '%d'", dir);
 	}
 
-	Map& map = game.map();
+	const Map& map = game.map();
 	int32_t const tdelta = (map.calc_cost(get_position(), mapdir)) / 2;
 	molog("[move_in_battle] dir: (%d) tdelta: (%d)\n", dir, tdelta);
 	combat_walking_ = dir;
@@ -1275,7 +1275,7 @@ void Soldier::battle_update(Game& game, State&) {
 		return pop_task(game);
 	}
 
-	Map& map = game.map();
+	const Map& map = game.map();
 	Soldier& opponent = *battle_->opponent(*this);
 	if (opponent.get_position() != get_position()) {
 		if (is_a(Building, map[get_position()].get_immovable())) {

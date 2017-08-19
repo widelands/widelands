@@ -830,7 +830,7 @@ void MapBuildingdataPacket::write(FileSystem& fs, EditorGameBase& egbase, MapObj
 	fw.unsigned_16(kCurrentPacketVersion);
 
 	// Walk the map again
-	Map& map = egbase.map();
+	const Map& map = egbase.map();
 	const uint32_t mapwidth = map.get_width();
 	MapIndex const max_index = map.max_index();
 	for (MapIndex i = 0; i < max_index; ++i) {

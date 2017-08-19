@@ -41,7 +41,7 @@ CheckStepRoadAI::CheckStepRoadAI(Player* const pl, uint8_t const mc, bool const 
 }
 
 bool CheckStepRoadAI::allowed(
-   Map& map, FCoords start, FCoords end, int32_t, CheckStep::StepId const id) const {
+   const Map& map, FCoords start, FCoords end, int32_t, CheckStep::StepId const id) const {
 	uint8_t endcaps = player->get_buildcaps(end);
 
 	// we should not cross fields with road or flags (or any other immovable)

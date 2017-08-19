@@ -244,7 +244,7 @@ void DefaultAI::think() {
 
 	const int32_t delay_time = gametime - taskPool.front().due_time;
 
-	Map& map = game().map();
+	const Map& map = game().map();
 
 	// Here we decide how many jobs will be run now (none - 5)
 	// in case no job is due now, it can be zero
@@ -690,7 +690,7 @@ void DefaultAI::late_initialization() {
 			for (const DescriptionIndex& temp_output : prod.output_ware_types()) {
 				bo.outputs.push_back(temp_output);
 			}
-			for (const auto temp_position : prod.working_positions()) {
+			for (const auto& temp_position : prod.working_positions()) {
 				bo.positions.push_back(temp_position.first);
 			}
 
@@ -925,7 +925,7 @@ void DefaultAI::late_initialization() {
 	taskPool.push_back(SchedulerTask(
 	   std::max<uint32_t>(gametime, 10 * 1000), SchedulerTaskId::kUpdateStats, 15, "review"));
 
-	Map& map = game().map();
+	const Map& map = game().map();
 
 	// here we generate list of all ports and their vicinity from entire map
 	for (const Coords& c : map.get_port_spaces()) {
@@ -1185,7 +1185,7 @@ void DefaultAI::update_all_not_buildable_fields() {
 /// Updates one buildable field
 void DefaultAI::update_buildable_field(BuildableField& field) {
 	// look if there is any unowned land nearby
-	Map& map = game().map();
+	const Map& map = game().map();
 	const uint32_t gametime = game().get_gametime();
 	FindNodeUnownedWalkable find_unowned_walkable(player_, game());
 	FindEnemyNodeWalkable find_enemy_owned_walkable(player_, game());
@@ -1813,7 +1813,7 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 void DefaultAI::update_mineable_field(MineableField& field) {
 	// collect information about resources in the area
 	std::vector<ImmovableFound> immovables;
-	Map& map = game().map();
+	const Map& map = game().map();
 	map.find_immovables(Area<FCoords>(field.coords, 5), &immovables);
 	field.preferred = false;
 	field.mines_nearby = 0;
@@ -1948,7 +1948,7 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 	bool mine = false;
 	uint32_t consumers_nearby_count = 0;
 
-	Map& map = game().map();
+	const Map& map = game().map();
 
 	for (int32_t i = 0; i < 4; ++i)
 		spots_avail.at(i) = 0;
@@ -3226,7 +3226,7 @@ bool DefaultAI::dispensable_road_test(Widelands::Road& road) {
 	} else {
 		checkradius = 15;
 	}
-	Map& map = game().map();
+	const Map& map = game().map();
 
 	// algorithm to walk on roads
 	while (!queue.empty()) {
@@ -3371,7 +3371,7 @@ bool DefaultAI::create_shortcut_road(const Flag& flag,
 		checkradius += 2;
 	}
 
-	Map& map = game().map();
+	const Map& map = game().map();
 
 	// initializing new object of FlagsForRoads, we will push there all candidate flags
 	Widelands::FlagsForRoads RoadCandidates(min_reduction);
@@ -3605,7 +3605,7 @@ bool DefaultAI::check_productionsites(uint32_t gametime) {
 		}
 	}
 
-	Map& map = game().map();
+	const Map& map = game().map();
 
 	// The code here is bit complicated
 	// a) Either this site is pending for upgrade, if ready, order the upgrade
@@ -5437,7 +5437,7 @@ bool DefaultAI::other_player_accessible(const uint32_t max_distance,
                                         uint16_t* mineable_fields_count,
                                         const Coords& starting_spot,
                                         const WalkSearch& type) {
-	Map& map = game().map();
+	const Map& map = game().map();
 	std::list<uint32_t> queue;
 	std::unordered_set<uint32_t> done;
 	queue.push_front(starting_spot.hash());
@@ -5640,7 +5640,7 @@ void DefaultAI::gain_building(Building& b, const bool found_on_load) {
 				++num_ports;
 				seafaring_economy = true;
 				// unblock nearby fields, might be used for other buildings...
-				Map& map = game().map();
+				const Map& map = game().map();
 				MapRegion<Area<FCoords>> mr(
 				   map, Area<FCoords>(map.get_fcoords(warehousesites.back().site->get_position()), 3));
 				do {
@@ -5809,7 +5809,7 @@ void DefaultAI::update_player_stat(const uint32_t gametime) {
 		return;
 	}
 	player_statistics.set_update_time(gametime);
-	Map& map = game().map();
+	const Map& map = game().map();
 	Widelands::PlayerNumber const pn = player_number();
 	PlayerNumber const nr_players = map.get_nrplayers();
 	uint32_t plr_in_game = 0;
