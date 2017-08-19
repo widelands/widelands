@@ -4,7 +4,7 @@ tribes:new_ware_type {
    msgctxt = "ware",
    name = "fur_clothes_studded",
    -- TRANSLATORS: This is a ware name used in lists of wares
-   descname = pgettext("ware", "Studded Fur Clothes"),
+   descname = pgettext("ware", "Studded Fur Garment"),
    helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    default_target_quantity = {

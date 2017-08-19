@@ -1,6 +1,6 @@
 function ware_helptext(tribe)
    local helptext = {
-      -- TRANSLATORS: Helptext for a ware: Old Fur Clothes
+      -- TRANSLATORS: Helptext for a ware: Old Fur Garment
       frisians = pgettext("frisians_ware", "Old clothes can be turned into fur in a recycling centre."),
    }
    local result = ""

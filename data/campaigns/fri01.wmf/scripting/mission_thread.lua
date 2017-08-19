@@ -34,7 +34,7 @@ function stormflood() --TODO fix memory leaks
          end
          x = x + 1
       end
-      sleep(197)
+      sleep(397)
    end
 end
 
@@ -117,12 +117,17 @@ function mission_thread()
 
    --we can start some real mining
    campaign_message_box(mining_1)
-   p1:allow_buildings{"frisians_ironmine", "frisians_goldmine", "frisians_coalmine_deep", "frisians_rockmine_deep", "frisians_ironmine_deep", "frisians_goldmine_deep", "frisians_furnace", "frisians_blacksmithy", "frisians_armour_smithy_small"}
+   p1:allow_buildings{"frisians_ironmine", "frisians_goldmine", "frisians_coalmine_deep", "frisians_rockmine_deep", "frisians_ironmine_deep", "frisians_goldmine_deep", "frisians_furnace", "frisians_blacksmithy", "frisians_armour_smithy_small", "frisians_charcoal_kiln"}
    o = add_campaign_objective(obj_build_mining)
-   while not check_for_buildings(p1, {frisians_ironmine = 1, frisians_goldmine = 1, frisians_furnace = 1, frisians_blacksmithy = 1, frisians_armour_smithy_small = 1}) do sleep(4273) end
+   while not check_for_buildings(p1, {frisians_ironmine = 1, frisians_furnace = 1, frisians_blacksmithy = 1, frisians_armour_smithy_small = 1}) do sleep(4273) end
    set_objective_done(o)
    
-   p1:allow_buildings{"frisians_outpost"}
+   campaign_message_box(recruit_1)
+   o = add_campaign_objective(obj_recruit)
+   p1:allow_buildings{"frisians_outpost", "frisians_barracks", "frisians_reindeer_farm", "frisians_seamstress"}
+   while not check_for_buildings(p1, {frisians_barracks = 1, frisians_seamstress = 1, frisians_reindeer_farm = 1}) do sleep(4273) end
+   set_objective_done(o)
+   
    --show the "expand" objective only if we haven´t expanded that far yet
    local skip = not ( expansionMark.owner == nil )
    if not skip then
@@ -137,36 +142,31 @@ function mission_thread()
    --a friendly chat between neighbours
    p1:reveal_fields(wl.Game().map.player_slots[2].starting_field:region(6))
    scroll_to_field(wl.Game().map.player_slots[2].starting_field)
-   campaign_message_box(recruiting_1)
-   campaign_message_box(recruiting_2)
-   campaign_message_box(recruiting_3)
+   sleep(1000)
+   campaign_message_box(enemies_1)
+   campaign_message_box(enemies_2)
+   campaign_message_box(enemies_3)
    scroll_to_field(expansionMark)
    p1:hide_fields(wl.Game().map.player_slots[2].starting_field:region(6))
    sleep(1000)
 
-   --start recruiting
-   campaign_message_box(recruiting_4)
-   p1:allow_buildings{"frisians_barracks", "frisians_reindeer_farm", "frisians_seamstress", "frisians_wooden_tower", "frisians_wooden_tower_high"}
-   o = add_campaign_objective(obj_recruit_soldiers)
-   while not check_for_buildings(p1, {frisians_barracks = 1, frisians_seamstress = 1, frisians_reindeer_farm = 1}) do sleep(4273) end
-   set_objective_done(o)
-   sleep(30000)
-
    --start training
    campaign_message_box(training_1)
-   p1:allow_buildings{"frisians_training_camp", "frisians_training_arena", "frisians_seamstress_master", "frisians_armour_smithy_large"}
+   p1:allow_buildings{"frisians_training_camp", "frisians_training_arena", "frisians_seamstress_master", "frisians_armour_smithy_large", "frisians_wooden_tower", "frisians_wooden_tower_high"}
    o = add_campaign_objective(obj_train_soldiers)
    
    --wait until at least 1 soldier has level 10
    local hasL10 = false
    while not hasL10 do
-      local milbuild = array_combine(
+      local bld = array_combine(
+         p1:get_buildings("frisians_headquarters"),
+         p1:get_buildings("frisians_warehouse"),
          p1:get_buildings("frisians_sentinel"),
          p1:get_buildings("frisians_wooden_tower"),
          p1:get_buildings("frisians_wooden_tower_high"),
          p1:get_buildings("frisians_outpost")
       )
-      for idx,site in ipairs(milbuild) do
+      for idx,site in ipairs(bld) do
          hasL10 = hasL10 or ( site:get_soldiers{2,6,2,0} > 0 )
       end
       sleep(4273)
