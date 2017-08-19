@@ -505,7 +505,7 @@ void DefaultAI::late_initialization() {
 
 	// The data struct below is owned by Player object, the purpose is to have them saved therein
 	persistent_data = player_->get_mutable_ai_persistent_state();
-	management_data._persistent_data = player_->get_mutable_ai_persistent_state();
+	management_data.persistent_data = player_->get_mutable_ai_persistent_state();
 	const bool create_basic_buildings_list = (gametime < kRemainingBasicBuildingsResetTime);
 
 	if (persistent_data->initialized == kFalse) {

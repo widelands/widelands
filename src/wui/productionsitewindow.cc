@@ -42,7 +42,9 @@ ProductionSiteWindow::ProductionSiteWindow(InteractiveGameBase& parent,
                                            UI::UniqueWindow::Registry& reg,
                                            Widelands::ProductionSite& ps,
                                            bool avoid_fastclick)
-   : BuildingWindow(parent, reg, ps, avoid_fastclick) {
+   : BuildingWindow(parent, reg, ps, avoid_fastclick),
+     worker_table_(nullptr),
+     worker_caps_(nullptr) {
 	productionsitenotes_subscriber_ = Notifications::subscribe<Widelands::NoteBuilding>(
 	   [this](const Widelands::NoteBuilding& note) {
 		   if (note.serial == building().serial() && !is_dying_) {
