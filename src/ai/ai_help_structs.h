@@ -439,6 +439,8 @@ struct BuildingObserver {
 	uint16_t mines_percent;  // % of res it can mine
 	uint32_t current_stats;
 
+	uint32_t basic_amount; // basic amount for basic economy as defined in init.lua
+
 	std::vector<Widelands::DescriptionIndex> inputs;
 	std::vector<Widelands::DescriptionIndex> outputs;
 	std::vector<Widelands::DescriptionIndex> positions;
