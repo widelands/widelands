@@ -1239,10 +1239,10 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 void DefaultAI::soldier_trained(const TrainingSite& site) {
 
 	const uint32_t gametime = game().get_gametime();
-	soldier_trained_log.push(gametime);
 
 	for (TrainingSiteObserver& trainingsite_obs : trainingsites) {
 		if (trainingsite_obs.site == &site) {
+			soldier_trained_log.push(gametime, trainingsite_obs.bo->id);
 			if (trainingsite_obs.site->soldier_control()->soldier_capacity() > 0) {
 				game().send_player_change_soldier_capacity(
 				   *trainingsite_obs.site,
