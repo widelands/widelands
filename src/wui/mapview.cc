@@ -344,7 +344,7 @@ void MapView::mouse_to_pixel(const Vector2i& pixel, const Transition& transition
 }
 
 void MapView::draw(RenderTarget& dst) {
-	Widelands::EditorGameBase& egbase = intbase().egbase();
+	Widelands::EditorGameBase& egbase = intbase_.egbase();
 
 	uint32_t now = SDL_GetTicks();
 	while (!view_plans_.empty()) {
@@ -393,7 +393,7 @@ void MapView::draw(RenderTarget& dst) {
 	}
 
 	TextToDraw text_to_draw = TextToDraw::kNone;
-	auto display_flags = intbase().get_display_flags();
+	auto display_flags = intbase_.get_display_flags();
 	if (display_flags & InteractiveBase::dfShowCensus) {
 		text_to_draw = text_to_draw | TextToDraw::kCensus;
 	}
@@ -401,17 +401,16 @@ void MapView::draw(RenderTarget& dst) {
 		text_to_draw = text_to_draw | TextToDraw::kStatistics;
 	}
 
-	if (upcast(InteractivePlayer const, interactive_player, &intbase())) {
+	if (upcast(InteractivePlayer const, interactive_player, &intbase_)) {
 		const GameRenderer::Overlays overlays{
 		   text_to_draw, interactive_player->road_building_preview()};
 		renderer_->rendermap(
 		   egbase, view_.viewpoint, view_.zoom, interactive_player->player(), overlays, &dst);
 	} else {
-		const auto draw_immovables = intbase().draw_immovables() ?
-		                                GameRenderer::DrawImmovables::kYes :
-		                                GameRenderer::DrawImmovables::kNo;
+		const auto draw_immovables = intbase_.draw_immovables() ? GameRenderer::DrawImmovables::kYes :
+		                                                          GameRenderer::DrawImmovables::kNo;
 		const auto draw_bobs =
-		   intbase().draw_bobs() ? GameRenderer::DrawBobs::kYes : GameRenderer::DrawBobs::kNo;
+		   intbase_.draw_bobs() ? GameRenderer::DrawBobs::kYes : GameRenderer::DrawBobs::kNo;
 		const GameRenderer::Overlays overlays{static_cast<TextToDraw>(text_to_draw), {}};
 		renderer_->rendermap(
 		   egbase, view_.viewpoint, view_.zoom, overlays, draw_immovables, draw_bobs, &dst);
@@ -419,7 +418,7 @@ void MapView::draw(RenderTarget& dst) {
 }
 
 void MapView::set_view(const View& target_view, const Transition& transition) {
-	const Widelands::Map& map = intbase().egbase().map();
+	const Widelands::Map& map = intbase_.egbase().map();
 	switch (transition) {
 	case Transition::Jump: {
 		view_ = target_view;
@@ -441,7 +440,7 @@ void MapView::set_view(const View& target_view, const Transition& transition) {
 }
 
 void MapView::scroll_to_field(const Widelands::Coords& c, const Transition& transition) {
-	const Widelands::Map& map = intbase().egbase().map();
+	const Widelands::Map& map = intbase_.egbase().map();
 	assert(0 <= c.x);
 	assert(c.x < map.get_width());
 	assert(0 <= c.y);
@@ -459,7 +458,7 @@ void MapView::scroll_to_map_pixel(const Vector2f& pos, const Transition& transit
 }
 
 MapView::ViewArea MapView::view_area() const {
-	return ViewArea(get_view_area(view_, get_w(), get_h()), intbase().egbase().map());
+	return ViewArea(get_view_area(view_, get_w(), get_h()), intbase_.egbase().map());
 }
 
 const MapView::View& MapView::view() const {
@@ -514,7 +513,7 @@ bool MapView::handle_mousemove(
 		}
 	}
 
-	if (!intbase().get_sel_freeze())
+	if (!intbase_.get_sel_freeze())
 		track_sel(Vector2i(x, y));
 	return true;
 }
@@ -575,7 +574,7 @@ bool MapView::is_animating() const {
 void MapView::track_sel(const Vector2i& p) {
 	Vector2f p_in_map = to_map(p);
 	intbase_.set_sel_pos(MapviewPixelFunctions::calc_node_and_triangle(
-	   intbase().egbase().map(), p_in_map.x, p_in_map.y));
+	   intbase_.egbase().map(), p_in_map.x, p_in_map.y));
 }
 
 bool MapView::handle_key(bool down, SDL_Keysym code) {

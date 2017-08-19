@@ -663,6 +663,8 @@ void GameHost::run() {
 	broadcast(s);
 
 	Widelands::Game game;
+	game.set_ai_training_mode(g_options.pull_section("global").get_bool("ai_training", false));
+	game.set_auto_speed(g_options.pull_section("global").get_bool("auto_speed", false));
 	game.set_write_syncstream(g_options.pull_section("global").get_bool("write_syncstreams", true));
 
 	try {

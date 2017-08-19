@@ -31,9 +31,9 @@ namespace Widelands {
 constexpr int kRoadNotFound = -1000;
 constexpr int kShortcutWithinSameEconomy = 1000;
 constexpr int kRoadToDifferentEconomy = 10000;
+constexpr int kNoAiTrainingMutation = 200;
 constexpr int kUpperDefaultMutationLimit = 150;
 constexpr int kLowerDefaultMutationLimit = 75;
-constexpr int16_t kPrefNumberProbability = kAITrainingMode ? 5 : 100;
 
 // CheckStepRoadAI
 CheckStepRoadAI::CheckStepRoadAI(Player* const pl, uint8_t const mc, bool const oe)
@@ -198,18 +198,31 @@ NearFlag::NearFlag(const Flag& f, int32_t const c, int32_t const d)
 EventTimeQueue::EventTimeQueue() {
 }
 
-void EventTimeQueue::push(const uint32_t production_time) {
-	queue.push(production_time);
+void EventTimeQueue::push(const uint32_t production_time, const uint32_t additional_id) {
+	queue.push_front(std::make_pair(production_time, additional_id));
 }
 
-uint32_t EventTimeQueue::count(const uint32_t current_time) {
+// Return count of entries in log (deque), if id is provided, it counts corresponding
+// members. id here can be index of building, f.e. it count how many soldiers were
+// trained in particular type of training site
+uint32_t EventTimeQueue::count(const uint32_t current_time, const uint32_t additional_id) {
 	strip_old(current_time);
-	return queue.size();
+	if (additional_id == std::numeric_limits<uint32_t>::max()) {
+		return queue.size();
+	} else {
+		uint32_t cnt = 0;
+		for (auto item : queue) {
+			if (item.second == additional_id) {
+				cnt += 1;
+			}
+		}
+		return cnt;
+	}
 }
 
 void EventTimeQueue::strip_old(const uint32_t current_time) {
-	while (!queue.empty() && queue.front() < current_time - duration_) {
-		queue.pop();
+	while (!queue.empty() && queue.back().first < current_time - duration_) {
+		queue.pop_back();
 	}
 }
 
@@ -326,7 +339,6 @@ ExpansionType::ExpansionType() {
 void ExpansionType::set_expantion_type(const ExpansionMode etype) {
 	type = etype;
 }
-
 
 // Initialization of neuron. Neuron is defined by curve (type) and weight [-kWeightRange,
 // kWeightRange]
@@ -599,11 +611,17 @@ void ManagementData::mutate(const uint8_t pn) {
 
 	int16_t probability =
 	   shift_weight_value(get_military_number_at(kMutationRatePosition), false) + 101;
-	if (probability > kUpperDefaultMutationLimit) {
-		probability = kUpperDefaultMutationLimit;
-	}
-	if (probability < kLowerDefaultMutationLimit) {
-		probability = kLowerDefaultMutationLimit;
+
+	// When doing training mutation probability is to be bigger than not in training mode
+	if (ai_training_mode_) {
+		if (probability > kUpperDefaultMutationLimit) {
+			probability = kUpperDefaultMutationLimit;
+		}
+		if (probability < kLowerDefaultMutationLimit) {
+			probability = kLowerDefaultMutationLimit;
+		}
+	} else {
+		probability = kNoAiTrainingMutation;
 	}
 
 	set_military_number_at(kMutationRatePosition, probability - 101);
@@ -618,7 +636,7 @@ void ManagementData::mutate(const uint8_t pn) {
 	}
 
 	// Wildcard for ai trainingmode
-	if (kAITrainingMode && std::rand() % 8 == 0) {
+	if (ai_training_mode_ && std::rand() % 8 == 0) {
 		probability /= 3;
 	}
 
@@ -633,7 +651,7 @@ void ManagementData::mutate(const uint8_t pn) {
 			// Preferred numbers are ones that will be mutated agressively in full range
 			// [-kWeightRange, kWeightRange]
 			std::set<int32_t> preferred_numbers = {std::rand() % kMagicNumbersSize *
-			                                       kPrefNumberProbability};
+			                                       pref_number_probability};
 
 			for (uint16_t i = 0; i < kMagicNumbersSize; i += 1) {
 				if (i == kMutationRatePosition) {  // mutated above
@@ -659,7 +677,7 @@ void ManagementData::mutate(const uint8_t pn) {
 		{
 			// Neurons to be mutated more agressively
 			std::set<int32_t> preferred_neurons = {std::rand() % kNeuronPoolSize *
-			                                       kPrefNumberProbability};
+			                                       pref_number_probability};
 			for (auto& item : neuron_pool) {
 
 				const MutatingIntensity mutating_intensity =
@@ -690,7 +708,7 @@ void ManagementData::mutate(const uint8_t pn) {
 		{
 			// FNeurons to be mutated more agressively
 			std::set<int32_t> preferred_f_neurons = {std::rand() % kFNeuronPoolSize *
-			                                         kPrefNumberProbability};
+			                                         pref_number_probability};
 			for (auto& item : f_neuron_pool) {
 				uint8_t changed_bits = 0;
 				// is this a preferred neuron

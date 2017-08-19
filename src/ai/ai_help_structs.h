@@ -119,12 +119,12 @@ const std::vector<std::vector<int8_t>> neuron_curves = {
 };
 
 // TODO(tiborb): this should be replaced by command line switch
-constexpr bool kAITrainingMode = false;
 constexpr int kMagicNumbersSize = 150;
 constexpr int kNeuronPoolSize = 80;
 constexpr int kFNeuronPoolSize = 60;
 constexpr int kFNeuronBitSize = 32;
 constexpr int kMutationRatePosition = 42;
+constexpr int16_t AiPrefNumberProbability = 5;
 
 constexpr uint32_t kNever = std::numeric_limits<uint32_t>::max();
 
@@ -276,16 +276,20 @@ struct NearFlag {
 	int32_t distance;
 };
 
+// FIFO like structure for pairs <gametime,id>, where id is optional
+// used to count events within a time frame - duration_ (older ones are
+// stripped with strip_old function)
 struct EventTimeQueue {
 	EventTimeQueue();
 
-	void push(uint32_t);
-	uint32_t count(uint32_t);
+	void push(uint32_t, uint32_t = std::numeric_limits<uint32_t>::max());
+	uint32_t count(uint32_t, uint32_t = std::numeric_limits<uint32_t>::max());
 	void strip_old(uint32_t);
 
 private:
-	uint32_t duration_ = 20 * 60 * 1000;
-	std::queue<uint32_t> queue;
+	const uint32_t duration_ = 20 * 60 * 1000;
+	// FIFO container where newest goes to the front
+	std::deque<std::pair<uint32_t, uint32_t>> queue;
 };
 
 struct WalkableSpot {
@@ -656,6 +660,11 @@ struct ManagementData {
 	void reset_bi_neuron_id() {
 		next_bi_neuron_id = 0;
 	}
+	void set_ai_training_mode() {
+		ai_training_mode_ = true;
+		pref_number_probability = AiPrefNumberProbability;
+	}
+
 	int16_t get_military_number_at(uint8_t);
 	void set_military_number_at(uint8_t, int16_t);
 	MutatingIntensity do_mutate(uint8_t, int16_t);
@@ -675,6 +684,8 @@ private:
 	uint16_t next_bi_neuron_id = 0U;
 	uint16_t performance_change = 0U;
 	Widelands::AiType ai_type = Widelands::AiType::kNormal;
+	bool ai_training_mode_ = false;
+	uint16_t pref_number_probability = 100;
 	AiDnaHandler ai_dna_handler;
 };
 
