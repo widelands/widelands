@@ -323,7 +323,7 @@ void MapView::mouse_to_field(const Widelands::Coords& c, const Transition& trans
 void MapView::mouse_to_pixel(const Vector2i& pixel, const Transition& transition) {
 	switch (transition) {
 	case Transition::Jump:
-		track_sel(pixel, HonorSelectionFreeze::kNo);
+		track_sel(pixel);
 		set_mouse_pos(pixel);
 		return;
 
@@ -389,7 +389,6 @@ void MapView::draw_map_view(const Widelands::EditorGameBase& egbase,
 }
 
 void MapView::set_view(const View& target_view, const Transition& transition) {
-	// NOCOM(#sirver): map_ will be outdated in the editor?
 	switch (transition) {
 	case Transition::Jump: {
 		view_ = target_view;
@@ -452,8 +451,8 @@ void MapView::stop_dragging() {
 bool MapView::handle_mousepress(uint8_t const btn, int32_t const x, int32_t const y) {
 	if (btn == SDL_BUTTON_LEFT) {
 		stop_dragging();
-		track_sel(Vector2i(x, y), HonorSelectionFreeze::kNo);
-		fieldclicked();
+		const auto node_and_triangle = track_sel(Vector2i(x, y));
+		field_clicked(node_and_triangle);
 	} else if (btn == SDL_BUTTON_RIGHT) {
 		dragging_ = true;
 		grab_mouse(true);
@@ -483,7 +482,7 @@ bool MapView::handle_mousemove(
 		}
 	}
 
-	track_sel(Vector2i(x, y), HonorSelectionFreeze::kYes);
+	track_sel(Vector2i(x, y));
 	return true;
 }
 
@@ -540,10 +539,12 @@ bool MapView::is_animating() const {
 	return !view_plans_.empty() || !mouse_plans_.empty();
 }
 
-void MapView::track_sel(const Vector2i& p, const HonorSelectionFreeze& honor) {
+Widelands::NodeAndTriangle<> MapView::track_sel(const Vector2i& p) {
 	Vector2f p_in_map = to_map(p);
-	track_selection(
-	   MapviewPixelFunctions::calc_node_and_triangle(map_, p_in_map.x, p_in_map.y), honor);
+	const auto node_and_triangle =
+	   MapviewPixelFunctions::calc_node_and_triangle(map_, p_in_map.x, p_in_map.y);
+	track_selection(node_and_triangle);
+	return node_and_triangle;
 }
 
 bool MapView::handle_key(bool down, SDL_Keysym code) {

@@ -114,12 +114,13 @@ InteractiveBase::InteractiveBase(EditorGameBase& the_egbase, Section& global_s)
 
 	toolbar_.set_layout_toplevel(true);
 	map_view_.changeview.connect([this] { mainview_move(); });
-	map_view_.track_selection.connect([this](const Widelands::NodeAndTriangle<>& node_and_triangle,
-	                                         const MapView::HonorSelectionFreeze freeze) {
-		if (freeze == HonorSelectionFreeze::kYes && sel_.freeze) {
-			return;
-		}
+	map_view()->field_clicked.connect([this](const Widelands::NodeAndTriangle<>& node_and_triangle) {
 		set_sel_pos(node_and_triangle);
+	});
+	map_view_.track_selection.connect([this](const Widelands::NodeAndTriangle<>& node_and_triangle) {
+		if (!sel_.freeze) {
+			set_sel_pos(node_and_triangle);
+		}
 	});
 
 	set_border_snap_distance(global_s.get_int("border_snap_distance", 0));

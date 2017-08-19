@@ -248,6 +248,7 @@ FieldActionWindow::FieldActionWindow(InteractiveBase* const ib,
      player_(plr),
      map_(&ib->egbase().map()),
      field_overlay_manager_(*ib->mutable_field_overlay_manager()),
+	  // NOCOM(#sirver): pass this in?
      node_(ib->get_sel_pos().node, &(*map_)[ib->get_sel_pos().node]),
      tabpanel_(this, g_gr->images().get("images/ui_basic/but1.png")),
      fastclick_(true),

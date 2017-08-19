@@ -124,7 +124,9 @@ WatchWindow::WatchWindow(InteractiveGameBase& parent,
 		closebtn->sigclicked.connect(boost::bind(&WatchWindow::close_cur_view, this));
 	}
 
-	mapview_.fieldclicked.connect(boost::bind(&InteractiveGameBase::node_action, &parent));
+	mapview_.field_clicked.connect([&parent](const Widelands::NodeAndTriangle<>& node_and_triangle) {
+		parent.node_action(node_and_triangle);
+	});
 	mapview_.changeview.connect([this] { stop_tracking_by_drag(); });
 	warp_mainview.connect([&parent](const Vector2f& map_pixel) {
 		parent.map_view()->scroll_to_map_pixel(map_pixel, MapView::Transition::Smooth);

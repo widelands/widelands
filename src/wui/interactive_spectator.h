@@ -51,7 +51,7 @@ private:
 	bool can_see(Widelands::PlayerNumber) const override;
 	bool can_act(Widelands::PlayerNumber) const override;
 	Widelands::PlayerNumber player_number() const override;
-	void node_action() override;
+	void node_action(const Widelands::NodeAndTriangle<>& node_and_triangle) override;
 
 private:
 	UI::UniqueWindow::Registry chat_;

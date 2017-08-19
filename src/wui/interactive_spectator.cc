@@ -95,7 +95,9 @@ InteractiveSpectator::InteractiveSpectator(Widelands::Game& g,
 	adjust_toolbar_position();
 
 	// Setup all screen elements
-	map_view()->fieldclicked.connect(boost::bind(&InteractiveSpectator::node_action, this));
+	map_view()->field_clicked.connect([this](const Widelands::NodeAndTriangle<>& node_and_triangle) {
+		node_action(node_and_triangle);
+	});
 }
 
 void InteractiveSpectator::draw(RenderTarget& dst) {
@@ -150,10 +152,10 @@ Widelands::PlayerNumber InteractiveSpectator::player_number() const {
 /**
  * Observer has clicked on the given node; bring up the context menu.
  */
-void InteractiveSpectator::node_action() {
+void InteractiveSpectator::node_action(const Widelands::NodeAndTriangle<>& node_and_triangle) {
 	// Special case for buildings
-	if (is_a(Widelands::Building, egbase().map().get_immovable(get_sel_pos().node))) {
-		show_building_window(get_sel_pos().node, false);
+	if (is_a(Widelands::Building, egbase().map().get_immovable(node_and_triangle.node))) {
+		show_building_window(node_and_triangle.node, false);
 		return;
 	}
 

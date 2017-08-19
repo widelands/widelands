@@ -67,7 +67,7 @@ public:
 	virtual bool can_act(Widelands::PlayerNumber) const = 0;
 	virtual Widelands::PlayerNumber player_number() const = 0;
 
-	virtual void node_action() = 0;
+	virtual void node_action(const Widelands::NodeAndTriangle<>& node_and_triangle) = 0;
 	const PlayerType& get_playertype() const {
 		return playertype_;
 	}

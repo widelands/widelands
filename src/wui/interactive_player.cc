@@ -114,7 +114,9 @@ InteractivePlayer::InteractivePlayer(Widelands::Game& g,
 	};
 
 	set_player_number(plyn);
-	map_view()->fieldclicked.connect(boost::bind(&InteractivePlayer::node_action, this));
+	map_view()->field_clicked.connect([this](const Widelands::NodeAndTriangle<>& node_and_triangle) {
+			node_action(node_and_triangle);
+	});
 
 	adjust_toolbar_position();
 
@@ -175,7 +177,6 @@ void InteractivePlayer::draw(RenderTarget& dst) {
 	if (!game().is_loaded())
 		return;
 
-	// NOCOM(#sirver): move road building preview here?
 	const GameRenderer::Overlays overlays{get_text_to_draw(), road_building_preview()};
 	map_view()->draw_map_view(egbase(), overlays, GameRenderer::DrawImmovables::kYes,
 	              GameRenderer::DrawBobs::kYes, &player(), &dst);
@@ -203,13 +204,13 @@ int32_t InteractivePlayer::calculate_buildcaps(const Widelands::FCoords& c) {
 }
 
 /// Player has clicked on the given node; bring up the context menu.
-void InteractivePlayer::node_action() {
+void InteractivePlayer::node_action(const Widelands::NodeAndTriangle<>& node_and_triangle) {
 	const Map& map = egbase().map();
-	if (1 < player().vision(Map::get_index(get_sel_pos().node, map.get_width()))) {
+	if (1 < player().vision(Map::get_index(node_and_triangle.node, map.get_width()))) {
 		// Special case for buildings
-		if (upcast(Building, building, map.get_immovable(get_sel_pos().node)))
+		if (upcast(Building, building, map.get_immovable(node_and_triangle.node)))
 			if (can_see(building->owner().player_number())) {
-				show_building_window(get_sel_pos().node, false);
+				show_building_window(node_and_triangle.node, false);
 				return;
 			}
 

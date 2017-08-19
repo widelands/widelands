@@ -67,14 +67,12 @@ EditorGameBase::EditorGameBase(LuaInterface* lua_interface)
    : gametime_(0),
      lua_(lua_interface),
      player_manager_(new PlayersManager(*this)),
-     ibase_(nullptr),
-     map_(nullptr) {
+     ibase_(nullptr) {
 	if (!lua_)  // TODO(SirVer): this is sooo ugly, I can't say
 		lua_.reset(new LuaEditorInterface(this));
 }
 
 EditorGameBase::~EditorGameBase() {
-	delete map_;
 	delete player_manager_.release();
 }
 
@@ -185,19 +183,6 @@ void EditorGameBase::inform_players_about_immovable(MapIndex const i,
 				player_field.map_object_descr[TCoords<>::None] = descr;
 			}
 		}
-}
-
-/**
- * Replaces the current map with the given one. Ownership of the map is transferred
- * to the EditorGameBase object.
- */
-void EditorGameBase::set_map(Map* const new_map) {
-	assert(new_map != map_);
-	assert(new_map);
-
-	delete map_;
-
-	map_ = new_map;
 }
 
 void EditorGameBase::allocate_player_maps() {
@@ -412,8 +397,7 @@ void EditorGameBase::cleanup_for_load() {
 
 	player_manager_->cleanup();
 
-	if (map_)
-		map_->cleanup();
+	map_.cleanup();
 }
 
 void EditorGameBase::set_road(const FCoords& f, uint8_t const direction, uint8_t const roadtype) {

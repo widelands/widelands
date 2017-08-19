@@ -164,7 +164,9 @@ EditorInteractive::EditorInteractive(Widelands::EditorGameBase& e)
 	set_display_flag(InteractiveBase::dfDebug, false);
 #endif
 
-	map_view()->fieldclicked.connect(boost::bind(&EditorInteractive::map_clicked, this, false));
+	map_view()->field_clicked.connect([this](const Widelands::NodeAndTriangle<>& node_and_triangle) {
+		map_clicked(node_and_triangle, false);
+	});
 
 	// Subscribe to changes of the resource type on a field..
 	field_resource_changed_subscriber_ =
@@ -287,9 +289,10 @@ void EditorInteractive::exit() {
 	end_modal<UI::Panel::Returncodes>(UI::Panel::Returncodes::kBack);
 }
 
-void EditorInteractive::map_clicked(bool should_draw) {
+void EditorInteractive::map_clicked(const Widelands::NodeAndTriangle<>& node_and_triangle,
+                                    const bool should_draw) {
 	history_->do_action(tools_->current(), tools_->use_tool, egbase().map(), egbase().world(),
-	                    get_sel_pos(), *this, should_draw);
+	                    node_and_triangle, *this, should_draw);
 	set_need_save(true);
 }
 
@@ -318,11 +321,11 @@ void EditorInteractive::draw(RenderTarget& dst) {
 /// Needed to get freehand painting tools (hold down mouse and move to edit).
 void EditorInteractive::set_sel_pos(Widelands::NodeAndTriangle<> const sel) {
 	bool const target_changed = tools_->current().operates_on_triangles() ?
-	                               sel.triangle != get_sel_pos().triangle :
-	                               sel.node != get_sel_pos().node;
+	                               sel.triangle != sel.triangle :
+	                               sel.node != sel.node;
 	InteractiveBase::set_sel_pos(sel);
 	if (target_changed && is_painting_)
-		map_clicked(true);
+		map_clicked(sel, true);
 }
 
 void EditorInteractive::set_sel_radius_and_update_menu(uint32_t const val) {

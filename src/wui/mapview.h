@@ -100,12 +100,6 @@ public:
 		Vector2f pixel = Vector2f::zero();
 	};
 
-	// If in 'track_selection', the selection freeze should be honored or
-	// ignored. For example, for a mouse click, the selection is always moved,
-	// even if a window is open.
-	// NOCOM(#sirver): this is a hack. Can this not be done by changin fieldclicked?
-	enum class HonorSelectionFreeze { kNo, kYes };
-
 	MapView(UI::Panel* const parent,
 	        const Widelands::Map& map,
 	        const int32_t x,
@@ -118,11 +112,10 @@ public:
 	boost::signals2::signal<void()> changeview;
 
 	// Called when the user clicked on a field.
-	boost::signals2::signal<void()> fieldclicked;
+	boost::signals2::signal<void(const Widelands::NodeAndTriangle<>&)> field_clicked;
 
 	// Called when the field under the mouse cursor has changed.
-	boost::signals2::signal<void(const Widelands::NodeAndTriangle<>&, const HonorSelectionFreeze&)>
-	   track_selection;
+	boost::signals2::signal<void(const Widelands::NodeAndTriangle<>&)> track_selection;
 
 	// Defines if an animation should be immediate (one-frame) or nicely
 	// animated for the user to follow.
@@ -190,8 +183,8 @@ private:
 	// current mouse) if we are not animating.
 	TimestampedMouse animation_target_mouse() const;
 
-	// Move the sel to the given mouse position. Does not honour sel freeze.
-	void track_sel(const Vector2i& m, const HonorSelectionFreeze& honor);
+	// Turns 'm' into the corresponding NodeAndTrinangle and calls 'track_selection'.
+	Widelands::NodeAndTriangle<> track_sel(const Vector2i& m);
 
 	Vector2f to_panel(const Vector2f& map_pixel) const;
 	Vector2f to_map(const Vector2i& panel_pixel) const;
