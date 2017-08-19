@@ -211,9 +211,8 @@ uint32_t EventTimeQueue::count(const uint32_t current_time, const uint32_t addit
 		return queue.size();
 	} else {
 		uint32_t cnt = 0;
-		// for (auto item : queue){
-		for (auto it : queue) {
-			if (it.second == additional_id) {
+		for (auto item : queue) {
+			if (item.second == additional_id) {
 				cnt += 1;
 			}
 		}
