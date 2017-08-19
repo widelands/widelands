@@ -48,14 +48,17 @@ using std::setiosflags;
 
 namespace {
 
+// Do not change the contents of this struct, segfaults will ensue.
 struct S2MapDescrHeader {
-	char name[20];  // We need fixed char arrays rather than strings here. Otherwise, this will
-	                // segfault.
+	char magic[10];  // "WORLD_V1.0"
+	char name[20];   // We need fixed char arrays rather than strings here. Otherwise, this will
+	                 // segfault.
 	int16_t w;
 	int16_t h;
 	int8_t uses_world;  // 0 = green, 1 =black, 2 = winter
 	int8_t nplayers;
 	char author[26];
+	char bulk[2290];  // unknown
 } /* size 2352 */;
 
 // TODO(unknown): the following bob types appear in S2 maps but are unknown
