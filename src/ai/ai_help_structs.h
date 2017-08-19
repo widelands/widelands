@@ -288,7 +288,7 @@ struct EventTimeQueue {
 
 private:
 	const uint32_t duration_ = 20 * 60 * 1000;
-	// FIFO contaner where newest goes to the front
+	// FIFO container where newest goes to the front
 	std::deque<std::pair<uint32_t, uint32_t>> queue;
 };
 
