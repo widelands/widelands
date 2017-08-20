@@ -542,6 +542,7 @@ struct GameHostImpl {
 	     lastpauseping(0),
 	     syncreport_pending(false),
 	     syncreport_time(0),
+	     syncreport(),
 	     syncreport_arrived(false) {
 	}
 };

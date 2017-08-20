@@ -43,8 +43,8 @@ private:
 	struct BaseCapsule {
 		virtual ~BaseCapsule() {
 		}
-		virtual bool
-		allowed(const Map&, const FCoords& start, const FCoords& end, int32_t dir, StepId id) const = 0;
+		virtual bool allowed(
+		   const Map&, const FCoords& start, const FCoords& end, int32_t dir, StepId id) const = 0;
 		virtual bool reachable_dest(const Map&, const FCoords& dest) const = 0;
 	};
 	template <typename T> struct Capsule : public BaseCapsule {
@@ -103,8 +103,11 @@ public:
 struct CheckStepAnd {
 	void add(const CheckStep& sub);
 
-	bool
-	allowed(const Map&, const FCoords& start, const FCoords& end, int32_t dir, CheckStep::StepId id) const;
+	bool allowed(const Map&,
+	             const FCoords& start,
+	             const FCoords& end,
+	             int32_t dir,
+	             CheckStep::StepId id) const;
 	bool reachable_dest(const Map&, const FCoords& dest) const;
 
 private:
@@ -122,8 +125,8 @@ struct CheckStepDefault {
 	CheckStepDefault(uint8_t const movecaps) : movecaps_(movecaps) {
 	}
 
-	bool
-	allowed(const Map&, const FCoords& start, const FCoords& end, int32_t dir, CheckStep::StepId) const;
+	bool allowed(
+	   const Map&, const FCoords& start, const FCoords& end, int32_t dir, CheckStep::StepId) const;
 	bool reachable_dest(const Map&, const FCoords& dest) const;
 
 private:
@@ -140,8 +143,8 @@ struct CheckStepWalkOn {
 	   : movecaps_(movecaps), onlyend_(onlyend) {
 	}
 
-	bool
-	allowed(const Map&, const FCoords& start, const FCoords& end, int32_t dir, CheckStep::StepId) const;
+	bool allowed(
+	   const Map&, const FCoords& start, const FCoords& end, int32_t dir, CheckStep::StepId) const;
 	bool reachable_dest(const Map&, FCoords dest) const;
 
 private:
@@ -161,8 +164,8 @@ struct CheckStepRoad {
 	   : player_(player), movecaps_(movecaps) {
 	}
 
-	bool
-	allowed(const Map&, const FCoords& start, const FCoords& end, int32_t dir, CheckStep::StepId) const;
+	bool allowed(
+	   const Map&, const FCoords& start, const FCoords& end, int32_t dir, CheckStep::StepId) const;
 	bool reachable_dest(const Map&, const FCoords& dest) const;
 
 private:
@@ -178,8 +181,8 @@ struct CheckStepLimited {
 	void add_allowed_location(const Coords& c) {
 		allowed_locations_.insert(c);
 	}
-	bool
-	allowed(const Map&, const FCoords& start, const FCoords& end, int32_t dir, CheckStep::StepId) const;
+	bool allowed(
+	   const Map&, const FCoords& start, const FCoords& end, int32_t dir, CheckStep::StepId) const;
 	bool reachable_dest(const Map&, FCoords dest) const;
 
 private:

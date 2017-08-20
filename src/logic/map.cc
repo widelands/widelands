@@ -565,7 +565,9 @@ Functor is of the form: functor(Map*, FCoords)
 ===============
 */
 template <typename functorT>
-void Map::find_reachable(const Area<FCoords>& area, const CheckStep& checkstep, functorT& functor) const {
+void Map::find_reachable(const Area<FCoords>& area,
+                         const CheckStep& checkstep,
+                         functorT& functor) const {
 	std::vector<Coords> queue;
 	boost::shared_ptr<Pathfields> pathfields = pathfieldmgr_->allocate();
 
@@ -654,8 +656,9 @@ the list.
 Returns the number of objects found.
 ===============
 */
-uint32_t
-Map::find_bobs(Area<FCoords> const area, std::vector<Bob*>* const list, const FindBob& functor) const {
+uint32_t Map::find_bobs(Area<FCoords> const area,
+                        std::vector<Bob*>* const list,
+                        const FindBob& functor) const {
 	FindBobsCallback cb(list, functor);
 
 	find(area, cb);
@@ -731,7 +734,7 @@ If list is not 0, found immovables are stored in list.
 */
 uint32_t Map::find_immovables(Area<FCoords> const area,
                               std::vector<ImmovableFound>* const list,
-                              const FindImmovable& functor) const{
+                              const FindImmovable& functor) const {
 	FindImmovablesCallback cb(list, functor);
 
 	find(area, cb);
@@ -823,8 +826,9 @@ Returns the number of matching fields.
 Note that list can be 0.
 ===============
 */
-uint32_t
-Map::find_fields(Area<FCoords> const area, std::vector<Coords>* list, const FindNode& functor) const {
+uint32_t Map::find_fields(Area<FCoords> const area,
+                          std::vector<Coords>* list,
+                          const FindNode& functor) const {
 	FindNodesCallback cb(list, functor);
 
 	find(area, cb);

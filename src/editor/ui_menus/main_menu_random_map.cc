@@ -511,7 +511,7 @@ void MainMenuNewRandomMap::clicked_create_map() {
 	cancel_button_.set_enabled(false);
 	EditorInteractive& eia = dynamic_cast<EditorInteractive&>(*get_parent());
 	Widelands::EditorGameBase& egbase = eia.egbase();
-	 Widelands::Map* map = egbase.mutable_map();
+	Widelands::Map* map = egbase.mutable_map();
 	UI::ProgressWindow loader_ui;
 
 	eia.cleanup_for_load();
@@ -527,12 +527,12 @@ void MainMenuNewRandomMap::clicked_create_map() {
 	      << "Resources = " << resources_.get_title() << "\n"
 	      << "ID = " << map_id_edit_.text() << "\n";
 
-		MapGenerator gen(*map, map_info, egbase);
-		map->create_empty_map(
-			egbase.world(), map_info.w, map_info.h, 0, _("No Name"),
-			g_options.pull_section("global").get_string("realname", pgettext("author_name", "Unknown")),
-			sstrm.str().c_str());
-		loader_ui.step(_("Generating random map…"));
+	MapGenerator gen(*map, map_info, egbase);
+	map->create_empty_map(
+	   egbase.world(), map_info.w, map_info.h, 0, _("No Name"),
+	   g_options.pull_section("global").get_string("realname", pgettext("author_name", "Unknown")),
+	   sstrm.str().c_str());
+	loader_ui.step(_("Generating random map…"));
 
 	log("============== Generating Map ==============\n");
 	log("ID:            %s\n", map_id_edit_.text().c_str());

@@ -304,11 +304,13 @@ public:
 	                                   std::vector<ImmovableFound>* list,
 	                                   const CheckStep&,
 	                                   const FindImmovable& = find_immovable_always_true()) const;
-	uint32_t find_reachable_immovables_unique(const Area<FCoords>,
-	                                          std::vector<BaseImmovable*>& list,
-	                                          const CheckStep&,
-	                                          const FindImmovable& = find_immovable_always_true()) const;
-	uint32_t find_fields(const Area<FCoords>, std::vector<Coords>* list, const FindNode& functor) const;
+	uint32_t
+	find_reachable_immovables_unique(const Area<FCoords>,
+	                                 std::vector<BaseImmovable*>& list,
+	                                 const CheckStep&,
+	                                 const FindImmovable& = find_immovable_always_true()) const;
+	uint32_t
+	find_fields(const Area<FCoords>, std::vector<Coords>* list, const FindNode& functor) const;
 	uint32_t find_reachable_fields(const Area<FCoords>,
 	                               std::vector<Coords>* list,
 	                               const CheckStep&,
@@ -488,7 +490,6 @@ private:
 	template <typename functorT>
 	void find_reachable(const Area<FCoords>&, const CheckStep&, functorT&) const;
 	template <typename functorT> void find(const Area<FCoords>&, functorT&) const;
-
 
 	/// # of players this map supports (!= Game's number of players!)
 	PlayerNumber nrplayers_;

@@ -113,8 +113,11 @@ bool CheckStepDefault::reachable_dest(const Map& map, const FCoords& dest) const
 CheckStepWalkOn
 ===============
 */
-bool CheckStepWalkOn::allowed(
-   const Map&, const FCoords& start, const FCoords& end, int32_t, CheckStep::StepId const id) const {
+bool CheckStepWalkOn::allowed(const Map&,
+                              const FCoords& start,
+                              const FCoords& end,
+                              int32_t,
+                              CheckStep::StepId const id) const {
 	NodeCaps const startcaps = start.field->nodecaps();
 	NodeCaps const endcaps = end.field->nodecaps();
 
@@ -143,8 +146,11 @@ bool CheckStepWalkOn::reachable_dest(const Map&, FCoords) const {
 	return true;
 }
 
-bool CheckStepRoad::allowed(
-   const Map& map, const FCoords& start, const FCoords& end, int32_t, CheckStep::StepId const id) const {
+bool CheckStepRoad::allowed(const Map& map,
+                            const FCoords& start,
+                            const FCoords& end,
+                            int32_t,
+                            CheckStep::StepId const id) const {
 	uint8_t const endcaps = player_.get_buildcaps(end);
 
 	// Calculate cost and passability

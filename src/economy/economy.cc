@@ -170,7 +170,8 @@ void Economy::check_splits() {
 		// reached from f1. These nodes induce a connected subgraph.
 		// This means that the newly created economy, which contains all the
 		// flags that have been split, is already connected.
-		RouteAStar<AStarEstimator> astar(*router_, wwWORKER, AStarEstimator(*egbase.mutable_map(), *f2));
+		RouteAStar<AStarEstimator> astar(
+		   *router_, wwWORKER, AStarEstimator(*egbase.mutable_map(), *f2));
 		astar.push(*f1);
 		std::set<OPtr<Flag>> reachable;
 

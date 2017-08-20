@@ -5972,7 +5972,8 @@ int LuaField::set_terr(lua_State* L) {
 	if (td == static_cast<DescriptionIndex>(-1))
 		report_error(L, "Unknown terrain '%s'", name);
 
-	egbase.mutable_map()->change_terrain(world, TCoords<FCoords>(fcoords(L), TCoords<FCoords>::R), td);
+	egbase.mutable_map()->change_terrain(
+	   world, TCoords<FCoords>(fcoords(L), TCoords<FCoords>::R), td);
 
 	lua_pushstring(L, name);
 	return 1;

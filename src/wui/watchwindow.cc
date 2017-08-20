@@ -213,8 +213,7 @@ void WatchWindow::think() {
 
 	if (upcast(Widelands::Bob, bob, views_[cur_index_].tracking.get(game()))) {
 		const Widelands::Map& map = game().map();
-		const Vector2f field_position =
-		   MapviewPixelFunctions::to_map_pixel(map, bob->get_position());
+		const Vector2f field_position = MapviewPixelFunctions::to_map_pixel(map, bob->get_position());
 		const Vector2f pos = bob->calc_drawpos(game(), field_position, 1.f);
 
 		// Drop the tracking if it leaves our vision range

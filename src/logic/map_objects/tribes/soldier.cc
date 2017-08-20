@@ -798,7 +798,7 @@ void Soldier::attack_update(Game& game, State& state) {
 				uint32_t maxdist = descr().vision_range() * 2;
 				Area<FCoords> area(map.get_fcoords(get_position()), maxdist);
 				if (map.find_reachable_fields(area, &coords, CheckStepDefault(descr().movecaps()),
-				                               FindNodeOwned(get_owner()->player_number()))) {
+				                              FindNodeOwned(get_owner()->player_number()))) {
 					// Found home land
 					target = coords.front();
 					molog("[attack] Going back to our land\n");
@@ -842,9 +842,8 @@ void Soldier::attack_update(Game& game, State& state) {
 		}
 		//  Any enemy soldier at baseflag count as defender.
 		std::vector<Bob*> soldiers;
-		map.find_bobs(
-		   Area<FCoords>(map.get_fcoords(enemy->base_flag().get_position()), 0), &soldiers,
-		   FindBobEnemySoldier(get_owner()));
+		map.find_bobs(Area<FCoords>(map.get_fcoords(enemy->base_flag().get_position()), 0), &soldiers,
+		              FindBobEnemySoldier(get_owner()));
 		defenders += soldiers.size();
 	}
 

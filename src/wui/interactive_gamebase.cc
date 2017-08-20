@@ -223,7 +223,7 @@ UI::UniqueWindow* InteractiveGameBase::show_building_window(const Widelands::Coo
  * If so, do it and return true; otherwise, return false.
  */
 bool InteractiveGameBase::try_show_ship_window() {
-	const Widelands::Map& map= game().map();
+	const Widelands::Map& map = game().map();
 	Widelands::Area<Widelands::FCoords> area(map.get_fcoords(get_sel_pos().node), 1);
 
 	if (!(area.field->nodecaps() & Widelands::MOVECAPS_SWIM))

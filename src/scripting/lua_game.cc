@@ -601,7 +601,8 @@ int LuaPlayer::reveal_fields(lua_State* L) {
 
 	lua_pushnil(L); /* first key */
 	while (lua_next(L, 2) != 0) {
-		p.see_node(map, map[0], (*get_user_class<LuaField>(L, -1))->fcoords(L), egbase.get_gametime());
+		p.see_node(
+		   map, map[0], (*get_user_class<LuaField>(L, -1))->fcoords(L), egbase.get_gametime());
 		lua_pop(L, 1);
 	}
 
@@ -1084,8 +1085,7 @@ int LuaObjective::set_done(lua_State* L) {
 		std::string filename = _("%1% (%2%)");
 		i18n::Textdomain td("maps");
 		filename =
-		   (boost::format(filename) % _(get_egbase(L).map().get_name()) % o.descname().c_str())
-		      .str();
+		   (boost::format(filename) % _(get_egbase(L).map().get_name()) % o.descname().c_str()).str();
 		get_game(L).save_handler().request_save(filename);
 	}
 	return 0;

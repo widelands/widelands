@@ -119,7 +119,8 @@ bool Worker::run_mine(Game& game, State& state, const Action& action) {
 	uint32_t totalres = 0;
 	uint32_t totalchance = 0;
 	int32_t pick;
-	MapRegion<Area<FCoords>> mr(*map, Area<FCoords>(map->get_fcoords(get_position()), action.iparam1));
+	MapRegion<Area<FCoords>> mr(
+	   *map, Area<FCoords>(map->get_fcoords(get_position()), action.iparam1));
 	do {
 		DescriptionIndex fres = mr.location().field->get_resources();
 		ResourceAmount amount = mr.location().field->get_resources_amount();
@@ -154,8 +155,8 @@ bool Worker::run_mine(Game& game, State& state, const Action& action) {
 
 	// Second pass through fields - reset mr
 	pick = game.logic_rand() % totalchance;
-	mr =
-	   MapRegion<Area<FCoords>>(*map, Area<FCoords>(map->get_fcoords(get_position()), action.iparam1));
+	mr = MapRegion<Area<FCoords>>(
+	   *map, Area<FCoords>(map->get_fcoords(get_position()), action.iparam1));
 	do {
 		DescriptionIndex fres = mr.location().field->get_resources();
 		if (fres != res) {
@@ -219,7 +220,8 @@ bool Worker::run_breed(Game& game, State& state, const Action& action) {
 	uint32_t totalres = 0;
 	uint32_t totalchance = 0;
 	int32_t pick;
-	MapRegion<Area<FCoords>> mr(*map, Area<FCoords>(map->get_fcoords(get_position()), action.iparam1));
+	MapRegion<Area<FCoords>> mr(
+	   *map, Area<FCoords>(map->get_fcoords(get_position()), action.iparam1));
 	do {
 		DescriptionIndex fres = mr.location().field->get_resources();
 		ResourceAmount amount = mr.location().field->get_initial_res_amount() -
@@ -256,8 +258,8 @@ bool Worker::run_breed(Game& game, State& state, const Action& action) {
 	// Second pass through fields - reset mr!
 	assert(totalchance);
 	pick = game.logic_rand() % totalchance;
-	mr =
-	   MapRegion<Area<FCoords>>(*map, Area<FCoords>(map->get_fcoords(get_position()), action.iparam1));
+	mr = MapRegion<Area<FCoords>>(
+	   *map, Area<FCoords>(map->get_fcoords(get_position()), action.iparam1));
 
 	do {
 		DescriptionIndex fres = mr.location().field->get_resources();
