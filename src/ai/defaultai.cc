@@ -4742,7 +4742,7 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 			return BuildingNecessity::kAllowed;
 		} else if (bo.production_hint >= 0) {
 
-			if (bo.cnt_under_construction + bo.unoccupied_count - bo.unconnected_count> 0) {
+			if (bo.cnt_under_construction + bo.unoccupied_count - bo.unconnected_count > 0) {
 				return BuildingNecessity::kForbidden;
 			}
 
