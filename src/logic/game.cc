@@ -192,8 +192,6 @@ void Game::save_syncstream(bool const save) {
 
 bool Game::run_splayer_scenario_direct(const std::string& mapname,
                                        const std::string& script_to_run) {
-	assert(!get_map());
-
 	// Replays can't handle scenarios
 	set_write_replay(false);
 
