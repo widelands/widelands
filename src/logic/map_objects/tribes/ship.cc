@@ -438,10 +438,10 @@ void Ship::ship_update_idle(Game& game, Bob::State& state) {
 
 	// If we are waiting for the next transport job, check if we should move away from ships and
 	// shores
+	const Map& map = game.map();
 	switch (ship_state_) {
 	case ShipStates::kTransport: {
 		FCoords position = get_position();
-		const Map& map = game.map();
 		unsigned int dirs[LAST_DIRECTION + 1];
 		unsigned int dirmax = 0;
 
@@ -569,7 +569,6 @@ void Ship::ship_update_idle(Game& game, Bob::State& state) {
 				// Most likely the command was send as the ship was on an exploration and just leaving
 				// the island - therefore we try to find the island again.
 				FCoords position = get_position();
-				const Map& map = game.map();
 				for (uint8_t dir = FIRST_DIRECTION; dir <= LAST_DIRECTION; ++dir) {
 					FCoords neighbour = map.get_neighbour(position, dir);
 					for (uint8_t sur = FIRST_DIRECTION; sur <= LAST_DIRECTION; ++sur)
@@ -612,7 +611,7 @@ void Ship::ship_update_idle(Game& game, Bob::State& state) {
 	}
 	case ShipStates::kExpeditionColonizing: {
 		assert(!expedition_->seen_port_buildspaces.empty());
-		BaseImmovable* baim = game.map()[expedition_->seen_port_buildspaces.front()].get_immovable();
+		BaseImmovable* baim = map[expedition_->seen_port_buildspaces.front()].get_immovable();
 		if (baim) {
 			upcast(ConstructionSite, cs, baim);
 

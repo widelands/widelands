@@ -231,8 +231,7 @@ MainMenuNewRandomMap::MainMenuNewRandomMap(EditorInteractive& parent)
 	width_.set_value_list(Widelands::kMapDimensions);
 	height_.set_value_list(Widelands::kMapDimensions);
 	{
-		const Widelands::Map& map = parent.egbase().map();
-		Widelands::Extent const map_extent = map.extent();
+		Widelands::Extent const map_extent = parent.egbase().map().extent();
 		width_.set_value(find_dimension_index(map_extent.w));
 		height_.set_value(find_dimension_index(map_extent.h));
 	}

@@ -625,14 +625,13 @@ int LuaPlayer::reveal_fields(lua_State* L) {
 int LuaPlayer::hide_fields(lua_State* L) {
 	EditorGameBase& egbase = get_egbase(L);
 	Player& p = get(L, egbase);
-	const Map& map = egbase.map();
 
 	luaL_checktype(L, 2, LUA_TTABLE);
 	const bool mode = !lua_isnone(L, 3) && luaL_checkboolean(L, 3);
 
 	lua_pushnil(L); /* first key */
 	while (lua_next(L, 2) != 0) {
-		p.unsee_node((*get_user_class<LuaField>(L, -1))->fcoords(L).field - &map[0],
+		p.unsee_node((*get_user_class<LuaField>(L, -1))->fcoords(L).field - &egbase.map()[0],
 		             egbase.get_gametime(),
 		             mode ? Player::UnseeNodeMode::kUnexplore : Player::UnseeNodeMode::kUnsee);
 		lua_pop(L, 1);
@@ -733,7 +732,6 @@ int LuaPlayer::get_ships(lua_State* L) {
 */
 int LuaPlayer::get_buildings(lua_State* L) {
 	EditorGameBase& egbase = get_egbase(L);
-	const Map& map = egbase.map();
 	Player& p = get(L, egbase);
 
 	// if only one string, convert to array so that we can use
@@ -769,7 +767,7 @@ int LuaPlayer::get_buildings(lua_State* L) {
 				continue;
 
 			lua_pushuint32(L, cidx++);
-			upcasted_map_object_to_lua(L, map[vec[l].pos].get_immovable());
+			upcasted_map_object_to_lua(L, egbase.map()[vec[l].pos].get_immovable());
 			lua_rawset(L, -3);
 		}
 

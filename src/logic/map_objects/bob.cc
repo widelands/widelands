@@ -634,8 +634,7 @@ void Bob::movepath_update(Game& game, State& state) {
 	// Using probability of 1/8 and pausing it for 5, 10 or 15 seconds
 	if (game.logic_rand() % 8 == 0) {
 		if (is_a(Ship, this)) {
-			const Map& map = game.map();
-			const uint32_t ships_count = map.find_bobs(
+			const uint32_t ships_count = game.map().find_bobs(
 			   Widelands::Area<Widelands::FCoords>(get_position(), 0), nullptr, FindBobShip());
 			assert(ships_count > 0);
 			if (ships_count > 1) {

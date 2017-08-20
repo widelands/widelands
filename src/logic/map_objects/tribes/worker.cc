@@ -863,8 +863,7 @@ bool Worker::run_geologist(Game& game, State& state, const Action& action) {
  * possible.
  */
 bool Worker::run_geologist_find(Game& game, State& state, const Action&) {
-	const Map& map = game.map();
-	const FCoords position = map.get_fcoords(get_position());
+	const FCoords position = game.map().get_fcoords(get_position());
 	BaseImmovable const* const imm = position.field->get_immovable();
 	const World& world = game.world();
 

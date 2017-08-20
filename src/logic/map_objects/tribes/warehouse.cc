@@ -581,8 +581,7 @@ void Warehouse::init_containers(Player& player) {
 void Warehouse::init_portdock(EditorGameBase& egbase) {
 	molog("Setting up port dock fields\n");
 
-	const Map& map = egbase.map();
-	std::vector<Coords> dock = map.find_portdock(get_position());
+	std::vector<Coords> dock = egbase.map().find_portdock(get_position());
 	if (dock.empty()) {
 		log("Attempting to setup port without neighboring water (coords: %3dx%3d).\n",
 		    get_position().x, get_position().y);

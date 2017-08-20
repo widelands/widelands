@@ -1489,10 +1489,11 @@ void ProductionProgram::ActConstruct::execute(Game& game, ProductionSite& psite)
 	}
 
 	// Look for an appropriate object in the given radius
+	const Map& map = game.map();
 	std::vector<ImmovableFound> immovables;
 	CheckStepWalkOn cstep(MOVECAPS_WALK, true);
-	Area<FCoords> area(game.map().get_fcoords(psite.base_flag().get_position()), radius);
-	if (game.map().find_reachable_immovables(
+	Area<FCoords> area(map.get_fcoords(psite.base_flag().get_position()), radius);
+	if (map.find_reachable_immovables(
 	       area, &immovables, cstep, FindImmovableByDescr(descr))) {
 		state.objvar = immovables[0].object;
 
@@ -1502,7 +1503,6 @@ void ProductionProgram::ActConstruct::execute(Game& game, ProductionSite& psite)
 
 	// No object found, look for a field where we can build
 	std::vector<Coords> fields;
-	const Map& map = game.map();
 	FindNodeAnd fna;
 	// 10 is custom value to make sure the "water" is at least 10 nodes big
 	fna.add(FindNodeShore(10));

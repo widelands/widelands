@@ -600,7 +600,6 @@ Supply* Economy::find_best_supply(Game& game, const Request& req, int32_t& cost)
 	Route* best_route = nullptr;
 	int32_t best_cost = -1;
 	Flag& target_flag = req.target_flag();
-	const Map& map = game.map();
 
 	available_supplies_.clear();
 
@@ -622,7 +621,7 @@ Supply* Economy::find_best_supply(Game& game, const Request& req, int32_t& cost)
 		const Widelands::Coords provider_position =
 		   supp.get_position(game)->base_flag().get_position();
 
-		const uint32_t dist = map.calc_distance(target_flag.get_position(), provider_position);
+		const uint32_t dist = game.map().calc_distance(target_flag.get_position(), provider_position);
 
 		UniqueDistance ud = {dist, supp.get_position(game)->serial(), provider};
 

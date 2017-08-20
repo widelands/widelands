@@ -421,7 +421,6 @@ Widelands::IslandExploreDirection DefaultAI::randomExploreDirection() {
 // navigation decisions (these notifications are processes not in 'real time')
 void DefaultAI::expedition_management(ShipObserver& so) {
 
-	const Map& map = game().map();
 	const int32_t gametime = game().get_gametime();
 	PlayerNumber const pn = player_->player_number();
 	// probability for island exploration repetition
@@ -484,6 +483,7 @@ void DefaultAI::expedition_management(ShipObserver& so) {
 		// we head for open sea again
 	} else {
 		// determine swimmable directions
+		const Map& map = game().map();
 		std::vector<Direction> possible_directions;
 		for (Direction dir = FIRST_DIRECTION; dir <= LAST_DIRECTION; ++dir) {
 			// testing distance of 8 fields

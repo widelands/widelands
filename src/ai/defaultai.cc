@@ -244,8 +244,6 @@ void DefaultAI::think() {
 
 	const int32_t delay_time = gametime - taskPool.front().due_time;
 
-	const Map& map = game().map();
-
 	// Here we decide how many jobs will be run now (none - 5)
 	// in case no job is due now, it can be zero
 	uint32_t jobs_to_run_count = (delay_time < 0) ? 0 : 1;
@@ -446,7 +444,7 @@ void DefaultAI::think() {
 			{  // statistics for spotted warehouses
 				uint16_t conquered_wh = 0;
 				for (auto coords : enemy_warehouses) {
-					if (get_land_owner(map, coords) == player_number()) {
+					if (get_land_owner(game().map(), coords) == player_number()) {
 						++conquered_wh;
 					}
 				};
@@ -3226,7 +3224,6 @@ bool DefaultAI::dispensable_road_test(Widelands::Road& road) {
 	} else {
 		checkradius = 15;
 	}
-	const Map& map = game().map();
 
 	// algorithm to walk on roads
 	while (!queue.empty()) {
@@ -3270,7 +3267,7 @@ bool DefaultAI::dispensable_road_test(Widelands::Road& road) {
 				endflag = &near_road->get_flag(Road::FlagEnd);
 			}
 
-			int32_t dist = map.calc_distance(roadstartflag.get_position(), endflag->get_position());
+			int32_t dist = game().map().calc_distance(roadstartflag.get_position(), endflag->get_position());
 
 			if (dist > checkradius) {  //  out of range of interest
 				continue;
@@ -3514,7 +3511,7 @@ bool DefaultAI::create_shortcut_road(const Flag& flag,
 		// first we block the field and vicinity for 15 minutes, probably it is not a good place to
 		// build on
 		MapRegion<Area<FCoords>> mr(
-		   game().map(), Area<FCoords>(map.get_fcoords(bld->get_position()), 2));
+		   map, Area<FCoords>(map.get_fcoords(bld->get_position()), 2));
 		do {
 			blocked_fields.add(mr.location(), game().get_gametime() + 15 * 60 * 1000);
 		} while (mr.advance(map));
@@ -5809,9 +5806,8 @@ void DefaultAI::update_player_stat(const uint32_t gametime) {
 		return;
 	}
 	player_statistics.set_update_time(gametime);
-	const Map& map = game().map();
 	Widelands::PlayerNumber const pn = player_number();
-	PlayerNumber const nr_players = map.get_nrplayers();
+	PlayerNumber const nr_players = game().map().get_nrplayers();
 	uint32_t plr_in_game = 0;
 	iterate_players_existing_novar(p, nr_players, game())++ plr_in_game;
 
