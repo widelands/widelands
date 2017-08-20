@@ -131,7 +131,7 @@ constexpr uint32_t kNever = std::numeric_limits<uint32_t>::max();
 struct CheckStepRoadAI {
 	CheckStepRoadAI(Player* const pl, uint8_t const mc, bool const oe);
 
-	bool allowed(Map&, FCoords start, FCoords end, int32_t dir, CheckStep::StepId) const;
+	bool allowed(const Map&, FCoords start, FCoords end, int32_t dir, CheckStep::StepId) const;
 	bool reachable_dest(const Map&, const FCoords& dest) const;
 
 	Player* player;

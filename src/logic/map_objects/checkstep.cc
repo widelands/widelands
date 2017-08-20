@@ -34,10 +34,10 @@ CheckStep::CheckStep() : capsule(always_false().capsule) {
 }
 
 struct CheckStepAlwaysFalse {
-	bool allowed(Map&, const FCoords&, const FCoords&, int32_t, CheckStep::StepId) const {
+	bool allowed(const Map&, const FCoords&, const FCoords&, int32_t, CheckStep::StepId) const {
 		return false;
 	}
-	bool reachable_dest(Map&, const FCoords&) const {
+	bool reachable_dest(const Map&, const FCoords&) const {
 		return false;
 	}
 };
@@ -51,7 +51,7 @@ void CheckStepAnd::add(const CheckStep& sub) {
 	subs.push_back(sub);
 }
 
-bool CheckStepAnd::allowed(Map& map,
+bool CheckStepAnd::allowed(const Map& map,
                            const FCoords& start,
                            const FCoords& end,
                            int32_t const dir,
@@ -64,7 +64,7 @@ bool CheckStepAnd::allowed(Map& map,
 	return true;
 }
 
-bool CheckStepAnd::reachable_dest(Map& map, const FCoords& dest) const {
+bool CheckStepAnd::reachable_dest(const Map& map, const FCoords& dest) const {
 	for (const CheckStep& checkstep : subs) {
 		if (!checkstep.reachable_dest(map, dest)) {
 			return false;
@@ -79,7 +79,7 @@ CheckStepDefault
 ===============
 */
 bool CheckStepDefault::allowed(
-   Map&, const FCoords& start, const FCoords& end, int32_t, CheckStep::StepId) const {
+   const Map&, const FCoords& start, const FCoords& end, int32_t, CheckStep::StepId) const {
 	NodeCaps const endcaps = end.field->nodecaps();
 
 	if (endcaps & movecaps_)
@@ -94,7 +94,7 @@ bool CheckStepDefault::allowed(
 	return false;
 }
 
-bool CheckStepDefault::reachable_dest(Map& map, const FCoords& dest) const {
+bool CheckStepDefault::reachable_dest(const Map& map, const FCoords& dest) const {
 	NodeCaps const caps = dest.field->nodecaps();
 
 	if (!(caps & movecaps_)) {
@@ -113,8 +113,11 @@ bool CheckStepDefault::reachable_dest(Map& map, const FCoords& dest) const {
 CheckStepWalkOn
 ===============
 */
-bool CheckStepWalkOn::allowed(
-   Map&, const FCoords& start, const FCoords& end, int32_t, CheckStep::StepId const id) const {
+bool CheckStepWalkOn::allowed(const Map&,
+                              const FCoords& start,
+                              const FCoords& end,
+                              int32_t,
+                              CheckStep::StepId const id) const {
 	NodeCaps const startcaps = start.field->nodecaps();
 	NodeCaps const endcaps = end.field->nodecaps();
 
@@ -138,13 +141,16 @@ bool CheckStepWalkOn::allowed(
 	return false;
 }
 
-bool CheckStepWalkOn::reachable_dest(Map&, FCoords) const {
+bool CheckStepWalkOn::reachable_dest(const Map&, FCoords) const {
 	// Don't bother solving this.
 	return true;
 }
 
-bool CheckStepRoad::allowed(
-   Map& map, const FCoords& start, const FCoords& end, int32_t, CheckStep::StepId const id) const {
+bool CheckStepRoad::allowed(const Map& map,
+                            const FCoords& start,
+                            const FCoords& end,
+                            int32_t,
+                            CheckStep::StepId const id) const {
 	uint8_t const endcaps = player_.get_buildcaps(end);
 
 	// Calculate cost and passability
@@ -165,7 +171,7 @@ bool CheckStepRoad::allowed(
 	return true;
 }
 
-bool CheckStepRoad::reachable_dest(Map& map, const FCoords& dest) const {
+bool CheckStepRoad::reachable_dest(const Map& map, const FCoords& dest) const {
 	NodeCaps const caps = dest.field->nodecaps();
 
 	if (!(caps & movecaps_)) {
@@ -180,11 +186,11 @@ bool CheckStepRoad::reachable_dest(Map& map, const FCoords& dest) const {
 }
 
 bool CheckStepLimited::allowed(
-   Map&, const FCoords&, const FCoords& end, int32_t, CheckStep::StepId) const {
+   const Map&, const FCoords&, const FCoords& end, int32_t, CheckStep::StepId) const {
 	return allowed_locations_.find(end) != allowed_locations_.end();
 }
 
-bool CheckStepLimited::reachable_dest(Map&, FCoords) const {
+bool CheckStepLimited::reachable_dest(const Map&, FCoords) const {
 	return true;
 }
 }

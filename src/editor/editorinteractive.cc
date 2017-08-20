@@ -177,21 +177,21 @@ EditorInteractive::EditorInteractive(Widelands::EditorGameBase& e)
 }
 
 void EditorInteractive::register_overlays() {
-	Widelands::Map& map = egbase().map();
+	Widelands::Map* map = egbase().mutable_map();
 
 	//  Starting locations
-	Widelands::PlayerNumber const nr_players = map.get_nrplayers();
+	Widelands::PlayerNumber const nr_players = map->get_nrplayers();
 	assert(nr_players <= kMaxPlayers);
 	iterate_player_numbers(p, nr_players) {
-		if (Widelands::Coords const sp = map.get_starting_pos(p)) {
-			tools_->set_starting_pos.set_starting_pos(*this, p, sp, &map);
+		if (Widelands::Coords const sp = map->get_starting_pos(p)) {
+			tools_->set_starting_pos.set_starting_pos(*this, p, sp, map);
 		}
 	}
 
 	//  Resources: we do not calculate default resources, therefore we do not
 	//  expect to meet them here.
-	Widelands::Extent const extent = map.extent();
-	iterate_Map_FCoords(map, extent, fc) {
+	Widelands::Extent const extent = map->extent();
+	iterate_Map_FCoords(*map, extent, fc) {
 		if (uint8_t const amount = fc.field->get_resources_amount()) {
 			const std::string& immname =
 			   egbase().world().get_resource(fc.field->get_resources())->editor_image(amount);
@@ -206,11 +206,11 @@ void EditorInteractive::register_overlays() {
 void EditorInteractive::load(const std::string& filename) {
 	assert(filename.size());
 
-	Widelands::Map& map = egbase().map();
+	Widelands::Map* map = egbase().mutable_map();
 
 	cleanup_for_load();
 
-	std::unique_ptr<Widelands::MapLoader> ml(map.get_correct_loader(filename));
+	std::unique_ptr<Widelands::MapLoader> ml(map->get_correct_loader(filename));
 	if (!ml.get())
 		throw WLWarning(
 		   _("Unsupported format"),
@@ -228,8 +228,9 @@ void EditorInteractive::load(const std::string& filename) {
 
 	// Create the players. TODO(SirVer): this must be managed better
 	loader_ui.step(_("Creating players"));
-	iterate_player_numbers(p, map.get_nrplayers()) {
-		egbase().add_player(p, 0, map.get_scenario_player_tribe(p), map.get_scenario_player_name(p));
+	iterate_player_numbers(p, map->get_nrplayers()) {
+		egbase().add_player(
+		   p, 0, map->get_scenario_player_tribe(p), map->get_scenario_player_name(p));
 	}
 
 	ml->load_map_complete(egbase(), Widelands::MapLoader::LoadType::kEditor);
@@ -288,8 +289,8 @@ void EditorInteractive::exit() {
 }
 
 void EditorInteractive::map_clicked(bool should_draw) {
-	history_->do_action(tools_->current(), tools_->use_tool, egbase().map(), egbase().world(),
-	                    get_sel_pos(), *this, should_draw);
+	history_->do_action(tools_->current(), tools_->use_tool, *egbase().mutable_map(),
+	                    egbase().world(), get_sel_pos(), *this, should_draw);
 	set_need_save(true);
 }
 
@@ -523,11 +524,10 @@ void EditorInteractive::select_tool(EditorTool& primary, EditorTool::ToolIndex c
 				toolsize_menu.update(toolsize_menu.value());
 			}
 		}
-		Widelands::Map& map = egbase().map();
 		//  A new tool has been selected. Remove all registered overlay callback
 		//  functions.
 		mutable_field_overlay_manager()->register_overlay_callback_function(nullptr);
-		map.recalc_whole_map(egbase().world());
+		egbase().mutable_map()->recalc_whole_map(egbase().world());
 	}
 	tools_->current_pointer = &primary;
 	tools_->use_tool = which;
@@ -603,16 +603,15 @@ void EditorInteractive::run_editor(const std::string& filename, const std::strin
 		GameTips editortips(loader_ui, tipstext);
 
 		{
-			Widelands::Map& map = *new Widelands::Map;
-			egbase.set_map(&map);
 			if (filename.empty()) {
 				loader_ui.step(_("Creating empty map…"));
-				map.create_empty_map(egbase.world(), 64, 64, 0,
-				                     /** TRANSLATORS: Default name for new map */
-				                     _("No Name"),
-				                     /** TRANSLATORS: Map author name when it hasn't been set yet */
-				                     g_options.pull_section("global").get_string(
-				                        "realname", pgettext("author_name", "Unknown")));
+				egbase.mutable_map()->create_empty_map(
+				   egbase.world(), 64, 64, 0,
+				   /** TRANSLATORS: Default name for new map */
+				   _("No Name"),
+				   /** TRANSLATORS: Map author name when it hasn't been set yet */
+				   g_options.pull_section("global").get_string(
+				      "realname", pgettext("author_name", "Unknown")));
 
 				load_all_tribes(&egbase, &loader_ui);
 
