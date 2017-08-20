@@ -68,7 +68,6 @@ EditorGameBase::EditorGameBase(LuaInterface* lua_interface)
      lua_(lua_interface),
      player_manager_(new PlayersManager(*this)),
      ibase_(nullptr) {
-		  // NOCOM(#sirver): Why not initialize in the editor?
 	if (!lua_)  // TODO(SirVer): this is sooo ugly, I can't say
 		lua_.reset(new LuaEditorInterface(this));
 }
