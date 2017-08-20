@@ -111,7 +111,6 @@ wl_library(wui_mapview
     logic_widelands_geometry
     ui_basic
     widelands_ball_of_mud
-    wui
     wui_mapview_pixelfunctions
 )
 

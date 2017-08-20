@@ -82,8 +82,6 @@ InteractiveBase::InteractiveBase(EditorGameBase& the_egbase, Section& global_s)
      lastframe_(SDL_GetTicks()),
      frametime_(0),
      avg_usframetime_(0),
-     draw_immovables_(true),
-     draw_bobs_(true),
      road_buildhelp_overlay_jobid_(0),
      buildroad_(nullptr),
      road_build_player_(0),
@@ -233,22 +231,6 @@ bool InteractiveBase::buildhelp() const {
 void InteractiveBase::show_buildhelp(bool t) {
 	field_overlay_manager_->show_buildhelp(t);
 	on_buildhelp_changed(t);
-}
-
-bool InteractiveBase::draw_bobs() const {
-	return draw_bobs_;
-}
-
-void InteractiveBase::set_draw_bobs(const bool value) {
-	draw_bobs_ = value;
-}
-
-bool InteractiveBase::draw_immovables() const {
-	return draw_immovables_;
-}
-
-void InteractiveBase::set_draw_immovables(const bool value) {
-	draw_immovables_ = value;
 }
 
 void InteractiveBase::toggle_buildhelp() {

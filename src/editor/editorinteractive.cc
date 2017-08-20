@@ -314,8 +314,8 @@ void EditorInteractive::draw(RenderTarget& dst) {
 	const GameRenderer::Overlays overlays{get_text_to_draw(), {}};
 	map_view()->draw_map_view(
 	   egbase(), overlays,
-	   draw_immovables() ? GameRenderer::DrawImmovables::kYes : GameRenderer::DrawImmovables::kNo,
-	   draw_bobs() ? GameRenderer::DrawBobs::kYes : GameRenderer::DrawBobs::kNo, nullptr, &dst);
+	   draw_immovables_ ? GameRenderer::DrawImmovables::kYes : GameRenderer::DrawImmovables::kNo,
+	   draw_bobs_ ? GameRenderer::DrawBobs::kYes : GameRenderer::DrawBobs::kNo, nullptr, &dst);
 }
 
 /// Needed to get freehand painting tools (hold down mouse and move to edit).
@@ -360,15 +360,13 @@ void EditorInteractive::toggle_resources() {
 }
 
 void EditorInteractive::toggle_immovables() {
-	const bool value = !draw_immovables();
-	set_draw_immovables(value);
-	toggle_immovables_->set_perm_pressed(value);
+	draw_immovables_ = !draw_immovables_;
+	toggle_immovables_->set_perm_pressed(draw_immovables_);
 }
 
 void EditorInteractive::toggle_bobs() {
-	const bool value = !draw_bobs();
-	set_draw_bobs(value);
-	toggle_bobs_->set_perm_pressed(value);
+	draw_bobs_ = !draw_bobs_;
+	toggle_bobs_->set_perm_pressed(draw_bobs_);
 }
 
 bool EditorInteractive::handle_key(bool const down, SDL_Keysym const code) {

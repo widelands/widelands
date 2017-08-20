@@ -103,15 +103,6 @@ public:
 	// Sets if the buildhelp should be displayed. Will also call on_buildhelp_changed().
 	void show_buildhelp(bool t);
 
-	// Returns true if bobs or immovables should be rendered.
-	// NOCOM(#sirver): move to editor_interactive?
-	bool draw_bobs() const;
-	bool draw_immovables() const;
-
-	// Sets if bobs or immovables should be rendered.
-	void set_draw_bobs(bool value);
-	void set_draw_immovables(bool value);
-
 	/**
 	 * sel_triangles determines whether the mouse pointer selects triangles.
 	 * (False meas that it selects nodes.)
@@ -285,8 +276,6 @@ private:
 	uint32_t lastframe_;        //  system time (milliseconds)
 	uint32_t frametime_;        //  in millseconds
 	uint32_t avg_usframetime_;  //  in microseconds!
-	bool draw_immovables_;
-	bool draw_bobs_;
 
 	FieldOverlayManager::OverlayId road_buildhelp_overlay_jobid_;
 	Widelands::CoordPath* buildroad_;  //  path for the new road

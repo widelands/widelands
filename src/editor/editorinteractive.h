@@ -189,6 +189,9 @@ private:
 
 	std::unique_ptr<Tools> tools_;
 	std::unique_ptr<EditorHistory> history_;
+
+	bool draw_immovables_ = true;
+	bool draw_bobs_ = true;
 };
 
 #endif  // end of include guard: WL_EDITOR_EDITORINTERACTIVE_H
