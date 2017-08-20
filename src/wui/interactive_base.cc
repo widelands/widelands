@@ -151,7 +151,7 @@ UniqueWindowHandler& InteractiveBase::unique_windows() {
 }
 
 void InteractiveBase::set_sel_pos(Widelands::NodeAndTriangle<> const center) {
-	Map& map = egbase().map();
+	const Map& map = egbase().map();
 
 	// Remove old sel pointer
 	if (sel_.jobid)
@@ -298,7 +298,7 @@ FieldOverlayManager::OverlayId InteractiveBase::show_work_area(const WorkareaInf
 	default:
 		throw wexception("Encountered unexpected WorkareaInfo size %i", workareas_nrs);
 	}
-	Widelands::Map& map = egbase_.map();
+	const Widelands::Map& map = egbase_.map();
 	FieldOverlayManager::OverlayId overlay_id = field_overlay_manager_->next_overlay_id();
 
 	Widelands::HollowArea<> hollow_area(Widelands::Area<>(coords, 0), 0);
@@ -622,7 +622,7 @@ Otherwise append if possible or return false.
 bool InteractiveBase::append_build_road(Coords const field) {
 	assert(buildroad_);
 
-	Map& map = egbase().map();
+	const Map& map = egbase().map();
 	const Widelands::Player& player = egbase().player(road_build_player_);
 
 	{  //  find a path to the clicked-on node
@@ -724,7 +724,7 @@ void InteractiveBase::roadb_add_overlay() {
 	assert(buildroad_);
 	assert(road_building_preview_.empty());
 
-	Map& map = egbase().map();
+	const Map& map = egbase().map();
 
 	// preview of the road
 	const CoordPath::StepVector::size_type nr_steps = buildroad_->get_nsteps();

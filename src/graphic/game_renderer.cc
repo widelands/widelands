@@ -321,7 +321,7 @@ void GameRenderer::render(const EditorGameBase& egbase,
 	const int surface_width = surface->width();
 	const int surface_height = surface->height();
 
-	Map& map = egbase.map();
+	const Map& map = egbase.map();
 	const uint32_t gametime = egbase.get_gametime();
 
 	const float scale = 1.f / zoom;

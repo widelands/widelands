@@ -198,7 +198,7 @@ struct FieldDebugWindow : public UI::Window {
 	void open_bob(uint32_t);
 
 private:
-	Widelands::Map& map_;
+	const Widelands::Map& map_;
 	Widelands::FCoords const coords_;
 
 	UI::MultilineTextarea ui_field_;

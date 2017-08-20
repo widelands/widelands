@@ -84,15 +84,11 @@ public:
 	explicit EditorGameBase(LuaInterface* lua);
 	virtual ~EditorGameBase();
 
-	// TODO(sirver): this should just be const Map& map() and Map* mutable_map().
 	const Map& map() const {
 		return map_;
 	}
-	Map* get_map() {
+	Map* mutable_map() {
 		return &map_;
-	}
-	const Map& get_map() const {
-		return map_;
 	}
 	const ObjectManager& objects() const {
 		return objects_;

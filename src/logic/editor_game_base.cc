@@ -550,7 +550,7 @@ void EditorGameBase::conquer_area_no_building(PlayerArea<Area<FCoords>> player_a
 	//  This must reach one step beyond the conquered area to adjust the borders
 	//  of neighbour players.
 	++player_area.radius;
-	map().recalc_for_field_area(world(), player_area);
+	map_.recalc_for_field_area(world(), player_area);
 }
 
 /// Conquers the given area for that player; does the actual work.
@@ -626,21 +626,20 @@ void EditorGameBase::do_conquer_area(PlayerArea<Area<FCoords>> player_area,
 	// This must reach one step beyond the conquered area to adjust the borders
 	// of neighbour players.
 	++player_area.radius;
-	map().recalc_for_field_area(world(), player_area);
+	map_.recalc_for_field_area(world(), player_area);
 }
 
 /// Makes sure that buildings cannot exist outside their owner's territory.
 void EditorGameBase::cleanup_playerimmovables_area(PlayerArea<Area<FCoords>> const area) {
 	std::vector<ImmovableFound> immovables;
 	std::vector<PlayerImmovable*> burnlist;
-	Map& m = map();
 
 	//  find all immovables that need fixing
-	m.find_immovables(area, &immovables, FindImmovablePlayerImmovable());
+	map_.find_immovables(area, &immovables, FindImmovablePlayerImmovable());
 
 	for (const ImmovableFound& temp_imm : immovables) {
 		upcast(PlayerImmovable, imm, temp_imm.object);
-		if (!m[temp_imm.coords].is_interior(imm->owner().player_number())) {
+		if (!map_[temp_imm.coords].is_interior(imm->owner().player_number())) {
 			if (std::find(burnlist.begin(), burnlist.end(), imm) == burnlist.end()) {
 				burnlist.push_back(imm);
 			}

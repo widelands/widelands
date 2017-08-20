@@ -60,7 +60,7 @@ void MapBuildingPacket::read(FileSystem& fs,
 	try {
 		uint16_t const packet_version = fr.unsigned_16();
 		if (packet_version == kCurrentPacketVersion) {
-			Map& map = egbase.map();
+			const Map& map = egbase.map();
 			uint16_t const width = map.get_width();
 			uint16_t const height = map.get_height();
 			FCoords c;
