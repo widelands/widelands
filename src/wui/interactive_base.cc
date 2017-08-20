@@ -64,6 +64,8 @@ using Widelands::Map;
 using Widelands::MapObject;
 using Widelands::TCoords;
 
+// NOCOM(#sirver): Watchwindo is broken. Already in trunk?
+
 InteractiveBase::InteractiveBase(EditorGameBase& the_egbase, Section& global_s)
    : UI::Panel(nullptr, 0, 0, g_gr->get_xres(), g_gr->get_yres()),
      show_workarea_preview_(global_s.get_bool("workareapreview", true)),
