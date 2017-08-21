@@ -9,7 +9,7 @@ function reebaud(title, text)
    return speech("map:reebaud.png", "55BB55", title, text)
 end
 function hauke(title, text)
-   return speech("map:hauke.png", "224488", title, text)
+   return speech("map:hauke.png", "7799BB", title, text)
 end
 function maukor(title, text)
    return speech("map:maukor.png", "990000", title, text)
@@ -204,8 +204,8 @@ recruit_1 = {
       _([[We could use these weapons to equip some new soldiers. I hope we won´t find enemies here, but it is always better to be prepared. New soldiers are equipped in a barracks with a basic sword and a set of fur clothes, the uniform of all honourable warriors.]])
       .. paragraphdivider() ..
       -- TRANSLATORS: Reebaud – recruit
-      _([[We will need a barracks, of course; a reindeer farm to produce fur, and a seamstress to sew the fur into garments. The reindeer farm produces meat as a by-product of fur, and it also trains some reindeer to help our carriers on busy roads.]])
-      .. new_objectives(obj_recruit_soldiers)),
+      _([[We will need a barracks, of course; a reindeer farm to produce fur, and a seamstress to sew the fur into garments. The reindeer farm produces meat as a by-product of fur, and it also trains some reindeer to help our carriers on busy roads.]]))
+      .. new_objectives(obj_recruit_soldiers),
 }
 expand_1 = {
    title =_ "Discover the island",
@@ -217,8 +217,8 @@ expand_1 = {
       _([[But we can´t be sure we´re safe here yet. It would be better to expand further to the east to find out whether we really are alone here.]])
       .. paragraphdivider() ..
       -- TRANSLATORS: Reebaud – expand
-      _([[Expanding would also provide more space for farming. We could use some extra barley to recruit more reindeer, as our roads are quite busy.]])
-      .. new_objectives(obj_expand)),
+      _([[Expanding would also provide more space for farming. We could use some extra barley to recruit more reindeer, as our roads are quite busy.]]))
+      .. new_objectives(obj_expand),
 }
 
 enemies_1 = {

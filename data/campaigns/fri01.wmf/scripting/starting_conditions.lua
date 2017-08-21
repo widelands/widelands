@@ -118,4 +118,5 @@ hq2:set_workers {
    frisians_brewer_master = 5,
    frisians_reindeer = 50,
 }
-hq2:set_soldiers({2,0,2,0}, 200)
+hq2:set_soldiers({2,0,2,0}, 150)
+hq2:set_soldiers({0,6,0,0}, 50)

@@ -11,7 +11,7 @@ function stormflood() --TODO fix memory leaks
       --flood field nextF
       nextF.terr = "winter_water"
       nextF.terd = "winter_water"
-      --turn the settlement into Rungholt (or Atlantis, if you prefer)
+      --turn the settlement into Rungholt (or Atlantis, if you prefer); even swimming things (like ships) are destroyed by the storm
       for idx,field in ipairs(nextF:region(1)) do
          if field.immovable then field.immovable:remove() end
          for idb,bob in ipairs(field.bobs) do bob:remove() end
@@ -28,13 +28,13 @@ function stormflood() --TODO fix memory leaks
             if y < 0 then y = y + wl.Game().map.height end
             if not ( y < wl.Game().map.height ) then y = y - wl.Game().map.height end
             check = wl.Game().map:get_field(x, y)
-            if ( not ( check.terr == "winter_water" ) or not ( check.terd == "winter_water" )) and check.height < 4 then nextF = check end
+            if ( not ( check.terr == "winter_water" and check.terd == "winter_water" )) and check.height < 4 then nextF = check end
             if up then yD = yD + 1 end
             up = not up
          end
          x = x + 1
       end
-      sleep(397)
+      sleep(413)
    end
 end
 
@@ -46,7 +46,7 @@ function mission_thread()
    
    
    
-   --TEST TEST TEST
+   --STORMFLOOD TEST
    
    --p1.see_all = true
    --scroll_to_field(firstToFlood)
@@ -122,8 +122,9 @@ function mission_thread()
    while not check_for_buildings(p1, {frisians_ironmine = 1, frisians_furnace = 1, frisians_blacksmithy = 1, frisians_armour_smithy_small = 1}) do sleep(4273) end
    set_objective_done(o)
    
+   --start recruiting
    campaign_message_box(recruit_1)
-   o = add_campaign_objective(obj_recruit)
+   o = add_campaign_objective(obj_recruit_soldiers)
    p1:allow_buildings{"frisians_outpost", "frisians_barracks", "frisians_reindeer_farm", "frisians_seamstress"}
    while not check_for_buildings(p1, {frisians_barracks = 1, frisians_seamstress = 1, frisians_reindeer_farm = 1}) do sleep(4273) end
    set_objective_done(o)
