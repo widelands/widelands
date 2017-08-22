@@ -117,10 +117,6 @@ public:
 	// action functions
 	void exit();
 
-	//  reference functions
-	void reference_player_tribe(Widelands::PlayerNumber, void const* const) override;
-	void unreference_player_tribe(Widelands::PlayerNumber, void const* const);
-	bool is_player_tribe_referenced(Widelands::PlayerNumber);
 	void set_need_save(bool const t) {
 		need_save_ = t;
 	}
@@ -144,11 +140,6 @@ public:
 private:
 	friend struct EditorToolMenu;
 
-	struct PlayerReferences {
-		int32_t player;
-		void const* object;
-	};
-
 	// Registers the overlays for player starting positions.
 	void register_overlays();
 
@@ -160,7 +151,6 @@ private:
 
 	//  state variables
 	bool need_save_;
-	std::vector<PlayerReferences> player_tribe_references_;
 	uint32_t realtime_;
 	bool is_painting_;
 
