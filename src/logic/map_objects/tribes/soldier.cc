@@ -735,6 +735,7 @@ void Soldier::attack_update(Game& game, State& state) {
 	upcast(Building, enemy, state.objvar1.get(game));
 
 	// Handle returns
+	const Map& map = game.map();
 	if (state.ivar2 > 0) {
 		if (state.ivar2 == 1) {
 			// Return home
@@ -774,7 +775,7 @@ void Soldier::attack_update(Game& game, State& state) {
 		}
 		if (state.ivar2 == 2) {
 			// No more home, so return to homeland
-			upcast(Flag, flag, game.map().get_immovable(get_position()));
+			upcast(Flag, flag, map.get_immovable(get_position()));
 			if (flag && flag->get_owner() == get_owner()) {
 				// At a flag
 				molog("[attack] Returned to own flag\n");
@@ -793,12 +794,11 @@ void Soldier::attack_update(Game& game, State& state) {
 					return pop_task(game);
 				}
 				// Try to find our land
-				Map* map = game.get_map();
 				std::vector<Coords> coords;
 				uint32_t maxdist = descr().vision_range() * 2;
-				Area<FCoords> area(map->get_fcoords(get_position()), maxdist);
-				if (map->find_reachable_fields(area, &coords, CheckStepDefault(descr().movecaps()),
-				                               FindNodeOwned(get_owner()->player_number()))) {
+				Area<FCoords> area(map.get_fcoords(get_position()), maxdist);
+				if (map.find_reachable_fields(area, &coords, CheckStepDefault(descr().movecaps()),
+				                              FindNodeOwned(get_owner()->player_number()))) {
 					// Found home land
 					target = coords.front();
 					molog("[attack] Going back to our land\n");
@@ -842,9 +842,8 @@ void Soldier::attack_update(Game& game, State& state) {
 		}
 		//  Any enemy soldier at baseflag count as defender.
 		std::vector<Bob*> soldiers;
-		game.map().find_bobs(
-		   Area<FCoords>(game.map().get_fcoords(enemy->base_flag().get_position()), 0), &soldiers,
-		   FindBobEnemySoldier(get_owner()));
+		map.find_bobs(Area<FCoords>(map.get_fcoords(enemy->base_flag().get_position()), 0), &soldiers,
+		              FindBobEnemySoldier(get_owner()));
 		defenders += soldiers.size();
 	}
 
@@ -862,7 +861,7 @@ void Soldier::attack_update(Game& game, State& state) {
 		// valid anymore, we either "conquered" the new building, or it was
 		// destroyed.
 		if (state.coords) {
-			BaseImmovable* const newimm = game.map()[state.coords].get_immovable();
+			BaseImmovable* const newimm = map[state.coords].get_immovable();
 			upcast(MilitarySite, newsite, newimm);
 			if (newsite && (&newsite->owner() == &owner())) {
 				const SoldierControl* soldier_control = newsite->soldier_control();
@@ -1182,7 +1181,7 @@ void Soldier::start_task_move_in_battle(Game& game, CombatWalkingDir dir) {
 		throw GameDataError("bad direction '%d'", dir);
 	}
 
-	Map& map = game.map();
+	const Map& map = game.map();
 	int32_t const tdelta = (map.calc_cost(get_position(), mapdir)) / 2;
 	molog("[move_in_battle] dir: (%d) tdelta: (%d)\n", dir, tdelta);
 	combat_walking_ = dir;
@@ -1275,7 +1274,7 @@ void Soldier::battle_update(Game& game, State&) {
 		return pop_task(game);
 	}
 
-	Map& map = game.map();
+	const Map& map = game.map();
 	Soldier& opponent = *battle_->opponent(*this);
 	if (opponent.get_position() != get_position()) {
 		if (is_a(Building, map[get_position()].get_immovable())) {

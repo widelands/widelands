@@ -23,7 +23,7 @@ using namespace Widelands;
 
 bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 
-	Map& map = game().map();
+	const Map& map = game().map();
 
 	PlayerNumber const nr_players = map.get_nrplayers();
 	uint32_t plr_in_game = 0;
@@ -777,7 +777,6 @@ bool DefaultAI::check_militarysites(uint32_t gametime) {
 
 	// Check next militarysite
 	bool changed = false;
-	Map& map = game().map();
 	MilitarySite* ms = militarysites.front().site;
 
 	// Don't do anything if last change took place lately
@@ -787,7 +786,7 @@ bool DefaultAI::check_militarysites(uint32_t gametime) {
 		return false;
 	}
 
-	FCoords f = map.get_fcoords(ms->get_position());
+	FCoords f = game().map().get_fcoords(ms->get_position());
 
 	BuildableField bf(f);
 	update_buildable_field(bf);

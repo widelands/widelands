@@ -70,8 +70,9 @@ MapSaver::~MapSaver() {
 }
 
 void MapSaver::save() {
+	const Map& map = egbase_.map();
 	std::string timer_message = "MapSaver::save() for '";
-	timer_message += egbase_.map().get_name();
+	timer_message += map.get_name();
 	timer_message += "' took %ums";
 	ScopedTimer timer(timer_message);
 
@@ -160,9 +161,6 @@ void MapSaver::save() {
 
 	// We don't save these when saving a map in the editor.
 	if (is_game) {
-
-		const Map& map = egbase_.map();
-
 		PlayerNumber const nr_players = map.get_nrplayers();
 
 		//  allowed worker types
@@ -285,7 +283,7 @@ void MapSaver::save() {
 	log("took %ums\n ", timer.ms_since_last_query());
 
 	log("Writing map images ... ");
-	save_map_images(&fs_, egbase_.map().filesystem());
+	save_map_images(&fs_, map.filesystem());
 	log("took %ums\n ", timer.ms_since_last_query());
 
 	if (is_game) {

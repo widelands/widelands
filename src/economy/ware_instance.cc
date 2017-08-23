@@ -518,9 +518,6 @@ Load/save support
 
 constexpr uint8_t kCurrentPacketVersion = 2;
 
-WareInstance::Loader::Loader() : location_(0), transfer_nextstep_(0) {
-}
-
 void WareInstance::Loader::load(FileRead& fr) {
 	MapObject::Loader::load(fr);
 
