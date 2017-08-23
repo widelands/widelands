@@ -35,7 +35,8 @@ tribes:new_productionsite_type {
 
    aihints = {
       space_consumer = true,
-      prohibited_till = 220
+      prohibited_till = 220,
+      renews_map_resource="honey"
    },
 
    working_positions = {

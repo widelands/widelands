@@ -19,10 +19,10 @@ end
 --                           Texts - No logic here
 -- =======================================================================
 
-
 -- ===========
 -- objectives
 -- ===========
+
 obj_build_wood_economy = {
    name = "build_wood_economy",
    title=_"Build a wood economy and a reed farm",
@@ -104,11 +104,10 @@ obj_escape = {
    ),
 }
 
-
-
 -- ==================
 -- Texts to the user
 -- ==================
+
 intro_1 = {
    title =_ "Introduction",
    body=reebaud(_"Welcome!",

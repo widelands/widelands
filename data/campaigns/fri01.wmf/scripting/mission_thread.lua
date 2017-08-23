@@ -1,6 +1,6 @@
 include "scripting/messages.lua"
 
-function stormflood() --TODO fix memory leaks
+function stormflood()
    local x
    local y
    local yD
@@ -43,20 +43,6 @@ function mission_thread()
    --Introduction
    sleep(1000)
    campaign_message_box(intro_1)
-   
-   
-   
-   --STORMFLOOD TEST
-   
-   --p1.see_all = true
-   --scroll_to_field(firstToFlood)
-   --run(stormflood)
-   --sleep(3000001)
-   
-   --END OF TEST
-   
-   
-   
    include "map:scripting/starting_conditions.lua"
    scroll_to_field(wl.Game().map.player_slots[1].starting_field)
    sleep(1000)
@@ -141,6 +127,7 @@ function mission_thread()
    if not skip then set_objective_done(o) end
    
    --a friendly chat between neighbours
+   wl.Game().desired_speed = 1000
    p1:reveal_fields(wl.Game().map.player_slots[2].starting_field:region(6))
    scroll_to_field(wl.Game().map.player_slots[2].starting_field)
    sleep(1000)
@@ -181,6 +168,7 @@ function mission_thread()
    while not p2.defeated do sleep(4273) end
    set_objective_done(o)
    
+   wl.Game().desired_speed = 1000
    sleep(2000)
    scroll_to_field(wl.Game().map.player_slots[2].starting_field)
    campaign_message_box(rising_water_1)
@@ -190,7 +178,7 @@ function mission_thread()
    p1.see_all = true
    scroll_to_field(firstToFlood)
    run(stormflood)
-   sleep(3000)
+   sleep(6000)
    
    campaign_message_box(rising_water_3)
    campaign_message_box(rising_water_4)
@@ -203,7 +191,7 @@ function mission_thread()
       for idx,ship in ipairs(p1:get_ships()) do
          expReady = expReady or ( ship.state:sub(1, 4) == "exp_" )
       end
-      sleep(4273)
+      sleep(2149)
    end
    --We escaped!
    scroll_to_field(p1:get_buildings("frisians_port")[1].fields[1])

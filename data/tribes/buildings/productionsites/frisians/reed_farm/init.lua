@@ -33,7 +33,8 @@ tribes:new_productionsite_type {
       prohibited_till = 200,
       very_weak_ai_limit = 1,
       weak_ai_limit = 2,
-      basic_amount = 1
+      basic_amount = 1,
+      renews_map_resource="honey"
    },
 
    working_positions = {
