@@ -612,7 +612,7 @@ void DefaultAI::late_initialization() {
 		bo.construction_decision_time = -60 * 60 * 1000;
 		bo.last_building_built = kNever;
 		bo.build_material_shortage = false;
-		bo.production_hint = kUncalculated;
+		bo.production_hint = kUncalculated; // NOCOM Use empty set instead of the constant
 		bo.current_stats = 0;
 		bo.unoccupied_count = 0;
 		bo.unconnected_count = 0;

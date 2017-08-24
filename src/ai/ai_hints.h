@@ -118,7 +118,7 @@ struct BuildingHints {
 	uint8_t trainingsites_max_percent() const;
 
 private:
-	std::string renews_map_resource_;
+	std::string renews_map_resource_; // NOCOM replace this
 	std::string mines_;
 	bool log_producer_;
 	bool granite_producer_;
@@ -137,6 +137,7 @@ private:
 	int16_t very_weak_ai_limit_;
 	int16_t weak_ai_limit_;
 	int trainingsites_max_percent_;
+	std::set<std::string> renews_map_resources_; // NOCOM use this instead
 
 	DISALLOW_COPY_AND_ASSIGN(BuildingHints);
 };
