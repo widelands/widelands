@@ -178,6 +178,83 @@ void TrainingSiteDescr::add_training_inputs(const LuaTable& table,
 	}
 }
 
+// TODO(sirver): This SoldierControl looks very similar to te one in
+// MilitarySite. Pull out a class to reuse code.
+std::vector<Soldier*> TrainingSite::SoldierControl::present_soldiers() const {
+	return training_site_->soldiers_;
+}
+
+std::vector<Soldier*> TrainingSite::SoldierControl::stationed_soldiers() const {
+	return training_site_->soldiers_;
+}
+
+Quantity TrainingSite::SoldierControl::min_soldier_capacity() const {
+	return 0;
+}
+Quantity TrainingSite::SoldierControl::max_soldier_capacity() const {
+	return training_site_->descr().get_max_number_of_soldiers();
+}
+Quantity TrainingSite::SoldierControl::soldier_capacity() const {
+	return training_site_->capacity_;
+}
+
+void TrainingSite::SoldierControl::set_soldier_capacity(Quantity const capacity) {
+	assert(min_soldier_capacity() <= capacity);
+	assert(capacity <= max_soldier_capacity());
+	assert(training_site_->capacity_ != capacity);
+	training_site_->capacity_ = capacity;
+	training_site_->update_soldier_request();
+}
+
+/**
+ * Drop a given soldier.
+ *
+ * 'Dropping' means releasing the soldier from the site. The soldier then
+ * becomes available to the economy.
+ *
+ * \note This is called from player commands, so we need to verify that the
+ * soldier is actually stationed here, without breaking anything if he isn't.
+ */
+void TrainingSite::SoldierControl::drop_soldier(Soldier& soldier) {
+	Game& game = dynamic_cast<Game&>(training_site_->owner().egbase());
+
+	std::vector<Soldier*>::iterator it =
+	   std::find(training_site_->soldiers_.begin(), training_site_->soldiers_.end(), &soldier);
+	if (it == training_site_->soldiers_.end()) {
+		training_site_->molog(
+		   "TrainingSite::SoldierControl::drop_soldier: soldier not in training site");
+		return;
+	}
+
+	training_site_->soldiers_.erase(it);
+
+	soldier.reset_tasks(game);
+	soldier.start_task_leavebuilding(game, true);
+
+	// Schedule, so that we can call new soldiers on next act()
+	training_site_->schedule_act(game, 100);
+	Notifications::publish(
+	   NoteTrainingSiteSoldierTrained(training_site_, training_site_->get_owner()));
+}
+
+int TrainingSite::SoldierControl::incorporate_soldier(EditorGameBase& egbase, Soldier& s) {
+	if (s.get_location(egbase) != training_site_) {
+		if (stationed_soldiers().size() + 1 > training_site_->descr().get_max_number_of_soldiers())
+			return -1;
+
+		s.set_location(training_site_);
+	}
+
+	// Bind the worker into this house, hide him on the map
+	if (upcast(Game, game, &egbase))
+		s.start_task_idle(*game, 0, -1);
+
+	// Make sure the request count is reduced or the request is deleted.
+	training_site_->update_soldier_request();
+
+	return 0;
+}
+
 /*
 =============================
 
@@ -188,10 +265,13 @@ class TrainingSite
 
 TrainingSite::TrainingSite(const TrainingSiteDescr& d)
    : ProductionSite(d),
+     soldier_control_(this),
      soldier_request_(nullptr),
      capacity_(descr().get_max_number_of_soldiers()),
      build_heroes_(false),
      result_(Failed) {
+	set_soldier_control(&soldier_control_);
+
 	// Initialize this in the constructor so that loading code may
 	// overwrite priorities.
 	calc_upgrades();
@@ -218,7 +298,7 @@ void TrainingSite::init_kick_state(const TrainingAttribute& art, const TrainingS
 /**
  * Setup the building and request soldiers
  */
-void TrainingSite::init(EditorGameBase& egbase) {
+bool TrainingSite::init(EditorGameBase& egbase) {
 	ProductionSite::init(egbase);
 
 	upcast(Game, game, &egbase);
@@ -232,6 +312,7 @@ void TrainingSite::init(EditorGameBase& egbase) {
 		}
 	}
 	update_soldier_request();
+	return true;
 }
 
 /**
@@ -328,7 +409,7 @@ void TrainingSite::update_soldier_request() {
 		soldier_request_ = nullptr;
 
 		while (soldiers_.size() > capacity_) {
-			drop_soldier(**soldiers_.rbegin());
+			soldier_control_.drop_soldier(**soldiers_.rbegin());
 		}
 	}
 }
@@ -352,86 +433,7 @@ void TrainingSite::request_soldier_callback(Game& game,
 	assert(s.get_location(game) == &tsite);
 	assert(tsite.soldier_request_ == &rq);
 
-	tsite.incorporate_soldier(game, s);
-}
-
-/*
-===============
-Takes one soldier and adds him to ours
-
-returns 0 on succes, -1 if there was no room for this soldier
-===============
-*/
-int TrainingSite::incorporate_soldier(EditorGameBase& egbase, Soldier& s) {
-	if (s.get_location(egbase) != this) {
-		if (stationed_soldiers().size() + 1 > descr().get_max_number_of_soldiers())
-			return -1;
-
-		s.set_location(this);
-	}
-
-	// Bind the worker into this house, hide him on the map
-	if (upcast(Game, game, &egbase))
-		s.start_task_idle(*game, 0, -1);
-
-	// Make sure the request count is reduced or the request is deleted.
-	update_soldier_request();
-
-	return 0;
-}
-
-std::vector<Soldier*> TrainingSite::present_soldiers() const {
-	return soldiers_;
-}
-
-std::vector<Soldier*> TrainingSite::stationed_soldiers() const {
-	return soldiers_;
-}
-
-Quantity TrainingSite::min_soldier_capacity() const {
-	return 0;
-}
-Quantity TrainingSite::max_soldier_capacity() const {
-	return descr().get_max_number_of_soldiers();
-}
-Quantity TrainingSite::soldier_capacity() const {
-	return capacity_;
-}
-
-void TrainingSite::set_soldier_capacity(Quantity const capacity) {
-	assert(min_soldier_capacity() <= capacity);
-	assert(capacity <= max_soldier_capacity());
-	assert(capacity_ != capacity);
-	capacity_ = capacity;
-	update_soldier_request();
-}
-
-/**
- * Drop a given soldier.
- *
- * 'Dropping' means releasing the soldier from the site. The soldier then
- * becomes available to the economy.
- *
- * \note This is called from player commands, so we need to verify that the
- * soldier is actually stationed here, without breaking anything if he isn't.
- */
-void TrainingSite::drop_soldier(Soldier& soldier) {
-	Game& game = dynamic_cast<Game&>(owner().egbase());
-
-	std::vector<Soldier*>::iterator it = std::find(soldiers_.begin(), soldiers_.end(), &soldier);
-	if (it == soldiers_.end()) {
-		molog("TrainingSite::drop_soldier: soldier not in training site");
-		return;
-	}
-
-	soldiers_.erase(it);
-
-	soldier.reset_tasks(game);
-	soldier.start_task_leavebuilding(game, true);
-
-	// Schedule, so that we can call new soldiers on next act()
-	schedule_act(game, 100);
-	Notifications::publish(NoteTrainingSiteSoldierTrained(this, get_owner()));
+	tsite.soldier_control_.incorporate_soldier(game, s);
 }
 
 /**
@@ -455,7 +457,7 @@ void TrainingSite::drop_unupgradable_soldiers(Game&) {
 	// Drop soldiers only now, so that changes in the soldiers array don't
 	// mess things up
 	for (Soldier* soldier : droplist) {
-		drop_soldier(*soldier);
+		soldier_control_.drop_soldier(*soldier);
 	}
 }
 
@@ -517,7 +519,7 @@ void TrainingSite::drop_stalled_soldiers(Game&) {
 	// Finally drop the soldier.
 	if (nullptr != soldier_to_drop) {
 		log("TrainingSite::drop_stalled_soldiers: Kicking somebody out.\n");
-		drop_soldier(*soldier_to_drop);
+		soldier_control_.drop_soldier(*soldier_to_drop);
 	}
 }
 

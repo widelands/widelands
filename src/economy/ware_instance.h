@@ -72,7 +72,7 @@ public:
 		return descr_index_;
 	}
 
-	void init(EditorGameBase&) override;
+	bool init(EditorGameBase&) override;
 	void cleanup(EditorGameBase&) override;
 	void act(Game&, uint32_t data) override;
 	void update(Game&);
@@ -107,15 +107,15 @@ private:
 	// loading and saving stuff
 protected:
 	struct Loader : MapObject::Loader {
-		Loader();
+		Loader() = default;
 
 		void load(FileRead&);
 		void load_pointers() override;
 		void load_finish() override;
 
 	private:
-		uint32_t location_;
-		uint32_t transfer_nextstep_;
+		uint32_t location_ = 0U;
+		uint32_t transfer_nextstep_ = 0U;
 		Transfer::ReadData transfer_;
 	};
 

@@ -93,19 +93,22 @@ void Fleet::set_economy(Economy* e) {
  * Initialize the fleet, including a search through the map
  * to rejoin with the next other fleet we can find.
  */
-void Fleet::init(EditorGameBase& egbase) {
+bool Fleet::init(EditorGameBase& egbase) {
 	MapObject::init(egbase);
 
 	if (ships_.empty() && ports_.empty()) {
 		molog("Empty fleet initialized; disband immediately\n");
 		remove(egbase);
-		return;
+		return false;
 	}
 
 	find_other_fleet(egbase);
 
-	if (active())
+	if (active()) {
 		update(egbase);
+		return true;
+	}
+	return false;
 }
 
 struct StepEvalFindFleet {
@@ -135,9 +138,7 @@ struct StepEvalFindFleet {
  * of the same player.
  */
 void Fleet::find_other_fleet(EditorGameBase& egbase) {
-	Map& map = egbase.map();
-	MapAStar<StepEvalFindFleet> astar(map, StepEvalFindFleet());
-
+	MapAStar<StepEvalFindFleet> astar(*egbase.mutable_map(), StepEvalFindFleet());
 	for (const Ship* temp_ship : ships_) {
 		astar.push(temp_ship->get_position());
 	}
@@ -440,7 +441,6 @@ struct StepEvalFindPorts {
  * because path finding is flaky during map loading.
  */
 void Fleet::connect_port(EditorGameBase& egbase, uint32_t idx) {
-	Map& map = egbase.map();
 	StepEvalFindPorts se;
 
 	for (uint32_t i = 0; i < ports_.size(); ++i) {
@@ -460,7 +460,7 @@ void Fleet::connect_port(EditorGameBase& egbase, uint32_t idx) {
 	if (se.targets.empty())
 		return;
 
-	MapAStar<StepEvalFindPorts> astar(map, se);
+	MapAStar<StepEvalFindPorts> astar(*egbase.mutable_map(), se);
 
 	BaseImmovable::PositionList src(ports_[idx]->get_positions(egbase));
 	for (const Coords& temp_pos : src) {
@@ -562,6 +562,10 @@ void Fleet::remove_port(EditorGameBase& egbase, PortDock* port) {
 		molog("Port removed from fleet, triggering fleet update\n");
 		update(egbase);
 	}
+}
+
+bool Fleet::has_ports() {
+	return !ports_.empty();
 }
 
 /**
@@ -794,11 +798,10 @@ void Fleet::act(Game& game, uint32_t /* data */) {
 	// looking for best scores and sending ships accordingly
 	uint16_t best_ship = 0;
 	uint16_t best_port = 0;
-	uint16_t best_score;
 
 	// after sending a ship we will remove one or more items from scores
 	while (!scores.empty()) {
-		best_score = 0;
+		uint16_t best_score = 0;
 
 		// searching for combination with highest score
 		for (const auto& combination : scores) {

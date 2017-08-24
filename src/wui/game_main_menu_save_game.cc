@@ -113,7 +113,7 @@ GameMainMenuSaveGame::GameMainMenuSaveGame(InteractiveGameBase& parent,
 		{
 			// Try to translate the map name.
 			i18n::Textdomain td("maps");
-			mapname_.set_text(_(parent.game().get_map()->get_name()));
+			mapname_.set_text(_(parent.game().map().get_name()));
 		}
 		uint32_t gametime = parent.game().get_gametime();
 		gametime_.set_text(gametimestring(gametime));
@@ -197,7 +197,7 @@ void GameMainMenuSaveGame::fill_list() {
 	edit_box_changed();
 }
 
-void GameMainMenuSaveGame::select_by_name(std::string name) {
+void GameMainMenuSaveGame::select_by_name(const std::string& name) {
 	for (uint32_t idx = 0; idx < ls_.size(); idx++) {
 		const std::string val = ls_[idx];
 		if (name == val) {

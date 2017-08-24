@@ -26,7 +26,7 @@
 #include "economy/road.h"
 #include "graphic/graphic.h"
 #include "logic/cmd_queue.h"
-#include "logic/map_objects/attackable.h"
+#include "logic/map_objects/tribes/attack_target.h"
 #include "logic/map_objects/tribes/soldier.h"
 #include "logic/map_objects/tribes/tribe_descr.h"
 #include "logic/map_objects/tribes/warehouse.h"
@@ -195,7 +195,7 @@ private:
 	void reset_mouse_and_die();
 
 	Widelands::Player* player_;
-	Widelands::Map* map_;
+	const Widelands::Map& map_;
 	FieldOverlayManager& field_overlay_manager_;
 
 	Widelands::FCoords node_;
@@ -246,10 +246,10 @@ FieldActionWindow::FieldActionWindow(InteractiveBase* const ib,
                                      UI::UniqueWindow::Registry* const registry)
    : UI::UniqueWindow(ib, "field_action", registry, 68, 34, _("Action")),
      player_(plr),
-     map_(&ib->egbase().map()),
+     map_(ib->egbase().map()),
      field_overlay_manager_(*ib->mutable_field_overlay_manager()),
-     node_(ib->get_sel_pos().node, &(*map_)[ib->get_sel_pos().node]),
-     tabpanel_(this, 0, 0, g_gr->images().get("images/ui_basic/but1.png")),
+     node_(ib->get_sel_pos().node, &map_[ib->get_sel_pos().node]),
+     tabpanel_(this, g_gr->images().get("images/ui_basic/but1.png")),
      fastclick_(true),
      best_tab_(0),
      workarea_preview_overlay_id_(0),
@@ -305,7 +305,7 @@ void FieldActionWindow::add_buttons_auto() {
 	const Widelands::PlayerNumber owner = node_.field->get_owned_by();
 
 	if (!igbase || igbase->can_see(owner)) {
-		Widelands::BaseImmovable* const imm = map_->get_immovable(node_);
+		Widelands::BaseImmovable* const imm = map_.get_immovable(node_);
 		const bool can_act = igbase ? igbase->can_act(owner) : true;
 
 		// The box with road-building buttons
@@ -380,13 +380,16 @@ void FieldActionWindow::add_buttons_auto() {
 void FieldActionWindow::add_buttons_attack() {
 	UI::Box& a_box = *new UI::Box(&tabpanel_, 0, 0, UI::Box::Horizontal);
 
-	if (upcast(Widelands::Attackable, attackable, map_->get_immovable(node_))) {
-		if (player_ && player_->is_hostile(attackable->owner()) && attackable->can_attack()) {
-			attack_box_ = new AttackBox(&a_box, player_, &node_, 0, 0);
-			a_box.add(attack_box_);
+	if (upcast(Widelands::Building, building, map_.get_immovable(node_))) {
+		if (const Widelands::AttackTarget* attack_target = building->attack_target()) {
+			if (player_ && player_->is_hostile(building->owner()) &&
+			    attack_target->can_be_attacked()) {
+				attack_box_ = new AttackBox(&a_box, player_, &node_, 0, 0);
+				a_box.add(attack_box_);
 
-			set_fastclick_panel(&add_button(
-			   &a_box, "attack", pic_attack, &FieldActionWindow::act_attack, _("Start attack")));
+				set_fastclick_panel(&add_button(
+				   &a_box, "attack", pic_attack, &FieldActionWindow::act_attack, _("Start attack")));
+			}
 		}
 	}
 
@@ -526,7 +529,7 @@ It resets the mouse to its original position and closes the window
 ===============
 */
 void FieldActionWindow::reset_mouse_and_die() {
-	ibase().mouse_to_field(node_, MapView::Transition::Jump);
+	ibase().map_view()->mouse_to_field(node_, MapView::Transition::Jump);
 	die();
 }
 

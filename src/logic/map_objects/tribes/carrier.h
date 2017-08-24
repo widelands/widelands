@@ -29,16 +29,20 @@ class CarrierDescr : public WorkerDescr {
 public:
 	CarrierDescr(const std::string& init_descname,
 	             const LuaTable& table,
-	             const EditorGameBase& egbase)
-	   : WorkerDescr(init_descname, MapObjectType::CARRIER, table, egbase) {
-	}
+	             const EditorGameBase& egbase);
 	~CarrierDescr() override {
+	}
+
+	Vector2i get_ware_hotspot() const {
+		return ware_hotspot_;
 	}
 
 protected:
 	Bob& create_object() const override;
 
 private:
+	Vector2i ware_hotspot_;
+
 	DISALLOW_COPY_AND_ASSIGN(CarrierDescr);
 };
 
@@ -50,7 +54,8 @@ struct Carrier : public Worker {
 
 	MO_DESCR(CarrierDescr)
 
-	Carrier(const CarrierDescr& carrier_descr) : Worker(carrier_descr), promised_pickup_to_(NOONE) {
+	explicit Carrier(const CarrierDescr& carrier_descr)
+	   : Worker(carrier_descr), promised_pickup_to_(NOONE) {
 	}
 	virtual ~Carrier() {
 	}
@@ -65,6 +70,12 @@ struct Carrier : public Worker {
 	void log_general_info(const EditorGameBase&) override;
 
 	static Task const taskRoad;
+
+protected:
+	void draw_inner(const EditorGameBase& game,
+	                const Vector2f& point_on_dst,
+	                const float scale,
+	                RenderTarget* dst) const override;
 
 private:
 	void find_pending_ware(Game&);

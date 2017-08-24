@@ -323,11 +323,20 @@ void GameMessageMenu::selected(uint32_t const t) {
 			}
 			centerviewbtn_->set_enabled(message->position());
 
-			message_body.set_text(
-			   (boost::format("<rt><p font-size=18 font-weight=bold font-color=D1D1D1>%s<br></p>"
-			                  "<p font-size=8> <br></p></rt>%s") %
-			    message->heading() % message->body())
-			      .str());
+			// TODO(GunChleoc): Programming by exception is ugly, but we need try/catch here for
+			// saveloading.
+			// Revisit this when we delete the old font renderer.
+			try {
+				message_body.force_new_renderer();
+				message_body.set_text(as_message(message->heading(), message->body()));
+			} catch (const std::exception&) {
+				message_body.force_new_renderer(false);
+				message_body.set_text(
+				   (boost::format("<rt><p font-size=18 font-weight=bold font-color=D1D1D1>%s<br></p>"
+				                  "<p font-size=8> <br></p></rt>%s") %
+				    message->heading() % message->body())
+				      .str());
+			}
 			update_archive_button_tooltip();
 			return;
 		}
@@ -396,9 +405,10 @@ bool GameMessageMenu::handle_key(bool down, SDL_Keysym code) {
 			return true;
 		case SDL_SCANCODE_KP_PERIOD:
 		case SDLK_KP_PERIOD:
-			if (code.mod & KMOD_NUM)
+			if (code.mod & KMOD_NUM) {
 				break;
-		/* no break */
+			}
+			FALLS_THROUGH;
 		default:
 			break;  // not handled
 		}
@@ -438,7 +448,7 @@ void GameMessageMenu::center_view() {
 	if (Message const* const message =
 	       iplayer().player().messages()[MessageId((*list)[selection])]) {
 		assert(message->position());
-		iplayer().scroll_to_field(message->position(), MapView::Transition::Smooth);
+		iplayer().map_view()->scroll_to_field(message->position(), MapView::Transition::Smooth);
 	}
 }
 
@@ -545,7 +555,7 @@ void GameMessageMenu::set_filter_messages_tooltips() {
 /**
  * Get the filename for a message category's icon
  */
-std::string GameMessageMenu::display_message_type_icon(Widelands::Message message) {
+std::string GameMessageMenu::display_message_type_icon(const Widelands::Message& message) {
 	switch (message.message_type_category()) {
 	case Widelands::Message::Type::kGeologists:
 		return "images/wui/fieldaction/menu_geologist.png";
@@ -603,7 +613,7 @@ void GameMessageMenu::update_archive_button_tooltip() {
 		return;
 	}
 	archivebtn_->set_enabled(true);
-	std::string button_tooltip = "";
+	std::string button_tooltip;
 	size_t no_selections = list->selections().size();
 	switch (mode) {
 	case Archive:

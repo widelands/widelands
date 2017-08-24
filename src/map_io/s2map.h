@@ -28,10 +28,10 @@
 class FileRead;
 
 struct S2MapLoader : public Widelands::MapLoader {
-	enum WorldType {
-		GREENLAND = 0,
-		BLACKLAND = 1,
-		WINTERLAND = 2,
+	enum class WorldType {
+		kGreenland = 0,
+		kBlackland = 1,
+		kWinterland = 2,
 	};
 
 	S2MapLoader(const std::string& filename, Widelands::Map& M);

@@ -30,8 +30,6 @@
 #include "sound/sound_handler.h"
 #include "wlapplication.h"
 
-using namespace std;
-
 namespace UI {
 
 Panel* Panel::modal_ = nullptr;
@@ -191,7 +189,7 @@ int Panel::do_run() {
 			RenderTarget& rt = *g_gr->get_render_target();
 			forefather->do_draw(rt);
 			rt.blit(
-			   (app->get_mouse_position() - Vector2i(3, 7)).cast<float>(),
+			   (app->get_mouse_position() - Vector2i(3, 7)),
 			   WLApplication::get()->is_mouse_pressed() ? default_cursor_click_ : default_cursor_);
 			forefather->do_tooltip();
 			g_gr->refresh();
@@ -746,7 +744,7 @@ void Panel::do_draw(RenderTarget& dst) {
 		return;
 
 	Recti outerrc;
-	Vector2i outerofs;
+	Vector2i outerofs = Vector2i::zero();
 
 	if (!dst.enter_window(Recti(Vector2i(x_, y_), w_, h_), &outerrc, &outerofs))
 		return;
@@ -1060,17 +1058,19 @@ bool Panel::draw_tooltip(RenderTarget& dst, const std::string& text) {
 		text_to_render = as_tooltip(text);
 	}
 
-	static const uint32_t TIP_WIDTH_MAX = 360;
-	const Image* rendered_text = g_fh1->render(text_to_render, TIP_WIDTH_MAX);
-	if (!rendered_text) {
+	constexpr uint32_t kTipWidthMax = 360;
+	std::shared_ptr<const UI::RenderedText> rendered_text =
+	   g_fh1->render(text_to_render, kTipWidthMax);
+	if (rendered_text->rects.empty()) {
 		return false;
 	}
-	uint16_t tip_width = rendered_text->width() + 4;
-	uint16_t tip_height = rendered_text->height() + 4;
 
-	Rectf r(WLApplication::get()->get_mouse_position() + Vector2i(2, 32), tip_width, tip_height);
-	const Vector2f tooltip_bottom_right = r.opposite_of_origin();
-	const Vector2f screen_bottom_right(g_gr->get_xres(), g_gr->get_yres());
+	const uint16_t tip_width = rendered_text->width() + 4;
+	const uint16_t tip_height = rendered_text->height() + 4;
+
+	Recti r(WLApplication::get()->get_mouse_position() + Vector2i(2, 32), tip_width, tip_height);
+	const Vector2i tooltip_bottom_right = r.opposite_of_origin();
+	const Vector2i screen_bottom_right(g_gr->get_xres(), g_gr->get_yres());
 	if (screen_bottom_right.x < tooltip_bottom_right.x)
 		r.x -= 4 + r.w;
 	if (screen_bottom_right.y < tooltip_bottom_right.y)
@@ -1078,7 +1078,7 @@ bool Panel::draw_tooltip(RenderTarget& dst, const std::string& text) {
 
 	dst.fill_rect(r, RGBColor(63, 52, 34));
 	dst.draw_rect(r, RGBColor(0, 0, 0));
-	dst.blit(r.origin() + Vector2f(2.f, 2.f), rendered_text);
+	rendered_text->draw(dst, r.origin() + Vector2i(2, 2));
 	return true;
 }
 }

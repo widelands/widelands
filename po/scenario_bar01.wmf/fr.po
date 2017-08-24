@@ -7,7 +7,8 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
 # GunChleoc, 2014
 # GunChleoc, 2014
-# hugues martin, 2015
+# Gwendal D <samuel.weber@normalesup.org>, 2017
+# finki boy, 2015
 # Jaypad <ju-ju@nataju.fr>, 2015-2016
 # Renaud Bouchard, 2016
 # Tubuntu <tubuntu@testimonium.be>, 2015
@@ -15,9 +16,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-01-06 13:06+0000\n"
-"PO-Revision-Date: 2016-12-10 20:05+0000\n"
-"Last-Translator: Renaud Bouchard\n"
+"POT-Creation-Date: 2017-04-28 06:01+0000\n"
+"PO-Revision-Date: 2017-05-01 11:32+0000\n"
+"Last-Translator: Gwendal D <samuel.weber@normalesup.org>\n"
 "Language-Team: French (http://www.transifex.com/widelands/widelands/language/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -221,14 +222,14 @@ msgid ""
 "building – for instance, deep mines need snacks instead of rations. You will"
 " have to enhance your tavern to an inn in order to produce snacks out of "
 "pitta bread AND a second kind of food (meat or fish) AND beer."
-msgstr "Ces bâtiments ont habituellement de plus grands besoins que les édifices basiques - pas exemple, les mines profondes ont besoin de casses-croutes à la place des rations. Vous devrez améliorer votre taverne vers une auberge afin de produire des casses-croute à partir de pain pita ET un second type de nourriture (viande ou poisson) ET de la bière."
+msgstr "Ces bâtiments ont habituellement de plus grands besoins que les édifices basiques – par exemple, les mines profondes ont besoin de casses-croûtes à la place des rations. Vous devrez améliorer votre taverne vers une auberge afin de produire des casses-croûtes à partir de pain pita ET un second type de nourriture (viande ou poisson) ET de la bière."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:98
 msgid ""
 "You may of course enhance all mines to deep mines instantly given you have "
 "the workers – bigger mines work a bit faster, smaller mines need cheaper "
 "food. It’s up to you which strategy you prefer."
-msgstr "Vous pouvez bien entendu améliorer toutes les mines vers des mines profondes instantanément à partir du moment ou vous avez les ouvriers qualifiés - Les grandes mines travaillent un peu plus vite, les plus petites demandent de la nourriture moins coûteuse à produire. Cela dépends de la stratégie que vous préférez."
+msgstr "Vous pouvez bien entendu améliorer toutes les mines vers des mines profondes instantanément à partir du moment où vous avez les ouvriers qualifiés – les grandes mines travaillent un peu plus vite, les plus petites demandent de la nourriture moins coûteuse à produire. Cela dépends de la stratégie que vous préférez."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:103
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:105
@@ -273,7 +274,7 @@ msgid ""
 "In order to call a geologist to search for water, click on a flag in the "
 "area that you want him to search and then on the button labeled ‘Send "
 "geologist to explore site’."
-msgstr "Pour demander à un géologue de chercher de l'eau, cliquez sur un drapeau dans la zone de recherche puis sur le bouton \"Envoyer un géologue explorer ce site\"."
+msgstr "Pour demander à un géologue de chercher de l'eau, cliquez sur un drapeau dans la zone de recherche puis sur le bouton « Envoyer un géologue explorer ce site »."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:123
 msgid ""
@@ -299,7 +300,7 @@ msgid ""
 "The third material necessary for improved buildings is thatch reed, used to "
 "cover roofs. Thatch reed is planted by a gardener around his building, the "
 "reed yard."
-msgstr "Le troisième matériau nécessaire pour améliorer les constructions sont les chaumes de roseaux, utilisé pour couvrir les toits. Les chaumes de roseaux sont planté par un jardinier autour de sa construction, la roseraie."
+msgstr "Le troisième matériau nécessaire pour améliorer les constructions sont les chaumes de roseaux, utilisés pour couvrir les toits. Les chaumes de roseaux sont plantés par un jardinier autour de sa construction, la roseraie."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:140
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:142
@@ -418,7 +419,7 @@ msgid ""
 "brothers will ever gain and hold control over the wooden throne, none of the"
 " tribes will be strong enough to subdue the other. There will be no end to "
 "this slaughter, unless… is this it? As father told me?"
-msgstr "Aujourd'hui, mes chasseurs ont amené devant moi des hommes, des femmes et de jeunes enfants qui s'étaient cachés dans nos forêts, essayant d'échapper à la guerre, la haine et la revanche qui fait rage entre des tribus qui se battent entre elles depuis la nuit des temps, lorsque nous n'étions rien de plus que des bêtes dirigées par leur instinct. \nAucun de mes frères ne gagnera et conservera le contrôle du trône de bois, aucune des tribus ne sera assez forte pour surpasser les autres. Il n'y aura pas de fin à ce massacre, à moins que... est ce cela ? Comme Père me l'a dit ?"
+msgstr "Aujourd'hui, mes chasseurs ont amené devant moi des hommes, des femmes et de jeunes enfants qui s'étaient cachés dans nos forêts, essayant d'échapper à la guerre, la haine et la revanche qui fait rage entre des tribus qui se battent entre elles depuis la nuit des temps, lorsque nous n'étions rien de plus que des bêtes dirigées par leurs instincts. \nAucun de mes frères ne gagnera et conservera le contrôle du trône de bois, aucune des tribus ne sera assez forte pour surpasser les autres. Il n'y aura pas de fin à ce massacre, à moins que... est ce cela ? Comme Père me l'a dit ?"
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:223
@@ -731,7 +732,7 @@ msgid ""
 "There seem to be quite a lot of animals in the forests here – we might just "
 "hunt down more of them. And, of course, the people would cheer a new tavern "
 "– hey, we might call it ‘Thron’s Pride’ or so if you want!"
-msgstr "Il semble y avoir du gibier en abondance dans ces forêts, nous pourrions le chasser. Et, bien entendu, nos gens se réjouiraient d'avoir une nouvelle taverne, hé, on pourrait l'appeler \"la fierté de Thron\" ou autre si vous voulez !"
+msgstr "Il semble y avoir du gibier en abondance dans ces forêts, nous pourrions le chasser. Et, bien entendu, nos gens se réjouiraient d'avoir une nouvelle taverne. Hé, on pourrait l'appeler « La Fierté de Thron » ou autre si vous voulez !"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:397
 msgid "The elder jumps into the air…"
@@ -748,7 +749,7 @@ msgid ""
 "North of the great mountain is a large plain – why don’t we use the space "
 "Mother Nature gave us and build a farm? I sure would enjoy a freshly baked "
 "pitta bread for a change…"
-msgstr "Le nord de la grande montagne est une vaste plaine, pourquoi n'utiliserions-nous pas l'espace que Mère Nature nous a offert pour y construire une ferme ? J'apprécierai certainement de manger un pain pita encore chaud pour changer..."
+msgstr "Le nord de la grande montagne est une vaste plaine, pourquoi n'utiliserions-nous pas l'espace que Mère Nature nous a offert pour y construire une ferme ? J'apprécierais certainement de manger un pain pita encore chaud pour changer..."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:408
 msgid "Boldreth cheers up…"
@@ -764,7 +765,7 @@ msgstr "Nos chasseurs sont en forêt, Thron."
 msgid ""
 "I promise you, before the sun sets today you will have a magnificent meal "
 "fit for the chieftain of all clans!"
-msgstr "Je te promet qu'avant le levé du soleil tu auras un magnifique repas digne des chefs de tous les clans!"
+msgstr "Je te promets qu'avant le levé du soleil tu auras un magnifique repas digne des chefs de tous les clans !"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:418
 msgid "Khantrukh gazes over the plains…"
@@ -784,7 +785,7 @@ msgstr "Un beau matin"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:425
 msgid "Thron recognizes…"
-msgstr "Thron reconnais..."
+msgstr "Thron reconnaît..."
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:427
@@ -793,7 +794,7 @@ msgid ""
 "celebration, I noticed how much this tiny bit of home means to my people. "
 "Their songs filled the air until deep in the night, and they were in higher "
 "spirits still the day after."
-msgstr "Une taverne a ouvert pour notre peuple hier. Bien que peu enclin à faire la fête, j'ai bien constaté que ce petit bout de \"chez-soi\" signifie beaucoup pour mon peuple. Leurs chansons ont empli l'atmosphère jusqu'à la nuit, et leur moral était nettement meilleur le lendemain."
+msgstr "Une taverne a ouvert pour notre peuple hier. Bien que peu enclin à faire la fête, j'ai bien constaté que ce petit bout de « chez-soi » signifie beaucoup pour mon peuple. Leurs chansons ont empli l'atmosphère jusqu'à la nuit, et leur moral était nettement meilleur le lendemain."
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:430
@@ -860,7 +861,7 @@ msgstr "Boldreth sourit..."
 msgid ""
 "Well, old friend, this should ensure that our fortifications do not break "
 "down with our foes’ first battle cry! Now we can expand safely!"
-msgstr "Eh bien mon vieil ami, ceci devrait garantir que nos fortifications ne s'écrouleront pas au premier cri de guerre ennemi ! A présent nous pouvons nous étendre sereinement !"
+msgstr "Eh bien mon vieil ami, ceci devrait garantir que nos fortifications ne s'écrouleront pas au premier cri de guerre ennemi ! À présent nous pouvons nous étendre sereinement !"
 
 #. TRANSLATORS: Boldreth
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:470
@@ -919,7 +920,7 @@ msgid ""
 "They are amazing animals: The ox is as swift as a human being while being "
 "much stronger and very frugal: all we need is wheat and water to breed them "
 "and they will do their work on the roads loyally and reliably."
-msgstr "Ce sont des animaux étonnants : le bœuf est agile comme les humains, mais plus fort et il mange peu : tout ce  dont ils ont besoin c'est du blé et de l'eau. Une fois élevés, ils travailleront au transport routier de manière fiable et loyale."
+msgstr "Ce sont des animaux étonnants : le bœuf est agile comme les humains, mais plus fort et il mange peu. Tout ce dont nous avons besoin c'est du blé et de l'eau. Une fois élevés, ils travailleront au transport routier de manière fiable et loyale."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:504
 msgid "Mission Complete"
@@ -996,7 +997,7 @@ msgid ""
 "The winter is upon us. Many of us are suffering from the cold, yet we must "
 "endure. The day we may return cannot be far anymore – it must not be far "
 "anymore."
-msgstr "L'hiver est sur nous. Nombreux souffrent du froid, mais nous devons le supporter. Le jour de notre retour ne peut plus être loin maintenant - il ne doit plus l'être."
+msgstr "L'hiver est sur nous. Nombreux souffrent du froid, mais nous devons le supporter. Le jour de notre retour ne peut plus être loin maintenant – il ne doit plus l'être."
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:535
@@ -1040,7 +1041,7 @@ msgstr "Mais ils ont eu peur que la guerre autour d'Al'thunran mette un terme à
 msgid "“%s”"
 msgstr "“%s”"
 
-#: ../../data/scripting/format_scenario.lua:96
+#: ../../data/scripting/format_scenario.lua:84
 msgid "New Objective"
 msgid_plural "New Objectives"
 msgstr[0] "Nouvel objectif"

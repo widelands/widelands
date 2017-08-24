@@ -261,7 +261,6 @@ function barbarians_thread()
    campaign_message_box(seven_days_later)
    campaign_message_box(diary_page_11)
 
-   p1:reveal_campaign("campsect2")
    p1:reveal_scenario("empiretut02")
 end
 

@@ -19,12 +19,14 @@
 
 #include "ai/defaultai.h"
 
+#include "economy/fleet.h"
+
 using namespace Widelands;
 
 // this scores spot for potential colony
 uint8_t DefaultAI::spot_scoring(Widelands::Coords candidate_spot) {
 
-	Map& map = game().map();
+	const Map& map = game().map();
 	PlayerNumber const pn = player_->player_number();
 	uint8_t score = 0;
 	uint16_t mineable_fields_count = 0;
@@ -116,7 +118,7 @@ bool DefaultAI::marine_main_decisions() {
 
 	// goes over all warehouses (these includes ports)
 	for (const WarehouseSiteObserver& wh_obs : warehousesites) {
-		if (wh_obs.bo->is_port) {
+		if (wh_obs.bo->is(BuildingAttribute::kPort)) {
 			ports_count += 1;
 			if (Widelands::PortDock* pd = wh_obs.site->get_portdock()) {
 				if (pd->expedition_started()) {
@@ -128,7 +130,7 @@ bool DefaultAI::marine_main_decisions() {
 
 	// goes over productionsites and gets status of shipyards
 	for (const ProductionSiteObserver& ps_obs : productionsites) {
-		if (ps_obs.bo->is_shipyard) {
+		if (ps_obs.bo->is(BuildingAttribute::kShipyard)) {
 			shipyards_count += 1;
 
 			// counting stocks
@@ -184,7 +186,7 @@ bool DefaultAI::marine_main_decisions() {
 	if (enough_ships == FleetStatus::kNeedShip) {
 
 		for (const ProductionSiteObserver& ps_obs : productionsites) {
-			if (ps_obs.bo->is_shipyard && ps_obs.site->can_start_working() &&
+			if (ps_obs.bo->is(BuildingAttribute::kShipyard) && ps_obs.site->can_start_working() &&
 			    ps_obs.site->is_stopped()) {
 				// make sure it is fully stocked
 				// counting stocks
@@ -211,7 +213,7 @@ bool DefaultAI::marine_main_decisions() {
 
 		// we need to find a port
 		for (const WarehouseSiteObserver& wh_obs : warehousesites) {
-			if (wh_obs.bo->is_port) {
+			if (wh_obs.bo->is(BuildingAttribute::kPort)) {
 				game().send_player_start_or_cancel_expedition(*wh_obs.site);
 				return true;
 			}
@@ -301,7 +303,7 @@ bool DefaultAI::check_ships(uint32_t const gametime) {
 			// iterate over all production sites searching for shipyard
 			for (std::list<ProductionSiteObserver>::iterator site = productionsites.begin();
 			     site != productionsites.end(); ++site) {
-				if (site->bo->is_shipyard) {
+				if (site->bo->is(BuildingAttribute::kShipyard)) {
 					if (!site->site->is_stopped()) {
 						game().send_player_start_stop_building(*site->site);
 					}
@@ -312,7 +314,7 @@ bool DefaultAI::check_ships(uint32_t const gametime) {
 		if (marine_task_queue.back() == kReprioritize) {
 			for (std::list<ProductionSiteObserver>::iterator site = productionsites.begin();
 			     site != productionsites.end(); ++site) {
-				if (site->bo->is_shipyard) {
+				if (site->bo->is(BuildingAttribute::kShipyard)) {
 					for (uint32_t k = 0; k < site->bo->inputs.size(); ++k) {
 						game().send_player_set_ware_priority(
 						   *site->site, wwWARE, site->bo->inputs.at(k), HIGH_PRIORITY);
@@ -357,6 +359,14 @@ void DefaultAI::check_ship_in_expedition(ShipObserver& so, uint32_t const gameti
 		game().send_player_cancel_expedition_ship(*so.ship);
 		log("%d: %s at %3dx%3d: END OF EXPEDITION due to time-out\n", pn,
 		    so.ship->get_shipname().c_str(), so.ship->get_position().x, so.ship->get_position().y);
+
+		// In case there is no port left to get back to, continue exploring
+		if (!so.ship->get_fleet() || !so.ship->get_fleet()->has_ports()) {
+			log("%d: %s at %3dx%3d: END OF EXPEDITION without port, continue exploring\n", pn,
+			    so.ship->get_shipname().c_str(), so.ship->get_position().x, so.ship->get_position().y);
+			persistent_data->expedition_start_time = gametime;
+			return;
+		}
 
 		// For known and running expedition
 	} else {
@@ -411,7 +421,6 @@ Widelands::IslandExploreDirection DefaultAI::randomExploreDirection() {
 // navigation decisions (these notifications are processes not in 'real time')
 void DefaultAI::expedition_management(ShipObserver& so) {
 
-	Map& map = game().map();
 	const int32_t gametime = game().get_gametime();
 	PlayerNumber const pn = player_->player_number();
 	// probability for island exploration repetition
@@ -474,6 +483,7 @@ void DefaultAI::expedition_management(ShipObserver& so) {
 		// we head for open sea again
 	} else {
 		// determine swimmable directions
+		const Map& map = game().map();
 		std::vector<Direction> possible_directions;
 		for (Direction dir = FIRST_DIRECTION; dir <= LAST_DIRECTION; ++dir) {
 			// testing distance of 8 fields

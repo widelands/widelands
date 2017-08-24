@@ -12,8 +12,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-03-03 06:24+0000\n"
-"PO-Revision-Date: 2017-03-03 06:26+0000\n"
+"POT-Creation-Date: 2017-07-04 08:57+0000\n"
+"PO-Revision-Date: 2017-07-04 09:00+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Hungarian (http://www.transifex.com/widelands/widelands/language/hu/)\n"
 "MIME-Version: 1.0\n"
@@ -122,6 +122,7 @@ msgid ""
 "blackroot."
 msgstr "A feketegyökér termesztőnek átlagosan %1% szükséges, hogy elvessen és leszedjen egy kötegnyi feketegyökeret."
 
+#. TRANSLATORS: Purpose helptext for a building
 #. TRANSLATORS: Note helptext for a building
 #. TRANSLATORS: Performance helptext for a building
 #. This include can be removed when all help texts have been defined.
@@ -720,8 +721,8 @@ msgstr "Ez a bánya mindent nyersanyagot kitermel a legmélyebb szintig. De miut
 #. TRANSLATORS: 'It' is a mine
 #: ../../data/tribes/buildings/productionsites/barbarians/granitemine/helptexts.lua:21
 msgctxt "barbarians_building"
-msgid "It cannot be upgraded."
-msgstr "Nem fejleszthető tovább."
+msgid "It cannot be enhanced."
+msgstr ""
 
 #. TRANSLATORS: Performance helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/granitemine/helptexts.lua:26
@@ -1070,8 +1071,8 @@ msgstr "A barbárok által hadakozásra használt fejszéket készíti."
 msgctxt "barbarians_building"
 msgid ""
 "The Barbarian war mill is their most advanced production site for weapons. "
-"As such it needs to be upgraded from an ax workshop."
-msgstr "A barbár fegyverkészítő műhely a legfejlettebb fegyvertermelő hely. Mint ilyet, a fejszkészítő műhelyből lehet kifejleszteni."
+"As such you will need to enhance an ax workshop in order to get one."
+msgstr ""
 
 #: ../../data/tribes/buildings/productionsites/barbarians/warmill/helptexts.lua:29
 msgctxt "barbarians_building"
@@ -3519,7 +3520,7 @@ msgid "Wool is the hair of sheep. Weaving mills use it to make cloth."
 msgstr "A gyapjú a juhok szőre. A szövödék használják fel szövet készítéséhez."
 
 #. TRANSLATORS: Helptext for a worker: Armorsmith
-#: ../../data/tribes/workers/atlanteans/armorsmith/helptexts.lua:3
+#: ../../data/tribes/workers/atlanteans/armorsmith/helptexts.lua:5
 msgctxt "atlanteans_worker"
 msgid "Produces armor for the soldiers."
 msgstr "Páncélt készít a katonák számára."

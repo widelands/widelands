@@ -59,7 +59,7 @@ struct NoteShipWindow {
 
 	Serial serial;
 
-	enum class Action { kRefresh, kClose };
+	enum class Action { kRefresh, kClose, kNoPortLeft };
 	const Action action;
 
 	NoteShipWindow(Serial init_serial, const Action& init_action)
@@ -98,7 +98,7 @@ private:
 struct Ship : Bob {
 	MO_DESCR(ShipDescr)
 
-	Ship(const ShipDescr& descr);
+	explicit Ship(const ShipDescr& descr);
 	virtual ~Ship();
 
 	// Returns the fleet the ship is a part of.
@@ -120,7 +120,7 @@ struct Ship : Bob {
 
 	void init_auto_task(Game&) override;
 
-	void init(EditorGameBase&) override;
+	bool init(EditorGameBase&) override;
 	void cleanup(EditorGameBase&) override;
 
 	void start_task_ship(Game&);
@@ -264,7 +264,7 @@ private:
 	void ship_update_expedition(Game&, State&);
 	void ship_update_idle(Game&, State&);
 
-	void init_fleet(EditorGameBase&);
+	bool init_fleet(EditorGameBase&);
 	void set_fleet(Fleet* fleet);
 
 	void send_message(Game& game,
@@ -295,7 +295,6 @@ private:
 	// saving and loading
 protected:
 	struct Loader : Bob::Loader {
-		Loader();
 
 		const Task* get_task(const std::string& name) override;
 
@@ -304,9 +303,10 @@ protected:
 		void load_finish() override;
 
 	private:
-		uint32_t lastdock_;
-		uint32_t destination_;
-		ShipStates ship_state_;
+		// Initialize everything to make cppcheck happy.
+		uint32_t lastdock_ = 0U;
+		uint32_t destination_ = 0U;
+		ShipStates ship_state_ = ShipStates::kTransport;
 		std::string shipname_;
 		std::unique_ptr<Expedition> expedition_;
 		std::vector<ShippingItem::Loader> items_;

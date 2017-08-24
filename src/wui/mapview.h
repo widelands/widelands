@@ -71,6 +71,11 @@ public:
 	};
 
 	struct View {
+		View(Vector2f init_viewpoint, float init_zoom) : viewpoint(init_viewpoint), zoom(init_zoom) {
+		}
+		View() : View(Vector2f::zero(), 1.0f) {
+		}
+
 		// Mappixel of top-left pixel of this MapView.
 		Vector2f viewpoint;
 
@@ -87,8 +92,12 @@ public:
 	};
 
 	struct TimestampedMouse {
+		TimestampedMouse(uint32_t init_t, Vector2f init_pixel) : t(init_t), pixel(init_pixel) {
+		}
+		TimestampedMouse() : t(0), pixel(Vector2f::zero()) {
+		}
 		uint32_t t;
-		Vector2f pixel;
+		Vector2f pixel = Vector2f::zero();
 	};
 
 	MapView(UI::Panel* const parent,
@@ -127,6 +136,9 @@ public:
 	// Jump, this behaves exactly like 'set_mouse_pos'.
 	void mouse_to_pixel(const Vector2i& pixel, const Transition& transition);
 
+	// Move the view by 'delta_pixels'.
+	void pan_by(Vector2i delta_pixels);
+
 	// The current view area visible in the MapView in map pixel coordinates.
 	// The returned value always has 'x' > 0 and 'y' > 0.
 	ViewArea view_area() const;
@@ -144,7 +156,6 @@ public:
 	// True if a 'Transition::Smooth' animation is playing.
 	bool is_animating() const;
 
-	// Implementing Panel.
 	void draw(RenderTarget&) override;
 	bool handle_mousepress(uint8_t btn, int32_t x, int32_t y) override;
 	bool handle_mouserelease(uint8_t btn, int32_t x, int32_t y) override;
@@ -152,14 +163,6 @@ public:
 	handle_mousemove(uint8_t state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff) override;
 	bool handle_mousewheel(uint32_t which, int32_t x, int32_t y) override;
 	bool handle_key(bool down, SDL_Keysym code) override;
-
-protected:
-	InteractiveBase& intbase() const {
-		return intbase_;
-	}
-
-	// Move the view by 'delta_pixels'.
-	void pan_by(Vector2i delta_pixels);
 
 private:
 	void stop_dragging();

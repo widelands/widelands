@@ -26,7 +26,6 @@
 #include "graphic/font_handler1.h"
 #include "graphic/text/font_set.h"
 #include "graphic/text_constants.h"
-#include "logic/map_objects/attackable.h"
 #include "logic/map_objects/bob.h"
 #include "logic/map_objects/tribes/soldier.h"
 #include "logic/player.h"
@@ -81,7 +80,7 @@ private:
 
 private:
 	Widelands::Player* player_;
-	Widelands::Map* map_;
+	const Widelands::Map& map_;
 	Widelands::FCoords* node_coordinates_;
 
 	std::unique_ptr<UI::Slider> soldiers_slider_;

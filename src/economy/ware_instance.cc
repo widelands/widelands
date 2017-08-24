@@ -46,7 +46,7 @@ namespace Widelands {
  */
 // TODO(unknown): This maybe shouldn't be here.
 struct IdleWareSupply : public Supply {
-	IdleWareSupply(WareInstance&);
+	explicit IdleWareSupply(WareInstance&);
 	virtual ~IdleWareSupply();
 
 	void set_economy(Economy*);
@@ -187,13 +187,15 @@ WareInstance::WareInstance(DescriptionIndex const i, const WareDescr* const ware
 
 WareInstance::~WareInstance() {
 	if (supply_) {
+		FORMAT_WARNINGS_OFF;
 		molog("Ware %u still has supply %p\n", descr_index_, supply_);
+		FORMAT_WARNINGS_ON;
 		delete supply_;
 	}
 }
 
-void WareInstance::init(EditorGameBase& egbase) {
-	MapObject::init(egbase);
+bool WareInstance::init(EditorGameBase& egbase) {
+	return MapObject::init(egbase);
 }
 
 void WareInstance::cleanup(EditorGameBase& egbase) {
@@ -515,9 +517,6 @@ Load/save support
 */
 
 constexpr uint8_t kCurrentPacketVersion = 2;
-
-WareInstance::Loader::Loader() : location_(0), transfer_nextstep_(0) {
-}
 
 void WareInstance::Loader::load(FileRead& fr) {
 	MapObject::Loader::load(fr);

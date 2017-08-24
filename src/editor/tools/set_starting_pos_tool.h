@@ -42,9 +42,7 @@ struct EditorSetStartingPosTool : public EditorTool {
 	                          EditorActionArgs*,
 	                          Widelands::Map*) override;
 	const Image* get_sel_impl() const override {
-		return playercolor_image(get_current_player() - 1,
-		                         g_gr->images().get("images/players/player_position_menu.png"),
-		                         g_gr->images().get("images/players/player_position_menu_pc.png"));
+		return playercolor_image(get_current_player() - 1, "images/players/player_position_menu.png");
 	}
 
 	Widelands::PlayerNumber get_current_player() const;
@@ -61,7 +59,6 @@ private:
 	std::vector<FieldOverlayManager::OverlayId> overlay_ids_;
 };
 
-int32_t editor_tool_set_starting_pos_callback(const Widelands::TCoords<Widelands::FCoords>& c,
-                                              Widelands::Map& map);
+int32_t editor_tool_set_starting_pos_callback(const Widelands::FCoords& c, Widelands::Map& map);
 
 #endif  // end of include guard: WL_EDITOR_TOOLS_SET_STARTING_POS_TOOL_H

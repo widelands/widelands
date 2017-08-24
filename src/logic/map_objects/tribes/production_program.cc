@@ -263,9 +263,8 @@ void ProductionProgram::parse_ware_type_group(char*& parameters,
 				                    "the specified ware type(s) is only %u, so the group can "
 				                    "never be fulfilled by the site",
 				                    count, count_max);
-			//  fallthrough
 		}
-		/* no break */
+			FALLS_THROUGH;
 		case '\0':
 		case ' ':
 			group.second = count;
@@ -538,7 +537,7 @@ void ProductionProgram::ActReturn::execute(Game& game, ProductionSite& ps) const
 		std::string condition_string =
 		   i18n::localize_list(condition_list, i18n::ConcatenateWith::AND);
 
-		std::string result_string = "";
+		std::string result_string;
 		if (result_ == Failed) {
 			/** TRANSLATORS: "Did not start working because the economy needs the ware ‘%s’" */
 			result_string = (boost::format(_("Did not start %1$s because %2$s")) %
@@ -1139,7 +1138,7 @@ ProductionProgram::ActMine::ActMine(char* parameters,
 }
 
 void ProductionProgram::ActMine::execute(Game& game, ProductionSite& ps) const {
-	Map& map = game.map();
+	Map* map = game.mutable_map();
 
 	//  select one of the nodes randomly
 	uint32_t totalres = 0;
@@ -1148,7 +1147,7 @@ void ProductionProgram::ActMine::execute(Game& game, ProductionSite& ps) const {
 
 	{
 		MapRegion<Area<FCoords>> mr(
-		   map, Area<FCoords>(map.get_fcoords(ps.get_position()), distance_));
+		   *map, Area<FCoords>(map->get_fcoords(ps.get_position()), distance_));
 		do {
 			DescriptionIndex fres = mr.location().field->get_resources();
 			ResourceAmount amount = mr.location().field->get_resources_amount();
@@ -1173,7 +1172,7 @@ void ProductionProgram::ActMine::execute(Game& game, ProductionSite& ps) const {
 				totalchance += 4;
 			else if (amount <= 6)
 				totalchance += 2;
-		} while (mr.advance(map));
+		} while (mr.advance(*map));
 	}
 
 	//  how much is digged
@@ -1194,7 +1193,7 @@ void ProductionProgram::ActMine::execute(Game& game, ProductionSite& ps) const {
 
 		{
 			MapRegion<Area<FCoords>> mr(
-			   map, Area<FCoords>(map.get_fcoords(ps.get_position()), distance_));
+			   *map, Area<FCoords>(map->get_fcoords(ps.get_position()), distance_));
 			do {
 				DescriptionIndex fres = mr.location().field->get_resources();
 				ResourceAmount amount = mr.location().field->get_resources_amount();
@@ -1207,10 +1206,10 @@ void ProductionProgram::ActMine::execute(Game& game, ProductionSite& ps) const {
 					assert(amount > 0);
 
 					--amount;
-					map.set_resources(mr.location(), amount);
+					map->set_resources(mr.location(), amount);
 					break;
 				}
-			} while (mr.advance(map));
+			} while (mr.advance(*map));
 		}
 
 		if (pick >= 0) {
@@ -1277,8 +1276,9 @@ ProductionProgram::ActCheckSoldier::ActCheckSoldier(char* parameters) {
 }
 
 void ProductionProgram::ActCheckSoldier::execute(Game& game, ProductionSite& ps) const {
-	SoldierControl& ctrl = dynamic_cast<SoldierControl&>(ps);
-	const std::vector<Soldier*> soldiers = ctrl.present_soldiers();
+	const SoldierControl* ctrl = ps.soldier_control();
+	assert(ctrl != nullptr);
+	const std::vector<Soldier*> soldiers = ctrl->present_soldiers();
 	if (soldiers.empty()) {
 		ps.set_production_result(_("No soldier to train!"));
 		return ps.program_end(game, Skipped);
@@ -1356,8 +1356,9 @@ ProductionProgram::ActTrain::ActTrain(char* parameters) {
 }
 
 void ProductionProgram::ActTrain::execute(Game& game, ProductionSite& ps) const {
-	SoldierControl& ctrl = dynamic_cast<SoldierControl&>(ps);
-	const std::vector<Soldier*> soldiers = ctrl.present_soldiers();
+	const SoldierControl* ctrl = ps.soldier_control();
+	;
+	const std::vector<Soldier*> soldiers = ctrl->present_soldiers();
 	const std::vector<Soldier*>::const_iterator soldiers_end = soldiers.end();
 	std::vector<Soldier*>::const_iterator it = soldiers.begin();
 
@@ -1488,11 +1489,11 @@ void ProductionProgram::ActConstruct::execute(Game& game, ProductionSite& psite)
 	}
 
 	// Look for an appropriate object in the given radius
+	const Map& map = game.map();
 	std::vector<ImmovableFound> immovables;
 	CheckStepWalkOn cstep(MOVECAPS_WALK, true);
-	Area<FCoords> area(game.map().get_fcoords(psite.base_flag().get_position()), radius);
-	if (game.map().find_reachable_immovables(
-	       area, &immovables, cstep, FindImmovableByDescr(descr))) {
+	Area<FCoords> area(map.get_fcoords(psite.base_flag().get_position()), radius);
+	if (map.find_reachable_immovables(area, &immovables, cstep, FindImmovableByDescr(descr))) {
 		state.objvar = immovables[0].object;
 
 		psite.working_positions_[0].worker->update_task_buildingwork(game);
@@ -1501,7 +1502,6 @@ void ProductionProgram::ActConstruct::execute(Game& game, ProductionSite& psite)
 
 	// No object found, look for a field where we can build
 	std::vector<Coords> fields;
-	Map& map = game.map();
 	FindNodeAnd fna;
 	// 10 is custom value to make sure the "water" is at least 10 nodes big
 	fna.add(FindNodeShore(10));

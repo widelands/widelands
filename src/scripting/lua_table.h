@@ -33,7 +33,7 @@
 
 class LuaTableKeyError : public LuaError {
 public:
-	LuaTableKeyError(const std::string& wanted)
+	explicit LuaTableKeyError(const std::string& wanted)
 	   : LuaError(wanted + " is not a field in this table.") {
 	}
 };

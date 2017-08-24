@@ -145,8 +145,8 @@ private:
 };
 
 /**
- * A discrete slider with plot time steps preconfigured and automatic signal
- * setup.
+ * A discrete slider with plot time steps.
+ * Enclosing element will need to connect the changedto signal.
  */
 struct WuiPlotAreaSlider : public UI::DiscreteSlider {
 	WuiPlotAreaSlider(Panel* const parent,
@@ -171,8 +171,7 @@ struct WuiPlotAreaSlider : public UI::DiscreteSlider {
 	                    cursor_size,
 	                    enabled),
 	     plot_area_(plot_area),
-	     last_game_time_id_(plot_area.get_game_time_id()) {
-		changedto.connect(boost::bind(&WuiPlotArea::set_time_id, &plot_area, _1));
+	     last_game_time_id_(0) {
 	}
 
 protected:

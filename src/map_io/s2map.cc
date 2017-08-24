@@ -49,9 +49,8 @@ using std::setiosflags;
 namespace {
 
 struct S2MapDescrHeader {
-	char magic[10];  // "WORLD_V1.0"
-	char name[20];   // We need fixed char arrays rather than strings here. Otherwise, this will
-	                 // segfault.
+	char name[20];  // We need fixed char arrays rather than strings here. Otherwise, this will
+	                // segfault.
 	int16_t w;
 	int16_t h;
 	int8_t uses_world;  // 0 = green, 1 =black, 2 = winter
@@ -213,11 +212,11 @@ load_s2mf_section(FileRead& fr, int32_t const width, int32_t const height) {
 
 std::string get_world_name(S2MapLoader::WorldType world) {
 	switch (world) {
-	case S2MapLoader::GREENLAND:
+	case S2MapLoader::WorldType::kGreenland:
 		return "greenland";
-	case S2MapLoader::BLACKLAND:
+	case S2MapLoader::WorldType::kBlackland:
 		return "blackland";
-	case S2MapLoader::WINTERLAND:
+	case S2MapLoader::WorldType::kWinterland:
 		return "winterland";
 	}
 	NEVER_HERE();
@@ -245,18 +244,18 @@ TerrainConverter::TerrainConverter(const Widelands::World& world,
    : world_legacy_lookup_table_(lookup_table),
      world_(world),
      table_{std::make_pair(
-               S2MapLoader::GREENLAND,
+               S2MapLoader::WorldType::kGreenland,
                std::vector<std::string>{
                   "summer_steppe", "summer_mountain1", "summer_snow", "summer_swamp",
                   "summer_beach", "summer_water", "summer_meadow1", "summer_meadow2",
                   "summer_meadow3", "summer_mountain2", "summer_mountain3", "summer_mountain4",
                   "summer_steppe_barren", "summer_meadow4", "lava", "summer_mountain_meadow"}),
-            std::make_pair(S2MapLoader::BLACKLAND,
+            std::make_pair(S2MapLoader::WorldType::kBlackland,
                            std::vector<std::string>{
                               "ashes", "mountain1", "lava-stone1", "lava-stone2", "strand", "water",
                               "hardground1", "hardground2", "hardground3", "mountain2", "mountain3",
                               "mountain4", "ashes2", "hardground4", "lava", "hardlava"}),
-            std::make_pair(S2MapLoader::WINTERLAND,
+            std::make_pair(S2MapLoader::WorldType::kWinterland,
                            std::vector<std::string>{
                               "tundra", "mountain1", "ice_flows", "ice_flows2", "ice", "water",
                               "tundra_taiga", "tundra2", "tundra3", "mountain2", "mountain3",
@@ -339,7 +338,7 @@ Widelands::DescriptionIndex TerrainConverter::lookup(S2MapLoader::WorldType worl
 }  // namespace
 
 S2MapLoader::S2MapLoader(const std::string& filename, Widelands::Map& M)
-   : Widelands::MapLoader(filename, M), filename_(filename) {
+   : Widelands::MapLoader(filename, M), filename_(filename), worldtype_(WorldType::kGreenland) {
 }
 
 /// Load the header. The map will then return valid information when
@@ -954,10 +953,10 @@ void S2MapLoader::load_s2mf(Widelands::EditorGameBase& egbase) {
 				break;
 
 			case BOB_CACTUS1:
-				bobname = worldtype_ != S2MapLoader::WINTERLAND ? "cactus1" : "snowman";
+				bobname = worldtype_ != S2MapLoader::WorldType::kWinterland ? "cactus1" : "snowman";
 				break;
 			case BOB_CACTUS2:
-				bobname = worldtype_ != S2MapLoader::WINTERLAND ? "cactus2" : "track";
+				bobname = worldtype_ != S2MapLoader::WorldType::kWinterland ? "cactus2" : "track";
 				break;
 
 			case BOB_BUSH1:
@@ -1047,8 +1046,6 @@ void S2MapLoader::postload_fix_conversion(Widelands::EditorGameBase& egbase) {
 	 * 1: Try to fix port spaces
 	 */
 	const Widelands::Map::PortSpacesSet ports(map_.get_port_spaces());
-	uint16_t num_failed = 0;
-
 	const Widelands::World& world = egbase.world();
 
 	// Check if port spaces are valid
@@ -1074,7 +1071,6 @@ void S2MapLoader::postload_fix_conversion(Widelands::EditorGameBase& egbase) {
 				}
 			} while (mr.advance(map_) && !fixed);
 			if (!fixed) {
-				++num_failed;
 				log("FAILED! No alternative port buildspace for (%i, %i) found!\n", fc.x, fc.y);
 			} else
 				log("Fixed!\n");

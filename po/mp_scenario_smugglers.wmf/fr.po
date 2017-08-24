@@ -1,17 +1,18 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2016 Widelands Development Team
+# Copyright (C) 2005-2017 Widelands Development Team
 # 
 # Translators:
-# GunChleoc, 2016
+# GunChleoc, 2016-2017
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2011
+# Gwendal D <samuel.weber@normalesup.org>, 2017
 # Renaud Bouchard, 2015
 # Tubuntu <tubuntu@testimonium.be>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-10-15 08:42+0000\n"
-"PO-Revision-Date: 2016-09-14 20:29+0000\n"
+"POT-Creation-Date: 2017-04-28 06:01+0000\n"
+"PO-Revision-Date: 2017-05-01 19:47+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: French (http://www.transifex.com/widelands/widelands/language/fr/)\n"
 "MIME-Version: 1.0\n"
@@ -26,7 +27,7 @@ msgstr ""
 #: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/smuggling.lua:101
 #: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/smuggling.lua:104
 msgid "Status"
-msgstr "Etat"
+msgstr "État"
 
 #: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/multiplayer_init.lua:122
 msgid "Wares Smuggled"
@@ -57,7 +58,7 @@ msgid ""
 "Smugglers is a fun map for 4 players. You and your partner start diagonally "
 "from each other on a point symmetric island. There are plenty of smuggling "
 "tunnels on this island, each consisting of a receiving and a sending end."
-msgstr "Smuggers est une carte amusante pour 4 joueurs. Vous et vous partenaires démarrez opposé en diagonale sur une île symétrique. Il y a pleins de tunnels de contrebande sur cette île, chacun servant à recevoir et envoyer."
+msgstr "Contrebande est une carte amusante pour 4 joueurs. Vous et votre partenaire démarrez opposé en diagonale sur une île symétrique. Il y a pleins de tunnels de contrebande sur cette île, chacun servant à recevoir et envoyer."
 
 #: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/texts.lua:10
 msgid ""
@@ -114,7 +115,7 @@ msgstr "Une nouvelle route de contrebande a été établie de %1$s à %2$s ! Cha
 msgid ""
 "Your team has established a new smuggling route. You have the sending "
 "warehouse. Every ware smuggled here is worth %s."
-msgstr "Votre équipe a établie une nouvelle route de contrebande. Vous avez l' entrepôt qui envoie. Chaque marchandise passée en contrebande ici vaudra %s."
+msgstr "Votre équipe a établie une nouvelle route de contrebande. Vous avez l'entrepôt qui envoie. Chaque marchandise passée en contrebande ici vaudra %s."
 
 #. TRANSLATORS: %s = '<number> points'
 #: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/texts.lua:32
@@ -122,7 +123,7 @@ msgstr "Votre équipe a établie une nouvelle route de contrebande. Vous avez l'
 msgid ""
 "Your team has established a new smuggling route. You have the receiving "
 "warehouse. Every ware smuggled here is worth %s."
-msgstr "Votre équipe a établie une nouvelle route de contrebande. Vous avez l' entrepôt qui reçoit. Chaque marchandise passée en contrebande ici vaudra %s."
+msgstr "Votre équipe a établie une nouvelle route de contrebande. Vous avez l'entrepôt qui reçoit. Chaque marchandise passée en contrebande ici vaudra %s."
 
 #. TRANSLATORS: the first parameter is '<number> points', the last 2
 #. parameters are player names

@@ -1,3 +1,5 @@
+-- The basic worker documentation is located in /doc/sphinx/lua_tribes_workers_rst.org
+
 dirname = path.dirname(__file__)
 
 animations = {

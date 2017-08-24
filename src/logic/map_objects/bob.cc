@@ -118,7 +118,7 @@ Bob::~Bob() {
  *
  * \note Make sure you call this from derived classes!
  */
-void Bob::init(EditorGameBase& egbase) {
+bool Bob::init(EditorGameBase& egbase) {
 	MapObject::init(egbase);
 
 	if (upcast(Game, game, &egbase))
@@ -126,6 +126,7 @@ void Bob::init(EditorGameBase& egbase) {
 	else
 		// In editor: play idle task forever
 		set_animation(egbase, descr().get_animation("idle"));
+	return true;
 }
 
 /**
@@ -463,7 +464,7 @@ struct BlockedTracker {
 
 	Game& game_;
 	Bob& bob_;
-	Map& map_;
+	const Map& map_;
 	Coords finaldest_;
 	Cache nodes_;
 	int nrblocked_;
@@ -471,16 +472,16 @@ struct BlockedTracker {
 };
 
 struct CheckStepBlocked {
-	CheckStepBlocked(BlockedTracker& tracker) : tracker_(tracker) {
+	explicit CheckStepBlocked(BlockedTracker& tracker) : tracker_(tracker) {
 	}
 
-	bool allowed(Map&, FCoords, FCoords end, int32_t, CheckStep::StepId) const {
+	bool allowed(const Map&, FCoords, FCoords end, int32_t, CheckStep::StepId) const {
 		if (end == tracker_.finaldest_)
 			return true;
 
 		return !tracker_.is_blocked(end);
 	}
-	bool reachable_dest(Map&, FCoords) const {
+	bool reachable_dest(const Map&, FCoords) const {
 		return true;
 	}
 
@@ -518,7 +519,7 @@ bool Bob::start_task_movepath(Game& game,
 	if (forceall)
 		tracker.disabled_ = true;
 
-	Map& map = game.map();
+	const Map& map = game.map();
 	if (map.findpath(position_, dest, persist, path, cstep) < 0) {
 		if (!tracker.nrblocked_)
 			return false;
@@ -633,8 +634,7 @@ void Bob::movepath_update(Game& game, State& state) {
 	// Using probability of 1/8 and pausing it for 5, 10 or 15 seconds
 	if (game.logic_rand() % 8 == 0) {
 		if (is_a(Ship, this)) {
-			Map& map = game.map();
-			const uint32_t ships_count = map.find_bobs(
+			const uint32_t ships_count = game.map().find_bobs(
 			   Widelands::Area<Widelands::FCoords>(get_position(), 0), nullptr, FindBobShip());
 			assert(ships_count > 0);
 			if (ships_count > 1) {
@@ -693,7 +693,7 @@ void Bob::move_update(Game& game, State&) {
 Vector2f Bob::calc_drawpos(const EditorGameBase& game,
                            const Vector2f& field_on_dst,
                            const float scale) const {
-	const Map& map = game.get_map();
+	const Map& map = game.map();
 	const FCoords end = position_;
 	FCoords start;
 	Vector2f spos = field_on_dst;
@@ -792,7 +792,7 @@ void Bob::set_animation(EditorGameBase& egbase, uint32_t const anim) {
 int32_t Bob::start_walk(Game& game, WalkingDir const dir, uint32_t const a, bool const force) {
 	FCoords newnode;
 
-	Map& map = game.map();
+	const Map& map = game.map();
 	map.get_neighbour(position_, dir, &newnode);
 
 	// Move capability check
@@ -900,7 +900,9 @@ void Bob::set_position(EditorGameBase& egbase, const Coords& coords) {
 
 /// Give debug information.
 void Bob::log_general_info(const EditorGameBase& egbase) {
+	FORMAT_WARNINGS_OFF;
 	molog("Owner: %p\n", owner_);
+	FORMAT_WARNINGS_ON;
 	molog("Postition: (%i, %i)\n", position_.x, position_.y);
 	molog("ActID: %i\n", actid_);
 	molog("ActScheduled: %s\n", actscheduled_ ? "true" : "false");
@@ -925,7 +927,9 @@ void Bob::log_general_info(const EditorGameBase& egbase) {
 		molog("* ivar2: %i\n", stack_[i].ivar2);
 		molog("* ivar3: %i\n", stack_[i].ivar3);
 
+		FORMAT_WARNINGS_OFF;
 		molog("* object pointer: %p\n", stack_[i].objvar1.get(egbase));
+		FORMAT_WARNINGS_ON;
 		molog("* svar1: %s\n", stack_[i].svar1.c_str());
 
 		molog("* coords: (%i, %i)\n", stack_[i].coords.x, stack_[i].coords.y);
@@ -933,7 +937,9 @@ void Bob::log_general_info(const EditorGameBase& egbase) {
 		for (Direction dir = FIRST_DIRECTION; dir <= LAST_DIRECTION; ++dir) {
 			molog(" %d", stack_[i].diranims.get_animation(dir));
 		}
+		FORMAT_WARNINGS_OFF;
 		molog("\n* path: %p\n", stack_[i].path);
+		FORMAT_WARNINGS_ON;
 		if (stack_[i].path) {
 			const Path& path = *stack_[i].path;
 			Path::StepVector::size_type nr_steps = path.get_nsteps();
@@ -946,9 +952,10 @@ void Bob::log_general_info(const EditorGameBase& egbase) {
 				molog("*  (%i, %i)\n", coords.x, coords.y);
 			}
 		}
+		FORMAT_WARNINGS_OFF;
 		molog("* route: %p\n", stack_[i].route);
-
 		molog("* program: %p\n", stack_[i].route);
+		FORMAT_WARNINGS_ON;
 	}
 }
 

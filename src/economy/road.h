@@ -115,7 +115,7 @@ struct Road : public PlayerImmovable {
 	void log_general_info(const EditorGameBase&) override;
 
 protected:
-	void init(EditorGameBase&) override;
+	bool init(EditorGameBase&) override;
 	void cleanup(EditorGameBase&) override;
 
 	void draw(uint32_t gametime,

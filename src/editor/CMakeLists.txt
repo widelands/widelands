@@ -23,8 +23,6 @@ wl_library(editor
     tools/increase_resources_tool.h
     tools/info_tool.cc
     tools/info_tool.h
-    tools/make_infrastructure_tool.cc
-    tools/make_infrastructure_tool.h
     tools/multi_select.h
     tools/noise_height_tool.cc
     tools/noise_height_tool.h
@@ -108,7 +106,6 @@ wl_library(editor
     scripting_lua_interface
     scripting_lua_table
     ui_basic
-    widelands_ball_of_mud
     wui
     wui_common
     wui_field_overlay_manager

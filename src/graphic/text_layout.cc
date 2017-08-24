@@ -31,6 +31,16 @@
 #include "graphic/text/font_set.h"
 #include "graphic/text_constants.h"
 
+namespace {
+bool is_paragraph(const std::string& text) {
+	return boost::starts_with(text, "<p");
+}
+
+bool is_div(const std::string& text) {
+	return boost::starts_with(text, "<div");
+}
+}  // namespace
+
 void replace_entities(std::string* text) {
 	boost::replace_all(*text, "&gt;", ">");
 	boost::replace_all(*text, "&lt;", "<");
@@ -38,14 +48,16 @@ void replace_entities(std::string* text) {
 	boost::replace_all(*text, "&amp;", "&");  // Must be performed last
 }
 
-uint32_t text_width(const std::string& text, int ptsize) {
+int text_width(const std::string& text, int ptsize) {
 	return UI::g_fh1->render(as_editorfont(text, ptsize - UI::g_fh1->fontset()->size_offset()))
 	   ->width();
 }
 
-uint32_t text_height(const std::string& text, int ptsize) {
-	return UI::g_fh1->render(as_editorfont(text.empty() ? "." : text,
-	                                       ptsize - UI::g_fh1->fontset()->size_offset()))
+int text_height(int ptsize, UI::FontSet::Face face) {
+	return UI::g_fh1->render(as_aligned(UI::g_fh1->fontset()->representative_character(),
+	                                    UI::Align::kLeft,
+	                                    ptsize - UI::g_fh1->fontset()->size_offset(),
+	                                    RGBColor(0, 0, 0), face))
 	   ->height();
 }
 
@@ -145,8 +157,17 @@ std::string as_waresinfo(const std::string& txt) {
 	return f.str();
 }
 
-const Image* autofit_ui_text(const std::string& text, int width, RGBColor color, int fontsize) {
-	const Image* result = UI::g_fh1->render(as_uifont(richtext_escape(text), fontsize, color));
+std::string as_message(const std::string& heading, const std::string& body) {
+	return ((boost::format(
+	            "<rt><p><font size=18 bold=1 color=D1D1D1>%s<br></font></p><vspace gap=6>%s</rt>") %
+	         heading % (is_paragraph(body) || is_div(body) ? body : "<p>" + body + "</p>"))
+	           .str());
+}
+
+std::shared_ptr<const UI::RenderedText>
+autofit_ui_text(const std::string& text, int width, RGBColor color, int fontsize) {
+	std::shared_ptr<const UI::RenderedText> result =
+	   UI::g_fh1->render(as_uifont(richtext_escape(text), fontsize, color));
 	if (width > 0) {  // Autofit
 		for (; result->width() > width && fontsize >= kMinimumFontSize; --fontsize) {
 			result = UI::g_fh1->render(
@@ -162,9 +183,14 @@ namespace UI {
  * This mirrors the horizontal alignment for RTL languages.
  *
  * Do not store this value as it is based on the global font setting.
+ *
+ * If 'checkme' is not empty, mirror the alignment if the first 20 characters contain an RTL
+ * character. Otherwise, mirror if the current fontset is RTL.
  */
-Align mirror_alignment(Align alignment) {
-	if (UI::g_fh1->fontset()->is_rtl()) {
+Align mirror_alignment(Align alignment, const std::string& checkme) {
+	bool do_swap_alignment = checkme.empty() ? UI::g_fh1->fontset()->is_rtl() :
+	                                           i18n::has_rtl_character(checkme.c_str(), 20);
+	if (do_swap_alignment) {
 		switch (alignment) {
 		case Align::kLeft:
 			alignment = Align::kRight;
@@ -187,7 +213,7 @@ Align mirror_alignment(Align alignment) {
  * subsampled rendering - this can lead to blurry texts. That is why we
  * never do float divisions in this function.
  */
-void correct_for_align(Align align, uint32_t w, Vector2f* pt) {
+void correct_for_align(Align align, uint32_t w, Vector2i* pt) {
 
 	if (align == Align::kCenter)
 		pt->x -= w / 2;
@@ -198,7 +224,7 @@ void correct_for_align(Align align, uint32_t w, Vector2f* pt) {
 /**
  * Adjust the y coordinate in 'point 'pt' to vertically center an element with height 'h'.
  */
-void center_vertically(uint32_t h, Vector2f* pt) {
+void center_vertically(uint32_t h, Vector2i* pt) {
 	pt->y -= h / 2;
 }
 }  // namespace UI

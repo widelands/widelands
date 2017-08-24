@@ -24,6 +24,7 @@
 
 #include <boost/test/unit_test.hpp>
 
+#include "base/macros.h"
 #include "io/filesystem/disk_filesystem.h"
 
 #ifdef _WIN32
@@ -45,6 +46,9 @@ static int setenv(const char* envname, const char* envval, int /* overwrite */) 
 // BOOST_CHECK_EQUAL generates an old-style cast usage warning, so ignore
 #pragma GCC diagnostic ignored "-Wold-style-cast"
 #endif
+
+// Triggered by BOOST_AUTO_TEST_CASE
+CLANG_DIAG_OFF("-Wdisabled-macro-expansion")
 
 BOOST_AUTO_TEST_SUITE(FileSystemTests)
 #ifndef _WIN32

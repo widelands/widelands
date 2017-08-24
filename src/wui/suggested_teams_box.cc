@@ -45,12 +45,10 @@ SuggestedTeamsBox::SuggestedTeamsBox(Panel* parent,
      padding_(padding),
      indent_(indent),
      label_height_(g_gr->images().get("images/players/player_position_menu.png")->height() +
-                   padding) {
-	player_icons_.clear();
-	suggested_teams_.clear();
+                   padding),
+     suggested_teams_box_label_(new UI::Textarea(this)),
+     lineup_box_(nullptr) {
 	set_size(max_x, max_y);
-
-	suggested_teams_box_label_ = new UI::Textarea(this);
 	add(suggested_teams_box_label_);
 }
 SuggestedTeamsBox::~SuggestedTeamsBox() {
@@ -119,9 +117,8 @@ void SuggestedTeamsBox::show(
 
 				for (Widelands::PlayerNumber player : team) {
 					assert(player < kMaxPlayers);
-					const Image* player_image = playercolor_image(
-					   player, g_gr->images().get("images/players/player_position_menu.png"),
-					   g_gr->images().get("images/players/player_position_menu_pc.png"));
+					const Image* player_image =
+					   playercolor_image(player, "images/players/player_position_menu.png");
 
 					assert(player_image);
 					player_icon = new UI::Icon(

@@ -162,7 +162,7 @@ class ProductionSite : public Building {
 	MO_DESCR(ProductionSiteDescr)
 
 public:
-	ProductionSite(const ProductionSiteDescr& descr);
+	explicit ProductionSite(const ProductionSiteDescr& descr);
 	virtual ~ProductionSite();
 
 	void log_general_info(const EditorGameBase&) override;
@@ -205,7 +205,7 @@ public:
 
 	InputQueue& inputqueue(DescriptionIndex, WareWorker) override;
 
-	void init(EditorGameBase&) override;
+	bool init(EditorGameBase&) override;
 	void cleanup(EditorGameBase&) override;
 	void act(Game&, uint32_t data) override;
 

@@ -29,8 +29,11 @@
 /**
  * The current version of the in-game network protocol. Client and metaserver
  * protocol versions must match.
+ * Used Versions:
+ * 0: Build 19 and before
+ * 1: Between build 19 and build 20 - IPv6 support added
  */
-#define INTERNET_GAMING_PROTOCOL_VERSION 0
+#define INTERNET_GAMING_PROTOCOL_VERSION 1
 
 /**
  * The default timeout time after which the client tries to resend a package or even finally closes
@@ -89,10 +92,34 @@ static const std::string INTERNET_CLIENT_BOT = "BOT";
  *
  * \note ALL PAYLOADS SHALL BE STRINGS - this is for easier handling and debugging of the
  * communication
- *       between metaserver and client. If an unsigned or signed value has to be send, convert it
+ *       between metaserver and client. If an unsigned or signed value has to be sent, convert it
  * with
- *       boost::lexical_cast<std::string>. Boolean values should be send in form of "true" or
+ *       boost::lexical_cast<std::string>. Boolean values should be sent in form of "true" or
  * "false".
+ */
+
+/**
+ * The nonce:
+ *
+ * The nonce is used on the metaserver to link multiple connections by the same client. This
+ * normally
+ * happens when the client supports IPv4 and IPv6 and connects with both protocol versions. This
+ * way,
+ * the metaserver knows that the clients supports both versions and can show games / offer his game
+ * of/for clients with both protocol versions.
+ *
+ * When a network client connects to the metaserver with (RE)LOGIN he also sends a nonce.
+ * When "another" netclient connects to the metaserver and sends TELL_IP containing the same nonce,
+ * it is considered the same game client connecting with another IP. This way, two connections by
+ * IPv4 and
+ * IPv6 can be matched so the server learns both addresses of the client.
+ *
+ * In the case of registered players, the password can be used instead of a random nonce. The
+ * username alone
+ * can not be used for this, especially not for unregistered users: The metaserver can not
+ * differentiate
+ * between a second connection by the user and an initial login of another user (with the same
+ * name).
  */
 
 /**
@@ -126,8 +153,12 @@ static const std::string IGPCMD_DISCONNECT = "DISCONNECT";
  * \li string:    protocol version
  * \li string:    client name
  * \li string:    build_id of the client
- * \li string:    whether the client wants to login in to a registered account (0 = false, 1 = true)
- * \li string:    password in clear text - only valid if previous was 1
+ * \li string:    whether the client wants to login in to a registered account ("true" or "false" as
+ * string)
+ * \li string:    for registered accounts: password in clear text
+ *                for unregistered users a random nonce to recognized the matching IPv4 and IPv6
+ * connections.
+ *                for an explanation of the nonce, see above.
  *
  * If the metaserver accepts, it replies with a LOGIN command with the following payload:
  * \li string:    client name (might be different to the previously chosen one, if the client did
@@ -150,7 +181,7 @@ static const std::string IGPCMD_LOGIN = "LOGIN";
  * the
  * place it was before - so if the user was in a running game and only lost connection to the
  * metaserver,
- * but not to the game itself, statistics for that game can still be send and saved.
+ * but not to the game itself, statistics for that game can still be sent and saved.
  * To ensure everything is fine, the login information will still be checked + if a client with the
  * name
  * is still listed as online, the metaserver will ping the client and if the client does not answer
@@ -162,7 +193,10 @@ static const std::string IGPCMD_LOGIN = "LOGIN";
  * \li string:    client name - the one the metaserver replied at the first login
  * \li string:    build_id of the client
  * \li string:    whether the client wants to login in to a registered account ("false", "true")
- * \li string:    password in clear text - only valid if previous was 1
+ * \li string:    for registered accounts: password in clear text
+ *                for unregistered users a random nonce to recognized the matching IPv4 and IPv6
+ * connections.
+ *                for an explanation of the nonce, see above.
  *
  * If the metaserver accepts, it replies with a RELOGIN command without any payload.
  *
@@ -173,6 +207,23 @@ static const std::string IGPCMD_LOGIN = "LOGIN";
  * For the case, that the metaserver does not accept the login, it sends a \ref IGPCMD_ERROR "LOGIN"
  */
 static const std::string IGPCMD_RELOGIN = "RELOGIN";
+
+/**
+ * Tells the metaserver about a secondary IP address.
+ *
+ * Assuming the client already has a connection over IPv6 and tries to establish a secondary
+ * connection over IPv4, this is the only message sent.
+ * It should be sent as soon as a connection is established, immediately followed by closing
+ * the connection. No answer from the server should be expected.
+ *
+ * Is sent by the client, with the following payload:
+ * \li string:    protocol version
+ * \li string:    client name - the one the metaserver replied at the first login
+ * \li string:    for registered accounts: password in clear text
+ *                for unregistered users the random nonce used on login
+ *                for an explanation of the nonce, see above.
+ */
+static const std::string IGPCMD_TELL_IP = "TELL_IP";
 
 /**
  * This command is sent by the metaserver if something went wrong.
@@ -189,13 +240,13 @@ static const std::string IGPCMD_RELOGIN = "RELOGIN";
 static const std::string IGPCMD_ERROR = "ERROR";
 
 /**
- * This is send by the metaserver to inform the client, about the metaserver time = time(0). Payload
+ * This is sent by the metaserver to inform the client, about the metaserver time = time(0). Payload
  * \li string:    the server time
  */
 static const std::string IGPCMD_TIME = "TIME";
 
 /**
- * This is send by a superuser client to change the motd. The server has to check the permissions
+ * This is sent by a superuser client to change the motd. The server has to check the permissions
  * and if those
  * allow a motd change has to change the motd and afterwards to broadcast the new motd to all
  * clients.
@@ -207,7 +258,7 @@ static const std::string IGPCMD_TIME = "TIME";
 static const std::string IGPCMD_MOTD = "MOTD";
 
 /**
- * This is send by a superuser client as announcement. The server has to check the permissions and
+ * This is sent by a superuser client as announcement. The server has to check the permissions and
  * if those
  * allow an announcement, the server broadcasts the announcement as system chat to all clients.
  * If the client has no right to change the motd, the server disconnects the client with a
@@ -246,7 +297,7 @@ static const std::string IGPCMD_PONG = "PONG";
  * \li string:    the message
  * \li string:    type ("public", "private", "system")
  *
- * \note system messages are the motd (Send by the metaserver to the client, after login (but not
+ * \note system messages are the motd (Sent by the metaserver to the client, after login (but not
  * relogin)
  *       and after the motd got changed) and announcements by superusers.
  */
@@ -322,7 +373,9 @@ static const std::string IGPCMD_GAME_OPEN = "GAME_OPEN";
  *       client finally closes the connection.
  *
  * Sent by the metaserver to acknowledge the connection request and to submit the ip of the game
- * \li string:    ip of the game.
+ * \li string:    primary ip of the game.
+ * \li string:    whether a secondary ip for the game follows ("true" or "false" as string)
+ * \li string:    secondary ip of the game - only valid if previous was true
  * \note as soon as this message is sent, the metaserver will list the client as connected to the
  * game.
  */
@@ -345,11 +398,11 @@ static const std::string IGPCMD_GAME_DISCONNECT = "GAME_DISCONNECT";
 
 /**
  * Sent by the game hosting client to announce the start of the game. No payload.
- * \note the hosting client will wait for the metaserver answer,to ensure the game is listed. If
+ * \note the hosting client will wait for the metaserver answer, to ensure the game is listed. If
  * even
  *       retries are not answered, the connection to the metaserver will be closed and a message
  * shall be
- *       send in the newly started game.
+ *       sent in the newly started game.
  *
  * Sent by the metaserver to acknowledge the start without payload.
  */

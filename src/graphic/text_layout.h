@@ -24,6 +24,7 @@
 
 #include "graphic/align.h"
 #include "graphic/color.h"
+#include "graphic/font_handler1.h"
 #include "graphic/image.h"
 #include "graphic/text/font_set.h"
 #include "graphic/text_constants.h"
@@ -38,14 +39,13 @@ void replace_entities(std::string* text);
   * Returns the exact width of the text rendered as editorfont for the given font size.
   * This function is inefficient; only call when we need the exact width.
   */
-
-uint32_t text_width(const std::string& text, int ptsize);
+int text_width(const std::string& text, int ptsize = UI_FONT_SIZE_SMALL);
 
 /**
-  * Returns the exact height of the text rendered as editorfont for the given font size.
+  * Returns the exact height of the text rendered for the given font size and face.
   * This function is inefficient; only call when we need the exact height.
   */
-uint32_t text_height(const std::string& text, int ptsize);
+int text_height(int ptsize = UI_FONT_SIZE_SMALL, UI::FontSet::Face face = UI::FontSet::Face::kSans);
 
 /**
  * Checks it the given string is RichText or not. Does not do validity checking.
@@ -87,6 +87,7 @@ std::string as_aligned(const std::string& txt,
 std::string as_tooltip(const std::string&);
 std::string as_waresinfo(const std::string&);
 std::string as_game_tip(const std::string&);
+std::string as_message(const std::string& heading, const std::string& body);
 
 /**
   * Render 'text' as ui_font. If 'width' > 0 and the rendered image is too
@@ -94,17 +95,17 @@ std::string as_game_tip(const std::string&);
   * smaller until it fits 'width'. The resulting font size will not go below
   * 'kMinimumFontSize'.
   */
-const Image* autofit_ui_text(const std::string& text,
-                             int width = 0,
-                             RGBColor color = UI_FONT_CLR_FG,
-                             int fontsize = UI_FONT_SIZE_SMALL);
+std::shared_ptr<const UI::RenderedText> autofit_ui_text(const std::string& text,
+                                                        int width = 0,
+                                                        RGBColor color = UI_FONT_CLR_FG,
+                                                        int fontsize = UI_FONT_SIZE_SMALL);
 
 namespace UI {
 
-Align mirror_alignment(Align alignment);
+Align mirror_alignment(Align alignment, const std::string& checkme = "");
 
-void center_vertically(uint32_t h, Vector2f* pt);
-void correct_for_align(Align, uint32_t w, Vector2f* pt);
+void center_vertically(uint32_t h, Vector2i* pt);
+void correct_for_align(Align, uint32_t w, Vector2i* pt);
 
 }  // namespace UI
 

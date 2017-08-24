@@ -39,7 +39,7 @@ class PartiallyFinishedBuilding : public Building {
 	friend struct MapBuildingPacket;
 
 public:
-	PartiallyFinishedBuilding(const BuildingDescr& building_descr);
+	explicit PartiallyFinishedBuilding(const BuildingDescr& building_descr);
 
 	virtual void set_building(const BuildingDescr&);
 
@@ -47,7 +47,7 @@ public:
 	uint32_t get_playercaps() const override;
 	const Image* representative_image() const override;
 	void cleanup(EditorGameBase&) override;
-	void init(EditorGameBase&) override;
+	bool init(EditorGameBase&) override;
 	void set_economy(Economy*) override;
 
 	uint32_t get_nrwaresqueues() {

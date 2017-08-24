@@ -100,15 +100,16 @@ static std::string const base_immovable_name = "unknown";
 void BaseImmovable::set_position(EditorGameBase& egbase, const Coords& c) {
 	assert(c);
 
-	Map& map = egbase.map();
-	FCoords f = map.get_fcoords(c);
+	Map* map = egbase.mutable_map();
+	FCoords f = map->get_fcoords(c);
 	if (f.field->immovable && f.field->immovable != this)
 		f.field->immovable->remove(egbase);
 
 	f.field->immovable = this;
 
-	if (get_size() >= SMALL)
-		map.recalc_for_field_area(egbase.world(), Area<FCoords>(f, 2));
+	if (get_size() >= SMALL) {
+		map->recalc_for_field_area(egbase.world(), Area<FCoords>(f, 2));
+	}
 }
 
 /**
@@ -117,8 +118,8 @@ void BaseImmovable::set_position(EditorGameBase& egbase, const Coords& c) {
  * Only call this during cleanup.
 */
 void BaseImmovable::unset_position(EditorGameBase& egbase, const Coords& c) {
-	Map& map = egbase.map();
-	FCoords const f = map.get_fcoords(c);
+	Map* map = egbase.mutable_map();
+	FCoords const f = map->get_fcoords(c);
 
 	// this is to help to debug failing assertion below (see bug 1542238)
 	if (f.field->immovable != this) {
@@ -131,14 +132,15 @@ void BaseImmovable::unset_position(EditorGameBase& egbase, const Coords& c) {
 
 	f.field->immovable = nullptr;
 	reinstate_portspace_anchor(egbase, c);
-	egbase.inform_players_about_immovable(f.field - &map[0], nullptr);
+	egbase.inform_players_about_immovable(f.field - &(*map)[0], nullptr);
 
-	if (get_size() >= SMALL)
-		map.recalc_for_field_area(egbase.world(), Area<FCoords>(f, 2));
+	if (get_size() >= SMALL) {
+		map->recalc_for_field_area(egbase.world(), Area<FCoords>(f, 2));
+	}
 }
 
 void BaseImmovable::reinstate_portspace_anchor(EditorGameBase& egbase, const Coords& coords) {
-	Map* map = egbase.get_map();
+	Map* map = egbase.mutable_map();
 	if (map->is_port_space(coords) && descr().name() != "portspace_anchor") {
 		const DescriptionIndex imm_idx = egbase.world().get_immovable_index("portspace_anchor");
 		if (imm_idx != Widelands::INVALID_INDEX) {
@@ -406,7 +408,7 @@ void Immovable::increment_program_pointer() {
 /**
  * Actually initialize the immovable.
 */
-void Immovable::init(EditorGameBase& egbase) {
+bool Immovable::init(EditorGameBase& egbase) {
 	BaseImmovable::init(egbase);
 
 	set_position(egbase, position_);
@@ -423,6 +425,7 @@ void Immovable::init(EditorGameBase& egbase) {
 	if (upcast(Game, game, &egbase)) {
 		switch_program(*game, "program");
 	}
+	return true;
 }
 
 /**
@@ -996,7 +999,7 @@ ImmovableProgram::ActSeed::ActSeed(char* parameters, ImmovableDescr& descr) {
 				probability = value;
 				//  fallthrough
 			}
-			/* no break */
+				FALLS_THROUGH;
 			case '\0':
 				goto end;
 			default:
@@ -1237,8 +1240,7 @@ PlayerImmovable::PlayerImmovable(const MapObjectDescr& mo_descr)
 */
 PlayerImmovable::~PlayerImmovable() {
 	if (workers_.size())
-		log("PlayerImmovable::~PlayerImmovable: %lu workers left!\n",
-		    static_cast<long unsigned int>(workers_.size()));
+		log("PlayerImmovable::~PlayerImmovable: %" PRIuS " workers left!\n", workers_.size());
 }
 
 /**
@@ -1300,8 +1302,8 @@ void PlayerImmovable::set_owner(Player* new_owner) {
 /**
  * Initialize the immovable.
 */
-void PlayerImmovable::init(EditorGameBase& egbase) {
-	BaseImmovable::init(egbase);
+bool PlayerImmovable::init(EditorGameBase& egbase) {
+	return BaseImmovable::init(egbase);
 }
 
 /**
@@ -1339,10 +1341,14 @@ void PlayerImmovable::receive_worker(Game&, Worker& worker) {
 void PlayerImmovable::log_general_info(const EditorGameBase& egbase) {
 	BaseImmovable::log_general_info(egbase);
 
+	FORMAT_WARNINGS_OFF;
 	molog("this: %p\n", this);
 	molog("owner_: %p\n", owner_);
+	FORMAT_WARNINGS_ON;
 	molog("player_number: %i\n", owner_->player_number());
+	FORMAT_WARNINGS_OFF;
 	molog("economy_: %p\n", economy_);
+	FORMAT_WARNINGS_ON;
 }
 
 constexpr uint8_t kCurrentPacketVersionPlayerImmovable = 1;

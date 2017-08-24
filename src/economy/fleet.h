@@ -75,7 +75,7 @@ struct Fleet : MapObject {
 
 	const FleetDescr& descr() const;
 
-	Fleet(Player& player);
+	explicit Fleet(Player& player);
 
 	Player* get_owner() const {
 		return &owner_;
@@ -91,7 +91,7 @@ struct Fleet : MapObject {
 
 	bool active() const;
 
-	void init(EditorGameBase&) override;
+	bool init(EditorGameBase&) override;
 	void cleanup(EditorGameBase&) override;
 	void update(EditorGameBase&);
 
@@ -99,6 +99,7 @@ struct Fleet : MapObject {
 	void remove_ship(EditorGameBase& egbase, Ship* ship);
 	void add_port(EditorGameBase& egbase, PortDock* port);
 	void remove_port(EditorGameBase& egbase, PortDock* port);
+	bool has_ports();
 
 	void log_general_info(const EditorGameBase&) override;
 

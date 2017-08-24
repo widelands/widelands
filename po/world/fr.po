@@ -4,6 +4,7 @@
 # Translators:
 # adrien vigneron <adrienvigneron@ml1.net>, 2015-2016
 # GunChleoc, 2016
+# Gwendal D <samuel.weber@normalesup.org>, 2017
 # Jaypad <ju-ju@nataju.fr>, 2016
 # Renaud Bouchard, 2015,2017
 # syl_, 2016
@@ -11,9 +12,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-01-28 21:57+0000\n"
-"PO-Revision-Date: 2017-01-30 10:51+0000\n"
-"Last-Translator: Renaud Bouchard\n"
+"POT-Creation-Date: 2017-04-28 06:01+0000\n"
+"PO-Revision-Date: 2017-05-01 17:52+0000\n"
+"Last-Translator: Gwendal D <samuel.weber@normalesup.org>\n"
 "Language-Team: French (http://www.transifex.com/widelands/widelands/language/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -21,67 +22,67 @@ msgstr ""
 "Language: fr\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: ../../data/world/critters/badger/init.lua:14
+#: ../../data/world/critters/badger/init.lua:15
 msgid "Badger"
 msgstr "Blaireau"
 
-#: ../../data/world/critters/brownbear/init.lua:14
+#: ../../data/world/critters/brownbear/init.lua:15
 msgid "Brown bear"
 msgstr "Ours brun"
 
-#: ../../data/world/critters/bunny/init.lua:13
+#: ../../data/world/critters/bunny/init.lua:14
 msgid "Bunny"
 msgstr "Lapin"
 
-#: ../../data/world/critters/chamois/init.lua:14
+#: ../../data/world/critters/chamois/init.lua:15
 msgid "Chamois"
 msgstr "Chamois"
 
-#: ../../data/world/critters/deer/init.lua:14
+#: ../../data/world/critters/deer/init.lua:15
 msgid "Deer"
 msgstr "Cerf"
 
-#: ../../data/world/critters/duck/init.lua:18
+#: ../../data/world/critters/duck/init.lua:19
 msgid "Duck"
 msgstr "Canard"
 
-#: ../../data/world/critters/elk/init.lua:19
+#: ../../data/world/critters/elk/init.lua:20
 msgid "Elk"
 msgstr "Élan"
 
-#: ../../data/world/critters/fox/init.lua:19
+#: ../../data/world/critters/fox/init.lua:20
 msgid "Fox"
 msgstr "Renard"
 
-#: ../../data/world/critters/lynx/init.lua:14
+#: ../../data/world/critters/lynx/init.lua:16
 msgid "Lynx"
 msgstr "Lynx"
 
-#: ../../data/world/critters/marten/init.lua:14
+#: ../../data/world/critters/marten/init.lua:15
 msgid "Marten"
 msgstr "Martre"
 
-#: ../../data/world/critters/reindeer/init.lua:14
+#: ../../data/world/critters/reindeer/init.lua:16
 msgid "Reindeer"
 msgstr "Renne"
 
-#: ../../data/world/critters/sheep/init.lua:18
+#: ../../data/world/critters/sheep/init.lua:19
 msgid "Sheep"
 msgstr "Mouton"
 
-#: ../../data/world/critters/stag/init.lua:19
+#: ../../data/world/critters/stag/init.lua:20
 msgid "Stag"
 msgstr "Cerf"
 
-#: ../../data/world/critters/wildboar/init.lua:18
+#: ../../data/world/critters/wildboar/init.lua:19
 msgid "Wild boar"
 msgstr "Sanglier"
 
-#: ../../data/world/critters/wisent/init.lua:14
+#: ../../data/world/critters/wisent/init.lua:15
 msgid "Wisent"
 msgstr "Bison"
 
-#: ../../data/world/critters/wolf/init.lua:19
+#: ../../data/world/critters/wolf/init.lua:20
 msgid "Wolf"
 msgstr "Loup"
 
@@ -179,14 +180,14 @@ msgstr "Rochers 4"
 #: ../../data/world/immovables/rocks/greenland_rocks5/init.lua:12
 #: ../../data/world/immovables/rocks/winterland_rocks5/init.lua:12
 msgid "Rocks 5"
-msgstr "Rocks 5"
+msgstr "Rochers 5"
 
 #: ../../data/world/immovables/rocks/blackland_rocks6/init.lua:12
 #: ../../data/world/immovables/rocks/desert_rocks6/init.lua:12
 #: ../../data/world/immovables/rocks/greenland_rocks6/init.lua:12
 #: ../../data/world/immovables/rocks/winterland_rocks6/init.lua:12
 msgid "Rocks 6"
-msgstr "Rock 6"
+msgstr "Rochers 6"
 
 #: ../../data/world/immovables/ruin3/init.lua:5
 #: ../../data/world/immovables/ruin4/init.lua:5
@@ -300,7 +301,7 @@ msgstr "Bouleau (Jeune arbre)"
 
 #: ../../data/world/immovables/trees/birch/init.lua:35
 msgid "Birch (Pole)"
-msgstr "Bouleau (Baton)"
+msgstr "Bouleau (Arbuste)"
 
 #: ../../data/world/immovables/trees/birch/init.lua:58
 msgid "Birch (Mature)"
@@ -317,7 +318,7 @@ msgstr "Bouleau"
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../data/world/immovables/trees/cirrus/init.lua:13
 msgid "Cirrus Tree (Sapling)"
-msgstr "Sapin Cirrus (jeune pousse)"
+msgstr "Sapin Cirrus (Jeune arbre)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../data/world/immovables/trees/cirrus/init.lua:37
@@ -354,19 +355,19 @@ msgstr "Arbre abattu"
 
 #: ../../data/world/immovables/trees/larch/init.lua:12
 msgid "Larch (Sapling)"
-msgstr "Mélèze (jeune arbre)"
+msgstr "Mélèze (Jeune arbre)"
 
 #: ../../data/world/immovables/trees/larch/init.lua:35
 msgid "Larch (Pole)"
-msgstr "Mélèze (baton)"
+msgstr "Mélèze (Arbuste)"
 
 #: ../../data/world/immovables/trees/larch/init.lua:58
 msgid "Larch (Mature)"
-msgstr "Mélèze (mature)"
+msgstr "Mélèze (Mature)"
 
 #: ../../data/world/immovables/trees/larch/init.lua:81
 msgid "Larch (Old)"
-msgstr "Mélèze (vieux)"
+msgstr "Mélèze (Vieux)"
 
 #: ../../data/world/immovables/trees/larch/init.lua:82
 msgid "Larch"
@@ -375,7 +376,7 @@ msgstr "Mélèze"
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../data/world/immovables/trees/liana/init.lua:13
 msgid "Liana Tree (Sapling)"
-msgstr "Arbre liane (Jeune pousse)"
+msgstr "Arbre liane (Jeune arbre)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../data/world/immovables/trees/liana/init.lua:37
@@ -399,19 +400,19 @@ msgstr "Arbre à lianes"
 
 #: ../../data/world/immovables/trees/maple/init.lua:12
 msgid "Maple (Sapling)"
-msgstr "Erable (Jeune arbre)"
+msgstr "Érable (Jeune arbre)"
 
 #: ../../data/world/immovables/trees/maple/init.lua:35
 msgid "Maple (Pole)"
-msgstr "Erable (Baton)"
+msgstr "Érable (Arbuste)"
 
 #: ../../data/world/immovables/trees/maple/init.lua:58
 msgid "Maple (Mature)"
-msgstr "Erable (Mature)"
+msgstr "Érable (Mature)"
 
 #: ../../data/world/immovables/trees/maple/init.lua:81
 msgid "Maple (Old)"
-msgstr "Erable (Vieux)"
+msgstr "Érable (Vieux)"
 
 #: ../../data/world/immovables/trees/maple/init.lua:82
 msgid "Maple"
@@ -420,7 +421,7 @@ msgstr "Érable"
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../data/world/immovables/trees/mushroom_dark/init.lua:13
 msgid "Dark Mushroom Tree (Sapling)"
-msgstr "Champignon boisé sombre (Jeune pousse)"
+msgstr "Champignon boisé sombre (Jeune arbre)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../data/world/immovables/trees/mushroom_dark/init.lua:37
@@ -445,7 +446,7 @@ msgstr "Arbre à champignons noirs"
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../data/world/immovables/trees/mushroom_green/init.lua:13
 msgid "Green Mushroom Tree (Sapling)"
-msgstr "Champignon boisé vert (Jeune pousse)"
+msgstr "Champignon boisé vert (Jeune arbre)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../data/world/immovables/trees/mushroom_green/init.lua:37
@@ -470,7 +471,7 @@ msgstr "Arbre à champignons verts"
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../data/world/immovables/trees/mushroom_red/init.lua:13
 msgid "Red Mushroom Tree (Sapling)"
-msgstr "Champignon boisé rouge (Jeune pousse)"
+msgstr "Champignon boisé rouge (Jeune arbre)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../data/world/immovables/trees/mushroom_red/init.lua:37
@@ -498,7 +499,7 @@ msgstr "Chêne (Jeune arbre)"
 
 #: ../../data/world/immovables/trees/oak/init.lua:35
 msgid "Oak (Pole)"
-msgstr "Chêne (Baton)"
+msgstr "Chêne (Arbuste)"
 
 #: ../../data/world/immovables/trees/oak/init.lua:58
 msgid "Oak (Mature)"
@@ -534,7 +535,7 @@ msgstr "Palmier de Palmyre"
 
 #: ../../data/world/immovables/trees/palm_coconut/init.lua:12
 msgid "Coconut Palm (Sapling)"
-msgstr "Cocotier (Jeune pousse)"
+msgstr "Cocotier (Jeune arbre)"
 
 #: ../../data/world/immovables/trees/palm_coconut/init.lua:35
 msgid "Coconut Palm (Pole)"
@@ -554,7 +555,7 @@ msgstr "Cocotier"
 
 #: ../../data/world/immovables/trees/palm_date/init.lua:12
 msgid "Date Palm (Sapling)"
-msgstr "Palmier Dattier (Jeune pousse)"
+msgstr "Palmier Dattier (Jeune arbre)"
 
 #: ../../data/world/immovables/trees/palm_date/init.lua:35
 msgid "Date Palm (Pole)"
@@ -574,7 +575,7 @@ msgstr "Palmier Dattier"
 
 #: ../../data/world/immovables/trees/palm_oil/init.lua:12
 msgid "Oil Palm (Sapling)"
-msgstr "Palmier à huile (Jeune pousse)"
+msgstr "Palmier à huile (Jeune arbre)"
 
 #: ../../data/world/immovables/trees/palm_oil/init.lua:35
 msgid "Oil Palm (Pole)"
@@ -594,7 +595,7 @@ msgstr "Palmier à huile"
 
 #: ../../data/world/immovables/trees/palm_roystonea/init.lua:12
 msgid "Roystonea regia Palm (Sapling)"
-msgstr "Palmier Royal (Jeune pousse)"
+msgstr "Palmier Royal (Jeune arbre)"
 
 #: ../../data/world/immovables/trees/palm_roystonea/init.lua:35
 msgid "Roystonea regia Palm (Pole)"
@@ -614,19 +615,19 @@ msgstr "Palmier Royal"
 
 #: ../../data/world/immovables/trees/rowan/init.lua:12
 msgid "Rowan (Sapling)"
-msgstr "Sorbier des oiseleurs (jeune arbre)"
+msgstr "Sorbier des oiseleurs (Jeune arbre)"
 
 #: ../../data/world/immovables/trees/rowan/init.lua:35
 msgid "Rowan (Pole)"
-msgstr "Sorbier des oiseleurs (baton)"
+msgstr "Sorbier des oiseleurs (Arbuste)"
 
 #: ../../data/world/immovables/trees/rowan/init.lua:58
 msgid "Rowan (Mature)"
-msgstr "Sorbier des oiseleurs (mature)"
+msgstr "Sorbier des oiseleurs (Mature)"
 
 #: ../../data/world/immovables/trees/rowan/init.lua:84
 msgid "Rowan (Old)"
-msgstr "Sorbier des oiseleurs (vieux)"
+msgstr "Sorbier des oiseleurs (Vieux)"
 
 #: ../../data/world/immovables/trees/rowan/init.lua:85
 msgid "Rowan"
@@ -634,19 +635,19 @@ msgstr "Sorbier des oiseleurs"
 
 #: ../../data/world/immovables/trees/spruce/init.lua:12
 msgid "Spruce (Sapling)"
-msgstr "Epicéa (Jeune arbre)"
+msgstr "Épicéa (Jeune arbre)"
 
 #: ../../data/world/immovables/trees/spruce/init.lua:35
 msgid "Spruce (Pole)"
-msgstr "Epicéa (Baton)"
+msgstr "Épicéa (Arbuste)"
 
 #: ../../data/world/immovables/trees/spruce/init.lua:58
 msgid "Spruce (Mature)"
-msgstr "Epicéa (Mature)"
+msgstr "Épicéa (Mature)"
 
 #: ../../data/world/immovables/trees/spruce/init.lua:81
 msgid "Spruce (Old)"
-msgstr "Epicéa (Vieux)"
+msgstr "Épicéa (Vieux)"
 
 #: ../../data/world/immovables/trees/spruce/init.lua:82
 msgid "Spruce"
@@ -655,7 +656,7 @@ msgstr "Épicéa"
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../data/world/immovables/trees/twine/init.lua:13
 msgid "Twine Tree (Sapling)"
-msgstr "Arbre à ficelle (Jeune pousse)"
+msgstr "Arbre à ficelle (Jeune arbre)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../data/world/immovables/trees/twine/init.lua:37
@@ -680,7 +681,7 @@ msgstr "Arbre à ficelle"
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../data/world/immovables/trees/umbrella_green/init.lua:13
 msgid "Green Umbrella Tree (Sapling)"
-msgstr "Arbre ombrelle vert (Jeune pousse)"
+msgstr "Arbre ombrelle vert (Jeune arbre)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../data/world/immovables/trees/umbrella_green/init.lua:37
@@ -705,7 +706,7 @@ msgstr "Arbre ombrelle vert"
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../data/world/immovables/trees/umbrella_red/init.lua:13
 msgid "Red Umbrella Tree (Sapling)"
-msgstr "Arbre ombrelle rouge (Jeune pousse)"
+msgstr "Arbre ombrelle rouge (Jeune arbre)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../data/world/immovables/trees/umbrella_red/init.lua:37
@@ -727,62 +728,62 @@ msgstr "Arbre ombrelle rouge (Vieux)"
 msgid "Red Umbrella Tree"
 msgstr "Arbre ombrelle rouge"
 
-#: ../../data/world/init.lua:11
+#: ../../data/world/init.lua:19
 msgid "Miscellaneous"
 msgstr "Divers"
 
-#: ../../data/world/init.lua:18
+#: ../../data/world/init.lua:26
 msgid "Artifacts"
 msgstr "Artefacts"
 
-#: ../../data/world/init.lua:18
+#: ../../data/world/init.lua:26
 msgid "These immovables are used by the win condition “Artifacts”."
-msgstr "Ces objets inamovibles sont utilisés dans condition de victoire «&nbsp;Artefacts&nbsp;»"
+msgstr "Ces objets inamovibles sont utilisés par la condition de victoire « Artefacts »."
 
-#: ../../data/world/init.lua:25
+#: ../../data/world/init.lua:33
 msgid "Plants"
 msgstr "Plantes"
 
-#: ../../data/world/init.lua:32
+#: ../../data/world/init.lua:40
 msgid "Standing Stones"
-msgstr "Rochers"
+msgstr "Pierres dressées"
 
-#: ../../data/world/init.lua:39
+#: ../../data/world/init.lua:47
 msgid "Rocks"
 msgstr "Rochers"
 
-#: ../../data/world/init.lua:46
+#: ../../data/world/init.lua:54
 msgid "Dead Trees"
 msgstr "Arbres morts"
 
-#: ../../data/world/init.lua:53
+#: ../../data/world/init.lua:61
 msgid "Coniferous Trees"
 msgstr "Arbres conifères"
 
-#: ../../data/world/init.lua:60
+#: ../../data/world/init.lua:68
 msgid "Deciduous Trees"
 msgstr "Arbres à feuilles caduques"
 
-#: ../../data/world/init.lua:67
+#: ../../data/world/init.lua:75
 msgid "Palm Trees"
 msgstr "Palmiers"
 
-#: ../../data/world/init.lua:74
+#: ../../data/world/init.lua:82
 msgid "Wasteland Trees"
 msgstr "Arbres de terres en friches"
 
 #. TRANSLATORS: A category in the editor for placing animals on the map.
-#: ../../data/world/init.lua:82
+#: ../../data/world/init.lua:90
 msgid "Herbivores"
 msgstr "Herbivores"
 
 #. TRANSLATORS: A category in the editor for placing animals on the map.
-#: ../../data/world/init.lua:90
+#: ../../data/world/init.lua:98
 msgid "Carnivores"
 msgstr "Carnivores"
 
 #. TRANSLATORS: A category in the editor for placing animals on the map.
-#: ../../data/world/init.lua:98
+#: ../../data/world/init.lua:106
 msgid "Aquatic"
 msgstr "Aquatique"
 

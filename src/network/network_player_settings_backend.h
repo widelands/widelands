@@ -25,7 +25,7 @@
 
 struct NetworkPlayerSettingsBackend {
 
-	NetworkPlayerSettingsBackend(GameSettingsProvider* const settings) : s(settings) {
+	explicit NetworkPlayerSettingsBackend(GameSettingsProvider* const settings) : s(settings) {
 		for (uint8_t i = 0; i < kMaxPlayers; ++i)
 			shared_in_tribe[i] = std::string();
 	}
@@ -43,7 +43,7 @@ struct NetworkPlayerSettingsBackend {
 
 	GameSettingsProvider* const s;
 	std::string shared_in_tribe[kMaxPlayers];
-	bool tribe_selection_blocked;
+	bool tribe_selection_blocked = false;
 
 private:
 	void toggle_shared_in(uint8_t id);

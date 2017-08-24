@@ -70,14 +70,15 @@ protected:
 	int32_t get_right_column_w(int32_t x);
 
 	// UI coordinates and spacers
-	const int32_t padding_;  // Common padding between panels
-	const int32_t indent_;   // Indent for elements below labels
-	const int32_t label_height_;
-	const int32_t right_column_margin_;  // X margins of the right column
-	int32_t tablex_, tabley_, tablew_, tableh_;
-	int32_t right_column_x_;
-	int32_t buty_, butw_, buth_;  // Button dimensions
-	int32_t right_column_tab_;
+	const int32_t padding_ = 4;  // Common padding between panels
+	const int32_t indent_ = 10;  // Indent for elements below labels
+	const int32_t label_height_ = 20;
+	const int32_t right_column_margin_ = 15;  // X margins of the right column
+	// These are set by the layout() function.
+	int32_t tablex_, tabley_, tablew_, tableh_ = 0;
+	int32_t right_column_x_ = 0;
+	int32_t buty_, butw_, buth_ = 0;  // Button dimensions
+	int32_t right_column_tab_ = 0;
 
 	// Main buttons
 	UI::Button back_;

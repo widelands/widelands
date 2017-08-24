@@ -458,7 +458,7 @@ int LuaPlayerBase::place_flag(lua_State* L) {
 */
 int LuaPlayerBase::place_road(lua_State* L) {
 	EditorGameBase& egbase = get_egbase(L);
-	Map& map = egbase.map();
+	const Map& map = egbase.map();
 
 	Flag* starting_flag = (*get_user_class<LuaMaps::LuaFlag>(L, 2))->get(L, egbase);
 	Coords current = starting_flag->get_position();

@@ -65,7 +65,8 @@ static char const* falseWords[FALSE_WORDS] = {
 
 Profile g_options(Profile::err_log);
 
-Section::Value::Value(const string& nname, const char* const nval) : used_(false), name_(nname) {
+Section::Value::Value(const std::string& nname, const char* const nval)
+   : used_(false), name_(nname) {
 	set_string(nval);
 }
 
@@ -443,6 +444,10 @@ void Section::set_int(char const* const name, int32_t const value) {
 	set_string(name, std::to_string(value));
 }
 
+void Section::set_natural(char const* const name, uint32_t const value) {
+	set_string(name, std::to_string(static_cast<int64_t>(value)));
+}
+
 void Section::set_string(char const* const name, char const* string) {
 	create_val(name, string).mark_used();
 }
@@ -754,12 +759,20 @@ void Profile::read(char const* const filename, char const* const global_section,
 /**
  * Writes all sections out to the given file.
  * If used_only is true, only used sections and keys are written to the file.
+ * comment is optional text to be put to second line
  */
-void Profile::write(char const* const filename, bool const used_only, FileSystem& fs) {
+void Profile::write(char const* const filename,
+                    bool const used_only,
+                    FileSystem& fs,
+                    char const* const comment) {
 	FileWrite fw;
 
 	fw.print_f(
 	   "# Automatically created by Widelands %s (%s)\n", build_id().c_str(), build_type().c_str());
+
+	if (comment) {
+		fw.print_f("# %s\n", comment);
+	}
 
 	for (const Section& temp_section : sections_) {
 		if (used_only && !temp_section.is_used())

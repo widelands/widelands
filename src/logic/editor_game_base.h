@@ -36,7 +36,7 @@
 namespace UI {
 struct ProgressWindow;
 }
-struct FullscreenMenuLaunchGame;
+class FullscreenMenuLaunchGame;
 class InteractiveBase;
 class InteractiveGameBase;  // TODO(GunChleoc): Get rid
 
@@ -78,22 +78,17 @@ struct NoteFieldPossession {
 class EditorGameBase {
 public:
 	friend class InteractiveBase;
-	friend struct FullscreenMenuLaunchGame;
+	friend class FullscreenMenuLaunchGame;
 	friend struct GameClassPacket;
 
-	EditorGameBase(LuaInterface* lua);
+	explicit EditorGameBase(LuaInterface* lua);
 	virtual ~EditorGameBase();
 
-	void set_map(Map*);
-	// TODO(sirver): this should just be const Map& map() and Map* mutable_map().
-	Map& map() const {
-		return *map_;
-	}
-	Map* get_map() {
+	const Map& map() const {
 		return map_;
 	}
-	Map& get_map() const {
-		return *map_;
+	Map* mutable_map() {
+		return &map_;
 	}
 	const ObjectManager& objects() const {
 		return objects_;
@@ -160,13 +155,6 @@ public:
 	InteractiveBase* get_ibase() const {
 		return ibase_.get();
 	}
-
-	// safe system for storing pointers to non-MapObject C++ objects
-	// unlike objects in the ObjectManager, these pointers need not be
-	// synchronized across the network, and they are not saved in savegames
-	uint32_t add_trackpointer(void*);
-	void* get_trackpointer(uint32_t serial);
-	void remove_trackpointer(uint32_t serial);
 
 	void inform_players_about_ownership(MapIndex, PlayerNumber);
 	void inform_players_about_immovable(MapIndex, MapObjectDescr const*);
@@ -265,10 +253,7 @@ private:
 	std::unique_ptr<World> world_;
 	std::unique_ptr<Tribes> tribes_;
 	std::unique_ptr<InteractiveBase> ibase_;
-	Map* map_;
-
-	uint32_t lasttrackserial_;
-	std::map<uint32_t, void*> trackpointers_;
+	Map map_;
 
 	DISALLOW_COPY_AND_ASSIGN(EditorGameBase);
 };

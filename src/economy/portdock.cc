@@ -144,7 +144,7 @@ void PortDock::draw(uint32_t, const TextToDraw, const Vector2f&, float, RenderTa
 	// do nothing
 }
 
-void PortDock::init(EditorGameBase& egbase) {
+bool PortDock::init(EditorGameBase& egbase) {
 	PlayerImmovable::init(egbase);
 
 	for (const Coords& coords : dockpoints_) {
@@ -152,6 +152,7 @@ void PortDock::init(EditorGameBase& egbase) {
 	}
 
 	init_fleet(egbase);
+	return true;
 }
 
 /**
@@ -336,7 +337,6 @@ void PortDock::ship_arrived(Game& game, Ship& ship) {
 			// The expedition goods are now on the ship, so from now on it is independent from the port
 			// and thus we switch the port to normal, so we could even start a new expedition,
 			cancel_expedition(game);
-			Notifications::publish(NoteShipWindow(ship.serial(), NoteShipWindow::Action::kRefresh));
 			return fleet_->update(game);
 		}
 	}

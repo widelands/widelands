@@ -75,7 +75,7 @@ class PortDock : public PlayerImmovable {
 public:
 	const PortdockDescr& descr() const;
 
-	PortDock(Warehouse* warehouse);
+	explicit PortDock(Warehouse* warehouse);
 	~PortDock() override;
 
 	void add_position(Widelands::Coords where);
@@ -102,7 +102,7 @@ public:
 	          float scale,
 	          RenderTarget* dst) override;
 
-	void init(EditorGameBase&) override;
+	bool init(EditorGameBase&) override;
 	void cleanup(EditorGameBase&) override;
 
 	void add_neighbours(std::vector<RoutingNodeNeighbour>& neighbours);

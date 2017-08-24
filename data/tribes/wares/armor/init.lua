@@ -10,7 +10,10 @@
 -- ``data/tribes/wares/<ware_name>/init.lua``.
 -- The ware will also need its help texts, which are defined in
 -- ``data/tribes/wares/<ware_name>/helptexts.lua``
-
+--
+-- Fetching the helptext for a ware depends on the current tribe. So, best copy
+-- the function out of ``data/tribes/wares/bread_paddle/helptexts.lua``
+-- and use it as a base for creating your ware's helptexts.
 
 dirname = path.dirname(__file__)
 
@@ -42,7 +45,7 @@ dirname = path.dirname(__file__)
 --
 --    **animations**: A table containing all animations for this ware.
 --    Wares have an "idle" animation.
-
+--
 tribes:new_ware_type {
    msgctxt = "ware",
    name = "armor",

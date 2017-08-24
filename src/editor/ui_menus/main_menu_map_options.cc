@@ -46,9 +46,7 @@ MainMenuMapOptions::MainMenuMapOptions(EditorInteractive& parent, bool modal)
    : UI::Window(&parent, "map_options", 0, 0, 350, parent.get_inner_h() - 80, _("Map Options")),
      padding_(4),
      indent_(10),
-     labelh_(
-        UI::g_fh1->render(as_uifont(UI::g_fh1->fontset()->representative_character()))->height() +
-        4),
+     labelh_(text_height() + 4),
      checkbox_space_(25),
      butw_((get_inner_w() - 3 * padding_) / 2),
      max_w_(get_inner_w() - 2 * padding_),
@@ -69,7 +67,7 @@ MainMenuMapOptions::MainMenuMapOptions(EditorInteractive& parent, bool modal)
              g_gr->images().get("images/ui_basic/but1.png"),
              _("Cancel")),
      tab_box_(this, padding_, padding_, UI::Box::Vertical, max_w_, get_inner_h(), 0),
-     tabs_(&tab_box_, 0, 0, nullptr),
+     tabs_(&tab_box_, nullptr),
 
      main_box_(&tabs_, padding_, padding_, UI::Box::Vertical, max_w_, get_inner_h(), 0),
      tags_box_(&tabs_, padding_, padding_, UI::Box::Vertical, max_w_, get_inner_h(), 0),
@@ -195,16 +193,16 @@ void MainMenuMapOptions::changed() {
 }
 
 void MainMenuMapOptions::clicked_ok() {
-	eia().egbase().map().set_name(name_.text());
-	eia().egbase().map().set_author(author_.text());
+	eia().egbase().mutable_map()->set_name(name_.text());
+	eia().egbase().mutable_map()->set_author(author_.text());
 	g_options.pull_section("global").set_string("realname", author_.text());
-	eia().egbase().map().set_description(descr_->get_text());
-	eia().egbase().map().set_hint(hint_->get_text());
+	eia().egbase().mutable_map()->set_description(descr_->get_text());
+	eia().egbase().mutable_map()->set_hint(hint_->get_text());
 
-	eia().egbase().map().clear_tags();
+	eia().egbase().mutable_map()->clear_tags();
 	for (const auto& tag : tags_checkboxes_) {
 		if (tag.second->get_state()) {
-			eia().egbase().map().add_tag(tag.first);
+			eia().egbase().mutable_map()->add_tag(tag.first);
 		}
 	}
 
@@ -230,7 +228,7 @@ void MainMenuMapOptions::add_tag_checkbox(UI::Box* parent,
                                           std::string tag,
                                           std::string displ_name) {
 	UI::Box* box = new UI::Box(parent, 0, 0, UI::Box::Horizontal, max_w_, checkbox_space_, 0);
-	UI::Checkbox* cb = new UI::Checkbox(box, Vector2i(0, 0), displ_name);
+	UI::Checkbox* cb = new UI::Checkbox(box, Vector2i::zero(), displ_name);
 	box->add(cb, UI::Box::Resizing::kFullSize);
 	box->add_space(checkbox_space_);
 	parent->add(box);

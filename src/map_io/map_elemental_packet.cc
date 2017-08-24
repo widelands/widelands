@@ -114,7 +114,7 @@ void MapElementalPacket::pre_read(FileSystem& fs, Map* map) {
 }
 
 void MapElementalPacket::read(FileSystem& fs, EditorGameBase& egbase, bool, MapObjectLoader&) {
-	pre_read(fs, &egbase.map());
+	pre_read(fs, egbase.mutable_map());
 }
 
 void MapElementalPacket::write(FileSystem& fs, EditorGameBase& egbase, MapObjectSaver&) {
@@ -147,7 +147,7 @@ void MapElementalPacket::write(FileSystem& fs, EditorGameBase& egbase, MapObject
 		   prof.create_section((boost::format("teams%02d") % counter++).str().c_str());
 		int lineup_counter = 0;
 		for (Widelands::Map::SuggestedTeam team : lineup) {
-			std::string section_contents = "";
+			std::string section_contents;
 			for (std::vector<PlayerNumber>::const_iterator it = team.begin(); it != team.end(); ++it) {
 				if (it == team.begin()) {
 					section_contents = (boost::format("%d") % static_cast<unsigned int>(*it)).str();

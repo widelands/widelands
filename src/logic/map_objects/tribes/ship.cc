@@ -152,7 +152,7 @@ void Ship::init_auto_task(Game& game) {
 	start_task_ship(game);
 }
 
-void Ship::init(EditorGameBase& egbase) {
+bool Ship::init(EditorGameBase& egbase) {
 	Bob::init(egbase);
 	init_fleet(egbase);
 	Notifications::publish(NoteShipMessage(this, NoteShipMessage::Message::kGained));
@@ -161,6 +161,7 @@ void Ship::init(EditorGameBase& egbase) {
 	// Assigning a ship name
 	shipname_ = get_owner()->pick_shipname();
 	molog("New ship: %s\n", shipname_.c_str());
+	return true;
 }
 
 /**
@@ -168,11 +169,11 @@ void Ship::init(EditorGameBase& egbase) {
  * The fleet code will automatically merge us into a larger
  * fleet, if one is reachable.
  */
-void Ship::init_fleet(EditorGameBase& egbase) {
+bool Ship::init_fleet(EditorGameBase& egbase) {
 	assert(get_owner() != nullptr);
 	Fleet* fleet = new Fleet(*get_owner());
 	fleet->add_ship(this);
-	fleet->init(egbase);
+	return fleet->init(egbase);
 	// fleet calls the set_fleet function appropriately
 }
 
@@ -274,21 +275,20 @@ void Ship::ship_update(Game& game, Bob::State& state) {
 			return;
 		}
 		log("Oh no... this ship has no sinking animation :(!\n");
-	// fall trough
+		FALLS_THROUGH;
 	case ShipStates::kSinkAnimation:
 		// The sink animation has been played, so finally remove the ship from the map
 		pop_task(game);
 		remove(game);
 		return;
 	}
-
 	// if the real update function failed (e.g. nothing to transport), the ship goes idle
 	ship_update_idle(game, state);
 }
 
 /// updates a ships tasks in transport mode \returns false if failed to update tasks
 bool Ship::ship_update_transport(Game& game, Bob::State& state) {
-	Map& map = game.map();
+	const Map& map = game.map();
 
 	PortDock* dst = get_destination(game);
 	if (!dst) {
@@ -366,7 +366,7 @@ bool Ship::ship_update_transport(Game& game, Bob::State& state) {
 
 /// updates a ships tasks in expedition mode
 void Ship::ship_update_expedition(Game& game, Bob::State&) {
-	Map& map = game.map();
+	Map* map = game.mutable_map();
 
 	assert(expedition_);
 
@@ -374,29 +374,29 @@ void Ship::ship_update_expedition(Game& game, Bob::State&) {
 	FCoords position = get_position();
 	for (Direction dir = FIRST_DIRECTION; dir <= LAST_DIRECTION; ++dir) {
 		expedition_->swimmable[dir - 1] =
-		   map.get_neighbour(position, dir).field->nodecaps() & MOVECAPS_SWIM;
+		   map->get_neighbour(position, dir).field->nodecaps() & MOVECAPS_SWIM;
 	}
 
 	if (ship_state_ == ShipStates::kExpeditionScouting) {
 		// Check surrounding fields for port buildspaces
 		std::vector<Coords> temp_port_buildspaces;
-		MapRegion<Area<Coords>> mr(map, Area<Coords>(position, descr().vision_range()));
+		MapRegion<Area<Coords>> mr(*map, Area<Coords>(position, descr().vision_range()));
 		bool new_port_space = false;
 		do {
-			if (!map.is_port_space(mr.location())) {
+			if (!map->is_port_space(mr.location())) {
 				continue;
 			}
 
-			const FCoords fc = map.get_fcoords(mr.location());
+			const FCoords fc = map->get_fcoords(mr.location());
 
 			// Check whether the maximum theoretical possible NodeCap of the field
 			// is of the size big and whether it can theoretically be a port space
-			if ((map.get_max_nodecaps(game.world(), fc) & BUILDCAPS_SIZEMASK) != BUILDCAPS_BIG ||
-			    map.find_portdock(fc).empty()) {
+			if ((map->get_max_nodecaps(game.world(), fc) & BUILDCAPS_SIZEMASK) != BUILDCAPS_BIG ||
+			    map->find_portdock(fc).empty()) {
 				continue;
 			}
 
-			if (!can_build_port_here(get_owner()->player_number(), map, fc)) {
+			if (!can_build_port_here(get_owner()->player_number(), *map, fc)) {
 				continue;
 			}
 
@@ -409,7 +409,7 @@ void Ship::ship_update_expedition(Game& game, Bob::State&) {
 				new_port_space = true;
 				temp_port_buildspaces.insert(temp_port_buildspaces.begin(), mr.location());
 			}
-		} while (mr.advance(map));
+		} while (mr.advance(*map));
 
 		if (new_port_space) {
 			ship_state_ = ShipStates::kExpeditionPortspaceFound;
@@ -438,16 +438,16 @@ void Ship::ship_update_idle(Game& game, Bob::State& state) {
 
 	// If we are waiting for the next transport job, check if we should move away from ships and
 	// shores
+	const Map& map = game.map();
 	switch (ship_state_) {
 	case ShipStates::kTransport: {
 		FCoords position = get_position();
-		Map& map = game.map();
 		unsigned int dirs[LAST_DIRECTION + 1];
 		unsigned int dirmax = 0;
 
 		for (Direction dir = 0; dir <= LAST_DIRECTION; ++dir) {
 			FCoords node = dir ? map.get_neighbour(position, dir) : position;
-			dirs[dir] = node.field->nodecaps() & MOVECAPS_WALK ? 10 : 0;
+			dirs[dir] = (node.field->nodecaps() & MOVECAPS_WALK) ? 10 : 0;
 
 			Area<FCoords> area(node, 0);
 			std::vector<Bob*> ships;
@@ -569,7 +569,6 @@ void Ship::ship_update_idle(Game& game, Bob::State& state) {
 				// Most likely the command was send as the ship was on an exploration and just leaving
 				// the island - therefore we try to find the island again.
 				FCoords position = get_position();
-				Map& map = game.map();
 				for (uint8_t dir = FIRST_DIRECTION; dir <= LAST_DIRECTION; ++dir) {
 					FCoords neighbour = map.get_neighbour(position, dir);
 					for (uint8_t sur = FIRST_DIRECTION; sur <= LAST_DIRECTION; ++sur)
@@ -612,7 +611,7 @@ void Ship::ship_update_idle(Game& game, Bob::State& state) {
 	}
 	case ShipStates::kExpeditionColonizing: {
 		assert(!expedition_->seen_port_buildspaces.empty());
-		BaseImmovable* baim = game.map()[expedition_->seen_port_buildspaces.front()].get_immovable();
+		BaseImmovable* baim = map[expedition_->seen_port_buildspaces.front()].get_immovable();
 		if (baim) {
 			upcast(ConstructionSite, cs, baim);
 
@@ -680,12 +679,10 @@ void Ship::ship_update_idle(Game& game, Bob::State& state) {
 			}
 
 			expedition_.reset(nullptr);
-
-			Notifications::publish(NoteShipWindow(serial(), NoteShipWindow::Action::kRefresh));
 			return start_task_idle(game, descr().main_animation(), 1500);
 		}
 	}
-
+		FALLS_THROUGH;
 	case ShipStates::kExpeditionWaiting:
 	case ShipStates::kExpeditionPortspaceFound:
 	case ShipStates::kSinkRequest:
@@ -744,13 +741,13 @@ void Ship::withdraw_items(Game& game, PortDock& pd, std::vector<ShippingItem>& i
  * Find a path to the dock @p pd, returns its length, and the path optionally.
  */
 uint32_t Ship::calculate_sea_route(Game& game, PortDock& pd, Path* finalpath) const {
-	Map& map = game.map();
+	Map* map = game.mutable_map();
 	StepEvalAStar se(pd.get_warehouse()->get_position());
 	se.swim_ = true;
 	se.conservative_ = false;
-	se.estimator_bias_ = -5 * map.calc_cost(0);
+	se.estimator_bias_ = -5 * map->calc_cost(0);
 
-	MapAStar<StepEvalAStar> astar(map, se);
+	MapAStar<StepEvalAStar> astar(*map, se);
 
 	astar.push(get_position());
 
@@ -898,7 +895,6 @@ void Ship::exp_cancel(Game& game) {
 
 	if ((ship_state_ == ShipStates::kExpeditionColonizing) || !state_is_expedition())
 		return;
-	send_signal(game, "cancel_expedition");
 
 	// The workers were hold in an idle state so that they did not try
 	// to become fugitive or run to the next warehouse. But now, we
@@ -920,13 +916,29 @@ void Ship::exp_cancel(Game& game) {
 	// Bring us back into a fleet and a economy.
 	set_economy(game, nullptr);
 	init_fleet(game);
+	if (!get_fleet() || !get_fleet()->has_ports()) {
+		// We lost our last reachable port, so we reset the expedition's state
+		ship_state_ = ShipStates::kExpeditionWaiting;
+		set_economy(game, expedition_->economy.get());
+
+		worker = nullptr;
+		for (ShippingItem& item : items_) {
+			item.get(game, nullptr, &worker);
+			if (worker) {
+				worker->reset_tasks(game);
+				worker->start_task_idle(game, 0, -1);
+			}
+		}
+
+		Notifications::publish(NoteShipWindow(serial(), NoteShipWindow::Action::kNoPortLeft));
+		return;
+	}
 	assert(get_economy() && get_economy() != expedition_->economy.get());
+
+	send_signal(game, "cancel_expedition");
 
 	// Delete the expedition and the economy it created.
 	expedition_.reset(nullptr);
-
-	// And finally update our ship window
-	Notifications::publish(NoteShipWindow(serial(), NoteShipWindow::Action::kRefresh));
 }
 
 /// Sinks the ship
@@ -949,7 +961,7 @@ void Ship::draw(const EditorGameBase& egbase,
 	Bob::draw(egbase, draw_text, field_on_dst, scale, dst);
 
 	// Show ship name and current activity
-	std::string statistics_string = "";
+	std::string statistics_string;
 	if (draw_text & TextToDraw::kStatistics) {
 		switch (ship_state_) {
 		case (ShipStates::kTransport):
@@ -1033,30 +1045,26 @@ void Ship::log_general_info(const EditorGameBase& egbase) {
  * It will have the ship's coordinates, and display a picture in its description.
  *
  * \param msgsender a computer-readable description of why the message was sent
- * \param title user-visible title of the message
+ * \param title short title to be displayed in message listings
+ * \param heading long title to be displayed within the message
  * \param description user-visible message body, will be placed in an appropriate rich-text
  *paragraph
- * \param picture picture name relative to the data/ directory
+ * \param picture the filename to be used for the icon in message listings
  */
 void Ship::send_message(Game& game,
                         const std::string& title,
                         const std::string& heading,
                         const std::string& description,
                         const std::string& picture) {
-	std::string rt_description;
-	if (picture.size() > 3) {
-		rt_description = "<rt image=";
-		rt_description += picture;
-		rt_description += "><p font-size=14 font-face=serif>";
-	} else
-		rt_description = "<rt><p font-size=14 font-face=serif>";
-	rt_description += description;
-	rt_description += "</p></rt>";
+	const std::string rt_description =
+	   (boost::format("<div padding_r=10><p><img src=%s></p></div>"
+	                  "<div width=*><p><font size=%d>%s</font></p></div>") %
+	    picture % UI_FONT_SIZE_MESSAGE % description)
+	      .str();
 
-	Message* msg = new Message(Message::Type::kSeafaring, game.get_gametime(), title, picture,
-	                           heading, rt_description, get_position(), serial_);
-
-	get_owner()->add_message(game, *msg);
+	get_owner()->add_message(game, std::unique_ptr<Message>(new Message(
+	                                  Message::Type::kSeafaring, game.get_gametime(), title, picture,
+	                                  heading, rt_description, get_position(), serial_)));
 }
 
 /*
@@ -1068,9 +1076,6 @@ Load / Save implementation
 */
 
 constexpr uint8_t kCurrentPacketVersion = 6;
-
-Ship::Loader::Loader() : lastdock_(0), destination_(0) {
-}
 
 const Bob::Task* Ship::Loader::get_task(const std::string& name) {
 	if (name == "shipidle" || name == "ship")
