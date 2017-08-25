@@ -27,7 +27,7 @@ tribes:new_productionsite_type {
 
    aihints = {
       needs_water = true,
-      renews_map_resources = { "fish" },
+      supports_production_of = { "fish" },
       prohibited_till = 700,
       forced_after = 900
    },

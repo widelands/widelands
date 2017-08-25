@@ -46,9 +46,9 @@ BuildingHints::BuildingHints(std::unique_ptr<LuaTable> table)
      trainingsites_max_percent_(table->has_key("trainingsites_max_percent") ?
                                    table->get_int("trainingsites_max_percent") :
                                    0) {
-	if (table->has_key("renews_map_resources")) {
-		for (const std::string& ware_name : table->get_table("renews_map_resources")->array_entries<std::string>()) {
-			renews_map_resources_.insert(ware_name);
+	if (table->has_key("supports_production_of")) {
+		for (const std::string& ware_name : table->get_table("supports_production_of")->array_entries<std::string>()) {
+			supported_production_.insert(ware_name);
 		}
 	}
 }

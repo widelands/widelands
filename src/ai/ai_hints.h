@@ -26,6 +26,7 @@
 
 #include "base/log.h"
 #include "base/macros.h"
+#include "scripting/lua_interface.h"
 #include "scripting/lua_table.h"
 
 /// This struct is used to read out the data given in [aihints] section of a
@@ -36,12 +37,8 @@ struct BuildingHints {
 	~BuildingHints() {
 	}
 
-	bool renews_map_resource() const {
-		return !renews_map_resource_.empty();
-	}
-
-	std::string get_renews_map_resource() const {
-		return renews_map_resource_;
+	std::set<std::string> get_supported_production_() const {
+		return supported_production_;
 	}
 
 	bool has_mines() const {
@@ -118,13 +115,12 @@ struct BuildingHints {
 	uint8_t trainingsites_max_percent() const;
 
 private:
-	std::string renews_map_resource_; // NOCOM replace this
 	std::string mines_;
 	bool log_producer_;
 	bool granite_producer_;
 	bool needs_water_;
 	bool mines_water_;
-	bool recruitment_;  // whether building recruits special workers
+	bool recruitment_;
 	bool space_consumer_;
 	bool expansion_;
 	bool fighting_;
@@ -137,7 +133,7 @@ private:
 	int16_t very_weak_ai_limit_;
 	int16_t weak_ai_limit_;
 	int trainingsites_max_percent_;
-	std::set<std::string> renews_map_resources_; // NOCOM use this instead
+	std::set<std::string> supported_production_;
 
 	DISALLOW_COPY_AND_ASSIGN(BuildingHints);
 };

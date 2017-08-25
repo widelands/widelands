@@ -452,8 +452,7 @@ struct BuildingObserver {
 	std::unordered_set<Widelands::DescriptionIndex> substitute_inputs;
 	int32_t substitutes_count;
 
-	int16_t production_hint; // NOCOM replace this
-	std::set<int> production_hints; // NOCOM use this
+	std::set<DescriptionIndex> production_hints;
 
 	// information needed for decision on new building construction
 	int16_t max_preciousness;

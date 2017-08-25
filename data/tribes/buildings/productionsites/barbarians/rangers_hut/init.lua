@@ -32,7 +32,7 @@ tribes:new_productionsite_type {
    },
 
    aihints = {
-      renews_map_resources = { "log" },
+      supports_production_of = { "log" },
       space_consumer = true,
       basic_amount = 1
    },
