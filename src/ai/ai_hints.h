@@ -26,7 +26,6 @@
 
 #include "base/log.h"
 #include "base/macros.h"
-#include "scripting/lua_interface.h"
 #include "scripting/lua_table.h"
 
 /// This struct is used to read out the data given in [aihints] section of a
