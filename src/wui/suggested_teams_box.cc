@@ -45,12 +45,10 @@ SuggestedTeamsBox::SuggestedTeamsBox(Panel* parent,
      padding_(padding),
      indent_(indent),
      label_height_(g_gr->images().get("images/players/player_position_menu.png")->height() +
-                   padding) {
-	player_icons_.clear();
-	suggested_teams_.clear();
+                   padding),
+     suggested_teams_box_label_(new UI::Textarea(this)),
+     lineup_box_(nullptr) {
 	set_size(max_x, max_y);
-
-	suggested_teams_box_label_ = new UI::Textarea(this);
 	add(suggested_teams_box_label_);
 }
 SuggestedTeamsBox::~SuggestedTeamsBox() {

@@ -75,14 +75,14 @@ void md5_process_block(void const* buffer, uint32_t len, Md5Ctx*);
 template <typename Base> class MD5Checksum : public Base {
 public:
 	MD5Checksum() {
-		Reset();
+		reset();
 	}
 	explicit MD5Checksum(const MD5Checksum& other)
 	   : Base(), can_handle_data(other.can_handle_data), sum(other.sum), ctx(other.ctx) {
 	}
 
 	/// Reset the checksumming machinery to its initial state.
-	void Reset() {
+	void reset() {
 		can_handle_data = 1;
 		ctx.A = 0x67452301;
 		ctx.B = 0xefcdab89;

@@ -29,7 +29,6 @@
 #include "logic/editor_game_base.h"
 #include "logic/map_objects/world/world.h"
 #include "logic/player.h"
-#include "wui/edge_overlay_manager.h"
 #include "wui/field_overlay_manager.h"
 #include "wui/interactive_base.h"
 #include "wui/mapviewpixelconstants.h"
@@ -97,27 +96,34 @@ float field_brightness(const FCoords& fcoords,
 	return brightness / 255.;
 }
 
-void draw_objects_for_visible_field(const EditorGameBase& egbase,
-                                    const FieldsToDraw::Field& field,
-                                    const float zoom,
-                                    const TextToDraw draw_text,
-                                    const Player* player,
-                                    RenderTarget* dst) {
+void draw_immovables_for_visible_field(const EditorGameBase& egbase,
+                                       const FieldsToDraw::Field& field,
+                                       const float zoom,
+                                       const TextToDraw text_to_draw,
+                                       const Player* player,
+                                       RenderTarget* dst) {
 	BaseImmovable* const imm = field.fcoords.field->get_immovable();
 	if (imm != nullptr && imm->get_positions(egbase).front() == field.fcoords) {
-		TextToDraw draw_text_for_this_immovable = draw_text;
+		TextToDraw draw_text_for_this_immovable = text_to_draw;
 		const Player* owner = imm->get_owner();
 		if (player != nullptr && owner != nullptr && !player->see_all() &&
 		    player->is_hostile(*owner)) {
 			draw_text_for_this_immovable =
 			   static_cast<TextToDraw>(draw_text_for_this_immovable & ~TextToDraw::kStatistics);
 		}
-
 		imm->draw(
 		   egbase.get_gametime(), draw_text_for_this_immovable, field.rendertarget_pixel, zoom, dst);
 	}
+}
+
+void draw_bobs_for_visible_field(const EditorGameBase& egbase,
+                                 const FieldsToDraw::Field& field,
+                                 const float zoom,
+                                 const TextToDraw text_to_draw,
+                                 const Player* player,
+                                 RenderTarget* dst) {
 	for (Bob* bob = field.fcoords.field->get_first_bob(); bob; bob = bob->get_next_bob()) {
-		TextToDraw draw_text_for_this_bob = draw_text;
+		TextToDraw draw_text_for_this_bob = text_to_draw;
 		const Player* owner = bob->get_owner();
 		if (player != nullptr && owner != nullptr && !player->see_all() &&
 		    player->is_hostile(*owner)) {
@@ -128,10 +134,10 @@ void draw_objects_for_visible_field(const EditorGameBase& egbase,
 	}
 }
 
-void draw_objects_for_formerly_visible_field(const FieldsToDraw::Field& field,
-                                             const Player::Field& player_field,
-                                             const float zoom,
-                                             RenderTarget* dst) {
+void draw_immovables_for_formerly_visible_field(const FieldsToDraw::Field& field,
+                                                const Player::Field& player_field,
+                                                const float zoom,
+                                                RenderTarget* dst) {
 	if (const MapObjectDescr* const map_object_descr =
 	       player_field.map_object_descr[TCoords<>::None]) {
 		if (player_field.constructionsite.becomes) {
@@ -209,9 +215,10 @@ void draw_objects(const EditorGameBase& egbase,
                   const float zoom,
                   const FieldsToDraw& fields_to_draw,
                   const Player* player,
-                  const TextToDraw draw_text,
+                  const TextToDraw text_to_draw,
+                  const GameRenderer::DrawImmovables& draw_immovables,
+                  const GameRenderer::DrawBobs& draw_bobs,
                   RenderTarget* dst) {
-	std::vector<FieldOverlayManager::OverlayInfo> overlay_info;
 	for (size_t current_index = 0; current_index < fields_to_draw.size(); ++current_index) {
 		const FieldsToDraw::Field& field = fields_to_draw.at(current_index);
 		if (!field.all_neighbors_valid()) {
@@ -222,7 +229,7 @@ void draw_objects(const EditorGameBase& egbase,
 		const FieldsToDraw::Field& bln = fields_to_draw.at(field.bln_index);
 		const FieldsToDraw::Field& brn = fields_to_draw.at(field.brn_index);
 
-		if (field.is_border) {
+		if (field.is_border && draw_immovables == GameRenderer::DrawImmovables::kYes) {
 			assert(field.owner != nullptr);
 			uint32_t const anim_idx = field.owner->tribe().frontier_animation();
 			if (field.vision) {
@@ -239,65 +246,28 @@ void draw_objects(const EditorGameBase& egbase,
 		}
 
 		if (1 < field.vision) {  // Render stuff that belongs to the node.
-			draw_objects_for_visible_field(egbase, field, zoom, draw_text, player, dst);
-		} else if (field.vision == 1) {
+			if (draw_immovables == GameRenderer::DrawImmovables::kYes) {
+				draw_immovables_for_visible_field(egbase, field, zoom, text_to_draw, player, dst);
+			}
+			if (draw_bobs == GameRenderer::DrawBobs::kYes) {
+				draw_bobs_for_visible_field(egbase, field, zoom, text_to_draw, player, dst);
+			}
+		} else if (field.vision == 1 && draw_immovables == GameRenderer::DrawImmovables::kYes) {
 			// We never show census or statistics for objects in the fog.
 			assert(player != nullptr);
 			const Map& map = egbase.map();
 			const Player::Field& player_field =
 			   player->fields()[map.get_index(field.fcoords, map.get_width())];
-			draw_objects_for_formerly_visible_field(field, player_field, zoom, dst);
+			draw_immovables_for_formerly_visible_field(field, player_field, zoom, dst);
 		}
 
-		const FieldOverlayManager& overlay_manager = egbase.get_ibase()->field_overlay_manager();
-		{
-			overlay_info.clear();
-			overlay_manager.get_overlays(field.fcoords, &overlay_info);
-			for (const auto& overlay : overlay_info) {
-				dst->blitrect_scale(
-				   Rectf(field.rendertarget_pixel - overlay.hotspot.cast<float>() * zoom,
-				         overlay.pic->width() * zoom, overlay.pic->height() * zoom),
-				   overlay.pic, Recti(0, 0, overlay.pic->width(), overlay.pic->height()), 1.f,
-				   BlendMode::UseAlpha);
-			}
-		}
-
-		{
-			// Render overlays on the right triangle
-			overlay_info.clear();
-			overlay_manager.get_overlays(TCoords<>(field.fcoords, TCoords<>::R), &overlay_info);
-
-			Vector2f tripos(
-			   (field.rendertarget_pixel.x + rn.rendertarget_pixel.x + brn.rendertarget_pixel.x) / 3.f,
-			   (field.rendertarget_pixel.y + rn.rendertarget_pixel.y + brn.rendertarget_pixel.y) /
-			      3.f);
-			for (const auto& overlay : overlay_info) {
-				dst->blitrect_scale(Rectf(tripos - overlay.hotspot.cast<float>() * zoom,
-				                          overlay.pic->width() * zoom, overlay.pic->height() * zoom),
-				                    overlay.pic,
-				                    Recti(0, 0, overlay.pic->width(), overlay.pic->height()), 1.f,
-				                    BlendMode::UseAlpha);
-			}
-		}
-
-		{
-			// Render overlays on the D triangle
-			overlay_info.clear();
-			overlay_manager.get_overlays(TCoords<>(field.fcoords, TCoords<>::D), &overlay_info);
-
-			Vector2f tripos(
-			   (field.rendertarget_pixel.x + bln.rendertarget_pixel.x + brn.rendertarget_pixel.x) /
-			      3.f,
-			   (field.rendertarget_pixel.y + bln.rendertarget_pixel.y + brn.rendertarget_pixel.y) /
-			      3.f);
-			for (const auto& overlay : overlay_info) {
-				dst->blitrect_scale(Rectf(tripos - overlay.hotspot.cast<float>() * zoom,
-				                          overlay.pic->width() * zoom, overlay.pic->height() * zoom),
-				                    overlay.pic,
-				                    Recti(0, 0, overlay.pic->width(), overlay.pic->height()), 1.f,
-				                    BlendMode::UseAlpha);
-			}
-		}
+		egbase.get_ibase()->field_overlay_manager().foreach_overlay(
+		   field.fcoords, [dst, &field, zoom](const Image* pic, const Vector2i& hotspot) {
+			   dst->blitrect_scale(Rectf(field.rendertarget_pixel - hotspot.cast<float>() * zoom,
+			                             pic->width() * zoom, pic->height() * zoom),
+			                       pic, Recti(0, 0, pic->width(), pic->height()), 1.f,
+			                       BlendMode::UseAlpha);
+			});
 	}
 }
 
@@ -313,23 +283,27 @@ void GameRenderer::rendermap(const Widelands::EditorGameBase& egbase,
                              const Vector2f& viewpoint,
                              const float zoom,
                              const Widelands::Player& player,
-                             const TextToDraw draw_text,
+                             const Overlays& overlays,
                              RenderTarget* dst) {
-	draw(egbase, viewpoint, zoom, draw_text, &player, dst);
+	draw(egbase, viewpoint, zoom, overlays, DrawImmovables::kYes, DrawBobs::kYes, &player, dst);
 }
 
 void GameRenderer::rendermap(const Widelands::EditorGameBase& egbase,
                              const Vector2f& viewpoint,
                              const float zoom,
-                             const TextToDraw draw_text,
+                             const Overlays& overlays,
+                             const DrawImmovables& draw_immovables,
+                             const DrawBobs& draw_bobs,
                              RenderTarget* dst) {
-	draw(egbase, viewpoint, zoom, draw_text, nullptr, dst);
+	draw(egbase, viewpoint, zoom, overlays, draw_immovables, draw_bobs, nullptr, dst);
 }
 
 void GameRenderer::draw(const EditorGameBase& egbase,
                         const Vector2f& viewpoint,
                         const float zoom,
-                        const TextToDraw draw_text,
+                        const Overlays& overlays,
+                        const DrawImmovables& draw_immovables,
+                        const DrawBobs& draw_bobs,
                         const Player* player,
                         RenderTarget* dst) {
 	assert(viewpoint.x >= 0);  // divisions involving negative numbers are bad
@@ -366,8 +340,7 @@ void GameRenderer::draw(const EditorGameBase& egbase,
 	const int surface_width = surface->width();
 	const int surface_height = surface->height();
 
-	Map& map = egbase.map();
-	const EdgeOverlayManager& edge_overlay_manager = egbase.get_ibase()->edge_overlay_manager();
+	const Map& map = egbase.map();
 	const uint32_t gametime = egbase.get_gametime();
 
 	const float scale = 1.f / zoom;
@@ -423,7 +396,11 @@ void GameRenderer::draw(const EditorGameBase& egbase,
 					f.is_border = pf.border;
 				}
 			}
-			f.roads |= edge_overlay_manager.get_overlay(f.fcoords);
+
+			const auto it = overlays.road_building_preview.find(f.fcoords);
+			if (it != overlays.road_building_preview.end()) {
+				f.roads |= it->second;
+			}
 		}
 	}
 
@@ -451,5 +428,6 @@ void GameRenderer::draw(const EditorGameBase& egbase,
 	i.program_id = RenderQueue::Program::kTerrainRoad;
 	RenderQueue::instance().enqueue(i);
 
-	draw_objects(egbase, scale, fields_to_draw_, player, draw_text, dst);
+	draw_objects(egbase, scale, fields_to_draw_, player, overlays.text_to_draw, draw_immovables,
+	             draw_bobs, dst);
 }

@@ -146,7 +146,7 @@ public:
 	friend struct MapElementalPacket;
 	friend struct WidelandsMapLoader;
 
-	using PortSpacesSet = std::set<Coords, Coords::OrderingFunctor>;
+	using PortSpacesSet = std::set<Coords>;
 	using Objectives = std::map<std::string, std::unique_ptr<Objective>>;
 	using SuggestedTeam = std::vector<PlayerNumber>;  // Players in a team
 	using SuggestedTeamLineup =
@@ -181,7 +181,7 @@ public:
 	    const std::string& description = _("No description defined"));
 
 	void recalc_whole_map(const World& world);
-	virtual void recalc_for_field_area(const World& world, Area<FCoords>);
+	void recalc_for_field_area(const World& world, Area<FCoords>);
 
 	/***
 	 * Ensures that resources match their adjacent terrains.
@@ -292,27 +292,29 @@ public:
 	BaseImmovable* get_immovable(const Coords&) const;
 	uint32_t find_bobs(const Area<FCoords>,
 	                   std::vector<Bob*>* list,
-	                   const FindBob& functor = FindBobAlwaysTrue());
+	                   const FindBob& functor = FindBobAlwaysTrue()) const;
 	uint32_t find_reachable_bobs(const Area<FCoords>,
 	                             std::vector<Bob*>* list,
 	                             const CheckStep&,
-	                             const FindBob& functor = FindBobAlwaysTrue());
+	                             const FindBob& functor = FindBobAlwaysTrue()) const;
 	uint32_t find_immovables(const Area<FCoords>,
 	                         std::vector<ImmovableFound>* list,
-	                         const FindImmovable& = find_immovable_always_true());
+	                         const FindImmovable& = find_immovable_always_true()) const;
 	uint32_t find_reachable_immovables(const Area<FCoords>,
 	                                   std::vector<ImmovableFound>* list,
 	                                   const CheckStep&,
-	                                   const FindImmovable& = find_immovable_always_true());
-	uint32_t find_reachable_immovables_unique(const Area<FCoords>,
-	                                          std::vector<BaseImmovable*>& list,
-	                                          const CheckStep&,
-	                                          const FindImmovable& = find_immovable_always_true());
-	uint32_t find_fields(const Area<FCoords>, std::vector<Coords>* list, const FindNode& functor);
+	                                   const FindImmovable& = find_immovable_always_true()) const;
+	uint32_t
+	find_reachable_immovables_unique(const Area<FCoords>,
+	                                 std::vector<BaseImmovable*>& list,
+	                                 const CheckStep&,
+	                                 const FindImmovable& = find_immovable_always_true()) const;
+	uint32_t
+	find_fields(const Area<FCoords>, std::vector<Coords>* list, const FindNode& functor) const;
 	uint32_t find_reachable_fields(const Area<FCoords>,
 	                               std::vector<Coords>* list,
 	                               const CheckStep&,
-	                               const FindNode&);
+	                               const FindNode&) const;
 
 	// Field logic
 	static MapIndex get_index(const Coords&, int16_t width);
@@ -370,7 +372,7 @@ public:
 	                 const int32_t persist,
 	                 Path&,
 	                 const CheckStep&,
-	                 const uint32_t flags = 0);
+	                 const uint32_t flags = 0) const;
 
 	/**
 	 * We can reach a field by water either if it has MOVECAPS_SWIM or if it has
@@ -464,11 +466,30 @@ public:
 	/// Checks whether there are any artifacts on the map
 	bool has_artifacts();
 
-protected:  /// These functions are needed in Testclasses
+	// Visible for testing.
 	void set_size(uint32_t w, uint32_t h);
 
 private:
 	void recalc_border(const FCoords&);
+	void recalc_brightness(const FCoords&);
+	void recalc_nodecaps_pass1(const World& world, const FCoords&);
+	void recalc_nodecaps_pass2(const World& world, const FCoords& f);
+	NodeCaps calc_nodecaps_pass1(const World& world, const FCoords&, bool consider_mobs = true);
+	NodeCaps calc_nodecaps_pass2(const World& world,
+	                             const FCoords&,
+	                             bool consider_mobs = true,
+	                             NodeCaps initcaps = CAPS_NONE);
+	void check_neighbour_heights(FCoords, uint32_t& radius);
+	int calc_buildsize(const World& world,
+	                   const FCoords& f,
+	                   bool avoidnature,
+	                   bool* ismine = nullptr,
+	                   bool consider_mobs = true,
+	                   NodeCaps initcaps = CAPS_NONE);
+	bool is_cycle_connected(const FCoords& start, uint32_t length, const WalkingDir* dirs);
+	template <typename functorT>
+	void find_reachable(const Area<FCoords>&, const CheckStep&, functorT&) const;
+	template <typename functorT> void find(const Area<FCoords>&, functorT&) const;
 
 	/// # of players this map supports (!= Game's number of players!)
 	PlayerNumber nrplayers_;
@@ -500,26 +521,6 @@ private:
 
 	PortSpacesSet port_spaces_;
 	Objectives objectives_;
-
-	void recalc_brightness(const FCoords&);
-	void recalc_nodecaps_pass1(const World& world, const FCoords&);
-	void recalc_nodecaps_pass2(const World& world, const FCoords& f);
-	NodeCaps calc_nodecaps_pass1(const World& world, const FCoords&, bool consider_mobs = true);
-	NodeCaps calc_nodecaps_pass2(const World& world,
-	                             const FCoords&,
-	                             bool consider_mobs = true,
-	                             NodeCaps initcaps = CAPS_NONE);
-	void check_neighbour_heights(FCoords, uint32_t& radius);
-	int calc_buildsize(const World& world,
-	                   const FCoords& f,
-	                   bool avoidnature,
-	                   bool* ismine = nullptr,
-	                   bool consider_mobs = true,
-	                   NodeCaps initcaps = CAPS_NONE);
-	bool is_cycle_connected(const FCoords& start, uint32_t length, const WalkingDir* dirs);
-	template <typename functorT>
-	void find_reachable(const Area<FCoords>&, const CheckStep&, functorT&);
-	template <typename functorT> void find(const Area<FCoords>&, functorT&) const;
 
 	MapVersion map_version_;
 };

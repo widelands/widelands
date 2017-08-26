@@ -448,7 +448,7 @@ void GameMessageMenu::center_view() {
 	if (Message const* const message =
 	       iplayer().player().messages()[MessageId((*list)[selection])]) {
 		assert(message->position());
-		iplayer().scroll_to_field(message->position(), MapView::Transition::Smooth);
+		iplayer().map_view()->scroll_to_field(message->position(), MapView::Transition::Smooth);
 	}
 }
 
@@ -613,7 +613,7 @@ void GameMessageMenu::update_archive_button_tooltip() {
 		return;
 	}
 	archivebtn_->set_enabled(true);
-	std::string button_tooltip = "";
+	std::string button_tooltip;
 	size_t no_selections = list->selections().size();
 	switch (mode) {
 	case Archive:

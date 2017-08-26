@@ -67,7 +67,7 @@ MainMenuMapOptions::MainMenuMapOptions(EditorInteractive& parent, bool modal)
              g_gr->images().get("images/ui_basic/but1.png"),
              _("Cancel")),
      tab_box_(this, padding_, padding_, UI::Box::Vertical, max_w_, get_inner_h(), 0),
-     tabs_(&tab_box_, 0, 0, nullptr),
+     tabs_(&tab_box_, nullptr),
 
      main_box_(&tabs_, padding_, padding_, UI::Box::Vertical, max_w_, get_inner_h(), 0),
      tags_box_(&tabs_, padding_, padding_, UI::Box::Vertical, max_w_, get_inner_h(), 0),
@@ -193,16 +193,16 @@ void MainMenuMapOptions::changed() {
 }
 
 void MainMenuMapOptions::clicked_ok() {
-	eia().egbase().map().set_name(name_.text());
-	eia().egbase().map().set_author(author_.text());
+	eia().egbase().mutable_map()->set_name(name_.text());
+	eia().egbase().mutable_map()->set_author(author_.text());
 	g_options.pull_section("global").set_string("realname", author_.text());
-	eia().egbase().map().set_description(descr_->get_text());
-	eia().egbase().map().set_hint(hint_->get_text());
+	eia().egbase().mutable_map()->set_description(descr_->get_text());
+	eia().egbase().mutable_map()->set_hint(hint_->get_text());
 
-	eia().egbase().map().clear_tags();
+	eia().egbase().mutable_map()->clear_tags();
 	for (const auto& tag : tags_checkboxes_) {
 		if (tag.second->get_state()) {
-			eia().egbase().map().add_tag(tag.first);
+			eia().egbase().mutable_map()->add_tag(tag.first);
 		}
 	}
 

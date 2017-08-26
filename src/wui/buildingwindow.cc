@@ -98,7 +98,7 @@ void BuildingWindow::init(bool avoid_fastclick) {
 
 	vbox_.reset(new UI::Box(this, 0, 0, UI::Box::Vertical));
 
-	tabs_ = new UI::TabPanel(vbox_.get(), 0, 0, nullptr);
+	tabs_ = new UI::TabPanel(vbox_.get(), nullptr);
 	vbox_->add(tabs_, UI::Box::Resizing::kFullSize);
 
 	capsbuttons_ = new UI::Box(vbox_.get(), 0, 0, UI::Box::Horizontal);
@@ -491,7 +491,7 @@ void BuildingWindow::create_input_queue_panel(UI::Box* const box,
  * for the corresponding button.
  */
 void BuildingWindow::clicked_goto() {
-	igbase()->scroll_to_field(building().get_position(), MapView::Transition::Smooth);
+	igbase()->map_view()->scroll_to_field(building().get_position(), MapView::Transition::Smooth);
 }
 
 void BuildingWindow::update_expedition_button(bool expedition_was_canceled) {
