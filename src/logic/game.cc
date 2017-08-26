@@ -122,10 +122,13 @@ Game::Game()
      ctrl_(nullptr),
      writereplay_(true),
      writesyncstream_(false),
+     ai_training_mode_(false),
+     auto_speed_(false),
      state_(gs_notrunning),
      cmdqueue_(*this),
      /** TRANSLATORS: Win condition for this game has not been set. */
-     win_condition_displayname_(_("Not set")) {
+     win_condition_displayname_(_("Not set")),
+     replay_(false) {
 }
 
 Game::~Game() {
@@ -134,7 +137,7 @@ Game::~Game() {
 void Game::sync_reset() {
 	syncwrapper_.counter_ = 0;
 
-	synchash_.Reset();
+	synchash_.reset();
 	log("[sync] Reset\n");
 }
 
@@ -149,6 +152,14 @@ InteractivePlayer* Game::get_ipl() {
 
 void Game::set_game_controller(GameController* const ctrl) {
 	ctrl_ = ctrl;
+}
+
+void Game::set_ai_training_mode(const bool mode) {
+	ai_training_mode_ = mode;
+}
+
+void Game::set_auto_speed(const bool mode) {
+	auto_speed_ = mode;
 }
 
 GameController* Game::game_controller() {
@@ -181,14 +192,10 @@ void Game::save_syncstream(bool const save) {
 
 bool Game::run_splayer_scenario_direct(const std::string& mapname,
                                        const std::string& script_to_run) {
-	assert(!get_map());
-
 	// Replays can't handle scenarios
 	set_write_replay(false);
 
-	set_map(new Map);
-
-	std::unique_ptr<MapLoader> maploader(map().get_correct_loader(mapname));
+	std::unique_ptr<MapLoader> maploader(mutable_map()->get_correct_loader(mapname));
 	if (!maploader)
 		throw wexception("could not load \"%s\"", mapname.c_str());
 	UI::ProgressWindow loader_ui;
@@ -241,10 +248,7 @@ void Game::init_newgame(UI::ProgressWindow* loader_ui, const GameSettings& setti
 
 	loader_ui->step(_("Preloading map"));
 
-	assert(!get_map());
-	set_map(new Map);
-
-	std::unique_ptr<MapLoader> maploader(map().get_correct_loader(settings.mapfilename));
+	std::unique_ptr<MapLoader> maploader(mutable_map()->get_correct_loader(settings.mapfilename));
 	assert(maploader != nullptr);
 	maploader->preload_map(settings.scenario);
 
@@ -314,8 +318,6 @@ void Game::init_savegame(UI::ProgressWindow* loader_ui, const GameSettings& sett
 
 	loader_ui->step(_("Preloading map"));
 
-	assert(!get_map());
-	set_map(new Map);
 	try {
 		GameLoader gl(settings.mapfilename, *this);
 		Widelands::GamePreloadPacket gpdp;
@@ -343,9 +345,6 @@ bool Game::run_load_game(const std::string& filename, const std::string& script_
 	int8_t player_nr;
 
 	loader_ui.step(_("Preloading map"));
-
-	// We have to create an empty map, otherwise nothing will load properly
-	set_map(new Map);
 
 	{
 		GameLoader gl(filename, *this);
@@ -445,12 +444,13 @@ bool Game::run(UI::ProgressWindow* loader_ui,
 			}
 		}
 
-		if (get_ipl())
-			get_ipl()->scroll_to_field(
+		if (get_ipl()) {
+			get_ipl()->map_view()->scroll_to_field(
 			   map().get_starting_pos(get_ipl()->player_number()), MapView::Transition::Jump);
+		}
 
 		// Prepare the map, set default textures
-		map().recalc_default_resources(world());
+		mutable_map()->recalc_default_resources(world());
 
 		// Finally, set the scenario names and tribes to represent
 		// the correct names of the players
@@ -460,10 +460,10 @@ bool Game::run(UI::ProgressWindow* loader_ui,
 			const std::string& player_tribe = plr ? plr->tribe().name() : no_name;
 			const std::string& player_name = plr ? plr->get_name() : no_name;
 			const std::string& player_ai = plr ? plr->get_ai() : no_name;
-			map().set_scenario_player_tribe(p, player_tribe);
-			map().set_scenario_player_name(p, player_name);
-			map().set_scenario_player_ai(p, player_ai);
-			map().set_scenario_player_closeable(p, false);  // player is already initialized.
+			mutable_map()->set_scenario_player_tribe(p, player_tribe);
+			mutable_map()->set_scenario_player_name(p, player_name);
+			mutable_map()->set_scenario_player_ai(p, player_ai);
+			mutable_map()->set_scenario_player_closeable(p, false);  // player is already initialized.
 		}
 
 		// Run the init script, if the map provides one.
@@ -666,7 +666,7 @@ void Game::send_player_start_stop_building(Building& building) {
 }
 
 void Game::send_player_militarysite_set_soldier_preference(Building& building,
-                                                           uint8_t my_preference) {
+                                                           SoldierPreference my_preference) {
 	send_player_command(*new CmdMilitarySiteSetSoldierPreference(
 	   get_gametime(), building.owner().player_number(), building, my_preference));
 }

@@ -60,7 +60,7 @@ void terraform_for_building(Widelands::EditorGameBase& egbase,
                             const Widelands::PlayerNumber player_number,
                             const Widelands::Coords& location,
                             const Widelands::BuildingDescr* descr) {
-	Widelands::Map& map = egbase.map();
+	const Widelands::Map& map = egbase.map();
 	Widelands::FCoords c[4];  //  Big buildings occupy 4 locations.
 	c[0] = map.get_fcoords(location);
 	map.get_brn(c[0], &c[1]);
@@ -136,7 +136,6 @@ Player::Player(EditorGameBase& the_egbase,
      fields_(nullptr),
      allowed_worker_types_(the_egbase.tribes().nrworkers(), true),
      allowed_building_types_(the_egbase.tribes().nrbuildings(), true),
-     ai_(""),
      current_produced_statistics_(the_egbase.tribes().nrwares()),
      current_consumed_statistics_(the_egbase.tribes().nrwares()),
      ware_productions_(the_egbase.tribes().nrwares()),
@@ -413,7 +412,7 @@ in some situations over the network.
 ===============
 */
 Road* Player::build_road(const Path& path) {
-	Map& map = egbase().map();
+	const Map& map = egbase().map();
 	FCoords fc = map.get_fcoords(path.get_start());
 	if (upcast(Flag, start, fc.field->get_immovable())) {
 		if (upcast(Flag, end, map.get_immovable(path.get_end()))) {
@@ -442,7 +441,7 @@ Road* Player::build_road(const Path& path) {
 }
 
 Road& Player::force_road(const Path& path) {
-	Map& map = egbase().map();
+	const Map& map = egbase().map();
 	FCoords c = map.get_fcoords(path.get_start());
 	Flag& start = force_flag(c);
 	Flag& end = force_flag(map.get_fcoords(path.get_end()));
@@ -467,7 +466,7 @@ Road& Player::force_road(const Path& path) {
 
 Building& Player::force_building(Coords const location,
                                  const BuildingDescr::FormerBuildings& former_buildings) {
-	Map& map = egbase().map();
+	const Map& map = egbase().map();
 	DescriptionIndex idx = former_buildings.back();
 	const BuildingDescr* descr = egbase().tribes().get_building_descr(idx);
 	terraform_for_building(egbase(), player_number(), location, descr);
@@ -482,7 +481,7 @@ Building& Player::force_csite(Coords const location,
                               DescriptionIndex b_idx,
                               const BuildingDescr::FormerBuildings& former_buildings) {
 	EditorGameBase& eg = egbase();
-	Map& map = eg.map();
+	const Map& map = eg.map();
 	const Tribes& tribes = eg.tribes();
 	const PlayerNumber pn = player_number();
 
@@ -653,11 +652,10 @@ void Player::start_or_cancel_expedition(Warehouse& wh) {
 }
 
 void Player::military_site_set_soldier_preference(PlayerImmovable& imm,
-                                                  uint8_t soldier_preference) {
+                                                  SoldierPreference soldier_preference) {
 	if (&imm.owner() == this)
 		if (upcast(MilitarySite, milsite, &imm))
-			milsite->set_soldier_preference(
-			   static_cast<MilitarySite::SoldierPreference>(soldier_preference));
+			milsite->set_soldier_preference(soldier_preference);
 }
 
 /*
@@ -835,7 +833,7 @@ Player::find_attack_soldiers(Flag& flag, std::vector<Soldier*>* soldiers, uint32
 	if (soldiers)
 		soldiers->clear();
 
-	Map& map = egbase().map();
+	const Map& map = egbase().map();
 	std::vector<BaseImmovable*> flags;
 
 	map.find_reachable_immovables_unique(Area<FCoords>(map.get_fcoords(flag.get_position()), 25),

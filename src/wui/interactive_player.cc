@@ -75,7 +75,7 @@ InteractivePlayer::InteractivePlayer(Widelands::Game& g,
 		new GameStatisticsMenu(*this, statisticsmenu_, main_windows_);
 	};
 
-	toolbar_.add_space(15);
+	toolbar()->add_space(15);
 
 	add_toolbar_button(
 	   "wui/menus/menu_toggle_minimap", "minimap", _("Minimap"), &minimap_registry(), true);
@@ -86,9 +86,10 @@ InteractivePlayer::InteractivePlayer(Widelands::Game& g,
 	toggle_buildhelp_->sigclicked.connect(boost::bind(&InteractiveBase::toggle_buildhelp, this));
 	reset_zoom_ = add_toolbar_button("wui/menus/menu_reset_zoom", "reset_zoom", _("Reset zoom"));
 	reset_zoom_->sigclicked.connect([this] {
-		zoom_around(1.f, Vector2f(get_w() / 2.f, get_h() / 2.f), MapView::Transition::Smooth);
+		map_view()->zoom_around(
+		   1.f, Vector2f(get_w() / 2.f, get_h() / 2.f), MapView::Transition::Smooth);
 	});
-	toolbar_.add_space(15);
+	toolbar()->add_space(15);
 	if (multiplayer) {
 		toggle_chat_ = add_toolbar_button("wui/menus/menu_chat", "chat", _("Chat"), &chat_, true);
 		chat_.open_window = [this] {
@@ -96,7 +97,7 @@ InteractivePlayer::InteractivePlayer(Widelands::Game& g,
 				GameChatMenu::create_chat_console(this, chat_, *chat_provider_);
 			}
 		};
-		toolbar_.add_space(15);
+		toolbar()->add_space(15);
 	}
 
 	add_toolbar_button(
@@ -113,7 +114,7 @@ InteractivePlayer::InteractivePlayer(Widelands::Game& g,
 	};
 
 	set_player_number(plyn);
-	fieldclicked.connect(boost::bind(&InteractivePlayer::node_action, this));
+	map_view()->fieldclicked.connect(boost::bind(&InteractivePlayer::node_action, this));
 
 	adjust_toolbar_position();
 
@@ -139,7 +140,7 @@ void InteractivePlayer::think() {
 					//  That is not allowed. Therefore we must delete the
 					//  fieldaction window before entering roadbuilding mode here.
 					fieldaction_.destroy();
-					mouse_to_field(flag_to_connect_, MapView::Transition::Jump);
+					map_view()->mouse_to_field(flag_to_connect_, MapView::Transition::Jump);
 					set_sel_pos(Widelands::NodeAndTriangle<>(
 					   flag_to_connect_,
 					   Widelands::TCoords<>(flag_to_connect_, Widelands::TCoords<>::D)));
@@ -184,7 +185,7 @@ Widelands::PlayerNumber InteractivePlayer::player_number() const {
 	return player_number_;
 }
 
-int32_t InteractivePlayer::calculate_buildcaps(const Widelands::TCoords<Widelands::FCoords>& c) {
+int32_t InteractivePlayer::calculate_buildcaps(const Widelands::FCoords& c) {
 	assert(get_player());
 	return get_player()->get_buildcaps(c);
 }
@@ -274,7 +275,8 @@ bool InteractivePlayer::handle_key(bool const down, SDL_Keysym const code) {
 				break;
 			FALLS_THROUGH;
 		case SDLK_HOME:
-			scroll_to_field(game().map().get_starting_pos(player_number_), Transition::Smooth);
+			map_view()->scroll_to_field(
+			   game().map().get_starting_pos(player_number_), MapView::Transition::Smooth);
 			return true;
 
 		case SDLK_KP_ENTER:

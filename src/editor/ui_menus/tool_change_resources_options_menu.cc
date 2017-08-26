@@ -154,17 +154,16 @@ void EditorToolChangeResourcesOptionsMenu::change_resource() {
 	increase_tool_.decrease_tool().set_cur_res(resource_index);
 
 	Widelands::EditorGameBase& egbase = eia().egbase();
-	Widelands::Map& map = egbase.map();
+	Widelands::Map* map = egbase.mutable_map();
 	eia().mutable_field_overlay_manager()->register_overlay_callback_function(
-	   [resource_index, &map,
-	    &egbase](const Widelands::TCoords<Widelands::FCoords>& coords) -> uint32_t {
-		   if (map.is_resource_valid(egbase.world(), coords, resource_index)) {
-			   return coords.field->nodecaps();
+	   [resource_index, map, &egbase](const Widelands::FCoords& fc) -> uint32_t {
+		   if (map->is_resource_valid(egbase.world(), fc, resource_index)) {
+			   return fc.field->nodecaps();
 		   }
 		   return 0;
 		});
 
-	map.recalc_whole_map(egbase.world());
+	map->recalc_whole_map(egbase.world());
 	select_correct_tool();
 	update();
 }

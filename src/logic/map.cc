@@ -565,7 +565,9 @@ Functor is of the form: functor(Map*, FCoords)
 ===============
 */
 template <typename functorT>
-void Map::find_reachable(const Area<FCoords>& area, const CheckStep& checkstep, functorT& functor) {
+void Map::find_reachable(const Area<FCoords>& area,
+                         const CheckStep& checkstep,
+                         functorT& functor) const {
 	std::vector<Coords> queue;
 	boost::shared_ptr<Pathfields> pathfields = pathfieldmgr_->allocate();
 
@@ -654,8 +656,9 @@ the list.
 Returns the number of objects found.
 ===============
 */
-uint32_t
-Map::find_bobs(Area<FCoords> const area, std::vector<Bob*>* const list, const FindBob& functor) {
+uint32_t Map::find_bobs(Area<FCoords> const area,
+                        std::vector<Bob*>* const list,
+                        const FindBob& functor) const {
 	FindBobsCallback cb(list, functor);
 
 	find(area, cb);
@@ -678,7 +681,7 @@ Returns the number of objects found.
 uint32_t Map::find_reachable_bobs(Area<FCoords> const area,
                                   std::vector<Bob*>* const list,
                                   const CheckStep& checkstep,
-                                  const FindBob& functor) {
+                                  const FindBob& functor) const {
 	FindBobsCallback cb(list, functor);
 
 	find_reachable(area, checkstep, cb);
@@ -731,7 +734,7 @@ If list is not 0, found immovables are stored in list.
 */
 uint32_t Map::find_immovables(Area<FCoords> const area,
                               std::vector<ImmovableFound>* const list,
-                              const FindImmovable& functor) {
+                              const FindImmovable& functor) const {
 	FindImmovablesCallback cb(list, functor);
 
 	find(area, cb);
@@ -752,7 +755,7 @@ Returns the number of immovables we found.
 uint32_t Map::find_reachable_immovables(Area<FCoords> const area,
                                         std::vector<ImmovableFound>* const list,
                                         const CheckStep& checkstep,
-                                        const FindImmovable& functor) {
+                                        const FindImmovable& functor) const {
 	FindImmovablesCallback cb(list, functor);
 
 	find_reachable(area, checkstep, cb);
@@ -770,7 +773,7 @@ uint32_t Map::find_reachable_immovables(Area<FCoords> const area,
 uint32_t Map::find_reachable_immovables_unique(const Area<FCoords> area,
                                                std::vector<BaseImmovable*>& list,
                                                const CheckStep& checkstep,
-                                               const FindImmovable& functor) {
+                                               const FindImmovable& functor) const {
 	std::vector<ImmovableFound> duplist;
 	FindImmovablesCallback cb(&duplist, find_immovable_always_true());
 
@@ -823,8 +826,9 @@ Returns the number of matching fields.
 Note that list can be 0.
 ===============
 */
-uint32_t
-Map::find_fields(Area<FCoords> const area, std::vector<Coords>* list, const FindNode& functor) {
+uint32_t Map::find_fields(Area<FCoords> const area,
+                          std::vector<Coords>* list,
+                          const FindNode& functor) const {
 	FindNodesCallback cb(list, functor);
 
 	find(area, cb);
@@ -844,7 +848,7 @@ Note that list can be 0.
 uint32_t Map::find_reachable_fields(Area<FCoords> const area,
                                     std::vector<Coords>* list,
                                     const CheckStep& checkstep,
-                                    const FindNode& functor) {
+                                    const FindNode& functor) const {
 	FindNodesCallback cb(list, functor);
 
 	find_reachable(area, checkstep, cb);
@@ -1263,11 +1267,10 @@ std::vector<Coords> Map::find_portdock(const Coords& c) const {
 	                                         WALK_SE, WALK_E,  WALK_E,  WALK_E};
 	const FCoords start = br_n(br_n(get_fcoords(c)));
 	const Widelands::PlayerNumber owner = start.field->get_owned_by();
-	bool is_good_water;
 	FCoords f = start;
 	std::vector<Coords> portdock;
 	for (uint32_t i = 0; i < 16; ++i) {
-		is_good_water = (f.field->get_caps() & (MOVECAPS_SWIM | MOVECAPS_WALK)) == MOVECAPS_SWIM;
+		bool is_good_water = (f.field->get_caps() & (MOVECAPS_SWIM | MOVECAPS_WALK)) == MOVECAPS_SWIM;
 
 		// Any immovable here? (especially another portdock)
 		if (is_good_water && f.field->get_immovable()) {
@@ -1596,7 +1599,7 @@ int32_t Map::findpath(Coords instart,
                       int32_t const persist,
                       Path& path,
                       const CheckStep& checkstep,
-                      uint32_t const flags) {
+                      uint32_t const flags) const {
 	FCoords start;
 	FCoords end;
 	int32_t upper_cost_limit;
@@ -1654,7 +1657,7 @@ int32_t Map::findpath(Coords instart,
 		// avoid bias by using different orders when pathfinding
 		static const int8_t order1[] = {WALK_NW, WALK_NE, WALK_E, WALK_SE, WALK_SW, WALK_W};
 		static const int8_t order2[] = {WALK_NW, WALK_W, WALK_SW, WALK_SE, WALK_E, WALK_NE};
-		int8_t const* direction = (cur.x + cur.y) & 1 ? order1 : order2;
+		int8_t const* direction = ((cur.x + cur.y) & 1) ? order1 : order2;
 
 		// Check all the 6 neighbours
 		for (uint32_t i = 6; i; i--, direction++) {
@@ -1676,8 +1679,8 @@ int32_t Map::findpath(Coords instart,
 				continue;
 
 			// Calculate cost
-			cost = curpf->real_cost +
-			       (flags & fpBidiCost ? calc_bidi_cost(cur, *direction) : calc_cost(cur, *direction));
+			cost = curpf->real_cost + ((flags & fpBidiCost) ? calc_bidi_cost(cur, *direction) :
+			                                                  calc_cost(cur, *direction));
 
 			if (neighbpf.cycle != pathfields->cycle) {
 				// add to open list
@@ -1967,11 +1970,11 @@ for each other - then the map is seafaring.
 bool Map::allows_seafaring() {
 	Map::PortSpacesSet port_spaces = get_port_spaces();
 	std::vector<Coords> portdocks;
-	std::set<Coords, Coords::OrderingFunctor> swim_coords;
+	std::set<Coords> swim_coords;
 
 	for (const Coords& c : port_spaces) {
 		std::queue<Coords> q_positions;
-		std::set<Coords, Coords::OrderingFunctor> visited_positions;
+		std::set<Coords> visited_positions;
 		FCoords fc = get_fcoords(c);
 		portdocks = find_portdock(fc);
 

@@ -26,7 +26,6 @@
 #include "editor/tools/increase_height_tool.h"
 #include "editor/tools/increase_resources_tool.h"
 #include "editor/tools/info_tool.h"
-#include "editor/tools/make_infrastructure_tool.h"
 #include "editor/tools/noise_height_tool.h"
 #include "editor/tools/place_critter_tool.h"
 #include "editor/tools/place_immovable_tool.h"
@@ -84,7 +83,6 @@ public:
 		EditorSetPortSpaceTool set_port_space;
 		EditorUnsetPortSpaceTool unset_port_space;
 		EditorSetOriginTool set_origin;
-		EditorMakeInfrastructureTool make_infrastructure;
 	};
 	explicit EditorInteractive(Widelands::EditorGameBase&);
 
@@ -156,6 +154,10 @@ private:
 
 	void on_buildhelp_changed(const bool value) override;
 
+	void toggle_resources();
+	void toggle_immovables();
+	void toggle_bobs();
+
 	//  state variables
 	bool need_save_;
 	std::vector<PlayerReferences> player_tribe_references_;
@@ -178,7 +180,9 @@ private:
 	UI::UniqueWindow::Registry helpmenu_;
 
 	UI::Button* toggle_buildhelp_;
-	UI::Button* reset_zoom_;
+	UI::Button* toggle_resources_;
+	UI::Button* toggle_immovables_;
+	UI::Button* toggle_bobs_;
 	UI::Button* undo_;
 	UI::Button* redo_;
 

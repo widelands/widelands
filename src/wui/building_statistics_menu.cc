@@ -485,7 +485,7 @@ void BuildingStatisticsMenu::jump_building(JumpTarget target, bool reverse) {
 
 	if (found) {
 		validate_pointer(&last_building_index_, stats_vector.size());
-		iplayer().scroll_to_field(
+		iplayer().map_view()->scroll_to_field(
 		   stats_vector[last_building_index_].pos, MapView::Transition::Smooth);
 	}
 	low_production_reset_focus();
@@ -540,7 +540,6 @@ int32_t BuildingStatisticsMenu::validate_pointer(int32_t* const id, int32_t cons
 void BuildingStatisticsMenu::update() {
 	const Player& player = iplayer().player();
 	const TribeDescr& tribe = player.tribe();
-	const Map& map = iplayer().game().map();
 	const DescriptionIndex nr_buildings = iplayer().egbase().tribes().nrbuildings();
 
 	owned_label_.set_visible(false);
@@ -581,7 +580,7 @@ void BuildingStatisticsMenu::update() {
 				++nr_build;
 			else {
 				++nr_owned;
-				BaseImmovable& immovable = *map[stats_vector[l].pos].get_immovable();
+				BaseImmovable& immovable = *iplayer().game().map()[stats_vector[l].pos].get_immovable();
 				if (building.type() == MapObjectType::PRODUCTIONSITE ||
 				    building.type() == MapObjectType::TRAININGSITE) {
 					ProductionSite& productionsite = dynamic_cast<ProductionSite&>(immovable);
@@ -676,7 +675,7 @@ void BuildingStatisticsMenu::update() {
 			}
 		}
 
-		std::string owned_text = "";
+		std::string owned_text;
 		if (player.tribe().has_building(id) && (building.is_buildable() || building.is_enhanced())) {
 			/** TRANSLATORS Buildings: owned / under construction */
 			owned_text = (boost::format(_("%1%/%2%")) % nr_owned % nr_build).str();

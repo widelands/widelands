@@ -127,7 +127,7 @@ WatchWindow::WatchWindow(InteractiveGameBase& parent,
 	mapview_.fieldclicked.connect(boost::bind(&InteractiveGameBase::node_action, &parent));
 	mapview_.changeview.connect([this] { stop_tracking_by_drag(); });
 	warp_mainview.connect([&parent](const Vector2f& map_pixel) {
-		parent.scroll_to_map_pixel(map_pixel, MapView::Transition::Smooth);
+		parent.map_view()->scroll_to_map_pixel(map_pixel, MapView::Transition::Smooth);
 	});
 }
 
@@ -210,11 +210,10 @@ void WatchWindow::think() {
 	}
 
 	if (upcast(Widelands::Bob, bob, views_[cur_index_].tracking.get(game()))) {
-		const Vector2f field_position =
-		   MapviewPixelFunctions::to_map_pixel(game().map(), bob->get_position());
+		const Widelands::Map& map = game().map();
+		const Vector2f field_position = MapviewPixelFunctions::to_map_pixel(map, bob->get_position());
 		const Vector2f pos = bob->calc_drawpos(game(), field_position, 1.f);
 
-		Widelands::Map& map = game().map();
 		// Drop the tracking if it leaves our vision range
 		InteractivePlayer* ipl = game().get_ipl();
 		if (ipl && 1 >= ipl->player().vision(map.get_index(bob->get_position(), map.get_width()))) {
@@ -253,7 +252,7 @@ void WatchWindow::do_follow() {
 		//  Find the nearest bob. Other object types can not move and are
 		//  therefore not of interest.
 		Vector2f center_map_pixel = mapview_.view_area().rect().center();
-		Widelands::Map& map = g.map();
+		const Widelands::Map& map = g.map();
 		MapviewPixelFunctions::normalize_pix(map, &center_map_pixel);
 		std::vector<Widelands::Bob*> bobs;
 		//  Scan progressively larger circles around the given position for

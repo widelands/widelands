@@ -1171,10 +1171,10 @@ int LuaMap::get_height(lua_State* L) {
       for each player defined in the map.
 */
 int LuaMap::get_player_slots(lua_State* L) {
-	Map& m = get_egbase(L).map();
+	const Map& map = get_egbase(L).map();
 
-	lua_createtable(L, m.get_nrplayers(), 0);
-	for (Widelands::PlayerNumber i = 0; i < m.get_nrplayers(); i++) {
+	lua_createtable(L, map.get_nrplayers(), 0);
+	for (Widelands::PlayerNumber i = 0; i < map.get_nrplayers(); i++) {
 		lua_pushuint32(L, i + 1);
 		to_lua<LuaMaps::LuaPlayerSlot>(L, new LuaMaps::LuaPlayerSlot(i + 1));
 		lua_settable(L, -3);
@@ -1206,7 +1206,7 @@ int LuaMap::get_player_slots(lua_State* L) {
       :returns: The created immovable.
 */
 int LuaMap::place_immovable(lua_State* const L) {
-	std::string from_where = "";
+	std::string from_where;
 
 	const std::string objname = luaL_checkstring(L, 2);
 	LuaMaps::LuaField* c = *get_user_class<LuaMaps::LuaField>(L, 3);
@@ -1252,11 +1252,11 @@ int LuaMap::get_field(lua_State* L) {
 	uint32_t x = luaL_checkuint32(L, 2);
 	uint32_t y = luaL_checkuint32(L, 3);
 
-	Map& m = get_egbase(L).map();
+	const Map& map = get_egbase(L).map();
 
-	if (x >= static_cast<uint32_t>(m.get_width()))
+	if (x >= static_cast<uint32_t>(map.get_width()))
 		report_error(L, "x coordinate out of range!");
-	if (y >= static_cast<uint32_t>(m.get_height()))
+	if (y >= static_cast<uint32_t>(map.get_height()))
 		report_error(L, "y coordinate out of range!");
 
 	return to_lua<LuaMaps::LuaField>(L, new LuaMaps::LuaField(x, y));
@@ -1272,7 +1272,7 @@ int LuaMap::get_field(lua_State* L) {
 // TODO(unknown): do we really want this function?
 int LuaMap::recalculate(lua_State* L) {
 	EditorGameBase& egbase = get_egbase(L);
-	egbase.map().recalc_whole_map(egbase.world());
+	egbase.mutable_map()->recalc_whole_map(egbase.world());
 	return 0;
 }
 
@@ -5787,7 +5787,7 @@ int LuaField::set_height(lua_State* L) {
 		report_error(L, "height must be <= %i", MAX_FIELD_HEIGHT);
 
 	EditorGameBase& egbase = get_egbase(L);
-	egbase.map().set_height(egbase.world(), f, height);
+	egbase.mutable_map()->set_height(egbase.world(), f, height);
 
 	return 0;
 }
@@ -5865,9 +5865,9 @@ int LuaField::set_resource(lua_State* L) {
 
 	auto c = fcoords(L);
 	const auto current_amount = c.field->get_resources_amount();
-	auto& map = egbase.map();
-	map.initialize_resources(c, res, c.field->get_initial_res_amount());
-	map.set_resources(c, current_amount);
+	auto* map = egbase.mutable_map();
+	map->initialize_resources(c, res, c.field->get_initial_res_amount());
+	map->set_resources(c, current_amount);
 	return 0;
 }
 
@@ -5894,12 +5894,12 @@ int LuaField::set_resource_amount(lua_State* L) {
 		report_error(L, "Illegal amount: %i, must be >= 0 and <= %i", amount,
 		             static_cast<unsigned int>(max_amount));
 
-	auto& map = egbase.map();
+	auto* map = egbase.mutable_map();
 	if (is_a(Game, &egbase)) {
-		map.set_resources(c, amount);
+		map->set_resources(c, amount);
 	} else {
 		// in editor, reset also initial amount
-		map.initialize_resources(c, res, amount);
+		map->initialize_resources(c, res, amount);
 	}
 	return 0;
 }
@@ -5972,7 +5972,8 @@ int LuaField::set_terr(lua_State* L) {
 	if (td == static_cast<DescriptionIndex>(-1))
 		report_error(L, "Unknown terrain '%s'", name);
 
-	egbase.map().change_terrain(world, TCoords<FCoords>(fcoords(L), TCoords<FCoords>::R), td);
+	egbase.mutable_map()->change_terrain(
+	   world, TCoords<FCoords>(fcoords(L), TCoords<FCoords>::R), td);
 
 	lua_pushstring(L, name);
 	return 1;
@@ -5991,7 +5992,8 @@ int LuaField::set_terd(lua_State* L) {
 	if (td == static_cast<DescriptionIndex>(INVALID_INDEX))
 		report_error(L, "Unknown terrain '%s'", name);
 
-	egbase.map().change_terrain(world, TCoords<FCoords>(fcoords(L), TCoords<FCoords>::D), td);
+	egbase.mutable_map()->change_terrain(
+	   world, TCoords<FCoords>(fcoords(L), TCoords<FCoords>::D), td);
 
 	lua_pushstring(L, name);
 	return 1;
@@ -6058,7 +6060,7 @@ int LuaField::get_owner(lua_State* L) {
 */
 int LuaField::get_claimers(lua_State* L) {
 	EditorGameBase& egbase = get_egbase(L);
-	Map& map = egbase.map();
+	const Map& map = egbase.map();
 
 	std::vector<PlrInfluence> claimers;
 
@@ -6187,7 +6189,7 @@ int LuaField::has_caps(lua_State* L) {
  ==========================================================
  */
 int LuaField::region(lua_State* L, uint32_t radius) {
-	Map& map = get_egbase(L).map();
+	const Map& map = get_egbase(L).map();
 	MapRegion<Area<FCoords>> mr(map, Area<FCoords>(fcoords(L), radius));
 
 	lua_newtable(L);
@@ -6203,7 +6205,7 @@ int LuaField::region(lua_State* L, uint32_t radius) {
 }
 
 int LuaField::hollow_region(lua_State* L, uint32_t radius, uint32_t inner_radius) {
-	Map& map = get_egbase(L).map();
+	const Map& map = get_egbase(L).map();
 	HollowArea<Area<>> har(Area<>(coords_, radius), inner_radius);
 
 	MapHollowRegion<Area<>> mr(map, har);
@@ -6265,7 +6267,7 @@ void LuaPlayerSlot::__unpersist(lua_State* L) {
       (RO) The name of the tribe suggested for this player in this map
 */
 int LuaPlayerSlot::get_tribe_name(lua_State* L) {
-	lua_pushstring(L, get_egbase(L).get_map()->get_scenario_player_tribe(player_number_));
+	lua_pushstring(L, get_egbase(L).map().get_scenario_player_tribe(player_number_));
 	return 1;
 }
 
@@ -6275,7 +6277,7 @@ int LuaPlayerSlot::get_tribe_name(lua_State* L) {
       (RO) The name for this player as suggested in this map
 */
 int LuaPlayerSlot::get_name(lua_State* L) {
-	lua_pushstring(L, get_egbase(L).get_map()->get_scenario_player_name(player_number_));
+	lua_pushstring(L, get_egbase(L).map().get_scenario_player_name(player_number_));
 	return 1;
 }
 
