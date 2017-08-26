@@ -29,15 +29,59 @@ function farm_plans()
       print("Failed to remove artifact at (" .. f.x .. ", " .. f.y .. ")")
    end
    campaign_message_box(amalea_4)
+   o.done = true
    p1:allow_buildings{"empire_farm"}
 end  
 
 function clear_roads()
    local o = add_campaign_objective(obj_clear_roads)
-end 
+   local cleared = false
+   local count
+   
+   while cleared == false do 
+   cleared = true
+   sleep (5000)
+      for x=7, 35 do
+         for y=180, 207 do
+           local field = map:get_field(x,y)
+		   if (field.immovable and field.immovable.descr.type_name == "flag" and field.immovable.building == nil) then
+			  local numroads = 0
+              for _ in pairs(field.immovable.roads) do numroads = numroads + 1 end
+		        if numroads < 2 then
+		        cleared = false
+                end
+		    end
+	     end
+         for y=0, 25 do
+           local field = map:get_field(x,y)
+		   if (field.immovable and field.immovable.descr.type_name == "flag" and field.immovable.building == nil) then
+			  local numroads = 0
+              for _ in pairs(field.immovable.roads) do numroads = numroads + 1 end
+		        if numroads < 2 then
+		        cleared = false
+                end
+		    end
+	     end
+	  end	  
+   end 
+   o.done = true
+   campaign_message_box(amalea_6)
+end
+
+
 
 function quarries_lumberjacks()
    local o = add_campaign_objective(obj_build_quarries_and_lumberjacks)
+   while not check_for_buildings(p1, { empire_lumberjacks_house = 3, empire_quarry = 2}) do sleep(3000) end
+   o.done = true
+   campaign_message_box(amalea_5)
+   run(produce_food)
+end
+
+function produce_food()
+   local o = add_campaign_objective(obj_produce_fish)
+   while count_in_warehouses(ration) < 3 do sleep(3000) end
+   o.done = true 
 end
 
 function mission_thread()
@@ -72,8 +116,7 @@ function mission_thread()
    -- campaign_message_box(saledus_2)
 
    -- 
-   -- while #p1:get_buildings("empire_quarry") < 1 do sleep(3000) end
-   -- o1.done = true
+
 
    -- -- quarry is now build but we need more basic infrastructure
    -- campaign_message_box(amalea_2)
