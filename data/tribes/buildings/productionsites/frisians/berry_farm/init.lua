@@ -27,7 +27,7 @@ tribes:new_productionsite_type {
    },
 
    aihints = {
-      renews_map_resource = "fruit",
+      supports_production_of = { "fruit", "honey" },
       space_consumer = true,
       prohibited_till = 500
    },

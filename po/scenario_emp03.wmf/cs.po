@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-08-11 11:44+0000\n"
+"POT-Creation-Date: 2017-08-17 14:06+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Milan Fašina <matrix17@seznam.cz>, 2017\n"
 "Language-Team: Czech (https://www.transifex.com/widelands/teams/35159/cs/)\n"
@@ -69,11 +69,11 @@ msgstr ""
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:66
 msgid "Lower the demand for marble columns"
-msgstr ""
+msgstr "Vyšší poptávka po mramorových sloupech"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:68
 msgid "Lower Demand for Marble Columns"
-msgstr ""
+msgstr "Nižší poptávka po mramorových sloupech"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:69
 msgid ""
@@ -263,6 +263,8 @@ msgid ""
 "Finally, we were set towards Fremil again. I couldn’t await the chance to "
 "clear my records of this big defeat by the Barbarians."
 msgstr ""
+"Konečně míříme zpět do Fremilu. Nemůžu se dočkat až ze svým záznamů smažu "
+"záznamy o té velké porážce od barbarů."
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:177
@@ -790,7 +792,7 @@ msgstr ""
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:465
 msgid "Amalea is really proud of the achievements…"
-msgstr ""
+msgstr "Amalea je opravdu hrdá na všechny úspěchy..."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:467
@@ -809,11 +811,11 @@ msgstr ""
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:476
 msgid "Amalea is Pleased"
-msgstr ""
+msgstr "Amalea je potěšena"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:477
 msgid "Amalea is content that we will manage all our challenges"
-msgstr ""
+msgstr "Amalea je spokojená, že překonáme všechny naše problémy"
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:479
@@ -895,7 +897,7 @@ msgstr ""
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:520
 msgid "Amalea is Very Content"
-msgstr ""
+msgstr "Amalea je velmi spokojená"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:521
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:530
@@ -943,7 +945,7 @@ msgstr "Vítězství je naše"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:543
 msgid "Saledus is cheering…"
-msgstr ""
+msgstr "Saledus jásá..."
 
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:545
@@ -951,6 +953,8 @@ msgid ""
 "Sire, finally we have defeated the Barbarians in this region. And "
 "furthermore, we have built a nice colony for our empire."
 msgstr ""
+"Pane, konečně jsme porazili barbary v této oblasti. A co víc, postavili jsme"
+" zde pěknou kolonii našeho císařství."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:547
 msgid "The king will be very pleased with our victory."
@@ -962,7 +966,7 @@ msgstr ""
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:554
 msgid "Saledus is Very Sad and Anxious…"
-msgstr ""
+msgstr "Saledus je velmi smutný a znepokojený..."
 
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:556
@@ -1095,6 +1099,7 @@ msgid ""
 "You have completed this mission. You may continue playing if you wish, "
 "otherwise move on to the next mission."
 msgstr ""
+"Dokončil jsi misi. Pokud chceš, můžeš hrát dál, jinak pokračuj další misí."
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:628

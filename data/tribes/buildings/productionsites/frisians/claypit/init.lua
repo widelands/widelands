@@ -35,7 +35,7 @@ tribes:new_productionsite_type {
       very_weak_ai_limit = 1,
       weak_ai_limit = 2,
       basic_amount = 1,
-      renews_map_resource=pond_dry
+      supports_production_of = { pond_dry }
    },
 
    working_positions = {
