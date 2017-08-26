@@ -36,7 +36,7 @@ struct BuildingHints {
 	~BuildingHints() {
 	}
 
-	std::set<std::string> get_supported_production_() const {
+	std::set<std::string> supported_production() const {
 		return supported_production_;
 	}
 
