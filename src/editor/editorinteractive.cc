@@ -312,11 +312,11 @@ bool EditorInteractive::handle_mousepress(uint8_t btn, int32_t x, int32_t y) {
 }
 
 void EditorInteractive::draw(RenderTarget& dst) {
-	const GameRenderer::Overlays overlays{get_text_to_draw(), {}};
-	map_view()->draw_map_view(
-	   egbase(), overlays,
-	   draw_immovables_ ? GameRenderer::DrawImmovables::kYes : GameRenderer::DrawImmovables::kNo,
-	   draw_bobs_ ? GameRenderer::DrawBobs::kYes : GameRenderer::DrawBobs::kNo, nullptr, &dst);
+	const auto& ebase = egbase();
+	auto* fields_to_draw = map_view()->draw_terrain(ebase, &dst);
+	draw_objects(ebase, 1.f / map_view()->view().zoom, *fields_to_draw, nullptr, get_text_to_draw(),
+	             draw_immovables_ ? DrawImmovables::kYes : DrawImmovables::kNo,
+	             draw_bobs_ ? DrawBobs::kYes : DrawBobs::kNo, &dst);
 }
 
 /// Needed to get freehand painting tools (hold down mouse and move to edit).

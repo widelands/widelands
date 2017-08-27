@@ -203,6 +203,7 @@ wl_library(graphic_minimap_renderer
 
 wl_library(graphic_terrain_programs
   SRCS
+    gl/fields_to_draw.cc
     gl/fields_to_draw.h
     gl/road_program.cc
     gl/road_program.h

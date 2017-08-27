@@ -26,48 +26,25 @@
 #include "base/macros.h"
 #include "base/vector.h"
 #include "graphic/gl/fields_to_draw.h"
+#include "logic/editor_game_base.h"
 #include "logic/map_objects/draw_text.h"
+#include "logic/player.h"
 
-namespace Widelands {
-class Player;
-class EditorGameBase;
-}
+enum class DrawImmovables { kNo, kYes };
+enum class DrawBobs { kNo, kYes };
 
-class RenderTarget;
+void draw_objects(const Widelands::EditorGameBase& egbase,
+						const float scale,
+						const FieldsToDraw& fields_to_draw,
+						const Widelands::Player* player,
+						const TextToDraw text_to_draw,
+						const DrawImmovables& draw_immovables,
+						const DrawBobs& draw_bobs,
+						RenderTarget* dst);
 
-// Renders the MapView on screen.
-class GameRenderer {
-public:
-	struct Overlays {
-		TextToDraw text_to_draw;
-		std::map<Widelands::Coords, uint8_t> road_building_preview;
-	};
-
-	enum class DrawImmovables { kNo, kYes };
-	enum class DrawBobs { kNo, kYes };
-
-	GameRenderer();
-	~GameRenderer();
-
-	// Renders the map from a 'player's point of view (or omniscient if nullptr)
-	// into the given drawing window. The 'viewpoint' is the top left screens
-	// pixel map pixel and 'scale' is the magnification of the view.
-	void render(const Widelands::EditorGameBase& egbase,
-	          const Vector2f& viewpoint,
-	          float zoom,
-	          const Widelands::Player* player,
-	          const Overlays& overlays,
-	          const DrawImmovables& draw_immovables,
-	          const DrawBobs& draw_bobs,
-	          RenderTarget* dst);
-
-private:
-
-	// This is owned and handled by us, but handed to the RenderQueue, so we
-	// basically promise that this stays valid for one frame.
-	FieldsToDraw fields_to_draw_;
-
-	DISALLOW_COPY_AND_ASSIGN(GameRenderer);
-};
+void draw_terrain(const Widelands::EditorGameBase& egbase,
+						const FieldsToDraw& fields_to_draw,
+						const float scale,
+						RenderTarget* dst);
 
 #endif  // end of include guard: WL_GRAPHIC_GAME_RENDERER_H

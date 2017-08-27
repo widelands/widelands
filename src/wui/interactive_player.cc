@@ -58,6 +58,34 @@
 using Widelands::Building;
 using Widelands::Map;
 
+namespace  {
+
+// Returns the brightness value in [0, 1.] for 'fcoords' at 'gametime' for
+// 'pf'. See 'field_brightness' in fields_to_draw.cc for scale of values.
+float adjusted_field_brightness(const Widelands::FCoords& fcoords,
+                       const uint32_t gametime,
+                       const Widelands::Player::Field& pf) {
+	if (pf.vision == 0) {
+		return 0.;
+	};
+
+	uint32_t brightness = 144 + fcoords.field->get_brightness();
+	brightness = std::min<uint32_t>(255, (brightness * 255) / 160);
+
+	if (pf.vision == 1) {
+		static const uint32_t kDecayTimeInMs = 20000;
+		const Widelands::Duration time_ago = gametime - pf.time_node_last_unseen;
+		if (time_ago < kDecayTimeInMs) {
+			brightness = (brightness * (2 * kDecayTimeInMs - time_ago)) / (2 * kDecayTimeInMs);
+		} else {
+			brightness = brightness / 2;
+		}
+	}
+	return brightness / 255.;
+}
+
+}  // namespace 
+
 InteractivePlayer::InteractivePlayer(Widelands::Game& g,
                                      Section& global_s,
                                      Widelands::PlayerNumber const plyn,
@@ -181,9 +209,40 @@ void InteractivePlayer::draw(RenderTarget& dst) {
 }
 
 void InteractivePlayer::draw_map_view(MapView* map_view, RenderTarget* dst) {
-	const GameRenderer::Overlays overlays{get_text_to_draw(), road_building_preview()};
-	map_view->draw_map_view(egbase(), overlays, GameRenderer::DrawImmovables::kYes,
-	                        GameRenderer::DrawBobs::kYes, &player(), dst);
+	const Widelands::Player& plr = player();
+	const auto& gbase = egbase();
+	const Widelands::Map& map = gbase.map();
+	const uint32_t gametime = gbase.get_gametime();
+
+	auto* fields_to_draw = map_view->draw_terrain(gbase, dst);
+	const auto roads_preview = road_building_preview();
+
+	for (size_t idx = 0; idx < fields_to_draw->size(); ++idx) {
+		auto* f = fields_to_draw->mutable_field(idx);
+
+		// Adjust this field for visibility for this player.
+		if (!plr.see_all()) {
+			const Widelands::Player::Field& pf =
+			   plr.fields()[map.get_index(f->fcoords, map.get_width())];
+
+			f->brightness = adjusted_field_brightness(f->fcoords, gametime, pf);
+			f->roads = pf.roads;
+			f->vision = pf.vision;
+			if (pf.vision == 1) {
+				f->owner = pf.owner != 0 ? &gbase.player(pf.owner) : nullptr;
+				f->is_border = pf.border;
+			}
+		}
+
+		// Add road building overlays.
+		const auto it = roads_preview.find(f->fcoords);
+		if (it != roads_preview.end()) {
+			f->roads |= it->second;
+		}
+	}
+
+	draw_objects(gbase, 1.f / map_view->view().zoom, *fields_to_draw, &player(),
+	             get_text_to_draw(), DrawImmovables::kYes, DrawBobs::kYes, dst);
 }
 
 void InteractivePlayer::popup_message(Widelands::MessageId const id,

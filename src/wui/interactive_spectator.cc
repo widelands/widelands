@@ -109,9 +109,13 @@ void InteractiveSpectator::draw(RenderTarget& dst) {
 }
 
 void InteractiveSpectator::draw_map_view(MapView* map_view, RenderTarget* dst) {
-	const GameRenderer::Overlays overlays{get_text_to_draw(), road_building_preview()};
-	map_view->draw_map_view(egbase(), overlays, GameRenderer::DrawImmovables::kYes,
-	                        GameRenderer::DrawBobs::kYes, nullptr, dst);
+	// A spectator cannot build roads.
+	assert(road_building_preview().empty());
+
+	auto* fields_to_draw = map_view->draw_terrain(egbase(), dst);
+
+	draw_objects(egbase(), 1.f / map_view->view().zoom, *fields_to_draw, nullptr, get_text_to_draw(),
+	             DrawImmovables::kYes, DrawBobs::kYes, dst);
 }
 
 /**
