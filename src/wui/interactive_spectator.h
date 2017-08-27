@@ -44,6 +44,7 @@ struct InteractiveSpectator : public InteractiveGameBase {
 
 	bool handle_key(bool down, SDL_Keysym) override;
 	void draw(RenderTarget& dst) override;
+	void draw_map_view(MapView* map_view, RenderTarget* dst) override;
 
 private:
 	void exit_btn();

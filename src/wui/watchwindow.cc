@@ -58,7 +58,7 @@ struct WatchWindow : public UI::Window {
 	~WatchWindow();
 
 	Widelands::Game& game() const {
-		return dynamic_cast<InteractiveGameBase&>(*get_parent()).game();
+		return parent_.game();
 	}
 
 	boost::signals2::signal<void(Vector2f)> warp_mainview;
@@ -98,7 +98,7 @@ WatchWindow::WatchWindow(InteractiveGameBase& parent,
                          uint32_t const h,
                          bool const init_single_window)
    : UI::Window(&parent, "watch", x, y, w, h, _("Watch")),
-	parent_(parent),
+     parent_(parent),
      map_view_(this, game().map(), 0, 0, 200, 166),
      last_visit_(game().get_gametime()),
      single_window_(init_single_window),
@@ -140,16 +140,9 @@ WatchWindow::WatchWindow(InteractiveGameBase& parent,
 }
 
 void WatchWindow::draw(RenderTarget& dst) {
-	// NOCOM(#sirver): this does not work. It requires settings from the parent that are not available easily in this context.
-	// Either: add the context to the parent and bubble down a pointer to it.
-	// or add a function to the parent that knows how to render map_views_.
-	// or come up with something clever. I am out of ideas.
-	UniqueWindow::draw(dst);
-
+	UI::Window::draw(dst);
 	if (!is_minimal()) {
-		const GameRenderer::Overlays overlays{parent_.get_text_to_draw(), road_building_preview()};
-		map_view()->draw_map_view(egbase(), overlays, GameRenderer::DrawImmovables::kYes,
-		                          GameRenderer::DrawBobs::kYes, &player(), &dst);
+		parent_.draw_map_view(&map_view_, &dst);
 	}
 }
 
