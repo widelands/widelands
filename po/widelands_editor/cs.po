@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-01-31 07:09+0000\n"
-"PO-Revision-Date: 2017-02-07 17:28+0000\n"
+"POT-Creation-Date: 2017-08-17 14:06+0000\n"
+"PO-Revision-Date: 2017-08-20 07:13+0000\n"
 "Last-Translator: Milan Fašina <matrix17@seznam.cz>\n"
 "Language-Team: Czech (http://www.transifex.com/widelands/widelands/language/cs/)\n"
 "MIME-Version: 1.0\n"
@@ -42,79 +42,103 @@ msgstr "Zapnout hlavní nabídku"
 msgid "Toggle tools menu"
 msgstr "Zapnout menu nástroje"
 
-#. TRANSLATORS: This is an access key combination. The hotkey is 'p'
+#. TRANSLATORS: This is an access key combination. Localize, but do not change
+#. the key.
 #: ../../data/scripting/editor/editor_controls.lua:25
+msgid "Toggle building spaces"
+msgstr "Přepínání míst pro budovy"
+
+#. TRANSLATORS: This is an access key combination. Localize, but do not change
+#. the key.
+#: ../../data/scripting/editor/editor_controls.lua:27
+msgid "Toggle immovables display"
+msgstr "Přepínání zobrazení budov"
+
+#. TRANSLATORS: This is an access key combination. Localize, but do not change
+#. the key.
+#: ../../data/scripting/editor/editor_controls.lua:29
+msgid "Toggle animals display"
+msgstr "Přepínání zobrazení zvěře"
+
+#. TRANSLATORS: This is an access key combination. The hotkey is 'p'
+#: ../../data/scripting/editor/editor_controls.lua:31
+msgid "Toggle resources display"
+msgstr "Přepínání zobrazení surovin"
+
+#. TRANSLATORS: This is an access key combination. Localize, but do not change
+#. the key.
+#: ../../data/scripting/editor/editor_controls.lua:33
 msgid "Toggle player menu"
 msgstr "Zapnout menu hráče"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
-#: ../../data/scripting/editor/editor_controls.lua:27
+#: ../../data/scripting/editor/editor_controls.lua:35
 msgid "Undo"
 msgstr "Zpět"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
-#: ../../data/scripting/editor/editor_controls.lua:29
+#: ../../data/scripting/editor/editor_controls.lua:37
 msgid "Redo"
 msgstr "Provést znovu"
 
 #. TRANSLATORS: This is an access key combination. The hotkey is 'i'
-#: ../../data/scripting/editor/editor_controls.lua:31
+#: ../../data/scripting/editor/editor_controls.lua:39
 msgid "Activate information tool"
 msgstr "Zapnout informace o nástroji"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
-#: ../../data/scripting/editor/editor_controls.lua:33
+#: ../../data/scripting/editor/editor_controls.lua:41
 msgctxt "hotkey"
 msgid "Ctrl + L"
 msgstr "Ctrl + L"
 
-#: ../../data/scripting/editor/editor_controls.lua:33
+#: ../../data/scripting/editor/editor_controls.lua:41
 msgid "Load map"
 msgstr "Nahrát mapu"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
-#: ../../data/scripting/editor/editor_controls.lua:35
+#: ../../data/scripting/editor/editor_controls.lua:43
 msgctxt "hotkey"
 msgid "Ctrl + S"
 msgstr "Ctrl + S"
 
-#: ../../data/scripting/editor/editor_controls.lua:35
+#: ../../data/scripting/editor/editor_controls.lua:43
 msgid "Save map"
 msgstr "Uložit mapu"
 
-#: ../../data/scripting/editor/editor_controls.lua:39
+#: ../../data/scripting/editor/editor_controls.lua:47
 msgid "Tools"
 msgstr "Nástroje"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
-#: ../../data/scripting/editor/editor_controls.lua:42
+#: ../../data/scripting/editor/editor_controls.lua:50
 msgctxt "hotkey"
 msgid "0-9"
 msgstr "0-9"
 
-#: ../../data/scripting/editor/editor_controls.lua:42
+#: ../../data/scripting/editor/editor_controls.lua:50
 msgid "Change tool size"
 msgstr "Změnit velikost nástroje"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
-#: ../../data/scripting/editor/editor_controls.lua:44
+#: ../../data/scripting/editor/editor_controls.lua:52
 msgctxt "hotkey"
 msgid "Click"
 msgstr "Klik"
 
-#: ../../data/scripting/editor/editor_controls.lua:44
+#: ../../data/scripting/editor/editor_controls.lua:52
 msgid ""
 "Place new elements on the map, or increase map elements by the value "
 "selected by ‘Increase/Decrease value’"
 msgstr "Vlož nové prvky do mapy nebo zvyš počet prvků na mapě o hodnotu v \"Zvýšit/Snížit hodnotu\""
 
-#: ../../data/scripting/editor/editor_controls.lua:46
+#: ../../data/scripting/editor/editor_controls.lua:54
 msgid ""
 "Remove elements from the map, or decrease map elements by the value selected"
 " by ‘Increase/Decrease value’"
@@ -122,19 +146,19 @@ msgstr "Odstranit prvky z mapy nebo snížit počet prvků o hodnotu v \"Zvýši
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
-#: ../../data/scripting/editor/editor_controls.lua:46
+#: ../../data/scripting/editor/editor_controls.lua:54
 msgctxt "hotkey"
 msgid "Shift + Click"
 msgstr "Shift + Klik"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
-#: ../../data/scripting/editor/editor_controls.lua:48
+#: ../../data/scripting/editor/editor_controls.lua:56
 msgctxt "hotkey"
 msgid "Ctrl + Click"
 msgstr "Ctrl + Klik"
 
-#: ../../data/scripting/editor/editor_controls.lua:48
+#: ../../data/scripting/editor/editor_controls.lua:56
 msgid "Set map elements to the value selected by ‘Set Value’"
 msgstr "Nastavit počet prvků na mapě v \"Nastavit hodnotu\""
 

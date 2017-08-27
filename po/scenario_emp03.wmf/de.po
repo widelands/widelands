@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-08-11 11:44+0000\n"
+"POT-Creation-Date: 2017-08-17 14:06+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>, 2017\n"
 "Language-Team: German (https://www.transifex.com/widelands/teams/35159/de/)\n"
@@ -326,8 +326,8 @@ msgstr ""
 "Abermals strandeten wir an einer unbekannten Küste und schliefen im Schatten"
 " einiger Palmen, bis die Sonne hoch am Himmel stand. Ich befürchte niemand "
 "war wirklich überrascht, dass das Einzige was wir sehen konnten, als wir "
-"gegen Mittag erwachten, Sand war ....obwohl die Berge von Steinen neben "
-"unserem Lager waren wirklich erstaunlich."
+"gegen Mittag erwachten, Sand war … obwohl die Berge von Steinen neben "
+"unserem Lager wirklich erstaunlich waren."
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:207
@@ -901,7 +901,7 @@ msgid ""
 "building an arena and other buildings to train our soldiers."
 msgstr ""
 "Das war nur ein Witz. Natürlich müssen wir so viel Gold wie möglich für eine"
-" Arena und andere Trainingsgebäude für unsere Soldaten aufsparen."
+" Arena und andere Trainingsgebäude aufsparen."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:476
 msgid "Amalea is Pleased"
