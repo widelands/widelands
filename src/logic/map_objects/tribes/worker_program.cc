@@ -30,6 +30,31 @@
 #include "sound/sound_handler.h"
 
 namespace Widelands {
+/* RST
+.. _tribes_worker_programs:
+
+Worker Programs
+===============
+
+Worker programs are defined in the ``programs`` subtable specified in calls to
+:ref:`tribes:new_worker_type <lua_tribes_workers_common>`.
+Each worker program is a Lua table in itself and defined as a series of command strings.
+Commands can also have parameters, which are separated from each other by a blank space.
+The table looks like this::
+
+   programs = {
+      program1 = {
+         "command1 parameter1 parameter2",
+         "command2 parameter1",
+         "return"
+      },
+      program2 = {
+         "command3",
+         "command4 parameter1 parameter2 parameter3",
+         "return"
+      }
+   },
+*/
 
 const WorkerProgram::ParseMap WorkerProgram::parsemap_[] = {
    {"mine", &WorkerProgram::parse_mine},
@@ -93,11 +118,26 @@ void WorkerProgram::parse(const LuaTable& table) {
 	}
 }
 
+/* RST
+.. function:: createware <ware_name>
+
+   :arg ware_name: The ware type to create, e.g. ``wheat``.
+   :type ware_name: :class:`string`
+
+   The worker will create and carry a ware of the given type. Example::
+
+      harvest = {
+         "findobject attrib:ripe_wheat radius:2",
+         "walk object",
+         "play_sound sound/farm scythe 220",
+         "animation harvesting 10000",
+         "object harvest",
+         "animation gathering 4000",
+         "createware wheat", -- Create 1 wheat and start carrying it
+         "return"
+      },
+*/
 /**
- * createware \<waretype\>
- *
- * The worker will create and carry a ware of the given type.
- *
  * iparam1 = ware index
  */
 void WorkerProgram::parse_createware(Worker::Action* act, const std::vector<std::string>& cmd) {
@@ -108,12 +148,29 @@ void WorkerProgram::parse_createware(Worker::Action* act, const std::vector<std:
 	act->iparam1 = tribes_.safe_ware_index(cmd[1]);
 }
 
+/* RST
+.. function:: mine <resource_name> <area>
+
+   :arg resource_name: The map resource to mine, e.g. ``fish``.
+   :type resource_name: :class:`string`
+
+   :arg area: The radius that is scanned for decreasing the map resource, e.g. ``1``.
+   :type area: :class:`int`
+
+   Mine on the current coordinates that the worker has walked to for resources decrease. Example::
+
+      fish = {
+         "findspace size:any radius:7 resource:fish",
+         "walk coords",
+         "play_sound sound/fisher fisher_throw_net 192",
+         "mine fish 1", -- Remove a fish in an area of 1
+         "animation fishing 3000",
+         "play_sound sound/fisher fisher_pull_net 192",
+         "createware fish",
+         "return"
+      },
+*/
 /**
- * mine \<resource\> \<area\>
- *
- * Mine on the current coordinates (from walk or so) for resources decrease,
- * go home
- *
  * iparam1 = area
  * sparam1 = resource
  */
@@ -130,12 +187,26 @@ void WorkerProgram::parse_mine(Worker::Action* act, const std::vector<std::strin
 		throw wexception("Bad area '%s'", cmd[2].c_str());
 }
 
+/* RST
+.. function:: breed <resource_name> <area>
+
+   :arg resource_name: The map resource to breed, e.g. ``fish``.
+   :type resource_name: :class:`string`
+
+   :arg area: The radius that is scanned for increasing the map resource, e.g. ``1``.
+   :type area: :class:`int`
+
+   Breed a resource on the current coordinates that the worker has walked to for resources increase. Example::
+
+      breed = {
+         "findspace size:any radius:7 breed resource:fish",
+         "walk coords",
+         "animation freeing 3000",
+         "breed fish 1", -- Add a fish in an area of 1
+         "return"
+      },
+*/
 /**
- * breed \<resource\> \<area\>
- *
- * Breed on the current coordinates (from walk or so) for resource increase,
- * go home
- *
  * iparam1 = area
  * sparam1 = resource
  */
@@ -152,12 +223,26 @@ void WorkerProgram::parse_breed(Worker::Action* act, const std::vector<std::stri
 		throw wexception("Bad area '%s'", cmd[2].c_str());
 }
 
+/* RST
+.. function:: setbobdescription <bob_name> <bob_name> ...
+
+   :arg bob_name: The bob type to add to the selection. Specify as many as you want.
+   :type bob_name: :class:`string`
+
+   Randomly select a bob name that can be used in subsequent commands,
+   e.g. create_bob. Used for releasing animals. Example::
+
+      release = {
+         "setbobdescription wildboar stag sheep", -- A wildboar, stag or sheep will be selected
+         "findspace size:any radius:3",
+         "walk coords",
+         "animation releasein 2000",
+         "create_bob",
+         "animation releaseout 2000",
+         "return"
+      },
+*/
 /**
- * setbobdescription \<bob name\> \<bob name\> ...
- *
- * Randomly select a bob name that can be used in subsequent commands
- * (e.g. create_bob).
- *
  * sparamv = possible bobs
  */
 void WorkerProgram::parse_setbobdescription(Worker::Action* act,

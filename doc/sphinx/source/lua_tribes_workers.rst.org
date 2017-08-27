@@ -1,5 +1,3 @@
-.. _workers:
-
 Workers
 =======
 
@@ -18,7 +16,6 @@ In addition to the basic worker type, Widelands knows about the following sub ty
 REPLACE_ME
 
 .. _lua_tribes_workers_common:
-
 
 Common Worker Properties
 ------------------------
@@ -74,7 +71,10 @@ Workers are defined with Lua functions called ``new_worker_type{table}``. The co
       on the map in order to do his work, and what that work is, including any
       animations and sounds played.
 
-TODO(GunChleoc): create Worker Program Reference
+
+.. toctree::
+
+   autogen_tribes_worker_programs
 
 Help Texts
 ----------
