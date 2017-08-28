@@ -255,7 +255,7 @@ InteractivePlayer::InteractivePlayer(Widelands::Game& g,
 
 	set_player_number(plyn);
 	map_view()->field_clicked.connect([this](const Widelands::NodeAndTriangle<>& node_and_triangle) {
-			node_action(node_and_triangle);
+		node_action(node_and_triangle);
 	});
 
 	adjust_toolbar_position();

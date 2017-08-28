@@ -1,3 +1,5 @@
+.. _productionsite_programs:
+
 Productionsite Program Reference
 ================================
 Productionsites can have programs that will be executed by the game engine. Each productionsite must have a program named ``work``, which will be started automatically when the productionsite is created in the game, and then repeated until the productionsite is destroyed.
