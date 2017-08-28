@@ -40,11 +40,12 @@ Worker programs are defined in the ``programs`` subtable specified in calls to
 :ref:`tribes:new_worker_type <lua_tribes_workers_common>`.
 Each worker program is a Lua table in itself and defined as a series of command strings.
 Commands can also have parameters, which are separated from each other by a blank space.
+These parameters can also have values, which are sepatared from the parameter name by a colon (:).
 The table looks like this::
 
    programs = {
       program_name1 = {
-         "command1 parameter1 parameter2",
+         "command1 parameter1:value1 parameter2:value2",
          "command2 parameter1",
          "return"
       },
