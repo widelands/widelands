@@ -108,13 +108,13 @@ void InteractiveSpectator::draw(RenderTarget& dst) {
 	draw_map_view(map_view(), &dst);
 }
 
-void InteractiveSpectator::draw_map_view(MapView* map_view, RenderTarget* dst) {
+void InteractiveSpectator::draw_map_view(MapView* given_map_view, RenderTarget* dst) {
 	// A spectator cannot build roads.
 	assert(road_building_preview().empty());
 
 	const auto& gbase = egbase();
-	auto* fields_to_draw = map_view->draw_terrain(gbase, dst);
-	const float scale = 1.f / map_view->view().zoom;
+	auto* fields_to_draw = given_map_view->draw_terrain(gbase, dst);
+	const float scale = 1.f / given_map_view->view().zoom;
 	const uint32_t gametime = gbase.get_gametime();
 
 	const auto text_to_draw = get_text_to_draw();
