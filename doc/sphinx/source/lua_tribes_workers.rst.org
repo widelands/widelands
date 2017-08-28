@@ -66,15 +66,9 @@ Workers are defined with Lua functions called ``new_worker_type{table}``. The co
        worker programs. The "idle" and "walk" animations are mandatory.
 
   **programs**:
-      *Optional*. If the worker leaves the building to do his work, the worker
-      programs that define which type of space or resource the worker has to find
+      *Optional*. If the worker leaves the building to do his work, the :ref:`tribes_worker_programs` that define which type of space or resource the worker has to find
       on the map in order to do his work, and what that work is, including any
       animations and sounds played.
-
-
-.. toctree::
-
-   autogen_tribes_worker_programs
 
 Help Texts
 ----------
