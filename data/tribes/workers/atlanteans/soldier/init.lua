@@ -74,7 +74,7 @@ animations = {
 add_walking_animations(animations, "walk", dirname, "walk", {20, 34}, 10)
 
 -- RST
--- .. function:: new_soldier_type(table)
+-- .. function:: new_soldier_type{table}
 --
 --    This function adds the definition of a soldier to the engine.
 --

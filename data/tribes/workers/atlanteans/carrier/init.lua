@@ -26,7 +26,7 @@ add_walking_animations(animations, "walk", dirname, "walk", {8, 25}, 10)
 add_walking_animations(animations, "walkload", dirname, "walkload", {8, 25}, 10)
 
 -- RST
--- .. function:: new_carrier_type(table)
+-- .. function:: new_carrier_type{table}
 --
 --    This function adds the definition of a carrier to the engine.
 --

@@ -20,7 +20,9 @@ REPLACE_ME
 Common Worker Properties
 ------------------------
 
-Workers are defined with Lua functions called ``new_worker_type{table}``. The contents of ``table`` depend on the type of worker that you are defining. The common properties shared by all workers are:
+.. function:: new_worker_type{table}
+
+This function adds the definition of a worker to the engine. The contents of ``table`` depend on the type of worker that you are defining. The common properties shared by all workers are:
 
   **msgctxt**: The context that Gettext will use to disambiguate the
   translations for strings in this table.
