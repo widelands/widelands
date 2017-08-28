@@ -53,7 +53,6 @@ class Image;
 // drawn below the buildhelp, everything higher above.
 enum class OverlayLevel {
 	kWorkAreaPreview = 0,
-	kResource = 4,
 	kSelection = 7,
 	kRoadBuildSlope = 8,
 };
