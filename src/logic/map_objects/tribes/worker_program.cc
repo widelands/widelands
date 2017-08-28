@@ -62,6 +62,7 @@ The available programs are:
 - `breed`_
 - `setbobdescription`_
 - `findobject`_
+- `findspace`_
 */
 
 const WorkerProgram::ParseMap WorkerProgram::parsemap_[] = {
@@ -278,7 +279,7 @@ findobject
 ^^^^^^^^^^
 .. function:: findobject radius:\<distance\> [type:\<map_object_type\>] [attrib:\<attribute\>]
 
-   :arg radius: Search for the object within a radius of ``distance``.
+   :arg radius: Search for an object within the given radius around the worker.
    :type radius: :class:`int`
 
    :arg type: The type of map object to search for. Defaults to ``immovable``.
@@ -349,36 +350,69 @@ void WorkerProgram::parse_findobject(Worker::Action* act, const std::vector<std:
 	workarea_info_[act->iparam1].insert(" findobject");
 }
 
+/* RST
+findspace
+^^^^^^^^^
+.. function:: findspace size:\<plot\> radius:\<distance\> [breed] [resource:\<name\>] [avoid:\<immovable_attribute\>] [space]
+
+   :arg size: The size or building plot type of the free space. The possible values are:
+
+      * ``any``: Any size will do.
+      * ``build``: Any building plot.
+      * ``small``: Small building plots only.
+      * ``medium``: Medium building plots only.
+      * ``big``: Big building plots only.
+      * ``mine``: Mining plots only.
+      * ``port``: Port spaces only.
+
+   :type size: :class:`string`
+
+   :arg radius: Search for map fields within the given radius around the worker.
+   :type radius: :class:`int`
+
+   :arg breed: Used in front of ``resource`` only: Also accept fields where the resource has been depleted. Use this when looking for a place for breeding.
+   :type breed: :class:`empty`
+
+   :arg resource: A resource to search for. This is mainly intended for fishers and suchlike, for non-detectable resources and default resources.
+   :type resource: :class:`string`
+
+   :arg avoid: A field containing an immovable that has this attribute will not be used.
+   :type avoid: :class:`string`
+
+   :arg space: Find only fields that are walkable in such a way that all neighbours are also walkable (an exception is made if one of the neighbouring fields is owned by this worker's location).
+   :type space: :class:`empty`
+
+   Find a map field based on a number of predicates.
+   The field can then be used in other commands like ``walk``. Examples::
+
+      breed = {
+         "findspace size:any radius:7 breed resource:fish", -- Find any field that can have fish in it for adding a fish to it below
+         "walk coords",
+         "animation freeing 3000",
+         "breed fish 1",
+         "return"
+      },
+
+      plant = {
+         "findspace size:any radius:5 avoid:field", -- Don't get in the way of the farmer's crops when planting trees
+         "walk coords",
+         "animation dig 2000",
+         "animation planting 1000",
+         "plant attrib:tree_sapling",
+         "animation water 2000",
+         "return"
+      },
+
+      plant = {
+         "findspace size:any radius:2 space", -- The farmer will want to walk to this field again later for harvesting his crop
+         "walk coords",
+         "animation planting 4000",
+         "plant tribe:field_tiny",
+         "animation planting 4000",
+         "return",
+      },
+*/
 /**
- * findspace key:value key:value ...
- *
- * Find a field based on a number of predicates.
- * The field can later be used in other commands, e.g. walk.
- *
- * Predicates:
- * radius:\<dist\>
- * Search for fields within the given radius around the worker.
- *
- * size:[any|build|small|medium|big|mine|port]
- * Search for fields with the given amount of space.
- *
- * breed
- * in resource:\<resname\>, also accept fields where the resource has been
- * depleted. Use this when looking for a place for breeding. Should be used
- * before resource:\<resname\>
- *
- * resource:\<resname\>
- * Resource to search for. This is mainly intended for fisher and
- * therelike (non detectable Resources and default resources)
- *
- * avoid:\<immovable attribute>
- * a field containing an immovable with that immovable should not be used
- *
- * space
- * Find only fields that are walkable such that all neighbours
- * are also walkable (an exception is made if one of the neighbouring
- * fields is owned by this worker's location).
- *
  * iparam1 = radius
  * iparam2 = FindNodeSize::sizeXXX
  * iparam3 = whether the "space" flag is set
