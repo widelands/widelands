@@ -72,14 +72,13 @@ void draw_immovables_for_visible_field(const Widelands::EditorGameBase& egbase,
                                        const FieldsToDraw::Field& field,
                                        const float scale,
                                        const TextToDraw text_to_draw,
-                                       const Widelands::Player* player,
+                                       const Widelands::Player& player,
                                        RenderTarget* dst) {
 	Widelands::BaseImmovable* const imm = field.fcoords.field->get_immovable();
 	if (imm != nullptr && imm->get_positions(egbase).front() == field.fcoords) {
 		TextToDraw draw_text_for_this_immovable = text_to_draw;
 		const Widelands::Player* owner = imm->get_owner();
-		if (player != nullptr && owner != nullptr && !player->see_all() &&
-		    player->is_hostile(*owner)) {
+		if (owner != nullptr && !player.see_all() && player.is_hostile(*owner)) {
 			draw_text_for_this_immovable =
 			   static_cast<TextToDraw>(draw_text_for_this_immovable & ~TextToDraw::kStatistics);
 		}
@@ -92,13 +91,12 @@ void draw_bobs_for_visible_field(const Widelands::EditorGameBase& egbase,
                                  const FieldsToDraw::Field& field,
                                  const float scale,
                                  const TextToDraw text_to_draw,
-                                 const Widelands::Player* player,
+                                 const Widelands::Player& player,
                                  RenderTarget* dst) {
 	for (Widelands::Bob* bob = field.fcoords.field->get_first_bob(); bob; bob = bob->get_next_bob()) {
 		TextToDraw draw_text_for_this_bob = text_to_draw;
 		const Widelands::Player* owner = bob->get_owner();
-		if (player != nullptr && owner != nullptr && !player->see_all() &&
-		    player->is_hostile(*owner)) {
+		if (owner != nullptr && !player.see_all() && player.is_hostile(*owner)) {
 			draw_text_for_this_bob =
 			   static_cast<TextToDraw>(draw_text_for_this_bob & ~TextToDraw::kStatistics);
 		}
@@ -182,56 +180,53 @@ void draw_immovables_for_formerly_visible_field(const FieldsToDraw::Field& field
 	}
 }
 
-}  // namespace 
+}  // namespace
 
+void draw_border(const FieldsToDraw::Field& field,
+					  const float scale,
+                 const FieldsToDraw& fields_to_draw,
+                 RenderTarget* dst) {
+	if (!field.all_neighbors_valid() || !field.is_border) {
+		return;
+	}
+	assert(field.owner != nullptr);
+
+	uint32_t const anim_idx = field.owner->tribe().frontier_animation();
+	if (field.vision) {
+		dst->blit_animation(
+		   field.rendertarget_pixel, scale, anim_idx, 0, field.owner->get_playercolor());
+	}
+	for (const auto& nf : {fields_to_draw.at(field.rn_index), fields_to_draw.at(field.bln_index),
+	                       fields_to_draw.at(field.brn_index)}) {
+		if ((field.vision || nf.vision) && nf.is_border &&
+		    (field.owner == nf.owner || nf.owner == nullptr)) {
+			dst->blit_animation(middle(field.rendertarget_pixel, nf.rendertarget_pixel), scale,
+			                    anim_idx, 0, field.owner->get_playercolor());
+		}
+	}
+}
+
+// NOCOM(#sirver): hoist into InteractivePlayer.
 // Draws the objects (animations & overlays).
 void draw_objects(const Widelands::EditorGameBase& egbase,
                   const float scale,
                   const FieldsToDraw& fields_to_draw,
-                  const Widelands::Player* player,
+                  const Widelands::Player& player,
                   const TextToDraw text_to_draw,
-                  const DrawImmovables& draw_immovables,
-                  const DrawBobs& draw_bobs,
                   RenderTarget* dst) {
 	for (size_t current_index = 0; current_index < fields_to_draw.size(); ++current_index) {
 		const FieldsToDraw::Field& field = fields_to_draw.at(current_index);
-		if (!field.all_neighbors_valid()) {
-			continue;
-		}
 
-		const FieldsToDraw::Field& rn = fields_to_draw.at(field.rn_index);
-		const FieldsToDraw::Field& bln = fields_to_draw.at(field.bln_index);
-		const FieldsToDraw::Field& brn = fields_to_draw.at(field.brn_index);
-
-		if (field.is_border && draw_immovables == DrawImmovables::kYes) {
-			assert(field.owner != nullptr);
-			uint32_t const anim_idx = field.owner->tribe().frontier_animation();
-			if (field.vision) {
-				dst->blit_animation(
-				   field.rendertarget_pixel, scale, anim_idx, 0, field.owner->get_playercolor());
-			}
-			for (const auto& nf : {rn, bln, brn}) {
-				if ((field.vision || nf.vision) && nf.is_border &&
-				    (field.owner == nf.owner || nf.owner == nullptr)) {
-					dst->blit_animation(middle(field.rendertarget_pixel, nf.rendertarget_pixel), scale,
-					                    anim_idx, 0, field.owner->get_playercolor());
-				}
-			}
-		}
+		draw_border(field, scale, fields_to_draw, dst);
 
 		if (1 < field.vision) {  // Render stuff that belongs to the node.
-			if (draw_immovables == DrawImmovables::kYes) {
-				draw_immovables_for_visible_field(egbase, field, scale, text_to_draw, player, dst);
-			}
-			if (draw_bobs == DrawBobs::kYes) {
-				draw_bobs_for_visible_field(egbase, field, scale, text_to_draw, player, dst);
-			}
-		} else if (field.vision == 1 && draw_immovables == DrawImmovables::kYes) {
+			draw_immovables_for_visible_field(egbase, field, scale, text_to_draw, player, dst);
+			draw_bobs_for_visible_field(egbase, field, scale, text_to_draw, player, dst);
+		} else if (field.vision == 1) {
 			// We never show census or statistics for objects in the fog.
-			assert(player != nullptr);
 			const Widelands::Map& map = egbase.map();
 			const Widelands::Player::Field& player_field =
-			   player->fields()[map.get_index(field.fcoords, map.get_width())];
+			   player.fields()[map.get_index(field.fcoords, map.get_width())];
 			draw_immovables_for_formerly_visible_field(field, player_field, scale, dst);
 		}
 

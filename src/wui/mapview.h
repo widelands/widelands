@@ -160,7 +160,7 @@ public:
 
 	// Schedules drawing of the terrain of this MapView. The returned value can
 	// be used to override contents of 'fields_to_draw' for player knowledge and
-	// visibility and to 'draw_objects', overlays and text.
+	// visibility, and to correctly draw map objects, overlays and text.
 	FieldsToDraw* draw_terrain(const Widelands::EditorGameBase& egbase, RenderTarget* dst);
 
 	// Not overriden from UI::Panel, instead we expect to be passed the data through.

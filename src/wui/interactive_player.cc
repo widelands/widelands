@@ -241,8 +241,8 @@ void InteractivePlayer::draw_map_view(MapView* map_view, RenderTarget* dst) {
 		}
 	}
 
-	draw_objects(gbase, 1.f / map_view->view().zoom, *fields_to_draw, &player(),
-	             get_text_to_draw(), DrawImmovables::kYes, DrawBobs::kYes, dst);
+	draw_objects(
+	   gbase, 1.f / map_view->view().zoom, *fields_to_draw, plr, get_text_to_draw(), dst);
 }
 
 void InteractivePlayer::popup_message(Widelands::MessageId const id,

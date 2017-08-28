@@ -314,9 +314,36 @@ bool EditorInteractive::handle_mousepress(uint8_t btn, int32_t x, int32_t y) {
 void EditorInteractive::draw(RenderTarget& dst) {
 	const auto& ebase = egbase();
 	auto* fields_to_draw = map_view()->draw_terrain(ebase, &dst);
-	draw_objects(ebase, 1.f / map_view()->view().zoom, *fields_to_draw, nullptr, get_text_to_draw(),
-	             draw_immovables_ ? DrawImmovables::kYes : DrawImmovables::kNo,
-	             draw_bobs_ ? DrawBobs::kYes : DrawBobs::kNo, &dst);
+
+	const float scale = 1.f / map_view()->view().zoom;
+	const uint32_t gametime = ebase.get_gametime();
+
+	for (size_t idx = 0; idx < fields_to_draw->size(); ++idx) {
+		const FieldsToDraw::Field& field = fields_to_draw->at(idx);
+		if (draw_immovables_) {
+			Widelands::BaseImmovable* const imm = field.fcoords.field->get_immovable();
+			if (imm != nullptr && imm->get_positions(ebase).front() == field.fcoords) {
+				imm->draw(gametime, TextToDraw::kNone, field.rendertarget_pixel, scale, &dst);
+			}
+		}
+
+		if (draw_bobs_) {
+			for (Widelands::Bob* bob = field.fcoords.field->get_first_bob(); bob;
+			     bob = bob->get_next_bob()) {
+				bob->draw(ebase, TextToDraw::kNone, field.rendertarget_pixel, scale, dst);
+			}
+		}
+
+		// TODO(sirver): Do not use the field_overlay_manager, instead draw the
+		// overlays we are interested in here directly.
+		field_overlay_manager().foreach_overlay(
+		   field.fcoords, [dst, &field, scale](const Image* pic, const Vector2i& hotspot) {
+			   dst->blitrect_scale(Rectf(field.rendertarget_pixel - hotspot.cast<float>() * scale,
+			                             pic->width() * scale, pic->height() * scale),
+			                       pic, Recti(0, 0, pic->width(), pic->height()), 1.f,
+			                       BlendMode::UseAlpha);
+			});
+	}
 }
 
 /// Needed to get freehand painting tools (hold down mouse and move to edit).
