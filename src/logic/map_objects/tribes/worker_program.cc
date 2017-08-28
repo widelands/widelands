@@ -180,7 +180,8 @@ mine
 
    :arg int area: The radius that is scanned for decreasing the map resource, e.g. ``1``.
 
-   Mine on the current coordinates that the worker has walked to for resources decrease. Example::
+   Mine on the current coordinates that the worker has walked to for resources decrease.
+   Example::
 
       fish = {
          "findspace size:any radius:7 resource:fish",
@@ -219,7 +220,8 @@ breed
 
    :arg int area: The radius that is scanned for increasing the map resource, e.g. ``1``.
 
-   Breed a resource on the current coordinates that the worker has walked to for resources increase. Example::
+   Breed a resource on the current coordinates that the worker has walked to for
+   resources increase. Example::
 
       breed = {
          "findspace size:any radius:7 breed resource:fish",
@@ -251,7 +253,8 @@ setbobdescription
 ^^^^^^^^^^^^^^^^^
 .. function:: setbobdescription \<bob_name\> [\<bob_name\> ...]
 
-   :arg string bob_name: The bob type to add to the selection. Specify as many bob types as you want.
+   :arg string bob_name: The bob type to add to the selection. Specify as many bob
+      types as you want.
 
    Randomly select a bob name that can be used in subsequent commands,
    e.g. create_bob. Used for releasing animals. Example::
@@ -280,7 +283,6 @@ void WorkerProgram::parse_setbobdescription(Worker::Action* act,
 		act->sparamv.push_back(cmd[i]);
 }
 
-
 /* RST
 findobject
 ^^^^^^^^^^
@@ -290,8 +292,9 @@ findobject
    :arg string type: The type of map object to search for. Defaults to ``immovable``.
    :arg string attrib: The attribute that the map object should possess.
 
-   Find and select an object based on a number of predicates, which can be specified in arbitrary order.
-   The object can then be used in other commands like ``walk`` or ``object``. Examples::
+   Find and select an object based on a number of predicates, which can be specified
+   in arbitrary order. The object can then be used in other commands like ``walk``
+   or ``object``. Examples::
 
       cut_granite = {
          "findobject attrib:rocks radius:6", -- Find rocks on the map within a radius of 6 from your building
@@ -357,7 +360,8 @@ findspace
 ^^^^^^^^^
 .. function:: findspace size:\<plot\> radius:\<distance\> [breed] [resource:\<name\>] [avoid:\<immovable_attribute\>] [space]
 
-   :arg string size: The size or building plot type of the free space. The possible values are:
+   :arg string size: The size or building plot type of the free space.
+      The possible values are:
 
       * ``any``: Any size will do.
       * ``build``: Any building plot.
@@ -369,13 +373,18 @@ findspace
 
    :arg int radius: Search for map fields within the given radius around the worker.
 
-   :arg empty breed: Used in front of ``resource`` only: Also accept fields where the resource has been depleted. Use this when looking for a place for breeding.
+   :arg empty breed: Used in front of ``resource`` only: Also accept fields where the
+      resource has been depleted. Use this when looking for a place for breeding.
 
-   :arg string resource: A resource to search for. This is mainly intended for fishers and suchlike, for non-detectable resources and default resources.
+   :arg string resource: A resource to search for. This is mainly intended for
+      fishers and suchlike, for non-detectable resources and default resources.
 
-   :arg string avoid: A field containing an immovable that has this attribute will not be used.
+   :arg string avoid: A field containing an immovable that has this attribute will
+      not be used.
 
-   :arg empty space: Find only fields that are walkable in such a way that all neighbors are also walkable (an exception is made if one of the neighboring fields is owned by this worker's location).
+   :arg empty space: Find only fields that are walkable in such a way that all
+      neighbors are also walkable (an exception is made if one of the neighboring
+      fields is owned by this worker's location).
 
    Find a map field based on a number of predicates.
    The field can then be used in other commands like ``walk``. Examples::
@@ -486,7 +495,8 @@ walk
 
       * ``object``: Walk to a previously found and selected object.
       * ``coords``: Walk to a previously found and selected field/coordinate.
-      * ``object-or-coords``: Walk to a previously found and selected object if present; otherwise to previously found and selected field/coordinate.
+      * ``object-or-coords``: Walk to a previously found and selected object if present;
+        otherwise to previously found and selected field/coordinate.
 
    Walk to a previously selected destination. Examples::
 
@@ -640,14 +650,17 @@ plant
 ^^^^^
 .. function:: plant \<immmovable_type\> [\<immovable_type\> ...] [unless object]
 
-   :arg string immovable_type: The immovable to be planted. This can be specified in two different ways:
+   :arg string immovable_type: The immovable to be planted. This can be specified
+      in two different ways:
 
       * ``attrib:<attribute>``: Select at random any immovable that has this attribute.
       * ``tribe:<immovable_name>``: Name a specific immovable to be planted.
 
-   :arg empty unless object: Do not plant the immovable if it already exists at the current position.
+   :arg empty unless object: Do not plant the immovable if it already exists at
+      the current position.
 
-   Plant one of the given immovables on the current position, taking into account the fertility of the area. Examples::
+   Plant one of the given immovables on the current position, taking into account
+   the fertility of the area. Examples::
 
       plant = {
          "findspace size:any radius:5 avoid:field",
@@ -768,11 +781,13 @@ geologist
 ^^^^^^^^^
 .. function:: geologist \<repetitions\> \<radius\> \<program_name\>
 
-   :arg int repetitions: The number of times that the geologist will move to a different spot on the map to execute ``program_name``.
+   :arg int repetitions: The number of times that the geologist will move to a
+      different spot on the map to execute ``program_name``.
 
    :arg int radius: The radius of map fields for the geologist not to stray from.
 
-   Walk around the starting point randomly within a certain radius, and execute your ``program_name`` for some of the fields. Example::
+   Walk around the starting point randomly within a certain radius, and execute
+   your ``program_name`` for some of the fields. Example::
 
       expedition = {
          "geologist 15 5 search"
@@ -807,7 +822,8 @@ geologist_find
 ^^^^^^^^^^^^^^
 .. function:: geologist_find
 
-   Check the current position for map resources (e.g. coal or water), and plant a marker object when possible. Example::
+   Check the current position for map resources (e.g. coal or water), and plant
+   a marker object when possible. Example::
 
       search = {
          "animation hacking 5000",
@@ -858,8 +874,11 @@ play_sound
 ^^^^^^^^^^
 .. function:: play_sound \<sound_dir\> \<sound_name\> [priority]
 
-   :arg string sound_dir: The directory (folder) that the sound files are in, relative to the data directory.
-   :arg string sound_name: The name of the particular sound to play. There can be multiple sound files to select from at random, e.g. for `scythe`, we can have `scythe_00.ogg`, `scythe_01.ogg` ...
+   :arg string sound_dir: The directory (folder) that the sound files are in,
+      relative to the data directory.
+   :arg string sound_name: The name of the particular sound to play.
+      There can be multiple sound files to select from at random, e.g.
+      for `scythe`, we can have `scythe_00.ogg`, `scythe_01.ogg` ...
 
    :arg int priority: The priority to give this sound. Maximum priority is 255.
 
@@ -894,7 +913,8 @@ construct
 ^^^^^^^^^
 .. function:: construct
 
-   Give the ware currently held by the worker to the immovable object for construction. This is used in ship building. Example::
+   Give the ware currently held by the worker to the immovable object for construction.
+   This is used in ship building. Example::
 
       buildship = {
          "walk object-or-coords", -- Walk to coordinates from 1. or to object from 2.
