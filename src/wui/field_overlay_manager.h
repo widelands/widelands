@@ -56,7 +56,6 @@ enum class OverlayLevel {
 	kResource = 4,
 	kSelection = 7,
 	kRoadBuildSlope = 8,
-	kPlayerStartingPosition = 9,
 };
 
 struct FieldOverlayManager {

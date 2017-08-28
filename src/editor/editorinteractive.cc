@@ -181,15 +181,6 @@ EditorInteractive::EditorInteractive(Widelands::EditorGameBase& e)
 void EditorInteractive::register_overlays() {
 	Widelands::Map* map = egbase().mutable_map();
 
-	//  Starting locations
-	Widelands::PlayerNumber const nr_players = map->get_nrplayers();
-	assert(nr_players <= kMaxPlayers);
-	iterate_player_numbers(p, nr_players) {
-		if (Widelands::Coords const sp = map->get_starting_pos(p)) {
-			tools_->set_starting_pos.set_starting_pos(*this, p, sp, map);
-		}
-	}
-
 	//  Resources: we do not calculate default resources, therefore we do not
 	//  expect to meet them here.
 	Widelands::Extent const extent = map->extent();
@@ -318,6 +309,12 @@ void EditorInteractive::draw(RenderTarget& dst) {
 	const float scale = 1.f / map_view()->view().zoom;
 	const uint32_t gametime = ebase.get_gametime();
 
+	const auto& map = ebase.map();
+	std::map<Coords, int> starting_positions;
+	for (int i = 0; i < map.get_nrplayers(); ++i) {
+		starting_positions[map.get_starting_pos(i)] = i;
+	}
+
 	for (size_t idx = 0; idx < fields_to_draw->size(); ++idx) {
 		const FieldsToDraw::Field& field = fields_to_draw->at(idx);
 		if (draw_immovables_) {
@@ -343,6 +340,19 @@ void EditorInteractive::draw(RenderTarget& dst) {
 			                      pic, Recti(0, 0, pic->width(), pic->height()), 1.f,
 			                      BlendMode::UseAlpha);
 			});
+
+		// Draw the player starting position overlays.
+		const it = starting_positions.find(field.fcoords);
+		if (it != starting_positions.end()) {
+			const Image* player_image =
+			   playercolor_image(it->second - 1, "images/players/player_position.png");
+			assert(player_image != nullptr);
+			constexpr int kStartingPosHotspotY = 55;
+			const Vector2f hotspot(player_image->width() / 2, kStartingPosHotspotY) dst.blitrect_scale(
+			   Rectf(field.rendertarget_pixel - hotspot * scale, pic->width() * scale,
+			         pic->height() * scale),
+			   pic, Recti(0, 0, pic->width(), pic->height()), 1.f, BlendMode::UseAlpha);
+		}
 	}
 }
 
