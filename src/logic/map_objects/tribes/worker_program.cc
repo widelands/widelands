@@ -43,12 +43,12 @@ Commands can also have parameters, which are separated from each other by a blan
 The table looks like this::
 
    programs = {
-      programname1 = {
+      program_name1 = {
          "command1 parameter1 parameter2",
          "command2 parameter1",
          "return"
       },
-      programname2 = {
+      program_name2 = {
          "command3",
          "command4 parameter1 parameter2 parameter3",
          "return"
@@ -57,9 +57,11 @@ The table looks like this::
 
 The available programs are:
 
-- `createware \<ware_name\>`_
-- `mine \<resource_name\> \<area\>`_
-- `breed \<resource_name\> \<area\>`_
+- `createware`_
+- `mine`_
+- `breed`_
+- `setbobdescription`_
+- `findobject`_
 */
 
 const WorkerProgram::ParseMap WorkerProgram::parsemap_[] = {
@@ -125,8 +127,9 @@ void WorkerProgram::parse(const LuaTable& table) {
 }
 
 /* RST
-createware \<ware_name\>
-^^^^^^^^^^^^^^^^^^^^^^^^
+createware
+^^^^^^^^^^
+.. function:: createware \<ware_name\>
 
    :arg ware_name: The ware type to create, e.g. ``wheat``.
    :type ware_name: :class:`string`
@@ -156,8 +159,9 @@ void WorkerProgram::parse_createware(Worker::Action* act, const std::vector<std:
 }
 
 /* RST
-mine \<resource_name\> \<area\>
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+mine
+^^^^
+.. function:: mine \<resource_name\> \<area\>
 
    :arg resource_name: The map resource to mine, e.g. ``fish``.
    :type resource_name: :class:`string`
@@ -196,8 +200,9 @@ void WorkerProgram::parse_mine(Worker::Action* act, const std::vector<std::strin
 }
 
 /* RST
-breed \<resource_name\> \<area\>
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+breed
+^^^^^
+.. function:: breed \<resource_name\> \<area\>
 
    :arg resource_name: The map resource to breed, e.g. ``fish``.
    :type resource_name: :class:`string`
@@ -233,9 +238,11 @@ void WorkerProgram::parse_breed(Worker::Action* act, const std::vector<std::stri
 }
 
 /* RST
-.. function:: setbobdescription <bob_name> <bob_name> ...
+setbobdescription
+^^^^^^^^^^^^^^^^^
+.. function:: setbobdescription \<bob_name\> [\<bob_name\> ...]
 
-   :arg bob_name: The bob type to add to the selection. Specify as many as you want.
+   :arg bob_name: The bob type to add to the selection. Specify as many bob types as you want.
    :type bob_name: :class:`string`
 
    Randomly select a bob name that can be used in subsequent commands,
@@ -265,22 +272,44 @@ void WorkerProgram::parse_setbobdescription(Worker::Action* act,
 		act->sparamv.push_back(cmd[i]);
 }
 
+
+/* RST
+findobject
+^^^^^^^^^^
+.. function:: findobject radius:\<distance\> [type:\<map_object_type\>] [attrib:\<attribute\>]
+
+   :arg radius: Search for the object within a radius of ``distance``.
+   :type radius: :class:`int`
+
+   :arg type: The type of map object to search for. Defaults to ``immovable``.
+   :type type: :class:`string`
+
+   :arg attrib: The attribute that the map object should possess.
+   :type attrib: :class:`string`
+
+   Find and select an object based on a number of predicates, which can be specified in arbitrary order.
+   The object can then be used in other commands like ``walk`` or ``object``. Examples::
+
+      cut_granite = {
+         "findobject attrib:rocks radius:6", -- Find rocks on the map within a radius of 6 from your building
+         "walk object", -- Now walk to those rocks
+         "play_sound sound/atlanteans/cutting stonecutter 192",
+         "animation hacking 12000",
+         "object shrink",
+         "createware granite",
+         "return"
+      },
+
+      hunt = {
+         "findobject type:bob radius:13 attrib:eatable", -- Find an eatable bob (animal) within a radius of 13 from your building
+         "walk object", -- Walk to where the animal is
+         "animation idle 1500",
+         "object remove",
+         "createware meat",
+         "return"
+      },
+*/
 /**
- * findobject key:value key:value ...
- *
- * Find and select an object based on a number of predicates.
- * The object can be used in other commands like walk or object.
- *
- * Predicates:
- * radius:\<dist\>
- * Find objects within the given radius
- *
- * attrib:\<attribute\>  (optional)
- * Find objects with the given attribute
- *
- * type:\<what\>         (optional, defaults to immovable)
- * Find only objects of this type
- *
  * iparam1 = radius predicate
  * iparam2 = attribute predicate (if >= 0)
  * sparam1 = type
