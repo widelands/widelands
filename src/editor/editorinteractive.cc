@@ -263,13 +263,14 @@ void EditorInteractive::draw(RenderTarget& dst) {
 	const float scale = 1.f / map_view()->view().zoom;
 	const uint32_t gametime = ebase.get_gametime();
 
-	// The Map provides a mapping from player number to Coords, while we require
+	// The map provides a mapping from player number to Coords, while we require
 	// the inverse here. We construct this, but this is done on every frame and
-	// therefore potentially expensive. We should change the Map should this
-	// become a bottleneck, since the maps format is needed less often.
+	// therefore potentially expensive - though it never showed up in any of my
+	// profiles. We could change the Map should this become a bottleneck, since
+	// plrnum -> coords is needed less often.
 	const auto& map = ebase.map();
 	std::map<Widelands::Coords, int> starting_positions;
-	for (int i = 0; i < map.get_nrplayers(); ++i) {
+	for (int i = 1; i <= map.get_nrplayers(); ++i) {
 		starting_positions[map.get_starting_pos(i)] = i;
 	}
 
