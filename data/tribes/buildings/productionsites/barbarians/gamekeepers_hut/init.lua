@@ -36,7 +36,7 @@ tribes:new_productionsite_type {
    aihints = {
       supports_production_of = { "meat" },
       prohibited_till = 900,
-      --basic_amount = 1
+      basic_amount = 1
    },
 
    working_positions = {

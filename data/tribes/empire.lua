@@ -339,4 +339,3 @@ tribes:new_tribe {
    refinedlog = "planks",
    granite = "granite",
 }
---wl.Game().players["all"]:forbid_buildings{"empire_farm1", "empire_well1"}

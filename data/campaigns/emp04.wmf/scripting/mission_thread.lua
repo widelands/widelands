@@ -36,12 +36,12 @@ end
 function clear_roads()
    local o = add_campaign_objective(obj_clear_roads)
    local cleared = false
-   local count
+   --local count
    
    while cleared == false do 
    cleared = true
    sleep (5000)
-      for x=7, 35 do
+      for x=7, 40 do
          for y=180, 207 do
            local field = map:get_field(x,y)
 		   if (field.immovable and field.immovable.descr.type_name == "flag" and field.immovable.building == nil) then
@@ -52,7 +52,7 @@ function clear_roads()
                 end
 		    end
 	     end
-         for y=0, 25 do
+         for y=0, 28 do
            local field = map:get_field(x,y)
 		   if (field.immovable and field.immovable.descr.type_name == "flag" and field.immovable.building == nil) then
 			  local numroads = 0
@@ -68,7 +68,26 @@ function clear_roads()
    campaign_message_box(amalea_6)
 end
 
-
+function no_trees()
+   local trees = 100
+   while trees > 8 do 
+      trees = 0
+      sleep (5000)
+      for x=13, 25 do
+         for y=182, 205 do
+           local field = map:get_field(x,y)
+		   if (field.immovable and field.immovable.descr.terrain_affinity) then
+              trees = trees + 1 
+		   end
+	     end
+      end
+   end
+   local o = add_campaign_objective(obj_replace_foresters)   
+   campaign_message_box(amalea_7)
+   while #p1:get_buildings("empire_foresters_house") < 2 do sleep(3249) end
+   o.done = true
+   campaign_message_box(amalea_8)
+end
 
 function quarries_lumberjacks()
    local o = add_campaign_objective(obj_build_quarries_and_lumberjacks)
@@ -76,11 +95,12 @@ function quarries_lumberjacks()
    o.done = true
    campaign_message_box(amalea_5)
    run(produce_food)
+   run(no_trees)
 end
 
 function produce_food()
    local o = add_campaign_objective(obj_produce_fish)
-   while count_in_warehouses(ration) < 3 do sleep(3000) end
+   while count_in_warehouses("ration") < 3 do sleep(3000) end
    o.done = true 
 end
 
@@ -172,4 +192,4 @@ function mission_thread()
 end
 
 run(mission_thread)
--- run(check_military)
+

@@ -79,14 +79,14 @@ obj_produce_fish = {
    ),
 }
 
--- obj_find_port_space = {
-   -- name = "find a portspace",
-   -- title=_"Find a portspace on the small island",
-   -- number = 1,
-   -- body = objective_text(_"Port Space",
-      -- listitem_bullet(_[[To sail back home we first must discover a portspace.]])
-   -- ),
--- }
+obj_replace_foresters = {
+   name = "Replace_foresters",
+   title=_"Replace our old and uneffective foresters",
+   number = 1,
+   body = objective_text(_"Replace our foresters by new ones",
+      listitem_bullet(_[[Our two forester's houses are old and weared out. We should replace them by new ones to increase productivity.]])
+   ),
+}
 
 -- obj_build_port_and_shipyard = {
    -- name = "build a port and a shipyard",
@@ -441,27 +441,35 @@ amalea_6 = {
    -- h=500,
 -- }
 
--- amalea_7 = {
-   -- title=_"Amalea's luck",
-   -- body= amalea2(_"Amalea is really proud of the achievements…",
-      -- -- TRANSLATORS: Amalea
-      -- _([[Lutius we have just solved another problem. We managed to smelt enough gold to send out at least 3 expeditions. Perhaps we might even keep some gold to make some jewelry.]])
-      -- .. paragraphdivider() ..
-	  -- -- TRANSLATORS: Amalea
-      -- _([[I'm just kidding. Of course we should spare as much gold as we can for building an Arena and other buildings to train our soldiers.]])),
-   -- posy=1,
--- }
+amalea_7 = {
+   title=_"Amalea shaking her head",
+   body= amalea2(_"Amalea is getting fed up with all the problems in this economy",
+      -- TRANSLATORS: Amalea
+      _([[Lutius for the sake of Neptune, I just discovered another problem. It seems that really very few things are working as expected in this economy.]])
+      .. paragraphdivider() ..
+	  -- TRANSLATORS: Amalea
+      _([[One of our lumberjacks told me that the reproduction of our forests is far behind his experience and expectations. So I had a deep look on our foresters effectiveness.]])
+      .. paragraphdivider() ..
+	  -- TRANSLATORS: Amalea
+      _([[And guess what, they are both old. Their houses and tools are weared and their seed is degenerated. For this reason they need much more time to plant a tree then usual.]])
+      .. paragraphdivider() ..
+	  -- TRANSLATORS: Amalea
+      _([[The only solution is we need to replace them both with new foresters houses. Be sure to first build a new forester and then destroy the old one. Dismantling is not an option because they are so weared.]]))
+	  .. new_objectives(obj_replace_foresters),
+   posy=1,
+   h=500,
+}
 
--- amalea_8 = {
-   -- title=_"Amalea is pleased",
-   -- body= amalea1(_"Amalea is content that we will manage all our challenges",
-      -- -- TRANSLATORS: Amalea
-      -- _([[Well done so far. Now we will not produce more marble columns than needed. I really think we will need this economy feature quite often to adjust our economy. Remember our industry only works until the given amount in the economy settings is reached.]])
-      -- .. paragraphdivider() ..
-	  -- -- TRANSLATORS: Amalea
-      -- _([[For example it might be a good idea to produce a reasonable amount of a ware and afterwards dismantle the building to gain space for another building.]])),
-   -- posy=1,
--- }
+amalea_8 = {
+   title=_"Amalea sarcastic",
+   body= amalea1(_"Amalea is laughing sarcastically",
+      -- TRANSLATORS: Amalea
+      _([[Ok Lutius. We have solved just another weird behaviour in our economy. Now our lumberjacks would be supplied with enough wood to enhance our economy.]])
+      .. paragraphdivider() ..
+	  -- TRANSLATORS: Amalea
+      _([[I am deeply curious what will go wrong next.]])),
+   posy=1,
+}
 
 -- amalea_9 = {
    -- title=_"Amalea shaking head",
