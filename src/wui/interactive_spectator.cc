@@ -111,6 +111,9 @@ void InteractiveSpectator::draw(RenderTarget& dst) {
 void InteractiveSpectator::draw_map_view(MapView* given_map_view, RenderTarget* dst) {
 	// A spectator cannot build roads.
 	assert(road_building_preview().empty());
+	// In-game, selection can never be on triangles or have a radius.
+	assert(get_sel_radius() == 0);
+	assert(!get_sel_triangles());
 
 	const auto& gbase = egbase();
 	auto* fields_to_draw = given_map_view->draw_terrain(gbase, dst);
@@ -133,15 +136,22 @@ void InteractiveSpectator::draw_map_view(MapView* given_map_view, RenderTarget* 
 			bob->draw(gbase, text_to_draw, field.rendertarget_pixel, scale, dst);
 		}
 
+		const auto blit_overlay = [dst, &field, scale](const Image* pic, const Vector2i& hotspot) {
+			dst->blitrect_scale(Rectf(field.rendertarget_pixel - hotspot.cast<float>() * scale,
+			                          pic->width() * scale, pic->height() * scale),
+			                    pic, Recti(0, 0, pic->width(), pic->height()), 1.f,
+			                    BlendMode::UseAlpha);
+		};
+
 		// TODO(sirver): Do not use the field_overlay_manager, instead draw the
 		// overlays we are interested in here directly.
-		field_overlay_manager().foreach_overlay(
-		   field.fcoords, [dst, &field, scale](const Image* pic, const Vector2i& hotspot) {
-			   dst->blitrect_scale(Rectf(field.rendertarget_pixel - hotspot.cast<float>() * scale,
-			                             pic->width() * scale, pic->height() * scale),
-			                       pic, Recti(0, 0, pic->width(), pic->height()), 1.f,
-			                       BlendMode::UseAlpha);
-			});
+		field_overlay_manager().foreach_overlay(field.fcoords, blit_overlay);
+
+		// Blit the selection marker.
+		if (field.fcoords == get_sel_pos().node) {
+			const Image* pic = get_sel_picture();
+			blit_overlay(pic, Vector2i(pic->width() / 2, pic->height() / 2));
+		}
 	}
 }
 

@@ -321,6 +321,10 @@ void InteractivePlayer::draw(RenderTarget& dst) {
 }
 
 void InteractivePlayer::draw_map_view(MapView* given_map_view, RenderTarget* dst) {
+	// In-game, selection can never be on triangles or have a radius.
+	assert(get_sel_radius() == 0);
+	assert(!get_sel_triangles());
+
 	const Widelands::Player& plr = player();
 	const auto& gbase = egbase();
 	const Widelands::Map& map = gbase.map();
@@ -368,15 +372,22 @@ void InteractivePlayer::draw_map_view(MapView* given_map_view, RenderTarget* dst
 			draw_immovables_for_formerly_visible_field(*f, player_field, scale, dst);
 		}
 
+		const auto blit_overlay = [dst, f, scale](const Image* pic, const Vector2i& hotspot) {
+			dst->blitrect_scale(Rectf(f->rendertarget_pixel - hotspot.cast<float>() * scale,
+			                          pic->width() * scale, pic->height() * scale),
+			                    pic, Recti(0, 0, pic->width(), pic->height()), 1.f,
+			                    BlendMode::UseAlpha);
+		};
+
 		// TODO(sirver): Do not use the field_overlay_manager, instead draw the
 		// overlays we are interested in here directly.
-		field_overlay_manager().foreach_overlay(
-		   f->fcoords, [dst, f, scale](const Image* pic, const Vector2i& hotspot) {
-			   dst->blitrect_scale(Rectf(f->rendertarget_pixel - hotspot.cast<float>() * scale,
-			                             pic->width() * scale, pic->height() * scale),
-			                       pic, Recti(0, 0, pic->width(), pic->height()), 1.f,
-			                       BlendMode::UseAlpha);
-			});
+		field_overlay_manager().foreach_overlay(f->fcoords, blit_overlay);
+
+		// Blit the selection marker.
+		if (f->fcoords == get_sel_pos().node) {
+			const Image* pic = get_sel_picture();
+			blit_overlay(pic, Vector2i(pic->width() / 2, pic->height() / 2));
+		}
 	}
 }
 

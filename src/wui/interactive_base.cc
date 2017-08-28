@@ -150,43 +150,20 @@ UniqueWindowHandler& InteractiveBase::unique_windows() {
 
 void InteractiveBase::set_sel_pos(Widelands::NodeAndTriangle<> const center) {
 	const Map& map = egbase().map();
-
-	// Remove old sel pointer
-	if (sel_.jobid)
-		field_overlay_manager_->remove_overlay(sel_.jobid);
-	const FieldOverlayManager::OverlayId jobid = sel_.jobid =
-	   field_overlay_manager_->next_overlay_id();
-
 	sel_.pos = center;
 
-	//  register sel overlay position
-	if (sel_.triangles) {
-		assert(center.triangle.t == TCoords<>::D || center.triangle.t == TCoords<>::R);
-		Widelands::MapTriangleRegion<> mr(map, Area<TCoords<>>(center.triangle, sel_.radius));
-		do
-			field_overlay_manager_->register_overlay(
-			   mr.location(), sel_.pic, OverlayLevel::kSelection, Vector2i::invalid(), jobid);
-		while (mr.advance(map));
-	} else {
-		Widelands::MapRegion<> mr(map, Area<>(center.node, sel_.radius));
-		do
-			field_overlay_manager_->register_overlay(
-			   mr.location(), sel_.pic, OverlayLevel::kSelection, Vector2i::invalid(), jobid);
-		while (mr.advance(map));
-		if (upcast(InteractiveGameBase const, igbase, this))
-			if (upcast(Widelands::ProductionSite, productionsite, map[center.node].get_immovable())) {
-				if (upcast(InteractivePlayer const, iplayer, igbase)) {
-					const Widelands::Player& player = iplayer->player();
-					if (!player.see_all() &&
-					    (1 >= player.vision(Widelands::Map::get_index(center.node, map.get_width())) ||
-					     player.is_hostile(*productionsite->get_owner())))
-						return set_tooltip("");
-				}
-				set_tooltip(
-				   productionsite->info_string(Widelands::Building::InfoStringFormat::kTooltip));
-				return;
+	if (upcast(InteractiveGameBase const, igbase, this))
+		if (upcast(Widelands::ProductionSite, productionsite, map[center.node].get_immovable())) {
+			if (upcast(InteractivePlayer const, iplayer, igbase)) {
+				const Widelands::Player& player = iplayer->player();
+				if (!player.see_all() &&
+				    (1 >= player.vision(Widelands::Map::get_index(center.node, map.get_width())) ||
+				     player.is_hostile(*productionsite->get_owner())))
+					return set_tooltip("");
 			}
-	}
+			set_tooltip(productionsite->info_string(Widelands::Building::InfoStringFormat::kTooltip));
+			return;
+		}
 	set_tooltip("");
 }
 
