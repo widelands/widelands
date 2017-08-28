@@ -63,6 +63,18 @@ The available programs are:
 - `setbobdescription`_
 - `findobject`_
 - `findspace`_
+- `walk`_
+- `animation`_
+- `return`_
+- `object`_
+- `plant`_
+- `create_bob`_
+- `object remove`_
+- `geologist`_
+- `geologist_find`_
+- `scout`_
+- `play_sound`_
+- `construct`_
 */
 
 const WorkerProgram::ParseMap WorkerProgram::parsemap_[] = {
@@ -132,8 +144,7 @@ createware
 ^^^^^^^^^^
 .. function:: createware \<ware_name\>
 
-   :arg ware_name: The ware type to create, e.g. ``wheat``.
-   :type ware_name: :class:`string`
+   :arg string ware_name: The ware type to create, e.g. ``wheat``.
 
    The worker will create and carry a ware of the given type. Example::
 
@@ -164,11 +175,9 @@ mine
 ^^^^
 .. function:: mine \<resource_name\> \<area\>
 
-   :arg resource_name: The map resource to mine, e.g. ``fish``.
-   :type resource_name: :class:`string`
+   :arg string resource_name: The map resource to mine, e.g. ``fish``.
 
-   :arg area: The radius that is scanned for decreasing the map resource, e.g. ``1``.
-   :type area: :class:`int`
+   :arg int area: The radius that is scanned for decreasing the map resource, e.g. ``1``.
 
    Mine on the current coordinates that the worker has walked to for resources decrease. Example::
 
@@ -205,11 +214,9 @@ breed
 ^^^^^
 .. function:: breed \<resource_name\> \<area\>
 
-   :arg resource_name: The map resource to breed, e.g. ``fish``.
-   :type resource_name: :class:`string`
+   :arg string resource_name: The map resource to breed, e.g. ``fish``.
 
-   :arg area: The radius that is scanned for increasing the map resource, e.g. ``1``.
-   :type area: :class:`int`
+   :arg int area: The radius that is scanned for increasing the map resource, e.g. ``1``.
 
    Breed a resource on the current coordinates that the worker has walked to for resources increase. Example::
 
@@ -243,8 +250,7 @@ setbobdescription
 ^^^^^^^^^^^^^^^^^
 .. function:: setbobdescription \<bob_name\> [\<bob_name\> ...]
 
-   :arg bob_name: The bob type to add to the selection. Specify as many bob types as you want.
-   :type bob_name: :class:`string`
+   :arg string bob_name: The bob type to add to the selection. Specify as many bob types as you want.
 
    Randomly select a bob name that can be used in subsequent commands,
    e.g. create_bob. Used for releasing animals. Example::
@@ -279,14 +285,9 @@ findobject
 ^^^^^^^^^^
 .. function:: findobject radius:\<distance\> [type:\<map_object_type\>] [attrib:\<attribute\>]
 
-   :arg radius: Search for an object within the given radius around the worker.
-   :type radius: :class:`int`
-
-   :arg type: The type of map object to search for. Defaults to ``immovable``.
-   :type type: :class:`string`
-
-   :arg attrib: The attribute that the map object should possess.
-   :type attrib: :class:`string`
+   :arg int radius: Search for an object within the given radius around the worker.
+   :arg string type: The type of map object to search for. Defaults to ``immovable``.
+   :arg string attrib: The attribute that the map object should possess.
 
    Find and select an object based on a number of predicates, which can be specified in arbitrary order.
    The object can then be used in other commands like ``walk`` or ``object``. Examples::
@@ -355,7 +356,7 @@ findspace
 ^^^^^^^^^
 .. function:: findspace size:\<plot\> radius:\<distance\> [breed] [resource:\<name\>] [avoid:\<immovable_attribute\>] [space]
 
-   :arg size: The size or building plot type of the free space. The possible values are:
+   :arg string size: The size or building plot type of the free space. The possible values are:
 
       * ``any``: Any size will do.
       * ``build``: Any building plot.
@@ -365,22 +366,15 @@ findspace
       * ``mine``: Mining plots only.
       * ``port``: Port spaces only.
 
-   :type size: :class:`string`
+   :arg int radius: Search for map fields within the given radius around the worker.
 
-   :arg radius: Search for map fields within the given radius around the worker.
-   :type radius: :class:`int`
+   :arg empty breed: Used in front of ``resource`` only: Also accept fields where the resource has been depleted. Use this when looking for a place for breeding.
 
-   :arg breed: Used in front of ``resource`` only: Also accept fields where the resource has been depleted. Use this when looking for a place for breeding.
-   :type breed: :class:`empty`
+   :arg string resource: A resource to search for. This is mainly intended for fishers and suchlike, for non-detectable resources and default resources.
 
-   :arg resource: A resource to search for. This is mainly intended for fishers and suchlike, for non-detectable resources and default resources.
-   :type resource: :class:`string`
+   :arg string avoid: A field containing an immovable that has this attribute will not be used.
 
-   :arg avoid: A field containing an immovable that has this attribute will not be used.
-   :type avoid: :class:`string`
-
-   :arg space: Find only fields that are walkable in such a way that all neighbours are also walkable (an exception is made if one of the neighbouring fields is owned by this worker's location).
-   :type space: :class:`empty`
+   :arg empty space: Find only fields that are walkable in such a way that all neighbours are also walkable (an exception is made if one of the neighbouring fields is owned by this worker's location).
 
    Find a map field based on a number of predicates.
    The field can then be used in other commands like ``walk``. Examples::
@@ -482,15 +476,49 @@ void WorkerProgram::parse_findspace(Worker::Action* act, const std::vector<std::
 	workarea_info_[act->iparam1].insert(" findspace");
 }
 
+/* RST
+walk
+^^^^
+.. function:: walk \<destination_type\>
+
+   :arg string destination_type: Search for an object within the given radius around the worker. Possible destinations are:
+
+      * ``object``: Walk to a previously found and selected object.
+      * ``coords``: Walk to a previously found and selected field/coordinate.
+      * ``object-or-coords``: Walk to a previously found and selected object if present; otherwise to previously found and selected field/coordinate.
+
+   Walk to a previously selected destination. Examples::
+
+      plant = {
+         "findspace size:any radius:2",
+         "walk coords", -- Walk to the space found by the command above
+         "animation planting 4000",
+         "plant tribe:blackrootfield_tiny",
+         "animation planting 4000",
+         "return"
+      },
+
+      harvest = {
+         "findobject attrib:ripe_blackroot radius:2",
+         "walk object", -- Walk to the blackroot field found by the command above
+         "animation harvesting 10000",
+         "object harvest",
+         "animation gathering 2000",
+         "createware blackroot",
+         "return"
+      },
+
+      buildship = {
+         "walk object-or-coords", -- Walk to coordinates from 1. or to object from 2.
+         "plant tribe:barbarians_shipconstruction unless object", -- 2. This will create an object for us if we don't have one yet
+         "play_sound sound/sawmill sawmill 230",
+         "animation work 500",
+         "construct", -- 1. This will find a space for us if no object has been planted yet
+         "animation work 5000",
+         "return"
+      },
+*/
 /**
- * walk \<where\>
- *
- * Walk to a previously selected destination. where can be one of:
- * object  walk to a previously found and selected object
- * coords  walk to a previously found and selected field/coordinate
- * object-or-coords  walk to a previously found and selected object if
- *         present; otherwise to previously found and selected coordinate
- *
  * iparam1 = walkXXX
  */
 void WorkerProgram::parse_walk(Worker::Action* act, const std::vector<std::string>& cmd) {
@@ -509,14 +537,28 @@ void WorkerProgram::parse_walk(Worker::Action* act, const std::vector<std::strin
 		throw wexception("Bad walk destination '%s'", cmd[1].c_str());
 }
 
+/* RST
+animation
+^^^^^^^^^
+.. function:: animation \<name\> \<duration\>
+
+   :arg string name: The name of the animation.
+   :arg int duration: The time in ms for which the animation will be played.
+
+   Play the given animation for the given duration. Example::
+
+      plantvine = {
+         "findspace size:any radius:1",
+         "walk coords",
+         "animation dig 2000", -- Play a digging animation for 2 seconds.
+         "plant tribe:grapevine_tiny",
+         "animation planting 3000", -- Play a planting animation for 3 seconds.
+         "return"
+      },
+*/
 /**
- * animation \<name\> \<duration\>
- *
- * Play the given animation for the given amount of time.
- *
  * iparam1 = anim id
  * iparam2 = duration
- *
  */
 void WorkerProgram::parse_animation(Worker::Action* act, const std::vector<std::string>& cmd) {
 	char* endp;
@@ -540,9 +582,19 @@ void WorkerProgram::parse_animation(Worker::Action* act, const std::vector<std::
 		throw GameDataError("animation duration must be positive");
 }
 
+/* RST
+return
+^^^^^^
+.. function:: return
+
+   Return home and then drop any ware we're carrying onto our building's flag. Example::
+
+      scout = {
+         "scout 15 75000",
+         "return"
+      }
+*/
 /**
- * Return home, drop an ware we're carrying onto our building's flag.
- *
  * iparam1 = 0: don't drop ware on flag, 1: do drop ware on flag
  */
 void WorkerProgram::parse_return(Worker::Action* act, const std::vector<std::string>&) {
@@ -550,11 +602,28 @@ void WorkerProgram::parse_return(Worker::Action* act, const std::vector<std::str
 	act->iparam1 = 1;  // drop a ware on our owner's flag
 }
 
+/* RST
+object
+^^^^^^
+.. function:: object \<program_name\>
+
+   :arg string program_name: The name of the program to be executed.
+
+   Cause the currently selected object to execute its given program. Example::
+
+      chop = {
+         "findobject attrib:tree radius:10",
+         "walk object",
+         "play_sound sound/woodcutting fast_woodcutting 250",
+         "animation hacking 10000",
+         "play_sound sound/woodcutting tree-falling 130",
+         "object fall", -- Cause the tree to fall
+         "animation idle 2000",
+         "createware log",
+         "return"
+      }
+*/
 /**
- * object \<command\>
- *
- * Cause the currently selected object to execute the given program.
- *
  * sparam1 = object command name
  */
 void WorkerProgram::parse_object(Worker::Action* act, const std::vector<std::string>& cmd) {
@@ -565,12 +634,50 @@ void WorkerProgram::parse_object(Worker::Action* act, const std::vector<std::str
 	act->sparam1 = cmd[1];
 }
 
+/* RST
+plant
+^^^^^
+.. function:: plant \<immmovable_type\> [\<immovable_type\> ...] [unless object]
+
+   :arg string immovable_type: The immovable to be planted. This can be specified in two different ways:
+
+      * ``attrib:<attribute>``: Select at random any immovable that has this attribute.
+      * ``tribe:<immovable_name>``: Specify a specific immovable to be planted.
+
+   :arg empty unless object: Do not plant the immovable if it already exists at the current position.
+
+   Plant one of the given immovables on the current position, taking into account the fertility of the area. Examples::
+
+      plant = {
+         "findspace size:any radius:5 avoid:field",
+         "walk coords",
+         "animation dig 2000",
+         "animation planting 1000",
+         "plant attrib:tree_sapling", -- Plant any random sapling tree
+         "animation water 2000",
+         "return"
+      },
+
+      plant = {
+         "findspace size:any radius:2 space",
+         "walk coords",
+         "animation planting 4000",
+         "plant tribe:field_tiny", -- Plant the tiny field immovable that the worker's tribe knows about
+         "animation planting 4000",
+         "return",
+      },
+
+      buildship = {
+         "walk object-or-coords",
+         "plant tribe:empire_shipconstruction unless object", -- Only create a shipconstruction if we don't already have one
+         "play_sound sound/sawmill sawmill 230",
+         "animation work 500",
+         "construct",
+         "animation work 5000",
+         "return"
+      }
+*/
 /**
- * plant \<immmovable type\> \<immovable type\> ... [unless object]
- *
- * Plant one of the given immovables on the current position taking into
- * account the fertility of the area.
- *
  * sparamv  list of object names
  * iparam1  one of plantXXX
  */
@@ -613,27 +720,64 @@ void WorkerProgram::parse_plant(Worker::Action* act, const std::vector<std::stri
 	}
 }
 
-/**
- * Plants a bob (critter usually, maybe also worker later on). The immovable
- * type must have been selected by a previous command (i.e. setbobdescription).
- */
+/* RST
+create_bob
+^^^^^^^^^^
+.. function:: create_bob
+
+   Adds a bob (usually an animal) to the map at the worker's current location.
+   The list of possible bobs must have been selected by a previous command (i.e. setbobdescription). Example::
+
+      release = {
+         "setbobdescription wildboar stag sheep",
+         "findspace size:any radius:3",
+         "walk coords",
+         "animation releasein 2000",
+         "create_bob", -- Release a wildboar, stag or sheep into the wild
+         "animation releaseout 2000",
+         "return"
+      }
+*/
 void WorkerProgram::parse_create_bob(Worker::Action* act, const std::vector<std::string>&) {
 	act->function = &Worker::run_create_bob;
 }
 
-/**
- * Simply remove the currently selected object - make no fuss about it.
- */
+/* RST
+object remove
+^^^^^^^^^^^^^
+.. function:: object remove
+
+   Simply remove the currently selected object. Example::
+
+      hunt = {
+         "findobject type:bob radius:13 attrib:eatable", -- Select an object to remove
+         "walk object",
+         "animation idle 1000",
+         "object remove", -- The selected eatable map object has been hunted, so remove it from the map
+         "createware meat",
+         "return"
+      }
+*/
 void WorkerProgram::parse_removeobject(Worker::Action* act, const std::vector<std::string>&) {
 	act->function = &Worker::run_removeobject;
 }
 
+/* RST
+geologist
+^^^^^^^^^
+.. function:: geologist \<repetitions\> \<radius\> \<program_name\>
+
+   :arg int repetitions: The number of times that the geologist will move to a different spot on the map to execute ``program_name``.
+
+   :arg int radius: The radius of map fields for the geologist not to stray from.
+
+   Walk around the starting point randomly within a certain radius, and execute your ``program_name`` for some of the fields. Example::
+
+      expedition = {
+         "geologist 15 5 search"
+      },
+*/
 /**
- * geologist \<repeat #\> \<radius\> \<subcommand\>
- *
- * Walk around the starting point randomly within a certain radius,
- * and execute the subcommand for some of the fields.
- *
  * iparam1 = maximum repeat #
  * iparam2 = radius
  * sparam1 = subcommand
@@ -657,10 +801,21 @@ void WorkerProgram::parse_geologist(Worker::Action* act, const std::vector<std::
 	act->sparam1 = cmd[3];
 }
 
-/**
- * Check resources at the current position, and plant a marker object
- * when possible.
- */
+/* RST
+geologist_find
+^^^^^^^^^^^^^^
+.. function:: geologist_find
+
+   Check the current position for map resources (e.g. coal or water), and plant a marker object when possible. Example::
+
+      search = {
+         "animation hacking 5000",
+         "animation idle 2000",
+         "play_sound sound/hammering geologist_hammer 192",
+         "animation hacking 3000",
+         "geologist_find" -- Plant a resource marker at the current location, according to what has been found.
+      }
+*/
 void WorkerProgram::parse_geologist_find(Worker::Action* act, const std::vector<std::string>& cmd) {
 	if (cmd.size() != 1)
 		throw wexception("Usage: geologist_find");
@@ -668,11 +823,23 @@ void WorkerProgram::parse_geologist_find(Worker::Action* act, const std::vector<
 	act->function = &Worker::run_geologist_find;
 }
 
+/* RST
+scout
+^^^^^
+.. function:: scout \<radius\> \<time\>
+
+   :arg int radius: The radius of map fields for the scout to explore.
+
+   :arg int time: The time in milliseconds that the scout will spend scouting.
+
+   Sends a scout out to run around scouting the area. Example::
+
+      scout = {
+         "scout 15 75000", -- Scout within a radius of 15 for 75 seconds
+         "return"
+      },
+*/
 /**
- * scout \<radius\> \<time\>
- *
- * Sends the scout out to run around scouting the area
- *
  * iparam1 = radius
  * iparam2 = time
  */
@@ -685,6 +852,29 @@ void WorkerProgram::parse_scout(Worker::Action* act, const std::vector<std::stri
 	act->function = &Worker::run_scout;
 }
 
+/* RST
+play_sound
+^^^^^^^^^^
+.. function:: play_sound \<sound_dir\> \<sound_name\> [priority]
+
+   :arg string sound_dir: The directory that the sound files are in, relative to the data directory.
+   :arg string sound_name: The name of the particular sound to play. There can be multiple sound files to select from at random, e.g. for `scythe`, we can have `scythe_00.ogg`, `scythe_01.ogg` ...
+
+   :arg int priority: The priority to give this sound. Maximum priority is 255.
+
+   Play a sound effect. Example::
+
+      harvest = {
+         "findobject attrib:ripe_wheat radius:2",
+         "walk object",
+         "play_sound sound/farm scythe 220", -- Almost certainly play a swishy harvesting sound
+         "animation harvesting 10000",
+         "object harvest",
+         "animation gathering 4000",
+         "createware wheat",
+         "return"
+      }
+*/
 void WorkerProgram::parse_play_sound(Worker::Action* act, const std::vector<std::string>& cmd) {
 	if (cmd.size() < 3 || cmd.size() > 4)
 		throw wexception("Usage: play_sound <sound_dir> <sound_name> [priority]");
@@ -698,6 +888,23 @@ void WorkerProgram::parse_play_sound(Worker::Action* act, const std::vector<std:
 	                  atoi(cmd[3].c_str());
 }
 
+/* RST
+construct
+^^^^^^^^^
+.. function:: construct
+
+   Give the ware currently held by the worker to the immovable object for construction. This is used in ship building. Example::
+
+      buildship = {
+         "walk object-or-coords", -- Walk to coordinates from 1. or to object from 2.
+         "plant tribe:barbarians_shipconstruction unless object", -- 2. This will create an object for us if we don't have one yet
+         "play_sound sound/sawmill sawmill 230",
+         "animation work 500",
+         "construct", -- 1. Add the current ware to the construction. This will find a space for us if no shipconstruction object has been planted yet
+         "animation work 5000",
+         "return"
+      },
+*/
 /**
  * construct
  *
