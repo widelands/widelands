@@ -40,7 +40,7 @@ Worker programs are defined in the ``programs`` subtable specified in calls to
 :ref:`tribes:new_worker_type <lua_tribes_workers_common>`.
 Each worker program is a Lua table in itself and defined as a series of command strings.
 Commands can also have parameters, which are separated from each other by a blank space.
-These parameters can also have values, which are sepatared from the parameter name by a colon (:).
+These parameters can also have values, which are separated from the parameter name by a colon (:).
 The table looks like this::
 
    programs = {
@@ -375,7 +375,7 @@ findspace
 
    :arg string avoid: A field containing an immovable that has this attribute will not be used.
 
-   :arg empty space: Find only fields that are walkable in such a way that all neighbours are also walkable (an exception is made if one of the neighbouring fields is owned by this worker's location).
+   :arg empty space: Find only fields that are walkable in such a way that all neighbors are also walkable (an exception is made if one of the neighboring fields is owned by this worker's location).
 
    Find a map field based on a number of predicates.
    The field can then be used in other commands like ``walk``. Examples::
@@ -482,7 +482,7 @@ walk
 ^^^^
 .. function:: walk \<destination_type\>
 
-   :arg string destination_type: Search for an object within the given radius around the worker. Possible destinations are:
+   :arg string destination_type: Defines where to walk to. Possible destinations are:
 
       * ``object``: Walk to a previously found and selected object.
       * ``coords``: Walk to a previously found and selected field/coordinate.
@@ -544,7 +544,7 @@ animation
 .. function:: animation \<name\> \<duration\>
 
    :arg string name: The name of the animation.
-   :arg int duration: The time in ms for which the animation will be played.
+   :arg int duration: The time in milliseconds for which the animation will be played.
 
    Play the given animation for the given duration. Example::
 
@@ -592,7 +592,7 @@ return
 
       scout = {
          "scout 15 75000",
-         "return"
+         "return" -- Go home
       }
 */
 /**
@@ -643,7 +643,7 @@ plant
    :arg string immovable_type: The immovable to be planted. This can be specified in two different ways:
 
       * ``attrib:<attribute>``: Select at random any immovable that has this attribute.
-      * ``tribe:<immovable_name>``: Specify a specific immovable to be planted.
+      * ``tribe:<immovable_name>``: Name a specific immovable to be planted.
 
    :arg empty unless object: Do not plant the immovable if it already exists at the current position.
 
@@ -727,14 +727,14 @@ create_bob
 .. function:: create_bob
 
    Adds a bob (usually an animal) to the map at the worker's current location.
-   The list of possible bobs must have been selected by a previous command (i.e. setbobdescription). Example::
+   The list of possible bobs must have been selected by a previous command. Example::
 
       release = {
-         "setbobdescription wildboar stag sheep",
+         "setbobdescription wildboar stag sheep", -- We want to release a wildboar, stag or sheep into the wild
          "findspace size:any radius:3",
          "walk coords",
          "animation releasein 2000",
-         "create_bob", -- Release a wildboar, stag or sheep into the wild
+         "create_bob", -- Now release a wildboar, stag or sheep into the wild
          "animation releaseout 2000",
          "return"
       }
@@ -748,7 +748,7 @@ object remove
 ^^^^^^^^^^^^^
 .. function:: object remove
 
-   Simply remove the currently selected object. Example::
+   Remove the currently selected object. Example::
 
       hunt = {
          "findobject type:bob radius:13 attrib:eatable", -- Select an object to remove
@@ -858,7 +858,7 @@ play_sound
 ^^^^^^^^^^
 .. function:: play_sound \<sound_dir\> \<sound_name\> [priority]
 
-   :arg string sound_dir: The directory that the sound files are in, relative to the data directory.
+   :arg string sound_dir: The directory (folder) that the sound files are in, relative to the data directory.
    :arg string sound_name: The name of the particular sound to play. There can be multiple sound files to select from at random, e.g. for `scythe`, we can have `scythe_00.ogg`, `scythe_01.ogg` ...
 
    :arg int priority: The priority to give this sound. Maximum priority is 255.
@@ -901,7 +901,7 @@ construct
          "plant tribe:barbarians_shipconstruction unless object", -- 2. This will create an object for us if we don't have one yet
          "play_sound sound/sawmill sawmill 230",
          "animation work 500",
-         "construct", -- 1. Add the current ware to the construction. This will find a space for us if no shipconstruction object has been planted yet
+         "construct", -- 1. Add the current ware to the shipconstruction. This will find a space for us if no shipconstruction object has been planted yet
          "animation work 5000",
          "return"
       },
