@@ -95,7 +95,23 @@ InteractiveSpectator::InteractiveSpectator(Widelands::Game& g,
 	adjust_toolbar_position();
 
 	// Setup all screen elements
-	map_view()->fieldclicked.connect(boost::bind(&InteractiveSpectator::node_action, this));
+	map_view()->field_clicked.connect([this](const Widelands::NodeAndTriangle<>& node_and_triangle) {
+		node_action(node_and_triangle);
+	});
+}
+
+void InteractiveSpectator::draw(RenderTarget& dst) {
+	// This fixes a crash with displaying an error dialog during loading.
+	if (!game().is_loaded())
+		return;
+
+	draw_map_view(map_view(), &dst);
+}
+
+void InteractiveSpectator::draw_map_view(MapView* given_map_view, RenderTarget* dst) {
+	const GameRenderer::Overlays overlays{get_text_to_draw(), road_building_preview()};
+	given_map_view->draw_map_view(egbase(), overlays, GameRenderer::DrawImmovables::kYes,
+	                              GameRenderer::DrawBobs::kYes, nullptr, dst);
 }
 
 /**
@@ -140,10 +156,10 @@ Widelands::PlayerNumber InteractiveSpectator::player_number() const {
 /**
  * Observer has clicked on the given node; bring up the context menu.
  */
-void InteractiveSpectator::node_action() {
+void InteractiveSpectator::node_action(const Widelands::NodeAndTriangle<>& node_and_triangle) {
 	// Special case for buildings
-	if (is_a(Widelands::Building, egbase().map().get_immovable(get_sel_pos().node))) {
-		show_building_window(get_sel_pos().node, false);
+	if (is_a(Widelands::Building, egbase().map().get_immovable(node_and_triangle.node))) {
+		show_building_window(node_and_triangle.node, false);
 		return;
 	}
 
