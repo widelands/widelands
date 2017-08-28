@@ -180,10 +180,10 @@ void InteractivePlayer::draw(RenderTarget& dst) {
 	draw_map_view(map_view(), &dst);
 }
 
-void InteractivePlayer::draw_map_view(MapView* map_view, RenderTarget* dst) {
+void InteractivePlayer::draw_map_view(MapView* given_map_view, RenderTarget* dst) {
 	const GameRenderer::Overlays overlays{get_text_to_draw(), road_building_preview()};
-	map_view->draw_map_view(egbase(), overlays, GameRenderer::DrawImmovables::kYes,
-	                        GameRenderer::DrawBobs::kYes, &player(), dst);
+	given_map_view->draw_map_view(egbase(), overlays, GameRenderer::DrawImmovables::kYes,
+	                              GameRenderer::DrawBobs::kYes, &player(), dst);
 }
 
 void InteractivePlayer::popup_message(Widelands::MessageId const id,
