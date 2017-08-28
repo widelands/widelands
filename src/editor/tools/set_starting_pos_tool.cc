@@ -55,14 +55,13 @@ int32_t editor_tool_set_starting_pos_callback(const Widelands::FCoords& c, Widel
 	return 0;
 }
 
-EditorSetStartingPosTool::EditorSetStartingPosTool()
-   : EditorTool(*this, *this, false), overlay_ids_(kMaxPlayers, 0) {
+EditorSetStartingPosTool::EditorSetStartingPosTool() : EditorTool(*this, *this, false) {
 	current_player_ = 1;
 }
 
 int32_t EditorSetStartingPosTool::handle_click_impl(const Widelands::World&,
                                                     const Widelands::NodeAndTriangle<>& center,
-                                                    EditorInteractive& eia,
+                                                    EditorInteractive&,
                                                     EditorActionArgs*,
                                                     Widelands::Map* map) {
 	assert(0 <= center.node.x);

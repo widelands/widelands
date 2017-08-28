@@ -309,8 +309,9 @@ void EditorInteractive::draw(RenderTarget& dst) {
 	const float scale = 1.f / map_view()->view().zoom;
 	const uint32_t gametime = ebase.get_gametime();
 
+	// NOCOM(#sirver): change the map to provide the data in this form.
 	const auto& map = ebase.map();
-	std::map<Coords, int> starting_positions;
+	std::map<Widelands::Coords, int> starting_positions;
 	for (int i = 0; i < map.get_nrplayers(); ++i) {
 		starting_positions[map.get_starting_pos(i)] = i;
 	}
@@ -342,16 +343,18 @@ void EditorInteractive::draw(RenderTarget& dst) {
 			});
 
 		// Draw the player starting position overlays.
-		const it = starting_positions.find(field.fcoords);
+		const auto it = starting_positions.find(field.fcoords);
 		if (it != starting_positions.end()) {
 			const Image* player_image =
 			   playercolor_image(it->second - 1, "images/players/player_position.png");
 			assert(player_image != nullptr);
 			constexpr int kStartingPosHotspotY = 55;
-			const Vector2f hotspot(player_image->width() / 2, kStartingPosHotspotY) dst.blitrect_scale(
-			   Rectf(field.rendertarget_pixel - hotspot * scale, pic->width() * scale,
-			         pic->height() * scale),
-			   pic, Recti(0, 0, pic->width(), pic->height()), 1.f, BlendMode::UseAlpha);
+			const Vector2f hotspot(player_image->width() / 2, kStartingPosHotspotY);
+			dst.blitrect_scale(Rectf(field.rendertarget_pixel - hotspot * scale,
+			                         player_image->width() * scale, player_image->height() * scale),
+			                   player_image,
+			                   Recti(0, 0, player_image->width(), player_image->height()), 1.f,
+			                   BlendMode::UseAlpha);
 		}
 	}
 }
