@@ -255,7 +255,6 @@ FieldActionWindow::FieldActionWindow(InteractiveBase* const ib,
      workarea_preview_overlay_id_(0),
      attack_box_(nullptr) {
 	ib->set_sel_freeze(true);
-
 	set_center_panel(&tabpanel_);
 }
 
