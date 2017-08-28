@@ -43,17 +43,23 @@ Commands can also have parameters, which are separated from each other by a blan
 The table looks like this::
 
    programs = {
-      program1 = {
+      programname1 = {
          "command1 parameter1 parameter2",
          "command2 parameter1",
          "return"
       },
-      program2 = {
+      programname2 = {
          "command3",
          "command4 parameter1 parameter2 parameter3",
          "return"
       }
    },
+
+The available programs are:
+
+- `createware \<ware_name\>`_
+- `mine \<resource_name\> \<area\>`_
+- `breed \<resource_name\> \<area\>`_
 */
 
 const WorkerProgram::ParseMap WorkerProgram::parsemap_[] = {
@@ -119,7 +125,8 @@ void WorkerProgram::parse(const LuaTable& table) {
 }
 
 /* RST
-.. function:: createware <ware_name>
+createware \<ware_name\>
+^^^^^^^^^^^^^^^^^^^^^^^^
 
    :arg ware_name: The ware type to create, e.g. ``wheat``.
    :type ware_name: :class:`string`
@@ -149,7 +156,8 @@ void WorkerProgram::parse_createware(Worker::Action* act, const std::vector<std:
 }
 
 /* RST
-.. function:: mine <resource_name> <area>
+mine \<resource_name\> \<area\>
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
    :arg resource_name: The map resource to mine, e.g. ``fish``.
    :type resource_name: :class:`string`
@@ -188,7 +196,8 @@ void WorkerProgram::parse_mine(Worker::Action* act, const std::vector<std::strin
 }
 
 /* RST
-.. function:: breed <resource_name> <area>
+breed \<resource_name\> \<area\>
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
    :arg resource_name: The map resource to breed, e.g. ``fish``.
    :type resource_name: :class:`string`
