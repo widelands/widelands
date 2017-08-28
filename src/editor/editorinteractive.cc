@@ -330,18 +330,18 @@ void EditorInteractive::draw(RenderTarget& dst) {
 		if (draw_bobs_) {
 			for (Widelands::Bob* bob = field.fcoords.field->get_first_bob(); bob;
 			     bob = bob->get_next_bob()) {
-				bob->draw(ebase, TextToDraw::kNone, field.rendertarget_pixel, scale, dst);
+				bob->draw(ebase, TextToDraw::kNone, field.rendertarget_pixel, scale, &dst);
 			}
 		}
 
 		// TODO(sirver): Do not use the field_overlay_manager, instead draw the
 		// overlays we are interested in here directly.
 		field_overlay_manager().foreach_overlay(
-		   field.fcoords, [dst, &field, scale](const Image* pic, const Vector2i& hotspot) {
-			   dst->blitrect_scale(Rectf(field.rendertarget_pixel - hotspot.cast<float>() * scale,
-			                             pic->width() * scale, pic->height() * scale),
-			                       pic, Recti(0, 0, pic->width(), pic->height()), 1.f,
-			                       BlendMode::UseAlpha);
+		   field.fcoords, [&dst, &field, scale](const Image* pic, const Vector2i& hotspot) {
+			   dst.blitrect_scale(Rectf(field.rendertarget_pixel - hotspot.cast<float>() * scale,
+			                            pic->width() * scale, pic->height() * scale),
+			                      pic, Recti(0, 0, pic->width(), pic->height()), 1.f,
+			                      BlendMode::UseAlpha);
 			});
 	}
 }

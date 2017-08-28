@@ -106,6 +106,7 @@ wl_library(wui_mapview
     base_macros
     base_math
     graphic
+    graphic_fields_to_draw
     graphic_game_renderer
     logic
     logic_widelands_geometry

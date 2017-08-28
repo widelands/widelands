@@ -121,7 +121,6 @@ void FieldsToDraw::reset(const Widelands::EditorGameBase& egbase,
 			Widelands::PlayerNumber owned_by = f.fcoords.field->get_owned_by();
 			f.owner = owned_by != 0 ? &egbase.player(owned_by) : nullptr;
 			f.is_border = f.fcoords.field->is_border();
-			// NOCOM(#sirver): is vision still required?
 			f.vision = 2;
 			f.roads = f.fcoords.field->get_roads();
 		}

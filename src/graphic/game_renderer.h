@@ -30,13 +30,6 @@
 #include "logic/map_objects/draw_text.h"
 #include "logic/player.h"
 
-void draw_objects(const Widelands::EditorGameBase& egbase,
-						const float scale,
-						const FieldsToDraw& fields_to_draw,
-						const Widelands::Player& player,
-						const TextToDraw text_to_draw,
-						RenderTarget* dst);
-
 // Draw the terrain only.
 void draw_terrain(const Widelands::EditorGameBase& egbase,
 						const FieldsToDraw& fields_to_draw,
@@ -45,7 +38,7 @@ void draw_terrain(const Widelands::EditorGameBase& egbase,
 
 // Draw the border stones for 'field' if it is a border and 'visibility' is
 // correct.
-void draw_border(const FieldsToDraw::Field& field,
+void draw_border_markers(const FieldsToDraw::Field& field,
 					  const float scale,
                  const FieldsToDraw& fields_to_draw,
                  RenderTarget* dst);

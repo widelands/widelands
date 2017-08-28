@@ -30,7 +30,6 @@
 #include "base/vector.h"
 #include "graphic/rendertarget.h"
 #include "logic/editor_game_base.h"
-#include "logic/map_objects/tribes/road_textures.h"
 #include "logic/widelands.h"
 #include "logic/widelands_geometry.h"
 
@@ -97,7 +96,7 @@ public:
 	inline Field* mutable_field(const int index) {
 		return &fields_[index];
 	}
-	
+
 private:
 	// Calculates the index of the given field with ('fx', 'fy') being geometric
 	// coordinates in the map. Returns kInvalidIndex if this field is not in the
