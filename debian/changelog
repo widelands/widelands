@@ -362,7 +362,7 @@ widelands (1:16-1) unstable; urgency=low
 
 widelands (1:16~rc1-1) unstable; urgency=low
 
-  * New upsteram release candidate
+  * New upstream release candidate
   * Updated Standards-Version to 3.9.1, no changes required
   * Removed patches/secfix-617960 since part of the new release
   * Do not override widelands version number in debian/rules
