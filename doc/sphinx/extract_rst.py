@@ -59,6 +59,8 @@ lua_dirs = (
      'soldiers', 'lua_tribes_workers'),
      ('data/world/critters/badger',
      'critters', 'lua_world_units'),
+     ('data/world/immovables/bush1',
+     'immovables', 'lua_world_units'),
 )
 
 
