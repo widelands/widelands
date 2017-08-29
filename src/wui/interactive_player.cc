@@ -58,13 +58,13 @@
 using Widelands::Building;
 using Widelands::Map;
 
-namespace  {
+namespace {
 
 // Returns the brightness value in [0, 1.] for 'fcoords' at 'gametime' for
 // 'pf'. See 'field_brightness' in fields_to_draw.cc for scale of values.
 float adjusted_field_brightness(const Widelands::FCoords& fcoords,
-                       const uint32_t gametime,
-                       const Widelands::Player::Field& pf) {
+                                const uint32_t gametime,
+                                const Widelands::Player::Field& pf) {
 	if (pf.vision == 0) {
 		return 0.;
 	};
@@ -109,7 +109,8 @@ void draw_bobs_for_visible_field(const Widelands::EditorGameBase& egbase,
                                  const TextToDraw text_to_draw,
                                  const Widelands::Player& player,
                                  RenderTarget* dst) {
-	for (Widelands::Bob* bob = field.fcoords.field->get_first_bob(); bob; bob = bob->get_next_bob()) {
+	for (Widelands::Bob* bob = field.fcoords.field->get_first_bob(); bob;
+	     bob = bob->get_next_bob()) {
 		TextToDraw draw_text_for_this_bob = text_to_draw;
 		const Widelands::Player* owner = bob->get_owner();
 		if (owner != nullptr && !player.see_all() && player.is_hostile(*owner)) {
