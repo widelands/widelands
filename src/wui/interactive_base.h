@@ -85,7 +85,6 @@ public:
 	virtual Widelands::Player* get_player() const = 0;
 
 	void think() override;
-	void draw(RenderTarget&) override;
 	bool handle_mousepress(uint8_t btn, int32_t x, int32_t y) override;
 	bool handle_mouserelease(uint8_t btn, int32_t x, int32_t y) override;
 	bool
@@ -97,23 +96,12 @@ public:
 	const Widelands::NodeAndTriangle<>& get_sel_pos() const {
 		return sel_.pos;
 	}
-	bool get_sel_freeze() const {
-		return sel_.freeze;
-	}
 
 	// Returns true if the buildhelp is currently displayed.
 	bool buildhelp() const;
 
 	// Sets if the buildhelp should be displayed. Will also call on_buildhelp_changed().
 	void show_buildhelp(bool t);
-
-	// Returns true if bobs or immovables should be rendered.
-	bool draw_bobs() const;
-	bool draw_immovables() const;
-
-	// Sets if bobs or immovables should be rendered.
-	void set_draw_bobs(bool value);
-	void set_draw_immovables(bool value);
 
 	/**
 	 * sel_triangles determines whether the mouse pointer selects triangles.
@@ -224,9 +212,13 @@ protected:
 	ChatOverlay* chat_overlay() {
 		return chat_overlay_;
 	}
+
 	UI::Box* toolbar() {
 		return &toolbar_;
 	}
+
+	// Returns the information which overlay text should currently be drawn.
+	TextToDraw get_text_to_draw() const;
 
 private:
 	int32_t stereo_position(Widelands::Coords position_map);
@@ -284,8 +276,6 @@ private:
 	uint32_t lastframe_;        //  system time (milliseconds)
 	uint32_t frametime_;        //  in millseconds
 	uint32_t avg_usframetime_;  //  in microseconds!
-	bool draw_immovables_;
-	bool draw_bobs_;
 
 	FieldOverlayManager::OverlayId road_buildhelp_overlay_jobid_;
 	Widelands::CoordPath* buildroad_;  //  path for the new road

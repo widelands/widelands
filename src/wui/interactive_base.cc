@@ -67,8 +67,7 @@ using Widelands::TCoords;
 InteractiveBase::InteractiveBase(EditorGameBase& the_egbase, Section& global_s)
    : UI::Panel(nullptr, 0, 0, g_gr->get_xres(), g_gr->get_yres()),
      show_workarea_preview_(global_s.get_bool("workareapreview", true)),
-     // TODO(sirver): MapView should no longer have knowledge of InteractiveBase.
-     map_view_(this, 0, 0, g_gr->get_xres(), g_gr->get_yres(), *this),
+     map_view_(this, the_egbase.map(), 0, 0, g_gr->get_xres(), g_gr->get_yres()),
      // Initialize chatoveraly before the toolbar so it is below
      chat_overlay_(new ChatOverlay(this, 10, 25, get_w() / 2, get_h() - 25)),
      toolbar_(this, 0, 0, UI::Box::Horizontal),
@@ -83,8 +82,6 @@ InteractiveBase::InteractiveBase(EditorGameBase& the_egbase, Section& global_s)
      lastframe_(SDL_GetTicks()),
      frametime_(0),
      avg_usframetime_(0),
-     draw_immovables_(true),
-     draw_bobs_(true),
      road_buildhelp_overlay_jobid_(0),
      buildroad_(nullptr),
      road_build_player_(0),
@@ -115,6 +112,14 @@ InteractiveBase::InteractiveBase(EditorGameBase& the_egbase, Section& global_s)
 
 	toolbar_.set_layout_toplevel(true);
 	map_view_.changeview.connect([this] { mainview_move(); });
+	map_view()->field_clicked.connect([this](const Widelands::NodeAndTriangle<>& node_and_triangle) {
+		set_sel_pos(node_and_triangle);
+	});
+	map_view_.track_selection.connect([this](const Widelands::NodeAndTriangle<>& node_and_triangle) {
+		if (!sel_.freeze) {
+			set_sel_pos(node_and_triangle);
+		}
+	});
 
 	set_border_snap_distance(global_s.get_int("border_snap_distance", 0));
 	set_panel_snap_distance(global_s.get_int("panel_snap_distance", 10));
@@ -202,6 +207,19 @@ void InteractiveBase::set_sel_picture(const Image* image) {
 	sel_.pic = image;
 	set_sel_pos(get_sel_pos());  //  redraw
 }
+
+TextToDraw InteractiveBase::get_text_to_draw() const {
+	TextToDraw text_to_draw = TextToDraw::kNone;
+	auto display_flags = get_display_flags();
+	if (display_flags & InteractiveBase::dfShowCensus) {
+		text_to_draw = text_to_draw | TextToDraw::kCensus;
+	}
+	if (display_flags & InteractiveBase::dfShowStatistics) {
+		text_to_draw = text_to_draw | TextToDraw::kStatistics;
+	}
+	return text_to_draw;
+}
+
 void InteractiveBase::unset_sel_picture() {
 	set_sel_picture(g_gr->images().get("images/ui_basic/fsel.png"));
 }
@@ -213,22 +231,6 @@ bool InteractiveBase::buildhelp() const {
 void InteractiveBase::show_buildhelp(bool t) {
 	field_overlay_manager_->show_buildhelp(t);
 	on_buildhelp_changed(t);
-}
-
-bool InteractiveBase::draw_bobs() const {
-	return draw_bobs_;
-}
-
-void InteractiveBase::set_draw_bobs(const bool value) {
-	draw_bobs_ = value;
-}
-
-bool InteractiveBase::draw_immovables() const {
-	return draw_immovables_;
-}
-
-void InteractiveBase::set_draw_immovables(const bool value) {
-	draw_immovables_ = value;
 }
 
 void InteractiveBase::toggle_buildhelp() {
@@ -342,10 +344,6 @@ void InteractiveBase::think() {
 	egbase().think();  // Call game logic here. The game advances.
 
 	UI::Panel::think();
-}
-
-void InteractiveBase::draw(RenderTarget& dst) {
-	map_view_.draw(dst);
 }
 
 bool InteractiveBase::handle_mousepress(uint8_t btn, int32_t x, int32_t y) {
