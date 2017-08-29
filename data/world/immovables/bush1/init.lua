@@ -34,7 +34,7 @@ dirname = path.dirname(__file__)
 --    **descname**
 --        *Mandatory*. The translatable display name, e.g.::
 --
---            descname = _"Alder (Old)"",
+--            descname = _"Alder (Old)",
 --
 --    **species**
 --        *Mandatory for trees*. `Trees`_ have 4 variants (sapling, pole, mature, and old),

@@ -61,6 +61,8 @@ lua_dirs = (
      'critters', 'lua_world_units'),
      ('data/world/immovables/bush1',
      'immovables', 'lua_world_units'),
+     ('data/world/resources',
+     'resources', 'lua_world_units'),
 )
 
 
