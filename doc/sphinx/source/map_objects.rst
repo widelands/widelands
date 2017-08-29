@@ -5,5 +5,5 @@ World and Tribes
    :maxdepth: 3
 
    animations
-   autogen_toc_lua_world
+   lua_world
    lua_tribes
