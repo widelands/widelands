@@ -38,7 +38,7 @@ dirname = path.dirname(__file__)
 --
 --    **species**
 --        *Mandatory for trees*. `Trees`_ have 4 variants (sapling, pole, mature, and old),
---        so we will want a simplified translatable display name for the editor, e.g.::
+--        so we will want a simplified translatable display name for the editor help, e.g.::
 --
 --            species = _"Alder",
 --
@@ -87,7 +87,7 @@ dirname = path.dirname(__file__)
 --             -- In percent (1 being very fertile).
 --             preferred_fertility = 0.6,
 --
---             -- A value in [0, 1] that defines how well this can deal with non-ideal terrain.
+--             -- A value in [0, 1] that defines how well this immovable can deal with non-ideal terrain.
 --             -- A lower value means that it is less picky, i.e. it can deal better with it.
 --             pickiness = 0.6,
 --          }
@@ -140,12 +140,12 @@ world:new_immovable_type{
 -- Trees are a special type of immovable, and should be placed in the editor_category
 -- "trees_coniferous", "trees_deciduous", "trees_palm", or "trees_wasteland".
 -- Because they will grow with time, this growth is represented by transforming one
--- tree  into the next through the ``grow`` command in their program.
+-- tree into the next through the ``grow`` command in their program.
 -- They also all need to define a species name and their terrain affinity (see above).
 -- Trees will grow in 4 stages:
 --
 -- * **Sapling**: A sapling will be seeded by another tree or planted by a forester.
---   All saplings have the attribute  ``"tree_sapling"``.
+--   All saplings have the attribute ``"tree_sapling"``.
 -- * **Pole**: A young, slender tree that is not able to seed other trees yet.
 --   A pole has no special attributes.
 -- * **Mature**: A visually grown tree but without any special attributes, just like the pole.

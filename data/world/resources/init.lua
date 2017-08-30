@@ -7,7 +7,7 @@
 -- Resources are mineable map resources.
 -- All resources are defined in ``data/world/resources/init.lua``.
 --
--- * **Fish** can be placed in water only and be fished by a fisher.
+-- * **Fish** can be placed in water terrain only and be fished by a fisher.
 -- * **Water** can be placed on any non-mountain terrain and be pulled up by a well.
 -- * **Stones**, **Coal**, **Iron** and **Gold** are placed on mountain terrain
 --   and can be dug up by mines.
@@ -61,9 +61,9 @@ pics_dir = path.dirname(__file__) .. "pics/"
 --        on the map, for use in the editor, e.g.::
 --
 --            editor_pictures = {
---               [5] = pics_dir .. "coal1.png", -- Use this image for amount 0-5;
---               [10] = pics_dir .. "coal2.png", -- Use this image for amount 6-10;
---               [15] = pics_dir .. "coal3.png", -- Use this image for amount 11-15;
+--               [5] = pics_dir .. "coal1.png",    -- Use this image for amount 0-5;
+--               [10] = pics_dir .. "coal2.png",   -- Use this image for amount 6-10;
+--               [15] = pics_dir .. "coal3.png",   -- Use this image for amount 11-15;
 --               [1000] = pics_dir .. "coal4.png", -- Use this image for amount > 15;
 --            }
 --
