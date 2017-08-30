@@ -1816,14 +1816,9 @@ void Map::initialize_resources(const FCoords& c,
 	if (resource_type == Widelands::kNoResource) {
 		amount = 0;
 	}
-	const auto note = NoteFieldResourceChanged{
-	   c, c.field->resources, c.field->initial_res_amount, c.field->res_amount,
-	};
-
 	c.field->resources = resource_type;
 	c.field->initial_res_amount = amount;
 	c.field->res_amount = amount;
-	Notifications::publish(note);
 }
 
 void Map::set_resources(const FCoords& c, ResourceAmount amount) {
@@ -1831,11 +1826,7 @@ void Map::set_resources(const FCoords& c, ResourceAmount amount) {
 	if (c.field->resources == Widelands::kNoResource) {
 		return;
 	}
-	const auto note = NoteFieldResourceChanged{
-	   c, c.field->resources, c.field->initial_res_amount, c.field->res_amount,
-	};
 	c.field->res_amount = amount;
-	Notifications::publish(note);
 }
 
 void Map::clear_resources(const FCoords& c) {

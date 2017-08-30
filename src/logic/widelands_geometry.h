@@ -122,6 +122,7 @@ struct FCoords : public Coords {
 	Field* field;
 };
 
+// TODO(sirver): This should not derive from CoordsType. Replace with NodeAndTriangle.
 template <typename CoordsType = Coords> struct TCoords : public CoordsType {
 	enum TriangleIndex { D, R, None };
 

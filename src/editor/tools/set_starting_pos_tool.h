@@ -30,7 +30,6 @@
 // How much place should be left around a player position
 // where no other player can start
 #define MIN_PLACE_AROUND_PLAYERS 24
-#define STARTING_POS_HOTSPOT_Y 55
 
 /// Sets the starting position of players.
 struct EditorSetStartingPosTool : public EditorTool {
@@ -50,13 +49,6 @@ struct EditorSetStartingPosTool : public EditorTool {
 	bool has_size_one() const override {
 		return true;
 	}
-	void set_starting_pos(EditorInteractive& eia,
-	                      Widelands::PlayerNumber plnum,
-	                      const Widelands::Coords& c,
-	                      Widelands::Map* map);
-
-private:
-	std::vector<FieldOverlayManager::OverlayId> overlay_ids_;
 };
 
 int32_t editor_tool_set_starting_pos_callback(const Widelands::FCoords& c, Widelands::Map& map);
