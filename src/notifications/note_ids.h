@@ -31,7 +31,6 @@ enum class NoteId : uint32_t {
 	Immovable,
 	FieldPossession,
 	FieldTerrainChanged,
-	FieldResourceTypeChanged,
 	ProductionSiteOutOfResources,
 	TrainingSiteSoldierTrained,
 	ShipMessage,
