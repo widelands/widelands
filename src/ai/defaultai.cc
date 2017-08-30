@@ -612,7 +612,6 @@ void DefaultAI::late_initialization() {
 		bo.construction_decision_time = -60 * 60 * 1000;
 		bo.last_building_built = kNever;
 		bo.build_material_shortage = false;
-		bo.production_hint = kUncalculated;
 		bo.current_stats = 0;
 		bo.unoccupied_count = 0;
 		bo.unconnected_count = 0;
@@ -657,15 +656,13 @@ void DefaultAI::late_initialization() {
 		bo.max_preciousness = 0;
 		bo.max_needed_preciousness = 0;
 
-		if (bh.renews_map_resource()) {
-			bo.production_hint = tribe_->safe_ware_index(bh.get_renews_map_resource());
+		for (auto ph : bh.supported_production()) {
+			bo.production_hints.insert(tribe_->safe_ware_index(ph));
 		}
-
 		// I just presume cut wood is named "log" in the game
-		if (tribe_->safe_ware_index("log") == bo.production_hint) {
+		if (bo.production_hints.count(tribe_->safe_ware_index("log"))) {
 			bo.set_is(BuildingAttribute::kRanger);
 		}
-
 		// Is total count of this building limited by AI mode?
 		if (type_ == Widelands::AiType::kVeryWeak && bh.get_very_weak_ai_limit() >= 0) {
 			bo.cnt_limit_by_aimode = bh.get_very_weak_ai_limit();
@@ -858,6 +855,7 @@ void DefaultAI::late_initialization() {
 	// create e.g. two barracks or bakeries, the impact on the AI must be considered
 	assert(count_buildings_with_attribute(BuildingAttribute::kBarracks) == 1);
 	assert(count_buildings_with_attribute(BuildingAttribute::kLogRefiner) == 1);
+	assert(count_buildings_with_attribute(BuildingAttribute::kRanger) == 1);
 	assert(count_buildings_with_attribute(BuildingAttribute::kWell) == 1);
 	assert(count_buildings_with_attribute(BuildingAttribute::kLumberjack) == 1);
 	assert(count_buildings_with_attribute(BuildingAttribute::kHunter) == 1);
@@ -2558,7 +2556,7 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 						prio *= 3;
 					}
 
-				} else if (bo.production_hint >= 0) {
+				} else if (!bo.production_hints.empty()) {
 					if (bo.is(BuildingAttribute::kRanger)) {
 						assert(bo.cnt_target > 0);
 					}
@@ -2580,18 +2578,22 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 
 						prio -= bf->water_nearby / 5;
 
-						prio += management_data.neuron_pool[67].get_result_safe(
-						           bf->producers_nearby.at(bo.production_hint) * 5, kAbsValue) /
-						        2;
+						for (auto ph : bo.production_hints) {
+							prio += management_data.neuron_pool[67].get_result_safe(
+							           bf->producers_nearby.at(ph) * 5, kAbsValue) /
+							        2;
+						}
 
 						prio +=
 						   management_data.neuron_pool[49].get_result_safe(bf->trees_nearby, kAbsValue) /
 						   5;
 
-						prio += bf->producers_nearby.at(bo.production_hint) * 5 -
-						        (expansion_type.get_expansion_type() != ExpansionMode::kEconomy) * 15 -
-						        bf->space_consumers_nearby * 5 - bf->rocks_nearby / 3 +
-						        bf->supporters_nearby.at(bo.production_hint) * 3;
+						for (auto ph : bo.production_hints) {
+							prio += bf->producers_nearby.at(ph) * 5 -
+							        (expansion_type.get_expansion_type() != ExpansionMode::kEconomy) * 15 -
+							        bf->space_consumers_nearby * 5 - bf->rocks_nearby / 3 +
+							        bf->supporters_nearby.at(ph) * 3;
+						}
 
 					} else {  // FISH BREEDERS and GAME KEEPERS
 
@@ -2618,8 +2620,10 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 							           (40 - current_stocklevel) / 2, kAbsValue);
 						}
 
-						prio += bf->producers_nearby.at(bo.production_hint) * 10;
-						prio -= bf->supporters_nearby.at(bo.production_hint) * 20;
+						for (auto ph : bo.production_hints) {
+							prio += bf->producers_nearby.at(ph) * 10;
+							prio -= bf->supporters_nearby.at(ph) * 20;
+						}
 
 						if (bf->enemy_nearby) {
 							prio -= 20;
@@ -2632,7 +2636,7 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 					prio -= (bf->enemy_nearby) * 100;
 					prio -= (expansion_type.get_expansion_type() != ExpansionMode::kEconomy) * 100;
 				} else {  // finally normal productionsites
-					assert(bo.production_hint < 0);
+					assert(bo.production_hints.empty());
 
 					if (bo.new_building == BuildingNecessity::kForced) {
 						prio += 150;
@@ -3907,8 +3911,8 @@ bool DefaultAI::check_productionsites(uint32_t gametime) {
 	}
 
 	// All other SPACE_CONSUMERS without input and above target_count
-	if (site.bo->inputs.empty()                       // does not consume anything
-	    && site.bo->production_hint == kUncalculated  // not a renewing building (forester...)
+	if (site.bo->inputs.empty()               // does not consume anything
+	    && site.bo->production_hints.empty()  // not a renewing building (forester...)
 	    && site.bo->is(BuildingAttribute::kSpaceConsumer) &&
 	    !site.bo->is(BuildingAttribute::kRanger)) {
 
@@ -3976,8 +3980,8 @@ bool DefaultAI::check_productionsites(uint32_t gametime) {
 
 	// remaining buildings without inputs and not supporting ones (fishers only left probably and
 	// hunters)
-	if (site.bo->inputs.empty() && site.bo->production_hint < 0 && site.site->can_start_working() &&
-	    !site.bo->is(BuildingAttribute::kSpaceConsumer) &&
+	if (site.bo->inputs.empty() && site.bo->production_hints.empty() &&
+	    site.site->can_start_working() && !site.bo->is(BuildingAttribute::kSpaceConsumer) &&
 	    site.site->get_statistics_percent() < 10 &&
 	    ((game().get_gametime() - site.built_time) > 10 * 60 * 1000)) {
 
@@ -3993,7 +3997,7 @@ bool DefaultAI::check_productionsites(uint32_t gametime) {
 
 	// supporting productionsites (rangers)
 	// stop/start them based on stock avaiable
-	if (site.bo->production_hint >= 0) {
+	if (!site.bo->production_hints.empty()) {
 
 		if (!site.bo->is(BuildingAttribute::kRanger)) {
 			// other supporting sites, like fish breeders, gamekeepers are not dismantled at all
@@ -4737,7 +4741,7 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 		           bo.cnt_under_construction + bo.unoccupied_count == 0) {
 			bo.max_needed_preciousness = bo.max_preciousness;  // even when rocks are not needed
 			return BuildingNecessity::kAllowed;
-		} else if (bo.production_hint >= 0) {
+		} else if (!bo.production_hints.empty()) {
 
 			if (bo.cnt_under_construction + bo.unoccupied_count - bo.unconnected_count > 0) {
 				return BuildingNecessity::kForbidden;
@@ -5214,8 +5218,16 @@ uint32_t DefaultAI::calculate_stocklevel(Widelands::DescriptionIndex wt, const W
 uint32_t
 DefaultAI::get_stocklevel(BuildingObserver& bo, const uint32_t gametime, const WareWorker what) {
 	if (bo.stocklevel_time < gametime - 5 * 1000) {
-		if (bo.production_hint > 0) {
-			bo.stocklevel_count = calculate_stocklevel(static_cast<size_t>(bo.production_hint), what);
+		if (!bo.production_hints.empty()) {
+			// looking for smallest value
+			bo.stocklevel_count = std::numeric_limits<uint32_t>::max();
+			for (auto ph : bo.production_hints) {
+				const uint32_t res = calculate_stocklevel(static_cast<size_t>(ph), what);
+				if (res < bo.stocklevel_count) {
+					bo.stocklevel_count = res;
+				}
+			}
+			assert(bo.stocklevel_count < std::numeric_limits<uint32_t>::max());
 		} else if (!bo.outputs.empty()) {
 			bo.stocklevel_count = calculate_stocklevel(bo, what);
 		} else {
@@ -5285,8 +5297,10 @@ void DefaultAI::consider_productionsite_influence(BuildableField& field,
 		++field.producers_nearby.at(bo.outputs.at(i));
 	}
 
-	if (bo.production_hint >= 0) {
-		++field.supporters_nearby.at(bo.production_hint);
+	if (!bo.production_hints.empty()) {
+		for (auto ph : bo.production_hints) {
+			++field.supporters_nearby.at(ph);
+		}
 	}
 
 	if (bo.is(BuildingAttribute::kRanger)) {
