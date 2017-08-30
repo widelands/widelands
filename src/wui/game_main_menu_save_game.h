@@ -43,6 +43,7 @@ struct GameMainMenuSaveGame : public UI::UniqueWindow {
 
 protected:
 	void die() override;
+	bool handle_key(bool down, SDL_Keysym code) override;
 
 private:
 	void layout() override;

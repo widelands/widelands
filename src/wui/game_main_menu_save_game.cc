@@ -208,6 +208,27 @@ void GameMainMenuSaveGame::die() {
 	UI::UniqueWindow::die();
 }
 
+bool GameMainMenuSaveGame::handle_key(bool down, SDL_Keysym code) {
+	if (down) {
+		switch (code.sym) {
+		case SDLK_KP_ENTER:
+		case SDLK_RETURN:
+			ok();
+			return true;
+		case SDLK_ESCAPE:
+			die();
+			return true;
+		case SDLK_DELETE:
+			load_or_save_.clicked_delete();
+			return true;
+		default:
+			break;  // not handled
+		}
+	}
+	return UI::Panel::handle_key(down, code);
+}
+
+
 void GameMainMenuSaveGame::pause_game(bool paused) {
 	if (igbase().is_multiplayer()) {
 		return;
