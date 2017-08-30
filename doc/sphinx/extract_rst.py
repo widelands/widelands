@@ -63,6 +63,8 @@ lua_dirs = (
      'immovables', 'lua_world_units'),
      ('data/world/resources',
      'resources', 'lua_world_units'),
+     ('data/world/terrains',
+     'terrains', 'lua_world_units'),
 )
 
 
