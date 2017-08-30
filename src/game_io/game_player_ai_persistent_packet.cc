@@ -32,8 +32,7 @@ constexpr uint16_t kCurrentPacketVersion = 3;
 
 void GamePlayerAiPersistentPacket::read(FileSystem& fs, Game& game, MapObjectLoader*) {
 	try {
-		const Map& map = game.map();
-		PlayerNumber const nr_players = map.get_nrplayers();
+		PlayerNumber const nr_players = game.map().get_nrplayers();
 
 		FileRead fr;
 		fr.open(fs, "binary/player_ai");
@@ -125,8 +124,7 @@ void GamePlayerAiPersistentPacket::write(FileSystem& fs, Game& game, MapObjectSa
 
 	fw.unsigned_16(kCurrentPacketVersion);
 
-	const Map& map = game.map();
-	PlayerNumber const nr_players = map.get_nrplayers();
+	PlayerNumber const nr_players = game.map().get_nrplayers();
 	iterate_players_existing_const(p, nr_players, game, player) {
 		fw.unsigned_8(player->ai_data.initialized);
 		fw.unsigned_32(player->ai_data.colony_scan_area);

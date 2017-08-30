@@ -48,13 +48,12 @@ struct CoordPath;
 
 class EdgeOverlayManager;
 class UniqueWindowHandler;
-struct InteractiveBaseInternals;
 
 /**
  * This is used to represent the code that InteractivePlayer and
  * EditorInteractive share.
  */
-class InteractiveBase : public MapView, public DebugConsole::Handler {
+class InteractiveBase : public UI::Panel, public DebugConsole::Handler {
 public:
 	friend class SoundHandler;
 
@@ -76,6 +75,7 @@ public:
 	virtual void reference_player_tribe(Widelands::PlayerNumber, const void* const) {
 	}
 
+	// TODO(sirver): This should be private.
 	bool show_workarea_preview_;
 	FieldOverlayManager::OverlayId show_work_area(const WorkareaInfo& workarea_info,
 	                                              Widelands::Coords coords);
@@ -85,13 +85,16 @@ public:
 	virtual Widelands::Player* get_player() const = 0;
 
 	void think() override;
+	bool handle_mousepress(uint8_t btn, int32_t x, int32_t y) override;
+	bool handle_mouserelease(uint8_t btn, int32_t x, int32_t y) override;
+	bool
+	handle_mousemove(uint8_t state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff) override;
+	bool handle_mousewheel(uint32_t which, int32_t x, int32_t y) override;
+	bool handle_key(bool down, SDL_Keysym code) override;
 	virtual void postload();
 
 	const Widelands::NodeAndTriangle<>& get_sel_pos() const {
 		return sel_.pos;
-	}
-	bool get_sel_freeze() const {
-		return sel_.freeze;
 	}
 
 	// Returns true if the buildhelp is currently displayed.
@@ -99,14 +102,6 @@ public:
 
 	// Sets if the buildhelp should be displayed. Will also call on_buildhelp_changed().
 	void show_buildhelp(bool t);
-
-	// Returns true if bobs or immovables should be rendered.
-	bool draw_bobs() const;
-	bool draw_immovables() const;
-
-	// Sets if bobs or immovables should be rendered.
-	void set_draw_bobs(bool value);
-	void set_draw_immovables(bool value);
 
 	/**
 	 * sel_triangles determines whether the mouse pointer selects triangles.
@@ -179,6 +174,10 @@ public:
 		return road_building_preview_;
 	}
 
+	MapView* map_view() {
+		return &map_view_;
+	}
+
 protected:
 	/// Adds a toolbar button to the toolbar
 	/// \param image_basename:      File path for button image starting from 'images' and without
@@ -203,7 +202,6 @@ protected:
 	void mainview_move();
 
 	void draw_overlay(RenderTarget&) override;
-	bool handle_key(bool down, SDL_Keysym) override;
 
 	void unset_sel_picture();
 	void set_sel_picture(const Image* image);
@@ -211,14 +209,16 @@ protected:
 		toolbar_.set_pos(Vector2i((get_inner_w() - toolbar_.get_w()) >> 1, get_inner_h() - 34));
 	}
 
-	// TODO(sirver): why are these protected?
-	ChatOverlay* chat_overlay_;
+	ChatOverlay* chat_overlay() {
+		return chat_overlay_;
+	}
 
-	// These get collected by add_toolbar_button
-	// so we can call unassign_toggle_button on them in the destructor.
-	std::vector<UI::UniqueWindow::Registry> registries_;
+	UI::Box* toolbar() {
+		return &toolbar_;
+	}
 
-	UI::Box toolbar_;
+	// Returns the information which overlay text should currently be drawn.
+	TextToDraw get_text_to_draw() const;
 
 private:
 	int32_t stereo_position(Widelands::Coords position_map);
@@ -247,7 +247,19 @@ private:
 		FieldOverlayManager::OverlayId jobid;
 	} sel_;
 
-	std::unique_ptr<InteractiveBaseInternals> m;
+	MapView map_view_;
+	ChatOverlay* chat_overlay_;
+
+	// These get collected by add_toolbar_button
+	// so we can call unassign_toggle_button on them in the destructor.
+	std::vector<UI::UniqueWindow::Registry> registries_;
+
+	UI::Box toolbar_;
+	// No unique_ptr on purpose: 'minimap_' is a UniqueWindow, its parent will
+	// delete it.
+	MiniMap* minimap_;
+	MiniMap::Registry minimap_registry_;
+	QuickNavigation quick_navigation_;
 
 	std::unique_ptr<FieldOverlayManager> field_overlay_manager_;
 
@@ -264,8 +276,6 @@ private:
 	uint32_t lastframe_;        //  system time (milliseconds)
 	uint32_t frametime_;        //  in millseconds
 	uint32_t avg_usframetime_;  //  in microseconds!
-	bool draw_immovables_;
-	bool draw_bobs_;
 
 	FieldOverlayManager::OverlayId road_buildhelp_overlay_jobid_;
 	Widelands::CoordPath* buildroad_;  //  path for the new road

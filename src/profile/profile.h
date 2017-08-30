@@ -196,7 +196,10 @@ public:
 	void read(const char* const filename,
 	          const char* const global_section = nullptr,
 	          FileSystem& = *g_fs);
-	void write(const char* const filename, bool used_only = true, FileSystem& = *g_fs);
+	void write(const char* const filename,
+	           bool used_only = true,
+	           FileSystem& = *g_fs,
+	           const char* const comment = nullptr);
 
 	Section* get_section(const std::string& name);
 	Section& get_safe_section(const std::string& name);

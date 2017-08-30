@@ -65,7 +65,7 @@ InteractiveSpectator::InteractiveSpectator(Widelands::Game& g,
 		new GeneralStatisticsMenu(*this, main_windows_.general_stats);
 	};
 
-	toolbar_.add_space(15);
+	toolbar()->add_space(15);
 
 	add_toolbar_button(
 	   "wui/menus/menu_toggle_minimap", "minimap", _("Minimap"), &minimap_registry(), true);
@@ -77,10 +77,11 @@ InteractiveSpectator::InteractiveSpectator(Widelands::Game& g,
 
 	reset_zoom_ = add_toolbar_button("wui/menus/menu_reset_zoom", "reset_zoom", _("Reset zoom"));
 	reset_zoom_->sigclicked.connect([this] {
-		zoom_around(1.f, Vector2f(get_w() / 2.f, get_h() / 2.f), MapView::Transition::Smooth);
+		map_view()->zoom_around(
+		   1.f, Vector2f(get_w() / 2.f, get_h() / 2.f), MapView::Transition::Smooth);
 	});
 
-	toolbar_.add_space(15);
+	toolbar()->add_space(15);
 
 	if (is_multiplayer()) {
 		add_toolbar_button("wui/menus/menu_chat", "chat", _("Chat"), &chat_, true);
@@ -94,7 +95,54 @@ InteractiveSpectator::InteractiveSpectator(Widelands::Game& g,
 	adjust_toolbar_position();
 
 	// Setup all screen elements
-	fieldclicked.connect(boost::bind(&InteractiveSpectator::node_action, this));
+	map_view()->field_clicked.connect([this](const Widelands::NodeAndTriangle<>& node_and_triangle) {
+		node_action(node_and_triangle);
+	});
+}
+
+void InteractiveSpectator::draw(RenderTarget& dst) {
+	// This fixes a crash with displaying an error dialog during loading.
+	if (!game().is_loaded())
+		return;
+
+	draw_map_view(map_view(), &dst);
+}
+
+void InteractiveSpectator::draw_map_view(MapView* given_map_view, RenderTarget* dst) {
+	// A spectator cannot build roads.
+	assert(road_building_preview().empty());
+
+	const auto& gbase = egbase();
+	auto* fields_to_draw = given_map_view->draw_terrain(gbase, dst);
+	const float scale = 1.f / given_map_view->view().zoom;
+	const uint32_t gametime = gbase.get_gametime();
+
+	const auto text_to_draw = get_text_to_draw();
+	for (size_t idx = 0; idx < fields_to_draw->size(); ++idx) {
+		const FieldsToDraw::Field& field = fields_to_draw->at(idx);
+
+		draw_border_markers(field, scale, *fields_to_draw, dst);
+
+		Widelands::BaseImmovable* const imm = field.fcoords.field->get_immovable();
+		if (imm != nullptr && imm->get_positions(gbase).front() == field.fcoords) {
+			imm->draw(gametime, text_to_draw, field.rendertarget_pixel, scale, dst);
+		}
+
+		for (Widelands::Bob* bob = field.fcoords.field->get_first_bob(); bob;
+		     bob = bob->get_next_bob()) {
+			bob->draw(gbase, text_to_draw, field.rendertarget_pixel, scale, dst);
+		}
+
+		// TODO(sirver): Do not use the field_overlay_manager, instead draw the
+		// overlays we are interested in here directly.
+		field_overlay_manager().foreach_overlay(
+		   field.fcoords, [dst, &field, scale](const Image* pic, const Vector2i& hotspot) {
+			   dst->blitrect_scale(Rectf(field.rendertarget_pixel - hotspot.cast<float>() * scale,
+			                             pic->width() * scale, pic->height() * scale),
+			                       pic, Recti(0, 0, pic->width(), pic->height()), 1.f,
+			                       BlendMode::UseAlpha);
+			});
+	}
 }
 
 /**
@@ -139,10 +187,10 @@ Widelands::PlayerNumber InteractiveSpectator::player_number() const {
 /**
  * Observer has clicked on the given node; bring up the context menu.
  */
-void InteractiveSpectator::node_action() {
+void InteractiveSpectator::node_action(const Widelands::NodeAndTriangle<>& node_and_triangle) {
 	// Special case for buildings
-	if (is_a(Widelands::Building, egbase().map().get_immovable(get_sel_pos().node))) {
-		show_building_window(get_sel_pos().node, false);
+	if (is_a(Widelands::Building, egbase().map().get_immovable(node_and_triangle.node))) {
+		show_building_window(node_and_triangle.node, false);
 		return;
 	}
 

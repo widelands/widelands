@@ -58,6 +58,147 @@
 using Widelands::Building;
 using Widelands::Map;
 
+namespace {
+
+// Returns the brightness value in [0, 1.] for 'fcoords' at 'gametime' for
+// 'pf'. See 'field_brightness' in fields_to_draw.cc for scale of values.
+float adjusted_field_brightness(const Widelands::FCoords& fcoords,
+                                const uint32_t gametime,
+                                const Widelands::Player::Field& pf) {
+	if (pf.vision == 0) {
+		return 0.;
+	};
+
+	uint32_t brightness = 144 + fcoords.field->get_brightness();
+	brightness = std::min<uint32_t>(255, (brightness * 255) / 160);
+
+	if (pf.vision == 1) {
+		static const uint32_t kDecayTimeInMs = 20000;
+		const Widelands::Duration time_ago = gametime - pf.time_node_last_unseen;
+		if (time_ago < kDecayTimeInMs) {
+			brightness = (brightness * (2 * kDecayTimeInMs - time_ago)) / (2 * kDecayTimeInMs);
+		} else {
+			brightness = brightness / 2;
+		}
+	}
+	return brightness / 255.;
+}
+
+void draw_immovables_for_visible_field(const Widelands::EditorGameBase& egbase,
+                                       const FieldsToDraw::Field& field,
+                                       const float scale,
+                                       const TextToDraw text_to_draw,
+                                       const Widelands::Player& player,
+                                       RenderTarget* dst) {
+	Widelands::BaseImmovable* const imm = field.fcoords.field->get_immovable();
+	if (imm != nullptr && imm->get_positions(egbase).front() == field.fcoords) {
+		TextToDraw draw_text_for_this_immovable = text_to_draw;
+		const Widelands::Player* owner = imm->get_owner();
+		if (owner != nullptr && !player.see_all() && player.is_hostile(*owner)) {
+			draw_text_for_this_immovable =
+			   static_cast<TextToDraw>(draw_text_for_this_immovable & ~TextToDraw::kStatistics);
+		}
+		imm->draw(
+		   egbase.get_gametime(), draw_text_for_this_immovable, field.rendertarget_pixel, scale, dst);
+	}
+}
+
+void draw_bobs_for_visible_field(const Widelands::EditorGameBase& egbase,
+                                 const FieldsToDraw::Field& field,
+                                 const float scale,
+                                 const TextToDraw text_to_draw,
+                                 const Widelands::Player& player,
+                                 RenderTarget* dst) {
+	for (Widelands::Bob* bob = field.fcoords.field->get_first_bob(); bob;
+	     bob = bob->get_next_bob()) {
+		TextToDraw draw_text_for_this_bob = text_to_draw;
+		const Widelands::Player* owner = bob->get_owner();
+		if (owner != nullptr && !player.see_all() && player.is_hostile(*owner)) {
+			draw_text_for_this_bob =
+			   static_cast<TextToDraw>(draw_text_for_this_bob & ~TextToDraw::kStatistics);
+		}
+		bob->draw(egbase, draw_text_for_this_bob, field.rendertarget_pixel, scale, dst);
+	}
+}
+
+void draw_immovables_for_formerly_visible_field(const FieldsToDraw::Field& field,
+                                                const Widelands::Player::Field& player_field,
+                                                const float scale,
+                                                RenderTarget* dst) {
+	if (const Widelands::MapObjectDescr* const map_object_descr =
+	       player_field.map_object_descr[Widelands::TCoords<>::None]) {
+		if (player_field.constructionsite.becomes) {
+			assert(field.owner != nullptr);
+			const Widelands::ConstructionsiteInformation& csinf = player_field.constructionsite;
+			// draw the partly finished constructionsite
+			uint32_t anim_idx;
+			try {
+				anim_idx = csinf.becomes->get_animation("build");
+			} catch (Widelands::MapObjectDescr::AnimationNonexistent&) {
+				try {
+					anim_idx = csinf.becomes->get_animation("unoccupied");
+				} catch (Widelands::MapObjectDescr::AnimationNonexistent) {
+					anim_idx = csinf.becomes->get_animation("idle");
+				}
+			}
+			const Animation& anim = g_gr->animations().get_animation(anim_idx);
+			const size_t nr_frames = anim.nr_frames();
+			uint32_t cur_frame =
+			   csinf.totaltime ? csinf.completedtime * nr_frames / csinf.totaltime : 0;
+			uint32_t tanim = cur_frame * FRAME_LENGTH;
+
+			uint32_t percent = 100 * csinf.completedtime * nr_frames;
+			if (csinf.totaltime) {
+				percent /= csinf.totaltime;
+			}
+			percent -= 100 * cur_frame;
+
+			if (cur_frame) {  // not the first frame
+				// Draw the prev frame
+				dst->blit_animation(field.rendertarget_pixel, scale, anim_idx, tanim - FRAME_LENGTH,
+				                    field.owner->get_playercolor());
+			} else if (csinf.was) {
+				// Is the first frame, but there was another building here before,
+				// get its last build picture and draw it instead.
+				uint32_t a;
+				try {
+					a = csinf.was->get_animation("unoccupied");
+				} catch (Widelands::MapObjectDescr::AnimationNonexistent&) {
+					a = csinf.was->get_animation("idle");
+				}
+				dst->blit_animation(field.rendertarget_pixel, scale, a, tanim - FRAME_LENGTH,
+				                    field.owner->get_playercolor());
+			}
+			dst->blit_animation(field.rendertarget_pixel, scale, anim_idx, tanim,
+			                    field.owner->get_playercolor(), percent);
+		} else if (upcast(const Widelands::BuildingDescr, building, map_object_descr)) {
+			assert(field.owner != nullptr);
+			// this is a building therefore we either draw unoccupied or idle animation
+			uint32_t pic;
+			try {
+				pic = building->get_animation("unoccupied");
+			} catch (Widelands::MapObjectDescr::AnimationNonexistent&) {
+				pic = building->get_animation("idle");
+			}
+			dst->blit_animation(
+			   field.rendertarget_pixel, scale, pic, 0, field.owner->get_playercolor());
+		} else if (map_object_descr->type() == Widelands::MapObjectType::FLAG) {
+			assert(field.owner != nullptr);
+			dst->blit_animation(field.rendertarget_pixel, scale, field.owner->tribe().flag_animation(),
+			                    0, field.owner->get_playercolor());
+		} else if (const uint32_t pic = map_object_descr->main_animation()) {
+			if (field.owner != nullptr) {
+				dst->blit_animation(
+				   field.rendertarget_pixel, scale, pic, 0, field.owner->get_playercolor());
+			} else {
+				dst->blit_animation(field.rendertarget_pixel, scale, pic, 0);
+			}
+		}
+	}
+}
+
+}  // namespace
+
 InteractivePlayer::InteractivePlayer(Widelands::Game& g,
                                      Section& global_s,
                                      Widelands::PlayerNumber const plyn,
@@ -75,7 +216,7 @@ InteractivePlayer::InteractivePlayer(Widelands::Game& g,
 		new GameStatisticsMenu(*this, statisticsmenu_, main_windows_);
 	};
 
-	toolbar_.add_space(15);
+	toolbar()->add_space(15);
 
 	add_toolbar_button(
 	   "wui/menus/menu_toggle_minimap", "minimap", _("Minimap"), &minimap_registry(), true);
@@ -86,9 +227,10 @@ InteractivePlayer::InteractivePlayer(Widelands::Game& g,
 	toggle_buildhelp_->sigclicked.connect(boost::bind(&InteractiveBase::toggle_buildhelp, this));
 	reset_zoom_ = add_toolbar_button("wui/menus/menu_reset_zoom", "reset_zoom", _("Reset zoom"));
 	reset_zoom_->sigclicked.connect([this] {
-		zoom_around(1.f, Vector2f(get_w() / 2.f, get_h() / 2.f), MapView::Transition::Smooth);
+		map_view()->zoom_around(
+		   1.f, Vector2f(get_w() / 2.f, get_h() / 2.f), MapView::Transition::Smooth);
 	});
-	toolbar_.add_space(15);
+	toolbar()->add_space(15);
 	if (multiplayer) {
 		toggle_chat_ = add_toolbar_button("wui/menus/menu_chat", "chat", _("Chat"), &chat_, true);
 		chat_.open_window = [this] {
@@ -96,7 +238,7 @@ InteractivePlayer::InteractivePlayer(Widelands::Game& g,
 				GameChatMenu::create_chat_console(this, chat_, *chat_provider_);
 			}
 		};
-		toolbar_.add_space(15);
+		toolbar()->add_space(15);
 	}
 
 	add_toolbar_button(
@@ -113,7 +255,9 @@ InteractivePlayer::InteractivePlayer(Widelands::Game& g,
 	};
 
 	set_player_number(plyn);
-	fieldclicked.connect(boost::bind(&InteractivePlayer::node_action, this));
+	map_view()->field_clicked.connect([this](const Widelands::NodeAndTriangle<>& node_and_triangle) {
+		node_action(node_and_triangle);
+	});
 
 	adjust_toolbar_position();
 
@@ -139,7 +283,7 @@ void InteractivePlayer::think() {
 					//  That is not allowed. Therefore we must delete the
 					//  fieldaction window before entering roadbuilding mode here.
 					fieldaction_.destroy();
-					mouse_to_field(flag_to_connect_, MapView::Transition::Jump);
+					map_view()->mouse_to_field(flag_to_connect_, MapView::Transition::Jump);
 					set_sel_pos(Widelands::NodeAndTriangle<>(
 					   flag_to_connect_,
 					   Widelands::TCoords<>(flag_to_connect_, Widelands::TCoords<>::D)));
@@ -168,6 +312,75 @@ void InteractivePlayer::think() {
 	}
 }
 
+void InteractivePlayer::draw(RenderTarget& dst) {
+	// Bail out if the game isn't actually loaded.
+	// This fixes a crash with displaying an error dialog during loading.
+	if (!game().is_loaded())
+		return;
+
+	draw_map_view(map_view(), &dst);
+}
+
+void InteractivePlayer::draw_map_view(MapView* given_map_view, RenderTarget* dst) {
+	const Widelands::Player& plr = player();
+	const auto& gbase = egbase();
+	const Widelands::Map& map = gbase.map();
+	const uint32_t gametime = gbase.get_gametime();
+
+	auto* fields_to_draw = given_map_view->draw_terrain(gbase, dst);
+	const auto& roads_preview = road_building_preview();
+
+	for (size_t idx = 0; idx < fields_to_draw->size(); ++idx) {
+		auto* f = fields_to_draw->mutable_field(idx);
+
+		const Widelands::Player::Field& player_field =
+		   plr.fields()[map.get_index(f->fcoords, map.get_width())];
+
+		// Adjust this field for visibility for this player.
+		if (!plr.see_all()) {
+			f->brightness = adjusted_field_brightness(f->fcoords, gametime, player_field);
+			f->roads = player_field.roads;
+			f->vision = player_field.vision;
+			if (player_field.vision == 0) {
+				// If the player cannot see the field, no need to do any more work.
+				continue;
+			} else if (player_field.vision == 1) {
+				f->owner = player_field.owner != 0 ? &gbase.player(player_field.owner) : nullptr;
+				f->is_border = player_field.border;
+			}
+		}
+
+		// Add road building overlays if applicable.
+		const auto it = roads_preview.find(f->fcoords);
+		if (it != roads_preview.end()) {
+			f->roads |= it->second;
+		}
+
+		const float scale = 1.f / given_map_view->view().zoom;
+		draw_border_markers(*f, scale, *fields_to_draw, dst);
+
+		// Render stuff that belongs to the node.
+		if (f->vision > 1) {
+			const auto text_to_draw = get_text_to_draw();
+			draw_immovables_for_visible_field(gbase, *f, scale, text_to_draw, plr, dst);
+			draw_bobs_for_visible_field(gbase, *f, scale, text_to_draw, plr, dst);
+		} else if (f->vision == 1) {
+			// We never show census or statistics for objects in the fog.
+			draw_immovables_for_formerly_visible_field(*f, player_field, scale, dst);
+		}
+
+		// TODO(sirver): Do not use the field_overlay_manager, instead draw the
+		// overlays we are interested in here directly.
+		field_overlay_manager().foreach_overlay(
+		   f->fcoords, [dst, f, scale](const Image* pic, const Vector2i& hotspot) {
+			   dst->blitrect_scale(Rectf(f->rendertarget_pixel - hotspot.cast<float>() * scale,
+			                             pic->width() * scale, pic->height() * scale),
+			                       pic, Recti(0, 0, pic->width(), pic->height()), 1.f,
+			                       BlendMode::UseAlpha);
+			});
+	}
+}
+
 void InteractivePlayer::popup_message(Widelands::MessageId const id,
                                       const Widelands::Message& message) {
 	message_menu_.create();
@@ -190,13 +403,13 @@ int32_t InteractivePlayer::calculate_buildcaps(const Widelands::FCoords& c) {
 }
 
 /// Player has clicked on the given node; bring up the context menu.
-void InteractivePlayer::node_action() {
+void InteractivePlayer::node_action(const Widelands::NodeAndTriangle<>& node_and_triangle) {
 	const Map& map = egbase().map();
-	if (1 < player().vision(Map::get_index(get_sel_pos().node, map.get_width()))) {
+	if (1 < player().vision(Map::get_index(node_and_triangle.node, map.get_width()))) {
 		// Special case for buildings
-		if (upcast(Building, building, map.get_immovable(get_sel_pos().node)))
+		if (upcast(Building, building, map.get_immovable(node_and_triangle.node)))
 			if (can_see(building->owner().player_number())) {
-				show_building_window(get_sel_pos().node, false);
+				show_building_window(node_and_triangle.node, false);
 				return;
 			}
 
@@ -274,7 +487,8 @@ bool InteractivePlayer::handle_key(bool const down, SDL_Keysym const code) {
 				break;
 			FALLS_THROUGH;
 		case SDLK_HOME:
-			scroll_to_field(game().map().get_starting_pos(player_number_), Transition::Smooth);
+			map_view()->scroll_to_field(
+			   game().map().get_starting_pos(player_number_), MapView::Transition::Smooth);
 			return true;
 
 		case SDLK_KP_ENTER:

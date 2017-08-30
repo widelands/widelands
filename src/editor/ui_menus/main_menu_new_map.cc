@@ -138,14 +138,14 @@ MainMenuNewMap::MainMenuNewMap(EditorInteractive& parent)
 void MainMenuNewMap::clicked_create_map() {
 	EditorInteractive& parent = eia();
 	Widelands::EditorGameBase& egbase = parent.egbase();
-	Widelands::Map& map = egbase.map();
+	Widelands::Map* map = egbase.mutable_map();
 	UI::ProgressWindow loader_ui;
 
 	loader_ui.step(_("Creating empty map…"));
 
 	parent.cleanup_for_load();
 
-	map.create_empty_map(
+	map->create_empty_map(
 	   egbase.world(), width_.get_value() > 0 ? width_.get_value() : Widelands::kMapDimensions[0],
 	   height_.get_value() > 0 ? height_.get_value() : Widelands::kMapDimensions[0],
 	   list_.get_selected(), _("No Name"),
@@ -154,7 +154,7 @@ void MainMenuNewMap::clicked_create_map() {
 	egbase.postload();
 	egbase.load_graphics(loader_ui);
 
-	map.recalc_whole_map(egbase.world());
+	map->recalc_whole_map(egbase.world());
 	parent.map_changed(EditorInteractive::MapWas::kReplaced);
 	die();
 }

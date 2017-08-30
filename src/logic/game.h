@@ -234,6 +234,18 @@ public:
 		return replay_;
 	}
 
+	bool is_ai_training_mode() const {
+		return ai_training_mode_;
+	}
+
+	bool is_auto_speed() const {
+		return auto_speed_;
+	}
+
+	void set_ai_training_mode(bool);
+
+	void set_auto_speed(bool);
+
 private:
 	void sync_reset();
 
@@ -283,6 +295,9 @@ private:
 	/// Defaults to \c false, and can be set to true for network games. The file
 	/// is written only if \ref writereplay_ is true too.
 	bool writesyncstream_;
+
+	bool ai_training_mode_;
+	bool auto_speed_;
 
 	int32_t state_;
 

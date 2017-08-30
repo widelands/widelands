@@ -158,7 +158,7 @@ void do_draw_minimap(Texture* texture,
 	const Widelands::Map& map = egbase.map();
 	const uint16_t surface_h = texture->height();
 	const uint16_t surface_w = texture->width();
-	const int32_t mapwidth = egbase.get_map().get_width();
+	const int32_t mapwidth = map.get_width();
 
 	for (uint32_t y = 0; y < surface_h; ++y) {
 		Widelands::FCoords f(

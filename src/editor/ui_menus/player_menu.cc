@@ -89,7 +89,6 @@ EditorPlayerMenu::EditorPlayerMenu(EditorInteractive& parent, UI::UniqueWindow::
 		plr_names_[i] = nullptr;
 		plr_set_pos_buts_[i] = nullptr;
 		plr_set_tribes_buts_[i] = nullptr;
-		plr_make_infrastructure_buts_[i] = nullptr;
 	}
 	update();
 
@@ -111,8 +110,8 @@ void EditorPlayerMenu::update() {
 	if (is_minimal())
 		return;
 
-	Widelands::Map& map = eia().egbase().map();
-	Widelands::PlayerNumber const nr_players = map.get_nrplayers();
+	Widelands::Map* map = eia().egbase().mutable_map();
+	Widelands::PlayerNumber const nr_players = map->get_nrplayers();
 	{
 		assert(nr_players <= 99);  //  2 decimal digits
 		char text[3];
@@ -148,7 +147,7 @@ void EditorPlayerMenu::update() {
 			plr_names_[p - 1]->changed.connect(
 			   boost::bind(&EditorPlayerMenu::name_changed, this, p - 1));
 			posx += 140 + spacing;
-			plr_names_[p - 1]->set_text(map.get_scenario_player_name(p));
+			plr_names_[p - 1]->set_text(map->get_scenario_player_name(p));
 		}
 
 		if (!plr_set_tribes_buts_[p - 1]) {
@@ -161,19 +160,19 @@ void EditorPlayerMenu::update() {
 		}
 
 		// Get/Set (localized) tribe names
-		if (map.get_scenario_player_tribe(p) != UNDEFINED_TRIBE_NAME) {
-			selected_tribes_[p - 1] = map.get_scenario_player_tribe(p);
+		if (map->get_scenario_player_tribe(p) != UNDEFINED_TRIBE_NAME) {
+			selected_tribes_[p - 1] = map->get_scenario_player_tribe(p);
 		} else {
 			selected_tribes_[p - 1] = tribenames_[0];
-			map.set_scenario_player_tribe(p, selected_tribes_[p - 1]);
+			map->set_scenario_player_tribe(p, selected_tribes_[p - 1]);
 		}
 
 		plr_set_tribes_buts_[p - 1]->set_title(
 		   Widelands::get_tribeinfo(selected_tribes_[p - 1]).descname);
 
 		// Set default AI and closeable to false (always default - should be changed by hand)
-		map.set_scenario_player_ai(p, "");
-		map.set_scenario_player_closeable(p, false);
+		map->set_scenario_player_ai(p, "");
+		map->set_scenario_player_closeable(p, false);
 
 		//  Set Starting pos button.
 		if (!plr_set_pos_buts_[p - 1]) {
@@ -196,18 +195,18 @@ void EditorPlayerMenu::update() {
 }
 
 void EditorPlayerMenu::clicked_add_player() {
-	Widelands::Map& map = eia().egbase().map();
-	Widelands::PlayerNumber const nr_players = map.get_nrplayers() + 1;
+	Widelands::Map* map = eia().egbase().mutable_map();
+	Widelands::PlayerNumber const nr_players = map->get_nrplayers() + 1;
 	assert(nr_players <= kMaxPlayers);
-	map.set_nrplayers(nr_players);
+	map->set_nrplayers(nr_players);
 	{                             //  register new default name for this players
 		assert(nr_players <= 99);  //  2 decimal digits
 		/** TRANSLATORS: Default player name, e.g. Player 1 */
 		const std::string name =
 		   (boost::format(_("Player %u")) % static_cast<unsigned int>(nr_players)).str();
-		map.set_scenario_player_name(nr_players, name);
+		map->set_scenario_player_name(nr_players, name);
 	}
-	map.set_scenario_player_tribe(nr_players, tribenames_[0]);
+	map->set_scenario_player_tribe(nr_players, tribenames_[0]);
 	eia().set_need_save(true);
 	add_player_.set_enabled(nr_players < kMaxPlayers);
 	remove_last_player_.set_enabled(true);
@@ -216,13 +215,13 @@ void EditorPlayerMenu::clicked_add_player() {
 
 void EditorPlayerMenu::clicked_remove_last_player() {
 	EditorInteractive& menu = eia();
-	Widelands::Map& map = menu.egbase().map();
-	Widelands::PlayerNumber const old_nr_players = map.get_nrplayers();
+	Widelands::Map* map = menu.egbase().mutable_map();
+	Widelands::PlayerNumber const old_nr_players = map->get_nrplayers();
 	Widelands::PlayerNumber const nr_players = old_nr_players - 1;
 	assert(1 <= nr_players);
 
 	if (!menu.is_player_tribe_referenced(old_nr_players)) {
-		if (const Widelands::Coords sp = map.get_starting_pos(old_nr_players)) {
+		if (const Widelands::Coords sp = map->get_starting_pos(old_nr_players)) {
 			//  Remove starting position marker.
 			const Image* player_image =
 			   playercolor_image(old_nr_players - 1, "images/players/player_position.png");
@@ -233,7 +232,7 @@ void EditorPlayerMenu::clicked_remove_last_player() {
 		if (old_nr_players == menu.tools()->set_starting_pos.get_current_player())
 			set_starting_pos_clicked(nr_players);
 	}
-	map.set_nrplayers(nr_players);
+	map->set_nrplayers(nr_players);
 	add_player_.set_enabled(nr_players < kMaxPlayers);
 	remove_last_player_.set_enabled(1 < nr_players);
 	update();
@@ -258,7 +257,7 @@ void EditorPlayerMenu::player_tribe_clicked(uint8_t n) {
 			}
 		}
 		selected_tribes_[n] = i == tribenames_.size() - 1 ? tribenames_[0] : tribenames_[++i];
-		menu.egbase().map().set_scenario_player_tribe(n + 1, selected_tribes_[n]);
+		menu.egbase().mutable_map()->set_scenario_player_tribe(n + 1, selected_tribes_[n]);
 		menu.set_need_save(true);
 	} else {
 		UI::WLMessageBox mmb(&menu, _("Error!"),
@@ -276,9 +275,9 @@ void EditorPlayerMenu::player_tribe_clicked(uint8_t n) {
 void EditorPlayerMenu::set_starting_pos_clicked(uint8_t n) {
 	EditorInteractive& menu = eia();
 	//  jump to the current node
-	Widelands::Map& map = menu.egbase().map();
-	if (Widelands::Coords const sp = map.get_starting_pos(n)) {
-		menu.scroll_to_field(sp, MapView::Transition::Smooth);
+	Widelands::Map* map = menu.egbase().mutable_map();
+	if (Widelands::Coords const sp = map->get_starting_pos(n)) {
+		menu.map_view()->scroll_to_field(sp, MapView::Transition::Smooth);
 	}
 
 	//  select tool set mplayer
@@ -291,8 +290,8 @@ void EditorPlayerMenu::set_starting_pos_clicked(uint8_t n) {
 	//  Register callback function to make sure that only valid locations are
 	//  selected.
 	menu.mutable_field_overlay_manager()->register_overlay_callback_function(
-	   boost::bind(&editor_tool_set_starting_pos_callback, _1, boost::ref(map)));
-	map.recalc_whole_map(menu.egbase().world());
+	   boost::bind(&editor_tool_set_starting_pos_callback, _1, boost::ref(*map)));
+	map->recalc_whole_map(menu.egbase().world());
 	update();
 }
 
@@ -303,68 +302,8 @@ void EditorPlayerMenu::name_changed(int32_t m) {
 	//  Player name has been changed.
 	std::string text = plr_names_[m]->text();
 	EditorInteractive& menu = eia();
-	Widelands::Map& map = menu.egbase().map();
-	map.set_scenario_player_name(m + 1, text);
-	plr_names_[m]->set_text(map.get_scenario_player_name(m + 1));
+	Widelands::Map* map = menu.egbase().mutable_map();
+	map->set_scenario_player_name(m + 1, text);
+	plr_names_[m]->set_text(map->get_scenario_player_name(m + 1));
 	menu.set_need_save(true);
-}
-
-/*
- * Make infrastructure button clicked
- */
-void EditorPlayerMenu::make_infrastructure_clicked(uint8_t n) {
-	EditorInteractive& parent = dynamic_cast<EditorInteractive&>(*get_parent());
-	// Check if starting position is valid (was checked before
-	// so must be true)
-	Widelands::EditorGameBase& egbase = parent.egbase();
-	Widelands::Map& map = egbase.map();
-	auto* overlay_manager = parent.mutable_field_overlay_manager();
-	const Widelands::Coords start_pos = map.get_starting_pos(n);
-	assert(start_pos);
-
-	Widelands::Player* p = egbase.get_player(n);
-	if (!p) {
-		// This player is unknown, register it,
-		// place a hq and reference the tribe
-		// so that this tribe can not be changed
-		egbase.add_player(n, 0,  // TODO(SirVer): initialization index makes no sense here
-		                  Widelands::get_tribeinfo(selected_tribes_[n]).descname,
-		                  plr_names_[n - 1]->text());
-
-		p = egbase.get_player(n);
-	}
-
-	// If the player is already created in the editor, this means
-	// that there might be already a hq placed somewhere. This needs to be
-	// deleted before a starting position change can occure
-	const Widelands::PlayerNumber player_number = p->player_number();
-	const Widelands::Coords starting_pos = map.get_starting_pos(player_number);
-	Widelands::BaseImmovable* const imm = map[starting_pos].get_immovable();
-	if (!imm) {
-		// place HQ
-		const Widelands::TribeDescr& tribe = p->tribe();
-		const Widelands::DescriptionIndex idx = tribe.headquarters();
-		if (!tribe.has_building(idx))
-			throw wexception("Tribe %s lacks headquarters", tribe.name().c_str());
-		// Widelands::Warehouse & headquarter = dynamic_cast<Widelands::Warehouse &>
-		//         (egbase.warp_building(starting_pos, player_number, idx));
-		// egbase.conquer_area
-		//         (PlayerArea
-		//          (player_number, Area(starting_pos, headquarter.get_conquers())));
-		// tribe.load_warehouse_with_start_wares(editor, headquarter);
-
-		parent.reference_player_tribe(n, &tribe);
-
-		// Remove the player overlay from this starting pos.
-		// A HQ is overlay enough
-		const Image* player_image = playercolor_image(n - 1, "images/players/player_position.png");
-		assert(player_image);
-		overlay_manager->remove_overlay(start_pos, player_image);
-	}
-
-	parent.select_tool(parent.tools()->make_infrastructure, EditorTool::First);
-	parent.tools()->make_infrastructure.set_player(n);
-	overlay_manager->register_overlay_callback_function(
-	   boost::bind(&editor_make_infrastructure_tool_callback, _1, boost::ref(egbase), n));
-	map.recalc_whole_map(egbase.world());
 }
