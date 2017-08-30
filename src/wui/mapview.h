@@ -29,11 +29,10 @@
 #include "base/rect.h"
 #include "base/vector.h"
 #include "graphic/game_renderer.h"
+#include "graphic/gl/fields_to_draw.h"
 #include "logic/map.h"
 #include "logic/widelands_geometry.h"
 #include "ui_basic/panel.h"
-
-class GameRenderer;
 
 /**
  * Implements a view of a map. It is used to render a valid map on the screen.
@@ -159,13 +158,12 @@ public:
 	// True if a 'Transition::Smooth' animation is playing.
 	bool is_animating() const;
 
+	// Schedules drawing of the terrain of this MapView. The returned value can
+	// be used to override contents of 'fields_to_draw' for player knowledge and
+	// visibility, and to correctly draw map objects, overlays and text.
+	FieldsToDraw* draw_terrain(const Widelands::EditorGameBase& egbase, RenderTarget* dst);
+
 	// Not overriden from UI::Panel, instead we expect to be passed the data through.
-	void draw_map_view(const Widelands::EditorGameBase& egbase,
-	                   const GameRenderer::Overlays& overlays,
-	                   const GameRenderer::DrawImmovables& draw_immovables,
-	                   const GameRenderer::DrawBobs& draw_bobs,
-	                   const Widelands::Player* player,
-	                   RenderTarget* dst);
 	bool handle_mousepress(uint8_t btn, int32_t x, int32_t y);
 	bool handle_mouserelease(uint8_t btn, int32_t x, int32_t y);
 	bool handle_mousemove(uint8_t state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff);
@@ -190,7 +188,11 @@ private:
 	Vector2f to_map(const Vector2i& panel_pixel) const;
 
 	const Widelands::Map& map_;
-	std::unique_ptr<GameRenderer> renderer_;
+
+	// This is owned and handled by us, but handed to the RenderQueue, so we
+	// basically promise that this stays valid for one frame.
+	FieldsToDraw fields_to_draw_;
+
 	View view_;
 	Vector2i last_mouse_pos_;
 	bool dragging_;

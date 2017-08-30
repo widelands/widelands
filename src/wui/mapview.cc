@@ -25,8 +25,6 @@
 #include "base/math.h"
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
-#include "logic/map_objects/draw_text.h"
-#include "logic/player.h"
 #include "wlapplication.h"
 #include "wui/mapviewpixelfunctions.h"
 
@@ -294,7 +292,6 @@ MapView::MapView(
    UI::Panel* parent, const Widelands::Map& map, int32_t x, int32_t y, uint32_t w, uint32_t h)
    : UI::Panel(parent, x, y, w, h),
      map_(map),
-     renderer_(new GameRenderer()),
      view_(),
      last_mouse_pos_(Vector2i::zero()),
      dragging_(false) {
@@ -339,12 +336,7 @@ void MapView::mouse_to_pixel(const Vector2i& pixel, const Transition& transition
 	NEVER_HERE();
 }
 
-void MapView::draw_map_view(const Widelands::EditorGameBase& egbase,
-                            const GameRenderer::Overlays& overlays,
-                            const GameRenderer::DrawImmovables& draw_immovables,
-                            const GameRenderer::DrawBobs& draw_bobs,
-                            const Widelands::Player* player,
-                            RenderTarget* dst) {
+FieldsToDraw* MapView::draw_terrain(const Widelands::EditorGameBase& egbase, RenderTarget* dst) {
 	uint32_t now = SDL_GetTicks();
 	while (!view_plans_.empty()) {
 		auto& plan = view_plans_.front();
@@ -384,8 +376,10 @@ void MapView::draw_map_view(const Widelands::EditorGameBase& egbase,
 		break;
 	}
 
-	renderer_->render(
-	   egbase, view_.viewpoint, view_.zoom, player, overlays, draw_immovables, draw_bobs, dst);
+	fields_to_draw_.reset(egbase, view_.viewpoint, view_.zoom, dst);
+	const float scale = 1.f / view_.zoom;
+	::draw_terrain(egbase, fields_to_draw_, scale, dst);
+	return &fields_to_draw_;
 }
 
 void MapView::set_view(const View& target_view, const Transition& transition) {
