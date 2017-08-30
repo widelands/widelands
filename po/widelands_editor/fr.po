@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-01-28 21:57+0000\n"
-"PO-Revision-Date: 2017-01-30 10:44+0000\n"
+"POT-Creation-Date: 2017-08-17 14:06+0000\n"
+"PO-Revision-Date: 2017-08-19 13:06+0000\n"
 "Last-Translator: Renaud Bouchard\n"
 "Language-Team: French (http://www.transifex.com/widelands/widelands/language/fr/)\n"
 "MIME-Version: 1.0\n"
@@ -42,79 +42,103 @@ msgstr "Bascule vers le menu principal"
 msgid "Toggle tools menu"
 msgstr "Bascule vers le menu des outils"
 
-#. TRANSLATORS: This is an access key combination. The hotkey is 'p'
+#. TRANSLATORS: This is an access key combination. Localize, but do not change
+#. the key.
 #: ../../data/scripting/editor/editor_controls.lua:25
+msgid "Toggle building spaces"
+msgstr "Basculer l'affichage des espaces de construction"
+
+#. TRANSLATORS: This is an access key combination. Localize, but do not change
+#. the key.
+#: ../../data/scripting/editor/editor_controls.lua:27
+msgid "Toggle immovables display"
+msgstr "Basculer l'affichage des objets indéplaçables"
+
+#. TRANSLATORS: This is an access key combination. Localize, but do not change
+#. the key.
+#: ../../data/scripting/editor/editor_controls.lua:29
+msgid "Toggle animals display"
+msgstr "Basculer l'affichage des animaux"
+
+#. TRANSLATORS: This is an access key combination. The hotkey is 'p'
+#: ../../data/scripting/editor/editor_controls.lua:31
+msgid "Toggle resources display"
+msgstr "Basculer l'affichage des ressources"
+
+#. TRANSLATORS: This is an access key combination. Localize, but do not change
+#. the key.
+#: ../../data/scripting/editor/editor_controls.lua:33
 msgid "Toggle player menu"
 msgstr "Bascule vers le menu des joueurs"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
-#: ../../data/scripting/editor/editor_controls.lua:27
+#: ../../data/scripting/editor/editor_controls.lua:35
 msgid "Undo"
 msgstr "Défaire"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
-#: ../../data/scripting/editor/editor_controls.lua:29
+#: ../../data/scripting/editor/editor_controls.lua:37
 msgid "Redo"
 msgstr "Refaire"
 
 #. TRANSLATORS: This is an access key combination. The hotkey is 'i'
-#: ../../data/scripting/editor/editor_controls.lua:31
+#: ../../data/scripting/editor/editor_controls.lua:39
 msgid "Activate information tool"
 msgstr "Active l'outil d'information"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
-#: ../../data/scripting/editor/editor_controls.lua:33
+#: ../../data/scripting/editor/editor_controls.lua:41
 msgctxt "hotkey"
 msgid "Ctrl + L"
 msgstr "Ctrl+L"
 
-#: ../../data/scripting/editor/editor_controls.lua:33
+#: ../../data/scripting/editor/editor_controls.lua:41
 msgid "Load map"
 msgstr "Charger une Carte"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
-#: ../../data/scripting/editor/editor_controls.lua:35
+#: ../../data/scripting/editor/editor_controls.lua:43
 msgctxt "hotkey"
 msgid "Ctrl + S"
 msgstr "Ctrl+S"
 
-#: ../../data/scripting/editor/editor_controls.lua:35
+#: ../../data/scripting/editor/editor_controls.lua:43
 msgid "Save map"
 msgstr "Enregistrer la Carte"
 
-#: ../../data/scripting/editor/editor_controls.lua:39
+#: ../../data/scripting/editor/editor_controls.lua:47
 msgid "Tools"
 msgstr "Outils"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
-#: ../../data/scripting/editor/editor_controls.lua:42
+#: ../../data/scripting/editor/editor_controls.lua:50
 msgctxt "hotkey"
 msgid "0-9"
 msgstr "0-9"
 
-#: ../../data/scripting/editor/editor_controls.lua:42
+#: ../../data/scripting/editor/editor_controls.lua:50
 msgid "Change tool size"
 msgstr "Changer la taille de l'outil"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
-#: ../../data/scripting/editor/editor_controls.lua:44
+#: ../../data/scripting/editor/editor_controls.lua:52
 msgctxt "hotkey"
 msgid "Click"
 msgstr "Clic"
 
-#: ../../data/scripting/editor/editor_controls.lua:44
+#: ../../data/scripting/editor/editor_controls.lua:52
 msgid ""
 "Place new elements on the map, or increase map elements by the value "
 "selected by ‘Increase/Decrease value’"
 msgstr "Place des nouveaux éléments sur la carte, ou augmente les éléments de la carte par la valeur définie dans \"Augmenter/Diminuer la valeur\""
 
-#: ../../data/scripting/editor/editor_controls.lua:46
+#: ../../data/scripting/editor/editor_controls.lua:54
 msgid ""
 "Remove elements from the map, or decrease map elements by the value selected"
 " by ‘Increase/Decrease value’"
@@ -122,19 +146,19 @@ msgstr "Enlève des éléments de la carte, ou diminu les éléments de la carte
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
-#: ../../data/scripting/editor/editor_controls.lua:46
+#: ../../data/scripting/editor/editor_controls.lua:54
 msgctxt "hotkey"
 msgid "Shift + Click"
 msgstr "Shift+Clic"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
-#: ../../data/scripting/editor/editor_controls.lua:48
+#: ../../data/scripting/editor/editor_controls.lua:56
 msgctxt "hotkey"
 msgid "Ctrl + Click"
 msgstr "Ctrl+Clic"
 
-#: ../../data/scripting/editor/editor_controls.lua:48
+#: ../../data/scripting/editor/editor_controls.lua:56
 msgid "Set map elements to the value selected by ‘Set Value’"
 msgstr "Définir les éléments de la carte via la valeur sélectionnée par \"Définir valeur\""
 

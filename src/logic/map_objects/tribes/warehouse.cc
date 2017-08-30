@@ -80,15 +80,14 @@ void Warehouse::AttackTarget::enemy_soldier_approaches(const Soldier& enemy) con
 
 	Player& owner = warehouse_->owner();
 	Game& game = dynamic_cast<Game&>(owner.egbase());
-	Map& map = game.map();
+	const Map& map = game.map();
 	if (enemy.get_owner() == &owner || enemy.get_battle() ||
 	    warehouse_->descr().get_conquers() <=
 	       map.calc_distance(enemy.get_position(), warehouse_->get_position()))
 		return;
 
-	if (game.map().find_bobs(
-	       Area<FCoords>(map.get_fcoords(warehouse_->base_flag().get_position()), 2), nullptr,
-	       FindBobEnemySoldier(&owner)))
+	if (map.find_bobs(Area<FCoords>(map.get_fcoords(warehouse_->base_flag().get_position()), 2),
+	                  nullptr, FindBobEnemySoldier(&owner)))
 		return;
 
 	DescriptionIndex const soldier_index = owner.tribe().soldier();
@@ -581,8 +580,7 @@ void Warehouse::init_containers(Player& player) {
 void Warehouse::init_portdock(EditorGameBase& egbase) {
 	molog("Setting up port dock fields\n");
 
-	Map& map = egbase.map();
-	std::vector<Coords> dock = map.find_portdock(get_position());
+	std::vector<Coords> dock = egbase.map().find_portdock(get_position());
 	if (dock.empty()) {
 		log("Attempting to setup port without neighboring water (coords: %3dx%3d).\n",
 		    get_position().x, get_position().y);
@@ -670,7 +668,7 @@ void Warehouse::cleanup(EditorGameBase& egbase) {
 		planned_workers_.pop_back();
 	}
 
-	Map& map = egbase.map();
+	const Map& map = egbase.map();
 	if (const uint32_t conquer_radius = descr().get_conquers())
 		egbase.unconquer_area(
 		   PlayerArea<Area<FCoords>>(owner().player_number(),

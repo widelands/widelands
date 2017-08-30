@@ -84,16 +84,11 @@ public:
 	explicit EditorGameBase(LuaInterface* lua);
 	virtual ~EditorGameBase();
 
-	void set_map(Map*);
-	// TODO(sirver): this should just be const Map& map() and Map* mutable_map().
-	Map& map() const {
-		return *map_;
-	}
-	Map* get_map() {
+	const Map& map() const {
 		return map_;
 	}
-	Map& get_map() const {
-		return *map_;
+	Map* mutable_map() {
+		return &map_;
 	}
 	const ObjectManager& objects() const {
 		return objects_;
@@ -258,7 +253,7 @@ private:
 	std::unique_ptr<World> world_;
 	std::unique_ptr<Tribes> tribes_;
 	std::unique_ptr<InteractiveBase> ibase_;
-	Map* map_;
+	Map map_;
 
 	DISALLOW_COPY_AND_ASSIGN(EditorGameBase);
 };

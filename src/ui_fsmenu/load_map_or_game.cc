@@ -33,13 +33,6 @@
 /// It also defines common buttons.
 FullscreenMenuLoadMapOrGame::FullscreenMenuLoadMapOrGame()
    : FullscreenMenuBase(),
-
-     // Values for alignment and size
-     padding_(4),
-     indent_(10),
-     label_height_(20),
-     right_column_margin_(15),
-
      // Main buttons
      back_(this, "back", 0, 0, 0, 0, g_gr->images().get("images/ui_basic/but0.png"), _("Back")),
      ok_(this, "ok", 0, 0, 0, 0, g_gr->images().get("images/ui_basic/but2.png"), _("OK")) {
