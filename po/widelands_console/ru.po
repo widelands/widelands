@@ -1,5 +1,5 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2016 Widelands Development Team
+# Copyright (C) 2005-2017 Widelands Development Team
 # 
 # Translators:
 # Alexander Bikmeyev <bikmeyev@freemail.ru>, 2006
@@ -9,9 +9,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-10-15 08:42+0000\n"
-"PO-Revision-Date: 2016-10-02 06:23+0000\n"
-"Last-Translator: Anton Khabarov <2233009@gmail.com>\n"
+"POT-Creation-Date: 2017-08-24 07:44+0000\n"
+"PO-Revision-Date: 2017-08-24 07:45+0000\n"
+"Last-Translator: GunChleoc\n"
 "Language-Team: Russian (http://www.transifex.com/widelands/widelands/language/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -124,15 +124,30 @@ msgstr "--editor Запускает редактор.\nЕсли добавить
 
 #: ../../src/wlapplication_messages.cc:93
 msgid ""
+" --ai_training        Enables AI training mode. See\n"
+"                      https://wl.widelands.org/wiki/Ai%20Training/\n"
+"                      for a full description of the AI training logic."
+msgstr ""
+
+#: ../../src/wlapplication_messages.cc:97
+msgid ""
+" --auto_speed         In multiplayer games only, this will keep\n"
+"                      adjusting the game speed automatically,\n"
+"                      depending on FPS. Useful in conjunction with\n"
+"                      --ai_training."
+msgstr ""
+
+#: ../../src/wlapplication_messages.cc:102
+msgid ""
 " --scenario=FILENAME  Directly starts the map FILENAME as scenario\n"
 "                      map."
 msgstr " --scenario=FILENAME  Запускает карту FILENAME в качестве карты\nсценария."
 
-#: ../../src/wlapplication_messages.cc:96
+#: ../../src/wlapplication_messages.cc:105
 msgid " --loadgame=FILENAME  Directly loads the savegame FILENAME."
 msgstr " --loadgame=FILENAME  загружает сохранение игры FILENAME."
 
-#: ../../src/wlapplication_messages.cc:97
+#: ../../src/wlapplication_messages.cc:106
 msgid ""
 " --script=FILENAME    Run the given Lua script after initialization.\n"
 "                      Only valid with --scenario, --loadgame, or --editor."
@@ -142,7 +157,7 @@ msgstr " --script=FILENAME    Запускает данный Lua-скрипт �
 #. * TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the
 #. widelands
 #. textdomain
-#: ../../src/wlapplication_messages.cc:103
+#: ../../src/wlapplication_messages.cc:112
 msgid ""
 " --auto_roadbuild_mode=[true|false]\n"
 "                      Whether to enter roadbuilding mode\n"
@@ -150,7 +165,7 @@ msgid ""
 "                      not connected to a road."
 msgstr " --auto_roadbuild_mode=[true|false]\nИспользуется для входа в режим строительства дороги\nавтоматически, сразу после размещения флага,\nне связанного с  дорогами."
 
-#: ../../src/wlapplication_messages.cc:109
+#: ../../src/wlapplication_messages.cc:118
 msgid "Graphic options:"
 msgstr "Настройки графики:"
 
@@ -158,26 +173,26 @@ msgstr "Настройки графики:"
 #. * TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the
 #. widelands
 #. textdomain
-#: ../../src/wlapplication_messages.cc:113
+#: ../../src/wlapplication_messages.cc:122
 msgid ""
 " --fullscreen=[true|false]\n"
 "                      Whether to use the whole display for the\n"
 "                      game screen."
 msgstr " --fullscreen=[true|false]\nИспользуется для того чтобы запустить игровое окно\nво весь экран."
 
-#: ../../src/wlapplication_messages.cc:117
+#: ../../src/wlapplication_messages.cc:126
 msgid " --xres=[...]         Width of the window in pixel."
 msgstr " --xres=[...]         Ширина окна в пикселях."
 
-#: ../../src/wlapplication_messages.cc:118
+#: ../../src/wlapplication_messages.cc:127
 msgid " --yres=[...]         Height of the window in pixel."
 msgstr " --yres=[...]         Высота окна в пикселях."
 
-#: ../../src/wlapplication_messages.cc:123
+#: ../../src/wlapplication_messages.cc:132
 msgid "Options for the internal window manager:"
 msgstr "Настройки внутреннего оконного менеджера:"
 
-#: ../../src/wlapplication_messages.cc:124
+#: ../../src/wlapplication_messages.cc:133
 msgid ""
 " --border_snap_distance=[0 ...]\n"
 "                      Move a window to the edge of the screen\n"
@@ -189,7 +204,7 @@ msgstr " --border_snap_distance=[0 ...]\nПрилепить окно к краю
 #. * TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the
 #. widelands
 #. textdomain
-#: ../../src/wlapplication_messages.cc:132
+#: ../../src/wlapplication_messages.cc:141
 msgid ""
 " --dock_windows_to_edges=[true|false]\n"
 "                      Eliminate a window's border towards the\n"
@@ -197,7 +212,7 @@ msgid ""
 "                      window is next to the edge of the screen."
 msgstr " --dock_windows_to_edges=[true|false]\nУбирает границу окна обращенную\nк краю экрана, когда край окна\nнаходится рядом с краем экрана."
 
-#: ../../src/wlapplication_messages.cc:137
+#: ../../src/wlapplication_messages.cc:146
 msgid ""
 " --panel_snap_distance=[0 ...]\n"
 "                      Move a window to the edge of the panel when\n"
@@ -205,7 +220,7 @@ msgid ""
 "                      distance from the edge of the panel."
 msgstr " --panel_snap_distance=[0 ...]\nПеремещает окно к краю панели,\nкогда край окна оказывается на\nуказанном расстоянии от края панели."
 
-#: ../../src/wlapplication_messages.cc:142
+#: ../../src/wlapplication_messages.cc:151
 msgid ""
 " --snap_windows_only_when_overlapping=[yes|no]\n"
 "                      Only move a window to the edge of a panel\n"
@@ -213,15 +228,15 @@ msgid ""
 "                      panel."
 msgstr " --snap_windows_only_when_overlapping=[yes|no]\nПеремещает окно к краю панели,\nтолько если окно перекрывает панель."
 
-#: ../../src/wlapplication_messages.cc:148
+#: ../../src/wlapplication_messages.cc:157
 msgid " --verbose            Enable verbose debug messages"
 msgstr " --verbose            Включить подробные сообщения отладки"
 
-#: ../../src/wlapplication_messages.cc:149
+#: ../../src/wlapplication_messages.cc:158
 msgid " --help               Show this help"
 msgstr " --help               Показать справку"
 
-#: ../../src/wlapplication_messages.cc:150
+#: ../../src/wlapplication_messages.cc:159
 msgid ""
 "Bug reports? Suggestions? Check out the project website:\n"
 "        https://launchpad.net/widelands\n"
