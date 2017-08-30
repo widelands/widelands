@@ -43,6 +43,8 @@ struct InteractiveSpectator : public InteractiveGameBase {
 	Widelands::Player* get_player() const override;
 
 	bool handle_key(bool down, SDL_Keysym) override;
+	void draw(RenderTarget& dst) override;
+	void draw_map_view(MapView* given_map_view, RenderTarget* dst) override;
 
 private:
 	void exit_btn();
@@ -50,7 +52,7 @@ private:
 	bool can_see(Widelands::PlayerNumber) const override;
 	bool can_act(Widelands::PlayerNumber) const override;
 	Widelands::PlayerNumber player_number() const override;
-	void node_action() override;
+	void node_action(const Widelands::NodeAndTriangle<>& node_and_triangle) override;
 
 private:
 	UI::UniqueWindow::Registry chat_;

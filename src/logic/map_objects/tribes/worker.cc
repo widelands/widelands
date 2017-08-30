@@ -106,7 +106,7 @@ bool Worker::run_createware(Game& game, State& state, const Action& action) {
  */
 // TODO(unknown): Lots of magic numbers in here
 bool Worker::run_mine(Game& game, State& state, const Action& action) {
-	Map& map = game.map();
+	Map* map = game.mutable_map();
 
 	// Make sure that the specified resource is available in this world
 	DescriptionIndex const res = game.world().get_resource(action.sparam1.c_str());
@@ -119,7 +119,8 @@ bool Worker::run_mine(Game& game, State& state, const Action& action) {
 	uint32_t totalres = 0;
 	uint32_t totalchance = 0;
 	int32_t pick;
-	MapRegion<Area<FCoords>> mr(map, Area<FCoords>(map.get_fcoords(get_position()), action.iparam1));
+	MapRegion<Area<FCoords>> mr(
+	   *map, Area<FCoords>(map->get_fcoords(get_position()), action.iparam1));
 	do {
 		DescriptionIndex fres = mr.location().field->get_resources();
 		ResourceAmount amount = mr.location().field->get_resources_amount();
@@ -143,7 +144,7 @@ bool Worker::run_mine(Game& game, State& state, const Action& action) {
 			totalchance += 4;
 		else if (amount <= 6)
 			totalchance += 2;
-	} while (mr.advance(map));
+	} while (mr.advance(*map));
 
 	if (totalres == 0) {
 		molog("  Run out of resources\n");
@@ -154,8 +155,8 @@ bool Worker::run_mine(Game& game, State& state, const Action& action) {
 
 	// Second pass through fields - reset mr
 	pick = game.logic_rand() % totalchance;
-	mr =
-	   MapRegion<Area<FCoords>>(map, Area<FCoords>(map.get_fcoords(get_position()), action.iparam1));
+	mr = MapRegion<Area<FCoords>>(
+	   *map, Area<FCoords>(map->get_fcoords(get_position()), action.iparam1));
 	do {
 		DescriptionIndex fres = mr.location().field->get_resources();
 		if (fres != res) {
@@ -169,10 +170,10 @@ bool Worker::run_mine(Game& game, State& state, const Action& action) {
 			assert(amount > 0);
 
 			--amount;
-			map.set_resources(mr.location(), amount);
+			map->set_resources(mr.location(), amount);
 			break;
 		}
-	} while (mr.advance(map));
+	} while (mr.advance(*map));
 
 	if (pick >= 0) {
 		molog("  Not successful this time\n");
@@ -206,7 +207,7 @@ bool Worker::run_mine(Game& game, State& state, const Action& action) {
 bool Worker::run_breed(Game& game, State& state, const Action& action) {
 	molog(" Breed(%s, %i)\n", action.sparam1.c_str(), action.iparam1);
 
-	Map& map = game.map();
+	Map* map = game.mutable_map();
 
 	// Make sure that the specified resource is available in this world
 	DescriptionIndex const res = game.world().get_resource(action.sparam1.c_str());
@@ -219,7 +220,8 @@ bool Worker::run_breed(Game& game, State& state, const Action& action) {
 	uint32_t totalres = 0;
 	uint32_t totalchance = 0;
 	int32_t pick;
-	MapRegion<Area<FCoords>> mr(map, Area<FCoords>(map.get_fcoords(get_position()), action.iparam1));
+	MapRegion<Area<FCoords>> mr(
+	   *map, Area<FCoords>(map->get_fcoords(get_position()), action.iparam1));
 	do {
 		DescriptionIndex fres = mr.location().field->get_resources();
 		ResourceAmount amount = mr.location().field->get_initial_res_amount() -
@@ -244,7 +246,7 @@ bool Worker::run_breed(Game& game, State& state, const Action& action) {
 			totalchance += 4;
 		else if (amount <= 6)
 			totalchance += 2;
-	} while (mr.advance(map));
+	} while (mr.advance(*map));
 
 	if (totalres == 0) {
 		molog("  All resources full\n");
@@ -256,8 +258,8 @@ bool Worker::run_breed(Game& game, State& state, const Action& action) {
 	// Second pass through fields - reset mr!
 	assert(totalchance);
 	pick = game.logic_rand() % totalchance;
-	mr =
-	   MapRegion<Area<FCoords>>(map, Area<FCoords>(map.get_fcoords(get_position()), action.iparam1));
+	mr = MapRegion<Area<FCoords>>(
+	   *map, Area<FCoords>(map->get_fcoords(get_position()), action.iparam1));
 
 	do {
 		DescriptionIndex fres = mr.location().field->get_resources();
@@ -272,10 +274,10 @@ bool Worker::run_breed(Game& game, State& state, const Action& action) {
 			assert(amount > 0);
 
 			--amount;
-			map.set_resources(mr.location(), mr.location().field->get_initial_res_amount() - amount);
+			map->set_resources(mr.location(), mr.location().field->get_initial_res_amount() - amount);
 			break;
 		}
-	} while (mr.advance(map));
+	} while (mr.advance(*map));
 
 	if (pick >= 0) {
 		molog("  Not successful this time\n");
@@ -341,7 +343,7 @@ bool Worker::run_setbobdescription(Game& game, State& state, const Action& actio
 bool Worker::run_findobject(Game& game, State& state, const Action& action) {
 	CheckStepWalkOn cstep(descr().movecaps(), false);
 
-	Map& map = game.map();
+	const Map& map = game.map();
 	Area<FCoords> area(map.get_fcoords(get_position()), 0);
 	bool found_reserved = false;
 
@@ -486,7 +488,7 @@ private:
 
 bool Worker::run_findspace(Game& game, State& state, const Action& action) {
 	std::vector<Coords> list;
-	Map& map = game.map();
+	const Map& map = game.map();
 	const World& world = game.world();
 
 	CheckStepDefault cstep(descr().movecaps());
@@ -706,7 +708,7 @@ bool Worker::run_plant(Game& game, State& state, const Action& action) {
 		}
 	}
 
-	Map& map = game.map();
+	const Map& map = game.map();
 	Coords pos = get_position();
 	FCoords fpos = map.get_fcoords(pos);
 
@@ -863,8 +865,7 @@ bool Worker::run_geologist(Game& game, State& state, const Action& action) {
  * possible.
  */
 bool Worker::run_geologist_find(Game& game, State& state, const Action&) {
-	const Map& map = game.map();
-	const FCoords position = map.get_fcoords(get_position());
+	const FCoords position = game.map().get_fcoords(get_position());
 	BaseImmovable const* const imm = position.field->get_immovable();
 	const World& world = game.world();
 
@@ -1285,7 +1286,7 @@ void Worker::transfer_pop(Game& /* game */, State& /* state */) {
 }
 
 void Worker::transfer_update(Game& game, State& /* state */) {
-	Map& map = game.map();
+	const Map& map = game.map();
 	PlayerImmovable* location = get_location(game);
 
 	// We expect to always have a location at this point,
@@ -2235,7 +2236,7 @@ void Worker::fugitive_update(Game& game, State& state) {
 		return pop_task(game);
 	}
 
-	Map& map = game.map();
+	const Map& map = game.map();
 	PlayerImmovable const* location = get_location(game);
 
 	if (location && &location->owner() == &owner()) {
@@ -2354,7 +2355,7 @@ void Worker::geologist_update(Game& game, State& state) {
 	}
 
 	//
-	Map& map = game.map();
+	const Map& map = game.map();
 	const World& world = game.world();
 	Area<FCoords> owner_area(
 	   map.get_fcoords(dynamic_cast<Flag&>(*get_location(game)).get_position()), state.ivar2);
@@ -2482,7 +2483,7 @@ void Worker::scout_update(Game& game, State& state) {
 		return pop_task(game);
 	}
 
-	Map& map = game.map();
+	const Map& map = game.map();
 
 	// If not yet time to go home
 	if (static_cast<int32_t>(state.ivar2 - game.get_gametime()) > 0) {

@@ -156,7 +156,7 @@ bool MilitarySite::AttackTarget::can_be_attacked() const {
 void MilitarySite::AttackTarget::enemy_soldier_approaches(const Soldier& enemy) const {
 	auto& owner = military_site_->owner();
 	Game& game = dynamic_cast<Game&>(owner.egbase());
-	Map& map = game.map();
+	const Map& map = game.map();
 	if (enemy.get_owner() == &owner || enemy.get_battle() ||
 	    military_site_->descr().get_conquers() <=
 	       map.calc_distance(enemy.get_position(), military_site_->get_position()))

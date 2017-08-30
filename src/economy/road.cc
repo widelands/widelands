@@ -109,7 +109,7 @@ bool Road::get_passable() const {
 }
 
 BaseImmovable::PositionList Road::get_positions(const EditorGameBase& egbase) const {
-	Map& map = egbase.map();
+	const Map& map = egbase.map();
 	Coords curf = map.get_fcoords(path_.get_start());
 
 	PositionList rv;
@@ -155,7 +155,7 @@ void Road::set_path(EditorGameBase& egbase, const Path& path) {
  * Add road markings to the map
 */
 void Road::mark_map(EditorGameBase& egbase) {
-	Map& map = egbase.map();
+	const Map& map = egbase.map();
 	FCoords curf = map.get_fcoords(path_.get_start());
 
 	const Path::StepVector::size_type nr_steps = path_.get_nsteps();
@@ -189,7 +189,7 @@ void Road::mark_map(EditorGameBase& egbase) {
  * Remove road markings from the map
 */
 void Road::unmark_map(EditorGameBase& egbase) {
-	Map& map = egbase.map();
+	const Map& map = egbase.map();
 	FCoords curf(path_.get_start(), &map[path_.get_start()]);
 
 	const Path::StepVector::size_type nr_steps = path_.get_nsteps();
@@ -425,7 +425,7 @@ void Road::postsplit(Game& game, Flag& flag) {
 	oldend.detach_road(flagidx_[FlagEnd]);
 
 	// build our new path and the new road's path
-	Map& map = game.map();
+	const Map& map = game.map();
 	CoordPath path(map, path_);
 	CoordPath secondpath(path);
 	int32_t const index = path.get_index(flag.get_position());

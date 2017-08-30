@@ -164,7 +164,9 @@ EditorInteractive::EditorInteractive(Widelands::EditorGameBase& e)
 	set_display_flag(InteractiveBase::dfDebug, false);
 #endif
 
-	map_view()->fieldclicked.connect(boost::bind(&EditorInteractive::map_clicked, this, false));
+	map_view()->field_clicked.connect([this](const Widelands::NodeAndTriangle<>& node_and_triangle) {
+		map_clicked(node_and_triangle, false);
+	});
 
 	// Subscribe to changes of the resource type on a field..
 	field_resource_changed_subscriber_ =
@@ -177,21 +179,21 @@ EditorInteractive::EditorInteractive(Widelands::EditorGameBase& e)
 }
 
 void EditorInteractive::register_overlays() {
-	Widelands::Map& map = egbase().map();
+	Widelands::Map* map = egbase().mutable_map();
 
 	//  Starting locations
-	Widelands::PlayerNumber const nr_players = map.get_nrplayers();
+	Widelands::PlayerNumber const nr_players = map->get_nrplayers();
 	assert(nr_players <= kMaxPlayers);
 	iterate_player_numbers(p, nr_players) {
-		if (Widelands::Coords const sp = map.get_starting_pos(p)) {
-			tools_->set_starting_pos.set_starting_pos(*this, p, sp, &map);
+		if (Widelands::Coords const sp = map->get_starting_pos(p)) {
+			tools_->set_starting_pos.set_starting_pos(*this, p, sp, map);
 		}
 	}
 
 	//  Resources: we do not calculate default resources, therefore we do not
 	//  expect to meet them here.
-	Widelands::Extent const extent = map.extent();
-	iterate_Map_FCoords(map, extent, fc) {
+	Widelands::Extent const extent = map->extent();
+	iterate_Map_FCoords(*map, extent, fc) {
 		if (uint8_t const amount = fc.field->get_resources_amount()) {
 			const std::string& immname =
 			   egbase().world().get_resource(fc.field->get_resources())->editor_image(amount);
@@ -206,11 +208,11 @@ void EditorInteractive::register_overlays() {
 void EditorInteractive::load(const std::string& filename) {
 	assert(filename.size());
 
-	Widelands::Map& map = egbase().map();
+	Widelands::Map* map = egbase().mutable_map();
 
 	cleanup_for_load();
 
-	std::unique_ptr<Widelands::MapLoader> ml(map.get_correct_loader(filename));
+	std::unique_ptr<Widelands::MapLoader> ml(map->get_correct_loader(filename));
 	if (!ml.get())
 		throw WLWarning(
 		   _("Unsupported format"),
@@ -228,8 +230,9 @@ void EditorInteractive::load(const std::string& filename) {
 
 	// Create the players. TODO(SirVer): this must be managed better
 	loader_ui.step(_("Creating players"));
-	iterate_player_numbers(p, map.get_nrplayers()) {
-		egbase().add_player(p, 0, map.get_scenario_player_tribe(p), map.get_scenario_player_name(p));
+	iterate_player_numbers(p, map->get_nrplayers()) {
+		egbase().add_player(
+		   p, 0, map->get_scenario_player_tribe(p), map->get_scenario_player_name(p));
 	}
 
 	ml->load_map_complete(egbase(), Widelands::MapLoader::LoadType::kEditor);
@@ -287,9 +290,10 @@ void EditorInteractive::exit() {
 	end_modal<UI::Panel::Returncodes>(UI::Panel::Returncodes::kBack);
 }
 
-void EditorInteractive::map_clicked(bool should_draw) {
-	history_->do_action(tools_->current(), tools_->use_tool, egbase().map(), egbase().world(),
-	                    get_sel_pos(), *this, should_draw);
+void EditorInteractive::map_clicked(const Widelands::NodeAndTriangle<>& node_and_triangle,
+                                    const bool should_draw) {
+	history_->do_action(tools_->current(), tools_->use_tool, *egbase().mutable_map(),
+	                    egbase().world(), node_and_triangle, *this, should_draw);
 	set_need_save(true);
 }
 
@@ -307,14 +311,50 @@ bool EditorInteractive::handle_mousepress(uint8_t btn, int32_t x, int32_t y) {
 	return InteractiveBase::handle_mousepress(btn, x, y);
 }
 
+void EditorInteractive::draw(RenderTarget& dst) {
+	const auto& ebase = egbase();
+	auto* fields_to_draw = map_view()->draw_terrain(ebase, &dst);
+
+	const float scale = 1.f / map_view()->view().zoom;
+	const uint32_t gametime = ebase.get_gametime();
+
+	for (size_t idx = 0; idx < fields_to_draw->size(); ++idx) {
+		const FieldsToDraw::Field& field = fields_to_draw->at(idx);
+		if (draw_immovables_) {
+			Widelands::BaseImmovable* const imm = field.fcoords.field->get_immovable();
+			if (imm != nullptr && imm->get_positions(ebase).front() == field.fcoords) {
+				imm->draw(gametime, TextToDraw::kNone, field.rendertarget_pixel, scale, &dst);
+			}
+		}
+
+		if (draw_bobs_) {
+			for (Widelands::Bob* bob = field.fcoords.field->get_first_bob(); bob;
+			     bob = bob->get_next_bob()) {
+				bob->draw(ebase, TextToDraw::kNone, field.rendertarget_pixel, scale, &dst);
+			}
+		}
+
+		// TODO(sirver): Do not use the field_overlay_manager, instead draw the
+		// overlays we are interested in here directly.
+		field_overlay_manager().foreach_overlay(
+		   field.fcoords, [&dst, &field, scale](const Image* pic, const Vector2i& hotspot) {
+			   dst.blitrect_scale(Rectf(field.rendertarget_pixel - hotspot.cast<float>() * scale,
+			                            pic->width() * scale, pic->height() * scale),
+			                      pic, Recti(0, 0, pic->width(), pic->height()), 1.f,
+			                      BlendMode::UseAlpha);
+			});
+	}
+}
+
 /// Needed to get freehand painting tools (hold down mouse and move to edit).
 void EditorInteractive::set_sel_pos(Widelands::NodeAndTriangle<> const sel) {
 	bool const target_changed = tools_->current().operates_on_triangles() ?
 	                               sel.triangle != get_sel_pos().triangle :
 	                               sel.node != get_sel_pos().node;
 	InteractiveBase::set_sel_pos(sel);
-	if (target_changed && is_painting_)
-		map_clicked(true);
+	if (target_changed && is_painting_) {
+		map_clicked(sel, true);
+	}
 }
 
 void EditorInteractive::set_sel_radius_and_update_menu(uint32_t const val) {
@@ -349,15 +389,13 @@ void EditorInteractive::toggle_resources() {
 }
 
 void EditorInteractive::toggle_immovables() {
-	const bool value = !draw_immovables();
-	set_draw_immovables(value);
-	toggle_immovables_->set_perm_pressed(value);
+	draw_immovables_ = !draw_immovables_;
+	toggle_immovables_->set_perm_pressed(draw_immovables_);
 }
 
 void EditorInteractive::toggle_bobs() {
-	const bool value = !draw_bobs();
-	set_draw_bobs(value);
-	toggle_bobs_->set_perm_pressed(value);
+	draw_bobs_ = !draw_bobs_;
+	toggle_bobs_->set_perm_pressed(draw_bobs_);
 }
 
 bool EditorInteractive::handle_key(bool const down, SDL_Keysym const code) {
@@ -523,11 +561,10 @@ void EditorInteractive::select_tool(EditorTool& primary, EditorTool::ToolIndex c
 				toolsize_menu.update(toolsize_menu.value());
 			}
 		}
-		Widelands::Map& map = egbase().map();
 		//  A new tool has been selected. Remove all registered overlay callback
 		//  functions.
 		mutable_field_overlay_manager()->register_overlay_callback_function(nullptr);
-		map.recalc_whole_map(egbase().world());
+		egbase().mutable_map()->recalc_whole_map(egbase().world());
 	}
 	tools_->current_pointer = &primary;
 	tools_->use_tool = which;
@@ -603,16 +640,15 @@ void EditorInteractive::run_editor(const std::string& filename, const std::strin
 		GameTips editortips(loader_ui, tipstext);
 
 		{
-			Widelands::Map& map = *new Widelands::Map;
-			egbase.set_map(&map);
 			if (filename.empty()) {
 				loader_ui.step(_("Creating empty map…"));
-				map.create_empty_map(egbase.world(), 64, 64, 0,
-				                     /** TRANSLATORS: Default name for new map */
-				                     _("No Name"),
-				                     /** TRANSLATORS: Map author name when it hasn't been set yet */
-				                     g_options.pull_section("global").get_string(
-				                        "realname", pgettext("author_name", "Unknown")));
+				egbase.mutable_map()->create_empty_map(
+				   egbase.world(), 64, 64, 0,
+				   /** TRANSLATORS: Default name for new map */
+				   _("No Name"),
+				   /** TRANSLATORS: Map author name when it hasn't been set yet */
+				   g_options.pull_section("global").get_string(
+				      "realname", pgettext("author_name", "Unknown")));
 
 				load_all_tribes(&egbase, &loader_ui);
 
