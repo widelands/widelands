@@ -126,7 +126,7 @@ void draw_immovables_for_formerly_visible_field(const FieldsToDraw::Field& field
                                                 const float scale,
                                                 RenderTarget* dst) {
 	if (const Widelands::MapObjectDescr* const map_object_descr =
-	       player_field.map_object_descr[Widelands::TCoords<>::None]) {
+	       player_field.map_object_descr[Widelands::TriangleIndex::None]) {
 		if (player_field.constructionsite.becomes) {
 			assert(field.owner != nullptr);
 			const Widelands::ConstructionsiteInformation& csinf = player_field.constructionsite;
@@ -286,7 +286,7 @@ void InteractivePlayer::think() {
 					map_view()->mouse_to_field(flag_to_connect_, MapView::Transition::Jump);
 					set_sel_pos(Widelands::NodeAndTriangle<>(
 					   flag_to_connect_,
-					   Widelands::TCoords<>(flag_to_connect_, Widelands::TCoords<>::D)));
+					   Widelands::TCoords<>(flag_to_connect_, Widelands::TriangleIndex::D)));
 					start_build_road(flag_to_connect_, field.get_owned_by());
 				}
 			flag_to_connect_ = Widelands::Coords::null();

@@ -698,7 +698,7 @@ void EditorInteractive::map_changed(const MapWas& action) {
 		map_view()->set_view(MapView::View{Vector2f::zero(), 1.f}, MapView::Transition::Jump);
 		set_sel_pos(Widelands::NodeAndTriangle<>(
 		   Widelands::Coords(0, 0),
-		   Widelands::TCoords<>(Widelands::Coords(0, 0), Widelands::TCoords<>::D)));
+		   Widelands::TCoords<>(Widelands::Coords(0, 0), Widelands::TriangleIndex::D)));
 		break;
 
 	case MapWas::kGloballyMutated:

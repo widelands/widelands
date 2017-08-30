@@ -180,7 +180,7 @@ void EditorGameBase::inform_players_about_immovable(MapIndex const i,
 		iterate_players_existing_const(plnum, kMaxPlayers, *this, p) {
 			Player::Field& player_field = p->fields_[i];
 			if (1 < player_field.vision) {
-				player_field.map_object_descr[TCoords<>::None] = descr;
+				player_field.map_object_descr[TriangleIndex::None] = descr;
 			}
 		}
 }

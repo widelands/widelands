@@ -29,7 +29,7 @@ int32_t EditorSetTerrainTool::handle_click_impl(const Widelands::World& world,
                                                 EditorInteractive& /* parent */,
                                                 EditorActionArgs* args,
                                                 Widelands::Map* map) {
-	assert(center.triangle.t == TCoords<>::D || center.triangle.t == TCoords<>::R);
+	assert(center.triangle.t == TriangleIndex::D || center.triangle.t == TriangleIndex::R);
 	uint16_t const radius = args->sel_radius;
 	int32_t max = 0;
 
@@ -70,7 +70,7 @@ EditorSetTerrainTool::handle_undo_impl(const Widelands::World& world,
                                        EditorInteractive& /* parent */,
                                        EditorActionArgs* args,
                                        Widelands::Map* map) {
-	assert(center.triangle.t == TCoords<>::D || center.triangle.t == TCoords<>::R);
+	assert(center.triangle.t == TriangleIndex::D || center.triangle.t == TriangleIndex::R);
 	uint16_t const radius = args->sel_radius;
 	if (!args->terrain_type.empty()) {
 		int32_t max = 0;

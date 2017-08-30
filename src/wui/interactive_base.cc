@@ -161,7 +161,7 @@ void InteractiveBase::set_sel_pos(Widelands::NodeAndTriangle<> const center) {
 
 	//  register sel overlay position
 	if (sel_.triangles) {
-		assert(center.triangle.t == TCoords<>::D || center.triangle.t == TCoords<>::R);
+		assert(center.triangle.t == TriangleIndex::D || center.triangle.t == TriangleIndex::R);
 		Widelands::MapTriangleRegion<> mr(map, Area<TCoords<>>(center.triangle, sel_.radius));
 		do
 			field_overlay_manager_->register_overlay(
