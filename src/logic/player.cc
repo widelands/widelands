@@ -963,7 +963,7 @@ void Player::rediscover_node(const Map& map,
 				}
 			} else
 				map_object_descr = nullptr;
-			field.map_object_descr[TriangleIndex::None] = map_object_descr;
+			field.map_object_descr[static_cast<int>(TriangleIndex::None)] = map_object_descr;
 		}
 	}
 	{  //  discover the D triangle and the SW edge of the top right neighbour

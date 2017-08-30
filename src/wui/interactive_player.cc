@@ -126,7 +126,7 @@ void draw_immovables_for_formerly_visible_field(const FieldsToDraw::Field& field
                                                 const float scale,
                                                 RenderTarget* dst) {
 	if (const Widelands::MapObjectDescr* const map_object_descr =
-	       player_field.map_object_descr[Widelands::TriangleIndex::None]) {
+	       player_field.map_object_descr[static_cast<int>(Widelands::TriangleIndex::None)]) {
 		if (player_field.constructionsite.becomes) {
 			assert(field.owner != nullptr);
 			const Widelands::ConstructionsiteInformation& csinf = player_field.constructionsite;
