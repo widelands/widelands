@@ -43,6 +43,7 @@
 #include "logic/maphollowregion.h"
 #include "logic/maptriangleregion.h"
 #include "logic/player.h"
+#include "logic/widelands_geometry.h"
 #include "profile/profile.h"
 #include "scripting/lua_interface.h"
 #include "wui/field_overlay_manager.h"
@@ -161,7 +162,7 @@ void InteractiveBase::set_sel_pos(Widelands::NodeAndTriangle<> const center) {
 
 	//  register sel overlay position
 	if (sel_.triangles) {
-		assert(center.triangle.t == TriangleIndex::D || center.triangle.t == TriangleIndex::R);
+		assert(center.triangle.t == Widelands::TriangleIndex::D || center.triangle.t == Widelands::TriangleIndex::R);
 		Widelands::MapTriangleRegion<> mr(map, Area<TCoords<>>(center.triangle, sel_.radius));
 		do
 			field_overlay_manager_->register_overlay(
