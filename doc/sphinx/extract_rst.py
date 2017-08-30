@@ -57,6 +57,7 @@ lua_dirs = (
      'carriers', 'lua_tribes_workers'),
      ('data/tribes/workers/atlanteans/soldier',
      'soldiers', 'lua_tribes_workers'),
+     ('data/world', '', 'lua_world_defining'),
      ('data/world/critters/badger',
      'critters', 'lua_world_units'),
      ('data/world/immovables/bush1',

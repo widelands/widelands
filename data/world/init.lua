@@ -1,3 +1,45 @@
+-- RST
+-- init.lua
+-- --------
+--
+-- World initialization.
+-- All world entities are loaded via this file.
+--
+-- This file also defines the editor categories for world elements so that they
+-- can be added to the editor tools. The available element types are ``terrain``,
+-- ``immovable``, and ``critter``. Editor categories are defined by:
+--
+-- .. function:: new_editor_<element_type>_category{table}
+--
+--    This function adds the definition for an editor category, to be added as a
+--    tab to the tool for ``<element_type>``. Only elements of the given type can
+--    be in the editor category.
+--
+--    :arg table: This table contains all the data that the game engine will add
+--        to this editor category. It contains the following entries:
+--
+--    **name**
+--        *Mandatory*. A string containing the internal name of this editor category
+--        for reference, e.g.::
+--
+--            name = "summer",
+--
+--    **descname**
+--        *Mandatory*. The translatable display name, e.g.::
+--
+--            descname = _"Summer",
+--
+--    **picture**
+--        *Mandatory*. An image to represent this category in the editor tool's tab, e.g.::
+--
+--            picture = "world/pics/editor_terrain_category_green.png",
+--
+--    **items_per_row**
+--        *Mandatory*. How many items will be displayed in each row by the tool, e.g.::
+--
+--            items_per_row = 6,
+--
+
 world = wl.World()
 
 set_textdomain("world")
@@ -12,6 +54,14 @@ print_loading_message("┗━ took", function()
 
    print_loading_message("┃    Terrains", function()
 
+-- RST
+-- .. function:: new_editor_terrain_category{table}
+--
+--    This function adds the definition for a category in the "Terrains" tool.
+--    Only terrains can be in this editor category.
+--
+--    :arg table: This table contains all the data that the game engine will
+--       add to this editor category. See above.
       world:new_editor_terrain_category{
          name = "summer",
          descname = _ "Summer",
@@ -41,7 +91,14 @@ print_loading_message("┗━ took", function()
    end)
 
    print_loading_message("┃    Immovables", function()
-      -- Miscellaneous
+-- RST
+-- .. function:: new_editor_immovable_category{table}
+--
+--    This function adds the definition for a category in the "Immovables" tool.
+--    Only immovables can be in this editor category.
+--
+--    :arg table: This table contains all the data that the game engine will
+--       add to this editor category. See above.
       world:new_editor_immovable_category{
          name = "miscellaneous",
          descname = _ "Miscellaneous",
@@ -243,7 +300,14 @@ print_loading_message("┗━ took", function()
 
    print_loading_message("┃    Critters", function()
 
-      -- Herbivores
+-- RST
+-- .. function:: new_editor_critter_category{table}
+--
+--    This function adds the definition for a category in the "Animals" tool.
+--    Only critters can be in this editor category.
+--
+--    :arg table: This table contains all the data that the game engine will
+--       add to this editor category. See above.
       world:new_editor_critter_category {
          name = "critters_herbivores",
          -- TRANSLATORS: A category in the editor for placing animals on the map.

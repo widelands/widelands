@@ -19,5 +19,6 @@ terrains, which have a common ``init.lua`` file.
 .. toctree::
    :maxdepth: 3
 
+   autogen_toc_lua_world_defining
    autogen_toc_lua_world_units
    autogen_toc_lua_world_other
