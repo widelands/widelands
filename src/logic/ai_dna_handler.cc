@@ -122,6 +122,9 @@ void AiDnaHandler::dump_output(Widelands::Player::AiPersistentState* pd, uint8_t
 	for (size_t i = 0; i < pd->f_neuron_pool_size; ++i) {
 		fn.set_natural(std::to_string(static_cast<int64_t>(i)).c_str(), pd->f_neurons[i]);
 	}
-	prof.write(full_filename.c_str(), false, *g_fs);
+
+	std::string comment = "See wiki for more info: https://wl.widelands.org/wiki/Ai%20Training/";
+
+	prof.write(full_filename.c_str(), false, *g_fs, comment.c_str());
 }
 }

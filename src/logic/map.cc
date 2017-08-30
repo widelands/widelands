@@ -565,7 +565,9 @@ Functor is of the form: functor(Map*, FCoords)
 ===============
 */
 template <typename functorT>
-void Map::find_reachable(const Area<FCoords>& area, const CheckStep& checkstep, functorT& functor) {
+void Map::find_reachable(const Area<FCoords>& area,
+                         const CheckStep& checkstep,
+                         functorT& functor) const {
 	std::vector<Coords> queue;
 	boost::shared_ptr<Pathfields> pathfields = pathfieldmgr_->allocate();
 
@@ -654,8 +656,9 @@ the list.
 Returns the number of objects found.
 ===============
 */
-uint32_t
-Map::find_bobs(Area<FCoords> const area, std::vector<Bob*>* const list, const FindBob& functor) {
+uint32_t Map::find_bobs(Area<FCoords> const area,
+                        std::vector<Bob*>* const list,
+                        const FindBob& functor) const {
 	FindBobsCallback cb(list, functor);
 
 	find(area, cb);
@@ -678,7 +681,7 @@ Returns the number of objects found.
 uint32_t Map::find_reachable_bobs(Area<FCoords> const area,
                                   std::vector<Bob*>* const list,
                                   const CheckStep& checkstep,
-                                  const FindBob& functor) {
+                                  const FindBob& functor) const {
 	FindBobsCallback cb(list, functor);
 
 	find_reachable(area, checkstep, cb);
@@ -731,7 +734,7 @@ If list is not 0, found immovables are stored in list.
 */
 uint32_t Map::find_immovables(Area<FCoords> const area,
                               std::vector<ImmovableFound>* const list,
-                              const FindImmovable& functor) {
+                              const FindImmovable& functor) const {
 	FindImmovablesCallback cb(list, functor);
 
 	find(area, cb);
@@ -752,7 +755,7 @@ Returns the number of immovables we found.
 uint32_t Map::find_reachable_immovables(Area<FCoords> const area,
                                         std::vector<ImmovableFound>* const list,
                                         const CheckStep& checkstep,
-                                        const FindImmovable& functor) {
+                                        const FindImmovable& functor) const {
 	FindImmovablesCallback cb(list, functor);
 
 	find_reachable(area, checkstep, cb);
@@ -770,7 +773,7 @@ uint32_t Map::find_reachable_immovables(Area<FCoords> const area,
 uint32_t Map::find_reachable_immovables_unique(const Area<FCoords> area,
                                                std::vector<BaseImmovable*>& list,
                                                const CheckStep& checkstep,
-                                               const FindImmovable& functor) {
+                                               const FindImmovable& functor) const {
 	std::vector<ImmovableFound> duplist;
 	FindImmovablesCallback cb(&duplist, find_immovable_always_true());
 
@@ -823,8 +826,9 @@ Returns the number of matching fields.
 Note that list can be 0.
 ===============
 */
-uint32_t
-Map::find_fields(Area<FCoords> const area, std::vector<Coords>* list, const FindNode& functor) {
+uint32_t Map::find_fields(Area<FCoords> const area,
+                          std::vector<Coords>* list,
+                          const FindNode& functor) const {
 	FindNodesCallback cb(list, functor);
 
 	find(area, cb);
@@ -844,7 +848,7 @@ Note that list can be 0.
 uint32_t Map::find_reachable_fields(Area<FCoords> const area,
                                     std::vector<Coords>* list,
                                     const CheckStep& checkstep,
-                                    const FindNode& functor) {
+                                    const FindNode& functor) const {
 	FindNodesCallback cb(list, functor);
 
 	find_reachable(area, checkstep, cb);
@@ -1595,7 +1599,7 @@ int32_t Map::findpath(Coords instart,
                       int32_t const persist,
                       Path& path,
                       const CheckStep& checkstep,
-                      uint32_t const flags) {
+                      uint32_t const flags) const {
 	FCoords start;
 	FCoords end;
 	int32_t upper_cost_limit;

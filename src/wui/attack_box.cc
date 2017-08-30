@@ -40,17 +40,16 @@ AttackBox::AttackBox(UI::Panel* parent,
                      uint32_t const y)
    : UI::Box(parent, x, y, UI::Box::Vertical),
      player_(player),
-     map_(&player_->egbase().map()),
+     map_(player_->egbase().map()),
      node_coordinates_(target),
      lastupdate_(0) {
 	init();
 }
 
 uint32_t AttackBox::get_max_attackers() {
-	assert(map_);
 	assert(player_);
 
-	if (upcast(Building, building, map_->get_immovable(*node_coordinates_)))
+	if (upcast(Building, building, map_.get_immovable(*node_coordinates_)))
 		return player_->find_attack_soldiers(building->base_flag());
 	return 0;
 }

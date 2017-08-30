@@ -31,9 +31,9 @@ namespace Widelands {
 constexpr int kRoadNotFound = -1000;
 constexpr int kShortcutWithinSameEconomy = 1000;
 constexpr int kRoadToDifferentEconomy = 10000;
+constexpr int kNoAiTrainingMutation = 200;
 constexpr int kUpperDefaultMutationLimit = 150;
 constexpr int kLowerDefaultMutationLimit = 75;
-constexpr int16_t kPrefNumberProbability = kAITrainingMode ? 5 : 100;
 
 // CheckStepRoadAI
 CheckStepRoadAI::CheckStepRoadAI(Player* const pl, uint8_t const mc, bool const oe)
@@ -41,7 +41,7 @@ CheckStepRoadAI::CheckStepRoadAI(Player* const pl, uint8_t const mc, bool const 
 }
 
 bool CheckStepRoadAI::allowed(
-   Map& map, FCoords start, FCoords end, int32_t, CheckStep::StepId const id) const {
+   const Map& map, FCoords start, FCoords end, int32_t, CheckStep::StepId const id) const {
 	uint8_t endcaps = player->get_buildcaps(end);
 
 	// we should not cross fields with road or flags (or any other immovable)
@@ -198,18 +198,31 @@ NearFlag::NearFlag(const Flag& f, int32_t const c, int32_t const d)
 EventTimeQueue::EventTimeQueue() {
 }
 
-void EventTimeQueue::push(const uint32_t production_time) {
-	queue.push(production_time);
+void EventTimeQueue::push(const uint32_t production_time, const uint32_t additional_id) {
+	queue.push_front(std::make_pair(production_time, additional_id));
 }
 
-uint32_t EventTimeQueue::count(const uint32_t current_time) {
+// Return count of entries in log (deque), if id is provided, it counts corresponding
+// members. id here can be index of building, f.e. it count how many soldiers were
+// trained in particular type of training site
+uint32_t EventTimeQueue::count(const uint32_t current_time, const uint32_t additional_id) {
 	strip_old(current_time);
-	return queue.size();
+	if (additional_id == std::numeric_limits<uint32_t>::max()) {
+		return queue.size();
+	} else {
+		uint32_t cnt = 0;
+		for (auto item : queue) {
+			if (item.second == additional_id) {
+				cnt += 1;
+			}
+		}
+		return cnt;
+	}
 }
 
 void EventTimeQueue::strip_old(const uint32_t current_time) {
-	while (!queue.empty() && queue.front() < current_time - duration_) {
-		queue.pop();
+	while (!queue.empty() && queue.back().first < current_time - duration_) {
+		queue.pop_back();
 	}
 }
 
@@ -221,6 +234,9 @@ BuildableField::BuildableField(const Widelands::FCoords& fc)
      enemy_accessible_(false),
      enemy_wh_nearby(false),
      unowned_land_nearby(0),
+     enemy_owned_land_nearby(0U),
+     unowned_buildable_spots_nearby(0U),
+     nearest_buildable_spot_nearby(0U),
      near_border(false),
      unowned_mines_spots_nearby(0),
      unowned_iron_mines_nearby(false),
@@ -246,11 +262,13 @@ BuildableField::BuildableField(const Widelands::FCoords& fc)
      military_in_constr_nearby(0),
      own_military_presence(0),
      enemy_military_presence(0),
+     enemy_military_sites(0),
      ally_military_presence(0),
      military_stationed(0),
      unconnected_nearby(false),
      military_unstationed(0),
      own_non_military_nearby(0),
+     defense_msite_allowed(false),
      is_portspace(Widelands::ExtendedBool::kUnset),
      port_nearby(false),
      portspace_nearby(Widelands::ExtendedBool::kUnset),
@@ -308,25 +326,6 @@ bool BuildingObserver::buildable(Widelands::Player& p) {
 	return is(BuildingAttribute::kBuildable) && p.is_building_type_allowed(id);
 }
 
-// Computer player does not get notification messages about enemy militarysites
-// and warehouses, so following is collected based on observation
-// It is conventient to have some information preserved, like nearby minefields,
-// when it was attacked, whether it is warehouse and so on
-// Also AI test more such targets when considering attack and calculated score is
-// is stored in the observer
-EnemySiteObserver::EnemySiteObserver()
-   : is_warehouse(false),
-     attack_soldiers_strength(0),
-     defenders_strength(0),
-     stationed_soldiers(0),
-     last_time_seen(0),
-     last_tested(0),
-     score(0),
-     mines_nearby(Widelands::ExtendedBool::kUnset),
-     last_time_attacked(0),
-     attack_counter(0) {
-}
-
 // as all mines have 3 levels, AI does not know total count of mines per mined material
 // so this observer will be used for this
 MineTypesObserver::MineTypesObserver()
@@ -339,14 +338,6 @@ ExpansionType::ExpansionType() {
 
 void ExpansionType::set_expantion_type(const ExpansionMode etype) {
 	type = etype;
-}
-
-ManagementData::ManagementData() {
-	score = 1;
-	primary_parent = 255;
-	next_neuron_id = 0;
-	performance_change = 0;
-	AiDnaHandler ai_dna_handler();
 }
 
 // Initialization of neuron. Neuron is defined by curve (type) and weight [-kWeightRange,
@@ -558,9 +549,9 @@ void ManagementData::new_dna_for_persistent(const uint8_t pn, const Widelands::A
 		}
 	}
 
-	_persistent_data->neuron_weights.clear();
-	_persistent_data->neuron_functs.clear();
-	_persistent_data->f_neurons.clear();
+	persistent_data->neuron_weights.clear();
+	persistent_data->neuron_functs.clear();
+	persistent_data->f_neurons.clear();
 
 	for (uint16_t i = 0; i < kNeuronPoolSize; i += 1) {
 		const DnaParent dna_donor = ((std::rand() % kSecondParentProbability) > 0) ?
@@ -569,12 +560,12 @@ void ManagementData::new_dna_for_persistent(const uint8_t pn, const Widelands::A
 
 		switch (dna_donor) {
 		case DnaParent::kPrimary:
-			_persistent_data->neuron_weights.push_back(input_weights_P1[i]);
-			_persistent_data->neuron_functs.push_back(input_func_P1[i]);
+			persistent_data->neuron_weights.push_back(input_weights_P1[i]);
+			persistent_data->neuron_functs.push_back(input_func_P1[i]);
 			break;
 		case DnaParent::kSecondary:
-			_persistent_data->neuron_weights.push_back(input_weights_P2[i]);
-			_persistent_data->neuron_functs.push_back(input_func_P2[i]);
+			persistent_data->neuron_weights.push_back(input_weights_P2[i]);
+			persistent_data->neuron_functs.push_back(input_func_P2[i]);
 			break;
 		default:
 			log("Invalid dna_donor for neurons\n");
@@ -588,10 +579,10 @@ void ManagementData::new_dna_for_persistent(const uint8_t pn, const Widelands::A
 		                               DnaParent::kSecondary;
 		switch (dna_donor) {
 		case DnaParent::kPrimary:
-			_persistent_data->f_neurons.push_back(f_neurons_P1[i]);
+			persistent_data->f_neurons.push_back(f_neurons_P1[i]);
 			break;
 		case DnaParent::kSecondary:
-			_persistent_data->f_neurons.push_back(f_neurons_P2[i]);
+			persistent_data->f_neurons.push_back(f_neurons_P2[i]);
 			break;
 		default:
 			log("Invalid dna_donor for f-neurons\n");
@@ -599,9 +590,9 @@ void ManagementData::new_dna_for_persistent(const uint8_t pn, const Widelands::A
 		}
 	}
 
-	_persistent_data->magic_numbers_size = kMagicNumbersSize;
-	_persistent_data->neuron_pool_size = kNeuronPoolSize;
-	_persistent_data->f_neuron_pool_size = kFNeuronPoolSize;
+	persistent_data->magic_numbers_size = kMagicNumbersSize;
+	persistent_data->neuron_pool_size = kNeuronPoolSize;
+	persistent_data->f_neuron_pool_size = kFNeuronPoolSize;
 }
 // Decides if mutation takes place and how intensive it will be
 MutatingIntensity ManagementData::do_mutate(const uint8_t is_preferred,
@@ -620,11 +611,17 @@ void ManagementData::mutate(const uint8_t pn) {
 
 	int16_t probability =
 	   shift_weight_value(get_military_number_at(kMutationRatePosition), false) + 101;
-	if (probability > kUpperDefaultMutationLimit) {
-		probability = kUpperDefaultMutationLimit;
-	}
-	if (probability < kLowerDefaultMutationLimit) {
-		probability = kLowerDefaultMutationLimit;
+
+	// When doing training mutation probability is to be bigger than not in training mode
+	if (ai_training_mode_) {
+		if (probability > kUpperDefaultMutationLimit) {
+			probability = kUpperDefaultMutationLimit;
+		}
+		if (probability < kLowerDefaultMutationLimit) {
+			probability = kLowerDefaultMutationLimit;
+		}
+	} else {
+		probability = kNoAiTrainingMutation;
 	}
 
 	set_military_number_at(kMutationRatePosition, probability - 101);
@@ -639,7 +636,7 @@ void ManagementData::mutate(const uint8_t pn) {
 	}
 
 	// Wildcard for ai trainingmode
-	if (kAITrainingMode && std::rand() % 8 == 0) {
+	if (ai_training_mode_ && std::rand() % 8 == 0) {
 		probability /= 3;
 	}
 
@@ -654,7 +651,7 @@ void ManagementData::mutate(const uint8_t pn) {
 			// Preferred numbers are ones that will be mutated agressively in full range
 			// [-kWeightRange, kWeightRange]
 			std::set<int32_t> preferred_numbers = {std::rand() % kMagicNumbersSize *
-			                                       kPrefNumberProbability};
+			                                       pref_number_probability};
 
 			for (uint16_t i = 0; i < kMagicNumbersSize; i += 1) {
 				if (i == kMutationRatePosition) {  // mutated above
@@ -680,7 +677,7 @@ void ManagementData::mutate(const uint8_t pn) {
 		{
 			// Neurons to be mutated more agressively
 			std::set<int32_t> preferred_neurons = {std::rand() % kNeuronPoolSize *
-			                                       kPrefNumberProbability};
+			                                       pref_number_probability};
 			for (auto& item : neuron_pool) {
 
 				const MutatingIntensity mutating_intensity =
@@ -691,12 +688,12 @@ void ManagementData::mutate(const uint8_t pn) {
 					if (std::rand() % 4 == 0) {
 						assert(!neuron_curves.empty());
 						item.set_type(std::rand() % neuron_curves.size());
-						_persistent_data->neuron_functs[item.get_id()] = item.get_type();
+						persistent_data->neuron_functs[item.get_id()] = item.get_type();
 					} else {
 						int16_t new_value = shift_weight_value(
 						   item.get_weight(), mutating_intensity == MutatingIntensity::kAgressive);
 						item.set_weight(new_value);
-						_persistent_data->neuron_weights[item.get_id()] = item.get_weight();
+						persistent_data->neuron_weights[item.get_id()] = item.get_weight();
 					}
 					log("      Neuron %2d: weight: %4d -> %4d, new curve: %d   %s\n", item.get_id(),
 					    old_value, item.get_weight(), item.get_type(),
@@ -711,7 +708,7 @@ void ManagementData::mutate(const uint8_t pn) {
 		{
 			// FNeurons to be mutated more agressively
 			std::set<int32_t> preferred_f_neurons = {std::rand() % kFNeuronPoolSize *
-			                                         kPrefNumberProbability};
+			                                         pref_number_probability};
 			for (auto& item : f_neuron_pool) {
 				uint8_t changed_bits = 0;
 				// is this a preferred neuron
@@ -732,7 +729,7 @@ void ManagementData::mutate(const uint8_t pn) {
 				}
 
 				if (changed_bits) {
-					_persistent_data->f_neurons[item.get_id()] = item.get_int();
+					persistent_data->f_neurons[item.get_id()] = item.get_int();
 					log("      F-Neuron %2d: new value: %13ul, changed bits: %2d   %s\n", item.get_id(),
 					    item.get_int(), changed_bits,
 					    (preferred_f_neurons.count(item.get_id()) > 0) ? "aggressive" : "");
@@ -747,23 +744,23 @@ void ManagementData::mutate(const uint8_t pn) {
 // Now we copy persistent to local
 void ManagementData::copy_persistent_to_local() {
 
-	assert(_persistent_data->neuron_weights.size() == kNeuronPoolSize);
-	assert(_persistent_data->neuron_functs.size() == kNeuronPoolSize);
+	assert(persistent_data->neuron_weights.size() == kNeuronPoolSize);
+	assert(persistent_data->neuron_functs.size() == kNeuronPoolSize);
 	neuron_pool.clear();
 	for (uint32_t i = 0; i < kNeuronPoolSize; i = i + 1) {
 		neuron_pool.push_back(
-		   Neuron(_persistent_data->neuron_weights[i], _persistent_data->neuron_functs[i], i));
+		   Neuron(persistent_data->neuron_weights[i], persistent_data->neuron_functs[i], i));
 	}
 
-	assert(_persistent_data->f_neurons.size() == kFNeuronPoolSize);
+	assert(persistent_data->f_neurons.size() == kFNeuronPoolSize);
 	f_neuron_pool.clear();
 	for (uint32_t i = 0; i < kFNeuronPoolSize; i = i + 1) {
-		f_neuron_pool.push_back(FNeuron(_persistent_data->f_neurons[i], i));
+		f_neuron_pool.push_back(FNeuron(persistent_data->f_neurons[i], i));
 	}
 
-	_persistent_data->magic_numbers_size = kMagicNumbersSize;
-	_persistent_data->neuron_pool_size = kNeuronPoolSize;
-	_persistent_data->f_neuron_pool_size = kFNeuronPoolSize;
+	persistent_data->magic_numbers_size = kMagicNumbersSize;
+	persistent_data->neuron_pool_size = kNeuronPoolSize;
+	persistent_data->f_neuron_pool_size = kFNeuronPoolSize;
 
 	test_consistency();
 	log("    ... DNA initialized\n");
@@ -771,27 +768,27 @@ void ManagementData::copy_persistent_to_local() {
 
 void ManagementData::test_consistency(bool itemized) {
 
-	assert(_persistent_data->neuron_weights.size() == _persistent_data->neuron_pool_size);
-	assert(_persistent_data->neuron_functs.size() == _persistent_data->neuron_pool_size);
-	assert(neuron_pool.size() == _persistent_data->neuron_pool_size);
+	assert(persistent_data->neuron_weights.size() == persistent_data->neuron_pool_size);
+	assert(persistent_data->neuron_functs.size() == persistent_data->neuron_pool_size);
+	assert(neuron_pool.size() == persistent_data->neuron_pool_size);
 	assert(neuron_pool.size() == kNeuronPoolSize);
 
-	assert(_persistent_data->magic_numbers_size == kMagicNumbersSize);
-	assert(_persistent_data->magic_numbers.size() == kMagicNumbersSize);
+	assert(persistent_data->magic_numbers_size == kMagicNumbersSize);
+	assert(persistent_data->magic_numbers.size() == kMagicNumbersSize);
 
-	assert(_persistent_data->f_neurons.size() == _persistent_data->f_neuron_pool_size);
-	assert(f_neuron_pool.size() == _persistent_data->f_neuron_pool_size);
+	assert(persistent_data->f_neurons.size() == persistent_data->f_neuron_pool_size);
+	assert(f_neuron_pool.size() == persistent_data->f_neuron_pool_size);
 	assert(f_neuron_pool.size() == kFNeuronPoolSize);
 
 	if (itemized) {
 		// comparing contents of neuron and fneuron pools
 		for (uint16_t i = 0; i < kNeuronPoolSize; i += 1) {
-			assert(_persistent_data->neuron_weights[i] == neuron_pool[i].get_weight());
-			assert(_persistent_data->neuron_functs[i] == neuron_pool[i].get_type());
+			assert(persistent_data->neuron_weights[i] == neuron_pool[i].get_weight());
+			assert(persistent_data->neuron_functs[i] == neuron_pool[i].get_type());
 			assert(neuron_pool[i].get_id() == i);
 		}
 		for (uint16_t i = 0; i < kFNeuronPoolSize; i += 1) {
-			assert(_persistent_data->f_neurons[i] == f_neuron_pool[i].get_int());
+			assert(persistent_data->f_neurons[i] == f_neuron_pool[i].get_int());
 			assert(f_neuron_pool[i].get_id() == i);
 		}
 	}
@@ -800,25 +797,25 @@ void ManagementData::test_consistency(bool itemized) {
 }
 
 void ManagementData::dump_data(const PlayerNumber pn) {
-	ai_dna_handler.dump_output(_persistent_data, pn);
+	ai_dna_handler.dump_output(persistent_data, pn);
 }
 
 // Querying military number at a possition
 int16_t ManagementData::get_military_number_at(uint8_t pos) {
 	assert(pos < kMagicNumbersSize);
-	return _persistent_data->magic_numbers[pos];
+	return persistent_data->magic_numbers[pos];
 }
 
 // Setting military number (persistent numbers are used also for local use)
 void ManagementData::set_military_number_at(const uint8_t pos, int16_t value) {
 	assert(pos < kMagicNumbersSize);
 
-	while (pos >= _persistent_data->magic_numbers.size()) {
-		_persistent_data->magic_numbers.push_back(0);
+	while (pos >= persistent_data->magic_numbers.size()) {
+		persistent_data->magic_numbers.push_back(0);
 	}
 
 	value = Neuron::clip_weight_to_range(value);
-	_persistent_data->magic_numbers[pos] = value;
+	persistent_data->magic_numbers[pos] = value;
 }
 
 uint16_t MineTypesObserver::total_count() const {
@@ -1022,16 +1019,6 @@ bool FlagsForRoads::get_winner(uint32_t* winner_hash) {
 }
 
 PlayersStrengths::PlayersStrengths() : update_time(0) {
-}
-
-// Default constructor
-PlayersStrengths::PlayerStat::PlayerStat()
-   : team_number(0),
-     is_enemy(false),
-     players_power(0),
-     old_players_power(0),
-     old60_players_power(0),
-     players_casualities(0) {
 }
 
 // Constructor to be used
@@ -1347,10 +1334,6 @@ void PlayersStrengths::set_update_time(const uint32_t gametime) {
 
 uint32_t PlayersStrengths::get_update_time() {
 	return update_time;
-}
-
-ProductionSiteObserver::ProductionSiteObserver()
-   : no_resources_since(kNever), upgrade_pending(false), dismantle_pending_since(kNever) {
 }
 
 }  // namespace Widelands

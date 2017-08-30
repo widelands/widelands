@@ -114,7 +114,7 @@ void MapElementalPacket::pre_read(FileSystem& fs, Map* map) {
 }
 
 void MapElementalPacket::read(FileSystem& fs, EditorGameBase& egbase, bool, MapObjectLoader&) {
-	pre_read(fs, &egbase.map());
+	pre_read(fs, egbase.mutable_map());
 }
 
 void MapElementalPacket::write(FileSystem& fs, EditorGameBase& egbase, MapObjectSaver&) {
