@@ -37,11 +37,10 @@ int32_t EditorSetTerrainTool::handle_click_impl(const Widelands::World& world,
 		Widelands::MapTriangleRegion<TCoords<Widelands::FCoords>> mr(
 		   *map, Widelands::Area<TCoords<Widelands::FCoords>>(
 		            TCoords<Widelands::FCoords>(
-		               Widelands::FCoords(map->get_fcoords(center.triangle)),
-		               static_cast<TCoords<Widelands::FCoords>::TriangleIndex>(center.triangle.t)),
+		               Widelands::FCoords(map->get_fcoords(center.triangle)), center.triangle.t),
 		            radius));
 		do {
-			args->original_terrain_type.push_back((mr.location().t == TCoords<Widelands::FCoords>::D) ?
+			args->original_terrain_type.push_back((mr.location().t == Widelands::TriangleIndex::D) ?
 			                                         mr.location().field->terrain_d() :
 			                                         mr.location().field->terrain_r());
 			args->terrain_type.push_back(get_random_enabled());
@@ -52,8 +51,7 @@ int32_t EditorSetTerrainTool::handle_click_impl(const Widelands::World& world,
 		Widelands::MapTriangleRegion<TCoords<Widelands::FCoords>> mr(
 		   *map, Widelands::Area<TCoords<Widelands::FCoords>>(
 		            TCoords<Widelands::FCoords>(
-		               Widelands::FCoords(map->get_fcoords(center.triangle)),
-		               static_cast<TCoords<Widelands::FCoords>::TriangleIndex>(center.triangle.t)),
+		               Widelands::FCoords(map->get_fcoords(center.triangle)), center.triangle.t),
 		            radius));
 		std::list<Widelands::DescriptionIndex>::iterator i = args->terrain_type.begin();
 		do {
@@ -77,8 +75,7 @@ EditorSetTerrainTool::handle_undo_impl(const Widelands::World& world,
 		Widelands::MapTriangleRegion<TCoords<Widelands::FCoords>> mr(
 		   *map, Widelands::Area<TCoords<Widelands::FCoords>>(
 		            TCoords<Widelands::FCoords>(
-		               Widelands::FCoords(map->get_fcoords(center.triangle)),
-		               static_cast<TCoords<Widelands::FCoords>::TriangleIndex>(center.triangle.t)),
+		               Widelands::FCoords(map->get_fcoords(center.triangle)), center.triangle.t),
 		            radius));
 
 		std::list<Widelands::DescriptionIndex>::iterator i = args->original_terrain_type.begin();
