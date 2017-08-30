@@ -141,9 +141,6 @@ public:
 private:
 	friend struct EditorToolMenu;
 
-	// Registers the overlays for player starting positions.
-	void register_overlays();
-
 	void on_buildhelp_changed(const bool value) override;
 
 	void toggle_resources();
@@ -155,8 +152,6 @@ private:
 	uint32_t realtime_;
 	bool is_painting_;
 
-	std::unique_ptr<Notifications::Subscriber<Widelands::NoteFieldResourceChanged>>
-	   field_resource_changed_subscriber_;
 	UI::UniqueWindow::Registry toolmenu_;
 
 	UI::UniqueWindow::Registry toolsizemenu_;
@@ -180,6 +175,7 @@ private:
 	std::unique_ptr<Tools> tools_;
 	std::unique_ptr<EditorHistory> history_;
 
+	bool draw_resources_ = true;
 	bool draw_immovables_ = true;
 	bool draw_bobs_ = true;
 };
