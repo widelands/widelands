@@ -36,8 +36,7 @@ namespace Widelands {
 Worker Programs
 ===============
 
-Worker programs are defined in the ``programs`` subtable specified in calls to
-:ref:`tribes:new_worker_type{table} <lua_tribes_workers_common>`.
+Worker programs are defined in the ``programs`` subtable specified in the worker's :ref:`lua_tribes_workers_common`.
 Each worker program is a Lua table in itself and defined as a series of command strings.
 Commands can also have parameters, which are separated from each other by a blank space.
 These parameters can also have values, which are separated from the parameter name by a colon (:). Finally, programs can call other programs.
