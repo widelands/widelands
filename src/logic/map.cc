@@ -1741,7 +1741,7 @@ Map::change_terrain(const World& world, TCoords<FCoords> const c, DescriptionInd
 
 	// remove invalid resources if necessary
 	// check vertex to which the triangle belongs
-	if (!is_resource_valid(world, c, c.node.field->get_resources())) {
+	if (!is_resource_valid(world, c.node, c.node.field->get_resources())) {
 		clear_resources(c.node);
 	}
 
@@ -1770,7 +1770,7 @@ Map::change_terrain(const World& world, TCoords<FCoords> const c, DescriptionInd
 }
 
 bool Map::is_resource_valid(const Widelands::World& world,
-                            const TCoords<Widelands::FCoords>& c,
+                            const Widelands::FCoords& c,
                             DescriptionIndex curres) {
 	if (curres == Widelands::kNoResource)
 		return true;
@@ -1780,21 +1780,21 @@ bool Map::is_resource_valid(const Widelands::World& world,
 	int32_t count = 0;
 
 	//  this field
-	count += world.terrain_descr(c.node.field->terrain_r()).is_resource_valid(curres);
-	count += world.terrain_descr(c.node.field->terrain_d()).is_resource_valid(curres);
+	count += world.terrain_descr(c.field->terrain_r()).is_resource_valid(curres);
+	count += world.terrain_descr(c.field->terrain_d()).is_resource_valid(curres);
 
 	//  If one of the neighbours is impassable, count its resource stronger.
 	//  top left neigbour
-	get_neighbour(c.node, Widelands::WALK_NW, &f1);
+	get_neighbour(c, Widelands::WALK_NW, &f1);
 	count += world.terrain_descr(f1.field->terrain_r()).is_resource_valid(curres);
 	count += world.terrain_descr(f1.field->terrain_d()).is_resource_valid(curres);
 
 	//  top right neigbour
-	get_neighbour(c.node, Widelands::WALK_NE, &f1);
+	get_neighbour(c, Widelands::WALK_NE, &f1);
 	count += world.terrain_descr(f1.field->terrain_d()).is_resource_valid(curres);
 
 	//  left neighbour
-	get_neighbour(c.node, Widelands::WALK_W, &f1);
+	get_neighbour(c, Widelands::WALK_W, &f1);
 	count += world.terrain_descr(f1.field->terrain_r()).is_resource_valid(curres);
 
 	return count > 1;

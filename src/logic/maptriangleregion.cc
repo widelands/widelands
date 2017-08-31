@@ -23,8 +23,7 @@ namespace Widelands {
 
 template <>
 MapTriangleRegion<>::MapTriangleRegion(const Map& map, Area<TCoords<>> area)
-   : radius_is_odd_(area.radius & 1) {
-	assert(area.t == TriangleIndex::R || area.t == TriangleIndex::D);
+   : radius_is_odd_(area.radius & 1), location_(area) {
 	const uint16_t radius_plus_1 = area.radius + 1;
 	const uint16_t half_radius_rounded_down = area.radius / 2;
 	row_length_ = radius_plus_1;
@@ -144,7 +143,7 @@ template <> bool MapTriangleRegion<>::advance(const Map& map) {
 
 template <>
 MapTriangleRegion<TCoords<FCoords>>::MapTriangleRegion(const Map& map, Area<TCoords<FCoords>> area)
-   : radius_is_odd_(area.radius & 1) {
+   : radius_is_odd_(area.radius & 1), location_(area) {
 	assert(area.t == TriangleIndex::R || area.t == TriangleIndex::D);
 	const uint16_t radius_plus_1 = area.radius + 1;
 	const uint16_t half_radius_rounded_down = area.radius / 2;
