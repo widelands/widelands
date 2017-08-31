@@ -63,6 +63,8 @@ void load_all_tribes(Widelands::EditorGameBase* egbase, UI::ProgressWindow* load
 	egbase->tribes();
 }
 
+void populate_fsel_nodes(const Coords& position, 
+
 }  // namespace
 
 EditorInteractive::EditorInteractive(Widelands::EditorGameBase& e)
@@ -342,6 +344,11 @@ void EditorInteractive::draw(RenderTarget& dst) {
 	for (int i = 1; i <= map.get_nrplayers(); ++i) {
 		starting_positions[map.get_starting_pos(i)] = i;
 	}
+
+	std::set<Coords> fsel_nodes;
+	if (!set_sel_triangles()) {
+		populate_fsel_nodes(get_sel_pos(), get_sel_radius(), &fsel_nodes);
+	} 
 
 	const auto& world = ebase.world();
 	for (size_t idx = 0; idx < fields_to_draw->size(); ++idx) {
@@ -742,9 +749,9 @@ void EditorInteractive::map_changed(const MapWas& action) {
 
 		// Make sure that we will start at coordinates (0,0).
 		map_view()->set_view(MapView::View{Vector2f::zero(), 1.f}, MapView::Transition::Jump);
-		set_sel_pos(Widelands::NodeAndTriangle<>(
+		set_sel_pos(Widelands::NodeAndTriangle<>{
 		   Widelands::Coords(0, 0),
-		   Widelands::TCoords<>(Widelands::Coords(0, 0), Widelands::TCoords<>::D)));
+		   Widelands::TCoords<>(Widelands::Coords(0, 0), Widelands::TriangleIndex::D)});
 		break;
 
 	case MapWas::kGloballyMutated:

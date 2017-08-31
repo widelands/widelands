@@ -43,6 +43,7 @@
 #include "logic/maphollowregion.h"
 #include "logic/maptriangleregion.h"
 #include "logic/player.h"
+#include "logic/widelands_geometry.h"
 #include "profile/profile.h"
 #include "scripting/lua_interface.h"
 #include "wui/field_overlay_manager.h"

@@ -427,7 +427,7 @@ public:
 	 * To qualify as valid, resources need to be surrounded by at least two matching terrains.
 	 */
 	bool is_resource_valid(const Widelands::World& world,
-	                       const Widelands::TCoords<Widelands::FCoords>& c,
+	                       const Widelands::FCoords& c,
 	                       DescriptionIndex curres);
 
 	// The objectives that are defined in this map if it is a scenario.
