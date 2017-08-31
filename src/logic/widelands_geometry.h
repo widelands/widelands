@@ -112,15 +112,12 @@ struct FCoords : public Coords {
 	Field* field;
 };
 
-enum class TriangleIndex { D, R, None };
+enum class TriangleIndex { D, R };
 
 // This uniquely indexes a single Triangle on the map. A Triangle is
-// indentified by its owning node and the triangle index (down or right). The
-// default constructor puts this in an invalid state (None).
+// indentified by its owning node and the triangle index (down or right).
 template <typename CoordsType = Coords> struct TCoords {
-	TCoords() : t(TriangleIndex::None) {
-	}
-	TCoords(const CoordsType C, const TriangleIndex T = TriangleIndex::None) : node(C), t(T) {
+	TCoords(const CoordsType C, const TriangleIndex T) : node(C), t(T) {
 	}
 
 	bool operator==(const TCoords& other) const {
