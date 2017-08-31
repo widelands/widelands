@@ -942,7 +942,7 @@ void Player::rediscover_node(const Map& map,
 		field.border_bl = ((1 | br_vision) && (br_owner_number == field.owner) &&
 		                   ((r_owner_number == field.owner) ^ (bl_owner_number == field.owner)));
 
-		{ 
+		{
 			const MapObjectDescr* map_object_descr;
 			field.constructionsite.becomes = nullptr;
 			if (const BaseImmovable* base_immovable = f.field->get_immovable()) {
