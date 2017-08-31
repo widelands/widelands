@@ -620,9 +620,12 @@ void MapPlayersViewPacket::read(FileSystem& fs,
 						                            triangle_immovable_kinds_file_version,
 						                            kCurrentPacketVersionImmovableKinds);
 					}
-					MapObjectData mod = read_unseen_immovable(
+					// We read and ignore the immovable information on the D
+					// triangle. This was done because there were vague plans of
+					// suporting immovables on the triangles instead as on the
+					// nodes.
+					read_unseen_immovable(
 					   egbase, im_kind, triangle_immovables_file, triangle_immovables_file_version);
-					assert(mod.map_object_descr == nullptr);
 				}
 				if (f_seen | br_seen | r_seen) {
 					//  The player currently sees the R triangle. Therefore his
@@ -646,9 +649,12 @@ void MapPlayersViewPacket::read(FileSystem& fs,
 						                            triangle_immovable_kinds_file_version,
 						                            kCurrentPacketVersionImmovableKinds);
 					}
-					MapObjectData mod = read_unseen_immovable(
+					// We read and ignore the immovable information on the D
+					// triangle. This was done because there were vague plans of
+					// suporting immovables on the triangles instead as on the
+					// nodes.
+					read_unseen_immovable(
 					   egbase, im_kind, triangle_immovables_file, triangle_immovables_file_version);
-					assert(mod.map_object_descr == nullptr);
 				}
 
 				{  //  edges
