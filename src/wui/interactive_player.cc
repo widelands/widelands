@@ -125,75 +125,66 @@ void draw_immovables_for_formerly_visible_field(const FieldsToDraw::Field& field
                                                 const Widelands::Player::Field& player_field,
                                                 const float scale,
                                                 RenderTarget* dst) {
-	if (const Widelands::MapObjectDescr* const map_object_descr =
-	       player_field.map_object_descr[static_cast<int>(Widelands::TriangleIndex::None)]) {
-		if (player_field.constructionsite.becomes) {
-			assert(field.owner != nullptr);
-			const Widelands::ConstructionsiteInformation& csinf = player_field.constructionsite;
-			// draw the partly finished constructionsite
-			uint32_t anim_idx;
+	if (player_field.map_object_descr == nullptr) {
+		return;
+	}
+	if (player_field.constructionsite.becomes) {
+		assert(field.owner != nullptr);
+		const Widelands::ConstructionsiteInformation& csinf = player_field.constructionsite;
+		// draw the partly finished constructionsite
+		uint32_t anim_idx;
+		try {
+			anim_idx = csinf.becomes->get_animation("build");
+		} catch (Widelands::MapObjectDescr::AnimationNonexistent&) {
 			try {
-				anim_idx = csinf.becomes->get_animation("build");
-			} catch (Widelands::MapObjectDescr::AnimationNonexistent&) {
-				try {
-					anim_idx = csinf.becomes->get_animation("unoccupied");
-				} catch (Widelands::MapObjectDescr::AnimationNonexistent) {
-					anim_idx = csinf.becomes->get_animation("idle");
-				}
-			}
-			const Animation& anim = g_gr->animations().get_animation(anim_idx);
-			const size_t nr_frames = anim.nr_frames();
-			uint32_t cur_frame =
-			   csinf.totaltime ? csinf.completedtime * nr_frames / csinf.totaltime : 0;
-			uint32_t tanim = cur_frame * FRAME_LENGTH;
-
-			uint32_t percent = 100 * csinf.completedtime * nr_frames;
-			if (csinf.totaltime) {
-				percent /= csinf.totaltime;
-			}
-			percent -= 100 * cur_frame;
-
-			if (cur_frame) {  // not the first frame
-				// Draw the prev frame
-				dst->blit_animation(field.rendertarget_pixel, scale, anim_idx, tanim - FRAME_LENGTH,
-				                    field.owner->get_playercolor());
-			} else if (csinf.was) {
-				// Is the first frame, but there was another building here before,
-				// get its last build picture and draw it instead.
-				uint32_t a;
-				try {
-					a = csinf.was->get_animation("unoccupied");
-				} catch (Widelands::MapObjectDescr::AnimationNonexistent&) {
-					a = csinf.was->get_animation("idle");
-				}
-				dst->blit_animation(field.rendertarget_pixel, scale, a, tanim - FRAME_LENGTH,
-				                    field.owner->get_playercolor());
-			}
-			dst->blit_animation(field.rendertarget_pixel, scale, anim_idx, tanim,
-			                    field.owner->get_playercolor(), percent);
-		} else if (upcast(const Widelands::BuildingDescr, building, map_object_descr)) {
-			assert(field.owner != nullptr);
-			// this is a building therefore we either draw unoccupied or idle animation
-			uint32_t pic;
-			try {
-				pic = building->get_animation("unoccupied");
-			} catch (Widelands::MapObjectDescr::AnimationNonexistent&) {
-				pic = building->get_animation("idle");
-			}
-			dst->blit_animation(
-			   field.rendertarget_pixel, scale, pic, 0, field.owner->get_playercolor());
-		} else if (map_object_descr->type() == Widelands::MapObjectType::FLAG) {
-			assert(field.owner != nullptr);
-			dst->blit_animation(field.rendertarget_pixel, scale, field.owner->tribe().flag_animation(),
-			                    0, field.owner->get_playercolor());
-		} else if (const uint32_t pic = map_object_descr->main_animation()) {
-			if (field.owner != nullptr) {
-				dst->blit_animation(
-				   field.rendertarget_pixel, scale, pic, 0, field.owner->get_playercolor());
-			} else {
-				dst->blit_animation(field.rendertarget_pixel, scale, pic, 0);
+				anim_idx = csinf.becomes->get_animation("unoccupied");
+			} catch (Widelands::MapObjectDescr::AnimationNonexistent) {
+				anim_idx = csinf.becomes->get_animation("idle");
 			}
 		}
+		const Animation& anim = g_gr->animations().get_animation(anim_idx);
+		const size_t nr_frames = anim.nr_frames();
+		uint32_t cur_frame =
+			csinf.totaltime ? csinf.completedtime * nr_frames / csinf.totaltime : 0;
+		uint32_t tanim = cur_frame * FRAME_LENGTH;
+
+		uint32_t percent = 100 * csinf.completedtime * nr_frames;
+		if (csinf.totaltime) {
+			percent /= csinf.totaltime;
+		}
+		percent -= 100 * cur_frame;
+
+		if (cur_frame) {  // not the first frame
+			// Draw the prev frame
+			dst->blit_animation(field.rendertarget_pixel, scale, anim_idx, tanim - FRAME_LENGTH,
+									  field.owner->get_playercolor());
+		} else if (csinf.was) {
+			// Is the first frame, but there was another building here before,
+			// get its last build picture and draw it instead.
+			uint32_t a;
+			try {
+				a = csinf.was->get_animation("unoccupied");
+			} catch (Widelands::MapObjectDescr::AnimationNonexistent&) {
+				a = csinf.was->get_animation("idle");
+			}
+			dst->blit_animation(field.rendertarget_pixel, scale, a, tanim - FRAME_LENGTH,
+									  field.owner->get_playercolor());
+		}
+		dst->blit_animation(field.rendertarget_pixel, scale, anim_idx, tanim,
+								  field.owner->get_playercolor(), percent);
+	} else if (upcast(const Widelands::BuildingDescr, building, player_field.map_object_descr)) {
+		assert(field.owner != nullptr);
+		// this is a building therefore we either draw unoccupied or idle animation
+		uint32_t pic;
+		try {
+			pic = building->get_animation("unoccupied");
+		} catch (Widelands::MapObjectDescr::AnimationNonexistent&) {
+			pic = building->get_animation("idle");
+		}
+		dst->blit_animation(
+			field.rendertarget_pixel, scale, pic, 0, field.owner->get_playercolor());
+	} else {
+		dst->blit_animation(field.rendertarget_pixel, scale, pic, 0);
 	}
 }
 

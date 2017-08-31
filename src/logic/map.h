@@ -74,16 +74,6 @@ struct NoteFieldTerrainChanged {
 	MapIndex map_index;
 };
 
-/// Send when the resource of a field is changed.
-struct NoteFieldResourceChanged {
-	CAN_BE_SENT_AS_NOTE(NoteId::FieldResourceTypeChanged)
-
-	FCoords fc;
-	DescriptionIndex old_resource;
-	ResourceAmount old_initial_amount;
-	ResourceAmount old_amount;
-};
-
 struct ImmovableFound {
 	BaseImmovable* object;
 	Coords coords;
