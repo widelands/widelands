@@ -43,6 +43,7 @@
 #include "logic/map_objects/tribes/tribes.h"
 #include "logic/map_objects/world/resource_description.h"
 #include "logic/map_objects/world/world.h"
+#include "logic/maptriangleregion.h"
 #include "logic/player.h"
 #include "map_io/map_loader.h"
 #include "map_io/widelands_map_loader.h"
@@ -62,8 +63,6 @@ void load_all_tribes(Widelands::EditorGameBase* egbase, UI::ProgressWindow* load
 	loader_ui->step(_("Loading tribes"));
 	egbase->tribes();
 }
-
-void populate_fsel_nodes(const Coords& position, 
 
 }  // namespace
 
@@ -258,75 +257,6 @@ bool EditorInteractive::handle_mousepress(uint8_t btn, int32_t x, int32_t y) {
 	return InteractiveBase::handle_mousepress(btn, x, y);
 }
 
-// NOCOM(#sirver): what
-	// if (sel_.triangles) {
-		// assert(center.triangle.t == TCoords<>::D || center.triangle.t == TCoords<>::R);
-		// Widelands::MapTriangleRegion<> mr(map, Area<TCoords<>>(center.triangle, sel_.radius));
-		// do
-			// field_overlay_manager_->register_overlay(
-				// mr.location(), sel_.pic, OverlayLevel::kSelection, Vector2i::invalid(), jobid);
-		// while (mr.advance(map));
-	// } else {
-		// Widelands::MapRegion<> mr(map, Area<>(center.node, sel_.radius));
-		// do
-			// field_overlay_manager_->register_overlay(
-				// mr.location(), sel_.pic, OverlayLevel::kSelection, Vector2i::invalid(), jobid);
-		// while (mr.advance(map));
-		// if (upcast(InteractiveGameBase const, igbase, this))
-			// if (upcast(Widelands::ProductionSite, productionsite, map[center.node].get_immovable())) {
-				// if (upcast(InteractivePlayer const, iplayer, igbase)) {
-					// const Widelands::Player& player = iplayer->player();
-					// if (!player.see_all() &&
-						 // (1 >= player.vision(Widelands::Map::get_index(center.node, map.get_width())) ||
-						  // player.is_hostile(*productionsite->get_owner())))
-						// return set_tooltip("");
-				// }
-				// set_tooltip(
-					// productionsite->info_string(Widelands::Building::InfoStringFormat::kTooltip));
-				// return;
-			// }
-	// }
-	// set_tooltip("");
-	// 
-	// 
-	// NOCOM(#sirver): this is the draw code.
-	// // 	{
-			// // Render overlays on the right triangle
-			// overlay_info.clear();
-			// overlay_manager.get_overlays(TCoords<>(field.fcoords, TCoords<>::R), &overlay_info);
-
-			// Vector2f tripos(
-				// (field.rendertarget_pixel.x + rn.rendertarget_pixel.x + brn.rendertarget_pixel.x) / 3.f,
-				// (field.rendertarget_pixel.y + rn.rendertarget_pixel.y + brn.rendertarget_pixel.y) /
-					// 3.f);
-			// for (const auto& overlay : overlay_info) {
-				// dst->blitrect_scale(Rectf(tripos - overlay.hotspot.cast<float>() * zoom,
-												  // overlay.pic->width() * zoom, overlay.pic->height() * zoom),
-										  // overlay.pic,
-										  // Recti(0, 0, overlay.pic->width(), overlay.pic->height()), 1.f,
-										  // BlendMode::UseAlpha);
-			// }
-		// }
-
-		// {
-			// // Render overlays on the D triangle
-			// overlay_info.clear();
-			// overlay_manager.get_overlays(TCoords<>(field.fcoords, TCoords<>::D), &overlay_info);
-
-			// Vector2f tripos(
-				// (field.rendertarget_pixel.x + bln.rendertarget_pixel.x + brn.rendertarget_pixel.x) /
-					// 3.f,
-				// (field.rendertarget_pixel.y + bln.rendertarget_pixel.y + brn.rendertarget_pixel.y) /
-					// 3.f);
-			// for (const auto& overlay : overlay_info) {
-				// dst->blitrect_scale(Rectf(tripos - overlay.hotspot.cast<float>() * zoom,
-												  // overlay.pic->width() * zoom, overlay.pic->height() * zoom),
-										  // overlay.pic,
-										  // Recti(0, 0, overlay.pic->width(), overlay.pic->height()), 1.f,
-										  // BlendMode::UseAlpha);
-			// }
-		// }
-
 void EditorInteractive::draw(RenderTarget& dst) {
 	const auto& ebase = egbase();
 	auto* fields_to_draw = map_view()->draw_terrain(ebase, &dst);
@@ -345,10 +275,21 @@ void EditorInteractive::draw(RenderTarget& dst) {
 		starting_positions[map.get_starting_pos(i)] = i;
 	}
 
-	std::set<Coords> fsel_nodes;
-	if (!set_sel_triangles()) {
-		populate_fsel_nodes(get_sel_pos(), get_sel_radius(), &fsel_nodes);
-	} 
+	// Figure out which fields are currently under the selection.
+	std::set<Widelands::Coords> selected_nodes;
+	std::set<Widelands::TCoords<>> selected_triangles;
+	if (!get_sel_triangles()) {
+		Widelands::MapRegion<> mr(map, Widelands::Area<>(get_sel_pos().node, get_sel_radius()));
+		do {
+			selected_nodes.emplace(mr.location());
+		} while (mr.advance(map));
+	} else {
+		Widelands::MapTriangleRegion<> mr(
+		   map, Widelands::Area<Widelands::TCoords<>>(get_sel_pos().triangle, get_sel_radius()));
+		do {
+			selected_triangles.emplace(mr.location());
+		} while (mr.advance(map));
+	}
 
 	const auto& world = ebase.world();
 	for (size_t idx = 0; idx < fields_to_draw->size(); ++idx) {
@@ -367,11 +308,16 @@ void EditorInteractive::draw(RenderTarget& dst) {
 			}
 		}
 
-		const auto blit_overlay = [&dst, &field, scale](const Image* pic, const Vector2i& hotspot) {
-			dst.blitrect_scale(Rectf(field.rendertarget_pixel - hotspot.cast<float>() * scale,
+		const auto blit = [&dst, &field, scale](
+		   const Image* pic, const Vector2f& position, const Vector2i& hotspot) {
+			dst.blitrect_scale(Rectf(position - hotspot.cast<float>() * scale,
 			                         pic->width() * scale, pic->height() * scale),
 			                   pic, Recti(0, 0, pic->width(), pic->height()), 1.f,
 			                   BlendMode::UseAlpha);
+		};
+		const auto blit_overlay = [&dst, &field, scale, &blit](
+		   const Image* pic, const Vector2i& hotspot) {
+			blit(pic, field.rendertarget_pixel, hotspot);
 		};
 
 		// Draw resource overlay.
@@ -397,6 +343,39 @@ void EditorInteractive::draw(RenderTarget& dst) {
 			assert(player_image != nullptr);
 			constexpr int kStartingPosHotspotY = 55;
 			blit_overlay(player_image, Vector2i(player_image->width() / 2, kStartingPosHotspotY));
+		}
+
+		// Draw selection markers on the field.
+		if(selected_nodes.count(field.fcoords) > 0) {
+			const Image* pic = get_sel_picture();
+			blit_overlay(pic, Vector2i(pic->width() / 2, pic->height() / 2));
+		}
+
+		// Draw selection markers on the triangles.
+		if (field.all_neighbors_valid()) {
+			const FieldsToDraw::Field& rn = fields_to_draw->at(field.rn_index);
+			const FieldsToDraw::Field& brn = fields_to_draw->at(field.brn_index);
+			const FieldsToDraw::Field& bln = fields_to_draw->at(field.bln_index);
+			if (selected_triangles.count(
+			       Widelands::TCoords<>(field.fcoords, Widelands::TriangleIndex::R))) {
+				const Vector2f tripos(
+				   (field.rendertarget_pixel.x + rn.rendertarget_pixel.x + brn.rendertarget_pixel.x) /
+				      3.f,
+				   (field.rendertarget_pixel.y + rn.rendertarget_pixel.y + brn.rendertarget_pixel.y) /
+				      3.f);
+				const Image* pic = get_sel_picture();
+				blit(pic, tripos, Vector2i(pic->width() / 2, pic->height() / 2));
+			}
+			if (selected_triangles.count(
+			       Widelands::TCoords<>(field.fcoords, Widelands::TriangleIndex::D))) {
+				const Vector2f tripos(
+				   (field.rendertarget_pixel.x + bln.rendertarget_pixel.x + brn.rendertarget_pixel.x) /
+				      3.f,
+				   (field.rendertarget_pixel.y + bln.rendertarget_pixel.y + brn.rendertarget_pixel.y) /
+				      3.f);
+				const Image* pic = get_sel_picture();
+				blit(pic, tripos, Vector2i(pic->width() / 2, pic->height() / 2));
+			}
 		}
 	}
 }
