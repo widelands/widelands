@@ -231,9 +231,10 @@ private:
 	struct SelData {
 		SelData(const bool Freeze = false,
 		        const bool Triangles = false,
-		        const Widelands::NodeAndTriangle<>& Pos = Widelands::NodeAndTriangle<>(
-		           Widelands::Coords(0, 0),
-		           Widelands::TCoords<>(Widelands::Coords(0, 0), Widelands::TriangleIndex::D)),
+		        const Widelands::NodeAndTriangle<>& Pos =
+		           Widelands::NodeAndTriangle<>{
+		              Widelands::Coords(0, 0),
+		              Widelands::TCoords<>(Widelands::Coords(0, 0), Widelands::TriangleIndex::D)},
 		        const uint32_t Radius = 0,
 		        const Image* Pic = nullptr,
 		        const FieldOverlayManager::OverlayId Jobid = 0)

@@ -345,7 +345,7 @@ void Map::set_origin(const Coords& new_origin) {
 	// NOTE because of the triangle design, we have to take special care about cases
 	// NOTE where y is changed by an odd number
 	bool yisodd = (new_origin.y % 2) != 0;
-	for (FCoords c(Coords(0, 0)); c.y < height_; ++c.y) {
+	for (Coords c(Coords(0, 0)); c.y < height_; ++c.y) {
 		bool cyisodd = (c.y % 2) != 0;
 		for (c.x = 0; c.x < width_; ++c.x) {
 			Coords temp;

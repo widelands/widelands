@@ -109,22 +109,12 @@ struct FCoords : public Coords {
 	}
 	FCoords(const Coords& nc, Field* const nf) : Coords(nc), field(nf) {
 	}
-
-	/**
-	 * Used in RenderTarget::rendermap where this is first called, then the
-	 * coordinates are normalized and after that field is set.
-	 *
-	 * \note You really want to use \ref Map::get_fcoords instead.
-	 */
-	explicit FCoords(const Coords& nc) : Coords(nc), field(nullptr) {
-	}
-
 	Field* field;
 };
 
 enum class TriangleIndex { D, R, None };
 
-// TODO(sirver): This should not derive from CoordsType. Replace with NodeAndTriangle.
+// TODO(sirver): This should not derive from CoordsType.
 template <typename CoordsType = Coords> struct TCoords : public CoordsType {
 	TCoords() : t() {
 	}
@@ -141,22 +131,10 @@ template <typename CoordsType = Coords> struct TCoords : public CoordsType {
 	TriangleIndex t;
 };
 
+// A pair of a coord and a triangle, used to signify which field or triangle
+// the cursor is closest. The triangle might belong to another field.
 template <typename NodeCoordsType = Coords, typename TriangleCoordsType = Coords>
 struct NodeAndTriangle {
-	NodeAndTriangle() {
-	}
-	NodeAndTriangle(const NodeCoordsType Node, const TCoords<TriangleCoordsType>& Triangle)
-
-	   : node(Node), triangle(Triangle) {
-	}
-
-	bool operator==(const NodeAndTriangle<>& other) const {
-		return node == other.node && triangle == other.triangle;
-	}
-	bool operator!=(const NodeAndTriangle<>& other) const {
-		return !(*this == other);
-	}
-
 	NodeCoordsType node;
 	TCoords<TriangleCoordsType> triangle;
 };

@@ -284,9 +284,9 @@ void InteractivePlayer::think() {
 					//  fieldaction window before entering roadbuilding mode here.
 					fieldaction_.destroy();
 					map_view()->mouse_to_field(flag_to_connect_, MapView::Transition::Jump);
-					set_sel_pos(Widelands::NodeAndTriangle<>(
+					set_sel_pos(Widelands::NodeAndTriangle<>{
 					   flag_to_connect_,
-					   Widelands::TCoords<>(flag_to_connect_, Widelands::TriangleIndex::D)));
+					   Widelands::TCoords<>(flag_to_connect_, Widelands::TriangleIndex::D)});
 					start_build_road(flag_to_connect_, field.get_owned_by());
 				}
 			flag_to_connect_ = Widelands::Coords::null();
