@@ -114,20 +114,23 @@ struct FCoords : public Coords {
 
 enum class TriangleIndex { D, R, None };
 
-// TODO(sirver): This should not derive from CoordsType.
-template <typename CoordsType = Coords> struct TCoords : public CoordsType {
-	TCoords() : t() {
+// This uniquely indexes a single Triangle on the map. A Triangle is
+// indentified by its owning node and the triangle index (down or right). The
+// default constructor puts this in an invalid state (None).
+template <typename CoordsType = Coords> struct TCoords {
+	TCoords() : t(TriangleIndex::None) {
 	}
-	TCoords(const CoordsType C, const TriangleIndex T = TriangleIndex::None) : CoordsType(C), t(T) {
+	TCoords(const CoordsType C, const TriangleIndex T = TriangleIndex::None) : node(C), t(T) {
 	}
 
 	bool operator==(const TCoords& other) const {
-		return CoordsType::operator==(other) && t == other.t;
+		return node == other.node && t == other.t;
 	}
 	bool operator!=(const TCoords& other) const {
-		return CoordsType::operator!=(other) || t != other.t;
+		return !(*this == other);
 	}
 
+	CoordsType node;
 	TriangleIndex t;
 };
 

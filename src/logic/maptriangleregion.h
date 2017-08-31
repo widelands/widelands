@@ -69,8 +69,8 @@ template <> struct MapTriangleRegion<FCoords> {
 	     remaining_in_row_(rowwidth_),
 	     remaining_rows_(area_.radius * 2) {
 		for (uint8_t r = area_.radius; r; --r)
-			map.get_tln(area_, &area_);
-		left_ = area_;
+			map.get_tln(area_.node, &area_.node);
+		left_ = area_.node;
 	}
 
 	const TCoords<FCoords>& location() const {
@@ -83,16 +83,16 @@ template <> struct MapTriangleRegion<FCoords> {
 				area_.t = TriangleIndex::R;
 			else {
 				area_.t = TriangleIndex::D;
-				map.get_rn(area_, &area_);
+				map.get_rn(area_.node, &area_.node);
 			}
 		} else if (area_.radius < --remaining_rows_) {
-			map.get_bln(left_, &area_);
-			left_ = area_;
+			map.get_bln(left_, &area_.node);
+			left_ = area_.node;
 			area_.t = TriangleIndex::D;
 			remaining_in_row_ = rowwidth_ += 2;
 		} else if (remaining_rows_) {
-			map.get_brn(left_, &area_);
-			left_ = area_;
+			map.get_brn(left_, &area_.node);
+			left_ = area_.node;
 			area_.t = TriangleIndex::D;
 			remaining_in_row_ = rowwidth_ -= 2;
 		} else

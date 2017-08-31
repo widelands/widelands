@@ -166,7 +166,7 @@ void InteractiveBase::set_sel_pos(Widelands::NodeAndTriangle<> const center) {
 		Widelands::MapTriangleRegion<> mr(map, Area<TCoords<>>(center.triangle, sel_.radius));
 		do
 			field_overlay_manager_->register_overlay(
-			   mr.location(), sel_.pic, OverlayLevel::kSelection, Vector2i::invalid(), jobid);
+			   mr.location().node, sel_.pic, OverlayLevel::kSelection, Vector2i::invalid(), jobid);
 		while (mr.advance(map));
 	} else {
 		Widelands::MapRegion<> mr(map, Area<>(center.node, sel_.radius));
