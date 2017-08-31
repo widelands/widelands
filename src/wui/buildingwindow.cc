@@ -60,10 +60,9 @@ BuildingWindow::BuildingWindow(InteractiveGameBase& parent,
 	   [this](const Widelands::NoteBuilding& note) { on_building_note(note); });
 }
 
+// NOCOM(#sirver): this crashes when the game is exited while a buiding window is open.
 BuildingWindow::~BuildingWindow() {
-	if (showing_workarea_) {
-		igbase()->mutable_field_overlay_manager()->remove_overlay(building_.get_position());
-	}
+	hide_workarea();
 }
 
 void BuildingWindow::on_building_note(const Widelands::NoteBuilding& note) {
@@ -116,6 +115,7 @@ void BuildingWindow::init(bool avoid_fastclick) {
 // Stop everybody from thinking to avoid segfaults
 void BuildingWindow::die() {
 	is_dying_ = true;
+	hide_workarea();
 	set_thinks(false);
 	vbox_.reset(nullptr);
 	UniqueWindow::die();
@@ -287,13 +287,13 @@ void BuildingWindow::create_capsbuttons(UI::Box* capsbuttons) {
 	}
 
 	if (can_see) {
-		WorkareaInfo wa_info;
+		const WorkareaInfo* wa_info;
 		if (upcast(Widelands::ConstructionSite, csite, &building_)) {
-			wa_info = csite->building().workarea_info();
+			wa_info = &csite->building().workarea_info();
 		} else {
-			wa_info = building_.descr().workarea_info();
+			wa_info = &building_.descr().workarea_info();
 		}
-		if (!wa_info.empty()) {
+		if (!wa_info->empty()) {
 			toggle_workarea_ = new UI::Button(
 			   capsbuttons, "workarea", 0, 0, 34, 34, g_gr->images().get("images/ui_basic/but4.png"),
 			   g_gr->images().get("images/wui/overlays/workarea123.png"), _("Hide work area"));
@@ -429,16 +429,16 @@ void BuildingWindow::show_workarea() {
 	if (showing_workarea_) {
 		return;  // already shown, nothing to be done
 	}
-	WorkareaInfo workarea_info;
+	const WorkareaInfo* workarea_info;
 	if (upcast(Widelands::ConstructionSite, csite, &building_)) {
-		workarea_info = csite->building().workarea_info();
+		workarea_info = &csite->building().workarea_info();
 	} else {
-		workarea_info = building_.descr().workarea_info();
+		workarea_info = &building_.descr().workarea_info();
 	}
-	if (workarea_info.empty()) {
+	if (workarea_info->empty()) {
 		return;
 	}
-	igbase()->show_work_area(workarea_info, building_.get_position());
+	igbase()->show_work_area(*workarea_info, building_.get_position());
 	showing_workarea_ = true;
 
 	configure_workarea_button();
