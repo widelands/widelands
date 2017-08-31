@@ -121,6 +121,8 @@ void InteractiveSpectator::draw_map_view(MapView* given_map_view, RenderTarget* 
 	const uint32_t gametime = gbase.get_gametime();
 
 	const auto text_to_draw = get_text_to_draw();
+	const std::map<Widelands::Coords, const Image*> work_area_overlays =
+	   get_work_area_overlays(gbase.map());
 	for (size_t idx = 0; idx < fields_to_draw->size(); ++idx) {
 		const FieldsToDraw::Field& field = fields_to_draw->at(idx);
 
@@ -142,6 +144,12 @@ void InteractiveSpectator::draw_map_view(MapView* given_map_view, RenderTarget* 
 			                    pic, Recti(0, 0, pic->width(), pic->height()), 1.f,
 			                    BlendMode::UseAlpha);
 		};
+
+		const auto it = work_area_overlays.find(field.fcoords);
+		if (it != work_area_overlays.end()) {
+			const Image* pic = it->second;
+			blit_overlay(pic, Vector2i(pic->width() / 2, pic->height() / 2));
+		}
 
 		// TODO(sirver): Do not use the field_overlay_manager, instead draw the
 		// overlays we are interested in here directly.

@@ -346,7 +346,7 @@ void EditorInteractive::draw(RenderTarget& dst) {
 		}
 
 		// Draw selection markers on the field.
-		if(selected_nodes.count(field.fcoords) > 0) {
+		if (selected_nodes.count(field.fcoords) > 0) {
 			const Image* pic = get_sel_picture();
 			blit_overlay(pic, Vector2i(pic->width() / 2, pic->height() / 2));
 		}

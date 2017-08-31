@@ -53,7 +53,7 @@ BuildingWindow::BuildingWindow(InteractiveGameBase& parent,
      is_dying_(false),
      parent_(&parent),
      building_(b),
-     workarea_overlay_id_(0),
+     showing_workarea_(false),
      avoid_fastclick_(avoid_fastclick),
      expeditionbtn_(nullptr) {
 	buildingnotes_subscriber_ = Notifications::subscribe<Widelands::NoteBuilding>(
@@ -61,8 +61,8 @@ BuildingWindow::BuildingWindow(InteractiveGameBase& parent,
 }
 
 BuildingWindow::~BuildingWindow() {
-	if (workarea_overlay_id_) {
-		igbase()->mutable_field_overlay_manager()->remove_overlay(workarea_overlay_id_);
+	if (showing_workarea_) {
+		igbase()->mutable_field_overlay_manager()->remove_overlay(building_.get_position());
 	}
 }
 
@@ -289,9 +289,9 @@ void BuildingWindow::create_capsbuttons(UI::Box* capsbuttons) {
 	if (can_see) {
 		WorkareaInfo wa_info;
 		if (upcast(Widelands::ConstructionSite, csite, &building_)) {
-			wa_info = csite->building().workarea_info_;
+			wa_info = csite->building().workarea_info();
 		} else {
-			wa_info = building_.descr().workarea_info_;
+			wa_info = building_.descr().workarea_info();
 		}
 		if (!wa_info.empty()) {
 			toggle_workarea_ = new UI::Button(
@@ -426,19 +426,20 @@ void BuildingWindow::act_debug() {
  * Show the building's workarea (if it has one).
  */
 void BuildingWindow::show_workarea() {
-	if (workarea_overlay_id_) {
+	if (showing_workarea_) {
 		return;  // already shown, nothing to be done
 	}
 	WorkareaInfo workarea_info;
 	if (upcast(Widelands::ConstructionSite, csite, &building_)) {
-		workarea_info = csite->building().workarea_info_;
+		workarea_info = csite->building().workarea_info();
 	} else {
-		workarea_info = building_.descr().workarea_info_;
+		workarea_info = building_.descr().workarea_info();
 	}
 	if (workarea_info.empty()) {
 		return;
 	}
-	workarea_overlay_id_ = igbase()->show_work_area(workarea_info, building_.get_position());
+	igbase()->show_work_area(workarea_info, building_.get_position());
+	showing_workarea_ = true;
 
 	configure_workarea_button();
 }
@@ -447,10 +448,9 @@ void BuildingWindow::show_workarea() {
  * Hide the workarea from view.
  */
 void BuildingWindow::hide_workarea() {
-	if (workarea_overlay_id_) {
-		igbase()->hide_work_area(workarea_overlay_id_);
-		workarea_overlay_id_ = 0;
-
+	if (showing_workarea_) {
+		igbase()->hide_work_area(building_.get_position());
+		showing_workarea_ = false;
 		configure_workarea_button();
 	}
 }
@@ -460,7 +460,7 @@ void BuildingWindow::hide_workarea() {
  */
 void BuildingWindow::configure_workarea_button() {
 	if (toggle_workarea_) {
-		if (workarea_overlay_id_) {
+		if (showing_workarea_) {
 			toggle_workarea_->set_tooltip(_("Hide work area"));
 			toggle_workarea_->set_perm_pressed(true);
 		} else {
@@ -471,7 +471,7 @@ void BuildingWindow::configure_workarea_button() {
 }
 
 void BuildingWindow::toggle_workarea() {
-	if (workarea_overlay_id_) {
+	if (showing_workarea_) {
 		hide_workarea();
 	} else {
 		show_workarea();

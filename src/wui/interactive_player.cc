@@ -331,6 +331,7 @@ void InteractivePlayer::draw_map_view(MapView* given_map_view, RenderTarget* dst
 
 	auto* fields_to_draw = given_map_view->draw_terrain(gbase, dst);
 	const auto& roads_preview = road_building_preview();
+	const std::map<Widelands::Coords, const Image*> work_area_overlays = get_work_area_overlays(map);
 
 	for (size_t idx = 0; idx < fields_to_draw->size(); ++idx) {
 		auto* f = fields_to_draw->mutable_field(idx);
@@ -353,9 +354,11 @@ void InteractivePlayer::draw_map_view(MapView* given_map_view, RenderTarget* dst
 		}
 
 		// Add road building overlays if applicable.
-		const auto it = roads_preview.find(f->fcoords);
-		if (it != roads_preview.end()) {
-			f->roads |= it->second;
+		{
+			const auto it = roads_preview.find(f->fcoords);
+			if (it != roads_preview.end()) {
+				f->roads |= it->second;
+			}
 		}
 
 		const float scale = 1.f / given_map_view->view().zoom;
@@ -377,6 +380,14 @@ void InteractivePlayer::draw_map_view(MapView* given_map_view, RenderTarget* dst
 			                    pic, Recti(0, 0, pic->width(), pic->height()), 1.f,
 			                    BlendMode::UseAlpha);
 		};
+
+		// Draw work area previews.
+		{
+			const auto it = work_area_overlays.find(f->fcoords);
+			if (it != work_area_overlays.end()) {
+				blit_overlay(it->second, Vector2i(it->second->width() / 2, it->second->height() / 2));
+			}
+		}
 
 		// TODO(sirver): Do not use the field_overlay_manager, instead draw the
 		// overlays we are interested in here directly.

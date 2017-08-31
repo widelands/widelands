@@ -107,7 +107,7 @@ private:
 	Widelands::PlayerNumber capscache_player_number_;
 	bool caps_setup_;
 
-	FieldOverlayManager::OverlayId workarea_overlay_id_;
+	bool showing_workarea_;
 	bool avoid_fastclick_;
 
 	// For ports only.
