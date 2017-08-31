@@ -720,7 +720,8 @@ void MapPlayersViewPacket::read(FileSystem& fs,
 							                            kCurrentPacketVersionSurveyAmounts);
 						}
 						try {
-							f_player_field.time_triangle_last_surveyed[TCoords<>::D] =
+							f_player_field
+							   .time_triangle_last_surveyed[static_cast<int>(TriangleIndex::D)] =
 							   survey_times_file.unsigned_32();
 						} catch (const FileRead::FileBoundaryExceeded&) {
 							throw GameDataError(
@@ -754,7 +755,8 @@ void MapPlayersViewPacket::read(FileSystem& fs,
 							                            kCurrentPacketVersionSurveyAmounts);
 						}
 						try {
-							f_player_field.time_triangle_last_surveyed[TCoords<>::R] =
+							f_player_field
+							   .time_triangle_last_surveyed[static_cast<int>(TriangleIndex::R)] =
 							   survey_times_file.unsigned_32();
 						} catch (const FileRead::FileBoundaryExceeded&) {
 							throw GameDataError(
@@ -946,7 +948,7 @@ void MapPlayersViewPacket::write(FileSystem& fs, EditorGameBase& egbase, MapObje
 				//  geologic survey
 				if (f_everseen & bl_everseen & br_everseen) {
 					const uint32_t time_last_surveyed =
-					   f_player_field.time_triangle_last_surveyed[TCoords<>::D];
+					   f_player_field.time_triangle_last_surveyed[static_cast<int>(TriangleIndex::D)];
 					const uint8_t has_info = time_last_surveyed != 0xffffffff;
 					surveys_file.unsigned_8(has_info);
 					if (has_info) {
@@ -956,7 +958,7 @@ void MapPlayersViewPacket::write(FileSystem& fs, EditorGameBase& egbase, MapObje
 				}
 				if (f_everseen & br_everseen & r_everseen) {
 					const uint32_t time_last_surveyed =
-					   f_player_field.time_triangle_last_surveyed[TCoords<>::R];
+					   f_player_field.time_triangle_last_surveyed[static_cast<int>(TriangleIndex::R)];
 					const uint8_t has_info = time_last_surveyed != 0xffffffff;
 					surveys_file.unsigned_8(has_info);
 					if (has_info) {

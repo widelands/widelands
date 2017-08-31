@@ -115,7 +115,7 @@ int32_t EditorInfoTool::handle_click_impl(const Widelands::World& world,
 
 	const Widelands::Field& tf = (*map)[center.triangle];
 	const Widelands::TerrainDescription& ter = world.terrain_descr(
-	   center.triangle.t == Widelands::TCoords<>::D ? tf.terrain_d() : tf.terrain_r());
+	   center.triangle.t == Widelands::TriangleIndex::D ? tf.terrain_d() : tf.terrain_r());
 
 	buf +=
 	   "• " + (boost::format(pgettext("terrain_name", "Name: %s")) % ter.descname()).str() + "\n";
