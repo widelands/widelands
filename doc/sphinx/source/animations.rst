@@ -122,7 +122,7 @@ Workers can have both non-directional animations and directional animations. The
    **walkload**
       *Optional*. A directional animation. The worker is walking while carrying something.
 
-Any further animations like e.g. "plant", "harvest", or "breed" will be referenced in the ``programs table``, under the ``animation`` command.
+Any further animations like e.g. "plant", "harvest", or "breed" will be referenced in the :ref:`tribes_worker_programs`, under the ``animation`` command.
 
 For example, a fisher could look like this::
 

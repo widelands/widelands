@@ -7,3 +7,4 @@ World and Tribes
    animations
    autogen_toc_lua_world
    lua_tribes
+   map_object_programs
