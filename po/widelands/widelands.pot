@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-08-24 07:44+0000\n"
+"POT-Creation-Date: 2017-08-30 18:44+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -197,118 +197,119 @@ msgstr ""
 msgid "Loading tribes"
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:98
+#: ../../src/editor/editorinteractive.cc:77
 #: ../../src/editor/ui_menus/main_menu.cc:43
-#: ../../src/wui/game_options_menu.cc:66 ../../src/wui/interactive_player.cc:69
+#: ../../src/wui/game_options_menu.cc:66
+#: ../../src/wui/interactive_player.cc:210
 #: ../../src/wui/interactive_spectator.cc:48
 msgid "Main Menu"
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:102
+#: ../../src/editor/editorinteractive.cc:81
 #: ../../src/editor/ui_menus/tool_menu.cc:45
 msgid "Tools"
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:106
+#: ../../src/editor/editorinteractive.cc:85
 #: ../../src/editor/ui_menus/toolsize_menu.cc:40
 msgid "Tool Size"
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:110
+#: ../../src/editor/editorinteractive.cc:89
 #: ../../src/ui_fsmenu/launch_mpg.cc:144
 msgid "Players"
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:119
-#: ../../src/wui/interactive_player.cc:85
+#: ../../src/editor/editorinteractive.cc:98
+#: ../../src/wui/interactive_player.cc:226
 #: ../../src/wui/interactive_spectator.cc:75
 msgid "Show Building Spaces (on/off)"
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:122
+#: ../../src/editor/editorinteractive.cc:101
 msgid "Show Immovables (on/off)"
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:126
+#: ../../src/editor/editorinteractive.cc:105
 msgid "Show Animals (on/off)"
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:130
+#: ../../src/editor/editorinteractive.cc:109
 msgid "Show Resources (on/off)"
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:137
-#: ../../src/wui/interactive_player.cc:81
+#: ../../src/editor/editorinteractive.cc:116
+#: ../../src/wui/interactive_player.cc:222
 #: ../../src/wui/interactive_spectator.cc:71
 msgid "Minimap"
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:140
-#: ../../src/wui/interactive_player.cc:87
+#: ../../src/editor/editorinteractive.cc:119
+#: ../../src/wui/interactive_player.cc:228
 #: ../../src/wui/interactive_spectator.cc:78
 msgid "Reset zoom"
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:148
+#: ../../src/editor/editorinteractive.cc:127
 msgid "Undo"
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:151
+#: ../../src/editor/editorinteractive.cc:130
 msgid "Redo"
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:156
+#: ../../src/editor/editorinteractive.cc:135
 #: ../../src/wui/buildingwindow.cc:330
 msgid "Help"
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:216
+#: ../../src/editor/editorinteractive.cc:163
 msgid "Unsupported format"
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:217
+#: ../../src/editor/editorinteractive.cc:164
 #, c-format
 msgid ""
 "Widelands could not load the file \"%s\". The file format seems to be "
 "incompatible."
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:230 ../../src/logic/game.cc:215
+#: ../../src/editor/editorinteractive.cc:177 ../../src/logic/game.cc:215
 #: ../../src/logic/game.cc:265
 msgid "Creating players"
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:281
+#: ../../src/editor/editorinteractive.cc:228
 msgid "Unsaved Map"
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:282
+#: ../../src/editor/editorinteractive.cc:229
 msgid "The map has not been saved, do you really want to quit?"
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:607
+#: ../../src/editor/editorinteractive.cc:621
 #: ../../src/editor/ui_menus/main_menu_new_map.cc:144
 msgid "Creating empty map…"
 msgstr ""
 
 #. * TRANSLATORS: Default name for new map
-#: ../../src/editor/editorinteractive.cc:611
+#: ../../src/editor/editorinteractive.cc:625
 #: ../../src/editor/ui_menus/main_menu_new_map.cc:151
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:532
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:133
-#: ../../src/logic/map.h:179 ../../src/wui/mapdata.cc:44
+#: ../../src/logic/map.h:169 ../../src/wui/mapdata.cc:44
 msgid "No Name"
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:614
+#: ../../src/editor/editorinteractive.cc:628
 #: ../../src/editor/ui_menus/main_menu_new_map.cc:152
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:533
-#: ../../src/logic/map.h:180
+#: ../../src/logic/map.h:170
 msgctxt "author_name"
 msgid "Unknown"
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:621
+#: ../../src/editor/editorinteractive.cc:635
 #, c-format
 msgid "Loading map “%s”…"
 msgstr ""
@@ -1001,7 +1002,7 @@ msgid ""
 "anymore, or it's a new version that can't be handled yet."
 msgstr ""
 
-#: ../../src/logic/map.h:181
+#: ../../src/logic/map.h:171
 msgid "No description defined"
 msgstr ""
 
@@ -2034,7 +2035,7 @@ msgstr[1] ""
 msgid "About Widelands"
 msgstr ""
 
-#: ../../src/ui_fsmenu/about.cc:30 ../../src/wui/watchwindow.cc:123
+#: ../../src/ui_fsmenu/about.cc:30 ../../src/wui/watchwindow.cc:126
 msgid "Close"
 msgstr ""
 
@@ -3146,7 +3147,7 @@ msgstr ""
 msgid "Hide work area"
 msgstr ""
 
-#: ../../src/wui/buildingwindow.cc:311 ../../src/wui/fieldaction.cc:371
+#: ../../src/wui/buildingwindow.cc:311 ../../src/wui/fieldaction.cc:370
 #: ../../src/wui/shipwindow.cc:140
 msgid "Show Debug Window"
 msgstr ""
@@ -3221,71 +3222,71 @@ msgstr ""
 msgid "Action"
 msgstr ""
 
-#: ../../src/wui/fieldaction.cc:318 ../../src/wui/fieldaction.cc:375
+#: ../../src/wui/fieldaction.cc:317 ../../src/wui/fieldaction.cc:374
 msgid "Build road"
 msgstr ""
 
-#: ../../src/wui/fieldaction.cc:324
+#: ../../src/wui/fieldaction.cc:323
 msgid "Destroy this flag"
 msgstr ""
 
-#: ../../src/wui/fieldaction.cc:329
+#: ../../src/wui/fieldaction.cc:328
 msgid "Configure economy"
 msgstr ""
 
-#: ../../src/wui/fieldaction.cc:332
+#: ../../src/wui/fieldaction.cc:331
 msgid "Send geologist to explore site"
 msgstr ""
 
-#: ../../src/wui/fieldaction.cc:347
+#: ../../src/wui/fieldaction.cc:346
 msgid "Place a flag"
 msgstr ""
 
-#: ../../src/wui/fieldaction.cc:351
+#: ../../src/wui/fieldaction.cc:350
 msgid "Destroy a road"
 msgstr ""
 
-#: ../../src/wui/fieldaction.cc:362
+#: ../../src/wui/fieldaction.cc:361
 msgid "Watch field in a separate window"
 msgstr ""
 
-#: ../../src/wui/fieldaction.cc:364
+#: ../../src/wui/fieldaction.cc:363
 msgid "Toggle building statistics display"
 msgstr ""
 
-#: ../../src/wui/fieldaction.cc:367
+#: ../../src/wui/fieldaction.cc:366
 msgid "Toggle building label display"
 msgstr ""
 
-#: ../../src/wui/fieldaction.cc:377 ../../src/wui/watchwindow.cc:98
+#: ../../src/wui/fieldaction.cc:376 ../../src/wui/watchwindow.cc:100
 msgid "Watch"
 msgstr ""
 
-#: ../../src/wui/fieldaction.cc:391
+#: ../../src/wui/fieldaction.cc:390
 msgid "Start attack"
 msgstr ""
 
-#: ../../src/wui/fieldaction.cc:397
+#: ../../src/wui/fieldaction.cc:396
 msgid "Attack"
 msgstr ""
 
-#: ../../src/wui/fieldaction.cc:475
+#: ../../src/wui/fieldaction.cc:474
 msgid "Build mines"
 msgstr ""
 
-#: ../../src/wui/fieldaction.cc:488
+#: ../../src/wui/fieldaction.cc:487
 msgid "Build flag"
 msgstr ""
 
-#: ../../src/wui/fieldaction.cc:491
+#: ../../src/wui/fieldaction.cc:490
 msgid "Cancel road"
 msgstr ""
 
-#: ../../src/wui/fieldaction.cc:494
+#: ../../src/wui/fieldaction.cc:493
 msgid "Build roads"
 msgstr ""
 
-#: ../../src/wui/game_chat_menu.cc:52 ../../src/wui/interactive_player.cc:94
+#: ../../src/wui/game_chat_menu.cc:52 ../../src/wui/interactive_player.cc:235
 #: ../../src/wui/interactive_spectator.cc:87
 msgid "Chat"
 msgstr ""
@@ -3494,7 +3495,7 @@ msgid "Del: %s"
 msgstr ""
 
 #: ../../src/wui/game_objectives_menu.cc:42
-#: ../../src/wui/interactive_player.cc:104
+#: ../../src/wui/interactive_player.cc:245
 msgid "Objectives"
 msgstr ""
 
@@ -3682,21 +3683,21 @@ msgstr ""
 msgid "%1$s (%2$s)"
 msgstr ""
 
-#: ../../src/wui/interactive_player.cc:73
+#: ../../src/wui/interactive_player.cc:214
 #: ../../src/wui/interactive_spectator.cc:62
 msgid "Statistics"
 msgstr ""
 
-#: ../../src/wui/interactive_player.cc:108
-#: ../../src/wui/interactive_player.cc:158
+#: ../../src/wui/interactive_player.cc:249
+#: ../../src/wui/interactive_player.cc:301
 msgid "Messages"
 msgstr ""
 
-#: ../../src/wui/interactive_player.cc:111
+#: ../../src/wui/interactive_player.cc:252
 msgid "Tribal Encyclopedia"
 msgstr ""
 
-#: ../../src/wui/interactive_player.cc:163
+#: ../../src/wui/interactive_player.cc:306
 #, c-format
 msgid "%u new message"
 msgid_plural "%u new messages"
@@ -4180,10 +4181,10 @@ msgstr ""
 msgid "Expedition"
 msgstr ""
 
-#: ../../src/wui/watchwindow.cc:105
+#: ../../src/wui/watchwindow.cc:108
 msgid "Follow"
 msgstr ""
 
-#: ../../src/wui/watchwindow.cc:111
+#: ../../src/wui/watchwindow.cc:114
 msgid "Center the main view on this"
 msgstr ""

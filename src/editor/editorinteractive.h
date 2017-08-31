@@ -97,7 +97,7 @@ public:
 	void start() override;
 	void think() override;
 
-	void map_clicked(bool draw = false);
+	void map_clicked(const Widelands::NodeAndTriangle<>& node_and_triangle, bool draw);
 	void set_sel_pos(Widelands::NodeAndTriangle<>) override;
 	void set_sel_radius_and_update_menu(uint32_t);
 	void start_painting();
@@ -107,6 +107,7 @@ public:
 	bool handle_key(bool down, SDL_Keysym) override;
 	bool handle_mousepress(uint8_t btn, int32_t x, int32_t y) override;
 	bool handle_mouserelease(uint8_t btn, int32_t x, int32_t y) override;
+	void draw(RenderTarget&) override;
 
 	void select_tool(EditorTool&, EditorTool::ToolIndex);
 
@@ -149,9 +150,6 @@ private:
 		void const* object;
 	};
 
-	// Registers the overlays for player starting positions.
-	void register_overlays();
-
 	void on_buildhelp_changed(const bool value) override;
 
 	void toggle_resources();
@@ -164,8 +162,6 @@ private:
 	uint32_t realtime_;
 	bool is_painting_;
 
-	std::unique_ptr<Notifications::Subscriber<Widelands::NoteFieldResourceChanged>>
-	   field_resource_changed_subscriber_;
 	UI::UniqueWindow::Registry toolmenu_;
 
 	UI::UniqueWindow::Registry toolsizemenu_;
@@ -188,6 +184,10 @@ private:
 
 	std::unique_ptr<Tools> tools_;
 	std::unique_ptr<EditorHistory> history_;
+
+	bool draw_resources_ = true;
+	bool draw_immovables_ = true;
+	bool draw_bobs_ = true;
 };
 
 #endif  // end of include guard: WL_EDITOR_EDITORINTERACTIVE_H

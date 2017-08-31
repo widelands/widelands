@@ -575,9 +575,12 @@ int LuaMapView::get_is_animating(lua_State* L) {
       :type field: :class:`wl.map.Field`
 */
 int LuaMapView::click(lua_State* L) {
-	get()->map_view()->mouse_to_field(
-	   (*get_user_class<LuaMaps::LuaField>(L, 2))->coords(), MapView::Transition::Jump);
-	get()->map_view()->fieldclicked();
+	const auto field = *get_user_class<LuaMaps::LuaField>(L, 2);
+	get()->map_view()->mouse_to_field(field->coords(), MapView::Transition::Jump);
+
+	Widelands::NodeAndTriangle<> node_and_triangle;
+	node_and_triangle.node = field->coords();
+	get()->map_view()->field_clicked(node_and_triangle);
 	return 0;
 }
 
