@@ -144,8 +144,7 @@ void draw_immovables_for_formerly_visible_field(const FieldsToDraw::Field& field
 		}
 		const Animation& anim = g_gr->animations().get_animation(anim_idx);
 		const size_t nr_frames = anim.nr_frames();
-		uint32_t cur_frame =
-			csinf.totaltime ? csinf.completedtime * nr_frames / csinf.totaltime : 0;
+		uint32_t cur_frame = csinf.totaltime ? csinf.completedtime * nr_frames / csinf.totaltime : 0;
 		uint32_t tanim = cur_frame * FRAME_LENGTH;
 
 		uint32_t percent = 100 * csinf.completedtime * nr_frames;
@@ -157,7 +156,7 @@ void draw_immovables_for_formerly_visible_field(const FieldsToDraw::Field& field
 		if (cur_frame) {  // not the first frame
 			// Draw the prev frame
 			dst->blit_animation(field.rendertarget_pixel, scale, anim_idx, tanim - FRAME_LENGTH,
-									  field.owner->get_playercolor());
+			                    field.owner->get_playercolor());
 		} else if (csinf.was) {
 			// Is the first frame, but there was another building here before,
 			// get its last build picture and draw it instead.
@@ -168,10 +167,10 @@ void draw_immovables_for_formerly_visible_field(const FieldsToDraw::Field& field
 				a = csinf.was->get_animation("idle");
 			}
 			dst->blit_animation(field.rendertarget_pixel, scale, a, tanim - FRAME_LENGTH,
-									  field.owner->get_playercolor());
+			                    field.owner->get_playercolor());
 		}
-		dst->blit_animation(field.rendertarget_pixel, scale, anim_idx, tanim,
-								  field.owner->get_playercolor(), percent);
+		dst->blit_animation(
+		   field.rendertarget_pixel, scale, anim_idx, tanim, field.owner->get_playercolor(), percent);
 	} else if (upcast(const Widelands::BuildingDescr, building, player_field.map_object_descr)) {
 		assert(field.owner != nullptr);
 		// this is a building therefore we either draw unoccupied or idle animation
@@ -181,10 +180,18 @@ void draw_immovables_for_formerly_visible_field(const FieldsToDraw::Field& field
 		} catch (Widelands::MapObjectDescr::AnimationNonexistent&) {
 			pic = building->get_animation("idle");
 		}
-		dst->blit_animation(
-			field.rendertarget_pixel, scale, pic, 0, field.owner->get_playercolor());
-	} else {
-		dst->blit_animation(field.rendertarget_pixel, scale, pic, 0);
+		dst->blit_animation(field.rendertarget_pixel, scale, pic, 0, field.owner->get_playercolor());
+	} else if (player_field.map_object_descr->type() == Widelands::MapObjectType::FLAG) {
+		assert(field.owner != nullptr);
+		dst->blit_animation(field.rendertarget_pixel, scale, field.owner->tribe().flag_animation(), 0,
+		                    field.owner->get_playercolor());
+	} else if (const uint32_t pic = player_field.map_object_descr->main_animation()) {
+		if (field.owner != nullptr) {
+			dst->blit_animation(
+			   field.rendertarget_pixel, scale, pic, 0, field.owner->get_playercolor());
+		} else {
+			dst->blit_animation(field.rendertarget_pixel, scale, pic, 0);
+		}
 	}
 }
 

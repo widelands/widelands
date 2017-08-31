@@ -35,10 +35,6 @@ namespace Widelands {
  * Note that the order in which locations are returned is not guarantueed. (But
  * in fact the triangles are returned row by row from top to bottom and from
  * left to right in each row and I see no reason why that would ever change.)
- *
- * The initial coordinates must refer to a triangle
- * (TriangleIndex::D or TriangleIndex::R). Use MapRegion instead for nodes
- * (TriangleIndex::None).
  */
 template <typename CoordsType = TCoords<>, typename RadiusType = uint16_t>
 struct MapTriangleRegion {
