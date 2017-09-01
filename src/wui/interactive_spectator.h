@@ -48,7 +48,6 @@ struct InteractiveSpectator : public InteractiveGameBase {
 
 private:
 	void exit_btn();
-	int32_t calculate_buildcaps(const Widelands::FCoords& c) override;
 	bool can_see(Widelands::PlayerNumber) const override;
 	bool can_act(Widelands::PlayerNumber) const override;
 	Widelands::PlayerNumber player_number() const override;

@@ -190,9 +190,6 @@ void EditorInteractive::cleanup_for_load() {
 	// TODO(unknown): get rid of cleanup_for_load, it tends to be very messy
 	// Instead, delete and re-create the egbase.
 	egbase().cleanup_for_load();
-
-	// Select a tool that doesn't care about map changes
-	mutable_field_overlay_manager()->register_overlay_callback_function(nullptr);
 }
 
 /// Called just before the editor starts, after postload, init and gfxload.
@@ -593,9 +590,6 @@ void EditorInteractive::select_tool(EditorTool& primary, EditorTool::ToolIndex c
 				toolsize_menu.update(toolsize_menu.value());
 			}
 		}
-		//  A new tool has been selected. Remove all registered overlay callback
-		//  functions.
-		mutable_field_overlay_manager()->register_overlay_callback_function(nullptr);
 		egbase().mutable_map()->recalc_whole_map(egbase().world());
 	}
 	tools_->current_pointer = &primary;

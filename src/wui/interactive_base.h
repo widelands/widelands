@@ -72,6 +72,12 @@ public:
 		std::map<Widelands::Coords, const Image*> steepness_indicators;
 	};
 
+	/// A build help overlay, i.e. small, big, mine, port ...
+	struct BuildhelpOverlay {
+		const Image* pic = nullptr;
+		Vector2i hotspot = Vector2i::zero();
+	};
+
 	// Manages all UniqueWindows.
 	UniqueWindowHandler& unique_windows();
 
@@ -179,9 +185,6 @@ public:
 	// Sets the landmark for the keyboard 'key' to 'point'
 	void set_landmark(size_t key, const MapView::View& view);
 
-	const RoadBuildingOverlays& road_building_overlays() const {
-		return road_building_overlays_;
-	}
 
 	MapView* map_view() {
 		return &map_view_;
@@ -233,6 +236,14 @@ protected:
 	// Returns the current overlays for the work area previews.
 	std::map<Widelands::Coords, const Image*>
 	get_work_area_overlays(const Widelands::Map& map) const;
+
+	// Returns the 'BuildhelpOverlay' for 'caps' or nullptr if there is no help
+	// to be displayed on this field.
+	const BuildhelpOverlay* get_buildhelp_overlay(Widelands::NodeCaps caps) const;
+
+	const RoadBuildingOverlays& road_building_overlays() const {
+		return road_building_overlays_;
+	}
 
 private:
 	int32_t stereo_position(Widelands::Coords position_map);
@@ -299,6 +310,7 @@ private:
 		UI::UniqueWindow::Registry debugconsole_;
 		std::unique_ptr<UniqueWindowHandler> unique_window_handler_;
 		std::vector<const Image*> workarea_pics_;
+		BuildhelpOverlay buildhelp_overlays_[Widelands::Field::Buildhelp_None];
 };
 
 #endif  // end of include guard: WL_WUI_INTERACTIVE_BASE_H
