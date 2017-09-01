@@ -53,6 +53,7 @@ BuildingWindow::BuildingWindow(InteractiveGameBase& parent,
      is_dying_(false),
      parent_(&parent),
      building_(b),
+	  building_position_(b.get_position()),
      showing_workarea_(false),
      avoid_fastclick_(avoid_fastclick),
      expeditionbtn_(nullptr) {
@@ -60,7 +61,6 @@ BuildingWindow::BuildingWindow(InteractiveGameBase& parent,
 	   [this](const Widelands::NoteBuilding& note) { on_building_note(note); });
 }
 
-// NOCOM(#sirver): this crashes when the game is exited while a buiding window is open.
 BuildingWindow::~BuildingWindow() {
 	hide_workarea();
 }
@@ -76,7 +76,7 @@ void BuildingWindow::on_building_note(const Widelands::NoteBuilding& note) {
 			break;
 		// The building is no more
 		case Widelands::NoteBuilding::Action::kStartWarp:
-			igbase()->add_wanted_building_window(building().get_position(), get_pos(), is_minimal());
+			igbase()->add_wanted_building_window(building_position_, get_pos(), is_minimal());
 			FALLS_THROUGH;
 		case Widelands::NoteBuilding::Action::kDeleted:
 			die();
@@ -419,7 +419,7 @@ Callback for debug window
 ===============
 */
 void BuildingWindow::act_debug() {
-	show_field_debug(*igbase(), igbase()->game().map().get_fcoords(building_.get_position()));
+	show_field_debug(*igbase(), igbase()->game().map().get_fcoords(building_position_));
 }
 
 /**
@@ -438,7 +438,7 @@ void BuildingWindow::show_workarea() {
 	if (workarea_info->empty()) {
 		return;
 	}
-	igbase()->show_work_area(*workarea_info, building_.get_position());
+	igbase()->show_work_area(*workarea_info, building_position_);
 	showing_workarea_ = true;
 
 	configure_workarea_button();
@@ -449,7 +449,7 @@ void BuildingWindow::show_workarea() {
  */
 void BuildingWindow::hide_workarea() {
 	if (showing_workarea_) {
-		igbase()->hide_work_area(building_.get_position());
+		igbase()->hide_work_area(building_position_);
 		showing_workarea_ = false;
 		configure_workarea_button();
 	}
@@ -491,7 +491,7 @@ void BuildingWindow::create_input_queue_panel(UI::Box* const box,
  * for the corresponding button.
  */
 void BuildingWindow::clicked_goto() {
-	igbase()->map_view()->scroll_to_field(building().get_position(), MapView::Transition::Smooth);
+	igbase()->map_view()->scroll_to_field(building_position_, MapView::Transition::Smooth);
 }
 
 void BuildingWindow::update_expedition_button(bool expedition_was_canceled) {
