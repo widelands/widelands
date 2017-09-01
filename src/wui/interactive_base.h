@@ -72,8 +72,6 @@ public:
 	Widelands::EditorGameBase& egbase() const {
 		return egbase_;
 	}
-	virtual void reference_player_tribe(Widelands::PlayerNumber, const void* const) {
-	}
 
 	// TODO(sirver): This should be private.
 	bool show_workarea_preview_;
