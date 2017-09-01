@@ -85,3 +85,13 @@ EditorActionArgs EditorSetResourcesTool::format_args_impl(EditorInteractive& par
 	a.set_to = set_to_;
 	return a;
 }
+
+Widelands::NodeCaps resource_tools_nodecaps(const Widelands::FCoords& fcoords,
+                                            const Widelands::EditorGameBase& egbase,
+                                            Widelands::DescriptionIndex resource) {
+	if (egbase.map().is_resource_valid(egbase.world(), fcoords, resource)) {
+		return fcoords.field->nodecaps();
+	}
+	return Widelands::NodeCaps::CAPS_NONE;
+}
+

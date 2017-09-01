@@ -28,17 +28,17 @@
 // global variable to pass data from callback to class
 static int32_t current_player_;
 
-/*
- * static callback function for overlay calculation
- */
-int32_t editor_tool_set_starting_pos_callback(const Widelands::FCoords& c, Widelands::Map& map) {
+namespace  {
+
+Widelands::NodeCaps set_starting_pos_tool_nodecaps(const Widelands::FCoords& c,
+                                                   const Widelands::Map& map) {
 	// Area around already placed players
 	Widelands::PlayerNumber const nr_players = map.get_nrplayers();
 	for (Widelands::PlayerNumber p = 1, last = current_player_ - 1;; ++p) {
 		for (; p <= last; ++p) {
 			if (Widelands::Coords const sp = map.get_starting_pos(p)) {
 				if (map.calc_distance(sp, c) < MIN_PLACE_AROUND_PLAYERS) {
-					return 0;
+					return Widelands::NodeCaps::CAPS_NONE;
 				}
 			}
 		}
@@ -52,8 +52,10 @@ int32_t editor_tool_set_starting_pos_callback(const Widelands::FCoords& c, Widel
 	if ((caps & Widelands::BUILDCAPS_SIZEMASK) == Widelands::BUILDCAPS_BIG)
 		return caps;
 
-	return 0;
+	return Widelands::NodeCaps::CAPS_NONE;
 }
+
+}  // namespace 
 
 EditorSetStartingPosTool::EditorSetStartingPosTool() : EditorTool(*this, *this, false) {
 	current_player_ = 1;
@@ -78,11 +80,18 @@ int32_t EditorSetStartingPosTool::handle_click_impl(const Widelands::World&,
 		}
 
 		//  check if field is valid
-		if (editor_tool_set_starting_pos_callback(map->get_fcoords(center.node), *map)) {
+		if (set_starting_pos_tool_nodecaps(map->get_fcoords(center.node), *map) !=
+		    Widelands::NodeCaps::CAPS_NONE) {
 			map->set_starting_pos(current_player_, center.node);
 		}
 	}
 	return 1;
+}
+
+Widelands::NodeCaps
+EditorSetStartingPosTool::nodecaps_for_buildhelp(const Widelands::FCoords& fcoords,
+                                                 const Widelands::EditorGameBase& egbase) {
+	return set_starting_pos_tool_nodecaps(fcoords, egbase.map());
 }
 
 Widelands::PlayerNumber EditorSetStartingPosTool::get_current_player() const {

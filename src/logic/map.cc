@@ -1771,7 +1771,7 @@ Map::change_terrain(const World& world, TCoords<FCoords> const c, DescriptionInd
 
 bool Map::is_resource_valid(const Widelands::World& world,
                             const Widelands::FCoords& c,
-                            DescriptionIndex curres) {
+                            DescriptionIndex curres) const {
 	if (curres == Widelands::kNoResource)
 		return true;
 

@@ -37,7 +37,6 @@
 #include "ui_basic/unique_window.h"
 #include "wui/chatoverlay.h"
 #include "wui/debugconsole.h"
-#include "wui/field_overlay_manager.h"
 #include "wui/mapview.h"
 #include "wui/minimap.h"
 #include "wui/quicknavigation.h"
@@ -169,13 +168,6 @@ public:
 		log_message(std::string(message));
 	}
 
-	const FieldOverlayManager& field_overlay_manager() const {
-		return *field_overlay_manager_;
-	}
-	FieldOverlayManager* mutable_field_overlay_manager() {
-		return field_overlay_manager_.get();
-	}
-
 	void toggle_minimap();
 	void toggle_buildhelp();
 
@@ -261,19 +253,18 @@ private:
 		              Widelands::Coords(0, 0),
 		              Widelands::TCoords<>(Widelands::Coords(0, 0), Widelands::TriangleIndex::D)},
 		        const uint32_t Radius = 0,
-		        const Image* Pic = nullptr,
-		        const FieldOverlayManager::OverlayId Jobid = 0)
-		   : freeze(Freeze), triangles(Triangles), pos(Pos), radius(Radius), pic(Pic), jobid(Jobid) {
+		        const Image* Pic = nullptr)
+		   : freeze(Freeze), triangles(Triangles), pos(Pos), radius(Radius), pic(Pic) {
 		}
 		bool freeze;     // don't change sel, even if mouse moves
 		bool triangles;  //  otherwise nodes
 		Widelands::NodeAndTriangle<> pos;
 		uint32_t radius;
 		const Image* pic;
-		FieldOverlayManager::OverlayId jobid;
 		} sel_;
 
-		MapView map_view_;
+	   bool buildhelp_;
+	   MapView map_view_;
 		ChatOverlay* chat_overlay_;
 
 		// These get collected by add_toolbar_button
@@ -286,8 +277,6 @@ private:
 		MiniMap* minimap_;
 		MiniMap::Registry minimap_registry_;
 		QuickNavigation quick_navigation_;
-
-		std::unique_ptr<FieldOverlayManager> field_overlay_manager_;
 
 		// The currently enabled work area previews. They are keyed by the
 		// coordinate that the building that shows the work area is positioned.

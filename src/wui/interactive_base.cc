@@ -46,7 +46,6 @@
 #include "logic/widelands_geometry.h"
 #include "profile/profile.h"
 #include "scripting/lua_interface.h"
-#include "wui/field_overlay_manager.h"
 #include "wui/game_chat_menu.h"
 #include "wui/game_debug_ui.h"
 #include "wui/interactive_player.h"
@@ -94,12 +93,12 @@ int caps_to_buildhelp(const Widelands::NodeCaps caps) {
 InteractiveBase::InteractiveBase(EditorGameBase& the_egbase, Section& global_s)
    : UI::Panel(nullptr, 0, 0, g_gr->get_xres(), g_gr->get_yres()),
      show_workarea_preview_(global_s.get_bool("workareapreview", true)),
+	  buildhelp_(false),
      map_view_(this, the_egbase.map(), 0, 0, g_gr->get_xres(), g_gr->get_yres()),
      // Initialize chatoveraly before the toolbar so it is below
      chat_overlay_(new ChatOverlay(this, 10, 25, get_w() / 2, get_h() - 25)),
      toolbar_(this, 0, 0, UI::Box::Horizontal),
      quick_navigation_(&map_view_),
-     field_overlay_manager_(new FieldOverlayManager()),
      egbase_(the_egbase),
 #ifndef NDEBUG  //  not in releases
      display_flags_(dfDebug),
@@ -264,16 +263,16 @@ void InteractiveBase::unset_sel_picture() {
 }
 
 bool InteractiveBase::buildhelp() const {
-	return field_overlay_manager_->buildhelp();
+	return buildhelp_;
 }
 
 void InteractiveBase::show_buildhelp(bool t) {
-	field_overlay_manager_->show_buildhelp(t);
+	buildhelp_ = t;
 	on_buildhelp_changed(t);
 }
 
 void InteractiveBase::toggle_buildhelp() {
-	show_buildhelp(!field_overlay_manager_->buildhelp());
+	show_buildhelp(!buildhelp());
 }
 
 UI::Button* InteractiveBase::add_toolbar_button(const std::string& image_basename,

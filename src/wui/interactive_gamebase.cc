@@ -137,7 +137,6 @@ void InteractiveGameBase::draw_overlay(RenderTarget& dst) {
  * during single/multiplayer/scenario).
  */
 void InteractiveGameBase::postload() {
-	auto* overlay_manager = mutable_field_overlay_manager();
 	show_buildhelp(false);
 	on_buildhelp_changed(buildhelp());
 
