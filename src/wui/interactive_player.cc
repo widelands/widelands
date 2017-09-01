@@ -330,7 +330,7 @@ void InteractivePlayer::draw_map_view(MapView* given_map_view, RenderTarget* dst
 	const uint32_t gametime = gbase.get_gametime();
 
 	auto* fields_to_draw = given_map_view->draw_terrain(gbase, dst);
-	const auto& roads_preview = road_building_preview();
+	const auto& road_building = road_building_overlays();
 	const std::map<Widelands::Coords, const Image*> work_area_overlays = get_work_area_overlays(map);
 
 	for (size_t idx = 0; idx < fields_to_draw->size(); ++idx) {
@@ -355,8 +355,8 @@ void InteractivePlayer::draw_map_view(MapView* given_map_view, RenderTarget* dst
 
 		// Add road building overlays if applicable.
 		{
-			const auto it = roads_preview.find(f->fcoords);
-			if (it != roads_preview.end()) {
+			const auto it = road_building.road_previews.find(f->fcoords);
+			if (it != road_building.road_previews.end()) {
 				f->roads |= it->second;
 			}
 		}
@@ -397,6 +397,14 @@ void InteractivePlayer::draw_map_view(MapView* given_map_view, RenderTarget* dst
 		if (f->fcoords == get_sel_pos().node) {
 			const Image* pic = get_sel_picture();
 			blit_overlay(pic, Vector2i(pic->width() / 2, pic->height() / 2));
+		}
+
+		// Draw road building slopes.
+		{
+			const auto it = road_building.steepness_indicators.find(f->fcoords);
+			if (it != road_building.steepness_indicators.end()) {
+				blit_overlay(it->second, Vector2i(it->second->width() / 2, it->second->height() / 2));
+			}
 		}
 	}
 }
