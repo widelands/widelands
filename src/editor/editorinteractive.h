@@ -100,7 +100,6 @@ public:
 	void map_clicked(const Widelands::NodeAndTriangle<>& node_and_triangle, bool draw);
 	void set_sel_pos(Widelands::NodeAndTriangle<>) override;
 	void set_sel_radius_and_update_menu(uint32_t);
-	void start_painting();
 	void stop_painting();
 
 	//  Handle UI elements.
