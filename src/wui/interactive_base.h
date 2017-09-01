@@ -72,8 +72,6 @@ public:
 	Widelands::EditorGameBase& egbase() const {
 		return egbase_;
 	}
-	virtual void reference_player_tribe(Widelands::PlayerNumber, const void* const) {
-	}
 
 	// TODO(sirver): This should be private.
 	bool show_workarea_preview_;
@@ -233,7 +231,7 @@ private:
 		        const bool Triangles = false,
 		        const Widelands::NodeAndTriangle<>& Pos = Widelands::NodeAndTriangle<>(
 		           Widelands::Coords(0, 0),
-		           Widelands::TCoords<>(Widelands::Coords(0, 0), Widelands::TCoords<>::D)),
+		           Widelands::TCoords<>(Widelands::Coords(0, 0), Widelands::TriangleIndex::D)),
 		        const uint32_t Radius = 0,
 		        const Image* Pic = nullptr,
 		        const FieldOverlayManager::OverlayId Jobid = 0)

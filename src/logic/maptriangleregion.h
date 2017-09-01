@@ -37,8 +37,8 @@ namespace Widelands {
  * left to right in each row and I see no reason why that would ever change.)
  *
  * The initial coordinates must refer to a triangle
- * (TCoords<>::D or TCoords<>::R). Use MapRegion instead for nodes
- * (TCoords<>::None).
+ * (TriangleIndex::D or TriangleIndex::R). Use MapRegion instead for nodes
+ * (TriangleIndex::None).
  */
 template <typename CoordsType = TCoords<>, typename RadiusType = uint16_t>
 struct MapTriangleRegion {
@@ -64,7 +64,7 @@ struct MapTriangleRegion {
 };
 template <> struct MapTriangleRegion<FCoords> {
 	MapTriangleRegion(const Map& map, const Area<FCoords>& area)
-	   : area_(TCoords<FCoords>(area, TCoords<FCoords>::D), area.radius + 1),
+	   : area_(TCoords<FCoords>(area, TriangleIndex::D), area.radius + 1),
 	     rowwidth_(area_.radius * 2 + 1),
 	     remaining_in_row_(rowwidth_),
 	     remaining_rows_(area_.radius * 2) {
@@ -79,21 +79,21 @@ template <> struct MapTriangleRegion<FCoords> {
 
 	bool advance(const Map& map) {
 		if (--remaining_in_row_) {
-			if (area_.t == TCoords<FCoords>::D)
-				area_.t = TCoords<FCoords>::R;
+			if (area_.t == TriangleIndex::D)
+				area_.t = TriangleIndex::R;
 			else {
-				area_.t = TCoords<FCoords>::D;
+				area_.t = TriangleIndex::D;
 				map.get_rn(area_, &area_);
 			}
 		} else if (area_.radius < --remaining_rows_) {
 			map.get_bln(left_, &area_);
 			left_ = area_;
-			area_.t = TCoords<FCoords>::D;
+			area_.t = TriangleIndex::D;
 			remaining_in_row_ = rowwidth_ += 2;
 		} else if (remaining_rows_) {
 			map.get_brn(left_, &area_);
 			left_ = area_;
-			area_.t = TCoords<FCoords>::D;
+			area_.t = TriangleIndex::D;
 			remaining_in_row_ = rowwidth_ -= 2;
 		} else
 			return false;

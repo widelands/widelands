@@ -33,7 +33,6 @@
 #include "logic/player.h"
 #include "map_io/map_object_loader.h"
 #include "map_io/map_object_saver.h"
-#include "wui/interactive_base.h"
 
 namespace Widelands {
 
@@ -101,9 +100,6 @@ void MapBuildingPacket::read(FileSystem& fs,
 
 							mol.register_object<Building>(serial, *building);
 							read_priorities(*building, fr);
-
-							//  Reference the players tribe if in editor.
-							ibase.reference_player_tribe(p, &tribe);
 						} else
 							throw GameDataError("player %u does not exist", p);
 					}
