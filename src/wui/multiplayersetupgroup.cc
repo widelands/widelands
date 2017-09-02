@@ -132,7 +132,7 @@ struct MultiPlayerClientGroup : public UI::Box {
 		for (PlayerSlot slot = 0; slot < settings.players.size(); ++slot) {
 			if (settings.players.at(slot).state == PlayerSettings::State::kHuman ||
 			    settings.players.at(slot).state == PlayerSettings::State::kOpen) {
-				slot_dropdown_.add((boost::format(_("Player %u")) % cast_unsigned(slot + 1)).str(),
+				slot_dropdown_.add((boost::format(_("Player %u")) % static_cast<unsigned int>(slot + 1)).str(),
 				                   slot, playercolor_image(slot, "images/players/genstats_player.png"),
 				                   slot == user_setting.position);
 			}
@@ -186,7 +186,7 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 	            h,
 	            g_gr->images().get("images/ui_basic/but1.png"),
 	            playercolor_image(id, "images/players/player_position_menu.png"),
-	            (boost::format(_("Player %u")) % cast_unsigned(id_ + 1)).str(),
+	            (boost::format(_("Player %u")) % static_cast<unsigned int>(id_ + 1)).str(),
 	            UI::Button::Style::kFlat),
 	     type_dropdown_(this, 0, 0, 50, 200, h, _("Type"), UI::DropdownType::kPictorial),
 	     tribes_dropdown_(this, 0, 0, 50, 200, h, _("Tribe"), UI::DropdownType::kPictorial),
@@ -409,9 +409,9 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 					const std::string player_name =
 					   /** TRANSLATORS: This is an option in multiplayer setup for sharing
 					      another player's starting position. */
-					   (boost::format(_("Shared in Player %u")) % cast_unsigned(i + 1)).str();
+					   (boost::format(_("Shared in Player %u")) % static_cast<unsigned int>(i + 1)).str();
 					tribes_dropdown_.add(player_name,
-					                     boost::lexical_cast<std::string>(cast_unsigned(i + 1)),
+					                     boost::lexical_cast<std::string>(static_cast<unsigned int>(i + 1)),
 					                     player_image, (i + 1) == player_setting.shared_in, player_name);
 				}
 			}
@@ -517,7 +517,7 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 #endif
 		for (Widelands::TeamNumber t = 1; t <= settings.players.size() / 2; ++t) {
 			assert(t < no_of_team_colors);
-			team_dropdown_.add((boost::format(_("Team %d")) % cast_unsigned(t)).str(), t,
+			team_dropdown_.add((boost::format(_("Team %d")) % static_cast<unsigned int>(t)).str(), t,
 			                   playercolor_image(kTeamColors[t], "images/players/team.png"));
 		}
 		team_dropdown_.select(player_setting.team);

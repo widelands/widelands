@@ -104,10 +104,6 @@
 // the side-effect upcast has of creating a new identifier which won't be used.
 #define is_a(type, source) (dynamic_cast<const type*>(source) != nullptr)
 
-// For printf placeholders, we need to cast int8_t/uint8_t to avoid confusion with char
-#define cast_unsigned(u) static_cast<unsigned int>(u)
-#define cast_signed(i) static_cast<int>(i)
-
 // consistency check for printf arguments
 #ifdef __GNUC__
 #ifdef _WIN32

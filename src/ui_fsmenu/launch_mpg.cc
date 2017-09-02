@@ -476,7 +476,7 @@ void FullscreenMenuLaunchMPG::load_previous_playerdata() {
 	std::string player_save_ai[kMaxPlayers];
 
 	for (uint8_t i = 1; i <= nr_players_; ++i) {
-		Section* s = prof.get_section((boost::format("player_%u") % cast_unsigned(i)).str());
+		Section* s = prof.get_section((boost::format("player_%u") % static_cast<unsigned int>(i)).str());
 		if (s == nullptr) {
 			// Due to asynchronous notifications, the client can crash on savegame change when number
 			// of players goes down. So, we abort if the section does not exist to prevent crashes.
@@ -571,7 +571,7 @@ void FullscreenMenuLaunchMPG::load_map_info() {
 	            "\n";
 	infotext +=
 	   std::string("• ") +
-	   (boost::format(ngettext("%u Player", "%u Players", nr_players_)) % cast_unsigned(nr_players_))
+	   (boost::format(ngettext("%u Player", "%u Players", nr_players_)) % static_cast<unsigned int>(nr_players_))
 	      .str() +
 	   "\n";
 	if (settings_->settings().scenario)
