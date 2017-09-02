@@ -624,6 +624,8 @@ void MapPlayersViewPacket::read(FileSystem& fs,
 					// triangle. This was done because there were vague plans of
 					// suporting immovables on the triangles instead as on the
 					// nodes.
+					// TODO(sirver): Remove this logic the next time we break
+					// savegame compatibility.
 					read_unseen_immovable(
 					   egbase, im_kind, triangle_immovables_file, triangle_immovables_file_version);
 				}
