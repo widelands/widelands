@@ -452,13 +452,12 @@ bool MapView::handle_mousepress(uint8_t const btn, int32_t const x, int32_t cons
 		grab_mouse(true);
 		WLApplication::get()->set_mouse_lock(true);
 	}
-	return true;
+	return false;
 }
 
 bool MapView::handle_mouserelease(const uint8_t btn, int32_t, int32_t) {
 	if (btn == SDL_BUTTON_RIGHT && dragging_) {
 		stop_dragging();
-		return true;
 	}
 	return false;
 }
@@ -477,7 +476,7 @@ bool MapView::handle_mousemove(
 	}
 
 	track_sel(Vector2i(x, y));
-	return true;
+	return false;
 }
 
 bool MapView::handle_mousewheel(uint32_t which, int32_t /* x */, int32_t y) {

@@ -162,7 +162,12 @@ void InteractiveBase::set_sel_pos(Widelands::NodeAndTriangle<> const center) {
 
 	//  register sel overlay position
 	if (sel_.triangles) {
+<<<<<<< TREE
 		assert(center.triangle.t == Widelands::TriangleIndex::D || center.triangle.t == Widelands::TriangleIndex::R);
+=======
+		assert(center.triangle.t == Widelands::TriangleIndex::D ||
+		       center.triangle.t == Widelands::TriangleIndex::R);
+>>>>>>> MERGE-SOURCE
 		Widelands::MapTriangleRegion<> mr(map, Area<TCoords<>>(center.triangle, sel_.radius));
 		do
 			field_overlay_manager_->register_overlay(
@@ -345,23 +350,6 @@ void InteractiveBase::think() {
 	egbase().think();  // Call game logic here. The game advances.
 
 	UI::Panel::think();
-}
-
-bool InteractiveBase::handle_mousepress(uint8_t btn, int32_t x, int32_t y) {
-	return map_view_.handle_mousepress(btn, x, y);
-}
-
-bool InteractiveBase::handle_mouserelease(uint8_t btn, int32_t x, int32_t y) {
-	return map_view_.handle_mouserelease(btn, x, y);
-}
-
-bool InteractiveBase::handle_mousemove(
-   uint8_t state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff) {
-	return map_view_.handle_mousemove(state, x, y, xdiff, ydiff);
-}
-
-bool InteractiveBase::handle_mousewheel(uint32_t which, int32_t x, int32_t y) {
-	return map_view_.handle_mousewheel(which, x, y);
 }
 
 /*

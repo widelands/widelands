@@ -1,16 +1,9 @@
-.. _workers:
-
 Workers
 =======
 
-Workers are defined in their ``init.lua`` file. They also have a corresponding
-``helptexts.lua`` file that contains their help text.
-Worker files are placed in ``data/tribes/workers/<tribe_name>/<worker_name>/``.
+Workers are created in a warehouse or recruited by a building. Most workers will work in buildings, while special worker types will act as carriers or soldiers.
 
-Types of Workers
-----------------
-
-In addition to the basic worker type, Widelands knows about the following sub types:
+Widelands knows about the following worker types:
 
 .. toctree::
    :maxdepth: 3
@@ -19,11 +12,10 @@ REPLACE_ME
 
 .. _lua_tribes_workers_common:
 
-
 Common Worker Properties
 ------------------------
 
-Workers are defined with Lua functions called ``new_worker_type{table}``. The contents of ``table`` depend on the type of worker that you are defining. The common properties shared by all workers are:
+Workers are defined with Lua functions called ``new_<worker_type>_type{table}``. The contents of ``table`` depend on the type of worker that you are defining. The common properties shared by all workers are:
 
   **msgctxt**: The context that Gettext will use to disambiguate the
   translations for strings in this table.
@@ -69,12 +61,11 @@ Workers are defined with Lua functions called ``new_worker_type{table}``. The co
        worker programs. The "idle" and "walk" animations are mandatory.
 
   **programs**:
-      *Optional*. If the worker leaves the building to do his work, the worker
-      programs that define which type of space or resource the worker has to find
+      *Optional*. If the worker leaves the building to do his work, the :ref:`tribes_worker_programs` that define which type of space or resource the worker has to find
       on the map in order to do his work, and what that work is, including any
       animations and sounds played.
 
-TODO(GunChleoc): create Worker Program Reference
+.. _lua_tribes_workers_helptexts:
 
 Help Texts
 ----------
