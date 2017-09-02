@@ -244,14 +244,14 @@ void EditorInteractive::map_clicked(const Widelands::NodeAndTriangle<>& node_and
 
 bool EditorInteractive::handle_mouserelease(uint8_t btn, int32_t x, int32_t y) {
 	if (btn == SDL_BUTTON_LEFT) {
-		stop_painting();
+		is_painting_ = false;
 	}
 	return InteractiveBase::handle_mouserelease(btn, x, y);
 }
 
 bool EditorInteractive::handle_mousepress(uint8_t btn, int32_t x, int32_t y) {
 	if (btn == SDL_BUTTON_LEFT) {
-		start_painting();
+		is_painting_ = true;
 	}
 	return InteractiveBase::handle_mousepress(btn, x, y);
 }
@@ -346,10 +346,6 @@ void EditorInteractive::set_sel_radius_and_update_menu(uint32_t const val) {
 	} else {
 		set_sel_radius(val);
 	}
-}
-
-void EditorInteractive::start_painting() {
-	is_painting_ = true;
 }
 
 void EditorInteractive::stop_painting() {
