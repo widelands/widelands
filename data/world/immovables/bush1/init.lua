@@ -49,7 +49,9 @@ dirname = path.dirname(__file__)
 --            editor_category = "trees_deciduous",
 --
 --    **size**
---        *Optional*. The size of the immovable. Defaults to ``none``. Possible values
+--        *Optional*. The size of the immovable. Defaults to ``none`` -
+--        note that immovables with size ``none`` will be removed when
+--        their space is needed for a road. Possible values
 --        are ``none``, ``small``, ``medium``, and ``big``, e.g.::
 --
 --            size = "small",

@@ -70,6 +70,11 @@ pics_dir = path.dirname(__file__) .. "pics/"
 --
 --           is = "arable",
 --
+--        *Note: There is currently some interdependency between ``is`` and
+--        ``valid_resources``, so not all combinations are possible. See*
+--        `Bug 1505345 <https://bugs.launchpad.net/widelands/+bug/1505345>`_
+--        *for more information.*
+--
 --    **tooltips**
 --        *Optional*. Additional custom tooltip entries, e.g.::
 --
@@ -84,9 +89,15 @@ pics_dir = path.dirname(__file__) .. "pics/"
 --
 --            valid_resources = {"water"},
 --
+--        *Note: There is currently some interdependency between ``is`` and
+--        ``valid_resources``, so not all combinations are possible. See*
+--        `Bug #1505345 <https://bugs.launchpad.net/widelands/+bug/1505345/>`_
+--        *for more information.*
+--
 --    **default_resource**
---        *Mandatory*. A resource type that can always be found on this terrain,
---        unless overwritten by the map maker via the editor. Use the empty string
+--        *Mandatory*. A resource type that can always be found on this terrain when
+--        a new game is started, unless the map maker places some resources there via
+--        the editor. Use the empty string
 --        (``""``) if you want no default resource. Example::
 --
 --            default_resource = "water",

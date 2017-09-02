@@ -5,8 +5,9 @@
 -- World initialization.
 -- All world entities are loaded via this file.
 --
--- This file also defines the editor categories for world elements so that they
--- can be added to the editor tools. The available element types are ``terrain``,
+-- This file also defines the editor categories for world elements like terrains or
+-- immovables so that they will be added to their respective editor tools (Place terrain,
+-- Place immovable etc.). The available element types are ``terrain``,
 -- ``immovable``, and ``critter``. Editor categories are defined by:
 --
 -- .. function:: new_editor_<element_type>_category{table}
@@ -62,6 +63,7 @@ print_loading_message("┗━ took", function()
 --
 --    :arg table: This table contains all the data that the game engine will
 --       add to this editor category. See above.
+
       world:new_editor_terrain_category{
          name = "summer",
          descname = _ "Summer",
@@ -99,6 +101,7 @@ print_loading_message("┗━ took", function()
 --
 --    :arg table: This table contains all the data that the game engine will
 --       add to this editor category. See above.
+
       world:new_editor_immovable_category{
          name = "miscellaneous",
          descname = _ "Miscellaneous",
@@ -308,6 +311,7 @@ print_loading_message("┗━ took", function()
 --
 --    :arg table: This table contains all the data that the game engine will
 --       add to this editor category. See above.
+
       world:new_editor_critter_category {
          name = "critters_herbivores",
          -- TRANSLATORS: A category in the editor for placing animals on the map.
