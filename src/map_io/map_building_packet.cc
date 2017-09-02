@@ -55,7 +55,6 @@ void MapBuildingPacket::read(FileSystem& fs,
 	} catch (...) {
 		return;
 	}
-	InteractiveBase& ibase = *egbase.get_ibase();
 	try {
 		uint16_t const packet_version = fr.unsigned_16();
 		if (packet_version == kCurrentPacketVersion) {
