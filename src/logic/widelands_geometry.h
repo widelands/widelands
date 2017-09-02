@@ -114,8 +114,8 @@ struct FCoords : public Coords {
 
 enum class TriangleIndex { D, R };
 
-// This uniquely indexes a single Triangle on the map. A Triangle is
-// indentified by its owning node and the triangle index (down or right).
+// This uniquely indexes a single Triangle on the map. A Triangle is identified
+// by its owning node and the triangle index (down or right).
 template <typename CoordsType = Coords> struct TCoords {
 	TCoords(const CoordsType C, const TriangleIndex T) : node(C), t(T) {
 	}
@@ -131,8 +131,9 @@ template <typename CoordsType = Coords> struct TCoords {
 	TriangleIndex t;
 };
 
-// A pair of a coord and a triangle, used to signify which field or triangle
-// the cursor is closest. The triangle might belong to another field.
+// A pair of a coord and a triangle, used to signify which field and which
+// triangle the cursor is closest to. The triangle might belong to another
+// field.
 template <typename NodeCoordsType = Coords, typename TriangleCoordsType = Coords>
 struct NodeAndTriangle {
 	NodeCoordsType node;
