@@ -122,13 +122,13 @@ struct FCoords : public Coords {
 	Field* field;
 };
 
+enum class TriangleIndex { D, R, None };
+
 // TODO(sirver): This should not derive from CoordsType. Replace with NodeAndTriangle.
 template <typename CoordsType = Coords> struct TCoords : public CoordsType {
-	enum TriangleIndex { D, R, None };
-
 	TCoords() : t() {
 	}
-	TCoords(const CoordsType C, const TriangleIndex T = None) : CoordsType(C), t(T) {
+	TCoords(const CoordsType C, const TriangleIndex T = TriangleIndex::None) : CoordsType(C), t(T) {
 	}
 
 	bool operator==(const TCoords& other) const {

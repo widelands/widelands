@@ -63,27 +63,6 @@ void load_all_tribes(Widelands::EditorGameBase* egbase, UI::ProgressWindow* load
 	egbase->tribes();
 }
 
-// Updates the resources overlays after a field has changed.
-void update_resource_overlay(const Widelands::NoteFieldResourceChanged& note,
-                             const Widelands::World& world,
-                             FieldOverlayManager* field_overlay_manager) {
-	//  Ok, we're doing something. First remove the current overlays.
-	if (note.old_resource != Widelands::kNoResource) {
-		const std::string str = world.get_resource(note.old_resource)->editor_image(note.old_amount);
-		const Image* pic = g_gr->images().get(str);
-		field_overlay_manager->remove_overlay(note.fc, pic);
-	}
-
-	const auto amount = note.fc.field->get_resources_amount();
-	const auto resource_type = note.fc.field->get_resources();
-	if (amount > 0 && resource_type != Widelands::kNoResource) {
-		const std::string str =
-		   world.get_resource(note.fc.field->get_resources())->editor_image(amount);
-		const Image* pic = g_gr->images().get(str);
-		field_overlay_manager->register_overlay(note.fc, pic, OverlayLevel::kResource);
-	}
-}
-
 }  // namespace
 
 EditorInteractive::EditorInteractive(Widelands::EditorGameBase& e)
@@ -168,41 +147,7 @@ EditorInteractive::EditorInteractive(Widelands::EditorGameBase& e)
 		map_clicked(node_and_triangle, false);
 	});
 
-	// Subscribe to changes of the resource type on a field..
-	field_resource_changed_subscriber_ =
-	   Notifications::subscribe<Widelands::NoteFieldResourceChanged>(
-	      [this](const Widelands::NoteFieldResourceChanged& note) {
-		      update_resource_overlay(note, egbase().world(), mutable_field_overlay_manager());
-		   });
-
 	minimap_registry().minimap_type = MiniMapType::kStaticMap;
-}
-
-void EditorInteractive::register_overlays() {
-	Widelands::Map* map = egbase().mutable_map();
-
-	//  Starting locations
-	Widelands::PlayerNumber const nr_players = map->get_nrplayers();
-	assert(nr_players <= kMaxPlayers);
-	iterate_player_numbers(p, nr_players) {
-		if (Widelands::Coords const sp = map->get_starting_pos(p)) {
-			tools_->set_starting_pos.set_starting_pos(*this, p, sp, map);
-		}
-	}
-
-	//  Resources: we do not calculate default resources, therefore we do not
-	//  expect to meet them here.
-	Widelands::Extent const extent = map->extent();
-	iterate_Map_FCoords(*map, extent, fc) {
-		if (uint8_t const amount = fc.field->get_resources_amount()) {
-			const std::string& immname =
-			   egbase().world().get_resource(fc.field->get_resources())->editor_image(amount);
-			if (immname.size()) {
-				mutable_field_overlay_manager()->register_overlay(
-				   fc, g_gr->images().get(immname), OverlayLevel::kResource);
-			}
-		}
-	}
 }
 
 void EditorInteractive::load(const std::string& filename) {
@@ -299,14 +244,14 @@ void EditorInteractive::map_clicked(const Widelands::NodeAndTriangle<>& node_and
 
 bool EditorInteractive::handle_mouserelease(uint8_t btn, int32_t x, int32_t y) {
 	if (btn == SDL_BUTTON_LEFT) {
-		stop_painting();
+		is_painting_ = false;
 	}
 	return InteractiveBase::handle_mouserelease(btn, x, y);
 }
 
 bool EditorInteractive::handle_mousepress(uint8_t btn, int32_t x, int32_t y) {
 	if (btn == SDL_BUTTON_LEFT) {
-		start_painting();
+		is_painting_ = true;
 	}
 	return InteractiveBase::handle_mousepress(btn, x, y);
 }
@@ -318,6 +263,18 @@ void EditorInteractive::draw(RenderTarget& dst) {
 	const float scale = 1.f / map_view()->view().zoom;
 	const uint32_t gametime = ebase.get_gametime();
 
+	// The map provides a mapping from player number to Coords, while we require
+	// the inverse here. We construct this, but this is done on every frame and
+	// therefore potentially expensive - though it never showed up in any of my
+	// profiles. We could change the Map should this become a bottleneck, since
+	// plrnum -> coords is needed less often.
+	const auto& map = ebase.map();
+	std::map<Widelands::Coords, int> starting_positions;
+	for (int i = 1; i <= map.get_nrplayers(); ++i) {
+		starting_positions[map.get_starting_pos(i)] = i;
+	}
+
+	const auto& world = ebase.world();
 	for (size_t idx = 0; idx < fields_to_draw->size(); ++idx) {
 		const FieldsToDraw::Field& field = fields_to_draw->at(idx);
 		if (draw_immovables_) {
@@ -334,15 +291,37 @@ void EditorInteractive::draw(RenderTarget& dst) {
 			}
 		}
 
+		const auto blit_overlay = [&dst, &field, scale](const Image* pic, const Vector2i& hotspot) {
+			dst.blitrect_scale(Rectf(field.rendertarget_pixel - hotspot.cast<float>() * scale,
+			                         pic->width() * scale, pic->height() * scale),
+			                   pic, Recti(0, 0, pic->width(), pic->height()), 1.f,
+			                   BlendMode::UseAlpha);
+		};
+
+		// Draw resource overlay.
+		uint8_t const amount = field.fcoords.field->get_resources_amount();
+		if (draw_resources_ && amount > 0) {
+			const std::string& immname =
+			   world.get_resource(field.fcoords.field->get_resources())->editor_image(amount);
+			if (!immname.empty()) {
+				const auto* pic = g_gr->images().get(immname);
+				blit_overlay(pic, Vector2i(pic->width() / 2, pic->height() / 2));
+			}
+		}
+
 		// TODO(sirver): Do not use the field_overlay_manager, instead draw the
 		// overlays we are interested in here directly.
-		field_overlay_manager().foreach_overlay(
-		   field.fcoords, [&dst, &field, scale](const Image* pic, const Vector2i& hotspot) {
-			   dst.blitrect_scale(Rectf(field.rendertarget_pixel - hotspot.cast<float>() * scale,
-			                            pic->width() * scale, pic->height() * scale),
-			                      pic, Recti(0, 0, pic->width(), pic->height()), 1.f,
-			                      BlendMode::UseAlpha);
-			});
+		field_overlay_manager().foreach_overlay(field.fcoords, blit_overlay);
+
+		// Draw the player starting position overlays.
+		const auto it = starting_positions.find(field.fcoords);
+		if (it != starting_positions.end()) {
+			const Image* player_image =
+			   playercolor_image(it->second - 1, "images/players/player_position.png");
+			assert(player_image != nullptr);
+			constexpr int kStartingPosHotspotY = 55;
+			blit_overlay(player_image, Vector2i(player_image->width() / 2, kStartingPosHotspotY));
+		}
 	}
 }
 
@@ -369,10 +348,6 @@ void EditorInteractive::set_sel_radius_and_update_menu(uint32_t const val) {
 	}
 }
 
-void EditorInteractive::start_painting() {
-	is_painting_ = true;
-}
-
 void EditorInteractive::stop_painting() {
 	is_painting_ = false;
 }
@@ -382,10 +357,8 @@ void EditorInteractive::on_buildhelp_changed(const bool value) {
 }
 
 void EditorInteractive::toggle_resources() {
-	auto* overlay_manager = mutable_field_overlay_manager();
-	const bool value = !overlay_manager->is_enabled(OverlayLevel::kResource);
-	overlay_manager->set_enabled(OverlayLevel::kResource, value);
-	toggle_resources_->set_perm_pressed(value);
+	draw_resources_ = !draw_resources_;
+	toggle_resources_->set_perm_pressed(draw_resources_);
 }
 
 void EditorInteractive::toggle_immovables() {
@@ -577,58 +550,6 @@ void EditorInteractive::select_tool(EditorTool& primary, EditorTool::ToolIndex c
 	set_sel_triangles(primary.operates_on_triangles());
 }
 
-/**
- * Reference functions
- *
- *  data is a pointer to a tribe (for buildings)
- */
-void EditorInteractive::reference_player_tribe(Widelands::PlayerNumber player,
-                                               void const* const data) {
-	assert(0 < player);
-	assert(player <= egbase().map().get_nrplayers());
-
-	PlayerReferences r;
-	r.player = player;
-	r.object = data;
-
-	player_tribe_references_.push_back(r);
-}
-
-/// Unreference !once!, if referenced many times, this will leak a reference.
-void EditorInteractive::unreference_player_tribe(Widelands::PlayerNumber const player,
-                                                 void const* const data) {
-	assert(player <= egbase().map().get_nrplayers());
-	assert(data);
-
-	std::vector<PlayerReferences>& references = player_tribe_references_;
-	std::vector<PlayerReferences>::iterator it = references.begin();
-	std::vector<PlayerReferences>::const_iterator references_end = references.end();
-	if (player) {
-		for (; it < references_end; ++it)
-			if (it->player == player && it->object == data) {
-				references.erase(it);
-				break;
-			}
-	} else  //  Player is invalid. Remove all references from this object.
-		while (it < references_end)
-			if (it->object == data) {
-				it = references.erase(it);
-				references_end = references.end();
-			} else
-				++it;
-}
-
-bool EditorInteractive::is_player_tribe_referenced(Widelands::PlayerNumber const player) {
-	assert(0 < player);
-	assert(player <= egbase().map().get_nrplayers());
-
-	for (uint32_t i = 0; i < player_tribe_references_.size(); ++i)
-		if (player_tribe_references_[i].player == player)
-			return true;
-
-	return false;
-}
-
 void EditorInteractive::run_editor(const std::string& filename, const std::string& script_to_run) {
 	Widelands::EditorGameBase egbase(nullptr);
 	EditorInteractive& eia = *new EditorInteractive(egbase);
@@ -698,7 +619,7 @@ void EditorInteractive::map_changed(const MapWas& action) {
 		map_view()->set_view(MapView::View{Vector2f::zero(), 1.f}, MapView::Transition::Jump);
 		set_sel_pos(Widelands::NodeAndTriangle<>(
 		   Widelands::Coords(0, 0),
-		   Widelands::TCoords<>(Widelands::Coords(0, 0), Widelands::TCoords<>::D)));
+		   Widelands::TCoords<>(Widelands::Coords(0, 0), Widelands::TriangleIndex::D)));
 		break;
 
 	case MapWas::kGloballyMutated:
@@ -706,7 +627,6 @@ void EditorInteractive::map_changed(const MapWas& action) {
 	}
 
 	mutable_field_overlay_manager()->remove_all_overlays();
-	register_overlays();
 }
 
 EditorInteractive::Tools* EditorInteractive::tools() {

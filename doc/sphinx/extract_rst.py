@@ -20,6 +20,7 @@ cpp_pairs = (
     ('src/scripting/lua_game.cc', 'autogen_wl_game.rst'),
     ('src/scripting/lua_ui.cc', 'autogen_wl_ui.rst'),
     ('src/scripting/lua_globals.cc', 'autogen_globals.rst'),
+    ('src/logic/map_objects/tribes/worker_program.cc', 'autogen_tribes_worker_programs.rst'),
 )
 
 # These directories are scanned without knowing which file
@@ -53,6 +54,8 @@ lua_dirs = (
      'ships', 'lua_tribes_units'),
      ('data/tribes/wares/armor',
      'wares', 'lua_tribes_units'),
+     ('data/tribes/workers/atlanteans/armorsmith',
+     'basic_workers', 'lua_tribes_workers'),
      ('data/tribes/workers/atlanteans/carrier',
      'carriers', 'lua_tribes_workers'),
      ('data/tribes/workers/atlanteans/soldier',

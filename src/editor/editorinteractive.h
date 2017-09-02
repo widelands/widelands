@@ -100,7 +100,6 @@ public:
 	void map_clicked(const Widelands::NodeAndTriangle<>& node_and_triangle, bool draw);
 	void set_sel_pos(Widelands::NodeAndTriangle<>) override;
 	void set_sel_radius_and_update_menu(uint32_t);
-	void start_painting();
 	void stop_painting();
 
 	//  Handle UI elements.
@@ -118,10 +117,6 @@ public:
 	// action functions
 	void exit();
 
-	//  reference functions
-	void reference_player_tribe(Widelands::PlayerNumber, void const* const) override;
-	void unreference_player_tribe(Widelands::PlayerNumber, void const* const);
-	bool is_player_tribe_referenced(Widelands::PlayerNumber);
 	void set_need_save(bool const t) {
 		need_save_ = t;
 	}
@@ -145,14 +140,6 @@ public:
 private:
 	friend struct EditorToolMenu;
 
-	struct PlayerReferences {
-		int32_t player;
-		void const* object;
-	};
-
-	// Registers the overlays for player starting positions.
-	void register_overlays();
-
 	void on_buildhelp_changed(const bool value) override;
 
 	void toggle_resources();
@@ -161,12 +148,9 @@ private:
 
 	//  state variables
 	bool need_save_;
-	std::vector<PlayerReferences> player_tribe_references_;
 	uint32_t realtime_;
 	bool is_painting_;
 
-	std::unique_ptr<Notifications::Subscriber<Widelands::NoteFieldResourceChanged>>
-	   field_resource_changed_subscriber_;
 	UI::UniqueWindow::Registry toolmenu_;
 
 	UI::UniqueWindow::Registry toolsizemenu_;
@@ -190,6 +174,7 @@ private:
 	std::unique_ptr<Tools> tools_;
 	std::unique_ptr<EditorHistory> history_;
 
+	bool draw_resources_ = true;
 	bool draw_immovables_ = true;
 	bool draw_bobs_ = true;
 };

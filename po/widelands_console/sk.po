@@ -1,5 +1,5 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2016 Widelands Development Team
+# Copyright (C) 2005-2017 Widelands Development Team
 # 
 # Translators:
 # GunChleoc, 2014
@@ -9,9 +9,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-10-15 08:42+0000\n"
-"PO-Revision-Date: 2016-08-26 10:15+0000\n"
-"Last-Translator: Holger Rapp <SirVer@gmx.de>\n"
+"POT-Creation-Date: 2017-08-24 07:44+0000\n"
+"PO-Revision-Date: 2017-08-24 07:45+0000\n"
+"Last-Translator: GunChleoc\n"
 "Language-Team: Slovak (http://www.transifex.com/widelands/widelands/language/sk/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -124,15 +124,30 @@ msgstr " --editor             Spustí priamo Widelands editor.\n                
 
 #: ../../src/wlapplication_messages.cc:93
 msgid ""
+" --ai_training        Enables AI training mode. See\n"
+"                      https://wl.widelands.org/wiki/Ai%20Training/\n"
+"                      for a full description of the AI training logic."
+msgstr ""
+
+#: ../../src/wlapplication_messages.cc:97
+msgid ""
+" --auto_speed         In multiplayer games only, this will keep\n"
+"                      adjusting the game speed automatically,\n"
+"                      depending on FPS. Useful in conjunction with\n"
+"                      --ai_training."
+msgstr ""
+
+#: ../../src/wlapplication_messages.cc:102
+msgid ""
 " --scenario=FILENAME  Directly starts the map FILENAME as scenario\n"
 "                      map."
 msgstr " --scenario=NÁZOV_SÚBORU\n                      Priamo spustí mapu NÁZOV_SÚBORU ako scenár."
 
-#: ../../src/wlapplication_messages.cc:96
+#: ../../src/wlapplication_messages.cc:105
 msgid " --loadgame=FILENAME  Directly loads the savegame FILENAME."
 msgstr " --loadgame=NÁZOV_SÚBORU\n                      Priamo načíta uloženú hru NÁZOV_SÚBORU."
 
-#: ../../src/wlapplication_messages.cc:97
+#: ../../src/wlapplication_messages.cc:106
 msgid ""
 " --script=FILENAME    Run the given Lua script after initialization.\n"
 "                      Only valid with --scenario, --loadgame, or --editor."
@@ -142,7 +157,7 @@ msgstr " --script=NÁZOV_SÚBORU\n                      Po inicializácii spusti
 #. * TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the
 #. widelands
 #. textdomain
-#: ../../src/wlapplication_messages.cc:103
+#: ../../src/wlapplication_messages.cc:112
 msgid ""
 " --auto_roadbuild_mode=[true|false]\n"
 "                      Whether to enter roadbuilding mode\n"
@@ -150,7 +165,7 @@ msgid ""
 "                      not connected to a road."
 msgstr " --auto_roadbuild_mode=[true|false]\n                      Určuje, či sa má po umiestnení vlajky, ktorá\n                      nie je pripojená k ceste, automaticky zapnúť\n                      režim stavania ciest."
 
-#: ../../src/wlapplication_messages.cc:109
+#: ../../src/wlapplication_messages.cc:118
 msgid "Graphic options:"
 msgstr "Možnosti grafiky:"
 
@@ -158,26 +173,26 @@ msgstr "Možnosti grafiky:"
 #. * TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the
 #. widelands
 #. textdomain
-#: ../../src/wlapplication_messages.cc:113
+#: ../../src/wlapplication_messages.cc:122
 msgid ""
 " --fullscreen=[true|false]\n"
 "                      Whether to use the whole display for the\n"
 "                      game screen."
 msgstr " --fullscreen=[true|false]\n                      Určuje, či sa na zobrazenie hry použije\n                      celá obrazovka."
 
-#: ../../src/wlapplication_messages.cc:117
+#: ../../src/wlapplication_messages.cc:126
 msgid " --xres=[...]         Width of the window in pixel."
 msgstr " --xres=[...]         Šírka okna v pixeloch."
 
-#: ../../src/wlapplication_messages.cc:118
+#: ../../src/wlapplication_messages.cc:127
 msgid " --yres=[...]         Height of the window in pixel."
 msgstr " --yres=[...]         Výška okna v pixeloch."
 
-#: ../../src/wlapplication_messages.cc:123
+#: ../../src/wlapplication_messages.cc:132
 msgid "Options for the internal window manager:"
 msgstr "Možnosti vnútorného správcu okien:"
 
-#: ../../src/wlapplication_messages.cc:124
+#: ../../src/wlapplication_messages.cc:133
 msgid ""
 " --border_snap_distance=[0 ...]\n"
 "                      Move a window to the edge of the screen\n"
@@ -189,7 +204,7 @@ msgstr " --border_snap_distance=[0 ...]\n                      Presunúť okno k
 #. * TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the
 #. widelands
 #. textdomain
-#: ../../src/wlapplication_messages.cc:132
+#: ../../src/wlapplication_messages.cc:141
 msgid ""
 " --dock_windows_to_edges=[true|false]\n"
 "                      Eliminate a window's border towards the\n"
@@ -197,7 +212,7 @@ msgid ""
 "                      window is next to the edge of the screen."
 msgstr " --dock_windows_to_edges=[true|false]\n                      Odstráni rám okna smerom k okraju obrazovky,\n                      keď je okraj okna vedľa okraja obrazovky."
 
-#: ../../src/wlapplication_messages.cc:137
+#: ../../src/wlapplication_messages.cc:146
 msgid ""
 " --panel_snap_distance=[0 ...]\n"
 "                      Move a window to the edge of the panel when\n"
@@ -205,7 +220,7 @@ msgid ""
 "                      distance from the edge of the panel."
 msgstr " --panel_snap_distance=[0 ...]\n                      Presunúť okno k okraju panelu, ak sa\n                      okraj okna nachádza v tomto rozsahu\n                      vzdialeností od okraja panelu."
 
-#: ../../src/wlapplication_messages.cc:142
+#: ../../src/wlapplication_messages.cc:151
 msgid ""
 " --snap_windows_only_when_overlapping=[yes|no]\n"
 "                      Only move a window to the edge of a panel\n"
@@ -213,15 +228,15 @@ msgid ""
 "                      panel."
 msgstr " --snap_windows_only_when_overlapping=[yes|no]\n                      Presunúť okno k okraju panelu, len ak\n                      okno prekrýva panel."
 
-#: ../../src/wlapplication_messages.cc:148
+#: ../../src/wlapplication_messages.cc:157
 msgid " --verbose            Enable verbose debug messages"
 msgstr " --verbose            Zapne podrobné ladiace výpisy"
 
-#: ../../src/wlapplication_messages.cc:149
+#: ../../src/wlapplication_messages.cc:158
 msgid " --help               Show this help"
 msgstr " --help               Zobrazí túto pomoc"
 
-#: ../../src/wlapplication_messages.cc:150
+#: ../../src/wlapplication_messages.cc:159
 msgid ""
 "Bug reports? Suggestions? Check out the project website:\n"
 "        https://launchpad.net/widelands\n"

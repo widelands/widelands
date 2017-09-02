@@ -1754,8 +1754,7 @@ Map::change_terrain(const World& world, TCoords<FCoords> const c, DescriptionInd
 
 	// check south-west vertex if d-Triangle is changed, check east vertex if r-Triangle is changed
 	Widelands::FCoords f_sw_e(c, c.field);
-	get_neighbour(
-	   f_sw_e, c.t == TCoords<FCoords>::D ? Widelands::WALK_SW : Widelands::WALK_E, &f_sw_e);
+	get_neighbour(f_sw_e, c.t == TriangleIndex::D ? Widelands::WALK_SW : Widelands::WALK_E, &f_sw_e);
 	if (!is_resource_valid(world, f_sw_e, f_sw_e.field->get_resources())) {
 		clear_resources(f_sw_e);
 	}
@@ -1816,14 +1815,9 @@ void Map::initialize_resources(const FCoords& c,
 	if (resource_type == Widelands::kNoResource) {
 		amount = 0;
 	}
-	const auto note = NoteFieldResourceChanged{
-	   c, c.field->resources, c.field->initial_res_amount, c.field->res_amount,
-	};
-
 	c.field->resources = resource_type;
 	c.field->initial_res_amount = amount;
 	c.field->res_amount = amount;
-	Notifications::publish(note);
 }
 
 void Map::set_resources(const FCoords& c, ResourceAmount amount) {
@@ -1831,11 +1825,7 @@ void Map::set_resources(const FCoords& c, ResourceAmount amount) {
 	if (c.field->resources == Widelands::kNoResource) {
 		return;
 	}
-	const auto note = NoteFieldResourceChanged{
-	   c, c.field->resources, c.field->initial_res_amount, c.field->res_amount,
-	};
 	c.field->res_amount = amount;
-	Notifications::publish(note);
 }
 
 void Map::clear_resources(const FCoords& c) {
