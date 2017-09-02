@@ -1753,14 +1753,9 @@ Map::change_terrain(const World& world, TCoords<FCoords> const c, DescriptionInd
 	}
 
 	// check south-west vertex if d-Triangle is changed, check east vertex if r-Triangle is changed
-<<<<<<< TREE
 	Widelands::FCoords f_sw_e(c.node);
 	get_neighbour(
 	   f_sw_e, c.t == TriangleIndex::D ? Widelands::WALK_SW : Widelands::WALK_E, &f_sw_e);
-=======
-	Widelands::FCoords f_sw_e(c, c.field);
-	get_neighbour(f_sw_e, c.t == TriangleIndex::D ? Widelands::WALK_SW : Widelands::WALK_E, &f_sw_e);
->>>>>>> MERGE-SOURCE
 	if (!is_resource_valid(world, f_sw_e, f_sw_e.field->get_resources())) {
 		clear_resources(f_sw_e);
 	}
