@@ -310,10 +310,9 @@ void FieldDebugWindow::think() {
 			break;
 		case 1: {
 			std::string animation_name = "(no animation)";
-			if (player_field.map_object_descr[static_cast<int>(Widelands::TriangleIndex::None)]) {
+			if (player_field.map_object_descr) {
 				animation_name = "(seen an animation)";
 			}
-
 			str += (boost::format("  last seen at %u:\n"
 			                      "    owner: %u\n"
 			                      "    immovable animation:\n%s\n"

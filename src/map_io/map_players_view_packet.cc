@@ -351,8 +351,7 @@ void MapPlayersViewPacket::read(FileSystem& fs,
 									map_object_descr = nullptr;
 						} else
 							map_object_descr = nullptr;
-						f_player_field.map_object_descr[static_cast<int>(TriangleIndex::None)] =
-						   map_object_descr;
+						f_player_field.map_object_descr = map_object_descr;
 					}
 
 					{  //  triangles
@@ -555,8 +554,7 @@ void MapPlayersViewPacket::read(FileSystem& fs,
 					}
 					MapObjectData mod = read_unseen_immovable(
 					   egbase, imm_kind, node_immovables_file, node_immovables_file_version);
-					f_player_field.map_object_descr[static_cast<int>(TriangleIndex::None)] =
-					   mod.map_object_descr;
+					f_player_field.map_object_descr = mod.map_object_descr;
 					f_player_field.constructionsite = mod.csi;
 
 					// Read in whether this field had a border the last time it was seen
@@ -595,8 +593,7 @@ void MapPlayersViewPacket::read(FileSystem& fs,
 								map_object_descr = nullptr;
 					} else
 						map_object_descr = nullptr;
-					f_player_field.map_object_descr[static_cast<int>(TriangleIndex::None)] =
-					   map_object_descr;
+					f_player_field.map_object_descr = map_object_descr;
 					break;
 				}
 
@@ -606,7 +603,6 @@ void MapPlayersViewPacket::read(FileSystem& fs,
 					//  information about the triangle has not been saved. Fill in
 					//  the information from the game state.
 					f_player_field.terrains.d = f.field->terrain_d();
-					f_player_field.map_object_descr[static_cast<int>(TriangleIndex::D)] = nullptr;
 				} else if (f_everseen | bl_everseen | br_everseen) {
 					//  The player has seen the D triangle but does not see it now.
 					//  Load his information about the triangle from file.
@@ -624,17 +620,20 @@ void MapPlayersViewPacket::read(FileSystem& fs,
 						                            triangle_immovable_kinds_file_version,
 						                            kCurrentPacketVersionImmovableKinds);
 					}
-					MapObjectData mod = read_unseen_immovable(
+					// We read and ignore the immovable information on the D
+					// triangle. This was done because there were vague plans of
+					// suporting immovables on the triangles instead as on the
+					// nodes.
+					// TODO(sirver): Remove this logic the next time we break
+					// savegame compatibility.
+					read_unseen_immovable(
 					   egbase, im_kind, triangle_immovables_file, triangle_immovables_file_version);
-					f_player_field.map_object_descr[static_cast<int>(TriangleIndex::D)] =
-					   mod.map_object_descr;
 				}
 				if (f_seen | br_seen | r_seen) {
 					//  The player currently sees the R triangle. Therefore his
 					//  information about the triangle has not been saved. Fill in
 					//  the information from the game state.
 					f_player_field.terrains.r = f.field->terrain_r();
-					f_player_field.map_object_descr[static_cast<int>(TriangleIndex::R)] = nullptr;
 				} else if (f_everseen | br_everseen | r_everseen) {
 					//  The player has seen the R triangle but does not see it now.
 					//  Load his information about the triangle from file.
@@ -652,10 +651,12 @@ void MapPlayersViewPacket::read(FileSystem& fs,
 						                            triangle_immovable_kinds_file_version,
 						                            kCurrentPacketVersionImmovableKinds);
 					}
-					MapObjectData mod = read_unseen_immovable(
+					// We read and ignore the immovable information on the D
+					// triangle. This was done because there were vague plans of
+					// suporting immovables on the triangles instead as on the
+					// nodes.
+					read_unseen_immovable(
 					   egbase, im_kind, triangle_immovables_file, triangle_immovables_file_version);
-					f_player_field.map_object_descr[static_cast<int>(TriangleIndex::R)] =
-					   mod.map_object_descr;
 				}
 
 				{  //  edges
@@ -902,8 +903,7 @@ void MapPlayersViewPacket::write(FileSystem& fs, EditorGameBase& egbase, MapObje
 						assert(f_player_field.owner < 0x20);
 						owners_file.unsigned_8(f_player_field.owner);
 						MapObjectData mod;
-						mod.map_object_descr =
-						   f_player_field.map_object_descr[static_cast<int>(TriangleIndex::None)];
+						mod.map_object_descr = f_player_field.map_object_descr;
 						mod.csi = f_player_field.constructionsite;
 						write_unseen_immovable(&mod, node_immovable_kinds_file, node_immovables_file);
 
@@ -923,8 +923,7 @@ void MapPlayersViewPacket::write(FileSystem& fs, EditorGameBase& egbase, MapObje
 					   (!bl_seen & !br_seen & (f_everseen | bl_everseen | br_everseen)) {
 						terrains_file.unsigned_8(f_player_field.terrains.d);
 						MapObjectData mod;
-						mod.map_object_descr =
-						   f_player_field.map_object_descr[static_cast<int>(TriangleIndex::D)];
+						mod.map_object_descr = nullptr;
 						write_unseen_immovable(
 						   &mod, triangle_immovable_kinds_file, triangle_immovables_file);
 					}
@@ -934,8 +933,7 @@ void MapPlayersViewPacket::write(FileSystem& fs, EditorGameBase& egbase, MapObje
 					   (!br_seen & !r_seen & (f_everseen | br_everseen | r_everseen)) {
 						terrains_file.unsigned_8(f_player_field.terrains.r);
 						MapObjectData mod;
-						mod.map_object_descr =
-						   f_player_field.map_object_descr[static_cast<int>(TriangleIndex::R)];
+						mod.map_object_descr = nullptr;
 						write_unseen_immovable(
 						   &mod, triangle_immovable_kinds_file, triangle_immovables_file);
 					}
