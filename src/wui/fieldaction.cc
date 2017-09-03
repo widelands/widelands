@@ -678,7 +678,6 @@ void FieldActionWindow::act_build(Widelands::DescriptionIndex idx) {
 	upcast(InteractivePlayer, iaplayer, &ibase());
 
 	game->send_player_build(iaplayer->player_number(), node_, Widelands::DescriptionIndex(idx));
-	ibase().reference_player_tribe(player_->player_number(), &player_->tribe());
 	iaplayer->set_flag_to_connect(game->map().br_n(node_));
 	reset_mouse_and_die();
 }

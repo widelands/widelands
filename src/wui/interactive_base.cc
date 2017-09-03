@@ -328,23 +328,6 @@ void InteractiveBase::think() {
 	UI::Panel::think();
 }
 
-bool InteractiveBase::handle_mousepress(uint8_t btn, int32_t x, int32_t y) {
-	return map_view_.handle_mousepress(btn, x, y);
-}
-
-bool InteractiveBase::handle_mouserelease(uint8_t btn, int32_t x, int32_t y) {
-	return map_view_.handle_mouserelease(btn, x, y);
-}
-
-bool InteractiveBase::handle_mousemove(
-   uint8_t state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff) {
-	return map_view_.handle_mousemove(state, x, y, xdiff, ydiff);
-}
-
-bool InteractiveBase::handle_mousewheel(uint32_t which, int32_t x, int32_t y) {
-	return map_view_.handle_mousewheel(which, x, y);
-}
-
 /*
 ===============
 Draw debug overlay when appropriate.

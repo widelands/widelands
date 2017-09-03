@@ -33,7 +33,6 @@
 #include "ui_basic/textarea.h"
 
 struct GameSettingsProvider;
-struct MultiPlayerSetupGroupOptions;
 struct MultiPlayerClientGroup;
 struct MultiPlayerPlayerGroup;
 
@@ -44,26 +43,27 @@ struct MultiPlayerPlayerGroup;
  * clients, computers and closed players.
  *
  */
-struct MultiPlayerSetupGroup : public UI::Panel {
+struct MultiPlayerSetupGroup : public UI::Box {
 	MultiPlayerSetupGroup(UI::Panel* parent,
 	                      int32_t x,
 	                      int32_t y,
 	                      int32_t w,
 	                      int32_t h,
 	                      GameSettingsProvider* settings,
-	                      uint32_t butw,
 	                      uint32_t buth);
 	~MultiPlayerSetupGroup();
 
-	void refresh();
-
 private:
+	void update();
+	void draw(RenderTarget& dst) override;
+
 	GameSettingsProvider* const s;
 	std::unique_ptr<NetworkPlayerSettingsBackend> npsb;
 	std::vector<MultiPlayerClientGroup*> multi_player_client_groups;  // not owned
 	std::vector<MultiPlayerPlayerGroup*> multi_player_player_groups;  // not owned
+	std::unique_ptr<Notifications::Subscriber<NoteGameSettings>> subscriber_;
+
 	UI::Box clientbox, playerbox;
-	std::vector<UI::Textarea*> labels;
 
 	uint32_t buth_;
 
