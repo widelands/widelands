@@ -9,34 +9,6 @@
 -- immovables so that they will be added to their respective editor tools (Place Terrain,
 -- Place Immovable etc.). There are three categories available,
 -- each with their own function:
---
--- * new_editor_terrain_category{table}
--- * new_editor_immovable_category{table}
--- * new_editor_critter_category{table}
---
--- All categories have the same properties in the argument table:
---
---    **name**
---        *Mandatory*. A string containing the internal name of this editor category
---        for reference, e.g.::
---
---            name = "summer",
---
---    **descname**
---        *Mandatory*. The translatable display name, e.g.::
---
---            descname = _"Summer",
---
---    **picture**
---        *Mandatory*. An image to represent this category in the editor tool's tab, e.g.::
---
---            picture = "world/pics/editor_terrain_category_green.png",
---
---    **items_per_row**
---        *Mandatory*. How many items will be displayed in each row by the tool, e.g.::
---
---            items_per_row = 6,
---
 
 world = wl.World()
 
@@ -56,10 +28,7 @@ print_loading_message("┗━ took", function()
 -- .. function:: new_editor_terrain_category{table}
 --
 --    This function adds the definition for a category in the "Terrains" tool.
---    Only terrains can be in this editor category.
---
---    :arg table: This table contains all the data that the game engine will
---       add to this editor category. See above.
+--    Only terrains can be in this editor category. The parameter `table` is described below.
 
       world:new_editor_terrain_category{
          name = "summer",
@@ -94,10 +63,7 @@ print_loading_message("┗━ took", function()
 -- .. function:: new_editor_immovable_category{table}
 --
 --    This function adds the definition for a category in the "Immovables" tool.
---    Only immovables can be in this editor category.
---
---    :arg table: This table contains all the data that the game engine will
---       add to this editor category. See above.
+--    Only immovables can be in this editor category. The parameter `table` is described below.
 
       world:new_editor_immovable_category{
          name = "miscellaneous",
@@ -305,9 +271,6 @@ print_loading_message("┗━ took", function()
 --
 --    This function adds the definition for a category in the "Animals" tool.
 --    Only critters can be in this editor category.
---
---    :arg table: This table contains all the data that the game engine will
---       add to this editor category. See above.
 
       world:new_editor_critter_category {
          name = "critters_herbivores",
@@ -355,3 +318,28 @@ print_loading_message("┗━ took", function()
       include "world/critters/duck/init.lua"
    end)
 end)
+
+-- RST
+--    :arg table: This table contains all the data that the game engine will
+--       add to these editor categories.
+--
+--    **name**
+--        *Mandatory*. A string containing the internal name of this editor category
+--        for reference, e.g.::
+--
+--            name = "summer",
+--
+--    **descname**
+--        *Mandatory*. The translatable display name, e.g.::
+--
+--            descname = _"Summer",
+--
+--    **picture**
+--        *Mandatory*. An image to represent this category in the editor tool's tab, e.g.::
+--
+--            picture = "world/pics/editor_terrain_category_green.png",
+--
+--    **items_per_row**
+--        *Mandatory*. How many items will be displayed in each row by the tool, e.g.::
+--
+--            items_per_row = 6,
