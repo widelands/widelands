@@ -578,8 +578,10 @@ int LuaMapView::click(lua_State* L) {
 	const auto field = *get_user_class<LuaMaps::LuaField>(L, 2);
 	get()->map_view()->mouse_to_field(field->coords(), MapView::Transition::Jump);
 
-	Widelands::NodeAndTriangle<> node_and_triangle;
-	node_and_triangle.node = field->coords();
+	// We fake the triangle here, since we only support clicking on Nodes from
+	// Lua.
+	Widelands::NodeAndTriangle<> node_and_triangle{
+	   field->coords(), Widelands::TCoords<>(field->coords(), Widelands::TriangleIndex::D)};
 	get()->map_view()->field_clicked(node_and_triangle);
 	return 0;
 }

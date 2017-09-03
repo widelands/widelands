@@ -941,8 +941,7 @@ void Player::rediscover_node(const Map& map, const FCoords& f) {
 		field.border_bl = ((1 | br_vision) && (br_owner_number == field.owner) &&
 		                   ((r_owner_number == field.owner) ^ (bl_owner_number == field.owner)));
 
-		{  //  map_object_descr[TCoords::None]
-
+		{
 			const MapObjectDescr* map_object_descr;
 			field.constructionsite.becomes = nullptr;
 			if (const BaseImmovable* base_immovable = f.field->get_immovable()) {
@@ -962,7 +961,7 @@ void Player::rediscover_node(const Map& map, const FCoords& f) {
 				}
 			} else
 				map_object_descr = nullptr;
-			field.map_object_descr[TCoords<>::None] = map_object_descr;
+			field.map_object_descr = map_object_descr;
 		}
 	}
 	{  //  discover the D triangle and the SW edge of the top right neighbour
