@@ -1,3 +1,5 @@
+.. _toc_lua_world:
+
 Scripts for World
 =================
 
