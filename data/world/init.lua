@@ -6,18 +6,15 @@
 -- All world entities are loaded via this file.
 --
 -- This file also defines the editor categories for world elements like terrains or
--- immovables so that they will be added to their respective editor tools (Place terrain,
--- Place immovable etc.). The available element types are ``terrain``,
--- ``immovable``, and ``critter``. Editor categories are defined by:
+-- immovables so that they will be added to their respective editor tools (Place Terrain,
+-- Place Immovable etc.). There are three categories available,
+-- each with their own function:
 --
--- .. function:: new_editor_<element_type>_category{table}
+-- * new_editor_terrain_category{table}
+-- * new_editor_immovable_category{table}
+-- * new_editor_critter_category{table}
 --
---    This function adds the definition for an editor category, to be added as a
---    tab to the tool for ``<element_type>``. Only elements of the given type can
---    be in the editor category.
---
---    :arg table: This table contains all the data that the game engine will add
---        to this editor category. It contains the following entries:
+-- All categories have the same properties in the argument table:
 --
 --    **name**
 --        *Mandatory*. A string containing the internal name of this editor category
