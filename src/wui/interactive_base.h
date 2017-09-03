@@ -72,8 +72,6 @@ public:
 	Widelands::EditorGameBase& egbase() const {
 		return egbase_;
 	}
-	virtual void reference_player_tribe(Widelands::PlayerNumber, const void* const) {
-	}
 
 	// TODO(sirver): This should be private.
 	bool show_workarea_preview_;
@@ -85,11 +83,6 @@ public:
 	virtual Widelands::Player* get_player() const = 0;
 
 	void think() override;
-	bool handle_mousepress(uint8_t btn, int32_t x, int32_t y) override;
-	bool handle_mouserelease(uint8_t btn, int32_t x, int32_t y) override;
-	bool
-	handle_mousemove(uint8_t state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff) override;
-	bool handle_mousewheel(uint32_t which, int32_t x, int32_t y) override;
 	bool handle_key(bool down, SDL_Keysym code) override;
 	virtual void postload();
 
@@ -231,9 +224,10 @@ private:
 	struct SelData {
 		SelData(const bool Freeze = false,
 		        const bool Triangles = false,
-		        const Widelands::NodeAndTriangle<>& Pos = Widelands::NodeAndTriangle<>(
-		           Widelands::Coords(0, 0),
-		           Widelands::TCoords<>(Widelands::Coords(0, 0), Widelands::TCoords<>::D)),
+		        const Widelands::NodeAndTriangle<>& Pos =
+		           Widelands::NodeAndTriangle<>{
+		              Widelands::Coords(0, 0),
+		              Widelands::TCoords<>(Widelands::Coords(0, 0), Widelands::TriangleIndex::D)},
 		        const uint32_t Radius = 0,
 		        const Image* Pic = nullptr,
 		        const FieldOverlayManager::OverlayId Jobid = 0)
