@@ -40,8 +40,7 @@ tribes:new_trainingsite_type {
       trainingsites_max_percent = 20,
       prohibited_till = 900,
       very_weak_ai_limit = 1,
-      weak_ai_limit = 2,
-      forced_after = 1400
+      weak_ai_limit = 2
    },
 
    working_positions = {

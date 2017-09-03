@@ -31,7 +31,8 @@ tribes:new_productionsite_type {
 
    aihints = {
       basic_amount = 1,
-      space_consumer = true
+      space_consumer = true,
+      prohibited_till = 510
    },
 
    working_positions = {
