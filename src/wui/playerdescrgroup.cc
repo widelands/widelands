@@ -116,7 +116,7 @@ void PlayerDescriptionGroup::refresh() {
 
 	d->btnEnablePlayer->set_enabled(stateaccess);
 
-	if (player.state == PlayerSettings::stateClosed) {
+	if (player.state == PlayerSettings::State::kClosed) {
 		d->btnEnablePlayer->set_state(false);
 		d->btnPlayerTeam->set_visible(false);
 		d->btnPlayerTeam->set_enabled(false);
@@ -132,7 +132,7 @@ void PlayerDescriptionGroup::refresh() {
 		d->btnPlayerType->set_visible(true);
 		d->btnPlayerType->set_enabled(stateaccess);
 
-		if (player.state == PlayerSettings::stateOpen) {
+		if (player.state == PlayerSettings::State::kOpen) {
 			d->btnPlayerType->set_title(_("Open"));
 			d->btnPlayerTeam->set_visible(false);
 			d->btnPlayerTeam->set_visible(false);
@@ -144,7 +144,7 @@ void PlayerDescriptionGroup::refresh() {
 		} else {
 			std::string title;
 
-			if (player.state == PlayerSettings::stateComputer) {
+			if (player.state == PlayerSettings::State::kComputer) {
 				if (player.ai.empty())
 					title = _("Computer");
 				else {
@@ -156,7 +156,7 @@ void PlayerDescriptionGroup::refresh() {
 						title = _(impl->descname);
 					}
 				}
-			} else {  // PlayerSettings::stateHuman
+			} else {  // PlayerSettings::State::stateHuman
 				title = _("Human");
 			}
 			d->btnPlayerType->set_title(title);
@@ -215,11 +215,11 @@ void PlayerDescriptionGroup::enable_player(bool on) {
 		return;
 
 	if (on) {
-		if (settings.players[d->plnum].state == PlayerSettings::stateClosed)
+		if (settings.players[d->plnum].state == PlayerSettings::State::kClosed)
 			d->settings->next_player_state(d->plnum);
 	} else {
-		if (settings.players[d->plnum].state != PlayerSettings::stateClosed)
-			d->settings->set_player_state(d->plnum, PlayerSettings::stateClosed);
+		if (settings.players[d->plnum].state != PlayerSettings::State::kClosed)
+			d->settings->set_player_state(d->plnum, PlayerSettings::State::kClosed);
 	}
 }
 

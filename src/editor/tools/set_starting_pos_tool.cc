@@ -55,14 +55,13 @@ int32_t editor_tool_set_starting_pos_callback(const Widelands::FCoords& c, Widel
 	return 0;
 }
 
-EditorSetStartingPosTool::EditorSetStartingPosTool()
-   : EditorTool(*this, *this, false), overlay_ids_(kMaxPlayers, 0) {
+EditorSetStartingPosTool::EditorSetStartingPosTool() : EditorTool(*this, *this, false) {
 	current_player_ = 1;
 }
 
 int32_t EditorSetStartingPosTool::handle_click_impl(const Widelands::World&,
                                                     const Widelands::NodeAndTriangle<>& center,
-                                                    EditorInteractive& eia,
+                                                    EditorInteractive&,
                                                     EditorActionArgs*,
                                                     Widelands::Map* map) {
 	assert(0 <= center.node.x);
@@ -80,33 +79,10 @@ int32_t EditorSetStartingPosTool::handle_click_impl(const Widelands::World&,
 
 		//  check if field is valid
 		if (editor_tool_set_starting_pos_callback(map->get_fcoords(center.node), *map)) {
-			set_starting_pos(eia, current_player_, center.node, map);
+			map->set_starting_pos(current_player_, center.node);
 		}
 	}
 	return 1;
-}
-
-void EditorSetStartingPosTool::set_starting_pos(EditorInteractive& eia,
-                                                Widelands::PlayerNumber plnum,
-                                                const Widelands::Coords& c,
-                                                Widelands::Map* map) {
-	FieldOverlayManager* overlay_manager = eia.mutable_field_overlay_manager();
-	//  remove old overlay if any
-	overlay_manager->remove_overlay(overlay_ids_.at(plnum - 1));
-
-	//  add new overlay
-	FieldOverlayManager::OverlayId overlay_id = overlay_manager->next_overlay_id();
-	overlay_ids_[plnum - 1] = overlay_id;
-
-	const Image* player_image = playercolor_image(plnum - 1, "images/players/player_position.png");
-	assert(player_image);
-
-	overlay_manager->register_overlay(c, player_image, OverlayLevel::kPlayerStartingPosition,
-	                                  Vector2i(player_image->width() / 2, STARTING_POS_HOTSPOT_Y),
-	                                  overlay_id);
-
-	//  set new player pos
-	map->set_starting_pos(plnum, c);
 }
 
 Widelands::PlayerNumber EditorSetStartingPosTool::get_current_player() const {
