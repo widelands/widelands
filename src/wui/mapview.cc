@@ -485,8 +485,6 @@ bool MapView::handle_mousemove(
 }
 
 bool MapView::handle_mousewheel(uint32_t which, int32_t /* x */, int32_t y) {
-	log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
-	log("#sirver this: %p\n", this);
 	if (which != 0) {
 		return false;
 	}
