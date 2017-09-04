@@ -821,11 +821,14 @@ bool Panel::do_mousepress(const uint8_t btn, int32_t x, int32_t y) {
 
 bool Panel::do_mousewheel(uint32_t which, int32_t x, int32_t y, Vector2i rel_mouse_pos) {
 
+	log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 	// Check if a child-panel is beneath the mouse and processes the event
 	for (Panel* child = first_child_; child; child = child->next_) {
 		if (!child->handles_mouse() || !child->is_visible()) {
 			continue;
 		}
+		// NOCOM(#sirver): somehow the mouse wheel event does not reach mapview
+		log("#sirver child: %p\n", child);
 		if (rel_mouse_pos.x >= child->x_ + static_cast<int32_t>(child->w_) ||
 		    rel_mouse_pos.x < child->x_ ||
 		    rel_mouse_pos.y >= child->y_ + static_cast<int32_t>(child->h_) ||

@@ -447,10 +447,14 @@ bool MapView::handle_mousepress(uint8_t const btn, int32_t const x, int32_t cons
 		stop_dragging();
 		const auto node_and_triangle = track_sel(Vector2i(x, y));
 		field_clicked(node_and_triangle);
-	} else if (btn == SDL_BUTTON_RIGHT) {
+		// Do not return true, because we want to give our parent a chance to
+		// also handle the click.
+	} 
+	if (btn == SDL_BUTTON_RIGHT) {
 		dragging_ = true;
 		grab_mouse(true);
 		WLApplication::get()->set_mouse_lock(true);
+		return true;
 	}
 	return false;
 }
@@ -458,6 +462,7 @@ bool MapView::handle_mousepress(uint8_t const btn, int32_t const x, int32_t cons
 bool MapView::handle_mouserelease(const uint8_t btn, int32_t, int32_t) {
 	if (btn == SDL_BUTTON_RIGHT && dragging_) {
 		stop_dragging();
+		return true;
 	}
 	return false;
 }
@@ -480,6 +485,8 @@ bool MapView::handle_mousemove(
 }
 
 bool MapView::handle_mousewheel(uint32_t which, int32_t /* x */, int32_t y) {
+	log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
+	log("#sirver this: %p\n", this);
 	if (which != 0) {
 		return false;
 	}

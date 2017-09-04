@@ -827,7 +827,7 @@ bool InteractiveBase::handle_key(bool const down, SDL_Keysym const code) {
 		}
 	}
 
-	return map_view_.handle_key(down, code);
+	return false;
 }
 
 void InteractiveBase::cmd_lua(const std::vector<std::string>& args) {
