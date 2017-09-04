@@ -109,54 +109,33 @@ struct FCoords : public Coords {
 	}
 	FCoords(const Coords& nc, Field* const nf) : Coords(nc), field(nf) {
 	}
-
-	/**
-	 * Used in RenderTarget::rendermap where this is first called, then the
-	 * coordinates are normalized and after that field is set.
-	 *
-	 * \note You really want to use \ref Map::get_fcoords instead.
-	 */
-	explicit FCoords(const Coords& nc) : Coords(nc), field(nullptr) {
-	}
-
 	Field* field;
 };
 
-enum class TriangleIndex { D, R, None };
+enum class TriangleIndex { D, R };
 
-// TODO(sirver): This should not derive from CoordsType. Replace with NodeAndTriangle.
-template <typename CoordsType = Coords> struct TCoords : public CoordsType {
-	TCoords() : t() {
-	}
-	TCoords(const CoordsType C, const TriangleIndex T = TriangleIndex::None) : CoordsType(C), t(T) {
+// This uniquely indexes a single Triangle on the map. A Triangle is identified
+// by its owning node and the triangle index (down or right).
+template <typename CoordsType = Coords> struct TCoords {
+	TCoords(const CoordsType C, const TriangleIndex T) : node(C), t(T) {
 	}
 
 	bool operator==(const TCoords& other) const {
-		return CoordsType::operator==(other) && t == other.t;
+		return node == other.node && t == other.t;
 	}
 	bool operator!=(const TCoords& other) const {
-		return CoordsType::operator!=(other) || t != other.t;
-	}
-
-	TriangleIndex t;
-};
-
-template <typename NodeCoordsType = Coords, typename TriangleCoordsType = Coords>
-struct NodeAndTriangle {
-	NodeAndTriangle() {
-	}
-	NodeAndTriangle(const NodeCoordsType Node, const TCoords<TriangleCoordsType>& Triangle)
-
-	   : node(Node), triangle(Triangle) {
-	}
-
-	bool operator==(const NodeAndTriangle<>& other) const {
-		return node == other.node && triangle == other.triangle;
-	}
-	bool operator!=(const NodeAndTriangle<>& other) const {
 		return !(*this == other);
 	}
 
+	CoordsType node;
+	TriangleIndex t;
+};
+
+// A pair of a coord and a triangle, used to signify which field and which
+// triangle the cursor is closest to. The triangle might belong to another
+// field.
+template <typename NodeCoordsType = Coords, typename TriangleCoordsType = Coords>
+struct NodeAndTriangle {
 	NodeCoordsType node;
 	TCoords<TriangleCoordsType> triangle;
 };

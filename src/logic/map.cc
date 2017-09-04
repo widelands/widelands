@@ -345,7 +345,7 @@ void Map::set_origin(const Coords& new_origin) {
 	// NOTE because of the triangle design, we have to take special care about cases
 	// NOTE where y is changed by an odd number
 	bool yisodd = (new_origin.y % 2) != 0;
-	for (FCoords c(Coords(0, 0)); c.y < height_; ++c.y) {
+	for (Coords c(Coords(0, 0)); c.y < height_; ++c.y) {
 		bool cyisodd = (c.y % 2) != 0;
 		for (c.x = 0; c.x < width_; ++c.x) {
 			Coords temp;
@@ -1737,63 +1737,63 @@ bool Map::can_reach_by_water(const Coords& field) const {
 
 int32_t
 Map::change_terrain(const World& world, TCoords<FCoords> const c, DescriptionIndex const terrain) {
-	c.field->set_terrain(c.t, terrain);
+	c.node.field->set_terrain(c.t, terrain);
 
 	// remove invalid resources if necessary
 	// check vertex to which the triangle belongs
-	if (!is_resource_valid(world, c, c.field->get_resources())) {
-		clear_resources(c);
+	if (!is_resource_valid(world, c.node, c.node.field->get_resources())) {
+		clear_resources(c.node);
 	}
 
 	// always check south-east vertex
-	Widelands::FCoords f_se(c, c.field);
+	Widelands::FCoords f_se(c.node);
 	get_neighbour(f_se, Widelands::WALK_SE, &f_se);
 	if (!is_resource_valid(world, f_se, f_se.field->get_resources())) {
 		clear_resources(f_se);
 	}
 
 	// check south-west vertex if d-Triangle is changed, check east vertex if r-Triangle is changed
-	Widelands::FCoords f_sw_e(c, c.field);
+	Widelands::FCoords f_sw_e(c.node);
 	get_neighbour(f_sw_e, c.t == TriangleIndex::D ? Widelands::WALK_SW : Widelands::WALK_E, &f_sw_e);
 	if (!is_resource_valid(world, f_sw_e, f_sw_e.field->get_resources())) {
 		clear_resources(f_sw_e);
 	}
 
-	Notifications::publish(NoteFieldTerrainChanged{c, static_cast<MapIndex>(c.field - &fields_[0])});
+	Notifications::publish(
+	   NoteFieldTerrainChanged{c.node, static_cast<MapIndex>(c.node.field - &fields_[0])});
 
 	// Changing the terrain can affect ports, which can be up to 3 fields away.
 	constexpr int kPotentiallyAffectedNeighbors = 3;
-	recalc_for_field_area(world, Area<FCoords>(c, kPotentiallyAffectedNeighbors));
+	recalc_for_field_area(world, Area<FCoords>(c.node, kPotentiallyAffectedNeighbors));
 	return kPotentiallyAffectedNeighbors;
 }
 
 bool Map::is_resource_valid(const Widelands::World& world,
-                            const TCoords<Widelands::FCoords>& c,
+                            const Widelands::FCoords& c,
                             DescriptionIndex curres) {
 	if (curres == Widelands::kNoResource)
 		return true;
 
-	Widelands::FCoords f(c, c.field);
 	Widelands::FCoords f1;
 
 	int32_t count = 0;
 
 	//  this field
-	count += world.terrain_descr(f.field->terrain_r()).is_resource_valid(curres);
-	count += world.terrain_descr(f.field->terrain_d()).is_resource_valid(curres);
+	count += world.terrain_descr(c.field->terrain_r()).is_resource_valid(curres);
+	count += world.terrain_descr(c.field->terrain_d()).is_resource_valid(curres);
 
 	//  If one of the neighbours is impassable, count its resource stronger.
 	//  top left neigbour
-	get_neighbour(f, Widelands::WALK_NW, &f1);
+	get_neighbour(c, Widelands::WALK_NW, &f1);
 	count += world.terrain_descr(f1.field->terrain_r()).is_resource_valid(curres);
 	count += world.terrain_descr(f1.field->terrain_d()).is_resource_valid(curres);
 
 	//  top right neigbour
-	get_neighbour(f, Widelands::WALK_NE, &f1);
+	get_neighbour(c, Widelands::WALK_NE, &f1);
 	count += world.terrain_descr(f1.field->terrain_d()).is_resource_valid(curres);
 
 	//  left neighbour
-	get_neighbour(f, Widelands::WALK_W, &f1);
+	get_neighbour(c, Widelands::WALK_W, &f1);
 	count += world.terrain_descr(f1.field->terrain_r()).is_resource_valid(curres);
 
 	return count > 1;

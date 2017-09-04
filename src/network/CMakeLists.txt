@@ -33,7 +33,6 @@ wl_library(network
     build_info
     chat
     game_io
-    graphic_playercolor
     helper
     io_fileread
     io_filesystem

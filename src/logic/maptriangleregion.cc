@@ -23,20 +23,19 @@ namespace Widelands {
 
 template <>
 MapTriangleRegion<>::MapTriangleRegion(const Map& map, Area<TCoords<>> area)
-   : radius_is_odd_(area.radius & 1) {
-	assert(area.t == TriangleIndex::R || area.t == TriangleIndex::D);
+   : radius_is_odd_(area.radius & 1), location_(area) {
 	const uint16_t radius_plus_1 = area.radius + 1;
 	const uint16_t half_radius_rounded_down = area.radius / 2;
 	row_length_ = radius_plus_1;
 	for (uint32_t i = half_radius_rounded_down; i; --i)
-		map.get_tln(area, &area);
+		map.get_tln(area.node, &area.node);
 	if (area.t == TriangleIndex::R) {
-		left_ = area;
+		left_ = area.node;
 		if (area.radius) {
 			remaining_rows_in_upper_phase_ = half_radius_rounded_down + 1;
 			remaining_rows_in_lower_phase_ = (area.radius - 1) / 2;
 			if (radius_is_odd_) {
-				map.get_trn(area, &area);
+				map.get_trn(area.node, &area.node);
 				phase_ = Top;
 				row_length_ = area.radius + 2;
 				remaining_in_row_ = radius_plus_1 / 2;
@@ -56,13 +55,13 @@ MapTriangleRegion<>::MapTriangleRegion(const Map& map, Area<TCoords<>> area)
 		remaining_rows_in_upper_phase_ = radius_plus_1 / 2;
 		remaining_rows_in_lower_phase_ = half_radius_rounded_down;
 		if (radius_is_odd_) {
-			map.get_ln(area, &area);
-			left_ = area;
+			map.get_ln(area.node, &area.node);
+			left_ = area.node;
 			phase_ = Upper;
 			remaining_in_row_ = row_length_ = area.radius + 2;
 			area.t = TriangleIndex::R;
 		} else {
-			map.get_bln(area, &left_);
+			map.get_bln(area.node, &left_);
 			phase_ = Top;
 			row_length_ = area.radius + 3;
 			remaining_in_row_ = half_radius_rounded_down + (0 < area.radius);
@@ -80,7 +79,7 @@ template <> bool MapTriangleRegion<>::advance(const Map& map) {
 	switch (phase_) {
 	case Top:
 		if (remaining_in_row_)
-			map.get_rn(location_, &location_);
+			map.get_rn(location_.node, &location_.node);
 		else if (remaining_rows_in_upper_phase_) {
 			phase_ = Upper;
 			remaining_in_row_ = row_length_;
@@ -93,7 +92,7 @@ template <> bool MapTriangleRegion<>::advance(const Map& map) {
 			if (location_.t == TriangleIndex::D)
 				location_.t = TriangleIndex::R;
 			else
-				location_ = TCoords<>(map.r_n(location_), TriangleIndex::D);
+				location_ = TCoords<>(map.r_n(location_.node), TriangleIndex::D);
 		} else {
 			if (--remaining_rows_in_upper_phase_) {
 				row_length_ += 2;
@@ -119,7 +118,7 @@ template <> bool MapTriangleRegion<>::advance(const Map& map) {
 			if (location_.t == TriangleIndex::D)
 				location_.t = TriangleIndex::R;
 			else
-				location_ = TCoords<>(map.r_n(location_), TriangleIndex::D);
+				location_ = TCoords<>(map.r_n(location_.node), TriangleIndex::D);
 		} else {
 			if (--remaining_rows_in_lower_phase_) {
 				assert(row_length_ >= 2);
@@ -135,7 +134,7 @@ template <> bool MapTriangleRegion<>::advance(const Map& map) {
 		break;
 	case Bottom:
 		if (remaining_in_row_)
-			map.get_rn(location_, &location_);
+			map.get_rn(location_.node, &location_.node);
 		break;
 	}
 	assert(remaining_in_row_ < 10000);  //  Catch wrapping (integer underflow)
@@ -144,20 +143,20 @@ template <> bool MapTriangleRegion<>::advance(const Map& map) {
 
 template <>
 MapTriangleRegion<TCoords<FCoords>>::MapTriangleRegion(const Map& map, Area<TCoords<FCoords>> area)
-   : radius_is_odd_(area.radius & 1) {
+   : radius_is_odd_(area.radius & 1), location_(area) {
 	assert(area.t == TriangleIndex::R || area.t == TriangleIndex::D);
 	const uint16_t radius_plus_1 = area.radius + 1;
 	const uint16_t half_radius_rounded_down = area.radius / 2;
 	row_length_ = radius_plus_1;
 	for (uint32_t i = half_radius_rounded_down; i; --i)
-		map.get_tln(area, &area);
+		map.get_tln(area.node, &area.node);
 	if (area.t == TriangleIndex::R) {
-		left_ = area;
+		left_ = area.node;
 		if (area.radius) {
 			remaining_rows_in_upper_phase_ = half_radius_rounded_down + 1;
 			remaining_rows_in_lower_phase_ = (area.radius - 1) / 2;
 			if (radius_is_odd_) {
-				map.get_trn(area, &area);
+				map.get_trn(area.node, &area.node);
 				phase_ = Top;
 				row_length_ = area.radius + 2;
 				remaining_in_row_ = radius_plus_1 / 2;
@@ -176,13 +175,13 @@ MapTriangleRegion<TCoords<FCoords>>::MapTriangleRegion(const Map& map, Area<TCoo
 		remaining_rows_in_upper_phase_ = radius_plus_1 / 2;
 		remaining_rows_in_lower_phase_ = half_radius_rounded_down;
 		if (radius_is_odd_) {
-			map.get_ln(area, &area);
-			left_ = area;
+			map.get_ln(area.node, &area.node);
+			left_ = area.node;
 			phase_ = Upper;
 			remaining_in_row_ = row_length_ = area.radius + 2;
 			area.t = TriangleIndex::R;
 		} else {
-			map.get_bln(area, &left_);
+			map.get_bln(area.node, &left_);
 			phase_ = Top;
 			row_length_ = area.radius + 3;
 			remaining_in_row_ = half_radius_rounded_down + (0 < area.radius);
@@ -201,7 +200,7 @@ template <> bool MapTriangleRegion<TCoords<FCoords>>::advance(const Map& map) {
 	switch (phase_) {
 	case Top:
 		if (remaining_in_row_)
-			map.get_rn(location_, &location_);
+			map.get_rn(location_.node, &location_.node);
 		else if (remaining_rows_in_upper_phase_) {
 			phase_ = Upper;
 			remaining_in_row_ = row_length_;
@@ -214,7 +213,7 @@ template <> bool MapTriangleRegion<TCoords<FCoords>>::advance(const Map& map) {
 			if (location_.t == TriangleIndex::D)
 				location_.t = TriangleIndex::R;
 			else
-				location_ = TCoords<FCoords>(map.r_n(location_), TriangleIndex::D);
+				location_ = TCoords<FCoords>(map.r_n(location_.node), TriangleIndex::D);
 		} else {
 			if (--remaining_rows_in_upper_phase_) {
 				row_length_ += 2;
@@ -240,7 +239,7 @@ template <> bool MapTriangleRegion<TCoords<FCoords>>::advance(const Map& map) {
 			if (location_.t == TriangleIndex::D)
 				location_.t = TriangleIndex::R;
 			else
-				location_ = TCoords<FCoords>(map.r_n(location_), TriangleIndex::D);
+				location_ = TCoords<FCoords>(map.r_n(location_.node), TriangleIndex::D);
 		} else {
 			if (--remaining_rows_in_lower_phase_) {
 				assert(row_length_ >= 2);
@@ -256,7 +255,7 @@ template <> bool MapTriangleRegion<TCoords<FCoords>>::advance(const Map& map) {
 		break;
 	case Bottom:
 		if (remaining_in_row_)
-			map.get_rn(location_, &location_);
+			map.get_rn(location_.node, &location_.node);
 		break;
 	}
 	assert(remaining_in_row_ < 10000);  //  Catch wrapping (integer underflow)
