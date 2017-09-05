@@ -449,7 +449,7 @@ bool MapView::handle_mousepress(uint8_t const btn, int32_t const x, int32_t cons
 		field_clicked(node_and_triangle);
 		// Do not return true, because we want to give our parent a chance to
 		// also handle the click.
-	} 
+	}
 	if (btn == SDL_BUTTON_RIGHT) {
 		dragging_ = true;
 		grab_mouse(true);
