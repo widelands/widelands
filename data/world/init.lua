@@ -1,3 +1,15 @@
+-- RST
+-- init.lua
+-- --------
+--
+-- World initialization.
+-- All world entities are loaded via this file.
+--
+-- This file also defines the editor categories for world elements like terrains or
+-- immovables so that they will be added to their respective editor tools (Place Terrain,
+-- Place Immovable etc.). There are three categories available,
+-- each with their own function:
+
 world = wl.World()
 
 set_textdomain("world")
@@ -11,126 +23,61 @@ print_loading_message("┗━ took", function()
    end)
 
    print_loading_message("┃    Terrains", function()
+
+-- RST
+-- .. function:: new_editor_terrain_category{table}
+--
+--    This function adds the definition for a category in the "Terrains" tool.
+--    Only terrains can be in this editor category. The parameter `table` is described below.
+
+      world:new_editor_terrain_category{
+         name = "summer",
+         descname = _ "Summer",
+         picture = "world/pics/editor_terrain_category_green.png",
+         items_per_row = 6,
+      }
+      world:new_editor_terrain_category{
+         name = "wasteland",
+         descname = _ "Wasteland",
+         picture = "world/pics/editor_terrain_category_wasteland.png",
+         items_per_row = 6,
+      }
+      world:new_editor_terrain_category{
+         name = "winter",
+         descname = _ "Winter",
+         picture = "world/pics/editor_terrain_category_winter.png",
+         items_per_row = 6,
+      }
+      world:new_editor_terrain_category{
+         name = "desert",
+         descname = _ "Desert",
+         picture = "world/pics/editor_terrain_category_desert.png",
+         items_per_row = 6,
+      }
+
       include "world/terrains/init.lua"
    end)
 
-   world:new_editor_immovable_category{
-      name = "miscellaneous",
-      descname = _ "Miscellaneous",
-      picture = "world/immovables/ruin5/idle.png",
-      items_per_row = 6,
-   }
-
-   world:new_editor_immovable_category{
-      name = "artifacts",
-      descname = _ "Artifacts" .. "<br>" .. _ "These immovables are used by the win condition “Artifacts”.",
-      picture = "world/immovables/manmade/artifacts/artifact00/idle.png",
-      items_per_row = 6,
-   }
-
-   world:new_editor_immovable_category{
-      name = "plants",
-      descname = _ "Plants",
-      picture = "world/immovables/cactus3/idle.png",
-      items_per_row = 8,
-   }
-
-   world:new_editor_immovable_category{
-      name = "standing_stones",
-      descname = _ "Standing Stones",
-      picture = "world/immovables/standing_stones/standing_stone4_desert/idle.png",
-      items_per_row = 4,
-   }
-
-   world:new_editor_immovable_category{
-      name = "rocks",
-      descname = _ "Rocks",
-      picture = "world/immovables/rocks/greenland_rocks6/idle.png",
-      items_per_row = 6,
-   }
-
-   world:new_editor_immovable_category{
-      name = "trees_dead",
-      descname = _ "Dead Trees",
-      picture = "world/immovables/trees/deadtree2/idle.png",
-      items_per_row = 8,
-   }
-
-   world:new_editor_immovable_category{
-      name = "trees_coniferous",
-      descname = _ "Coniferous Trees",
-      picture = "world/immovables/trees/spruce/old/idle_0.png",
-      items_per_row = 8,
-   }
-
-   world:new_editor_immovable_category{
-      name = "trees_deciduous",
-      descname = _ "Deciduous Trees",
-      picture = "world/immovables/trees/alder/old/idle_0.png",
-      items_per_row = 8,
-   }
-
-   world:new_editor_immovable_category{
-      name = "trees_palm",
-      descname = _ "Palm Trees",
-      picture = "world/immovables/trees/palm_borassus/old/idle_0.png",
-      items_per_row = 8,
-   }
-
-   world:new_editor_immovable_category{
-      name = "trees_wasteland",
-      descname = _ "Wasteland Trees",
-      picture = "world/immovables/trees/umbrella_red/old/idle_0.png",
-      items_per_row = 8,
-   }
-
-   world:new_editor_critter_category {
-      name = "critters_herbivores",
-      -- TRANSLATORS: A category in the editor for placing animals on the map.
-      descname = _ "Herbivores",
-      picture = "world/critters/sheep/idle_00.png",
-      items_per_row = 10,
-   }
-
-   world:new_editor_critter_category {
-      name = "critters_carnivores",
-      -- TRANSLATORS: A category in the editor for placing animals on the map.
-      descname = _ "Carnivores",
-      picture = "world/critters/fox/idle_00.png",
-      items_per_row = 10,
-   }
-
-   world:new_editor_critter_category {
-      name = "critters_aquatic",
-      -- TRANSLATORS: A category in the editor for placing animals on the map.
-      descname = _ "Aquatic",
-      picture = "world/critters/duck/idle_00.png",
-      items_per_row = 10,
-   }
-
    print_loading_message("┃    Immovables", function()
-      include "world/immovables/grass1/init.lua"
-      include "world/immovables/grass2/init.lua"
-      include "world/immovables/grass3/init.lua"
-      include "world/immovables/bush1/init.lua"
-      include "world/immovables/bush2/init.lua"
-      include "world/immovables/bush3/init.lua"
-      include "world/immovables/bush4/init.lua"
-      include "world/immovables/bush5/init.lua"
-      include "world/immovables/cactus1/init.lua"
-      include "world/immovables/cactus3/init.lua"
-      include "world/immovables/cactus4/init.lua"
-      include "world/immovables/cactus2/init.lua"
+-- RST
+-- .. function:: new_editor_immovable_category{table}
+--
+--    This function adds the definition for a category in the "Immovables" tool.
+--    Only immovables can be in this editor category. The parameter `table` is described below.
+
+      world:new_editor_immovable_category{
+         name = "miscellaneous",
+         descname = _ "Miscellaneous",
+         picture = "world/immovables/ruin5/idle.png",
+         items_per_row = 6,
+      }
+
       include "world/immovables/pebble1/init.lua"
       include "world/immovables/pebble2/init.lua"
       include "world/immovables/pebble3/init.lua"
       include "world/immovables/pebble4/init.lua"
       include "world/immovables/pebble5/init.lua"
       include "world/immovables/pebble6/init.lua"
-      include "world/immovables/manmade/artifacts/artifact00/init.lua"
-      include "world/immovables/manmade/artifacts/artifact01/init.lua"
-      include "world/immovables/manmade/artifacts/artifact02/init.lua"
-      include "world/immovables/manmade/artifacts/artifact03/init.lua"
       include "world/immovables/mushroom1/init.lua"
       include "world/immovables/mushroom2/init.lua"
       include "world/immovables/manmade/snowman/init.lua"
@@ -152,8 +99,48 @@ print_loading_message("┗━ took", function()
       include "world/immovables/skeleton2/init.lua"
       include "world/immovables/skeleton4/init.lua"
 
+      -- Artifacts
+      world:new_editor_immovable_category{
+         name = "artifacts",
+         descname = _ "Artifacts" .. "<br>" .. _ "These immovables are used by the win condition “Artifacts”.",
+         picture = "world/immovables/manmade/artifacts/artifact00/idle.png",
+         items_per_row = 6,
+      }
+
+      include "world/immovables/manmade/artifacts/artifact00/init.lua"
+      include "world/immovables/manmade/artifacts/artifact01/init.lua"
+      include "world/immovables/manmade/artifacts/artifact02/init.lua"
+      include "world/immovables/manmade/artifacts/artifact03/init.lua"
+
+      -- Plants
+      world:new_editor_immovable_category{
+         name = "plants",
+         descname = _ "Plants",
+         picture = "world/immovables/cactus3/idle.png",
+         items_per_row = 8,
+      }
+
+      include "world/immovables/grass1/init.lua"
+      include "world/immovables/grass2/init.lua"
+      include "world/immovables/grass3/init.lua"
+      include "world/immovables/bush1/init.lua"
+      include "world/immovables/bush2/init.lua"
+      include "world/immovables/bush3/init.lua"
+      include "world/immovables/bush4/init.lua"
+      include "world/immovables/bush5/init.lua"
+      include "world/immovables/cactus1/init.lua"
+      include "world/immovables/cactus3/init.lua"
+      include "world/immovables/cactus4/init.lua"
+      include "world/immovables/cactus2/init.lua"
 
       -- Standing Stones
+      world:new_editor_immovable_category{
+         name = "standing_stones",
+         descname = _ "Standing Stones",
+         picture = "world/immovables/standing_stones/standing_stone4_desert/idle.png",
+         items_per_row = 4,
+      }
+
       include "world/immovables/standing_stones/standing_stone1_desert/init.lua"
       include "world/immovables/standing_stones/standing_stone1_summer/init.lua"
       include "world/immovables/standing_stones/standing_stone1_wasteland/init.lua"
@@ -178,6 +165,13 @@ print_loading_message("┗━ took", function()
       include "world/immovables/standing_stones/standing_stone7/init.lua"
 
       -- Rocks
+      world:new_editor_immovable_category{
+         name = "rocks",
+         descname = _ "Rocks",
+         picture = "world/immovables/rocks/greenland_rocks6/idle.png",
+         items_per_row = 6,
+      }
+
       include "world/immovables/rocks/blackland_rocks1/init.lua"
       include "world/immovables/rocks/blackland_rocks2/init.lua"
       include "world/immovables/rocks/blackland_rocks3/init.lua"
@@ -204,6 +198,41 @@ print_loading_message("┗━ took", function()
       include "world/immovables/rocks/winterland_rocks6/init.lua"
 
       -- Trees
+      world:new_editor_immovable_category{
+         name = "trees_dead",
+         descname = _ "Dead Trees",
+         picture = "world/immovables/trees/deadtree2/idle.png",
+         items_per_row = 8,
+      }
+
+      world:new_editor_immovable_category{
+         name = "trees_coniferous",
+         descname = _ "Coniferous Trees",
+         picture = "world/immovables/trees/spruce/old/idle_0.png",
+         items_per_row = 8,
+      }
+
+      world:new_editor_immovable_category{
+         name = "trees_deciduous",
+         descname = _ "Deciduous Trees",
+         picture = "world/immovables/trees/alder/old/idle_0.png",
+         items_per_row = 8,
+      }
+
+      world:new_editor_immovable_category{
+         name = "trees_palm",
+         descname = _ "Palm Trees",
+         picture = "world/immovables/trees/palm_borassus/old/idle_0.png",
+         items_per_row = 8,
+      }
+
+      world:new_editor_immovable_category{
+         name = "trees_wasteland",
+         descname = _ "Wasteland Trees",
+         picture = "world/immovables/trees/umbrella_red/old/idle_0.png",
+         items_per_row = 8,
+      }
+
       include "world/immovables/trees/alder/init.lua"
       include "world/immovables/trees/aspen/init.lua"
       include "world/immovables/trees/beech/init.lua"
@@ -236,7 +265,21 @@ print_loading_message("┗━ took", function()
    end)
 
    print_loading_message("┃    Critters", function()
-      -- Herbivores
+
+-- RST
+-- .. function:: new_editor_critter_category{table}
+--
+--    This function adds the definition for a category in the "Animals" tool.
+--    Only critters can be in this editor category.
+
+      world:new_editor_critter_category {
+         name = "critters_herbivores",
+         -- TRANSLATORS: A category in the editor for placing animals on the map.
+         descname = _ "Herbivores",
+         picture = "world/critters/sheep/idle_00.png",
+         items_per_row = 10,
+      }
+
       include "world/critters/bunny/init.lua"
       include "world/critters/sheep/init.lua"
       include "world/critters/wisent/init.lua"
@@ -248,6 +291,14 @@ print_loading_message("┗━ took", function()
       include "world/critters/elk/init.lua"
 
       -- Carnivores
+      world:new_editor_critter_category {
+         name = "critters_carnivores",
+         -- TRANSLATORS: A category in the editor for placing animals on the map.
+         descname = _ "Carnivores",
+         picture = "world/critters/fox/idle_00.png",
+         items_per_row = 10,
+      }
+
       include "world/critters/marten/init.lua"
       include "world/critters/badger/init.lua"
       include "world/critters/lynx/init.lua"
@@ -256,6 +307,39 @@ print_loading_message("┗━ took", function()
       include "world/critters/brownbear/init.lua"
 
       -- Aquatic animals
+      world:new_editor_critter_category {
+         name = "critters_aquatic",
+         -- TRANSLATORS: A category in the editor for placing animals on the map.
+         descname = _ "Aquatic",
+         picture = "world/critters/duck/idle_00.png",
+         items_per_row = 10,
+      }
+
       include "world/critters/duck/init.lua"
    end)
 end)
+
+-- RST
+--    :arg table: This table contains all the data that the game engine will
+--       add to these editor categories.
+--
+--    **name**
+--        *Mandatory*. A string containing the internal name of this editor category
+--        for reference, e.g.::
+--
+--            name = "summer",
+--
+--    **descname**
+--        *Mandatory*. The translatable display name, e.g.::
+--
+--            descname = _"Summer",
+--
+--    **picture**
+--        *Mandatory*. An image to represent this category in the editor tool's tab, e.g.::
+--
+--            picture = "world/pics/editor_terrain_category_green.png",
+--
+--    **items_per_row**
+--        *Mandatory*. How many items will be displayed in each row by the tool, e.g.::
+--
+--            items_per_row = 6,
