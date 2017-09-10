@@ -43,7 +43,9 @@ tribes:new_productionsite_type {
       },
    },
 
-   aihints = {},
+   aihints = {
+      prohibited_till = 800
+   },
 
    working_positions = {
       barbarians_blacksmith = 1
