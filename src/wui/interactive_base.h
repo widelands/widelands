@@ -75,9 +75,8 @@ public:
 
 	// TODO(sirver): This should be private.
 	bool show_workarea_preview_;
-	FieldOverlayManager::OverlayId show_work_area(const WorkareaInfo& workarea_info,
-	                                              Widelands::Coords coords);
-	void hide_work_area(FieldOverlayManager::OverlayId overlay_id);
+	void show_work_area(const WorkareaInfo& workarea_info, Widelands::Coords coords);
+	void hide_work_area(const Widelands::Coords& coords);
 
 	//  point of view for drawing
 	virtual Widelands::Player* get_player() const = 0;
@@ -198,6 +197,9 @@ protected:
 
 	void unset_sel_picture();
 	void set_sel_picture(const Image* image);
+	const Image* get_sel_picture() {
+		return sel_.pic;
+	}
 	void adjust_toolbar_position() {
 		toolbar_.set_pos(Vector2i((get_inner_w() - toolbar_.get_w()) >> 1, get_inner_h() - 34));
 	}
@@ -212,6 +214,10 @@ protected:
 
 	// Returns the information which overlay text should currently be drawn.
 	TextToDraw get_text_to_draw() const;
+
+	// Returns the current overlays for the work area previews.
+	std::map<Widelands::Coords, const Image*>
+	get_work_area_overlays(const Widelands::Map& map) const;
 
 private:
 	int32_t stereo_position(Widelands::Coords position_map);
@@ -257,7 +263,11 @@ private:
 
 	std::unique_ptr<FieldOverlayManager> field_overlay_manager_;
 
-	// The roads that are displayed while a road is being build. They are not
+	// The currently enabled work area previews. They are keyed by the
+	// coordinate that the building that shows the work area is positioned.
+	std::map<Widelands::Coords, const WorkareaInfo*> work_area_previews_;
+
+	// The roads that are displayed while a road is being built. They are not
 	// yet logically in the game, but need to be displayed for the user as
 	// visual guide. The data type is the same as for Field::road.
 	std::map<Widelands::Coords, uint8_t> road_building_preview_;
