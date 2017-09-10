@@ -43,6 +43,7 @@
 #include "logic/maphollowregion.h"
 #include "logic/maptriangleregion.h"
 #include "logic/player.h"
+#include "logic/widelands_geometry.h"
 #include "profile/profile.h"
 #include "scripting/lua_interface.h"
 #include "wui/field_overlay_manager.h"
@@ -150,43 +151,20 @@ UniqueWindowHandler& InteractiveBase::unique_windows() {
 
 void InteractiveBase::set_sel_pos(Widelands::NodeAndTriangle<> const center) {
 	const Map& map = egbase().map();
-
-	// Remove old sel pointer
-	if (sel_.jobid)
-		field_overlay_manager_->remove_overlay(sel_.jobid);
-	const FieldOverlayManager::OverlayId jobid = sel_.jobid =
-	   field_overlay_manager_->next_overlay_id();
-
 	sel_.pos = center;
 
-	//  register sel overlay position
-	if (sel_.triangles) {
-		assert(center.triangle.t == TCoords<>::D || center.triangle.t == TCoords<>::R);
-		Widelands::MapTriangleRegion<> mr(map, Area<TCoords<>>(center.triangle, sel_.radius));
-		do
-			field_overlay_manager_->register_overlay(
-			   mr.location(), sel_.pic, OverlayLevel::kSelection, Vector2i::invalid(), jobid);
-		while (mr.advance(map));
-	} else {
-		Widelands::MapRegion<> mr(map, Area<>(center.node, sel_.radius));
-		do
-			field_overlay_manager_->register_overlay(
-			   mr.location(), sel_.pic, OverlayLevel::kSelection, Vector2i::invalid(), jobid);
-		while (mr.advance(map));
-		if (upcast(InteractiveGameBase const, igbase, this))
-			if (upcast(Widelands::ProductionSite, productionsite, map[center.node].get_immovable())) {
-				if (upcast(InteractivePlayer const, iplayer, igbase)) {
-					const Widelands::Player& player = iplayer->player();
-					if (!player.see_all() &&
-					    (1 >= player.vision(Widelands::Map::get_index(center.node, map.get_width())) ||
-					     player.is_hostile(*productionsite->get_owner())))
-						return set_tooltip("");
-				}
-				set_tooltip(
-				   productionsite->info_string(Widelands::Building::InfoStringFormat::kTooltip));
-				return;
+	if (upcast(InteractiveGameBase const, igbase, this))
+		if (upcast(Widelands::ProductionSite, productionsite, map[center.node].get_immovable())) {
+			if (upcast(InteractivePlayer const, iplayer, igbase)) {
+				const Widelands::Player& player = iplayer->player();
+				if (!player.see_all() &&
+				    (1 >= player.vision(Widelands::Map::get_index(center.node, map.get_width())) ||
+				     player.is_hostile(*productionsite->get_owner())))
+					return set_tooltip("");
 			}
-	}
+			set_tooltip(productionsite->info_string(Widelands::Building::InfoStringFormat::kTooltip));
+			return;
+		}
 	set_tooltip("");
 }
 
@@ -261,48 +239,53 @@ void InteractiveBase::on_buildhelp_changed(bool /* value */) {
 }
 
 // Show the given workareas at the given coords and returns the overlay job id associated
-FieldOverlayManager::OverlayId InteractiveBase::show_work_area(const WorkareaInfo& workarea_info,
-                                                               Widelands::Coords coords) {
-	const uint8_t workareas_nrs = workarea_info.size();
-	WorkareaInfo::size_type wa_index;
-	switch (workareas_nrs) {
-	case 0:
-		return 0;  // no workarea
-	case 1:
-		wa_index = 5;
-		break;
-	case 2:
-		wa_index = 3;
-		break;
-	case 3:
-		wa_index = 0;
-		break;
-	default:
-		throw wexception("Encountered unexpected WorkareaInfo size %i", workareas_nrs);
-	}
-	const Widelands::Map& map = egbase_.map();
-	FieldOverlayManager::OverlayId overlay_id = field_overlay_manager_->next_overlay_id();
-
-	Widelands::HollowArea<> hollow_area(Widelands::Area<>(coords, 0), 0);
-
-	// Iterate through the work areas, from building to its enhancement
-	WorkareaInfo::const_iterator it = workarea_info.begin();
-	for (; it != workarea_info.end(); ++it) {
-		hollow_area.radius = it->first;
-		Widelands::MapHollowRegion<> mr(map, hollow_area);
-		do
-			field_overlay_manager_->register_overlay(mr.location(), workarea_pics_[wa_index],
-			                                         OverlayLevel::kWorkAreaPreview,
-			                                         Vector2i::invalid(), overlay_id);
-		while (mr.advance(map));
-		wa_index++;
-		hollow_area.hole_radius = hollow_area.radius;
-	}
-	return overlay_id;
+void InteractiveBase::show_work_area(const WorkareaInfo& workarea_info, Widelands::Coords coords) {
+	work_area_previews_[coords] = &workarea_info;
 }
 
-void InteractiveBase::hide_work_area(FieldOverlayManager::OverlayId overlay_id) {
-	field_overlay_manager_->remove_overlay(overlay_id);
+std::map<Coords, const Image*>
+InteractiveBase::get_work_area_overlays(const Widelands::Map& map) const {
+	std::map<Coords, const Image*> result;
+	for (const auto& pair : work_area_previews_) {
+		const Coords& coords = pair.first;
+		const WorkareaInfo* workarea_info = pair.second;
+		WorkareaInfo::size_type wa_index;
+		switch (workarea_info->size()) {
+		case 0:
+			continue;  // no workarea
+		case 1:
+			wa_index = 5;
+			break;
+		case 2:
+			wa_index = 3;
+			break;
+		case 3:
+			wa_index = 0;
+			break;
+		default:
+			throw wexception(
+			   "Encountered unexpected WorkareaInfo size %i", static_cast<int>(workarea_info->size()));
+		}
+
+		Widelands::HollowArea<> hollow_area(Widelands::Area<>(coords, 0), 0);
+
+		// Iterate through the work areas, from building to its enhancement
+		WorkareaInfo::const_iterator it = workarea_info->begin();
+		for (; it != workarea_info->end(); ++it) {
+			hollow_area.radius = it->first;
+			Widelands::MapHollowRegion<> mr(map, hollow_area);
+			do {
+				result[mr.location()] = workarea_pics_[wa_index];
+			} while (mr.advance(map));
+			wa_index++;
+			hollow_area.hole_radius = hollow_area.radius;
+		}
+	}
+	return result;
+}
+
+void InteractiveBase::hide_work_area(const Widelands::Coords& coords) {
+	work_area_previews_.erase(coords);
 }
 
 /**
@@ -344,23 +327,6 @@ void InteractiveBase::think() {
 	egbase().think();  // Call game logic here. The game advances.
 
 	UI::Panel::think();
-}
-
-bool InteractiveBase::handle_mousepress(uint8_t btn, int32_t x, int32_t y) {
-	return map_view_.handle_mousepress(btn, x, y);
-}
-
-bool InteractiveBase::handle_mouserelease(uint8_t btn, int32_t x, int32_t y) {
-	return map_view_.handle_mouserelease(btn, x, y);
-}
-
-bool InteractiveBase::handle_mousemove(
-   uint8_t state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff) {
-	return map_view_.handle_mousemove(state, x, y, xdiff, ydiff);
-}
-
-bool InteractiveBase::handle_mousewheel(uint32_t which, int32_t x, int32_t y) {
-	return map_view_.handle_mousewheel(which, x, y);
 }
 
 /*

@@ -125,74 +125,72 @@ void draw_immovables_for_formerly_visible_field(const FieldsToDraw::Field& field
                                                 const Widelands::Player::Field& player_field,
                                                 const float scale,
                                                 RenderTarget* dst) {
-	if (const Widelands::MapObjectDescr* const map_object_descr =
-	       player_field.map_object_descr[Widelands::TCoords<>::None]) {
-		if (player_field.constructionsite.becomes) {
-			assert(field.owner != nullptr);
-			const Widelands::ConstructionsiteInformation& csinf = player_field.constructionsite;
-			// draw the partly finished constructionsite
-			uint32_t anim_idx;
+	if (player_field.map_object_descr == nullptr) {
+		return;
+	}
+	if (player_field.constructionsite.becomes) {
+		assert(field.owner != nullptr);
+		const Widelands::ConstructionsiteInformation& csinf = player_field.constructionsite;
+		// draw the partly finished constructionsite
+		uint32_t anim_idx;
+		try {
+			anim_idx = csinf.becomes->get_animation("build");
+		} catch (Widelands::MapObjectDescr::AnimationNonexistent&) {
 			try {
-				anim_idx = csinf.becomes->get_animation("build");
-			} catch (Widelands::MapObjectDescr::AnimationNonexistent&) {
-				try {
-					anim_idx = csinf.becomes->get_animation("unoccupied");
-				} catch (Widelands::MapObjectDescr::AnimationNonexistent) {
-					anim_idx = csinf.becomes->get_animation("idle");
-				}
+				anim_idx = csinf.becomes->get_animation("unoccupied");
+			} catch (Widelands::MapObjectDescr::AnimationNonexistent) {
+				anim_idx = csinf.becomes->get_animation("idle");
 			}
-			const Animation& anim = g_gr->animations().get_animation(anim_idx);
-			const size_t nr_frames = anim.nr_frames();
-			uint32_t cur_frame =
-			   csinf.totaltime ? csinf.completedtime * nr_frames / csinf.totaltime : 0;
-			uint32_t tanim = cur_frame * FRAME_LENGTH;
+		}
+		const Animation& anim = g_gr->animations().get_animation(anim_idx);
+		const size_t nr_frames = anim.nr_frames();
+		uint32_t cur_frame = csinf.totaltime ? csinf.completedtime * nr_frames / csinf.totaltime : 0;
+		uint32_t tanim = cur_frame * FRAME_LENGTH;
 
-			uint32_t percent = 100 * csinf.completedtime * nr_frames;
-			if (csinf.totaltime) {
-				percent /= csinf.totaltime;
-			}
-			percent -= 100 * cur_frame;
+		uint32_t percent = 100 * csinf.completedtime * nr_frames;
+		if (csinf.totaltime) {
+			percent /= csinf.totaltime;
+		}
+		percent -= 100 * cur_frame;
 
-			if (cur_frame) {  // not the first frame
-				// Draw the prev frame
-				dst->blit_animation(field.rendertarget_pixel, scale, anim_idx, tanim - FRAME_LENGTH,
-				                    field.owner->get_playercolor());
-			} else if (csinf.was) {
-				// Is the first frame, but there was another building here before,
-				// get its last build picture and draw it instead.
-				uint32_t a;
-				try {
-					a = csinf.was->get_animation("unoccupied");
-				} catch (Widelands::MapObjectDescr::AnimationNonexistent&) {
-					a = csinf.was->get_animation("idle");
-				}
-				dst->blit_animation(field.rendertarget_pixel, scale, a, tanim - FRAME_LENGTH,
-				                    field.owner->get_playercolor());
-			}
-			dst->blit_animation(field.rendertarget_pixel, scale, anim_idx, tanim,
-			                    field.owner->get_playercolor(), percent);
-		} else if (upcast(const Widelands::BuildingDescr, building, map_object_descr)) {
-			assert(field.owner != nullptr);
-			// this is a building therefore we either draw unoccupied or idle animation
-			uint32_t pic;
+		if (cur_frame) {  // not the first frame
+			// Draw the prev frame
+			dst->blit_animation(field.rendertarget_pixel, scale, anim_idx, tanim - FRAME_LENGTH,
+			                    field.owner->get_playercolor());
+		} else if (csinf.was) {
+			// Is the first frame, but there was another building here before,
+			// get its last build picture and draw it instead.
+			uint32_t a;
 			try {
-				pic = building->get_animation("unoccupied");
+				a = csinf.was->get_animation("unoccupied");
 			} catch (Widelands::MapObjectDescr::AnimationNonexistent&) {
-				pic = building->get_animation("idle");
+				a = csinf.was->get_animation("idle");
 			}
+			dst->blit_animation(field.rendertarget_pixel, scale, a, tanim - FRAME_LENGTH,
+			                    field.owner->get_playercolor());
+		}
+		dst->blit_animation(
+		   field.rendertarget_pixel, scale, anim_idx, tanim, field.owner->get_playercolor(), percent);
+	} else if (upcast(const Widelands::BuildingDescr, building, player_field.map_object_descr)) {
+		assert(field.owner != nullptr);
+		// this is a building therefore we either draw unoccupied or idle animation
+		uint32_t pic;
+		try {
+			pic = building->get_animation("unoccupied");
+		} catch (Widelands::MapObjectDescr::AnimationNonexistent&) {
+			pic = building->get_animation("idle");
+		}
+		dst->blit_animation(field.rendertarget_pixel, scale, pic, 0, field.owner->get_playercolor());
+	} else if (player_field.map_object_descr->type() == Widelands::MapObjectType::FLAG) {
+		assert(field.owner != nullptr);
+		dst->blit_animation(field.rendertarget_pixel, scale, field.owner->tribe().flag_animation(), 0,
+		                    field.owner->get_playercolor());
+	} else if (const uint32_t pic = player_field.map_object_descr->main_animation()) {
+		if (field.owner != nullptr) {
 			dst->blit_animation(
 			   field.rendertarget_pixel, scale, pic, 0, field.owner->get_playercolor());
-		} else if (map_object_descr->type() == Widelands::MapObjectType::FLAG) {
-			assert(field.owner != nullptr);
-			dst->blit_animation(field.rendertarget_pixel, scale, field.owner->tribe().flag_animation(),
-			                    0, field.owner->get_playercolor());
-		} else if (const uint32_t pic = map_object_descr->main_animation()) {
-			if (field.owner != nullptr) {
-				dst->blit_animation(
-				   field.rendertarget_pixel, scale, pic, 0, field.owner->get_playercolor());
-			} else {
-				dst->blit_animation(field.rendertarget_pixel, scale, pic, 0);
-			}
+		} else {
+			dst->blit_animation(field.rendertarget_pixel, scale, pic, 0);
 		}
 	}
 }
@@ -284,9 +282,9 @@ void InteractivePlayer::think() {
 					//  fieldaction window before entering roadbuilding mode here.
 					fieldaction_.destroy();
 					map_view()->mouse_to_field(flag_to_connect_, MapView::Transition::Jump);
-					set_sel_pos(Widelands::NodeAndTriangle<>(
+					set_sel_pos(Widelands::NodeAndTriangle<>{
 					   flag_to_connect_,
-					   Widelands::TCoords<>(flag_to_connect_, Widelands::TCoords<>::D)));
+					   Widelands::TCoords<>(flag_to_connect_, Widelands::TriangleIndex::D)});
 					start_build_road(flag_to_connect_, field.get_owned_by());
 				}
 			flag_to_connect_ = Widelands::Coords::null();
@@ -322,6 +320,10 @@ void InteractivePlayer::draw(RenderTarget& dst) {
 }
 
 void InteractivePlayer::draw_map_view(MapView* given_map_view, RenderTarget* dst) {
+	// In-game, selection can never be on triangles or have a radius.
+	assert(get_sel_radius() == 0);
+	assert(!get_sel_triangles());
+
 	const Widelands::Player& plr = player();
 	const auto& gbase = egbase();
 	const Widelands::Map& map = gbase.map();
@@ -329,6 +331,7 @@ void InteractivePlayer::draw_map_view(MapView* given_map_view, RenderTarget* dst
 
 	auto* fields_to_draw = given_map_view->draw_terrain(gbase, dst);
 	const auto& roads_preview = road_building_preview();
+	const std::map<Widelands::Coords, const Image*> work_area_overlays = get_work_area_overlays(map);
 
 	for (size_t idx = 0; idx < fields_to_draw->size(); ++idx) {
 		auto* f = fields_to_draw->mutable_field(idx);
@@ -351,9 +354,11 @@ void InteractivePlayer::draw_map_view(MapView* given_map_view, RenderTarget* dst
 		}
 
 		// Add road building overlays if applicable.
-		const auto it = roads_preview.find(f->fcoords);
-		if (it != roads_preview.end()) {
-			f->roads |= it->second;
+		{
+			const auto it = roads_preview.find(f->fcoords);
+			if (it != roads_preview.end()) {
+				f->roads |= it->second;
+			}
 		}
 
 		const float scale = 1.f / given_map_view->view().zoom;
@@ -369,15 +374,30 @@ void InteractivePlayer::draw_map_view(MapView* given_map_view, RenderTarget* dst
 			draw_immovables_for_formerly_visible_field(*f, player_field, scale, dst);
 		}
 
+		const auto blit_overlay = [dst, f, scale](const Image* pic, const Vector2i& hotspot) {
+			dst->blitrect_scale(Rectf(f->rendertarget_pixel - hotspot.cast<float>() * scale,
+			                          pic->width() * scale, pic->height() * scale),
+			                    pic, Recti(0, 0, pic->width(), pic->height()), 1.f,
+			                    BlendMode::UseAlpha);
+		};
+
+		// Draw work area previews.
+		{
+			const auto it = work_area_overlays.find(f->fcoords);
+			if (it != work_area_overlays.end()) {
+				blit_overlay(it->second, Vector2i(it->second->width() / 2, it->second->height() / 2));
+			}
+		}
+
 		// TODO(sirver): Do not use the field_overlay_manager, instead draw the
 		// overlays we are interested in here directly.
-		field_overlay_manager().foreach_overlay(
-		   f->fcoords, [dst, f, scale](const Image* pic, const Vector2i& hotspot) {
-			   dst->blitrect_scale(Rectf(f->rendertarget_pixel - hotspot.cast<float>() * scale,
-			                             pic->width() * scale, pic->height() * scale),
-			                       pic, Recti(0, 0, pic->width(), pic->height()), 1.f,
-			                       BlendMode::UseAlpha);
-			});
+		field_overlay_manager().foreach_overlay(f->fcoords, blit_overlay);
+
+		// Blit the selection marker.
+		if (f->fcoords == get_sel_pos().node) {
+			const Image* pic = get_sel_picture();
+			blit_overlay(pic, Vector2i(pic->width() / 2, pic->height() / 2));
+		}
 	}
 }
 

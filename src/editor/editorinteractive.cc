@@ -43,6 +43,7 @@
 #include "logic/map_objects/tribes/tribes.h"
 #include "logic/map_objects/world/resource_description.h"
 #include "logic/map_objects/world/world.h"
+#include "logic/maptriangleregion.h"
 #include "logic/player.h"
 #include "map_io/map_loader.h"
 #include "map_io/widelands_map_loader.h"
@@ -244,14 +245,14 @@ void EditorInteractive::map_clicked(const Widelands::NodeAndTriangle<>& node_and
 
 bool EditorInteractive::handle_mouserelease(uint8_t btn, int32_t x, int32_t y) {
 	if (btn == SDL_BUTTON_LEFT) {
-		stop_painting();
+		is_painting_ = false;
 	}
 	return InteractiveBase::handle_mouserelease(btn, x, y);
 }
 
 bool EditorInteractive::handle_mousepress(uint8_t btn, int32_t x, int32_t y) {
 	if (btn == SDL_BUTTON_LEFT) {
-		start_painting();
+		is_painting_ = true;
 	}
 	return InteractiveBase::handle_mousepress(btn, x, y);
 }
@@ -274,6 +275,22 @@ void EditorInteractive::draw(RenderTarget& dst) {
 		starting_positions[map.get_starting_pos(i)] = i;
 	}
 
+	// Figure out which fields are currently under the selection.
+	std::set<Widelands::Coords> selected_nodes;
+	std::set<Widelands::TCoords<>> selected_triangles;
+	if (!get_sel_triangles()) {
+		Widelands::MapRegion<> mr(map, Widelands::Area<>(get_sel_pos().node, get_sel_radius()));
+		do {
+			selected_nodes.emplace(mr.location());
+		} while (mr.advance(map));
+	} else {
+		Widelands::MapTriangleRegion<> mr(
+		   map, Widelands::Area<Widelands::TCoords<>>(get_sel_pos().triangle, get_sel_radius()));
+		do {
+			selected_triangles.emplace(mr.location());
+		} while (mr.advance(map));
+	}
+
 	const auto& world = ebase.world();
 	for (size_t idx = 0; idx < fields_to_draw->size(); ++idx) {
 		const FieldsToDraw::Field& field = fields_to_draw->at(idx);
@@ -291,11 +308,16 @@ void EditorInteractive::draw(RenderTarget& dst) {
 			}
 		}
 
-		const auto blit_overlay = [&dst, &field, scale](const Image* pic, const Vector2i& hotspot) {
-			dst.blitrect_scale(Rectf(field.rendertarget_pixel - hotspot.cast<float>() * scale,
-			                         pic->width() * scale, pic->height() * scale),
+		const auto blit = [&dst, &field, scale](
+		   const Image* pic, const Vector2f& position, const Vector2i& hotspot) {
+			dst.blitrect_scale(Rectf(position - hotspot.cast<float>() * scale, pic->width() * scale,
+			                         pic->height() * scale),
 			                   pic, Recti(0, 0, pic->width(), pic->height()), 1.f,
 			                   BlendMode::UseAlpha);
+		};
+		const auto blit_overlay = [&dst, &field, scale, &blit](
+		   const Image* pic, const Vector2i& hotspot) {
+			blit(pic, field.rendertarget_pixel, hotspot);
 		};
 
 		// Draw resource overlay.
@@ -322,6 +344,39 @@ void EditorInteractive::draw(RenderTarget& dst) {
 			constexpr int kStartingPosHotspotY = 55;
 			blit_overlay(player_image, Vector2i(player_image->width() / 2, kStartingPosHotspotY));
 		}
+
+		// Draw selection markers on the field.
+		if (selected_nodes.count(field.fcoords) > 0) {
+			const Image* pic = get_sel_picture();
+			blit_overlay(pic, Vector2i(pic->width() / 2, pic->height() / 2));
+		}
+
+		// Draw selection markers on the triangles.
+		if (field.all_neighbors_valid()) {
+			const FieldsToDraw::Field& rn = fields_to_draw->at(field.rn_index);
+			const FieldsToDraw::Field& brn = fields_to_draw->at(field.brn_index);
+			const FieldsToDraw::Field& bln = fields_to_draw->at(field.bln_index);
+			if (selected_triangles.count(
+			       Widelands::TCoords<>(field.fcoords, Widelands::TriangleIndex::R))) {
+				const Vector2f tripos(
+				   (field.rendertarget_pixel.x + rn.rendertarget_pixel.x + brn.rendertarget_pixel.x) /
+				      3.f,
+				   (field.rendertarget_pixel.y + rn.rendertarget_pixel.y + brn.rendertarget_pixel.y) /
+				      3.f);
+				const Image* pic = get_sel_picture();
+				blit(pic, tripos, Vector2i(pic->width() / 2, pic->height() / 2));
+			}
+			if (selected_triangles.count(
+			       Widelands::TCoords<>(field.fcoords, Widelands::TriangleIndex::D))) {
+				const Vector2f tripos(
+				   (field.rendertarget_pixel.x + bln.rendertarget_pixel.x + brn.rendertarget_pixel.x) /
+				      3.f,
+				   (field.rendertarget_pixel.y + bln.rendertarget_pixel.y + brn.rendertarget_pixel.y) /
+				      3.f);
+				const Image* pic = get_sel_picture();
+				blit(pic, tripos, Vector2i(pic->width() / 2, pic->height() / 2));
+			}
+		}
 	}
 }
 
@@ -346,10 +401,6 @@ void EditorInteractive::set_sel_radius_and_update_menu(uint32_t const val) {
 	} else {
 		set_sel_radius(val);
 	}
-}
-
-void EditorInteractive::start_painting() {
-	is_painting_ = true;
 }
 
 void EditorInteractive::stop_painting() {
@@ -554,58 +605,6 @@ void EditorInteractive::select_tool(EditorTool& primary, EditorTool::ToolIndex c
 	set_sel_triangles(primary.operates_on_triangles());
 }
 
-/**
- * Reference functions
- *
- *  data is a pointer to a tribe (for buildings)
- */
-void EditorInteractive::reference_player_tribe(Widelands::PlayerNumber player,
-                                               void const* const data) {
-	assert(0 < player);
-	assert(player <= egbase().map().get_nrplayers());
-
-	PlayerReferences r;
-	r.player = player;
-	r.object = data;
-
-	player_tribe_references_.push_back(r);
-}
-
-/// Unreference !once!, if referenced many times, this will leak a reference.
-void EditorInteractive::unreference_player_tribe(Widelands::PlayerNumber const player,
-                                                 void const* const data) {
-	assert(player <= egbase().map().get_nrplayers());
-	assert(data);
-
-	std::vector<PlayerReferences>& references = player_tribe_references_;
-	std::vector<PlayerReferences>::iterator it = references.begin();
-	std::vector<PlayerReferences>::const_iterator references_end = references.end();
-	if (player) {
-		for (; it < references_end; ++it)
-			if (it->player == player && it->object == data) {
-				references.erase(it);
-				break;
-			}
-	} else  //  Player is invalid. Remove all references from this object.
-		while (it < references_end)
-			if (it->object == data) {
-				it = references.erase(it);
-				references_end = references.end();
-			} else
-				++it;
-}
-
-bool EditorInteractive::is_player_tribe_referenced(Widelands::PlayerNumber const player) {
-	assert(0 < player);
-	assert(player <= egbase().map().get_nrplayers());
-
-	for (uint32_t i = 0; i < player_tribe_references_.size(); ++i)
-		if (player_tribe_references_[i].player == player)
-			return true;
-
-	return false;
-}
-
 void EditorInteractive::run_editor(const std::string& filename, const std::string& script_to_run) {
 	Widelands::EditorGameBase egbase(nullptr);
 	EditorInteractive& eia = *new EditorInteractive(egbase);
@@ -673,9 +672,9 @@ void EditorInteractive::map_changed(const MapWas& action) {
 
 		// Make sure that we will start at coordinates (0,0).
 		map_view()->set_view(MapView::View{Vector2f::zero(), 1.f}, MapView::Transition::Jump);
-		set_sel_pos(Widelands::NodeAndTriangle<>(
+		set_sel_pos(Widelands::NodeAndTriangle<>{
 		   Widelands::Coords(0, 0),
-		   Widelands::TCoords<>(Widelands::Coords(0, 0), Widelands::TCoords<>::D)));
+		   Widelands::TCoords<>(Widelands::Coords(0, 0), Widelands::TriangleIndex::D)});
 		break;
 
 	case MapWas::kGloballyMutated:

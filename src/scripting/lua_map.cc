@@ -2133,7 +2133,7 @@ int LuaBuildingDescription::get_vision_range(lua_State* L) {
               nil in case bulding has no workareas
 */
 int LuaBuildingDescription::get_workarea_radius(lua_State* L) {
-	const WorkareaInfo& workareaInfo = get()->workarea_info_;
+	const WorkareaInfo& workareaInfo = get()->workarea_info();
 	if (!workareaInfo.empty()) {
 		lua_pushinteger(L, workareaInfo.begin()->first);
 	} else {
@@ -5972,8 +5972,7 @@ int LuaField::set_terr(lua_State* L) {
 	if (td == static_cast<DescriptionIndex>(-1))
 		report_error(L, "Unknown terrain '%s'", name);
 
-	egbase.mutable_map()->change_terrain(
-	   world, TCoords<FCoords>(fcoords(L), TCoords<FCoords>::R), td);
+	egbase.mutable_map()->change_terrain(world, TCoords<FCoords>(fcoords(L), TriangleIndex::R), td);
 
 	lua_pushstring(L, name);
 	return 1;
@@ -5992,8 +5991,7 @@ int LuaField::set_terd(lua_State* L) {
 	if (td == static_cast<DescriptionIndex>(INVALID_INDEX))
 		report_error(L, "Unknown terrain '%s'", name);
 
-	egbase.mutable_map()->change_terrain(
-	   world, TCoords<FCoords>(fcoords(L), TCoords<FCoords>::D), td);
+	egbase.mutable_map()->change_terrain(world, TCoords<FCoords>(fcoords(L), TriangleIndex::D), td);
 
 	lua_pushstring(L, name);
 	return 1;
