@@ -908,13 +908,13 @@ int32_t DefaultAI::calculate_strength(const std::vector<Widelands::Soldier*>& so
 		attack = (descr.get_base_max_attack() - descr.get_base_min_attack()) / 2.f +
 		         descr.get_base_min_attack() +
 		         descr.get_attack_incr_per_level() * soldier->get_attack_level();
-		defense = 100 - descr.get_base_defense() - 8 * soldier->get_defense_level();
+		defense = 100 - descr.get_base_defense() - descr.get_defense_incr_per_level() * soldier->get_defense_level();
 		evade = 100 - descr.get_base_evade() -
 		        descr.get_evade_incr_per_level() / 100.f * soldier->get_evade_level();
 		final += (attack * health) / (defense * evade);
 	}
 	assert(final >= 0);
-	assert(final <= 25000 * soldiers.size());
+	assert(final <= 32000 * soldiers.size());
 	// 2500 is aproximate strength of one unpromoted soldier
 	return static_cast<int32_t>(final / 2500);
 }
