@@ -65,7 +65,7 @@ public:
 
 	// Overlays displayed while a road is under construction.
 	struct RoadBuildingOverlays {
-		// The roads that are displayed while a road is being build. They are not
+		// The roads that are displayed while a road is being built. They are not
 		// yet logically in the game, but need to be displayed for the user as
 		// visual guide. The data type is the same as for Field::road.
 		std::map<Widelands::Coords, uint8_t> road_previews;
