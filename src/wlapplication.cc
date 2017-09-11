@@ -734,7 +734,7 @@ bool WLApplication::init_settings() {
 	// Profile needs support for a Syntax definition to solve this in a
 	// sensible way
 	s.get_bool("fullscreen");
-	s.get_bool("animate_map_paning");
+	s.get_bool("animate_map_panning");
 	s.get_int("xres");
 	s.get_int("yres");
 	s.get_int("border_snap_distance");

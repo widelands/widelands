@@ -151,7 +151,7 @@ FullscreenMenuOptions::FullscreenMenuOptions(OptionsCtrl::OptionsStruct opt)
      snap_win_overlap_only_(
         &box_windows_, Vector2i::zero(), _("Snap windows only when overlapping"), "", 0),
 	 dock_windows_to_edges_(&box_windows_, Vector2i::zero(), _("Dock windows to edges"), "", 0),
-	 animate_map_paning_(&box_windows_, Vector2i::zero(), _("Animate automatic map movements"), "", 0),
+	 animate_map_panning_(&box_windows_, Vector2i::zero(), _("Animate automatic map movements"), "", 0),
 
      sb_dis_panel_(&box_windows_,
                    0,
@@ -267,7 +267,7 @@ FullscreenMenuOptions::FullscreenMenuOptions(OptionsCtrl::OptionsStruct opt)
 	// Windows
 	box_windows_.add(&snap_win_overlap_only_);
 	box_windows_.add(&dock_windows_to_edges_);
-	box_windows_.add(&animate_map_paning_);
+	box_windows_.add(&animate_map_panning_);
 	box_windows_.add(&sb_dis_panel_);
 	box_windows_.add(&sb_dis_border_);
 
@@ -338,7 +338,7 @@ FullscreenMenuOptions::FullscreenMenuOptions(OptionsCtrl::OptionsStruct opt)
 	// Windows options
 	snap_win_overlap_only_.set_state(opt.snap_win_overlap_only);
 	dock_windows_to_edges_.set_state(opt.dock_windows_to_edges);
-	animate_map_paning_.set_state(opt.animate_map_paning);
+	animate_map_panning_.set_state(opt.animate_map_panning);
 
 	// Sound options
 	music_.set_state(opt.music);
@@ -402,7 +402,7 @@ void FullscreenMenuOptions::layout() {
 	// Windows options
 	snap_win_overlap_only_.set_desired_size(column_width_, snap_win_overlap_only_.get_h());
 	dock_windows_to_edges_.set_desired_size(column_width_, dock_windows_to_edges_.get_h());
-	animate_map_paning_.set_desired_size(column_width_, animate_map_paning_.get_h());
+	animate_map_panning_.set_desired_size(column_width_, animate_map_panning_.get_h());
 	sb_dis_panel_.set_unit_width(200);
 	sb_dis_panel_.set_desired_size(column_width_, sb_dis_panel_.get_h());
 	sb_dis_border_.set_unit_width(200);
@@ -505,7 +505,7 @@ OptionsCtrl::OptionsStruct FullscreenMenuOptions::get_values() {
 	// Windows options
 	os_.snap_win_overlap_only = snap_win_overlap_only_.get_state();
 	os_.dock_windows_to_edges = dock_windows_to_edges_.get_state();
-	os_.animate_map_paning = animate_map_paning_.get_state();
+	os_.animate_map_panning = animate_map_panning_.get_state();
 	os_.panel_snap_distance = sb_dis_panel_.get_value();
 	os_.border_snap_distance = sb_dis_border_.get_value();
 
@@ -566,7 +566,7 @@ OptionsCtrl::OptionsStruct OptionsCtrl::options_struct(uint32_t active_tab) {
 	// Windows options
 	opt.snap_win_overlap_only = opt_section_.get_bool("snap_windows_only_when_overlapping", false);
 	opt.dock_windows_to_edges = opt_section_.get_bool("dock_windows_to_edges", false);
-	opt.animate_map_paning = opt_section_.get_bool("animate_map_paning", true);
+	opt.animate_map_panning = opt_section_.get_bool("animate_map_panning", true);
 	opt.panel_snap_distance = opt_section_.get_int("panel_snap_distance", 0);
 	opt.border_snap_distance = opt_section_.get_int("border_snap_distance", 0);
 
@@ -608,7 +608,7 @@ void OptionsCtrl::save_options() {
 	// Windows options
 	opt_section_.set_bool("snap_windows_only_when_overlapping", opt.snap_win_overlap_only);
 	opt_section_.set_bool("dock_windows_to_edges", opt.dock_windows_to_edges);
-	opt_section_.set_bool("animate_map_paning", opt.animate_map_paning);
+	opt_section_.set_bool("animate_map_panning", opt.animate_map_panning);
 	opt_section_.set_int("panel_snap_distance", opt.panel_snap_distance);
 	opt_section_.set_int("border_snap_distance", opt.border_snap_distance);
 

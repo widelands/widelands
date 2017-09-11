@@ -54,7 +54,7 @@ public:
 		bool dock_windows_to_edges;
 		int32_t panel_snap_distance;
 		int32_t border_snap_distance;
-		bool animate_map_paning;
+		bool animate_map_panning;
 
 		// Sound options
 		bool music;
@@ -138,7 +138,7 @@ private:
 	// Windows options
 	UI::Checkbox snap_win_overlap_only_;
 	UI::Checkbox dock_windows_to_edges_;
-	UI::Checkbox animate_map_paning_;
+	UI::Checkbox animate_map_panning_;
 	UI::SpinBox sb_dis_panel_;
 	UI::SpinBox sb_dis_border_;
 
