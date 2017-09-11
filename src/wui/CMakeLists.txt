@@ -110,6 +110,7 @@ wl_library(wui_mapview
     graphic_game_renderer
     logic
     logic_widelands_geometry
+    profile
     ui_basic
     widelands_ball_of_mud
     wui_mapview_pixelfunctions

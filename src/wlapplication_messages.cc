@@ -130,6 +130,9 @@ void show_usage(const std::string& build_id, const std::string& build_type) {
 	             textdomain */
 	          << endl
 	          << _("Options for the internal window manager:") << endl
+	          << _(" --animate_map_panning=[yes|no]\n"
+	               "                      Should automatic map movements be animated.")
+	          << endl
 	          << _(" --border_snap_distance=[0 ...]\n"
 	               "                      Move a window to the edge of the screen\n"
 	               "                      when the edge of the window comes within\n"

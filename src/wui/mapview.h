@@ -187,6 +187,7 @@ private:
 	Vector2f to_panel(const Vector2f& map_pixel) const;
 	Vector2f to_map(const Vector2i& panel_pixel) const;
 
+	const bool animate_map_panning_;
 	const Widelands::Map& map_;
 
 	// This is owned and handled by us, but handed to the RenderQueue, so we

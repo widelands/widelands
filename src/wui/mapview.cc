@@ -25,6 +25,7 @@
 #include "base/math.h"
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
+#include "profile/profile.h"
 #include "wlapplication.h"
 #include "wui/mapviewpixelfunctions.h"
 
@@ -291,6 +292,7 @@ bool MapView::ViewArea::contains_map_pixel(const Vector2f& map_pixel) const {
 MapView::MapView(
    UI::Panel* parent, const Widelands::Map& map, int32_t x, int32_t y, uint32_t w, uint32_t h)
    : UI::Panel(parent, x, y, w, h),
+     animate_map_panning_(g_options.pull_section("global").get_bool("animate_map_panning", true)),
      map_(map),
      view_(),
      last_mouse_pos_(Vector2i::zero()),
@@ -382,7 +384,8 @@ FieldsToDraw* MapView::draw_terrain(const Widelands::EditorGameBase& egbase, Ren
 	return &fields_to_draw_;
 }
 
-void MapView::set_view(const View& target_view, const Transition& transition) {
+void MapView::set_view(const View& target_view, const Transition& passed_transition) {
+	const Transition transition = animate_map_panning_ ? passed_transition : Transition::Jump;
 	switch (transition) {
 	case Transition::Jump: {
 		view_ = target_view;
