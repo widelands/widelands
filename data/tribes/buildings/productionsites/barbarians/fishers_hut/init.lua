@@ -33,7 +33,7 @@ tribes:new_productionsite_type {
 
    aihints = {
       needs_water = true,
-      prohibited_till = 900
+      prohibited_till = 490
    },
 
    working_positions = {

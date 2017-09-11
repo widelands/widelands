@@ -81,24 +81,16 @@ public:
 	Widelands::EditorGameBase& egbase() const {
 		return egbase_;
 	}
-	virtual void reference_player_tribe(Widelands::PlayerNumber, const void* const) {
-	}
 
 	// TODO(sirver): This should be private.
 	bool show_workarea_preview_;
-	void show_work_area(const WorkareaInfo& workarea_info,
-	                                              Widelands::Coords coords);
+	void show_work_area(const WorkareaInfo& workarea_info, Widelands::Coords coords);
 	void hide_work_area(const Widelands::Coords& coords);
 
 	//  point of view for drawing
 	virtual Widelands::Player* get_player() const = 0;
 
 	void think() override;
-	bool handle_mousepress(uint8_t btn, int32_t x, int32_t y) override;
-	bool handle_mouserelease(uint8_t btn, int32_t x, int32_t y) override;
-	bool
-	handle_mousemove(uint8_t state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff) override;
-	bool handle_mousewheel(uint32_t which, int32_t x, int32_t y) override;
 	bool handle_key(bool down, SDL_Keysym code) override;
 	virtual void postload();
 
@@ -214,7 +206,9 @@ protected:
 
 	void unset_sel_picture();
 	void set_sel_picture(const Image* image);
-	const Image* get_sel_picture() { return sel_.pic; }
+	const Image* get_sel_picture() {
+		return sel_.pic;
+	}
 	void adjust_toolbar_position() {
 		toolbar_.set_pos(Vector2i((get_inner_w() - toolbar_.get_w()) >> 1, get_inner_h() - 34));
 	}
@@ -260,45 +254,45 @@ private:
 		uint32_t radius;
 		const Image* pic;
 		FieldOverlayManager::OverlayId jobid;
-		} sel_;
+	} sel_;
 
-		MapView map_view_;
-		ChatOverlay* chat_overlay_;
+	MapView map_view_;
+	ChatOverlay* chat_overlay_;
 
-		// These get collected by add_toolbar_button
-		// so we can call unassign_toggle_button on them in the destructor.
-		std::vector<UI::UniqueWindow::Registry> registries_;
+	// These get collected by add_toolbar_button
+	// so we can call unassign_toggle_button on them in the destructor.
+	std::vector<UI::UniqueWindow::Registry> registries_;
 
-		UI::Box toolbar_;
-		// No unique_ptr on purpose: 'minimap_' is a UniqueWindow, its parent will
-		// delete it.
-		MiniMap* minimap_;
-		MiniMap::Registry minimap_registry_;
-		QuickNavigation quick_navigation_;
+	UI::Box toolbar_;
+	// No unique_ptr on purpose: 'minimap_' is a UniqueWindow, its parent will
+	// delete it.
+	MiniMap* minimap_;
+	MiniMap::Registry minimap_registry_;
+	QuickNavigation quick_navigation_;
 
-		std::unique_ptr<FieldOverlayManager> field_overlay_manager_;
+	std::unique_ptr<FieldOverlayManager> field_overlay_manager_;
 
-		// The currently enabled work area previews. They are keyed by the
-		// coordinate that the building that shows the work area is positioned.
-	   std::map<Widelands::Coords, const WorkareaInfo*> work_area_previews_;
+	// The currently enabled work area previews. They are keyed by the
+	// coordinate that the building that shows the work area is positioned.
+	std::map<Widelands::Coords, const WorkareaInfo*> work_area_previews_;
 
-		RoadBuildingOverlays road_building_overlays_;
+	RoadBuildingOverlays road_building_overlays_;
 
-		std::unique_ptr<Notifications::Subscriber<GraphicResolutionChanged>>
-		   graphic_resolution_changed_subscriber_;
-		std::unique_ptr<Notifications::Subscriber<NoteSound>> sound_subscriber_;
-		Widelands::EditorGameBase& egbase_;
-		uint32_t display_flags_;
-		uint32_t lastframe_;        //  system time (milliseconds)
-		uint32_t frametime_;        //  in millseconds
-		uint32_t avg_usframetime_;  //  in microseconds!
+	std::unique_ptr<Notifications::Subscriber<GraphicResolutionChanged>>
+	   graphic_resolution_changed_subscriber_;
+	std::unique_ptr<Notifications::Subscriber<NoteSound>> sound_subscriber_;
+	Widelands::EditorGameBase& egbase_;
+	uint32_t display_flags_;
+	uint32_t lastframe_;        //  system time (milliseconds)
+	uint32_t frametime_;        //  in millseconds
+	uint32_t avg_usframetime_;  //  in microseconds!
 
-		Widelands::CoordPath* buildroad_;  //  path for the new road
-		Widelands::PlayerNumber road_build_player_;
+	Widelands::CoordPath* buildroad_;  //  path for the new road
+	Widelands::PlayerNumber road_build_player_;
 
-		UI::UniqueWindow::Registry debugconsole_;
-		std::unique_ptr<UniqueWindowHandler> unique_window_handler_;
-		std::vector<const Image*> workarea_pics_;
+	UI::UniqueWindow::Registry debugconsole_;
+	std::unique_ptr<UniqueWindowHandler> unique_window_handler_;
+	std::vector<const Image*> workarea_pics_;
 };
 
 #endif  // end of include guard: WL_WUI_INTERACTIVE_BASE_H

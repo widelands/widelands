@@ -245,14 +245,14 @@ void EditorInteractive::map_clicked(const Widelands::NodeAndTriangle<>& node_and
 
 bool EditorInteractive::handle_mouserelease(uint8_t btn, int32_t x, int32_t y) {
 	if (btn == SDL_BUTTON_LEFT) {
-		stop_painting();
+		is_painting_ = false;
 	}
 	return InteractiveBase::handle_mouserelease(btn, x, y);
 }
 
 bool EditorInteractive::handle_mousepress(uint8_t btn, int32_t x, int32_t y) {
 	if (btn == SDL_BUTTON_LEFT) {
-		start_painting();
+		is_painting_ = true;
 	}
 	return InteractiveBase::handle_mousepress(btn, x, y);
 }
@@ -310,8 +310,8 @@ void EditorInteractive::draw(RenderTarget& dst) {
 
 		const auto blit = [&dst, &field, scale](
 		   const Image* pic, const Vector2f& position, const Vector2i& hotspot) {
-			dst.blitrect_scale(Rectf(position - hotspot.cast<float>() * scale,
-			                         pic->width() * scale, pic->height() * scale),
+			dst.blitrect_scale(Rectf(position - hotspot.cast<float>() * scale, pic->width() * scale,
+			                         pic->height() * scale),
 			                   pic, Recti(0, 0, pic->width(), pic->height()), 1.f,
 			                   BlendMode::UseAlpha);
 		};
@@ -401,10 +401,6 @@ void EditorInteractive::set_sel_radius_and_update_menu(uint32_t const val) {
 	} else {
 		set_sel_radius(val);
 	}
-}
-
-void EditorInteractive::start_painting() {
-	is_painting_ = true;
 }
 
 void EditorInteractive::stop_painting() {
@@ -607,58 +603,6 @@ void EditorInteractive::select_tool(EditorTool& primary, EditorTool::ToolIndex c
 		unset_sel_picture();
 	}
 	set_sel_triangles(primary.operates_on_triangles());
-}
-
-/**
- * Reference functions
- *
- *  data is a pointer to a tribe (for buildings)
- */
-void EditorInteractive::reference_player_tribe(Widelands::PlayerNumber player,
-                                               void const* const data) {
-	assert(0 < player);
-	assert(player <= egbase().map().get_nrplayers());
-
-	PlayerReferences r;
-	r.player = player;
-	r.object = data;
-
-	player_tribe_references_.push_back(r);
-}
-
-/// Unreference !once!, if referenced many times, this will leak a reference.
-void EditorInteractive::unreference_player_tribe(Widelands::PlayerNumber const player,
-                                                 void const* const data) {
-	assert(player <= egbase().map().get_nrplayers());
-	assert(data);
-
-	std::vector<PlayerReferences>& references = player_tribe_references_;
-	std::vector<PlayerReferences>::iterator it = references.begin();
-	std::vector<PlayerReferences>::const_iterator references_end = references.end();
-	if (player) {
-		for (; it < references_end; ++it)
-			if (it->player == player && it->object == data) {
-				references.erase(it);
-				break;
-			}
-	} else  //  Player is invalid. Remove all references from this object.
-		while (it < references_end)
-			if (it->object == data) {
-				it = references.erase(it);
-				references_end = references.end();
-			} else
-				++it;
-}
-
-bool EditorInteractive::is_player_tribe_referenced(Widelands::PlayerNumber const player) {
-	assert(0 < player);
-	assert(player <= egbase().map().get_nrplayers());
-
-	for (uint32_t i = 0; i < player_tribe_references_.size(); ++i)
-		if (player_tribe_references_[i].player == player)
-			return true;
-
-	return false;
 }
 
 void EditorInteractive::run_editor(const std::string& filename, const std::string& script_to_run) {

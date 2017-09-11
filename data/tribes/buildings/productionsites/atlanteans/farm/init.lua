@@ -33,7 +33,7 @@ tribes:new_productionsite_type {
       basic_amount = 1,
        -- Farm needs spidercloth to be built and spidercloth needs corn for production
        -- -> farm should be built ASAP!
-      prohibited_till = 200
+      prohibited_till = 250
    },
 
    working_positions = {

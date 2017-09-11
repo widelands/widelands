@@ -76,6 +76,7 @@ A program's actions consist of a sequence of commands. A command is written as `
 
 The different command types and the parameters that they take are explained below.
 
+.. highlight:: default
 
 Command Types
 ^^^^^^^^^^^^^

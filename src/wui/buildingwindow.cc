@@ -53,7 +53,7 @@ BuildingWindow::BuildingWindow(InteractiveGameBase& parent,
      is_dying_(false),
      parent_(&parent),
      building_(b),
-	  building_position_(b.get_position()),
+     building_position_(b.get_position()),
      showing_workarea_(false),
      avoid_fastclick_(avoid_fastclick),
      expeditionbtn_(nullptr) {

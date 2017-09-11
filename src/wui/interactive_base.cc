@@ -242,7 +242,8 @@ void InteractiveBase::show_work_area(const WorkareaInfo& workarea_info, Wideland
 	work_area_previews_[coords] = &workarea_info;
 }
 
-std::map<Coords, const Image*> InteractiveBase::get_work_area_overlays(const Widelands::Map& map) const {
+std::map<Coords, const Image*>
+InteractiveBase::get_work_area_overlays(const Widelands::Map& map) const {
 	std::map<Coords, const Image*> result;
 	for (const auto& pair : work_area_previews_) {
 		const Coords& coords = pair.first;
@@ -325,23 +326,6 @@ void InteractiveBase::think() {
 	egbase().think();  // Call game logic here. The game advances.
 
 	UI::Panel::think();
-}
-
-bool InteractiveBase::handle_mousepress(uint8_t btn, int32_t x, int32_t y) {
-	return map_view_.handle_mousepress(btn, x, y);
-}
-
-bool InteractiveBase::handle_mouserelease(uint8_t btn, int32_t x, int32_t y) {
-	return map_view_.handle_mouserelease(btn, x, y);
-}
-
-bool InteractiveBase::handle_mousemove(
-   uint8_t state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff) {
-	return map_view_.handle_mousemove(state, x, y, xdiff, ydiff);
-}
-
-bool InteractiveBase::handle_mousewheel(uint32_t which, int32_t x, int32_t y) {
-	return map_view_.handle_mousewheel(which, x, y);
 }
 
 /*
