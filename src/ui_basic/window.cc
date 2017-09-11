@@ -399,6 +399,12 @@ bool Window::handle_tooltip() {
 	return true;
 }
 
+bool Window::handle_mousewheel(uint32_t which, int32_t x, int32_t y) {
+	// Mouse wheel events should not propagate to objects below us, so we claim
+	// that they have been handled.
+	return true;
+}
+
 /**
  * Close the window. Overwrite this virtual method if you want
  * to take some action before the window is destroyed, or to
