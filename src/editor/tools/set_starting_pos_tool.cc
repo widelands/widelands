@@ -55,7 +55,7 @@ Widelands::NodeCaps set_starting_pos_tool_nodecaps(const Widelands::FCoords& c,
 	return Widelands::NodeCaps::CAPS_NONE;
 }
 
-}  // namespace 
+}  // namespace
 
 EditorSetStartingPosTool::EditorSetStartingPosTool() : EditorTool(*this, *this, false) {
 	current_player_ = 1;

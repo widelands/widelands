@@ -39,7 +39,7 @@ Widelands::NodeCaps port_tool_nodecaps(const Widelands::FCoords& c, const Map& m
 	return NodeCaps::CAPS_NONE;
 }
 
-}  // namespace 
+}  // namespace
 
 EditorSetPortSpaceTool::EditorSetPortSpaceTool(EditorUnsetPortSpaceTool& the_unset_tool)
    : EditorTool(the_unset_tool, the_unset_tool) {
@@ -129,4 +129,3 @@ EditorUnsetPortSpaceTool::nodecaps_for_buildhelp(const Widelands::FCoords& fcoor
                                                   const Widelands::EditorGameBase& egbase) {
 	return port_tool_nodecaps(fcoords, egbase.map());
 }
-
