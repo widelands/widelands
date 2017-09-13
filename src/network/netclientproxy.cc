@@ -7,7 +7,7 @@
 
 std::unique_ptr<NetClientProxy> NetClientProxy::connect(const NetAddress& address, const std::string& name) {
 	std::unique_ptr<NetClientProxy> ptr(new NetClientProxy(address, name));
-	if (ptr->conn_->is_connected()) {
+	if (ptr->conn_ == nullptr || ptr->conn_->is_connected()) {
 		return ptr;
 	} else {
 		ptr.reset();
@@ -21,11 +21,11 @@ NetClientProxy::~NetClientProxy() {
 
 
 bool NetClientProxy::is_connected() const {
-	return conn_->is_connected();
+	return conn_ && conn_->is_connected();
 }
 
 void NetClientProxy::close() {
-	if (conn_->is_connected()) {
+	if (conn_ && conn_->is_connected()) {
 		conn_->close();
 	}
 }
@@ -69,6 +69,7 @@ NetClientProxy::NetClientProxy(const NetAddress& address, const std::string& nam
    	if (cmd != RelayCommand::kWelcome) {
 		conn_->close();
 		conn_.reset();
+		return;
    	}
 
    	// Check version
@@ -87,6 +88,7 @@ NetClientProxy::NetClientProxy(const NetAddress& address, const std::string& nam
    	if (game_name != name) {
 		conn_->close();
 		conn_.reset();
+		return;
    	}
 }
 
@@ -98,7 +100,10 @@ void NetClientProxy::receive_commands() {
 	// Receive all available commands
 	RelayCommand cmd;
 	conn_->peek_reset();
-	conn_->peek_cmd(&cmd);
+	if (!conn_->peek_cmd(&cmd)) {
+		// No command to receive
+		return;
+	}
 	switch (cmd) {
 		case RelayCommand::kDisconnect:
 			if (conn_->peek_string()) {
@@ -121,6 +126,8 @@ void NetClientProxy::receive_commands() {
 		default:
 			// Other commands should not be possible.
 			// Then is either something wrong with the protocol or there is an implementation mistake
+			log("Received command code %i from relay server, do not know what to do with it\n",
+					static_cast<uint8_t>(cmd));
 			NEVER_HERE();
 	}
 }

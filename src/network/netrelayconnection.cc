@@ -44,6 +44,8 @@ void NetRelayConnection::close() {
 }
 
 bool NetRelayConnection::peek_string() {
+	try_network_receive();
+
 	if (buffer_.size() < peek_pointer_ + 1) {
 		return false;
 	}
@@ -77,9 +79,13 @@ void NetRelayConnection::receive(std::string *str) {
 		str->push_back(buffer_.front());
 		buffer_.pop_front();
 	}
+	// Pop the \0
+	buffer_.pop_front();
 }
 
 bool NetRelayConnection::peek_cmd(RelayCommand *cmd) {
+	try_network_receive();
+
 	if (buffer_.size() > peek_pointer_) {
 		if (cmd != nullptr) {
 			*cmd = static_cast<RelayCommand>(buffer_[peek_pointer_]);
@@ -103,6 +109,8 @@ void NetRelayConnection::receive(RelayCommand *out) {
 }
 
 bool NetRelayConnection::peek_uint8_t() {
+	try_network_receive();
+
 	// If there is any byte available, we can read an uint8
 	if (buffer_.size() > peek_pointer_) {
 		peek_pointer_++;
@@ -123,6 +131,8 @@ void NetRelayConnection::receive(uint8_t *out) {
 }
 
 bool NetRelayConnection::peek_recvpacket() {
+	try_network_receive();
+
 	if (buffer_.size() < peek_pointer_ + 2) {
 		// Not even enough space for the size
 		return false;

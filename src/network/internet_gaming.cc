@@ -607,10 +607,11 @@ void InternetGaming::handle_packet(RecvPacket& packet) {
 			assert(waitcmd_ == IGPCMD_GAME_CONNECT);
 			waitcmd_ = "";
 			// Save the received IP(s), so the client can connect to the game
-			NetAddress::parse_ip(&gameips_.first, packet.string(), WIDELANDS_PORT);
+			// NOCOM(Notabilis): Make port a constant
+			NetAddress::parse_ip(&gameips_.first, packet.string(), 7397);
 			// If the next value is true, a secondary IP follows
 			if (packet.string() == bool2str(true)) {
-				NetAddress::parse_ip(&gameips_.second, packet.string(), WIDELANDS_PORT);
+				NetAddress::parse_ip(&gameips_.second, packet.string(), 7397);
 			}
 			log("InternetGaming: Received ips of the game to join: %s %s.\n",
 			    gameips_.first.ip.to_string().c_str(), gameips_.second.ip.to_string().c_str());

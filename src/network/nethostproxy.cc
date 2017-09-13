@@ -7,7 +7,7 @@
 
 std::unique_ptr<NetHostProxy> NetHostProxy::connect(const std::pair<NetAddress, NetAddress>& addresses, const std::string& name, const std::string& password) {
 	std::unique_ptr<NetHostProxy> ptr(new NetHostProxy(addresses, name, password));
-	if (ptr->conn_->is_connected()) {
+	if (ptr->conn_ == nullptr || ptr->conn_->is_connected()) {
 		return ptr;
 	} else {
 		ptr.reset();
@@ -16,7 +16,7 @@ std::unique_ptr<NetHostProxy> NetHostProxy::connect(const std::pair<NetAddress, 
 }
 
 NetHostProxy::~NetHostProxy() {
-	if (conn_->is_connected()) {
+	if (conn_ && conn_->is_connected()) {
 		while (!received_.empty()) {
 			close(received_.begin()->first);
 		}
@@ -69,7 +69,10 @@ bool NetHostProxy::try_receive(const ConnectionId id, RecvPacket* packet) {
 }
 
 void NetHostProxy::send(const ConnectionId id, const SendPacket& packet) {
-	send({id}, packet);
+	//printf("NetHostProxy::send() to %i\n", id);
+	std::vector<ConnectionId> vec;
+	vec.push_back(id);
+	send(vec, packet);
 }
 
 void NetHostProxy::send(const std::vector<ConnectionId>& ids, const SendPacket& packet) {
@@ -79,6 +82,7 @@ void NetHostProxy::send(const std::vector<ConnectionId>& ids, const SendPacket& 
 
 	conn_->send(RelayCommand::kToClients);
 	for (ConnectionId id : ids) {
+		//printf("NetHostProxy::send({}) to %i\n", id);
 		conn_->send(id);
 	}
 	conn_->send(0);
@@ -100,10 +104,13 @@ NetHostProxy::NetHostProxy(const std::pair<NetAddress, NetAddress>& addresses, c
    	conn_->send(kRelayProtocolVersion);
    	conn_->send(name);
    	conn_->send(password);
+   	conn_->send(password);
 
    	// Wait for answer
 	// Don't like it.
-   	while (!conn_->peek_cmd());
+   	while (!conn_->peek_cmd())
+		printf("while (!conn_->peek_cmd())\n")
+		;
 
 	RelayCommand cmd;
 	conn_->receive(&cmd);
@@ -111,24 +118,31 @@ NetHostProxy::NetHostProxy(const std::pair<NetAddress, NetAddress>& addresses, c
    	if (cmd != RelayCommand::kWelcome) {
 		conn_->close();
 		conn_.reset();
+		return;
    	}
 
    	// Check version
-   	while (!conn_->peek_uint8_t());
+   	while (!conn_->peek_uint8_t())
+		printf("while (!conn_->peek_cmd())\n")
+		;
 	uint8_t relay_proto_version;
 	conn_->receive(&relay_proto_version);
    	if (relay_proto_version != kRelayProtocolVersion) {
 		conn_->close();
 		conn_.reset();
+		return;
    	}
 
    	// Check game name
-   	while (!conn_->peek_string());
+   	while (!conn_->peek_string())
+		printf("while (!conn_->peek_string())\n")
+		;
 	std::string game_name;
 	conn_->receive(&game_name);
    	if (game_name != name) {
 		conn_->close();
 		conn_.reset();
+		return;
    	}
 }
 
@@ -140,7 +154,10 @@ void NetHostProxy::receive_commands() {
 	// Receive all available commands
 	RelayCommand cmd;
 	conn_->peek_reset();
-	conn_->peek_cmd(&cmd);
+	if (!conn_->peek_cmd(&cmd)) {
+		// No command to receive
+		return;
+	}
 	switch (cmd) {
 		case RelayCommand::kDisconnect:
 			if (conn_->peek_string()) {
@@ -158,6 +175,7 @@ void NetHostProxy::receive_commands() {
 				uint8_t id;
 				conn_->receive(&id);
                 accept_.push(id);
+                received_.insert(std::make_pair(id, std::queue<RecvPacket>()));
 			}
 			break;
 		case RelayCommand::kDisconnectClient:
@@ -183,6 +201,8 @@ void NetHostProxy::receive_commands() {
 		default:
 			// Other commands should not be possible.
 			// Then is either something wrong with the protocol or there is an implementation mistake
+			log("Received command code %i from relay server, do not know what to do with it\n",
+					static_cast<uint8_t>(cmd));
 			NEVER_HERE();
 	}
 }
