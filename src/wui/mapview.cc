@@ -25,6 +25,7 @@
 #include "base/math.h"
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
+#include "profile/profile.h"
 #include "wlapplication.h"
 #include "wui/mapviewpixelfunctions.h"
 
@@ -291,6 +292,7 @@ bool MapView::ViewArea::contains_map_pixel(const Vector2f& map_pixel) const {
 MapView::MapView(
    UI::Panel* parent, const Widelands::Map& map, int32_t x, int32_t y, uint32_t w, uint32_t h)
    : UI::Panel(parent, x, y, w, h),
+     animate_map_panning_(g_options.pull_section("global").get_bool("animate_map_panning", true)),
      map_(map),
      view_(),
      last_mouse_pos_(Vector2i::zero()),
@@ -382,7 +384,8 @@ FieldsToDraw* MapView::draw_terrain(const Widelands::EditorGameBase& egbase, Ren
 	return &fields_to_draw_;
 }
 
-void MapView::set_view(const View& target_view, const Transition& transition) {
+void MapView::set_view(const View& target_view, const Transition& passed_transition) {
+	const Transition transition = animate_map_panning_ ? passed_transition : Transition::Jump;
 	switch (transition) {
 	case Transition::Jump: {
 		view_ = target_view;
@@ -447,12 +450,16 @@ bool MapView::handle_mousepress(uint8_t const btn, int32_t const x, int32_t cons
 		stop_dragging();
 		const auto node_and_triangle = track_sel(Vector2i(x, y));
 		field_clicked(node_and_triangle);
-	} else if (btn == SDL_BUTTON_RIGHT) {
+		// Do not return true, because we want to give our parent a chance to
+		// also handle the click.
+	}
+	if (btn == SDL_BUTTON_RIGHT) {
 		dragging_ = true;
 		grab_mouse(true);
 		WLApplication::get()->set_mouse_lock(true);
+		return true;
 	}
-	return true;
+	return false;
 }
 
 bool MapView::handle_mouserelease(const uint8_t btn, int32_t, int32_t) {
@@ -477,7 +484,7 @@ bool MapView::handle_mousemove(
 	}
 
 	track_sel(Vector2i(x, y));
-	return true;
+	return false;
 }
 
 bool MapView::handle_mousewheel(uint32_t which, int32_t /* x */, int32_t y) {

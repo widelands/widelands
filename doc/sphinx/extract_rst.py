@@ -20,6 +20,7 @@ cpp_pairs = (
     ('src/scripting/lua_game.cc', 'autogen_wl_game.rst'),
     ('src/scripting/lua_ui.cc', 'autogen_wl_ui.rst'),
     ('src/scripting/lua_globals.cc', 'autogen_globals.rst'),
+    ('src/logic/map_objects/tribes/worker_program.cc', 'autogen_tribes_worker_programs.rst'),
 )
 
 # These directories are scanned without knowing which file
@@ -30,7 +31,7 @@ cpp_pairs = (
 lua_dirs = (
     ('data/scripting', '', 'auxiliary'),
     ('data/scripting/win_conditions', '', 'auxiliary'),
-    ('data/scripting/editor', '', 'lua_world'),
+    ('data/scripting/editor', '', 'lua_world_other'),
     ('data/tribes', '', 'lua_tribes_defining'),
     ('data/tribes/scripting', '', 'lua_tribes_other'),
     ('data/tribes/scripting/mapobject_info', '', 'lua_tribes_other'),
@@ -53,10 +54,21 @@ lua_dirs = (
      'ships', 'lua_tribes_units'),
      ('data/tribes/wares/armor',
      'wares', 'lua_tribes_units'),
+     ('data/tribes/workers/atlanteans/armorsmith',
+     'basic_workers', 'lua_tribes_workers'),
      ('data/tribes/workers/atlanteans/carrier',
      'carriers', 'lua_tribes_workers'),
      ('data/tribes/workers/atlanteans/soldier',
      'soldiers', 'lua_tribes_workers'),
+     ('data/world', '', 'lua_world_defining'),
+     ('data/world/critters/badger',
+     'critters', 'lua_world_units'),
+     ('data/world/immovables/bush1',
+     'immovables', 'lua_world_units'),
+     ('data/world/resources',
+     'resources', 'lua_world_units'),
+     ('data/world/terrains',
+     'terrains', 'lua_world_units'),
 )
 
 
