@@ -83,7 +83,6 @@ InteractiveBase::InteractiveBase(EditorGameBase& the_egbase, Section& global_s)
      lastframe_(SDL_GetTicks()),
      frametime_(0),
      avg_usframetime_(0),
-     road_buildhelp_overlay_jobid_(0),
      buildroad_(nullptr),
      road_build_player_(0),
      unique_window_handler_(new UniqueWindowHandler()),
@@ -670,7 +669,8 @@ Add road building data to the road overlay
 */
 void InteractiveBase::roadb_add_overlay() {
 	assert(buildroad_);
-	assert(road_building_preview_.empty());
+	assert(road_building_overlays_.road_previews.empty());
+	assert(road_building_overlays_.steepness_indicators.empty());
 
 	const Map& map = egbase().map();
 
@@ -685,14 +685,12 @@ void InteractiveBase::roadb_add_overlay() {
 			dir = Widelands::get_reverse_dir(dir);
 		}
 		int32_t const shift = 2 * (dir - Widelands::WALK_E);
-		road_building_preview_[c] |= (Widelands::RoadType::kNormal << shift);
+		road_building_overlays_.road_previews[c] |= (Widelands::RoadType::kNormal << shift);
 	}
 
 	// build hints
 	Widelands::FCoords endpos = map.get_fcoords(buildroad_->get_end());
 
-	assert(!road_buildhelp_overlay_jobid_);
-	road_buildhelp_overlay_jobid_ = field_overlay_manager_->next_overlay_id();
 	for (int32_t dir = 1; dir <= 6; ++dir) {
 		Widelands::FCoords neighb;
 		int32_t caps;
@@ -733,10 +731,7 @@ void InteractiveBase::roadb_add_overlay() {
 			name = "images/wui/overlays/roadb_yellow.png";
 		else
 			name = "images/wui/overlays/roadb_red.png";
-
-		field_overlay_manager_->register_overlay(neighb, g_gr->images().get(name),
-		                                         OverlayLevel::kRoadBuildSlope, Vector2i::invalid(),
-		                                         road_buildhelp_overlay_jobid_);
+		road_building_overlays_.steepness_indicators[neighb] = g_gr->images().get(name);
 	}
 }
 
@@ -747,14 +742,8 @@ Remove road building data from road overlay
 */
 void InteractiveBase::roadb_remove_overlay() {
 	assert(buildroad_);
-
-	road_building_preview_.clear();
-
-	// build hints
-	if (road_buildhelp_overlay_jobid_) {
-		field_overlay_manager_->remove_overlay(road_buildhelp_overlay_jobid_);
-	}
-	road_buildhelp_overlay_jobid_ = 0;
+	road_building_overlays_.road_previews.clear();
+	road_building_overlays_.steepness_indicators.clear();
 }
 
 bool InteractiveBase::handle_key(bool const down, SDL_Keysym const code) {

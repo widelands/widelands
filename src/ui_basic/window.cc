@@ -399,7 +399,7 @@ bool Window::handle_tooltip() {
 	return true;
 }
 
-bool Window::handle_mousewheel(uint32_t which, int32_t x, int32_t y) {
+bool Window::handle_mousewheel(uint32_t, int32_t, int32_t) {
 	// Mouse wheel events should not propagate to objects below us, so we claim
 	// that they have been handled.
 	return true;

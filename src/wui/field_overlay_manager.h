@@ -51,10 +51,8 @@ class Image;
 // Levels for the overlay registers. This defines in which order they will be
 // drawn. Buildhelp is special and has the value 5, i.e. every smaller will be
 // drawn below the buildhelp, everything higher above.
-enum class OverlayLevel {
-	kWorkAreaPreview = 0,
-	kRoadBuildSlope = 8,
-};
+// TODO(sirver): no longer used. remove.
+enum class OverlayLevel {};
 
 struct FieldOverlayManager {
 	/// A unique id identifying a registered overlay.
