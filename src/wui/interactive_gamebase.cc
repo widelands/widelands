@@ -209,6 +209,7 @@ UI::UniqueWindow* InteractiveGameBase::show_building_window(const Widelands::Coo
 			   *this, registry, *dynamic_cast<Widelands::Warehouse*>(building), avoid_fastclick);
 		};
 		break;
+		// NOCOM(#sirver): PUt something here.
 	default:
 		log("Unable to show window for building '%s', type '%s'.\n", building->descr().name().c_str(),
 		    to_string(building->descr().type()).c_str());

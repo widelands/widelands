@@ -121,6 +121,13 @@ void Tribes::add_warehouse_type(const LuaTable& table, const EditorGameBase& egb
 	   table, egbase));
 }
 
+void Tribes::add_market_type(const LuaTable& table, const EditorGameBase& egbase) {
+	i18n::Textdomain td("tribes");
+	buildings_->add(new MarketDescr(
+	   pgettext_expr(table.get_string("msgctxt").c_str(), table.get_string("descname").c_str()),
+	   table, egbase));
+}
+
 void Tribes::add_immovable_type(const LuaTable& table) {
 	i18n::Textdomain td("tribes");
 	immovables_->add(new ImmovableDescr(

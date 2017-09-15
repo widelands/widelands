@@ -374,6 +374,15 @@ struct NoteProductionSiteOutOfResources {
 	   : ps(init_ps), player(init_player) {
 	}
 };
-}
+
+// Parses the descriptions of the working positions from 'items_table' and
+// fills in 'working_positions'. Throws an error if the table contains invalid
+// values.
+void parse_working_positions(const EditorGameBase& egbase,
+                             LuaTable* items_table,
+                             BillOfMaterials* working_positions);
+
+}  // namespace Widelands
+
 
 #endif  // end of include guard: WL_LOGIC_MAP_OBJECTS_TRIBES_PRODUCTIONSITE_H

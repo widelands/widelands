@@ -618,6 +618,9 @@ int upcasted_map_object_descr_to_lua(lua_State* L, const MapObjectDescr* const d
 			return CAST_TO_LUA(MilitarySiteDescr, LuaMilitarySiteDescription);
 		case MapObjectType::WAREHOUSE:
 			return CAST_TO_LUA(WarehouseDescr, LuaWarehouseDescription);
+		case MapObjectType::MARKET:
+			// NOCOM(#sirver): Implement
+			// return CAST_TO_LUA(MarketDescr, LuaMarketDescription);
 		case MapObjectType::TRAININGSITE:
 			return CAST_TO_LUA(TrainingSiteDescr, LuaTrainingSiteDescription);
 		default:
@@ -684,6 +687,9 @@ int upcasted_map_object_to_lua(lua_State* L, MapObject* mo) {
 		return CAST_TO_LUA(Building);
 	case MapObjectType::WAREHOUSE:
 		return CAST_TO_LUA(Warehouse);
+	case MapObjectType::MARKET:
+		// NOCOM(#sirver): Implement this.
+		// return CAST_TO_LUA(Market);
 	case MapObjectType::PRODUCTIONSITE:
 		return CAST_TO_LUA(ProductionSite);
 	case MapObjectType::MILITARYSITE:
@@ -3678,6 +3684,9 @@ int LuaMapObject::get_descr(lua_State* L) {
 		return CAST_TO_LUA(TrainingSiteDescr, LuaTrainingSiteDescription);
 	case (MapObjectType::WAREHOUSE):
 		return CAST_TO_LUA(WarehouseDescr, LuaWarehouseDescription);
+	case (MapObjectType::MARKET):
+		// NOCOM(#sirver): implement this
+		// return CAST_TO_LUA(WarehouseDescr, LuaWarehouseDescription);
 	case (MapObjectType::IMMOVABLE):
 		return CAST_TO_LUA(ImmovableDescr, LuaImmovableDescription);
 	case (MapObjectType::WORKER):
