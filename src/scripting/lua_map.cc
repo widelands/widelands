@@ -2751,16 +2751,16 @@ int LuaWarehouseDescription::get_heal_per_second(lua_State* L) {
 
 /* RST
 MarketDescription
---------------------
+-----------------
 
 .. class:: MarketDescription
 
    Child of: :class:`MapObjectDescription`, :class:`ImmovableDescription`, :class:`BuildingDescription`
 
-	A static description of a tribe's market, so it can be used in help files
-	without having to access an actual building on the map. A Market is used for
-	trading over land with other players.
-   See the parent classes for more properties.
+   A static description of a tribe's market, so it can be used in help files
+   without having to access an actual building on the map. A Market is used for
+   trading over land with other players. See the parent classes for more
+   properties.
 */
 const char LuaMarketDescription::className[] = "MarketDescription";
 const MethodType<LuaMarketDescription> LuaMarketDescription::Methods[] = {
