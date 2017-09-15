@@ -619,8 +619,7 @@ int upcasted_map_object_descr_to_lua(lua_State* L, const MapObjectDescr* const d
 		case MapObjectType::WAREHOUSE:
 			return CAST_TO_LUA(WarehouseDescr, LuaWarehouseDescription);
 		case MapObjectType::MARKET:
-			// NOCOM(#sirver): Implement
-			// return CAST_TO_LUA(MarketDescr, LuaMarketDescription);
+			return CAST_TO_LUA(MarketDescr, LuaMarketDescription);
 		case MapObjectType::TRAININGSITE:
 			return CAST_TO_LUA(TrainingSiteDescr, LuaTrainingSiteDescription);
 		default:
@@ -688,19 +687,18 @@ int upcasted_map_object_to_lua(lua_State* L, MapObject* mo) {
 	case MapObjectType::WAREHOUSE:
 		return CAST_TO_LUA(Warehouse);
 	case MapObjectType::MARKET:
-		// NOCOM(#sirver): Implement this.
-		// return CAST_TO_LUA(Market);
+		return CAST_TO_LUA(Market);
 	case MapObjectType::PRODUCTIONSITE:
 		return CAST_TO_LUA(ProductionSite);
 	case MapObjectType::MILITARYSITE:
 		return CAST_TO_LUA(MilitarySite);
 	case MapObjectType::TRAININGSITE:
 		return CAST_TO_LUA(TrainingSite);
-	case (MapObjectType::MAPOBJECT):
-	case (MapObjectType::BATTLE):
-	case (MapObjectType::BOB):
-	case (MapObjectType::FLEET):
-	case (MapObjectType::WARE):
+	case MapObjectType::MAPOBJECT:
+	case MapObjectType::BATTLE:
+	case MapObjectType::BOB:
+	case MapObjectType::FLEET:
+	case MapObjectType::WARE:
 		throw LuaError((boost::format("upcasted_map_object_to_lua: Unknown %i") %
 		                static_cast<int>(mo->descr().type()))
 		                  .str());
@@ -2752,6 +2750,33 @@ int LuaWarehouseDescription::get_heal_per_second(lua_State* L) {
 }
 
 /* RST
+MarketDescription
+--------------------
+
+.. class:: MarketDescription
+
+   Child of: :class:`MapObjectDescription`, :class:`ImmovableDescription`, :class:`BuildingDescription`
+
+	A static description of a tribe's market, so it can be used in help files
+	without having to access an actual building on the map. A Market is used for
+	trading over land with other players.
+   See the parent classes for more properties.
+*/
+const char LuaMarketDescription::className[] = "MarketDescription";
+const MethodType<LuaMarketDescription> LuaMarketDescription::Methods[] = {
+   {nullptr, nullptr},
+};
+const PropertyType<LuaMarketDescription> LuaMarketDescription::Properties[] = {
+   {nullptr, nullptr, nullptr},
+};
+
+/*
+ ==========================================================
+ PROPERTIES
+ ==========================================================
+ */
+
+/* RST
 WareDescription
 ---------------
 
@@ -3670,39 +3695,38 @@ int LuaMapObject::get_descr(lua_State* L) {
 	assert(desc != nullptr);
 
 	switch (desc->type()) {
-	case (MapObjectType::BUILDING):
+	case MapObjectType::BUILDING:
 		return CAST_TO_LUA(BuildingDescr, LuaBuildingDescription);
-	case (MapObjectType::CONSTRUCTIONSITE):
+	case MapObjectType::CONSTRUCTIONSITE:
 		return CAST_TO_LUA(ConstructionSiteDescr, LuaConstructionSiteDescription);
-	case (MapObjectType::DISMANTLESITE):
+	case MapObjectType::DISMANTLESITE:
 		return CAST_TO_LUA(DismantleSiteDescr, LuaDismantleSiteDescription);
-	case (MapObjectType::PRODUCTIONSITE):
+	case MapObjectType::PRODUCTIONSITE:
 		return CAST_TO_LUA(ProductionSiteDescr, LuaProductionSiteDescription);
-	case (MapObjectType::MILITARYSITE):
+	case MapObjectType::MILITARYSITE:
 		return CAST_TO_LUA(MilitarySiteDescr, LuaMilitarySiteDescription);
-	case (MapObjectType::TRAININGSITE):
+	case MapObjectType::TRAININGSITE:
 		return CAST_TO_LUA(TrainingSiteDescr, LuaTrainingSiteDescription);
-	case (MapObjectType::WAREHOUSE):
+	case MapObjectType::WAREHOUSE:
 		return CAST_TO_LUA(WarehouseDescr, LuaWarehouseDescription);
-	case (MapObjectType::MARKET):
-		// NOCOM(#sirver): implement this
-		// return CAST_TO_LUA(WarehouseDescr, LuaWarehouseDescription);
-	case (MapObjectType::IMMOVABLE):
+	case MapObjectType::MARKET:
+		return CAST_TO_LUA(MarketDescr, LuaMarketDescription);
+	case MapObjectType::IMMOVABLE:
 		return CAST_TO_LUA(ImmovableDescr, LuaImmovableDescription);
-	case (MapObjectType::WORKER):
-	case (MapObjectType::CARRIER):
-	case (MapObjectType::SOLDIER):
+	case MapObjectType::WORKER:
+	case MapObjectType::CARRIER:
+	case MapObjectType::SOLDIER:
 		return CAST_TO_LUA(WorkerDescr, LuaWorkerDescription);
-	case (MapObjectType::MAPOBJECT):
-	case (MapObjectType::BATTLE):
-	case (MapObjectType::BOB):
-	case (MapObjectType::CRITTER):
-	case (MapObjectType::FLEET):
-	case (MapObjectType::SHIP):
-	case (MapObjectType::FLAG):
-	case (MapObjectType::ROAD):
-	case (MapObjectType::PORTDOCK):
-	case (MapObjectType::WARE):
+	case MapObjectType::MAPOBJECT:
+	case MapObjectType::BATTLE:
+	case MapObjectType::BOB:
+	case MapObjectType::CRITTER:
+	case MapObjectType::FLEET:
+	case MapObjectType::SHIP:
+	case MapObjectType::FLAG:
+	case MapObjectType::ROAD:
+	case MapObjectType::PORTDOCK:
+	case MapObjectType::WARE:
 		return CAST_TO_LUA(MapObjectDescr, LuaMapObjectDescription);
 	}
 	NEVER_HERE();
@@ -5045,6 +5069,51 @@ int LuaProductionSite::create_new_worker(PlayerImmovable& pi,
 }
 
 /* RST
+Market
+---------
+
+.. class:: Market
+
+   Child of: :class:`Building`, :class:`HasWares`, :class:`HasWorkers`
+
+	A Market used for trading with other players.
+
+   More properties are available through this object's
+   :class:`MarketDescription`, which you can access via :any:`MapObject.descr`.
+*/
+const char LuaMarket::className[] = "Market";
+const MethodType<LuaMarket> LuaMarket::Methods[] = {
+	// TODO(sirver,trading): Implement and fix documentation.
+   // METHOD(LuaMarket, set_wares),
+   // METHOD(LuaMarket, get_wares),
+   // METHOD(LuaMarket, set_workers),
+   // METHOD(LuaMarket, get_workers),
+   {nullptr, nullptr},
+};
+const PropertyType<LuaMarket> LuaMarket::Properties[] = {
+   {nullptr, nullptr, nullptr},
+};
+
+/*
+ ==========================================================
+ PROPERTIES
+ ==========================================================
+ */
+
+/*
+ ==========================================================
+ LUA METHODS
+ ==========================================================
+ */
+
+/*
+ ==========================================================
+ C METHODS
+ ==========================================================
+ */
+
+
+/* RST
 MilitarySite
 --------------
 
@@ -6371,6 +6440,11 @@ void luaopen_wlmap(lua_State* L) {
 	add_parent<LuaWarehouseDescription, LuaMapObjectDescription>(L);
 	lua_pop(L, 1);  // Pop the meta table
 
+	register_class<LuaMarketDescription>(L, "map", true);
+	add_parent<LuaMarketDescription, LuaBuildingDescription>(L);
+	add_parent<LuaMarketDescription, LuaMapObjectDescription>(L);
+	lua_pop(L, 1);  // Pop the meta table
+
 	register_class<LuaWareDescription>(L, "map", true);
 	add_parent<LuaWareDescription, LuaMapObjectDescription>(L);
 	lua_pop(L, 1);  // Pop the meta table
@@ -6457,6 +6531,13 @@ void luaopen_wlmap(lua_State* L) {
 	add_parent<LuaWarehouse, LuaPlayerImmovable>(L);
 	add_parent<LuaWarehouse, LuaBaseImmovable>(L);
 	add_parent<LuaWarehouse, LuaMapObject>(L);
+	lua_pop(L, 1);  // Pop the meta table
+
+	register_class<LuaMarket>(L, "map", true);
+	add_parent<LuaMarket, LuaBuilding>(L);
+	add_parent<LuaMarket, LuaPlayerImmovable>(L);
+	add_parent<LuaMarket, LuaBaseImmovable>(L);
+	add_parent<LuaMarket, LuaMapObject>(L);
 	lua_pop(L, 1);  // Pop the meta table
 
 	register_class<LuaProductionSite>(L, "map", true);

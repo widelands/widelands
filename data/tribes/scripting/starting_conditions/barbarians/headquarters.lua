@@ -18,6 +18,7 @@ init = {
       sf = shared_in_start
    else
       player:allow_workers("all")
+      plr:forbid_buildings("barbarians_market")
    end
 
    hq = prefilled_buildings(player, { "barbarians_headquarters", sf.x, sf.y,

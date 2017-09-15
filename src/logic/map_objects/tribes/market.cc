@@ -24,8 +24,6 @@
 
 namespace Widelands {
 
-// NOCOM(#sirver): forbid building of this in regular games for now.
-
 MarketDescr::MarketDescr(const std::string& init_descname,
                          const LuaTable& table,
                          const EditorGameBase& egbase)
@@ -33,7 +31,7 @@ MarketDescr::MarketDescr(const std::string& init_descname,
 	i18n::Textdomain td("tribes");
 
 	parse_working_positions(egbase, table.get_table("working_positions").get(), &working_positions_);
-	// NOCOM(#sirver): fill in
+	// TODO(sirver,trading): Add actual logic here.
 }
 
 Building& MarketDescr::create_object() const {
