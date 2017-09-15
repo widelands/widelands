@@ -7,7 +7,7 @@
 
 std::unique_ptr<NetClientProxy> NetClientProxy::connect(const NetAddress& address, const std::string& name) {
 	std::unique_ptr<NetClientProxy> ptr(new NetClientProxy(address, name));
-	if (ptr->conn_ == nullptr || ptr->conn_->is_connected()) {
+	if (ptr->conn_ != nullptr && ptr->conn_->is_connected()) {
 		return ptr;
 	} else {
 		ptr.reset();

@@ -73,8 +73,32 @@ private:
 	/// A list of clients which want to connect.
 	std::queue<ConnectionId> accept_;
 
-	/// For each connected client, the packages that have been received from him.
-	std::map<ConnectionId, std::queue<RecvPacket>> received_;
+	/// The clients connected through the relay
+	struct Client {
+		/// The state of the client
+		enum class State {
+			/// The relay introduced the client but try_accept() hasn't been called for it yet
+			kConnecting,
+			/// A normally connected client
+			kConnected,
+			/// The relay told us that the client disconnected but there are still packages in the buffer
+			kDisconnected
+		};
+
+		Client()
+			: state_(State::kConnecting), received_() {
+		}
+
+		// deleted since RecvPacket does not offer a copy constructor
+		Client(const Client& other) = delete;
+
+		/// The current connection state
+		State state_;
+		/// The packages that have been received
+		std::queue<RecvPacket> received_;
+	};
+	/// The connected clients
+	std::map<ConnectionId, Client> clients_;
 };
 
 #endif  // end of include guard: WL_NETWORK_NETHOSTPROXY_H

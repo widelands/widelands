@@ -7,7 +7,7 @@
 
 std::unique_ptr<NetHostProxy> NetHostProxy::connect(const std::pair<NetAddress, NetAddress>& addresses, const std::string& name, const std::string& password) {
 	std::unique_ptr<NetHostProxy> ptr(new NetHostProxy(addresses, name, password));
-	if (ptr->conn_ == nullptr || ptr->conn_->is_connected()) {
+	if (ptr->conn_ != nullptr && ptr->conn_->is_connected()) {
 		return ptr;
 	} else {
 		ptr.reset();
@@ -17,8 +17,9 @@ std::unique_ptr<NetHostProxy> NetHostProxy::connect(const std::pair<NetAddress, 
 
 NetHostProxy::~NetHostProxy() {
 	if (conn_ && conn_->is_connected()) {
-		while (!received_.empty()) {
-			close(received_.begin()->first);
+		while (!clients_.empty()) {
+			close(clients_.begin()->first);
+			clients_.erase(clients_.begin());
 		}
 		conn_->close();
 	}
@@ -29,42 +30,62 @@ bool NetHostProxy::is_connected() const {
 }*/
 
 bool NetHostProxy::is_connected(const ConnectionId id) const {
-	return received_.count(id) > 0;
+	return clients_.count(id) > 0 && clients_.at(id).state_ == Client::State::kConnected;
 }
 
 void NetHostProxy::close(const ConnectionId id) {
-	auto iter_client = received_.find(id);
-	if (iter_client == received_.end()) {
+	auto iter_client = clients_.find(id);
+	if (iter_client == clients_.end()) {
 		// Not connected anyway
 		return;
 	}
     conn_->send(RelayCommand::kDisconnectClient);
     conn_->send(id);
-    received_.erase(iter_client);
+    if (iter_client->second.received_.empty()) {
+		// No pending messages, remove the client
+		clients_.erase(iter_client);
+    } else {
+    	// Still messages pending. Keep the structure so the host can receive them
+		iter_client->second.state_ = Client::State::kDisconnected;
+    }
 }
 
 bool NetHostProxy::try_accept(ConnectionId* new_id) {
 	// Always read all available data into buffers
 	receive_commands();
 
-	if (accept_.empty()) {
-		return false;
+	for (auto& entry : clients_) {
+		if (entry.second.state_ == Client::State::kConnecting) {
+			*new_id = entry.first;
+			entry.second.state_ = Client::State::kConnected;
+			return true;
+		}
 	}
-	*new_id = accept_.front();
-	accept_.pop();
-	return true;
+	return false;
 }
 
 bool NetHostProxy::try_receive(const ConnectionId id, RecvPacket* packet) {
 	receive_commands();
 
-	// Now check whether there is data for the requested client
-	if (!is_connected(id) || received_.at(id).empty())
+	// Check whether client is or was connected
+	if (clients_.count(id) == 0 || clients_.at(id).state_ == Client::State::kConnecting)
 		return false;
 
-	std::queue<RecvPacket>& packet_list = received_.at(id);
+	std::queue<RecvPacket>& packet_list = clients_.at(id).received_;
+
+	// Now check whether there is data for the requested client
+	if (packet_list.empty()) {
+		// If the client is already disconnected it should not be in the map anymore
+		assert(clients_.at(id).state_ == Client::State::kConnected);
+		return false;
+	}
+
 	*packet = std::move(packet_list.front());
 	packet_list.pop();
+	if (packet_list.empty() && clients_.at(id).state_ == Client::State::kDisconnected) {
+		// If the receive bufffer is empty now, remove client
+		clients_.erase(id);
+	}
 	return true;
 }
 
@@ -83,6 +104,7 @@ void NetHostProxy::send(const std::vector<ConnectionId>& ids, const SendPacket& 
 	conn_->send(RelayCommand::kToClients);
 	for (ConnectionId id : ids) {
 		//printf("NetHostProxy::send({}) to %i\n", id);
+		assert(is_connected(id));
 		conn_->send(id);
 	}
 	conn_->send(0);
@@ -107,7 +129,7 @@ NetHostProxy::NetHostProxy(const std::pair<NetAddress, NetAddress>& addresses, c
    	conn_->send(password);
 
    	// Wait for answer
-	// Don't like it.
+	// TODO(Notabilis): Don't like it.
    	while (!conn_->peek_cmd())
 		printf("while (!conn_->peek_cmd())\n")
 		;
@@ -174,8 +196,12 @@ void NetHostProxy::receive_commands() {
 				conn_->receive(&cmd);
 				uint8_t id;
 				conn_->receive(&id);
-                accept_.push(id);
-                received_.insert(std::make_pair(id, std::queue<RecvPacket>()));
+				// Kind of hacky, but create a new Client object inplace.
+				// insert() and emplace() do not work since they call the (deleted) copy constructor
+				// (operator[] returns the object when it exists, otherwise a new one is created)
+				assert(clients_.count(id) == 0);
+                clients_[id];
+                assert(clients_.count(id) == 1);
 			}
 			break;
 		case RelayCommand::kDisconnectClient:
@@ -183,8 +209,8 @@ void NetHostProxy::receive_commands() {
 				conn_->receive(&cmd);
 				uint8_t id;
 				conn_->receive(&id);
-				assert(received_.count(id));
-                received_.erase(id);
+				assert(clients_.count(id));
+				clients_.at(id).state_ = Client::State::kDisconnected;
 			}
 			break;
 		case RelayCommand::kFromClient:
@@ -194,8 +220,8 @@ void NetHostProxy::receive_commands() {
 				conn_->receive(&id);
 				RecvPacket packet;
 				conn_->receive(&packet);
-				assert(received_.count(id));
-                received_.at(id).push(std::move(packet));
+				assert(clients_.count(id));
+				clients_.at(id).received_.push(std::move(packet));
 			}
 			break;
 		default:

@@ -565,14 +565,21 @@ GameHost::GameHost(const std::string& playername, bool internet)
 		// No real listening socket. Instead, connect to the relay server
 		d->net = NetHostProxy::connect(InternetGaming::ref().ips(),
 						InternetGaming::ref().get_local_servername(), InternetGaming::ref().relay_password());
+		if (d->net == nullptr) {
+			// Some kind of problem with the relay server. Bad luck :(
+			throw WLWarning(_("Failed to host the server!"),
+							_("Widelands could not start hosting a server.\n"
+							  "This should not happen and is unfortunately most likely "
+							  "a bug of the metaserver. There is nothing you can do."));
+		}
 	} else {
 		d->net = NetHost::listen(WIDELANDS_PORT);
-	}
-	if (d->net == nullptr) {
-		// This might happen when the widelands socket is already in use
-		throw WLWarning(_("Failed to start the server!"),
-		                _("Widelands could not start a server.\n"
-		                  "Probably some other process is already running a server on our port."));
+		if (d->net == nullptr) {
+			// This might happen when the widelands socket is already in use
+			throw WLWarning(_("Failed to start the server!"),
+							_("Widelands could not start a server.\n"
+							  "Probably some other process is already running a server on our port."));
+		}
 	}
 	d->promoter = new LanGamePromoter();
 	d->game = nullptr;
