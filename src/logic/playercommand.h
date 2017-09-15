@@ -848,7 +848,7 @@ private:
 };
 
 struct CmdSuggestTrade : PlayerCommand {
-	CmdSuggestTrade(uint32_t time, const Trade& trade);
+	CmdSuggestTrade(uint32_t time, PlayerNumber pn, const Trade& trade);
 
 	QueueCommandTypes id() const override {
 		return QueueCommandTypes::kSuggestTrade;

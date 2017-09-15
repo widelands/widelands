@@ -754,23 +754,95 @@ void Game::send_player_cancel_expedition_ship(Ship& ship) {
 }
 
 void Game::send_player_suggest_trade(const Trade& trade) {
-	send_player_command(*new CmdSuggestTrade(get_gametime(), trade));
+	auto* object = objects().get_object(trade.initiator);
+	assert(object != nullptr);
+	send_player_command(
+	   *new CmdSuggestTrade(get_gametime(), object->get_owner()->player_number(), trade));
 }
 
 void Game::suggest_trade(const Trade& trade) {
 	// NOCOM(#sirver): Check if a trade is possible (i.e. if there is a path between the two markets);
-	trade_agreements_.push_back(TradeAgreement{TradeAgreement::State::kSuggested, trade});
+	const int id = next_trade_agreement_id_;
+	++next_trade_agreement_id_;
 
-	trade.receiver->removed.connect([this](const uint32_t serial) {
-		// NOCOM(#sirver): no idea how to properly implement this.
-	});
-	trade.initiator->removed.connect([this](const uint32_t serial) {
-		// NOCOM(#sirver): no idea how to properly implement this.
-	});
+	auto* initiator = dynamic_cast<Market*>(objects().get_object(trade.initiator));
+	auto* receiver = dynamic_cast<Market*>(objects().get_object(trade.receiver));
+	// This is only ever called through a PlayerCommand and that already made
+	// sure that the objects still exist. Since no time has passed, they should
+	// not have vanished under us.
+	assert(initiator != nullptr);
+	assert(receiver != nullptr);
 
-	trade.receiver.send_message(*this,
-			send_message(*game, Message::Type::kTradeOfferReceived, trade.receiver.descr().descname(), trade.receiver.descr().icon_filename(),
-			             trade.receiver.descr().descname(), _("This Market received a new trade offer."), true);
+	receiver->removed.connect(
+	   [this, id](const uint32_t /* serial */) { trade_receiver_vanished(id); });
+	initiator->removed.connect(
+	   [this, id](const uint32_t /* serial */) { trade_initiator_vanished(id); });
+
+	receiver->send_message(*this, Message::Type::kTradeOfferReceived, receiver->descr().descname(),
+	                       receiver->descr().icon_filename(), receiver->descr().descname(),
+	                       _("This Market received a new trade offer."), true);
+	trade_agreements_[id] = TradeAgreement{id, TradeAgreement::State::kSuggested, trade};
+
+	// TODO(sirver): this should be done through another player_command, but I
+	// want to get to the trade logic implementation now.
+	accept_trade(id);
+}
+
+void Game::accept_trade(const int trade_id) {
+	auto* initiator = dynamic_cast<Market*>(objects().get_object(trade.initiator));
+	if (initiator == nullptr) {
+		trade_initiator_vanished(trade_id);
+		return;
+	}
+
+	auto* receiver = dynamic_cast<Market*>(objects().get_object(trade.receiver));
+	if (receiver == nullptr) {
+		trade_receiver_vanished(trade_id);
+		return;
+	}
+
+	initiator->new_trade(trade_id, trade.send_items, trade.num_batches, trade.receiver);
+	receiver->new_trade(trade_id, trade.receved_items, trade.num_batches, trade.initiator);
+
+	// NOCOM(#sirver): Messages to the users?
+}
+
+void Game::trade_receiver_vanished(int trade_id) {
+	// The trade id might be long gone - since we never disconnect from the
+	// 'removed' signal of the two buildings, we might be invoked long after the
+	// trade was deleted for other reasons.
+	const auto it = trade_agreements_.find(trade_id);
+	if (it == trade_agreements_.end()) {
+		return;
+	}
+	const auto& trade = it->second.trade;
+
+	auto* other = dynamic_cast<Market*>(objects().get_object(trade.initiator));
+	if (!other) {
+		return;
+	}
+
+	// NOCOM(#sirver): send message to initiator and clean up the trade there.
+	trade_agreements_.erase(trade_id);
+}
+
+void Game::trade_initiator_vanished(int trade_id) {
+	// The trade id might be long gone - since we never disconnect from the
+	// 'removed' signal of the two buildings, we might be invoked long after the
+	// trade was deleted for other reasons.
+	const auto it = trade_agreements_.find(trade_id);
+	if (it == trade_agreements_.end()) {
+		return;
+	}
+	const auto& trade = it->second.trade;
+
+	auto* other = dynamic_cast<Market*>(objects().get_object(trade.receiver));
+	if (!other) {
+		return;
+	}
+
+	// NOCOM(#sirver): send message to receiver and clean up the trade there.
+	trade_agreements_.erase(trade_id);
 }
 
 LuaGameInterface& Game::lua() {

@@ -375,13 +375,6 @@ struct NoteProductionSiteOutOfResources {
 	}
 };
 
-// Parses the descriptions of the working positions from 'items_table' and
-// fills in 'working_positions'. Throws an error if the table contains invalid
-// values.
-void parse_working_positions(const EditorGameBase& egbase,
-                             LuaTable* items_table,
-                             BillOfMaterials* working_positions);
-
 }  // namespace Widelands
 
 

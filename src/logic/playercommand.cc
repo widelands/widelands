@@ -1805,10 +1805,11 @@ void CmdSetStockPolicy::write(FileWrite& fw, EditorGameBase& egbase, MapObjectSa
 	fw.unsigned_8(static_cast<uint8_t>(policy_));
 }
 
-CmdSuggestTrade::CmdSuggestTrade(uint32_t time, const Trade& trade)
-   : PlayerCommand(time, trade.initiator.owner().player_number()),
-     initiator_(trade.initiator.serial()),
-     receiver_(trade.receiver.serial()),
+// NOCOM(#sirver): Change class to only hold on to 'trade_'
+CmdSuggestTrade::CmdSuggestTrade(uint32_t time, PlayerNumber pn, const Trade& trade)
+   : PlayerCommand(time, pn),
+     initiator_(trade.initiator),
+     receiver_(trade.receiver),
      send_items_(trade.send_items),
      received_items_(trade.received_items),
      num_batches_(trade.num_batches) {
@@ -1844,7 +1845,7 @@ void CmdSuggestTrade::execute(Game& game) {
 	}
 
 	// NOCOM(#sirver): report problems to the sender()
-	game.suggest_trade(Trade{send_items_, received_items_, num_batches_, *initiator, *receiver});
+	game.suggest_trade(Trade{send_items_, received_items_, num_batches_, initiator_, receiver_});
 }
 
 CmdSuggestTrade::CmdSuggestTrade(StreamRead& des) : PlayerCommand(0, des.unsigned_8()) {

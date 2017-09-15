@@ -20,7 +20,10 @@
 #ifndef WL_LOGIC_MAP_OBJECTS_TRIBES_MARKET_H
 #define WL_LOGIC_MAP_OBJECTS_TRIBES_MARKET_H
 
+#include <memory>
+
 #include "logic/map_objects/tribes/building.h"
+#include "economy/request.h"
 
 namespace Widelands {
 
@@ -32,8 +35,10 @@ public:
 
 	Building& create_object() const override;
 
+	DesriptionIndex carrier() const { return carrier_; }
+
 private:
-	BillOfMaterials working_positions_;
+	DescriptionIndex carrier_;
 };
 
 class Market : public Building {
@@ -42,7 +47,23 @@ public:
 	explicit Market(const MarketDescr& descr);
 	~Market() override;
 
+	void new_trade(int trade_id, const BillOfMaterials& items, int num_batches, Serial other_side);
+
 private:
+	struct TradeOrder {
+		BillOfMaterials items;
+		int initial_num_batches;
+		int shipped_batches;
+		Serial other_side;
+
+		std::vector<std::unique_ptr<Request>> worker_requests;
+	};
+
+	static void
+	request_worker_callback(Game&, Request&, DescriptionIndex, Worker*, PlayerImmovable&);
+
+	std::map<int, TradeOrder> trade_orders_;
+
 	DISALLOW_COPY_AND_ASSIGN(Market);
 };
 

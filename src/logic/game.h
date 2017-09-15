@@ -246,10 +246,14 @@ public:
 
 	void set_auto_speed(bool);
 
+	// NOCOM(#sirver): document
 	void suggest_trade(const Trade& trade);
+	void accept_trade(int trade_id);
 
 private:
 	void sync_reset();
+	void trade_receiver_vanished(int trade_id);
+	void trade_initiator_vanished(int trade_id);
 
 	MD5Checksum<StreamWrite> synchash_;
 
@@ -312,7 +316,9 @@ private:
 	std::unique_ptr<ReplayWriter> replaywriter_;
 
 	GeneralStatsVector general_stats_;
-	std::vector<TradeAgreement> trade_agreements_;
+	int next_trade_agreement_id_ = 1;
+	// Maps from trade agreement id to the agreement.
+	std::map<int, TradeAgreement> trade_agreements_;
 
 	/// For save games and statistics generation
 	std::string win_condition_displayname_;
