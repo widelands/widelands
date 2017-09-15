@@ -389,9 +389,13 @@ void InteractivePlayer::draw_map_view(MapView* given_map_view, RenderTarget* dst
 			}
 		}
 
-		// TODO(sirver): Do not use the field_overlay_manager, instead draw the
-		// overlays we are interested in here directly.
-		field_overlay_manager().foreach_overlay(f->fcoords, blit_overlay);
+		// Draw build help.
+		if (buildhelp()) {
+			const auto* overlay = get_buildhelp_overlay(plr.get_buildcaps(f->fcoords));
+			if (overlay != nullptr) {
+				blit_overlay(overlay->pic, overlay->hotspot);
+			}
+		}
 
 		// Blit the selection marker.
 		if (f->fcoords == get_sel_pos().node) {
@@ -423,11 +427,6 @@ bool InteractivePlayer::can_act(Widelands::PlayerNumber const p) const {
 }
 Widelands::PlayerNumber InteractivePlayer::player_number() const {
 	return player_number_;
-}
-
-int32_t InteractivePlayer::calculate_buildcaps(const Widelands::FCoords& c) {
-	assert(get_player());
-	return get_player()->get_buildcaps(c);
 }
 
 /// Player has clicked on the given node; bring up the context menu.

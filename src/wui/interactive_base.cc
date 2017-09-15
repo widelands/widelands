@@ -46,7 +46,6 @@
 #include "logic/widelands_geometry.h"
 #include "profile/profile.h"
 #include "scripting/lua_interface.h"
-#include "wui/field_overlay_manager.h"
 #include "wui/game_chat_menu.h"
 #include "wui/game_debug_ui.h"
 #include "wui/interactive_player.h"
@@ -55,6 +54,8 @@
 #include "wui/mapviewpixelfunctions.h"
 #include "wui/minimap.h"
 #include "wui/unique_window_handler.h"
+
+namespace {
 
 using Widelands::Area;
 using Widelands::CoordPath;
@@ -65,15 +66,39 @@ using Widelands::Map;
 using Widelands::MapObject;
 using Widelands::TCoords;
 
+int caps_to_buildhelp(const Widelands::NodeCaps caps) {
+	if (caps & Widelands::BUILDCAPS_MINE) {
+		return Widelands::Field::Buildhelp_Mine;
+	}
+	if ((caps & Widelands::BUILDCAPS_SIZEMASK) == Widelands::BUILDCAPS_BIG) {
+		if (caps & Widelands::BUILDCAPS_PORT) {
+			return Widelands::Field::Buildhelp_Port;
+		}
+		return Widelands::Field::Buildhelp_Big;
+	}
+	if ((caps & Widelands::BUILDCAPS_SIZEMASK) == Widelands::BUILDCAPS_MEDIUM) {
+		return Widelands::Field::Buildhelp_Medium;
+	}
+	if ((caps & Widelands::BUILDCAPS_SIZEMASK) == Widelands::BUILDCAPS_SMALL) {
+		return Widelands::Field::Buildhelp_Small;
+	}
+	if (caps & Widelands::BUILDCAPS_FLAG) {
+		return Widelands::Field::Buildhelp_Flag;
+	}
+	return Widelands::Field::Buildhelp_None;
+}
+
+}  // namespace
+
 InteractiveBase::InteractiveBase(EditorGameBase& the_egbase, Section& global_s)
    : UI::Panel(nullptr, 0, 0, g_gr->get_xres(), g_gr->get_yres()),
      show_workarea_preview_(global_s.get_bool("workareapreview", true)),
+     buildhelp_(false),
      map_view_(this, the_egbase.map(), 0, 0, g_gr->get_xres(), g_gr->get_yres()),
      // Initialize chatoveraly before the toolbar so it is below
      chat_overlay_(new ChatOverlay(this, 10, 25, get_w() / 2, get_h() - 25)),
      toolbar_(this, 0, 0, UI::Box::Horizontal),
      quick_navigation_(&map_view_),
-     field_overlay_manager_(new FieldOverlayManager()),
      egbase_(the_egbase),
 #ifndef NDEBUG  //  not in releases
      display_flags_(dfDebug),
@@ -93,6 +118,33 @@ InteractiveBase::InteractiveBase(EditorGameBase& the_egbase, Section& global_s)
                     g_gr->images().get("images/wui/overlays/workarea12.png"),
                     g_gr->images().get("images/wui/overlays/workarea2.png"),
                     g_gr->images().get("images/wui/overlays/workarea1.png")} {
+
+	// Load the buildhelp icons.
+	{
+		BuildhelpOverlay* buildhelp_overlay = buildhelp_overlays_;
+		const char* filenames[] = {
+		   "images/wui/overlays/set_flag.png", "images/wui/overlays/small.png",
+		   "images/wui/overlays/medium.png",   "images/wui/overlays/big.png",
+		   "images/wui/overlays/mine.png",     "images/wui/overlays/port.png"};
+		const char* const* filename = filenames;
+
+		//  Special case for flag, which has a different formula for hotspot_y.
+		buildhelp_overlay->pic = g_gr->images().get(*filename);
+		buildhelp_overlay->hotspot =
+		   Vector2i(buildhelp_overlay->pic->width() / 2, buildhelp_overlay->pic->height() - 1);
+
+		const BuildhelpOverlay* const buildhelp_overlays_end =
+		   buildhelp_overlay + Widelands::Field::Buildhelp_None;
+		for (;;) {  // The other buildhelp overlays.
+			++buildhelp_overlay;
+			++filename;
+			if (buildhelp_overlay == buildhelp_overlays_end)
+				break;
+			buildhelp_overlay->pic = g_gr->images().get(*filename);
+			buildhelp_overlay->hotspot =
+			   Vector2i(buildhelp_overlay->pic->width() / 2, buildhelp_overlay->pic->height() / 2);
+		}
+	}
 
 	resize_chat_overlay();
 
@@ -142,6 +194,15 @@ InteractiveBase::~InteractiveBase() {
 	for (auto& registry : registries_) {
 		registry.unassign_toggle_button();
 	}
+}
+
+const InteractiveBase::BuildhelpOverlay*
+InteractiveBase::get_buildhelp_overlay(const Widelands::NodeCaps caps) const {
+	const int buildhelp_overlay_index = caps_to_buildhelp(caps);
+	if (buildhelp_overlay_index < Widelands::Field::Buildhelp_None) {
+		return &buildhelp_overlays_[buildhelp_overlay_index];
+	}
+	return nullptr;
 }
 
 UniqueWindowHandler& InteractiveBase::unique_windows() {
@@ -202,16 +263,16 @@ void InteractiveBase::unset_sel_picture() {
 }
 
 bool InteractiveBase::buildhelp() const {
-	return field_overlay_manager_->buildhelp();
+	return buildhelp_;
 }
 
 void InteractiveBase::show_buildhelp(bool t) {
-	field_overlay_manager_->show_buildhelp(t);
+	buildhelp_ = t;
 	on_buildhelp_changed(t);
 }
 
 void InteractiveBase::toggle_buildhelp() {
-	show_buildhelp(!field_overlay_manager_->buildhelp());
+	show_buildhelp(!buildhelp());
 }
 
 UI::Button* InteractiveBase::add_toolbar_button(const std::string& image_basename,

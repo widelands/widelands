@@ -37,7 +37,6 @@
 #include "ui_basic/unique_window.h"
 #include "wui/chatoverlay.h"
 #include "wui/debugconsole.h"
-#include "wui/field_overlay_manager.h"
 #include "wui/mapview.h"
 #include "wui/minimap.h"
 #include "wui/quicknavigation.h"
@@ -70,6 +69,12 @@ public:
 		// visual guide. The data type is the same as for Field::road.
 		std::map<Widelands::Coords, uint8_t> road_previews;
 		std::map<Widelands::Coords, const Image*> steepness_indicators;
+	};
+
+	/// A build help overlay, i.e. small, big, mine, port ...
+	struct BuildhelpOverlay {
+		const Image* pic = nullptr;
+		Vector2i hotspot = Vector2i::zero();
 	};
 
 	// Manages all UniqueWindows.
@@ -155,13 +160,6 @@ public:
 		log_message(std::string(message));
 	}
 
-	const FieldOverlayManager& field_overlay_manager() const {
-		return *field_overlay_manager_;
-	}
-	FieldOverlayManager* mutable_field_overlay_manager() {
-		return field_overlay_manager_.get();
-	}
-
 	void toggle_minimap();
 	void toggle_buildhelp();
 
@@ -170,10 +168,6 @@ public:
 
 	// Sets the landmark for the keyboard 'key' to 'point'
 	void set_landmark(size_t key, const MapView::View& view);
-
-	const RoadBuildingOverlays& road_building_overlays() const {
-		return road_building_overlays_;
-	}
 
 	MapView* map_view() {
 		return &map_view_;
@@ -228,6 +222,14 @@ protected:
 	std::map<Widelands::Coords, const Image*>
 	get_work_area_overlays(const Widelands::Map& map) const;
 
+	// Returns the 'BuildhelpOverlay' for 'caps' or nullptr if there is no help
+	// to be displayed on this field.
+	const BuildhelpOverlay* get_buildhelp_overlay(Widelands::NodeCaps caps) const;
+
+	const RoadBuildingOverlays& road_building_overlays() const {
+		return road_building_overlays_;
+	}
+
 private:
 	int32_t stereo_position(Widelands::Coords position_map);
 	void resize_chat_overlay();
@@ -244,18 +246,17 @@ private:
 		              Widelands::Coords(0, 0),
 		              Widelands::TCoords<>(Widelands::Coords(0, 0), Widelands::TriangleIndex::D)},
 		        const uint32_t Radius = 0,
-		        const Image* Pic = nullptr,
-		        const FieldOverlayManager::OverlayId Jobid = 0)
-		   : freeze(Freeze), triangles(Triangles), pos(Pos), radius(Radius), pic(Pic), jobid(Jobid) {
+		        const Image* Pic = nullptr)
+		   : freeze(Freeze), triangles(Triangles), pos(Pos), radius(Radius), pic(Pic) {
 		}
 		bool freeze;     // don't change sel, even if mouse moves
 		bool triangles;  //  otherwise nodes
 		Widelands::NodeAndTriangle<> pos;
 		uint32_t radius;
 		const Image* pic;
-		FieldOverlayManager::OverlayId jobid;
 	} sel_;
 
+	bool buildhelp_;
 	MapView map_view_;
 	ChatOverlay* chat_overlay_;
 
@@ -269,8 +270,6 @@ private:
 	MiniMap* minimap_;
 	MiniMap::Registry minimap_registry_;
 	QuickNavigation quick_navigation_;
-
-	std::unique_ptr<FieldOverlayManager> field_overlay_manager_;
 
 	// The currently enabled work area previews. They are keyed by the
 	// coordinate that the building that shows the work area is positioned.
@@ -293,6 +292,7 @@ private:
 	UI::UniqueWindow::Registry debugconsole_;
 	std::unique_ptr<UniqueWindowHandler> unique_window_handler_;
 	std::vector<const Image*> workarea_pics_;
+	BuildhelpOverlay buildhelp_overlays_[Widelands::Field::Buildhelp_None];
 };
 
 #endif  // end of include guard: WL_WUI_INTERACTIVE_BASE_H

@@ -184,7 +184,6 @@ wl_library(graphic_game_renderer
     graphic_surface
     logic
     wui
-    wui_field_overlay_manager
     wui_mapview_pixelfunctions
 )
 

@@ -428,7 +428,7 @@ public:
 	 */
 	bool is_resource_valid(const Widelands::World& world,
 	                       const Widelands::FCoords& c,
-	                       DescriptionIndex curres);
+	                       DescriptionIndex curres) const;
 
 	// The objectives that are defined in this map if it is a scenario.
 	const Objectives& objectives() const {

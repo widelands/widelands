@@ -117,27 +117,27 @@ void InteractiveSpectator::draw_map_view(MapView* given_map_view, RenderTarget* 
 	assert(get_sel_radius() == 0);
 	assert(!get_sel_triangles());
 
-	const auto& gbase = egbase();
-	auto* fields_to_draw = given_map_view->draw_terrain(gbase, dst);
+	const Widelands::Game& the_game = game();
+	const Widelands::Map& map = the_game.map();
+	auto* fields_to_draw = given_map_view->draw_terrain(the_game, dst);
 	const float scale = 1.f / given_map_view->view().zoom;
-	const uint32_t gametime = gbase.get_gametime();
+	const uint32_t gametime = the_game.get_gametime();
 
 	const auto text_to_draw = get_text_to_draw();
-	const std::map<Widelands::Coords, const Image*> work_area_overlays =
-	   get_work_area_overlays(gbase.map());
+	const std::map<Widelands::Coords, const Image*> work_area_overlays = get_work_area_overlays(map);
 	for (size_t idx = 0; idx < fields_to_draw->size(); ++idx) {
 		const FieldsToDraw::Field& field = fields_to_draw->at(idx);
 
 		draw_border_markers(field, scale, *fields_to_draw, dst);
 
 		Widelands::BaseImmovable* const imm = field.fcoords.field->get_immovable();
-		if (imm != nullptr && imm->get_positions(gbase).front() == field.fcoords) {
+		if (imm != nullptr && imm->get_positions(the_game).front() == field.fcoords) {
 			imm->draw(gametime, text_to_draw, field.rendertarget_pixel, scale, dst);
 		}
 
 		for (Widelands::Bob* bob = field.fcoords.field->get_first_bob(); bob;
 		     bob = bob->get_next_bob()) {
-			bob->draw(gbase, text_to_draw, field.rendertarget_pixel, scale, dst);
+			bob->draw(the_game, text_to_draw, field.rendertarget_pixel, scale, dst);
 		}
 
 		const auto blit_overlay = [dst, &field, scale](const Image* pic, const Vector2i& hotspot) {
@@ -147,15 +147,29 @@ void InteractiveSpectator::draw_map_view(MapView* given_map_view, RenderTarget* 
 			                    BlendMode::UseAlpha);
 		};
 
+		// Draw work area previews.
 		const auto it = work_area_overlays.find(field.fcoords);
 		if (it != work_area_overlays.end()) {
 			const Image* pic = it->second;
 			blit_overlay(pic, Vector2i(pic->width() / 2, pic->height() / 2));
 		}
 
-		// TODO(sirver): Do not use the field_overlay_manager, instead draw the
-		// overlays we are interested in here directly.
-		field_overlay_manager().foreach_overlay(field.fcoords, blit_overlay);
+		// Draw build help.
+		if (buildhelp()) {
+			auto caps = Widelands::NodeCaps::CAPS_NONE;
+			const Widelands::PlayerNumber nr_players = map.get_nrplayers();
+			iterate_players_existing(p, nr_players, the_game, player) {
+				const Widelands::NodeCaps nc = player->get_buildcaps(field.fcoords);
+				if (nc > Widelands::NodeCaps::CAPS_NONE) {
+					caps = nc;
+					break;
+				}
+			}
+			const auto* overlay = get_buildhelp_overlay(caps);
+			if (overlay != nullptr) {
+				blit_overlay(overlay->pic, overlay->hotspot);
+			}
+		}
 
 		// Blit the selection marker.
 		if (field.fcoords == get_sel_pos().node) {
@@ -173,17 +187,6 @@ void InteractiveSpectator::draw_map_view(MapView* given_map_view, RenderTarget* 
  */
 Widelands::Player* InteractiveSpectator::get_player() const {
 	return nullptr;
-}
-
-int32_t InteractiveSpectator::calculate_buildcaps(const Widelands::FCoords& c) {
-	const Widelands::PlayerNumber nr_players = game().map().get_nrplayers();
-	iterate_players_existing(p, nr_players, game(), player) {
-		const Widelands::NodeCaps nc = player->get_buildcaps(c);
-		if (nc > Widelands::NodeCaps::CAPS_NONE) {
-			return nc;
-		}
-	}
-	return Widelands::NodeCaps::CAPS_NONE;
 }
 
 // Toolbar button callback functions.
