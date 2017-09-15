@@ -95,14 +95,14 @@ wl_library(logic
     findimmovable.h
     findnode.cc
     findnode.h
-    game_data_error.cc
-    game_data_error.h
     game.cc
     game.h
-    map_revision.cc
-    map_revision.h
+    game_data_error.cc
+    game_data_error.h
     map.cc
     map.h
+    map_revision.cc
+    map_revision.h
     mapastar.cc
     mapastar.h
     mapdifferenceregion.cc
@@ -114,18 +114,18 @@ wl_library(logic
     mapregion.h
     maptriangleregion.cc
     maptriangleregion.h
+    message.h
     message_id.h
     message_queue.h
-    message.h
     nodecaps.h
     objective.h
     path.cc
     path.h
     pathfield.cc
     pathfield.h
-    player_area.h
     player.cc
     player.h
+    player_area.h
     playercommand.cc
     playercommand.h
     playersmanager.cc
@@ -138,6 +138,7 @@ wl_library(logic
     roadtype.h
     save_handler.cc
     save_handler.h
+    trade_agreement.h
     widelands_geometry_io.cc
     widelands_geometry_io.h
     map_objects/bob.cc

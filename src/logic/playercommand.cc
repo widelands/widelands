@@ -52,6 +52,25 @@ Serial get_object_serial_or_zero(uint32_t object_index, MapObjectLoader& mol) {
 	return mol.get<T>(object_index).serial();
 }
 
+void serialize_bill_of_materials(const BillOfMaterials& bill, StreamWrite* ser) {
+	ser->unsigned_32(bill.size());
+	for (const WareAmount& amount : bill) {
+		ser->unsigned_8(amount.first);
+		ser->unsigned_32(amount.second);
+	}
+}
+
+BillOfMaterials deserialize_bill_of_materials(StreamRead* des) {
+	BillOfMaterials bill;
+	const int count = des->unsigned_32();
+	for (int i = 0; i < count; ++i) {
+		const auto index = des->unsigned_8();
+		const auto amount = des->unsigned_32();
+		bill.push_back(std::make_pair(index, amount));
+	}
+	return bill;
+}
+
 }  // namespace
 
 // NOTE keep numbers of existing entries as they are to ensure backward compatible savegame loading
@@ -86,7 +105,8 @@ enum {
 	PLCMD_SHIP_EXPLORE = 27,
 	PLCMD_SHIP_CONSTRUCT = 28,
 	PLCMD_SHIP_SINK = 29,
-	PLCMD_SHIP_CANCELEXPEDITION = 30
+	PLCMD_SHIP_CANCELEXPEDITION = 30,
+	PLCMD_SUGGEST_TRADE = 31,
 };
 
 /*** class PlayerCommand ***/
@@ -1784,4 +1804,82 @@ void CmdSetStockPolicy::write(FileWrite& fw, EditorGameBase& egbase, MapObjectSa
 	fw.unsigned_8(ware_);
 	fw.unsigned_8(static_cast<uint8_t>(policy_));
 }
+
+CmdSuggestTrade::CmdSuggestTrade(uint32_t time, const Trade& trade)
+   : PlayerCommand(time, trade.initiator.owner().player_number()),
+     initiator_(trade.initiator.serial()),
+     receiver_(trade.receiver.serial()),
+     send_items_(trade.send_items),
+     received_items_(trade.received_items),
+     num_batches_(trade.num_batches) {
+}
+
+CmdSuggestTrade::CmdSuggestTrade() : PlayerCommand() {
+}
+
+void CmdSuggestTrade::execute(Game& game) {
+	Player* plr = game.get_player(sender());
+	if (plr == nullptr) {
+		return;
+	}
+
+	Market* initiator = dynamic_cast<Market*>(game.objects().get_object(initiator_));
+	if (initiator == nullptr) {
+		log("CmdSuggestTrade: initiator vanished or is not a market.\n");
+		return;
+	}
+	if (&initiator->owner() != plr) {
+		log("CmdSuggestTrade: sender %u, but market owner %u\n", sender(),
+		    initiator->owner().player_number());
+		return;
+	}
+	Market* receiver = dynamic_cast<Market*>(game.objects().get_object(receiver_));
+	if (receiver == nullptr) {
+		log("CmdSuggestTrade: receiver vanished or is not a market.\n");
+		return;
+	}
+	if (&initiator->owner() == &receiver->owner()) {
+		log("CmdSuggestTrade: Sending and receiving player are the same.\n");
+		return;
+	}
+
+	// NOCOM(#sirver): report problems to the sender()
+	game.suggest_trade(Trade{send_items_, received_items_, num_batches_, *initiator, *receiver});
+}
+
+CmdSuggestTrade::CmdSuggestTrade(StreamRead& des) : PlayerCommand(0, des.unsigned_8()) {
+	initiator_ = des.unsigned_32();
+	receiver_ = des.unsigned_32();
+	send_items_ = deserialize_bill_of_materials(&des);
+	received_items_ = deserialize_bill_of_materials(&des);
+	num_batches_ = des.signed_32();
+}
+
+void CmdSuggestTrade::serialize(StreamWrite& ser) {
+	ser.unsigned_8(PLCMD_SUGGEST_TRADE);
+	ser.unsigned_8(sender());
+	ser.unsigned_32(initiator_);
+	ser.unsigned_32(receiver_);
+	serialize_bill_of_materials(send_items_, &ser);
+	serialize_bill_of_materials(received_items_, &ser);
+	ser.signed_32(num_batches_);
+}
+
+// NOCOM(#sirver): bring back
+// constexpr uint8_t kCurrentPacketVersionCmdSuggestTrade = 1;
+
+void CmdSuggestTrade::read(FileRead& /* fr */,
+                           EditorGameBase& /* egbase */,
+                           MapObjectLoader& /* mol */) {
+	// NOCOM(#sirver): implement
+	NEVER_HERE();
+}
+
+void CmdSuggestTrade::write(FileWrite& /* fw */,
+                            EditorGameBase& /* egbase */,
+                            MapObjectSaver& /* mos */) {
+	// NOCOM(#sirver): implement
+	NEVER_HERE();
+}
+
 }

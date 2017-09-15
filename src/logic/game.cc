@@ -753,6 +753,26 @@ void Game::send_player_cancel_expedition_ship(Ship& ship) {
 	   get_gametime(), ship.get_owner()->player_number(), ship.serial()));
 }
 
+void Game::send_player_suggest_trade(const Trade& trade) {
+	send_player_command(*new CmdSuggestTrade(get_gametime(), trade));
+}
+
+void Game::suggest_trade(const Trade& trade) {
+	// NOCOM(#sirver): Check if a trade is possible (i.e. if there is a path between the two markets);
+	trade_agreements_.push_back(TradeAgreement{TradeAgreement::State::kSuggested, trade});
+
+	trade.receiver->removed.connect([this](const uint32_t serial) {
+		// NOCOM(#sirver): no idea how to properly implement this.
+	});
+	trade.initiator->removed.connect([this](const uint32_t serial) {
+		// NOCOM(#sirver): no idea how to properly implement this.
+	});
+
+	trade.receiver.send_message(*this,
+			send_message(*game, Message::Type::kTradeOfferReceived, trade.receiver.descr().descname(), trade.receiver.descr().icon_filename(),
+			             trade.receiver.descr().descname(), _("This Market received a new trade offer."), true);
+}
+
 LuaGameInterface& Game::lua() {
 	return static_cast<LuaGameInterface&>(EditorGameBase::lua());
 }

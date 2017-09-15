@@ -846,6 +846,33 @@ private:
 	DescriptionIndex ware_;
 	Warehouse::StockPolicy policy_;
 };
+
+struct CmdSuggestTrade : PlayerCommand {
+	CmdSuggestTrade(uint32_t time, const Trade& trade);
+
+	QueueCommandTypes id() const override {
+		return QueueCommandTypes::kSuggestTrade;
+	}
+
+	void execute(Game& game) override;
+
+	// Network (de-)serialization
+	explicit CmdSuggestTrade(StreamRead& des);
+	void serialize(StreamWrite& ser) override;
+
+	// Savegame functions
+	CmdSuggestTrade();
+	void write(FileWrite&, EditorGameBase&, MapObjectSaver&) override;
+	void read(FileRead&, EditorGameBase&, MapObjectLoader&) override;
+
+private:
+	Serial initiator_ = 0;
+	Serial receiver_ = 0;
+	BillOfMaterials send_items_;
+	BillOfMaterials received_items_;
+	int num_batches_ = 0;
+};
+
 }
 
 #endif  // end of include guard: WL_LOGIC_PLAYERCOMMAND_H
