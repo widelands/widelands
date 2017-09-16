@@ -28,15 +28,18 @@
 
 using namespace Widelands;
 
-/// static callback function for overlay calculation
-int32_t editor_tool_set_port_space_callback(const Widelands::FCoords& c, const Map& map) {
+namespace {
+
+Widelands::NodeCaps port_tool_nodecaps(const Widelands::FCoords& c, const Map& map) {
 	NodeCaps const caps = c.field->nodecaps();
 	if ((caps & BUILDCAPS_SIZEMASK) == BUILDCAPS_BIG) {
 		if (!map.find_portdock(c).empty())
 			return caps;
 	}
-	return 0;
+	return NodeCaps::CAPS_NONE;
 }
+
+}  // namespace
 
 EditorSetPortSpaceTool::EditorSetPortSpaceTool(EditorUnsetPortSpaceTool& the_unset_tool)
    : EditorTool(the_unset_tool, the_unset_tool) {
@@ -61,7 +64,7 @@ int32_t EditorSetPortSpaceTool::handle_click_impl(const Widelands::World& world,
 	   *map, Widelands::Area<Widelands::FCoords>(map->get_fcoords(center.node), args->sel_radius));
 	do {
 		//  check if field is valid
-		if (editor_tool_set_port_space_callback(mr.location(), *map)) {
+		if (port_tool_nodecaps(mr.location(), *map) != NodeCaps::CAPS_NONE) {
 			map->set_port_space(mr.location(), true);
 			Area<FCoords> a(mr.location(), 0);
 			map->recalc_for_field_area(world, a);
@@ -70,6 +73,12 @@ int32_t EditorSetPortSpaceTool::handle_click_impl(const Widelands::World& world,
 	} while (mr.advance(*map));
 
 	return nr;
+}
+
+Widelands::NodeCaps
+EditorSetPortSpaceTool::nodecaps_for_buildhelp(const Widelands::FCoords& fcoords,
+                                               const Widelands::EditorGameBase& egbase) {
+	return port_tool_nodecaps(fcoords, egbase.map());
 }
 
 int32_t EditorSetPortSpaceTool::handle_undo_impl(const Widelands::World& world,
@@ -96,7 +105,7 @@ int32_t EditorUnsetPortSpaceTool::handle_click_impl(const Widelands::World& worl
 	   *map, Widelands::Area<Widelands::FCoords>(map->get_fcoords(center.node), args->sel_radius));
 	do {
 		//  check if field is valid
-		if (editor_tool_set_port_space_callback(mr.location(), *map)) {
+		if (port_tool_nodecaps(mr.location(), *map)) {
 			map->set_port_space(mr.location(), false);
 			Area<FCoords> a(mr.location(), 0);
 			map->recalc_for_field_area(world, a);
@@ -113,4 +122,10 @@ int32_t EditorUnsetPortSpaceTool::handle_undo_impl(const Widelands::World& world
                                                    EditorActionArgs* args,
                                                    Map* map) {
 	return parent.tools()->set_port_space.handle_click_impl(world, center, parent, args, map);
+}
+
+Widelands::NodeCaps
+EditorUnsetPortSpaceTool::nodecaps_for_buildhelp(const Widelands::FCoords& fcoords,
+                                                 const Widelands::EditorGameBase& egbase) {
+	return port_tool_nodecaps(fcoords, egbase.map());
 }

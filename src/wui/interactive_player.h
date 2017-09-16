@@ -78,7 +78,6 @@ public:
 	}
 
 	void popup_message(Widelands::MessageId, const Widelands::Message&);
-	int32_t calculate_buildcaps(const Widelands::FCoords& c) override;
 
 private:
 	void cmdSwitchPlayer(const std::vector<std::string>& args);

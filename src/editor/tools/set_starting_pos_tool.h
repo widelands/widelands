@@ -25,7 +25,6 @@
 #include "editor/tools/tool.h"
 #include "graphic/playercolor.h"
 #include "logic/widelands.h"
-#include "wui/field_overlay_manager.h"
 
 // How much place should be left around a player position
 // where no other player can start
@@ -49,8 +48,8 @@ struct EditorSetStartingPosTool : public EditorTool {
 	bool has_size_one() const override {
 		return true;
 	}
+	Widelands::NodeCaps nodecaps_for_buildhelp(const Widelands::FCoords& fcoords,
+	                                           const Widelands::EditorGameBase&) override;
 };
-
-int32_t editor_tool_set_starting_pos_callback(const Widelands::FCoords& c, Widelands::Map& map);
 
 #endif  // end of include guard: WL_EDITOR_TOOLS_SET_STARTING_POS_TOOL_H

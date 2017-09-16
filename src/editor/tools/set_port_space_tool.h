@@ -46,6 +46,8 @@ public:
 	const Image* get_sel_impl() const override {
 		return g_gr->images().get(FSEL_EUPS_FILENAME);
 	}
+	Widelands::NodeCaps nodecaps_for_buildhelp(const Widelands::FCoords& fcoords,
+	                                           const Widelands::EditorGameBase& egbase) override;
 };
 
 /// Sets a buildspace for ports.
@@ -68,8 +70,8 @@ public:
 	const Image* get_sel_impl() const override {
 		return g_gr->images().get(FSEL_ESPS_FILENAME);
 	}
+	Widelands::NodeCaps nodecaps_for_buildhelp(const Widelands::FCoords& fcoords,
+	                                           const Widelands::EditorGameBase& egbase) override;
 };
-
-int32_t editor_tool_set_port_space_callback(const Widelands::FCoords& c, const Widelands::Map& map);
 
 #endif  // end of include guard: WL_EDITOR_TOOLS_SET_PORT_SPACE_TOOL_H

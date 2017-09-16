@@ -41,7 +41,6 @@
 #include "wui/actionconfirm.h"
 #include "wui/attack_box.h"
 #include "wui/economy_options_window.h"
-#include "wui/field_overlay_manager.h"
 #include "wui/game_debug_ui.h"
 #include "wui/interactive_player.h"
 #include "wui/waresdisplay.h"
@@ -196,14 +195,13 @@ private:
 
 	Widelands::Player* player_;
 	const Widelands::Map& map_;
-	FieldOverlayManager& field_overlay_manager_;
 
 	Widelands::FCoords node_;
 
 	UI::TabPanel tabpanel_;
 	bool fastclick_;  // if true, put the mouse over first button in first tab
 	uint32_t best_tab_;
-	FieldOverlayManager::OverlayId workarea_preview_overlay_id_;
+	bool showing_workarea_preview_;
 
 	/// Variables to use with attack dialog.
 	AttackBox* attack_box_;
@@ -247,20 +245,19 @@ FieldActionWindow::FieldActionWindow(InteractiveBase* const ib,
    : UI::UniqueWindow(ib, "field_action", registry, 68, 34, _("Action")),
      player_(plr),
      map_(ib->egbase().map()),
-     field_overlay_manager_(*ib->mutable_field_overlay_manager()),
      node_(ib->get_sel_pos().node, &map_[ib->get_sel_pos().node]),
      tabpanel_(this, g_gr->images().get("images/ui_basic/but1.png")),
      fastclick_(true),
      best_tab_(0),
-     workarea_preview_overlay_id_(0),
+     showing_workarea_preview_(false),
      attack_box_(nullptr) {
 	ib->set_sel_freeze(true);
 	set_center_panel(&tabpanel_);
 }
 
 FieldActionWindow::~FieldActionWindow() {
-	if (workarea_preview_overlay_id_)
-		field_overlay_manager_.remove_overlay(workarea_preview_overlay_id_);
+	if (showing_workarea_preview_)
+		ibase().hide_work_area(node_);
 	ibase().set_sel_freeze(false);
 	delete attack_box_;
 }
@@ -685,17 +682,18 @@ void FieldActionWindow::act_build(Widelands::DescriptionIndex idx) {
 }
 
 void FieldActionWindow::building_icon_mouse_out(Widelands::DescriptionIndex) {
-	if (workarea_preview_overlay_id_) {
-		field_overlay_manager_.remove_overlay(workarea_preview_overlay_id_);
-		workarea_preview_overlay_id_ = 0;
+	if (showing_workarea_preview_) {
+		ibase().hide_work_area(node_);
+		showing_workarea_preview_ = false;
 	}
 }
 
 void FieldActionWindow::building_icon_mouse_in(const Widelands::DescriptionIndex idx) {
-	if (ibase().show_workarea_preview_ && !workarea_preview_overlay_id_) {
+	if (ibase().show_workarea_preview_ && !showing_workarea_preview_) {
 		const WorkareaInfo& workarea_info =
-		   player_->tribe().get_building_descr(Widelands::DescriptionIndex(idx))->workarea_info_;
-		workarea_preview_overlay_id_ = ibase().show_work_area(workarea_info, node_);
+		   player_->tribe().get_building_descr(Widelands::DescriptionIndex(idx))->workarea_info();
+		ibase().show_work_area(workarea_info, node_);
+		showing_workarea_preview_ = true;
 	}
 }
 
