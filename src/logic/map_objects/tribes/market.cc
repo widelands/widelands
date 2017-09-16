@@ -71,6 +71,8 @@ void Market::request_worker_callback(
 
 	// NOCOM(#sirver): We have to go through all trade_orders and search for the pointer of the request to identify for which trade order we asked for the trade. It should never happen that a request call this after it was canceled/deleted, so we should always have a match.
 	for (auto& 
+	// NOCOM(#sirver): once this is implemented, we need to expose an interface to Lua to create trade agreements for testing.
+	
 	// If there is more than one working position, it's possible, that different level workers are
 	// requested and therefor possible, that a higher qualified worker answers a request for a lower
 	// leveled worker, although a worker with equal level (as the arrived worker has) is needed as
