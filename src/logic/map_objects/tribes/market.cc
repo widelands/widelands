@@ -38,7 +38,7 @@ Building& MarketDescr::create_object() const {
 	return *new Market(*this);
 }
 
-Market::Market(const MarketDescr& descr) : Building(descr) {}
+Market::Market(const MarketDescr& the_descr) : Building(the_descr) {}
 
 Market::~Market() {}
 
