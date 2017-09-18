@@ -609,8 +609,16 @@ MutatingIntensity ManagementData::do_mutate(const uint8_t is_preferred,
 // Mutating, but all done on persistent data
 void ManagementData::mutate(const uint8_t pn) {
 
+	// Below numbers are used to dictate intensity of mutation
+	// Probability that a value will be mutated = 1 / probability
+	// (lesser number means higher probability and higher mutation)
 	int16_t probability =
 	   shift_weight_value(get_military_number_at(kMutationRatePosition), false) + 101;
+	// Some of mutation will be agressive - over full range of values, the number below
+	// say how many (aproximately) they will be
+	uint16_t prefferred_numbers_count = 0;
+	// This is used to store status whether wild card was or was not used
+	bool wild_card = false;
 
 	// When doing training mutation probability is to be bigger than not in training mode
 	if (ai_training_mode_) {
@@ -620,29 +628,32 @@ void ManagementData::mutate(const uint8_t pn) {
 		if (probability < kLowerDefaultMutationLimit) {
 			probability = kLowerDefaultMutationLimit;
 		}
+		prefferred_numbers_count = 1;
 	} else {
 		probability = kNoAiTrainingMutation;
 	}
 
 	set_military_number_at(kMutationRatePosition, probability - 101);
-
 	// decreasing probability (or rather increasing probability of mutation) if weaker player
 	if (ai_type == Widelands::AiType::kWeak) {
-		probability /= 2;
-		log("%2d: Weak mode, increasing mutation probability to 1 / %d\n", pn, probability);
+		probability /= 15;
+		prefferred_numbers_count = 25;
 	} else if (ai_type == Widelands::AiType::kVeryWeak) {
-		probability /= 4;
-		log("%2d: Very weak mode, increasing mutation probability to 1 / %d\n", pn, probability);
+		probability /= 40;
+		prefferred_numbers_count = 50;
 	}
 
 	// Wildcard for ai trainingmode
-	if (ai_training_mode_ && std::rand() % 8 == 0) {
+	if (ai_training_mode_ && std::rand() % 8 == 0 && ai_type == Widelands::AiType::kNormal) {
 		probability /= 3;
+		prefferred_numbers_count = 5;
+		wild_card = true;
 	}
 
 	assert(probability > 0 && probability <= 201);
 
-	log("%2d: mutating DNA with probability 1 / %3d:\n", pn, probability);
+	log("%2d: mutating DNA with probability 1 / %3d, preffered numbers target %d%s:\n", pn,
+	    probability, prefferred_numbers_count, (wild_card) ? ", wild card" : "");
 
 	if (probability < 201) {
 
@@ -650,8 +661,10 @@ void ManagementData::mutate(const uint8_t pn) {
 		{
 			// Preferred numbers are ones that will be mutated agressively in full range
 			// [-kWeightRange, kWeightRange]
-			std::set<int32_t> preferred_numbers = {std::rand() % kMagicNumbersSize *
-			                                       pref_number_probability};
+			std::set<int32_t> preferred_numbers;
+			for (int i = 0; i < prefferred_numbers_count; i++) {
+				preferred_numbers.insert(std::rand() % pref_number_probability);
+			}
 
 			for (uint16_t i = 0; i < kMagicNumbersSize; i += 1) {
 				if (i == kMutationRatePosition) {  // mutated above
@@ -676,8 +689,10 @@ void ManagementData::mutate(const uint8_t pn) {
 		// Modifying pool of neurons
 		{
 			// Neurons to be mutated more agressively
-			std::set<int32_t> preferred_neurons = {std::rand() % kNeuronPoolSize *
-			                                       pref_number_probability};
+			std::set<int32_t> preferred_neurons;
+			for (int i = 0; i < prefferred_numbers_count; i++) {
+				preferred_neurons.insert(std::rand() % pref_number_probability);
+			}
 			for (auto& item : neuron_pool) {
 
 				const MutatingIntensity mutating_intensity =
@@ -707,8 +722,13 @@ void ManagementData::mutate(const uint8_t pn) {
 		// Modifying pool of f-neurons
 		{
 			// FNeurons to be mutated more agressively
-			std::set<int32_t> preferred_f_neurons = {std::rand() % kFNeuronPoolSize *
-			                                         pref_number_probability};
+			std::set<int32_t> preferred_f_neurons;
+			// prefferred_numbers_count is multiplied by 3 because FNeuron store more than
+			// one value
+			for (int i = 0; i < 3 * prefferred_numbers_count; i++) {
+				preferred_f_neurons.insert(std::rand() % pref_number_probability);
+			}
+
 			for (auto& item : f_neuron_pool) {
 				uint8_t changed_bits = 0;
 				// is this a preferred neuron

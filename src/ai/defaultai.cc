@@ -448,6 +448,14 @@ void DefaultAI::think() {
 						++conquered_wh;
 					}
 				};
+				if (!basic_economy_established) {  // NOCOM
+					assert(persistent_data->remaining_basic_buildings.size() > 0);
+					assert(persistent_data->remaining_buildings_size > 0);
+					log("%2d: Basic economy not achieved, %lu building(s) missing, f.e.: %s\n",
+					    player_number(), persistent_data->remaining_basic_buildings.size(),
+					    get_building_observer(persistent_data->remaining_basic_buildings.begin()->first)
+					       .name);
+				}
 				if (!enemy_warehouses.empty())
 					log("Conquered warehouses: %d / %lu\n", conquered_wh, enemy_warehouses.size());
 				management_data.review(
@@ -1007,7 +1015,7 @@ void DefaultAI::late_initialization() {
 	if (!basic_economy_established) {
 		log("%2d: Initializing in the basic economy mode, required buildings:\n", player_number());
 		for (auto bb : persistent_data->remaining_basic_buildings) {
-			log("   %3d / %-25s- target %d\n", bb.first, get_building_observer(bb.first).name,
+			log("   %3d / %-28s- target %d\n", bb.first, get_building_observer(bb.first).name,
 			    bb.second);
 		}
 	}
@@ -1044,6 +1052,9 @@ void DefaultAI::late_initialization() {
 	assert(iron_ore_id != INVALID_INDEX);
 
 	productionsites_ratio_ = management_data.get_military_number_at(86) / 10 + 12;
+
+	assert(persistent_data->remaining_basic_buildings.size() ==
+	       persistent_data->remaining_buildings_size);
 
 	// Just to be initialized
 	soldier_status_ = SoldiersStatus::kEnough;
@@ -2352,14 +2363,13 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 			bo.primary_priority = 0;
 		}
 
-		if (ai_training_mode_ && bo.type == BuildingObserver::Type::kProductionsite) {
+		const bool log_needed = (bo.new_building == BuildingNecessity::kAllowed ||
+		                         bo.new_building == BuildingNecessity::kForced ||
+		                         bo.new_building == BuildingNecessity::kNeeded);
+		if (ai_training_mode_ && bo.type == BuildingObserver::Type::kProductionsite &&
+		    (gametime % 20 == 0 || log_needed)) {
 			log("%2d: %-35s(%2d now) %-11s: max prec: %2d/%2d, primary priority: %4d, overdue: %3d\n",
-			    player_number(), bo.name, bo.total_count(),
-			    (bo.new_building == BuildingNecessity::kAllowed ||
-			     bo.new_building == BuildingNecessity::kForced ||
-			     bo.new_building == BuildingNecessity::kNeeded) ?
-			       "needed" :
-			       "not needed",
+			    player_number(), bo.name, bo.total_count(), (log_needed) ? "needed" : "not needed",
 			    bo.max_needed_preciousness, bo.max_preciousness, bo.primary_priority,
 			    bo.new_building_overdue);
 		}
@@ -3580,6 +3590,9 @@ bool DefaultAI::check_productionsites(uint32_t gametime) {
 	// Get link to productionsite that should be checked
 	ProductionSiteObserver& site = productionsites.front();
 
+	// Make sure we are not above ai type limit
+	assert(site.bo->total_count() <= site.bo->cnt_limit_by_aimode);
+
 	// first we werify if site is working yet (can be unoccupied since the start)
 	if (!site.site->can_start_working()) {
 		site.unoccupied_till = game().get_gametime();
@@ -4502,6 +4515,7 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 	// And finally the 'core' of this function
 	// First deal with construction of new sites
 	if (purpose == PerfEvaluation::kForConstruction) {
+		assert(bo.total_count() <= bo.cnt_limit_by_aimode);
 		if (bo.forced_after < gametime && bo.total_count() == 0 && !has_substitution_building) {
 			if (!bo.is(BuildingAttribute::kBarracks)) {
 				bo.max_needed_preciousness = bo.max_preciousness;
@@ -4579,7 +4593,7 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 			}
 			bo.cnt_target = 3;
 			// adjusting/decreasing based on cnt_limit_by_aimode
-			bo.cnt_target = limit_cnt_target(bo.cnt_target, bo.cnt_limit_by_aimode);
+			bo.cnt_target = std::min(bo.cnt_target, bo.cnt_limit_by_aimode);
 
 			// for case the wood is not needed yet, to avoid inconsistency later on
 			bo.max_needed_preciousness = bo.max_preciousness;
@@ -4718,7 +4732,7 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 			bo.cnt_target = tmp_target;
 
 			// adjusting/decreasing based on cnt_limit_by_aimode
-			bo.cnt_target = limit_cnt_target(bo.cnt_target, bo.cnt_limit_by_aimode);
+			bo.cnt_target = std::min(bo.cnt_target, bo.cnt_limit_by_aimode);
 
 			assert(bo.cnt_target > 1 && bo.cnt_target < 1000);
 
@@ -5418,6 +5432,8 @@ Widelands::BuildingObserver& DefaultAI::get_building_observer(const DescriptionI
 		}
 	}
 
+	log("Sorry, cannot find building with id %d", static_cast<int32_t>(di));
+	// I noticed that exception test is being lost so will will print it into log as well
 	throw wexception("Sorry, cannot find building with id %d", static_cast<int32_t>(di));
 }
 
@@ -6187,25 +6203,6 @@ template <typename T> void DefaultAI::check_range(T value, T upper_range, const 
 	if (value > upper_range) {
 		log(" %d: unexpected value for %s: %d\n", player_number(), value_name, value);
 	}
-}
-
-int32_t DefaultAI::limit_cnt_target(const int32_t current_cnt_target, const int32_t ai_limit) {
-
-	if (ai_limit >= std::numeric_limits<int32_t>::max() - 1) {
-		// = ai limit is not set
-		return current_cnt_target;
-	}
-
-	int32_t new_target = current_cnt_target;
-
-	if (current_cnt_target > (ai_limit + 1) / 2) {
-		new_target = (ai_limit + 1) / 2;
-	}
-	assert(new_target * 2 >= ai_limit);
-	assert(new_target > 0);
-	assert(new_target <= ai_limit);
-
-	return new_target;
 }
 
 // Looking for situation where for a critical mine (iron, or marble) there is just one mine and it
