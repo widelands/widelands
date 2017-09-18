@@ -503,19 +503,20 @@ Tribes
 
 const char LuaTribes::className[] = "Tribes";
 const MethodType<LuaTribes> LuaTribes::Methods[] = {
+   METHOD(LuaTribes, new_carrier_type),
    METHOD(LuaTribes, new_constructionsite_type),
    METHOD(LuaTribes, new_dismantlesite_type),
+   METHOD(LuaTribes, new_immovable_type),
+   METHOD(LuaTribes, new_market_type),
    METHOD(LuaTribes, new_militarysite_type),
    METHOD(LuaTribes, new_productionsite_type),
-   METHOD(LuaTribes, new_trainingsite_type),
-   METHOD(LuaTribes, new_warehouse_type),
-   METHOD(LuaTribes, new_immovable_type),
    METHOD(LuaTribes, new_ship_type),
-   METHOD(LuaTribes, new_ware_type),
-   METHOD(LuaTribes, new_carrier_type),
    METHOD(LuaTribes, new_soldier_type),
-   METHOD(LuaTribes, new_worker_type),
+   METHOD(LuaTribes, new_trainingsite_type),
    METHOD(LuaTribes, new_tribe),
+   METHOD(LuaTribes, new_ware_type),
+   METHOD(LuaTribes, new_warehouse_type),
+   METHOD(LuaTribes, new_worker_type),
    {0, 0},
 };
 const PropertyType<LuaTribes> LuaTribes::Properties[] = {
@@ -684,6 +685,30 @@ int LuaTribes::new_warehouse_type(lua_State* L) {
 		LuaTable table(L);  // Will pop the table eventually.
 		EditorGameBase& egbase = get_egbase(L);
 		egbase.mutable_tribes()->add_warehouse_type(table, egbase);
+	} catch (std::exception& e) {
+		report_error(L, "%s", e.what());
+	}
+	return 0;
+}
+
+/* RST
+	.. method:: new_market_type{table}
+
+		Adds a new market building type. Takes a single argument, a table with
+		the descriptions. See :ref:`lua_tribes_buildings_markets` for detailed
+		documentation.
+
+		:returns: :const:`0`
+*/
+int LuaTribes::new_market_type(lua_State* L) {
+	if (lua_gettop(L) != 2) {
+		report_error(L, "Takes only one argument.");
+	}
+
+	try {
+		LuaTable table(L);  // Will pop the table eventually.
+		EditorGameBase& egbase = get_egbase(L);
+		egbase.mutable_tribes()->add_market_type(table, egbase);
 	} catch (std::exception& e) {
 		report_error(L, "%s", e.what());
 	}

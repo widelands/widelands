@@ -502,6 +502,37 @@ private:
 	CASTED_GET_DESCRIPTION(WarehouseDescr)
 };
 
+class LuaMarketDescription : public LuaBuildingDescription {
+public:
+	LUNA_CLASS_HEAD(LuaMarketDescription);
+
+	virtual ~LuaMarketDescription() {
+	}
+
+	LuaMarketDescription() {
+	}
+	explicit LuaMarketDescription(const Widelands::MarketDescr* const warehousedescr)
+	   : LuaBuildingDescription(warehousedescr) {
+	}
+	explicit LuaMarketDescription(lua_State* L) : LuaBuildingDescription(L) {
+	}
+
+	/*
+	 * Properties
+	 */
+
+	/*
+	 * Lua methods
+	 */
+
+	/*
+	 * C methods
+	 */
+
+private:
+	CASTED_GET_DESCRIPTION(MarketDescr)
+};
+
 class LuaWareDescription : public LuaMapObjectDescription {
 public:
 	LUNA_CLASS_HEAD(LuaWareDescription);
@@ -1073,6 +1104,33 @@ public:
 	 * C Methods
 	 */
 	CASTED_GET(Warehouse)
+};
+
+class LuaMarket : public LuaBuilding {
+public:
+	LUNA_CLASS_HEAD(LuaMarket);
+
+	LuaMarket() {
+	}
+	explicit LuaMarket(Widelands::Market& mo) : LuaBuilding(mo) {
+	}
+	explicit LuaMarket(lua_State* L) : LuaBuilding(L) {
+	}
+	virtual ~LuaMarket() {
+	}
+
+	/*
+	 * Properties
+	 */
+
+	/*
+	 * Lua Methods
+	 */
+
+	/*
+	 * C Methods
+	 */
+	CASTED_GET(Market)
 };
 
 class LuaProductionSite : public LuaBuilding {
