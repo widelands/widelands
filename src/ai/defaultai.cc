@@ -449,7 +449,7 @@ void DefaultAI::think() {
 					}
 				};
 				if (!basic_economy_established) {  // NOCOM
-					assert(persistent_data->remaining_basic_buildings.size() > 0);
+					assert(!persistent_data->remaining_basic_buildings.empty());
 					assert(persistent_data->remaining_buildings_size > 0);
 					log("%2d: Basic economy not achieved, %lu building(s) missing, f.e.: %s\n",
 					    player_number(), persistent_data->remaining_basic_buildings.size(),
@@ -3594,10 +3594,9 @@ bool DefaultAI::check_productionsites(uint32_t gametime) {
 	ProductionSiteObserver& site = productionsites.front();
 
 	// Make sure we are not above ai type limit
-	//NOCOM
 	if (site.bo->total_count() > site.bo->cnt_limit_by_aimode) {
-		printf ("Too many %s: %d, ai limit: %d\n", site.bo->name, site.bo->total_count(), site.bo->cnt_limit_by_aimode);
-		}
+		log("Too many %s: %d, ai limit: %d\n", site.bo->name, site.bo->total_count(), site.bo->cnt_limit_by_aimode);
+	}
 	assert(site.bo->total_count() <= site.bo->cnt_limit_by_aimode);
 
 	// first we werify if site is working yet (can be unoccupied since the start)
