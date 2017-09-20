@@ -25,9 +25,7 @@ tribes:new_productionsite_type {
    },
 
    aihints = {
-      graniteproducer = true,
-      forced_after = 240,
-      prohibited_till = 240
+      graniteproducer = true
    },
 
    working_positions = {

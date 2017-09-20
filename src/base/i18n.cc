@@ -322,7 +322,7 @@ const std::string& get_locale() {
 }
 
 std::string localize_list(const std::vector<std::string>& items, ConcatenateWith listtype) {
-	std::string result = "";
+	std::string result;
 	for (std::vector<std::string>::const_iterator it = items.begin(); it != items.end(); ++it) {
 		if (it == items.begin()) {
 			result = *it;

@@ -132,7 +132,7 @@ public:
 
 protected:
 	/// To get a filesystem, use the Create methods
-	FileSystem();
+	FileSystem() = default;
 
 	/// How to address the fs' topmost component (e.g. "" on Unix, "D:" on win32)
 	/// \warning This is should \e not contain filesep!

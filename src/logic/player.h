@@ -209,6 +209,7 @@ public:
 		     roads(0),
 		     owner(0),
 		     time_node_last_unseen(0),
+		     map_object_descr(nullptr),
 		     border(0),
 		     border_r(0),
 		     border_br(0),
@@ -220,9 +221,6 @@ public:
 
 			time_triangle_last_surveyed[0] = never();
 			time_triangle_last_surveyed[1] = never();
-
-			//  Initialized for debug purposes only.
-			map_object_descr[0] = map_object_descr[1] = map_object_descr[2] = nullptr;
 		}
 
 		/// Military influence is exerted by buildings with the help of soldiers.
@@ -377,7 +375,7 @@ public:
 		 * Only valid when the player has seen this node (or maybe a nearby node
 		 * if the immovable is big?). (Roads are not stored here.)
 		 */
-		const MapObjectDescr* map_object_descr[3];
+		const MapObjectDescr* map_object_descr;
 
 		/// Information for constructionsite's animation.
 		/// only valid, if there is a constructionsite on this node
@@ -405,9 +403,7 @@ public:
 		//  time_triangle_last_surveyed[0]  0x040  0x20   0x040  0x20
 		//  time_triangle_last_surveyed[1]  0x060  0x20   0x060  0x20
 		//  time_node_last_unseen           0x080  0x20   0x080  0x20
-		//  map_object_descr[0]             0x0a0  0x20   0x0a0  0x40
-		//  map_object_descr[1]             0x0c0  0x20   0x0e0  0x40
-		//  map_object_descr[2]             0x0e0  0x20   0x120  0x40
+		//  map_object_descr                0x0a0  0x20   0x0a0  0x40
 		//  ConstructionsiteInformation
 		//  border
 		//  border_r
@@ -507,7 +503,8 @@ public:
 	void bulldoze(PlayerImmovable&, bool recurse = false);
 	void flagaction(Flag&);
 	void start_stop_building(PlayerImmovable&);
-	void military_site_set_soldier_preference(PlayerImmovable&, uint8_t soldier_preference);
+	void military_site_set_soldier_preference(PlayerImmovable&,
+	                                          SoldierPreference soldier_preference);
 	void start_or_cancel_expedition(Warehouse&);
 	void enhance_building(Building*, DescriptionIndex index_of_new_building);
 	void dismantle_building(Building*);

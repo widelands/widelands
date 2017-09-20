@@ -95,6 +95,7 @@ public:
 	bool handle_mouserelease(uint8_t btn, int32_t mx, int32_t my) override;
 	bool
 	handle_mousemove(uint8_t state, int32_t mx, int32_t my, int32_t xdiff, int32_t ydiff) override;
+	bool handle_mousewheel(uint32_t which, int32_t x, int32_t y) override;
 	bool handle_tooltip() override;
 
 protected:
@@ -104,7 +105,7 @@ protected:
 
 private:
 	bool is_minimal_;
-	uint32_t oldh_;  // if it is, this is the old height
+	uint32_t oldh_;  // if it is minimized, this is the old height
 	bool dragging_, docked_left_, docked_right_, docked_bottom_;
 	int32_t drag_start_win_x_, drag_start_win_y_;
 	int32_t drag_start_mouse_x_, drag_start_mouse_y_;

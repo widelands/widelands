@@ -45,6 +45,7 @@ struct Path;
 struct PlayerImmovable;
 enum class IslandExploreDirection;
 enum class ScoutingDirection;
+enum class SoldierPreference : uint8_t;
 struct Ship;
 struct PlayerEndStatus;
 class TrainingSite;
@@ -183,7 +184,7 @@ public:
 	void send_player_build_road(int32_t, Path&);
 	void send_player_flagaction(Flag&);
 	void send_player_start_stop_building(Building&);
-	void send_player_militarysite_set_soldier_preference(Building&, uint8_t preference);
+	void send_player_militarysite_set_soldier_preference(Building&, SoldierPreference preference);
 	void send_player_start_or_cancel_expedition(Building&);
 
 	void send_player_enhance_building(Building&, DescriptionIndex);
@@ -230,6 +231,18 @@ public:
 	bool is_replay() const {
 		return replay_;
 	}
+
+	bool is_ai_training_mode() const {
+		return ai_training_mode_;
+	}
+
+	bool is_auto_speed() const {
+		return auto_speed_;
+	}
+
+	void set_ai_training_mode(bool);
+
+	void set_auto_speed(bool);
 
 private:
 	void sync_reset();
@@ -280,6 +293,9 @@ private:
 	/// Defaults to \c false, and can be set to true for network games. The file
 	/// is written only if \ref writereplay_ is true too.
 	bool writesyncstream_;
+
+	bool ai_training_mode_;
+	bool auto_speed_;
 
 	int32_t state_;
 

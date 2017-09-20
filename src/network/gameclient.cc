@@ -263,7 +263,7 @@ int32_t GameClient::get_frametime() {
 }
 
 GameController::GameType GameClient::get_game_type() {
-	return GameController::GameType::NETCLIENT;
+	return GameController::GameType::kNetClient;
 }
 
 void GameClient::report_result(uint8_t player_nr,
@@ -356,25 +356,25 @@ void GameClient::set_player_closeable(uint8_t, bool) {
 	//  client is not allowed to do this
 }
 
-void GameClient::set_player_shared(uint8_t number, uint8_t player) {
+void GameClient::set_player_shared(PlayerSlot number, Widelands::PlayerNumber shared) {
 	if ((number != d->settings.playernum))
 		return;
 
 	SendPacket s;
 	s.unsigned_8(NETCMD_SETTING_CHANGESHARED);
 	s.unsigned_8(number);
-	s.unsigned_8(player);
+	s.unsigned_8(shared);
 	d->net->send(s);
 }
 
-void GameClient::set_player_init(uint8_t number, uint8_t) {
+void GameClient::set_player_init(uint8_t number, uint8_t initialization_index) {
 	if ((number != d->settings.playernum))
 		return;
 
-	// Host will decide what to change, therefore the init is not send, just the request to change
 	SendPacket s;
 	s.unsigned_8(NETCMD_SETTING_CHANGEINIT);
 	s.unsigned_8(number);
+	s.unsigned_8(initialization_index);
 	d->net->send(s);
 }
 
@@ -404,8 +404,8 @@ void GameClient::set_player_number(uint8_t const number) {
 		return;
 	// Same if the player is not selectable
 	if (number < d->settings.players.size() &&
-	    (d->settings.players.at(number).state == PlayerSettings::stateClosed ||
-	     d->settings.players.at(number).state == PlayerSettings::stateComputer))
+	    (d->settings.players.at(number).state == PlayerSettings::State::kClosed ||
+	     d->settings.players.at(number).state == PlayerSettings::State::kComputer))
 		return;
 
 	// Send request
@@ -459,6 +459,7 @@ void GameClient::receive_one_player(uint8_t const number, StreamRead& packet) {
 	player.random_ai = packet.unsigned_8() == 1;
 	player.team = packet.unsigned_8();
 	player.shared_in = packet.unsigned_8();
+	Notifications::publish(NoteGameSettings(NoteGameSettings::Action::kPlayer, number));
 }
 
 void GameClient::receive_one_user(uint32_t const number, StreamRead& packet) {
@@ -473,10 +474,13 @@ void GameClient::receive_one_user(uint32_t const number, StreamRead& packet) {
 	d->settings.users.at(number).name = packet.string();
 	d->settings.users.at(number).position = packet.signed_32();
 	d->settings.users.at(number).ready = packet.unsigned_8() == 1;
+
 	if (static_cast<int32_t>(number) == d->settings.usernum) {
 		d->localplayername = d->settings.users.at(number).name;
 		d->settings.playernum = d->settings.users.at(number).position;
 	}
+	Notifications::publish(
+	   NoteGameSettings(NoteGameSettings::Action::kUser, d->settings.playernum, number));
 }
 
 void GameClient::send(const std::string& msg) {
@@ -567,6 +571,7 @@ void GameClient::handle_packet(RecvPacket& packet) {
 		// New map was set, so we clean up the buffer of a previously requested file
 		if (file_)
 			delete file_;
+		Notifications::publish(NoteGameSettings(NoteGameSettings::Action::kMap));
 		break;
 	}
 
@@ -820,8 +825,7 @@ void GameClient::handle_packet(RecvPacket& packet) {
 	}
 
 	case NETCMD_CHAT: {
-		ChatMessage c;
-		c.time = time(nullptr);
+		ChatMessage c("");
 		c.playern = packet.signed_16();
 		c.sender = packet.string();
 		c.msg = packet.string();
@@ -833,13 +837,11 @@ void GameClient::handle_packet(RecvPacket& packet) {
 	}
 
 	case NETCMD_SYSTEM_MESSAGE_CODE: {
-		ChatMessage c;
-		c.time = time(nullptr);
-		std::string code = packet.string();
-		std::string arg1 = packet.string();
-		std::string arg2 = packet.string();
-		std::string arg3 = packet.string();
-		c.msg = NetworkGamingMessages::get_message(code, arg1, arg2, arg3);
+		const std::string code = packet.string();
+		const std::string arg1 = packet.string();
+		const std::string arg2 = packet.string();
+		const std::string arg3 = packet.string();
+		ChatMessage c(NetworkGamingMessages::get_message(code, arg1, arg2, arg3));
 		c.playern = UserSettings::none();  //  == System message
 		// c.sender remains empty to indicate a system message
 		d->chatmessages.push_back(c);

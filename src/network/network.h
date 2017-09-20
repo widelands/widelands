@@ -172,7 +172,7 @@ public:
 private:
 	friend class Deserializer;
 	std::vector<uint8_t> buffer;
-	size_t index_;
+	size_t index_ = 0U;
 };
 
 struct FilePart {

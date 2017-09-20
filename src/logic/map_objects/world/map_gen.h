@@ -55,10 +55,10 @@ struct MapGenAreaInfo {
 		ttMountainsSnow
 	};
 
-	MapGenAreaInfo(const LuaTable& table, const World& world, MapGenAreaType areaType);
+	MapGenAreaInfo(const LuaTable& table, const World& world, MapGenAreaType area_type);
 
 	size_t get_num_terrains(MapGenTerrainType) const;
-	DescriptionIndex get_terrain(MapGenTerrainType terrType, uint32_t index) const;
+	DescriptionIndex get_terrain(MapGenTerrainType terrain_type, uint32_t index) const;
 	uint32_t get_weight() const {
 		return weight_;
 	}
@@ -69,7 +69,6 @@ private:
 	std::vector<DescriptionIndex> terrains3_;  //  shallow, upper, snow
 
 	uint32_t weight_;
-	MapGenAreaType areaType_;
 };
 
 struct MapGenBobCategory {
@@ -95,12 +94,12 @@ private:
 };
 
 struct MapGenLandResource {
-	MapGenLandResource(const LuaTable& table, MapGenInfo& mapGenInfo);
+	MapGenLandResource(const LuaTable& table, MapGenInfo& map_gen_info);
 
 	uint32_t get_weight() const {
 		return weight_;
 	}
-	const MapGenBobCategory* get_bob_category(MapGenAreaInfo::MapGenTerrainType terrType) const;
+	const MapGenBobCategory* get_bob_category(MapGenAreaInfo::MapGenTerrainType terrain_type) const;
 
 	uint8_t get_immovable_density() const {
 		return immovable_density_;
@@ -128,9 +127,9 @@ private:
 struct MapGenInfo {
 	MapGenInfo(const LuaTable& table, const World& world);
 
-	size_t get_num_areas(MapGenAreaInfo::MapGenAreaType areaType) const;
-	const MapGenAreaInfo& get_area(MapGenAreaInfo::MapGenAreaType areaType, uint32_t index) const;
-	const MapGenBobCategory* get_bob_category(const std::string& bobCategory) const;
+	size_t get_num_areas(MapGenAreaInfo::MapGenAreaType area_type) const;
+	const MapGenAreaInfo& get_area(MapGenAreaInfo::MapGenAreaType area_type, uint32_t index) const;
+	const MapGenBobCategory* get_bob_category(const std::string& bob_category) const;
 
 	uint8_t get_water_ocean_height() const {
 		return ocean_height_;

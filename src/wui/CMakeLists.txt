@@ -24,17 +24,6 @@ wl_library(wui_chat_ui
     wui
 )
 
-wl_library(wui_field_overlay_manager
-  SRCS
-    field_overlay_manager.cc
-    field_overlay_manager.h
-  DEPENDS
-    base_geometry
-    graphic
-    logic
-    logic_widelands_geometry
-)
-
 wl_library(wui_economy_options
   SRCS
     economy_options_window.cc
@@ -48,15 +37,6 @@ wl_library(wui_economy_options
     wui_waresdisplay
 )
 
-
-wl_library(wui_edge_overlay_manager
-  SRCS
-    edge_overlay_manager.cc
-    edge_overlay_manager.h
-  DEPENDS
-    base_macros
-    logic_widelands_geometry
-)
 
 wl_library(wui_mapview_pixelfunctions
   SRCS
@@ -115,12 +95,13 @@ wl_library(wui_mapview
     base_macros
     base_math
     graphic
+    graphic_fields_to_draw
     graphic_game_renderer
     logic
     logic_widelands_geometry
+    profile
     ui_basic
     widelands_ball_of_mud
-    wui
     wui_mapview_pixelfunctions
 )
 
@@ -273,8 +254,6 @@ wl_library(wui
     ui_basic
     wui_chat_ui
     wui_economy_options
-    wui_edge_overlay_manager
-    wui_field_overlay_manager
     wui_mapview
     wui_mapview_pixelfunctions
     wui_quicknavigation

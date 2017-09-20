@@ -31,9 +31,6 @@ ReplayGameController::ReplayGameController(Widelands::Game& game, const std::str
      speed_(1000),
      paused_(false) {
 	game_.set_game_controller(this);
-
-	// We have to create an empty map, otherwise nothing will load properly
-	game.set_map(new Widelands::Map);
 	replayreader_.reset(new Widelands::ReplayReader(game_, filename));
 }
 
@@ -72,7 +69,7 @@ int32_t ReplayGameController::get_frametime() {
 }
 
 GameController::GameType ReplayGameController::get_game_type() {
-	return GameController::GameType::REPLAY;
+	return GameController::GameType::kReplay;
 }
 
 uint32_t ReplayGameController::real_speed() {

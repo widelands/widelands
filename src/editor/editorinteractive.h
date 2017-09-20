@@ -26,7 +26,6 @@
 #include "editor/tools/increase_height_tool.h"
 #include "editor/tools/increase_resources_tool.h"
 #include "editor/tools/info_tool.h"
-#include "editor/tools/make_infrastructure_tool.h"
 #include "editor/tools/noise_height_tool.h"
 #include "editor/tools/place_critter_tool.h"
 #include "editor/tools/place_immovable_tool.h"
@@ -84,7 +83,6 @@ public:
 		EditorSetPortSpaceTool set_port_space;
 		EditorUnsetPortSpaceTool unset_port_space;
 		EditorSetOriginTool set_origin;
-		EditorMakeInfrastructureTool make_infrastructure;
 	};
 	explicit EditorInteractive(Widelands::EditorGameBase&);
 
@@ -99,16 +97,16 @@ public:
 	void start() override;
 	void think() override;
 
-	void map_clicked(bool draw = false);
+	void map_clicked(const Widelands::NodeAndTriangle<>& node_and_triangle, bool draw);
 	void set_sel_pos(Widelands::NodeAndTriangle<>) override;
 	void set_sel_radius_and_update_menu(uint32_t);
-	void start_painting();
 	void stop_painting();
 
 	//  Handle UI elements.
 	bool handle_key(bool down, SDL_Keysym) override;
 	bool handle_mousepress(uint8_t btn, int32_t x, int32_t y) override;
 	bool handle_mouserelease(uint8_t btn, int32_t x, int32_t y) override;
+	void draw(RenderTarget&) override;
 
 	void select_tool(EditorTool&, EditorTool::ToolIndex);
 
@@ -119,10 +117,6 @@ public:
 	// action functions
 	void exit();
 
-	//  reference functions
-	void reference_player_tribe(Widelands::PlayerNumber, void const* const) override;
-	void unreference_player_tribe(Widelands::PlayerNumber, void const* const);
-	bool is_player_tribe_referenced(Widelands::PlayerNumber);
 	void set_need_save(bool const t) {
 		need_save_ = t;
 	}
@@ -146,24 +140,17 @@ public:
 private:
 	friend struct EditorToolMenu;
 
-	struct PlayerReferences {
-		int32_t player;
-		void const* object;
-	};
-
-	// Registers the overlays for player starting positions.
-	void register_overlays();
-
 	void on_buildhelp_changed(const bool value) override;
+
+	void toggle_resources();
+	void toggle_immovables();
+	void toggle_bobs();
 
 	//  state variables
 	bool need_save_;
-	std::vector<PlayerReferences> player_tribe_references_;
 	uint32_t realtime_;
 	bool is_painting_;
 
-	std::unique_ptr<Notifications::Subscriber<Widelands::NoteFieldResourceChanged>>
-	   field_resource_changed_subscriber_;
 	UI::UniqueWindow::Registry toolmenu_;
 
 	UI::UniqueWindow::Registry toolsizemenu_;
@@ -178,12 +165,18 @@ private:
 	UI::UniqueWindow::Registry helpmenu_;
 
 	UI::Button* toggle_buildhelp_;
-	UI::Button* reset_zoom_;
+	UI::Button* toggle_resources_;
+	UI::Button* toggle_immovables_;
+	UI::Button* toggle_bobs_;
 	UI::Button* undo_;
 	UI::Button* redo_;
 
 	std::unique_ptr<Tools> tools_;
 	std::unique_ptr<EditorHistory> history_;
+
+	bool draw_resources_ = true;
+	bool draw_immovables_ = true;
+	bool draw_bobs_ = true;
 };
 
 #endif  // end of include guard: WL_EDITOR_EDITORINTERACTIVE_H

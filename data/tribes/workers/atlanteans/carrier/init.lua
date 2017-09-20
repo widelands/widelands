@@ -10,8 +10,8 @@
 --
 -- Carriers, like workers, are defined in
 -- ``data/tribes/workers/<tribe name>/<worker_name>/init.lua``.
--- The carrier will also need its help texts, which are defined in
--- ``data/tribes/wares/<tribe name>/<worker_name>/helptexts.lua``
+-- The carrier will also need its :ref:`help texts <lua_tribes_workers_helptexts>`,
+-- which are defined in ``data/tribes/wares/<tribe name>/<worker_name>/helptexts.lua``
 
 dirname = path.dirname(__file__)
 
@@ -26,7 +26,7 @@ add_walking_animations(animations, "walk", dirname, "walk", {8, 25}, 10)
 add_walking_animations(animations, "walkload", dirname, "walkload", {8, 25}, 10)
 
 -- RST
--- .. function:: new_carrier_type(table)
+-- .. function:: new_carrier_type{table}
 --
 --    This function adds the definition of a carrier to the engine.
 --

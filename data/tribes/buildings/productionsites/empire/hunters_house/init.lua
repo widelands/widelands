@@ -25,7 +25,9 @@ tribes:new_productionsite_type {
       },
    },
 
-   aihints = {},
+   aihints = {
+      prohibited_till = 400
+   },
 
    working_positions = {
       empire_hunter = 1
