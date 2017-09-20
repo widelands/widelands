@@ -448,7 +448,7 @@ void DefaultAI::think() {
 						++conquered_wh;
 					}
 				};
-				if (!basic_economy_established) {  // NOCOM
+				if (!basic_economy_established) {
 					assert(!persistent_data->remaining_basic_buildings.empty());
 					assert(persistent_data->remaining_buildings_size > 0);
 					log("%2d: Basic economy not achieved, %lu building(s) missing, f.e.: %s\n",
