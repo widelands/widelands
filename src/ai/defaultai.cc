@@ -2000,6 +2000,9 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 		    player_number(), persistent_data->remaining_basic_buildings.size(),
 		    gamestring_with_leading_zeros(gametime));
 		basic_economy_established = true;
+		// Zeroing following to preserve consistency
+		persistent_data->remaining_buildings_size = 0;
+		persistent_data->remaining_basic_buildings.clear();
 	}
 
 	// *_military_scores are used as minimal score for a new military building
@@ -3591,6 +3594,10 @@ bool DefaultAI::check_productionsites(uint32_t gametime) {
 	ProductionSiteObserver& site = productionsites.front();
 
 	// Make sure we are not above ai type limit
+	//NOCOM
+	if (site.bo->total_count() > site.bo->cnt_limit_by_aimode) {
+		printf ("Too many %s: %d, ai limit: %d\n", site.bo->name, site.bo->total_count(), site.bo->cnt_limit_by_aimode);
+		}
 	assert(site.bo->total_count() <= site.bo->cnt_limit_by_aimode);
 
 	// first we werify if site is working yet (can be unoccupied since the start)
