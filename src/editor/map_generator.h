@@ -78,7 +78,7 @@ struct MapGenerator {
 
 private:
 	void generate_bobs(std::unique_ptr<uint32_t[]> const* random_bobs,
-	                   Coords,
+	                   const Coords&,
 	                   RNG&,
 	                   MapGenAreaInfo::MapGenTerrainType terrType);
 
@@ -88,7 +88,7 @@ private:
 	                        uint32_t const* const random4,
 	                        const FCoords& fc);
 
-	uint8_t make_node_elevation(double elevation, Coords);
+	uint8_t make_node_elevation(double elevation, const Coords&);
 
 	static uint32_t* generate_random_value_map(uint32_t w, uint32_t h, RNG& rng);
 

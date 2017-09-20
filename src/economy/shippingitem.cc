@@ -129,19 +129,6 @@ void ShippingItem::update_destination(Game& game, PortDock& pd) {
 	destination_dock_ = dynamic_cast<PortDock*>(next);
 }
 
-void ShippingItem::schedule_update(Game& game, int32_t delay) {
-	WareInstance* ware;
-	Worker* worker;
-	get(game, &ware, &worker);
-
-	if (ware) {
-		ware->schedule_act(game, delay);
-	}
-	if (worker) {
-		worker->send_signal(game, "wakeup");
-	}
-}
-
 /**
  * Remove the underlying item directly. This is used when ships are removed.
  */

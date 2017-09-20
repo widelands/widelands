@@ -112,7 +112,7 @@ struct CoordPath {
 		return path_;
 	}
 
-	int32_t get_index(Coords field) const;
+	int32_t get_index(const Coords& field) const;
 
 	void reverse();
 	void truncate(const std::vector<char>::size_type after);

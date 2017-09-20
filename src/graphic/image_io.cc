@@ -77,7 +77,7 @@ SDL_Surface* load_image_as_sdl_surface(const std::string& fname, FileSystem* fs)
 
 	SDL_Surface* sdlsurf = IMG_Load_RW(SDL_RWFromMem(fr.data(0), fr.get_size()), 1);
 	if (!sdlsurf) {
-		throw ImageLoadingError(fname.c_str(), IMG_GetError());
+		throw ImageLoadingError(fname, IMG_GetError());
 	}
 	return sdlsurf;
 }

@@ -259,9 +259,6 @@ public:
 	UI::Align halign() const {
 		return halign_;
 	}
-	void set_halign(UI::Align ghalign) {
-		halign_ = ghalign;
-	}
 	UI::Align valign() const {
 		return valign_;
 	}
