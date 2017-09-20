@@ -137,12 +137,8 @@ void InteractiveGameBase::draw_overlay(RenderTarget& dst) {
  * during single/multiplayer/scenario).
  */
 void InteractiveGameBase::postload() {
-	auto* overlay_manager = mutable_field_overlay_manager();
 	show_buildhelp(false);
 	on_buildhelp_changed(buildhelp());
-
-	overlay_manager->register_overlay_callback_function(
-	   boost::bind(&InteractiveGameBase::calculate_buildcaps, this, _1));
 
 	// Recalc whole map for changed owner stuff
 	egbase().mutable_map()->recalc_whole_map(egbase().world());
@@ -209,7 +205,7 @@ UI::UniqueWindow* InteractiveGameBase::show_building_window(const Widelands::Coo
 			   *this, registry, *dynamic_cast<Widelands::Warehouse*>(building), avoid_fastclick);
 		};
 		break;
-		// TODO(sirver,trading): Add UI for market.
+	// TODO(sirver,trading): Add UI for market.
 	default:
 		log("Unable to show window for building '%s', type '%s'.\n", building->descr().name().c_str(),
 		    to_string(building->descr().type()).c_str());

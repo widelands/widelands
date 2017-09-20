@@ -51,7 +51,6 @@
 #include "scripting/lua_table.h"
 #include "ui_basic/messagebox.h"
 #include "ui_basic/progresswindow.h"
-#include "wui/field_overlay_manager.h"
 #include "wui/game_tips.h"
 #include "wui/interactive_base.h"
 
@@ -190,9 +189,6 @@ void EditorInteractive::cleanup_for_load() {
 	// TODO(unknown): get rid of cleanup_for_load, it tends to be very messy
 	// Instead, delete and re-create the egbase.
 	egbase().cleanup_for_load();
-
-	// Select a tool that doesn't care about map changes
-	mutable_field_overlay_manager()->register_overlay_callback_function(nullptr);
 }
 
 /// Called just before the editor starts, after postload, init and gfxload.
@@ -331,9 +327,14 @@ void EditorInteractive::draw(RenderTarget& dst) {
 			}
 		}
 
-		// TODO(sirver): Do not use the field_overlay_manager, instead draw the
-		// overlays we are interested in here directly.
-		field_overlay_manager().foreach_overlay(field.fcoords, blit_overlay);
+		// Draw build help.
+		if (buildhelp()) {
+			const auto* overlay =
+			   get_buildhelp_overlay(tools_->current().nodecaps_for_buildhelp(field.fcoords, ebase));
+			if (overlay != nullptr) {
+				blit_overlay(overlay->pic, overlay->hotspot);
+			}
+		}
 
 		// Draw the player starting position overlays.
 		const auto it = starting_positions.find(field.fcoords);
@@ -589,9 +590,6 @@ void EditorInteractive::select_tool(EditorTool& primary, EditorTool::ToolIndex c
 				toolsize_menu.update(toolsize_menu.value());
 			}
 		}
-		//  A new tool has been selected. Remove all registered overlay callback
-		//  functions.
-		mutable_field_overlay_manager()->register_overlay_callback_function(nullptr);
 		egbase().mutable_map()->recalc_whole_map(egbase().world());
 	}
 	tools_->current_pointer = &primary;
@@ -680,8 +678,6 @@ void EditorInteractive::map_changed(const MapWas& action) {
 	case MapWas::kGloballyMutated:
 		break;
 	}
-
-	mutable_field_overlay_manager()->remove_all_overlays();
 }
 
 EditorInteractive::Tools* EditorInteractive::tools() {

@@ -11,7 +11,7 @@ p1.see_all = true
 
 p1:allow_workers("all")
 
-function full_headquarters(player, x, y) 
+function full_headquarters(player, x, y)
    prefilled_buildings(player, { "barbarians_headquarters", x, y })
    hq = player:get_buildings("barbarians_headquarters")[1]
    for idx,descr in ipairs(game:get_tribe_description("barbarians").wares) do

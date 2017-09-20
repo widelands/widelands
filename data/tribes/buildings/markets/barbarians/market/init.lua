@@ -1,3 +1,10 @@
+-- RST
+-- .. _lua_tribes_buildings_markets:
+--
+-- Markets
+-- -------
+--
+-- TODO(sirver, trading): Add useful documentation here
 dirname = path.dirname(__file__)
 
 tribes:new_market_type {

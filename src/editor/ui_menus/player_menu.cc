@@ -33,7 +33,6 @@
 #include "ui_basic/editbox.h"
 #include "ui_basic/messagebox.h"
 #include "ui_basic/textarea.h"
-#include "wui/field_overlay_manager.h"
 
 #define UNDEFINED_TRIBE_NAME "<undefined>"
 
@@ -220,13 +219,6 @@ void EditorPlayerMenu::clicked_remove_last_player() {
 	Widelands::PlayerNumber const nr_players = old_nr_players - 1;
 	assert(1 <= nr_players);
 
-	if (const Widelands::Coords sp = map->get_starting_pos(old_nr_players)) {
-		//  Remove starting position marker.
-		const Image* player_image =
-		   playercolor_image(old_nr_players - 1, "images/players/player_position.png");
-		assert(player_image);
-		menu.mutable_field_overlay_manager()->remove_overlay(sp, player_image);
-	}
 	// if removed player was selected switch to the next highest player
 	if (old_nr_players == menu.tools()->set_starting_pos.get_current_player()) {
 		set_starting_pos_clicked(nr_players);
@@ -275,12 +267,6 @@ void EditorPlayerMenu::set_starting_pos_clicked(uint8_t n) {
 
 	//  reselect tool, so everything is in a defined state
 	menu.select_tool(menu.tools()->current(), EditorTool::First);
-
-	//  Register callback function to make sure that only valid locations are
-	//  selected.
-	menu.mutable_field_overlay_manager()->register_overlay_callback_function(
-	   boost::bind(&editor_tool_set_starting_pos_callback, _1, boost::ref(*map)));
-	map->recalc_whole_map(menu.egbase().world());
 	update();
 }
 

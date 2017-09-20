@@ -57,6 +57,11 @@ struct EditorIncreaseResourcesTool : public EditorTool {
 		return g_gr->images().get("images/wui/editor/fsel_editor_increase_resources.png");
 	}
 
+	Widelands::NodeCaps nodecaps_for_buildhelp(const Widelands::FCoords& fcoords,
+	                                           const Widelands::EditorGameBase& egbase) override {
+		return resource_tools_nodecaps(fcoords, egbase, cur_res_);
+	}
+
 	int32_t get_change_by() const {
 		return change_by_;
 	}

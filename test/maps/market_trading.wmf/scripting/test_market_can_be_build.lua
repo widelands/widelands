@@ -10,4 +10,3 @@ run(function()
    print("# All Tests passed.")
    wl.ui.MapView():close()
 end)
-
