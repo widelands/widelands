@@ -40,7 +40,31 @@ return {
          }
       })
       
-      player:reveal_fields(sf:region(9))
+      player:reveal_fields(sf:region(10))
       player:conquer(sf, 9)
+
+      local function add_wares(waretable)
+         local hq = player:get_buildings("atlanteans_warehouse")[1]
+         for ware,warecount in pairs(waretable) do
+            local oldwarecount = hq:get_wares(ware) or 0
+            hq:set_wares(ware, oldwarecount+warecount)
+         end
+      end
+
+      --NOTE: pessimistically, this could be a single rock
+      local has_rocks = false
+      for k,f in pairs(sf:region(10)) do
+         if f.immovable and f.immovable:has_attribute('rocks') then
+            has_rocks = true
+            break
+         end
+      end
+      if not has_rocks then
+         add_wares({
+            granite = 4,
+            planks = -1})
+         player:send_message(_"No rocks nearby", _"There are no rocks near to your starting position.  Therefore, you receive extra resources for bootstrapping your economy.")
+      end
+      
    end
 }
