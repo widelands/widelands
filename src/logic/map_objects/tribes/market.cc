@@ -58,16 +58,18 @@ void Market::new_trade(const int trade_id,
 	auto& trade_order = trade_orders_[trade_id];
 
 	// Request one worker for each item in a batch.
+	int num_required_carriers = 0;
 	for (size_t i = 0; i < items.size(); ++i) {
-		for (size_t j = 0; j < items[i].second; ++j) {
-			trade_order.worker_requests.emplace_back(
-			   new Request(*this, descr().carrier(), Market::request_worker_callback, wwWORKER));
-		}
+		num_required_carriers += items[i].second;
 	}
+	trade_order.worker_request.reset(
+	   new Request(*this, descr().carrier(), Market::request_worker_callback, wwWORKER));
+	trade_order.worker_request->set_count(num_required_carriers);
 }
 
 void Market::request_worker_callback(
    Game& game, Request& rq, DescriptionIndex /* widx */, Worker* const w, PlayerImmovable& target) {
+	// NOCOM(#sirver): set_economy is not handled.
 	auto& market = dynamic_cast<Market&>(target);
 
 	assert(w);
@@ -75,18 +77,19 @@ void Market::request_worker_callback(
 
 	for (auto& trade_order_pair : market.trade_orders_) {
 		auto& trade_order = trade_order_pair.second;
-		for (size_t i = 0; i < trade_order.worker_requests.size(); ++i) {
-			if (trade_order.worker_requests[i].get() != &rq) {
-				continue;
-			}
-			// Erase this request. We keep the vector as is.
-			trade_order.worker_requests[i].reset();
-			w->start_task_idle(game, 0, -1);
-			Notifications::publish(
-			   NoteBuilding(market.serial(), NoteBuilding::Action::kWorkersChanged));
-			// NOCOM(#sirver): try launching a batch now.
-			return;
+		if (trade_order.worker_request.get() != &rq) {
+			continue;
 		}
+
+		log("#sirver rq.get_count(): %d\n", rq.get_count());
+		if (rq.get_count() == 0) {
+			// Erase this request.
+			trade_order.worker_request.reset();
+		} 
+		w->start_task_idle(game, 0, -1);
+		Notifications::publish(NoteBuilding(market.serial(), NoteBuilding::Action::kWorkersChanged));
+		// NOCOM(#sirver): try launching a batch now.
+		return;
 	}
 	NEVER_HERE(); // We should have found and handled a match by now.
 }
