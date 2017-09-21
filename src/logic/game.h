@@ -247,7 +247,7 @@ public:
 	void set_auto_speed(bool);
 
 	// NOCOM(#sirver): document
-	void suggest_trade(const Trade& trade);
+	int suggest_trade(const Trade& trade);
 	void accept_trade(int trade_id);
 
 private:

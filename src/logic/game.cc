@@ -760,7 +760,7 @@ void Game::send_player_suggest_trade(const Trade& trade) {
 	   *new CmdSuggestTrade(get_gametime(), object->get_owner()->player_number(), trade));
 }
 
-void Game::suggest_trade(const Trade& trade) {
+int Game::suggest_trade(const Trade& trade) {
 	// NOCOM(#sirver): Check if a trade is possible (i.e. if there is a path between the two markets);
 	const int id = next_trade_agreement_id_;
 	++next_trade_agreement_id_;
@@ -781,14 +781,21 @@ void Game::suggest_trade(const Trade& trade) {
 	receiver->send_message(*this, Message::Type::kTradeOfferReceived, receiver->descr().descname(),
 	                       receiver->descr().icon_filename(), receiver->descr().descname(),
 	                       _("This Market received a new trade offer."), true);
-	trade_agreements_[id] = TradeAgreement{id, TradeAgreement::State::kSuggested, trade};
+	trade_agreements_[id] = TradeAgreement{TradeAgreement::State::kSuggested, trade};
 
 	// TODO(sirver): this should be done through another player_command, but I
 	// want to get to the trade logic implementation now.
 	accept_trade(id);
+	return id;
 }
 
 void Game::accept_trade(const int trade_id) {
+	auto it = trade_agreements_.find(trade_id);
+	if (it == trade_agreements_.end()) {
+		log("Game::accept_trade: Trade %d has vanished. Ignoring.\n", trade_id);
+		return;
+	}
+	const Trade& trade = it->second.trade;
 	auto* initiator = dynamic_cast<Market*>(objects().get_object(trade.initiator));
 	if (initiator == nullptr) {
 		trade_initiator_vanished(trade_id);
@@ -802,7 +809,7 @@ void Game::accept_trade(const int trade_id) {
 	}
 
 	initiator->new_trade(trade_id, trade.send_items, trade.num_batches, trade.receiver);
-	receiver->new_trade(trade_id, trade.receved_items, trade.num_batches, trade.initiator);
+	receiver->new_trade(trade_id, trade.received_items, trade.num_batches, trade.initiator);
 
 	// NOCOM(#sirver): Messages to the users?
 }

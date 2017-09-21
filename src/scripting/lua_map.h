@@ -1125,6 +1125,7 @@ public:
 	/*
 	 * Lua Methods
 	 */
+	int propose_trade(lua_State* L);
 
 	/*
 	 * C Methods

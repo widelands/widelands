@@ -35,7 +35,7 @@ public:
 
 	Building& create_object() const override;
 
-	DesriptionIndex carrier() const { return carrier_; }
+	DescriptionIndex carrier() const { return carrier_; }
 
 private:
 	DescriptionIndex carrier_;
@@ -56,6 +56,8 @@ private:
 		int shipped_batches;
 		Serial other_side;
 
+		// The requests for worker issues for this TradeOrder. Fulfilled orders
+		// are nullptr, so not all values here are actually there.
 		std::vector<std::unique_ptr<Request>> worker_requests;
 	};
 
