@@ -1,13 +1,13 @@
-# Automatically created by Widelands bzr8409[trunk] (Release)
+# Automatically created by Widelands master-2416_Release_x64 (Release)
 
 [global]
 packet_version="1"
 map_w="112"
 map_h="208"
-nr_players="2"
+nr_players="3"
 name="Higgledy-Piggledy"
 author="hessenfarmer"
 descr="After returning home Lutius and his crew are faced with a complete economic mess. It will be of utmost importance to resolve the bottlenecks in the economy to reinstate the glory of the empire."
 hint=
 background="campaigns/emp04.wmf/pics/background.jpg"
-tags="unbalanced"
+tags="artifacts,unbalanced"

@@ -1,8 +1,16 @@
+
+p3:forbid_buildings("all")
+
+
+
+
+
+
 -- =======================================================================
 --                                 Player 1
 -- =======================================================================
-p1.see_all = true
-p1:forbid_buildings{"empire_farm"}
+--p1.see_all = true
+p1:forbid_buildings{"empire_farm", "empire_mill", "empire_brewery"}
 
 
  prefilled_buildings(p1, { "empire_headquarters", sf.x, sf.y,
@@ -38,6 +46,7 @@ p1:forbid_buildings{"empire_farm"}
       place_building_in_region(p1, "empire_tower", {map:get_field(28, 24)})	  
       place_building_in_region(p1, "empire_tower", {map:get_field(35, 202)})
       place_building_in_region(p1, "empire_fortress", {map:get_field(31, 5)})
+
 
 -- place farm
 	  place_building_in_region(p1, "empire_farm1", {map:get_field(20, 194)})	  
@@ -384,3 +393,6 @@ prefilled_buildings(p2,
     }
   }
 )
+
+
+   

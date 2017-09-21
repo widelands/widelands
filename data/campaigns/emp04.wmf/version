@@ -1,11 +1,11 @@
-# Automatically created by Widelands bzr8409[trunk] (Release)
+# Automatically created by Widelands master-2416_Release_x64 (Release)
 
 [global]
 map_source_url=
 map_release=
-map_creator_version="bzr8409[trunk]"
+map_creator_version="master-2416_Release_x64"
 map_version_major="0"
 map_version_minor="1"
-map_version_timestamp="1502304914"
+map_version_timestamp="1504032035"
 packet_version="1"
 packet_compatibility="1"

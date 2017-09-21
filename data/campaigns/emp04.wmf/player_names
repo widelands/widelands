@@ -1,4 +1,4 @@
-# Automatically created by Widelands bzr8409[trunk] (Release)
+# Automatically created by Widelands master-2416_Release_x64 (Release)
 
 [global]
 packet_version="2"
@@ -12,5 +12,11 @@ closeable="false"
 [player_2]
 name="Runeth"
 tribe="barbarians"
+ai=
+closeable="false"
+
+[player_3]
+name="Vesta"
+tribe="empire"
 ai=
 closeable="false"

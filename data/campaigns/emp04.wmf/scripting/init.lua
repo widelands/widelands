@@ -12,6 +12,9 @@ include "scripting/ui.lua"
 
 p1 = wl.Game().players[1]
 p2 = wl.Game().players[2]
+p3 = wl.Game().players[3]
+
+
 
 include "map:scripting/texts.lua"
 include "map:scripting/mission_thread.lua"

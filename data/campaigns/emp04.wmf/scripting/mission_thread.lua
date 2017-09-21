@@ -15,7 +15,7 @@ function dismantle()
 end
 
 function farm_plans()
-   local f = map:get_field(7, 168)
+   local f = map:get_field(47, 190)
    while #p1:get_buildings("empire_farm1") > 1 do sleep(3249) end
    campaign_message_box(amalea_2)
    local o = add_campaign_objective(obj_find_farm_plans)
@@ -31,6 +31,7 @@ function farm_plans()
    campaign_message_box(amalea_4)
    o.done = true
    p1:allow_buildings{"empire_farm"}
+   run (wheat_chain)
 end  
 
 function clear_roads()
@@ -100,15 +101,153 @@ end
 
 function produce_food()
    local o = add_campaign_objective(obj_produce_fish)
-   while count_in_warehouses("ration") < 3 do sleep(3000) end
-   o.done = true 
+   while p1:get_produced_wares_count("ration") < 14 do sleep(3000) end
+   o.done = true
+   run(steel)
+end
+
+function steel()
+   campaign_message_box(amalea_13)
+   local o = add_campaign_objective(obj_produce_tools)
+
+   while not (( 
+      p1:get_produced_wares_count("basket") + 
+	  p1:get_produced_wares_count("bread_paddle") + 
+	  p1:get_produced_wares_count("felling_ax") + 
+	  p1:get_produced_wares_count("fire_tongs") +
+	  p1:get_produced_wares_count("fishing_rod") +
+	  p1:get_produced_wares_count("hammer") +
+	  p1:get_produced_wares_count("hunting_spear") +
+	  p1:get_produced_wares_count("kitchen_tools") +
+	  p1:get_produced_wares_count("pick") +
+	  p1:get_produced_wares_count("saw") +
+	  p1:get_produced_wares_count("scythe") +
+	  p1:get_produced_wares_count("shovel")
+	  ) > 9) do 
+   sleep(2500) 
+   end
+   
+   o.done = true
+   
+   local o1 = add_campaign_objective(obj_recruit_soldiers)
+   campaign_message_box(saledus_5)
+   local number_soldiers = 0
+   local bld = array_combine(
+      p1:get_buildings("empire_headquarters"),
+      p1:get_buildings("empire_warehouse"),
+      p1:get_buildings("empire_trainingcamp"),
+      p1:get_buildings("empire_arena"),
+      p1:get_buildings("empire_colosseum"),
+      p1:get_buildings("empire_sentry"),
+	  p1:get_buildings("empire_tower"),
+      p1:get_buildings("empire_fortress"),
+      p1:get_buildings("empire_outpost"),
+	  p1:get_buildings("empire_barrier"),
+      p1:get_buildings("empire_blockhouse"),
+      p1:get_buildings("empire_castle")
+      )
+   for idx,site in ipairs(bld) do
+      for descr,count in pairs(site:get_soldiers("all")) do
+         number_soldiers = number_soldiers + count
+	  end
+   end
+   
+   number_soldiers = number_soldiers + 9
+   local enough_soldiers = false
+   while not enough_soldiers do
+   bld = array_combine(
+      p1:get_buildings("empire_headquarters"),
+      p1:get_buildings("empire_warehouse"),
+      p1:get_buildings("empire_trainingcamp"),
+      p1:get_buildings("empire_arena"),
+      p1:get_buildings("empire_colosseum"),
+      p1:get_buildings("empire_sentry"),
+	  p1:get_buildings("empire_tower"),
+      p1:get_buildings("empire_fortress"),
+      p1:get_buildings("empire_outpost"),
+	  p1:get_buildings("empire_barrier"),
+      p1:get_buildings("empire_blockhouse"),
+      p1:get_buildings("empire_castle")
+      )
+	  local amount = 0
+      for idx,site in ipairs(bld) do
+	     for descr,count in pairs(site:get_soldiers("all")) do
+            amount = amount + count
+		 end
+      end
+	  if amount > number_soldiers then
+	     enough_soldiers = true
+      end
+      sleep(4273)
+   end
+   o1.done = true
+end
+
+function wheat_chain()
+   while not (p1:get_produced_wares_count('beer') > 4  and p1:get_produced_wares_count('flour') > 4) do sleep(2434) end
+   local o = add_campaign_objective(obj_find_monastry)
+   campaign_message_box(amalea_9)
+   while not (p1:sees_field(map:get_field(16,156)) or p1:sees_field(map:get_field(16,157)) or p1:sees_field(map:get_field(17,158)) or p1:sees_field(map:get_field(17,159)) or p1:sees_field(map:get_field(18,160)) or p1:sees_field(map:get_field(18,161)) or p1:sees_field(map:get_field(19,162)) or p1:sees_field(map:get_field(20,162)) or p1:sees_field(map:get_field(21,162)) or p1:sees_field(map:get_field(22,162)) or p1:sees_field(map:get_field(23,162)) or p1:sees_field(map:get_field(24,162))) do sleep(2500) end
+   local well = map:get_field(17, 154)
+   place_building_in_region(p3, "empire_well", {map:get_field(17, 154)})
+   local brew = map:get_field(19, 155)
+   place_building_in_region(p3, "empire_brewery", {map:get_field(19, 155)})
+   local mill = map:get_field(18, 156)
+   place_building_in_region(p3, "empire_mill", {map:get_field(18, 156)})
+   local ware = map:get_field(21, 158)
+   place_building_in_region(p3, "empire_warehouse", {map:get_field(21, 158)})
+   local sent = map:get_field(19, 157)
+   place_building_in_region(p3, "empire_sentry", {map:get_field(19, 157)})
+   o.done = true
+   sleep(4000)
+   local vesta = map:get_field(19, 157)
+   local prior_center = scroll_to_field(vesta)
+   concentric_reveal(p1, vesta, 7, 100)
+   campaign_message_box(vesta_0)
+   campaign_message_box(amalea_10)
+   campaign_message_box(saledus_1)
+   local o1 = add_campaign_objective(obj_deal_with_vesta)
+   scroll_to_map_pixel(prior_center)
+   
+   local hq = p1:get_buildings("empire_headquarters")
+   
+   while not ((hq[1]:get_wares("wheat") > 34 and hq[1]:get_wares("wine") > 14) or p3.defeated) do sleep(4000) end
+   if p3.defeated then
+      o1.done = true
+	  p1:allow_buildings{"empire_mill", "empire_brewery"}
+      campaign_message_box(saledus_2)
+	  campaign_message_box(amalea_11)
+	  campaign_message_box(saledus_4)
+   else
+      o1.done = true
+	  local wheat = hq[1]:get_wares("wheat") - 35
+	  local wine = hq[1]:get_wares("wine") - 15
+	  hq[1]:set_wares("wheat", wheat)
+	  hq[1]:set_wares("wine", wine)	  
+	  p1:allow_buildings{"empire_mill", "empire_brewery"}
+      campaign_message_box(vesta_1) 
+	  local wh = p3:get_buildings("empire_warehouse")
+	  wh[1]:set_workers("empire_carrier", 0)
+      well.immovable:remove()
+      brew.immovable:remove()
+      mill.immovable:remove()
+      ware.immovable:remove()
+      sent.immovable:remove()
+      place_building_in_region(p1, "empire_well", {map:get_field(17, 154)})
+      place_building_in_region(p1, "empire_brewery", {map:get_field(19, 155)})
+      place_building_in_region(p1, "empire_mill", {map:get_field(18, 156)})
+      place_building_in_region(p1, "empire_warehouse", {map:get_field(21, 158)}, {wares = {water = 30, flour = 30, beer = 40,}})
+      place_building_in_region(p1, "empire_sentry", {map:get_field(19, 157)})   
+      campaign_message_box(amalea_12)
+      campaign_message_box(saledus_3)
+   end
 end
 
 function mission_thread()
    sleep(1000)
    scroll_to_field(sf)  --scroll to our headquarters
    include "map:scripting/starting_conditions.lua"
-   
+
 
    --Initial messages
    campaign_message_box(diary_page_1)
@@ -124,71 +263,11 @@ function mission_thread()
    campaign_message_box(amalea_1)
    run(dismantle)
    run(farm_plans)
-
-   -- sleep(400)
-
-   -- sleep(400)
-   -- campaign_message_box(saledus_1)
-   -- o = add_campaign_objective(obj_build_first_outpost)
+   
 
 
-   -- -- Outpost is completed now
-   -- campaign_message_box(saledus_2)
-
-   -- 
 
 
-   -- -- quarry is now build but we need more basic infrastructure
-   -- campaign_message_box(amalea_2)
-   -- p1:allow_buildings{
-      -- "empire_barrier", 
-      -- "empire_sawmill", 
-      -- "empire_stonemasons_house", 
-      -- "empire_foresters_house", 
-      -- "empire_tower",
-   -- }
-   -- p2:allow_buildings{
-      -- "barbarians_tower", 
-      -- "barbarians_fortress",
-   -- }
-   -- o2 = add_campaign_objective(obj_build_sawmill_stonemason_and_lumberjacks)
-   -- -- in the same time we need to discover more land and a port space
-   -- run(building_industry)
-   -- sleep(40000)
-   -- campaign_message_box(saledus_3)
-   -- p1:allow_buildings{
-      -- "empire_port", 
-      -- "empire_shipyard",
-   -- }
-   -- o4 = add_campaign_objective(obj_find_port_space)
-
-   -- local port = map:get_field(17, 17)
-   -- local fowned = nil
-   -- while not fowned do
-      -- if port.owner == p1 then
-         -- fowned = 1
-         -- break
-      -- end
-   -- sleep(3000)
-   -- end
-
-   -- sleep(3213)
-   -- o4.done = true
-
-   -- -- Portspace discovered now we can build a port
-   -- campaign_message_box(saledus_4)
-   -- p1:allow_buildings{
-      -- "empire_farm", 
-      -- "empire_fishers_house", 
-      -- "empire_hunters_house",
-   -- }
-   -- o5 = add_campaign_objective(obj_build_port_and_shipyard)
-   -- run(ship_industry)
-
-   -- -- patience we have to think about how to get enough cloth to build a ship
-   -- campaign_message_box(amalea_4)
-   -- o6 = add_campaign_objective(obj_produce_wheat)
-   -- run(wheat) 
 end
 
 run(mission_thread)

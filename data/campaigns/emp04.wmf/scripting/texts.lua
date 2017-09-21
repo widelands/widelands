@@ -26,6 +26,12 @@ end
 function amalea3(title, text)
    return speech("map:Amalea3.png", "AF7511", title, text)
 end
+function vesta(title, text)
+   return speech("map:Vesta.png", "757511", title, text)
+end
+
+
+
 -- =======================================================================
 --                           Texts - No logic here
 -- =======================================================================
@@ -57,14 +63,14 @@ obj_find_farm_plans = {
    title=_"Find the construction plans for our farm",
    number = 1,
    body = objective_text(_"Find our construction plans",
-      listitem_bullet(_[[We need to recover our plans how to construct a farm.]])
+      listitem_bullet(_[[We need to recover our plans how to construct a farm. We should search for them in the hills east of our border.]])
    ),
 }
 
 obj_build_quarries_and_lumberjacks = {
    name = "build_quarries_and_lumberjacks",
    title=_"Build at least 3 lumberjack’s houses and 2 quarries to renew our building material supply chain",
-   number = 3,
+   number = 1,
    body = objective_text(_"Quarries and Lumberjacks",
       listitem_bullet(_[[Build at least 3 lumberjack’s houses and 2 quarries to renew our building material supply chain]])
    ),
@@ -80,7 +86,7 @@ obj_produce_fish = {
 }
 
 obj_replace_foresters = {
-   name = "Replace_foresters",
+   name = "replace_foresters",
    title=_"Replace our old and uneffective foresters",
    number = 1,
    body = objective_text(_"Replace our foresters by new ones",
@@ -88,51 +94,46 @@ obj_replace_foresters = {
    ),
 }
 
--- obj_build_port_and_shipyard = {
-   -- name = "build a port and a shipyard",
-   -- title=_"Build a port and a shipyard on the island",
-   -- number = 2,
-   -- body = objective_text(_"Ship Industry",
-      -- listitem_bullet(_[[Build a port to set sail again.]])..
-	  -- listitem_bullet(_[[Build a shipyard to produce the ships to sail on.]])),
--- }
+obj_find_monastry = {
+   name = "find_monastry",
+   title=_"Find the monastry in the north",
+   number = 1,
+   body = objective_text(_"Find the monastry",
+      listitem_bullet(_[[Find the monastry in the north to obtain the improved technology for our wheat industry chain.]])),
+}
 
--- obj_produce_wheat = {
-   -- name = "produce 50 wheat",
-   -- title=_"Produce at least 50 wheat",
-   -- number = 1,
-   -- body = objective_text(_"Wheat production",
-      -- listitem_bullet(_[[To start a wool production we need at least 50 wheat.]])
-   -- ),
--- }
+obj_deal_with_vesta = {
+   name = "deal_with_vesta",
+   title=_"Deal with Vesta to get the technology",
+   number = 1,
+   body = objective_text(_"Diplomacy: Trade or War",
+      listitem_bullet(_[[We need to get the improvements very soon. But we have to decide: either we collect 35 wheat and 15 wine for Vesta  in one of our warehouses or we just conquer the monastry.]])),
+}
 
--- obj_produce_cloth = {
-   -- name = "produce cloth",
-   -- title=_"Produce cloth for building our first ship",
-   -- number = 1,
-   -- body = objective_text(_"Cloth production",
-      -- listitem_bullet(_[[Now let's use the wheat to produce wool (at least 50) and then use the wool to weave cloth to build a ship.]])
-   -- ),
--- }
+obj_train_heroes = {
+   name = "train_heroes",
+   title=_"Train at least 3 heroes",
+   number = 1,
+   body = objective_text(_"Training of heroes",
+      listitem_bullet(_[[Use our ressources wisely to train at least 3 heroes.]])),
+}
 
--- obj_build_expedition_ports = {
-   -- name = "build two expedition ports",
-   -- title=_"Build 2 ports on distant islands",
-   -- number = 2,
-   -- body = objective_text(_"Build 2 distant ports by sending expeditions",
-      -- listitem_bullet(_[[We should explore the island in the south, use an expedition to build a port there. Afterwards let's try to find some mining resources.]])..
-	  -- listitem_bullet(_[[We should send a ship northwards to check if the barbarians are there. Try to build a port to found an outpost.]])
-   -- ),
--- }
+obj_produce_tools = {
+   name = "produce_tools",
+   title=_"Produce at least 10 tools",
+   number = 1,
+   body = objective_text(_"Produce 10  tools for the beginning",
+      listitem_bullet(_[[We need to produce additional tools to improve our economy. For the beginning start with at least 10 of them. Remember the possibility to control the production in the economy settings.]])),
+}
 
--- obj_produce_gold = {
-   -- name = "produce gold",
-   -- title=_"Produce gold to send out expeditions",
-   -- number = 1,
-   -- body = objective_text(_"Gold production",
-      -- listitem_bullet(_[[We need to produce at least 6 gold to be able to colonise our vicinity.]])
-   -- ),
--- }
+obj_recruit_soldiers = {
+   name = "recruit_soldiers",
+   title=_"Recruit new soldiers",
+   number = 1,
+   body = objective_text(_"Recruiting new soldiers",
+      listitem_bullet(_[[Start to recruit new soldiers in our barracks. For the beginning recruit 10 of them at least. Don' forget you need to forge weapons and armour for them.]])
+   ),
+}
 
 -- obj_conquer_all = {
    -- name = "Conquer all",
@@ -174,6 +175,9 @@ obj_replace_foresters = {
 -- ==================
 -- Texts to the user
 -- ==================
+
+-- Lutius diary
+
 diary_page_1 = {
    title =_"Home, sweet home",
    body=lutius(_"Diary of Lutius",
@@ -219,14 +223,25 @@ diary_page_2 = {
    -- posy=1,
 -- }
 
-saledus = {
-    title=_"Military Strength",
-    body= saledus2(_"Saledus looks very relaxed…",
-       -- TRANSLATORS: Saledus
-       _([[Sire, you are right it is a great pleasure to be at home again. And the best of all things: I can see we still have some military strength. I can count five towers and a fortress in our vicinity to guard us.]])),
- 
-    posy=1,
-}
+-- diary_page_4 = {
+   -- title=_"Seafaring possible again",
+   -- body= lutius(_"Diary of Lutius",
+      -- -- TRANSLATORS: Lutius - Diary
+      -- _([[Praise the gods. We finally have a ship industry.]])),
+   -- posy=1,
+-- }
+
+-- diary_page_5 = {
+   -- title=_"Now it's time to get home again",
+   -- body= lutius(_"Diary of Lutius",
+      -- -- TRANSLATORS: Lutius - Diary
+      -- _([[Yes my fellow comrades, we have done it. We managed all the challenges that were imposed on us. But my heart is still with our home. We shall set sail as soon as possible to help defend the empire from the babarian tribe.]])
+	  -- .. paragraphdivider() ..
+      -- _([[You have completed this mission. You may continue playing if you wish, otherwise move on to the next mission.]])),
+   -- posy=1,
+-- }
+
+-- Amalea
 
 amalea = {
     title=_"Amalea looking puzzled",
@@ -239,28 +254,6 @@ amalea = {
 
     posy=1,
 }
-
--- saledus_1 = {
-   -- title=_"Spare resources",
-   -- body= saledus2(_"Saledus is nodding in agreement…",
-      -- -- TRANSLATORS: Saledus
-      -- _([[Sire, Amalea is right about the resources. Therefore I correct myself. We should only build an outpost as this is the most effective military building.]]))
-      -- .. new_objectives(obj_build_first_outpost),
-	  
-   -- posy=1,
-   -- h=500,
--- }
-
--- saledus_2 = {
-   -- title=_"Stone, nothing but stone",
-   -- body= saledus3(_"Saledus speaks with a sigh of relief…",
-      -- -- TRANSLATORS: Saledus
-      -- _([[Sire, I saw that the construction of the outpost was completed, so I have assigned some of my best soldiers to it to keep the watch.]])
-      -- .. paragraphdivider() ..
-      -- -- TRANSLATORS: Saledus
-      -- _([[But although this is a good step forward I can't see much space to build on. There is only stone all over the place. How can we ever build a new ship or even have some basic infrastructure to make our lives more comfortable?]])),
-   -- posy=1,
--- }
 
 amalea_1 = {
    title=_"Amalea investigating",
@@ -288,7 +281,7 @@ amalea_2 = {
       _([[This is caused by the sad fact that our constructors have lost the plans how to construct a farm. for this reason they don't know how to dismantle it either.]])
 	  .. paragraphdivider() ..
       -- TRANSLATORS: Amalea
-      _([[So we need to recover our construction plans for a farm. One older constructor told me that they might have been concealed in a cave in the northern mountains.]]))
+      _([[So we need to recover our construction plans for a farm. One older constructor told me that they might have been concealed in a cave in the hills east of our border.]]))
 	  .. new_objectives(obj_find_farm_plans ),
    posy=1,
    h=500,
@@ -305,51 +298,11 @@ amalea_3 = {
       .. paragraphdivider() ..
       -- TRANSLATORS: Amalea
       _([[Oh before I forget this in the meantime while our builders are doing their job somebody should clear the mess in our road network. This is such a chaos wasting a lot of building lots.]]))
-      .. new_objectives(obj_build_quarries_and_lumberjacks)
-	  .. new_objectives(obj_clear_roads),
+      .. new_objectives(obj_build_quarries_and_lumberjacks, obj_clear_roads),
+	  --.. new_objectives(obj_clear_roads),
    posy=1,
    h=500,
 }
-
--- amalea_10 = {
-   -- title=_"Amalea looks happy",
-   -- body= amalea2(_"Amalea comes in…",
-      -- -- TRANSLATORS: Amalea
-      -- _([[Ave Lutius. I have very good progress to report now.]])
-      -- .. paragraphdivider() ..
-      -- -- TRANSLATORS: Amalea
-      -- _([[I found out that the construction of the lumberjack’s house and the sawmill is complete, so we can begin to harvest the logs and make planks out of them.]])
-      -- .. paragraphdivider() ..
-      -- -- TRANSLATORS: Amalea
-      -- _([[This is a great step forward in constructing advanced buildings, and eventually we can use some planks to build new ships.]])),
-   -- posy=1,
--- }
-
--- saledus_3 = {
-   -- title=_"We need a port",
-   -- body= saledus2(_"Saledus thoughtfully…",
-      -- -- TRANSLATORS: Saledus
-      -- _([[Sire, I just thought about our way home. It is utmost important to build a port for loading our ships and start an expedition.]])
-      -- .. paragraphdivider() ..
-      -- -- TRANSLATORS: Saledus
-      -- _([[The problem is that a port is a building which needs a very special place to be build. So while buidling our economy we should nevertheless expand further to discover the whole island. Let's try to find such a valuable construction site.]]))
-      -- .. new_objectives(obj_find_port_space),
-   -- posy=1,
-   -- h=500,
--- }
-
--- saledus_4 = {
-   -- title=_"A Step closer to get home",
-   -- body= saledus3(_"Saledus looks excited…",
-      -- -- TRANSLATORS: Saledus
-      -- _([[Sire, today we got a lot closer to finally get home again. Our military has spotted a space to build a port on. We should start to build a port quickly.]])
-      -- .. paragraphdivider() ..
-      -- -- TRANSLATORS: Saledus
-      -- _([[Now we truly can look forward to build some ships. So we should build a shipyard as well.]]))
-	  -- .. new_objectives(obj_build_port_and_shipyard),
-   -- posy=1,
-   -- h=500,
--- }
 
 amalea_4 = {
    title=_"Amalea is somewhat relieved",
@@ -365,16 +318,6 @@ amalea_4 = {
    posy=1,
    h=500,
 }
-
-
--- diary_page_4 = {
-   -- title=_"Seafaring possible again",
-   -- body= lutius(_"Diary of Lutius",
-      -- -- TRANSLATORS: Lutius - Diary
-      -- _([[Praise the gods. We finally have a ship industry.]])),
-   -- posy=1,
--- }
-
 
 amalea_5 = {
    title=_"Amalea has good news",
@@ -398,25 +341,6 @@ amalea_5 = {
    h=500,
 }
 
--- saledus_5 = {
-   -- title=_"We should explore the islands",
-   -- body= saledus2(_"Saledus is excited…",
-      -- -- TRANSLATORS: Saledus
-      -- _([[Now that we have all resources ready to built a ship, we should explore the surrounding islands.]])
-      -- .. paragraphdivider() ..
-      -- -- TRANSLATORS: Saledus
-      -- _([[First we need to find some more resources to back up our growing economy. I have spotted an island with some mountains in the south. Perhaps we can find some valuable resources like iron there.]])
-	  -- .. paragraphdivider() ..
-      -- -- TRANSLATORS: Saledus
-      -- _([[But even more important is the following objective.]])
-      -- .. paragraphdivider() ..
-      -- -- TRANSLATORS: Saledus
-      -- _([[I think I have heard the wind carrying some weird but well known sounds from the north. If I'm not totally wrong I heard some barbarian war drums, so we should better check what is going on up there.]]))
-	  -- .. new_objectives(obj_build_expedition_ports),
-   -- posy=1,
-   -- h=500,
--- }
-
 amalea_6 = {
    title=_"Amalea is pleased",
    body= amalea3(_"Amalea is nodding her head…",
@@ -428,18 +352,6 @@ amalea_6 = {
    posy=1,
    h=600,
 }
-
--- saledus_6 = {
-   -- title=_"We should conquer the whole islands",
-   -- body= saledus3(_"Saledus is excited…",
-      -- -- TRANSLATORS: Saledus
-      -- _([[Now it is time to conquer the islands.]])
-      -- .. paragraphdivider() ..
-      -- _([[Let's finish the barbarians off and provide a nice colony for the caesar of our empire.]]))
-      -- .. new_objectives(obj_conquer_all),
-   -- posy=1,
-   -- h=500,
--- }
 
 amalea_7 = {
    title=_"Amalea shaking her head",
@@ -471,43 +383,155 @@ amalea_8 = {
    posy=1,
 }
 
--- amalea_9 = {
-   -- title=_"Amalea shaking head",
-   -- body= amalea3(_"Amalea is reminding ...",
-      -- -- TRANSLATORS: Amalea
-      -- _([[Lutius. I really appreciate that you and Saledus are so concerned about our security. But I think we could use the little space on this island better than building a lot of military buildings.]])
-      -- .. paragraphdivider() ..
-	  -- -- TRANSLATORS: Amalea
-      -- _([[I strongly recommend to dismantle most of them to be able to build industrial buildings. I don't think there is much danger on this island, but if you want to be cautious you can keep some sentries or blockhouses near the coastline.]])
-      -- .. paragraphdivider() ..
-	  -- -- TRANSLATORS: Amalea
-      -- _([[But be careful not to waste any bigger building lots.]])),
-   -- posy=1,
--- }
+amalea_9 = {
+   title=_"Amalea shaking head",
+   body= amalea3(_"Amalea is looking defeatist ...",
+      -- TRANSLATORS: Amalea
+      _([[Alright Lutius. Here is another problem. After the production of some beer and some flour I found out that the technology in the mill and the brewery is somewhat outdated. by this they consume far to much ressources.]])
+      .. paragraphdivider() ..
+	  -- TRANSLATORS: Amalea
+      _([[And you wouldn't believe it nobody knows how to improve the technology nor how to build more efficient buildings. The only thing I found out is that there might be a monastry in the north were the female priests might know how to improve our technology.]])
+      .. paragraphdivider() ..
+	  -- TRANSLATORS: Amalea
+      _([[But I'm not sure if they will give us their knowledge for free. Anyway we have no choice we need to find them to improve our economy.]]))
+	  .. new_objectives(obj_find_monastry),
+   posy=1,
+   h=500,
+}
 
--- amalea_11 = {
-   -- title=_"Amalea excited",
-   -- body= amalea1(_"Amalea is looking forward for exploration ...",
-      -- -- TRANSLATORS: Amalea
-      -- _([[Lutius. We have made a lot of progress so far. I just got information that we have completed our third ship. ]])
-      -- .. paragraphdivider() ..
-	  -- -- TRANSLATORS: Amalea
-      -- _([[Now that our fleet is growing and growing we should explore the complete region. Let's try to find more land and eventually get more resources.]])
-      -- .. paragraphdivider() ..
-	  -- -- TRANSLATORS: Amalea
-      -- _([[In particular it would be very helpful to find more marble either within stone fields or in the mountains to mine it.]]))
-	  -- .. new_objectives(obj_find_all_ports),
-   -- posy=1,
-   -- h=500,
--- }
+amalea_10 = {
+   title=_"Amalea looks happy",
+   body= amalea2(_"Amalea comes in…",
+      -- TRANSLATORS: Amalea
+      _([[Lutius. I think this is rather a fair offer. And we could use some good karma from any of our gods as well.]])
+      .. paragraphdivider() ..
+      -- TRANSLATORS: Amalea
+      _([[The only problem might be that it will take some time to collect all the wares. Especially we will need to shorten the supply to our mines drastically, which gives us a drawback in metal production.]])),
+   posy=1,
+}
 
--- amalea_12 = {
-   -- title=_"Amalea is very content",
-   -- body= amalea2(_"Amalea is clapping her hands...",
-      -- -- TRANSLATORS: Amalea
-      -- _([[Lutius. Well done. Well done. We have discovered all possible port locations in the complete region. Now we can strengthen our economy and we will manage to sail home soon.]])),
-   -- posy=1,
--- }
+
+amalea_11 = {
+   title=_"Amalea sad",
+   body= amalea1(_"Amalea is really sad ...",
+      -- TRANSLATORS: Amalea
+      _([[Lutius. Yes we have obtained the plans but we will never know if and how Vesta and her sisters could have helped us against the babarians.]])
+      .. paragraphdivider() ..
+	  -- TRANSLATORS: Amalea
+      _([[Furthermore we will have to live with the guilt on our souls to have destroyed a temple of an empire god.]])),
+   posy=1,
+}
+
+amalea_12 = {
+   title=_"Amalea is very content",
+   body= amalea2(_"Amalea is clapping her hands...",
+      -- TRANSLATORS: Amalea
+      _([[Lutius. Well done. Now we are able to build more effective buildings to refine our wheat. And best of all we have a new ally who just provided us with lots of water, flour and beer. Now I really think that nothing could stop us to get stronger and conquer back our homeland.]])),
+   posy=1,
+}
+
+amalea_13 = {
+   title=_"Amalea satisfied",
+   body= amalea3(_"Amalea is satisfied with the progress ...",
+      -- TRANSLATORS: Amalea
+      _([[Alright Lutius another problem solved. Still more to come. As we are able to produce food now we should urgently start to mine some coal and iron ore. After all we need more tools to back up our economy and built more and different production sites.]])
+      .. paragraphdivider() ..
+	  -- TRANSLATORS: Amalea
+      _([[But due to recent experience I assume that something could be wrong with our mines as well. Probably it would be a good idea to send a geologist to check whether there are enough ressources in the vicinity of our mines.]])
+      .. paragraphdivider() ..
+	  -- TRANSLATORS: Amalea
+      _([[As soon as we have melted some iron we should start to produce tools. Perhaps we should control the production of them via the economy settings. In the meantime we could start to build the buildings we need most urgently. I think we miss a vineyard yet in our economy.]]))
+	  .. new_objectives(obj_produce_tools),
+   posy=1,
+   h=500,
+}
+   
+-- Saledus
+
+saledus = {
+    title=_"Military Strength",
+    body= saledus2(_"Saledus looks very relaxed…",
+       -- TRANSLATORS: Saledus
+       _([[Sire, you are right it is a great pleasure to be at home again. And the best of all things: I can see we still have some military strength. I can count five towers and a fortress in our vicinity to guard us.]])),
+    posy=1,
+}
+
+saledus_1 = {
+   title=_"We could use the military instead",
+   body= saledus2(_"Saledus raises his hand…",
+      -- TRANSLATORS: Saledus
+      _([[Sire, If we need to get the technology very quickly why not conquer it. We could defeat the little monastry in an instant.]])
+	  .. paragraphdivider() ..
+      -- TRANSLATORS: Saledus
+      _([[The only problem might be that probably the gods will not be that amused if we destroy a temple of them. And you never know what this could lead to.]]))
+      .. new_objectives(obj_deal_with_vesta),  
+   posy=1,
+   h=500,
+}
+
+saledus_2 = {
+   title=_"Easy victory",
+   body= saledus3(_"Saledus cheering proudly…",
+      -- TRANSLATORS: Saledus
+      _([[Sire, our armies just swept over the priests and conquered the plans. That was rather an easy victory]])),
+   posy=1,
+}
+
+saledus_3 = {
+   title=_"Defiance",
+   body= saledus2(_"Saledus is keeping his point…",
+      -- TRANSLATORS: Saledus
+      _([[Sire, I admit this has been proven to be a very good deal. But we could have had the plans much sooner. We will not be able to make any deals with the babarians, so we better keep our soldiers in good mood and train them adequately.]])
+      .. paragraphdivider() ..
+      -- TRANSLATORS: Saledus
+      _([[I think we should train at least 3 heroes. Therefore we need to expand our economy and manage the training of our soldiers.]]))
+      .. new_objectives(obj_train_heroes),
+   posy=1,
+   h=500,
+}
+
+saledus_4 = {
+   title=_"Pride",
+   body= saledus2(_"Saledus is keeping his point…",
+      -- TRANSLATORS: Saledus
+      _([[Sire, I admit that we have accumulated some bad karma, but in wartime sometimes the end justifies the means. And we won't be able to make any deals with the babarians either, so we better keep our soldiers in good mood and train them adequately.]])
+      .. paragraphdivider() ..
+      -- TRANSLATORS: Saledus
+      _([[I think we should train at least 3 heroes. Therefore we need to expand our economy and manage the training of our soldiers.]]))
+      .. new_objectives(obj_train_heroes),
+   posy=1,
+   h=500,
+}
+
+
+saledus_5 = {
+   title=_"We should explore the islands",
+   body= saledus2(_"Saledus is excited…",
+      -- TRANSLATORS: Saledus
+      _([[Now that we have produced some tools, I think it is time to diverge some of our iron and coal to start some military production.]])
+      .. paragraphdivider() ..
+      -- TRANSLATORS: Saledus
+      _([[I am really worried about the weakness of our army. We should start to inbcrease our military power. For the beginning we should start to recruit at least 10 new soldiers.]])
+	  .. paragraphdivider() ..
+      -- TRANSLATORS: Saledus
+      _([[Remember we need to produce wooden spears and helmets to recruit them in the barracks. Perhaps we could start to train them in the Arena as well. Probably you would even think of enhancing the Arena to a Colloseum first.]]))
+	  .. new_objectives(obj_recruit_soldiers),
+   posy=1,
+   h=500,
+}
+
+
+saledus_6 = {
+   title=_"We should conquer the whole islands",
+   body= saledus3(_"Saledus is excited…",
+      -- TRANSLATORS: Saledus
+      _([[Now it is time to conquer the islands.]])
+      .. paragraphdivider() ..
+      _([[Let's finish the barbarians off and provide a nice colony for the caesar of our empire.]]))
+      .. new_objectives(obj_conquer_all),
+   posy=1,
+   h=500,
+}   
    
 -- saledus_7 = {
    -- title=_"Victory is our's",
@@ -545,14 +569,6 @@ amalea_8 = {
    -- posy=1,
 -- }
 
--- saledus_12 = {
-   -- title=_"Unpleasant discoveries",
-   -- body= saledus3(_"Saledus looks very worried…",
-      -- -- TRANSLATORS: Saledus
-      -- _([[Sire, we found the ruins of a former babarian fortress and village. I'm somewhat worried we will have to fight against them sooner than we wanted.]])),
-   -- posy=1,
--- }
-
 -- saledus_10 = {
    -- title=_"Train faster, train harder",
    -- body= saledus2(_"Saledus is demanding some discipline",
@@ -575,17 +591,27 @@ amalea_8 = {
    -- h=500,
 -- }
 
+-- Vesta
+
+vesta_0 = {
+   title=_"Worship to be gifted",
+   body= vesta(_"Vesta is demanding a sacrifice for the gods...",
+      -- TRANSLATORS: Vesta
+      _([[Ave Lutius. If you want us to help you, you first have to worship our gods. Therefore deliver 35 wheat and 15 wine to prepare a worthy sacrifice for our gods.]])),
+   posy=1,
+}
+
+vesta_1 = {
+   title=_"May the gods bless you",
+   body= vesta(_"Vesta is blessing us...",
+      -- TRANSLATORS: Vesta
+      _([[Ave Lutius. You have served our gods well. You will not only be gifted with the improvements to your technology but with some goods that you could use so daringly as well. Furthermore we will pray for you and join your party to safeguard our land from the babarians.]])),
+   posy=1,
+}
 
 
--- diary_page_5 = {
-   -- title=_"Now it's time to get home again",
-   -- body= lutius(_"Diary of Lutius",
-      -- -- TRANSLATORS: Lutius - Diary
-      -- _([[Yes my fellow comrades, we have done it. We managed all the challenges that were imposed on us. But my heart is still with our home. We shall set sail as soon as possible to help defend the empire from the babarian tribe.]])
-	  -- .. paragraphdivider() ..
-      -- _([[You have completed this mission. You may continue playing if you wish, otherwise move on to the next mission.]])),
-   -- posy=1,
--- }
+
+
 
 
 -- function diary_page_6(count)
