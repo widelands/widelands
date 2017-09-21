@@ -56,8 +56,6 @@ public:
 	// files). Take ownership of the given filesystem.
 	void set_home_file_system(FileSystem*);
 
-	virtual void remove_file_system(const FileSystem&);
-
 	std::set<std::string> list_directory(const std::string& path) override;
 
 	/// Returns true if the filename is legal in all operating systems

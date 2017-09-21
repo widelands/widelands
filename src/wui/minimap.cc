@@ -205,7 +205,7 @@ void MiniMap::toggle(MiniMapLayer const button) {
 }
 
 void MiniMap::resize() {
-	view_.set_zoom(*view_.minimap_layers_ & MiniMapLayer::Zoom2 ? 2 : 1);
+	view_.set_zoom((*view_.minimap_layers_ & MiniMapLayer::Zoom2) ? 2 : 1);
 	set_inner_size(view_.get_w(), view_.get_h() + number_of_button_rows() * but_h());
 	button_terrn.set_pos(Vector2i(but_w() * 0, view_.get_h() + but_h() * 0));
 	button_terrn.set_size(but_w(), but_h());

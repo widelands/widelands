@@ -53,7 +53,7 @@ public:
 /// Sets a buildspace for ports.
 class EditorSetPortSpaceTool : public EditorTool {
 public:
-	EditorSetPortSpaceTool(EditorUnsetPortSpaceTool&);
+	explicit EditorSetPortSpaceTool(EditorUnsetPortSpaceTool&);
 
 	int32_t handle_click_impl(const Widelands::World& world,
 	                          const Widelands::NodeAndTriangle<>& center,

@@ -306,8 +306,6 @@ struct WalkableSpot {
 struct BuildableField {
 	explicit BuildableField(const Widelands::FCoords& fc);
 
-	int32_t own_military_sites_nearby_();
-
 	Widelands::FCoords coords;
 
 	uint32_t field_info_expiration;
@@ -835,7 +833,6 @@ public:
 	uint32_t get_enemies_max_power();
 	uint32_t get_enemies_max_land();
 	uint32_t get_old_visible_enemies_power(uint32_t);
-	uint32_t get_player_casualities(Widelands::PlayerNumber pn);
 	bool players_in_same_team(Widelands::PlayerNumber pl1, Widelands::PlayerNumber pl2);
 	bool strong_enough(Widelands::PlayerNumber pl);
 	void set_last_time_seen(uint32_t, Widelands::PlayerNumber);

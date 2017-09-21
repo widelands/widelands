@@ -32,7 +32,7 @@
 struct ChatMessage {
 	CAN_BE_SENT_AS_NOTE(NoteId::ChatMessage)
 
-	ChatMessage(const std::string& message) : msg(message) {
+	explicit ChatMessage(const std::string& message) : msg(message) {
 	}
 
 	// The (real-)time at which the message was received.
