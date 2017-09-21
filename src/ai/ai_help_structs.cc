@@ -280,10 +280,6 @@ BuildableField::BuildableField(const Widelands::FCoords& fc)
      is_militarysite(false) {
 }
 
-int32_t BuildableField::own_military_sites_nearby_() {
-	return military_stationed + military_unstationed;
-}
-
 MineableField::MineableField(const Widelands::FCoords& fc)
    : coords(fc),
      field_info_expiration(20000),
@@ -394,9 +390,7 @@ void Neuron::set_type(uint8_t new_type) {
 }
 
 // FNeuron is basically a single uint32_t integer, and the AI can query every bit of that uint32_t
-FNeuron::FNeuron(uint32_t c, uint16_t i) {
-	core = c;
-	id = i;
+FNeuron::FNeuron(uint32_t c, uint16_t i) : core(c), id(i) {
 }
 
 // Returning a result depending on combinations of 5 bools
@@ -1271,14 +1265,6 @@ uint32_t PlayersStrengths::get_old_visible_enemies_power(const uint32_t gametime
 		}
 	}
 	return pw;
-}
-
-// This is casualities of player
-uint32_t PlayersStrengths::get_player_casualities(Widelands::PlayerNumber pn) {
-	if (all_stats.count(pn) > 0) {
-		return all_stats[pn].players_casualities;
-	}
-	return 0;
 }
 
 // This is strength of player plus third of strength of other members of his team

@@ -1,86 +1,173 @@
--- Categories for the editor.
-world:new_editor_terrain_category{
-   name = "summer",
-   descname = _ "Summer",
-   picture = "world/pics/editor_terrain_category_green.png",
-   items_per_row = 6,
-}
-world:new_editor_terrain_category{
-   name = "wasteland",
-   descname = _ "Wasteland",
-   picture = "world/pics/editor_terrain_category_wasteland.png",
-   items_per_row = 6,
-}
-world:new_editor_terrain_category{
-   name = "winter",
-   descname = _ "Winter",
-   picture = "world/pics/editor_terrain_category_winter.png",
-   items_per_row = 6,
-}
-world:new_editor_terrain_category{
-   name = "desert",
-   descname = _ "Desert",
-   picture = "world/pics/editor_terrain_category_desert.png",
-   items_per_row = 6,
-}
+-- RST
+-- .. _lua_world_terrains:
+--
+-- Terrains
+-- --------
+--
+-- Terrains define the basic look of the map, and all terrains are defined in ``data/world/terrains/init.lua``.
+--
+-- .. code-block:: none
+--
+--         *-------*
+--        / \     / \
+--       /   \   /   \
+--      /     \ /     \
+--     *-------*-------*
+--      \     / \     /
+--       \   /   \   /
+--        \ /     \ /
+--         *-------*
+--
+-- Terrain tiles have a triangular shape, and 6 of them will be combined to form a hexagon. Each vertex between the terrains (* in the figure) will form a node that is influenced by the 6 terrains surrounding it, and where other map entities can be placed. You can find more information on the terrains' shape and on how to create textures on the `wiki <https://wl.widelands.org/wiki/HelpTerrains/>`_.
+--
+-- Each terrain tile will also influence some properties for the map entities that are placed on its 3 vertices, like:
+--
+-- * Which resources can go on a map node.
+-- * How well which type of tree will grow on a map node.
+-- * Which map objects can be built on the nodes or move through them.
+
+pics_dir = path.dirname(__file__) .. "pics/"
+
+-- RST
+-- .. function:: new_terrain_type{table}
+--
+--    This function adds the definition of a terrain to the engine.
+--
+--    :arg table: This table contains all the data that the game engine will add
+--       to this terrain. It contains the following entries:
+--
+--    **name**
+--        *Mandatory*. A string containing the internal name of this terrain, e.g.::
+--
+--            name = "summer_meadow1",
+--
+--    **descname**
+--        *Mandatory*. The translatable display name, e.g.::
+--
+--            descname = _"Meadow 1",
+--
+--    **editor_category**
+--        *Mandatory*. The category that is used in the editor tools for placing a
+--        terrain of this type on the map, e.g.::
+--
+--            editor_category = "summer",
+--
+--    **is**
+--        *Mandatory*. The type of this terrain, which determines if the nodes
+--        surrounding the terrain will be walkable or navigable, if mines or buildings
+--        can be built on them, if flags can be built on them, and so on.
+--        The following properties are available:
+--
+--         * ``arable``: Allows building of normal buildings and roads.
+--         * ``mineable``: Allows building of mines and roads.
+--         * ``walkable``: Allows building of flags and roads only.
+--         * ``water``: Nothing can be built here, but ships and aquatic animals can pass.
+--         * ``unreachable``: Nothing can be built here, and nothing can walk on it,
+--           and nothing will grow.
+--         * ``unwalkable``: Nothing can be built here, and nothing can walk on it.
+--
+--        Example::
+--
+--           is = "arable",
+--
+--        *Note: There is currently some interdependency between ``is`` and
+--        ``valid_resources``, so not all combinations are possible. See*
+--        `Bug 1505345 <https://bugs.launchpad.net/widelands/+bug/1505345>`_
+--        *for more information.*
+--
+--    **tooltips**
+--        *Optional*. Additional custom tooltip entries, e.g.::
+--
+--            tooltips = {
+--               -- TRANSLATORS: This is an entry in a terrain tooltip. Try to use 1 word if possible.
+--               _"likes trees",
+--            },
+--
+--    **valid_resources**
+--        *Mandatory*. The list of mineable resources that can be found on this terrain.
+--        Leave this empty (``{}``) if you want no resources on this terrain. Example::
+--
+--            valid_resources = {"water"},
+--
+--        *Note: There is currently some interdependency between ``is`` and
+--        ``valid_resources``, so not all combinations are possible. See*
+--        `Bug #1505345 <https://bugs.launchpad.net/widelands/+bug/1505345/>`_
+--        *for more information.*
+--
+--    **default_resource**
+--        *Mandatory*. A resource type that can always be found on this terrain when
+--        a new game is started, unless the map maker places some resources there via
+--        the editor. Use the empty string
+--        (``""``) if you want no default resource. Example::
+--
+--            default_resource = "water",
+--
+--    **default_resource_amount**
+--        *Mandatory*. The amount of the above default resource that will
+--        automatically be placed on this terrain, e.g.::
+--
+--            default_resource_amount = 10,
+--
+--    **textures**
+--        *Mandatory*. The images used for this terrain. Examples::
+--
+--            textures = { pics_dir .. "summer/meadow1_00.png" }, - A static terrain
+--            textures = path.list_files(pics_dir .. "summer/lava/lava_??.png"), -- An animated terrain
+--
+--    **dither_layer**
+--        *Mandatory*. Terrains will be blended slightly over each other in order
+--        to hide the harsh edges of the triangles. This describes the
+--        `z layer <https://en.wikipedia.org/wiki/Z-order>`_ of a terrain when
+--        rendered next to another terrain. Terrains with a higher value will be
+--        dithered on top of terrains with a lower value. Example::
+--
+--            dither_layer = 340,
+--
+--    **temperature**
+--        *Mandatory*. A terrain affinity constant. These are used to model how well
+--        trees will grow on this terrain. Temperature is in arbitrary units. Example::
+--
+--            temperature = 100,
+--
+--    **humidity**
+--        *Mandatory*. A terrain affinity constant. These are used to model how well
+--        trees will grow on this terrain. Humidity is in percent (1 being very wet).
+--        Example::
+--
+--            humidity = 0.6,
+--
+--    **fertility**
+--        *Mandatory*. A terrain affinity constant. These are used to model how well
+--        trees will grow on this terrain. Fertility is in percent (1 being very
+--        fertile). Example::
+--
+--            fertility = 0.7,
+--
 
 ------------------------
 --  Former greenland  --
 ------------------------
 
-pics_dir = path.dirname(__file__) .. "pics/"
 world:new_terrain_type{
-   -- The internal name of this terrain.
    name = "summer_meadow1",
-
-   -- The name that will be used in UI and translated.
    descname = _ "Meadow 1",
-
-   -- The category for sorting this into menus in the editor.
    editor_category = "summer",
-
-   -- Type of terrain. Describes if the terrain is walkable, swimmable, if
-   -- mines or buildings can be build on it, if flags can be build on it and so
-   -- on.
-   --
-   -- The following properties are available:
-   -- "arable": Allows building of normal buildings and roads
-   -- "mineable": Allows building of mines and roads
-   -- "walkable": Allows building of roads only.
-   -- "water": Nothing can be built here, but ships and aquatic animals can pass
-   -- "unreachable": Nothing can be built here, and nothing can walk on it, and nothing will grow.
-   -- "unwalkable": Nothing can be built here, and nothing can walk on it
    is = "arable",
-
-   -- You can add custom additional tooltip entries here.
    tooltips = {
       -- TRANSLATORS: This is an entry in a terrain tooltip. Try to use 1 word if possible.
       _"likes trees",
    },
 
-   -- The list resources that can be found in this terrain.
    valid_resources = {"water"},
-
-   -- The resources that is always in this terrain (if not overwritten by the
-   -- map maker through the editor) and the amount.
    default_resource = "water",
    default_resource_amount = 10,
 
-   -- The images used for this terrain.
    textures = { pics_dir .. "summer/meadow1_00.png" },
 
-   -- This describes the z layer of the terrain when rendered next to another
-   -- one and blending slightly over it to hide the triangles.
    dither_layer = 340,
 
-   -- Terrain affinity constants. This is used to model how well plants grow on this terrain.
-   -- Temperature is in arbitrary units.
    temperature = 100,
-
-   -- Humidity is in percent (1 being very wet).
    humidity = 0.6,
-
-   -- Fertility is in percent (1 being very fertile).
    fertility = 0.7,
 }
 

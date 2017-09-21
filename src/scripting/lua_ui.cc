@@ -555,7 +555,7 @@ int LuaMapView::get_is_building_road(lua_State* L) {
 /* RST
    .. attribute:: is_animating
 
-		(RO) True if this MapView is currently paning or zooming.
+		(RO) True if this MapView is currently panning or zooming.
 */
 int LuaMapView::get_is_animating(lua_State* L) {
 	lua_pushboolean(L, get()->map_view()->is_animating());
@@ -575,9 +575,14 @@ int LuaMapView::get_is_animating(lua_State* L) {
       :type field: :class:`wl.map.Field`
 */
 int LuaMapView::click(lua_State* L) {
-	get()->map_view()->mouse_to_field(
-	   (*get_user_class<LuaMaps::LuaField>(L, 2))->coords(), MapView::Transition::Jump);
-	get()->map_view()->fieldclicked();
+	const auto field = *get_user_class<LuaMaps::LuaField>(L, 2);
+	get()->map_view()->mouse_to_field(field->coords(), MapView::Transition::Jump);
+
+	// We fake the triangle here, since we only support clicking on Nodes from
+	// Lua.
+	Widelands::NodeAndTriangle<> node_and_triangle{
+	   field->coords(), Widelands::TCoords<>(field->coords(), Widelands::TriangleIndex::D)};
+	get()->map_view()->field_clicked(node_and_triangle);
 	return 0;
 }
 

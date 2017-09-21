@@ -22,9 +22,7 @@
 #include <memory>
 
 BuildingHints::BuildingHints(std::unique_ptr<LuaTable> table)
-   : renews_map_resource_(
-        table->has_key("renews_map_resource") ? table->get_string("renews_map_resource") : ""),
-     mines_(table->has_key("mines") ? table->get_string("mines") : ""),
+   : mines_(table->has_key("mines") ? table->get_string("mines") : ""),
      log_producer_(table->has_key("logproducer") ? table->get_bool("logproducer") : false),
      granite_producer_(table->has_key("graniteproducer") ? table->get_bool("graniteproducer") :
                                                            false),
@@ -48,6 +46,12 @@ BuildingHints::BuildingHints(std::unique_ptr<LuaTable> table)
      trainingsites_max_percent_(table->has_key("trainingsites_max_percent") ?
                                    table->get_int("trainingsites_max_percent") :
                                    0) {
+	if (table->has_key("supports_production_of")) {
+		for (const std::string& ware_name :
+		     table->get_table("supports_production_of")->array_entries<std::string>()) {
+			supported_production_.insert(ware_name);
+		}
+	}
 }
 
 void BuildingHints::set_trainingsites_max_percent(int percent) {

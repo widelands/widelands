@@ -368,16 +368,6 @@ void AbstractWaresDisplay::hide_ware(Widelands::DescriptionIndex ware) {
 	hidden_[ware] = true;
 }
 
-void AbstractWaresDisplay::unhide_ware(Widelands::DescriptionIndex ware) {
-	if (!hidden_[ware])
-		return;
-	hidden_[ware] = false;
-}
-
-bool AbstractWaresDisplay::ware_hidden(Widelands::DescriptionIndex ware) {
-	return hidden_[ware];
-}
-
 WaresDisplay::WaresDisplay(UI::Panel* const parent,
                            int32_t x,
                            int32_t y,
