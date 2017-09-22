@@ -58,11 +58,6 @@ public:
 	void traded_ware_arrived(int trade_id, DescriptionIndex ware_index, Game* game);
 
 private:
-	struct WareRequest {
-		int index;
-		std::unique_ptr<Request> request;
-	};
-
 	struct TradeOrder {
 		BillOfMaterials items;
 		int initial_num_batches;
@@ -75,8 +70,6 @@ private:
 		// == 'num_wares_per_batch()'
 		std::unique_ptr<Request> worker_request;
 		std::vector<Worker*> workers;
-
-		std::vector<WareRequest> ware_requests;
 
 		// The number of individual wares in 'items', i.e. the sum of all '.second's.
 		int num_wares_per_batch() const;

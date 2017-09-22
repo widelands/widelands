@@ -785,7 +785,7 @@ int Game::propose_trade(const Trade& trade) {
 	                       _("This Market received a new trade offer."), true);
 	trade_agreements_[id] = TradeAgreement{TradeAgreement::State::kProposed, trade};
 
-	// TODO(sirver): this should be done through another player_command, but I
+	// TODO(sirver,trading): this should be done through another player_command, but I
 	// want to get to the trade logic implementation now.
 	accept_trade(id);
 	return id;

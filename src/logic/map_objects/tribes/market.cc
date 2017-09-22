@@ -69,7 +69,7 @@ void Market::new_trade(const int trade_id,
                        const BillOfMaterials& items,
                        const int num_batches,
                        const Serial other_side) {
-	trade_orders_[trade_id] = TradeOrder{items, num_batches, 0, other_side, 0, nullptr, {}, {}};
+	trade_orders_[trade_id] = TradeOrder{items, num_batches, 0, other_side, 0, nullptr, {}};
 	auto& trade_order = trade_orders_[trade_id];
 
 	// Request one worker for each item in a batch.
@@ -128,7 +128,7 @@ void Market::try_launching_batch(Game* game) {
 		auto* other_market =
 		   dynamic_cast<Market*>(game->objects().get_object(pair.second.other_side));
 		if (other_market == nullptr) {
-			// TODO(sirver,trading): Can this even happen? Where is this function called from.
+			// TODO(sirver,trading): Can this even happen? Where is this function called from?
 			// The other market seems to have vanished. The game tracks this and
 			// should soon delete this trade request from us. We just ignore it.
 			continue;
