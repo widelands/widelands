@@ -25,6 +25,9 @@
 
 namespace Widelands {
 
+// Maximal number of a single ware that can be contained in a trade batch. 
+constexpr int kMaxPerItemTradeBatchSize = 15;
+
 struct Trade {
 	BillOfMaterials send_items;
 	BillOfMaterials received_items;

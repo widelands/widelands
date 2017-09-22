@@ -35,4 +35,4 @@ end
 full_headquarters(p1, 22, 25)
 full_headquarters(p2, 32, 25)
 
--- game.desired_speed = 50000
+game.desired_speed = 5000

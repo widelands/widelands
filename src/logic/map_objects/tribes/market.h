@@ -22,8 +22,9 @@
 
 #include <memory>
 
-#include "logic/map_objects/tribes/building.h"
 #include "economy/request.h"
+#include "economy/wares_queue.h"
+#include "logic/map_objects/tribes/building.h"
 
 namespace Widelands {
 
@@ -49,7 +50,15 @@ public:
 
 	void new_trade(int trade_id, const BillOfMaterials& items, int num_batches, Serial other_side);
 
+	InputQueue& inputqueue(DescriptionIndex, WareWorker) override;
+	void cleanup(EditorGameBase&) override;
+
 private:
+	struct WareRequest {
+		int index;
+		std::unique_ptr<Request> request;
+	};
+
 	struct TradeOrder {
 		BillOfMaterials items;
 		int initial_num_batches;
@@ -57,12 +66,16 @@ private:
 		Serial other_side;
 
 		std::unique_ptr<Request> worker_request;
+		std::vector<WareRequest> ware_requests;
 	};
 
 	static void
 	request_worker_callback(Game&, Request&, DescriptionIndex, Worker*, PlayerImmovable&);
 
-	std::map<int, TradeOrder> trade_orders_;
+	void ensure_wares_queue_exists(int ware_index);
+
+	std::map<int, TradeOrder> trade_orders_;  // Key is 'trade_id's.
+	std::map<int, std::unique_ptr<WaresQueue>> wares_queue_; // Key is 'ware_index'.
 
 	DISALLOW_COPY_AND_ASSIGN(Market);
 };

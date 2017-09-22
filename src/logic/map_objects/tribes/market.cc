@@ -19,6 +19,8 @@
 
 #include "logic/map_objects/tribes/market.h"
 
+#include <memory>
+
 #include "base/i18n.h"
 #include "logic/map_objects/tribes/productionsite.h"
 #include "logic/map_objects/tribes/tribes.h"
@@ -54,7 +56,7 @@ void Market::new_trade(const int trade_id,
                        const BillOfMaterials& items,
                        const int num_batches,
                        const Serial other_side) {
-	trade_orders_[trade_id] = TradeOrder{items, num_batches, 0, other_side, {}};
+	trade_orders_[trade_id] = TradeOrder{items, num_batches, 0, other_side, nullptr, {}};
 	auto& trade_order = trade_orders_[trade_id];
 
 	// Request one worker for each item in a batch.
@@ -65,6 +67,11 @@ void Market::new_trade(const int trade_id,
 	trade_order.worker_request.reset(
 	   new Request(*this, descr().carrier(), Market::request_worker_callback, wwWORKER));
 	trade_order.worker_request->set_count(num_required_carriers);
+
+	// Make sure we have a wares queue for each item in this.
+	for (const auto& entry : items) {
+		ensure_wares_queue_exists(entry.first);
+	}
 }
 
 void Market::request_worker_callback(
@@ -85,13 +92,38 @@ void Market::request_worker_callback(
 		if (rq.get_count() == 0) {
 			// Erase this request.
 			trade_order.worker_request.reset();
-		} 
+		}
 		w->start_task_idle(game, 0, -1);
 		Notifications::publish(NoteBuilding(market.serial(), NoteBuilding::Action::kWorkersChanged));
 		// NOCOM(#sirver): try launching a batch now.
 		return;
 	}
 	NEVER_HERE(); // We should have found and handled a match by now.
+}
+
+void Market::ensure_wares_queue_exists(int ware_index) {
+	if (wares_queue_.count(ware_index) > 0) {
+		return;
+	}
+	wares_queue_[ware_index] =
+	   std::unique_ptr<WaresQueue>(new WaresQueue(*this, ware_index, kMaxPerItemTradeBatchSize));
+}
+
+InputQueue& Market::inputqueue(DescriptionIndex index, WareWorker ware_worker) {
+	assert(ware_worker == wwWARE);
+	auto it = wares_queue_.find(index);
+	if (it != wares_queue_.end()) {
+		return *it->second;
+	}
+	// The parent will throw an exception.
+	return Building::inputqueue(index, ware_worker);
+}
+
+void Market::cleanup(EditorGameBase& egbase) {
+	for (auto& pair : wares_queue_) {
+		pair.second->cleanup();
+	}
+	Building::cleanup(egbase);
 }
 
 }  // namespace Widelands
