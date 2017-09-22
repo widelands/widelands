@@ -2783,7 +2783,8 @@ MarketDescription
    trading over land with other players. See the parent classes for more
    properties.
 */
-// NOCOM(#sirver): is this class even needed?
+// TODO(sirver,trading): Expose the properties of MarketDescription here once
+// the interface settles.
 const char LuaMarketDescription::className[] = "MarketDescription";
 const MethodType<LuaMarketDescription> LuaMarketDescription::Methods[] = {
    {nullptr, nullptr},
@@ -5105,7 +5106,6 @@ Market
 */
 const char LuaMarket::className[] = "Market";
 const MethodType<LuaMarket> LuaMarket::Methods[] = {
-	// NOCOM(#sirver): suggest -> propose?
 	METHOD(LuaMarket, propose_trade),
    // TODO(sirver,trading): Implement and fix documentation.
    // METHOD(LuaMarket, set_wares),
@@ -5133,7 +5133,7 @@ const PropertyType<LuaMarket> LuaMarket::Properties[] = {
 /* RST
    .. method:: propose_trade(other_market, num_batches, send_items, received_items)
 
-      NOCOM(#sirver): document
+      TODO(sirver,trading): document
 
       :returns: :const:`nil`
 */
@@ -5147,12 +5147,13 @@ int LuaMarket::propose_trade(lua_State* L) {
 	const int num_batches = luaL_checkinteger(L, 3);
 
 	const BillOfMaterials send_items = parse_wares_as_bill_of_material(L, 4, self->owner().tribe());
-	// NOCOM(#sirver): is this even correct? Is inter-tribe trade with foreign items possible this way?
+	// TODO(sirver,trading): unsure if correct. Test inter-tribe trading, i.e.
+	// barbarians trading with empire, but shipping atlantean only wares.
 	const BillOfMaterials received_items = parse_wares_as_bill_of_material(L, 5, self->owner().tribe());
-	const int trade_id = game.suggest_trade(
+	const int trade_id = game.propose_trade(
 	   Trade{send_items, received_items, num_batches, self->serial(), other_market->serial()});
 
-	// NOCOM(#sirver): wrap trade into a lua class and expose on game?
+	// TODO(sirver,trading): Wrap 'Trade' into its own Lua class?
 	lua_pushint32(L, trade_id);
 	return 1;
 }

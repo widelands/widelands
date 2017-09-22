@@ -208,7 +208,7 @@ public:
 	void send_player_ship_explore_island(Ship&, IslandExploreDirection);
 	void send_player_sink_ship(Ship&);
 	void send_player_cancel_expedition_ship(Ship&);
-	void send_player_suggest_trade(const Trade& trade);
+	void send_player_propose_trade(const Trade& trade);
 
 	InteractivePlayer* get_ipl();
 
@@ -246,14 +246,13 @@ public:
 
 	void set_auto_speed(bool);
 
-	// NOCOM(#sirver): document
-	int suggest_trade(const Trade& trade);
+	// TODO(sirver,trading): document these functions once the interface settles.
+	int propose_trade(const Trade& trade);
 	void accept_trade(int trade_id);
+	void cancel_trade(int trade_id);
 
 private:
 	void sync_reset();
-	void trade_receiver_vanished(int trade_id);
-	void trade_initiator_vanished(int trade_id);
 
 	MD5Checksum<StreamWrite> synchash_;
 

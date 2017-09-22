@@ -169,7 +169,7 @@ public:
 	void start_task_leavebuilding(Game&, bool changelocation);
 	void start_task_fugitive(Game&);
 
-	void start_task_carry_trade_item(Game&);
+	void start_task_carry_trade_item(Game& game, int trade_id, ObjectPointer other_market);
 	void update_task_carry_trade_item(Game&);
 
 	void

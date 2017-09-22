@@ -58,6 +58,7 @@ bool Market::TradeOrder::fulfilled() const {
 	return num_shipped_batches == initial_num_batches;
 }
 
+// TODO(sirver,trading): This needs to implement 'set_economy'. Maybe common code can be shared.
 Market::Market(const MarketDescr& the_descr) : Building(the_descr) {
 }
 
@@ -82,9 +83,13 @@ void Market::new_trade(const int trade_id,
 	}
 }
 
+void Market::cancel_trade(const int trade_id) {
+	// TODO(sirver,trading): Launch workers, release no longer required wares and delete now unneeded 'WaresQueue's
+	trade_orders_.erase(trade_id);
+}
+
 void Market::worker_arrived_callback(
    Game& game, Request& rq, DescriptionIndex /* widx */, Worker* const w, PlayerImmovable& target) {
-	// NOCOM(#sirver): set_economy is not handled.
 	auto& market = dynamic_cast<Market&>(target);
 
 	assert(w);
@@ -123,7 +128,7 @@ void Market::try_launching_batch(Game* game) {
 		auto* other_market =
 		   dynamic_cast<Market*>(game->objects().get_object(pair.second.other_side));
 		if (other_market == nullptr) {
-			// NOCOM(#sirver): can this even happen?
+			// TODO(sirver,trading): Can this even happen? Where is this function called from.
 			// The other market seems to have vanished. The game tracks this and
 			// should soon delete this trade request from us. We just ignore it.
 			continue;
@@ -138,16 +143,12 @@ void Market::try_launching_batch(Game* game) {
 }
 
 bool Market::is_ready_to_launch_batch(const int trade_id) {
-	// NOCOM(#sirver): if a transfer is in progress, this should fail.
 	const auto it = trade_orders_.find(trade_id);
 	if (it == trade_orders_.end()) {
 		return false;
 	}
 	auto& trade_order = it->second;
-	// NOCOM(#sirver): can this even happen?
-	if (trade_order.fulfilled()) {
-		return false;
-	}
+	assert(!trade_order.fulfilled());
 
 	// Do we have all necessary wares for a batch?
 	for (const auto& item_pair : trade_order.items) {
@@ -195,11 +196,8 @@ void Market::launch_batch(const int trade_id, Game* game) {
 
 			// Send the carrier going.
 			carrier->reset_tasks(*game);
-			carrier->start_task_carry_trade_item(*game);
-			// NOCOM(#sirver): pass the object
-			carrier->top_state().objvar1 =
-			   ObjectPointer(game->objects().get_object(trade_order.other_side));
-			carrier->top_state().ivar2 = trade_id;
+			carrier->start_task_carry_trade_item(
+			   *game, trade_id, ObjectPointer(game->objects().get_object(trade_order.other_side)));
 		}
 	}
 }
@@ -236,7 +234,10 @@ void Market::traded_ware_arrived(const int trade_id,  const DescriptionIndex war
 	WareInstance* ware = new WareInstance(ware_index, game->tribes().get_ware_descr(ware_index));
 	ware->init(*game);
 
-	// NOCOM(#sirver): this is a hack. We should have a worker that carriers stuff out.
+	// TODO(sirver,trading): This is a hack. We should have a worker that
+	// carriers stuff out. At the moment this assumes this market is barbarians
+	// (which is always correct right now), creates a carrier for each received
+	// ware to drop it off. The carrier then leaves the building and goes home.
 	const WorkerDescr& w_desc =
 	   *game->tribes().get_worker_descr(game->tribes().worker_index("barbarians_carrier"));
 	auto& worker = w_desc.create(*game, owner(), this, position_);
@@ -255,7 +256,12 @@ void Market::traded_ware_arrived(const int trade_id,  const DescriptionIndex war
 		trade_order.received_traded_wares_in_this_batch = 0;
 		++other_trade_order.num_shipped_batches;
 		other_trade_order.received_traded_wares_in_this_batch = 0;
-		// NOCOM(#sirver): kill trade in game if done.
+		if (trade_order.fulfilled()) {
+			assert(other_trade_order.fulfilled());
+			// TODO(sirver,trading): This is not quite correct. This should for
+			// example send a differnet message than actually canceling a trade.
+			game->cancel_trade(trade_id);
+		}
 	}
 }
 

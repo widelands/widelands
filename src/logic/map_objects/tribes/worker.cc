@@ -1595,21 +1595,29 @@ void Worker::update_task_buildingwork(Game& game) {
 		send_signal(game, "update");
 }
 
-// NOCOM(#sirver): document
+// The task when a worker is part of the caravane that is trading items.
 const Bob::Task Worker::taskCarryTradeItem = {
    "carry_trade_item", static_cast<Bob::Ptr>(&Worker::carry_trade_item_update), nullptr, nullptr, true};
 
-void Worker::start_task_carry_trade_item(Game& game) {
+void Worker::start_task_carry_trade_item(Game& game,
+                                         const int trade_id,
+                                         ObjectPointer other_market) {
 	push_task(game, taskCarryTradeItem);
-	top_state().ivar1 = 0;
+	auto& state = top_state();
+	state.ivar1 = 0;
+	state.ivar2 = trade_id;
+	state.objvar1 = other_market;
 }
 
+// This is a state machine: leave building, go to the other market, drop off
+// wares, and return.
 void Worker::carry_trade_item_update(Game& game, State& state) {
 	// Reset any signals that are not related to location
 	std::string signal = get_signal();
 	signal_handled();
 	if (!signal.empty()) {
-		log("#sirver signal: %s\n", signal.c_str());
+		// TODO(sirver,trading): Remove once signals are correctly handled.
+		log("carry_trade_item_update: signal received: %s\n", signal.c_str());
 	}
 	if (signal == "evict") {
 		return pop_task(game);
@@ -1635,7 +1643,7 @@ void Worker::carry_trade_item_update(Game& game, State& state) {
 		if (!start_task_movepath(game, other_market->base_flag().get_position(), 5,
 		                         descr().get_right_walk_anims(does_carry_ware()))) {
 			molog("carry_trade_item_update: Could not move to other flag.\n");
-			// NOCOM(#sirver): probably not correct?
+			// TODO(sirver,trading): something needs to happen here.
 		}
 		return;
 	}

@@ -107,7 +107,7 @@ enum {
 	PLCMD_SHIP_CONSTRUCT = 28,
 	PLCMD_SHIP_SINK = 29,
 	PLCMD_SHIP_CANCELEXPEDITION = 30,
-	PLCMD_SUGGEST_TRADE = 31,
+	PLCMD_PROPOSE_TRADE = 31,
 };
 
 /*** class PlayerCommand ***/
@@ -1806,81 +1806,73 @@ void CmdSetStockPolicy::write(FileWrite& fw, EditorGameBase& egbase, MapObjectSa
 	fw.unsigned_8(static_cast<uint8_t>(policy_));
 }
 
-// NOCOM(#sirver): Change class to only hold on to 'trade_'
-CmdSuggestTrade::CmdSuggestTrade(uint32_t time, PlayerNumber pn, const Trade& trade)
-   : PlayerCommand(time, pn),
-     initiator_(trade.initiator),
-     receiver_(trade.receiver),
-     send_items_(trade.send_items),
-     received_items_(trade.received_items),
-     num_batches_(trade.num_batches) {
+CmdProposeTrade::CmdProposeTrade(uint32_t time, PlayerNumber pn, const Trade& trade)
+   : PlayerCommand(time, pn), trade_(trade) {
 }
 
-CmdSuggestTrade::CmdSuggestTrade() : PlayerCommand() {
+CmdProposeTrade::CmdProposeTrade() : PlayerCommand() {
 }
 
-void CmdSuggestTrade::execute(Game& game) {
+void CmdProposeTrade::execute(Game& game) {
 	Player* plr = game.get_player(sender());
 	if (plr == nullptr) {
 		return;
 	}
 
-	Market* initiator = dynamic_cast<Market*>(game.objects().get_object(initiator_));
+	Market* initiator = dynamic_cast<Market*>(game.objects().get_object(trade_.initiator));
 	if (initiator == nullptr) {
-		log("CmdSuggestTrade: initiator vanished or is not a market.\n");
+		log("CmdProposeTrade: initiator vanished or is not a market.\n");
 		return;
 	}
 	if (&initiator->owner() != plr) {
-		log("CmdSuggestTrade: sender %u, but market owner %u\n", sender(),
+		log("CmdProposeTrade: sender %u, but market owner %u\n", sender(),
 		    initiator->owner().player_number());
 		return;
 	}
-	Market* receiver = dynamic_cast<Market*>(game.objects().get_object(receiver_));
+	Market* receiver = dynamic_cast<Market*>(game.objects().get_object(trade_.receiver));
 	if (receiver == nullptr) {
-		log("CmdSuggestTrade: receiver vanished or is not a market.\n");
+		log("CmdProposeTrade: receiver vanished or is not a market.\n");
 		return;
 	}
 	if (&initiator->owner() == &receiver->owner()) {
-		log("CmdSuggestTrade: Sending and receiving player are the same.\n");
+		log("CmdProposeTrade: Sending and receiving player are the same.\n");
 		return;
 	}
 
-	// NOCOM(#sirver): report problems to the sender()
-	game.suggest_trade(Trade{send_items_, received_items_, num_batches_, initiator_, receiver_});
+	// TODO(sirver,trading): Maybe check connectivity between markets here and
+	// report errors.
+	game.propose_trade(trade_);
 }
 
-CmdSuggestTrade::CmdSuggestTrade(StreamRead& des) : PlayerCommand(0, des.unsigned_8()) {
-	initiator_ = des.unsigned_32();
-	receiver_ = des.unsigned_32();
-	send_items_ = deserialize_bill_of_materials(&des);
-	received_items_ = deserialize_bill_of_materials(&des);
-	num_batches_ = des.signed_32();
+CmdProposeTrade::CmdProposeTrade(StreamRead& des) : PlayerCommand(0, des.unsigned_8()) {
+	trade_.initiator = des.unsigned_32();
+	trade_.receiver = des.unsigned_32();
+	trade_.send_items = deserialize_bill_of_materials(&des);
+	trade_.received_items = deserialize_bill_of_materials(&des);
+	trade_.num_batches = des.signed_32();
 }
 
-void CmdSuggestTrade::serialize(StreamWrite& ser) {
-	ser.unsigned_8(PLCMD_SUGGEST_TRADE);
+void CmdProposeTrade::serialize(StreamWrite& ser) {
+	ser.unsigned_8(PLCMD_PROPOSE_TRADE);
 	ser.unsigned_8(sender());
-	ser.unsigned_32(initiator_);
-	ser.unsigned_32(receiver_);
-	serialize_bill_of_materials(send_items_, &ser);
-	serialize_bill_of_materials(received_items_, &ser);
-	ser.signed_32(num_batches_);
+	ser.unsigned_32(trade_.initiator);
+	ser.unsigned_32(trade_.receiver);
+	serialize_bill_of_materials(trade_.send_items, &ser);
+	serialize_bill_of_materials(trade_.received_items, &ser);
+	ser.signed_32(trade_.num_batches);
 }
 
-// NOCOM(#sirver): bring back
-// constexpr uint8_t kCurrentPacketVersionCmdSuggestTrade = 1;
-
-void CmdSuggestTrade::read(FileRead& /* fr */,
+void CmdProposeTrade::read(FileRead& /* fr */,
                            EditorGameBase& /* egbase */,
                            MapObjectLoader& /* mol */) {
-	// NOCOM(#sirver): implement
+	// TODO(sirver,trading): Implement this.
 	NEVER_HERE();
 }
 
-void CmdSuggestTrade::write(FileWrite& /* fw */,
+void CmdProposeTrade::write(FileWrite& /* fw */,
                             EditorGameBase& /* egbase */,
                             MapObjectSaver& /* mos */) {
-	// NOCOM(#sirver): implement
+	// TODO(sirver,trading): Implement this.
 	NEVER_HERE();
 }
 

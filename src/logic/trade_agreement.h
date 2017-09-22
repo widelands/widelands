@@ -24,6 +24,8 @@
 
 namespace Widelands {
 
+// TODO(sirver,trading): Document everything in here.
+
 // Maximal number of a single ware that can be contained in a trade batch.
 constexpr int kMaxPerItemTradeBatchSize = 15;
 
@@ -35,11 +37,10 @@ struct Trade {
 	Serial receiver;
 };
 
-	// NOCOM(#sirver): Document
-	// NOCOM(#sirver): probably private to game and requires a trade_id.
+// TODO(sirver,trading): This class should probably be private to 'Game'.
 struct TradeAgreement {
 	enum class State {
-		kSuggested,
+		kProposed,
 		kRunning,
 	};
 

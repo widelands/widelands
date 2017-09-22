@@ -754,15 +754,16 @@ void Game::send_player_cancel_expedition_ship(Ship& ship) {
 	   get_gametime(), ship.get_owner()->player_number(), ship.serial()));
 }
 
-void Game::send_player_suggest_trade(const Trade& trade) {
+void Game::send_player_propose_trade(const Trade& trade) {
 	auto* object = objects().get_object(trade.initiator);
 	assert(object != nullptr);
 	send_player_command(
-	   *new CmdSuggestTrade(get_gametime(), object->get_owner()->player_number(), trade));
+	   *new CmdProposeTrade(get_gametime(), object->get_owner()->player_number(), trade));
 }
 
-int Game::suggest_trade(const Trade& trade) {
-	// NOCOM(#sirver): Check if a trade is possible (i.e. if there is a path between the two markets);
+int Game::propose_trade(const Trade& trade) {
+	// TODO(sirver,trading): Check if a trade is possible (i.e. if there is a
+	// path between the two markets);
 	const int id = next_trade_agreement_id_;
 	++next_trade_agreement_id_;
 
@@ -775,14 +776,14 @@ int Game::suggest_trade(const Trade& trade) {
 	assert(receiver != nullptr);
 
 	receiver->removed.connect(
-	   [this, id](const uint32_t /* serial */) { trade_receiver_vanished(id); });
+	   [this, id](const uint32_t /* serial */) { cancel_trade(id); });
 	initiator->removed.connect(
-	   [this, id](const uint32_t /* serial */) { trade_initiator_vanished(id); });
+	   [this, id](const uint32_t /* serial */) { cancel_trade(id); });
 
 	receiver->send_message(*this, Message::Type::kTradeOfferReceived, receiver->descr().descname(),
 	                       receiver->descr().icon_filename(), receiver->descr().descname(),
 	                       _("This Market received a new trade offer."), true);
-	trade_agreements_[id] = TradeAgreement{TradeAgreement::State::kSuggested, trade};
+	trade_agreements_[id] = TradeAgreement{TradeAgreement::State::kProposed, trade};
 
 	// TODO(sirver): this should be done through another player_command, but I
 	// want to get to the trade logic implementation now.
@@ -798,24 +799,19 @@ void Game::accept_trade(const int trade_id) {
 	}
 	const Trade& trade = it->second.trade;
 	auto* initiator = dynamic_cast<Market*>(objects().get_object(trade.initiator));
-	if (initiator == nullptr) {
-		trade_initiator_vanished(trade_id);
-		return;
-	}
-
 	auto* receiver = dynamic_cast<Market*>(objects().get_object(trade.receiver));
-	if (receiver == nullptr) {
-		trade_receiver_vanished(trade_id);
+	if (initiator == nullptr || receiver == nullptr) {
+		cancel_trade(trade_id);
 		return;
 	}
 
 	initiator->new_trade(trade_id, trade.send_items, trade.num_batches, trade.receiver);
 	receiver->new_trade(trade_id, trade.received_items, trade.num_batches, trade.initiator);
 
-	// NOCOM(#sirver): Messages to the users?
+	// TODO(sirver,trading): Message the users that the trade has been accepted.
 }
 
-void Game::trade_receiver_vanished(int trade_id) {
+void Game::cancel_trade(int trade_id) {
 	// The trade id might be long gone - since we never disconnect from the
 	// 'removed' signal of the two buildings, we might be invoked long after the
 	// trade was deleted for other reasons.
@@ -825,31 +821,17 @@ void Game::trade_receiver_vanished(int trade_id) {
 	}
 	const auto& trade = it->second.trade;
 
-	auto* other = dynamic_cast<Market*>(objects().get_object(trade.initiator));
-	if (!other) {
-		return;
+	auto* initiator = dynamic_cast<Market*>(objects().get_object(trade.initiator));
+	if (initiator != nullptr) {
+		initiator->cancel_trade(trade_id);
+		// TODO(sirver,trading): Send message to owner that the trade has been canceled.
 	}
 
-	// NOCOM(#sirver): send message to initiator and clean up the trade there.
-	trade_agreements_.erase(trade_id);
-}
-
-void Game::trade_initiator_vanished(int trade_id) {
-	// The trade id might be long gone - since we never disconnect from the
-	// 'removed' signal of the two buildings, we might be invoked long after the
-	// trade was deleted for other reasons.
-	const auto it = trade_agreements_.find(trade_id);
-	if (it == trade_agreements_.end()) {
-		return;
+	auto* receiver = dynamic_cast<Market*>(objects().get_object(trade.receiver));
+	if (receiver != nullptr) {
+		receiver->cancel_trade(trade_id);
+		// TODO(sirver,trading): Send message to owner that the trade has been canceled.
 	}
-	const auto& trade = it->second.trade;
-
-	auto* other = dynamic_cast<Market*>(objects().get_object(trade.receiver));
-	if (!other) {
-		return;
-	}
-
-	// NOCOM(#sirver): send message to receiver and clean up the trade there.
 	trade_agreements_.erase(trade_id);
 }
 

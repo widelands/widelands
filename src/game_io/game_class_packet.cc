@@ -61,7 +61,7 @@ void GameClassPacket::write(FileSystem& fs, Game& game, MapObjectSaver* const) {
 	// Write gametime
 	fw.unsigned_32(game.gametime_);
 
-	// NOCOM(#sirver): save/load next_trade_agreement_id_ and trade agreements.
+	// TODO(sirver,trading): save/load trade_agreements and related data.
 
 	// We do not care for players, since they were set
 	// on game initialization to match Map::scenario_player_[names|tribes]
