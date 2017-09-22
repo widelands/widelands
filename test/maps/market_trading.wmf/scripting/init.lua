@@ -1,6 +1,6 @@
-include "scripting/lunit.lua"
 include "scripting/coroutine.lua"
 include "scripting/infrastructure.lua"
+include "scripting/lunit.lua"
 include "scripting/ui.lua"
 
 game = wl.Game()
@@ -35,4 +35,4 @@ end
 full_headquarters(p1, 22, 25)
 full_headquarters(p2, 32, 25)
 
-game.desired_speed = 5000
+game.desired_speed = 50000

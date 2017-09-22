@@ -49,6 +49,7 @@
 #include "logic/cmd_luascript.h"
 #include "logic/game_settings.h"
 #include "logic/map_objects/tribes/carrier.h"
+#include "logic/map_objects/tribes/market.h"
 #include "logic/map_objects/tribes/militarysite.h"
 #include "logic/map_objects/tribes/ship.h"
 #include "logic/map_objects/tribes/soldier.h"

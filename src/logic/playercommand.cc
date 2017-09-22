@@ -29,6 +29,7 @@
 #include "io/streamwrite.h"
 #include "logic/game.h"
 #include "logic/map_objects/map_object.h"
+#include "logic/map_objects/tribes/market.h"
 #include "logic/map_objects/tribes/soldier.h"
 #include "logic/map_objects/tribes/tribe_descr.h"
 #include "logic/player.h"

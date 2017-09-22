@@ -47,6 +47,7 @@
 #include "logic/map_objects/terrain_affinity.h"
 #include "logic/map_objects/tribes/carrier.h"
 #include "logic/map_objects/tribes/dismantlesite.h"
+#include "logic/map_objects/tribes/market.h"
 #include "logic/map_objects/tribes/soldier.h"
 #include "logic/map_objects/tribes/tribe_descr.h"
 #include "logic/map_objects/tribes/warehouse.h"
@@ -1641,7 +1642,8 @@ void Worker::carry_trade_item_update(Game& game, State& state) {
 
 	if (state.ivar1 == 2) {
 		WareInstance* const ware = fetch_carried_ware(game);
-		ware->enter_building(game, *other_market);
+		other_market->traded_ware_arrived(state.ivar2, ware->descr_index(), &game);
+		ware->remove(game);
 		++state.ivar1;
 		start_task_move(game, WALK_SE, descr().get_right_walk_anims(does_carry_ware()), true);
 		return;

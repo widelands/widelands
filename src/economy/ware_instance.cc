@@ -171,7 +171,6 @@ void IdleWareSupply::send_to_storage(Game& game, Warehouse* wh) {
 
 	Transfer* t = new Transfer(game, ware_);
 	t->set_destination(*wh);
-	log("#sirver SENDING to STORAGE %s:%i\n", __FILE__, __LINE__);
 	ware_.set_transfer(game, *t);
 }
 
@@ -311,7 +310,6 @@ void WareInstance::update(Game& game) {
 	// Update whether we have a Supply or not
 	if (!transfer_ || !transfer_->get_request()) {
 		if (!supply_) {
-			log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 			supply_ = new IdleWareSupply(*this);
 		}
 	} else {
@@ -430,7 +428,6 @@ void WareInstance::enter_building(Game& game, Building& building) {
 			return;
 		}
 	} else {
-		log("#sirver ENTERED %s:%i\n", __FILE__, __LINE__);
 		// We don't have a transfer, so just enter the building
 		building.receive_ware(game, descr_index_);
 		remove(game);

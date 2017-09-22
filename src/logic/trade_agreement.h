@@ -21,7 +21,6 @@
 #define WL_LOGIC_TRADE_AGREEMENT_H
 
 #include "logic/map_objects/map_object.h"
-#include "logic/map_objects/tribes/market.h"
 
 namespace Widelands {
 

@@ -33,6 +33,7 @@
 #include "logic/map_objects/immovable.h"
 #include "logic/map_objects/terrain_affinity.h"
 #include "logic/map_objects/tribes/carrier.h"
+#include "logic/map_objects/tribes/market.h"
 #include "logic/map_objects/tribes/ship.h"
 #include "logic/map_objects/tribes/soldier.h"
 #include "logic/map_objects/tribes/tribes.h"

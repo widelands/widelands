@@ -46,6 +46,18 @@ Building& MarketDescr::create_object() const {
 	return *new Market(*this);
 }
 
+int Market::TradeOrder::num_wares_per_batch() const {
+	int sum = 0;
+	for (const auto& item_pair : items) {
+		sum += item_pair.second;
+	}
+	return sum;
+}
+
+bool Market::TradeOrder::fulfilled() const {
+	return num_shipped_batches == initial_num_batches;
+}
+
 Market::Market(const MarketDescr& the_descr) : Building(the_descr) {
 }
 
@@ -56,17 +68,13 @@ void Market::new_trade(const int trade_id,
                        const BillOfMaterials& items,
                        const int num_batches,
                        const Serial other_side) {
-	trade_orders_[trade_id] = TradeOrder{items, num_batches, 0, other_side, nullptr, {}, {}};
+	trade_orders_[trade_id] = TradeOrder{items, num_batches, 0, other_side, 0, nullptr, {}, {}};
 	auto& trade_order = trade_orders_[trade_id];
 
 	// Request one worker for each item in a batch.
-	int num_required_carriers = 0;
-	for (size_t i = 0; i < items.size(); ++i) {
-		num_required_carriers += items[i].second;
-	}
 	trade_order.worker_request.reset(
 	   new Request(*this, descr().carrier(), Market::worker_arrived_callback, wwWORKER));
-	trade_order.worker_request->set_count(num_required_carriers);
+	trade_order.worker_request->set_count(trade_order.num_wares_per_batch());
 
 	// Make sure we have a wares queue for each item in this.
 	for (const auto& entry : items) {
@@ -88,7 +96,6 @@ void Market::worker_arrived_callback(
 			continue;
 		}
 
-		log("#sirver rq.get_count(): %d\n", rq.get_count());
 		if (rq.get_count() == 0) {
 			// Erase this request.
 			trade_order.worker_request.reset();
@@ -131,18 +138,19 @@ void Market::try_launching_batch(Game* game) {
 }
 
 bool Market::is_ready_to_launch_batch(const int trade_id) {
-	log("#sirver trade_id: %d\n", trade_id);
 	// NOCOM(#sirver): if a transfer is in progress, this should fail.
 	const auto it = trade_orders_.find(trade_id);
 	if (it == trade_orders_.end()) {
 		return false;
 	}
 	auto& trade_order = it->second;
+	// NOCOM(#sirver): can this even happen?
+	if (trade_order.fulfilled()) {
+		return false;
+	}
 
 	// Do we have all necessary wares for a batch?
-	int num_wares = 0;
 	for (const auto& item_pair : trade_order.items) {
-		log("#sirver item_pair.first: %d\n", item_pair.first);
 		const auto wares_it = wares_queue_.find(item_pair.first);
 		if (wares_it == wares_queue_.end()) {
 			return false;
@@ -150,7 +158,6 @@ bool Market::is_ready_to_launch_batch(const int trade_id) {
 		if (wares_it->second->get_filled() < item_pair.second) {
 			return false;
 		}
-		num_wares += item_pair.second;
 	}
 
 	// Do we have enough people to carry wares?
@@ -158,18 +165,19 @@ bool Market::is_ready_to_launch_batch(const int trade_id) {
 	for (auto* worker : trade_order.workers) {
 		num_available_carriers += worker->is_idle() ? 1 : 0;
 	}
-	return num_available_carriers == num_wares;
+	return num_available_carriers == trade_order.num_wares_per_batch();
 }
 
 void Market::launch_batch(const int trade_id, Game* game) {
-	log("#sirver LAUNCHING BATCH %s:%i\n", __FILE__, __LINE__);
 	assert(is_ready_to_launch_batch(trade_id));
 	auto& trade_order = trade_orders_.at(trade_id);
 
 	// Do we have all necessary wares for a batch?
+	int worker_index = 0;
 	for (const auto& item_pair : trade_order.items) {
 		for (size_t i = 0; i < item_pair.second; ++i) {
-			Worker* carrier = trade_order.workers.at(i);
+			Worker* carrier = trade_order.workers.at(worker_index);
+			++worker_index;
 			assert(carrier->is_idle());
 
 			// Give the carrier a ware.
@@ -191,9 +199,9 @@ void Market::launch_batch(const int trade_id, Game* game) {
 			// NOCOM(#sirver): pass the object
 			carrier->top_state().objvar1 =
 			   ObjectPointer(game->objects().get_object(trade_order.other_side));
+			carrier->top_state().ivar2 = trade_id;
 		}
 	}
-	// NOCOM(#sirver): implement
 }
 
 void Market::ensure_wares_queue_exists(int ware_index) {
@@ -222,11 +230,33 @@ void Market::cleanup(EditorGameBase& egbase) {
 	Building::cleanup(egbase);
 }
 
-void Market::receive_ware(Game& game, DescriptionIndex ware_index) {
-	WareInstance* ware = new WareInstance(ware_index, game.tribes().get_ware_descr(ware_index));
-	ware->init(game);
-	worker.start_task_dropoff(game, ware_index);
+void Market::traded_ware_arrived(const int trade_id,  const DescriptionIndex ware_index, Game* game) {
+	auto& trade_order = trade_orders_.at(trade_id);
+
+	WareInstance* ware = new WareInstance(ware_index, game->tribes().get_ware_descr(ware_index));
+	ware->init(*game);
+
+	// NOCOM(#sirver): this is a hack. We should have a worker that carriers stuff out.
+	const WorkerDescr& w_desc =
+	   *game->tribes().get_worker_descr(game->tribes().worker_index("barbarians_carrier"));
+	auto& worker = w_desc.create(*game, owner(), this, position_);
+	worker.start_task_dropoff(*game, *ware);
+	trade_order.received_traded_wares_in_this_batch += 1;
 	owner().ware_produced(ware_index);
+
+	auto* other_market = dynamic_cast<Market*>(game->objects().get_object(trade_order.other_side));
+	assert(other_market != nullptr);
+	other_market->owner().ware_consumed(ware_index, 1);
+	auto& other_trade_order = other_market->trade_orders_.at(trade_id);
+	if (trade_order.received_traded_wares_in_this_batch == other_trade_order.num_wares_per_batch() &&
+			other_trade_order.received_traded_wares_in_this_batch == trade_order.num_wares_per_batch()) {
+		// This batch is completed.
+		++trade_order.num_shipped_batches;
+		trade_order.received_traded_wares_in_this_batch = 0;
+		++other_trade_order.num_shipped_batches;
+		other_trade_order.received_traded_wares_in_this_batch = 0;
+		// NOCOM(#sirver): kill trade in game if done.
+	}
 }
 
 }  // namespace Widelands

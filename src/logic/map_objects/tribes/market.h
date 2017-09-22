@@ -54,7 +54,7 @@ public:
 	void cleanup(EditorGameBase&) override;
 
 	void try_launching_batch(Game* game);
-	void receive_ware(Game&, DescriptionIndex ware) override;
+	void traded_ware_arrived(int trade_id, DescriptionIndex ware_index, Game* game);
 
 private:
 	struct WareRequest {
@@ -65,15 +65,23 @@ private:
 	struct TradeOrder {
 		BillOfMaterials items;
 		int initial_num_batches;
-		int shipped_batches;
+		int num_shipped_batches;
 		Serial other_side;
 
+		int received_traded_wares_in_this_batch;
+
 		// The invariant here is that worker.size() + worker_request.get_count()
-		// equals the number of individual wares in 'items'.
+		// == 'num_wares_per_batch()'
 		std::unique_ptr<Request> worker_request;
 		std::vector<Worker*> workers;
 
 		std::vector<WareRequest> ware_requests;
+
+		// The number of individual wares in 'items', i.e. the sum of all '.second's.
+		int num_wares_per_batch() const;
+
+		// True if the 'num_shipped_batches' equals the 'initial_num_batches'
+		bool fulfilled() const;
 	};
 
 	static void
