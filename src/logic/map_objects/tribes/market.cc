@@ -56,7 +56,7 @@ void Market::new_trade(const int trade_id,
                        const BillOfMaterials& items,
                        const int num_batches,
                        const Serial other_side) {
-	trade_orders_[trade_id] = TradeOrder{items, num_batches, 0, other_side, nullptr, {}};
+	trade_orders_[trade_id] = TradeOrder{items, num_batches, 0, other_side, nullptr, {}, {}};
 	auto& trade_order = trade_orders_[trade_id];
 
 	// Request one worker for each item in a batch.
@@ -94,7 +94,7 @@ void Market::worker_arrived_callback(
 			trade_order.worker_request.reset();
 		}
 		w->start_task_idle(game, 0, -1);
-		market.carriers_.push_back(w);
+		trade_order.workers.push_back(w);
 		Notifications::publish(NoteBuilding(market.serial(), NoteBuilding::Action::kWorkersChanged));
 		market.try_launching_batch(&game);
 		return;
@@ -139,13 +139,8 @@ bool Market::is_ready_to_launch_batch(const int trade_id) {
 	}
 	auto& trade_order = it->second;
 
-	// Do we have enough people to carry wares?
-	// NOCOM(#sirver): this is buggy. If the workers are en-route this will still report enough are there.
-	if (trade_order.worker_request != nullptr) {
-		return false;
-	}
-
 	// Do we have all necessary wares for a batch?
+	int num_wares = 0;
 	for (const auto& item_pair : trade_order.items) {
 		log("#sirver item_pair.first: %d\n", item_pair.first);
 		const auto wares_it = wares_queue_.find(item_pair.first);
@@ -155,9 +150,15 @@ bool Market::is_ready_to_launch_batch(const int trade_id) {
 		if (wares_it->second->get_filled() < item_pair.second) {
 			return false;
 		}
+		num_wares += item_pair.second;
 	}
-	log("#sirver READY to launch! %s:%i\n", __FILE__, __LINE__);
-	return true;
+
+	// Do we have enough people to carry wares?
+	int num_available_carriers = 0;
+	for (auto* worker : trade_order.workers) {
+		num_available_carriers += worker->is_idle() ? 1 : 0;
+	}
+	return num_available_carriers == num_wares;
 }
 
 void Market::launch_batch(const int trade_id, Game* game) {
@@ -165,30 +166,30 @@ void Market::launch_batch(const int trade_id, Game* game) {
 	assert(is_ready_to_launch_batch(trade_id));
 	auto& trade_order = trade_orders_.at(trade_id);
 
-	auto carrier_it = carriers_.begin();
 	// Do we have all necessary wares for a batch?
 	for (const auto& item_pair : trade_order.items) {
 		for (size_t i = 0; i < item_pair.second; ++i) {
-			log("#sirver item_pair: %d -> %d\n", item_pair.first, item_pair.second);
-			while (!(*carrier_it)->is_idle()) {
-				++carrier_it;
-				assert(carrier_it != carriers_.end());
-			}
+			Worker* carrier = trade_order.workers.at(i);
+			assert(carrier->is_idle());
 
-			log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
-			// Give the worker a ware.
+			// Give the carrier a ware.
 			WareInstance* ware =
 			   new WareInstance(item_pair.first, game->tribes().get_ware_descr(item_pair.first));
 			ware->init(*game);
-			(*carrier_it)->set_carried_ware(*game, ware);
+			carrier->set_carried_ware(*game, ware);
+
+			// We have to remove this item from our economy. Otherwise it would be
+			// considered idle (since it has no transport associated with it) and
+			// the engine would want to transfer it to the next warehouse.
+			ware->set_economy(nullptr);
 			wares_queue_.at(item_pair.first)
 			   ->set_filled(wares_queue_.at(item_pair.first)->get_filled() - 1);
 
-			// Send the worker going.
-			(*carrier_it)->reset_tasks(*game);
-			(*carrier_it)->start_task_carry_trade_item(*game);
+			// Send the carrier going.
+			carrier->reset_tasks(*game);
+			carrier->start_task_carry_trade_item(*game);
 			// NOCOM(#sirver): pass the object
-			(*carrier_it)->top_state().objvar1 =
+			carrier->top_state().objvar1 =
 			   ObjectPointer(game->objects().get_object(trade_order.other_side));
 		}
 	}
@@ -219,6 +220,13 @@ void Market::cleanup(EditorGameBase& egbase) {
 		pair.second->cleanup();
 	}
 	Building::cleanup(egbase);
+}
+
+void Market::receive_ware(Game& game, DescriptionIndex ware_index) {
+	WareInstance* ware = new WareInstance(ware_index, game.tribes().get_ware_descr(ware_index));
+	ware->init(game);
+	worker.start_task_dropoff(game, ware_index);
+	owner().ware_produced(ware_index);
 }
 
 }  // namespace Widelands

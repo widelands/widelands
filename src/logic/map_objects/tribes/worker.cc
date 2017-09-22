@@ -1607,6 +1607,9 @@ void Worker::carry_trade_item_update(Game& game, State& state) {
 	// Reset any signals that are not related to location
 	std::string signal = get_signal();
 	signal_handled();
+	if (!signal.empty()) {
+		log("#sirver signal: %s\n", signal.c_str());
+	}
 	if (signal == "evict") {
 		return pop_task(game);
 	}
@@ -1618,33 +1621,45 @@ void Worker::carry_trade_item_update(Game& game, State& state) {
 		return;
 	}
 
-	log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 	auto* other_market = dynamic_cast<Market*>(state.objvar1.get(game));
-	// NOCOM(#sirver): what if other_market vanished?
-	if (!start_task_movepath(game, other_market->base_flag().get_position(), 5,
-	                         descr().get_right_walk_anims(does_carry_ware()))) {
-		molog("carry_trade_item_update: Could not move to other flag.\n");
+	if (state.ivar1 == 1) {
+		// Arrived on site. Move to the building and advance our state.
+		if (other_market->base_flag().get_position() == get_position()) {
+			++state.ivar1;
+			return start_task_move(
+			   game, WALK_NW, descr().get_right_walk_anims(does_carry_ware()), true);
+		}
+
+		// Otherwise continue making progress towards the other market.
+		if (!start_task_movepath(game, other_market->base_flag().get_position(), 5,
+		                         descr().get_right_walk_anims(does_carry_ware()))) {
+			molog("carry_trade_item_update: Could not move to other flag.\n");
+			// NOCOM(#sirver): probably not correct?
+		}
+		return;
 	}
 
-	// // Return to building, if necessary
-	// upcast(Building, building, get_location(game));
-	// if (!building)
-		// return pop_task(game);
+	if (state.ivar1 == 2) {
+		WareInstance* const ware = fetch_carried_ware(game);
+		ware->enter_building(game, *other_market);
+		++state.ivar1;
+		start_task_move(game, WALK_SE, descr().get_right_walk_anims(does_carry_ware()), true);
+		return;
+	}
 
-	// if (game.map().get_immovable(get_position()) != building)
-		// return start_task_return(game, false);  //  do not drop ware
+	if (state.ivar1 == 3) {
+		++state.ivar1;
+		start_task_return(game, false);
+		return;
+	}
 
-	// // Get the new job
-	// bool const success = state.ivar1 != 2;
-
-	// // Set this *before* calling to get_building_work, because the
-	// // state pointer might become invalid
-	// state.ivar1 = 1;
-
-	// if (!building->get_building_work(game, *this, success)) {
-		// set_animation(game, 0);
-		// return skip_act();
-	// }
+	if (state.ivar1 == 4) {
+		pop_task(game);
+		start_task_idle(game, 0, -1);
+		dynamic_cast<Market*>(get_location(game))->try_launching_batch(&game);
+		return;
+	}
+	NEVER_HERE();
 }
 
 void Worker::update_task_carry_trade_item(Game& game) {
