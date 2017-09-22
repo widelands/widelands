@@ -1590,7 +1590,65 @@ void Worker::buildingwork_update(Game& game, State& state) {
  * is finished.
  */
 void Worker::update_task_buildingwork(Game& game) {
-	if (top_state().task == &taskBuildingwork)
+	if (top_state().task == &taskCarryTradeItem)
+		send_signal(game, "update");
+}
+
+// NOCOM(#sirver): document
+const Bob::Task Worker::taskCarryTradeItem = {
+   "carry_trade_item", static_cast<Bob::Ptr>(&Worker::carry_trade_item_update), nullptr, nullptr, true};
+
+void Worker::start_task_carry_trade_item(Game& game) {
+	push_task(game, taskCarryTradeItem);
+	top_state().ivar1 = 0;
+}
+
+void Worker::carry_trade_item_update(Game& game, State& state) {
+	// Reset any signals that are not related to location
+	std::string signal = get_signal();
+	signal_handled();
+	if (signal == "evict") {
+		return pop_task(game);
+	}
+
+	// First of all, make sure we're outside
+	if (state.ivar1 == 0) {
+		start_task_leavebuilding(game, false);
+		++state.ivar1;
+		return;
+	}
+
+	log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
+	auto* other_market = dynamic_cast<Market*>(state.objvar1.get(game));
+	// NOCOM(#sirver): what if other_market vanished?
+	if (!start_task_movepath(game, other_market->base_flag().get_position(), 5,
+	                         descr().get_right_walk_anims(does_carry_ware()))) {
+		molog("carry_trade_item_update: Could not move to other flag.\n");
+	}
+
+	// // Return to building, if necessary
+	// upcast(Building, building, get_location(game));
+	// if (!building)
+		// return pop_task(game);
+
+	// if (game.map().get_immovable(get_position()) != building)
+		// return start_task_return(game, false);  //  do not drop ware
+
+	// // Get the new job
+	// bool const success = state.ivar1 != 2;
+
+	// // Set this *before* calling to get_building_work, because the
+	// // state pointer might become invalid
+	// state.ivar1 = 1;
+
+	// if (!building->get_building_work(game, *this, success)) {
+		// set_animation(game, 0);
+		// return skip_act();
+	// }
+}
+
+void Worker::update_task_carry_trade_item(Game& game) {
+	if (top_state().task == &taskCarryTradeItem)
 		send_signal(game, "update");
 }
 

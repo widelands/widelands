@@ -169,6 +169,9 @@ public:
 	void start_task_leavebuilding(Game&, bool changelocation);
 	void start_task_fugitive(Game&);
 
+	void start_task_carry_trade_item(Game&);
+	void update_task_carry_trade_item(Game&);
+
 	void
 	start_task_geologist(Game&, uint8_t attempts, uint8_t radius, const std::string& subcommand);
 
@@ -208,6 +211,7 @@ public:
 	static const Task taskFugitive;
 	static const Task taskGeologist;
 	static const Task taskScout;
+	static const Task taskCarryTradeItem;
 
 private:
 	// task details
@@ -232,6 +236,7 @@ private:
 	void fugitive_update(Game&, State&);
 	void geologist_update(Game&, State&);
 	void scout_update(Game&, State&);
+	void carry_trade_item_update(Game&, State&);
 
 	// Program commands
 	bool run_mine(Game&, State&, const Action&);

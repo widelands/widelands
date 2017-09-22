@@ -278,6 +278,7 @@ public:
 	// TODO(feature-Hasi50): correct (?) Send a signal that may switch to some other \ref Task
 	void send_signal(Game&, char const*);
 	void start_task_idle(Game&, uint32_t anim, int32_t timeout);
+	bool is_idle();
 
 	/// This can fail (and return false). Therefore the caller must check the
 	/// result and find something else for the bob to do. Otherwise there will

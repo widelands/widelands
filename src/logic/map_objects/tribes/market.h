@@ -70,12 +70,21 @@ private:
 	};
 
 	static void
-	request_worker_callback(Game&, Request&, DescriptionIndex, Worker*, PlayerImmovable&);
+	worker_arrived_callback(Game&, Request&, DescriptionIndex, Worker*, PlayerImmovable&);
+	static void
+	ware_arrived_callback(Game& g, InputQueue* q, DescriptionIndex ware, Worker* worker, void* data);
 
 	void ensure_wares_queue_exists(int ware_index);
+	void try_launching_batch(Game* game);
+	bool is_ready_to_launch_batch(int trade_id);
+	void launch_batch(int trade_id, Game* game);
 
 	std::map<int, TradeOrder> trade_orders_;  // Key is 'trade_id's.
 	std::map<int, std::unique_ptr<WaresQueue>> wares_queue_; // Key is 'ware_index'.
+
+	// The workers currently associated with this market. Some of them might
+	// not be physically present if they are en-route to trading an item.
+	std::vector<Worker*> carriers_;
 
 	DISALLOW_COPY_AND_ASSIGN(Market);
 };

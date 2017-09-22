@@ -339,6 +339,7 @@ void MapBuildingdataPacket::read_warehouse(Warehouse& warehouse,
 				}
 			}
 
+			// NOCOM(#sirver): reuse save/load code
 			assert(warehouse.incorporated_workers_.empty());
 			{
 				uint16_t const nrworkers = fr.unsigned_16();
