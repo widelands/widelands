@@ -110,7 +110,7 @@ obj_deal_with_vesta = {
       listitem_bullet(_[[We need to get the improvements very soon. But we have to decide: either we collect 35 wheat and 15 wine for Vesta  in one of our warehouses or we just conquer the monastry.]])),
 }
 
-obj_train_heroes = {
+obj_heroes = {
    name = "train_heroes",
    title=_"Train at least 3 heroes",
    number = 1,
@@ -135,14 +135,14 @@ obj_recruit_soldiers = {
    ),
 }
 
--- obj_conquer_all = {
-   -- name = "Conquer all",
-   -- title=_"Defeat the barbarians",
-   -- number = 1,
-   -- body = objective_text(_"Defeat the enemy",
-      -- listitem_bullet(_[[We should end the barbarians existence in this part of the world.]])
-   -- ),
--- }
+obj_conquer_all = {
+   name = "conquer_all",
+   title=_"Defeat the barbarians",
+   number = 1,
+   body = objective_text(_"Defeat the enemy",
+      listitem_bullet(_[[Now it is time to end the barbarian aggression in our very own part of the world.]])
+   ),
+}
 
 -- obj_find_all_ports = {
    -- name = "Explore additional islands and search for port spaces",
@@ -162,14 +162,14 @@ obj_recruit_soldiers = {
    -- ),
 -- }
 
--- obj_training = {
-   -- name = "Build training infrastructure",
-   -- title=_"Build at least a trainingcamp, some barracks and an arena or colosseum",
-   -- number = 1,
-   -- body = objective_text(_"Training Infrastructure",
-      -- listitem_bullet(_[[Build a trainingcamp, some barracks and an arena or colosseum to train our soldiers.]])
-   -- ),
--- }
+obj_training = {
+   name = "train_your_soldiers",
+   title=_"Increase your miltitary strength by training your soldiers",
+   number = 1,
+   body = objective_text(_"Training is important",
+      listitem_bullet(_[[Train your soldiers hard and train them fast. We need to increase our military strength.]])
+   ),
+}
 
 
 -- ==================
@@ -231,15 +231,15 @@ diary_page_2 = {
    -- posy=1,
 -- }
 
--- diary_page_5 = {
-   -- title=_"Now it's time to get home again",
-   -- body= lutius(_"Diary of Lutius",
-      -- -- TRANSLATORS: Lutius - Diary
-      -- _([[Yes my fellow comrades, we have done it. We managed all the challenges that were imposed on us. But my heart is still with our home. We shall set sail as soon as possible to help defend the empire from the babarian tribe.]])
-	  -- .. paragraphdivider() ..
-      -- _([[You have completed this mission. You may continue playing if you wish, otherwise move on to the next mission.]])),
-   -- posy=1,
--- }
+diary_page_5 = {
+   title=_"Battle is won",
+   body= lutius(_"Diary of Lutius",
+      -- TRANSLATORS: Lutius - Diary
+      _([[Yes my fellow comrades, we have done it. We managed all the challenges that were imposed on us. And not to forget we have expelled the Babarians out of our country. But this was only a battle that was won, the war is even yet to begin. Let's see what the future will bring to us.]])
+	  .. paragraphdivider() ..
+      _([[You have completed this mission. You may continue playing if you wish, otherwise move on to the next mission.]])),
+   posy=1,
+}
 
 -- Amalea
 
@@ -481,13 +481,8 @@ saledus_3 = {
    title=_"Defiance",
    body= saledus2(_"Saledus is keeping his point…",
       -- TRANSLATORS: Saledus
-      _([[Sire, I admit this has been proven to be a very good deal. But we could have had the plans much sooner. We will not be able to make any deals with the babarians, so we better keep our soldiers in good mood and train them adequately.]])
-      .. paragraphdivider() ..
-      -- TRANSLATORS: Saledus
-      _([[I think we should train at least 3 heroes. Therefore we need to expand our economy and manage the training of our soldiers.]]))
-      .. new_objectives(obj_train_heroes),
+      _([[Sire, I admit this has been proven to be a very good deal. But we could have had the plans much earlier. Anyhow we will not be able to make any deals with the babarians, so we better keep our soldiers in good mood and train them adequately.]])),
    posy=1,
-   h=500,
 }
 
 saledus_4 = {
@@ -505,8 +500,8 @@ saledus_4 = {
 
 
 saledus_5 = {
-   title=_"We should explore the islands",
-   body= saledus2(_"Saledus is excited…",
+   title=_" Military Strength",
+   body= saledus2(_"Saledus is asking for a stronger army …",
       -- TRANSLATORS: Saledus
       _([[Now that we have produced some tools, I think it is time to diverge some of our iron and coal to start some military production.]])
       .. paragraphdivider() ..
@@ -520,54 +515,63 @@ saledus_5 = {
    h=500,
 }
 
-
 saledus_6 = {
-   title=_"We should conquer the whole islands",
+   title=_"Training is needed",
+   body= saledus3(_"Saledus still has security concerns",
+      -- TRANSLATORS: Saledus
+      _([[Sire, although we have started to recruit new soldiers we still need to train them well. It is important to increase the strength of our soldiers as fast as we can.]])
+      .. paragraphdivider() ..
+      _([[Unfortunately we only have an arena and a very old and small training camp with very little storage capacity. And guess what none of our builders knows how to improve this. But we need to use what we have to get prepared for battle.]]))
+	  .. new_objectives(obj_training),
+   posy=1,
+   h=500,
+}
+
+saledus_7 = {
+   title=_"Praise the army of the empire",
+   body= saledus2(_"Saledus is happy…",
+      -- TRANSLATORS: Saledus
+      _([[Sire, after training a bunch of recruits our trainers together with our builders developed better and more efficient training buildings.]])
+      .. paragraphdivider() ..
+      _([[Now we could really improve our army and build the military strength that we will need to defend our country.]])),
+   posy=1,
+}
+
+saledus_8 = {
+   title=_"We just need another hero",
+   body= saledus4(_"Saledus is in a good mood…",
+      -- TRANSLATORS: Saledus
+      _([[Sire, I have good progress to report. After we now have more and better beer together with enhanced training facilities we should be able to train as much heroes as we can.]])
+      .. paragraphdivider() ..
+      _([[It will give us great advantage in battle if our soldiers are much more powerful than the babarians. So we need to spend our ressources wisely to get heroes as soon as we can.]])
+      .. paragraphdivider() ..
+      _([[I would say for the beginning 3 fully trained heroes would be sufficient. But don't forget to send them to the frontline, cause back at home they are not that worthy.]]))
+	  .. new_objectives(obj_heroes),
+   posy=1,
+   h=500,
+}
+
+saledus_9 = {
+   title=_"We should expell the babarians",
    body= saledus3(_"Saledus is excited…",
       -- TRANSLATORS: Saledus
-      _([[Now it is time to conquer the islands.]])
+      _([[Now that we have some fully trained soldiers it is time to expell the babarians of our homeland.]])
       .. paragraphdivider() ..
-      _([[Let's finish the barbarians off and provide a nice colony for the caesar of our empire.]]))
+      _([[Let's finish them off and regain control over our lands. They should regret deeply they ever came.]]))
       .. new_objectives(obj_conquer_all),
    posy=1,
    h=500,
 }   
    
--- saledus_7 = {
-   -- title=_"Victory is our's",
-   -- body= saledus3(_"Saledus is cheering out…",
-      -- -- TRANSLATORS: Saledus
-      -- _([[Sire, finally we have defeated the babarians in this region. And furthermore we have built a nice colony for our empire.]])
-      -- .. paragraphdivider() ..
-      -- _([[Caesar will be very pleased about our victory.]])),
-   -- posy=1,
--- }
-
--- saledus_8 = {
-   -- title=_"Pleasing Neptune",
-   -- body= saledus4(_"Saledus is very sad and anxious…",
-      -- -- TRANSLATORS: Saledus
-      -- _([[Sire, we are making good progress to get home eventually. But there is one thing I need to talk about:]])
-      -- .. paragraphdivider() ..
-      -- _([[As we have seen on our last journey it is of great importance that the Gods, especially Neptune, are in a good mood to guard our journey.]])
-      -- .. paragraphdivider() ..
-      -- _([[Unfortunately we lost our holy shrine of Neptune in the great storm, so we can't worship him well. I think we should search the whole region to see if we can recover the shrine with all its 6 pieces.]])
-      -- .. paragraphdivider() ..
-      -- _([[To ease the search I made some models of the pieces as you can see. You can give them to our soldiers and sailors to look for them.]]))
-	  -- .. new_objectives(obj_find_artifacts),
-   -- posy=1,
-   -- h=500,
--- }
-
--- saledus_9 = {
-   -- title=_"Praise, praise, praise",
-   -- body= saledus2(_"Saledus is happily worshipping…",
-      -- -- TRANSLATORS: Saledus
-      -- _([[Sire, we recovered the holy shrine of Neptune. Now we can seek his protection for our journey.]])
-      -- .. paragraphdivider() ..
-      -- _([[Oh great Neptune safeguard our journey. Oh great Neptune let the winds be friendly for our course. Oh great Neptune protect us from the creatures of the sea. Oh great Neptune......]])),
-   -- posy=1,
--- }
+saledus_10 = {
+   title=_"Victory is our's",
+   body= saledus2(_"Saledus is cheering out…",
+      -- TRANSLATORS: Saledus
+      _([[Sire, finally we have defeated the babarians. We have expelled even the last of them. May they never come back.]])
+      .. paragraphdivider() ..
+      _([[Now it is time to find out why this big mess around could have happened. But first of all we should have a beer or two to celebrate our victory and our newfound freedom.]])),
+   posy=1,we
+}
 
 -- saledus_10 = {
    -- title=_"Train faster, train harder",
@@ -579,17 +583,7 @@ saledus_6 = {
    -- posy=1,
 -- }
 
--- saledus_11 = {
-   -- title=_"Training infrastructure is needed",
-   -- body= saledus3(_"Saledus has security concerns",
-      -- -- TRANSLATORS: Saledus
-      -- _([[Sire, we need to train some of our people to serve in your great army. It is important to increase the number of our soldiers as fast as we can. And we should train them well to improve their fighting abilities.]])
-      -- .. paragraphdivider() ..
-      -- _([[Therefore we need to build a full training infrastructure despite the limited space available. We need some barracks, a trainingcamp and an arena or a colosseum.]]))
-	  -- .. new_objectives(obj_training),
-   -- posy=1,
-   -- h=500,
--- }
+
 
 -- Vesta
 
@@ -609,7 +603,13 @@ vesta_1 = {
    posy=1,
 }
 
-
+vesta_2 = {
+   title=_"Damn you...",
+   body= vesta(_"Vesta is cursing us...",
+      -- TRANSLATORS: Vesta
+      _([[Damn you Lutius, for killing peacefull sisters of the goddess vesta. May your life and your land be cursed and may the wrath of the goods diminish your family from the earth.]])),
+   posy=1,
+}
 
 
 

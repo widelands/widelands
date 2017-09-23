@@ -1,6 +1,11 @@
 include "scripting/messages.lua"
 include "map:scripting/helper_functions.lua"
 
+-- Some objectives need to be waited for in separate threads
+local obj_find_monastry_done = false
+
+
+
 function dismantle()
    local o = add_campaign_objective(obj_dismantle_buildings)
    
@@ -135,9 +140,8 @@ function steel()
    local bld = array_combine(
       p1:get_buildings("empire_headquarters"),
       p1:get_buildings("empire_warehouse"),
-      p1:get_buildings("empire_trainingcamp"),
+      p1:get_buildings("empire_trainingcamp1"),
       p1:get_buildings("empire_arena"),
-      p1:get_buildings("empire_colosseum"),
       p1:get_buildings("empire_sentry"),
 	  p1:get_buildings("empire_tower"),
       p1:get_buildings("empire_fortress"),
@@ -158,9 +162,8 @@ function steel()
    bld = array_combine(
       p1:get_buildings("empire_headquarters"),
       p1:get_buildings("empire_warehouse"),
-      p1:get_buildings("empire_trainingcamp"),
+      p1:get_buildings("empire_trainingcamp1"),
       p1:get_buildings("empire_arena"),
-      p1:get_buildings("empire_colosseum"),
       p1:get_buildings("empire_sentry"),
 	  p1:get_buildings("empire_tower"),
       p1:get_buildings("empire_fortress"),
@@ -181,6 +184,118 @@ function steel()
       sleep(4273)
    end
    o1.done = true
+   campaign_message_box(saledus_6)
+   run(training)
+end
+
+function training()
+   local o = add_campaign_objective(obj_training)
+   local strength = 0
+
+   local bld = array_combine(
+      p1:get_buildings("empire_headquarters"),
+      p1:get_buildings("empire_warehouse"),
+      p1:get_buildings("empire_trainingcamp1"),
+      p1:get_buildings("empire_arena"),
+      p1:get_buildings("empire_sentry"),
+	  p1:get_buildings("empire_tower"),
+      p1:get_buildings("empire_fortress"),
+      p1:get_buildings("empire_outpost"),
+	  p1:get_buildings("empire_barrier"),
+      p1:get_buildings("empire_blockhouse"),
+      p1:get_buildings("empire_castle")
+      )
+   for idx,site in ipairs(bld) do
+      for descr,count in pairs(site:get_soldiers("all")) do
+		 strength = strength + descr[1]*count + descr[2]*count 
+	  end
+   end
+   
+   strength = strength + 10
+   local enough_strength = false
+   while not enough_strength do
+   bld = array_combine(
+      p1:get_buildings("empire_headquarters"),
+      p1:get_buildings("empire_warehouse"),
+      p1:get_buildings("empire_trainingcamp1"),
+      p1:get_buildings("empire_arena"),
+      p1:get_buildings("empire_sentry"),
+	  p1:get_buildings("empire_tower"),
+      p1:get_buildings("empire_fortress"),
+      p1:get_buildings("empire_outpost"),
+	  p1:get_buildings("empire_barrier"),
+      p1:get_buildings("empire_blockhouse"),
+      p1:get_buildings("empire_castle")
+      )
+	  local amount = 0
+      for idx,site in ipairs(bld) do
+	     for descr,count in pairs(site:get_soldiers("all")) do
+            amount = amount + descr[1]*count + descr[2]*count 
+		 end
+      end
+	  if amount > strength then
+	     enough_strength = true
+      end
+      sleep(4273)
+   end
+   o.done = true
+   p1:allow_buildings{"empire_trainingcamp", "empire_colosseum"}
+   campaign_message_box(saledus_7)
+   
+   
+   while not obj_find_monastry_done do sleep(3000) end
+   campaign_message_box(saledus_8)
+   local o1 = add_campaign_objective(obj_heroes)
+   local heroes = false
+   
+   while not heroes do
+   bld = array_combine(
+      p1:get_buildings("empire_headquarters"),
+      p1:get_buildings("empire_warehouse"),
+      p1:get_buildings("empire_trainingcamp1"),
+      p1:get_buildings("empire_trainingcamp"),
+      p1:get_buildings("empire_arena"),
+      p1:get_buildings("empire_colosseum"),
+      p1:get_buildings("empire_sentry"),
+	  p1:get_buildings("empire_tower"),
+      p1:get_buildings("empire_fortress"),
+      p1:get_buildings("empire_outpost"),
+	  p1:get_buildings("empire_barrier"),
+      p1:get_buildings("empire_blockhouse"),
+      p1:get_buildings("empire_castle")
+      )
+	  local amount = 0
+      for idx,site in ipairs(bld) do
+            amount = amount + (site:get_soldiers{2,6,2,0})
+      end
+	  if amount > 2 then
+	     heroes = true
+      end
+      sleep(4273)
+   end
+   o1.done = true
+   
+   run(conquer)
+end
+
+function conquer()
+   campaign_message_box(saledus_9)
+   local o = add_campaign_objective(obj_conquer_all)
+
+   while not p2.defeated do sleep(2342) end
+   objective.done = true
+
+   -- Babarians defeated.
+   campaign_message_box(saledus_10)
+
+   -- Sleep a while to have some time between the last objective done message and final victory
+   sleep(25000)
+   campaign_message_box(diary_page_5)
+
+   p1:reveal_campaign("campsect2")
+   p1:reveal_scenario("empiretut04")
+
+
 end
 
 function wheat_chain()
@@ -216,18 +331,20 @@ function wheat_chain()
       o1.done = true
 	  p1:allow_buildings{"empire_mill", "empire_brewery"}
       campaign_message_box(saledus_2)
+	  campaign_message_box(vesta_2)
 	  campaign_message_box(amalea_11)
 	  campaign_message_box(saledus_4)
    else
       o1.done = true
+	  local wh = p3:get_buildings("empire_warehouse")
+	  wh[1]:set_workers("empire_carrier", 0)
 	  local wheat = hq[1]:get_wares("wheat") - 35
 	  local wine = hq[1]:get_wares("wine") - 15
 	  hq[1]:set_wares("wheat", wheat)
 	  hq[1]:set_wares("wine", wine)	  
 	  p1:allow_buildings{"empire_mill", "empire_brewery"}
       campaign_message_box(vesta_1) 
-	  local wh = p3:get_buildings("empire_warehouse")
-	  wh[1]:set_workers("empire_carrier", 0)
+
       well.immovable:remove()
       brew.immovable:remove()
       mill.immovable:remove()
@@ -241,6 +358,7 @@ function wheat_chain()
       campaign_message_box(amalea_12)
       campaign_message_box(saledus_3)
    end
+   obj_find_monastry_done = true
 end
 
 function mission_thread()
