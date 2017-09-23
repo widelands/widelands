@@ -1591,7 +1591,7 @@ void Worker::buildingwork_update(Game& game, State& state) {
  * is finished.
  */
 void Worker::update_task_buildingwork(Game& game) {
-	if (top_state().task == &taskCarryTradeItem)
+	if (top_state().task == &taskBuildingwork)
 		send_signal(game, "update");
 }
 
