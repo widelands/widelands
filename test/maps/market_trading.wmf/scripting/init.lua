@@ -23,13 +23,13 @@ function full_headquarters(player, x, y)
 end
 
 function place_markets()
-   prefilled_buildings(p1, { "barbarians_market", 24, 25 })
-   market_p1 = map:get_field(24, 25).immovable
-   connected_road(p1, market_p1.flag, "l,l|", true)
+   prefilled_buildings(p1, { "barbarians_market", 22, 27 })
+   market_p1 = map:get_field(22, 27).immovable
+   connected_road(p1, market_p1.flag, "tr,tl|", true)
 
-   prefilled_buildings(p2, { "barbarians_market", 29, 25 })
-   market_p2 = map:get_field(29, 25).immovable
-   connected_road(p2, market_p2.flag, "r,r|", true)
+   prefilled_buildings(p2, { "barbarians_market", 31, 27 })
+   market_p2 = map:get_field(31, 27).immovable
+   connected_road(p2, market_p2.flag, "tr,tl|", true)
 end
 
 full_headquarters(p1, 22, 25)
