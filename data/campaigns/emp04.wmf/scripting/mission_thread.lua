@@ -266,7 +266,7 @@ function training()
       )
 	  local amount = 0
       for idx,site in ipairs(bld) do
-            amount = amount + (site:get_soldiers{2,6,2,0})
+            amount = amount + (site:get_soldiers{4,4,0,2})
       end
 	  if amount > 2 then
 	     heroes = true

@@ -489,13 +489,8 @@ saledus_4 = {
    title=_"Pride",
    body= saledus2(_"Saledus is keeping his point…",
       -- TRANSLATORS: Saledus
-      _([[Sire, I admit that we have accumulated some bad karma, but in wartime sometimes the end justifies the means. And we won't be able to make any deals with the babarians either, so we better keep our soldiers in good mood and train them adequately.]])
-      .. paragraphdivider() ..
-      -- TRANSLATORS: Saledus
-      _([[I think we should train at least 3 heroes. Therefore we need to expand our economy and manage the training of our soldiers.]]))
-      .. new_objectives(obj_train_heroes),
+      _([[Sire, I admit that we have accumulated some bad karma, but in wartime sometimes the end justifies the means. And we won't be able to make any deals with the babarians either, so we better keep our soldiers in good mood and train them adequately.]])),
    posy=1,
-   h=500,
 }
 
 
