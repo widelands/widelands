@@ -283,7 +283,7 @@ function conquer()
    local o = add_campaign_objective(obj_conquer_all)
 
    while not p2.defeated do sleep(2342) end
-   objective.done = true
+   o.done = true
 
    -- Babarians defeated.
    campaign_message_box(saledus_10)

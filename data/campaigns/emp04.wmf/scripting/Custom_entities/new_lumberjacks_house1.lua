@@ -26,9 +26,7 @@ tribes:new_productionsite_type {
    },
 
    aihints = {
-      logproducer = true,
-      forced_after = 180,
-      prohibited_till = 180
+
    },
 
    working_positions = {

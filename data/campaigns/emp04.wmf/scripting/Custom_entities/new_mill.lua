@@ -33,7 +33,7 @@ tribes:new_productionsite_type {
    },
 
    aihints = {
-      prohibited_till = 600
+
    },
 
    working_positions = {

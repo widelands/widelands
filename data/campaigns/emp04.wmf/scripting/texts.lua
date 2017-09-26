@@ -45,7 +45,7 @@ obj_dismantle_buildings = {
     title=_"Dismantle the unproductive Buildings",
     number = 1,
     body = objective_text(_"Dismantle Buildings",
-       listitem_bullet(_[[We should dismantle all the unproductive buildings to get some ressources for new buildings.]])
+       listitem_bullet(_[[We should dismantle all unproductive small buildings and the farms to get some ressources for new buildings. Remember to check the messages and the building stats which buildings are unproductive.]])
     ),
 }
 
@@ -259,7 +259,7 @@ amalea_1 = {
    title=_"Amalea investigating",
    body= amalea2(_"Amalea is nodding thougtful…",
       -- TRANSLATORS: Amalea
-      _([[Lutius in my opinion this will be a very difficult challenge again. But I'm afraid, we're doomed to manage this situation. To make things even worse I had a look into our warehouses. There is hardly some grain of dust left in there. No Wares, no tools, no workers and no soldiers as well.]])
+      _([[Lutius in my opinion this will be a very difficult challenge again. But I'm afraid, we're doomed to manage this situation. To make things even worse I had a look into our warehouses. There is hardly some grain of dust left in there. No wares, no tools, no workers and no soldiers as well.]])
       .. paragraphdivider() ..
       -- TRANSLATORS: Amalea
       _([[So, first of all we need some building material to start correcting the mistakes made.I think we should try to dismantle the unproductive small buildings and the farms to collect the ressources and regain them in our headquarters.]])

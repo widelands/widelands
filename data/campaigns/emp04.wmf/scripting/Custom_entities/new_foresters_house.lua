@@ -27,9 +27,7 @@ tribes:new_productionsite_type {
    },
 
    aihints = {
-      space_consumer = true,
-      renews_map_resource = "log",
-      prohibited_till = 200
+
    },
 
    working_positions = {
