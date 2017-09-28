@@ -109,7 +109,7 @@ p1:forbid_buildings{"empire_farm", "empire_mill", "empire_brewery", "empire_trai
 		 if field.immovable and field.immovable.descr.type_name == "flag" then
 			 local n1 = field.bln
 			 local n2 = n1.bln
-			     if n1.immovable == nil and (n2:has_caps("flag") or (n2.immovable and n2.immovable.descr.type_name == "flag")) then
+			     if n1.immovable == nil and n1:has_caps("walkable") and (n2:has_caps("flag") or (n2.immovable and n2.immovable.descr.type_name == "flag")) then
 		         local road = p1:place_road(field.immovable, "bl", "bl", true)
 			     end
          end
@@ -119,7 +119,7 @@ p1:forbid_buildings{"empire_farm", "empire_mill", "empire_brewery", "empire_trai
 		 if field.immovable and field.immovable.descr.type_name == "flag" then
 			 local n1 = field.bln
 			 local n2 = n1.bln
-			     if n1.immovable == nil and (n2:has_caps("flag") or (n2.immovable and n2.immovable.descr.type_name == "flag")) then
+			     if n1.immovable == nil and n1:has_caps("walkable") and (n2:has_caps("flag") or (n2.immovable and n2.immovable.descr.type_name == "flag")) then
 		         local road = p1:place_road(field.immovable, "bl", "bl", true)
 			     end
          end
@@ -132,7 +132,7 @@ p1:forbid_buildings{"empire_farm", "empire_mill", "empire_brewery", "empire_trai
 		 if field.immovable and field.immovable.descr.type_name == "flag" then
 			 local n1 = field.bln
 			 local n2 = n1.bln
-			     if n1.immovable == nil and (n2:has_caps("flag") or (n2.immovable and n2.immovable.descr.type_name == "flag")) then
+			     if n1.immovable == nil and n1:has_caps("walkable") and (n2:has_caps("flag") or (n2.immovable and n2.immovable.descr.type_name == "flag")) then
 		         local road = p1:place_road(field.immovable, "bl", "bl", true)
 			     end
          end
@@ -142,7 +142,7 @@ p1:forbid_buildings{"empire_farm", "empire_mill", "empire_brewery", "empire_trai
 		 if field.immovable and field.immovable.descr.type_name == "flag" then
 			 local n1 = field.bln
 			 local n2 = n1.bln
-			     if n1.immovable == nil and (n2:has_caps("flag") or (n2.immovable and n2.immovable.descr.type_name == "flag")) then
+			     if n1.immovable == nil and n1:has_caps("walkable") and (n2:has_caps("flag") or (n2.immovable and n2.immovable.descr.type_name == "flag")) then
 		         local road = p1:place_road(field.immovable, "bl", "bl", true)
 			     end
          end
@@ -155,7 +155,7 @@ p1:forbid_buildings{"empire_farm", "empire_mill", "empire_brewery", "empire_trai
 		 if field.immovable and field.immovable.descr.type_name == "flag" then
 			 local n1 = field.ln
 			 local n2 = n1.ln
-			     if n1.immovable == nil and (n2:has_caps("flag") or (n2.immovable and n2.immovable.descr.type_name == "flag")) then
+			     if n1.immovable == nil and n1:has_caps("walkable") and (n2:has_caps("flag") or (n2.immovable and n2.immovable.descr.type_name == "flag")) then
 		         local road = p1:place_road(field.immovable, "l", "l", true)
 			     end
          end
@@ -165,7 +165,7 @@ p1:forbid_buildings{"empire_farm", "empire_mill", "empire_brewery", "empire_trai
 		 if field.immovable and field.immovable.descr.type_name == "flag" then
 			 local n1 = field.ln
 			 local n2 = n1.ln
-			     if n1.immovable == nil and (n2:has_caps("flag") or (n2.immovable and n2.immovable.descr.type_name == "flag")) then
+			     if n1.immovable == nil and n1:has_caps("walkable") and (n2:has_caps("flag") or (n2.immovable and n2.immovable.descr.type_name == "flag")) then
 		         local road = p1:place_road(field.immovable, "l", "l", true)
 			     end
          end
@@ -178,7 +178,7 @@ p1:forbid_buildings{"empire_farm", "empire_mill", "empire_brewery", "empire_trai
 		 if field.immovable and field.immovable.descr.type_name == "flag" then
 			 local n1 = field.tln
 			 local n2 = n1.tln
-			     if n1.immovable == nil and (n2:has_caps("flag") or (n2.immovable and n2.immovable.descr.type_name == "flag")) then
+			     if n1.immovable == nil and n1:has_caps("walkable") and (n2:has_caps("flag") or (n2.immovable and n2.immovable.descr.type_name == "flag")) then
 		         local road = p1:place_road(field.immovable, "tl", "tl", true)
 			     end
          end
@@ -188,7 +188,7 @@ p1:forbid_buildings{"empire_farm", "empire_mill", "empire_brewery", "empire_trai
 		 if field.immovable and field.immovable.descr.type_name == "flag" then
 			 local n1 = field.tln
 			 local n2 = n1.tln
-			     if n1.immovable == nil and (n2:has_caps("flag") or (n2.immovable and n2.immovable.descr.type_name == "flag")) then
+			     if n1.immovable == nil and n1:has_caps("walkable") and (n2:has_caps("flag") or (n2.immovable and n2.immovable.descr.type_name == "flag")) then
 		         local road = p1:place_road(field.immovable, "tl", "tl", true)
 			     end
          end
@@ -201,7 +201,7 @@ p1:forbid_buildings{"empire_farm", "empire_mill", "empire_brewery", "empire_trai
 		 if field.immovable and field.immovable.descr.type_name == "flag" then
 			 local n1 = field.brn
 			 local n2 = n1.brn
-			     if n1.immovable == nil and (n2:has_caps("flag") or (n2.immovable and n2.immovable.descr.type_name == "flag")) then
+			     if n1.immovable == nil and n1:has_caps("walkable") and (n2:has_caps("flag") or (n2.immovable and n2.immovable.descr.type_name == "flag")) then
 		         local road = p1:place_road(field.immovable, "br", "br", true)
 			     end
          end
@@ -211,7 +211,7 @@ p1:forbid_buildings{"empire_farm", "empire_mill", "empire_brewery", "empire_trai
 		 if field.immovable and field.immovable.descr.type_name == "flag" then
 			 local n1 = field.brn
 			 local n2 = n1.brn
-			     if n1.immovable == nil and (n2:has_caps("flag") or (n2.immovable and n2.immovable.descr.type_name == "flag")) then
+			     if n1.immovable == nil and n1:has_caps("walkable") and (n2:has_caps("flag") or (n2.immovable and n2.immovable.descr.type_name == "flag")) then
 		         local road = p1:place_road(field.immovable, "br", "br", true)
 			     end
          end
@@ -224,7 +224,7 @@ p1:forbid_buildings{"empire_farm", "empire_mill", "empire_brewery", "empire_trai
 		 if field.immovable and field.immovable.descr.type_name == "flag" then
 			 local n1 = field.rn
 			 local n2 = n1.rn
-			     if n1.immovable == nil and (n2:has_caps("flag") or (n2.immovable and n2.immovable.descr.type_name == "flag")) then
+			     if n1.immovable == nil and n1:has_caps("walkable") and (n2:has_caps("flag") or (n2.immovable and n2.immovable.descr.type_name == "flag")) then
 		         local road = p1:place_road(field.immovable, "r", "r", true)
 			     end
          end
@@ -234,7 +234,7 @@ p1:forbid_buildings{"empire_farm", "empire_mill", "empire_brewery", "empire_trai
 		 if field.immovable and field.immovable.descr.type_name == "flag" then
 			 local n1 = field.rn
 			 local n2 = n1.rn
-			     if n1.immovable == nil and (n2:has_caps("flag") or (n2.immovable and n2.immovable.descr.type_name == "flag")) then
+			     if n1.immovable == nil and n1:has_caps("walkable") and (n2:has_caps("flag") or (n2.immovable and n2.immovable.descr.type_name == "flag")) then
 		         local road = p1:place_road(field.immovable, "r", "r", true)
 			     end
          end
@@ -247,7 +247,7 @@ p1:forbid_buildings{"empire_farm", "empire_mill", "empire_brewery", "empire_trai
 		 if field.immovable and field.immovable.descr.type_name == "flag" then
 			 local n1 = field.rn
 			 local n2 = n1.trn
-			     if n1.immovable == nil and (n2:has_caps("flag") or (n2.immovable and n2.immovable.descr.type_name == "flag")) then
+			     if n1.immovable == nil and n1:has_caps("walkable") and (n2:has_caps("flag") or (n2.immovable and n2.immovable.descr.type_name == "flag")) then
 		         local road = p1:place_road(field.immovable, "r", "tr", true)
 			     end
          end
@@ -257,7 +257,7 @@ p1:forbid_buildings{"empire_farm", "empire_mill", "empire_brewery", "empire_trai
 		 if field.immovable and field.immovable.descr.type_name == "flag" then
 			 local n1 = field.rn
 			 local n2 = n1.trn
-			     if n1.immovable == nil and (n2:has_caps("flag") or (n2.immovable and n2.immovable.descr.type_name == "flag")) then
+			     if n1.immovable == nil and n1:has_caps("walkable") and (n2:has_caps("flag") or (n2.immovable and n2.immovable.descr.type_name == "flag")) then
 		         local road = p1:place_road(field.immovable, "r", "tr", true)
 			     end
          end
@@ -270,7 +270,7 @@ p1:forbid_buildings{"empire_farm", "empire_mill", "empire_brewery", "empire_trai
 		 if field.immovable and field.immovable.descr.type_name == "flag" then
 			 local n1 = field.trn
 			 local n2 = n1.tln
-			     if n1.immovable == nil and (n2:has_caps("flag") or (n2.immovable and n2.immovable.descr.type_name == "flag")) then
+			     if n1.immovable == nil and n1:has_caps("walkable") and (n2:has_caps("flag") or (n2.immovable and n2.immovable.descr.type_name == "flag")) then
 		         local road = p1:place_road(field.immovable, "tr", "tl", true)
 			     end
          end
@@ -280,7 +280,7 @@ p1:forbid_buildings{"empire_farm", "empire_mill", "empire_brewery", "empire_trai
 		 if field.immovable and field.immovable.descr.type_name == "flag" then
 			 local n1 = field.trn
 			 local n2 = n1.tln
-			     if n1.immovable == nil and (n2:has_caps("flag") or (n2.immovable and n2.immovable.descr.type_name == "flag")) then
+			     if n1.immovable == nil and n1:has_caps("walkable") and (n2:has_caps("flag") or (n2.immovable and n2.immovable.descr.type_name == "flag")) then
 		         local road = p1:place_road(field.immovable, "tr", "tl", true)
 			     end
          end
