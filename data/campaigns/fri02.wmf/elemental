@@ -1,4 +1,4 @@
-# Automatically created by Widelands bzr8437[frisians] (Debug)
+# Automatically created by Widelands bzr8439[frisians] (Release)
 
 [global]
 packet_version="1"
@@ -9,5 +9,5 @@ name="An Icy Welcome"
 author="Nordfriese"
 descr="Reebaud and his tribe have arrived in the North. But their arrival between the frozen steppes and the snow-covered mountains is less than welcome…"
 hint=
-tags="unbalanced"
 background="campaigns/fri02.wmf/pics/background.jpg"
+tags="unbalanced"

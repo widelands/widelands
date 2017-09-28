@@ -63,6 +63,15 @@ public:
 		dfDebug = 4,           ///< general debugging info
 	};
 
+	// Overlays displayed while a road is under construction.
+	struct RoadBuildingOverlays {
+		// The roads that are displayed while a road is being built. They are not
+		// yet logically in the game, but need to be displayed for the user as
+		// visual guide. The data type is the same as for Field::road.
+		std::map<Widelands::Coords, uint8_t> road_previews;
+		std::map<Widelands::Coords, const Image*> steepness_indicators;
+	};
+
 	// Manages all UniqueWindows.
 	UniqueWindowHandler& unique_windows();
 
@@ -162,8 +171,8 @@ public:
 	// Sets the landmark for the keyboard 'key' to 'point'
 	void set_landmark(size_t key, const MapView::View& view);
 
-	const std::map<Widelands::Coords, uint8_t>& road_building_preview() const {
-		return road_building_preview_;
+	const RoadBuildingOverlays& road_building_overlays() const {
+		return road_building_overlays_;
 	}
 
 	MapView* map_view() {
@@ -267,10 +276,7 @@ private:
 	// coordinate that the building that shows the work area is positioned.
 	std::map<Widelands::Coords, const WorkareaInfo*> work_area_previews_;
 
-	// The roads that are displayed while a road is being built. They are not
-	// yet logically in the game, but need to be displayed for the user as
-	// visual guide. The data type is the same as for Field::road.
-	std::map<Widelands::Coords, uint8_t> road_building_preview_;
+	RoadBuildingOverlays road_building_overlays_;
 
 	std::unique_ptr<Notifications::Subscriber<GraphicResolutionChanged>>
 	   graphic_resolution_changed_subscriber_;
@@ -281,7 +287,6 @@ private:
 	uint32_t frametime_;        //  in millseconds
 	uint32_t avg_usframetime_;  //  in microseconds!
 
-	FieldOverlayManager::OverlayId road_buildhelp_overlay_jobid_;
 	Widelands::CoordPath* buildroad_;  //  path for the new road
 	Widelands::PlayerNumber road_build_player_;
 

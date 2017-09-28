@@ -1,4 +1,4 @@
-# Automatically created by Widelands bzr8437[frisians] (Debug)
+# Automatically created by Widelands bzr8439[frisians] (Release)
 
 [global]
 packet_version="2"
@@ -16,7 +16,7 @@ ai=
 closeable="false"
 
 [player_3]
-name="Luw´Ci-Har"
+name="Kru-Gu´Lhar"
 tribe="barbarians"
 ai=
 closeable="false"
