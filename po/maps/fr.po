@@ -5,7 +5,7 @@
 # adrien vigneron <adrienvigneron@ml1.net>, 2015
 # Bouchard Renaud <renaud.bouchard@gmail.com>, 2014
 # GunChleoc, 2016-2017
-# Gwendal D <samuel.weber@normalesup.org>, 2017
+# Samuël Weber <samuel.weber@normalesup.org>, 2017
 # Jaypad <ju-ju@nataju.fr>, 2015-2016
 # Pierre Salagnac <pierre.salagnac@free.fr>, 2007
 # Renaud Bouchard, 2016
@@ -15,8 +15,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-05-26 17:01+0000\n"
-"PO-Revision-Date: 2017-05-30 16:41+0000\n"
+"POT-Creation-Date: 2017-09-15 18:56+0000\n"
+"PO-Revision-Date: 2017-09-21 23:33+0000\n"
 "Last-Translator: zecas <jjorge@free.fr>\n"
 "Language-Team: French (http://www.transifex.com/widelands/widelands/language/fr/)\n"
 "MIME-Version: 1.0\n"
