@@ -24,6 +24,29 @@ function count_in_warehouses(ware)
    return rv
 end
 
+-- function count_mining(ware)
+   -- local whs = array_combine(
+      -- p1:get_buildings("empire_headquarters"),
+      -- p1:get_buildings("empire_warehouse"),
+      -- p1:get_buildings("empire_port")
+   -- )
+      -- local prod = array_combine(
+	  -- p1:get_buildings("empire_smelting_works"),
+	  -- p1:get_buildings("empire_toolsmithy"),
+	  -- p1:get_buildings("empire_armorsmithy"),
+	  -- p1:get_buildings("empire_weaponsmithy")
+   -- )
+   -- local rv = 0
+   -- for idx,wh in ipairs(whs) do
+      -- rv = rv + wh:get_wares(ware)
+   -- end
+   -- for idx,pr in ipairs(prod) do
+      -- rv = rv + pr:get_inputs(ware)
+   -- end
+   -- return rv
+-- end
+
+
 function concentric_reveal(plr, center, max_radius, delay)
    if not delay then delay = 100 end
    local steps = 0

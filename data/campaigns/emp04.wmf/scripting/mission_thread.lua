@@ -3,9 +3,9 @@ include "map:scripting/helper_functions.lua"
 
 -- Some objectives need to be waited for in separate threads
 local obj_find_monastry_done = false
+local vesta_conquered = false
 
-
-
+--  dismantle the unproductive small buildings
 function dismantle()
    local o = add_campaign_objective(obj_dismantle_buildings)
    
@@ -19,6 +19,7 @@ function dismantle()
    run (quarries_lumberjacks)
 end
 
+-- we need to find the plans how to build a farm
 function farm_plans()
    local f = map:get_field(47, 190)
    while #p1:get_buildings("empire_farm1") > 1 do sleep(3249) end
@@ -39,6 +40,7 @@ function farm_plans()
    run (wheat_chain)
 end  
 
+-- the chaotic road network has to be cleared
 function clear_roads()
    local o = add_campaign_objective(obj_clear_roads)
    local cleared = false
@@ -74,6 +76,7 @@ function clear_roads()
    campaign_message_box(amalea_6)
 end
 
+-- the forresters have to be replaced too
 function no_trees()
    local trees = 100
    while trees > 8 do 
@@ -95,6 +98,7 @@ function no_trees()
    campaign_message_box(amalea_8)
 end
 
+-- after having some logs and planks we need to ensure a constant supply of building materials 
 function quarries_lumberjacks()
    local o = add_campaign_objective(obj_build_quarries_and_lumberjacks)
    while not check_for_buildings(p1, { empire_lumberjacks_house = 3, empire_quarry = 2}) do sleep(3000) end
@@ -104,13 +108,16 @@ function quarries_lumberjacks()
    run(no_trees)
 end
 
+-- now we can start to produce food for our miners
 function produce_food()
    local o = add_campaign_objective(obj_produce_fish)
    while p1:get_produced_wares_count("ration") < 14 do sleep(3000) end
    o.done = true
    run(steel)
+   run(charcoal)
 end
 
+-- after having started the metal production we need tools and later on we need soldiers
 function steel()
    campaign_message_box(amalea_13)
    local o = add_campaign_objective(obj_produce_tools)
@@ -131,9 +138,9 @@ function steel()
 	  ) > 9) do 
    sleep(2500) 
    end
-   
    o.done = true
    
+   -- enough tools produced now start to build weapons
    local o1 = add_campaign_objective(obj_recruit_soldiers)
    campaign_message_box(saledus_5)
    local number_soldiers = 0
@@ -188,6 +195,18 @@ function steel()
    run(training)
 end
 
+-- charcoal might be needed to support the metal production
+function charcoal()
+   while p1:get_wares("coal") < 15 do sleep(2342) end
+   while (p1:get_wares("coal")/p1:get_wares("iron_ore")) > 0.05 do sleep(2342) end
+   local o = add_campaign_objective(obj_charcoal)
+   campaign_message_box(amalea_14)
+   while #p1:get_buildings("empire_charcoal_kiln") < 2 do sleep(3249) end
+   o.done = true
+   campaign_message_box(amalea_15)
+end
+
+-- soldiers need to be trained until we have 3 heroes
 function training()
    local o = add_campaign_objective(obj_training)
    local strength = 0
@@ -239,9 +258,11 @@ function training()
       sleep(4273)
    end
    o.done = true
+   
+   -- after some training we have enough knowledge to build better training buildings
    p1:allow_buildings{"empire_trainingcamp", "empire_colosseum"}
    campaign_message_box(saledus_7)
-   
+   sleep(5000)
    
    while not obj_find_monastry_done do sleep(3000) end
    campaign_message_box(saledus_8)
@@ -271,6 +292,7 @@ function training()
 	  if amount > 2 then
 	     heroes = true
       end
+	  --if 
       sleep(4273)
    end
    o1.done = true
@@ -278,6 +300,7 @@ function training()
    run(conquer)
 end
 
+-- lets finish the babarians off
 function conquer()
    campaign_message_box(saledus_9)
    local o = add_campaign_objective(obj_conquer_all)
@@ -298,6 +321,7 @@ function conquer()
 
 end
 
+-- another production chain that is uneffective and need to be corrected
 function wheat_chain()
    while not (p1:get_produced_wares_count('beer') > 4  and p1:get_produced_wares_count('flour') > 4) do sleep(2434) end
    local o = add_campaign_objective(obj_find_monastry)
@@ -329,6 +353,7 @@ function wheat_chain()
    while not ((hq[1]:get_wares("wheat") > 34 and hq[1]:get_wares("wine") > 14) or p3.defeated) do sleep(4000) end
    if p3.defeated then
       o1.done = true
+	  vesta_conquered = true
 	  p1:allow_buildings{"empire_mill", "empire_brewery"}
       campaign_message_box(saledus_2)
 	  campaign_message_box(vesta_2)
@@ -359,6 +384,59 @@ function wheat_chain()
       campaign_message_box(saledus_3)
    end
    obj_find_monastry_done = true
+   run(karma)
+end
+
+-- our actions have an effect positively or negatively
+function karma()
+   if vesta_conquered then
+      for count = 0, 10 do 
+	     sleep(1200000)
+	     bld = {
+		 "empire_stonemasons_house",
+         "empire_sawmill",
+         "empire_mill",
+         "empire_bakery",
+         "empire_brewery",
+         "empire_vineyard",
+         "empire_winery",
+	     "empire_tavern",
+         "empire_inn",
+         "empire_charcoal_kiln",
+	     "empire_smelting_works",
+         "empire_toolsmithy",
+         "empire_armorsmithy",
+		 "empire_barracks",
+		 "empire_lumberjacks_house"
+         }
+	     local most = 1
+		 local selc = 0 
+         for idx,site in ipairs(bld) do
+            if #p1:get_buildings(site) > most then
+			   most = #p1:get_buildings(site)
+			   local build = p1:get_buildings(site)
+			   selc = build[1]
+			end	   
+         end
+		 if selc ~= 0 then
+		    local fields = selc.fields
+		    local prior_center = scroll_to_field(fields[1])
+		    selc:destroy()
+		    campaign_message_box(amalea_16)
+		    scroll_to_map_pixel(prior_center)
+	     end
+	  end
+   else
+      for count = 0, 10 do 
+	     sleep(1500000)
+		 local hq = p1:get_buildings("empire_headquarters")
+		 local beer = hq[1]:get_wares("beer") + 20
+	     local wine = hq[1]:get_wares("wine") + 10
+	     hq[1]:set_wares("beer", beer)
+	     hq[1]:set_wares("wine", wine)
+		 campaign_message_box(amalea_17)
+      end
+   end
 end
 
 function mission_thread()
@@ -381,10 +459,6 @@ function mission_thread()
    campaign_message_box(amalea_1)
    run(dismantle)
    run(farm_plans)
-   
-
-
-
 
 end
 

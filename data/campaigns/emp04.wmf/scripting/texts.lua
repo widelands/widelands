@@ -27,7 +27,7 @@ function amalea3(title, text)
    return speech("map:Amalea3.png", "AF7511", title, text)
 end
 function vesta(title, text)
-   return speech("map:Vesta.png", "757511", title, text)
+   return speech("map:Vesta.png", "577511", title, text)
 end
 
 
@@ -89,8 +89,8 @@ obj_replace_foresters = {
    name = "replace_foresters",
    title=_"Replace our old and uneffective foresters",
    number = 1,
-   body = objective_text(_"Replace our foresters by new ones",
-      listitem_bullet(_[[Our two forester's houses are old and weared out. We should replace them by new ones to increase productivity.]])
+   body = objective_text(_"Build 2 new foresters instead of the old and uneffective ones",
+      listitem_bullet(_[[Our two forester's houses are old and weared out. We should build 2 new ones to increase our productivity.]])
    ),
 }
 
@@ -144,14 +144,14 @@ obj_conquer_all = {
    ),
 }
 
--- obj_find_all_ports = {
-   -- name = "Explore additional islands and search for port spaces",
-   -- title=_"Explore further and build ports",
-   -- number = 1,
-   -- body = objective_text(_"Explore additional islands and search for port spaces",
-      -- listitem_bullet(_[[We should discover more land and build as many ports as we can.]])
-   -- ),
--- }
+obj_charcoal = {
+   name = "charcoal",
+   title=_"Build 2 charcoal kiln",
+   number = 1,
+   body = objective_text(_"Build 2 charcoal kiln",
+      listitem_bullet(_[[We should build 2 charcoal kiln to support our iron industry. Be sure to ensure a constant log supply though.]])
+   ),
+}
 
 -- obj_find_artifacts = {
    -- name = "Find the pieces of Neptune's shrine",
@@ -350,7 +350,7 @@ amalea_6 = {
       -- TRANSLATORS: Amalea
       _([[Now we can focus on rebuilding our economy.]])),
    posy=1,
-   h=600,
+   h=400,
 }
 
 amalea_7 = {
@@ -366,7 +366,7 @@ amalea_7 = {
       _([[And guess what, they are both old. Their houses and tools are weared and their seed is degenerated. For this reason they need much more time to plant a tree then usual.]])
       .. paragraphdivider() ..
 	  -- TRANSLATORS: Amalea
-      _([[The only solution is we need to replace them both with new foresters houses. Be sure to first build a new forester and then destroy the old one. Dismantling is not an option because they are so weared.]]))
+      _([[The only solution is we need to build 2 new foresters houses near our lumberjacks. Be sure to first build a new forester and then eventually destroy the old one or at least expel the forrester to change houses. Dismantling is not an option because they are so weared.]]))
 	  .. new_objectives(obj_replace_foresters),
    posy=1,
    h=500,
@@ -445,6 +445,45 @@ amalea_13 = {
    posy=1,
    h=500,
 }
+
+amalea_14 = {
+   title=_"Amalea advising",
+   body= saledus2(_"Amalea is providing economic advise",
+      -- TRANSLATORS: Saledus
+      _([[Lutius, it seems that our coal supply is a little bit weak. So we need to expand and explore all mineable areas for more coal.]])
+	  .. paragraphdivider() ..
+      -- TRANSLATORS: Saledus
+      _([[In the meantime it might help to build some charcoal kiln to produce some charcoal for buffering any mining shortfalls. But be careful to ensure a continous log supply.]]))
+      .. new_objectives(obj_charcoal),  
+   posy=1,
+   h=500,
+}
+
+amalea_15 = {
+   title=_"Amalea is in a good manner",
+   body= amalea2(_"Amalea is celebrating success...",
+      -- TRANSLATORS: Amalea
+      _([[Lutius. Another issue is solved. Now the charcoal will backup our metal industry and we can concentrate on our exploration and military strength.]])),
+   posy=1,
+}
+
+amalea_16 = {
+   title=_"Amalea thoughtful",
+   body= amalea2(_"Amalea is sad about the news...",
+      -- TRANSLATORS: Amalea
+      _([[Lutius. I have bad news to report. One of our buildings was just destroyed due to a fireplace got uncontrolled. I fear this might be the sign of the goddess vesta being still in a bad mood.]])),
+   posy=1,
+}
+
+amalea_17 = {
+   title=_"Amalea positively surprised",
+   body= amalea2(_"Amalea is celebrating a happy event...",
+      -- TRANSLATORS: Amalea
+      _([[Lutius. I don't know how but we have been gifted with some beer and wine. During our recent inventory taking we found the additional wares. Maybe the goddess vesta is still supporting us.]])),
+   posy=1,
+}
+
+
    
 -- Saledus
 
