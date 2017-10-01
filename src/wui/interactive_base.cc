@@ -43,9 +43,9 @@
 #include "logic/maphollowregion.h"
 #include "logic/maptriangleregion.h"
 #include "logic/player.h"
+#include "logic/widelands_geometry.h"
 #include "profile/profile.h"
 #include "scripting/lua_interface.h"
-#include "wui/field_overlay_manager.h"
 #include "wui/game_chat_menu.h"
 #include "wui/game_debug_ui.h"
 #include "wui/interactive_player.h"
@@ -54,6 +54,8 @@
 #include "wui/mapviewpixelfunctions.h"
 #include "wui/minimap.h"
 #include "wui/unique_window_handler.h"
+
+namespace {
 
 using Widelands::Area;
 using Widelands::CoordPath;
@@ -64,16 +66,39 @@ using Widelands::Map;
 using Widelands::MapObject;
 using Widelands::TCoords;
 
+int caps_to_buildhelp(const Widelands::NodeCaps caps) {
+	if (caps & Widelands::BUILDCAPS_MINE) {
+		return Widelands::Field::Buildhelp_Mine;
+	}
+	if ((caps & Widelands::BUILDCAPS_SIZEMASK) == Widelands::BUILDCAPS_BIG) {
+		if (caps & Widelands::BUILDCAPS_PORT) {
+			return Widelands::Field::Buildhelp_Port;
+		}
+		return Widelands::Field::Buildhelp_Big;
+	}
+	if ((caps & Widelands::BUILDCAPS_SIZEMASK) == Widelands::BUILDCAPS_MEDIUM) {
+		return Widelands::Field::Buildhelp_Medium;
+	}
+	if ((caps & Widelands::BUILDCAPS_SIZEMASK) == Widelands::BUILDCAPS_SMALL) {
+		return Widelands::Field::Buildhelp_Small;
+	}
+	if (caps & Widelands::BUILDCAPS_FLAG) {
+		return Widelands::Field::Buildhelp_Flag;
+	}
+	return Widelands::Field::Buildhelp_None;
+}
+
+}  // namespace
+
 InteractiveBase::InteractiveBase(EditorGameBase& the_egbase, Section& global_s)
    : UI::Panel(nullptr, 0, 0, g_gr->get_xres(), g_gr->get_yres()),
      show_workarea_preview_(global_s.get_bool("workareapreview", true)),
-     // TODO(sirver): MapView should no longer have knowledge of InteractiveBase.
-     map_view_(this, 0, 0, g_gr->get_xres(), g_gr->get_yres(), *this),
+     buildhelp_(false),
+     map_view_(this, the_egbase.map(), 0, 0, g_gr->get_xres(), g_gr->get_yres()),
      // Initialize chatoveraly before the toolbar so it is below
      chat_overlay_(new ChatOverlay(this, 10, 25, get_w() / 2, get_h() - 25)),
      toolbar_(this, 0, 0, UI::Box::Horizontal),
      quick_navigation_(&map_view_),
-     field_overlay_manager_(new FieldOverlayManager()),
      egbase_(the_egbase),
 #ifndef NDEBUG  //  not in releases
      display_flags_(dfDebug),
@@ -83,9 +108,6 @@ InteractiveBase::InteractiveBase(EditorGameBase& the_egbase, Section& global_s)
      lastframe_(SDL_GetTicks()),
      frametime_(0),
      avg_usframetime_(0),
-     draw_immovables_(true),
-     draw_bobs_(true),
-     road_buildhelp_overlay_jobid_(0),
      buildroad_(nullptr),
      road_build_player_(0),
      unique_window_handler_(new UniqueWindowHandler()),
@@ -97,11 +119,39 @@ InteractiveBase::InteractiveBase(EditorGameBase& the_egbase, Section& global_s)
                     g_gr->images().get("images/wui/overlays/workarea2.png"),
                     g_gr->images().get("images/wui/overlays/workarea1.png")} {
 
+	// Load the buildhelp icons.
+	{
+		BuildhelpOverlay* buildhelp_overlay = buildhelp_overlays_;
+		const char* filenames[] = {
+		   "images/wui/overlays/set_flag.png", "images/wui/overlays/small.png",
+		   "images/wui/overlays/medium.png",   "images/wui/overlays/big.png",
+		   "images/wui/overlays/mine.png",     "images/wui/overlays/port.png"};
+		const char* const* filename = filenames;
+
+		//  Special case for flag, which has a different formula for hotspot_y.
+		buildhelp_overlay->pic = g_gr->images().get(*filename);
+		buildhelp_overlay->hotspot =
+		   Vector2i(buildhelp_overlay->pic->width() / 2, buildhelp_overlay->pic->height() - 1);
+
+		const BuildhelpOverlay* const buildhelp_overlays_end =
+		   buildhelp_overlay + Widelands::Field::Buildhelp_None;
+		for (;;) {  // The other buildhelp overlays.
+			++buildhelp_overlay;
+			++filename;
+			if (buildhelp_overlay == buildhelp_overlays_end)
+				break;
+			buildhelp_overlay->pic = g_gr->images().get(*filename);
+			buildhelp_overlay->hotspot =
+			   Vector2i(buildhelp_overlay->pic->width() / 2, buildhelp_overlay->pic->height() / 2);
+		}
+	}
+
 	resize_chat_overlay();
 
 	graphic_resolution_changed_subscriber_ = Notifications::subscribe<GraphicResolutionChanged>(
 	   [this](const GraphicResolutionChanged& message) {
 		   set_size(message.width, message.height);
+		   map_view_.set_size(message.width, message.height);
 		   resize_chat_overlay();
 		   adjust_toolbar_position();
 		});
@@ -115,6 +165,14 @@ InteractiveBase::InteractiveBase(EditorGameBase& the_egbase, Section& global_s)
 
 	toolbar_.set_layout_toplevel(true);
 	map_view_.changeview.connect([this] { mainview_move(); });
+	map_view()->field_clicked.connect([this](const Widelands::NodeAndTriangle<>& node_and_triangle) {
+		set_sel_pos(node_and_triangle);
+	});
+	map_view_.track_selection.connect([this](const Widelands::NodeAndTriangle<>& node_and_triangle) {
+		if (!sel_.freeze) {
+			set_sel_pos(node_and_triangle);
+		}
+	});
 
 	set_border_snap_distance(global_s.get_int("border_snap_distance", 0));
 	set_panel_snap_distance(global_s.get_int("panel_snap_distance", 10));
@@ -139,49 +197,35 @@ InteractiveBase::~InteractiveBase() {
 	}
 }
 
+const InteractiveBase::BuildhelpOverlay*
+InteractiveBase::get_buildhelp_overlay(const Widelands::NodeCaps caps) const {
+	const int buildhelp_overlay_index = caps_to_buildhelp(caps);
+	if (buildhelp_overlay_index < Widelands::Field::Buildhelp_None) {
+		return &buildhelp_overlays_[buildhelp_overlay_index];
+	}
+	return nullptr;
+}
+
 UniqueWindowHandler& InteractiveBase::unique_windows() {
 	return *unique_window_handler_;
 }
 
 void InteractiveBase::set_sel_pos(Widelands::NodeAndTriangle<> const center) {
 	const Map& map = egbase().map();
-
-	// Remove old sel pointer
-	if (sel_.jobid)
-		field_overlay_manager_->remove_overlay(sel_.jobid);
-	const FieldOverlayManager::OverlayId jobid = sel_.jobid =
-	   field_overlay_manager_->next_overlay_id();
-
 	sel_.pos = center;
 
-	//  register sel overlay position
-	if (sel_.triangles) {
-		assert(center.triangle.t == TCoords<>::D || center.triangle.t == TCoords<>::R);
-		Widelands::MapTriangleRegion<> mr(map, Area<TCoords<>>(center.triangle, sel_.radius));
-		do
-			field_overlay_manager_->register_overlay(
-			   mr.location(), sel_.pic, OverlayLevel::kSelection, Vector2i::invalid(), jobid);
-		while (mr.advance(map));
-	} else {
-		Widelands::MapRegion<> mr(map, Area<>(center.node, sel_.radius));
-		do
-			field_overlay_manager_->register_overlay(
-			   mr.location(), sel_.pic, OverlayLevel::kSelection, Vector2i::invalid(), jobid);
-		while (mr.advance(map));
-		if (upcast(InteractiveGameBase const, igbase, this))
-			if (upcast(Widelands::ProductionSite, productionsite, map[center.node].get_immovable())) {
-				if (upcast(InteractivePlayer const, iplayer, igbase)) {
-					const Widelands::Player& player = iplayer->player();
-					if (!player.see_all() &&
-					    (1 >= player.vision(Widelands::Map::get_index(center.node, map.get_width())) ||
-					     player.is_hostile(*productionsite->get_owner())))
-						return set_tooltip("");
-				}
-				set_tooltip(
-				   productionsite->info_string(Widelands::Building::InfoStringFormat::kTooltip));
-				return;
+	if (upcast(InteractiveGameBase const, igbase, this))
+		if (upcast(Widelands::ProductionSite, productionsite, map[center.node].get_immovable())) {
+			if (upcast(InteractivePlayer const, iplayer, igbase)) {
+				const Widelands::Player& player = iplayer->player();
+				if (!player.see_all() &&
+				    (1 >= player.vision(Widelands::Map::get_index(center.node, map.get_width())) ||
+				     player.is_hostile(*productionsite->get_owner())))
+					return set_tooltip("");
 			}
-	}
+			set_tooltip(productionsite->info_string(Widelands::Building::InfoStringFormat::kTooltip));
+			return;
+		}
 	set_tooltip("");
 }
 
@@ -202,37 +246,34 @@ void InteractiveBase::set_sel_picture(const Image* image) {
 	sel_.pic = image;
 	set_sel_pos(get_sel_pos());  //  redraw
 }
+
+TextToDraw InteractiveBase::get_text_to_draw() const {
+	TextToDraw text_to_draw = TextToDraw::kNone;
+	auto display_flags = get_display_flags();
+	if (display_flags & InteractiveBase::dfShowCensus) {
+		text_to_draw = text_to_draw | TextToDraw::kCensus;
+	}
+	if (display_flags & InteractiveBase::dfShowStatistics) {
+		text_to_draw = text_to_draw | TextToDraw::kStatistics;
+	}
+	return text_to_draw;
+}
+
 void InteractiveBase::unset_sel_picture() {
 	set_sel_picture(g_gr->images().get("images/ui_basic/fsel.png"));
 }
 
 bool InteractiveBase::buildhelp() const {
-	return field_overlay_manager_->buildhelp();
+	return buildhelp_;
 }
 
 void InteractiveBase::show_buildhelp(bool t) {
-	field_overlay_manager_->show_buildhelp(t);
+	buildhelp_ = t;
 	on_buildhelp_changed(t);
 }
 
-bool InteractiveBase::draw_bobs() const {
-	return draw_bobs_;
-}
-
-void InteractiveBase::set_draw_bobs(const bool value) {
-	draw_bobs_ = value;
-}
-
-bool InteractiveBase::draw_immovables() const {
-	return draw_immovables_;
-}
-
-void InteractiveBase::set_draw_immovables(const bool value) {
-	draw_immovables_ = value;
-}
-
 void InteractiveBase::toggle_buildhelp() {
-	show_buildhelp(!field_overlay_manager_->buildhelp());
+	show_buildhelp(!buildhelp());
 }
 
 UI::Button* InteractiveBase::add_toolbar_button(const std::string& image_basename,
@@ -259,48 +300,53 @@ void InteractiveBase::on_buildhelp_changed(bool /* value */) {
 }
 
 // Show the given workareas at the given coords and returns the overlay job id associated
-FieldOverlayManager::OverlayId InteractiveBase::show_work_area(const WorkareaInfo& workarea_info,
-                                                               Widelands::Coords coords) {
-	const uint8_t workareas_nrs = workarea_info.size();
-	WorkareaInfo::size_type wa_index;
-	switch (workareas_nrs) {
-	case 0:
-		return 0;  // no workarea
-	case 1:
-		wa_index = 5;
-		break;
-	case 2:
-		wa_index = 3;
-		break;
-	case 3:
-		wa_index = 0;
-		break;
-	default:
-		throw wexception("Encountered unexpected WorkareaInfo size %i", workareas_nrs);
-	}
-	const Widelands::Map& map = egbase_.map();
-	FieldOverlayManager::OverlayId overlay_id = field_overlay_manager_->next_overlay_id();
-
-	Widelands::HollowArea<> hollow_area(Widelands::Area<>(coords, 0), 0);
-
-	// Iterate through the work areas, from building to its enhancement
-	WorkareaInfo::const_iterator it = workarea_info.begin();
-	for (; it != workarea_info.end(); ++it) {
-		hollow_area.radius = it->first;
-		Widelands::MapHollowRegion<> mr(map, hollow_area);
-		do
-			field_overlay_manager_->register_overlay(mr.location(), workarea_pics_[wa_index],
-			                                         OverlayLevel::kWorkAreaPreview,
-			                                         Vector2i::invalid(), overlay_id);
-		while (mr.advance(map));
-		wa_index++;
-		hollow_area.hole_radius = hollow_area.radius;
-	}
-	return overlay_id;
+void InteractiveBase::show_work_area(const WorkareaInfo& workarea_info, Widelands::Coords coords) {
+	work_area_previews_[coords] = &workarea_info;
 }
 
-void InteractiveBase::hide_work_area(FieldOverlayManager::OverlayId overlay_id) {
-	field_overlay_manager_->remove_overlay(overlay_id);
+std::map<Coords, const Image*>
+InteractiveBase::get_work_area_overlays(const Widelands::Map& map) const {
+	std::map<Coords, const Image*> result;
+	for (const auto& pair : work_area_previews_) {
+		const Coords& coords = pair.first;
+		const WorkareaInfo* workarea_info = pair.second;
+		WorkareaInfo::size_type wa_index;
+		switch (workarea_info->size()) {
+		case 0:
+			continue;  // no workarea
+		case 1:
+			wa_index = 5;
+			break;
+		case 2:
+			wa_index = 3;
+			break;
+		case 3:
+			wa_index = 0;
+			break;
+		default:
+			throw wexception(
+			   "Encountered unexpected WorkareaInfo size %i", static_cast<int>(workarea_info->size()));
+		}
+
+		Widelands::HollowArea<> hollow_area(Widelands::Area<>(coords, 0), 0);
+
+		// Iterate through the work areas, from building to its enhancement
+		WorkareaInfo::const_iterator it = workarea_info->begin();
+		for (; it != workarea_info->end(); ++it) {
+			hollow_area.radius = it->first;
+			Widelands::MapHollowRegion<> mr(map, hollow_area);
+			do {
+				result[mr.location()] = workarea_pics_[wa_index];
+			} while (mr.advance(map));
+			wa_index++;
+			hollow_area.hole_radius = hollow_area.radius;
+		}
+	}
+	return result;
+}
+
+void InteractiveBase::hide_work_area(const Widelands::Coords& coords) {
+	work_area_previews_.erase(coords);
 }
 
 /**
@@ -342,27 +388,6 @@ void InteractiveBase::think() {
 	egbase().think();  // Call game logic here. The game advances.
 
 	UI::Panel::think();
-}
-
-void InteractiveBase::draw(RenderTarget& dst) {
-	map_view_.draw(dst);
-}
-
-bool InteractiveBase::handle_mousepress(uint8_t btn, int32_t x, int32_t y) {
-	return map_view_.handle_mousepress(btn, x, y);
-}
-
-bool InteractiveBase::handle_mouserelease(uint8_t btn, int32_t x, int32_t y) {
-	return map_view_.handle_mouserelease(btn, x, y);
-}
-
-bool InteractiveBase::handle_mousemove(
-   uint8_t state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff) {
-	return map_view_.handle_mousemove(state, x, y, xdiff, ydiff);
-}
-
-bool InteractiveBase::handle_mousewheel(uint32_t which, int32_t x, int32_t y) {
-	return map_view_.handle_mousewheel(which, x, y);
 }
 
 /*
@@ -706,7 +731,8 @@ Add road building data to the road overlay
 */
 void InteractiveBase::roadb_add_overlay() {
 	assert(buildroad_);
-	assert(road_building_preview_.empty());
+	assert(road_building_overlays_.road_previews.empty());
+	assert(road_building_overlays_.steepness_indicators.empty());
 
 	const Map& map = egbase().map();
 
@@ -721,14 +747,12 @@ void InteractiveBase::roadb_add_overlay() {
 			dir = Widelands::get_reverse_dir(dir);
 		}
 		int32_t const shift = 2 * (dir - Widelands::WALK_E);
-		road_building_preview_[c] |= (Widelands::RoadType::kNormal << shift);
+		road_building_overlays_.road_previews[c] |= (Widelands::RoadType::kNormal << shift);
 	}
 
 	// build hints
 	Widelands::FCoords endpos = map.get_fcoords(buildroad_->get_end());
 
-	assert(!road_buildhelp_overlay_jobid_);
-	road_buildhelp_overlay_jobid_ = field_overlay_manager_->next_overlay_id();
 	for (int32_t dir = 1; dir <= 6; ++dir) {
 		Widelands::FCoords neighb;
 		int32_t caps;
@@ -769,10 +793,7 @@ void InteractiveBase::roadb_add_overlay() {
 			name = "images/wui/overlays/roadb_yellow.png";
 		else
 			name = "images/wui/overlays/roadb_red.png";
-
-		field_overlay_manager_->register_overlay(neighb, g_gr->images().get(name),
-		                                         OverlayLevel::kRoadBuildSlope, Vector2i::invalid(),
-		                                         road_buildhelp_overlay_jobid_);
+		road_building_overlays_.steepness_indicators[neighb] = g_gr->images().get(name);
 	}
 }
 
@@ -783,14 +804,8 @@ Remove road building data from road overlay
 */
 void InteractiveBase::roadb_remove_overlay() {
 	assert(buildroad_);
-
-	road_building_preview_.clear();
-
-	// build hints
-	if (road_buildhelp_overlay_jobid_) {
-		field_overlay_manager_->remove_overlay(road_buildhelp_overlay_jobid_);
-	}
-	road_buildhelp_overlay_jobid_ = 0;
+	road_building_overlays_.road_previews.clear();
+	road_building_overlays_.steepness_indicators.clear();
 }
 
 bool InteractiveBase::handle_key(bool const down, SDL_Keysym const code) {

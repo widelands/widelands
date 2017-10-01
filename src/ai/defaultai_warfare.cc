@@ -567,6 +567,9 @@ bool DefaultAI::check_trainingsites(uint32_t gametime) {
 	TrainingSite* ts = trainingsites.front().site;
 	TrainingSiteObserver& tso = trainingsites.front();
 
+	// Make sure we are not above ai type limit
+	assert(tso.bo->total_count() <= tso.bo->cnt_limit_by_aimode);
+
 	const DescriptionIndex enhancement = ts->descr().enhancement();
 
 	if (enhancement != INVALID_INDEX && ts_without_trainers_ == 0 && mines_.size() > 3 &&
@@ -778,6 +781,7 @@ bool DefaultAI::check_militarysites(uint32_t gametime) {
 	// Check next militarysite
 	bool changed = false;
 	MilitarySite* ms = militarysites.front().site;
+	MilitarySiteObserver& mso = militarysites.front();
 
 	// Don't do anything if last change took place lately
 	if (militarysites.front().last_change + 2 * 60 * 1000 > gametime) {
@@ -785,6 +789,9 @@ bool DefaultAI::check_militarysites(uint32_t gametime) {
 		militarysites.pop_front();
 		return false;
 	}
+
+	// Make sure we are not above ai type limit
+	assert(mso.bo->total_count() <= mso.bo->cnt_limit_by_aimode);
 
 	FCoords f = game().map().get_fcoords(ms->get_position());
 
@@ -876,16 +883,6 @@ bool DefaultAI::check_militarysites(uint32_t gametime) {
 	militarysites.push_back(militarysites.front());
 	militarysites.pop_front();
 	return changed;
-}
-
-uint32_t DefaultAI::barracks_count() {
-	uint32_t count = 0;
-	for (auto ps : productionsites) {
-		if (ps.bo->is(BuildingAttribute::kBarracks)) {
-			count += ps.bo->total_count();
-		}
-	}
-	return count;
 }
 
 // This calculates strength of vector of soldiers, f.e. soldiers in a building or

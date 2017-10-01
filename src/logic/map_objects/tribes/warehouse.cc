@@ -1268,10 +1268,6 @@ void Warehouse::enable_spawn(Game& game, uint8_t const worker_types_without_cost
 	next_worker_without_cost_spawn_[worker_types_without_cost_index] =
 	   schedule_act(game, WORKER_WITHOUT_COST_SPAWN_INTERVAL);
 }
-void Warehouse::disable_spawn(uint8_t const worker_types_without_cost_index) {
-	assert(next_worker_without_cost_spawn_[worker_types_without_cost_index] != never());
-	next_worker_without_cost_spawn_[worker_types_without_cost_index] = never();
-}
 
 void Warehouse::PlannedWorkers::cleanup() {
 	while (!requests.empty()) {

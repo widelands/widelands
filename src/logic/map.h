@@ -74,16 +74,6 @@ struct NoteFieldTerrainChanged {
 	MapIndex map_index;
 };
 
-/// Send when the resource of a field is changed.
-struct NoteFieldResourceChanged {
-	CAN_BE_SENT_AS_NOTE(NoteId::FieldResourceTypeChanged)
-
-	FCoords fc;
-	DescriptionIndex old_resource;
-	ResourceAmount old_initial_amount;
-	ResourceAmount old_amount;
-};
-
 struct ImmovableFound {
 	BaseImmovable* object;
 	Coords coords;
@@ -437,8 +427,8 @@ public:
 	 * To qualify as valid, resources need to be surrounded by at least two matching terrains.
 	 */
 	bool is_resource_valid(const Widelands::World& world,
-	                       const Widelands::TCoords<Widelands::FCoords>& c,
-	                       DescriptionIndex curres);
+	                       const Widelands::FCoords& c,
+	                       DescriptionIndex curres) const;
 
 	// The objectives that are defined in this map if it is a scenario.
 	const Objectives& objectives() const {

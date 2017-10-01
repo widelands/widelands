@@ -29,7 +29,8 @@ tribes:new_productionsite_type {
    aihints = {
       space_consumer = true,
       supports_production_of = { "log" },
-      prohibited_till = 240
+      very_weak_ai_limit = 2,
+      weak_ai_limit = 4
    },
 
    working_positions = {

@@ -33,7 +33,6 @@
 #include "ui_basic/editbox.h"
 #include "ui_basic/messagebox.h"
 #include "ui_basic/textarea.h"
-#include "wui/field_overlay_manager.h"
 
 #define UNDEFINED_TRIBE_NAME "<undefined>"
 
@@ -220,24 +219,15 @@ void EditorPlayerMenu::clicked_remove_last_player() {
 	Widelands::PlayerNumber const nr_players = old_nr_players - 1;
 	assert(1 <= nr_players);
 
-	if (!menu.is_player_tribe_referenced(old_nr_players)) {
-		if (const Widelands::Coords sp = map->get_starting_pos(old_nr_players)) {
-			//  Remove starting position marker.
-			const Image* player_image =
-			   playercolor_image(old_nr_players - 1, "images/players/player_position.png");
-			assert(player_image);
-			menu.mutable_field_overlay_manager()->remove_overlay(sp, player_image);
-		}
-		// if removed player was selected switch to the next highest player
-		if (old_nr_players == menu.tools()->set_starting_pos.get_current_player())
-			set_starting_pos_clicked(nr_players);
+	// if removed player was selected switch to the next highest player
+	if (old_nr_players == menu.tools()->set_starting_pos.get_current_player()) {
+		set_starting_pos_clicked(nr_players);
 	}
+
 	map->set_nrplayers(nr_players);
 	add_player_.set_enabled(nr_players < kMaxPlayers);
 	remove_last_player_.set_enabled(1 < nr_players);
 	update();
-	// TODO(SirVer): Take steps when the player is referenced someplace. Not
-	// TODO(SirVer): currently possible in the editor though.
 }
 
 /**
@@ -245,27 +235,18 @@ void EditorPlayerMenu::clicked_remove_last_player() {
  */
 void EditorPlayerMenu::player_tribe_clicked(uint8_t n) {
 	EditorInteractive& menu = eia();
-	if (!menu.is_player_tribe_referenced(n + 1)) {
-		if (!Widelands::tribe_exists(selected_tribes_[n])) {
-			throw wexception(
-			   "Map defines tribe %s, but it does not exist!", selected_tribes_[n].c_str());
-		}
-		uint32_t i;
-		for (i = 0; i < tribenames_.size(); ++i) {
-			if (tribenames_[i] == selected_tribes_[n]) {
-				break;
-			}
-		}
-		selected_tribes_[n] = i == tribenames_.size() - 1 ? tribenames_[0] : tribenames_[++i];
-		menu.egbase().mutable_map()->set_scenario_player_tribe(n + 1, selected_tribes_[n]);
-		menu.set_need_save(true);
-	} else {
-		UI::WLMessageBox mmb(&menu, _("Error!"),
-		                     _("Cannot remove player. It is referenced someplace. Remove all"
-		                       " buildings and animals that depend on this player and try again."),
-		                     UI::WLMessageBox::MBoxType::kOk);
-		mmb.run<UI::Panel::Returncodes>();
+	if (!Widelands::tribe_exists(selected_tribes_[n])) {
+		throw wexception("Map defines tribe %s, but it does not exist!", selected_tribes_[n].c_str());
 	}
+	uint32_t i;
+	for (i = 0; i < tribenames_.size(); ++i) {
+		if (tribenames_[i] == selected_tribes_[n]) {
+			break;
+		}
+	}
+	selected_tribes_[n] = i == tribenames_.size() - 1 ? tribenames_[0] : tribenames_[++i];
+	menu.egbase().mutable_map()->set_scenario_player_tribe(n + 1, selected_tribes_[n]);
+	menu.set_need_save(true);
 	update();
 }
 
@@ -286,12 +267,6 @@ void EditorPlayerMenu::set_starting_pos_clicked(uint8_t n) {
 
 	//  reselect tool, so everything is in a defined state
 	menu.select_tool(menu.tools()->current(), EditorTool::First);
-
-	//  Register callback function to make sure that only valid locations are
-	//  selected.
-	menu.mutable_field_overlay_manager()->register_overlay_callback_function(
-	   boost::bind(&editor_tool_set_starting_pos_callback, _1, boost::ref(*map)));
-	map->recalc_whole_map(menu.egbase().world());
 	update();
 }
 
