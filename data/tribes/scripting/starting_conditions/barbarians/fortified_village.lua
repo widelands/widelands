@@ -19,6 +19,7 @@ return {
          sf = shared_in_start
       else
          plr:allow_workers("all")
+         plr:forbid_buildings{"barbarians_market"}
       end
 
       local h = plr:place_building("barbarians_citadel", sf, false, true)

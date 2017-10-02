@@ -2,8 +2,8 @@
 # Copyright (C) 2005-2017 Widelands Development Team
 # 
 # Translators:
-# Erdoğan Yağız Şahin, 2017
-# Erdoğan Yağız Şahin, 2016
+# Erdoğan Şahin, 2017
+# Erdoğan Şahin, 2016
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
 # Volkan Gezer <volkangezer@gmail.com>, 2015
 # Yusuf boy <ysf.fb.1999@hotmail.com>, 2015
@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-03-05 10:46+0000\n"
-"PO-Revision-Date: 2017-03-05 10:48+0000\n"
+"POT-Creation-Date: 2017-09-15 18:56+0000\n"
+"PO-Revision-Date: 2017-09-21 23:35+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Turkish (http://www.transifex.com/widelands/widelands/language/tr/)\n"
 "MIME-Version: 1.0\n"

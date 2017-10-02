@@ -51,7 +51,7 @@ MapGenerator::MapGenerator(Map& map, const UniqueRandomMapInfo& mapInfo, EditorG
 }
 
 void MapGenerator::generate_bobs(std::unique_ptr<uint32_t[]> const* random_bobs,
-                                 Coords const fc,
+                                 const Coords& fc,
                                  RNG& rng,
                                  MapGenAreaInfo::MapGenTerrainType const terrType) {
 	//  Figure out which bob area is due here...
@@ -194,7 +194,7 @@ void MapGenerator::generate_resources(uint32_t const* const random1,
 /// (map specific info).
 ///
 /// \returns A map height value corresponding to elevation.
-uint8_t MapGenerator::make_node_elevation(double const elevation, Coords const c) {
+uint8_t MapGenerator::make_node_elevation(double const elevation, const Coords& c) {
 	int32_t const water_h = map_gen_info_->get_water_shallow_height();
 	int32_t const mount_h = map_gen_info_->get_mountain_foot_height();
 	int32_t const summit_h = map_gen_info_->get_summit_height();

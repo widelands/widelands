@@ -49,8 +49,6 @@ struct MultilineEditbox : public Panel {
 	const std::string& get_text() const;
 	void set_text(const std::string&);
 
-	void set_maximum_bytes(uint32_t n);
-
 	void focus(bool topcaller = true) override;
 
 protected:

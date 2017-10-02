@@ -878,7 +878,7 @@ void GameHost::split_command_array(const std::string& cmdarray,
 	std::string::size_type const space = cmdarray.find(' ');
 	if (space > cmdarray.size())
 		// only cmd
-		cmd = cmdarray.substr(0);
+		cmd = cmdarray;
 	else {
 		cmd = cmdarray.substr(0, space);
 		std::string::size_type const space2 = cmdarray.find(' ', space + 1);
@@ -1709,9 +1709,8 @@ void GameHost::check_hung_clients() {
 						std::string seconds =
 						   (boost::format(ngettext("%li second", "%li seconds", deltanow)) % deltanow)
 						      .str();
-						send_system_message_code("CLIENT_HUNG",
-						                         d->settings.users.at(d->clients.at(i).usernum).name,
-						                         seconds.c_str());
+						send_system_message_code(
+						   "CLIENT_HUNG", d->settings.users.at(d->clients.at(i).usernum).name, seconds);
 						d->clients.at(i).lastdelta = deltanow;
 					}
 				}
@@ -1797,7 +1796,7 @@ void GameHost::update_network_speed() {
 				speeds[1] = speeds[0] + 1000;
 		}
 
-		d->networkspeed = speeds.size() % 2 ?
+		d->networkspeed = (speeds.size() % 2) ?
 		                     speeds.at(speeds.size() / 2) :
 		                     (speeds.at(speeds.size() / 2) + speeds.at((speeds.size() / 2) - 1)) / 2;
 
