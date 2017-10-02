@@ -945,7 +945,7 @@ void MapPlayersViewPacket::write(FileSystem& fs, EditorGameBase& egbase, MapObje
 					if
 					   //  the player does not see the D triangle now but has
 					   //  seen it
-					   (!bl_seen & !br_seen & (f_everseen | bl_everseen | br_everseen)) {
+					   ((!bl_seen) & (!br_seen) & (f_everseen | bl_everseen | br_everseen)) {
 						terrains_file.unsigned_8(f_player_field.terrains.d);
 						MapObjectData mod;
 						mod.map_object_descr = nullptr;
@@ -955,7 +955,7 @@ void MapPlayersViewPacket::write(FileSystem& fs, EditorGameBase& egbase, MapObje
 					if
 					   //  the player does not see the R triangle now but has
 					   //  seen it
-					   (!br_seen & !r_seen & (f_everseen | br_everseen | r_everseen)) {
+					   ((!br_seen) & (!r_seen) & (f_everseen | br_everseen | r_everseen)) {
 						terrains_file.unsigned_8(f_player_field.terrains.r);
 						MapObjectData mod;
 						mod.map_object_descr = nullptr;
@@ -964,11 +964,11 @@ void MapPlayersViewPacket::write(FileSystem& fs, EditorGameBase& egbase, MapObje
 					}
 
 					//  edges
-					if (!bl_seen && (f_everseen || bl_everseen))
+					if ((!bl_seen) && (f_everseen || bl_everseen))
 						roads_file.unsigned_8(f_player_field.road_sw());
-					if (!br_seen && (f_everseen || br_everseen))
+					if ((!br_seen) && (f_everseen || br_everseen))
 						roads_file.unsigned_8(f_player_field.road_se());
-					if (!r_seen && (f_everseen || r_everseen))
+					if ((!r_seen) && (f_everseen || r_everseen))
 						roads_file.unsigned_8(f_player_field.road_e());
 				}
 

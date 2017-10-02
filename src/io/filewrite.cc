@@ -41,11 +41,6 @@ void FileWrite::write(FileSystem& fs, char const* const filename) {
 	clear();
 }
 
-void FileWrite::write_append(RealFSImpl& fs, char const* const filename) {
-	fs.write(filename, data_, length_, true);
-	clear();
-}
-
 FileWrite::Pos FileWrite::get_pos() const {
 	return filepos_;
 }

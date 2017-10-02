@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-08-24 07:44+0000\n"
-"PO-Revision-Date: 2017-08-24 07:45+0000\n"
+"POT-Creation-Date: 2017-09-15 18:56+0000\n"
+"PO-Revision-Date: 2017-09-15 18:59+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Greek (http://www.transifex.com/widelands/widelands/language/el/)\n"
 "MIME-Version: 1.0\n"
@@ -191,6 +191,12 @@ msgstr ""
 
 #: ../../src/wlapplication_messages.cc:133
 msgid ""
+" --animate_map_panning=[yes|no]\n"
+"                      Should automatic map movements be animated."
+msgstr ""
+
+#: ../../src/wlapplication_messages.cc:136
+msgid ""
 " --border_snap_distance=[0 ...]\n"
 "                      Move a window to the edge of the screen\n"
 "                      when the edge of the window comes within\n"
@@ -201,7 +207,7 @@ msgstr ""
 #. * TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the
 #. widelands
 #. textdomain
-#: ../../src/wlapplication_messages.cc:141
+#: ../../src/wlapplication_messages.cc:144
 msgid ""
 " --dock_windows_to_edges=[true|false]\n"
 "                      Eliminate a window's border towards the\n"
@@ -209,7 +215,7 @@ msgid ""
 "                      window is next to the edge of the screen."
 msgstr ""
 
-#: ../../src/wlapplication_messages.cc:146
+#: ../../src/wlapplication_messages.cc:149
 msgid ""
 " --panel_snap_distance=[0 ...]\n"
 "                      Move a window to the edge of the panel when\n"
@@ -217,7 +223,7 @@ msgid ""
 "                      distance from the edge of the panel."
 msgstr ""
 
-#: ../../src/wlapplication_messages.cc:151
+#: ../../src/wlapplication_messages.cc:154
 msgid ""
 " --snap_windows_only_when_overlapping=[yes|no]\n"
 "                      Only move a window to the edge of a panel\n"
@@ -225,15 +231,15 @@ msgid ""
 "                      panel."
 msgstr ""
 
-#: ../../src/wlapplication_messages.cc:157
+#: ../../src/wlapplication_messages.cc:160
 msgid " --verbose            Enable verbose debug messages"
 msgstr ""
 
-#: ../../src/wlapplication_messages.cc:158
+#: ../../src/wlapplication_messages.cc:161
 msgid " --help               Show this help"
 msgstr ""
 
-#: ../../src/wlapplication_messages.cc:159
+#: ../../src/wlapplication_messages.cc:162
 msgid ""
 "Bug reports? Suggestions? Check out the project website:\n"
 "        https://launchpad.net/widelands\n"

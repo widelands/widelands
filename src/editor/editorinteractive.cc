@@ -43,6 +43,7 @@
 #include "logic/map_objects/tribes/tribes.h"
 #include "logic/map_objects/world/resource_description.h"
 #include "logic/map_objects/world/world.h"
+#include "logic/maptriangleregion.h"
 #include "logic/player.h"
 #include "map_io/map_loader.h"
 #include "map_io/widelands_map_loader.h"
@@ -50,7 +51,6 @@
 #include "scripting/lua_table.h"
 #include "ui_basic/messagebox.h"
 #include "ui_basic/progresswindow.h"
-#include "wui/field_overlay_manager.h"
 #include "wui/game_tips.h"
 #include "wui/interactive_base.h"
 
@@ -189,9 +189,6 @@ void EditorInteractive::cleanup_for_load() {
 	// TODO(unknown): get rid of cleanup_for_load, it tends to be very messy
 	// Instead, delete and re-create the egbase.
 	egbase().cleanup_for_load();
-
-	// Select a tool that doesn't care about map changes
-	mutable_field_overlay_manager()->register_overlay_callback_function(nullptr);
 }
 
 /// Called just before the editor starts, after postload, init and gfxload.
@@ -274,6 +271,22 @@ void EditorInteractive::draw(RenderTarget& dst) {
 		starting_positions[map.get_starting_pos(i)] = i;
 	}
 
+	// Figure out which fields are currently under the selection.
+	std::set<Widelands::Coords> selected_nodes;
+	std::set<Widelands::TCoords<>> selected_triangles;
+	if (!get_sel_triangles()) {
+		Widelands::MapRegion<> mr(map, Widelands::Area<>(get_sel_pos().node, get_sel_radius()));
+		do {
+			selected_nodes.emplace(mr.location());
+		} while (mr.advance(map));
+	} else {
+		Widelands::MapTriangleRegion<> mr(
+		   map, Widelands::Area<Widelands::TCoords<>>(get_sel_pos().triangle, get_sel_radius()));
+		do {
+			selected_triangles.emplace(mr.location());
+		} while (mr.advance(map));
+	}
+
 	const auto& world = ebase.world();
 	for (size_t idx = 0; idx < fields_to_draw->size(); ++idx) {
 		const FieldsToDraw::Field& field = fields_to_draw->at(idx);
@@ -291,11 +304,16 @@ void EditorInteractive::draw(RenderTarget& dst) {
 			}
 		}
 
-		const auto blit_overlay = [&dst, &field, scale](const Image* pic, const Vector2i& hotspot) {
-			dst.blitrect_scale(Rectf(field.rendertarget_pixel - hotspot.cast<float>() * scale,
-			                         pic->width() * scale, pic->height() * scale),
+		const auto blit = [&dst, &field, scale](
+		   const Image* pic, const Vector2f& position, const Vector2i& hotspot) {
+			dst.blitrect_scale(Rectf(position - hotspot.cast<float>() * scale, pic->width() * scale,
+			                         pic->height() * scale),
 			                   pic, Recti(0, 0, pic->width(), pic->height()), 1.f,
 			                   BlendMode::UseAlpha);
+		};
+		const auto blit_overlay = [&dst, &field, scale, &blit](
+		   const Image* pic, const Vector2i& hotspot) {
+			blit(pic, field.rendertarget_pixel, hotspot);
 		};
 
 		// Draw resource overlay.
@@ -309,9 +327,14 @@ void EditorInteractive::draw(RenderTarget& dst) {
 			}
 		}
 
-		// TODO(sirver): Do not use the field_overlay_manager, instead draw the
-		// overlays we are interested in here directly.
-		field_overlay_manager().foreach_overlay(field.fcoords, blit_overlay);
+		// Draw build help.
+		if (buildhelp()) {
+			const auto* overlay =
+			   get_buildhelp_overlay(tools_->current().nodecaps_for_buildhelp(field.fcoords, ebase));
+			if (overlay != nullptr) {
+				blit_overlay(overlay->pic, overlay->hotspot);
+			}
+		}
 
 		// Draw the player starting position overlays.
 		const auto it = starting_positions.find(field.fcoords);
@@ -321,6 +344,39 @@ void EditorInteractive::draw(RenderTarget& dst) {
 			assert(player_image != nullptr);
 			constexpr int kStartingPosHotspotY = 55;
 			blit_overlay(player_image, Vector2i(player_image->width() / 2, kStartingPosHotspotY));
+		}
+
+		// Draw selection markers on the field.
+		if (selected_nodes.count(field.fcoords) > 0) {
+			const Image* pic = get_sel_picture();
+			blit_overlay(pic, Vector2i(pic->width() / 2, pic->height() / 2));
+		}
+
+		// Draw selection markers on the triangles.
+		if (field.all_neighbors_valid()) {
+			const FieldsToDraw::Field& rn = fields_to_draw->at(field.rn_index);
+			const FieldsToDraw::Field& brn = fields_to_draw->at(field.brn_index);
+			const FieldsToDraw::Field& bln = fields_to_draw->at(field.bln_index);
+			if (selected_triangles.count(
+			       Widelands::TCoords<>(field.fcoords, Widelands::TriangleIndex::R))) {
+				const Vector2f tripos(
+				   (field.rendertarget_pixel.x + rn.rendertarget_pixel.x + brn.rendertarget_pixel.x) /
+				      3.f,
+				   (field.rendertarget_pixel.y + rn.rendertarget_pixel.y + brn.rendertarget_pixel.y) /
+				      3.f);
+				const Image* pic = get_sel_picture();
+				blit(pic, tripos, Vector2i(pic->width() / 2, pic->height() / 2));
+			}
+			if (selected_triangles.count(
+			       Widelands::TCoords<>(field.fcoords, Widelands::TriangleIndex::D))) {
+				const Vector2f tripos(
+				   (field.rendertarget_pixel.x + bln.rendertarget_pixel.x + brn.rendertarget_pixel.x) /
+				      3.f,
+				   (field.rendertarget_pixel.y + bln.rendertarget_pixel.y + brn.rendertarget_pixel.y) /
+				      3.f);
+				const Image* pic = get_sel_picture();
+				blit(pic, tripos, Vector2i(pic->width() / 2, pic->height() / 2));
+			}
 		}
 	}
 }
@@ -534,9 +590,6 @@ void EditorInteractive::select_tool(EditorTool& primary, EditorTool::ToolIndex c
 				toolsize_menu.update(toolsize_menu.value());
 			}
 		}
-		//  A new tool has been selected. Remove all registered overlay callback
-		//  functions.
-		mutable_field_overlay_manager()->register_overlay_callback_function(nullptr);
 		egbase().mutable_map()->recalc_whole_map(egbase().world());
 	}
 	tools_->current_pointer = &primary;
@@ -625,8 +678,6 @@ void EditorInteractive::map_changed(const MapWas& action) {
 	case MapWas::kGloballyMutated:
 		break;
 	}
-
-	mutable_field_overlay_manager()->remove_all_overlays();
 }
 
 EditorInteractive::Tools* EditorInteractive::tools() {

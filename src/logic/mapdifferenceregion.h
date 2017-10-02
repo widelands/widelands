@@ -29,13 +29,6 @@ namespace Widelands {
 /// constructor takes a Direction parameter, which is the walking direction
 /// when going from a to b.
 ///
-/// It first iterates over the set of nodes that are in A but not in B. When
-/// that iteration is completed (advance has returned false),
-/// move_to_other_side can be called to prepare the region for iterating over
-/// the set of nodes in B but not in A. (Because of symmetry, it is after that
-/// iteration again possible to call move_to_other_side to iterate over the
-/// nodes that are in A but not in B again, and so on.)
-///
 /// \note The order in which nodes are returned is not guarantueed.
 template <typename AreaType = Area<>> struct MapDifferenceRegion {
 	MapDifferenceRegion(const Map& map, AreaType area, Direction direction)
@@ -85,8 +78,6 @@ template <typename AreaType = Area<>> struct MapDifferenceRegion {
 	 * the iteration is done.
 	 */
 	bool advance(const Map& map);
-
-	void move_to_other_side(const Map& map);
 
 	typename AreaType::RadiusType radius() const {
 		return area_.radius;

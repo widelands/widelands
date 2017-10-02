@@ -29,7 +29,6 @@
 #include "logic/editor_game_base.h"
 #include "logic/map_objects/world/world.h"
 #include "logic/player.h"
-#include "wui/field_overlay_manager.h"
 #include "wui/interactive_base.h"
 #include "wui/mapviewpixelconstants.h"
 #include "wui/mapviewpixelfunctions.h"

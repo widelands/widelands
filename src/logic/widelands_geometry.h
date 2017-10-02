@@ -126,6 +126,9 @@ template <typename CoordsType = Coords> struct TCoords {
 	bool operator!=(const TCoords& other) const {
 		return !(*this == other);
 	}
+	bool operator<(const TCoords& other) const {
+		return std::forward_as_tuple(node, t) < std::forward_as_tuple(other.node, other.t);
+	}
 
 	CoordsType node;
 	TriangleIndex t;

@@ -553,7 +553,7 @@ Section* Profile::get_section(const std::string& name) {
  * If the section doesn't exist, an exception is thrown.
  */
 Section& Profile::get_safe_section(const std::string& name) {
-	if (Section* const s = get_section(name.c_str()))
+	if (Section* const s = get_section(name))
 		return *s;
 	else
 		throw wexception("in \"%s\" section [%s] not found", filename_.c_str(), name.c_str());

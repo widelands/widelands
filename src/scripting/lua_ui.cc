@@ -555,7 +555,7 @@ int LuaMapView::get_is_building_road(lua_State* L) {
 /* RST
    .. attribute:: is_animating
 
-		(RO) True if this MapView is currently paning or zooming.
+		(RO) True if this MapView is currently panning or zooming.
 */
 int LuaMapView::get_is_animating(lua_State* L) {
 	lua_pushboolean(L, get()->map_view()->is_animating());

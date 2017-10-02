@@ -38,6 +38,7 @@
 #include "logic/map_objects/tribes/tribe_descr.h"
 #include "logic/map_objects/tribes/ware_descr.h"
 #include "logic/map_objects/tribes/warehouse.h"
+#include "logic/map_objects/tribes/market.h"
 #include "logic/map_objects/tribes/worker_descr.h"
 #include "scripting/lua_table.h"
 
@@ -81,6 +82,9 @@ public:
 
 	/// Adds this building type to the tribe description.
 	void add_warehouse_type(const LuaTable& table, const EditorGameBase& egbase);
+
+	/// Adds this building type to the tribe description.
+	void add_market_type(const LuaTable& table, const EditorGameBase& egbase);
 
 	/// Adds this immovable type to the tribe description.
 	void add_immovable_type(const LuaTable& table);
