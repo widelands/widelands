@@ -1847,8 +1847,8 @@ void CmdProposeTrade::execute(Game& game) {
 CmdProposeTrade::CmdProposeTrade(StreamRead& des) : PlayerCommand(0, des.unsigned_8()) {
 	trade_.initiator = des.unsigned_32();
 	trade_.receiver = des.unsigned_32();
-	trade_.send_items = deserialize_bill_of_materials(&des);
-	trade_.received_items = deserialize_bill_of_materials(&des);
+	trade_.items_to_send = deserialize_bill_of_materials(&des);
+	trade_.items_to_receive = deserialize_bill_of_materials(&des);
 	trade_.num_batches = des.signed_32();
 }
 
@@ -1857,8 +1857,8 @@ void CmdProposeTrade::serialize(StreamWrite& ser) {
 	ser.unsigned_8(sender());
 	ser.unsigned_32(trade_.initiator);
 	ser.unsigned_32(trade_.receiver);
-	serialize_bill_of_materials(trade_.send_items, &ser);
-	serialize_bill_of_materials(trade_.received_items, &ser);
+	serialize_bill_of_materials(trade_.items_to_send, &ser);
+	serialize_bill_of_materials(trade_.items_to_receive, &ser);
 	ser.signed_32(trade_.num_batches);
 }
 

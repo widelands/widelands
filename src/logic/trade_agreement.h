@@ -26,12 +26,12 @@ namespace Widelands {
 
 // TODO(sirver,trading): Document everything in here.
 
-// Maximal number of a single ware that can be contained in a trade batch.
+// Maximum number of a single ware that can be contained in a trade batch.
 constexpr int kMaxPerItemTradeBatchSize = 15;
 
 struct Trade {
-	BillOfMaterials send_items;
-	BillOfMaterials received_items;
+	BillOfMaterials items_to_send;
+	BillOfMaterials items_to_receive;
 	int num_batches;
 	Serial initiator;
 	Serial receiver;

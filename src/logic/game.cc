@@ -780,9 +780,9 @@ int Game::propose_trade(const Trade& trade) {
 	initiator->removed.connect(
 	   [this, id](const uint32_t /* serial */) { cancel_trade(id); });
 
-	receiver->send_message(*this, Message::Type::kTradeOfferReceived, receiver->descr().descname(),
+	receiver->send_message(*this, Message::Type::kTradeOfferReceived, _("Trade Offer"),
 	                       receiver->descr().icon_filename(), receiver->descr().descname(),
-	                       _("This Market received a new trade offer."), true);
+	                       _("This market has received a new trade offer."), true);
 	trade_agreements_[id] = TradeAgreement{TradeAgreement::State::kProposed, trade};
 
 	// TODO(sirver,trading): this should be done through another player_command, but I
@@ -805,8 +805,8 @@ void Game::accept_trade(const int trade_id) {
 		return;
 	}
 
-	initiator->new_trade(trade_id, trade.send_items, trade.num_batches, trade.receiver);
-	receiver->new_trade(trade_id, trade.received_items, trade.num_batches, trade.initiator);
+	initiator->new_trade(trade_id, trade.items_to_send, trade.num_batches, trade.receiver);
+	receiver->new_trade(trade_id, trade.items_to_receive, trade.num_batches, trade.initiator);
 
 	// TODO(sirver,trading): Message the users that the trade has been accepted.
 }

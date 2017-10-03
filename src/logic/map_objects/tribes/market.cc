@@ -35,7 +35,7 @@ MarketDescr::MarketDescr(const std::string& init_descname,
 
 	DescriptionIndex const woi = egbase.tribes().worker_index(table.get_string("carrier"));
 	if (!egbase.tribes().worker_exists(woi)) {
-		throw wexception("invalid");
+		throw wexception("The tribe does not define the worker in 'carrier'.");
 	}
 	carrier_ = woi;
 

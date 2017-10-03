@@ -1595,7 +1595,7 @@ void Worker::update_task_buildingwork(Game& game) {
 		send_signal(game, "update");
 }
 
-// The task when a worker is part of the caravane that is trading items.
+// The task when a worker is part of the caravan that is trading items.
 const Bob::Task Worker::taskCarryTradeItem = {
    "carry_trade_item", static_cast<Bob::Ptr>(&Worker::carry_trade_item_update), nullptr, nullptr, true};
 

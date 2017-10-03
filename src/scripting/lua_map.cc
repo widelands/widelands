@@ -609,18 +609,14 @@ void parse_wares_workers(lua_State* L,
 			if (tribe.ware_index(luaL_checkstring(L, -2)) == INVALID_INDEX) {
 				report_error(L, "Illegal ware %s", luaL_checkstring(L, -2));
 			}
-		} else {
-			if (tribe.worker_index(luaL_checkstring(L, -2)) == INVALID_INDEX) {
-				report_error(L, "Illegal worker %s", luaL_checkstring(L, -2));
-			}
-		}
-
-		if (is_ware) {
 			ware_workers_list->insert(
 			   std::make_pair(std::make_pair(tribe.ware_index(luaL_checkstring(L, -2)),
 			                                 Widelands::WareWorker::wwWARE),
 			                  luaL_checkuint32(L, -1)));
 		} else {
+			if (tribe.worker_index(luaL_checkstring(L, -2)) == INVALID_INDEX) {
+				report_error(L, "Illegal worker %s", luaL_checkstring(L, -2));
+			}
 			ware_workers_list->insert(
 			   std::make_pair(std::make_pair(tribe.worker_index(luaL_checkstring(L, -2)),
 			                                 Widelands::WareWorker::wwWORKER),
@@ -5131,7 +5127,7 @@ const PropertyType<LuaMarket> LuaMarket::Properties[] = {
  */
 
 /* RST
-   .. method:: propose_trade(other_market, num_batches, send_items, received_items)
+   .. method:: propose_trade(other_market, num_batches, items_to_send, items_to_receive)
 
       TODO(sirver,trading): document
 
@@ -5146,12 +5142,12 @@ int LuaMarket::propose_trade(lua_State* L) {
 	Market* other_market = (*get_user_class<LuaMarket>(L, 2))->get(L, game);
 	const int num_batches = luaL_checkinteger(L, 3);
 
-	const BillOfMaterials send_items = parse_wares_as_bill_of_material(L, 4, self->owner().tribe());
+	const BillOfMaterials items_to_send = parse_wares_as_bill_of_material(L, 4, self->owner().tribe());
 	// TODO(sirver,trading): unsure if correct. Test inter-tribe trading, i.e.
 	// barbarians trading with empire, but shipping atlantean only wares.
-	const BillOfMaterials received_items = parse_wares_as_bill_of_material(L, 5, self->owner().tribe());
+	const BillOfMaterials items_to_receive = parse_wares_as_bill_of_material(L, 5, self->owner().tribe());
 	const int trade_id = game.propose_trade(
-	   Trade{send_items, received_items, num_batches, self->serial(), other_market->serial()});
+	   Trade{items_to_send, items_to_receive, num_batches, self->serial(), other_market->serial()});
 
 	// TODO(sirver,trading): Wrap 'Trade' into its own Lua class?
 	lua_pushint32(L, trade_id);
