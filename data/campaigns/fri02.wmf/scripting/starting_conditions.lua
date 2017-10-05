@@ -46,6 +46,7 @@ hq:set_workers {
    frisians_brewer = 1,
    frisians_trainer = 2,
    frisians_stonemason = 4,
+   frisians_reindeer = 1,
    frisians_charcoal_burner = 3
 }
 hq:set_soldiers({0,0,0,0}, 20)

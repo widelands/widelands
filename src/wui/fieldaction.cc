@@ -41,7 +41,6 @@
 #include "wui/actionconfirm.h"
 #include "wui/attack_box.h"
 #include "wui/economy_options_window.h"
-#include "wui/field_overlay_manager.h"
 #include "wui/game_debug_ui.h"
 #include "wui/interactive_player.h"
 #include "wui/waresdisplay.h"

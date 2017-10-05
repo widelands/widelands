@@ -66,8 +66,6 @@ public:
 
 	// Wares may be hidden
 	void hide_ware(Widelands::DescriptionIndex);
-	void unhide_ware(Widelands::DescriptionIndex);
-	bool ware_hidden(Widelands::DescriptionIndex);
 
 	Widelands::DescriptionIndex ware_at_point(int32_t x, int32_t y) const;
 	Widelands::WareWorker get_type() const {

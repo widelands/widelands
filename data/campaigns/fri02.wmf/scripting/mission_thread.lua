@@ -68,9 +68,13 @@ function expand_south ()
    local placed = false
    local radius = 1
    while not placed do
-      place_building_in_region(p1, "empire_warehouse", see_empire:region(radius, radius - 1))
       radius = radius + 1
-      if #(p1:get_buildings ("empire_warehouse")) > 0 then placed = true end
+      for idx,f in ipairs (see_empire:region (radius, radius - 1)) do
+         if f.owner == p1 and f:has_caps ("medium") and not placed then
+            p1:place_building ("empire_warehouse", f)
+            placed = true
+         end
+      end
    end
    local wh = p1:get_buildings ("empire_warehouse") [1]
    wh:set_warehouse_policies ("log", "prefer")
@@ -86,7 +90,7 @@ function expand_south ()
    wh:set_warehouse_policies ("iron_ore", "prefer")
    wh:set_warehouse_policies ("gold_ore", "prefer")
    scroll_to_field (wh.fields [1])
-   sleep (600)
+   sleep (2000)
    campaign_message_box (supply_murilius_6)
    campaign_message_box (supply_murilius_7)
    campaign_message_box (supply_murilius_8)
@@ -101,18 +105,18 @@ function expand_south ()
       elseif get_land (p1) > land then 
          choice = "military"
       else
-         if wh.get_wares ("log") >= 30 and
-            wh.get_wares ("granite") >= 40 and
-            wh.get_wares ("water") >= 150 and
-            wh.get_wares ("fish") >= 30 and
-            wh.get_wares ("ration") >= 40 and
-            wh.get_wares ("meal") >= 10 and
-            wh.get_wares ("coal") >= 30 and
-            wh.get_wares ("iron") >= 20 and
-            wh.get_wares ("gold") >= 10 and
-            wh.get_wares ("iron_ore") >= 40 and
-            wh.get_wares ("gold_ore") >= 20 and
-            wh.get_wares ("beer") >= 30 
+         if wh:get_wares ("log") >= 30 and
+            wh:get_wares ("granite") >= 40 and
+            wh:get_wares ("water") >= 150 and
+            wh:get_wares ("fish") >= 30 and
+            wh:get_wares ("ration") >= 40 and
+            wh:get_wares ("meal") >= 10 and
+            wh:get_wares ("coal") >= 30 and
+            wh:get_wares ("iron") >= 20 and
+            wh:get_wares ("gold") >= 10 and
+            wh:get_wares ("iron_ore") >= 40 and
+            wh:get_wares ("gold_ore") >= 20 and
+            wh:get_wares ("beer") >= 30 
          then
             choice = "yes"
          end
@@ -227,24 +231,22 @@ end
 
 function mission_thread()
    
-   --Introduction
-   scroll_to_field (map.player_slots[1].starting_field)
+   scroll_to_field (map.player_slots [1].starting_field)
    campaign_message_box (intro_1)
    include "map:scripting/starting_conditions.lua"
-   sleep (3000)
+   sleep (2000)
    
    p1.team = 1
    p2.team = 1
    p3.team = 0
    
--- TODO
--- ·tell p2 not to attack a building of p3 if its internal name begins with "barbarians_"
--- ·p1 and p2 may not share a vision while allies
+-- TODO list
+-- · tell p2 not to attack a building of p3 if its internal name begins with "barbarians_"
+-- · p1 and p2 may not share a vision while allies
    
-   --Objective: Basic material economy
    campaign_message_box (intro_2)
    local o = add_campaign_objective (obj_new_home)
-   while not check_for_buildings (p1, {frisians_woodcutters_house = 1, frisians_foresters_house = 1, frisians_well = 1, frisians_reed_farm = 1, frisians_quarry = 1, frisians_brick_burners_house = 1, frisians_claypit = 1}) do sleep (4273) end
+   while not check_for_buildings (p1, {frisians_woodcutters_house = 1, frisians_foresters_house = 1, frisians_well = 1, frisians_reed_farm = 1, frisians_quarry = 1, frisians_brick_burners_house = 1, frisians_claypit = 1, frisians_charcoal_kiln = 1}) do sleep (4273) end
    set_objective_done (o)
    
    run (expand_south)
