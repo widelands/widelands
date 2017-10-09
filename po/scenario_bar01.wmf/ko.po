@@ -1,14 +1,14 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2016 Widelands Development Team
+# Copyright (C) 2005-2017 Widelands Development Team
 # 
 # Translators:
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-12-10 10:58+0000\n"
-"PO-Revision-Date: 2016-12-10 10:59+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2017-09-29 15:54+0000\n"
+"PO-Revision-Date: 2017-10-05 06:08+0000\n"
+"Last-Translator: ks k\n"
 "Language-Team: Korean (http://www.transifex.com/widelands/widelands/language/ko/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -73,43 +73,43 @@ msgstr ""
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:48
 msgid "a bit of coal"
-msgstr ""
+msgstr "소량의 석탄"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:49
 msgid "a lot of coal"
-msgstr ""
+msgstr "대량의 석탄"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:50
 msgid "a bit of iron"
-msgstr ""
+msgstr "소량의 철광"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:51
 msgid "a lot of iron"
-msgstr ""
+msgstr "대량의 철광"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:52
 msgid "a bit of gold"
-msgstr ""
+msgstr "소량의 금"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:53
 msgid "a lot of gold"
-msgstr ""
+msgstr "대량의 금"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:54
 msgid "a bit of granite"
-msgstr ""
+msgstr "소량의 화강암"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:55
 msgid "a lot of granite"
-msgstr ""
+msgstr "대량의 화강암"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:56
 msgid "water"
-msgstr ""
+msgstr "물"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:57
 msgid "nothing was found here"
-msgstr ""
+msgstr "여기는 아무것도 발견되지 않았음"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:59
 msgid ""
@@ -1029,9 +1029,9 @@ msgstr ""
 #: ../../data/scripting/format_scenario.lua:36
 #, lua-format
 msgid "“%s”"
-msgstr ""
+msgstr "“%s”"
 
-#: ../../data/scripting/format_scenario.lua:96
+#: ../../data/scripting/format_scenario.lua:84
 msgid "New Objective"
 msgid_plural "New Objectives"
-msgstr[0] ""
+msgstr[0] "새로운 목적"

@@ -36,12 +36,13 @@ struct EmptyAI : ComputerPlayer {
 	}
 
 	struct EmptyAIImpl : Implementation {
-		EmptyAIImpl() {
-			name = "empty";
-			/** TRANSLATORS: This is the name of an AI used in the game setup screens */
-			descname = _("No AI");
-			icon_filename = "images/ai/ai_empty.png";
-			type = Implementation::Type::kEmpty;
+		EmptyAIImpl()
+		   : Implementation(
+		        "empty",
+		        /** TRANSLATORS: This is the name of an AI used in the game setup screens */
+		        _("No AI"),
+		        "images/ai/ai_empty.png",
+		        Implementation::Type::kEmpty) {
 		}
 		ComputerPlayer* instantiate(Widelands::Game& g,
 		                            Widelands::PlayerNumber const pid) const override {

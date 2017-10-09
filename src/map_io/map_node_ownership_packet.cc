@@ -51,7 +51,7 @@ void MapNodeOwnershipPacket::read(FileSystem& fs,
 	try {
 		uint16_t const packet_version = fr.unsigned_16();
 		if (packet_version == kCurrentPacketVersion) {
-			Map& map = egbase.map();
+			const Map& map = egbase.map();
 			MapIndex const max_index = map.max_index();
 			for (MapIndex i = 0; i < max_index; ++i)
 				map[i].set_owned_by(fr.unsigned_8());
@@ -69,7 +69,7 @@ void MapNodeOwnershipPacket::write(FileSystem& fs, EditorGameBase& egbase, MapOb
 
 	fw.unsigned_16(kCurrentPacketVersion);
 
-	Map& map = egbase.map();
+	const Map& map = egbase.map();
 	MapIndex const max_index = map.max_index();
 	for (MapIndex i = 0; i < max_index; ++i)
 		fw.unsigned_8(map[i].get_owned_by());

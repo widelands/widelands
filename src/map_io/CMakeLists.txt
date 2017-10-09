@@ -106,5 +106,4 @@ wl_library(map_io
     logic_widelands_geometry
     profile
     scripting_logic
-    wui
 )

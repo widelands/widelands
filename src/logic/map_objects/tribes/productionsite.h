@@ -374,6 +374,7 @@ struct NoteProductionSiteOutOfResources {
 	   : ps(init_ps), player(init_player) {
 	}
 };
-}
+
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_LOGIC_MAP_OBJECTS_TRIBES_PRODUCTIONSITE_H

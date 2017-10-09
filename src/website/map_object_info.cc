@@ -301,6 +301,9 @@ void write_buildings(const TribeDescr& tribe, EditorGameBase& egbase, FileSystem
 		case MapObjectType::WAREHOUSE:
 			fw.write_key_value_string("type", "warehouse");
 			break;
+		case MapObjectType::MARKET:
+			fw.write_key_value_string("type", "market");
+			break;
 		case MapObjectType::MILITARYSITE:
 			fw.write_key_value_string("type", "militarysite");
 			break;

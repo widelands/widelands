@@ -120,8 +120,8 @@ public:
 
 	void reset();
 
-	Surface* get_surface() const {
-		return surface_;
+	const Surface& get_surface() const {
+		return *surface_;
 	}
 	const Recti& get_rect() const {
 		return rect_;
@@ -143,7 +143,7 @@ protected:
 	                       const int percent_from_bottom = 100);
 
 	/// The target surface
-	Surface* surface_;
+	Surface* const surface_;
 	/// The current clip rectangle
 	Recti rect_;
 	/// Drawing offset

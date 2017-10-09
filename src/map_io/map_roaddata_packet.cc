@@ -104,7 +104,7 @@ void MapRoaddataPacket::read(FileSystem& fs,
 					Path p(road.flags_[0]->get_position());
 					for (Path::StepVector::size_type i = nr_steps; i; --i)
 						try {
-							p.append(egbase.map(), read_direction_8(&fr));
+							p.append(map, read_direction_8(&fr));
 						} catch (const WException& e) {
 							throw GameDataError(
 							   "step #%lu: %s", static_cast<long unsigned int>(nr_steps - i), e.what());

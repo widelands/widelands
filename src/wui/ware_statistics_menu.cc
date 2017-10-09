@@ -103,8 +103,7 @@ WareStatisticsMenu::WareStatisticsMenu(InteractivePlayer& parent,
                       &registry,
                       kPlotWidth + 2 * kSpacing,
                       270,
-                      _("Ware Statistics")),
-     parent_(&parent) {
+                      _("Ware Statistics")) {
 	uint8_t const nr_wares = parent.get_player()->egbase().tribes().nrwares();
 
 	// Init color sets

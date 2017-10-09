@@ -41,7 +41,7 @@ void GameMapPacket::read(FileSystem& fs, Game& game, MapObjectLoader* const) {
 	//  Now Load the map as it would be a normal map saving.
 	delete wml_;
 
-	wml_ = new WidelandsMapLoader(fs.make_sub_file_system("map"), &game.map());
+	wml_ = new WidelandsMapLoader(fs.make_sub_file_system("map"), game.mutable_map());
 
 	wml_->preload_map(true);
 

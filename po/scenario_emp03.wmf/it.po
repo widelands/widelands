@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-07-24 07:12+0000\n"
+"POT-Creation-Date: 2017-09-29 15:54+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Airina Santonocito <airina.santonocito@gmail.com>, 2017\n"
 "Language-Team: Italian (https://www.transifex.com/widelands/teams/35159/it/)\n"
@@ -148,13 +148,13 @@ msgstr ""
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:112
 msgid "Build 2 ports on distant islands"
-msgstr ""
+msgstr "Costruisci 2 porti su isole distanti"
 
 #. TRANSLATORS: Objective - create 2 expeditions and found new colonies with
 #. them
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:115
 msgid "Build 2 Expedition Ports"
-msgstr ""
+msgstr "Costruisci 2 porti di spedizione"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:116
 msgid ""
@@ -319,7 +319,7 @@ msgstr ""
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:220
 msgid "No Sight"
-msgstr ""
+msgstr "Niente in vista"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:221
 msgid "Saledus looks around nervously…"
@@ -335,7 +335,7 @@ msgstr ""
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:230
 msgid "Amalea Interrupts"
-msgstr ""
+msgstr "Amalea interrompe"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:231
 msgid "Amalea raises her hand…"
@@ -352,7 +352,7 @@ msgstr ""
 #. TRANSLATORS: Message header - Saledus is advising to save resources
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:241
 msgid "Save Resources"
-msgstr ""
+msgstr "Salva le risorse"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:242
 msgid "Saledus is nodding in agreement…"
@@ -368,7 +368,7 @@ msgstr ""
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:253
 msgid "Rocks, Nothing but Rocks"
-msgstr ""
+msgstr "Rocce, nient'altro che rocce"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:254
 msgid "Saledus speaks with a sigh of relief…"
@@ -396,7 +396,7 @@ msgstr "Il piano di Amalea"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:266
 msgid "Amalea smiles…"
-msgstr ""
+msgstr "Amalea sorride..."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:268
@@ -502,7 +502,7 @@ msgstr "Abbiamo bisogno di un porto"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:329
 msgid "Saledus is thoughtful…"
-msgstr ""
+msgstr "Saledus è pensieroso..."
 
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:331
@@ -672,7 +672,7 @@ msgstr ""
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:428
 msgid "Amalea Advises"
-msgstr ""
+msgstr "Amalea consiglia"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:429
 msgid "Amalea looks thoughtful…"

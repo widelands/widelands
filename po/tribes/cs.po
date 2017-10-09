@@ -9,15 +9,21 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-04-13 13:07+0000\n"
-"PO-Revision-Date: 2017-04-02 08:23+0000\n"
-"Last-Translator: Milan Fašina <matrix17@seznam.cz>\n"
+"POT-Creation-Date: 2017-09-29 15:54+0000\n"
+"PO-Revision-Date: 2017-09-29 15:57+0000\n"
+"Last-Translator: GunChleoc\n"
 "Language-Team: Czech (http://www.transifex.com/widelands/widelands/language/cs/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: cs\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
+
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../data/tribes/buildings/markets/barbarians/market/init.lua:14
+msgctxt "barbarians_building"
+msgid "Market"
+msgstr ""
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/militarysites/atlanteans/castle/init.lua:53
@@ -419,43 +425,43 @@ msgstr "Platnéřství"
 
 #. TRANSLATORS: Completed/Skipped/Did not start working because ...
 #: ../../data/tribes/buildings/productionsites/atlanteans/armorsmithy/init.lua:143
-#: ../../data/tribes/buildings/productionsites/atlanteans/blackroot_farm/init.lua:47
-#: ../../data/tribes/buildings/productionsites/atlanteans/crystalmine/init.lua:60
+#: ../../data/tribes/buildings/productionsites/atlanteans/blackroot_farm/init.lua:46
+#: ../../data/tribes/buildings/productionsites/atlanteans/crystalmine/init.lua:61
 #: ../../data/tribes/buildings/productionsites/atlanteans/farm/init.lua:50
-#: ../../data/tribes/buildings/productionsites/atlanteans/mill/init.lua:55
-#: ../../data/tribes/buildings/productionsites/atlanteans/quarry/init.lua:44
+#: ../../data/tribes/buildings/productionsites/atlanteans/mill/init.lua:56
+#: ../../data/tribes/buildings/productionsites/atlanteans/quarry/init.lua:42
 #: ../../data/tribes/buildings/productionsites/atlanteans/shipyard/init.lua:64
 #: ../../data/tribes/buildings/productionsites/atlanteans/smelting_works/init.lua:56
 #: ../../data/tribes/buildings/productionsites/atlanteans/smokery/init.lua:58
 #: ../../data/tribes/buildings/productionsites/atlanteans/spiderfarm/init.lua:53
-#: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:66
+#: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:65
 #: ../../data/tribes/buildings/productionsites/atlanteans/weaponsmithy/init.lua:61
 #: ../../data/tribes/buildings/productionsites/atlanteans/weaving_mill/init.lua:58
-#: ../../data/tribes/buildings/productionsites/atlanteans/well/init.lua:50
-#: ../../data/tribes/buildings/productionsites/barbarians/ax_workshop/init.lua:65
+#: ../../data/tribes/buildings/productionsites/atlanteans/well/init.lua:48
+#: ../../data/tribes/buildings/productionsites/barbarians/ax_workshop/init.lua:67
 #: ../../data/tribes/buildings/productionsites/barbarians/big_inn/init.lua:60
 #: ../../data/tribes/buildings/productionsites/barbarians/farm/init.lua:58
-#: ../../data/tribes/buildings/productionsites/barbarians/gamekeepers_hut/init.lua:48
+#: ../../data/tribes/buildings/productionsites/barbarians/gamekeepers_hut/init.lua:49
 #: ../../data/tribes/buildings/productionsites/barbarians/helmsmithy/init.lua:68
 #: ../../data/tribes/buildings/productionsites/barbarians/inn/init.lua:58
-#: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:75
-#: ../../data/tribes/buildings/productionsites/barbarians/quarry/init.lua:51
-#: ../../data/tribes/buildings/productionsites/barbarians/reed_yard/init.lua:45
+#: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:77
+#: ../../data/tribes/buildings/productionsites/barbarians/quarry/init.lua:49
+#: ../../data/tribes/buildings/productionsites/barbarians/reed_yard/init.lua:44
 #: ../../data/tribes/buildings/productionsites/barbarians/shipyard/init.lua:65
-#: ../../data/tribes/buildings/productionsites/barbarians/smelting_works/init.lua:59
-#: ../../data/tribes/buildings/productionsites/barbarians/warmill/init.lua:69
-#: ../../data/tribes/buildings/productionsites/barbarians/well/init.lua:51
-#: ../../data/tribes/buildings/productionsites/empire/armorsmithy/init.lua:69
-#: ../../data/tribes/buildings/productionsites/empire/farm/init.lua:48
-#: ../../data/tribes/buildings/productionsites/empire/inn/init.lua:55
-#: ../../data/tribes/buildings/productionsites/empire/marblemine/init.lua:60
-#: ../../data/tribes/buildings/productionsites/empire/quarry/init.lua:45
+#: ../../data/tribes/buildings/productionsites/barbarians/smelting_works/init.lua:60
+#: ../../data/tribes/buildings/productionsites/barbarians/warmill/init.lua:71
+#: ../../data/tribes/buildings/productionsites/barbarians/well/init.lua:50
+#: ../../data/tribes/buildings/productionsites/empire/armorsmithy/init.lua:68
+#: ../../data/tribes/buildings/productionsites/empire/farm/init.lua:49
+#: ../../data/tribes/buildings/productionsites/empire/inn/init.lua:54
+#: ../../data/tribes/buildings/productionsites/empire/marblemine/init.lua:61
+#: ../../data/tribes/buildings/productionsites/empire/quarry/init.lua:43
 #: ../../data/tribes/buildings/productionsites/empire/shipyard/init.lua:63
 #: ../../data/tribes/buildings/productionsites/empire/smelting_works/init.lua:61
-#: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:65
-#: ../../data/tribes/buildings/productionsites/empire/vineyard/init.lua:46
+#: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:64
+#: ../../data/tribes/buildings/productionsites/empire/vineyard/init.lua:47
 #: ../../data/tribes/buildings/productionsites/empire/weaponsmithy/init.lua:66
-#: ../../data/tribes/buildings/productionsites/empire/well/init.lua:50
+#: ../../data/tribes/buildings/productionsites/empire/well/init.lua:48
 msgid "working"
 msgstr "pracuji"
 
@@ -502,35 +508,35 @@ msgid "Blackroot Farm"
 msgstr "Pěstírna rozrazilu"
 
 #. TRANSLATORS: Completed/Skipped/Did not start planting blackroot because ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/blackroot_farm/init.lua:56
+#: ../../data/tribes/buildings/productionsites/atlanteans/blackroot_farm/init.lua:55
 msgid "planting blackroot"
 msgstr "pěstuji rozrazil"
 
 #. TRANSLATORS: Completed/Skipped/Did not start harvesting blackroot because
 #. ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/blackroot_farm/init.lua:64
+#: ../../data/tribes/buildings/productionsites/atlanteans/blackroot_farm/init.lua:63
 msgid "harvesting blackroot"
 msgstr "sklízím rozrazil"
 
-#: ../../data/tribes/buildings/productionsites/atlanteans/blackroot_farm/init.lua:73
+#: ../../data/tribes/buildings/productionsites/atlanteans/blackroot_farm/init.lua:72
 #: ../../data/tribes/buildings/productionsites/atlanteans/farm/init.lua:76
 #: ../../data/tribes/buildings/productionsites/barbarians/farm/init.lua:85
-#: ../../data/tribes/buildings/productionsites/barbarians/reed_yard/init.lua:71
-#: ../../data/tribes/buildings/productionsites/empire/farm/init.lua:74
-#: ../../data/tribes/buildings/productionsites/empire/vineyard/init.lua:72
+#: ../../data/tribes/buildings/productionsites/barbarians/reed_yard/init.lua:70
+#: ../../data/tribes/buildings/productionsites/empire/farm/init.lua:75
+#: ../../data/tribes/buildings/productionsites/empire/vineyard/init.lua:73
 msgid "No Fields"
 msgstr "Žádné pole"
 
-#: ../../data/tribes/buildings/productionsites/atlanteans/blackroot_farm/init.lua:74
+#: ../../data/tribes/buildings/productionsites/atlanteans/blackroot_farm/init.lua:73
 #: ../../data/tribes/buildings/productionsites/atlanteans/farm/init.lua:77
 #: ../../data/tribes/buildings/productionsites/barbarians/farm/init.lua:86
-#: ../../data/tribes/buildings/productionsites/barbarians/reed_yard/init.lua:72
-#: ../../data/tribes/buildings/productionsites/empire/farm/init.lua:75
-#: ../../data/tribes/buildings/productionsites/empire/vineyard/init.lua:73
+#: ../../data/tribes/buildings/productionsites/barbarians/reed_yard/init.lua:71
+#: ../../data/tribes/buildings/productionsites/empire/farm/init.lua:76
+#: ../../data/tribes/buildings/productionsites/empire/vineyard/init.lua:74
 msgid "Out of Fields"
 msgstr "Došla pole"
 
-#: ../../data/tribes/buildings/productionsites/atlanteans/blackroot_farm/init.lua:75
+#: ../../data/tribes/buildings/productionsites/atlanteans/blackroot_farm/init.lua:74
 msgctxt "atlanteans_building"
 msgid ""
 "The blackroot farmer working at this blackroot farm has no cleared soil to "
@@ -598,31 +604,31 @@ msgid "Crystal Mine"
 msgstr "Důl na křišťál"
 
 #. TRANSLATORS: Completed/Skipped/Did not start mining granite because ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/crystalmine/init.lua:70
+#: ../../data/tribes/buildings/productionsites/atlanteans/crystalmine/init.lua:71
 #: ../../data/tribes/buildings/productionsites/barbarians/granitemine/init.lua:59
-#: ../../data/tribes/buildings/productionsites/empire/marblemine/init.lua:84
+#: ../../data/tribes/buildings/productionsites/empire/marblemine/init.lua:85
 msgid "mining granite"
 msgstr "těžím žulu"
 
 #. TRANSLATORS: Completed/Skipped/Did not start mining quartz because ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/crystalmine/init.lua:91
+#: ../../data/tribes/buildings/productionsites/atlanteans/crystalmine/init.lua:92
 msgid "mining quartz"
 msgstr "doluji křemen"
 
 #. TRANSLATORS: Completed/Skipped/Did not start mining diamonds because ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/crystalmine/init.lua:109
+#: ../../data/tribes/buildings/productionsites/atlanteans/crystalmine/init.lua:110
 msgid "mining diamonds"
 msgstr "těžím diamanty"
 
-#: ../../data/tribes/buildings/productionsites/atlanteans/crystalmine/init.lua:128
+#: ../../data/tribes/buildings/productionsites/atlanteans/crystalmine/init.lua:129
 msgid "No Crystal"
 msgstr "Není křemen"
 
-#: ../../data/tribes/buildings/productionsites/atlanteans/crystalmine/init.lua:129
+#: ../../data/tribes/buildings/productionsites/atlanteans/crystalmine/init.lua:130
 msgid "Main Crystal Vein Exhausted"
 msgstr "Hlavní žíla křišťálu je vyčerpaná"
 
-#: ../../data/tribes/buildings/productionsites/atlanteans/crystalmine/init.lua:131
+#: ../../data/tribes/buildings/productionsites/atlanteans/crystalmine/init.lua:132
 msgctxt "atlanteans_building"
 msgid ""
 "This crystal mine’s main vein is exhausted. Expect strongly diminished "
@@ -663,14 +669,14 @@ msgid "breeding fish"
 msgstr "chovám ryby"
 
 #: ../../data/tribes/buildings/productionsites/atlanteans/fishbreeders_house/init.lua:52
-#: ../../data/tribes/buildings/productionsites/atlanteans/fishers_house/init.lua:53
+#: ../../data/tribes/buildings/productionsites/atlanteans/fishers_house/init.lua:54
 #: ../../data/tribes/buildings/productionsites/barbarians/fishers_hut/init.lua:59
 #: ../../data/tribes/buildings/productionsites/empire/fishers_house/init.lua:53
 msgid "No Fish"
 msgstr "Nejsou ryby"
 
 #: ../../data/tribes/buildings/productionsites/atlanteans/fishbreeders_house/init.lua:53
-#: ../../data/tribes/buildings/productionsites/atlanteans/fishers_house/init.lua:54
+#: ../../data/tribes/buildings/productionsites/atlanteans/fishers_house/init.lua:55
 #: ../../data/tribes/buildings/productionsites/barbarians/fishers_hut/init.lua:60
 #: ../../data/tribes/buildings/productionsites/empire/fishers_house/init.lua:54
 msgid "Out of Fish"
@@ -695,13 +701,13 @@ msgid "Fisher’s House"
 msgstr "Domek rybáře"
 
 #. TRANSLATORS: Completed/Skipped/Did not start fishing because ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/fishers_house/init.lua:43
+#: ../../data/tribes/buildings/productionsites/atlanteans/fishers_house/init.lua:44
 #: ../../data/tribes/buildings/productionsites/barbarians/fishers_hut/init.lua:50
 #: ../../data/tribes/buildings/productionsites/empire/fishers_house/init.lua:44
 msgid "fishing"
 msgstr "rybařím"
 
-#: ../../data/tribes/buildings/productionsites/atlanteans/fishers_house/init.lua:55
+#: ../../data/tribes/buildings/productionsites/atlanteans/fishers_house/init.lua:56
 msgctxt "atlanteans_building"
 msgid ""
 "The fisher working out of this fisher’s house can’t find any fish in his "
@@ -716,9 +722,9 @@ msgid "Forester’s House"
 msgstr "Domek lesníka"
 
 #. TRANSLATORS: Completed/Skipped/Did not start planting trees because ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/foresters_house/init.lua:42
+#: ../../data/tribes/buildings/productionsites/atlanteans/foresters_house/init.lua:41
 #: ../../data/tribes/buildings/productionsites/barbarians/rangers_hut/init.lua:47
-#: ../../data/tribes/buildings/productionsites/empire/foresters_house/init.lua:42
+#: ../../data/tribes/buildings/productionsites/empire/foresters_house/init.lua:41
 msgid "planting trees"
 msgstr "sázím stromy"
 
@@ -781,7 +787,7 @@ msgid "Horse Farm"
 msgstr "Stáje"
 
 #. TRANSLATORS: Completed/Skipped/Did not start breeding horses because ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/horsefarm/init.lua:52
+#: ../../data/tribes/buildings/productionsites/atlanteans/horsefarm/init.lua:53
 msgctxt "atlanteans_building"
 msgid "breeding horses"
 msgstr "chovat koně"
@@ -794,21 +800,21 @@ msgstr "Domek lovce"
 
 #. TRANSLATORS: Completed/Skipped/Did not start hunting because ...
 #: ../../data/tribes/buildings/productionsites/atlanteans/hunters_house/init.lua:43
-#: ../../data/tribes/buildings/productionsites/barbarians/hunters_hut/init.lua:51
-#: ../../data/tribes/buildings/productionsites/empire/hunters_house/init.lua:41
+#: ../../data/tribes/buildings/productionsites/barbarians/hunters_hut/init.lua:52
+#: ../../data/tribes/buildings/productionsites/empire/hunters_house/init.lua:43
 msgid "hunting"
 msgstr "lovím"
 
 #: ../../data/tribes/buildings/productionsites/atlanteans/hunters_house/init.lua:52
-#: ../../data/tribes/buildings/productionsites/barbarians/hunters_hut/init.lua:60
-#: ../../data/tribes/buildings/productionsites/empire/hunters_house/init.lua:50
+#: ../../data/tribes/buildings/productionsites/barbarians/hunters_hut/init.lua:61
+#: ../../data/tribes/buildings/productionsites/empire/hunters_house/init.lua:52
 msgid "No Game"
 msgstr "Není, co lovit"
 
 #. TRANSLATORS: "Game" means animals that you can hunt
 #: ../../data/tribes/buildings/productionsites/atlanteans/hunters_house/init.lua:54
-#: ../../data/tribes/buildings/productionsites/barbarians/hunters_hut/init.lua:62
-#: ../../data/tribes/buildings/productionsites/empire/hunters_house/init.lua:52
+#: ../../data/tribes/buildings/productionsites/barbarians/hunters_hut/init.lua:63
+#: ../../data/tribes/buildings/productionsites/empire/hunters_house/init.lua:54
 msgid "Out of Game"
 msgstr "Došla zvířata"
 
@@ -868,12 +874,12 @@ msgid "Mill"
 msgstr "Mlýn"
 
 #. TRANSLATORS: Completed/Skipped/Did not start grinding corn because ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/mill/init.lua:64
+#: ../../data/tribes/buildings/productionsites/atlanteans/mill/init.lua:65
 msgid "grinding corn"
 msgstr "melu kukuřici"
 
 #. TRANSLATORS: Completed/Skipped/Did not start grinding blackrootbecause ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/mill/init.lua:77
+#: ../../data/tribes/buildings/productionsites/atlanteans/mill/init.lua:78
 msgid "grinding blackroot"
 msgstr "melu rozrazil"
 
@@ -884,25 +890,25 @@ msgid "Quarry"
 msgstr "Lom"
 
 #. TRANSLATORS: Completed/Skipped/Did not start quarrying granite because ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/quarry/init.lua:54
-#: ../../data/tribes/buildings/productionsites/barbarians/quarry/init.lua:61
-#: ../../data/tribes/buildings/productionsites/empire/quarry/init.lua:59
+#: ../../data/tribes/buildings/productionsites/atlanteans/quarry/init.lua:52
+#: ../../data/tribes/buildings/productionsites/barbarians/quarry/init.lua:59
+#: ../../data/tribes/buildings/productionsites/empire/quarry/init.lua:57
 msgid "quarrying granite"
 msgstr "těžím žulu"
 
-#: ../../data/tribes/buildings/productionsites/atlanteans/quarry/init.lua:65
-#: ../../data/tribes/buildings/productionsites/barbarians/quarry/init.lua:72
-#: ../../data/tribes/buildings/productionsites/empire/quarry/init.lua:80
+#: ../../data/tribes/buildings/productionsites/atlanteans/quarry/init.lua:63
+#: ../../data/tribes/buildings/productionsites/barbarians/quarry/init.lua:70
+#: ../../data/tribes/buildings/productionsites/empire/quarry/init.lua:78
 msgid "No Rocks"
 msgstr "Žádné kamení"
 
-#: ../../data/tribes/buildings/productionsites/atlanteans/quarry/init.lua:66
-#: ../../data/tribes/buildings/productionsites/barbarians/quarry/init.lua:73
-#: ../../data/tribes/buildings/productionsites/empire/quarry/init.lua:81
+#: ../../data/tribes/buildings/productionsites/atlanteans/quarry/init.lua:64
+#: ../../data/tribes/buildings/productionsites/barbarians/quarry/init.lua:71
+#: ../../data/tribes/buildings/productionsites/empire/quarry/init.lua:79
 msgid "Out of Rocks"
 msgstr "Došlo kamení"
 
-#: ../../data/tribes/buildings/productionsites/atlanteans/quarry/init.lua:67
+#: ../../data/tribes/buildings/productionsites/atlanteans/quarry/init.lua:65
 msgctxt "atlanteans_building"
 msgid ""
 "The stonecutter working at this quarry can’t find any rocks in his work "
@@ -916,8 +922,8 @@ msgid "Sawmill"
 msgstr "Pila"
 
 #. TRANSLATORS: Completed/Skipped/Did not start sawing logs because ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/sawmill/init.lua:54
-#: ../../data/tribes/buildings/productionsites/empire/sawmill/init.lua:54
+#: ../../data/tribes/buildings/productionsites/atlanteans/sawmill/init.lua:53
+#: ../../data/tribes/buildings/productionsites/empire/sawmill/init.lua:53
 msgid "sawing logs"
 msgstr "řežu kmeny"
 
@@ -956,14 +962,14 @@ msgstr "Slévárna"
 
 #. TRANSLATORS: Completed/Skipped/Did not start smelting iron because ...
 #: ../../data/tribes/buildings/productionsites/atlanteans/smelting_works/init.lua:66
-#: ../../data/tribes/buildings/productionsites/barbarians/smelting_works/init.lua:69
+#: ../../data/tribes/buildings/productionsites/barbarians/smelting_works/init.lua:70
 #: ../../data/tribes/buildings/productionsites/empire/smelting_works/init.lua:71
 msgid "smelting iron"
 msgstr "tavím železo"
 
 #. TRANSLATORS: Completed/Skipped/Did not start smelting gold because ...
 #: ../../data/tribes/buildings/productionsites/atlanteans/smelting_works/init.lua:80
-#: ../../data/tribes/buildings/productionsites/barbarians/smelting_works/init.lua:83
+#: ../../data/tribes/buildings/productionsites/barbarians/smelting_works/init.lua:84
 #: ../../data/tribes/buildings/productionsites/empire/smelting_works/init.lua:85
 msgid "smelting gold"
 msgstr "tavím zlato"
@@ -998,79 +1004,79 @@ msgstr "Dílna"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a bread paddle because
 #. ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:85
-#: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:92
-#: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:108
+#: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:84
+#: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:94
+#: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:107
 msgid "making a bread paddle"
 msgstr "vyrábím lopatu na chléb"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a pair of buckets
 #. because ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:98
+#: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:97
 msgid "making a pair of buckets"
 msgstr "vyrábím kýble"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making fire tongs because ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:111
-#: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:116
-#: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:120
+#: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:110
+#: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:118
+#: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:119
 msgid "making fire tongs"
 msgstr "vyrábím kovářské kleště"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a fishing net because
 #. ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:124
+#: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:123
 msgid "making a fishing net"
 msgstr "vyrábím rybářskou síť"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a hammer because ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:137
-#: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:140
-#: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:144
+#: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:136
+#: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:142
+#: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:143
 msgid "making a hammer"
 msgstr "vyrábím kladivo"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a hook pole because ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:150
+#: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:149
 msgid "making a hook pole"
 msgstr "vyrábím hák na tyči"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a hunting bow because
 #. ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:163
+#: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:162
 msgid "making a hunting bow"
 msgstr "vyrábím lovecký luk"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making milking tongs because
 #. ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:176
+#: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:175
 msgid "making milking tongs"
 msgstr "vyrábím pavoučí kleště"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a pick because ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:189
-#: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:176
-#: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:180
+#: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:188
+#: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:178
+#: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:179
 msgid "making a pick"
 msgstr "vyrábím krumpáč"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a saw because ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:202
-#: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:192
+#: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:201
+#: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:191
 msgid "making a saw"
 msgstr "vyrábím pilu"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a scythe because ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:215
-#: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:188
-#: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:204
+#: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:214
+#: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:190
+#: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:203
 msgid "making a scythe"
 msgstr "vyrábím kosu"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a shovel because ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:228
-#: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:200
-#: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:216
+#: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:227
+#: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:202
+#: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:215
 msgid "making a shovel"
 msgstr "vyrábím lopatu"
 
@@ -1139,19 +1145,19 @@ msgctxt "atlanteans_building"
 msgid "Well"
 msgstr "Studna"
 
-#: ../../data/tribes/buildings/productionsites/atlanteans/well/init.lua:61
-#: ../../data/tribes/buildings/productionsites/barbarians/well/init.lua:63
-#: ../../data/tribes/buildings/productionsites/empire/well/init.lua:61
+#: ../../data/tribes/buildings/productionsites/atlanteans/well/init.lua:59
+#: ../../data/tribes/buildings/productionsites/barbarians/well/init.lua:62
+#: ../../data/tribes/buildings/productionsites/empire/well/init.lua:59
 msgid "No Water"
 msgstr "Žádná voda"
 
-#: ../../data/tribes/buildings/productionsites/atlanteans/well/init.lua:62
-#: ../../data/tribes/buildings/productionsites/barbarians/well/init.lua:64
-#: ../../data/tribes/buildings/productionsites/empire/well/init.lua:62
+#: ../../data/tribes/buildings/productionsites/atlanteans/well/init.lua:60
+#: ../../data/tribes/buildings/productionsites/barbarians/well/init.lua:63
+#: ../../data/tribes/buildings/productionsites/empire/well/init.lua:60
 msgid "Out of Water"
 msgstr "Došla voda"
 
-#: ../../data/tribes/buildings/productionsites/atlanteans/well/init.lua:63
+#: ../../data/tribes/buildings/productionsites/atlanteans/well/init.lua:61
 msgctxt "atlanteans_building"
 msgid "The carrier working at this well can’t find any water in his well."
 msgstr "Nosič pracující u této studny nemá ve studně vodu."
@@ -1163,25 +1169,25 @@ msgid "Woodcutter’s House"
 msgstr "Domek dřevorubce"
 
 #. TRANSLATORS: Completed/Skipped/Did not start felling trees because ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/woodcutters_house/init.lua:45
-#: ../../data/tribes/buildings/productionsites/barbarians/lumberjacks_hut/init.lua:51
-#: ../../data/tribes/buildings/productionsites/empire/lumberjacks_house/init.lua:45
+#: ../../data/tribes/buildings/productionsites/atlanteans/woodcutters_house/init.lua:43
+#: ../../data/tribes/buildings/productionsites/barbarians/lumberjacks_hut/init.lua:50
+#: ../../data/tribes/buildings/productionsites/empire/lumberjacks_house/init.lua:43
 msgid "felling trees"
 msgstr "kácím stromy"
 
-#: ../../data/tribes/buildings/productionsites/atlanteans/woodcutters_house/init.lua:54
-#: ../../data/tribes/buildings/productionsites/barbarians/lumberjacks_hut/init.lua:60
-#: ../../data/tribes/buildings/productionsites/empire/lumberjacks_house/init.lua:54
+#: ../../data/tribes/buildings/productionsites/atlanteans/woodcutters_house/init.lua:52
+#: ../../data/tribes/buildings/productionsites/barbarians/lumberjacks_hut/init.lua:59
+#: ../../data/tribes/buildings/productionsites/empire/lumberjacks_house/init.lua:52
 msgid "No Trees"
 msgstr "Žádné stromy"
 
-#: ../../data/tribes/buildings/productionsites/atlanteans/woodcutters_house/init.lua:55
-#: ../../data/tribes/buildings/productionsites/barbarians/lumberjacks_hut/init.lua:61
-#: ../../data/tribes/buildings/productionsites/empire/lumberjacks_house/init.lua:55
+#: ../../data/tribes/buildings/productionsites/atlanteans/woodcutters_house/init.lua:53
+#: ../../data/tribes/buildings/productionsites/barbarians/lumberjacks_hut/init.lua:60
+#: ../../data/tribes/buildings/productionsites/empire/lumberjacks_house/init.lua:53
 msgid "Out of Trees"
 msgstr "Došly stromy"
 
-#: ../../data/tribes/buildings/productionsites/atlanteans/woodcutters_house/init.lua:56
+#: ../../data/tribes/buildings/productionsites/atlanteans/woodcutters_house/init.lua:54
 msgctxt "atlanteans_building"
 msgid ""
 "The woodcutter working at this woodcutter’s house can’t find any trees in "
@@ -1196,20 +1202,20 @@ msgid "Ax Workshop"
 msgstr "Dílna na sekery"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging an ax because ...
-#: ../../data/tribes/buildings/productionsites/barbarians/ax_workshop/init.lua:75
-#: ../../data/tribes/buildings/productionsites/barbarians/warmill/init.lua:82
+#: ../../data/tribes/buildings/productionsites/barbarians/ax_workshop/init.lua:77
+#: ../../data/tribes/buildings/productionsites/barbarians/warmill/init.lua:84
 msgid "forging an ax"
 msgstr "kovu sekeru"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a sharp ax because ...
-#: ../../data/tribes/buildings/productionsites/barbarians/ax_workshop/init.lua:90
-#: ../../data/tribes/buildings/productionsites/barbarians/warmill/init.lua:97
+#: ../../data/tribes/buildings/productionsites/barbarians/ax_workshop/init.lua:92
+#: ../../data/tribes/buildings/productionsites/barbarians/warmill/init.lua:99
 msgid "forging a sharp ax"
 msgstr "kovu ostrou sekeru"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a broad ax because ...
-#: ../../data/tribes/buildings/productionsites/barbarians/ax_workshop/init.lua:105
-#: ../../data/tribes/buildings/productionsites/barbarians/warmill/init.lua:112
+#: ../../data/tribes/buildings/productionsites/barbarians/ax_workshop/init.lua:107
+#: ../../data/tribes/buildings/productionsites/barbarians/warmill/init.lua:114
 msgid "forging a broad ax"
 msgstr "kovu širokou sekeru"
 
@@ -1232,7 +1238,7 @@ msgid "Barracks"
 msgstr "Kasárna"
 
 #. TRANSLATORS: Completed/Skipped/Did not start recruiting soldier because ...
-#: ../../data/tribes/buildings/productionsites/barbarians/barracks/init.lua:56
+#: ../../data/tribes/buildings/productionsites/barbarians/barracks/init.lua:57
 msgctxt "barbarians_building"
 msgid "recruiting soldier"
 msgstr "verbovat vojáka"
@@ -1246,8 +1252,8 @@ msgstr "Velký hostinec"
 #. TRANSLATORS: Completed/Skipped/Did not start preparing a ration because ...
 #: ../../data/tribes/buildings/productionsites/barbarians/big_inn/init.lua:70
 #: ../../data/tribes/buildings/productionsites/barbarians/inn/init.lua:67
-#: ../../data/tribes/buildings/productionsites/barbarians/tavern/init.lua:60
-#: ../../data/tribes/buildings/productionsites/empire/inn/init.lua:64
+#: ../../data/tribes/buildings/productionsites/barbarians/tavern/init.lua:61
+#: ../../data/tribes/buildings/productionsites/empire/inn/init.lua:63
 #: ../../data/tribes/buildings/productionsites/empire/tavern/init.lua:56
 msgid "preparing a ration"
 msgstr "příprava přídělu"
@@ -1260,7 +1266,7 @@ msgstr "připravuji svačinu"
 
 #. TRANSLATORS: Completed/Skipped/Did not start preparing a meal because ...
 #: ../../data/tribes/buildings/productionsites/barbarians/big_inn/init.lua:96
-#: ../../data/tribes/buildings/productionsites/empire/inn/init.lua:78
+#: ../../data/tribes/buildings/productionsites/empire/inn/init.lua:77
 msgid "preparing a meal"
 msgstr "připravuji jídlo"
 
@@ -1272,7 +1278,7 @@ msgstr "Pivovar"
 
 #. TRANSLATORS: Completed/Skipped/Did not start brewing strong beer because
 #. ...
-#: ../../data/tribes/buildings/productionsites/barbarians/brewery/init.lua:53
+#: ../../data/tribes/buildings/productionsites/barbarians/brewery/init.lua:51
 msgid "brewing strong beer"
 msgstr "vařím silné pivo"
 
@@ -1283,7 +1289,7 @@ msgid "Cattle Farm"
 msgstr "Statek"
 
 #. TRANSLATORS: Completed/Skipped/Did not start rearing cattle because ...
-#: ../../data/tribes/buildings/productionsites/barbarians/cattlefarm/init.lua:52
+#: ../../data/tribes/buildings/productionsites/barbarians/cattlefarm/init.lua:53
 msgctxt "barbarians_building"
 msgid "rearing cattle"
 msgstr "chovat dobytek"
@@ -1336,13 +1342,13 @@ msgstr "Obilné pole"
 
 #. TRANSLATORS: Completed/Skipped/Did not start planting wheat because ...
 #: ../../data/tribes/buildings/productionsites/barbarians/farm/init.lua:67
-#: ../../data/tribes/buildings/productionsites/empire/farm/init.lua:57
+#: ../../data/tribes/buildings/productionsites/empire/farm/init.lua:58
 msgid "planting wheat"
 msgstr "pěstuji pšenici"
 
 #. TRANSLATORS: Completed/Skipped/Did not start harvesting wheat because ...
 #: ../../data/tribes/buildings/productionsites/barbarians/farm/init.lua:75
-#: ../../data/tribes/buildings/productionsites/empire/farm/init.lua:65
+#: ../../data/tribes/buildings/productionsites/empire/farm/init.lua:66
 msgid "harvesting wheat"
 msgstr "sklízím pšenici"
 
@@ -1435,7 +1441,7 @@ msgstr "Kovárna přileb"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a helmet because ...
 #: ../../data/tribes/buildings/productionsites/barbarians/helmsmithy/init.lua:78
-#: ../../data/tribes/buildings/productionsites/empire/armorsmithy/init.lua:80
+#: ../../data/tribes/buildings/productionsites/empire/armorsmithy/init.lua:79
 msgid "forging a helmet"
 msgstr "kovu přilbu"
 
@@ -1456,7 +1462,7 @@ msgid "Hunter’s Hut"
 msgstr "Lovecká chata"
 
 #. TRANSLATORS: "game" means animals that you can hunt
-#: ../../data/tribes/buildings/productionsites/barbarians/hunters_hut/init.lua:64
+#: ../../data/tribes/buildings/productionsites/barbarians/hunters_hut/init.lua:65
 msgctxt "barbarians_building"
 msgid ""
 "The hunter working out of this hunter’s hut can’t find any game in his work "
@@ -1521,7 +1527,7 @@ msgctxt "barbarians_building"
 msgid "Lumberjack’s Hut"
 msgstr "Chata dřevorubce"
 
-#: ../../data/tribes/buildings/productionsites/barbarians/lumberjacks_hut/init.lua:62
+#: ../../data/tribes/buildings/productionsites/barbarians/lumberjacks_hut/init.lua:61
 msgctxt "barbarians_building"
 msgid ""
 "The lumberjack working at this lumberjack’s hut can’t find any trees in his "
@@ -1537,29 +1543,29 @@ msgstr "Dílna na železo"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a felling ax because
 #. ...
-#: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:104
-#: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:84
+#: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:106
+#: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:83
 msgid "making a felling ax"
 msgstr "vyrábím těžební sekeru"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a fishing rod because
 #. ...
-#: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:128
-#: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:132
+#: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:130
+#: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:131
 msgid "making a fishing rod"
 msgstr "vyrábím rybářský prut"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a hunting spear because
 #. ...
-#: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:152
-#: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:156
+#: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:154
+#: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:155
 msgid "making a hunting spear"
 msgstr "vyrábím lovecký oštěp"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making kitchen tools because
 #. ...
-#: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:164
-#: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:168
+#: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:166
+#: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:167
 msgid "making kitchen tools"
 msgstr "vyrábím kuchyňské náčiní"
 
@@ -1570,8 +1576,8 @@ msgid "Micro Brewery"
 msgstr "Malý pivovar"
 
 #. TRANSLATORS: Completed/Skipped/Did not start brewing beer because ...
-#: ../../data/tribes/buildings/productionsites/barbarians/micro_brewery/init.lua:55
-#: ../../data/tribes/buildings/productionsites/empire/brewery/init.lua:55
+#: ../../data/tribes/buildings/productionsites/barbarians/micro_brewery/init.lua:56
+#: ../../data/tribes/buildings/productionsites/empire/brewery/init.lua:54
 msgid "brewing beer"
 msgstr "vařím pivo"
 
@@ -1581,7 +1587,7 @@ msgctxt "barbarians_building"
 msgid "Quarry"
 msgstr "Lom"
 
-#: ../../data/tribes/buildings/productionsites/barbarians/quarry/init.lua:74
+#: ../../data/tribes/buildings/productionsites/barbarians/quarry/init.lua:72
 msgctxt "barbarians_building"
 msgid ""
 "The stonemason working at this quarry can’t find any rocks in his work area."
@@ -1600,16 +1606,16 @@ msgid "Reed Yard"
 msgstr "Rákosové pole"
 
 #. TRANSLATORS: Completed/Skipped/Did not start planting reed because ...
-#: ../../data/tribes/buildings/productionsites/barbarians/reed_yard/init.lua:54
+#: ../../data/tribes/buildings/productionsites/barbarians/reed_yard/init.lua:53
 msgid "planting reed"
 msgstr "pěstuji rákos"
 
 #. TRANSLATORS: Completed/Skipped/Did not start harvesting reed because ...
-#: ../../data/tribes/buildings/productionsites/barbarians/reed_yard/init.lua:62
+#: ../../data/tribes/buildings/productionsites/barbarians/reed_yard/init.lua:61
 msgid "harvesting reed"
 msgstr "sklízím rákos"
 
-#: ../../data/tribes/buildings/productionsites/barbarians/reed_yard/init.lua:73
+#: ../../data/tribes/buildings/productionsites/barbarians/reed_yard/init.lua:72
 msgctxt "barbarians_building"
 msgid ""
 "The gardener working at this reed yard has no cleared soil to plant his "
@@ -1648,19 +1654,19 @@ msgstr "Válečná akademie"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a bronze ax because
 #. ...
-#: ../../data/tribes/buildings/productionsites/barbarians/warmill/init.lua:127
+#: ../../data/tribes/buildings/productionsites/barbarians/warmill/init.lua:129
 msgid "forging a bronze ax"
 msgstr "kovu bronzovou sekeru"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a battle ax because
 #. ...
-#: ../../data/tribes/buildings/productionsites/barbarians/warmill/init.lua:142
+#: ../../data/tribes/buildings/productionsites/barbarians/warmill/init.lua:144
 msgid "forging a battle ax"
 msgstr "kovu bojovou sekeru"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a warrior’s ax because
 #. ...
-#: ../../data/tribes/buildings/productionsites/barbarians/warmill/init.lua:157
+#: ../../data/tribes/buildings/productionsites/barbarians/warmill/init.lua:159
 msgid "forging a warrior’s ax"
 msgstr "kovu válečnou sekeru"
 
@@ -1682,7 +1688,7 @@ msgctxt "barbarians_building"
 msgid "Well"
 msgstr "Studna"
 
-#: ../../data/tribes/buildings/productionsites/barbarians/well/init.lua:65
+#: ../../data/tribes/buildings/productionsites/barbarians/well/init.lua:64
 msgctxt "barbarians_building"
 msgid "The carrier working at this well can’t find any water in his well."
 msgstr "Nosič pracující u této studny nemá ve studně vodu."
@@ -1694,7 +1700,7 @@ msgid "Wood Hardener"
 msgstr "Tesař"
 
 #. TRANSLATORS: Completed/Skipped/Did not start hardening wood because ...
-#: ../../data/tribes/buildings/productionsites/barbarians/wood_hardener/init.lua:61
+#: ../../data/tribes/buildings/productionsites/barbarians/wood_hardener/init.lua:60
 msgid "hardening wood"
 msgstr "tesám dřevo"
 
@@ -1706,19 +1712,19 @@ msgstr "Platnéřství"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a suit of armor
 #. because ...
-#: ../../data/tribes/buildings/productionsites/empire/armorsmithy/init.lua:92
+#: ../../data/tribes/buildings/productionsites/empire/armorsmithy/init.lua:91
 msgid "forging a suit of armor"
 msgstr "kovu zbroj"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a suit of chain armor
 #. because ...
-#: ../../data/tribes/buildings/productionsites/empire/armorsmithy/init.lua:104
+#: ../../data/tribes/buildings/productionsites/empire/armorsmithy/init.lua:103
 msgid "forging a suit of chain armor"
 msgstr "kovu kroužkovou zbroj"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a suit of gilded armor
 #. because ...
-#: ../../data/tribes/buildings/productionsites/empire/armorsmithy/init.lua:116
+#: ../../data/tribes/buildings/productionsites/empire/armorsmithy/init.lua:115
 msgid "forging a suit of gilded armor"
 msgstr "kovu zlacenou zbroj"
 
@@ -1792,7 +1798,7 @@ msgid "Donkey Farm"
 msgstr "Oslí farma"
 
 #. TRANSLATORS: Completed/Skipped/Did not start rearing donkeys because ...
-#: ../../data/tribes/buildings/productionsites/empire/donkeyfarm/init.lua:52
+#: ../../data/tribes/buildings/productionsites/empire/donkeyfarm/init.lua:53
 msgctxt "empire_building"
 msgid "rearing donkeys"
 msgstr "chovat osly"
@@ -1803,7 +1809,7 @@ msgctxt "empire_building"
 msgid "Farm"
 msgstr "Obilné pole"
 
-#: ../../data/tribes/buildings/productionsites/empire/farm/init.lua:76
+#: ../../data/tribes/buildings/productionsites/empire/farm/init.lua:77
 msgctxt "empire_building"
 msgid ""
 "The farmer working at this farm has no cleared soil to plant his seeds."
@@ -1862,7 +1868,7 @@ msgid "Hunter’s House"
 msgstr "Domek lovce"
 
 #. TRANSLATORS: "game" means animals that you can hunt
-#: ../../data/tribes/buildings/productionsites/empire/hunters_house/init.lua:54
+#: ../../data/tribes/buildings/productionsites/empire/hunters_house/init.lua:56
 msgctxt "empire_building"
 msgid ""
 "The hunter working out of this hunter’s house can’t find any game in his "
@@ -1908,7 +1914,7 @@ msgctxt "empire_building"
 msgid "Lumberjack’s House"
 msgstr "Domek dřevorubce"
 
-#: ../../data/tribes/buildings/productionsites/empire/lumberjacks_house/init.lua:56
+#: ../../data/tribes/buildings/productionsites/empire/lumberjacks_house/init.lua:54
 msgctxt "empire_building"
 msgid ""
 "The lumberjack working at this lumberjack’s house can’t find any trees in "
@@ -1923,22 +1929,22 @@ msgid "Marble Mine"
 msgstr "Důl na mramor"
 
 #. TRANSLATORS: Completed/Skipped/Did not start mining marble because ...
-#: ../../data/tribes/buildings/productionsites/empire/marblemine/init.lua:69
+#: ../../data/tribes/buildings/productionsites/empire/marblemine/init.lua:70
 #: ../../data/tribes/buildings/productionsites/empire/marblemine_deep/init.lua:58
 msgid "mining marble"
 msgstr "těžím mramor"
 
-#: ../../data/tribes/buildings/productionsites/empire/marblemine/init.lua:100
+#: ../../data/tribes/buildings/productionsites/empire/marblemine/init.lua:101
 #: ../../data/tribes/buildings/productionsites/empire/marblemine_deep/init.lua:74
 msgid "No Marble"
 msgstr "Není mramor"
 
-#: ../../data/tribes/buildings/productionsites/empire/marblemine/init.lua:101
+#: ../../data/tribes/buildings/productionsites/empire/marblemine/init.lua:102
 #: ../../data/tribes/buildings/productionsites/empire/marblemine_deep/init.lua:75
 msgid "Main Marble Vein Exhausted"
 msgstr "Hlavní mramorová žíla je vyčerpaná"
 
-#: ../../data/tribes/buildings/productionsites/empire/marblemine/init.lua:103
+#: ../../data/tribes/buildings/productionsites/empire/marblemine/init.lua:104
 msgctxt "empire_building"
 msgid ""
 "This marble mine’s main vein is exhausted. Expect strongly diminished "
@@ -1989,11 +1995,11 @@ msgid "Quarry"
 msgstr "Lom"
 
 #. TRANSLATORS: Completed/Skipped/Did not start quarrying marble because ...
-#: ../../data/tribes/buildings/productionsites/empire/quarry/init.lua:69
+#: ../../data/tribes/buildings/productionsites/empire/quarry/init.lua:67
 msgid "quarrying marble"
 msgstr "těžím mramor"
 
-#: ../../data/tribes/buildings/productionsites/empire/quarry/init.lua:82
+#: ../../data/tribes/buildings/productionsites/empire/quarry/init.lua:80
 msgctxt "empire_building"
 msgid ""
 "The stonemason working at this quarry can’t find any rocks in his work area."
@@ -2042,7 +2048,7 @@ msgstr "Domek kameníka"
 
 #. TRANSLATORS: Completed/Skipped/Did not start sculpting a marble column
 #. because ...
-#: ../../data/tribes/buildings/productionsites/empire/stonemasons_house/init.lua:55
+#: ../../data/tribes/buildings/productionsites/empire/stonemasons_house/init.lua:54
 msgid "sculpting a marble column"
 msgstr "tesám mramorový sloup"
 
@@ -2059,7 +2065,7 @@ msgid "Toolsmithy"
 msgstr "Dílna"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a basket because ...
-#: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:96
+#: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:95
 msgid "making a basket"
 msgstr "vyrábím koš"
 
@@ -2071,17 +2077,17 @@ msgstr "Vinohrad"
 
 #. TRANSLATORS: Completed/Skipped/Did not start planting grapevines because
 #. ...
-#: ../../data/tribes/buildings/productionsites/empire/vineyard/init.lua:55
+#: ../../data/tribes/buildings/productionsites/empire/vineyard/init.lua:56
 msgid "planting grapevines"
 msgstr "pěstuji vinná réva"
 
 #. TRANSLATORS: Completed/Skipped/Did not start harvesting grapevines because
 #. ...
-#: ../../data/tribes/buildings/productionsites/empire/vineyard/init.lua:63
+#: ../../data/tribes/buildings/productionsites/empire/vineyard/init.lua:64
 msgid "harvesting grapes"
 msgstr "sklízím vinnou révu"
 
-#: ../../data/tribes/buildings/productionsites/empire/vineyard/init.lua:74
+#: ../../data/tribes/buildings/productionsites/empire/vineyard/init.lua:75
 msgctxt "empire_building"
 msgid ""
 "The vine farmer working at this vineyard has no cleared soil to plant his "
@@ -2135,7 +2141,7 @@ msgctxt "empire_building"
 msgid "Well"
 msgstr "Studna"
 
-#: ../../data/tribes/buildings/productionsites/empire/well/init.lua:63
+#: ../../data/tribes/buildings/productionsites/empire/well/init.lua:61
 msgctxt "empire_building"
 msgid "The carrier working at this well can’t find any water in his well."
 msgstr "Nosič pracující u této studny nemá ve studně vodu."
@@ -2158,36 +2164,36 @@ msgid "Dungeon"
 msgstr "Kobky"
 
 #. TRANSLATORS: Completed/Skipped/Did not start sleeping because ...
-#: ../../data/tribes/buildings/trainingsites/atlanteans/dungeon/init.lua:156
-#: ../../data/tribes/buildings/trainingsites/atlanteans/labyrinth/init.lua:94
-#: ../../data/tribes/buildings/trainingsites/barbarians/battlearena/init.lua:83
-#: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:102
-#: ../../data/tribes/buildings/trainingsites/empire/arena/init.lua:73
-#: ../../data/tribes/buildings/trainingsites/empire/colosseum/init.lua:68
-#: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:96
+#: ../../data/tribes/buildings/trainingsites/atlanteans/dungeon/init.lua:155
+#: ../../data/tribes/buildings/trainingsites/atlanteans/labyrinth/init.lua:92
+#: ../../data/tribes/buildings/trainingsites/barbarians/battlearena/init.lua:81
+#: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:101
+#: ../../data/tribes/buildings/trainingsites/empire/arena/init.lua:72
+#: ../../data/tribes/buildings/trainingsites/empire/colosseum/init.lua:66
+#: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:95
 msgid "sleeping"
 msgstr "spím"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/atlanteans/dungeon/init.lua:164
+#: ../../data/tribes/buildings/trainingsites/atlanteans/dungeon/init.lua:163
 msgctxt "atlanteans_building"
 msgid "upgrading soldier attack from level 0 to level 1"
 msgstr "vylepšovat útok vojáka z úrovně 0 na úroveň 1"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/atlanteans/dungeon/init.lua:175
+#: ../../data/tribes/buildings/trainingsites/atlanteans/dungeon/init.lua:174
 msgctxt "atlanteans_building"
 msgid "upgrading soldier attack from level 1 to level 2"
 msgstr "vylepšovat útok vojáka z úrovně 1 na úroveň 2"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/atlanteans/dungeon/init.lua:186
+#: ../../data/tribes/buildings/trainingsites/atlanteans/dungeon/init.lua:185
 msgctxt "atlanteans_building"
 msgid "upgrading soldier attack from level 2 to level 3"
 msgstr "vylepšovat útok vojáka z úrovně 2 na úroveň 3"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/atlanteans/dungeon/init.lua:197
+#: ../../data/tribes/buildings/trainingsites/atlanteans/dungeon/init.lua:196
 msgctxt "atlanteans_building"
 msgid "upgrading soldier attack from level 3 to level 4"
 msgstr "vylepšovat útok vojáka z úrovně 3 na úroveň 4"
@@ -2199,31 +2205,31 @@ msgid "Labyrinth"
 msgstr "Labyrint"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/atlanteans/labyrinth/init.lua:102
+#: ../../data/tribes/buildings/trainingsites/atlanteans/labyrinth/init.lua:100
 msgctxt "atlanteans_building"
 msgid "upgrading soldier defense from level 0 to level 1"
 msgstr "vylepšovat obranu vojáka z úrovně 0 na úroveň 1"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/atlanteans/labyrinth/init.lua:113
+#: ../../data/tribes/buildings/trainingsites/atlanteans/labyrinth/init.lua:111
 msgctxt "atlanteans_building"
 msgid "upgrading soldier defense from level 1 to level 2"
 msgstr "vylepšovat obranu vojáka z úrovně 1 na úroveň 2"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/atlanteans/labyrinth/init.lua:124
+#: ../../data/tribes/buildings/trainingsites/atlanteans/labyrinth/init.lua:122
 msgctxt "atlanteans_building"
 msgid "upgrading soldier health from level 0 to level 1"
 msgstr "vylepšovat zdraví vojáka z úrovně 0 na úroveň 1"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/atlanteans/labyrinth/init.lua:135
+#: ../../data/tribes/buildings/trainingsites/atlanteans/labyrinth/init.lua:133
 msgctxt "atlanteans_building"
 msgid "upgrading soldier evade from level 0 to level 1"
 msgstr "vylepšovat odrážení vojáka z úrovně 0 na úroveň 1"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/atlanteans/labyrinth/init.lua:146
+#: ../../data/tribes/buildings/trainingsites/atlanteans/labyrinth/init.lua:144
 msgctxt "atlanteans_building"
 msgid "upgrading soldier evade from level 1 to level 2"
 msgstr "vylepšovat odrážení vojáka z úrovně 1 na úroveň 2"
@@ -2235,13 +2241,13 @@ msgid "Battle Arena"
 msgstr "Bitevní aréna"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/barbarians/battlearena/init.lua:91
+#: ../../data/tribes/buildings/trainingsites/barbarians/battlearena/init.lua:89
 msgctxt "barbarians_building"
 msgid "upgrading soldier evade from level 0 to level 1"
 msgstr "vylepšovat odrážení vojáka z úrovně 0 na úroveň 1"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/barbarians/battlearena/init.lua:103
+#: ../../data/tribes/buildings/trainingsites/barbarians/battlearena/init.lua:101
 msgctxt "barbarians_building"
 msgid "upgrading soldier evade from level 1 to level 2"
 msgstr "vylepšovat odrážení vojáka z úrovně 1 na úroveň 2"
@@ -2253,49 +2259,49 @@ msgid "Training Camp"
 msgstr "Výcvikový tábor"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:110
+#: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:109
 msgctxt "barbarians_building"
 msgid "upgrading soldier attack from level 0 to level 1"
 msgstr "vylepšovat útok vojáka z úrovně 0 na úroveň 1"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:121
+#: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:120
 msgctxt "barbarians_building"
 msgid "upgrading soldier attack from level 1 to level 2"
 msgstr "vylepšovat útok vojáka z úrovně 1 na úroveň 2"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:132
+#: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:131
 msgctxt "barbarians_building"
 msgid "upgrading soldier attack from level 2 to level 3"
 msgstr "vylepšovat útok vojáka z úrovně 2 na úroveň 3"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:143
+#: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:142
 msgctxt "barbarians_building"
 msgid "upgrading soldier attack from level 3 to level 4"
 msgstr "vylepšovat útok vojáka z úrovně 3 na úroveň 4"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:154
+#: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:153
 msgctxt "barbarians_building"
 msgid "upgrading soldier attack from level 4 to level 5"
 msgstr "vylepšovat útok vojáka z úrovně 4 na úroveň 5"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:165
+#: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:164
 msgctxt "barbarians_building"
 msgid "upgrading soldier health from level 0 to level 1"
 msgstr "vylepšovat zdraví vojáka z úrovně 0 na úroveň 1"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:176
+#: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:175
 msgctxt "barbarians_building"
 msgid "upgrading soldier health from level 1 to level 2"
 msgstr "vylepšovat zdraví vojáka z úrovně 1 na úroveň 2"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:187
+#: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:186
 msgctxt "barbarians_building"
 msgid "upgrading soldier health from level 2 to level 3"
 msgstr "vylepšovat zdraví vojáka z úrovně 2 na úroveň 3"
@@ -2307,8 +2313,8 @@ msgid "Arena"
 msgstr "Aréna"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/empire/arena/init.lua:81
-#: ../../data/tribes/buildings/trainingsites/empire/colosseum/init.lua:76
+#: ../../data/tribes/buildings/trainingsites/empire/arena/init.lua:80
+#: ../../data/tribes/buildings/trainingsites/empire/colosseum/init.lua:74
 msgctxt "empire_building"
 msgid "upgrading soldier evade from level 0 to level 1"
 msgstr "vylepšovat odrážení vojáka z úrovně 0 na úroveň 1"
@@ -2320,7 +2326,7 @@ msgid "Colosseum"
 msgstr "Koloseum"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/empire/colosseum/init.lua:87
+#: ../../data/tribes/buildings/trainingsites/empire/colosseum/init.lua:85
 msgctxt "empire_building"
 msgid "upgrading soldier evade from level 1 to level 2"
 msgstr "vylepšovat odrážení vojáka z úrovně 1 na úroveň 2"
@@ -2332,49 +2338,49 @@ msgid "Training Camp"
 msgstr "Výcvikový tábor"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:104
+#: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:103
 msgctxt "empire_building"
 msgid "upgrading soldier attack from level 0 to level 1"
 msgstr "vylepšovat útok vojáka z úrovně 0 na úroveň 1"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:115
+#: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:114
 msgctxt "empire_building"
 msgid "upgrading soldier attack from level 1 to level 2"
 msgstr "vylepšovat útok vojáka z úrovně 1 na úroveň 2"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:126
+#: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:125
 msgctxt "empire_building"
 msgid "upgrading soldier attack from level 2 to level 3"
 msgstr "vylepšovat útok vojáka z úrovně 2 na úroveň 3"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:137
+#: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:136
 msgctxt "empire_building"
 msgid "upgrading soldier attack from level 3 to level 4"
 msgstr "vylepšovat útok vojáka z úrovně 3 na úroveň 4"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:148
+#: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:147
 msgctxt "empire_building"
 msgid "upgrading soldier health from level 0 to level 1"
 msgstr "vylepšovat zdraví vojáka z úrovně 0 na úroveň 1"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:159
+#: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:158
 msgctxt "empire_building"
 msgid "upgrading soldier health from level 1 to level 2"
 msgstr "vylepšovat zdraví vojáka z úrovně 1 na úroveň 2"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:170
+#: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:169
 msgctxt "empire_building"
 msgid "upgrading soldier health from level 2 to level 3"
 msgstr "vylepšovat zdraví vojáka z úrovně 2 na úroveň 3"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:181
+#: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:180
 msgctxt "empire_building"
 msgid "upgrading soldier health from level 3 to level 4"
 msgstr "vylepšovat zdraví vojáka z úrovně 3 na úroveň 4"
@@ -2778,7 +2784,7 @@ msgid "Ship"
 msgstr "Loď"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
-#: ../../data/tribes/wares/armor/init.lua:50
+#: ../../data/tribes/wares/armor/init.lua:53
 msgctxt "ware"
 msgid "Armor"
 msgstr "Zbroj"
@@ -3288,7 +3294,7 @@ msgid "Wool"
 msgstr "Vlna"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../data/tribes/workers/atlanteans/armorsmith/init.lua:17
+#: ../../data/tribes/workers/atlanteans/armorsmith/init.lua:39
 msgctxt "atlanteans_worker"
 msgid "Armorsmith"
 msgstr "Platnéř"
@@ -3312,7 +3318,7 @@ msgid "Builder"
 msgstr "Stavitel"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../data/tribes/workers/atlanteans/carrier/init.lua:19
+#: ../../data/tribes/workers/atlanteans/carrier/init.lua:49
 msgctxt "atlanteans_worker"
 msgid "Carrier"
 msgstr "Nosič"
@@ -3420,7 +3426,7 @@ msgid "Smoker"
 msgstr "Uzenář"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../data/tribes/workers/atlanteans/soldier/init.lua:67
+#: ../../data/tribes/workers/atlanteans/soldier/init.lua:198
 msgctxt "atlanteans_worker"
 msgid "Soldier"
 msgstr "Voják"

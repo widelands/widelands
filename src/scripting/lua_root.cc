@@ -294,8 +294,9 @@ World
 
 .. class:: World
 
-   This offers access to the objects in a the widelands world and allows to add
-   new objects.
+   This offers access to the objects in the Widelands world and allows to add new objects.
+   On how to build the world and adding new objects to it, see
+   :ref:`toc_lua_world`.
 */
 
 const char LuaWorld::className[] = "World";
@@ -376,15 +377,8 @@ int LuaWorld::get_terrain_descriptions(lua_State* L) {
 	return 1;
 }
 
-/* RST
-   .. method:: new_resource_type(table)
-
-      Adds a new resource type that can be in the different maps. Takes a
-      single argument, a table with the descriptions for the resource type. See the
-      files in data/world/ for usage examples.
-
-      :returns: :const:`nil`
-*/
+// Documented in data/world/resources/init.lua.
+// See also the World and Tribes section in the Widelands Scripting Reference on the website.
 int LuaWorld::new_resource_type(lua_State* L) {
 	if (lua_gettop(L) != 2) {
 		report_error(L, "Takes only one argument.");
@@ -400,15 +394,8 @@ int LuaWorld::new_resource_type(lua_State* L) {
 	return 0;
 }
 
-/* RST
-   .. method:: new_terrain_type(table)
-
-      Adds a new terrain type that can be used in maps. Takes a single
-      argument, a table with the descriptions for the terrain type. See the files in data/world/
-      for usage examples.
-
-      :returns: :const:`nil`
-*/
+// Documented in data/world/terrains/init.lua.
+// See also the World and Tribes section in the Widelands Scripting Reference on the website.
 int LuaWorld::new_terrain_type(lua_State* L) {
 	if (lua_gettop(L) != 2) {
 		report_error(L, "Takes only one argument.");
@@ -423,15 +410,8 @@ int LuaWorld::new_terrain_type(lua_State* L) {
 	return 0;
 }
 
-/* RST
-   .. method:: new_critter_type(table)
-
-      Adds a new critter type that can be used in maps. Takes a single
-      argument, a table with the description. See the files in data/world/ for usage
-      examples.
-
-      :returns: :const:`nil`
-*/
+// Documented in data/world/critters/badger/init.lua.
+// See also the World and Tribes section in the Widelands Scripting Reference on the website.
 int LuaWorld::new_critter_type(lua_State* L) {
 	if (lua_gettop(L) != 2) {
 		report_error(L, "Takes only one argument.");
@@ -445,15 +425,8 @@ int LuaWorld::new_critter_type(lua_State* L) {
 	return 0;
 }
 
-/* RST
-   .. method:: new_immovable_type(table)
-
-      Adds a new immovable type that can be used in maps. Takes a single
-      argument, a table with the description. See the files in data/world/ for usage
-      examples.
-
-      :returns: :const:`nil`
-*/
+// Documented in data/world/immovables/bush1/init.lua.
+// See also the World and Tribes section in the Widelands Scripting Reference on the website.
 int LuaWorld::new_immovable_type(lua_State* L) {
 	if (lua_gettop(L) != 2) {
 		report_error(L, "Takes only one argument.");
@@ -467,15 +440,8 @@ int LuaWorld::new_immovable_type(lua_State* L) {
 	return 0;
 }
 
-/* RST
-   .. method:: new_editor_terrain_category(table)
-
-      Adds a new editor category that can be used to classify objects in the
-      world. This will be used to sort them into sub menus in the editor. See
-      usage examples in data/world/.
-
-      :returns: :const:`nil`
-*/
+// Documented in data/world/init.lua.
+// See also the World and Tribes section in the Widelands Scripting Reference on the website.
 int LuaWorld::new_editor_terrain_category(lua_State* L) {
 	if (lua_gettop(L) != 2) {
 		report_error(L, "Takes only one argument.");
@@ -489,13 +455,8 @@ int LuaWorld::new_editor_terrain_category(lua_State* L) {
 	return 0;
 }
 
-/* RST
-	.. method:: new_editor_critter_category(table)
-
-		Like :func:`new_editor_terrain_category`, but for immovables.
-
-		:returns: :const:`nil`
-*/
+// Documented in data/world/init.lua.
+// See also the World and Tribes section in the Widelands Scripting Reference on the website.
 int LuaWorld::new_editor_critter_category(lua_State* L) {
 	if (lua_gettop(L) != 2) {
 		report_error(L, "Takes only one argument.");
@@ -509,13 +470,8 @@ int LuaWorld::new_editor_critter_category(lua_State* L) {
 	return 0;
 }
 
-/* RST
-   .. method:: new_editor_immovable_category(table)
-
-      Like :func:`new_editor_terrain_category`, but for immovables.
-
-      :returns: :const:`nil`
-*/
+// Documented in data/world/init.lua.
+// See also the World and Tribes section in the Widelands Scripting Reference on the website.
 int LuaWorld::new_editor_immovable_category(lua_State* L) {
 	if (lua_gettop(L) != 2) {
 		report_error(L, "Takes only one argument.");
@@ -547,19 +503,20 @@ Tribes
 
 const char LuaTribes::className[] = "Tribes";
 const MethodType<LuaTribes> LuaTribes::Methods[] = {
+   METHOD(LuaTribes, new_carrier_type),
    METHOD(LuaTribes, new_constructionsite_type),
    METHOD(LuaTribes, new_dismantlesite_type),
+   METHOD(LuaTribes, new_immovable_type),
+   METHOD(LuaTribes, new_market_type),
    METHOD(LuaTribes, new_militarysite_type),
    METHOD(LuaTribes, new_productionsite_type),
-   METHOD(LuaTribes, new_trainingsite_type),
-   METHOD(LuaTribes, new_warehouse_type),
-   METHOD(LuaTribes, new_immovable_type),
    METHOD(LuaTribes, new_ship_type),
-   METHOD(LuaTribes, new_ware_type),
-   METHOD(LuaTribes, new_carrier_type),
    METHOD(LuaTribes, new_soldier_type),
-   METHOD(LuaTribes, new_worker_type),
+   METHOD(LuaTribes, new_trainingsite_type),
    METHOD(LuaTribes, new_tribe),
+   METHOD(LuaTribes, new_ware_type),
+   METHOD(LuaTribes, new_warehouse_type),
+   METHOD(LuaTribes, new_worker_type),
    {0, 0},
 };
 const PropertyType<LuaTribes> LuaTribes::Properties[] = {
@@ -728,6 +685,30 @@ int LuaTribes::new_warehouse_type(lua_State* L) {
 		LuaTable table(L);  // Will pop the table eventually.
 		EditorGameBase& egbase = get_egbase(L);
 		egbase.mutable_tribes()->add_warehouse_type(table, egbase);
+	} catch (std::exception& e) {
+		report_error(L, "%s", e.what());
+	}
+	return 0;
+}
+
+/* RST
+	.. method:: new_market_type{table}
+
+		Adds a new market building type. Takes a single argument, a table with
+		the descriptions. See :ref:`lua_tribes_buildings_markets` for detailed
+		documentation.
+
+		:returns: :const:`0`
+*/
+int LuaTribes::new_market_type(lua_State* L) {
+	if (lua_gettop(L) != 2) {
+		report_error(L, "Takes only one argument.");
+	}
+
+	try {
+		LuaTable table(L);  // Will pop the table eventually.
+		EditorGameBase& egbase = get_egbase(L);
+		egbase.mutable_tribes()->add_market_type(table, egbase);
 	} catch (std::exception& e) {
 		report_error(L, "%s", e.what());
 	}

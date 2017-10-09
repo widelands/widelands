@@ -118,7 +118,7 @@ public:
 		int renderbuffer_width = 0;
 		int renderbuffer_height = 0;
 		const DescriptionMaintainer<Widelands::TerrainDescription>* terrains = nullptr;
-		FieldsToDraw* fields_to_draw = nullptr;
+		const FieldsToDraw* fields_to_draw = nullptr;
 		float scale = 1.f;
 		Rectf destination_rect = Rectf(0.f, 0.f, 0.f, 0.f);
 	};
