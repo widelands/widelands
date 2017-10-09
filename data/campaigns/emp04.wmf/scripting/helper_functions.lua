@@ -24,27 +24,24 @@ function count_in_warehouses(ware)
    return rv
 end
 
--- function count_mining(ware)
-   -- local whs = array_combine(
-      -- p1:get_buildings("empire_headquarters"),
-      -- p1:get_buildings("empire_warehouse"),
-      -- p1:get_buildings("empire_port")
-   -- )
-      -- local prod = array_combine(
-	  -- p1:get_buildings("empire_smelting_works"),
-	  -- p1:get_buildings("empire_toolsmithy"),
-	  -- p1:get_buildings("empire_armorsmithy"),
-	  -- p1:get_buildings("empire_weaponsmithy")
-   -- )
-   -- local rv = 0
-   -- for idx,wh in ipairs(whs) do
-      -- rv = rv + wh:get_wares(ware)
-   -- end
-   -- for idx,pr in ipairs(prod) do
-      -- rv = rv + pr:get_inputs(ware)
-   -- end
-   -- return rv
--- end
+function enemy_seen()
+   local rv = {}
+   local enemy_border ={}
+   for x=0, map.width-1 do
+      for y=0, map.height-2 do
+         local field = map:get_field(x,y)	 
+		 if field.owner == p2 and (field.trn.owner ~= p2 or field.rn.owner ~= p2 or field.brn.owner ~= p2 or field.bln.owner ~= p2 or field.ln.owner ~= p2 or field.tln.owner ~= p2) then 
+			table.insert(enemy_border, field)
+         end
+	  end
+   end
+   for idx, border in ipairs(enemy_border) do
+      if p1:sees_field(border) then
+      rv = border
+      end
+   end
+   return rv   
+end
 
 
 function concentric_reveal(plr, center, max_radius, delay)

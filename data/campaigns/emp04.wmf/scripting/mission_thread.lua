@@ -13,6 +13,8 @@ function dismantle()
    while count_buildings(p1, {"empire_fishers_house", "empire_quarry", "empire_lumberjacks_house2", "empire_well2", "empire_farm1"}) > 0 do
    sleep(4000)
    end
+   p1:allow_buildings("all")
+   p1:forbid_buildings{"empire_farm", "empire_mill", "empire_brewery", "empire_trainingcamp", "empire_colosseum"}
    o.done = true
    campaign_message_box(amalea_3)
    run (clear_roads)
@@ -263,12 +265,13 @@ function training()
    p1:allow_buildings{"empire_trainingcamp", "empire_colosseum"}
    campaign_message_box(saledus_7)
    sleep(5000)
-   
-   while not obj_find_monastry_done do sleep(3000) end
+
+   while not (obj_find_monastry_done and check_for_buildings(p1, { empire_trainingcamp = 1, empire_colosseum = 1})) do sleep(3000) end
    campaign_message_box(saledus_8)
    local o1 = add_campaign_objective(obj_heroes)
    local heroes = false
    
+   local enemy = false
    while not heroes do
    bld = array_combine(
       p1:get_buildings("empire_headquarters"),
@@ -292,17 +295,32 @@ function training()
 	  if amount > 2 then
 	     heroes = true
       end
-	  --if 
+	  
+	  -- check if the enemy has been seen and where
+	  if enemy == false then
+	     local en_see = enemy_seen()
+	  
+	     if en_see then
+	        local prior_center = scroll_to_field(en_see)
+	        campaign_message_box(saledus_11)
+		    enemy = true
+		    run(conquer)
+	        scroll_to_map_pixel(prior_center)
+	     end
+	  end
       sleep(4273)
    end
    o1.done = true
-   
-   run(conquer)
+   if enemy == false then
+      campaign_message_box(saledus_9)
+      run(conquer)
+   end
+
 end
 
 -- lets finish the babarians off
 function conquer()
-   campaign_message_box(saledus_9)
+
    local o = add_campaign_objective(obj_conquer_all)
 
    while not p2.defeated do sleep(2342) end
@@ -317,8 +335,6 @@ function conquer()
 
    p1:reveal_campaign("campsect2")
    p1:reveal_scenario("empiretut04")
-
-
 end
 
 -- another production chain that is uneffective and need to be corrected
@@ -459,8 +475,12 @@ function mission_thread()
    campaign_message_box(amalea_1)
    run(dismantle)
    run(farm_plans)
+   
+
 
 end
+
+
 
 run(mission_thread)
 

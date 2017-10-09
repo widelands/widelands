@@ -1,16 +1,11 @@
 
 p3:forbid_buildings("all")
 
-
-
-
-
-
 -- =======================================================================
 --                                 Player 1
 -- =======================================================================
 --p1.see_all = true
-p1:forbid_buildings{"empire_farm", "empire_mill", "empire_brewery", "empire_trainingcamp", "empire_colosseum"}
+p1:forbid_buildings("all")
 
 
  prefilled_buildings(p1, { "empire_headquarters", sf.x, sf.y,
