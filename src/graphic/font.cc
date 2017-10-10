@@ -122,13 +122,6 @@ uint32_t Font::ascent() const {
 }
 
 /**
- * \return the number of pixels between lines in this font (from baseline to baseline).
- */
-uint32_t Font::lineskip() const {
-	return computed_typical_maxy_ - computed_typical_miny_;
-}
-
-/**
  * Return the font for the given name and size.
  *
  * \note Fonts are cached and need not be freed explicitly. \see shutdown

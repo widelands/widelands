@@ -48,7 +48,8 @@ struct Message {
 		kWarfare,              // everything starting from here is warfare
 		kWarfareSiteDefeated,
 		kWarfareSiteLost,
-		kWarfareUnderAttack
+		kWarfareUnderAttack,
+		kTradeOfferReceived,
 	};
 
 	/**

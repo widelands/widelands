@@ -262,7 +262,6 @@ private:
 	bool check_enemy_sites(uint32_t);
 	void count_military_vacant_positions();
 	bool check_trainingsites(uint32_t);
-	uint32_t barracks_count();
 	// return single number of strength of vector of soldiers
 	int32_t calculate_strength(const std::vector<Widelands::Soldier*>&);
 	// for militarysites (overloading the function)
@@ -328,7 +327,6 @@ private:
 	uint32_t military_last_dismantle_;
 	uint32_t military_last_build_;  // sometimes expansions just stops, this is time of last military
 	                                // building built
-	int32_t limit_cnt_target(int32_t, int32_t);
 	uint32_t time_of_last_construction_;
 	uint32_t next_mine_construction_due_;
 	uint16_t fishers_count_;

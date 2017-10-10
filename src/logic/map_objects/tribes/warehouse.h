@@ -195,7 +195,6 @@ public:
 	std::vector<Quantity> calc_available_for_worker(Game&, DescriptionIndex index) const;
 
 	void enable_spawn(Game&, uint8_t worker_types_without_cost_index);
-	void disable_spawn(uint8_t worker_types_without_cost_index);
 
 	void receive_ware(Game&, DescriptionIndex ware) override;
 	void receive_worker(Game&, Worker& worker) override;

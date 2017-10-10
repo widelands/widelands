@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-08-24 07:44+0000\n"
-"PO-Revision-Date: 2017-08-24 12:23+0000\n"
+"POT-Creation-Date: 2017-09-15 18:56+0000\n"
+"PO-Revision-Date: 2017-09-16 08:40+0000\n"
 "Last-Translator: Любомир Василев\n"
 "Language-Team: Bulgarian (http://www.transifex.com/widelands/widelands/language/bg/)\n"
 "MIME-Version: 1.0\n"
@@ -195,6 +195,12 @@ msgstr "Параметри на вътрешния мениджър на про�
 
 #: ../../src/wlapplication_messages.cc:133
 msgid ""
+" --animate_map_panning=[yes|no]\n"
+"                      Should automatic map movements be animated."
+msgstr " --animate_map_panning=[yes|no]\n                      Дали автоматичните придвижвания на картата да бъдат анимирани."
+
+#: ../../src/wlapplication_messages.cc:136
+msgid ""
 " --border_snap_distance=[0 ...]\n"
 "                      Move a window to the edge of the screen\n"
 "                      when the edge of the window comes within\n"
@@ -205,7 +211,7 @@ msgstr " --border_snap_distance=[0 …]\n                      Придвижв�
 #. * TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the
 #. widelands
 #. textdomain
-#: ../../src/wlapplication_messages.cc:141
+#: ../../src/wlapplication_messages.cc:144
 msgid ""
 " --dock_windows_to_edges=[true|false]\n"
 "                      Eliminate a window's border towards the\n"
@@ -213,7 +219,7 @@ msgid ""
 "                      window is next to the edge of the screen."
 msgstr " --dock_windows_to_edges=[true|false]\n                      Премахва рамката на прозорец, която е\n                      откъм ръба на екрана, когато ръба на\n                      този прозорец е до ръба на екрана."
 
-#: ../../src/wlapplication_messages.cc:146
+#: ../../src/wlapplication_messages.cc:149
 msgid ""
 " --panel_snap_distance=[0 ...]\n"
 "                      Move a window to the edge of the panel when\n"
@@ -221,7 +227,7 @@ msgid ""
 "                      distance from the edge of the panel."
 msgstr " --panel_snap_distance=[0 …]\n                      Придвижва прозореца към края на панела в\n                      случай, че края на прозореца се окаже в\n                      указаното разстояние от края на панела."
 
-#: ../../src/wlapplication_messages.cc:151
+#: ../../src/wlapplication_messages.cc:154
 msgid ""
 " --snap_windows_only_when_overlapping=[yes|no]\n"
 "                      Only move a window to the edge of a panel\n"
@@ -229,15 +235,15 @@ msgid ""
 "                      panel."
 msgstr " --snap_windows_only_when_overlapping=[yes|no]\n                      Придвижва прозореца в края на панела,\n                      само ако прозореца се припокрива с панела."
 
-#: ../../src/wlapplication_messages.cc:157
+#: ../../src/wlapplication_messages.cc:160
 msgid " --verbose            Enable verbose debug messages"
 msgstr " --verbose Включва подробни съобщения за остраняване на грешките"
 
-#: ../../src/wlapplication_messages.cc:158
+#: ../../src/wlapplication_messages.cc:161
 msgid " --help               Show this help"
 msgstr " --help Показва тази информация"
 
-#: ../../src/wlapplication_messages.cc:159
+#: ../../src/wlapplication_messages.cc:162
 msgid ""
 "Bug reports? Suggestions? Check out the project website:\n"
 "        https://launchpad.net/widelands\n"

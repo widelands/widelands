@@ -124,7 +124,6 @@ constexpr int kNeuronPoolSize = 80;
 constexpr int kFNeuronPoolSize = 60;
 constexpr int kFNeuronBitSize = 32;
 constexpr int kMutationRatePosition = 42;
-constexpr int16_t AiPrefNumberProbability = 5;
 
 constexpr uint32_t kNever = std::numeric_limits<uint32_t>::max();
 
@@ -305,8 +304,6 @@ struct WalkableSpot {
 
 struct BuildableField {
 	explicit BuildableField(const Widelands::FCoords& fc);
-
-	int32_t own_military_sites_nearby_();
 
 	Widelands::FCoords coords;
 
@@ -664,7 +661,6 @@ struct ManagementData {
 	}
 	void set_ai_training_mode() {
 		ai_training_mode_ = true;
-		pref_number_probability = AiPrefNumberProbability;
 	}
 
 	int16_t get_military_number_at(uint8_t);
@@ -687,7 +683,7 @@ private:
 	uint16_t performance_change = 0U;
 	Widelands::AiType ai_type = Widelands::AiType::kNormal;
 	bool ai_training_mode_ = false;
-	uint16_t pref_number_probability = 100;
+	uint16_t pref_number_probability = 200;
 	AiDnaHandler ai_dna_handler;
 };
 
@@ -835,7 +831,6 @@ public:
 	uint32_t get_enemies_max_power();
 	uint32_t get_enemies_max_land();
 	uint32_t get_old_visible_enemies_power(uint32_t);
-	uint32_t get_player_casualities(Widelands::PlayerNumber pn);
 	bool players_in_same_team(Widelands::PlayerNumber pl1, Widelands::PlayerNumber pl2);
 	bool strong_enough(Widelands::PlayerNumber pl);
 	void set_last_time_seen(uint32_t, Widelands::PlayerNumber);
