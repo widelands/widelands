@@ -31,12 +31,16 @@ function farm_plans()
    sleep(4000)
    end
    if f.immovable then
+      local prior_center = scroll_to_field(f)
+	  campaign_message_box(amalea_4)
+	  sleep(2000)
       f.immovable:remove()
       sleep(2000)
+	  scroll_to_map_pixel(prior_center)
    else
       print("Failed to remove artifact at (" .. f.x .. ", " .. f.y .. ")")
    end
-   campaign_message_box(amalea_4)
+
    o.done = true
    p1:allow_buildings{"empire_farm"}
    run (wheat_chain)
@@ -422,8 +426,7 @@ function karma()
 	     "empire_smelting_works",
          "empire_toolsmithy",
          "empire_armorsmithy",
-		 "empire_barracks",
-		 "empire_lumberjacks_house"
+		 "empire_barracks"
          }
 	     local most = 1
 		 local selc = 0 
