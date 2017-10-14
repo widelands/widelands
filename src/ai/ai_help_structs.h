@@ -78,6 +78,7 @@ enum class BuildingAttribute : uint8_t {
 	kUpgradeExtends,
 	kLogRefiner,
 	kIronMine,
+	kNeedsSeafaring,
 };
 
 enum class AiType : uint8_t { kVeryWeak, kWeak, kNormal };
@@ -780,7 +781,6 @@ private:
 	struct PlayerStat {
 		PlayerStat() = default;
 		PlayerStat(Widelands::TeamNumber tc,
-		           bool en,
 		           uint32_t pp,
 		           uint32_t op,
 		           uint32_t o60p,
@@ -790,7 +790,6 @@ private:
 		           uint32_t o60l);
 
 		Widelands::TeamNumber team_number = 0U;
-		bool is_enemy = false;
 		uint32_t players_power = 0U;
 		uint32_t old_players_power = 0U;
 		uint32_t old60_players_power = 0U;
@@ -838,7 +837,6 @@ public:
 	bool get_is_enemy(Widelands::PlayerNumber);
 	uint8_t enemies_seen_lately_count(uint32_t);
 	bool any_enemy_seen_lately(uint32_t);
-	PlayerNumber this_player_number;
 	void set_update_time(uint32_t);
 	uint32_t get_update_time();
 
@@ -850,6 +848,9 @@ private:
 	std::map<Widelands::TeamNumber, uint32_t> team_powers;
 
 	uint32_t update_time;
+	PlayerNumber this_player_number;
+	PlayerNumber this_player_team;
+
 };
 }  // namespace Widelands
 

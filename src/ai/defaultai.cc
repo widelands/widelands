@@ -628,6 +628,9 @@ void DefaultAI::late_initialization() {
 		if (bld.is_buildable()) {
 			bo.set_is(BuildingAttribute::kBuildable);
 		}
+		if (bld.needs_seafaring()) {
+			bo.set_is(BuildingAttribute::kNeedsSeafaring);
+		}
 		if (bh.is_logproducer()) {
 			bo.set_is(BuildingAttribute::kLumberjack);
 		}
@@ -1957,6 +1960,9 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 	uint32_t consumers_nearby_count = 0;
 
 	const Map& map = game().map();
+	//NOCOM this does not compile
+	//const bool seafaring_map = map.allows_seafaring();
+	const bool seafaring_map = true;
 
 	for (int32_t i = 0; i < 4; ++i)
 		spots_avail.at(i) = 0;
@@ -2285,7 +2291,7 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 		} else if (bo.type == BuildingObserver::Type::kProductionsite ||
 		           bo.type == BuildingObserver::Type::kMine) {
 
-			bo.new_building = check_building_necessity(bo, PerfEvaluation::kForConstruction, gametime);
+			bo.new_building = check_building_necessity(bo, PerfEvaluation::kForConstruction, gametime, seafaring_map);
 
 			if (bo.is(BuildingAttribute::kShipyard)) {
 				assert(bo.new_building == BuildingNecessity::kAllowed ||
@@ -2356,7 +2362,7 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 		} else if (bo.type == BuildingObserver::Type::kMilitarysite) {
 			bo.new_building = check_building_necessity(bo, gametime);
 		} else if (bo.type == BuildingObserver::Type::kTrainingsite) {
-			bo.new_building = check_building_necessity(bo, PerfEvaluation::kForConstruction, gametime);
+			bo.new_building = check_building_necessity(bo, PerfEvaluation::kForConstruction, gametime, seafaring_map);
 		} else if (bo.type == BuildingObserver::Type::kWarehouse) {
 			bo.new_building = check_warehouse_necessity(bo, gametime);
 		} else if (bo.aimode_limit_status() != AiModeBuildings::kAnotherAllowed) {
@@ -4291,7 +4297,8 @@ BuildingNecessity DefaultAI::check_warehouse_necessity(BuildingObserver& bo,
 // dismantle
 BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
                                                       const PerfEvaluation purpose,
-                                                      const uint32_t gametime) {
+                                                      const uint32_t gametime,
+                                                      const bool seafaring_map) {
 
 	bo.primary_priority = 0;
 
@@ -4314,6 +4321,12 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 	// Very first we finds if AI is allowed to build such building due to its mode
 	if (purpose == PerfEvaluation::kForConstruction &&
 	    bo.aimode_limit_status() != AiModeBuildings::kAnotherAllowed) {
+		return BuildingNecessity::kForbidden;
+	}
+
+	// Perhaps buildings are not allowed because the map is no seafaring
+	if (purpose == PerfEvaluation::kForConstruction &&
+	    !seafaring_map && bo.is(BuildingAttribute::kNeedsSeafaring)) {
 		return BuildingNecessity::kForbidden;
 	}
 
