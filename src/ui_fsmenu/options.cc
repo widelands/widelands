@@ -112,7 +112,6 @@ FullscreenMenuOptions::FullscreenMenuOptions(OptionsCtrl::OptionsStruct opt)
      box_game_(&tabs_, 0, 0, UI::Box::Vertical, 0, 0, padding_),
 
      // Interface options
-     // NOCOM this will only work when bug-536489-pictorial-dropdown has been merged.
      language_dropdown_(&box_interface_left_,
                         0,
                         0,
