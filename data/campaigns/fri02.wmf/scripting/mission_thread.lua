@@ -4,14 +4,26 @@ local done_exp = false
 local done_mine = false
 local done_fight = false
 
-local has_mountain = false
+local has_mountain = nil
 local see_empire = nil
 
 local fields = {}
+local mountains = {}
 for x=0,map.width-1 do
    for y=0,map.height-1 do
-      fields [#fields + 1] = map:get_field(x,y)
+      local f = map:get_field(x,y)
+      fields [#fields + 1] = f
+      if not (f.terd:find ("mountain") == nil) then mountains [#mountains + 1] = f end
    end
+end
+
+function count_military_buildings_p1 ()
+   return (#p1:get_buildings ("frisians_sentinel") + 
+      #p1:get_buildings ("frisians_outpost") + 
+      #p1:get_buildings ("frisians_tower") + 
+      #p1:get_buildings ("frisians_fortress") + 
+      #p1:get_buildings ("frisians_wooden_tower") + 
+      #p1:get_buildings ("frisians_wooden_tower_high"))
 end
 
 function get_land (p)
@@ -25,9 +37,9 @@ end
 function check_mountain ()
    while true do
       sleep (7777)
-      for idx,f in ipairs(fields) do
+      for idx,f in ipairs(mountains) do
          if f:has_caps ("mine") and f.owner == p1 then 
-            has_mountain = true
+            has_mountain = f
             return
          end
       end
@@ -56,7 +68,7 @@ function expand_south ()
    campaign_message_box (expand_s_1)
    local o = add_campaign_objective (obj_expand_south)
    run (check_empire)
-   while see_empire == nil do sleep (777) end
+   while see_empire == nil do sleep (2221) end
    set_objective_done (o)
 
    scroll_to_field (see_empire)
@@ -66,43 +78,44 @@ function expand_south ()
    campaign_message_box (supply_murilius_4)
    campaign_message_box (supply_murilius_5)
    local placed = false
-   local radius = 1
+   local radius = 0
    while not placed do
       radius = radius + 1
       for idx,f in ipairs (see_empire:region (radius, radius - 1)) do
-         if f.owner == p1 and f:has_caps ("medium") and not placed then
-            p1:place_building ("empire_warehouse", f)
-            placed = true
+         if not placed then
+            local suited = f:has_caps ("medium") and f.brn:has_caps ("flag")
+            for idy,n in ipairs ({f, f.brn, f.rn, f.ln, f.tln, f.trn, f.bln, f.brn.brn, f.brn.bln, f.brn.rn}) do
+               if not (n.owner == p1) then suited = false end
+            end
+            if suited then
+               p1:place_building ("empire_warehouse", f, false, true)
+               placed = true
+            end
          end
       end
    end
    local wh = p1:get_buildings ("empire_warehouse") [1]
-   wh:set_warehouse_policies ("log", "prefer")
-   wh:set_warehouse_policies ("granite", "prefer")
-   wh:set_warehouse_policies ("water", "prefer")
-   wh:set_warehouse_policies ("fish", "prefer")
-   wh:set_warehouse_policies ("ration", "prefer")
-   wh:set_warehouse_policies ("meal", "prefer")
-   wh:set_warehouse_policies ("beer", "prefer")
-   wh:set_warehouse_policies ("coal", "prefer")
-   wh:set_warehouse_policies ("iron", "prefer")
-   wh:set_warehouse_policies ("gold", "prefer")
-   wh:set_warehouse_policies ("iron_ore", "prefer")
-   wh:set_warehouse_policies ("gold_ore", "prefer")
+   for idx,ware in ipairs (p1.tribe.wares) do
+      if p2.tribe:has_ware (ware.name) then
+         wh:set_warehouse_policies (ware.name, "prefer")
+      else
+         wh:set_warehouse_policies (ware.name, "dontstock")
+      end
+   end
    scroll_to_field (wh.fields [1])
-   sleep (2000)
+   sleep (1500)
    campaign_message_box (supply_murilius_6)
    campaign_message_box (supply_murilius_7)
    campaign_message_box (supply_murilius_8)
    
    o = add_campaign_objective (obj_supply_murilius)
    local choice = nil
-   local land = get_land (p1)
+   local milbld = count_military_buildings_p1 ()
    while choice == nil do
-      sleep (7777)
+      sleep (2791)
       if #(p1:get_buildings ("empire_warehouse")) < 1 then 
          choice = "destroy"
-      elseif get_land (p1) > land then 
+      elseif count_military_buildings_p1 () > milbld then 
          choice = "military"
       else
          if wh:get_wares ("log") >= 30 and
@@ -139,46 +152,39 @@ end
 
 function mining_issues ()
    run (check_mountain)
-   while not has_mountain do sleep (777) end
+   while has_mountain == nil do sleep (2221) end
+   scroll_to_field (has_mountain)
    campaign_message_box (train_recycle_1)
    campaign_message_box (train_recycle_2)
    campaign_message_box (train_recycle_3)
    local o = add_campaign_objective (obj_train_recycle)
-   p1:allow_buildings {"frisians_recycling_centre"}
-   local left = true
-   local wares = {"scrap_metal_iron", "scrap_metal_mixed", "sword_basic", "sword_long", "sword_curved", "sword_double"}
-   while left do 
-      sleep (4273) 
-      left = false
-      local buildings = array_combine (
-         p1:get_buildings ("frisians_port"),
-         p1:get_buildings ("frisians_warehouse")
+   p1:allow_buildings {"frisians_recycling_centre", "frisians_training_camp", "frisians_training_arena"}
+   local miner = false
+   while not miner do 
+      sleep (4473) 
+      local mines = array_combine(
+         p1:get_buildings ("frisians_coalmine"),
+         p1:get_buildings ("frisians_rockmine"),
+         p1:get_buildings ("frisians_ironmine"),
+         p1:get_buildings ("frisians_goldmine"),
+         p1:get_buildings ("frisians_coalmine_deep"),
+         p1:get_buildings ("frisians_rockmine_deep"),
+         p1:get_buildings ("frisians_ironmine_deep"),
+         p1:get_buildings ("frisians_goldmine_deep")
       )
-      for idx,bld in ipairs (buildings) do
-         for idy,ware in ipairs (wares) do
-            if bld:get_wares (ware) > 0 then left = true end
-         end
-      end
-      buildings = array_combine(
-         p1:get_buildings ("frisians_recycling_centre"),
-         p1:get_buildings ("frisians_training_camp"),
-         p1:get_buildings ("frisians_training_arena")
-      )
-      for idx,bld in ipairs (buildings) do
-         for idy,ware in ipairs (wares) do
-            if bld:get_inputs (ware) > 0 then left = true end
-         end
+      for idx,bld in ipairs (mines) do 
+         if bld:get_workers ("frisians_miner") + bld:get_workers ("frisians_miner_master") > 0 then 
+            miner = true 
+         end 
       end
    end
    set_objective_done (o)
-
-   while not (check_for_buildings (p1, {frisians_coalmine = 1}) or check_for_buildings (p1, {frisians_ironmine = 1}) or check_for_buildings (p1, {frisians_goldmine = 1}) or check_for_buildings (p1, {frisians_rockmine = 1})) do sleep (4273) end
-   
    campaign_message_box (aqua_farm_1)
    local o = add_campaign_objective (obj_aqua_farm)
-   p1:allow_buildings {"frisians_aqua_farm"}
-   while not check_for_buildings (p1, {frisians_aqua_farm = 1}) do sleep (4273) end
+   p1:allow_buildings {"frisians_aqua_farm", "frisians_furnace", "frisians_barracks", "frisians_seamstress"}
+   while not check_for_buildings (p1, {frisians_aqua_farm = 1}) do sleep (4473) end
    set_objective_done (o)
+   p1:allow_buildings {"frisians_armour_smithy_small", "frisians_seamstress_master"}
    
    done_mine = true
 end
@@ -199,19 +205,17 @@ function supply_yes ()
    if not p2.defeated then 
       campaign_message_box (defeat_murilius_1)
       campaign_message_box (defeat_murilius_2)
-      p2.team = 0
+      p2.team = 2
       p2:allow_buildings ("all")
       add_campaign_objective (obj_defeat_murilius)
-      while get_land (p2) > 0 do 
-         sleep (7777)
-      end
+      while get_land (p2) > 0 do sleep (7777) end
    end
    
    done_fight = true
 end
 
 function supply_no ()
-   p2.team = 0
+   p2.team = 2
    campaign_message_box (defeat_both)
    local o = add_campaign_objective (obj_defeat_both)
    while not p3.defeated do sleep (4829) end
@@ -238,11 +242,11 @@ function mission_thread()
    
    p1.team = 1
    p2.team = 1
-   p3.team = 0
-   
--- TODO list
--- · tell p2 not to attack a building of p3 if its internal name begins with "barbarians_"
--- · p1 and p2 may not share a vision while allies
+   p3.team = 2
+-- TODO: instead of alliances, just forbid certain players to attack each other:
+--     · Beginning:          forbid 1/2, 2/1, 2/3
+--     · Refusing alliance:  forbid only 2/3
+--     · Accepting alliance: first unchanged, after p3 defeated: allow all
    
    campaign_message_box (intro_2)
    local o = add_campaign_objective (obj_new_home)

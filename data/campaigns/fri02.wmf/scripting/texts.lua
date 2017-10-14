@@ -12,7 +12,7 @@ function hauke (title, text)
    return speech ("map:hauke.png", "7799BB", title, text)
 end
 function murilius (title, text)
-   return speech ("map:murilius.png", "BB3311", title, text)
+   return speech ("map:murilius.png", "881100", title, text)
 end
 
 -- =======================================================================
@@ -28,7 +28,7 @@ obj_new_home = {
    title=_"Build a basic economy",
    number = 1,
    body = objective_text (_"Take care of supplies of all basic materials",
-      listitem_bullet (_[[Build a quarry, a reed farm, a clay pit, a well, and houses for a brick burner, a woodcutter and a forester. Also build a charcoal kiln, in case there is no coal in mountains nearby.]])
+      listitem_bullet (_[[Build a quarry, a reed farm, a clay pit, a well, a charcoal kiln, and houses for a brick burner, a woodcutter and a forester.]])
    ),
 }
 obj_expand_south = {
@@ -44,7 +44,7 @@ obj_train_recycle = {
    title=_"Train soldiers and recycle their weapons",
    number = 1,
    body = objective_text (_"Train your soldiers and recycle the discarded weapons to regain some metal",
-      listitem_bullet (_[[When soldiers train, their old weapons are discarded. They can be turned into metal in a Recycling Centre. Use all weapons in the store to train soldiers and recycle all scrap metal.]])
+      listitem_bullet (_[[When soldiers train, their old weapons are discarded. They can be turned into metal in a Recycling Centre. Use the weapons in the store to train soldiers and recycle some scrap metal.]])
    ),
 }
 obj_aqua_farm = {
@@ -64,7 +64,7 @@ obj_supply_murilius = {
       .. paragraphdivider () ..
       _([[30×Log, 40×Granite, 30×Fish, 30×Beer, 150×Water, 40×Ration, 10×Meal, 30×Coal, 40×Iron Ore, 20×Iron, 20×Gold Ore, 10×Gold.]]) 
       .. paragraphdivider () ..
-      _([[Or just destroy the warehouse and risk having Murilius as an enemy. Expanding your territory is forbidden until the wares have been handed over.]]) 
+      _([[Or just destroy the warehouse and risk having Murilius as an enemy. He forbade you to expand your territory until the wares have been handed over.]]) 
       )
    ),
 }
@@ -113,7 +113,10 @@ intro_2 = {
       _([[This place looks bleak and barren, my companions say, but I think it looks… beautiful.]])
       .. paragraphdivider () ..
       -- TRANSLATORS: Reebaud – Introduction 2
-      _([[We will settle here. My scouts report no sign of living creatures anywhere nearby. We will start building our new home here.]]))
+      _([[We will settle here. My scouts report no sign of living creatures anywhere nearby. We will start building our new home here.]])
+      .. paragraphdivider () ..
+      -- TRANSLATORS: Reebaud – Introduction 2
+      _([[We must start by building all the basic buildings. I see no mountains nearby where we might mine coal. We´d better build a charcoal kiln to burn logs into charcoal. We improve the kilns with clay so they don´t consume so much wood. Our neighbours used to envy us for this clever technique, which they couldn´t copy.]]))
       .. new_objectives (obj_new_home),
 }
 
@@ -161,7 +164,7 @@ aqua_farm_1 = {
    title =_ "Fishing",
    body=hauke (_"We need fish",
       -- TRANSLATORS: Hauke – Aqua Farms
-      _([[Chieftain Reebaud, I have more bad news. There are almost no fish in the waters nearby. We can prepare rations using only fruit or bread, but soldier training requires lots of smoked meat or fish. The scraps of meat a reindeer farm drops out as a by-product when making fur aren´t enough.]])
+      _([[Chieftain Reebaud, I have more bad news. There are almost no fish in the waters nearby. While we can prepare rations using only fruit or bread, soldier training requires lots of smoked meat or fish. The scraps of meat a reindeer farm drops out as a by-product when making fur aren´t enough.]])
       .. paragraphdivider () ..
       -- TRANSLATORS: Hauke – Aqua Farms
       _([[Fortunately, one of our fishermen thought of a solution. Our clay pits leave large holes in the ground; a fisher could fill them with water and grow fish in these ponds. He will only need lots of water for the ponds, and fruit to feed the fish.]]))
@@ -187,7 +190,7 @@ supply_murilius_3 = {
       _([[Do they not even speak the noble language of the Empire?]])
       .. paragraphdivider () ..
       -- TRANSLATORS: Murilius – Supply Murilius 3
-      _([[Strangers! I, Murilius, Proconsule of the Northern Lands, a province of our Empire, demand to know who you are and what your business in these lands is!]])),
+      _([[Strangers! I, Murilius, Proconsule of the Northern Lands, a province of the Empire, demand to know who you are and what your business in these lands is!]])),
 }
 supply_murilius_4 = {
    title =_ "We are not alone",
@@ -217,16 +220,16 @@ supply_murilius_7 = {
    title =_ "We are not alone",
    body=hauke (_"Strangers",
       -- TRANSLATORS: Hauke – Supply Murilius 7
-      _([[Chieftain Reebaud – we cannot afford to spare that many wares to aid that arrogant Empire Proconsule. All his demands are just outrageous. I propose to destroy that ugly warehouse and let him fight his own battles.]])),
+      _([[Chieftain Reebaud – the demands of this arrogant Empire Proconsule are just outrageous. He treats us like we are his servants. And we certainly cannot afford to spare that many wares to aid him. I propose to destroy that ugly warehouse and let him fight his own battles.]])),
 }
 supply_murilius_8 = {
    title =_ "We are not alone",
    body=murilius ("Salvete peregrini!",
       -- TRANSLATORS: Murilius – Supply Murilius 8
-      _([[If you fail to deliver these wares, the Empire shall turn against you. And so as to prevent you wasting your precious metal, I forbid you to expand your territory from this moment on until you have given us your gift. Fail to obey, and the Empire shall turn against you.]])
+      _([[If you fail to deliver these wares, the Empire shall treat you like enemies. And so as to prevent you wasting your precious metal, I forbid you to expand your territory from this moment on until you have given us your gift. Fail to obey, and the Empire shall treat you like enemies.]])
       .. paragraphdivider () ..
       -- TRANSLATORS: Murilius – Supply Murilius 8
-      _([[You will have to fight these barbarians if you intend to live in the area; surely you can see that fighting them together with the Empire is easier than alone? And you really do not want the Empire to turn against you. Barbarians though you are, I do believe you will realize the truth of my words after some consideration.]]))
+      _([[You will have to fight these barbarians if you intend to live in the area; surely you can see that fighting them together with the Empire is easier than alone? And you really do not want the Empire as your enemy. Barbarians though you are, I do believe you will realize the truth of my words after some consideration.]]))
       .. new_objectives (obj_supply_murilius),
 }
 
@@ -259,7 +262,7 @@ defeat_both = {
       _([[He has made it quite clear that he won´t leave us alone. I fear we must defeat Murilius and destroy his colony if we ever want to have peace here.]])
       .. paragraphdivider () ..
       -- TRANSLATORS: Reebaud – defeat both enemies
-      _([[The barbarian tribe he mentioned is also a threat. I don´t want to share this land with anyone, as sharing only leads to conflicts and battles. We must defeat the barbarians as well.]]))
+      _([[The barbarian tribe he mentioned is also a threat. I don´t want to share this land with anyone, as sharing only leads to conflicts and battles, as we saw in our old home. We must defeat the barbarians as well.]]))
       .. new_objectives (obj_defeat_both),
 }
 supply_murilius_thanks = {
@@ -268,8 +271,8 @@ supply_murilius_thanks = {
       -- TRANSLATORS: Murilius – Supplied Murilius
       _([[Strangers! I see you have kept your word. The Empire rewards its friends, therefore I shall reward you with the friendship of the Empire!]])
       .. paragraphdivider () ..
-      -- TRANSLATORS: Murilius – Supplied Murilius. Murilius´s plan is to use the player´s soldiers as cannon fodder, while he only attacks when he has no choice
-      _([[Now I permit you to assist us in conquering the barbarians, who live in a sheltered valley northwest to us. I charge you, expand north of the mountains enclosing this outpost; you will find the barbarians there – attack them! We will fend off attacks lauched by the enemy.]]))
+      -- TRANSLATORS: Murilius – Supplied Murilius. Murilius´s plan is to use the player as cannon fodder, while he himself only attacks when he has no choice
+      _([[Now I permit you to assist us in conquering the barbarians, who live in a sheltered valley northwest to us. I charge you, expand along the northern end of the mountains enclosing this outpost; you will find the barbarians there – attack them! We will fend off attacks lauched by the enemy.]]))
       .. new_objectives (obj_defeat_barbarians),
 }
 defeat_murilius_1 = {

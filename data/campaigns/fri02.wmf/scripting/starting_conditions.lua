@@ -1,31 +1,42 @@
 -- =======================================================================
 --                                 Player 1
 -- =======================================================================
-p1:allow_buildings("all")
-p1:forbid_buildings{"frisians_aqua_farm", "frisians_recycling_centre"}
+p1:allow_buildings ("all")
+p1:forbid_buildings {
+   "frisians_aqua_farm", 
+   "frisians_recycling_centre",
+   "frisians_furnace",
+   "frisians_armour_smithy_small",
+   "frisians_barracks",
+   "frisians_training_camp",
+   "frisians_training_arena",
+   "frisians_seamstress",
+   "frisians_seamstress_master",
+}
 
-hq = p1:place_building("frisians_port",
-   map.player_slots[1].starting_field, false, true)
-hq:set_wares {
+port1 = p1:place_building ("frisians_port", map.player_slots [1].starting_field, false, true)
+port1:set_wares {
    log = 40,
    brick = 50,
-   clay = 20,
    granite = 40,
+   thatch_reed = 20,
+   --log = 200, brick = 300, granite = 200, thatch_reed = 200,
+   
+   clay = 20,
    water = 20,
    coal = 20,
-   thatch_reed = 20,
-   fish = 10,
-   meat = 5,
+   fish = 8,
+   meat = 6,
    fruit = 10,
    bread_frisians = 15,
    beer = 15,
    ration = 10,
-   gold_ore = 1,
-   sword_long = 10,
+   gold = 1,
+   sword_long = 9,
    sword_curved = 4,
    sword_double = 1
 }
-hq:set_workers {
+port1:set_workers {
    frisians_woodcutter = 4,
    frisians_forester = 7,
    frisians_clay_burner = 5,
@@ -49,13 +60,13 @@ hq:set_workers {
    frisians_reindeer = 1,
    frisians_charcoal_burner = 3
 }
-hq:set_soldiers({0,0,0,0}, 20)
+port1:set_soldiers ({0,0,0,0}, 20)
 
 -- =======================================================================
 --                                 Player 2
 -- =======================================================================
-p2:forbid_buildings("all")
-p2:allow_buildings({
+p2:forbid_buildings ("all")
+p2:allow_buildings {
    "empire_warehouse",
    "empire_sentry",
    "empire_blockhouse",
@@ -91,9 +102,8 @@ p2:allow_buildings({
    "empire_well",
    "empire_stonemasons_house",
    "empire_sawmill"
-})
-hq2 = p2:place_building("empire_headquarters",
-   map.player_slots[2].starting_field, false, true)
+}
+hq2 = p2:place_building ("empire_headquarters", map.player_slots [2].starting_field, false, true)
 hq2:set_wares {
    log = 100,
    granite = 50,
@@ -147,13 +157,13 @@ hq2:set_workers {
    empire_weaponsmith = 1,
    empire_geologist = 2
 }
-hq2:set_soldiers({4,4,0,2}, 50)
+hq2:set_soldiers ({4,4,0,2}, 50)
 
 -- =======================================================================
 --                                 Player 3
 -- =======================================================================
-p3:forbid_buildings("all")
-p3:allow_buildings({
+p3:forbid_buildings ("all")
+p3:allow_buildings {
    "barbarians_warehouse",
    "barbarians_sentry",
    "barbarians_barrier",
@@ -189,9 +199,8 @@ p3:allow_buildings({
    "barbarians_hunters_hut",
    "barbarians_fishers_hut",
    "barbarians_gamekeepers_hut"
-})
-hq3 = p3:place_building("barbarians_headquarters",
-   map.player_slots[3].starting_field, false, true)
+}
+hq3 = p3:place_building ("barbarians_headquarters", map.player_slots [3].starting_field, false, true)
 hq3:set_wares {
    log = 100,
    granite = 50,
@@ -240,4 +249,4 @@ hq3:set_workers {
    barbarians_blacksmith_master = 1,
    barbarians_helmsmith = 1
 }
-hq3:set_soldiers({3,5,0,2}, 80)
+hq3:set_soldiers ({3,5,0,2}, 80)
