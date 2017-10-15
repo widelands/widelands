@@ -1960,9 +1960,8 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 	uint32_t consumers_nearby_count = 0;
 
 	const Map& map = game().map();
-	//NOCOM this does not compile
-	//const bool seafaring_map = map.allows_seafaring();
-	const bool seafaring_map = true;
+	const std::set<std::string>& map_tags = map.get_tags();
+	const bool seafaring_map = map_tags.count("seafaring");
 
 	for (int32_t i = 0; i < 4; ++i)
 		spots_avail.at(i) = 0;
