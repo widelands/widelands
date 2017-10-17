@@ -26,7 +26,7 @@
  * introduction of the relay this changes: GameHost/GameClient still create and process the data packets.
  * For LAN games, they still pass them to the NetHost/NetClient.
  * For internet games, the traffic is relayed by the metaserver. GameHost/GameClient pass their packets to
- * the new classes NetHostProxy/NetClientProxy. Those have no longer a direct connection but are both
+ * the new classes NetHostProxy/NetClientProxy. Those no longer have a direct connection but are both
  * connected to the relay on the metaserver. When they want to exchange messages, they send their packets
  * to the relay which forwards them to the intended recipient.
  * The relay only transport the packets, it does not run any game logic. The idea of this is that the
@@ -38,18 +38,18 @@
  *
  * An example of a typical session:
  * 1) A user wants to start an internet game. The Widelands instance tells the metaserver about it.
- * 2) A relay instance is started by the metaserver. On startup of the relay, a password (random string)
- *    for the game-host position in the new game is set. Additionally, the name of the hosted game is stored.
- *    The address of the relay as well as the password is send to the Widelands instance by the metaserver.
- * 3) The GameHost is constructed in the Widelands instance of the user and connects to the relay.
+ * 2) A relay instance is started by the metaserver. On startup of the relay, the nonce of the player is set
+ *    as password for the game-host position in the new game. Additionally, the name of the hosted game
+ *    is stored. The IP address of the relay is send to the Widelands instance by the metaserver.
+ * 3) The Widelands instance of the user connects to the relay.
  * 4) Now there is a reachable relay/game running somewhere. The open game can be listed in the lobby.
  * 5) Clients get the address and port of the relay by the metaserver and can connect to the game.
  *    When enough clients have connected, the GameHost can start the game.
- * 6) When a client wants to send a packet (e.g. user input) to the GameHost, its GameHost packs the packet,
+ * 6) When a client wants to send a packet (e.g. user input) to the GameHost, its GameClient packs the packet,
  *    passes it to the local NetClientProxy which sends it to the relay. The relay relays the packet to the
  *    NetHostProxy which passes it to the GameHost.
  * 7) When the GameHost wants to send a packet to one or all clients, it also packs it and passes it to its
- *    NetHostProxy which sends it to the relay, where it is forwarded to the clients.
+ *    NetHostProxy which sends it to the relay, where it is forwarded to the client(s).
  */
 
 
@@ -64,9 +64,6 @@
  * 1: Initial version between build 19 and build 20
  */
 constexpr uint8_t kRelayProtocolVersion = 1;
-
-// This protocol does not need to care about timeouts, keep-alives, or reconnects
-// since higher layers (GameHost, GameClient) deal with it.
 
 /**
  * The commands used by the relay.
