@@ -790,6 +790,9 @@ bool DefaultAI::check_militarysites(uint32_t gametime) {
 		return false;
 	}
 
+	// Make sure we have statistics about our enemies up-to-date
+	update_player_stat(gametime);
+
 	// Make sure we are not above ai type limit
 	assert(mso.bo->total_count() <= mso.bo->cnt_limit_by_aimode);
 

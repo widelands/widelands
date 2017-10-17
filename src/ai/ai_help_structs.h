@@ -814,6 +814,7 @@ public:
 	         uint32_t land,
 	         uint32_t oland,
 	         uint32_t o60l);
+	void remove_stat(Widelands::PlayerNumber pn);
 	void recalculate_team_power();
 
 	// This is strength of player plus third of strength of other members of his team

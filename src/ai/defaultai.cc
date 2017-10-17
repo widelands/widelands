@@ -1076,6 +1076,9 @@ void DefaultAI::late_initialization() {
 void DefaultAI::update_all_buildable_fields(const uint32_t gametime) {
 	uint16_t i = 0;
 
+	// To be sure we have some info about enemies we might see
+	update_player_stat(gametime);
+
 	// we test 40 fields that were update more than 1 seconds ago
 	while (!buildable_fields.empty() &&
 	       (buildable_fields.front()->field_info_expiration - kFieldInfoExpiration + 1000) <=
@@ -1962,6 +1965,10 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 	const Map& map = game().map();
 	const std::set<std::string>& map_tags = map.get_tags();
 	const bool seafaring_map = map_tags.count("seafaring");
+	for (auto item : map_tags) {
+		printf (" - %s\n",item.c_str());
+		}
+	printf ("DEBUG: Seafaring map %s\n", (seafaring_map) ? "Y":"N");
 
 	for (int32_t i = 0; i < 4; ++i)
 		spots_avail.at(i) = 0;
@@ -5883,10 +5890,11 @@ bool DefaultAI::check_supply(const BuildingObserver& bo) {
 
 // TODO(tiborb): - should be called from scheduler, once in 60s is enough
 void DefaultAI::update_player_stat(const uint32_t gametime) {
-	if (player_statistics.get_update_time() > 0 &&
-	    player_statistics.get_update_time() + 15 * 1000 > gametime) {
-		return;
-	}
+	printf ("%d: DEBUG: update_player_stat(), old update time: %d\n", player_number(), player_statistics.get_update_time());
+	//if (player_statistics.get_update_time() > 0 &&
+	    //player_statistics.get_update_time() + 15 * 1000 > gametime) {
+		//return;
+	//}
 	player_statistics.set_update_time(gametime);
 	Widelands::PlayerNumber const pn = player_number();
 	PlayerNumber const nr_players = game().map().get_nrplayers();
@@ -5898,7 +5906,8 @@ void DefaultAI::update_player_stat(const uint32_t gametime) {
 
 	// Collecting statistics and saving them in player_statistics object
 	const Player* me = game().get_player(pn);
-	for (Widelands::PlayerNumber j = 1; j <= plr_in_game; ++j) {
+	printf ("DEBUG Players in game: %d, player positions: %d\n", plr_in_game, nr_players); //NOCOM
+	for (Widelands::PlayerNumber j = 1; j <= nr_players; ++j) {
 		const Player* this_player = game().get_player(j);
 		if (this_player) {
 			try {
@@ -5940,6 +5949,9 @@ void DefaultAI::update_player_stat(const uint32_t gametime) {
 				    static_cast<unsigned int>(player_number()),
 				    static_cast<unsigned int>(genstats.size()));
 			}
+		} else {
+			// Well, under some circumstances it is possible we have stat for this player and he does not exist anymore
+			player_statistics.remove_stat(j);
 		}
 	}
 

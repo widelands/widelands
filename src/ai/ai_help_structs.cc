@@ -1077,14 +1077,6 @@ void PlayersStrengths::add(Widelands::PlayerNumber pn,
                            uint32_t oland,
                            uint32_t o60l) {
 	if (all_stats.count(opn) == 0) {
-		//bool enemy = false;
-		//if (pn == opn) {
-			//;
-		//} else if (pltn == 0 || mytn == 0) {
-			//enemy = true;
-		//} else if (pltn != mytn) {
-			//enemy = true;
-		//}
 		this_player_number = pn;
 		this_player_team = mytn;
 		all_stats.insert(
@@ -1099,15 +1091,23 @@ void PlayersStrengths::add(Widelands::PlayerNumber pn,
 		all_stats[opn].old60_players_land = oland;
 		assert(this_player_number == pn);
 		if (this_player_team != mytn){
-			printf ("DEBUG %2d: Team changed %d -> %d\n", pn, this_player_team, mytn);
+			log("%2d: Team changed %d -> %d\n", pn, this_player_team, mytn);
 			this_player_team = mytn;
 		};
 		if (all_stats[opn].team_number != pltn){
-			printf ("DEBUG %2d: Team changed for player %d: %d -> %d\n", pn, opn, all_stats[opn].team_number, pltn);
+			log("%2d: Team changed for player %d: %d -> %d\n", pn, opn, all_stats[opn].team_number, pltn);
 			all_stats[opn].team_number = pltn;
 		};
 	}
 }
+
+void PlayersStrengths::remove_stat(const Widelands::PlayerNumber pn) {
+	if (all_stats.count(pn) > 0){
+		printf("%d: Erasing statistics for player %d\n", this_player_number, pn);
+		all_stats.erase(pn);
+	}
+}
+
 
 // After statistics for team members are updated, this calculation is needed
 void PlayersStrengths::recalculate_team_power() {
