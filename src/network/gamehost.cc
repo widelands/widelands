@@ -50,6 +50,7 @@
 #include "map_io/widelands_map_loader.h"
 #include "network/constants.h"
 #include "network/internet_gaming.h"
+#include "network/nethost.h"
 #include "network/network_gaming_messages.h"
 #include "network/network_lan_promotion.h"
 #include "network/network_player_settings_backend.h"
@@ -387,7 +388,7 @@ private:
 };
 
 struct Client {
-	NetHost::ConnectionId sock_id;
+	NetHostInterface::ConnectionId sock_id;
 	uint8_t playernum;
 	int16_t usernum;
 	std::string build_id;
@@ -411,7 +412,7 @@ struct GameHostImpl {
 	NetworkPlayerSettingsBackend npsb;
 
 	LanGamePromoter* promoter;
-	std::unique_ptr<NetHost> net;
+	std::unique_ptr<NetHostInterface> net;
 
 	/// List of connected clients. Note that clients are not in the same
 	/// order as players. In fact, a client must not be assigned to a player.
@@ -2197,7 +2198,7 @@ void GameHost::handle_packet(uint32_t const i, RecvPacket& r) {
 	}
 }
 
-void GameHost::send_file_part(NetHost::ConnectionId csock_id, uint32_t part) {
+void GameHost::send_file_part(NetHostInterface::ConnectionId csock_id, uint32_t part) {
 	assert(part < file_->parts.size());
 
 	uint32_t left = file_->bytes - NETFILEPARTSIZE * part;
