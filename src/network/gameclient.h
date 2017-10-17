@@ -36,10 +36,7 @@ struct GameClientImpl;
  * This includes running the game setup screen and the actual game after
  * launch, as well as dealing with the actual network protocol.
  */
-struct GameClient : public GameController,
-                    public GameSettingsProvider,
-                    private SyncCallback,
-                    public ChatProvider {
+struct GameClient : public GameController, public GameSettingsProvider, public ChatProvider {
 	GameClient(const std::pair<NetAddress, NetAddress>& host,
 	           const std::string& playername,
 			   bool internet = false, const std::string& gamename = "");
@@ -87,13 +84,13 @@ struct GameClient : public GameController,
 	virtual void set_player_tribe(uint8_t number,
 	                              const std::string& tribe,
 	                              bool const random_tribe = false) override;
-	void set_player_init(uint8_t number, uint8_t index) override;
+	void set_player_init(uint8_t number, uint8_t initialization_index) override;
 	void set_player_name(uint8_t number, const std::string& name) override;
 	void set_player(uint8_t number, const PlayerSettings& ps) override;
 	void set_player_number(uint8_t number) override;
 	void set_player_team(uint8_t number, Widelands::TeamNumber team) override;
 	void set_player_closeable(uint8_t number, bool closeable) override;
-	void set_player_shared(uint8_t number, uint8_t shared) override;
+	void set_player_shared(PlayerSlot number, Widelands::PlayerNumber shared) override;
 	void set_win_condition_script(const std::string&) override;
 	std::string get_win_condition_script() override;
 
@@ -110,7 +107,7 @@ private:
 		return path + "~backup";
 	}
 
-	void syncreport() override;
+	void sync_report_callback();
 
 	void handle_packet(RecvPacket&);
 	void handle_network();

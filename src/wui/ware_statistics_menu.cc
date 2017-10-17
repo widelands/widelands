@@ -103,8 +103,7 @@ WareStatisticsMenu::WareStatisticsMenu(InteractivePlayer& parent,
                       &registry,
                       kPlotWidth + 2 * kSpacing,
                       270,
-                      _("Ware Statistics")),
-     parent_(&parent) {
+                      _("Ware Statistics")) {
 	uint8_t const nr_wares = parent.get_player()->egbase().tribes().nrwares();
 
 	// Init color sets
@@ -120,8 +119,7 @@ WareStatisticsMenu::WareStatisticsMenu(InteractivePlayer& parent,
 
 	// Setup plot widgets
 	// Create a tabbed environment for the different plots
-	UI::TabPanel* tabs =
-	   new UI::TabPanel(box, kSpacing, 0, g_gr->images().get("images/ui_basic/but1.png"));
+	UI::TabPanel* tabs = new UI::TabPanel(box, g_gr->images().get("images/ui_basic/but1.png"));
 
 	plot_production_ = new WuiPlotArea(tabs, 0, 0, kPlotWidth, kPlotHeight + kSpacing,
 	                                   kStatisticsSampleTime, WuiPlotArea::Plotmode::kRelative);

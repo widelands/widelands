@@ -13,6 +13,7 @@ wl_library(logic_game_settings
     io_filesystem
     logic
     logic_constants
+    notifications
     scripting_lua_interface
     scripting_lua_table
 )
@@ -66,6 +67,8 @@ wl_library(logic_constants
 
 wl_library(logic
   SRCS
+    ai_dna_handler.cc
+    ai_dna_handler.h
     backtrace.cc
     backtrace.h
     cmd_calculate_statistics.cc
@@ -92,14 +95,14 @@ wl_library(logic
     findimmovable.h
     findnode.cc
     findnode.h
-    game_data_error.cc
-    game_data_error.h
     game.cc
     game.h
-    map_revision.cc
-    map_revision.h
+    game_data_error.cc
+    game_data_error.h
     map.cc
     map.h
+    map_revision.cc
+    map_revision.h
     mapastar.cc
     mapastar.h
     mapdifferenceregion.cc
@@ -111,18 +114,18 @@ wl_library(logic
     mapregion.h
     maptriangleregion.cc
     maptriangleregion.h
+    message.h
     message_id.h
     message_queue.h
-    message.h
     nodecaps.h
     objective.h
     path.cc
     path.h
     pathfield.cc
     pathfield.h
-    player_area.h
     player.cc
     player.h
+    player_area.h
     playercommand.cc
     playercommand.h
     playersmanager.cc
@@ -135,6 +138,7 @@ wl_library(logic
     roadtype.h
     save_handler.cc
     save_handler.h
+    trade_agreement.h
     widelands_geometry_io.cc
     widelands_geometry_io.h
     map_objects/bob.cc
@@ -163,6 +167,8 @@ wl_library(logic
     map_objects/tribes/constructionsite.h
     map_objects/tribes/dismantlesite.cc
     map_objects/tribes/dismantlesite.h
+    map_objects/tribes/market.cc
+    map_objects/tribes/market.h
     map_objects/tribes/militarysite.cc
     map_objects/tribes/militarysite.h
     map_objects/tribes/partially_finished_building.cc

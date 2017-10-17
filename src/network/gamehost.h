@@ -38,7 +38,7 @@ struct Client;
  * This includes running the game setup screen and the actual game after
  * launch, as well as dealing with the actual network protocol.
  */
-struct GameHost : public GameController, private SyncCallback {
+struct GameHost : public GameController {
 	GameHost(const std::string& playername, bool internet = false);
 	virtual ~GameHost();
 
@@ -76,7 +76,7 @@ struct GameHost : public GameController, private SyncCallback {
 	void set_player_number(uint8_t number);
 	void set_player_team(uint8_t number, Widelands::TeamNumber team);
 	void set_player_closeable(uint8_t number, bool closeable);
-	void set_player_shared(uint8_t number, uint8_t shared);
+	void set_player_shared(PlayerSlot number, Widelands::PlayerNumber shared);
 	void switch_to_player(uint32_t user, uint8_t number);
 	void set_win_condition_script(const std::string& wc);
 
@@ -119,7 +119,7 @@ private:
 	                              const std::string& c = "");
 	void request_sync_reports();
 	void check_sync_reports();
-	void syncreport() override;
+	void sync_report_callback();
 
 	void clear_computer_players();
 	void init_computer_player(Widelands::PlayerNumber p);

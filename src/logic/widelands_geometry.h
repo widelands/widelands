@@ -54,14 +54,11 @@ struct Coords {
 
 	bool operator==(const Coords& other) const;
 	bool operator!=(const Coords& other) const;
-	operator bool() const;
+	bool operator<(const Coords& other) const {
+		return std::forward_as_tuple(y, x) < std::forward_as_tuple(other.y, other.x);
+	}
 
-	// Ordering functor for use with std:: containers.
-	struct OrderingFunctor {
-		bool operator()(const Coords& a, const Coords& b) const {
-			return std::forward_as_tuple(a.y, a.x) < std::forward_as_tuple(b.y, b.x);
-		}
-	};
+	operator bool() const;
 
 	// Move the coords to the 'new_origin'.
 	void reorigin(Coords new_origin, const Extent& extent);
@@ -112,53 +109,36 @@ struct FCoords : public Coords {
 	}
 	FCoords(const Coords& nc, Field* const nf) : Coords(nc), field(nf) {
 	}
-
-	/**
-	 * Used in RenderTarget::rendermap where this is first called, then the
-	 * coordinates are normalized and after that field is set.
-	 *
-	 * \note You really want to use \ref Map::get_fcoords instead.
-	 */
-	explicit FCoords(const Coords& nc) : Coords(nc), field(nullptr) {
-	}
-
 	Field* field;
 };
 
-template <typename CoordsType = Coords> struct TCoords : public CoordsType {
-	enum TriangleIndex { D, R, None };
+enum class TriangleIndex { D, R };
 
-	TCoords() : t() {
-	}
-	TCoords(const CoordsType C, const TriangleIndex T = None) : CoordsType(C), t(T) {
+// This uniquely indexes a single Triangle on the map. A Triangle is identified
+// by its owning node and the triangle index (down or right).
+template <typename CoordsType = Coords> struct TCoords {
+	TCoords(const CoordsType C, const TriangleIndex T) : node(C), t(T) {
 	}
 
 	bool operator==(const TCoords& other) const {
-		return CoordsType::operator==(other) && t == other.t;
+		return node == other.node && t == other.t;
 	}
 	bool operator!=(const TCoords& other) const {
-		return CoordsType::operator!=(other) || t != other.t;
+		return !(*this == other);
+	}
+	bool operator<(const TCoords& other) const {
+		return std::forward_as_tuple(node, t) < std::forward_as_tuple(other.node, other.t);
 	}
 
+	CoordsType node;
 	TriangleIndex t;
 };
 
+// A pair of a coord and a triangle, used to signify which field and which
+// triangle the cursor is closest to. The triangle might belong to another
+// field.
 template <typename NodeCoordsType = Coords, typename TriangleCoordsType = Coords>
 struct NodeAndTriangle {
-	NodeAndTriangle() {
-	}
-	NodeAndTriangle(const NodeCoordsType Node, const TCoords<TriangleCoordsType>& Triangle)
-
-	   : node(Node), triangle(Triangle) {
-	}
-
-	bool operator==(const NodeAndTriangle<>& other) const {
-		return node == other.node && triangle == other.triangle;
-	}
-	bool operator!=(const NodeAndTriangle<>& other) const {
-		return !(*this == other);
-	}
-
 	NodeCoordsType node;
 	TCoords<TriangleCoordsType> triangle;
 };

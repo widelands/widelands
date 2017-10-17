@@ -7,6 +7,7 @@
 # GunChleoc, 2015-2016
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2014
 # FIRST AUTHOR <nasenbaer_peter@sourceforge.net>, 2008
+# Jonas Richardsen <jonas.richardsen@isdas.de>, 2017
 # millimarg, 2015
 # millimarg, 2015
 # Mirian Margiani <mirian.margiani@gmail.com>, 2014
@@ -20,8 +21,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-03-03 06:24+0000\n"
-"PO-Revision-Date: 2017-03-03 21:23+0000\n"
+"POT-Creation-Date: 2017-09-15 18:56+0000\n"
+"PO-Revision-Date: 2017-09-23 20:46+0000\n"
 "Last-Translator: Elisabeth Jäger\n"
 "Language-Team: German (http://www.transifex.com/widelands/widelands/language/de/)\n"
 "MIME-Version: 1.0\n"
@@ -130,6 +131,7 @@ msgid ""
 "blackroot."
 msgstr "Der Dunkelrübenbauer braucht zur Produktion von Dunkelrüben, von der Saat bis zur Ernte, durchschnittlich %1%."
 
+#. TRANSLATORS: Purpose helptext for a building
 #. TRANSLATORS: Note helptext for a building
 #. TRANSLATORS: Performance helptext for a building
 #. This include can be removed when all help texts have been defined.
@@ -728,8 +730,8 @@ msgstr "Diese Mine baut alle Rohstoffe bis zur tiefsten Schicht ab. Aber auch da
 #. TRANSLATORS: 'It' is a mine
 #: ../../data/tribes/buildings/productionsites/barbarians/granitemine/helptexts.lua:21
 msgctxt "barbarians_building"
-msgid "It cannot be upgraded."
-msgstr "Sie kann nicht ausgebaut werden."
+msgid "It cannot be enhanced."
+msgstr "Kann nicht erweitert werden."
 
 #. TRANSLATORS: Performance helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/granitemine/helptexts.lua:26
@@ -1078,8 +1080,8 @@ msgstr "Stellt alle Äxte her, die die Barbaren für die Kriegsführung brauchen
 msgctxt "barbarians_building"
 msgid ""
 "The Barbarian war mill is their most advanced production site for weapons. "
-"As such it needs to be upgraded from an ax workshop."
-msgstr "Die Waffenschmiede der Barbaren ist die höchstausgebaute Produktionsstätte für Waffen. Sie muss daher aus einer Axtschmiede ausgebaut werden."
+"As such you will need to enhance an ax workshop in order to get one."
+msgstr "Die Waffenschmiede der Barbaren ist die höchstausgebaute Produktionsstätte für Waffen. Daher wirst du eine Axtschmiede erweitern müssen, um sie zu erhalten."
 
 #: ../../data/tribes/buildings/productionsites/barbarians/warmill/helptexts.lua:29
 msgctxt "barbarians_building"
@@ -3527,7 +3529,7 @@ msgid "Wool is the hair of sheep. Weaving mills use it to make cloth."
 msgstr "Wolle ist das Haar von Schafen. Webereien verwenden es, um Stoff herzustellen."
 
 #. TRANSLATORS: Helptext for a worker: Armorsmith
-#: ../../data/tribes/workers/atlanteans/armorsmith/helptexts.lua:3
+#: ../../data/tribes/workers/atlanteans/armorsmith/helptexts.lua:5
 msgctxt "atlanteans_worker"
 msgid "Produces armor for the soldiers."
 msgstr "Schmiedet Rüstungen für die Soldaten."

@@ -83,13 +83,16 @@ struct HostGameSettingsProvider : public GameSettingsProvider {
 		return true;
 	}
 	bool can_change_player_state(uint8_t const number) override {
+		if (number >= settings().players.size()) {
+			return false;
+		}
 		if (settings().savegame)
-			return settings().players.at(number).state != PlayerSettings::stateClosed;
+			return settings().players.at(number).state != PlayerSettings::State::kClosed;
 		else if (settings().scenario)
-			return ((settings().players.at(number).state == PlayerSettings::stateOpen ||
-			         settings().players.at(number).state == PlayerSettings::stateHuman) &&
+			return ((settings().players.at(number).state == PlayerSettings::State::kOpen ||
+			         settings().players.at(number).state == PlayerSettings::State::kHuman) &&
 			        settings().players.at(number).closeable) ||
-			       settings().players.at(number).state == PlayerSettings::stateClosed;
+			       settings().players.at(number).state == PlayerSettings::State::kClosed;
 		return true;
 	}
 	bool can_change_player_tribe(uint8_t const number) override {
@@ -107,7 +110,7 @@ struct HostGameSettingsProvider : public GameSettingsProvider {
 			return false;
 		if (number == settings().playernum)
 			return true;
-		return settings().players.at(number).state == PlayerSettings::stateComputer;
+		return settings().players.at(number).state == PlayerSettings::State::kComputer;
 	}
 
 	bool can_launch() override {
@@ -126,83 +129,6 @@ struct HostGameSettingsProvider : public GameSettingsProvider {
 
 		host_->set_player_state(number, state);
 	}
-	void next_player_state(uint8_t const number) override {
-		if (number > settings().players.size())
-			return;
-
-		PlayerSettings::State newstate = PlayerSettings::stateClosed;
-		switch (host_->settings().players.at(number).state) {
-		case PlayerSettings::stateClosed:
-			// In savegames : closed players can not be changed.
-			assert(!host_->settings().savegame);
-			newstate = PlayerSettings::stateOpen;
-			break;
-		case PlayerSettings::stateOpen:
-		case PlayerSettings::stateHuman:
-			if (host_->settings().scenario) {
-				assert(host_->settings().players.at(number).closeable);
-				newstate = PlayerSettings::stateClosed;
-				break;
-			}  // else fall through
-			FALLS_THROUGH;
-		case PlayerSettings::stateComputer: {
-			const ComputerPlayer::ImplementationVector& impls = ComputerPlayer::get_implementations();
-			ComputerPlayer::ImplementationVector::const_iterator it = impls.begin();
-			if (host_->settings().players.at(number).ai.empty()) {
-				set_player_ai(number, (*it)->name);
-				newstate = PlayerSettings::stateComputer;
-				break;
-			}
-			do {
-				++it;
-				if ((*(it - 1))->name == host_->settings().players.at(number).ai)
-					break;
-			} while (it != impls.end());
-			if (settings().players.at(number).random_ai) {
-				set_player_ai(number, std::string());
-				set_player_name(number, std::string());
-				// Do not share a player in savegames or scenarios
-				if (host_->settings().scenario || host_->settings().savegame)
-					newstate = PlayerSettings::stateOpen;
-				else {
-					uint8_t shared = 0;
-					for (; shared < settings().players.size(); ++shared) {
-						if (settings().players.at(shared).state != PlayerSettings::stateClosed &&
-						    settings().players.at(shared).state != PlayerSettings::stateShared)
-							break;
-					}
-					if (shared < settings().players.size()) {
-						newstate = PlayerSettings::stateShared;
-						set_player_shared(number, shared + 1);
-					} else
-						newstate = PlayerSettings::stateClosed;
-				}
-			} else if (it == impls.end()) {
-				do {
-					uint8_t random = (std::rand() % impls.size());  // Choose a random AI
-					it = impls.begin() + random;
-				} while ((*it)->type == ComputerPlayer::Implementation::Type::kEmpty);
-				set_player_ai(number, (*it)->name, true);
-				newstate = PlayerSettings::stateComputer;
-				break;
-			} else {
-				set_player_ai(number, (*it)->name);
-				newstate = PlayerSettings::stateComputer;
-			}
-			break;
-		}
-		case PlayerSettings::stateShared: {
-			// Do not close a player in savegames or scenarios
-			if (host_->settings().scenario || host_->settings().savegame)
-				newstate = PlayerSettings::stateOpen;
-			else
-				newstate = PlayerSettings::stateClosed;
-			break;
-		}
-		}
-
-		host_->set_player_state(number, newstate, true);
-	}
 
 	void
 	set_player_tribe(uint8_t number, const std::string& tribe, bool const random_tribe) override {
@@ -210,9 +136,10 @@ struct HostGameSettingsProvider : public GameSettingsProvider {
 			return;
 
 		if (number == settings().playernum ||
-		    settings().players.at(number).state == PlayerSettings::stateComputer ||
-		    settings().players.at(number).state == PlayerSettings::stateShared ||
-		    settings().players.at(number).state == PlayerSettings::stateOpen)  // For savegame loading
+		    settings().players.at(number).state == PlayerSettings::State::kComputer ||
+		    settings().players.at(number).state == PlayerSettings::State::kShared ||
+		    settings().players.at(number).state ==
+		       PlayerSettings::State::kOpen)  // For savegame loading
 			host_->set_player_tribe(number, tribe, random_tribe);
 	}
 
@@ -221,7 +148,7 @@ struct HostGameSettingsProvider : public GameSettingsProvider {
 			return;
 
 		if (number == settings().playernum ||
-		    settings().players.at(number).state == PlayerSettings::stateComputer)
+		    settings().players.at(number).state == PlayerSettings::State::kComputer)
 			host_->set_player_team(number, team);
 	}
 
@@ -231,7 +158,7 @@ struct HostGameSettingsProvider : public GameSettingsProvider {
 		host_->set_player_closeable(number, closeable);
 	}
 
-	void set_player_shared(uint8_t number, uint8_t shared) override {
+	void set_player_shared(PlayerSlot number, Widelands::PlayerNumber shared) override {
 		if (number >= host_->settings().players.size())
 			return;
 		host_->set_player_shared(number, shared);
@@ -284,11 +211,9 @@ struct HostChatProvider : public ChatProvider {
 	}
 
 	void send(const std::string& msg) override {
-		ChatMessage c;
-		c.time = time(nullptr);
+		ChatMessage c(msg);
 		c.playern = h->get_local_playerposition();
 		c.sender = h->get_local_playername();
-		c.msg = msg;
 		if (c.msg.size() && *c.msg.begin() == '@') {
 			// Personal message
 			std::string::size_type const space = c.msg.find(' ');
@@ -546,6 +471,7 @@ struct GameHostImpl {
 	     lastpauseping(0),
 	     syncreport_pending(false),
 	     syncreport_time(0),
+	     syncreport(),
 	     syncreport_arrived(false) {
 	}
 };
@@ -678,6 +604,8 @@ void GameHost::run() {
 	broadcast(s);
 
 	Widelands::Game game;
+	game.set_ai_training_mode(g_options.pull_section("global").get_bool("ai_training", false));
+	game.set_auto_speed(g_options.pull_section("global").get_bool("auto_speed", false));
 	game.set_write_syncstream(g_options.pull_section("global").get_bool("write_syncstreams", true));
 
 	try {
@@ -869,12 +797,8 @@ void GameHost::send(ChatMessage msg) {
 
 				// is host the sender?
 				if (d->localplayername == msg.sender) {
-					ChatMessage err;
-					err.time = time(nullptr);
+					ChatMessage err(fail);
 					err.playern = -2;  // System message
-					err.sender = "";
-					err.msg = fail;
-					err.recipient = "";
 					d->chat.receive(err);
 					return;  // nothing left to do!
 				}
@@ -968,7 +892,7 @@ void GameHost::split_command_array(const std::string& cmdarray,
 	std::string::size_type const space = cmdarray.find(' ');
 	if (space > cmdarray.size())
 		// only cmd
-		cmd = cmdarray.substr(0);
+		cmd = cmdarray;
 	else {
 		cmd = cmdarray.substr(0, space);
 		std::string::size_type const space2 = cmdarray.find(' ', space + 1);
@@ -1000,9 +924,7 @@ void GameHost::send_system_message_code(const std::string& code,
 	broadcast(s);
 
 	// Now add to our own chatbox
-	ChatMessage msg;
-	msg.time = time(nullptr);
-	msg.msg = NetworkGamingMessages::get_message(code, a, b, c);
+	ChatMessage msg(NetworkGamingMessages::get_message(code, a, b, c));
 	msg.playern = UserSettings::none();  //  == System message
 	// c.sender remains empty to indicate a system message
 	d->chat.receive(msg);
@@ -1013,7 +935,7 @@ int32_t GameHost::get_frametime() {
 }
 
 GameController::GameType GameHost::get_game_type() {
-	return GameController::GameType::NETHOST;
+	return GameController::GameType::kNetHost;
 }
 
 const GameSettings& GameHost::settings() {
@@ -1038,9 +960,9 @@ bool GameHost::can_launch() {
 	// but not all should be closed!
 	bool one_not_closed = false;
 	for (PlayerSettings& setting : d->settings.players) {
-		if (setting.state != PlayerSettings::stateClosed)
+		if (setting.state != PlayerSettings::State::kClosed)
 			one_not_closed = true;
-		if (setting.state == PlayerSettings::stateOpen)
+		if (setting.state == PlayerSettings::State::kOpen)
 			return false;
 	}
 	return one_not_closed;
@@ -1090,7 +1012,7 @@ void GameHost::set_map(const std::string& mapname,
 
 	while (oldplayers < maxplayers) {
 		PlayerSettings& player = d->settings.players.at(oldplayers);
-		player.state = PlayerSettings::stateOpen;
+		player.state = PlayerSettings::State::kOpen;
 		player.name = "";
 		player.tribe = d->settings.tribes.at(0).name;
 		player.random_tribe = false;
@@ -1165,9 +1087,7 @@ void GameHost::set_player_state(uint8_t const number,
 	if (player.state == state)
 		return;
 
-	SendPacket s;
-
-	if (player.state == PlayerSettings::stateHuman) {
+	if (player.state == PlayerSettings::State::kHuman) {
 		//  0 is host and has no client
 		if (d->settings.users.at(0).position == number) {
 			d->settings.users.at(0).position = UserSettings::none();
@@ -1187,13 +1107,6 @@ void GameHost::set_player_state(uint8_t const number,
 						break;
 					}
 				}
-
-				//  broadcast change
-				s.unsigned_8(NETCMD_SETTING_USER);
-				s.unsigned_32(i);
-				write_setting_user(s, i);
-				broadcast(s);
-
 				break;
 			}
 		}
@@ -1201,14 +1114,52 @@ void GameHost::set_player_state(uint8_t const number,
 
 	player.state = state;
 
-	if (player.state == PlayerSettings::stateComputer)
+	// Make sure that shared slots have a player number to share in
+	if (player.state == PlayerSettings::State::kShared) {
+		const PlayerSlot shared = d->settings.find_shared(number);
+		if (d->settings.is_shared_usable(number, shared)) {
+			set_player_shared(number, shared);
+		} else {
+			player.state = PlayerSettings::State::kClosed;
+		}
+	}
+
+	// Update shared positions for other players
+	for (size_t i = 0; i < d->settings.players.size(); ++i) {
+		if (i == number) {
+			// Don't set own state
+			continue;
+		}
+		if (d->settings.players.at(i).state == PlayerSettings::State::kShared) {
+			const PlayerSlot shared = d->settings.find_shared(i);
+			if (d->settings.is_shared_usable(i, shared)) {
+				set_player_shared(i, shared);
+			} else {
+				set_player_state(i, PlayerSettings::State::kClosed, host);
+			}
+		}
+	}
+
+	// Make sure that slots that are not closeable stay open
+	if (player.state == PlayerSettings::State::kClosed && d->settings.uncloseable(number)) {
+		player.state = PlayerSettings::State::kOpen;
+	}
+
+	if (player.state == PlayerSettings::State::kComputer)
 		player.name = get_computer_player_name(number);
 
-	// Broadcast change
+	// Broadcast change to player
+	SendPacket s;
 	s.reset();
 	s.unsigned_8(NETCMD_SETTING_PLAYER);
 	s.unsigned_8(number);
 	write_setting_player(s, number);
+	broadcast(s);
+
+	// Let clients know whether their slot has changed
+	s.reset();
+	s.unsigned_8(NETCMD_SETTING_ALLUSERS);
+	write_setting_all_users(s);
 	broadcast(s);
 }
 
@@ -1331,7 +1282,7 @@ void GameHost::set_player_closeable(uint8_t const number, bool closeable) {
 	// uses it.
 }
 
-void GameHost::set_player_shared(uint8_t number, uint8_t shared) {
+void GameHost::set_player_shared(PlayerSlot number, Widelands::PlayerNumber shared) {
 	if (number >= d->settings.players.size())
 		return;
 
@@ -1341,8 +1292,8 @@ void GameHost::set_player_shared(uint8_t number, uint8_t shared) {
 		return;
 
 	PlayerSettings& sharedplr = d->settings.players.at(shared - 1);
-	assert(sharedplr.state != PlayerSettings::stateClosed &&
-	       sharedplr.state != PlayerSettings::stateShared);
+	assert(PlayerSettings::can_be_shared(sharedplr.state));
+	assert(d->settings.is_shared_usable(number, shared));
 
 	player.shared_in = shared;
 	player.tribe = sharedplr.tribe;
@@ -1386,8 +1337,8 @@ void GameHost::set_win_condition_script(const std::string& wc) {
 
 void GameHost::switch_to_player(uint32_t user, uint8_t number) {
 	if (number < d->settings.players.size() &&
-	    (d->settings.players.at(number).state != PlayerSettings::stateOpen &&
-	     d->settings.players.at(number).state != PlayerSettings::stateHuman))
+	    (d->settings.players.at(number).state != PlayerSettings::State::kOpen &&
+	     d->settings.players.at(number).state != PlayerSettings::State::kHuman))
 		return;
 
 	uint32_t old = d->settings.users.at(user).position;
@@ -1402,14 +1353,14 @@ void GameHost::switch_to_player(uint32_t user, uint8_t number) {
 		temp2 = temp2.erase(op.name.find(temp), temp.size());
 		set_player_name(old, temp2);
 		if (temp2.empty())
-			set_player_state(old, PlayerSettings::stateOpen);
+			set_player_state(old, PlayerSettings::State::kOpen);
 	}
 
 	if (number < d->settings.players.size()) {
 		// Add clients name to new player slot
 		PlayerSettings& op = d->settings.players.at(number);
-		if (op.state == PlayerSettings::stateOpen) {
-			set_player_state(number, PlayerSettings::stateHuman);
+		if (op.state == PlayerSettings::State::kOpen) {
+			set_player_state(number, PlayerSettings::State::kHuman);
 			set_player_name(number, " " + name + " ");
 		} else
 			set_player_name(number, op.name + " " + name + " ");
@@ -1498,6 +1449,7 @@ void GameHost::write_setting_map(SendPacket& packet) {
 	packet.string(d->settings.mapfilename);
 	packet.unsigned_8(d->settings.savegame ? 1 : 0);
 	packet.unsigned_8(d->settings.scenario ? 1 : 0);
+	Notifications::publish(NoteGameSettings(NoteGameSettings::Action::kMap));
 }
 
 void GameHost::write_setting_player(SendPacket& packet, uint8_t const number) {
@@ -1511,6 +1463,7 @@ void GameHost::write_setting_player(SendPacket& packet, uint8_t const number) {
 	packet.unsigned_8(player.random_ai ? 1 : 0);
 	packet.unsigned_8(player.team);
 	packet.unsigned_8(player.shared_in);
+	Notifications::publish(NoteGameSettings(NoteGameSettings::Action::kPlayer, number));
 }
 
 void GameHost::write_setting_all_players(SendPacket& packet) {
@@ -1523,6 +1476,8 @@ void GameHost::write_setting_user(SendPacket& packet, uint32_t const number) {
 	packet.string(d->settings.users.at(number).name);
 	packet.signed_32(d->settings.users.at(number).position);
 	packet.unsigned_8(d->settings.users.at(number).ready ? 1 : 0);
+	Notifications::publish(NoteGameSettings(
+	   NoteGameSettings::Action::kUser, d->settings.users.at(number).position, number));
 }
 
 void GameHost::write_setting_all_users(SendPacket& packet) {
@@ -1694,7 +1649,7 @@ void GameHost::welcome_client(uint32_t const number, std::string& playername) {
 
 	// Check if there is an unoccupied player left and if, assign.
 	for (uint8_t i = 0; i < d->settings.players.size(); ++i)
-		if (d->settings.players.at(i).state == PlayerSettings::stateOpen) {
+		if (d->settings.players.at(i).state == PlayerSettings::State::kOpen) {
 			switch_to_player(client.usernum, i);
 			break;
 		}
@@ -1770,9 +1725,8 @@ void GameHost::check_hung_clients() {
 						std::string seconds =
 						   (boost::format(ngettext("%li second", "%li seconds", deltanow)) % deltanow)
 						      .str();
-						send_system_message_code("CLIENT_HUNG",
-						                         d->settings.users.at(d->clients.at(i).usernum).name,
-						                         seconds.c_str());
+						send_system_message_code(
+						   "CLIENT_HUNG", d->settings.users.at(d->clients.at(i).usernum).name, seconds);
 						d->clients.at(i).lastdelta = deltanow;
 					}
 				}
@@ -1858,7 +1812,7 @@ void GameHost::update_network_speed() {
 				speeds[1] = speeds[0] + 1000;
 		}
 
-		d->networkspeed = speeds.size() % 2 ?
+		d->networkspeed = (speeds.size() % 2) ?
 		                     speeds.at(speeds.size() / 2) :
 		                     (speeds.at(speeds.size() / 2) + speeds.at((speeds.size() / 2) - 1)) / 2;
 
@@ -1891,7 +1845,8 @@ void GameHost::request_sync_reports() {
 	s.signed_32(d->syncreport_time);
 	broadcast(s);
 
-	d->game->enqueue_command(new CmdNetCheckSync(d->syncreport_time, this));
+	d->game->enqueue_command(
+	   new CmdNetCheckSync(d->syncreport_time, [this] { sync_report_callback(); }));
 
 	committed_network_time(d->syncreport_time);
 }
@@ -1939,7 +1894,7 @@ void GameHost::check_sync_reports() {
 	}
 }
 
-void GameHost::syncreport() {
+void GameHost::sync_report_callback() {
 	assert(d->game->get_gametime() == static_cast<uint32_t>(d->syncreport_time));
 
 	d->syncreport = d->game->get_sync_hash();
@@ -2116,10 +2071,13 @@ void GameHost::handle_packet(uint32_t const i, RecvPacket& r) {
 
 	case NETCMD_SETTING_CHANGEINIT:
 		if (!d->game) {
+			// TODO(GunChleoc): For some nebulous reason, we don't receive the num that the client is
+			// sending when a player changes slot. So, keeping the access to the client off for now.
+			// Would be nice to have though.
 			uint8_t num = r.unsigned_8();
 			if (num != client.playernum)
 				throw DisconnectException("NO_ACCESS_TO_PLAYER");
-			d->npsb.toggle_init(num);
+			set_player_init(num, r.unsigned_8());
 		}
 		break;
 
@@ -2179,11 +2137,9 @@ void GameHost::handle_packet(uint32_t const i, RecvPacket& r) {
 	}
 
 	case NETCMD_CHAT: {
-		ChatMessage c;
-		c.time = time(nullptr);
+		ChatMessage c(r.string());
 		c.playern = d->settings.users.at(client.usernum).position;
 		c.sender = d->settings.users.at(client.usernum).name;
-		c.msg = r.string();
 		if (c.msg.size() && *c.msg.begin() == '@') {
 			// Personal message
 			std::string::size_type const space = c.msg.find(' ');
@@ -2289,7 +2245,7 @@ void GameHost::disconnect_player_controller(uint8_t const number, const std::str
 		}
 	}
 
-	set_player_state(number, PlayerSettings::stateOpen);
+	set_player_state(number, PlayerSettings::State::kOpen);
 	if (d->game)
 		init_computer_player(number + 1);
 }

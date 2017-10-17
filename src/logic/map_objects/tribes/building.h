@@ -155,6 +155,12 @@ public:
 	virtual uint32_t get_conquers() const;
 	virtual uint32_t vision_range() const;
 
+	const WorkareaInfo& workarea_info() const {
+		return workarea_info_;
+	}
+
+	// TODO(sirver): This should not be public. It is mutated by other classes
+	// in many places.
 	WorkareaInfo workarea_info_;
 
 	bool suitability(const Map&, const FCoords&) const;
@@ -357,7 +363,6 @@ protected:
 	//  The player who has defeated this building.
 	PlayerNumber defeating_player_;
 
-	int32_t priority_;  // base priority
 	std::map<DescriptionIndex, int32_t> ware_priorities_;
 
 	/// Whether we see our vision_range area based on workers in the building

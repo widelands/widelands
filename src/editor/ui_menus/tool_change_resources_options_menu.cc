@@ -35,7 +35,6 @@
 #include "logic/map_objects/world/world.h"
 #include "logic/widelands.h"
 #include "logic/widelands_geometry.h"
-#include "wui/field_overlay_manager.h"
 
 constexpr int kMaxValue = 63;
 
@@ -153,18 +152,6 @@ void EditorToolChangeResourcesOptionsMenu::change_resource() {
 	increase_tool_.set_cur_res(resource_index);
 	increase_tool_.decrease_tool().set_cur_res(resource_index);
 
-	Widelands::EditorGameBase& egbase = eia().egbase();
-	Widelands::Map& map = egbase.map();
-	eia().mutable_field_overlay_manager()->register_overlay_callback_function(
-	   [resource_index, &map,
-	    &egbase](const Widelands::TCoords<Widelands::FCoords>& coords) -> uint32_t {
-		   if (map.is_resource_valid(egbase.world(), coords, resource_index)) {
-			   return coords.field->nodecaps();
-		   }
-		   return 0;
-		});
-
-	map.recalc_whole_map(egbase.world());
 	select_correct_tool();
 	update();
 }

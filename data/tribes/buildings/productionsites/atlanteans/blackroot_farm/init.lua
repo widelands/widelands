@@ -28,9 +28,10 @@ tribes:new_productionsite_type {
    },
 
    aihints = {
-      prohibited_till = 600,
-      forced_after = 800,
-      space_consumer = true
+      prohibited_till = 550,
+      space_consumer = true,
+      very_weak_ai_limit = 1,
+      weak_ai_limit = 2
    },
 
    working_positions = {

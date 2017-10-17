@@ -47,6 +47,7 @@
 #include "logic/map_objects/terrain_affinity.h"
 #include "logic/map_objects/tribes/carrier.h"
 #include "logic/map_objects/tribes/dismantlesite.h"
+#include "logic/map_objects/tribes/market.h"
 #include "logic/map_objects/tribes/soldier.h"
 #include "logic/map_objects/tribes/tribe_descr.h"
 #include "logic/map_objects/tribes/warehouse.h"
@@ -106,7 +107,7 @@ bool Worker::run_createware(Game& game, State& state, const Action& action) {
  */
 // TODO(unknown): Lots of magic numbers in here
 bool Worker::run_mine(Game& game, State& state, const Action& action) {
-	Map& map = game.map();
+	Map* map = game.mutable_map();
 
 	// Make sure that the specified resource is available in this world
 	DescriptionIndex const res = game.world().get_resource(action.sparam1.c_str());
@@ -119,7 +120,8 @@ bool Worker::run_mine(Game& game, State& state, const Action& action) {
 	uint32_t totalres = 0;
 	uint32_t totalchance = 0;
 	int32_t pick;
-	MapRegion<Area<FCoords>> mr(map, Area<FCoords>(map.get_fcoords(get_position()), action.iparam1));
+	MapRegion<Area<FCoords>> mr(
+	   *map, Area<FCoords>(map->get_fcoords(get_position()), action.iparam1));
 	do {
 		DescriptionIndex fres = mr.location().field->get_resources();
 		ResourceAmount amount = mr.location().field->get_resources_amount();
@@ -143,7 +145,7 @@ bool Worker::run_mine(Game& game, State& state, const Action& action) {
 			totalchance += 4;
 		else if (amount <= 6)
 			totalchance += 2;
-	} while (mr.advance(map));
+	} while (mr.advance(*map));
 
 	if (totalres == 0) {
 		molog("  Run out of resources\n");
@@ -154,8 +156,8 @@ bool Worker::run_mine(Game& game, State& state, const Action& action) {
 
 	// Second pass through fields - reset mr
 	pick = game.logic_rand() % totalchance;
-	mr =
-	   MapRegion<Area<FCoords>>(map, Area<FCoords>(map.get_fcoords(get_position()), action.iparam1));
+	mr = MapRegion<Area<FCoords>>(
+	   *map, Area<FCoords>(map->get_fcoords(get_position()), action.iparam1));
 	do {
 		DescriptionIndex fres = mr.location().field->get_resources();
 		if (fres != res) {
@@ -169,10 +171,10 @@ bool Worker::run_mine(Game& game, State& state, const Action& action) {
 			assert(amount > 0);
 
 			--amount;
-			map.set_resources(mr.location(), amount);
+			map->set_resources(mr.location(), amount);
 			break;
 		}
-	} while (mr.advance(map));
+	} while (mr.advance(*map));
 
 	if (pick >= 0) {
 		molog("  Not successful this time\n");
@@ -206,7 +208,7 @@ bool Worker::run_mine(Game& game, State& state, const Action& action) {
 bool Worker::run_breed(Game& game, State& state, const Action& action) {
 	molog(" Breed(%s, %i)\n", action.sparam1.c_str(), action.iparam1);
 
-	Map& map = game.map();
+	Map* map = game.mutable_map();
 
 	// Make sure that the specified resource is available in this world
 	DescriptionIndex const res = game.world().get_resource(action.sparam1.c_str());
@@ -219,7 +221,8 @@ bool Worker::run_breed(Game& game, State& state, const Action& action) {
 	uint32_t totalres = 0;
 	uint32_t totalchance = 0;
 	int32_t pick;
-	MapRegion<Area<FCoords>> mr(map, Area<FCoords>(map.get_fcoords(get_position()), action.iparam1));
+	MapRegion<Area<FCoords>> mr(
+	   *map, Area<FCoords>(map->get_fcoords(get_position()), action.iparam1));
 	do {
 		DescriptionIndex fres = mr.location().field->get_resources();
 		ResourceAmount amount = mr.location().field->get_initial_res_amount() -
@@ -244,7 +247,7 @@ bool Worker::run_breed(Game& game, State& state, const Action& action) {
 			totalchance += 4;
 		else if (amount <= 6)
 			totalchance += 2;
-	} while (mr.advance(map));
+	} while (mr.advance(*map));
 
 	if (totalres == 0) {
 		molog("  All resources full\n");
@@ -256,8 +259,8 @@ bool Worker::run_breed(Game& game, State& state, const Action& action) {
 	// Second pass through fields - reset mr!
 	assert(totalchance);
 	pick = game.logic_rand() % totalchance;
-	mr =
-	   MapRegion<Area<FCoords>>(map, Area<FCoords>(map.get_fcoords(get_position()), action.iparam1));
+	mr = MapRegion<Area<FCoords>>(
+	   *map, Area<FCoords>(map->get_fcoords(get_position()), action.iparam1));
 
 	do {
 		DescriptionIndex fres = mr.location().field->get_resources();
@@ -272,10 +275,10 @@ bool Worker::run_breed(Game& game, State& state, const Action& action) {
 			assert(amount > 0);
 
 			--amount;
-			map.set_resources(mr.location(), mr.location().field->get_initial_res_amount() - amount);
+			map->set_resources(mr.location(), mr.location().field->get_initial_res_amount() - amount);
 			break;
 		}
-	} while (mr.advance(map));
+	} while (mr.advance(*map));
 
 	if (pick >= 0) {
 		molog("  Not successful this time\n");
@@ -341,7 +344,7 @@ bool Worker::run_setbobdescription(Game& game, State& state, const Action& actio
 bool Worker::run_findobject(Game& game, State& state, const Action& action) {
 	CheckStepWalkOn cstep(descr().movecaps(), false);
 
-	Map& map = game.map();
+	const Map& map = game.map();
 	Area<FCoords> area(map.get_fcoords(get_position()), 0);
 	bool found_reserved = false;
 
@@ -486,7 +489,7 @@ private:
 
 bool Worker::run_findspace(Game& game, State& state, const Action& action) {
 	std::vector<Coords> list;
-	Map& map = game.map();
+	const Map& map = game.map();
 	const World& world = game.world();
 
 	CheckStepDefault cstep(descr().movecaps());
@@ -706,7 +709,7 @@ bool Worker::run_plant(Game& game, State& state, const Action& action) {
 		}
 	}
 
-	Map& map = game.map();
+	const Map& map = game.map();
 	Coords pos = get_position();
 	FCoords fpos = map.get_fcoords(pos);
 
@@ -863,8 +866,7 @@ bool Worker::run_geologist(Game& game, State& state, const Action& action) {
  * possible.
  */
 bool Worker::run_geologist_find(Game& game, State& state, const Action&) {
-	const Map& map = game.map();
-	const FCoords position = map.get_fcoords(get_position());
+	const FCoords position = game.map().get_fcoords(get_position());
 	BaseImmovable const* const imm = position.field->get_immovable();
 	const World& world = game.world();
 
@@ -899,11 +901,12 @@ bool Worker::run_geologist_find(Game& game, State& state, const Action&) {
 
 			//  We should add a message to the player's message queue - but only,
 			//  if there is not already a similar one in list.
-			owner().add_message_with_timeout(
-			   game, *new Message(message_type, game.get_gametime(), rdescr->descname(),
-			                      ri.descr().representative_image_filename(), rdescr->descname(),
-			                      message, position, serial_),
-			   300000, 8);
+			owner().add_message_with_timeout(game,
+			                                 std::unique_ptr<Message>(new Message(
+			                                    message_type, game.get_gametime(), rdescr->descname(),
+			                                    ri.descr().representative_image_filename(),
+			                                    rdescr->descname(), message, position, serial_)),
+			                                 300000, 8);
 		}
 	}
 
@@ -1284,7 +1287,7 @@ void Worker::transfer_pop(Game& /* game */, State& /* state */) {
 }
 
 void Worker::transfer_update(Game& game, State& /* state */) {
-	Map& map = game.map();
+	const Map& map = game.map();
 	PlayerImmovable* location = get_location(game);
 
 	// We expect to always have a location at this point,
@@ -1592,6 +1595,89 @@ void Worker::update_task_buildingwork(Game& game) {
 		send_signal(game, "update");
 }
 
+// The task when a worker is part of the caravan that is trading items.
+const Bob::Task Worker::taskCarryTradeItem = {
+   "carry_trade_item", static_cast<Bob::Ptr>(&Worker::carry_trade_item_update), nullptr, nullptr,
+   true};
+
+void Worker::start_task_carry_trade_item(Game& game,
+                                         const int trade_id,
+                                         ObjectPointer other_market) {
+	push_task(game, taskCarryTradeItem);
+	auto& state = top_state();
+	state.ivar1 = 0;
+	state.ivar2 = trade_id;
+	state.objvar1 = other_market;
+}
+
+// This is a state machine: leave building, go to the other market, drop off
+// wares, and return.
+void Worker::carry_trade_item_update(Game& game, State& state) {
+	// Reset any signals that are not related to location
+	std::string signal = get_signal();
+	signal_handled();
+	if (!signal.empty()) {
+		// TODO(sirver,trading): Remove once signals are correctly handled.
+		log("carry_trade_item_update: signal received: %s\n", signal.c_str());
+	}
+	if (signal == "evict") {
+		return pop_task(game);
+	}
+
+	// First of all, make sure we're outside
+	if (state.ivar1 == 0) {
+		start_task_leavebuilding(game, false);
+		++state.ivar1;
+		return;
+	}
+
+	auto* other_market = dynamic_cast<Market*>(state.objvar1.get(game));
+	if (state.ivar1 == 1) {
+		// Arrived on site. Move to the building and advance our state.
+		if (other_market->base_flag().get_position() == get_position()) {
+			++state.ivar1;
+			return start_task_move(
+			   game, WALK_NW, descr().get_right_walk_anims(does_carry_ware()), true);
+		}
+
+		// Otherwise continue making progress towards the other market.
+		if (!start_task_movepath(game, other_market->base_flag().get_position(), 5,
+		                         descr().get_right_walk_anims(does_carry_ware()))) {
+			molog("carry_trade_item_update: Could not move to other flag.\n");
+			// TODO(sirver,trading): something needs to happen here.
+		}
+		return;
+	}
+
+	if (state.ivar1 == 2) {
+		WareInstance* const ware = fetch_carried_ware(game);
+		other_market->traded_ware_arrived(state.ivar2, ware->descr_index(), &game);
+		ware->remove(game);
+		++state.ivar1;
+		start_task_move(game, WALK_SE, descr().get_right_walk_anims(does_carry_ware()), true);
+		return;
+	}
+
+	if (state.ivar1 == 3) {
+		++state.ivar1;
+		start_task_return(game, false);
+		return;
+	}
+
+	if (state.ivar1 == 4) {
+		pop_task(game);
+		start_task_idle(game, 0, -1);
+		dynamic_cast<Market*>(get_location(game))->try_launching_batch(&game);
+		return;
+	}
+	NEVER_HERE();
+}
+
+void Worker::update_task_carry_trade_item(Game& game) {
+	if (top_state().task == &taskCarryTradeItem)
+		send_signal(game, "update");
+}
+
 /**
  * Evict the worker from its current building.
  */
@@ -1689,10 +1775,11 @@ void Worker::return_update(Game& game, State& state) {
 		    descr().descname().c_str())
 		      .str();
 
-		owner().add_message(game, *new Message(Message::Type::kGameLogic, game.get_gametime(),
-		                                       _("Worker"), "images/ui_basic/menu_help.png",
-		                                       _("Worker got lost!"), message, get_position()),
-		                    serial_);
+		owner().add_message(
+		   game, std::unique_ptr<Message>(new Message(
+		            Message::Type::kGameLogic, game.get_gametime(), _("Worker"),
+		            "images/ui_basic/menu_help.png", _("Worker got lost!"), message, get_position())),
+		   serial_);
 		set_location(nullptr);
 		return pop_task(game);
 	}
@@ -2233,7 +2320,7 @@ void Worker::fugitive_update(Game& game, State& state) {
 		return pop_task(game);
 	}
 
-	Map& map = game.map();
+	const Map& map = game.map();
 	PlayerImmovable const* location = get_location(game);
 
 	if (location && &location->owner() == &owner()) {
@@ -2352,7 +2439,7 @@ void Worker::geologist_update(Game& game, State& state) {
 	}
 
 	//
-	Map& map = game.map();
+	const Map& map = game.map();
 	const World& world = game.world();
 	Area<FCoords> owner_area(
 	   map.get_fcoords(dynamic_cast<Flag&>(*get_location(game)).get_position()), state.ivar2);
@@ -2480,7 +2567,7 @@ void Worker::scout_update(Game& game, State& state) {
 		return pop_task(game);
 	}
 
-	Map& map = game.map();
+	const Map& map = game.map();
 
 	// If not yet time to go home
 	if (static_cast<int32_t>(state.ivar2 - game.get_gametime()) > 0) {

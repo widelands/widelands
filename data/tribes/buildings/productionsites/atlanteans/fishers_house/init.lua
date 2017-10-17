@@ -26,7 +26,10 @@ tribes:new_productionsite_type {
 
    aihints = {
       needs_water = true,
-      prohibited_till = 600
+      basic_amount = 1,
+      prohibited_till = 540,
+      very_weak_ai_limit = 2,
+      weak_ai_limit = 4
    },
 
    working_positions = {

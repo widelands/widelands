@@ -26,9 +26,7 @@ tribes:new_productionsite_type {
    },
 
    aihints = {
-      logproducer = true,
-      forced_after = 210,
-      prohibited_till = 210
+      logproducer = true
    },
 
    working_positions = {
@@ -54,6 +52,6 @@ tribes:new_productionsite_type {
       title = _"No Trees",
       heading = _"Out of Trees",
       message = pgettext("atlanteans_building", "The woodcutter working at this woodcutter’s house can’t find any trees in his work area. You should consider dismantling or destroying the building or building a forester’s house."),
-      productivity_threshold = 66
+      productivity_threshold = 60
    },
 }

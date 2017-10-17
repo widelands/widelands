@@ -84,7 +84,7 @@ void GamePreloadPacket::write(FileSystem& fs, Game& game, MapObjectSaver* const)
 	Profile prof;
 	Section& s = prof.create_section("global");
 
-	InteractivePlayer const* const ipl = game.get_ipl();
+	InteractivePlayer* const ipl = game.get_ipl();
 
 	s.set_int("packet_version", kCurrentPacketVersion);
 
@@ -125,8 +125,8 @@ void GamePreloadPacket::write(FileSystem& fs, Game& game, MapObjectSaver* const)
 		   MiniMapLayer::Owner | MiniMapLayer::Building | MiniMapLayer::Terrain;
 		std::unique_ptr<Texture> texture;
 		if (ipl != nullptr) {  // Player
-			texture = draw_minimap(
-			   game, &ipl->player(), ipl->view_area().rect(), MiniMapType::kStaticViewWindow, layers);
+			texture = draw_minimap(game, &ipl->player(), ipl->map_view()->view_area().rect(),
+			                       MiniMapType::kStaticViewWindow, layers);
 		} else {  // Observer
 			texture = draw_minimap(game, nullptr, Rectf(), MiniMapType::kStaticMap, layers);
 		}

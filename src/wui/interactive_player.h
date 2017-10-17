@@ -51,8 +51,9 @@ public:
 	bool can_see(Widelands::PlayerNumber) const override;
 	bool can_act(Widelands::PlayerNumber) const override;
 	Widelands::PlayerNumber player_number() const override;
+	void draw_map_view(MapView* given_map_view, RenderTarget* dst) override;
 
-	void node_action() override;
+	void node_action(const Widelands::NodeAndTriangle<>& node_and_triangle) override;
 
 	bool handle_key(bool down, SDL_Keysym) override;
 
@@ -70,13 +71,13 @@ public:
 	// For load
 	void cleanup_for_load() override;
 	void think() override;
+	void draw(RenderTarget& dst) override;
 
 	void set_flag_to_connect(const Widelands::Coords& location) {
 		flag_to_connect_ = location;
 	}
 
 	void popup_message(Widelands::MessageId, const Widelands::Message&);
-	int32_t calculate_buildcaps(const Widelands::TCoords<Widelands::FCoords>& c) override;
 
 private:
 	void cmdSwitchPlayer(const std::vector<std::string>& args);

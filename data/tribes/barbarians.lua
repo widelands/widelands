@@ -176,6 +176,9 @@ tribes:new_tribe {
       "barbarians_warehouse",
       "barbarians_port",
 
+      -- Markets
+      "barbarians_market",
+
       -- Small
       "barbarians_quarry",
       "barbarians_lumberjacks_hut",
@@ -285,4 +288,8 @@ tribes:new_tribe {
    headquarters = "barbarians_headquarters",
    port = "barbarians_port",
    barracks = "barbarians_barracks",
+   ironore = "iron_ore",
+   rawlog = "log",
+   refinedlog = "blackwood",
+   granite = "granite",
 }

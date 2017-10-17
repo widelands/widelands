@@ -63,7 +63,7 @@ bool NetHostProxy::try_accept(ConnectionId* new_id) {
 bool NetHostProxy::try_receive(const ConnectionId id, RecvPacket* packet) {
 	receive_commands();
 
-	// Check whether client is or was connected
+	// Check whether client is not (yet) connected
 	if (clients_.count(id) == 0 || clients_.at(id).state_ == Client::State::kConnecting)
 		return false;
 
@@ -79,7 +79,7 @@ bool NetHostProxy::try_receive(const ConnectionId id, RecvPacket* packet) {
 	*packet = std::move(packet_list.front());
 	packet_list.pop();
 	if (packet_list.empty() && clients_.at(id).state_ == Client::State::kDisconnected) {
-		// If the receive bufffer is empty now, remove client
+		// If the receive buffer is empty now, remove client
 		clients_.erase(id);
 	}
 	return true;

@@ -22,9 +22,7 @@
 #include <memory>
 
 BuildingHints::BuildingHints(std::unique_ptr<LuaTable> table)
-   : renews_map_resource_(
-        table->has_key("renews_map_resource") ? table->get_string("renews_map_resource") : ""),
-     mines_(table->has_key("mines") ? table->get_string("mines") : ""),
+   : mines_(table->has_key("mines") ? table->get_string("mines") : ""),
      log_producer_(table->has_key("logproducer") ? table->get_bool("logproducer") : false),
      granite_producer_(table->has_key("graniteproducer") ? table->get_bool("graniteproducer") :
                                                            false),
@@ -38,27 +36,25 @@ BuildingHints::BuildingHints(std::unique_ptr<LuaTable> table)
         table->has_key("mountain_conqueror") ? table->get_bool("mountain_conqueror") : false),
      shipyard_(table->has_key("shipyard") ? table->get_bool("shipyard") : false),
      prohibited_till_(table->has_key("prohibited_till") ? table->get_int("prohibited_till") : 0),
+     basic_amount_(table->has_key("basic_amount") ? table->get_int("basic_amount") : 0),
      // 10 days default
      forced_after_(table->has_key("forced_after") ? table->get_int("forced_after") : 864000),
      mines_percent_(table->has_key("mines_percent") ? table->get_int("mines_percent") : 100),
      very_weak_ai_limit_(
         table->has_key("very_weak_ai_limit") ? table->get_int("very_weak_ai_limit") : -1),
      weak_ai_limit_(table->has_key("weak_ai_limit") ? table->get_int("weak_ai_limit") : -1),
-     trainingsite_type_(TrainingSiteType::kNoTS),
      trainingsites_max_percent_(table->has_key("trainingsites_max_percent") ?
                                    table->get_int("trainingsites_max_percent") :
                                    0) {
-
-	if (table->has_key("trainingsite_type")) {
-		if (table->get_string("trainingsite_type") == "basic") {
-			trainingsite_type_ = TrainingSiteType::kBasic;
-		} else if (table->get_string("trainingsite_type") == "advanced") {
-			trainingsite_type_ = TrainingSiteType::kAdvanced;
+	if (table->has_key("supports_production_of")) {
+		for (const std::string& ware_name :
+		     table->get_table("supports_production_of")->array_entries<std::string>()) {
+			supported_production_.insert(ware_name);
 		}
 	}
 }
 
-void BuildingHints::set_trainingsites_max_percent(uint8_t percent) {
+void BuildingHints::set_trainingsites_max_percent(int percent) {
 	trainingsites_max_percent_ = percent;
 }
 

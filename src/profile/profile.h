@@ -57,9 +57,7 @@ public:
 	friend class Profile;
 
 	struct Value {
-		using string = std::string;
-
-		Value(const string& name, const char* const value);
+		Value(const std::string& name, const char* const value);
 		Value(const Value&);
 		Value(Value&& other);
 
@@ -93,7 +91,7 @@ public:
 
 	private:
 		bool used_;
-		string name_;
+		std::string name_;
 		std::unique_ptr<char[]> value_;
 
 		Value() = default;
@@ -138,6 +136,7 @@ public:
 	char const* get_next_bool(char const* name, bool* value);
 
 	void set_int(char const* name, int32_t value);
+	void set_natural(char const* name, uint32_t value);
 	void set_bool(char const* const name, bool const value) {
 		set_string(name, value ? "true" : "false");
 	}
@@ -197,7 +196,10 @@ public:
 	void read(const char* const filename,
 	          const char* const global_section = nullptr,
 	          FileSystem& = *g_fs);
-	void write(const char* const filename, bool used_only = true, FileSystem& = *g_fs);
+	void write(const char* const filename,
+	           bool used_only = true,
+	           FileSystem& = *g_fs,
+	           const char* const comment = nullptr);
 
 	Section* get_section(const std::string& name);
 	Section& get_safe_section(const std::string& name);

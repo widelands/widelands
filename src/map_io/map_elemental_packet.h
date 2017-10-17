@@ -35,6 +35,8 @@ class Map;
  * like number of players, map size, world name, magic bytes and so on
  */
 struct MapElementalPacket {
+	MapElementalPacket() = default;
+
 	void read(FileSystem&, EditorGameBase&, bool, MapObjectLoader&);
 	void write(FileSystem&, EditorGameBase&, MapObjectSaver&);
 
@@ -54,7 +56,7 @@ struct MapElementalPacket {
 
 private:
 	std::string old_world_name_;
-	uint32_t version_;
+	uint32_t version_ = 0;
 };
 }
 
