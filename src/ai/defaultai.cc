@@ -955,10 +955,6 @@ void DefaultAI::late_initialization() {
 		} while (mr_nw.advance(map));
 	}
 
-	if (!port_reserved_coords.empty()) {
-		seafaring_economy = true;
-	}
-
 	// here we scan entire map for own ships
 	std::set<OPtr<Ship>> found_ships;
 	for (int16_t y = 0; y < map.get_height(); ++y) {
@@ -1963,12 +1959,15 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 	uint32_t consumers_nearby_count = 0;
 
 	const Map& map = game().map();
-	const std::set<std::string>& map_tags = map.get_tags();
-	const bool seafaring_map = map_tags.count("seafaring");
-	for (auto item : map_tags) {
-		printf (" - %s\n",item.c_str());
-		}
-	printf ("DEBUG: Seafaring map %s\n", (seafaring_map) ? "Y":"N");
+
+	//auto* map2 = game().mutable_map(); NOCOM
+	if (gametime % 5 == 0) { // No need to query this too frequently
+		seafaring_economy = game().mutable_map()->allows_seafaring();
+		printf ("DEBUG: Seafaring map %s\n", (seafaring_economy) ? "Y":"N");
+	}
+
+
+
 
 	for (int32_t i = 0; i < 4; ++i)
 		spots_avail.at(i) = 0;
@@ -2297,7 +2296,7 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 		} else if (bo.type == BuildingObserver::Type::kProductionsite ||
 		           bo.type == BuildingObserver::Type::kMine) {
 
-			bo.new_building = check_building_necessity(bo, PerfEvaluation::kForConstruction, gametime, seafaring_map);
+			bo.new_building = check_building_necessity(bo, PerfEvaluation::kForConstruction, gametime, seafaring_economy);
 
 			if (bo.is(BuildingAttribute::kShipyard)) {
 				assert(bo.new_building == BuildingNecessity::kAllowed ||
@@ -2368,7 +2367,7 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 		} else if (bo.type == BuildingObserver::Type::kMilitarysite) {
 			bo.new_building = check_building_necessity(bo, gametime);
 		} else if (bo.type == BuildingObserver::Type::kTrainingsite) {
-			bo.new_building = check_building_necessity(bo, PerfEvaluation::kForConstruction, gametime, seafaring_map);
+			bo.new_building = check_building_necessity(bo, PerfEvaluation::kForConstruction, gametime, seafaring_economy);
 		} else if (bo.type == BuildingObserver::Type::kWarehouse) {
 			bo.new_building = check_warehouse_necessity(bo, gametime);
 		} else if (bo.aimode_limit_status() != AiModeBuildings::kAnotherAllowed) {
@@ -5724,7 +5723,6 @@ void DefaultAI::gain_building(Building& b, const bool found_on_load) {
 			warehousesites.back().bo = &bo;
 			if (bo.is(BuildingAttribute::kPort)) {
 				++num_ports;
-				seafaring_economy = true;
 				// unblock nearby fields, might be used for other buildings...
 				const Map& map = game().map();
 				MapRegion<Area<FCoords>> mr(
@@ -5890,11 +5888,10 @@ bool DefaultAI::check_supply(const BuildingObserver& bo) {
 
 // TODO(tiborb): - should be called from scheduler, once in 60s is enough
 void DefaultAI::update_player_stat(const uint32_t gametime) {
-	printf ("%d: DEBUG: update_player_stat(), old update time: %d\n", player_number(), player_statistics.get_update_time());
-	//if (player_statistics.get_update_time() > 0 &&
-	    //player_statistics.get_update_time() + 15 * 1000 > gametime) {
-		//return;
-	//}
+	if (player_statistics.get_update_time() > 0 &&
+	    player_statistics.get_update_time() + 15 * 1000 > gametime) {
+		return;
+	}
 	player_statistics.set_update_time(gametime);
 	Widelands::PlayerNumber const pn = player_number();
 	PlayerNumber const nr_players = game().map().get_nrplayers();
@@ -5906,7 +5903,6 @@ void DefaultAI::update_player_stat(const uint32_t gametime) {
 
 	// Collecting statistics and saving them in player_statistics object
 	const Player* me = game().get_player(pn);
-	printf ("DEBUG Players in game: %d, player positions: %d\n", plr_in_game, nr_players); //NOCOM
 	for (Widelands::PlayerNumber j = 1; j <= nr_players; ++j) {
 		const Player* this_player = game().get_player(j);
 		if (this_player) {
