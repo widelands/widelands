@@ -554,10 +554,6 @@ GameHost::GameHost(const std::string& playername, bool internet)
    : d(new GameHostImpl(this)), internet_(internet), forced_pause_(false) {
 	log("[Host]: starting up.\n");
 
-	if (internet) {
-		InternetGaming::ref().open_game();
-	}
-
 	d->localplayername = playername;
 
 	// create a listening socket
@@ -580,8 +576,8 @@ GameHost::GameHost(const std::string& playername, bool internet)
 							_("Widelands could not start a server.\n"
 							  "Probably some other process is already running a server on our port."));
 		}
+		d->promoter = new LanGamePromoter();
 	}
-	d->promoter = new LanGamePromoter();
 	d->game = nullptr;
 	d->pseudo_networktime = 0;
 	d->waiting = true;
@@ -612,7 +608,10 @@ GameHost::~GameHost() {
 
 	// close all open sockets
 	d->net.reset();
-	delete d->promoter;
+	if (d->promoter != nullptr) {
+		delete d->promoter;
+		d->promoter = nullptr;
+	}
 	delete d;
 	delete file_;
 }

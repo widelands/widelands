@@ -24,10 +24,6 @@ NetHostProxy::~NetHostProxy() {
 		conn_->close();
 	}
 }
-/*
-bool NetHostProxy::is_connected() const {
-	return conn_->is_connected();
-}*/
 
 bool NetHostProxy::is_connected(const ConnectionId id) const {
 	return clients_.count(id) > 0 && clients_.at(id).state_ == Client::State::kConnected;
@@ -90,7 +86,6 @@ bool NetHostProxy::try_receive(const ConnectionId id, RecvPacket* packet) {
 }
 
 void NetHostProxy::send(const ConnectionId id, const SendPacket& packet) {
-	//printf("NetHostProxy::send() to %i\n", id);
 	std::vector<ConnectionId> vec;
 	vec.push_back(id);
 	send(vec, packet);
@@ -101,11 +96,15 @@ void NetHostProxy::send(const std::vector<ConnectionId>& ids, const SendPacket& 
 		return;
 	}
 
+	receive_commands();
+
 	conn_->send(RelayCommand::kToClients);
 	for (ConnectionId id : ids) {
-		//printf("NetHostProxy::send({}) to %i\n", id);
-		assert(is_connected(id));
-		conn_->send(id);
+		if (is_connected(id)) {
+			// This should be but is not always the case. It can happen that we receive a client disconnect
+			// on receive_commands() above and the GameHost did not have the chance to react to it yet.
+			conn_->send(id);
+		}
 	}
 	conn_->send(0);
 	conn_->send(packet);
@@ -128,11 +127,16 @@ NetHostProxy::NetHostProxy(const std::pair<NetAddress, NetAddress>& addresses, c
    	conn_->send(password);
    	conn_->send(password);
 
-   	// Wait for answer
-	// TODO(Notabilis): Don't like it.
-   	while (!conn_->peek_cmd())
-		printf("while (!conn_->peek_cmd())\n")
-		;
+   	// Wait 10 seconds for an answer
+	uint32_t endtime = time(nullptr) + 10;
+	while (!conn_->peek_cmd()) {
+		if (time(nullptr) > endtime) {
+			// No message received in time
+			conn_->close();
+			conn_.reset();
+			return;
+		}
+	}
 
 	RelayCommand cmd;
 	conn_->receive(&cmd);
@@ -144,9 +148,15 @@ NetHostProxy::NetHostProxy(const std::pair<NetAddress, NetAddress>& addresses, c
    	}
 
    	// Check version
-   	while (!conn_->peek_uint8_t())
-		printf("while (!conn_->peek_cmd())\n")
-		;
+	endtime = time(nullptr) + 10;
+	while (!conn_->peek_uint8_t()) {
+		if (time(nullptr) > endtime) {
+			// No message received in time
+			conn_->close();
+			conn_.reset();
+			return;
+		}
+	}
 	uint8_t relay_proto_version;
 	conn_->receive(&relay_proto_version);
    	if (relay_proto_version != kRelayProtocolVersion) {
@@ -156,9 +166,15 @@ NetHostProxy::NetHostProxy(const std::pair<NetAddress, NetAddress>& addresses, c
    	}
 
    	// Check game name
-   	while (!conn_->peek_string())
-		printf("while (!conn_->peek_string())\n")
-		;
+	endtime = time(nullptr) + 10;
+	while (!conn_->peek_string()) {
+		if (time(nullptr) > endtime) {
+			// No message received in time
+			conn_->close();
+			conn_.reset();
+			return;
+		}
+	}
 	std::string game_name;
 	conn_->receive(&game_name);
    	if (game_name != name) {
@@ -187,8 +203,11 @@ void NetHostProxy::receive_commands() {
 				conn_->receive(&cmd);
 				std::string reason;
 				conn_->receive(&reason);
-				// TODO(Notabilis): Handle the reason for the disconnect
 				conn_->close();
+				// Set all clients to offline
+				for (auto& entry : clients_) {
+					entry.second.state_ = Client::State::kDisconnected;
+				}
 			}
 			break;
 		case RelayCommand::kConnectClient:
@@ -223,6 +242,11 @@ void NetHostProxy::receive_commands() {
 				assert(clients_.count(id));
 				clients_.at(id).received_.push(std::move(packet));
 			}
+			break;
+		case RelayCommand::kPing:
+			conn_->receive(&cmd);
+			// Reply with a pong
+			conn_->send(RelayCommand::kPong);
 			break;
 		default:
 			// Other commands should not be possible.

@@ -600,6 +600,15 @@ void InternetGaming::handle_packet(RecvPacket& packet) {
 			// Client received the acknowledgment, that the game was opened
 			assert(waitcmd_ == IGPCMD_GAME_OPEN);
 			waitcmd_ = "";
+			// Save the received IP(s), so the client can connect to the game
+			NetAddress::parse_ip(&gameips_.first, packet.string(), INTERNET_RELAY_PORT);
+			// If the next value is true, a secondary IP follows
+			if (packet.string() == bool2str(true)) {
+				NetAddress::parse_ip(&gameips_.second, packet.string(), INTERNET_RELAY_PORT);
+			}
+			log("InternetGaming: Received ips of the relay to host: %s %s.\n",
+			    gameips_.first.ip.to_string().c_str(), gameips_.second.ip.to_string().c_str());
+			state_ = IN_GAME;
 		}
 
 		else if (cmd == IGPCMD_GAME_CONNECT) {
@@ -607,11 +616,10 @@ void InternetGaming::handle_packet(RecvPacket& packet) {
 			assert(waitcmd_ == IGPCMD_GAME_CONNECT);
 			waitcmd_ = "";
 			// Save the received IP(s), so the client can connect to the game
-			// NOCOM(Notabilis): Make port a constant
-			NetAddress::parse_ip(&gameips_.first, packet.string(), 7397);
+			NetAddress::parse_ip(&gameips_.first, packet.string(), INTERNET_RELAY_PORT);
 			// If the next value is true, a secondary IP follows
 			if (packet.string() == bool2str(true)) {
-				NetAddress::parse_ip(&gameips_.second, packet.string(), 7397);
+				NetAddress::parse_ip(&gameips_.second, packet.string(), INTERNET_RELAY_PORT);
 			}
 			log("InternetGaming: Received ips of the game to join: %s %s.\n",
 			    gameips_.first.ip.to_string().c_str(), gameips_.second.ip.to_string().c_str());
@@ -669,14 +677,16 @@ const std::pair<NetAddress, NetAddress>& InternetGaming::ips() {
 }
 
 const std::string InternetGaming::relay_password() {
-	/// NOCOM(Notabilis): Get this from the metaserver
-	return "pwd";
+	return pwd_;
 }
 
 /// called by a client to join the game \arg gamename
 void InternetGaming::join_game(const std::string& gamename) {
 	if (!logged_in())
 		return;
+
+	// Reset the game ips, we should receive new ones shortly
+	gameips_ = std::make_pair(NetAddress(), NetAddress());
 
 	SendPacket s;
 	s.string(IGPCMD_GAME_CONNECT);
@@ -696,25 +706,19 @@ void InternetGaming::open_game() {
 	if (!logged_in())
 		return;
 
+	// Reset the game ips, we should receive new ones shortly
+	gameips_ = std::make_pair(NetAddress(), NetAddress());
+
 	SendPacket s;
 	s.string(IGPCMD_GAME_OPEN);
 	s.string(gamename_);
 	s.string("1024");  // Used to be maxclients, no longer used.
 	net->send(s);
 	log("InternetGaming: Client opened a game with the name %s.\n", gamename_.c_str());
-	state_ = IN_GAME;
 
 	// From now on we wait for a reply from the metaserver
 	waitcmd_ = IGPCMD_GAME_OPEN;
 	waittimeout_ = time(nullptr) + INTERNET_GAMING_TIMEOUT;
-
-	/// NOCOM(Notabilis): Get this from the metaserver, as well as the password. Or use hardcoded address
-	/// and select and send password ourself? Otherwise, we have to wait here until we get the
-	/// information from the metaserver
-	NetAddress addr;
-	net->get_remote_address(&addr);
-	addr.port = 7397; // Just temporary, see relay server code
-	gameips_ = std::make_pair(addr, addr);
 }
 
 /// called by a client that is host of a game to inform the metaserver, that the game started

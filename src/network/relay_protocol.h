@@ -186,6 +186,18 @@ enum class RelayCommand : uint8_t {
 	 * \li packet: The SendPacket to relay.
 	 */
 	kFromClient = 14,
+
+	/**
+	 * The relay sends this message to check for the presence of the NetHostProxy.
+	 * Any message is acceptable as response.
+	 */
+	kPing = 15,
+
+	/**
+	 * The NetHostProxy replies with this message to a kPing when it has nothing
+	 * else to talk about.
+	 */
+	kPong = 16,
 	/// \}
 
 	/**
