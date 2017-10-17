@@ -1420,12 +1420,14 @@ void GameHost::set_paused(bool /* paused */) {
 
 // Send the packet to all properly connected clients
 void GameHost::broadcast(SendPacket& packet) {
+	std::vector<NetHostInterface::ConnectionId> receivers;
 	for (const Client& client : d->clients) {
 		if (client.playernum != UserSettings::not_connected()) {
 			assert(client.sock_id > 0);
-			d->net->send(client.sock_id, packet);
+			receivers.push_back(client.sock_id);
 		}
 	}
+	d->net->send(receivers, packet);
 }
 
 void GameHost::write_setting_map(SendPacket& packet) {
