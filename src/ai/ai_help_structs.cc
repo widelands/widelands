@@ -1079,8 +1079,7 @@ void PlayersStrengths::add(Widelands::PlayerNumber pn,
 	if (all_stats.count(opn) == 0) {
 		this_player_number = pn;
 		this_player_team = mytn;
-		all_stats.insert(
-		   std::make_pair(opn, PlayerStat(pltn, pp, op, o60p, cs, land, oland, o60l)));
+		all_stats.insert(std::make_pair(opn, PlayerStat(pltn, pp, op, o60p, cs, land, oland, o60l)));
 	} else {
 		all_stats[opn].players_power = pp;
 		all_stats[opn].old_players_power = op;
@@ -1090,24 +1089,26 @@ void PlayersStrengths::add(Widelands::PlayerNumber pn,
 		all_stats[opn].old_players_land = oland;
 		all_stats[opn].old60_players_land = oland;
 		assert(this_player_number == pn);
-		if (this_player_team != mytn){
+		if (this_player_team != mytn) {
 			log("%2d: Team changed %d -> %d\n", pn, this_player_team, mytn);
 			this_player_team = mytn;
 		};
-		if (all_stats[opn].team_number != pltn){
-			log("%2d: Team changed for player %d: %d -> %d\n", pn, opn, all_stats[opn].team_number, pltn);
+		if (all_stats[opn].team_number != pltn) {
+			log("%2d: Team changed for player %d: %d -> %d\n", pn, opn, all_stats[opn].team_number,
+			    pltn);
 			all_stats[opn].team_number = pltn;
 		};
 	}
 }
 
+// Very tiny possibility that player that has a statistics info here
+// does not exist anymore
 void PlayersStrengths::remove_stat(const Widelands::PlayerNumber pn) {
-	if (all_stats.count(pn) > 0){
-		printf("%d: Erasing statistics for player %d\n", this_player_number, pn);
+	if (all_stats.count(pn) > 0) {
+		log("%d: AI: Erasing statistics for player %d\n", this_player_number, pn);
 		all_stats.erase(pn);
 	}
 }
-
 
 // After statistics for team members are updated, this calculation is needed
 void PlayersStrengths::recalculate_team_power() {
@@ -1154,7 +1155,7 @@ void PlayersStrengths::set_last_time_seen(const uint32_t seentime, Widelands::Pl
 
 bool PlayersStrengths::get_is_enemy(Widelands::PlayerNumber other_player_number) {
 	// So this is me
- 	if (other_player_number == this_player_number) {
+	if (other_player_number == this_player_number) {
 		return false;
 	}
 	// If we do not belong to any team, all others are our enemies
@@ -1163,7 +1164,8 @@ bool PlayersStrengths::get_is_enemy(Widelands::PlayerNumber other_player_number)
 	}
 	if (all_stats.count(other_player_number) == 0) {
 		// Should happen only rarely so we print a warning here
-		log("%d: WARNING: player has no statistics yet for player %d\n", this_player_number, other_player_number);
+		log("%d: WARNING: player has no statistics yet for player %d\n", this_player_number,
+		    other_player_number);
 		return false;
 	}
 	// finally we compare my team number of the other player team number
@@ -1321,7 +1323,6 @@ uint32_t PlayersStrengths::get_modified_player_power(Widelands::PlayerNumber pn)
 // Are the player in the same team
 bool PlayersStrengths::players_in_same_team(Widelands::PlayerNumber pl1,
                                             Widelands::PlayerNumber pl2) {
-	//printf ("Player1 %d / team %d vs player2 %d / team %d\n", pl1, all_stats[pl1].team_number, pl2, all_stats[pl2].team_number); //NOCOM
 	assert(all_stats.count(pl1) > 0);
 	assert(all_stats.count(pl2) > 0);
 	if (pl1 == pl2) {

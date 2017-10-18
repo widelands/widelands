@@ -1960,14 +1960,9 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 
 	const Map& map = game().map();
 
-	//auto* map2 = game().mutable_map(); NOCOM
-	if (gametime % 5 == 0) { // No need to query this too frequently
+	if (gametime % 5 == 0) {  // No need to query this too frequently
 		seafaring_economy = game().mutable_map()->allows_seafaring();
-		printf ("DEBUG: Seafaring map %s\n", (seafaring_economy) ? "Y":"N");
 	}
-
-
-
 
 	for (int32_t i = 0; i < 4; ++i)
 		spots_avail.at(i) = 0;
@@ -2296,7 +2291,8 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 		} else if (bo.type == BuildingObserver::Type::kProductionsite ||
 		           bo.type == BuildingObserver::Type::kMine) {
 
-			bo.new_building = check_building_necessity(bo, PerfEvaluation::kForConstruction, gametime, seafaring_economy);
+			bo.new_building = check_building_necessity(
+			   bo, PerfEvaluation::kForConstruction, gametime, seafaring_economy);
 
 			if (bo.is(BuildingAttribute::kShipyard)) {
 				assert(bo.new_building == BuildingNecessity::kAllowed ||
@@ -2367,7 +2363,8 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 		} else if (bo.type == BuildingObserver::Type::kMilitarysite) {
 			bo.new_building = check_building_necessity(bo, gametime);
 		} else if (bo.type == BuildingObserver::Type::kTrainingsite) {
-			bo.new_building = check_building_necessity(bo, PerfEvaluation::kForConstruction, gametime, seafaring_economy);
+			bo.new_building = check_building_necessity(
+			   bo, PerfEvaluation::kForConstruction, gametime, seafaring_economy);
 		} else if (bo.type == BuildingObserver::Type::kWarehouse) {
 			bo.new_building = check_warehouse_necessity(bo, gametime);
 		} else if (bo.aimode_limit_status() != AiModeBuildings::kAnotherAllowed) {
@@ -4330,8 +4327,8 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 	}
 
 	// Perhaps buildings are not allowed because the map is no seafaring
-	if (purpose == PerfEvaluation::kForConstruction &&
-	    !seafaring_map && bo.is(BuildingAttribute::kNeedsSeafaring)) {
+	if (purpose == PerfEvaluation::kForConstruction && !seafaring_map &&
+	    bo.is(BuildingAttribute::kNeedsSeafaring)) {
 		return BuildingNecessity::kForbidden;
 	}
 
@@ -5946,7 +5943,8 @@ void DefaultAI::update_player_stat(const uint32_t gametime) {
 				    static_cast<unsigned int>(genstats.size()));
 			}
 		} else {
-			// Well, under some circumstances it is possible we have stat for this player and he does not exist anymore
+			// Well, under some circumstances it is possible we have stat for this player and he does
+			// not exist anymore
 			player_statistics.remove_stat(j);
 		}
 	}
