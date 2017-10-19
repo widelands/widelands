@@ -1960,8 +1960,11 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 
 	const Map& map = game().map();
 
-	if (gametime % 5 == 0) {  // No need to query this too frequently
-		seafaring_economy = game().mutable_map()->allows_seafaring();
+	if (gametime % 5 == 0) {
+		// TODO(unknown): Counting port spaces is very primitive way for this
+		// there should be better alternative f.e. like map::allows_seafaring()
+		// function but simplier
+		seafaring_economy = map.get_port_spaces().size() >= 2;
 	}
 
 	for (int32_t i = 0; i < 4; ++i)
