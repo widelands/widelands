@@ -5895,8 +5895,6 @@ void DefaultAI::update_player_stat(const uint32_t gametime) {
 	player_statistics.set_update_time(gametime);
 	Widelands::PlayerNumber const pn = player_number();
 	PlayerNumber const nr_players = game().map().get_nrplayers();
-	uint32_t plr_in_game = 0;
-	iterate_players_existing_novar(p, nr_players, game())++ plr_in_game;
 
 	// receiving games statistics and parsing it (reading latest entry)
 	const Game::GeneralStatsVector& genstats = game().get_general_statistics();
