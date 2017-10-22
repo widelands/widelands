@@ -52,10 +52,10 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start sewing fur clothes because ...
          descname = _"sewing fur clothes",
          actions = {
-            "sleep=5000",
+            "sleep=20000",
             "return=skipped unless economy needs fur_clothes or workers need experience",
             "consume=fur:2",
-            "animate=working 40000",
+            "animate=working 25000",
             "produce=fur_clothes"
          },
       },

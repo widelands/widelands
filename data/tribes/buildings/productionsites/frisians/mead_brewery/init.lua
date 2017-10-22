@@ -16,10 +16,10 @@ tribes:new_productionsite_type {
       thatch_reed = 3
    },
    return_on_dismantle_on_enhanced = {
-      brick = 3,
+      brick = 2,
       granite = 1,
       log = 1,
-      thatch_reed = 3
+      thatch_reed = 1
    },
 
    animations = {
@@ -68,9 +68,9 @@ tribes:new_productionsite_type {
          descname = _"brewing mead",
          actions = {
             "return=skipped unless economy needs mead or workers need experience",
-            "sleep=10000",
+            "sleep=35000",
             "consume=barley water honey",
-            "animate=working 44000",
+            "animate=working 35000",
             "produce=mead"
          }
       },
@@ -79,9 +79,9 @@ tribes:new_productionsite_type {
          descname = _"brewing beer",
          actions = {
             "return=skipped unless economy needs beer or workers need experience",
-            "sleep=10000",
+            "sleep=30000",
             "consume=barley water",
-            "animate=working 35000",
+            "animate=working 30000",
             "produce=beer"
          }
       },

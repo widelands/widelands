@@ -16,10 +16,10 @@ tribes:new_productionsite_type {
       thatch_reed = 4
    },
    return_on_dismantle_on_enhanced = {
-      brick = 3,
-      granite = 2,
-      log = 2,
-      thatch_reed = 3
+      brick = 2,
+      granite = 1,
+      log = 1,
+      thatch_reed = 2
    },
 
    animations = {
@@ -68,9 +68,9 @@ tribes:new_productionsite_type {
          descname = _"baking honey bread",
          actions = {
             "return=skipped unless economy needs honey_bread or workers need experience",
-            "sleep=10000",
+            "sleep=35000",
             "consume=barley water honey",
-            "animate=working 51000",
+            "animate=working 35000",
             "produce=honey_bread"
          }
       },
@@ -79,9 +79,9 @@ tribes:new_productionsite_type {
          descname = _"baking bread",
          actions = {
             "return=skipped unless economy needs bread_frisians or workers need experience",
-            "sleep=10000",
+            "sleep=20000",
             "consume=barley water",
-            "animate=working 40000",
+            "animate=working 20000",
             "produce=bread_frisians"
          }
       },

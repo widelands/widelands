@@ -54,12 +54,12 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start making clay because ...
          descname = _"making clay",
          actions = {
-            "sleep=4000",
+            "sleep=20000",
             "return=skipped unless economy needs clay",
             "return=failed unless site has water",
             "worker=dig",
             "consume=water",
-            "animate=working 10000",
+            "animate=working 20000",
             "produce=clay"
          },
       },

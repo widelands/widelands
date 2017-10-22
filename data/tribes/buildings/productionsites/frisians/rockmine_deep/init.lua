@@ -16,9 +16,8 @@ tribes:new_productionsite_type {
       thatch_reed = 2
    },
    return_on_dismantle_on_enhanced = {
-      brick = 2,
-      granite = 1,
-      log = 2,
+      brick = 1,
+      log = 1,
       thatch_reed = 1
    },
 
@@ -58,16 +57,16 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start mining rock because ...
          descname = _"mining granite",
          actions = {
-            "sleep=20000",
+            "sleep=40000",
             "return=skipped unless economy needs granite",
             "consume=meal",
-            "animate=working 10000",
+            "animate=working 12000",
             "mine=stones 3 100 10 5",
             "produce=granite",
-            "animate=working 10000",
+            "animate=working 12000",
             "mine=stones 3 100 10 5",
             "produce=granite",
-            "animate=working 10000",
+            "animate=working 12000",
             "mine=stones 3 100 10 5",
             "produce=granite"
          }

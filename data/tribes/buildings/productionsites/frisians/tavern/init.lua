@@ -63,25 +63,26 @@ tribes:new_productionsite_type {
             "return=skipped"
          },
       },
-      produce_cheap = {
-         -- TRANSLATORS: Completed/Skipped/Did not start preparing a ration because ...
-         descname = _"preparing a ration",
+      produce_fast = {
+         -- TRANSLATORS: Completed/Skipped/Did not start preparing only one ration because ... (can produce more efficient when supply is good)
+         descname = _"preparing only one ration",
          actions = {
             "return=skipped unless economy needs ration",
-            "sleep=12000",
+            "return=skipped when site has fruit,bread_frisians and site has smoked_fish,smoked_meat",
+            "sleep=21000",
             "consume=fruit,bread_frisians,smoked_fish,smoked_meat",
-            "animate=working 14000",
+            "animate=working 28500",
             "produce=ration"
          },
       },
-      produce_fast = {
+      produce_cheap = {
          -- TRANSLATORS: Completed/Skipped/Did not start preparing rations because ...
          descname = _"preparing rations",
          actions = {
             "return=skipped unless economy needs ration",
-            "sleep=6000",
+            "sleep=28000",
             "consume=fruit,bread_frisians smoked_fish,smoked_meat",
-            "animate=working 18000",
+            "animate=working 38000",
             "produce=ration:2"
          },
       },

@@ -44,7 +44,7 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start gathering berries because ...
          descname = _"gathering berries",
          actions = {
-            "sleep=18000",
+            "sleep=21000",
             "worker=harvest",
          }
       },

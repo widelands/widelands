@@ -20,10 +20,8 @@ port1:set_wares {
    brick = 50,
    granite = 40,
    thatch_reed = 20,
-   --log = 200, brick = 300, granite = 200, thatch_reed = 200,
-   
-   clay = 20,
-   water = 20,
+   clay = 10,
+   water = 10,
    coal = 20,
    fish = 8,
    meat = 6,
@@ -32,12 +30,11 @@ port1:set_wares {
    beer = 15,
    ration = 10,
    gold = 1,
-   sword_long = 9,
-   sword_curved = 4,
-   sword_double = 1
+   sword_long = 2,
+   sword_curved = 1
 }
 port1:set_workers {
-   frisians_woodcutter = 4,
+   frisians_woodcutter = 3,
    frisians_forester = 7,
    frisians_clay_burner = 5,
    frisians_builder = 10,
@@ -49,9 +46,9 @@ port1:set_workers {
    frisians_berry_farmer = 4,
    frisians_fruit_collector = 4,
    frisians_beekeeper = 1,
-   frisians_fisher = 2,
+   frisians_fisher = 3,
    frisians_geologist = 1,
-   frisians_farmer = 4,
+   frisians_farmer = 5,
    frisians_reed_farmer = 4,
    frisians_baker = 1,
    frisians_brewer = 1,
@@ -60,7 +57,7 @@ port1:set_workers {
    frisians_reindeer = 1,
    frisians_charcoal_burner = 3
 }
-port1:set_soldiers ({0,0,0,0}, 20)
+port1:set_soldiers ({0,0,0,0}, 25)
 
 -- =======================================================================
 --                                 Player 2
@@ -105,18 +102,18 @@ p2:allow_buildings {
 }
 hq2 = p2:place_building ("empire_headquarters", map.player_slots [2].starting_field, false, true)
 hq2:set_wares {
-   log = 100,
-   granite = 50,
-   marble = 100,
+   log = 80,
+   granite = 40,
+   marble = 80,
    marble_column = 20,
-   planks = 50,
+   planks = 40,
    cloth = 10,
-   ration = 40,
-   beer = 20,
+   ration = 30,
+   beer = 15,
    meal = 5,
-   wine = 20,
+   wine = 15,
    grape = 10,
-   wheat = 20,
+   wheat = 30,
    water = 50,
    coal = 50,
    iron = 20,
@@ -128,7 +125,7 @@ hq2:set_wares {
    empire_bread = 20
 }
 hq2:set_workers {
-   empire_builder = 3, --to delay expansion
+   empire_builder = 3, --to slow him down a bit
    empire_lumberjack = 8,
    empire_forester = 18,
    empire_stonemason = 7,
@@ -136,11 +133,11 @@ hq2:set_workers {
    empire_miner_master = 4,
    empire_toolsmith = 3,
    empire_carpenter = 3,
-   empire_donkey = 20,
+   empire_donkey = 40,
    empire_donkeybreeder = 1,
    empire_weaver = 2,
    empire_hunter = 2,
-   empire_fisher = 2,
+   empire_fisher = 3,
    empire_shepherd = 2,
    empire_farmer = 9,
    empire_miller = 4,
@@ -157,7 +154,7 @@ hq2:set_workers {
    empire_weaponsmith = 1,
    empire_geologist = 2
 }
-hq2:set_soldiers ({4,4,0,2}, 50)
+hq2:set_soldiers ({4,4,0,2}, 35)
 
 -- =======================================================================
 --                                 Player 3
@@ -205,7 +202,7 @@ hq3:set_wares {
    log = 100,
    granite = 50,
    thatch_reed = 50,
-   blackwood = 10, --to delay expansion
+   blackwood = 5, --to delay expansion
    grout = 20,
    coal = 20,
    water = 50,
@@ -249,4 +246,4 @@ hq3:set_workers {
    barbarians_blacksmith_master = 1,
    barbarians_helmsmith = 1
 }
-hq3:set_soldiers ({3,5,0,2}, 80)
+hq3:set_soldiers ({3,5,0,2}, 50)

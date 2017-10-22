@@ -6,7 +6,7 @@ tribes:new_tribe {
    animations = {
       frontier = {
          pictures = path.list_files(dirname .. "images/frisians/frontier_??.png"),
-         hotspot = { 12, 28 },
+         hotspot = { 9, 26 },
       },
       flag = {
          pictures = path.list_files(dirname .. "images/frisians/flag_??.png"),
@@ -189,6 +189,7 @@ tribes:new_tribe {
       "frisians_headquarters",
       "frisians_warehouse",
       "frisians_port",
+      "frisians_warehouse_empire", --Special building – used by scenarios, unavailable in normal games
 
       -- Small
       "frisians_quarry",
@@ -288,7 +289,6 @@ tribes:new_tribe {
    port = "frisians_port",
    
    barracks = "frisians_barracks",
-   bakery = "frisians_bakery",
    ironore = "iron_ore",
    rawlog = "log",
    refinedlog = "brick",

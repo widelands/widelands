@@ -14,8 +14,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-09-15 18:56+0000\n"
-"PO-Revision-Date: 2017-09-23 21:47+0000\n"
+"POT-Creation-Date: 2017-09-29 15:54+0000\n"
+"PO-Revision-Date: 2017-09-30 17:53+0000\n"
 "Last-Translator: Jukka Pakarinen\n"
 "Language-Team: Finnish (http://www.transifex.com/widelands/widelands/language/fi/)\n"
 "MIME-Version: 1.0\n"
@@ -23,6 +23,12 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Language: fi\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../data/tribes/buildings/markets/barbarians/market/init.lua:14
+msgctxt "barbarians_building"
+msgid "Market"
+msgstr "Kauppapaikka"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/militarysites/atlanteans/castle/init.lua:53

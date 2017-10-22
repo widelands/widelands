@@ -58,7 +58,7 @@ tribes:new_productionsite_type {
          descname = _"breeding fish",
          actions = {
             "return=skipped unless economy needs fish",
-            "sleep=20000",
+            "sleep=23000",
             "consume=fruit water:3",
             "worker=breed_in_pond"
          },
@@ -68,7 +68,7 @@ tribes:new_productionsite_type {
          descname = _"fishing",
          actions = {
             "return=skipped unless economy needs fish",
-            "sleep=10000",
+            "sleep=9000",
             "worker=fish_in_pond"
          },
       },

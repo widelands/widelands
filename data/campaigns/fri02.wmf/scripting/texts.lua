@@ -12,7 +12,7 @@ function hauke (title, text)
    return speech ("map:hauke.png", "7799BB", title, text)
 end
 function murilius (title, text)
-   return speech ("map:murilius.png", "881100", title, text)
+   return speech ("map:murilius.png", "BB7755", title, text)
 end
 
 -- =======================================================================
@@ -163,12 +163,21 @@ train_recycle_3 = {
 aqua_farm_1 = {
    title =_ "Fishing",
    body=hauke (_"We need fish",
-      -- TRANSLATORS: Hauke – Aqua Farms
+      -- TRANSLATORS: Hauke – Aqua Farms 1
       _([[Chieftain Reebaud, I have more bad news. There are almost no fish in the waters nearby. While we can prepare rations using only fruit or bread, soldier training requires lots of smoked meat or fish. The scraps of meat a reindeer farm drops out as a by-product when making fur aren´t enough.]])
       .. paragraphdivider () ..
-      -- TRANSLATORS: Hauke – Aqua Farms
+      -- TRANSLATORS: Hauke – Aqua Farms 1
       _([[Fortunately, one of our fishermen thought of a solution. Our clay pits leave large holes in the ground; a fisher could fill them with water and grow fish in these ponds. He will only need lots of water for the ponds, and fruit to feed the fish.]]))
       .. new_objectives (obj_aqua_farm),
+}
+aqua_farm_2 = {
+   title =_ "Fishing",
+   body=hauke (_"We have fish again",
+      -- TRANSLATORS: Hauke – Aqua Farms 2
+      _([[Well done. We have an aqua farm now, and our mining economy is stable for now. However, the miners tell me that the resources are already low, and the mines may run empty completely soon.]]) 
+      .. paragraphdivider () ..
+      -- TRANSLATORS: Hauke – Aqua Farms 2
+      _([[The mines will still be able to produce then, but it will take about twenty times longer – ten times if it is a deep mine – to produce ores or coal. You probably want to prepare for the increasing demands of time and food.]])),
 }
 
 supply_murilius_1 = {

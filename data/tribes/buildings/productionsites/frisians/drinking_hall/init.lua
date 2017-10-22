@@ -16,10 +16,9 @@ tribes:new_productionsite_type {
       thatch_reed = 3
    },
    return_on_dismantle_on_enhanced = {
-      brick = 3,
+      brick = 1,
       granite = 1,
-      log = 1,
-      thatch_reed = 2
+      thatch_reed = 1
    },
 
    animations = {
@@ -68,9 +67,9 @@ tribes:new_productionsite_type {
          descname = _"preparing a ration",
          actions = {
             "return=skipped unless economy needs ration",
-            "sleep=8000",
+            "sleep=14000",
             "consume=fruit,smoked_fish,smoked_meat",
-            "animate=working 16000",
+            "animate=working 19000",
             "produce=ration"
          }
       },
@@ -79,9 +78,9 @@ tribes:new_productionsite_type {
          descname = _"preparing a meal",
          actions = {
             "return=skipped unless economy needs meal",
-            "sleep=8000",
+            "sleep=10000",
             "consume=beer honey_bread smoked_fish,smoked_meat",
-            "animate=working 20000",
+            "animate=working 30000",
             "produce=meal"
          }
       },

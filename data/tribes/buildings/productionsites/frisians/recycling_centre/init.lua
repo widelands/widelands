@@ -60,9 +60,10 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
          descname = pgettext("frisians_building", "working"),
          actions = {
+            "call=make_fur",
             "call=smelt_iron",
             "call=smelt_mixed",
-            "call=make_fur",
+            "call=smelt_iron",
             "return=skipped"
          }
       },
@@ -71,7 +72,7 @@ tribes:new_productionsite_type {
          descname = pgettext("frisians_building", "recycling fur"),
          actions = {
             "return=skipped unless site has fur_clothes_old",
-            "sleep=14000",
+            "sleep=40000",
             "consume=fur_clothes_old",
             "animate=working 15000",
             "produce=fur"
@@ -82,9 +83,9 @@ tribes:new_productionsite_type {
          descname = pgettext("frisians_building", "recycling iron"),
          actions = {
             "return=skipped unless economy needs iron",
-            "sleep=14000",
+            "sleep=40000",
             "consume=scrap_metal_iron:2 coal",
-            "animate=working 18000",
+            "animate=working 40000",
             "produce=iron:2"
          }
       },
@@ -93,9 +94,9 @@ tribes:new_productionsite_type {
          descname = pgettext("frisians_building", "recycling iron and gold"),
          actions = {
             "return=skipped unless economy needs iron or economy needs gold",
-            "sleep=14000",
+            "sleep=40000",
             "consume=scrap_metal_mixed:2 coal",
-            "animate=working 24000",
+            "animate=working 40000",
             "produce=iron gold"
          }
       },

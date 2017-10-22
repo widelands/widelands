@@ -58,7 +58,6 @@ print_loading_message("┗━ took", function()
       include "tribes/wares/sword_curved/init.lua"
       include "tribes/wares/sword_double/init.lua"
       include "tribes/wares/needles/init.lua"
-      
       include "tribes/wares/armor/init.lua"
       include "tribes/wares/armor_chain/init.lua"
       include "tribes/wares/armor_gilded/init.lua"
@@ -194,7 +193,6 @@ print_loading_message("┗━ took", function()
       include "tribes/immovables/shipconstruction_barbarians/init.lua"
       include "tribes/immovables/shipconstruction_empire/init.lua"
       include "tribes/immovables/shipconstruction_frisians/init.lua"
-      
       include "tribes/immovables/bush_tiny/init.lua"
       include "tribes/immovables/bush_small/init.lua"
       include "tribes/immovables/bush_medium/init.lua"
@@ -361,10 +359,10 @@ print_loading_message("┗━ took", function()
       include "tribes/buildings/warehouses/empire/headquarters_shipwreck/init.lua"
       include "tribes/buildings/warehouses/empire/port/init.lua"
       include "tribes/buildings/warehouses/empire/warehouse/init.lua"
-      
       include "tribes/buildings/warehouses/frisians/headquarters/init.lua"
       include "tribes/buildings/warehouses/frisians/port/init.lua"
       include "tribes/buildings/warehouses/frisians/warehouse/init.lua"
+      include "tribes/buildings/warehouses/frisians/warehouse_empire/init.lua"
    end)
 
    -- ===================================
@@ -499,6 +497,7 @@ print_loading_message("┗━ took", function()
       include "tribes/buildings/productionsites/empire/goldmine_deep/init.lua"
       include "tribes/buildings/productionsites/empire/goldmine/init.lua"
       
+      --Frisians mines
       include "tribes/buildings/productionsites/frisians/coalmine_deep/init.lua"
       include "tribes/buildings/productionsites/frisians/rockmine_deep/init.lua"
       include "tribes/buildings/productionsites/frisians/goldmine_deep/init.lua"
@@ -507,11 +506,10 @@ print_loading_message("┗━ took", function()
       include "tribes/buildings/productionsites/frisians/rockmine/init.lua"
       include "tribes/buildings/productionsites/frisians/goldmine/init.lua"
       include "tribes/buildings/productionsites/frisians/ironmine/init.lua"
-      
+      --Frisians big
       include "tribes/buildings/productionsites/frisians/farm/init.lua"
       include "tribes/buildings/productionsites/frisians/reindeer_farm/init.lua"
-      include "tribes/buildings/productionsites/frisians/aqua_farm/init.lua"
-      
+      --Frisians small
       include "tribes/buildings/productionsites/frisians/woodcutters_house/init.lua"
       include "tribes/buildings/productionsites/frisians/foresters_house/init.lua"
       include "tribes/buildings/productionsites/frisians/quarry/init.lua"
@@ -519,11 +517,13 @@ print_loading_message("┗━ took", function()
       include "tribes/buildings/productionsites/frisians/beekeepers_house/init.lua"
       include "tribes/buildings/productionsites/frisians/reed_farm/init.lua"
       include "tribes/buildings/productionsites/frisians/well/init.lua"
+      include "tribes/buildings/productionsites/frisians/aqua_farm/init.lua"
       include "tribes/buildings/productionsites/frisians/hunters_house/init.lua"
       include "tribes/buildings/productionsites/frisians/fishers_house/init.lua"
       include "tribes/buildings/productionsites/frisians/berry_farm/init.lua"
       include "tribes/buildings/productionsites/frisians/collectors_house/init.lua"
-      
+      include "tribes/buildings/productionsites/frisians/claypit/init.lua"
+      --Frisians medium
       include "tribes/buildings/productionsites/frisians/honey_bread_bakery/init.lua"
       include "tribes/buildings/productionsites/frisians/bakery/init.lua"
       include "tribes/buildings/productionsites/frisians/drinking_hall/init.lua"
@@ -542,7 +542,6 @@ print_loading_message("┗━ took", function()
       include "tribes/buildings/productionsites/frisians/seamstress/init.lua"
       include "tribes/buildings/productionsites/frisians/charcoal_kiln/init.lua"
       include "tribes/buildings/productionsites/frisians/brick_burners_house/init.lua"
-      include "tribes/buildings/productionsites/frisians/claypit/init.lua"
       include "tribes/buildings/productionsites/frisians/barracks/init.lua"
    end)
 
@@ -558,7 +557,6 @@ print_loading_message("┗━ took", function()
       include "tribes/buildings/trainingsites/empire/colosseum/init.lua"
       include "tribes/buildings/trainingsites/empire/arena/init.lua"
       include "tribes/buildings/trainingsites/empire/trainingcamp/init.lua"
-      
       include "tribes/buildings/trainingsites/frisians/training_camp/init.lua"
       include "tribes/buildings/trainingsites/frisians/training_arena/init.lua"
    end)

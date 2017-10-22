@@ -68,9 +68,10 @@ tribes:new_productionsite_type {
          descname = _"smelting iron",
          actions = {
             "return=skipped unless economy needs iron",
-            "sleep=8000",
+            "sleep=5000",
             "consume=coal iron_ore",
-            "animate=working 28000",
+            "sleep=22000",
+            "animate=working 35000",
             "produce=iron"
          },
       },
@@ -79,9 +80,10 @@ tribes:new_productionsite_type {
          descname = _"smelting gold",
          actions = {
             "return=skipped unless economy needs gold",
-            "sleep=8000",
+            "sleep=10000",
             "consume=coal gold_ore",
-            "animate=working 30000",
+            "sleep=17000",
+            "animate=working 35000",
             "produce=gold"
          },
       },

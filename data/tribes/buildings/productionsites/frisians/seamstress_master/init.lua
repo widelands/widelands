@@ -10,14 +10,14 @@ tribes:new_productionsite_type {
    size = "medium",
 
    enhancement_cost = {
+      brick = 1,
       granite = 2,
       log = 2,
       thatch_reed = 2
    },
    return_on_dismantle_on_enhanced = {
-      brick = 2,
       granite = 1,
-      log = 2,
+      log = 1,
       thatch_reed = 1
    },
 
@@ -66,9 +66,9 @@ tribes:new_productionsite_type {
          descname = _"sewing studded fur clothes",
          actions = {
             "return=skipped unless economy needs fur_clothes_studded",
-            "sleep=8000",
+            "sleep=45000",
             "consume=fur_clothes iron",
-            "animate=working 28000",
+            "animate=working 45000",
             "produce=fur_clothes_studded"
          },
       },
@@ -77,9 +77,9 @@ tribes:new_productionsite_type {
          descname = _"sewing golden fur clothes",
          actions = {
             "return=skipped unless economy needs fur_clothes_golden",
-            "sleep=8000",
+            "sleep=47000",
             "consume=fur_clothes iron gold",
-            "animate=working 34000",
+            "animate=working 61000",
             "produce=fur_clothes_golden"
          },
       },

@@ -16,10 +16,10 @@ tribes:new_productionsite_type {
       thatch_reed = 3
    },
    return_on_dismantle_on_enhanced = {
-      brick = 4,
+      brick = 2,
       granite = 1,
       log = 1,
-      thatch_reed = 3
+      thatch_reed = 1
    },
 
    animations = {
@@ -69,9 +69,9 @@ tribes:new_productionsite_type {
          descname = _"forging a curved sword",
          actions = {
             "return=skipped unless economy needs sword_curved",
-            "sleep=14000",
+            "sleep=59000",
             "consume=coal iron:2 gold",
-            "animate=working 25000",
+            "animate=working 51000",
             "produce=sword_curved"
          },
       },
@@ -80,9 +80,9 @@ tribes:new_productionsite_type {
          descname = _"forging a double-edged sword",
          actions = {
             "return=skipped unless economy needs sword_double",
-            "sleep=14000",
+            "sleep=64000",
             "consume=coal:2 iron:2 gold:2",
-            "animate=working 38000",
+            "animate=working 51000",
             "produce=sword_double"
          },
       },
@@ -91,9 +91,9 @@ tribes:new_productionsite_type {
          descname = _"forging a golden helmet",
          actions = {
             "return=skipped unless economy needs helmet_golden",
-            "sleep=14000",
+            "sleep=51000",
             "consume=coal:2 iron:2 gold",
-            "animate=working 32000",
+            "animate=working 64000",
             "produce=helmet_golden"
          },
       },

@@ -69,8 +69,6 @@ function expand_south ()
    local o = add_campaign_objective (obj_expand_south)
    run (check_empire)
    while see_empire == nil do sleep (2221) end
-   set_objective_done (o)
-
    scroll_to_field (see_empire)
    campaign_message_box (supply_murilius_1)
    campaign_message_box (supply_murilius_2)
@@ -88,13 +86,13 @@ function expand_south ()
                if not (n.owner == p1) then suited = false end
             end
             if suited then
-               p1:place_building ("empire_warehouse", f, false, true)
+               p1:place_building ("frisians_warehouse_empire", f, false, true)
                placed = true
             end
          end
       end
    end
-   local wh = p1:get_buildings ("empire_warehouse") [1]
+   local wh = p1:get_buildings ("frisians_warehouse_empire") [1]
    for idx,ware in ipairs (p1.tribe.wares) do
       if p2.tribe:has_ware (ware.name) then
          wh:set_warehouse_policies (ware.name, "prefer")
@@ -104,18 +102,20 @@ function expand_south ()
    end
    scroll_to_field (wh.fields [1])
    sleep (1500)
+   p2:forbid_buildings {"empire_fortress", "empire_barrier", "empire_outpost", "empire_tower"}
    campaign_message_box (supply_murilius_6)
    campaign_message_box (supply_murilius_7)
    campaign_message_box (supply_murilius_8)
+   set_objective_done (o)
    
    o = add_campaign_objective (obj_supply_murilius)
    local choice = nil
    local milbld = count_military_buildings_p1 ()
    while choice == nil do
       sleep (2791)
-      if #(p1:get_buildings ("empire_warehouse")) < 1 then 
+      if #(p1:get_buildings ("frisians_warehouse_empire")) < 1 then 
          choice = "destroy"
-      elseif count_military_buildings_p1 () > milbld then 
+      elseif count_military_buildings_p1 () > milbld then --it IS possible to destroy a military building and build a new one elsewhere
          choice = "military"
       else
          if wh:get_wares ("log") >= 30 and
@@ -136,6 +136,7 @@ function expand_south ()
       end
    end
    set_objective_done (o)
+   p2:allow_buildings ("all")
    p3:allow_buildings ("all")
    done_exp = true
    if choice == "yes" then
@@ -184,13 +185,14 @@ function mining_issues ()
    p1:allow_buildings {"frisians_aqua_farm", "frisians_furnace", "frisians_barracks", "frisians_seamstress"}
    while not check_for_buildings (p1, {frisians_aqua_farm = 1}) do sleep (4473) end
    set_objective_done (o)
+   campaign_message_box (aqua_farm_2)
    p1:allow_buildings {"frisians_armour_smithy_small", "frisians_seamstress_master"}
    
    done_mine = true
 end
 
 function supply_yes ()
-   local wh = p1:get_buildings ("empire_warehouse") [1]
+   local wh = p1:get_buildings ("frisians_warehouse_empire") [1]
    local hq = p2:get_buildings ("empire_headquarters") [1]
    for name,nb in ipairs (wh:get_wares ("all")) do
       if p2.tribe:has_ware (name) then 
@@ -206,7 +208,6 @@ function supply_yes ()
       campaign_message_box (defeat_murilius_1)
       campaign_message_box (defeat_murilius_2)
       p2.team = 2
-      p2:allow_buildings ("all")
       add_campaign_objective (obj_defeat_murilius)
       while get_land (p2) > 0 do sleep (7777) end
    end
@@ -218,16 +219,12 @@ function supply_no ()
    p2.team = 2
    campaign_message_box (defeat_both)
    local o = add_campaign_objective (obj_defeat_both)
-   while not p3.defeated do sleep (4829) end
-   p2:allow_buildings ("all")
-   while not p2.defeated do sleep (4829) end
+   while not (p2.defeated and p3.defeated) do sleep (4829) end
    done_fight = true
 end
 
-function victory () --when all objectives are done
-   while not done_exp do sleep (4731) end
-   while not done_mine do sleep (4731) end
-   while not done_fight do sleep (4731) end
+function victory ()
+   while not (done_exp and done_mine and done_fight) do sleep (4731) end
    sleep (10000)
    campaign_message_box (victory_1)
    --END OF THE FRISIAN CAMPAIGN – no further scenarios

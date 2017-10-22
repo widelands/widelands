@@ -53,10 +53,10 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start brewing beer because ...
          descname = _"brewing beer",
          actions = {
-            "sleep=20000",
+            "sleep=30000",
             "return=skipped unless economy needs beer or workers need experience",
             "consume=water barley",
-            "animate=working 25000",
+            "animate=working 30000",
             "produce=beer"
          },
       },
