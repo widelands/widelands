@@ -633,7 +633,22 @@ Supply* Economy::find_best_supply(Game& game, const Request& req, int32_t& cost)
 	}
 
 	// Now available supplies have been sorted by distance to requestor
+	//bool print_stat = false;
+	if (available_supplies_.size() > 10) {
+		//printf ("Available suppliers count: %lu\n", available_supplies_.size());
+		//print_stat = true;
+	}
+	uint16_t pair_count = 0;
+	uint16_t wait_limit = 0;
 	for (auto& supplypair : available_supplies_) {
+		if (best_route) {
+			if (wait_limit > 3) {break;}
+			wait_limit += 1;
+		}
+
+
+		pair_count += 1;
+		//printf (" %d: %d, wait limit: %d\n", pair_count, supplypair.first.distance, wait_limit);
 		Supply& supp = *supplypair.second;
 
 		Route* const route = best_route != &buf_route0 ? &buf_route0 : &buf_route1;
@@ -654,6 +669,8 @@ Supply* Economy::find_best_supply(Game& game, const Request& req, int32_t& cost)
 		best_supply = &supp;
 		best_route = route;
 		best_cost = route->get_totalcost();
+		//if (print_stat) printf( "  winning shortest path air distance: %u, costs: %d, pair pos.: %d\n",  supplypair.first.distance, best_cost, pair_count);
+		wait_limit = 0;
 	}
 
 	if (!best_route)
