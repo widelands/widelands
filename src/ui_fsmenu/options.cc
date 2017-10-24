@@ -421,7 +421,8 @@ void FullscreenMenuOptions::add_languages_to_list(const std::string& current_loc
 	language_dropdown_.add(_("Try system language"), "", nullptr, current_locale == "");
 	language_dropdown_.add("English", "en", nullptr, current_locale == "en");
 
-	// Add translation directories to the list. We are using a container that will support std::sort.
+	// Add translation directories to the list. We are using a container that will support std::sort
+	// and that will avoid any eventual hash collisions on the sortname.
 	std::vector<LanguageEntry> entries;
 	std::string selected_locale;
 
@@ -509,8 +510,10 @@ void FullscreenMenuOptions::update_language_stats(bool include_system_lang) {
 			try {
 				const LanguageEntry& entry = language_entries_[locale];
 				Profile prof("i18n/translation_stats.conf");
-				Section& s = prof.get_safe_section(locale);
-				percent = floor(100.f * s.get_int("translated") / s.get_int("total"));
+				Section& s = prof.get_safe_section("global");
+				const int total = s.get_int("total");
+				s = prof.get_safe_section(locale);
+				percent = floor(100.f * s.get_int("translated") / total);
 				if (percent == 100) {
 					message = (boost::format(_("The translation into %s is complete.")) %
 								  entry.descname)
@@ -525,7 +528,9 @@ void FullscreenMenuOptions::update_language_stats(bool include_system_lang) {
 		}
 	}
 
-	// We will want some help with incomplete translations
+	// We will want some help with incomplete translations. We set this lower than 100%,
+	// because some translators let things drop a bit sometimes because they're busy and
+	// will catch up with the work later.
 	if (percent <= 90) {
 		message = message + " " +
 		          (boost::format(_("If you wish to help us translate, please visit %s")) %

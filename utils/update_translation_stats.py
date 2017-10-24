@@ -57,7 +57,7 @@ def generate_translation_stats(po_dir, output_file):
             stats_output = check_output(
                 ['pocount ' + subdir + ' --short-words'], stderr=subprocess.STDOUT, shell=True)
             if 'ERROR' in stats_output:
-                print('\nError running pocount:\n' + stats_output.split('\n', 1)
+                print('\nError running pocount:\n' + stats_output.split('\n', 0)
                       [0]) + '\nAborted creating translation statistics.'
                 return False
 
@@ -88,13 +88,17 @@ def generate_translation_stats(po_dir, output_file):
 
     print('\n\nLocale\tTotal\tTranslated')
     print('------\t-----\t----------')
-    result = ''
+
+    # The total goes in a [global] section and is identical for all locales
+    result = '[global]\n'
+    result = result + 'total=' + str(locale_stats[locale_stats.keys()[0]].total) + '\n\n'
+
+    # Write translation stats for all locales
     for locale in sorted(locale_stats.keys(), key=str.lower):
         entry = locale_stats[locale]
         print(locale + '\t' + str(entry.total) + '\t' + str(entry.translated))
         result = result + '[' + locale + ']\n'
-        result = result + 'translated=' + str(entry.translated) + '\n'
-        result = result + 'total=' + str(entry.total) + '\n\n'
+        result = result + 'translated=' + str(entry.translated) + '\n\n'
 
     with open(output_file, 'w+') as destination:
         destination.write(result[:-1])  # Strip the final \n
