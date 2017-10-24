@@ -421,7 +421,7 @@ void FullscreenMenuOptions::add_languages_to_list(const std::string& current_loc
 	language_dropdown_.add(_("Try system language"), "", nullptr, current_locale == "");
 	language_dropdown_.add("English", "en", nullptr, current_locale == "en");
 
-	// Add translation directories to the list. We use a vector so we can call std::sort on it.
+	// Add translation directories to the list. We are using a container that will support std::sort.
 	std::vector<LanguageEntry> entries;
 	std::string selected_locale;
 
