@@ -182,7 +182,7 @@ DefaultAI::DefaultAI(Game& ggame, PlayerNumber const pid, Widelands::AiType cons
 			   break;
 
 		   case NoteShipMessage::Message::kLost:
-			   for (std::list<ShipObserver>::iterator i = allships.begin(); i != allships.end(); ++i) {
+			   for (std::deque<ShipObserver>::iterator i = allships.begin(); i != allships.end(); ++i) {
 				   if (i->ship == note.ship) {
 					   allships.erase(i);
 					   break;
@@ -191,7 +191,7 @@ DefaultAI::DefaultAI(Game& ggame, PlayerNumber const pid, Widelands::AiType cons
 			   break;
 
 		   case NoteShipMessage::Message::kWaitingForCommand:
-			   for (std::list<ShipObserver>::iterator i = allships.begin(); i != allships.end(); ++i) {
+			   for (std::deque<ShipObserver>::iterator i = allships.begin(); i != allships.end(); ++i) {
 				   if (i->ship == note.ship) {
 					   i->waiting_for_command_ = true;
 					   break;
@@ -1195,13 +1195,13 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 	// look if there is any unowned land nearby
 	const Map& map = game().map();
 	const uint32_t gametime = game().get_gametime();
-	FindNodeUnownedWalkable find_unowned_walkable(player_, game());
-	FindEnemyNodeWalkable find_enemy_owned_walkable(player_, game());
-	FindNodeUnownedBuildable find_unowned_buildable(player_, game());
-	FindNodeUnownedMineable find_unowned_mines_pots(player_, game());
-	FindNodeUnownedMineable find_unowned_iron_mines(player_, game(), iron_ore_id);
-	FindNodeAllyOwned find_ally(player_, game(), player_number());
-	PlayerNumber const pn = player_->player_number();
+	static FindNodeUnownedWalkable find_unowned_walkable(player_, game());
+	static FindEnemyNodeWalkable find_enemy_owned_walkable(player_, game());
+	static FindNodeUnownedBuildable find_unowned_buildable(player_, game());
+	static FindNodeUnownedMineable find_unowned_mines_pots(player_, game());
+	static FindNodeUnownedMineable find_unowned_iron_mines(player_, game(), iron_ore_id);
+	static FindNodeAllyOwned find_ally(player_, game(), player_number());
+	static PlayerNumber const pn = player_->player_number();
 	const World& world = game().world();
 
 	constexpr uint16_t kProductionArea = 6;
@@ -1254,7 +1254,7 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 	}
 
 	// are we going to count resources now?
-	bool resource_count_now = false;
+	static bool resource_count_now = false;
 	// Testing in first 10 seconds or if last testing was more then 60 sec ago
 	if (field.last_resources_check_time < 10000 ||
 	    field.last_resources_check_time - gametime > 60 * 1000) {
@@ -1445,12 +1445,14 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 	field.unconnected_nearby = false;
 
 	// collect information about productionsites nearby
-	std::vector<ImmovableFound> immovables;
+	static std::vector<ImmovableFound> immovables;
+	immovables.clear();
 	// Search in a radius of range
 	map.find_immovables(Area<FCoords>(field.coords, kProductionArea + 2), &immovables);
 
 	// function seems to return duplicates, so we will use serial numbers to filter them out
-	std::set<uint32_t> unique_serials;
+	static std::set<uint32_t> unique_serials;
+	unique_serials.clear();
 
 	for (uint32_t i = 0; i < immovables.size(); ++i) {
 		const BaseImmovable& base_immovable = *immovables.at(i).object;
@@ -1483,8 +1485,8 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 	map.find_immovables(Area<FCoords>(field.coords, actual_enemy_check_area), &immovables);
 
 	// We are interested in unconnected immovables, but we must be also close to connected ones
-	bool any_connected_imm = false;
-	bool any_unconnected_imm = false;
+	static bool any_connected_imm = false;
+	static bool any_unconnected_imm = false;
 	unique_serials.clear();
 
 	for (uint32_t i = 0; i < immovables.size(); ++i) {
@@ -1806,7 +1808,7 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 
 	// is new site allowed at all here?
 	field.defense_msite_allowed = false;
-	int16_t multiplicator = 10;
+	static int16_t multiplicator = 10;
 	if (soldier_status_ == SoldiersStatus::kBadShortage) {
 		multiplicator = 4;
 	} else if (soldier_status_ == SoldiersStatus::kShortage) {
@@ -1961,7 +1963,7 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 	for (int32_t i = 0; i < 4; ++i)
 		spots_avail.at(i) = 0;
 
-	for (std::list<BuildableField*>::iterator i = buildable_fields.begin();
+	for (std::deque<BuildableField*>::iterator i = buildable_fields.begin();
 	     i != buildable_fields.end(); ++i)
 		++spots_avail.at((*i)->coords.field->nodecaps() & BUILDCAPS_SIZEMASK);
 
@@ -2379,7 +2381,7 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 	}
 
 	// first scan all buildable fields for regular buildings
-	for (std::list<BuildableField*>::iterator i = buildable_fields.begin();
+	for (std::deque<BuildableField*>::iterator i = buildable_fields.begin();
 	     i != buildable_fields.end(); ++i) {
 		BuildableField* const bf = *i;
 
@@ -2932,7 +2934,7 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 				}
 
 				// iterating over fields
-				for (std::list<MineableField*>::iterator j = mineable_fields.begin();
+				for (std::deque<MineableField*>::iterator j = mineable_fields.begin();
 				     j != mineable_fields.end(); ++j) {
 
 					MineableField* const mf = *j;
@@ -3529,7 +3531,9 @@ bool DefaultAI::create_shortcut_road(const Flag& flag,
 		do {
 			blocked_fields.add(mr.location(), game().get_gametime() + 15 * 60 * 1000);
 		} while (mr.advance(map));
-		eco->flags.remove(&flag);
+		//remove_from_flags(eco->flags, &flag);
+		remove_from_dqueue<Widelands::Flag>(eco->flags, &flag);
+		//eco->flags.remove(&flag); NOCOM
 		game().send_player_bulldoze(*const_cast<Flag*>(&flag));
 		return true;
 	}
@@ -3550,12 +3554,12 @@ bool DefaultAI::check_economies() {
 		get_economy_observer(flag.economy())->flags.push_back(&flag);
 	}
 
-	for (std::list<EconomyObserver*>::iterator obs_iter = economies.begin();
+	for (std::deque<EconomyObserver*>::iterator obs_iter = economies.begin();
 	     obs_iter != economies.end(); ++obs_iter) {
 		// check if any flag has changed its economy
-		std::list<Flag const*>& fl = (*obs_iter)->flags;
+		std::deque<Flag const*>& fl = (*obs_iter)->flags;
 
-		for (std::list<Flag const*>::iterator j = fl.begin(); j != fl.end();) {
+		for (std::deque<Flag const*>::iterator j = fl.begin(); j != fl.end();) {
 			if (&(*obs_iter)->economy != &(*j)->economy()) {
 				get_economy_observer((*j)->economy())->flags.push_back(*j);
 				j = fl.erase(j);
@@ -5222,7 +5226,7 @@ uint32_t DefaultAI::calculate_stocklevel(BuildingObserver& bo, const WareWorker 
 uint32_t DefaultAI::calculate_stocklevel(Widelands::DescriptionIndex wt, const WareWorker what) {
 	uint32_t count = 0;
 
-	for (std::list<WarehouseSiteObserver>::iterator i = warehousesites.begin();
+	for (std::deque<WarehouseSiteObserver>::iterator i = warehousesites.begin();
 	     i != warehousesites.end(); ++i) {
 		if (what == WareWorker::kWare) {
 			count += i->site->get_wares().stock(wt);
@@ -5331,7 +5335,7 @@ void DefaultAI::consider_productionsite_influence(BuildableField& field,
 
 /// \returns the economy observer containing \arg economy
 EconomyObserver* DefaultAI::get_economy_observer(Economy& economy) {
-	for (std::list<EconomyObserver*>::iterator i = economies.begin(); i != economies.end(); ++i)
+	for (std::deque<EconomyObserver*>::iterator i = economies.begin(); i != economies.end(); ++i)
 		if (&(*i)->economy == &economy)
 			return *i;
 
@@ -5460,24 +5464,27 @@ void DefaultAI::lose_immovable(const PlayerImmovable& pi) {
 	if (upcast(Building const, building, &pi)) {
 		lose_building(*building);
 	} else if (upcast(Flag const, flag, &pi)) {
+		//Flag to be removed can be:
+		// 1. In one of our economies
 		for (EconomyObserver* eco_obs : economies) {
-			for (std::list<Flag const*>::iterator flag_iter = eco_obs->flags.begin();
-			     flag_iter != eco_obs->flags.end(); ++flag_iter) {
-				if (*flag_iter == flag) {
-					eco_obs->flags.erase(flag_iter);
-					return;
-				}
-			}
-		}
-		for (std::list<Flag const*>::iterator flag_iter = new_flags.begin();
-		     flag_iter != new_flags.end(); ++flag_iter) {
-			if (*flag_iter == flag) {
-				new_flags.erase(flag_iter);
+			printf("Player %d has %lu flags in this economy\n", flag->owner().player_number(), eco_obs->flags.size()); //NOCOM
+			if (remove_from_dqueue<Widelands::Flag>(eco_obs->flags, flag)){
 				return;
 			}
 		}
+
+		// 2. in new flags to be processed yet
+		if (remove_from_dqueue<Widelands::Flag>(new_flags, flag)) {
+			return;
+		};
+		//assert(new_flags.empty()); ?
+
+		// 3. Or not in either
+		//printf ("Weird flag at %dx%d\n", flag->get_position().x,  flag->get_position().y); //NOCOM
+
 	} else if (upcast(Road const, road, &pi)) {
-		roads.remove(road);
+		remove_from_dqueue<Widelands::Road>(roads, road);
+		//roads.remove(road); NOCOM
 	}
 }
 
@@ -5487,7 +5494,7 @@ void DefaultAI::out_of_resources_site(const ProductionSite& site) {
 	const uint32_t gametime = game().get_gametime();
 
 	// we must identify which mine matches the productionsite a note reffers to
-	for (std::list<ProductionSiteObserver>::iterator i = mines_.begin(); i != mines_.end(); ++i)
+	for (std::deque<ProductionSiteObserver>::iterator i = mines_.begin(); i != mines_.end(); ++i)
 		if (i->site == &site) {
 			if (i->no_resources_since > gametime) {
 				i->no_resources_since = gametime;
@@ -5762,7 +5769,7 @@ void DefaultAI::lose_building(const Building& b) {
 
 		if (bo.type == BuildingObserver::Type::kProductionsite) {
 
-			for (std::list<ProductionSiteObserver>::iterator i = productionsites.begin();
+			for (std::deque<ProductionSiteObserver>::iterator i = productionsites.begin();
 			     i != productionsites.end(); ++i)
 				if (i->site == &b) {
 					if (i->upgrade_pending) {
@@ -5786,7 +5793,7 @@ void DefaultAI::lose_building(const Building& b) {
 			}
 
 		} else if (bo.type == BuildingObserver::Type::kMine) {
-			for (std::list<ProductionSiteObserver>::iterator i = mines_.begin(); i != mines_.end();
+			for (std::deque<ProductionSiteObserver>::iterator i = mines_.begin(); i != mines_.end();
 			     ++i) {
 				if (i->site == &b) {
 					mines_.erase(i);
@@ -5812,7 +5819,7 @@ void DefaultAI::lose_building(const Building& b) {
 		} else if (bo.type == BuildingObserver::Type::kMilitarysite) {
 			msites_per_size[bo.desc->get_size()].finished -= 1;
 
-			for (std::list<MilitarySiteObserver>::iterator i = militarysites.begin();
+			for (std::deque<MilitarySiteObserver>::iterator i = militarysites.begin();
 			     i != militarysites.end(); ++i) {
 				if (i->site == &b) {
 					militarysites.erase(i);
@@ -5823,7 +5830,7 @@ void DefaultAI::lose_building(const Building& b) {
 			assert(ts_finished_count_ >= 1);
 			--ts_finished_count_;
 
-			for (std::list<TrainingSiteObserver>::iterator i = trainingsites.begin();
+			for (std::deque<TrainingSiteObserver>::iterator i = trainingsites.begin();
 			     i != trainingsites.end(); ++i) {
 				if (i->site == &b) {
 					trainingsites.erase(i);
@@ -5837,7 +5844,7 @@ void DefaultAI::lose_building(const Building& b) {
 				--num_ports;
 			}
 
-			for (std::list<WarehouseSiteObserver>::iterator i = warehousesites.begin();
+			for (std::deque<WarehouseSiteObserver>::iterator i = warehousesites.begin();
 			     i != warehousesites.end(); ++i) {
 				if (i->site == &b) {
 					warehousesites.erase(i);
@@ -6191,6 +6198,28 @@ template <typename T> void DefaultAI::check_range(T value, T upper_range, const 
 		log(" %d: unexpected value for %s: %d\n", player_number(), value_name, value);
 	}
 }
+
+template <typename T> bool DefaultAI::remove_from_dqueue(std::deque<T const*>& dq, T const* member) { //NOCOM
+	for (auto it = dq.begin(); it != dq.end(); ++it) {
+        if (*it == member) {
+            it = dq.erase(it);
+            return true;
+		}
+	}
+	printf ("Not erased from deque\n");
+	return false;
+}
+
+//void DefaultAI::remove_from_flags(std::deque<Widelands::Flag const*>& dq ,  Widelands::Flag const*  member) {//NOCOM
+	//for (auto it = dq.begin(); it != dq.end(); ++it) {
+		//if (*it == member) {
+        ////if (it == member) {
+            //it = dq.erase(it);
+            //return;
+		//}
+	//}
+	//printf ("Not erased from deque\n");
+//}
 
 // Looking for situation where for a critical mine (iron, or marble) there is just one mine and it
 // is

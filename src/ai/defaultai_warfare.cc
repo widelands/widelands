@@ -753,7 +753,7 @@ bool DefaultAI::check_trainingsites(uint32_t gametime) {
 	}
 
 	ts_without_trainers_ = 0;  // zeroing
-	for (std::list<TrainingSiteObserver>::iterator site = trainingsites.begin();
+	for (std::deque<TrainingSiteObserver>::iterator site = trainingsites.begin();
 	     site != trainingsites.end(); ++site) {
 
 		if (!site->site->can_start_working()) {
