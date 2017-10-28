@@ -175,20 +175,13 @@ private:
 	// Data model for the entries in the language selection list.
 	struct LanguageEntry {
 		LanguageEntry(const std::string& init_localename,
-		              const std::string& init_descname,
-		              const std::string& init_sortname)
-		   : localename(init_localename), descname(init_descname), sortname(init_sortname) {
+		              const std::string& init_descname)
+		   : localename(init_localename), descname(init_descname) {
 		}
-		LanguageEntry() : LanguageEntry("", "", "") {
+		LanguageEntry() : LanguageEntry("", "") {
 		}
-
-		bool operator<(const LanguageEntry& other) const {
-			return sortname < other.sortname;
-		}
-
 		std::string localename;  // ISO code for the locale
 		std::string descname;    // Native language name
-		std::string sortname;    // ASCII Language name used for sorting
 	};
 	std::map<std::string, LanguageEntry> language_entries_;
 };
