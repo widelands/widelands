@@ -421,9 +421,8 @@ void FullscreenMenuOptions::add_languages_to_list(const std::string& current_loc
 	language_dropdown_.add(_("Try system language"), "", nullptr, current_locale == "");
 	language_dropdown_.add("English", "en", nullptr, current_locale == "en");
 
-	// Add translation directories to the list. We are using a container that will support std::sort
-	// and that will avoid any eventual hash collisions on the sortname.
-	std::vector<LanguageEntry> entries;
+	// Add translation directories to the list. Using the LanguageEntries' sortnames as a key for getting a sorted result.
+	std::map<std::string, LanguageEntry> entries;
 	std::string selected_locale;
 
 	try {  // Begin read locales table
@@ -451,7 +450,7 @@ void FullscreenMenuOptions::add_languages_to_list(const std::string& current_loc
 				std::string name = i18n::make_ligatures(table->get_string("name").c_str());
 				const std::string sortname = table->get_string("sort_name");
 				LanguageEntry* entry = new LanguageEntry(localename, name, sortname);
-				entries.push_back(*entry);
+				entries.insert(std::make_pair(sortname, *entry));
 				language_entries_.insert(std::make_pair(localename, *entry));
 
 				if (localename == current_locale) {
@@ -460,7 +459,7 @@ void FullscreenMenuOptions::add_languages_to_list(const std::string& current_loc
 
 			} catch (const WException&) {
 				log("Could not read locale for: %s\n", localename.c_str());
-				entries.push_back(LanguageEntry(localename, localename, localename));
+				entries.insert(std::make_pair(localename, LanguageEntry(localename, localename, localename)));
 			}  // End read locale from table
 		}     // End scan locales directory
 	} catch (const LuaError& err) {
@@ -469,10 +468,10 @@ void FullscreenMenuOptions::add_languages_to_list(const std::string& current_loc
 	}           // End read locales table
 
 	find_selected_locale(&selected_locale, current_locale);
-	std::sort(entries.begin(), entries.end());
-	for (const LanguageEntry& entry : entries) {
-		language_dropdown_.add(entry.descname.c_str(), entry.localename, nullptr,
-		                       entry.localename == selected_locale, "");
+	for (const auto& entry : entries) {
+		const LanguageEntry& language_entry = entry.second;
+		language_dropdown_.add(language_entry.descname.c_str(), language_entry.localename, nullptr,
+		                       language_entry.localename == selected_locale, "");
 	}
 }
 
