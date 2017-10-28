@@ -1195,13 +1195,13 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 	// look if there is any unowned land nearby
 	const Map& map = game().map();
 	const uint32_t gametime = game().get_gametime();
-	static FindNodeUnownedWalkable find_unowned_walkable(player_, game());
-	static FindEnemyNodeWalkable find_enemy_owned_walkable(player_, game());
-	static FindNodeUnownedBuildable find_unowned_buildable(player_, game());
-	static FindNodeUnownedMineable find_unowned_mines_pots(player_, game());
-	static FindNodeUnownedMineable find_unowned_iron_mines(player_, game(), iron_ore_id);
-	static FindNodeAllyOwned find_ally(player_, game(), player_number());
-	static PlayerNumber const pn = player_->player_number();
+	FindNodeUnownedWalkable find_unowned_walkable(player_, game());//NOCOM
+	FindEnemyNodeWalkable find_enemy_owned_walkable(player_, game());
+	FindNodeUnownedBuildable find_unowned_buildable(player_, game());
+	FindNodeUnownedMineable find_unowned_mines_pots(player_, game());
+	FindNodeUnownedMineable find_unowned_iron_mines(player_, game(), iron_ore_id);
+	FindNodeAllyOwned find_ally(player_, game(), player_number());
+	PlayerNumber const pn = player_->player_number();
 	const World& world = game().world();
 
 	constexpr uint16_t kProductionArea = 6;
@@ -1255,6 +1255,7 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 
 	// are we going to count resources now?
 	static bool resource_count_now = false;
+	resource_count_now = false;
 	// Testing in first 10 seconds or if last testing was more then 60 sec ago
 	if (field.last_resources_check_time < 10000 ||
 	    field.last_resources_check_time - gametime > 60 * 1000) {
@@ -1446,6 +1447,7 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 
 	// collect information about productionsites nearby
 	static std::vector<ImmovableFound> immovables;
+	immovables.reserve(50);
 	immovables.clear();
 	// Search in a radius of range
 	map.find_immovables(Area<FCoords>(field.coords, kProductionArea + 2), &immovables);
@@ -1486,7 +1488,9 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 
 	// We are interested in unconnected immovables, but we must be also close to connected ones
 	static bool any_connected_imm = false;
+	any_connected_imm = false;
 	static bool any_unconnected_imm = false;
+	any_unconnected_imm = false;
 	unique_serials.clear();
 
 	for (uint32_t i = 0; i < immovables.size(); ++i) {
@@ -1809,6 +1813,7 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 	// is new site allowed at all here?
 	field.defense_msite_allowed = false;
 	static int16_t multiplicator = 10;
+	multiplicator = 10;
 	if (soldier_status_ == SoldiersStatus::kBadShortage) {
 		multiplicator = 4;
 	} else if (soldier_status_ == SoldiersStatus::kShortage) {
@@ -1955,8 +1960,10 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 	}
 
 	// Just used for easy checking whether a mine or something else was built.
-	bool mine = false;
-	uint32_t consumers_nearby_count = 0;
+	static bool mine = false;
+	mine = false;
+	static uint32_t consumers_nearby_count = 0;
+	consumers_nearby_count = 0;
 
 	const Map& map = game().map();
 
@@ -1975,7 +1982,7 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 	// the proportion depends on size of economy
 	// this proportion defines how dense the buildings will be
 	// it is degressive (allows high density on the beginning)
-	int32_t needed_spots = 0;
+	static int32_t needed_spots = 0;
 	if (productionsites.size() < 50) {
 		needed_spots = productionsites.size();
 	} else if (productionsites.size() < 100) {
@@ -2020,7 +2027,10 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 	const PlayerNumber pn = player_number();
 
 	// Genetic algorithm is used here
-	bool inputs[2 * kFNeuronBitSize] = {0};
+	static bool inputs[2 * kFNeuronBitSize] = {0};
+	for (int i = 0; i < 2 * kFNeuronBitSize;i++) {
+		inputs[i] = 0;
+	}
 	inputs[0] = (pow(msites_in_constr(), 2) > militarysites.size() + 2);
 	inputs[1] = !(pow(msites_in_constr(), 2) > militarysites.size() + 2);
 	inputs[2] =
@@ -2107,8 +2117,10 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 	inputs[51] = (numof_psites_in_constr > 8);
 	inputs[52] = (numof_psites_in_constr < 8);
 
-	int16_t needs_boost_economy_score = management_data.get_military_number_at(61) / 5;
-	int16_t increase_score_limit_score = 0;
+	static int16_t needs_boost_economy_score = management_data.get_military_number_at(61) / 5;
+	needs_boost_economy_score = management_data.get_military_number_at(61) / 5;
+	static int16_t increase_score_limit_score = 0;
+	increase_score_limit_score = 0;
 
 	for (uint8_t i = 0; i < kFNeuronBitSize; ++i) {
 		if (management_data.f_neuron_pool[51].get_position(i)) {
@@ -2147,8 +2159,10 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 	const bool increase_least_score_limit =
 	   (increase_score_limit_score > management_data.get_military_number_at(45) / 5);
 
-	uint16_t concurent_ms_in_constr_no_enemy = 1;
-	uint16_t concurent_ms_in_constr_enemy_nearby = 2;
+	static uint16_t concurent_ms_in_constr_no_enemy = 1;
+	concurent_ms_in_constr_no_enemy = 1;
+	static uint16_t concurent_ms_in_constr_enemy_nearby = 2;
+	concurent_ms_in_constr_enemy_nearby = 2;
 
 	// resetting highest_nonmil_prio_ so it can be recalculated anew
 	highest_nonmil_prio_ = 0;
@@ -4299,7 +4313,8 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 
 	bo.primary_priority = 0;
 
-	BasicEconomyBuildingStatus site_needed_for_economy = BasicEconomyBuildingStatus::kNone;
+	static BasicEconomyBuildingStatus site_needed_for_economy = BasicEconomyBuildingStatus::kNone;
+	site_needed_for_economy = BasicEconomyBuildingStatus::kNone;
 	if (gametime > 2 * 60 * 1000 && gametime < 120 * 60 * 1000 && !basic_economy_established) {
 		if (persistent_data->remaining_basic_buildings.count(bo.id) &&
 		    bo.cnt_under_construction == 0) {
@@ -4546,7 +4561,11 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 				return BuildingNecessity::kForbidden;
 			}
 
-			int16_t inputs[kFNeuronBitSize] = {0};
+			static int16_t inputs[kFNeuronBitSize] = {0};
+			// Reseting values as the variable is static
+			for (int i = 0; i < kFNeuronBitSize;i++) {
+				inputs[i] = 0;
+			}
 			inputs[0] = (bo.max_needed_preciousness == 0) ? -1 : 0;
 			inputs[1] = (bo.max_needed_preciousness > 0) ? 2 : 0;
 			inputs[2] = (bo.max_needed_preciousness == 0) ? -3 : 0;
@@ -4631,8 +4650,14 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 			}
 
 			// genetic algorithm to decide whether new rangers are needed
-			int16_t tmp_target = 2;
-			int16_t inputs[2 * kFNeuronBitSize] = {0};
+			static int16_t tmp_target = 2;
+			tmp_target = 2;
+			static int16_t inputs[2 * kFNeuronBitSize] = {0};
+			// Reseting values as the variable is static
+			for (int i = 0; i < 2 * kFNeuronBitSize;i++) {
+				inputs[i] = 0;
+			}
+
 			inputs[0] = (persistent_data->trees_around_cutters < 10) * 2;
 			inputs[1] = (persistent_data->trees_around_cutters < 20) * 2;
 			inputs[2] = (persistent_data->trees_around_cutters < 30) * 2;
@@ -4744,6 +4769,8 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 
 			// adjusting/decreasing based on cnt_limit_by_aimode
 			bo.cnt_target = std::min(bo.cnt_target, bo.cnt_limit_by_aimode);
+
+			//printf ("%s: ai limit: %d, target: %d\n", bo.name, bo.cnt_limit_by_aimode, bo.cnt_target);
 
 			assert(bo.cnt_target > 1 && bo.cnt_target < 1000);
 
@@ -4866,7 +4893,11 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 				return BuildingNecessity::kForbidden;
 			}
 
-			int16_t inputs[kFNeuronBitSize] = {0};
+			static int16_t inputs[kFNeuronBitSize] = {0};
+			// Reseting values as the variable is static
+			for (int i = 0; i < kFNeuronBitSize;i++) {
+				inputs[i] = 0;
+			}
 			inputs[0] = (gametime < 15 * 60 * 1000) ? -2 : 0;
 			inputs[1] = (gametime < 30 * 60 * 1000) ? -2 : 0;
 			inputs[2] = (gametime < 45 * 60 * 1000) ? -2 : 0;
@@ -4948,7 +4979,11 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 
 		} else if (bo.max_needed_preciousness > 0) {
 
-			int16_t inputs[4 * kFNeuronBitSize] = {0};
+			static int16_t inputs[4 * kFNeuronBitSize] = {0};
+			// Reseting values as the variable is static
+			for (int i = 0; i < 4 * kFNeuronBitSize;i++) {
+				inputs[i] = 0;
+			}
 			inputs[0] = (bo.total_count() <= 1) ?
 			               std::abs(management_data.get_military_number_at(110)) / 10 :
 			               0;
@@ -5467,7 +5502,7 @@ void DefaultAI::lose_immovable(const PlayerImmovable& pi) {
 		//Flag to be removed can be:
 		// 1. In one of our economies
 		for (EconomyObserver* eco_obs : economies) {
-			printf("Player %d has %lu flags in this economy\n", flag->owner().player_number(), eco_obs->flags.size()); //NOCOM
+			//printf("Player %d has %lu flags in this economy\n", flag->owner().player_number(), eco_obs->flags.size()); //NOCOM
 			if (remove_from_dqueue<Widelands::Flag>(eco_obs->flags, flag)){
 				return;
 			}
@@ -6206,7 +6241,7 @@ template <typename T> bool DefaultAI::remove_from_dqueue(std::deque<T const*>& d
             return true;
 		}
 	}
-	printf ("Not erased from deque\n");
+	//printf ("Not erased from deque\n");
 	return false;
 }
 
