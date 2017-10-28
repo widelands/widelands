@@ -29,6 +29,9 @@ class TranslationStats:
     """Total source words and translated source words."""
 
     def __init__(self):
+        # We need the total only once, but since the entries come in per
+        # directory rather than per locale, we just store it here to keep the
+        # algorithm simpler
         self.total = 0
         self.translated = 0
 
@@ -71,7 +74,7 @@ def generate_translation_stats(po_dir, output_file):
         # Format provided by pocount:
         # /home/<snip>/po/<textdomain>/<locale>.po  source words: total: 1701	| 500t	0f	1201u	| 29%t	0%f	70%u
         regex_translated = re.compile(
-            '/\S+/(\w+)\.po\s+source words: total: (\d+)\t\| (\d+)t\t\d+f\t\d+u\t\| (\d+)%t\t\d+%f\t\d+%u')
+            r"/\S+/(\w+)\.po\s+source words: total: (\d+)\t\| (\d+)t\t\d+f\t\d+u\t\| (\d+)%t\t\d+%f\t\d+%u")
 
         for line in result:
             match = regex_translated.match(line)
