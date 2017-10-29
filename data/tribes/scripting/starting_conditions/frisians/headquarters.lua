@@ -82,6 +82,7 @@ init = {
          frisians_forester = 2,
          frisians_stonemason = 2,
          frisians_reindeer = 5,
+         frisians_trainer = 3,
       },
       soldiers = {
          [{0,0,0,0}] = 45,

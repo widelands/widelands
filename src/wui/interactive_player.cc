@@ -344,42 +344,39 @@ void InteractivePlayer::draw_map_view(MapView* given_map_view, RenderTarget* dst
 			f->brightness = adjusted_field_brightness(f->fcoords, gametime, player_field);
 			f->roads = player_field.roads;
 			f->vision = player_field.vision;
-			if (player_field.vision == 0) {
-				// If the player cannot see the field, no need to do any more work.
-				continue;
-			} else if (player_field.vision == 1) {
+			if (player_field.vision == 1) {
 				f->owner = player_field.owner != 0 ? &gbase.player(player_field.owner) : nullptr;
 				f->is_border = player_field.border;
 			}
 		}
 
-		// Add road building overlays if applicable.
-		{
-			const auto it = road_building.road_previews.find(f->fcoords);
-			if (it != road_building.road_previews.end()) {
-				f->roads |= it->second;
-			}
-		}
-
 		const float scale = 1.f / given_map_view->view().zoom;
-		draw_border_markers(*f, scale, *fields_to_draw, dst);
-
-		// Render stuff that belongs to the node.
-		if (f->vision > 1) {
-			const auto text_to_draw = get_text_to_draw();
-			draw_immovables_for_visible_field(gbase, *f, scale, text_to_draw, plr, dst);
-			draw_bobs_for_visible_field(gbase, *f, scale, text_to_draw, plr, dst);
-		} else if (f->vision == 1) {
-			// We never show census or statistics for objects in the fog.
-			draw_immovables_for_formerly_visible_field(*f, player_field, scale, dst);
-		}
-
 		const auto blit_overlay = [dst, f, scale](const Image* pic, const Vector2i& hotspot) {
 			dst->blitrect_scale(Rectf(f->rendertarget_pixel - hotspot.cast<float>() * scale,
 			                          pic->width() * scale, pic->height() * scale),
 			                    pic, Recti(0, 0, pic->width(), pic->height()), 1.f,
 			                    BlendMode::UseAlpha);
 		};
+
+		// Add road building overlays if applicable.
+		if (f->vision > 0) {
+			const auto it = road_building.road_previews.find(f->fcoords);
+			if (it != road_building.road_previews.end()) {
+				f->roads |= it->second;
+			}
+
+			draw_border_markers(*f, scale, *fields_to_draw, dst);
+
+			// Render stuff that belongs to the node.
+			if (f->vision > 1) {
+				const auto text_to_draw = get_text_to_draw();
+				draw_immovables_for_visible_field(gbase, *f, scale, text_to_draw, plr, dst);
+				draw_bobs_for_visible_field(gbase, *f, scale, text_to_draw, plr, dst);
+			} else if (f->vision == 1) {
+				// We never show census or statistics for objects in the fog.
+				draw_immovables_for_formerly_visible_field(*f, player_field, scale, dst);
+			}
+		}
 
 		// Draw work area previews.
 		{
@@ -389,25 +386,28 @@ void InteractivePlayer::draw_map_view(MapView* given_map_view, RenderTarget* dst
 			}
 		}
 
-		// Draw build help.
-		if (buildhelp()) {
-			const auto* overlay = get_buildhelp_overlay(plr.get_buildcaps(f->fcoords));
-			if (overlay != nullptr) {
-				blit_overlay(overlay->pic, overlay->hotspot);
+		if (f->vision > 0) {
+			// Draw build help.
+			if (buildhelp()) {
+				const auto* overlay = get_buildhelp_overlay(plr.get_buildcaps(f->fcoords));
+				if (overlay != nullptr) {
+					blit_overlay(overlay->pic, overlay->hotspot);
+				}
 			}
-		}
 
-		// Blit the selection marker.
-		if (f->fcoords == get_sel_pos().node) {
-			const Image* pic = get_sel_picture();
-			blit_overlay(pic, Vector2i(pic->width() / 2, pic->height() / 2));
-		}
+			// Blit the selection marker.
+			if (f->fcoords == get_sel_pos().node) {
+				const Image* pic = get_sel_picture();
+				blit_overlay(pic, Vector2i(pic->width() / 2, pic->height() / 2));
+			}
 
-		// Draw road building slopes.
-		{
-			const auto it = road_building.steepness_indicators.find(f->fcoords);
-			if (it != road_building.steepness_indicators.end()) {
-				blit_overlay(it->second, Vector2i(it->second->width() / 2, it->second->height() / 2));
+			// Draw road building slopes.
+			{
+				const auto it = road_building.steepness_indicators.find(f->fcoords);
+				if (it != road_building.steepness_indicators.end()) {
+					blit_overlay(
+					   it->second, Vector2i(it->second->width() / 2, it->second->height() / 2));
+				}
 			}
 		}
 	}

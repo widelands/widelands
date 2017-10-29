@@ -83,6 +83,7 @@ return {
              frisians_forester = 2,
              frisians_stonemason = 2,
              frisians_reindeer = 5,
+             frisians_trainer = 4,
          },
          -- Max health: 2, Max attack: 6, Max defense: 2, Max evade: 0
          soldiers = {
