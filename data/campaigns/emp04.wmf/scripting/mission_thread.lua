@@ -4,6 +4,7 @@ include "map:scripting/helper_functions.lua"
 -- Some objectives need to be waited for in separate threads
 local obj_find_monastry_done = false
 local vesta_conquered = false
+local enemy = false
 
 --  dismantle the unproductive small buildings
 function dismantle()
@@ -144,6 +145,8 @@ function steel()
 	  ) > 9) do 
    sleep(2500) 
    end
+   campaign_message_box(diary_page_6)
+   sleep(10000)
    o.done = true
    
    -- enough tools produced now start to build weapons
@@ -199,12 +202,13 @@ function steel()
    o1.done = true
    campaign_message_box(saledus_6)
    run(training)
+   run(check_enemy)
 end
 
 -- charcoal might be needed to support the metal production
 function charcoal()
    while p1:get_wares("coal") < 15 do sleep(2342) end
-   while (p1:get_wares("coal")/p1:get_wares("iron_ore")) > 0.05 do sleep(2342) end
+   while (p1:get_wares("coal")/p1:get_wares("iron_ore")) > 0.1 do sleep(2342) end
    local o = add_campaign_objective(obj_charcoal)
    campaign_message_box(amalea_14)
    while #p1:get_buildings("empire_charcoal_kiln") < 2 do sleep(3249) end
@@ -268,14 +272,18 @@ function training()
    -- after some training we have enough knowledge to build better training buildings
    p1:allow_buildings{"empire_trainingcamp", "empire_colosseum"}
    campaign_message_box(saledus_7)
+   local o2 = add_campaign_objective(obj_upgrade)
    sleep(5000)
 
-   while not (obj_find_monastry_done and check_for_buildings(p1, { empire_trainingcamp = 1, empire_colosseum = 1})) do sleep(3000) end
+   while not (check_for_buildings(p1, { empire_trainingcamp = 1, empire_colosseum = 1})) do sleep(3000) end
+   o2.done = true
+   campaign_message_box(diary_page_7)
+   sleep(5000)
+   while not (obj_find_monastry_done) do sleep(2000) end
    campaign_message_box(saledus_8)
    local o1 = add_campaign_objective(obj_heroes)
    local heroes = false
    
-   local enemy = false
    while not heroes do
    bld = array_combine(
       p1:get_buildings("empire_headquarters"),
@@ -299,21 +307,9 @@ function training()
 	  if amount > 2 then
 	     heroes = true
       end
-	  
-	  -- check if the enemy has been seen and where
-	  if enemy == false then
-	     local en_see = enemy_seen()
-	  
-	     if en_see then
-	        local prior_center = scroll_to_field(en_see)
-	        campaign_message_box(saledus_11)
-		    enemy = true
-		    run(conquer)
-	        scroll_to_map_pixel(prior_center)
-	     end
-	  end
       sleep(4273)
    end
+   
    o1.done = true
    if enemy == false then
       campaign_message_box(saledus_9)
@@ -322,9 +318,27 @@ function training()
 
 end
 
+   
+-- check if the enemy has been seen and where
+function check_enemy()
+   local en_see = {}
+	  while not enemy do
+	     en_see = enemy_seen()
+	  
+	     if en_see then
+	        local prior_center = scroll_to_field(en_see)
+	        campaign_message_box(saledus_11)
+		    enemy = true
+		    run(conquer)
+	        scroll_to_map_pixel(prior_center)
+	     end
+		 sleep(5000)
+	  end
+end
+
+
 -- lets finish the babarians off
 function conquer()
-
    local o = add_campaign_objective(obj_conquer_all)
 
    while not p2.defeated do sleep(2342) end
@@ -354,7 +368,7 @@ function wheat_chain()
    local mill = map:get_field(18, 156)
    place_building_in_region(p3, "empire_mill", {map:get_field(18, 156)})
    local ware = map:get_field(21, 158)
-   place_building_in_region(p3, "empire_warehouse", {map:get_field(21, 158)})
+   place_building_in_region(p3, "empire_warehouse", {map:get_field(21, 158)}, {workers = {empire_carrier = 5,}})
    local sent = map:get_field(19, 157)
    place_building_in_region(p3, "empire_sentry", {map:get_field(19, 157)})
    o.done = true
@@ -466,18 +480,30 @@ function mission_thread()
 
    --Initial messages
    campaign_message_box(diary_page_1)
-   sleep(1000)
+   sleep(700)
    campaign_message_box(saledus)
-   sleep(1000)
+   sleep(700)
    campaign_message_box(amalea)
-
-   -- let's start with dismantling the unproductive buildings 
-   sleep(1000)
+ 
+   -- the mayor is appearing
+   sleep(700)
    campaign_message_box(diary_page_2)
-   sleep(1000)
+   sleep(700)
+   campaign_message_box(marcus_1) 
+   sleep(700)
+   campaign_message_box(diary_page_3)
+   sleep(700)
+   campaign_message_box(marcus_2)
+   sleep(700)
+   campaign_message_box(diary_page_4)
+   sleep(700) 
+   
+   -- let's start with dismantling the unproductive buildings  
    campaign_message_box(amalea_1)
    run(dismantle)
    run(farm_plans)
+
+  
    
 
 

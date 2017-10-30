@@ -15,7 +15,7 @@ tribes:new_productionsite_type {
    },
    return_on_dismantle_on_enhanced = {
       planks = 1,
-	  felling_ax = 1
+	  --felling_ax = 1
    },
 
    animations = {

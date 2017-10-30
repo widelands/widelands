@@ -38,6 +38,9 @@ function enemy_seen()
    for idx, border in ipairs(enemy_border) do
       if p1:sees_field(border) then
       rv = border
+	  break
+	  else
+	  rv = false
       end
    end
    return rv   

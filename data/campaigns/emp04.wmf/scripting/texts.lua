@@ -29,6 +29,10 @@ end
 function vesta(title, text)
    return speech("map:Vesta.png", "D0D0D0", title, text)
 end
+function marcus(title, text)
+   return speech("map:Markus.png", "1175AF", title, text)
+end
+
 
 
 
@@ -162,6 +166,14 @@ obj_training = {
    ),
 }
 
+obj_upgrade = {
+   name = "upgrade",
+   title=_"Build a training camp and upgrade the colosseum",
+   number = 1,
+   body = objective_text(_"Build more efficient training buildings",
+      listitem_bullet(_[[We need more efficient training sites. Build a trainingscamp and upgrade our colosseum to an arena.]])
+   ),
+}
 
 -- ==================
 -- Texts to the user
@@ -177,7 +189,6 @@ diary_page_1 = {
       .. paragraphdivider() ..
       -- TRANSLATORS: Lutius - Diary
       _([[Saledus, Amalea, aren't you delighted as well?]])),
-	
    posy=1,
 }
 
@@ -185,42 +196,44 @@ diary_page_2 = {
    title=_"Chaos",
    body= lutius(_"Diary of Lutius",
       -- TRANSLATORS: Lutius - Diary
-      _([[Oh no. Amalea is right. In fact I can't see any productivity overall. And our road network seems to be a complete mess as well. Who might be responsible for this chaos?]])
-      .. paragraphdivider() ..
-      -- TRANSLATORS: Lutius - Diary
-      _([[I am really afraid we could be totally unprepared if the babarians will attack us.]])),
-
+      _([[Oh no. Amalea is right. In fact I can't see any productivity overall. And our road network seems to be a complete mess as well. Who might be responsible for this chaos?]])),
    posy=1,
 }
 
--- diary_page_3 = {
-   -- title=_"Shipwrecked again",
-   -- body= lutius(_"Diary of Lutius",
-      -- -- TRANSLATORS: Lutius - Diary
-      -- _([[Finally, the wrath of the Gods and the ocean seems to be over.]])
-      -- .. paragraphdivider() ..
-      -- -- TRANSLATORS: Lutius - Diary
-      -- _([[We landed on an unknown coast and found some rest under the palm trees growing at the shore. But that is about as good as it gets. The truth is: when I woke up this morning, I saw nothing but sand and stone around us.]])
-      -- .. paragraphdivider() ..
-      -- -- TRANSLATORS: Lutius - Diary
-      -- _([[It really seems as if we have landed on a very small island with little space.]])
-	  -- .. paragraphdivider() ..
-      -- -- TRANSLATORS: Lutius - Diary
-      -- _([[To make it even worse all the land we can see is blocked by stone and trees. I fear we won’t find the resources we need to build a new ship.]])
-	  -- .. paragraphdivider() ..
-      -- -- TRANSLATORS: Lutius - Diary
-      -- _([[I really don't know if and how we will get back home. And the war is going on without us. I hope my comrades defend our empire well.]])),
+diary_page_3 = {
+   title=_"Explanation needed",
+   body= lutius(_"Diary of Lutius",
+      -- TRANSLATORS: Lutius - Diary
+      _([[Ave. Who are you and what happened to our beautiful land.]])),
+   posy=1,
+}
 
-   -- posy=1,
--- }
+diary_page_4 = {
+   title=_"Difficult times",
+   body= lutius(_"Diary of Lutius",
+      -- TRANSLATORS: Lutius - Diary
+      _([[Mayor, we have to thank you for your efforts to saveguard our city. And we will do our very best to recover from the chaos. But unfortunately it seems to be very difficult.]])
+      .. paragraphdivider() ..
+      -- TRANSLATORS: Lutius - Diary
+      _([[I am really afraid we could be totally unprepared if the babarians will attack us.]])),
+   posy=1,
+}
 
--- diary_page_4 = {
-   -- title=_"Seafaring possible again",
-   -- body= lutius(_"Diary of Lutius",
-      -- -- TRANSLATORS: Lutius - Diary
-      -- _([[Praise the gods. We finally have a ship industry.]])),
-   -- posy=1,
--- }
+diary_page_6= {
+   title=_"Tools, tools, tools",
+   body= lutius(_"Diary of Lutius",
+      -- TRANSLATORS: Lutius - Diary
+      _([[Praise the gods. We just ensured a constant tool supply. Now we should be able to expand our economy.]])),
+   posy=1,
+}
+
+diary_page_7= {
+   title=_"Military strength",
+   body= lutius(_"Diary of Lutius",
+      -- TRANSLATORS: Lutius - Diary
+      _([[Thank goodness. Now we have everything ready to fully train our soldiers. Finally we will increase our military strength.]])),
+   posy=1,
+}
 
 diary_page_5 = {
    title=_"Battle is won",
@@ -231,6 +244,31 @@ diary_page_5 = {
       _([[You have completed this mission. You may continue playing if you wish, otherwise move on to the next mission.]])),
    posy=1,
 }
+
+-- Marcus (mayor of fremil)
+
+marcus_1 = {
+   title=_"Welcome Back",
+   body= marcus(_"A high fremil official is advancing ...",
+      -- TRANSLATORS: Marcus - Mayor of fremil welcoming Lutius and explaining the chaos
+      _([[Ave Sire. The people and me we are so glad to see you returning back home. We really could use some good leadership around here.]])
+	  .. paragraphdivider() ..
+      _([[As you have already noticed, things have went terribly wrong around here after you left.]])),
+   posy=1,
+}
+
+marcus_2 = {
+   title=_"a long story",
+   body= marcus(_"The official is deeply sighing...",
+      -- TRANSLATORS: Marcus - Mayor of fremil welcoming Lutius and explaining the chaos
+      _([[Sire. The emperor left fremil a lot of months ago to fight against the babarians. As this was his duty he delegated the duty to run the city to his former secretary and instated him as his surrogate around here.]])
+	  .. paragraphdivider() ..
+      _([[But this was one of his worst decisions ever. The secretary got caught by his powers. His selfish instincts were as worse as his total stupidity and inability to govern the city.]])
+	  .. paragraphdivider() ..
+      _([[After a while the people discovered the truth and expelled the bloody moron. And afterwards I was elected mayor of this city. But recovering the chaos seems to be a task to big for me alone.]])),
+   posy=1,
+}
+
 
 -- Amalea
 
@@ -557,15 +595,17 @@ saledus_7 = {
       -- TRANSLATORS: Saledus
       _([[Sire, after training a bunch of recruits our trainers together with our builders developed better and more efficient training buildings.]])
       .. paragraphdivider() ..
-      _([[Now we could really improve our army and build the military strength that we will need to defend our country.]])),
+      _([[Now we could really improve our army and build the military strength that we will need to defend our country.]]))
+	  .. new_objectives(obj_upgrade),
    posy=1,
+   h=500,
 }
 
 saledus_8 = {
    title=_"We just need another hero",
    body= saledus4(_"Saledus is in a good mood…",
       -- TRANSLATORS: Saledus
-      _([[Sire, I have good progress to report. After we now have more and better beer together with enhanced training facilities we should be able to train as much heroes as we can.]])
+      _([[Sire, after we now have more and better beer together with enhanced training facilities we should be able to train as much heroes as we can.]])
       .. paragraphdivider() ..
       _([[It will give us great advantage in battle if our soldiers are much more powerful than the babarians. So we need to spend our ressources wisely to get heroes as soon as we can.]])
       .. paragraphdivider() ..
