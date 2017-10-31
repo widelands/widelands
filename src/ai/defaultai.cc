@@ -162,43 +162,43 @@ DefaultAI::DefaultAI(Game& ggame, PlayerNumber const pid, Widelands::AiType cons
 		});
 
 	// Subscribe to ShipNotes.
-	shipnotes_subscriber_ =
-	   Notifications::subscribe<NoteShipMessage>([this](const NoteShipMessage& note) {
+	shipnotes_subscriber_ = Notifications::subscribe<NoteShipMessage>([this](
+	   const NoteShipMessage& note) {
 
-		   // in a short time between start and late_initialization the player
-		   // can get notes that can not be processed.
-		   // It seems that this causes no problem, at least no substantial
-		   if (player_ == nullptr) {
-			   return;
-		   }
-		   if (note.ship->get_owner()->player_number() != player_->player_number()) {
-			   return;
-		   }
+		// in a short time between start and late_initialization the player
+		// can get notes that can not be processed.
+		// It seems that this causes no problem, at least no substantial
+		if (player_ == nullptr) {
+			return;
+		}
+		if (note.ship->get_owner()->player_number() != player_->player_number()) {
+			return;
+		}
 
-		   switch (note.message) {
+		switch (note.message) {
 
-		   case NoteShipMessage::Message::kGained:
-			   gain_ship(*note.ship, NewShip::kBuilt);
-			   break;
+		case NoteShipMessage::Message::kGained:
+			gain_ship(*note.ship, NewShip::kBuilt);
+			break;
 
-		   case NoteShipMessage::Message::kLost:
-			   for (std::deque<ShipObserver>::iterator i = allships.begin(); i != allships.end(); ++i) {
-				   if (i->ship == note.ship) {
-					   allships.erase(i);
-					   break;
-				   }
-			   }
-			   break;
+		case NoteShipMessage::Message::kLost:
+			for (std::deque<ShipObserver>::iterator i = allships.begin(); i != allships.end(); ++i) {
+				if (i->ship == note.ship) {
+					allships.erase(i);
+					break;
+				}
+			}
+			break;
 
-		   case NoteShipMessage::Message::kWaitingForCommand:
-			   for (std::deque<ShipObserver>::iterator i = allships.begin(); i != allships.end(); ++i) {
-				   if (i->ship == note.ship) {
-					   i->waiting_for_command_ = true;
-					   break;
-				   }
-			   }
-		   }
-		});
+		case NoteShipMessage::Message::kWaitingForCommand:
+			for (std::deque<ShipObserver>::iterator i = allships.begin(); i != allships.end(); ++i) {
+				if (i->ship == note.ship) {
+					i->waiting_for_command_ = true;
+					break;
+				}
+			}
+		}
+	});
 }
 
 DefaultAI::~DefaultAI() {
@@ -1195,7 +1195,7 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 	// look if there is any unowned land nearby
 	const Map& map = game().map();
 	const uint32_t gametime = game().get_gametime();
-	FindNodeUnownedWalkable find_unowned_walkable(player_, game());//NOCOM
+	FindNodeUnownedWalkable find_unowned_walkable(player_, game());
 	FindEnemyNodeWalkable find_enemy_owned_walkable(player_, game());
 	FindNodeUnownedBuildable find_unowned_buildable(player_, game());
 	FindNodeUnownedMineable find_unowned_mines_pots(player_, game());
@@ -2028,7 +2028,7 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 
 	// Genetic algorithm is used here
 	static bool inputs[2 * kFNeuronBitSize] = {0};
-	for (int i = 0; i < 2 * kFNeuronBitSize;i++) {
+	for (int i = 0; i < 2 * kFNeuronBitSize; i++) {
 		inputs[i] = 0;
 	}
 	inputs[0] = (pow(msites_in_constr(), 2) > militarysites.size() + 2);
@@ -3545,9 +3545,7 @@ bool DefaultAI::create_shortcut_road(const Flag& flag,
 		do {
 			blocked_fields.add(mr.location(), game().get_gametime() + 15 * 60 * 1000);
 		} while (mr.advance(map));
-		//remove_from_flags(eco->flags, &flag);
 		remove_from_dqueue<Widelands::Flag>(eco->flags, &flag);
-		//eco->flags.remove(&flag); NOCOM
 		game().send_player_bulldoze(*const_cast<Flag*>(&flag));
 		return true;
 	}
@@ -4563,7 +4561,7 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 
 			static int16_t inputs[kFNeuronBitSize] = {0};
 			// Reseting values as the variable is static
-			for (int i = 0; i < kFNeuronBitSize;i++) {
+			for (int i = 0; i < kFNeuronBitSize; i++) {
 				inputs[i] = 0;
 			}
 			inputs[0] = (bo.max_needed_preciousness == 0) ? -1 : 0;
@@ -4654,7 +4652,7 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 			tmp_target = 2;
 			static int16_t inputs[2 * kFNeuronBitSize] = {0};
 			// Reseting values as the variable is static
-			for (int i = 0; i < 2 * kFNeuronBitSize;i++) {
+			for (int i = 0; i < 2 * kFNeuronBitSize; i++) {
 				inputs[i] = 0;
 			}
 
@@ -4769,8 +4767,6 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 
 			// adjusting/decreasing based on cnt_limit_by_aimode
 			bo.cnt_target = std::min(bo.cnt_target, bo.cnt_limit_by_aimode);
-
-			//printf ("%s: ai limit: %d, target: %d\n", bo.name, bo.cnt_limit_by_aimode, bo.cnt_target);
 
 			assert(bo.cnt_target > 1 && bo.cnt_target < 1000);
 
@@ -4895,7 +4891,7 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 
 			static int16_t inputs[kFNeuronBitSize] = {0};
 			// Reseting values as the variable is static
-			for (int i = 0; i < kFNeuronBitSize;i++) {
+			for (int i = 0; i < kFNeuronBitSize; i++) {
 				inputs[i] = 0;
 			}
 			inputs[0] = (gametime < 15 * 60 * 1000) ? -2 : 0;
@@ -4981,7 +4977,7 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 
 			static int16_t inputs[4 * kFNeuronBitSize] = {0};
 			// Reseting values as the variable is static
-			for (int i = 0; i < 4 * kFNeuronBitSize;i++) {
+			for (int i = 0; i < 4 * kFNeuronBitSize; i++) {
 				inputs[i] = 0;
 			}
 			inputs[0] = (bo.total_count() <= 1) ?
@@ -5499,11 +5495,10 @@ void DefaultAI::lose_immovable(const PlayerImmovable& pi) {
 	if (upcast(Building const, building, &pi)) {
 		lose_building(*building);
 	} else if (upcast(Flag const, flag, &pi)) {
-		//Flag to be removed can be:
+		// Flag to be removed can be:
 		// 1. In one of our economies
 		for (EconomyObserver* eco_obs : economies) {
-			//printf("Player %d has %lu flags in this economy\n", flag->owner().player_number(), eco_obs->flags.size()); //NOCOM
-			if (remove_from_dqueue<Widelands::Flag>(eco_obs->flags, flag)){
+			if (remove_from_dqueue<Widelands::Flag>(eco_obs->flags, flag)) {
 				return;
 			}
 		}
@@ -5512,14 +5507,10 @@ void DefaultAI::lose_immovable(const PlayerImmovable& pi) {
 		if (remove_from_dqueue<Widelands::Flag>(new_flags, flag)) {
 			return;
 		};
-		//assert(new_flags.empty()); ?
 
-		// 3. Or not in either
-		//printf ("Weird flag at %dx%d\n", flag->get_position().x,  flag->get_position().y); //NOCOM
-
+		// 3. Or in neither of them
 	} else if (upcast(Road const, road, &pi)) {
 		remove_from_dqueue<Widelands::Road>(roads, road);
-		//roads.remove(road); NOCOM
 	}
 }
 
@@ -6234,27 +6225,16 @@ template <typename T> void DefaultAI::check_range(T value, T upper_range, const 
 	}
 }
 
-template <typename T> bool DefaultAI::remove_from_dqueue(std::deque<T const*>& dq, T const* member) { //NOCOM
+template <typename T>
+bool DefaultAI::remove_from_dqueue(std::deque<T const*>& dq, T const* member) {
 	for (auto it = dq.begin(); it != dq.end(); ++it) {
-        if (*it == member) {
-            it = dq.erase(it);
-            return true;
+		if (*it == member) {
+			it = dq.erase(it);
+			return true;
 		}
 	}
-	//printf ("Not erased from deque\n");
 	return false;
 }
-
-//void DefaultAI::remove_from_flags(std::deque<Widelands::Flag const*>& dq ,  Widelands::Flag const*  member) {//NOCOM
-	//for (auto it = dq.begin(); it != dq.end(); ++it) {
-		//if (*it == member) {
-        ////if (it == member) {
-            //it = dq.erase(it);
-            //return;
-		//}
-	//}
-	//printf ("Not erased from deque\n");
-//}
 
 // Looking for situation where for a critical mine (iron, or marble) there is just one mine and it
 // is

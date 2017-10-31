@@ -244,9 +244,8 @@ private:
 	template <typename T> void check_range(const T, const T, const T, const char*);
 	template <typename T> void check_range(const T, const T, const char*);
 
-	// Remove member from std::deque NOCOM
+	// Remove a member from std::deque
 	template <typename T> bool remove_from_dqueue(std::deque<T const*>&, T const*);
-	//void remove_from_flags(std::deque<Widelands::Flag const*>&,  Widelands::Flag const*);   //<------
 
 	// Functions used for seafaring / defaultai_seafaring.cc
 	Widelands::IslandExploreDirection randomExploreDirection();

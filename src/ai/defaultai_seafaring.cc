@@ -70,7 +70,9 @@ uint8_t DefaultAI::spot_scoring(Widelands::Coords candidate_spot) {
 	}
 
 	// here we check for surface rocks + trees
-	std::vector<ImmovableFound> immovables;
+	static std::vector<ImmovableFound> immovables;
+	immovables.clear();
+	immovables.reserve(50);
 	// Search in a radius of range
 	map.find_immovables(Area<FCoords>(map.get_fcoords(candidate_spot), 10), &immovables);
 
