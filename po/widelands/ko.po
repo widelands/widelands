@@ -4,15 +4,16 @@
 # Translators:
 # GunChleoc, 2015
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
+# ks k, 2017
 # Moon Yeonki <backnii@gmail.com>, 2017
 # TaeMin An <kavern02@gmail.com>, 2017
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-09-15 18:56+0000\n"
-"PO-Revision-Date: 2017-09-22 15:32+0000\n"
-"Last-Translator: Moon Yeonki <backnii@gmail.com>\n"
+"POT-Creation-Date: 2017-10-09 18:20+0000\n"
+"PO-Revision-Date: 2017-10-09 18:23+0000\n"
+"Last-Translator: GunChleoc\n"
 "Language-Team: Korean (http://www.transifex.com/widelands/widelands/language/ko/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -210,12 +211,12 @@ msgstr "11월"
 msgid "Dec"
 msgstr "12월"
 
-#: ../../src/editor/editorinteractive.cc:63 ../../src/logic/game.cc:211
-#: ../../src/logic/game.cc:258
+#: ../../src/editor/editorinteractive.cc:62 ../../src/logic/game.cc:212
+#: ../../src/logic/game.cc:259
 msgid "Loading tribes"
 msgstr "부족 소환 중"
 
-#: ../../src/editor/editorinteractive.cc:78
+#: ../../src/editor/editorinteractive.cc:77
 #: ../../src/editor/ui_menus/main_menu.cc:43
 #: ../../src/wui/game_options_menu.cc:66
 #: ../../src/wui/interactive_player.cc:208
@@ -223,95 +224,95 @@ msgstr "부족 소환 중"
 msgid "Main Menu"
 msgstr "주 메뉴"
 
-#: ../../src/editor/editorinteractive.cc:82
+#: ../../src/editor/editorinteractive.cc:81
 #: ../../src/editor/ui_menus/tool_menu.cc:45
 msgid "Tools"
 msgstr "도구"
 
-#: ../../src/editor/editorinteractive.cc:86
+#: ../../src/editor/editorinteractive.cc:85
 #: ../../src/editor/ui_menus/toolsize_menu.cc:40
 msgid "Tool Size"
 msgstr "도구 크기"
 
-#: ../../src/editor/editorinteractive.cc:90
+#: ../../src/editor/editorinteractive.cc:89
 #: ../../src/ui_fsmenu/launch_mpg.cc:144
 msgid "Players"
 msgstr "플레이어"
 
-#: ../../src/editor/editorinteractive.cc:99
+#: ../../src/editor/editorinteractive.cc:98
 #: ../../src/wui/interactive_player.cc:224
 #: ../../src/wui/interactive_spectator.cc:75
 msgid "Show Building Spaces (on/off)"
 msgstr "건설 공간 확인 (on/off)"
 
-#: ../../src/editor/editorinteractive.cc:102
+#: ../../src/editor/editorinteractive.cc:101
 msgid "Show Immovables (on/off)"
-msgstr ""
+msgstr "토지 표시 (켜기/끄기)"
 
-#: ../../src/editor/editorinteractive.cc:106
+#: ../../src/editor/editorinteractive.cc:105
 msgid "Show Animals (on/off)"
 msgstr "동물 보기 (켜기/끄기)"
 
-#: ../../src/editor/editorinteractive.cc:110
+#: ../../src/editor/editorinteractive.cc:109
 msgid "Show Resources (on/off)"
 msgstr "자원 보기 (켜기/끄기)"
 
-#: ../../src/editor/editorinteractive.cc:117
+#: ../../src/editor/editorinteractive.cc:116
 #: ../../src/wui/interactive_player.cc:220
 #: ../../src/wui/interactive_spectator.cc:71
 msgid "Minimap"
 msgstr "약도"
 
-#: ../../src/editor/editorinteractive.cc:120
+#: ../../src/editor/editorinteractive.cc:119
 #: ../../src/wui/interactive_player.cc:226
 #: ../../src/wui/interactive_spectator.cc:78
 msgid "Reset zoom"
 msgstr "기본 배율 전환"
 
-#: ../../src/editor/editorinteractive.cc:128
+#: ../../src/editor/editorinteractive.cc:127
 msgid "Undo"
 msgstr "되돌리기"
 
-#: ../../src/editor/editorinteractive.cc:131
+#: ../../src/editor/editorinteractive.cc:130
 msgid "Redo"
 msgstr "재실행하기"
 
-#: ../../src/editor/editorinteractive.cc:136
+#: ../../src/editor/editorinteractive.cc:135
 #: ../../src/wui/buildingwindow.cc:330
 msgid "Help"
 msgstr "도움말"
 
-#: ../../src/editor/editorinteractive.cc:164
+#: ../../src/editor/editorinteractive.cc:163
 msgid "Unsupported format"
 msgstr "지원하지 않는 형식"
 
-#: ../../src/editor/editorinteractive.cc:165
+#: ../../src/editor/editorinteractive.cc:164
 #, c-format
 msgid ""
 "Widelands could not load the file \"%s\". The file format seems to be "
 "incompatible."
 msgstr "Widelands는 파일 \"%s\"를 불러올 수 없습니다. 파일 형식이 적합하지 않습니다."
 
-#: ../../src/editor/editorinteractive.cc:178 ../../src/logic/game.cc:215
-#: ../../src/logic/game.cc:265
+#: ../../src/editor/editorinteractive.cc:177 ../../src/logic/game.cc:216
+#: ../../src/logic/game.cc:266
 msgid "Creating players"
 msgstr "플레이어 생성"
 
-#: ../../src/editor/editorinteractive.cc:229
+#: ../../src/editor/editorinteractive.cc:225
 msgid "Unsaved Map"
 msgstr "저장되지 않은 지도"
 
-#: ../../src/editor/editorinteractive.cc:230
+#: ../../src/editor/editorinteractive.cc:226
 msgid "The map has not been saved, do you really want to quit?"
 msgstr "지도가 저장되지 않았는데, 종료하기를 원하십니까?"
 
-#: ../../src/editor/editorinteractive.cc:620
+#: ../../src/editor/editorinteractive.cc:618
 #: ../../src/editor/ui_menus/main_menu_new_map.cc:144
 msgid "Creating empty map…"
 msgstr "빈 지도를 만드는 중..."
 
 #. * TRANSLATORS: Default name for new map
-#: ../../src/editor/editorinteractive.cc:624
+#: ../../src/editor/editorinteractive.cc:622
 #: ../../src/editor/ui_menus/main_menu_new_map.cc:151
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:532
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:133
@@ -319,7 +320,7 @@ msgstr "빈 지도를 만드는 중..."
 msgid "No Name"
 msgstr "이름 없음"
 
-#: ../../src/editor/editorinteractive.cc:627
+#: ../../src/editor/editorinteractive.cc:625
 #: ../../src/editor/ui_menus/main_menu_new_map.cc:152
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:533
 #: ../../src/logic/map.h:170
@@ -327,7 +328,7 @@ msgctxt "author_name"
 msgid "Unknown"
 msgstr "알 수 없음"
 
-#: ../../src/editor/editorinteractive.cc:634
+#: ../../src/editor/editorinteractive.cc:632
 #, c-format
 msgid "Loading map “%s”…"
 msgstr "지도 \"%s\"를 불러오는 중..."
@@ -500,7 +501,7 @@ msgstr "개체를 선택하려면 클릭하세요. 여러 개체를 선택하려
 
 #. * TRANSLATORS: %s are the currently selected items in an editor tool
 #: ../../src/editor/ui_menus/categorized_item_selection_menu.h:198
-#: ../../src/editor/ui_menus/tool_change_resources_options_menu.cc:176
+#: ../../src/editor/ui_menus/tool_change_resources_options_menu.cc:164
 #, c-format
 msgid "Current: %s"
 msgstr "현재: %s"
@@ -824,23 +825,23 @@ msgstr "지도 저장 오류!\n저장된 지도 파일이 손상되었습니다.
 msgid "Enter Directory Name:"
 msgstr "디렉토리 이름 입력:"
 
-#: ../../src/editor/ui_menus/player_menu.cc:45
+#: ../../src/editor/ui_menus/player_menu.cc:44
 msgid "Player Options"
 msgstr "플레이어 옵션"
 
-#: ../../src/editor/ui_menus/player_menu.cc:54
+#: ../../src/editor/ui_menus/player_menu.cc:53
 msgid "Add player"
 msgstr "플레이어 추가"
 
-#: ../../src/editor/ui_menus/player_menu.cc:63
+#: ../../src/editor/ui_menus/player_menu.cc:62
 msgid "Remove last player"
 msgstr "마지막 플레이어 제외"
 
-#: ../../src/editor/ui_menus/player_menu.cc:77
+#: ../../src/editor/ui_menus/player_menu.cc:76
 msgid "Number of Players"
 msgstr "플레이어 수"
 
-#: ../../src/editor/ui_menus/player_menu.cc:206 ../../src/logic/map.cc:309
+#: ../../src/editor/ui_menus/player_menu.cc:205 ../../src/logic/map.cc:309
 #: ../../src/logic/single_player_game_settings_provider.cc:89
 #: ../../src/map_io/map_player_names_and_tribes_packet.cc:94
 #: ../../src/network/gamehost.cc:1568 ../../src/ui_fsmenu/launch_mpg.cc:491
@@ -855,12 +856,12 @@ msgid "Height Tools Options"
 msgstr "높이 도구 옵션"
 
 #: ../../src/editor/ui_menus/tool_change_height_options_menu.cc:47
-#: ../../src/editor/ui_menus/tool_change_resources_options_menu.cc:61
+#: ../../src/editor/ui_menus/tool_change_resources_options_menu.cc:60
 msgid "Increase/Decrease Value:"
 msgstr "값 증가/감소:"
 
 #: ../../src/editor/ui_menus/tool_change_height_options_menu.cc:59
-#: ../../src/editor/ui_menus/tool_change_resources_options_menu.cc:73
+#: ../../src/editor/ui_menus/tool_change_resources_options_menu.cc:72
 #: ../../src/editor/ui_menus/tool_noise_height_options_menu.cc:74
 msgid "Set Value:"
 msgstr "값 설정:"
@@ -878,20 +879,20 @@ msgstr "지형 높이를 상승시키려면 지도에 클릭, 하강시키려면
 msgid "Ctrl + Click on the map to set terrain height"
 msgstr "지형 높이를 설정하려면 지도에 Ctrl + 클릭을 하세요."
 
-#: ../../src/editor/ui_menus/tool_change_resources_options_menu.cc:50
+#: ../../src/editor/ui_menus/tool_change_resources_options_menu.cc:49
 #: ../../src/editor/ui_menus/tool_menu.cc:64
 msgid "Resources"
 msgstr "자원"
 
 #. * TRANSLATORS: Editor change rseources access keys. *
-#: ../../src/editor/ui_menus/tool_change_resources_options_menu.cc:82
+#: ../../src/editor/ui_menus/tool_change_resources_options_menu.cc:81
 msgid ""
 "Click on the map to increase, Shift + Click on the map to decrease the "
 "amount of the selected resource"
 msgstr "선택한 자원의 양을 증가시키려면 지도에 클릭, 감소시키려면 Shift + 클릭을 하세요."
 
 #. * TRANSLATORS: Editor set rseources access key. *
-#: ../../src/editor/ui_menus/tool_change_resources_options_menu.cc:86
+#: ../../src/editor/ui_menus/tool_change_resources_options_menu.cc:85
 msgid "Ctrl + Click on the map to set the amount of the selected resource"
 msgstr "선택한 자원의 양을 설정하려면 지도에 Ctrl + 클릭을 하세요."
 
@@ -976,42 +977,50 @@ msgid "Loading graphics"
 msgstr "그래픽 불러오는 중"
 
 #. * TRANSLATORS: Win condition for this game has not been set.
-#: ../../src/logic/game.cc:130
+#: ../../src/logic/game.cc:131
 msgid "Not set"
 msgstr "설정되지 않음"
 
-#: ../../src/logic/game.cc:203 ../../src/logic/game.cc:249
-#: ../../src/logic/game.cc:319 ../../src/logic/game.cc:347
+#: ../../src/logic/game.cc:204 ../../src/logic/game.cc:250
+#: ../../src/logic/game.cc:320 ../../src/logic/game.cc:348
 msgid "Preloading map"
 msgstr "지도를 미리 불러오는 중"
 
-#: ../../src/logic/game.cc:209 ../../src/logic/game.cc:255
+#: ../../src/logic/game.cc:210 ../../src/logic/game.cc:256
 msgid "Loading world"
 msgstr "월드 불러오는 중"
 
-#: ../../src/logic/game.cc:225 ../../src/logic/game.cc:293
+#: ../../src/logic/game.cc:226 ../../src/logic/game.cc:294
 msgid "Loading map…"
 msgstr "지도 불러오는 중..."
 
-#: ../../src/logic/game.cc:332 ../../src/logic/game.cc:364
+#: ../../src/logic/game.cc:333 ../../src/logic/game.cc:365
 #: ../../src/ui_basic/progresswindow.cc:51 ../../src/wlapplication.cc:1366
 msgid "Loading…"
 msgstr "불러오는 중..."
 
-#: ../../src/logic/game.cc:427
+#: ../../src/logic/game.cc:428
 msgid "Creating player infrastructure"
 msgstr "플레이어 환경 생성 중"
 
-#: ../../src/logic/game.cc:438 ../../src/logic/player.cc:219
+#: ../../src/logic/game.cc:439 ../../src/logic/player.cc:219
 msgid "Missing starting position"
 msgstr "시작 위치를 찾을 수 없음"
 
-#: ../../src/logic/game.cc:439 ../../src/logic/player.cc:220
+#: ../../src/logic/game.cc:440 ../../src/logic/player.cc:220
 #, c-format
 msgid ""
 "Widelands could not start the game, because player %u has no starting position.\n"
 "You can manually add a starting position with the Widelands Editor to fix this problem."
 msgstr "Widelands는 플레이어 %u의 시작 위치가 없어서 게임을 시작할 수가 없습니다.\n이 문제를 해결하려면 Widelands 편집기에서 시작 위치를 수동으로 추가해야 합니다."
+
+#: ../../src/logic/game.cc:781
+msgid "Trade Offer"
+msgstr ""
+
+#: ../../src/logic/game.cc:783
+msgid "This market has received a new trade offer."
+msgstr ""
 
 #: ../../src/logic/game_data_error.cc:48
 msgid ""
@@ -1237,28 +1246,28 @@ msgstr "훈련할 군인이 없어요!"
 msgid "No soldier found for this training level!"
 msgstr "훈련 수준에 걸맞는 군인이 없어요!"
 
-#: ../../src/logic/map_objects/tribes/productionsite.cc:265
+#: ../../src/logic/map_objects/tribes/productionsite.cc:271
 msgid "(not occupied)"
 msgstr "(사용자 없음)"
 
-#: ../../src/logic/map_objects/tribes/productionsite.cc:272
+#: ../../src/logic/map_objects/tribes/productionsite.cc:278
 msgid "Worker missing"
 msgid_plural "Workers missing"
 msgstr[0] "일꾼 부족"
 
-#: ../../src/logic/map_objects/tribes/productionsite.cc:279
+#: ../../src/logic/map_objects/tribes/productionsite.cc:285
 msgid "(stopped)"
 msgstr "(중지됨)"
 
 #. * TRANSLATORS: Percent in building statistics window, e.g. 85%
 #. * TRANSLATORS: If you wish to add a space, translate as '%i %%'
-#: ../../src/logic/map_objects/tribes/productionsite.cc:378
+#: ../../src/logic/map_objects/tribes/productionsite.cc:384
 #: ../../src/wui/building_statistics_menu.cc:627
 #, c-format
 msgid "%i%%"
 msgstr "%i%%"
 
-#: ../../src/logic/map_objects/tribes/productionsite.cc:939
+#: ../../src/logic/map_objects/tribes/productionsite.cc:945
 msgid "Can’t find any more resources!"
 msgstr "더 이상 자원이 없어요!"
 
@@ -1380,37 +1389,37 @@ msgstr "새로운 본부가 경제에 추가되었습니다."
 msgid "A new warehouse was added to your economy."
 msgstr "새로운 창고가 경제에 추가되었습니다."
 
-#: ../../src/logic/map_objects/tribes/worker.cc:114
+#: ../../src/logic/map_objects/tribes/worker.cc:115
 #, c-format
 msgid ""
 "should mine resource %s, which does not exist in world; tribe is not "
 "compatible with world"
 msgstr "세계에 존재하지 않는 자원 %s 를 채굴해야 함; 부족은 세계에 부적합함"
 
-#: ../../src/logic/map_objects/tribes/worker.cc:215
+#: ../../src/logic/map_objects/tribes/worker.cc:216
 #, c-format
 msgid ""
 "should breed resource type %s, which does not exist in world; tribe is not "
 "compatible with world"
 msgstr "세계에 존재하지 않는 자원 종류 %s 를 사육해야 함; 부족은 세계에 부적합함"
 
-#: ../../src/logic/map_objects/tribes/worker.cc:886
+#: ../../src/logic/map_objects/tribes/worker.cc:887
 msgid "A geologist found resources."
 msgstr "지질학자가 자원을 발견했습니다."
 
-#: ../../src/logic/map_objects/tribes/worker.cc:1690
+#: ../../src/logic/map_objects/tribes/worker.cc:1774
 #, c-format
 msgid "Your %s can't find a way home and will likely die."
 msgstr "당신의 %s이 집으로 가는 길을 찾을 수 없어서 죽을 것 같습니다."
 
-#: ../../src/logic/map_objects/tribes/worker.cc:1696
+#: ../../src/logic/map_objects/tribes/worker.cc:1780
 #: ../../src/wui/productionsitewindow.cc:89
 #: ../../src/wui/productionsitewindow.cc:114
 msgid "Worker"
 msgid_plural "Workers"
 msgstr[0] "일꾼"
 
-#: ../../src/logic/map_objects/tribes/worker.cc:1697
+#: ../../src/logic/map_objects/tribes/worker.cc:1781
 msgid "Worker got lost!"
 msgstr "일꾼이 길을 잃었네요!"
 
@@ -1465,7 +1474,7 @@ msgstr "저장 실패!"
 msgid "Game saved"
 msgstr "게임 저장됨"
 
-#: ../../src/map_io/s2map.cc:422
+#: ../../src/map_io/s2map.cc:424
 msgid "Bluebyte Settlers II Map. No comment defined!"
 msgstr "Bluebyte Settlers II 지도. 아무런 코멘트 없음!"
 
@@ -1479,7 +1488,7 @@ msgid ""
 "Widelands could not establish a connection to the given address. Either no "
 "Widelands server was running at the supposed port or the server shut down as"
 " you tried to connect."
-msgstr ""
+msgstr "Widelands 가 주어진 주소에 연결할 수 없습니다. 가정된 포트에서 Widelands 서버가 실행 중이지 않거나 연결할 때 서버가 종료되었을것입니다."
 
 #: ../../src/network/gameclient.cc:171 ../../src/network/gamehost.cc:610
 #: ../../src/wlapplication.cc:1258
@@ -1961,7 +1970,7 @@ msgstr "클라이언트 %1$s 는 %2$s 이상으로 대응하지 못합니다."
 
 #: ../../src/network/network_lan_promotion.cc:350
 msgid "Failed to use the local network!"
-msgstr ""
+msgstr "로컬 네트워크를 사용하는데 실패했습니다!"
 
 #: ../../src/network/network_lan_promotion.cc:351
 #, c-format
@@ -1969,7 +1978,7 @@ msgid ""
 "Widelands was unable to use the local network. Maybe some other process is "
 "already running a server on port %d, %d or %d or your network setup is "
 "broken."
-msgstr ""
+msgstr "Widelands 가 로컬 네트워크를 사용할 수 없습니다.  어쩌면 다른 프로세스가 이미 포트 %d, %d 또는 %d에서 서버를 실행하고 있거나 네트워크 설정이 손상되었을 수 있습니다."
 
 #. * TRANSLATORS: A variant of the commandline parameter "true" value
 #. * TRANSLATORS: Needs to be consistent with the translations in widelands-
@@ -2876,7 +2885,7 @@ msgstr "창을 구석에 고정"
 
 #: ../../src/ui_fsmenu/options.cc:155
 msgid "Animate automatic map movements"
-msgstr ""
+msgstr "자동으로 지도 움직임 애니메이션하기"
 
 #: ../../src/ui_fsmenu/options.cc:165
 msgid "Distance for windows to snap to other panels:"
@@ -2998,11 +3007,11 @@ msgstr "이 정보를 당신의 보고서에 추가해 주세요.\n\nWidelands�
 
 #: ../../src/wlapplication.cc:1195
 msgid "Invalid address"
-msgstr ""
+msgstr "잘못된 주소"
 
 #: ../../src/wlapplication.cc:1196
 msgid "The entered hostname or address is invalid and can’t be connected to."
-msgstr ""
+msgstr "입력한 호스트 이름 또는 주소가 잘못되어 연결할 수 없습니다."
 
 #: ../../src/wui/actionconfirm.cc:176
 msgid "Destroy building?"
@@ -3160,7 +3169,7 @@ msgstr "중지"
 msgid "Enhance to %s"
 msgstr "%s 로 향상"
 
-#: ../../src/wui/buildingwindow.cc:239 ../../src/wui/fieldaction.cc:99
+#: ../../src/wui/buildingwindow.cc:239 ../../src/wui/fieldaction.cc:98
 msgid "Construction costs:"
 msgstr "건설 비용:"
 
@@ -3180,7 +3189,7 @@ msgstr "반납:"
 msgid "Hide work area"
 msgstr "작업 범위 숨기기"
 
-#: ../../src/wui/buildingwindow.cc:311 ../../src/wui/fieldaction.cc:368
+#: ../../src/wui/buildingwindow.cc:311 ../../src/wui/fieldaction.cc:367
 #: ../../src/wui/shipwindow.cc:140
 msgid "Show Debug Window"
 msgstr "디버그 창 확인"
@@ -3235,87 +3244,87 @@ msgstr "목표 증가"
 msgid "Reset to default"
 msgstr "기본값 복귀"
 
-#: ../../src/wui/fieldaction.cc:218
+#: ../../src/wui/fieldaction.cc:217
 msgid "Build large building"
 msgstr "대형 건물 건설"
 
-#: ../../src/wui/fieldaction.cc:218
+#: ../../src/wui/fieldaction.cc:217
 msgid "Build medium building"
 msgstr "중형 건물 건설"
 
-#: ../../src/wui/fieldaction.cc:218
+#: ../../src/wui/fieldaction.cc:217
 msgid "Build small building"
 msgstr "소형 건물 건설"
 
-#: ../../src/wui/fieldaction.cc:219
+#: ../../src/wui/fieldaction.cc:218
 msgid "Build port building"
 msgstr "항구 건물 건설"
 
-#: ../../src/wui/fieldaction.cc:246
+#: ../../src/wui/fieldaction.cc:245
 msgid "Action"
 msgstr "행동"
 
-#: ../../src/wui/fieldaction.cc:315 ../../src/wui/fieldaction.cc:372
+#: ../../src/wui/fieldaction.cc:314 ../../src/wui/fieldaction.cc:371
 msgid "Build road"
 msgstr "도로 건설"
 
-#: ../../src/wui/fieldaction.cc:321
+#: ../../src/wui/fieldaction.cc:320
 msgid "Destroy this flag"
 msgstr "깃발 파괴"
 
-#: ../../src/wui/fieldaction.cc:326
+#: ../../src/wui/fieldaction.cc:325
 msgid "Configure economy"
 msgstr "경제 구성"
 
-#: ../../src/wui/fieldaction.cc:329
+#: ../../src/wui/fieldaction.cc:328
 msgid "Send geologist to explore site"
 msgstr "지질학자를 탐사 장소로 파견"
 
-#: ../../src/wui/fieldaction.cc:344
+#: ../../src/wui/fieldaction.cc:343
 msgid "Place a flag"
 msgstr "깃발 건설"
 
-#: ../../src/wui/fieldaction.cc:348
+#: ../../src/wui/fieldaction.cc:347
 msgid "Destroy a road"
 msgstr "도로 파괴"
 
-#: ../../src/wui/fieldaction.cc:359
+#: ../../src/wui/fieldaction.cc:358
 msgid "Watch field in a separate window"
 msgstr "분리된 창에 지역 주시하기"
 
-#: ../../src/wui/fieldaction.cc:361
+#: ../../src/wui/fieldaction.cc:360
 msgid "Toggle building statistics display"
 msgstr "건물 통계 창 켜기/끄기"
 
-#: ../../src/wui/fieldaction.cc:364
+#: ../../src/wui/fieldaction.cc:363
 msgid "Toggle building label display"
 msgstr "건물 레이블 창 켜기/끄기"
 
-#: ../../src/wui/fieldaction.cc:374 ../../src/wui/watchwindow.cc:100
+#: ../../src/wui/fieldaction.cc:373 ../../src/wui/watchwindow.cc:100
 msgid "Watch"
 msgstr "주시하기"
 
-#: ../../src/wui/fieldaction.cc:388
+#: ../../src/wui/fieldaction.cc:387
 msgid "Start attack"
 msgstr "공격 시작"
 
-#: ../../src/wui/fieldaction.cc:394
+#: ../../src/wui/fieldaction.cc:393
 msgid "Attack"
 msgstr "공격"
 
-#: ../../src/wui/fieldaction.cc:472
+#: ../../src/wui/fieldaction.cc:471
 msgid "Build mines"
 msgstr "광산 건설"
 
-#: ../../src/wui/fieldaction.cc:485
+#: ../../src/wui/fieldaction.cc:484
 msgid "Build flag"
 msgstr "깃발 건설"
 
-#: ../../src/wui/fieldaction.cc:488
+#: ../../src/wui/fieldaction.cc:487
 msgid "Cancel road"
 msgstr "도로 취소"
 
-#: ../../src/wui/fieldaction.cc:491
+#: ../../src/wui/fieldaction.cc:490
 msgid "Build roads"
 msgstr "도로 건설"
 
@@ -3378,7 +3387,7 @@ msgid "Do you really want to delete the file %s?"
 msgstr "정말 파일 %s 를 삭제합니까?"
 
 #: ../../src/wui/game_message_menu.cc:51
-#: ../../src/wui/game_message_menu.cc:600
+#: ../../src/wui/game_message_menu.cc:602
 msgid "Messages: Inbox"
 msgstr "메시지: 수신함"
 
@@ -3407,7 +3416,7 @@ msgid "Sent"
 msgstr "시간"
 
 #: ../../src/wui/game_message_menu.cc:129
-#: ../../src/wui/game_message_menu.cc:603
+#: ../../src/wui/game_message_menu.cc:605
 msgid "Show Archive"
 msgstr "기록 보기"
 
@@ -3423,107 +3432,107 @@ msgid "Center main mapview on location"
 msgstr "해당 위치의 주 지도시야를 중앙으로"
 
 #. * TRANSLATORS: %1% is a tooltip, %2% is the corresponding hotkey
-#: ../../src/wui/game_message_menu.cc:521
-#: ../../src/wui/game_message_menu.cc:532
-#: ../../src/wui/game_message_menu.cc:537
-#: ../../src/wui/game_message_menu.cc:541
-#: ../../src/wui/game_message_menu.cc:545
-#: ../../src/wui/game_message_menu.cc:549
+#: ../../src/wui/game_message_menu.cc:522
+#: ../../src/wui/game_message_menu.cc:533
+#: ../../src/wui/game_message_menu.cc:538
+#: ../../src/wui/game_message_menu.cc:542
+#: ../../src/wui/game_message_menu.cc:546
+#: ../../src/wui/game_message_menu.cc:550
 msgid "%1% (Hotkey: %2%)"
 msgstr "%1% (단축키: %2%)"
 
-#: ../../src/wui/game_message_menu.cc:523
+#: ../../src/wui/game_message_menu.cc:524
 msgctxt "hotkey"
 msgid "Alt + 0"
 msgstr "Alt + 0"
 
 #. * TRANSLATORS: Tooltip in the messages window
-#: ../../src/wui/game_message_menu.cc:523
+#: ../../src/wui/game_message_menu.cc:524
 msgid "Show all messages"
 msgstr "모든 메시지 확인"
 
 #. * TRANSLATORS: Tooltip in the messages window
-#: ../../src/wui/game_message_menu.cc:534
+#: ../../src/wui/game_message_menu.cc:535
 msgid "Show geologists' messages only"
 msgstr "지질학자의 메시지만 표기"
 
-#: ../../src/wui/game_message_menu.cc:535
+#: ../../src/wui/game_message_menu.cc:536
 msgctxt "hotkey"
 msgid "Alt + 1"
 msgstr "Alt + 1"
 
-#: ../../src/wui/game_message_menu.cc:539
+#: ../../src/wui/game_message_menu.cc:540
 msgctxt "hotkey"
 msgid "Alt + 2"
 msgstr "Alt + 2"
 
 #. * TRANSLATORS: Tooltip in the messages window
-#: ../../src/wui/game_message_menu.cc:539
+#: ../../src/wui/game_message_menu.cc:540
 msgid "Show economy messages only"
 msgstr "경제 메시지만 확인"
 
-#: ../../src/wui/game_message_menu.cc:543
+#: ../../src/wui/game_message_menu.cc:544
 msgctxt "hotkey"
 msgid "Alt + 3"
 msgstr "Alt + 3"
 
 #. * TRANSLATORS: Tooltip in the messages window
-#: ../../src/wui/game_message_menu.cc:543
+#: ../../src/wui/game_message_menu.cc:544
 msgid "Show seafaring messages only"
 msgstr "항해 메시지만 표기"
 
-#: ../../src/wui/game_message_menu.cc:547
+#: ../../src/wui/game_message_menu.cc:548
 msgctxt "hotkey"
 msgid "Alt + 4"
 msgstr "Alt + 4"
 
 #. * TRANSLATORS: Tooltip in the messages window
-#: ../../src/wui/game_message_menu.cc:547
+#: ../../src/wui/game_message_menu.cc:548
 msgid "Show warfare messages only"
 msgstr "전투 메시지만 표기"
 
-#: ../../src/wui/game_message_menu.cc:551
+#: ../../src/wui/game_message_menu.cc:552
 msgctxt "hotkey"
 msgid "Alt + 5"
 msgstr "Alt + 5"
 
 #. * TRANSLATORS: Tooltip in the messages window
-#: ../../src/wui/game_message_menu.cc:551
+#: ../../src/wui/game_message_menu.cc:552
 msgid "Show scenario messages only"
 msgstr "시나리오 메시지만 표기"
 
-#: ../../src/wui/game_message_menu.cc:593
+#: ../../src/wui/game_message_menu.cc:595
 msgid "Messages: Archive"
 msgstr "메시지: 보관함"
 
-#: ../../src/wui/game_message_menu.cc:596
+#: ../../src/wui/game_message_menu.cc:598
 msgid "Show Inbox"
 msgstr "수신함 확인"
 
-#: ../../src/wui/game_message_menu.cc:624
+#: ../../src/wui/game_message_menu.cc:626
 #, c-format
 msgid "Restore the selected %d message"
 msgid_plural "Restore the selected %d messages"
 msgstr[0] "선택된 %d 메시지 회복"
 
 #. * TRANSLATORS: Tooltip in the messages window
-#: ../../src/wui/game_message_menu.cc:630
+#: ../../src/wui/game_message_menu.cc:632
 msgid "Restore selected message"
 msgstr "선택된 메시지 회복"
 
-#: ../../src/wui/game_message_menu.cc:638
+#: ../../src/wui/game_message_menu.cc:640
 #, c-format
 msgid "Archive the selected %d message"
 msgid_plural "Archive the selected %d messages"
 msgstr[0] "선택된 %d 메시지 보관"
 
 #. * TRANSLATORS: Tooltip in the messages window
-#: ../../src/wui/game_message_menu.cc:644
+#: ../../src/wui/game_message_menu.cc:646
 msgid "Archive selected message"
 msgstr "선택된 메시지 보관"
 
 #. * TRANSLATORS: %s is a tooltip, Del is the corresponding hotkey
-#: ../../src/wui/game_message_menu.cc:649
+#: ../../src/wui/game_message_menu.cc:651
 #, c-format
 msgid "Del: %s"
 msgstr "Del: %s"
@@ -3580,7 +3589,7 @@ msgid "Ware Statistics"
 msgstr "용품 통계"
 
 #: ../../src/wui/game_statistics_menu.cc:46 ../../src/wui/stock_menu.cc:36
-#: ../../src/wui/ware_statistics_menu.cc:147 ../../src/wui/waresdisplay.cc:68
+#: ../../src/wui/ware_statistics_menu.cc:146 ../../src/wui/waresdisplay.cc:68
 msgid "Stock"
 msgstr "재고"
 
@@ -3980,12 +3989,12 @@ msgstr "부족은 무작위로 선택됨"
 
 #: ../../src/wui/multiplayersetupgroup.cc:516
 msgid "No Team"
-msgstr ""
+msgstr "편 없음"
 
 #: ../../src/wui/multiplayersetupgroup.cc:522
 #, c-format
 msgid "Team %d"
-msgstr ""
+msgstr "편 %d"
 
 #: ../../src/wui/playerdescrgroup.cc:86
 msgid "Initialization"
@@ -4176,15 +4185,15 @@ msgstr "창고에 있는 일꾼"
 msgid "Soldiers in training"
 msgstr "훈련중인 군인들"
 
-#: ../../src/wui/ware_statistics_menu.cc:129
+#: ../../src/wui/ware_statistics_menu.cc:128
 msgid "Production"
 msgstr "생산"
 
-#: ../../src/wui/ware_statistics_menu.cc:135
+#: ../../src/wui/ware_statistics_menu.cc:134
 msgid "Consumption"
 msgstr "소모"
 
-#: ../../src/wui/ware_statistics_menu.cc:142
+#: ../../src/wui/ware_statistics_menu.cc:141
 msgid "Economy Health"
 msgstr "경제 활력"
 

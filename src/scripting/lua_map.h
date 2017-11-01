@@ -29,6 +29,7 @@
 #include "logic/game.h"
 #include "logic/map_objects/tribes/constructionsite.h"
 #include "logic/map_objects/tribes/dismantlesite.h"
+#include "logic/map_objects/tribes/market.h"
 #include "logic/map_objects/tribes/militarysite.h"
 #include "logic/map_objects/tribes/productionsite.h"
 #include "logic/map_objects/tribes/ship.h"
@@ -1125,6 +1126,7 @@ public:
 	/*
 	 * Lua Methods
 	 */
+	int propose_trade(lua_State* L);
 
 	/*
 	 * C Methods

@@ -29,6 +29,7 @@
 #include "io/streamwrite.h"
 #include "logic/game.h"
 #include "logic/map_objects/map_object.h"
+#include "logic/map_objects/tribes/market.h"
 #include "logic/map_objects/tribes/soldier.h"
 #include "logic/map_objects/tribes/tribe_descr.h"
 #include "logic/player.h"
@@ -50,6 +51,25 @@ Serial get_object_serial_or_zero(uint32_t object_index, MapObjectLoader& mol) {
 	if (!object_index)
 		return 0;
 	return mol.get<T>(object_index).serial();
+}
+
+void serialize_bill_of_materials(const BillOfMaterials& bill, StreamWrite* ser) {
+	ser->unsigned_32(bill.size());
+	for (const WareAmount& amount : bill) {
+		ser->unsigned_8(amount.first);
+		ser->unsigned_32(amount.second);
+	}
+}
+
+BillOfMaterials deserialize_bill_of_materials(StreamRead* des) {
+	BillOfMaterials bill;
+	const int count = des->unsigned_32();
+	for (int i = 0; i < count; ++i) {
+		const auto index = des->unsigned_8();
+		const auto amount = des->unsigned_32();
+		bill.push_back(std::make_pair(index, amount));
+	}
+	return bill;
 }
 
 }  // namespace
@@ -86,7 +106,8 @@ enum {
 	PLCMD_SHIP_EXPLORE = 27,
 	PLCMD_SHIP_CONSTRUCT = 28,
 	PLCMD_SHIP_SINK = 29,
-	PLCMD_SHIP_CANCELEXPEDITION = 30
+	PLCMD_SHIP_CANCELEXPEDITION = 30,
+	PLCMD_PROPOSE_TRADE = 31,
 };
 
 /*** class PlayerCommand ***/
@@ -1785,4 +1806,73 @@ void CmdSetStockPolicy::write(FileWrite& fw, EditorGameBase& egbase, MapObjectSa
 	fw.unsigned_8(static_cast<uint8_t>(policy_));
 }
 
+CmdProposeTrade::CmdProposeTrade(uint32_t time, PlayerNumber pn, const Trade& trade)
+   : PlayerCommand(time, pn), trade_(trade) {
+}
+
+CmdProposeTrade::CmdProposeTrade() : PlayerCommand() {
+}
+
+void CmdProposeTrade::execute(Game& game) {
+	Player* plr = game.get_player(sender());
+	if (plr == nullptr) {
+		return;
+	}
+
+	Market* initiator = dynamic_cast<Market*>(game.objects().get_object(trade_.initiator));
+	if (initiator == nullptr) {
+		log("CmdProposeTrade: initiator vanished or is not a market.\n");
+		return;
+	}
+	if (&initiator->owner() != plr) {
+		log("CmdProposeTrade: sender %u, but market owner %u\n", sender(),
+		    initiator->owner().player_number());
+		return;
+	}
+	Market* receiver = dynamic_cast<Market*>(game.objects().get_object(trade_.receiver));
+	if (receiver == nullptr) {
+		log("CmdProposeTrade: receiver vanished or is not a market.\n");
+		return;
+	}
+	if (&initiator->owner() == &receiver->owner()) {
+		log("CmdProposeTrade: Sending and receiving player are the same.\n");
+		return;
+	}
+
+	// TODO(sirver,trading): Maybe check connectivity between markets here and
+	// report errors.
+	game.propose_trade(trade_);
+}
+
+CmdProposeTrade::CmdProposeTrade(StreamRead& des) : PlayerCommand(0, des.unsigned_8()) {
+	trade_.initiator = des.unsigned_32();
+	trade_.receiver = des.unsigned_32();
+	trade_.items_to_send = deserialize_bill_of_materials(&des);
+	trade_.items_to_receive = deserialize_bill_of_materials(&des);
+	trade_.num_batches = des.signed_32();
+}
+
+void CmdProposeTrade::serialize(StreamWrite& ser) {
+	ser.unsigned_8(PLCMD_PROPOSE_TRADE);
+	ser.unsigned_8(sender());
+	ser.unsigned_32(trade_.initiator);
+	ser.unsigned_32(trade_.receiver);
+	serialize_bill_of_materials(trade_.items_to_send, &ser);
+	serialize_bill_of_materials(trade_.items_to_receive, &ser);
+	ser.signed_32(trade_.num_batches);
+}
+
+void CmdProposeTrade::read(FileRead& /* fr */,
+                           EditorGameBase& /* egbase */,
+                           MapObjectLoader& /* mol */) {
+	// TODO(sirver,trading): Implement this.
+	NEVER_HERE();
+}
+
+void CmdProposeTrade::write(FileWrite& /* fw */,
+                            EditorGameBase& /* egbase */,
+                            MapObjectSaver& /* mos */) {
+	// TODO(sirver,trading): Implement this.
+	NEVER_HERE();
+}
 }

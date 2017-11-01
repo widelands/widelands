@@ -31,7 +31,6 @@
 #include "logic/map_objects/tribes/worker.h"
 #include "logic/message_id.h"
 #include "logic/path.h"
-#include "logic/see_unsee_node.h"
 
 namespace Widelands {
 
@@ -848,6 +847,27 @@ private:
 	Warehouse::StockPolicy policy_;
 };
 
-} // namespace Widelands
+struct CmdProposeTrade : PlayerCommand {
+	CmdProposeTrade(uint32_t time, PlayerNumber pn, const Trade& trade);
+
+	QueueCommandTypes id() const override {
+		return QueueCommandTypes::kProposeTrade;
+	}
+
+	void execute(Game& game) override;
+
+	// Network (de-)serialization
+	explicit CmdProposeTrade(StreamRead& des);
+	void serialize(StreamWrite& ser) override;
+
+	// Savegame functions
+	CmdProposeTrade();
+	void write(FileWrite&, EditorGameBase&, MapObjectSaver&) override;
+	void read(FileRead&, EditorGameBase&, MapObjectLoader&) override;
+
+private:
+	Trade trade_;
+};
+}
 
 #endif  // end of include guard: WL_LOGIC_PLAYERCOMMAND_H

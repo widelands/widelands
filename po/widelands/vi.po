@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-09-15 18:56+0000\n"
-"PO-Revision-Date: 2017-09-21 23:33+0000\n"
+"POT-Creation-Date: 2017-10-09 18:20+0000\n"
+"PO-Revision-Date: 2017-10-09 18:23+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Vietnamese (http://www.transifex.com/widelands/widelands/language/vi/)\n"
 "MIME-Version: 1.0\n"
@@ -208,12 +208,12 @@ msgstr ""
 msgid "Dec"
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:63 ../../src/logic/game.cc:211
-#: ../../src/logic/game.cc:258
+#: ../../src/editor/editorinteractive.cc:62 ../../src/logic/game.cc:212
+#: ../../src/logic/game.cc:259
 msgid "Loading tribes"
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:78
+#: ../../src/editor/editorinteractive.cc:77
 #: ../../src/editor/ui_menus/main_menu.cc:43
 #: ../../src/wui/game_options_menu.cc:66
 #: ../../src/wui/interactive_player.cc:208
@@ -221,95 +221,95 @@ msgstr ""
 msgid "Main Menu"
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:82
+#: ../../src/editor/editorinteractive.cc:81
 #: ../../src/editor/ui_menus/tool_menu.cc:45
 msgid "Tools"
 msgstr "Công cụ"
 
-#: ../../src/editor/editorinteractive.cc:86
+#: ../../src/editor/editorinteractive.cc:85
 #: ../../src/editor/ui_menus/toolsize_menu.cc:40
 msgid "Tool Size"
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:90
+#: ../../src/editor/editorinteractive.cc:89
 #: ../../src/ui_fsmenu/launch_mpg.cc:144
 msgid "Players"
 msgstr "Người chơi"
 
-#: ../../src/editor/editorinteractive.cc:99
+#: ../../src/editor/editorinteractive.cc:98
 #: ../../src/wui/interactive_player.cc:224
 #: ../../src/wui/interactive_spectator.cc:75
 msgid "Show Building Spaces (on/off)"
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:102
+#: ../../src/editor/editorinteractive.cc:101
 msgid "Show Immovables (on/off)"
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:106
+#: ../../src/editor/editorinteractive.cc:105
 msgid "Show Animals (on/off)"
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:110
+#: ../../src/editor/editorinteractive.cc:109
 msgid "Show Resources (on/off)"
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:117
+#: ../../src/editor/editorinteractive.cc:116
 #: ../../src/wui/interactive_player.cc:220
 #: ../../src/wui/interactive_spectator.cc:71
 msgid "Minimap"
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:120
+#: ../../src/editor/editorinteractive.cc:119
 #: ../../src/wui/interactive_player.cc:226
 #: ../../src/wui/interactive_spectator.cc:78
 msgid "Reset zoom"
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:128
+#: ../../src/editor/editorinteractive.cc:127
 msgid "Undo"
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:131
+#: ../../src/editor/editorinteractive.cc:130
 msgid "Redo"
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:136
+#: ../../src/editor/editorinteractive.cc:135
 #: ../../src/wui/buildingwindow.cc:330
 msgid "Help"
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:164
+#: ../../src/editor/editorinteractive.cc:163
 msgid "Unsupported format"
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:165
+#: ../../src/editor/editorinteractive.cc:164
 #, c-format
 msgid ""
 "Widelands could not load the file \"%s\". The file format seems to be "
 "incompatible."
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:178 ../../src/logic/game.cc:215
-#: ../../src/logic/game.cc:265
+#: ../../src/editor/editorinteractive.cc:177 ../../src/logic/game.cc:216
+#: ../../src/logic/game.cc:266
 msgid "Creating players"
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:229
+#: ../../src/editor/editorinteractive.cc:225
 msgid "Unsaved Map"
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:230
+#: ../../src/editor/editorinteractive.cc:226
 msgid "The map has not been saved, do you really want to quit?"
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:620
+#: ../../src/editor/editorinteractive.cc:618
 #: ../../src/editor/ui_menus/main_menu_new_map.cc:144
 msgid "Creating empty map…"
 msgstr ""
 
 #. * TRANSLATORS: Default name for new map
-#: ../../src/editor/editorinteractive.cc:624
+#: ../../src/editor/editorinteractive.cc:622
 #: ../../src/editor/ui_menus/main_menu_new_map.cc:151
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:532
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:133
@@ -317,7 +317,7 @@ msgstr ""
 msgid "No Name"
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:627
+#: ../../src/editor/editorinteractive.cc:625
 #: ../../src/editor/ui_menus/main_menu_new_map.cc:152
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:533
 #: ../../src/logic/map.h:170
@@ -325,7 +325,7 @@ msgctxt "author_name"
 msgid "Unknown"
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:634
+#: ../../src/editor/editorinteractive.cc:632
 #, c-format
 msgid "Loading map “%s”…"
 msgstr ""
@@ -498,7 +498,7 @@ msgstr ""
 
 #. * TRANSLATORS: %s are the currently selected items in an editor tool
 #: ../../src/editor/ui_menus/categorized_item_selection_menu.h:198
-#: ../../src/editor/ui_menus/tool_change_resources_options_menu.cc:176
+#: ../../src/editor/ui_menus/tool_change_resources_options_menu.cc:164
 #, c-format
 msgid "Current: %s"
 msgstr ""
@@ -822,23 +822,23 @@ msgstr ""
 msgid "Enter Directory Name:"
 msgstr ""
 
-#: ../../src/editor/ui_menus/player_menu.cc:45
+#: ../../src/editor/ui_menus/player_menu.cc:44
 msgid "Player Options"
 msgstr ""
 
-#: ../../src/editor/ui_menus/player_menu.cc:54
+#: ../../src/editor/ui_menus/player_menu.cc:53
 msgid "Add player"
 msgstr ""
 
-#: ../../src/editor/ui_menus/player_menu.cc:63
+#: ../../src/editor/ui_menus/player_menu.cc:62
 msgid "Remove last player"
 msgstr ""
 
-#: ../../src/editor/ui_menus/player_menu.cc:77
+#: ../../src/editor/ui_menus/player_menu.cc:76
 msgid "Number of Players"
 msgstr ""
 
-#: ../../src/editor/ui_menus/player_menu.cc:206 ../../src/logic/map.cc:309
+#: ../../src/editor/ui_menus/player_menu.cc:205 ../../src/logic/map.cc:309
 #: ../../src/logic/single_player_game_settings_provider.cc:89
 #: ../../src/map_io/map_player_names_and_tribes_packet.cc:94
 #: ../../src/network/gamehost.cc:1568 ../../src/ui_fsmenu/launch_mpg.cc:491
@@ -853,12 +853,12 @@ msgid "Height Tools Options"
 msgstr ""
 
 #: ../../src/editor/ui_menus/tool_change_height_options_menu.cc:47
-#: ../../src/editor/ui_menus/tool_change_resources_options_menu.cc:61
+#: ../../src/editor/ui_menus/tool_change_resources_options_menu.cc:60
 msgid "Increase/Decrease Value:"
 msgstr ""
 
 #: ../../src/editor/ui_menus/tool_change_height_options_menu.cc:59
-#: ../../src/editor/ui_menus/tool_change_resources_options_menu.cc:73
+#: ../../src/editor/ui_menus/tool_change_resources_options_menu.cc:72
 #: ../../src/editor/ui_menus/tool_noise_height_options_menu.cc:74
 msgid "Set Value:"
 msgstr ""
@@ -876,20 +876,20 @@ msgstr ""
 msgid "Ctrl + Click on the map to set terrain height"
 msgstr ""
 
-#: ../../src/editor/ui_menus/tool_change_resources_options_menu.cc:50
+#: ../../src/editor/ui_menus/tool_change_resources_options_menu.cc:49
 #: ../../src/editor/ui_menus/tool_menu.cc:64
 msgid "Resources"
 msgstr ""
 
 #. * TRANSLATORS: Editor change rseources access keys. *
-#: ../../src/editor/ui_menus/tool_change_resources_options_menu.cc:82
+#: ../../src/editor/ui_menus/tool_change_resources_options_menu.cc:81
 msgid ""
 "Click on the map to increase, Shift + Click on the map to decrease the "
 "amount of the selected resource"
 msgstr ""
 
 #. * TRANSLATORS: Editor set rseources access key. *
-#: ../../src/editor/ui_menus/tool_change_resources_options_menu.cc:86
+#: ../../src/editor/ui_menus/tool_change_resources_options_menu.cc:85
 msgid "Ctrl + Click on the map to set the amount of the selected resource"
 msgstr ""
 
@@ -974,41 +974,49 @@ msgid "Loading graphics"
 msgstr ""
 
 #. * TRANSLATORS: Win condition for this game has not been set.
-#: ../../src/logic/game.cc:130
+#: ../../src/logic/game.cc:131
 msgid "Not set"
 msgstr ""
 
-#: ../../src/logic/game.cc:203 ../../src/logic/game.cc:249
-#: ../../src/logic/game.cc:319 ../../src/logic/game.cc:347
+#: ../../src/logic/game.cc:204 ../../src/logic/game.cc:250
+#: ../../src/logic/game.cc:320 ../../src/logic/game.cc:348
 msgid "Preloading map"
 msgstr ""
 
-#: ../../src/logic/game.cc:209 ../../src/logic/game.cc:255
+#: ../../src/logic/game.cc:210 ../../src/logic/game.cc:256
 msgid "Loading world"
 msgstr ""
 
-#: ../../src/logic/game.cc:225 ../../src/logic/game.cc:293
+#: ../../src/logic/game.cc:226 ../../src/logic/game.cc:294
 msgid "Loading map…"
 msgstr ""
 
-#: ../../src/logic/game.cc:332 ../../src/logic/game.cc:364
+#: ../../src/logic/game.cc:333 ../../src/logic/game.cc:365
 #: ../../src/ui_basic/progresswindow.cc:51 ../../src/wlapplication.cc:1366
 msgid "Loading…"
 msgstr ""
 
-#: ../../src/logic/game.cc:427
+#: ../../src/logic/game.cc:428
 msgid "Creating player infrastructure"
 msgstr ""
 
-#: ../../src/logic/game.cc:438 ../../src/logic/player.cc:219
+#: ../../src/logic/game.cc:439 ../../src/logic/player.cc:219
 msgid "Missing starting position"
 msgstr ""
 
-#: ../../src/logic/game.cc:439 ../../src/logic/player.cc:220
+#: ../../src/logic/game.cc:440 ../../src/logic/player.cc:220
 #, c-format
 msgid ""
 "Widelands could not start the game, because player %u has no starting position.\n"
 "You can manually add a starting position with the Widelands Editor to fix this problem."
+msgstr ""
+
+#: ../../src/logic/game.cc:781
+msgid "Trade Offer"
+msgstr ""
+
+#: ../../src/logic/game.cc:783
+msgid "This market has received a new trade offer."
 msgstr ""
 
 #: ../../src/logic/game_data_error.cc:48
@@ -1235,28 +1243,28 @@ msgstr ""
 msgid "No soldier found for this training level!"
 msgstr ""
 
-#: ../../src/logic/map_objects/tribes/productionsite.cc:265
+#: ../../src/logic/map_objects/tribes/productionsite.cc:271
 msgid "(not occupied)"
 msgstr ""
 
-#: ../../src/logic/map_objects/tribes/productionsite.cc:272
+#: ../../src/logic/map_objects/tribes/productionsite.cc:278
 msgid "Worker missing"
 msgid_plural "Workers missing"
 msgstr[0] ""
 
-#: ../../src/logic/map_objects/tribes/productionsite.cc:279
+#: ../../src/logic/map_objects/tribes/productionsite.cc:285
 msgid "(stopped)"
 msgstr ""
 
 #. * TRANSLATORS: Percent in building statistics window, e.g. 85%
 #. * TRANSLATORS: If you wish to add a space, translate as '%i %%'
-#: ../../src/logic/map_objects/tribes/productionsite.cc:378
+#: ../../src/logic/map_objects/tribes/productionsite.cc:384
 #: ../../src/wui/building_statistics_menu.cc:627
 #, c-format
 msgid "%i%%"
 msgstr ""
 
-#: ../../src/logic/map_objects/tribes/productionsite.cc:939
+#: ../../src/logic/map_objects/tribes/productionsite.cc:945
 msgid "Can’t find any more resources!"
 msgstr ""
 
@@ -1378,37 +1386,37 @@ msgstr ""
 msgid "A new warehouse was added to your economy."
 msgstr ""
 
-#: ../../src/logic/map_objects/tribes/worker.cc:114
+#: ../../src/logic/map_objects/tribes/worker.cc:115
 #, c-format
 msgid ""
 "should mine resource %s, which does not exist in world; tribe is not "
 "compatible with world"
 msgstr ""
 
-#: ../../src/logic/map_objects/tribes/worker.cc:215
+#: ../../src/logic/map_objects/tribes/worker.cc:216
 #, c-format
 msgid ""
 "should breed resource type %s, which does not exist in world; tribe is not "
 "compatible with world"
 msgstr ""
 
-#: ../../src/logic/map_objects/tribes/worker.cc:886
+#: ../../src/logic/map_objects/tribes/worker.cc:887
 msgid "A geologist found resources."
 msgstr ""
 
-#: ../../src/logic/map_objects/tribes/worker.cc:1690
+#: ../../src/logic/map_objects/tribes/worker.cc:1774
 #, c-format
 msgid "Your %s can't find a way home and will likely die."
 msgstr ""
 
-#: ../../src/logic/map_objects/tribes/worker.cc:1696
+#: ../../src/logic/map_objects/tribes/worker.cc:1780
 #: ../../src/wui/productionsitewindow.cc:89
 #: ../../src/wui/productionsitewindow.cc:114
 msgid "Worker"
 msgid_plural "Workers"
 msgstr[0] "Công nhân"
 
-#: ../../src/logic/map_objects/tribes/worker.cc:1697
+#: ../../src/logic/map_objects/tribes/worker.cc:1781
 msgid "Worker got lost!"
 msgstr ""
 
@@ -1463,7 +1471,7 @@ msgstr ""
 msgid "Game saved"
 msgstr ""
 
-#: ../../src/map_io/s2map.cc:422
+#: ../../src/map_io/s2map.cc:424
 msgid "Bluebyte Settlers II Map. No comment defined!"
 msgstr ""
 
@@ -3158,7 +3166,7 @@ msgstr ""
 msgid "Enhance to %s"
 msgstr ""
 
-#: ../../src/wui/buildingwindow.cc:239 ../../src/wui/fieldaction.cc:99
+#: ../../src/wui/buildingwindow.cc:239 ../../src/wui/fieldaction.cc:98
 msgid "Construction costs:"
 msgstr ""
 
@@ -3178,7 +3186,7 @@ msgstr ""
 msgid "Hide work area"
 msgstr ""
 
-#: ../../src/wui/buildingwindow.cc:311 ../../src/wui/fieldaction.cc:368
+#: ../../src/wui/buildingwindow.cc:311 ../../src/wui/fieldaction.cc:367
 #: ../../src/wui/shipwindow.cc:140
 msgid "Show Debug Window"
 msgstr ""
@@ -3233,87 +3241,87 @@ msgstr ""
 msgid "Reset to default"
 msgstr ""
 
-#: ../../src/wui/fieldaction.cc:218
+#: ../../src/wui/fieldaction.cc:217
 msgid "Build large building"
 msgstr ""
 
-#: ../../src/wui/fieldaction.cc:218
+#: ../../src/wui/fieldaction.cc:217
 msgid "Build medium building"
 msgstr ""
 
-#: ../../src/wui/fieldaction.cc:218
+#: ../../src/wui/fieldaction.cc:217
 msgid "Build small building"
 msgstr ""
 
-#: ../../src/wui/fieldaction.cc:219
+#: ../../src/wui/fieldaction.cc:218
 msgid "Build port building"
 msgstr ""
 
-#: ../../src/wui/fieldaction.cc:246
+#: ../../src/wui/fieldaction.cc:245
 msgid "Action"
 msgstr ""
 
-#: ../../src/wui/fieldaction.cc:315 ../../src/wui/fieldaction.cc:372
+#: ../../src/wui/fieldaction.cc:314 ../../src/wui/fieldaction.cc:371
 msgid "Build road"
 msgstr ""
 
-#: ../../src/wui/fieldaction.cc:321
+#: ../../src/wui/fieldaction.cc:320
 msgid "Destroy this flag"
 msgstr ""
 
-#: ../../src/wui/fieldaction.cc:326
+#: ../../src/wui/fieldaction.cc:325
 msgid "Configure economy"
 msgstr ""
 
-#: ../../src/wui/fieldaction.cc:329
+#: ../../src/wui/fieldaction.cc:328
 msgid "Send geologist to explore site"
 msgstr ""
 
-#: ../../src/wui/fieldaction.cc:344
+#: ../../src/wui/fieldaction.cc:343
 msgid "Place a flag"
 msgstr ""
 
-#: ../../src/wui/fieldaction.cc:348
+#: ../../src/wui/fieldaction.cc:347
 msgid "Destroy a road"
 msgstr ""
 
-#: ../../src/wui/fieldaction.cc:359
+#: ../../src/wui/fieldaction.cc:358
 msgid "Watch field in a separate window"
 msgstr ""
 
-#: ../../src/wui/fieldaction.cc:361
+#: ../../src/wui/fieldaction.cc:360
 msgid "Toggle building statistics display"
 msgstr ""
 
-#: ../../src/wui/fieldaction.cc:364
+#: ../../src/wui/fieldaction.cc:363
 msgid "Toggle building label display"
 msgstr ""
 
-#: ../../src/wui/fieldaction.cc:374 ../../src/wui/watchwindow.cc:100
+#: ../../src/wui/fieldaction.cc:373 ../../src/wui/watchwindow.cc:100
 msgid "Watch"
 msgstr ""
 
-#: ../../src/wui/fieldaction.cc:388
+#: ../../src/wui/fieldaction.cc:387
 msgid "Start attack"
 msgstr ""
 
-#: ../../src/wui/fieldaction.cc:394
+#: ../../src/wui/fieldaction.cc:393
 msgid "Attack"
 msgstr ""
 
-#: ../../src/wui/fieldaction.cc:472
+#: ../../src/wui/fieldaction.cc:471
 msgid "Build mines"
 msgstr ""
 
-#: ../../src/wui/fieldaction.cc:485
+#: ../../src/wui/fieldaction.cc:484
 msgid "Build flag"
 msgstr ""
 
-#: ../../src/wui/fieldaction.cc:488
+#: ../../src/wui/fieldaction.cc:487
 msgid "Cancel road"
 msgstr ""
 
-#: ../../src/wui/fieldaction.cc:491
+#: ../../src/wui/fieldaction.cc:490
 msgid "Build roads"
 msgstr ""
 
@@ -3376,7 +3384,7 @@ msgid "Do you really want to delete the file %s?"
 msgstr ""
 
 #: ../../src/wui/game_message_menu.cc:51
-#: ../../src/wui/game_message_menu.cc:600
+#: ../../src/wui/game_message_menu.cc:602
 msgid "Messages: Inbox"
 msgstr ""
 
@@ -3405,7 +3413,7 @@ msgid "Sent"
 msgstr ""
 
 #: ../../src/wui/game_message_menu.cc:129
-#: ../../src/wui/game_message_menu.cc:603
+#: ../../src/wui/game_message_menu.cc:605
 msgid "Show Archive"
 msgstr ""
 
@@ -3421,107 +3429,107 @@ msgid "Center main mapview on location"
 msgstr ""
 
 #. * TRANSLATORS: %1% is a tooltip, %2% is the corresponding hotkey
-#: ../../src/wui/game_message_menu.cc:521
-#: ../../src/wui/game_message_menu.cc:532
-#: ../../src/wui/game_message_menu.cc:537
-#: ../../src/wui/game_message_menu.cc:541
-#: ../../src/wui/game_message_menu.cc:545
-#: ../../src/wui/game_message_menu.cc:549
+#: ../../src/wui/game_message_menu.cc:522
+#: ../../src/wui/game_message_menu.cc:533
+#: ../../src/wui/game_message_menu.cc:538
+#: ../../src/wui/game_message_menu.cc:542
+#: ../../src/wui/game_message_menu.cc:546
+#: ../../src/wui/game_message_menu.cc:550
 msgid "%1% (Hotkey: %2%)"
 msgstr ""
 
-#: ../../src/wui/game_message_menu.cc:523
+#: ../../src/wui/game_message_menu.cc:524
 msgctxt "hotkey"
 msgid "Alt + 0"
 msgstr ""
 
 #. * TRANSLATORS: Tooltip in the messages window
-#: ../../src/wui/game_message_menu.cc:523
+#: ../../src/wui/game_message_menu.cc:524
 msgid "Show all messages"
 msgstr ""
 
 #. * TRANSLATORS: Tooltip in the messages window
-#: ../../src/wui/game_message_menu.cc:534
+#: ../../src/wui/game_message_menu.cc:535
 msgid "Show geologists' messages only"
 msgstr ""
 
-#: ../../src/wui/game_message_menu.cc:535
+#: ../../src/wui/game_message_menu.cc:536
 msgctxt "hotkey"
 msgid "Alt + 1"
 msgstr ""
 
-#: ../../src/wui/game_message_menu.cc:539
+#: ../../src/wui/game_message_menu.cc:540
 msgctxt "hotkey"
 msgid "Alt + 2"
 msgstr ""
 
 #. * TRANSLATORS: Tooltip in the messages window
-#: ../../src/wui/game_message_menu.cc:539
+#: ../../src/wui/game_message_menu.cc:540
 msgid "Show economy messages only"
 msgstr ""
 
-#: ../../src/wui/game_message_menu.cc:543
+#: ../../src/wui/game_message_menu.cc:544
 msgctxt "hotkey"
 msgid "Alt + 3"
 msgstr ""
 
 #. * TRANSLATORS: Tooltip in the messages window
-#: ../../src/wui/game_message_menu.cc:543
+#: ../../src/wui/game_message_menu.cc:544
 msgid "Show seafaring messages only"
 msgstr ""
 
-#: ../../src/wui/game_message_menu.cc:547
+#: ../../src/wui/game_message_menu.cc:548
 msgctxt "hotkey"
 msgid "Alt + 4"
 msgstr ""
 
 #. * TRANSLATORS: Tooltip in the messages window
-#: ../../src/wui/game_message_menu.cc:547
+#: ../../src/wui/game_message_menu.cc:548
 msgid "Show warfare messages only"
 msgstr ""
 
-#: ../../src/wui/game_message_menu.cc:551
+#: ../../src/wui/game_message_menu.cc:552
 msgctxt "hotkey"
 msgid "Alt + 5"
 msgstr ""
 
 #. * TRANSLATORS: Tooltip in the messages window
-#: ../../src/wui/game_message_menu.cc:551
+#: ../../src/wui/game_message_menu.cc:552
 msgid "Show scenario messages only"
 msgstr ""
 
-#: ../../src/wui/game_message_menu.cc:593
+#: ../../src/wui/game_message_menu.cc:595
 msgid "Messages: Archive"
 msgstr ""
 
-#: ../../src/wui/game_message_menu.cc:596
+#: ../../src/wui/game_message_menu.cc:598
 msgid "Show Inbox"
 msgstr ""
 
-#: ../../src/wui/game_message_menu.cc:624
+#: ../../src/wui/game_message_menu.cc:626
 #, c-format
 msgid "Restore the selected %d message"
 msgid_plural "Restore the selected %d messages"
 msgstr[0] ""
 
 #. * TRANSLATORS: Tooltip in the messages window
-#: ../../src/wui/game_message_menu.cc:630
+#: ../../src/wui/game_message_menu.cc:632
 msgid "Restore selected message"
 msgstr ""
 
-#: ../../src/wui/game_message_menu.cc:638
+#: ../../src/wui/game_message_menu.cc:640
 #, c-format
 msgid "Archive the selected %d message"
 msgid_plural "Archive the selected %d messages"
 msgstr[0] ""
 
 #. * TRANSLATORS: Tooltip in the messages window
-#: ../../src/wui/game_message_menu.cc:644
+#: ../../src/wui/game_message_menu.cc:646
 msgid "Archive selected message"
 msgstr ""
 
 #. * TRANSLATORS: %s is a tooltip, Del is the corresponding hotkey
-#: ../../src/wui/game_message_menu.cc:649
+#: ../../src/wui/game_message_menu.cc:651
 #, c-format
 msgid "Del: %s"
 msgstr ""
@@ -3578,7 +3586,7 @@ msgid "Ware Statistics"
 msgstr ""
 
 #: ../../src/wui/game_statistics_menu.cc:46 ../../src/wui/stock_menu.cc:36
-#: ../../src/wui/ware_statistics_menu.cc:147 ../../src/wui/waresdisplay.cc:68
+#: ../../src/wui/ware_statistics_menu.cc:146 ../../src/wui/waresdisplay.cc:68
 msgid "Stock"
 msgstr ""
 
@@ -4174,15 +4182,15 @@ msgstr ""
 msgid "Soldiers in training"
 msgstr ""
 
-#: ../../src/wui/ware_statistics_menu.cc:129
+#: ../../src/wui/ware_statistics_menu.cc:128
 msgid "Production"
 msgstr ""
 
-#: ../../src/wui/ware_statistics_menu.cc:135
+#: ../../src/wui/ware_statistics_menu.cc:134
 msgid "Consumption"
 msgstr ""
 
-#: ../../src/wui/ware_statistics_menu.cc:142
+#: ../../src/wui/ware_statistics_menu.cc:141
 msgid "Economy Health"
 msgstr ""
 

@@ -1,6 +1,6 @@
-include "scripting/lunit.lua"
 include "scripting/coroutine.lua"
 include "scripting/infrastructure.lua"
+include "scripting/lunit.lua"
 include "scripting/ui.lua"
 
 game = wl.Game()
@@ -22,7 +22,17 @@ function full_headquarters(player, x, y)
    end
 end
 
+function place_markets()
+   prefilled_buildings(p1, { "barbarians_market", 22, 27 })
+   market_p1 = map:get_field(22, 27).immovable
+   connected_road(p1, market_p1.flag, "tr,tl|", true)
+
+   prefilled_buildings(p2, { "barbarians_market", 31, 27 })
+   market_p2 = map:get_field(31, 27).immovable
+   connected_road(p2, market_p2.flag, "tr,tl|", true)
+end
+
 full_headquarters(p1, 22, 25)
-full_headquarters(p2, 32, 25)
+full_headquarters(p2, 31, 25)
 
 game.desired_speed = 50000

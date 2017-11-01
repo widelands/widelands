@@ -37,7 +37,6 @@ public:
 	void set_time(int32_t);
 
 private:
-	InteractivePlayer* parent_;
 	WuiPlotArea* plot_production_;
 	WuiPlotArea* plot_consumption_;
 	WuiPlotArea* plot_stock_;
