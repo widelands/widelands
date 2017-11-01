@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-09-29 15:54+0000\n"
+"POT-Creation-Date: 2017-10-23 08:29+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Milan Fašina <matrix17@seznam.cz>, 2017\n"
 "Language-Team: Czech (https://www.transifex.com/widelands/teams/35159/cs/)\n"
@@ -1002,7 +1002,7 @@ msgstr "Chvála, chvála, chvála"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:571
 msgid "Saledus is happily worshipping…"
-msgstr ""
+msgstr "Saledus radostně uctívá..."
 
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:573
@@ -1040,7 +1040,7 @@ msgstr "Trénuj rychleji, trénuj tvrději"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:591
 msgid "Saledus is demanding some discipline"
-msgstr ""
+msgstr "Saledus požaduje disciplínu"
 
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:593
@@ -1083,6 +1083,8 @@ msgid ""
 "limited space available. We need some barracks, a training camp and an arena"
 " or a colosseum."
 msgstr ""
+"Proto bychom měli vybudovat všechny výcvikové budovy navzdory tomu, že máme "
+"málo místa. Potřebujeme kasárna, výcvikový tábor a arénu nebo koloseum."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:614
 msgid "Time to get Home Again"
