@@ -698,7 +698,7 @@ void DefaultAI::late_initialization() {
 				bo.positions.push_back(temp_position.first);
 			}
 
-			// Now identify is it is a producer and if also supports some ware
+			// If this is a producer, does it act also as supporter?
 			if (!bo.outputs.empty()) {
 				if (bo.production_hints.empty()) {
 					bo.set_is(BuildingAttribute::kPureProducer);
