@@ -955,7 +955,7 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 	                         3)};
 	const uint16_t total_score = scores[0] + scores[1] + scores[2];
 
-	int32_t inputs[4 * kFNeuronBitSize] = {0};
+	static int32_t inputs[4 * kFNeuronBitSize] = {0};
 	// Reseting values as the variable is static
 	for (int i = 0; i < 4 * kFNeuronBitSize; i++) {
 		inputs[i] = 0;
