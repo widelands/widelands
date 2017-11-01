@@ -2311,7 +2311,7 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 			     bo.new_building == BuildingNecessity::kForced ||
 			     bo.new_building == BuildingNecessity::kAllowed ||
 			     bo.new_building == BuildingNecessity::kNeededPending) &&
-			    (bo.is(BuildingAttribute::kPureProducer) || bo.is(BuildingAttribute::kBarracks))) {
+			    (!bo.outputs.empty() || bo.is(BuildingAttribute::kBarracks))) {
 				if (bo.max_needed_preciousness <= 0) {
 					throw wexception("AI: Max presciousness must not be <= 0 for building: %s",
 					                 bo.desc->name().c_str());
@@ -2718,7 +2718,8 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 						}
 					}
 
-					// This is for a special case this is also supporter
+					// This is for a special case this is also supporter, it considers
+					// producers nearby
 					for (auto ph : bo.production_hints) {
 						prio += management_data.neuron_pool[51].get_result_safe(
 						           bf->producers_nearby.at(ph) * 5, kAbsValue) /
@@ -4786,7 +4787,7 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 			bo.max_needed_preciousness = bo.max_preciousness;  // even when rocks are not needed
 			return BuildingNecessity::kAllowed;
 		} else if (!bo.production_hints.empty() && !bo.is(BuildingAttribute::kSupportingProducer)) {
-			// Pure supporting sites only) {
+			// Pure supporting sites only
 
 			if (bo.cnt_under_construction + bo.unoccupied_count - bo.unconnected_count > 0) {
 				return BuildingNecessity::kForbidden;
