@@ -45,6 +45,14 @@ def generate_translation_stats(po_dir, output_file):
 
     sys.stdout.write('Fetching translation stats ')
 
+    # Prepare the regex. Format provided by pocount:
+    # /home/<snip>/po/<textdomain>/<locale>.po  source words: total: 1701	| 500t	0f	1201u	| 29%t	0%f	70%u
+    regex_translated = re.compile(
+        r"/\S+/(\w+)\.po\s+source words: total: (\d+)\t\| (\d+)t\t\d+f\t\d+u\t\| (\d+)%t\t\d+%f\t\d+%u")
+
+    # We can skip the .pot files
+    regex_pot = re.compile(r"(.+)\.pot(.+)")
+
     # We get errors for non-po files in the base po dir, so we have to walk
     # the subdirs.
     for subdir in sorted(os.listdir(po_dir), key=str.lower):
@@ -71,11 +79,6 @@ def generate_translation_stats(po_dir, output_file):
 
         result = stats_output.split('\n')
 
-        # Format provided by pocount:
-        # /home/<snip>/po/<textdomain>/<locale>.po  source words: total: 1701	| 500t	0f	1201u	| 29%t	0%f	70%u
-        regex_translated = re.compile(
-            r"/\S+/(\w+)\.po\s+source words: total: (\d+)\t\| (\d+)t\t\d+f\t\d+u\t\| (\d+)%t\t\d+%f\t\d+%u")
-
         for line in result:
             match = regex_translated.match(line)
             if match:
@@ -88,6 +91,12 @@ def generate_translation_stats(po_dir, output_file):
                 entry.total = entry.total + int(match.group(2))
                 entry.translated = entry.translated + int(match.group(3))
                 locale_stats[locale] = entry
+
+            elif len(line) > 0: # Empty lines are OK
+                match = regex_pot.match(line)
+                if not match:
+                    print("\nERROR: Invalid line in pocount output:\n" + line)
+                    sys.exit(1)
 
     print('\n\nLocale\tTotal\tTranslated')
     print('------\t-----\t----------')
