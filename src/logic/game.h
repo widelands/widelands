@@ -208,7 +208,6 @@ public:
 	void send_player_ship_explore_island(Ship&, IslandExploreDirection);
 	void send_player_sink_ship(Ship&);
 	void send_player_cancel_expedition_ship(Ship&);
-	void send_player_hide_reveal_field(PlayerNumber pid, const Coords& coords, SeeUnseeNode mode);
 
 	InteractivePlayer* get_ipl();
 

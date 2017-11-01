@@ -848,31 +848,6 @@ private:
 	Warehouse::StockPolicy policy_;
 };
 
-
-struct CmdHideRevealField : public PlayerCommand {
-	CmdHideRevealField() : PlayerCommand() {
-	}  // For savegame loading
-	CmdHideRevealField(const uint32_t time, const PlayerNumber p, const Coords& c, SeeUnseeNode m)
-	   : PlayerCommand(time, p), coords(c), mode(m) {
-	}
-
-	CmdHideRevealField(StreamRead&);
-
-	void write(FileWrite&, EditorGameBase&, MapObjectSaver&) override;
-	void read(FileRead&, EditorGameBase&, MapObjectLoader&) override;
-
-	QueueCommandTypes id() const override {
-		return QueueCommandTypes::kHideRevealField;
-	}
-
-	void execute(Game&) override;
-	void serialize(StreamWrite&) override;
-
-private:
-	Widelands::Coords coords;
-	Widelands::SeeUnseeNode mode;
-};
-
 } // namespace Widelands
 
 #endif  // end of include guard: WL_LOGIC_PLAYERCOMMAND_H

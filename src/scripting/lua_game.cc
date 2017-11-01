@@ -600,7 +600,7 @@ int LuaPlayer::reveal_fields(lua_State* L) {
 
 	lua_pushnil(L); /* first key */
 	while (lua_next(L, 2) != 0) {
-		game.send_player_hide_reveal_field(p.player_number(), (*get_user_class<LuaField>(L, -1))->coords(), SeeUnseeNode::kReveal);
+		p.hide_or_reveal_field(game.get_gametime(), (*get_user_class<LuaField>(L, -1))->coords(), SeeUnseeNode::kReveal);
 		lua_pop(L, 1);
 	}
 
@@ -631,7 +631,7 @@ int LuaPlayer::hide_fields(lua_State* L) {
 
 	lua_pushnil(L); /* first key */
 	while (lua_next(L, 2) != 0) {
-		game.send_player_hide_reveal_field(p.player_number(), (*get_user_class<LuaField>(L, -1))->coords(), mode);
+		p.hide_or_reveal_field(game.get_gametime(), (*get_user_class<LuaField>(L, -1))->coords(), mode);
 		lua_pop(L, 1);
 	}
 
