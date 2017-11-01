@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-09-29 15:54+0000\n"
-"PO-Revision-Date: 2017-10-09 18:12+0000\n"
+"POT-Creation-Date: 2017-10-23 08:29+0000\n"
+"PO-Revision-Date: 2017-10-24 18:01+0000\n"
 "Last-Translator: Jukka Pakarinen\n"
 "Language-Team: Finnish (http://www.transifex.com/widelands/widelands/language/fi/)\n"
 "MIME-Version: 1.0\n"
@@ -183,7 +183,7 @@ msgstr " --fullscreen=[true|false]\n                      Käyttääkkö peli-ik
 
 #: ../../src/wlapplication_messages.cc:126
 msgid " --xres=[...]         Width of the window in pixel."
-msgstr " --xres=[...]         Ikkunan levelys pikseleinä."
+msgstr " --xres=[...]         Ikkunan leveys pikseleinä."
 
 #: ../../src/wlapplication_messages.cc:127
 msgid " --yres=[...]         Height of the window in pixel."
@@ -197,7 +197,7 @@ msgstr "Sisäisen ikkunointijärjestelmän asetukset:"
 msgid ""
 " --animate_map_panning=[yes|no]\n"
 "                      Should automatic map movements be animated."
-msgstr " --animate_map_panning=[yes|no]\n            Pitäisikö automaattiset karttaliikkeet animoida."
+msgstr " --animate_map_panning=[yes|no]\n                      Pitäisikö automaattiset karttaliikkeet animoida."
 
 #: ../../src/wlapplication_messages.cc:136
 msgid ""
