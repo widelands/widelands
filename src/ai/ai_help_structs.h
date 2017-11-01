@@ -78,6 +78,8 @@ enum class BuildingAttribute : uint8_t {
 	kUpgradeExtends,
 	kLogRefiner,
 	kIronMine,
+	kPureProducer,
+	kSupportingProducer,
 };
 
 enum class AiType : uint8_t { kVeryWeak, kWeak, kNormal };

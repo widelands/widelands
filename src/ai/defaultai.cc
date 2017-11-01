@@ -698,6 +698,15 @@ void DefaultAI::late_initialization() {
 				bo.positions.push_back(temp_position.first);
 			}
 
+			// Now identify is it is a producer and if also supports some ware
+			if (!bo.outputs.empty()) {
+				if (bo.production_hints.empty()) {
+					bo.set_is(BuildingAttribute::kPureProducer);
+				} else {
+					bo.set_is(BuildingAttribute::kSupportingProducer);
+				}
+			}
+
 			iron_ore_id = tribe_->ironore();
 
 			if (bo.type == BuildingObserver::Type::kMine) {
@@ -2302,7 +2311,7 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 			     bo.new_building == BuildingNecessity::kForced ||
 			     bo.new_building == BuildingNecessity::kAllowed ||
 			     bo.new_building == BuildingNecessity::kNeededPending) &&
-			    (!bo.outputs.empty() || bo.is(BuildingAttribute::kBarracks))) {
+			    (bo.is(BuildingAttribute::kPureProducer) || bo.is(BuildingAttribute::kBarracks))) {
 				if (bo.max_needed_preciousness <= 0) {
 					throw wexception("AI: Max presciousness must not be <= 0 for building: %s",
 					                 bo.desc->name().c_str());
@@ -2649,7 +2658,7 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 					prio -= (bf->enemy_nearby) * 100;
 					prio -= (expansion_type.get_expansion_type() != ExpansionMode::kEconomy) * 100;
 				} else {  // finally normal productionsites
-					assert(bo.production_hints.empty());
+					assert(bo.production_hints.empty() || bo.is(BuildingAttribute::kSupportingProducer));
 
 					if (bo.new_building == BuildingNecessity::kForced) {
 						prio += 150;
@@ -2707,6 +2716,20 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 						} else {
 							continue;
 						}
+					}
+
+					// This is for a special case this is also supporter
+					for (auto ph : bo.production_hints) {
+						prio += management_data.neuron_pool[51].get_result_safe(
+						           bf->producers_nearby.at(ph) * 5, kAbsValue) /
+						        2;
+					}
+
+					// This considers supporters nearby
+					for (auto ph : bo.outputs) {
+						prio += management_data.neuron_pool[52].get_result_safe(
+						           bf->supporters_nearby.at(ph) * 5, kAbsValue) /
+						        2;
 					}
 
 					if (prio <= 0) {
@@ -4762,7 +4785,8 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 		           bo.cnt_under_construction + bo.unoccupied_count == 0) {
 			bo.max_needed_preciousness = bo.max_preciousness;  // even when rocks are not needed
 			return BuildingNecessity::kAllowed;
-		} else if (!bo.production_hints.empty()) {
+		} else if (!bo.production_hints.empty() && !bo.is(BuildingAttribute::kSupportingProducer)) {
+			// Pure supporting sites only) {
 
 			if (bo.cnt_under_construction + bo.unoccupied_count - bo.unconnected_count > 0) {
 				return BuildingNecessity::kForbidden;
@@ -5126,6 +5150,15 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 			inputs[99] = (wood_policy_ == WoodPolicy::kAllowRangers) ? -1 : 0;
 			inputs[100] = (bo.total_count() == 0) ? 3 : 0;
 			inputs[101] = (bo.total_count() == 0) ? 6 : 0;
+			if (bo.is(BuildingAttribute::kSupportingProducer)) {
+				if (bo.total_count() == 0) {
+					inputs[102] = 1;
+					inputs[103] = 2;
+					inputs[104] = -2;
+				}
+				inputs[105] = -2;
+				inputs[106] = -2;
+			}
 
 			int16_t tmp_score = 0;
 			for (uint8_t i = 0; i < kFNeuronBitSize; ++i) {
