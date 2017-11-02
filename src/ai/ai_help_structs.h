@@ -78,7 +78,6 @@ enum class BuildingAttribute : uint8_t {
 	kUpgradeExtends,
 	kLogRefiner,
 	kIronMine,
-	kPureProducer,
 	kSupportingProducer,
 };
 

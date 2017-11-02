@@ -699,12 +699,8 @@ void DefaultAI::late_initialization() {
 			}
 
 			// If this is a producer, does it act also as supporter?
-			if (!bo.outputs.empty()) {
-				if (bo.production_hints.empty()) {
-					bo.set_is(BuildingAttribute::kPureProducer);
-				} else {
+			if (!bo.outputs.empty() && !bo.production_hints.empty()) {
 					bo.set_is(BuildingAttribute::kSupportingProducer);
-				}
 			}
 
 			iron_ore_id = tribe_->ironore();
