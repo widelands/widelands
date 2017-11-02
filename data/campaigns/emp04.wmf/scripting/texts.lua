@@ -94,7 +94,7 @@ obj_replace_foresters = {
    title=_"Replace our old and uneffective foresters",
    number = 1,
    body = objective_text(_"Build 2 new foresters instead of the old and uneffective ones",
-      listitem_bullet(_[[Our two forester's houses are old and weared out. We should build 2 new ones to increase our productivity.]])
+      listitem_bullet(_[[Our forester's houses are old and weared out. We should build 2 new ones to increase our productivity.]])
    ),
 }
 
@@ -261,11 +261,11 @@ marcus_2 = {
    title=_"a long story",
    body= marcus(_"The official is deeply sighing...",
       -- TRANSLATORS: Marcus - Mayor of fremil welcoming Lutius and explaining the chaos
-      _([[Sire. The emperor left fremil a lot of months ago to fight against the babarians. As this was his duty he delegated the duty to run the city to his former secretary and instated him as his surrogate around here.]])
+      _([[Sire. The emperor left fremil a long time ago to fight against the babarians. As this duty was demanding his full dedication he delegated the authority to run the city to his former secretary and instated him as his surrogate around here.]])
 	  .. paragraphdivider() ..
-      _([[But this was one of his worst decisions ever. The secretary got caught by his powers. His selfish instincts were as worse as his total stupidity and inability to govern the city.]])
+      _([[But this was one of his worst decisions ever. The secretary got caught by his powers. His selfish instincts were as awful as his total stupidity and inability to govern the city.]])
 	  .. paragraphdivider() ..
-      _([[After a while the people discovered the truth and expelled the bloody moron. And afterwards I was elected mayor of this city. But recovering the chaos seems to be a task to big for me alone.]])),
+      _([[After a while the people discovered the truth and expelled the bloody moron. Afterwards they elected me as mayor of this city. But recovering the chaos seems to be a task to big for my abilities alone.]])),
    posy=1,
 }
 
@@ -391,7 +391,7 @@ amalea_7 = {
       _([[One of our lumberjacks told me that the reproduction of our forests is far behind his experience and expectations. So I had a deep look on our foresters effectiveness.]])
       .. paragraphdivider() ..
 	  -- TRANSLATORS: Amalea
-      _([[And guess what, they are both old. Their houses and tools are weared and their seed is degenerated. For this reason they need much more time to plant a tree then usual.]])
+      _([[And guess what, they are very old. Their houses and tools are weared and their seed is degenerated. For this reason they need much more time to plant a tree then usual.]])
       .. paragraphdivider() ..
 	  -- TRANSLATORS: Amalea
       _([[The only solution is we need to build 2 new forester's houses near our lumberjacks. Be sure to first build a new forester and then eventually destroy the old one or at least expel the forester to change houses. Dismantling them is not an option because they are so weared.]]))

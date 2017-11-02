@@ -98,11 +98,13 @@ function no_trees()
 	     end
       end
    end
-   local o = add_campaign_objective(obj_replace_foresters)   
-   campaign_message_box(amalea_7)
-   while #p1:get_buildings("empire_foresters_house") < 2 do sleep(3249) end
-   o.done = true
-   campaign_message_box(amalea_8)
+   if #p1:get_buildings("empire_foresters_house1") > 0 then
+      local o = add_campaign_objective(obj_replace_foresters)   
+      campaign_message_box(amalea_7)
+      while #p1:get_buildings("empire_foresters_house") < 2 do sleep(3249) end
+      o.done = true
+      campaign_message_box(amalea_8)
+   end
 end
 
 -- after having some logs and planks we need to ensure a constant supply of building materials 
@@ -146,8 +148,8 @@ function steel()
    sleep(2500) 
    end
    campaign_message_box(diary_page_6)
+   o.done = true   
    sleep(10000)
-   o.done = true
    
    -- enough tools produced now start to build weapons
    local o1 = add_campaign_objective(obj_recruit_soldiers)
@@ -312,6 +314,7 @@ function training()
    
    o1.done = true
    if enemy == false then
+      enemy = true
       campaign_message_box(saledus_9)
       run(conquer)
    end
@@ -327,6 +330,7 @@ function check_enemy()
 	  
 	     if en_see then
 	        local prior_center = scroll_to_field(en_see)
+			sleep(2000)
 	        campaign_message_box(saledus_11)
 		    enemy = true
 		    run(conquer)
@@ -368,9 +372,9 @@ function wheat_chain()
    local mill = map:get_field(18, 156)
    place_building_in_region(p3, "empire_mill", {map:get_field(18, 156)})
    local ware = map:get_field(21, 158)
-   place_building_in_region(p3, "empire_warehouse", {map:get_field(21, 158)}, {workers = {empire_carrier = 5,}})
+   place_building_in_region(p3, "empire_warehouse", {map:get_field(21, 158)}, {workers = {empire_carrier = 0, empire_recruit = 0,}})
    local sent = map:get_field(19, 157)
-   place_building_in_region(p3, "empire_sentry", {map:get_field(19, 157)})
+   place_building_in_region(p3, "empire_sentry", {map:get_field(19, 157)}, {soldiers = {[{0,0,0,0}] = 1,}})
    o.done = true
    sleep(4000)
    local vesta = map:get_field(19, 157)
@@ -383,7 +387,7 @@ function wheat_chain()
    scroll_to_map_pixel(prior_center)
    
    local hq = p1:get_buildings("empire_headquarters")
-   
+   local wh = p3:get_buildings("empire_warehouse")
    while not ((hq[1]:get_wares("wheat") > 34 and hq[1]:get_wares("wine") > 14) or p3.defeated) do sleep(4000) end
    if p3.defeated then
       o1.done = true
@@ -395,8 +399,8 @@ function wheat_chain()
 	  campaign_message_box(saledus_4)
    else
       o1.done = true
-	  local wh = p3:get_buildings("empire_warehouse")
 	  wh[1]:set_workers("empire_carrier", 0)
+	  wh[1]:set_workers("empire_recruit", 0)
 	  local wheat = hq[1]:get_wares("wheat") - 35
 	  local wine = hq[1]:get_wares("wine") - 15
 	  hq[1]:set_wares("wheat", wheat)
@@ -502,10 +506,6 @@ function mission_thread()
    campaign_message_box(amalea_1)
    run(dismantle)
    run(farm_plans)
-
-  
-   
-
 
 end
 

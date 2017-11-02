@@ -24,28 +24,17 @@ function count_in_warehouses(ware)
    return rv
 end
 
-function enemy_seen()
-   local rv = {}
-   local enemy_border ={}
-   for x=0, map.width-1 do
-      for y=0, map.height-2 do
-         local field = map:get_field(x,y)	 
-		 if field.owner == p2 and (field.trn.owner ~= p2 or field.rn.owner ~= p2 or field.brn.owner ~= p2 or field.bln.owner ~= p2 or field.ln.owner ~= p2 or field.tln.owner ~= p2) then 
-			table.insert(enemy_border, field)
-         end
-	  end
-   end
-   for idx, border in ipairs(enemy_border) do
-      if p1:sees_field(border) then
-      rv = border
-	  break
-	  else
-	  rv = false
-      end
-   end
-   return rv   
-end
 
+function enemy_seen()
+   for x=32, 90 do
+      for y=20, 175 do
+         local field = map:get_field(x,y)	 
+		 if field.owner == p2 and p1:sees_field(field) then 
+			return field
+	     end
+      end
+   end 
+end
 
 function concentric_reveal(plr, center, max_radius, delay)
    if not delay then delay = 100 end
