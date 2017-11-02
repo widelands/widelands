@@ -168,7 +168,7 @@ private:
 
 	// for production sites
 	Widelands::BuildingNecessity
-	check_building_necessity(Widelands::BuildingObserver& bo, PerfEvaluation purpose, uint32_t, const bool = true);
+	check_building_necessity(Widelands::BuildingObserver& bo, PerfEvaluation purpose, uint32_t);
 	Widelands::BuildingNecessity check_warehouse_necessity(Widelands::BuildingObserver&,
 	                                                       uint32_t gametime);
 	void sort_task_pool();
