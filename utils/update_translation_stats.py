@@ -48,7 +48,7 @@ def generate_translation_stats(po_dir, output_file):
     # Prepare the regex. Format provided by pocount:
     # /home/<snip>/po/<textdomain>/<locale>.po  source words: total: 1701	| 500t	0f	1201u	| 29%t	0%f	70%u
     regex_translated = re.compile(
-        r"/\S+/(\w+)\.po\s+source words: total: (\d+)\t\| (\d+)t\t\d+f\t\d+u\t\| (\d+)%t\t\d+%f\t\d+%u")
+        r"/\S+/(\w+)\.po\s+source words: total: (\d+)\s\| (\d+)t\s\d+f\s\d+u\s\| (\d+)%t\s\d+%f\s\d+%u")
 
     # We can skip the .pot files
     regex_pot = re.compile(r"(.+)\.pot(.+)")
