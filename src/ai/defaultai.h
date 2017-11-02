@@ -297,7 +297,6 @@ private:
 	std::unordered_set<uint32_t> port_reserved_coords;
 	std::deque<Widelands::MineableField*> mineable_fields;
 	std::deque<Widelands::Flag const*> new_flags;
-	std::deque<Widelands::Coords> flags_to_be_removed;
 	std::deque<Widelands::Road const*> roads;
 	std::deque<Widelands::EconomyObserver*> economies;
 	std::deque<Widelands::ProductionSiteObserver> productionsites;

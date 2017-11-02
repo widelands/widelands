@@ -3573,7 +3573,9 @@ bool DefaultAI::check_economies() {
 
 		for (std::deque<Flag const*>::iterator j = fl.begin(); j != fl.end();) {
 			if (&(*obs_iter)->economy != &(*j)->economy()) {
+				// the flag belongs to other economy so we must assign it there
 				get_economy_observer((*j)->economy())->flags.push_back(*j);
+				// and erase from this economy's observer
 				j = fl.erase(j);
 			} else {
 				++j;
@@ -3858,7 +3860,6 @@ bool DefaultAI::check_productionsites(uint32_t gametime) {
 
 		// so finally we dismantle the lumberjac
 		site.bo->last_dismantle_time = game().get_gametime();
-		flags_to_be_removed.push_back(site.site->base_flag().get_position());
 		if (connected_to_wh) {
 			game().send_player_dismantle(*site.site);
 		} else {
@@ -3878,7 +3879,6 @@ bool DefaultAI::check_productionsites(uint32_t gametime) {
 		if (site.unoccupied_till + 6 * 60 * 1000 < gametime &&
 		    site.site->get_statistics_percent() == 0) {
 			site.bo->last_dismantle_time = gametime;
-			flags_to_be_removed.push_back(site.site->base_flag().get_position());
 			if (connected_to_wh) {
 				game().send_player_dismantle(*site.site);
 			} else {
@@ -3898,7 +3898,6 @@ bool DefaultAI::check_productionsites(uint32_t gametime) {
 		// after dismantling previous one
 		if (get_stocklevel(*site.bo, gametime) > 250 + productionsites.size() * 5) {  // dismantle
 			site.bo->last_dismantle_time = game().get_gametime();
-			flags_to_be_removed.push_back(site.site->base_flag().get_position());
 			if (connected_to_wh) {
 				game().send_player_dismantle(*site.site);
 			} else {
@@ -3920,7 +3919,6 @@ bool DefaultAI::check_productionsites(uint32_t gametime) {
 			// destruct the building and it's flag (via flag destruction)
 			// the destruction of the flag avoids that defaultAI will have too many
 			// unused roads - if needed the road will be rebuild directly.
-			flags_to_be_removed.push_back(site.site->base_flag().get_position());
 			if (connected_to_wh) {
 				game().send_player_dismantle(*site.site);
 			} else {
@@ -3933,7 +3931,6 @@ bool DefaultAI::check_productionsites(uint32_t gametime) {
 		    site.site->get_statistics_percent() == 0) {
 			// it is possible that there are rocks but quarry is not able to mine them
 			site.bo->last_dismantle_time = game().get_gametime();
-			flags_to_be_removed.push_back(site.site->base_flag().get_position());
 			if (connected_to_wh) {
 				game().send_player_dismantle(*site.site);
 			} else {
@@ -3958,7 +3955,6 @@ bool DefaultAI::check_productionsites(uint32_t gametime) {
 
 			if (site.site->get_statistics_percent() < 30 && get_stocklevel(*site.bo, gametime) > 100) {
 				site.bo->last_dismantle_time = game().get_gametime();
-				flags_to_be_removed.push_back(site.site->base_flag().get_position());
 				if (connected_to_wh) {
 					game().send_player_dismantle(*site.site);
 				} else {
@@ -3972,7 +3968,6 @@ bool DefaultAI::check_productionsites(uint32_t gametime) {
 		if (site.site->get_statistics_percent() <= 10 && site.bo->cnt_built > 1 &&
 		    site.unoccupied_till + 10 * 60 * 1000 < gametime && site.site->can_start_working()) {
 
-			flags_to_be_removed.push_back(site.site->base_flag().get_position());
 			if (connected_to_wh) {
 				game().send_player_dismantle(*site.site);
 			} else {
@@ -4005,7 +4000,6 @@ bool DefaultAI::check_productionsites(uint32_t gametime) {
 
 		site.bo->last_dismantle_time = game().get_gametime();
 
-		flags_to_be_removed.push_back(site.site->base_flag().get_position());
 		if (connected_to_wh) {
 			game().send_player_dismantle(*site.site);
 		} else {
@@ -4022,7 +4016,6 @@ bool DefaultAI::check_productionsites(uint32_t gametime) {
 	    ((game().get_gametime() - site.built_time) > 10 * 60 * 1000)) {
 
 		site.bo->last_dismantle_time = game().get_gametime();
-		flags_to_be_removed.push_back(site.site->base_flag().get_position());
 		if (connected_to_wh) {
 			game().send_player_dismantle(*site.site);
 		} else {
@@ -4045,7 +4038,6 @@ bool DefaultAI::check_productionsites(uint32_t gametime) {
 		    site.bo->cnt_built > site.bo->cnt_target) {
 
 			site.bo->last_dismantle_time = game().get_gametime();
-			flags_to_be_removed.push_back(site.site->base_flag().get_position());
 			if (connected_to_wh) {
 				game().send_player_dismantle(*site.site);
 			} else {
@@ -4106,7 +4098,6 @@ bool DefaultAI::check_mines_(uint32_t const gametime) {
 	if (site.dismantle_pending_since != kNever) {
 		assert(site.dismantle_pending_since <= gametime);
 		if (set_inputs_to_zero(site) || site.dismantle_pending_since + 5 * 60 * 1000 < gametime) {
-			flags_to_be_removed.push_back(site.site->base_flag().get_position());
 			if (connected_to_wh) {
 				game().send_player_dismantle(*site.site);
 			} else {

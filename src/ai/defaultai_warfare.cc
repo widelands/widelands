@@ -866,7 +866,6 @@ bool DefaultAI::check_militarysites(uint32_t gametime) {
 	} else if (should_be_dismantled && can_be_dismantled) {
 		changed = true;
 		if (ms->get_playercaps() & Widelands::Building::PCap_Dismantle) {
-			flags_to_be_removed.push_back(ms->base_flag().get_position());
 			game().send_player_dismantle(*ms);
 			military_last_dismantle_ = game().get_gametime();
 		} else {
