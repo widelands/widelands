@@ -45,13 +45,8 @@ def generate_translation_stats(po_dir, output_file):
 
     sys.stdout.write('Fetching translation stats ')
 
-    # Prepare the regex. Format provided by pocount, where blank spaces can also contain ACSCII color control characters, and be tabs or space:
-    # /home/<snip>/po/<textdomain>/<locale>.po  source words: total: 1701	| 500t	0f	1201u	| 29%t	0%f	70%u
-    regex_translated = re.compile(
-        r"/\S+/(\w+)\.po\W+source words:\W+total:\W+(\d+)\W+\|\W+(\d+)t\W+\d+f\W+\d+u\W+\|\W+(\d+)%t\W+\d+%f\W+\d+%u")
-
-    # We can skip the .pot files
-    regex_pot = re.compile(r"(.+)\.pot(.+)")
+    # Regex to extract the locale from the po filenames.
+    regex_po = re.compile(r"/\S+/(\w+)\.po")
 
     # We get errors for non-po files in the base po dir, so we have to walk
     # the subdirs.
@@ -66,7 +61,7 @@ def generate_translation_stats(po_dir, output_file):
         try:
             # We need shell=True, otherwise we get "No such file or directory".
             stats_output = check_output(
-                ['pocount ' + subdir + ' --short-words'], stderr=subprocess.STDOUT, shell=True)
+                ['pocount ' + subdir + ' --csv'], stderr=subprocess.STDOUT, shell=True)
             if 'ERROR' in stats_output:
                 print('\nError running pocount:\n' + stats_output.split('\n', 0)
                       [0]) + '\nAborted creating translation statistics.'
@@ -80,23 +75,16 @@ def generate_translation_stats(po_dir, output_file):
         result = stats_output.split('\n')
 
         for line in result:
-            match = regex_translated.match(line)
-            if match:
+            cells = line.split(",")
+            po_filename = cells[0]
+            if po_filename.endswith(".po"):
                 entry = TranslationStats()
-                locale = match.group(1)
-
+                locale = regex_po.match(po_filename).group(1)
                 if locale in locale_stats:
                     entry = locale_stats[locale]
-
-                entry.total = entry.total + int(match.group(2))
-                entry.translated = entry.translated + int(match.group(3))
+                entry.total = entry.total + int(cells[9])
+                entry.translated = entry.translated + int(cells[3])
                 locale_stats[locale] = entry
-
-            elif len(line) > 0: # Empty lines are OK
-                match = regex_pot.match(line)
-                if not match:
-                    print("\nERROR: Invalid line in pocount output:\n" + line)
-                    sys.exit(1)
 
     print('\n\nLocale\tTotal\tTranslated')
     print('------\t-----\t----------')
