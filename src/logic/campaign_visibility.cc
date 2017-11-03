@@ -26,13 +26,14 @@
 
 #include "base/wexception.h"
 #include "io/filesystem/filesystem.h"
+#include "logic/save_handler.h"
 #include "profile/profile.h"
 
 /**
  * Get the path of campaign visibility save-file
  */
 std::string CampaignVisibilitySave::get_path() {
-	std::string savepath = "save";
+	std::string savepath = SaveHandler::get_base_dir();
 	g_fs->ensure_directory_exists(savepath);  // Make sure save directory exists
 	savepath += "/campvis";                   // add the name of save-file
 

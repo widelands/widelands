@@ -52,17 +52,19 @@ void Icon::set_no_frame() {
 
 void Icon::draw(RenderTarget& dst) {
 	if (pic_) {
-		const float scale = std::min(1.f, std::min(static_cast<float>(get_w()) / pic_->width(),
-		                                           static_cast<float>(get_h()) / pic_->height()));
+		const int available_width = draw_frame_ ? get_w() - 2 : get_w();
+		const int available_height = draw_frame_ ? get_h() - 2 : get_h();
+		const float scale = std::min(1.f, std::min(static_cast<float>(available_width) / pic_->width(),
+		                                           static_cast<float>(available_height) / pic_->height()));
 		// We need to be pixel perfect, so we use ints.
-		const int width = scale * get_w();
-		const int height = scale * get_h();
-		const int x = (get_w() - width) / 2;
-		const int y = (get_h() - height) / 2;
-		dst.blitrect_scale(Rectf(x, y, width, height), pic_,
+		const int width = scale * available_width;
+		const int height = scale * available_height;
+		const int x = (available_width - width) / 2;
+		const int y = (available_height - height) / 2;
+		dst.blitrect_scale(Rectf(draw_frame_ ? x + 1 : x, draw_frame_? y + 1: y, width, height), pic_,
 		                   Recti(0, 0, pic_->width(), pic_->height()), 1., BlendMode::UseAlpha);
 		if (draw_frame_) {
-			dst.draw_rect(Recti(x, y, width, height), framecolor_);
+			dst.draw_rect(Recti(x, y, width + 2, height + 2), framecolor_);
 		}
 	}
 }

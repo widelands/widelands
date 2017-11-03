@@ -298,13 +298,13 @@ void LoadOrSaveGame::fill_table() {
 		gamefiles = filter(g_fs->list_directory(REPLAY_DIR),
 		                   [](const std::string& fn) { return boost::ends_with(fn, REPLAY_SUFFIX); });
 	} else {
-		gamefiles = g_fs->list_directory("save");
+		gamefiles = g_fs->list_directory(SaveHandler::get_base_dir());
 	}
 
 	Widelands::GamePreloadPacket gpdp;
 
 	for (const std::string& gamefilename : gamefiles) {
-		if (gamefilename == "save/campvis" || gamefilename == "save\\campvis") {
+		if (gamefilename == g_fs->fix_cross_file("save/campvis")) {
 			continue;
 		}
 

@@ -48,17 +48,15 @@ MultilineTextarea::MultilineTextarea(Panel* const parent,
      force_new_renderer_(false),
      use_old_renderer_(false),
      scrollbar_(this, get_w() - Scrollbar::kSize, 0, Scrollbar::kSize, h, button_background, false),
-     scrollmode_(scroll_mode),
      pic_background_(nullptr) {
-	assert(scrollmode_ == MultilineTextarea::ScrollMode::kNoScrolling || Scrollbar::kSize <= w);
-	set_scrollmode(scroll_mode);
 	set_thinks(false);
 
 	scrollbar_.moved.connect(boost::bind(&MultilineTextarea::scrollpos_changed, this, _1));
 
 	scrollbar_.set_singlestepsize(text_height());
 	scrollbar_.set_steps(1);
-	layout();
+	set_scrollmode(scroll_mode);
+	assert(scrollmode_ == MultilineTextarea::ScrollMode::kNoScrolling || Scrollbar::kSize <= w);
 }
 
 /**

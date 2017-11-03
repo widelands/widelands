@@ -188,8 +188,9 @@ private:
 };
 
 void GameMainMenuSaveGame::ok() {
-	if (filename_editbox_.text().empty())
+	if (filename_editbox_.text().empty()) {
 		return;
+	}
 
 	std::string const complete_filename =
 	   igbase().game().save_handler().create_file_name(curdir_, filename_editbox_.text());
