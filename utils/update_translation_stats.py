@@ -45,15 +45,10 @@ def generate_translation_stats(po_dir, output_file):
 
     sys.stdout.write('Fetching translation stats ')
 
-    # Prepare the regex. Format provided by pocount:
+    # Prepare the regex. Format provided by pocount, where blank spaces can also contain ACSCII color control characters, and be tabs or space:
     # /home/<snip>/po/<textdomain>/<locale>.po  source words: total: 1701	| 500t	0f	1201u	| 29%t	0%f	70%u
     regex_translated = re.compile(
-        r"/\S+/(\w+)\.po\s+source words: total: (\d+)\s\| (\d+)t\s\d+f\s\d+u\s\| (\d+)%t\s\d+%f\s\d+%u")
-
-    # Some versions of pocount produce slightly different output:
-    # /home/<snip>/po/<textdomain>/<locale>.po source words: total: 438 | 438t 0f 0u | 100.0%t 0.0%f 0.0%u
-    regex_translated2 = re.compile(
-        r"/\S+/(\w+)\.po\s+source words: total: (\d+)\s\| (\d+)t\s\d+f\s\d+u\s\| (\d+)\.\d+%t\s\d+\.\d+%f\s\d+\.\d+%u")
+        r"/\S+/(\w+)\.po\W+source words:\W+total:\W+(\d+)\W+\|\W+(\d+)t\W+\d+f\W+\d+u\W+\|\W+(\d+)%t\W+\d+%f\W+\d+%u")
 
     # We can skip the .pot files
     regex_pot = re.compile(r"(.+)\.pot(.+)")
@@ -86,8 +81,6 @@ def generate_translation_stats(po_dir, output_file):
 
         for line in result:
             match = regex_translated.match(line)
-            if not match:
-                match = regex_translated2.match(line)
             if match:
                 entry = TranslationStats()
                 locale = match.group(1)
