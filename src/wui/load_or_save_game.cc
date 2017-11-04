@@ -133,7 +133,6 @@ LoadOrSaveGame::LoadOrSaveGame(UI::Panel* parent,
 	table_.set_column_compare(
 	   0, boost::bind(&LoadOrSaveGame::compare_date_descending, this, _1, _2));
 	table_.set_sort_column(0);
-	table_.focus();
 	fill_table();
 
 	table_box_->add(&table_, UI::Box::Resizing::kExpandBoth);
@@ -195,6 +194,8 @@ const SavegameData* LoadOrSaveGame::entry_selected() {
 		delete_->set_tooltip("");
 	}
 	game_details_.update(*result);
+	delete_->set_enabled(table().has_selection());
+	// TODO(GunChleoc): Take care of the OK button too.
 	return result;
 }
 
@@ -273,10 +274,6 @@ void LoadOrSaveGame::clicked_delete() {
 		// there is some number of entries where the message window is too big to
 		// be drawn completely and parts are cut off at the top and bottom.
 
-		// NOCOM(#codereview): A small optical comment: When having slightly less
-		// than the "use scroll box" number of entries selected, the window with
-		// the list is bigger than with the scrollbox. No need to fix this, though.
-
 		// NOCOM(#codereview): The removal dialog displays the filename when a
 		// single file is selected but a list of "mapnames + saved-on-date" when
 		// multiple files are selected. The filename is not that useful I think,
@@ -285,8 +282,9 @@ void LoadOrSaveGame::clicked_delete() {
 		// bit strange but is no bug. For campaign save games the name of the save
 		// and the filename can both be quite long. So using the full name in the
 		// "multiple files selected" list is probably no good idea.
+
 		UI::WLMessageBox confirmationBox(
-		   parent_, ngettext("Confirm deleting file", "Confirm deleting files", no_selections),
+		   parent_->get_parent()->get_parent(), ngettext("Confirm deleting file", "Confirm deleting files", no_selections),
 		   message, UI::WLMessageBox::MBoxType::kOkCancel);
 		do_delete = confirmationBox.run<UI::Panel::Returncodes>() == UI::Panel::Returncodes::kOk;
 	}
@@ -299,11 +297,19 @@ void LoadOrSaveGame::clicked_delete() {
 			}
 		}
 		fill_table();
-		// NOCOM(#codereview): Select something meaningful if possible.
-		// NOCOM(#codereview) : Make sure that the game details are updated
-		// NOCOM(#codereview) : Fix OK button state - only enabled is something is selected
+
+		// Select something meaningful if possible.
+		// NOCOM scroll the table
+		const uint32_t selectme = std::max(0U, *selections.begin());
+		if (selectme < table_.size() - 1) {
+			table_.select(selectme);
+		} else if (!table_.empty()) {
+			table_.select(table_.size() - 1);
+		}
+		// Make sure that the game details are updated
+		entry_selected();
 	}
-	// NOCOM(#codereview): When the removal dialog was open, navigation with arrow keys no longer works.
+	// TODO(GunChleoc): When the removal dialog was open, navigation with arrow keys no longer works.
 }
 
 UI::Button* LoadOrSaveGame::delete_button() {
@@ -312,7 +318,7 @@ UI::Button* LoadOrSaveGame::delete_button() {
 
 void LoadOrSaveGame::fill_table() {
 
-	games_data_.clear();
+	clear_selections();
 	table_.clear();
 
 	FilenameSet gamefiles;
@@ -507,4 +513,5 @@ void LoadOrSaveGame::fill_table() {
 		}
 	}
 	table_.sort();
+	table_.focus();
 }

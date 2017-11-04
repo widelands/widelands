@@ -137,6 +137,10 @@ void GameDetails::clear() {
 
 void GameDetails::update(const SavegameData& gamedata) {
 	clear();
+	// Do not display anything if gamedata is empty
+	if (gamedata.errormessage.empty() && gamedata.filename_list.empty() && gamedata.mapname.empty()) {
+		return;
+	}
 
 	if (gamedata.errormessage.empty()) {
 		if (gamedata.filename_list.empty()) {
