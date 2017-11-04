@@ -266,6 +266,25 @@ void LoadOrSaveGame::clicked_delete() {
 
 	bool do_delete = SDL_GetModState() & KMOD_CTRL;
 	if (!do_delete) {
+		// NOCOM(#codereview): When selecting many entries (around 30 for me in
+		// non-fullscreen mode) the "really remove" dialog box can become cut off.
+		// First, the entries are all listed normally which is fine. At some point
+		// the dialog box uses a scroll box which is fine, too. Between this cases
+		// there is some number of entries where the message window is too big to
+		// be drawn completely and parts are cut off at the top and bottom.
+
+		// NOCOM(#codereview): A small optical comment: When having slightly less
+		// than the "use scroll box" number of entries selected, the window with
+		// the list is bigger than with the scrollbox. No need to fix this, though.
+
+		// NOCOM(#codereview): The removal dialog displays the filename when a
+		// single file is selected but a list of "mapnames + saved-on-date" when
+		// multiple files are selected. The filename is not that useful I think,
+		// maybe change it to the name of the save? When I had multiple campaign
+		// saves selected, the list contained five times the same entry. Looked a
+		// bit strange but is no bug. For campaign save games the name of the save
+		// and the filename can both be quite long. So using the full name in the
+		// "multiple files selected" list is probably no good idea.
 		UI::WLMessageBox confirmationBox(
 		   parent_, ngettext("Confirm deleting file", "Confirm deleting files", no_selections),
 		   message, UI::WLMessageBox::MBoxType::kOkCancel);
@@ -280,7 +299,11 @@ void LoadOrSaveGame::clicked_delete() {
 			}
 		}
 		fill_table();
+		// NOCOM(#codereview): Select something meaningful if possible.
+		// NOCOM(#codereview) : Make sure that the game details are updated
+		// NOCOM(#codereview) : Fix OK button state - only enabled is something is selected
 	}
+	// NOCOM(#codereview): When the removal dialog was open, navigation with arrow keys no longer works.
 }
 
 UI::Button* LoadOrSaveGame::delete_button() {
