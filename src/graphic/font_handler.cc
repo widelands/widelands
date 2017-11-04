@@ -118,18 +118,6 @@ void FontHandler::flush() {
 	d.reset(new Data);
 }
 
-/*
- * Returns the height of the font, in pixels.
-*/
-uint32_t FontHandler::get_fontheight(const std::string& name, int32_t const size) {
-	TTF_Font* const f = Font::get(name, size)->get_ttf_font();
-	const int32_t fontheight = TTF_FontHeight(f);
-	if (fontheight < 0)
-		throw wexception("TTF_FontHeight returned a negative value, which does not have a "
-		                 "known meaning.");
-	return fontheight;
-}
-
 /**
  * Get a cache entry for the given text (without linebreaks!) rendered
  * in the given style.

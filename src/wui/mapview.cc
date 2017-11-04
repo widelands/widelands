@@ -23,15 +23,10 @@
 
 #include "base/macros.h"
 #include "base/math.h"
-#include "graphic/game_renderer.h"
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
-#include "logic/map.h"
-#include "logic/map_objects/draw_text.h"
-#include "logic/player.h"
+#include "profile/profile.h"
 #include "wlapplication.h"
-#include "wui/interactive_base.h"
-#include "wui/interactive_player.h"
 #include "wui/mapviewpixelfunctions.h"
 
 namespace {
@@ -295,10 +290,10 @@ bool MapView::ViewArea::contains_map_pixel(const Vector2f& map_pixel) const {
 }
 
 MapView::MapView(
-   UI::Panel* parent, int32_t x, int32_t y, uint32_t w, uint32_t h, InteractiveBase& player)
+   UI::Panel* parent, const Widelands::Map& map, int32_t x, int32_t y, uint32_t w, uint32_t h)
    : UI::Panel(parent, x, y, w, h),
-     renderer_(new GameRenderer()),
-     intbase_(player),
+     animate_map_panning_(g_options.pull_section("global").get_bool("animate_map_panning", true)),
+     map_(map),
      view_(),
      last_mouse_pos_(Vector2i::zero()),
      dragging_(false) {
@@ -343,9 +338,7 @@ void MapView::mouse_to_pixel(const Vector2i& pixel, const Transition& transition
 	NEVER_HERE();
 }
 
-void MapView::draw(RenderTarget& dst) {
-	Widelands::EditorGameBase& egbase = intbase().egbase();
-
+FieldsToDraw* MapView::draw_terrain(const Widelands::EditorGameBase& egbase, RenderTarget* dst) {
 	uint32_t now = SDL_GetTicks();
 	while (!view_plans_.empty()) {
 		auto& plan = view_plans_.front();
@@ -385,45 +378,18 @@ void MapView::draw(RenderTarget& dst) {
 		break;
 	}
 
-	if (upcast(Widelands::Game, game, &egbase)) {
-		// Bail out if the game isn't actually loaded.
-		// This fixes a crash with displaying an error dialog during loading.
-		if (!game->is_loaded())
-			return;
-	}
-
-	TextToDraw text_to_draw = TextToDraw::kNone;
-	auto display_flags = intbase().get_display_flags();
-	if (display_flags & InteractiveBase::dfShowCensus) {
-		text_to_draw = text_to_draw | TextToDraw::kCensus;
-	}
-	if (display_flags & InteractiveBase::dfShowStatistics) {
-		text_to_draw = text_to_draw | TextToDraw::kStatistics;
-	}
-
-	if (upcast(InteractivePlayer const, interactive_player, &intbase())) {
-		const GameRenderer::Overlays overlays{
-		   text_to_draw, interactive_player->road_building_preview()};
-		renderer_->rendermap(
-		   egbase, view_.viewpoint, view_.zoom, interactive_player->player(), overlays, &dst);
-	} else {
-		const auto draw_immovables = intbase().draw_immovables() ?
-		                                GameRenderer::DrawImmovables::kYes :
-		                                GameRenderer::DrawImmovables::kNo;
-		const auto draw_bobs =
-		   intbase().draw_bobs() ? GameRenderer::DrawBobs::kYes : GameRenderer::DrawBobs::kNo;
-		const GameRenderer::Overlays overlays{static_cast<TextToDraw>(text_to_draw), {}};
-		renderer_->rendermap(
-		   egbase, view_.viewpoint, view_.zoom, overlays, draw_immovables, draw_bobs, &dst);
-	}
+	fields_to_draw_.reset(egbase, view_.viewpoint, view_.zoom, dst);
+	const float scale = 1.f / view_.zoom;
+	::draw_terrain(egbase, fields_to_draw_, scale, dst);
+	return &fields_to_draw_;
 }
 
-void MapView::set_view(const View& target_view, const Transition& transition) {
-	const Widelands::Map& map = intbase().egbase().map();
+void MapView::set_view(const View& target_view, const Transition& passed_transition) {
+	const Transition transition = animate_map_panning_ ? passed_transition : Transition::Jump;
 	switch (transition) {
 	case Transition::Jump: {
 		view_ = target_view;
-		MapviewPixelFunctions::normalize_pix(map, &view_.viewpoint);
+		MapviewPixelFunctions::normalize_pix(map_, &view_.viewpoint);
 		changeview();
 		return;
 	}
@@ -431,7 +397,7 @@ void MapView::set_view(const View& target_view, const Transition& transition) {
 	case Transition::Smooth: {
 		const TimestampedView current = animation_target_view();
 		const auto plan =
-		   plan_map_transition(current.t, map, current.view, target_view, get_w(), get_h());
+		   plan_map_transition(current.t, map_, current.view, target_view, get_w(), get_h());
 		if (!plan.empty()) {
 			view_plans_.push_back(plan);
 		}
@@ -441,13 +407,12 @@ void MapView::set_view(const View& target_view, const Transition& transition) {
 }
 
 void MapView::scroll_to_field(const Widelands::Coords& c, const Transition& transition) {
-	const Widelands::Map& map = intbase().egbase().map();
 	assert(0 <= c.x);
-	assert(c.x < map.get_width());
+	assert(c.x < map_.get_width());
 	assert(0 <= c.y);
-	assert(c.y < map.get_height());
+	assert(c.y < map_.get_height());
 
-	const Vector2f in_mappixel = MapviewPixelFunctions::to_map_pixel(map.get_fcoords(c));
+	const Vector2f in_mappixel = MapviewPixelFunctions::to_map_pixel(map_.get_fcoords(c));
 	scroll_to_map_pixel(in_mappixel, transition);
 }
 
@@ -459,7 +424,7 @@ void MapView::scroll_to_map_pixel(const Vector2f& pos, const Transition& transit
 }
 
 MapView::ViewArea MapView::view_area() const {
-	return ViewArea(get_view_area(view_, get_w(), get_h()), intbase().egbase().map());
+	return ViewArea(get_view_area(view_, get_w(), get_h()), map_);
 }
 
 const MapView::View& MapView::view() const {
@@ -483,14 +448,18 @@ void MapView::stop_dragging() {
 bool MapView::handle_mousepress(uint8_t const btn, int32_t const x, int32_t const y) {
 	if (btn == SDL_BUTTON_LEFT) {
 		stop_dragging();
-		track_sel(Vector2i(x, y));
-		fieldclicked();
-	} else if (btn == SDL_BUTTON_RIGHT) {
+		const auto node_and_triangle = track_sel(Vector2i(x, y));
+		field_clicked(node_and_triangle);
+		// Do not return true, because we want to give our parent a chance to
+		// also handle the click.
+	}
+	if (btn == SDL_BUTTON_RIGHT) {
 		dragging_ = true;
 		grab_mouse(true);
 		WLApplication::get()->set_mouse_lock(true);
+		return true;
 	}
-	return true;
+	return false;
 }
 
 bool MapView::handle_mouserelease(const uint8_t btn, int32_t, int32_t) {
@@ -514,9 +483,8 @@ bool MapView::handle_mousemove(
 		}
 	}
 
-	if (!intbase().get_sel_freeze())
-		track_sel(Vector2i(x, y));
-	return true;
+	track_sel(Vector2i(x, y));
+	return false;
 }
 
 bool MapView::handle_mousewheel(uint32_t which, int32_t /* x */, int32_t y) {
@@ -572,10 +540,12 @@ bool MapView::is_animating() const {
 	return !view_plans_.empty() || !mouse_plans_.empty();
 }
 
-void MapView::track_sel(const Vector2i& p) {
+Widelands::NodeAndTriangle<> MapView::track_sel(const Vector2i& p) {
 	Vector2f p_in_map = to_map(p);
-	intbase_.set_sel_pos(MapviewPixelFunctions::calc_node_and_triangle(
-	   intbase().egbase().map(), p_in_map.x, p_in_map.y));
+	const auto node_and_triangle =
+	   MapviewPixelFunctions::calc_node_and_triangle(map_, p_in_map.x, p_in_map.y);
+	track_selection(node_and_triangle);
+	return node_and_triangle;
 }
 
 bool MapView::handle_key(bool down, SDL_Keysym code) {

@@ -23,7 +23,7 @@ using namespace Widelands;
 
 bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 
-	Map& map = game().map();
+	const Map& map = game().map();
 
 	PlayerNumber const nr_players = map.get_nrplayers();
 	uint32_t plr_in_game = 0;
@@ -567,6 +567,9 @@ bool DefaultAI::check_trainingsites(uint32_t gametime) {
 	TrainingSite* ts = trainingsites.front().site;
 	TrainingSiteObserver& tso = trainingsites.front();
 
+	// Make sure we are not above ai type limit
+	assert(tso.bo->total_count() <= tso.bo->cnt_limit_by_aimode);
+
 	const DescriptionIndex enhancement = ts->descr().enhancement();
 
 	if (enhancement != INVALID_INDEX && ts_without_trainers_ == 0 && mines_.size() > 3 &&
@@ -777,8 +780,8 @@ bool DefaultAI::check_militarysites(uint32_t gametime) {
 
 	// Check next militarysite
 	bool changed = false;
-	Map& map = game().map();
 	MilitarySite* ms = militarysites.front().site;
+	MilitarySiteObserver& mso = militarysites.front();
 
 	// Don't do anything if last change took place lately
 	if (militarysites.front().last_change + 2 * 60 * 1000 > gametime) {
@@ -787,7 +790,10 @@ bool DefaultAI::check_militarysites(uint32_t gametime) {
 		return false;
 	}
 
-	FCoords f = map.get_fcoords(ms->get_position());
+	// Make sure we are not above ai type limit
+	assert(mso.bo->total_count() <= mso.bo->cnt_limit_by_aimode);
+
+	FCoords f = game().map().get_fcoords(ms->get_position());
 
 	BuildableField bf(f);
 	update_buildable_field(bf);
@@ -877,16 +883,6 @@ bool DefaultAI::check_militarysites(uint32_t gametime) {
 	militarysites.push_back(militarysites.front());
 	militarysites.pop_front();
 	return changed;
-}
-
-uint32_t DefaultAI::barracks_count() {
-	uint32_t count = 0;
-	for (auto ps : productionsites) {
-		if (ps.bo->is(BuildingAttribute::kBarracks)) {
-			count += ps.bo->total_count();
-		}
-	}
-	return count;
 }
 
 // This calculates strength of vector of soldiers, f.e. soldiers in a building or
@@ -1239,10 +1235,10 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 void DefaultAI::soldier_trained(const TrainingSite& site) {
 
 	const uint32_t gametime = game().get_gametime();
-	soldier_trained_log.push(gametime);
 
 	for (TrainingSiteObserver& trainingsite_obs : trainingsites) {
 		if (trainingsite_obs.site == &site) {
+			soldier_trained_log.push(gametime, trainingsite_obs.bo->id);
 			if (trainingsite_obs.site->soldier_control()->soldier_capacity() > 0) {
 				game().send_player_change_soldier_capacity(
 				   *trainingsite_obs.site,

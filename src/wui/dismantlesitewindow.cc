@@ -28,7 +28,7 @@ DismantleSiteWindow::DismantleSiteWindow(InteractiveGameBase& parent,
                                          UI::UniqueWindow::Registry& reg,
                                          Widelands::DismantleSite& ds,
                                          bool avoid_fastclick)
-   : BuildingWindow(parent, reg, ds, avoid_fastclick) {
+   : BuildingWindow(parent, reg, ds, avoid_fastclick), progress_(nullptr) {
 	init(avoid_fastclick);
 }
 

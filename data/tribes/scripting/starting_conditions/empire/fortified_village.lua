@@ -66,6 +66,7 @@ return {
             empire_miner = 4,
             empire_stonemason = 1,
             empire_toolsmith = 1,
+            empire_trainer = 3,
             empire_donkey = 5,
          },
          soldiers = {

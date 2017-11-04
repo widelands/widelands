@@ -10,8 +10,10 @@ wl_library(network
     gameclient.h
     gamehost.cc
     gamehost.h
+    netclient_interface.h
     netclient.cc
     netclient.h
+    nethost_interface.h
     nethost.cc
     nethost.h
     network.cc
@@ -33,7 +35,6 @@ wl_library(network
     build_info
     chat
     game_io
-    graphic_playercolor
     helper
     io_fileread
     io_filesystem

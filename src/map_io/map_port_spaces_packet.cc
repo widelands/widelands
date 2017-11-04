@@ -39,8 +39,8 @@ void MapPortSpacesPacket::read(FileSystem& fs, EditorGameBase& egbase, bool, Map
 	prof.read("port_spaces", nullptr, fs);
 	Section& s1 = prof.get_safe_section("global");
 
-	Map& map = egbase.map();
-	Extent ext(map.extent());
+	Map* map = egbase.mutable_map();
+	Extent ext(map->extent());
 
 	try {
 		int32_t const packet_version = s1.get_int("packet_version");
@@ -51,7 +51,7 @@ void MapPortSpacesPacket::read(FileSystem& fs, EditorGameBase& egbase, bool, Map
 
 			Section& s2 = prof.get_safe_section("port_spaces");
 			for (uint16_t i = 0; i < num; ++i) {
-				map.set_port_space(
+				map->set_port_space(
 				   get_safe_coords(std::to_string(static_cast<unsigned int>(i)), ext, &s2), true);
 			}
 		} else {
@@ -69,7 +69,7 @@ void MapPortSpacesPacket::write(FileSystem& fs, EditorGameBase& egbase, MapObjec
 	Section& s1 = prof.create_section("global");
 	s1.set_int("packet_version", kCurrentPacketVersion);
 
-	Map& map = egbase.map();
+	const Map& map = egbase.map();
 	const uint16_t num = map.get_port_spaces().size();
 	s1.set_int("number_of_port_spaces", num);
 

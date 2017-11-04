@@ -26,6 +26,7 @@
 #include "editor/tools/action_args.h"
 #include "graphic/graphic.h"
 #include "graphic/image.h"
+#include "logic/editor_game_base.h"
 #include "logic/widelands_geometry.h"
 
 class EditorInteractive;
@@ -99,6 +100,14 @@ public:
 		return 0;
 	}  // non unduable tools don't need to implement this.
 	virtual const Image* get_sel_impl() const = 0;
+
+	// Gives the tool the chance to modify the nodecaps to change what will be
+	// displayed as build help.
+	virtual Widelands::NodeCaps nodecaps_for_buildhelp(const Widelands::FCoords& fcoords,
+	                                                   const Widelands::EditorGameBase&) {
+		return fcoords.field->nodecaps();
+	}
+
 	virtual bool operates_on_triangles() const {
 		return false;
 	}

@@ -53,7 +53,8 @@ BuildingWindow::BuildingWindow(InteractiveGameBase& parent,
      is_dying_(false),
      parent_(&parent),
      building_(b),
-     workarea_overlay_id_(0),
+     building_position_(b.get_position()),
+     showing_workarea_(false),
      avoid_fastclick_(avoid_fastclick),
      expeditionbtn_(nullptr) {
 	buildingnotes_subscriber_ = Notifications::subscribe<Widelands::NoteBuilding>(
@@ -61,9 +62,7 @@ BuildingWindow::BuildingWindow(InteractiveGameBase& parent,
 }
 
 BuildingWindow::~BuildingWindow() {
-	if (workarea_overlay_id_) {
-		igbase()->mutable_field_overlay_manager()->remove_overlay(workarea_overlay_id_);
-	}
+	hide_workarea();
 }
 
 void BuildingWindow::on_building_note(const Widelands::NoteBuilding& note) {
@@ -77,7 +76,7 @@ void BuildingWindow::on_building_note(const Widelands::NoteBuilding& note) {
 			break;
 		// The building is no more
 		case Widelands::NoteBuilding::Action::kStartWarp:
-			igbase()->add_wanted_building_window(building().get_position(), get_pos(), is_minimal());
+			igbase()->add_wanted_building_window(building_position_, get_pos(), is_minimal());
 			FALLS_THROUGH;
 		case Widelands::NoteBuilding::Action::kDeleted:
 			die();
@@ -116,6 +115,7 @@ void BuildingWindow::init(bool avoid_fastclick) {
 // Stop everybody from thinking to avoid segfaults
 void BuildingWindow::die() {
 	is_dying_ = true;
+	hide_workarea();
 	set_thinks(false);
 	vbox_.reset(nullptr);
 	UniqueWindow::die();
@@ -287,13 +287,13 @@ void BuildingWindow::create_capsbuttons(UI::Box* capsbuttons) {
 	}
 
 	if (can_see) {
-		WorkareaInfo wa_info;
+		const WorkareaInfo* wa_info;
 		if (upcast(Widelands::ConstructionSite, csite, &building_)) {
-			wa_info = csite->building().workarea_info_;
+			wa_info = &csite->building().workarea_info();
 		} else {
-			wa_info = building_.descr().workarea_info_;
+			wa_info = &building_.descr().workarea_info();
 		}
-		if (!wa_info.empty()) {
+		if (!wa_info->empty()) {
 			toggle_workarea_ = new UI::Button(
 			   capsbuttons, "workarea", 0, 0, 34, 34, g_gr->images().get("images/ui_basic/but4.png"),
 			   g_gr->images().get("images/wui/overlays/workarea123.png"), _("Hide work area"));
@@ -419,26 +419,27 @@ Callback for debug window
 ===============
 */
 void BuildingWindow::act_debug() {
-	show_field_debug(*igbase(), igbase()->game().map().get_fcoords(building_.get_position()));
+	show_field_debug(*igbase(), igbase()->game().map().get_fcoords(building_position_));
 }
 
 /**
  * Show the building's workarea (if it has one).
  */
 void BuildingWindow::show_workarea() {
-	if (workarea_overlay_id_) {
+	if (showing_workarea_) {
 		return;  // already shown, nothing to be done
 	}
-	WorkareaInfo workarea_info;
+	const WorkareaInfo* workarea_info;
 	if (upcast(Widelands::ConstructionSite, csite, &building_)) {
-		workarea_info = csite->building().workarea_info_;
+		workarea_info = &csite->building().workarea_info();
 	} else {
-		workarea_info = building_.descr().workarea_info_;
+		workarea_info = &building_.descr().workarea_info();
 	}
-	if (workarea_info.empty()) {
+	if (workarea_info->empty()) {
 		return;
 	}
-	workarea_overlay_id_ = igbase()->show_work_area(workarea_info, building_.get_position());
+	igbase()->show_work_area(*workarea_info, building_position_);
+	showing_workarea_ = true;
 
 	configure_workarea_button();
 }
@@ -447,10 +448,9 @@ void BuildingWindow::show_workarea() {
  * Hide the workarea from view.
  */
 void BuildingWindow::hide_workarea() {
-	if (workarea_overlay_id_) {
-		igbase()->hide_work_area(workarea_overlay_id_);
-		workarea_overlay_id_ = 0;
-
+	if (showing_workarea_) {
+		igbase()->hide_work_area(building_position_);
+		showing_workarea_ = false;
 		configure_workarea_button();
 	}
 }
@@ -460,7 +460,7 @@ void BuildingWindow::hide_workarea() {
  */
 void BuildingWindow::configure_workarea_button() {
 	if (toggle_workarea_) {
-		if (workarea_overlay_id_) {
+		if (showing_workarea_) {
 			toggle_workarea_->set_tooltip(_("Hide work area"));
 			toggle_workarea_->set_perm_pressed(true);
 		} else {
@@ -471,7 +471,7 @@ void BuildingWindow::configure_workarea_button() {
 }
 
 void BuildingWindow::toggle_workarea() {
-	if (workarea_overlay_id_) {
+	if (showing_workarea_) {
 		hide_workarea();
 	} else {
 		show_workarea();
@@ -491,7 +491,7 @@ void BuildingWindow::create_input_queue_panel(UI::Box* const box,
  * for the corresponding button.
  */
 void BuildingWindow::clicked_goto() {
-	igbase()->scroll_to_field(building().get_position(), MapView::Transition::Smooth);
+	igbase()->map_view()->scroll_to_field(building_position_, MapView::Transition::Smooth);
 }
 
 void BuildingWindow::update_expedition_button(bool expedition_was_canceled) {

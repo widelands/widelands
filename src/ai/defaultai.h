@@ -91,12 +91,13 @@ struct DefaultAI : ComputerPlayer {
 
 	/// Implementation for Strong
 	struct NormalImpl : public ComputerPlayer::Implementation {
-		NormalImpl() {
-			name = "normal";
-			/** TRANSLATORS: This is the name of an AI used in the game setup screens */
-			descname = _("Normal AI");
-			icon_filename = "images/ai/ai_normal.png";
-			type = Implementation::Type::kDefault;
+		NormalImpl()
+		   : Implementation(
+		        "normal",
+		        /** TRANSLATORS: This is the name of an AI used in the game setup screens */
+		        _("Normal AI"),
+		        "images/ai/ai_normal.png",
+		        Implementation::Type::kDefault) {
 		}
 		ComputerPlayer* instantiate(Widelands::Game& game,
 		                            Widelands::PlayerNumber const p) const override {
@@ -105,12 +106,13 @@ struct DefaultAI : ComputerPlayer {
 	};
 
 	struct WeakImpl : public ComputerPlayer::Implementation {
-		WeakImpl() {
-			name = "weak";
-			/** TRANSLATORS: This is the name of an AI used in the game setup screens */
-			descname = _("Weak AI");
-			icon_filename = "images/ai/ai_weak.png";
-			type = Implementation::Type::kDefault;
+		WeakImpl()
+		   : Implementation(
+		        "weak",
+		        /** TRANSLATORS: This is the name of an AI used in the game setup screens */
+		        _("Weak AI"),
+		        "images/ai/ai_weak.png",
+		        Implementation::Type::kDefault) {
 		}
 		ComputerPlayer* instantiate(Widelands::Game& game,
 		                            Widelands::PlayerNumber const p) const override {
@@ -119,12 +121,13 @@ struct DefaultAI : ComputerPlayer {
 	};
 
 	struct VeryWeakImpl : public ComputerPlayer::Implementation {
-		VeryWeakImpl() {
-			name = "very_weak";
-			/** TRANSLATORS: This is the name of an AI used in the game setup screens */
-			descname = _("Very Weak AI");
-			icon_filename = "images/ai/ai_very_weak.png";
-			type = Implementation::Type::kDefault;
+		VeryWeakImpl()
+		   : Implementation(
+		        "very_weak",
+		        /** TRANSLATORS: This is the name of an AI used in the game setup screens */
+		        _("Very Weak AI"),
+		        "images/ai/ai_very_weak.png",
+		        Implementation::Type::kDefault) {
 		}
 		ComputerPlayer* instantiate(Widelands::Game& game,
 		                            Widelands::PlayerNumber const p) const override {
@@ -259,7 +262,6 @@ private:
 	bool check_enemy_sites(uint32_t);
 	void count_military_vacant_positions();
 	bool check_trainingsites(uint32_t);
-	uint32_t barracks_count();
 	// return single number of strength of vector of soldiers
 	int32_t calculate_strength(const std::vector<Widelands::Soldier*>&);
 	// for militarysites (overloading the function)
@@ -325,7 +327,6 @@ private:
 	uint32_t military_last_dismantle_;
 	uint32_t military_last_build_;  // sometimes expansions just stops, this is time of last military
 	                                // building built
-	int32_t limit_cnt_target(int32_t, int32_t);
 	uint32_t time_of_last_construction_;
 	uint32_t next_mine_construction_due_;
 	uint16_t fishers_count_;
@@ -394,6 +395,8 @@ private:
 
 	bool has_critical_mines = false;
 	uint16_t buil_material_mines_count = 0;
+
+	bool ai_training_mode_ = false;
 
 	// Notification subscribers
 	std::unique_ptr<Notifications::Subscriber<Widelands::NoteFieldPossession>>

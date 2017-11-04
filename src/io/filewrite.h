@@ -53,7 +53,7 @@ public:
 		Pos operator++() {
 			return ++pos;
 		}
-		Pos operator+=(Pos const other) {
+		Pos operator+=(const Pos& other) {
 			return pos += other.pos;
 		}
 
@@ -77,10 +77,6 @@ public:
 	/// Otherwise, an exception is thrown but the buffer remains intact (don't
 	/// worry, it will be cleared by the destructor).
 	void write(FileSystem& fs, char const* const filename);
-
-	/// Same as above, just that the data is appended to the file
-	/// NOTE RealFSImpl is used by purpose - zip filesystems do not support appending
-	void write_append(RealFSImpl& fs, char const* const filename);
 
 	/// Get the position that will be written to in the next write operation that
 	/// does not specify a position.

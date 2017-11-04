@@ -38,7 +38,7 @@ GameStatisticsMenu::GameStatisticsMenu(InteractivePlayer& plr,
      player_(plr),
      windows_(windows),
      box_(this, 0, 0, UI::Box::Horizontal, 0, 0, 5) {
-	const bool is_seafaring = plr.egbase().map().allows_seafaring();
+	const bool is_seafaring = plr.egbase().mutable_map()->allows_seafaring();
 	add_button("wui/menus/menu_general_stats", "general_stats", _("General Statistics"),
 	           &windows_.general_stats);
 	add_button(

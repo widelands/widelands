@@ -82,7 +82,7 @@ void GameInteractivePlayerPacket::read(FileSystem& fs, Game& game, MapObjectLoad
 			uint32_t const display_flags = fr.unsigned_32();
 
 			if (InteractiveBase* const ibase = game.get_ibase()) {
-				ibase->scroll_to_map_pixel(center_map_pixel, MapView::Transition::Jump);
+				ibase->map_view()->scroll_to_map_pixel(center_map_pixel, MapView::Transition::Jump);
 
 				uint32_t const loaded_df =
 				   InteractiveBase::dfShowCensus | InteractiveBase::dfShowStatistics;
@@ -136,7 +136,7 @@ void GameInteractivePlayerPacket::write(FileSystem& fs, Game& game, MapObjectSav
 	fw.unsigned_8(iplayer ? iplayer->player_number() : 1);
 
 	if (ibase != nullptr) {
-		Vector2f center = ibase->view_area().rect().center();
+		const Vector2f center = ibase->map_view()->view_area().rect().center();
 		fw.float_32(center.x);
 		fw.float_32(center.y);
 	} else {

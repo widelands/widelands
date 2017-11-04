@@ -48,9 +48,11 @@ using std::setiosflags;
 
 namespace {
 
+// Do not change the contents of this struct, segfaults will ensue.
 struct S2MapDescrHeader {
-	char name[20];  // We need fixed char arrays rather than strings here. Otherwise, this will
-	                // segfault.
+	char magic[10];  // "WORLD_V1.0"
+	char name[20];   // We need fixed char arrays rather than strings here. Otherwise, this will
+	                 // segfault.
 	int16_t w;
 	int16_t h;
 	int8_t uses_world;  // 0 = green, 1 =black, 2 = winter

@@ -33,6 +33,7 @@
 #include "logic/map_objects/immovable.h"
 #include "logic/map_objects/terrain_affinity.h"
 #include "logic/map_objects/tribes/carrier.h"
+#include "logic/map_objects/tribes/market.h"
 #include "logic/map_objects/tribes/ship.h"
 #include "logic/map_objects/tribes/soldier.h"
 #include "logic/map_objects/tribes/tribes.h"
@@ -594,6 +595,48 @@ int do_set_soldiers(lua_State* L,
 	}
 	return 0;
 }
+
+// Parses a table of name/count pairs as given from Lua.
+void parse_wares_workers(lua_State* L,
+                         int table_index,
+                         const TribeDescr& tribe,
+                         InputMap* ware_workers_list,
+                         bool is_ware) {
+	luaL_checktype(L, table_index, LUA_TTABLE);
+	lua_pushnil(L);
+	while (lua_next(L, table_index) != 0) {
+		if (is_ware) {
+			if (tribe.ware_index(luaL_checkstring(L, -2)) == INVALID_INDEX) {
+				report_error(L, "Illegal ware %s", luaL_checkstring(L, -2));
+			}
+			ware_workers_list->insert(
+			   std::make_pair(std::make_pair(tribe.ware_index(luaL_checkstring(L, -2)),
+			                                 Widelands::WareWorker::wwWARE),
+			                  luaL_checkuint32(L, -1)));
+		} else {
+			if (tribe.worker_index(luaL_checkstring(L, -2)) == INVALID_INDEX) {
+				report_error(L, "Illegal worker %s", luaL_checkstring(L, -2));
+			}
+			ware_workers_list->insert(
+			   std::make_pair(std::make_pair(tribe.worker_index(luaL_checkstring(L, -2)),
+			                                 Widelands::WareWorker::wwWORKER),
+			                  luaL_checkuint32(L, -1)));
+		}
+		lua_pop(L, 1);
+	}
+}
+
+BillOfMaterials
+parse_wares_as_bill_of_material(lua_State* L, int table_index, const TribeDescr& tribe) {
+	InputMap input_map;
+	parse_wares_workers(L, table_index, tribe, &input_map, true /* is_ware */);
+	BillOfMaterials result;
+	for (const auto& pair : input_map) {
+		result.push_back(std::make_pair(pair.first.first, pair.second));
+	}
+	return result;
+}
+
 }  // namespace
 
 /*
@@ -618,6 +661,8 @@ int upcasted_map_object_descr_to_lua(lua_State* L, const MapObjectDescr* const d
 			return CAST_TO_LUA(MilitarySiteDescr, LuaMilitarySiteDescription);
 		case MapObjectType::WAREHOUSE:
 			return CAST_TO_LUA(WarehouseDescr, LuaWarehouseDescription);
+		case MapObjectType::MARKET:
+			return CAST_TO_LUA(MarketDescr, LuaMarketDescription);
 		case MapObjectType::TRAININGSITE:
 			return CAST_TO_LUA(TrainingSiteDescr, LuaTrainingSiteDescription);
 		default:
@@ -684,17 +729,19 @@ int upcasted_map_object_to_lua(lua_State* L, MapObject* mo) {
 		return CAST_TO_LUA(Building);
 	case MapObjectType::WAREHOUSE:
 		return CAST_TO_LUA(Warehouse);
+	case MapObjectType::MARKET:
+		return CAST_TO_LUA(Market);
 	case MapObjectType::PRODUCTIONSITE:
 		return CAST_TO_LUA(ProductionSite);
 	case MapObjectType::MILITARYSITE:
 		return CAST_TO_LUA(MilitarySite);
 	case MapObjectType::TRAININGSITE:
 		return CAST_TO_LUA(TrainingSite);
-	case (MapObjectType::MAPOBJECT):
-	case (MapObjectType::BATTLE):
-	case (MapObjectType::BOB):
-	case (MapObjectType::FLEET):
-	case (MapObjectType::WARE):
+	case MapObjectType::MAPOBJECT:
+	case MapObjectType::BATTLE:
+	case MapObjectType::BOB:
+	case MapObjectType::FLEET:
+	case MapObjectType::WARE:
 		throw LuaError((boost::format("upcasted_map_object_to_lua: Unknown %i") %
 		                static_cast<int>(mo->descr().type()))
 		                  .str());
@@ -778,7 +825,6 @@ RequestedWareWorker parse_wares_workers_counted(lua_State* L,
 
 	// We either received, two items string,int:
 	if (nargs == 3) {
-
 		result = RequestedWareWorker::kSingle;
 		if (is_ware) {
 			if (tribe.ware_index(luaL_checkstring(L, 2)) == INVALID_INDEX) {
@@ -799,32 +845,7 @@ RequestedWareWorker parse_wares_workers_counted(lua_State* L,
 	} else {
 		result = RequestedWareWorker::kList;
 		// or we got a table with name:quantity
-		luaL_checktype(L, 2, LUA_TTABLE);
-		lua_pushnil(L);
-		while (lua_next(L, 2) != 0) {
-			if (is_ware) {
-				if (tribe.ware_index(luaL_checkstring(L, -2)) == INVALID_INDEX) {
-					report_error(L, "Illegal ware %s", luaL_checkstring(L, -2));
-				}
-			} else {
-				if (tribe.worker_index(luaL_checkstring(L, -2)) == INVALID_INDEX) {
-					report_error(L, "Illegal worker %s", luaL_checkstring(L, -2));
-				}
-			}
-
-			if (is_ware) {
-				ware_workers_list->insert(
-				   std::make_pair(std::make_pair(tribe.ware_index(luaL_checkstring(L, -2)),
-				                                 Widelands::WareWorker::wwWARE),
-				                  luaL_checkuint32(L, -1)));
-			} else {
-				ware_workers_list->insert(
-				   std::make_pair(std::make_pair(tribe.worker_index(luaL_checkstring(L, -2)),
-				                                 Widelands::WareWorker::wwWORKER),
-				                  luaL_checkuint32(L, -1)));
-			}
-			lua_pop(L, 1);
-		}
+		parse_wares_workers(L, 2, tribe, ware_workers_list, is_ware);
 	}
 	return result;
 }
@@ -1171,10 +1192,10 @@ int LuaMap::get_height(lua_State* L) {
       for each player defined in the map.
 */
 int LuaMap::get_player_slots(lua_State* L) {
-	Map& m = get_egbase(L).map();
+	const Map& map = get_egbase(L).map();
 
-	lua_createtable(L, m.get_nrplayers(), 0);
-	for (Widelands::PlayerNumber i = 0; i < m.get_nrplayers(); i++) {
+	lua_createtable(L, map.get_nrplayers(), 0);
+	for (Widelands::PlayerNumber i = 0; i < map.get_nrplayers(); i++) {
 		lua_pushuint32(L, i + 1);
 		to_lua<LuaMaps::LuaPlayerSlot>(L, new LuaMaps::LuaPlayerSlot(i + 1));
 		lua_settable(L, -3);
@@ -1252,11 +1273,11 @@ int LuaMap::get_field(lua_State* L) {
 	uint32_t x = luaL_checkuint32(L, 2);
 	uint32_t y = luaL_checkuint32(L, 3);
 
-	Map& m = get_egbase(L).map();
+	const Map& map = get_egbase(L).map();
 
-	if (x >= static_cast<uint32_t>(m.get_width()))
+	if (x >= static_cast<uint32_t>(map.get_width()))
 		report_error(L, "x coordinate out of range!");
-	if (y >= static_cast<uint32_t>(m.get_height()))
+	if (y >= static_cast<uint32_t>(map.get_height()))
 		report_error(L, "y coordinate out of range!");
 
 	return to_lua<LuaMaps::LuaField>(L, new LuaMaps::LuaField(x, y));
@@ -1272,7 +1293,7 @@ int LuaMap::get_field(lua_State* L) {
 // TODO(unknown): do we really want this function?
 int LuaMap::recalculate(lua_State* L) {
 	EditorGameBase& egbase = get_egbase(L);
-	egbase.map().recalc_whole_map(egbase.world());
+	egbase.mutable_map()->recalc_whole_map(egbase.world());
 	return 0;
 }
 
@@ -2133,7 +2154,7 @@ int LuaBuildingDescription::get_vision_range(lua_State* L) {
               nil in case bulding has no workareas
 */
 int LuaBuildingDescription::get_workarea_radius(lua_State* L) {
-	const WorkareaInfo& workareaInfo = get()->workarea_info_;
+	const WorkareaInfo& workareaInfo = get()->workarea_info();
 	if (!workareaInfo.empty()) {
 		lua_pushinteger(L, workareaInfo.begin()->first);
 	} else {
@@ -2744,6 +2765,35 @@ int LuaWarehouseDescription::get_heal_per_second(lua_State* L) {
 	lua_pushinteger(L, descr->get_heal_per_second());
 	return 1;
 }
+
+/* RST
+MarketDescription
+-----------------
+
+.. class:: MarketDescription
+
+   Child of: :class:`MapObjectDescription`, :class:`ImmovableDescription`, :class:`BuildingDescription`
+
+   A static description of a tribe's market, so it can be used in help files
+   without having to access an actual building on the map. A Market is used for
+   trading over land with other players. See the parent classes for more
+   properties.
+*/
+// TODO(sirver,trading): Expose the properties of MarketDescription here once
+// the interface settles.
+const char LuaMarketDescription::className[] = "MarketDescription";
+const MethodType<LuaMarketDescription> LuaMarketDescription::Methods[] = {
+   {nullptr, nullptr},
+};
+const PropertyType<LuaMarketDescription> LuaMarketDescription::Properties[] = {
+   {nullptr, nullptr, nullptr},
+};
+
+/*
+ ==========================================================
+ PROPERTIES
+ ==========================================================
+ */
 
 /* RST
 WareDescription
@@ -3664,36 +3714,38 @@ int LuaMapObject::get_descr(lua_State* L) {
 	assert(desc != nullptr);
 
 	switch (desc->type()) {
-	case (MapObjectType::BUILDING):
+	case MapObjectType::BUILDING:
 		return CAST_TO_LUA(BuildingDescr, LuaBuildingDescription);
-	case (MapObjectType::CONSTRUCTIONSITE):
+	case MapObjectType::CONSTRUCTIONSITE:
 		return CAST_TO_LUA(ConstructionSiteDescr, LuaConstructionSiteDescription);
-	case (MapObjectType::DISMANTLESITE):
+	case MapObjectType::DISMANTLESITE:
 		return CAST_TO_LUA(DismantleSiteDescr, LuaDismantleSiteDescription);
-	case (MapObjectType::PRODUCTIONSITE):
+	case MapObjectType::PRODUCTIONSITE:
 		return CAST_TO_LUA(ProductionSiteDescr, LuaProductionSiteDescription);
-	case (MapObjectType::MILITARYSITE):
+	case MapObjectType::MILITARYSITE:
 		return CAST_TO_LUA(MilitarySiteDescr, LuaMilitarySiteDescription);
-	case (MapObjectType::TRAININGSITE):
+	case MapObjectType::TRAININGSITE:
 		return CAST_TO_LUA(TrainingSiteDescr, LuaTrainingSiteDescription);
-	case (MapObjectType::WAREHOUSE):
+	case MapObjectType::WAREHOUSE:
 		return CAST_TO_LUA(WarehouseDescr, LuaWarehouseDescription);
-	case (MapObjectType::IMMOVABLE):
+	case MapObjectType::MARKET:
+		return CAST_TO_LUA(MarketDescr, LuaMarketDescription);
+	case MapObjectType::IMMOVABLE:
 		return CAST_TO_LUA(ImmovableDescr, LuaImmovableDescription);
-	case (MapObjectType::WORKER):
-	case (MapObjectType::CARRIER):
-	case (MapObjectType::SOLDIER):
+	case MapObjectType::WORKER:
+	case MapObjectType::CARRIER:
+	case MapObjectType::SOLDIER:
 		return CAST_TO_LUA(WorkerDescr, LuaWorkerDescription);
-	case (MapObjectType::MAPOBJECT):
-	case (MapObjectType::BATTLE):
-	case (MapObjectType::BOB):
-	case (MapObjectType::CRITTER):
-	case (MapObjectType::FLEET):
-	case (MapObjectType::SHIP):
-	case (MapObjectType::FLAG):
-	case (MapObjectType::ROAD):
-	case (MapObjectType::PORTDOCK):
-	case (MapObjectType::WARE):
+	case MapObjectType::MAPOBJECT:
+	case MapObjectType::BATTLE:
+	case MapObjectType::BOB:
+	case MapObjectType::CRITTER:
+	case MapObjectType::FLEET:
+	case MapObjectType::SHIP:
+	case MapObjectType::FLAG:
+	case MapObjectType::ROAD:
+	case MapObjectType::PORTDOCK:
+	case MapObjectType::WARE:
 		return CAST_TO_LUA(MapObjectDescr, LuaMapObjectDescription);
 	}
 	NEVER_HERE();
@@ -5036,6 +5088,81 @@ int LuaProductionSite::create_new_worker(PlayerImmovable& pi,
 }
 
 /* RST
+Market
+---------
+
+.. class:: Market
+
+   Child of: :class:`Building`, :class:`HasWares`, :class:`HasWorkers`
+
+	A Market used for trading with other players.
+
+   More properties are available through this object's
+   :class:`MarketDescription`, which you can access via :any:`MapObject.descr`.
+*/
+const char LuaMarket::className[] = "Market";
+const MethodType<LuaMarket> LuaMarket::Methods[] = {
+   METHOD(LuaMarket, propose_trade),
+   // TODO(sirver,trading): Implement and fix documentation.
+   // METHOD(LuaMarket, set_wares),
+   // METHOD(LuaMarket, get_wares),
+   // METHOD(LuaMarket, set_workers),
+   // METHOD(LuaMarket, get_workers),
+   {nullptr, nullptr},
+};
+const PropertyType<LuaMarket> LuaMarket::Properties[] = {
+   {nullptr, nullptr, nullptr},
+};
+
+/*
+ ==========================================================
+ PROPERTIES
+ ==========================================================
+ */
+
+/*
+ ==========================================================
+ LUA METHODS
+ ==========================================================
+ */
+
+/* RST
+   .. method:: propose_trade(other_market, num_batches, items_to_send, items_to_receive)
+
+      TODO(sirver,trading): document
+
+      :returns: :const:`nil`
+*/
+int LuaMarket::propose_trade(lua_State* L) {
+	if (lua_gettop(L) != 5) {
+		report_error(L, "Takes 4 arguments.");
+	}
+	Game& game = get_game(L);
+	Market* self = get(L, game);
+	Market* other_market = (*get_user_class<LuaMarket>(L, 2))->get(L, game);
+	const int num_batches = luaL_checkinteger(L, 3);
+
+	const BillOfMaterials items_to_send =
+	   parse_wares_as_bill_of_material(L, 4, self->owner().tribe());
+	// TODO(sirver,trading): unsure if correct. Test inter-tribe trading, i.e.
+	// barbarians trading with empire, but shipping atlantean only wares.
+	const BillOfMaterials items_to_receive =
+	   parse_wares_as_bill_of_material(L, 5, self->owner().tribe());
+	const int trade_id = game.propose_trade(
+	   Trade{items_to_send, items_to_receive, num_batches, self->serial(), other_market->serial()});
+
+	// TODO(sirver,trading): Wrap 'Trade' into its own Lua class?
+	lua_pushint32(L, trade_id);
+	return 1;
+}
+
+/*
+ ==========================================================
+ C METHODS
+ ==========================================================
+ */
+
+/* RST
 MilitarySite
 --------------
 
@@ -5787,7 +5914,7 @@ int LuaField::set_height(lua_State* L) {
 		report_error(L, "height must be <= %i", MAX_FIELD_HEIGHT);
 
 	EditorGameBase& egbase = get_egbase(L);
-	egbase.map().set_height(egbase.world(), f, height);
+	egbase.mutable_map()->set_height(egbase.world(), f, height);
 
 	return 0;
 }
@@ -5865,9 +5992,9 @@ int LuaField::set_resource(lua_State* L) {
 
 	auto c = fcoords(L);
 	const auto current_amount = c.field->get_resources_amount();
-	auto& map = egbase.map();
-	map.initialize_resources(c, res, c.field->get_initial_res_amount());
-	map.set_resources(c, current_amount);
+	auto* map = egbase.mutable_map();
+	map->initialize_resources(c, res, c.field->get_initial_res_amount());
+	map->set_resources(c, current_amount);
 	return 0;
 }
 
@@ -5894,12 +6021,12 @@ int LuaField::set_resource_amount(lua_State* L) {
 		report_error(L, "Illegal amount: %i, must be >= 0 and <= %i", amount,
 		             static_cast<unsigned int>(max_amount));
 
-	auto& map = egbase.map();
+	auto* map = egbase.mutable_map();
 	if (is_a(Game, &egbase)) {
-		map.set_resources(c, amount);
+		map->set_resources(c, amount);
 	} else {
 		// in editor, reset also initial amount
-		map.initialize_resources(c, res, amount);
+		map->initialize_resources(c, res, amount);
 	}
 	return 0;
 }
@@ -5972,7 +6099,7 @@ int LuaField::set_terr(lua_State* L) {
 	if (td == static_cast<DescriptionIndex>(-1))
 		report_error(L, "Unknown terrain '%s'", name);
 
-	egbase.map().change_terrain(world, TCoords<FCoords>(fcoords(L), TCoords<FCoords>::R), td);
+	egbase.mutable_map()->change_terrain(world, TCoords<FCoords>(fcoords(L), TriangleIndex::R), td);
 
 	lua_pushstring(L, name);
 	return 1;
@@ -5991,7 +6118,7 @@ int LuaField::set_terd(lua_State* L) {
 	if (td == static_cast<DescriptionIndex>(INVALID_INDEX))
 		report_error(L, "Unknown terrain '%s'", name);
 
-	egbase.map().change_terrain(world, TCoords<FCoords>(fcoords(L), TCoords<FCoords>::D), td);
+	egbase.mutable_map()->change_terrain(world, TCoords<FCoords>(fcoords(L), TriangleIndex::D), td);
 
 	lua_pushstring(L, name);
 	return 1;
@@ -6058,7 +6185,7 @@ int LuaField::get_owner(lua_State* L) {
 */
 int LuaField::get_claimers(lua_State* L) {
 	EditorGameBase& egbase = get_egbase(L);
-	Map& map = egbase.map();
+	const Map& map = egbase.map();
 
 	std::vector<PlrInfluence> claimers;
 
@@ -6187,7 +6314,7 @@ int LuaField::has_caps(lua_State* L) {
  ==========================================================
  */
 int LuaField::region(lua_State* L, uint32_t radius) {
-	Map& map = get_egbase(L).map();
+	const Map& map = get_egbase(L).map();
 	MapRegion<Area<FCoords>> mr(map, Area<FCoords>(fcoords(L), radius));
 
 	lua_newtable(L);
@@ -6203,7 +6330,7 @@ int LuaField::region(lua_State* L, uint32_t radius) {
 }
 
 int LuaField::hollow_region(lua_State* L, uint32_t radius, uint32_t inner_radius) {
-	Map& map = get_egbase(L).map();
+	const Map& map = get_egbase(L).map();
 	HollowArea<Area<>> har(Area<>(coords_, radius), inner_radius);
 
 	MapHollowRegion<Area<>> mr(map, har);
@@ -6265,7 +6392,7 @@ void LuaPlayerSlot::__unpersist(lua_State* L) {
       (RO) The name of the tribe suggested for this player in this map
 */
 int LuaPlayerSlot::get_tribe_name(lua_State* L) {
-	lua_pushstring(L, get_egbase(L).get_map()->get_scenario_player_tribe(player_number_));
+	lua_pushstring(L, get_egbase(L).map().get_scenario_player_tribe(player_number_));
 	return 1;
 }
 
@@ -6275,7 +6402,7 @@ int LuaPlayerSlot::get_tribe_name(lua_State* L) {
       (RO) The name for this player as suggested in this map
 */
 int LuaPlayerSlot::get_name(lua_State* L) {
-	lua_pushstring(L, get_egbase(L).get_map()->get_scenario_player_name(player_number_));
+	lua_pushstring(L, get_egbase(L).map().get_scenario_player_name(player_number_));
 	return 1;
 }
 
@@ -6360,6 +6487,11 @@ void luaopen_wlmap(lua_State* L) {
 	register_class<LuaWarehouseDescription>(L, "map", true);
 	add_parent<LuaWarehouseDescription, LuaBuildingDescription>(L);
 	add_parent<LuaWarehouseDescription, LuaMapObjectDescription>(L);
+	lua_pop(L, 1);  // Pop the meta table
+
+	register_class<LuaMarketDescription>(L, "map", true);
+	add_parent<LuaMarketDescription, LuaBuildingDescription>(L);
+	add_parent<LuaMarketDescription, LuaMapObjectDescription>(L);
 	lua_pop(L, 1);  // Pop the meta table
 
 	register_class<LuaWareDescription>(L, "map", true);
@@ -6448,6 +6580,13 @@ void luaopen_wlmap(lua_State* L) {
 	add_parent<LuaWarehouse, LuaPlayerImmovable>(L);
 	add_parent<LuaWarehouse, LuaBaseImmovable>(L);
 	add_parent<LuaWarehouse, LuaMapObject>(L);
+	lua_pop(L, 1);  // Pop the meta table
+
+	register_class<LuaMarket>(L, "map", true);
+	add_parent<LuaMarket, LuaBuilding>(L);
+	add_parent<LuaMarket, LuaPlayerImmovable>(L);
+	add_parent<LuaMarket, LuaBaseImmovable>(L);
+	add_parent<LuaMarket, LuaMapObject>(L);
 	lua_pop(L, 1);  // Pop the meta table
 
 	register_class<LuaProductionSite>(L, "map", true);

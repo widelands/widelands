@@ -41,7 +41,7 @@
 static WatchWindow* g_watch_window = nullptr;
 
 Widelands::Game& WatchWindow::game() const {
-	return dynamic_cast<InteractiveGameBase&>(*get_parent()).game();
+	return parent_.game();
 }
 
 WatchWindow::WatchWindow(InteractiveGameBase& parent,
@@ -51,7 +51,8 @@ WatchWindow::WatchWindow(InteractiveGameBase& parent,
                          uint32_t const h,
                          bool const init_single_window)
    : UI::Window(&parent, "watch", x, y, w, h, _("Watch")),
-     mapview_(this, 0, 0, 200, 166, parent),
+	  parent_(parent),
+	  map_view_(this, game().map(), 0, 0, 200, 166),
      last_visit_(game().get_gametime()),
      single_window_(init_single_window),
      cur_index_(0) {
@@ -79,11 +80,25 @@ WatchWindow::WatchWindow(InteractiveGameBase& parent,
 		closebtn->sigclicked.connect(boost::bind(&WatchWindow::close_cur_view, this));
 	}
 
-	mapview_.fieldclicked.connect(boost::bind(&InteractiveGameBase::node_action, &parent));
-	mapview_.changeview.connect([this] { stop_tracking_by_drag(); });
+	map_view_.field_clicked.connect(
+      [&parent](const Widelands::NodeAndTriangle<>& node_and_triangle) {
+              parent.map_view()->field_clicked(node_and_triangle);
+           });
+   map_view_.track_selection.connect(
+      [&parent](const Widelands::NodeAndTriangle<>& node_and_triangle) {
+              parent.map_view()->track_selection(node_and_triangle);
+           });
+   map_view_.changeview.connect([this] { stop_tracking_by_drag(); });
 	warp_mainview.connect([&parent](const Vector2f& map_pixel) {
-		parent.scroll_to_map_pixel(map_pixel, MapView::Transition::Smooth);
+		parent.map_view()->scroll_to_map_pixel(map_pixel, MapView::Transition::Smooth);
 	});
+}
+
+void WatchWindow::draw(RenderTarget& dst) {
+        UI::Window::draw(dst);
+        if (!is_minimal()) {
+                parent_.draw_map_view(&map_view_, &dst);
+        }
 }
 
 /**
@@ -96,10 +111,10 @@ void WatchWindow::add_view(Widelands::Coords const coords) {
 		return;
 	WatchWindow::View view;
 
-	mapview_.scroll_to_field(coords, MapView::Transition::Jump);
+	map_view_.scroll_to_field(coords, MapView::Transition::Jump);
 
 	view.tracking = nullptr;
-	view.view = mapview_.view();
+	view.view = map_view_.view();
 	last_visit_ = game().get_gametime();
 
 	views_.push_back(view);
@@ -116,7 +131,7 @@ void WatchWindow::next_view() {
 // Saves the coordinates of a view if it was already shown (and possibly moved)
 void WatchWindow::save_coords() {
 	auto& view = views_[cur_index_];
-	view.view = mapview_.view();
+	view.view = map_view_.view();
 }
 
 // Enables/Disables buttons for views_
@@ -143,7 +158,7 @@ void WatchWindow::set_current_view(uint8_t idx, bool save_previous) {
 		view_btns_[idx]->set_perm_pressed(true);
 	}
 	cur_index_ = idx;
-	mapview_.set_view(views_[cur_index_].view, MapView::Transition::Jump);
+	map_view_.set_view(views_[cur_index_].view, MapView::Transition::Jump);
 }
 
 WatchWindow::~WatchWindow() {
@@ -152,7 +167,7 @@ WatchWindow::~WatchWindow() {
 
 /*
 ===============
-Update the mapview_ if we're tracking something.
+Update the map_view_ if we're tracking something.
 ===============
 */
 void WatchWindow::think() {
@@ -165,30 +180,29 @@ void WatchWindow::think() {
 	}
 
 	if (upcast(Widelands::Bob, bob, views_[cur_index_].tracking.get(game()))) {
-		const Vector2f field_position =
-		   MapviewPixelFunctions::to_map_pixel(game().map(), bob->get_position());
+		const Widelands::Map& map = game().map();
+      const Vector2f field_position = MapviewPixelFunctions::to_map_pixel(map, bob->get_position());
 		const Vector2f pos = bob->calc_drawpos(game(), field_position, 1.f);
 
-		Widelands::Map& map = game().map();
 		// Drop the tracking if it leaves our vision range
 		InteractivePlayer* ipl = game().get_ipl();
 		if (ipl && 1 >= ipl->player().vision(map.get_index(bob->get_position(), map.get_width()))) {
 			// Not in sight
 			views_[cur_index_].tracking = nullptr;
 		} else {
-			mapview_.scroll_to_map_pixel(pos, MapView::Transition::Jump);
+			map_view_.scroll_to_map_pixel(pos, MapView::Transition::Jump);
 		}
 	}
 }
 
 /*
 ===============
-When the user drags the mapview_, we stop tracking.
+When the user drags the map_view_, we stop tracking.
 ===============
 */
 void WatchWindow::stop_tracking_by_drag() {
 	// Disable switching while dragging
-	if (mapview_.is_dragging()) {
+	if (map_view_.is_dragging()) {
 		last_visit_ = game().get_gametime();
 		views_[cur_index_].tracking = nullptr;
 	}
@@ -214,8 +228,8 @@ void WatchWindow::do_follow() {
 	} else {
 		//  Find the nearest bob. Other object types can not move and are
 		//  therefore not of interest.
-		Vector2f center_map_pixel = mapview_.view_area().rect().center();
-		Widelands::Map& map = g.map();
+		Vector2f center_map_pixel = map_view_.view_area().rect().center();
+		const Widelands::Map& map = g.map();
 		MapviewPixelFunctions::normalize_pix(map, &center_map_pixel);
 		std::vector<Widelands::Bob*> bobs;
 		//  Scan progressively larger circles around the given position for
@@ -255,7 +269,7 @@ void WatchWindow::do_follow() {
  * Cause the main mapview_ to jump to our current position.
  */
 void WatchWindow::do_goto() {
-	warp_mainview(mapview_.view_area().rect().center());
+	warp_mainview(map_view_.view_area().rect().center());
 }
 
 /**

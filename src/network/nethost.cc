@@ -191,6 +191,12 @@ void NetHost::send(const ConnectionId id, const SendPacket& packet) {
 	}
 }
 
+void NetHost::send(const std::vector<ConnectionId>& ids, const SendPacket& packet) {
+	for (ConnectionId id : ids) {
+		send(id, packet);
+	}
+}
+
 NetHost::NetHost(const uint16_t port)
    : clients_(), next_id_(1), io_service_(), acceptor_v4_(io_service_), acceptor_v6_(io_service_) {
 

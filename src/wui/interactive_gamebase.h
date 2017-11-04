@@ -68,7 +68,13 @@ public:
 	virtual bool can_act(Widelands::PlayerNumber) const = 0;
 	virtual Widelands::PlayerNumber player_number() const = 0;
 
-	virtual void node_action() = 0;
+	// Only the 'InteractiveGameBase' has all information of what should be
+	// drawn into a map_view (i.e. which overlays are available). The
+	// 'WatchWindow' does not have this information, but needs to draw
+	// 'map_views', hence this function.
+	virtual void draw_map_view(MapView* given_map_view, RenderTarget* dst) = 0;
+
+	virtual void node_action(const Widelands::NodeAndTriangle<>& node_and_triangle) = 0;
 	const PlayerType& get_playertype() const {
 		return playertype_;
 	}
@@ -93,7 +99,6 @@ public:
 
 protected:
 	void draw_overlay(RenderTarget&) override;
-	virtual int32_t calculate_buildcaps(const Widelands::FCoords& c) = 0;
 
 	GameMainMenuWindows main_windows_;
 	ChatProvider* chat_provider_;

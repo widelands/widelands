@@ -449,7 +449,7 @@ int LuaPlayer::message_box(lua_State* L) {
 		lua_getfield(L, 4, "field");
 		if (!lua_isnil(L, -1)) {
 			Coords c = (*get_user_class<LuaField>(L, -1))->coords();
-			game.get_ipl()->scroll_to_field(c, MapView::Transition::Jump);
+			game.get_ipl()->map_view()->scroll_to_field(c, MapView::Transition::Jump);
 		}
 		lua_pop(L, 1);
 	}
@@ -565,8 +565,7 @@ int LuaPlayer::forbid_buildings(lua_State* L) {
 int LuaPlayer::add_objective(lua_State* L) {
 	Game& game = get_game(L);
 
-	Map* map = game.get_map();
-	Map::Objectives* objectives = map->mutable_objectives();
+	Map::Objectives* objectives = game.mutable_map()->mutable_objectives();
 
 	const std::string name = luaL_checkstring(L, 2);
 	if (objectives->count(name))
@@ -596,13 +595,14 @@ int LuaPlayer::add_objective(lua_State* L) {
 int LuaPlayer::reveal_fields(lua_State* L) {
 	EditorGameBase& egbase = get_egbase(L);
 	Player& p = get(L, egbase);
-	Map& m = egbase.map();
+	const Map& map = egbase.map();
 
 	luaL_checktype(L, 2, LUA_TTABLE);
 
 	lua_pushnil(L); /* first key */
 	while (lua_next(L, 2) != 0) {
-		p.see_node(m, m[0], (*get_user_class<LuaField>(L, -1))->fcoords(L), egbase.get_gametime());
+		p.see_node(
+		   map, map[0], (*get_user_class<LuaField>(L, -1))->fcoords(L), egbase.get_gametime());
 		lua_pop(L, 1);
 	}
 
@@ -626,14 +626,13 @@ int LuaPlayer::reveal_fields(lua_State* L) {
 int LuaPlayer::hide_fields(lua_State* L) {
 	EditorGameBase& egbase = get_egbase(L);
 	Player& p = get(L, egbase);
-	Map& m = egbase.map();
 
 	luaL_checktype(L, 2, LUA_TTABLE);
 	const bool mode = !lua_isnone(L, 3) && luaL_checkboolean(L, 3);
 
 	lua_pushnil(L); /* first key */
 	while (lua_next(L, 2) != 0) {
-		p.unsee_node((*get_user_class<LuaField>(L, -1))->fcoords(L).field - &m[0],
+		p.unsee_node((*get_user_class<LuaField>(L, -1))->fcoords(L).field - &egbase.map()[0],
 		             egbase.get_gametime(),
 		             mode ? Player::UnseeNodeMode::kUnexplore : Player::UnseeNodeMode::kUnsee);
 		lua_pop(L, 1);
@@ -720,7 +719,6 @@ int LuaPlayer::get_ships(lua_State* L) {
 */
 int LuaPlayer::get_buildings(lua_State* L) {
 	EditorGameBase& egbase = get_egbase(L);
-	Map* map = egbase.get_map();
 	Player& p = get(L, egbase);
 
 	// if only one string, convert to array so that we can use
@@ -756,7 +754,7 @@ int LuaPlayer::get_buildings(lua_State* L) {
 				continue;
 
 			lua_pushuint32(L, cidx++);
-			upcasted_map_object_to_lua(L, (*map)[vec[l].pos].get_immovable());
+			upcasted_map_object_to_lua(L, egbase.map()[vec[l].pos].get_immovable());
 			lua_rawset(L, -3);
 		}
 
@@ -1073,8 +1071,7 @@ int LuaObjective::set_done(lua_State* L) {
 		std::string filename = _("%1% (%2%)");
 		i18n::Textdomain td("maps");
 		filename =
-		   (boost::format(filename) % _(get_egbase(L).get_map()->get_name()) % o.descname().c_str())
-		      .str();
+		   (boost::format(filename) % _(get_egbase(L).map().get_name()) % o.descname().c_str()).str();
 		get_game(L).save_handler().request_save(filename);
 	}
 	return 0;
@@ -1089,7 +1086,7 @@ int LuaObjective::remove(lua_State* L) {
 	Game& g = get_game(L);
 	// The next call checks if the Objective still exists
 	get(L, g);
-	g.map().mutable_objectives()->erase(name_);
+	g.mutable_map()->mutable_objectives()->erase(name_);
 	return 0;
 }
 
@@ -1111,7 +1108,7 @@ int LuaObjective::__eq(lua_State* L) {
  ==========================================================
  */
 Objective& LuaObjective::get(lua_State* L, Widelands::Game& g) {
-	Map::Objectives* objectives = g.map().mutable_objectives();
+	Map::Objectives* objectives = g.mutable_map()->mutable_objectives();
 	Map::Objectives::iterator i = objectives->find(name_);
 	if (i == objectives->end()) {
 		report_error(L, "Objective with name '%s' doesn't exist!", name_.c_str());

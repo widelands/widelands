@@ -436,7 +436,7 @@ bool SeafaringStatisticsMenu::handle_key(bool down, SDL_Keysym code) {
 void SeafaringStatisticsMenu::center_view() {
 	if (table_.has_selection()) {
 		Widelands::Ship* ship = serial_to_ship(table_.get_selected());
-		iplayer().scroll_to_field(ship->get_position(), MapView::Transition::Smooth);
+		iplayer().map_view()->scroll_to_field(ship->get_position(), MapView::Transition::Smooth);
 	}
 }
 
@@ -474,7 +474,7 @@ void SeafaringStatisticsMenu::filter_ships(ShipFilterStatus status) {
 		toggle_filter_ships_button(idle_btn_, status);
 		break;
 		// We're not interested in the "colonizing" status for filtering.
-	case ShipFilterStatus::kExpeditionColonizing:
+
 	case ShipFilterStatus::kAll:
 		set_filter_ships_tooltips();
 		ship_filter_ = ShipFilterStatus::kAll;

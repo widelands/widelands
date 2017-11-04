@@ -58,6 +58,7 @@ private:
 
 	void think() override;
 	void stop_tracking_by_drag();
+	void draw(RenderTarget&) override;
 	void save_coords();
 	void next_view();
 	void close_cur_view();
@@ -68,7 +69,8 @@ private:
 	void view_button_clicked(uint8_t index);
 	void set_current_view(uint8_t idx, bool save_previous = true);
 
-	MapView mapview_;
+	InteractiveGameBase& parent_;
+	MapView map_view_;
 	uint32_t last_visit_;
 	bool single_window_;
 	uint8_t cur_index_;
