@@ -47,6 +47,7 @@
 #include "logic/map_objects/terrain_affinity.h"
 #include "logic/map_objects/tribes/carrier.h"
 #include "logic/map_objects/tribes/dismantlesite.h"
+#include "logic/map_objects/tribes/market.h"
 #include "logic/map_objects/tribes/soldier.h"
 #include "logic/map_objects/tribes/tribe_descr.h"
 #include "logic/map_objects/tribes/warehouse.h"
@@ -1591,6 +1592,89 @@ void Worker::buildingwork_update(Game& game, State& state) {
  */
 void Worker::update_task_buildingwork(Game& game) {
 	if (top_state().task == &taskBuildingwork)
+		send_signal(game, "update");
+}
+
+// The task when a worker is part of the caravan that is trading items.
+const Bob::Task Worker::taskCarryTradeItem = {
+   "carry_trade_item", static_cast<Bob::Ptr>(&Worker::carry_trade_item_update), nullptr, nullptr,
+   true};
+
+void Worker::start_task_carry_trade_item(Game& game,
+                                         const int trade_id,
+                                         ObjectPointer other_market) {
+	push_task(game, taskCarryTradeItem);
+	auto& state = top_state();
+	state.ivar1 = 0;
+	state.ivar2 = trade_id;
+	state.objvar1 = other_market;
+}
+
+// This is a state machine: leave building, go to the other market, drop off
+// wares, and return.
+void Worker::carry_trade_item_update(Game& game, State& state) {
+	// Reset any signals that are not related to location
+	std::string signal = get_signal();
+	signal_handled();
+	if (!signal.empty()) {
+		// TODO(sirver,trading): Remove once signals are correctly handled.
+		log("carry_trade_item_update: signal received: %s\n", signal.c_str());
+	}
+	if (signal == "evict") {
+		return pop_task(game);
+	}
+
+	// First of all, make sure we're outside
+	if (state.ivar1 == 0) {
+		start_task_leavebuilding(game, false);
+		++state.ivar1;
+		return;
+	}
+
+	auto* other_market = dynamic_cast<Market*>(state.objvar1.get(game));
+	if (state.ivar1 == 1) {
+		// Arrived on site. Move to the building and advance our state.
+		if (other_market->base_flag().get_position() == get_position()) {
+			++state.ivar1;
+			return start_task_move(
+			   game, WALK_NW, descr().get_right_walk_anims(does_carry_ware()), true);
+		}
+
+		// Otherwise continue making progress towards the other market.
+		if (!start_task_movepath(game, other_market->base_flag().get_position(), 5,
+		                         descr().get_right_walk_anims(does_carry_ware()))) {
+			molog("carry_trade_item_update: Could not move to other flag.\n");
+			// TODO(sirver,trading): something needs to happen here.
+		}
+		return;
+	}
+
+	if (state.ivar1 == 2) {
+		WareInstance* const ware = fetch_carried_ware(game);
+		other_market->traded_ware_arrived(state.ivar2, ware->descr_index(), &game);
+		ware->remove(game);
+		++state.ivar1;
+		start_task_move(game, WALK_SE, descr().get_right_walk_anims(does_carry_ware()), true);
+		return;
+	}
+
+	if (state.ivar1 == 3) {
+		++state.ivar1;
+		start_task_return(game, false);
+		return;
+	}
+
+	if (state.ivar1 == 4) {
+		pop_task(game);
+		start_task_idle(game, 0, -1);
+		dynamic_cast<Market*>(get_location(game))->try_launching_batch(&game);
+		return;
+	}
+	NEVER_HERE();
+}
+
+void Worker::update_task_carry_trade_item(Game& game) {
+	if (top_state().task == &taskCarryTradeItem)
 		send_signal(game, "update");
 }
 

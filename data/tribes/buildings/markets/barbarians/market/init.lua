@@ -50,7 +50,5 @@ tribes:new_market_type {
       prohibited_till = 1000
    },
 
-   working_positions = {
-      barbarians_ox = 10,
-   },
+   carrier = "barbarians_ox",
 }

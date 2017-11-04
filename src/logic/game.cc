@@ -49,6 +49,7 @@
 #include "logic/cmd_luascript.h"
 #include "logic/game_settings.h"
 #include "logic/map_objects/tribes/carrier.h"
+#include "logic/map_objects/tribes/market.h"
 #include "logic/map_objects/tribes/militarysite.h"
 #include "logic/map_objects/tribes/ship.h"
 #include "logic/map_objects/tribes/soldier.h"
@@ -751,6 +752,85 @@ void Game::send_player_sink_ship(Ship& ship) {
 void Game::send_player_cancel_expedition_ship(Ship& ship) {
 	send_player_command(*new CmdShipCancelExpedition(
 	   get_gametime(), ship.get_owner()->player_number(), ship.serial()));
+}
+
+void Game::send_player_propose_trade(const Trade& trade) {
+	auto* object = objects().get_object(trade.initiator);
+	assert(object != nullptr);
+	send_player_command(
+	   *new CmdProposeTrade(get_gametime(), object->get_owner()->player_number(), trade));
+}
+
+int Game::propose_trade(const Trade& trade) {
+	// TODO(sirver,trading): Check if a trade is possible (i.e. if there is a
+	// path between the two markets);
+	const int id = next_trade_agreement_id_;
+	++next_trade_agreement_id_;
+
+	auto* initiator = dynamic_cast<Market*>(objects().get_object(trade.initiator));
+	auto* receiver = dynamic_cast<Market*>(objects().get_object(trade.receiver));
+	// This is only ever called through a PlayerCommand and that already made
+	// sure that the objects still exist. Since no time has passed, they should
+	// not have vanished under us.
+	assert(initiator != nullptr);
+	assert(receiver != nullptr);
+
+	receiver->removed.connect([this, id](const uint32_t /* serial */) { cancel_trade(id); });
+	initiator->removed.connect([this, id](const uint32_t /* serial */) { cancel_trade(id); });
+
+	receiver->send_message(*this, Message::Type::kTradeOfferReceived, _("Trade Offer"),
+	                       receiver->descr().icon_filename(), receiver->descr().descname(),
+	                       _("This market has received a new trade offer."), true);
+	trade_agreements_[id] = TradeAgreement{TradeAgreement::State::kProposed, trade};
+
+	// TODO(sirver,trading): this should be done through another player_command, but I
+	// want to get to the trade logic implementation now.
+	accept_trade(id);
+	return id;
+}
+
+void Game::accept_trade(const int trade_id) {
+	auto it = trade_agreements_.find(trade_id);
+	if (it == trade_agreements_.end()) {
+		log("Game::accept_trade: Trade %d has vanished. Ignoring.\n", trade_id);
+		return;
+	}
+	const Trade& trade = it->second.trade;
+	auto* initiator = dynamic_cast<Market*>(objects().get_object(trade.initiator));
+	auto* receiver = dynamic_cast<Market*>(objects().get_object(trade.receiver));
+	if (initiator == nullptr || receiver == nullptr) {
+		cancel_trade(trade_id);
+		return;
+	}
+
+	initiator->new_trade(trade_id, trade.items_to_send, trade.num_batches, trade.receiver);
+	receiver->new_trade(trade_id, trade.items_to_receive, trade.num_batches, trade.initiator);
+
+	// TODO(sirver,trading): Message the users that the trade has been accepted.
+}
+
+void Game::cancel_trade(int trade_id) {
+	// The trade id might be long gone - since we never disconnect from the
+	// 'removed' signal of the two buildings, we might be invoked long after the
+	// trade was deleted for other reasons.
+	const auto it = trade_agreements_.find(trade_id);
+	if (it == trade_agreements_.end()) {
+		return;
+	}
+	const auto& trade = it->second.trade;
+
+	auto* initiator = dynamic_cast<Market*>(objects().get_object(trade.initiator));
+	if (initiator != nullptr) {
+		initiator->cancel_trade(trade_id);
+		// TODO(sirver,trading): Send message to owner that the trade has been canceled.
+	}
+
+	auto* receiver = dynamic_cast<Market*>(objects().get_object(trade.receiver));
+	if (receiver != nullptr) {
+		receiver->cancel_trade(trade_id);
+		// TODO(sirver,trading): Send message to owner that the trade has been canceled.
+	}
+	trade_agreements_.erase(trade_id);
 }
 
 LuaGameInterface& Game::lua() {
