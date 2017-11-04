@@ -568,7 +568,7 @@ bool DefaultAI::check_trainingsites(uint32_t gametime) {
 	TrainingSiteObserver& tso = trainingsites.front();
 
 	// Make sure we are not above ai type limit
-	if (so.bo->total_count() >  tso.bo->cnt_limit_by_aimode) {
+	if (tso.bo->total_count() >  tso.bo->cnt_limit_by_aimode) {
 		throw wexception("%d AI count of %s exceeds an AI limit %d: actual count: %d\n",
 		    player_number(), tso.bo->name, tso.bo->cnt_limit_by_aimode, tso.bo->total_count());
 	}
