@@ -284,13 +284,15 @@ void LoadOrSaveGame::clicked_delete() {
 		}
 		fill_table();
 
-		// Select something meaningful if possible.
-		// NOCOM scroll the table
+		// Select something meaningful if possible, then scroll to it.
 		const uint32_t selectme = std::max(0U, *selections.begin());
 		if (selectme < table_.size() - 1) {
 			table_.select(selectme);
 		} else if (!table_.empty()) {
 			table_.select(table_.size() - 1);
+		}
+		if (table_.has_selection()) {
+			table_.scroll_to_item(table_.selection_index() + 1);
 		}
 		// Make sure that the game details are updated
 		entry_selected();

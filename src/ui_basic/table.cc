@@ -416,25 +416,8 @@ void Table<void*>::move_selection(const int32_t offset) {
 		new_selection = entry_records_.size() - 1;
 
 	multiselect(new_selection);
-
 	// Scroll to newly selected entry
-	if (scrollbar_) {
-		// Keep an unselected item above or below
-		int32_t scroll_item = new_selection + offset;
-		if (scroll_item < 0)
-			scroll_item = 0;
-		if (scroll_item > static_cast<int32_t>(entry_records_.size())) {
-			scroll_item = entry_records_.size();
-		}
-
-		// Ensure scroll_item is visible
-		if (static_cast<int32_t>(scroll_item * get_lineheight()) < scrollpos_) {
-			scrollbar_->set_scrollpos(scroll_item * get_lineheight());
-		} else if (static_cast<int32_t>((scroll_item + 1) * get_lineheight() - get_inner_h()) >
-		           scrollpos_) {
-			scrollbar_->set_scrollpos((scroll_item + 1) * get_lineheight() - get_inner_h());
-		}
-	}
+	scroll_to_item(new_selection + offset);
 }
 
 /**
@@ -481,6 +464,26 @@ void Table<void*>::multiselect(uint32_t row) {
 		last_multiselect_ = row;
 	} else {
 		select(row);
+	}
+}
+
+// Scroll to the given item. Out of range items will be corrected automatically.
+void Table<void*>::scroll_to_item(int32_t item) {
+	if (scrollbar_) {
+		// Correct out of range items
+		if (item < 0) {
+			item = 0;
+		} else if (item >= static_cast<int32_t>(entry_records_.size())) {
+			item = entry_records_.size() - 1;
+		}
+
+		// Ensure item is visible
+		if (static_cast<int32_t>(item * get_lineheight()) < scrollpos_) {
+			scrollbar_->set_scrollpos(item * get_lineheight());
+		} else if (static_cast<int32_t>((item + 2) * get_lineheight() - get_inner_h()) >
+		           scrollpos_) {
+			scrollbar_->set_scrollpos((item + 3) * get_lineheight() - get_inner_h());
+		}
 	}
 }
 
