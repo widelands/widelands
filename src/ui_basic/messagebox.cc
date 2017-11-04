@@ -147,7 +147,9 @@ bool WLMessageBox::handle_key(bool down, SDL_Keysym code) {
 
 void WLMessageBox::clicked_ok() {
 	ok_button_->set_enabled(false);
-	cancel_button_->set_enabled(false);
+	if (cancel_button_) {
+		cancel_button_->set_enabled(false);
+	}
 	ok();
 	if (is_modal())
 		end_modal<UI::Panel::Returncodes>(UI::Panel::Returncodes::kOk);
