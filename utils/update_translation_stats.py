@@ -74,6 +74,26 @@ def generate_translation_stats(po_dir, output_file):
 
         result = stats_output.split('\n')
 
+        # pocount distributes its header over multiple lines, so we have to do some
+        # collecting here before we parse it
+        header = ""
+        for line in result:
+            # Non-header rows will have a file path in them
+            if "/" in line or "\\" in line:
+                break
+            header = header + " " + line
+        header_entries = header.split(",")
+        column_counter = 0
+        total_column = 0
+        translated_column = 0
+        while column_counter < len(header_entries):
+            if header_entries[column_counter].strip() == "Total Source Words":
+                total_column = column_counter
+            elif header_entries[column_counter].strip() == "Translated Source Words":
+                translated_column = column_counter
+            column_counter = column_counter + 1
+
+        # Now do the actual counting for the current textdomain
         for line in result:
             cells = line.split(",")
             po_filename = cells[0]
@@ -82,8 +102,11 @@ def generate_translation_stats(po_dir, output_file):
                 locale = regex_po.match(po_filename).group(1)
                 if locale in locale_stats:
                     entry = locale_stats[locale]
-                entry.total = entry.total + int(cells[9])
-                entry.translated = entry.translated + int(cells[3])
+                entry.total = entry.total + int(cells[total_column])
+                entry.translated = entry.translated + int(cells[translated_column])
+                if entry.translated > entry.total:
+                    print("Error! Translated " + str(entry.translated) + " (+"+(cells[translated_column])+") is bigger than the total of " + str(entry.total) + "("+(cells[total_column])+")\n" + line)
+                    sys.exit(1)
                 locale_stats[locale] = entry
 
     print('\n\nLocale\tTotal\tTranslated')
