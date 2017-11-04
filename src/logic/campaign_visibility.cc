@@ -36,8 +36,9 @@ std::string CampaignVisibilitySave::get_path() {
 	g_fs->ensure_directory_exists(kSaveDir);  // Make sure save directory exists
 
 	// check if campaigns visibility-save is available
-	if (!(g_fs->file_exists(kCampVisFile)))
+	if (!(g_fs->file_exists(kCampVisFile))) {
 		make_campvis(kCampVisFile);
+	}
 
 	// check if campaigns visibility-save is up to date
 	Profile ca(kCampVisFile);

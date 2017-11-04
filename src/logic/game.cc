@@ -81,7 +81,7 @@ Game::SyncWrapper::~SyncWrapper() {
 }
 
 void Game::SyncWrapper::start_dump(const std::string& fname) {
-	dumpfname_ = (boost::format("%s%s") % fname % kSyncstreamExtension).str();
+	dumpfname_ = fname + kSyncstreamExtension;
 	dump_.reset(g_fs->open_stream_write(dumpfname_));
 }
 
@@ -482,9 +482,8 @@ bool Game::run(UI::ProgressWindow* loader_ui,
 
 	if (writereplay_ || writesyncstream_) {
 		// Derive a replay filename from the current time
-		const std::string fname = (boost::format("%s/%s_%s%s") % kReplayDir % timestring() %
-		                           prefix_for_replays % kReplayExtension)
-		                             .str();
+		const std::string fname = kReplayDir + g_fs->file_separator() + std::string(timestring()) + std::string("_") +
+		                           prefix_for_replays + kReplayExtension;
 		if (writereplay_) {
 			log("Starting replay writer\n");
 

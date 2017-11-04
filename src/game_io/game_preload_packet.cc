@@ -48,7 +48,7 @@ constexpr const char* kMinimapFilename = "minimap.png";
 
 // Win condition localization can come from the 'widelands' or 'win_conditions' textdomain.
 std::string GamePreloadPacket::get_localized_win_condition() const {
-	std::string result = _(win_condition_);
+	const std::string result = _(win_condition_);
 	i18n::Textdomain td("win_conditions");
 	return _(result);
 }
