@@ -310,7 +310,7 @@ void SeafaringStatisticsMenu::update_ship(const Widelands::Ship& ship) {
 	assert(iplayer().get_player() == ship.get_owner());
 	const ShipInfo* info = create_shipinfo(ship);
 	// Remove ships that don't satisfy the filter
-	if (ship_filter_ != ShipFilterStatus::kAll && info->status != ship_filter_) {
+	if (ship_filter_ != ShipFilterStatus::kAll && !satisfies_filter(*info, ship_filter_)) {
 		remove_ship(info->serial);
 		return;
 	}
@@ -414,12 +414,6 @@ bool SeafaringStatisticsMenu::handle_key(bool down, SDL_Keysym code) {
 				return true;
 			}
 			return false;
-		case SDLK_6:
-			if (code.mod & KMOD_ALT) {
-				filter_ships(ShipFilterStatus::kExpeditionColonizing);
-				return true;
-			}
-			return false;
 		case SDL_SCANCODE_KP_PERIOD:
 		case SDLK_KP_PERIOD:
 			if (code.mod & KMOD_NUM)
@@ -464,6 +458,8 @@ void SeafaringStatisticsMenu::filter_ships(ShipFilterStatus status) {
 	case ShipFilterStatus::kExpeditionScouting:
 		toggle_filter_ships_button(scouting_btn_, status);
 		break;
+	// We're grouping the "colonizing" status with the port space.
+	case ShipFilterStatus::kExpeditionColonizing:
 	case ShipFilterStatus::kExpeditionPortspaceFound:
 		toggle_filter_ships_button(portspace_btn_, status);
 		break;
@@ -473,8 +469,6 @@ void SeafaringStatisticsMenu::filter_ships(ShipFilterStatus status) {
 	case ShipFilterStatus::kIdle:
 		toggle_filter_ships_button(idle_btn_, status);
 		break;
-		// We're not interested in the "colonizing" status for filtering.
-
 	case ShipFilterStatus::kAll:
 		set_filter_ships_tooltips();
 		ship_filter_ = ShipFilterStatus::kAll;
@@ -532,9 +526,15 @@ void SeafaringStatisticsMenu::set_filter_ships_tooltips() {
 	                             .str());
 	portspace_btn_.set_tooltip((boost::format(_("%1% (Hotkey: %2%)"))
 	                            /** TRANSLATORS: Tooltip in the messages window */
-	                            % _("Show expeditions with port space found") %
+	                            % _("Show colonizing expeditions and expeditions with port space found") %
 	                            pgettext("hotkey", "Alt + 5"))
 	                              .str());
+}
+
+bool SeafaringStatisticsMenu::satisfies_filter(const ShipInfo& info, ShipFilterStatus filter) {
+	return filter == info.status ||
+			(filter == ShipFilterStatus::kExpeditionPortspaceFound
+			 && info.status == ShipFilterStatus::kExpeditionColonizing);
 }
 
 void SeafaringStatisticsMenu::fill_table() {
@@ -547,7 +547,7 @@ void SeafaringStatisticsMenu::fill_table() {
 		assert(iplayer().get_player() == ship->get_owner());
 		const ShipInfo* info = create_shipinfo(*ship);
 		if (info->status != ShipFilterStatus::kAll) {
-			if (ship_filter_ == ShipFilterStatus::kAll || info->status == ship_filter_) {
+			if (ship_filter_ == ShipFilterStatus::kAll || satisfies_filter(*info, ship_filter_)) {
 				data_.insert(std::make_pair(serial, info));
 				UI::Table<uintptr_t const>::EntryRecord& er = table_.add(serial, serial == last_selection);
 				set_entry_record(&er, *info);

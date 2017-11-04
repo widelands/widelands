@@ -129,6 +129,9 @@ private:
 	/// Helper for filter_ships
 	void set_filter_ships_tooltips();
 
+	/// We group colonizing status with port space found. Anything else needs to have an identical status.
+	bool satisfies_filter(const ShipInfo& info, ShipFilterStatus filter);
+
 	const Image* colony_icon_;
 	UI::Box main_box_;
 	// Buttons for ship states
