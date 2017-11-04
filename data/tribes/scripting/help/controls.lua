@@ -22,6 +22,16 @@ return {
                -- TRANSLATORS: This is an access key combination. Localize, but do not change the key.
                dl(help_format_hotkey(pgettext("hotkey", "Ctrl + Left-click on Button")), _"Skip confirmation dialog")) ..
 
+         h2(_"Table Control") ..
+         h3(_"In tables that allow the selection of multiple entries, the following key combinations are available:") ..
+         p(
+               -- TRANSLATORS: This is an access key combination. Localize, but do not change the key.
+               dl(help_format_hotkey(pgettext("hotkey", "Ctrl + Click")), pgettext("table_control", "Select multiple entries")) ..
+               -- TRANSLATORS: This is an access key combination. Localize, but do not change the key.
+               dl(help_format_hotkey(pgettext("hotkey", "Shift + Click")), pgettext("table_control", "Select a range of entries")) ..
+               -- TRANSLATORS: This is an access key combination. Localize, but do not change the key.
+               dl(help_format_hotkey(pgettext("hotkey", "Ctrl + A")), pgettext("table_control", "Select all entries"))) ..
+
          h2(_"Road Control") ..
          p(
                -- TRANSLATORS: This is an access key combination. Localize, but do not change the key.
@@ -76,7 +86,7 @@ return {
          ) ..
 
          -- TRANSLATORS: Heading in "Controls" help
-         h3(_"Message Window") ..
+         h2(_"Message Window") ..
          p(
                -- TRANSLATORS: This is the helptext for an access key combination.
                dl(help_format_hotkey(pgettext("hotkey", "Alt + 0")), _"Show all messages") ..
@@ -97,7 +107,7 @@ return {
           ) ..
 
          -- TRANSLATORS: Heading in "Controls" help
-         h3(_"Ship Statistics") ..
+         h2(_"Ship Statistics") ..
          p(
                -- TRANSLATORS: This is the helptext for an access key combination.
                dl(help_format_hotkey(pgettext("hotkey", "Alt + 0")), _"Show all ships") ..
@@ -117,16 +127,6 @@ return {
                dl(help_format_hotkey("O"), _"Go to the selected ship and open its window") ..
                -- TRANSLATORS: This is the helptext for an access key combination.
                dl(help_format_hotkey("W"), _"Watch the selected ship")
-         ) ..
-
-         h2(_"Table Control") ..
-         h3(_"In tables that allow the selection of multiple entries, the following key combinations are available:") ..
-         p(
-               -- TRANSLATORS: This is an access key combination. Localize, but do not change the key.
-               dl(help_format_hotkey(pgettext("hotkey", "Ctrl + Click")), pgettext("table_control", "Select multiple entries")) ..
-               -- TRANSLATORS: This is an access key combination. Localize, but do not change the key.
-               dl(help_format_hotkey(pgettext("hotkey", "Shift + Click")), pgettext("table_control", "Select a range of entries")) ..
-               -- TRANSLATORS: This is an access key combination. Localize, but do not change the key.
-               dl(help_format_hotkey(pgettext("hotkey", "Ctrl + A")), pgettext("table_control", "Select all entries")))
+         )
       )
 }
