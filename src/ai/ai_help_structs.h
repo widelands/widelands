@@ -79,6 +79,7 @@ enum class BuildingAttribute : uint8_t {
 	kLogRefiner,
 	kIronMine,
 	kNeedsSeafaring,
+	kSupportingProducer,
 };
 
 enum class AiType : uint8_t { kVeryWeak, kWeak, kNormal };
@@ -389,7 +390,7 @@ struct EconomyObserver {
 	explicit EconomyObserver(Widelands::Economy& e);
 
 	Widelands::Economy& economy;
-	std::list<Widelands::Flag const*> flags;
+	std::deque<Widelands::Flag const*> flags;
 	int32_t dismantle_grace_time;
 };
 

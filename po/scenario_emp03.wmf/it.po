@@ -5,13 +5,14 @@
 # Translators:
 # Guybrush88 <erpizzo@alice.it>, 2017
 # Airina Santonocito <airina.santonocito@gmail.com>, 2017
+# theo the best <enthusedquill6@gmail.com>, 2017
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-10-09 18:20+0000\n"
+"POT-Creation-Date: 2017-10-23 08:29+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: Airina Santonocito <airina.santonocito@gmail.com>, 2017\n"
+"Last-Translator: theo the best <enthusedquill6@gmail.com>, 2017\n"
 "Language-Team: Italian (https://www.transifex.com/widelands/teams/35159/it/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -48,6 +49,8 @@ msgid ""
 "Build a quarry close to the abundant rocks, so we can free some building "
 "plots and get some valuable resources."
 msgstr ""
+"Costruisci una cava vicino ad un'abbondanza, così potremo liberare dello "
+"spazio per gli edifici e ottenere delle importanti risorse."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:57
 msgid "Build a lumberjack’s house, a sawmill and a stonemason’s house"
@@ -82,15 +85,20 @@ msgid ""
 "We should save some marble for buildings. So, please lower the demand for "
 "marble columns in the economy settings to four."
 msgstr ""
+"Dovremmo conservare un po' di marmo per gli edifici. Quindi, per favore, "
+"abbassa la domanda per le colonne di marmo nelle impostazioni dell'economia "
+"a quattro."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:70
 msgid ""
 "Remember that you can access the economy settings by clicking on any flag."
 msgstr ""
+"Ricordati che puoi accedere alle impostazioni dell'economia cliccando su "
+"qualsiasi bandiera."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:76
 msgid "Find a port space on the small island"
-msgstr ""
+msgstr "Trova dello spazio per un porto sulla piccola isola"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:78
 msgid "Port Space"
@@ -100,6 +108,8 @@ msgstr "Spazio per il porto"
 msgid ""
 "In order to regain access to the sea, we first must discover a port space."
 msgstr ""
+"Per riottenere l'accesso al mare, dobbiamo prima trovare dello spazio per un"
+" porto."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:85
 msgid "Build a port and a shipyard on the Island"
@@ -111,11 +121,12 @@ msgstr "Industria navale"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:88
 msgid "Build a port to set sail from this island."
-msgstr ""
+msgstr "Costruisci un porto per salpare da quest'isola."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:89
 msgid "Build a shipyard to produce the ships to sail on."
 msgstr ""
+"Costruisci un cantiere navale per costruire delle navi su cui salpare."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:94
 msgid "Produce at least 50 sheaves of wheat"
@@ -134,7 +145,7 @@ msgstr ""
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:103
 msgid "Produce cloth for building our first ship"
-msgstr ""
+msgstr "Produci del tessuto per costruire la nostra prima nave"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:105
 msgid "Cloth Production"
@@ -145,6 +156,8 @@ msgid ""
 "Now let’s turn all the wheat into wool (at least 50 bales) and then use the "
 "wool to weave cloth in order to build a ship."
 msgstr ""
+"Ora trasformiamo tutto il grano in lana (almeno 50 balle) e poi usiamo la "
+"lana per tessere delle stoffe per costruire una nave."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:112
 msgid "Build 2 ports on distant islands"

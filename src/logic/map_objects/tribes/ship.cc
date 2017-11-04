@@ -612,6 +612,10 @@ void Ship::ship_update_idle(Game& game, Bob::State& state) {
 	case ShipStates::kExpeditionColonizing: {
 		assert(!expedition_->seen_port_buildspaces.empty());
 		BaseImmovable* baim = map[expedition_->seen_port_buildspaces.front()].get_immovable();
+		// Following is a preparation for very rare situation, when colonizing port already have a
+		// worker (bug-1727673)
+		// We leave the worker on the ship then
+		bool leftover_builder = false;
 		if (baim) {
 			upcast(ConstructionSite, cs, baim);
 
@@ -644,6 +648,16 @@ void Ship::ship_update_idle(Game& game, Bob::State& state) {
 					break;
 				} else {
 					assert(worker);
+					// If constructionsite does not need worker anymore, we must leave it on the ship.
+					// Also we presume that he is on position 0
+					if (cs->get_builder_request() == nullptr) {
+						log("%2d: WARNING: Colonizing ship %s cannot unload the worker to new port at "
+						    "%3dx%3d because the request is no longer active\n",
+						    get_owner()->player_number(), shipname_.c_str(), cs->get_position().x,
+						    cs->get_position().y);
+						leftover_builder = true;
+						break;  // no more unloading (builder shoud be on position 0)
+					}
 					worker->set_economy(nullptr);
 					worker->set_location(cs);
 					worker->set_position(game, cs->get_position());
@@ -661,8 +675,8 @@ void Ship::ship_update_idle(Game& game, Bob::State& state) {
 			send_signal(game, "cancel_expedition");
 		}
 
-		if (items_.empty() || !baim) {            // we are done, either way
-			ship_state_ = ShipStates::kTransport;  // That's it, expedition finished
+		if (items_.empty() || !baim || leftover_builder) {  // we are done, either way
+			ship_state_ = ShipStates::kTransport;            // That's it, expedition finished
 
 			// Bring us back into a fleet and a economy.
 			init_fleet(game);
