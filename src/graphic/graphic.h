@@ -25,6 +25,7 @@
 #include <SDL.h>
 
 #include "graphic/image_cache.h"
+#include "graphic/style_manager.h"
 #include "notifications/note_ids.h"
 #include "notifications/notifications.h"
 

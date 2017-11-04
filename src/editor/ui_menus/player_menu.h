@@ -49,8 +49,7 @@ private:
 	UI::Textarea* nr_of_players_ta_;
 	UI::EditBox* plr_names_[kMaxPlayers];
 	UI::Button add_player_, remove_last_player_;
-	UI::Button *plr_make_infrastructure_buts_[kMaxPlayers], *plr_set_pos_buts_[kMaxPlayers],
-	   *plr_set_tribes_buts_[kMaxPlayers];
+	UI::Button *plr_set_pos_buts_[kMaxPlayers], *plr_set_tribes_buts_[kMaxPlayers];
 
 	std::vector<std::string> tribenames_;
 
@@ -66,7 +65,6 @@ private:
 	void set_starting_pos_clicked(uint8_t);
 	void update();
 	void think() override;
-	void make_infrastructure_clicked(uint8_t);
 };
 
 #endif  // end of include guard: WL_EDITOR_UI_MENUS_PLAYER_MENU_H

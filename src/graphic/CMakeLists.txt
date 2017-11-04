@@ -173,8 +173,9 @@ wl_library(graphic_render_queue
     base_geometry
     base_macros
     graphic_color
-    graphic_terrain_programs
     graphic_draw_programs
+    graphic_fields_to_draw
+    graphic_terrain_programs
     logic
 )
 
@@ -186,13 +187,12 @@ wl_library(graphic_game_renderer
     base_geometry
     base_macros
     graphic
+    graphic_fields_to_draw
     graphic_gl_utils
     graphic_render_queue
     graphic_surface
-    graphic_terrain_programs
     logic
     wui
-    wui_field_overlay_manager
     wui_mapview_pixelfunctions
 )
 
@@ -209,9 +209,22 @@ wl_library(graphic_minimap_renderer
     wui_mapview_pixelfunctions
 )
 
+wl_library(graphic_fields_to_draw
+  SRCS
+    gl/fields_to_draw.cc
+    gl/fields_to_draw.h
+  DEPENDS
+    base_geometry
+    graphic
+    graphic_gl_utils
+    logic
+    logic_constants
+    logic_widelands_geometry
+    wui_mapview_pixelfunctions
+)
+
 wl_library(graphic_terrain_programs
   SRCS
-    gl/fields_to_draw.h
     gl/road_program.cc
     gl/road_program.h
     gl/terrain_program.cc
@@ -223,13 +236,12 @@ wl_library(graphic_terrain_programs
     base_geometry
     base_log
     base_macros
+    graphic_fields_to_draw
     graphic_gl_utils
     graphic_image_io
     graphic_surface
     io_filesystem
     logic
-    logic_constants
-    logic_widelands_geometry
 )
 
 

@@ -41,7 +41,7 @@ void MapTerrainPacket::read(FileSystem& fs,
 	FileRead fr;
 	fr.open(fs, "binary/terrain");
 
-	Map& map = egbase.map();
+	const Map& map = egbase.map();
 	const World& world = egbase.world();
 
 	try {

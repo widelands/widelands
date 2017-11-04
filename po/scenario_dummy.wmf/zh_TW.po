@@ -1,5 +1,5 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2016 Widelands Development Team
+# Copyright (C) 2005-2017 Widelands Development Team
 # 
 # Translators:
 # Arm Coon <armcoon@gmail.com>, 2016
@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-10-15 08:42+0000\n"
-"PO-Revision-Date: 2016-08-26 07:26+0000\n"
+"POT-Creation-Date: 2017-09-15 18:56+0000\n"
+"PO-Revision-Date: 2017-09-21 23:43+0000\n"
 "Last-Translator: Arm Coon <armcoon@gmail.com>\n"
 "Language-Team: Chinese (Taiwan) (http://www.transifex.com/widelands/widelands/language/zh_TW/)\n"
 "MIME-Version: 1.0\n"
@@ -32,7 +32,7 @@ msgstr "抱歉, 這個地圖尚未執行"
 msgid "“%s”"
 msgstr "“%s”"
 
-#: ../../data/scripting/format_scenario.lua:96
+#: ../../data/scripting/format_scenario.lua:84
 msgid "New Objective"
 msgid_plural "New Objectives"
 msgstr[0] "新目標"

@@ -79,7 +79,7 @@ private:
 
 private:
 	Widelands::Player* player_;
-	Widelands::Map* map_;
+	const Widelands::Map& map_;
 	Widelands::FCoords* node_coordinates_;
 
 	std::unique_ptr<UI::Slider> soldiers_slider_;

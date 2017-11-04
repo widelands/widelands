@@ -80,6 +80,7 @@ enum class MapObjectType : uint8_t {
 	CONSTRUCTIONSITE,  // Building -- Constructionsite
 	DISMANTLESITE,     // Building -- Dismantlesite
 	WAREHOUSE,         // Building -- Warehouse
+	MARKET,            // Building -- Market
 	PRODUCTIONSITE,    // Building -- Productionsite
 	MILITARYSITE,      // Building -- Productionsite -- Militarysite
 	TRAININGSITE       // Building -- Productionsite -- Trainingsite

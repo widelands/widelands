@@ -66,7 +66,7 @@ DismantleSite::DismantleSite(const DismantleSiteDescr& gdescr) : PartiallyFinish
 
 DismantleSite::DismantleSite(const DismantleSiteDescr& gdescr,
                              EditorGameBase& egbase,
-                             Coords const c,
+                             const Coords& c,
                              Player& plr,
                              bool loading,
                              Building::FormerBuildings& former_buildings)

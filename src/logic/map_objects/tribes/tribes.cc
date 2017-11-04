@@ -24,6 +24,7 @@
 #include "base/wexception.h"
 #include "graphic/graphic.h"
 #include "logic/game_data_error.h"
+#include "logic/map_objects/tribes/market.h"
 
 namespace Widelands {
 
@@ -117,6 +118,13 @@ void Tribes::add_trainingsite_type(const LuaTable& table, const EditorGameBase& 
 void Tribes::add_warehouse_type(const LuaTable& table, const EditorGameBase& egbase) {
 	i18n::Textdomain td("tribes");
 	buildings_->add(new WarehouseDescr(
+	   pgettext_expr(table.get_string("msgctxt").c_str(), table.get_string("descname").c_str()),
+	   table, egbase));
+}
+
+void Tribes::add_market_type(const LuaTable& table, const EditorGameBase& egbase) {
+	i18n::Textdomain td("tribes");
+	buildings_->add(new MarketDescr(
 	   pgettext_expr(table.get_string("msgctxt").c_str(), table.get_string("descname").c_str()),
 	   table, egbase));
 }

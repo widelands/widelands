@@ -36,7 +36,6 @@ public:
 	void set_time(int32_t);
 
 private:
-	InteractivePlayer* parent_;
 	WuiPlotArea* plot_production_;
 	WuiPlotArea* plot_consumption_;
 	WuiPlotArea* plot_stock_;
@@ -44,7 +43,6 @@ private:
 	std::vector<uint8_t> color_map_;  // Maps ware index to colors
 	std::vector<bool> active_colors_;
 
-	void clicked_help();
 	void cb_changed_to(Widelands::DescriptionIndex, bool);
 };
 

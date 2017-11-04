@@ -26,7 +26,7 @@ tribes:new_militarysite_type {
    aihints = {
       expansion = true,
       mountain_conqueror = true,
-      prohibited_till = 600
+      prohibited_till = 400
    },
 
    animations = {

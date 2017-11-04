@@ -212,13 +212,6 @@ GeneralStatisticsMenu::~GeneralStatisticsMenu() {
 	}
 }
 
-/**
- * called when the help button was clicked
- */
-// TODO(unknown): Implement help
-void GeneralStatisticsMenu::clicked_help() {
-}
-
 /*
  * Cb has been changed to this state
  */

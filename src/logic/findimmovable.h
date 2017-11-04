@@ -62,7 +62,7 @@ private:
 	BaseCapsule* capsule;
 
 public:
-	FindImmovable(const FindImmovable& o) {
+	explicit FindImmovable(const FindImmovable& o) {
 		capsule = o.capsule;
 		capsule->addref();
 	}

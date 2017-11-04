@@ -60,7 +60,6 @@ private:
 	UI::Button* cbs_[kMaxPlayers];
 	uint32_t ndatasets_;
 
-	void clicked_help();
 	void cb_changed_to(int32_t);
 	void radiogroup_changed(int32_t);
 };

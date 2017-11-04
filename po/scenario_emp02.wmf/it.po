@@ -14,8 +14,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-01-21 14:22+0000\n"
-"PO-Revision-Date: 2017-01-21 14:24+0000\n"
+"POT-Creation-Date: 2017-09-15 18:56+0000\n"
+"PO-Revision-Date: 2017-09-23 20:46+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Italian (http://www.transifex.com/widelands/widelands/language/it/)\n"
 "MIME-Version: 1.0\n"
@@ -520,7 +520,7 @@ msgstr "Hai completato questa missione. Puoi continuare a giocare, se lo desider
 msgid "“%s”"
 msgstr "“%s”"
 
-#: ../../data/scripting/format_scenario.lua:96
+#: ../../data/scripting/format_scenario.lua:84
 msgid "New Objective"
 msgid_plural "New Objectives"
 msgstr[0] "Nuovo obiettivo"

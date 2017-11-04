@@ -287,7 +287,7 @@ void Ship::ship_update(Game& game, Bob::State& state) {
 
 /// updates a ships tasks in transport mode \returns false if failed to update tasks
 bool Ship::ship_update_transport(Game& game, Bob::State& state) {
-	Map& map = game.map();
+	const Map& map = game.map();
 
 	PortDock* dst = get_destination(game);
 	if (!dst) {
@@ -365,7 +365,7 @@ bool Ship::ship_update_transport(Game& game, Bob::State& state) {
 
 /// updates a ships tasks in expedition mode
 void Ship::ship_update_expedition(Game& game, Bob::State&) {
-	Map& map = game.map();
+	Map* map = game.mutable_map();
 
 	assert(expedition_);
 
@@ -373,29 +373,29 @@ void Ship::ship_update_expedition(Game& game, Bob::State&) {
 	FCoords position = get_position();
 	for (Direction dir = FIRST_DIRECTION; dir <= LAST_DIRECTION; ++dir) {
 		expedition_->swimmable[dir - 1] =
-		   map.get_neighbour(position, dir).field->nodecaps() & MOVECAPS_SWIM;
+		   map->get_neighbour(position, dir).field->nodecaps() & MOVECAPS_SWIM;
 	}
 
 	if (ship_state_ == ShipStates::kExpeditionScouting) {
 		// Check surrounding fields for port buildspaces
 		std::vector<Coords> temp_port_buildspaces;
-		MapRegion<Area<Coords>> mr(map, Area<Coords>(position, descr().vision_range()));
+		MapRegion<Area<Coords>> mr(*map, Area<Coords>(position, descr().vision_range()));
 		bool new_port_space = false;
 		do {
-			if (!map.is_port_space(mr.location())) {
+			if (!map->is_port_space(mr.location())) {
 				continue;
 			}
 
-			const FCoords fc = map.get_fcoords(mr.location());
+			const FCoords fc = map->get_fcoords(mr.location());
 
 			// Check whether the maximum theoretical possible NodeCap of the field
 			// is of the size big and whether it can theoretically be a port space
-			if ((map.get_max_nodecaps(game.world(), fc) & BUILDCAPS_SIZEMASK) != BUILDCAPS_BIG ||
-			    map.find_portdock(fc).empty()) {
+			if ((map->get_max_nodecaps(game.world(), fc) & BUILDCAPS_SIZEMASK) != BUILDCAPS_BIG ||
+			    map->find_portdock(fc).empty()) {
 				continue;
 			}
 
-			if (!can_build_port_here(get_owner()->player_number(), map, fc)) {
+			if (!can_build_port_here(get_owner()->player_number(), *map, fc)) {
 				continue;
 			}
 
@@ -408,7 +408,7 @@ void Ship::ship_update_expedition(Game& game, Bob::State&) {
 				new_port_space = true;
 				temp_port_buildspaces.insert(temp_port_buildspaces.begin(), mr.location());
 			}
-		} while (mr.advance(map));
+		} while (mr.advance(*map));
 
 		if (new_port_space) {
 			ship_state_ = ShipStates::kExpeditionPortspaceFound;
@@ -437,10 +437,10 @@ void Ship::ship_update_idle(Game& game, Bob::State& state) {
 
 	// If we are waiting for the next transport job, check if we should move away from ships and
 	// shores
+	const Map& map = game.map();
 	switch (ship_state_) {
 	case ShipStates::kTransport: {
 		FCoords position = get_position();
-		Map& map = game.map();
 		unsigned int dirs[LAST_DIRECTION + 1];
 		unsigned int dirmax = 0;
 
@@ -568,7 +568,6 @@ void Ship::ship_update_idle(Game& game, Bob::State& state) {
 				// Most likely the command was send as the ship was on an exploration and just leaving
 				// the island - therefore we try to find the island again.
 				FCoords position = get_position();
-				Map& map = game.map();
 				for (uint8_t dir = FIRST_DIRECTION; dir <= LAST_DIRECTION; ++dir) {
 					FCoords neighbour = map.get_neighbour(position, dir);
 					for (uint8_t sur = FIRST_DIRECTION; sur <= LAST_DIRECTION; ++sur)
@@ -611,7 +610,11 @@ void Ship::ship_update_idle(Game& game, Bob::State& state) {
 	}
 	case ShipStates::kExpeditionColonizing: {
 		assert(!expedition_->seen_port_buildspaces.empty());
-		BaseImmovable* baim = game.map()[expedition_->seen_port_buildspaces.front()].get_immovable();
+		BaseImmovable* baim = map[expedition_->seen_port_buildspaces.front()].get_immovable();
+		// Following is a preparation for very rare situation, when colonizing port already have a
+		// worker (bug-1727673)
+		// We leave the worker on the ship then
+		bool leftover_builder = false;
 		if (baim) {
 			upcast(ConstructionSite, cs, baim);
 
@@ -644,6 +647,16 @@ void Ship::ship_update_idle(Game& game, Bob::State& state) {
 					break;
 				} else {
 					assert(worker);
+					// If constructionsite does not need worker anymore, we must leave it on the ship.
+					// Also we presume that he is on position 0
+					if (cs->get_builder_request() == nullptr) {
+						log("%2d: WARNING: Colonizing ship %s cannot unload the worker to new port at "
+						    "%3dx%3d because the request is no longer active\n",
+						    get_owner()->player_number(), shipname_.c_str(), cs->get_position().x,
+						    cs->get_position().y);
+						leftover_builder = true;
+						break;  // no more unloading (builder shoud be on position 0)
+					}
 					worker->set_economy(nullptr);
 					worker->set_location(cs);
 					worker->set_position(game, cs->get_position());
@@ -661,8 +674,8 @@ void Ship::ship_update_idle(Game& game, Bob::State& state) {
 			send_signal(game, "cancel_expedition");
 		}
 
-		if (items_.empty() || !baim) {            // we are done, either way
-			ship_state_ = ShipStates::kTransport;  // That's it, expedition finished
+		if (items_.empty() || !baim || leftover_builder) {  // we are done, either way
+			ship_state_ = ShipStates::kTransport;            // That's it, expedition finished
 
 			// Bring us back into a fleet and a economy.
 			init_fleet(game);
@@ -741,13 +754,13 @@ void Ship::withdraw_items(Game& game, PortDock& pd, std::vector<ShippingItem>& i
  * Find a path to the dock @p pd, returns its length, and the path optionally.
  */
 uint32_t Ship::calculate_sea_route(Game& game, PortDock& pd, Path* finalpath) const {
-	Map& map = game.map();
+	Map* map = game.mutable_map();
 	StepEvalAStar se(pd.get_warehouse()->get_position());
 	se.swim_ = true;
 	se.conservative_ = false;
-	se.estimator_bias_ = -5 * map.calc_cost(0);
+	se.estimator_bias_ = -5 * map->calc_cost(0);
 
-	MapAStar<StepEvalAStar> astar(map, se);
+	MapAStar<StepEvalAStar> astar(*map, se);
 
 	astar.push(get_position());
 

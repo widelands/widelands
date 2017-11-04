@@ -29,7 +29,6 @@
 #include "ui_basic/button.h"
 #include "ui_basic/tabpanel.h"
 #include "ui_basic/unique_window.h"
-#include "wui/field_overlay_manager.h"
 #include "wui/interactive_gamebase.h"
 #include "wui/waresdisplay.h"
 
@@ -91,10 +90,20 @@ protected:
 	bool is_dying_;
 
 private:
-	InteractiveGameBase* parent_;
-	/// Actions performed when a NoteBuilding is received.
+	// Actions performed when a NoteBuilding is received.
 	void on_building_note(const Widelands::NoteBuilding& note);
+
+	// For ports only.
+	void update_expedition_button(bool expedition_was_canceled);
+
+	InteractiveGameBase* parent_;
+
 	Widelands::Building& building_;
+
+	// We require this to unregister overlays when we are closed. Since the
+	// building might have been destroyed by then we have to keep a copy of its
+	// position around.
+	const Widelands::Coords building_position_;
 
 	std::unique_ptr<UI::Box> vbox_;
 
@@ -108,11 +117,8 @@ private:
 	Widelands::PlayerNumber capscache_player_number_;
 	bool caps_setup_;
 
-	FieldOverlayManager::OverlayId workarea_overlay_id_;
+	bool showing_workarea_;
 	bool avoid_fastclick_;
-
-	// For ports only.
-	void update_expedition_button(bool expedition_was_canceled);
 
 	UI::Button* expeditionbtn_;
 	std::unique_ptr<Notifications::Subscriber<Widelands::NoteExpeditionCanceled>>

@@ -255,11 +255,6 @@ public:
 		assert(selection_ < entry_records_.size());
 		return *entry_records_.at(selection_);
 	}
-	void remove_selected() {
-		if (selection_ == no_selection_index())
-			throw NoSelection();
-		remove(selection_);
-	}
 	void* get_selected() const {
 		return get_selected_record().entry();
 	}

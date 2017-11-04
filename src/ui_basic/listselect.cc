@@ -120,7 +120,6 @@ void BaseListselect::add(const std::string& name,
 
 	er->entry_ = entry;
 	er->pic = pic;
-	er->use_clr = false;
 	er->name = name;
 	er->tooltip = tooltip_text;
 	int entry_height = lineheight_;
@@ -155,7 +154,6 @@ void BaseListselect::add_front(const std::string& name,
 	}
 
 	er->pic = pic;
-	er->use_clr = false;
 	er->name = name;
 	er->tooltip = tooltip_text;
 
@@ -177,24 +175,6 @@ void BaseListselect::add_front(const std::string& name,
 
 	if (sel)
 		select(0);
-}
-
-/**
- * Switch two entries
- */
-void BaseListselect::switch_entries(const uint32_t m, const uint32_t n) {
-	assert(m < size());
-	assert(n < size());
-
-	std::swap(entry_records_[m], entry_records_[n]);
-
-	if (selection_ == m) {
-		selection_ = n;
-		selected(n);
-	} else if (selection_ == n) {
-		selection_ = m;
-		selected(m);
-	}
 }
 
 /**
@@ -233,17 +213,6 @@ void BaseListselect::set_scrollpos(const int32_t i) {
 }
 
 /**
- * Define a special color that will be used to display the item at the given
- * index.
- */
-void BaseListselect::set_entry_color(const uint32_t n, const RGBColor& col) {
-	assert(n < entry_records_.size());
-
-	entry_records_[n]->use_clr = true;
-	entry_records_[n]->clr = col;
-}
-
-/**
  * Change the currently selected entry
  *
  * Args: i  the entry to select
@@ -279,14 +248,6 @@ bool BaseListselect::has_selection() const {
 uint32_t BaseListselect::get_selected() const {
 	return selection_ < entry_records_.size() ? entry_records_[selection_]->entry_ :
 	                                            no_selection_index();
-}
-
-/**
- * Remove the currently selected item. Requires an element to have been selected first.
- */
-void BaseListselect::remove_selected() {
-	assert(selection_ != no_selection_index());
-	remove(selection_);
 }
 
 /**
@@ -334,8 +295,8 @@ void BaseListselect::layout() {
 	if (selection_mode_ == ListselectLayout::kDropdown) {
 		for (size_t i = 0; i < entry_records_.size(); ++i) {
 			const EntryRecord& er = *entry_records_[i];
-			std::shared_ptr<const UI::RenderedText> rendered_text = UI::g_fh1->render(as_uifont(
-			   richtext_escape(er.name), UI_FONT_SIZE_SMALL, er.use_clr ? er.clr : UI_FONT_CLR_FG));
+			std::shared_ptr<const UI::RenderedText> rendered_text = UI::g_fh1->render(
+			   as_uifont(richtext_escape(er.name), UI_FONT_SIZE_SMALL, UI_FONT_CLR_FG));
 			int picw = max_pic_width_ ? max_pic_width_ + 10 : 0;
 			int difference = rendered_text->width() + picw + 8 - get_eff_w();
 			if (difference > 0) {
@@ -360,9 +321,9 @@ void BaseListselect::draw(RenderTarget& dst) {
 	if (selection_mode_ == ListselectLayout::kDropdown) {
 		RGBAColor black(0, 0, 0, 255);
 		//  top edge
-		dst.brighten_rect(Recti(0, 0, get_w(), 2), BUTTON_EDGE_BRIGHT_FACTOR / 4);
+		dst.brighten_rect(Recti(0, 0, get_w(), 2), BUTTON_EDGE_BRIGHT_FACTOR);
 		//  left edge
-		dst.brighten_rect(Recti(0, 0, 2, get_h()), BUTTON_EDGE_BRIGHT_FACTOR);
+		dst.brighten_rect(Recti(0, 2, 2, get_h()), BUTTON_EDGE_BRIGHT_FACTOR);
 		//  bottom edge
 		dst.fill_rect(Recti(2, get_h() - 2, get_eff_w() - 2, 1), black);
 		dst.fill_rect(Recti(1, get_h() - 1, get_eff_w() - 1, 1), black);
@@ -377,8 +338,8 @@ void BaseListselect::draw(RenderTarget& dst) {
 		assert(eff_h < std::numeric_limits<int32_t>::max());
 
 		const EntryRecord& er = *entry_records_[idx];
-		std::shared_ptr<const UI::RenderedText> rendered_text = UI::g_fh1->render(as_uifont(
-		   richtext_escape(er.name), UI_FONT_SIZE_SMALL, er.use_clr ? er.clr : UI_FONT_CLR_FG));
+		std::shared_ptr<const UI::RenderedText> rendered_text =
+		   UI::g_fh1->render(as_uifont(richtext_escape(er.name), UI_FONT_SIZE_SMALL, UI_FONT_CLR_FG));
 
 		int lineheight = std::max(get_lineheight(), rendered_text->height());
 

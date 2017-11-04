@@ -54,7 +54,6 @@ struct ShippingItem {
 
 	void set_economy(Game&, Economy* e);
 	PortDock* get_destination(Game&);
-	void schedule_update(Game&, int32_t delay);
 
 	void remove(EditorGameBase&);
 
