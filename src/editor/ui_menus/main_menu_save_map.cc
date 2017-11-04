@@ -37,6 +37,7 @@
 #include "io/filesystem/filesystem.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "io/filesystem/zip_filesystem.h"
+#include "logic/constants.h"
 #include "map_io/map_saver.h"
 #include "map_io/widelands_map_loader.h"
 #include "ui_basic/messagebox.h"
@@ -132,7 +133,7 @@ void MainMenuSaveMap::clicked_ok() {
 		Widelands::Map* map = eia().egbase().mutable_map();
 		if (map->get_name() == _("No Name")) {
 			std::string::size_type const filename_size = filename.size();
-			map->set_name(4 <= filename_size && boost::iends_with(filename, WLMF_SUFFIX) ?
+			map->set_name(4 <= filename_size && boost::iends_with(filename, kWidelandsMapExtension) ?
 			                 filename.substr(0, filename_size - 4) :
 			                 filename);
 		}
@@ -239,8 +240,8 @@ bool MainMenuSaveMap::save_map(std::string filename, bool binary) {
 	boost::trim(filename);
 
 	//  OK, first check if the extension matches (ignoring case).
-	if (!boost::iends_with(filename, WLMF_SUFFIX))
-		filename += WLMF_SUFFIX;
+	if (!boost::iends_with(filename, kWidelandsMapExtension))
+		filename += kWidelandsMapExtension;
 
 	//  Append directory name.
 	const std::string complete_filename = curdir_ + g_fs->file_separator() + filename;

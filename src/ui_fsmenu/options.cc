@@ -638,4 +638,7 @@ void OptionsCtrl::save_options() {
 	UI::g_fh1->reinitialize_fontset(i18n::get_locale());
 	g_sound_handler.set_disable_music(!opt.music);
 	g_sound_handler.set_disable_fx(!opt.fx);
+
+	// Now write to file
+	g_options.write(kConfigFile, true);
 }

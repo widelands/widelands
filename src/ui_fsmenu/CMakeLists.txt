@@ -72,6 +72,7 @@ wl_library(ui_fsmenu
     io_filesystem
     logic
     logic_campaign_visibility
+    logic_constants
     logic_game_controller
     logic_game_settings
     map_io_map_loader

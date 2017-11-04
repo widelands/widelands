@@ -41,14 +41,6 @@ class AiDnaHandler {
 public:
 	AiDnaHandler();
 
-	static std::string get_ai_dir() {
-		return "ai";
-	}
-
-	static std::string get_ai_suffix() {
-		return "wai";
-	}
-
 	void fetch_dna(std::vector<int16_t>&,
 	               std::vector<int8_t>&,
 	               std::vector<int8_t>&,

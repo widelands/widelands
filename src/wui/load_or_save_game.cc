@@ -32,6 +32,7 @@
 #include "graphic/font_handler1.h"
 #include "helper.h"
 #include "io/filesystem/layered_filesystem.h"
+#include "logic/constants.h"
 #include "logic/game.h"
 #include "logic/game_controller.h"
 #include "logic/game_settings.h"
@@ -46,7 +47,7 @@ std::string
 map_filename(const std::string& filename, const std::string& mapname, bool localize_autosave) {
 	std::string result = FileSystem::filename_without_ext(filename.c_str());
 
-	if (localize_autosave && boost::starts_with(result, "wl_autosave")) {
+	if (localize_autosave && boost::starts_with(result, kAutosavePrefix)) {
 		std::vector<std::string> autosave_name;
 		boost::split(autosave_name, result, boost::is_any_of("_"));
 		if (autosave_name.empty() || autosave_name.size() < 3) {
@@ -293,7 +294,7 @@ void LoadOrSaveGame::clicked_delete() {
 			const std::string& deleteme = get_filename(index);
 			g_fs->fs_unlink(deleteme);
 			if (filetype_ == FileType::kReplay) {
-				g_fs->fs_unlink(deleteme + WLGF_SUFFIX);
+				g_fs->fs_unlink(deleteme + kSavegameExtension);
 			}
 		}
 		fill_table();
@@ -324,10 +325,10 @@ void LoadOrSaveGame::fill_table() {
 	FilenameSet gamefiles;
 
 	if (filetype_ == FileType::kReplay) {
-		gamefiles = filter(g_fs->list_directory(REPLAY_DIR),
-		                   [](const std::string& fn) { return boost::ends_with(fn, REPLAY_SUFFIX); });
+		gamefiles = filter(g_fs->list_directory(kReplayDir),
+		                   [](const std::string& fn) { return boost::ends_with(fn, kReplayExtension); });
 	} else {
-		gamefiles = g_fs->list_directory(SaveHandler::get_base_dir());
+		gamefiles = g_fs->list_directory(kSaveDir);
 	}
 
 	Widelands::GamePreloadPacket gpdp;
@@ -341,7 +342,7 @@ void LoadOrSaveGame::fill_table() {
 
 		std::string savename = gamefilename;
 		if (filetype_ == FileType::kReplay)
-			savename += WLGF_SUFFIX;
+			savename += kSavegameExtension;
 
 		if (!g_fs->file_exists(savename.c_str())) {
 			continue;

@@ -27,6 +27,7 @@
 #include "game_io/game_saver.h"
 #include "io/filesystem/filesystem.h"
 #include "io/filesystem/layered_filesystem.h"
+#include "logic/constants.h"
 #include "logic/game.h"
 #include "logic/game_controller.h"
 #include "logic/playersmanager.h"
@@ -73,7 +74,7 @@ GameMainMenuSaveGame::GameMainMenuSaveGame(InteractiveGameBase& parent,
              _("Cancel")),
      ok_(&buttons_box_, "ok", 0, 0, 0, 0, g_gr->images().get("images/ui_basic/but5.png"), _("OK")),
 
-     curdir_(SaveHandler::get_base_dir()) {
+     curdir_(kSaveDir) {
 
 	layout();
 

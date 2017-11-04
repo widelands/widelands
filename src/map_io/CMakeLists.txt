@@ -14,6 +14,7 @@ wl_library(map_io_map_loader
     io_fileread
     io_filesystem
     logic
+    logic_constants
     map_io
     scripting_lua_interface
 )

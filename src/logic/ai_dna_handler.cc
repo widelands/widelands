@@ -27,12 +27,13 @@
 
 #include "base/macros.h"
 #include "base/wexception.h"
+#include "logic/constants.h"
 #include "wui/interactive_base.h"
 
 namespace Widelands {
 
 AiDnaHandler::AiDnaHandler() {
-	g_fs->ensure_directory_exists(get_ai_dir());
+	g_fs->ensure_directory_exists(kAiDir);
 }
 
 // This reads the AI file for a particular slot (position) and populates numbers into passed
@@ -47,8 +48,8 @@ void AiDnaHandler::fetch_dna(std::vector<int16_t>& military_numbers,
 	// AI files are in range 1-4
 	assert(slot > 0 && slot < 5);
 
-	std::string full_filename = get_ai_dir() + g_fs->file_separator() + "ai_input_" +
-	                            std::to_string(static_cast<int16_t>(slot)) + "." + get_ai_suffix();
+	const std::string full_filename = (boost::format("%s%sai_input_%d%s") % kAiDir % g_fs->file_separator() %
+	                            static_cast<unsigned int>(slot) % kAiExtension).str();
 
 	Profile prof;
 	prof.read(full_filename.c_str(), nullptr, *g_fs);
@@ -91,9 +92,8 @@ void AiDnaHandler::fetch_dna(std::vector<int16_t>& military_numbers,
 // This generates a new file with AI data in '.widelands/ai'
 void AiDnaHandler::dump_output(Widelands::Player::AiPersistentState* pd, uint8_t pn) {
 
-	std::string full_filename = get_ai_dir() + g_fs->file_separator() + timestring() +
-	                            "_ai_player_" + std::to_string(static_cast<int16_t>(pn)) + "." +
-	                            get_ai_suffix();
+	const std::string full_filename = (boost::format("%s%s%s_ai_player_%d%s") % kAiDir % g_fs->file_separator() % timestring() %
+	                            static_cast<unsigned int>(pn) % kAiExtension).str();
 
 	log(" %d: AI to be dumped to %s\n", pn, full_filename.c_str());
 

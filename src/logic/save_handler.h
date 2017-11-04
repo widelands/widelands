@@ -45,9 +45,6 @@ public:
 	std::string create_file_name(const std::string& dir, const std::string& filename) const;
 	bool save_game(Widelands::Game&, const std::string& filename, std::string* error = nullptr);
 
-	static std::string get_base_dir() {
-		return "save";
-	}
 	const std::string get_cur_filename() {
 		return current_filename_;
 	}

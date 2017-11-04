@@ -33,9 +33,6 @@
 
 #include <stdint.h>
 
-#define REPLAY_DIR "replays"
-#define REPLAY_SUFFIX ".wrpl"
-
 struct Md5Checksum;
 
 class StreamRead;

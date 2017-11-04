@@ -26,36 +26,34 @@
 
 #include "base/wexception.h"
 #include "io/filesystem/filesystem.h"
-#include "logic/save_handler.h"
+#include "logic/constants.h"
 #include "profile/profile.h"
 
 /**
  * Get the path of campaign visibility save-file
  */
 std::string CampaignVisibilitySave::get_path() {
-	std::string savepath = SaveHandler::get_base_dir();
-	g_fs->ensure_directory_exists(savepath);  // Make sure save directory exists
-	savepath += "/campvis";                   // add the name of save-file
+	g_fs->ensure_directory_exists(kSaveDir);  // Make sure save directory exists
 
 	// check if campaigns visibility-save is available
-	if (!(g_fs->file_exists(savepath)))
-		make_campvis(savepath);
+	if (!(g_fs->file_exists(kCampVisFile)))
+		make_campvis(kCampVisFile);
 
 	// check if campaigns visibility-save is up to date
-	Profile ca(savepath.c_str());
+	Profile ca(kCampVisFile);
 
 	//  1st version of campvis had no global section
 	if (!ca.get_section("global"))
-		update_campvis(savepath);
+		update_campvis(kCampVisFile);
 	else {
 		Section& ca_s = ca.get_safe_section("global");
 		Profile cc("campaigns/campaigns.conf");
 		Section& cc_s = cc.get_safe_section("global");
 		if (cc_s.get_int("version") > ca_s.get_int("version"))
-			update_campvis(savepath);
+			update_campvis(kCampVisFile);
 	}
 
-	return savepath;
+	return std::string(kCampVisFile);
 }
 
 /**

@@ -53,6 +53,7 @@ wl_library(logic_campaign_visibility
   DEPENDS
     base_exceptions
     io_filesystem
+    logic_constants
     profile
 )
 

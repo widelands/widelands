@@ -52,8 +52,6 @@ struct PlayerEndStatus;
 class TrainingSite;
 class MilitarySite;
 
-#define WLGF_SUFFIX ".wgf"
-#define WLGF_MAGIC "WLgf"
 
 /** class Game
  *

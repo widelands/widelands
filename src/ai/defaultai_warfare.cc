@@ -789,7 +789,6 @@ bool DefaultAI::check_militarysites(uint32_t gametime) {
 	// Check next militarysite
 	bool changed = false;
 	MilitarySite* ms = militarysites.front().site;
-	MilitarySiteObserver& mso = militarysites.front();
 
 	// Don't do anything if last change took place lately
 	if (militarysites.front().last_change + 2 * 60 * 1000 > gametime) {
