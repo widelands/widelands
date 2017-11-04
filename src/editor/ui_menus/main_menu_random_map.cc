@@ -231,8 +231,7 @@ MainMenuNewRandomMap::MainMenuNewRandomMap(EditorInteractive& parent)
 	width_.set_value_list(Widelands::kMapDimensions);
 	height_.set_value_list(Widelands::kMapDimensions);
 	{
-		const Widelands::Map& map = parent.egbase().map();
-		Widelands::Extent const map_extent = map.extent();
+		Widelands::Extent const map_extent = parent.egbase().map().extent();
 		width_.set_value(find_dimension_index(map_extent.w));
 		height_.set_value(find_dimension_index(map_extent.h));
 	}
@@ -512,7 +511,7 @@ void MainMenuNewRandomMap::clicked_create_map() {
 	cancel_button_.set_enabled(false);
 	EditorInteractive& eia = dynamic_cast<EditorInteractive&>(*get_parent());
 	Widelands::EditorGameBase& egbase = eia.egbase();
-	Widelands::Map& map = egbase.map();
+	Widelands::Map* map = egbase.mutable_map();
 	UI::ProgressWindow loader_ui;
 
 	eia.cleanup_for_load();
@@ -528,8 +527,8 @@ void MainMenuNewRandomMap::clicked_create_map() {
 	      << "Resources = " << resources_.get_title() << "\n"
 	      << "ID = " << map_id_edit_.text() << "\n";
 
-	MapGenerator gen(map, map_info, egbase);
-	map.create_empty_map(
+	MapGenerator gen(*map, map_info, egbase);
+	map->create_empty_map(
 	   egbase.world(), map_info.w, map_info.h, 0, _("No Name"),
 	   g_options.pull_section("global").get_string("realname", pgettext("author_name", "Unknown")),
 	   sstrm.str().c_str());
@@ -564,7 +563,7 @@ void MainMenuNewRandomMap::clicked_create_map() {
 	egbase.postload();
 	egbase.load_graphics(loader_ui);
 
-	map.recalc_whole_map(egbase.world());
+	map->recalc_whole_map(egbase.world());
 	eia.map_changed(EditorInteractive::MapWas::kReplaced);
 	UI::WLMessageBox mbox(
 	   &eia,

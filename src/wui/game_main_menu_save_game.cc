@@ -113,7 +113,7 @@ GameMainMenuSaveGame::GameMainMenuSaveGame(InteractiveGameBase& parent,
 		{
 			// Try to translate the map name.
 			i18n::Textdomain td("maps");
-			mapname_.set_text(_(parent.game().get_map()->get_name()));
+			mapname_.set_text(_(parent.game().map().get_name()));
 		}
 		uint32_t gametime = parent.game().get_gametime();
 		gametime_.set_text(gametimestring(gametime));

@@ -91,12 +91,13 @@ struct DefaultAI : ComputerPlayer {
 
 	/// Implementation for Strong
 	struct NormalImpl : public ComputerPlayer::Implementation {
-		NormalImpl() {
-			name = "normal";
-			/** TRANSLATORS: This is the name of an AI used in the game setup screens */
-			descname = _("Normal AI");
-			icon_filename = "images/ai/ai_normal.png";
-			type = Implementation::Type::kDefault;
+		NormalImpl()
+		   : Implementation(
+		        "normal",
+		        /** TRANSLATORS: This is the name of an AI used in the game setup screens */
+		        _("Normal AI"),
+		        "images/ai/ai_normal.png",
+		        Implementation::Type::kDefault) {
 		}
 		ComputerPlayer* instantiate(Widelands::Game& game,
 		                            Widelands::PlayerNumber const p) const override {
@@ -105,12 +106,13 @@ struct DefaultAI : ComputerPlayer {
 	};
 
 	struct WeakImpl : public ComputerPlayer::Implementation {
-		WeakImpl() {
-			name = "weak";
-			/** TRANSLATORS: This is the name of an AI used in the game setup screens */
-			descname = _("Weak AI");
-			icon_filename = "images/ai/ai_weak.png";
-			type = Implementation::Type::kDefault;
+		WeakImpl()
+		   : Implementation(
+		        "weak",
+		        /** TRANSLATORS: This is the name of an AI used in the game setup screens */
+		        _("Weak AI"),
+		        "images/ai/ai_weak.png",
+		        Implementation::Type::kDefault) {
 		}
 		ComputerPlayer* instantiate(Widelands::Game& game,
 		                            Widelands::PlayerNumber const p) const override {
@@ -119,12 +121,13 @@ struct DefaultAI : ComputerPlayer {
 	};
 
 	struct VeryWeakImpl : public ComputerPlayer::Implementation {
-		VeryWeakImpl() {
-			name = "very_weak";
-			/** TRANSLATORS: This is the name of an AI used in the game setup screens */
-			descname = _("Very Weak AI");
-			icon_filename = "images/ai/ai_very_weak.png";
-			type = Implementation::Type::kDefault;
+		VeryWeakImpl()
+		   : Implementation(
+		        "very_weak",
+		        /** TRANSLATORS: This is the name of an AI used in the game setup screens */
+		        _("Very Weak AI"),
+		        "images/ai/ai_very_weak.png",
+		        Implementation::Type::kDefault) {
 		}
 		ComputerPlayer* instantiate(Widelands::Game& game,
 		                            Widelands::PlayerNumber const p) const override {
@@ -241,6 +244,9 @@ private:
 	template <typename T> void check_range(const T, const T, const T, const char*);
 	template <typename T> void check_range(const T, const T, const char*);
 
+	// Remove a member from std::deque
+	template <typename T> bool remove_from_dqueue(std::deque<T const*>&, T const*);
+
 	// Functions used for seafaring / defaultai_seafaring.cc
 	Widelands::IslandExploreDirection randomExploreDirection();
 	void gain_ship(Widelands::Ship&, NewShip);
@@ -259,7 +265,6 @@ private:
 	bool check_enemy_sites(uint32_t);
 	void count_military_vacant_positions();
 	bool check_trainingsites(uint32_t);
-	uint32_t barracks_count();
 	// return single number of strength of vector of soldiers
 	int32_t calculate_strength(const std::vector<Widelands::Soldier*>&);
 	// for militarysites (overloading the function)
@@ -283,24 +288,23 @@ private:
 	uint16_t trees_nearby_treshold_;
 
 	std::vector<Widelands::BuildingObserver> buildings_;
-	std::list<Widelands::FCoords> unusable_fields;
-	std::list<Widelands::BuildableField*> buildable_fields;
+	std::deque<Widelands::FCoords> unusable_fields;
+	std::deque<Widelands::BuildableField*> buildable_fields;
 	Widelands::BlockedFields blocked_fields;
 	Widelands::PlayersStrengths player_statistics;
 	Widelands::ManagementData management_data;
 	Widelands::ExpansionType expansion_type;
 	std::unordered_set<uint32_t> port_reserved_coords;
-	std::list<Widelands::MineableField*> mineable_fields;
-	std::list<Widelands::Flag const*> new_flags;
-	std::list<Widelands::Coords> flags_to_be_removed;
-	std::list<Widelands::Road const*> roads;
-	std::list<Widelands::EconomyObserver*> economies;
-	std::list<Widelands::ProductionSiteObserver> productionsites;
-	std::list<Widelands::ProductionSiteObserver> mines_;
-	std::list<Widelands::MilitarySiteObserver> militarysites;
-	std::list<Widelands::WarehouseSiteObserver> warehousesites;
-	std::list<Widelands::TrainingSiteObserver> trainingsites;
-	std::list<Widelands::ShipObserver> allships;
+	std::deque<Widelands::MineableField*> mineable_fields;
+	std::deque<Widelands::Flag const*> new_flags;
+	std::deque<Widelands::Road const*> roads;
+	std::deque<Widelands::EconomyObserver*> economies;
+	std::deque<Widelands::ProductionSiteObserver> productionsites;
+	std::deque<Widelands::ProductionSiteObserver> mines_;
+	std::deque<Widelands::MilitarySiteObserver> militarysites;
+	std::deque<Widelands::WarehouseSiteObserver> warehousesites;
+	std::deque<Widelands::TrainingSiteObserver> trainingsites;
+	std::deque<Widelands::ShipObserver> allships;
 	std::vector<Widelands::WareObserver> wares;
 	// This is a vector that is filled up on initiatlization
 	// and no items are added/removed afterwards
@@ -325,7 +329,6 @@ private:
 	uint32_t military_last_dismantle_;
 	uint32_t military_last_build_;  // sometimes expansions just stops, this is time of last military
 	                                // building built
-	int32_t limit_cnt_target(int32_t, int32_t);
 	uint32_t time_of_last_construction_;
 	uint32_t next_mine_construction_due_;
 	uint16_t fishers_count_;
@@ -394,6 +397,8 @@ private:
 
 	bool has_critical_mines = false;
 	uint16_t buil_material_mines_count = 0;
+
+	bool ai_training_mode_ = false;
 
 	// Notification subscribers
 	std::unique_ptr<Notifications::Subscriber<Widelands::NoteFieldPossession>>

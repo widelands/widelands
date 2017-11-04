@@ -44,7 +44,7 @@ void MapPlayerNamesAndTribesPacket::read(FileSystem& fs,
                                          EditorGameBase& egbase,
                                          bool const skip,
                                          MapObjectLoader&) {
-	pre_read(fs, egbase.get_map(), skip);
+	pre_read(fs, egbase.mutable_map(), skip);
 }
 
 void MapPlayerNamesAndTribesPacket::pre_read(FileSystem& fs, Map* const map, bool const skip) {

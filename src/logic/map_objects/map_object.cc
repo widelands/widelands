@@ -653,6 +653,8 @@ std::string to_string(const MapObjectType type) {
 		return "dismantlesite";
 	case MapObjectType::WAREHOUSE:
 		return "warehouse";
+	case MapObjectType::MARKET:
+		return "market";
 	case MapObjectType::PRODUCTIONSITE:
 		return "productionsite";
 	case MapObjectType::MILITARYSITE:

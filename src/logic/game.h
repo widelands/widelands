@@ -27,6 +27,7 @@
 #include "logic/cmd_queue.h"
 #include "logic/editor_game_base.h"
 #include "logic/save_handler.h"
+#include "logic/trade_agreement.h"
 #include "random/random.h"
 #include "scripting/logic.h"
 
@@ -207,6 +208,7 @@ public:
 	void send_player_ship_explore_island(Ship&, IslandExploreDirection);
 	void send_player_sink_ship(Ship&);
 	void send_player_cancel_expedition_ship(Ship&);
+	void send_player_propose_trade(const Trade& trade);
 
 	InteractivePlayer* get_ipl();
 
@@ -231,6 +233,23 @@ public:
 	bool is_replay() const {
 		return replay_;
 	}
+
+	bool is_ai_training_mode() const {
+		return ai_training_mode_;
+	}
+
+	bool is_auto_speed() const {
+		return auto_speed_;
+	}
+
+	void set_ai_training_mode(bool);
+
+	void set_auto_speed(bool);
+
+	// TODO(sirver,trading): document these functions once the interface settles.
+	int propose_trade(const Trade& trade);
+	void accept_trade(int trade_id);
+	void cancel_trade(int trade_id);
 
 private:
 	void sync_reset();
@@ -282,6 +301,9 @@ private:
 	/// is written only if \ref writereplay_ is true too.
 	bool writesyncstream_;
 
+	bool ai_training_mode_;
+	bool auto_speed_;
+
 	int32_t state_;
 
 	RNG rng_;
@@ -293,6 +315,9 @@ private:
 	std::unique_ptr<ReplayWriter> replaywriter_;
 
 	GeneralStatsVector general_stats_;
+	int next_trade_agreement_id_ = 1;
+	// Maps from trade agreement id to the agreement.
+	std::map<int, TradeAgreement> trade_agreements_;
 
 	/// For save games and statistics generation
 	std::string win_condition_displayname_;

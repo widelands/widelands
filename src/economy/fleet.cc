@@ -138,9 +138,7 @@ struct StepEvalFindFleet {
  * of the same player.
  */
 void Fleet::find_other_fleet(EditorGameBase& egbase) {
-	Map& map = egbase.map();
-	MapAStar<StepEvalFindFleet> astar(map, StepEvalFindFleet());
-
+	MapAStar<StepEvalFindFleet> astar(*egbase.mutable_map(), StepEvalFindFleet());
 	for (const Ship* temp_ship : ships_) {
 		astar.push(temp_ship->get_position());
 	}
@@ -443,7 +441,6 @@ struct StepEvalFindPorts {
  * because path finding is flaky during map loading.
  */
 void Fleet::connect_port(EditorGameBase& egbase, uint32_t idx) {
-	Map& map = egbase.map();
 	StepEvalFindPorts se;
 
 	for (uint32_t i = 0; i < ports_.size(); ++i) {
@@ -463,7 +460,7 @@ void Fleet::connect_port(EditorGameBase& egbase, uint32_t idx) {
 	if (se.targets.empty())
 		return;
 
-	MapAStar<StepEvalFindPorts> astar(map, se);
+	MapAStar<StepEvalFindPorts> astar(*egbase.mutable_map(), se);
 
 	BaseImmovable::PositionList src(ports_[idx]->get_positions(egbase));
 	for (const Coords& temp_pos : src) {
