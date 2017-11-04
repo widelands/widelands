@@ -179,6 +179,7 @@ const SavegameData* LoadOrSaveGame::entry_selected() {
 		      /** TRANSLATORS: Tooltip for the delete button. The user has selected 1 file */
 		      _("Delete this game"));
 		result = &games_data_[table_.get_selected()];
+		result->filename_list = filename_list_string();
 	} else if (selections > 1) {
 		delete_->set_tooltip(
 		   filetype_ == FileType::kReplay ?
@@ -263,26 +264,10 @@ void LoadOrSaveGame::clicked_delete() {
 		             no_selections)
 		               .str();
 	}
-	std::string message = no_selections > 1 ? gamedata.filename_list : gamedata.filename;
-	message = (boost::format("%s\n%s") % header % message).str();
 
 	bool do_delete = SDL_GetModState() & KMOD_CTRL;
 	if (!do_delete) {
-		// NOCOM(#codereview): When selecting many entries (around 30 for me in
-		// non-fullscreen mode) the "really remove" dialog box can become cut off.
-		// First, the entries are all listed normally which is fine. At some point
-		// the dialog box uses a scroll box which is fine, too. Between this cases
-		// there is some number of entries where the message window is too big to
-		// be drawn completely and parts are cut off at the top and bottom.
-
-		// NOCOM(#codereview): The removal dialog displays the filename when a
-		// single file is selected but a list of "mapnames + saved-on-date" when
-		// multiple files are selected. The filename is not that useful I think,
-		// maybe change it to the name of the save? When I had multiple campaign
-		// saves selected, the list contained five times the same entry. Looked a
-		// bit strange but is no bug. For campaign save games the name of the save
-		// and the filename can both be quite long. So using the full name in the
-		// "multiple files selected" list is probably no good idea.
+		const std::string message = (boost::format("%s\n%s") % header % gamedata.filename_list).str();
 
 		UI::WLMessageBox confirmationBox(
 		   parent_->get_parent()->get_parent(), ngettext("Confirm deleting file", "Confirm deleting files", no_selections),
