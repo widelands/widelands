@@ -17,49 +17,47 @@
  *
  */
 
-#ifndef WL_LOGIC_CONSTANTS_H
-#define WL_LOGIC_CONSTANTS_H
+#ifndef WL_LOGIC_FILESYSTEM_CONSTANTS_H
+#define WL_LOGIC_FILESYSTEM_CONSTANTS_H
 
 #include <cstdint>
-
-/// How often are statistics to be sampled.
-constexpr uint32_t kStatisticsSampleTime = 30000;
+#include <string>
 
 /// Stop writing screenshots or syncstreams if we have less disk space left than this
 constexpr unsigned long long kMinimumDiskSpace = 256 * 1024 * 1024;
 
 /// Filesystem names and timeouts for ai
-constexpr const char* const kAiDir = "ai";
-constexpr const char* const kAiExtension = ".wai";
+const std::string kAiDir = "ai";
+const std::string kAiExtension = ".wai";
 // We delete AI files older than one week
 constexpr double kAIFilesKeepAroundTime = 7 * 24 * 60 * 60;
 
 /// Filesystem names for maps
-constexpr const char* const kMapsDir = "maps";
-constexpr const char* const kWidelandsMapExtension = ".wmf";
-constexpr const char* const kS2MapExtension1 = ".swd";
-constexpr const char* const kS2MapExtension2 = ".wld";
+const std::string kMapsDir = "maps";
+const std::string kWidelandsMapExtension = ".wmf";
+const std::string kS2MapExtension1 = ".swd";
+const std::string kS2MapExtension2 = ".wld";
 
 /// Filesystem names and timeouts for replays
-constexpr const char* const kReplayDir = "replays";
-constexpr const char* const kReplayExtension = ".wrpl";
-constexpr const char* const kSyncstreamExtension = ".wss";
+const std::string kReplayDir = "replays";
+const std::string kReplayExtension = ".wrpl";
+const std::string kSyncstreamExtension = ".wss";
 // The time in seconds for how long old replays/syncstreams should be kept
 // around, in seconds. Right now this is 4 weeks.
 constexpr double kReplayKeepAroundTime = 4 * 7 * 24 * 60 * 60;
 
 /// Filesystem names and intervals for savegames
-constexpr const char* const kSaveDir = "save";
-constexpr const char* const kCampVisFile = "save/campvis";
-constexpr const char* const kSavegameExtension = ".wgf";
-constexpr const char* const kAutosavePrefix = "wl_autosave";
+const std::string kSaveDir = "save";
+const std::string kCampVisFile = "save/campvis";
+const std::string kSavegameExtension = ".wgf";
+const std::string kAutosavePrefix = "wl_autosave";
 // Default autosave interval in minutes
 constexpr int kDefaultAutosaveInterval = 15;
 
 /// Filesystem names for screenshots
-constexpr const char* const kScreenshotsDir = "screenshots";
+const std::string kScreenshotsDir = "screenshots";
 
 /// Filesystem names for config
-constexpr const char* const kConfigFile = "config";
+const std::string kConfigFile = "config";
 
-#endif  // end of include guard: WL_LOGIC_CONSTANTS_H
+#endif  // end of include guard: WL_LOGIC_FILESYSTEM_CONSTANTS_H

@@ -32,7 +32,7 @@
 #include "graphic/font_handler1.h"
 #include "helper.h"
 #include "io/filesystem/layered_filesystem.h"
-#include "logic/constants.h"
+#include "logic/filesystem_constants.h"
 #include "logic/game.h"
 #include "logic/game_controller.h"
 #include "logic/game_settings.h"

@@ -41,6 +41,9 @@ class GameController;
 
 namespace Widelands {
 
+/// How often are statistics to be sampled.
+constexpr uint32_t kStatisticsSampleTime = 30000;
+
 struct Flag;
 struct Path;
 struct PlayerImmovable;

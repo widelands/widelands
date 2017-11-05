@@ -27,7 +27,7 @@
 
 #include "base/macros.h"
 #include "base/wexception.h"
-#include "logic/constants.h"
+#include "logic/filesystem_constants.h"
 #include "wui/interactive_base.h"
 
 namespace Widelands {

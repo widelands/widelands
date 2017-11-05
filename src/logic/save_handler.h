@@ -26,7 +26,6 @@
 #include <stdint.h>
 
 #include "io/filesystem/filesystem.h"
-#include "logic/constants.h"
 
 namespace Widelands {
 class Game;

@@ -23,7 +23,7 @@
 #include <string>
 
 #include "editor/editorinteractive.h"
-#include "logic/constants.h"
+#include "logic/filesystem_constants.h"
 #include "ui_basic/button.h"
 #include "ui_basic/checkbox.h"
 #include "ui_basic/textarea.h"

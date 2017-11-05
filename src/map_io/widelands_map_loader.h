@@ -24,7 +24,7 @@
 #include <memory>
 #include <string>
 
-#include "logic/constants.h"
+#include "logic/filesystem_constants.h"
 #include "map_io/map_loader.h"
 
 class FileSystem;

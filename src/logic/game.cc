@@ -47,7 +47,7 @@
 #include "logic/cmd_calculate_statistics.h"
 #include "logic/cmd_luacoroutine.h"
 #include "logic/cmd_luascript.h"
-#include "logic/constants.h"
+#include "logic/filesystem_constants.h"
 #include "logic/game_settings.h"
 #include "logic/map_objects/tribes/carrier.h"
 #include "logic/map_objects/tribes/market.h"

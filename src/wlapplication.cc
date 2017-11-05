@@ -61,7 +61,7 @@
 #include "io/filesystem/disk_filesystem.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "logic/ai_dna_handler.h"
-#include "logic/constants.h"
+#include "logic/filesystem_constants.h"
 #include "logic/game.h"
 #include "logic/game_data_error.h"
 #include "logic/game_settings.h"
@@ -713,7 +713,7 @@ void WLApplication::refresh_graphics() {
 bool WLApplication::init_settings() {
 
 	// Read in the configuration file
-	g_options.read(kConfigFile, "global");
+	g_options.read(kConfigFile.c_str(), "global");
 	Section& s = g_options.pull_section("global");
 
 	// Then parse the commandline - overwrites conffile settings
@@ -784,7 +784,7 @@ void WLApplication::shutdown_settings() {
 	i18n::release_textdomain();
 
 	try {  //  overwrite the old config file
-		g_options.write(kConfigFile, true);
+		g_options.write(kConfigFile.c_str(), true);
 	} catch (const std::exception& e) {
 		log("WARNING: could not save configuration: %s\n", e.what());
 	} catch (...) {

@@ -38,7 +38,7 @@
 #include "graphic/text_constants.h"
 #include "helper.h"
 #include "io/filesystem/layered_filesystem.h"
-#include "logic/constants.h"
+#include "logic/filesystem_constants.h"
 #include "profile/profile.h"
 #include "scripting/lua_interface.h"
 #include "scripting/lua_table.h"
@@ -640,5 +640,5 @@ void OptionsCtrl::save_options() {
 	g_sound_handler.set_disable_fx(!opt.fx);
 
 	// Now write to file
-	g_options.write(kConfigFile, true);
+	g_options.write(kConfigFile.c_str(), true);
 }

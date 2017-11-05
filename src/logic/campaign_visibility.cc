@@ -26,7 +26,7 @@
 
 #include "base/wexception.h"
 #include "io/filesystem/filesystem.h"
-#include "logic/constants.h"
+#include "logic/filesystem_constants.h"
 #include "profile/profile.h"
 
 /**
@@ -41,7 +41,7 @@ std::string CampaignVisibilitySave::get_path() {
 	}
 
 	// check if campaigns visibility-save is up to date
-	Profile ca(kCampVisFile);
+	Profile ca(kCampVisFile.c_str());
 
 	//  1st version of campvis had no global section
 	if (!ca.get_section("global"))
@@ -54,7 +54,7 @@ std::string CampaignVisibilitySave::get_path() {
 			update_campvis(kCampVisFile);
 	}
 
-	return std::string(kCampVisFile);
+	return kCampVisFile;
 }
 
 /**
