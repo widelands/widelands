@@ -12,7 +12,7 @@ wl_library(ui_fsmenu_options
     graphic_text_constants
     helper
     io_filesystem
-    logic_constants
+    logic_filesystem_constants
     scripting_lua_interface
     scripting_lua_table
     ui_basic
@@ -72,7 +72,7 @@ wl_library(ui_fsmenu
     io_filesystem
     logic
     logic_campaign_visibility
-    logic_constants
+    logic_filesystem_constants
     logic_game_controller
     logic_game_settings
     map_io_map_loader
