@@ -1037,7 +1037,6 @@ PlayersStrengths::PlayersStrengths() : update_time(0) {
 
 // Constructor to be used
 PlayersStrengths::PlayerStat::PlayerStat(Widelands::TeamNumber tc,
-                                         bool e,
                                          uint32_t pp,
                                          uint32_t op,
                                          uint32_t o60p,
@@ -1046,7 +1045,6 @@ PlayersStrengths::PlayerStat::PlayerStat(Widelands::TeamNumber tc,
                                          uint32_t oland,
                                          uint32_t o60l)
    : team_number(tc),
-     is_enemy(e),
      players_power(pp),
      old_players_power(op),
      old60_players_power(o60p),
@@ -1079,17 +1077,9 @@ void PlayersStrengths::add(Widelands::PlayerNumber pn,
                            uint32_t oland,
                            uint32_t o60l) {
 	if (all_stats.count(opn) == 0) {
-		bool enemy = false;
-		if (pn == opn) {
-			;
-		} else if (pltn == 0 || mytn == 0) {
-			enemy = true;
-		} else if (pltn != mytn) {
-			enemy = true;
-		}
 		this_player_number = pn;
-		all_stats.insert(
-		   std::make_pair(opn, PlayerStat(pltn, enemy, pp, op, o60p, cs, land, oland, o60l)));
+		this_player_team = mytn;
+		all_stats.insert(std::make_pair(opn, PlayerStat(pltn, pp, op, o60p, cs, land, oland, o60l)));
 	} else {
 		all_stats[opn].players_power = pp;
 		all_stats[opn].old_players_power = op;
@@ -1098,6 +1088,25 @@ void PlayersStrengths::add(Widelands::PlayerNumber pn,
 		all_stats[opn].players_land = land;
 		all_stats[opn].old_players_land = oland;
 		all_stats[opn].old60_players_land = oland;
+		assert(this_player_number == pn);
+		if (this_player_team != mytn) {
+			log("%2d: Team changed %d -> %d\n", pn, this_player_team, mytn);
+			this_player_team = mytn;
+		};
+		if (all_stats[opn].team_number != pltn) {
+			log("%2d: Team changed for player %d: %d -> %d\n", pn, opn, all_stats[opn].team_number,
+			    pltn);
+			all_stats[opn].team_number = pltn;
+		};
+	}
+}
+
+// Very tiny possibility that player that has a statistics info here
+// does not exist anymore
+void PlayersStrengths::remove_stat(const Widelands::PlayerNumber pn) {
+	if (all_stats.count(pn) > 0) {
+		log("%d: AI: Erasing statistics for player %d\n", this_player_number, pn);
+		all_stats.erase(pn);
 	}
 }
 
@@ -1118,7 +1127,7 @@ void PlayersStrengths::recalculate_team_power() {
 // This just goes over information about all enemies and where they were seen the last time
 bool PlayersStrengths::any_enemy_seen_lately(const uint32_t gametime) {
 	for (auto& item : all_stats) {
-		if (item.second.is_enemy && player_seen_lately(item.first, gametime)) {
+		if (get_is_enemy(item.first) && player_seen_lately(item.first, gametime)) {
 			return true;
 		}
 	}
@@ -1129,7 +1138,7 @@ bool PlayersStrengths::any_enemy_seen_lately(const uint32_t gametime) {
 uint8_t PlayersStrengths::enemies_seen_lately_count(const uint32_t gametime) {
 	uint8_t count = 0;
 	for (auto& item : all_stats) {
-		if (item.second.is_enemy && player_seen_lately(item.first, gametime)) {
+		if (get_is_enemy(item.first) && player_seen_lately(item.first, gametime)) {
 			count += 1;
 		}
 	}
@@ -1144,13 +1153,23 @@ void PlayersStrengths::set_last_time_seen(const uint32_t seentime, Widelands::Pl
 	all_stats[pn].last_time_seen = seentime;
 }
 
-bool PlayersStrengths::get_is_enemy(Widelands::PlayerNumber pn) {
-	if (all_stats.count(pn) == 0) {
-		// Should happen only rarely so we print a warning here
-		log("%d: WARNING: player has no statistics yet\n", this_player_number);
+bool PlayersStrengths::get_is_enemy(Widelands::PlayerNumber other_player_number) {
+	// So this is me
+	if (other_player_number == this_player_number) {
 		return false;
 	}
-	return all_stats[pn].is_enemy;
+	// If we do not belong to any team, all others are our enemies
+	if (this_player_team == 0) {
+		return true;
+	}
+	if (all_stats.count(other_player_number) == 0) {
+		// Should happen only rarely so we print a warning here
+		log("%d: WARNING: player has no statistics yet for player %d\n", this_player_number,
+		    other_player_number);
+		return false;
+	}
+	// finally we compare my team number of the other player team number
+	return all_stats[other_player_number].team_number != this_player_team;
 }
 
 // Was the player seen less then 2 minutes ago

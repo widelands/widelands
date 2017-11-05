@@ -66,6 +66,7 @@ return {
             atlanteans_miner = 4,
             atlanteans_stonecutter = 2,
             atlanteans_toolsmith = 1,
+            atlanteans_trainer = 3,
             atlanteans_woodcutter = 3,
             atlanteans_horse = 5,
          },

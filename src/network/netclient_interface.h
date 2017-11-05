@@ -33,7 +33,6 @@
  */
 class NetClientInterface {
 public:
-
 	/**
 	 * Closes the connection.
 	 * If you want to send a goodbye-message to the host, do so before freeing the object.

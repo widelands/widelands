@@ -32,7 +32,6 @@
  */
 class NetHost : public NetHostInterface {
 public:
-
 	/**
 	 * Tries to listen on the given port.
 	 * \param port The port to listen on.
@@ -54,7 +53,6 @@ public:
 	void send(const std::vector<ConnectionId>& ids, const SendPacket& packet) override;
 
 private:
-
 	/**
 	 * Returns whether the server is started and is listening.
 	 * \return \c true if the server is listening, \c false otherwise.
