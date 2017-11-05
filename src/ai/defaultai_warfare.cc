@@ -569,17 +569,17 @@ bool DefaultAI::check_trainingsites(uint32_t gametime) {
 
 	// Make sure we are not above ai type limit
 	if (tso.bo->total_count() > tso.bo->cnt_limit_by_aimode) {
-		throw wexception("%d AI count of %s exceeds an AI limit %d: actual count: %d\n",
-		                 player_number(), tso.bo->name, tso.bo->cnt_limit_by_aimode,
-		                 tso.bo->total_count());
+		log("%d AI count of %s exceeds an AI limit %d: actual count: %d\n", player_number(),
+		    tso.bo->name, tso.bo->cnt_limit_by_aimode, tso.bo->total_count());
 	}
+	assert(tso.bo->total_count() <= tso.bo->cnt_limit_by_aimode);
 
 	const DescriptionIndex enhancement = ts->descr().enhancement();
 
 	if (enhancement != INVALID_INDEX && ts_without_trainers_ == 0 && mines_.size() > 3 &&
 	    ts_finished_count_ > 1 && ts_in_const_count_ == 0) {
 
-		// Make sure that"
+		// Make sure that:
 		// 1. Building is allowed
 		// 2. AI limit for weaker AI is not to be exceeded
 		BuildingObserver& en_bo =
