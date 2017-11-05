@@ -451,7 +451,11 @@ public:
 		return port_spaces_;
 	}
 	std::vector<Coords> find_portdock(const Widelands::Coords& c) const;
-	bool allows_seafaring();
+
+	/// Check whether there are at least 2 port spaces that can be reached from each other by water
+	bool allows_seafaring() const;
+	/// Remove all port spaces that are not valid (Buildcap < big or not enough space for a portdock)
+	void cleanup_portspaces();
 
 	/// Checks whether there are any artifacts on the map
 	bool has_artifacts();

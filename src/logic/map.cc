@@ -1949,32 +1949,15 @@ void Map::check_neighbour_heights(FCoords coords, uint32_t& area) {
 			check_neighbour_heights(n[i], area);
 }
 
-/*
-===========
-Map::allows_seafaring()
-
-This function checks if there are two ports that are reachable
-for each other - then the map is seafaring.
-=============
-*/
-bool Map::allows_seafaring() {
-	Map::PortSpacesSet port_spaces = get_port_spaces();
-	std::vector<Coords> portdocks;
+bool Map::allows_seafaring() const {
 	std::set<Coords> swim_coords;
 
-	for (const Coords& c : port_spaces) {
+	for (const Coords& c : get_port_spaces()) {
 		std::queue<Coords> q_positions;
 		std::set<Coords> visited_positions;
 		FCoords fc = get_fcoords(c);
-		portdocks = find_portdock(fc);
 
-		/* remove the port space if it is not longer valid port space */
-		if ((fc.field->get_caps() & BUILDCAPS_SIZEMASK) != BUILDCAPS_BIG || portdocks.empty()) {
-			set_port_space(c, false);
-			continue;
-		}
-
-		for (const Coords& portdock : portdocks) {
+		for (const Coords& portdock : find_portdock(fc)) {
 			visited_positions.insert(portdock);
 			q_positions.push(portdock);
 		}
@@ -2001,6 +1984,16 @@ bool Map::allows_seafaring() {
 				return true;
 	}
 	return false;
+}
+
+void Map::cleanup_portspaces() {
+	for (const Coords& c : get_port_spaces()) {
+		const FCoords fc = get_fcoords(c);
+		if ((fc.field->get_caps() & BUILDCAPS_SIZEMASK) != BUILDCAPS_BIG || find_portdock(fc).empty()) {
+			set_port_space(c, false);
+			continue;
+		}
+	}
 }
 
 bool Map::has_artifacts() {
