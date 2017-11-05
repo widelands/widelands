@@ -70,7 +70,9 @@ uint8_t DefaultAI::spot_scoring(Widelands::Coords candidate_spot) {
 	}
 
 	// here we check for surface rocks + trees
-	std::vector<ImmovableFound> immovables;
+	static std::vector<ImmovableFound> immovables;
+	immovables.clear();
+	immovables.reserve(50);
 	// Search in a radius of range
 	map.find_immovables(Area<FCoords>(map.get_fcoords(candidate_spot), 10), &immovables);
 
@@ -148,7 +150,7 @@ bool DefaultAI::marine_main_decisions() {
 	}
 
 	// and now over ships
-	for (std::list<ShipObserver>::iterator sp_iter = allships.begin(); sp_iter != allships.end();
+	for (std::deque<ShipObserver>::iterator sp_iter = allships.begin(); sp_iter != allships.end();
 	     ++sp_iter) {
 		if (sp_iter->ship->state_is_expedition()) {
 			expeditions_in_progress += 1;
@@ -301,7 +303,7 @@ bool DefaultAI::check_ships(uint32_t const gametime) {
 	while (!marine_task_queue.empty()) {
 		if (marine_task_queue.back() == kStopShipyard) {
 			// iterate over all production sites searching for shipyard
-			for (std::list<ProductionSiteObserver>::iterator site = productionsites.begin();
+			for (std::deque<ProductionSiteObserver>::iterator site = productionsites.begin();
 			     site != productionsites.end(); ++site) {
 				if (site->bo->is(BuildingAttribute::kShipyard)) {
 					if (!site->site->is_stopped()) {
@@ -312,7 +314,7 @@ bool DefaultAI::check_ships(uint32_t const gametime) {
 		}
 
 		if (marine_task_queue.back() == kReprioritize) {
-			for (std::list<ProductionSiteObserver>::iterator site = productionsites.begin();
+			for (std::deque<ProductionSiteObserver>::iterator site = productionsites.begin();
 			     site != productionsites.end(); ++site) {
 				if (site->bo->is(BuildingAttribute::kShipyard)) {
 					for (uint32_t k = 0; k < site->bo->inputs.size(); ++k) {
