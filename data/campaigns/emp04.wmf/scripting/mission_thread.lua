@@ -5,14 +5,19 @@ include "map:scripting/helper_functions.lua"
 local obj_find_monastry_done = false
 local vesta_conquered = false
 local enemy = false
+local mv = wl.ui.MapView()
 
 --  dismantle the unproductive small buildings
 function dismantle()
    local o = add_campaign_objective(obj_dismantle_buildings)
-   
+   local buildmessage = false
    sleep(5000)
-   while count_buildings(p1, {"empire_fishers_house", "empire_quarry", "empire_lumberjacks_house2", "empire_well2", "empire_farm1"}) > 0 do
-   sleep(4000)
+   while count_buildings(p1, {"empire_fishers_house", "empire_quarry", "empire_lumberjacks_house2", "empire_well2"}) > 0 do
+      if mv.windows.field_action and mv.windows.field_action.tabs.small and not buildmessage then
+         campaign_message_box(amalea_19)
+		 buildmessage = true
+	  end
+	  sleep(500)
    end
    p1:allow_buildings("all")
    p1:forbid_buildings{"empire_farm", "empire_mill", "empire_brewery", "empire_trainingcamp", "empire_colosseum"}
@@ -25,7 +30,22 @@ end
 -- we need to find the plans how to build a farm
 function farm_plans()
    local f = map:get_field(47, 190)
-   while #p1:get_buildings("empire_farm1") > 1 do sleep(3249) end
+   local farmclick = false
+   local count = 0
+   while not farmclick do
+      if mv.windows.building_window and not mv.windows.building_window.buttons.dismantle and not mv.windows.building_window.tabs.wares then
+	     sleep(100)
+		 if mv.windows.building_window and not mv.windows.building_window.buttons.dismantle and not mv.windows.building_window.tabs.wares then
+            farmclick = true
+		 end
+      end
+	  count = count + 1
+	  if count == 1201 then 
+	  campaign_message_box(amalea_18)
+	  end
+      sleep(400)
+   end
+   
    campaign_message_box(amalea_2)
    local o = add_campaign_objective(obj_find_farm_plans)
    while not (f.owner == p1) do 
@@ -83,7 +103,7 @@ function clear_roads()
    campaign_message_box(amalea_6)
 end
 
--- the forresters have to be replaced too
+-- the foresters have to be replaced too
 function no_trees()
    local trees = 100
    while trees > 8 do 

@@ -6,7 +6,7 @@ p3:forbid_buildings("all")
 -- =======================================================================
 --p1.see_all = true
 p1:forbid_buildings("all")
-
+p1:allow_buildings{"empire_lumberjacks_house"}
 
  prefilled_buildings(p1, { "empire_headquarters", sf.x, sf.y,
       workers = {
@@ -59,8 +59,8 @@ p1:forbid_buildings("all")
 	  place_building_in_region(p1, "empire_lumberjacks_house2", sf:region(10))
 	  place_building_in_region(p1, "empire_lumberjacks_house2", sf:region(10))	
 	  place_building_in_region(p1, "empire_lumberjacks_house2", sf:region(10))
-	  place_building_in_region(p1, "empire_foresters_house1", {map:get_field(19, 190)})	  	  
-	  place_building_in_region(p1, "empire_foresters_house1", {map:get_field(19, 198)}) 
+	  place_building_in_region(p1, "empire_foresters_house2", {map:get_field(19, 190)})	  	  
+	  place_building_in_region(p1, "empire_foresters_house2", {map:get_field(19, 198)}) 
 
 -- mines
 	  place_building_in_region(p1, "empire_ironmine", {map:get_field(33, 194)})

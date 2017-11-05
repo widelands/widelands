@@ -13,6 +13,7 @@ tribes:new_productionsite_type {
       log = 2,
       planks = 1
    },
+   
    return_on_dismantle_on_enhanced = {
       planks = 1,
 	  --felling_ax = 1

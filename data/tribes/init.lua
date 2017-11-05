@@ -485,6 +485,7 @@ print_loading_message("┗━ took", function()
       include "campaigns/emp04.wmf/scripting/Custom_entities/new_farm.lua"
       include "campaigns/emp04.wmf/scripting/Custom_entities/new_lumberjacks_house1.lua"
       include "campaigns/emp04.wmf/scripting/Custom_entities/new_lumberjacks_house.lua"
+      include "campaigns/emp04.wmf/scripting/Custom_entities/new_foresters_house1.lua"	  
       include "campaigns/emp04.wmf/scripting/Custom_entities/new_foresters_house.lua"
       include "campaigns/emp04.wmf/scripting/Custom_entities/new_trainingcamp.lua"
       include "campaigns/emp04.wmf/scripting/Custom_entities/new_mill.lua"

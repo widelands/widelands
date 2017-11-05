@@ -9,12 +9,6 @@ tribes:new_productionsite_type {
    icon = dirname .. "menu.png",
    size = "big",
 
-   -- buildcost = {
-      -- planks = 2,
-      -- granite = 2,
-      -- marble = 2,
-      -- marble_column = 2
-   -- },
    
    return_on_dismantle = {
       planks = 1,

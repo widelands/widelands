@@ -185,7 +185,7 @@ diary_page_1 = {
    title =_"Home, sweet home",
    body=lutius(_"Diary of Lutius",
       -- TRANSLATORS: Lutius - Diary
-      _([[Finally we managed to get home. I am so glad to see the walls of our city again. I really look forward for a walk on our lovely coast and for a hunt in our deep forrests.]])
+      _([[Finally we managed to get home. I am so glad to see our beautiful country again. I really look forward for a walk on our lovely coast and for a hunt in our deep forrests.]])
       .. paragraphdivider() ..
       -- TRANSLATORS: Lutius - Diary
       _([[Saledus, Amalea, aren't you delighted as well?]])),
@@ -253,7 +253,7 @@ marcus_1 = {
       -- TRANSLATORS: Marcus - Mayor of fremil welcoming Lutius and explaining the chaos
       _([[Ave Sire. The people and me we are so glad to see you returning back home. We really could use some good leadership around here.]])
 	  .. paragraphdivider() ..
-      _([[As you have already noticed, things have went terribly wrong around here after you left.]])),
+      _([[As you have already noticed, things have gone terribly wrong around here after you left.]])),
    posy=1,
 }
 
@@ -288,10 +288,10 @@ amalea_1 = {
    title=_"Amalea investigating",
    body= amalea2(_"Amalea is nodding thougtfully…",
       -- TRANSLATORS: Amalea
-      _([[Lutius in my opinion this will be a very difficult challenge again. But I'm afraid, we're doomed to manage this situation. To make things even worse I had a look into our warehouses. There is hardly some grain of dust left in there. No wares, no tools, no workers and no soldiers as well.]])
+      _([[Lutius in my opinion this will be a very difficult challenge again. But I'm afraid, we're doomed to manage this situation. To make things even worse I discovered a bad issue in our warehouses. There is hardly some grain of dust left in there. No wares, no tools, no workers and no soldiers as well.]])
       .. paragraphdivider() ..
       -- TRANSLATORS: Amalea
-      _([[So, first of all we need some building material to start correcting the mistakes made by whoever. I think we should try to dismantle the unproductive small buildings and the farms to collect the ressources and regain them in our headquarters.]])
+      _([[So, first of all we need some building material to start correcting the mistakes made by the infamous secretary. I think we should try to dismantle the unproductive small buildings to collect their leftover building materials and regain them in our headquarters. As far as I can see now the fisherman's huts and the quarries don't have any ressources available. The lumberjack's houses and the well additionally seem to be unefficient and weared out.]])
       .. paragraphdivider() ..
       -- TRANSLATORS: Amalea
       _([[Additionally we should restrict the input to all builidngs which consume any of our building material to zero. Or maybe you could even pause the production in all bigger buildings and get the workers some rest until we will have produced some of their input wares.]]))
@@ -304,13 +304,13 @@ amalea_2 = {
    title=_"Amalea's bad news",
    body= amalea3(_"Amalea recommends…",
       -- TRANSLATORS: Amalea
-      _([[Lutius, I'm really worried to deliver bad news again. As you might have noticed we couldn't dismantle our farm, but just destroy it.]])
+      _([[Lutius, I'm really worried to deliver bad news again. As you can see our farms have no productivity and we can't dismantle them, but just destroy.]])
       .. paragraphdivider() ..
       -- TRANSLATORS: Amalea
-      _([[This is caused by the sad fact that our constructors have lost the plans how to construct a farm. For this reason they don't know how to dismantle it either.]])
+      _([[This is caused by the sad fact that our constructors have lost the plans how to construct and operate a farm. For this reason they have zero productivity and the constructors don't know how to dismantle them either.]])
 	  .. paragraphdivider() ..
       -- TRANSLATORS: Amalea
-      _([[So we need to recover our construction plans for a farm. One older constructor told me that they might have been concealed in a cave in the hills east of our border.]]))
+      _([[So we urgently need to recover our plans regarding the construction and operation of farms. One older constructor told me that they might have been concealed in a cave in the hills east of our border.]]))
 	  .. new_objectives(obj_find_farm_plans),
    posy=1,
    h=500,
@@ -394,7 +394,7 @@ amalea_7 = {
       _([[And guess what, they are very old. Their houses and tools are weared and their seed is degenerated. For this reason they need much more time to plant a tree then usual.]])
       .. paragraphdivider() ..
 	  -- TRANSLATORS: Amalea
-      _([[The only solution is we need to build 2 new forester's houses near our lumberjacks. Be sure to first build a new forester and then eventually destroy the old one or at least expel the forester to change houses. Dismantling them is not an option because they are so weared.]]))
+      _([[The only solution is we need to build 2 new forester's houses near our lumberjacks. Be sure to first build a new forester and then eventually destroy the old one or at least expel the forester to change houses. Dismantling them is also possible but will not return any wares because they are so weared.]]))
 	  .. new_objectives(obj_replace_foresters),
    posy=1,
    h=500,
@@ -511,6 +511,27 @@ amalea_17 = {
    posy=1,
 }
 
+amalea_18 = {
+   title=_"Amalea analyses",
+   body= amalea1(_"Amalea reminds…",
+      -- TRANSLATORS: Amalea
+      _([[Lutius. I just have analyzed our economy somewhat further. I think there might be a problem with our farms. They don't show any productivity although there is space enough to plant wheat.]])
+      .. paragraphdivider() ..
+      -- TRANSLATORS: Amalea
+      _([[I think we should have a deeper look into the issue and open the Building window of one of them.]])),
+   posy=1,
+}
+
+amalea_19 = {
+   title=_"Amalea's restrictions",
+   body= amalea1(_"Amalea restricted building possibilities…",
+      -- TRANSLATORS: Amalea
+      _([[Lutius. The most critical ressource in the current state of our economy is wood.]])
+      .. paragraphdivider() ..
+      -- TRANSLATORS: Amalea
+      _([[Therefore I took the freedom to restrict our current buildingoptions to the lumberjack's house until we have dismantled all necessary small buildings.]])),
+   posy=1,
+}
 
    
 -- Saledus
