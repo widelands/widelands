@@ -628,6 +628,9 @@ void DefaultAI::late_initialization() {
 		if (bld.is_buildable()) {
 			bo.set_is(BuildingAttribute::kBuildable);
 		}
+		if (bld.needs_seafaring()) {
+			bo.set_is(BuildingAttribute::kNeedsSeafaring);
+		}
 		if (bh.is_logproducer()) {
 			bo.set_is(BuildingAttribute::kLumberjack);
 		}
@@ -957,10 +960,6 @@ void DefaultAI::late_initialization() {
 		} while (mr_nw.advance(map));
 	}
 
-	if (!port_reserved_coords.empty()) {
-		seafaring_economy = true;
-	}
-
 	// here we scan entire map for own ships
 	std::set<OPtr<Ship>> found_ships;
 	for (int16_t y = 0; y < map.get_height(); ++y) {
@@ -1077,6 +1076,9 @@ void DefaultAI::late_initialization() {
  */
 void DefaultAI::update_all_buildable_fields(const uint32_t gametime) {
 	uint16_t i = 0;
+
+	// To be sure we have some info about enemies we might see
+	update_player_stat(gametime);
 
 	// we test 40 fields that were update more than 1 seconds ago
 	while (!buildable_fields.empty() &&
@@ -1971,6 +1973,13 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 	consumers_nearby_count = 0;
 
 	const Map& map = game().map();
+
+	if (gametime % 5 == 0) {
+		// TODO(unknown): Counting port spaces is very primitive way for this
+		// there should be better alternative f.e. like map::allows_seafaring()
+		// function but simplier
+		seafaring_economy = map.get_port_spaces().size() >= 2;
+	}
 
 	for (int32_t i = 0; i < 4; ++i)
 		spots_avail.at(i) = 0;
@@ -4345,6 +4354,12 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 		return BuildingNecessity::kForbidden;
 	}
 
+	// Perhaps buildings are not allowed because the map is no seafaring
+	if (purpose == PerfEvaluation::kForConstruction && !seafaring_economy &&
+	    bo.is(BuildingAttribute::kNeedsSeafaring)) {
+		return BuildingNecessity::kForbidden;
+	}
+
 	// First we deal with training sites, they are separate category
 	if (bo.type == BuildingObserver::Type::kTrainingsite) {
 
@@ -5759,7 +5774,6 @@ void DefaultAI::gain_building(Building& b, const bool found_on_load) {
 			warehousesites.back().bo = &bo;
 			if (bo.is(BuildingAttribute::kPort)) {
 				++num_ports;
-				seafaring_economy = true;
 				// unblock nearby fields, might be used for other buildings...
 				const Map& map = game().map();
 				MapRegion<Area<FCoords>> mr(
@@ -5932,15 +5946,13 @@ void DefaultAI::update_player_stat(const uint32_t gametime) {
 	player_statistics.set_update_time(gametime);
 	Widelands::PlayerNumber const pn = player_number();
 	PlayerNumber const nr_players = game().map().get_nrplayers();
-	uint32_t plr_in_game = 0;
-	iterate_players_existing_novar(p, nr_players, game())++ plr_in_game;
 
 	// receiving games statistics and parsing it (reading latest entry)
 	const Game::GeneralStatsVector& genstats = game().get_general_statistics();
 
 	// Collecting statistics and saving them in player_statistics object
 	const Player* me = game().get_player(pn);
-	for (Widelands::PlayerNumber j = 1; j <= plr_in_game; ++j) {
+	for (Widelands::PlayerNumber j = 1; j <= nr_players; ++j) {
 		const Player* this_player = game().get_player(j);
 		if (this_player) {
 			try {
@@ -5982,6 +5994,10 @@ void DefaultAI::update_player_stat(const uint32_t gametime) {
 				    static_cast<unsigned int>(player_number()),
 				    static_cast<unsigned int>(genstats.size()));
 			}
+		} else {
+			// Well, under some circumstances it is possible we have stat for this player and he does
+			// not exist anymore
+			player_statistics.remove_stat(j);
 		}
 	}
 
