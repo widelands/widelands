@@ -798,7 +798,7 @@ bool DefaultAI::check_militarysites(uint32_t gametime) {
 	}
 
 	// Make sure we are not above ai type limit
-	assert(mso.bo->total_count() <= mso.bo->cnt_limit_by_aimode);
+	assert(militarysites.front().bo->total_count() <= militarysites.front().bo->cnt_limit_by_aimode);
 
 	FCoords f = game().map().get_fcoords(ms->get_position());
 
