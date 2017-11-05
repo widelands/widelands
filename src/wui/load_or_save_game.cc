@@ -179,7 +179,6 @@ const SavegameData* LoadOrSaveGame::entry_selected() {
 		      /** TRANSLATORS: Tooltip for the delete button. The user has selected 1 file */
 		      _("Delete this game"));
 		result = &games_data_[table_.get_selected()];
-		result->filename_list = filename_list_string();
 	} else if (selections > 1) {
 		delete_->set_tooltip(
 		   filetype_ == FileType::kReplay ?
@@ -242,8 +241,7 @@ void LoadOrSaveGame::clicked_delete() {
 		return;
 	}
 	std::set<uint32_t> selections = table().selections();
-	const SavegameData& gamedata = *entry_selected();
-	size_t no_selections = selections.size();
+	const size_t no_selections = selections.size();
 	std::string header = "";
 	if (filetype_ == FileType::kReplay) {
 		header = no_selections == 1 ?
@@ -267,7 +265,7 @@ void LoadOrSaveGame::clicked_delete() {
 
 	bool do_delete = SDL_GetModState() & KMOD_CTRL;
 	if (!do_delete) {
-		const std::string message = (boost::format("%s\n%s") % header % gamedata.filename_list).str();
+		const std::string message = (boost::format("%s\n%s") % header % filename_list_string()).str();
 
 		UI::WLMessageBox confirmationBox(
 		   parent_->get_parent()->get_parent(), ngettext("Confirm deleting file", "Confirm deleting files", no_selections),
