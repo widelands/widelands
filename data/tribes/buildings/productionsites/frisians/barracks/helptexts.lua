@@ -13,7 +13,7 @@ end
 
 function building_helptext_purpose()
    -- #TRANSLATORS: Purpose helptext for a building
-   return pgettext("barbarians_building", "Equips recruits and trains them as soldiers.")
+   return pgettext("frisians_building", "Equips recruits and trains them as soldiers.")
 end
 
 function building_helptext_note()
@@ -23,5 +23,5 @@ end
 
 function building_helptext_performance()
    -- #TRANSLATORS: Performance helptext for a building
-   return no_performance_text_yet()
+   return pgettext("frisians_building", "The barracks needs %s to recruit one soldier."):bformat(ngettext("%d second", "%d seconds", 30):bformat(30))
 end

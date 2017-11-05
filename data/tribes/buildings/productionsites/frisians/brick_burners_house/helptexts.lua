@@ -23,5 +23,5 @@ end
 
 function building_helptext_performance()
    -- TRANSLATORS#: Performance helptext for a building
-   return no_performance_text_yet()
+   return pgettext("frisians_building", "The brick burner needs %s to produce two bricks."):bformat(ngettext("%d second", "%d seconds", 78):bformat(78))
 end

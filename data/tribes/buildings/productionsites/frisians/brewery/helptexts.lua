@@ -13,7 +13,7 @@ end
 
 function building_helptext_purpose()
    -- TRANSLATORS: Purpose helptext for a building
-   return pgettext("building", "Brews beer for soldier training.")
+   return pgettext("building", "Brews beer for miners and soldier training.")
 end
 
 function building_helptext_note()
@@ -23,5 +23,5 @@ end
 
 function building_helptext_performance()
    -- TRANSLATORS#: Performance helptext for a building
-   return no_performance_text_yet()
+   return pgettext("frisians_building", "The brewery needs %s to brew one mug of beer."):bformat(ngettext("%d second", "%d seconds", 60):bformat(60))
 end

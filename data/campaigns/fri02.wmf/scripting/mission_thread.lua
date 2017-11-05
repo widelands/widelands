@@ -10,11 +10,13 @@ local see_empire = nil
 local fields = {}
 local mountains = {}
 for x=0,map.width-1 do
+   local fld = {}
    for y=0,map.height-1 do
       local f = map:get_field(x,y)
-      fields [#fields + 1] = f
+      fld [#fld + 1] = f
       if not (f.terd:find ("mountain") == nil) then mountains [#mountains + 1] = f end
    end
+   fields [#fields + 1] = fld
 end
 
 function count_military_buildings_p1 ()
@@ -28,8 +30,10 @@ end
 
 function get_land (p)
    local land = 0
-   for idx,f in ipairs (fields) do
-      if f.owner == p then land = land + 1 end
+   for idx,ff in ipairs (fields) do
+      for idy,f in ipairs (ff) do
+         if f.owner == p then land = land + 1 end
+      end
    end
    return land
 end
@@ -48,17 +52,19 @@ end
 
 function check_empire ()
    while true do
-      sleep (7777)
-      for idx,f in ipairs(fields) do
-         local p1c = false
-         local p2c = false
-         for idx,cl in ipairs(f.claimers) do
-            if cl == p1 then p1c = true end
-            if cl == p2 then p2c = true end
-         end
-         if p1c and p2c then 
-            see_empire = f
-            return
+      for idx,fld in ipairs(fields) do
+         sleep (40)
+         for idy,f in ipairs(fld) do
+            local p1c = false
+            local p2c = false
+            for idx,cl in ipairs(f.claimers) do
+               if cl == p1 then p1c = true end
+               if cl == p2 then p2c = true end
+            end
+            if p1c and p2c then 
+               see_empire = f
+               return
+            end
          end
       end
    end

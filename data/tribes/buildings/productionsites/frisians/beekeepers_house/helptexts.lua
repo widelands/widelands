@@ -1,10 +1,10 @@
 function building_helptext_lore()
-   -- TRANSLATORS: Lore helptext for a building
+   -- #TRANSLATORS: Lore helptext for a building
    return pgettext("frisians_building", "")
 end
 
 function building_helptext_lore_author()
-   -- TRANSLATORS: Lore author helptext for a building
+   -- #TRANSLATORS: Lore author helptext for a building
    return pgettext("frisians_building", "")
 end
 
@@ -20,5 +20,5 @@ end
 
 function building_helptext_performance()
    -- TRANSLATORS: Performance helptext for a building
-   return pgettext("frisians_building", "Calculation needed")
+   return pgettext("frisians_building", "The beekeeper pauses %s before going to work again."):bformat(ngettext("%d second", "%d seconds", 45):bformat(45))
 end
