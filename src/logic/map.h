@@ -444,9 +444,19 @@ public:
 	/// Translate the whole map so that the given point becomes the new origin.
 	void set_origin(const Coords&);
 
-	/// Port space specific functions
+	// Port space specific functions
+
+	/// Checks whether the port space at the given fccords has enough space and enough water nearby.
+	bool is_port_space_allowed(const FCoords fc) const;
 	bool is_port_space(const Coords& c) const;
-	void set_port_space(Coords c, bool allowed);
+
+	/**
+	  * Set or unset a space as port space.
+	  * 'force' sets the port space even if it isn't viable, and is to be used for map loading only,
+	  * or if you want to set a port space somewhere where immovables might already be present on the map.
+	  * Returns whether the port space was set/unset successfully.
+	  */
+	bool set_port_space(Coords c, bool allowed, bool force = false);
 	const PortSpacesSet& get_port_spaces() const {
 		return port_spaces_;
 	}
@@ -454,8 +464,9 @@ public:
 
 	/// Check whether there are at least 2 port spaces that can be reached from each other by water
 	bool allows_seafaring() const;
-	/// Remove all port spaces that are not valid (Buildcap < big or not enough space for a portdock)
-	void cleanup_portspaces();
+	/// Remove all port spaces that are not valid (Buildcap < big or not enough space for a portdock).
+	/// Returns false if a port space got removed.
+	bool cleanup_port_spaces();
 
 	/// Checks whether there are any artifacts on the map
 	bool has_artifacts();

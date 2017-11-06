@@ -51,8 +51,7 @@ void MapPortSpacesPacket::read(FileSystem& fs, EditorGameBase& egbase, bool, Map
 
 			Section& s2 = prof.get_safe_section("port_spaces");
 			for (uint16_t i = 0; i < num; ++i) {
-				map->set_port_space(
-				   get_safe_coords(std::to_string(static_cast<unsigned int>(i)), ext, &s2), true);
+				map->set_port_space(get_safe_coords(std::to_string(static_cast<unsigned int>(i)), ext, &s2), true, true);
 			}
 		} else {
 			throw UnhandledVersionError("MapPortSpacesPacket", packet_version, kCurrentPacketVersion);
@@ -70,8 +69,7 @@ void MapPortSpacesPacket::write(FileSystem& fs, EditorGameBase& egbase, MapObjec
 	s1.set_int("packet_version", kCurrentPacketVersion);
 
 	const Map& map = egbase.map();
-	const uint16_t num = map.get_port_spaces().size();
-	s1.set_int("number_of_port_spaces", num);
+	s1.set_int("number_of_port_spaces", map.get_port_spaces().size());
 
 	Section& s2 = prof.create_section("port_spaces");
 	int i = 0;

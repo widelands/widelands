@@ -1303,18 +1303,28 @@ std::vector<Coords> Map::find_portdock(const Coords& c) const {
 	return portdock;
 }
 
+bool Map::is_port_space_allowed(const FCoords fc) const {
+	return (fc.field->get_caps() & BUILDCAPS_SIZEMASK) == BUILDCAPS_BIG && !find_portdock(fc).empty();
+}
+
 /// \returns true, if Coordinates are in port space list
 bool Map::is_port_space(const Coords& c) const {
 	return port_spaces_.count(c);
 }
 
-/// Set or unset a space as port space
-void Map::set_port_space(Coords c, bool allowed) {
+bool Map::set_port_space(Coords c, bool allowed, bool force) {
+	bool success = false;
 	if (allowed) {
 		port_spaces_.insert(c);
+		success = force || is_port_space_allowed(get_fcoords(c));
+		if (!success) {
+			port_spaces_.erase(c);
+		}
 	} else {
 		port_spaces_.erase(c);
+		success = true;
 	}
+	return success;
 }
 
 /**
@@ -1953,25 +1963,25 @@ bool Map::allows_seafaring() const {
 	std::set<Coords> swim_coords;
 
 	for (const Coords& c : get_port_spaces()) {
-		std::queue<Coords> q_positions;
+		std::queue<Coords> positions_to_check;
 		std::set<Coords> visited_positions;
 		FCoords fc = get_fcoords(c);
 
 		for (const Coords& portdock : find_portdock(fc)) {
 			visited_positions.insert(portdock);
-			q_positions.push(portdock);
+			positions_to_check.push(portdock);
 		}
 
-		while (!q_positions.empty()) {
-			const Coords& swim_coord = q_positions.front();
-			q_positions.pop();
+		while (!positions_to_check.empty()) {
+			const Coords& swim_coord = positions_to_check.front();
+			positions_to_check.pop();
 			for (uint8_t i = 1; i <= 6; ++i) {
 				FCoords neighbour;
 				get_neighbour(get_fcoords(swim_coord), i, &neighbour);
 				if ((neighbour.field->get_caps() & (MOVECAPS_SWIM | MOVECAPS_WALK)) == MOVECAPS_SWIM) {
 					if (visited_positions.count(neighbour) == 0) {
 						visited_positions.insert(neighbour);
-						q_positions.push(neighbour);
+						positions_to_check.push(neighbour);
 					}
 				}
 			}
@@ -1986,14 +1996,16 @@ bool Map::allows_seafaring() const {
 	return false;
 }
 
-void Map::cleanup_portspaces() {
+bool Map::cleanup_port_spaces() {
+	bool was_clean = true;
 	for (const Coords& c : get_port_spaces()) {
-		const FCoords fc = get_fcoords(c);
-		if ((fc.field->get_caps() & BUILDCAPS_SIZEMASK) != BUILDCAPS_BIG || find_portdock(fc).empty()) {
+		if (!is_port_space_allowed(get_fcoords(c))) {
 			set_port_space(c, false);
+			was_clean = false;
 			continue;
 		}
 	}
+	return was_clean;
 }
 
 bool Map::has_artifacts() {

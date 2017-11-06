@@ -138,8 +138,8 @@ BuildingStatisticsMenu::BuildingStatisticsMenu(InteractivePlayer& parent,
 	               g_gr->images().get("images/wui/fieldaction/menu_tab_buildmine.png"),
 	               tabs_[BuildingTab::Mines], _("Mines"));
 
-	// Hide the ports tab for non-seafaring maps
-	if (iplayer().game().map().get_port_spaces().size() > 1) {
+	// Only show the ports tab for seafaring maps
+	if (iplayer().game().map().allows_seafaring()) {
 		tab_panel_.add("building_stats_ports",
 		               g_gr->images().get("images/wui/fieldaction/menu_tab_buildport.png"),
 		               tabs_[BuildingTab::Ports], _("Ports"));

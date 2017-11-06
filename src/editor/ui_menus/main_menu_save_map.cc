@@ -279,7 +279,7 @@ bool MainMenuSaveMap::save_map(std::string filename, bool binary) {
 		   g_fs->create_sub_file_system(tmp_name, binary ? FileSystem::ZIP : FileSystem::DIR));
 
 		// Recompute seafaring tag
-		map->cleanup_portspaces();
+		map->cleanup_port_spaces();
 		if (map->allows_seafaring()) {
 			map->add_tag("seafaring");
 		} else {
