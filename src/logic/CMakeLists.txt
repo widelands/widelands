@@ -59,6 +59,7 @@ wl_library(logic_campaign_visibility
 
 wl_library(logic_constants
   SRCS
+    widelands.cc
     widelands.h
   DEPENDS
     base_macros
