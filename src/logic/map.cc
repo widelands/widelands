@@ -1312,13 +1312,12 @@ bool Map::is_port_space(const Coords& c) const {
 	return port_spaces_.count(c);
 }
 
-bool Map::set_port_space(Coords c, bool allowed, bool force) {
+bool Map::set_port_space(Coords c, bool set, bool force) {
 	bool success = false;
-	if (allowed) {
-		port_spaces_.insert(c);
+	if (set) {
 		success = force || is_port_space_allowed(get_fcoords(c));
-		if (!success) {
-			port_spaces_.erase(c);
+		if (success) {
+			port_spaces_.insert(c);
 		}
 	} else {
 		port_spaces_.erase(c);
