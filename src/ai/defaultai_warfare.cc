@@ -576,6 +576,10 @@ bool DefaultAI::check_trainingsites(uint32_t gametime) {
 	TrainingSiteObserver& tso = trainingsites.front();
 
 	// Make sure we are not above ai type limit
+	if (tso.bo->total_count() > tso.bo->cnt_limit_by_aimode) {
+		log("AI player %d: count of %s exceeds an AI limit %d: actual count: %d\n", player_number(),
+		    tso.bo->name, tso.bo->cnt_limit_by_aimode, tso.bo->total_count());
+	}
 	assert(tso.bo->total_count() <= tso.bo->cnt_limit_by_aimode);
 
 	const DescriptionIndex enhancement = ts->descr().enhancement();
@@ -583,7 +587,13 @@ bool DefaultAI::check_trainingsites(uint32_t gametime) {
 	if (enhancement != INVALID_INDEX && ts_without_trainers_ == 0 && mines_.size() > 3 &&
 	    ts_finished_count_ > 1 && ts_in_const_count_ == 0) {
 
-		if (player_->is_building_type_allowed(enhancement)) {
+		// Make sure that:
+		// 1. Building is allowed
+		// 2. AI limit for weaker AI is not to be exceeded
+		BuildingObserver& en_bo =
+		   get_building_observer(tribe_->get_building_descr(enhancement)->name().c_str());
+		if (player_->is_building_type_allowed(enhancement) &&
+		    en_bo.aimode_limit_status() == AiModeBuildings::kAnotherAllowed) {
 			game().send_player_enhance_building(*tso.site, enhancement);
 		}
 	}
