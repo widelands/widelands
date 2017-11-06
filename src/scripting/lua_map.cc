@@ -1338,6 +1338,7 @@ int LuaMap::recalculate(lua_State* L) {
       :arg allowed: Whether building a port will be allowed here.
       :type allowed: :class:`bool`
       :arg force: Force a port space, even if it isn't viable in this position.
+         Can be useful if there are trees in the way, for example.
       :type force: :class:`bool`
 
       :returns: :const:`true` on success, or :const:`false` otherwise
