@@ -1326,7 +1326,7 @@ int LuaMap::recalculate(lua_State* L) {
 }
 
 /* RST
-   .. method:: set_port_space(x, y, allowed)
+   .. method:: set_port_space(x, y, allowed, force)
 
       Sets whether a port space is allowed at the coordinates (x, y).
       Returns false if the port space couldn't be set.
