@@ -12,8 +12,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-09-15 18:56+0000\n"
-"PO-Revision-Date: 2017-09-23 20:46+0000\n"
+"POT-Creation-Date: 2017-10-09 18:20+0000\n"
+"PO-Revision-Date: 2017-10-10 06:11+0000\n"
 "Last-Translator: Любомир Василев\n"
 "Language-Team: Bulgarian (http://www.transifex.com/widelands/widelands/language/bg/)\n"
 "MIME-Version: 1.0\n"
@@ -213,12 +213,12 @@ msgstr "ное"
 msgid "Dec"
 msgstr "дек"
 
-#: ../../src/editor/editorinteractive.cc:63 ../../src/logic/game.cc:211
-#: ../../src/logic/game.cc:258
+#: ../../src/editor/editorinteractive.cc:62 ../../src/logic/game.cc:212
+#: ../../src/logic/game.cc:259
 msgid "Loading tribes"
 msgstr "Зареждане на племена"
 
-#: ../../src/editor/editorinteractive.cc:78
+#: ../../src/editor/editorinteractive.cc:77
 #: ../../src/editor/ui_menus/main_menu.cc:43
 #: ../../src/wui/game_options_menu.cc:66
 #: ../../src/wui/interactive_player.cc:208
@@ -226,95 +226,95 @@ msgstr "Зареждане на племена"
 msgid "Main Menu"
 msgstr "Главно меню"
 
-#: ../../src/editor/editorinteractive.cc:82
+#: ../../src/editor/editorinteractive.cc:81
 #: ../../src/editor/ui_menus/tool_menu.cc:45
 msgid "Tools"
 msgstr "Инструменти"
 
-#: ../../src/editor/editorinteractive.cc:86
+#: ../../src/editor/editorinteractive.cc:85
 #: ../../src/editor/ui_menus/toolsize_menu.cc:40
 msgid "Tool Size"
 msgstr "Размер на инструмента"
 
-#: ../../src/editor/editorinteractive.cc:90
+#: ../../src/editor/editorinteractive.cc:89
 #: ../../src/ui_fsmenu/launch_mpg.cc:144
 msgid "Players"
 msgstr "Играчи"
 
-#: ../../src/editor/editorinteractive.cc:99
+#: ../../src/editor/editorinteractive.cc:98
 #: ../../src/wui/interactive_player.cc:224
 #: ../../src/wui/interactive_spectator.cc:75
 msgid "Show Building Spaces (on/off)"
 msgstr "Показване на местата за строеж (вкл/изкл.)"
 
-#: ../../src/editor/editorinteractive.cc:102
+#: ../../src/editor/editorinteractive.cc:101
 msgid "Show Immovables (on/off)"
 msgstr "Показване на неподвижните обекти (вкл/изкл.)"
 
-#: ../../src/editor/editorinteractive.cc:106
+#: ../../src/editor/editorinteractive.cc:105
 msgid "Show Animals (on/off)"
 msgstr "Показване на животните (вкл/изкл.)"
 
-#: ../../src/editor/editorinteractive.cc:110
+#: ../../src/editor/editorinteractive.cc:109
 msgid "Show Resources (on/off)"
 msgstr "Показване на ресурсите (вкл/изкл.)"
 
-#: ../../src/editor/editorinteractive.cc:117
+#: ../../src/editor/editorinteractive.cc:116
 #: ../../src/wui/interactive_player.cc:220
 #: ../../src/wui/interactive_spectator.cc:71
 msgid "Minimap"
 msgstr "Миникарта"
 
-#: ../../src/editor/editorinteractive.cc:120
+#: ../../src/editor/editorinteractive.cc:119
 #: ../../src/wui/interactive_player.cc:226
 #: ../../src/wui/interactive_spectator.cc:78
 msgid "Reset zoom"
 msgstr "Връщане към нормалното ниво на приближение"
 
-#: ../../src/editor/editorinteractive.cc:128
+#: ../../src/editor/editorinteractive.cc:127
 msgid "Undo"
 msgstr "Отмяна"
 
-#: ../../src/editor/editorinteractive.cc:131
+#: ../../src/editor/editorinteractive.cc:130
 msgid "Redo"
 msgstr "Повтаряне"
 
-#: ../../src/editor/editorinteractive.cc:136
+#: ../../src/editor/editorinteractive.cc:135
 #: ../../src/wui/buildingwindow.cc:330
 msgid "Help"
 msgstr "Помощ"
 
-#: ../../src/editor/editorinteractive.cc:164
+#: ../../src/editor/editorinteractive.cc:163
 msgid "Unsupported format"
 msgstr "Неподдържан формат"
 
-#: ../../src/editor/editorinteractive.cc:165
+#: ../../src/editor/editorinteractive.cc:164
 #, c-format
 msgid ""
 "Widelands could not load the file \"%s\". The file format seems to be "
 "incompatible."
 msgstr "Widelands не успя да зареди файла „%s“. Форматът на файла изглежда несъвместим."
 
-#: ../../src/editor/editorinteractive.cc:178 ../../src/logic/game.cc:215
-#: ../../src/logic/game.cc:265
+#: ../../src/editor/editorinteractive.cc:177 ../../src/logic/game.cc:216
+#: ../../src/logic/game.cc:266
 msgid "Creating players"
 msgstr "Създаване на играчи"
 
-#: ../../src/editor/editorinteractive.cc:229
+#: ../../src/editor/editorinteractive.cc:225
 msgid "Unsaved Map"
 msgstr "Незапазена карта"
 
-#: ../../src/editor/editorinteractive.cc:230
+#: ../../src/editor/editorinteractive.cc:226
 msgid "The map has not been saved, do you really want to quit?"
 msgstr "Картата не е запазена, сигурни ли сте, че искате да излезете?"
 
-#: ../../src/editor/editorinteractive.cc:620
+#: ../../src/editor/editorinteractive.cc:618
 #: ../../src/editor/ui_menus/main_menu_new_map.cc:144
 msgid "Creating empty map…"
 msgstr "Създаване на празна карта…"
 
 #. * TRANSLATORS: Default name for new map
-#: ../../src/editor/editorinteractive.cc:624
+#: ../../src/editor/editorinteractive.cc:622
 #: ../../src/editor/ui_menus/main_menu_new_map.cc:151
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:532
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:133
@@ -322,7 +322,7 @@ msgstr "Създаване на празна карта…"
 msgid "No Name"
 msgstr "Без име"
 
-#: ../../src/editor/editorinteractive.cc:627
+#: ../../src/editor/editorinteractive.cc:625
 #: ../../src/editor/ui_menus/main_menu_new_map.cc:152
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:533
 #: ../../src/logic/map.h:170
@@ -330,7 +330,7 @@ msgctxt "author_name"
 msgid "Unknown"
 msgstr "Неизвестен"
 
-#: ../../src/editor/editorinteractive.cc:634
+#: ../../src/editor/editorinteractive.cc:632
 #, c-format
 msgid "Loading map “%s”…"
 msgstr "Зареждане на картата „%s“…"
@@ -503,7 +503,7 @@ msgstr "Щракнете, за да изберете нещо. Използва�
 
 #. * TRANSLATORS: %s are the currently selected items in an editor tool
 #: ../../src/editor/ui_menus/categorized_item_selection_menu.h:198
-#: ../../src/editor/ui_menus/tool_change_resources_options_menu.cc:176
+#: ../../src/editor/ui_menus/tool_change_resources_options_menu.cc:164
 #, c-format
 msgid "Current: %s"
 msgstr "Текущи: %s"
@@ -828,23 +828,23 @@ msgstr "Грешка при запазването на картата!\nЗап�
 msgid "Enter Directory Name:"
 msgstr "Въведете име на папка:"
 
-#: ../../src/editor/ui_menus/player_menu.cc:45
+#: ../../src/editor/ui_menus/player_menu.cc:44
 msgid "Player Options"
 msgstr "Настройки за играчите"
 
-#: ../../src/editor/ui_menus/player_menu.cc:54
+#: ../../src/editor/ui_menus/player_menu.cc:53
 msgid "Add player"
 msgstr "Добавяне на играч"
 
-#: ../../src/editor/ui_menus/player_menu.cc:63
+#: ../../src/editor/ui_menus/player_menu.cc:62
 msgid "Remove last player"
 msgstr "Премахване на последния играч"
 
-#: ../../src/editor/ui_menus/player_menu.cc:77
+#: ../../src/editor/ui_menus/player_menu.cc:76
 msgid "Number of Players"
 msgstr "Брой играчи"
 
-#: ../../src/editor/ui_menus/player_menu.cc:206 ../../src/logic/map.cc:309
+#: ../../src/editor/ui_menus/player_menu.cc:205 ../../src/logic/map.cc:309
 #: ../../src/logic/single_player_game_settings_provider.cc:89
 #: ../../src/map_io/map_player_names_and_tribes_packet.cc:94
 #: ../../src/network/gamehost.cc:1568 ../../src/ui_fsmenu/launch_mpg.cc:491
@@ -859,12 +859,12 @@ msgid "Height Tools Options"
 msgstr "Настр. на инструментите за височини"
 
 #: ../../src/editor/ui_menus/tool_change_height_options_menu.cc:47
-#: ../../src/editor/ui_menus/tool_change_resources_options_menu.cc:61
+#: ../../src/editor/ui_menus/tool_change_resources_options_menu.cc:60
 msgid "Increase/Decrease Value:"
 msgstr "Увел./намал. на стойността:"
 
 #: ../../src/editor/ui_menus/tool_change_height_options_menu.cc:59
-#: ../../src/editor/ui_menus/tool_change_resources_options_menu.cc:73
+#: ../../src/editor/ui_menus/tool_change_resources_options_menu.cc:72
 #: ../../src/editor/ui_menus/tool_noise_height_options_menu.cc:74
 msgid "Set Value:"
 msgstr "Задаване на стойност:"
@@ -882,20 +882,20 @@ msgstr "Щракнете върху картата за издигане на т
 msgid "Ctrl + Click on the map to set terrain height"
 msgstr "Контрол + щракване върху картата за задаване на височината на терена"
 
-#: ../../src/editor/ui_menus/tool_change_resources_options_menu.cc:50
+#: ../../src/editor/ui_menus/tool_change_resources_options_menu.cc:49
 #: ../../src/editor/ui_menus/tool_menu.cc:64
 msgid "Resources"
 msgstr "Ресурси"
 
 #. * TRANSLATORS: Editor change rseources access keys. *
-#: ../../src/editor/ui_menus/tool_change_resources_options_menu.cc:82
+#: ../../src/editor/ui_menus/tool_change_resources_options_menu.cc:81
 msgid ""
 "Click on the map to increase, Shift + Click on the map to decrease the "
 "amount of the selected resource"
 msgstr "Щракнете върху картата за увеличаване на количеството на избрания ресурс; Шифт + щракване за намаляване"
 
 #. * TRANSLATORS: Editor set rseources access key. *
-#: ../../src/editor/ui_menus/tool_change_resources_options_menu.cc:86
+#: ../../src/editor/ui_menus/tool_change_resources_options_menu.cc:85
 msgid "Ctrl + Click on the map to set the amount of the selected resource"
 msgstr "Контрол + щракване върху картата за задаване на количеството на избрания ресурс"
 
@@ -980,42 +980,50 @@ msgid "Loading graphics"
 msgstr "Зареждане на графиките"
 
 #. * TRANSLATORS: Win condition for this game has not been set.
-#: ../../src/logic/game.cc:130
+#: ../../src/logic/game.cc:131
 msgid "Not set"
 msgstr "Не е зададено"
 
-#: ../../src/logic/game.cc:203 ../../src/logic/game.cc:249
-#: ../../src/logic/game.cc:319 ../../src/logic/game.cc:347
+#: ../../src/logic/game.cc:204 ../../src/logic/game.cc:250
+#: ../../src/logic/game.cc:320 ../../src/logic/game.cc:348
 msgid "Preloading map"
 msgstr "Предварително зареждане на картата"
 
-#: ../../src/logic/game.cc:209 ../../src/logic/game.cc:255
+#: ../../src/logic/game.cc:210 ../../src/logic/game.cc:256
 msgid "Loading world"
 msgstr "Зареждане на света"
 
-#: ../../src/logic/game.cc:225 ../../src/logic/game.cc:293
+#: ../../src/logic/game.cc:226 ../../src/logic/game.cc:294
 msgid "Loading map…"
 msgstr "Зареждане на картата…"
 
-#: ../../src/logic/game.cc:332 ../../src/logic/game.cc:364
+#: ../../src/logic/game.cc:333 ../../src/logic/game.cc:365
 #: ../../src/ui_basic/progresswindow.cc:51 ../../src/wlapplication.cc:1366
 msgid "Loading…"
 msgstr "Зареждане…"
 
-#: ../../src/logic/game.cc:427
+#: ../../src/logic/game.cc:428
 msgid "Creating player infrastructure"
 msgstr "Създаване на инфраструктурата на играча"
 
-#: ../../src/logic/game.cc:438 ../../src/logic/player.cc:219
+#: ../../src/logic/game.cc:439 ../../src/logic/player.cc:219
 msgid "Missing starting position"
 msgstr "Липсва начална позиция"
 
-#: ../../src/logic/game.cc:439 ../../src/logic/player.cc:220
+#: ../../src/logic/game.cc:440 ../../src/logic/player.cc:220
 #, c-format
 msgid ""
 "Widelands could not start the game, because player %u has no starting position.\n"
 "You can manually add a starting position with the Widelands Editor to fix this problem."
 msgstr "Widelands не може да започне играта, тъй като играч %u няма начална позиция.\nЗа да поправите този проблем, можете да добавите начална позиция ръчно чрез редактора на Widelands."
+
+#: ../../src/logic/game.cc:781
+msgid "Trade Offer"
+msgstr "Предложение за търговия"
+
+#: ../../src/logic/game.cc:783
+msgid "This market has received a new trade offer."
+msgstr "Този пазар получи предложение за търговия."
 
 #: ../../src/logic/game_data_error.cc:48
 msgid ""
@@ -1248,29 +1256,29 @@ msgstr "Няма войник за обучение!"
 msgid "No soldier found for this training level!"
 msgstr "Няма войници за това ниво на обучение!"
 
-#: ../../src/logic/map_objects/tribes/productionsite.cc:265
+#: ../../src/logic/map_objects/tribes/productionsite.cc:271
 msgid "(not occupied)"
 msgstr "(незаето)"
 
-#: ../../src/logic/map_objects/tribes/productionsite.cc:272
+#: ../../src/logic/map_objects/tribes/productionsite.cc:278
 msgid "Worker missing"
 msgid_plural "Workers missing"
 msgstr[0] "Липсва работник"
 msgstr[1] "Липсват работници"
 
-#: ../../src/logic/map_objects/tribes/productionsite.cc:279
+#: ../../src/logic/map_objects/tribes/productionsite.cc:285
 msgid "(stopped)"
 msgstr "(спряно)"
 
 #. * TRANSLATORS: Percent in building statistics window, e.g. 85%
 #. * TRANSLATORS: If you wish to add a space, translate as '%i %%'
-#: ../../src/logic/map_objects/tribes/productionsite.cc:378
+#: ../../src/logic/map_objects/tribes/productionsite.cc:384
 #: ../../src/wui/building_statistics_menu.cc:627
 #, c-format
 msgid "%i%%"
 msgstr "%i%%"
 
-#: ../../src/logic/map_objects/tribes/productionsite.cc:939
+#: ../../src/logic/map_objects/tribes/productionsite.cc:945
 msgid "Can’t find any more resources!"
 msgstr "Не могат да се намерят повече ресурси!"
 
@@ -1392,30 +1400,30 @@ msgstr "Към икономиката Ви беше добавен нов щаб
 msgid "A new warehouse was added to your economy."
 msgstr "Към икономиката Ви беше добавен нов склад."
 
-#: ../../src/logic/map_objects/tribes/worker.cc:114
+#: ../../src/logic/map_objects/tribes/worker.cc:115
 #, c-format
 msgid ""
 "should mine resource %s, which does not exist in world; tribe is not "
 "compatible with world"
 msgstr "трябва да добива ресурса %s, който не е наличен в света; племето не е съвместимо със света"
 
-#: ../../src/logic/map_objects/tribes/worker.cc:215
+#: ../../src/logic/map_objects/tribes/worker.cc:216
 #, c-format
 msgid ""
 "should breed resource type %s, which does not exist in world; tribe is not "
 "compatible with world"
 msgstr "трябва да развъжда ресурс от тип %s, който не е наличен в света; племето не е съвместимо със света"
 
-#: ../../src/logic/map_objects/tribes/worker.cc:886
+#: ../../src/logic/map_objects/tribes/worker.cc:887
 msgid "A geologist found resources."
 msgstr "Геолог откри ресурси."
 
-#: ../../src/logic/map_objects/tribes/worker.cc:1690
+#: ../../src/logic/map_objects/tribes/worker.cc:1774
 #, c-format
 msgid "Your %s can't find a way home and will likely die."
 msgstr "Вашият/ата/ето %s не може да намери път към дома и най-вероятно ще умре."
 
-#: ../../src/logic/map_objects/tribes/worker.cc:1696
+#: ../../src/logic/map_objects/tribes/worker.cc:1780
 #: ../../src/wui/productionsitewindow.cc:89
 #: ../../src/wui/productionsitewindow.cc:114
 msgid "Worker"
@@ -1423,7 +1431,7 @@ msgid_plural "Workers"
 msgstr[0] "Работник"
 msgstr[1] "Работници"
 
-#: ../../src/logic/map_objects/tribes/worker.cc:1697
+#: ../../src/logic/map_objects/tribes/worker.cc:1781
 msgid "Worker got lost!"
 msgstr "Работник се загуби!"
 
@@ -1478,7 +1486,7 @@ msgstr "Запазването беше неуспешно!"
 msgid "Game saved"
 msgstr "Играта е запазена"
 
-#: ../../src/map_io/s2map.cc:422
+#: ../../src/map_io/s2map.cc:424
 msgid "Bluebyte Settlers II Map. No comment defined!"
 msgstr "Карта Bluebyte Settlers II. Няма коментари!"
 
@@ -3184,7 +3192,7 @@ msgstr "Спиране"
 msgid "Enhance to %s"
 msgstr "Надграждане до %s"
 
-#: ../../src/wui/buildingwindow.cc:239 ../../src/wui/fieldaction.cc:99
+#: ../../src/wui/buildingwindow.cc:239 ../../src/wui/fieldaction.cc:98
 msgid "Construction costs:"
 msgstr "Цена за изграждане:"
 
@@ -3204,7 +3212,7 @@ msgstr "Връща:"
 msgid "Hide work area"
 msgstr "Скриване на работната област"
 
-#: ../../src/wui/buildingwindow.cc:311 ../../src/wui/fieldaction.cc:368
+#: ../../src/wui/buildingwindow.cc:311 ../../src/wui/fieldaction.cc:367
 #: ../../src/wui/shipwindow.cc:140
 msgid "Show Debug Window"
 msgstr "Показване на прозореца за отстраняване на грешки"
@@ -3259,87 +3267,87 @@ msgstr "Увеличаване на целта"
 msgid "Reset to default"
 msgstr "По подразбиране"
 
-#: ../../src/wui/fieldaction.cc:218
+#: ../../src/wui/fieldaction.cc:217
 msgid "Build large building"
 msgstr "Строеж на голяма сграда"
 
-#: ../../src/wui/fieldaction.cc:218
+#: ../../src/wui/fieldaction.cc:217
 msgid "Build medium building"
 msgstr "Строеж на средна сграда"
 
-#: ../../src/wui/fieldaction.cc:218
+#: ../../src/wui/fieldaction.cc:217
 msgid "Build small building"
 msgstr "Строеж на малка сграда"
 
-#: ../../src/wui/fieldaction.cc:219
+#: ../../src/wui/fieldaction.cc:218
 msgid "Build port building"
 msgstr "Строеж на пристанище"
 
-#: ../../src/wui/fieldaction.cc:246
+#: ../../src/wui/fieldaction.cc:245
 msgid "Action"
 msgstr "Действиe"
 
-#: ../../src/wui/fieldaction.cc:315 ../../src/wui/fieldaction.cc:372
+#: ../../src/wui/fieldaction.cc:314 ../../src/wui/fieldaction.cc:371
 msgid "Build road"
 msgstr "Строеж на път"
 
-#: ../../src/wui/fieldaction.cc:321
+#: ../../src/wui/fieldaction.cc:320
 msgid "Destroy this flag"
 msgstr "Унищожаване на този флаг"
 
-#: ../../src/wui/fieldaction.cc:326
+#: ../../src/wui/fieldaction.cc:325
 msgid "Configure economy"
 msgstr "Настройки на икономиката"
 
-#: ../../src/wui/fieldaction.cc:329
+#: ../../src/wui/fieldaction.cc:328
 msgid "Send geologist to explore site"
 msgstr "Изпращане на геолог да проучи района"
 
-#: ../../src/wui/fieldaction.cc:344
+#: ../../src/wui/fieldaction.cc:343
 msgid "Place a flag"
 msgstr "Поставяне на флаг"
 
-#: ../../src/wui/fieldaction.cc:348
+#: ../../src/wui/fieldaction.cc:347
 msgid "Destroy a road"
 msgstr "Разрушаване на пътя"
 
-#: ../../src/wui/fieldaction.cc:359
+#: ../../src/wui/fieldaction.cc:358
 msgid "Watch field in a separate window"
 msgstr "Наблюдаване на полето в отделен прозорец"
 
-#: ../../src/wui/fieldaction.cc:361
+#: ../../src/wui/fieldaction.cc:360
 msgid "Toggle building statistics display"
 msgstr "Превключване на показването на статистиките за сградите"
 
-#: ../../src/wui/fieldaction.cc:364
+#: ../../src/wui/fieldaction.cc:363
 msgid "Toggle building label display"
 msgstr "Превключване на показването на наименованията на сградите"
 
-#: ../../src/wui/fieldaction.cc:374 ../../src/wui/watchwindow.cc:100
+#: ../../src/wui/fieldaction.cc:373 ../../src/wui/watchwindow.cc:100
 msgid "Watch"
 msgstr "Наблюдение"
 
-#: ../../src/wui/fieldaction.cc:388
+#: ../../src/wui/fieldaction.cc:387
 msgid "Start attack"
 msgstr "Започване на атака"
 
-#: ../../src/wui/fieldaction.cc:394
+#: ../../src/wui/fieldaction.cc:393
 msgid "Attack"
 msgstr "Атакуване"
 
-#: ../../src/wui/fieldaction.cc:472
+#: ../../src/wui/fieldaction.cc:471
 msgid "Build mines"
 msgstr "Строеж на мини"
 
-#: ../../src/wui/fieldaction.cc:485
+#: ../../src/wui/fieldaction.cc:484
 msgid "Build flag"
 msgstr "Поставяне на флаг"
 
-#: ../../src/wui/fieldaction.cc:488
+#: ../../src/wui/fieldaction.cc:487
 msgid "Cancel road"
 msgstr "Отмяна на пътя"
 
-#: ../../src/wui/fieldaction.cc:491
+#: ../../src/wui/fieldaction.cc:490
 msgid "Build roads"
 msgstr "Строеж на пътища"
 
@@ -3403,7 +3411,7 @@ msgid "Do you really want to delete the file %s?"
 msgstr "Наистина ли искате да изтриете файла %s?"
 
 #: ../../src/wui/game_message_menu.cc:51
-#: ../../src/wui/game_message_menu.cc:600
+#: ../../src/wui/game_message_menu.cc:602
 msgid "Messages: Inbox"
 msgstr "Съобщения: входящи"
 
@@ -3432,7 +3440,7 @@ msgid "Sent"
 msgstr "Изпратено"
 
 #: ../../src/wui/game_message_menu.cc:129
-#: ../../src/wui/game_message_menu.cc:603
+#: ../../src/wui/game_message_menu.cc:605
 msgid "Show Archive"
 msgstr "Показване на архива"
 
@@ -3448,84 +3456,84 @@ msgid "Center main mapview on location"
 msgstr "Центриране на картата върху място"
 
 #. * TRANSLATORS: %1% is a tooltip, %2% is the corresponding hotkey
-#: ../../src/wui/game_message_menu.cc:521
-#: ../../src/wui/game_message_menu.cc:532
-#: ../../src/wui/game_message_menu.cc:537
-#: ../../src/wui/game_message_menu.cc:541
-#: ../../src/wui/game_message_menu.cc:545
-#: ../../src/wui/game_message_menu.cc:549
+#: ../../src/wui/game_message_menu.cc:522
+#: ../../src/wui/game_message_menu.cc:533
+#: ../../src/wui/game_message_menu.cc:538
+#: ../../src/wui/game_message_menu.cc:542
+#: ../../src/wui/game_message_menu.cc:546
+#: ../../src/wui/game_message_menu.cc:550
 msgid "%1% (Hotkey: %2%)"
 msgstr "%1% (Клавиш: %2%)"
 
-#: ../../src/wui/game_message_menu.cc:523
+#: ../../src/wui/game_message_menu.cc:524
 msgctxt "hotkey"
 msgid "Alt + 0"
 msgstr "Алт + 0"
 
 #. * TRANSLATORS: Tooltip in the messages window
-#: ../../src/wui/game_message_menu.cc:523
+#: ../../src/wui/game_message_menu.cc:524
 msgid "Show all messages"
 msgstr "Показване на всички съобщения"
 
 #. * TRANSLATORS: Tooltip in the messages window
-#: ../../src/wui/game_message_menu.cc:534
+#: ../../src/wui/game_message_menu.cc:535
 msgid "Show geologists' messages only"
 msgstr "Показване само на съобщенията от геолозите"
 
-#: ../../src/wui/game_message_menu.cc:535
+#: ../../src/wui/game_message_menu.cc:536
 msgctxt "hotkey"
 msgid "Alt + 1"
 msgstr "Алт + 1"
 
-#: ../../src/wui/game_message_menu.cc:539
+#: ../../src/wui/game_message_menu.cc:540
 msgctxt "hotkey"
 msgid "Alt + 2"
 msgstr "Алт + 2"
 
 #. * TRANSLATORS: Tooltip in the messages window
-#: ../../src/wui/game_message_menu.cc:539
+#: ../../src/wui/game_message_menu.cc:540
 msgid "Show economy messages only"
 msgstr "Показване само на съобщенията за икономиката"
 
-#: ../../src/wui/game_message_menu.cc:543
+#: ../../src/wui/game_message_menu.cc:544
 msgctxt "hotkey"
 msgid "Alt + 3"
 msgstr "Алт + 3"
 
 #. * TRANSLATORS: Tooltip in the messages window
-#: ../../src/wui/game_message_menu.cc:543
+#: ../../src/wui/game_message_menu.cc:544
 msgid "Show seafaring messages only"
 msgstr "Показване само на съобщенията за мореплаването"
 
-#: ../../src/wui/game_message_menu.cc:547
+#: ../../src/wui/game_message_menu.cc:548
 msgctxt "hotkey"
 msgid "Alt + 4"
 msgstr "Алт + 4"
 
 #. * TRANSLATORS: Tooltip in the messages window
-#: ../../src/wui/game_message_menu.cc:547
+#: ../../src/wui/game_message_menu.cc:548
 msgid "Show warfare messages only"
 msgstr "Показване само на военните съобщения"
 
-#: ../../src/wui/game_message_menu.cc:551
+#: ../../src/wui/game_message_menu.cc:552
 msgctxt "hotkey"
 msgid "Alt + 5"
 msgstr "Алт + 5"
 
 #. * TRANSLATORS: Tooltip in the messages window
-#: ../../src/wui/game_message_menu.cc:551
+#: ../../src/wui/game_message_menu.cc:552
 msgid "Show scenario messages only"
 msgstr "Показване само на съобщенията за сценария"
 
-#: ../../src/wui/game_message_menu.cc:593
+#: ../../src/wui/game_message_menu.cc:595
 msgid "Messages: Archive"
 msgstr "Съобщения: архив"
 
-#: ../../src/wui/game_message_menu.cc:596
+#: ../../src/wui/game_message_menu.cc:598
 msgid "Show Inbox"
 msgstr "Входящи"
 
-#: ../../src/wui/game_message_menu.cc:624
+#: ../../src/wui/game_message_menu.cc:626
 #, c-format
 msgid "Restore the selected %d message"
 msgid_plural "Restore the selected %d messages"
@@ -3533,11 +3541,11 @@ msgstr[0] "Възстановяване на избраното съобщени
 msgstr[1] "Възстановяване на избраните %d съобщения"
 
 #. * TRANSLATORS: Tooltip in the messages window
-#: ../../src/wui/game_message_menu.cc:630
+#: ../../src/wui/game_message_menu.cc:632
 msgid "Restore selected message"
 msgstr "Възстановяване на избраното съобщение"
 
-#: ../../src/wui/game_message_menu.cc:638
+#: ../../src/wui/game_message_menu.cc:640
 #, c-format
 msgid "Archive the selected %d message"
 msgid_plural "Archive the selected %d messages"
@@ -3545,12 +3553,12 @@ msgstr[0] "Архивиране на избраното съобщение"
 msgstr[1] "Архивиране на избраните %d  съобщения"
 
 #. * TRANSLATORS: Tooltip in the messages window
-#: ../../src/wui/game_message_menu.cc:644
+#: ../../src/wui/game_message_menu.cc:646
 msgid "Archive selected message"
 msgstr "Архивиране на избраното съобщение"
 
 #. * TRANSLATORS: %s is a tooltip, Del is the corresponding hotkey
-#: ../../src/wui/game_message_menu.cc:649
+#: ../../src/wui/game_message_menu.cc:651
 #, c-format
 msgid "Del: %s"
 msgstr "Del: %s"
@@ -3607,7 +3615,7 @@ msgid "Ware Statistics"
 msgstr "Статистики на стоките"
 
 #: ../../src/wui/game_statistics_menu.cc:46 ../../src/wui/stock_menu.cc:36
-#: ../../src/wui/ware_statistics_menu.cc:147 ../../src/wui/waresdisplay.cc:68
+#: ../../src/wui/ware_statistics_menu.cc:146 ../../src/wui/waresdisplay.cc:68
 msgid "Stock"
 msgstr "Запаси"
 
@@ -4207,15 +4215,15 @@ msgstr "Работници в складовете"
 msgid "Soldiers in training"
 msgstr "Обучаващи се войници"
 
-#: ../../src/wui/ware_statistics_menu.cc:129
+#: ../../src/wui/ware_statistics_menu.cc:128
 msgid "Production"
 msgstr "Производство"
 
-#: ../../src/wui/ware_statistics_menu.cc:135
+#: ../../src/wui/ware_statistics_menu.cc:134
 msgid "Consumption"
 msgstr "Потребление"
 
-#: ../../src/wui/ware_statistics_menu.cc:142
+#: ../../src/wui/ware_statistics_menu.cc:141
 msgid "Economy Health"
 msgstr "Здраве на икономиката"
 

@@ -33,6 +33,7 @@
 #include "logic/map_objects/immovable.h"
 #include "logic/map_objects/terrain_affinity.h"
 #include "logic/map_objects/tribes/carrier.h"
+#include "logic/map_objects/tribes/market.h"
 #include "logic/map_objects/tribes/ship.h"
 #include "logic/map_objects/tribes/soldier.h"
 #include "logic/map_objects/tribes/tribes.h"
@@ -594,6 +595,48 @@ int do_set_soldiers(lua_State* L,
 	}
 	return 0;
 }
+
+// Parses a table of name/count pairs as given from Lua.
+void parse_wares_workers(lua_State* L,
+                         int table_index,
+                         const TribeDescr& tribe,
+                         InputMap* ware_workers_list,
+                         bool is_ware) {
+	luaL_checktype(L, table_index, LUA_TTABLE);
+	lua_pushnil(L);
+	while (lua_next(L, table_index) != 0) {
+		if (is_ware) {
+			if (tribe.ware_index(luaL_checkstring(L, -2)) == INVALID_INDEX) {
+				report_error(L, "Illegal ware %s", luaL_checkstring(L, -2));
+			}
+			ware_workers_list->insert(
+			   std::make_pair(std::make_pair(tribe.ware_index(luaL_checkstring(L, -2)),
+			                                 Widelands::WareWorker::wwWARE),
+			                  luaL_checkuint32(L, -1)));
+		} else {
+			if (tribe.worker_index(luaL_checkstring(L, -2)) == INVALID_INDEX) {
+				report_error(L, "Illegal worker %s", luaL_checkstring(L, -2));
+			}
+			ware_workers_list->insert(
+			   std::make_pair(std::make_pair(tribe.worker_index(luaL_checkstring(L, -2)),
+			                                 Widelands::WareWorker::wwWORKER),
+			                  luaL_checkuint32(L, -1)));
+		}
+		lua_pop(L, 1);
+	}
+}
+
+BillOfMaterials
+parse_wares_as_bill_of_material(lua_State* L, int table_index, const TribeDescr& tribe) {
+	InputMap input_map;
+	parse_wares_workers(L, table_index, tribe, &input_map, true /* is_ware */);
+	BillOfMaterials result;
+	for (const auto& pair : input_map) {
+		result.push_back(std::make_pair(pair.first.first, pair.second));
+	}
+	return result;
+}
+
 }  // namespace
 
 /*
@@ -782,7 +825,6 @@ RequestedWareWorker parse_wares_workers_counted(lua_State* L,
 
 	// We either received, two items string,int:
 	if (nargs == 3) {
-
 		result = RequestedWareWorker::kSingle;
 		if (is_ware) {
 			if (tribe.ware_index(luaL_checkstring(L, 2)) == INVALID_INDEX) {
@@ -803,32 +845,7 @@ RequestedWareWorker parse_wares_workers_counted(lua_State* L,
 	} else {
 		result = RequestedWareWorker::kList;
 		// or we got a table with name:quantity
-		luaL_checktype(L, 2, LUA_TTABLE);
-		lua_pushnil(L);
-		while (lua_next(L, 2) != 0) {
-			if (is_ware) {
-				if (tribe.ware_index(luaL_checkstring(L, -2)) == INVALID_INDEX) {
-					report_error(L, "Illegal ware %s", luaL_checkstring(L, -2));
-				}
-			} else {
-				if (tribe.worker_index(luaL_checkstring(L, -2)) == INVALID_INDEX) {
-					report_error(L, "Illegal worker %s", luaL_checkstring(L, -2));
-				}
-			}
-
-			if (is_ware) {
-				ware_workers_list->insert(
-				   std::make_pair(std::make_pair(tribe.ware_index(luaL_checkstring(L, -2)),
-				                                 Widelands::WareWorker::wwWARE),
-				                  luaL_checkuint32(L, -1)));
-			} else {
-				ware_workers_list->insert(
-				   std::make_pair(std::make_pair(tribe.worker_index(luaL_checkstring(L, -2)),
-				                                 Widelands::WareWorker::wwWORKER),
-				                  luaL_checkuint32(L, -1)));
-			}
-			lua_pop(L, 1);
-		}
+		parse_wares_workers(L, 2, tribe, ware_workers_list, is_ware);
 	}
 	return result;
 }
@@ -2762,6 +2779,8 @@ MarketDescription
    trading over land with other players. See the parent classes for more
    properties.
 */
+// TODO(sirver,trading): Expose the properties of MarketDescription here once
+// the interface settles.
 const char LuaMarketDescription::className[] = "MarketDescription";
 const MethodType<LuaMarketDescription> LuaMarketDescription::Methods[] = {
    {nullptr, nullptr},
@@ -5083,6 +5102,7 @@ Market
 */
 const char LuaMarket::className[] = "Market";
 const MethodType<LuaMarket> LuaMarket::Methods[] = {
+   METHOD(LuaMarket, propose_trade),
    // TODO(sirver,trading): Implement and fix documentation.
    // METHOD(LuaMarket, set_wares),
    // METHOD(LuaMarket, get_wares),
@@ -5105,6 +5125,36 @@ const PropertyType<LuaMarket> LuaMarket::Properties[] = {
  LUA METHODS
  ==========================================================
  */
+
+/* RST
+   .. method:: propose_trade(other_market, num_batches, items_to_send, items_to_receive)
+
+      TODO(sirver,trading): document
+
+      :returns: :const:`nil`
+*/
+int LuaMarket::propose_trade(lua_State* L) {
+	if (lua_gettop(L) != 5) {
+		report_error(L, "Takes 4 arguments.");
+	}
+	Game& game = get_game(L);
+	Market* self = get(L, game);
+	Market* other_market = (*get_user_class<LuaMarket>(L, 2))->get(L, game);
+	const int num_batches = luaL_checkinteger(L, 3);
+
+	const BillOfMaterials items_to_send =
+	   parse_wares_as_bill_of_material(L, 4, self->owner().tribe());
+	// TODO(sirver,trading): unsure if correct. Test inter-tribe trading, i.e.
+	// barbarians trading with empire, but shipping atlantean only wares.
+	const BillOfMaterials items_to_receive =
+	   parse_wares_as_bill_of_material(L, 5, self->owner().tribe());
+	const int trade_id = game.propose_trade(
+	   Trade{items_to_send, items_to_receive, num_batches, self->serial(), other_market->serial()});
+
+	// TODO(sirver,trading): Wrap 'Trade' into its own Lua class?
+	lua_pushint32(L, trade_id);
+	return 1;
+}
 
 /*
  ==========================================================
