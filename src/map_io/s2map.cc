@@ -392,7 +392,7 @@ int32_t S2MapLoader::load_map_complete(Widelands::EditorGameBase& egbase, MapLoa
 
 	map_.recalc_whole_map(egbase.world());
 
-	postload_set_port_spaces();
+	postload_set_port_spaces(egbase.world());
 
 	set_state(STATE_LOADED);
 
@@ -1045,17 +1045,17 @@ void S2MapLoader::load_s2mf(Widelands::EditorGameBase& egbase) {
 
 /// Try to fix data which is incompatible between S2 and Widelands.
 /// This is only the port space locations.
-void S2MapLoader::postload_set_port_spaces() {
+void S2MapLoader::postload_set_port_spaces(const Widelands::World& world) {
 	// Set port spaces near desired locations if possible
 	for (const Widelands::Coords& coords : port_spaces_to_set_) {
-		bool was_set = map_.set_port_space(coords, true);
+		bool was_set = map_.set_port_space(world, coords, true);
 		const Widelands::FCoords fc = map_.get_fcoords(coords);
 		if (!was_set) {
 			// Try to set a port space at alternative location
 			Widelands::MapRegion<Widelands::Area<Widelands::FCoords>> mr(
 				map_, Widelands::Area<Widelands::FCoords>(fc, 3));
 			do {
-				was_set = map_.set_port_space(Widelands::Coords(mr.location().x, mr.location().y), true);
+				was_set = map_.set_port_space(world, Widelands::Coords(mr.location().x, mr.location().y), true);
 			} while (!was_set && mr.advance(map_));
 		}
 		if (!was_set) {

@@ -1326,7 +1326,7 @@ int LuaMap::recalculate(lua_State* L) {
 }
 
 /* RST
-   .. method:: set_port_space(x, y, allowed, force)
+   .. method:: set_port_space(x, y, allowed)
 
       Sets whether a port space is allowed at the coordinates (x, y).
       Returns false if the port space couldn't be set.
@@ -1337,9 +1337,6 @@ int LuaMap::recalculate(lua_State* L) {
       :type y: :class:`int`
       :arg allowed: Whether building a port will be allowed here.
       :type allowed: :class:`bool`
-      :arg force: Force a port space, even if it isn't viable in this position.
-         Can be useful if there are trees in the way, for example.
-      :type force: :class:`bool`
 
       :returns: :const:`true` on success, or :const:`false` otherwise
       :rtype: :class:`bool`
@@ -1348,11 +1345,7 @@ int LuaMap::set_port_space(lua_State* L) {
 	const int x = luaL_checkint32(L, 2);
 	const int y = luaL_checkint32(L, 3);
 	const bool allowed = luaL_checkboolean(L, 4);
-	bool force = false;
-	if (lua_gettop(L) == 5) {
-		force = luaL_checkboolean(L, 5);
-	}
-	const bool success = get_egbase(L).mutable_map()->set_port_space(Widelands::Coords(x, y), allowed, force);
+	const bool success = get_egbase(L).mutable_map()->set_port_space(get_egbase(L).world(), Widelands::Coords(x, y), allowed);
 	lua_pushboolean(L, success);
 	return 1;
 }

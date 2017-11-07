@@ -545,7 +545,7 @@ void Map::delete_tag(const std::string& tag) {
 	}
 }
 
-NodeCaps Map::get_max_nodecaps(const World& world, const FCoords& fc) {
+NodeCaps Map::get_max_nodecaps(const World& world, const FCoords& fc) const {
 	NodeCaps caps = calc_nodecaps_pass1(world, fc, false);
 	caps = calc_nodecaps_pass2(world, fc, false, caps);
 	return caps;
@@ -936,7 +936,7 @@ void Map::recalc_nodecaps_pass1(const World& world, const FCoords& f) {
 	f.field->caps = calc_nodecaps_pass1(world, f, true);
 }
 
-NodeCaps Map::calc_nodecaps_pass1(const World& world, const FCoords& f, bool consider_mobs) {
+NodeCaps Map::calc_nodecaps_pass1(const World& world, const FCoords& f, bool consider_mobs) const {
 	uint8_t caps = CAPS_NONE;
 
 	// 1a) Get all the neighbours to make life easier
@@ -1057,7 +1057,7 @@ void Map::recalc_nodecaps_pass2(const World& world, const FCoords& f) {
 NodeCaps Map::calc_nodecaps_pass2(const World& world,
                                   const FCoords& f,
                                   bool consider_mobs,
-                                  NodeCaps initcaps) {
+                                  NodeCaps initcaps) const {
 	uint8_t caps = consider_mobs ? f.field->caps : static_cast<uint8_t>(initcaps);
 
 	// NOTE  This dependency on the bottom-right neighbour is the reason
@@ -1165,7 +1165,7 @@ int Map::calc_buildsize(const World& world,
                         bool avoidnature,
                         bool* ismine,
                         bool consider_mobs,
-                        NodeCaps initcaps) {
+                        NodeCaps initcaps) const {
 	if (consider_mobs) {
 		if (!(f.field->get_caps() & MOVECAPS_WALK))
 			return BaseImmovable::NONE;
@@ -1239,7 +1239,7 @@ int Map::calc_buildsize(const World& world,
  * The array \p dirs must have length \p length, where \p length is
  * the length of the cycle.
  */
-bool Map::is_cycle_connected(const FCoords& start, uint32_t length, const WalkingDir* dirs) {
+bool Map::is_cycle_connected(const FCoords& start, uint32_t length, const WalkingDir* dirs) const {
 	FCoords f = start;
 	bool prev_walkable = start.field->get_caps() & MOVECAPS_WALK;
 	uint32_t alternations = 0;
@@ -1303,8 +1303,8 @@ std::vector<Coords> Map::find_portdock(const Coords& c) const {
 	return portdock;
 }
 
-bool Map::is_port_space_allowed(const FCoords fc) const {
-	return (fc.field->get_caps() & BUILDCAPS_SIZEMASK) == BUILDCAPS_BIG && !find_portdock(fc).empty();
+bool Map::is_port_space_allowed(const World& world, const FCoords& fc) const {
+	return (get_max_nodecaps(world, fc) & BUILDCAPS_SIZEMASK) == BUILDCAPS_BIG && !find_portdock(fc).empty();
 }
 
 /// \returns true, if Coordinates are in port space list
@@ -1312,10 +1312,10 @@ bool Map::is_port_space(const Coords& c) const {
 	return port_spaces_.count(c);
 }
 
-bool Map::set_port_space(Coords c, bool set, bool force) {
+bool Map::set_port_space(const World& world, const Coords& c, bool set, bool force) {
 	bool success = false;
 	if (set) {
-		success = force || is_port_space_allowed(get_fcoords(c));
+		success = force || is_port_space_allowed(world, get_fcoords(c));
 		if (success) {
 			port_spaces_.insert(c);
 		}
@@ -1995,11 +1995,11 @@ bool Map::allows_seafaring() const {
 	return false;
 }
 
-bool Map::cleanup_port_spaces() {
+bool Map::cleanup_port_spaces(const World& world) {
 	bool was_clean = true;
 	for (const Coords& c : get_port_spaces()) {
-		if (!is_port_space_allowed(get_fcoords(c))) {
-			set_port_space(c, false);
+		if (!is_port_space_allowed(world, get_fcoords(c))) {
+			set_port_space(world, c, false);
 			was_clean = false;
 			continue;
 		}

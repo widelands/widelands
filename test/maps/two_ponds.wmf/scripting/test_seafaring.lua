@@ -1,5 +1,6 @@
 run(function()
-   -- The map in its initial state has 2 unconnected port spaces, so it should not allow seafaring
+   -- The map in its initial state has 2 unconnected port spaces, so it should
+   -- not allow seafaring. One of the port spaces has trees on top of it.
    assert_equal(2, map.number_of_port_spaces)
    assert_equal(false, map.allows_seafaring)
 
@@ -22,12 +23,6 @@ run(function()
    assert_equal(true, map:set_port_space(0, 2, false))
    assert_equal(2, map.number_of_port_spaces)
    assert_equal(false, map.allows_seafaring)
-
-   -- Now try to force a port space away from water, it should succeed
-   assert_equal(true, map:set_port_space(18, 9, true, true))
-   assert_equal(3, map.number_of_port_spaces)
-   assert_equal(false, map.allows_seafaring)
-   map:set_port_space(18, 9, false)
 
    print("# All Tests passed.")
    wl.ui.MapView():close()
