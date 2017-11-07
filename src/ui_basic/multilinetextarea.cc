@@ -47,19 +47,15 @@ MultilineTextarea::MultilineTextarea(Panel* const parent,
      align_(align),
      force_new_renderer_(false),
      use_old_renderer_(false),
-     scrollbar_(this, get_w() - Scrollbar::kSize, 0, Scrollbar::kSize, h, style, false),
-     scrollmode_(scroll_mode) {
-	assert(scrollmode_ == MultilineTextarea::ScrollMode::kNoScrolling || Scrollbar::kSize <= w);
+     scrollbar_(this, get_w() - Scrollbar::kSize, 0, Scrollbar::kSize, h, style, false) {
 	set_thinks(false);
 
 	scrollbar_.moved.connect(boost::bind(&MultilineTextarea::scrollpos_changed, this, _1));
 
 	scrollbar_.set_singlestepsize(text_height());
 	scrollbar_.set_steps(1);
-	scrollbar_.set_force_draw(scrollmode_ == ScrollMode::kScrollNormalForced ||
-	                          scrollmode_ == ScrollMode::kScrollLogForced);
-
-	layout();
+	set_scrollmode(scroll_mode);
+	assert(scrollmode_ == MultilineTextarea::ScrollMode::kNoScrolling || Scrollbar::kSize <= w);
 }
 
 /**
@@ -170,6 +166,13 @@ bool MultilineTextarea::handle_mousewheel(uint32_t which, int32_t x, int32_t y) 
 
 void MultilineTextarea::scroll_to_top() {
 	scrollbar_.set_scrollpos(0);
+}
+
+void MultilineTextarea::set_scrollmode(MultilineTextarea::ScrollMode scroll_mode) {
+	scrollmode_ = scroll_mode;
+	scrollbar_.set_force_draw(scrollmode_ == ScrollMode::kScrollNormalForced ||
+	                          scrollmode_ == ScrollMode::kScrollLogForced);
+	layout();
 }
 
 std::string MultilineTextarea::make_richtext() {

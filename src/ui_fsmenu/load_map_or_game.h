@@ -71,7 +71,7 @@ protected:
 	const int32_t padding_ = 4;  // Common padding between panels
 	const int32_t indent_ = 10;  // Indent for elements below labels
 	const int32_t label_height_ = 20;
-	const int32_t right_column_margin_ = 15;  // X margins of the right column
+	const int32_t right_column_margin_ = 16;  // X margins of the right column
 	// These are set by the layout() function.
 	int32_t tablex_, tabley_, tablew_, tableh_ = 0;
 	int32_t right_column_x_ = 0;
