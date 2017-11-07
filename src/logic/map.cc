@@ -1996,16 +1996,13 @@ bool Map::allows_seafaring() const {
 	return false;
 }
 
-bool Map::cleanup_port_spaces(const World& world) {
-	bool was_clean = true;
+void Map::cleanup_port_spaces(const World& world) {
 	for (const Coords& c : get_port_spaces()) {
 		if (!is_port_space_allowed(world, get_fcoords(c))) {
 			set_port_space(world, c, false);
-			was_clean = false;
 			continue;
 		}
 	}
-	return was_clean;
 }
 
 bool Map::has_artifacts() {

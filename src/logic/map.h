@@ -457,8 +457,7 @@ public:
 	/// Check whether there are at least 2 port spaces that can be reached from each other by water
 	bool allows_seafaring() const;
 	/// Remove all port spaces that are not valid (Buildcap < big or not enough space for a portdock).
-	/// Returns false if a port space got removed.
-	bool cleanup_port_spaces(const World& world);
+	void cleanup_port_spaces(const World& world);
 
 	/// Checks whether there are any artifacts on the map
 	bool has_artifacts();
