@@ -34,6 +34,7 @@
 #include "economy/road.h"
 #include "editor/tools/increase_resources_tool.h"
 #include "io/filesystem/layered_filesystem.h"
+#include "logic/filesystem_constants.h"
 #include "logic/findimmovable.h"
 #include "logic/findnode.h"
 #include "logic/map_objects/checkstep.h"
@@ -1564,15 +1565,15 @@ std::unique_ptr<MapLoader> Map::get_correct_loader(const std::string& filename) 
 	std::string lower_filename = filename;
 	boost::algorithm::to_lower(lower_filename);
 
-	if (boost::algorithm::ends_with(lower_filename, WLMF_SUFFIX)) {
+	if (boost::algorithm::ends_with(lower_filename, kWidelandsMapExtension)) {
 		try {
 			result.reset(new WidelandsMapLoader(g_fs->make_sub_file_system(filename), this));
 		} catch (...) {
 			//  If this fails, it is an illegal file.
 			//  TODO(unknown): catchall hides real errors! Replace with more specific code
 		}
-	} else if (boost::algorithm::ends_with(lower_filename, S2MF_SUFFIX) ||
-	           boost::algorithm::ends_with(lower_filename, S2MF_SUFFIX2)) {
+	} else if (boost::algorithm::ends_with(lower_filename, kS2MapExtension1) ||
+	           boost::algorithm::ends_with(lower_filename, kS2MapExtension2)) {
 		result.reset(new S2MapLoader(filename, *this));
 	}
 	return result;

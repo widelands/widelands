@@ -53,16 +53,22 @@ wl_library(logic_campaign_visibility
   DEPENDS
     base_exceptions
     io_filesystem
+    logic_filesystem_constants
     profile
 )
 
 wl_library(logic_constants
   SRCS
-    constants.h
-    constants.cc
+    widelands.cc
     widelands.h
   DEPENDS
     base_macros
+)
+
+wl_library(logic_filesystem_constants
+  SRCS
+    filesystem_constants.h
+    filesystem_constants.cc
 )
 
 wl_library(logic
@@ -255,6 +261,7 @@ wl_library(logic
     io_filesystem
     io_stream
     logic_constants
+    logic_filesystem_constants
     logic_game_controller
     logic_game_settings
     logic_widelands_geometry

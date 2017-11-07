@@ -29,6 +29,7 @@
 #include "graphic/font_handler1.h"
 #include "graphic/graphic.h"
 #include "io/filesystem/layered_filesystem.h"
+#include "logic/filesystem_constants.h"
 #include "logic/game_controller.h"
 #include "logic/game_settings.h"
 #include "map_io/widelands_map_loader.h"
@@ -57,7 +58,7 @@ FullscreenMenuMapSelect::FullscreenMenuMapSelect(GameSettingsProvider* const set
                   tableh_ - buth_ - 4 * padding_,
                   MapDetails::Style::kFsMenu),
 
-     basedir_("maps"),
+     basedir_(kMapsDir),
      settings_(settings),
      ctrl_(ctrl),
      has_translated_mapname_(false) {
