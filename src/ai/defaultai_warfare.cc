@@ -50,7 +50,9 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 		FCoords f = map.get_fcoords(ms->get_position());
 
 		// get list of immovable around this our military site
-		std::vector<ImmovableFound> immovables;
+		static std::vector<ImmovableFound> immovables;
+		immovables.clear();
+		immovables.reserve(40);
 		map.find_immovables(Area<FCoords>(f, (vision + 3 < 13) ? 13 : vision + 3), &immovables,
 		                    FindImmovableAttackTarget());
 
@@ -87,7 +89,9 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 	uint8_t best_score = 0;
 	uint32_t count = 0;
 	// sites that were either conquered or destroyed
-	std::vector<uint32_t> disappeared_sites;
+	static std::vector<uint32_t> disappeared_sites;
+	disappeared_sites.clear();
+	disappeared_sites.reserve(6);
 
 	// Willingness to attack depend on how long ago the last soldier has been trained. This is used
 	// as indicator how busy our trainingsites are.
@@ -166,19 +170,19 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 				owner_number = bld->owner().player_number();
 			}
 		}
-		if (upcast(Warehouse, Wh, f.field->get_immovable())) {
-			if (player_->is_hostile(Wh->owner())) {
+		if (upcast(Warehouse, wh, f.field->get_immovable())) {
+			if (player_->is_hostile(wh->owner())) {
 
 				std::vector<Soldier*> defenders;
-				defenders = Wh->soldier_control()->present_soldiers();
+				defenders = wh->soldier_control()->present_soldiers();
 				defenders_strength = calculate_strength(defenders);
 
-				flag = &Wh->base_flag();
+				flag = &wh->base_flag();
 				is_warehouse = true;
-				if (is_visible && Wh->attack_target()->can_be_attacked()) {
+				if (is_visible && wh->attack_target()->can_be_attacked()) {
 					is_attackable = true;
 				}
-				owner_number = Wh->owner().player_number();
+				owner_number = wh->owner().player_number();
 			}
 		}
 
@@ -249,7 +253,11 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 					                      player_statistics.get_old60_player_land(pn);
 				}
 
-				int16_t inputs[3 * kFNeuronBitSize] = {0};
+				static int16_t inputs[3 * kFNeuronBitSize] = {0};
+				// Reseting values as the variable is static
+				for (int j = 0; j < 3 * kFNeuronBitSize; j++) {
+					inputs[j] = 0;
+				}
 				inputs[0] = (site->second.attack_soldiers_strength - site->second.defenders_strength) *
 				            std::abs(management_data.get_military_number_at(114)) / 30;
 				inputs[1] = (site->second.attack_soldiers_strength - site->second.defenders_strength) *
@@ -753,7 +761,7 @@ bool DefaultAI::check_trainingsites(uint32_t gametime) {
 	}
 
 	ts_without_trainers_ = 0;  // zeroing
-	for (std::list<TrainingSiteObserver>::iterator site = trainingsites.begin();
+	for (std::deque<TrainingSiteObserver>::iterator site = trainingsites.begin();
 	     site != trainingsites.end(); ++site) {
 
 		if (!site->site->can_start_working()) {
@@ -789,6 +797,9 @@ bool DefaultAI::check_militarysites(uint32_t gametime) {
 		militarysites.pop_front();
 		return false;
 	}
+
+	// Make sure we have statistics about our enemies up-to-date
+	update_player_stat(gametime);
 
 	// Make sure we are not above ai type limit
 	assert(mso.bo->total_count() <= mso.bo->cnt_limit_by_aimode);
@@ -858,7 +869,6 @@ bool DefaultAI::check_militarysites(uint32_t gametime) {
 	} else if (should_be_dismantled && can_be_dismantled) {
 		changed = true;
 		if (ms->get_playercaps() & Widelands::Building::PCap_Dismantle) {
-			flags_to_be_removed.push_back(ms->base_flag().get_position());
 			game().send_player_dismantle(*ms);
 			military_last_dismantle_ = game().get_gametime();
 		} else {
@@ -888,7 +898,6 @@ bool DefaultAI::check_militarysites(uint32_t gametime) {
 // This calculates strength of vector of soldiers, f.e. soldiers in a building or
 // ones ready to attack
 int32_t DefaultAI::calculate_strength(const std::vector<Widelands::Soldier*>& soldiers) {
-
 	if (soldiers.empty()) {
 		return 0;
 	}
@@ -899,21 +908,33 @@ int32_t DefaultAI::calculate_strength(const std::vector<Widelands::Soldier*>& so
 	float evade = 0;
 	float final = 0;
 
+	const SoldierDescr& descr = soldiers.front()->descr();
+
 	for (Soldier* soldier : soldiers) {
-		const SoldierDescr& descr = soldier->descr();
 		health = soldier->get_current_health();
 		attack = (descr.get_base_max_attack() - descr.get_base_min_attack()) / 2.f +
 		         descr.get_base_min_attack() +
 		         descr.get_attack_incr_per_level() * soldier->get_attack_level();
-		defense = 100 - descr.get_base_defense() - descr.get_defense_incr_per_level() * soldier->get_defense_level();
+		defense = 100 - descr.get_base_defense() -
+		          descr.get_defense_incr_per_level() * soldier->get_defense_level();
 		evade = 100 - descr.get_base_evade() -
 		        descr.get_evade_incr_per_level() / 100.f * soldier->get_evade_level();
 		final += (attack * health) / (defense * evade);
 	}
+
 	assert(final >= 0);
-	assert(final <= 32000 * soldiers.size());
-	// 2500 is aproximate strength of one unpromoted soldier
-	return static_cast<int32_t>(final / 2500);
+	assert(final <=
+	       soldiers.size() * (descr.get_base_max_attack() * descr.get_base_health() +
+	                          descr.get_max_attack_level() * descr.get_attack_incr_per_level() +
+	                          descr.get_max_health_level() * descr.get_health_incr_per_level()));
+
+	// We divide the result by the aproximate strength of one unpromoted soldier
+	const int average_unpromoted_strength =
+	   (descr.get_base_min_attack() +
+	    (descr.get_base_max_attack() - descr.get_base_min_attack()) / 2) *
+	   descr.get_base_health() / (descr.get_base_defense() * descr.get_base_evade());
+
+	return static_cast<int32_t>(final / average_unpromoted_strength);
 }
 
 // Now we can prohibit some militarysites, based on size, the goal is not to
@@ -947,7 +968,11 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 	                         3)};
 	const uint16_t total_score = scores[0] + scores[1] + scores[2];
 
-	int32_t inputs[4 * kFNeuronBitSize] = {0};
+	static int32_t inputs[4 * kFNeuronBitSize] = {0};
+	// Reseting values as the variable is static
+	for (int i = 0; i < 4 * kFNeuronBitSize; i++) {
+		inputs[i] = 0;
+	}
 	inputs[0] = (msites_total < 1) ? 1 : 0;
 	inputs[1] = (msites_total < 2) ? 1 : 0;
 	inputs[2] = (msites_total < 3) ? 1 : 0;

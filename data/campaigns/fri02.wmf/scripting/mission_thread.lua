@@ -108,10 +108,13 @@ function expand_south ()
    end
    scroll_to_field (wh.fields [1])
    sleep (1500)
-   p2:forbid_buildings {"empire_fortress", "empire_barrier", "empire_outpost", "empire_tower"}
+   p2:forbid_buildings {"empire_fortress", "empire_castle", "empire_barrier", "empire_blockhouse", "empire_tower"}
+   p3:forbid_buildings {"barbarians_citadel", "barbarians_tower"}
    campaign_message_box (supply_murilius_6)
    campaign_message_box (supply_murilius_7)
    campaign_message_box (supply_murilius_8)
+   p2:allow_buildings {"empire_barracks"}
+   p3:allow_buildings {"barbarians_barracks"}
    set_objective_done (o)
    
    o = add_campaign_objective (obj_supply_murilius)

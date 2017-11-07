@@ -15,7 +15,7 @@ end
 
 function building_helptext_note()
    -- TRANSLATORS: Note helptext for a building
-   return pgettext("frisians_building", "Reed is the traditional material for roofing, and it is woven into the extremely durable cloth that they use for their ships’ sails.")
+   return pgettext("frisians_building", "Reed is the traditional material for roofing, and it is woven – together with reindeer fur – into the cloth used for ships’ sails.")
 end
 
 function building_helptext_performance()

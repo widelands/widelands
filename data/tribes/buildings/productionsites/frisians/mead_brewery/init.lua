@@ -75,7 +75,7 @@ tribes:new_productionsite_type {
          }
       },
       brew_beer = {
-         -- TRANSLATORS: Completed/Skipped/Did not start brewing mead because ...
+         -- TRANSLATORS: Completed/Skipped/Did not start brewing beer because ...
          descname = _"brewing beer",
          actions = {
             "return=skipped unless economy needs beer or workers need experience",
