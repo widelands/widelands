@@ -33,6 +33,7 @@
 #include "helper.h"
 #include "io/fileread.h"
 #include "io/filewrite.h"
+#include "logic/filesystem_constants.h"
 #include "logic/game.h"
 #include "logic/map_objects/tribes/tribes.h"
 #include "logic/player.h"
@@ -174,7 +175,7 @@ void GameClient::run() {
 		game.set_game_controller(this);
 		uint8_t const pn = d->settings.playernum + 1;
 		game.save_handler().set_autosave_filename(
-		   (boost::format("wl_autosave_netclient%u") % static_cast<unsigned int>(pn)).str());
+		   (boost::format("%s_netclient%u") % kAutosavePrefix % static_cast<unsigned int>(pn)).str());
 		InteractiveGameBase* igb;
 		if (pn > 0)
 			igb = new InteractivePlayer(game, g_options.pull_section("global"), pn, true);

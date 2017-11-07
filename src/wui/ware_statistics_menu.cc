@@ -22,7 +22,6 @@
 #include "base/i18n.h"
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
-#include "logic/constants.h"
 #include "logic/map_objects/tribes/tribe_descr.h"
 #include "logic/map_objects/tribes/warelist.h"
 #include "logic/player.h"
@@ -121,27 +120,30 @@ WareStatisticsMenu::WareStatisticsMenu(InteractivePlayer& parent,
 	// Create a tabbed environment for the different plots
 	UI::TabPanel* tabs = new UI::TabPanel(box, g_gr->images().get("images/ui_basic/but1.png"));
 
-	plot_production_ = new WuiPlotArea(tabs, 0, 0, kPlotWidth, kPlotHeight + kSpacing,
-	                                   kStatisticsSampleTime, WuiPlotArea::Plotmode::kRelative);
+	plot_production_ =
+	   new WuiPlotArea(tabs, 0, 0, kPlotWidth, kPlotHeight + kSpacing,
+	                   Widelands::kStatisticsSampleTime, WuiPlotArea::Plotmode::kRelative);
 
 	tabs->add(
 	   "production", g_gr->images().get(pic_tab_production), plot_production_, _("Production"));
 
-	plot_consumption_ = new WuiPlotArea(tabs, 0, 0, kPlotWidth, kPlotHeight + kSpacing,
-	                                    kStatisticsSampleTime, WuiPlotArea::Plotmode::kRelative);
+	plot_consumption_ =
+	   new WuiPlotArea(tabs, 0, 0, kPlotWidth, kPlotHeight + kSpacing,
+	                   Widelands::kStatisticsSampleTime, WuiPlotArea::Plotmode::kRelative);
 
 	tabs->add(
 	   "consumption", g_gr->images().get(pic_tab_consumption), plot_consumption_, _("Consumption"));
 
 	plot_economy_ =
 	   new DifferentialPlotArea(tabs, 0, 0, kPlotWidth, kPlotHeight + kSpacing,
-	                            kStatisticsSampleTime, WuiPlotArea::Plotmode::kRelative);
+	                            Widelands::kStatisticsSampleTime, WuiPlotArea::Plotmode::kRelative);
 
 	tabs->add(
 	   "economy_health", g_gr->images().get(pic_tab_economy), plot_economy_, _("Economy Health"));
 
-	plot_stock_ = new WuiPlotArea(tabs, 0, 0, kPlotWidth, kPlotHeight + kSpacing,
-	                              kStatisticsSampleTime, WuiPlotArea::Plotmode::kAbsolute);
+	plot_stock_ =
+	   new WuiPlotArea(tabs, 0, 0, kPlotWidth, kPlotHeight + kSpacing,
+	                   Widelands::kStatisticsSampleTime, WuiPlotArea::Plotmode::kAbsolute);
 
 	tabs->add("stock", g_gr->images().get(pic_tab_stock), plot_stock_, _("Stock"));
 
