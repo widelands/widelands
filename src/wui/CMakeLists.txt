@@ -51,6 +51,10 @@ wl_library(wui_mapview_pixelfunctions
 
 wl_library(wui_common
   SRCS
+    gamedetails.cc
+    gamedetails.h
+    load_or_save_game.cc
+    load_or_save_game.h
     mapdetails.cc
     mapdetails.h
     mapdata.cc
@@ -65,12 +69,18 @@ wl_library(wui_common
     base_exceptions
     base_i18n
     base_log
+    base_time_string
+    helper
+    game_io
     graphic
     graphic_fonthandler
+    graphic_image_io
     graphic_playercolor
+    graphic_surface
     graphic_text_constants
     io_filesystem
     logic
+    logic_filesystem_constants
     logic_game_controller
     logic_game_settings
     map_io_map_loader
@@ -242,6 +252,7 @@ wl_library(wui
     io_filesystem
     logic
     logic_constants
+    logic_filesystem_constants
     logic_game_controller
     logic_game_settings
     logic_widelands_geometry
@@ -255,6 +266,7 @@ wl_library(wui
     sound
     ui_basic
     wui_chat_ui
+    wui_common
     wui_economy_options
     wui_mapview
     wui_mapview_pixelfunctions

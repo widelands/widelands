@@ -47,6 +47,7 @@
 #include "logic/cmd_calculate_statistics.h"
 #include "logic/cmd_luacoroutine.h"
 #include "logic/cmd_luascript.h"
+#include "logic/filesystem_constants.h"
 #include "logic/game_settings.h"
 #include "logic/map_objects/tribes/carrier.h"
 #include "logic/map_objects/tribes/market.h"
@@ -80,11 +81,9 @@ Game::SyncWrapper::~SyncWrapper() {
 }
 
 void Game::SyncWrapper::start_dump(const std::string& fname) {
-	dumpfname_ = fname + ".wss";
+	dumpfname_ = fname + kSyncstreamExtension;
 	dump_.reset(g_fs->open_stream_write(dumpfname_));
 }
-
-static const unsigned long long MINIMUM_DISK_SPACE = 256 * 1024 * 1024;
 
 void Game::SyncWrapper::data(void const* const sync_data, size_t const size) {
 #ifdef SYNC_DEBUG
@@ -98,7 +97,7 @@ void Game::SyncWrapper::data(void const* const sync_data, size_t const size) {
 	if (dump_ != nullptr && static_cast<int32_t>(counter_ - next_diskspacecheck_) >= 0) {
 		next_diskspacecheck_ = counter_ + 16 * 1024 * 1024;
 
-		if (g_fs->disk_space() < MINIMUM_DISK_SPACE) {
+		if (g_fs->disk_space() < kMinimumDiskSpace) {
 			log("Stop writing to syncstream file: disk is getting full.\n");
 			dump_.reset();
 		}
@@ -483,9 +482,8 @@ bool Game::run(UI::ProgressWindow* loader_ui,
 
 	if (writereplay_ || writesyncstream_) {
 		// Derive a replay filename from the current time
-		const std::string fname = (boost::format("%s/%s_%s%s") % REPLAY_DIR % timestring() %
-		                           prefix_for_replays % REPLAY_SUFFIX)
-		                             .str();
+		const std::string fname = kReplayDir + g_fs->file_separator() + std::string(timestring()) +
+		                          std::string("_") + prefix_for_replays + kReplayExtension;
 		if (writereplay_) {
 			log("Starting replay writer\n");
 

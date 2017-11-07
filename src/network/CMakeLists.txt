@@ -41,6 +41,7 @@ wl_library(network
     io_stream
     logic
     logic_constants
+    logic_filesystem_constants
     logic_game_controller
     logic_game_settings
     map_io_map_loader

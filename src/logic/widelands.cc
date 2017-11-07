@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2017 by the Widelands Development Team
+ * Copyright (C) 2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,15 +17,4 @@
  *
  */
 
-#ifndef WL_LOGIC_CONSTANTS_H
-#define WL_LOGIC_CONSTANTS_H
-
-#include <cstdint>
-
-/// How often are statistics to be sampled.
-constexpr uint32_t kStatisticsSampleTime = 30000;
-
-/// Default autosave interval in minutes
-constexpr int kDefaultAutosaveInterval = 15;
-
-#endif  // end of include guard: WL_LOGIC_CONSTANTS_H
+// Dummy file as cmake cannot handle header only libraries :(.
