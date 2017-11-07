@@ -27,7 +27,7 @@ AI Hints
 
 Every :doc:`building <autogen_toc_lua_tribes_buildings>`'s ``init.lua`` file has an ``aihints`` table in its ``new_<building_type>_type{table}``
 function. This ``aihints`` table can contain any number of entries, which will help the AI decide
-when and where to build or dismantle a building of that type.
+when and where to build or dismantle a building of that type an/or how to treat it.
 
 All entries in ``aihints`` are optional.
 
@@ -51,10 +51,15 @@ Common
 
         forced_after = 890,
 
+     But note, that "forced after" can interfere with "basic economy" stuff. If the building is not part of basic economy and basic economy is not achieved yet, this can lead to
+     unobvious behaviour. Part of this unclearness is due to genetic algorithm.
+
 **prohibited_till**
     Do not build this building before the given time (in seconds) has elapsed, e.g.::
 
         prohibited_till = 1500,
+
+    This takes precedence over basic economy stuff, so it means it can delay achievement of basic economy.
 
 **very_weak_ai_limit**
     The maximum number of this building type that the very weak AI is allowed to build, e.g.::
@@ -76,16 +81,21 @@ Military Sites
 
         expansion = true,
 
+     It is recommended to have at least one of such buildings...
+
 **fighting**
     The building is suitable for military conflicts, e.g.::
 
         fighting = true,
+
+     It is recommended to have at least one of such buildings...
 
 **mountain_conqueror**
     Prefer this type of military site near mountains, e.g.::
 
         mountain_conqueror = true,
 
+     It is recommended to have at least one of such buildings...
 
 .. _ai_hints_production:
 
@@ -97,10 +107,14 @@ Production Sites
 
         graniteproducer = true,
 
+    AI expects only one such building
+
 **logproducer**
     The building will produce the ``log`` ware, e.g.::
 
         logproducer = true,
+
+    AI expects one such building
 
 **mines**
     The building will mine to obtain the given ware, e.g.::
@@ -117,10 +131,14 @@ Production Sites
 
         mines_water = true,
 
+    AI expects one such building
+
 **needs_water**
     The building needs to be placed near a body of water, e.g.::
 
         needs_water = true,
+
+    AI expects one such building
 
 **recruitment**
     The building will recruit the tribe's carrier2, for example oxen or horses, e.g.::
@@ -131,6 +149,8 @@ Production Sites
     This building will construct ships, e.g.::
 
         shipyard = true,
+
+    AI expects one such building
 
 **space_consumer**
     The building needs a lot of space around it, for example a farm needs space for its fields, e.g.::
@@ -145,6 +165,9 @@ Production Sites
     For example, if a building supports the production of fish, it should be placed near a building
     that has fish in its output.
 
+    AI expects that supporters will have no inputs and no outputs. However AI could tolerate and consider for location the ai_hint for productionsite (site with outputs) but such sites will be primarily treated as
+    normal productionsites
+
 **trainingsites_max_percent**
     The maximum percentate this trainingsite will have among all training sites, e.g.::
 
@@ -155,6 +178,25 @@ Production Sites
     will be distributed evenly.
 
 */
+
+/*
+ * ****** General comments
+AI has separate code paths for various building categories. Many of them are categories with single buildings (ranger, well, port, fishbreeder, barracks and so on), these cannot be combined
+with other types of buildings and are mostly mandatory.
+
+But main categories where you can freely modify and add buildings are:
+- Military sites
+- Training sites
+- Pure productionsites (have outputs, and optionally inputs, but no production hints)
+- Pure supporters (has production hints, but neither inputs nor outputs)
+- Combination of supporter and productionsite is possible, but suboptimal...
+
+You can create new such buildings without limitations. Of course cross-types are not allowed.
+
+Production of humans (workers, soldiers) in productionsites is not supported by now. With exception of barracks.
+
+****** General comments - end
+* */
 BuildingHints::BuildingHints(std::unique_ptr<LuaTable> table)
    : mines_(table->has_key("mines") ? table->get_string("mines") : ""),
      log_producer_(table->has_key("logproducer") ? table->get_bool("logproducer") : false),
