@@ -446,7 +446,7 @@ public:
 	bool is_port_space(const Coords& c) const;
 
 	/// If 'set', set the space at 'c' as port space, otherwise unset.
-	/// 'force' sets the port space even if it isn't viable, and is to be used for map loading only,
+	/// 'force' sets the port space even if it isn't viable, and is to be used for map loading only.
 	/// Returns whether the port space was set/unset successfully.
 	bool set_port_space(const World& world, const Widelands::Coords& c, bool set, bool force = false);
 	const PortSpacesSet& get_port_spaces() const {
