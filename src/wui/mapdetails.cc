@@ -149,6 +149,8 @@ void MapDetails::update(const MapData& mapdata, bool localize_mapname) {
 				     mapdata.localized_name)
 				       .str());
 			}
+		} else {
+			name_label_.set_tooltip("");
 		}
 
 		// Show map information
