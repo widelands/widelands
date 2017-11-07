@@ -67,6 +67,11 @@ fi
 
 # Update catalogues.
 utils/buildcat.py
+
+# Update statistics.
+utils/update_translation_stats.py
+
+# Commit and push.
 bzr commit -m "Fetched translations and updated catalogues."
 bzr push lp:widelands
 
