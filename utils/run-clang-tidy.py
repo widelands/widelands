@@ -32,7 +32,7 @@
 #    This will give you a file 'build/compile_commands.json'
 #
 # 4. In 'build/compile_commands.json', do replace-all with an empty string
-#    for the following switvhed that would clutter the result with warnings:
+#    for the following switches that would clutter the result with warnings:
 #
 #        -Wlogical-op
 #        -Wsync-nand
@@ -45,7 +45,7 @@
 #
 #    Results will then be in 'clang-tidy.log'
 #
-# 6. You can pick with warnings you want with the checks parameter.
+# 6. You can pick which warnings you want with the checks parameter.
 #
 # 7. Documentation is available at:
 #
