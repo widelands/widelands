@@ -19,8 +19,16 @@ run(function()
    assert_equal(3, map.number_of_port_spaces)
    assert_equal(true, map.allows_seafaring)
 
+   stable_save("port_spaces_1")
+   assert_equal(3, map.number_of_port_spaces)
+   assert_equal(true, map.allows_seafaring)
+
   -- Remove the port space again
    assert_equal(true, map:set_port_space(0, 2, false))
+   assert_equal(2, map.number_of_port_spaces)
+   assert_equal(false, map.allows_seafaring)
+
+   stable_save("port_spaces_2")
    assert_equal(2, map.number_of_port_spaces)
    assert_equal(false, map.allows_seafaring)
 
