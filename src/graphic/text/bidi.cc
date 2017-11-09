@@ -588,9 +588,9 @@ std::string make_ligatures(const char* input) {
 	}
 	const icu::UnicodeString parseme(input, "UTF-8");
 	icu::UnicodeString queue;
-	UChar not_a_character = 0xFFFF;
-	UChar next = not_a_character;
-	UChar previous = not_a_character;
+	const UChar not_a_character = 0xFFFF;
+	UChar next;
+	UChar previous;
 	for (int i = parseme.length() - 1; i >= 0; --i) {
 		UChar c = parseme.charAt(i);
 

@@ -260,11 +260,13 @@ void draw_diagram(uint32_t time_ms,
 
 		// The space at the end is intentional to have the tick centered
 		// over the number, not to the left
-		std::shared_ptr<const UI::RenderedText> xtick = UI::g_fh1->render(
-		   xtick_text_style((boost::format("-%u ") % (max_x / how_many_ticks * i)).str()));
-		Vector2i pos(posx, inner_h - kSpaceBottom + 10);
-		UI::center_vertically(xtick->height(), &pos);
-		xtick->draw(dst, pos, UI::Align::kCenter);
+		if (how_many_ticks != 0) {
+			std::shared_ptr<const UI::RenderedText> xtick = UI::g_fh1->render(
+				xtick_text_style((boost::format("-%u ") % (max_x / how_many_ticks * i)).str()));
+			Vector2i pos(posx, inner_h - kSpaceBottom + 10);
+			UI::center_vertically(xtick->height(), &pos);
+			xtick->draw(dst, pos, UI::Align::kCenter);
+		}
 
 		posx -= sub;
 	}

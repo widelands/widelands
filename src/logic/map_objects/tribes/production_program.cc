@@ -1703,7 +1703,7 @@ size_t ProductionProgram::size() const {
 }
 
 const ProductionProgram::Action& ProductionProgram::operator[](size_t const idx) const {
-	return *actions_.at(idx).get();
+	return *actions_.at(idx);
 }
 
 const ProductionProgram::Groups& ProductionProgram::consumed_wares_workers() const {

@@ -1494,7 +1494,7 @@ bool GameHost::write_map_transfer_info(SendPacket& s, std::string mapfilename) {
 	// Scan-build reports that access to bytes here results in a dereference of null pointer.
 	// This is a false positive.
 	// See https://bugs.launchpad.net/widelands/+bug/1198919
-	s.unsigned_32(file_->bytes);
+	s.unsigned_32(file_->bytes); // NOLINT
 	s.string(file_->md5sum);
 	return true;
 }

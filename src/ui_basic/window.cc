@@ -243,8 +243,8 @@ void Window::draw(RenderTarget& dst) {
  * Redraw the window frame
  */
 void Window::draw_border(RenderTarget& dst) {
-	assert(HZ_B_CORNER_PIXMAP_LEN >= VT_B_PIXMAP_THICKNESS);
-	assert(HZ_B_MIDDLE_PIXMAP_LEN > 0);
+	static_assert(HZ_B_CORNER_PIXMAP_LEN >= VT_B_PIXMAP_THICKNESS, "HZ_B_CORNER_PIXMAP_LEN < VT_B_PIXMAP_THICKNESS");
+	static_assert(HZ_B_MIDDLE_PIXMAP_LEN > 0, "HZ_B_MIDDLE_PIXMAP_LEN <= 0");
 
 	const int32_t hz_bar_end = get_w() - HZ_B_CORNER_PIXMAP_LEN;
 	const int32_t hz_bar_end_minus_middle = hz_bar_end - HZ_B_MIDDLE_PIXMAP_LEN;

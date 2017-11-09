@@ -315,7 +315,7 @@ void PortDock::ship_arrived(Game& game, Ship& ship) {
 	}
 
 	if (expedition_ready_) {
-		assert(expedition_bootstrap_.get() != nullptr);
+		assert(expedition_bootstrap_ != nullptr);
 
 		// Only use an empty ship.
 		if (ship.get_nritems() < 1) {
