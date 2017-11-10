@@ -553,7 +553,7 @@ uint16_t TextNode::hotspot_y() const {
 UI::RenderedText* TextNode::render(TextureCache* texture_cache) {
 	auto rendered_image =
 	   font_.render(txt_, nodestyle_.font_color, nodestyle_.font_style, texture_cache);
-	assert(rendered_image.get() != nullptr);
+	assert(rendered_image != nullptr);
 	UI::RenderedText* rendered_text = new UI::RenderedText();
 	rendered_text->rects.push_back(
 	   std::unique_ptr<UI::RenderedRect>(new UI::RenderedRect(rendered_image)));
@@ -610,7 +610,7 @@ UI::RenderedText* FillingTextNode::render(TextureCache* texture_cache) {
 		}
 		rendered_image = texture_cache->insert(hash, std::move(texture));
 	}
-	assert(rendered_image.get() != nullptr);
+	assert(rendered_image != nullptr);
 	rendered_text->rects.push_back(
 	   std::unique_ptr<UI::RenderedRect>(new UI::RenderedRect(rendered_image)));
 	return rendered_text;
@@ -643,7 +643,7 @@ public:
 				texture->fill_rect(Rectf(0.f, 0.f, w_, h_), RGBAColor(0xcc, 0, 0, 0xcc));
 				rendered_image = texture_cache->insert(hash, std::move(texture));
 			}
-			assert(rendered_image.get() != nullptr);
+			assert(rendered_image != nullptr);
 			rendered_text->rects.push_back(
 			   std::unique_ptr<UI::RenderedRect>(new UI::RenderedRect(rendered_image)));
 			return rendered_text;
@@ -737,7 +737,7 @@ public:
 			}
 			rendered_image = texture_cache->insert(hash, std::move(texture));
 		}
-		assert(rendered_image.get() != nullptr);
+		assert(rendered_image != nullptr);
 		rendered_text->rects.push_back(
 		   std::unique_ptr<UI::RenderedRect>(new UI::RenderedRect(rendered_image)));
 		return rendered_text;
@@ -942,7 +942,7 @@ UI::RenderedText* ImgRenderNode::render(TextureCache* texture_cache) {
 			rendered_image = texture_cache->insert(hash, std::move(texture));
 		}
 
-		assert(rendered_image.get() != nullptr);
+		assert(rendered_image != nullptr);
 		rendered_text->rects.push_back(
 		   std::unique_ptr<UI::RenderedRect>(new UI::RenderedRect(rendered_image)));
 	}

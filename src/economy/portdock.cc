@@ -60,7 +60,7 @@ PortDock::PortDock(Warehouse* wh)
 }
 
 PortDock::~PortDock() {
-	assert(expedition_bootstrap_.get() == nullptr);
+	assert(expedition_bootstrap_ == nullptr);
 }
 
 /**
@@ -413,7 +413,7 @@ uint32_t PortDock::count_waiting() {
 
 /// \returns whether an expedition was started or is even ready
 bool PortDock::expedition_started() {
-	return (expedition_bootstrap_.get() != nullptr) || expedition_ready_;
+	return (expedition_bootstrap_ != nullptr) || expedition_ready_;
 }
 
 /// Start an expedition
@@ -561,7 +561,7 @@ void PortDock::save(EditorGameBase& egbase, MapObjectSaver& mos, FileWrite& fw) 
 	}
 
 	// Expedition specific stuff
-	fw.unsigned_8(expedition_bootstrap_.get() != nullptr ? 1 : 0);
+	fw.unsigned_8(expedition_bootstrap_ != nullptr ? 1 : 0);
 	fw.unsigned_8(expedition_ready_ ? 1 : 0);
 }
 

@@ -607,16 +607,12 @@ std::string make_ligatures(const char* input) {
 				if (kArabicLegacyDiacritics.count(previous) == 1) {
 					previous = kArabicLegacyDiacritics.at({previous});
 				}
-				if (kArabicLegacyDiacritics.count(next) == 1) {
-					next = kArabicLegacyDiacritics.at({next});
-				}
 
 				// Special ligature forms combine 2 letters.
 				if (kArabicLigatures.count({previous, c}) == 1) {
 					c = kArabicLigatures.at({previous, c});
 					// Now skip 1 letter, since we have just combined 2 letters
 					--i;
-					previous = (i > 0) ? parseme.charAt(i - 1) : not_a_character;
 				}
 			} catch (const std::out_of_range& e) {
 				log("Error trying to fetch Arabic diacritic form: %s\n", e.what());
