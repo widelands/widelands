@@ -115,7 +115,9 @@ private:
 };
 
 struct RenderedText {
-	/// RenderedRects that can be drawn on screen
+        using Shared = std::shared_ptr<RenderedText>;
+
+        /// RenderedRects that can be drawn on screen
 	std::vector<std::unique_ptr<RenderedRect>> rects;
 
 	/// The width occupied  by all rects in pixels.
