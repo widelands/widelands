@@ -22,23 +22,50 @@
 #include <memory>
 
 /* RST
-AI Hints
-========
+AI Hints and Restrictions
+=========================
 
 Every :doc:`building <autogen_toc_lua_tribes_buildings>`'s ``init.lua`` file has an ``aihints`` table in its ``new_<building_type>_type{table}``
 function. This ``aihints`` table can contain any number of entries, which will help the AI decide
-when and where to build or dismantle a building of that type an/or how to treat it.
+when and where to build or dismantle a building of that type and/or how to treat it.
 
 All entries in ``aihints`` are optional.
 
+- :ref:`ai_hints_introduction`
 - :ref:`ai_hints_common`
 - :ref:`ai_hints_military`
 - :ref:`ai_hints_production`
 
+.. _ai_hints_introduction:
+
+Introduction
+------------
+
+The AI has separate code paths for various building categories. Many of them are
+categories that contain one unique building (ranger, well, port, fish breeder,
+barracks and so on), and these cannot be combined with other types of buildings
+and are mostly mandatory.
+
+The main categories where you can freely modify and add buildings are:
+
+- Military sites
+- Training sites
+- Pure production sites (they have outputs, and optionally inputs, but no production hints)
+- Pure supporters (they have production hints, but neither inputs nor outputs)
+- A combination of supporter and production site is possible, but suboptimal
+
+You can create as many building types as you want in these main categories, but
+make sure that you don't combine any incompatible features (for example,
+``shipyard`` and ``mines`` don't combine).
+
+With the exception of the barracks and the building that produces carrier2
+(see: :ref:`lua_tribes_<tribename>.lua`), production of workers in production sites
+is not supported at this time.
+
 .. _ai_hints_common:
 
-Common
-------
+Common Building Hints
+---------------------
 
 **basic_amount**
     The amount of this building to be built while establishing a basic economy, e.g.::
@@ -46,20 +73,25 @@ Common
         basic_amount = 1,
 
 **forced_after**
-    If a building of this type hasn't been built already, force that a building of this type
-    is constructed after the given time (in seconds) has elapsed, e.g.::
+    If a building of this type hasn't been built already, force that a building
+    of this type will be constructed after the given time (in seconds) has elapsed,
+    e.g.::
 
         forced_after = 890,
 
-     But note, that "forced after" can interfere with "basic economy" stuff. If the building is not part of basic economy and basic economy is not achieved yet, this can lead to
-     unobvious behaviour. Part of this unclearness is due to genetic algorithm.
+    **Note:** ``forced after`` can interfere with setting up the basic economy
+    defined by ``basic_amount``: if we don't want the building to be part of the
+    basic economy but it is forced before all the buildings for the basic economy
+    have been built, this can lead to unobvious behavior. Part of this ambiguity
+    is due to the genetic algorithm.
 
 **prohibited_till**
     Do not build this building before the given time (in seconds) has elapsed, e.g.::
 
         prohibited_till = 1500,
 
-    This takes precedence over basic economy stuff, so it means it can delay achievement of basic economy.
+    This takes precedence over ``basic_amount``, so it means it can delay achieving
+    the basic economy.
 
 **very_weak_ai_limit**
     The maximum number of this building type that the very weak AI is allowed to build, e.g.::
@@ -81,21 +113,21 @@ Military Sites
 
         expansion = true,
 
-     It is recommended to have at least one of such buildings...
+    **Note:** It is recommended to have at least one building has this feature.
 
 **fighting**
     The building is suitable for military conflicts, e.g.::
 
         fighting = true,
 
-     It is recommended to have at least one of such buildings...
+    **Note:** It is recommended to have at least one building has this feature.
 
 **mountain_conqueror**
     Prefer this type of military site near mountains, e.g.::
 
         mountain_conqueror = true,
 
-     It is recommended to have at least one of such buildings...
+    **Note:** It is recommended to have at least one building has this feature.
 
 .. _ai_hints_production:
 
@@ -107,14 +139,14 @@ Production Sites
 
         graniteproducer = true,
 
-    AI expects only one such building
+    The AI expects exactly one such building type.
 
 **logproducer**
     The building will produce the ``log`` ware, e.g.::
 
         logproducer = true,
 
-    AI expects one such building
+    The AI expects exactly one such building type.
 
 **mines**
     The building will mine to obtain the given ware, e.g.::
@@ -131,14 +163,14 @@ Production Sites
 
         mines_water = true,
 
-    AI expects one such building
+    **Note:** The AI expects exactly one such building type.
 
 **needs_water**
     The building needs to be placed near a body of water, e.g.::
 
         needs_water = true,
 
-    AI expects one such building
+    **Note:** The AI expects exactly one such building type.
 
 **recruitment**
     The building will recruit the tribe's carrier2, for example oxen or horses, e.g.::
@@ -150,53 +182,39 @@ Production Sites
 
         shipyard = true,
 
-    AI expects one such building
+    **Note:** The AI expects exactly one such building type.
 
 **space_consumer**
-    The building needs a lot of space around it, for example a farm needs space for its fields, e.g.::
+    The building needs a lot of space around it, for example a farm needs space for
+    its fields, e.g.::
 
         space_consumer = true,
 
 **supports_production_of**
-    This building will support the production of the given wares without producing it directly, e.g.::
+    This building will support the production of the given wares without producing
+    it directly, e.g.::
 
         supports_production_of = { "fish" },
 
-    For example, if a building supports the production of fish, it should be placed near a building
-    that has fish in its output.
+    For example, if a building supports the production of fish, it should be placed
+    near a building that has fish in its output.
 
-    AI expects that supporters will have no inputs and no outputs. However AI could tolerate and consider for location the ai_hint for productionsite (site with outputs) but such sites will be primarily treated as
-    normal productionsites
+    **Note:** The AI expects that supporters will have no inputs and no outputs. Although
+    the AI can tolerate such buildings, they will be primarily treated as normal
+    production sites when deciding on the building's location.
 
 **trainingsites_max_percent**
-    The maximum percentate this trainingsite will have among all training sites, e.g.::
+    The maximum percengate this training site will have among all training sites, e.g.::
 
         trainingsites_max_percent = 20,
 
-    For example, if an AI has built 5 trainingsites, it will have a maximum of 1 site of this type
-    if the value is set to ``20``. For trainingsites that don't have this value set, their percentage
-    will be distributed evenly.
+    In this example, if an AI has built 5 training sites, it will have a maximum of
+    1 site of this type. If it has built 10 training sites, the maximum is 2.
+    For training sites that don't have this value set, their percentage will be
+    distributed evenly.
 
 */
 
-/*
- * ****** General comments
-AI has separate code paths for various building categories. Many of them are categories with single buildings (ranger, well, port, fishbreeder, barracks and so on), these cannot be combined
-with other types of buildings and are mostly mandatory.
-
-But main categories where you can freely modify and add buildings are:
-- Military sites
-- Training sites
-- Pure productionsites (have outputs, and optionally inputs, but no production hints)
-- Pure supporters (has production hints, but neither inputs nor outputs)
-- Combination of supporter and productionsite is possible, but suboptimal...
-
-You can create new such buildings without limitations. Of course cross-types are not allowed.
-
-Production of humans (workers, soldiers) in productionsites is not supported by now. With exception of barracks.
-
-****** General comments - end
-* */
 BuildingHints::BuildingHints(std::unique_ptr<LuaTable> table)
    : mines_(table->has_key("mines") ? table->get_string("mines") : ""),
      log_producer_(table->has_key("logproducer") ? table->get_bool("logproducer") : false),
