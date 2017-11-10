@@ -166,7 +166,7 @@ protected:
 	void add_attribute(uint32_t attr);
 
 private:
-	/// Throws an exception if thpe MapObjectDescr has no representative image
+	/// Throws an exception if the MapObjectDescr has no representative image
 	void check_representative_image();
 
 	using Anims = std::map<std::string, uint32_t>;
