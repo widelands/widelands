@@ -19,6 +19,7 @@ function dismantle()
 	  end
 	  sleep(500)
    end
+   sleep(2000)
    p1:allow_buildings("all")
    p1:forbid_buildings{"empire_farm", "empire_mill", "empire_brewery", "empire_trainingcamp", "empire_colosseum"}
    o.done = true
@@ -33,17 +34,17 @@ function farm_plans()
    local farmclick = false
    local count = 0
    while not farmclick do
-      if mv.windows.building_window and not mv.windows.building_window.buttons.dismantle and not mv.windows.building_window.tabs.wares then
-	     sleep(100)
-		 if mv.windows.building_window and not mv.windows.building_window.buttons.dismantle and not mv.windows.building_window.tabs.wares then
+      if mv.windows.building_window and not mv.windows.building_window.buttons.dismantle and not mv.windows.building_window.tabs.wares and mv.windows.building_window.tabs.workers then
+	     --sleep(100)
+		 --if (mv.windows.building_window and not mv.windows.building_window.buttons.dismantle) and (mv.windows.building_window.tabs.workers and not mv.windows.building_window.tabs.wares) then
             farmclick = true
-		 end
+		 --end
       end
 	  count = count + 1
 	  if count == 1201 then 
 	  campaign_message_box(amalea_18)
 	  end
-      sleep(400)
+      sleep(500)
    end
    
    campaign_message_box(amalea_2)
