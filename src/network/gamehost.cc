@@ -42,6 +42,7 @@
 #include "helper.h"
 #include "io/fileread.h"
 #include "io/filesystem/layered_filesystem.h"
+#include "logic/filesystem_constants.h"
 #include "logic/game.h"
 #include "logic/map_objects/tribes/tribes.h"
 #include "logic/player.h"
@@ -614,7 +615,8 @@ void GameHost::run() {
 		game.set_game_controller(this);
 		InteractiveGameBase* igb;
 		uint8_t pn = d->settings.playernum + 1;
-		game.save_handler().set_autosave_filename("wl_autosave_nethost");
+		game.save_handler().set_autosave_filename(
+		   (boost::format("%s_nethost") % kAutosavePrefix).str());
 
 		if (d->settings.savegame) {
 			// Read and broadcast original win condition

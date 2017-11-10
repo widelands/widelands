@@ -105,6 +105,7 @@ public:
 			return "UI::Table<Entry>: No selection";
 		}
 	};
+	void scroll_to_item(int32_t item);
 	EntryRecord& get_selected_record() const;
 	Entry get_selected() const;
 
@@ -249,6 +250,7 @@ public:
 			return "UI::Table<void *>: No selection";
 		}
 	};
+	void scroll_to_item(int32_t item);
 	EntryRecord& get_selected_record() const {
 		if (selection_ == no_selection_index())
 			throw NoSelection();

@@ -170,19 +170,19 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 				owner_number = bld->owner().player_number();
 			}
 		}
-		if (upcast(Warehouse, Wh, f.field->get_immovable())) {
-			if (player_->is_hostile(Wh->owner())) {
+		if (upcast(Warehouse, wh, f.field->get_immovable())) {
+			if (player_->is_hostile(wh->owner())) {
 
 				std::vector<Soldier*> defenders;
-				defenders = Wh->soldier_control()->present_soldiers();
+				defenders = wh->soldier_control()->present_soldiers();
 				defenders_strength = calculate_strength(defenders);
 
-				flag = &Wh->base_flag();
+				flag = &wh->base_flag();
 				is_warehouse = true;
-				if (is_visible && Wh->attack_target()->can_be_attacked()) {
+				if (is_visible && wh->attack_target()->can_be_attacked()) {
 					is_attackable = true;
 				}
-				owner_number = Wh->owner().player_number();
+				owner_number = wh->owner().player_number();
 			}
 		}
 
@@ -576,6 +576,10 @@ bool DefaultAI::check_trainingsites(uint32_t gametime) {
 	TrainingSiteObserver& tso = trainingsites.front();
 
 	// Make sure we are not above ai type limit
+	if (tso.bo->total_count() > tso.bo->cnt_limit_by_aimode) {
+		log("AI player %d: count of %s exceeds an AI limit %d: actual count: %d\n", player_number(),
+		    tso.bo->name, tso.bo->cnt_limit_by_aimode, tso.bo->total_count());
+	}
 	assert(tso.bo->total_count() <= tso.bo->cnt_limit_by_aimode);
 
 	const DescriptionIndex enhancement = ts->descr().enhancement();
@@ -583,7 +587,13 @@ bool DefaultAI::check_trainingsites(uint32_t gametime) {
 	if (enhancement != INVALID_INDEX && ts_without_trainers_ == 0 && mines_.size() > 3 &&
 	    ts_finished_count_ > 1 && ts_in_const_count_ == 0) {
 
-		if (player_->is_building_type_allowed(enhancement)) {
+		// Make sure that:
+		// 1. Building is allowed
+		// 2. AI limit for weaker AI is not to be exceeded
+		BuildingObserver& en_bo =
+		   get_building_observer(tribe_->get_building_descr(enhancement)->name().c_str());
+		if (player_->is_building_type_allowed(enhancement) &&
+		    en_bo.aimode_limit_status() == AiModeBuildings::kAnotherAllowed) {
 			game().send_player_enhance_building(*tso.site, enhancement);
 		}
 	}
@@ -789,7 +799,6 @@ bool DefaultAI::check_militarysites(uint32_t gametime) {
 	// Check next militarysite
 	bool changed = false;
 	MilitarySite* ms = militarysites.front().site;
-	MilitarySiteObserver& mso = militarysites.front();
 
 	// Don't do anything if last change took place lately
 	if (militarysites.front().last_change + 2 * 60 * 1000 > gametime) {
@@ -802,7 +811,7 @@ bool DefaultAI::check_militarysites(uint32_t gametime) {
 	update_player_stat(gametime);
 
 	// Make sure we are not above ai type limit
-	assert(mso.bo->total_count() <= mso.bo->cnt_limit_by_aimode);
+	assert(militarysites.front().bo->total_count() <= militarysites.front().bo->cnt_limit_by_aimode);
 
 	FCoords f = game().map().get_fcoords(ms->get_position());
 
@@ -898,7 +907,6 @@ bool DefaultAI::check_militarysites(uint32_t gametime) {
 // This calculates strength of vector of soldiers, f.e. soldiers in a building or
 // ones ready to attack
 int32_t DefaultAI::calculate_strength(const std::vector<Widelands::Soldier*>& soldiers) {
-
 	if (soldiers.empty()) {
 		return 0;
 	}
@@ -909,21 +917,33 @@ int32_t DefaultAI::calculate_strength(const std::vector<Widelands::Soldier*>& so
 	float evade = 0;
 	float final = 0;
 
+	const SoldierDescr& descr = soldiers.front()->descr();
+
 	for (Soldier* soldier : soldiers) {
-		const SoldierDescr& descr = soldier->descr();
 		health = soldier->get_current_health();
 		attack = (descr.get_base_max_attack() - descr.get_base_min_attack()) / 2.f +
 		         descr.get_base_min_attack() +
 		         descr.get_attack_incr_per_level() * soldier->get_attack_level();
-		defense = 100 - descr.get_base_defense() - 8 * soldier->get_defense_level();
+		defense = 100 - descr.get_base_defense() -
+		          descr.get_defense_incr_per_level() * soldier->get_defense_level();
 		evade = 100 - descr.get_base_evade() -
 		        descr.get_evade_incr_per_level() / 100.f * soldier->get_evade_level();
 		final += (attack * health) / (defense * evade);
 	}
+
 	assert(final >= 0);
-	assert(final <= 25000 * soldiers.size());
-	// 2500 is aproximate strength of one unpromoted soldier
-	return static_cast<int32_t>(final / 2500);
+	assert(final <=
+	       soldiers.size() * (descr.get_base_max_attack() * descr.get_base_health() +
+	                          descr.get_max_attack_level() * descr.get_attack_incr_per_level() +
+	                          descr.get_max_health_level() * descr.get_health_incr_per_level()));
+
+	// We divide the result by the aproximate strength of one unpromoted soldier
+	const int average_unpromoted_strength =
+	   (descr.get_base_min_attack() +
+	    (descr.get_base_max_attack() - descr.get_base_min_attack()) / 2) *
+	   descr.get_base_health() / (descr.get_base_defense() * descr.get_base_evade());
+
+	return static_cast<int32_t>(final / average_unpromoted_strength);
 }
 
 // Now we can prohibit some militarysites, based on size, the goal is not to
