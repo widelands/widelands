@@ -14,15 +14,24 @@ Checks that placeholders are numbered in ascending order.
 import re
 
 # Regex to find placeholders
-find_unordered = re.compile(r"[^0-9]\%([0-9#*]*\.*[0-9#]*[a-zA-Z]{1,2})")
+find_unordered = re.compile(r"(\%[0-9#*]*\.*[0-9#]*[a-zA-Z]{1,2})")
 find_ordered = re.compile(r"\%[|]{0,1}(\d\$[0-9#*]*\.*[0-9#]*[a-zA-Z]{1,2})")
 find_boost = re.compile(r"\%(\d)\%")
+
+def find_unordered_placeholders(sanitized_entry):
+    """ We need to exclude boost strings from the unordered results. Could't come up with a good regex, so we're doing this in 2 steps. """
+    result = []
+    for entry in find_unordered.findall(sanitized_entry):
+        temp_boost = find_boost.findall(sanitized_entry)
+        if len(temp_boost) < 1:
+            result.append(entry[1:])
+    return result
 
 
 def check_placeholders(entry):
     """Make sure that a string satisfies our placeholder policy."""
     sanitized_entry = entry.replace('%%', '')
-    unordered = find_unordered.findall(sanitized_entry)
+    unordered = find_unordered_placeholders(sanitized_entry)
     if len(unordered) > 1:
         return 'Translatable string has multiple sprintf placeholders that are not ordered:'
     else:
@@ -44,20 +53,23 @@ def check_placeholders(entry):
 
 
 def compare_placeholders(entry1, entry2):
-    """An Ngettext string must have the same splaceholders in its singular and
+    """An Ngettext string must have the same placeholders in its singular and
     plural strings."""
     sanitized_entry1 = entry1.replace('%%', '')
     sanitized_entry2 = entry2.replace('%%', '')
-    placeholders1 = find_unordered.findall(sanitized_entry1)
-    if len(placeholders1) > 0:
-        placeholders2 = find_unordered.findall(sanitized_entry2)
-    else:
+
+    placeholders1 = find_unordered_placeholders(sanitized_entry1)
+    placeholders2 = find_unordered_placeholders(sanitized_entry2)
+    if len(placeholders1) == 0 and len(placeholders2) == 0:
         placeholders1 = find_ordered.findall(sanitized_entry1)
-        if len(placeholders1) > 0:
-            placeholders2 = find_ordered.findall(sanitized_entry2)
-        else:
+        placeholders2 = find_ordered.findall(sanitized_entry2)
+        if len(placeholders1) == 0 and len(placeholders2) == 0:
             placeholders1 = find_boost.findall(sanitized_entry1)
             placeholders2 = find_boost.findall(sanitized_entry2)
+
+    if len(placeholders1) != len(placeholders2):
+            return 'Ngettext string has mismatching number of placeholders. Singular has ' + str(len(placeholders1)) + ' placeholder(s) and plural has ' + str(len(placeholders2)) + ' placeholder(s):'
+
     for entryno, placeholder in enumerate(placeholders1, 0):
         if placeholder != placeholders2[entryno]:
             return 'Ngettext string has mismatching placeholders "' + placeholder + '" and "' + placeholders2[entryno] + '" in position ' + str(entryno + 1) + ':'
@@ -88,10 +100,6 @@ def find_line(entry, lines):
 def evaluate_matches(lines, fn):
     """Main check."""
     result = []
-    gettext_started = False
-    gettext_ended = False
-    gettext_string = ''
-    gettext_line = 0
 
     searchme = ''.join(lines).strip()
 
@@ -134,7 +142,6 @@ def evaluate_matches(lines, fn):
     for entry in single_strings:
         check_result = check_placeholders(entry)
         if len(check_result) > 0:
-            # print(check_result)
             result.append((fn, find_line(entry, lines),
                            check_result + '\n' + entry))
 
@@ -142,13 +149,11 @@ def evaluate_matches(lines, fn):
         for entry in checkme:
             check_result = check_placeholders(entry)
             if len(check_result) > 0:
-                # print(check_result)
                 result.append((fn, find_line(
                     checkme[0], lines), check_result + '\n' + checkme[0] + ' - ' + checkme[1]))
 
         check_result = compare_placeholders(checkme[0], checkme[1])
         if len(check_result) > 0:
-            # print(check_result)
             result.append((fn, find_line(
                 checkme[0], lines), check_result + '\n' + checkme[0] + ' - ' + checkme[1]))
 
