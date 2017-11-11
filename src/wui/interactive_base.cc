@@ -551,6 +551,9 @@ void InteractiveBase::start_build_road(Coords road_start, Widelands::PlayerNumbe
 	road_build_player_ = player;
 
 	roadb_add_overlay();
+
+	default_cursor_ = g_gr->images().get("images/ui_basic/cursor_roadbuilding.png");
+	default_cursor_click_ = g_gr->images().get("images/ui_basic/cursor_roadbuilding_click.png");
 }
 
 /*
@@ -567,6 +570,9 @@ void InteractiveBase::abort_build_road() {
 
 	delete buildroad_;
 	buildroad_ = nullptr;
+
+	default_cursor_ = g_gr->images().get("images/ui_basic/cursor.png");
+	default_cursor_click_ = g_gr->images().get("images/ui_basic/cursor_click.png");
 }
 
 /*
@@ -620,6 +626,8 @@ void InteractiveBase::finish_build_road() {
 
 	delete buildroad_;
 	buildroad_ = nullptr;
+	default_cursor_ = g_gr->images().get("images/ui_basic/cursor.png");
+	default_cursor_click_ = g_gr->images().get("images/ui_basic/cursor_click.png");
 }
 
 /*
