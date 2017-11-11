@@ -1,0 +1,162 @@
+#!/usr/bin/python -tt
+
+"""Checks that all translatable strings that have multiple printf placeholders
+have defined those as reversible.
+
+Checks that unordered, ordered and boost placeholders aren't mixed up in the same string.
+
+Checks that ngettext singular and plural strings have the same placeholders.
+
+Checks that placeholders are numbered in ascending order.
+
+"""
+
+import re
+
+# Regex to find placeholders
+find_unordered = re.compile(r"[^0-9]\%([0-9#*]*\.*[0-9#]*[a-zA-Z]{1,2})")
+find_ordered = re.compile(r"\%[|]{0,1}(\d\$[0-9#*]*\.*[0-9#]*[a-zA-Z]{1,2})")
+find_boost = re.compile(r"\%(\d)\%")
+
+
+def check_placeholders(entry):
+    """Make sure that a string satisfies our placeholder policy."""
+    sanitized_entry = entry.replace('%%', '')
+    unordered = find_unordered.findall(sanitized_entry)
+    if len(unordered) > 1:
+        return 'Translatable string has multiple sprintf placeholders that are not ordered:'
+    else:
+        ordered = find_ordered.findall(sanitized_entry)
+        boost = find_boost.findall(sanitized_entry)
+        if len(unordered) > 0 and (len(ordered) > 0 or len(boost) > 0):
+            return 'Translatable string is mixing unordered sprintf placeholders with ordered or boost placeholders:'
+        if len(ordered) > 0 and (len(unordered) > 0 or len(boost) > 0):
+            return 'Translatable string is mixing ordered sprintf placeholders with unordered or boost placeholders:'
+        if len(ordered) > 0:
+            for entryno, placeholder in enumerate(ordered, 1):
+                if str(entryno) != placeholder[:placeholder.find('$')]:
+                    return 'Translatable string has an ordered sprintf placeholder "' + placeholder + '" in position ' + str(entryno) + " - the numbers don't match:"
+        if len(boost) > 0:
+            for entryno, placeholder in enumerate(boost, 1):
+                if str(entryno) != placeholder:
+                    return 'Translatable string has an ordered boost placeholder "' + placeholder + '" in position ' + str(entryno) + " - the numbers don't match:"
+    return ''
+
+
+def compare_placeholders(entry1, entry2):
+    """An Ngettext string must have the same splaceholders in its singular and
+    plural strings."""
+    sanitized_entry1 = entry1.replace('%%', '')
+    sanitized_entry2 = entry2.replace('%%', '')
+    placeholders1 = find_unordered.findall(sanitized_entry1)
+    if len(placeholders1) > 0:
+        placeholders2 = find_unordered.findall(sanitized_entry2)
+    else:
+        placeholders1 = find_ordered.findall(sanitized_entry1)
+        if len(placeholders1) > 0:
+            placeholders2 = find_ordered.findall(sanitized_entry2)
+        else:
+            placeholders1 = find_boost.findall(sanitized_entry1)
+            placeholders2 = find_boost.findall(sanitized_entry2)
+    for entryno, placeholder in enumerate(placeholders1, 0):
+        if placeholder != placeholders2[entryno]:
+            return 'Ngettext string has mismatching placeholders "' + placeholder + '" and "' + placeholders2[entryno] + '" in position ' + str(entryno + 1) + ':'
+
+    return ''
+
+
+def find_line(entry, lines):
+    """Find the line for the error entry.
+
+    Grabs the first match, so this is imprecise for multiple matches
+
+    """
+    checkme = entry.split('\n')
+    for lineno, line in enumerate(lines, 0):
+        if checkme[0] in line:
+            is_match = True
+            for rowno, row in enumerate(checkme, 0):
+                if (lineno + rowno) < len(lines):
+                    if not checkme[rowno] in lines[lineno + rowno]:
+                        is_match = False
+                        break
+            if is_match:
+                return lineno + 1
+    return 0
+
+
+def evaluate_matches(lines, fn):
+    """Main check."""
+    result = []
+    gettext_started = False
+    gettext_ended = False
+    gettext_string = ''
+    gettext_line = 0
+
+    searchme = ''.join(lines).strip()
+
+    single_strings = []
+    string_pairs = []
+
+    # Simple gettext
+    # DOTALL makes . match newlines
+    matches = re.findall(r"_\(\"(.*?)\"\)", searchme, re.DOTALL)
+    for match in matches:
+        if '%' in match:
+            single_strings.append(match)
+
+    matches = re.findall(r"\Wgettext\(\"(.*?)\"\)", searchme, re.DOTALL)
+    for match in matches:
+        if '%' in match:
+            single_strings.append(match)
+
+    # pgettext
+    matches = re.findall(
+        r"\Wpgettext\(\".*?\",.+?\"(.*?)\"\)", searchme, re.DOTALL)
+    for match in matches:
+        if '%' in match:
+            single_strings.append(match)
+
+    # ngettext
+    matches = re.findall(
+        r"ngettext\(\"(.*?)\",.+?\"(.*?)\".+?\w+?\)", searchme, re.DOTALL)
+    for match in matches:
+        if '%' in match[0] or '%' in match[1]:
+            string_pairs.append(match)
+
+    # npgettext
+    matches = re.findall(
+        r"npgettext\(\".*?\",.+?(.*?)\",.+?\"(.*?)\".+?\w+?\)", searchme, re.DOTALL)
+    for match in matches:
+        if '%' in match[0] or '%' in match[1]:
+            string_pairs.append(match)
+
+    for entry in single_strings:
+        check_result = check_placeholders(entry)
+        if len(check_result) > 0:
+            # print(check_result)
+            result.append((fn, find_line(entry, lines),
+                           check_result + '\n' + entry))
+
+    for checkme in string_pairs:
+        for entry in checkme:
+            check_result = check_placeholders(entry)
+            if len(check_result) > 0:
+                # print(check_result)
+                result.append((fn, find_line(
+                    checkme[0], lines), check_result + '\n' + checkme[0] + ' - ' + checkme[1]))
+
+        check_result = compare_placeholders(checkme[0], checkme[1])
+        if len(check_result) > 0:
+            # print(check_result)
+            result.append((fn, find_line(
+                checkme[0], lines), check_result + '\n' + checkme[0] + ' - ' + checkme[1]))
+
+    return result
+
+# File this is called on is always called testdir/test.h
+forbidden = [
+]
+
+allowed = [
+]

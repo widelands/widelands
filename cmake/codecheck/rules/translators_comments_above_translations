@@ -9,7 +9,6 @@ permutation typos like "TRASNLATORS".
 """
 
 import re
-import os
 
 
 def evaluate_matches(lines, fn):
