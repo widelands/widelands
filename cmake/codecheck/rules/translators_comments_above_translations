@@ -28,7 +28,7 @@ def evaluate_matches(lines, fn):
             if not '/** TRANSLATORS: ' in line:
                 result.append((fn, lineno, 'Translators\' comment starting with "' +
                                line.strip() + '" does not start with: "/** TRANSLATORS:"'))
-        # Comments can go over multiple lines, so we check for its end
+        # Comments can go over multiple lines, so we check for their end
         # separately
         if translators_comment_started:
             last_translators_comment = last_translators_comment + ' ' + line
@@ -41,12 +41,12 @@ def evaluate_matches(lines, fn):
         # style.
         if '_("' in line or 'gettext' in line:
             # We have a complete comment, so there should be a gettext call
-            # immediatley afterwards. Otherwise, xgettext won't find the
+            # immediately afterwards. Otherwise, xgettext won't find the
             # translators' comment.
             if translators_comment_ended:
                 if lineno != last_translators_comment_line + 1:
                     result.append(
-                        (fn, lineno, 'Translators comment is not directly above its translation:\n' + last_translators_comment.strip()))
+                        (fn, lineno, 'Translators\' comment is not directly above its translation:\n' + last_translators_comment.strip()))
             # Reset if there was no complete comment
             translators_comment_started = False
             translators_comment_ended = False
