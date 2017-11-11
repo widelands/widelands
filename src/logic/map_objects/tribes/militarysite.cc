@@ -379,10 +379,11 @@ void MilitarySite::update_statistics_string(std::string* s) {
 		}
 	} else {
 		if (capacity_ > stationed) {
-			/** TRANSLATORS: %1% is the number of soldiers the plural refers to */
-			/** TRANSLATORS: %2% are currently open soldier slots in the building */
-			/** TRANSLATORS: %3% is the maximum number of soldier slots in the building */
+
 			*s = (boost::format(
+						/** TRANSLATORS: %1% is the number of soldiers the plural refers to */
+						/** TRANSLATORS: %2% are currently open soldier slots in the building */
+						/** TRANSLATORS: %3% is the maximum number of soldier slots in the building */
 			         ngettext("%1%(+%2%) soldier (+%3%)", "%1%(+%2%) soldiers (+%3%)", stationed)) %
 			      present % (stationed - present) % (capacity_ - stationed))
 			        .str();

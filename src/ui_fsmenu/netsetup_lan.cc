@@ -193,8 +193,8 @@ void FullscreenMenuNetSetupLAN::update_game_info(
 	case LAN_GAME_CLOSED:
 		er.set_string(2, _("Closed"));
 		break;
-	/** TRANSLATORS: The state of a LAN game can be open, closed or unknown */
 	default:
+		/** TRANSLATORS: The state of a LAN game can be open, closed or unknown */
 		er.set_string(2, pgettext("game_state", "Unknown"));
 		break;
 	};

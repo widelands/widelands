@@ -87,8 +87,8 @@ MainMenuLoadOrSaveMap::MainMenuLoadOrSaveMap(EditorInteractive& parent,
 	                  g_gr->images().get("images/ui_basic/but1.png"), _("Show Map Names"));
 	vbox->add(show_mapnames_, UI::Box::Resizing::kFullSize);
 
-	/** TRANSLATORS: Checkbox title. If this checkbox is enabled, map names aren't translated. */
 	cb_dont_localize_mapnames_ =
+			/** TRANSLATORS: Checkbox title. If this checkbox is enabled, map names aren't translated. */
 	   new UI::Checkbox(vbox, Vector2i::zero(), _("Show original map names"));
 	cb_dont_localize_mapnames_->set_state(false);
 	vbox->add_space(2 * padding_);

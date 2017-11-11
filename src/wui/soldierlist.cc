@@ -382,9 +382,9 @@ SoldierList::SoldierList(UI::Panel& parent, InteractiveGameBase& igb, Widelands:
 	int w =
 	   UI::g_fh1->render(
 	               as_uifont((boost::format("%s ")  // We need some extra space to fix bug 724169
-	                          /** TRANSLATORS: Health, Attack, Defense, Evade */
-	                          % (boost::format(_(
-	                                "HP: %1$u/%2$u  AT: %3$u/%4$u  DE: %5$u/%6$u  EV: %7$u/%8$u")) %
+	                          % (boost::format(
+											  /** TRANSLATORS: Health, Attack, Defense, Evade */
+											  _("HP: %1$u/%2$u  AT: %3$u/%4$u  DE: %5$u/%6$u  EV: %7$u/%8$u")) %
 	                             8 % 8 % 8 % 8 % 8 % 8 % 8 % 8))
 	                            .str()))
 	      ->width();
