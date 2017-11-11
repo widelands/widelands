@@ -6,6 +6,7 @@ tribes:new_immovable_type {
    -- TRANSLATORS: This is an immovable name used in lists of immovables
    descname = pgettext("immovable", "Ship Under Construction"),
    size = "small",
+   attributes = { "barbarians_shipconstruction" },
    programs = {
       program = {
          "construction=idle 5000 210000",
