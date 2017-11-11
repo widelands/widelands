@@ -411,14 +411,14 @@ void LoadOrSaveGame::fill_table() {
 					gamedata.savedatestring =
 					   /** TRANSLATORS: Display date for choosing a savegame/replay. Placeholders are:
 					      month day, year */
-					   (boost::format(_("%2% %1%, %3%")) % savedate->tm_mday %
-					    localize_month(savedate->tm_mon) % (1900 + savedate->tm_year))
+					   (boost::format(_("%1% %2%, %3%"))  %
+					    localize_month(savedate->tm_mon) % savedate->tm_mday % (1900 + savedate->tm_year))
 					      .str();
 					gamedata.savedonstring =
 					   /** TRANSLATORS: Display date for choosing a savegame/replay. Placeholders are:
 					      month day, year. This is part of a list. */
-					   (boost::format(_("saved on %2% %1%, %3%")) % savedate->tm_mday %
-					    localize_month(savedate->tm_mon) % (1900 + savedate->tm_year))
+					   (boost::format(_("saved on %1% %2%, %3%"))  %
+					    localize_month(savedate->tm_mon) % savedate->tm_mday % (1900 + savedate->tm_year))
 					      .str();
 				}
 			}

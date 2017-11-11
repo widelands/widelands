@@ -518,7 +518,8 @@ void FullscreenMenuOptions::update_language_stats(bool include_system_lang) {
 					message =
 					   (boost::format(_("The translation into %s is complete.")) % entry.descname).str();
 				} else {
-					message = (boost::format(_("The translation into %s is %d%% complete.")) %
+					/** TRANSLATORS: %1% = language name, %2% = percentage */
+					message = (boost::format(_("The translation into %1% is %2%%% complete.")) %
 					           entry.descname % percent)
 					             .str();
 				}

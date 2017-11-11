@@ -149,9 +149,9 @@ bool FullscreenMenuNetSetupLAN::get_host_address(NetAddress* addr) {
 	}
 
 	// The user probably entered a hostname on his own. Try to resolve it
-	if (NetAddress::resolve_to_v6(addr, host, WIDELANDS_PORT))
+	if (NetAddress::resolve_to_v6(addr, host, kWidelandsLanPort))
 		return true;
-	if (NetAddress::resolve_to_v4(addr, host, WIDELANDS_PORT))
+	if (NetAddress::resolve_to_v4(addr, host, kWidelandsLanPort))
 		return true;
 	return false;
 }
