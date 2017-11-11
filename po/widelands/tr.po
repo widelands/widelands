@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-10-09 18:20+0000\n"
-"PO-Revision-Date: 2017-10-09 18:23+0000\n"
+"POT-Creation-Date: 2017-11-05 08:17+0000\n"
+"PO-Revision-Date: 2017-11-05 08:20+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Turkish (http://www.transifex.com/widelands/widelands/language/tr/)\n"
 "MIME-Version: 1.0\n"
@@ -568,7 +568,7 @@ msgstr ""
 #: ../../src/scripting/lua_game.cc:433 ../../src/ui_basic/messagebox.cc:89
 #: ../../src/ui_fsmenu/helpwindow.cc:51
 #: ../../src/ui_fsmenu/load_map_or_game.cc:38
-#: ../../src/ui_fsmenu/options.cc:118
+#: ../../src/ui_fsmenu/options.cc:102
 #: ../../src/wui/game_main_menu_save_game.cc:87
 msgid "OK"
 msgstr "Tamam"
@@ -579,7 +579,7 @@ msgstr "Tamam"
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:226
 #: ../../src/editor/ui_menus/main_menu_save_map_make_directory.cc:64
 #: ../../src/ui_basic/messagebox.cc:95 ../../src/ui_fsmenu/launch_mpg.cc:77
-#: ../../src/ui_fsmenu/options.cc:109
+#: ../../src/ui_fsmenu/options.cc:93
 #: ../../src/wui/game_main_menu_save_game.cc:92 ../../src/wui/login_box.cc:61
 msgid "Cancel"
 msgstr "İptal"
@@ -845,7 +845,7 @@ msgstr "Oyuncu Sayısı"
 #: ../../src/editor/ui_menus/player_menu.cc:205 ../../src/logic/map.cc:309
 #: ../../src/logic/single_player_game_settings_provider.cc:89
 #: ../../src/map_io/map_player_names_and_tribes_packet.cc:94
-#: ../../src/network/gamehost.cc:1568 ../../src/ui_fsmenu/launch_mpg.cc:491
+#: ../../src/network/gamehost.cc:1571 ../../src/ui_fsmenu/launch_mpg.cc:491
 #: ../../src/wui/multiplayersetupgroup.cc:136
 #: ../../src/wui/multiplayersetupgroup.cc:190
 #, c-format
@@ -1321,54 +1321,54 @@ msgid ""
 "An expedition ship reached a coast and is waiting for further commands."
 msgstr ""
 
-#: ../../src/logic/map_objects/tribes/ship.cc:658
+#: ../../src/logic/map_objects/tribes/ship.cc:672
 msgid "New port construction site is gone"
 msgstr ""
 
-#: ../../src/logic/map_objects/tribes/ship.cc:658
+#: ../../src/logic/map_objects/tribes/ship.cc:672
 msgid "Port Lost!"
 msgstr ""
 
-#: ../../src/logic/map_objects/tribes/ship.cc:659
+#: ../../src/logic/map_objects/tribes/ship.cc:673
 msgid "Unloading of wares failed, expedition is cancelled now."
 msgstr ""
 
 #. * TRANSLATORS: Ship expedition ready
-#: ../../src/logic/map_objects/tribes/ship.cc:832
+#: ../../src/logic/map_objects/tribes/ship.cc:846
 msgctxt "ship"
 msgid "Expedition"
 msgstr ""
 
-#: ../../src/logic/map_objects/tribes/ship.cc:832
+#: ../../src/logic/map_objects/tribes/ship.cc:846
 msgid "Expedition Ready"
 msgstr ""
 
-#: ../../src/logic/map_objects/tribes/ship.cc:833
+#: ../../src/logic/map_objects/tribes/ship.cc:847
 msgid "An expedition ship is waiting for your commands."
 msgstr ""
 
 #. * TRANSLATORS: This is a ship state
-#: ../../src/logic/map_objects/tribes/ship.cc:969
+#: ../../src/logic/map_objects/tribes/ship.cc:983
 msgctxt "ship_state"
 msgid "Shipping"
 msgstr ""
 
 #. * TRANSLATORS: This is a ship state. An expedition is waiting for your
 #. commands.
-#: ../../src/logic/map_objects/tribes/ship.cc:973
+#: ../../src/logic/map_objects/tribes/ship.cc:987
 msgctxt "ship_state"
 msgid "Waiting"
 msgstr ""
 
 #. * TRANSLATORS: This is a ship state. An expedition is scouting for port
 #. spaces.
-#: ../../src/logic/map_objects/tribes/ship.cc:977
+#: ../../src/logic/map_objects/tribes/ship.cc:991
 msgctxt "ship_state"
 msgid "Scouting"
 msgstr ""
 
 #. * TRANSLATORS: This is a ship state. An expedition has found a port space.
-#: ../../src/logic/map_objects/tribes/ship.cc:981
+#: ../../src/logic/map_objects/tribes/ship.cc:995
 msgctxt "ship_state"
 msgid "Port Space Found"
 msgstr ""
@@ -1376,7 +1376,7 @@ msgstr ""
 #. * TRANSLATORS: This is a ship state. An expedition is unloading
 #. wares/workers to build a
 #. * port.
-#: ../../src/logic/map_objects/tribes/ship.cc:986
+#: ../../src/logic/map_objects/tribes/ship.cc:1000
 msgctxt "ship_state"
 msgid "Founding a Colony"
 msgstr ""
@@ -1500,7 +1500,7 @@ msgid ""
 " you tried to connect."
 msgstr ""
 
-#: ../../src/network/gameclient.cc:171 ../../src/network/gamehost.cc:610
+#: ../../src/network/gameclient.cc:171 ../../src/network/gamehost.cc:611
 #: ../../src/wlapplication.cc:1258
 msgid "Preparing game"
 msgstr "Oyun hazırlanıyor"
@@ -1525,120 +1525,120 @@ msgstr ""
 msgid "Disconnected from Host"
 msgstr ""
 
-#: ../../src/network/gamehost.cc:254
+#: ../../src/network/gamehost.cc:255
 msgid "Available host commands are:"
 msgstr ""
 
 #. * TRANSLATORS: Available host command
-#: ../../src/network/gamehost.cc:256
+#: ../../src/network/gamehost.cc:257
 msgid "/help  -  Shows this help"
 msgstr ""
 
 #. * TRANSLATORS: Available host command
-#: ../../src/network/gamehost.cc:258
+#: ../../src/network/gamehost.cc:259
 msgid "/announce <msg>  -  Send a chatmessage as announcement (system chat)"
 msgstr ""
 
 #. * TRANSLATORS: Available host command
-#: ../../src/network/gamehost.cc:260
+#: ../../src/network/gamehost.cc:261
 msgid "/warn <name> <reason>  -  Warn the user <name> because of <reason>"
 msgstr ""
 
 #. * TRANSLATORS: Available host command
-#: ../../src/network/gamehost.cc:262
+#: ../../src/network/gamehost.cc:263
 msgid "/kick <name> <reason>  -  Kick the user <name> because of <reason>"
 msgstr ""
 
 #. * TRANSLATORS: Available host command
-#: ../../src/network/gamehost.cc:264
+#: ../../src/network/gamehost.cc:265
 msgid "/forcePause            -  Force the game to pause."
 msgstr ""
 
 #. * TRANSLATORS: Available host command
-#: ../../src/network/gamehost.cc:266
+#: ../../src/network/gamehost.cc:267
 msgid "/endForcedPause        -  Return game to normal speed."
 msgstr ""
 
-#: ../../src/network/gamehost.cc:273
+#: ../../src/network/gamehost.cc:274
 msgid "Wrong use, should be: /announce <message>"
 msgstr ""
 
-#: ../../src/network/gamehost.cc:284
+#: ../../src/network/gamehost.cc:285
 msgid "Wrong use, should be: /warn <name> <reason>"
 msgstr ""
 
-#: ../../src/network/gamehost.cc:288 ../../src/network/gamehost.cc:311
+#: ../../src/network/gamehost.cc:289 ../../src/network/gamehost.cc:312
 #, c-format
 msgid "The client %s could not be found."
 msgstr ""
 
-#: ../../src/network/gamehost.cc:299
+#: ../../src/network/gamehost.cc:300
 msgid "Wrong use, should be: /kick <name> <reason>"
 msgstr ""
 
-#: ../../src/network/gamehost.cc:309
+#: ../../src/network/gamehost.cc:310
 msgid "You can not kick yourself!"
 msgstr ""
 
-#: ../../src/network/gamehost.cc:315
+#: ../../src/network/gamehost.cc:316
 #, c-format
 msgid "Are you sure you want to kick %s?"
 msgstr ""
 
-#: ../../src/network/gamehost.cc:317
+#: ../../src/network/gamehost.cc:318
 #, c-format
 msgid "The stated reason was: %s"
 msgstr ""
 
-#: ../../src/network/gamehost.cc:318
+#: ../../src/network/gamehost.cc:319
 #, c-format
 msgid "If yes, type: /ack_kick %s"
 msgstr ""
 
-#: ../../src/network/gamehost.cc:326
+#: ../../src/network/gamehost.cc:327
 msgid "kick acknowledgement cancelled: No name given!"
 msgstr ""
 
-#: ../../src/network/gamehost.cc:328
+#: ../../src/network/gamehost.cc:329
 msgid "Wrong use, should be: /ack_kick <name>"
 msgstr ""
 
-#: ../../src/network/gamehost.cc:334
+#: ../../src/network/gamehost.cc:335
 msgid "kick acknowledgement cancelled: Wrong name given!"
 msgstr ""
 
-#: ../../src/network/gamehost.cc:343
+#: ../../src/network/gamehost.cc:344
 msgid "Pause was already forced - game should be paused."
 msgstr ""
 
-#: ../../src/network/gamehost.cc:353
+#: ../../src/network/gamehost.cc:354
 msgid "There is no forced pause - nothing to end."
 msgstr ""
 
-#: ../../src/network/gamehost.cc:362
+#: ../../src/network/gamehost.cc:363
 msgid "Invalid command! Type /help for a list of commands."
 msgstr ""
 
-#: ../../src/network/gamehost.cc:491
+#: ../../src/network/gamehost.cc:492
 msgid "Failed to start the server!"
 msgstr ""
 
-#: ../../src/network/gamehost.cc:492
+#: ../../src/network/gamehost.cc:493
 msgid ""
 "Widelands could not start a server.\n"
 "Probably some other process is already running a server on our port."
 msgstr ""
 
-#: ../../src/network/gamehost.cc:1505
+#: ../../src/network/gamehost.cc:1508
 #, c-format
 msgid "Computer %u"
 msgstr ""
 
-#: ../../src/network/gamehost.cc:1562 ../../src/wui/game_summary.cc:101
+#: ../../src/network/gamehost.cc:1565 ../../src/wui/game_summary.cc:101
 msgid "Player"
 msgstr "Oyuncu"
 
-#: ../../src/network/gamehost.cc:1710
+#: ../../src/network/gamehost.cc:1713
 #, c-format
 msgid "%li second"
 msgid_plural "%li seconds"
@@ -2312,7 +2312,7 @@ msgid "Version"
 msgstr ""
 
 #: ../../src/ui_fsmenu/internet_lobby.cc:138
-#: ../../src/ui_fsmenu/options.cc:248
+#: ../../src/ui_fsmenu/options.cc:234
 msgid "Game"
 msgstr ""
 
@@ -2767,7 +2767,7 @@ msgstr ""
 msgid "Editor"
 msgstr ""
 
-#: ../../src/ui_fsmenu/main.cc:73 ../../src/ui_fsmenu/options.cc:98
+#: ../../src/ui_fsmenu/main.cc:73 ../../src/ui_fsmenu/options.cc:82
 msgid "Options"
 msgstr ""
 
@@ -2872,127 +2872,142 @@ msgctxt "game_state"
 msgid "Unknown"
 msgstr ""
 
-#: ../../src/ui_fsmenu/options.cc:117
+#: ../../src/ui_fsmenu/options.cc:101
 msgid "Apply"
 msgstr ""
 
-#: ../../src/ui_fsmenu/options.cc:136
+#: ../../src/ui_fsmenu/options.cc:121
 msgid "Language"
 msgstr ""
 
-#: ../../src/ui_fsmenu/options.cc:143
+#: ../../src/ui_fsmenu/options.cc:128
 msgid "In-game resolution"
 msgstr ""
 
-#: ../../src/ui_fsmenu/options.cc:145
+#: ../../src/ui_fsmenu/options.cc:130
 msgid "Fullscreen"
 msgstr ""
 
-#: ../../src/ui_fsmenu/options.cc:146
+#: ../../src/ui_fsmenu/options.cc:131
 msgid "Grab Input"
 msgstr ""
 
-#: ../../src/ui_fsmenu/options.cc:148
+#: ../../src/ui_fsmenu/options.cc:132
 msgid "Maximum FPS:"
 msgstr ""
 
-#: ../../src/ui_fsmenu/options.cc:152
+#: ../../src/ui_fsmenu/options.cc:137
 msgid "Snap windows only when overlapping"
 msgstr ""
 
-#: ../../src/ui_fsmenu/options.cc:153
+#: ../../src/ui_fsmenu/options.cc:138
 msgid "Dock windows to edges"
 msgstr ""
 
-#: ../../src/ui_fsmenu/options.cc:155
+#: ../../src/ui_fsmenu/options.cc:140
 msgid "Animate automatic map movements"
 msgstr ""
 
-#: ../../src/ui_fsmenu/options.cc:165
+#: ../../src/ui_fsmenu/options.cc:150
 msgid "Distance for windows to snap to other panels:"
 msgstr ""
 
-#: ../../src/ui_fsmenu/options.cc:176
+#: ../../src/ui_fsmenu/options.cc:161
 msgid "Distance for windows to snap to borders:"
 msgstr ""
 
-#: ../../src/ui_fsmenu/options.cc:180
+#: ../../src/ui_fsmenu/options.cc:165
 #: ../../src/wui/game_options_sound_menu.cc:28
 msgid "Enable Music"
 msgstr ""
 
-#: ../../src/ui_fsmenu/options.cc:181
+#: ../../src/ui_fsmenu/options.cc:166
 #: ../../src/wui/game_options_sound_menu.cc:31
 msgid "Enable Sound Effects"
 msgstr ""
 
-#: ../../src/ui_fsmenu/options.cc:182
+#: ../../src/ui_fsmenu/options.cc:167
 msgid "Play a sound at message arrival"
 msgstr ""
 
-#: ../../src/ui_fsmenu/options.cc:193
+#: ../../src/ui_fsmenu/options.cc:178
 msgid "Save game automatically every:"
 msgstr ""
 
-#: ../../src/ui_fsmenu/options.cc:206
+#: ../../src/ui_fsmenu/options.cc:191
 msgid "Maximum number of autosave files:"
 msgstr ""
 
-#: ../../src/ui_fsmenu/options.cc:213
+#: ../../src/ui_fsmenu/options.cc:198
 msgid "Compress widelands data files (maps, replays and savegames)"
 msgstr ""
 
-#: ../../src/ui_fsmenu/options.cc:218
+#: ../../src/ui_fsmenu/options.cc:203
 msgid "Write syncstreams in network games to debug desyncs"
 msgstr ""
 
-#: ../../src/ui_fsmenu/options.cc:224
+#: ../../src/ui_fsmenu/options.cc:209
 msgid "Start building road after placing a flag"
 msgstr ""
 
-#: ../../src/ui_fsmenu/options.cc:225
+#: ../../src/ui_fsmenu/options.cc:210
 msgid "Show buildings area preview"
 msgstr ""
 
-#: ../../src/ui_fsmenu/options.cc:227
+#: ../../src/ui_fsmenu/options.cc:212
 msgid "Show in-game chat with transparent background"
 msgstr ""
 
 #. * TRANSLATORS: A watchwindow is a window where you keep watching an object
 #. or a map region,
 #. * TRANSLATORS: and it also lets you jump to it on the map.
-#: ../../src/ui_fsmenu/options.cc:231
+#: ../../src/ui_fsmenu/options.cc:216
 msgid "Use single watchwindow mode"
 msgstr ""
 
-#: ../../src/ui_fsmenu/options.cc:244
+#: ../../src/ui_fsmenu/options.cc:230
 msgid "Interface"
 msgstr ""
 
-#: ../../src/ui_fsmenu/options.cc:245
+#: ../../src/ui_fsmenu/options.cc:231
 msgid "Windows"
 msgstr ""
 
-#: ../../src/ui_fsmenu/options.cc:246
+#: ../../src/ui_fsmenu/options.cc:232
 msgid "Sound"
 msgstr "Ses"
 
-#: ../../src/ui_fsmenu/options.cc:247
+#: ../../src/ui_fsmenu/options.cc:233
 msgid "Saving"
 msgstr ""
 
 #. * TRANSLATORS Options: Save game automatically every:
-#: ../../src/ui_fsmenu/options.cc:298
+#: ../../src/ui_fsmenu/options.cc:282
 msgid "Off"
 msgstr ""
 
 #. * TRANSLATORS: Screen resolution, e.g. 800 x 600
-#: ../../src/ui_fsmenu/options.cc:324 ../../src/ui_fsmenu/options.cc:333
+#: ../../src/ui_fsmenu/options.cc:308 ../../src/ui_fsmenu/options.cc:317
 msgid "%1% x %2%"
 msgstr ""
 
-#: ../../src/ui_fsmenu/options.cc:432
+#: ../../src/ui_fsmenu/options.cc:421
 msgid "Try system language"
+msgstr ""
+
+#: ../../src/ui_fsmenu/options.cc:519
+#, c-format
+msgid "The translation into %s is complete."
+msgstr ""
+
+#: ../../src/ui_fsmenu/options.cc:521
+#, c-format
+msgid "The translation into %s is %d%% complete."
+msgstr ""
+
+#: ../../src/ui_fsmenu/options.cc:535
+#, c-format
+msgid "If you wish to help us translate, please visit %s"
 msgstr ""
 
 #: ../../src/ui_fsmenu/singleplayer.cc:40
