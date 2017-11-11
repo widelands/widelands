@@ -19,7 +19,7 @@ find_ordered = re.compile(r"\%[|]{0,1}(\d\$[0-9#*]*\.*[0-9#]*[a-zA-Z]{1,2})")
 find_boost = re.compile(r"\%(\d)\%")
 
 def find_unordered_placeholders(sanitized_entry):
-    """ We need to exclude boost strings from the unordered results. Could't come up with a good regex, so we're doing this in 2 steps. """
+    """ We need to exclude boost strings from the unordered results. Couldn't come up with a good regex, so we're doing this in 2 steps. """
     result = []
     for entry in find_unordered.findall(sanitized_entry):
         temp_boost = find_boost.findall(sanitized_entry)
