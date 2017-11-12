@@ -72,7 +72,7 @@ std::shared_ptr<const Image> SdlTtfFont::render(const std::string& txt,
 	    static_cast<int>(clr.r) % static_cast<int>(clr.g) % static_cast<int>(clr.b) % style)
 	      .str();
 	std::shared_ptr<const Image> rv = texture_cache->get(hash);
-	if (rv.get() != nullptr) {
+	if (rv != nullptr) {
 		return rv;
 	}
 

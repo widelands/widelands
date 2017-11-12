@@ -66,7 +66,6 @@ constexpr int kRemainingBasicBuildingsResetTime = 1 * 60 * 1000;
 
 // following two are used for roads management, for creating shortcuts and dismantling dispensable
 // roads
-constexpr int32_t kSpotsTooLittle = 15;
 constexpr int32_t kSpotsEnough = 25;
 
 constexpr uint16_t kTargetQuantCap = 30;
@@ -5452,7 +5451,7 @@ uint32_t DefaultAI::count_productionsites_without_buildings() {
 		}
 	}
 
-	return existing / total;
+	return (total > 0) ? (existing / total) : 0;
 }
 
 // \returns the building observer

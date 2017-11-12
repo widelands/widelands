@@ -328,7 +328,7 @@ const Animation& AnimationManager::get_animation(uint32_t id) const {
 	if (!id || id > animations_.size())
 		throw wexception("Requested unknown animation with id: %i", id);
 
-	return *animations_[id - 1].get();
+	return *animations_[id - 1];
 }
 
 const Image* AnimationManager::get_representative_image(uint32_t id, const RGBColor* clr) {
