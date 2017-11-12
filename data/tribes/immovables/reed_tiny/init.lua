@@ -6,7 +6,7 @@ tribes:new_immovable_type {
    -- TRANSLATORS: This is an immovable name used in lists of immovables
    descname = pgettext("immovable", "Reed (tiny)"),
    size = "small",
-   attributes = { "field", "reed_tiny" },
+   attributes = { "field", "seed_reed" },
    programs = {
       program = {
          "animate=idle 22000",

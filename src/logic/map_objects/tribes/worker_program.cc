@@ -412,7 +412,7 @@ findspace
          "findspace size:any radius:2 space", -- The farmer will want to walk to this field again later for harvesting his crop
          "walk coords",
          "animation planting 4000",
-         "plant attrib:field_tiny",
+         "plant attrib:seed_wheat",
          "animation planting 4000",
          "return",
       },
@@ -505,7 +505,7 @@ walk
          "findspace size:any radius:2",
          "walk coords", -- Walk to the space found by the command above
          "animation planting 4000",
-         "plant attrib:blackrootfield_tiny",
+         "plant attrib:seed_blackroot",
          "animation planting 4000",
          "return"
       },
@@ -522,7 +522,7 @@ walk
 
       buildship = {
          "walk object-or-coords", -- Walk to coordinates from 1. or to object from 2.
-         "plant attrib:barbarians_shipconstruction unless object", -- 2. This will create an object for us if we don't have one yet
+         "plant attrib:shipconstruction unless object", -- 2. This will create an object for us if we don't have one yet
          "play_sound sound/sawmill sawmill 230",
          "animation work 500",
          "construct", -- 1. This will find a space for us if no object has been planted yet
@@ -563,7 +563,7 @@ animation
          "findspace size:any radius:1",
          "walk coords",
          "animation dig 2000", -- Play a digging animation for 2 seconds.
-         "plant attrib:grapevine_tiny",
+         "plant attrib:seed_grapes",
          "animation planting 3000", -- Play a planting animation for 3 seconds.
          "return"
       },
@@ -674,14 +674,14 @@ plant
          "findspace size:any radius:2 space",
          "walk coords",
          "animation planting 4000",
-         "plant attrib:field_tiny", -- Plant a random tiny field immovable that the worker's tribe knows about
+         "plant attrib:seed_wheat", -- Plant a random wheat field immovable that the worker's tribe knows about
          "animation planting 4000",
          "return",
       },
 
       buildship = {
          "walk object-or-coords",
-         "plant attrib:empire_shipconstruction unless object", -- Only create a shipconstruction if we don't already have one
+         "plant attrib:shipconstruction unless object", -- Only create a shipconstruction if we don't already have one
          "play_sound sound/sawmill sawmill 230",
          "animation work 500",
          "construct",
@@ -913,7 +913,7 @@ construct
 
       buildship = {
          "walk object-or-coords", -- Walk to coordinates from 1. or to object from 2.
-         "plant attrib:barbarians_shipconstruction unless object", -- 2. This will create an object for us if we don't have one yet
+         "plant attrib:shipconstruction unless object", -- 2. This will create an object for us if we don't have one yet
          "play_sound sound/sawmill sawmill 230",
          "animation work 500",
          "construct", -- 1. Add the current ware to the shipconstruction. This will find a space for us if no shipconstruction object has been planted yet
