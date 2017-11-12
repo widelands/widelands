@@ -271,7 +271,7 @@ static int os_date (lua_State *L) {
     luaL_error(L, "time result cannot be represented in this installation");
   if (strcmp(s, "*t") == 0) {
     lua_createtable(L, 0, 9);  /* 9 = number of fields */
-    setfield(L, "sec", stm->tm_sec);
+    setfield(L, "sec", stm->tm_sec); // NOLINT
     setfield(L, "min", stm->tm_min);
     setfield(L, "hour", stm->tm_hour);
     setfield(L, "day", stm->tm_mday);

@@ -553,7 +553,7 @@ uint16_t TextNode::hotspot_y() const {
 std::shared_ptr<UI::RenderedText> TextNode::render(TextureCache* texture_cache) {
 	auto rendered_image =
 	   font_.render(txt_, nodestyle_.font_color, nodestyle_.font_style, texture_cache);
-	assert(rendered_image.get() != nullptr);
+	assert(rendered_image != nullptr);
 	std::shared_ptr<UI::RenderedText> rendered_text(new UI::RenderedText());
 	rendered_text->rects.push_back(
 	   std::unique_ptr<UI::RenderedRect>(new UI::RenderedRect(rendered_image)));
@@ -599,7 +599,7 @@ std::shared_ptr<UI::RenderedText> FillingTextNode::render(TextureCache* texture_
 	      .str();
 
 	std::shared_ptr<const Image> rendered_image = texture_cache->get(hash);
-	if (rendered_image.get() == nullptr) {
+	if (rendered_image == nullptr) {
 		std::shared_ptr<const Image> ttf =
 		   font_.render(txt_, nodestyle_.font_color, nodestyle_.font_style, texture_cache);
 		auto texture = std::make_shared<Texture>(width(), height());
@@ -610,7 +610,7 @@ std::shared_ptr<UI::RenderedText> FillingTextNode::render(TextureCache* texture_
 		}
 		rendered_image = texture_cache->insert(hash, std::move(texture));
 	}
-	assert(rendered_image.get() != nullptr);
+	assert(rendered_image != nullptr);
 	rendered_text->rects.push_back(
 	   std::unique_ptr<UI::RenderedRect>(new UI::RenderedRect(rendered_image)));
 	return rendered_text;
@@ -638,12 +638,12 @@ public:
 			std::shared_ptr<UI::RenderedText> rendered_text(new UI::RenderedText());
 			const std::string hash = (boost::format("rt:wsp:%i:%i") % width() % height()).str();
 			std::shared_ptr<const Image> rendered_image = texture_cache->get(hash);
-			if (rendered_image.get() == nullptr) {
+			if (rendered_image == nullptr) {
 				auto texture = std::make_shared<Texture>(width(), height());
 				texture->fill_rect(Rectf(0.f, 0.f, w_, h_), RGBAColor(0xcc, 0, 0, 0xcc));
 				rendered_image = texture_cache->insert(hash, std::move(texture));
 			}
-			assert(rendered_image.get() != nullptr);
+			assert(rendered_image != nullptr);
 			rendered_text->rects.push_back(
 			   std::unique_ptr<UI::RenderedRect>(new UI::RenderedRect(rendered_image)));
 			return rendered_text;
@@ -719,7 +719,7 @@ public:
 		                            .str();
 
 		std::shared_ptr<const Image> rendered_image = texture_cache->get(hash);
-		if (rendered_image.get() == nullptr) {
+		if (rendered_image == nullptr) {
 			// Draw background image (tiling)
 			auto texture = std::make_shared<Texture>(width(), height());
 			if (background_image_ != nullptr) {
@@ -737,7 +737,7 @@ public:
 			}
 			rendered_image = texture_cache->insert(hash, std::move(texture));
 		}
-		assert(rendered_image.get() != nullptr);
+		assert(rendered_image != nullptr);
 		rendered_text->rects.push_back(
 		   std::unique_ptr<UI::RenderedRect>(new UI::RenderedRect(rendered_image)));
 		return rendered_text;
@@ -935,14 +935,14 @@ std::shared_ptr<UI::RenderedText> ImgRenderNode::render(TextureCache* texture_ca
 		                          (use_playercolor_ ? color_.hex_value() : "") % width() % height())
 		                            .str();
 		std::shared_ptr<const Image> rendered_image = texture_cache->get(hash);
-		if (rendered_image.get() == nullptr) {
+		if (rendered_image == nullptr) {
 			auto texture = std::make_shared<Texture>(width(), height());
 			texture->blit(Rectf(0.f, 0.f, width(), height()), *image_,
 			              Rectf(0.f, 0.f, image_->width(), image_->height()), 1., BlendMode::Copy);
 			rendered_image = texture_cache->insert(hash, std::move(texture));
 		}
 
-		assert(rendered_image.get() != nullptr);
+		assert(rendered_image != nullptr);
 		rendered_text->rects.push_back(
 		   std::unique_ptr<UI::RenderedRect>(new UI::RenderedRect(rendered_image)));
 	}

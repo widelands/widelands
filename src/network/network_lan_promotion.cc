@@ -372,7 +372,7 @@ LanGamePromoter::LanGamePromoter() : LanBase(WIDELANDS_LAN_PROMOTION_PORT) {
 	needupdate = true;
 
 	memset(&gameinfo, 0, sizeof(gameinfo));
-	strcpy(gameinfo.magic, "GAME");
+	strncpy(gameinfo.magic, "GAME", sizeof(gameinfo.magic));
 
 	gameinfo.version = LAN_PROMOTION_PROTOCOL_VERSION;
 	gameinfo.state = LAN_GAME_OPEN;

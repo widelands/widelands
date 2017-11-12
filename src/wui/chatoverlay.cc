@@ -175,7 +175,7 @@ void ChatOverlay::draw(RenderTarget& dst) {
 		// render everything in one single line.
 		im = UI::g_fh1->render(m->all_text_);
 	}
-	assert(im.get() != nullptr);
+	assert(im != nullptr);
 
 	// Background
 	const int32_t height = im->height() > get_h() ? get_h() : im->height();

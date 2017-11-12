@@ -4112,7 +4112,7 @@ int LuaFlag::set_wares(lua_State* L) {
 		if (sp.second > 0) {
 			c_wares = count_wares_on_flag_(*f, tribes);
 			assert(c_wares.count(index) == 1);
-			assert(c_wares[index] = sp.second);
+			assert(c_wares.at(index) == sp.second);
 		}
 #endif
 	}

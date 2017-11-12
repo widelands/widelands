@@ -289,7 +289,7 @@ const EditorCategory* ImmovableDescr::editor_category() const {
 }
 
 bool ImmovableDescr::has_terrain_affinity() const {
-	return terrain_affinity_.get() != nullptr;
+	return terrain_affinity_ != nullptr;
 }
 
 const TerrainAffinity& ImmovableDescr::terrain_affinity() const {
