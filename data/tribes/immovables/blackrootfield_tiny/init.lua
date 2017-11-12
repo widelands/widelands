@@ -5,6 +5,7 @@ tribes:new_immovable_type {
    name = "blackrootfield_tiny",
    -- TRANSLATORS: This is an immovable name used in lists of immovables
    descname = pgettext("immovable", "Blackroot Field (tiny)"),
+   helptext_script = dirname .. "helptexts.lua",
    size = "small",
    attributes = { "field", "seed_blackroot" },
    programs = {

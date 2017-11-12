@@ -5,6 +5,7 @@ tribes:new_immovable_type {
    name = "resi_none",
    -- TRANSLATORS: This is a resource name used in lists of resources
    descname = pgettext("immovable", "No Resources"),
+   helptext_script = dirname .. "helptexts.lua",
    attributes = { "resi" },
    programs = {
       program = {

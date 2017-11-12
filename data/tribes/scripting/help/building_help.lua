@@ -453,7 +453,7 @@ function building_help_building_section(building_description)
          else
             result = result .. rt(h3(_"Build cost:"))
          end
-         for ware, amount in pairs(building_description.build_cost) do
+         for ware, amount in pairs(building_description.buildcost) do
             local ware_description = wl.Game():get_ware_description(ware)
             result = result .. help_ware_amount_line(ware_description, amount)
          end
@@ -494,7 +494,7 @@ function building_help_building_section(building_description)
          for index, former in pairs(former_buildings) do
             former_building = wl.Game():get_building_description(former.name)
             if (former_building.buildable) then
-               for ware, amount in pairs(former_building.build_cost) do
+               for ware, amount in pairs(former_building.buildcost) do
                   if (warescost[ware]) then
                      warescost[ware] = warescost[ware] + amount
                   else
