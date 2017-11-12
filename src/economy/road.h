@@ -34,7 +34,7 @@ class Request;
 class RoadDescr : public MapObjectDescr {
 public:
 	RoadDescr(char const* const init_name, char const* const init_descname)
-	   : MapObjectDescr(MapObjectType::ROAD, init_name, init_descname) {
+	   : MapObjectDescr(MapObjectType::ROAD, init_name, init_descname, "") {
 	}
 	~RoadDescr() override {
 	}

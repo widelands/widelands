@@ -101,7 +101,7 @@ struct MapObjectDescr {
 
 	MapObjectDescr(const MapObjectType init_type,
 	               const std::string& init_name,
-	               const std::string& init_descname);
+	               const std::string& init_descname, const std::string& init_helptext_script);
 	MapObjectDescr(const MapObjectType init_type,
 	               const std::string& init_name,
 	               const std::string& init_descname,
