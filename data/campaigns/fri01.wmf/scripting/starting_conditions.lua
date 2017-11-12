@@ -1,11 +1,10 @@
 -- =======================================================================
 --                                 Player 1
 -- =======================================================================
-p1:forbid_buildings("all")
-p1:allow_buildings{"frisians_sentinel","frisians_warehouse"}
+p1:forbid_buildings ("all")
+p1:allow_buildings {"frisians_sentinel","frisians_warehouse"}
 
-hq = p1:place_building("frisians_headquarters",
-   wl.Game().map.player_slots[1].starting_field, false, true)
+hq = p1:place_building ("frisians_headquarters", map.player_slots [1].starting_field, false, true)
 hq:set_wares {
    log = 40,
    brick = 50,
@@ -48,13 +47,13 @@ hq:set_workers {
    frisians_brewer = 1,
    frisians_trainer = 3,
 }
-hq:set_soldiers({0,0,0,0}, 20)
+hq:set_soldiers ({0,0,0,0}, 20)
 
 -- =======================================================================
 --                                 Player 2
 -- =======================================================================
-p2:forbid_buildings("all")
-p2:allow_buildings{
+p2:forbid_buildings ("all")
+p2:allow_buildings {
    "frisians_woodcutters_house",
    "frisians_foresters_house",
    "frisians_well",
@@ -84,8 +83,7 @@ p2:allow_buildings{
    "frisians_sentinel",
    "frisians_outpost"}
 
-hq2 = p2:place_building("frisians_headquarters",
-   wl.Game().map.player_slots[2].starting_field, false, true)
+hq2 = p2:place_building ("frisians_headquarters", map.player_slots [2].starting_field, false, true)
 hq2:set_wares {
    log = 50,
    brick = 500,
@@ -118,5 +116,5 @@ hq2:set_workers {
    frisians_brewer_master = 5,
    frisians_reindeer = 50,
 }
-hq2:set_soldiers({2,0,2,0}, 150)
-hq2:set_soldiers({0,6,0,0}, 50)
+hq2:set_soldiers ({2,0,2,0}, 150)
+hq2:set_soldiers ({0,6,0,0}, 50)

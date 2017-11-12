@@ -10,7 +10,8 @@ tribes:new_tribe {
       },
       flag = {
          pictures = path.list_files(dirname .. "images/frisians/flag_??.png"),
-         hotspot = { 13, 36 },
+         hotspot = { 8, 37 },
+         fps = 12,
       }
    },
 
@@ -154,6 +155,18 @@ tribes:new_tribe {
    immovables = {
       "ashes",
       "destroyed_building",
+      --"berry_bush_blueberry_tiny",
+      --"berry_bush_blueberry_small",
+      --"berry_bush_blueberry_medium",
+      --"berry_bush_blueberry_ripe",
+      --"berry_bush_currant_tiny",
+      --"berry_bush_currant_small",
+      --"berry_bush_currant_medium",
+      --"berry_bush_currant_ripe",
+      --"berry_bush_raspberry_tiny",
+      --"berry_bush_raspberry_small",
+      --"berry_bush_raspberry_medium",
+      --"berry_bush_raspberry_ripe",
       "bush_tiny",
       "bush_small",
       "bush_medium",

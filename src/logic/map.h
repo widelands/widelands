@@ -53,12 +53,6 @@ struct BaseImmovable;
 struct MapGenerator;
 struct PathfieldManager;
 
-#define WLMF_SUFFIX ".wmf"
-#define S2MF_SUFFIX ".swd"
-#define S2MF_SUFFIX2 ".wld"
-
-#define S2MF_MAGIC "WORLD_V1.0"
-
 // Global list of available map dimensions.
 const std::vector<int32_t> kMapDimensions = {64,  80,  96,  112, 128, 144, 160, 176, 192, 208,
                                              224, 240, 256, 272, 288, 304, 320, 336, 352, 368,

@@ -28,16 +28,6 @@ function count_military_buildings_p1 ()
       #p1:get_buildings ("frisians_wooden_tower_high"))
 end
 
-function get_land (p)
-   local land = 0
-   for idx,ff in ipairs (fields) do
-      for idy,f in ipairs (ff) do
-         if f.owner == p then land = land + 1 end
-      end
-   end
-   return land
-end
-
 function check_mountain ()
    while true do
       sleep (7777)
@@ -218,9 +208,17 @@ function supply_yes ()
       campaign_message_box (defeat_murilius_2)
       p2.team = 2
       add_campaign_objective (obj_defeat_murilius)
-      while get_land (p2) > 0 do sleep (7777) end
+      local def = false
+      while not def do
+         def = true
+         for idx,ff in ipairs (fields) do
+            for idy,f in ipairs (ff) do
+               if f.owner == p2 then def = false end
+            end
+            sleep (40)
+         end
+      end
    end
-   
    done_fight = true
 end
 

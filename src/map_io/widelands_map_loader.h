@@ -24,6 +24,7 @@
 #include <memory>
 #include <string>
 
+#include "logic/filesystem_constants.h"
 #include "map_io/map_loader.h"
 
 class FileSystem;
@@ -48,7 +49,7 @@ struct WidelandsMapLoader : public MapLoader {
 	}
 
 	static bool is_widelands_map(const std::string& filename) {
-		return boost::iends_with(filename, WLMF_SUFFIX);
+		return boost::iends_with(filename, kWidelandsMapExtension);
 	}
 
 	// If this was made pre one-world, the name of the world.
