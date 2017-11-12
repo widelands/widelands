@@ -282,6 +282,9 @@ const std::set<DescriptionIndex>& TribeDescr::wares() const {
 const std::set<DescriptionIndex>& TribeDescr::workers() const {
 	return workers_;
 }
+const std::set<DescriptionIndex>& TribeDescr::immovables() const {
+	return immovables_;
+}
 
 bool TribeDescr::has_building(const DescriptionIndex& index) const {
 	return std::find(buildings_.begin(), buildings_.end(), index) != buildings_.end();
