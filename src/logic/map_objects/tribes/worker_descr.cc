@@ -44,8 +44,11 @@ WorkerDescr::WorkerDescr(const std::string& init_descname,
      needed_experience_(INVALID_INDEX),
      becomes_(INVALID_INDEX),
      egbase_(egbase) {
+	if (helptext_script().empty()) {
+		throw GameDataError("Worker %s has no helptext script", name().c_str());
+	}
 	if (icon_filename().empty()) {
-		throw GameDataError("Worker %s has no menu icon", table.get_string("name").c_str());
+		throw GameDataError("Worker %s has no menu icon", name().c_str());
 	}
 	i18n::Textdomain td("tribes");
 	std::unique_ptr<LuaTable> items_table;
@@ -76,8 +79,6 @@ WorkerDescr::WorkerDescr(const std::string& init_descname,
 			}
 		}
 	}
-
-	helptext_script_ = table.get_string("helptext_script");
 
 	// Read the walking animations
 	add_directional_animation(&walk_anims_, "walk");

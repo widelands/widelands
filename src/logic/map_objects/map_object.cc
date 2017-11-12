@@ -222,7 +222,8 @@ MapObjectDescr::MapObjectDescr(const MapObjectType init_type,
                                const std::string& init_name,
                                const std::string& init_descname,
                                const LuaTable& table)
-   : MapObjectDescr(init_type, init_name, init_descname) {
+   : MapObjectDescr(init_type, init_name, init_descname),
+	  helptext_script_(table.has_key("helptext_script") ? table.get_string("helptext_script") : "") {
 	if (table.has_key("animations")) {
 		std::unique_ptr<LuaTable> anims(table.get_table("animations"));
 		for (const std::string& animation : anims->keys<std::string>()) {

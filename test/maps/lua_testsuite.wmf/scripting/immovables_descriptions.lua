@@ -35,13 +35,13 @@ function test_descr:test_immovable_species()
    assert_equal("Alder", egbase:get_immovable_description("alder_summer_old").species)
 end
 
-function test_descr:test_immovable_build_cost()
-   local build_cost = egbase:get_immovable_description(
-      "atlanteans_shipconstruction").build_cost
-   assert_equal(10, build_cost["planks"])
-   assert_equal(2, build_cost["log"])
-   assert_equal(4, build_cost["spidercloth"])
-   assert_equal(nil, build_cost["wine"])
+function test_descr:test_immovable_buildcost()
+   local buildcost = egbase:get_immovable_description(
+      "atlanteans_shipconstruction").buildcost
+   assert_equal(10, buildcost["planks"])
+   assert_equal(2, buildcost["log"])
+   assert_equal(4, buildcost["spidercloth"])
+   assert_equal(nil, buildcost["wine"])
 
    local total_cost = function(t)
       local cost = 0
@@ -50,7 +50,7 @@ function test_descr:test_immovable_build_cost()
       end
       return cost
    end
-   assert_equal(16, total_cost(build_cost))
+   assert_equal(16, total_cost(buildcost))
 end
 
 function test_descr:test_immovable_editor_category()
@@ -164,7 +164,7 @@ function test_descr:test_name()
    assert_equal("barbarians_coalmine", egbase:get_building_description("barbarians_coalmine").name)
 end
 
-function test_descr:test_build_cost()
+function test_descr:test_buildcost()
    local total_cost = function(t)
       local cost = 0
       for name, count in pairs(t) do
@@ -172,9 +172,9 @@ function test_descr:test_build_cost()
       end
       return cost
    end
-   assert_equal(2, total_cost(egbase:get_building_description("barbarians_sentry").build_cost))
-   assert_equal(20, total_cost(egbase:get_building_description("barbarians_fortress").build_cost))
-   assert_equal(0, total_cost(egbase:get_building_description("barbarians_citadel").build_cost))
+   assert_equal(2, total_cost(egbase:get_building_description("barbarians_sentry").buildcost))
+   assert_equal(20, total_cost(egbase:get_building_description("barbarians_fortress").buildcost))
+   assert_equal(0, total_cost(egbase:get_building_description("barbarians_citadel").buildcost))
 end
 
 function test_descr:test_buildable()

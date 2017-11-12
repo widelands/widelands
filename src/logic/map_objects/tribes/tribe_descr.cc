@@ -178,9 +178,9 @@ TribeDescr::TribeDescr(const LuaTable& table, const TribeBasicInfo& info, const 
 				}
 
 				// Register construction materials
-				for (const auto& build_cost : get_building_descr(index)->buildcost()) {
-					if (!is_construction_material(build_cost.first)) {
-						construction_materials_.insert(build_cost.first);
+				for (const auto& buildcost : get_building_descr(index)->buildcost()) {
+					if (!is_construction_material(buildcost.first)) {
+						construction_materials_.insert(buildcost.first);
 					}
 				}
 				for (const auto& enhancement_cost : get_building_descr(index)->enhancement_cost()) {
