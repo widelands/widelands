@@ -36,7 +36,7 @@ tribes:new_worker_type {
    programs = {
       buildship = {
          "walk object-or-coords",
-         "plant tribe:frisians_shipconstruction unless object",
+         "plant attrib:shipconstruction unless object",
          "animation work 500",
          "construct",
          "animation work 5000",

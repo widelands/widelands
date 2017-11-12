@@ -1325,6 +1325,7 @@ const PropertyType<LuaTribeDescription> LuaTribeDescription::Properties[] = {
    PROP_RO(LuaTribeDescription, descname),
    PROP_RO(LuaTribeDescription, geologist),
    PROP_RO(LuaTribeDescription, headquarters),
+	PROP_RO(LuaTribeDescription, immovables),
    PROP_RO(LuaTribeDescription, name),
    PROP_RO(LuaTribeDescription, port),
    PROP_RO(LuaTribeDescription, ship),
@@ -1424,6 +1425,23 @@ int LuaTribeDescription::get_geologist(lua_State* L) {
 
 int LuaTribeDescription::get_headquarters(lua_State* L) {
 	lua_pushstring(L, get_egbase(L).tribes().get_building_descr(get()->headquarters())->name());
+	return 1;
+}
+
+/* RST
+   .. attribute:: immovables
+
+      (RO) an array of :class:`LuaImmovableDescription` with all the immovables that the tribe can use.
+*/
+int LuaTribeDescription::get_immovables(lua_State* L) {
+	const TribeDescr& tribe = *get();
+	lua_newtable(L);
+	int counter = 0;
+	for (DescriptionIndex immovable : tribe.immovables()) {
+		lua_pushinteger(L, ++counter);
+		to_lua<LuaImmovableDescription>(L, new LuaImmovableDescription(tribe.get_immovable_descr(immovable)));
+		lua_settable(L, -3);
+	}
 	return 1;
 }
 
@@ -1571,6 +1589,7 @@ const MethodType<LuaMapObjectDescription> LuaMapObjectDescription::Methods[] = {
 };
 const PropertyType<LuaMapObjectDescription> LuaMapObjectDescription::Properties[] = {
    PROP_RO(LuaMapObjectDescription, descname),
+	PROP_RO(LuaMapObjectDescription, helptext_script),
    PROP_RO(LuaMapObjectDescription, icon_name),
    PROP_RO(LuaMapObjectDescription, name),
    PROP_RO(LuaMapObjectDescription, type_name),
@@ -1601,6 +1620,16 @@ void LuaMapObjectDescription::__unpersist(lua_State*) {
 
 int LuaMapObjectDescription::get_descname(lua_State* L) {
 	lua_pushstring(L, get()->descname());
+	return 1;
+}
+
+/* RST
+   .. attribute:: helptext_script
+
+         (RO) The path and filename to the helptext script. Can be empty.
+*/
+int LuaMapObjectDescription::get_helptext_script(lua_State* L) {
+	lua_pushstring(L, get()->helptext_script());
 	return 1;
 }
 
@@ -1737,7 +1766,7 @@ const MethodType<LuaImmovableDescription> LuaImmovableDescription::Methods[] = {
 };
 const PropertyType<LuaImmovableDescription> LuaImmovableDescription::Properties[] = {
    PROP_RO(LuaImmovableDescription, species),
-   PROP_RO(LuaImmovableDescription, build_cost),
+   PROP_RO(LuaImmovableDescription, buildcost),
    PROP_RO(LuaImmovableDescription, editor_category),
    PROP_RO(LuaImmovableDescription, terrain_affinity),
    PROP_RO(LuaImmovableDescription, owner_type),
@@ -1774,12 +1803,12 @@ int LuaImmovableDescription::get_species(lua_State* L) {
 }
 
 /* RST
-   .. attribute:: build_cost
+   .. attribute:: buildcost
 
          (RO) a table of ware-to-count pairs, describing the build cost for the
          immovable.
 */
-int LuaImmovableDescription::get_build_cost(lua_State* L) {
+int LuaImmovableDescription::get_buildcost(lua_State* L) {
 	return wares_or_workers_map_to_lua(L, get()->buildcost(), MapObjectType::WARE);
 }
 
@@ -1944,11 +1973,10 @@ const MethodType<LuaBuildingDescription> LuaBuildingDescription::Methods[] = {
    {nullptr, nullptr},
 };
 const PropertyType<LuaBuildingDescription> LuaBuildingDescription::Properties[] = {
-   PROP_RO(LuaBuildingDescription, build_cost),
+   PROP_RO(LuaBuildingDescription, buildcost),
    PROP_RO(LuaBuildingDescription, buildable),
    PROP_RO(LuaBuildingDescription, conquers),
    PROP_RO(LuaBuildingDescription, destructible),
-   PROP_RO(LuaBuildingDescription, helptext_script),
    PROP_RO(LuaBuildingDescription, enhanced),
    PROP_RO(LuaBuildingDescription, enhanced_from),
    PROP_RO(LuaBuildingDescription, enhancement_cost),
@@ -1983,11 +2011,11 @@ void LuaBuildingDescription::__unpersist(lua_State* L) {
  */
 
 /* RST
-   .. attribute:: build_cost
+   .. attribute:: buildcost
 
          (RO) a list of ware build cost for the building.
 */
-int LuaBuildingDescription::get_build_cost(lua_State* L) {
+int LuaBuildingDescription::get_buildcost(lua_State* L) {
 	return wares_or_workers_map_to_lua(L, get()->buildcost(), MapObjectType::WARE);
 }
 
@@ -2021,15 +2049,6 @@ int LuaBuildingDescription::get_destructible(lua_State* L) {
 	return 1;
 }
 
-/* RST
-   .. attribute:: helptext_script
-
-         (RO) The path and filename to the building's helptext script
-*/
-int LuaBuildingDescription::get_helptext_script(lua_State* L) {
-	lua_pushstring(L, get()->helptext_script());
-	return 1;
-}
 
 /* RST
    .. attribute:: enhanced
@@ -2813,7 +2832,6 @@ const MethodType<LuaWareDescription> LuaWareDescription::Methods[] = {
 };
 const PropertyType<LuaWareDescription> LuaWareDescription::Properties[] = {
    PROP_RO(LuaWareDescription, consumers),
-   PROP_RO(LuaWareDescription, helptext_script),
    PROP_RO(LuaWareDescription, producers),
    {nullptr, nullptr, nullptr},
 };
@@ -2852,16 +2870,6 @@ int LuaWareDescription::get_consumers(lua_State* L) {
 		   L, get_egbase(L).tribes().get_building_descr(building_index));
 		lua_rawset(L, -3);
 	}
-	return 1;
-}
-
-/* RST
-   .. attribute:: helptext_script
-
-         (RO) The path and filename to the ware's helptext script
-*/
-int LuaWareDescription::get_helptext_script(lua_State* L) {
-	lua_pushstring(L, get()->helptext_script());
 	return 1;
 }
 
@@ -2924,7 +2932,6 @@ const PropertyType<LuaWorkerDescription> LuaWorkerDescription::Properties[] = {
    PROP_RO(LuaWorkerDescription, becomes),
    PROP_RO(LuaWorkerDescription, buildcost),
    PROP_RO(LuaWorkerDescription, employers),
-   PROP_RO(LuaWorkerDescription, helptext_script),
    PROP_RO(LuaWorkerDescription, is_buildable),
    PROP_RO(LuaWorkerDescription, needed_experience),
    {nullptr, nullptr, nullptr},
@@ -3001,15 +3008,6 @@ int LuaWorkerDescription::get_employers(lua_State* L) {
 	return 1;
 }
 
-/* RST
-   .. attribute:: helptext_script
-
-         (RO) The path and filename to the worker's helptext script
-*/
-int LuaWorkerDescription::get_helptext_script(lua_State* L) {
-	lua_pushstring(L, get()->helptext_script());
-	return 1;
-}
 
 /* RST
    .. attribute:: is_buildable
@@ -4114,7 +4112,7 @@ int LuaFlag::set_wares(lua_State* L) {
 		if (sp.second > 0) {
 			c_wares = count_wares_on_flag_(*f, tribes);
 			assert(c_wares.count(index) == 1);
-			assert(c_wares[index] = sp.second);
+			assert(c_wares.at(index) == sp.second);
 		}
 #endif
 	}

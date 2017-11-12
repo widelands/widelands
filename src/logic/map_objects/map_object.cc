@@ -215,14 +215,17 @@ MapObjectDescr IMPLEMENTATION
 */
 MapObjectDescr::MapObjectDescr(const MapObjectType init_type,
                                const std::string& init_name,
-                               const std::string& init_descname)
-   : type_(init_type), name_(init_name), descname_(init_descname) {
+                               const std::string& init_descname,
+										 const std::string& init_helptext_script)
+   : type_(init_type), name_(init_name), descname_(init_descname),
+	  helptext_script_(init_helptext_script) {
 }
 MapObjectDescr::MapObjectDescr(const MapObjectType init_type,
                                const std::string& init_name,
                                const std::string& init_descname,
                                const LuaTable& table)
-   : MapObjectDescr(init_type, init_name, init_descname) {
+   : MapObjectDescr(init_type, init_name, init_descname, table.has_key("helptext_script") ? table.get_string("helptext_script") : "")
+	   {
 	if (table.has_key("animations")) {
 		std::unique_ptr<LuaTable> anims(table.get_table("animations"));
 		for (const std::string& animation : anims->keys<std::string>()) {

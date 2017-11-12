@@ -1,5 +1,3 @@
--- TODO(GunChleoc): This is unused
-
 function immovable_helptext(tribe)
    local helptext = {
       default = ""

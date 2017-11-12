@@ -82,10 +82,6 @@ public:
 			default_target_quantity_ = 1;
 	}
 
-	std::string helptext_script() const {
-		return helptext_script_;
-	}
-
 	const DirAnimations& get_walk_anims() const {
 		return walk_anims_;
 	}
@@ -121,7 +117,6 @@ public:
 
 protected:
 	Quantity default_target_quantity_;
-	std::string helptext_script_;  // The path and filename to the worker's helptext script
 	DirAnimations walk_anims_;
 	DirAnimations walkload_anims_;
 	bool buildable_;

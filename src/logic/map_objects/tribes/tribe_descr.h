@@ -69,6 +69,7 @@ public:
 	const std::vector<DescriptionIndex>& buildings() const;
 	const std::set<DescriptionIndex>& wares() const;
 	const std::set<DescriptionIndex>& workers() const;
+	const std::set<DescriptionIndex>& immovables() const;
 
 	bool has_building(const DescriptionIndex& index) const;
 	bool has_ware(const DescriptionIndex& index) const;

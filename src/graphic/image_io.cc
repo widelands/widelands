@@ -96,7 +96,7 @@ bool save_to_png(Texture* texture, StreamWrite* sw, ColorType color_type) {
 	}
 
 	// Set jump for error
-	if (setjmp(png_jmpbuf(png_ptr))) {
+	if (setjmp(png_jmpbuf(png_ptr))) {  // NOLINT
 		png_destroy_write_struct(&png_ptr, &info_ptr);
 		throw wexception("save_to_png: Error writing PNG!");
 	}

@@ -6,7 +6,8 @@ tribes:new_immovable_type {
    -- TRANSLATORS: This is an immovable name used in lists of immovables
    descname = pgettext("immovable", "Dry Pond"),
    size = "small",
-   attributes = { "pond_dry", "pond" },
+   helptext_script = dirname .. "helptexts.lua",
+   attributes = { "pond_dry" },
    programs = {
       program = {
          "animate=idle 400000",

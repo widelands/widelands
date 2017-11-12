@@ -34,7 +34,7 @@ tribes:new_worker_type {
          "findspace size:any radius:4",
          "walk coords",
          "animation dig 8000",
-         "plant tribe:pond_dry",
+         "plant attrib:pond_dry",
          "return"
       }
    },

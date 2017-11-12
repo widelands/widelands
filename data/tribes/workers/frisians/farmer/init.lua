@@ -44,7 +44,7 @@ tribes:new_worker_type {
          "findspace size:any radius:2 space",
          "walk coords",
          "animation planting 4000",
-         "plant tribe:barleyfield_tiny",
+         "plant attrib:seed_barley",
          "animation planting 4000",
          "return"
       },

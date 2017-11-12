@@ -108,9 +108,6 @@ public:
 		return return_enhanced_;
 	}
 
-	std::string helptext_script() const {
-		return helptext_script_;
-	}
 	int32_t get_size() const {
 		return size_;
 	}
@@ -179,7 +176,6 @@ private:
 	Buildcost return_dismantle_;   // Returned wares on dismantle
 	Buildcost enhance_cost_;       // cost for enhancing
 	Buildcost return_enhanced_;    // Returned ware for dismantling an enhanced building
-	std::string helptext_script_;  // The path and filename to the building's helptext script
 	int32_t size_;                 // size of the building
 	bool mine_;
 	bool port_;
