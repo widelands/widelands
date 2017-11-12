@@ -516,7 +516,7 @@ void FullscreenMenuOptions::update_language_stats(bool include_system_lang) {
 				percent = floor(100.f * s.get_int("translated") / total);
 				if (percent == 100) {
 					message =
-							/** TRANSLATORS: %s = language name */
+					   /** TRANSLATORS: %s = language name */
 					   (boost::format(_("The translation into %s is complete.")) % entry.descname).str();
 				} else {
 					/** TRANSLATORS: %1% = language name, %2% = percentage */

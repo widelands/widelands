@@ -230,7 +230,7 @@ public:
 	virtual uint16_t width() const = 0;
 	virtual uint16_t height() const = 0;
 	virtual uint16_t hotspot_y() const = 0;
-	virtual UI::RenderedText* render(TextureCache* texture_cache) = 0;
+	virtual std::shared_ptr<UI::RenderedText> render(TextureCache* texture_cache) = 0;
 
 	// TODO(GunChleoc): Remove this function once conversion is finished and well tested.
 	virtual std::string debug_info() const = 0;
@@ -527,7 +527,7 @@ public:
 		return rv;
 	}
 
-	UI::RenderedText* render(TextureCache* texture_cache) override;
+	std::shared_ptr<UI::RenderedText> render(TextureCache* texture_cache) override;
 
 protected:
 	uint16_t w_, h_;
@@ -550,11 +550,11 @@ uint16_t TextNode::hotspot_y() const {
 	return font_.ascent(nodestyle_.font_style);
 }
 
-UI::RenderedText* TextNode::render(TextureCache* texture_cache) {
+std::shared_ptr<UI::RenderedText> TextNode::render(TextureCache* texture_cache) {
 	auto rendered_image =
 	   font_.render(txt_, nodestyle_.font_color, nodestyle_.font_style, texture_cache);
 	assert(rendered_image.get() != nullptr);
-	UI::RenderedText* rendered_text = new UI::RenderedText();
+	std::shared_ptr<UI::RenderedText> rendered_text(new UI::RenderedText());
 	rendered_text->rects.push_back(
 	   std::unique_ptr<UI::RenderedRect>(new UI::RenderedRect(rendered_image)));
 	return rendered_text;
@@ -579,7 +579,7 @@ public:
 		return "ft";
 	}
 
-	UI::RenderedText* render(TextureCache*) override;
+	std::shared_ptr<UI::RenderedText> render(TextureCache*) override;
 
 	bool is_expanding() const override {
 		return is_expanding_;
@@ -591,8 +591,8 @@ public:
 private:
 	bool is_expanding_;
 };
-UI::RenderedText* FillingTextNode::render(TextureCache* texture_cache) {
-	UI::RenderedText* rendered_text = new UI::RenderedText();
+std::shared_ptr<UI::RenderedText> FillingTextNode::render(TextureCache* texture_cache) {
+	std::shared_ptr<UI::RenderedText> rendered_text(new UI::RenderedText());
 	const std::string hash =
 	   (boost::format("rt:fill:%s:%s:%i:%i:%i:%s") % txt_ % nodestyle_.font_color.hex_value() %
 	    nodestyle_.font_style % width() % height() % (is_expanding_ ? "e" : "f"))
@@ -633,9 +633,9 @@ public:
 		return "wsp";
 	}
 
-	UI::RenderedText* render(TextureCache* texture_cache) override {
+	std::shared_ptr<UI::RenderedText> render(TextureCache* texture_cache) override {
 		if (show_spaces_) {
-			UI::RenderedText* rendered_text = new UI::RenderedText();
+			std::shared_ptr<UI::RenderedText> rendered_text(new UI::RenderedText());
 			const std::string hash = (boost::format("rt:wsp:%i:%i") % width() % height()).str();
 			std::shared_ptr<const Image> rendered_image = texture_cache->get(hash);
 			if (rendered_image.get() == nullptr) {
@@ -681,7 +681,7 @@ public:
 	uint16_t hotspot_y() const override {
 		return 0;
 	}
-	UI::RenderedText* render(TextureCache* /* texture_cache */) override {
+	std::shared_ptr<UI::RenderedText> render(TextureCache* /* texture_cache */) override {
 		NEVER_HERE();
 	}
 	bool is_non_mandatory_space() const override {
@@ -712,8 +712,8 @@ public:
 	uint16_t hotspot_y() const override {
 		return h_;
 	}
-	UI::RenderedText* render(TextureCache* texture_cache) override {
-		UI::RenderedText* rendered_text = new UI::RenderedText();
+	std::shared_ptr<UI::RenderedText> render(TextureCache* texture_cache) override {
+		std::shared_ptr<UI::RenderedText> rendered_text(new UI::RenderedText());
 		const std::string hash = (boost::format("rt:sp:%s:%i:%i:%s") % filename_ % width() %
 		                          height() % (is_expanding_ ? "e" : "f"))
 		                            .str();
@@ -802,8 +802,8 @@ public:
 		return desired_width_;
 	}
 
-	UI::RenderedText* render(TextureCache* texture_cache) override {
-		UI::RenderedText* rendered_text = new UI::RenderedText();
+	std::shared_ptr<UI::RenderedText> render(TextureCache* texture_cache) override {
+		std::shared_ptr<UI::RenderedText> rendered_text(new UI::RenderedText());
 		// Preserve padding
 		rendered_text->rects.push_back(std::unique_ptr<UI::RenderedRect>(
 		   new UI::RenderedRect(Recti(0, 0, width(), height()), nullptr)));
@@ -912,7 +912,7 @@ public:
 	uint16_t hotspot_y() const override {
 		return scale_ * image_->height();
 	}
-	UI::RenderedText* render(TextureCache* texture_cache) override;
+	std::shared_ptr<UI::RenderedText> render(TextureCache* texture_cache) override;
 
 private:
 	const Image* image_;
@@ -922,8 +922,8 @@ private:
 	bool use_playercolor_;
 };
 
-UI::RenderedText* ImgRenderNode::render(TextureCache* texture_cache) {
-	UI::RenderedText* rendered_text = new UI::RenderedText();
+std::shared_ptr<UI::RenderedText> ImgRenderNode::render(TextureCache* texture_cache) {
+	std::shared_ptr<UI::RenderedText> rendered_text(new UI::RenderedText());
 
 	if (scale_ == 1.0) {
 		// Image can be used as is, and has already been cached in g_gr->images()
