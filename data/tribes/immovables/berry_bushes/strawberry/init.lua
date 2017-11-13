@@ -1,24 +1,25 @@
 dirname = path.dirname(__file__)
 
 terrain_affinity = {
-   preferred_temperature = 110,
-   preferred_humidity = 0.7,
-   preferred_fertility = 0.85,
-   pickiness = 0.8,
+   preferred_temperature = 120, -- Temperature is in arbitrary units.
+   preferred_humidity = 0.9,    -- In percent (1 being very wet).
+   preferred_fertility = 0.65,  -- In percent (1 being very fertile).
+   pickiness = 0.4,             -- Lower means it is less picky, i.e. it can deal better.
 }
 
 tribes:new_immovable_type {
    msgctxt = "immovable",
-   name = "berry_bush_currant_tiny",
-   descname = _ "Currant Bush (Tiny)",
+   name = "berry_bush_strawberry_tiny",
+   descname = _ "Strawberry Bush (Tiny)",
    size = "small",
    helptext_script = dirname .. "helptexts.lua",
    attributes = { "seed_berrybush" },
    terrain_affinity = terrain_affinity,
    programs = {
       program = {
-         "animate=idle 22000",
-         "transform=berry_bush_currant_small",
+         "animate=idle 16000",
+         "remove=25",
+         "grow=berry_bush_strawberry_small",
       },
    },
    animations = {
@@ -31,16 +32,17 @@ tribes:new_immovable_type {
 
 tribes:new_immovable_type {
    msgctxt = "immovable",
-   name = "berry_bush_currant_small",
-   descname = _ "Currant Bush (Small)",
+   name = "berry_bush_strawberry_small",
+   descname = _ "Strawberry Bush (Small)",
    size = "small",
    helptext_script = dirname .. "helptexts.lua",
    attributes = {},
    terrain_affinity = terrain_affinity,
    programs = {
       program = {
-         "animate=idle 28000",
-         "transform=berry_bush_currant_medium",
+         "animate=idle 22000",
+         "remove=10",
+         "grow=berry_bush_strawberry_medium",
       },
    },
    animations = {
@@ -53,16 +55,17 @@ tribes:new_immovable_type {
 
 tribes:new_immovable_type {
    msgctxt = "immovable",
-   name = "berry_bush_currant_medium",
-   descname = _ "Currant Bush (Medium)",
+   name = "berry_bush_strawberry_medium",
+   descname = _ "Strawberry Bush (Medium)",
    size = "small",
    helptext_script = dirname .. "helptexts.lua",
    attributes = { "flowering" },
    terrain_affinity = terrain_affinity,
    programs = {
       program = {
-         "animate=idle 40000",
-         "transform=berry_bush_currant_ripe",
+         "animate=idle 50000",
+         "remove=15",
+         "grow=berry_bush_strawberry_ripe",
       },
    },
    animations = {
@@ -75,15 +78,15 @@ tribes:new_immovable_type {
 
 tribes:new_immovable_type {
    msgctxt = "immovable",
-   name = "berry_bush_currant_ripe",
-   descname = _ "Currant Bush (Ripe)",
+   name = "berry_bush_strawberry_ripe",
+   descname = _ "Strawberry Bush (Ripe)",
    size = "small",
    helptext_script = dirname .. "helptexts.lua",
    attributes = { "ripe_bush" },
    terrain_affinity = terrain_affinity,
    programs = {
       program = {
-         "animate=idle 500000",
+         "animate=idle 450000",
          "remove=",
       },
       harvest = {

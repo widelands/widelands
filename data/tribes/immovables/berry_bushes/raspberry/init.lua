@@ -1,10 +1,10 @@
 dirname = path.dirname(__file__)
 
 terrain_affinity = {
-   preferred_temperature = 85,
-   preferred_humidity = 0.65,
-   preferred_fertility = 0.75,
-   pickiness = 0.65,
+   preferred_temperature = 75,
+   preferred_humidity = 0.75,
+   preferred_fertility = 0.65,
+   pickiness = 0.7,
 }
 
 tribes:new_immovable_type {
@@ -17,8 +17,9 @@ tribes:new_immovable_type {
    terrain_affinity = terrain_affinity,
    programs = {
       program = {
-         "animate=idle 22000",
-         "transform=berry_bush_raspberry_small",
+         "animate=idle 20000",
+         "remove=60",
+         "grow=berry_bush_raspberry_small",
       },
    },
    animations = {
@@ -39,8 +40,9 @@ tribes:new_immovable_type {
    terrain_affinity = terrain_affinity,
    programs = {
       program = {
-         "animate=idle 28000",
-         "transform=berry_bush_raspberry_medium",
+         "animate=idle 20000",
+         "remove=40",
+         "grow=berry_bush_raspberry_medium",
       },
    },
    animations = {
@@ -62,7 +64,8 @@ tribes:new_immovable_type {
    programs = {
       program = {
          "animate=idle 40000",
-         "transform=berry_bush_raspberry_ripe",
+         "remove=20",
+         "grow=berry_bush_raspberry_ripe",
       },
    },
    animations = {
@@ -83,7 +86,7 @@ tribes:new_immovable_type {
    terrain_affinity = terrain_affinity,
    programs = {
       program = {
-         "animate=idle 500000",
+         "animate=idle 400000",
          "remove=",
       },
       harvest = {

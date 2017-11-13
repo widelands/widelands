@@ -117,7 +117,7 @@ function expand_south ()
       elseif count_military_buildings_p1 () > milbld then --it IS possible to destroy a military building and build a new one elsewhere
          choice = "military"
       else
-         if wh:get_wares ("log") >= 30 and
+         if (wh:get_wares ("log") >= 30 and
             wh:get_wares ("granite") >= 40 and
             wh:get_wares ("water") >= 150 and
             wh:get_wares ("fish") >= 30 and
@@ -128,7 +128,7 @@ function expand_south ()
             wh:get_wares ("gold") >= 10 and
             wh:get_wares ("iron_ore") >= 40 and
             wh:get_wares ("gold_ore") >= 20 and
-            wh:get_wares ("beer") >= 30 
+            wh:get_wares ("beer") >= 30 ) or wh:get_wares ("granite") >= 10
          then
             choice = "yes"
          end
@@ -138,6 +138,7 @@ function expand_south ()
    p2:allow_buildings ("all")
    p3:allow_buildings ("all")
    done_exp = true
+   run (victory)
    if choice == "yes" then
       supply_yes ()
    else
@@ -186,14 +187,13 @@ function mining_issues ()
    set_objective_done (o)
    campaign_message_box (aqua_farm_2)
    p1:allow_buildings {"frisians_armour_smithy_small", "frisians_seamstress_master"}
-   
    done_mine = true
 end
 
 function supply_yes ()
    local wh = p1:get_buildings ("frisians_warehouse_empire") [1]
    local hq = p2:get_buildings ("empire_headquarters") [1]
-   for name,nb in ipairs (wh:get_wares ("all")) do
+   for name,nb in ipairs (wh:get_wares ("all")) do --FIXME get_wares("all") returns {}
       if p2.tribe:has_ware (name) then 
          wh:set_wares (name, 0)
          hq:set_wares (name, hq:get_wares (name) + nb)
@@ -254,12 +254,11 @@ function mission_thread()
    
    campaign_message_box (intro_2)
    local o = add_campaign_objective (obj_new_home)
-   while not check_for_buildings (p1, {frisians_woodcutters_house = 1, frisians_foresters_house = 1, frisians_well = 1, frisians_reed_farm = 1, frisians_quarry = 1, frisians_brick_burners_house = 1, frisians_claypit = 1, frisians_charcoal_kiln = 1}) do sleep (4273) end
+   --while not check_for_buildings (p1, {frisians_woodcutters_house = 1, frisians_foresters_house = 1, frisians_well = 1, frisians_reed_farm = 1, frisians_quarry = 1, frisians_brick_burners_house = 1, frisians_claypit = 1, frisians_charcoal_kiln = 1}) do sleep (4273) end
    set_objective_done (o)
    
    run (expand_south)
    run (mining_issues)
-   run (victory)
 
 end
 

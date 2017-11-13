@@ -16,10 +16,10 @@ p1:forbid_buildings {
 
 port1 = p1:place_building ("frisians_port", map.player_slots [1].starting_field, false, true)
 port1:set_wares {
-   log = 40,
-   brick = 50,
-   granite = 40,
-   thatch_reed = 20,
+   log = 400,
+   brick = 500,
+   granite = 400,
+   thatch_reed = 200,
    clay = 10,
    water = 5,
    coal = 30,
