@@ -629,7 +629,7 @@ void InternetGaming::handle_packet(RecvPacket& packet) {
 			// Client received an ERROR message - seems something went wrong
 			std::string subcmd(packet.string());
 			std::string reason(packet.string());
-			std::string message = "";
+			std::string message;
 
 			if (subcmd == IGPCMD_CHAT) {
 				// Something went wrong with the chat message the user sent.
@@ -873,16 +873,14 @@ void InternetGaming::format_and_add_chat(const std::string& from,
                                          const std::string& to,
                                          bool system,
                                          const std::string& msg) {
-	ChatMessage c;
+	ChatMessage c(msg);
 	if (!system && from.empty()) {
 		std::string unkown_string = (boost::format("<%s>") % _("unknown")).str();
 		c.sender = unkown_string;
 	} else {
 		c.sender = from;
 	}
-	c.time = time(nullptr);
 	c.playern = system ? -1 : to.size() ? 3 : 7;
-	c.msg = msg;
 	c.recipient = to;
 
 	receive(c);

@@ -1,0 +1,14 @@
+Defining the World
+==================
+
+The world is bootstrapped with the following scripts:
+
+* ``data/world/init.lua``: This file loads all the scripts that define the
+  world. So, if you add a new unit to the world, it needs to be
+  listed in this file.
+* ``data/world/map_generation.lua``: This file is used by the random map generator.
+
+.. toctree::
+   :maxdepth: 3
+
+REPLACE_ME

@@ -45,8 +45,7 @@ Statebox::Statebox(Panel* const parent,
    : Panel(parent, p.x, p.y, kStateboxSize, kStateboxSize, tooltip_text),
      flags_(Is_Enabled),
      pic_graphics_(pic),
-     rendered_text_(nullptr),
-     label_text_("") {
+     rendered_text_(nullptr) {
 	uint16_t w = pic->width();
 	uint16_t h = pic->height();
 	set_desired_size(w, h);
@@ -157,8 +156,8 @@ void Statebox::draw(RenderTarget& dst) {
 		}
 
 		dst.blitrect(
-		   image_anchor, pic_graphics_,
-		   Recti(Vector2i(flags_ & Is_Checked ? kStateboxSize : 0, 0), kStateboxSize, kStateboxSize));
+		   image_anchor, pic_graphics_, Recti(Vector2i((flags_ & Is_Checked) ? kStateboxSize : 0, 0),
+		                                      kStateboxSize, kStateboxSize));
 
 		if (flags_ & Is_Highlighted)
 			dst.draw_rect(

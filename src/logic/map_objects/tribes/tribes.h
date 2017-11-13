@@ -82,6 +82,9 @@ public:
 	/// Adds this building type to the tribe description.
 	void add_warehouse_type(const LuaTable& table, const EditorGameBase& egbase);
 
+	/// Adds this building type to the tribe description.
+	void add_market_type(const LuaTable& table, const EditorGameBase& egbase);
+
 	/// Adds this immovable type to the tribe description.
 	void add_immovable_type(const LuaTable& table);
 

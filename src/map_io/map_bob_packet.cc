@@ -75,13 +75,13 @@ void MapBobPacket::read(FileSystem& fs,
 	FileRead fr;
 	fr.open(fs, "binary/bob");
 
-	Map& map = egbase.map();
-	map.recalc_whole_map(egbase.world());  //  for movecaps checks in ReadBob
+	Map* map = egbase.mutable_map();
+	map->recalc_whole_map(egbase.world());  //  for movecaps checks in ReadBob
 	try {
 		uint16_t const packet_version = fr.unsigned_16();
 		if (packet_version == kCurrentPacketVersion)
-			for (uint16_t y = 0; y < map.get_height(); ++y) {
-				for (uint16_t x = 0; x < map.get_width(); ++x) {
+			for (uint16_t y = 0; y < map->get_height(); ++y) {
+				for (uint16_t x = 0; x < map->get_width(); ++x) {
 					uint32_t const nr_bobs = fr.unsigned_32();
 					for (uint32_t i = 0; i < nr_bobs; ++i)
 						read_bob(fr, egbase, mol, Coords(x, y), lookup_table);

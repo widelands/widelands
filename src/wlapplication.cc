@@ -61,6 +61,7 @@
 #include "io/filesystem/disk_filesystem.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "logic/ai_dna_handler.h"
+#include "logic/filesystem_constants.h"
 #include "logic/game.h"
 #include "logic/game_data_error.h"
 #include "logic/game_settings.h"
@@ -94,16 +95,7 @@
 #include "wui/interactive_player.h"
 #include "wui/interactive_spectator.h"
 
-#define MINIMUM_DISK_SPACE 250000000lu
-#define SCREENSHOT_DIR "screenshots"
-
 namespace {
-
-// The time in seconds for how long old replays/syncstreams should be kept
-// around, in seconds. Right now this is 4 weeks.
-constexpr double kReplayKeepAroundTime = 4 * 7 * 24 * 60 * 60;
-// Similary we delete AI files older than one week
-constexpr double kAIFilesKeepAroundTime = 7 * 24 * 60 * 60;
 
 /**
  * Shut the hardware down: stop graphics mode, stop sound handler
@@ -413,6 +405,7 @@ void WLApplication::run() {
 		replay();
 	} else if (game_type_ == LOADGAME) {
 		Widelands::Game game;
+		game.set_ai_training_mode(g_options.pull_section("global").get_bool("ai_training", false));
 		try {
 			game.run_load_game(filename_, script_to_run_);
 		} catch (const Widelands::GameDataError& e) {
@@ -504,15 +497,15 @@ bool WLApplication::handle_key(bool down, const SDL_Keycode& keycode, int modifi
 		case SDLK_F11:
 			// Takes a screenshot.
 			if (ctrl) {
-				if (g_fs->disk_space() < MINIMUM_DISK_SPACE) {
-					log("Omitting screenshot because diskspace is lower than %luMB\n",
-					    MINIMUM_DISK_SPACE / (1000 * 1000));
+				if (g_fs->disk_space() < kMinimumDiskSpace) {
+					log("Omitting screenshot because diskspace is lower than %lluMB\n",
+					    kMinimumDiskSpace / (1000 * 1000));
 					break;
 				}
-				g_fs->ensure_directory_exists(SCREENSHOT_DIR);
+				g_fs->ensure_directory_exists(kScreenshotsDir);
 				for (uint32_t nr = 0; nr < 10000; ++nr) {
 					const std::string filename =
-					   (boost::format(SCREENSHOT_DIR "/shot%04u.png") % nr).str();
+					   (boost::format("%s/shot%04u.png") % kScreenshotsDir % nr).str();
 					if (g_fs->file_exists(filename)) {
 						continue;
 					}
@@ -720,7 +713,7 @@ void WLApplication::refresh_graphics() {
 bool WLApplication::init_settings() {
 
 	// Read in the configuration file
-	g_options.read("config", "global");
+	g_options.read(kConfigFile.c_str(), "global");
 	Section& s = g_options.pull_section("global");
 
 	// Then parse the commandline - overwrites conffile settings
@@ -733,6 +726,7 @@ bool WLApplication::init_settings() {
 	// Profile needs support for a Syntax definition to solve this in a
 	// sensible way
 	s.get_bool("fullscreen");
+	s.get_bool("animate_map_panning");
 	s.get_int("xres");
 	s.get_int("yres");
 	s.get_int("border_snap_distance");
@@ -790,7 +784,7 @@ void WLApplication::shutdown_settings() {
 	i18n::release_textdomain();
 
 	try {  //  overwrite the old config file
-		g_options.write("config", true);
+		g_options.write(kConfigFile.c_str(), true);
 	} catch (const std::exception& e) {
 		log("WARNING: could not save configuration: %s\n", e.what());
 	} catch (...) {
@@ -953,6 +947,21 @@ void WLApplication::handle_commandline_parameters() {
 		if (*script_to_run_.rbegin() == '/')
 			script_to_run_.erase(script_to_run_.size() - 1);
 		commandline_.erase("script");
+	}
+
+	// Following is used for training of AI
+	if (commandline_.count("ai_training")) {
+		g_options.pull_section("global").create_val("ai_training", "true");
+		commandline_.erase("ai_training");
+	} else {
+		g_options.pull_section("global").create_val("ai_training", "false");
+	}
+
+	if (commandline_.count("auto_speed")) {
+		g_options.pull_section("global").create_val("auto_speed", "true");
+		commandline_.erase("auto_speed");
+	} else {
+		g_options.pull_section("global").create_val("auto_speed", "false");
 	}
 
 	// If it hasn't been handled yet it's probably an attempt to
@@ -1211,6 +1220,8 @@ bool WLApplication::new_game() {
 
 	Widelands::Game game;
 
+	game.set_ai_training_mode(g_options.pull_section("global").get_bool("ai_training", false));
+
 	if (code == FullscreenMenuBase::MenuTarget::kScenarioGame) {  // scenario
 		try {
 			game.run_splayer_scenario_direct(sp.get_map().c_str(), "");
@@ -1261,6 +1272,7 @@ bool WLApplication::load_game() {
 	Widelands::Game game;
 	std::string filename;
 
+	game.set_ai_training_mode(g_options.pull_section("global").get_bool("ai_training", false));
 	SinglePlayerGameSettingsProvider sp;
 	FullscreenMenuLoadGame ssg(game, &sp, nullptr);
 
@@ -1371,8 +1383,7 @@ void WLApplication::emergency_save(Widelands::Game& game) {
 			SaveHandler& save_handler = game.save_handler();
 			std::string error;
 			if (!save_handler.save_game(
-			       game, save_handler.create_file_name(save_handler.get_base_dir(), timestring()),
-			       &error)) {
+			       game, save_handler.create_file_name(kSaveDir, timestring()), &error)) {
 				log("Emergency save failed: %s\n", error.c_str());
 			}
 		} catch (...) {
@@ -1388,8 +1399,10 @@ void WLApplication::emergency_save(Widelands::Game& game) {
  */
 void WLApplication::cleanup_replays() {
 	for (const std::string& filename :
-	     filter(g_fs->list_directory(REPLAY_DIR),
-	            [](const std::string& fn) { return boost::ends_with(fn, REPLAY_SUFFIX ".wss"); })) {
+	     filter(g_fs->list_directory(kReplayDir), [](const std::string& fn) {
+		     return boost::ends_with(
+		        fn, (boost::format("%s%s") % kReplayExtension % kSyncstreamExtension).str());
+		  })) {
 		if (is_autogenerated_and_expired(filename)) {
 			log("Delete syncstream %s\n", filename.c_str());
 			g_fs->fs_unlink(filename);
@@ -1397,12 +1410,12 @@ void WLApplication::cleanup_replays() {
 	}
 
 	for (const std::string& filename :
-	     filter(g_fs->list_directory(REPLAY_DIR),
-	            [](const std::string& fn) { return boost::ends_with(fn, REPLAY_SUFFIX); })) {
+	     filter(g_fs->list_directory(kReplayDir),
+	            [](const std::string& fn) { return boost::ends_with(fn, kReplayExtension); })) {
 		if (is_autogenerated_and_expired(filename)) {
 			log("Deleting replay %s\n", filename.c_str());
 			g_fs->fs_unlink(filename);
-			g_fs->fs_unlink(filename + WLGF_SUFFIX);
+			g_fs->fs_unlink(filename + kSavegameExtension);
 		}
 	}
 }
@@ -1412,13 +1425,9 @@ void WLApplication::cleanup_replays() {
  */
 void WLApplication::cleanup_ai_files() {
 	for (const std::string& filename :
-	     filter(g_fs->list_directory(
-	               Widelands::AiDnaHandler::get_ai_dir()),  // NOCOM repace with common defineds
-	            // used by both locations (here and ai_dna_handler)
-	            [](const std::string& fn) {
-		            return boost::ends_with(fn, Widelands::AiDnaHandler::get_ai_suffix()) ||
-		                   boost::contains(fn, "ai_player");
-		         })) {
+	     filter(g_fs->list_directory(kAiDir), [](const std::string& fn) {
+		     return boost::ends_with(fn, kAiExtension) || boost::contains(fn, "ai_player");
+		  })) {
 		if (is_autogenerated_and_expired(filename, kAIFilesKeepAroundTime)) {
 			log("Deleting generated ai file: %s\n", filename.c_str());
 			g_fs->fs_unlink(filename);

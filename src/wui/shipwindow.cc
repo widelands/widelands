@@ -47,13 +47,117 @@ static const char pic_scout_e[] = "images/wui/ship/ship_scout_e.png";
 static const char pic_scout_sw[] = "images/wui/ship/ship_scout_sw.png";
 static const char pic_scout_se[] = "images/wui/ship/ship_scout_se.png";
 static const char pic_construct_port[] = "images/wui/editor/fsel_editor_set_port_space.png";
+
+constexpr int kPadding = 5;
 }  // namespace
 
 using namespace Widelands;
 
 ShipWindow::ShipWindow(InteractiveGameBase& igb, UniqueWindow::Registry& reg, Ship& ship)
-   : UniqueWindow(&igb, "shipwindow", &reg, 0, 0, ship.get_shipname()), igbase_(igb), ship_(ship) {
-	init(false);
+   : UniqueWindow(&igb, "shipwindow", &reg, 0, 0, ship.get_shipname()),
+     igbase_(igb),
+     ship_(ship),
+     vbox_(this, 0, 0, UI::Box::Vertical),
+     navigation_box_(&vbox_, 0, 0, UI::Box::Vertical),
+     navigation_box_height_(0) {
+	vbox_.set_inner_spacing(kPadding);
+	assert(ship_.get_owner());
+
+	display_ = new ItemWaresDisplay(&vbox_, *ship_.get_owner());
+	display_->set_capacity(ship_.descr().get_capacity());
+	vbox_.add(display_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
+
+	// Expedition buttons
+	UI::Box* exp_top = new UI::Box(&navigation_box_, 0, 0, UI::Box::Horizontal);
+	navigation_box_.add(exp_top, UI::Box::Resizing::kAlign, UI::Align::kCenter);
+	UI::Box* exp_mid = new UI::Box(&navigation_box_, 0, 0, UI::Box::Horizontal);
+	navigation_box_.add(exp_mid, UI::Box::Resizing::kAlign, UI::Align::kCenter);
+	UI::Box* exp_bot = new UI::Box(&navigation_box_, 0, 0, UI::Box::Horizontal);
+	navigation_box_.add(exp_bot, UI::Box::Resizing::kAlign, UI::Align::kCenter);
+
+	btn_scout_[WALK_NW - 1] =
+	   make_button(exp_top, "scnw", _("Scout towards the north west"), pic_scout_nw,
+	               boost::bind(&ShipWindow::act_scout_towards, this, WALK_NW));
+	exp_top->add(btn_scout_[WALK_NW - 1]);
+
+	btn_explore_island_cw_ = make_button(
+	   exp_top, "expcw", _("Explore the island’s coast clockwise"), pic_explore_cw,
+	   boost::bind(&ShipWindow::act_explore_island, this, IslandExploreDirection::kClockwise));
+	exp_top->add(btn_explore_island_cw_);
+
+	btn_scout_[WALK_NE - 1] =
+	   make_button(exp_top, "scne", _("Scout towards the north east"), pic_scout_ne,
+	               boost::bind(&ShipWindow::act_scout_towards, this, WALK_NE));
+	exp_top->add(btn_scout_[WALK_NE - 1]);
+
+	btn_scout_[WALK_W - 1] = make_button(exp_mid, "scw", _("Scout towards the west"), pic_scout_w,
+	                                     boost::bind(&ShipWindow::act_scout_towards, this, WALK_W));
+	exp_mid->add(btn_scout_[WALK_W - 1]);
+
+	btn_construct_port_ =
+	   make_button(exp_mid, "buildport", _("Construct a port at the current location"),
+	               pic_construct_port, boost::bind(&ShipWindow::act_construct_port, this));
+	exp_mid->add(btn_construct_port_);
+
+	btn_scout_[WALK_E - 1] = make_button(exp_mid, "sce", _("Scout towards the east"), pic_scout_e,
+	                                     boost::bind(&ShipWindow::act_scout_towards, this, WALK_E));
+	exp_mid->add(btn_scout_[WALK_E - 1]);
+
+	btn_scout_[WALK_SW - 1] =
+	   make_button(exp_bot, "scsw", _("Scout towards the south west"), pic_scout_sw,
+	               boost::bind(&ShipWindow::act_scout_towards, this, WALK_SW));
+	exp_bot->add(btn_scout_[WALK_SW - 1]);
+
+	btn_explore_island_ccw_ =
+	   make_button(exp_bot, "expccw", _("Explore the island’s coast counter clockwise"),
+	               pic_explore_ccw, boost::bind(&ShipWindow::act_explore_island, this,
+	                                            IslandExploreDirection::kCounterClockwise));
+	exp_bot->add(btn_explore_island_ccw_);
+
+	btn_scout_[WALK_SE - 1] =
+	   make_button(exp_bot, "scse", _("Scout towards the south east"), pic_scout_se,
+	               boost::bind(&ShipWindow::act_scout_towards, this, WALK_SE));
+	exp_bot->add(btn_scout_[WALK_SE - 1]);
+
+	vbox_.add(&navigation_box_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
+
+	// Bottom buttons
+	UI::Box* buttons = new UI::Box(&vbox_, 0, 0, UI::Box::Horizontal);
+	vbox_.add(buttons, UI::Box::Resizing::kFullSize);
+
+	btn_sink_ = make_button(
+	   buttons, "sink", _("Sink the ship"), pic_sink, boost::bind(&ShipWindow::act_sink, this));
+	buttons->add(btn_sink_);
+
+	btn_cancel_expedition_ =
+	   make_button(buttons, "cancel_expedition", _("Cancel the Expedition"), pic_cancel_expedition,
+	               boost::bind(&ShipWindow::act_cancel_expedition, this));
+	buttons->add(btn_cancel_expedition_);
+
+	buttons->add_inf_space();
+
+	if (igbase_.get_display_flag(InteractiveBase::dfDebug)) {
+		btn_debug_ = make_button(buttons, "debug", _("Show Debug Window"), pic_debug,
+		                         boost::bind(&ShipWindow::act_debug, this));
+		btn_debug_->set_enabled(true);
+		buttons->add(btn_debug_);
+	}
+
+	btn_destination_ = make_button(buttons, "destination", _("Go to destination"), pic_destination,
+	                               boost::bind(&ShipWindow::act_destination, this));
+	btn_destination_->set_enabled(false);
+	buttons->add(btn_destination_);
+
+	btn_goto_ = make_button(
+	   buttons, "goto", _("Go to ship"), pic_goto, boost::bind(&ShipWindow::act_goto, this));
+	buttons->add(btn_goto_);
+
+	set_center_panel(&vbox_);
+	set_thinks(true);
+	set_fastclick_panel(btn_goto_);
+	move_out_of_the_way();
+	warp_mouse_to_fastclick_panel();
+
 	shipnotes_subscriber_ = Notifications::subscribe<Widelands::NoteShipWindow>([this](
 	   const Widelands::NoteShipWindow& note) {
 		if (note.serial == ship_.serial()) {
@@ -72,10 +176,6 @@ ShipWindow::ShipWindow(InteractiveGameBase& igb, UniqueWindow::Registry& reg, Sh
 					}
 				}
 				break;
-			// The ship state has changed, e.g. expedition canceled
-			case Widelands::NoteShipWindow::Action::kRefresh:
-				init(true);
-				break;
 			// The ship is no more
 			case Widelands::NoteShipWindow::Action::kClose:
 				// Stop this from thinking to avoid segfaults
@@ -85,108 +185,24 @@ ShipWindow::ShipWindow(InteractiveGameBase& igb, UniqueWindow::Registry& reg, Sh
 			}
 		}
 	});
+
+	// Init button visibility
+	navigation_box_height_ = navigation_box_.get_h();
+	navigation_box_.set_visible(false);
+	navigation_box_.set_desired_size(navigation_box_.get_w(), 0);
+	btn_cancel_expedition_->set_enabled(false);
+	think();
 }
 
-void ShipWindow::init(bool avoid_fastclick) {
-	assert(ship_.get_owner());
-
-	vbox_.reset(new UI::Box(this, 0, 0, UI::Box::Vertical));
-
-	display_ = new ItemWaresDisplay(vbox_.get(), *ship_.get_owner());
-	display_->set_capacity(ship_.descr().get_capacity());
-	vbox_->add(display_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
-
-	// Expedition buttons
-	if (ship_.state_is_expedition()) {
-		UI::Box* exp_top = new UI::Box(vbox_.get(), 0, 0, UI::Box::Horizontal);
-		vbox_->add(exp_top, UI::Box::Resizing::kAlign, UI::Align::kCenter);
-		UI::Box* exp_mid = new UI::Box(vbox_.get(), 0, 0, UI::Box::Horizontal);
-		vbox_->add(exp_mid, UI::Box::Resizing::kAlign, UI::Align::kCenter);
-		UI::Box* exp_bot = new UI::Box(vbox_.get(), 0, 0, UI::Box::Horizontal);
-		vbox_->add(exp_bot, UI::Box::Resizing::kAlign, UI::Align::kCenter);
-
-		btn_scout_[WALK_NW - 1] =
-		   make_button(exp_top, "scnw", _("Scout towards the north west"), pic_scout_nw,
-		               boost::bind(&ShipWindow::act_scout_towards, this, WALK_NW));
-		exp_top->add(btn_scout_[WALK_NW - 1]);
-
-		btn_explore_island_cw_ = make_button(
-		   exp_top, "expcw", _("Explore the island’s coast clockwise"), pic_explore_cw,
-		   boost::bind(&ShipWindow::act_explore_island, this, IslandExploreDirection::kClockwise));
-		exp_top->add(btn_explore_island_cw_);
-
-		btn_scout_[WALK_NE - 1] =
-		   make_button(exp_top, "scne", _("Scout towards the north east"), pic_scout_ne,
-		               boost::bind(&ShipWindow::act_scout_towards, this, WALK_NE));
-		exp_top->add(btn_scout_[WALK_NE - 1]);
-
-		btn_scout_[WALK_W - 1] =
-		   make_button(exp_mid, "scw", _("Scout towards the west"), pic_scout_w,
-		               boost::bind(&ShipWindow::act_scout_towards, this, WALK_W));
-		exp_mid->add(btn_scout_[WALK_W - 1]);
-
-		btn_construct_port_ =
-		   make_button(exp_mid, "buildport", _("Construct a port at the current location"),
-		               pic_construct_port, boost::bind(&ShipWindow::act_construct_port, this));
-		exp_mid->add(btn_construct_port_);
-
-		btn_scout_[WALK_E - 1] =
-		   make_button(exp_mid, "sce", _("Scout towards the east"), pic_scout_e,
-		               boost::bind(&ShipWindow::act_scout_towards, this, WALK_E));
-		exp_mid->add(btn_scout_[WALK_E - 1]);
-
-		btn_scout_[WALK_SW - 1] =
-		   make_button(exp_bot, "scsw", _("Scout towards the south west"), pic_scout_sw,
-		               boost::bind(&ShipWindow::act_scout_towards, this, WALK_SW));
-		exp_bot->add(btn_scout_[WALK_SW - 1]);
-
-		btn_explore_island_ccw_ =
-		   make_button(exp_bot, "expccw", _("Explore the island’s coast counter clockwise"),
-		               pic_explore_ccw, boost::bind(&ShipWindow::act_explore_island, this,
-		                                            IslandExploreDirection::kCounterClockwise));
-		exp_bot->add(btn_explore_island_ccw_);
-
-		btn_scout_[WALK_SE - 1] =
-		   make_button(exp_bot, "scse", _("Scout towards the south east"), pic_scout_se,
-		               boost::bind(&ShipWindow::act_scout_towards, this, WALK_SE));
-		exp_bot->add(btn_scout_[WALK_SE - 1]);
+void ShipWindow::set_button_visibility() {
+	if (navigation_box_.is_visible() != ship_.state_is_expedition()) {
+		navigation_box_.set_visible(ship_.state_is_expedition());
+		navigation_box_.set_desired_size(
+		   navigation_box_.get_w(), ship_.state_is_expedition() ? navigation_box_height_ : 0);
+		layout();
 	}
-
-	// Bottom buttons
-	UI::Box* buttons = new UI::Box(vbox_.get(), 0, 0, UI::Box::Horizontal);
-	vbox_->add(buttons);
-
-	btn_goto_ = make_button(
-	   buttons, "goto", _("Go to ship"), pic_goto, boost::bind(&ShipWindow::act_goto, this));
-	buttons->add(btn_goto_);
-	btn_destination_ = make_button(buttons, "destination", _("Go to destination"), pic_destination,
-	                               boost::bind(&ShipWindow::act_destination, this));
-	btn_destination_->set_enabled(false);
-	buttons->add(btn_destination_);
-
-	btn_sink_ = make_button(
-	   buttons, "sink", _("Sink the ship"), pic_sink, boost::bind(&ShipWindow::act_sink, this));
-	buttons->add(btn_sink_);
-
-	if (ship_.state_is_expedition()) {
-		btn_cancel_expedition_ =
-		   make_button(buttons, "cancel_expedition", _("Cancel the Expedition"),
-		               pic_cancel_expedition, boost::bind(&ShipWindow::act_cancel_expedition, this));
-		buttons->add(btn_cancel_expedition_);
-	}
-
-	if (igbase_.get_display_flag(InteractiveBase::dfDebug)) {
-		btn_debug_ = make_button(buttons, "debug", _("Show Debug Window"), pic_debug,
-		                         boost::bind(&ShipWindow::act_debug, this));
-		btn_debug_->set_enabled(true);
-		buttons->add(btn_debug_);
-	}
-	set_center_panel(vbox_.get());
-	set_thinks(true);
-	set_fastclick_panel(btn_goto_);
-	if (!avoid_fastclick) {
-		move_out_of_the_way();
-		warp_mouse_to_fastclick_panel();
+	if (btn_cancel_expedition_->is_visible() != btn_cancel_expedition_->enabled()) {
+		btn_cancel_expedition_->set_visible(btn_cancel_expedition_->enabled());
 	}
 }
 
@@ -215,7 +231,6 @@ void ShipWindow::think() {
 		}
 	}
 
-	// Expedition specific buttons
 	Ship::ShipStates state = ship_.get_ship_state();
 	if (ship_.state_is_expedition()) {
 		/* The following rules apply:
@@ -243,9 +258,11 @@ void ShipWindow::think() {
 		btn_explore_island_ccw_->set_enabled(can_act && coast_nearby &&
 		                                     (state != Ship::ShipStates::kExpeditionColonizing));
 		btn_sink_->set_enabled(can_act && (state != Ship::ShipStates::kExpeditionColonizing));
-		btn_cancel_expedition_->set_enabled(can_act &&
-		                                    (state != Ship::ShipStates::kExpeditionColonizing));
 	}
+	btn_cancel_expedition_->set_enabled(ship_.state_is_expedition() && can_act &&
+	                                    (state != Ship::ShipStates::kExpeditionColonizing));
+	// Expedition specific buttons
+	set_button_visibility();
 }
 
 UI::Button* ShipWindow::make_button(UI::Panel* parent,
@@ -262,13 +279,13 @@ UI::Button* ShipWindow::make_button(UI::Panel* parent,
 
 /// Move the main view towards the current ship location
 void ShipWindow::act_goto() {
-	igbase_.scroll_to_field(ship_.get_position(), MapView::Transition::Smooth);
+	igbase_.map_view()->scroll_to_field(ship_.get_position(), MapView::Transition::Smooth);
 }
 
 /// Move the main view towards the current destination of the ship
 void ShipWindow::act_destination() {
 	if (PortDock* destination = ship_.get_destination(igbase_.egbase())) {
-		igbase_.scroll_to_field(
+		igbase_.map_view()->scroll_to_field(
 		   destination->get_warehouse()->get_position(), MapView::Transition::Smooth);
 	}
 }

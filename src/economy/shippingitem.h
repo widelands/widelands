@@ -54,7 +54,6 @@ struct ShippingItem {
 
 	void set_economy(Game&, Economy* e);
 	PortDock* get_destination(Game&);
-	void schedule_update(Game&, int32_t delay);
 
 	void remove(EditorGameBase&);
 
@@ -63,7 +62,7 @@ struct ShippingItem {
 		ShippingItem get(MapObjectLoader& mol);
 
 	private:
-		uint32_t serial_;
+		uint32_t serial_ = 0U;
 	};
 
 	void save(EditorGameBase& egbase, MapObjectSaver& mos, FileWrite& fw);

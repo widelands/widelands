@@ -78,6 +78,7 @@ Window::Window(Panel* const parent,
                 w + VT_B_PIXMAP_THICKNESS * 2,
                 TP_B_PIXMAP_THICKNESS + h + BT_B_PIXMAP_THICKNESS),
      is_minimal_(false),
+     oldh_(TP_B_PIXMAP_THICKNESS + h + BT_B_PIXMAP_THICKNESS),
      dragging_(false),
      docked_left_(false),
      docked_right_(false),
@@ -242,8 +243,9 @@ void Window::draw(RenderTarget& dst) {
  * Redraw the window frame
  */
 void Window::draw_border(RenderTarget& dst) {
-	assert(HZ_B_CORNER_PIXMAP_LEN >= VT_B_PIXMAP_THICKNESS);
-	assert(HZ_B_MIDDLE_PIXMAP_LEN > 0);
+	static_assert(HZ_B_CORNER_PIXMAP_LEN >= VT_B_PIXMAP_THICKNESS,
+	              "HZ_B_CORNER_PIXMAP_LEN < VT_B_PIXMAP_THICKNESS");
+	static_assert(HZ_B_MIDDLE_PIXMAP_LEN > 0, "HZ_B_MIDDLE_PIXMAP_LEN <= 0");
 
 	const int32_t hz_bar_end = get_w() - HZ_B_CORNER_PIXMAP_LEN;
 	const int32_t hz_bar_end_minus_middle = hz_bar_end - HZ_B_MIDDLE_PIXMAP_LEN;
@@ -395,6 +397,12 @@ bool Window::handle_mouserelease(const uint8_t btn, int32_t, int32_t) {
 // our parent to be rendered
 bool Window::handle_tooltip() {
 	UI::Panel::handle_tooltip();
+	return true;
+}
+
+bool Window::handle_mousewheel(uint32_t, int32_t, int32_t) {
+	// Mouse wheel events should not propagate to objects below us, so we claim
+	// that they have been handled.
 	return true;
 }
 

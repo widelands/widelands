@@ -19,6 +19,7 @@
   <summary xml:lang="gd">Geama ro-innleachd togail fìor-ama</summary>
   <summary xml:lang="hu">Egy valós idejű, építkezős stratégiai játék</summary>
   <summary xml:lang="it">Un gioco di costruzione e strategia in tempo reale</summary>
+  <summary xml:lang="ko">실시간 건설 전략 게임</summary>
   <summary xml:lang="la">Ludus strategicae exstructionis in tempore vero</summary>
   <summary xml:lang="ms">Permainan strategi pembinaan masa-nyata</summary>
   <summary xml:lang="nl">Een realtime opbouwend strategiespel</summary>
@@ -129,6 +130,12 @@
     <p xml:lang="it">
       Widelands è giocabile in modalità giocatore singolo, con campagne che raccontano storie delle tribù e la loro lotta nell'universo Widelands . Oppure, l'insediamento in realtà inizia quando vi unite con gli amici su Internet o in LAN per costruire nuovi imperi insieme – o per schiacciare gli altri nella polvere in una guerra. In Widelands è presente anche una intelligenza artificiale per metterti alla prova.
     </p>
+    <p xml:lang="ko">
+      당신은 작은 일족의 섭정입니다. 당신의 임무는 성장하는 정착지를 건설하는 것입니다. 당신의 일족 모든 일원은 성장을 위한 더 많은 자원을 생산하기 위해 자신의 역할을 다할 것입니다.
+    </p>
+    <p xml:lang="ko">
+      Widelands는 부족들의 이야기와 그들의 투쟁에 대한 캠페인 모드를 제공합니다. 하지만, 당신이 인터넷이나 LAN을 통해 친구와 새로운 제국을 함께 만들거나 또는 서로를 짓눌러 버릴 때, 비로소 진정한 정착이 시작됩니다. Widelands는 당신과 맞설 인공 지능 또한 제공합니다.
+    </p>
     <p xml:lang="la">
       Tu es princeps de parva gens. Pensum tuum est coloniam excolere. Unusquisque homines gentis tuis opes augere auxilient.
     </p>
@@ -227,6 +234,7 @@
   <url type="homepage">https://wl.widelands.org/</url>
   <update_contact>widelands-dev_at_lists.launchpad.net</update_contact>
   <releases>
+    <release date="2016-11-11" version="Build 19"/>
     <release date="2014-02-22" version="Build 18"/>
     <release date="2012-04-23" version="Build 17"/>
     <release date="2011-04-15" version="Build 16"/>

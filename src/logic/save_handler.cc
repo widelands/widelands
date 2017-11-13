@@ -32,7 +32,7 @@
 #include "base/wexception.h"
 #include "game_io/game_saver.h"
 #include "io/filesystem/filesystem.h"
-#include "logic/constants.h"
+#include "logic/filesystem_constants.h"
 #include "logic/game.h"
 #include "logic/game_controller.h"
 #include "wui/interactive_base.h"
@@ -46,8 +46,7 @@ SaveHandler::SaveHandler()
      allow_saving_(true),
      save_requested_(false),
      saving_next_tick_(false),
-     save_filename_(""),
-     autosave_filename_("wl_autosave"),
+     autosave_filename_(kAutosavePrefix),
      fs_type_(FileSystem::ZIP),
      autosave_interval_in_ms_(kDefaultAutosaveInterval * 60 * 1000),
      number_of_rolls_(5) {
@@ -59,7 +58,7 @@ void SaveHandler::roll_save_files(const std::string& filename) {
 	log("Autosave: Rolling savefiles (count): %d\n", rolls);
 	rolls--;
 	std::string filename_previous =
-	   create_file_name(get_base_dir(), (boost::format("%s_%02d") % filename % rolls).str());
+	   create_file_name(kSaveDir, (boost::format("%s_%02d") % filename % rolls).str());
 	if (rolls > 0 && g_fs->file_exists(filename_previous)) {
 		g_fs->fs_unlink(filename_previous);  // Delete last of the rolling files
 		log("Autosave: Deleted %s\n", filename_previous.c_str());
@@ -67,7 +66,7 @@ void SaveHandler::roll_save_files(const std::string& filename) {
 	rolls--;
 	while (rolls >= 0) {
 		const std::string filename_next =
-		   create_file_name(get_base_dir(), (boost::format("%s_%02d") % filename % rolls).str());
+		   create_file_name(kSaveDir, (boost::format("%s_%02d") % filename % rolls).str());
 		if (g_fs->file_exists(filename_next)) {
 			g_fs->fs_rename(
 			   filename_next, filename_previous);  // e.g. wl_autosave_08 -> wl_autosave_09
@@ -166,13 +165,13 @@ void SaveHandler::think(Widelands::Game& game) {
 		}
 
 		// Saving now
-		const std::string complete_filename = create_file_name(get_base_dir(), filename);
+		const std::string complete_filename = create_file_name(kSaveDir, filename);
 		std::string backup_filename;
 
 		// always overwrite a file
 		if (g_fs->file_exists(complete_filename)) {
 			filename += "2";
-			backup_filename = create_file_name(get_base_dir(), filename);
+			backup_filename = create_file_name(kSaveDir, filename);
 			if (g_fs->file_exists(backup_filename)) {
 				g_fs->fs_unlink(backup_filename);
 			}
@@ -223,8 +222,8 @@ std::string SaveHandler::create_file_name(const std::string& dir,
 	boost::trim(complete_filename);
 
 	// Now check if the extension matches (ignoring case)
-	if (!boost::iends_with(filename, WLGF_SUFFIX)) {
-		complete_filename += WLGF_SUFFIX;
+	if (!boost::iends_with(filename, kSavegameExtension)) {
+		complete_filename += kSavegameExtension;
 	}
 
 	return complete_filename;
@@ -243,7 +242,7 @@ bool SaveHandler::save_game(Widelands::Game& game,
 	ScopedTimer save_timer("SaveHandler::save_game() took %ums");
 
 	// Make sure that the base directory exists
-	g_fs->ensure_directory_exists(get_base_dir());
+	g_fs->ensure_directory_exists(kSaveDir);
 
 	// Make a filesystem out of this
 	std::unique_ptr<FileSystem> fs;

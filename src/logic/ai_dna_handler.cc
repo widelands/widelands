@@ -27,12 +27,13 @@
 
 #include "base/macros.h"
 #include "base/wexception.h"
+#include "logic/filesystem_constants.h"
 #include "wui/interactive_base.h"
 
 namespace Widelands {
 
 AiDnaHandler::AiDnaHandler() {
-	g_fs->ensure_directory_exists(get_ai_dir());
+	g_fs->ensure_directory_exists(kAiDir);
 }
 
 // This reads the AI file for a particular slot (position) and populates numbers into passed
@@ -47,8 +48,8 @@ void AiDnaHandler::fetch_dna(std::vector<int16_t>& military_numbers,
 	// AI files are in range 1-4
 	assert(slot > 0 && slot < 5);
 
-	std::string full_filename = get_ai_dir() + g_fs->file_separator() + "ai_input_" +
-	                            std::to_string(static_cast<int16_t>(slot)) + "." + get_ai_suffix();
+	const std::string full_filename = kAiDir + g_fs->file_separator() + std::string("ai_input_") +
+	                                  std::to_string(static_cast<int>(slot)) + kAiExtension;
 
 	Profile prof;
 	prof.read(full_filename.c_str(), nullptr, *g_fs);
@@ -91,9 +92,9 @@ void AiDnaHandler::fetch_dna(std::vector<int16_t>& military_numbers,
 // This generates a new file with AI data in '.widelands/ai'
 void AiDnaHandler::dump_output(Widelands::Player::AiPersistentState* pd, uint8_t pn) {
 
-	std::string full_filename = get_ai_dir() + g_fs->file_separator() + timestring() +
-	                            "_ai_player_" + std::to_string(static_cast<int16_t>(pn)) + "." +
-	                            get_ai_suffix();
+	const std::string full_filename = kAiDir + g_fs->file_separator() + std::string(timestring()) +
+	                                  std::string("_ai_player_") +
+	                                  std::to_string(static_cast<int>(pn)) + kAiExtension;
 
 	log(" %d: AI to be dumped to %s\n", pn, full_filename.c_str());
 
@@ -122,6 +123,9 @@ void AiDnaHandler::dump_output(Widelands::Player::AiPersistentState* pd, uint8_t
 	for (size_t i = 0; i < pd->f_neuron_pool_size; ++i) {
 		fn.set_natural(std::to_string(static_cast<int64_t>(i)).c_str(), pd->f_neurons[i]);
 	}
-	prof.write(full_filename.c_str(), false, *g_fs);
+
+	std::string comment = "See wiki for more info: https://wl.widelands.org/wiki/Ai%20Training/";
+
+	prof.write(full_filename.c_str(), false, *g_fs, comment.c_str());
 }
 }

@@ -60,7 +60,7 @@ PortDock::PortDock(Warehouse* wh)
 }
 
 PortDock::~PortDock() {
-	assert(expedition_bootstrap_.get() == nullptr);
+	assert(expedition_bootstrap_ == nullptr);
 }
 
 /**
@@ -315,7 +315,7 @@ void PortDock::ship_arrived(Game& game, Ship& ship) {
 	}
 
 	if (expedition_ready_) {
-		assert(expedition_bootstrap_.get() != nullptr);
+		assert(expedition_bootstrap_ != nullptr);
 
 		// Only use an empty ship.
 		if (ship.get_nritems() < 1) {
@@ -337,7 +337,6 @@ void PortDock::ship_arrived(Game& game, Ship& ship) {
 			// The expedition goods are now on the ship, so from now on it is independent from the port
 			// and thus we switch the port to normal, so we could even start a new expedition,
 			cancel_expedition(game);
-			Notifications::publish(NoteShipWindow(ship.serial(), NoteShipWindow::Action::kRefresh));
 			return fleet_->update(game);
 		}
 	}
@@ -414,7 +413,7 @@ uint32_t PortDock::count_waiting() {
 
 /// \returns whether an expedition was started or is even ready
 bool PortDock::expedition_started() {
-	return (expedition_bootstrap_.get() != nullptr) || expedition_ready_;
+	return (expedition_bootstrap_ != nullptr) || expedition_ready_;
 }
 
 /// Start an expedition
@@ -562,7 +561,7 @@ void PortDock::save(EditorGameBase& egbase, MapObjectSaver& mos, FileWrite& fw) 
 	}
 
 	// Expedition specific stuff
-	fw.unsigned_8(expedition_bootstrap_.get() != nullptr ? 1 : 0);
+	fw.unsigned_8(expedition_bootstrap_ != nullptr ? 1 : 0);
 	fw.unsigned_8(expedition_ready_ ? 1 : 0);
 }
 

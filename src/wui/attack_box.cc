@@ -40,17 +40,16 @@ AttackBox::AttackBox(UI::Panel* parent,
                      uint32_t const y)
    : UI::Box(parent, x, y, UI::Box::Vertical),
      player_(player),
-     map_(&player_->egbase().map()),
+     map_(player_->egbase().map()),
      node_coordinates_(target),
      lastupdate_(0) {
 	init();
 }
 
 uint32_t AttackBox::get_max_attackers() {
-	assert(map_);
 	assert(player_);
 
-	if (upcast(Building, building, map_->get_immovable(*node_coordinates_)))
+	if (upcast(Building, building, map_.get_immovable(*node_coordinates_)))
 		return player_->find_attack_soldiers(building->base_flag());
 	return 0;
 }
@@ -84,7 +83,7 @@ std::unique_ptr<UI::Button> AttackBox::add_button(UI::Box& parent,
 	std::unique_ptr<UI::Button> button(new UI::Button(&parent, text, 8, 8, 26, 26,
 	                                                  g_gr->images().get("images/ui_basic/but2.png"),
 	                                                  text, tooltip_text));
-	button.get()->sigclicked.connect(boost::bind(fn, boost::ref(*this)));
+	button->sigclicked.connect(boost::bind(fn, boost::ref(*this)));
 	parent.add(button.get());
 	return button;
 }

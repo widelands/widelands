@@ -105,6 +105,7 @@ public:
 			return "UI::Table<Entry>: No selection";
 		}
 	};
+	void scroll_to_item(int32_t item);
 	EntryRecord& get_selected_record() const;
 	Entry get_selected() const;
 
@@ -156,13 +157,6 @@ public:
 		std::vector<Data> data_;
 	};
 
-	/**
-	 * Compare the two items at the given indices in the list.
-	 *
-	 * return true if the first item is strictly less than the second
-	 */
-	using CompareFn = boost::function<bool(uint32_t, uint32_t)>;
-
 	Table(Panel* parent,
 	      int32_t x,
 	      int32_t y,
@@ -171,6 +165,13 @@ public:
 	      const Image* button_background = g_gr->images().get("images/ui_basic/but3.png"),
 	      TableRows rowtype = TableRows::kSingle);
 	~Table();
+
+	/**
+	 * Compare the two items at the given indices in the list.
+	 *
+	 * return true if the first item is strictly less than the second
+	 */
+	using CompareFn = boost::function<bool(uint32_t, uint32_t)>;
 
 	boost::signals2::signal<void(uint32_t)> selected;
 	boost::signals2::signal<void(uint32_t)> double_clicked;
@@ -249,16 +250,12 @@ public:
 			return "UI::Table<void *>: No selection";
 		}
 	};
+	void scroll_to_item(int32_t item);
 	EntryRecord& get_selected_record() const {
 		if (selection_ == no_selection_index())
 			throw NoSelection();
 		assert(selection_ < entry_records_.size());
 		return *entry_records_.at(selection_);
-	}
-	void remove_selected() {
-		if (selection_ == no_selection_index())
-			throw NoSelection();
-		remove(selection_);
 	}
 	void* get_selected() const {
 		return get_selected_record().entry();

@@ -29,6 +29,7 @@
 #include "logic/game.h"
 #include "logic/map_objects/tribes/constructionsite.h"
 #include "logic/map_objects/tribes/dismantlesite.h"
+#include "logic/map_objects/tribes/market.h"
 #include "logic/map_objects/tribes/militarysite.h"
 #include "logic/map_objects/tribes/productionsite.h"
 #include "logic/map_objects/tribes/ship.h"
@@ -502,6 +503,37 @@ private:
 	CASTED_GET_DESCRIPTION(WarehouseDescr)
 };
 
+class LuaMarketDescription : public LuaBuildingDescription {
+public:
+	LUNA_CLASS_HEAD(LuaMarketDescription);
+
+	virtual ~LuaMarketDescription() {
+	}
+
+	LuaMarketDescription() {
+	}
+	explicit LuaMarketDescription(const Widelands::MarketDescr* const warehousedescr)
+	   : LuaBuildingDescription(warehousedescr) {
+	}
+	explicit LuaMarketDescription(lua_State* L) : LuaBuildingDescription(L) {
+	}
+
+	/*
+	 * Properties
+	 */
+
+	/*
+	 * Lua methods
+	 */
+
+	/*
+	 * C methods
+	 */
+
+private:
+	CASTED_GET_DESCRIPTION(MarketDescr)
+};
+
 class LuaWareDescription : public LuaMapObjectDescription {
 public:
 	LUNA_CLASS_HEAD(LuaWareDescription);
@@ -793,8 +825,7 @@ public:
 
 	LuaMapObject() : ptr_(nullptr) {
 	}
-	explicit LuaMapObject(Widelands::MapObject& mo) {
-		ptr_ = &mo;
+	explicit LuaMapObject(Widelands::MapObject& mo) : ptr_(&mo) {
 	}
 	explicit LuaMapObject(lua_State* L) : ptr_(nullptr) {
 		report_error(L, "Cannot instantiate a '%s' directly!", className);
@@ -1073,6 +1104,34 @@ public:
 	 * C Methods
 	 */
 	CASTED_GET(Warehouse)
+};
+
+class LuaMarket : public LuaBuilding {
+public:
+	LUNA_CLASS_HEAD(LuaMarket);
+
+	LuaMarket() {
+	}
+	explicit LuaMarket(Widelands::Market& mo) : LuaBuilding(mo) {
+	}
+	explicit LuaMarket(lua_State* L) : LuaBuilding(L) {
+	}
+	virtual ~LuaMarket() {
+	}
+
+	/*
+	 * Properties
+	 */
+
+	/*
+	 * Lua Methods
+	 */
+	int propose_trade(lua_State* L);
+
+	/*
+	 * C Methods
+	 */
+	CASTED_GET(Market)
 };
 
 class LuaProductionSite : public LuaBuilding {

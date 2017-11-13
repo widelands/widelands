@@ -50,7 +50,6 @@ struct Font {
 	uint32_t size() const;
 	uint32_t ascent() const;
 	uint32_t height() const;
-	uint32_t lineskip() const;
 
 	TTF_Font* get_ttf_font() const {
 		return font_;

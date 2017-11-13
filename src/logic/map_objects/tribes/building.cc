@@ -329,7 +329,7 @@ bool Building::init(EditorGameBase& egbase) {
 	PlayerImmovable::init(egbase);
 
 	// Set the building onto the map
-	Map& map = egbase.map();
+	const Map& map = egbase.map();
 	Coords neighb;
 
 	set_position(egbase, position_);
@@ -385,7 +385,7 @@ void Building::cleanup(EditorGameBase& egbase) {
 	unset_position(egbase, position_);
 
 	if (get_size() == BIG) {
-		Map& map = egbase.map();
+		const Map& map = egbase.map();
 		Coords neighb;
 
 		map.get_ln(position_, &neighb);
@@ -421,7 +421,7 @@ BaseImmovable::PositionList Building::get_positions(const EditorGameBase& egbase
 
 	rv.push_back(position_);
 	if (get_size() == BIG) {
-		Map& map = egbase.map();
+		const Map& map = egbase.map();
 		Coords neighb;
 
 		map.get_ln(position_, &neighb);
@@ -458,7 +458,7 @@ void Building::destroy(EditorGameBase& egbase) {
 }
 
 std::string Building::info_string(const InfoStringFormat& format) {
-	std::string result = "";
+	std::string result;
 	switch (format) {
 	case InfoStringFormat::kCensus:
 		if (upcast(ConstructionSite const, constructionsite, this)) {
@@ -727,7 +727,7 @@ void Building::set_seeing(bool see) {
 		return;
 
 	Player& player = owner();
-	Map& map = player.egbase().map();
+	const Map& map = player.egbase().map();
 
 	if (see)
 		player.see_area(Area<FCoords>(map.get_fcoords(get_position()), descr().vision_range()));
