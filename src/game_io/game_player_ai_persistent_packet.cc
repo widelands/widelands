@@ -28,8 +28,8 @@
 
 namespace Widelands {
 
-constexpr uint16_t kCurrentPacketVersion = 3;
-constexpr uint16_t kPacketVersion2 = 2; // TODO(TiborB): what exactly does this version stand for -> please rename
+constexpr uint16_t kCurrentPacketVersion = 3; // introduction of genetic algorith with all structures that are needed for it
+constexpr uint16_t kPacketVersion2 = 2;       // Old Version before using genetics
 
 /**
  * skip and ignore old data, we will just read other variables
