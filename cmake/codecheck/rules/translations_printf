@@ -17,15 +17,18 @@ import re
 find_unordered = re.compile(r"(\%[0-9#*]*\.*[0-9#]*[a-zA-Z]{1,2})")
 find_ordered = re.compile(r"\%[|]{0,1}(\d\$[0-9#*]*\.*[0-9#]*[a-zA-Z]{1,2})")
 find_boost = re.compile(r"\%(\d)\%")
+clean_boost_for_unordered = re.compile(r"(\%\d\%)")
+
 
 def find_unordered_placeholders(sanitized_entry):
-    """ We need to exclude boost strings from the unordered results. Couldn't come up with a good regex, so we're doing this in 2 steps. """
-    result = []
-    for entry in find_unordered.findall(sanitized_entry):
-        temp_boost = find_boost.findall(sanitized_entry)
-        if len(temp_boost) < 1:
-            result.append(entry[1:])
-    return result
+    """We need to remove boost-style matches first, because we have cases like.
+
+    %1%m that match both regex expressions.
+
+    """
+    for entry in clean_boost_for_unordered.findall(sanitized_entry):
+        sanitized_entry = sanitized_entry.replace(entry, '')
+    return find_unordered.findall(sanitized_entry)
 
 
 def check_placeholders(entry):
@@ -61,17 +64,19 @@ def compare_placeholders(entry1, entry2):
     sanitized_entry1 = entry1.replace('%%', '')
     sanitized_entry2 = entry2.replace('%%', '')
 
-    placeholders1 = find_unordered_placeholders(sanitized_entry1)
-    placeholders2 = find_unordered_placeholders(sanitized_entry2)
+    # There is interaction between boost and unordered, so boost has to come
+    # first.
+    placeholders1 = find_boost.findall(sanitized_entry1)
+    placeholders2 = find_boost.findall(sanitized_entry2)
     if len(placeholders1) == 0 and len(placeholders2) == 0:
         placeholders1 = find_ordered.findall(sanitized_entry1)
         placeholders2 = find_ordered.findall(sanitized_entry2)
         if len(placeholders1) == 0 and len(placeholders2) == 0:
-            placeholders1 = find_boost.findall(sanitized_entry1)
-            placeholders2 = find_boost.findall(sanitized_entry2)
+            placeholders1 = find_unordered.findall(sanitized_entry1)
+            placeholders2 = find_unordered.findall(sanitized_entry2)
 
     if len(placeholders1) != len(placeholders2):
-            return 'Ngettext string has mismatching number of placeholders. Singular has ' + str(len(placeholders1)) + ' placeholder(s) and plural has ' + str(len(placeholders2)) + ' placeholder(s):'
+        return 'Ngettext string has mismatching number of placeholders. Singular has ' + str(len(placeholders1)) + ' placeholder(s) and plural has ' + str(len(placeholders2)) + ' placeholder(s):'
 
     for entryno, placeholder in enumerate(placeholders1, 0):
         if placeholder != placeholders2[entryno]:
