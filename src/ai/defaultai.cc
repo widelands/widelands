@@ -66,7 +66,6 @@ constexpr int kRemainingBasicBuildingsResetTime = 1 * 60 * 1000;
 
 // following two are used for roads management, for creating shortcuts and dismantling dispensable
 // roads
-constexpr int32_t kSpotsTooLittle = 15;
 constexpr int32_t kSpotsEnough = 25;
 
 constexpr uint16_t kTargetQuantCap = 30;
@@ -3640,12 +3639,11 @@ bool DefaultAI::check_productionsites(uint32_t gametime) {
 	// Get link to productionsite that should be checked
 	ProductionSiteObserver& site = productionsites.front();
 
-	// Make sure we are not above ai type limit
+	// Inform if we are above ai type limit.
 	if (site.bo->total_count() > site.bo->cnt_limit_by_aimode) {
-		log("Too many %s: %d, ai limit: %d\n", site.bo->name, site.bo->total_count(),
-		    site.bo->cnt_limit_by_aimode);
+		log("AI check_productionsites: Too many %s: %d, ai limit: %d\n", site.bo->name,
+		    site.bo->total_count(), site.bo->cnt_limit_by_aimode);
 	}
-	assert(site.bo->total_count() <= site.bo->cnt_limit_by_aimode);
 
 	// first we werify if site is working yet (can be unoccupied since the start)
 	if (!site.site->can_start_working()) {
@@ -4565,7 +4563,12 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 	// And finally the 'core' of this function
 	// First deal with construction of new sites
 	if (purpose == PerfEvaluation::kForConstruction) {
-		assert(bo.total_count() <= bo.cnt_limit_by_aimode);
+		// Inform if we are above ai type limit.
+		if (bo.total_count() > bo.cnt_limit_by_aimode) {
+			log("AI check_building_necessity: Too many %s: %d, ai limit: %d\n", bo.name,
+			    bo.total_count(), bo.cnt_limit_by_aimode);
+		}
+
 		if (bo.forced_after < gametime && bo.total_count() == 0 && !has_substitution_building) {
 			if (!bo.is(BuildingAttribute::kBarracks)) {
 				bo.max_needed_preciousness = bo.max_preciousness;
@@ -5448,7 +5451,7 @@ uint32_t DefaultAI::count_productionsites_without_buildings() {
 		}
 	}
 
-	return existing / total;
+	return (total > 0) ? (existing / total) : 0;
 }
 
 // \returns the building observer

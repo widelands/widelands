@@ -1666,7 +1666,7 @@ ProductionProgram::ProductionProgram(const std::string& init_name,
 			   arguments.get(), name().c_str(), building->name().c_str());
 		}
 
-		const ProductionProgram::Action& action = *actions_.back().get();
+		const ProductionProgram::Action& action = *actions_.back();
 		for (const auto& group : action.consumed_wares_workers()) {
 			consumed_wares_workers_.push_back(group);
 		}
@@ -1703,7 +1703,7 @@ size_t ProductionProgram::size() const {
 }
 
 const ProductionProgram::Action& ProductionProgram::operator[](size_t const idx) const {
-	return *actions_.at(idx).get();
+	return *actions_.at(idx);
 }
 
 const ProductionProgram::Groups& ProductionProgram::consumed_wares_workers() const {

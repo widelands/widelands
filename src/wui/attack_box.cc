@@ -83,7 +83,7 @@ std::unique_ptr<UI::Button> AttackBox::add_button(UI::Box& parent,
 	std::unique_ptr<UI::Button> button(new UI::Button(&parent, text, 8, 8, 26, 26,
 	                                                  g_gr->images().get("images/ui_basic/but2.png"),
 	                                                  text, tooltip_text));
-	button.get()->sigclicked.connect(boost::bind(fn, boost::ref(*this)));
+	button->sigclicked.connect(boost::bind(fn, boost::ref(*this)));
 	parent.add(button.get());
 	return button;
 }
