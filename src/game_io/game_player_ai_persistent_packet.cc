@@ -141,7 +141,7 @@ static void writeCurrentVersion(FileWrite& fw, const Player::AiPersistentState& 
     fw.unsigned_32(ai_data.target_military_score);
     fw.unsigned_32(ai_data.ai_productionsites_ratio);
     fw.signed_32(ai_data.ai_personality_mil_upper_limit);
-    
+
     // Magic numbers
     fw.unsigned_32(ai_data.magic_numbers_size);
     assert(ai_data.magic_numbers_size == ai_data.magic_numbers.size());
@@ -158,15 +158,15 @@ static void writeCurrentVersion(FileWrite& fw, const Player::AiPersistentState& 
     for (uint16_t i = 0; i < ai_data.neuron_pool_size; ++i) {
         fw.signed_8(ai_data.neuron_functs[i]);
     }
-    
+
     // F-Neurons
     fw.unsigned_32(ai_data.f_neuron_pool_size);
     assert(ai_data.f_neuron_pool_size == ai_data.f_neurons.size());
-    
+
     for (uint16_t i = 0; i < ai_data.f_neuron_pool_size; ++i) {
         fw.unsigned_32(ai_data.f_neurons[i]);
     }
-    
+
     // Remaining buildings for basic economy
     assert(ai_data.remaining_buildings_size ==
            ai_data.remaining_basic_buildings.size());
