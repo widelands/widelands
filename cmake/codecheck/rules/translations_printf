@@ -37,10 +37,13 @@ def check_placeholders(entry):
     else:
         ordered = find_ordered.findall(sanitized_entry)
         boost = find_boost.findall(sanitized_entry)
-        if len(unordered) > 0 and (len(ordered) > 0 or len(boost) > 0):
-            return 'Translatable string is mixing unordered sprintf placeholders with ordered or boost placeholders:'
-        if len(ordered) > 0 and (len(unordered) > 0 or len(boost) > 0):
-            return 'Translatable string is mixing ordered sprintf placeholders with unordered or boost placeholders:'
+        if len(unordered) > 0:
+            if len(ordered) > 0:
+                return 'Translatable string is mixing unordered sprintf placeholders with ordered placeholders:'
+            if len(boost) > 0:
+                return 'Translatable string is mixing unordered sprintf placeholders with boost-style placeholders:'
+        if len(ordered) > 0 and len(boost) > 0:
+            return 'Translatable string is mixing ordered sprintf placeholders with boost-style placeholders:'
         if len(ordered) > 0:
             for entryno, placeholder in enumerate(ordered, 1):
                 if str(entryno) != placeholder[:placeholder.find('$')]:
@@ -48,7 +51,7 @@ def check_placeholders(entry):
         if len(boost) > 0:
             for entryno, placeholder in enumerate(boost, 1):
                 if str(entryno) != placeholder:
-                    return 'Translatable string has an ordered boost placeholder "' + placeholder + '" in position ' + str(entryno) + " - the numbers don't match:"
+                    return 'Translatable string has an ordered boost-style placeholder "' + placeholder + '" in position ' + str(entryno) + " - the numbers don't match:"
     return ''
 
 
