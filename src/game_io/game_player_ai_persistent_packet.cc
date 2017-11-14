@@ -52,7 +52,7 @@ static void skipVersion2(FileRead& fr) {
     fr.unsigned_32();
 }
 
-    static void readCurrentVersion(FileRead& fr, Player::AiPersistentState& ai_data) {
+static void readCurrentVersion(FileRead& fr, Player::AiPersistentState& ai_data) {
     ai_data.initialized                    = fr.unsigned_8();
     ai_data.colony_scan_area               = fr.unsigned_32();
     ai_data.trees_around_cutters           = fr.unsigned_32();
