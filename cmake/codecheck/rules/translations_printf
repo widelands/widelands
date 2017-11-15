@@ -169,7 +169,67 @@ def evaluate_matches(lines, fn):
 
 # File this is called on is always called testdir/test.h
 forbidden = [
+    # Unordered with multiple
+    '_("One %d and another %s")',
+
+    # Mixed Boost + Ordered
+    '_("One %1$i and another %2%")',
+
+    # Mixed Boost + Unordered
+    '_("One %i and another %2%")',
+
+    # Mixed Ordered + Unordered
+    '_("One %i and another %2$d")',
+
+    # Wrong order
+    '_("One %2% and another %1%")',
+    '_("One %2$lu and another %1$lu")',
 ]
 
 allowed = [
+    # Boost followed by letter
+    'npgettext("foo", "%1%d", "%1%d", value)',
+    'ngettext("%1%m", "%1%m", value)',
+    'gettext("%1%s")',
+    '_("%1%s")',
+    # Boost
+    'npgettext("foo", "%1%", "%1%", value)',
+    'ngettext("%1%", "%1%", value)',
+    'gettext("%1%")',
+    '_("%1%")',
+    # Boost with percent
+    'npgettext("foo", "%1%%%", "%1%%%", value)',
+    'ngettext("%1%%%", "%1%%%", value)',
+    'gettext("%1%%%")',
+    '_("%1%%%")',
+    # Boost with multiple
+    'npgettext("foo", "One %1% and another %2%", "Many %1% and another %2%", value,)',
+    'ngettext("One %1% and another %2%", "Many %1% and another %2%", value)',
+    'gettext("One %1% and another %2%")',
+    '_("One %1% and another %2%")',
+    # Ordered
+    'npgettext("foo", "%1$d", "%1$d", value)',
+    'ngettext("%1$d", "%1$d", value)',
+    'gettext("%1%s")',
+    '_("%1$s")',
+    # Ordered with percent
+    'npgettext("foo", "%1$d%%", "%1$d%%", value)',
+    'ngettext("%1$d%%", "%1$d%%", value)',
+    'gettext("%1$s%%")',
+    '_("%1%s%%")',
+    # Ordered with multiple
+    'npgettext("foo", "One %1$d and another %2$s", "Many %1$d and another %2$s", value,)',
+    'ngettext("One %1$lu and another %2$s", "Many %1$lu and another %2$s", value)',
+    'gettext("One %1$d and another %2$s")',
+    '_("One %1$d and another %2$s")',
+    # Unordered
+    'npgettext("foo", "%d", "%d", value)',
+    'ngettext("%d", "%d", value)',
+    'gettext("%s")',
+    '_("%1$s")',
+    # Unordered with percent
+    'npgettext("foo", "%d%%", "%d%%", value)',
+    'ngettext("%lu%%", "%lu%%", value)',
+    'gettext("%s%%")',
+    '_("%s%%")',
 ]
