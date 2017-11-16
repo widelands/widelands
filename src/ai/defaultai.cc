@@ -449,7 +449,6 @@ void DefaultAI::think() {
 				};
 				if (!basic_economy_established) {
 					assert(!persistent_data->remaining_basic_buildings.empty());
-					assert(persistent_data->remaining_buildings_size > 0);
 					log("%2d: Basic economy not achieved, %lu building(s) missing, f.e.: %s\n",
 					    player_number(), persistent_data->remaining_basic_buildings.size(),
 					    get_building_observer(persistent_data->remaining_basic_buildings.begin()->first)
@@ -589,7 +588,6 @@ void DefaultAI::late_initialization() {
 	// on lua conf files
 	if (create_basic_buildings_list) {
 		persistent_data->remaining_basic_buildings.clear();
-		persistent_data->remaining_buildings_size = 0;
 	}
 
 	for (DescriptionIndex building_index = 0; building_index < nr_buildings; ++building_index) {
@@ -638,8 +636,8 @@ void DefaultAI::late_initialization() {
 		}
 		if (create_basic_buildings_list &&
 		    bh.basic_amount() > 0) {  // This is the very begining of the game
-			persistent_data->remaining_basic_buildings[bo.id] = bh.basic_amount();
-			++persistent_data->remaining_buildings_size;
+			assert(persistent_data->remaining_basic_buildings.count(bo.id) == 0);
+			persistent_data->remaining_basic_buildings.emplace(std::make_pair(bo.id, bh.basic_amount());
 		}
 		bo.basic_amount = bh.basic_amount();
 		if (bh.get_needs_water()) {
@@ -1022,8 +1020,6 @@ void DefaultAI::late_initialization() {
 			    bb.second);
 		}
 	}
-	assert(persistent_data->remaining_basic_buildings.size() ==
-	       persistent_data->remaining_buildings_size);
 
 	update_player_stat(gametime);
 
@@ -1055,9 +1051,6 @@ void DefaultAI::late_initialization() {
 	assert(iron_ore_id != INVALID_INDEX);
 
 	productionsites_ratio_ = management_data.get_military_number_at(86) / 10 + 12;
-
-	assert(persistent_data->remaining_basic_buildings.size() ==
-	       persistent_data->remaining_buildings_size);
 
 	// Just to be initialized
 	soldier_status_ = SoldiersStatus::kEnough;
@@ -2012,7 +2005,7 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 		log("%2d: Player has achieved the basic economy at %s\n", player_number(),
 		    gamestring_with_leading_zeros(gametime));
 		basic_economy_established = true;
-		assert(persistent_data->remaining_buildings_size == 0);
+		assert(persistent_data->remaining_basic_buildings.empty());
 	}
 
 	if (!basic_economy_established && player_statistics.any_enemy_seen_lately(gametime) &&
@@ -2023,7 +2016,6 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 		    gamestring_with_leading_zeros(gametime));
 		basic_economy_established = true;
 		// Zeroing following to preserve consistency
-		persistent_data->remaining_buildings_size = 0;
 		persistent_data->remaining_basic_buildings.clear();
 	}
 
@@ -5691,15 +5683,12 @@ void DefaultAI::gain_building(Building& b, const bool found_on_load) {
 				--persistent_data->remaining_basic_buildings[bo.id];
 			} else {
 				persistent_data->remaining_basic_buildings.erase(bo.id);
-				--persistent_data->remaining_buildings_size;
 			}
 		}
 		// Remaining basic buildings map contain either no entry for the building, or the number is
 		// nonzero
 		assert(persistent_data->remaining_basic_buildings.count(bo.id) == 0 ||
 		       persistent_data->remaining_basic_buildings[bo.id] > 0);
-		assert(persistent_data->remaining_basic_buildings.size() ==
-		       persistent_data->remaining_buildings_size);
 
 		if (bo.type == BuildingObserver::Type::kProductionsite) {
 			productionsites.push_back(ProductionSiteObserver());

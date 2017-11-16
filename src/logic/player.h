@@ -169,8 +169,7 @@ public:
 		     ai_personality_mil_upper_limit(0),
 		     magic_numbers_size(0),
 		     neuron_pool_size(0),
-		     f_neuron_pool_size(0),
-		     remaining_buildings_size(0) {
+		     f_neuron_pool_size(0) {
 		}
 
 		// Was initialized
@@ -189,7 +188,6 @@ public:
 		uint32_t magic_numbers_size;
 		uint32_t neuron_pool_size;
 		uint32_t f_neuron_pool_size;
-		uint32_t remaining_buildings_size;
 		std::vector<int16_t> magic_numbers;
 		std::vector<int8_t> neuron_weights;
 		std::vector<int8_t> neuron_functs;

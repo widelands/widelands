@@ -89,13 +89,14 @@ static void readCurrentVersion(FileRead& fr, Player::AiPersistentState& ai_data)
     assert(ai_data.f_neuron_pool_size == ai_data.f_neurons.size());
 
     // remaining buildings for basic economy
-    ai_data.remaining_buildings_size = fr.unsigned_32();
-    for (uint16_t i = 0; i < ai_data.remaining_buildings_size; ++i) {
+	 ai_data.remaining_basic_buildings.clear();
+    size_t remaining_basic_buildings_size = fr.unsigned_32();
+    for (uint16_t i = 0; i < remaining_basic_buildings_size; ++i) {
         ai_data.remaining_basic_buildings.emplace(static_cast<Widelands::DescriptionIndex>(fr.unsigned_32()), fr.unsigned_32());
     }
-    assert(ai_data.remaining_buildings_size ==
-           ai_data.remaining_basic_buildings.size());
-
+	 // NOCOM(#codereview): undo the refactoring or pass the player rather than the AI data to this funciton.
+	 // We can then assert something like this as a basic sanity check:
+	 // assert (ai_data.remaining_basic_buildings.size() < player->tribe().buildings().size())
 }
 
 void GamePlayerAiPersistentPacket::read(FileSystem& fs, Game& game, MapObjectLoader*) {
@@ -168,9 +169,7 @@ static void writeCurrentVersion(FileWrite& fw, const Player::AiPersistentState& 
     }
 
     // Remaining buildings for basic economy
-    assert(ai_data.remaining_buildings_size ==
-           ai_data.remaining_basic_buildings.size());
-    fw.unsigned_32(ai_data.remaining_buildings_size);
+    fw.unsigned_32(ai_data.remaining_basic_buildings.size());
     for (auto bb : ai_data.remaining_basic_buildings) {
         fw.unsigned_32(bb.first);
         fw.unsigned_32(bb.second);
