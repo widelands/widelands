@@ -64,12 +64,18 @@ static void readCurrentVersion(FileRead& fr, Player::AiPersistentState& ai_data)
     ai_data.target_military_score          = fr.unsigned_32();
     ai_data.ai_productionsites_ratio       = fr.unsigned_32();
     ai_data.ai_personality_mil_upper_limit = fr.signed_32();
+
     // Magic numbers
-    ai_data.magic_numbers_size = fr.unsigned_32();
-    for (uint16_t i = 0; i < ai_data.magic_numbers_size; ++i) {
-        ai_data.magic_numbers.push_back(fr.signed_16());
+	 // TODO (GunChleoc): We allow for smaller size for savegame compatibility. Make the size static after Build 20.
+    size_t magic_numbers_size = fr.unsigned_32();
+	 if (magic_numbers_size > Widelands::Player::AiPersistentState::kMagicNumbersSize) {
+		 throw GameDataError("Too many magic numbers. we have %" PRIuS " but only %" PRIuS "are allowed", magic_numbers_size, Widelands::Player::AiPersistentState::kMagicNumbersSize);
+	 }
+	 assert(magic_numbers_size <= Widelands::Player::AiPersistentState::kMagicNumbersSize);
+	 assert(ai_data.magic_numbers.size() == Widelands::Player::AiPersistentState::kMagicNumbersSize);
+    for (uint16_t i = 0; i < Widelands::Player::AiPersistentState::kMagicNumbersSize; ++i) {
+        ai_data.magic_numbers.at(i) = (i < magic_numbers_size) ? fr.signed_16() : 0;
     }
-    assert(ai_data.magic_numbers_size == ai_data.magic_numbers.size());
     // Neurons
     ai_data.neuron_pool_size = fr.unsigned_32();
     for (uint16_t i = 0; i < ai_data.neuron_pool_size; ++i) {
@@ -144,10 +150,10 @@ static void writeCurrentVersion(FileWrite& fw, const Player::AiPersistentState& 
     fw.signed_32(ai_data.ai_personality_mil_upper_limit);
 
     // Magic numbers
-    fw.unsigned_32(ai_data.magic_numbers_size);
-    assert(ai_data.magic_numbers_size == ai_data.magic_numbers.size());
-    for (uint16_t i = 0; i < ai_data.magic_numbers_size; ++i) {
-        fw.signed_16(ai_data.magic_numbers[i]);
+	 assert(ai_data.magic_numbers.size() == Widelands::Player::AiPersistentState::kMagicNumbersSize);
+    fw.unsigned_32(ai_data.magic_numbers.size());
+    for (int16_t magic_number : ai_data.magic_numbers) {
+        fw.signed_16(magic_number);
     }
     // Neurons
     fw.unsigned_32(ai_data.neuron_pool_size);

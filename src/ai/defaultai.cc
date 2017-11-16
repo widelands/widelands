@@ -530,9 +530,14 @@ void DefaultAI::late_initialization() {
 		// all zeroes
 		assert(persistent_data->neuron_weights.empty());
 		assert(persistent_data->neuron_functs.empty());
-		assert(persistent_data->magic_numbers_size == 0);
 		assert(persistent_data->neuron_pool_size == 0);
-		assert(persistent_data->magic_numbers.empty());
+
+		assert(persistent_data->magic_numbers.size() == Widelands::Player::AiPersistentState::kMagicNumbersSize);
+#ifndef NDEBUG
+		for (size_t i = 0; i < persistent_data->magic_numbers.size(); ++i) {
+			assert(persistent_data->magic_numbers.at(i) == 0);
+		}
+#endif
 
 		// AI's DNA population
 		management_data.new_dna_for_persistent(player_number(), type_);
@@ -637,7 +642,7 @@ void DefaultAI::late_initialization() {
 		if (create_basic_buildings_list &&
 		    bh.basic_amount() > 0) {  // This is the very begining of the game
 			assert(persistent_data->remaining_basic_buildings.count(bo.id) == 0);
-			persistent_data->remaining_basic_buildings.emplace(std::make_pair(bo.id, bh.basic_amount());
+			persistent_data->remaining_basic_buildings.emplace(std::make_pair(bo.id, bh.basic_amount()));
 		}
 		bo.basic_amount = bh.basic_amount();
 		if (bh.get_needs_water()) {

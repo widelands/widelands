@@ -101,9 +101,9 @@ void AiDnaHandler::dump_output(Widelands::Player::AiPersistentState* pd, uint8_t
 	Profile prof;
 
 	Section& mn = prof.create_section("magic_numbers");
-	assert(pd->magic_numbers_size == pd->magic_numbers.size());
-	for (size_t i = 0; i < pd->magic_numbers_size; ++i) {
-		mn.set_int(std::to_string(static_cast<int32_t>(i)).c_str(), pd->magic_numbers[i]);
+	assert(pd->magic_numbers.size() == Widelands::Player::AiPersistentState::kMagicNumbersSize);
+	for (size_t i = 0; i < pd->magic_numbers.size(); ++i) {
+		mn.set_int(std::to_string(static_cast<int32_t>(i)).c_str(), pd->magic_numbers.at(i));
 	}
 
 	Section& nv = prof.create_section("neuron_values");

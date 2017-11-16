@@ -155,6 +155,9 @@ public:
 	/// Data that are used and managed by AI. They are here to have it saved as a part of player's
 	/// data
 	struct AiPersistentState {
+		// TODO(tiborb): this should be replaced by command line switch
+		static constexpr size_t kMagicNumbersSize = 150;
+
 		AiPersistentState()
 		   : initialized(0),  // zero here is important, it means "~first time"
 		     colony_scan_area(0),
@@ -167,9 +170,9 @@ public:
 		     target_military_score(0),
 		     ai_productionsites_ratio(0),
 		     ai_personality_mil_upper_limit(0),
-		     magic_numbers_size(0),
 		     neuron_pool_size(0),
-		     f_neuron_pool_size(0) {
+		     f_neuron_pool_size(0),
+			  magic_numbers(kMagicNumbersSize, 0) {
 		}
 
 		// Was initialized
@@ -185,7 +188,6 @@ public:
 		int32_t target_military_score;
 		uint32_t ai_productionsites_ratio;
 		int32_t ai_personality_mil_upper_limit;
-		uint32_t magic_numbers_size;
 		uint32_t neuron_pool_size;
 		uint32_t f_neuron_pool_size;
 		std::vector<int16_t> magic_numbers;
