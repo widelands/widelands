@@ -168,8 +168,8 @@ bool LoadOrSaveGame::compare_date_descending(uint32_t rowa, uint32_t rowb) const
 	return r1.savetimestamp < r2.savetimestamp;
 }
 
-const SavegameData* LoadOrSaveGame::entry_selected() {
-	SavegameData* result = new SavegameData();
+const std::shared_ptr<SavegameData> LoadOrSaveGame::entry_selected() {
+	std::shared_ptr<SavegameData> result = std::make_shared<SavegameData>(SavegameData());
 	size_t selections = table_.selections().size();
 	if (selections == 1) {
 		delete_->set_tooltip(
@@ -178,7 +178,7 @@ const SavegameData* LoadOrSaveGame::entry_selected() {
 		      _("Delete this replay") :
 		      /** TRANSLATORS: Tooltip for the delete button. The user has selected 1 file */
 		      _("Delete this game"));
-		result = &games_data_[table_.get_selected()];
+		result = std::make_shared<SavegameData>(games_data_[table_.get_selected()]);
 	} else if (selections > 1) {
 		delete_->set_tooltip(
 		   filetype_ == FileType::kReplay ?

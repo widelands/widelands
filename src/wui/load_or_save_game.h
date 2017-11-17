@@ -43,7 +43,7 @@ protected:
 	               bool localize_autosave);
 
 	/// Update gamedetails and tooltips and return information about the current selection
-	const SavegameData* entry_selected();
+	const std::shared_ptr<SavegameData> entry_selected();
 
 	/// Whether the table has a selection
 	bool has_selection() const;
