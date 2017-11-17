@@ -3,12 +3,11 @@ dirname = path.dirname (__file__)
 animations = {
    idle = {
       pictures = path.list_files (dirname .. "idle_??.png"),
-      hotspot = { 101, 141 },
-      fps = 10
+      hotspot = {192, 226},
+      fps = 20
    }
 }
-add_walking_animations (animations, "sail", dirname, "sail", {114, 139}, 10)
-
+add_walking_animations (animations, "sail", dirname, "sail", {192, 226}, 10)
 
 tribes:new_ship_type {
    name = "frisians_ship",

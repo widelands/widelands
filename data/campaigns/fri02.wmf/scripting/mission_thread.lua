@@ -207,7 +207,7 @@ function supply_yes ()
       campaign_message_box (defeat_murilius_1)
       campaign_message_box (defeat_murilius_2)
       p2.team = 2
-      add_campaign_objective (obj_defeat_murilius)
+      o = add_campaign_objective (obj_defeat_murilius)
       local def = false
       while not def do
          def = true
@@ -218,6 +218,7 @@ function supply_yes ()
             sleep (40)
          end
       end
+      set_objective_done (o)
    end
    done_fight = true
 end
