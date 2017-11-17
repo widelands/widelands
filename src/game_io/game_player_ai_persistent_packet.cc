@@ -28,89 +28,10 @@
 
 namespace Widelands {
 
-constexpr uint16_t kCurrentPacketVersion = 3; // introduction of genetic algorith with all structures that are needed for it
-constexpr uint16_t kPacketVersion2 = 2;       // Old Version before using genetics
-
-/**
- * skip and ignore old data, we will just read other variables
- */
-static void skipVersion2(FileRead& fr) {
-    fr.unsigned_8();
-    fr.unsigned_32();
-    fr.unsigned_32();
-    fr.unsigned_32();
-    fr.unsigned_16();
-    fr.unsigned_8();
-    fr.signed_16();
-    fr.unsigned_32();
-    fr.unsigned_32();
-    fr.signed_16();
-    fr.signed_32();
-    fr.unsigned_32();
-    fr.signed_32();
-    fr.unsigned_32();
-    fr.unsigned_32();
-}
-
-static void readCurrentVersion(FileRead& fr, Player::AiPersistentState& ai_data) {
-    ai_data.initialized                    = fr.unsigned_8();
-    ai_data.colony_scan_area               = fr.unsigned_32();
-    ai_data.trees_around_cutters           = fr.unsigned_32();
-    ai_data.expedition_start_time          = fr.unsigned_32();
-    ai_data.ships_utilization              = fr.unsigned_16();
-    ai_data.no_more_expeditions            = fr.unsigned_8();
-    ai_data.last_attacked_player           = fr.signed_16();
-    ai_data.least_military_score           = fr.unsigned_32();
-    ai_data.target_military_score          = fr.unsigned_32();
-    ai_data.ai_productionsites_ratio       = fr.unsigned_32();
-    ai_data.ai_personality_mil_upper_limit = fr.signed_32();
-
-    // Magic numbers
-	 // TODO (GunChleoc): We allow for smaller size for savegame compatibility. Make the size static after Build 20.
-    size_t magic_numbers_size = fr.unsigned_32();
-	 if (magic_numbers_size > Widelands::Player::AiPersistentState::kMagicNumbersSize) {
-		 throw GameDataError("Too many magic numbers: We have %" PRIuS " but only %" PRIuS "are allowed", magic_numbers_size, Widelands::Player::AiPersistentState::kMagicNumbersSize);
-	 }
-	 assert(magic_numbers_size <= Widelands::Player::AiPersistentState::kMagicNumbersSize);
-	 assert(ai_data.magic_numbers.size() == Widelands::Player::AiPersistentState::kMagicNumbersSize);
-    for (size_t i = 0; i < Widelands::Player::AiPersistentState::kMagicNumbersSize; ++i) {
-        ai_data.magic_numbers.at(i) = (i < magic_numbers_size) ? fr.signed_16() : 0;
-    }
-
-    // Neurons
-	 const size_t neuron_pool_size = fr.unsigned_32();
-	 if (neuron_pool_size > Widelands::Player::AiPersistentState::kNeuronPoolSize) {
-		 throw GameDataError("Too many neurons: We have %" PRIuS " but only %" PRIuS "are allowed", neuron_pool_size, Widelands::Player::AiPersistentState::kNeuronPoolSize);
-	 }
-	 assert(ai_data.neuron_weights.size() == Widelands::Player::AiPersistentState::kNeuronPoolSize);
-    for (size_t i = 0; i < Widelands::Player::AiPersistentState::kNeuronPoolSize; ++i) {
-        ai_data.neuron_weights.at(i) = (i < neuron_pool_size) ? fr.signed_8() : 0;
-    }
-	 assert(ai_data.neuron_functs.size() == Widelands::Player::AiPersistentState::kNeuronPoolSize);
-    for (size_t i = 0; i < Widelands::Player::AiPersistentState::kNeuronPoolSize; ++i) {
-        ai_data.neuron_functs.at(i) = (i < neuron_pool_size) ? fr.signed_8() : 0;
-    }
-
-    // F-neurons
-    const size_t f_neuron_pool_size = fr.unsigned_32();
-	 if (f_neuron_pool_size > Widelands::Player::AiPersistentState::kFNeuronPoolSize) {
-		 throw GameDataError("Too many f neurons: We have %" PRIuS " but only %" PRIuS "are allowed", f_neuron_pool_size, Widelands::Player::AiPersistentState::kFNeuronPoolSize);
-	 }
-	 assert(ai_data.f_neurons.size() == Widelands::Player::AiPersistentState::kFNeuronPoolSize);
-    for (size_t i = 0; i < Widelands::Player::AiPersistentState::kFNeuronPoolSize; ++i) {
-        ai_data.f_neurons.at(i) = (i < neuron_pool_size) ? fr.unsigned_32() : 0;
-    }
-
-    // remaining buildings for basic economy
-	 ai_data.remaining_basic_buildings.clear();
-    size_t remaining_basic_buildings_size = fr.unsigned_32();
-    for (uint16_t i = 0; i < remaining_basic_buildings_size; ++i) {
-        ai_data.remaining_basic_buildings.emplace(static_cast<Widelands::DescriptionIndex>(fr.unsigned_32()), fr.unsigned_32());
-    }
-	 // NOCOM(#codereview): undo the refactoring or pass the player rather than the AI data to this funciton.
-	 // We can then assert something like this as a basic sanity check:
-	 // assert (ai_data.remaining_basic_buildings.size() < player->tribe().buildings().size())
-}
+// Introduction of genetic algorithm with all structures that are needed for it
+constexpr uint16_t kCurrentPacketVersion = 3;
+// Old Version before using genetics
+constexpr uint16_t kPacketVersion2 = 2;
 
 void GamePlayerAiPersistentPacket::read(FileSystem& fs, Game& game, MapObjectLoader*) {
 	try {
@@ -123,13 +44,101 @@ void GamePlayerAiPersistentPacket::read(FileSystem& fs, Game& game, MapObjectLoa
 		if (packet_version >= kPacketVersion2 && packet_version <= kCurrentPacketVersion) {
 			iterate_players_existing(p, nr_players, game, player) try {
 				if (packet_version == kPacketVersion2) {
+					// Packet is not compatible. Consume without using the data.
+					fr.unsigned_8();
+					fr.unsigned_32();
+					fr.unsigned_32();
+					fr.unsigned_32();
+					fr.unsigned_16();
+					fr.unsigned_8();
+					fr.signed_16();
+					fr.unsigned_32();
+					fr.unsigned_32();
+					fr.signed_16();
+					fr.signed_32();
+					fr.unsigned_32();
+					fr.signed_32();
+					fr.unsigned_32();
+					fr.unsigned_32();
+					// Make the AI initialize itself
+					player->ai_data.initialized = 0;
+				} else {
+					// kCurrentPacketVersion
+					player->ai_data.initialized = fr.unsigned_8();
+					player->ai_data.colony_scan_area = fr.unsigned_32();
+					player->ai_data.trees_around_cutters = fr.unsigned_32();
+					player->ai_data.expedition_start_time = fr.unsigned_32();
+					player->ai_data.ships_utilization = fr.unsigned_16();
+					player->ai_data.no_more_expeditions = fr.unsigned_8();
+					player->ai_data.last_attacked_player = fr.signed_16();
+					player->ai_data.least_military_score = fr.unsigned_32();
+					player->ai_data.target_military_score = fr.unsigned_32();
+					player->ai_data.ai_productionsites_ratio = fr.unsigned_32();
+					player->ai_data.ai_personality_mil_upper_limit = fr.signed_32();
 
-					player->ai_data.initialized = 0; // AI has not been initialized
-                    skipVersion2(fr);
-                }
-                else // kCurrentPacketVersion
-                {
-                    readCurrentVersion(fr, player->ai_data);
+					// Magic numbers
+					size_t magic_numbers_size = fr.unsigned_32();
+
+					// TODO (GunChleoc): We allow for smaller size for savegame compatibility.
+					// Investigate if we can make the size static after Build 20.
+					if (magic_numbers_size > Widelands::Player::AiPersistentState::kMagicNumbersSize) {
+						throw GameDataError(
+						   "Too many magic numbers: We have %" PRIuS " but only %" PRIuS "are allowed",
+						   magic_numbers_size, Widelands::Player::AiPersistentState::kMagicNumbersSize);
+					}
+					assert(magic_numbers_size <=
+					       Widelands::Player::AiPersistentState::kMagicNumbersSize);
+					assert(player->ai_data.magic_numbers.size() ==
+					       Widelands::Player::AiPersistentState::kMagicNumbersSize);
+					for (size_t i = 0; i < Widelands::Player::AiPersistentState::kMagicNumbersSize;
+					     ++i) {
+						player->ai_data.magic_numbers.at(i) =
+						   (i < magic_numbers_size) ? fr.signed_16() : 0;
+					}
+
+					// Neurons
+					const size_t neuron_pool_size = fr.unsigned_32();
+					if (neuron_pool_size > Widelands::Player::AiPersistentState::kNeuronPoolSize) {
+						throw GameDataError(
+						   "Too many neurons: We have %" PRIuS " but only %" PRIuS "are allowed",
+						   neuron_pool_size, Widelands::Player::AiPersistentState::kNeuronPoolSize);
+					}
+					assert(player->ai_data.neuron_weights.size() ==
+					       Widelands::Player::AiPersistentState::kNeuronPoolSize);
+					for (size_t i = 0; i < Widelands::Player::AiPersistentState::kNeuronPoolSize; ++i) {
+						player->ai_data.neuron_weights.at(i) = (i < neuron_pool_size) ? fr.signed_8() : 0;
+					}
+					assert(player->ai_data.neuron_functs.size() ==
+					       Widelands::Player::AiPersistentState::kNeuronPoolSize);
+					for (size_t i = 0; i < Widelands::Player::AiPersistentState::kNeuronPoolSize; ++i) {
+						player->ai_data.neuron_functs.at(i) = (i < neuron_pool_size) ? fr.signed_8() : 0;
+					}
+
+					// F-neurons
+					const size_t f_neuron_pool_size = fr.unsigned_32();
+					if (f_neuron_pool_size > Widelands::Player::AiPersistentState::kFNeuronPoolSize) {
+						throw GameDataError(
+						   "Too many f neurons: We have %" PRIuS " but only %" PRIuS "are allowed",
+						   f_neuron_pool_size, Widelands::Player::AiPersistentState::kFNeuronPoolSize);
+					}
+					assert(player->ai_data.f_neurons.size() ==
+					       Widelands::Player::AiPersistentState::kFNeuronPoolSize);
+					for (size_t i = 0; i < Widelands::Player::AiPersistentState::kFNeuronPoolSize; ++i) {
+						player->ai_data.f_neurons.at(i) = (i < neuron_pool_size) ? fr.unsigned_32() : 0;
+					}
+
+					// Remaining buildings for basic economy
+					// NOCOM reset everything with a function in ai_data
+					player->ai_data.remaining_basic_buildings.clear();
+
+					size_t remaining_basic_buildings_size = fr.unsigned_32();
+					for (uint16_t i = 0; i < remaining_basic_buildings_size; ++i) {
+						player->ai_data.remaining_basic_buildings.emplace(
+						   static_cast<Widelands::DescriptionIndex>(fr.unsigned_32()), fr.unsigned_32());
+					}
+					// Basic sanity check for remaining basic buildings
+					assert(player->ai_data.remaining_basic_buildings.size() <
+					       player->tribe().buildings().size());
 				}
 			} catch (const WException& e) {
 				throw GameDataError("player %u: %s", p, e.what());
@@ -143,51 +152,6 @@ void GamePlayerAiPersistentPacket::read(FileSystem& fs, Game& game, MapObjectLoa
 	}
 }
 
-static void writeCurrentVersion(FileWrite& fw, const Player::AiPersistentState& ai_data) {
-    fw.unsigned_8(ai_data.initialized);
-    fw.unsigned_32(ai_data.colony_scan_area);
-    fw.unsigned_32(ai_data.trees_around_cutters);
-    fw.unsigned_32(ai_data.expedition_start_time);
-    fw.unsigned_16(ai_data.ships_utilization);
-    fw.unsigned_8(ai_data.no_more_expeditions);
-    fw.signed_16(ai_data.last_attacked_player);
-    fw.unsigned_32(ai_data.least_military_score);
-    fw.unsigned_32(ai_data.target_military_score);
-    fw.unsigned_32(ai_data.ai_productionsites_ratio);
-    fw.signed_32(ai_data.ai_personality_mil_upper_limit);
-
-    // Magic numbers
-	 assert(ai_data.magic_numbers.size() == Widelands::Player::AiPersistentState::kMagicNumbersSize);
-    fw.unsigned_32(ai_data.magic_numbers.size());
-    for (int16_t magic_number : ai_data.magic_numbers) {
-        fw.signed_16(magic_number);
-    }
-    // Neurons
-    fw.unsigned_32(Widelands::Player::AiPersistentState::kNeuronPoolSize);
-    assert(ai_data.neuron_weights.size() == Widelands::Player::AiPersistentState::kNeuronPoolSize);
-    assert(ai_data.neuron_functs.size() == Widelands::Player::AiPersistentState::kNeuronPoolSize);
-    for (size_t i = 0; i < Widelands::Player::AiPersistentState::kNeuronPoolSize; ++i) {
-        fw.signed_8(ai_data.neuron_weights.at(i));
-    }
-    for (size_t i = 0; i < Widelands::Player::AiPersistentState::kNeuronPoolSize; ++i) {
-        fw.signed_8(ai_data.neuron_functs.at(i));
-    }
-
-    // F-Neurons
-	 assert(ai_data.f_neurons.size() == Widelands::Player::AiPersistentState::kFNeuronPoolSize);
-    fw.unsigned_32(ai_data.f_neurons.size());
-    for (uint32_t f_neuron : ai_data.f_neurons) {
-        fw.unsigned_32(f_neuron);
-    }
-
-    // Remaining buildings for basic economy
-    fw.unsigned_32(ai_data.remaining_basic_buildings.size());
-    for (auto bb : ai_data.remaining_basic_buildings) {
-        fw.unsigned_32(bb.first);
-        fw.unsigned_32(bb.second);
-    }
-}
-
 /*
  * Write Function
  */
@@ -198,7 +162,52 @@ void GamePlayerAiPersistentPacket::write(FileSystem& fs, Game& game, MapObjectSa
 
 	PlayerNumber const nr_players = game.map().get_nrplayers();
 	iterate_players_existing_const(p, nr_players, game, player) {
-        writeCurrentVersion(fw, player->ai_data);
+		fw.unsigned_8(player->ai_data.initialized);
+		fw.unsigned_32(player->ai_data.colony_scan_area);
+		fw.unsigned_32(player->ai_data.trees_around_cutters);
+		fw.unsigned_32(player->ai_data.expedition_start_time);
+		fw.unsigned_16(player->ai_data.ships_utilization);
+		fw.unsigned_8(player->ai_data.no_more_expeditions);
+		fw.signed_16(player->ai_data.last_attacked_player);
+		fw.unsigned_32(player->ai_data.least_military_score);
+		fw.unsigned_32(player->ai_data.target_military_score);
+		fw.unsigned_32(player->ai_data.ai_productionsites_ratio);
+		fw.signed_32(player->ai_data.ai_personality_mil_upper_limit);
+
+		// Magic numbers
+		assert(player->ai_data.magic_numbers.size() ==
+		       Widelands::Player::AiPersistentState::kMagicNumbersSize);
+		fw.unsigned_32(player->ai_data.magic_numbers.size());
+		for (int16_t magic_number : player->ai_data.magic_numbers) {
+			fw.signed_16(magic_number);
+		}
+		// Neurons
+		fw.unsigned_32(Widelands::Player::AiPersistentState::kNeuronPoolSize);
+		assert(player->ai_data.neuron_weights.size() ==
+		       Widelands::Player::AiPersistentState::kNeuronPoolSize);
+		assert(player->ai_data.neuron_functs.size() ==
+		       Widelands::Player::AiPersistentState::kNeuronPoolSize);
+		for (size_t i = 0; i < Widelands::Player::AiPersistentState::kNeuronPoolSize; ++i) {
+			fw.signed_8(player->ai_data.neuron_weights.at(i));
+		}
+		for (size_t i = 0; i < Widelands::Player::AiPersistentState::kNeuronPoolSize; ++i) {
+			fw.signed_8(player->ai_data.neuron_functs.at(i));
+		}
+
+		// F-Neurons
+		assert(player->ai_data.f_neurons.size() ==
+		       Widelands::Player::AiPersistentState::kFNeuronPoolSize);
+		fw.unsigned_32(player->ai_data.f_neurons.size());
+		for (uint32_t f_neuron : player->ai_data.f_neurons) {
+			fw.unsigned_32(f_neuron);
+		}
+
+		// Remaining buildings for basic economy
+		fw.unsigned_32(player->ai_data.remaining_basic_buildings.size());
+		for (auto bb : player->ai_data.remaining_basic_buildings) {
+			fw.unsigned_32(bb.first);
+			fw.unsigned_32(bb.second);
+		}
 	}
 
 	fw.write(fs, "binary/player_ai");
