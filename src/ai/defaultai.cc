@@ -528,12 +528,20 @@ void DefaultAI::late_initialization() {
 		persistent_data->ai_personality_mil_upper_limit = 100;
 
 		// all zeroes
-		assert(persistent_data->neuron_weights.empty());
-		assert(persistent_data->neuron_functs.empty());
-		assert(persistent_data->neuron_pool_size == 0);
-
+		assert(persistent_data->neuron_weights.size() == Widelands::Player::AiPersistentState::kNeuronPoolSize);
+		assert(persistent_data->neuron_functs.size() == Widelands::Player::AiPersistentState::kNeuronPoolSize);
+		assert(persistent_data->f_neurons.size() == Widelands::Player::AiPersistentState::kFNeuronPoolSize);
 		assert(persistent_data->magic_numbers.size() == Widelands::Player::AiPersistentState::kMagicNumbersSize);
 #ifndef NDEBUG
+		for (int8_t neuron_weight : persistent_data->neuron_weights) {
+			assert(neuron_weight == 0);
+		}
+		for (int8_t neuron_funct : persistent_data->neuron_functs) {
+			assert(neuron_funct == 0);
+		}
+		for (uint32_t f_neuron : persistent_data->f_neurons) {
+			assert(f_neuron == 0);
+		}
 		for (size_t i = 0; i < persistent_data->magic_numbers.size(); ++i) {
 			assert(persistent_data->magic_numbers.at(i) == 0);
 		}

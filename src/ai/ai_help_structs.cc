@@ -506,16 +506,16 @@ void ManagementData::new_dna_for_persistent(const uint8_t pn, const Widelands::A
 	const uint8_t parent2 = std::rand() % 4;
 
 	std::vector<int16_t> AI_military_numbers_P1(Widelands::Player::AiPersistentState::kMagicNumbersSize);
-	std::vector<int8_t> input_weights_P1(kNeuronPoolSize);
-	std::vector<int8_t> input_func_P1(kNeuronPoolSize);
-	std::vector<uint32_t> f_neurons_P1(kFNeuronPoolSize);
+	std::vector<int8_t> input_weights_P1(Widelands::Player::AiPersistentState::kNeuronPoolSize);
+	std::vector<int8_t> input_func_P1(Widelands::Player::AiPersistentState::kNeuronPoolSize);
+	std::vector<uint32_t> f_neurons_P1(Widelands::Player::AiPersistentState::kFNeuronPoolSize);
 	ai_dna_handler.fetch_dna(
 	   AI_military_numbers_P1, input_weights_P1, input_func_P1, f_neurons_P1, primary_parent + 1);
 
 	std::vector<int16_t> AI_military_numbers_P2(Widelands::Player::AiPersistentState::kMagicNumbersSize);
-	std::vector<int8_t> input_weights_P2(kNeuronPoolSize);
-	std::vector<int8_t> input_func_P2(kNeuronPoolSize);
-	std::vector<uint32_t> f_neurons_P2(kFNeuronPoolSize);
+	std::vector<int8_t> input_weights_P2(Widelands::Player::AiPersistentState::kNeuronPoolSize);
+	std::vector<int8_t> input_func_P2(Widelands::Player::AiPersistentState::kNeuronPoolSize);
+	std::vector<uint32_t> f_neurons_P2(Widelands::Player::AiPersistentState::kFNeuronPoolSize);
 	ai_dna_handler.fetch_dna(
 	   AI_military_numbers_P2, input_weights_P2, input_func_P2, f_neurons_P2, parent2 + 1);
 
@@ -547,7 +547,7 @@ void ManagementData::new_dna_for_persistent(const uint8_t pn, const Widelands::A
 	persistent_data->neuron_functs.clear();
 	persistent_data->f_neurons.clear();
 
-	for (uint16_t i = 0; i < kNeuronPoolSize; i += 1) {
+	for (uint16_t i = 0; i < Widelands::Player::AiPersistentState::kNeuronPoolSize; ++i) {
 		const DnaParent dna_donor = ((std::rand() % kSecondParentProbability) > 0) ?
 		                               DnaParent::kPrimary :
 		                               DnaParent::kSecondary;
@@ -567,7 +567,7 @@ void ManagementData::new_dna_for_persistent(const uint8_t pn, const Widelands::A
 		}
 	}
 
-	for (uint16_t i = 0; i < kFNeuronPoolSize; i += 1) {
+	for (uint16_t i = 0; i < Widelands::Player::AiPersistentState::kFNeuronPoolSize; ++i) {
 		const DnaParent dna_donor = ((std::rand() % kSecondParentProbability) > 0) ?
 		                               DnaParent::kPrimary :
 		                               DnaParent::kSecondary;
@@ -585,8 +585,6 @@ void ManagementData::new_dna_for_persistent(const uint8_t pn, const Widelands::A
 	}
 
 	assert(persistent_data->magic_numbers.size() == Widelands::Player::AiPersistentState::kMagicNumbersSize);
-	persistent_data->neuron_pool_size = kNeuronPoolSize;
-	persistent_data->f_neuron_pool_size = kFNeuronPoolSize;
 }
 // Decides if mutation takes place and how intensive it will be
 MutatingIntensity ManagementData::do_mutate(const uint8_t is_preferred,
@@ -758,49 +756,41 @@ void ManagementData::mutate(const uint8_t pn) {
 // Now we copy persistent to local
 void ManagementData::copy_persistent_to_local() {
 
-	assert(persistent_data->neuron_weights.size() == kNeuronPoolSize);
-	assert(persistent_data->neuron_functs.size() == kNeuronPoolSize);
+	assert(persistent_data->neuron_weights.size() == Widelands::Player::AiPersistentState::kNeuronPoolSize);
+	assert(persistent_data->neuron_functs.size() == Widelands::Player::AiPersistentState::kNeuronPoolSize);
 	neuron_pool.clear();
-	for (uint32_t i = 0; i < kNeuronPoolSize; i = i + 1) {
+	for (uint32_t i = 0; i < Widelands::Player::AiPersistentState::kNeuronPoolSize; ++i) {
 		neuron_pool.push_back(
 		   Neuron(persistent_data->neuron_weights[i], persistent_data->neuron_functs[i], i));
 	}
 
-	assert(persistent_data->f_neurons.size() == kFNeuronPoolSize);
+	assert(persistent_data->f_neurons.size() == Widelands::Player::AiPersistentState::kFNeuronPoolSize);
 	f_neuron_pool.clear();
-	for (uint32_t i = 0; i < kFNeuronPoolSize; i = i + 1) {
+	for (uint32_t i = 0; i < Widelands::Player::AiPersistentState::kFNeuronPoolSize; ++i) {
 		f_neuron_pool.push_back(FNeuron(persistent_data->f_neurons[i], i));
 	}
 
 	assert(persistent_data->magic_numbers.size() == Widelands::Player::AiPersistentState::kMagicNumbersSize);
-	persistent_data->neuron_pool_size = kNeuronPoolSize;
-	persistent_data->f_neuron_pool_size = kFNeuronPoolSize;
 
 	test_consistency();
 	log("    ... DNA initialized\n");
 }
 
 void ManagementData::test_consistency(bool itemized) {
-
-	assert(persistent_data->neuron_weights.size() == persistent_data->neuron_pool_size);
-	assert(persistent_data->neuron_functs.size() == persistent_data->neuron_pool_size);
-	assert(neuron_pool.size() == persistent_data->neuron_pool_size);
-	assert(neuron_pool.size() == kNeuronPoolSize);
-
 	assert(persistent_data->magic_numbers.size() == Widelands::Player::AiPersistentState::kMagicNumbersSize);
-
-	assert(persistent_data->f_neurons.size() == persistent_data->f_neuron_pool_size);
-	assert(f_neuron_pool.size() == persistent_data->f_neuron_pool_size);
-	assert(f_neuron_pool.size() == kFNeuronPoolSize);
+	assert(persistent_data->neuron_weights.size() == Widelands::Player::AiPersistentState::kNeuronPoolSize);
+	assert(persistent_data->neuron_functs.size() == Widelands::Player::AiPersistentState::kNeuronPoolSize);
+	assert(neuron_pool.size() == Widelands::Player::AiPersistentState::kNeuronPoolSize);
+	assert(f_neuron_pool.size() == Widelands::Player::AiPersistentState::kFNeuronPoolSize);
 
 	if (itemized) {
 		// comparing contents of neuron and fneuron pools
-		for (uint16_t i = 0; i < kNeuronPoolSize; i += 1) {
+		for (uint16_t i = 0; i < Widelands::Player::AiPersistentState::kNeuronPoolSize; ++i) {
 			assert(persistent_data->neuron_weights[i] == neuron_pool[i].get_weight());
 			assert(persistent_data->neuron_functs[i] == neuron_pool[i].get_type());
 			assert(neuron_pool[i].get_id() == i);
 		}
-		for (uint16_t i = 0; i < kFNeuronPoolSize; i += 1) {
+		for (uint16_t i = 0; i < Widelands::Player::AiPersistentState::kFNeuronPoolSize; ++i) {
 			assert(persistent_data->f_neurons[i] == f_neuron_pool[i].get_int());
 			assert(f_neuron_pool[i].get_id() == i);
 		}

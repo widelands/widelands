@@ -69,30 +69,37 @@ static void readCurrentVersion(FileRead& fr, Player::AiPersistentState& ai_data)
 	 // TODO (GunChleoc): We allow for smaller size for savegame compatibility. Make the size static after Build 20.
     size_t magic_numbers_size = fr.unsigned_32();
 	 if (magic_numbers_size > Widelands::Player::AiPersistentState::kMagicNumbersSize) {
-		 throw GameDataError("Too many magic numbers. we have %" PRIuS " but only %" PRIuS "are allowed", magic_numbers_size, Widelands::Player::AiPersistentState::kMagicNumbersSize);
+		 throw GameDataError("Too many magic numbers: We have %" PRIuS " but only %" PRIuS "are allowed", magic_numbers_size, Widelands::Player::AiPersistentState::kMagicNumbersSize);
 	 }
 	 assert(magic_numbers_size <= Widelands::Player::AiPersistentState::kMagicNumbersSize);
 	 assert(ai_data.magic_numbers.size() == Widelands::Player::AiPersistentState::kMagicNumbersSize);
-    for (uint16_t i = 0; i < Widelands::Player::AiPersistentState::kMagicNumbersSize; ++i) {
+    for (size_t i = 0; i < Widelands::Player::AiPersistentState::kMagicNumbersSize; ++i) {
         ai_data.magic_numbers.at(i) = (i < magic_numbers_size) ? fr.signed_16() : 0;
     }
+
     // Neurons
-    ai_data.neuron_pool_size = fr.unsigned_32();
-    for (uint16_t i = 0; i < ai_data.neuron_pool_size; ++i) {
-        ai_data.neuron_weights.push_back(fr.signed_8());
+	 const size_t neuron_pool_size = fr.unsigned_32();
+	 if (neuron_pool_size > Widelands::Player::AiPersistentState::kNeuronPoolSize) {
+		 throw GameDataError("Too many neurons: We have %" PRIuS " but only %" PRIuS "are allowed", neuron_pool_size, Widelands::Player::AiPersistentState::kNeuronPoolSize);
+	 }
+	 assert(ai_data.neuron_weights.size() == Widelands::Player::AiPersistentState::kNeuronPoolSize);
+    for (size_t i = 0; i < Widelands::Player::AiPersistentState::kNeuronPoolSize; ++i) {
+        ai_data.neuron_weights.at(i) = (i < neuron_pool_size) ? fr.signed_8() : 0;
     }
-    for (uint16_t i = 0; i < ai_data.neuron_pool_size; ++i) {
-        ai_data.neuron_functs.push_back(fr.signed_8());
+	 assert(ai_data.neuron_functs.size() == Widelands::Player::AiPersistentState::kNeuronPoolSize);
+    for (size_t i = 0; i < Widelands::Player::AiPersistentState::kNeuronPoolSize; ++i) {
+        ai_data.neuron_functs.at(i) = (i < neuron_pool_size) ? fr.signed_8() : 0;
     }
-    assert(ai_data.neuron_pool_size == ai_data.neuron_weights.size());
-    assert(ai_data.neuron_pool_size == ai_data.neuron_functs.size());
 
     // F-neurons
-    ai_data.f_neuron_pool_size = fr.unsigned_32();
-    for (uint16_t i = 0; i < ai_data.f_neuron_pool_size; ++i) {
-        ai_data.f_neurons.push_back(fr.unsigned_32());
+    const size_t f_neuron_pool_size = fr.unsigned_32();
+	 if (f_neuron_pool_size > Widelands::Player::AiPersistentState::kFNeuronPoolSize) {
+		 throw GameDataError("Too many f neurons: We have %" PRIuS " but only %" PRIuS "are allowed", f_neuron_pool_size, Widelands::Player::AiPersistentState::kFNeuronPoolSize);
+	 }
+	 assert(ai_data.f_neurons.size() == Widelands::Player::AiPersistentState::kFNeuronPoolSize);
+    for (size_t i = 0; i < Widelands::Player::AiPersistentState::kFNeuronPoolSize; ++i) {
+        ai_data.f_neurons.at(i) = (i < neuron_pool_size) ? fr.unsigned_32() : 0;
     }
-    assert(ai_data.f_neuron_pool_size == ai_data.f_neurons.size());
 
     // remaining buildings for basic economy
 	 ai_data.remaining_basic_buildings.clear();
@@ -156,22 +163,21 @@ static void writeCurrentVersion(FileWrite& fw, const Player::AiPersistentState& 
         fw.signed_16(magic_number);
     }
     // Neurons
-    fw.unsigned_32(ai_data.neuron_pool_size);
-    assert(ai_data.neuron_pool_size == ai_data.neuron_weights.size());
-    assert(ai_data.neuron_pool_size == ai_data.neuron_functs.size());
-    for (uint16_t i = 0; i < ai_data.neuron_pool_size; ++i) {
-        fw.signed_8(ai_data.neuron_weights[i]);
+    fw.unsigned_32(Widelands::Player::AiPersistentState::kNeuronPoolSize);
+    assert(ai_data.neuron_weights.size() == Widelands::Player::AiPersistentState::kNeuronPoolSize);
+    assert(ai_data.neuron_functs.size() == Widelands::Player::AiPersistentState::kNeuronPoolSize);
+    for (size_t i = 0; i < Widelands::Player::AiPersistentState::kNeuronPoolSize; ++i) {
+        fw.signed_8(ai_data.neuron_weights.at(i));
     }
-    for (uint16_t i = 0; i < ai_data.neuron_pool_size; ++i) {
-        fw.signed_8(ai_data.neuron_functs[i]);
+    for (size_t i = 0; i < Widelands::Player::AiPersistentState::kNeuronPoolSize; ++i) {
+        fw.signed_8(ai_data.neuron_functs.at(i));
     }
 
     // F-Neurons
-    fw.unsigned_32(ai_data.f_neuron_pool_size);
-    assert(ai_data.f_neuron_pool_size == ai_data.f_neurons.size());
-
-    for (uint16_t i = 0; i < ai_data.f_neuron_pool_size; ++i) {
-        fw.unsigned_32(ai_data.f_neurons[i]);
+	 assert(ai_data.f_neurons.size() == Widelands::Player::AiPersistentState::kFNeuronPoolSize);
+    fw.unsigned_32(ai_data.f_neurons.size());
+    for (uint32_t f_neuron : ai_data.f_neurons) {
+        fw.unsigned_32(f_neuron);
     }
 
     // Remaining buildings for basic economy

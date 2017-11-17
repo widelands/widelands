@@ -157,6 +157,8 @@ public:
 	struct AiPersistentState {
 		// TODO(tiborb): this should be replaced by command line switch
 		static constexpr size_t kMagicNumbersSize = 150;
+		static constexpr size_t kNeuronPoolSize = 80;
+		static constexpr size_t kFNeuronPoolSize = 60;
 
 		AiPersistentState()
 		   : initialized(0),  // zero here is important, it means "~first time"
@@ -170,9 +172,10 @@ public:
 		     target_military_score(0),
 		     ai_productionsites_ratio(0),
 		     ai_personality_mil_upper_limit(0),
-		     neuron_pool_size(0),
-		     f_neuron_pool_size(0),
-			  magic_numbers(kMagicNumbersSize, 0) {
+			  magic_numbers(kMagicNumbersSize, 0),
+			  neuron_weights(kNeuronPoolSize, 0),
+			  neuron_functs(kNeuronPoolSize, 0),
+			  f_neurons(kFNeuronPoolSize, 0) {
 		}
 
 		// Was initialized
@@ -188,8 +191,6 @@ public:
 		int32_t target_military_score;
 		uint32_t ai_productionsites_ratio;
 		int32_t ai_personality_mil_upper_limit;
-		uint32_t neuron_pool_size;
-		uint32_t f_neuron_pool_size;
 		std::vector<int16_t> magic_numbers;
 		std::vector<int8_t> neuron_weights;
 		std::vector<int8_t> neuron_functs;

@@ -107,21 +107,21 @@ void AiDnaHandler::dump_output(Widelands::Player::AiPersistentState* pd, uint8_t
 	}
 
 	Section& nv = prof.create_section("neuron_values");
-	assert(pd->neuron_pool_size == pd->neuron_weights.size());
-	for (size_t i = 0; i < pd->neuron_pool_size; ++i) {
-		nv.set_int(std::to_string(static_cast<int32_t>(i)).c_str(), pd->neuron_weights[i]);
+	assert(pd->neuron_weights.size() == Widelands::Player::AiPersistentState::kNeuronPoolSize);
+	for (size_t i = 0; i < pd->neuron_weights.size(); ++i) {
+		nv.set_int(std::to_string(static_cast<int32_t>(i)).c_str(), pd->neuron_weights.at(i));
 	}
 
 	Section& nf = prof.create_section("neuron_functions");
-	assert(pd->neuron_pool_size == pd->neuron_functs.size());
-	for (size_t i = 0; i < pd->neuron_pool_size; ++i) {
-		nf.set_int(std::to_string(static_cast<int32_t>(i)).c_str(), pd->neuron_functs[i]);
+	assert(pd->neuron_functs.size() == Widelands::Player::AiPersistentState::kNeuronPoolSize);
+	for (size_t i = 0; i < pd->neuron_functs.size(); ++i) {
+		nf.set_int(std::to_string(static_cast<int32_t>(i)).c_str(), pd->neuron_functs.at(i));
 	}
 
 	Section& fn = prof.create_section("fneurons");
-	assert(pd->f_neuron_pool_size == pd->f_neurons.size());
-	for (size_t i = 0; i < pd->f_neuron_pool_size; ++i) {
-		fn.set_natural(std::to_string(static_cast<int64_t>(i)).c_str(), pd->f_neurons[i]);
+	assert(pd->f_neurons.size() == Widelands::Player::AiPersistentState::kFNeuronPoolSize);
+	for (size_t i = 0; i < pd->f_neurons.size(); ++i) {
+		fn.set_natural(std::to_string(static_cast<int64_t>(i)).c_str(), pd->f_neurons.at(i));
 	}
 
 	std::string comment = "See wiki for more info: https://wl.widelands.org/wiki/Ai%20Training/";

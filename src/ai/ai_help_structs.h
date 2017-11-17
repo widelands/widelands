@@ -121,8 +121,6 @@ const std::vector<std::vector<int8_t>> neuron_curves = {
 };
 
 // TODO(tiborb): this should be replaced by command line switch
-constexpr int kNeuronPoolSize = 80;
-constexpr int kFNeuronPoolSize = 60;
 constexpr int kFNeuronBitSize = 32;
 constexpr int kMutationRatePosition = 42;
 
