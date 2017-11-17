@@ -24,6 +24,7 @@
 #include "base/wexception.h"
 #include "graphic/graphic.h"
 #include "logic/game_data_error.h"
+#include "logic/map_objects/tribes/market.h"
 
 namespace Widelands {
 

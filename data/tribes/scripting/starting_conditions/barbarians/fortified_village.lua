@@ -61,6 +61,7 @@ return {
             barbarians_miner = 4,
             barbarians_ranger = 1,
             barbarians_stonemason = 2,
+            barbarians_trainer = 3,
             barbarians_ox = 5,
          },
          soldiers = {

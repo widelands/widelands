@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-08-24 07:44+0000\n"
+"POT-Creation-Date: 2017-11-11 07:08+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Joe Hansen <joedalton2@yahoo.dk>, 2017\n"
 "Language-Team: Danish (https://www.transifex.com/widelands/teams/35159/da/)\n"
@@ -64,172 +64,188 @@ msgid ""
 "there is enough space for them. This will complete the basic building "
 "material supply chain."
 msgstr ""
+"Byg en skovhuggerhytte, et savværk og et stenhuggerhus så snart der er nok "
+"plads til dem. Dette vil færdiggøre den grundlæggende forsyningskæde."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:66
 msgid "Lower the demand for marble columns"
-msgstr ""
+msgstr "Sænk efterspørgslen efter marmorsøjler"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:68
 msgid "Lower Demand for Marble Columns"
-msgstr ""
+msgstr "Mindre efterspørgsel efter marmorsøjler"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:69
 msgid ""
 "We should save some marble for buildings. So, please lower the demand for "
 "marble columns in the economy settings to four."
 msgstr ""
+"Vi bør gemme noget marmor til bygningerne. Så sænk venligst efterspørgslen "
+"efter marmorsøljer i økonomiindstillingerne til fire."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:70
 msgid ""
 "Remember that you can access the economy settings by clicking on any flag."
 msgstr ""
+"Husk at du kan tilgå økonomiindstilliingerne ved at klikke på et flag."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:76
 msgid "Find a port space on the small island"
-msgstr ""
+msgstr "Find en plads til havnen på den lille ø"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:78
 msgid "Port Space"
-msgstr ""
+msgstr "Havneplads"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:79
 msgid ""
 "In order to regain access to the sea, we first must discover a port space."
 msgstr ""
+"For at kunne få adgang til havet igen, så skal vi finde et egnet sted."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:85
 msgid "Build a port and a shipyard on the Island"
-msgstr ""
+msgstr "Byg en havn og et skibsværft på øen"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:87
 msgid "Ship Industry"
-msgstr ""
+msgstr "Skibsindustri"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:88
 msgid "Build a port to set sail from this island."
-msgstr ""
+msgstr "Byg en havn for at kunne sejle væk fra denne ø."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:89
 msgid "Build a shipyard to produce the ships to sail on."
-msgstr ""
+msgstr "Byg et skibsværft for at fremstille skibene."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:94
 msgid "Produce at least 50 sheaves of wheat"
-msgstr ""
+msgstr "Fremstil mindst 50 hvedeneg"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:96
 msgid "Wheat Production"
-msgstr ""
+msgstr "Hvedeproduktion"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:97
 msgid ""
 "To get our wool production started, we need at least 50 sheaves of wheat."
-msgstr ""
+msgstr "For at starte uldproduktionen, skal vi bruge mindst 50 hvedeneg."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:103
 msgid "Produce cloth for building our first ship"
-msgstr ""
+msgstr "Fremstil klæde til vores første skib"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:105
 msgid "Cloth Production"
-msgstr ""
+msgstr "Klædeproduktion"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:106
 msgid ""
 "Now let’s turn all the wheat into wool (at least 50 bales) and then use the "
 "wool to weave cloth in order to build a ship."
 msgstr ""
+"Lad os nu omdanne hveden til uld (mindst 50 baller) og brug så ulden til at "
+"væve klæde til skibet."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:112
 msgid "Build 2 ports on distant islands"
-msgstr ""
+msgstr "Byg 2 havne på fjerne øer"
 
 #. TRANSLATORS: Objective - create 2 expeditions and found new colonies with
 #. them
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:115
 msgid "Build 2 Expedition Ports"
-msgstr ""
+msgstr "Byg 2 ekspeditionshavne"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:116
 msgid ""
 "We should explore the island in the south. Use an expedition to build a port"
 " there. Afterwards, let’s try to find some mining resources."
 msgstr ""
+"Vi bør udforske øen mod syd. Brug en ekspedition til at bygge en havn der. "
+"Efterfølgende skal vi prøve at finde nogle mineressourcer."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:117
 msgid ""
 "We should send a ship northwards to gather some intelligence about the "
 "Barbarians. Try to build a port on the island and found an outpost."
 msgstr ""
+"Vi bør sende et skib nordpå for at samle efterretninger om barbarerne. Prøv "
+"at bygge en havn på øen og grundlæg en forpost."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:123
 msgid "Produce gold to send out expeditions"
-msgstr ""
+msgstr "Fremstil guld for at kunne udsende ekspeditioner"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:125
 msgid "Gold Production"
-msgstr ""
+msgstr "Guldproduktion"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:126
 msgid ""
 "We need to produce at least 6 gold to be able to colonize our vicinity."
 msgstr ""
+"Vi skal fremstille mindst 6 guldstykker for at kunne kolonisere vores "
+"nærområde."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:132
 msgid "Defeat the Barbarians"
-msgstr ""
+msgstr "Besejr barbarerne."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:134
 msgid "Defeat the Enemy"
-msgstr ""
+msgstr "Besejr fjenden"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:135
 msgid "We should end the Barbarians’ existence in this part of the world."
-msgstr ""
+msgstr "Vi skal afslutte barbarernes eksistens i den her del af verden."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:141
 msgid "Explore further and build ports"
-msgstr ""
+msgstr "Udforsk yderligere og byg havne"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:143
 msgid "Explore Additional Islands and Search for Port Spaces"
-msgstr ""
+msgstr "Udforsk yderligere øer og søg efter egnede steder til havne"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:144
 msgid "We should discover more land and build as many ports as we can."
-msgstr ""
+msgstr "Vi bør udforske yderligere land og bygge så mange havne som muligt."
 
 #. TRANSLATORS: Objective header
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:151
 msgid "Recover the shrine"
-msgstr ""
+msgstr "Find helligdommen igen"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:153
 msgid "Find the Holy Shrine"
-msgstr ""
+msgstr "Find helligdommen"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:154
 msgid ""
 "We need to find and secure all six pieces of the holy shrine of Neptune."
-msgstr ""
+msgstr "Vi skal finde og sikre alle seks stykker af Neptuns helligdom."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:159
 msgid "Build a training infrastructure"
-msgstr ""
+msgstr "Byg en træningsinfrastruktur"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:161
 msgid "Training Infrastructure"
-msgstr ""
+msgstr "Træningsinfrastruktur"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:162
 msgid ""
 "Build a training camp, some barracks and an arena or colosseum to train our "
 "soldiers."
 msgstr ""
+"Byg en træningslejr, nogle barakker og en arena eller et amfiteater for at "
+"træne vores soldater."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:171
 msgid "The Journey Home"
-msgstr ""
+msgstr "Rejsen hjem"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:172
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:186
@@ -238,7 +254,7 @@ msgstr ""
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:615
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:643
 msgid "Diary of Lutius"
-msgstr ""
+msgstr "Lutius' dagbog"
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:174
@@ -254,7 +270,7 @@ msgstr ""
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:185
 msgid "The Wrath of Neptune"
-msgstr ""
+msgstr "Neptuns vrede"
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:188
@@ -263,6 +279,9 @@ msgid ""
 "But this time it felt even worse than last time. The waves were twice the "
 "height of our brave ship and the winds drove us into unsafe waters."
 msgstr ""
+"Selveste Neptun var os ugunstig og drev os ud i den mørke, vilde storm igen."
+" Men denne gang føltes det værre end sidste gang. Bølgerne var af dobbelt "
+"højde af vores gode skib og vindene drev os til usikre vande."
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:191
@@ -1060,15 +1079,15 @@ msgstr ""
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:642
 msgid "Artifact Found"
-msgstr ""
+msgstr "Artefakt fundet"
 
 #: ../../data/scripting/format_scenario.lua:36
 #, lua-format
 msgid "“%s”"
-msgstr ""
+msgstr "»%s«"
 
 #: ../../data/scripting/format_scenario.lua:84
 msgid "New Objective"
 msgid_plural "New Objectives"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Nyt mål"
+msgstr[1] "Nye mål"

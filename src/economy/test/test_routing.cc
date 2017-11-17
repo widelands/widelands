@@ -43,7 +43,7 @@ using namespace Widelands;
 class BadAccess : public std::exception {};
 class TestingRoutingNode : public RoutingNode {
 public:
-	TestingRoutingNode(int32_t wcost = 0, Coords pos = Coords(0, 0))
+	explicit TestingRoutingNode(int32_t wcost = 0, Coords pos = Coords(0, 0))
 	   : waitcost_(wcost), position_(pos) {
 	}
 	void add_neighbour(TestingRoutingNode* nb) {

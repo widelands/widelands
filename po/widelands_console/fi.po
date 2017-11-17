@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-08-30 18:44+0000\n"
-"PO-Revision-Date: 2017-09-12 20:28+0000\n"
+"POT-Creation-Date: 2017-10-23 08:29+0000\n"
+"PO-Revision-Date: 2017-10-24 18:01+0000\n"
 "Last-Translator: Jukka Pakarinen\n"
 "Language-Team: Finnish (http://www.transifex.com/widelands/widelands/language/fi/)\n"
 "MIME-Version: 1.0\n"
@@ -42,13 +42,13 @@ msgstr " --<asetuksen-nimi>=arvo Ylikirjoittaa asetustiedoston asetuksen"
 msgid ""
 " --datadir=DIRNAME    Use specified directory for the widelands\n"
 "                      data files"
-msgstr " --datadir=HAKEMISTO Käytä annettua hakemistoa widelandsin\n                      data tiedostoille"
+msgstr " --datadir=HAKEMISTO  Käytä annettua hakemistoa widelandsin\n                      data tiedostoille"
 
 #: ../../src/wlapplication_messages.cc:50
 msgid ""
 " --homedir=DIRNAME    Use specified directory for widelands config\n"
 "                      files, savegames and replays"
-msgstr " --homedir=HAKEMISTO Käytä HAKEMISTO:a widelands asetustiedstoille,\n                      pelitallenteilla ja toistotiedostoille"
+msgstr " --homedir=HAKEMISTO  Käytä HAKEMISTO:a widelands asetustiedstoille,\n                      pelitallenteilla ja toistotiedostoille"
 
 #: ../../src/wlapplication_messages.cc:54
 msgid "                      Default is ~/.widelands"
@@ -63,7 +63,7 @@ msgid ""
 " --coredump=[true|false]\n"
 "                      Generates a core dump on segfaults instead of\n"
 "                      using the SDL"
-msgstr "--coredump=[true|false]\nMuodostaa core dump tiedoston muistialueen\nylityksessä SDL:n käyttämisen sijaan"
+msgstr " --coredump=[true|false]\n                      Muodostaa core dump tiedoston muistialueen\n                      ylityksessä SDL:n käyttämisen sijaan"
 
 #: ../../src/wlapplication_messages.cc:64
 msgid ""
@@ -84,17 +84,17 @@ msgstr " --language=[de_DE|sv_SE|...]\n                      Käytetty lokalisaa
 msgid ""
 " --write_syncstreams=[true|false]\n"
 "                      Create syncstream dump files to help debug network games."
-msgstr " --write_syncstreams=[true|false]\nLuo syncstream dump tiedostot verkkopelin debugaamisen helpottamiseksi "
+msgstr " --write_syncstreams=[true|false]\n                      Luo syncstream dump tiedostot verkkopelin debugaamisen helpottamiseksi "
 
 #: ../../src/wlapplication_messages.cc:76
 msgid " --autosave=[...]     Automatically save each n minutes"
-msgstr "--autosave=[...] Automaattitallennus jokaisella n minuutilla"
+msgstr " --autosave=[...]     Automaattitallennus jokaisella n minuutilla"
 
 #: ../../src/wlapplication_messages.cc:77
 msgid ""
 " --rolling_autosave=[...]\n"
 "                      Use this many files for rolling autosaves"
-msgstr "--rolling_autosave=[...]\nKäytä näin montaa tiedostoa automaatisten tallennusten vierittämiseen"
+msgstr " --rolling_autosave=[...]\n                      Käytä näin montaa tiedostoa automaatisten tallennusten vierittämiseen"
 
 #: ../../src/wlapplication_messages.cc:82
 msgid "Sound options:"
@@ -136,7 +136,7 @@ msgid ""
 "                      adjusting the game speed automatically,\n"
 "                      depending on FPS. Useful in conjunction with\n"
 "                      --ai_training."
-msgstr " --auto_speed        Vain moninpeleissä tämä säätää\n                    pelin nopeuden automaattisesti\n                    perustuen FPS:ään. Hyödyllinen\n                   yhdistettynä  asetuksen --ai_training."
+msgstr " --auto_speed         Vain moninpeleissä tämä säätää\n                      pelin nopeuden automaattisesti\n                      perustuen FPS:ään. Hyödyllinen\n                      yhdistettynä  asetuksen --ai_training."
 
 #: ../../src/wlapplication_messages.cc:102
 msgid ""
@@ -152,7 +152,7 @@ msgstr " --loadgame=TIEDOSTO  Avaa suoraan pelitallennuksen TIEDOSTO."
 msgid ""
 " --script=FILENAME    Run the given Lua script after initialization.\n"
 "                      Only valid with --scenario, --loadgame, or --editor."
-msgstr "--script=TIEDOSTO Suorita annettu Lua skripti alustuksen jälkeen.\nToimii vain asetusten --scenario, --loadgame, tai --editor kanssa."
+msgstr " --script=TIEDOSTO    Suorita annettu Lua skripti alustuksen jälkeen.\n                      Toimii vain asetusten --scenario, --loadgame, tai --editor kanssa."
 
 #. * TRANSLATORS: You may translate true/false, also as on/off or yes/no, but
 #. * TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the
@@ -164,7 +164,7 @@ msgid ""
 "                      Whether to enter roadbuilding mode\n"
 "                      automatically after placing a flag that is\n"
 "                      not connected to a road."
-msgstr "--auto_roadbuild_mode=[true|false]\nAstuakko tienrakennusmoodiin\nautomaattisesti heti lipun sijoittamisen jälkeen,\nkun se ei ole vielä yhdistetty tiehen."
+msgstr " --auto_roadbuild_mode=[true|false]\n                      Astuakko tienrakennusmoodiin\n                      automaattisesti heti lipun sijoittamisen jälkeen,\n                      kun se ei ole vielä yhdistetty tiehen."
 
 #: ../../src/wlapplication_messages.cc:118
 msgid "Graphic options:"
@@ -179,21 +179,27 @@ msgid ""
 " --fullscreen=[true|false]\n"
 "                      Whether to use the whole display for the\n"
 "                      game screen."
-msgstr "--fullscreen=[true|false]\nKäyttääkkö peli-ikkunalle koko näytön laajuutta."
+msgstr " --fullscreen=[true|false]\n                      Käyttääkkö peli-ikkunalle koko näytön laajuutta."
 
 #: ../../src/wlapplication_messages.cc:126
 msgid " --xres=[...]         Width of the window in pixel."
-msgstr "--xres=[...] Ikkunan levelys pikseleinä."
+msgstr " --xres=[...]         Ikkunan leveys pikseleinä."
 
 #: ../../src/wlapplication_messages.cc:127
 msgid " --yres=[...]         Height of the window in pixel."
-msgstr "--yres=[...] Ikkunan korkeus pikseleinä."
+msgstr " --yres=[...]         Ikkunan korkeus pikseleinä."
 
 #: ../../src/wlapplication_messages.cc:132
 msgid "Options for the internal window manager:"
 msgstr "Sisäisen ikkunointijärjestelmän asetukset:"
 
 #: ../../src/wlapplication_messages.cc:133
+msgid ""
+" --animate_map_panning=[yes|no]\n"
+"                      Should automatic map movements be animated."
+msgstr " --animate_map_panning=[yes|no]\n                      Pitäisikö automaattiset karttaliikkeet animoida."
+
+#: ../../src/wlapplication_messages.cc:136
 msgid ""
 " --border_snap_distance=[0 ...]\n"
 "                      Move a window to the edge of the screen\n"
@@ -205,15 +211,15 @@ msgstr " --border_snap_distance=[0 ...]\n                      Siirrä ikkuna ru
 #. * TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the
 #. widelands
 #. textdomain
-#: ../../src/wlapplication_messages.cc:141
+#: ../../src/wlapplication_messages.cc:144
 msgid ""
 " --dock_windows_to_edges=[true|false]\n"
 "                      Eliminate a window's border towards the\n"
 "                      edge of the screen when the edge of the\n"
 "                      window is next to the edge of the screen."
-msgstr "--dock_windows_to_edges=[true|false]\nTuhoa ikkunan reuna ruudun reunaa kohti\nsilloin kun ikkunan reuna on ruudun reunan vieressä."
+msgstr " --dock_windows_to_edges=[true|false]\n                      Tuhoa ikkunan reuna ruudun reunaa kohti\n                      silloin kun ikkunan reuna on ruudun reunan\n                      vieressä."
 
-#: ../../src/wlapplication_messages.cc:146
+#: ../../src/wlapplication_messages.cc:149
 msgid ""
 " --panel_snap_distance=[0 ...]\n"
 "                      Move a window to the edge of the panel when\n"
@@ -221,7 +227,7 @@ msgid ""
 "                      distance from the edge of the panel."
 msgstr " --panel_snap_distance=[0 ...]\n                      Siirrä ikkuna paneelin reunaan kun ikkunan reuna\n                      on tällä etäisyydellä paneelin reunasta."
 
-#: ../../src/wlapplication_messages.cc:151
+#: ../../src/wlapplication_messages.cc:154
 msgid ""
 " --snap_windows_only_when_overlapping=[yes|no]\n"
 "                      Only move a window to the edge of a panel\n"
@@ -229,15 +235,15 @@ msgid ""
 "                      panel."
 msgstr " --snap_windows_only_when_overlapping=[yes|no]\n                      Siirrä ikkuna paneelin reunaan vain jos se on\n                      paneelin päällä."
 
-#: ../../src/wlapplication_messages.cc:157
+#: ../../src/wlapplication_messages.cc:160
 msgid " --verbose            Enable verbose debug messages"
 msgstr " --verbose            Käytä laajaa debug-tulostusta"
 
-#: ../../src/wlapplication_messages.cc:158
+#: ../../src/wlapplication_messages.cc:161
 msgid " --help               Show this help"
 msgstr " --help               Näytä tämä ohje"
 
-#: ../../src/wlapplication_messages.cc:159
+#: ../../src/wlapplication_messages.cc:162
 msgid ""
 "Bug reports? Suggestions? Check out the project website:\n"
 "        https://launchpad.net/widelands\n"

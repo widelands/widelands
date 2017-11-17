@@ -390,6 +390,10 @@ void Bob::idle_update(Game& game, State& state) {
 	state.ivar1 = 0;
 }
 
+bool Bob::is_idle() {
+	return get_state(taskIdle);
+}
+
 /**
  * Move along a predefined path.
  * \par ivar1 the step number.

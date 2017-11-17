@@ -78,6 +78,8 @@ enum class BuildingAttribute : uint8_t {
 	kUpgradeExtends,
 	kLogRefiner,
 	kIronMine,
+	kNeedsSeafaring,
+	kSupportingProducer,
 };
 
 enum class AiType : uint8_t { kVeryWeak, kWeak, kNormal };
@@ -124,7 +126,6 @@ constexpr int kNeuronPoolSize = 80;
 constexpr int kFNeuronPoolSize = 60;
 constexpr int kFNeuronBitSize = 32;
 constexpr int kMutationRatePosition = 42;
-constexpr int16_t AiPrefNumberProbability = 5;
 
 constexpr uint32_t kNever = std::numeric_limits<uint32_t>::max();
 
@@ -389,7 +390,7 @@ struct EconomyObserver {
 	explicit EconomyObserver(Widelands::Economy& e);
 
 	Widelands::Economy& economy;
-	std::list<Widelands::Flag const*> flags;
+	std::deque<Widelands::Flag const*> flags;
 	int32_t dismantle_grace_time;
 };
 
@@ -662,7 +663,6 @@ struct ManagementData {
 	}
 	void set_ai_training_mode() {
 		ai_training_mode_ = true;
-		pref_number_probability = AiPrefNumberProbability;
 	}
 
 	int16_t get_military_number_at(uint8_t);
@@ -685,7 +685,7 @@ private:
 	uint16_t performance_change = 0U;
 	Widelands::AiType ai_type = Widelands::AiType::kNormal;
 	bool ai_training_mode_ = false;
-	uint16_t pref_number_probability = 100;
+	uint16_t pref_number_probability = 200;
 	AiDnaHandler ai_dna_handler;
 };
 
@@ -782,7 +782,6 @@ private:
 	struct PlayerStat {
 		PlayerStat() = default;
 		PlayerStat(Widelands::TeamNumber tc,
-		           bool en,
 		           uint32_t pp,
 		           uint32_t op,
 		           uint32_t o60p,
@@ -792,7 +791,6 @@ private:
 		           uint32_t o60l);
 
 		Widelands::TeamNumber team_number = 0U;
-		bool is_enemy = false;
 		uint32_t players_power = 0U;
 		uint32_t old_players_power = 0U;
 		uint32_t old60_players_power = 0U;
@@ -817,6 +815,7 @@ public:
 	         uint32_t land,
 	         uint32_t oland,
 	         uint32_t o60l);
+	void remove_stat(Widelands::PlayerNumber pn);
 	void recalculate_team_power();
 
 	// This is strength of player plus third of strength of other members of his team
@@ -840,7 +839,6 @@ public:
 	bool get_is_enemy(Widelands::PlayerNumber);
 	uint8_t enemies_seen_lately_count(uint32_t);
 	bool any_enemy_seen_lately(uint32_t);
-	PlayerNumber this_player_number;
 	void set_update_time(uint32_t);
 	uint32_t get_update_time();
 
@@ -852,6 +850,8 @@ private:
 	std::map<Widelands::TeamNumber, uint32_t> team_powers;
 
 	uint32_t update_time;
+	PlayerNumber this_player_number;
+	PlayerNumber this_player_team;
 };
 }  // namespace Widelands
 

@@ -6,7 +6,7 @@
 # GunChleoc, 2016
 # GunChleoc, 2016
 # GwendalD <samuel.weber@gresille.org>, 2017
-# Gwendal D <samuel.weber@normalesup.org>, 2017
+# Samuël Weber <samuel.weber@normalesup.org>, 2017
 # Jaypad <ju-ju@nataju.fr>, 2016
 # Renaud Bouchard, 2015-2017
 # Tubuntu <tubuntu@testimonium.be>, 2015
@@ -14,8 +14,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-08-24 07:44+0000\n"
-"PO-Revision-Date: 2017-08-24 19:12+0000\n"
+"POT-Creation-Date: 2017-09-15 18:56+0000\n"
+"PO-Revision-Date: 2017-09-16 17:50+0000\n"
 "Last-Translator: Renaud Bouchard\n"
 "Language-Team: French (http://www.transifex.com/widelands/widelands/language/fr/)\n"
 "MIME-Version: 1.0\n"
@@ -199,6 +199,12 @@ msgstr "Options pour le gestionnaire de fenêtre interne :"
 
 #: ../../src/wlapplication_messages.cc:133
 msgid ""
+" --animate_map_panning=[yes|no]\n"
+"                      Should automatic map movements be animated."
+msgstr " --animate_map_panning=[yes|no]\n                      Doit activer automatiquement le déplacement de la carte."
+
+#: ../../src/wlapplication_messages.cc:136
+msgid ""
 " --border_snap_distance=[0 ...]\n"
 "                      Move a window to the edge of the screen\n"
 "                      when the edge of the window comes within\n"
@@ -209,7 +215,7 @@ msgstr " --border_snap_distance=[0 ...]\n\tBouge une fenêtre vers le bord de l'
 #. * TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the
 #. widelands
 #. textdomain
-#: ../../src/wlapplication_messages.cc:141
+#: ../../src/wlapplication_messages.cc:144
 msgid ""
 " --dock_windows_to_edges=[true|false]\n"
 "                      Eliminate a window's border towards the\n"
@@ -217,7 +223,7 @@ msgid ""
 "                      window is next to the edge of the screen."
 msgstr " --dock_windows_to_edges=[true|false]\n\tElimine le bord d'une fenêtre du coté du bord de l'écran lorsque \n\tle bord de la fenêtre est à coté du bord de l'écran."
 
-#: ../../src/wlapplication_messages.cc:146
+#: ../../src/wlapplication_messages.cc:149
 msgid ""
 " --panel_snap_distance=[0 ...]\n"
 "                      Move a window to the edge of the panel when\n"
@@ -225,7 +231,7 @@ msgid ""
 "                      distance from the edge of the panel."
 msgstr " --panel_snap_distance=[0 ...]\n\tBouge une fenêtre vers le bord du panneau quand le bord\n\tde la fenêtre entre dans cette distance du bord du panneau."
 
-#: ../../src/wlapplication_messages.cc:151
+#: ../../src/wlapplication_messages.cc:154
 msgid ""
 " --snap_windows_only_when_overlapping=[yes|no]\n"
 "                      Only move a window to the edge of a panel\n"
@@ -233,15 +239,15 @@ msgid ""
 "                      panel."
 msgstr " --snap_windows_only_when_overlapping=[yes|no]\n\tBouge seulement la fenêtre vers le bord du panneau si la fenêtre\n\test au dessus du panneau."
 
-#: ../../src/wlapplication_messages.cc:157
+#: ../../src/wlapplication_messages.cc:160
 msgid " --verbose            Enable verbose debug messages"
 msgstr " --verbose\n\tActive les messages verbeux de debogage."
 
-#: ../../src/wlapplication_messages.cc:158
+#: ../../src/wlapplication_messages.cc:161
 msgid " --help               Show this help"
 msgstr " --help\n\tMontre cette aide."
 
-#: ../../src/wlapplication_messages.cc:159
+#: ../../src/wlapplication_messages.cc:162
 msgid ""
 "Bug reports? Suggestions? Check out the project website:\n"
 "        https://launchpad.net/widelands\n"
