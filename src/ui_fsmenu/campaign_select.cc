@@ -493,4 +493,5 @@ void FullscreenMenuCampaignMapSelect::fill_table() {
 		table_.select(0);
 	}
 	set_has_selection();
+	delete prof;
 }
