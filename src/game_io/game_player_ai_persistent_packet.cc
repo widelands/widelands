@@ -43,6 +43,9 @@ void GamePlayerAiPersistentPacket::read(FileSystem& fs, Game& game, MapObjectLoa
 		// TODO(GunChleoc): Savegame compatibility, remove after Build20
 		if (packet_version >= kPacketVersion2 && packet_version <= kCurrentPacketVersion) {
 			iterate_players_existing(p, nr_players, game, player) try {
+				// Make sure that all containers are reset properly etc.
+				player->ai_data.initialize();
+
 				if (packet_version == kPacketVersion2) {
 					// Packet is not compatible. Consume without using the data.
 					fr.unsigned_8();
@@ -64,10 +67,6 @@ void GamePlayerAiPersistentPacket::read(FileSystem& fs, Game& game, MapObjectLoa
 					player->ai_data.initialized = 0;
 				} else {
 					// kCurrentPacketVersion
-					// Mare sure that all containers are reset properly etc.
-					player->ai_data.initialize();
-
-					// Now read the data
 					player->ai_data.initialized = (fr.unsigned_8() == 1) ? true : false;
 					player->ai_data.colony_scan_area = fr.unsigned_32();
 					player->ai_data.trees_around_cutters = fr.unsigned_32();
@@ -90,14 +89,11 @@ void GamePlayerAiPersistentPacket::read(FileSystem& fs, Game& game, MapObjectLoa
 						   "Too many magic numbers: We have %" PRIuS " but only %" PRIuS "are allowed",
 						   magic_numbers_size, Widelands::Player::AiPersistentState::kMagicNumbersSize);
 					}
-					assert(magic_numbers_size <=
-					       Widelands::Player::AiPersistentState::kMagicNumbersSize);
 					assert(player->ai_data.magic_numbers.size() ==
 					       Widelands::Player::AiPersistentState::kMagicNumbersSize);
-					for (size_t i = 0; i < Widelands::Player::AiPersistentState::kMagicNumbersSize;
+					for (size_t i = 0; i < magic_numbers_size;
 					     ++i) {
-						player->ai_data.magic_numbers.at(i) =
-						   (i < magic_numbers_size) ? fr.signed_16() : 0;
+						player->ai_data.magic_numbers.at(i) = fr.signed_16();
 					}
 
 					// Neurons
@@ -109,13 +105,13 @@ void GamePlayerAiPersistentPacket::read(FileSystem& fs, Game& game, MapObjectLoa
 					}
 					assert(player->ai_data.neuron_weights.size() ==
 					       Widelands::Player::AiPersistentState::kNeuronPoolSize);
-					for (size_t i = 0; i < Widelands::Player::AiPersistentState::kNeuronPoolSize; ++i) {
-						player->ai_data.neuron_weights.at(i) = (i < neuron_pool_size) ? fr.signed_8() : 0;
+					for (size_t i = 0; i < neuron_pool_size; ++i) {
+						player->ai_data.neuron_weights.at(i) = fr.signed_8();
 					}
 					assert(player->ai_data.neuron_functs.size() ==
 					       Widelands::Player::AiPersistentState::kNeuronPoolSize);
-					for (size_t i = 0; i < Widelands::Player::AiPersistentState::kNeuronPoolSize; ++i) {
-						player->ai_data.neuron_functs.at(i) = (i < neuron_pool_size) ? fr.signed_8() : 0;
+					for (size_t i = 0; i < neuron_pool_size; ++i) {
+						player->ai_data.neuron_functs.at(i) = fr.signed_8();
 					}
 
 					// F-neurons
@@ -127,8 +123,8 @@ void GamePlayerAiPersistentPacket::read(FileSystem& fs, Game& game, MapObjectLoa
 					}
 					assert(player->ai_data.f_neurons.size() ==
 					       Widelands::Player::AiPersistentState::kFNeuronPoolSize);
-					for (size_t i = 0; i < Widelands::Player::AiPersistentState::kFNeuronPoolSize; ++i) {
-						player->ai_data.f_neurons.at(i) = (i < neuron_pool_size) ? fr.unsigned_32() : 0;
+					for (size_t i = 0; i < f_neuron_pool_size; ++i) {
+						player->ai_data.f_neurons.at(i) = fr.unsigned_32();
 					}
 
 					// Remaining buildings for basic economy
