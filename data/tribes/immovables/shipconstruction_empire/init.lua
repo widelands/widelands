@@ -8,7 +8,7 @@ tribes:new_immovable_type {
    size = "small",
    programs = {
       program = {
-         "construction=idle 5000 210000",
+         "construct=idle 5000 210000",
          "transform=bob tribe:empire_ship",
       }
    },
