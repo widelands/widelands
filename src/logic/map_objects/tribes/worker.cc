@@ -67,7 +67,7 @@
 namespace Widelands {
 
 /**
- * createware \<waretype\>
+ * createware=\<waretype\>
  *
  * The worker will create and carry an ware of the given type.
  *
@@ -98,7 +98,7 @@ bool Worker::run_createware(Game& game, State& state, const Action& action) {
 /**
  * Mine on the current coordinates for resources decrease, go home.
  *
- * Syntax in conffile: mine \<resource\> \<area\>
+ * Syntax in conffile: mine=\<resource\> \<area\>
  *
  * \param g
  * \param state
@@ -192,7 +192,7 @@ bool Worker::run_mine(Game& game, State& state, const Action& action) {
 /**
  * Breed on the current coordinates for resource increase, go home.
  *
- * Syntax in conffile: breed \<resource\> \<area\>
+ * Syntax in conffile: breed=\<resource\> \<area\>
  *
  * \param g
  * \param state
@@ -295,34 +295,9 @@ bool Worker::run_breed(Game& game, State& state, const Action& action) {
 	return true;
 }
 
-/**
- * setbobdescription \<bob name\> \<bob name\> ...
- *
- * Randomly select a bob name that can be used in subsequent commands
- * (e.g. create_bob).
- *
- * sparamv = possible bobs
- */
-bool Worker::run_setbobdescription(Game& game, State& state, const Action& action) {
-	int32_t const idx = game.logic_rand() % action.sparamv.size();
-
-	const std::string& bob = action.sparamv[idx];
-	state.ivar2 = game.world().get_critter(bob.c_str());
-
-	if (state.ivar2 < 0) {
-		molog("  WARNING: Unknown bob %s\n", bob.c_str());
-		send_signal(game, "fail");
-		pop_task(game);
-		return true;
-	}
-
-	++state.ivar1;
-	schedule_act(game, 10);
-	return true;
-}
 
 /**
- * findobject key:value key:value ...
+ * findobject=key:value key:value ...
  *
  * Find and select an object based on a number of predicates.
  * The object can be used in other commands like walk or object.
@@ -563,7 +538,7 @@ bool Worker::run_findspace(Game& game, State& state, const Action& action) {
 }
 
 /**
- * walk \<where\>
+ * walk=\<where\>
  *
  * Walk to a previously selected destination. where can be one of:
  * object  walk to a previously found and selected object
@@ -630,14 +605,14 @@ bool Worker::run_walk(Game& game, State& state, const Action& action) {
 }
 
 /**
- * animation \<name\> \<duration\>
+ * animate=\<name\> \<duration\>
  *
  * Play the given animation for the given amount of time.
  *
  * iparam1 = anim id
  * iparam2 = duration
  */
-bool Worker::run_animation(Game& game, State& state, const Action& action) {
+bool Worker::run_animate(Game& game, State& state, const Action& action) {
 	set_animation(game, action.iparam1);
 
 	++state.ivar1;
@@ -657,13 +632,13 @@ bool Worker::run_return(Game& game, State& state, const Action& action) {
 }
 
 /**
- * object \<command\>
+ * callobject=\<command\>
  *
  * Cause the currently selected object to execute the given program.
  *
  * sparam1 = object command name
  */
-bool Worker::run_object(Game& game, State& state, const Action& action) {
+bool Worker::run_callobject(Game& game, State& state, const Action& action) {
 	MapObject* const obj = state.objvar1.get(game);
 
 	if (!obj) {
@@ -818,11 +793,26 @@ bool Worker::run_plant(Game& game, State& state, const Action& action) {
 }
 
 /**
- * Plants a bob (critter usually, maybe also worker later on). The immovable
- * type must have been selected by a previous command (i.e. setbobdescription).
+ * createbob=\<bob name\> \<bob name\> ...
+ *
+ * Plants a bob (critter usually, maybe also worker later on), randomly celected from one of the given types.
+ *
+ * sparamv = possible bobs
  */
-bool Worker::run_create_bob(Game& game, State& state, const Action&) {
-	game.create_critter(get_position(), state.ivar2);
+bool Worker::run_createbob(Game& game, State& state, const Action& action) {
+	int32_t const idx = game.logic_rand() % action.sparamv.size();
+
+	const std::string& bob = action.sparamv[idx];
+	const DescriptionIndex critter = game.world().get_critter(bob.c_str());
+
+	if (critter == INVALID_INDEX) {
+		molog("  WARNING: Unknown bob %s\n", bob.c_str());
+		send_signal(game, "fail");
+		pop_task(game);
+		return true;
+	}
+
+	game.create_critter(get_position(), critter);
 	++state.ivar1;
 	schedule_act(game, 10);
 	return true;
@@ -843,7 +833,7 @@ bool Worker::run_removeobject(Game& game, State& state, const Action&) {
 }
 
 /**
- * geologist \<repeat #\> \<radius\> \<subcommand\>
+ * geologist=\<repeat #\> \<radius\> \<subcommand\>
  *
  * Walk around the starting point randomly within a certain radius, and
  * execute the subcommand for some of the fields.
@@ -852,7 +842,7 @@ bool Worker::run_removeobject(Game& game, State& state, const Action&) {
  * iparam2 = radius
  * sparam1 = subcommand
  */
-bool Worker::run_geologist(Game& game, State& state, const Action& action) {
+bool Worker::run_repeatsearch(Game& game, State& state, const Action& action) {
 	molog("  Start Geologist (%i attempts, %i radius -> %s)\n", action.iparam1, action.iparam2,
 	      action.sparam1.c_str());
 
@@ -865,7 +855,7 @@ bool Worker::run_geologist(Game& game, State& state, const Action& action) {
  * Check resources at the current position, and plant a marker object when
  * possible.
  */
-bool Worker::run_geologist_find(Game& game, State& state, const Action&) {
+bool Worker::run_findresources(Game& game, State& state, const Action&) {
 	const FCoords position = game.map().get_fcoords(get_position());
 	BaseImmovable const* const imm = position.field->get_immovable();
 	const World& world = game.world();
@@ -1788,7 +1778,7 @@ void Worker::return_update(Game& game, State& state) {
 /**
  * Follow the steps of a configuration-defined program.
  * ivar1 is the next action to be performed.
- * ivar2 is used to store description indices selected by plant/setbobdescription
+ * ivar2 is used to store description indices selected by plant
  * objvar1 is used to store objects found by findobject
  * coords is used to store target coordinates found by findspace
  */
@@ -2529,7 +2519,7 @@ const Bob::Task Worker::taskScout = {
    "scout", static_cast<Bob::Ptr>(&Worker::scout_update), nullptr, nullptr, true};
 
 /**
- * scout \<radius\> \<time\>
+ * scout=\<radius\> \<time\>
  *
  * Find a spot that is in the fog of war and go there to see what's up.
  *
