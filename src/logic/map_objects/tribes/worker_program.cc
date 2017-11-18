@@ -129,7 +129,7 @@ void WorkerProgram::parse(const LuaTable& table) {
 				throw wexception("unknown command type \"%s\"", cmd[0].c_str());
 			}
 
-			// NOCOM quick and dirty
+			// TODO(GunChleoc): Quick and dirty solution, don't do it like that when we unify the program parsers
 			if (cmd.size() == 2) {
 				const std::vector<std::string> parameters(split_string(cmd[1], " \t\n"));
 				cmd.pop_back();
@@ -728,6 +728,7 @@ createbob
          "return"
       }
 */
+// TODO(GunChleoc): attrib:eatable would be much better, then depend on terrain too
 void WorkerProgram::parse_createbob(Worker::Action* act, const std::vector<std::string>& cmd) {
 	if (cmd.size() < 2)
 		throw wexception("Usage: createbob=<bob name> <bob name> ...");
