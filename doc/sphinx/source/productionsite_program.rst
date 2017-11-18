@@ -66,7 +66,7 @@ A program's actions consist of a sequence of commands. A command is written as `
          "return=skipped unless economy needs snack",
          "sleep=5000",
          "consume=barbarians_bread fish,meat beer",
-         "play_sound=sound/barbarians/taverns inn 100",
+         "playsound=sound/barbarians/taverns inn 100",
          "animate=working 22000",
          "sleep=10000",
          "produce=snack"
@@ -90,7 +90,7 @@ Command Types
 - `mine`_
 - `check_soldier`_
 - `train`_
-- `play_sound`_
+- `playsound`_
 
 
 return
@@ -279,9 +279,9 @@ train
 -----
 Increases the level of a specified property of a soldier. No further documentation available.
 
-play_sound
-----------
-Plays a soundFX.
+playsound
+---------
+Plays a sound effect.
 
 Parameter syntax::
 

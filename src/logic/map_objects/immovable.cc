@@ -170,7 +170,7 @@ ImmovableProgram::ImmovableProgram(const std::string& init_name,
 			action = new ActRemove(arguments.get(), *immovable);
 		} else if (parts[0] == "seed") {
 			action = new ActSeed(arguments.get(), *immovable);
-		} else if (parts[0] == "play_sound") {
+		} else if (parts[0] == "playsound") {
 			action = new ActPlaySound(arguments.get(), *immovable);
 		} else if (parts[0] == "construction") {
 			action = new ActConstruction(arguments.get(), *immovable);
@@ -801,7 +801,7 @@ ImmovableProgram::ActPlaySound::ActPlaySound(char* parameters, const ImmovableDe
 		g_sound_handler.load_fx_if_needed(
 		   FileSystem::fs_dirname(name), FileSystem::fs_filename(name.c_str()), name);
 	} catch (const WException& e) {
-		throw GameDataError("play_sound: %s", e.what());
+		throw GameDataError("playsound: %s", e.what());
 	}
 }
 

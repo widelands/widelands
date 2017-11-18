@@ -89,7 +89,7 @@ private:
 	void parse_repeatsearch(Worker::Action* act, const std::vector<std::string>& cmd);
 	void parse_findresources(Worker::Action* act, const std::vector<std::string>& cmd);
 	void parse_scout(Worker::Action* act, const std::vector<std::string>& cmd);
-	void parse_play_sound(Worker::Action* act, const std::vector<std::string>& cmd);
+	void parse_playsound(Worker::Action* act, const std::vector<std::string>& cmd);
 	void parse_construct(Worker::Action* act, const std::vector<std::string>& cmd);
 
 	const std::string name_;

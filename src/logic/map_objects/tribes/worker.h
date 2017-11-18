@@ -254,7 +254,7 @@ private:
 	bool run_repeatsearch(Game&, State&, const Action&);
 	bool run_findresources(Game&, State&, const Action&);
 	bool run_scout(Game&, State&, const Action&);
-	bool run_play_sound(Game&, State&, const Action&);
+	bool run_playsound(Game&, State&, const Action&);
 	bool run_construct(Game&, State&, const Action&);
 
 	OPtr<PlayerImmovable> location_;   ///< meta location of the worker

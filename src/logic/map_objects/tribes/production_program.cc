@@ -1427,7 +1427,7 @@ ProductionProgram::ActPlaySound::ActPlaySound(char* parameters) {
 
 		g_sound_handler.load_fx_if_needed(filepath, filename, name);
 	} catch (const WException& e) {
-		throw GameDataError("play_sound: %s", e.what());
+		throw GameDataError("playsound: %s", e.what());
 	}
 }
 
@@ -1651,7 +1651,7 @@ ProductionProgram::ProductionProgram(const std::string& init_name,
 		} else if (boost::iequals(parts[0], "train")) {
 			actions_.push_back(
 			   std::unique_ptr<ProductionProgram::Action>(new ActTrain(arguments.get())));
-		} else if (boost::iequals(parts[0], "play_sound")) {
+		} else if (boost::iequals(parts[0], "playsound")) {
 			actions_.push_back(
 			   std::unique_ptr<ProductionProgram::Action>(new ActPlaySound(arguments.get())));
 		} else if (boost::iequals(parts[0], "construct")) {
