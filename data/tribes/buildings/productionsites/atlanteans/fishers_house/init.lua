@@ -46,7 +46,7 @@ tribes:new_productionsite_type {
          descname = _"fishing",
          actions = {
             "sleep=16000",
-            "worker=fish"
+            "send_worker=fish"
          }
       },
 

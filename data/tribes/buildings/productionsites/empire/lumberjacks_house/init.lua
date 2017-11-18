@@ -43,7 +43,7 @@ tribes:new_productionsite_type {
          descname = _"felling trees",
          actions = {
             "sleep=30000", -- Barbarian lumberjack sleeps 25000
-            "worker=chop"
+            "send_worker=chop"
          }
       },
    },

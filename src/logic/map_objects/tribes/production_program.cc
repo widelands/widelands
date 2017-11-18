@@ -1639,7 +1639,7 @@ ProductionProgram::ProductionProgram(const std::string& init_name,
 		} else if (boost::iequals(parts[0], "recruit")) {
 			actions_.push_back(std::unique_ptr<ProductionProgram::Action>(
 			   new ActRecruit(arguments.get(), *building, egbase.tribes())));
-		} else if (boost::iequals(parts[0], "worker")) {
+		} else if (boost::iequals(parts[0], "send_worker")) {
 			actions_.push_back(std::unique_ptr<ProductionProgram::Action>(
 			   new ActWorker(arguments.get(), name(), building, egbase.tribes())));
 		} else if (boost::iequals(parts[0], "mine")) {

@@ -82,7 +82,7 @@ Command Types
 ^^^^^^^^^^^^^
 - `return`_
 - `call`_
-- `worker`_
+- `send_worker`_
 - `sleep`_
 - `animate`_
 - `consume`_
@@ -168,8 +168,8 @@ Parameter semantics:
 ``failure_handling_directive``
     If omitted, the value ``Ignore`` is used for ``failure_handling_method``.
 
-worker
-------
+send_worker
+-----------
 Calls a program of the productionsite's main worker.
 
 Parameter syntax::
