@@ -64,12 +64,16 @@ void GamePlayerAiPersistentPacket::read(FileSystem& fs, Game& game, MapObjectLoa
 					player->ai_data.initialized = 0;
 				} else {
 					// kCurrentPacketVersion
-					player->ai_data.initialized = fr.unsigned_8();
+					// Mare sure that all containers are reset properly etc.
+					player->ai_data.initialize();
+
+					// Now read the data
+					player->ai_data.initialized = (fr.unsigned_8() == 1) ? true : false;
 					player->ai_data.colony_scan_area = fr.unsigned_32();
 					player->ai_data.trees_around_cutters = fr.unsigned_32();
 					player->ai_data.expedition_start_time = fr.unsigned_32();
 					player->ai_data.ships_utilization = fr.unsigned_16();
-					player->ai_data.no_more_expeditions = fr.unsigned_8();
+					player->ai_data.no_more_expeditions = (fr.unsigned_8() == 1) ? true : false;
 					player->ai_data.last_attacked_player = fr.signed_16();
 					player->ai_data.least_military_score = fr.unsigned_32();
 					player->ai_data.target_military_score = fr.unsigned_32();
@@ -79,7 +83,7 @@ void GamePlayerAiPersistentPacket::read(FileSystem& fs, Game& game, MapObjectLoa
 					// Magic numbers
 					size_t magic_numbers_size = fr.unsigned_32();
 
-					// TODO (GunChleoc): We allow for smaller size for savegame compatibility.
+					// TODO(GunChleoc): We allow for smaller size for savegame compatibility.
 					// Investigate if we can make the size static after Build 20.
 					if (magic_numbers_size > Widelands::Player::AiPersistentState::kMagicNumbersSize) {
 						throw GameDataError(
@@ -128,8 +132,7 @@ void GamePlayerAiPersistentPacket::read(FileSystem& fs, Game& game, MapObjectLoa
 					}
 
 					// Remaining buildings for basic economy
-					// NOCOM reset everything with a function in ai_data
-					player->ai_data.remaining_basic_buildings.clear();
+					assert(player->ai_data.remaining_basic_buildings.empty());
 
 					size_t remaining_basic_buildings_size = fr.unsigned_32();
 					for (uint16_t i = 0; i < remaining_basic_buildings_size; ++i) {
@@ -162,12 +165,12 @@ void GamePlayerAiPersistentPacket::write(FileSystem& fs, Game& game, MapObjectSa
 
 	PlayerNumber const nr_players = game.map().get_nrplayers();
 	iterate_players_existing_const(p, nr_players, game, player) {
-		fw.unsigned_8(player->ai_data.initialized);
+		fw.unsigned_8(player->ai_data.initialized ? 1 : 0);
 		fw.unsigned_32(player->ai_data.colony_scan_area);
 		fw.unsigned_32(player->ai_data.trees_around_cutters);
 		fw.unsigned_32(player->ai_data.expedition_start_time);
 		fw.unsigned_16(player->ai_data.ships_utilization);
-		fw.unsigned_8(player->ai_data.no_more_expeditions);
+		fw.unsigned_8(player->ai_data.no_more_expeditions ? 1 : 0);
 		fw.signed_16(player->ai_data.last_attacked_player);
 		fw.unsigned_32(player->ai_data.least_military_score);
 		fw.unsigned_32(player->ai_data.target_military_score);

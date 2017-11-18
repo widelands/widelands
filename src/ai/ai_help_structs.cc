@@ -813,7 +813,6 @@ int16_t ManagementData::get_military_number_at(uint8_t pos) {
 void ManagementData::set_military_number_at(const uint8_t pos, int16_t value) {
 	assert(pos < Widelands::Player::AiPersistentState::kMagicNumbersSize);
 	assert(persistent_data->magic_numbers.size() == Widelands::Player::AiPersistentState::kMagicNumbersSize);
-	// NOCOM review this carefully
 	persistent_data->magic_numbers.at(pos) = Neuron::clip_weight_to_range(value);
 }
 

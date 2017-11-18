@@ -160,13 +160,18 @@ public:
 		static constexpr size_t kNeuronPoolSize = 80;
 		static constexpr size_t kFNeuronPoolSize = 60;
 
+		// Seafaring constants for controlling expeditions
+		static constexpr uint32_t kColonyScanStartArea = 35;
+		static constexpr uint32_t kColonyScanMinArea = 12;
+		static constexpr uint32_t kNoExpedition = 0;
+
 		AiPersistentState()
-		   : initialized(0),  // zero here is important, it means "~first time"
+		   : initialized(false),
 		     colony_scan_area(0),
 		     trees_around_cutters(0),
 		     expedition_start_time(0),
 		     ships_utilization(0),
-		     no_more_expeditions(0),
+		     no_more_expeditions(false),
 		     last_attacked_player(0),
 		     least_military_score(0),
 		     target_military_score(0),
@@ -178,14 +183,16 @@ public:
 			  f_neurons(kFNeuronPoolSize, 0) {
 		}
 
+		void initialize();
+
 		// Was initialized
-		uint8_t initialized;
+		bool initialized;
 		uint32_t colony_scan_area;
 		uint32_t trees_around_cutters;
 		uint32_t expedition_start_time;
 		int16_t
 		   ships_utilization;  // 0-10000 to avoid floats, used for decision for building new ships
-		uint8_t no_more_expeditions;
+		bool no_more_expeditions;
 		int16_t last_attacked_player;
 		int32_t least_military_score;
 		int32_t target_military_score;

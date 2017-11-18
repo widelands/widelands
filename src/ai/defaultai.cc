@@ -510,42 +510,12 @@ void DefaultAI::late_initialization() {
 	// The data struct below is owned by Player object, the purpose is to have them saved therein
 	persistent_data = player_->get_mutable_ai_persistent_state();
 	management_data.persistent_data = player_->get_mutable_ai_persistent_state();
-	const bool create_basic_buildings_list = (gametime < kRemainingBasicBuildingsResetTime);
+	const bool create_basic_buildings_list = !persistent_data->initialized || (gametime < kRemainingBasicBuildingsResetTime);
 
-	if (persistent_data->initialized == kFalse) {
+	if (!persistent_data->initialized) {
 		// As all data are initialized without given values, they must be populated with reasonable
 		// values first
-		persistent_data->colony_scan_area = kColonyScanStartArea;
-		persistent_data->trees_around_cutters = 0;
-		persistent_data->initialized = kTrue;
-		persistent_data->last_attacked_player = std::numeric_limits<int16_t>::max();
-		persistent_data->expedition_start_time = kNoExpedition;
-		persistent_data->ships_utilization = 200;
-		persistent_data->no_more_expeditions = kFalse;
-		persistent_data->target_military_score = 100;
-		persistent_data->least_military_score = 0;
-		persistent_data->ai_productionsites_ratio = std::rand() % 5 + 7;
-		persistent_data->ai_personality_mil_upper_limit = 100;
-
-		// all zeroes
-		assert(persistent_data->neuron_weights.size() == Widelands::Player::AiPersistentState::kNeuronPoolSize);
-		assert(persistent_data->neuron_functs.size() == Widelands::Player::AiPersistentState::kNeuronPoolSize);
-		assert(persistent_data->f_neurons.size() == Widelands::Player::AiPersistentState::kFNeuronPoolSize);
-		assert(persistent_data->magic_numbers.size() == Widelands::Player::AiPersistentState::kMagicNumbersSize);
-#ifndef NDEBUG
-		for (int8_t neuron_weight : persistent_data->neuron_weights) {
-			assert(neuron_weight == 0);
-		}
-		for (int8_t neuron_funct : persistent_data->neuron_functs) {
-			assert(neuron_funct == 0);
-		}
-		for (uint32_t f_neuron : persistent_data->f_neurons) {
-			assert(f_neuron == 0);
-		}
-		for (size_t i = 0; i < persistent_data->magic_numbers.size(); ++i) {
-			assert(persistent_data->magic_numbers.at(i) == 0);
-		}
-#endif
+		persistent_data->initialize();
 
 		// AI's DNA population
 		management_data.new_dna_for_persistent(player_number(), type_);
@@ -559,7 +529,7 @@ void DefaultAI::late_initialization() {
 		assert(management_data.get_military_number_at(42) ==
 		       management_data.get_military_number_at(kMutationRatePosition));
 
-	} else if (persistent_data->initialized == kTrue) {
+	} else {
 		// Doing some consistency checks
 		check_range<uint32_t>(
 		   persistent_data->expedition_start_time, gametime, "expedition_start_time");
@@ -593,8 +563,6 @@ void DefaultAI::late_initialization() {
 		       "New list will be recreated though (kAITrainingMode is true)" :
 		       "");
 
-	} else {
-		throw wexception("Corrupted AI data");
 	}
 
 	// Even if we have basic buildings from savefile, we ignore them and recreate them based
@@ -1055,8 +1023,8 @@ void DefaultAI::late_initialization() {
 
 	// Sometimes there can be a ship in expedition, but expedition start time is not given
 	// e.g. human player played this player before
-	if (expedition_ship_ != kNoShip && persistent_data->expedition_start_time == kNoExpedition) {
-		// Current gametime is better then 'kNoExpedition'
+	if (expedition_ship_ != kNoShip && persistent_data->expedition_start_time == Player::AiPersistentState::kNoExpedition) {
+		// Current gametime is better then 'Player::AiPersistentState::kNoExpedition'
 		persistent_data->expedition_start_time = gametime;
 	}
 
