@@ -82,13 +82,14 @@ Command Types
 ^^^^^^^^^^^^^
 - `return`_
 - `call`_
-- `send_worker`_
+- `callworker`_
 - `sleep`_
 - `animate`_
 - `consume`_
 - `produce`_
 - `mine`_
-- `check_soldier`_
+- `checksoldier`_
+- `checkmap`_
 - `train`_
 - `playsound`_
 
@@ -168,8 +169,8 @@ Parameter semantics:
 ``failure_handling_directive``
     If omitted, the value ``Ignore`` is used for ``failure_handling_method``.
 
-send_worker
------------
+callworker
+----------
 Calls a program of the productionsite's main worker.
 
 Parameter syntax::
@@ -271,9 +272,17 @@ is the percentage chance that a worker is gaining experience on failure - this
 is to guarantee that you can eventually extend a mine, even though it was
 exhausted for a while already.
 
-check_soldier
--------------
+checksoldier
+------------
 Returns failure unless there are a specified amount of soldiers with specified level of specified properties. This command type is subject to change.
+
+checkmap
+--------
+Checks the map for properties. At the moment, only 'seafaring' is available as parameter.
+
+Parameter syntax::
+
+  parameters ::= seafaring
 
 train
 -----

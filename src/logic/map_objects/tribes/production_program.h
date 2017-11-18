@@ -276,8 +276,8 @@ struct ProductionProgram {
 	/// Parameter semantics:
 	///    program:
 	///       The name of a program defined in the productionsite's main worker.
-	struct ActWorker : public Action {
-		ActWorker(char* parameters,
+	struct ActCallWorker : public Action {
+		ActCallWorker(char* parameters,
 		          const std::string& production_program_name,
 		          ProductionSiteDescr*,
 		          const Tribes& tribes);

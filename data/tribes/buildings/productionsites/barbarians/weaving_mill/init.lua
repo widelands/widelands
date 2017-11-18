@@ -56,7 +56,7 @@ tribes:new_productionsite_type {
          descname = _"weaving",
          actions = {
             "sleep=25000",
-            "check_map=seafaring",
+            "checkmap=seafaring",
             "return=skipped unless economy needs cloth",
             "consume=thatch_reed",
             "playsound=sound/barbarians weaver 120",

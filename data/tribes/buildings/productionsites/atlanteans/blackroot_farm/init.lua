@@ -57,7 +57,7 @@ tribes:new_productionsite_type {
          descname = _"planting blackroot",
          actions = {
             "sleep=20000",
-            "send_worker=plant"
+            "callworker=plant"
          }
       },
       harvest = {
@@ -65,7 +65,7 @@ tribes:new_productionsite_type {
          descname = _"harvesting blackroot",
          actions = {
             "sleep=5000",
-            "send_worker=harvest"
+            "callworker=harvest"
          }
       },
    },

@@ -53,7 +53,7 @@ tribes:new_productionsite_type {
          descname = _"planting reed",
          actions = {
             "sleep=18000", -- orig sleep=20000 but gardener animation was increased by 2sec
-            "send_worker=plant"
+            "callworker=plant"
          }
       },
       harvest = {
@@ -61,7 +61,7 @@ tribes:new_productionsite_type {
          descname = _"harvesting reed",
          actions = {
             "sleep=5000",
-            "send_worker=harvest"
+            "callworker=harvest"
          }
       },
    },

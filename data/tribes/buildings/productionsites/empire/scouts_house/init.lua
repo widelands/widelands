@@ -46,7 +46,7 @@ tribes:new_productionsite_type {
          actions = {
             "sleep=30000",
             "consume=ration",
-            "send_worker=scout"
+            "callworker=scout"
          }
       },
    },

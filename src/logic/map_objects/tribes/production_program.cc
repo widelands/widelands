@@ -646,7 +646,7 @@ void ProductionProgram::ActCall::execute(Game& game, ProductionSite& ps) const {
 	}
 }
 
-ProductionProgram::ActWorker::ActWorker(char* parameters,
+ProductionProgram::ActCallWorker::ActCallWorker(char* parameters,
                                         const std::string& production_program_name,
                                         ProductionSiteDescr* descr,
                                         const Tribes& tribes) {
@@ -681,12 +681,12 @@ ProductionProgram::ActWorker::ActWorker(char* parameters,
 	}
 }
 
-void ProductionProgram::ActWorker::execute(Game& game, ProductionSite& ps) const {
+void ProductionProgram::ActCallWorker::execute(Game& game, ProductionSite& ps) const {
 	// Always main worker is doing stuff
 	ps.working_positions_[0].worker->update_task_buildingwork(game);
 }
 
-bool ProductionProgram::ActWorker::get_building_work(Game& game,
+bool ProductionProgram::ActCallWorker::get_building_work(Game& game,
                                                      ProductionSite& psite,
                                                      Worker& worker) const {
 	ProductionSite::State& state = psite.top_state();
@@ -700,7 +700,7 @@ bool ProductionProgram::ActWorker::get_building_work(Game& game,
 	}
 }
 
-void ProductionProgram::ActWorker::building_work_failed(Game& game,
+void ProductionProgram::ActCallWorker::building_work_failed(Game& game,
                                                         ProductionSite& psite,
                                                         Worker&) const {
 	psite.program_end(game, Failed);
@@ -1271,7 +1271,7 @@ ProductionProgram::ActCheckSoldier::ActCheckSoldier(char* parameters) {
 		if (*endp || level != value)
 			throw GameDataError("expected %s but found \"%s\"", "level", parameters);
 	} catch (const WException& e) {
-		throw GameDataError("check_soldier: %s", e.what());
+		throw GameDataError("checksoldier: %s", e.what());
 	}
 }
 
@@ -1639,13 +1639,13 @@ ProductionProgram::ProductionProgram(const std::string& init_name,
 		} else if (boost::iequals(parts[0], "recruit")) {
 			actions_.push_back(std::unique_ptr<ProductionProgram::Action>(
 			   new ActRecruit(arguments.get(), *building, egbase.tribes())));
-		} else if (boost::iequals(parts[0], "send_worker")) {
+		} else if (boost::iequals(parts[0], "callworker")) {
 			actions_.push_back(std::unique_ptr<ProductionProgram::Action>(
-			   new ActWorker(arguments.get(), name(), building, egbase.tribes())));
+			   new ActCallWorker(arguments.get(), name(), building, egbase.tribes())));
 		} else if (boost::iequals(parts[0], "mine")) {
 			actions_.push_back(std::unique_ptr<ProductionProgram::Action>(
 			   new ActMine(arguments.get(), egbase.world(), name(), building)));
-		} else if (boost::iequals(parts[0], "check_soldier")) {
+		} else if (boost::iequals(parts[0], "checksoldier")) {
 			actions_.push_back(
 			   std::unique_ptr<ProductionProgram::Action>(new ActCheckSoldier(arguments.get())));
 		} else if (boost::iequals(parts[0], "train")) {
@@ -1657,7 +1657,7 @@ ProductionProgram::ProductionProgram(const std::string& init_name,
 		} else if (boost::iequals(parts[0], "construct")) {
 			actions_.push_back(std::unique_ptr<ProductionProgram::Action>(
 			   new ActConstruct(arguments.get(), name(), building)));
-		} else if (boost::iequals(parts[0], "check_map")) {
+		} else if (boost::iequals(parts[0], "checkmap")) {
 			actions_.push_back(
 			   std::unique_ptr<ProductionProgram::Action>(new ActCheckMap(arguments.get())));
 		} else {

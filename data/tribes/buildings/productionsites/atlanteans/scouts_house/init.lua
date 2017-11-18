@@ -46,10 +46,10 @@ tribes:new_productionsite_type {
          actions = {
             "sleep=30000",
             "consume=smoked_fish",
-            "send_worker=scout",
+            "callworker=scout",
             "sleep=30000",
             "consume=atlanteans_bread",
-            "send_worker=scout"
+            "callworker=scout"
          }
       },
    },
