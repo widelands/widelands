@@ -41,7 +41,7 @@ tribes:new_worker_type {
    },
 
    programs = {
-      plantvine = {
+      plant = {
          "findspace size:any radius:1",
          "walk coords",
          "animation dig 2000",
@@ -49,7 +49,7 @@ tribes:new_worker_type {
          "animation planting 3000",
          "return"
       },
-      harvestvine = {
+      harvest = {
          "findobject attrib:ripe_grapes radius:1",
          "walk object",
          "animation gathering 10000",

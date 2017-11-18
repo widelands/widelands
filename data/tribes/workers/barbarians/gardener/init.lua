@@ -35,7 +35,7 @@ tribes:new_worker_type {
    },
 
    programs = {
-      plantreed = {
+      plant = {
          "findspace size:any radius:1",
          "walk coords",
          "animation planting 1500",
@@ -43,7 +43,7 @@ tribes:new_worker_type {
          "animation planting 1500",
          "return"
       },
-      harvestreed = {
+      harvest = {
          "findobject attrib:ripe_reed radius:1",
          "walk object",
          "animation harvesting 12000",

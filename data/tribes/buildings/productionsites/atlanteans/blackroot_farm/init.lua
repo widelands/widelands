@@ -47,12 +47,12 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
          descname = _"working",
          actions = {
-            "call=plant_blackroot",
-            "call=harvest_blackroot",
+            "call=plant",
+            "call=harvest",
             "return=skipped"
          }
       },
-      plant_blackroot = {
+      plant = {
          -- TRANSLATORS: Completed/Skipped/Did not start planting blackroot because ...
          descname = _"planting blackroot",
          actions = {
@@ -60,7 +60,7 @@ tribes:new_productionsite_type {
             "send_worker=plant"
          }
       },
-      harvest_blackroot = {
+      harvest = {
          -- TRANSLATORS: Completed/Skipped/Did not start harvesting blackroot because ...
          descname = _"harvesting blackroot",
          actions = {

@@ -49,25 +49,25 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
          descname = _"working",
          actions = {
-            "call=plant_vine",
-            "call=harvest_vine",
+            "call=plant",
+            "call=harvest",
             "return=skipped"
          }
       },
-      plant_vine = {
+      plant = {
          -- TRANSLATORS: Completed/Skipped/Did not start planting grapevines because ...
          descname = _"planting grapevines",
          actions = {
             "sleep=20000",
-            "send_worker=plantvine"
+            "send_worker=plant"
          }
       },
-      harvest_vine = {
+      harvest = {
          -- TRANSLATORS: Completed/Skipped/Did not start harvesting grapevines because ...
          descname = _"harvesting grapes",
          actions = {
             "sleep=5000",
-            "send_worker=harvestvine"
+            "send_worker=harvest"
          }
       },
    },
