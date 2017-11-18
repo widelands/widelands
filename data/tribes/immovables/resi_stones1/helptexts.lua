@@ -2,7 +2,7 @@ function immovable_helptext(tribe)
    local helptext = {
       atlanteans = pgettext("sentence_separator", "%s %s"):bformat(
          -- TRANSLATORS: Helptext for an Atlantean resource: Stones
-         _("Precious stones are used in the construction of big buildings. They can be dug up by a crystal mine."),
+         _("Precious stones are used in the construction of big buildings. They can be dug up by a crystal mine. You will also get granite from the mine."),
          -- TRANSLATORS: Helptext for an Atlantean resource: Stones
          _("There are only a few precious stones here.")),
       barbarians = pgettext("sentence_separator", "%s %s"):bformat(
