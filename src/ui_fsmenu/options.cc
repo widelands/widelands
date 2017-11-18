@@ -450,10 +450,9 @@ void FullscreenMenuOptions::add_languages_to_list(const std::string& current_loc
 
 				std::string name = i18n::make_ligatures(table->get_string("name").c_str());
 				const std::string sortname = table->get_string("sort_name");
-				LanguageEntry* entry = new LanguageEntry(localename, name);
+				std::unique_ptr<LanguageEntry> entry(new LanguageEntry(localename, name));
 				entries.insert(std::make_pair(sortname, *entry));
 				language_entries_.insert(std::make_pair(localename, *entry));
-				delete entry;
 
 				if (localename == current_locale) {
 					selected_locale = current_locale;
