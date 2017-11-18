@@ -2,16 +2,17 @@
 # Copyright (C) 2005-2017 Widelands Development Team
 # 
 # Translators:
-# GunChleoc, 2014
+# GunChleoc, 2014,2017
 # GunChleoc, 2015-2017
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2013
+# GunChleoc, 2014
 # GunChleoc, 2013-2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-11-11 07:08+0000\n"
-"PO-Revision-Date: 2017-11-11 07:11+0000\n"
+"POT-Creation-Date: 2017-11-11 07:38+0000\n"
+"PO-Revision-Date: 2017-11-11 07:49+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Gaelic, Scottish (http://www.transifex.com/widelands/widelands/language/gd/)\n"
 "MIME-Version: 1.0\n"
@@ -3509,7 +3510,7 @@ msgstr "Sgòr an sgioba"
 #. * TRANSLATORS: The time a replay starts. Shown in the replay loading screen
 #: ../../src/wui/gamedetails.cc:157
 msgid "Start of Replay:"
-msgstr ""
+msgstr "Toiseach na h-ath-chluiche:"
 
 #. * TRANSLATORS: The current time of a savegame. Shown in the game saving and
 #. loading screens.
@@ -3527,7 +3528,7 @@ msgstr "Cumha na buaidhe:"
 
 #: ../../src/wui/gamedetails.cc:206
 msgid "Error:"
-msgstr ""
+msgstr "Mearachd:"
 
 #: ../../src/wui/general_statistics_menu.cc:140
 msgid "Land"
@@ -3636,7 +3637,7 @@ msgstr "Fèin-sàbhaladh %1%: %2%"
 #: ../../src/wui/load_or_save_game.cc:62
 msgctxt "filename_mapname"
 msgid "%1%: %2%"
-msgstr ""
+msgstr "%1%: %2%"
 
 #: ../../src/wui/load_or_save_game.cc:97
 msgid "Delete"
@@ -3696,7 +3697,7 @@ msgstr "Tuairisgeul"
 
 #: ../../src/wui/load_or_save_game.cc:130
 msgid "Map name (start of replay)"
-msgstr ""
+msgstr "Ainm a’ mhapa (toiseach na h-ath-chluiche)"
 
 #: ../../src/wui/load_or_save_game.cc:131
 msgid ""
@@ -3718,13 +3719,13 @@ msgstr "Sguab às an geama seo"
 #. multiple files
 #: ../../src/wui/load_or_save_game.cc:186
 msgid "Delete these replays"
-msgstr ""
+msgstr "Sguab às na h-ath-chluichean seo"
 
 #. * TRANSLATORS: Tooltip for the delete button. The user has selected
 #. multiple files
 #: ../../src/wui/load_or_save_game.cc:188
 msgid "Delete these games"
-msgstr ""
+msgstr "Sguab às na geamannan seo"
 
 #: ../../src/wui/load_or_save_game.cc:190
 #, c-format
@@ -3783,7 +3784,7 @@ msgstr "An-diugh, %1%:%2%"
 #. hour:minute. This is part of a list.
 #: ../../src/wui/load_or_save_game.cc:391
 msgid "saved today at %1%:%2%"
-msgstr ""
+msgstr "air a shàbhaladh an-diugh %1%:%2%"
 
 #. * TRANSLATORS: Display date for choosing a savegame/replay. Placeholders
 #. are:
@@ -3797,7 +3798,7 @@ msgstr "An-dè, %1%:%2%"
 #. hour:minute. This is part of a list.
 #: ../../src/wui/load_or_save_game.cc:408
 msgid "saved yesterday at %1%:%2%"
-msgstr ""
+msgstr "air a shàbhaladh an-dè %1%:%2%"
 
 #. * TRANSLATORS: Display date for choosing a savegame/replay. Placeholders
 #. are:
@@ -3811,7 +3812,7 @@ msgstr "%1% %2% %3%"
 #. month day, year. This is part of a list.
 #: ../../src/wui/load_or_save_game.cc:420
 msgid "saved on %2% %1%, %3%"
-msgstr ""
+msgstr "air a shàbhaladh %2% %1%, %3%"
 
 #. * TRANSLATORS: "Single Player" entry in the Game Mode table column.
 #. * TRANSLATORS: "Keep this to 6 letters maximum.
@@ -3845,7 +3846,7 @@ msgstr "Iom (%1%)"
 #: ../../src/wui/load_or_save_game.cc:467
 msgctxt "mapname_gametime"
 msgid "%1% (%2%)"
-msgstr ""
+msgstr "%1% (%2%)"
 
 #. * TRANSLATORS: Error message introduction for when an old savegame can't be
 #. loaded

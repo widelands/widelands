@@ -2,13 +2,14 @@
 # Copyright (C) 2005-2017 Widelands Development Team
 # 
 # Translators:
+# Luitzen Hietkamp <luitzenhietkamp@gmail.com>, 2017
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-11-11 07:08+0000\n"
-"PO-Revision-Date: 2015-02-03 14:29+0000\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"POT-Creation-Date: 2017-11-11 07:38+0000\n"
+"PO-Revision-Date: 2017-11-15 01:59+0000\n"
+"Last-Translator: Luitzen Hietkamp <luitzenhietkamp@gmail.com>\n"
 "Language-Team: Western Frisian (http://www.transifex.com/widelands/widelands/language/fy/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -21,16 +22,16 @@ msgstr ""
 #: ../../data/campaigns/atl01.wmf/scripting/init.lua:75
 msgctxt "message_short_title"
 msgid "Building lost!"
-msgstr ""
+msgstr "Gebouw kwytrekke!"
 
 #: ../../data/campaigns/atl01.wmf/scripting/init.lua:77
 msgid "We lost a building to the ocean!"
-msgstr ""
+msgstr "Wy binne in gebouw oan de oseaan kwytrekke!"
 
 #: ../../data/campaigns/atl01.wmf/scripting/init.lua:83
 msgctxt "message_heading"
 msgid "Building lost!"
-msgstr ""
+msgstr "Gebouw kwytrekke!"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:32
 msgid "Ensure the supply of building wares"
@@ -50,42 +51,42 @@ msgstr ""
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:37
 msgid "Build two woodcutter’s houses"
-msgstr ""
+msgstr "Bouw twa houthakkershúskes."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:38
 msgid "Build two forester’s houses"
-msgstr ""
+msgstr "Bouw twa boswachtershúskes."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:39
 msgid "Build a sawmill"
-msgstr ""
+msgstr "Bouw in sagerij"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:45
 msgid "Expand your territory and explore"
-msgstr ""
+msgstr "Wreidzje dyn gebiet út en ferken"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:47
 msgid "Expand and Explore"
-msgstr ""
+msgstr "Utwreidzje en ferkenne"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:48
 msgid ""
 "The island is huge and as long as we are not sure that we are alone here, we"
 " cannot relax. Explore and conquer it, this is the only way to protect us "
 "from threats on the island and from Atlantis."
-msgstr ""
+msgstr "It eilân is enoarm en salang't wy net witte dat we hjirre allinne binne kinne we net efteroer hingje. Ferken en feroverje it. It is de iennige manier om ús te beskermjen tsjin bedreingen op it eilân en fan Atlantis."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:49
 msgid "Build military sites to expand your territory"
-msgstr ""
+msgstr "Bou militêre gebouwen om dyn gebiet út te wreidzjen"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:55
 msgid "Establish a solid food production"
-msgstr ""
+msgstr "Soargje foar in betroubere itensfoarsjenning"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:57
 msgid "Food Production"
-msgstr ""
+msgstr "Itensfoarsjenning"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:58
 msgid ""
@@ -93,7 +94,7 @@ msgid ""
 "well working food environment by building at least one farm, one blackroot "
 "farm and a mill. The two kinds of flour together with water from a well will"
 " be baked into bread in a bakery, so build a bakery and a well, too."
-msgstr ""
+msgstr "Iten is tige wichtich foar mynwurkers en de militêre oefening. Soargje foar in betroubere itensfoarsjenning troch yn elts gefal ien buorkery, in swartknolbuorkerij en in mûne te bouwen. De twa ferskillende soarten moal wurde mjukse mei wetter út in put en yn de bakkerij ta bôle bakt. Bou dêrom ek in bakkerij en in put."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:59
 msgid ""
@@ -103,49 +104,49 @@ msgid ""
 "breeding more. Make sure that there are always fish left, otherwise the fish"
 " breeder won’t be able to breed new ones. The smoking happens in a smokery, "
 "you will need at least two of those."
-msgstr ""
+msgstr "De oare twa wichtige itenswaren binne rikke fisk en rikkeljirre. Fleis wurdt levere troch in jager. In fisker fangt de fisk wylst in fiskekweker soarget dat de fiskstân op peil bliuwt. Soargje derfoar dat der altiten fisken oerbliuwe want at fisken útstjerre kin de kweker gjin nije fisken mear kweke. It rikjen fan de fleis ta rikkeljirre en de fisk ta rikke fisk bart yn de rikkerij."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:60
 msgid "Build a farm and a blackroot farm"
-msgstr ""
+msgstr "Bou in buorkerij en in swartknolbuorkerij."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:61
 msgid "Build a mill to make cornmeal and blackroot flour"
-msgstr ""
+msgstr "Bou in mûne om maismoal en swartknolmoal te meitsjen"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:62
 msgid "Build a well"
-msgstr ""
+msgstr "Bou in put"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:63
 msgid "Build a bakery to bake bread from cornmeal, blackroot flour and water"
-msgstr ""
+msgstr "Bou in bakkerij om bôle te bakken fan maismoal, swartknolmoal en wetter"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:64
 msgid "Build a hunter’s house to get raw meat"
-msgstr ""
+msgstr "Bou in jachthut om oan farsk fleis te kommen"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:65
 msgid "Build a fisher’s house close to water to get raw fish"
-msgstr ""
+msgstr "Bou in fiskerhúske tichteby it wetter om oan farske fisk te kommen"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:66
 msgid ""
 "Build a fish breeder’s house close to the fisher to make sure the fish do "
 "not die out"
-msgstr ""
+msgstr "Bou in fiskekweker tichteby it fiskershúske om derfoar te soargje dat de fiskstân op peil bliuwt."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:67
 msgid "Build two smokeries to smoke raw meat and fish"
-msgstr ""
+msgstr "Bou twa rikkerijen om farsk fleis en farske fisk te rikjen"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:73
 msgid "Build a spider farm and a weaving mill"
-msgstr ""
+msgstr "Bou in spinnebuorkerij en in weverij"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:75
 msgid "Spidercloth Production"
-msgstr ""
+msgstr "Spinnedoekproduksje"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:76
 msgid ""
@@ -154,27 +155,27 @@ msgid ""
 "tabards are the uniforms of soldiers. The weaving mill needs gold thread and"
 " spider silk as raw material. Spider silk is produced by the spider farm, "
 "while gold thread is produced by the gold spinning mill out of gold."
-msgstr ""
+msgstr "De wevers meitsje spinnedoek en tabberts yn de weverij. Spinnedoek is nedich foar it bouwen fan guon gebouwen en it meitsjen fan guon klean wylst tabberts de uniformen fan soldaten binne. De weverij hat goudtried en spinneside nedich as grûnstof. Spinneside wurd produsearre op de spinnebuorkerij wylst goudtried yn de goudweverij makke wurdt fan goud."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:77
 msgid "Build a weaving mill"
-msgstr ""
+msgstr "Bou in weverij"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:78
 msgid "Build a spider farm"
-msgstr ""
+msgstr "Bou in spinnebuorkerij"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:79
 msgid "Build a gold spinning mill"
-msgstr ""
+msgstr "Bou in goudweverij"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:85
 msgid "Build industry and mines"
-msgstr ""
+msgstr "Bou in yndustry en minen"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:87
 msgid "Industry and Mines"
-msgstr ""
+msgstr "Yndustry en minen"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:88
 msgid ""
@@ -182,41 +183,41 @@ msgid ""
 "mine will dig for quartz and diamonds – all of them are precious materials "
 "and very rarely found. It will produce a lot of granite while searching for "
 "them."
-msgstr ""
+msgstr "Izererts, gouderts en koal wurdt allegear fûn yn de derfoar bedoelde minen. Yn in kristalmyn wurdt socht nei kwarts en diamanten, seldsume materialen dy't muoilik te finen binne. Wylst dernei socht wurdt, wurdt gewoanwei in soad granyt produsearre."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:89
 msgid ""
 "The ores have to be smelted at a smelting works before they can be used. The"
 " refined materials are then used in the weapon smithy, the armor smithy and "
 "the toolsmithy."
-msgstr ""
+msgstr "It erts wurdt smolten yn de smelterij foar't it brûkt wurde kin. De bewurke materialen wurde dan brûkt yn de wapensmidderij, de pantsersmidderij en de arksmidderij."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:90
 msgid ""
 "Build a mine of each type. Make sure to send geologists to the mountain "
 "first."
-msgstr ""
+msgstr "Bou in myn fan elts soad. Soargje derfoar datst earst geologen nei de barch stjoerst."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:91
 msgid "Build a smelting works"
-msgstr ""
+msgstr "Bou in smelterij"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:92
 msgid "Build an armor smithy and a weapon smithy"
-msgstr ""
+msgstr "Bou in pantsersmidderij en in wapensmidderij"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:93
 msgid "Build a toolsmithy"
-msgstr ""
+msgstr "Bou in arksmidderij"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:99
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:103
 msgid "Build a barracks"
-msgstr ""
+msgstr "Bou barakken"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:101
 msgid "Recruiting new soldiers"
-msgstr ""
+msgstr "Rop nije soldaten op"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:102
 msgid ""
@@ -224,15 +225,15 @@ msgid ""
 "we need to deliver light tridents and tabards to the barracks. Recruits will"
 " arrive from the warehouse and receive one of each and some basic training "
 "to become a soldier."
-msgstr ""
+msgstr "No't wapens smidde wurde kinne nije soldaten oproppen wurden. Hjirfoar moatte lichte gripen en tabberts nei de barakken brocht wurde. Rekruten komme fan it pakhús en krije fan beiden ien en krije in lichte trening om soldaat te wurden."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:109
 msgid "Build training sites for soldiers"
-msgstr ""
+msgstr "Lis oefenfjilden foar soldaten oan"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:111
 msgid "Soldier Training Sites"
-msgstr ""
+msgstr "Oefenfjilden foar soldaten"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:112
 msgid ""
@@ -240,19 +241,19 @@ msgid ""
 "dungeon trains attack – the major attribute of the Atlanteans – and the "
 "labyrinth trains evasion, health and defense. The items produced by the "
 "industry are used to train better soldiers in the two training sites."
-msgstr ""
+msgstr "Lykas alle oare stammen kinne ek de Atlanteanen soldaten trene. Yn de finzenis wurdt de oanfal treent, de haadfeardichheid fan de Atlanteanen. Yn de dwaaltún fynt ûnderrjocht yn ûntwiken, sûnens en ferdigening plak. De foarwerpen dy't troch de yndustry levere wurde, wurde brûkt om op de twa ferskillende plakken soldaten te trenen."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:113
 msgid "Build a dungeon and a labyrinth"
-msgstr ""
+msgstr "Bou in finzenis en in dwaaltún"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:119
 msgid "Build a warehouse and a horse farm"
-msgstr ""
+msgstr "Bouw in pakhûs en in hynstefokkerij"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:121
 msgid "Warehouse and Horse Farm"
-msgstr ""
+msgstr "Pakhûs en hynstefokkerij"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:122
 msgid ""
@@ -260,42 +261,42 @@ msgid ""
 "horses to help out your carriers. Horses are bred at horse farms using water"
 " and corn. A warehouse will also help to ensure that your transportation "
 "system does not collapse."
-msgstr ""
+msgstr "At dyn wegennetwurk grutter en yngewikkelder wurdt, wurdt it ferstannich om hynders yn te setten om dyn dragers te helpen. Hynders wurde fokt op in hynstefokkerij en hawwe wetter en stynske weet nedich. In pakhûs soarget der ek foar dat dyn transportnetwurk net ynstoart."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:123
 msgid "Build a warehouse"
-msgstr ""
+msgstr "Bou in pakhûs"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:124
 msgid "Build a horse farm"
-msgstr ""
+msgstr "Bou in hynstefokkerij"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:130
 msgid "Build 3 ships to escape from the island"
-msgstr ""
+msgstr "Bou 3 skippen om fan it eilân te ûntsnappen"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:132
 msgid "Escape From the Island"
-msgstr ""
+msgstr "Untsnap fan it eilân"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:133
 msgid ""
 "There is a lake at the top of the island. Build three ships in these waters "
 "and you might be able to rescue your people before the island is swallowed "
 "completely by the ocean."
-msgstr ""
+msgstr "Dêr is in mar oan de noardkant fan it eilân. Bou dêr trije skippen en miskien witsto dyn stam te rêden foar't it folsleine eilân troch de oseaan opslokt wurdt."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:134
 msgid "Build a shipyard close to the lake to start building ships"
-msgstr ""
+msgstr "Bou in skipswerf tichteby it mar om mei de bou fan skippen begjinne te kinnen."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:145
 msgid "Proud to the Death"
-msgstr ""
+msgstr "Grutsk ta de dea"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:147
 msgid "Favored by the God"
-msgstr ""
+msgstr "Favoryt fan de god"
 
 #. TRANSLATORS: Foreword
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:149
@@ -305,7 +306,7 @@ msgid ""
 "human to be empowered by the sea god Lutas to breathe above sea level – and "
 "the wise clerics, who provided the link to Lutas – they prospered and became"
 " civilized."
-msgstr ""
+msgstr "Doe't de wrâld noch tige jong wie hat op it ferstoppe en ferlerne eilân fan Atlantis in grutske stam in beskaving opsetten. Dizze beskaving waard laat troch de bloedline fan kening Ajanthul, de earste minske dy't troch de god fan de see, Lutas, it fermogen krigen hie om boppe seenivo te asemjen. De wize geasteliken dy't de ferbining mei Lutas leinen hienen it goed en waarden beskaafd."
 
 #. TRANSLATORS: Foreword
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:151
@@ -316,15 +317,15 @@ msgid ""
 "began looking for a cure for death even though most clerics warned him "
 "against it. Some said that endless life was only for the gods and that to "
 "seek for it was forbidden."
-msgstr ""
+msgstr "Dit ferhaal hat plak doe't kening Askandor, de 43ste opfolger fan kening Ajanthul, hearsker wie. Hy wie in goeie kening dy't Atlantis mei wiisheid en ynsjocht late. Doe't er âlder waard rekke er mear en mear benaud foar de dea dat hy socht in wûndermiddel om de dea te kearen, mar de measte geasteliken warskôgen him dêrtsjin. Guon seinen dat ûneinich libben allinne foar de goaden wie en dat in syktocht dêrnei ferbean wie."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:155
 msgid "Disgraced Before the God"
-msgstr ""
+msgstr "Beskamme troch de god"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:157
 msgid "The God’s Punishment"
-msgstr ""
+msgstr "De straf fan de god"
 
 #. TRANSLATORS: Foreword
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:159
@@ -447,7 +448,7 @@ msgstr ""
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:460
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:473
 msgid "Jundlina"
-msgstr ""
+msgstr "Jundlina"
 
 #. TRANSLATORS: Jundlina
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:197
@@ -525,7 +526,7 @@ msgstr ""
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:439
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:459
 msgid "Jundlina Replies"
-msgstr ""
+msgstr "Jundlina anderet"
 
 #. TRANSLATORS: Jundlina
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:232
@@ -594,7 +595,7 @@ msgstr ""
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:266
 msgid "A Man Comes to Jundlina"
-msgstr ""
+msgstr "In man komt by Jundlina op besite"
 
 #. TRANSLATORS: Opol
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:269
@@ -661,7 +662,7 @@ msgstr ""
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:308
 msgid "Jundlina Nods"
-msgstr ""
+msgstr "Jundlina knikt"
 
 #. TRANSLATORS: Jundlina
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:310
@@ -672,7 +673,7 @@ msgstr ""
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:317
 msgid "Jundlina Writes a Letter"
-msgstr ""
+msgstr "Jundlina skriuwt in brief"
 
 #. TRANSLATORS: Jundlina
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:320
@@ -695,7 +696,7 @@ msgstr ""
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:337
 msgid "Jundlina is Angry"
-msgstr ""
+msgstr "Jundlina is lilk"
 
 #. TRANSLATORS: Jundlina
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:339
@@ -732,7 +733,7 @@ msgstr ""
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:358
 msgid "Jundlina Received a Letter"
-msgstr ""
+msgstr "Jundlina kriget in brief"
 
 #. TRANSLATORS: Jundlina
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:361
@@ -766,12 +767,12 @@ msgstr ""
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:385
 msgid "A Dangerous Discovery"
-msgstr ""
+msgstr "In gefaarlike ûntdekking"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:386
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:414
 msgid "Jundlina is in Thought"
-msgstr ""
+msgstr "Jundlina is fertize yn tinzen"
 
 #. TRANSLATORS: Jundlina
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:388
@@ -807,7 +808,7 @@ msgstr ""
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:403
 msgid "Jundlina is Worried"
-msgstr ""
+msgstr "Jundlina makket har soargen"
 
 #. TRANSLATORS: Jundlina
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:405
@@ -920,21 +921,21 @@ msgstr ""
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:479
 msgid "Congratulations"
-msgstr ""
+msgstr "Lokwinske"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:480
 msgid ""
 "You have won this mission. Continue with the next one or keep playing for as"
 " long as you like."
-msgstr ""
+msgstr "Do hast de missy foltôge. Gean fierder mei de folgjende of spylje troch foar sa lang atst wolst."
 
 #: ../../data/scripting/format_scenario.lua:36
 #, lua-format
 msgid "“%s”"
-msgstr ""
+msgstr "“%s”"
 
 #: ../../data/scripting/format_scenario.lua:84
 msgid "New Objective"
 msgid_plural "New Objectives"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Nij doel"
+msgstr[1] "Nije doelen"

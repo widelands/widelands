@@ -2,13 +2,14 @@
 # Copyright (C) 2005-2017 Widelands Development Team
 # 
 # Translators:
+# Luitzen Hietkamp <luitzenhietkamp@gmail.com>, 2017
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-11-11 07:08+0000\n"
-"PO-Revision-Date: 2015-02-03 14:28+0000\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"POT-Creation-Date: 2017-11-11 07:38+0000\n"
+"PO-Revision-Date: 2017-11-12 22:21+0000\n"
+"Last-Translator: Luitzen Hietkamp <luitzenhietkamp@gmail.com>\n"
 "Language-Team: Western Frisian (http://www.transifex.com/widelands/widelands/language/fy/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -22,11 +23,11 @@ msgstr ""
 #: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/smuggling.lua:101
 #: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/smuggling.lua:104
 msgid "Status"
-msgstr ""
+msgstr "Status"
 
 #: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/multiplayer_init.lua:122
 msgid "Wares Smuggled"
-msgstr ""
+msgstr "Smokkele guod"
 
 #: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/multiplayer_init.lua:145
 #: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/multiplayer_init.lua:148
@@ -42,18 +43,18 @@ msgstr[1] ""
 #: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/multiplayer_init.lua:148
 #: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/texts.lua:8
 msgid "Rules"
-msgstr ""
+msgstr "Rigels"
 
 #: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/texts.lua:6
 msgid "Smugglers"
-msgstr ""
+msgstr "Smokkelers"
 
 #: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/texts.lua:9
 msgid ""
 "Smugglers is a fun map for 4 players. You and your partner start diagonally "
 "from each other on a point symmetric island. There are plenty of smuggling "
 "tunnels on this island, each consisting of a receiving and a sending end."
-msgstr ""
+msgstr "Smokkelers is in map foar 4 spilers. Do en dyn maat begjinne diagonaal tsjin inoar oer op in symmetrysk eilân. Dêr binne in soad smokkeltunnels op it eilând. Elts bestiet út in yngong en útgong."
 
 #: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/texts.lua:10
 msgid ""
@@ -61,7 +62,7 @@ msgid ""
 "sending/receiving spot while your team mate has to build one on the "
 "corresponding receiving/sending spot. A ware is then transported every 10 "
 "seconds."
-msgstr ""
+msgstr "Om in smokkelrûte op te setten is it nedich datsto in pakhûs by in yn- of in útgong delsetst wylst dyn maat oan de oare ein in pakhûs hat. Alle 10 sekonden wurdt der dan wat hinne en wer ferfierd."
 
 #. TRANSLATORS: %s = '<number> points'
 #: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/texts.lua:12
@@ -69,26 +70,26 @@ msgstr ""
 msgid ""
 "For harder to defend smuggling routes, you get 2 or 3 points per ware "
 "smuggled. The first team to collect %s wins."
-msgstr ""
+msgstr "Foar smokkelrûtes dy't muoiliker te ferdigenje binne falle der 2 as 3 punten te fertsjinjen foar elts foarwerp dat ferfierd wurdt. It earste tiim mei %s punten wint."
 
 #: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/texts.lua:13
 msgid "A sending spot"
-msgstr ""
+msgstr "In útgong"
 
 #: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/texts.lua:14
 msgid "A receiving spot"
-msgstr ""
+msgstr "In yngong"
 
 #: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/texts.lua:15
 msgid "Notes"
-msgstr ""
+msgstr "Oantekenings"
 
 #: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/texts.lua:16
 msgid ""
 "Remember that the map has rotational symmetry. For example, when you have "
 "found a spot to the top-left of your headquarters, the corresponding spot "
 "will be to the bottom-right of the headquarters of your team mate."
-msgstr ""
+msgstr "Unthâld dat de kaart rotaasjesymmetrysk is. Wannears befoarbyld in plak oan de linkerboppekant fan dyn haadkertier fûn hast wol dat sizze dat it oare byhearrende plak oan de rjochterûnderkant fan dyn maat syn haadkertier te finen is."
 
 #: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/texts.lua:17
 msgid ""

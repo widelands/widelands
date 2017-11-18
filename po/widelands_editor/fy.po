@@ -2,13 +2,14 @@
 # Copyright (C) 2005-2017 Widelands Development Team
 # 
 # Translators:
+# Luitzen Hietkamp <luitzenhietkamp@gmail.com>, 2017
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-11-11 07:08+0000\n"
-"PO-Revision-Date: 2016-03-24 07:33+0000\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"POT-Creation-Date: 2017-11-11 07:38+0000\n"
+"PO-Revision-Date: 2017-11-15 11:32+0000\n"
+"Last-Translator: Luitzen Hietkamp <luitzenhietkamp@gmail.com>\n"
 "Language-Team: Western Frisian (http://www.transifex.com/widelands/widelands/language/fy/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -29,7 +30,7 @@ msgstr ""
 #. the key.
 #: ../../data/scripting/editor/editor_controls.lua:17
 msgid "Help"
-msgstr ""
+msgstr "Help"
 
 #. TRANSLATORS: This is an access key combination.
 #: ../../data/scripting/editor/editor_controls.lua:19
@@ -74,13 +75,13 @@ msgstr ""
 #. the key.
 #: ../../data/scripting/editor/editor_controls.lua:35
 msgid "Undo"
-msgstr ""
+msgstr "Werom sette"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
 #: ../../data/scripting/editor/editor_controls.lua:37
 msgid "Redo"
-msgstr ""
+msgstr "Opnij dwaan"
 
 #. TRANSLATORS: This is an access key combination. The hotkey is 'i'
 #: ../../data/scripting/editor/editor_controls.lua:39
@@ -92,44 +93,44 @@ msgstr ""
 #: ../../data/scripting/editor/editor_controls.lua:41
 msgctxt "hotkey"
 msgid "Ctrl + L"
-msgstr ""
+msgstr "Ctrl+L"
 
 #: ../../data/scripting/editor/editor_controls.lua:41
 msgid "Load map"
-msgstr ""
+msgstr "Kaart lade"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
 #: ../../data/scripting/editor/editor_controls.lua:43
 msgctxt "hotkey"
 msgid "Ctrl + S"
-msgstr ""
+msgstr "Ctrl+S"
 
 #: ../../data/scripting/editor/editor_controls.lua:43
 msgid "Save map"
-msgstr ""
+msgstr "Kaart opslaan"
 
 #: ../../data/scripting/editor/editor_controls.lua:47
 msgid "Tools"
-msgstr ""
+msgstr "Ark"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
 #: ../../data/scripting/editor/editor_controls.lua:50
 msgctxt "hotkey"
 msgid "0-9"
-msgstr ""
+msgstr "0-9"
 
 #: ../../data/scripting/editor/editor_controls.lua:50
 msgid "Change tool size"
-msgstr ""
+msgstr "Arkformaat oanpasse"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
 #: ../../data/scripting/editor/editor_controls.lua:52
 msgctxt "hotkey"
 msgid "Click"
-msgstr ""
+msgstr "Klik"
 
 #: ../../data/scripting/editor/editor_controls.lua:52
 msgid ""
@@ -148,14 +149,14 @@ msgstr ""
 #: ../../data/scripting/editor/editor_controls.lua:54
 msgctxt "hotkey"
 msgid "Shift + Click"
-msgstr ""
+msgstr "Shift+klik"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
 #: ../../data/scripting/editor/editor_controls.lua:56
 msgctxt "hotkey"
 msgid "Ctrl + Click"
-msgstr ""
+msgstr "Ctrl+klik"
 
 #: ../../data/scripting/editor/editor_controls.lua:56
 msgid "Set map elements to the value selected by ‘Set Value’"
@@ -167,25 +168,25 @@ msgstr ""
 
 #: ../../data/scripting/editor/editor_help.lua:54
 msgid "General"
-msgstr ""
+msgstr "Algemien"
 
 #: ../../data/scripting/editor/editor_help.lua:59
 #: ../../data/scripting/editor/editor_introduction.lua:12
 msgid "Introduction"
-msgstr ""
+msgstr "Yntroduksje"
 
 #: ../../data/scripting/editor/editor_help.lua:71
 #: ../../data/scripting/editor/tips.lua:16
 msgid "Tips"
-msgstr ""
+msgstr "Oanwizings"
 
 #: ../../data/scripting/editor/editor_help.lua:81
 msgid "Terrains"
-msgstr ""
+msgstr "Terrein"
 
 #: ../../data/scripting/editor/editor_help.lua:88
 msgid "Trees"
-msgstr ""
+msgstr "Beammen"
 
 #: ../../data/scripting/editor/editor_introduction.lua:9
 msgid "The Widelands Editor"
@@ -209,7 +210,7 @@ msgstr ""
 
 #: ../../data/scripting/editor/terrain_help.lua:21
 msgid "Resources"
-msgstr ""
+msgstr "Grûnstoffen"
 
 #. TRANSLATORS: A header in the editor help
 #: ../../data/scripting/editor/terrain_help.lua:25
@@ -225,7 +226,7 @@ msgstr ""
 #. TRANSLATORS: e.g. "5x Water"
 #: ../../data/scripting/editor/terrain_help.lua:36
 msgid "%1%x %2%"
-msgstr ""
+msgstr "%1%x %2%"
 
 #. TRANSLATORS: A header in the editor help
 #: ../../data/scripting/editor/terrain_help.lua:67
@@ -245,4 +246,4 @@ msgstr ""
 #. TRANSLATORS: Terrain name (Climate)
 #: ../../data/scripting/editor/tree_help.lua:39
 msgid "%1% (%2%)"
-msgstr ""
+msgstr "%1% (%2%)"
