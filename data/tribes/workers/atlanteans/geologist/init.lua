@@ -35,7 +35,7 @@ tribes:new_worker_type {
       -- The specialized geologist command walks the geologist around his starting
       -- location, executing the search program from time to time.
       expedition = {
-         "repeat_search= 15 5 search"
+         "repeatsearch= 15 5 search"
       },
       -- Search program, executed when we have found a place to hack on
       search = {
@@ -43,7 +43,7 @@ tribes:new_worker_type {
          "animate=idle 2000",
          "playsound=sound/hammering geologist_hammer 192",
          "animate=hacking 3000",
-         "find_resources"
+         "findresources"
       }
    },
 
