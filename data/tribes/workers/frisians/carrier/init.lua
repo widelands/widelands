@@ -2,9 +2,9 @@ dirname = path.dirname (__file__)
 
 animations = {
    idle = {
-      pictures = path.list_files (dirname .. "idle_??.png"),
-      hotspot = {20, 26},
-      scale = 7.55,
+      pictures = path.list_files (dirname .. "idle_???.png"),
+      hotspot = {32, 38},
+      scale = 6,
       fps = 10
    }
 }

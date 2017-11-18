@@ -241,6 +241,15 @@ supply_murilius_8 = {
       _([[You will have to fight these barbarians if you intend to live in the area; surely you can see that fighting them together with the Empire is easier than alone? And you really do not want the Empire as your enemy. Barbarians though you are, I do believe you will realize the truth of my words after some consideration.]]))
       .. new_objectives (obj_supply_murilius),
 }
+supply_murilius_9 = {
+   title =_ "We are not alone",
+   body=reebaud (_"Strangers",
+      -- TRANSLATORS: Reebaud – Supply Murilius 9
+      _([[This is the greatest outrage of all. How dare he order us to stop expanding our territory when all we want is to build a new home, and threaten us with war if we refuse to be his slaves?!]])
+      .. paragraphdivider () ..
+      -- TRANSLATORS: Reebaud – Supply Murilius 9
+      _([[I´d like to say we should attack him right now, but I fear we aren´t strong enough yet to hold our own against him in battle. We should hurry our soldier training while pretending to be gathering his so-called gift. That would buy us some time. As for expansion – I wonder how strictly he can possibly control us…]])),
+}
 
 supply_murilius_destroy = {
    title =_ "The Empire is angry",
@@ -258,7 +267,7 @@ supply_murilius_military = {
    body=murilius ("Hostes Imperii estis!",
       -- TRANSLATORS: Murilius – enemy of the Empire
       _([[Barbarians! You have refused my offer of friendship most ingraciously by ]]) .. 
-      -- TRANSLATORS: Murilius – enemy of the Empire: player trained or recruited soldiers
+      -- TRANSLATORS: Murilius – enemy of the Empire: player built forbidden military buildings
       _([[basely wasting your precious resources on expansion!]])
       .. paragraphdivider () ..
       -- TRANSLATORS: Murilius – enemy of the Empire
@@ -297,10 +306,10 @@ defeat_murilius_2 = {
    title =_ "Another enemy",
    body=reebaud (_"Defeat the Empire!",
       -- TRANSLATORS: Reebaud – defeat Murilius 2
-      _([[Did I understand him correctly? He wants us to be servants of this Empire, and take away my leadership? And the hypocrite calls this a reward?]])
+      _([[Did I understand him correctly? After all we have done for him, after so many of my soldiers have laid down their lifes for his sake, he wants us to be servants of this Empire, and take away my leadership? And does the hypocrite dare call this a reward?]])
       .. paragraphdivider () ..
       -- TRANSLATORS: Reebaud – defeat Murilius 2
-      _([[We will punish this self-proclaimed Proconsule for this insult! I shall burn down his entire colony, and kill every single person in his realm. He will be very sorry indeed for insulting our tribe thus.]]))
+      _([[We will punish this self-proclaimed Proconsule for his treachery! I shall burn down his entire colony, and kill every single person in his realm. He will be very sorry indeed for insulting our tribe thus.]]))
       .. new_objectives (obj_defeat_murilius),
 }
 victory_1 = {
@@ -310,5 +319,8 @@ victory_1 = {
       _([[We have defeated all our enemies! Now no other tribe will ever dare settle here again. We are safe, and we can finally live our lifes in peace.]]))
       .. objective_text (_"Congratulations",
       -- TRANSLATORS: Reebaud – victory
-      _[[You have completed this campaign!]]),
+      _[[You have completed this campaign!]] 
+      .. paragraphdivider () .. 
+      -- TRANSLATORS: Reebaud – victory
+      _[[To be continued…]]),
 }

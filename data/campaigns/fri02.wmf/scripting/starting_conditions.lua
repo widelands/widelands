@@ -12,14 +12,18 @@ p1:forbid_buildings {
    "frisians_training_arena",
    "frisians_seamstress",
    "frisians_seamstress_master",
+   -- the map is non-seafaring, but just in case:
+   "frisians_shipyard",
+   "frisians_weaving_mill",
+   "frisians_port",
 }
 
 port1 = p1:place_building ("frisians_port", map.player_slots [1].starting_field, false, true)
 port1:set_wares {
-   log = 400,
-   brick = 500,
-   granite = 400,
-   thatch_reed = 200,
+   log = 40,
+   brick = 50,
+   granite = 40,
+   thatch_reed = 20,
    clay = 10,
    water = 5,
    coal = 30,
@@ -58,6 +62,10 @@ port1:set_workers {
    frisians_charcoal_burner = 3
 }
 port1:set_soldiers ({0,0,0,0}, 25)
+
+map:place_immovable ("destroyed_building", map.player_slots [1].starting_field.ln.ln.ln.tln, "tribes")
+map:place_immovable ("ashes", map.player_slots [1].starting_field.ln.tln.tln, "tribes")
+map:place_immovable ("destroyed_building", map.player_slots [1].starting_field.ln.ln, "tribes")
 
 -- =======================================================================
 --                                 Player 2

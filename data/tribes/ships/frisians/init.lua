@@ -4,7 +4,7 @@ animations = {
    idle = {
       pictures = path.list_files (dirname .. "idle_??.png"),
       hotspot = {192, 226},
-      fps = 20
+      fps = 10
    }
 }
 add_walking_animations (animations, "sail", dirname, "sail", {192, 226}, 10)

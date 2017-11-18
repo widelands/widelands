@@ -1,11 +1,11 @@
-# Automatically created by Widelands bzr8439[frisians] (Release)
+# Automatically created by Widelands bzr8448[frisians] (Release)
 
 [global]
 map_source_url=
 map_release=
-map_creator_version="bzr8439[frisians]"
+map_creator_version="bzr8448[frisians]"
 map_version_major="0"
 map_version_minor="1"
-map_version_timestamp="1506508228"
+map_version_timestamp="1510951715"
 packet_version="1"
 packet_compatibility="1"

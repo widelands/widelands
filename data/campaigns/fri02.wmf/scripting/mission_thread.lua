@@ -105,6 +105,8 @@ function expand_south ()
    campaign_message_box (supply_murilius_8)
    p2:allow_buildings {"empire_barracks"}
    p3:allow_buildings {"barbarians_barracks"}
+   sleep (2000)
+   campaign_message_box (supply_murilius_9)
    set_objective_done (o)
    
    o = add_campaign_objective (obj_supply_murilius)
@@ -128,7 +130,7 @@ function expand_south ()
             wh:get_wares ("gold") >= 10 and
             wh:get_wares ("iron_ore") >= 40 and
             wh:get_wares ("gold_ore") >= 20 and
-            wh:get_wares ("beer") >= 30 ) or wh:get_wares ("granite") >= 10
+            wh:get_wares ("beer") >= 30 )
          then
             choice = "yes"
          end
@@ -193,11 +195,11 @@ end
 function supply_yes ()
    local wh = p1:get_buildings ("frisians_warehouse_empire") [1]
    local hq = p2:get_buildings ("empire_headquarters") [1]
-   for name,nb in ipairs (wh:get_wares ("all")) do --FIXME get_wares("all") returns {}
-      if p2.tribe:has_ware (name) then 
-         wh:set_wares (name, 0)
-         hq:set_wares (name, hq:get_wares (name) + nb)
-      end
+   -- transfer all wares that frisians and empire have in common
+   for idx,name in ipairs ({"log", "granite", "coal", "iron", "iron_ore", "gold", "gold_ore", "water", "fish", "meat", "beer", "ration", "meal", "pick", "felling_ax", "shovel", "hammer", "hunting_spear", "scythe", "bread_paddle", "basket", "kitchen_tools", "fire_tongs"}) do
+      local nb = wh:get_wares (name)
+      wh:set_wares (name, 0)
+      hq:set_wares (name, hq:get_wares (name) + nb)
    end
    campaign_message_box (supply_murilius_thanks)
    local o = add_campaign_objective (obj_defeat_barbarians)
@@ -249,13 +251,13 @@ function mission_thread()
    p2.team = 1
    p3.team = 2
 -- TODO: instead of alliances, just forbid certain players to attack each other:
---     · Beginning:          forbid 1/2, 2/1, 2/3
---     · Refusing alliance:  forbid only 2/3
+--     · Beginning:          forbid 1>2, 2>1, 2>3
+--     · Refusing alliance:  forbid only 2>3
 --     · Accepting alliance: first unchanged, after p3 defeated: allow all
    
    campaign_message_box (intro_2)
    local o = add_campaign_objective (obj_new_home)
-   --while not check_for_buildings (p1, {frisians_woodcutters_house = 1, frisians_foresters_house = 1, frisians_well = 1, frisians_reed_farm = 1, frisians_quarry = 1, frisians_brick_burners_house = 1, frisians_claypit = 1, frisians_charcoal_kiln = 1}) do sleep (4273) end
+   while not check_for_buildings (p1, {frisians_woodcutters_house = 1, frisians_foresters_house = 1, frisians_well = 1, frisians_reed_farm = 1, frisians_quarry = 1, frisians_brick_burners_house = 1, frisians_claypit = 1, frisians_charcoal_kiln = 1}) do sleep (4273) end
    set_objective_done (o)
    
    run (expand_south)
