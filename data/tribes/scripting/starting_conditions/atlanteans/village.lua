@@ -77,9 +77,18 @@ return {
             [{0,0,0,0}] = 5,
          },
       })
+      place_building_in_region(plr, "atlanteans_weaving_mill", sf:region(10), {
+         inputs = {
+      spider_silk = 6 ,
+      gold_thread = 3
+   }, 
+      })
 
       place_building_in_region(plr, "atlanteans_toolsmithy", sf:region(7), {
-         inputs = { log = 6 }
+         inputs = {log = 5 ,
+      spidercloth = 3 ,
+      iron = 5 
+   },
       })
 
       place_building_in_region(plr, "atlanteans_sawmill", sf:region(7), {

@@ -71,14 +71,14 @@ return {
       })
 
       place_building_in_region(plr, "barbarians_metal_workshop", sf:region(8), {
-         inputs = { iron = 8 },
+         inputs = { log = 7, iron = 7 },
       })
 
       place_building_in_region(plr, "barbarians_wood_hardener", sf:region(8), {
-         inputs = { log = 6 },
+         inputs = { log = 5 },
       })
       place_building_in_region(plr, "barbarians_lime_kiln", sf:region(8), {
-         inputs = { granite = 6, coal = 3 },
+         inputs = { granite = 5, water = 5, coal = 2 },
       })
    end
 }

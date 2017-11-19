@@ -78,17 +78,17 @@ prefilled_buildings(plr, { "empire_headquarters", sf.x, sf.y,
       })
 
       place_building_in_region(plr, "empire_toolsmithy", sf:region(9), {
-         inputs = {
-            iron = 8,
+         inputs = {log = 7, iron = 7
          }
       })
 
       place_building_in_region(plr, "empire_sawmill", sf:region(9), {
-         inputs = {
-            log = 6,
+         inputs = {log = 7
          }
       })
 
-      place_building_in_region(plr, "empire_stonemasons_house", sf:region(9))
+      place_building_in_region(plr, "empire_stonemasons_house", sf:region(9), {
+      inputs = {marble = 6 }
+   })
    end
 }
