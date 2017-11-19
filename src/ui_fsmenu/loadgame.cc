@@ -19,6 +19,8 @@
 
 #include "ui_fsmenu/loadgame.h"
 
+#include <memory>
+
 #include "base/i18n.h"
 #include "wui/gamedetails.h"
 

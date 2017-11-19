@@ -20,6 +20,8 @@
 #ifndef WL_WUI_LOAD_OR_SAVE_GAME_H
 #define WL_WUI_LOAD_OR_SAVE_GAME_H
 
+#include <memory>
+
 #include "logic/game.h"
 #include "ui_basic/box.h"
 #include "ui_basic/panel.h"
