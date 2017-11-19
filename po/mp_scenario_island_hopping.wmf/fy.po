@@ -2,13 +2,14 @@
 # Copyright (C) 2005-2017 Widelands Development Team
 # 
 # Translators:
+# Luitzen Hietkamp <luitzenhietkamp@gmail.com>, 2017
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-11-11 07:08+0000\n"
-"PO-Revision-Date: 2015-02-03 14:27+0000\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"POT-Creation-Date: 2017-11-11 07:38+0000\n"
+"PO-Revision-Date: 2017-11-13 16:12+0000\n"
+"Last-Translator: Luitzen Hietkamp <luitzenhietkamp@gmail.com>\n"
 "Language-Team: Western Frisian (http://www.transifex.com/widelands/widelands/language/fy/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -18,30 +19,30 @@ msgstr ""
 
 #: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/first_island.lua:70
 msgid "5 minutes"
-msgstr ""
+msgstr "5 minuten"
 
 #: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/first_island.lua:74
 msgid "10 minutes"
-msgstr ""
+msgstr "10 minuten"
 
 #: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/first_island.lua:78
 msgid "15 minutes"
-msgstr ""
+msgstr "15 minuten"
 
 #: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/multiplayer_init.lua:99
 #: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/multiplayer_init.lua:101
 msgid "Status"
-msgstr ""
+msgstr "Status"
 
 #. TRANSLATORS: number + resource name, e.g. '1x Log'
 #: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/multiplayer_init.lua:112
 msgid "%1$dx %2$s"
-msgstr ""
+msgstr "%1$d x %2$s"
 
 #: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/multiplayer_init.lua:223
 #: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:7
 msgid "Rules"
-msgstr ""
+msgstr "Rigels"
 
 #: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:5
 msgid "Welcome to Island Hopping"
@@ -88,31 +89,31 @@ msgstr ""
 
 #: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:30
 msgid "First Island"
-msgstr ""
+msgstr "Earste eilân"
 
 #: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:31
 #: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:36
 msgid "1st to finish"
-msgstr ""
+msgstr "1ste klear"
 
 #: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:32
 #: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:37
 msgid "2nd to finish"
-msgstr ""
+msgstr "2de klear"
 
 #: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:33
 #: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:38
 msgid "3rd to finish"
-msgstr ""
+msgstr "3de klear"
 
 #: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:34
 #: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:39
 msgid "4th to finish"
-msgstr ""
+msgstr "4de klear"
 
 #: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:35
 msgid "Second Island"
-msgstr ""
+msgstr "Twadde eilân"
 
 #: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:44
 msgid "%1$s was the first to reach Island number %2$i."
@@ -144,7 +145,7 @@ msgstr ""
 #: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:55
 #, lua-format
 msgid "%s lost control of the hill."
-msgstr ""
+msgstr "%s is de kontrôle oer de heuvel kwytrekke."
 
 #: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:57
 msgid "%1$s has been King of the Hill for %2$s!"
@@ -153,4 +154,4 @@ msgstr ""
 #: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:58
 #, lua-format
 msgid "%s has won the game. Congratulations!"
-msgstr ""
+msgstr "%s hat de striid wûn. Lokwinske!"

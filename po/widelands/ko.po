@@ -4,6 +4,8 @@
 # Translators:
 # GunChleoc, 2015
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
+# GunChleoc, 2015
+# ks k, 2017
 # ks k, 2017
 # Moon Yeonki <backnii@gmail.com>, 2017
 # TaeMin An <kavern02@gmail.com>, 2017
@@ -11,9 +13,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-11-11 07:08+0000\n"
-"PO-Revision-Date: 2017-11-11 07:11+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2017-11-11 07:38+0000\n"
+"PO-Revision-Date: 2017-11-16 17:54+0000\n"
+"Last-Translator: ks k\n"
 "Language-Team: Korean (http://www.transifex.com/widelands/widelands/language/ko/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -97,12 +99,12 @@ msgstr "보통 AI"
 #. * TRANSLATORS: This is the name of an AI used in the game setup screens
 #: ../../src/ai/defaultai.h:113
 msgid "Weak AI"
-msgstr "낮은 AI"
+msgstr "약한 AI"
 
 #. * TRANSLATORS: This is the name of an AI used in the game setup screens
 #: ../../src/ai/defaultai.h:128
 msgid "Very Weak AI"
-msgstr "매우 낮은 AI"
+msgstr "매우 약한 AI"
 
 #. * TRANSLATORS: January. Keep this to 4 letters maximum.
 #. * TRANSLATORS: Use the "Months - abbreviated - Formatting" definition from
@@ -214,7 +216,7 @@ msgstr "12월"
 #: ../../src/editor/editorinteractive.cc:62 ../../src/logic/game.cc:211
 #: ../../src/logic/game.cc:258
 msgid "Loading tribes"
-msgstr "부족 소환 중"
+msgstr "부족들을 불러오는 중"
 
 #: ../../src/editor/editorinteractive.cc:77
 #: ../../src/editor/ui_menus/main_menu.cc:43
@@ -296,7 +298,7 @@ msgstr "Widelands는 파일 \"%s\"를 불러올 수 없습니다. 파일 형식�
 #: ../../src/editor/editorinteractive.cc:177 ../../src/logic/game.cc:215
 #: ../../src/logic/game.cc:265
 msgid "Creating players"
-msgstr "플레이어 생성"
+msgstr "플레이어 생성중"
 
 #: ../../src/editor/editorinteractive.cc:225
 msgid "Unsaved Map"
@@ -309,7 +311,7 @@ msgstr "지도가 저장되지 않았는데, 종료하기를 원하십니까?"
 #: ../../src/editor/editorinteractive.cc:618
 #: ../../src/editor/ui_menus/main_menu_new_map.cc:144
 msgid "Creating empty map…"
-msgstr "빈 지도를 만드는 중..."
+msgstr "빈 지도를 만드는 중…"
 
 #. * TRANSLATORS: Default name for new map
 #: ../../src/editor/editorinteractive.cc:622
@@ -360,7 +362,7 @@ msgstr "중간"
 
 #: ../../src/editor/tools/info_tool.cc:71
 msgid "big"
-msgstr "큰"
+msgstr "큼"
 
 #: ../../src/editor/tools/info_tool.cc:78
 msgid "flag"
@@ -1014,11 +1016,11 @@ msgstr "Widelands는 플레이어 %u의 시작 위치가 없어서 게임을 시
 
 #: ../../src/logic/game.cc:779
 msgid "Trade Offer"
-msgstr ""
+msgstr "거래 제안"
 
 #: ../../src/logic/game.cc:781
 msgid "This market has received a new trade offer."
-msgstr ""
+msgstr "이 시장은 새로운 무역 제안을 받았습니다."
 
 #: ../../src/logic/game_data_error.cc:48
 msgid ""
@@ -1164,13 +1166,13 @@ msgstr "이 건물은 다음 용품을 소유하고 있지 않음: %s"
 #. experience'.
 #: ../../src/logic/map_objects/tribes/production_program.cc:433
 msgid "a worker needs experience"
-msgstr "일꾼은 경험이 필요하다"
+msgstr "일꾼은 경험이 필요합니다"
 
 #. * TRANSLATORS: 'Completed/Skipped/Did not start ... because the workers
 #. need no experience'.
 #: ../../src/logic/map_objects/tribes/production_program.cc:439
 msgid "the workers need no experience"
-msgstr "일꾼들은 경험이 필요없다"
+msgstr "일꾼들은 경험이 필요없습니다"
 
 #. * TRANSLATORS: "Did not start working because the economy needs the ware
 #. ‘%s’"
@@ -1424,7 +1426,7 @@ msgstr "일꾼이 길을 잃었네요!"
 #. * TRANSLATORS: This is a terrain type tooltip in the editor
 #: ../../src/logic/map_objects/world/terrain_description.cc:70
 msgid "arable"
-msgstr "가능한"
+msgstr "경작 가능함"
 
 #. * TRANSLATORS: This is a terrain type tooltip in the editor
 #: ../../src/logic/map_objects/world/terrain_description.cc:80
@@ -1479,7 +1481,7 @@ msgstr "Bluebyte Settlers II 지도. 아무런 코멘트 없음!"
 #: ../../src/network/gameclient.cc:103
 #: ../../src/network/internet_gaming.cc:111
 msgid "Could not establish connection to host"
-msgstr "호스트와의 연결을 수립할 수 없음"
+msgstr "호스트에 연결할 수 없습니다"
 
 #: ../../src/network/gameclient.cc:104
 msgid ""
@@ -2769,17 +2771,17 @@ msgstr "시스템 언어 적용"
 #: ../../src/ui_fsmenu/options.cc:519
 #, c-format
 msgid "The translation into %s is complete."
-msgstr ""
+msgstr "%s (으)로의 번역이 완료되었습니다."
 
 #: ../../src/ui_fsmenu/options.cc:521
 #, c-format
 msgid "The translation into %s is %d%% complete."
-msgstr ""
+msgstr "%s (으)로의 번역이 %d%% 완료되었습니다."
 
 #: ../../src/ui_fsmenu/options.cc:535
 #, c-format
 msgid "If you wish to help us translate, please visit %s"
-msgstr ""
+msgstr "번역을 돕고 싶다면, 다음을 방문해주세요: %s"
 
 #: ../../src/ui_fsmenu/singleplayer.cc:40
 msgid "New Game"
@@ -2803,7 +2805,7 @@ msgid ""
 "Please report this problem to help us improve Widelands. You will find "
 "related messages in the standard output (stdout.txt on Windows). You are "
 "using build %1$s (%2$s)."
-msgstr "Widelands를 향상시키도록 이 문제를 보고해 주세요. 당신은 관련된 메시지를 표준 결과물 (Windows에서 stdout.txt) 에서 찾을 수 있습니다. 당신은 build %1$s (%2$s) 를 사용하고 있습니다."
+msgstr "Widelands가 더 좋아질수 있도록 이 문제를 보고해 주세요. 당신은 관련된 메시지를 표준 결과물 (Windows에서 stdout.txt) 에서 찾을 수 있습니다. 당신은 build %1$s (%2$s) 를 사용하고 있습니다."
 
 #: ../../src/wlapplication.cc:1061
 msgid ""
@@ -3450,7 +3452,7 @@ msgstr "팀 점수"
 #. * TRANSLATORS: The time a replay starts. Shown in the replay loading screen
 #: ../../src/wui/gamedetails.cc:157
 msgid "Start of Replay:"
-msgstr ""
+msgstr "리플레이 시작:"
 
 #. * TRANSLATORS: The current time of a savegame. Shown in the game saving and
 #. loading screens.
@@ -3468,7 +3470,7 @@ msgstr "승리 조건:"
 
 #: ../../src/wui/gamedetails.cc:206
 msgid "Error:"
-msgstr ""
+msgstr "오류:"
 
 #: ../../src/wui/general_statistics_menu.cc:140
 msgid "Land"
@@ -3574,7 +3576,7 @@ msgstr "자동 저장 %1%: %2%"
 #: ../../src/wui/load_or_save_game.cc:62
 msgctxt "filename_mapname"
 msgid "%1%: %2%"
-msgstr ""
+msgstr "%1%: %2%"
 
 #: ../../src/wui/load_or_save_game.cc:97
 msgid "Delete"
@@ -3634,7 +3636,7 @@ msgstr "설명"
 
 #: ../../src/wui/load_or_save_game.cc:130
 msgid "Map name (start of replay)"
-msgstr ""
+msgstr "지도 이름 (리플레이 시작)"
 
 #: ../../src/wui/load_or_save_game.cc:131
 msgid ""
@@ -3656,13 +3658,13 @@ msgstr "해당 게임 삭제"
 #. multiple files
 #: ../../src/wui/load_or_save_game.cc:186
 msgid "Delete these replays"
-msgstr ""
+msgstr "이런 리플레이 삭제"
 
 #. * TRANSLATORS: Tooltip for the delete button. The user has selected
 #. multiple files
 #: ../../src/wui/load_or_save_game.cc:188
 msgid "Delete these games"
-msgstr ""
+msgstr "이런 게임 삭제"
 
 #: ../../src/wui/load_or_save_game.cc:190
 #, c-format
@@ -3709,7 +3711,7 @@ msgstr "오늘, %1%:%2%"
 #. hour:minute. This is part of a list.
 #: ../../src/wui/load_or_save_game.cc:391
 msgid "saved today at %1%:%2%"
-msgstr ""
+msgstr "오늘 %1%:%2%에 저장 됨"
 
 #. * TRANSLATORS: Display date for choosing a savegame/replay. Placeholders
 #. are:
@@ -3723,21 +3725,21 @@ msgstr "어제, %1%:%2%"
 #. hour:minute. This is part of a list.
 #: ../../src/wui/load_or_save_game.cc:408
 msgid "saved yesterday at %1%:%2%"
-msgstr ""
+msgstr "어제 %1%:%2%에 저장됨"
 
 #. * TRANSLATORS: Display date for choosing a savegame/replay. Placeholders
 #. are:
 #. month day, year
 #: ../../src/wui/load_or_save_game.cc:414
 msgid "%2% %1%, %3%"
-msgstr "%2% %1%, %3%"
+msgstr "%3% %2% %1%"
 
 #. * TRANSLATORS: Display date for choosing a savegame/replay. Placeholders
 #. are:
 #. month day, year. This is part of a list.
 #: ../../src/wui/load_or_save_game.cc:420
 msgid "saved on %2% %1%, %3%"
-msgstr ""
+msgstr "%3% %2% %1%에 저장됨"
 
 #. * TRANSLATORS: "Single Player" entry in the Game Mode table column.
 #. * TRANSLATORS: "Keep this to 6 letters maximum.
@@ -3771,7 +3773,7 @@ msgstr "MP (%1%)"
 #: ../../src/wui/load_or_save_game.cc:467
 msgctxt "mapname_gametime"
 msgid "%1% (%2%)"
-msgstr ""
+msgstr "%1% (%2%)"
 
 #. * TRANSLATORS: Error message introduction for when an old savegame can't be
 #. loaded
@@ -3807,7 +3809,7 @@ msgstr "암호:"
 
 #: ../../src/wui/login_box.cc:42
 msgid "WARNING: Password will be shown and saved readable!"
-msgstr "경고: 비밀번호가 가독성있게 보여지고 저장됩니다!"
+msgstr "경고: 비밀번호는 누구에게나 보여지고 읽을 수 있게 저장됩니다!"
 
 #: ../../src/wui/login_box.cc:44
 msgid "Log in to a registered account"
@@ -3868,27 +3870,27 @@ msgstr "유물"
 #. * TRANSLATORS: This is a map tag
 #: ../../src/wui/map_tags.cc:38
 msgid "Free for all"
-msgstr "프리 포 올"
+msgstr "누구나 자유롭게 참가하는 경기"
 
 #. * TRANSLATORS: This is a map tag. One versus one.
 #: ../../src/wui/map_tags.cc:40
 msgid "1v1"
-msgstr "1v1"
+msgstr "1 대 1"
 
 #. * TRANSLATORS: This is a map tag
 #: ../../src/wui/map_tags.cc:42
 msgid "Teams of 2"
-msgstr "2 팀전"
+msgstr "2 대 2"
 
 #. * TRANSLATORS: This is a map tag
 #: ../../src/wui/map_tags.cc:44
 msgid "Teams of 3"
-msgstr "3 팀전"
+msgstr "3 대 3"
 
 #. * TRANSLATORS: This is a map tag
 #: ../../src/wui/map_tags.cc:46
 msgid "Teams of 4"
-msgstr "4 팀전"
+msgstr "4 대 4"
 
 #: ../../src/wui/mapdata.cc:44
 msgid "No Author"
@@ -3924,7 +3926,7 @@ msgstr "지도의 원래 이름: %s"
 #: ../../src/wui/mapdetails.cc:148
 #, c-format
 msgid "The name of this map in your language: %s"
-msgstr "지도의 번역명 : %s"
+msgstr "지도의 번역된 이름 : %s"
 
 #. * TRANSLATORS: Map hint header when selecting a map.
 #: ../../src/wui/mapdetails.cc:180
@@ -4098,7 +4100,7 @@ msgstr "경험치"
 
 #: ../../src/wui/productionsitewindow.cc:91
 msgid "Next Level"
-msgstr "다음 층"
+msgstr "다음 단계"
 
 #: ../../src/wui/productionsitewindow.cc:103
 msgid "Terminate the employment of the selected worker"

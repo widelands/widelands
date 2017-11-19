@@ -20,9 +20,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-11-11 07:08+0000\n"
-"PO-Revision-Date: 2017-11-11 07:11+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2017-11-11 07:38+0000\n"
+"PO-Revision-Date: 2017-11-13 10:08+0000\n"
+"Last-Translator: Elisabeth Jäger\n"
 "Language-Team: German (http://www.transifex.com/widelands/widelands/language/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -2796,17 +2796,17 @@ msgstr "Systemsprache"
 #: ../../src/ui_fsmenu/options.cc:519
 #, c-format
 msgid "The translation into %s is complete."
-msgstr ""
+msgstr "Die Übersetzung nach %s ist vollständig."
 
 #: ../../src/ui_fsmenu/options.cc:521
 #, c-format
 msgid "The translation into %s is %d%% complete."
-msgstr ""
+msgstr "Die Übersetzung nach %s ist zu %d%% vollständig."
 
 #: ../../src/ui_fsmenu/options.cc:535
 #, c-format
 msgid "If you wish to help us translate, please visit %s"
-msgstr ""
+msgstr "Wenn du uns mit der Übersetzung helfen möchtest, besuche bitte %s."
 
 #: ../../src/ui_fsmenu/singleplayer.cc:40
 msgid "New Game"
@@ -3479,7 +3479,7 @@ msgstr "Teampunkte"
 #. * TRANSLATORS: The time a replay starts. Shown in the replay loading screen
 #: ../../src/wui/gamedetails.cc:157
 msgid "Start of Replay:"
-msgstr ""
+msgstr "Beginn der Aufzeichnung:"
 
 #. * TRANSLATORS: The current time of a savegame. Shown in the game saving and
 #. loading screens.
@@ -3497,7 +3497,7 @@ msgstr "Siegbedingung:"
 
 #: ../../src/wui/gamedetails.cc:206
 msgid "Error:"
-msgstr ""
+msgstr "Fehler:"
 
 #: ../../src/wui/general_statistics_menu.cc:140
 msgid "Land"
@@ -3604,7 +3604,7 @@ msgstr "Automatischer Spielstand %1%: %2%"
 #: ../../src/wui/load_or_save_game.cc:62
 msgctxt "filename_mapname"
 msgid "%1%: %2%"
-msgstr ""
+msgstr "%1%: %2%"
 
 #: ../../src/wui/load_or_save_game.cc:97
 msgid "Delete"
@@ -3664,7 +3664,7 @@ msgstr "Beschreibung"
 
 #: ../../src/wui/load_or_save_game.cc:130
 msgid "Map name (start of replay)"
-msgstr ""
+msgstr "Kartenname (Beginn der Aufzeichnung)"
 
 #: ../../src/wui/load_or_save_game.cc:131
 msgid ""
@@ -3686,13 +3686,13 @@ msgstr "Lösche diesen Spielstand"
 #. multiple files
 #: ../../src/wui/load_or_save_game.cc:186
 msgid "Delete these replays"
-msgstr ""
+msgstr "Lösche diese Aufzeichnungen"
 
 #. * TRANSLATORS: Tooltip for the delete button. The user has selected
 #. multiple files
 #: ../../src/wui/load_or_save_game.cc:188
 msgid "Delete these games"
-msgstr ""
+msgstr "Lösche diese Spielstände"
 
 #: ../../src/wui/load_or_save_game.cc:190
 #, c-format
@@ -3743,7 +3743,7 @@ msgstr "Heute, %1%:%2%"
 #. hour:minute. This is part of a list.
 #: ../../src/wui/load_or_save_game.cc:391
 msgid "saved today at %1%:%2%"
-msgstr ""
+msgstr "Gespeichert heute, %1%:%2%"
 
 #. * TRANSLATORS: Display date for choosing a savegame/replay. Placeholders
 #. are:
@@ -3757,7 +3757,7 @@ msgstr "Gestern, %1%:%2%"
 #. hour:minute. This is part of a list.
 #: ../../src/wui/load_or_save_game.cc:408
 msgid "saved yesterday at %1%:%2%"
-msgstr ""
+msgstr "Gespeichert gestern, %1%:%2%"
 
 #. * TRANSLATORS: Display date for choosing a savegame/replay. Placeholders
 #. are:
@@ -3771,7 +3771,7 @@ msgstr "%1%. %2% %3%"
 #. month day, year. This is part of a list.
 #: ../../src/wui/load_or_save_game.cc:420
 msgid "saved on %2% %1%, %3%"
-msgstr ""
+msgstr "Gespeichert am %1%. %2% %3%"
 
 #. * TRANSLATORS: "Single Player" entry in the Game Mode table column.
 #. * TRANSLATORS: "Keep this to 6 letters maximum.
@@ -3805,7 +3805,7 @@ msgstr "MS (%1%)"
 #: ../../src/wui/load_or_save_game.cc:467
 msgctxt "mapname_gametime"
 msgid "%1% (%2%)"
-msgstr ""
+msgstr "%1% (%2%)"
 
 #. * TRANSLATORS: Error message introduction for when an old savegame can't be
 #. loaded

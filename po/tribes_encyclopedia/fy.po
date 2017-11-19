@@ -2,13 +2,14 @@
 # Copyright (C) 2005-2017 Widelands Development Team
 # 
 # Translators:
+# Luitzen Hietkamp <luitzenhietkamp@gmail.com>, 2017
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-11-11 07:08+0000\n"
-"PO-Revision-Date: 2015-02-03 14:53+0000\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"POT-Creation-Date: 2017-11-11 07:38+0000\n"
+"PO-Revision-Date: 2017-11-14 23:02+0000\n"
+"Last-Translator: Luitzen Hietkamp <luitzenhietkamp@gmail.com>\n"
 "Language-Team: Western Frisian (http://www.transifex.com/widelands/widelands/language/fy/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -162,7 +163,7 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/atlanteans/fishbreeders_house/helptexts.lua:16
 msgctxt "building"
 msgid "Breeds fish."
-msgstr ""
+msgstr "Fokt fisken."
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/atlanteans/fishers_house/helptexts.lua:16
@@ -203,7 +204,7 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/atlanteans/gold_spinning_mill/helptexts.lua:16
 msgctxt "atlanteans_building"
 msgid "Spins gold thread out of gold."
-msgstr ""
+msgstr "Spint goudtried út goud."
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/atlanteans/goldmine/helptexts.lua:16
@@ -274,7 +275,7 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/empire/sawmill/helptexts.lua:16
 msgctxt "building"
 msgid "Saws logs to produce planks."
-msgstr ""
+msgstr "Saget stammen ta planken."
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/atlanteans/scouts_house/helptexts.lua:16
@@ -282,7 +283,7 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/empire/scouts_house/helptexts.lua:16
 msgctxt "building"
 msgid "Explores unknown territory."
-msgstr ""
+msgstr "Ferkent ûnbekind gebiet."
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/atlanteans/shipyard/helptexts.lua:16
@@ -319,7 +320,7 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/atlanteans/spiderfarm/helptexts.lua:16
 msgctxt "building"
 msgid "Breeds spiders for silk."
-msgstr ""
+msgstr "Fokt spinnen foar side."
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/helptexts.lua:16
@@ -424,8 +425,8 @@ msgstr ""
 #, lua-format
 msgid "%d second"
 msgid_plural "%d seconds"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%d sekonde"
+msgstr[1] "%d sekonden"
 
 #: ../../data/tribes/buildings/productionsites/barbarians/ax_workshop/helptexts.lua:23
 msgctxt "barbarians_building"
@@ -746,7 +747,7 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/barbarians/hunters_hut/helptexts.lua:8
 msgctxt "barbarians_building"
 msgid "‘The Art of Hunting’"
-msgstr ""
+msgstr "‘De keunst fan it jeien’"
 
 #. TRANSLATORS: Note helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/hunters_hut/helptexts.lua:18
@@ -785,7 +786,7 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/barbarians/ironmine_deeper/helptexts.lua:8
 msgctxt "barbarians_building"
 msgid "Quote from an anonymous miner."
-msgstr ""
+msgstr "Sitaat fan in anonime mynwurker."
 
 #. TRANSLATORS: Note helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/ironmine/helptexts.lua:18
@@ -884,7 +885,7 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/barbarians/lumberjacks_hut/helptexts.lua:8
 msgctxt "barbarians_building"
 msgid "Krumta, carpenter of Chat’Karuth"
-msgstr ""
+msgstr "Krumta, timmerman fan Chat’Karuth"
 
 #. TRANSLATORS: Note helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/lumberjacks_hut/helptexts.lua:18
@@ -905,7 +906,7 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/helptexts.lua:3
 msgctxt "barbarians_building"
 msgid "‘We make it work!’"
-msgstr ""
+msgstr "‘Wy soargje dat it wurket!’"
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/helptexts.lua:8
@@ -1361,8 +1362,8 @@ msgstr ""
 #, lua-format
 msgid "%d minute"
 msgid_plural "%d minutes"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%d minút"
+msgstr[1] "%d minuten"
 
 #. TRANSLATORS: Performance helptext for a building
 #: ../../data/tribes/buildings/trainingsites/barbarians/battlearena/helptexts.lua:26
@@ -1533,11 +1534,11 @@ msgstr ""
 #: ../../data/tribes/scripting/help/format_help.lua:153
 #, lua-format
 msgid "%s and"
-msgstr ""
+msgstr "%s en"
 
 #: ../../data/tribes/scripting/help/building_help.lua:96
 msgid "Food:"
-msgstr ""
+msgstr "Iten:"
 
 #: ../../data/tribes/scripting/help/building_help.lua:144
 msgid "Equipment:"
@@ -1552,11 +1553,11 @@ msgstr ""
 #: ../../data/tribes/scripting/help/init.lua:53
 #: ../../data/tribes/scripting/help/tips.lua:45
 msgid "General"
-msgstr ""
+msgstr "Algemien"
 
 #: ../../data/tribes/scripting/help/building_help.lua:176
 msgid "Purpose:"
-msgstr ""
+msgstr "Doel:"
 
 #: ../../data/tribes/scripting/help/building_help.lua:204
 #: ../../data/tribes/scripting/help/building_help.lua:445
@@ -1583,16 +1584,16 @@ msgstr[1] ""
 #: ../../data/tribes/scripting/help/building_help.lua:215
 #: ../../data/tribes/scripting/help/building_help.lua:221
 msgid "Conquer range:"
-msgstr ""
+msgstr "Feroverberik:"
 
 #: ../../data/tribes/scripting/help/building_help.lua:220
 #: ../../data/tribes/scripting/help/building_help.lua:224
 msgid "Capacity:"
-msgstr ""
+msgstr "Kapasiteit:"
 
 #: ../../data/tribes/scripting/help/building_help.lua:226
 msgid "Vision range:"
-msgstr ""
+msgstr "Sjochtberik:"
 
 #: ../../data/tribes/scripting/help/building_help.lua:251
 msgid "%1$s from: %2$s"
@@ -1602,28 +1603,28 @@ msgstr ""
 #. (e.g. wheat for a mill).
 #: ../../data/tribes/scripting/help/building_help.lua:258
 msgid "Incoming:"
-msgstr ""
+msgstr "Ynkommend:"
 
 #: ../../data/tribes/scripting/help/building_help.lua:262
 msgid "Collects:"
-msgstr ""
+msgstr "Sammelet:"
 
 #. TRANSLATORS: This is a verb (The miner mines)
 #: ../../data/tribes/scripting/help/building_help.lua:274
 msgid "Mines:"
-msgstr ""
+msgstr "Minen:"
 
 #: ../../data/tribes/scripting/help/building_help.lua:294
 msgid "Produces:"
-msgstr ""
+msgstr "Makket:"
 
 #: ../../data/tribes/scripting/help/building_help.lua:336
 msgid "Outgoing:"
-msgstr ""
+msgstr "Utgeand:"
 
 #: ../../data/tribes/scripting/help/building_help.lua:338
 msgid "None"
-msgstr ""
+msgstr "Gjin"
 
 #: ../../data/tribes/scripting/help/building_help.lua:339
 msgid "Dependencies"
@@ -1642,7 +1643,7 @@ msgstr ""
 #: ../../data/tribes/scripting/help/building_help.lua:384
 #: ../../data/tribes/scripting/help/building_help.lua:397
 msgid "Soldiers:"
-msgstr ""
+msgstr "Soldaten:"
 
 #: ../../data/tribes/scripting/help/building_help.lua:368
 msgid "Attack Training"
@@ -1709,7 +1710,7 @@ msgstr ""
 #: ../../data/tribes/scripting/help/building_help.lua:521
 #: ../../data/tribes/scripting/help/building_help.lua:570
 msgid "Unknown"
-msgstr ""
+msgstr "Unbekind"
 
 #: ../../data/tribes/scripting/help/building_help.lua:446
 msgid ""
@@ -1719,11 +1720,11 @@ msgstr ""
 
 #: ../../data/tribes/scripting/help/building_help.lua:452
 msgid "Direct build cost:"
-msgstr ""
+msgstr "Direkte bouwkosten:"
 
 #: ../../data/tribes/scripting/help/building_help.lua:454
 msgid "Build cost:"
-msgstr ""
+msgstr "Bouwkosten:"
 
 #: ../../data/tribes/scripting/help/building_help.lua:465
 msgid "Or enhanced from:"
@@ -1763,13 +1764,13 @@ msgstr ""
 #: ../../data/tribes/scripting/help/building_help.lua:614
 #: ../../data/tribes/scripting/help/init.lua:86
 msgid "Workers"
-msgstr ""
+msgstr "Arbeiders"
 
 #. TRANSLATORS: %s is a worker name, e.g. "Chief Miner" or "Brewer".
 #: ../../data/tribes/scripting/help/building_help.lua:636
 #, lua-format
 msgid "%s or better"
-msgstr ""
+msgstr "%s of better"
 
 #. TRANSLATORS: Tribal Encyclopedia: Heading for which tool workers use
 #: ../../data/tribes/scripting/help/building_help.lua:647
@@ -1793,11 +1794,11 @@ msgstr ""
 
 #: ../../data/tribes/scripting/help/building_help.lua:687
 msgid "Production"
-msgstr ""
+msgstr "Produksje"
 
 #: ../../data/tribes/scripting/help/building_help.lua:688
 msgid "Performance:"
-msgstr ""
+msgstr "Prestaasje:"
 
 #: ../../data/tribes/scripting/help/controls.lua:13
 #: ../../data/tribes/scripting/help/init.lua:64
@@ -1806,11 +1807,11 @@ msgstr ""
 
 #: ../../data/tribes/scripting/help/controls.lua:16
 msgid "Window Control"
-msgstr ""
+msgstr "Finsterkontrôle"
 
 #: ../../data/tribes/scripting/help/controls.lua:19
 msgid "Close window"
-msgstr ""
+msgstr "Slút finster"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
@@ -1843,7 +1844,7 @@ msgstr ""
 
 #: ../../data/tribes/scripting/help/controls.lua:25
 msgid "Road Control"
-msgstr ""
+msgstr "Weikontrôle"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
@@ -1874,7 +1875,7 @@ msgstr ""
 #: ../../data/tribes/scripting/help/controls.lua:35
 msgctxt "hotkey"
 msgid "Page Up"
-msgstr ""
+msgstr "Page Up"
 
 #: ../../data/tribes/scripting/help/controls.lua:37
 msgid "Decrease game speed"
@@ -1885,14 +1886,14 @@ msgstr ""
 #: ../../data/tribes/scripting/help/controls.lua:37
 msgctxt "hotkey"
 msgid "Page Down"
-msgstr ""
+msgstr "Page Down"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
 #: ../../data/tribes/scripting/help/controls.lua:39
 msgctxt "hotkey"
 msgid "Pause"
-msgstr ""
+msgstr "Pause"
 
 #: ../../data/tribes/scripting/help/controls.lua:39
 msgid "Pause the game"
@@ -1943,14 +1944,14 @@ msgstr ""
 #: ../../data/tribes/scripting/help/controls.lua:57
 msgctxt "hotkey"
 msgid "Home"
-msgstr ""
+msgstr "Home"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
 #: ../../data/tribes/scripting/help/controls.lua:59
 msgctxt "hotkey"
 msgid "Ctrl + 1-9"
-msgstr ""
+msgstr "Ctrl+1-9"
 
 #: ../../data/tribes/scripting/help/controls.lua:59
 msgid "Remember current location"
@@ -1959,7 +1960,7 @@ msgstr ""
 #: ../../data/tribes/scripting/help/controls.lua:60
 msgctxt "hotkey"
 msgid "1-9"
-msgstr ""
+msgstr "1-9"
 
 #: ../../data/tribes/scripting/help/controls.lua:60
 msgid "Go to previously remembered location"
@@ -1970,7 +1971,7 @@ msgstr ""
 #: ../../data/tribes/scripting/help/controls.lua:62
 msgctxt "hotkey"
 msgid "Ctrl + +"
-msgstr ""
+msgstr "Ctrl++"
 
 #: ../../data/tribes/scripting/help/controls.lua:62
 msgid "Increase zoom"
@@ -1981,7 +1982,7 @@ msgstr ""
 #: ../../data/tribes/scripting/help/controls.lua:64
 msgctxt "hotkey"
 msgid "Ctrl + -"
-msgstr ""
+msgstr "Ctrl+-"
 
 #: ../../data/tribes/scripting/help/controls.lua:64
 msgid "Decrease zoom"
@@ -1992,7 +1993,7 @@ msgstr ""
 #: ../../data/tribes/scripting/help/controls.lua:66
 msgctxt "hotkey"
 msgid "Ctrl + 0"
-msgstr ""
+msgstr "Ctrl+0"
 
 #: ../../data/tribes/scripting/help/controls.lua:66
 msgid "Reset zoom"
@@ -2003,7 +2004,7 @@ msgstr ""
 #: ../../data/tribes/scripting/help/controls.lua:68
 msgctxt "hotkey"
 msgid "Ctrl + F11"
-msgstr ""
+msgstr "Ctrl+F11"
 
 #: ../../data/tribes/scripting/help/controls.lua:68
 msgid "Take a screenshot"
@@ -2013,7 +2014,7 @@ msgstr ""
 #: ../../data/tribes/scripting/help/controls.lua:71
 msgctxt "hotkey"
 msgid "Ctrl + F10"
-msgstr ""
+msgstr "Ctrl+F10"
 
 #: ../../data/tribes/scripting/help/controls.lua:71
 msgid "Quit the game immediately"
@@ -2023,7 +2024,7 @@ msgstr ""
 #: ../../data/tribes/scripting/help/controls.lua:73
 msgctxt "hotkey"
 msgid "F6"
-msgstr ""
+msgstr "F6"
 
 #: ../../data/tribes/scripting/help/controls.lua:73
 msgid "Show the debug console (only in debug-builds)"
@@ -2044,7 +2045,7 @@ msgstr ""
 #: ../../data/tribes/scripting/help/controls.lua:80
 msgctxt "hotkey"
 msgid "Ctrl + Click"
-msgstr ""
+msgstr "Ctrl+klik"
 
 #: ../../data/tribes/scripting/help/controls.lua:80
 msgctxt "table_control"
@@ -2061,14 +2062,14 @@ msgstr ""
 #: ../../data/tribes/scripting/help/controls.lua:82
 msgctxt "hotkey"
 msgid "Shift + Click"
-msgstr ""
+msgstr "Shift+klik"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
 #: ../../data/tribes/scripting/help/controls.lua:84
 msgctxt "hotkey"
 msgid "Ctrl + A"
-msgstr ""
+msgstr "Ctrl+A"
 
 #: ../../data/tribes/scripting/help/controls.lua:84
 msgctxt "table_control"
@@ -2088,7 +2089,7 @@ msgstr ""
 #: ../../data/tribes/scripting/help/controls.lua:90
 msgctxt "hotkey"
 msgid "Alt + 0"
-msgstr ""
+msgstr "Alt+0"
 
 #: ../../data/tribes/scripting/help/controls.lua:90
 msgid "Show all messages"
@@ -2098,7 +2099,7 @@ msgstr ""
 #: ../../data/tribes/scripting/help/controls.lua:92
 msgctxt "hotkey"
 msgid "Alt + 1"
-msgstr ""
+msgstr "Alt+1"
 
 #: ../../data/tribes/scripting/help/controls.lua:92
 msgid "Show geologists’ messages only"
@@ -2108,7 +2109,7 @@ msgstr ""
 #: ../../data/tribes/scripting/help/controls.lua:94
 msgctxt "hotkey"
 msgid "Alt + 2"
-msgstr ""
+msgstr "Alt+2"
 
 #: ../../data/tribes/scripting/help/controls.lua:94
 msgid "Show economy messages only"
@@ -2118,7 +2119,7 @@ msgstr ""
 #: ../../data/tribes/scripting/help/controls.lua:96
 msgctxt "hotkey"
 msgid "Alt + 3"
-msgstr ""
+msgstr "Alt+3"
 
 #: ../../data/tribes/scripting/help/controls.lua:96
 msgid "Show seafaring messages only"
@@ -2128,7 +2129,7 @@ msgstr ""
 #: ../../data/tribes/scripting/help/controls.lua:98
 msgctxt "hotkey"
 msgid "Alt + 4"
-msgstr ""
+msgstr "Alt+4"
 
 #: ../../data/tribes/scripting/help/controls.lua:98
 msgid "Show warfare messages only"
@@ -2138,7 +2139,7 @@ msgstr ""
 #: ../../data/tribes/scripting/help/controls.lua:100
 msgctxt "hotkey"
 msgid "Alt + 5"
-msgstr ""
+msgstr "Alt+5"
 
 #: ../../data/tribes/scripting/help/controls.lua:100
 msgid "Show scenario messages only"
@@ -2158,13 +2159,13 @@ msgstr ""
 #: ../../data/tribes/scripting/help/controls.lua:104
 msgctxt "hotkey"
 msgid "Delete"
-msgstr ""
+msgstr "Delete"
 
 #. TRANSLATORS: %1$d is a number, %2$s the name of a ware, e.g. 12x Stone
 #: ../../data/tribes/scripting/help/format_help.lua:86
 #: ../../data/tribes/scripting/help/format_help.lua:145
 msgid "%1$dx %2$s"
-msgstr ""
+msgstr "%1$dx %2$s"
 
 #. TRANSLATORS: Tribal Encyclopedia: Heading for wares and workers consumed by
 #. a productionsite
@@ -2209,7 +2210,7 @@ msgstr ""
 
 #: ../../data/tribes/scripting/help/init.lua:58
 msgid "Introduction"
-msgstr ""
+msgstr "Yntroduksje"
 
 #: ../../data/tribes/scripting/help/init.lua:70
 #: ../../data/tribes/scripting/help/tips.lua:71
@@ -2222,31 +2223,31 @@ msgstr ""
 
 #: ../../data/tribes/scripting/help/init.lua:93
 msgid "Buildings"
-msgstr ""
+msgstr "Gebouwen"
 
 #: ../../data/tribes/scripting/help/introduction.lua:7
 msgid "About Widelands"
-msgstr ""
+msgstr "Oer Widelands"
 
 #: ../../data/tribes/scripting/help/tips.lua:50
 msgid "Atlanteans"
-msgstr ""
+msgstr "Atlanteanen"
 
 #: ../../data/tribes/scripting/help/tips.lua:53
 msgid "Barbarians"
-msgstr ""
+msgstr "Barbaren"
 
 #: ../../data/tribes/scripting/help/tips.lua:56
 msgid "Empire"
-msgstr ""
+msgstr "It Ryk"
 
 #: ../../data/tribes/scripting/help/tips.lua:62
 msgid "Single Player"
-msgstr ""
+msgstr "Ien spiler"
 
 #: ../../data/tribes/scripting/help/tips.lua:65
 msgid "Multiplayer"
-msgstr ""
+msgstr "Meardere spilers"
 
 #. TRANSLATORS: Put 2 sentences one after the other.
 #. Languages using Chinese script probably want to lose the blank space here.
@@ -2254,12 +2255,12 @@ msgstr ""
 #, lua-format
 msgctxt "sentence_separator"
 msgid "%s %s"
-msgstr ""
+msgstr "%s%s"
 
 #: ../../data/tribes/scripting/help/ware_help.lua:36
 #: ../../data/tribes/scripting/help/worker_help.lua:129
 msgid "Purpose"
-msgstr ""
+msgstr "Doel"
 
 #. TRANSLATORS: Ware Encyclopedia: A building producing a ware
 #. TRANSLATORS: Worker Encyclopedia: A building recruiting a worker
@@ -2280,8 +2281,8 @@ msgstr[1] ""
 #: ../../data/tribes/scripting/help/ware_help.lua:158
 msgid "Consumer"
 msgid_plural "Consumers"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Gebrûker"
+msgstr[1] "Gebrûkers"
 
 #. TRANSLATORS: Worker Encyclopedia: Workers recruited by a productionsite
 #: ../../data/tribes/scripting/help/worker_help.lua:79
@@ -2311,7 +2312,7 @@ msgstr ""
 #. TRANSLATORS: Soldier levels
 #: ../../data/tribes/scripting/help/worker_help.lua:177
 msgid "Levels"
-msgstr ""
+msgstr "Nivo's"
 
 #: ../../data/tribes/scripting/help/worker_help.lua:179
 msgid "Health"
@@ -2342,7 +2343,7 @@ msgstr[1] ""
 
 #: ../../data/tribes/scripting/help/worker_help.lua:191
 msgid "Attack"
-msgstr ""
+msgstr "Oanfal"
 
 #. TRANSLATORS: Points are 4 digit numbers.
 #: ../../data/tribes/scripting/help/worker_help.lua:194
@@ -2351,7 +2352,7 @@ msgstr ""
 
 #: ../../data/tribes/scripting/help/worker_help.lua:201
 msgid "Defense"
-msgstr ""
+msgstr "Ferdigening"
 
 #: ../../data/tribes/scripting/help/worker_help.lua:205
 #: ../../data/tribes/scripting/help/worker_help.lua:213
@@ -2372,7 +2373,7 @@ msgstr ""
 
 #: ../../data/tribes/scripting/help/worker_help.lua:217
 msgid "Evade"
-msgstr ""
+msgstr "Untwiken"
 
 #. TRANSLATORS: Helptext for a ware: Armor
 #: ../../data/tribes/wares/armor/helptexts.lua:4
@@ -3147,7 +3148,7 @@ msgstr ""
 #: ../../data/tribes/wares/planks/helptexts.lua:4
 msgctxt "ware"
 msgid "Planks are an important building material."
-msgstr ""
+msgstr "Planken binne in wichtich bouwmateriaal."
 
 #. TRANSLATORS: Helptext for a ware: Planks
 #: ../../data/tribes/wares/planks/helptexts.lua:7
@@ -3221,7 +3222,7 @@ msgstr ""
 #: ../../data/tribes/wares/scythe/helptexts.lua:4
 msgctxt "ware"
 msgid "The scythe is the tool of the farmers."
-msgstr ""
+msgstr "De seine is it ark fan de boeren."
 
 #. TRANSLATORS: Helptext for a ware: Scythe
 #: ../../data/tribes/wares/scythe/helptexts.lua:6
@@ -3453,13 +3454,13 @@ msgstr ""
 #: ../../data/tribes/wares/water/helptexts.lua:4
 msgctxt "ware"
 msgid "Water is the essence of life!"
-msgstr ""
+msgstr "Wetter is de essinsje fan it libben!"
 
 #. TRANSLATORS: Helptext for a ware: Water
 #: ../../data/tribes/wares/water/helptexts.lua:6
 msgctxt "atlanteans_ware"
 msgid "Water is used in the bakery and the horse and spider farms."
-msgstr ""
+msgstr "Wetter wurdt brûkt yn de bakkerij en yn hynster- en spinnebuorkerijen."
 
 #. TRANSLATORS: Helptext for a ware: Water
 #: ../../data/tribes/wares/water/helptexts.lua:8
@@ -3576,7 +3577,7 @@ msgstr ""
 #: ../../data/tribes/workers/atlanteans/forester/helptexts.lua:3
 msgctxt "atlanteans_worker"
 msgid "Plants trees."
-msgstr ""
+msgstr "Plantet beammen."
 
 #. TRANSLATORS: Helptext for a worker: Geologist
 #: ../../data/tribes/workers/atlanteans/geologist/helptexts.lua:3
@@ -3655,7 +3656,7 @@ msgstr ""
 #: ../../data/tribes/workers/atlanteans/smoker/helptexts.lua:3
 msgctxt "atlanteans_worker"
 msgid "Smokes meat and fish."
-msgstr ""
+msgstr "Rikket fleis en fisk."
 
 #. TRANSLATORS: Helptext for a worker: Soldier
 #: ../../data/tribes/workers/atlanteans/soldier/helptexts.lua:3
@@ -3667,7 +3668,7 @@ msgstr ""
 #: ../../data/tribes/workers/atlanteans/spiderbreeder/helptexts.lua:3
 msgctxt "atlanteans_worker"
 msgid "Breeds spiders for silk."
-msgstr ""
+msgstr "Fokt spinnen foar side."
 
 #. TRANSLATORS: Helptext for a worker: Stonecutter
 #: ../../data/tribes/workers/atlanteans/stonecutter/helptexts.lua:3
@@ -3679,19 +3680,19 @@ msgstr ""
 #: ../../data/tribes/workers/atlanteans/toolsmith/helptexts.lua:3
 msgctxt "atlanteans_worker"
 msgid "Produces tools for the workers."
-msgstr ""
+msgstr "Makket ark foar arbeiders."
 
 #. TRANSLATORS: Helptext for a worker: Trainer
 #: ../../data/tribes/workers/atlanteans/trainer/helptexts.lua:3
 msgctxt "atlanteans_worker"
 msgid "Trains the soldiers."
-msgstr ""
+msgstr "Treent soldaten."
 
 #. TRANSLATORS: Helptext for a worker: Weaponsmith
 #: ../../data/tribes/workers/atlanteans/weaponsmith/helptexts.lua:3
 msgctxt "atlanteans_worker"
 msgid "Produces weapons for the soldiers."
-msgstr ""
+msgstr "Makket wapens foar soldaten."
 
 #. TRANSLATORS: Helptext for a worker: Weaver
 #: ../../data/tribes/workers/atlanteans/weaver/helptexts.lua:3
@@ -3703,7 +3704,7 @@ msgstr ""
 #: ../../data/tribes/workers/atlanteans/woodcutter/helptexts.lua:3
 msgctxt "atlanteans_worker"
 msgid "Fells trees."
-msgstr ""
+msgstr "Hakt beammen om."
 
 #. TRANSLATORS: Helptext for a worker: Baker
 #: ../../data/tribes/workers/barbarians/baker/helptexts.lua:3
@@ -3766,7 +3767,7 @@ msgstr ""
 #: ../../data/tribes/workers/barbarians/fisher/helptexts.lua:3
 msgctxt "barbarians_worker"
 msgid "Catches fish in the sea."
-msgstr ""
+msgstr "Fangt fisken."
 
 #. TRANSLATORS: Helptext for a worker: Gamekeeper
 #: ../../data/tribes/workers/barbarians/gamekeeper/helptexts.lua:3
@@ -3816,7 +3817,7 @@ msgstr ""
 #: ../../data/tribes/workers/barbarians/lumberjack/helptexts.lua:3
 msgctxt "barbarians_worker"
 msgid "Fells trees."
-msgstr ""
+msgstr "Hakt beammen om."
 
 #. TRANSLATORS: Helptext for a worker: Chief Miner
 #. TRANSLATORS: Helptext for a worker: Master Miner
@@ -3839,7 +3840,7 @@ msgstr ""
 #: ../../data/tribes/workers/barbarians/ranger/helptexts.lua:3
 msgctxt "barbarians_worker"
 msgid "Plants trees."
-msgstr ""
+msgstr "Plantet beammen."
 
 #. TRANSLATORS: Helptext for a worker: Recruit
 #: ../../data/tribes/workers/barbarians/recruit/helptexts.lua:3
@@ -3882,7 +3883,7 @@ msgstr ""
 #: ../../data/tribes/workers/barbarians/trainer/helptexts.lua:3
 msgctxt "barbarians_worker"
 msgid "Trains the soldiers."
-msgstr ""
+msgstr "Treent soldaten."
 
 #. TRANSLATORS: Helptext for a worker: Weaver
 #: ../../data/tribes/workers/barbarians/weaver/helptexts.lua:3
@@ -3900,13 +3901,13 @@ msgstr ""
 #: ../../data/tribes/workers/empire/baker/helptexts.lua:3
 msgctxt "empire_worker"
 msgid "Bakes bread for workers."
-msgstr ""
+msgstr "Bakt bôle foar arbeiders."
 
 #. TRANSLATORS: Helptext for a worker: Brewer
 #: ../../data/tribes/workers/empire/brewer/helptexts.lua:3
 msgctxt "empire_worker"
 msgid "Produces beer."
-msgstr ""
+msgstr "Makket bier."
 
 #. TRANSLATORS: Helptext for a worker: Builder
 #: ../../data/tribes/workers/empire/builder/helptexts.lua:3
@@ -3918,7 +3919,7 @@ msgstr ""
 #: ../../data/tribes/workers/empire/carpenter/helptexts.lua:3
 msgctxt "empire_worker"
 msgid "Works in the sawmill."
-msgstr ""
+msgstr "Wurket yn de houtsagerij."
 
 #. TRANSLATORS: Helptext for a worker: Carrier
 #: ../../data/tribes/workers/empire/carrier/helptexts.lua:3
@@ -3952,7 +3953,7 @@ msgstr ""
 #: ../../data/tribes/workers/empire/farmer/helptexts.lua:3
 msgctxt "empire_worker"
 msgid "Plants fields."
-msgstr ""
+msgstr "Fangt fisken."
 
 #. TRANSLATORS: Helptext for a worker: Fisher
 #: ../../data/tribes/workers/empire/fisher/helptexts.lua:3
@@ -3964,7 +3965,7 @@ msgstr ""
 #: ../../data/tribes/workers/empire/forester/helptexts.lua:3
 msgctxt "empire_worker"
 msgid "Plants trees."
-msgstr ""
+msgstr "Plantet beammen."
 
 #. TRANSLATORS: Helptext for a worker: Geologist
 #: ../../data/tribes/workers/empire/geologist/helptexts.lua:3
@@ -3988,7 +3989,7 @@ msgstr ""
 #: ../../data/tribes/workers/empire/lumberjack/helptexts.lua:3
 msgctxt "empire_worker"
 msgid "Fells trees."
-msgstr ""
+msgstr "Hakt beammen om."
 
 #. TRANSLATORS: Helptext for a worker: Miller
 #: ../../data/tribes/workers/empire/miller/helptexts.lua:3
@@ -4008,7 +4009,7 @@ msgstr ""
 #: ../../data/tribes/workers/empire/pigbreeder/helptexts.lua:3
 msgctxt "empire_worker"
 msgid "Breeds pigs."
-msgstr ""
+msgstr "Fokt bargen."
 
 #. TRANSLATORS: Helptext for a worker: Recruit
 #: ../../data/tribes/workers/empire/recruit/helptexts.lua:3
@@ -4027,7 +4028,7 @@ msgstr ""
 #: ../../data/tribes/workers/empire/shepherd/helptexts.lua:3
 msgctxt "empire_worker"
 msgid "Keeping sheep."
-msgstr ""
+msgstr "Hâldt skiep."
 
 #. TRANSLATORS: Helptext for a worker: Shipwright
 #: ../../data/tribes/workers/empire/shipwright/helptexts.lua:3
@@ -4063,19 +4064,19 @@ msgstr ""
 #: ../../data/tribes/workers/empire/trainer/helptexts.lua:3
 msgctxt "empire_worker"
 msgid "Trains the soldiers."
-msgstr ""
+msgstr "Treent soldaten."
 
 #. TRANSLATORS: Helptext for a worker: Vine Farmer
 #: ../../data/tribes/workers/empire/vinefarmer/helptexts.lua:3
 msgctxt "empire_worker"
 msgid "Grows grapevines."
-msgstr ""
+msgstr "Ferbouwt druven."
 
 #. TRANSLATORS: Helptext for a worker: Brewer
 #: ../../data/tribes/workers/empire/vintner/helptexts.lua:3
 msgctxt "empire_worker"
 msgid "Produces wine."
-msgstr ""
+msgstr "Makket wyn."
 
 #. TRANSLATORS: Helptext for a worker: Weaponsmith
 #: ../../data/tribes/workers/empire/weaponsmith/helptexts.lua:3
