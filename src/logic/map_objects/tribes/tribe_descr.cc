@@ -146,9 +146,7 @@ TribeDescr::TribeDescr(const LuaTable& table, const TribeBasicInfo& info, const 
 			}
 		}
 
-		std::vector<std::string> immovables =
-		   table.get_table("immovables")->array_entries<std::string>();
-		for (const std::string& immovablename : immovables) {
+		for (const std::string& immovablename : table.get_table("immovables")->array_entries<std::string>()) {
 			try {
 				DescriptionIndex index = tribes_.safe_immovable_index(immovablename);
 				if (immovables_.count(index) == 1) {
