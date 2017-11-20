@@ -14,6 +14,7 @@ p1 = game.players [1] --Reebaud – player´s tribe
 p2 = game.players [2] --Murilius – friend or foe
 p3 = game.players [3] --Kru-Gu´Lhar – determined enemy
 map = game.map
+p1start = map.player_slots [1].starting_field
 
 include "map:scripting/texts.lua"
 include "map:scripting/mission_thread.lua"

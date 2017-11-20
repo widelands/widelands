@@ -3,62 +3,61 @@ dirname = path.dirname(__file__)
 animations = {
    idle = {
       pictures = path.list_files(dirname .. "idle_??.png"),
-      hotspot = { 16, 31 },
-      fps = 5
+      hotspot = {32, 38},
+--      fps = 10
    },
    atk_ok_e = {
       pictures = path.list_files(dirname .. "atk_ok_e_??.png"),
-      hotspot = { 30, 36 },
+      hotspot = {32, 38},
       fps = 10
    },
    atk_fail_e = {
       pictures = path.list_files(dirname .. "atk_fail_e_??.png"),
-      hotspot = { 30, 36 },
+      hotspot = {32, 38},
       fps = 10
    },
    eva_ok_e = {
       pictures = path.list_files(dirname .. "eva_ok_e_??.png"),
-      hotspot = { 18, 34 },
-      fps = 20
+      hotspot = {32, 38},
+      fps = 10
    },
    eva_fail_e = {
       pictures = path.list_files(dirname .. "eva_fail_e_??.png"),
-      hotspot = { 30, 36 },
+      hotspot = {32, 38},
       fps = 10
    },
    atk_ok_w = {
       pictures = path.list_files(dirname .. "atk_ok_w_??.png"),
-      hotspot = { 30, 36 },
+      hotspot = {32, 38},
       fps = 10
    },
    atk_fail_w = {
       pictures = path.list_files(dirname .. "atk_fail_w_??.png"),
-      hotspot = { 30, 36 },
+      hotspot = {32, 38},
       fps = 10
    },
    eva_ok_w = {
       pictures = path.list_files(dirname .. "eva_ok_w_??.png"),
-      hotspot = { 18, 34 },
-      fps = 20
+      hotspot = {32, 38},
+      fps = 10
    },
    eva_fail_w = {
       pictures = path.list_files(dirname .. "eva_fail_w_??.png"),
-      hotspot = { 30, 36 },
+      hotspot = {32, 38},
       fps = 10
    },
    die_w = {
-      pictures = path.list_files(dirname .. "die_??.png"),
-      hotspot = { 16, 31 },
-      fps = 20
+      pictures = path.list_files(dirname .. "die_w_??.png"),
+      hotspot = {32, 38},
+      fps = 10
    },
    die_e = {
-      pictures = path.list_files(dirname .. "die_??.png"),
-      hotspot = { 16, 31 },
-      fps = 20
+      pictures = path.list_files(dirname .. "die_e_??.png"),
+      hotspot = {32, 38},
+      fps = 10
    },
 }
-add_walking_animations(animations, "walk", dirname, "walk", {16, 31}, 10)
-
+add_walking_animations(animations, "walk", dirname, "walk", {32, 38}, 10)
 
 tribes:new_soldier_type {
    msgctxt = "frisians_worker",

@@ -161,6 +161,7 @@ function mining_issues ()
    campaign_message_box (train_recycle_2)
    campaign_message_box (train_recycle_3)
    local o = add_campaign_objective (obj_train_recycle)
+   campaign_message_box (train_recycle_4)
    p1:allow_buildings {"frisians_recycling_centre", "frisians_training_camp", "frisians_training_arena"}
    local miner = false
    while not miner do 
@@ -183,12 +184,15 @@ function mining_issues ()
    end
    set_objective_done (o)
    campaign_message_box (aqua_farm_1)
+   sleep (10000)
+   campaign_message_box (aqua_farm_2)
    local o = add_campaign_objective (obj_aqua_farm)
-   p1:allow_buildings {"frisians_aqua_farm", "frisians_furnace", "frisians_barracks", "frisians_seamstress"}
+   p1:allow_buildings {"frisians_aqua_farm", "frisians_furnace", "frisians_seamstress"}
    while not check_for_buildings (p1, {frisians_aqua_farm = 1}) do sleep (4473) end
    set_objective_done (o)
-   campaign_message_box (aqua_farm_2)
-   p1:allow_buildings {"frisians_armour_smithy_small", "frisians_seamstress_master"}
+   campaign_message_box (aqua_farm_3)
+   campaign_message_box (aqua_farm_4)
+   p1:allow_buildings {"frisians_armour_smithy_small", "frisians_seamstress_master", "frisians_barracks"}
    done_mine = true
 end
 
@@ -196,7 +200,7 @@ function supply_yes ()
    local wh = p1:get_buildings ("frisians_warehouse_empire") [1]
    local hq = p2:get_buildings ("empire_headquarters") [1]
    -- transfer all wares that frisians and empire have in common
-   for idx,name in ipairs ({"log", "granite", "coal", "iron", "iron_ore", "gold", "gold_ore", "water", "fish", "meat", "beer", "ration", "meal", "pick", "felling_ax", "shovel", "hammer", "hunting_spear", "scythe", "bread_paddle", "basket", "kitchen_tools", "fire_tongs"}) do
+   for idx,name in ipairs ({"log", "granite", "coal", "iron", "iron_ore", "gold", "gold_ore", "water", "fish", "meat", "beer", "ration", "meal", "pick", "felling_ax", "shovel", "hammer", "hunting_spear", "scythe", "bread_paddle", "basket", "kitchen_tools", "ire_tongs"}) do
       local nb = wh:get_wares (name)
       wh:set_wares (name, 0)
       hq:set_wares (name, hq:get_wares (name) + nb)
@@ -242,8 +246,18 @@ end
 
 function mission_thread()
    
-   scroll_to_field (map.player_slots [1].starting_field)
+   p3:conquer (p1start, 8)
+   place_building_in_region (p3, "barbarians_farm", p1start:region (2))
+   place_building_in_region (p3, "barbarians_quarry", p1start:region (7))
+   place_building_in_region (p3, "barbarians_lumberjacks_hut", p1start:region (7))
+   place_building_in_region (p3, "barbarians_wood_hardener", p1start:region (7))
+   place_building_in_region (p3, "barbarians_bakery", p1start:region (7))
+   place_building_in_region (p3, "barbarians_metal_workshop", p1start:region (7))
+   place_building_in_region (p3, "barbarians_well", p1start:region (7))
+   place_building_in_region (p3, "barbarians_rangers_hut", p1start:region (7))
+   scroll_to_field (p1start)
    campaign_message_box (intro_1)
+   campaign_message_box (intro_2)
    include "map:scripting/starting_conditions.lua"
    sleep (2000)
    
@@ -255,7 +269,7 @@ function mission_thread()
 --     · Refusing alliance:  forbid only 2>3
 --     · Accepting alliance: first unchanged, after p3 defeated: allow all
    
-   campaign_message_box (intro_2)
+   campaign_message_box (intro_3)
    local o = add_campaign_objective (obj_new_home)
    while not check_for_buildings (p1, {frisians_woodcutters_house = 1, frisians_foresters_house = 1, frisians_well = 1, frisians_reed_farm = 1, frisians_quarry = 1, frisians_brick_burners_house = 1, frisians_claypit = 1, frisians_charcoal_kiln = 1}) do sleep (4273) end
    set_objective_done (o)

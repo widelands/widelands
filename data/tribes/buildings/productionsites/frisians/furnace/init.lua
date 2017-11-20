@@ -25,10 +25,12 @@ tribes:new_productionsite_type {
       idle = {
          pictures = path.list_files(dirname .. "idle_??.png"),
          hotspot = { 54, 55 },
+         --scale = 1,
       },
       working = {
          pictures = path.list_files(dirname .. "idle_??.png"), --TODO no animation yet
          hotspot = { 54, 55 },
+         --scale = 1,
       },
    },
 

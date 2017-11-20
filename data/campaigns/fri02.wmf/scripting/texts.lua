@@ -110,12 +110,21 @@ intro_2 = {
    title =_ "Welcome back!",
    body=reebaud (_"A new home",
       -- TRANSLATORS: Reebaud – Introduction 2
+      _([[There was a small group of foreigners living here. They welcomed us by brandishing their axes at us, and shouted in an incoherent language.]])
+      .. paragraphdivider () ..
+      -- TRANSLATORS: Reebaud – Introduction 2
+      _([[Our ship was in no state to continue sailing, so we killed all the locals and took their land. I just hope there aren´t more of them, so we can live in peace.]])),
+}
+intro_3 = {
+   title =_ "Welcome back!",
+   body=reebaud (_"A new home",
+      -- TRANSLATORS: Reebaud – Introduction 3
       _([[This place looks bleak and barren, my companions say, but I think it looks… beautiful.]])
       .. paragraphdivider () ..
-      -- TRANSLATORS: Reebaud – Introduction 2
-      _([[We will settle here. My scouts report no sign of living creatures anywhere nearby. We will start building our new home here.]])
+      -- TRANSLATORS: Reebaud – Introduction 3
+      _([[We will settle here. My scouts report no signs of living creatures anywhere nearby now. We will start building our new home here.]])
       .. paragraphdivider () ..
-      -- TRANSLATORS: Reebaud – Introduction 2
+      -- TRANSLATORS: Reebaud – Introduction 3
       _([[We must start by building all the basic buildings. I see no mountains nearby where we might mine coal. We´d better build a charcoal kiln to burn logs into charcoal. We improve the kilns with clay so they don´t consume so much wood. Our neighbours used to envy us for this clever technique, which they couldn´t copy.]]))
       .. new_objectives (obj_new_home),
 }
@@ -159,25 +168,49 @@ train_recycle_3 = {
       _([[That is what we must do. We will use our weapons to train soldiers, then smelt the scrap metal into iron and gold. And then our blacksmiths can produce picks to equip miners with. I will see to it at once!]]))
       .. new_objectives (obj_train_recycle),
 }
+train_recycle_4 = {
+   title =_ "Metal Shortage",
+   body=reebaud (_"Getting new metal",
+      -- TRANSLATORS: Reebaud – Train and recycle 4
+      _([[Not so hasty! To build a training camp, we will first need gold, and we don´t have any. We must first dismantle our port, which will give us just enough gold for a training camp. I don´t like this, but it is the only way. Of course, we will need to move all our wares to a warehouse before we can dismantle the port.]])),
+}
 
 aqua_farm_1 = {
-   title =_ "Fishing",
-   body=hauke (_"We need fish",
-      -- TRANSLATORS: Hauke – Aqua Farms 1
-      _([[Chieftain Reebaud, I have more bad news. There are almost no fish in the waters nearby. While we can prepare rations using only fruit or bread, soldier training requires lots of smoked meat or fish. The scraps of meat a reindeer farm drops out as a by-product when making fur aren´t enough.]])
+   title =_ "Metal production",
+   body=reebaud (_"The mines are working",
+      -- TRANSLATORS: Reebaud – Aqua Farms 1
+      _([[Our mines have started working. Now, we only need to build a furnace and the metal production will be running smoothly.]])
       .. paragraphdivider () ..
-      -- TRANSLATORS: Hauke – Aqua Farms 1
-      _([[Fortunately, one of our fishermen thought of a solution. Our clay pits leave large holes in the ground; a fisher could fill them with water and grow fish in these ponds. He will only need lots of water for the ponds, and fruit to feed the fish.]]))
-      .. new_objectives (obj_aqua_farm),
+      -- TRANSLATORS: Reebaud – Aqua Farms 1
+      _([[Do we have a reindeer farm already? If not, we should build one now. We need more reindeer for the crowded roads, and we could already start sewing fur clothes to equip new soldiers. Who knows whether we will have to fight eventually?]])),
 }
 aqua_farm_2 = {
    title =_ "Fishing",
-   body=hauke (_"We have fish again",
+   body=hauke (_"We need fish",
       -- TRANSLATORS: Hauke – Aqua Farms 2
-      _([[Well done. We have an aqua farm now, and our mining economy is stable for now. However, the miners tell me that the resources are already low, and the mines may run empty completely soon.]]) 
+      _([[Chieftain Reebaud, I have more bad news. There are almost no fish in the waters nearby. While we can prepare rations using only fruit or bread, soldier training requires lots of smoked meat or fish. The scraps of meat a reindeer farm drops out as a by-product when making fur aren´t enough.]])
       .. paragraphdivider () ..
       -- TRANSLATORS: Hauke – Aqua Farms 2
+      _([[Fortunately, one of our fishermen thought of a solution. Our clay pits leave large holes in the ground; a fisher could fill them with water and grow fish in these ponds. He will only need lots of water for the ponds, and fruit to feed the fish.]]))
+      .. new_objectives (obj_aqua_farm),
+}
+aqua_farm_3 = {
+   title =_ "Fishing",
+   body=hauke (_"We have fish again",
+      -- TRANSLATORS: Hauke – Aqua Farms 3
+      _([[Well done. We have an aqua farm now, and our mining economy is stable for now. However, the miners tell me that the resources are already low, and the mines may run empty completely soon.]]) 
+      .. paragraphdivider () ..
+      -- TRANSLATORS: Hauke – Aqua Farms 3
       _([[The mines will still be able to produce then, but it will take about twenty times longer – ten times if it is a deep mine – to produce ores or coal. You probably want to prepare for the increasing demands of time and food.]])),
+}
+aqua_farm_4 = {
+   title =_ "Recruiting",
+   body=reebaud (_"Our economy is complete",
+      -- TRANSLATORS: Reebaud – Aqua Farms 4
+      _([[You are right – we should build more berry farms, collector´s houses and taverns as well as a drinking hall, and advanced bakeries and breweries.]])
+      .. paragraphdivider () ..
+      -- TRANSLATORS: Reebaud – Aqua Farms 4
+      _([[But meanwhile, we can start focusing on recruiting and training soldiers. We can now afford to use metal for weapons, helmets and armour. I propose to build armour smithies, a barracks, a training arena and a master seamstress now.]])),
 }
 
 supply_murilius_1 = {
@@ -223,7 +256,7 @@ supply_murilius_6 = {
       _([[Also, as a sign of your good intentions, we demand a gift of friendship to the Empire. As you probably can see, I have presented you with a new warehouse. Fill it with the required gifts to hand them over. I permit you to give us these wares:]])
       .. paragraphdivider () ..
       -- TRANSLATORS: Murilius – Supply Murilius 6. A list of wares.
-      _([[30×Log, 40×Granite, 30×Fish, 30×Beer, 150×Water, 40×Ration, 10×Meal, 30×Coal, 40×Iron Ore, 20×Iron, 20×Gold Ore, 10×Gold.]])),
+      _([[30 logs, 40 slabs of granite, 30 fish, 30 mugs of beer, 150 buckets of water, 40 rations, 10 meals, 30 pieces of coal, 40 pieces of iron ore, 20 iron ingots, 20 pieces of gold ore, and 10 gold bars.]])),
 }
 supply_murilius_7 = {
    title =_ "We are not alone",

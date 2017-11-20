@@ -20,7 +20,7 @@ tribes:new_trainingsite_type {
       brick = 2,
       granite = 1,
       log = 1,
-      gold = 2,
+      gold = 1,
       thatch_reed = 2
    },
 

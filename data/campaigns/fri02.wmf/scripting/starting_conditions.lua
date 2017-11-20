@@ -18,7 +18,7 @@ p1:forbid_buildings {
    "frisians_port",
 }
 
-port1 = p1:place_building ("frisians_port", map.player_slots [1].starting_field, false, true)
+port1 = p1:place_building ("frisians_port", p1start, false, true)
 port1:set_wares {
    log = 40,
    brick = 50,
@@ -30,10 +30,9 @@ port1:set_wares {
    fish = 2,
    meat = 2,
    fruit = 10,
-   bread_frisians = 6,
-   beer = 6,
+   bread_frisians = 4,
+   beer = 4,
    ration = 10,
-   gold = 1,
    sword_long = 2,
    sword_curved = 1
 }
@@ -62,10 +61,6 @@ port1:set_workers {
    frisians_charcoal_burner = 3
 }
 port1:set_soldiers ({0,0,0,0}, 25)
-
-map:place_immovable ("destroyed_building", map.player_slots [1].starting_field.ln.ln.ln.tln, "tribes")
-map:place_immovable ("ashes", map.player_slots [1].starting_field.ln.tln.tln, "tribes")
-map:place_immovable ("destroyed_building", map.player_slots [1].starting_field.ln.ln, "tribes")
 
 -- =======================================================================
 --                                 Player 2
