@@ -33,7 +33,6 @@
 #include "helper.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "logic/filesystem_constants.h"
-#include "logic/game.h"
 #include "logic/game_controller.h"
 #include "logic/game_settings.h"
 #include "logic/replay.h"

@@ -22,6 +22,7 @@
 #include <set>
 #include <string>
 
+#include "base/i18n.h"
 #include "graphic/graphic.h"
 #include "graphic/playercolor.h"
 
@@ -76,7 +77,7 @@ void SuggestedTeamsBox::hide() {
 }
 
 void SuggestedTeamsBox::show(
-   const std::vector<Widelands::Map::SuggestedTeamLineup>& suggested_teams) {
+   const std::vector<Widelands::SuggestedTeamLineup>& suggested_teams) {
 	hide();
 	suggested_teams_ = suggested_teams;
 
@@ -94,7 +95,7 @@ void SuggestedTeamsBox::show(
 		// Parse suggested teams
 		UI::Icon* player_icon;
 		UI::Textarea* vs_label;
-		for (const Widelands::Map::SuggestedTeamLineup& lineup : suggested_teams_) {
+		for (const Widelands::SuggestedTeamLineup& lineup : suggested_teams_) {
 
 			lineup_box_ =
 			   new UI::Box(this, indent_, teamlist_offset + lineup_counter * (label_height_),
@@ -103,7 +104,7 @@ void SuggestedTeamsBox::show(
 			lineup_box_->set_size(get_w(), label_height_);
 
 			bool is_first = true;
-			for (const Widelands::Map::SuggestedTeam& team : lineup) {
+			for (const Widelands::SuggestedTeam& team : lineup) {
 
 				if (!is_first) {
 					lineup_box_->add_space(padding_);
