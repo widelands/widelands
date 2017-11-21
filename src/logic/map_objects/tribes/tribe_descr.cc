@@ -473,59 +473,6 @@ void TribeDescr::add_building(const std::string& buildingname) {
 	}
 }
 
-// Set default trainingsites proportions for AI. Make sure that we get a sum of ca. 100
-void TribeDescr::calculate_trainingsites_proportions() {
-	unsigned int trainingsites_without_percent = 0;
-	int used_percent = 0;
-	std::vector<BuildingDescr*> traingsites_with_percent;
-	for (const DescriptionIndex& index : trainingsites_) {
-		BuildingDescr* descr = tribes_.get_mutable_building_descr(index);
-		if (descr->hints().trainingsites_max_percent() == 0) {
-			++trainingsites_without_percent;
-		} else {
-			used_percent += descr->hints().trainingsites_max_percent();
-			traingsites_with_percent.push_back(descr);
-		}
-	}
-
-	log("%s trainingsites: We have used up %d%% on %lu sites, there are %d without\n", name().c_str(), used_percent, traingsites_with_percent.size(), trainingsites_without_percent);
-
-	// Adjust used_percent if we don't have at least 5% for each remaining trainingsite
-	const float limit = 100 - trainingsites_without_percent * 5;
-	if (used_percent > limit) {
-		const int deductme = (used_percent - limit) / traingsites_with_percent.size();
-		used_percent = 0;
-		for (BuildingDescr* descr : traingsites_with_percent) {
-				descr->set_hints_trainingsites_max_percent(descr->hints().trainingsites_max_percent() - deductme);
-				used_percent += descr->hints().trainingsites_max_percent();
-		}
-		log("%s trainingsites: Used percent was adjusted to %d%%\n", name().c_str(), used_percent);
-	}
-
-	// Now adjust for trainingsites that didn't have their max_percent set
-	if (trainingsites_without_percent > 0) {
-		const int percent_to_use = std::ceil((100 - used_percent) / trainingsites_without_percent);
-		log("%s trainingsites: Assigning %d%% to each of the remaining %d sites\n", name().c_str(), percent_to_use, trainingsites_without_percent);
-		if (percent_to_use < 1) {
-			throw GameDataError("Training sites without predefined proportions add up to < 1%% and "
-									  "will never be built: %d",
-									  used_percent);
-		}
-		for (const DescriptionIndex& index : trainingsites_) {
-			BuildingDescr* descr = tribes_.get_mutable_building_descr(index);
-			if (descr->hints().trainingsites_max_percent() == 0) {
-				descr->set_hints_trainingsites_max_percent(percent_to_use);
-				used_percent += percent_to_use;
-			}
-		}
-	}
-	if (used_percent < 100) {
-		throw GameDataError(
-		   "Final training sites proportions add up to < 100%%: %d", used_percent);
-	}
-}
-
-
 /**
   * Helper functions
   */

@@ -156,6 +156,8 @@ public:
 	void postload();
 
 private:
+	void postload_calculate_trainingsites_proportions();
+
 	std::unique_ptr<DescriptionMaintainer<BuildingDescr>> buildings_;
 	std::unique_ptr<DescriptionMaintainer<ImmovableDescr>> immovables_;
 	std::unique_ptr<DescriptionMaintainer<ShipDescr>> ships_;
