@@ -157,6 +157,10 @@ public:
 		return ship_names_;
 	}
 
+	void add_building(const std::string& buildingname);
+	// Since trainingsites can change due to adding custom buildings, call this in postload
+	void calculate_trainingsites_proportions();
+
 private:
 	// Helper function for adding a special worker type (carriers etc.)
 	DescriptionIndex add_special_worker(const std::string& workername);

@@ -178,6 +178,17 @@ void Tribes::add_tribe(const LuaTable& table, const EditorGameBase& egbase) {
 	}
 }
 
+void Tribes::add_custom_building(const LuaTable& table) {
+	const std::string tribename = table.get_string("tribename");
+	if (Widelands::tribe_exists(tribename)) {
+		TribeDescr* descr = tribes_->get_mutable(tribe_index(tribename));
+		const std::string buildingname = table.get_string("buildingname");
+		descr->add_building(buildingname);
+	} else {
+		throw GameDataError("The tribe '%s'' has no preload file.", tribename.c_str());
+	}
+}
+
 size_t Tribes::nrbuildings() const {
 	return buildings_->size();
 }
@@ -194,8 +205,14 @@ size_t Tribes::nrworkers() const {
 	return workers_->size();
 }
 
+bool Tribes::ware_exists(const std::string& warename) const {
+	return wares_->exists(warename) != nullptr;
+}
 bool Tribes::ware_exists(const DescriptionIndex& index) const {
 	return wares_->get_mutable(index) != nullptr;
+}
+bool Tribes::worker_exists(const std::string& workername) const {
+	return workers_->exists(workername) != nullptr;
 }
 bool Tribes::worker_exists(const DescriptionIndex& index) const {
 	return workers_->get_mutable(index) != nullptr;
@@ -360,11 +377,15 @@ void Tribes::postload() {
 			buildings_->get_mutable(enhancement)->set_enhanced_from(i);
 		}
 	}
+
 	// Resize the configuration of our wares if they won't fit in the current window (12 = info label
-	// size)
+	// size).
+	// Also calculate the trainingsites proportions.
 	int number = (g_gr->get_yres() - 290) / (WARE_MENU_PIC_HEIGHT + WARE_MENU_PIC_PAD_Y + 12);
 	for (DescriptionIndex i = 0; i < tribes_->size(); ++i) {
-		tribes_->get_mutable(i)->resize_ware_orders(number);
+		TribeDescr* tribe_descr = tribes_->get_mutable(i);
+		tribe_descr->resize_ware_orders(number);
+		tribe_descr->calculate_trainingsites_proportions();
 	}
 }
 
