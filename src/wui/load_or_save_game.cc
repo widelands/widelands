@@ -169,7 +169,7 @@ bool LoadOrSaveGame::compare_date_descending(uint32_t rowa, uint32_t rowb) const
 	return r1.savetimestamp < r2.savetimestamp;
 }
 
-std::unique_ptr<const SavegameData> LoadOrSaveGame::entry_selected() {
+std::unique_ptr<SavegameData> LoadOrSaveGame::entry_selected() {
 	std::unique_ptr<SavegameData> result(new SavegameData());
 	size_t selections = table_.selections().size();
 	if (selections == 1) {

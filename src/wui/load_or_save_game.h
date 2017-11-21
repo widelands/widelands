@@ -45,7 +45,7 @@ protected:
 	               bool localize_autosave);
 
 	/// Update gamedetails and tooltips and return information about the current selection
-	std::unique_ptr<const SavegameData> entry_selected();
+	std::unique_ptr<SavegameData> entry_selected();
 
 	/// Whether the table has a selection
 	bool has_selection() const;

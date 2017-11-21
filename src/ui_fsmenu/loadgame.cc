@@ -116,7 +116,7 @@ void FullscreenMenuLoadGame::clicked_ok() {
 		return;
 	}
 
-	std::unique_ptr<const SavegameData> gamedata = load_or_save_.entry_selected();
+	std::unique_ptr<SavegameData> gamedata = load_or_save_.entry_selected();
 	if (gamedata && gamedata->errormessage.empty()) {
 		filename_ = gamedata->filename;
 		end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kOk);
