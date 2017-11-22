@@ -17,7 +17,7 @@
  *
  */
 
-#include "logic/backtrace.h"
+#include "logic/map_objects/backtrace.h"
 
 #ifndef _WIN32
 #ifndef __APPLE__

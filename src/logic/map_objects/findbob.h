@@ -17,33 +17,47 @@
  *
  */
 
-#include "logic/findbob.h"
+#ifndef WL_LOGIC_MAP_OBJECTS_FINDBOB_H
+#define WL_LOGIC_MAP_OBJECTS_FINDBOB_H
 
-#include "base/macros.h"
-#include "logic/map_objects/tribes/soldier.h"
-#include "logic/player.h"
+#include "logic/map.h"
 
 namespace Widelands {
 
-bool FindBobAttribute::accept(Bob* const bob) const {
-	return bob->has_attribute(attrib);
-}
+class Player;
 
-bool FindBobEnemySoldier::accept(Bob* const imm) const {
-	if (upcast(Soldier, soldier, imm))
-		if (soldier->is_on_battlefield() && (!player || soldier->owner().is_hostile(*player)) &&
-		    soldier->get_current_health())
-			return true;
+struct FindBobAttribute : public FindBob {
+	explicit FindBobAttribute(uint32_t const init_attrib) : attrib(init_attrib) {
+	}
 
-	return false;
-}
+	bool accept(Bob*) const override;
 
-bool FindBobShip::accept(Bob* bob) const {
-	return bob->descr().type() == MapObjectType::SHIP;
-}
+	uint32_t attrib;
+	virtual ~FindBobAttribute() {
+	}  // make gcc shut up
+};
 
-bool FindBobCritter::accept(Bob* bob) const {
-	return bob->descr().type() == MapObjectType::CRITTER;
-}
+/**
+ * Find soldiers which are hostile to the given player (or all soldiers
+ * if player is 0).
+ */
+struct FindBobEnemySoldier : public FindBob {
+	explicit FindBobEnemySoldier(Player* init_player) : player(init_player) {
+	}
+
+	bool accept(Bob*) const override;
+
+	Player* player;
+};
+
+struct FindBobShip : FindBob {
+	bool accept(Bob* bob) const override;
+};
+
+struct FindBobCritter : FindBob {
+	bool accept(Bob* bob) const override;
+};
 
 }  // namespace Widelands
+
+#endif  // end of include guard: WL_LOGIC_MAP_OBJECTS_FINDBOB_H

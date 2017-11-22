@@ -30,6 +30,7 @@
 #include "logic/map_objects/tribes/tribes.h"
 #include "logic/map_objects/tribes/warehouse.h"
 #include "logic/player.h"
+#include "logic/widelands.h"
 #include "ui_basic/editbox.h"
 #include "ui_basic/messagebox.h"
 #include "ui_basic/textarea.h"

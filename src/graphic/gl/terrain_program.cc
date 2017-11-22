@@ -84,7 +84,7 @@ void TerrainProgram::add_vertex(const FieldsToDraw::Field& field, const Vector2f
 }
 
 void TerrainProgram::draw(uint32_t gametime,
-                          const DescriptionMaintainer<Widelands::TerrainDescription>& terrains,
+                          const Widelands::DescriptionMaintainer<Widelands::TerrainDescription>& terrains,
                           const FieldsToDraw& fields_to_draw,
                           float z_value) {
 	// This method expects that all terrains have the same dimensions and that

@@ -24,6 +24,7 @@
 #include "logic/editor_game_base.h"
 #include "logic/game_data_error.h"
 #include "logic/map.h"
+#include "logic/widelands.h"
 #include "map_io/coords_profile.h"
 #include "profile/profile.h"
 

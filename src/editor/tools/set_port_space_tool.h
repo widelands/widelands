@@ -21,7 +21,6 @@
 #define WL_EDITOR_TOOLS_SET_PORT_SPACE_TOOL_H
 
 #include "editor/tools/tool.h"
-#include "logic/widelands.h"
 
 #define FSEL_ESPS_FILENAME "images/wui/editor/fsel_editor_set_port_space.png"
 #define FSEL_EUPS_FILENAME "images/wui/editor/fsel_editor_unset_port_space.png"

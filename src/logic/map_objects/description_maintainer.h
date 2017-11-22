@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef WL_LOGIC_DESCRIPTION_MAINTAINER_H
-#define WL_LOGIC_DESCRIPTION_MAINTAINER_H
+#ifndef WL_LOGIC_MAP_OBJECTS_DESCRIPTION_MAINTAINER_H
+#define WL_LOGIC_MAP_OBJECTS_DESCRIPTION_MAINTAINER_H
 
 #include <cassert>
 #include <map>
@@ -29,7 +29,9 @@
 #include "base/wexception.h"
 #include "logic/widelands.h"
 
-// Used to have a typesafe maintainer for description classes.
+namespace Widelands {
+
+// Used for having a typesafe maintainer for description classes.
 template <typename T> struct DescriptionMaintainer {
 	// Adds the 'entry', will assert() if it is already registered. Returns the
 	// index of the entry. Ownership is taken.
@@ -77,7 +79,7 @@ template <typename T> Widelands::DescriptionIndex DescriptionMaintainer<T>::add(
 		throw wexception("Tried to add %s twice.", item->name().c_str());
 	}
 	int32_t index = items_.size();
-	assert(index < (Widelands::INVALID_INDEX - 2));  // allowing for kInvalidIndex
+	assert(index < (Widelands::INVALID_INDEX - 2));  // allowing for INVALID_INDEX
 	items_.emplace_back(item);
 	name_to_index_[item->name()] = index;
 	return index;
@@ -90,4 +92,6 @@ template <typename T> T* DescriptionMaintainer<T>::exists(const std::string& nam
 	return items_[index].get();
 }
 
-#endif  // end of include guard: WL_LOGIC_DESCRIPTION_MAINTAINER_H
+} // namespace Widelands
+
+#endif  // end of include guard: WL_LOGIC_MAP_OBJECTS_DESCRIPTION_MAINTAINER_H

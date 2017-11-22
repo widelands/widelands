@@ -62,7 +62,7 @@ using TeamNumber = uint8_t;
  */
 using DescriptionIndex = uint8_t;
 
-constexpr uint8_t INVALID_INDEX = std::numeric_limits<uint8_t>::max();
+constexpr DescriptionIndex INVALID_INDEX = std::numeric_limits<uint8_t>::max();
 constexpr DescriptionIndex kInvalidWare = INVALID_INDEX - 1;
 constexpr DescriptionIndex kNoResource = INVALID_INDEX - 1;
 
@@ -85,21 +85,6 @@ inline Duration endless() {
 using Serial = uint32_t;  /// Serial number for MapObject.
 
 using Direction = uint8_t;
-
-struct SoldierStrength {
-	uint8_t health, attack, defense, evade;
-	bool operator==(const SoldierStrength& other) const {
-		return health == other.health && attack == other.attack && defense == other.defense &&
-		       evade == other.evade;
-	}
-	bool operator<(const SoldierStrength& other) const {
-		return health < other.health ||
-		       (health == other.health &&
-		        (attack < other.attack ||
-		         (attack == other.attack &&
-		          (defense < other.defense || (defense == other.defense && evade < other.evade)))));
-	}
-};
 
 }  // namespace Widelands
 

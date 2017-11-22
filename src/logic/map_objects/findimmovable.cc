@@ -17,7 +17,7 @@
  *
  */
 
-#include "logic/findimmovable.h"
+#include "logic/map_objects/findimmovable.h"
 
 #include "base/macros.h"
 #include "economy/flag.h"

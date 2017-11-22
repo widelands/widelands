@@ -86,7 +86,7 @@ void DitherProgram::add_vertex(const FieldsToDraw::Field& field,
 
 void DitherProgram::maybe_add_dithering_triangle(
    const uint32_t gametime,
-   const DescriptionMaintainer<Widelands::TerrainDescription>& terrains,
+   const Widelands::DescriptionMaintainer<Widelands::TerrainDescription>& terrains,
    const FieldsToDraw& fields_to_draw,
    const int idx1,
    const int idx2,
@@ -140,7 +140,7 @@ void DitherProgram::gl_draw(int gl_texture, float texture_w, float texture_h, co
 }
 
 void DitherProgram::draw(const uint32_t gametime,
-                         const DescriptionMaintainer<Widelands::TerrainDescription>& terrains,
+                         const Widelands::DescriptionMaintainer<Widelands::TerrainDescription>& terrains,
                          const FieldsToDraw& fields_to_draw,
                          const float z_value) {
 	// This method expects that all terrains have the same dimensions and that

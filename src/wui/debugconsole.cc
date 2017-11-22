@@ -25,7 +25,6 @@
 
 #include "base/log.h"
 #include "chat/chat.h"
-#include "logic/widelands.h"
 
 namespace DebugConsole {
 

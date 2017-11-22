@@ -21,6 +21,7 @@
 
 #include "graphic/gl/coordinate_conversion.h"
 #include "logic/map_objects/world/terrain_description.h"
+#include "logic/widelands.h"
 #include "wui/mapviewpixelconstants.h"
 #include "wui/mapviewpixelfunctions.h"
 

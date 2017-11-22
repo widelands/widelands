@@ -24,9 +24,9 @@
 #include <boost/format.hpp>
 
 #include "logic/cmd_luacoroutine.h"
-#include "logic/findimmovable.h"
 #include "logic/game.h"
 #include "logic/game_controller.h"
+#include "logic/map_objects/findimmovable.h"
 #include "logic/map_objects/immovable.h"
 #include "logic/map_objects/tribes/tribe_descr.h"
 #include "logic/map_objects/tribes/tribes.h"

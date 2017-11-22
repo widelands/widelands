@@ -28,7 +28,7 @@
 #include "economy/flag.h"
 #include "economy/road.h"
 #include "logic/ai_dna_handler.h"
-#include "logic/findnode.h"
+#include "logic/map_objects/findnode.h"
 #include "logic/game.h"
 #include "logic/map.h"
 #include "logic/map_objects/checkstep.h"

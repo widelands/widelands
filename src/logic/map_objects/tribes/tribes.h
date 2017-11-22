@@ -24,7 +24,7 @@
 
 #include "base/macros.h"
 #include "graphic/texture.h"
-#include "logic/description_maintainer.h"
+#include "logic/map_objects/description_maintainer.h"
 #include "logic/map_objects/immovable.h"
 #include "logic/map_objects/tribes/carrier.h"
 #include "logic/map_objects/tribes/constructionsite.h"

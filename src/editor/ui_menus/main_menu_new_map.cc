@@ -168,7 +168,7 @@ void MainMenuNewMap::clicked_cancel() {
  */
 void MainMenuNewMap::fill_list() {
 	list_.clear();
-	const DescriptionMaintainer<Widelands::TerrainDescription>& terrains =
+	const Widelands::DescriptionMaintainer<Widelands::TerrainDescription>& terrains =
 	   eia().egbase().world().terrains();
 
 	for (Widelands::DescriptionIndex index = 0; index < terrains.size(); ++index) {

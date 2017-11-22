@@ -45,6 +45,7 @@
 #include "logic/map_objects/world/world.h"
 #include "logic/maptriangleregion.h"
 #include "logic/player.h"
+#include "logic/widelands.h"
 #include "map_io/map_loader.h"
 #include "map_io/widelands_map_loader.h"
 #include "scripting/lua_interface.h"

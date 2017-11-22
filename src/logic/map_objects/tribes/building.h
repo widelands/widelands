@@ -36,7 +36,6 @@
 #include "logic/map_objects/tribes/wareworker.h"
 #include "logic/map_objects/tribes/workarea_info.h"
 #include "logic/message.h"
-#include "logic/widelands.h"
 #include "notifications/notifications.h"
 #include "scripting/lua_table.h"
 

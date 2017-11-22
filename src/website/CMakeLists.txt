@@ -11,6 +11,7 @@ wl_binary(wl_map_info
     io_fileread
     io_filesystem
     logic
+    logic_map
     map_io_map_loader
 )
 
@@ -26,5 +27,6 @@ wl_binary(wl_map_object_info
     io_fileread
     io_filesystem
     logic
+    logic_map_objects
     sound
 )

@@ -25,7 +25,7 @@
 #include "base/vector.h"
 #include "graphic/gl/fields_to_draw.h"
 #include "graphic/gl/utils.h"
-#include "logic/description_maintainer.h"
+#include "logic/map_objects/description_maintainer.h"
 #include "logic/map_objects/world/terrain_description.h"
 
 class Texture;
@@ -37,7 +37,7 @@ public:
 
 	// Draws the terrain.
 	void draw(uint32_t gametime,
-	          const DescriptionMaintainer<Widelands::TerrainDescription>& terrains,
+	          const Widelands::DescriptionMaintainer<Widelands::TerrainDescription>& terrains,
 	          const FieldsToDraw& fields_to_draw,
 	          float z_value);
 
@@ -53,7 +53,7 @@ private:
 	// agree.
 	void maybe_add_dithering_triangle(
 	   uint32_t gametime,
-	   const DescriptionMaintainer<Widelands::TerrainDescription>& terrains,
+	   const Widelands::DescriptionMaintainer<Widelands::TerrainDescription>& terrains,
 	   const FieldsToDraw& fields_to_draw,
 	   int idx1,
 	   int idx2,

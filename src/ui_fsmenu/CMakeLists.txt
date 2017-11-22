@@ -76,6 +76,8 @@ wl_library(ui_fsmenu
     logic_filesystem_constants
     logic_game_controller
     logic_game_settings
+    logic_map
+    logic_map_objects
     map_io_map_loader
     network
     profile

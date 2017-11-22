@@ -60,6 +60,7 @@
 #include "logic/playercommand.h"
 #include "logic/replay.h"
 #include "logic/single_player_game_controller.h"
+#include "logic/widelands.h"
 #include "map_io/widelands_map_loader.h"
 #include "network/network.h"
 #include "scripting/logic.h"

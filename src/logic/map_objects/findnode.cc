@@ -17,7 +17,7 @@
  *
  */
 
-#include "logic/findnode.h"
+#include "logic/map_objects/findnode.h"
 
 #include "base/wexception.h"
 #include "logic/field.h"

@@ -22,7 +22,6 @@
 
 #include "editor/tools/tool.h"
 #include "logic/mapregion.h"
-#include "logic/widelands.h"
 
 Widelands::NodeCaps resource_tools_nodecaps(const Widelands::FCoords& fcoords,
                                             const Widelands::EditorGameBase& egbase,

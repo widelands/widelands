@@ -8,7 +8,7 @@ wl_library(game_io
     game_interactive_player_packet.cc
     game_interactive_player_packet.h
     game_player_ai_persistent_packet.cc
-    game_player_ai_persistent_packet.h    
+    game_player_ai_persistent_packet.h
     game_loader.cc
     game_loader.h
     game_map_packet.cc
@@ -35,7 +35,11 @@ wl_library(game_io
     io_fileread
     io_filesystem
     logic
+    logic_commands
     logic_game_controller
+    logic_map
+    logic_map_objects
+    logic_widelands_geometry_io
     map_io
     map_io_map_loader
     profile

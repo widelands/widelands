@@ -24,7 +24,6 @@
 
 #include "graphic/color.h"
 #include "logic/map_objects/tribes/building.h"
-#include "logic/widelands.h"
 #include "ui_basic/box.h"
 #include "ui_basic/button.h"
 #include "ui_basic/editbox.h"

@@ -35,7 +35,6 @@
 #include "logic/map_objects/tribes/bill_of_materials.h"
 #include "logic/map_objects/tribes/program_result.h"
 #include "logic/map_objects/tribes/training_attribute.h"
-#include "logic/widelands.h"
 #include "scripting/lua_table.h"
 
 namespace Widelands {

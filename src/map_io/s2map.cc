@@ -37,6 +37,7 @@
 #include "logic/map_objects/map_object.h"
 #include "logic/map_objects/world/world.h"
 #include "logic/mapregion.h"
+#include "logic/widelands.h"
 #include "map_io/map_loader.h"
 #include "map_io/world_legacy_lookup_table.h"
 #include "scripting/lua_interface.h"

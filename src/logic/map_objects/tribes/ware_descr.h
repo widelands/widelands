@@ -28,6 +28,7 @@
 
 #include "base/macros.h"
 #include "logic/map_objects/map_object.h"
+#include "logic/widelands.h"
 #include "scripting/lua_table.h"
 
 class Image;

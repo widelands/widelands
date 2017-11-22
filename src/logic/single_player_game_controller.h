@@ -23,6 +23,7 @@
 #include "ai/computer_player.h"
 #include "logic/game_controller.h"
 #include "logic/player_end_result.h"
+#include "logic/widelands.h"
 
 class SinglePlayerGameController : public GameController {
 public:
