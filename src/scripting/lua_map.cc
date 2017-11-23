@@ -1324,7 +1324,6 @@ const PropertyType<LuaTribeDescription> LuaTribeDescription::Properties[] = {
    PROP_RO(LuaTribeDescription, carrier2),
    PROP_RO(LuaTribeDescription, descname),
    PROP_RO(LuaTribeDescription, geologist),
-   PROP_RO(LuaTribeDescription, headquarters),
    PROP_RO(LuaTribeDescription, name),
    PROP_RO(LuaTribeDescription, port),
    PROP_RO(LuaTribeDescription, ship),
@@ -1413,17 +1412,6 @@ int LuaTribeDescription::get_descname(lua_State* L) {
 
 int LuaTribeDescription::get_geologist(lua_State* L) {
 	lua_pushstring(L, get_egbase(L).tribes().get_worker_descr(get()->geologist())->name());
-	return 1;
-}
-
-/* RST
-   .. attribute:: headquarters
-
-         (RO) the :class:`string` internal name of the default headquarters type that this tribe uses
-*/
-
-int LuaTribeDescription::get_headquarters(lua_State* L) {
-	lua_pushstring(L, get_egbase(L).tribes().get_building_descr(get()->headquarters())->name());
 	return 1;
 }
 

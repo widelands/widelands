@@ -101,7 +101,6 @@ public:
 	DescriptionIndex geologist() const;
 	DescriptionIndex soldier() const;
 	DescriptionIndex ship() const;
-	DescriptionIndex headquarters() const;
 	DescriptionIndex port() const;
 	DescriptionIndex barracks() const;
 	DescriptionIndex ironore() const;
@@ -189,7 +188,6 @@ private:
 	DescriptionIndex geologist_;     // This tribe's geologist worker
 	DescriptionIndex soldier_;       // The soldier that this tribe uses
 	DescriptionIndex ship_;          // The ship that this tribe uses
-	DescriptionIndex headquarters_;  // The tribe's default headquarters, needed by the editor
 	DescriptionIndex port_;          // The port that this tribe uses
 	DescriptionIndex barracks_;      // The barracks to create soldiers
 	DescriptionIndex ironore_;       // Iron ore
