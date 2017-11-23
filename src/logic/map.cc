@@ -32,7 +32,6 @@
 #include "build_info.h"
 #include "economy/flag.h"
 #include "economy/road.h"
-#include "editor/tools/increase_resources_tool.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "logic/filesystem_constants.h"
 #include "logic/map_objects/checkstep.h"

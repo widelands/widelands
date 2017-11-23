@@ -116,7 +116,6 @@ wl_library(logic_map
     base_macros
     build_info
     economy
-    editor # TODO(GunChleoc): Circular dependency
     graphic_playercolor
     io_fileread
     io_filesystem
