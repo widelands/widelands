@@ -220,7 +220,6 @@ wl_library(logic
     logic_map_objects
     logic_widelands_geometry
     map_io_map_loader
-    network # TODO(GunChleoc): Circular dependency
     note_sound
     notifications
     random
