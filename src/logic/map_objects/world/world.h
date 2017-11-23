@@ -32,7 +32,6 @@ namespace Widelands {
 
 struct CritterDescr;
 class EditorCategory;
-class EditorGameBase;
 class ImmovableDescr;
 class ResourceDescription;
 class TerrainDescription;

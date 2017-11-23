@@ -31,10 +31,11 @@
 
 #include "base/log.h"
 #include "base/macros.h"
-#include "logic/editor_game_base.h"
 #include "logic/map_objects/tribes/bill_of_materials.h"
+#include "logic/map_objects/buildcost.h"
 #include "logic/map_objects/tribes/program_result.h"
 #include "logic/map_objects/tribes/training_attribute.h"
+#include "logic/map_objects/tribes/wareworker.h"
 #include "scripting/lua_table.h"
 
 namespace Widelands {
@@ -44,6 +45,7 @@ class ImmovableDescr;
 class ProductionSiteDescr;
 class ProductionSite;
 class TribeDescr;
+class Tribes;
 class Worker;
 class World;
 
@@ -531,7 +533,7 @@ struct ProductionProgram {
 	ProductionProgram(const std::string& init_name,
 	                  const std::string& init_descname,
 	                  std::unique_ptr<LuaTable> actions_table,
-	                  const EditorGameBase& egbase,
+	                  const Tribes& tribes, const World& world,
 	                  ProductionSiteDescr* building);
 
 	const std::string& name() const;

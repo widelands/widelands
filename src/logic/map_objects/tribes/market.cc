@@ -29,12 +29,12 @@ namespace Widelands {
 
 MarketDescr::MarketDescr(const std::string& init_descname,
                          const LuaTable& table,
-                         const EditorGameBase& egbase)
-   : BuildingDescr(init_descname, MapObjectType::MARKET, table, egbase) {
+                         const Tribes& tribes)
+   : BuildingDescr(init_descname, MapObjectType::MARKET, table, tribes) {
 	i18n::Textdomain td("tribes");
 
-	DescriptionIndex const woi = egbase.tribes().worker_index(table.get_string("carrier"));
-	if (!egbase.tribes().worker_exists(woi)) {
+	DescriptionIndex const woi = tribes.worker_index(table.get_string("carrier"));
+	if (!tribes.worker_exists(woi)) {
 		throw wexception("The tribe does not define the worker in 'carrier'.");
 	}
 	carrier_ = woi;

@@ -1603,7 +1603,8 @@ void ProductionProgram::ActConstruct::building_work_failed(Game& game,
 ProductionProgram::ProductionProgram(const std::string& init_name,
                                      const std::string& init_descname,
                                      std::unique_ptr<LuaTable> actions_table,
-                                     const EditorGameBase& egbase,
+                                     const Tribes& tribes,
+                                     const World& world,
                                      ProductionSiteDescr* building)
    : name_(init_name), descname_(init_descname) {
 
@@ -1620,7 +1621,7 @@ ProductionProgram::ProductionProgram(const std::string& init_name,
 
 		if (boost::iequals(parts[0], "return")) {
 			actions_.push_back(std::unique_ptr<ProductionProgram::Action>(
-			   new ActReturn(arguments.get(), *building, egbase.tribes())));
+			   new ActReturn(arguments.get(), *building, tribes)));
 		} else if (boost::iequals(parts[0], "call")) {
 			actions_.push_back(
 			   std::unique_ptr<ProductionProgram::Action>(new ActCall(arguments.get(), *building)));
@@ -1632,19 +1633,19 @@ ProductionProgram::ProductionProgram(const std::string& init_name,
 			   std::unique_ptr<ProductionProgram::Action>(new ActAnimate(arguments.get(), building)));
 		} else if (boost::iequals(parts[0], "consume")) {
 			actions_.push_back(std::unique_ptr<ProductionProgram::Action>(
-			   new ActConsume(arguments.get(), *building, egbase.tribes())));
+			   new ActConsume(arguments.get(), *building, tribes)));
 		} else if (boost::iequals(parts[0], "produce")) {
 			actions_.push_back(std::unique_ptr<ProductionProgram::Action>(
-			   new ActProduce(arguments.get(), *building, egbase.tribes())));
+			   new ActProduce(arguments.get(), *building, tribes)));
 		} else if (boost::iequals(parts[0], "recruit")) {
 			actions_.push_back(std::unique_ptr<ProductionProgram::Action>(
-			   new ActRecruit(arguments.get(), *building, egbase.tribes())));
+			   new ActRecruit(arguments.get(), *building, tribes)));
 		} else if (boost::iequals(parts[0], "worker")) {
 			actions_.push_back(std::unique_ptr<ProductionProgram::Action>(
-			   new ActWorker(arguments.get(), name(), building, egbase.tribes())));
+			   new ActWorker(arguments.get(), name(), building, tribes)));
 		} else if (boost::iequals(parts[0], "mine")) {
 			actions_.push_back(std::unique_ptr<ProductionProgram::Action>(
-			   new ActMine(arguments.get(), egbase.world(), name(), building)));
+			   new ActMine(arguments.get(), world, name(), building)));
 		} else if (boost::iequals(parts[0], "check_soldier")) {
 			actions_.push_back(
 			   std::unique_ptr<ProductionProgram::Action>(new ActCheckSoldier(arguments.get())));

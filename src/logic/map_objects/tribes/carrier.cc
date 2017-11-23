@@ -568,8 +568,8 @@ void Carrier::draw_inner(const EditorGameBase& game,
 
 CarrierDescr::CarrierDescr(const std::string& init_descname,
                            const LuaTable& table,
-                           const EditorGameBase& egbase)
-   : WorkerDescr(init_descname, MapObjectType::CARRIER, table, egbase),
+                           const Tribes& tribes)
+   : WorkerDescr(init_descname, MapObjectType::CARRIER, table, tribes),
      ware_hotspot_(Vector2i(0, 15)) {
 	if (table.has_key("ware_hotspot")) {
 		std::unique_ptr<LuaTable> items_table = table.get_table("ware_hotspot");

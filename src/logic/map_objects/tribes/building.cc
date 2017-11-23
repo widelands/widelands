@@ -57,9 +57,9 @@ static const int32_t BUILDING_LEAVE_INTERVAL = 1000;
 BuildingDescr::BuildingDescr(const std::string& init_descname,
                              const MapObjectType init_type,
                              const LuaTable& table,
-                             const EditorGameBase& egbase)
+                             const Tribes& tribes)
    : MapObjectDescr(init_type, table.get_string("name"), init_descname, table),
-     egbase_(egbase),
+     tribes_(tribes),
      buildable_(false),
      size_(BaseImmovable::SMALL),
      mine_(false),
@@ -112,13 +112,13 @@ BuildingDescr::BuildingDescr(const std::string& init_descname,
 		if (enh == name()) {
 			throw wexception("enhancement to same type");
 		}
-		DescriptionIndex const en_i = egbase_.tribes().building_index(enh);
-		if (egbase_.tribes().building_exists(en_i)) {
+		DescriptionIndex const en_i = tribes_.building_index(enh);
+		if (tribes_.building_exists(en_i)) {
 			enhancement_ = en_i;
 
 			//  Merge the enhancements workarea info into this building's
 			//  workarea info.
-			const BuildingDescr* tmp_enhancement = egbase_.tribes().get_building_descr(en_i);
+			const BuildingDescr* tmp_enhancement = tribes_.get_building_descr(en_i);
 			for (auto area : tmp_enhancement->workarea_info_) {
 				std::set<std::string>& strs = workarea_info_[area.first];
 				for (std::string str : area.second)
@@ -134,8 +134,8 @@ BuildingDescr::BuildingDescr(const std::string& init_descname,
 	if (table.has_key("buildcost")) {
 		buildable_ = true;
 		try {
-			buildcost_ = Buildcost(table.get_table("buildcost"), egbase_.tribes());
-			return_dismantle_ = Buildcost(table.get_table("return_on_dismantle"), egbase_.tribes());
+			buildcost_ = Buildcost(table.get_table("buildcost"), tribes_);
+			return_dismantle_ = Buildcost(table.get_table("return_on_dismantle"), tribes_);
 		} catch (const WException& e) {
 			throw wexception(
 			   "A buildable building must define \"buildcost\" and \"return_on_dismantle\": %s",
@@ -145,9 +145,9 @@ BuildingDescr::BuildingDescr(const std::string& init_descname,
 	if (table.has_key("enhancement_cost")) {
 		enhanced_building_ = true;
 		try {
-			enhance_cost_ = Buildcost(table.get_table("enhancement_cost"), egbase_.tribes());
+			enhance_cost_ = Buildcost(table.get_table("enhancement_cost"), tribes_);
 			return_enhanced_ =
-			   Buildcost(table.get_table("return_on_dismantle_on_enhanced"), egbase_.tribes());
+			   Buildcost(table.get_table("return_on_dismantle_on_enhanced"), tribes_);
 		} catch (const WException& e) {
 			throw wexception("An enhanced building must define \"enhancement_cost\""
 			                 "and \"return_on_dismantle_on_enhanced\": %s",
@@ -221,7 +221,7 @@ Create a construction site for this type of building
 */
 Building& BuildingDescr::create_constructionsite() const {
 	BuildingDescr const* const descr =
-	   egbase_.tribes().get_building_descr(egbase_.tribes().safe_building_index("constructionsite"));
+	   tribes_.get_building_descr(tribes_.safe_building_index("constructionsite"));
 	ConstructionSite& csite = dynamic_cast<ConstructionSite&>(descr->create_object());
 	csite.set_building(*this);
 

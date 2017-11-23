@@ -65,7 +65,7 @@ public:
 	BuildingDescr(const std::string& init_descname,
 	              MapObjectType type,
 	              const LuaTable& t,
-	              const EditorGameBase& egbase);
+	              const Tribes& tribes);
 	~BuildingDescr() override {
 	}
 
@@ -171,7 +171,7 @@ protected:
 	Building& create_constructionsite() const;
 
 private:
-	const EditorGameBase& egbase_;
+	const Tribes& tribes_;
 	bool buildable_;     // the player can build this himself
 	bool destructible_;  // the player can destruct this himself
 	Buildcost buildcost_;
