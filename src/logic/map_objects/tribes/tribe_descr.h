@@ -101,7 +101,6 @@ public:
 	DescriptionIndex geologist() const;
 	DescriptionIndex soldier() const;
 	DescriptionIndex ship() const;
-	DescriptionIndex headquarters() const;
 	DescriptionIndex port() const;
 	DescriptionIndex barracks() const;
 	DescriptionIndex ironore() const;
@@ -183,19 +182,18 @@ private:
 	// The wares that are used by construction sites
 	std::set<DescriptionIndex> construction_materials_;
 	// Special units. Some of them are used by the engine, some are only used by the AI.
-	DescriptionIndex builder_;       // The builder for this tribe
-	DescriptionIndex carrier_;       // The basic carrier for this tribe
-	DescriptionIndex carrier2_;      // Additional carrier for busy roads
-	DescriptionIndex geologist_;     // This tribe's geologist worker
-	DescriptionIndex soldier_;       // The soldier that this tribe uses
-	DescriptionIndex ship_;          // The ship that this tribe uses
-	DescriptionIndex headquarters_;  // The tribe's default headquarters, needed by the editor
-	DescriptionIndex port_;          // The port that this tribe uses
-	DescriptionIndex barracks_;      // The barracks to create soldiers
-	DescriptionIndex ironore_;       // Iron ore
-	DescriptionIndex rawlog_;        // Simple log
-	DescriptionIndex refinedlog_;    // Refined log, e.g. wood or blackwood
-	DescriptionIndex granite_;       // Granite
+	DescriptionIndex builder_;     // The builder for this tribe
+	DescriptionIndex carrier_;     // The basic carrier for this tribe
+	DescriptionIndex carrier2_;    // Additional carrier for busy roads
+	DescriptionIndex geologist_;   // This tribe's geologist worker
+	DescriptionIndex soldier_;     // The soldier that this tribe uses
+	DescriptionIndex ship_;        // The ship that this tribe uses
+	DescriptionIndex port_;        // The port that this tribe uses
+	DescriptionIndex barracks_;    // The barracks to create soldiers
+	DescriptionIndex ironore_;     // Iron ore
+	DescriptionIndex rawlog_;      // Simple log
+	DescriptionIndex refinedlog_;  // Refined log, e.g. wood or blackwood
+	DescriptionIndex granite_;     // Granite
 	std::vector<DescriptionIndex> worker_types_without_cost_;
 	std::vector<DescriptionIndex> trainingsites_;
 	// Order and positioning of wares in the warehouse display

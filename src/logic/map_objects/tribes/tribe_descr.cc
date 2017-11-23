@@ -241,7 +241,6 @@ TribeDescr::TribeDescr(const LuaTable& table, const TribeBasicInfo& info, const 
 			throw GameDataError("Failed adding ship '%s': %s", shipname.c_str(), e.what());
 		}
 
-		headquarters_ = add_special_building(table.get_string("headquarters"));
 		port_ = add_special_building(table.get_string("port"));
 		barracks_ = add_special_building(table.get_string("barracks"));
 
@@ -361,10 +360,6 @@ DescriptionIndex TribeDescr::soldier() const {
 DescriptionIndex TribeDescr::ship() const {
 	assert(tribes_.ship_exists(ship_));
 	return ship_;
-}
-DescriptionIndex TribeDescr::headquarters() const {
-	assert(tribes_.building_exists(headquarters_));
-	return headquarters_;
 }
 DescriptionIndex TribeDescr::port() const {
 	assert(tribes_.building_exists(port_));

@@ -44,8 +44,6 @@ dirname = path.dirname(__file__)
 --
 --    **ship**: The internal name of the tribe's ship.
 --
---    **headquarters**: The internal name of the tribe's headquarters building. This unit needs to be defined in the ``buildings`` table too.
---
 --    **port**: The internal name of the tribe's port building. This unit needs to be defined in the ``buildings`` table too.
 tribes:new_tribe {
    name = "atlanteans",
@@ -349,7 +347,6 @@ tribes:new_tribe {
    geologist = "atlanteans_geologist",
    soldier = "atlanteans_soldier",
    ship = "atlanteans_ship",
-   headquarters = "atlanteans_headquarters",
    port = "atlanteans_port",
    barracks = "atlanteans_barracks",
    ironore = "iron_ore",
