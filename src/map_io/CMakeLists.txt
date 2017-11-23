@@ -107,8 +107,10 @@ wl_library(map_io
     io_filesystem
     logic
     logic_constants
+    logic_exceptions
     logic_map
     logic_map_objects
+    logic_objectives
     logic_widelands_geometry
     logic_widelands_geometry_io
     profile

@@ -261,6 +261,7 @@ wl_library(wui
     logic_game_settings
     logic_map
     logic_map_objects
+    logic_objectives
     logic_widelands_geometry
     network
     note_sound

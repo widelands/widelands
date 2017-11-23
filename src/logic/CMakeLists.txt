@@ -1,3 +1,12 @@
+wl_library(logic_exceptions
+  SRCS
+    game_data_error.cc
+    game_data_error.h
+  DEPENDS
+    base_exceptions
+    base_i18n
+)
+
 wl_library(logic_widelands_geometry
   SRCS
     widelands_geometry.cc
@@ -84,6 +93,14 @@ wl_library(logic_filesystem_constants
     filesystem_constants.cc
 )
 
+wl_library(logic_objectives
+  SRCS
+    objective.cc
+    objective.h
+  DEPENDS
+    base_i18n
+)
+
 wl_library(logic_map
   SRCS
     cookie_priority_queue.h
@@ -119,10 +136,11 @@ wl_library(logic_map
     graphic_playercolor
     io_fileread
     io_filesystem
-    logic # TODO(GunChleoc): Circular
     logic_constants
+    logic_exceptions
     logic_filesystem_constants
     logic_map_objects
+    logic_objectives
     logic_widelands_geometry
     logic_widelands_geometry_io
     map_io_map_loader
@@ -159,6 +177,7 @@ wl_library(logic_commands
     io_fileread
     io_stream
     logic # TODO(GunChleoc): Circular dependency
+    logic_exceptions
     logic_game_controller
     logic_map
     logic_map_objects
@@ -177,12 +196,9 @@ wl_library(logic
     editor_game_base.h
     game.cc
     game.h
-    game_data_error.cc
-    game_data_error.h
     message.h
     message_id.h
     message_queue.h
-    objective.h
     player.cc
     player.h
     player_area.h
@@ -213,6 +229,7 @@ wl_library(logic
     io_stream
     logic_commands
     logic_constants
+    logic_exceptions
     logic_filesystem_constants
     logic_game_controller
     logic_game_settings

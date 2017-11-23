@@ -115,6 +115,7 @@ wl_library(scripting_logic
     logic_game_settings
     logic_map
     logic_map_objects
+    logic_objectives
     logic_widelands_geometry
     map_io
     scripting_base

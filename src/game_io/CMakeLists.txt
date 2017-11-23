@@ -36,6 +36,7 @@ wl_library(game_io
     io_filesystem
     logic
     logic_commands
+    logic_exceptions
     logic_game_controller
     logic_map
     logic_map_objects

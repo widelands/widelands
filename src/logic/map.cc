@@ -44,7 +44,6 @@
 #include "logic/mapfringeregion.h"
 #include "logic/objective.h"
 #include "logic/pathfield.h"
-#include "logic/player.h"
 #include "map_io/s2map.h"
 #include "map_io/widelands_map_loader.h"
 #include "notifications/notifications.h"
