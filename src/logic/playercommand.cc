@@ -74,8 +74,8 @@ BillOfMaterials deserialize_bill_of_materials(StreamRead* des) {
 
 }  // namespace
 
-// NOTE keep numbers of existing entries as they are to ensure backward compatible savegame loading
-enum {
+// TODO(GunChleoc): Replay loading compatibility. Completely get rid of this after Build 20
+enum class QueueCommandCompatibilityTypes {
 	PLCMD_UNUSED = 0,
 	PLCMD_BULLDOZE = 1,
 	PLCMD_BUILD = 2,
@@ -116,68 +116,143 @@ PlayerCommand::PlayerCommand(const uint32_t time, const PlayerNumber s)
    : GameLogicCommand(time), sender_(s), cmdserial_(0) {
 }
 
-PlayerCommand* PlayerCommand::deserialize(StreamRead& des) {
-	switch (des.unsigned_8()) {
-	case PLCMD_BULLDOZE:
-		return new CmdBulldoze(des);
-	case PLCMD_BUILD:
-		return new CmdBuild(des);
-	case PLCMD_BUILDFLAG:
-		return new CmdBuildFlag(des);
-	case PLCMD_BUILDROAD:
-		return new CmdBuildRoad(des);
-	case PLCMD_FLAGACTION:
-		return new CmdFlagAction(des);
-	case PLCMD_STARTSTOPBUILDING:
-		return new CmdStartStopBuilding(des);
-	case PLCMD_SHIP_EXPEDITION:
-		return new CmdStartOrCancelExpedition(des);
-	case PLCMD_SHIP_SCOUT:
-		return new CmdShipScoutDirection(des);
-	case PLCMD_SHIP_EXPLORE:
-		return new CmdShipExploreIsland(des);
-	case PLCMD_SHIP_CONSTRUCT:
-		return new CmdShipConstructPort(des);
-	case PLCMD_SHIP_SINK:
-		return new CmdShipSink(des);
-	case PLCMD_SHIP_CANCELEXPEDITION:
-		return new CmdShipCancelExpedition(des);
-	case PLCMD_ENHANCEBUILDING:
-		return new CmdEnhanceBuilding(des);
-	case PLCMD_CHANGETRAININGOPTIONS:
-		return new CmdChangeTrainingOptions(des);
-	case PLCMD_DROPSOLDIER:
-		return new CmdDropSoldier(des);
-	case PLCMD_CHANGESOLDIERCAPACITY:
-		return new CmdChangeSoldierCapacity(des);
-	case PLCMD_ENEMYFLAGACTION:
-		return new CmdEnemyFlagAction(des);
-	case PLCMD_SETWAREPRIORITY:
-		return new CmdSetWarePriority(des);
-	case PLCMD_SETWARETARGETQUANTITY:
-		return new CmdSetWareTargetQuantity(des);
-	case PLCMD_RESETWARETARGETQUANTITY:
-		return new CmdResetWareTargetQuantity(des);
-	case PLCMD_SETWORKERTARGETQUANTITY:
-		return new CmdSetWorkerTargetQuantity(des);
-	case PLCMD_RESETWORKERTARGETQUANTITY:
-		return new CmdResetWorkerTargetQuantity(des);
-	case PLCMD_MESSAGESETSTATUSREAD:
-		return new CmdMessageSetStatusRead(des);
-	case PLCMD_MESSAGESETSTATUSARCHIVED:
-		return new CmdMessageSetStatusArchived(des);
-	case PLCMD_SETSTOCKPOLICY:
-		return new CmdSetStockPolicy(des);
-	case PLCMD_SETINPUTMAXFILL:
-		return new CmdSetInputMaxFill(des);
-	case PLCMD_DISMANTLEBUILDING:
-		return new CmdDismantleBuilding(des);
-	case PLCMD_EVICTWORKER:
-		return new CmdEvictWorker(des);
-	case PLCMD_MILITARYSITESETSOLDIERPREFERENCE:
-		return new CmdMilitarySiteSetSoldierPreference(des);
-	default:
-		throw wexception("PlayerCommand::deserialize(): Invalid command id encountered");
+void PlayerCommand::write_id(StreamWrite& ser) {
+	ser.unsigned_8(static_cast<uint8_t>(id()));
+}
+
+PlayerCommand* PlayerCommand::deserialize(StreamRead& des, bool use_compatibility_mode) {
+	if (use_compatibility_mode) {
+		switch (static_cast<QueueCommandCompatibilityTypes>(des.unsigned_8())) {
+		case QueueCommandCompatibilityTypes::PLCMD_BULLDOZE:
+			return new CmdBulldoze(des);
+		case QueueCommandCompatibilityTypes::PLCMD_BUILD:
+			return new CmdBuild(des);
+		case QueueCommandCompatibilityTypes::PLCMD_BUILDFLAG:
+			return new CmdBuildFlag(des);
+		case QueueCommandCompatibilityTypes::PLCMD_BUILDROAD:
+			return new CmdBuildRoad(des);
+		case QueueCommandCompatibilityTypes::PLCMD_FLAGACTION:
+			return new CmdFlagAction(des);
+		case QueueCommandCompatibilityTypes::PLCMD_STARTSTOPBUILDING:
+			return new CmdStartStopBuilding(des);
+		case QueueCommandCompatibilityTypes::PLCMD_SHIP_EXPEDITION:
+			return new CmdStartOrCancelExpedition(des);
+		case QueueCommandCompatibilityTypes::PLCMD_SHIP_SCOUT:
+			return new CmdShipScoutDirection(des);
+		case QueueCommandCompatibilityTypes::PLCMD_SHIP_EXPLORE:
+			return new CmdShipExploreIsland(des);
+		case QueueCommandCompatibilityTypes::PLCMD_SHIP_CONSTRUCT:
+			return new CmdShipConstructPort(des);
+		case QueueCommandCompatibilityTypes::PLCMD_SHIP_SINK:
+			return new CmdShipSink(des);
+		case QueueCommandCompatibilityTypes::PLCMD_SHIP_CANCELEXPEDITION:
+			return new CmdShipCancelExpedition(des);
+		case QueueCommandCompatibilityTypes::PLCMD_ENHANCEBUILDING:
+			return new CmdEnhanceBuilding(des);
+		case QueueCommandCompatibilityTypes::PLCMD_CHANGETRAININGOPTIONS:
+			return new CmdChangeTrainingOptions(des);
+		case QueueCommandCompatibilityTypes::PLCMD_DROPSOLDIER:
+			return new CmdDropSoldier(des);
+		case QueueCommandCompatibilityTypes::PLCMD_CHANGESOLDIERCAPACITY:
+			return new CmdChangeSoldierCapacity(des);
+		case QueueCommandCompatibilityTypes::PLCMD_ENEMYFLAGACTION:
+			return new CmdEnemyFlagAction(des);
+		case QueueCommandCompatibilityTypes::PLCMD_SETWAREPRIORITY:
+			return new CmdSetWarePriority(des);
+		case QueueCommandCompatibilityTypes::PLCMD_SETWARETARGETQUANTITY:
+			return new CmdSetWareTargetQuantity(des);
+		case QueueCommandCompatibilityTypes::PLCMD_RESETWARETARGETQUANTITY:
+			return new CmdResetWareTargetQuantity(des);
+		case QueueCommandCompatibilityTypes::PLCMD_SETWORKERTARGETQUANTITY:
+			return new CmdSetWorkerTargetQuantity(des);
+		case QueueCommandCompatibilityTypes::PLCMD_RESETWORKERTARGETQUANTITY:
+			return new CmdResetWorkerTargetQuantity(des);
+		case QueueCommandCompatibilityTypes::PLCMD_MESSAGESETSTATUSREAD:
+			return new CmdMessageSetStatusRead(des);
+		case QueueCommandCompatibilityTypes::PLCMD_MESSAGESETSTATUSARCHIVED:
+			return new CmdMessageSetStatusArchived(des);
+		case QueueCommandCompatibilityTypes::PLCMD_SETSTOCKPOLICY:
+			return new CmdSetStockPolicy(des);
+		case QueueCommandCompatibilityTypes::PLCMD_SETINPUTMAXFILL:
+			return new CmdSetInputMaxFill(des);
+		case QueueCommandCompatibilityTypes::PLCMD_DISMANTLEBUILDING:
+			return new CmdDismantleBuilding(des);
+		case QueueCommandCompatibilityTypes::PLCMD_EVICTWORKER:
+			return new CmdEvictWorker(des);
+		case QueueCommandCompatibilityTypes::PLCMD_MILITARYSITESETSOLDIERPREFERENCE:
+			return new CmdMilitarySiteSetSoldierPreference(des);
+		default:
+			throw wexception("PlayerCommand::deserialize(): Invalid compatibility command id encountered");
+		}
+	} else {
+		switch (static_cast<QueueCommandTypes>(des.unsigned_8())) {
+		case QueueCommandTypes::kBulldoze:
+			return new CmdBulldoze(des);
+		case QueueCommandTypes::kBuild:
+			return new CmdBuild(des);
+		case QueueCommandTypes::kBuildFlag:
+			return new CmdBuildFlag(des);
+		case QueueCommandTypes::kBuildRoad:
+			return new CmdBuildRoad(des);
+		case QueueCommandTypes::kFlagAction:
+			return new CmdFlagAction(des);
+		case QueueCommandTypes::kStartStopBuilding:
+			return new CmdStartStopBuilding(des);
+		case QueueCommandTypes::kEnhanceBuilding:
+			return new CmdEnhanceBuilding(des);
+
+		case QueueCommandTypes::kChangeTrainingOptions:
+			return new CmdChangeTrainingOptions(des);
+		case QueueCommandTypes::kDropSoldier:
+			return new CmdDropSoldier(des);
+		case QueueCommandTypes::kChangeSoldierCapacity:
+			return new CmdChangeSoldierCapacity(des);
+		case QueueCommandTypes::kEnemyFlagAction:
+			return new CmdEnemyFlagAction(des);
+
+		case QueueCommandTypes::kSetWarePriority:
+			return new CmdSetWarePriority(des);
+		case QueueCommandTypes::kSetWareTargetQuantity:
+			return new CmdSetWareTargetQuantity(des);
+		case QueueCommandTypes::kResetWareTargetQuantity:
+			return new CmdResetWareTargetQuantity(des);
+		case QueueCommandTypes::kSetWorkerTargetQuantity:
+			return new CmdSetWorkerTargetQuantity(des);
+		case QueueCommandTypes::kResetWorkerTargetQuantity:
+			return new CmdResetWorkerTargetQuantity(des);
+
+		case QueueCommandTypes::kMessageSetStatusRead:
+			return new CmdMessageSetStatusRead(des);
+		case QueueCommandTypes::kMessageSetStatusArchived:
+			return new CmdMessageSetStatusArchived(des);
+
+		case QueueCommandTypes::kSetStockPolicy:
+			return new CmdSetStockPolicy(des);
+		case QueueCommandTypes::kSetInputMaxFill:
+			return new CmdSetInputMaxFill(des);
+		case QueueCommandTypes::kDismantleBuilding:
+			return new CmdDismantleBuilding(des);
+		case QueueCommandTypes::kEvictWorker:
+			return new CmdEvictWorker(des);
+		case QueueCommandTypes::kMilitarysiteSetSoldierPreference:
+			return new CmdMilitarySiteSetSoldierPreference(des);
+
+		case QueueCommandTypes::kStartOrCancelExpedition:
+			return new CmdStartOrCancelExpedition(des);
+		case QueueCommandTypes::kShipScoutDirection:
+			return new CmdShipScoutDirection(des);
+		case QueueCommandTypes::kShipExploreIsland:
+			return new CmdShipExploreIsland(des);
+		case QueueCommandTypes::kShipConstructPort:
+			return new CmdShipConstructPort(des);
+		case QueueCommandTypes::kShipSink:
+			return new CmdShipSink(des);
+		case QueueCommandTypes::kShipCancelExpedition:
+			return new CmdShipCancelExpedition(des);
+
+		default:
+			throw wexception("PlayerCommand::deserialize(): Invalid command id encountered");
+		}
 	}
 }
 
@@ -226,7 +301,7 @@ void CmdBulldoze::execute(Game& game) {
 }
 
 void CmdBulldoze::serialize(StreamWrite& ser) {
-	ser.unsigned_8(PLCMD_BULLDOZE);
+	write_id(ser);
 	ser.unsigned_8(sender());
 	ser.unsigned_32(serial);
 	ser.unsigned_8(recurse);
@@ -273,7 +348,7 @@ void CmdBuild::execute(Game& game) {
 }
 
 void CmdBuild::serialize(StreamWrite& ser) {
-	ser.unsigned_8(PLCMD_BUILD);
+	write_id(ser);
 	ser.unsigned_8(sender());
 	ser.signed_16(bi);
 	write_coords_32(&ser, coords);
@@ -317,7 +392,7 @@ void CmdBuildFlag::execute(Game& game) {
 }
 
 void CmdBuildFlag::serialize(StreamWrite& ser) {
-	ser.unsigned_8(PLCMD_BUILDFLAG);
+	write_id(ser);
 	ser.unsigned_8(sender());
 	write_coords_32(&ser, coords);
 }
@@ -387,7 +462,7 @@ void CmdBuildRoad::execute(Game& game) {
 }
 
 void CmdBuildRoad::serialize(StreamWrite& ser) {
-	ser.unsigned_8(PLCMD_BUILDROAD);
+	write_id(ser);
 	ser.unsigned_8(sender());
 	write_coords_32(&ser, start);
 	ser.unsigned_16(nsteps);
@@ -444,7 +519,7 @@ void CmdFlagAction::execute(Game& game) {
 }
 
 void CmdFlagAction::serialize(StreamWrite& ser) {
-	ser.unsigned_8(PLCMD_FLAGACTION);
+	write_id(ser);
 	ser.unsigned_8(sender());
 	ser.unsigned_8(0);
 	ser.unsigned_32(serial);
@@ -491,7 +566,7 @@ void CmdStartStopBuilding::execute(Game& game) {
 }
 
 void CmdStartStopBuilding::serialize(StreamWrite& ser) {
-	ser.unsigned_8(PLCMD_STARTSTOPBUILDING);
+	write_id(ser);
 	ser.unsigned_8(sender());
 	ser.unsigned_32(serial);
 }
@@ -529,7 +604,7 @@ CmdMilitarySiteSetSoldierPreference::CmdMilitarySiteSetSoldierPreference(StreamR
 }
 
 void CmdMilitarySiteSetSoldierPreference::serialize(StreamWrite& ser) {
-	ser.unsigned_8(PLCMD_MILITARYSITESETSOLDIERPREFERENCE);
+	write_id(ser);
 	ser.unsigned_8(sender());
 	ser.unsigned_32(serial);
 	ser.unsigned_8(static_cast<uint8_t>(preference));
@@ -587,7 +662,7 @@ void CmdStartOrCancelExpedition::execute(Game& game) {
 }
 
 void CmdStartOrCancelExpedition::serialize(StreamWrite& ser) {
-	ser.unsigned_8(PLCMD_SHIP_EXPEDITION);
+	write_id(ser);
 	ser.unsigned_8(sender());
 	ser.unsigned_32(serial);
 }
@@ -631,7 +706,7 @@ void CmdEnhanceBuilding::execute(Game& game) {
 }
 
 void CmdEnhanceBuilding::serialize(StreamWrite& ser) {
-	ser.unsigned_8(PLCMD_ENHANCEBUILDING);
+	write_id(ser);
 	ser.unsigned_8(sender());
 	ser.unsigned_32(serial);
 	ser.unsigned_16(bi);
@@ -678,7 +753,7 @@ void CmdDismantleBuilding::execute(Game& game) {
 }
 
 void CmdDismantleBuilding::serialize(StreamWrite& ser) {
-	ser.unsigned_8(PLCMD_DISMANTLEBUILDING);
+	write_id(ser);
 	ser.unsigned_8(sender());
 	ser.unsigned_32(serial);
 }
@@ -722,7 +797,7 @@ void CmdEvictWorker::execute(Game& game) {
 }
 
 void CmdEvictWorker::serialize(StreamWrite& ser) {
-	ser.unsigned_8(PLCMD_EVICTWORKER);
+	write_id(ser);
 	ser.unsigned_8(sender());
 	ser.unsigned_32(serial);
 }
@@ -777,7 +852,7 @@ void CmdShipScoutDirection::execute(Game& game) {
 }
 
 void CmdShipScoutDirection::serialize(StreamWrite& ser) {
-	ser.unsigned_8(PLCMD_SHIP_SCOUT);
+	write_id(ser);
 	ser.unsigned_8(sender());
 	ser.unsigned_32(serial);
 	ser.unsigned_8(static_cast<uint8_t>(dir));
@@ -835,7 +910,7 @@ void CmdShipConstructPort::execute(Game& game) {
 }
 
 void CmdShipConstructPort::serialize(StreamWrite& ser) {
-	ser.unsigned_8(PLCMD_SHIP_CONSTRUCT);
+	write_id(ser);
 	ser.unsigned_8(sender());
 	ser.unsigned_32(serial);
 	write_coords_32(&ser, coords);
@@ -896,7 +971,7 @@ void CmdShipExploreIsland::execute(Game& game) {
 }
 
 void CmdShipExploreIsland::serialize(StreamWrite& ser) {
-	ser.unsigned_8(PLCMD_SHIP_EXPLORE);
+	write_id(ser);
 	ser.unsigned_8(sender());
 	ser.unsigned_32(serial);
 	ser.unsigned_8(static_cast<uint8_t>(island_explore_direction));
@@ -945,7 +1020,7 @@ void CmdShipSink::execute(Game& game) {
 }
 
 void CmdShipSink::serialize(StreamWrite& ser) {
-	ser.unsigned_8(PLCMD_SHIP_SINK);
+	write_id(ser);
 	ser.unsigned_8(sender());
 	ser.unsigned_32(serial);
 }
@@ -990,7 +1065,7 @@ void CmdShipCancelExpedition::execute(Game& game) {
 }
 
 void CmdShipCancelExpedition::serialize(StreamWrite& ser) {
-	ser.unsigned_8(PLCMD_SHIP_CANCELEXPEDITION);
+	write_id(ser);
 	ser.unsigned_8(sender());
 	ser.unsigned_32(serial);
 }
@@ -1087,7 +1162,7 @@ CmdSetWarePriority::CmdSetWarePriority(StreamRead& des)
 }
 
 void CmdSetWarePriority::serialize(StreamWrite& ser) {
-	ser.unsigned_8(PLCMD_SETWAREPRIORITY);
+	write_id(ser);
 	ser.unsigned_8(sender());
 	ser.unsigned_32(serial_);
 	ser.unsigned_8(type_);
@@ -1173,7 +1248,7 @@ CmdSetInputMaxFill::CmdSetInputMaxFill(StreamRead& des) : PlayerCommand(0, des.u
 }
 
 void CmdSetInputMaxFill::serialize(StreamWrite& ser) {
-	ser.unsigned_8(PLCMD_SETINPUTMAXFILL);
+	write_id(ser);
 	ser.unsigned_8(sender());
 	ser.unsigned_32(serial_);
 	ser.signed_32(index_);
@@ -1213,6 +1288,7 @@ CmdChangeTargetQuantity::CmdChangeTargetQuantity(StreamRead& des)
 }
 
 void CmdChangeTargetQuantity::serialize(StreamWrite& ser) {
+	// Does not implement id(), so we don't have any id header to serialize
 	ser.unsigned_8(sender());
 	ser.unsigned_32(economy());
 	ser.unsigned_8(ware_type());
@@ -1265,7 +1341,7 @@ CmdSetWareTargetQuantity::CmdSetWareTargetQuantity(StreamRead& des)
 }
 
 void CmdSetWareTargetQuantity::serialize(StreamWrite& ser) {
-	ser.unsigned_8(PLCMD_SETWARETARGETQUANTITY);
+	write_id(ser);
 	CmdChangeTargetQuantity::serialize(ser);
 	ser.unsigned_32(permanent_);
 }
@@ -1313,7 +1389,7 @@ CmdResetWareTargetQuantity::CmdResetWareTargetQuantity(StreamRead& des)
 }
 
 void CmdResetWareTargetQuantity::serialize(StreamWrite& ser) {
-	ser.unsigned_8(PLCMD_RESETWARETARGETQUANTITY);
+	write_id(ser);
 	CmdChangeTargetQuantity::serialize(ser);
 }
 
@@ -1364,7 +1440,7 @@ CmdSetWorkerTargetQuantity::CmdSetWorkerTargetQuantity(StreamRead& des)
 }
 
 void CmdSetWorkerTargetQuantity::serialize(StreamWrite& ser) {
-	ser.unsigned_8(PLCMD_SETWORKERTARGETQUANTITY);
+	write_id(ser);
 	CmdChangeTargetQuantity::serialize(ser);
 	ser.unsigned_32(permanent_);
 }
@@ -1416,7 +1492,7 @@ CmdResetWorkerTargetQuantity::CmdResetWorkerTargetQuantity(StreamRead& des)
 }
 
 void CmdResetWorkerTargetQuantity::serialize(StreamWrite& ser) {
-	ser.unsigned_8(PLCMD_RESETWORKERTARGETQUANTITY);
+	write_id(ser);
 	CmdChangeTargetQuantity::serialize(ser);
 }
 
@@ -1434,7 +1510,7 @@ void CmdChangeTrainingOptions::execute(Game& game) {
 }
 
 void CmdChangeTrainingOptions::serialize(StreamWrite& ser) {
-	ser.unsigned_8(PLCMD_CHANGETRAININGOPTIONS);
+	write_id(ser);
 	ser.unsigned_8(sender());
 	ser.unsigned_32(serial);
 	ser.unsigned_8(static_cast<uint8_t>(attribute));
@@ -1487,7 +1563,7 @@ void CmdDropSoldier::execute(Game& game) {
 }
 
 void CmdDropSoldier::serialize(StreamWrite& ser) {
-	ser.unsigned_8(PLCMD_DROPSOLDIER);
+	write_id(ser);
 	ser.unsigned_8(sender());
 	ser.unsigned_32(serial);
 	ser.unsigned_32(soldier);
@@ -1551,7 +1627,7 @@ void CmdChangeSoldierCapacity::execute(Game& game) {
 }
 
 void CmdChangeSoldierCapacity::serialize(StreamWrite& ser) {
-	ser.unsigned_8(PLCMD_CHANGESOLDIERCAPACITY);
+	write_id(ser);
 	ser.unsigned_8(sender());
 	ser.unsigned_32(serial);
 	ser.signed_16(val);
@@ -1617,7 +1693,7 @@ void CmdEnemyFlagAction::execute(Game& game) {
 }
 
 void CmdEnemyFlagAction::serialize(StreamWrite& ser) {
-	ser.unsigned_8(PLCMD_ENEMYFLAGACTION);
+	write_id(ser);
 	ser.unsigned_8(sender());
 	ser.unsigned_8(1);
 	ser.unsigned_32(serial);
@@ -1699,7 +1775,7 @@ void CmdMessageSetStatusRead::execute(Game& game) {
 }
 
 void CmdMessageSetStatusRead::serialize(StreamWrite& ser) {
-	ser.unsigned_8(PLCMD_MESSAGESETSTATUSREAD);
+	write_id(ser);
 	ser.unsigned_8(sender());
 	ser.unsigned_32(message_id().value());
 }
@@ -1711,7 +1787,7 @@ void CmdMessageSetStatusArchived::execute(Game& game) {
 }
 
 void CmdMessageSetStatusArchived::serialize(StreamWrite& ser) {
-	ser.unsigned_8(PLCMD_MESSAGESETSTATUSARCHIVED);
+	write_id(ser);
 	ser.unsigned_8(sender());
 	ser.unsigned_32(message_id().value());
 }
@@ -1769,7 +1845,7 @@ CmdSetStockPolicy::CmdSetStockPolicy(StreamRead& des) : PlayerCommand(0, des.uns
 }
 
 void CmdSetStockPolicy::serialize(StreamWrite& ser) {
-	ser.unsigned_8(PLCMD_SETSTOCKPOLICY);
+	write_id(ser);
 	ser.unsigned_8(sender());
 	ser.unsigned_32(warehouse_);
 	ser.unsigned_8(isworker_);
@@ -1853,7 +1929,7 @@ CmdProposeTrade::CmdProposeTrade(StreamRead& des) : PlayerCommand(0, des.unsigne
 }
 
 void CmdProposeTrade::serialize(StreamWrite& ser) {
-	ser.unsigned_8(PLCMD_PROPOSE_TRADE);
+	write_id(ser);
 	ser.unsigned_8(sender());
 	ser.unsigned_32(trade_.initiator);
 	ser.unsigned_32(trade_.receiver);

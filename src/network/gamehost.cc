@@ -2105,7 +2105,7 @@ void GameHost::handle_packet(uint32_t const i, RecvPacket& r) {
 		if (!d->game)
 			throw DisconnectException("PLAYERCMD_WO_GAME");
 		int32_t time = r.signed_32();
-		Widelands::PlayerCommand& plcmd = *Widelands::PlayerCommand::deserialize(r);
+		Widelands::PlayerCommand& plcmd = *Widelands::PlayerCommand::deserialize(r, false);
 		log("[Host]: Client %u (%u) sent player command %u for %u, time = %i\n", i, client.playernum,
 		    static_cast<unsigned int>(plcmd.id()), plcmd.sender(), time);
 		receive_client_time(i, time);

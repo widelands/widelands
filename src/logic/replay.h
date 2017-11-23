@@ -58,6 +58,7 @@ private:
 	StreamRead* cmdlog_;
 
 	uint32_t replaytime_;
+	bool use_old_playercommands_;
 };
 
 /**
