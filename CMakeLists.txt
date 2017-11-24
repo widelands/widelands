@@ -155,8 +155,11 @@ if("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
   wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Werror=non-pod-varargs")
 
   wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Qunused-arguments")
-  wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Winconsistent-missing-override")
+
   wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wint-to-void-pointer-cast")
+  if(CMAKE_CXX_COMPILER_VERSION VERSION_GREATER 3.8)
+      wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Winconsistent-missing-override")
+  endif()
 else()
   # Assuming GCC 4.8 or higher.
   if(WIN32)
