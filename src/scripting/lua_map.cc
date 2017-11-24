@@ -1319,19 +1319,12 @@ const MethodType<LuaTribeDescription> LuaTribeDescription::Methods[] = {
    {nullptr, nullptr},
 };
 const PropertyType<LuaTribeDescription> LuaTribeDescription::Properties[] = {
-   PROP_RO(LuaTribeDescription, buildings),
-   PROP_RO(LuaTribeDescription, carrier),
-   PROP_RO(LuaTribeDescription, carrier2),
-   PROP_RO(LuaTribeDescription, descname),
-   PROP_RO(LuaTribeDescription, geologist),
-   PROP_RO(LuaTribeDescription, headquarters),
-   PROP_RO(LuaTribeDescription, name),
-   PROP_RO(LuaTribeDescription, port),
-   PROP_RO(LuaTribeDescription, ship),
-   PROP_RO(LuaTribeDescription, soldier),
-   PROP_RO(LuaTribeDescription, wares),
-   PROP_RO(LuaTribeDescription, workers),
-   {nullptr, nullptr, nullptr},
+   PROP_RO(LuaTribeDescription, buildings), PROP_RO(LuaTribeDescription, carrier),
+   PROP_RO(LuaTribeDescription, carrier2),  PROP_RO(LuaTribeDescription, descname),
+   PROP_RO(LuaTribeDescription, geologist), PROP_RO(LuaTribeDescription, name),
+   PROP_RO(LuaTribeDescription, port),      PROP_RO(LuaTribeDescription, ship),
+   PROP_RO(LuaTribeDescription, soldier),   PROP_RO(LuaTribeDescription, wares),
+   PROP_RO(LuaTribeDescription, workers),   {nullptr, nullptr, nullptr},
 };
 
 void LuaTribeDescription::__persist(lua_State* L) {
@@ -1413,17 +1406,6 @@ int LuaTribeDescription::get_descname(lua_State* L) {
 
 int LuaTribeDescription::get_geologist(lua_State* L) {
 	lua_pushstring(L, get_egbase(L).tribes().get_worker_descr(get()->geologist())->name());
-	return 1;
-}
-
-/* RST
-   .. attribute:: headquarters
-
-         (RO) the :class:`string` internal name of the default headquarters type that this tribe uses
-*/
-
-int LuaTribeDescription::get_headquarters(lua_State* L) {
-	lua_pushstring(L, get_egbase(L).tribes().get_building_descr(get()->headquarters())->name());
 	return 1;
 }
 

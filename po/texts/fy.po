@@ -2,13 +2,14 @@
 # Copyright (C) 2005-2017 Widelands Development Team
 # 
 # Translators:
+# Luitzen Hietkamp <luitzenhietkamp@gmail.com>, 2017
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-11-11 07:08+0000\n"
-"PO-Revision-Date: 2015-02-03 14:50+0000\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"POT-Creation-Date: 2017-11-11 07:38+0000\n"
+"PO-Revision-Date: 2017-11-14 22:18+0000\n"
+"Last-Translator: Luitzen Hietkamp <luitzenhietkamp@gmail.com>\n"
 "Language-Team: Western Frisian (http://www.transifex.com/widelands/widelands/language/fy/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -18,36 +19,36 @@ msgstr ""
 
 #: ../../data/txts/AUTHORS.lua:27
 msgid "Developers"
-msgstr ""
+msgstr "Untwikkelers"
 
 #: ../../data/txts/AUTHORS.lua:29
 msgid "Widelands Development Team"
-msgstr ""
+msgstr "Widelands ûntwikkeltiim"
 
 #: ../../data/txts/LICENSE.lua:18
 msgid "License"
-msgstr ""
+msgstr "Lisinsje"
 
 #: ../../data/txts/LICENSE.lua:20
 msgid "Licensing information for Widelands"
-msgstr ""
+msgstr "Lisinsjeynformaasje foar Widelands"
 
 #: ../../data/txts/LICENSE.lua:23
 msgid "Copyright 2002 - 2016 by the Widelands Development Team."
-msgstr ""
+msgstr "Auteursrjocht 2002 - 2016 fan it Widelands ûntwikkeltiim."
 
 #: ../../data/txts/LICENSE.lua:24
 msgid ""
 "This game is Free and Open Source (FOSS), licensed under the GNU General "
 "Public License (GPL) V2.0."
-msgstr ""
+msgstr "Dit spultsje is fergees en hat in iepen boarne (FOSS - Free and Open Source), ûnder in GNU General Public License (GPL) V2.0 lisinsje."
 
 #: ../../data/txts/LICENSE.lua:26
 #, lua-format
 msgid ""
 "You can find more information on FOSS and the GPL by visiting the following "
 "webpage: %s"
-msgstr ""
+msgstr "Do kinst mear ynformaasje fine oer FOSS en de GPL-lisinsje op de neikommende webside: %s"
 
 #: ../../data/txts/LICENSE.lua:27
 msgid ""
@@ -86,11 +87,11 @@ msgstr ""
 
 #: ../../data/txts/README.lua:7
 msgid "Readme"
-msgstr ""
+msgstr "LêsMy"
 
 #: ../../data/txts/README.lua:12
 msgid "an open source strategy game"
-msgstr ""
+msgstr "in strategyspultsje mei in iepen boarne"
 
 #: ../../data/txts/README.lua:15
 msgid "Check out the Widelands project homepage:"
@@ -117,7 +118,7 @@ msgstr ""
 
 #: ../../data/txts/README.lua:21
 msgid "Widelands Help"
-msgstr ""
+msgstr "Widelands help"
 
 #. TRANSLATORS: %1% is a key on the keyboard
 #: ../../data/txts/README.lua:23
@@ -129,7 +130,7 @@ msgstr ""
 #. TRANSLATORS: This is a key on the keyboard
 #: ../../data/txts/README.lua:25
 msgid "F1"
-msgstr ""
+msgstr "F1"
 
 #: ../../data/txts/README.lua:28
 msgid "Reporting Bugs"
@@ -185,23 +186,23 @@ msgstr ""
 
 #: ../../data/txts/TRANSLATORS.lua:25
 msgid "Translators"
-msgstr ""
+msgstr "Oersetters"
 
 #: ../../data/txts/TRANSLATORS.lua:27
 msgid "Widelands Translators"
-msgstr ""
+msgstr "Widelands-oersetters"
 
 #: ../../data/txts/developers.lua:3
 msgid "Atlantean"
-msgstr ""
+msgstr "Atlanteanen"
 
 #: ../../data/txts/developers.lua:3
 msgid "Barbarian"
-msgstr ""
+msgstr "Barbaren"
 
 #: ../../data/txts/developers.lua:3
 msgid "Campaign Story"
-msgstr ""
+msgstr "Kampanjeferhaal"
 
 #: ../../data/txts/developers.lua:3
 msgid "Chieftains"
@@ -209,15 +210,15 @@ msgstr ""
 
 #: ../../data/txts/developers.lua:3
 msgid "Coders"
-msgstr ""
+msgstr "Koders"
 
 #: ../../data/txts/developers.lua:3
 msgid "Debian Linux"
-msgstr ""
+msgstr "Debian Linux"
 
 #: ../../data/txts/developers.lua:3
 msgid "Documentation, Help and Wiki"
-msgstr ""
+msgstr "Dokumintaasje, help en wiki"
 
 #: ../../data/txts/developers.lua:3
 msgid "Elders"
@@ -225,11 +226,11 @@ msgstr ""
 
 #: ../../data/txts/developers.lua:3
 msgid "Empire"
-msgstr ""
+msgstr "It Ryk"
 
 #: ../../data/txts/developers.lua:3
 msgid "Fedora Linux"
-msgstr ""
+msgstr "Fedora Linux"
 
 #: ../../data/txts/developers.lua:3
 msgid "Former Elders"
@@ -237,55 +238,55 @@ msgstr ""
 
 #: ../../data/txts/developers.lua:3
 msgid "FreeBSD"
-msgstr ""
+msgstr "Free BSD"
 
 #: ../../data/txts/developers.lua:3
 msgid "Graphicians"
-msgstr ""
+msgstr "Byldartiesten"
 
 #: ../../data/txts/developers.lua:3
 msgid "Graphics"
-msgstr ""
+msgstr "Bylden"
 
 #: ../../data/txts/developers.lua:3
 msgid "Homepage"
-msgstr ""
+msgstr "Webside"
 
 #: ../../data/txts/developers.lua:3
 msgid "Homepage Coders"
-msgstr ""
+msgstr "Websidekoders"
 
 #: ../../data/txts/developers.lua:3
 msgid "Mac OS X"
-msgstr ""
+msgstr "Mac OS X"
 
 #: ../../data/txts/developers.lua:3
 msgid "Mandriva Linux"
-msgstr ""
+msgstr "Mandriva Linux"
 
 #: ../../data/txts/developers.lua:3
 msgid "Maps and Missions"
-msgstr ""
+msgstr "Kaarten en missies"
 
 #: ../../data/txts/developers.lua:3
 msgid "Musicians"
-msgstr ""
+msgstr "Muzikanten"
 
 #: ../../data/txts/developers.lua:3
 msgid "Other"
-msgstr ""
+msgstr "Oars"
 
 #: ../../data/txts/developers.lua:3
 msgid "Packagers"
-msgstr ""
+msgstr "Paketten"
 
 #: ../../data/txts/developers.lua:3
 msgid "Sound"
-msgstr ""
+msgstr "Lûd"
 
 #: ../../data/txts/developers.lua:3
 msgid "Sound Effects"
-msgstr ""
+msgstr "Lûdseffekten"
 
 #: ../../data/txts/developers.lua:3
 msgid "Tongues"
@@ -293,15 +294,15 @@ msgstr ""
 
 #: ../../data/txts/developers.lua:3
 msgid "Translation"
-msgstr ""
+msgstr "Oersettingen"
 
 #: ../../data/txts/developers.lua:3
 msgid "Windows"
-msgstr ""
+msgstr "Windows"
 
 #: ../../data/txts/developers.lua:3
 msgid "ZetaOS"
-msgstr ""
+msgstr "ZetaOS"
 
 #: ../../data/txts/help/common_helptexts.lua:10
 msgid "Online Help"
@@ -317,7 +318,7 @@ msgstr ""
 
 #: ../../data/txts/help/common_helptexts.lua:17
 msgid "Introduction"
-msgstr ""
+msgstr "Yntroduksje"
 
 #: ../../data/txts/help/common_helptexts.lua:18
 msgid ""
@@ -373,28 +374,28 @@ msgstr ""
 #, lua-format
 msgctxt "hotkey"
 msgid "%s:"
-msgstr ""
+msgstr "%s:"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
 #: ../../data/txts/help/common_helptexts.lua:42
 msgctxt "hotkey"
 msgid "Space"
-msgstr ""
+msgstr "Romte"
 
 #: ../../data/txts/help/common_helptexts.lua:42
 msgid "Toggle building spaces"
-msgstr ""
+msgstr "Bouromten oan-/útsette"
 
 #. TRANSLATORS: This is an access key combination. The hotkey is 'f'
 #: ../../data/txts/help/common_helptexts.lua:49
 msgid "Toggle fullscreen (if supported by the OS)"
-msgstr ""
+msgstr "Folslein skerm oan-/útsette (wannear ûndersteund troch bestjoeringssysteem)"
 
 #. TRANSLATORS: This is an access key combination. The hotkey is 'm'
 #: ../../data/txts/help/common_helptexts.lua:56
 msgid "Toggle minimap"
-msgstr ""
+msgstr "Minikaart oan-/útsette"
 
 #: ../../data/txts/help/multiplayer_help.lua:10
 msgid "Multiplayer Game Setup"
@@ -428,7 +429,7 @@ msgstr ""
 
 #: ../../data/txts/help/multiplayer_help.lua:18
 msgid "Player settings"
-msgstr ""
+msgstr "Spilersynstellings"
 
 #: ../../data/txts/help/multiplayer_help.lua:19
 msgid ""
@@ -453,7 +454,7 @@ msgstr ""
 
 #: ../../data/txts/help/multiplayer_help.lua:23
 msgid "Closed."
-msgstr ""
+msgstr "Sletten"
 
 #: ../../data/txts/help/multiplayer_help.lua:24
 msgid ""
@@ -471,7 +472,7 @@ msgstr ""
 
 #: ../../data/txts/help/multiplayer_help.lua:27
 msgid "Map details"
-msgstr ""
+msgstr "Kaartynformaasje"
 
 #: ../../data/txts/help/multiplayer_help.lua:28
 msgid ""
@@ -650,12 +651,12 @@ msgstr ""
 #: ../../data/txts/tips/general_game.lua:40
 msgctxt "hotkey"
 msgid "1-9"
-msgstr ""
+msgstr "1-9"
 
 #: ../../data/txts/tips/general_game.lua:40
 msgctxt "hotkey"
 msgid "Ctrl+(1-9)"
-msgstr ""
+msgstr "Ctrl+(1-9)"
 
 #: ../../data/txts/tips/general_game.lua:40
 msgid "Press %1% to store important locations, then press %2% to recall them."
@@ -698,12 +699,12 @@ msgstr ""
 #: ../../data/txts/tips/general_game.lua:68
 msgctxt "hotkey"
 msgid "Ctrl+(+/-)"
-msgstr ""
+msgstr "Ctrl+(+/-)"
 
 #: ../../data/txts/tips/general_game.lua:68
 msgctxt "hotkey"
 msgid "Ctrl+0"
-msgstr ""
+msgstr "Ctrl+0"
 
 #: ../../data/txts/tips/general_game.lua:68
 msgid "Zoom in/out with the mouse wheel or %1%. Press %2% to reset the zoom."

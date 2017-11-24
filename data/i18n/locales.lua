@@ -130,7 +130,7 @@ return {
 
    fy = {
       name = "Frysk",
-      sort_name = "Frisian, Western",
+      sort_name = "Frysk",
       font = "default"
    },
 
