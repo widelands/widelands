@@ -3,12 +3,12 @@ dirname = path.dirname (__file__)
 animations = {
    idle = {
       pictures = path.list_files (dirname .. "idle_???.png"),
-      hotspot = {32, 38},
+      hotspot = {17, 19},
       fps = 10
    },
 }
-add_walking_animations (animations, "walk", dirname, "walk", {32, 38}, 10)
-add_walking_animations (animations, "walkload", dirname, "walkload", {32, 38}, 10)
+add_walking_animations (animations, "walk", dirname, "walk", {21, 25}, 15)
+add_walking_animations (animations, "walkload", dirname, "walkload", {23, 27}, 15)
 
 tribes:new_carrier_type {
    msgctxt = "frisians_worker",
@@ -21,6 +21,6 @@ tribes:new_carrier_type {
 
    buildcost = {}, -- This will give the worker the property "buildable"
 
-   ware_hotspot = {0, 24},
+   ware_hotspot = {-3, 20},
    animations = animations,
 }
