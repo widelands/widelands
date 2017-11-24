@@ -27,8 +27,7 @@
 #include "network/netrelayconnection.h"
 
 /**
- * NetHostProxy manages is a NetHostInterface implementation communicating to
- * the game clients about a relay server.
+ * Represents a host in-game, but talks through the 'wlnr' relay binary.
  */
 class NetHostProxy : public NetHostInterface {
 public:
@@ -45,7 +44,7 @@ public:
 	/**
 	 * Closes the server.
 	 */
-	~NetHostProxy();
+	~NetHostProxy() override;
 
 	// Inherited from NetHostInterface
 	bool is_connected(ConnectionId id) const override;
@@ -64,7 +63,7 @@ private:
 	 * \param name The name of the game.
 	 * \param password The password for connecting as host.
 	 */
-	explicit NetHostProxy(const std::pair<NetAddress, NetAddress>& addresses, const std::string& name, const std::string& password);
+	NetHostProxy(const std::pair<NetAddress, NetAddress>& addresses, const std::string& name, const std::string& password);
 
 	void receive_commands();
 

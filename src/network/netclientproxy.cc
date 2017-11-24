@@ -7,12 +7,10 @@
 
 std::unique_ptr<NetClientProxy> NetClientProxy::connect(const NetAddress& address, const std::string& name) {
 	std::unique_ptr<NetClientProxy> ptr(new NetClientProxy(address, name));
-	if (ptr->conn_ != nullptr && ptr->conn_->is_connected()) {
-		return ptr;
-	} else {
+	if (ptr->conn_ == nullptr || !ptr->conn_->is_connected()) {
 		ptr.reset();
-		return ptr;
 	}
+	return ptr;
 }
 
 NetClientProxy::~NetClientProxy() {
@@ -34,8 +32,9 @@ bool NetClientProxy::try_receive(RecvPacket* packet) {
 	receive_commands();
 
 	// Now check whether there is data
-	if (received_.empty())
+	if (received_.empty()) {
 		return false;
+	}
 
 	*packet = std::move(received_.front());
 	received_.pop();
@@ -49,19 +48,19 @@ void NetClientProxy::send(const SendPacket& packet) {
 
 NetClientProxy::NetClientProxy(const NetAddress& address, const std::string& name)
 	: conn_(NetRelayConnection::connect(address)) {
-
    	if (conn_ == nullptr || !conn_->is_connected()) {
-		return;
-   	}
+		   return;
+	   }
 
    	conn_->send(RelayCommand::kHello);
    	conn_->send(kRelayProtocolVersion);
    	conn_->send(name);
    	conn_->send("client");
 
-   	// Wait for answer
-	// Don't like it.
-   	while (!conn_->peek_cmd());
+	   while (!conn_->peek_cmd()) {
+		   // Wait for answer
+		   // Don't like it.
+		}
 
 	RelayCommand cmd;
 	conn_->receive(&cmd);

@@ -26,7 +26,7 @@
 #include "network/relay_protocol.h"
 
 /**
- * A wrapper around a network connection to the netrelay.
+ * A wrapper around a network connection to the 'wlnr' binary in the metaserver repo.
  * Does not contain logic but provides a buffer to read
  * uint8_t / std::string / SendPacket from the network stream.
  *
@@ -38,8 +38,16 @@
  * Note that a successful peek does not mean that the received bytes really are of the requested type, it only
  * means they could be interpreted that way. Whether the type matches is in the responsibility of the caller.
  * The idea of this methods is that the caller can check whether a complete relay command can be received
- * before starting to remove data from the buffer. Otherwise, the caller would have to maintain an own buffer.
+ * before starting to remove data from the buffer. Otherwise, the caller would have to maintain their own buffer.
  */
+// NOCOM(#codereview): I feel this API is easy to misuse by forgetting to reset
+// the peek value. Also the interface mixes network code (connect is connected,
+// close and so on) with peeking. How about you pull all the peek_* into a
+// separate nested class NetRelayConnection::Peeker and create return such a
+// peeker in a method called peek(). The peeker can not be reset, you can
+// create a new peeker though to restart at the current buffer beginning. The user must then not modify the buffer
+// while a peeker is alive - a required invariant of your API which you have now too.
+// A nested class can access private variables from its parent - just give it a pointer to NetRelayConnection and it can use its 'buffer'.
 class NetRelayConnection {
 public:
 	/**

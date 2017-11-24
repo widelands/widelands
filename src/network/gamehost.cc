@@ -412,6 +412,7 @@ struct GameHostImpl {
 	HostGameSettingsProvider hp;
 	NetworkPlayerSettingsBackend npsb;
 
+	// NOCOM(#codereview): Make this a unique_ptr?
 	LanGamePromoter* promoter;
 	std::unique_ptr<NetHostInterface> net;
 
@@ -489,6 +490,7 @@ GameHost::GameHost(const std::string& playername, bool internet)
 						InternetGaming::ref().get_local_servername(), InternetGaming::ref().relay_password());
 		if (d->net == nullptr) {
 			// Some kind of problem with the relay server. Bad luck :(
+			// NOCOM(#codereview): That is quite fatalistic. How about "Please report a bug"?
 			throw WLWarning(_("Failed to host the server!"),
 							_("Widelands could not start hosting a server.\n"
 							  "This should not happen and is unfortunately most likely "

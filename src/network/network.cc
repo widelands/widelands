@@ -202,6 +202,13 @@ uint8_t* SendPacket::get_data() const {
 
 /*** class RecvPacket ***/
 
+// NOCOM(#codereview): It is unlikley that these methods will increase performance.
+// 1: you are forcing the compiler to move. It cannot apply copy elision as an optimization anymore.
+// 2: the copying of these few bytes will not be noticable performance loss.
+// On the other side you increase code complexity with having these move operations.
+// Moving is much more complex than it looks at the surface in c++. Related
+// reading in www.stroustrup.com/move.pdf and "Effective Modern C++" by Meyers.
+// TL/DR: probably better to remove these methods again and not move RecvPacket anywhere.
 RecvPacket::RecvPacket(RecvPacket&& other) {
 	index_ = other.index_;
 	buffer.swap(other.buffer);

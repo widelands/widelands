@@ -23,12 +23,13 @@
 /**
  * Before the internet gaming relay was added, (a) NetHost and (multiple) NetClient established a direct
  * connection and exchanged data packets created and processed by the GameHost/GameClient. With the
- * introduction of the relay this changes: GameHost/GameClient still create and process the data packets.
+ * introduction of the relay this changed: GameHost/GameClient still create and process the data packets.
  * For LAN games, they still pass them to the NetHost/NetClient.
- * For internet games, the traffic is relayed by the metaserver. GameHost/GameClient pass their packets to
- * the new classes NetHostProxy/NetClientProxy. Those no longer have a direct connection but are both
- * connected to the relay on the metaserver. When they want to exchange messages, they send their packets
- * to the relay which forwards them to the intended recipient.
+ * For internet games, the traffic is relayed by the wlnr binary in the metaserver repository.
+ * GameHost/GameClient pass their packets to the new classes NetHostProxy/NetClientProxy.
+ * Those no longer have a direct connection but are both connected to the relay on the metaserver.
+ * When they want to exchange messages, they send their packets to the relay which forwards them to the
+ * intended recipient.
  * The relay only transport the packets, it does not run any game logic. The idea of this is that the
  * relay runs on an globally reachable computer (i.e. the one of the metaserver) and simplifies
  * connectivity for the users (i.e. no more port forwarding required).
@@ -61,7 +62,7 @@
  * The current version of the network protocol.
  * Protocol versions must match on all systems.
  * Used versions:
- * 1: Initial version between build 19 and build 20
+ * 1: Initial version introduced between build 19 and build 20
  */
 constexpr uint8_t kRelayProtocolVersion = 1;
 
@@ -78,7 +79,7 @@ constexpr uint8_t kRelayProtocolVersion = 1;
  *
  * Transmitting data packets:
  *
- * The main work of the relay consists of passing unstructured data packets between GameHost
+ * The main work of the relay consists of passing opaque data packets between GameHost
  * and GameClients. They send SendPacket's over the network and expect to receive RecvPacket's
  * (see network.h). Those packets basically consists of an array of uint8_t with the first two bytes
  * coding the length of the packet.
@@ -94,6 +95,10 @@ constexpr uint8_t kRelayProtocolVersion = 1;
  * as the next two bytes specify. When all parameters have been read the next command starts
  * without any separator.
  */
+
+// NOCOM(#codereview): It would be nice to get syncstream data into this somehow to make it easier to debug desyncs going forward. Do you have
+// any ideas for this?
+
 // If anyone removes a command: Please leave a comment which command with which value was removed
 enum class RelayCommand : uint8_t {
 	// Value 0 should not be used
@@ -188,6 +193,8 @@ enum class RelayCommand : uint8_t {
 	 * The relay sends this message to check for the presence of the NetHostProxy.
 	 * Any message is acceptable as response.
 	 */
+	// NOCOM(#codereview): It would be nice to always get a kPong on a kPing to make sure we can do round-trip-timing to
+	// gauge quality of connections - and whom to kick from a game should it lag.
 	kPing = 15,
 
 	/**

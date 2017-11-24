@@ -7,14 +7,11 @@
 // Not so great: Quite some duplicated code between this class and NetClient.
 
 std::unique_ptr<NetRelayConnection> NetRelayConnection::connect(const NetAddress& host) {
-
 	std::unique_ptr<NetRelayConnection> ptr(new NetRelayConnection(host));
-	if (ptr->is_connected()) {
-		return ptr;
-	} else {
+	if (!ptr->is_connected()) {
 		ptr.reset();
-		return ptr;
 	}
+	return ptr;
 }
 
 NetRelayConnection::~NetRelayConnection() {
@@ -66,6 +63,10 @@ void NetRelayConnection::receive(std::string *str) {
 
 	// Reset the peek pointer
 	peek_reset();
+
+	// NOCOM(#codereview): The next block is only compiled in release mode. You
+	// probably want #ifndef NDEBUG, which reads if not defined not debug. That
+	// is all quite backwards, but that is the standard c++ code converged on.
 	#ifdef NDEBUG
 	// Check if we can read a complete string
 	assert(peek_string());
@@ -154,6 +155,7 @@ void NetRelayConnection::receive(RecvPacket *packet) {
 	try_network_receive();
 
 	peek_reset();
+	// NOCOM(#codereview): This should probably be ifndef NDEBUG as well.
 	#ifdef NDEBUG
 	assert(peek_recvpacket());
 	peek_reset();
@@ -214,6 +216,7 @@ void NetRelayConnection::send(const uint8_t data) {
 	buf[0] = data;
 
 	boost::system::error_code ec;
+	// NOCOM(#codereview): I think you should check written also in release modes and throw if it is not as expected, also a few times below.
 #ifdef NDEBUG
 	boost::asio::write(socket_, boost::asio::buffer(buf, 1), ec);
 #else
@@ -224,6 +227,7 @@ void NetRelayConnection::send(const uint8_t data) {
 	// TODO(Notabilis): This one is an assertion of mine, I am not sure if it will hold
 	// If it doesn't, set the socket to blocking before writing
 	// If it does, remove this comment after build 20
+	// NOCOM(#codereview): most people play release builds where this is not compiled in. Turn into an if() with throwing an wexception.
 	assert(ec != boost::asio::error::would_block);
 	assert(written == 1 || ec);
 	if (ec) {

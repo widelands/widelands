@@ -7,12 +7,10 @@
 
 std::unique_ptr<NetHostProxy> NetHostProxy::connect(const std::pair<NetAddress, NetAddress>& addresses, const std::string& name, const std::string& password) {
 	std::unique_ptr<NetHostProxy> ptr(new NetHostProxy(addresses, name, password));
-	if (ptr->conn_ != nullptr && ptr->conn_->is_connected()) {
-		return ptr;
-	} else {
+	if (ptr->conn_ == nullptr || !ptr->conn_->is_connected()) {
 		ptr.reset();
-		return ptr;
 	}
+	return ptr;
 }
 
 NetHostProxy::~NetHostProxy() {
@@ -218,6 +216,8 @@ void NetHostProxy::receive_commands() {
 				// Kind of hacky, but create a new Client object inplace.
 				// insert() and emplace() do not work since they call the (deleted) copy constructor
 				// (operator[] returns the object when it exists, otherwise a new one is created)
+				// NOCOM(#codereview): You can and should use std::piecewise_construct here and get rid of the default constructor for client:
+				// https://stackoverflow.com/a/14816514
 				assert(clients_.count(id) == 0);
                 clients_[id];
                 assert(clients_.count(id) == 1);
