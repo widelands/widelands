@@ -323,7 +323,6 @@ tribes:new_tribe {
    geologist = "empire_geologist",
    soldier = "empire_soldier",
    ship = "empire_ship",
-   headquarters = "empire_headquarters",
    port = "empire_port",
    barracks = "empire_barracks",
    ironore = "iron_ore",

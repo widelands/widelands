@@ -19,6 +19,8 @@
 
 #include "ui_fsmenu/loadgame.h"
 
+#include <memory>
+
 #include "base/i18n.h"
 #include "wui/gamedetails.h"
 
@@ -114,7 +116,7 @@ void FullscreenMenuLoadGame::clicked_ok() {
 		return;
 	}
 
-	const SavegameData* gamedata = load_or_save_.entry_selected();
+	std::unique_ptr<SavegameData> gamedata = load_or_save_.entry_selected();
 	if (gamedata && gamedata->errormessage.empty()) {
 		filename_ = gamedata->filename;
 		end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kOk);
