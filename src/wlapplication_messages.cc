@@ -125,10 +125,10 @@ void show_usage(const std::string& build_id, const std::string& build_type) {
 	          << endl
 	          << _(" --xres=[...]         Width of the window in pixel.") << endl
 	          << _(" --yres=[...]         Height of the window in pixel.") << endl
+	          << endl
 	          /** TRANSLATORS: You may translate true/false, also as on/off or yes/no, but */
 	          /** TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the widelands
 	             textdomain */
-	          << endl
 	          << _("Options for the internal window manager:") << endl
 	          << _(" --animate_map_panning=[yes|no]\n"
 	               "                      Should automatic map movements be animated.")
