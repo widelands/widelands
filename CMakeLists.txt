@@ -8,6 +8,7 @@ option(OPTION_USE_GLBINDING "Use glbinding instead of GLEW" OFF)
 option(OPTION_GLEW_STATIC "Use static GLEW Library" OFF)
 option(OPTION_BUILD_WEBSITE_TOOLS "Build website-related tools" ON)
 option(OPTION_BUILD_TRANSLATIONS "Build translations" ON)
+option(OPTION_ASAN "Build with AddressSanitizer" ON)
 
 if (CMAKE_SOURCE_DIR STREQUAL CMAKE_BINARY_DIR)
   message(FATAL_ERROR "Build directory and source directory must not be the same.")
@@ -36,6 +37,10 @@ elseif("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
 else()
   message(WARNING "You are using an unsupported compiler! Supported are Clang and GCC.")
 endif()
+
+if(OPTION_ASAN)
+  message(STATUS "Using AddressSanitizer http://clang.llvm.org/docs/AddressSanitizer.html")
+endif(OPTION_ASAN)
 
 SET(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${CMAKE_CURRENT_SOURCE_DIR}/cmake/Modules)
 
@@ -115,6 +120,13 @@ endif()
 
 wl_add_flag(WL_GENERIC_CXX_FLAGS "-std=c++11")
 
+if(OPTION_ASAN)
+  # See http://clang.llvm.org/docs/AddressSanitizer.html
+  wl_add_flag(WL_COMPILE_DIAGNOSTICS "-fsanitize=address")
+  wl_add_flag(WL_COMPILE_DIAGNOSTICS "-fno-omit-frame-pointer")
+  set (CMAKE_EXE_LINKER_FLAGS "-fsanitize=address" CACHE STRING "Set by widelands CMakeLists.txt" FORCE)
+endif(OPTION_ASAN)
+
 if("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
   wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Weverything")
 
@@ -143,6 +155,8 @@ if("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
   wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Werror=non-pod-varargs")
 
   wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Qunused-arguments")
+  wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Winconsistent-missing-override")
+  wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wint-to-void-pointer-cast")
 else()
   # Assuming GCC 4.8 or higher.
   if(WIN32)
