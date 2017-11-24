@@ -513,7 +513,7 @@ void FullscreenMenuOptions::update_language_stats(bool include_system_lang) {
 				Section& s = prof.get_safe_section("global");
 				const int total = s.get_int("total");
 				s = prof.get_safe_section(locale);
-				percent = floor(100.f * s.get_int("translated") / total);
+				percent = static_cast<int>(floor(100 * s.get_int("translated") / total));
 				if (percent == 100) {
 					message =
 					   /** TRANSLATORS: %s = language name */

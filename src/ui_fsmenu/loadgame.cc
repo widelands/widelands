@@ -26,7 +26,6 @@
 
 FullscreenMenuLoadGame::FullscreenMenuLoadGame(Widelands::Game& g,
                                                GameSettingsProvider* gsp,
-                                               GameController* gc,
                                                bool is_replay)
    : FullscreenMenuLoadMapOrGame(),
 
@@ -49,10 +48,7 @@ FullscreenMenuLoadGame::FullscreenMenuLoadGame(Widelands::Game& g,
                    GameDetails::Style::kFsMenu,
                    true),
 
-     is_replay_(is_replay),
-     game_(g),
-     settings_(gsp),
-     ctrl_(gc) {
+     is_replay_(is_replay) {
 
 	// Make sure that we have some space to work with.
 	main_box_.set_size(get_w(), get_w());
