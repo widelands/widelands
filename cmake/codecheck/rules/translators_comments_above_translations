@@ -56,7 +56,40 @@ def evaluate_matches(lines, fn):
 
 # File this is called on is always called testdir/test.h
 forbidden = [
+    r"""/** TRANSLATORS: some comment */
+    line with some other stuff
+    _("translateme");
+    """,
+    r"""/** TRANSLATORS: some
+     comment */
+    line with some other stuff
+    _("translateme");
+    """,
+    r"""/** TRANSLATORS: some comment */
+    line with some other stuff
+    gettext("translateme whatever";
+    """,
+    r"""/** TRANSLATORS: some
+     comment */
+
+    gettext("translateme whatever";
+    """,
+
 ]
 
 allowed = [
+    r"""/** TRANSLATORS: some comment */
+    _("translateme");
+    """,
+    r"""/** TRANSLATORS: some
+     comment */
+    _("translateme");
+    """,
+    r"""/** TRANSLATORS: some comment */
+    gettext("translateme whatever";
+    """,
+    r"""/** TRANSLATORS: some
+     comment */
+    gettext("translateme whatever";
+    """,
 ]
