@@ -424,7 +424,12 @@ void Tribes::postload_calculate_trainingsites_proportions() {
 
 		// Now adjust for trainingsites that didn't have their max_percent set
 		if (trainingsites_without_percent > 0) {
-			const int percent_to_use = std::ceil((100 - used_percent) / trainingsites_without_percent);
+			int percent_to_use = std::ceil((100 - used_percent) / trainingsites_without_percent);
+			// We sometimes get below 100% in spite of the ceil call above.
+			// A total sum a bit above 100% is fine though, so we increment until it's big enough.
+			while ((used_percent + percent_to_use * trainingsites_without_percent) < 100) {
+				++percent_to_use;
+			}
 			log("%s trainingsites: Assigning %d%% to each of the remaining %d sites\n", tribe_descr->name().c_str(), percent_to_use, trainingsites_without_percent);
 			if (percent_to_use < 1) {
 				throw GameDataError("%s: Training sites without predefined proportions add up to < 1%% and "
