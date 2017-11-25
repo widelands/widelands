@@ -246,15 +246,6 @@ tribes:new_tribe {
       -- Partially Finished Buildings - these are the same 2 buildings for all tribes
       "constructionsite",
       "dismantlesite",
-	  
-	  --custom entities
-      "empire_farm1",
-      "empire_mill1",
-      "empire_well2",
-      "empire_lumberjacks_house2",
-      "empire_foresters_house2",
-      "empire_trainingcamp1",
-      "empire_brewery1",
    },
 
    ship_names = {
