@@ -164,7 +164,7 @@ void Fleet::find_other_fleet(EditorGameBase& egbase) {
 						    dock->dockpoints_.front().y);
 					}
 					if (dock->get_fleet() != this && dock->get_owner() == get_owner()) {
-						dock->get_fleet()->merge(egbase, this);
+						merge(egbase, dock->get_fleet());
 						return;
 					}
 				}
@@ -178,7 +178,7 @@ void Fleet::find_other_fleet(EditorGameBase& egbase) {
 			if (upcast(Ship, ship, bob)) {
 				if (ship->get_fleet() != nullptr && ship->get_fleet() != this &&
 				    ship->get_owner() == get_owner()) {
-					ship->get_fleet()->merge(egbase, this);
+					merge(egbase, ship->get_fleet());
 					return;
 				}
 			}
@@ -190,11 +190,6 @@ void Fleet::find_other_fleet(EditorGameBase& egbase) {
  * Merge the @p other fleet into this fleet, and remove the other fleet.
  */
 void Fleet::merge(EditorGameBase& egbase, Fleet* other) {
-	if (ports_.empty() && !other->ports_.empty()) {
-		other->merge(egbase, this);
-		return;
-	}
-
 	while (!other->ships_.empty()) {
 		Ship* ship = other->ships_.back();
 		other->ships_.pop_back();
