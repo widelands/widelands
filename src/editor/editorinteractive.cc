@@ -73,7 +73,8 @@ EditorInteractive::EditorInteractive(Widelands::EditorGameBase& e)
      undo_(nullptr),
      redo_(nullptr),
      tools_(new Tools()),
-     history_(new EditorHistory(*undo_, *redo_)) {
+     history_(nullptr)  // history needs the undo/redo buttons
+{
 	add_toolbar_button("wui/menus/menu_toggle_menu", "menu", _("Main Menu"), &mainmenu_, true);
 	mainmenu_.open_window = [this] { new EditorMainMenu(*this, mainmenu_); };
 
@@ -125,9 +126,11 @@ EditorInteractive::EditorInteractive(Widelands::EditorGameBase& e)
 	toolbar()->add_space(15);
 
 	undo_ = add_toolbar_button("wui/editor/editor_undo", "undo", _("Undo"));
-	undo_->sigclicked.connect([this] { history_->undo_action(egbase().world()); });
-
 	redo_ = add_toolbar_button("wui/editor/editor_redo", "redo", _("Redo"));
+
+	history_.reset(new EditorHistory(*undo_, *redo_));
+
+	undo_->sigclicked.connect([this] { history_->undo_action(egbase().world()); });
 	redo_->sigclicked.connect([this] { history_->redo_action(egbase().world()); });
 
 	toolbar()->add_space(15);
@@ -619,10 +622,10 @@ void EditorInteractive::run_editor(const std::string& filename, const std::strin
 				egbase.mutable_map()->create_empty_map(
 				   egbase.world(), 64, 64, 0,
 				   /** TRANSLATORS: Default name for new map */
-				   _("No Name"),
-				   /** TRANSLATORS: Map author name when it hasn't been set yet */
-				   g_options.pull_section("global").get_string(
-				      "realname", pgettext("author_name", "Unknown")));
+				   _("No Name"), g_options.pull_section("global").get_string(
+				                    "realname",
+				                    /** TRANSLATORS: Map author name when it hasn't been set yet */
+				                    pgettext("author_name", "Unknown")));
 
 				load_all_tribes(&egbase, &loader_ui);
 

@@ -82,7 +82,7 @@ void Flag::load_finish(EditorGameBase& egbase) {
 	auto should_be_deleted = [&egbase, this](const OPtr<Worker>& r) {
 		Worker& worker = *r.get(egbase);
 		Bob::State const* const state = worker.get_state(Worker::taskWaitforcapacity);
-		if (!state) {
+		if (state == nullptr) {
 			log("WARNING: worker %u is in the capacity wait queue of flag %u but "
 			    "does not have a waitforcapacity task! Removing from queue.\n",
 			    worker.serial(), serial());

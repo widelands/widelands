@@ -145,16 +145,18 @@ void GameInteractivePlayerPacket::write(FileSystem& fs, Game& game, MapObjectSav
 	}
 
 	// Display flags
-	fw.unsigned_32(ibase ? ibase->get_display_flags() : 0);
+	fw.unsigned_32(ibase != nullptr ? ibase->get_display_flags() : 0);
 
 	// Map landmarks
-	const std::vector<QuickNavigation::Landmark>& landmarks = ibase->landmarks();
-	fw.unsigned_8(landmarks.size());
-	for (const QuickNavigation::Landmark& landmark : landmarks) {
-		fw.unsigned_8(landmark.set ? 1 : 0);
-		fw.float_32(landmark.view.viewpoint.x);
-		fw.float_32(landmark.view.viewpoint.y);
-		fw.float_32(landmark.view.zoom);
+	if (ibase != nullptr) {
+		const std::vector<QuickNavigation::Landmark>& landmarks = ibase->landmarks();
+		fw.unsigned_8(landmarks.size());
+		for (const QuickNavigation::Landmark& landmark : landmarks) {
+			fw.unsigned_8(landmark.set ? 1 : 0);
+			fw.float_32(landmark.view.viewpoint.x);
+			fw.float_32(landmark.view.viewpoint.y);
+			fw.float_32(landmark.view.zoom);
+		}
 	}
 
 	fw.write(fs, "binary/interactive_player");
