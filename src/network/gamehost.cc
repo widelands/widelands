@@ -487,7 +487,7 @@ GameHost::GameHost(const std::string& playername, bool internet)
 	d->localplayername = playername;
 
 	// create a listening socket
-	d->net = NetHost::listen(WIDELANDS_PORT);
+	d->net = NetHost::listen(kWidelandsLanPort);
 	if (d->net == nullptr) {
 		// This might happen when the widelands socket is already in use
 		throw WLWarning(_("Failed to start the server!"),

@@ -28,7 +28,7 @@ print_help () {
     echo " "
     echo "The following options are available:"
     echo " "
-    echo "-a or --help          Print this help."
+    echo "-h or --help          Print this help."
     echo " "
     echo " "
     echo "Omission options:"

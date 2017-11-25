@@ -278,7 +278,7 @@ FullscreenMenuOptions::FullscreenMenuOptions(OptionsCtrl::OptionsStruct opt)
 	apply_.sigclicked.connect(boost::bind(&FullscreenMenuOptions::clicked_apply, this));
 	ok_.sigclicked.connect(boost::bind(&FullscreenMenuOptions::clicked_ok, this));
 
-	/** TRANSLATORS Options: Save game automatically every: */
+	/** TRANSLATORS: Options: Save game automatically every: */
 	sb_autosave_.add_replacement(0, _("Off"));
 
 	// Fill in data

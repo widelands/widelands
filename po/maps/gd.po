@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-10-09 18:20+0000\n"
-"PO-Revision-Date: 2017-10-09 19:25+0000\n"
+"POT-Creation-Date: 2017-11-18 10:17+0000\n"
+"PO-Revision-Date: 2017-11-18 12:33+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Gaelic, Scottish (http://www.transifex.com/widelands/widelands/language/gd/)\n"
 "MIME-Version: 1.0\n"
@@ -543,7 +543,7 @@ msgstr "Cha do fhreagair na diathan baogaideach ri ar n-ùrnaighean. Rinn solas 
 
 #: ../../data/maps/Last_Bastion_v2.wmf/elemental:11
 msgid "Don’t forget to take care of your timber supplies, you’ll need them."
-msgstr " Na dìochuimhnich fiodh gu leòr a thoirt leat on a bhios feum agad air."
+msgstr "Na dìochuimhnich fiodh gu leòr a thoirt leat on a bhios feum agad air."
 
 #: ../../data/maps/Last_Survivors.wmf/elemental:8
 msgid "Last Survivors"
