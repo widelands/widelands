@@ -156,6 +156,8 @@ public:
 		return ship_names_;
 	}
 
+	void add_building(const std::string& buildingname);
+
 private:
 	// Helper function for adding a special worker type (carriers etc.)
 	DescriptionIndex add_special_worker(const std::string& workername);
