@@ -115,8 +115,8 @@ protected:
 	void act(Game&, uint32_t data) override;
 
 private:
-	void find_other_fleet(EditorGameBase& egbase);
-	void merge(EditorGameBase& egbase, Fleet* other);
+	bool find_other_fleet(EditorGameBase& egbase);
+	bool merge(EditorGameBase& egbase, Fleet* other);
 	void check_merge_economy();
 	void connect_port(EditorGameBase& egbase, uint32_t idx);
 
