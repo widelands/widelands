@@ -35,10 +35,7 @@ function farm_plans()
    local count = 0
    while not farmclick do
       if mv.windows.building_window and not mv.windows.building_window.buttons.dismantle and not mv.windows.building_window.tabs.wares and mv.windows.building_window.tabs.workers then
-	     --sleep(100)
-		 --if (mv.windows.building_window and not mv.windows.building_window.buttons.dismantle) and (mv.windows.building_window.tabs.workers and not mv.windows.building_window.tabs.wares) then
             farmclick = true
-		 --end
       end
 	  count = count + 1
 	  if count == 1201 then 
@@ -72,7 +69,6 @@ end
 function clear_roads()
    local o = add_campaign_objective(obj_clear_roads)
    local cleared = false
-   --local count
    
    while cleared == false do 
    cleared = true

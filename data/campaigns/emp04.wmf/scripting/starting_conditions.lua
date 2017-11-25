@@ -1,10 +1,15 @@
+-- =======================================================================
+--                                 Player 3
+-- =======================================================================
+-- Player 3 (Vesta) will be introduced to the game when discovered so for the beginning we fornbid everything
+-- and do not place any buildings
 
 p3:forbid_buildings("all")
 
 -- =======================================================================
 --                                 Player 1
 -- =======================================================================
---p1.see_all = true
+
 p1:forbid_buildings("all")
 p1:allow_buildings{"empire_lumberjacks_house"}
 
