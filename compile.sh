@@ -20,22 +20,90 @@ echo "  https://bugs.launchpad.net/widelands"
 echo " "
 echo "###########################################################"
 echo " "
+print_help () {
+    # Print help for our options
+    echo "Per default, this script will create a full debug build."
+    echo "Unless explicitly switched off, AddressSanitizer will"
+    echo "be used as well with debug builds."
+    echo " "
+    echo "The following options are available:"
+    echo " "
+    echo "-h or --help          Print this help."
+    echo " "
+    echo " "
+    echo "Omission options:"
+    echo " "
+    echo "-w or --no-website    Omit building of website binaries."
+    echo " "
+    echo "-t or --no-translations"
+    echo "                      Omit building translations."
+    echo " "
+    echo "-a or --no-asan       If in debug mode, switch off the AddressSanitizer."
+    echo "                      Release builds are created without AddressSanitizer"
+    echo "                      per default."
+    echo " "
+    echo "Compiler options:"
+    echo " "
+    echo "-r or --release       Create a release build. If this is not set,"
+    echo "                      a debug build will be created."
+    echo " "
+    echo "--gcc                 Try to build with GCC rather than the system default."
+    echo "                      If you built with Clang before, you will have to clean"
+    echo "                      your build directory before switching compilers."
+    echo "                      Expects that the compiler is in '/usr/bin/'."
+    echo " "
+    echo "--clang               Try to build with Clang rather than the system default."
+    echo "                      If you built with GCC before, you will have to clean"
+    echo "                      your build directory before switching compilers."
+    echo "                      Expects that the compiler is in '/usr/bin/'."
+    echo " "
+    echo "For the AddressSanitizer output to be useful, some systems (e.g. Ubuntu Linux)"
+    echo "require that you set a symlink to the symbolizer. For example:"
+    echo " "
+    echo "    sudo ln -s /usr/bin/llvm-symbolizer-3.8 /usr/bin/llvm-symbolizer"
+    echo " "
+    echo "More info about AddressSanitizer at:"
+    echo " "
+    echo "    http://clang.llvm.org/docs/AddressSanitizer.html"
+    echo " "
+    return
+  }
+
 
 
 ## Option to avoid building and linking website-related executables.
 BUILD_WEBSITE="ON"
 BUILD_TRANSLATIONS="ON"
-BUILDTYPE="Debug"
+BUILD_TYPE="Debug"
+USE_ASAN="ON"
+COMPILER="default"
 while [ "$1" != "" ]; do
   if [ "$1" = "--no-website" -o "$1" = "-w" ]; then
     BUILD_WEBSITE="OFF"
   elif [ "$1" = "--release" -o "$1" = "-r" ]; then
-    BUILDTYPE="Release"
+    BUILD_TYPE="Release"
+    USE_ASAN="OFF"
   elif [ "$1" = "--no-translations" -o "$1" = "-t" ]; then
     BUILD_TRANSLATIONS="OFF"
+  elif [ "$1" = "--no-asan" -o "$1" = "-a" ]; then
+    USE_ASAN="OFF"
+  elif [ "$1" = "--gcc"]; then
+    if [ -f /usr/bin/gcc -a /usr/bin/g++ ]; then
+      export CC=/usr/bin/gcc
+      export CXX=/usr/bin/g++
+    fi
+  elif [ "$1" = "--clang" ]; then
+    if [ -f /usr/bin/clang -a /usr/bin/clang++ ]; then
+      export CC=/usr/bin/clang
+      export CXX=/usr/bin/clang++
+    fi
+  elif [ "$1" = "--help" -o "$1" = "-h" ]; then
+    print_help
+    exit 0
   fi
   shift
 done
+
 if [ $BUILD_WEBSITE = "ON" ]; then
   echo "A complete build will be created."
   echo "You can use -w or --no-website to omit building and"
@@ -55,12 +123,24 @@ fi
 echo " "
 echo "###########################################################"
 echo " "
-if [ $BUILDTYPE = "Release" ]; then
+if [ $BUILD_TYPE = "Release" ]; then
   echo "Creating a Release build."
 else
   echo "Creating a Debug build. Use -r to create a Release build."
 fi
 echo " "
+if [ $USE_ASAN = "ON" ]; then
+  echo "Will build with AddressSanitizer."
+  echo "http://clang.llvm.org/docs/AddressSanitizer.html"
+  echo "You can use -a or --no-asan to switch it off."
+else
+  echo "Will build without AddressSanitizer."
+fi
+echo " "
+echo "###########################################################"
+echo " "
+echo "Call 'compile.sh -h' or 'compile.sh --help' for help."
+echo ""
 echo "For instructions on how to adjust options and build with"
 echo "CMake, please take a look at"
 echo "https://wl.widelands.org/wiki/BuildingWidelands/."
@@ -114,9 +194,9 @@ buildtool="" #Use ninja by default, fall back to make if that is not available.
   # Compile Widelands
   compile_widelands () {
     if [ $buildtool = "ninja" ] || [ $buildtool = "ninja-build" ] ; then
-      cmake -G Ninja .. -DCMAKE_BUILD_TYPE=$BUILDTYPE -DOPTION_BUILD_WEBSITE_TOOLS=$BUILD_WEBSITE -DOPTION_BUILD_TRANSLATIONS=$BUILD_TRANSLATIONS
+      cmake -G Ninja .. -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DOPTION_BUILD_WEBSITE_TOOLS=$BUILD_WEBSITE -DOPTION_BUILD_TRANSLATIONS=$BUILD_TRANSLATIONS -DOPTION_ASAN=$USE_ASAN
     else
-      cmake .. -DCMAKE_BUILD_TYPE=$BUILDTYPE -DOPTION_BUILD_WEBSITE_TOOLS=$BUILD_WEBSITE -DOPTION_BUILD_TRANSLATIONS=$BUILD_TRANSLATIONS
+      cmake .. -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DOPTION_BUILD_WEBSITE_TOOLS=$BUILD_WEBSITE -DOPTION_BUILD_TRANSLATIONS=$BUILD_TRANSLATIONS -DOPTION_ASAN=$USE_ASAN
     fi
 
     $buildtool
@@ -203,7 +283,7 @@ echo "###########################################################"
 echo "# Congratulations! Widelands has been built successfully  #"
 echo "# with the following settings:                            #"
 echo "#                                                         #"
-if [ $BUILDTYPE = "Release" ]; then
+if [ $BUILD_TYPE = "Release" ]; then
   echo "# - Release build                                         #"
 else
   echo "# - Debug build                                           #"
