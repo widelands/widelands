@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-11-11 07:08+0000\n"
-"PO-Revision-Date: 2017-11-11 07:11+0000\n"
+"POT-Creation-Date: 2017-11-18 10:17+0000\n"
+"PO-Revision-Date: 2017-11-18 10:19+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Kinyarwanda (http://www.transifex.com/widelands/widelands/language/rw/)\n"
 "MIME-Version: 1.0\n"
@@ -214,7 +214,7 @@ msgstr ""
 msgid "Loading tribes"
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:77
+#: ../../src/editor/editorinteractive.cc:78
 #: ../../src/editor/ui_menus/main_menu.cc:43
 #: ../../src/wui/game_options_menu.cc:66
 #: ../../src/wui/interactive_player.cc:208
@@ -222,95 +222,95 @@ msgstr ""
 msgid "Main Menu"
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:81
+#: ../../src/editor/editorinteractive.cc:82
 #: ../../src/editor/ui_menus/tool_menu.cc:45
 msgid "Tools"
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:85
+#: ../../src/editor/editorinteractive.cc:86
 #: ../../src/editor/ui_menus/toolsize_menu.cc:40
 msgid "Tool Size"
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:89
+#: ../../src/editor/editorinteractive.cc:90
 #: ../../src/ui_fsmenu/launch_mpg.cc:144
 msgid "Players"
 msgstr "abakinnyi"
 
-#: ../../src/editor/editorinteractive.cc:98
+#: ../../src/editor/editorinteractive.cc:99
 #: ../../src/wui/interactive_player.cc:224
 #: ../../src/wui/interactive_spectator.cc:75
 msgid "Show Building Spaces (on/off)"
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:101
+#: ../../src/editor/editorinteractive.cc:102
 msgid "Show Immovables (on/off)"
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:105
+#: ../../src/editor/editorinteractive.cc:106
 msgid "Show Animals (on/off)"
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:109
+#: ../../src/editor/editorinteractive.cc:110
 msgid "Show Resources (on/off)"
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:116
+#: ../../src/editor/editorinteractive.cc:117
 #: ../../src/wui/interactive_player.cc:220
 #: ../../src/wui/interactive_spectator.cc:71
 msgid "Minimap"
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:119
+#: ../../src/editor/editorinteractive.cc:120
 #: ../../src/wui/interactive_player.cc:226
 #: ../../src/wui/interactive_spectator.cc:78
 msgid "Reset zoom"
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:127
+#: ../../src/editor/editorinteractive.cc:128
 msgid "Undo"
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:130
+#: ../../src/editor/editorinteractive.cc:129
 msgid "Redo"
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:135
+#: ../../src/editor/editorinteractive.cc:138
 #: ../../src/wui/buildingwindow.cc:330
 msgid "Help"
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:163
+#: ../../src/editor/editorinteractive.cc:166
 msgid "Unsupported format"
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:164
+#: ../../src/editor/editorinteractive.cc:167
 #, c-format
 msgid ""
 "Widelands could not load the file \"%s\". The file format seems to be "
 "incompatible."
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:177 ../../src/logic/game.cc:215
+#: ../../src/editor/editorinteractive.cc:180 ../../src/logic/game.cc:215
 #: ../../src/logic/game.cc:265
 msgid "Creating players"
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:225
+#: ../../src/editor/editorinteractive.cc:228
 msgid "Unsaved Map"
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:226
+#: ../../src/editor/editorinteractive.cc:229
 msgid "The map has not been saved, do you really want to quit?"
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:618
+#: ../../src/editor/editorinteractive.cc:621
 #: ../../src/editor/ui_menus/main_menu_new_map.cc:144
 msgid "Creating empty map…"
 msgstr ""
 
 #. * TRANSLATORS: Default name for new map
-#: ../../src/editor/editorinteractive.cc:622
+#: ../../src/editor/editorinteractive.cc:625
 #: ../../src/editor/ui_menus/main_menu_new_map.cc:151
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:532
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:134
@@ -318,7 +318,7 @@ msgstr ""
 msgid "No Name"
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:625
+#: ../../src/editor/editorinteractive.cc:628
 #: ../../src/editor/ui_menus/main_menu_new_map.cc:152
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:533
 #: ../../src/logic/map.h:164
@@ -326,7 +326,7 @@ msgctxt "author_name"
 msgid "Unknown"
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:632
+#: ../../src/editor/editorinteractive.cc:635
 #, c-format
 msgid "Loading map “%s”…"
 msgstr ""
@@ -969,7 +969,7 @@ msgstr ""
 msgid "Current Size: %u"
 msgstr ""
 
-#: ../../src/logic/editor_game_base.cc:215
+#: ../../src/logic/editor_game_base.cc:214
 msgid "Loading graphics"
 msgstr ""
 
@@ -2781,17 +2781,18 @@ msgstr ""
 msgid "Try system language"
 msgstr ""
 
-#: ../../src/ui_fsmenu/options.cc:519
+#. * TRANSLATORS: %s = language name
+#: ../../src/ui_fsmenu/options.cc:520
 #, c-format
 msgid "The translation into %s is complete."
 msgstr ""
 
-#: ../../src/ui_fsmenu/options.cc:521
-#, c-format
-msgid "The translation into %s is %d%% complete."
+#. * TRANSLATORS: %1% = language name, %2% = percentage
+#: ../../src/ui_fsmenu/options.cc:523
+msgid "The translation into %1% is %2%%% complete."
 msgstr ""
 
-#: ../../src/ui_fsmenu/options.cc:535
+#: ../../src/ui_fsmenu/options.cc:537
 #, c-format
 msgid "If you wish to help us translate, please visit %s"
 msgstr ""
@@ -4113,7 +4114,7 @@ msgctxt "unit_generic"
 msgid "minutes"
 msgstr ""
 
-#: ../../src/wui/plot_area.cc:329
+#: ../../src/wui/plot_area.cc:331
 msgid "game"
 msgstr ""
 

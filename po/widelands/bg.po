@@ -12,8 +12,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-11-11 07:38+0000\n"
-"PO-Revision-Date: 2017-11-11 20:48+0000\n"
+"POT-Creation-Date: 2017-11-18 10:17+0000\n"
+"PO-Revision-Date: 2017-11-19 09:35+0000\n"
 "Last-Translator: Любомир Василев\n"
 "Language-Team: Bulgarian (http://www.transifex.com/widelands/widelands/language/bg/)\n"
 "MIME-Version: 1.0\n"
@@ -218,7 +218,7 @@ msgstr "дек"
 msgid "Loading tribes"
 msgstr "Зареждане на племена"
 
-#: ../../src/editor/editorinteractive.cc:77
+#: ../../src/editor/editorinteractive.cc:78
 #: ../../src/editor/ui_menus/main_menu.cc:43
 #: ../../src/wui/game_options_menu.cc:66
 #: ../../src/wui/interactive_player.cc:208
@@ -226,95 +226,95 @@ msgstr "Зареждане на племена"
 msgid "Main Menu"
 msgstr "Главно меню"
 
-#: ../../src/editor/editorinteractive.cc:81
+#: ../../src/editor/editorinteractive.cc:82
 #: ../../src/editor/ui_menus/tool_menu.cc:45
 msgid "Tools"
 msgstr "Инструменти"
 
-#: ../../src/editor/editorinteractive.cc:85
+#: ../../src/editor/editorinteractive.cc:86
 #: ../../src/editor/ui_menus/toolsize_menu.cc:40
 msgid "Tool Size"
 msgstr "Размер на инструмента"
 
-#: ../../src/editor/editorinteractive.cc:89
+#: ../../src/editor/editorinteractive.cc:90
 #: ../../src/ui_fsmenu/launch_mpg.cc:144
 msgid "Players"
 msgstr "Играчи"
 
-#: ../../src/editor/editorinteractive.cc:98
+#: ../../src/editor/editorinteractive.cc:99
 #: ../../src/wui/interactive_player.cc:224
 #: ../../src/wui/interactive_spectator.cc:75
 msgid "Show Building Spaces (on/off)"
 msgstr "Показване на местата за строеж (вкл/изкл.)"
 
-#: ../../src/editor/editorinteractive.cc:101
+#: ../../src/editor/editorinteractive.cc:102
 msgid "Show Immovables (on/off)"
 msgstr "Показване на неподвижните обекти (вкл/изкл.)"
 
-#: ../../src/editor/editorinteractive.cc:105
+#: ../../src/editor/editorinteractive.cc:106
 msgid "Show Animals (on/off)"
 msgstr "Показване на животните (вкл/изкл.)"
 
-#: ../../src/editor/editorinteractive.cc:109
+#: ../../src/editor/editorinteractive.cc:110
 msgid "Show Resources (on/off)"
 msgstr "Показване на ресурсите (вкл/изкл.)"
 
-#: ../../src/editor/editorinteractive.cc:116
+#: ../../src/editor/editorinteractive.cc:117
 #: ../../src/wui/interactive_player.cc:220
 #: ../../src/wui/interactive_spectator.cc:71
 msgid "Minimap"
 msgstr "Миникарта"
 
-#: ../../src/editor/editorinteractive.cc:119
+#: ../../src/editor/editorinteractive.cc:120
 #: ../../src/wui/interactive_player.cc:226
 #: ../../src/wui/interactive_spectator.cc:78
 msgid "Reset zoom"
 msgstr "Връщане към нормалното ниво на приближение"
 
-#: ../../src/editor/editorinteractive.cc:127
+#: ../../src/editor/editorinteractive.cc:128
 msgid "Undo"
 msgstr "Отмяна"
 
-#: ../../src/editor/editorinteractive.cc:130
+#: ../../src/editor/editorinteractive.cc:129
 msgid "Redo"
 msgstr "Повтаряне"
 
-#: ../../src/editor/editorinteractive.cc:135
+#: ../../src/editor/editorinteractive.cc:138
 #: ../../src/wui/buildingwindow.cc:330
 msgid "Help"
 msgstr "Помощ"
 
-#: ../../src/editor/editorinteractive.cc:163
+#: ../../src/editor/editorinteractive.cc:166
 msgid "Unsupported format"
 msgstr "Неподдържан формат"
 
-#: ../../src/editor/editorinteractive.cc:164
+#: ../../src/editor/editorinteractive.cc:167
 #, c-format
 msgid ""
 "Widelands could not load the file \"%s\". The file format seems to be "
 "incompatible."
 msgstr "Widelands не успя да зареди файла „%s“. Форматът на файла изглежда несъвместим."
 
-#: ../../src/editor/editorinteractive.cc:177 ../../src/logic/game.cc:215
+#: ../../src/editor/editorinteractive.cc:180 ../../src/logic/game.cc:215
 #: ../../src/logic/game.cc:265
 msgid "Creating players"
 msgstr "Създаване на играчи"
 
-#: ../../src/editor/editorinteractive.cc:225
+#: ../../src/editor/editorinteractive.cc:228
 msgid "Unsaved Map"
 msgstr "Незапазена карта"
 
-#: ../../src/editor/editorinteractive.cc:226
+#: ../../src/editor/editorinteractive.cc:229
 msgid "The map has not been saved, do you really want to quit?"
 msgstr "Картата не е запазена, сигурни ли сте, че искате да излезете?"
 
-#: ../../src/editor/editorinteractive.cc:618
+#: ../../src/editor/editorinteractive.cc:621
 #: ../../src/editor/ui_menus/main_menu_new_map.cc:144
 msgid "Creating empty map…"
 msgstr "Създаване на празна карта…"
 
 #. * TRANSLATORS: Default name for new map
-#: ../../src/editor/editorinteractive.cc:622
+#: ../../src/editor/editorinteractive.cc:625
 #: ../../src/editor/ui_menus/main_menu_new_map.cc:151
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:532
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:134
@@ -322,7 +322,7 @@ msgstr "Създаване на празна карта…"
 msgid "No Name"
 msgstr "Без име"
 
-#: ../../src/editor/editorinteractive.cc:625
+#: ../../src/editor/editorinteractive.cc:628
 #: ../../src/editor/ui_menus/main_menu_new_map.cc:152
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:533
 #: ../../src/logic/map.h:164
@@ -330,7 +330,7 @@ msgctxt "author_name"
 msgid "Unknown"
 msgstr "Неизвестен"
 
-#: ../../src/editor/editorinteractive.cc:632
+#: ../../src/editor/editorinteractive.cc:635
 #, c-format
 msgid "Loading map “%s”…"
 msgstr "Зареждане на картата „%s“…"
@@ -973,7 +973,7 @@ msgstr "%1%: %2%"
 msgid "Current Size: %u"
 msgstr "Текущ размер: %u"
 
-#: ../../src/logic/editor_game_base.cc:215
+#: ../../src/logic/editor_game_base.cc:214
 msgid "Loading graphics"
 msgstr "Зареждане на графиките"
 
@@ -2785,17 +2785,18 @@ msgstr "%1% х %2%"
 msgid "Try system language"
 msgstr "Ако е възможно, системния език"
 
-#: ../../src/ui_fsmenu/options.cc:519
+#. * TRANSLATORS: %s = language name
+#: ../../src/ui_fsmenu/options.cc:520
 #, c-format
 msgid "The translation into %s is complete."
 msgstr "Преводът на %s е завършен."
 
-#: ../../src/ui_fsmenu/options.cc:521
-#, c-format
-msgid "The translation into %s is %d%% complete."
-msgstr "Преводът на %s е завършен на %d%%"
+#. * TRANSLATORS: %1% = language name, %2% = percentage
+#: ../../src/ui_fsmenu/options.cc:523
+msgid "The translation into %1% is %2%%% complete."
+msgstr "Преводът на %1% е завършен на %2%%%."
 
-#: ../../src/ui_fsmenu/options.cc:535
+#: ../../src/ui_fsmenu/options.cc:537
 #, c-format
 msgid "If you wish to help us translate, please visit %s"
 msgstr "Ако искате да помогнете, моля, посетете %s"
@@ -3316,7 +3317,7 @@ msgstr "Входящи"
 #, c-format
 msgid "Restore the selected %d message"
 msgid_plural "Restore the selected %d messages"
-msgstr[0] "Възстановяване на избраното съобщение"
+msgstr[0] "Възстановяване на избраното %d съобщение"
 msgstr[1] "Възстановяване на избраните %d съобщения"
 
 #. * TRANSLATORS: Tooltip in the messages window
@@ -3328,8 +3329,8 @@ msgstr "Възстановяване на избраното съобщение"
 #, c-format
 msgid "Archive the selected %d message"
 msgid_plural "Archive the selected %d messages"
-msgstr[0] "Архивиране на избраното съобщение"
-msgstr[1] "Архивиране на избраните %d  съобщения"
+msgstr[0] "Архивиране на избраното %d съобщение"
+msgstr[1] "Архивиране на избраните %d съобщения"
 
 #. * TRANSLATORS: Tooltip in the messages window
 #: ../../src/wui/game_message_menu.cc:646
@@ -3702,7 +3703,7 @@ msgstr "Наистина ли искате да изтриете това пов
 #, c-format
 msgid "Do you really want to delete this %d replay?"
 msgid_plural "Do you really want to delete these %d replays?"
-msgstr[0] "Наистина ли искате да изтриете това повторение?"
+msgstr[0] "Наистина ли искате да изтриете това %d повторение?"
 msgstr[1] "Наистина ли искате да изтриете тези %d повторения?"
 
 #: ../../src/wui/load_or_save_game.cc:257
@@ -3714,7 +3715,7 @@ msgstr "Наистина ли искате да изтриете тази игр
 #, c-format
 msgid "Do you really want to delete this %d game?"
 msgid_plural "Do you really want to delete these %d games?"
-msgstr[0] "Наистина ли искате да изтриете тази игра?"
+msgstr[0] "Наистина ли искате да изтриете тази %d игра?"
 msgstr[1] "Наистина ли искате да изтриете тези %d игри?"
 
 #: ../../src/wui/load_or_save_game.cc:272
@@ -4117,7 +4118,7 @@ msgctxt "unit_generic"
 msgid "minutes"
 msgstr "минути"
 
-#: ../../src/wui/plot_area.cc:329
+#: ../../src/wui/plot_area.cc:331
 msgid "game"
 msgstr "игра"
 
