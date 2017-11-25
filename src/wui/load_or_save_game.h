@@ -30,8 +30,8 @@
 
 /// Common functions for loading or saving a game or replay.
 class LoadOrSaveGame {
-	friend class GameMainMenuSaveGame;
 	friend class FullscreenMenuLoadGame;
+	friend struct GameMainMenuSaveGame;
 
 protected:
 	/// Choose which type of files to show
