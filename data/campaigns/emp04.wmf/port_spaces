@@ -2,7 +2,8 @@
 
 [global]
 packet_version="1"
-number_of_port_spaces="1"
+number_of_port_spaces="2"
 
 [port_spaces]
 0="12 15"
+1="20 194"

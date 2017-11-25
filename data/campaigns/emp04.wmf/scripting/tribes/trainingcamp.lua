@@ -9,20 +9,11 @@ tribes:new_trainingsite_type {
    icon = dirname .. "menu.png",
    size = "big",
 
-   -- buildcost = {
-      -- log = 2,
-      -- granite = 5,
-      -- planks = 4,
-      -- marble = 5,
-      -- gold = 4,
-      -- marble_column = 3,
-      -- cloth = 2
-   -- },
+
    return_on_dismantle = {
       granite = 3,
       planks = 2,
       marble = 3,
-      --gold = 2,
       marble_column = 1
    },
 
@@ -34,7 +25,7 @@ tribes:new_trainingsite_type {
    },
 
    aihints = {
-
+      trainingsites_max_percent = 1
    },
 
    working_positions = {

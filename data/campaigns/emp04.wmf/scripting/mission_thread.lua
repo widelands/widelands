@@ -171,6 +171,7 @@ function steel()
    campaign_message_box(diary_page_6)
    o.done = true   
    sleep(10000)
+   run(check_enemy)
    
    -- enough tools produced now start to build weapons
    local o1 = add_campaign_objective(obj_recruit_soldiers)
@@ -225,7 +226,7 @@ function steel()
    o1.done = true
    campaign_message_box(saledus_6)
    run(training)
-   run(check_enemy)
+
 end
 
 -- charcoal might be needed to support the metal production
@@ -357,7 +358,7 @@ function check_enemy()
 		    run(conquer)
 	        scroll_to_map_pixel(prior_center)
 	     end
-		 sleep(5000)
+		 sleep(8000)
 	  end
 end
 
@@ -501,6 +502,7 @@ function mission_thread()
    sleep(1000)
    scroll_to_field(sf)  --scroll to our headquarters
    include "map:scripting/starting_conditions.lua"
+   sleep(1000)
 
 
    --Initial messages
