@@ -587,9 +587,9 @@ void GameHost::run() {
 			disconnect_client(i, "GAME_STARTED_AT_CONNECT");
 	}
 
-	SendPacket s;
-	s.unsigned_8(NETCMD_LAUNCH);
-	broadcast(s);
+	SendPacket packet;
+	packet.unsigned_8(NETCMD_LAUNCH);
+	broadcast(packet);
 
 	Widelands::Game game;
 	game.set_ai_training_mode(g_options.pull_section("global").get_bool("ai_training", false));
@@ -704,10 +704,10 @@ void GameHost::think() {
 			} else if (curtime - d->last_heartbeat >= SERVER_TIMESTAMP_INTERVAL) {
 				d->last_heartbeat = curtime;
 
-				SendPacket s;
-				s.unsigned_8(NETCMD_TIME);
-				s.signed_32(d->pseudo_networktime);
-				broadcast(s);
+				SendPacket packet;
+				packet.unsigned_8(NETCMD_TIME);
+				packet.signed_32(d->pseudo_networktime);
+				broadcast(packet);
 
 				committed_network_time(d->pseudo_networktime);
 
@@ -724,11 +724,11 @@ void GameHost::think() {
 void GameHost::send_player_command(Widelands::PlayerCommand& pc) {
 	pc.set_duetime(d->committed_networktime + 1);
 
-	SendPacket s;
-	s.unsigned_8(NETCMD_PLAYERCOMMAND);
-	s.signed_32(pc.duetime());
-	pc.serialize(s);
-	broadcast(s);
+	SendPacket packet;
+	packet.unsigned_8(NETCMD_PLAYERCOMMAND);
+	packet.signed_32(pc.duetime());
+	pc.serialize(packet);
+	broadcast(packet);
 	d->game->enqueue_command(&pc);
 
 	committed_network_time(d->committed_networktime + 1);
@@ -746,38 +746,38 @@ void GameHost::send(ChatMessage msg) {
 		return;
 
 	if (msg.recipient.empty()) {
-		SendPacket s;
-		s.unsigned_8(NETCMD_CHAT);
-		s.signed_16(msg.playern);
-		s.string(msg.sender);
-		s.string(msg.msg);
-		s.unsigned_8(0);
-		broadcast(s);
+		SendPacket packet;
+		packet.unsigned_8(NETCMD_CHAT);
+		packet.signed_16(msg.playern);
+		packet.string(msg.sender);
+		packet.string(msg.msg);
+		packet.unsigned_8(0);
+		broadcast(packet);
 
 		d->chat.receive(msg);
 	} else {  //  personal messages
-		SendPacket s;
-		s.unsigned_8(NETCMD_CHAT);
+		SendPacket packet;
+		packet.unsigned_8(NETCMD_CHAT);
 
 		// Is this a pm for the host player?
 		if (d->localplayername == msg.recipient) {
 			d->chat.receive(msg);
 			// Write the SendPacket - will be used below to show that the message
 			// was received.
-			s.signed_16(msg.playern);
-			s.string(msg.sender);
-			s.string(msg.msg);
-			s.unsigned_8(1);
-			s.string(msg.recipient);
+			packet.signed_16(msg.playern);
+			packet.string(msg.sender);
+			packet.string(msg.msg);
+			packet.unsigned_8(1);
+			packet.string(msg.recipient);
 		} else {  // Find the recipient
 			int32_t clientnum = check_client(msg.recipient);
 			if (clientnum >= 0) {
-				s.signed_16(msg.playern);
-				s.string(msg.sender);
-				s.string(msg.msg);
-				s.unsigned_8(1);
-				s.string(msg.recipient);
-				d->net->send(d->clients.at(clientnum).sock_id, s);
+				packet.signed_16(msg.playern);
+				packet.string(msg.sender);
+				packet.string(msg.msg);
+				packet.unsigned_8(1);
+				packet.string(msg.recipient);
+				d->net->send(d->clients.at(clientnum).sock_id, packet);
 				log(
 				   "[Host]: personal chat: from %s to %s\n", msg.sender.c_str(), msg.recipient.c_str());
 			} else {
@@ -791,10 +791,10 @@ void GameHost::send(ChatMessage msg) {
 					d->chat.receive(err);
 					return;  // nothing left to do!
 				}
-				s.signed_16(-2);  // System message
-				s.string("");
-				s.string(fail);
-				s.unsigned_8(0);
+				packet.signed_16(-2);  // System message
+				packet.string("");
+				packet.string(fail);
+				packet.unsigned_8(0);
 			}
 		}
 
@@ -819,7 +819,7 @@ void GameHost::send(ChatMessage msg) {
 					if (d->clients.at(j).usernum == static_cast<int16_t>(i))
 						break;
 				if (j < d->clients.size())
-					d->net->send(d->clients.at(j).sock_id, s);
+					d->net->send(d->clients.at(j).sock_id, packet);
 				else
 					// Better no wexception it would break the whole game
 					log("WARNING: user was found but no client is connected to it!\n");
@@ -904,13 +904,13 @@ void GameHost::send_system_message_code(const std::string& code,
                                         const std::string& b,
                                         const std::string& c) {
 	// First send to all clients
-	SendPacket s;
-	s.unsigned_8(NETCMD_SYSTEM_MESSAGE_CODE);
-	s.string(code);
-	s.string(a);
-	s.string(b);
-	s.string(c);
-	broadcast(s);
+	SendPacket packet;
+	packet.unsigned_8(NETCMD_SYSTEM_MESSAGE_CODE);
+	packet.string(code);
+	packet.string(a);
+	packet.string(b);
+	packet.string(c);
+	broadcast(packet);
 
 	// Now add to our own chatbox
 	ChatMessage msg(NetworkGamingMessages::get_message(code, a, b, c));
@@ -967,7 +967,7 @@ void GameHost::set_map(const std::string& mapname,
 
 	std::vector<PlayerSettings>::size_type oldplayers = d->settings.players.size();
 
-	SendPacket s;
+	SendPacket packet;
 
 	// Care about the host
 	if (static_cast<int32_t>(maxplayers) <= d->settings.playernum &&
@@ -989,11 +989,11 @@ void GameHost::set_map(const std::string& mapname,
 				d->clients.at(j).playernum = UserSettings::none();
 
 				// Broadcast change
-				s.reset();
-				s.unsigned_8(NETCMD_SETTING_USER);
-				s.unsigned_32(i);
-				write_setting_user(s, i);
-				broadcast(s);
+				packet.reset();
+				packet.unsigned_8(NETCMD_SETTING_USER);
+				packet.unsigned_32(i);
+				write_setting_user(packet, i);
+				broadcast(packet);
 			}
 	}
 
@@ -1016,16 +1016,16 @@ void GameHost::set_map(const std::string& mapname,
 	}
 
 	// Broadcast new map info
-	s.reset();
-	s.unsigned_8(NETCMD_SETTING_MAP);
-	write_setting_map(s);
-	broadcast(s);
+	packet.reset();
+	packet.unsigned_8(NETCMD_SETTING_MAP);
+	write_setting_map(packet);
+	broadcast(packet);
 
 	// Broadcast new player settings
-	s.reset();
-	s.unsigned_8(NETCMD_SETTING_ALLPLAYERS);
-	write_setting_all_players(s);
-	broadcast(s);
+	packet.reset();
+	packet.unsigned_8(NETCMD_SETTING_ALLPLAYERS);
+	write_setting_all_players(packet);
+	broadcast(packet);
 
 	// If possible, offer the map / saved game as transfer
 	// TODO(unknown): not yet able to handle directory type maps / savegames
@@ -1060,9 +1060,9 @@ void GameHost::set_map(const std::string& mapname,
 		}
 	}
 
-	s.reset();
-	if (write_map_transfer_info(s, mapfilename))
-		broadcast(s);
+	packet.reset();
+	if (write_map_transfer_info(packet, mapfilename))
+		broadcast(packet);
 }
 
 void GameHost::set_player_state(uint8_t const number,
@@ -1138,18 +1138,18 @@ void GameHost::set_player_state(uint8_t const number,
 		player.name = get_computer_player_name(number);
 
 	// Broadcast change to player
-	SendPacket s;
-	s.reset();
-	s.unsigned_8(NETCMD_SETTING_PLAYER);
-	s.unsigned_8(number);
-	write_setting_player(s, number);
-	broadcast(s);
+	SendPacket packet;
+	packet.reset();
+	packet.unsigned_8(NETCMD_SETTING_PLAYER);
+	packet.unsigned_8(number);
+	write_setting_player(packet, number);
+	broadcast(packet);
 
 	// Let clients know whether their slot has changed
-	s.reset();
-	s.unsigned_8(NETCMD_SETTING_ALLUSERS);
-	write_setting_all_users(s);
-	broadcast(s);
+	packet.reset();
+	packet.unsigned_8(NETCMD_SETTING_ALLUSERS);
+	write_setting_all_users(packet);
+	broadcast(packet);
 }
 
 void GameHost::set_player_tribe(uint8_t const number,
@@ -1179,11 +1179,11 @@ void GameHost::set_player_tribe(uint8_t const number,
 				player.initialization_index = 0;
 
 			//  broadcast changes
-			SendPacket s;
-			s.unsigned_8(NETCMD_SETTING_PLAYER);
-			s.unsigned_8(number);
-			write_setting_player(s, number);
-			broadcast(s);
+			SendPacket packet;
+			packet.unsigned_8(NETCMD_SETTING_PLAYER);
+			packet.unsigned_8(number);
+			write_setting_player(packet, number);
+			broadcast(packet);
 			return;
 		}
 	}
@@ -1205,11 +1205,11 @@ void GameHost::set_player_init(uint8_t const number, uint8_t const index) {
 				player.initialization_index = index;
 
 				//  broadcast changes
-				SendPacket s;
-				s.unsigned_8(NETCMD_SETTING_PLAYER);
-				s.unsigned_8(number);
-				write_setting_player(s, number);
-				broadcast(s);
+				SendPacket packet;
+				packet.unsigned_8(NETCMD_SETTING_PLAYER);
+				packet.unsigned_8(number);
+				write_setting_player(packet, number);
+				broadcast(packet);
 				return;
 			} else
 				log("Attempted to change to out-of-range initialization index %u "
@@ -1230,11 +1230,11 @@ void GameHost::set_player_ai(uint8_t number, const std::string& name, bool const
 	player.random_ai = random_ai;
 
 	// Broadcast changes
-	SendPacket s;
-	s.unsigned_8(NETCMD_SETTING_PLAYER);
-	s.unsigned_8(number);
-	write_setting_player(s, number);
-	broadcast(s);
+	SendPacket packet;
+	packet.unsigned_8(NETCMD_SETTING_PLAYER);
+	packet.unsigned_8(number);
+	write_setting_player(packet, number);
+	broadcast(packet);
 }
 
 void GameHost::set_player_name(uint8_t const number, const std::string& name) {
@@ -1249,11 +1249,11 @@ void GameHost::set_player_name(uint8_t const number, const std::string& name) {
 	player.name = name;
 
 	// Broadcast changes
-	SendPacket s;
-	s.unsigned_8(NETCMD_SETTING_PLAYER);
-	s.unsigned_8(number);
-	write_setting_player(s, number);
-	broadcast(s);
+	SendPacket packet;
+	packet.unsigned_8(NETCMD_SETTING_PLAYER);
+	packet.unsigned_8(number);
+	write_setting_player(packet, number);
+	broadcast(packet);
 }
 
 void GameHost::set_player_closeable(uint8_t const number, bool closeable) {
@@ -1288,11 +1288,11 @@ void GameHost::set_player_shared(PlayerSlot number, Widelands::PlayerNumber shar
 	player.tribe = sharedplr.tribe;
 
 	// Broadcast changes
-	SendPacket s;
-	s.unsigned_8(NETCMD_SETTING_PLAYER);
-	s.unsigned_8(number);
-	write_setting_player(s, number);
-	broadcast(s);
+	SendPacket packet;
+	packet.unsigned_8(NETCMD_SETTING_PLAYER);
+	packet.unsigned_8(number);
+	write_setting_player(packet, number);
+	broadcast(packet);
 }
 
 void GameHost::set_player(uint8_t const number, const PlayerSettings& ps) {
@@ -1303,11 +1303,11 @@ void GameHost::set_player(uint8_t const number, const PlayerSettings& ps) {
 	player = ps;
 
 	// Broadcast changes
-	SendPacket s;
-	s.unsigned_8(NETCMD_SETTING_PLAYER);
-	s.unsigned_8(number);
-	write_setting_player(s, number);
-	broadcast(s);
+	SendPacket packet;
+	packet.unsigned_8(NETCMD_SETTING_PLAYER);
+	packet.unsigned_8(number);
+	write_setting_player(packet, number);
+	broadcast(packet);
 }
 
 void GameHost::set_player_number(uint8_t const number) {
@@ -1318,10 +1318,10 @@ void GameHost::set_win_condition_script(const std::string& wc) {
 	d->settings.win_condition_script = wc;
 
 	// Broadcast changes
-	SendPacket s;
-	s.unsigned_8(NETCMD_WIN_CONDITION);
-	s.string(wc);
-	broadcast(s);
+	SendPacket packet;
+	packet.unsigned_8(NETCMD_WIN_CONDITION);
+	packet.string(wc);
+	broadcast(packet);
 }
 
 void GameHost::switch_to_player(uint32_t user, uint8_t number) {
@@ -1367,11 +1367,11 @@ void GameHost::switch_to_player(uint32_t user, uint8_t number) {
 	}
 
 	// Broadcast the user changes to everybody
-	SendPacket s;
-	s.unsigned_8(NETCMD_SETTING_USER);
-	s.unsigned_32(user);
-	write_setting_user(s, user);
-	broadcast(s);
+	SendPacket packet;
+	packet.unsigned_8(NETCMD_SETTING_USER);
+	packet.unsigned_32(user);
+	write_setting_user(packet, user);
+	broadcast(packet);
 }
 
 void GameHost::set_player_team(uint8_t number, Widelands::TeamNumber team) {
@@ -1380,11 +1380,11 @@ void GameHost::set_player_team(uint8_t number, Widelands::TeamNumber team) {
 	d->settings.players.at(number).team = team;
 
 	// Broadcast changes
-	SendPacket s;
-	s.unsigned_8(NETCMD_SETTING_PLAYER);
-	s.unsigned_8(number);
-	write_setting_player(s, number);
-	broadcast(s);
+	SendPacket packet;
+	packet.unsigned_8(NETCMD_SETTING_PLAYER);
+	packet.unsigned_8(number);
+	write_setting_player(packet, number);
+	broadcast(packet);
 }
 
 void GameHost::set_multiplayer_game_settings() {
@@ -1476,11 +1476,11 @@ void GameHost::write_setting_all_users(SendPacket& packet) {
 }
 
 /**
-* If possible, this function writes the MapTransferInfo to SendPacket & s
+* If possible, this function writes the MapTransferInfo to SendPacket & packet
 *
 * \returns true if the data was written, else false
 */
-bool GameHost::write_map_transfer_info(SendPacket& s, std::string mapfilename) {
+bool GameHost::write_map_transfer_info(SendPacket& packet, std::string mapfilename) {
 	// TODO(unknown): not yet able to handle directory type maps / savegames
 	if (g_fs->is_directory(mapfilename)) {
 		log("Map/Save is a directory! No way for making it available a.t.m.!\n");
@@ -1489,13 +1489,13 @@ bool GameHost::write_map_transfer_info(SendPacket& s, std::string mapfilename) {
 
 	// Write the new map/save file information, so client can decide whether it
 	// needs the file.
-	s.unsigned_8(NETCMD_NEW_FILE_AVAILABLE);
-	s.string(mapfilename);
+	packet.unsigned_8(NETCMD_NEW_FILE_AVAILABLE);
+	packet.string(mapfilename);
 	// Scan-build reports that access to bytes here results in a dereference of null pointer.
 	// This is a false positive.
 	// See https://bugs.launchpad.net/widelands/+bug/1198919
-	s.unsigned_32(file_->bytes);  // NOLINT
-	s.string(file_->md5sum);
+	packet.unsigned_32(file_->bytes);  // NOLINT
+	packet.string(file_->md5sum);
 	return true;
 }
 
@@ -1579,62 +1579,62 @@ void GameHost::welcome_client(uint32_t const number, std::string& playername) {
 
 	log("[Host]: Client %u: welcome to usernum %u\n", number, client.usernum);
 
-	SendPacket s;
-	s.unsigned_8(NETCMD_HELLO);
-	s.unsigned_8(NETWORK_PROTOCOL_VERSION);
-	s.unsigned_32(client.usernum);
-	d->net->send(client.sock_id, s);
+	SendPacket packet;
+	packet.unsigned_8(NETCMD_HELLO);
+	packet.unsigned_8(NETWORK_PROTOCOL_VERSION);
+	packet.unsigned_32(client.usernum);
+	d->net->send(client.sock_id, packet);
 	// even if the network protocol is the same, the data might be different.
 	if (client.build_id != build_id())
 		send_system_message_code("DIFFERENT_WL_VERSION", effective_name, client.build_id, build_id());
 	// Send information about currently selected map / savegame
-	s.reset();
+	packet.reset();
 
-	s.unsigned_8(NETCMD_SETTING_MAP);
-	write_setting_map(s);
-	d->net->send(client.sock_id, s);
+	packet.unsigned_8(NETCMD_SETTING_MAP);
+	write_setting_map(packet);
+	d->net->send(client.sock_id, packet);
 
 	// If possible, offer the map / savegame as transfer
 	if (file_) {
-		s.reset();
-		if (write_map_transfer_info(s, file_->filename))
-			d->net->send(client.sock_id, s);
+		packet.reset();
+		if (write_map_transfer_info(packet, file_->filename))
+			d->net->send(client.sock_id, packet);
 	}
 
 	//  Send the tribe information to the new client.
-	s.reset();
-	s.unsigned_8(NETCMD_SETTING_TRIBES);
-	s.unsigned_8(d->settings.tribes.size());
+	packet.reset();
+	packet.unsigned_8(NETCMD_SETTING_TRIBES);
+	packet.unsigned_8(d->settings.tribes.size());
 	for (const TribeBasicInfo& tribe : d->settings.tribes) {
-		s.string(tribe.name);
+		packet.string(tribe.name);
 		size_t const nr_initializations = tribe.initializations.size();
-		s.unsigned_8(nr_initializations);
+		packet.unsigned_8(nr_initializations);
 		for (const TribeBasicInfo::Initialization& init : tribe.initializations)
-			s.string(init.script);
+			packet.string(init.script);
 	}
-	d->net->send(client.sock_id, s);
+	d->net->send(client.sock_id, packet);
 
-	s.reset();
-	s.unsigned_8(NETCMD_SETTING_ALLPLAYERS);
-	write_setting_all_players(s);
-	d->net->send(client.sock_id, s);
+	packet.reset();
+	packet.unsigned_8(NETCMD_SETTING_ALLPLAYERS);
+	write_setting_all_players(packet);
+	d->net->send(client.sock_id, packet);
 
-	s.reset();
-	s.unsigned_8(NETCMD_SETTING_ALLUSERS);
-	write_setting_all_users(s);
-	d->net->send(client.sock_id, s);
+	packet.reset();
+	packet.unsigned_8(NETCMD_SETTING_ALLUSERS);
+	write_setting_all_users(packet);
+	d->net->send(client.sock_id, packet);
 
-	s.reset();
-	s.unsigned_8(NETCMD_WIN_CONDITION);
-	s.string(d->settings.win_condition_script);
-	d->net->send(client.sock_id, s);
+	packet.reset();
+	packet.unsigned_8(NETCMD_WIN_CONDITION);
+	packet.string(d->settings.win_condition_script);
+	d->net->send(client.sock_id, packet);
 
 	// Broadcast new information about the player to everybody
-	s.reset();
-	s.unsigned_8(NETCMD_SETTING_USER);
-	s.unsigned_32(client.usernum);
-	write_setting_user(s, client.usernum);
-	broadcast(s);
+	packet.reset();
+	packet.unsigned_8(NETCMD_SETTING_USER);
+	packet.unsigned_32(client.usernum);
+	write_setting_user(packet, client.usernum);
+	broadcast(packet);
 
 	// Check if there is an unoccupied player left and if, assign.
 	for (uint8_t i = 0; i < d->settings.players.size(); ++i)
@@ -1731,9 +1731,9 @@ void GameHost::check_hung_clients() {
 			d->waiting = true;
 			broadcast_real_speed(0);
 
-			SendPacket s;
-			s.unsigned_8(NETCMD_WAIT);
-			broadcast(s);
+			SendPacket packet;
+			packet.unsigned_8(NETCMD_WAIT);
+			broadcast(packet);
 		}
 	} else {
 		if (nrdelayed == 0) {
@@ -1748,10 +1748,10 @@ void GameHost::check_hung_clients() {
 void GameHost::broadcast_real_speed(uint32_t const speed) {
 	assert(speed <= std::numeric_limits<uint16_t>::max());
 
-	SendPacket s;
-	s.unsigned_8(NETCMD_SETSPEED);
-	s.unsigned_16(speed);
-	broadcast(s);
+	SendPacket packet;
+	packet.unsigned_8(NETCMD_SETSPEED);
+	packet.unsigned_16(speed);
+	broadcast(packet);
 }
 
 /**
@@ -1829,10 +1829,10 @@ void GameHost::request_sync_reports() {
 
 	log("[Host]: Requesting sync reports for time %i\n", d->syncreport_time);
 
-	SendPacket s;
-	s.unsigned_8(NETCMD_SYNCREQUEST);
-	s.signed_32(d->syncreport_time);
-	broadcast(s);
+	SendPacket packet;
+	packet.unsigned_8(NETCMD_SYNCREQUEST);
+	packet.signed_32(d->syncreport_time);
+	broadcast(packet);
 
 	d->game->enqueue_command(
 	   new CmdNetCheckSync(d->syncreport_time, [this] { sync_report_callback(); }));
@@ -1870,9 +1870,9 @@ void GameHost::check_sync_reports() {
 
 			d->game->save_syncstream(true);
 
-			SendPacket s;
-			s.unsigned_8(NETCMD_INFO_DESYNC);
-			broadcast(s);
+			SendPacket packet;
+			packet.unsigned_8(NETCMD_INFO_DESYNC);
+			broadcast(packet);
 
 			disconnect_client(i, "CLIENT_DESYNCED");
 			// Pause the game, so that host and client have time to handle the
@@ -1948,9 +1948,9 @@ void GameHost::handle_network() {
 	if ((forced_pause_ || real_speed() == 0) && (time(nullptr) > (d->lastpauseping + 20))) {
 		d->lastpauseping = time(nullptr);
 
-		SendPacket s;
-		s.unsigned_8(NETCMD_PING);
-		broadcast(s);
+		SendPacket send_packet;
+		send_packet.unsigned_8(NETCMD_PING);
+		broadcast(send_packet);
 	}
 
 	reaper();
@@ -1984,9 +1984,9 @@ void GameHost::handle_packet(uint32_t const i, RecvPacket& r) {
 		if (cmd == NETCMD_METASERVER_PING) {
 			log("[Host]: Received ping from metaserver.\n");
 			// Send PING back
-			SendPacket s;
-			s.unsigned_8(NETCMD_METASERVER_PING);
-			d->net->send(client.sock_id, s);
+			SendPacket packet;
+			packet.unsigned_8(NETCMD_METASERVER_PING);
+			d->net->send(client.sock_id, packet);
 
 			// Remove metaserver from list of clients
 			client.playernum = UserSettings::not_connected();
@@ -2155,11 +2155,11 @@ void GameHost::handle_packet(uint32_t const i, RecvPacket& r) {
 		send_file_part(client.sock_id, 0);
 		// Remember client as "currently receiving file"
 		d->settings.users[client.usernum].ready = false;
-		SendPacket s;
-		s.unsigned_8(NETCMD_SETTING_USER);
-		s.unsigned_32(client.usernum);
-		write_setting_user(s, client.usernum);
-		broadcast(s);
+		SendPacket packet;
+		packet.unsigned_8(NETCMD_SETTING_USER);
+		packet.unsigned_32(client.usernum);
+		write_setting_user(packet, client.usernum);
+		broadcast(packet);
 		break;
 	}
 
@@ -2179,11 +2179,11 @@ void GameHost::handle_packet(uint32_t const i, RecvPacket& r) {
 			send_system_message_code(
 			   "COMPLETED_FILE_TRANSFER", file_->filename, d->settings.users.at(client.usernum).name);
 			d->settings.users[client.usernum].ready = true;
-			SendPacket s;
-			s.unsigned_8(NETCMD_SETTING_USER);
-			s.unsigned_32(client.usernum);
-			write_setting_user(s, client.usernum);
-			broadcast(s);
+			SendPacket packet;
+			packet.unsigned_8(NETCMD_SETTING_USER);
+			packet.unsigned_32(client.usernum);
+			write_setting_user(packet, client.usernum);
+			broadcast(packet);
 			return;
 		}
 		++part;
@@ -2207,12 +2207,12 @@ void GameHost::send_file_part(NetHostInterface::ConnectionId csock_id, uint32_t 
 	uint32_t size = (left > NETFILEPARTSIZE) ? NETFILEPARTSIZE : left;
 
 	// Send the part
-	SendPacket s;
-	s.unsigned_8(NETCMD_FILE_PART);
-	s.unsigned_32(part);
-	s.unsigned_32(size);
-	s.data(file_->parts[part].part, size);
-	d->net->send(csock_id, s);
+	SendPacket packet;
+	packet.unsigned_8(NETCMD_FILE_PART);
+	packet.unsigned_32(part);
+	packet.unsigned_32(size);
+	packet.data(file_->parts[part].part, size);
+	d->net->send(csock_id, packet);
 }
 
 void GameHost::disconnect_player_controller(uint8_t const number, const std::string& name) {
@@ -2265,11 +2265,11 @@ void GameHost::disconnect_client(uint32_t const number,
 		send_system_message_code(
 		   "CLIENT_X_LEFT_GAME", d->settings.users.at(client.usernum).name, reason, arg);
 
-		SendPacket s;
-		s.unsigned_8(NETCMD_SETTING_USER);
-		s.unsigned_32(client.usernum);
-		write_setting_user(s, client.usernum);
-		broadcast(s);
+		SendPacket packet;
+		packet.unsigned_8(NETCMD_SETTING_USER);
+		packet.unsigned_32(client.usernum);
+		write_setting_user(packet, client.usernum);
+		broadcast(packet);
 	} else
 		send_system_message_code("UNKNOWN_LEFT_GAME", reason, arg);
 
@@ -2277,13 +2277,13 @@ void GameHost::disconnect_client(uint32_t const number,
 
 	if (client.sock_id > 0) {
 		if (sendreason) {
-			SendPacket s;
-			s.unsigned_8(NETCMD_DISCONNECT);
-			s.unsigned_8(arg.empty() ? 1 : 2);
-			s.string(reason);
+			SendPacket packet;
+			packet.unsigned_8(NETCMD_DISCONNECT);
+			packet.unsigned_8(arg.empty() ? 1 : 2);
+			packet.string(reason);
 			if (!arg.empty())
-				s.string(arg);
-			d->net->send(client.sock_id, s);
+				packet.string(arg);
+			d->net->send(client.sock_id, packet);
 		}
 
 		d->net->close(client.sock_id);
