@@ -83,6 +83,8 @@ FullscreenMenuMapSelect::FullscreenMenuMapSelect(GameSettingsProvider* const set
 
 	UI::Box* hbox = new UI::Box(&checkboxes_, 0, 0, UI::Box::Horizontal, checkbox_space_, get_w());
 
+	scenario_types_ = settings_->settings().multiplayer ? Map::MP_SCENARIO : Map::SP_SCENARIO;
+
 	// Must be initialized before tag checkboxes
 	cb_dont_localize_mapnames_ =
 	   new UI::Checkbox(hbox, Vector2i::zero(), _("Show original map names"));
@@ -115,8 +117,6 @@ FullscreenMenuMapSelect::FullscreenMenuMapSelect(GameSettingsProvider* const set
 	add_tag_checkbox(hbox, "3teams", localize_tag("3teams"));
 	add_tag_checkbox(hbox, "4teams", localize_tag("4teams"));
 	checkboxes_.add(hbox, UI::Box::Resizing::kFullSize);
-
-	scenario_types_ = settings_->settings().multiplayer ? Map::MP_SCENARIO : Map::SP_SCENARIO;
 
 	table_.focus();
 	fill_table();
