@@ -1,24 +1,24 @@
-dirname = path.dirname(__file__)
+dirname = path.dirname (__file__)
 
 animations = {
    idle = {
-      pictures = path.list_files(dirname .. "idle_??.png"),
-      hotspot = { 6, 28 },
+      pictures = path.list_files (dirname .. "idle_??.png"),
+      hotspot = { 21, 25 }
    },
    dig = {
-      pictures = path.list_files(dirname .. "dig_??.png"),
-      hotspot = { 6, 28 },
+      pictures = path.list_files (dirname .. "dig_??.png"),
+      hotspot = { 24, 29 },
+      fps = 20
    }
 }
-add_walking_animations(animations, "walk", dirname, "walk", {11, 24}, 15)
-add_walking_animations(animations, "walkload", dirname, "walk", {11, 24}, 15)
-
+add_walking_animations (animations, "walk", dirname, "walk", {21, 25}, 15)
+add_walking_animations (animations, "walkload", dirname, "walkload", {23, 27}, 15)
 
 tribes:new_worker_type {
    msgctxt = "frisians_worker",
    name = "frisians_clay_burner",
    -- TRANSLATORS: This is a worker name used in lists of workers
-   descname = pgettext("frisians_worker", "Clay Burner"),
+   descname = pgettext ("frisians_worker", "Clay Burner"),
    helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    vision_range = 2,

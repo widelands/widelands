@@ -3,28 +3,32 @@ dirname = path.dirname(__file__)
 animations = {
    idle = {
       pictures = path.list_files(dirname .. "idle_??.png"),
-      hotspot = { -4, 11 }
+      hotspot = { 21, 25 }
+   },
+   dig = {
+      pictures = path.list_files (dirname .. "dig_??.png"),
+      hotspot = { 24, 29 },
+      fps = 20
    },
    planting = {
-      pictures = path.list_files(dirname .. "plantreed_??.png"),
-      hotspot = { 10, 21 },
+      pictures = path.list_files (dirname .. "plant_??.png"),
+      hotspot = { 24, 29 },
       fps = 10
    },
    harvesting = {
       pictures = path.list_files(dirname .. "harvest_??.png"),
-      hotspot = { 10, 22 },
-      fps = 5
+      hotspot = { 21, 25 },
+      fps = 10
    }
 }
-add_walking_animations(animations, "walk", dirname, "walk", {8, 23}, 10)
-add_walking_animations(animations, "walkload", dirname, "walkload", {7, 23}, 10)
-
+add_walking_animations (animations, "walk", dirname, "walk", {21, 25}, 15)
+add_walking_animations (animations, "walkload", dirname, "walkload", {23, 27}, 15)
 
 tribes:new_worker_type {
    msgctxt = "frisians_worker",
    name = "frisians_reed_farmer",
    -- TRANSLATORS: This is a worker name used in lists of workers
-   descname = pgettext("frisians_worker", "Reed Farmer"),
+   descname = pgettext ("frisians_worker", "Reed Farmer"),
    helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    vision_range = 2,
@@ -38,9 +42,9 @@ tribes:new_worker_type {
       plantreed = {
          "findspace size:any radius:1",
          "walk coords",
-         "animation planting 1500",
+         "animation dig 2000",
+         "animation planting 1000",
          "plant attrib:seed_reed",
-         "animation planting 1500",
          "return"
       },
       harvestreed = {

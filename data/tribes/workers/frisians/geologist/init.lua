@@ -1,26 +1,24 @@
-dirname = path.dirname(__file__)
+dirname = path.dirname (__file__)
 
 animations = {
    idle = {
-      pictures = path.list_files(dirname .. "idle_??.png"),
-      hotspot = { 9, 21 },
+      pictures = path.list_files (dirname .. "idle_??.png"),
+      hotspot = { 21, 25 },
       fps = 10
    },
    hacking = {
-      pictures = path.list_files(dirname .. "hacking_??.png"),
-      hotspot = { 11, 18 },
+      pictures = path.list_files (dirname .. "hacking_??.png"),
+      hotspot = { 21, 25 },
       fps = 10
    }
 }
-add_walking_animations(animations, "walk", dirname, "walk", {9, 21}, 10)
-add_walking_animations(animations, "walkload", dirname, "walk", {9, 21}, 10)
-
+add_walking_animations (animations, "walk", dirname, "walk", {21, 25}, 15)
 
 tribes:new_worker_type {
    msgctxt = "frisians_worker",
    name = "frisians_geologist",
    -- TRANSLATORS: This is a worker name used in lists of workers
-   descname = pgettext("frisians_worker", "Geologist"),
+   descname = pgettext ("frisians_worker", "Geologist"),
    helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    vision_range = 2,
@@ -31,16 +29,14 @@ tribes:new_worker_type {
    },
 
    programs = {
-      -- Expedition is the main program
-      -- The specialized geologist command walks the geologist around his starting
-      -- location, executing the search program from time to time.
       expedition = {
          "geologist 15 5 search"
       },
-      -- Search program, executed when we have found a place to hack on
       search = {
-         "animation hacking 5000",
-         "animation idle 2000",
+         "animation hacking 3000",
+         "animation idle 1000",
+         "animation hacking 2000",
+         "animation idle 1000",
          "animation hacking 3000",
          "geologist_find"
       }
