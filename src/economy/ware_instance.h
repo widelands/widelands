@@ -60,7 +60,7 @@ class WareInstance : public MapObject {
 
 public:
 	WareInstance(DescriptionIndex, const WareDescr* const);
-	~WareInstance();
+	~WareInstance() override;
 
 	MapObject* get_location(EditorGameBase& egbase) {
 		return location_.get(egbase);
