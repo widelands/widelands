@@ -131,8 +131,9 @@ void GamePlayerAiPersistentPacket::read(FileSystem& fs, Game& game, MapObjectLoa
 
 					size_t remaining_basic_buildings_size = fr.unsigned_32();
 					for (uint16_t i = 0; i < remaining_basic_buildings_size; ++i) {
+						const std::string building_string = fr.string();
 						player->ai_data.remaining_basic_buildings.emplace(
-						   static_cast<Widelands::DescriptionIndex>(fr.unsigned_32()), fr.unsigned_32());
+						  building_string, fr.unsigned_32()); //NOCOM building_string here fails
 					}
 					// Basic sanity check for remaining basic buildings
 					assert(player->ai_data.remaining_basic_buildings.size() <
@@ -203,7 +204,8 @@ void GamePlayerAiPersistentPacket::write(FileSystem& fs, Game& game, MapObjectSa
 		// Remaining buildings for basic economy
 		fw.unsigned_32(player->ai_data.remaining_basic_buildings.size());
 		for (auto bb : player->ai_data.remaining_basic_buildings) {
-			fw.unsigned_32(bb.first);
+			const std::string bld_name = game.tribes().get_building_descr(bb.first)->name().c_str();
+			fw.string(bld_name);
 			fw.unsigned_32(bb.second);
 		}
 	}
