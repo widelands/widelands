@@ -19,11 +19,13 @@ return {
    text = rt(
       title(_"Licensing information for Widelands") ..
 
-      "<rt><p font-size=14><br>" ..
-      _"Copyright 2002 - 2016 by the Widelands Development Team." .. "<br>" ..
-      _"This game is Free and Open Source (FOSS), licensed under the GNU General Public License (GPL) V2.0." .. "<br></p>" ..
+      "<rt>" .. h2("<br>" ..
+      _"Copyright 2002 - 2016 by the Widelands Development Team.") ..
+   h2(_"This game is Free and Open Source (FOSS), licensed under the GNU General Public License (GPL) V2.0.")..
 
-      p(_"You can find more information on FOSS and the GPL by visiting the following webpage: %s"):bformat(a("http://www.gnu.org/licenses/old-licenses/gpl-2.0")) ..
+      --"<p font-size=8><br></p" ..
+
+      p(_"You can find more information on FOSS and the GPL by visiting the following webpage: %s"):bformat(a("https://www.gnu.org/licenses/old-licenses/gpl-2.0.html")) ..
       p(_"You can find the full text of the license there as well as further information about its philosophy and the legal implications.") ..
 
       p(_"We are also shipping the GPL as a text document with Widelands itself.") ..
@@ -31,11 +33,13 @@ return {
       p(_"On Windows, you can find the file called COPYING.txt in the installation folder, and the Widelands Start menu entry provides a link to this file.") ..
       p(_"On MacOS, you can find the file called COPYING in the archive you downloaded from the website.") ..
 
-      "<p font-size=14 color=ff4444>" .. (_"This game comes as-is and without any warranty. For more information and support you can find us at %1% (Website, Wiki, Forum for questions or general support), %2% (Bugtracker), and %3% (Translations)."):
+      h2(_"This game comes as-is and without any warranty.") ..
+
+      "<p font-size=14>" .. (_"For more information and support you can find us at %1% (Website, Wiki, Forum for questions or general support), %2% (Bugtracker), and %3% (Translations)."):
          bformat(
-            a2("http://wl.widelands.org"),
-            a2("https://launchpad.net/widelands"),
-            a2("https://www.transifex.com/widelands/"))
+            a2("widelands.org"),
+            a2("widelands.org/wiki/ReportingBugs"),
+            a2("widelands.org/wiki/TranslatingWidelands"))
          .. "</p>"
    )
 }

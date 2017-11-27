@@ -13,7 +13,7 @@ rt("text-align=center",
 rt(
    help_introduction() ..
    h3(_[[Check out the Widelands project homepage:]]) ..
-   p(a([[https://wl.widelands.org]])) ..
+   p(a([[widelands.org]])) ..
    p(_[[Widelands is licensed under the GNU General Public License (GPL). For more information, see the file ‘COPYING’.]]) ..
    h3(_[[Status]]) ..
    p(_[[Widelands is nearly feature complete and is much fun to play alone and even more in multiplayer with others. Still, there is always more work to be done in all areas. If you are interested in contributing – be it by making graphics, fixing bugs or adding new features, translating the game into your language or creating new maps – get in touch on our homepage.]]) ..
@@ -27,7 +27,7 @@ rt(
 
    h2(_[[Reporting Bugs]]) ..
    p(_[[If you encounter a bug, please report it to our bugtracker:]]) ..
-   p(a([[https://bugs.launchpad.net/widelands]])) ..
+   p(a([[widelands.org/wiki/ReportingBugs]])) ..
    p(_[[Please provide enough background information. Tell us:]]) ..
    p(
        listitem_bullet(_[[Detailed steps on how to trigger the bug, if possible.]]) ..
