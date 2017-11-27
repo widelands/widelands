@@ -12,6 +12,8 @@
 
 #include "lua.h"
 
+#pragma clang diagnostic ignored "-Wint-to-void-pointer-cast"
+
 /* extra error code for 'luaL_load' */
 #define LUA_ERRFILE (LUA_ERRERR + 1)
 

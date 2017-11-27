@@ -51,7 +51,9 @@ public:
 	   const Widelands::TribeDescr&,
 	   Widelands::WareWorker type,
 	   bool selectable,
+			CLANG_DIAG_OFF("-Wint-to-void-pointer-cast")
 	   boost::function<void(Widelands::DescriptionIndex, bool)> callback_function = 0,
+			CLANG_DIAG_ON("-Wint-to-void-pointer-cast")
 	   bool horizontal = false);
 
 	bool
@@ -132,7 +134,7 @@ public:
 	             Widelands::WareWorker type,
 	             bool selectable);
 
-	virtual ~WaresDisplay();
+	~WaresDisplay() override;
 
 	void add_warelist(const Widelands::WareList&);
 	void remove_all_warelists();

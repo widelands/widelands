@@ -13,6 +13,8 @@
 
 #include "luaconf.h"
 
+#pragma clang diagnostic ignored "-Wint-to-void-pointer-cast"
+
 #define LUA_VERSION_MAJOR "5"
 #define LUA_VERSION_MINOR "3"
 #define LUA_VERSION_NUM 503

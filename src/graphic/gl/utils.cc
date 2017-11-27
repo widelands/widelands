@@ -121,7 +121,9 @@ void Shader::compile(const char* source) {
 		glGetShaderiv(shader_object_, GL_INFO_LOG_LENGTH, &infoLen);
 		if (infoLen > 1) {
 			std::unique_ptr<char[]> infoLog(new char[infoLen]);
+			CLANG_DIAG_OFF("-Wint-to-void-pointer-cast")
 			glGetShaderInfoLog(shader_object_, infoLen, NULL, infoLog.get());
+			CLANG_DIAG_ON("-Wint-to-void-pointer-cast")
 			throw wexception(
 			   "Error compiling %s shader:\n%s", shader_to_string(type_).c_str(), infoLog.get());
 		}
@@ -163,7 +165,9 @@ void Program::build(const std::string& program_name) {
 
 		if (infoLen > 1) {
 			std::unique_ptr<char[]> infoLog(new char[infoLen]);
+			CLANG_DIAG_OFF("-Wdisabled-macro-expansion")
 			glGetProgramInfoLog(program_object_, infoLen, NULL, infoLog.get());
+			CLANG_DIAG_ON("-Wdisabled-macro-expansion")
 			throw wexception("Error linking:\n%s", infoLog.get());
 		}
 	}
