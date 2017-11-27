@@ -487,7 +487,7 @@ GameHost::GameHost(const std::string& playername, bool internet)
 	d->localplayername = playername;
 
 	// create a listening socket
-	d->net = NetHost::listen(WIDELANDS_PORT);
+	d->net = NetHost::listen(kWidelandsLanPort);
 	if (d->net == nullptr) {
 		// This might happen when the widelands socket is already in use
 		throw WLWarning(_("Failed to start the server!"),
@@ -1494,7 +1494,7 @@ bool GameHost::write_map_transfer_info(SendPacket& s, std::string mapfilename) {
 	// Scan-build reports that access to bytes here results in a dereference of null pointer.
 	// This is a false positive.
 	// See https://bugs.launchpad.net/widelands/+bug/1198919
-	s.unsigned_32(file_->bytes);
+	s.unsigned_32(file_->bytes);  // NOLINT
 	s.string(file_->md5sum);
 	return true;
 }

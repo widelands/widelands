@@ -128,6 +128,12 @@ return {
       font = "default"
    },
 
+   fy = {
+      name = "Frysk",
+      sort_name = "Frysk",
+      font = "default"
+   },
+
    ga = {
       name = "Gaeilge",
       sort_name = "Gaeilge",

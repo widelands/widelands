@@ -129,7 +129,6 @@ public:
 	int get_carrier(lua_State*);
 	int get_carrier2(lua_State*);
 	int get_descname(lua_State*);
-	int get_headquarters(lua_State*);
 	int get_geologist(lua_State*);
 	int get_name(lua_State*);
 	int get_port(lua_State*);

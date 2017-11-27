@@ -3,13 +3,14 @@
 # 
 # Translators:
 # ks k, 2017
+# ks k, 2017
 # TaeMin An <kavern02@gmail.com>, 2017
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-09-29 15:54+0000\n"
-"PO-Revision-Date: 2017-10-02 15:51+0000\n"
+"POT-Creation-Date: 2017-11-11 07:38+0000\n"
+"PO-Revision-Date: 2017-11-16 21:32+0000\n"
 "Last-Translator: ks k\n"
 "Language-Team: Korean (http://www.transifex.com/widelands/widelands/language/ko/)\n"
 "MIME-Version: 1.0\n"
@@ -21,7 +22,7 @@ msgstr ""
 #: ../../data/campaigns/atl01.wmf/elemental:9
 #: ../../data/campaigns/campaigns.conf:100
 msgid "From Nemesis to Genesis"
-msgstr "신벌에서 창세기로"
+msgstr "천벌에서 신세기까지"
 
 #: ../../data/campaigns/atl01.wmf/elemental:11
 msgid ""
@@ -78,7 +79,7 @@ msgid ""
 "forces he left to secure the borders of Al’thunran, the young warlord seeks "
 "to reunite his ambitious brothers and force the tribes to march once again "
 "under a common banner."
-msgstr "찻'카루스가 죽었을 때, 그는 늙은 남자였고, 세 명의 강하고 야망에 찬 아들들의 아버지였고, 고대의 숲에 대해 기꺼이 저항을 다짐한 어떤 적들과도 겨룰 수 있는 군대의 사령관이였습니다. 비록 그의 영광스러운 치세의 끝에, 찻'카루스는 그의 맏아들인, 쓰론을, 부족의 사령관을 이어받는 자리에 선택했습니다만 - 그의 두 동생들에게는 만족스럽지 못한 결정이었습니다. 늙은 사령관은 알고 있었습니다. 그의 아버지가 쓰론을 임명했을 때, 그는 나무들 사이의 왕좌의 고향으로 알려진, 알'툰란의 수도에 있었고, 그의 군대를 아버지의 시신을 묻었던 높은 언덕으로 물렸습니다. 거기서 그는 신들과 그의 아버지의 영혼에 대고 그가 질서를 재정립하기 위해 돌아올 것을 맹세했습니다. 그의 동생들이 쓰론과 그가 알'툰란의 경계를 지키기 위해 남긴 소수의 군대들에 대항하는 맹목적인 전쟁에 정신을 쏟을 동안, 젊은 사령관은 야망이 넘치는 동생들을 다시 결속하고 통일된 깃발 아래서 부족이 다시 한번 진군할 수 있게 하는 방법을 찾고 있습니다."
+msgstr "찻'카루스가 죽었을 때, 그는 노인이었고, 강하고 야심찬 세 아들들의 아버지 였고, 고대의 숲에 대해 기꺼이 저항을 다짐한 어떤 적들과도 겨룰 수 있는 군대의 사령관이였습니다. 비록 그의 영광스러운 치세의 끝에, 찻'카루스는 그의 맏아들인, 쓰론을, 부족의 사령관을 이어받는 자리에 선택했습니다만 - 그의 두 동생들에게는 만족스럽지 못한 결정이었습니다. 늙은 사령관은 알고 있었습니다. 그의 아버지가 쓰론을 임명했을 때, 그는 나무들 사이의 왕좌의 고향으로 알려진, 알'툰란의 수도에 있었고, 그의 군대를 아버지의 시신을 묻었던 높은 언덕으로 물렸습니다. 거기서 그는 신들과 그의 아버지의 영혼에 대고 그가 질서를 재정립하기 위해 돌아올 것을 맹세했습니다. 그의 동생들이 쓰론과 그가 알'툰란의 경계를 지키기 위해 남긴 소수의 군대들에 대항하는 맹목적인 전쟁에 정신을 쏟을 동안, 젊은 사령관은 야망이 넘치는 동생들을 다시 결속하고 통일된 깃발 아래서 부족이 다시 한번 진군할 수 있게 하는 방법을 찾고 있습니다."
 
 #: ../../data/campaigns/campaigns.conf:35
 msgid "The Months of Exile"
@@ -139,7 +140,7 @@ msgstr "망명을 위한 전초기지"
 
 #: ../../data/campaigns/campaigns.conf:88
 msgid "Neptune’s Revenge"
-msgstr "넵튠의 복수"
+msgstr "해왕성의 복수"
 
 #: ../../data/campaigns/campaigns.conf:93
 #: ../../data/campaigns/campaigns.conf:105
@@ -246,7 +247,7 @@ msgstr "이 작은 섬들에는 큰 건설 터가 희귀합니다. 큰 건물들
 
 #: ../../data/maps/Atoll.wmf/elemental:8
 msgid "Atoll"
-msgstr "환초"
+msgstr "고리모양의 산호섬"
 
 #: ../../data/maps/Atoll.wmf/elemental:10
 msgid "Who will be the real king of the big atoll?"
@@ -265,7 +266,7 @@ msgstr "이 갈라진 시골의 아름다움에 정착하는 것은 하나의 �
 
 #: ../../data/maps/Checkmate.wmf/elemental:8
 msgid "Checkmate"
-msgstr "체크메이트"
+msgstr "진퇴양난"
 
 #: ../../data/maps/Checkmate.wmf/elemental:10
 msgid ""
@@ -331,7 +332,7 @@ msgstr "4곳의 부족이 가장 가까운 이웃과 믿음을 초월한 재물�
 
 #: ../../data/maps/Dolomites_v2.wmf/elemental:8
 msgid "Dolomites"
-msgstr "돌로미테 알프스"
+msgstr "돌로미티(백운암)"
 
 #: ../../data/maps/Dolomites_v2.wmf/elemental:10
 msgid ""
@@ -340,7 +341,7 @@ msgid ""
 "reasonable reconstruction of the area delimited by Cortina d’Ampezzo in the "
 "north-east and Canazei in the south-west. If you have to be pitted in a duel"
 " to the death against your enemies, it may as well be in a beautiful place."
-msgstr ""
+msgstr "알프스의 보석인 돌로미티 산맥은 그 원래의 아름다움을 위해 2009년 유네스코 세계 유산으로 지정되었습니다. 이 지도는 북동쪽의 코르티나 담페초(Cortina d'Ampezzo)와 남서쪽의 카나제이(Canazei)로 구분된 지역을 충실하게 재현한 것입니다. 원수에 대한 죽음의 결투를 해야한다면, 그곳은 아름다운 장소에 있을 수도 있습니다."
 
 #: ../../data/maps/Dolomites_v2.wmf/elemental:11
 msgid ""
@@ -348,7 +349,7 @@ msgid ""
 "vertical. Use the little building space that you have wisely. A fortress at "
 "the mouth of a narrow mountain pass can be a formidable obstacle to an enemy"
 " army. Use the terrain to your advantage."
-msgstr ""
+msgstr "산에는 평지가 많이 있습니다. 불행히도 대부분은 수직벽입니다. 현명하게 가지고 있는 작은 건물 공간을 사용하십시오. 좁은 산길의 입구에있는 요새는 적군에게 막대한 장애물이 될 수 있습니다. 당신 진형의 지형에대한 잇점을 잘 활용하십시오."
 
 #: ../../data/maps/Elven_Forests.wmf/elemental:8
 msgid "Elven Forests"
@@ -358,7 +359,7 @@ msgstr "요정의 숲"
 msgid ""
 "The breath-taking beauty of these emerald lands has lured many tribes into "
 "an attempt to take them for themselves."
-msgstr ""
+msgstr "숨 막힐듯 아름다운 이 에메랄드 땅은 여러 부족들이 그땅을 차지하기 위한 시도로 이끌고 있습니다."
 
 #: ../../data/maps/Fellowships_v2.wmf/elemental:8
 msgid "Fellowships"
@@ -368,14 +369,14 @@ msgstr "유대감"
 msgid ""
 "Ships are your best fellows. Starting positions are similar, so the map "
 "should be fair."
-msgstr ""
+msgstr "배는 가장 친한 동료입니다. 출발점은 비슷하기 때문에 지도는 공정해야합니다."
 
 #: ../../data/maps/Fellowships_v2.wmf/elemental:11
 msgid ""
 "This is a somewhat technical map, and it is best suited for two or three "
 "human players. Coal is hard to find – consider making some. There is gold "
 "near the starting point – do you see it?"
-msgstr ""
+msgstr "다소 기술적인 지도이며 2~3 명의 인간 선수에게 가장 적합합니다. 석탄은 찾기 어려울 것입니다. 출발점 인근에는 금이 있습니다. 당신은 그것을 보았습니까?"
 
 #: ../../data/maps/Finnish_Lakes.wmf/elemental:8
 msgid "Finnish Lakes"
@@ -385,17 +386,17 @@ msgstr "핀란드 호수"
 msgid ""
 "These are the beautiful Finnish lands of lakes, rivers, ancient forests and "
 "mountains. It is up to you to find a way through these lands."
-msgstr ""
+msgstr "이것은 아름다운 호수, 강, 고대 숲과 산이 있는 핀란드의 땅입니다. 이 땅을 통과하는 길을 찾아내는 것은 당신에게 달려있습니다."
 
 #: ../../data/maps/Finnish_Lakes.wmf/elemental:11
 msgid ""
 "Yellow player has a much easier starting position than the other two; this "
 "map is suited for 1v2."
-msgstr ""
+msgstr "노란색 선수는 다른 두 선수보다 훨씬 쉽고 유리한 시작 위치를 가집니다. 이 지도는 1대2에 적합합니다."
 
 #: ../../data/maps/Firegames.wmf/elemental:8
 msgid "Firegames"
-msgstr ""
+msgstr "화력전"
 
 #: ../../data/maps/Firegames.wmf/elemental:10
 msgid ""
@@ -403,17 +404,17 @@ msgid ""
 "your tribe woke up on this island among fire and lava? Until now it seems as"
 " if you are alone, but no-one knows what might happen if you met an opposing"
 " tribe?"
-msgstr ""
+msgstr "이것은 신들의 시험인가 다른 누군가의 사악한 계획인가? 당신과 당신 부족은 불과 용암에 둘러쌓인 섬에서 깨어난것인가요? 지금까지는 당신 부족만 있는것처럼 보이지만, 반대 종족을 만난다면 어떤 일이 일어날지 아무도 모를까요?"
 
 #: ../../data/maps/Four_Castles.wmf/elemental:8
 msgid "Four Castles"
-msgstr "4곳의 성"
+msgstr "4개의 성"
 
 #: ../../data/maps/Four_Castles.wmf/elemental:10
 msgid ""
 "Well protected in their mighty fortresses, four power-hungry warlords are "
 "completing their schemes to dominate these lands…"
-msgstr ""
+msgstr "강력한 요새에서 잘 보호 받고, 권력에 굶주린 네곳의 군벌들이 땅을 지배하기위한 계획을 세워두었습니다…"
 
 #: ../../data/maps/Four_Mountains.wmf/elemental:8
 msgid "Four Mountains"
@@ -423,13 +424,13 @@ msgstr "4곳의 산"
 msgid ""
 "Each tribe is surrounded by four mighty mountains. Who will first conquer "
 "them and claim the resources for his own tribe?"
-msgstr ""
+msgstr "각 부족은 4개의 거대한 산으로 둘러싸여 있습니다. 누가 먼저 그들을 정복하고 자신의 부족을 위해 자원을 차지 하시겠습니까?"
 
 #: ../../data/maps/Four_Mountains.wmf/elemental:11
 msgid ""
 "I: Water can be found along the river. II: Snowmen mark additional water "
 "sources. III: Each mountain contains only one resource."
-msgstr ""
+msgstr "I: 물은 강가에서 발견 될 수있다. II: 눈사람은 추가 수원을 표시합니다. III: 각 산에는 하나의 자원 만 있습니다."
 
 #: ../../data/maps/Full_Moon_v2.wmf/elemental:8
 msgid "Full Moon"
@@ -439,7 +440,7 @@ msgstr "보름달"
 msgid ""
 "Whether it is the latest solstice, or lunar illness, something moves these "
 "tribes towards their final ordeal."
-msgstr ""
+msgstr "그것이 최후의 태양 지점이든, 달의 병이든,이 종족들은 그들의 마지막 시련으로 향해 움직입니다."
 
 #: ../../data/maps/Glacier_Lake_v2.wmf/elemental:8
 msgid "Glacier Lake"

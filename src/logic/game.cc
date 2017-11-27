@@ -211,6 +211,12 @@ bool Game::run_splayer_scenario_direct(const std::string& mapname,
 	loader_ui.step(_("Loading tribes"));
 	tribes();
 
+	// If the scenario has custrom tribe entites, load them.
+	const std::string custom_tribe_script = mapname + "/scripting/tribes/init.lua";
+	if (g_fs->file_exists(custom_tribe_script)) {
+		lua().run_script(custom_tribe_script);
+	}
+
 	// We have to create the players here.
 	loader_ui.step(_("Creating players"));
 	PlayerNumber const nr_players = map().get_nrplayers();

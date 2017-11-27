@@ -1274,7 +1274,7 @@ bool WLApplication::load_game() {
 
 	game.set_ai_training_mode(g_options.pull_section("global").get_bool("ai_training", false));
 	SinglePlayerGameSettingsProvider sp;
-	FullscreenMenuLoadGame ssg(game, &sp, nullptr);
+	FullscreenMenuLoadGame ssg(game, &sp);
 
 	if (ssg.run<FullscreenMenuBase::MenuTarget>() == FullscreenMenuBase::MenuTarget::kOk)
 		filename = ssg.filename();
@@ -1342,7 +1342,7 @@ void WLApplication::replay() {
 	Widelands::Game game;
 	if (filename_.empty()) {
 		SinglePlayerGameSettingsProvider sp;
-		FullscreenMenuLoadGame rm(game, &sp, nullptr, true);
+		FullscreenMenuLoadGame rm(game, &sp, true);
 		if (rm.run<FullscreenMenuBase::MenuTarget>() == FullscreenMenuBase::MenuTarget::kBack)
 			return;
 
