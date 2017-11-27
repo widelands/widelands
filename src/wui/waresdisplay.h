@@ -51,9 +51,9 @@ public:
 	   const Widelands::TribeDescr&,
 	   Widelands::WareWorker type,
 	   bool selectable,
-			CLANG_DIAG_OFF("-Wint-to-void-pointer-cast")
+			CLANG_DIAG_OFF("-Wzero-as-null-pointer-constant")
 	   boost::function<void(Widelands::DescriptionIndex, bool)> callback_function = 0,
-			CLANG_DIAG_ON("-Wint-to-void-pointer-cast")
+			CLANG_DIAG_ON("-Wzero-as-null-pointer-constant")
 	   bool horizontal = false);
 
 	bool

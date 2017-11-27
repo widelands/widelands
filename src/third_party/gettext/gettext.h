@@ -24,7 +24,7 @@
 /* Get declarations of GNU message catalog functions.  */
 #include <libintl.h>
 
-#pragma clang diagnostic ignored "-Wint-to-void-pointer-cast"
+#pragma clang diagnostic ignored "-Wzero-as-null-pointer-constant"
 
 /* You can set the DEFAULT_TEXT_DOMAIN macro to specify the domain used by
    the gettext() and ngettext() macros.  This is an alternative to calling

@@ -13,7 +13,7 @@
 
 #include "luaconf.h"
 
-#pragma clang diagnostic ignored "-Wint-to-void-pointer-cast"
+#pragma clang diagnostic ignored "-Wzero-as-null-pointer-constant"
 
 #define LUA_VERSION_MAJOR "5"
 #define LUA_VERSION_MINOR "3"
