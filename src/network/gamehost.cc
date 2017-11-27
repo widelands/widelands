@@ -1061,8 +1061,9 @@ void GameHost::set_map(const std::string& mapname,
 	}
 
 	packet.reset();
-	if (write_map_transfer_info(packet, mapfilename))
+	if (write_map_transfer_info(packet, mapfilename)) {
 		broadcast(packet);
+	}
 }
 
 void GameHost::set_player_state(uint8_t const number,
@@ -1597,8 +1598,9 @@ void GameHost::welcome_client(uint32_t const number, std::string& playername) {
 	// If possible, offer the map / savegame as transfer
 	if (file_) {
 		packet.reset();
-		if (write_map_transfer_info(packet, file_->filename))
+		if (write_map_transfer_info(packet, file_->filename)) {
 			d->net->send(client.sock_id, packet);
+		}
 	}
 
 	//  Send the tribe information to the new client.
@@ -2281,8 +2283,9 @@ void GameHost::disconnect_client(uint32_t const number,
 			packet.unsigned_8(NETCMD_DISCONNECT);
 			packet.unsigned_8(arg.empty() ? 1 : 2);
 			packet.string(reason);
-			if (!arg.empty())
+			if (!arg.empty()) {
 				packet.string(arg);
+			}
 			d->net->send(client.sock_id, packet);
 		}
 
