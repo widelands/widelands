@@ -213,14 +213,14 @@ void NetHostProxy::receive_commands() {
 				conn_->receive(&cmd);
 				uint8_t id;
 				conn_->receive(&id);
-				// Kind of hacky, but create a new Client object inplace.
-				// insert() and emplace() do not work since they call the (deleted) copy constructor
-				// (operator[] returns the object when it exists, otherwise a new one is created)
-				// NOCOM(#codereview): You can and should use std::piecewise_construct here and get rid of the default constructor for client:
-				// https://stackoverflow.com/a/14816514
-				assert(clients_.count(id) == 0);
-                clients_[id];
-                assert(clients_.count(id) == 1);
+#ifndef NDEBUG
+			   auto result = clients_.emplace(
+			      std::piecewise_construct, std::forward_as_tuple(id), std::forward_as_tuple());
+				assert(result.second);
+#else
+			   clients_.emplace(
+			      std::piecewise_construct, std::forward_as_tuple(id), std::forward_as_tuple());
+#endif
 			}
 			break;
 		case RelayCommand::kDisconnectClient:

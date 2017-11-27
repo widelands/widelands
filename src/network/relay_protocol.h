@@ -96,9 +96,6 @@ constexpr uint8_t kRelayProtocolVersion = 1;
  * without any separator.
  */
 
-// NOCOM(#codereview): It would be nice to get syncstream data into this somehow to make it easier to debug desyncs going forward. Do you have
-// any ideas for this?
-
 // If anyone removes a command: Please leave a comment which command with which value was removed
 enum class RelayCommand : uint8_t {
 	// Value 0 should not be used
