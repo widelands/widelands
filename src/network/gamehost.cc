@@ -412,8 +412,7 @@ struct GameHostImpl {
 	HostGameSettingsProvider hp;
 	NetworkPlayerSettingsBackend npsb;
 
-	// NOCOM(#codereview): Make this a unique_ptr?
-	LanGamePromoter* promoter;
+	std::unique_ptr<LanGamePromoter> promoter;
 	std::unique_ptr<NetHostInterface> net;
 
 	/// List of connected clients. Note that clients are not in the same
@@ -460,7 +459,7 @@ struct GameHostImpl {
 	     chat(h),
 	     hp(h),
 	     npsb(&hp),
-	     promoter(nullptr),
+	     promoter(),
 	     net(),
 	     game(nullptr),
 	     pseudo_networktime(0),
@@ -490,11 +489,10 @@ GameHost::GameHost(const std::string& playername, bool internet)
 						InternetGaming::ref().get_local_servername(), InternetGaming::ref().relay_password());
 		if (d->net == nullptr) {
 			// Some kind of problem with the relay server. Bad luck :(
-			// NOCOM(#codereview): That is quite fatalistic. How about "Please report a bug"?
 			throw WLWarning(_("Failed to host the server!"),
 							_("Widelands could not start hosting a server.\n"
-							  "This should not happen and is unfortunately most likely "
-							  "a bug of the metaserver. There is nothing you can do."));
+							  "This should not happen and there is most likely "
+							  "nothing you can do about it. Please report a bug."));
 		}
 	} else {
 		d->net = NetHost::listen(WIDELANDS_PORT);
@@ -504,7 +502,7 @@ GameHost::GameHost(const std::string& playername, bool internet)
 							_("Widelands could not start a server.\n"
 							  "Probably some other process is already running a server on our port."));
 		}
-		d->promoter = new LanGamePromoter();
+		d->promoter.reset(new LanGamePromoter());
 	}
 	d->game = nullptr;
 	d->pseudo_networktime = 0;
@@ -536,10 +534,7 @@ GameHost::~GameHost() {
 
 	// close all open sockets
 	d->net.reset();
-	if (d->promoter != nullptr) {
-		delete d->promoter;
-		d->promoter = nullptr;
-	}
+	d->promoter.reset();
 	delete d;
 	delete file_;
 }
@@ -1907,8 +1902,9 @@ void GameHost::sync_report_callback() {
 
 void GameHost::handle_network() {
 
-	if (d->promoter != nullptr)
+	if (d->promoter) {
 		d->promoter->run();
+	}
 
 	// Check for new connections.
 	Client peer;

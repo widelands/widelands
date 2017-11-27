@@ -64,10 +64,7 @@ void NetRelayConnection::receive(std::string *str) {
 	// Reset the peek pointer
 	peek_reset();
 
-	// NOCOM(#codereview): The next block is only compiled in release mode. You
-	// probably want #ifndef NDEBUG, which reads if not defined not debug. That
-	// is all quite backwards, but that is the standard c++ code converged on.
-	#ifdef NDEBUG
+	#ifndef NDEBUG
 	// Check if we can read a complete string
 	assert(peek_string());
 	peek_reset();
@@ -155,8 +152,8 @@ void NetRelayConnection::receive(RecvPacket *packet) {
 	try_network_receive();
 
 	peek_reset();
-	// NOCOM(#codereview): This should probably be ifndef NDEBUG as well.
-	#ifdef NDEBUG
+
+	#ifndef NDEBUG
 	assert(peek_recvpacket());
 	peek_reset();
 	#endif // NDEBUG
@@ -216,20 +213,14 @@ void NetRelayConnection::send(const uint8_t data) {
 	buf[0] = data;
 
 	boost::system::error_code ec;
-	// NOCOM(#codereview): I think you should check written also in release modes and throw if it is not as expected, also a few times below.
-#ifdef NDEBUG
-	boost::asio::write(socket_, boost::asio::buffer(buf, 1), ec);
-#else
-	size_t written =
-	   boost::asio::write(socket_, boost::asio::buffer(buf, 1), ec);
-#endif
+	size_t written = boost::asio::write(socket_, boost::asio::buffer(buf, 1), ec);
 
-	// TODO(Notabilis): This one is an assertion of mine, I am not sure if it will hold
-	// If it doesn't, set the socket to blocking before writing
-	// If it does, remove this comment after build 20
-	// NOCOM(#codereview): most people play release builds where this is not compiled in. Turn into an if() with throwing an wexception.
-	assert(ec != boost::asio::error::would_block);
-	assert(written == 1 || ec);
+	if (ec == boost::asio::error::would_block) {
+		throw wexception("[NetRelayConnection] Socket connected to relay would block when writing");
+	}
+	if (written < 1) {
+		throw wexception("[NetRelayConnection] Unable to send byte to relay");
+	}
 	if (ec) {
 		log("[NetRelayConnection] Error when trying to send some data: %s.\n", ec.message().c_str());
 		close();
@@ -247,15 +238,16 @@ void NetRelayConnection::send(const std::string& str) {
 	buffers.push_back(boost::asio::buffer("\0", 1));
 
 	boost::system::error_code ec;
-#ifdef NDEBUG
-	boost::asio::write(socket_, buffers, ec);
-#else
-	size_t written =
-	   boost::asio::write(socket_, buffers, ec);
-#endif
+	size_t written = boost::asio::write(socket_, buffers, ec);
 
-	assert(ec != boost::asio::error::would_block);
-	assert(written == str.length() + 1 || ec);
+	if (ec == boost::asio::error::would_block) {
+		throw wexception("[NetRelayConnection] Socket connected to relay would block when writing");
+	}
+	if (written < str.length() + 1) {
+		throw wexception(
+					"[NetRelayConnection] Unable to send complete string to relay (only %lu bytes of %lu)",
+					written, str.length() + 1);
+	}
 	if (ec) {
 		log("[NetRelayConnection] Error when trying to send some data: %s.\n", ec.message().c_str());
 		close();
@@ -268,15 +260,17 @@ void NetRelayConnection::send(const SendPacket& packet) {
 	}
 
 	boost::system::error_code ec;
-#ifdef NDEBUG
-	boost::asio::write(socket_, boost::asio::buffer(packet.get_data(), packet.get_size()), ec);
-#else
 	size_t written =
-	   boost::asio::write(socket_, boost::asio::buffer(packet.get_data(), packet.get_size()), ec);
-#endif
+		boost::asio::write(socket_, boost::asio::buffer(packet.get_data(), packet.get_size()), ec);
 
-	assert(ec != boost::asio::error::would_block);
-	assert(written == packet.get_size() || ec);
+	if (ec == boost::asio::error::would_block) {
+		throw wexception("[NetRelayConnection] Socket connected to relay would block when writing");
+	}
+	if (written < packet.get_size()) {
+		throw wexception(
+					"[NetRelayConnection] Unable to send complete packet to relay (only %lu bytes of %lu)",
+					written, packet.get_size());
+	}
 	if (ec) {
 		log("[NetRelayConnection] Error when trying to send some data: %s.\n", ec.message().c_str());
 		close();

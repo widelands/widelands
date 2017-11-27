@@ -81,18 +81,16 @@ void NetClient::send(const SendPacket& packet) {
 	}
 
 	boost::system::error_code ec;
-#ifdef NDEBUG
-	boost::asio::write(socket_, boost::asio::buffer(packet.get_data(), packet.get_size()), ec);
-#else
 	size_t written =
 	   boost::asio::write(socket_, boost::asio::buffer(packet.get_data(), packet.get_size()), ec);
-#endif
 
-	// TODO(Notabilis): This one is an assertion of mine, I am not sure if it will hold
-	// If it doesn't, set the socket to blocking before writing
-	// If it does, remove this comment after build 20
-	assert(ec != boost::asio::error::would_block);
-	assert(written == packet.get_size() || ec);
+	if (ec == boost::asio::error::would_block) {
+		throw wexception("[NetClient] Socket connected to relay would block when writing");
+	}
+	if (written < packet.get_size()) {
+		throw wexception("[NetClient] Unable to send complete packet to relay (only %lu bytes of %lu)",
+						written, packet.get_size());
+	}
 	if (ec) {
 		log("[NetClient] Error when trying to send some data: %s.\n", ec.message().c_str());
 		close();
