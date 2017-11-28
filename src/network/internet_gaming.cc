@@ -43,7 +43,7 @@ InternetGaming::InternetGaming()
    : net(nullptr),
      state_(OFFLINE),
      reg_(false),
-     port_(INTERNET_GAMING_PORT),
+     port_(kInternetGamingPort),
      clientrights_(INTERNET_CLIENT_UNREGISTERED),
      gameips_(),
      clientupdateonmetaserver_(true),
@@ -68,7 +68,7 @@ void InternetGaming::reset() {
 	authenticator_ = "";
 	reg_ = false;
 	meta_ = INTERNET_GAMING_METASERVER;
-	port_ = INTERNET_GAMING_PORT;
+	port_ = kInternetGamingPort;
 	clientname_ = "";
 	clientrights_ = INTERNET_CLIENT_UNREGISTERED;
 	gamename_ = "";
@@ -152,7 +152,7 @@ bool InternetGaming::do_login(bool should_relogin) {
 	log("InternetGaming: Sending login request.\n");
 	SendPacket s;
 	s.string(IGPCMD_LOGIN);
-	s.string(boost::lexical_cast<std::string>(INTERNET_GAMING_PROTOCOL_VERSION));
+	s.string(boost::lexical_cast<std::string>(kInternetGamingProtocolVersion));
 	s.string(clientname_);
 	s.string(build_id());
 	s.string(bool2str(reg_));
@@ -162,7 +162,7 @@ bool InternetGaming::do_login(bool should_relogin) {
 	// Now let's see, whether the metaserver is answering
 	uint32_t const secs = time(nullptr);
 	state_ = CONNECTING;
-	while (INTERNET_GAMING_TIMEOUT > time(nullptr) - secs) {
+	while (kInternetGamingTimeout > time(nullptr) - secs) {
 		handle_metaserver_communication();
 		// Check if we are a step further... if yes handle_packet has taken care about all the
 		// paperwork, so we put our feet up and just return. ;)
@@ -356,7 +356,7 @@ void InternetGaming::create_second_connection() {
 	// Okay, we have a connection. Send the login message and terminate the connection
 	SendPacket s;
 	s.string(IGPCMD_TELL_IP);
-	s.string(boost::lexical_cast<std::string>(INTERNET_GAMING_PROTOCOL_VERSION));
+	s.string(boost::lexical_cast<std::string>(kInternetGamingProtocolVersion));
 	s.string(clientname_);
 	s.string(authenticator_);
 	tmpNet->send(s);
@@ -582,10 +582,10 @@ void InternetGaming::handle_packet(RecvPacket& packet) {
 				waitcmd_ = "";
 			}
 			// Save the received IP(s), so the client can connect to the game
-			NetAddress::parse_ip(&gameips_.first, packet.string(), INTERNET_RELAY_PORT);
+			NetAddress::parse_ip(&gameips_.first, packet.string(), kInternetRelayPort);
 			// If the next value is true, a secondary IP follows
 			if (packet.string() == bool2str(true)) {
-				NetAddress::parse_ip(&gameips_.second, packet.string(), INTERNET_RELAY_PORT);
+				NetAddress::parse_ip(&gameips_.second, packet.string(), kInternetRelayPort);
 			}
 			log("InternetGaming: Received ips of the relay to host: %s %s.\n",
 			    gameips_.first.ip.to_string().c_str(), gameips_.second.ip.to_string().c_str());
@@ -597,10 +597,10 @@ void InternetGaming::handle_packet(RecvPacket& packet) {
 			assert(waitcmd_ == IGPCMD_GAME_CONNECT);
 			waitcmd_ = "";
 			// Save the received IP(s), so the client can connect to the game
-			NetAddress::parse_ip(&gameips_.first, packet.string(), INTERNET_RELAY_PORT);
+			NetAddress::parse_ip(&gameips_.first, packet.string(), kInternetRelayPort);
 			// If the next value is true, a secondary IP follows
 			if (packet.string() == bool2str(true)) {
-				NetAddress::parse_ip(&gameips_.second, packet.string(), INTERNET_RELAY_PORT);
+				NetAddress::parse_ip(&gameips_.second, packet.string(), kInternetRelayPort);
 			}
 			log("InternetGaming: Received ips of the game to join: %s %s.\n",
 			    gameips_.first.ip.to_string().c_str(), gameips_.second.ip.to_string().c_str());
@@ -679,7 +679,7 @@ void InternetGaming::join_game(const std::string& gamename) {
 
 	// From now on we wait for a reply from the metaserver
 	waitcmd_ = IGPCMD_GAME_CONNECT;
-	waittimeout_ = time(nullptr) + INTERNET_GAMING_TIMEOUT;
+	waittimeout_ = time(nullptr) + kInternetGamingTimeout;
 }
 
 /// called by a client to open a new game with name gamename_
@@ -699,7 +699,7 @@ void InternetGaming::open_game() {
 
 	// From now on we wait for a reply from the metaserver
 	waitcmd_ = IGPCMD_GAME_OPEN;
-	waittimeout_ = time(nullptr) + INTERNET_GAMING_TIMEOUT;
+	waittimeout_ = time(nullptr) + kInternetGamingTimeout;
 }
 
 /// called by a client that is host of a game to inform the metaserver, that the game started
@@ -714,7 +714,7 @@ void InternetGaming::set_game_playing() {
 
 	// From now on we wait for a reply from the metaserver
 	waitcmd_ = IGPCMD_GAME_START;
-	waittimeout_ = time(nullptr) + INTERNET_GAMING_TIMEOUT;
+	waittimeout_ = time(nullptr) + kInternetGamingTimeout;
 }
 
 /// called by a client to inform the metaserver, that it left the game and is back in the lobby.

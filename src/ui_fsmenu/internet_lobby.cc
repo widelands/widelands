@@ -193,7 +193,7 @@ void FullscreenMenuInternetLobby::clicked_ok() {
 void FullscreenMenuInternetLobby::connect_to_metaserver() {
 	Section& s = g_options.pull_section("global");
 	const std::string& metaserver = s.get_string("metaserver", INTERNET_GAMING_METASERVER.c_str());
-	uint32_t port = s.get_natural("metaserverport", INTERNET_GAMING_PORT);
+	uint32_t port = s.get_natural("metaserverport", kInternetGamingPort);
 	std::string auth = is_registered_ ? password_ : s.get_string("uuid");
 	assert(!auth.empty());
 	InternetGaming::ref().login(nickname_, auth, is_registered_, metaserver, port);
@@ -358,7 +358,7 @@ bool FullscreenMenuInternetLobby::wait_for_ip() {
 	while (!InternetGaming::ref().ips().first.is_valid()) {
 		InternetGaming::ref().handle_metaserver_communication();
 		// give some time for the answer + for a relogin, if a problem occurs.
-		if ((INTERNET_GAMING_TIMEOUT * 5 / 3) < time(nullptr) - secs) {
+		if ((kInternetGamingTimeout * 5 / 3) < time(nullptr) - secs) {
 			// Show a popup warning message
 			const std::string warning(
 			   _("Widelands was unable to get the IP address of the server in time. "
