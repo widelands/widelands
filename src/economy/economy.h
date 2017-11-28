@@ -52,6 +52,9 @@ struct Supply;
 struct NoteEconomy {
 	CAN_BE_SENT_AS_NOTE(NoteId::Economy)
 
+	// The owner of the economy.
+	int player_number;
+
 	// When 2 economies have been merged, this is the economy number that has
 	// been removed, while the other one is the number of the resulting economy.
 	// For all other messages old_economy == new_economy.
@@ -60,10 +63,6 @@ struct NoteEconomy {
 
 	enum class Action { kMerged, kDeleted };
 	const Action action;
-
-	NoteEconomy(size_t init_old, size_t init_new, const Action& init_action)
-	   : old_economy(init_old), new_economy(init_new), action(init_action) {
-	}
 };
 
 /**

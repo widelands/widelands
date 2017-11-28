@@ -57,6 +57,9 @@ EconomyOptionsWindow::~EconomyOptionsWindow() {
 }
 
 void EconomyOptionsWindow::on_economy_note(const Widelands::NoteEconomy& note) {
+	if (owner_.player_number() != note.player_number) {
+		return;
+	}
 	if (note.old_economy == economy_number_) {
 		switch (note.action) {
 		case Widelands::NoteEconomy::Action::kMerged:
