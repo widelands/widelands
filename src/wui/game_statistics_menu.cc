@@ -72,10 +72,8 @@ UI::Button* GameStatisticsMenu::add_button(const std::string& image_basename,
 	                  g_gr->images().get("images/" + image_basename + ".png"), tooltip_text);
 	box_.add(button);
 	if (window) {
-		if (!window->on_create) {
-			window->assign_toggle_button(button);
-			registries_.push_back(*window);
-		}
+		window->opened.connect(boost::bind(&UI::Button::set_style, button, UI::Button::Style::kPermpressed));
+		window->closed.connect(boost::bind(&UI::Button::set_style, button, UI::Button::Style::kRaised));
 		button->sigclicked.connect(
 		   boost::bind(&UI::UniqueWindow::Registry::toggle, boost::ref(*window)));
 	}
@@ -83,7 +81,4 @@ UI::Button* GameStatisticsMenu::add_button(const std::string& image_basename,
 }
 
 GameStatisticsMenu::~GameStatisticsMenu() {
-	for (auto& registry : registries_) {
-		registry.unassign_toggle_button();
-	}
 }

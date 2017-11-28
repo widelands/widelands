@@ -41,6 +41,7 @@ void UniqueWindow::Registry::create() {
 			window->restore();
 		window->move_to_top();
 	}
+	opened();
 }
 
 /**
@@ -50,6 +51,7 @@ void UniqueWindow::Registry::destroy() {
 	if (window) {
 		window->die();
 	}
+	closed();
 }
 
 /**
@@ -58,8 +60,10 @@ void UniqueWindow::Registry::destroy() {
 void UniqueWindow::Registry::toggle() {
 	if (window) {
 		window->die();
+		closed();
 	} else {
 		open_window();
+		opened();
 	}
 }
 
@@ -69,21 +73,7 @@ void UniqueWindow::Registry::toggle() {
 */
 UniqueWindow::Registry::~Registry() {
 	delete window;
-}
-
-void UniqueWindow::Registry::assign_toggle_button(UI::Button* button) {
-	assert(!on_create);
-	assert(!on_delete);
-	on_create = boost::bind(&UI::Button::set_style, button, UI::Button::Style::kPermpressed);
-	on_delete = boost::bind(&UI::Button::set_style, button, UI::Button::Style::kRaised);
-	if (window) {
-		button->set_style(UI::Button::Style::kPermpressed);
-	}
-}
-
-void UniqueWindow::Registry::unassign_toggle_button() {
-	on_create = 0;
-	on_delete = 0;
+	closed();
 }
 
 /**
@@ -104,9 +94,6 @@ UniqueWindow::UniqueWindow(Panel* const parent,
 			set_pos(Vector2i(registry_->x, registry_->y));
 			usedefaultpos_ = false;
 		}
-		if (registry_->on_create) {
-			registry_->on_create();
-		}
 	}
 }
 
@@ -121,10 +108,6 @@ UniqueWindow::~UniqueWindow() {
 		registry_->x = get_x();
 		registry_->y = get_y();
 		registry_->valid_pos = true;
-
-		if (registry_->on_delete) {
-			registry_->on_delete();
-		}
 	}
 }
 }
