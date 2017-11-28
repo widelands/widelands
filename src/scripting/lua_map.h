@@ -829,7 +829,7 @@ public:
 	explicit LuaMapObject(lua_State* L) : ptr_(nullptr) {
 		report_error(L, "Cannot instantiate a '%s' directly!", className);
 	}
-	virtual ~LuaMapObject() {
+	~LuaMapObject() override {
 		ptr_ = nullptr;
 	}
 
@@ -1372,7 +1372,7 @@ public:
 	explicit LuaField(lua_State* L) {
 		report_error(L, "Cannot instantiate a 'Field' directly!");
 	}
-	virtual ~LuaField() {
+	~LuaField() override {
 	}
 
 	void __persist(lua_State* L) override;
@@ -1444,7 +1444,7 @@ public:
 	explicit LuaPlayerSlot(lua_State* L) : player_number_(0) {
 		report_error(L, "Cannot instantiate a 'PlayerSlot' directly!");
 	}
-	virtual ~LuaPlayerSlot() {
+	~LuaPlayerSlot() override {
 	}
 
 	void __persist(lua_State* L) override;

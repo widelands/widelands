@@ -83,7 +83,7 @@ public:
 	LuaEditor() {
 	}
 	explicit LuaEditor(lua_State* L);
-	virtual ~LuaEditor() {
+	~LuaEditor() override {
 	}
 
 	void __persist(lua_State* L) override;
