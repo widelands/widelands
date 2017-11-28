@@ -575,15 +575,25 @@ bool DefaultAI::check_trainingsites(uint32_t gametime) {
 	TrainingSite* ts = trainingsites.front().site;
 	TrainingSiteObserver& tso = trainingsites.front();
 
-	// Make sure we are not above ai type limit
-	assert(tso.bo->total_count() <= tso.bo->cnt_limit_by_aimode);
+	// Inform if we are above ai type limit.
+	if (tso.bo->total_count() > tso.bo->cnt_limit_by_aimode) {
+		log("AI check_trainingsites: AI player %d: count of %s exceeds an AI limit %d: actual count: "
+		    "%d\n",
+		    player_number(), tso.bo->name, tso.bo->cnt_limit_by_aimode, tso.bo->total_count());
+	}
 
 	const DescriptionIndex enhancement = ts->descr().enhancement();
 
 	if (enhancement != INVALID_INDEX && ts_without_trainers_ == 0 && mines_.size() > 3 &&
 	    ts_finished_count_ > 1 && ts_in_const_count_ == 0) {
 
-		if (player_->is_building_type_allowed(enhancement)) {
+		// Make sure that:
+		// 1. Building is allowed
+		// 2. AI limit for weaker AI is not to be exceeded
+		BuildingObserver& en_bo =
+		   get_building_observer(tribe_->get_building_descr(enhancement)->name().c_str());
+		if (player_->is_building_type_allowed(enhancement) &&
+		    en_bo.aimode_limit_status() == AiModeBuildings::kAnotherAllowed) {
 			game().send_player_enhance_building(*tso.site, enhancement);
 		}
 	}
@@ -789,7 +799,6 @@ bool DefaultAI::check_militarysites(uint32_t gametime) {
 	// Check next militarysite
 	bool changed = false;
 	MilitarySite* ms = militarysites.front().site;
-	MilitarySiteObserver& mso = militarysites.front();
 
 	// Don't do anything if last change took place lately
 	if (militarysites.front().last_change + 2 * 60 * 1000 > gametime) {
@@ -801,8 +810,11 @@ bool DefaultAI::check_militarysites(uint32_t gametime) {
 	// Make sure we have statistics about our enemies up-to-date
 	update_player_stat(gametime);
 
-	// Make sure we are not above ai type limit
-	assert(mso.bo->total_count() <= mso.bo->cnt_limit_by_aimode);
+	// Inform if we are above ai type limit.
+	if (militarysites.front().bo->total_count() > militarysites.front().bo->cnt_limit_by_aimode) {
+		log("AI check_militarysites: Too many %s: %d, ai limit: %d\n", militarysites.front().bo->name,
+		    militarysites.front().bo->total_count(), militarysites.front().bo->cnt_limit_by_aimode);
+	}
 
 	FCoords f = game().map().get_fcoords(ms->get_position());
 

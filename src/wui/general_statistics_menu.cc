@@ -27,7 +27,6 @@
 #include "base/log.h"
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
-#include "logic/constants.h"
 #include "logic/editor_game_base.h"
 #include "logic/game.h"
 #include "logic/map_objects/tribes/tribe_descr.h"
@@ -51,7 +50,13 @@ GeneralStatisticsMenu::GeneralStatisticsMenu(InteractiveGameBase& parent,
    : UI::UniqueWindow(&parent, "statistics_menu", &registry, 440, 400, _("General Statistics")),
      my_registry_(&registry),
      box_(this, 0, 0, UI::Box::Vertical, 0, 0, 5),
-     plot_(&box_, 0, 0, 430, PLOT_HEIGHT, kStatisticsSampleTime, WuiPlotArea::Plotmode::kAbsolute),
+     plot_(&box_,
+           0,
+           0,
+           430,
+           PLOT_HEIGHT,
+           Widelands::kStatisticsSampleTime,
+           WuiPlotArea::Plotmode::kAbsolute),
      selected_information_(0) {
 	assert(my_registry_);
 

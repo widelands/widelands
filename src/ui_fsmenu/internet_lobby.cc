@@ -27,10 +27,12 @@
 #include "base/macros.h"
 #include "graphic/graphic.h"
 #include "graphic/text_constants.h"
+#include "network/crypto.h"
 #include "network/gameclient.h"
 #include "network/gamehost.h"
 #include "network/internet_gaming.h"
 #include "profile/profile.h"
+#include "random/random.h"
 #include "ui_basic/messagebox.h"
 
 FullscreenMenuInternetLobby::FullscreenMenuInternetLobby(char const* const nick,
@@ -192,8 +194,9 @@ void FullscreenMenuInternetLobby::connect_to_metaserver() {
 	Section& s = g_options.pull_section("global");
 	const std::string& metaserver = s.get_string("metaserver", INTERNET_GAMING_METASERVER.c_str());
 	uint32_t port = s.get_natural("metaserverport", INTERNET_GAMING_PORT);
-
-	InternetGaming::ref().login(nickname_, password_, is_registered_, metaserver, port);
+	std::string auth = is_registered_ ? password_ : s.get_string("uuid");
+	assert(!auth.empty());
+	InternetGaming::ref().login(nickname_, auth, is_registered_, metaserver, port);
 }
 
 /// fills the server list

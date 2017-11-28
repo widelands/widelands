@@ -778,7 +778,7 @@ bool Worker::run_plant(Game& game, State& state, const Action& action) {
 	}
 
 	if (best_suited_immovables_index.empty()) {
-		molog("  WARNING: No suitable immovable found!");
+		molog("  WARNING: No suitable immovable found!\n");
 		send_signal(game, "fail");
 		pop_task(game);
 		return true;
