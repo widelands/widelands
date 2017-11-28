@@ -307,14 +307,14 @@ void EditorInteractive::draw(RenderTarget& dst) {
 			}
 		}
 
-		const auto blit = [&dst, &field, scale](
+		const auto blit = [&dst, scale](
 		   const Image* pic, const Vector2f& position, const Vector2i& hotspot) {
 			dst.blitrect_scale(Rectf(position - hotspot.cast<float>() * scale, pic->width() * scale,
 			                         pic->height() * scale),
 			                   pic, Recti(0, 0, pic->width(), pic->height()), 1.f,
 			                   BlendMode::UseAlpha);
 		};
-		const auto blit_overlay = [&dst, &field, scale, &blit](
+		const auto blit_overlay = [&field, &blit](
 		   const Image* pic, const Vector2i& hotspot) {
 			blit(pic, field.rendertarget_pixel, hotspot);
 		};
