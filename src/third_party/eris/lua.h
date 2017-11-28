@@ -13,6 +13,7 @@
 
 #include "luaconf.h"
 
+#pragma clang diagnostic ignored "-Wunknown-pragmas"
 #pragma clang diagnostic ignored "-Wzero-as-null-pointer-constant"
 
 #define LUA_VERSION_MAJOR "5"
