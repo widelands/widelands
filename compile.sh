@@ -71,7 +71,7 @@ print_help () {
 
 
 
-## Option to avoid building and linking website-related executables.
+## Options to control the build.
 BUILD_WEBSITE="ON"
 BUILD_TRANSLATIONS="ON"
 BUILD_TYPE="Debug"
