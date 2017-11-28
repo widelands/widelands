@@ -6,6 +6,87 @@
 
 // Not so great: Quite some duplicated code between this class and NetClient.
 
+NetRelayConnection::Peeker::Peeker(std::shared_ptr<NetRelayConnection> conn)
+	: conn_(conn), peek_pointer_(0) {
+	assert(conn_);
+}
+
+bool NetRelayConnection::Peeker::string() {
+
+	// Simple validity check. Should always be true as long as the caller has not used any receive() method.
+	assert(conn_->buffer_.size() >= peek_pointer_);
+
+	conn_->try_network_receive();
+
+	if (conn_->buffer_.size() < peek_pointer_ + 1) {
+		return false;
+	}
+
+	// A string goes until the next \0 and might have a length of 0
+	for (size_t i = peek_pointer_; i < conn_->buffer_.size(); ++i) {
+		if (conn_->buffer_[i] == '\0') {
+			peek_pointer_ = i + 1;
+			return true;
+		}
+	}
+	return false;
+}
+
+bool NetRelayConnection::Peeker::cmd(RelayCommand *cmd) {
+
+	assert(conn_->buffer_.size() >= peek_pointer_);
+
+	conn_->try_network_receive();
+
+	if (conn_->buffer_.size() > peek_pointer_) {
+		if (cmd != nullptr) {
+			*cmd = static_cast<RelayCommand>(conn_->buffer_[peek_pointer_]);
+		}
+		peek_pointer_++;
+		return true;
+	} else {
+		return false;
+	}
+}
+
+bool NetRelayConnection::Peeker::uint8_t() {
+
+	assert(conn_->buffer_.size() >= peek_pointer_);
+
+	conn_->try_network_receive();
+
+	// If there is any byte available, we can read an uint8
+	if (conn_->buffer_.size() > peek_pointer_) {
+		peek_pointer_++;
+		return true;
+	} else {
+		return false;
+	}
+}
+
+bool NetRelayConnection::Peeker::recvpacket() {
+
+	assert(conn_->buffer_.size() >= peek_pointer_);
+
+	conn_->try_network_receive();
+
+	if (conn_->buffer_.size() < peek_pointer_ + 2) {
+		// Not even enough space for the size of the recvpacket
+		return false;
+	}
+
+	// RecvPackets have their size coded in their first two bytes
+	const uint16_t size = conn_->buffer_[peek_pointer_ + 0] << 8 | conn_->buffer_[peek_pointer_ + 1];
+	assert(size >= 2);
+
+	if (conn_->buffer_.size() >= peek_pointer_ + size) {
+		peek_pointer_ += size;
+		return true;
+	} else {
+		return false;
+	}
+}
+
 std::unique_ptr<NetRelayConnection> NetRelayConnection::connect(const NetAddress& host) {
 	std::unique_ptr<NetRelayConnection> ptr(new NetRelayConnection(host));
 	if (!ptr->is_connected()) {
@@ -40,34 +121,13 @@ void NetRelayConnection::close() {
 	socket_.close(ec);
 }
 
-bool NetRelayConnection::peek_string() {
-	try_network_receive();
-
-	if (buffer_.size() < peek_pointer_ + 1) {
-		return false;
-	}
-
-	// A string goes until the next \0 and might have a length of 0
-	for (size_t i = peek_pointer_; i < buffer_.size(); ++i) {
-		if (buffer_[i] == '\0') {
-			peek_pointer_ = i + 1;
-			return true;
-		}
-	}
-	return false;
-}
-
 void NetRelayConnection::receive(std::string *str) {
 	// Try to receive something from the network.
 	try_network_receive();
 
-	// Reset the peek pointer
-	peek_reset();
-
 	#ifndef NDEBUG
 	// Check if we can read a complete string
-	assert(peek_string());
-	peek_reset();
+	assert(Peeker(shared_from_this()).string());
 	#endif // NDEBUG
 
 	// Read the string
@@ -81,24 +141,10 @@ void NetRelayConnection::receive(std::string *str) {
 	buffer_.pop_front();
 }
 
-bool NetRelayConnection::peek_cmd(RelayCommand *cmd) {
-	try_network_receive();
-
-	if (buffer_.size() > peek_pointer_) {
-		if (cmd != nullptr) {
-			*cmd = static_cast<RelayCommand>(buffer_[peek_pointer_]);
-		}
-		peek_pointer_++;
-		return true;
-	} else {
-		return false;
-	}
-}
-
 void NetRelayConnection::receive(RelayCommand *out) {
 	try_network_receive();
 
-	peek_reset();
+	// No complete peeker required here, we only want one byte
 	assert(!buffer_.empty());
 
 	uint8_t i;
@@ -106,56 +152,21 @@ void NetRelayConnection::receive(RelayCommand *out) {
 	*out = static_cast<RelayCommand>(i);
 }
 
-bool NetRelayConnection::peek_uint8_t() {
-	try_network_receive();
-
-	// If there is any byte available, we can read an uint8
-	if (buffer_.size() > peek_pointer_) {
-		peek_pointer_++;
-		return true;
-	} else {
-		return false;
-	}
-}
-
 void NetRelayConnection::receive(uint8_t *out) {
 	try_network_receive();
 
-	peek_reset();
 	assert(!buffer_.empty());
 
 	*out = buffer_.front();
 	buffer_.pop_front();
 }
 
-bool NetRelayConnection::peek_recvpacket() {
-	try_network_receive();
-
-	if (buffer_.size() < peek_pointer_ + 2) {
-		// Not even enough space for the size
-		return false;
-	}
-
-	// RecvPackets have their size coded in their first two bytes
-	const uint16_t size = buffer_[peek_pointer_ + 0] << 8 | buffer_[peek_pointer_ + 1];
-	assert(size >= 2);
-
-	if (buffer_.size() >= peek_pointer_ + size) {
-		peek_pointer_ += size;
-		return true;
-	} else {
-		return false;
-	}
-}
-
 void NetRelayConnection::receive(RecvPacket *packet) {
 	try_network_receive();
 
-	peek_reset();
 
 	#ifndef NDEBUG
-	assert(peek_recvpacket());
-	peek_reset();
+	assert(Peeker(shared_from_this()).recvpacket());
 	#endif // NDEBUG
 
 	// Read the packet (adapted copy from Deserializer)
@@ -194,10 +205,6 @@ bool NetRelayConnection::try_network_receive() {
 		return false;
 	}
 	return true;
-}
-
-void NetRelayConnection::peek_reset() {
-	peek_pointer_ = 0;
 }
 
 void NetRelayConnection::send(const RelayCommand data) {
@@ -278,7 +285,7 @@ void NetRelayConnection::send(const SendPacket& packet) {
 }
 
 NetRelayConnection::NetRelayConnection(const NetAddress& host)
-   : io_service_(), socket_(io_service_), buffer_(), peek_pointer_(0) {
+   : io_service_(), socket_(io_service_), buffer_() {
 
 	assert(host.is_valid());
 	const boost::asio::ip::tcp::endpoint destination(host.ip, host.port);

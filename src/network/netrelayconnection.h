@@ -30,26 +30,81 @@
  * Does not contain logic but provides a buffer to read
  * uint8_t / std::string / SendPacket from the network stream.
  *
- * Additionally, the peek_* methods allow to check the contents of the buffer. They will not remove any bytes,
- * but will check whether the required value can be read. After checking, an internal peek-pointer will be
- * incremented. The next call of a peek_* method will then start reading after the previous value.
- * Calling peek_reset() will restore the pointer to the start of the buffer. Only a successful peek will
- * move the pointer.
- * Note that a successful peek does not mean that the received bytes really are of the requested type, it only
- * means they could be interpreted that way. Whether the type matches is in the responsibility of the caller.
- * The idea of this methods is that the caller can check whether a complete relay command can be received
- * before starting to remove data from the buffer. Otherwise, the caller would have to maintain their own buffer.
+ * Use the Peeker class to check whether the required data has already been received
+ * before trying to read the data.
  */
-// NOCOM(#codereview): I feel this API is easy to misuse by forgetting to reset
-// the peek value. Also the interface mixes network code (connect is connected,
-// close and so on) with peeking. How about you pull all the peek_* into a
-// separate nested class NetRelayConnection::Peeker and create return such a
-// peeker in a method called peek(). The peeker can not be reset, you can
-// create a new peeker though to restart at the current buffer beginning. The user must then not modify the buffer
-// while a peeker is alive - a required invariant of your API which you have now too.
-// A nested class can access private variables from its parent - just give it a pointer to NetRelayConnection and it can use its 'buffer'.
-class NetRelayConnection {
+class NetRelayConnection : public std::enable_shared_from_this<NetRelayConnection> {
 public:
+
+	/**
+	 * Allows to check whether the required data is completely in the buffer before starting to receive it.
+	 *
+	 * The idea of this methods is that the caller can check whether a complete relay command
+	 * can be received before starting to remove data from the buffer. Otherwise, the caller would have to
+	 * maintain their own buffer.
+	 *
+	 * The methods will not remove any bytes, but will check whether the required value can be read.
+	 * After checking, an internal peek-pointer will be incremented. The next call of a method will then
+	 * start reading after the previous value. Only a successful peek will move the pointer.
+	 *
+	 * Note that a successful peek does not mean that the received bytes really are of the requested type,
+	 * it only means they could be interpreted that way. Whether the type matches is in the responsibility
+	 * of the caller.
+	 *
+	 * Using any method of this class will trigger an internal read from the network socket inside the
+	 * given NetRelayConnection.
+	 *
+	 * \warning Calling any receive() method on the given connection will invalidate the Peeker.
+	 */
+	class Peeker {
+	public:
+
+		/**
+		 * Creates a Peeker for the given connection.
+		 * Calling any receive() method on the given connection will invalidate the Peeker.
+		 * \param conn The connection which should be peeked into.
+		 */
+		Peeker(std::shared_ptr<NetRelayConnection> conn);
+
+		/**
+		 * Checks whether a relay command can be read from the buffer.
+		 * This method does not modify the buffer contents but increases the peek-pointer.
+		 * \param cmd The command that will be returned next. It will not be removed from the input queue!
+		 *            Can be nullptr.
+		 * \return \c True if the value can be read, \c false if not enough data has been received.
+		 */
+		bool cmd(RelayCommand *cmd = nullptr);
+
+		/**
+		 * Checks whether an uint8_t can be read from the buffer.
+		 * This method does not modify the buffer contents but increases the peek-pointer.
+		 * \return \c True if the value can be read, \c false if not enough data has been received.
+		 */
+		bool uint8_t();
+
+		/**
+		 * Checks whether a std::string can be read from the buffer.
+		 * This method does not modify the buffer contents but increases the peek-pointer.
+		 * \return \c True if the value can be read, \c false if not enough data has been received.
+		 */
+		bool string();
+
+		/**
+		 * Checks whether a RecvPacket can be read from the buffer.
+		 * This method does not modify the buffer contents but increases the peek-pointer.
+		 * \return \c True if the value can be read, \c false if not enough data has been received.
+		 */
+		bool recvpacket();
+
+	private:
+
+		/// The connection to operate on.
+		std::shared_ptr<NetRelayConnection> conn_;
+
+		/// The position of the next peek.
+		size_t peek_pointer_;
+	};
+
 	/**
 	 * Tries to establish a connection to the given relay.
 	 * \param host The host to connect to.
@@ -76,46 +131,9 @@ public:
 	void close();
 
 	/**
-	 * Checks whether a relay command can be read from the buffer.
-	 * This method does not modify the buffer contents but increases the peek-pointer.
-	 * \param cmd The command that will be returned next. It will not be removed from the input queue!
-	 *            Can be nullptr.
-	 * \return \c True if the value can be read, \c false if not enough data has been received.
-	 */
-	bool peek_cmd(RelayCommand *cmd = nullptr);
-
-	/**
-	 * Checks whether an uint8_t can be read from the buffer.
-	 * This method does not modify the buffer contents but increases the peek-pointer.
-	 * \return \c True if the value can be read, \c false if not enough data has been received.
-	 */
-	bool peek_uint8_t();
-
-	/**
-	 * Checks whether a std::string can be read from the buffer.
-	 * This method does not modify the buffer contents but increases the peek-pointer.
-	 * \return \c True if the value can be read, \c false if not enough data has been received.
-	 */
-	bool peek_string();
-
-	/**
-	 * Checks whether a RecvPacket can be read from the buffer.
-	 * This method does not modify the buffer contents but increases the peek-pointer.
-	 * \return \c True if the value can be read, \c false if not enough data has been received.
-	 */
-	bool peek_recvpacket();
-
-	/**
-	 * Resets the peek pointer to the beginning of the buffer.
-	 */
-	void peek_reset();
-
-	/**
 	 * Receive a command.
 	 * \warning Calling this method is only safe when peek_cmd() returned \c true.
 	 *          Otherwise the behavior of this method is undefined.
-	 *
-	 * Calling this methods resets the peek-pointer.
 	 * \param out The variable to write the value to.
 	 */
 	void receive(RelayCommand *out);
@@ -124,8 +142,6 @@ public:
 	 * Receive an uint8_t.
 	 * \warning Calling this method is only safe when peek_uint8_t() returned \c true.
 	 *          Otherwise the behavior of this method is undefined.
-	 *
-	 * Calling this methods resets the peek-pointer.
 	 * \param out The variable to write the value to.
 	 */
 	void receive(uint8_t *out);
@@ -134,8 +150,6 @@ public:
 	 * Receive a string.
 	 * \warning Calling this method is only safe when peek_string() returned \c true.
 	 *          Otherwise the behavior of this method is undefined.
-	 *
-	 * Calling this methods resets the peek-pointer.
 	 * \param out The variable to write the value to.
 	 */
 	void receive(std::string *out);
@@ -144,8 +158,6 @@ public:
 	 * Receive a RecvPacket.
 	 * \warning Calling this method is only safe when peek_recvpacket() returned \c true.
 	 *          Otherwise the behavior of this method is undefined.
-	 *
-	 * Calling this methods resets the peek-pointer.
 	 * \param out The variable to write the value to.
 	 */
 	void receive(RecvPacket *out);
@@ -200,9 +212,6 @@ private:
 
 	/// Buffer for arriving data. We need to store it until we have enough to return the required type.
 	std::deque<unsigned char> buffer_;
-
-	/// The position of the next peek.
-	size_t peek_pointer_;
 };
 
 #endif  // end of include guard: WL_NETWORK_NETRELAYCONNECTION_H

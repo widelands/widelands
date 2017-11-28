@@ -127,7 +127,7 @@ NetHostProxy::NetHostProxy(const std::pair<NetAddress, NetAddress>& addresses, c
 
    	// Wait 10 seconds for an answer
 	uint32_t endtime = time(nullptr) + 10;
-	while (!conn_->peek_cmd()) {
+	while (!NetRelayConnection::Peeker(conn_).cmd()) {
 		if (time(nullptr) > endtime) {
 			// No message received in time
 			conn_->close();
@@ -147,7 +147,7 @@ NetHostProxy::NetHostProxy(const std::pair<NetAddress, NetAddress>& addresses, c
 
    	// Check version
 	endtime = time(nullptr) + 10;
-	while (!conn_->peek_uint8_t()) {
+	while (!NetRelayConnection::Peeker(conn_).uint8_t()) {
 		if (time(nullptr) > endtime) {
 			// No message received in time
 			conn_->close();
@@ -165,7 +165,7 @@ NetHostProxy::NetHostProxy(const std::pair<NetAddress, NetAddress>& addresses, c
 
    	// Check game name
 	endtime = time(nullptr) + 10;
-	while (!conn_->peek_string()) {
+	while (!NetRelayConnection::Peeker(conn_).string()) {
 		if (time(nullptr) > endtime) {
 			// No message received in time
 			conn_->close();
@@ -189,14 +189,14 @@ void NetHostProxy::receive_commands() {
 
 	// Receive all available commands
 	RelayCommand cmd;
-	conn_->peek_reset();
-	if (!conn_->peek_cmd(&cmd)) {
+	NetRelayConnection::Peeker peek(conn_);
+	if (!peek.cmd(&cmd)) {
 		// No command to receive
 		return;
 	}
 	switch (cmd) {
 		case RelayCommand::kDisconnect:
-			if (conn_->peek_string()) {
+			if (peek.string()) {
 				// Command is completely in the buffer, handle it
 				conn_->receive(&cmd);
 				std::string reason;
@@ -209,7 +209,7 @@ void NetHostProxy::receive_commands() {
 			}
 			break;
 		case RelayCommand::kConnectClient:
-			if (conn_->peek_uint8_t()) {
+			if (peek.uint8_t()) {
 				conn_->receive(&cmd);
 				uint8_t id;
 				conn_->receive(&id);
@@ -224,7 +224,7 @@ void NetHostProxy::receive_commands() {
 			}
 			break;
 		case RelayCommand::kDisconnectClient:
-			if (conn_->peek_uint8_t()) {
+			if (peek.uint8_t()) {
 				conn_->receive(&cmd);
 				uint8_t id;
 				conn_->receive(&id);
@@ -233,7 +233,7 @@ void NetHostProxy::receive_commands() {
 			}
 			break;
 		case RelayCommand::kFromClient:
-			if (conn_->peek_uint8_t() && conn_->peek_recvpacket()) {
+			if (peek.uint8_t() && peek.recvpacket()) {
 				conn_->receive(&cmd);
 				uint8_t id;
 				conn_->receive(&id);

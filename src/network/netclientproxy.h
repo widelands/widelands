@@ -64,7 +64,7 @@ private:
 
 	void receive_commands();
 
-	std::unique_ptr<NetRelayConnection> conn_;
+	std::shared_ptr<NetRelayConnection> conn_;
 
 	/// For each connected client, the packages that have been received from him.
 	std::queue<RecvPacket> received_;
