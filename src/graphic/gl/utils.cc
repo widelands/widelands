@@ -165,9 +165,9 @@ void Program::build(const std::string& program_name) {
 
 		if (infoLen > 1) {
 			std::unique_ptr<char[]> infoLog(new char[infoLen]);
-			CLANG_DIAG_OFF("-Wdisabled-macro-expansion")
+			CLANG_DIAG_OFF("-Wzero-as-null-pointer-constant")
 			glGetProgramInfoLog(program_object_, infoLen, NULL, infoLog.get());
-			CLANG_DIAG_ON("-Wdisabled-macro-expansion")
+			CLANG_DIAG_ON("-Wzero-as-null-pointer-constant")
 			throw wexception("Error linking:\n%s", infoLog.get());
 		}
 	}
