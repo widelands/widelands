@@ -74,8 +74,7 @@ Economy::Economy(Player& player) : owner_(player), request_timerid_(0), has_wind
 
 Economy::~Economy() {
 	const size_t economy_number = owner_.get_economy_number(this);
-	Notifications::publish(
-	   NoteEconomy{owner_.player_number(), economy_number, economy_number, NoteEconomy::Action::kDeleted});
+	Notifications::publish(NoteEconomy{this, this, NoteEconomy::Action::kDeleted});
 	owner_.remove_economy(*this);
 
 	if (requests_.size())
@@ -531,8 +530,7 @@ void Economy::merge(Economy& e) {
 	//  should still have an options window after the merge.
 	if (e.has_window() && !has_window()) {
 		Notifications::publish(
-		   NoteEconomy{e.owner().player_number(), e.owner().get_economy_number(&e),
-		               owner_.get_economy_number(this), NoteEconomy::Action::kMerged});
+		   NoteEconomy{&e, this, NoteEconomy::Action::kMerged});
 	}
 
 	for (std::vector<Flag*>::size_type i = e.get_nrflags() + 1; --i;) {

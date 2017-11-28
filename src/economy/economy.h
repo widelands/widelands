@@ -48,18 +48,16 @@ class Request;
 struct Route;
 struct Router;
 struct Supply;
+class Economy;
 
 struct NoteEconomy {
 	CAN_BE_SENT_AS_NOTE(NoteId::Economy)
 
-	// The owner of the economy.
-	int player_number;
-
 	// When 2 economies have been merged, this is the economy number that has
 	// been removed, while the other one is the number of the resulting economy.
 	// For all other messages old_economy == new_economy.
-	size_t old_economy;
-	size_t new_economy;
+	Economy* old_economy;
+	Economy* new_economy;
 
 	enum class Action { kMerged, kDeleted };
 	const Action action;

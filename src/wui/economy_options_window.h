@@ -39,20 +39,17 @@ private:
 		TargetWaresDisplay(UI::Panel* const parent,
 		                   int32_t const x,
 		                   int32_t const y,
-		                   const Widelands::TribeDescr& tribe,
 		                   Widelands::WareWorker type,
 		                   bool selectable,
-		                   size_t economy_number,
-		                   Widelands::Player& owner);
+		                   Widelands::Economy* economy);
 
-		void set_economy_number(size_t economy_number);
+		void set_economy(Widelands::Economy*);
 
 	protected:
 		std::string info_for_ware(Widelands::DescriptionIndex const ware) override;
 
 	private:
-		size_t economy_number_;
-		Widelands::Player& owner_;
+		Widelands::Economy* economy_;
 	};
 
 	/**
@@ -62,17 +59,15 @@ private:
 		EconomyOptionsPanel(UI::Panel* parent,
 		                    bool can_act,
 		                    Widelands::WareWorker type,
-		                    size_t economy_number,
-		                    Widelands::Player& owner);
+		                    Widelands::Economy* economy);
 
-		void set_economy_number(size_t economy_number);
+		void set_economy(Widelands::Economy*);
 		void change_target(int amount);
 		void reset_target();
 
 	private:
 		Widelands::WareWorker type_;
-		size_t economy_number_;
-		Widelands::Player& owner_;
+		Widelands::Economy* economy_;
 		bool can_act_;
 		TargetWaresDisplay display_;
 	};
@@ -80,8 +75,8 @@ private:
 	/// Actions performed when a NoteEconomyWindow is received.
 	void on_economy_note(const Widelands::NoteEconomy& note);
 
-	size_t economy_number_;
-	Widelands::Player& owner_;
+
+	Widelands::Economy* economy_;
 	UI::TabPanel tabpanel_;
 	EconomyOptionsPanel* ware_panel_;
 	EconomyOptionsPanel* worker_panel_;
