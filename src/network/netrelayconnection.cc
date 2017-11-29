@@ -49,7 +49,7 @@ bool NetRelayConnection::Peeker::cmd(RelayCommand *cmd) {
 	}
 }
 
-bool NetRelayConnection::Peeker::uint8_t() {
+bool NetRelayConnection::Peeker::uint8_t(::uint8_t *n) {
 
 	assert(conn_->buffer_.size() >= peek_pointer_);
 
@@ -57,6 +57,9 @@ bool NetRelayConnection::Peeker::uint8_t() {
 
 	// If there is any byte available, we can read an uint8
 	if (conn_->buffer_.size() > peek_pointer_) {
+		if (n != nullptr) {
+			*n = static_cast<::uint8_t>(conn_->buffer_[peek_pointer_]);
+		}
 		peek_pointer_++;
 		return true;
 	} else {

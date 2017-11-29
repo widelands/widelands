@@ -148,6 +148,37 @@ enum class RelayCommand : uint8_t {
 	 *             INVALID_CLIENT: Host tried to send a message to a non-existing client
 	 */
 	kDisconnect = 3,
+
+	/**
+	 * The relay sends this message to check for presence and to measure the round-trip-time.
+	 * Has to be answered by kPong immediately.
+	 * Payload:
+	 * \li unsigned_8: A sequence number for this ping request.
+	 */
+	kPing = 4,
+
+	/**
+	 * Send to the relay to answer a kPing message.
+	 * Payload:
+	 * \li unsigned_8: Should be the sequence number found in the ping request.
+	 */
+	kPong = 5,
+
+	/**
+	 * Send to the relay to request the newest ping results.
+	 * No payload.
+	 */
+	kRoundTripTimeRequest = 6,
+
+	/**
+	 * Send by the relay as an answer to the kRoundTripTimeRequest with the following payload:
+	 * \li unsigned_8: Length of the list.
+	 * A list of
+	 * \li unsigned_8: Id of the client.
+	 * \li unsigned_8: The RTT in milliseconds. RTTs are capped to max. 255ms.
+	 * \li unsigned_8: Seconds since the last kPong has been received by the relay.
+	 */
+	kRoundTripTimeResponse = 7,
 	/// \}
 
 	/**
@@ -185,20 +216,6 @@ enum class RelayCommand : uint8_t {
 	 * \li packet: The SendPacket to relay.
 	 */
 	kFromClient = 14,
-
-	/**
-	 * The relay sends this message to check for the presence of the NetHostProxy.
-	 * Any message is acceptable as response.
-	 */
-	// NOCOM(#codereview): It would be nice to always get a kPong on a kPing to make sure we can do round-trip-timing to
-	// gauge quality of connections - and whom to kick from a game should it lag.
-	kPing = 15,
-
-	/**
-	 * The NetHostProxy replies with this message to a kPing when it has nothing
-	 * else to talk about.
-	 */
-	kPong = 16,
 	/// \}
 
 	/**
