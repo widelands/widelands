@@ -41,7 +41,6 @@ void UniqueWindow::Registry::create() {
 			window->restore();
 		window->move_to_top();
 	}
-	opened();
 }
 
 /**
@@ -51,7 +50,6 @@ void UniqueWindow::Registry::destroy() {
 	if (window) {
 		window->die();
 	}
-	closed();
 }
 
 /**
@@ -60,10 +58,8 @@ void UniqueWindow::Registry::destroy() {
 void UniqueWindow::Registry::toggle() {
 	if (window) {
 		window->die();
-		closed();
 	} else {
 		open_window();
-		opened();
 	}
 }
 
@@ -73,7 +69,6 @@ void UniqueWindow::Registry::toggle() {
 */
 UniqueWindow::Registry::~Registry() {
 	delete window;
-	closed();
 }
 
 /**
@@ -94,6 +89,7 @@ UniqueWindow::UniqueWindow(Panel* const parent,
 			set_pos(Vector2i(registry_->x, registry_->y));
 			usedefaultpos_ = false;
 		}
+		registry_->opened();
 	}
 }
 
@@ -108,6 +104,8 @@ UniqueWindow::~UniqueWindow() {
 		registry_->x = get_x();
 		registry_->y = get_y();
 		registry_->valid_pos = true;
+
+		registry_->closed();
 	}
 }
 }

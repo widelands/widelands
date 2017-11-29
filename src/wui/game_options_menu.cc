@@ -114,6 +114,9 @@ GameOptionsMenu::GameOptionsMenu(InteractiveGameBase& gb,
 	exit_game_.sigclicked.connect(
 	   boost::bind(&GameOptionsMenu::clicked_exit_game, boost::ref(*this)));
 
+	if (windows_.sound_options.window) {
+		sound_.set_style(UI::Button::Style::kPermpressed);
+	}
 	windows_.sound_options.opened.connect(boost::bind(&UI::Button::set_style, &sound_, UI::Button::Style::kPermpressed));
 	windows_.sound_options.closed.connect(boost::bind(&UI::Button::set_style, &sound_, UI::Button::Style::kRaised));
 
