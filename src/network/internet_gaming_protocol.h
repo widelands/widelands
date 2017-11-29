@@ -38,7 +38,7 @@
  *     username assigned. Dropping RELOGIN command.
  * 3: Between build 19 and build 20 - Added network relay for internet games [supported]
  */
-constexpr uint8_t kInternetGamingProtocolVersion = 2;
+constexpr unsigned int kInternetGamingProtocolVersion = 3;
 
 /**
  * The default timeout time after which the client tries to resend a package or even finally closes
