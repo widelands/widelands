@@ -12,8 +12,10 @@
 
 #include "lua.h"
 
+#ifdef __clang__
 #pragma clang diagnostic ignored "-Wunknown-pragmas"
 #pragma clang diagnostic ignored "-Wzero-as-null-pointer-constant"
+#endif
 
 /* extra error code for 'luaL_load' */
 #define LUA_ERRFILE (LUA_ERRERR + 1)
