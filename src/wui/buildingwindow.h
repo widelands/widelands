@@ -58,9 +58,8 @@ struct BuildingWindow : public UI::UniqueWindow {
 	void think() override;
 
 protected:
+	virtual void init(bool avoid_fastclick);
 	void die() override;
-
-	void init(bool avoid_fastclick);
 
 	UI::TabPanel* get_tabs() {
 		return tabs_;

@@ -62,10 +62,11 @@ ProductionSiteWindow::ProductionSiteWindow(InteractiveGameBase& parent,
 			   }
 		   }
 		});
-	init(avoid_fastclick, &ps);
+	init(avoid_fastclick);
 }
 
-void ProductionSiteWindow::init(bool avoid_fastclick, Widelands::ProductionSite *production_site) {
+void ProductionSiteWindow::init(bool avoid_fastclick) {
+	Widelands::ProductionSite* production_site = production_site_.get(igbase()->egbase());
 	assert(production_site != nullptr);
 
 	BuildingWindow::init(avoid_fastclick);

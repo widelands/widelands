@@ -34,7 +34,7 @@ struct ProductionSiteWindow : public BuildingWindow {
 
 protected:
 	void think() override;
-	void init(bool avoid_fastclick, Widelands::ProductionSite* production_site);
+	void init(bool avoid_fastclick) override;
 	void evict_worker();
 
 private:
@@ -45,6 +45,7 @@ private:
 	UI::Box* worker_caps_;
 	std::unique_ptr<Notifications::Subscriber<Widelands::NoteBuilding>>
 	   productionsitenotes_subscriber_;
+
 	DISALLOW_COPY_AND_ASSIGN(ProductionSiteWindow);
 };
 

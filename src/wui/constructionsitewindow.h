@@ -36,7 +36,7 @@ struct ConstructionSiteWindow : public BuildingWindow {
 	void think() override;
 
 protected:
-	void init(bool avoid_fastclick);
+	void init(bool avoid_fastclick) override;
 
 private:
 	Widelands::OPtr<Widelands::ConstructionSite> construction_site_;

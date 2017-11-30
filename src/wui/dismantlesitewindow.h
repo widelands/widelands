@@ -36,7 +36,7 @@ struct DismantleSiteWindow : public BuildingWindow {
 	void think() override;
 
 private:
-	void init(bool avoid_fastclick);
+	void init(bool avoid_fastclick) override;
 
 	Widelands::OPtr<Widelands::DismantleSite> dismantle_site_;
 	UI::ProgressBar* progress_;

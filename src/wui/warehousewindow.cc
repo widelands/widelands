@@ -176,11 +176,12 @@ WarehouseWindow::WarehouseWindow(InteractiveGameBase& parent,
                                  UI::UniqueWindow::Registry& reg,
                                  Widelands::Warehouse& wh,
                                  bool avoid_fastclick)
-   : BuildingWindow(parent, reg, wh, avoid_fastclick) {
-	init(avoid_fastclick, &wh);
+   : BuildingWindow(parent, reg, wh, avoid_fastclick), warehouse_(&wh) {
+	init(avoid_fastclick);
 }
 
-void WarehouseWindow::init(bool avoid_fastclick, Widelands::Warehouse* warehouse) {
+void WarehouseWindow::init(bool avoid_fastclick) {
+	Widelands::Warehouse* warehouse = warehouse_.get(igbase()->egbase());
 	assert(warehouse != nullptr);
 	BuildingWindow::init(avoid_fastclick);
 	get_tabs()->add(

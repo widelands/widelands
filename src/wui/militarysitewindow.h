@@ -33,7 +33,10 @@ struct MilitarySiteWindow : public BuildingWindow {
 	                   bool avoid_fastclick);
 
 private:
-	void init(bool avoid_fastclick, Widelands::MilitarySite* military_site);
+	void init(bool avoid_fastclick) override;
+
+	Widelands::OPtr<Widelands::MilitarySite> military_site_;
+
 	DISALLOW_COPY_AND_ASSIGN(MilitarySiteWindow);
 };
 

@@ -33,7 +33,9 @@ struct WarehouseWindow : public BuildingWindow {
 	                bool avoid_fastclick);
 
 private:
-	void init(bool avoid_fastclick, Widelands::Warehouse* warehouse);
+	void init(bool avoid_fastclick) override;
+
+	Widelands::OPtr<Widelands::Warehouse> warehouse_;
 
 	DISALLOW_COPY_AND_ASSIGN(WarehouseWindow);
 };
