@@ -50,10 +50,6 @@ struct BuildingWindow : public UI::UniqueWindow {
 
 	virtual ~BuildingWindow();
 
-	Widelands::Building& building() {
-		return building_;
-	}
-
 	InteractiveGameBase* igbase() const {
 		return parent_;
 	}
@@ -62,8 +58,9 @@ struct BuildingWindow : public UI::UniqueWindow {
 	void think() override;
 
 protected:
-	virtual void init(bool avoid_fastclick);
 	void die() override;
+
+	void init(bool avoid_fastclick);
 
 	UI::TabPanel* get_tabs() {
 		return tabs_;
@@ -84,11 +81,12 @@ protected:
 	void
 	create_input_queue_panel(UI::Box*, Widelands::Building&, Widelands::InputQueue*, bool = false);
 
-	virtual void create_capsbuttons(UI::Box* buttons);
 
 	bool is_dying_;
 
 private:
+	void create_capsbuttons(UI::Box* buttons, Widelands::Building* building);
+
 	// Actions performed when a NoteBuilding is received.
 	void on_building_note(const Widelands::NoteBuilding& note);
 
@@ -97,7 +95,7 @@ private:
 
 	InteractiveGameBase* parent_;
 
-	Widelands::Building& building_;
+	Widelands::OPtr<Widelands::Building> building_;
 
 	// We require this to unregister overlays when we are closed. Since the
 	// building might have been destroyed by then we have to keep a copy of its

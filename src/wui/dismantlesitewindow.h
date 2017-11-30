@@ -35,10 +35,10 @@ struct DismantleSiteWindow : public BuildingWindow {
 
 	void think() override;
 
-protected:
-	void init(bool avoid_fastclick) override;
-
 private:
+	void init(bool avoid_fastclick);
+
+	Widelands::OPtr<Widelands::DismantleSite> dismantle_site_;
 	UI::ProgressBar* progress_;
 	DISALLOW_COPY_AND_ASSIGN(DismantleSiteWindow);
 };

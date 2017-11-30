@@ -32,14 +32,9 @@ struct WarehouseWindow : public BuildingWindow {
 	                Widelands::Warehouse&,
 	                bool avoid_fastclick);
 
-	Widelands::Warehouse& warehouse() {
-		return dynamic_cast<Widelands::Warehouse&>(building());
-	}
-
-protected:
-	void init(bool avoid_fastclick) override;
-
 private:
+	void init(bool avoid_fastclick, Widelands::Warehouse* warehouse);
+
 	DISALLOW_COPY_AND_ASSIGN(WarehouseWindow);
 };
 

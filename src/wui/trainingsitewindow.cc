@@ -34,17 +34,14 @@ TrainingSiteWindow::TrainingSiteWindow(InteractiveGameBase& parent,
                                        Widelands::TrainingSite& ts,
                                        bool avoid_fastclick)
    : ProductionSiteWindow(parent, reg, ts, avoid_fastclick) {
-	init(avoid_fastclick);
+	init(avoid_fastclick, &ts);
 }
 
-void TrainingSiteWindow::init(bool avoid_fastclick) {
-	ProductionSiteWindow::init(avoid_fastclick);
+void TrainingSiteWindow::init(bool avoid_fastclick, Widelands::TrainingSite* training_site) {
+	assert(training_site != nullptr);
+	ProductionSiteWindow::init(avoid_fastclick, training_site);
 	get_tabs()->add("soldiers", g_gr->images().get(pic_tab_military),
-	                create_soldier_list(*get_tabs(), *igbase(), trainingsite()),
+	                create_soldier_list(*get_tabs(), *igbase(), *training_site),
 	                _("Soldiers in training"));
 	think();
-}
-
-void TrainingSiteWindow::create_capsbuttons(UI::Box* buttons) {
-	ProductionSiteWindow::create_capsbuttons(buttons);
 }

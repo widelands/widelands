@@ -36,9 +36,10 @@ struct ConstructionSiteWindow : public BuildingWindow {
 	void think() override;
 
 protected:
-	void init(bool avoid_fastclick) override;
+	void init(bool avoid_fastclick);
 
 private:
+	Widelands::OPtr<Widelands::ConstructionSite> construction_site_;
 	UI::ProgressBar* progress_;
 	DISALLOW_COPY_AND_ASSIGN(ConstructionSiteWindow);
 };

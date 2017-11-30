@@ -32,17 +32,15 @@ struct ProductionSiteWindow : public BuildingWindow {
 	                     Widelands::ProductionSite&,
 	                     bool avoid_fastclick);
 
-	Widelands::ProductionSite& productionsite() {
-		return dynamic_cast<Widelands::ProductionSite&>(building());
-	}
-	void update_worker_table();
-
 protected:
-	void init(bool avoid_fastclick) override;
 	void think() override;
+	void init(bool avoid_fastclick, Widelands::ProductionSite* production_site);
 	void evict_worker();
 
 private:
+	void update_worker_table(Widelands::ProductionSite* production_site);
+
+	Widelands::OPtr<Widelands::ProductionSite> production_site_;
 	UI::Table<uintptr_t>* worker_table_;
 	UI::Box* worker_caps_;
 	std::unique_ptr<Notifications::Subscriber<Widelands::NoteBuilding>>
