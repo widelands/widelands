@@ -19,6 +19,8 @@
 
 #include "wui/game_main_menu_save_game.h"
 
+#include <memory>
+
 #include <boost/format.hpp>
 
 #include "base/i18n.h"
