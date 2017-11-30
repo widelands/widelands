@@ -1940,11 +1940,12 @@ void GameHost::handle_network() {
 	}
 
 	// Check if we hear anything from our clients
-	RecvPacket packet;
 	for (size_t i = 0; i < d->clients.size(); ++i) {
 		try {
-			while (d->net->try_receive(d->clients.at(i).sock_id, &packet)) {
-				handle_packet(i, packet);
+			std::unique_ptr<RecvPacket> packet = d->net->try_receive(d->clients.at(i).sock_id);
+			while (packet) {
+				handle_packet(i, *packet);
+				packet = d->net->try_receive(d->clients.at(i).sock_id);
 			}
 			// Thrown by handle_packet()
 		} catch (const DisconnectException& e) {

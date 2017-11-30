@@ -50,7 +50,7 @@ public:
 	bool is_connected(ConnectionId id) const override;
 	void close(ConnectionId id) override;
 	bool try_accept(ConnectionId* new_id) override;
-	bool try_receive(ConnectionId id, RecvPacket* packet) override;
+	std::unique_ptr<RecvPacket> try_receive(ConnectionId id) override;
 	void send(ConnectionId id, const SendPacket& packet) override;
 	void send(const std::vector<ConnectionId>& ids, const SendPacket& packet) override;
 
@@ -94,7 +94,7 @@ private:
 		/// The current connection state
 		State state_;
 		/// The packages that have been received
-		std::queue<RecvPacket> received_;
+		std::queue<std::unique_ptr<RecvPacket>> received_;
 	};
 	/// The connected clients
 	std::map<ConnectionId, Client> clients_;

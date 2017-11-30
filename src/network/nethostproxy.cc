@@ -58,29 +58,29 @@ bool NetHostProxy::try_accept(ConnectionId* new_id) {
 	return false;
 }
 
-bool NetHostProxy::try_receive(const ConnectionId id, RecvPacket* packet) {
+std::unique_ptr<RecvPacket> NetHostProxy::try_receive(const ConnectionId id) {
 	receive_commands();
 
 	// Check whether client is not (yet) connected
 	if (clients_.count(id) == 0 || clients_.at(id).state_ == Client::State::kConnecting)
-		return false;
+		return std::unique_ptr<RecvPacket>();
 
-	std::queue<RecvPacket>& packet_list = clients_.at(id).received_;
+	std::queue<std::unique_ptr<RecvPacket>>& packet_list = clients_.at(id).received_;
 
 	// Now check whether there is data for the requested client
 	if (packet_list.empty()) {
 		// If the client is already disconnected it should not be in the map anymore
 		assert(clients_.at(id).state_ == Client::State::kConnected);
-		return false;
+		return std::unique_ptr<RecvPacket>();
 	}
 
-	*packet = std::move(packet_list.front());
+	std::unique_ptr<RecvPacket> packet = std::move(packet_list.front());
 	packet_list.pop();
 	if (packet_list.empty() && clients_.at(id).state_ == Client::State::kDisconnected) {
 		// If the receive buffer is empty now, remove client
 		clients_.erase(id);
 	}
-	return true;
+	return packet;
 }
 
 void NetHostProxy::send(const ConnectionId id, const SendPacket& packet) {
@@ -237,8 +237,8 @@ void NetHostProxy::receive_commands() {
 				conn_->receive(&cmd);
 				uint8_t id;
 				conn_->receive(&id);
-				RecvPacket packet;
-				conn_->receive(&packet);
+				std::unique_ptr<RecvPacket> packet(new RecvPacket);
+				conn_->receive(packet.get());
 				assert(clients_.count(id));
 				clients_.at(id).received_.push(std::move(packet));
 			}

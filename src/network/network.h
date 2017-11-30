@@ -166,9 +166,6 @@ private:
  */
 struct RecvPacket : public StreamRead {
 public:
-	RecvPacket() = default;
-	RecvPacket(RecvPacket&& other);
-	RecvPacket& operator=(RecvPacket&& other);
 	size_t data(void* data, size_t bufsize) override;
 	bool end_of_file() const override;
 

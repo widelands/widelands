@@ -888,9 +888,10 @@ void GameClient::handle_network() {
 			return;
 		}
 		// Process all available packets
-		RecvPacket packet;
-		while (d->net->try_receive(&packet)) {
-			handle_packet(packet);
+		std::unique_ptr<RecvPacket> packet = d->net->try_receive();
+		while (packet) {
+			handle_packet(*packet);
+			packet = d->net->try_receive();
 		}
 	} catch (const DisconnectException& e) {
 		disconnect(e.what());

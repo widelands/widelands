@@ -49,7 +49,7 @@ public:
 	// Inherited from NetClientInterface
 	bool is_connected() const override;
 	void close() override;
-	bool try_receive(RecvPacket* packet) override;
+	std::unique_ptr<RecvPacket> try_receive() override;
 	void send(const SendPacket& packet) override;
 
 private:
@@ -67,7 +67,7 @@ private:
 	std::unique_ptr<NetRelayConnection> conn_;
 
 	/// For each connected client, the packages that have been received from him.
-	std::queue<RecvPacket> received_;
+	std::queue<std::unique_ptr<RecvPacket>> received_;
 };
 
 #endif  // end of include guard: WL_NETWORK_NETCLIENTPROXY_H

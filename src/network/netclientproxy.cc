@@ -28,17 +28,17 @@ void NetClientProxy::close() {
 	}
 }
 
-bool NetClientProxy::try_receive(RecvPacket* packet) {
+std::unique_ptr<RecvPacket> NetClientProxy::try_receive() {
 	receive_commands();
 
 	// Now check whether there is data
 	if (received_.empty()) {
-		return false;
+		return std::unique_ptr<RecvPacket>();
 	}
 
-	*packet = std::move(received_.front());
+	std::unique_ptr<RecvPacket> packet = std::move(received_.front());
 	received_.pop();
-	return true;
+	return packet;
 }
 
 void NetClientProxy::send(const SendPacket& packet) {
@@ -137,8 +137,8 @@ void NetClientProxy::receive_commands() {
 		case RelayCommand::kFromHost:
 			if (peek.recvpacket()) {
 				conn_->receive(&cmd);
-				RecvPacket packet;
-				conn_->receive(&packet);
+				std::unique_ptr<RecvPacket> packet(new RecvPacket);
+				conn_->receive(packet.get());
 			   received_.push(std::move(packet));
 		   }
 			break;

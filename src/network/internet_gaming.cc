@@ -274,9 +274,9 @@ void InternetGaming::handle_metaserver_communication() {
 				return;
 			}
 			// Process all available packets
-			RecvPacket packet;
-			if (net->try_receive(&packet)) {
-				handle_packet(packet);
+			std::unique_ptr<RecvPacket> packet = net->try_receive();
+			if (packet) {
+				handle_packet(*packet);
 			} else {
 				// Nothing more to receive
 				break;

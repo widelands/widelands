@@ -51,7 +51,7 @@ void NetClient::close() {
 	socket_.close(ec);
 }
 
-bool NetClient::try_receive(RecvPacket* packet) {
+std::unique_ptr<RecvPacket> NetClient::try_receive() {
 	if (is_connected()) {
 		// If we are connected, try to receive some data
 
@@ -72,7 +72,12 @@ bool NetClient::try_receive(RecvPacket* packet) {
 		}
 	}
 	// Try to get one packet from the deserializer
-	return deserializer_.write_packet(packet);
+	std::unique_ptr<RecvPacket> packet(new RecvPacket);
+	if (deserializer_.write_packet(packet.get())) {
+		return packet;
+	} else {
+		return std::unique_ptr<RecvPacket>();
+	}
 }
 
 void NetClient::send(const SendPacket& packet) {

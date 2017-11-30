@@ -127,7 +127,7 @@ bool NetHost::try_accept(ConnectionId* new_id) {
 	return true;
 }
 
-bool NetHost::try_receive(const ConnectionId id, RecvPacket* packet) {
+std::unique_ptr<RecvPacket> NetHost::try_receive(const ConnectionId id) {
 	// Always read all available data into buffers
 	uint8_t buffer[kNetworkBufferSize];
 
@@ -161,10 +161,15 @@ bool NetHost::try_receive(const ConnectionId id, RecvPacket* packet) {
 
 	// Now check whether there is data for the requested client
 	if (!is_connected(id))
-		return false;
+		return std::unique_ptr<RecvPacket>();
 
 	// Try to get one packet from the deserializer
-	return clients_.at(id).deserializer.write_packet(packet);
+	std::unique_ptr<RecvPacket> packet(new RecvPacket);
+	if (clients_.at(id).deserializer.write_packet(packet.get())) {
+		return packet;
+	} else {
+		return std::unique_ptr<RecvPacket>();
+	}
 }
 
 void NetHost::send(const ConnectionId id, const SendPacket& packet) {
