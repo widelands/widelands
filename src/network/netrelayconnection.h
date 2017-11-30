@@ -33,6 +33,9 @@
  * Use the Peeker class to check whether the required data has already been received
  * before trying to read the data.
  */
+// NOCOM(#codereview): Oha. The only reason you require enable_shared_from_this is because peeker claims
+// to co-own the connection. Change Peeker to keep track of a raw pointer and doucment that it must not outlive the
+// conection. Then remove this again.
 class NetRelayConnection : public std::enable_shared_from_this<NetRelayConnection> {
 public:
 

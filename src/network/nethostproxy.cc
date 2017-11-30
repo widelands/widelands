@@ -248,8 +248,7 @@ void NetHostProxy::receive_commands() {
 			// Reply with a pong
 			conn_->send(RelayCommand::kPong);
 			break;
-		case RelayCommand::kRoundTripTimeResponse:
-			{ // Scope for case-local variables
+		case RelayCommand::kRoundTripTimeResponse: {
 				uint8_t length_list = 0;
 				bool data_complete = peek.uint8_t(&length_list);
 				// Each list element consists of three uint8_t
@@ -267,8 +266,8 @@ void NetHostProxy::receive_commands() {
 					conn_->receive(&cmd); // Parts of the list. See relay_protocol.h
 				}
 				// TODO(Notabilis): Implement GUI with display of RTTs and possibility to kick lagging players
-			}
-			break;
+		      break;
+	      }
 		default:
 			// Other commands should not be possible.
 			// Then is either something wrong with the protocol or there is an implementation mistake

@@ -44,9 +44,8 @@ bool NetRelayConnection::Peeker::cmd(RelayCommand *cmd) {
 		}
 		peek_pointer_++;
 		return true;
-	} else {
-		return false;
 	}
+	return false;
 }
 
 bool NetRelayConnection::Peeker::uint8_t(::uint8_t *n) {
@@ -62,9 +61,8 @@ bool NetRelayConnection::Peeker::uint8_t(::uint8_t *n) {
 		}
 		peek_pointer_++;
 		return true;
-	} else {
-		return false;
 	}
+	return false;
 }
 
 bool NetRelayConnection::Peeker::recvpacket() {
@@ -85,9 +83,8 @@ bool NetRelayConnection::Peeker::recvpacket() {
 	if (conn_->buffer_.size() >= peek_pointer_ + size) {
 		peek_pointer_ += size;
 		return true;
-	} else {
-		return false;
 	}
+	return false;
 }
 
 std::unique_ptr<NetRelayConnection> NetRelayConnection::connect(const NetAddress& host) {

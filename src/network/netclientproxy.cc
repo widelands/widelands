@@ -139,21 +139,21 @@ void NetClientProxy::receive_commands() {
 				conn_->receive(&cmd);
 				RecvPacket packet;
 				conn_->receive(&packet);
-                received_.push(std::move(packet));
-			}
+			   received_.push(std::move(packet));
+		   }
 			break;
 		case RelayCommand::kPing:
 			conn_->receive(&cmd);
 			// Reply with a pong
 			conn_->send(RelayCommand::kPong);
 			break;
-		case RelayCommand::kRoundTripTimeResponse:
-			{ // Scope for case-local variables
-				uint8_t length_list = 0;
-				bool data_complete = peek.uint8_t(&length_list);
-				// Each list element consists of three uint8_t
-				for (uint8_t i = 0; i < length_list * 3; i++) {
-					data_complete = data_complete && peek.uint8_t();
+		case RelayCommand::kRoundTripTimeResponse: {
+		   // NOCOM(#codereview): Pull out a method for this exact duplicated code?
+		   uint8_t length_list = 0;
+		   bool data_complete = peek.uint8_t(&length_list);
+		   // Each list element consists of three uint8_t
+		   for (uint8_t i = 0; i < length_list * 3; i++) {
+			   data_complete = data_complete && peek.uint8_t();
 				}
 				if (!data_complete) {
 					// Some part of this packet is still missing. Try again later
@@ -166,8 +166,8 @@ void NetClientProxy::receive_commands() {
 					conn_->receive(&cmd); // Parts of the list. See relay_protocol.h
 				}
 				// TODO(Notabilis): Implement some nice GUI with display of RTTs
-			}
-			break;
+		      break;
+	      }
 		default:
 			// Other commands should not be possible.
 			// Then is either something wrong with the protocol or there is an implementation mistake
