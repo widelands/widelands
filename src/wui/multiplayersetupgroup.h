@@ -57,7 +57,7 @@ private:
 	void update();
 	void draw(RenderTarget& dst) override;
 
-	GameSettingsProvider* const s;
+	GameSettingsProvider* const settings_;
 	std::unique_ptr<NetworkPlayerSettingsBackend> npsb;
 	std::vector<MultiPlayerClientGroup*> multi_player_client_groups;  // not owned
 	std::vector<MultiPlayerPlayerGroup*> multi_player_player_groups;  // not owned
