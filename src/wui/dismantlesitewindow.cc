@@ -62,11 +62,12 @@ Make sure the window is redrawn when necessary.
 ===============
 */
 void DismantleSiteWindow::think() {
+	// BuildingWindow::think() will call die in case we are no longer in
+	// existance.
 	BuildingWindow::think();
 
 	Widelands::DismantleSite* dismantle_site = dismantle_site_.get(igbase()->egbase());
 	if (dismantle_site == nullptr) {
-		die();
 		return;
 	}
 	progress_->set_state(dismantle_site->get_built_per64k());

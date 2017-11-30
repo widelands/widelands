@@ -67,13 +67,13 @@ Make sure the window is redrawn when necessary.
 ===============
 */
 void ConstructionSiteWindow::think() {
+	// BuildingWindow::think() will call die in case we are no longer in
+	// existance.
 	BuildingWindow::think();
 
 	Widelands::ConstructionSite* construction_site = construction_site_.get(igbase()->egbase());
 	if (construction_site == nullptr) {
-		die();
 		return;
 	}
-
 	progress_->set_state(construction_site->get_built_per64k());
 }

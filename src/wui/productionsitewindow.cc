@@ -125,11 +125,12 @@ void ProductionSiteWindow::init(bool avoid_fastclick, Widelands::ProductionSite 
 }
 
 void ProductionSiteWindow::think() {
+	// BuildingWindow::think() will call die in case we are no longer in
+	// existance.
 	BuildingWindow::think();
 
 	Widelands::ProductionSite* production_site = production_site_.get(igbase()->egbase());
 	if (production_site == nullptr) {
-		die();
 		return;
 	}
 
@@ -196,7 +197,6 @@ void ProductionSiteWindow::update_worker_table(Widelands::ProductionSite* produc
 void ProductionSiteWindow::evict_worker() {
 	Widelands::ProductionSite* production_site = production_site_.get(igbase()->egbase());
 	if (production_site == nullptr) {
-		die();
 		return;
 	}
 

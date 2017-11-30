@@ -126,7 +126,6 @@ Draw a picture of the building in the background.
 void BuildingWindow::draw(RenderTarget& dst) {
 	Widelands::Building* building = building_.get(parent_->egbase());
 	if (building == nullptr) {
-		die();
 		return;
 	}
 
@@ -359,7 +358,6 @@ Callback for bulldozing request
 void BuildingWindow::act_bulldoze() {
 	Widelands::Building* building = building_.get(parent_->egbase());
 	if (building == nullptr) {
-		die();
 		return;
 	}
 
@@ -410,7 +408,6 @@ Callback for starting an expedition request
 void BuildingWindow::act_start_or_cancel_expedition() {
 	Widelands::Building* building = building_.get(parent_->egbase());
 	if (building == nullptr) {
-		die();
 		return;
 	}
 
@@ -434,7 +431,6 @@ Callback for enhancement request
 void BuildingWindow::act_enhance(Widelands::DescriptionIndex id) {
 	Widelands::Building* building = building_.get(parent_->egbase());
 	if (building == nullptr) {
-		die();
 		return;
 	}
 
@@ -464,7 +460,6 @@ void BuildingWindow::show_workarea() {
 	}
 	Widelands::Building* building = building_.get(parent_->egbase());
 	if (building == nullptr) {
-		die();
 		return;
 	}
 
