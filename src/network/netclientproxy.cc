@@ -148,7 +148,7 @@ void NetClientProxy::receive_commands() {
 			conn_->send(RelayCommand::kPong);
 			break;
 		case RelayCommand::kRoundTripTimeResponse: {
-		   // NOCOM(#codereview): Pull out a method for this exact duplicated code?
+		   // TODO(Notabilis): Pull out a method for this exact duplicated code (see NetHostProxy)
 		   uint8_t length_list = 0;
 		   bool data_complete = peek.uint8_t(&length_list);
 		   // Each list element consists of three uint8_t
