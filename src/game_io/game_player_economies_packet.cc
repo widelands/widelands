@@ -74,7 +74,8 @@ void GamePlayerEconomiesPacket::read(FileSystem& fs, Game& game, MapObjectLoader
 				// https://bugs.launchpad.net/widelands/+bug/1654897 which is likely
 				// caused by players having more economies at load than they had at
 				// save.
-				Player::Economies& economies = player->economies_;
+				/* NOCOM
+				auto& economies = player->economies_;
 				if (packet_version > 3) {
 					const size_t num_economies = fr.unsigned_16();
 					if (num_economies != economies.size()) {
@@ -118,6 +119,7 @@ void GamePlayerEconomiesPacket::read(FileSystem& fs, Game& game, MapObjectLoader
 						}
 					}
 				}
+				*/
 			} catch (const WException& e) {
 				throw GameDataError("player %u: %s", p, e.what());
 			}
@@ -140,13 +142,13 @@ void GamePlayerEconomiesPacket::write(FileSystem& fs, Game& game, MapObjectSaver
 	const Map& map = game.map();
 	PlayerNumber const nr_players = map.get_nrplayers();
 	iterate_players_existing_const(p, nr_players, game, player) {
-		const Player::Economies& economies = player->economies_;
+		const auto& economies = player->economies_;
 		fw.unsigned_16(economies.size());
-		for (Economy* economy : economies) {
-			Flag* arbitrary_flag = economy->get_arbitrary_flag();
+		for (const auto& economy : economies) {
+			Flag* arbitrary_flag = economy.second->get_arbitrary_flag();
 			if (arbitrary_flag != nullptr) {
 				fw.unsigned_32(map.get_fcoords(arbitrary_flag->get_position()).field - &map[0]);
-				EconomyDataPacket d(economy);
+				EconomyDataPacket d(economy.second.get());
 				d.write(fw);
 				continue;
 			}
@@ -154,7 +156,7 @@ void GamePlayerEconomiesPacket::write(FileSystem& fs, Game& game, MapObjectSaver
 			// No flag found, let's look for a representative Ship. Expeditions
 			// ships are special and have their own economy (which will not have a
 			// flag), therefore we have to special case them.
-			if (!write_expedition_ship_economy(economy, map, &fw)) {
+			if (!write_expedition_ship_economy(economy.second.get(), map, &fw)) {
 				throw GameDataError("economy without representative");
 			}
 		}

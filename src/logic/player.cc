@@ -782,37 +782,38 @@ void Player::allow_building_type(DescriptionIndex const i, bool const allow) {
 /*
  * Economy stuff below
  */
-void Player::add_economy(Economy& economy) {
-	if (!has_economy(economy))
-		economies_.push_back(&economy);
+Economy* Player::create_economy() {
+	std::unique_ptr<Economy> eco(new Economy(*this));
+
+	assert(economies_.count(eco->serial()) == 0);
+	economies_.emplace(std::make_pair(eco->serial(), std::move(eco)));
+	assert(economies_.at(eco->serial())->serial() == eco->serial());
+	assert(economies_.count(eco->serial()) == 1);
+
+	return eco.get();
 }
 
-void Player::remove_economy(Economy& economy) {
-	for (std::vector<Economy*>::iterator economy_iter = economies_.begin();
-	     economy_iter != economies_.end(); ++economy_iter)
-		if (*economy_iter == &economy) {
-			economies_.erase(economy_iter);
-			return;
-		}
+void Player::remove_economy(Serial serial) {
+	assert(has_economy(serial));
+	economies_.erase(economies_.find(serial));
+	assert(!has_economy(serial));
 }
 
-bool Player::has_economy(Economy& economy) const {
-	for (Economy* temp_economy : economies_) {
-		if (temp_economy == &economy) {
-			return true;
-		}
+const std::map<Serial,std::unique_ptr<Economy>>& Player::economies() const {
+	return economies_;
+}
+
+Economy* Player::get_economy(Widelands::Serial serial) const {
+	if (economies_.count(serial) == 0) {
+		return nullptr;
 	}
-	return false;
+	return economies_.at(serial).get();
 }
 
-Player::Economies::size_type Player::get_economy_number(Economy const* const economy) const {
-	Economies::const_iterator const economies_end = economies_.end(),
-	                                economies_begin = economies_.begin();
-	for (Economies::const_iterator it = economies_begin; it != economies_end; ++it)
-		if (*it == economy)
-			return it - economies_begin;
-	NEVER_HERE();
+bool Player::has_economy(Widelands::Serial serial) const {
+	return economies_.count(serial) != 0;
 }
+
 
 /************  Military stuff  **********/
 
@@ -1106,11 +1107,8 @@ void Player::sample_statistics() {
 	// Calculate stocks
 	std::vector<uint32_t> stocks(egbase().tribes().nrwares());
 
-	const uint32_t nrecos = get_nr_economies();
-	for (uint32_t i = 0; i < nrecos; ++i) {
-		const std::vector<Widelands::Warehouse*>& warehouses = get_economy_by_number(i)->warehouses();
-
-		for (Widelands::Warehouse* warehouse : warehouses) {
+	for (const auto& economy : economies()) {
+		for (Widelands::Warehouse* warehouse : economy.second->warehouses()) {
 			const Widelands::WareList& wares = warehouse->get_wares();
 			for (size_t id = 0; id < stocks.size(); ++id) {
 				stocks[id] += wares.stock(DescriptionIndex(id));

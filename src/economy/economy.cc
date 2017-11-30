@@ -41,14 +41,14 @@
 
 namespace Widelands {
 
-Economy::Economy(Player& player) : owner_(player), request_timerid_(0), has_window_(false) {
+Serial Economy::last_economy_serial_ = 0;
+
+Economy::Economy(Player& player) : serial_(last_economy_serial_++), owner_(player), request_timerid_(0), has_window_(false) {
 	const TribeDescr& tribe = player.tribe();
 	DescriptionIndex const nr_wares = player.egbase().tribes().nrwares();
 	DescriptionIndex const nr_workers = player.egbase().tribes().nrworkers();
 	wares_.set_nrwares(nr_wares);
 	workers_.set_nrwares(nr_workers);
-
-	player.add_economy(*this);
 
 	ware_target_quantities_ = new TargetQuantity[nr_wares];
 	for (DescriptionIndex i = 0; i < nr_wares; ++i) {
@@ -74,8 +74,6 @@ Economy::Economy(Player& player) : owner_(player), request_timerid_(0), has_wind
 
 Economy::~Economy() {
 	Notifications::publish(NoteEconomy{this, this, NoteEconomy::Action::kDeleted});
-	owner_.remove_economy(*this);
-
 	if (requests_.size())
 		log("Warning: Economy still has requests left on destruction\n");
 	if (flags_.size())
@@ -543,9 +541,7 @@ void Economy::merge(Economy& e) {
 
 	// Remember that the other economy may not have been connected before the merge
 	split_checks_.insert(split_checks_.end(), e.split_checks_.begin(), e.split_checks_.end());
-
-	// implicitly delete the economy
-	delete &e;
+	owner_.remove_economy(e.serial());
 }
 
 /**
@@ -554,21 +550,21 @@ void Economy::merge(Economy& e) {
 void Economy::split(const std::set<OPtr<Flag>>& flags) {
 	assert(!flags.empty());
 
-	Economy& e = *new Economy(owner_);
+	Economy* e = owner_.create_economy();
 
 	for (const DescriptionIndex& ware_index : owner_.tribe().wares()) {
-		e.ware_target_quantities_[ware_index] = ware_target_quantities_[ware_index];
+		e->ware_target_quantities_[ware_index] = ware_target_quantities_[ware_index];
 	}
 
 	for (const DescriptionIndex& worker_index : owner_.tribe().workers()) {
-		e.worker_target_quantities_[worker_index] = worker_target_quantities_[worker_index];
+		e->worker_target_quantities_[worker_index] = worker_target_quantities_[worker_index];
 	}
 
 	for (const OPtr<Flag>& temp_flag : flags) {
 		Flag& flag = *temp_flag.get(owner().egbase());
 		assert(flags_.size() > 1);  // We will not be deleted in remove_flag, right?
 		remove_flag(flag);
-		e.add_flag(flag);
+		e->add_flag(flag);
 	}
 
 	// As long as rebalance commands are tied to specific flags, we

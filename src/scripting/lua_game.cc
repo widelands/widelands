@@ -174,16 +174,16 @@ int LuaPlayer::get_objectives(lua_State* L) {
 */
 int LuaPlayer::get_defeated(lua_State* L) {
 	Player& p = get(L, get_egbase(L));
-	bool have_warehouses = false;
+	bool is_defeated = true;
 
-	for (uint32_t economy_nr = 0; economy_nr < p.get_nr_economies(); economy_nr++) {
-		if (!p.get_economy_by_number(economy_nr)->warehouses().empty()) {
-			have_warehouses = true;
+	for (const auto& economy : p.economies()) {
+		if (!economy.second->warehouses().empty()) {
+			is_defeated = false;
 			break;
 		}
 	}
 
-	lua_pushboolean(L, !have_warehouses);
+	lua_pushboolean(L, is_defeated);
 	return 1;
 }
 
@@ -844,10 +844,8 @@ int LuaPlayer::allow_workers(lua_State* L) {
 					break;
 				}
 			}
-			for (uint32_t j = player.get_nr_economies(); j;) {
-				Economy& economy = *player.get_economy_by_number(--j);
-
-				for (Warehouse* warehouse : economy.warehouses()) {
+			for (const auto& economy: player.economies()) {
+				for (Warehouse* warehouse : economy.second->warehouses()) {
 					warehouse->enable_spawn(game, worker_types_without_cost_index);
 				}
 			}

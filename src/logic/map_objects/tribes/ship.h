@@ -288,7 +288,7 @@ private:
 		WalkingDir scouting_direction;
 		Coords exploration_start;
 		IslandExploreDirection island_explore_direction;
-		std::unique_ptr<Economy> economy;
+		Economy* economy; // Owned by Player
 	};
 	std::unique_ptr<Expedition> expedition_;
 

@@ -178,12 +178,12 @@ void EconomyOptionsWindow::EconomyOptionsPanel::change_target(int amount) {
 					// deletion. Economies require a unique, never changing id, same
 					// as map objects.
 					game.send_player_command(*new Widelands::CmdSetWareTargetQuantity(
-					   game.get_gametime(), owner.player_number(), owner.get_economy_number(economy_),
+					   game.get_gametime(), owner.player_number(), economy_->serial(),
 					   index, tq.permanent + amount));
 				} else {
 					// TODO(sirver): Same as above
 					game.send_player_command(*new Widelands::CmdSetWorkerTargetQuantity(
-					   game.get_gametime(), owner.player_number(), owner.get_economy_number(economy_), index,
+					   game.get_gametime(), owner.player_number(), economy_->serial(), index,
 					   tq.permanent + amount));
 				}
 			}
@@ -200,11 +200,11 @@ void EconomyOptionsWindow::EconomyOptionsPanel::reset_target() {
 		if (display_.ware_selected(index)) {
 			if (is_wares) {
 				game.send_player_command(*new Widelands::CmdResetWareTargetQuantity(
-				   game.get_gametime(), owner.player_number(), owner.get_economy_number(economy_),
+				   game.get_gametime(), owner.player_number(), economy_->serial(),
 				   index));
 			} else {
 				game.send_player_command(*new Widelands::CmdResetWorkerTargetQuantity(
-				   game.get_gametime(), owner.player_number(), owner.get_economy_number(economy_),
+				   game.get_gametime(), owner.player_number(), economy_->serial(),
 				   index));
 			}
 		}

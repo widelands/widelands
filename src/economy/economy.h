@@ -110,6 +110,10 @@ public:
 	explicit Economy(Player&);
 	~Economy();
 
+	Serial serial() const {
+		return serial_;
+	}
+
 	Player& owner() const {
 		return owner_;
 	}
@@ -209,6 +213,9 @@ public:
 		start_request_timer();
 	}
 
+protected:
+	static Serial last_economy_serial_;
+
 private:
 	// This structs is to store distance from supply to request(or), but to allow unambiguous
 	// sorting if distances are the same, we use also serial number of provider and type of provider
@@ -250,6 +257,9 @@ private:
 	/* Variables */
 	/*************/
 	using RequestList = std::vector<Request*>;
+
+	// NOCOM Not const for saveloading
+	Serial serial_;
 
 	Player& owner_;
 

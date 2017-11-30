@@ -27,14 +27,23 @@
 #include "map_io/map_object_loader.h"
 #include "map_io/map_object_saver.h"
 
-constexpr uint16_t kCurrentPacketVersion = 3;
+constexpr uint16_t kCurrentPacketVersion = 4;
 
 namespace Widelands {
+
+// NOCOM don't forget saveloading
+// Read/Write Serial Economy::last_economy_serial_;
 
 void EconomyDataPacket::read(FileRead& fr) {
 	try {
 		uint16_t const packet_version = fr.unsigned_16();
-		if (packet_version == kCurrentPacketVersion) {
+		if (packet_version >= 3) {
+			if (packet_version == kCurrentPacketVersion) {
+				eco_->serial_ = fr.unsigned_32();
+				Economy::last_economy_serial_ = std::max(Economy::last_economy_serial_, eco_->serial_);
+			} else {
+				eco_->serial_ = Economy::last_economy_serial_++;
+			}
 			try {
 				const TribeDescr& tribe = eco_->owner().tribe();
 				while (Time const last_modified = fr.unsigned_32()) {
@@ -94,6 +103,8 @@ void EconomyDataPacket::read(FileRead& fr) {
 
 void EconomyDataPacket::write(FileWrite& fw) {
 	fw.unsigned_16(kCurrentPacketVersion);
+	// NOCOM Serial is new.
+	fw.unsigned_32(eco_->serial());
 	const TribeDescr& tribe = eco_->owner().tribe();
 	for (const DescriptionIndex& ware_index : tribe.wares()) {
 		const Economy::TargetQuantity& tq = eco_->ware_target_quantities_[ware_index];

@@ -819,14 +819,14 @@ void Ship::start_task_expedition(Game& game) {
 	expedition_->scouting_direction = WalkingDir::IDLE;
 	expedition_->exploration_start = Coords(0, 0);
 	expedition_->island_explore_direction = IslandExploreDirection::kClockwise;
-	expedition_->economy.reset(new Economy(*get_owner()));
+	expedition_->economy = get_owner()->create_economy();
 
 	// We are no longer in any other economy, but instead are an economy of our
 	// own.
 	fleet_->remove_ship(game, this);
 	assert(fleet_ == nullptr);
 
-	set_economy(game, expedition_->economy.get());
+	set_economy(game, expedition_->economy);
 
 	for (int i = items_.size() - 1; i >= 0; --i) {
 		WareInstance* ware;
@@ -933,7 +933,7 @@ void Ship::exp_cancel(Game& game) {
 	if (!get_fleet() || !get_fleet()->has_ports()) {
 		// We lost our last reachable port, so we reset the expedition's state
 		ship_state_ = ShipStates::kExpeditionWaiting;
-		set_economy(game, expedition_->economy.get());
+		set_economy(game, expedition_->economy);
 
 		worker = nullptr;
 		for (ShippingItem& item : items_) {
@@ -947,7 +947,7 @@ void Ship::exp_cancel(Game& game) {
 		Notifications::publish(NoteShipWindow(serial(), NoteShipWindow::Action::kNoPortLeft));
 		return;
 	}
-	assert(get_economy() && get_economy() != expedition_->economy.get());
+	assert(get_economy() && get_economy() != expedition_->economy);
 
 	send_signal(game, "cancel_expedition");
 
@@ -1169,8 +1169,9 @@ void Ship::Loader::load_finish() {
 	// if the ship is on an expedition, restore the expedition specific data
 	if (expedition_) {
 		ship.expedition_.swap(expedition_);
-		ship.expedition_->economy.reset(new Economy(*ship.get_owner()));
-		ship.economy_ = ship.expedition_->economy.get();
+		// NOCOM test
+		ship.expedition_->economy = ship.get_owner()->create_economy();
+		ship.economy_ = ship.expedition_->economy;
 	} else
 		assert(ship_state_ == ShipStates::kTransport);
 

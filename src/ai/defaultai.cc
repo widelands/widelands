@@ -6012,7 +6012,7 @@ void DefaultAI::review_wares_targets(uint32_t const gametime) {
 			assert(new_target > 1);
 
 			game().send_player_command(*new Widelands::CmdSetWareTargetQuantity(
-			   gametime, player_number(), player_->get_economy_number(&observer->economy), id,
+			   gametime, player_number(), observer->economy.serial(), id,
 			   new_target));
 		}
 	}
