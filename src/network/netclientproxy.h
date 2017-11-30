@@ -64,11 +64,7 @@ private:
 
 	void receive_commands();
 
-	// NOCOM(#codereview): Please add a comment why this is shared. It also
-	// feels like it maybe should not be. The Peekers do not own the connection,
-	// they only use it, i.e. a Peeker should never outlive the NetClientProxy or similar class
-	// that actually owns the connection, right?
-	std::shared_ptr<NetRelayConnection> conn_;
+	std::unique_ptr<NetRelayConnection> conn_;
 
 	/// For each connected client, the packages that have been received from him.
 	std::queue<RecvPacket> received_;

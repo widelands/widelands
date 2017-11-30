@@ -6,7 +6,7 @@
 
 // Not so great: Quite some duplicated code between this class and NetClient.
 
-NetRelayConnection::Peeker::Peeker(std::shared_ptr<NetRelayConnection> conn)
+NetRelayConnection::Peeker::Peeker(NetRelayConnection *conn)
 	: conn_(conn), peek_pointer_(0) {
 	assert(conn_);
 }
@@ -127,7 +127,7 @@ void NetRelayConnection::receive(std::string *str) {
 
 	#ifndef NDEBUG
 	// Check if we can read a complete string
-	assert(Peeker(shared_from_this()).string());
+	assert(Peeker(this).string());
 	#endif // NDEBUG
 
 	// Read the string
@@ -166,7 +166,7 @@ void NetRelayConnection::receive(RecvPacket *packet) {
 
 
 	#ifndef NDEBUG
-	assert(Peeker(shared_from_this()).recvpacket());
+	assert(Peeker(this).recvpacket());
 	#endif // NDEBUG
 
 	// Read the packet (adapted copy from Deserializer)

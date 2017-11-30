@@ -67,7 +67,7 @@ private:
 
 	void receive_commands();
 
-	std::shared_ptr<NetRelayConnection> conn_;
+	std::unique_ptr<NetRelayConnection> conn_;
 
 	/// A list of clients which want to connect.
 	std::queue<ConnectionId> accept_;

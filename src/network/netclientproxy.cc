@@ -59,7 +59,7 @@ NetClientProxy::NetClientProxy(const NetAddress& address, const std::string& nam
 
    	// Wait 10 seconds for an answer
 	uint32_t endtime = time(nullptr) + 10;
-	while (!NetRelayConnection::Peeker(conn_).cmd()) {
+	while (!NetRelayConnection::Peeker(conn_.get()).cmd()) {
 		if (time(nullptr) > endtime) {
 			// No message received in time
 			conn_->close();
@@ -79,7 +79,7 @@ NetClientProxy::NetClientProxy(const NetAddress& address, const std::string& nam
 
    	// Check version
    	endtime = time(nullptr) + 10;
-	while (!NetRelayConnection::Peeker(conn_).uint8_t()) {
+	while (!NetRelayConnection::Peeker(conn_.get()).uint8_t()) {
 		if (time(nullptr) > endtime) {
 			conn_->close();
 			conn_.reset();
@@ -95,7 +95,7 @@ NetClientProxy::NetClientProxy(const NetAddress& address, const std::string& nam
 
    	// Check game name
    	endtime = time(nullptr) + 10;
-	while (!NetRelayConnection::Peeker(conn_).string()) {
+	while (!NetRelayConnection::Peeker(conn_.get()).string()) {
 		if (time(nullptr) > endtime) {
 			conn_->close();
 			conn_.reset();
@@ -118,7 +118,7 @@ void NetClientProxy::receive_commands() {
 
 	// Receive all available commands
 	RelayCommand cmd;
-	NetRelayConnection::Peeker peek(conn_);
+	NetRelayConnection::Peeker peek(conn_.get());
 	if (!peek.cmd(&cmd)) {
 		// No command to receive
 		return;

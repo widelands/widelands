@@ -33,10 +33,7 @@
  * Use the Peeker class to check whether the required data has already been received
  * before trying to read the data.
  */
-// NOCOM(#codereview): Oha. The only reason you require enable_shared_from_this is because peeker claims
-// to co-own the connection. Change Peeker to keep track of a raw pointer and doucment that it must not outlive the
-// conection. Then remove this again.
-class NetRelayConnection : public std::enable_shared_from_this<NetRelayConnection> {
+class NetRelayConnection {
 public:
 
 	/**
@@ -66,8 +63,10 @@ public:
 		 * Creates a Peeker for the given connection.
 		 * Calling any receive() method on the given connection will invalidate the Peeker.
 		 * \param conn The connection which should be peeked into.
+		 * \note The Peeker instance does not own the given connection. It is the responsible of the
+		 *       caller to make sure the given instance stays valid.
 		 */
-		Peeker(std::shared_ptr<NetRelayConnection> conn);
+		Peeker(NetRelayConnection *conn);
 
 		/**
 		 * Checks whether a relay command can be read from the buffer.
@@ -104,7 +103,7 @@ public:
 	private:
 
 		/// The connection to operate on.
-		std::shared_ptr<NetRelayConnection> conn_;
+		NetRelayConnection *conn_;
 
 		/// The position of the next peek.
 		size_t peek_pointer_;
