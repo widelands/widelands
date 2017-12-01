@@ -71,20 +71,20 @@ public:
 		/**
 		 * Checks whether a relay command can be read from the buffer.
 		 * This method does not modify the buffer contents but increases the peek-pointer.
-		 * \param cmd The command that will be returned next. It will not be removed from the input queue!
+		 * \param out The command that will be returned next. It will not be removed from the input queue!
 		 *            If \c false is returned the contents are not modified. Can be nullptr.
 		 * \return \c True if the value can be read, \c false if not enough data has been received.
 		 */
-		bool cmd(RelayCommand *cmd = nullptr);
+		bool cmd(RelayCommand *out = nullptr);
 
 		/**
 		 * Checks whether an uint8_t can be read from the buffer.
 		 * This method does not modify the buffer contents but increases the peek-pointer.
-		 * \param n The uint8_t that will be returned next. It will not be removed from the input queue!
+		 * \param out The uint8_t that will be returned next. It will not be removed from the input queue!
 		 *            If \c false is returned the contents are not modified. Can be nullptr.
 		 * \return \c True if the value can be read, \c false if not enough data has been received.
 		 */
-		bool uint8_t(uint8_t *n = nullptr);
+		bool uint8_t(uint8_t *out = nullptr);
 
 		/**
 		 * Checks whether a std::string can be read from the buffer.
@@ -193,6 +193,10 @@ public:
 	 * \param data The data to send.
 	 */
 	void send(const SendPacket& data);
+
+	// Temporary method, will be removed.
+	// Removes a message from type kRoundTripTimeResponse from the buffer.
+	void ignore_rtt_response();
 
 private:
 	/**

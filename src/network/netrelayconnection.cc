@@ -32,15 +32,15 @@ bool NetRelayConnection::Peeker::string() {
 	return false;
 }
 
-bool NetRelayConnection::Peeker::cmd(RelayCommand *cmd) {
+bool NetRelayConnection::Peeker::cmd(RelayCommand *out) {
 
 	assert(conn_->buffer_.size() >= peek_pointer_);
 
 	conn_->try_network_receive();
 
 	if (conn_->buffer_.size() > peek_pointer_) {
-		if (cmd != nullptr) {
-			*cmd = static_cast<RelayCommand>(conn_->buffer_[peek_pointer_]);
+		if (out != nullptr) {
+			*out = static_cast<RelayCommand>(conn_->buffer_[peek_pointer_]);
 		}
 		peek_pointer_++;
 		return true;
@@ -48,7 +48,7 @@ bool NetRelayConnection::Peeker::cmd(RelayCommand *cmd) {
 	return false;
 }
 
-bool NetRelayConnection::Peeker::uint8_t(::uint8_t *n) {
+bool NetRelayConnection::Peeker::uint8_t(::uint8_t *out) {
 
 	assert(conn_->buffer_.size() >= peek_pointer_);
 
@@ -56,8 +56,8 @@ bool NetRelayConnection::Peeker::uint8_t(::uint8_t *n) {
 
 	// If there is any byte available, we can read an uint8
 	if (conn_->buffer_.size() > peek_pointer_) {
-		if (n != nullptr) {
-			*n = static_cast<::uint8_t>(conn_->buffer_[peek_pointer_]);
+		if (out != nullptr) {
+			*out = static_cast<::uint8_t>(conn_->buffer_[peek_pointer_]);
 		}
 		peek_pointer_++;
 		return true;
@@ -300,5 +300,37 @@ NetRelayConnection::NetRelayConnection(const NetAddress& host)
 		log("failed.\n");
 		socket_.close();
 		assert(!is_connected());
+	}
+}
+
+void NetRelayConnection::ignore_rtt_response() {
+
+	// TODO(Notabilis): Implement GUI with display of RTTs and possibility to kick lagging players
+	//                  See https://bugs.launchpad.net/widelands/+bug/1734673
+	// TODO(Notabilis): Move this method somewhere where it makes sense.
+
+	uint8_t length_list = 0;
+	RelayCommand cmd;
+	uint8_t tmp;
+
+	Peeker peek(this);
+	peek.cmd(&cmd);
+	assert(cmd == RelayCommand::kRoundTripTimeResponse);
+
+	bool data_complete = peek.uint8_t(&length_list);
+	// Each list element consists of three uint8_t
+	for (uint8_t i = 0; i < length_list * 3; i++) {
+		data_complete = data_complete && peek.uint8_t();
+	}
+	if (!data_complete) {
+		// Some part of this packet is still missing. Try again later
+		return;
+	}
+
+	// Packet completely in buffer, fetch it and ignore it
+	receive(&cmd); // Cmd
+	receive(&tmp); // Length
+	for (uint8_t i = 0; i < length_list * 3; i++) {
+		receive(&tmp); // Parts of the list. See relay_protocol.h
 	}
 }
