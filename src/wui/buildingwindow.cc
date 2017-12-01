@@ -66,6 +66,11 @@ BuildingWindow::~BuildingWindow() {
 }
 
 void BuildingWindow::on_building_note(const Widelands::NoteBuilding& note) {
+	if (is_dying_) {
+		// Our building is potentially already destroyed. And we do not care
+		// about anything anymore anyways.
+		return;
+	}
 	if (note.serial == building_.serial()) {
 		switch (note.action) {
 		// The building's state has changed
