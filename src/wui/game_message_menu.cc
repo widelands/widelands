@@ -620,9 +620,9 @@ void GameMessageMenu::update_archive_button_tooltip() {
 	switch (mode) {
 	case Archive:
 		if (no_selections > 1) {
-			/** TRANSLATORS: Tooltip in the messages window. There is a separate string for 1 message.
-			 */
 			button_tooltip =
+			   /** TRANSLATORS: Tooltip in the messages window. There is a separate string for 1
+			      message. */
 			   (boost::format(ngettext("Restore the selected %d message",
 			                           "Restore the selected %d messages", no_selections)) %
 			    no_selections)
@@ -634,9 +634,9 @@ void GameMessageMenu::update_archive_button_tooltip() {
 		break;
 	case Inbox:
 		if (no_selections > 1) {
-			/** TRANSLATORS: Tooltip in the messages window. There is a separate string for 1 message.
-			 */
 			button_tooltip =
+			   /** TRANSLATORS: Tooltip in the messages window. There is a separate string for 1
+			      message. */
 			   (boost::format(ngettext("Archive the selected %d message",
 			                           "Archive the selected %d messages", no_selections)) %
 			    no_selections)

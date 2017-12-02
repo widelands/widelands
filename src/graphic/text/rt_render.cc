@@ -1606,8 +1606,7 @@ RenderNode* Renderer::layout_(const std::string& text, uint16_t width, const Tag
 std::shared_ptr<const UI::RenderedText>
 Renderer::render(const std::string& text, uint16_t width, const TagSet& allowed_tags) {
 	std::unique_ptr<RenderNode> node(layout_(text, width, allowed_tags));
-
-	return std::shared_ptr<const UI::RenderedText>(std::move(node->render(texture_cache_)));
+	return std::shared_ptr<const UI::RenderedText>(node->render(texture_cache_));
 }
 
 IRefMap*

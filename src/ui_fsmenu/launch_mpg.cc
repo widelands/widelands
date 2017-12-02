@@ -288,7 +288,7 @@ void FullscreenMenuLaunchMPG::select_saved_game() {
 		return;
 
 	Widelands::Game game;  // The place all data is saved to.
-	FullscreenMenuLoadGame lsgm(game, settings_, ctrl_);
+	FullscreenMenuLoadGame lsgm(game, settings_);
 	FullscreenMenuBase::MenuTarget code = lsgm.run<FullscreenMenuBase::MenuTarget>();
 
 	if (code == FullscreenMenuBase::MenuTarget::kBack) {

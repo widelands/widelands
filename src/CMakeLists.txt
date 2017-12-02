@@ -122,6 +122,7 @@ wl_library(widelands_ball_of_mud
     map_io_map_loader
     network
     profile
+    random
     sound
     ui_basic
     ui_fsmenu_gameloading

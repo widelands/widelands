@@ -81,6 +81,7 @@ wl_library(ui_fsmenu_loading_common
     io_filesystem
     profile
     network
+    random
     ui_basic
     ui_fsmenu_base
     ui_fsmenu_main_menu
@@ -165,6 +166,7 @@ wl_library(ui_fsmenu_network
     graphic_text_constants
     network
     profile
+    random
     ui_basic
     ui_fsmenu_base
     wui_chat_ui

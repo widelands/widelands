@@ -140,14 +140,6 @@ struct DefaultAI : ComputerPlayer {
 	static VeryWeakImpl very_weak_impl;
 
 private:
-	// Variables of default AI
-	Widelands::AiType type_;
-	Widelands::Player* player_;
-	Widelands::TribeDescr const* tribe_;
-
-	// This points to persistent data stored in Player object
-	Widelands::Player::AiPersistentState* persistent_data;
-
 	static constexpr int8_t kUncalculated = -1;
 	static constexpr uint8_t kFalse = 0;
 	static constexpr uint8_t kTrue = 1;
@@ -156,6 +148,28 @@ private:
 	static constexpr int32_t kSpotsTooLittle = 15;
 	static constexpr int kManagementUpdateInterval = 10 * 60 * 1000;
 	static constexpr int kStatUpdateInterval = 60 * 1000;
+
+	// For vision and scheduling
+	static constexpr uint32_t kNever = std::numeric_limits<uint32_t>::max();
+
+	// common for defaultai.cc and defaultai_seafaring.cc
+	static constexpr uint32_t kExpeditionMinDuration = 60 * 60 * 1000;
+	static constexpr uint32_t kExpeditionMaxDuration = 210 * 60 * 1000;
+	static constexpr uint32_t kNoShip = std::numeric_limits<uint32_t>::max();
+	static constexpr int kShipCheckInterval = 5 * 1000;
+
+	// used by defaultai_warfare.cc
+	// duration of military campaign
+	static constexpr int kCampaignDuration = 15 * 60 * 1000;
+	static constexpr int kTrainingSitesCheckInterval = 15 * 1000;
+
+	// Variables of default AI
+	Widelands::AiType type_;
+	Widelands::Player* player_;
+	Widelands::TribeDescr const* tribe_;
+
+	// This points to persistent data stored in Player object
+	Widelands::Player::AiPersistentState* persistent_data;
 
 	void late_initialization();
 
@@ -379,21 +393,6 @@ private:
 
 	std::vector<std::vector<int16_t>> AI_military_matrix;
 	std::vector<int16_t> AI_military_numbers;
-
-	// common for defaultai.cc and defaultai_seafaring.cc
-	static constexpr uint32_t kColonyScanStartArea = 35;
-	static constexpr uint32_t kColonyScanMinArea = 12;
-	static constexpr uint32_t kExpeditionMinDuration = 60 * 60 * 1000;
-	static constexpr uint32_t kExpeditionMaxDuration = 210 * 60 * 1000;
-	static constexpr uint32_t kNoShip = std::numeric_limits<uint32_t>::max();
-	static constexpr uint32_t kNever = std::numeric_limits<uint32_t>::max();
-	static constexpr uint32_t kNoExpedition = 0;
-	static constexpr int kShipCheckInterval = 5 * 1000;
-
-	// used by defaultai_seafaring.cc
-	// duration of military campaign
-	static constexpr int kCampaignDuration = 15 * 60 * 1000;
-	static constexpr int kTrainingSitesCheckInterval = 15 * 1000;
 
 	bool has_critical_mines = false;
 	uint16_t buil_material_mines_count = 0;

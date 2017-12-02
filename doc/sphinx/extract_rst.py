@@ -13,6 +13,7 @@ import sys
 # These files are known to have rst comments; cpp files
 # Meaning: (src_file, file_name_to_generate_rst)
 cpp_pairs = (
+    ('src/ai/ai_hints.cc', 'autogen_ai_hints.rst'),
     ('src/scripting/lua_root.cc', 'autogen_wl.rst'),
     ('src/scripting/lua_bases.cc', 'autogen_wl_bases.rst'),
     ('src/scripting/lua_editor.cc', 'autogen_wl_editor.rst'),

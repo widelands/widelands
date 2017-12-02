@@ -250,6 +250,40 @@ bool Player::is_hostile(const Player& other) const {
 	return &other != this && (!team_number_ || team_number_ != other.team_number_);
 }
 
+void Player::AiPersistentState::initialize() {
+	colony_scan_area = kColonyScanStartArea;
+	trees_around_cutters = 0;
+	last_attacked_player = std::numeric_limits<int16_t>::max();
+	expedition_start_time = kNoExpedition;
+	ships_utilization = 200;
+	no_more_expeditions = false;
+	target_military_score = 100;
+	least_military_score = 0;
+	ai_productionsites_ratio = std::rand() % 5 + 7;
+	ai_personality_mil_upper_limit = 100;
+
+	// all zeroes
+	assert(neuron_weights.size() == Widelands::Player::AiPersistentState::kNeuronPoolSize);
+	assert(neuron_functs.size() == Widelands::Player::AiPersistentState::kNeuronPoolSize);
+	assert(f_neurons.size() == Widelands::Player::AiPersistentState::kFNeuronPoolSize);
+	assert(magic_numbers.size() == Widelands::Player::AiPersistentState::kMagicNumbersSize);
+	for (size_t i = 0; i < neuron_weights.size(); ++i) {
+		neuron_weights.at(i) = 0;
+	}
+	for (size_t i = 0; i < neuron_functs.size(); ++i) {
+		neuron_functs.at(i) = 0;
+	}
+	for (size_t i = 0; i < f_neurons.size(); ++i) {
+		f_neurons.at(i) = 0;
+	}
+	for (size_t i = 0; i < magic_numbers.size(); ++i) {
+		magic_numbers.at(i) = 0;
+	}
+	remaining_basic_buildings.clear();
+
+	initialized = true;
+}
+
 /**
  * Updates the vector containing allied players
  */
