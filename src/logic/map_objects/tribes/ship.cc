@@ -1169,7 +1169,6 @@ void Ship::Loader::load_finish() {
 	// if the ship is on an expedition, restore the expedition specific data
 	if (expedition_) {
 		ship.expedition_.swap(expedition_);
-		// NOCOM test
 		ship.expedition_->economy = ship.get_owner()->create_economy();
 		ship.economy_ = ship.expedition_->economy;
 	} else

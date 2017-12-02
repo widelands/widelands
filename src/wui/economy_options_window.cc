@@ -51,12 +51,10 @@ EconomyOptionsWindow::EconomyOptionsWindow(UI::Panel* parent,
 }
 
 EconomyOptionsWindow::~EconomyOptionsWindow() {
-	//Widelands::Economy* economy = player_->get_economy(serial_);
-	/* NOCOM why are you heap use after free if you're not nullptr?
+	Widelands::Economy* economy = player_->get_economy(serial_);
 	if (economy != nullptr) {
 		economy->set_has_window(false);
 	}
-	*/
 }
 
 void EconomyOptionsWindow::on_economy_note(const Widelands::NoteEconomy& note) {
