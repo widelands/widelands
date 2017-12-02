@@ -2,7 +2,6 @@ language: cpp
 script: bash -e .travis.sh
 sudo: required
 dist: trusty
-osx_image: xcode8.3
 
 before_script:
   - export DISPLAY=:99.0
