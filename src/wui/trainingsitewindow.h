@@ -33,15 +33,11 @@ struct TrainingSiteWindow : public ProductionSiteWindow {
 	                   Widelands::TrainingSite&,
 	                   bool avoid_fastclick);
 
-	Widelands::TrainingSite& trainingsite() {
-		return dynamic_cast<Widelands::TrainingSite&>(building());
-	}
-
-protected:
-	void init(bool avoid_fastclick) override;
-	void create_capsbuttons(UI::Box* buttons) override;
-
 private:
+	void init(bool avoid_fastclick) override;
+
+	Widelands::OPtr<Widelands::TrainingSite> training_site_;
+
 	DISALLOW_COPY_AND_ASSIGN(TrainingSiteWindow);
 };
 

@@ -107,7 +107,7 @@ WorkerDescr::WorkerDescr(const std::string& init_descname,
 
 				programs_[program_name] = std::unique_ptr<WorkerProgram>(
 				   new WorkerProgram(program_name, *this, egbase_.tribes()));
-				programs_[program_name]->parse(*programs_table->get_table(program_name).get());
+				programs_[program_name]->parse(*programs_table->get_table(program_name));
 			} catch (const std::exception& e) {
 				throw wexception("program %s: %s", program_name.c_str(), e.what());
 			}

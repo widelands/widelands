@@ -260,10 +260,6 @@ private:
 	MapView map_view_;
 	ChatOverlay* chat_overlay_;
 
-	// These get collected by add_toolbar_button
-	// so we can call unassign_toggle_button on them in the destructor.
-	std::vector<UI::UniqueWindow::Registry> registries_;
-
 	UI::Box toolbar_;
 	// No unique_ptr on purpose: 'minimap_' is a UniqueWindow, its parent will
 	// delete it.

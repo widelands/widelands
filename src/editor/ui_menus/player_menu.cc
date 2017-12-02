@@ -200,8 +200,8 @@ void EditorPlayerMenu::clicked_add_player() {
 	map->set_nrplayers(nr_players);
 	{                             //  register new default name for this players
 		assert(nr_players <= 99);  //  2 decimal digits
-		/** TRANSLATORS: Default player name, e.g. Player 1 */
 		const std::string name =
+		   /** TRANSLATORS: Default player name, e.g. Player 1 */
 		   (boost::format(_("Player %u")) % static_cast<unsigned int>(nr_players)).str();
 		map->set_scenario_player_name(nr_players, name);
 	}
