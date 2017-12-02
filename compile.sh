@@ -87,7 +87,7 @@ while [ "$1" != "" ]; do
     BUILD_TRANSLATIONS="OFF"
   elif [ "$1" = "--no-asan" -o "$1" = "-a" ]; then
     USE_ASAN="OFF"
-  elif [ "$1" = "--gcc"]; then
+  elif [ "$1" = "--gcc" ]; then
     if [ -f /usr/bin/gcc -a /usr/bin/g++ ]; then
       export CC=/usr/bin/gcc
       export CXX=/usr/bin/g++

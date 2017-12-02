@@ -79,7 +79,6 @@ private:
 	/// Actions performed when a NoteEconomyWindow is received.
 	void on_economy_note(const Widelands::NoteEconomy& note);
 
-
 	Widelands::Serial serial_;
 	Widelands::Player* player_;
 	UI::TabPanel tabpanel_;

@@ -255,8 +255,10 @@ void InputQueueDisplay::update_max_fill_buttons() {
  * Update priority when radiogroup has changed
  */
 void InputQueueDisplay::radiogroup_changed(int32_t state) {
-
 	assert(type_ == Widelands::wwWARE);
+	if (!igb_.can_act(building_.owner().player_number())) {
+		return;
+	}
 
 	int32_t priority = 0;
 
@@ -273,7 +275,6 @@ void InputQueueDisplay::radiogroup_changed(int32_t state) {
 	default:
 		return;
 	}
-
 	igb_.game().send_player_set_ware_priority(building_, type_, index_, priority);
 }
 
@@ -283,14 +284,17 @@ void InputQueueDisplay::radiogroup_changed(int32_t state) {
  */
 void InputQueueDisplay::decrease_max_fill_clicked() {
 	assert(cache_max_fill_ > 0);
-
+	if (!igb_.can_act(building_.owner().player_number())) {
+		return;
+	}
 	igb_.game().send_player_set_input_max_fill(building_, index_, type_, cache_max_fill_ - 1);
 }
 
 void InputQueueDisplay::increase_max_fill_clicked() {
-
 	assert(cache_max_fill_ < queue_->get_max_size());
-
+	if (!igb_.can_act(building_.owner().player_number())) {
+		return;
+	}
 	igb_.game().send_player_set_input_max_fill(building_, index_, type_, cache_max_fill_ + 1);
 }
 
