@@ -1324,7 +1324,6 @@ const PropertyType<LuaTribeDescription> LuaTribeDescription::Properties[] = {
    PROP_RO(LuaTribeDescription, carrier2),
    PROP_RO(LuaTribeDescription, descname),
    PROP_RO(LuaTribeDescription, geologist),
-   PROP_RO(LuaTribeDescription, headquarters),
 	PROP_RO(LuaTribeDescription, immovables),
    PROP_RO(LuaTribeDescription, name),
    PROP_RO(LuaTribeDescription, port),
@@ -1418,17 +1417,6 @@ int LuaTribeDescription::get_geologist(lua_State* L) {
 }
 
 /* RST
-   .. attribute:: headquarters
-
-         (RO) the :class:`string` internal name of the default headquarters type that this tribe uses
-*/
-
-int LuaTribeDescription::get_headquarters(lua_State* L) {
-	lua_pushstring(L, get_egbase(L).tribes().get_building_descr(get()->headquarters())->name());
-	return 1;
-}
-
-/* RST
    .. attribute:: immovables
 
       (RO) an array of :class:`LuaImmovableDescription` with all the immovables that the tribe can use.
@@ -1446,6 +1434,7 @@ int LuaTribeDescription::get_immovables(lua_State* L) {
 }
 
 /* RST
+=======
    .. attribute:: name
 
          (RO) a :class:`string` with the tribe's internal name

@@ -285,7 +285,6 @@ tribes:new_tribe {
    geologist = "barbarians_geologist",
    soldier = "barbarians_soldier",
    ship = "barbarians_ship",
-   headquarters = "barbarians_headquarters",
    port = "barbarians_port",
    barracks = "barbarians_barracks",
    ironore = "iron_ore",

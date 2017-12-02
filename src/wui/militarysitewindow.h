@@ -32,15 +32,11 @@ struct MilitarySiteWindow : public BuildingWindow {
 	                   Widelands::MilitarySite&,
 	                   bool avoid_fastclick);
 
-	Widelands::MilitarySite& militarysite() {
-		return dynamic_cast<Widelands::MilitarySite&>(building());
-	}
-
-protected:
-	void init(bool avoid_fastclick) override;
-	void create_capsbuttons(UI::Box* buttons) override;
-
 private:
+	void init(bool avoid_fastclick) override;
+
+	Widelands::OPtr<Widelands::MilitarySite> military_site_;
+
 	DISALLOW_COPY_AND_ASSIGN(MilitarySiteWindow);
 };
 

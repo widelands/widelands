@@ -154,8 +154,7 @@ struct MapObjectDescr {
 	/// nullptr otherwise
 	const Image* representative_image(const RGBColor* player_color = nullptr) const;
 	/// Returns the image fileneme for first frame of the idle animation if the MapObject has
-	/// animations,
-	/// is empty otherwise
+	/// animations, is empty otherwise
 	const std::string& representative_image_filename() const;
 
 	/// Returns the menu image if the MapObject has one, nullptr otherwise
@@ -171,6 +170,9 @@ protected:
 	void add_attribute(uint32_t attr);
 
 private:
+	/// Throws an exception if the MapObjectDescr has no representative image
+	void check_representative_image();
+
 	using Anims = std::map<std::string, uint32_t>;
 	using AttribMap = std::map<std::string, uint32_t>;
 	using Attributes = std::vector<uint32_t>;
