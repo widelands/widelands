@@ -125,7 +125,6 @@ Flag::Flag(EditorGameBase& egbase, Player& owning_player, const Coords& coords)
 
 	if (game) {
 		//  we split a road, or a new, standalone flag is created
-		// NOCOM test
 		(road ? road->get_economy() : owning_player.create_economy())->add_flag(*this);
 
 		if (road)

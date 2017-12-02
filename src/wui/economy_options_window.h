@@ -39,17 +39,19 @@ private:
 		TargetWaresDisplay(UI::Panel* const parent,
 		                   int32_t const x,
 		                   int32_t const y,
+								 Widelands::Serial serial,
+							    Widelands::Player* player,
 		                   Widelands::WareWorker type,
-		                   bool selectable,
-		                   Widelands::Economy* economy);
+		                   bool selectable);
 
-		void set_economy(Widelands::Economy*);
+		void set_economy(Widelands::Serial serial);
 
 	protected:
 		std::string info_for_ware(Widelands::DescriptionIndex const ware) override;
 
 	private:
-		Widelands::Economy* economy_;
+		Widelands::Serial serial_;
+		Widelands::Player* player_;
 	};
 
 	/**
@@ -57,17 +59,19 @@ private:
 	 */
 	struct EconomyOptionsPanel : UI::Box {
 		EconomyOptionsPanel(UI::Panel* parent,
+								  Widelands::Serial serial,
+								  Widelands::Player* player,
 		                    bool can_act,
-		                    Widelands::WareWorker type,
-		                    Widelands::Economy* economy);
+		                    Widelands::WareWorker type);
 
-		void set_economy(Widelands::Economy*);
+		void set_economy(Widelands::Serial serial);
 		void change_target(int amount);
 		void reset_target();
 
 	private:
+		Widelands::Serial serial_;
+		Widelands::Player* player_;
 		Widelands::WareWorker type_;
-		Widelands::Economy* economy_;
 		bool can_act_;
 		TargetWaresDisplay display_;
 	};
@@ -76,7 +80,8 @@ private:
 	void on_economy_note(const Widelands::NoteEconomy& note);
 
 
-	Widelands::Economy* economy_;
+	Widelands::Serial serial_;
+	Widelands::Player* player_;
 	UI::TabPanel tabpanel_;
 	EconomyOptionsPanel* ware_panel_;
 	EconomyOptionsPanel* worker_panel_;

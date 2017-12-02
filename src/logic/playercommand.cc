@@ -1229,7 +1229,6 @@ CmdSetWareTargetQuantity::CmdSetWareTargetQuantity(const uint32_t init_duetime,
 
 void CmdSetWareTargetQuantity::execute(Game& game) {
 	Player& player = game.player(sender());
-	// NOCOM test
 	if (player.has_economy(economy()) && game.tribes().ware_exists(ware_type())) {
 		player.get_economy(economy())->set_ware_target_quantity(
 		   ware_type(), permanent_, duetime());

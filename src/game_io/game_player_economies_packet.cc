@@ -74,8 +74,9 @@ void GamePlayerEconomiesPacket::read(FileSystem& fs, Game& game, MapObjectLoader
 				// https://bugs.launchpad.net/widelands/+bug/1654897 which is likely
 				// caused by players having more economies at load than they had at
 				// save.
-				/* NOCOM
+				// NOCOM
 				auto& economies = player->economies_;
+				log("NOCOM economies size: %lu", economies.size());
 				if (packet_version > 3) {
 					const size_t num_economies = fr.unsigned_16();
 					if (num_economies != economies.size()) {
@@ -119,7 +120,6 @@ void GamePlayerEconomiesPacket::read(FileSystem& fs, Game& game, MapObjectLoader
 						}
 					}
 				}
-				*/
 			} catch (const WException& e) {
 				throw GameDataError("player %u: %s", p, e.what());
 			}

@@ -75,7 +75,6 @@ void StockMenu::think() {
 void StockMenu::fill_total_waresdisplay(WaresDisplay* waresdisplay, Widelands::WareWorker type) {
 	waresdisplay->remove_all_warelists();
 	const Widelands::Player& player = *player_.get_player();
-	// NOCOM test
 	for (const auto& economy : player.economies()) {
 		waresdisplay->add_warelist(type == Widelands::wwWARE ? economy.second->get_wares() : economy.second->get_workers());
 	}

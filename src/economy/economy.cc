@@ -69,11 +69,12 @@ Economy::Economy(Player& player) : serial_(last_economy_serial_++), owner_(playe
 		worker_target_quantities_[i] = tq;
 	}
 
-	router_ = new Router(boost::bind(&Economy::reset_all_pathfinding_cycles, this));
+	router_.reset(new Router(boost::bind(&Economy::reset_all_pathfinding_cycles, this)));
 }
 
 Economy::~Economy() {
-	Notifications::publish(NoteEconomy{this, this, NoteEconomy::Action::kDeleted});
+	Notifications::publish(NoteEconomy{serial_, serial_, NoteEconomy::Action::kDeleted});
+
 	if (requests_.size())
 		log("Warning: Economy still has requests left on destruction\n");
 	if (flags_.size())
@@ -83,8 +84,6 @@ Economy::~Economy() {
 
 	delete[] ware_target_quantities_;
 	delete[] worker_target_quantities_;
-
-	delete router_;
 }
 
 /**
@@ -267,8 +266,9 @@ void Economy::remove_flag(Flag& flag) {
 	do_remove_flag(flag);
 
 	// automatically delete the economy when it becomes empty.
-	if (flags_.empty())
-		delete this;
+	if (flags_.empty()) {
+		owner_.remove_economy(serial_);
+	}
 }
 
 /**
@@ -527,7 +527,7 @@ void Economy::merge(Economy& e) {
 	//  should still have an options window after the merge.
 	if (e.has_window() && !has_window()) {
 		Notifications::publish(
-		   NoteEconomy{&e, this, NoteEconomy::Action::kMerged});
+		   NoteEconomy{e.serial(), serial_, NoteEconomy::Action::kMerged});
 	}
 
 	for (std::vector<Flag*>::size_type i = e.get_nrflags() + 1; --i;) {

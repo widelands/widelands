@@ -784,13 +784,14 @@ void Player::allow_building_type(DescriptionIndex const i, bool const allow) {
  */
 Economy* Player::create_economy() {
 	std::unique_ptr<Economy> eco(new Economy(*this));
+	const Serial serial = eco->serial();
 
-	assert(economies_.count(eco->serial()) == 0);
-	economies_.emplace(std::make_pair(eco->serial(), std::move(eco)));
-	assert(economies_.at(eco->serial())->serial() == eco->serial());
-	assert(economies_.count(eco->serial()) == 1);
+	assert(economies_.count(serial) == 0);
+	economies_.emplace(std::make_pair(serial, std::move(eco)));
+	assert(economies_.at(serial)->serial() == serial);
+	assert(economies_.count(serial) == 1);
 
-	return eco.get();
+	return get_economy(serial);
 }
 
 void Player::remove_economy(Serial serial) {
