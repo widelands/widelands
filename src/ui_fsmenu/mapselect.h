@@ -73,6 +73,8 @@ private:
 	MapTable table_;
 	MapDetails map_details_;
 
+	Map::ScenarioTypes scenario_types_;
+
 	const std::string basedir_;
 	std::string curdir_;
 
@@ -84,8 +86,6 @@ private:
 
 	UI::Checkbox* cb_show_all_maps_;
 	std::vector<UI::Checkbox*> tags_checkboxes_;
-
-	Map::ScenarioTypes scenario_types_;
 
 	std::vector<std::string> tags_ordered_;
 	std::set<uint32_t> req_tags_;

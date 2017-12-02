@@ -31,13 +31,15 @@ ConstructionSiteWindow::ConstructionSiteWindow(InteractiveGameBase& parent,
                                                UI::UniqueWindow::Registry& reg,
                                                Widelands::ConstructionSite& cs,
                                                bool avoid_fastclick)
-   : BuildingWindow(parent, reg, cs, avoid_fastclick), progress_(nullptr) {
+   : BuildingWindow(parent, reg, cs, avoid_fastclick), construction_site_(&cs), progress_(nullptr) {
 	init(avoid_fastclick);
 }
 
 void ConstructionSiteWindow::init(bool avoid_fastclick) {
+	Widelands::ConstructionSite* construction_site = construction_site_.get(igbase()->egbase());
+	assert(construction_site != nullptr);
+
 	BuildingWindow::init(avoid_fastclick);
-	Widelands::ConstructionSite& cs = dynamic_cast<Widelands::ConstructionSite&>(building());
 	UI::Box& box = *new UI::Box(get_tabs(), 0, 0, UI::Box::Vertical);
 
 	// Add the progress bar
@@ -49,12 +51,13 @@ void ConstructionSiteWindow::init(bool avoid_fastclick) {
 	box.add_space(8);
 
 	// Add the wares queue
-	for (uint32_t i = 0; i < cs.get_nrwaresqueues(); ++i)
-		box.add(new InputQueueDisplay(&box, 0, 0, *igbase(), cs, cs.get_waresqueue(i)));
+	for (uint32_t i = 0; i < construction_site->get_nrwaresqueues(); ++i)
+		box.add(new InputQueueDisplay(
+		   &box, 0, 0, *igbase(), *construction_site, construction_site->get_waresqueue(i)));
 
 	get_tabs()->add("wares", g_gr->images().get(pic_tab_wares), &box, _("Building materials"));
 
-	set_title((boost::format("(%s)") % cs.building().descname()).str());
+	set_title((boost::format("(%s)") % construction_site->building().descname()).str());
 	think();
 }
 
@@ -64,9 +67,13 @@ Make sure the window is redrawn when necessary.
 ===============
 */
 void ConstructionSiteWindow::think() {
+	// BuildingWindow::think() will call die in case we are no longer in
+	// existance.
 	BuildingWindow::think();
 
-	const Widelands::ConstructionSite& cs = dynamic_cast<Widelands::ConstructionSite&>(building());
-
-	progress_->set_state(cs.get_built_per64k());
+	Widelands::ConstructionSite* construction_site = construction_site_.get(igbase()->egbase());
+	if (construction_site == nullptr) {
+		return;
+	}
+	progress_->set_state(construction_site->get_built_per64k());
 }

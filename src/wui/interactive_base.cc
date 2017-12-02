@@ -192,9 +192,6 @@ InteractiveBase::~InteractiveBase() {
 	if (buildroad_) {
 		abort_build_road();
 	}
-	for (auto& registry : registries_) {
-		registry.unassign_toggle_button();
-	}
 }
 
 const InteractiveBase::BuildhelpOverlay*
@@ -286,8 +283,10 @@ UI::Button* InteractiveBase::add_toolbar_button(const std::string& image_basenam
 	   g_gr->images().get("images/" + image_basename + ".png"), tooltip_text);
 	toolbar_.add(button);
 	if (window) {
-		window->assign_toggle_button(button);
-		registries_.push_back(*window);
+		window->opened.connect(
+		   [this, button] { button->set_style(UI::Button::Style::kPermpressed); });
+		window->closed.connect([this, button] { button->set_style(UI::Button::Style::kRaised); });
+
 		if (bind_default_toggle) {
 			button->sigclicked.connect(
 			   boost::bind(&UI::UniqueWindow::Registry::toggle, boost::ref(*window)));

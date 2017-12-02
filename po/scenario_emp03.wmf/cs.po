@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-11-01 15:33+0000\n"
+"POT-Creation-Date: 2017-11-25 03:55+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Milan Fašina <matrix17@seznam.cz>, 2017\n"
 "Language-Team: Czech (https://www.transifex.com/widelands/teams/35159/cs/)\n"
@@ -334,6 +334,8 @@ msgid ""
 "To make matters even worse, all the land we can see is blocked by rocks and "
 "trees. I fear we won’t find the resources we need to build a new ship."
 msgstr ""
+"Aby toho nebylo málo, všechna zem, kam až oko dohlédne je blokována skálami "
+"a stromy. Bojím se, že nenalezneme suroviny potřebné na stavbu nové lodi."
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:213
@@ -341,6 +343,8 @@ msgid ""
 "I really don’t know if and how we will get back home. And the war is going "
 "on without us. I hope my fellow soldiers are defending our empire well."
 msgstr ""
+"Opravdu nemám tušení kdy a jak se dostaneme domů. Válka zatím pokračuje bez "
+"nás. Doufám, že moji bratři ve zbrani brání naše císařství dobře."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:220
 msgid "No Sight"
@@ -462,6 +466,8 @@ msgid ""
 "our new world. We can use them as soon as there will finally be enough space"
 " for buildings."
 msgstr ""
+"Navíc tím získáme žulu a mramor na stavbu našeho nového světa. Můžeme je "
+"využít jakmile bude dostatek místa na stavění."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:282
 msgid "Amalea’s New Instructions"
@@ -538,6 +544,8 @@ msgid ""
 "I found out that the construction of the lumberjack’s house and the sawmill "
 "is complete, so we can begin to harvest logs and make planks out of them."
 msgstr ""
+"Zjistil jsem, že stavba domku dřevorubce a pily je dokončena, takže můžeme "
+"začít těžit kmeny a řezat z nich prkna."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:322
@@ -545,6 +553,8 @@ msgid ""
 "This is a great step forward in constructing advanced buildings. And we can "
 "think of using some planks to build new ships."
 msgstr ""
+"Je to velký skok vpřed směrem k vyspělejším budovám. Nyní můžeme pomýšlet na"
+" využití prken na stavbu nových lodí."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:328
 msgid "We Need a Port"

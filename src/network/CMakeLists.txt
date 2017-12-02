@@ -1,6 +1,8 @@
 wl_library(network
   SRCS
     constants.h
+    crypto.h
+    crypto.cc
     internet_gaming.cc
     internet_gaming.h
     internet_gaming_messages.cc
@@ -46,6 +48,7 @@ wl_library(network
     logic_game_settings
     map_io_map_loader
     profile
+    random
     scripting_lua_interface
     scripting_lua_table
     ui_basic

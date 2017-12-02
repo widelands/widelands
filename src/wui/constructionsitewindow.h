@@ -39,6 +39,7 @@ protected:
 	void init(bool avoid_fastclick) override;
 
 private:
+	Widelands::OPtr<Widelands::ConstructionSite> construction_site_;
 	UI::ProgressBar* progress_;
 	DISALLOW_COPY_AND_ASSIGN(ConstructionSiteWindow);
 };

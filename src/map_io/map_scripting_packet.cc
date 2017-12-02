@@ -38,6 +38,21 @@ namespace Widelands {
 
 namespace {
 constexpr uint32_t kCurrentPacketVersion = 3;
+
+// Write all .lua files that exist in the given 'path' in 'map_fs' to the 'target_fs'.
+void write_lua_dir(FileSystem& target_fs, FileSystem* map_fs, const std::string& path) {
+	if (map_fs) {
+		target_fs.ensure_directory_exists(path);
+		for (const std::string& script :
+		     filter(map_fs->list_directory(path),
+		            [](const std::string& fn) { return boost::ends_with(fn, ".lua"); })) {
+			size_t length;
+			void* input_data = map_fs->load(script, length);
+			target_fs.write(script, input_data, length);
+			free(input_data);
+		}
+	}
+}
 }  // namespace
    /*
     * ========================================================================
@@ -67,18 +82,13 @@ void MapScriptingPacket::read(FileSystem& fs, EditorGameBase& egbase, bool, MapO
 }
 
 void MapScriptingPacket::write(FileSystem& fs, EditorGameBase& egbase, MapObjectSaver& mos) {
-	fs.ensure_directory_exists("scripting");
-
+	// Write any scenario scripting files in the map's basic scripting dir
 	FileSystem* map_fs = egbase.map().filesystem();
-	if (map_fs) {
-		for (const std::string& script :
-		     filter(map_fs->list_directory("scripting"),
-		            [](const std::string& fn) { return boost::ends_with(fn, ".lua"); })) {
-			size_t length;
-			void* input_data = map_fs->load(script, length);
-			fs.write(script, input_data, length);
-			free(input_data);
-		}
+	write_lua_dir(fs, map_fs, "scripting");
+
+	// Write any custom scenario tribe entities
+	if (map_fs->file_exists("scripting/tribes/init.lua")) {
+		write_lua_dir(fs, map_fs, "scripting/tribes");
 	}
 
 	// Dump the global environment if this is a game and not in the editor
