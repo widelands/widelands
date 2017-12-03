@@ -541,7 +541,7 @@ private:
 };
 
 template <class T> struct OPtr {
-	OPtr(T* const obj = 0) : m(obj) {
+	OPtr(T* const obj = nullptr) : m(obj) {
 	}
 
 	OPtr& operator=(T* const obj) {

@@ -33,7 +33,7 @@ struct WidelandsMapLoader;
 struct GameMapPacket : public GameDataPacket {
 	GameMapPacket() : mos_(nullptr), mol_(nullptr), wms_(nullptr), wml_(nullptr) {
 	}
-	virtual ~GameMapPacket();
+	~GameMapPacket() override;
 
 	/// Ensures that the world gets loaded but does not much more.
 	void read(FileSystem&, Game&, MapObjectLoader* = nullptr) override;

@@ -57,7 +57,7 @@ public:
 	}
 	LuaClass() : x(123), prop(246) {
 	}
-	virtual ~LuaClass();
+	~LuaClass() override;
 	explicit LuaClass(lua_State* /* L */) : x(124), prop(248) {
 	}
 	virtual int test(lua_State* L) {

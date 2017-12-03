@@ -64,7 +64,7 @@ public:
 	        // button is pressed.
 	        int32_t step_size = 1,
 	        int32_t big_step_size = 10);
-	~SpinBox();
+	~SpinBox() override;
 
 	boost::signals2::signal<void()> changed;
 

@@ -40,7 +40,7 @@ struct Button;
 class EditorPlayerMenu : public UI::UniqueWindow {
 public:
 	EditorPlayerMenu(EditorInteractive&, UI::UniqueWindow::Registry&);
-	virtual ~EditorPlayerMenu() {
+	~EditorPlayerMenu() override {
 	}
 
 private:

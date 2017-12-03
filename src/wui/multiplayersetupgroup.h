@@ -51,7 +51,7 @@ struct MultiPlayerSetupGroup : public UI::Box {
 	                      int32_t h,
 	                      GameSettingsProvider* settings,
 	                      uint32_t buth);
-	~MultiPlayerSetupGroup();
+	~MultiPlayerSetupGroup() override;
 
 private:
 	void update();
