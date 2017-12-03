@@ -99,7 +99,7 @@ struct FindBobAlwaysTrue : public FindBob {
 	bool accept(Bob*) const override {
 		return true;
 	}
-	virtual ~FindBobAlwaysTrue() {
+	~FindBobAlwaysTrue() override {
 	}  // make gcc shut up
 };
 
@@ -148,7 +148,7 @@ public:
 	enum { NO_SCENARIO = 0, SP_SCENARIO = 1, MP_SCENARIO = 2 };
 
 	Map();
-	virtual ~Map();
+	~Map() override;
 
 	/// Returns the correct initialized loader for the given mapfile
 	std::unique_ptr<MapLoader> get_correct_loader(const std::string& filename);

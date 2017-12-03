@@ -504,7 +504,7 @@ Layout::fit_nodes(std::vector<RenderNode*>& rv, uint16_t w, Borders p, bool shri
 class TextNode : public RenderNode {
 public:
 	TextNode(FontCache& font, NodeStyle&, const std::string& txt);
-	virtual ~TextNode() {
+	~TextNode() override {
 	}
 
 	std::string debug_info() const override {
@@ -572,7 +572,7 @@ public:
 		w_ = w;
 		check_size();
 	}
-	virtual ~FillingTextNode() {
+	~FillingTextNode() override {
 	}
 
 	std::string debug_info() const override {
@@ -777,7 +777,7 @@ public:
 	     is_background_color_set_(false),
 	     background_image_(nullptr) {
 	}
-	virtual ~DivTagRenderNode() {
+	~DivTagRenderNode() override {
 		for (RenderNode* n : nodes_to_render_) {
 			delete n;
 		}
