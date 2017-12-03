@@ -2,7 +2,7 @@ include "scripting/messages.lua"
 include "map:scripting/helper_functions.lua"
 
 -- Some objectives need to be waited for in separate threads
-local obj_find_monastry_done = false
+local obj_find_monastery_done = false
 local vesta_conquered = false
 local enemy = false
 local mv = wl.ui.MapView()
@@ -164,7 +164,7 @@ function steel()
 	  ) > 9) do 
    sleep(2500) 
    end
-   campaign_message_box(diary_page_6)
+   campaign_message_box(diary_page_2)
    o.done = true   
    sleep(10000)
    run(check_enemy)
@@ -297,9 +297,9 @@ function training()
 
    while not (check_for_buildings(p1, { empire_trainingcamp = 1, empire_colosseum = 1})) do sleep(3000) end
    o2.done = true
-   campaign_message_box(diary_page_7)
+   campaign_message_box(diary_page_3)
    sleep(5000)
-   while not (obj_find_monastry_done) do sleep(2000) end
+   while not (obj_find_monastery_done) do sleep(2000) end
    campaign_message_box(saledus_8)
    local o1 = add_campaign_objective(obj_heroes)
    local heroes = false
@@ -371,7 +371,7 @@ function conquer()
 
    -- Sleep a while to have some time between the last objective done message and final victory
    sleep(25000)
-   campaign_message_box(diary_page_5)
+   campaign_message_box(diary_page_4)
 
    p1:reveal_campaign("campsect2")
    p1:reveal_scenario("empiretut04")
@@ -380,7 +380,7 @@ end
 -- another production chain that is uneffective and need to be corrected
 function wheat_chain()
    while not (p1:get_produced_wares_count('beer') > 4  and p1:get_produced_wares_count('flour') > 4) do sleep(2434) end
-   local o = add_campaign_objective(obj_find_monastry)
+   local o = add_campaign_objective(obj_find_monastery)
    campaign_message_box(amalea_9)
    while not (p1:sees_field(map:get_field(16,156)) or p1:sees_field(map:get_field(16,157)) or p1:sees_field(map:get_field(17,158)) or p1:sees_field(map:get_field(17,159)) or p1:sees_field(map:get_field(18,160)) or p1:sees_field(map:get_field(18,161)) or p1:sees_field(map:get_field(19,162)) or p1:sees_field(map:get_field(20,162)) or p1:sees_field(map:get_field(21,162)) or p1:sees_field(map:get_field(22,162)) or p1:sees_field(map:get_field(23,162)) or p1:sees_field(map:get_field(24,162))) do sleep(2500) end
    local well = map:get_field(17, 154)
@@ -439,7 +439,7 @@ function wheat_chain()
       campaign_message_box(amalea_12)
       campaign_message_box(saledus_3)
    end
-   obj_find_monastry_done = true
+   obj_find_monastery_done = true
    run(karma)
 end
 
@@ -510,15 +510,15 @@ function mission_thread()
  
    -- the mayor is appearing
    sleep(700)
-   campaign_message_box(diary_page_2)
+   campaign_message_box(lutius_1)
    sleep(700)
    campaign_message_box(marcus_1) 
    sleep(700)
-   campaign_message_box(diary_page_3)
+   campaign_message_box(lutius_2)
    sleep(700)
    campaign_message_box(marcus_2)
    sleep(700)
-   campaign_message_box(diary_page_4)
+   campaign_message_box(lutius_3)
    sleep(700) 
    
    -- let's start with dismantling the unproductive buildings  
@@ -527,8 +527,6 @@ function mission_thread()
    run(farm_plans)
 
 end
-
-
 
 run(mission_thread)
 
