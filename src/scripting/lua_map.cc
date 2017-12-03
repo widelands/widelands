@@ -1434,7 +1434,6 @@ int LuaTribeDescription::get_immovables(lua_State* L) {
 }
 
 /* RST
-=======
    .. attribute:: name
 
          (RO) a :class:`string` with the tribe's internal name
