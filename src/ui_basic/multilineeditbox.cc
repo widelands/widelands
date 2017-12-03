@@ -105,6 +105,7 @@ MultilineEditbox::Data::Data(MultilineEditbox& o,
    : scrollbar(&o, o.get_w() - Scrollbar::kSize, 0, Scrollbar::kSize, o.get_h(), button_background),
      background(init_background),
      cursor_pos(0),
+     lineheight(1),
      maxbytes(std::min(g_gr->max_texture_size() / UI_FONT_SIZE_SMALL, 0xffff)),
      ww_valid(false),
      owner(o) {
