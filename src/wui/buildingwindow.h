@@ -48,7 +48,7 @@ struct BuildingWindow : public UI::UniqueWindow {
 	               Widelands::Building&,
 	               bool avoid_fastclick);
 
-	virtual ~BuildingWindow();
+	~BuildingWindow() override;
 
 	InteractiveGameBase* igbase() const {
 		return parent_;

@@ -147,7 +147,7 @@ public:
 	FieldActionWindow(InteractiveBase* ibase,
 	                  Widelands::Player* plr,
 	                  UI::UniqueWindow::Registry* registry);
-	~FieldActionWindow();
+	~FieldActionWindow() override;
 
 	InteractiveBase& ibase() {
 		return dynamic_cast<InteractiveBase&>(*get_parent());

@@ -365,7 +365,7 @@ void Tribes::postload_calculate_trainingsites_proportions() {
 			}
 		}
 
-		log("%s trainingsites: We have used up %d%% on %lu sites, there are %d without\n",
+		log("%s trainingsites: We have used up %d%% on %" PRIuS " sites, there are %d without\n",
 		    tribe_descr->name().c_str(), used_percent, traingsites_with_percent.size(),
 		    trainingsites_without_percent);
 

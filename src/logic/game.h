@@ -99,7 +99,7 @@ public:
 	friend struct GameLoader;
 
 	Game();
-	~Game();
+	~Game() override;
 
 	// life cycle
 	void set_game_controller(GameController*);
@@ -265,7 +265,7 @@ private:
 		     syncstreamsave_(false) {
 		}
 
-		~SyncWrapper();
+		~SyncWrapper() override;
 
 		/// Start dumping the entire syncstream into a file.
 		///
