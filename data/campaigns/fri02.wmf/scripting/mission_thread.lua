@@ -241,7 +241,8 @@ function victory ()
    while not (done_exp and done_mine and done_fight) do sleep (4731) end
    sleep (10000)
    campaign_message_box (victory_1)
-   --END OF THE FRISIAN CAMPAIGN – no further scenarios
+   p1:reveal_scenario ("frisians02")
+   --END OF MISSION 2
 end
 
 function mission_thread()

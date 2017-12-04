@@ -1,35 +1,34 @@
-dirname = path.dirname(__file__)
+dirname = path.dirname (__file__)
 
 animations = {
    idle = {
-      pictures = path.list_files(dirname .. "idle_??.png"),
-      hotspot = { 10, 23 },
+      pictures = path.list_files (dirname .. "idle_??.png"),
+      hotspot = { 21, 25 },
    },
    planting = {
-      pictures = path.list_files(dirname .. "plant_??.png"),
-      hotspot = { 14, 25 },
-      fps = 10
+      pictures = path.list_files (dirname .. "plant_??.png"),
+      hotspot = { 21, 25 },
+      fps = 20
    },
    harvesting = {
-      pictures = path.list_files(dirname .. "harvest_??.png"),
-      hotspot = { 19, 23 },
+      pictures = path.list_files (dirname .. "harvest_??.png"),
+      hotspot = { 21, 25 },
       fps = 10
    },
    gathering = {
-      pictures = path.list_files(dirname .. "gather_??.png"),
-      hotspot = { 9, 23 },
-      fps = 5
+      pictures = path.list_files (dirname .. "gather_??.png"),
+      hotspot = { 21, 25 },
+      fps = 10
    }
 }
-add_walking_animations(animations, "walk", dirname, "walk", {18, 23}, 10)
-add_walking_animations(animations, "walkload", dirname, "walkload", {16, 23}, 10)
-
+add_walking_animations (animations, "walk", dirname, "walk", {21, 25}, 15)
+add_walking_animations (animations, "walkload", dirname, "walkload", {23, 27}, 15)
 
 tribes:new_worker_type {
    msgctxt = "frisians_worker",
    name = "frisians_farmer",
    -- TRANSLATORS: This is a worker name used in lists of workers
-   descname = pgettext("frisians_worker", "Farmer"),
+   descname = pgettext ("frisians_worker", "Farmer"),
    helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    vision_range = 2,

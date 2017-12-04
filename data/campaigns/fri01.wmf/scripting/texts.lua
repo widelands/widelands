@@ -124,36 +124,67 @@ intro_2 = {
       _([[This is as good a place as any to start building our new home. First of all, we must ensure a stable supply of basic building materials.]])
       .. paragraphdivider () ..
       -- TRANSLATORS: Reebaud – Introduction 2
-      _([[Like all Frisians, we build our houses mainly with bricks. We improve them by adding some wood and stones. The roofs are thatched with reed, naturally. Nothing is better suited to keep the rain out.]])
-      .. paragraphdivider () ..
-      -- TRANSLATORS: Reebaud – Introduction 2
-      _([[Let´s start by taking care of our wood production. Trees don´t seem to grow well on this island; better build at least two houses for foresters and one for a woodcutter.]])
-      .. paragraphdivider () ..
-      -- TRANSLATORS: Reebaud – Introduction 2
-      _([[Also, we had better build a reed farm. Even reed farms need reed to be built, so we must take care not to run short before we can grow our own. Reed is easily cultivated, so the reed farmer doesn´t need anything more to start growing reed.]]))
-      .. new_objectives (obj_build_wood_economy),
+      _([[I have asked one of my advisors to oversee the construction of our settlement.]])),
 }
 intro_3 = {
    title =_ "Introduction",
-   body=reebaud (_"Building our now home",
-      -- TRANSLATORS: Reebaud – Introduction 3
-      _([[Our wood and reed supplies are ensured. Now, we must take care of our brick supply. Bricks are burned in a brick burner´s house out of stone and clay, so we first need to produce those. On the mainland, we used to cut granite out of rocks, but I don´t see any here. Perhaps these hills contain enough stones to mine some granite.]])
+   body=hauke (_"The first buildings",
+      -- TRANSLATORS: Hauke – Introduction 3
+      _([[Greetings, Chieftain Reebaud! I am Hauke, your First Advisor. I will start with the colonization of the island straight away.]])
       .. paragraphdivider () ..
-      -- TRANSLATORS: Reebaud – Introduction 3
-      _([[Clay is easy to make: A clay burner simply digs up some earth and mixes it with water. Just make sure that he has plenty of space for digging around his clay pit. It might be a good idea to build some sentinels to expand.]])
+      -- TRANSLATORS: Hauke – Introduction 3
+      _([[Like all Frisians, we build our houses mainly with bricks. We improve them by adding some wood and stones. The roofs are thatched with reed, naturally. Nothing is better suited to keep the rain out.]])
       .. paragraphdivider () ..
-      -- TRANSLATORS: Reebaud – Introduction 3
-      _([[To burn bricks, the brick burner needs a fire. We use coal as fuel. Build a coal mine to make sure we don´t run out. No coal means no bricks, no bricks means no mines, no mines mean no coal… you can see the problem.]])
+      -- TRANSLATORS: Hauke – Introduction 3
+      _([[We should start by taking care of our wood production. Trees don´t seem to grow well on this island; better build at least two houses for foresters and one for a woodcutter.]])
       .. paragraphdivider () ..
-      -- TRANSLATORS: Reebaud – Introduction 3
-      _([[Also, build a well – nobody likes to drink salt water, and it is no good for making clay.]]))
-      .. new_objectives (obj_build_brick_economy),
+      -- TRANSLATORS: Hauke – Introduction 3
+      _([[Also, we had better build a reed farm soon. Even reed farms need reed to be built, so we must take care not to run short before we can grow our own. Reed is easily cultivated, so the reed farmer doesn´t need anything more to start growing thatch reed.]]))
+      .. new_objectives (obj_build_wood_economy),
 }
 intro_4 = {
    title =_ "Introduction",
+   body=hauke (_"Building our now home",
+      -- TRANSLATORS: Hauke – Introduction 4
+      _([[Our wood and reed supplies are ensured. Now, we must take care of our brick supply. Bricks are burned in a brick burner´s house out of stone and clay, so we first need to produce those. On the mainland, we used to cut granite out of rocks, but I don´t see any here. Perhaps these hills contain enough stones to mine some granite.]])
+      .. paragraphdivider () ..
+      -- TRANSLATORS: Hauke – Introduction 4
+      _([[Clay is easy to make: A clay burner simply digs up some earth and mixes it with water. Just make sure that he has plenty of space for digging around his clay pit. It might be a good idea to build some sentinels to expand.]])
+      .. paragraphdivider () ..
+      -- TRANSLATORS: Hauke – Introduction 4
+      _([[To burn bricks, the brick burner needs a fire. We use coal as fuel. Build a coal mine to make sure we don´t run out. No coal means no bricks, no bricks means no mines, no mines mean no coal… you can see the problem.]])
+      .. paragraphdivider () ..
+      -- TRANSLATORS: Hauke – Introduction 4
+      _([[Also, build a well – nobody likes to drink salt water, and it is no good for making clay.]]))
+      .. new_objectives (obj_build_brick_economy),
+}
+intro_5 = {
+   title =_ "Introduction",
    body=reebaud (_"Our first settlement",
-      -- TRANSLATORS: Reebaud – Introduction 4
-      _([[Good – our entire building material production works now. Let´s wait until we have gathered some more materials.]])),
+      -- TRANSLATORS: Reebaud – Introduction 5
+      _([[You did well. Our entire building material production works now. Let´s wait until we have gathered some more materials. We could expand our territory some more, to see what else can be found on this island.]])),
+}
+
+warning_reed = {
+   title =_ "Reed shortages",
+   body=hauke (_"Build another reed farm",
+      -- TRANSLATORS: Hauke – no reed
+      _([[I noticed we have been short of reed for a while now. Our buildings seem to need quite a lot of it. We should build another reed farm or two. Reed is also used to make fishing nets and other tools; therefore, resolving this shortage should be a priority.]])),
+}
+warning_clay = {
+   title =_ "Clay shortages",
+   body=hauke (_"Build another clay pit",
+      -- TRANSLATORS: Hauke – no clay
+      _([[Our brick burners have been complaining about a shortage of clay for a while now. No clay means no bricks can be produced, so this shortage slows us down a lot. It would be better to build one or two more clay pits, and wells to supply them with water.]])
+      .. paragraphdivider () ..
+      -- TRANSLATORS: Hauke – no clay
+      _([[Clay is also used in shipbuilding and to improve charcoal kilns. If we ever need to build a ship, or the mines cannot provide us with enough coal, we will need more clay, so the shortage must be resolved.]])),
+}
+warning_bricks = {
+   title =_ "Brick shortages",
+   body=hauke (_"Build another brick burner",
+      -- TRANSLATORS: Hauke – no bricks
+      _([[I noticed we are running out of bricks. This slows down construction of our buildings a lot, since we need so many bricks. We should really start to construct another brick burner´s house, and assign it the highest priority for bricks in the constructionsite window so as to resolve the shortage as soon as possible.]])),
 }
 
 food_1 = {
@@ -163,7 +194,7 @@ food_1 = {
       _([[Chieftain Reebaud! I bring bad news. The miners are working so hard that they have no time to prepare their own food. They demand to be supplied with it.]])
       .. paragraphdivider () ..
       -- TRANSLATORS: Hauke – no rations left
-      _([[You had better build a tavern to prepare rations. Also, build a fisher´s house, and as nobody likes raw fish, a smokery to smoke it. You should also build a berry farm, which plants berry bushes, and a fruit collector´s house, so the bushes are harvested.]]))
+      _([[We need to build a tavern to prepare rations. To get the raw food, we have to build a fisher´s house, and as nobody likes raw fish, a smokery to smoke it. Further, build a berry farm, which plants berry bushes, and a fruit collector´s house, so the bushes are harvested.]]))
       .. new_objectives (obj_build_food_economy),
 }
 food_2 = {
@@ -173,13 +204,13 @@ food_2 = {
       _([[Well done. The miners are satisfied and have started working again.]])
       .. paragraphdivider () ..
       -- TRANSLATORS: Hauke – better food
-      _([[But when the mines have to be expanded, rations won´t keep the miners happy. Better take precautions – build a second tavern and consider enhancing the one you have to a drinking hall.]])
+      _([[But when the mines have to be expanded, rations won´t keep the miners happy. Better take precautions – build a second tavern, then consider enhancing the one you have to a drinking hall.]])
       .. paragraphdivider () ..
       -- TRANSLATORS: Hauke – better food
-      _([[A drinking hall needs better food. Build two farms to start growing barley, a bakery and a brewery.]])
+      _([[A drinking hall needs better food. Build a bakery a brewery, and two or three farms to start growing barley. Keep in mind that barley grows very slowly; therefore, so few farms won´t suffice when we actually need the bread and beer.]])
       .. paragraphdivider () ..
       -- TRANSLATORS: Hauke – better food
-      _([[The bakery and brewery should be enhanced as soon as the workers have enough experience. They can then produce mead, and bread sweetened with honey. Build a bee-keeper´s house next to the berry farm to ensure we have enough honey.]]))
+      _([[The bakery and brewery should be enhanced as soon as the workers have enough experience. They can then produce mead, and bread sweetened with honey. Build a bee-keeper´s house next to the berry farm to produce some honey, which we can store until we need it.]]))
       .. new_objectives (obj_build_food_economy_2),
 }
 
@@ -190,20 +221,29 @@ mining_1 = {
       _([[We can now produce all the kinds of food we are used to. I wonder what treasures these hills might contain? We should find out.]])
       .. paragraphdivider () ..
       -- TRANSLATORS: Reebaud – mining economy
-      _([[Build an iron mine and perhaps a gold mine. As they produce only ores, we will need a furnace to smelt them. Also build a blacksmithy to ensure we won´t run out of tools – and yes, a small armour smithy as well. I hope we won´t meet enemies here, but it´s better to be prepared.]]))
+      _([[Build an iron mine and perhaps a gold mine. As they produce only ores, we will need a furnace to smelt them. Also build a blacksmithy to ensure we won´t run out of tools – and yes, a small armour smithy as well. It produces helmets as well as swords. I hope we won´t meet enemies here, but it´s better to be prepared.]]))
       .. new_objectives (obj_build_mining),
 }
 recruit_1 = {
    title =_ "Be Prepared",
    body=reebaud (_"Start recruiting soldiers",
-      -- TRANSLATORS: Reebaud – recruit
+      -- TRANSLATORS: Reebaud – recruit 1
       _([[Our mines are working well. We can now produce all the tools we need, and some weapons as well.]])
       .. paragraphdivider () ..
-      -- TRANSLATORS: Reebaud – recruit
-      _([[We could use these weapons to equip some new soldiers. I hope we won´t find enemies here, but it is always better to be prepared. New soldiers are equipped in a barracks with a basic sword and a set of fur clothes, the uniform of all honourable warriors.]])
+      -- TRANSLATORS: Reebaud – recruit 1
+      _([[We could use these weapons to equip some new soldiers. I hope we won´t find enemies here, but it is always better to be prepared. New soldiers are equipped in a barracks with a basic sword and a set of fur clothes, the uniform of all honourable warriors.]]),
+}
+recruit_2 = {
+   title =_ "Be Prepared",
+   body=hauke (_"Build a recruitment centre",
+      -- TRANSLATORS: Hauke – recruit 2
+      _([[We will need a barracks, of course; a reindeer farm to produce fur, and a seamstress to sew the fur into garments. The reindeer farm produces some meat as a by-product of fur, and it also trains reindeer to help our carriers on busy roads.]]))
       .. paragraphdivider () ..
-      -- TRANSLATORS: Reebaud – recruit
-      _([[We will need a barracks, of course; a reindeer farm to produce fur, and a seamstress to sew the fur into garments. The reindeer farm produces meat as a by-product of fur, and it also trains some reindeer to help our carriers on busy roads.]]))
+      -- TRANSLATORS: Hauke – recruit 2
+      _([[I advise to build all those buildings within a short distance of each other, and to construct two new warehouses nearby: One should be set to store only weapons, armour, ores, metal and coal; the other to store building materials.]])
+      .. paragraphdivider () ..
+      -- TRANSLATORS: Hauke – recruit 2
+      _([[We should also build other related buildings nearby, such as a furnace, and some wells and farms to supply the reindeer farm. This design will make our military economy more efficient, because it reduces the waiting time for wares in the processing buildings.]])
       .. new_objectives (obj_recruit_soldiers),
 }
 expand_1 = {
@@ -242,25 +282,70 @@ enemies_3 = {
 training_1 = {
    title =_ "Training Soldiers",
    body=reebaud (_"Stronger in battle",
-      -- TRANSLATORS: Reebaud – train soldiers
+      -- TRANSLATORS: Reebaud – train soldiers 1
       _([[We recruit soldiers easily enough, but they are fairly weak. We must train our soldiers if they are to beat the enemy.]])
        .. paragraphdivider () ..
-      -- TRANSLATORS: Reebaud – train soldiers
-      _([[Soldiers are trained in the basics of attack, health and defence by a small training camp. They learn the finer points in a large training arena.]])
-       .. paragraphdivider () ..
-      -- TRANSLATORS: Reebaud – train soldiers
-      _([[We will need a master seamstress to sew better armour, and another seamstress to keep producing normal fur clothes. Also, enhance the small armour smithy to produce better weapons and helmets, and build a new small one so we still get basic weapons. We need at least one gold mine now, because the best weapons and armour use gold.]])
-       .. paragraphdivider () ..
-      -- TRANSLATORS: Reebaud – train soldiers
-      _([[I want to have at least one soldier who is trained to the highest possible level in all categories: Level 6 attack, level 2 health and level 2 defence. We do not train soldiers to evade attacks; a true warrior can block his opponent´s blows instead of jumping away like a coward.]]))
-      .. new_objectives (obj_train_soldiers),
+      -- TRANSLATORS: Reebaud – train soldiers 1
+      _([[Soldiers are trained in the basics of attack, health and defence by a small training camp. They learn the finer points in a large training arena.]])),
 }
 training_2 = {
-   title =_ "Training soldiers",
+   title =_ "Training Soldiers",
+   body=reebaud (_"Frisian Fighting",
+      -- TRANSLATORS: Reebaud – train soldiers 2
+      _([[Soldiers are trained in two steps in defense and health. They get fur garments studded with iron and also gold to cushion blows; and helmets forged from iron, and gold as well, to lengthen their life in battle.]])
+       .. paragraphdivider () ..
+      -- TRANSLATORS: Reebaud – train soldiers 2
+      _([[They learn to attack with three different swords: The long, curved and double-edged sword. The latter two contain gold, all of them iron. The advanced soldiers are taught to use two matching swords at once. This makes six steps of attack training.]])
+       .. paragraphdivider () ..
+      -- TRANSLATORS: Reebaud – train soldiers 2
+      _([[We do not train soldiers to evade attacks; a true warrior can block his opponent´s blows with a skillful twist of the sword instead of jumping away like a coward.]])),
+}
+training_3 = {
+   title =_ "Training Soldiers",
+   body=hauke (_"Planning a training centre",
+      -- TRANSLATORS: Hauke – train soldiers 3
+      _([[We will need a master seamstress to sew better armour, and another seamstress to keep producing normal fur clothes. Also, enhance the small armour smithy to produce better weapons and helmets, and build a new small one so we still get basic weapons. We need at least one gold mine now, because the best weapons and armour use gold.]])
+       .. paragraphdivider () ..
+      -- TRANSLATORS: Hauke – train soldiers 3
+      _([[We should build these buildings close to the barracks, since it is, as I already mentioned earlier, much more efficient to centralise all our military facilities in one recruiting and training centre, than if they were strewn out over a long distance. Build a third warehouse there which will store only the food needed for training.]])
+       .. paragraphdivider () ..
+      -- TRANSLATORS: Hauke – train soldiers 3
+      _([[When soldiers train to use new weapons, their old equipment is discarded. Take into account that the useless scraps will clutter up your roads until they are stored in a warehouse somewhere.]])
+       .. paragraphdivider () ..
+      -- TRANSLATORS: Hauke – train soldiers 3
+      _([[I recommend to train at least one soldier to the highest level in health, defense and attack. Until then, the enemy is just too strong for us.]]))
+      .. new_objectives (obj_train_soldiers),
+}
+training_4 = {
+   title =_ "Training Soldiers",
    body=reebaud (_"Our soldiers are strong",
-      -- TRANSLATORS: Reebaud – attack enemy
-      _([[We finally have out first fully trained soldier. Let´s attack!]]))
+      -- TRANSLATORS: Reebaud – attack enemy 1
+      _([[We finally have out first fully trained soldier. Let´s attack!]])),
+}
+training_5 = {
+   title =_ "Training Soldiers",
+   body=hauke (_"Are our soldiers strong enough?",
+      -- TRANSLATORS: Hauke – attack enemy 2
+      _([[With respect, Chieftain, please be not so hasty! The enemies are very strong, and I´m still not convinced we can defeat them. I´d prefer not to send any soldiers into a battle they will likely lose. I´d prefer to wait a bit longer until we can certainly beat the enemy without losing soldiers.]])),
+}
+training_6 = {
+   title =_ "Training Soldiers",
+   body=reebaud (_"Our soldiers are strong enough",
+      -- TRANSLATORS: Reebaud – attack enemy 3
+      _([[Of course I also prefer to keep our soldiers alive, but we can´t save every life. Soldiers die in battle, that´s just the way things are. You may decide how long to wait until attacking, but don´t take too long, or the enemies will exploit our weakness.]]))
       .. new_objectives (obj_defeat_enemy),
+}
+warning_early_attack = {
+   title =_ "Beware!",
+   body=reebaud (_"Not strong enough",
+      -- TRANSLATORS: Hauke – beware of early attacks
+      _([[Chieftain Reebaud! Our scouts report that the enemy is advancing fast. I fear we are not strong enough yet to defend ourselves if he attacks first. We must somehow hold him off.]] )
+       .. paragraphdivider () ..
+      -- TRANSLATORS: Hauke – beware of early attacks
+      _([[But we have been informed that he can´t build towers. I suggest to build a fortress, which is the building with the highest conquer radius, to push the border as far east as possible. The enemies can only see it if they build a fortress right at the border.]])
+       .. paragraphdivider () ..
+      -- TRANSLATORS: Hauke – beware of early attacks
+      _([[We can prevent this, or at least make it harder to do, by ordering some foresters to plant trees at the border. The enemy will have to cut enough them down to build the fortress, so we may be safe until we choose to attack.]])),
 }
 rising_water_1 = {
    title =_ "Enemy defeated",

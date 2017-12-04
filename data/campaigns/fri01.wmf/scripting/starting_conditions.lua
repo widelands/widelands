@@ -80,6 +80,7 @@ p2:allow_buildings {
    "frisians_mead_brewery",
    "frisians_honey_bread_bakery",
    "frisians_drinking_hall",
+   "frisians_fortress",
    "frisians_sentinel",
    "frisians_outpost"}
 

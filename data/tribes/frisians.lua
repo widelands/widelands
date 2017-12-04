@@ -1,15 +1,15 @@
-dirname = path.dirname(__file__)
+dirname = path.dirname (__file__)
 
 tribes:new_tribe {
    name = "frisians",
 
    animations = {
       frontier = {
-         pictures = path.list_files(dirname .. "images/frisians/frontier_??.png"),
+         pictures = path.list_files (dirname .. "images/frisians/frontier_??.png"),
          hotspot = { 9, 26 },
       },
       flag = {
-         pictures = path.list_files(dirname .. "images/frisians/flag_??.png"),
+         pictures = path.list_files (dirname .. "images/frisians/flag_??.png"),
          hotspot = { 45, 55 },
          fps = 10,
          scale = 4.2,
@@ -184,10 +184,6 @@ tribes:new_tribe {
       "berry_bush_sea_buckthorn_small",
       "berry_bush_sea_buckthorn_medium",
       "berry_bush_sea_buckthorn_ripe",
-      --"bush_tiny",
-      --"bush_small",
-      --"bush_medium",
-      --"bush_ripe",
       "barleyfield_tiny",
       "barleyfield_small",
       "barleyfield_medium",
@@ -318,6 +314,7 @@ tribes:new_tribe {
    headquarters = "frisians_headquarters",
    port = "frisians_port",
    
+   -- AI hints
    barracks = "frisians_barracks",
    ironore = "iron_ore",
    rawlog = "log",

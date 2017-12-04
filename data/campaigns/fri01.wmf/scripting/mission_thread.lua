@@ -1,5 +1,107 @@
 include "scripting/messages.lua"
 
+shewWarningEarlyAttack = false
+shewnWarningReed = false
+shewnWarningClay = false
+shewnWarningBricks = false
+
+local fields = {}
+for y=0,map.height - 1 do
+   local fld = {}
+   for x=0,map.width - 1 do
+      local f = map:get_field (x, y)
+      fld [#fld + 1] = f
+   end
+   fields [#fields + 1] = fld
+end
+
+function checkWarningEarlyAttack ()
+   local y = 0
+   local westernmostEnemy = map.width - 1
+   local easternmostOwn = 0
+   while not shewWarningEarlyAttack do
+      for x,field in fields.y do
+         if field.owner == p1 and idy > easternmostOwn then easternmostOwn = x end
+         if field.owner == p2 and idy < westernmostEnemy then westernmostEnemy = x end
+         if easternmostEnemy - westernmostOwn < 21 then --if they are so close that they´d be inside a new tower´s vision range
+            campaign_message_box (warning_early_attack)
+            return
+         end
+      end
+      y = y + 1
+      while y >= map.height do y = y - map.height end
+      sleep (50) --maximum delay = height · sleeptime = 128·50ms = 6,4s
+   end
+end
+
+function warningReed () 
+   local ready = 0 --show warning only if player is short on reed for more than 8 checks (= 1.5 minutes)
+   while not shewnWarningReed do
+      sleep (10000)
+      if count ("thatch_reed") < 4 then
+         if ready > 8 then
+            if #p1:get_buildings ("frisians_reed_farm") < 3 then
+               campaign_message_box (warning_reed)
+            end
+            return
+         else
+            ready = ready + 1
+         end
+      else
+         ready = 0
+      end
+   end
+end
+
+function warningBricks () 
+   local ready = 0 --show warning only if player is short on bricks for more than 5 checks (= 1 minute)
+   while not shewnWarningBricks do
+      sleep (10000)
+      if count ("brick") < 4 then
+         if ready > 5 then
+            if #p1:get_buildings ("frisians_brick_burners_house") < 3 then
+               campaign_message_box (warning_bricks)
+            end
+            return
+         else
+            ready = ready + 1
+         end
+      else
+         ready = 0
+      end
+   end
+end
+
+function warningClay () 
+   local ready = 0 --show warning only if player is short on reed for more than 11 checks (= 2 minutes)
+   while not shewnWarningClay do
+      sleep (10000)
+      if count ("clay") < 4 then
+         if ready > 11 then
+            if #p1:get_buildings ("frisians_clay_pit") < 4 then
+               campaign_message_box (warning_clay)
+            end
+            return
+         else
+            ready = ready + 1
+         end
+      else
+         ready = 0
+      end
+   end
+end
+
+function count (ware)
+   local whs = array_combine (
+      p1:get_buildings ("frisians_headquarters"),
+      p1:get_buildings ("frisians_port"),
+      p1:get_buildings ("frisians_warehouse"))
+   local inWH = 0
+   for idx,wh in ipairs (whs) do
+      inWH = inWH + wh:get_wares (ware)
+   end
+end
+
 function stormflood ()
    local x
    local y
@@ -8,10 +110,9 @@ function stormflood ()
    local check
    local nextF = firstToFlood
    while not (nextF == nil) do
-      --flood field nextF
       nextF.terr = "winter_water"
       nextF.terd = "winter_water"
-      --turn the settlement into Rungholt (or Atlantis, if you prefer); even swimming things (like ships) are destroyed by the storm
+      --turn the settlement into Rungholt; even swimming things (like ships) are destroyed by the storm
       for idx,field in ipairs (nextF:region (1)) do
          if field.immovable then 
             local fs = field.immovable.fields
@@ -20,7 +121,6 @@ function stormflood ()
          end
          for idb,bob in ipairs (field.bobs) do bob:remove () end
       end
-      --Set nextF to westernmost unflooded field. To ensure waveform, select of all fields here the one closest (y-direction) to floodstart
       x = nextF.x
       nextF = nil
       while (nextF == nil) and (x < map.width) do
@@ -30,9 +130,10 @@ function stormflood ()
             y = firstToFlood.y
             if up then y = y + yD else y = y - yD end
             if y < 0 then y = y + map.height end
-            if not ( y < map.height ) then y = y - map.height end
+            if not (y < map.height) then y = y - map.height end
             check = map:get_field (x, y)
-            if (not ((check.terr == "winter_water") and (check.terd == "winter_water" ))) and (check.height < 4) then nextF = check end
+            if (not ((check.terr == "winter_water") and (check.terd == "winter_water"))) and 
+               (check.height < 4) then nextF = check end
             if up then yD = yD + 1 end
             up = not up
          end
@@ -51,76 +152,85 @@ function mission_thread ()
    scroll_to_field (map.player_slots [1].starting_field)
    sleep (1000)
    campaign_message_box (intro_2)
+   campaign_message_box (intro_3)
    --build wood economy and reed yard
-   p1:allow_buildings{"frisians_woodcutters_house", "frisians_foresters_house", "frisians_reed_farm"}
+   p1:allow_buildings {"frisians_woodcutters_house", "frisians_foresters_house", "frisians_reed_farm"}
    local o = add_campaign_objective (obj_build_wood_economy)
-   while not check_for_buildings (p1, {frisians_woodcutters_house = 1, frisians_foresters_house = 2, frisians_reed_farm = 1}) do sleep (4273) end
+   while not check_for_buildings (p1, {frisians_woodcutters_house = 1, frisians_foresters_house = 2, 
+      frisians_reed_farm = 1}) do sleep (4273) end
    set_objective_done (o)
 
-   campaign_message_box (intro_3)
-   --build brick economy
-   p1:allow_buildings{"frisians_brick_burners_house", "frisians_well", "frisians_claypit", "frisians_coalmine", "frisians_rockmine"}
-   o = add_campaign_objective (obj_build_brick_economy)
-   while not check_for_buildings (p1, {frisians_brick_burners_house = 1, frisians_well = 1, frisians_claypit = 1, frisians_coalmine = 1, frisians_rockmine = 1}) do sleep (4273) end
-   set_objective_done (o)
    campaign_message_box (intro_4)
+   --build brick economy
+   p1:allow_buildings {"frisians_brick_burners_house", "frisians_well", "frisians_claypit", "frisians_coalmine", 
+      "frisians_rockmine"}
+   o = add_campaign_objective (obj_build_brick_economy)
+   run (warningReed)
+   while not check_for_buildings (p1, {frisians_brick_burners_house = 1, frisians_well = 1, frisians_claypit = 1, 
+      frisians_coalmine = 1, frisians_rockmine = 1}) do sleep (4273) end
+   set_objective_done (o)
+   campaign_message_box (intro_5)
+   run (warningClay)
    
    --wait until no rations left
    sleep (60000)
    local somethingLeft = true
    while somethingLeft do
-      local whs = array_combine(
-         p1:get_buildings ("frisians_headquarters"),
-         p1:get_buildings ("frisians_warehouse")
-      )
-      local inWH = 0
-      for idx,wh in ipairs (whs) do
-         inWH = inWH + wh:get_wares ("ration")
-      end
+      local inWH = count ("ration")
       whs = array_combine(
          p1:get_buildings ("frisians_coalmine"),
          p1:get_buildings ("frisians_rockmine")
       )
       local mW = false -- has at least 1 mine no rations left?
       for idx,wh in ipairs (whs) do
-         mW = mW or ( wh:get_inputs ("ration") == 0 )
+         mW = mW or (wh:get_inputs ("ration") == 0)
       end
-      somethingLeft = ( inWH > 0 ) or not mW
+      somethingLeft = (inWH > 0) or not mW
       sleep (4273)
    end
    
    --great, you forgot to provide rations…
    campaign_message_box (food_1)
-   p1:allow_buildings {"frisians_fishers_house", "frisians_smokery", "frisians_hunters_house", "frisians_tavern", "frisians_berry_farm", "frisians_collectors_house"}
+   run (warningBricks)
+   p1:allow_buildings {"frisians_fishers_house", "frisians_smokery", "frisians_hunters_house", "frisians_tavern", 
+      "frisians_berry_farm", "frisians_collectors_house"}
    o = add_campaign_objective (obj_build_food_economy)
-   while not check_for_buildings (p1, {frisians_fishers_house = 1, frisians_smokery = 1, frisians_tavern = 1, frisians_berry_farm = 1, frisians_collectors_house = 1}) do sleep (4273) end
+   while not check_for_buildings (p1, {frisians_fishers_house = 1, frisians_smokery = 1, frisians_tavern = 1, 
+      frisians_berry_farm = 1, frisians_collectors_house = 1}) do sleep (4273) end
    set_objective_done (o)
 
    --we want better food
    campaign_message_box (food_2)
-   p1:allow_buildings {"frisians_beekeepers_house", "frisians_farm", "frisians_bakery", "frisians_brewery", "frisians_mead_brewery", "frisians_honey_bread_bakery"}
+   p1:allow_buildings {"frisians_beekeepers_house", "frisians_farm", "frisians_bakery", "frisians_brewery", 
+      "frisians_mead_brewery", "frisians_honey_bread_bakery"}
    o = add_campaign_objective (obj_build_food_economy_2)
    while not check_for_buildings (p1, {frisians_tavern = 2}) do sleep (4273) end
    p1:allow_buildings {"frisians_drinking_hall"}
-   while not check_for_buildings (p1, {frisians_farm = 2, frisians_bakery = 1, frisians_brewery = 1, frisians_beekeepers_house = 1}) do sleep (4273) end
+   while not check_for_buildings (p1, {frisians_farm = 2, frisians_bakery = 1, frisians_brewery = 1, 
+      frisians_beekeepers_house = 1}) do sleep (4273) end
    set_objective_done (o)
 
    --we can start some real mining
    campaign_message_box (mining_1)
-   p1:allow_buildings {"frisians_ironmine", "frisians_goldmine", "frisians_coalmine_deep", "frisians_rockmine_deep", "frisians_ironmine_deep", "frisians_goldmine_deep", "frisians_furnace", "frisians_blacksmithy", "frisians_armour_smithy_small", "frisians_charcoal_kiln"}
+   p1:allow_buildings {"frisians_ironmine", "frisians_goldmine", "frisians_coalmine_deep", "frisians_rockmine_deep", 
+       "frisians_ironmine_deep", "frisians_goldmine_deep", "frisians_furnace", "frisians_blacksmithy", 
+       "frisians_armour_smithy_small", "frisians_charcoal_kiln"}
    o = add_campaign_objective (obj_build_mining)
-   while not check_for_buildings (p1, {frisians_ironmine = 1, frisians_furnace = 1, frisians_blacksmithy = 1, frisians_armour_smithy_small = 1}) do sleep (4273) end
+   while not check_for_buildings (p1, {frisians_ironmine = 1, frisians_furnace = 1, frisians_blacksmithy = 1, 
+      frisians_armour_smithy_small = 1}) do sleep (4273) end
    set_objective_done (o)
    
    --start recruiting
    campaign_message_box (recruit_1)
+   campaign_message_box (recruit_2)
    o = add_campaign_objective (obj_recruit_soldiers)
    p1:allow_buildings {"frisians_outpost", "frisians_barracks", "frisians_reindeer_farm", "frisians_seamstress"}
-   while not check_for_buildings (p1, {frisians_barracks = 1, frisians_seamstress = 1, frisians_reindeer_farm = 1}) do sleep (4273) end
+   while not check_for_buildings (p1, {frisians_barracks = 1, frisians_seamstress = 1, 
+      frisians_reindeer_farm = 1}) do sleep (4273) end
    set_objective_done (o)
    
    --show the "expand" objective only if we haven´t expanded that far yet
-   local skip = not ( expansionMark.owner == nil )
+   local skip = not (expansionMark.owner == nil)
    if not skip then
       campaign_message_box (expand_1)
       o = add_campaign_objective (obj_expand)
@@ -143,32 +253,42 @@ function mission_thread ()
 
    --start training
    campaign_message_box (training_1)
-   p1:allow_buildings {"frisians_training_camp", "frisians_training_arena", "frisians_seamstress_master", "frisians_armour_smithy_large", "frisians_wooden_tower", "frisians_wooden_tower_high"}
+   campaign_message_box (training_2)
+   campaign_message_box (training_3)
+   p1:allow_buildings {"frisians_training_camp", "frisians_training_arena", "frisians_seamstress_master", 
+      "frisians_armour_smithy_large", "frisians_wooden_tower", "frisians_fortress"}
    o = add_campaign_objective (obj_train_soldiers)
    
    --wait until at least 1 soldier has level 10
    local hasL10 = false
+   run (checkWarningEarlyAttack)
    while not hasL10 do
-      local bld = array_combine(
+      local bld = array_combine (
          p1:get_buildings ("frisians_headquarters"),
          p1:get_buildings ("frisians_warehouse"),
          p1:get_buildings ("frisians_sentinel"),
          p1:get_buildings ("frisians_wooden_tower"),
          p1:get_buildings ("frisians_wooden_tower_high"),
          p1:get_buildings ("frisians_outpost")
-      )
+     )
       for idx,site in ipairs (bld) do
-         hasL10 = hasL10 or ( site:get_soldiers {2,6,2,0} > 0 )
+         hasL10 = hasL10 or (site:get_soldiers {2,6,2,0} > 0)
       end
       sleep (4273)
    end
+   shewWarningEarlyAttack = true --We are strong enough now – no need for the warning if it didn´t appear yet
+   shewnWarningBricks = true
    
    --Attack!
    set_objective_done (o)
-   campaign_message_box (training_2)
-   p1:allow_buildings {"frisians_fortress", "frisians_tower"}
+   campaign_message_box (training_4)
+   campaign_message_box (training_5)
+   campaign_message_box (training_6)
+   p1:allow_buildings {"frisians_wooden_tower_high", "frisians_tower", "frisians_scouts_house"}
    o = add_campaign_objective (obj_defeat_enemy)
    while not p2.defeated do sleep (4273) end
+   shewnWarningReed = true
+   shewnWarningClay = true
    set_objective_done (o)
    
    sleep (2000)
@@ -177,8 +297,8 @@ function mission_thread ()
    campaign_message_box (rising_water_2)
    
    --Stormflood!
-   for x=0,map.width - 1 do
-      for y=0,map.height - 1 do
+   for x=4,map.width - 5 do
+      for y=4,map.height - 5 do --leave some small margin, show everything else
          p1:reveal_fields {map:get_field (x,y)}
       end
    end
@@ -195,15 +315,16 @@ function mission_thread ()
    local expReady = false
    while not expReady do
       for idx,ship in ipairs (p1:get_ships ()) do
-         expReady = expReady or ( ship.state:sub (1, 4) == "exp_" )
+         expReady = expReady or (ship.state:sub (1, 4) == "exp_")
       end
-      sleep (2149)
+      sleep (1149)
    end
    --We escaped!
    scroll_to_field (p1:get_buildings ("frisians_port") [1].fields [1])
    sleep (1000)
    campaign_message_box (victory_1)
    p1:reveal_scenario ("frisians01")
+   --END OF MISSION 1
 end
 
 run (mission_thread)
