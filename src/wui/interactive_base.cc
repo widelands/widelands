@@ -182,7 +182,7 @@ InteractiveBase::InteractiveBase(EditorGameBase& the_egbase, Section& global_s)
 
 	//  Having this in the initializer list (before Sys_InitGraphics) will give
 	//  funny results.
-	sel_.pic = g_gr->images().get("images/ui_basic/fsel.png");
+	unset_sel_picture();
 
 	setDefaultCommand(boost::bind(&InteractiveBase::cmd_lua, this, _1));
 	addCommand("mapobject", boost::bind(&InteractiveBase::cmd_map_object, this, _1));
@@ -553,6 +553,7 @@ void InteractiveBase::start_build_road(Coords road_start, Widelands::PlayerNumbe
 
 	default_cursor_ = g_gr->images().get("images/ui_basic/cursor_roadbuilding.png");
 	default_cursor_click_ = g_gr->images().get("images/ui_basic/cursor_roadbuilding_click.png");
+	set_sel_picture(g_gr->images().get("images/ui_basic/fsel_roadbuilding.png"));
 }
 
 /*
@@ -572,6 +573,7 @@ void InteractiveBase::abort_build_road() {
 
 	default_cursor_ = g_gr->images().get("images/ui_basic/cursor.png");
 	default_cursor_click_ = g_gr->images().get("images/ui_basic/cursor_click.png");
+	unset_sel_picture();
 }
 
 /*
@@ -627,6 +629,7 @@ void InteractiveBase::finish_build_road() {
 	buildroad_ = nullptr;
 	default_cursor_ = g_gr->images().get("images/ui_basic/cursor.png");
 	default_cursor_click_ = g_gr->images().get("images/ui_basic/cursor_click.png");
+	unset_sel_picture();
 }
 
 /*
