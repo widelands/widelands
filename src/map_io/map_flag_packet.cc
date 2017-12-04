@@ -35,7 +35,7 @@
 
 namespace Widelands {
 
-constexpr uint16_t kCurrentPacketVersion = 1;
+constexpr uint16_t kCurrentPacketVersion = 2;
 
 void MapFlagPacket::read(FileSystem& fs,
                          EditorGameBase& egbase,
@@ -62,6 +62,8 @@ void MapFlagPacket::read(FileSystem& fs,
 				if (!(0 < owner && owner <= nr_players)) {
 					throw GameDataError("Invalid player number: %i.", owner);
 				}
+
+				const Serial economy_serial = fr.unsigned_32();
 
 				Serial const serial = fr.unsigned_32();
 
@@ -94,13 +96,24 @@ void MapFlagPacket::read(FileSystem& fs,
 
 					//  No flag lives on more than one place.
 
-					//  Now, create this Flag. Directly create it, do not call
-					//  the player class since we recreate the data in another
-					//  packet. We always create this, no matter what skip is
-					//  since we have to read the data packets. We delete this
-					//  object later again, if it is not wanted.
-					mol.register_object<Flag>(
-					   serial, *new Flag(dynamic_cast<Game&>(egbase), egbase.player(owner), fc));
+					// Get economy from serial
+					Player* player = egbase.get_player(owner);
+					Economy* economy = player->get_economy(economy_serial);
+					log("NOCOM Want economy %d for flag\n", economy_serial);
+					if (!economy) {
+						log("NOCOM Creating economy %d for flag\n", economy_serial);
+						economy = player->create_economy(economy_serial);
+					}
+
+					// Create a flag without connecting anything.
+					// We always create this, no matter what skip is
+					// since we have to read the data packets. We delete this
+					// object later again if it is not wanted.
+					Flag* flag = new Flag(dynamic_cast<Game&>(egbase), *player, fc, economy);
+					mol.register_object<Flag>(serial, *flag);
+
+					log("NOCOM Flag has economy %d\n", flag->economy().serial());
+
 				} catch (const WException& e) {
 					throw GameDataError(
 					   "%u (at (%i, %i), owned by player %u): %s", serial, fc.x, fc.y, owner, e.what());
@@ -133,6 +146,7 @@ void MapFlagPacket::write(FileSystem& fs, EditorGameBase& egbase, MapObjectSaver
 
 			fw.unsigned_8(1);
 			fw.unsigned_8(flag->owner().player_number());
+			fw.unsigned_32(flag->economy().serial());
 			fw.unsigned_32(mos.register_object(*flag));
 		} else  //  no existence, no owner
 			fw.unsigned_8(0);

@@ -1089,7 +1089,7 @@ Load / Save implementation
 ==============================
 */
 
-constexpr uint8_t kCurrentPacketVersion = 6;
+constexpr uint8_t kCurrentPacketVersion = 7;
 
 const Bob::Task* Ship::Loader::get_task(const std::string& name) {
 	if (name == "shipidle" || name == "ship")
@@ -1099,6 +1099,9 @@ const Bob::Task* Ship::Loader::get_task(const std::string& name) {
 
 void Ship::Loader::load(FileRead& fr) {
 	Bob::Loader::load(fr);
+
+	// Economy
+	economy_serial_ = fr.unsigned_32();
 
 	// The state the ship is in
 	ship_state_ = static_cast<ShipStates>(fr.unsigned_8());
@@ -1160,6 +1163,15 @@ void Ship::Loader::load_finish() {
 
 	Ship& ship = get<Ship>();
 
+	ship.economy_ = ship.get_owner()->get_economy(economy_serial_);
+	log("NOCOM Want economy %d for ship\n", economy_serial_);
+	if (!ship.economy_) {
+		log("NOCOM Creating economy %d for ship\n", economy_serial_);
+		ship.economy_ = ship.get_owner()->create_economy(economy_serial_);
+	}
+
+	log("NOCOM Ship has economy %d\n", ship.economy_->serial());
+
 	// restore the state the ship is in
 	ship.ship_state_ = ship_state_;
 
@@ -1169,8 +1181,8 @@ void Ship::Loader::load_finish() {
 	// if the ship is on an expedition, restore the expedition specific data
 	if (expedition_) {
 		ship.expedition_.swap(expedition_);
-		ship.expedition_->economy = ship.get_owner()->create_economy();
-		ship.economy_ = ship.expedition_->economy;
+		ship.expedition_->economy = ship.economy_;
+		log("NOCOM Ship expedition has economy %d\n", ship.expedition_->economy->serial());
 	} else
 		assert(ship_state_ == ShipStates::kTransport);
 
@@ -1185,28 +1197,17 @@ void Ship::Loader::load_finish() {
 
 MapObject::Loader* Ship::load(EditorGameBase& egbase, MapObjectLoader& mol, FileRead& fr) {
 	std::unique_ptr<Loader> loader(new Loader);
-
 	try {
 		// The header has been peeled away by the caller
 		uint8_t const packet_version = fr.unsigned_8();
-		if (1 <= packet_version && packet_version <= kCurrentPacketVersion) {
+		if (packet_version == kCurrentPacketVersion) {
 			try {
 				const ShipDescr* descr = nullptr;
+				// NOCOM Need to fix test suite? Packet < 5 is not available.
 				// Removing this will break the test suite
-				if (packet_version < 5) {
-					std::string tribe_name = fr.string();
-					fr.c_string();  // This used to be the ship's name, which we don't need any more.
-					if (!Widelands::tribe_exists(tribe_name)) {
-						throw GameDataError("Tribe %s does not exist for ship", tribe_name.c_str());
-					}
-					const DescriptionIndex& tribe_index = egbase.tribes().tribe_index(tribe_name);
-					const TribeDescr& tribe_descr = *egbase.tribes().get_tribe_descr(tribe_index);
-					descr = egbase.tribes().get_ship_descr(tribe_descr.ship());
-				} else {
-					std::string name = fr.c_string();
-					const DescriptionIndex& ship_index = egbase.tribes().safe_ship_index(name);
-					descr = egbase.tribes().get_ship_descr(ship_index);
-				}
+				std::string name = fr.c_string();
+				const DescriptionIndex& ship_index = egbase.tribes().safe_ship_index(name);
+				descr = egbase.tribes().get_ship_descr(ship_index);
 				loader->init(egbase, mol, descr->create_object());
 				loader->load(fr);
 			} catch (const WException& e) {
@@ -1228,6 +1229,9 @@ void Ship::save(EditorGameBase& egbase, MapObjectSaver& mos, FileWrite& fw) {
 	fw.c_string(descr().name());
 
 	Bob::save(egbase, mos, fw);
+
+	// Economy
+	fw.unsigned_32(economy_->serial());
 
 	// state the ship is in
 	fw.unsigned_8(static_cast<uint8_t>(ship_state_));

@@ -20,6 +20,8 @@
 #ifndef WL_ECONOMY_ECONOMY_DATA_PACKET_H
 #define WL_ECONOMY_ECONOMY_DATA_PACKET_H
 
+#include <cassert>
+
 class FileRead;
 class FileWrite;
 
@@ -32,6 +34,7 @@ struct MapObjectSaver;
 class EconomyDataPacket {
 public:
 	explicit EconomyDataPacket(Economy* e) : eco_(e) {
+		assert(eco_);
 	}
 
 	void read(FileRead&);

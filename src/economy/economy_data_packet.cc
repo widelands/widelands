@@ -31,19 +31,15 @@ constexpr uint16_t kCurrentPacketVersion = 4;
 
 namespace Widelands {
 
-// NOCOM don't forget saveloading
-// Read/Write Serial Economy::last_economy_serial_;
-
 void EconomyDataPacket::read(FileRead& fr) {
 	try {
 		uint16_t const packet_version = fr.unsigned_16();
-		if (packet_version >= 3) {
-			if (packet_version == kCurrentPacketVersion) {
-				eco_->serial_ = fr.unsigned_32();
-				Economy::last_economy_serial_ = std::max(Economy::last_economy_serial_, eco_->serial_);
-			} else {
-				eco_->serial_ = Economy::last_economy_serial_++;
+		if (packet_version == kCurrentPacketVersion) {
+			const Serial saved_serial = fr.unsigned_32();
+			if (eco_->serial_ != saved_serial) {
+				throw GameDataError("Representative flag/ship has economy serial %d, but the data packet has %d", eco_->serial_, saved_serial);
 			}
+			assert(last_economy_serial_ >= eco_->serial_);
 			try {
 				const TribeDescr& tribe = eco_->owner().tribe();
 				while (Time const last_modified = fr.unsigned_32()) {
@@ -103,8 +99,11 @@ void EconomyDataPacket::read(FileRead& fr) {
 
 void EconomyDataPacket::write(FileWrite& fw) {
 	fw.unsigned_16(kCurrentPacketVersion);
-	// NOCOM Serial is new.
+
+	// We save the serial number for sanity checks
 	fw.unsigned_32(eco_->serial());
+
+	// Requests etc.
 	const TribeDescr& tribe = eco_->owner().tribe();
 	for (const DescriptionIndex& ware_index : tribe.wares()) {
 		const Economy::TargetQuantity& tq = eco_->ware_target_quantities_[ware_index];

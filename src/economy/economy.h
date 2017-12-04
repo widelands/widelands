@@ -108,6 +108,7 @@ public:
 	};
 
 	explicit Economy(Player&);
+	explicit Economy(Player&, Serial serial); // For saveloading
 	~Economy();
 
 	Serial serial() const {
@@ -258,8 +259,7 @@ private:
 	/*************/
 	using RequestList = std::vector<Request*>;
 
-	// NOCOM Not const for saveloading
-	Serial serial_;
+	const Serial serial_;
 
 	Player& owner_;
 

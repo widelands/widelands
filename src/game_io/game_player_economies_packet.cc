@@ -34,7 +34,7 @@
 namespace Widelands {
 namespace {
 
-constexpr uint16_t kCurrentPacketVersion = 4;
+constexpr uint16_t kCurrentPacketVersion = 5;
 
 bool write_expedition_ship_economy(Economy* economy, const Map& map, FileWrite* fw) {
 	for (Field const* field = &map[0]; field < &map[map.max_index()]; ++field) {
@@ -67,33 +67,22 @@ void GamePlayerEconomiesPacket::read(FileSystem& fs, Game& game, MapObjectLoader
 		FileRead fr;
 		fr.open(fs, "binary/player_economies");
 		uint16_t const packet_version = fr.unsigned_16();
-		if (packet_version == 3 || packet_version == kCurrentPacketVersion) {
+		if (packet_version == kCurrentPacketVersion) {
 			iterate_players_existing(p, nr_players, game, player) try {
-				// In packet_version 4 we dump the number of economies a player had at
-				// save time to debug
-				// https://bugs.launchpad.net/widelands/+bug/1654897 which is likely
-				// caused by players having more economies at load than they had at
-				// save.
-				// NOCOM
-				auto& economies = player->economies_;
-				log("NOCOM economies size: %lu", economies.size());
-				if (packet_version > 3) {
-					const size_t num_economies = fr.unsigned_16();
-					if (num_economies != economies.size()) {
-						throw GameDataError("Num economies on save (%" PRIuS
-						                    ") != Num economies on load (%" PRIuS ")",
-						                    num_economies, economies.size());
-					}
-				}
-
-				for (uint32_t i = 0; i < economies.size(); ++i) {
+				const size_t num_economies = fr.unsigned_32();
+				for (uint32_t i = 0; i < num_economies; ++i) {
 					uint32_t value = fr.unsigned_32();
 					if (value < 0xffffffff) {
 						if (upcast(Flag const, flag, map[value].get_immovable())) {
-							assert(flag->get_economy()->owner().player_number() ==
-							       player->player_number());
-							EconomyDataPacket d(flag->get_economy());
-							d.read(fr);
+							log("NOCOM reading economy from flag\n");
+							try {
+								assert(flag->get_economy()->owner().player_number() ==
+										 player->player_number());
+								EconomyDataPacket d(flag->get_economy());
+								d.read(fr);
+							} catch (const GameDataError& e) {
+								throw GameDataError("error reading economy data for flag at map index %d: %s", value, e.what());
+							}
 						} else {
 							throw GameDataError("there is no flag at the specified location");
 						}
@@ -102,15 +91,20 @@ void GamePlayerEconomiesPacket::read(FileSystem& fs, Game& game, MapObjectLoader
 						Bob* bob = map[read_map_index_32(&fr, max_index)].get_first_bob();
 						while (bob) {
 							if (upcast(Ship const, ship, bob)) {
+								log("NOCOM reading economy from ship\n");
 								// We are interested only in current player's ships
 								if (ship->get_owner() == player) {
-									assert(ship->get_economy());
-									assert(ship->get_economy()->owner().player_number() ==
-									       player->player_number());
-									EconomyDataPacket d(ship->get_economy());
-									d.read(fr);
-									read_this_economy = true;
-									break;
+									try {
+										assert(ship->get_economy());
+										assert(ship->get_economy()->owner().player_number() ==
+												 player->player_number());
+										EconomyDataPacket d(ship->get_economy());
+										d.read(fr);
+										read_this_economy = true;
+										break;
+									} catch (const GameDataError& e) {
+										throw GameDataError("error reading economy data for ship %s: %s", ship->get_shipname().c_str(), e.what());
+									}
 								}
 							}
 							bob = bob->get_next_bob();
@@ -143,7 +137,7 @@ void GamePlayerEconomiesPacket::write(FileSystem& fs, Game& game, MapObjectSaver
 	PlayerNumber const nr_players = map.get_nrplayers();
 	iterate_players_existing_const(p, nr_players, game, player) {
 		const auto& economies = player->economies_;
-		fw.unsigned_16(economies.size());
+		fw.unsigned_32(economies.size());
 		for (const auto& economy : economies) {
 			Flag* arbitrary_flag = economy.second->get_arbitrary_flag();
 			if (arbitrary_flag != nullptr) {
@@ -157,6 +151,7 @@ void GamePlayerEconomiesPacket::write(FileSystem& fs, Game& game, MapObjectSaver
 			// ships are special and have their own economy (which will not have a
 			// flag), therefore we have to special case them.
 			if (!write_expedition_ship_economy(economy.second.get(), map, &fw)) {
+				// NOCOM this will barf after building port
 				throw GameDataError("economy without representative");
 			}
 		}

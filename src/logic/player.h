@@ -518,6 +518,7 @@ public:
 	void dismantle_building(Building*);
 
 	Economy* create_economy();
+	Economy* create_economy(Serial serial); // For saveloading only
 	void remove_economy(Serial serial);
 	const std::map<Serial,std::unique_ptr<Economy>>& economies() const;
 	Economy* get_economy(Widelands::Serial serial) const;
