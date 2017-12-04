@@ -41,7 +41,7 @@ struct GameClient : public GameController, public GameSettingsProvider, public C
 	           const std::string& playername,
 	           bool internet = false);
 
-	virtual ~GameClient();
+	~GameClient() override;
 
 	void run();
 

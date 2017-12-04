@@ -83,7 +83,7 @@ struct Button : public NamedPanel {
 	    const std::string& tooltip_text = std::string(),
 	    UI::Button::Style init_style = UI::Button::Style::kRaised,
 	    UI::Button::ImageMode mode = UI::Button::ImageMode::kShrink);
-	~Button();
+	~Button() override;
 
 	void set_pic(const Image* pic);
 	void set_title(const std::string&);

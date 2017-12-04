@@ -2,7 +2,6 @@ language: cpp
 script: bash -e .travis.sh
 sudo: required
 dist: trusty
-osx_image: xcode8.3
 
 before_script:
   - export DISPLAY=:99.0
@@ -26,8 +25,8 @@ addons:
         key_url: "http://apt.llvm.org/llvm-snapshot.gpg.key"
       - sourceline: "deb http://apt.llvm.org/trusty/ llvm-toolchain-trusty-3.5 main"
         key_url: "http://apt.llvm.org/llvm-snapshot.gpg.key"
-      - llvm-toolchain-trusty-3.9
       - llvm-toolchain-trusty-4.0
+      - llvm-toolchain-trusty-5.0
     packages:
       - cmake
       - libboost-dev
@@ -60,10 +59,10 @@ matrix:
       env: CLANG_VERSION="3.5" BUILD_TYPE="Debug"
     - os: linux
       compiler: clang
-      env: CLANG_VERSION="3.9" BUILD_TYPE="Debug"
+      env: CLANG_VERSION="4.0" BUILD_TYPE="Debug"
     - os: linux
       compiler: clang
-      env: CLANG_VERSION="4.0" BUILD_TYPE="Debug"
+      env: CLANG_VERSION="5.0" BUILD_TYPE="Debug"
     - os: linux
       compiler: clang
       env: CLANG_VERSION="3.4" BUILD_TYPE="Release"
@@ -72,10 +71,10 @@ matrix:
       env: CLANG_VERSION="3.5" BUILD_TYPE="Release"
     - os: linux
       compiler: clang
-      env: CLANG_VERSION="3.9" BUILD_TYPE="Release"
+      env: CLANG_VERSION="4.0" BUILD_TYPE="Release"
     - os: linux
       compiler: clang
-      env: CLANG_VERSION="4.0" BUILD_TYPE="Release"
+      env: CLANG_VERSION="5.0" BUILD_TYPE="Release"
     ### LINUX + GCC BUILDS
     - os: linux
       compiler: gcc

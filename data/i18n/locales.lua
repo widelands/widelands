@@ -188,6 +188,12 @@ return {
       font = "default"
    },
 
+   ig = {
+      name = "Igbo",
+      sort_name = "Igbo",
+      font = "default"
+   },
+
    it = {
       name = "Italiano",
       sort_name = "Italiano",

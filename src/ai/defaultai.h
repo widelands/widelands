@@ -76,7 +76,7 @@ struct Flag;
 struct DefaultAI : ComputerPlayer {
 
 	DefaultAI(Widelands::Game&, const Widelands::PlayerNumber, Widelands::AiType);
-	~DefaultAI();
+	~DefaultAI() override;
 	void think() override;
 
 	enum class WalkSearch : uint8_t { kAnyPlayer, kOtherPlayers, kEnemy };

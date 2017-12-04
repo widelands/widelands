@@ -200,7 +200,7 @@ struct NoteBuilding {
 
 	Serial serial;
 
-	enum class Action { kChanged, kDeleted, kStartWarp, kFinishWarp, kWorkersChanged };
+	enum class Action { kChanged, kStartWarp, kFinishWarp, kWorkersChanged };
 	const Action action;
 
 	NoteBuilding(Serial init_serial, const Action& init_action)

@@ -51,7 +51,7 @@ struct EditBox : public Panel {
 	        int margin_y = 2,
 	        const Image* background = g_gr->images().get("images/ui_basic/but2.png"),
 	        int font_size = UI_FONT_SIZE_SMALL);
-	virtual ~EditBox();
+	~EditBox() override;
 
 	boost::signals2::signal<void()> changed;
 	boost::signals2::signal<void()> ok;

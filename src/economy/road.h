@@ -77,7 +77,7 @@ struct Road : public PlayerImmovable {
 	};
 
 	Road();
-	virtual ~Road();
+	~Road() override;
 
 	static Road& create(EditorGameBase&, Flag& start, Flag& end, const Path&);
 

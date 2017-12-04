@@ -58,7 +58,7 @@ public:
 	                  Widelands::Building& building,
 	                  Widelands::InputQueue* queue,
 	                  bool = false);
-	~InputQueueDisplay();
+	~InputQueueDisplay() override;
 
 	void think() override;
 	void draw(RenderTarget&) override;

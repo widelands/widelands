@@ -50,7 +50,7 @@ class LuaInterface;
 class FullscreenMenuLaunchSPG : public FullscreenMenuLaunchGame {
 public:
 	FullscreenMenuLaunchSPG(GameSettingsProvider*, GameController* = nullptr);
-	~FullscreenMenuLaunchSPG();
+	~FullscreenMenuLaunchSPG() override;
 
 	void start() override;
 	void refresh() override;

@@ -35,7 +35,7 @@ public:
 
 class GameFactory : public Factory {
 public:
-	virtual ~GameFactory() {
+	~GameFactory() override {
 	}
 
 	void push_player(lua_State* L, Widelands::PlayerNumber plr) override;
@@ -43,7 +43,7 @@ public:
 
 class EditorFactory : public Factory {
 public:
-	virtual ~EditorFactory() {
+	~EditorFactory() override {
 	}
 
 	void push_player(lua_State* L, Widelands::PlayerNumber plr) override;

@@ -2,13 +2,14 @@
 # Copyright (C) 2005-2017 Widelands Development Team
 # 
 # Translators:
+# ks k, 2017
 # Moon Yeonki <backnii@gmail.com>, 2017
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-09-29 15:54+0000\n"
-"PO-Revision-Date: 2017-10-05 16:34+0000\n"
+"POT-Creation-Date: 2017-11-25 03:55+0000\n"
+"PO-Revision-Date: 2017-11-29 18:19+0000\n"
 "Last-Translator: ks k\n"
 "Language-Team: Korean (http://www.transifex.com/widelands/widelands/language/ko/)\n"
 "MIME-Version: 1.0\n"
@@ -118,7 +119,7 @@ msgstr ""
 
 #: ../../data/txts/README.lua:21
 msgid "Widelands Help"
-msgstr ""
+msgstr "와이드랜드 도움말"
 
 #. TRANSLATORS: %1% is a key on the keyboard
 #: ../../data/txts/README.lua:23
