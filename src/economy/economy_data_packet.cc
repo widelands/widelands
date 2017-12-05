@@ -39,7 +39,7 @@ void EconomyDataPacket::read(FileRead& fr) {
 			if (eco_->serial_ != saved_serial) {
 				throw GameDataError("Representative flag/ship has economy serial %d, but the data packet has %d", eco_->serial_, saved_serial);
 			}
-			assert(last_economy_serial_ >= eco_->serial_);
+			assert(Economy::last_economy_serial_ >= eco_->serial_);
 			try {
 				const TribeDescr& tribe = eco_->owner().tribe();
 				while (Time const last_modified = fr.unsigned_32()) {

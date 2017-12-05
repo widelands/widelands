@@ -136,7 +136,7 @@ void GamePlayerEconomiesPacket::write(FileSystem& fs, Game& game, MapObjectSaver
 	const Map& map = game.map();
 	PlayerNumber const nr_players = map.get_nrplayers();
 	iterate_players_existing_const(p, nr_players, game, player) {
-		const auto& economies = player->economies_;
+		const auto& economies = player->economies();
 		fw.unsigned_32(economies.size());
 		for (const auto& economy : economies) {
 			Flag* arbitrary_flag = economy.second->get_arbitrary_flag();
@@ -151,8 +151,7 @@ void GamePlayerEconomiesPacket::write(FileSystem& fs, Game& game, MapObjectSaver
 			// ships are special and have their own economy (which will not have a
 			// flag), therefore we have to special case them.
 			if (!write_expedition_ship_economy(economy.second.get(), map, &fw)) {
-				// NOCOM this will barf after building port
-				throw GameDataError("economy without representative");
+				throw GameDataError("Player %d: economy %d has no representative", player->player_number(), economy.first);
 			}
 		}
 	}

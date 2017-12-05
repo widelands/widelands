@@ -282,6 +282,8 @@ private:
 	std::string shipname_;
 
 	struct Expedition {
+		~Expedition();
+
 		std::vector<Coords> seen_port_buildspaces;
 		bool swimmable[LAST_DIRECTION];
 		bool island_exploration;

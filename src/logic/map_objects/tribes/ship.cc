@@ -1081,6 +1081,12 @@ void Ship::send_message(Game& game,
 	                                  heading, rt_description, get_position(), serial_)));
 }
 
+Ship::Expedition::~Expedition() {
+	if (economy) {
+		economy->owner().remove_economy(economy->serial());
+	}
+}
+
 /*
 ==============================
 
