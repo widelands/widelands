@@ -195,6 +195,17 @@ NetHostProxy::NetHostProxy(const std::pair<NetAddress, NetAddress>& addresses, c
 
 void NetHostProxy::receive_commands() {
 	if (!conn_->is_connected()) {
+		// Seems the connection broke at some time. Set all clients to disconnected
+		for (auto iter_client = clients_.begin(); iter_client != clients_.end(); ) {
+			if (iter_client->second.received_.empty()) {
+				// No pending messages, remove the client
+				clients_.erase(iter_client++);
+			} else {
+				// Still messages pending. Keep the structure so the host can receive them
+				iter_client->second.state_ = Client::State::kDisconnected;
+				++iter_client;
+			}
+		}
 		return;
 	}
 
@@ -272,7 +283,6 @@ void NetHostProxy::receive_commands() {
 			// Then is either something wrong with the protocol or there is an implementation mistake
 			log("Received command code %i from relay server, do not know what to do with it\n",
 					static_cast<uint8_t>(cmd));
-			/// NOCOM(Notabilis): This has been reached with command code 1
 			NEVER_HERE();
 	}
 }
