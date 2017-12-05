@@ -951,8 +951,12 @@ bool GameHost::can_launch() {
 
 	// if there is one client that is currently receiving a file, we can not launch.
 	for (std::vector<Client>::iterator j = d->clients.begin(); j != d->clients.end(); ++j) {
-		if (!d->settings.users[j->usernum].ready)
+		if (j->usernum == -1) {
 			return false;
+		}
+		if (!d->settings.users[j->usernum].ready) {
+			return false;
+		}
 	}
 
 	// all players must be connected to a controller (human/ai) or be closed.
