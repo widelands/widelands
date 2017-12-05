@@ -3,7 +3,7 @@ include "map:scripting/helper_functions.lua"
 
 -- Some objectives need to be waited for in separate threads
 local obj_find_monastery_done = false
-local vesta_conquered = false
+local julia_conquered = false
 local enemy = false
 local mv = wl.ui.MapView()
 
@@ -395,13 +395,13 @@ function wheat_chain()
    place_building_in_region(p3, "empire_sentry", {map:get_field(19, 157)}, {soldiers = {[{0,0,0,0}] = 1,}})
    o.done = true
    sleep(4000)
-   local vesta = map:get_field(19, 157)
-   local prior_center = scroll_to_field(vesta)
-   concentric_reveal(p1, vesta, 7, 100)
-   campaign_message_box(vesta_0)
+   local julia = map:get_field(19, 157)
+   local prior_center = scroll_to_field(julia)
+   concentric_reveal(p1, julia, 7, 100)
+   campaign_message_box(julia_0)
    campaign_message_box(amalea_10)
    campaign_message_box(saledus_1)
-   local o1 = add_campaign_objective(obj_deal_with_vesta)
+   local o1 = add_campaign_objective(obj_deal_with_julia)
    scroll_to_map_pixel(prior_center)
    
    local hq = p1:get_buildings("empire_headquarters")
@@ -409,10 +409,10 @@ function wheat_chain()
    while not ((hq[1]:get_wares("wheat") > 34 and hq[1]:get_wares("wine") > 14) or p3.defeated) do sleep(4000) end
    if p3.defeated then
       o1.done = true
-	  vesta_conquered = true
+	  julia_conquered = true
 	  p1:allow_buildings{"empire_mill", "empire_brewery"}
       campaign_message_box(saledus_2)
-	  campaign_message_box(vesta_2)
+	  campaign_message_box(julia_2)
 	  campaign_message_box(amalea_11)
 	  campaign_message_box(saledus_4)
    else
@@ -424,7 +424,7 @@ function wheat_chain()
 	  hq[1]:set_wares("wheat", wheat)
 	  hq[1]:set_wares("wine", wine)	  
 	  p1:allow_buildings{"empire_mill", "empire_brewery"}
-      campaign_message_box(vesta_1) 
+      campaign_message_box(julia_1) 
 
       well.immovable:remove()
       brew.immovable:remove()
@@ -445,7 +445,7 @@ end
 
 -- our actions have an effect positively or negatively
 function karma()
-   if vesta_conquered then
+   if julia_conquered then
       for count = 0, 10 do 
 	     sleep(1200000)
 	     bld = {
