@@ -48,10 +48,10 @@ struct MultilineEditbox::Data {
 	/// text.size() inidicates that the cursor is after the last character.
 	uint32_t cursor_pos;
 
-	int lineheight;
+	const int lineheight;
 
 	/// Maximum length of the text string, in bytes
-	uint32_t maxbytes;
+	const uint32_t maxbytes;
 
 	/// Cached wrapping info; see @ref refresh_ww and @ref update
 	/*@{*/
@@ -90,7 +90,6 @@ MultilineEditbox::MultilineEditbox(Panel* parent,
                                    const Image* background,
                                    const Image* button_background)
    : Panel(parent, x, y, w, h), d_(new Data(*this, background, button_background)) {
-	d_->lineheight = text_height();
 	set_handle_mouse(true);
 	set_can_focus(true);
 	set_thinks(false);
@@ -105,6 +104,7 @@ MultilineEditbox::Data::Data(MultilineEditbox& o,
    : scrollbar(&o, o.get_w() - Scrollbar::kSize, 0, Scrollbar::kSize, o.get_h(), button_background),
      background(init_background),
      cursor_pos(0),
+     lineheight(text_height()),
      maxbytes(std::min(g_gr->max_texture_size() / UI_FONT_SIZE_SMALL, 0xffff)),
      ww_valid(false),
      owner(o) {
