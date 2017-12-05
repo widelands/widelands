@@ -143,9 +143,14 @@ void NetClientProxy::receive_commands() {
 		   }
 			break;
 		case RelayCommand::kPing:
-			conn_->receive(&cmd);
-			// Reply with a pong
-			conn_->send(RelayCommand::kPong);
+			if (peek.uint8_t()) {
+				conn_->receive(&cmd);
+				uint8_t seq;
+				conn_->receive(&seq);
+				// Reply with a pong
+				conn_->send(RelayCommand::kPong);
+				conn_->send(seq);
+			}
 			break;
 		case RelayCommand::kRoundTripTimeResponse:
 			conn_->ignore_rtt_response();

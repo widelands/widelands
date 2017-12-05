@@ -244,9 +244,14 @@ void NetHostProxy::receive_commands() {
 			}
 			break;
 		case RelayCommand::kPing:
-			conn_->receive(&cmd);
-			// Reply with a pong
-			conn_->send(RelayCommand::kPong);
+			if (peek.uint8_t()) {
+				conn_->receive(&cmd);
+				uint8_t seq;
+				conn_->receive(&seq);
+				// Reply with a pong
+				conn_->send(RelayCommand::kPong);
+				conn_->send(seq);
+			}
 			break;
 		case RelayCommand::kRoundTripTimeResponse:
 			conn_->ignore_rtt_response();
@@ -256,6 +261,7 @@ void NetHostProxy::receive_commands() {
 			// Then is either something wrong with the protocol or there is an implementation mistake
 			log("Received command code %i from relay server, do not know what to do with it\n",
 					static_cast<uint8_t>(cmd));
+			/// NOCOM(Notabilis): This has been reached with command code 1
 			NEVER_HERE();
 	}
 }
