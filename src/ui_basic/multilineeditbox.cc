@@ -375,6 +375,7 @@ bool MultilineEditbox::handle_key(bool const down, SDL_Keysym const code) {
 		case SDLK_KP_ENTER:
 		case SDLK_RETURN:
 			d_->insert(d_->cursor_pos, "\n");
+			d_->update();
 			changed();
 			break;
 
