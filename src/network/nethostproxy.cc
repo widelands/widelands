@@ -96,11 +96,22 @@ void NetHostProxy::send(const std::vector<ConnectionId>& ids, const SendPacket& 
 
 	receive_commands();
 
-	conn_->send(RelayCommand::kToClients);
+	bool has_connected_client = false;
 	for (ConnectionId id : ids) {
 		if (is_connected(id)) {
 			// This should be but is not always the case. It can happen that we receive a client disconnect
 			// on receive_commands() above and the GameHost did not have the chance to react to it yet.
+			has_connected_client = true;
+		}
+	}
+	if (!has_connected_client) {
+		// Oops, no clients left to send to
+		return;
+	}
+
+	conn_->send(RelayCommand::kToClients);
+	for (ConnectionId id : ids) {
+		if (is_connected(id)) {
 			conn_->send(id);
 		}
 	}
