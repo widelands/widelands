@@ -139,8 +139,7 @@ enum class RelayCommand : uint8_t {
 	 * \note When the game host sends its kDisconnect message, the relay will shut down.
 	 * Payload:
 	 * \li string: An error code describing the reason of the disconnect. Valid values:
-	 *             NORMAL: Regular disconnect (game has ended, client leaves, ...);
-	 *             RELAY_SHUTDOWN: Relay shuts down for some reason;
+	 *             NORMAL: Regular disconnect (game has ended, host leaves, client leaves, ...);
 	 *             PROTOCOL_VIOLATION: Some protocol error (unknown command, invalid parameters, ...);
 	 *             WRONG_VERSION: The version in the kHello packet is not supported;
 	 *             GAME_UNKNOWN: Game name provided in kHello packet is unknown;
