@@ -175,8 +175,8 @@ enum class RelayCommand : uint8_t {
 	 * \li unsigned_8: Length of the list.
 	 * A list of
 	 * \li unsigned_8: Id of the client.
-	 * \li unsigned_8: The RTT in milliseconds. RTTs are capped to max. 255ms.
-	 * \li unsigned_8: Seconds since the last kPong has been received by the relay.
+	 * \li unsigned_8: The RTT in milliseconds. Capped to max. 255ms.
+	 * \li unsigned_8: Seconds since the last kPong has been received by the relay. Capped to max. 255ms.
 	 */
 	kRoundTripTimeResponse = 7,
 	/// \}

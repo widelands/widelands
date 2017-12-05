@@ -92,13 +92,14 @@ void NetClient::send(const SendPacket& packet) {
 	if (ec == boost::asio::error::would_block) {
 		throw wexception("[NetClient] Socket connected to relay would block when writing");
 	}
-	if (written < packet.get_size()) {
-		throw wexception("[NetClient] Unable to send complete packet to relay (only %lu bytes of %lu)",
-						written, packet.get_size());
-	}
 	if (ec) {
 		log("[NetClient] Error when trying to send some data: %s.\n", ec.message().c_str());
 		close();
+		return;
+	}
+	if (written < packet.get_size()) {
+		throw wexception("[NetClient] Unable to send complete packet to relay (only %lu bytes of %lu)",
+						written, packet.get_size());
 	}
 }
 

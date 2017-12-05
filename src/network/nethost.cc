@@ -181,14 +181,15 @@ void NetHost::send(const ConnectionId id, const SendPacket& packet) {
 		if (ec == boost::asio::error::would_block) {
 			throw wexception("[NetHost] Socket connected to relay would block when writing");
 		}
-		if (written < packet.get_size()) {
-			throw wexception("[NetHost] Unable to send complete packet to relay (only %lu bytes of %lu)",
-							written, packet.get_size());
-		}
 		if (ec) {
 			log("[NetHost] Error when sending to a client, closing connection: %s.\n",
 			    ec.message().c_str());
 			close(id);
+			return;
+		}
+		if (written < packet.get_size()) {
+			throw wexception("[NetHost] Unable to send complete packet to relay (only %lu bytes of %lu)",
+							written, packet.get_size());
 		}
 	}
 }
