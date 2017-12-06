@@ -1950,10 +1950,7 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 
 	const Map& map = game().map();
 
-	// Checking for seafaring is a bit expensive, so we only do it once per second
-	if (gametime % 1000 == 0) {
-		seafaring_economy = map.allows_seafaring();
-	}
+	seafaring_economy = map.allows_seafaring();
 
 	for (int32_t i = 0; i < 4; ++i)
 		spots_avail.at(i) = 0;
