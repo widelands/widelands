@@ -82,6 +82,8 @@ DefaultAI::NormalImpl DefaultAI::normal_impl;
 DefaultAI::WeakImpl DefaultAI::weak_impl;
 DefaultAI::VeryWeakImpl DefaultAI::very_weak_impl;
 
+uint32_t DefaultAI::last_seafaring_check_ = 0;
+
 /// Constructor of DefaultAI
 DefaultAI::DefaultAI(Game& ggame, PlayerNumber const pid, Widelands::AiType const t)
    : ComputerPlayer(ggame, pid),
@@ -1950,7 +1952,9 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 
 	const Map& map = game().map();
 
-	seafaring_economy = map.allows_seafaring();
+	if (gametime > last_seafaring_check_ + 5000U) {
+		seafaring_economy = map.allows_seafaring();
+	}
 
 	for (int32_t i = 0; i < 4; ++i)
 		spots_avail.at(i) = 0;
