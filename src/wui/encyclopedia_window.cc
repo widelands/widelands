@@ -178,9 +178,8 @@ void EncyclopediaWindow::entry_selected(const std::string& tab_name) {
 		try {
 			contents_.at(tab_name)->force_new_renderer();
 			contents_.at(tab_name)->set_text(as_message(table->get_string("title"), table->get_string("text")));
-			log("Encyclopedia: using NEW font renderer.\n");
 		} catch (const std::exception& e) {
-			log("Encyclopedia: falling back to OLD font renderer:\n%s\n%s\n", as_message(table->get_string("title"), table->get_string("text")).c_str(), e.what());
+			log("Encyclopedia: falling back to OLD font renderer: %s\n", e.what());
 			contents_.at(tab_name)->force_new_renderer(false);
 			contents_.at(tab_name)->set_text(
 			   (boost::format("%s%s") % heading(table->get_string("title")) % table->get_string("text"))
