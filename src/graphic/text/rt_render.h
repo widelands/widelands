@@ -89,7 +89,7 @@ public:
 	IRefMap* make_reference_map(const std::string&, uint16_t, const TagSet& = TagSet());
 
 private:
-	RenderNode* layout_(const std::string& text, uint16_t width, const TagSet& allowed_tags);
+	std::shared_ptr<RenderNode> layout(const std::string& text, uint16_t width, const TagSet& allowed_tags);
 
 	std::unique_ptr<FontCache> font_cache_;
 	std::unique_ptr<Parser> parser_;
