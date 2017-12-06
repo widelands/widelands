@@ -4,7 +4,7 @@
 --
 -- Functions used in the ingame help windows for formatting the text and pictures.
 
-include "scripting/formatting.lua"
+include "scripting/richtext.lua"
 
 --  =======================================================
 --  *************** Basic helper functions ****************
@@ -22,17 +22,19 @@ include "scripting/formatting.lua"
 --    :returns: the text on the left and a picture row on the right.
 --
 function image_line(image, count, text)
-   local imgs={}
+   if not text then
+      text = ""
+   end
+   local images = ""
    for i=1,count do
-      imgs[#imgs + 1] = image
+      images = images .. img(image)
    end
-   local imgstr = table.concat(imgs, ";")
 
-   if text then
-      return rt("image=" .. imgstr .. " image-align=right", "  " .. text)
-   else
-      return rt("image=" .. imgstr .. " image-align=right", "")
-   end
+   return
+      div("width=100%",
+         div("width=50%", p(vspace(6) .. text .. space(6))) ..
+         div("width=*", p("align=right", vspace(6) .. images .. vspace(12)))
+      )
 end
 
 
@@ -54,11 +56,12 @@ function dependencies(items, text)
    if not text then
       text = ""
    end
-   local string = "image=" .. items[1].icon_name
+   local images = img(items[1].icon_name)
    for k,v in ipairs({table.unpack(items,2)}) do
-      string = string .. ";images/richtext/arrow-right.png;" ..  v.icon_name
+      images = images .. img("images/richtext/arrow-right.png") ..  img(v.icon_name)
    end
-   return rt(string, p(text))
+   return
+      div("width=100%", p(vspace(6) .. images .. space(6) .. text .. vspace(12)))
 end
 
 
@@ -152,20 +155,25 @@ function help_consumed_wares_workers(tribe, building, program_name)
       if (countlist > 1) then
          text = _"%s and":bformat(text)
       end
-      local images = consumed_images[1]
-      local image_counter = 2
+      local images = ""
+      local image_counter = 1
       while (image_counter <= consumed_amount[1]) do
-         images = images .. ";" .. consumed_images[1]
+         images = images .. img(consumed_images[1])
          image_counter = image_counter + 1
       end
       for k, v in ipairs({table.unpack(consumed_images,2)}) do
          image_counter = 1
          while (image_counter <= consumed_amount[k + 1]) do
-            images = images .. ";" .. v
+            images = images .. img(v)
             image_counter = image_counter + 1
          end
       end
-      consumed_items_string = image_line(images, 1, p(text)) .. consumed_items_string
+      consumed_items_string =
+         div("width=100%",
+            div("width=50%", p(vspace(6) .. text .. space(6))) ..
+            div("width=*", p("align=right", vspace(6) .. images .. vspace(12)))
+         .. consumed_items_string
+      )
    end
    if (consumed_items_counter > 0) then
       local consumed_header = ""
@@ -181,7 +189,7 @@ function help_consumed_wares_workers(tribe, building, program_name)
          -- TRANSLATORS: Tribal Encyclopedia: Heading for wares consumed by a productionsite
          consumed_header = _("Wares consumed:")
       end
-      result = result .. rt(h3(consumed_header)) .. consumed_items_string
+      result = result .. h3(consumed_header) .. consumed_items_string
    end
    return result
 end
