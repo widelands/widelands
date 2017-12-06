@@ -280,6 +280,7 @@ Parser::Parser() {
 		tc.allowed_children.insert("p");
 		tc.allowed_children.insert("font");
 		tc.allowed_children.insert("div");
+		tc.allowed_children.insert("img");
 		tc.text_allowed = true;
 		tc.has_closing_tag = true;
 		tag_constraints_["font"] = tc;
