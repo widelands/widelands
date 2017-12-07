@@ -153,23 +153,7 @@ function worker_help_string(tribe, worker_description)
    local becomes_description = worker_description.becomes
    if (becomes_description) then
 
-      result = result .. h2(_"Experience levels")
-      local exp_string = _"%s to %s (%s EP)":format(
-            worker_description.descname,
-            becomes_description.descname,
-            worker_description.needed_experience
-         )
-
-      worker_description = becomes_description
-      becomes_description = worker_description.becomes
-      if(becomes_description) then
-         exp_string = exp_string .. "<br>" .. _"%s to %s (%s EP)":format(
-               worker_description.descname,
-               becomes_description.descname,
-               worker_description.needed_experience
-            )
-      end
-      result = result .. p("align=right", exp_string)
+      result = result .. help_worker_experience(worker_description, becomes_description)
    end
    -- Soldier properties
    if (worker_description.type_name == "soldier") then

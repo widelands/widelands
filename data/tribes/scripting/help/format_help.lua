@@ -91,6 +91,38 @@ function help_ware_amount_line(ware_description, amount)
 end
 
 -- RST
+-- .. function:: help_worker_experience(worker_description, becomes_description)
+--
+--    Displays needed experience levels for workers
+--
+--    :arg worker_description: The :class:`LuaWorkerDescription` for the lower-level worker
+--    :arg becomes_description: The :class:`LuaWorkerDescription` for the higher-level worker
+--    :returns: text describing the needed experience
+--
+function help_worker_experience(worker_description, becomes_description)
+   local result = h2(_"Experience levels")
+   -- TRANSLATORS: EP = Experience Points
+   local exp_string = _"%s to %s (%s EP)":format(
+         worker_description.descname,
+         becomes_description.descname,
+         worker_description.needed_experience
+      )
+
+   worker_description = becomes_description
+   becomes_description = worker_description.becomes
+   if(becomes_description) then
+     -- TRANSLATORS: EP = Experience Points
+      exp_string = exp_string .. "<br>" .. _"%s to %s (%s EP)":format(
+            worker_description.descname,
+            becomes_description.descname,
+            worker_description.needed_experience
+         )
+   end
+   result = result .. p("align=right", exp_string)
+   return result
+end
+
+-- RST
 -- .. function:: help_tool_string(tribe, toolname, no_of_workers)
 --
 --    Displays tools with an intro text and images
@@ -172,8 +204,8 @@ function help_consumed_wares_workers(tribe, building, program_name)
          div("width=100%",
             div("width=50%", p(vspace(6) .. text .. space(6))) ..
             div("width=*", p("align=right", vspace(6) .. images .. vspace(12)))
+         )
          .. consumed_items_string
-      )
    end
    if (consumed_items_counter > 0) then
       local consumed_header = ""
