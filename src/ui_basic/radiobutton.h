@@ -35,7 +35,7 @@ struct Radiobutton : public Statebox {
 	friend struct Radiogroup;
 
 	Radiobutton(Panel* parent, Vector2i, const Image* pic, Radiogroup&, int32_t id);
-	~Radiobutton();
+	~Radiobutton() override;
 
 	Radiobutton* next_button() {
 		return nextbtn_;

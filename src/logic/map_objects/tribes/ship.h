@@ -59,7 +59,7 @@ struct NoteShipWindow {
 
 	Serial serial;
 
-	enum class Action { kRefresh, kClose, kNoPortLeft };
+	enum class Action { kClose, kNoPortLeft };
 	const Action action;
 
 	NoteShipWindow(Serial init_serial, const Action& init_action)
@@ -99,7 +99,7 @@ struct Ship : Bob {
 	MO_DESCR(ShipDescr)
 
 	explicit Ship(const ShipDescr& descr);
-	virtual ~Ship();
+	~Ship() override;
 
 	// Returns the fleet the ship is a part of.
 	Fleet* get_fleet() const;

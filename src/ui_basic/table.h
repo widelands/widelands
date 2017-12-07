@@ -105,6 +105,7 @@ public:
 			return "UI::Table<Entry>: No selection";
 		}
 	};
+	void scroll_to_item(int32_t item);
 	EntryRecord& get_selected_record() const;
 	Entry get_selected() const;
 
@@ -163,7 +164,7 @@ public:
 	      uint32_t h,
 	      const Image* button_background = g_gr->images().get("images/ui_basic/but3.png"),
 	      TableRows rowtype = TableRows::kSingle);
-	~Table();
+	~Table() override;
 
 	/**
 	 * Compare the two items at the given indices in the list.
@@ -249,16 +250,12 @@ public:
 			return "UI::Table<void *>: No selection";
 		}
 	};
+	void scroll_to_item(int32_t item);
 	EntryRecord& get_selected_record() const {
 		if (selection_ == no_selection_index())
 			throw NoSelection();
 		assert(selection_ < entry_records_.size());
 		return *entry_records_.at(selection_);
-	}
-	void remove_selected() {
-		if (selection_ == no_selection_index())
-			throw NoSelection();
-		remove(selection_);
 	}
 	void* get_selected() const {
 		return get_selected_record().entry();

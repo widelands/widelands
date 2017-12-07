@@ -53,7 +53,7 @@ struct BaseListselect : public Panel {
 	               uint32_t h,
 	               const Image* button_background,
 	               ListselectLayout selection_mode = ListselectLayout::kPlain);
-	~BaseListselect();
+	~BaseListselect() override;
 
 	boost::signals2::signal<void(uint32_t)> selected;
 	boost::signals2::signal<void(uint32_t)> clicked;
@@ -72,10 +72,6 @@ struct BaseListselect : public Panel {
 	               const std::string& tooltip_text = std::string());
 	void remove(uint32_t);
 	void remove(const char* name);
-
-	void switch_entries(uint32_t, uint32_t);
-
-	void set_entry_color(uint32_t, const RGBColor&);
 
 	uint32_t size() const {
 		return entry_records_.size();
@@ -101,7 +97,6 @@ struct BaseListselect : public Panel {
 	bool has_selection() const;
 
 	uint32_t get_selected() const;
-	void remove_selected();
 
 	const std::string& get_selected_name() const;
 	const std::string& get_selected_tooltip() const;
@@ -136,8 +131,6 @@ private:
 
 	struct EntryRecord {
 		uint32_t entry_;
-		bool use_clr;
-		RGBColor clr;
 		const Image* pic;
 		std::string name;
 		std::string tooltip;

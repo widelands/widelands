@@ -45,7 +45,7 @@
 
 struct MapObjectDebugPanel : public UI::Panel, public Widelands::MapObject::LogSink {
 	MapObjectDebugPanel(UI::Panel& parent, const Widelands::EditorGameBase&, Widelands::MapObject&);
-	~MapObjectDebugPanel();
+	~MapObjectDebugPanel() override;
 
 	void log(const std::string& str) override;
 
@@ -198,7 +198,7 @@ struct FieldDebugWindow : public UI::Window {
 	void open_bob(uint32_t);
 
 private:
-	Widelands::Map& map_;
+	const Widelands::Map& map_;
 	Widelands::FCoords const coords_;
 
 	UI::MultilineTextarea ui_field_;
@@ -282,7 +282,7 @@ void FieldDebugWindow::think() {
 		str += (boost::format("  vision: %u\n") % vision).str();
 		{
 			Widelands::Time const time_last_surveyed =
-			   player_field.time_triangle_last_surveyed[Widelands::TCoords<>::D];
+			   player_field.time_triangle_last_surveyed[static_cast<int>(Widelands::TriangleIndex::D)];
 
 			if (time_last_surveyed != Widelands::never()) {
 				str += (boost::format("  D triangle last surveyed at %u: amount %u\n") %
@@ -294,7 +294,7 @@ void FieldDebugWindow::think() {
 		}
 		{
 			Widelands::Time const time_last_surveyed =
-			   player_field.time_triangle_last_surveyed[Widelands::TCoords<>::R];
+			   player_field.time_triangle_last_surveyed[static_cast<int>(Widelands::TriangleIndex::R)];
 
 			if (time_last_surveyed != Widelands::never()) {
 				str += (boost::format("  R triangle last surveyed at %u: amount %u\n") %
@@ -310,10 +310,9 @@ void FieldDebugWindow::think() {
 			break;
 		case 1: {
 			std::string animation_name = "(no animation)";
-			if (player_field.map_object_descr[Widelands::TCoords<>::None]) {
+			if (player_field.map_object_descr) {
 				animation_name = "(seen an animation)";
 			}
-
 			str += (boost::format("  last seen at %u:\n"
 			                      "    owner: %u\n"
 			                      "    immovable animation:\n%s\n"

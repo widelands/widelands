@@ -60,7 +60,6 @@ struct FontHandler {
 	              uint32_t& w,
 	              uint32_t& h,
 	              uint32_t wrap = std::numeric_limits<uint32_t>::max());
-	uint32_t get_fontheight(const std::string& name, int32_t size);
 
 	// Delete the whole cache.
 	void flush();

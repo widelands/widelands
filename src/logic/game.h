@@ -27,6 +27,7 @@
 #include "logic/cmd_queue.h"
 #include "logic/editor_game_base.h"
 #include "logic/save_handler.h"
+#include "logic/trade_agreement.h"
 #include "random/random.h"
 #include "scripting/logic.h"
 
@@ -40,6 +41,9 @@ class GameController;
 
 namespace Widelands {
 
+/// How often are statistics to be sampled.
+constexpr uint32_t kStatisticsSampleTime = 30000;
+
 struct Flag;
 struct Path;
 struct PlayerImmovable;
@@ -50,9 +54,6 @@ struct Ship;
 struct PlayerEndStatus;
 class TrainingSite;
 class MilitarySite;
-
-#define WLGF_SUFFIX ".wgf"
-#define WLGF_MAGIC "WLgf"
 
 /** class Game
  *
@@ -98,7 +99,7 @@ public:
 	friend struct GameLoader;
 
 	Game();
-	~Game();
+	~Game() override;
 
 	// life cycle
 	void set_game_controller(GameController*);
@@ -207,6 +208,7 @@ public:
 	void send_player_ship_explore_island(Ship&, IslandExploreDirection);
 	void send_player_sink_ship(Ship&);
 	void send_player_cancel_expedition_ship(Ship&);
+	void send_player_propose_trade(const Trade& trade);
 
 	InteractivePlayer* get_ipl();
 
@@ -232,6 +234,23 @@ public:
 		return replay_;
 	}
 
+	bool is_ai_training_mode() const {
+		return ai_training_mode_;
+	}
+
+	bool is_auto_speed() const {
+		return auto_speed_;
+	}
+
+	void set_ai_training_mode(bool);
+
+	void set_auto_speed(bool);
+
+	// TODO(sirver,trading): document these functions once the interface settles.
+	int propose_trade(const Trade& trade);
+	void accept_trade(int trade_id);
+	void cancel_trade(int trade_id);
+
 private:
 	void sync_reset();
 
@@ -246,7 +265,7 @@ private:
 		     syncstreamsave_(false) {
 		}
 
-		~SyncWrapper();
+		~SyncWrapper() override;
 
 		/// Start dumping the entire syncstream into a file.
 		///
@@ -282,6 +301,9 @@ private:
 	/// is written only if \ref writereplay_ is true too.
 	bool writesyncstream_;
 
+	bool ai_training_mode_;
+	bool auto_speed_;
+
 	int32_t state_;
 
 	RNG rng_;
@@ -293,6 +315,9 @@ private:
 	std::unique_ptr<ReplayWriter> replaywriter_;
 
 	GeneralStatsVector general_stats_;
+	int next_trade_agreement_id_ = 1;
+	// Maps from trade agreement id to the agreement.
+	std::map<int, TradeAgreement> trade_agreements_;
 
 	/// For save games and statistics generation
 	std::string win_condition_displayname_;

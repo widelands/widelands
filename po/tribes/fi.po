@@ -14,15 +14,21 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-06-23 12:21+0000\n"
-"PO-Revision-Date: 2017-06-24 08:22+0000\n"
-"Last-Translator: Jukka Pakarinen\n"
+"POT-Creation-Date: 2017-11-25 03:55+0000\n"
+"PO-Revision-Date: 2017-11-25 03:58+0000\n"
+"Last-Translator: GunChleoc\n"
 "Language-Team: Finnish (http://www.transifex.com/widelands/widelands/language/fi/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: fi\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../data/tribes/buildings/markets/barbarians/market/init.lua:14
+msgctxt "barbarians_building"
+msgid "Market"
+msgstr "Kauppapaikka"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/militarysites/atlanteans/castle/init.lua:53
@@ -424,43 +430,43 @@ msgstr "Haarniskapaja"
 
 #. TRANSLATORS: Completed/Skipped/Did not start working because ...
 #: ../../data/tribes/buildings/productionsites/atlanteans/armorsmithy/init.lua:143
-#: ../../data/tribes/buildings/productionsites/atlanteans/blackroot_farm/init.lua:47
-#: ../../data/tribes/buildings/productionsites/atlanteans/crystalmine/init.lua:60
-#: ../../data/tribes/buildings/productionsites/atlanteans/farm/init.lua:50
-#: ../../data/tribes/buildings/productionsites/atlanteans/mill/init.lua:55
-#: ../../data/tribes/buildings/productionsites/atlanteans/quarry/init.lua:44
+#: ../../data/tribes/buildings/productionsites/atlanteans/blackroot_farm/init.lua:48
+#: ../../data/tribes/buildings/productionsites/atlanteans/crystalmine/init.lua:61
+#: ../../data/tribes/buildings/productionsites/atlanteans/farm/init.lua:52
+#: ../../data/tribes/buildings/productionsites/atlanteans/mill/init.lua:56
+#: ../../data/tribes/buildings/productionsites/atlanteans/quarry/init.lua:42
 #: ../../data/tribes/buildings/productionsites/atlanteans/shipyard/init.lua:64
 #: ../../data/tribes/buildings/productionsites/atlanteans/smelting_works/init.lua:56
 #: ../../data/tribes/buildings/productionsites/atlanteans/smokery/init.lua:58
 #: ../../data/tribes/buildings/productionsites/atlanteans/spiderfarm/init.lua:53
-#: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:66
+#: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:65
 #: ../../data/tribes/buildings/productionsites/atlanteans/weaponsmithy/init.lua:61
 #: ../../data/tribes/buildings/productionsites/atlanteans/weaving_mill/init.lua:58
-#: ../../data/tribes/buildings/productionsites/atlanteans/well/init.lua:50
-#: ../../data/tribes/buildings/productionsites/barbarians/ax_workshop/init.lua:65
+#: ../../data/tribes/buildings/productionsites/atlanteans/well/init.lua:48
+#: ../../data/tribes/buildings/productionsites/barbarians/ax_workshop/init.lua:67
 #: ../../data/tribes/buildings/productionsites/barbarians/big_inn/init.lua:60
-#: ../../data/tribes/buildings/productionsites/barbarians/farm/init.lua:58
-#: ../../data/tribes/buildings/productionsites/barbarians/gamekeepers_hut/init.lua:48
+#: ../../data/tribes/buildings/productionsites/barbarians/farm/init.lua:60
+#: ../../data/tribes/buildings/productionsites/barbarians/gamekeepers_hut/init.lua:49
 #: ../../data/tribes/buildings/productionsites/barbarians/helmsmithy/init.lua:68
 #: ../../data/tribes/buildings/productionsites/barbarians/inn/init.lua:58
-#: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:75
-#: ../../data/tribes/buildings/productionsites/barbarians/quarry/init.lua:51
-#: ../../data/tribes/buildings/productionsites/barbarians/reed_yard/init.lua:45
+#: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:77
+#: ../../data/tribes/buildings/productionsites/barbarians/quarry/init.lua:49
+#: ../../data/tribes/buildings/productionsites/barbarians/reed_yard/init.lua:44
 #: ../../data/tribes/buildings/productionsites/barbarians/shipyard/init.lua:65
-#: ../../data/tribes/buildings/productionsites/barbarians/smelting_works/init.lua:59
-#: ../../data/tribes/buildings/productionsites/barbarians/warmill/init.lua:69
-#: ../../data/tribes/buildings/productionsites/barbarians/well/init.lua:51
-#: ../../data/tribes/buildings/productionsites/empire/armorsmithy/init.lua:69
-#: ../../data/tribes/buildings/productionsites/empire/farm/init.lua:48
-#: ../../data/tribes/buildings/productionsites/empire/inn/init.lua:55
-#: ../../data/tribes/buildings/productionsites/empire/marblemine/init.lua:60
-#: ../../data/tribes/buildings/productionsites/empire/quarry/init.lua:45
+#: ../../data/tribes/buildings/productionsites/barbarians/smelting_works/init.lua:60
+#: ../../data/tribes/buildings/productionsites/barbarians/warmill/init.lua:71
+#: ../../data/tribes/buildings/productionsites/barbarians/well/init.lua:50
+#: ../../data/tribes/buildings/productionsites/empire/armorsmithy/init.lua:68
+#: ../../data/tribes/buildings/productionsites/empire/farm/init.lua:51
+#: ../../data/tribes/buildings/productionsites/empire/inn/init.lua:54
+#: ../../data/tribes/buildings/productionsites/empire/marblemine/init.lua:61
+#: ../../data/tribes/buildings/productionsites/empire/quarry/init.lua:43
 #: ../../data/tribes/buildings/productionsites/empire/shipyard/init.lua:63
 #: ../../data/tribes/buildings/productionsites/empire/smelting_works/init.lua:61
-#: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:65
-#: ../../data/tribes/buildings/productionsites/empire/vineyard/init.lua:46
+#: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:64
+#: ../../data/tribes/buildings/productionsites/empire/vineyard/init.lua:50
 #: ../../data/tribes/buildings/productionsites/empire/weaponsmithy/init.lua:66
-#: ../../data/tribes/buildings/productionsites/empire/well/init.lua:50
+#: ../../data/tribes/buildings/productionsites/empire/well/init.lua:48
 msgid "working"
 msgstr "työskentelee"
 
@@ -507,35 +513,35 @@ msgid "Blackroot Farm"
 msgstr "Mustajuuriviljelmä"
 
 #. TRANSLATORS: Completed/Skipped/Did not start planting blackroot because ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/blackroot_farm/init.lua:56
+#: ../../data/tribes/buildings/productionsites/atlanteans/blackroot_farm/init.lua:57
 msgid "planting blackroot"
 msgstr "istuttaa mustajuurta"
 
 #. TRANSLATORS: Completed/Skipped/Did not start harvesting blackroot because
 #. ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/blackroot_farm/init.lua:64
+#: ../../data/tribes/buildings/productionsites/atlanteans/blackroot_farm/init.lua:65
 msgid "harvesting blackroot"
 msgstr "korjaa mustajuurisatoa"
 
-#: ../../data/tribes/buildings/productionsites/atlanteans/blackroot_farm/init.lua:73
-#: ../../data/tribes/buildings/productionsites/atlanteans/farm/init.lua:76
-#: ../../data/tribes/buildings/productionsites/barbarians/farm/init.lua:85
-#: ../../data/tribes/buildings/productionsites/barbarians/reed_yard/init.lua:71
-#: ../../data/tribes/buildings/productionsites/empire/farm/init.lua:74
-#: ../../data/tribes/buildings/productionsites/empire/vineyard/init.lua:72
+#: ../../data/tribes/buildings/productionsites/atlanteans/blackroot_farm/init.lua:74
+#: ../../data/tribes/buildings/productionsites/atlanteans/farm/init.lua:78
+#: ../../data/tribes/buildings/productionsites/barbarians/farm/init.lua:87
+#: ../../data/tribes/buildings/productionsites/barbarians/reed_yard/init.lua:70
+#: ../../data/tribes/buildings/productionsites/empire/farm/init.lua:77
+#: ../../data/tribes/buildings/productionsites/empire/vineyard/init.lua:76
 msgid "No Fields"
 msgstr "Ei peltoja"
 
-#: ../../data/tribes/buildings/productionsites/atlanteans/blackroot_farm/init.lua:74
-#: ../../data/tribes/buildings/productionsites/atlanteans/farm/init.lua:77
-#: ../../data/tribes/buildings/productionsites/barbarians/farm/init.lua:86
-#: ../../data/tribes/buildings/productionsites/barbarians/reed_yard/init.lua:72
-#: ../../data/tribes/buildings/productionsites/empire/farm/init.lua:75
-#: ../../data/tribes/buildings/productionsites/empire/vineyard/init.lua:73
+#: ../../data/tribes/buildings/productionsites/atlanteans/blackroot_farm/init.lua:75
+#: ../../data/tribes/buildings/productionsites/atlanteans/farm/init.lua:79
+#: ../../data/tribes/buildings/productionsites/barbarians/farm/init.lua:88
+#: ../../data/tribes/buildings/productionsites/barbarians/reed_yard/init.lua:71
+#: ../../data/tribes/buildings/productionsites/empire/farm/init.lua:78
+#: ../../data/tribes/buildings/productionsites/empire/vineyard/init.lua:77
 msgid "Out of Fields"
 msgstr "Pellonpuutteessa"
 
-#: ../../data/tribes/buildings/productionsites/atlanteans/blackroot_farm/init.lua:75
+#: ../../data/tribes/buildings/productionsites/atlanteans/blackroot_farm/init.lua:76
 msgctxt "atlanteans_building"
 msgid ""
 "The blackroot farmer working at this blackroot farm has no cleared soil to "
@@ -603,31 +609,31 @@ msgid "Crystal Mine"
 msgstr "Kidekaivos"
 
 #. TRANSLATORS: Completed/Skipped/Did not start mining granite because ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/crystalmine/init.lua:70
+#: ../../data/tribes/buildings/productionsites/atlanteans/crystalmine/init.lua:71
 #: ../../data/tribes/buildings/productionsites/barbarians/granitemine/init.lua:59
-#: ../../data/tribes/buildings/productionsites/empire/marblemine/init.lua:84
+#: ../../data/tribes/buildings/productionsites/empire/marblemine/init.lua:85
 msgid "mining granite"
 msgstr "louhii kiveä"
 
 #. TRANSLATORS: Completed/Skipped/Did not start mining quartz because ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/crystalmine/init.lua:91
+#: ../../data/tribes/buildings/productionsites/atlanteans/crystalmine/init.lua:92
 msgid "mining quartz"
 msgstr "louhii kvartsia"
 
 #. TRANSLATORS: Completed/Skipped/Did not start mining diamonds because ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/crystalmine/init.lua:109
+#: ../../data/tribes/buildings/productionsites/atlanteans/crystalmine/init.lua:110
 msgid "mining diamonds"
 msgstr "louhii timantteja"
 
-#: ../../data/tribes/buildings/productionsites/atlanteans/crystalmine/init.lua:128
+#: ../../data/tribes/buildings/productionsites/atlanteans/crystalmine/init.lua:129
 msgid "No Crystal"
 msgstr "Kvartsikide puuttuu"
 
-#: ../../data/tribes/buildings/productionsites/atlanteans/crystalmine/init.lua:129
+#: ../../data/tribes/buildings/productionsites/atlanteans/crystalmine/init.lua:130
 msgid "Main Crystal Vein Exhausted"
 msgstr "Kidekaivoksen suoni ehtynyt"
 
-#: ../../data/tribes/buildings/productionsites/atlanteans/crystalmine/init.lua:131
+#: ../../data/tribes/buildings/productionsites/atlanteans/crystalmine/init.lua:132
 msgctxt "atlanteans_building"
 msgid ""
 "This crystal mine’s main vein is exhausted. Expect strongly diminished "
@@ -641,16 +647,16 @@ msgid "Farm"
 msgstr "Maatila"
 
 #. TRANSLATORS: Completed/Skipped/Did not start planting corn because ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/farm/init.lua:59
+#: ../../data/tribes/buildings/productionsites/atlanteans/farm/init.lua:61
 msgid "planting corn"
 msgstr "istuttaa maissia"
 
 #. TRANSLATORS: Completed/Skipped/Did not start harvesting corn because ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/farm/init.lua:67
+#: ../../data/tribes/buildings/productionsites/atlanteans/farm/init.lua:69
 msgid "harvesting corn"
 msgstr "korjaan maissia"
 
-#: ../../data/tribes/buildings/productionsites/atlanteans/farm/init.lua:78
+#: ../../data/tribes/buildings/productionsites/atlanteans/farm/init.lua:80
 msgctxt "atlanteans_building"
 msgid ""
 "The farmer working at this farm has no cleared soil to plant his seeds."
@@ -668,15 +674,15 @@ msgid "breeding fish"
 msgstr "kasvattaa kaloja"
 
 #: ../../data/tribes/buildings/productionsites/atlanteans/fishbreeders_house/init.lua:52
-#: ../../data/tribes/buildings/productionsites/atlanteans/fishers_house/init.lua:53
-#: ../../data/tribes/buildings/productionsites/barbarians/fishers_hut/init.lua:59
+#: ../../data/tribes/buildings/productionsites/atlanteans/fishers_house/init.lua:56
+#: ../../data/tribes/buildings/productionsites/barbarians/fishers_hut/init.lua:61
 #: ../../data/tribes/buildings/productionsites/empire/fishers_house/init.lua:53
 msgid "No Fish"
 msgstr "Ei kalaa"
 
 #: ../../data/tribes/buildings/productionsites/atlanteans/fishbreeders_house/init.lua:53
-#: ../../data/tribes/buildings/productionsites/atlanteans/fishers_house/init.lua:54
-#: ../../data/tribes/buildings/productionsites/barbarians/fishers_hut/init.lua:60
+#: ../../data/tribes/buildings/productionsites/atlanteans/fishers_house/init.lua:57
+#: ../../data/tribes/buildings/productionsites/barbarians/fishers_hut/init.lua:62
 #: ../../data/tribes/buildings/productionsites/empire/fishers_house/init.lua:54
 msgid "Out of Fish"
 msgstr "Ei kalavesiä"
@@ -700,13 +706,13 @@ msgid "Fisher’s House"
 msgstr "Kalastajatorppa"
 
 #. TRANSLATORS: Completed/Skipped/Did not start fishing because ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/fishers_house/init.lua:43
-#: ../../data/tribes/buildings/productionsites/barbarians/fishers_hut/init.lua:50
+#: ../../data/tribes/buildings/productionsites/atlanteans/fishers_house/init.lua:46
+#: ../../data/tribes/buildings/productionsites/barbarians/fishers_hut/init.lua:52
 #: ../../data/tribes/buildings/productionsites/empire/fishers_house/init.lua:44
 msgid "fishing"
 msgstr "kalastaa"
 
-#: ../../data/tribes/buildings/productionsites/atlanteans/fishers_house/init.lua:55
+#: ../../data/tribes/buildings/productionsites/atlanteans/fishers_house/init.lua:58
 msgctxt "atlanteans_building"
 msgid ""
 "The fisher working out of this fisher’s house can’t find any fish in his "
@@ -721,9 +727,9 @@ msgid "Forester’s House"
 msgstr "Metsänhoitajan Mökki"
 
 #. TRANSLATORS: Completed/Skipped/Did not start planting trees because ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/foresters_house/init.lua:42
-#: ../../data/tribes/buildings/productionsites/barbarians/rangers_hut/init.lua:47
-#: ../../data/tribes/buildings/productionsites/empire/foresters_house/init.lua:42
+#: ../../data/tribes/buildings/productionsites/atlanteans/foresters_house/init.lua:43
+#: ../../data/tribes/buildings/productionsites/barbarians/rangers_hut/init.lua:49
+#: ../../data/tribes/buildings/productionsites/empire/foresters_house/init.lua:43
 msgid "planting trees"
 msgstr "istuttaa puita"
 
@@ -786,7 +792,7 @@ msgid "Horse Farm"
 msgstr "Hevostila"
 
 #. TRANSLATORS: Completed/Skipped/Did not start breeding horses because ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/horsefarm/init.lua:52
+#: ../../data/tribes/buildings/productionsites/atlanteans/horsefarm/init.lua:53
 msgctxt "atlanteans_building"
 msgid "breeding horses"
 msgstr "hevosten kasvatus"
@@ -799,21 +805,21 @@ msgstr "Metsästysmaja"
 
 #. TRANSLATORS: Completed/Skipped/Did not start hunting because ...
 #: ../../data/tribes/buildings/productionsites/atlanteans/hunters_house/init.lua:43
-#: ../../data/tribes/buildings/productionsites/barbarians/hunters_hut/init.lua:51
-#: ../../data/tribes/buildings/productionsites/empire/hunters_house/init.lua:41
+#: ../../data/tribes/buildings/productionsites/barbarians/hunters_hut/init.lua:54
+#: ../../data/tribes/buildings/productionsites/empire/hunters_house/init.lua:43
 msgid "hunting"
 msgstr "metsästää"
 
 #: ../../data/tribes/buildings/productionsites/atlanteans/hunters_house/init.lua:52
-#: ../../data/tribes/buildings/productionsites/barbarians/hunters_hut/init.lua:60
-#: ../../data/tribes/buildings/productionsites/empire/hunters_house/init.lua:50
+#: ../../data/tribes/buildings/productionsites/barbarians/hunters_hut/init.lua:63
+#: ../../data/tribes/buildings/productionsites/empire/hunters_house/init.lua:52
 msgid "No Game"
 msgstr "Ei riistaa"
 
 #. TRANSLATORS: "Game" means animals that you can hunt
 #: ../../data/tribes/buildings/productionsites/atlanteans/hunters_house/init.lua:54
-#: ../../data/tribes/buildings/productionsites/barbarians/hunters_hut/init.lua:62
-#: ../../data/tribes/buildings/productionsites/empire/hunters_house/init.lua:52
+#: ../../data/tribes/buildings/productionsites/barbarians/hunters_hut/init.lua:65
+#: ../../data/tribes/buildings/productionsites/empire/hunters_house/init.lua:54
 msgid "Out of Game"
 msgstr "Riistaa ei löydy"
 
@@ -873,12 +879,12 @@ msgid "Mill"
 msgstr "Mylly"
 
 #. TRANSLATORS: Completed/Skipped/Did not start grinding corn because ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/mill/init.lua:64
+#: ../../data/tribes/buildings/productionsites/atlanteans/mill/init.lua:65
 msgid "grinding corn"
 msgstr "jauhaa maissia"
 
 #. TRANSLATORS: Completed/Skipped/Did not start grinding blackrootbecause ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/mill/init.lua:77
+#: ../../data/tribes/buildings/productionsites/atlanteans/mill/init.lua:78
 msgid "grinding blackroot"
 msgstr "jauhaa mustajuurta"
 
@@ -889,25 +895,25 @@ msgid "Quarry"
 msgstr "Kivilouhos"
 
 #. TRANSLATORS: Completed/Skipped/Did not start quarrying granite because ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/quarry/init.lua:54
-#: ../../data/tribes/buildings/productionsites/barbarians/quarry/init.lua:61
-#: ../../data/tribes/buildings/productionsites/empire/quarry/init.lua:59
+#: ../../data/tribes/buildings/productionsites/atlanteans/quarry/init.lua:52
+#: ../../data/tribes/buildings/productionsites/barbarians/quarry/init.lua:59
+#: ../../data/tribes/buildings/productionsites/empire/quarry/init.lua:57
 msgid "quarrying granite"
 msgstr "hakkaa kiviä"
 
-#: ../../data/tribes/buildings/productionsites/atlanteans/quarry/init.lua:65
-#: ../../data/tribes/buildings/productionsites/barbarians/quarry/init.lua:72
-#: ../../data/tribes/buildings/productionsites/empire/quarry/init.lua:80
+#: ../../data/tribes/buildings/productionsites/atlanteans/quarry/init.lua:63
+#: ../../data/tribes/buildings/productionsites/barbarians/quarry/init.lua:70
+#: ../../data/tribes/buildings/productionsites/empire/quarry/init.lua:78
 msgid "No Rocks"
 msgstr "Kivipula"
 
-#: ../../data/tribes/buildings/productionsites/atlanteans/quarry/init.lua:66
-#: ../../data/tribes/buildings/productionsites/barbarians/quarry/init.lua:73
-#: ../../data/tribes/buildings/productionsites/empire/quarry/init.lua:81
+#: ../../data/tribes/buildings/productionsites/atlanteans/quarry/init.lua:64
+#: ../../data/tribes/buildings/productionsites/barbarians/quarry/init.lua:71
+#: ../../data/tribes/buildings/productionsites/empire/quarry/init.lua:79
 msgid "Out of Rocks"
 msgstr "Kivet lopussa"
 
-#: ../../data/tribes/buildings/productionsites/atlanteans/quarry/init.lua:67
+#: ../../data/tribes/buildings/productionsites/atlanteans/quarry/init.lua:65
 msgctxt "atlanteans_building"
 msgid ""
 "The stonecutter working at this quarry can’t find any rocks in his work "
@@ -921,8 +927,8 @@ msgid "Sawmill"
 msgstr "Saha"
 
 #. TRANSLATORS: Completed/Skipped/Did not start sawing logs because ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/sawmill/init.lua:54
-#: ../../data/tribes/buildings/productionsites/empire/sawmill/init.lua:54
+#: ../../data/tribes/buildings/productionsites/atlanteans/sawmill/init.lua:53
+#: ../../data/tribes/buildings/productionsites/empire/sawmill/init.lua:53
 msgid "sawing logs"
 msgstr "sahaa tukkeja"
 
@@ -961,14 +967,14 @@ msgstr "Sulattamo"
 
 #. TRANSLATORS: Completed/Skipped/Did not start smelting iron because ...
 #: ../../data/tribes/buildings/productionsites/atlanteans/smelting_works/init.lua:66
-#: ../../data/tribes/buildings/productionsites/barbarians/smelting_works/init.lua:69
+#: ../../data/tribes/buildings/productionsites/barbarians/smelting_works/init.lua:70
 #: ../../data/tribes/buildings/productionsites/empire/smelting_works/init.lua:71
 msgid "smelting iron"
 msgstr "sulattaa rautaa"
 
 #. TRANSLATORS: Completed/Skipped/Did not start smelting gold because ...
 #: ../../data/tribes/buildings/productionsites/atlanteans/smelting_works/init.lua:80
-#: ../../data/tribes/buildings/productionsites/barbarians/smelting_works/init.lua:83
+#: ../../data/tribes/buildings/productionsites/barbarians/smelting_works/init.lua:84
 #: ../../data/tribes/buildings/productionsites/empire/smelting_works/init.lua:85
 msgid "smelting gold"
 msgstr "sulattaa kultaa"
@@ -1003,79 +1009,79 @@ msgstr "Työkaluseppä"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a bread paddle because
 #. ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:85
-#: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:92
-#: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:108
+#: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:84
+#: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:94
+#: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:107
 msgid "making a bread paddle"
 msgstr "tekee leipälapiota"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a pair of buckets
 #. because ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:98
+#: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:97
 msgid "making a pair of buckets"
 msgstr "tekee ämpäriparia"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making fire tongs because ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:111
-#: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:116
-#: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:120
+#: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:110
+#: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:118
+#: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:119
 msgid "making fire tongs"
 msgstr "tekee pihtejä"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a fishing net because
 #. ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:124
+#: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:123
 msgid "making a fishing net"
 msgstr "tekee kalastusverkkoa"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a hammer because ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:137
-#: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:140
-#: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:144
+#: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:136
+#: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:142
+#: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:143
 msgid "making a hammer"
 msgstr "tekee vasaraa"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a hook pole because ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:150
+#: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:149
 msgid "making a hook pole"
 msgstr "tekee savustusvarrasta"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a hunting bow because
 #. ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:163
+#: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:162
 msgid "making a hunting bow"
 msgstr "tekee metsästysjousta"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making milking tongs because
 #. ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:176
+#: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:175
 msgid "making milking tongs"
 msgstr "tekee hämähäkinlypsupihtejä"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a pick because ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:189
-#: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:176
-#: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:180
+#: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:188
+#: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:178
+#: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:179
 msgid "making a pick"
 msgstr "tekee hakkua"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a saw because ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:202
-#: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:192
+#: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:201
+#: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:191
 msgid "making a saw"
 msgstr "tekee sahaa"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a scythe because ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:215
-#: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:188
-#: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:204
+#: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:214
+#: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:190
+#: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:203
 msgid "making a scythe"
 msgstr "tekee viikatetta"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a shovel because ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:228
-#: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:200
-#: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:216
+#: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:227
+#: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:202
+#: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:215
 msgid "making a shovel"
 msgstr "tekee lapiota"
 
@@ -1144,19 +1150,19 @@ msgctxt "atlanteans_building"
 msgid "Well"
 msgstr "Kaivo"
 
-#: ../../data/tribes/buildings/productionsites/atlanteans/well/init.lua:61
-#: ../../data/tribes/buildings/productionsites/barbarians/well/init.lua:63
-#: ../../data/tribes/buildings/productionsites/empire/well/init.lua:61
+#: ../../data/tribes/buildings/productionsites/atlanteans/well/init.lua:59
+#: ../../data/tribes/buildings/productionsites/barbarians/well/init.lua:62
+#: ../../data/tribes/buildings/productionsites/empire/well/init.lua:59
 msgid "No Water"
 msgstr "Kuivaa"
 
-#: ../../data/tribes/buildings/productionsites/atlanteans/well/init.lua:62
-#: ../../data/tribes/buildings/productionsites/barbarians/well/init.lua:64
-#: ../../data/tribes/buildings/productionsites/empire/well/init.lua:62
+#: ../../data/tribes/buildings/productionsites/atlanteans/well/init.lua:60
+#: ../../data/tribes/buildings/productionsites/barbarians/well/init.lua:63
+#: ../../data/tribes/buildings/productionsites/empire/well/init.lua:60
 msgid "Out of Water"
 msgstr "Vesi lopussa"
 
-#: ../../data/tribes/buildings/productionsites/atlanteans/well/init.lua:63
+#: ../../data/tribes/buildings/productionsites/atlanteans/well/init.lua:61
 msgctxt "atlanteans_building"
 msgid "The carrier working at this well can’t find any water in his well."
 msgstr "Kantaja työskentelee tällä kaivolla, mutta ei löydä kaivostaan vettä."
@@ -1165,28 +1171,28 @@ msgstr "Kantaja työskentelee tällä kaivolla, mutta ei löydä kaivostaan vett
 #: ../../data/tribes/buildings/productionsites/atlanteans/woodcutters_house/init.lua:7
 msgctxt "atlanteans_building"
 msgid "Woodcutter’s House"
-msgstr "Puunhakkaajan talo"
+msgstr "Metsurin mökki"
 
 #. TRANSLATORS: Completed/Skipped/Did not start felling trees because ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/woodcutters_house/init.lua:45
-#: ../../data/tribes/buildings/productionsites/barbarians/lumberjacks_hut/init.lua:51
-#: ../../data/tribes/buildings/productionsites/empire/lumberjacks_house/init.lua:45
+#: ../../data/tribes/buildings/productionsites/atlanteans/woodcutters_house/init.lua:43
+#: ../../data/tribes/buildings/productionsites/barbarians/lumberjacks_hut/init.lua:50
+#: ../../data/tribes/buildings/productionsites/empire/lumberjacks_house/init.lua:43
 msgid "felling trees"
 msgstr "kaataa puuta"
 
-#: ../../data/tribes/buildings/productionsites/atlanteans/woodcutters_house/init.lua:54
-#: ../../data/tribes/buildings/productionsites/barbarians/lumberjacks_hut/init.lua:60
-#: ../../data/tribes/buildings/productionsites/empire/lumberjacks_house/init.lua:54
+#: ../../data/tribes/buildings/productionsites/atlanteans/woodcutters_house/init.lua:52
+#: ../../data/tribes/buildings/productionsites/barbarians/lumberjacks_hut/init.lua:59
+#: ../../data/tribes/buildings/productionsites/empire/lumberjacks_house/init.lua:52
 msgid "No Trees"
 msgstr "Ei puita"
 
-#: ../../data/tribes/buildings/productionsites/atlanteans/woodcutters_house/init.lua:55
-#: ../../data/tribes/buildings/productionsites/barbarians/lumberjacks_hut/init.lua:61
-#: ../../data/tribes/buildings/productionsites/empire/lumberjacks_house/init.lua:55
+#: ../../data/tribes/buildings/productionsites/atlanteans/woodcutters_house/init.lua:53
+#: ../../data/tribes/buildings/productionsites/barbarians/lumberjacks_hut/init.lua:60
+#: ../../data/tribes/buildings/productionsites/empire/lumberjacks_house/init.lua:53
 msgid "Out of Trees"
 msgstr "Ei puita"
 
-#: ../../data/tribes/buildings/productionsites/atlanteans/woodcutters_house/init.lua:56
+#: ../../data/tribes/buildings/productionsites/atlanteans/woodcutters_house/init.lua:54
 msgctxt "atlanteans_building"
 msgid ""
 "The woodcutter working at this woodcutter’s house can’t find any trees in "
@@ -1201,20 +1207,20 @@ msgid "Ax Workshop"
 msgstr "Kirvespaja"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging an ax because ...
-#: ../../data/tribes/buildings/productionsites/barbarians/ax_workshop/init.lua:75
-#: ../../data/tribes/buildings/productionsites/barbarians/warmill/init.lua:82
+#: ../../data/tribes/buildings/productionsites/barbarians/ax_workshop/init.lua:77
+#: ../../data/tribes/buildings/productionsites/barbarians/warmill/init.lua:84
 msgid "forging an ax"
 msgstr "tekee kirvestä"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a sharp ax because ...
-#: ../../data/tribes/buildings/productionsites/barbarians/ax_workshop/init.lua:90
-#: ../../data/tribes/buildings/productionsites/barbarians/warmill/init.lua:97
+#: ../../data/tribes/buildings/productionsites/barbarians/ax_workshop/init.lua:92
+#: ../../data/tribes/buildings/productionsites/barbarians/warmill/init.lua:99
 msgid "forging a sharp ax"
 msgstr "tekee terävää kirvestä"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a broad ax because ...
-#: ../../data/tribes/buildings/productionsites/barbarians/ax_workshop/init.lua:105
-#: ../../data/tribes/buildings/productionsites/barbarians/warmill/init.lua:112
+#: ../../data/tribes/buildings/productionsites/barbarians/ax_workshop/init.lua:107
+#: ../../data/tribes/buildings/productionsites/barbarians/warmill/init.lua:114
 msgid "forging a broad ax"
 msgstr "tekee leveää kirvestä"
 
@@ -1237,7 +1243,7 @@ msgid "Barracks"
 msgstr "Kasarmi"
 
 #. TRANSLATORS: Completed/Skipped/Did not start recruiting soldier because ...
-#: ../../data/tribes/buildings/productionsites/barbarians/barracks/init.lua:56
+#: ../../data/tribes/buildings/productionsites/barbarians/barracks/init.lua:57
 msgctxt "barbarians_building"
 msgid "recruiting soldier"
 msgstr "sotilaan palkkaus"
@@ -1251,8 +1257,8 @@ msgstr "Majatalo"
 #. TRANSLATORS: Completed/Skipped/Did not start preparing a ration because ...
 #: ../../data/tribes/buildings/productionsites/barbarians/big_inn/init.lua:70
 #: ../../data/tribes/buildings/productionsites/barbarians/inn/init.lua:67
-#: ../../data/tribes/buildings/productionsites/barbarians/tavern/init.lua:60
-#: ../../data/tribes/buildings/productionsites/empire/inn/init.lua:64
+#: ../../data/tribes/buildings/productionsites/barbarians/tavern/init.lua:61
+#: ../../data/tribes/buildings/productionsites/empire/inn/init.lua:63
 #: ../../data/tribes/buildings/productionsites/empire/tavern/init.lua:56
 msgid "preparing a ration"
 msgstr "valmistaa ruoka-annosta"
@@ -1265,7 +1271,7 @@ msgstr "valmistaa välipalaa"
 
 #. TRANSLATORS: Completed/Skipped/Did not start preparing a meal because ...
 #: ../../data/tribes/buildings/productionsites/barbarians/big_inn/init.lua:96
-#: ../../data/tribes/buildings/productionsites/empire/inn/init.lua:78
+#: ../../data/tribes/buildings/productionsites/empire/inn/init.lua:77
 msgid "preparing a meal"
 msgstr "valmistaa tuhtia ateriaa"
 
@@ -1277,7 +1283,7 @@ msgstr "Panimo"
 
 #. TRANSLATORS: Completed/Skipped/Did not start brewing strong beer because
 #. ...
-#: ../../data/tribes/buildings/productionsites/barbarians/brewery/init.lua:53
+#: ../../data/tribes/buildings/productionsites/barbarians/brewery/init.lua:51
 msgid "brewing strong beer"
 msgstr "panee vahvaa olutta"
 
@@ -1288,7 +1294,7 @@ msgid "Cattle Farm"
 msgstr "Karjatila"
 
 #. TRANSLATORS: Completed/Skipped/Did not start rearing cattle because ...
-#: ../../data/tribes/buildings/productionsites/barbarians/cattlefarm/init.lua:52
+#: ../../data/tribes/buildings/productionsites/barbarians/cattlefarm/init.lua:53
 msgctxt "barbarians_building"
 msgid "rearing cattle"
 msgstr "karjan kasvatus"
@@ -1340,18 +1346,18 @@ msgid "Farm"
 msgstr "Maatila"
 
 #. TRANSLATORS: Completed/Skipped/Did not start planting wheat because ...
-#: ../../data/tribes/buildings/productionsites/barbarians/farm/init.lua:67
-#: ../../data/tribes/buildings/productionsites/empire/farm/init.lua:57
+#: ../../data/tribes/buildings/productionsites/barbarians/farm/init.lua:69
+#: ../../data/tribes/buildings/productionsites/empire/farm/init.lua:60
 msgid "planting wheat"
 msgstr "istuttaa vehnää"
 
 #. TRANSLATORS: Completed/Skipped/Did not start harvesting wheat because ...
-#: ../../data/tribes/buildings/productionsites/barbarians/farm/init.lua:75
-#: ../../data/tribes/buildings/productionsites/empire/farm/init.lua:65
+#: ../../data/tribes/buildings/productionsites/barbarians/farm/init.lua:77
+#: ../../data/tribes/buildings/productionsites/empire/farm/init.lua:68
 msgid "harvesting wheat"
 msgstr "pui vehnää"
 
-#: ../../data/tribes/buildings/productionsites/barbarians/farm/init.lua:87
+#: ../../data/tribes/buildings/productionsites/barbarians/farm/init.lua:89
 msgctxt "barbarians_building"
 msgid ""
 "The farmer working at this farm has no cleared soil to plant his seeds."
@@ -1363,7 +1369,7 @@ msgctxt "barbarians_building"
 msgid "Fisher’s Hut"
 msgstr "Kalastajatorppa"
 
-#: ../../data/tribes/buildings/productionsites/barbarians/fishers_hut/init.lua:61
+#: ../../data/tribes/buildings/productionsites/barbarians/fishers_hut/init.lua:63
 msgctxt "barbarians_building"
 msgid ""
 "The fisher working out of this fisher’s hut can’t find any fish in his work "
@@ -1440,7 +1446,7 @@ msgstr "Kypäräpaja"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a helmet because ...
 #: ../../data/tribes/buildings/productionsites/barbarians/helmsmithy/init.lua:78
-#: ../../data/tribes/buildings/productionsites/empire/armorsmithy/init.lua:80
+#: ../../data/tribes/buildings/productionsites/empire/armorsmithy/init.lua:79
 msgid "forging a helmet"
 msgstr "valmistaa kypärän"
 
@@ -1461,7 +1467,7 @@ msgid "Hunter’s Hut"
 msgstr "Metsästysmaja"
 
 #. TRANSLATORS: "game" means animals that you can hunt
-#: ../../data/tribes/buildings/productionsites/barbarians/hunters_hut/init.lua:64
+#: ../../data/tribes/buildings/productionsites/barbarians/hunters_hut/init.lua:67
 msgctxt "barbarians_building"
 msgid ""
 "The hunter working out of this hunter’s hut can’t find any game in his work "
@@ -1526,7 +1532,7 @@ msgctxt "barbarians_building"
 msgid "Lumberjack’s Hut"
 msgstr "Puunhakkaajan maja"
 
-#: ../../data/tribes/buildings/productionsites/barbarians/lumberjacks_hut/init.lua:62
+#: ../../data/tribes/buildings/productionsites/barbarians/lumberjacks_hut/init.lua:61
 msgctxt "barbarians_building"
 msgid ""
 "The lumberjack working at this lumberjack’s hut can’t find any trees in his "
@@ -1542,29 +1548,29 @@ msgstr "Työkalupaja"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a felling ax because
 #. ...
-#: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:104
-#: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:84
+#: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:106
+#: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:83
 msgid "making a felling ax"
 msgstr "tekee kaatokirvestä"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a fishing rod because
 #. ...
-#: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:128
-#: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:132
+#: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:130
+#: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:131
 msgid "making a fishing rod"
 msgstr "tekee onkea"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a hunting spear because
 #. ...
-#: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:152
-#: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:156
+#: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:154
+#: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:155
 msgid "making a hunting spear"
 msgstr "tekee metsästyskeihästä"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making kitchen tools because
 #. ...
-#: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:164
-#: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:168
+#: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:166
+#: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:167
 msgid "making kitchen tools"
 msgstr "tekee keittiövälineitä"
 
@@ -1575,8 +1581,8 @@ msgid "Micro Brewery"
 msgstr "Pienpanimo"
 
 #. TRANSLATORS: Completed/Skipped/Did not start brewing beer because ...
-#: ../../data/tribes/buildings/productionsites/barbarians/micro_brewery/init.lua:55
-#: ../../data/tribes/buildings/productionsites/empire/brewery/init.lua:55
+#: ../../data/tribes/buildings/productionsites/barbarians/micro_brewery/init.lua:56
+#: ../../data/tribes/buildings/productionsites/empire/brewery/init.lua:54
 msgid "brewing beer"
 msgstr "panee"
 
@@ -1586,7 +1592,7 @@ msgctxt "barbarians_building"
 msgid "Quarry"
 msgstr "Kivilouhos"
 
-#: ../../data/tribes/buildings/productionsites/barbarians/quarry/init.lua:74
+#: ../../data/tribes/buildings/productionsites/barbarians/quarry/init.lua:72
 msgctxt "barbarians_building"
 msgid ""
 "The stonemason working at this quarry can’t find any rocks in his work area."
@@ -1605,16 +1611,16 @@ msgid "Reed Yard"
 msgstr "Ruokotarha"
 
 #. TRANSLATORS: Completed/Skipped/Did not start planting reed because ...
-#: ../../data/tribes/buildings/productionsites/barbarians/reed_yard/init.lua:54
+#: ../../data/tribes/buildings/productionsites/barbarians/reed_yard/init.lua:53
 msgid "planting reed"
 msgstr "istuttaa heinää"
 
 #. TRANSLATORS: Completed/Skipped/Did not start harvesting reed because ...
-#: ../../data/tribes/buildings/productionsites/barbarians/reed_yard/init.lua:62
+#: ../../data/tribes/buildings/productionsites/barbarians/reed_yard/init.lua:61
 msgid "harvesting reed"
 msgstr "korjaa olkia"
 
-#: ../../data/tribes/buildings/productionsites/barbarians/reed_yard/init.lua:73
+#: ../../data/tribes/buildings/productionsites/barbarians/reed_yard/init.lua:72
 msgctxt "barbarians_building"
 msgid ""
 "The gardener working at this reed yard has no cleared soil to plant his "
@@ -1653,19 +1659,19 @@ msgstr "Asetehdas"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a bronze ax because
 #. ...
-#: ../../data/tribes/buildings/productionsites/barbarians/warmill/init.lua:127
+#: ../../data/tribes/buildings/productionsites/barbarians/warmill/init.lua:129
 msgid "forging a bronze ax"
 msgstr "valmistaa pronssikirveen"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a battle ax because
 #. ...
-#: ../../data/tribes/buildings/productionsites/barbarians/warmill/init.lua:142
+#: ../../data/tribes/buildings/productionsites/barbarians/warmill/init.lua:144
 msgid "forging a battle ax"
 msgstr "valmistaa taistelukirveen"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a warrior’s ax because
 #. ...
-#: ../../data/tribes/buildings/productionsites/barbarians/warmill/init.lua:157
+#: ../../data/tribes/buildings/productionsites/barbarians/warmill/init.lua:159
 msgid "forging a warrior’s ax"
 msgstr "valmistaa sotakirveen"
 
@@ -1687,7 +1693,7 @@ msgctxt "barbarians_building"
 msgid "Well"
 msgstr "Kaivo"
 
-#: ../../data/tribes/buildings/productionsites/barbarians/well/init.lua:65
+#: ../../data/tribes/buildings/productionsites/barbarians/well/init.lua:64
 msgctxt "barbarians_building"
 msgid "The carrier working at this well can’t find any water in his well."
 msgstr "Kantaja työskentelee tällä kaivolla, mutta ei löydä kaivostaan vettä."
@@ -1699,7 +1705,7 @@ msgid "Wood Hardener"
 msgstr "Puunkovettamo"
 
 #. TRANSLATORS: Completed/Skipped/Did not start hardening wood because ...
-#: ../../data/tribes/buildings/productionsites/barbarians/wood_hardener/init.lua:61
+#: ../../data/tribes/buildings/productionsites/barbarians/wood_hardener/init.lua:60
 msgid "hardening wood"
 msgstr "lämpökäsittelee puuta"
 
@@ -1711,19 +1717,19 @@ msgstr "Haarniskapaja"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a suit of armor
 #. because ...
-#: ../../data/tribes/buildings/productionsites/empire/armorsmithy/init.lua:92
+#: ../../data/tribes/buildings/productionsites/empire/armorsmithy/init.lua:91
 msgid "forging a suit of armor"
 msgstr "valmistaa ketjupanssarin"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a suit of chain armor
 #. because ...
-#: ../../data/tribes/buildings/productionsites/empire/armorsmithy/init.lua:104
+#: ../../data/tribes/buildings/productionsites/empire/armorsmithy/init.lua:103
 msgid "forging a suit of chain armor"
 msgstr "valmistaa ketjupanssarin"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a suit of gilded armor
 #. because ...
-#: ../../data/tribes/buildings/productionsites/empire/armorsmithy/init.lua:116
+#: ../../data/tribes/buildings/productionsites/empire/armorsmithy/init.lua:115
 msgid "forging a suit of gilded armor"
 msgstr "valmistaa levyhaarniskan"
 
@@ -1734,7 +1740,7 @@ msgid "Bakery"
 msgstr "Leipomo"
 
 #. TRANSLATORS: Completed/Skipped/Did not start baking bread because ...
-#: ../../data/tribes/buildings/productionsites/empire/bakery/init.lua:58
+#: ../../data/tribes/buildings/productionsites/empire/bakery/init.lua:60
 msgctxt "empire_building"
 msgid "baking bread"
 msgstr "levän leipominen"
@@ -1797,7 +1803,7 @@ msgid "Donkey Farm"
 msgstr "Aasitalli"
 
 #. TRANSLATORS: Completed/Skipped/Did not start rearing donkeys because ...
-#: ../../data/tribes/buildings/productionsites/empire/donkeyfarm/init.lua:52
+#: ../../data/tribes/buildings/productionsites/empire/donkeyfarm/init.lua:53
 msgctxt "empire_building"
 msgid "rearing donkeys"
 msgstr "aasien kasvatus"
@@ -1808,7 +1814,7 @@ msgctxt "empire_building"
 msgid "Farm"
 msgstr "Maatila"
 
-#: ../../data/tribes/buildings/productionsites/empire/farm/init.lua:76
+#: ../../data/tribes/buildings/productionsites/empire/farm/init.lua:79
 msgctxt "empire_building"
 msgid ""
 "The farmer working at this farm has no cleared soil to plant his seeds."
@@ -1818,7 +1824,7 @@ msgstr "Maanviljelijällä ei ole viljelyskelpoista maata käytössään."
 #: ../../data/tribes/buildings/productionsites/empire/fishers_house/init.lua:7
 msgctxt "empire_building"
 msgid "Fisher’s House"
-msgstr "Kalastakjatorppa"
+msgstr "Kalastajatorppa"
 
 #: ../../data/tribes/buildings/productionsites/empire/fishers_house/init.lua:55
 msgctxt "empire_building"
@@ -1867,7 +1873,7 @@ msgid "Hunter’s House"
 msgstr "Metsästysmaja"
 
 #. TRANSLATORS: "game" means animals that you can hunt
-#: ../../data/tribes/buildings/productionsites/empire/hunters_house/init.lua:54
+#: ../../data/tribes/buildings/productionsites/empire/hunters_house/init.lua:56
 msgctxt "empire_building"
 msgid ""
 "The hunter working out of this hunter’s house can’t find any game in his "
@@ -1913,7 +1919,7 @@ msgctxt "empire_building"
 msgid "Lumberjack’s House"
 msgstr "Puunhakkaajan mökki"
 
-#: ../../data/tribes/buildings/productionsites/empire/lumberjacks_house/init.lua:56
+#: ../../data/tribes/buildings/productionsites/empire/lumberjacks_house/init.lua:54
 msgctxt "empire_building"
 msgid ""
 "The lumberjack working at this lumberjack’s house can’t find any trees in "
@@ -1928,22 +1934,22 @@ msgid "Marble Mine"
 msgstr "Marmorikaivos"
 
 #. TRANSLATORS: Completed/Skipped/Did not start mining marble because ...
-#: ../../data/tribes/buildings/productionsites/empire/marblemine/init.lua:69
+#: ../../data/tribes/buildings/productionsites/empire/marblemine/init.lua:70
 #: ../../data/tribes/buildings/productionsites/empire/marblemine_deep/init.lua:58
 msgid "mining marble"
 msgstr "louhii marmoria"
 
-#: ../../data/tribes/buildings/productionsites/empire/marblemine/init.lua:100
+#: ../../data/tribes/buildings/productionsites/empire/marblemine/init.lua:101
 #: ../../data/tribes/buildings/productionsites/empire/marblemine_deep/init.lua:74
 msgid "No Marble"
 msgstr "Ei marmoria"
 
-#: ../../data/tribes/buildings/productionsites/empire/marblemine/init.lua:101
+#: ../../data/tribes/buildings/productionsites/empire/marblemine/init.lua:102
 #: ../../data/tribes/buildings/productionsites/empire/marblemine_deep/init.lua:75
 msgid "Main Marble Vein Exhausted"
 msgstr "Paras Marmorisuoni Ehtynyt"
 
-#: ../../data/tribes/buildings/productionsites/empire/marblemine/init.lua:103
+#: ../../data/tribes/buildings/productionsites/empire/marblemine/init.lua:104
 msgctxt "empire_building"
 msgid ""
 "This marble mine’s main vein is exhausted. Expect strongly diminished "
@@ -1994,11 +2000,11 @@ msgid "Quarry"
 msgstr "Kivilouhos"
 
 #. TRANSLATORS: Completed/Skipped/Did not start quarrying marble because ...
-#: ../../data/tribes/buildings/productionsites/empire/quarry/init.lua:69
+#: ../../data/tribes/buildings/productionsites/empire/quarry/init.lua:67
 msgid "quarrying marble"
 msgstr "hakkaa marmoria"
 
-#: ../../data/tribes/buildings/productionsites/empire/quarry/init.lua:82
+#: ../../data/tribes/buildings/productionsites/empire/quarry/init.lua:80
 msgctxt "empire_building"
 msgid ""
 "The stonemason working at this quarry can’t find any rocks in his work area."
@@ -2023,7 +2029,7 @@ msgid "Sheep Farm"
 msgstr "Lammastila"
 
 #. TRANSLATORS: Completed/Skipped/Did not start breeding sheep because ...
-#: ../../data/tribes/buildings/productionsites/empire/sheepfarm/init.lua:52
+#: ../../data/tribes/buildings/productionsites/empire/sheepfarm/init.lua:54
 msgid "breeding sheep"
 msgstr "kasvattaa lampaita"
 
@@ -2047,7 +2053,7 @@ msgstr "Marmoriveistämö"
 
 #. TRANSLATORS: Completed/Skipped/Did not start sculpting a marble column
 #. because ...
-#: ../../data/tribes/buildings/productionsites/empire/stonemasons_house/init.lua:55
+#: ../../data/tribes/buildings/productionsites/empire/stonemasons_house/init.lua:54
 msgid "sculpting a marble column"
 msgstr "veistää marmoripylvään"
 
@@ -2064,7 +2070,7 @@ msgid "Toolsmithy"
 msgstr "Työkaluseppä"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a basket because ...
-#: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:96
+#: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:95
 msgid "making a basket"
 msgstr "tekee koria"
 
@@ -2076,17 +2082,17 @@ msgstr "Viinitarha"
 
 #. TRANSLATORS: Completed/Skipped/Did not start planting grapevines because
 #. ...
-#: ../../data/tribes/buildings/productionsites/empire/vineyard/init.lua:55
+#: ../../data/tribes/buildings/productionsites/empire/vineyard/init.lua:59
 msgid "planting grapevines"
 msgstr "istuttaa viiniköynnöksiä"
 
 #. TRANSLATORS: Completed/Skipped/Did not start harvesting grapevines because
 #. ...
-#: ../../data/tribes/buildings/productionsites/empire/vineyard/init.lua:63
+#: ../../data/tribes/buildings/productionsites/empire/vineyard/init.lua:67
 msgid "harvesting grapes"
 msgstr "korjaa satoa viiniköynnöksistä"
 
-#: ../../data/tribes/buildings/productionsites/empire/vineyard/init.lua:74
+#: ../../data/tribes/buildings/productionsites/empire/vineyard/init.lua:78
 msgctxt "empire_building"
 msgid ""
 "The vine farmer working at this vineyard has no cleared soil to plant his "
@@ -2140,7 +2146,7 @@ msgctxt "empire_building"
 msgid "Well"
 msgstr "Kaivo"
 
-#: ../../data/tribes/buildings/productionsites/empire/well/init.lua:63
+#: ../../data/tribes/buildings/productionsites/empire/well/init.lua:61
 msgctxt "empire_building"
 msgid "The carrier working at this well can’t find any water in his well."
 msgstr "Kantaja työskentelee tällä kaivolla, mutta ei löydä kaivostaan vettä."
@@ -2163,36 +2169,36 @@ msgid "Dungeon"
 msgstr "Tyrmä"
 
 #. TRANSLATORS: Completed/Skipped/Did not start sleeping because ...
-#: ../../data/tribes/buildings/trainingsites/atlanteans/dungeon/init.lua:156
-#: ../../data/tribes/buildings/trainingsites/atlanteans/labyrinth/init.lua:94
-#: ../../data/tribes/buildings/trainingsites/barbarians/battlearena/init.lua:83
-#: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:102
-#: ../../data/tribes/buildings/trainingsites/empire/arena/init.lua:74
-#: ../../data/tribes/buildings/trainingsites/empire/colosseum/init.lua:68
-#: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:96
+#: ../../data/tribes/buildings/trainingsites/atlanteans/dungeon/init.lua:155
+#: ../../data/tribes/buildings/trainingsites/atlanteans/labyrinth/init.lua:92
+#: ../../data/tribes/buildings/trainingsites/barbarians/battlearena/init.lua:81
+#: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:101
+#: ../../data/tribes/buildings/trainingsites/empire/arena/init.lua:72
+#: ../../data/tribes/buildings/trainingsites/empire/colosseum/init.lua:66
+#: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:95
 msgid "sleeping"
 msgstr "tauolla"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/atlanteans/dungeon/init.lua:164
+#: ../../data/tribes/buildings/trainingsites/atlanteans/dungeon/init.lua:163
 msgctxt "atlanteans_building"
 msgid "upgrading soldier attack from level 0 to level 1"
 msgstr "sotilaan hyökkäystaidon korotus tasolta 0 tasolle 1"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/atlanteans/dungeon/init.lua:175
+#: ../../data/tribes/buildings/trainingsites/atlanteans/dungeon/init.lua:174
 msgctxt "atlanteans_building"
 msgid "upgrading soldier attack from level 1 to level 2"
 msgstr "sotilaan hyökkäystaidon korotus tasolta 1 tasolle 2"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/atlanteans/dungeon/init.lua:186
+#: ../../data/tribes/buildings/trainingsites/atlanteans/dungeon/init.lua:185
 msgctxt "atlanteans_building"
 msgid "upgrading soldier attack from level 2 to level 3"
 msgstr "sotilaan hyökkäystaidon korotus tasolta 2 tasolle 3"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/atlanteans/dungeon/init.lua:197
+#: ../../data/tribes/buildings/trainingsites/atlanteans/dungeon/init.lua:196
 msgctxt "atlanteans_building"
 msgid "upgrading soldier attack from level 3 to level 4"
 msgstr "sotilaan hyökkäystaidon korotus tasolta 3 tasolle 4"
@@ -2204,31 +2210,31 @@ msgid "Labyrinth"
 msgstr "Labyrintti"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/atlanteans/labyrinth/init.lua:102
+#: ../../data/tribes/buildings/trainingsites/atlanteans/labyrinth/init.lua:100
 msgctxt "atlanteans_building"
 msgid "upgrading soldier defense from level 0 to level 1"
 msgstr "sotilaan puolustuskyvyn korotus tasolta 0 tasolle 1"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/atlanteans/labyrinth/init.lua:113
+#: ../../data/tribes/buildings/trainingsites/atlanteans/labyrinth/init.lua:111
 msgctxt "atlanteans_building"
 msgid "upgrading soldier defense from level 1 to level 2"
 msgstr "sotilaan puolustuskyvyn korotus tasolta 1 tasolle 2"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/atlanteans/labyrinth/init.lua:124
+#: ../../data/tribes/buildings/trainingsites/atlanteans/labyrinth/init.lua:122
 msgctxt "atlanteans_building"
 msgid "upgrading soldier health from level 0 to level 1"
 msgstr "sotilaan terveyden korotus tasolta 0 tasolle 1"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/atlanteans/labyrinth/init.lua:135
+#: ../../data/tribes/buildings/trainingsites/atlanteans/labyrinth/init.lua:133
 msgctxt "atlanteans_building"
 msgid "upgrading soldier evade from level 0 to level 1"
 msgstr "sotilaan väistelykyvyn korotus tasolta 0 tasolle 1"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/atlanteans/labyrinth/init.lua:146
+#: ../../data/tribes/buildings/trainingsites/atlanteans/labyrinth/init.lua:144
 msgctxt "atlanteans_building"
 msgid "upgrading soldier evade from level 1 to level 2"
 msgstr "sotilaan väistelykyvyn korotus tasolta 1 tasolle 2"
@@ -2240,13 +2246,13 @@ msgid "Battle Arena"
 msgstr "Taisteluareena"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/barbarians/battlearena/init.lua:91
+#: ../../data/tribes/buildings/trainingsites/barbarians/battlearena/init.lua:89
 msgctxt "barbarians_building"
 msgid "upgrading soldier evade from level 0 to level 1"
 msgstr "sotilaan väistelykyvyn korotus tasolta 0 tasolle 1"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/barbarians/battlearena/init.lua:103
+#: ../../data/tribes/buildings/trainingsites/barbarians/battlearena/init.lua:101
 msgctxt "barbarians_building"
 msgid "upgrading soldier evade from level 1 to level 2"
 msgstr "sotilaan väistelykyvyn korotus tasolta 1 tasolle 2"
@@ -2258,49 +2264,49 @@ msgid "Training Camp"
 msgstr "Harjoitusleiri"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:110
+#: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:109
 msgctxt "barbarians_building"
 msgid "upgrading soldier attack from level 0 to level 1"
 msgstr "sotilaan hyökkäystaidon korotus tasolta 0 tasolle 1"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:121
+#: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:120
 msgctxt "barbarians_building"
 msgid "upgrading soldier attack from level 1 to level 2"
 msgstr "sotilaan hyökkäystaidon korotus tasolta 1 tasolle 2"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:132
+#: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:131
 msgctxt "barbarians_building"
 msgid "upgrading soldier attack from level 2 to level 3"
 msgstr "sotilaan hyökkäystaidon korotus tasolta 2 tasolle 3"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:143
+#: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:142
 msgctxt "barbarians_building"
 msgid "upgrading soldier attack from level 3 to level 4"
 msgstr "sotilaan hyökkäystaidon korotus tasolta 3 tasolle 4"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:154
+#: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:153
 msgctxt "barbarians_building"
 msgid "upgrading soldier attack from level 4 to level 5"
 msgstr "sotilaan hyökkäystaidon korotus tasolta 4 tasolle 5"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:165
+#: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:164
 msgctxt "barbarians_building"
 msgid "upgrading soldier health from level 0 to level 1"
 msgstr "sotilaan terveyden korotus tasolta 0 tasolle 1"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:176
+#: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:175
 msgctxt "barbarians_building"
 msgid "upgrading soldier health from level 1 to level 2"
 msgstr "sotilaan terveyden korotus tasolta 1 tasolle 2"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:187
+#: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:186
 msgctxt "barbarians_building"
 msgid "upgrading soldier health from level 2 to level 3"
 msgstr "sotilaan terveyden korotus tasolta 2 tasolle 3"
@@ -2312,8 +2318,8 @@ msgid "Arena"
 msgstr "Areena"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/empire/arena/init.lua:82
-#: ../../data/tribes/buildings/trainingsites/empire/colosseum/init.lua:76
+#: ../../data/tribes/buildings/trainingsites/empire/arena/init.lua:80
+#: ../../data/tribes/buildings/trainingsites/empire/colosseum/init.lua:74
 msgctxt "empire_building"
 msgid "upgrading soldier evade from level 0 to level 1"
 msgstr "sotilaan väistelykyvyn korotus tasolta 0 tasolle 1"
@@ -2325,7 +2331,7 @@ msgid "Colosseum"
 msgstr "Colosseumi"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/empire/colosseum/init.lua:87
+#: ../../data/tribes/buildings/trainingsites/empire/colosseum/init.lua:85
 msgctxt "empire_building"
 msgid "upgrading soldier evade from level 1 to level 2"
 msgstr "sotilaan väistelykyvyn korotus tasolta 1 tasolle 2"
@@ -2337,49 +2343,49 @@ msgid "Training Camp"
 msgstr "Harjoitusleiri"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:104
+#: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:103
 msgctxt "empire_building"
 msgid "upgrading soldier attack from level 0 to level 1"
 msgstr "sotilaan hyökkäystaidon korotus tasolta 0 tasolle 1"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:115
+#: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:114
 msgctxt "empire_building"
 msgid "upgrading soldier attack from level 1 to level 2"
 msgstr "sotilaan hyökkäystaidon korotus tasolta 1 tasolle 2"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:126
+#: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:125
 msgctxt "empire_building"
 msgid "upgrading soldier attack from level 2 to level 3"
 msgstr "sotilaan hyökkäystaidon korotus tasolta 2 tasolle 3"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:137
+#: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:136
 msgctxt "empire_building"
 msgid "upgrading soldier attack from level 3 to level 4"
 msgstr "sotilaan hyökkäystaidon korotus tasolta 3 tasolle 4"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:148
+#: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:147
 msgctxt "empire_building"
 msgid "upgrading soldier health from level 0 to level 1"
 msgstr "sotilaan terveyden korotus tasolta 0 tasolle 1"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:159
+#: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:158
 msgctxt "empire_building"
 msgid "upgrading soldier health from level 1 to level 2"
 msgstr "sotilaan terveyden korotus tasolta 1 tasolle 2"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:170
+#: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:169
 msgctxt "empire_building"
 msgid "upgrading soldier health from level 2 to level 3"
 msgstr "sotilaan terveyden korotus tasolta 2 tasolle 3"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:181
+#: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:180
 msgctxt "empire_building"
 msgid "upgrading soldier health from level 3 to level 4"
 msgstr "sotilaan terveyden korotus tasolta 3 tasolle 4"
@@ -2663,8 +2669,8 @@ msgctxt "immovable"
 msgid "Ship Under Construction"
 msgstr "Telakka-alue"
 
-#: ../../data/tribes/preload.lua:15 ../../data/tribes/preload.lua:31
-#: ../../data/tribes/preload.lua:47
+#: ../../data/tribes/preload.lua:15 ../../data/tribes/preload.lua:32
+#: ../../data/tribes/preload.lua:49
 msgid "The Widelands Development Team"
 msgstr "Widelands-kehittäjät"
 
@@ -2678,20 +2684,20 @@ msgid "The mighty tribes of the east-lands."
 msgstr "Itäisten maiden mahtavat heimot."
 
 #. TRANSLATORS: This is a tribe name
-#: ../../data/tribes/preload.lua:33
+#: ../../data/tribes/preload.lua:34
 msgid "Empire"
 msgstr "Keisarikunta"
 
-#: ../../data/tribes/preload.lua:34
+#: ../../data/tribes/preload.lua:35
 msgid "This is the culture of the Roman Empire."
 msgstr "Tämä on Rooman keisarikunnan kansa ja kulttuuri."
 
 #. TRANSLATORS: This is a tribe name
-#: ../../data/tribes/preload.lua:49
+#: ../../data/tribes/preload.lua:51
 msgid "Atlanteans"
 msgstr "Atlantislaiset"
 
-#: ../../data/tribes/preload.lua:50
+#: ../../data/tribes/preload.lua:52
 msgid ""
 "This tribe is known from the oldest tales. The sons and daughters of "
 "Atlantis."
@@ -2774,6 +2780,20 @@ msgid ""
 "If this player runs low on important wares, they will be replenished for "
 "free"
 msgstr "Jos pelaajalta loppuvat tärkät tarvikkeet, ne korvautuvat itsestään"
+
+#. TRANSLATORS: This is the name of a starting condition
+#: ../../data/tribes/scripting/starting_conditions/atlanteans/village.lua:11
+#: ../../data/tribes/scripting/starting_conditions/barbarians/village.lua:11
+#: ../../data/tribes/scripting/starting_conditions/empire/village.lua:11
+msgid "Village"
+msgstr ""
+
+#. TRANSLATORS: This is the tooltip for the "Village" starting condition
+#: ../../data/tribes/scripting/starting_conditions/atlanteans/village.lua:13
+#: ../../data/tribes/scripting/starting_conditions/barbarians/village.lua:13
+#: ../../data/tribes/scripting/starting_conditions/empire/village.lua:13
+msgid "Start the game with a peaceful village"
+msgstr ""
 
 #. TRANSLATORS: This is the ship's name used in lists of units
 #: ../../data/tribes/ships/atlanteans/init.lua:55
@@ -3293,7 +3313,7 @@ msgid "Wool"
 msgstr "Villa"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../data/tribes/workers/atlanteans/armorsmith/init.lua:19
+#: ../../data/tribes/workers/atlanteans/armorsmith/init.lua:39
 msgctxt "atlanteans_worker"
 msgid "Armorsmith"
 msgstr "Haarniskaseppä"
@@ -3470,7 +3490,7 @@ msgstr "Kutoja"
 #: ../../data/tribes/workers/atlanteans/woodcutter/init.lua:22
 msgctxt "atlanteans_worker"
 msgid "Woodcutter"
-msgstr "Puunhakkaaja"
+msgstr "Metsuri"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/barbarians/baker/init.lua:17

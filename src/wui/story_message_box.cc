@@ -54,7 +54,7 @@ StoryMessageBox::StoryMessageBox(Widelands::Game* game,
 
 	// Adjust map view
 	if (coords != Widelands::Coords::null()) {
-		game_->get_ipl()->scroll_to_field(coords, MapView::Transition::Jump);
+		game_->get_ipl()->map_view()->scroll_to_field(coords, MapView::Transition::Jump);
 	}
 
 	// Add and configure the panels

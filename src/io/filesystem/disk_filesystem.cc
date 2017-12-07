@@ -77,19 +77,6 @@ bool RealFSImpl::is_writable() const {
 	return true;
 }
 
-/// returns true, if the file is writeable
-bool RealFSImpl::file_is_writeable(const std::string& path) {
-	std::string fullname;
-	fullname = canonicalize_name(path);
-
-	// we call fopen with "a" == append to be sure nothing gets overwritten
-	FILE* const f = fopen(fullname.c_str(), "a");
-	if (!f)
-		return false;
-	fclose(f);
-	return true;
-}
-
 std::set<std::string> RealFSImpl::list_directory(const std::string& path) {
 #ifdef _WIN32
 	std::string buf;
@@ -455,7 +442,7 @@ struct RealFSStreamRead : public StreamRead {
 			throw wexception("could not open %s for reading", fname.c_str());
 	}
 
-	~RealFSStreamRead() {
+	~RealFSStreamRead() override {
 		fclose(file_);
 	}
 
@@ -493,7 +480,7 @@ struct RealFSStreamWrite : public StreamWrite {
 			throw wexception("could not open %s for writing", fname.c_str());
 	}
 
-	~RealFSStreamWrite() {
+	~RealFSStreamWrite() override {
 		fclose(file_);
 	}
 

@@ -82,6 +82,9 @@ public:
 	/// Adds this building type to the tribe description.
 	void add_warehouse_type(const LuaTable& table, const EditorGameBase& egbase);
 
+	/// Adds this building type to the tribe description.
+	void add_market_type(const LuaTable& table, const EditorGameBase& egbase);
+
 	/// Adds this immovable type to the tribe description.
 	void add_immovable_type(const LuaTable& table);
 
@@ -103,12 +106,16 @@ public:
 	/// Adds a specific tribe's configuration.
 	void add_tribe(const LuaTable& table, const EditorGameBase& egbase);
 
+	void add_custom_building(const LuaTable& table);
+
 	size_t nrbuildings() const;
 	size_t nrtribes() const;
 	size_t nrwares() const;
 	size_t nrworkers() const;
 
+	bool ware_exists(const std::string& warename) const;
 	bool ware_exists(const DescriptionIndex& index) const;
+	bool worker_exists(const std::string& workername) const;
 	bool worker_exists(const DescriptionIndex& index) const;
 	bool building_exists(const std::string& buildingname) const;
 	bool building_exists(const DescriptionIndex& index) const;
@@ -149,6 +156,8 @@ public:
 	void postload();
 
 private:
+	void postload_calculate_trainingsites_proportions();
+
 	std::unique_ptr<DescriptionMaintainer<BuildingDescr>> buildings_;
 	std::unique_ptr<DescriptionMaintainer<ImmovableDescr>> immovables_;
 	std::unique_ptr<DescriptionMaintainer<ShipDescr>> ships_;

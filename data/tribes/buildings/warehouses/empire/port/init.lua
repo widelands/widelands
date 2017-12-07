@@ -40,7 +40,7 @@ tribes:new_warehouse_type {
    },
 
    aihints = {
-      prohibited_till = 900
+      prohibited_till = 1000
    },
 
    conquers = 5,

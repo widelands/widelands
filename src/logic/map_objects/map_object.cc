@@ -246,6 +246,7 @@ MapObjectDescr::MapObjectDescr(const MapObjectType init_type,
 	if (table.has_key("representative_image")) {
 		representative_image_filename_ = table.get_string("representative_image");
 	}
+	check_representative_image();
 }
 MapObjectDescr::~MapObjectDescr() {
 	anims_.clear();
@@ -299,6 +300,14 @@ const Image* MapObjectDescr::representative_image(const RGBColor* player_color) 
 }
 const std::string& MapObjectDescr::representative_image_filename() const {
 	return representative_image_filename_;
+}
+
+void MapObjectDescr::check_representative_image() {
+	if (representative_image() == nullptr) {
+		throw Widelands::GameDataError(
+		   "The %s %s has no representative image. Does it have an \"idle\" animation?",
+		   to_string(type()).c_str(), name().c_str());
+	}
 }
 
 const Image* MapObjectDescr::icon() const {
@@ -653,6 +662,8 @@ std::string to_string(const MapObjectType type) {
 		return "dismantlesite";
 	case MapObjectType::WAREHOUSE:
 		return "warehouse";
+	case MapObjectType::MARKET:
+		return "market";
 	case MapObjectType::PRODUCTIONSITE:
 		return "productionsite";
 	case MapObjectType::MILITARYSITE:

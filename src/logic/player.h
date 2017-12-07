@@ -155,41 +155,49 @@ public:
 	/// Data that are used and managed by AI. They are here to have it saved as a part of player's
 	/// data
 	struct AiPersistentState {
+		// TODO(tiborb): this should be replaced by command line switch
+		static constexpr size_t kMagicNumbersSize = 150;
+		static constexpr size_t kNeuronPoolSize = 80;
+		static constexpr size_t kFNeuronPoolSize = 60;
+
+		// Seafaring constants for controlling expeditions
+		static constexpr uint32_t kColonyScanStartArea = 35;
+		static constexpr uint32_t kColonyScanMinArea = 12;
+		static constexpr uint32_t kNoExpedition = 0;
+
 		AiPersistentState()
-		   : initialized(0),  // zero here is important, it means "~first time"
+		   : initialized(false),
 		     colony_scan_area(0),
 		     trees_around_cutters(0),
 		     expedition_start_time(0),
 		     ships_utilization(0),
-		     no_more_expeditions(0),
+		     no_more_expeditions(false),
 		     last_attacked_player(0),
 		     least_military_score(0),
 		     target_military_score(0),
 		     ai_productionsites_ratio(0),
 		     ai_personality_mil_upper_limit(0),
-		     magic_numbers_size(0),
-		     neuron_pool_size(0),
-		     f_neuron_pool_size(0),
-		     remaining_buildings_size(0) {
+		     magic_numbers(kMagicNumbersSize, 0),
+		     neuron_weights(kNeuronPoolSize, 0),
+		     neuron_functs(kNeuronPoolSize, 0),
+		     f_neurons(kFNeuronPoolSize, 0) {
 		}
 
+		void initialize();
+
 		// Was initialized
-		uint8_t initialized;
+		bool initialized;
 		uint32_t colony_scan_area;
 		uint32_t trees_around_cutters;
 		uint32_t expedition_start_time;
 		int16_t
 		   ships_utilization;  // 0-10000 to avoid floats, used for decision for building new ships
-		uint8_t no_more_expeditions;
+		bool no_more_expeditions;
 		int16_t last_attacked_player;
 		int32_t least_military_score;
 		int32_t target_military_score;
 		uint32_t ai_productionsites_ratio;
 		int32_t ai_personality_mil_upper_limit;
-		uint32_t magic_numbers_size;
-		uint32_t neuron_pool_size;
-		uint32_t f_neuron_pool_size;
-		uint32_t remaining_buildings_size;
 		std::vector<int16_t> magic_numbers;
 		std::vector<int8_t> neuron_weights;
 		std::vector<int8_t> neuron_functs;
@@ -209,6 +217,7 @@ public:
 		     roads(0),
 		     owner(0),
 		     time_node_last_unseen(0),
+		     map_object_descr(nullptr),
 		     border(0),
 		     border_r(0),
 		     border_br(0),
@@ -220,9 +229,6 @@ public:
 
 			time_triangle_last_surveyed[0] = never();
 			time_triangle_last_surveyed[1] = never();
-
-			//  Initialized for debug purposes only.
-			map_object_descr[0] = map_object_descr[1] = map_object_descr[2] = nullptr;
 		}
 
 		/// Military influence is exerted by buildings with the help of soldiers.
@@ -377,7 +383,7 @@ public:
 		 * Only valid when the player has seen this node (or maybe a nearby node
 		 * if the immovable is big?). (Roads are not stored here.)
 		 */
-		const MapObjectDescr* map_object_descr[3];
+		const MapObjectDescr* map_object_descr;
 
 		/// Information for constructionsite's animation.
 		/// only valid, if there is a constructionsite on this node
@@ -405,9 +411,7 @@ public:
 		//  time_triangle_last_surveyed[0]  0x040  0x20   0x040  0x20
 		//  time_triangle_last_surveyed[1]  0x060  0x20   0x060  0x20
 		//  time_node_last_unseen           0x080  0x20   0x080  0x20
-		//  map_object_descr[0]             0x0a0  0x20   0x0a0  0x40
-		//  map_object_descr[1]             0x0c0  0x20   0x0e0  0x40
-		//  map_object_descr[2]             0x0e0  0x20   0x120  0x40
+		//  map_object_descr                0x0a0  0x20   0x0a0  0x40
 		//  ConstructionsiteInformation
 		//  border
 		//  border_r

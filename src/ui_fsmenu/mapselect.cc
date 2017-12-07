@@ -29,6 +29,7 @@
 #include "graphic/font_handler1.h"
 #include "graphic/graphic.h"
 #include "io/filesystem/layered_filesystem.h"
+#include "logic/filesystem_constants.h"
 #include "logic/game_controller.h"
 #include "logic/game_settings.h"
 #include "map_io/widelands_map_loader.h"
@@ -57,7 +58,8 @@ FullscreenMenuMapSelect::FullscreenMenuMapSelect(GameSettingsProvider* const set
                   tableh_ - buth_ - 4 * padding_,
                   MapDetails::Style::kFsMenu),
 
-     basedir_("maps"),
+     scenario_types_(settings->settings().multiplayer ? Map::MP_SCENARIO : Map::SP_SCENARIO),
+     basedir_(kMapsDir),
      settings_(settings),
      ctrl_(ctrl),
      has_translated_mapname_(false) {
@@ -114,8 +116,6 @@ FullscreenMenuMapSelect::FullscreenMenuMapSelect(GameSettingsProvider* const set
 	add_tag_checkbox(hbox, "3teams", localize_tag("3teams"));
 	add_tag_checkbox(hbox, "4teams", localize_tag("4teams"));
 	checkboxes_.add(hbox, UI::Box::Resizing::kFullSize);
-
-	scenario_types_ = settings_->settings().multiplayer ? Map::MP_SCENARIO : Map::SP_SCENARIO;
 
 	table_.focus();
 	fill_table();

@@ -435,7 +435,7 @@ static int pushargs (lua_State *L) {
 static int handle_script (lua_State *L, char **argv) {
   int status;
   const char *fname = argv[0];
-  if (strcmp(fname, "-") == 0 && strcmp(argv[-1], "--") != 0)
+  if (strcmp(fname, "-") == 0 && strcmp(argv[-1], "--") != 0) // NOLINT
     fname = NULL;  /* stdin */
   status = luaL_loadfile(L, fname);
   if (status == LUA_OK) {

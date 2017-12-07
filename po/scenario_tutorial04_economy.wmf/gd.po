@@ -1,8 +1,8 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2016 Widelands Development Team
+# Copyright (C) 2005-2017 Widelands Development Team
 # 
 # Translators:
-# GunChleoc, 2015-2016
+# GunChleoc, 2015-2017
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2013
 # GunChleoc, 2015
 # GunChleoc, 2013-2015
@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-12-04 07:02+0000\n"
-"PO-Revision-Date: 2016-12-07 19:13+0000\n"
+"POT-Creation-Date: 2017-11-18 10:17+0000\n"
+"PO-Revision-Date: 2017-11-18 13:33+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Gaelic, Scottish (http://www.transifex.com/widelands/widelands/language/gd/)\n"
 "MIME-Version: 1.0\n"
@@ -481,7 +481,7 @@ msgstr "Stadastaireachd nam bathar"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:253
 msgid "In the statistics menu, there is also a"
-msgstr "An an clàr-taice na stadastaireachd, tha"
+msgstr "Ann an clàr-taice na stadastaireachd, tha"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:254
 msgid "‘Ware statistics’ button."
@@ -843,7 +843,7 @@ msgstr "Seo an t-oideachadh mu dheireadh a dh’ullaich mi air do shon. Tha mi a
 msgid "“%s”"
 msgstr "“%s”"
 
-#: ../../data/scripting/format_scenario.lua:96
+#: ../../data/scripting/format_scenario.lua:84
 msgid "New Objective"
 msgid_plural "New Objectives"
 msgstr[0] "Amas ùr"

@@ -395,9 +395,9 @@ enum {
     * \li unsigned_8: new shared player
     *
     * \note The client must not assume that the host will accept this
-    * request. Change of team number only becomes effective when/if the host
+    * request. Change of the initialization only becomes effective when/if the host
     * replies with a \ref NETCMD_SETTING_PLAYER or
-    *  \ref NETCMD_SETTING_ALLPLAYERS indicating the changed team.
+    *  \ref NETCMD_SETTING_ALLPLAYERS indicating the changed initialization.
     */
 	NETCMD_SETTING_CHANGESHARED = 27,
 
@@ -406,6 +406,7 @@ enum {
     * client wants to change a player's initialisation.
     *
     * \li unsigned_8: number of the player
+    * \li unsigned_8: index of the initialization
     *
     * \note The client must not assume that the host will accept this
     * request. Change of team number only becomes effective when/if the host

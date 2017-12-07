@@ -175,7 +175,7 @@ def load_hunspell_locales(locale):
     hunspell_locales['ro'].append(HunspellLocale('ro_RO'))
     hunspell_locales['ru'].append(HunspellLocale('ru_RU'))
     hunspell_locales['rw'].append(HunspellLocale('rw_RW'))
-    hunspell_locales['si'].append(HunspellLocale('si_LK'))
+    hunspell_locales['si'].append(HunspellLocale('si'))
     hunspell_locales['sk'].append(HunspellLocale('sk_SK'))
     hunspell_locales['sl'].append(HunspellLocale('sl_SI'))
     hunspell_locales['sr'].append(HunspellLocale('sr_RS'))

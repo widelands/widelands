@@ -41,7 +41,7 @@ struct GameClient : public GameController, public GameSettingsProvider, public C
 	           const std::string& playername,
 	           bool internet = false);
 
-	virtual ~GameClient();
+	~GameClient() override;
 
 	void run();
 
@@ -84,13 +84,13 @@ struct GameClient : public GameController, public GameSettingsProvider, public C
 	virtual void set_player_tribe(uint8_t number,
 	                              const std::string& tribe,
 	                              bool const random_tribe = false) override;
-	void set_player_init(uint8_t number, uint8_t index) override;
+	void set_player_init(uint8_t number, uint8_t initialization_index) override;
 	void set_player_name(uint8_t number, const std::string& name) override;
 	void set_player(uint8_t number, const PlayerSettings& ps) override;
 	void set_player_number(uint8_t number) override;
 	void set_player_team(uint8_t number, Widelands::TeamNumber team) override;
 	void set_player_closeable(uint8_t number, bool closeable) override;
-	void set_player_shared(uint8_t number, uint8_t shared) override;
+	void set_player_shared(PlayerSlot number, Widelands::PlayerNumber shared) override;
 	void set_win_condition_script(const std::string&) override;
 	std::string get_win_condition_script() override;
 

@@ -163,7 +163,7 @@ class ProductionSite : public Building {
 
 public:
 	explicit ProductionSite(const ProductionSiteDescr& descr);
-	virtual ~ProductionSite();
+	~ProductionSite() override;
 
 	void log_general_info(const EditorGameBase&) override;
 
@@ -374,6 +374,7 @@ struct NoteProductionSiteOutOfResources {
 	   : ps(init_ps), player(init_player) {
 	}
 };
-}
+
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_LOGIC_MAP_OBJECTS_TRIBES_PRODUCTIONSITE_H
