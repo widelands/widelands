@@ -40,7 +40,7 @@ namespace {
 
 constexpr int kPadding = 5;
 constexpr int kTabHeight = 35;
-
+// TODO(GunChleoc): Remove when all help is converted to new font renderer
 const std::string heading(const std::string& text) {
 	return ((boost::format("<rt><p font-size=18 font-weight=bold font-color=D1D1D1>"
 	                       "%s<br></p><p font-size=8> <br></p></rt>") %
@@ -173,9 +173,19 @@ void EncyclopediaWindow::entry_selected(const std::string& tab_name) {
 			cr->resume();
 			table = cr->pop_table();
 		}
-		contents_.at(tab_name)->set_text(
-		   (boost::format("%s%s") % heading(table->get_string("title")) % table->get_string("text"))
-		      .str());
+
+		// TODO(GunChleoc): Remove this when all in-game help has been converted.
+		try {
+			contents_.at(tab_name)->force_new_renderer();
+			contents_.at(tab_name)->set_text(as_message(table->get_string("title"), table->get_string("text")));
+		} catch (const std::exception& e) {
+			log("Encyclopedia: falling back to OLD font renderer: %s\n", e.what());
+			contents_.at(tab_name)->force_new_renderer(false);
+			contents_.at(tab_name)->set_text(
+			   (boost::format("%s%s") % heading(table->get_string("title")) % table->get_string("text"))
+			      .str());
+		}
+
 	} catch (LuaError& err) {
 		contents_.at(tab_name)->set_text(err.what());
 	}

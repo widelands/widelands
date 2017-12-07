@@ -2,7 +2,7 @@
 -- e.g. for the readme and general in-game help
 -- This cuts down on string maintenance.
 
-include "scripting/formatting.lua"
+include "scripting/richtext.lua"
 
 function help_online_help()
    set_textdomain("texts")
