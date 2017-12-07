@@ -1952,8 +1952,9 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 
 	const Map& map = game().map();
 
-	if (gametime > last_seafaring_check_ + 5000U) {
+	if (gametime > last_seafaring_check_ + 20000U) {
 		seafaring_economy = map.allows_seafaring();
+		last_seafaring_check_ = gametime;
 	}
 
 	for (int32_t i = 0; i < 4; ++i)
