@@ -197,23 +197,6 @@ struct Reference {
 	std::string ref;
 };
 
-class RefMap : public IRefMap {
-public:
-	explicit RefMap(const std::vector<Reference>& refs) : refs_(refs) {
-	}
-	std::string query(int16_t x, int16_t y) override {
-		// Should this linear algorithm proof to be too slow (doubtful), the
-		// RefMap could also be efficiently implemented using an R-Tree
-		for (const Reference& c : refs_)
-			if (c.dim.contains(Vector2i(x, y)))
-				return c.ref;
-		return "";
-	}
-
-private:
-	std::vector<Reference> refs_;
-};
-
 class RenderNode {
 public:
 	enum Floating {
@@ -320,7 +303,7 @@ public:
 	uint16_t height() {
 		return h_;
 	}
-	uint16_t fit_nodes(std::vector<std::shared_ptr<RenderNode>>& rv, uint16_t w, Borders p, bool shrink_to_fit);
+	uint16_t fit_nodes(std::vector<std::shared_ptr<RenderNode>>* rv, uint16_t w, Borders p, bool shrink_to_fit);
 
 private:
 	// Represents a change in the rendering constraints. For example when an
@@ -375,7 +358,6 @@ Layout::fit_line(uint16_t w, const Borders& p, std::vector<std::shared_ptr<Rende
 	// Remove trailing spaces
 	while (!rv->empty() && rv->back()->is_non_mandatory_space() && shrink_to_fit) {
 		x -= rv->back()->width();
-		rv->back().reset();
 		rv->pop_back();
 	}
 
@@ -403,8 +385,8 @@ Layout::fit_line(uint16_t w, const Borders& p, std::vector<std::shared_ptr<Rende
 		}
 	} else {
 		// Take last elements style in this line and check horizontal alignment
-		if (!rv->empty() && (*rv->rbegin())->halign() != UI::Align::kLeft) {
-			if ((*rv->rbegin())->halign() == UI::Align::kCenter) {
+		if (!rv->empty() && rv->back()->halign() != UI::Align::kLeft) {
+			if (rv->back()->halign() == UI::Align::kCenter) {
 				remaining_space /= 2;  // Otherwise, we align right
 			}
 			for (std::shared_ptr<RenderNode> node : *rv) {
@@ -425,8 +407,8 @@ Layout::fit_line(uint16_t w, const Borders& p, std::vector<std::shared_ptr<Rende
  * Take ownership of all nodes, delete those that we do not render anyways (for
  * example unneeded spaces), append the rest to the vector we got.
  */
-uint16_t Layout::fit_nodes(std::vector<std::shared_ptr<RenderNode>>& rv, uint16_t w, Borders p, bool shrink_to_fit) {
-	assert(rv.empty());
+uint16_t Layout::fit_nodes(std::vector<std::shared_ptr<RenderNode>>* rv, uint16_t w, Borders p, bool shrink_to_fit) {
+	assert(rv->empty());
 	h_ = p.top;
 
 	uint16_t max_line_width = 0;
@@ -461,7 +443,7 @@ uint16_t Layout::fit_nodes(std::vector<std::shared_ptr<RenderNode>>& rv, uint16_
 			// So, we fix the sign.
 			n->set_y(std::abs(n->y() - space));
 		}
-		rv.insert(rv.end(), nodes_in_line.begin(), nodes_in_line.end());
+		rv->insert(rv->end(), nodes_in_line.begin(), nodes_in_line.end());
 
 		h_ += line_height;
 		while (!constraint_changes_.empty() && constraint_changes_.top().at_y <= h_) {
@@ -487,7 +469,7 @@ uint16_t Layout::fit_nodes(std::vector<std::shared_ptr<RenderNode>>& rv, uint16_
 				max_line_width = std::max(max_line_width, w);
 			}
 			constraint_changes_.push(cc);
-			rv.push_back(n);
+			rv->push_back(n);
 			++idx_;
 		}
 		if (idx_ == idx_before_iteration_) {
@@ -1207,7 +1189,7 @@ public:
 				scale = static_cast<double>(width) / image_width;
 			}
 		}
-		render_node_ = std::shared_ptr<ImgRenderNode>(new ImgRenderNode(nodestyle_, image_filename, scale, color, use_playercolor));
+		render_node_.reset(new ImgRenderNode(nodestyle_, image_filename, scale, color, use_playercolor));
 	}
 	void emit_nodes(std::vector<std::shared_ptr<RenderNode>>& nodes) override {
 		nodes.push_back(render_node_);
@@ -1278,17 +1260,17 @@ public:
 		if (!fill_text_.empty()) {
 			std::shared_ptr<FillingTextNode> node;
 			if (space_ < INFINITE_WIDTH) {
-				node = std::shared_ptr<FillingTextNode>(new FillingTextNode(font_cache_, nodestyle_, space_, fill_text_));
+				node.reset(new FillingTextNode(font_cache_, nodestyle_, space_, fill_text_));
 			} else {
-				node = std::shared_ptr<FillingTextNode>(new FillingTextNode(font_cache_, nodestyle_, 0, fill_text_, true));
+				node.reset(new FillingTextNode(font_cache_, nodestyle_, 0, fill_text_, true));
 			}
 			nodes.push_back(node);
 		} else {
 			std::shared_ptr<SpaceNode> node;
 			if (space_ < INFINITE_WIDTH) {
-				node = std::shared_ptr<SpaceNode>(new SpaceNode(nodestyle_, space_, 0));
+				node.reset(new SpaceNode(nodestyle_, space_, 0));
 			} else {
-				node = std::shared_ptr<SpaceNode>(new SpaceNode(nodestyle_, 0, 0, true));
+				node.reset(new SpaceNode(nodestyle_, 0, 0, true));
 			}
 			if (background_image_) {
 				node->set_background(background_image_, image_filename_);
@@ -1333,7 +1315,7 @@ public:
 	   : TagHandler(tag, fc, ns, image_cache, init_renderer_style, fontsets),
 	     shrink_to_fit_(shrink_to_fit),
 	     w_(max_w),
-	     render_node_(std::shared_ptr<DivTagRenderNode>(new DivTagRenderNode(ns))) {
+	     render_node_(new DivTagRenderNode(ns)) {
 	}
 
 	void enter() override {
@@ -1394,7 +1376,7 @@ public:
 		Layout layout(subnodes);
 		std::vector<std::shared_ptr<RenderNode>> nodes_to_render;
 
-		uint16_t max_line_width = layout.fit_nodes(nodes_to_render, w_, padding, shrink_to_fit_);
+		uint16_t max_line_width = layout.fit_nodes(&nodes_to_render, w_, padding, shrink_to_fit_);
 		uint16_t extra_width = 0;
 		if (w_ < INFINITE_WIDTH && w_ > max_line_width) {
 			extra_width = w_ - max_line_width;
@@ -1606,11 +1588,5 @@ std::shared_ptr<const UI::RenderedText>
 Renderer::render(const std::string& text, uint16_t width, const TagSet& allowed_tags) {
 	std::shared_ptr<RenderNode> node(layout(text, width, allowed_tags));
 	return std::shared_ptr<const UI::RenderedText>(node->render(texture_cache_));
-}
-
-IRefMap*
-Renderer::make_reference_map(const std::string& text, uint16_t width, const TagSet& allowed_tags) {
-	std::shared_ptr<RenderNode> node(layout(text, width, allowed_tags));
-	return new RefMap(node->get_references());
 }
 }
