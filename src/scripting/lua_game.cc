@@ -441,7 +441,7 @@ int LuaPlayer::message_box(lua_State* L) {
 		CHECK_UINT(w);
 		CHECK_UINT(h);
 
-		// If a field has been defined, read the coordinated to jump to.
+		// If a field has been defined, read the coordinates to jump to.
 		lua_getfield(L, 4, "field");
 		if (!lua_isnil(L, -1)) {
 			coords = (*get_user_class<LuaField>(L, -1))->coords();
