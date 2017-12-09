@@ -43,7 +43,7 @@ StoryMessageBox::StoryMessageBox(Widelands::Game* game,
    : UI::Window(game->get_ipl(), "story_message_box", x, y, w, h, title.c_str()),
 	  main_box_(this, kPadding, kPadding, UI::Box::Vertical, 0, 0, kPadding),
 	  button_box_(&main_box_, kPadding, kPadding, UI::Box::Horizontal, 0, 0, kPadding),
-	  textarea_(&main_box_, 0, 0, 0, 0, ""),
+	  textarea_(&main_box_, 0, 0, 100, 100, ""),
 	  ok_(&button_box_, "ok", 0, 0, 120, 0, g_gr->images().get("images/ui_basic/but5.png"), _("OK")),
 	  desired_speed_(game->game_controller()->desired_speed()),
 	  game_(game) {
@@ -70,6 +70,8 @@ StoryMessageBox::StoryMessageBox(Widelands::Game* game,
 
 
 	// Add and configure the panels
+	main_box_.set_size(get_inner_w() - 3 * kPadding, get_inner_h() - 2 * kPadding);
+
 	main_box_.add(&textarea_, UI::Box::Resizing::kExpandBoth);
 	main_box_.add(&button_box_, UI::Box::Resizing::kFullSize);
 	button_box_.add_inf_space();
@@ -77,8 +79,6 @@ StoryMessageBox::StoryMessageBox(Widelands::Game* game,
 	button_box_.add_inf_space();
 
 	ok_.sigclicked.connect(boost::bind(&StoryMessageBox::clicked_ok, boost::ref(*this)));
-
-	main_box_.set_size(get_inner_w() - 3 * kPadding, get_inner_h() - 2 * kPadding);
 
 	if (x == -1 && y == -1) {
 		center_to_parent();
