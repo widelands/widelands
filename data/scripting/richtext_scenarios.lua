@@ -43,7 +43,7 @@ end
 --    Closes a paragraph and opens a new paragraph. Use this when you format a string with the speech function
 --    and need to divide the speech into multiple paragraphs.
 --
---    :returns: <br></p><p font-size=8><br></p><p line-spacing=3 font-size=12>
+--    :returns: close_p() .. open_p()
 function paragraphdivider()
    return close_p() .. open_p()
 end
