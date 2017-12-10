@@ -66,7 +66,7 @@ TribeDescr::TribeDescr(const LuaTable& table, const TribeBasicInfo& info, const 
 		flag_animation_id_ = g_gr->animations().load(*items_table->get_table("flag"));
 
 		items_table = table.get_table("roads");
-		const auto load_roads = [&items_table, this](
+		const auto load_roads = [&items_table](
 		   const std::string& road_type, std::vector<std::string>* images) {
 			std::vector<std::string> roads =
 			   items_table->get_table(road_type)->array_entries<std::string>();

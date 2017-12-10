@@ -40,7 +40,7 @@ public:
 	 */
 	static std::unique_ptr<NetClient> connect(const NetAddress& host);
 
-	~NetClient();
+	~NetClient() override;
 
 	/**
 	 * Returns the ip and port of the remote host we are connected to.

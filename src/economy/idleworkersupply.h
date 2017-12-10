@@ -28,7 +28,7 @@ class Economy;
 
 struct IdleWorkerSupply : public Supply {
 	explicit IdleWorkerSupply(Worker&);
-	~IdleWorkerSupply();
+	~IdleWorkerSupply() override;
 
 	void set_economy(Economy*);
 	PlayerImmovable* get_position(Game&) override;

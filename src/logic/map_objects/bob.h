@@ -351,7 +351,7 @@ public:
 
 protected:
 	explicit Bob(const BobDescr& descr);
-	virtual ~Bob();
+	~Bob() override;
 
 private:
 	void do_act(Game&);

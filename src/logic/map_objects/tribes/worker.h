@@ -72,7 +72,7 @@ class Worker : public Bob {
 
 public:
 	explicit Worker(const WorkerDescr&);
-	virtual ~Worker();
+	~Worker() override;
 
 	Player& owner() const {
 		assert(get_owner());
