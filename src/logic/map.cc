@@ -1981,8 +1981,16 @@ bool Map::allows_seafaring() const {
 
 		// Pick up all positions that can be reached from the current port
 		while (!positions_to_check.empty()) {
-			const Coords& current_position = positions_to_check.front();
+			// Take a copy, because we'll pop it
+			const Coords current_position = positions_to_check.front();
 			positions_to_check.pop();
+
+			// Found one
+			if (reachable_from_previous_port.count(current_position) > 0) {
+				return true;
+			}
+
+			// Adding the neighbors to the list
 			for (uint8_t i = 1; i <= 6; ++i) {
 				FCoords neighbour;
 				get_neighbour(get_fcoords(current_position), i, &neighbour);
@@ -1995,14 +2003,9 @@ bool Map::allows_seafaring() const {
 			}
 		}
 
+		// Couldn't connect to another port, so we add our reachable nodes to the list
 		for (const Coords& reachable_coord : reachable_from_current_port) {
-			// This one is new, so we add it for the next port space to check back
-			if (reachable_from_previous_port.count(reachable_coord) == 0) {
-				reachable_from_previous_port.insert(reachable_coord);
-			} else {
-				// Can also be reached from a different port, so we have a path between 2 port spaces
-				return true;
-			}
+			reachable_from_previous_port.insert(reachable_coord);
 		}
 	}
 	return false;
