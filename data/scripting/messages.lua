@@ -33,6 +33,28 @@ function send_message(player, title, body, parameters)
    player:send_message(title, body, parameters)
 end
 
+
+-- RST
+-- .. function:: send_to_all(text[, heading])
+--
+--    Sends a game status message to all players.
+--
+--    :arg text: the localized body of the message. You can use rt functions here.
+--    :type text: :class:`string`
+--    :arg heading: the localized title of the message (optional)
+--    :type heading: :class:`string`
+--
+function send_to_all(text, heading)
+   for idx,plr in ipairs(game.players) do
+      if (heading ~= nil and heading ~= "") then
+         send_message(plr, _"Status", text, {popup=true, heading=heading})
+      else
+         send_message(plr, _"Status", text, {popup=true})
+      end
+   end
+end
+
+
 -- RST
 -- .. function:: message_box(player, title, message, parameters)
 --
