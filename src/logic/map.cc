@@ -1960,38 +1960,50 @@ void Map::check_neighbour_heights(FCoords coords, uint32_t& area) {
 }
 
 bool Map::allows_seafaring() const {
-	std::set<Coords> swim_coords;
+
+	// There need to be at least 2 port spaces for seafaring to make sense
+	if (get_port_spaces().size() < 2) {
+		return false;
+	}
+
+	std::set<Coords> reachable_from_previous_port;
 
 	for (const Coords& c : get_port_spaces()) {
 		std::queue<Coords> positions_to_check;
-		std::set<Coords> visited_positions;
+		std::set<Coords> reachable_from_current_port;
 		FCoords fc = get_fcoords(c);
 
+		// Get portdock slots for this port
 		for (const Coords& portdock : find_portdock(fc)) {
-			visited_positions.insert(portdock);
+			reachable_from_current_port.insert(portdock);
 			positions_to_check.push(portdock);
 		}
 
+		// Pick up all positions that can be reached from the current port
 		while (!positions_to_check.empty()) {
-			const Coords& swim_coord = positions_to_check.front();
+			const Coords& current_position = positions_to_check.front();
 			positions_to_check.pop();
 			for (uint8_t i = 1; i <= 6; ++i) {
 				FCoords neighbour;
-				get_neighbour(get_fcoords(swim_coord), i, &neighbour);
+				get_neighbour(get_fcoords(current_position), i, &neighbour);
 				if ((neighbour.field->get_caps() & (MOVECAPS_SWIM | MOVECAPS_WALK)) == MOVECAPS_SWIM) {
-					if (visited_positions.count(neighbour) == 0) {
-						visited_positions.insert(neighbour);
+					if (reachable_from_current_port.count(neighbour) == 0) {
+						reachable_from_current_port.insert(neighbour);
 						positions_to_check.push(neighbour);
 					}
 				}
 			}
 		}
 
-		for (const Coords& swim_coord : visited_positions)
-			if (swim_coords.count(swim_coord) == 0)
-				swim_coords.insert(swim_coord);
-			else
+		for (const Coords& reachable_coord : reachable_from_current_port) {
+			// This one is new, so we add it for the next port space to check back
+			if (reachable_from_previous_port.count(reachable_coord) == 0) {
+				reachable_from_previous_port.insert(reachable_coord);
+			} else {
+				// Can also be reached from a different port, so we have a path between 2 port spaces
 				return true;
+			}
+		}
 	}
 	return false;
 }
