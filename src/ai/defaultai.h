@@ -386,7 +386,8 @@ private:
 	// seafaring related
 	enum { kReprioritize, kStopShipyard, kStapShipyard };
 	static uint32_t last_seafaring_check_;
-	bool seafaring_economy;  // false by default, until first port space is found
+	// False by default, until Map::allows_seafaring() is true, or an AI gains a ship
+	static bool map_allows_seafaring_;
 	uint32_t expedition_ship_;
 	uint32_t expedition_max_duration;
 	std::vector<int16_t> marine_task_queue;
