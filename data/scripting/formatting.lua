@@ -1,7 +1,6 @@
 -- TODO(GunChleoc): This is for the legacy font renderer. Remove when we remove the old renderer.
 
 
--- RST
 -- formatting.lua
 -- --------------
 --
@@ -10,7 +9,6 @@
 -- widelands rich text formatting system more bearable.
 
 
--- RST
 -- .. function:: localize_list(items, listtype, former_textdomain)
 --
 --    Turns an array of string items into a localized string list with
@@ -51,7 +49,6 @@ function localize_list(items, listtype, former_textdomain)
 end
 
 
--- RST
 -- .. function:: rt(text_or_options[, text = nil])
 --
 --    Wraps a block of text into Lua rich text: <rt>%s</rt>.
@@ -75,7 +72,6 @@ function rt(text_or_opts, text)
 end
 
 
--- RST
 -- .. function:: title(s)
 --
 --    Returns a paragraph formatted as a center-aligned green title heading with a small gap after it.
@@ -85,7 +81,7 @@ function title(s)
    return "<rt text-align=center><p font-size=28 font-decoration=bold font-face=serif font-color=2F9131>" .. s .. "</p></rt>"
 end
 
--- RST
+
 -- .. function:: h1(s)
 --
 --    Returns a paragraph formatted as a big heading with a small gap after it.
@@ -97,7 +93,7 @@ function h1(s)
       ..  s .. "<br></p><p font-size=8> <br></p>"
 end
 
--- RST
+
 -- .. function:: h2(s)
 --
 --    Like :func:`h1` but smaller.
@@ -108,7 +104,7 @@ function h2(s)
       ..  s .. "<br></p><p font-size=4> <br></p>"
 end
 
--- RST
+
 -- .. function:: h3(s)
 --
 --    Like :func:`h2` but smaller.
@@ -120,7 +116,7 @@ function h3(s)
       ..  s .. "<br></p><p font-size=4> <br></p>"
 end
 
--- RST
+
 -- .. function:: h4(s)
 --
 --    Like :func:`h3` but smaller.
@@ -132,7 +128,7 @@ function h4(s)
       ..  s .. "<br></p><p font-size=4> <br></p>"
 end
 
--- RST
+
 -- .. function:: p(text_or_options[, text = nil])
 --
 --    Returns one paragraph with text followed by a small vertical gap. Options
@@ -152,7 +148,7 @@ function p(text_or_opts, text)
       "<p font-size=8> <br></p>"
 end
 
--- RST
+
 -- .. function:: a(text)
 --
 --    Underlines the text to show links. Only words with default paragraph text style.
@@ -162,7 +158,7 @@ function a(text)
    return "</p><p font-size=12 font-decoration=underline>" .. text .. "</p><p font-size=12>"
 end
 
--- RST
+
 -- .. function:: b(text)
 --
 --    Makes the text bold. Only words with default paragraph text style.
@@ -172,7 +168,7 @@ function b(text)
    return "</p><p font-size=12 font-weight=bold>" .. text .. "</p><p font-size=12>"
 end
 
--- RST
+
 -- .. function:: i(text)
 --
 --    Makes the text italic. Only words with default paragraph text style.
@@ -182,7 +178,7 @@ function i(text)
    return "</p><p font-size=12 font-style=italic>" .. text .. "</p><p font-size=12>"
 end
 
--- RST
+
 -- .. function:: listdivider()
 --
 --    Closes a paragraph and opens a new paragraph.
@@ -195,7 +191,7 @@ function listdivider()
 end
 
 
--- RST
+
 -- .. function:: listitem(symbol, text)
 --
 --    Adds the symbol in front of the text to create a list item and adds a paragraphdivider
@@ -208,7 +204,7 @@ function listitem(symbol, text)
    return symbol .. " " .. text .. listdivider()
 end
 
--- RST
+
 -- .. function:: listitem_bullet(text)
 --
 --    Creates a list item with an arrow
@@ -220,7 +216,7 @@ function listitem_arrow(text)
    return listitem("→", text)
 end
 
--- RST
+
 -- .. function:: listitem_bullet(text)
 --
 --    Creates a list item with a bullet point
@@ -232,7 +228,7 @@ function listitem_bullet(text)
    return listitem("•", text)
 end
 
--- RST
+
 -- .. function:: dl(dt, dd)
 --
 --    Creates a description list item
@@ -245,7 +241,7 @@ function dl(dt, dd)
    return b(dt) .. " " .. dd .. "<br>"
 end
 
--- RST
+
 -- .. function:: text_line(t1, t2[, imgstr = nil])
 --
 --    Creates a line of h3 formatted text followed by normal text and an image.
@@ -268,7 +264,7 @@ function text_line(t1, t2, imgstr)
    end
 end
 
--- RST
+
 -- .. function:: paragraphdivider()
 --
 --    Closes a paragraph and opens a new paragraph. Use this when you format a string with the speech function

@@ -1,4 +1,3 @@
--- RST
 -- format_scenario.lua
 -- -------------------
 --
@@ -7,7 +6,7 @@
 -- text formatting system more bearable.
 
 
--- RST
+
 -- .. function:: speech(img, clr, title, text)
 --
 --    Formats a text as spoken by one person in a scenario. Use it as follows:
@@ -47,7 +46,7 @@ function speech(img, clr, g_title, g_text)
 end
 
 
--- RST
+
 -- .. function:: objective_text(heading, body)
 --
 --    Provides nice formatting for objective texts.
@@ -60,7 +59,7 @@ function objective_text(heading, body)
 end
 
 
--- RST
+
 -- Append an objective text with a header to a dialog box in a nice fashion.
 -- For displaying objectives with an extra title when an advisor is talking
 --

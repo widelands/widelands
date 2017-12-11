@@ -171,11 +171,71 @@ void Tag::parse(TextStream& ts, TagConstraints& tcs, const TagSet& allowed_tags)
 	}
 }
 
+/* RST
+.. _rt_tags:
+
+The Richtext Tags
+=================
+
+- :ref:`rt_tags_br`
+- :ref:`rt_tags_div`
+- :ref:`rt_tags_font`
+- :ref:`rt_tags_img`
+- :ref:`rt_tags_p`
+- :ref:`rt_tags_rt`
+- :ref:`rt_tags_space`
+- :ref:`rt_tags_vspace`
+
+*/
+
 /*
  * Class Parser
  */
 Parser::Parser() {
-	{  // rt tag
+	{
+		/* RST
+.. _rt_tags_rt:
+
+Rich Text -- <rt>
+-----------------
+
+The main wrapper that will signal to the font renderer to go into richtext mode.
+This tag surrounds your whole text, and is allowed only once.
+You can also set some options here what will affect your whole text.
+
+Attributes
+^^^^^^^^^^
+
+Padding
+"""""""
+
+* **padding**: The rectangle of this tag is shrunk so leave a gap on its outside, on all four outer edges.
+* **padding_r**: Padding on the right-hand side
+* **padding_l**: Padding on the left-hand side
+* **padding_b**: Padding on the bottom
+* **padding_t**: Padding on the top
+
+Background color
+""""""""""""""""
+
+* **background**: Give this tag's rectangle a background color as a hex value.
+
+Global Formatting Controls
+""""""""""""""""""""""""""
+
+* **keep_spaces**: Do now trim away trailing and double spaces. Use this where the user is editing text.
+* **db_show_spaces**: Highlight all blank spaces for debugging purposes.
+
+Subtags
+^^^^^^^
+
+* :ref:`rt_tags_div`
+* :ref:`rt_tags_font`
+* :ref:`rt_tags_p`
+* :ref:`rt_tags_vspace`
+
+:ref:`Return to tag index<rt_tags>`
+		*/
 		TagConstraint tc;
 		tc.allowed_attrs.insert("padding");
 		tc.allowed_attrs.insert("padding_r");
@@ -194,13 +254,57 @@ Parser::Parser() {
 		tc.has_closing_tag = true;
 		tag_constraints_["rt"] = tc;
 	}
-	{  // br tag
+	{
+		/* RST
+.. _rt_tags_br:
+
+Line Break -- <br>
+------------------
+
+A single line break. Use sparingly for things like poetry stanzas.
+If you are starting a new paragraph, use :ref:`rt_tags_p` instead.
+
+Attributes
+^^^^^^^^^^
+
+None
+
+Subtags
+^^^^^^^
+
+None
+
+:ref:`Return to tag index<rt_tags>`
+		*/
 		TagConstraint tc;
 		tc.text_allowed = false;
 		tc.has_closing_tag = false;
 		tag_constraints_["br"] = tc;
 	}
-	{  // img tag
+	{
+		/* RST
+.. _rt_tags_img:
+
+Image -- <img>
+--------------
+
+Displays an image with your text.
+
+Attributes
+^^^^^^^^^^
+
+* **src**: The path to the image, relative to the ``data`` directory.
+* **ref**: To be implemented
+* **color**: Playercolor for the image as a hex value
+* **width**: Width of the image as a pixel amount. The corresponding height will be matched automatically.
+
+Subtags
+^^^^^^^
+
+None
+
+:ref:`Return to tag index<rt_tags>`
+		*/
 		TagConstraint tc;
 		tc.allowed_attrs.insert("src");
 		tc.allowed_attrs.insert("ref");
@@ -210,14 +314,56 @@ Parser::Parser() {
 		tc.has_closing_tag = false;
 		tag_constraints_["img"] = tc;
 	}
-	{  // vspace tag
+	{
+		/* RST
+.. _rt_tags_vspace:
+
+Vertical Space -- <vspace>
+--------------------------
+
+Inserts a vertical gap between the previous and the following text.
+
+Attributes
+^^^^^^^^^^
+
+* **gap**: The size of the gap as a pixel amount
+
+Subtags
+^^^^^^^
+
+None
+
+:ref:`Return to tag index<rt_tags>`
+		*/
 		TagConstraint tc;
 		tc.allowed_attrs.insert("gap");
 		tc.text_allowed = false;
 		tc.has_closing_tag = false;
 		tag_constraints_["vspace"] = tc;
 	}
-	{  // space tag
+	{
+		/* RST
+.. _rt_tags_space:
+
+Horizontal Space -- <space>
+---------------------------
+
+Inserts a horizontal gap between the previous and the following text.
+This space can be filled with a character of your choice.
+
+Attributes
+^^^^^^^^^^
+
+* **gap**: The size of the gap as a pixel amount
+* **fill**: A character to fill the gap with
+
+Subtags
+^^^^^^^
+
+None
+
+:ref:`Return to tag index<rt_tags>`
+		*/
 		TagConstraint tc;
 		tc.allowed_attrs.insert("gap");
 		tc.allowed_attrs.insert("fill");
@@ -225,7 +371,47 @@ Parser::Parser() {
 		tc.has_closing_tag = false;
 		tag_constraints_["space"] = tc;
 	}
-	{  // div tag
+	{
+		/* RST
+.. _rt_tags_div:
+
+Division -- <div>
+-----------------
+
+This tag defines a rectangle and an be used as a layouting control.
+
+Attributes
+^^^^^^^^^^
+
+Padding
+"""""""
+
+See :ref:`rt_tags_rt`
+
+Background color
+""""""""""""""""
+
+See :ref:`rt_tags_rt`
+
+Margins and placement
+"""""""""""""""""""""
+
+* **margin**: Shrink all contents to leave a margin towards the outer edge of this tag's rectangle
+* **float**: To be implemented. Allowed values are ``left``,  ``right``
+* **valign**: Align the contents vertically. Allowed values are ``top`` (default), ``center`` = ``middle``, ``bottom``.
+* **width**: The width of this element, as a pixel amount, or as a precentage.
+  The last ``div`` in a row can be expanded automatically by using ``*``.
+
+Subtags
+^^^^^^^
+
+* :ref:`rt_tags_div`
+* :ref:`rt_tags_font`
+* :ref:`rt_tags_p`
+* :ref:`rt_tags_vspace`
+
+:ref:`Return to tag index<rt_tags>`
+		*/
 		TagConstraint tc;
 		tc.allowed_attrs.insert("padding");
 		tc.allowed_attrs.insert("padding_r");
@@ -247,7 +433,36 @@ Parser::Parser() {
 		tc.has_closing_tag = true;
 		tag_constraints_["div"] = tc;
 	}
-	{  // p tag
+	{
+		/* RST
+.. _rt_tags_p:
+
+Paragraph -- <p>
+----------------
+
+This tag encloses a text paragraph.
+
+Attributes
+^^^^^^^^^^
+
+* **indent**: Adds an indent to the first line of the paragraph
+* **align**: The horizontal alignment for the paragraph's text.
+  Allowed values are ``left`` (default), ``center`` = ``middle``, ``right``.
+* **valign**: See :ref:`rt_tags_div`
+* **spacing**: Vertical line spacing as a pixel value
+
+Subtags
+^^^^^^^
+
+* :ref:`rt_tags_br`
+* :ref:`rt_tags_div`
+* :ref:`rt_tags_font`
+* :ref:`rt_tags_img`
+* :ref:`rt_tags_space`
+* :ref:`rt_tags_vspace`
+
+:ref:`Return to tag index<rt_tags>`
+		*/
 		TagConstraint tc;
 		tc.allowed_attrs.insert("indent");
 		tc.allowed_attrs.insert("align");
@@ -264,7 +479,40 @@ Parser::Parser() {
 		tc.has_closing_tag = true;
 		tag_constraints_["p"] = tc;
 	}
-	{  // font tag
+	{
+		/* RST
+.. _rt_tags_font:
+
+Font -- <font>
+--------------
+
+This tag defines the font style for the enclosed text.
+
+Attributes
+^^^^^^^^^^
+
+* **size**: The font size as a pixel value
+* **face**: The font face. Allowed values are ``sans`` (default), ``serif``  and ``condensed``.
+* **color**: The font color as a hex value
+* **bold**: Make the text bold
+* **italic**: Make the text italic
+* **underline**: Underline the text
+* **shadow**: Add a background shadow
+* **ref**: To be implemented
+
+Subtags
+^^^^^^^
+
+* :ref:`rt_tags_br`
+* :ref:`rt_tags_div`
+* :ref:`rt_tags_font`
+* :ref:`rt_tags_img`
+* :ref:`rt_tags_p`
+* :ref:`rt_tags_space`
+* :ref:`rt_tags_vspace`
+
+:ref:`Return to tag index<rt_tags>`
+		*/
 		TagConstraint tc;
 		tc.allowed_attrs.insert("size");
 		tc.allowed_attrs.insert("face");

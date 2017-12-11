@@ -10,5 +10,6 @@ Contents:
    tutorial
    reference
    roadmap
+   autogen_rt_tags
    wlrichtext
    implementation
