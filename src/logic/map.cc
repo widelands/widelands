@@ -1966,7 +1966,7 @@ bool Map::allows_seafaring() const {
 		return false;
 	}
 
-	std::set<Coords> reachable_from_previous_port;
+	std::set<Coords> reachable_from_previous_ports;
 
 	for (const Coords& c : get_port_spaces()) {
 		std::queue<Coords> positions_to_check;
@@ -1986,7 +1986,7 @@ bool Map::allows_seafaring() const {
 			positions_to_check.pop();
 
 			// Found one
-			if (reachable_from_previous_port.count(current_position) > 0) {
+			if (reachable_from_previous_ports.count(current_position) > 0) {
 				return true;
 			}
 
@@ -2005,7 +2005,7 @@ bool Map::allows_seafaring() const {
 
 		// Couldn't connect to another port, so we add our reachable nodes to the list
 		for (const Coords& reachable_coord : reachable_from_current_port) {
-			reachable_from_previous_port.insert(reachable_coord);
+			reachable_from_previous_ports.insert(reachable_coord);
 		}
 	}
 	return false;
