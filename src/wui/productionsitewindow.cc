@@ -48,6 +48,9 @@ ProductionSiteWindow::ProductionSiteWindow(InteractiveGameBase& parent,
      worker_caps_(nullptr) {
 	productionsitenotes_subscriber_ = Notifications::subscribe<Widelands::NoteBuilding>(
 	   [this](const Widelands::NoteBuilding& note) {
+			if (is_dying_) {
+				return;
+			}
 		   Widelands::ProductionSite* production_site = production_site_.get(igbase()->egbase());
 		   if (production_site == nullptr) {
 			   return;
