@@ -76,7 +76,7 @@ obj_build_quarries_and_lumberjacks = {
    title=_"Build at least 3 lumberjack’s houses and 2 quarries",
    number = 1,
    body = objective_text(_"Quarries and Lumberjacks",
-      listitem_bullet(_[[Build at least 3 lumberjack’s houses and 2 quarries to renew your building material supply chain.]])
+      listitem_bullet(_[[Build at least three lumberjack’s houses and two quarries to renew your building material supply chain.]])
    ),
 }
 
@@ -93,8 +93,8 @@ obj_replace_foresters = {
    name = "replace_foresters",
    title=_"Replace the old and ineffective forester’s houses",
    number = 1,
-   body = objective_text(_"Build 2 New Forester’s Houses",
-      listitem_bullet(_[[Replace the 2 forester’s houses by new ones to increase productivity.]])
+   body = objective_text(_"Build Two New Forester’s Houses",
+      listitem_bullet(_[[Replace the two forester’s houses by new ones to increase productivity.]])
    ),
 }
 
@@ -119,7 +119,7 @@ obj_heroes = {
    title=_"Train at least 3 heroes",
    number = 1,
    body = objective_text(_"Hero Training",
-      listitem_bullet(_[[Use your resources wisely to train at least 3 heroes.]])),
+      listitem_bullet(_[[Use your resources wisely to train at least three heroes.]])),
 }
 
 obj_produce_tools = {
@@ -127,7 +127,7 @@ obj_produce_tools = {
    title=_"Produce at least 10 tools",
    number = 1,
    body = objective_text(_"Tool Production",
-      listitem_bullet(_[[Produce at least 10 tools to improve your economy. Remember that you can control the production amount in the economy settings.]])),
+      listitem_bullet(_[[Produce at least ten tools to improve your economy. Remember that you can control the production amount in the economy settings.]])),
 }
 
 obj_recruit_soldiers = {
@@ -135,7 +135,7 @@ obj_recruit_soldiers = {
    title=_"Recruit new soldiers",
    number = 1,
    body = objective_text(_"New Soldier Recruiting",
-      listitem_bullet(_[[Recruit at least 10 new soldiers in your barracks. Don’t forget to forge weapons and armor for them.]])
+      listitem_bullet(_[[Recruit at least ten new soldiers in your barracks. Don’t forget to forge weapons and armor for them.]])
    ),
 }
 
@@ -152,8 +152,8 @@ obj_charcoal = {
    name = "charcoal",
    title=_"Build 2 charcoal kiln",
    number = 1,
-   body = objective_text(_"Build 2 Charcoal Kilns",
-      listitem_bullet(_[[Build 2 charcoal kilns to support the iron industry. Remember to ensure a constant log supply for them.]])
+   body = objective_text(_"Build Two Charcoal Kilns",
+      listitem_bullet(_[[Build two charcoal kilns to support the iron industry. Remember to ensure a constant log supply for them.]])
    ),
 }
 
@@ -255,7 +255,7 @@ marcus_1 = {
    title=_"Welcome Back",
    body= marcus(_"A high Fremil official is welcoming you…",
       -- TRANSLATORS: Marcus - Mayor of Fremil welcoming Lutius and explaining the chaos
-      _([[Ave Sire! The people and me are so glad to see you returning back home. We really could use some good leadership around here.]])
+      _([[Ave Sire! The people and me are so glad to see you returning back home. We really need some good leadership around here.]])
 	  .. paragraphdivider() ..
       _([[As you have already noticed, things have gone terribly wrong around here since you left.]])),
    posy=1,
@@ -265,11 +265,11 @@ marcus_2 = {
    title=_"A Long Story",
    body= marcus(_"The official sighs deeply…",
       -- TRANSLATORS: Marcus - Mayor of Fremil welcoming Lutius and explaining the chaos
-      _([[Sire, the king left Fremil a long time ago to fight against the Barbarians. As this duty was demanding his full dedication, he delegated the authority of running the city to his former secretary and instated him as his surrogate around here.]])
+      _([[Sire, let me start from the beginning. The king left Fremil a long time ago to fight the Barbarians. As this duty was demanding his full commitment, he delegated the authority of running the city to his former secretary and instated him as his surrogate around here.]])
 	  .. paragraphdivider() ..
       _([[But this was one of his worst decisions ever. The secretary got blinded by his new power. His selfish instincts were as awful as his complete stupidity and inability to govern the city.]])
 	  .. paragraphdivider() ..
-      _([[After a while, the people discovered the truth and expelled the utter fool. Afterwards, they elected me as mayor of this city. However, recovering from the chaos seems to be a task too big for my abilities alone.]])),
+      _([[After a while, the people discovered the truth and expelled the utter fool. Afterwards, they elected me as mayor of this city. However, recovering from the chaos seems to be a task too big for my abilities.]])),
    posy=1,
 }
 
@@ -314,7 +314,7 @@ amalea_2 = {
       _([[This situation was caused by the sad fact that our people lost the instructions on how to construct and operate farms. Therefore they have zero productivity and the constructors don’t know how to dismantle them either.]])
 	  .. paragraphdivider() ..
       -- TRANSLATORS: Amalea
-      _([[So, we urgently need to recover the plans regarding the construction and operation of farms. One older constructor told me that they might have been concealed in a cave in the hills east of our border.]]))
+      _([[So, we urgently need to recover the plans regarding the construction and operation of farms. One older constructor told me, that they might have been concealed in a cave in the hills east of our border.]]))
 	  .. new_objectives(obj_find_farm_plans),
    posy=1,
    h=500,
@@ -327,10 +327,10 @@ amalea_3 = {
       _([[Lutius, now we are getting somewhere. As we have gained some construction materials, we can start to rebuild our economy.]])
       .. paragraphdivider() ..
       -- TRANSLATORS: Amalea
-      _([[First of all, we need more construction materials. So, we should build at least 3 lumberjacks’ houses and 2 quarries.]])
+      _([[First of all, we need more construction materials. So, we should build at least three lumberjacks’ houses and two quarries.]])
       .. paragraphdivider() ..
       -- TRANSLATORS: Amalea
-      _([[Oh, before I forget, there is another task to accomplish. While our builders are doing their job, somebody should clear up our road network in the meantime. This complete disorder is wasting so many building sites.]])) -- NOCOM I don't understand what you mean by "wasting so many building sites" - might become clear when I play the scenario
+      _([[Oh, before I forget, there is another task to accomplish. While our builders are doing their job, somebody should clear up our road network. This complete disorder is wasting so many building sites.]])) -- NOCOM I don't understand what you mean by "wasting so many building sites" - might become clear when I play the scenario
       .. new_objectives(obj_build_quarries_and_lumberjacks, obj_clear_roads),
    posy=1,
    h=500,
@@ -340,7 +340,7 @@ amalea_4 = {
    title=_"Amalea is Somewhat Relieved",
    body= amalea2(_"Amalea is giving a deep sigh…",
       -- TRANSLATORS: Amalea
-      _([[Praise the gods, Lutius! We have found the plans on how to build and operate farms.]])
+      _([[Praise the gods, Lutius! We have found the plans of how to build and operate farms.]])
       .. paragraphdivider() ..
       -- TRANSLATORS: Amalea
       _([[Now we can start building farms to produce the beer which our miners need so desperately.]])
@@ -377,7 +377,7 @@ amalea_6 = {
    title=_"Amalea is Pleased",
    body= amalea3(_"Amalea is nodding her head…",
       -- TRANSLATORS: Amalea
-      _([[Well done. Well done. Our road network looks a lot more structured than before.]])
+      _([[Well done, well done. Our road network looks a lot more structured than before.]])
       .. paragraphdivider() ..
       -- TRANSLATORS: Amalea
       _([[Now we can focus on rebuilding our economy.]])),
@@ -392,7 +392,7 @@ amalea_7 = {
       _([[For the sake of Neptune, I just discovered another problem! It seems that really very few things are working as expected in this economy.]])
       .. paragraphdivider() ..
 	  -- TRANSLATORS: Amalea
-      _([[One of our lumberjacks told me that the reproduction of our forests is far behind his experience and expectations. So, I took a close look at our foresters’ effectiveness.]])
+      _([[One of our lumberjacks told me that the reproduction of our forests is far behind his experience and expectations. So, I took a close look at our foresters’ performance.]])
       .. paragraphdivider() ..
 	  -- TRANSLATORS: Amalea
       _([[And guess what? They are very old. Their houses and tools are worn and their seed is degenerated. For this reason, they need much more time than usual for planting trees.]])
@@ -408,10 +408,10 @@ amalea_8 = {
    title=_"Amalea Laughs Sarcastically",
    body= amalea1(_"Amalea is laughing sarcastically…",
       -- TRANSLATORS: Amalea
-      _([[Well, Lutius, we have just solved another weird behavior in our economy. Now our lumberjacks should be supplied with sufficient wood to enhance our economy.]])
+      _([[Well, Lutius, we have just solved another weird behavior in our economy. Now our lumberjacks should be supplied with enough trees to enhance our economy.]])
       .. paragraphdivider() ..
 	  -- TRANSLATORS: Amalea
-      _([[I am really very curious what will go wrong next!]])),
+      _([[I am really very curious about what will go wrong next!]])),
    posy=1,
 }
 
@@ -419,7 +419,7 @@ amalea_9 = {
    title=_"Amalea Shrugs",
    body= amalea3(_"Amalea is getting used to bad news…",
       -- TRANSLATORS: Amalea
-      _([[Alright Lutius, here is another problem: after the production of some beer and some flour, I found out that the technology that we are using in our mills and breweries is somewhat outdated. This way, they are consuming far too many resources.]])
+      _([[Alright Lutius, here is another problem: after the production of some beer and some flour, I realized that the technology that we are using in our mills and breweries is somewhat outdated. This way, they are consuming far too many resources.]])
       .. paragraphdivider() ..
 	  -- TRANSLATORS: Amalea
       _([[And you wouldn’t believe it, but nobody knows how to improve the technology or how to build more efficient buildings. I only heard some rumors about a monastery in the north where the priestesses are supposed to possess some knowledge about improved technologies.]])
@@ -435,7 +435,7 @@ amalea_10 = {
    title=_"Amalea Looks Happy",
    body= amalea2(_"Amalea comes in…",
       -- TRANSLATORS: Amalea
-      _([[Brother, I think this is rather a fair offer. And some good will from any of our gods could be very helpful as well.]])
+      _([[Brother, I think this is a rather fair offer. And some good will from any of our gods could be very helpful as well.]])
       .. paragraphdivider() ..
       -- TRANSLATORS: Amalea
       _([[The only problem might be that it will take significant time to collect all the wares. In particular, we will need to shorten the supply to our mines drastically. This will give us a real drawback in metal production.]])),
@@ -458,7 +458,7 @@ amalea_12 = {
    title=_"Amalea is Very Content",
    body= amalea2(_"Amalea claps her hands…",
       -- TRANSLATORS: Amalea
-      _([[Well done. Now we are able to build more effective buildings to refine our wheat. And best of all, we have a new ally who just provided us with lots of water, flour and beer. Now I really think that nothing can prevent us from getting stronger and conquering back our homeland.]])),
+      _([[Well done. Now we are able to build more effective buildings to refine our wheat. And, best of all, we have a new ally who just provided us with lots of water, flour and beer. Now I really think that nothing can prevent us from getting stronger and conquering back our homeland.]])),
    posy=1,
 }
 
@@ -503,7 +503,7 @@ amalea_16 = {
    title=_"Amalea Looks Thoughtful",
    body= amalea2(_"Amalea is sorrowful…",
       -- TRANSLATORS: Amalea
-      _([[Dear brother, I have bad news to report. One of our buildings was just destroyed by an uncontrolled kitchen fire. I fear this might be a sign of the goddess Vesta being still in a bad mood.]])),
+      _([[Dear brother, I have bad news to report. One of our buildings has just been destroyed by an uncontrolled kitchen fire. I fear this might be a sign of the goddess Vesta still being in a bad mood.]])),
    posy=1,
 }
 
@@ -550,7 +550,7 @@ saledus = {
 
 saledus_1 = {
    title=_"We Could Use The Military Instead",
-   body= saledus2(_"Saledus raises his hand…",
+   body= saledus2(_"Saledus raises his voice…",
       -- TRANSLATORS: Saledus
       _([[Sire, if we need the technology that badly, why don’t we conquer it? We could defeat the little monastery in an instant.]])
 	  .. paragraphdivider() ..
@@ -593,7 +593,7 @@ saledus_5 = {
       _([[Now that we have produced some tools, I think it is time to divert some of our iron and coal towards military production.]])
       .. paragraphdivider() ..
       -- TRANSLATORS: Saledus
-      _([[I am really worried about the weakness of our army. We should start to increase our military power. As a starting point, we should recruit at least 10 new soldiers.]])
+      _([[I am really worried about the weakness of our army. We should start to increase our military power. As a starting point, we should recruit at least ten new soldiers.]])
 	  .. paragraphdivider() ..
       -- TRANSLATORS: Saledus
       _([[Remember, we need to produce wooden spears and helmets to recruit them in the barracks. Perhaps we should train them further in the arena as well.]]))
@@ -608,7 +608,7 @@ saledus_6 = {
       -- TRANSLATORS: Saledus
       _([[General, although we have started recruiting new soldiers, we still need to train them well. It is important to increase the strength of our soldiers as fast as we can.]])
       .. paragraphdivider() ..
-      _([[Unfortunately, we only have an arena and a very old and small training camp with very little storage capacity. And guess what? None of our builders knows how to improve this. But we need to use what we have to get prepared for battle.]]))
+      _([[Unfortunately, we only have an arena and a very old and small training camp with very little storage capacity. And none of our builders knows how to improve this. Alas! But we need to use what we have to get prepared for battle.]]))
 	  .. new_objectives(obj_training),
    posy=1,
    h=500,
@@ -634,7 +634,7 @@ saledus_8 = {
       .. paragraphdivider() ..
       _([[It will give us great advantage in battle if our soldiers are much more powerful than the Barbarians’. So, we need to spend our resources wisely to get heroes as soon as we can.]])
       .. paragraphdivider() ..
-      _([[I would say that three fully trained heroes should be sufficient to begin with. But don’t forget to send them to the front line, because they are not that useful back at home.]]))
+      _([[I would say that three fully trained heroes should be sufficient to begin with. But don’t forget to send them to the front line, because they are not that useful back home.]]))
 	  .. new_objectives(obj_heroes),
    posy=1,
    h=500,
@@ -658,7 +658,7 @@ saledus_10 = {
       -- TRANSLATORS: Saledus
       _([[Sire, finally we have defeated the Barbarians. We have expelled even the last of them. May they never come back!]])
       .. paragraphdivider() ..
-      _([[Now it is time to find out why this big mess around us could have happened. But first of all we should have a beer or two to celebrate our victory and our newfound freedom.]])),
+      _([[Now it is time to find out why this big mess around us could have happened. But first of all we should have a beer or two to celebrate our victory and our reclaimed freedom.]])),
    posy=1,
 }
 
