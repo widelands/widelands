@@ -1,10 +1,10 @@
-dirname = path.dirname(__file__)
+dirname = path.dirname (__file__)
 
 tribes:new_immovable_type {
    msgctxt = "immovable",
    name = "pond_dry",
    -- TRANSLATORS: This is an immovable name used in lists of immovables
-   descname = pgettext("immovable", "Dry Pond"),
+   descname = pgettext ("immovable", "Dry Pond"),
    size = "small",
    helptext_script = dirname .. "helptexts.lua",
    attributes = { "pond_dry" },
@@ -20,8 +20,9 @@ tribes:new_immovable_type {
 
    animations = {
       idle = {
-         pictures = path.list_files(dirname .. "idle_??.png"),
-         hotspot = { 19, 12 },
+         pictures = path.list_files (dirname .. "idle_??.png"),
+         hotspot = { 8, 5 },
+         scale = 2.5
       },
    }
 }

@@ -20,9 +20,9 @@ function checkWarningEarlyAttack ()
    local westernmostEnemy = map.width - 1
    local easternmostOwn = 0
    while not shewWarningEarlyAttack do
-      for x,field in fields.y do
-         if field.owner == p1 and idy > easternmostOwn then easternmostOwn = x end
-         if field.owner == p2 and idy < westernmostEnemy then westernmostEnemy = x end
+      for x,field in fields [y] do
+         if field.owner == p1 and x > easternmostOwn then easternmostOwn = x end
+         if field.owner == p2 and x < westernmostEnemy then westernmostEnemy = x end
          if easternmostEnemy - westernmostOwn < 21 then --if they are so close that they´d be inside a new tower´s vision range
             campaign_message_box (warning_early_attack)
             return
@@ -30,7 +30,7 @@ function checkWarningEarlyAttack ()
       end
       y = y + 1
       while y >= map.height do y = y - map.height end
-      sleep (50) --maximum delay = height · sleeptime = 128·50ms = 6,4s
+      sleep (50) --maximum delay = height×sleeptime = 128×50ms = 6,4s
    end
 end
 
@@ -78,7 +78,7 @@ function warningClay ()
       sleep (10000)
       if count ("clay") < 4 then
          if ready > 11 then
-            if #p1:get_buildings ("frisians_clay_pit") < 4 then
+            if #p1:get_buildings ("frisians_claypit") < 4 then
                campaign_message_box (warning_clay)
             end
             return
@@ -100,6 +100,7 @@ function count (ware)
    for idx,wh in ipairs (whs) do
       inWH = inWH + wh:get_wares (ware)
    end
+   return inWH
 end
 
 function stormflood ()
@@ -177,7 +178,7 @@ function mission_thread ()
    local somethingLeft = true
    while somethingLeft do
       local inWH = count ("ration")
-      whs = array_combine(
+      local whs = array_combine(
          p1:get_buildings ("frisians_coalmine"),
          p1:get_buildings ("frisians_rockmine")
       )
@@ -230,15 +231,15 @@ function mission_thread ()
    set_objective_done (o)
    
    --show the "expand" objective only if we haven´t expanded that far yet
-   local skip = not (expansionMark.owner == nil)
-   if not skip then
+   local noskip = expansionMark.owner == nil
+   if noskip then
       campaign_message_box (expand_1)
       o = add_campaign_objective (obj_expand)
    end
    
    --wait until we (or the enemy) have conquered the left half of the island
    while expansionMark.owner == nil do sleep (4273) end
-   if not skip then set_objective_done (o) end
+   if noskip then set_objective_done (o) end
    
    --a friendly chat between neighbours
    p1:reveal_fields (map.player_slots [2].starting_field:region (6))
@@ -270,7 +271,7 @@ function mission_thread ()
          p1:get_buildings ("frisians_wooden_tower"),
          p1:get_buildings ("frisians_wooden_tower_high"),
          p1:get_buildings ("frisians_outpost")
-     )
+      )
       for idx,site in ipairs (bld) do
          hasL10 = hasL10 or (site:get_soldiers {2,6,2,0} > 0)
       end
@@ -299,7 +300,7 @@ function mission_thread ()
    --Stormflood!
    for x=4,map.width - 5 do
       for y=4,map.height - 5 do --leave some small margin, show everything else
-         p1:reveal_fields {map:get_field (x,y)}
+         p1:reveal_fields {map:get_field (x, y)}
       end
    end
    scroll_to_field (firstToFlood)

@@ -8,7 +8,7 @@ animations = {
    beeswarm = {
       pictures = path.list_files (dirname .. "beeswarm_??.png"),
       hotspot = { 26, 31 },
-      fps = 20
+      fps = 50
    }
 }
 add_walking_animations (animations, "walk", dirname, "walk", {21, 25}, 15)

@@ -204,10 +204,10 @@ food_2 = {
       _([[Well done. The miners are satisfied and have started working again.]])
       .. paragraphdivider () ..
       -- TRANSLATORS: Hauke – better food
-      _([[But when the mines have to be expanded, rations won´t keep the miners happy. Better take precautions – build a second tavern, then consider enhancing the one you have to a drinking hall.]])
+      _([[But when the mines have to be expanded, rations won´t keep the miners happy. Better take precautions – build a second tavern, then consider enhancing one to a drinking hall.]])
       .. paragraphdivider () ..
       -- TRANSLATORS: Hauke – better food
-      _([[A drinking hall needs better food. Build a bakery a brewery, and two or three farms to start growing barley. Keep in mind that barley grows very slowly; therefore, so few farms won´t suffice when we actually need the bread and beer.]])
+      _([[A drinking hall needs better food. Build a bakery, a brewery, and two or three farms to start growing barley. Keep in mind that barley grows very slowly; therefore, these few farms won´t suffice when we actually need the bread and beer.]])
       .. paragraphdivider () ..
       -- TRANSLATORS: Hauke – better food
       _([[The bakery and brewery should be enhanced as soon as the workers have enough experience. They can then produce mead, and bread sweetened with honey. Build a bee-keeper´s house next to the berry farm to produce some honey, which we can store until we need it.]]))
@@ -231,19 +231,19 @@ recruit_1 = {
       _([[Our mines are working well. We can now produce all the tools we need, and some weapons as well.]])
       .. paragraphdivider () ..
       -- TRANSLATORS: Reebaud – recruit 1
-      _([[We could use these weapons to equip some new soldiers. I hope we won´t find enemies here, but it is always better to be prepared. New soldiers are equipped in a barracks with a basic sword and a set of fur clothes, the uniform of all honourable warriors.]]),
+      _([[We could use these weapons to equip some new soldiers. I hope we won´t find enemies here, but it is always better to be prepared. New soldiers are equipped in a barracks with a basic sword and a set of fur clothes, the uniform of all honourable warriors.]])),
 }
 recruit_2 = {
    title =_ "Be Prepared",
    body=hauke (_"Build a recruitment centre",
       -- TRANSLATORS: Hauke – recruit 2
-      _([[We will need a barracks, of course; a reindeer farm to produce fur, and a seamstress to sew the fur into garments. The reindeer farm produces some meat as a by-product of fur, and it also trains reindeer to help our carriers on busy roads.]]))
+      _([[We will need a barracks, of course; a reindeer farm to produce fur, and a seamstress to sew the fur into garments. The reindeer farm produces some meat as a by-product of fur, and it also trains reindeer to help our carriers on busy roads.]])
       .. paragraphdivider () ..
       -- TRANSLATORS: Hauke – recruit 2
-      _([[I advise to build all those buildings within a short distance of each other, and to construct two new warehouses nearby: One should be set to store only weapons, armour, ores, metal and coal; the other to store building materials.]])
+      _([[I advise to build all those buildings within a short distance of each other, and to construct two warehouses nearby: One should be set to store only weapons, armour, ores, metal and coal; the other to store building materials.]])
       .. paragraphdivider () ..
       -- TRANSLATORS: Hauke – recruit 2
-      _([[We should also build other related buildings nearby, such as a furnace, and some wells and farms to supply the reindeer farm. This design will make our military economy more efficient, because it reduces the waiting time for wares in the processing buildings.]])
+      _([[We should also build other related buildings nearby, such as a furnace, and some wells and farms to supply the reindeer farm. This design will make our military economy more efficient, because it reduces the waiting time for wares in the processing buildings.]]))
       .. new_objectives (obj_recruit_soldiers),
 }
 expand_1 = {
@@ -339,30 +339,30 @@ warning_early_attack = {
    title =_ "Beware!",
    body=reebaud (_"Not strong enough",
       -- TRANSLATORS: Hauke – beware of early attacks
-      _([[Chieftain Reebaud! Our scouts report that the enemy is advancing fast. I fear we are not strong enough yet to defend ourselves if he attacks first. We must somehow hold him off.]] )
+      _([[Chieftain Reebaud! Our scouts report that the enemy is advancing fast. I fear we are not strong enough yet to defend ourselves if he attacks first. We must somehow hold him off.]])
        .. paragraphdivider () ..
       -- TRANSLATORS: Hauke – beware of early attacks
       _([[But we have been informed that he can´t build towers. I suggest to build a fortress, which is the building with the highest conquer radius, to push the border as far east as possible. The enemies can only see it if they build a fortress right at the border.]])
        .. paragraphdivider () ..
       -- TRANSLATORS: Hauke – beware of early attacks
-      _([[We can prevent this, or at least make it harder to do, by ordering some foresters to plant trees at the border. The enemy will have to cut enough them down to build the fortress, so we may be safe until we choose to attack.]])),
+      _([[We can prevent this, or at least make it harder to do, by ordering some foresters to plant trees at the border. The enemy will have to cut enough of them down to build the fortress, so we may be safe until we open the battle at a time of our choosing.]])),
 }
 rising_water_1 = {
    title =_ "Enemy defeated",
    body=reebaud (_"Enemy defeated!",
-      -- TRANSLATORS: Reebaud – enemy defeated
+      -- TRANSLATORS: Reebaud – enemy defeated 1
       _([[They are defeated! I thank you, all my gods, for granting us victory over the unbelievers!]])),
 }
 rising_water_2 = {
    title =_ "Enemy defeated",
    body=maukor (_"Enemy defeated!",
-      -- TRANSLATORS: Maukor – enemy defeated
+      -- TRANSLATORS: Maukor – enemy defeated 2
       _([[I pray to God to hear my last words. Let not the false fiend triumph! Punish them for this ignoble feat!]])),
 }
 rising_water_3 = {
    title =_ "Stormflood",
    body=reebaud (_"The island is flooding!",
-      -- TRANSLATORS: Reebaud – enemy defeated
+      -- TRANSLATORS: Reebaud – enemy defeated 3
       _([[His God has granted his wish! The ocean is rising! The island is almost flat – we will all drown!]])),
 }
 rising_water_4 = {
@@ -372,7 +372,7 @@ rising_water_4 = {
       _([[Despair not, I spy some hope! The easternmost tip of the island seems well suited to build a port on. If we manage to construct a ship, and fill it with all we need to build a new settlement, we may be able to escape.]])
      .. paragraphdivider () ..
       -- TRANSLATORS: Hauke – rising water
-      _([[The stormflood seems to be coming from the west. If we hurry, we will just make it! We only need to build a port and a shipyard – oh, and a weaving mill to weave cloth for the sails. Then we launch an expedition from the port. Pray to the gods and make haste!]]))
+      _([[The stormflood seems to be coming from the west. If we hurry, we will just make it! We only need to build a port and a shipyard – oh, and a weaving mill to weave the durable cloth, which is made from reed and fur, for the sails. Then we launch an expedition from the port. Pray to the gods and make haste!]]))
       .. new_objectives (obj_escape),
 }
 

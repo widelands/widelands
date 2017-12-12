@@ -1,30 +1,29 @@
-dirname = path.dirname(__file__)
+dirname = path.dirname (__file__)
 
 animations = {
    idle = {
-      pictures = path.list_files(dirname .. "idle_??.png"),
-      hotspot = { 9, 39 },
+      pictures = path.list_files (dirname .. "idle_??.png"),
+      hotspot = { 21, 25 },
    },
    fishing = {
-      pictures = path.list_files(dirname .. "fishing_??.png"),
-      hotspot = { 9, 39 },
+      pictures = path.list_files (dirname .. "fishing_??.png"),
+      hotspot = { 21, 25 },
       fps = 10
    },
    release = {
-      pictures = path.list_files(dirname .. "fishing_??.png"), --TODO no animation yet
-      hotspot = { 9, 39 },
+      pictures = path.list_files (dirname .. "release_??.png"),
+      hotspot = { 21, 25 },
       fps = 10
    }
 }
-add_walking_animations(animations, "walk", dirname, "walk", {10, 38}, 10)
-add_walking_animations(animations, "walkload", dirname, "walk", {10, 38}, 10)
-
+add_walking_animations (animations, "walk", dirname, "walk", {21, 25}, 15)
+add_walking_animations (animations, "walkload", dirname, "walkload", {23, 27}, 15)
 
 tribes:new_worker_type {
    msgctxt = "frisians_worker",
    name = "frisians_fisher",
    -- TRANSLATORS: This is a worker name used in lists of workers
-   descname = pgettext("frisians_worker", "Fisher"),
+   descname = pgettext ("frisians_worker", "Fisher"),
    helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    vision_range = 2,
@@ -54,7 +53,7 @@ tribes:new_worker_type {
       breed_in_pond = {
          "findobject attrib:pond_dry radius:8",
          "walk object",
-         "animation release 3000",
+         "animation release 2000",
          "object with_fish",
          "return"
       }
