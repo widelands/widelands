@@ -15,17 +15,17 @@ function dismantle()
    while count_buildings(p1, {"empire_fishers_house", "empire_quarry", "empire_lumberjacks_house2", "empire_well2"}) > 0 do
       if mv.windows.field_action and mv.windows.field_action.tabs.small and not buildmessage then
          campaign_message_box(amalea_19)
-       buildmessage = true
-     end
-     sleep(500)
+         buildmessage = true
+      end
+      sleep(500)
    end
    sleep(2000)
    p1:allow_buildings("all")
    p1:forbid_buildings{"empire_farm", "empire_mill", "empire_brewery", "empire_trainingcamp", "empire_colosseum"}
    o.done = true
    campaign_message_box(amalea_3)
-   run (clear_roads)
-   run (quarries_lumberjacks)
+   run(clear_roads)
+   run(quarries_lumberjacks)
 end
 
 -- we need to find the plans how to build a farm
@@ -35,27 +35,27 @@ function farm_plans()
    local count = 0
    while not farmclick do
       if mv.windows.building_window and not mv.windows.building_window.buttons.dismantle and not mv.windows.building_window.tabs.wares and mv.windows.building_window.tabs.workers then
-            farmclick = true
+         farmclick = true
       end
-     count = count + 1
-     if count == 1201 then
-     campaign_message_box(amalea_18)
-     end
+      count = count + 1
+      if count == 1201 then
+         campaign_message_box(amalea_18)
+      end
       sleep(500)
    end
 
    campaign_message_box(amalea_2)
    local o = add_campaign_objective(obj_find_farm_plans)
    while not (f.owner == p1) do
-   sleep(4000)
+      sleep(4000)
    end
    if f.immovable then
       local prior_center = scroll_to_field(f)
-     campaign_message_box(amalea_4)
-     sleep(2000)
+      campaign_message_box(amalea_4)
+      sleep(2000)
       f.immovable:remove()
       sleep(2000)
-     scroll_to_map_pixel(prior_center)
+      scroll_to_map_pixel(prior_center)
    else
       print("Failed to remove artifact at (" .. f.x .. ", " .. f.y .. ")")
    end
@@ -71,30 +71,30 @@ function clear_roads()
    local cleared = false
 
    while cleared == false do
-   cleared = true
-   sleep (5000)
+      cleared = true
+      sleep (5000)
       for x=7, 40 do
          for y=180, 207 do
-           local field = map:get_field(x,y)
-         if (field.immovable and field.immovable.descr.type_name == "flag" and field.immovable.building == nil) then
-           local numroads = 0
-              for _ in pairs(field.immovable.roads) do numroads = numroads + 1 end
-              if numroads < 2 then
-              cleared = false
-                end
-          end
-        end
+            local field = map:get_field(x,y)
+            if (field.immovable and field.immovable.descr.type_name == "flag" and field.immovable.building == nil) then
+               local numroads = 0
+               for _ in pairs(field.immovable.roads) do numroads = numroads + 1 end
+               if numroads < 2 then
+                  cleared = false
+               end
+            end
+         end
          for y=0, 28 do
-           local field = map:get_field(x,y)
-         if (field.immovable and field.immovable.descr.type_name == "flag" and field.immovable.building == nil) then
-           local numroads = 0
-              for _ in pairs(field.immovable.roads) do numroads = numroads + 1 end
-              if numroads < 2 then
-              cleared = false
-                end
-          end
-        end
-     end
+            local field = map:get_field(x,y)
+            if (field.immovable and field.immovable.descr.type_name == "flag" and    field.immovable.building == nil) then
+               local numroads = 0
+               for _ in pairs(field.immovable.roads) do numroads = numroads + 1 end
+               if numroads < 2 then
+                  cleared = false
+               end
+            end
+         end
+      end
    end
    o.done = true
    campaign_message_box(amalea_6)
@@ -108,11 +108,11 @@ function no_trees()
       sleep (5000)
       for x=13, 25 do
          for y=182, 205 do
-           local field = map:get_field(x,y)
-         if (field.immovable and field.immovable.descr.terrain_affinity) then
-              trees = trees + 1
+            local field = map:get_field(x,y)
+            if (field.immovable and field.immovable.descr.terrain_affinity) then
+               trees = trees + 1
+            end
          end
-        end
       end
    end
    if #p1:get_buildings("empire_foresters_house1") > 0 then
@@ -149,19 +149,19 @@ function steel()
    local o = add_campaign_objective(obj_produce_tools)
 
    while not ((
-      p1:get_produced_wares_count("basket") +
-     p1:get_produced_wares_count("bread_paddle") +
-     p1:get_produced_wares_count("felling_ax") +
-     p1:get_produced_wares_count("fire_tongs") +
-     p1:get_produced_wares_count("fishing_rod") +
-     p1:get_produced_wares_count("hammer") +
-     p1:get_produced_wares_count("hunting_spear") +
-     p1:get_produced_wares_count("kitchen_tools") +
-     p1:get_produced_wares_count("pick") +
-     p1:get_produced_wares_count("saw") +
-     p1:get_produced_wares_count("scythe") +
-     p1:get_produced_wares_count("shovel")
-     ) > 9) do
+         p1:get_produced_wares_count("basket") +
+         p1:get_produced_wares_count("bread_paddle") +
+         p1:get_produced_wares_count("felling_ax") +
+         p1:get_produced_wares_count("fire_tongs") +
+         p1:get_produced_wares_count("fishing_rod") +
+         p1:get_produced_wares_count("hammer") +
+         p1:get_produced_wares_count("hunting_spear") +
+         p1:get_produced_wares_count("kitchen_tools") +
+         p1:get_produced_wares_count("pick") +
+         p1:get_produced_wares_count("saw") +
+         p1:get_produced_wares_count("scythe") +
+         p1:get_produced_wares_count("shovel")
+      ) > 9) do
    sleep(2500)
    end
    campaign_message_box(diary_page_2)
@@ -179,17 +179,17 @@ function steel()
       p1:get_buildings("empire_trainingcamp1"),
       p1:get_buildings("empire_arena"),
       p1:get_buildings("empire_sentry"),
-     p1:get_buildings("empire_tower"),
+      p1:get_buildings("empire_tower"),
       p1:get_buildings("empire_fortress"),
       p1:get_buildings("empire_outpost"),
-     p1:get_buildings("empire_barrier"),
+      p1:get_buildings("empire_barrier"),
       p1:get_buildings("empire_blockhouse"),
       p1:get_buildings("empire_castle")
-      )
+   )
    for idx,site in ipairs(bld) do
       for descr,count in pairs(site:get_soldiers("all")) do
          number_soldiers = number_soldiers + count
-     end
+      end
    end
 
    number_soldiers = number_soldiers + 9
@@ -201,28 +201,27 @@ function steel()
       p1:get_buildings("empire_trainingcamp1"),
       p1:get_buildings("empire_arena"),
       p1:get_buildings("empire_sentry"),
-     p1:get_buildings("empire_tower"),
+      p1:get_buildings("empire_tower"),
       p1:get_buildings("empire_fortress"),
       p1:get_buildings("empire_outpost"),
-     p1:get_buildings("empire_barrier"),
+      p1:get_buildings("empire_barrier"),
       p1:get_buildings("empire_blockhouse"),
       p1:get_buildings("empire_castle")
-      )
-     local amount = 0
+   )
+   local amount = 0
       for idx,site in ipairs(bld) do
-        for descr,count in pairs(site:get_soldiers("all")) do
+         for descr,count in pairs(site:get_soldiers("all")) do
             amount = amount + count
-       end
+         end
       end
-     if amount > number_soldiers then
-        enough_soldiers = true
+      if amount > number_soldiers then
+         enough_soldiers = true
       end
       sleep(4273)
    end
    o1.done = true
    campaign_message_box(saledus_6)
    run(training)
-
 end
 
 -- charcoal might be needed to support the metal production
@@ -247,43 +246,43 @@ function training()
       p1:get_buildings("empire_trainingcamp1"),
       p1:get_buildings("empire_arena"),
       p1:get_buildings("empire_sentry"),
-     p1:get_buildings("empire_tower"),
+      p1:get_buildings("empire_tower"),
       p1:get_buildings("empire_fortress"),
       p1:get_buildings("empire_outpost"),
-     p1:get_buildings("empire_barrier"),
+      p1:get_buildings("empire_barrier"),
       p1:get_buildings("empire_blockhouse"),
       p1:get_buildings("empire_castle")
-      )
+   )
    for idx,site in ipairs(bld) do
       for descr,count in pairs(site:get_soldiers("all")) do
-       strength = strength + descr[1]*count + descr[2]*count
-     end
+         strength = strength + descr[1]*count + descr[2]*count
+      end
    end
 
    strength = strength + 10
    local enough_strength = false
    while not enough_strength do
-   bld = array_combine(
-      p1:get_buildings("empire_headquarters"),
-      p1:get_buildings("empire_warehouse"),
-      p1:get_buildings("empire_trainingcamp1"),
-      p1:get_buildings("empire_arena"),
-      p1:get_buildings("empire_sentry"),
-     p1:get_buildings("empire_tower"),
-      p1:get_buildings("empire_fortress"),
-      p1:get_buildings("empire_outpost"),
-     p1:get_buildings("empire_barrier"),
-      p1:get_buildings("empire_blockhouse"),
-      p1:get_buildings("empire_castle")
+      bld = array_combine(
+         p1:get_buildings("empire_headquarters"),
+         p1:get_buildings("empire_warehouse"),
+         p1:get_buildings("empire_trainingcamp1"),
+         p1:get_buildings("empire_arena"),
+         p1:get_buildings("empire_sentry"),
+         p1:get_buildings("empire_tower"),
+         p1:get_buildings("empire_fortress"),
+         p1:get_buildings("empire_outpost"),
+         p1:get_buildings("empire_barrier"),
+         p1:get_buildings("empire_blockhouse"),
+         p1:get_buildings("empire_castle")
       )
-     local amount = 0
+      local amount = 0
       for idx,site in ipairs(bld) do
-        for descr,count in pairs(site:get_soldiers("all")) do
+         for descr,count in pairs(site:get_soldiers("all")) do
             amount = amount + descr[1]*count + descr[2]*count
-       end
+         end
       end
-     if amount > strength then
-        enough_strength = true
+      if amount > strength then
+         enough_strength = true
       end
       sleep(4273)
    end
