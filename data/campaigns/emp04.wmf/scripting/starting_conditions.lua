@@ -1,8 +1,8 @@
 -- =======================================================================
 --                                 Player 3
 -- =======================================================================
--- Player 3 (Vesta) will be introduced to the game when discovered so for the beginning we fornbid everything
--- and do not place any buildings
+-- Player 3 (Vesta) will be introduced to the game when discovered
+-- So, for the beginning we forbid everything and do not place any buildings
 
 p3:forbid_buildings("all")
 
@@ -13,376 +13,376 @@ p3:forbid_buildings("all")
 p1:forbid_buildings("all")
 p1:allow_buildings{"empire_lumberjacks_house"}
 
- prefilled_buildings(p1, { "empire_headquarters", sf.x, sf.y,
-      workers = {
-         empire_builder = 10,
-		 empire_geologist = 1,
+prefilled_buildings(p1, { "empire_headquarters", sf.x, sf.y,
+   workers = {
+      empire_builder = 10,
+       empire_geologist = 1,
       },
    })
-   
+
 -- lower ressources to zero in starting region (to cope with default ressources)
      for x=7, 42 do
       for y=190, 207 do
          local field = map:get_field(x,y)
-		 if field.resource == "fish" or
-		 field.resource == "water" then
-		 field.resource_amount = 0
+       if field.resource == "fish" or
+       field.resource == "water" then
+       field.resource_amount = 0
          end
-	  end
+     end
       for y=0, 22 do
          local field = map:get_field(x,y)
-		 if field.resource == "fish" or
-		 field.resource == "water" then
-		 field.resource_amount = 0
+       if field.resource == "fish" or
+       field.resource == "water" then
+       field.resource_amount = 0
          end
-      end		 
-     end 
-   
-   
+      end
+     end
+
+
 -- place towers and fortress
       place_building_in_region(p1, "empire_tower", {map:get_field(10, 196)})
-      place_building_in_region(p1, "empire_tower", {map:get_field(24, 190)})	  
-      place_building_in_region(p1, "empire_tower", {map:get_field(16, 18)})	  
-      place_building_in_region(p1, "empire_tower", {map:get_field(28, 24)})	  
+      place_building_in_region(p1, "empire_tower", {map:get_field(24, 190)})
+      place_building_in_region(p1, "empire_tower", {map:get_field(16, 18)})
+      place_building_in_region(p1, "empire_tower", {map:get_field(28, 24)})
       place_building_in_region(p1, "empire_tower", {map:get_field(35, 202)})
       place_building_in_region(p1, "empire_fortress", {map:get_field(31, 5)})
 
 
 -- place farm
-	  place_building_in_region(p1, "empire_farm1", {map:get_field(20, 194)})	  
-	  place_building_in_region(p1, "empire_farm1", sf:region(15))	 
+     place_building_in_region(p1, "empire_farm1", {map:get_field(20, 194)})
+     place_building_in_region(p1, "empire_farm1", sf:region(15))
 
 -- place fishers_house
-	  place_building_in_region(p1, "empire_fishers_house", {map:get_field(12, 203)})
-	  place_building_in_region(p1, "empire_fishers_house", {map:get_field(12, 15)})
-	 
--- place well
-	  place_building_in_region(p1, "empire_well2", sf:region(15))
-	  place_building_in_region(p1, "empire_well2", sf:region(15))
+     place_building_in_region(p1, "empire_fishers_house", {map:get_field(12, 203)})
+     place_building_in_region(p1, "empire_fishers_house", {map:get_field(12, 15)})
 
--- place lumberjacks	  
-	  place_building_in_region(p1, "empire_lumberjacks_house2", sf:region(10))
-	  place_building_in_region(p1, "empire_lumberjacks_house2", sf:region(10))	
-	  place_building_in_region(p1, "empire_lumberjacks_house2", sf:region(10))
-	  place_building_in_region(p1, "empire_foresters_house2", {map:get_field(19, 190)})	  	  
-	  place_building_in_region(p1, "empire_foresters_house2", {map:get_field(19, 198)}) 
+-- place well
+     place_building_in_region(p1, "empire_well2", sf:region(15))
+     place_building_in_region(p1, "empire_well2", sf:region(15))
+
+-- place lumberjacks
+     place_building_in_region(p1, "empire_lumberjacks_house2", sf:region(10))
+     place_building_in_region(p1, "empire_lumberjacks_house2", sf:region(10))
+     place_building_in_region(p1, "empire_lumberjacks_house2", sf:region(10))
+     place_building_in_region(p1, "empire_foresters_house2", {map:get_field(19, 190)})
+     place_building_in_region(p1, "empire_foresters_house2", {map:get_field(19, 198)})
 
 -- mines
-	  place_building_in_region(p1, "empire_ironmine", {map:get_field(33, 194)})
-	  place_building_in_region(p1, "empire_coalmine", {map:get_field(24, 17)})	  
-	  place_building_in_region(p1, "empire_coalmine", {map:get_field(31, 20)})
-	  place_building_in_region(p1, "empire_goldmine", sf:region(25))	  
+     place_building_in_region(p1, "empire_ironmine", {map:get_field(33, 194)})
+     place_building_in_region(p1, "empire_coalmine", {map:get_field(24, 17)})
+     place_building_in_region(p1, "empire_coalmine", {map:get_field(31, 20)})
+     place_building_in_region(p1, "empire_goldmine", sf:region(25))
 
--- place quarry	  
-	  place_building_in_region(p1, "empire_quarry", sf:region(9))
-	  place_building_in_region(p1, "empire_quarry", sf:region(9))
-	  
--- place build material infrastructure	  
+-- place quarry
+     place_building_in_region(p1, "empire_quarry", sf:region(9))
+     place_building_in_region(p1, "empire_quarry", sf:region(9))
+
+-- place build material infrastructure
       place_building_in_region(p1, "empire_sawmill", sf:region(8))
       place_building_in_region(p1, "empire_stonemasons_house", sf:region(8))
 
--- place metal industry	  
-	  place_building_in_region(p1, "empire_armorsmithy", sf:region(10))
+-- place metal industry
+     place_building_in_region(p1, "empire_armorsmithy", sf:region(10))
       place_building_in_region(p1, "empire_toolsmithy", sf:region(10))
       place_building_in_region(p1, "empire_weaponsmithy", sf:region(15))
-	  place_building_in_region(p1, "empire_smelting_works", sf:region(15))	  
-	  
+     place_building_in_region(p1, "empire_smelting_works", sf:region(15))
+
 -- food supply
-	  place_building_in_region(p1, "empire_bakery", sf:region(15))
-	  place_building_in_region(p1, "empire_brewery1", sf:region(15))
-	  place_building_in_region(p1, "empire_winery", sf:region(15))
-	  place_building_in_region(p1, "empire_mill1", sf:region(15))
-	  place_building_in_region(p1, "empire_tavern", sf:region(15))	  
+     place_building_in_region(p1, "empire_bakery", sf:region(15))
+     place_building_in_region(p1, "empire_brewery1", sf:region(15))
+     place_building_in_region(p1, "empire_winery", sf:region(15))
+     place_building_in_region(p1, "empire_mill1", sf:region(15))
+     place_building_in_region(p1, "empire_tavern", sf:region(15))
 
 
 
--- military training	  
-	  place_building_in_region(p1, "empire_arena", sf:region(20))
+-- military training
+     place_building_in_region(p1, "empire_arena", sf:region(20))
       place_building_in_region(p1, "empire_trainingcamp1", sf:region(20))
       place_building_in_region(p1, "empire_barracks", sf:region(20), {inputs = {empire_recruit = 8}})
 
-	  
-	  
+
+
 -- roads
      for x=7, 35 do
       for y=180, 207 do
          local field = map:get_field(x,y)
-		 if field.immovable and field.immovable.descr.type_name == "flag" then
-			 local n1 = field.bln
-			 local n2 = n1.bln
-			     if n1.immovable == nil and n1:has_caps("walkable") and (n2:has_caps("flag") or (n2.immovable and n2.immovable.descr.type_name == "flag")) then
-		         local road = p1:place_road(field.immovable, "bl", "bl", true)
-				 road:set_workers('empire_carrier',1)
-			     end
+       if field.immovable and field.immovable.descr.type_name == "flag" then
+          local n1 = field.bln
+          local n2 = n1.bln
+              if n1.immovable == nil and n1:has_caps("walkable") and (n2:has_caps("flag") or (n2.immovable and n2.immovable.descr.type_name == "flag")) then
+               local road = p1:place_road(field.immovable, "bl", "bl", true)
+             road:set_workers('empire_carrier',1)
+              end
          end
-	  end
+     end
       for y=0, 25 do
          local field = map:get_field(x,y)
-		 if field.immovable and field.immovable.descr.type_name == "flag" then
-			 local n1 = field.bln
-			 local n2 = n1.bln
-			     if n1.immovable == nil and n1:has_caps("walkable") and (n2:has_caps("flag") or (n2.immovable and n2.immovable.descr.type_name == "flag")) then
-		         local road = p1:place_road(field.immovable, "bl", "bl", true)
-				 road:set_workers('empire_carrier',1)
-			     end
+       if field.immovable and field.immovable.descr.type_name == "flag" then
+          local n1 = field.bln
+          local n2 = n1.bln
+              if n1.immovable == nil and n1:has_caps("walkable") and (n2:has_caps("flag") or (n2.immovable and n2.immovable.descr.type_name == "flag")) then
+               local road = p1:place_road(field.immovable, "bl", "bl", true)
+             road:set_workers('empire_carrier',1)
+              end
          end
-	  end		 
-     end 
-	 
+     end
+     end
+
      for x=5, 35, 3 do
       for y=180, 207 do
          local field = map:get_field(x,y)
-		 if field.immovable and field.immovable.descr.type_name == "flag" then
-			 local n1 = field.trn
-			 local n0 = n1.trn
-			 local n2 = n0.trn
-			     if n1.immovable == nil and n1:has_caps("walkable") and n0.immovable == nil and n0:has_caps("walkable") and (n2:has_caps("flag") or (n2.immovable and n2.immovable.descr.type_name == "flag")) then
-		         local road = p1:place_road(field.immovable, "tr", "tr", "tr", true)
-				 road:set_workers('empire_carrier',1)
-			     end
+       if field.immovable and field.immovable.descr.type_name == "flag" then
+          local n1 = field.trn
+          local n0 = n1.trn
+          local n2 = n0.trn
+              if n1.immovable == nil and n1:has_caps("walkable") and n0.immovable == nil and n0:has_caps("walkable") and (n2:has_caps("flag") or (n2.immovable and n2.immovable.descr.type_name == "flag")) then
+               local road = p1:place_road(field.immovable, "tr", "tr", "tr", true)
+             road:set_workers('empire_carrier',1)
+              end
          end
-	  end
+     end
       for y=0, 25 do
          local field = map:get_field(x,y)
-		 if field.immovable and field.immovable.descr.type_name == "flag" then
-			 local n1 = field.trn
-			 local n0 = n1.trn
-			 local n2 = n0.trn
-			     if n1.immovable == nil and n1:has_caps("walkable") and n0.immovable == nil and n0:has_caps("walkable") and (n2:has_caps("flag") or (n2.immovable and n2.immovable.descr.type_name == "flag")) then
-		         local road = p1:place_road(field.immovable, "tr", "tr", "tr", true)
-				 road:set_workers('empire_carrier',1)
-			     end
+       if field.immovable and field.immovable.descr.type_name == "flag" then
+          local n1 = field.trn
+          local n0 = n1.trn
+          local n2 = n0.trn
+              if n1.immovable == nil and n1:has_caps("walkable") and n0.immovable == nil and n0:has_caps("walkable") and (n2:has_caps("flag") or (n2.immovable and n2.immovable.descr.type_name == "flag")) then
+               local road = p1:place_road(field.immovable, "tr", "tr", "tr", true)
+             road:set_workers('empire_carrier',1)
+              end
          end
-	  end		 
-     end 
-	
+     end
+     end
+
      for x=6, 35, 3 do
       for y=180, 207 do
          local field = map:get_field(x,y)
-		 if field.immovable and field.immovable.descr.type_name == "flag" then
-			 local n1 = field.trn
-			 local n0 = n1.trn
-			 local n2 = n0.trn
-			     if n1.immovable == nil and n1:has_caps("walkable") and n0.immovable == nil and n0:has_caps("walkable") and (n2:has_caps("flag") or (n2.immovable and n2.immovable.descr.type_name == "flag")) then
-		         local road = p1:place_road(field.immovable, "tr", "tr", "tr", true)
-				 road:set_workers('empire_carrier',1)
-			     end
+       if field.immovable and field.immovable.descr.type_name == "flag" then
+          local n1 = field.trn
+          local n0 = n1.trn
+          local n2 = n0.trn
+              if n1.immovable == nil and n1:has_caps("walkable") and n0.immovable == nil and n0:has_caps("walkable") and (n2:has_caps("flag") or (n2.immovable and n2.immovable.descr.type_name == "flag")) then
+               local road = p1:place_road(field.immovable, "tr", "tr", "tr", true)
+             road:set_workers('empire_carrier',1)
+              end
          end
-	  end
+     end
       for y=0, 25 do
          local field = map:get_field(x,y)
-		 if field.immovable and field.immovable.descr.type_name == "flag" then
-			 local n1 = field.trn
-			 local n0 = n1.trn
-			 local n2 = n0.trn
-			     if n1.immovable == nil and n1:has_caps("walkable") and n0.immovable == nil and n0:has_caps("walkable") and (n2:has_caps("flag") or (n2.immovable and n2.immovable.descr.type_name == "flag")) then
-		         local road = p1:place_road(field.immovable, "tr", "tr", "tr", true)
-				 road:set_workers('empire_carrier',1)
-			     end
+       if field.immovable and field.immovable.descr.type_name == "flag" then
+          local n1 = field.trn
+          local n0 = n1.trn
+          local n2 = n0.trn
+              if n1.immovable == nil and n1:has_caps("walkable") and n0.immovable == nil and n0:has_caps("walkable") and (n2:has_caps("flag") or (n2.immovable and n2.immovable.descr.type_name == "flag")) then
+               local road = p1:place_road(field.immovable, "tr", "tr", "tr", true)
+             road:set_workers('empire_carrier',1)
+              end
          end
-	  end		 
-     end 
-	 
-     for x=7, 35 do
-      for y=180, 207 do
-         local field = map:get_field(x,y)
-		 if field.immovable and field.immovable.descr.type_name == "flag" then
-			 local n1 = field.bln
-			 local n2 = n1.bln
-			     if n1.immovable == nil and n1:has_caps("walkable") and (n2:has_caps("flag") or (n2.immovable and n2.immovable.descr.type_name == "flag")) then
-		         local road = p1:place_road(field.immovable, "bl", "bl", true)
-				 road:set_workers('empire_carrier',1)
-			     end
-         end
-	  end
-      for y=0, 25 do
-         local field = map:get_field(x,y)
-		 if field.immovable and field.immovable.descr.type_name == "flag" then
-			 local n1 = field.bln
-			 local n2 = n1.bln
-			     if n1.immovable == nil and n1:has_caps("walkable") and (n2:has_caps("flag") or (n2.immovable and n2.immovable.descr.type_name == "flag")) then
-		         local road = p1:place_road(field.immovable, "bl", "bl", true)
-				 road:set_workers('empire_carrier',1)
-			     end
-         end
-	  end		 
-     end 
+     end
+     end
 
      for x=7, 35 do
       for y=180, 207 do
          local field = map:get_field(x,y)
-		 if field.immovable and field.immovable.descr.type_name == "flag" then
-			 local n1 = field.ln
-			 local n2 = n1.ln
-			     if n1.immovable == nil and n1:has_caps("walkable") and (n2:has_caps("flag") or (n2.immovable and n2.immovable.descr.type_name == "flag")) then
-		         local road = p1:place_road(field.immovable, "l", "l", true)
-				 road:set_workers('empire_carrier',1)
-			     end
+       if field.immovable and field.immovable.descr.type_name == "flag" then
+          local n1 = field.bln
+          local n2 = n1.bln
+              if n1.immovable == nil and n1:has_caps("walkable") and (n2:has_caps("flag") or (n2.immovable and n2.immovable.descr.type_name == "flag")) then
+               local road = p1:place_road(field.immovable, "bl", "bl", true)
+             road:set_workers('empire_carrier',1)
+              end
          end
-	  end
+     end
       for y=0, 25 do
          local field = map:get_field(x,y)
-		 if field.immovable and field.immovable.descr.type_name == "flag" then
-			 local n1 = field.ln
-			 local n2 = n1.ln
-			     if n1.immovable == nil and n1:has_caps("walkable") and (n2:has_caps("flag") or (n2.immovable and n2.immovable.descr.type_name == "flag")) then
-		         local road = p1:place_road(field.immovable, "l", "l", true)
-				 road:set_workers('empire_carrier',1)
-			     end
+       if field.immovable and field.immovable.descr.type_name == "flag" then
+          local n1 = field.bln
+          local n2 = n1.bln
+              if n1.immovable == nil and n1:has_caps("walkable") and (n2:has_caps("flag") or (n2.immovable and n2.immovable.descr.type_name == "flag")) then
+               local road = p1:place_road(field.immovable, "bl", "bl", true)
+             road:set_workers('empire_carrier',1)
+              end
          end
-	  end		 
-     end 
-	 
-	 for x=7, 35 do
-      for y=180, 207 do
-         local field = map:get_field(x,y)
-		 if field.immovable and field.immovable.descr.type_name == "flag" then
-			 local n1 = field.tln
-			 local n2 = n1.tln
-			     if n1.immovable == nil and n1:has_caps("walkable") and (n2:has_caps("flag") or (n2.immovable and n2.immovable.descr.type_name == "flag")) then
-		         local road = p1:place_road(field.immovable, "tl", "tl", true)
-				 road:set_workers('empire_carrier',1)
-			     end
-         end
-	  end
-      for y=0, 25 do
-         local field = map:get_field(x,y)
-		 if field.immovable and field.immovable.descr.type_name == "flag" then
-			 local n1 = field.tln
-			 local n2 = n1.tln
-			     if n1.immovable == nil and n1:has_caps("walkable") and (n2:has_caps("flag") or (n2.immovable and n2.immovable.descr.type_name == "flag")) then
-		         local road = p1:place_road(field.immovable, "tl", "tl", true)
-				 road:set_workers('empire_carrier',1)
-			     end
-         end
-	  end		 
-     end 
-	 
-	 for x=7, 35 do
-      for y=180, 207 do
-         local field = map:get_field(x,y)
-		 if field.immovable and field.immovable.descr.type_name == "flag" then
-			 local n1 = field.brn
-			 local n2 = n1.brn
-			     if n1.immovable == nil and n1:has_caps("walkable") and (n2:has_caps("flag") or (n2.immovable and n2.immovable.descr.type_name == "flag")) then
-		         local road = p1:place_road(field.immovable, "br", "br", true)
-				 road:set_workers('empire_carrier',1)
-			     end
-         end
-	  end
-      for y=0, 25 do
-         local field = map:get_field(x,y)
-		 if field.immovable and field.immovable.descr.type_name == "flag" then
-			 local n1 = field.brn
-			 local n2 = n1.brn
-			     if n1.immovable == nil and n1:has_caps("walkable") and (n2:has_caps("flag") or (n2.immovable and n2.immovable.descr.type_name == "flag")) then
-		         local road = p1:place_road(field.immovable, "br", "br", true)
-				 road:set_workers('empire_carrier',1)
-			     end
-         end
-	  end		 
-     end 
-	 
-	 	 for x=7, 35 do
-      for y=180, 207 do
-         local field = map:get_field(x,y)
-		 if field.immovable and field.immovable.descr.type_name == "flag" then
-			 local n1 = field.rn
-			 local n2 = n1.rn
-			     if n1.immovable == nil and n1:has_caps("walkable") and (n2:has_caps("flag") or (n2.immovable and n2.immovable.descr.type_name == "flag")) then
-		         local road = p1:place_road(field.immovable, "r", "r", true)
-				 road:set_workers('empire_carrier',1)
-			     end
-         end
-	  end
-      for y=0, 25 do
-         local field = map:get_field(x,y)
-		 if field.immovable and field.immovable.descr.type_name == "flag" then
-			 local n1 = field.rn
-			 local n2 = n1.rn
-			     if n1.immovable == nil and n1:has_caps("walkable") and (n2:has_caps("flag") or (n2.immovable and n2.immovable.descr.type_name == "flag")) then
-		         local road = p1:place_road(field.immovable, "r", "r", true)
-				 road:set_workers('empire_carrier',1)
-			     end
-         end
-	  end		 
-     end 
+     end
+     end
 
-	 	 for x=7, 35 do
+     for x=7, 35 do
       for y=180, 207 do
          local field = map:get_field(x,y)
-		 if field.immovable and field.immovable.descr.type_name == "flag" then
-			 local n1 = field.rn
-			 local n2 = n1.trn
-			     if n1.immovable == nil and n1:has_caps("walkable") and (n2:has_caps("flag") or (n2.immovable and n2.immovable.descr.type_name == "flag")) then
-		         local road = p1:place_road(field.immovable, "r", "tr", true)
-				 road:set_workers('empire_carrier',1)
-			     end
+       if field.immovable and field.immovable.descr.type_name == "flag" then
+          local n1 = field.ln
+          local n2 = n1.ln
+              if n1.immovable == nil and n1:has_caps("walkable") and (n2:has_caps("flag") or (n2.immovable and n2.immovable.descr.type_name == "flag")) then
+               local road = p1:place_road(field.immovable, "l", "l", true)
+             road:set_workers('empire_carrier',1)
+              end
          end
-	  end
+     end
       for y=0, 25 do
          local field = map:get_field(x,y)
-		 if field.immovable and field.immovable.descr.type_name == "flag" then
-			 local n1 = field.rn
-			 local n2 = n1.trn
-			     if n1.immovable == nil and n1:has_caps("walkable") and (n2:has_caps("flag") or (n2.immovable and n2.immovable.descr.type_name == "flag")) then
-		         local road = p1:place_road(field.immovable, "r", "tr", true)
-				 road:set_workers('empire_carrier',1)
-			     end
+       if field.immovable and field.immovable.descr.type_name == "flag" then
+          local n1 = field.ln
+          local n2 = n1.ln
+              if n1.immovable == nil and n1:has_caps("walkable") and (n2:has_caps("flag") or (n2.immovable and n2.immovable.descr.type_name == "flag")) then
+               local road = p1:place_road(field.immovable, "l", "l", true)
+             road:set_workers('empire_carrier',1)
+              end
          end
-	  end		 
-     end 
-	 
-	 	 for x=7, 35 do
+     end
+     end
+
+    for x=7, 35 do
       for y=180, 207 do
          local field = map:get_field(x,y)
-		 if field.immovable and field.immovable.descr.type_name == "flag" then
-			 local n1 = field.trn
-			 local n2 = n1.tln
-			     if n1.immovable == nil and n1:has_caps("walkable") and (n2:has_caps("flag") or (n2.immovable and n2.immovable.descr.type_name == "flag")) then
-		         local road = p1:place_road(field.immovable, "tr", "tl", true)
-				 road:set_workers('empire_carrier',1)
-			     end
+       if field.immovable and field.immovable.descr.type_name == "flag" then
+          local n1 = field.tln
+          local n2 = n1.tln
+              if n1.immovable == nil and n1:has_caps("walkable") and (n2:has_caps("flag") or (n2.immovable and n2.immovable.descr.type_name == "flag")) then
+               local road = p1:place_road(field.immovable, "tl", "tl", true)
+             road:set_workers('empire_carrier',1)
+              end
          end
-	  end
+     end
       for y=0, 25 do
          local field = map:get_field(x,y)
-		 if field.immovable and field.immovable.descr.type_name == "flag" then
-			 local n1 = field.trn
-			 local n2 = n1.tln
-			     if n1.immovable == nil and n1:has_caps("walkable") and (n2:has_caps("flag") or (n2.immovable and n2.immovable.descr.type_name == "flag")) then
-		         local road = p1:place_road(field.immovable, "tr", "tl", true)
-				 road:set_workers('empire_carrier',1)
-			     end
+       if field.immovable and field.immovable.descr.type_name == "flag" then
+          local n1 = field.tln
+          local n2 = n1.tln
+              if n1.immovable == nil and n1:has_caps("walkable") and (n2:has_caps("flag") or (n2.immovable and n2.immovable.descr.type_name == "flag")) then
+               local road = p1:place_road(field.immovable, "tl", "tl", true)
+             road:set_workers('empire_carrier',1)
+              end
          end
-	  end		 
-     end 
-	 
-	 	 for x=7, 35 do
+     end
+     end
+
+    for x=7, 35 do
       for y=180, 207 do
          local field = map:get_field(x,y)
-		 if field.immovable and field.immovable.descr.type_name == "flag" then
-			 local n1 = field.rn
-			 local n2 = n1.brn
-			     if n1.immovable == nil and n1:has_caps("walkable") and (n2:has_caps("flag") or (n2.immovable and n2.immovable.descr.type_name == "flag")) then
-		         local road = p1:place_road(field.immovable, "r", "br", true)
-				 road:set_workers('empire_carrier',1)
-			     end
+       if field.immovable and field.immovable.descr.type_name == "flag" then
+          local n1 = field.brn
+          local n2 = n1.brn
+              if n1.immovable == nil and n1:has_caps("walkable") and (n2:has_caps("flag") or (n2.immovable and n2.immovable.descr.type_name == "flag")) then
+               local road = p1:place_road(field.immovable, "br", "br", true)
+             road:set_workers('empire_carrier',1)
+              end
          end
-	  end
+     end
       for y=0, 25 do
          local field = map:get_field(x,y)
-		 if field.immovable and field.immovable.descr.type_name == "flag" then
-			 local n1 = field.rn
-			 local n2 = n1.brn
-			     if n1.immovable == nil and n1:has_caps("walkable") and (n2:has_caps("flag") or (n2.immovable and n2.immovable.descr.type_name == "flag")) then
-		         local road = p1:place_road(field.immovable, "r", "br", true)
-				 road:set_workers('empire_carrier',1)
-			     end
+       if field.immovable and field.immovable.descr.type_name == "flag" then
+          local n1 = field.brn
+          local n2 = n1.brn
+              if n1.immovable == nil and n1:has_caps("walkable") and (n2:has_caps("flag") or (n2.immovable and n2.immovable.descr.type_name == "flag")) then
+               local road = p1:place_road(field.immovable, "br", "br", true)
+             road:set_workers('empire_carrier',1)
+              end
          end
-	  end		 
-     end 
-	  
+     end
+     end
+
+       for x=7, 35 do
+      for y=180, 207 do
+         local field = map:get_field(x,y)
+       if field.immovable and field.immovable.descr.type_name == "flag" then
+          local n1 = field.rn
+          local n2 = n1.rn
+              if n1.immovable == nil and n1:has_caps("walkable") and (n2:has_caps("flag") or (n2.immovable and n2.immovable.descr.type_name == "flag")) then
+               local road = p1:place_road(field.immovable, "r", "r", true)
+             road:set_workers('empire_carrier',1)
+              end
+         end
+     end
+      for y=0, 25 do
+         local field = map:get_field(x,y)
+       if field.immovable and field.immovable.descr.type_name == "flag" then
+          local n1 = field.rn
+          local n2 = n1.rn
+              if n1.immovable == nil and n1:has_caps("walkable") and (n2:has_caps("flag") or (n2.immovable and n2.immovable.descr.type_name == "flag")) then
+               local road = p1:place_road(field.immovable, "r", "r", true)
+             road:set_workers('empire_carrier',1)
+              end
+         end
+     end
+     end
+
+       for x=7, 35 do
+      for y=180, 207 do
+         local field = map:get_field(x,y)
+       if field.immovable and field.immovable.descr.type_name == "flag" then
+          local n1 = field.rn
+          local n2 = n1.trn
+              if n1.immovable == nil and n1:has_caps("walkable") and (n2:has_caps("flag") or (n2.immovable and n2.immovable.descr.type_name == "flag")) then
+               local road = p1:place_road(field.immovable, "r", "tr", true)
+             road:set_workers('empire_carrier',1)
+              end
+         end
+     end
+      for y=0, 25 do
+         local field = map:get_field(x,y)
+       if field.immovable and field.immovable.descr.type_name == "flag" then
+          local n1 = field.rn
+          local n2 = n1.trn
+              if n1.immovable == nil and n1:has_caps("walkable") and (n2:has_caps("flag") or (n2.immovable and n2.immovable.descr.type_name == "flag")) then
+               local road = p1:place_road(field.immovable, "r", "tr", true)
+             road:set_workers('empire_carrier',1)
+              end
+         end
+     end
+     end
+
+       for x=7, 35 do
+      for y=180, 207 do
+         local field = map:get_field(x,y)
+       if field.immovable and field.immovable.descr.type_name == "flag" then
+          local n1 = field.trn
+          local n2 = n1.tln
+              if n1.immovable == nil and n1:has_caps("walkable") and (n2:has_caps("flag") or (n2.immovable and n2.immovable.descr.type_name == "flag")) then
+               local road = p1:place_road(field.immovable, "tr", "tl", true)
+             road:set_workers('empire_carrier',1)
+              end
+         end
+     end
+      for y=0, 25 do
+         local field = map:get_field(x,y)
+       if field.immovable and field.immovable.descr.type_name == "flag" then
+          local n1 = field.trn
+          local n2 = n1.tln
+              if n1.immovable == nil and n1:has_caps("walkable") and (n2:has_caps("flag") or (n2.immovable and n2.immovable.descr.type_name == "flag")) then
+               local road = p1:place_road(field.immovable, "tr", "tl", true)
+             road:set_workers('empire_carrier',1)
+              end
+         end
+     end
+     end
+
+       for x=7, 35 do
+      for y=180, 207 do
+         local field = map:get_field(x,y)
+       if field.immovable and field.immovable.descr.type_name == "flag" then
+          local n1 = field.rn
+          local n2 = n1.brn
+              if n1.immovable == nil and n1:has_caps("walkable") and (n2:has_caps("flag") or (n2.immovable and n2.immovable.descr.type_name == "flag")) then
+               local road = p1:place_road(field.immovable, "r", "br", true)
+             road:set_workers('empire_carrier',1)
+              end
+         end
+     end
+      for y=0, 25 do
+         local field = map:get_field(x,y)
+       if field.immovable and field.immovable.descr.type_name == "flag" then
+          local n1 = field.rn
+          local n2 = n1.brn
+              if n1.immovable == nil and n1:has_caps("walkable") and (n2:has_caps("flag") or (n2.immovable and n2.immovable.descr.type_name == "flag")) then
+               local road = p1:place_road(field.immovable, "r", "br", true)
+             road:set_workers('empire_carrier',1)
+              end
+         end
+     end
+     end
+
 
 -- =======================================================================
 --                                 Player 2
@@ -432,7 +432,7 @@ p2:allow_buildings{
    "barbarians_big_inn",
    "barbarians_scouts_hut",
    "barbarians_citadel",
-   "barbarians_tower", 
+   "barbarians_tower",
    "barbarians_fortress",
 }
 
@@ -486,6 +486,3 @@ prefilled_buildings(p2,
     }
   }
 )
-
-
-   

@@ -9,7 +9,7 @@ tribes:new_productionsite_type {
    icon = dirname .. "menu.png",
    size = "big",
 
-   
+
    return_on_dismantle = {
       planks = 1,
       granite = 1,

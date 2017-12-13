@@ -28,12 +28,12 @@ end
 function enemy_seen()
    for x=32, 90 do
       for y=20, 175 do
-         local field = map:get_field(x,y)	 
-		 if field.owner == p2 and p1:sees_field(field) then 
-			return field
-	     end
+         local field = map:get_field(x,y)
+       if field.owner == p2 and p1:sees_field(field) then
+         return field
+        end
       end
-   end 
+   end
 end
 
 function concentric_reveal(plr, center, max_radius, delay)
@@ -88,4 +88,3 @@ function random_hide(plr, region, time)
       sleep(delay)
    end
 end
-

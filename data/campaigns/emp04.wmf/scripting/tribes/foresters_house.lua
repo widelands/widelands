@@ -9,13 +9,13 @@ tribes:new_productionsite_type {
    icon = dirname .. "menu.png",
    size = "small",
    enhancement = "empire_foresters_house2",
-   
+
    buildcost = {
       log = 1,
       planks = 1,
       granite = 1
    },
-   
+
    return_on_dismantle = {
       planks = 0,
    },

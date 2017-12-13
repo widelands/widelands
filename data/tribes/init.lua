@@ -471,7 +471,7 @@ print_loading_message("┗━ took", function()
       include "tribes/buildings/partially_finished/constructionsite/init.lua"
       include "tribes/buildings/partially_finished/dismantlesite/init.lua"
    end)
- 
+
    -- ===================================
    --    Tribes
    -- ===================================
@@ -480,6 +480,6 @@ print_loading_message("┗━ took", function()
       include "tribes/barbarians.lua"
       include "tribes/empire.lua"
    end)
-   
+
 
 end)
