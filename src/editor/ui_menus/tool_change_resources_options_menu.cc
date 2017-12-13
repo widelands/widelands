@@ -57,7 +57,7 @@ EditorToolChangeResourcesOptionsMenu::EditorToolChangeResourcesOptionsMenu(
                 increase_tool_.get_change_by(),
                 1,
                 kMaxValue,
-                _("Increase/Decrease Value:"),
+                _("Increase/Decrease Amount by:"),
                 UI::SpinBox::Units::kNone,
                 g_gr->images().get("images/ui_basic/but1.png"),
                 UI::SpinBox::Type::kSmall),
@@ -69,7 +69,7 @@ EditorToolChangeResourcesOptionsMenu::EditorToolChangeResourcesOptionsMenu(
              increase_tool_.set_tool().get_set_to(),
              0,
              kMaxValue,
-             _("Set Value:"),
+             _("Set Amount to:"),
              UI::SpinBox::Units::kNone,
              g_gr->images().get("images/ui_basic/but1.png"),
              UI::SpinBox::Type::kSmall),
@@ -82,7 +82,7 @@ EditorToolChangeResourcesOptionsMenu::EditorToolChangeResourcesOptionsMenu(
 	     "Shift + Click on the map to decrease the amount of the selected resource"));
 	set_to_.set_tooltip(
 	   /** TRANSLATORS: Editor set rseources access key. **/
-	   _("Ctrl + Click on the map to set the amount of the selected resource"));
+	   _("Ctrl + Click on the map to set the amount of the selected resource. This replaces already set resources"));
 
 	change_by_.changed.connect(
 	   boost::bind(&EditorToolChangeResourcesOptionsMenu::update_change_by, boost::ref(*this)));
