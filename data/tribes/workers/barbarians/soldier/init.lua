@@ -6,55 +6,105 @@ animations = {
       hotspot = { 16, 31 },
       fps = 5
    },
-   atk_ok_e = {
+   atk_ok_e_0 = {
       pictures = path.list_files(dirname .. "atk_ok_e_??.png"),
       hotspot = { 30, 36 },
       fps = 10
    },
-   atk_fail_e = {
+   atk_fail_e_0 = {
       pictures = path.list_files(dirname .. "atk_fail_e_??.png"),
       hotspot = { 30, 36 },
       fps = 10
    },
-   eva_ok_e = {
+   eva_ok_e_0 = {
       pictures = path.list_files(dirname .. "eva_ok_e_??.png"),
       hotspot = { 18, 34 },
       fps = 20
    },
-   eva_fail_e = {
+   eva_fail_e_0 = {
       pictures = path.list_files(dirname .. "eva_fail_e_??.png"),
       hotspot = { 30, 36 },
       fps = 10
    },
-   atk_ok_w = {
+   atk_ok_w_0 = {
       pictures = path.list_files(dirname .. "atk_ok_w_??.png"),
       hotspot = { 30, 36 },
       fps = 10
    },
-   atk_fail_w = {
+   atk_fail_w_0 = {
       pictures = path.list_files(dirname .. "atk_fail_w_??.png"),
       hotspot = { 30, 36 },
       fps = 10
    },
-   eva_ok_w = {
+   eva_ok_w_0 = {
       pictures = path.list_files(dirname .. "eva_ok_w_??.png"),
       hotspot = { 18, 34 },
       fps = 20
    },
-   eva_fail_w = {
+   eva_fail_w_0 = {
       pictures = path.list_files(dirname .. "eva_fail_w_??.png"),
       hotspot = { 30, 36 },
       fps = 10
    },
-   die_w = {
+   atk_ok_e_1 = {
+      pictures = path.list_files(dirname .. "idle_??.png"),
+      hotspot = { 16, 31 },
+      fps = 5
+   },
+   atk_fail_e_1 = {
+      pictures = path.list_files(dirname .. "idle_??.png"),
+      hotspot = { 16, 31 },
+      fps = 5
+   },
+   eva_ok_e_1 = {
+      pictures = path.list_files(dirname .. "idle_??.png"),
+      hotspot = { 16, 31 },
+      fps = 5
+   },
+   eva_fail_e_1 = {
+      pictures = path.list_files(dirname .. "idle_??.png"),
+      hotspot = { 16, 31 },
+      fps = 5
+   },
+   atk_ok_w_1 = {
+      pictures = path.list_files(dirname .. "idle_??.png"),
+      hotspot = { 16, 36 },
+      fps = 5
+   },
+   atk_fail_w_1 = {
+      pictures = path.list_files(dirname .. "idle_??.png"),
+      hotspot = { 16, 36 },
+      fps = 5
+   },
+   eva_ok_w_1 = {
+      pictures = path.list_files(dirname .. "idle_??.png"),
+      hotspot = { 16, 31 },
+      fps = 5
+   },
+   eva_fail_w_1 = {
+      pictures = path.list_files(dirname .. "idle_??.png"),
+      hotspot = { 16, 31 },
+      fps = 5
+   },
+   die_w_normal = {
       pictures = path.list_files(dirname .. "die_??.png"),
       hotspot = { 16, 31 },
       fps = 20
    },
-   die_e = {
+   die_e_normal = {
       pictures = path.list_files(dirname .. "die_??.png"),
       hotspot = { 16, 31 },
       fps = 20
+   },
+   die_alt_w = {
+      pictures = path.list_files(dirname .. "idle_??.png"),
+      hotspot = { 16, 31 },
+      fps = 5
+   },
+   die_alt_e = {
+      pictures = path.list_files(dirname .. "idle_??.png"),
+      hotspot = { 16, 31 },
+      fps = 5
    },
 }
 add_walking_animations(animations, "walk", dirname, "walk", {16, 31}, 10)
@@ -100,35 +150,47 @@ tribes:new_soldier_type {
       pictures = path.list_files(dirname .. "evade_level?.png"),
    },
 
-   -- Random animations for battle
+   -- Random animations for battle – for testing only
    attack_success_w = {
-      "atk_ok_w",
+      "atk_ok_w_0",
+      "atk_ok_w_1",
    },
    attack_success_e = {
-      "atk_ok_e",
+      "atk_ok_e_0",
+      "atk_ok_e_1",
    },
    attack_failure_w = {
-      "atk_fail_w",
+      "atk_fail_w_1",
+      "atk_fail_w_0",
    },
    attack_failure_e = {
-      "atk_fail_e",
+      "atk_fail_e_1",
+      "atk_fail_e_0",
    },
    evade_success_w = {
-      "eva_ok_w",
+      "eva_ok_w_0",
+      "eva_ok_w_1",
    },
    evade_success_e = {
-      "eva_ok_e",
+      "eva_ok_e_1",
+      "eva_ok_e_0",
    },
    evade_failure_w = {
-      "eva_fail_w",
+      "eva_fail_w_0",
+      "eva_fail_w_1",
    },
    evade_failure_e = {
-      "eva_fail_e",
+      "eva_fail_e_1",
+      "eva_fail_e_0",
    },
    die_w = {
-      "die_w",
+      "die_w_normal",
+      "die_alt_w",
+      "eva_fail_e_0",
    },
    die_e = {
-      "die_e",
+      "die_alt_e",
+      "die_e_normal",
+      "atk_ok_w_1",
    },
 }
