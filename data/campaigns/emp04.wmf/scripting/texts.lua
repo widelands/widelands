@@ -314,7 +314,7 @@ amalea_2 = {
       _([[This situation was caused by the sad fact that our people lost the instructions on how to construct and operate farms. Therefore they have zero productivity and the constructors don’t know how to dismantle them either.]])
 	  .. paragraphdivider() ..
       -- TRANSLATORS: Amalea
-      _([[So, we urgently need to recover the plans regarding the construction and operation of farms. One older constructor told me, that they might have been concealed in a cave in the hills east of our border.]]))
+      _([[So, we urgently need to recover the plans regarding the construction and operation of farms. One older constructor told me that they might have been concealed in a cave in the hills east of our border.]]))
 	  .. new_objectives(obj_find_farm_plans),
    posy=1,
    h=500,
@@ -330,7 +330,7 @@ amalea_3 = {
       _([[First of all, we need more construction materials. So, we should build at least three lumberjacks’ houses and two quarries.]])
       .. paragraphdivider() ..
       -- TRANSLATORS: Amalea
-      _([[Oh, before I forget, there is another task to accomplish. While our builders are doing their job, somebody should clear up our road network. This complete disorder is wasting so many building sites.]])) -- NOCOM I don't understand what you mean by "wasting so many building sites" - might become clear when I play the scenario
+      _([[Oh, before I forget, there is another task to accomplish. While our builders are doing their job, somebody should clear up our road network in the meantime. They are leaving us no space to place the buildings that we need.]]))
       .. new_objectives(obj_build_quarries_and_lumberjacks, obj_clear_roads),
    posy=1,
    h=500,
@@ -340,7 +340,7 @@ amalea_4 = {
    title=_"Amalea is Somewhat Relieved",
    body= amalea2(_"Amalea is giving a deep sigh…",
       -- TRANSLATORS: Amalea
-      _([[Praise the gods, Lutius! We have found the plans of how to build and operate farms.]])
+      _([[Praise the gods, Lutius! We have found the plans on how to build and operate farms.]])
       .. paragraphdivider() ..
       -- TRANSLATORS: Amalea
       _([[Now we can start building farms to produce the beer which our miners need so desperately.]])
