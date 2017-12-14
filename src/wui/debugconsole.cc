@@ -42,7 +42,7 @@ struct Console : public ChatProvider, public Handler {
 		default_handler = boost::bind(&Console::cmdErr, this, _1);
 	}
 
-	~Console() {
+	~Console() override {
 	}
 
 	void cmdHelp(const std::vector<std::string>&) {

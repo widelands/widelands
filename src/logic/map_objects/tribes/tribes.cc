@@ -178,6 +178,17 @@ void Tribes::add_tribe(const LuaTable& table, const EditorGameBase& egbase) {
 	}
 }
 
+void Tribes::add_custom_building(const LuaTable& table) {
+	const std::string tribename = table.get_string("tribename");
+	if (Widelands::tribe_exists(tribename)) {
+		TribeDescr* descr = tribes_->get_mutable(tribe_index(tribename));
+		const std::string buildingname = table.get_string("buildingname");
+		descr->add_building(buildingname);
+	} else {
+		throw GameDataError("The tribe '%s'' has no preload file.", tribename.c_str());
+	}
+}
+
 size_t Tribes::nrbuildings() const {
 	return buildings_->size();
 }
@@ -194,8 +205,14 @@ size_t Tribes::nrworkers() const {
 	return workers_->size();
 }
 
+bool Tribes::ware_exists(const std::string& warename) const {
+	return wares_->exists(warename) != nullptr;
+}
 bool Tribes::ware_exists(const DescriptionIndex& index) const {
 	return wares_->get_mutable(index) != nullptr;
+}
+bool Tribes::worker_exists(const std::string& workername) const {
+	return workers_->exists(workername) != nullptr;
 }
 bool Tribes::worker_exists(const DescriptionIndex& index) const {
 	return workers_->get_mutable(index) != nullptr;
@@ -360,11 +377,82 @@ void Tribes::postload() {
 			buildings_->get_mutable(enhancement)->set_enhanced_from(i);
 		}
 	}
+
+	// Calculate the trainingsites proportions.
+	postload_calculate_trainingsites_proportions();
+
 	// Resize the configuration of our wares if they won't fit in the current window (12 = info label
-	// size)
+	// size).
 	int number = (g_gr->get_yres() - 290) / (WARE_MENU_PIC_HEIGHT + WARE_MENU_PIC_PAD_Y + 12);
 	for (DescriptionIndex i = 0; i < tribes_->size(); ++i) {
-		tribes_->get_mutable(i)->resize_ware_orders(number);
+		TribeDescr* tribe_descr = tribes_->get_mutable(i);
+		tribe_descr->resize_ware_orders(number);
+	}
+}
+
+// Set default trainingsites proportions for AI. Make sure that we get a sum of ca. 100
+void Tribes::postload_calculate_trainingsites_proportions() {
+	for (DescriptionIndex i = 0; i < tribes_->size(); ++i) {
+		TribeDescr* tribe_descr = tribes_->get_mutable(i);
+		unsigned int trainingsites_without_percent = 0;
+		int used_percent = 0;
+		std::vector<BuildingDescr*> traingsites_with_percent;
+		for (const DescriptionIndex& index : tribe_descr->trainingsites()) {
+			BuildingDescr* descr = get_mutable_building_descr(index);
+			if (descr->hints().trainingsites_max_percent() == 0) {
+				++trainingsites_without_percent;
+			} else {
+				used_percent += descr->hints().trainingsites_max_percent();
+				traingsites_with_percent.push_back(descr);
+			}
+		}
+
+		log("%s trainingsites: We have used up %d%% on %" PRIuS " sites, there are %d without\n",
+		    tribe_descr->name().c_str(), used_percent, traingsites_with_percent.size(),
+		    trainingsites_without_percent);
+
+		// Adjust used_percent if we don't have at least 5% for each remaining trainingsite
+		const float limit = 100 - trainingsites_without_percent * 5;
+		if (used_percent > limit) {
+			const int deductme = (used_percent - limit) / traingsites_with_percent.size();
+			used_percent = 0;
+			for (BuildingDescr* descr : traingsites_with_percent) {
+				descr->set_hints_trainingsites_max_percent(descr->hints().trainingsites_max_percent() -
+				                                           deductme);
+				used_percent += descr->hints().trainingsites_max_percent();
+			}
+			log("%s trainingsites: Used percent was adjusted to %d%%\n", tribe_descr->name().c_str(),
+			    used_percent);
+		}
+
+		// Now adjust for trainingsites that didn't have their max_percent set
+		if (trainingsites_without_percent > 0) {
+			int percent_to_use = std::ceil((100 - used_percent) / trainingsites_without_percent);
+			// We sometimes get below 100% in spite of the ceil call above.
+			// A total sum a bit above 100% is fine though, so we increment until it's big enough.
+			while ((used_percent + percent_to_use * trainingsites_without_percent) < 100) {
+				++percent_to_use;
+			}
+			log("%s trainingsites: Assigning %d%% to each of the remaining %d sites\n",
+			    tribe_descr->name().c_str(), percent_to_use, trainingsites_without_percent);
+			if (percent_to_use < 1) {
+				throw GameDataError(
+				   "%s: Training sites without predefined proportions add up to < 1%% and "
+				   "will never be built: %d",
+				   tribe_descr->name().c_str(), used_percent);
+			}
+			for (const DescriptionIndex& index : tribe_descr->trainingsites()) {
+				BuildingDescr* descr = get_mutable_building_descr(index);
+				if (descr->hints().trainingsites_max_percent() == 0) {
+					descr->set_hints_trainingsites_max_percent(percent_to_use);
+					used_percent += percent_to_use;
+				}
+			}
+		}
+		if (used_percent < 100) {
+			throw GameDataError("%s: Final training sites proportions add up to < 100%%: %d",
+			                    tribe_descr->name().c_str(), used_percent);
+		}
 	}
 }
 

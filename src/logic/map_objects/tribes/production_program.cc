@@ -381,16 +381,16 @@ std::string ProductionProgram::ActReturn::SiteHas::description(const Tribes& tri
 	}
 	std::string condition = i18n::localize_list(condition_list, i18n::ConcatenateWith::AND);
 	if (1 < group.second) {
-		/** TRANSLATORS: This is an item in a list of wares, e.g. "3x water": */
-		/** TRANSLATORS:    %1$i = "3" */
-		/** TRANSLATORS:    %2$s = "water" */
 		condition =
+		   /** TRANSLATORS: This is an item in a list of wares, e.g. "3x water": */
+		   /** TRANSLATORS:    %1$i = "3" */
+		   /** TRANSLATORS:    %2$s = "water" */
 		   (boost::format(_("%1$ix %2$s")) % static_cast<unsigned int>(group.second) % condition)
 		      .str();
 	}
 
-	/** TRANSLATORS: %s is a list of wares*/
 	std::string result =
+	   /** TRANSLATORS: %s is a list of wares*/
 	   (boost::format(_("the building has the following wares: %s")) % condition).str();
 	return result;
 }
@@ -407,16 +407,16 @@ ProductionProgram::ActReturn::SiteHas::description_negation(const Tribes& tribes
 	}
 	std::string condition = i18n::localize_list(condition_list, i18n::ConcatenateWith::AND);
 	if (1 < group.second) {
-		/** TRANSLATORS: This is an item in a list of wares, e.g. "3x water": */
-		/** TRANSLATORS:    %1$i = "3" */
-		/** TRANSLATORS:    %2$s = "water" */
 		condition =
+		   /** TRANSLATORS: This is an item in a list of wares, e.g. "3x water": */
+		   /** TRANSLATORS:    %1$i = "3" */
+		   /** TRANSLATORS:    %2$s = "water" */
 		   (boost::format(_("%1$ix %2$s")) % static_cast<unsigned int>(group.second) % condition)
 		      .str();
 	}
 
-	/** TRANSLATORS: %s is a list of wares*/
 	std::string result =
+	   /** TRANSLATORS: %s is a list of wares*/
 	   (boost::format(_("the building doesn’t have the following wares: %s")) % condition).str();
 	return result;
 }
@@ -742,9 +742,9 @@ ProductionProgram::ActCheckMap::ActCheckMap(char* parameters) {
 void ProductionProgram::ActCheckMap::execute(Game& game, ProductionSite& ps) const {
 	switch (feature_) {
 	case SEAFARING: {
-		if (game.map().get_port_spaces().size() > 1)
+		if (game.map().allows_seafaring()) {
 			return ps.program_step(game, 0);
-		else {
+		} else {
 			ps.set_production_result(_("No use for ships on this map!"));
 			return ps.program_end(game, Failed);
 		}

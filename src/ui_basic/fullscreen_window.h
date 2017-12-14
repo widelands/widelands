@@ -68,7 +68,7 @@ public:
 
 	/// A full screen main menu outside of the game/editor itself.
 	FullscreenWindow();
-	virtual ~FullscreenWindow();
+	~FullscreenWindow() override;
 
 	/// \return the size for texts fitting to current resolution
 	int fs_small();

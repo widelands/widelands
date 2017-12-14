@@ -82,6 +82,9 @@ DefaultAI::NormalImpl DefaultAI::normal_impl;
 DefaultAI::WeakImpl DefaultAI::weak_impl;
 DefaultAI::VeryWeakImpl DefaultAI::very_weak_impl;
 
+uint32_t DefaultAI::last_seafaring_check_ = 0;
+bool DefaultAI::map_allows_seafaring_ = false;
+
 /// Constructor of DefaultAI
 DefaultAI::DefaultAI(Game& ggame, PlayerNumber const pid, Widelands::AiType const t)
    : ComputerPlayer(ggame, pid),
@@ -106,9 +109,9 @@ DefaultAI::DefaultAI(Game& ggame, PlayerNumber const pid, Widelands::AiType cons
      ts_in_const_count_(0),
      ts_without_trainers_(0),
      inhibit_road_building_(0),
+     enemysites_check_delay_(30),
      resource_necessity_water_needed_(false),
      highest_nonmil_prio_(0),
-     seafaring_economy(false),
      expedition_ship_(kNoShip) {
 
 	// Subscribe to NoteFieldPossession.
@@ -449,14 +452,14 @@ void DefaultAI::think() {
 				};
 				if (!basic_economy_established) {
 					assert(!persistent_data->remaining_basic_buildings.empty());
-					assert(persistent_data->remaining_buildings_size > 0);
-					log("%2d: Basic economy not achieved, %lu building(s) missing, f.e.: %s\n",
+					log("%2d: Basic economy not achieved, %" PRIuS " building(s) missing, f.e.: %s\n",
 					    player_number(), persistent_data->remaining_basic_buildings.size(),
 					    get_building_observer(persistent_data->remaining_basic_buildings.begin()->first)
 					       .name);
 				}
 				if (!enemy_warehouses.empty())
-					log("Conquered warehouses: %d / %lu\n", conquered_wh, enemy_warehouses.size());
+					log(
+					   "Conquered warehouses: %d / %" PRIuS "\n", conquered_wh, enemy_warehouses.size());
 				management_data.review(
 				   gametime, player_number(), player_statistics.get_player_land(player_number()),
 				   player_statistics.get_enemies_max_land(),
@@ -511,29 +514,13 @@ void DefaultAI::late_initialization() {
 	// The data struct below is owned by Player object, the purpose is to have them saved therein
 	persistent_data = player_->get_mutable_ai_persistent_state();
 	management_data.persistent_data = player_->get_mutable_ai_persistent_state();
-	const bool create_basic_buildings_list = (gametime < kRemainingBasicBuildingsResetTime);
+	const bool create_basic_buildings_list =
+	   !persistent_data->initialized || (gametime < kRemainingBasicBuildingsResetTime);
 
-	if (persistent_data->initialized == kFalse) {
+	if (!persistent_data->initialized) {
 		// As all data are initialized without given values, they must be populated with reasonable
 		// values first
-		persistent_data->colony_scan_area = kColonyScanStartArea;
-		persistent_data->trees_around_cutters = 0;
-		persistent_data->initialized = kTrue;
-		persistent_data->last_attacked_player = std::numeric_limits<int16_t>::max();
-		persistent_data->expedition_start_time = kNoExpedition;
-		persistent_data->ships_utilization = 200;
-		persistent_data->no_more_expeditions = kFalse;
-		persistent_data->target_military_score = 100;
-		persistent_data->least_military_score = 0;
-		persistent_data->ai_productionsites_ratio = std::rand() % 5 + 7;
-		persistent_data->ai_personality_mil_upper_limit = 100;
-
-		// all zeroes
-		assert(persistent_data->neuron_weights.empty());
-		assert(persistent_data->neuron_functs.empty());
-		assert(persistent_data->magic_numbers_size == 0);
-		assert(persistent_data->neuron_pool_size == 0);
-		assert(persistent_data->magic_numbers.empty());
+		persistent_data->initialize();
 
 		// AI's DNA population
 		management_data.new_dna_for_persistent(player_number(), type_);
@@ -547,7 +534,7 @@ void DefaultAI::late_initialization() {
 		assert(management_data.get_military_number_at(42) ==
 		       management_data.get_military_number_at(kMutationRatePosition));
 
-	} else if (persistent_data->initialized == kTrue) {
+	} else {
 		// Doing some consistency checks
 		check_range<uint32_t>(
 		   persistent_data->expedition_start_time, gametime, "expedition_start_time");
@@ -575,21 +562,17 @@ void DefaultAI::late_initialization() {
 
 		management_data.test_consistency(true);
 
-		log(" %2d: %lu basic buildings in savegame file. %s\n", player_number(),
+		log(" %2d: %" PRIuS " basic buildings in savegame file. %s\n", player_number(),
 		    persistent_data->remaining_basic_buildings.size(),
 		    (create_basic_buildings_list) ?
 		       "New list will be recreated though (kAITrainingMode is true)" :
 		       "");
-
-	} else {
-		throw wexception("Corrupted AI data");
 	}
 
 	// Even if we have basic buildings from savefile, we ignore them and recreate them based
 	// on lua conf files
 	if (create_basic_buildings_list) {
 		persistent_data->remaining_basic_buildings.clear();
-		persistent_data->remaining_buildings_size = 0;
 	}
 
 	for (DescriptionIndex building_index = 0; building_index < nr_buildings; ++building_index) {
@@ -638,8 +621,9 @@ void DefaultAI::late_initialization() {
 		}
 		if (create_basic_buildings_list &&
 		    bh.basic_amount() > 0) {  // This is the very begining of the game
-			persistent_data->remaining_basic_buildings[bo.id] = bh.basic_amount();
-			++persistent_data->remaining_buildings_size;
+			assert(persistent_data->remaining_basic_buildings.count(bo.id) == 0);
+			persistent_data->remaining_basic_buildings.emplace(
+			   std::make_pair(bo.id, bh.basic_amount()));
 		}
 		bo.basic_amount = bh.basic_amount();
 		if (bh.get_needs_water()) {
@@ -1022,8 +1006,6 @@ void DefaultAI::late_initialization() {
 			    bb.second);
 		}
 	}
-	assert(persistent_data->remaining_basic_buildings.size() ==
-	       persistent_data->remaining_buildings_size);
 
 	update_player_stat(gametime);
 
@@ -1046,8 +1028,9 @@ void DefaultAI::late_initialization() {
 
 	// Sometimes there can be a ship in expedition, but expedition start time is not given
 	// e.g. human player played this player before
-	if (expedition_ship_ != kNoShip && persistent_data->expedition_start_time == kNoExpedition) {
-		// Current gametime is better then 'kNoExpedition'
+	if (expedition_ship_ != kNoShip &&
+	    persistent_data->expedition_start_time == Player::AiPersistentState::kNoExpedition) {
+		// Current gametime is better then 'Player::AiPersistentState::kNoExpedition'
 		persistent_data->expedition_start_time = gametime;
 	}
 
@@ -1055,9 +1038,6 @@ void DefaultAI::late_initialization() {
 	assert(iron_ore_id != INVALID_INDEX);
 
 	productionsites_ratio_ = management_data.get_military_number_at(86) / 10 + 12;
-
-	assert(persistent_data->remaining_basic_buildings.size() ==
-	       persistent_data->remaining_buildings_size);
 
 	// Just to be initialized
 	soldier_status_ = SoldiersStatus::kEnough;
@@ -1973,11 +1953,9 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 
 	const Map& map = game().map();
 
-	if (gametime % 5 == 0) {
-		// TODO(unknown): Counting port spaces is very primitive way for this
-		// there should be better alternative f.e. like map::allows_seafaring()
-		// function but simplier
-		seafaring_economy = map.get_port_spaces().size() >= 2;
+	if (gametime > last_seafaring_check_ + 20000U) {
+		map_allows_seafaring_ = map.allows_seafaring();
+		last_seafaring_check_ = gametime;
 	}
 
 	for (int32_t i = 0; i < 4; ++i)
@@ -2012,18 +1990,18 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 		log("%2d: Player has achieved the basic economy at %s\n", player_number(),
 		    gamestring_with_leading_zeros(gametime));
 		basic_economy_established = true;
-		assert(persistent_data->remaining_buildings_size == 0);
+		assert(persistent_data->remaining_basic_buildings.empty());
 	}
 
 	if (!basic_economy_established && player_statistics.any_enemy_seen_lately(gametime) &&
 	    management_data.f_neuron_pool[17].get_position(0)) {
-		log("%2d: Player has not all buildings for basic economy yet (%lu missing), but enemy is "
+		log("%2d: Player has not all buildings for basic economy yet (%" PRIuS
+		    " missing), but enemy is "
 		    "nearby, so quitting the mode at %s\n",
 		    player_number(), persistent_data->remaining_basic_buildings.size(),
 		    gamestring_with_leading_zeros(gametime));
 		basic_economy_established = true;
 		// Zeroing following to preserve consistency
-		persistent_data->remaining_buildings_size = 0;
 		persistent_data->remaining_basic_buildings.clear();
 	}
 
@@ -2685,7 +2663,7 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 						assert(!bo.is(BuildingAttribute::kShipyard));
 					} else if (bo.is(BuildingAttribute::kShipyard)) {
 						assert(bo.new_building == BuildingNecessity::kAllowed);
-						if (!seafaring_economy) {
+						if (!map_allows_seafaring_) {
 							continue;
 						}
 					} else {
@@ -2724,12 +2702,10 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 						    bf->unowned_mines_spots_nearby) {  // not close to mountains
 							prio -= std::abs(management_data.get_military_number_at(104)) / 5;
 						}
-					}
-
-					else if (bo.is(BuildingAttribute::kShipyard)) {
+					} else if (bo.is(BuildingAttribute::kShipyard)) {
 						// for now AI builds only one shipyard
 						assert(bo.total_count() == 0);
-						if (bf->open_water_nearby > 3 && seafaring_economy) {
+						if (bf->open_water_nearby > 3 && map_allows_seafaring_) {
 							prio += productionsites.size() * 5 +
 							        bf->open_water_nearby *
 							           std::abs(management_data.get_military_number_at(109)) / 10;
@@ -4275,7 +4251,7 @@ BuildingNecessity DefaultAI::check_warehouse_necessity(BuildingObserver& bo,
 		return BuildingNecessity::kForbidden;
 	}
 
-	if (bo.is(BuildingAttribute::kPort) && !seafaring_economy) {
+	if (bo.is(BuildingAttribute::kPort) && !map_allows_seafaring_) {
 		bo.new_building_overdue = 0;
 		bo.primary_priority = 0;
 		return BuildingNecessity::kForbidden;
@@ -4353,7 +4329,7 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 	}
 
 	// Perhaps buildings are not allowed because the map is no seafaring
-	if (purpose == PerfEvaluation::kForConstruction && !seafaring_economy &&
+	if (purpose == PerfEvaluation::kForConstruction && !map_allows_seafaring_ &&
 	    bo.is(BuildingAttribute::kNeedsSeafaring)) {
 		return BuildingNecessity::kForbidden;
 	}
@@ -5691,15 +5667,12 @@ void DefaultAI::gain_building(Building& b, const bool found_on_load) {
 				--persistent_data->remaining_basic_buildings[bo.id];
 			} else {
 				persistent_data->remaining_basic_buildings.erase(bo.id);
-				--persistent_data->remaining_buildings_size;
 			}
 		}
 		// Remaining basic buildings map contain either no entry for the building, or the number is
 		// nonzero
 		assert(persistent_data->remaining_basic_buildings.count(bo.id) == 0 ||
 		       persistent_data->remaining_basic_buildings[bo.id] > 0);
-		assert(persistent_data->remaining_basic_buildings.size() ==
-		       persistent_data->remaining_buildings_size);
 
 		if (bo.type == BuildingObserver::Type::kProductionsite) {
 			productionsites.push_back(ProductionSiteObserver());

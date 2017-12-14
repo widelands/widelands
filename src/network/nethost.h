@@ -42,7 +42,7 @@ public:
 	/**
 	 * Closes the server.
 	 */
-	~NetHost();
+	~NetHost() override;
 
 	// Inherited from NetHostInterface
 	bool is_connected(ConnectionId id) const override;

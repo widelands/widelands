@@ -58,6 +58,7 @@ FullscreenMenuMapSelect::FullscreenMenuMapSelect(GameSettingsProvider* const set
                   tableh_ - buth_ - 4 * padding_,
                   MapDetails::Style::kFsMenu),
 
+     scenario_types_(settings->settings().multiplayer ? Map::MP_SCENARIO : Map::SP_SCENARIO),
      basedir_(kMapsDir),
      settings_(settings),
      ctrl_(ctrl),
@@ -115,8 +116,6 @@ FullscreenMenuMapSelect::FullscreenMenuMapSelect(GameSettingsProvider* const set
 	add_tag_checkbox(hbox, "3teams", localize_tag("3teams"));
 	add_tag_checkbox(hbox, "4teams", localize_tag("4teams"));
 	checkboxes_.add(hbox, UI::Box::Resizing::kFullSize);
-
-	scenario_types_ = settings_->settings().multiplayer ? Map::MP_SCENARIO : Map::SP_SCENARIO;
 
 	table_.focus();
 	fill_table();

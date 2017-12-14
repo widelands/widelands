@@ -278,7 +278,7 @@ FullscreenMenuOptions::FullscreenMenuOptions(OptionsCtrl::OptionsStruct opt)
 	apply_.sigclicked.connect(boost::bind(&FullscreenMenuOptions::clicked_apply, this));
 	ok_.sigclicked.connect(boost::bind(&FullscreenMenuOptions::clicked_ok, this));
 
-	/** TRANSLATORS Options: Save game automatically every: */
+	/** TRANSLATORS: Options: Save game automatically every: */
 	sb_autosave_.add_replacement(0, _("Off"));
 
 	// Fill in data
@@ -450,7 +450,7 @@ void FullscreenMenuOptions::add_languages_to_list(const std::string& current_loc
 
 				std::string name = i18n::make_ligatures(table->get_string("name").c_str());
 				const std::string sortname = table->get_string("sort_name");
-				LanguageEntry* entry = new LanguageEntry(localename, name);
+				std::unique_ptr<LanguageEntry> entry(new LanguageEntry(localename, name));
 				entries.insert(std::make_pair(sortname, *entry));
 				language_entries_.insert(std::make_pair(localename, *entry));
 
@@ -513,7 +513,7 @@ void FullscreenMenuOptions::update_language_stats(bool include_system_lang) {
 				Section& s = prof.get_safe_section("global");
 				const int total = s.get_int("total");
 				s = prof.get_safe_section(locale);
-				percent = floor(100.f * s.get_int("translated") / total);
+				percent = static_cast<int>(floor(100 * s.get_int("translated") / total));
 				if (percent == 100) {
 					message =
 					   /** TRANSLATORS: %s = language name */
