@@ -44,7 +44,7 @@ class LuaInterface;
 class FullscreenMenuLaunchGame : public FullscreenMenuBase {
 public:
 	FullscreenMenuLaunchGame(GameSettingsProvider*, GameController*);
-	~FullscreenMenuLaunchGame();
+	~FullscreenMenuLaunchGame() override;
 
 	void think() override;
 

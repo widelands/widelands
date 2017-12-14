@@ -57,7 +57,7 @@ struct Carrier : public Worker {
 	explicit Carrier(const CarrierDescr& carrier_descr)
 	   : Worker(carrier_descr), promised_pickup_to_(NOONE) {
 	}
-	virtual ~Carrier() {
+	~Carrier() override {
 	}
 
 	bool notify_ware(Game&, int32_t flag);

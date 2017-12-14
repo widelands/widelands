@@ -138,8 +138,8 @@ BuildingStatisticsMenu::BuildingStatisticsMenu(InteractivePlayer& parent,
 	               g_gr->images().get("images/wui/fieldaction/menu_tab_buildmine.png"),
 	               tabs_[BuildingTab::Mines], _("Mines"));
 
-	// Hide the ports tab for non-seafaring maps
-	if (iplayer().game().map().get_port_spaces().size() > 1) {
+	// Only show the ports tab for seafaring maps
+	if (iplayer().game().map().allows_seafaring()) {
 		tab_panel_.add("building_stats_ports",
 		               g_gr->images().get("images/wui/fieldaction/menu_tab_buildport.png"),
 		               tabs_[BuildingTab::Ports], _("Ports"));
@@ -667,7 +667,7 @@ void BuildingStatisticsMenu::update() {
 				   total_soldier_capacity > total_stationed_soldiers);
 				navigation_buttons_[NavigationButton::NextUnproductive]->set_visible(true);
 				navigation_buttons_[NavigationButton::PrevUnproductive]->set_visible(true);
-				/** TRANSLATORS Label for number of buildings that are waiting for soldiers */
+				/** TRANSLATORS: Label for number of buildings that are waiting for soldiers */
 				unproductive_label_.set_text(_("Lacking Soldiers:"));
 				unproductive_box_.set_visible(true);
 				unproductive_label_.set_visible(true);
@@ -677,7 +677,7 @@ void BuildingStatisticsMenu::update() {
 
 		std::string owned_text;
 		if (player.tribe().has_building(id) && (building.is_buildable() || building.is_enhanced())) {
-			/** TRANSLATORS Buildings: owned / under construction */
+			/** TRANSLATORS: Buildings: owned / under construction */
 			owned_text = (boost::format(_("%1%/%2%")) % nr_owned % nr_build).str();
 		} else {
 			owned_text = (boost::format(_("%1%/%2%")) % nr_owned % "–").str();

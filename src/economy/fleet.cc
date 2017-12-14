@@ -102,13 +102,7 @@ bool Fleet::init(EditorGameBase& egbase) {
 		return false;
 	}
 
-	find_other_fleet(egbase);
-
-	if (active()) {
-		update(egbase);
-		return true;
-	}
-	return false;
+	return find_other_fleet(egbase);
 }
 
 struct StepEvalFindFleet {
@@ -137,7 +131,7 @@ struct StepEvalFindFleet {
  * Search the map, starting at our ships and ports, for another fleet
  * of the same player.
  */
-void Fleet::find_other_fleet(EditorGameBase& egbase) {
+bool Fleet::find_other_fleet(EditorGameBase& egbase) {
 	MapAStar<StepEvalFindFleet> astar(*egbase.mutable_map(), StepEvalFindFleet());
 	for (const Ship* temp_ship : ships_) {
 		astar.push(temp_ship->get_position());
@@ -164,8 +158,7 @@ void Fleet::find_other_fleet(EditorGameBase& egbase) {
 						    dock->dockpoints_.front().y);
 					}
 					if (dock->get_fleet() != this && dock->get_owner() == get_owner()) {
-						dock->get_fleet()->merge(egbase, this);
-						return;
+						return dock->get_fleet()->merge(egbase, this);
 					}
 				}
 			}
@@ -178,21 +171,29 @@ void Fleet::find_other_fleet(EditorGameBase& egbase) {
 			if (upcast(Ship, ship, bob)) {
 				if (ship->get_fleet() != nullptr && ship->get_fleet() != this &&
 				    ship->get_owner() == get_owner()) {
-					ship->get_fleet()->merge(egbase, this);
-					return;
+					return ship->get_fleet()->merge(egbase, this);
 				}
 			}
 		}
 	}
+	if (active()) {
+		update(egbase);
+		return true;
+	}
+	return false;
 }
 
 /**
  * Merge the @p other fleet into this fleet, and remove the other fleet.
+ *
+ * Returns true if 'other' is the resulting fleet and "false" if 'this' is
+ * the resulting fleet. The values are reversed because we originally call this from
+ * another 'other' for efficiency reasons.
  */
-void Fleet::merge(EditorGameBase& egbase, Fleet* other) {
+bool Fleet::merge(EditorGameBase& egbase, Fleet* other) {
 	if (ports_.empty() && !other->ports_.empty()) {
 		other->merge(egbase, this);
-		return;
+		return true;
 	}
 
 	while (!other->ships_.empty()) {
@@ -223,6 +224,7 @@ void Fleet::merge(EditorGameBase& egbase, Fleet* other) {
 	other->remove(egbase);
 
 	update(egbase);
+	return false;
 }
 
 /**

@@ -53,7 +53,7 @@ struct BaseListselect : public Panel {
 	               uint32_t h,
 	               const Image* button_background,
 	               ListselectLayout selection_mode = ListselectLayout::kPlain);
-	~BaseListselect();
+	~BaseListselect() override;
 
 	boost::signals2::signal<void(uint32_t)> selected;
 	boost::signals2::signal<void(uint32_t)> clicked;

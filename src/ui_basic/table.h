@@ -164,7 +164,7 @@ public:
 	      uint32_t h,
 	      const Image* button_background = g_gr->images().get("images/ui_basic/but3.png"),
 	      TableRows rowtype = TableRows::kSingle);
-	~Table();
+	~Table() override;
 
 	/**
 	 * Compare the two items at the given indices in the list.
