@@ -82,7 +82,7 @@ EditorToolChangeResourcesOptionsMenu::EditorToolChangeResourcesOptionsMenu(
 	     "Shift + Click on the map to decrease the amount of the selected resource"));
 	set_to_.set_tooltip(
 	   /** TRANSLATORS: Editor set rseources access key. **/
-	   _("Ctrl + Click on the map to set the amount of the selected resource. This replaces already set resources"));
+	   _("Ctrl + Click on the map to set the amount of the selected resource. This will replace already set resources."));
 
 	change_by_.changed.connect(
 	   boost::bind(&EditorToolChangeResourcesOptionsMenu::update_change_by, boost::ref(*this)));
