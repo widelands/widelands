@@ -270,7 +270,7 @@ void LoadOrSaveGame::clicked_delete() {
 
 		UI::WLMessageBox confirmationBox(
 		   parent_->get_parent()->get_parent(),
-		   ngettext("Confirm deleting file", "Confirm deleting files", no_selections), message,
+		   ngettext("Confirm Deleting File", "Confirm Deleting Files", no_selections), message,
 		   UI::WLMessageBox::MBoxType::kOkCancel);
 		do_delete = confirmationBox.run<UI::Panel::Returncodes>() == UI::Panel::Returncodes::kOk;
 	}

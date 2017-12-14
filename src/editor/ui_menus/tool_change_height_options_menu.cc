@@ -44,7 +44,7 @@ EditorToolChangeHeightOptionsMenu::EditorToolChangeHeightOptionsMenu(
                 increase_tool_.get_change_by(),
                 1,
                 MAX_FIELD_HEIGHT_DIFF,
-                _("Increase/Decrease Height by:"),
+                _("Increase/Decrease height by:"),
                 UI::SpinBox::Units::kNone,
                 g_gr->images().get("images/ui_basic/but1.png"),
                 UI::SpinBox::Type::kSmall),
@@ -56,7 +56,7 @@ EditorToolChangeHeightOptionsMenu::EditorToolChangeHeightOptionsMenu(
              increase_tool_.set_tool().get_interval().min,
              0,
              MAX_FIELD_HEIGHT,
-             _("Set Height to:"),
+             _("Set height to:"),
              UI::SpinBox::Units::kNone,
              g_gr->images().get("images/ui_basic/but1.png"),
              UI::SpinBox::Type::kSmall) {

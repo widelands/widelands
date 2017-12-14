@@ -367,7 +367,7 @@ void FullscreenMenuInternetLobby::clicked_joingame() {
 				   _("Widelands was unable to get the IP address of the server in time.\n"
 				     "There seems to be a network problem, either on your side or on the side\n"
 				     "of the server.\n"));
-				UI::WLMessageBox mmb(this, _("Connection timed out"), warning,
+				UI::WLMessageBox mmb(this, _("Connection Timed Out"), warning,
 				                     UI::WLMessageBox::MBoxType::kOk, UI::Align::kLeft);
 				mmb.run<UI::Panel::Returncodes>();
 				return InternetGaming::ref().set_error();
