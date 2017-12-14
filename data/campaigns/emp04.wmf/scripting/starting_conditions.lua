@@ -13,45 +13,41 @@ p3:forbid_buildings("all")
 p1:forbid_buildings("all")
 p1:allow_buildings{"empire_lumberjacks_house"}
 
-prefilled_buildings(p1, { "empire_headquarters", sf.x, sf.y,
+prefilled_buildings(p1,
+   {"empire_headquarters", sf.x, sf.y,
    workers = {
       empire_builder = 10,
-       empire_geologist = 1,
-      },
-   })
+      empire_geologist = 1,
+   }
+   }
+)
 
 -- Lower resources to zero in starting region (to cope with default ressources)
 for x=7, 42 do
-   for y=190, 207 do
+   for y=10, 50 do
       local field = map:get_field(x,y)
       if field.resource == "fish" or field.resource == "water" then
-	 field.resource_amount = 0
+	     field.resource_amount = 0
       end
    end
-   for y=0, 22 do
-      local field = map:get_field(x,y)
-      if field.resource == "fish" or field.resource == "water" then
-	 field.resource_amount = 0
-      end
-      end
-   end
+end
 
 -- Place towers and fortress
-place_building_in_region(p1, "empire_tower", {map:get_field(10, 196)})
-place_building_in_region(p1, "empire_tower", {map:get_field(24, 190)})
-place_building_in_region(p1, "empire_tower", {map:get_field(16, 18)})
-place_building_in_region(p1, "empire_tower", {map:get_field(28, 24)})
-place_building_in_region(p1, "empire_tower", {map:get_field(35, 202)})
-place_building_in_region(p1, "empire_fortress", {map:get_field(31, 5)})
+place_building_in_region(p1, "empire_tower", {map:get_field(10, 16)})
+place_building_in_region(p1, "empire_tower", {map:get_field(24, 10)})
+place_building_in_region(p1, "empire_tower", {map:get_field(16, 46)})
+place_building_in_region(p1, "empire_tower", {map:get_field(28, 52)})
+place_building_in_region(p1, "empire_tower", {map:get_field(35, 22)})
+place_building_in_region(p1, "empire_fortress", {map:get_field(31, 33)})
 
 
 -- Place farm
-place_building_in_region(p1, "empire_farm1", {map:get_field(20, 194)})
+place_building_in_region(p1, "empire_farm1", {map:get_field(20, 14)})
 place_building_in_region(p1, "empire_farm1", sf:region(15))
 
 -- Place fishers_house
-place_building_in_region(p1, "empire_fishers_house", {map:get_field(12, 203)})
-place_building_in_region(p1, "empire_fishers_house", {map:get_field(12, 15)})
+place_building_in_region(p1, "empire_fishers_house", {map:get_field(12, 23)})
+place_building_in_region(p1, "empire_fishers_house", {map:get_field(12, 43)})
 
 -- Place well
 place_building_in_region(p1, "empire_well2", sf:region(15))
@@ -61,13 +57,13 @@ place_building_in_region(p1, "empire_well2", sf:region(15))
 place_building_in_region(p1, "empire_lumberjacks_house2", sf:region(10))
 place_building_in_region(p1, "empire_lumberjacks_house2", sf:region(10))
 place_building_in_region(p1, "empire_lumberjacks_house2", sf:region(10))
-place_building_in_region(p1, "empire_foresters_house2", {map:get_field(19, 190)})
-place_building_in_region(p1, "empire_foresters_house2", {map:get_field(19, 198)})
+place_building_in_region(p1, "empire_foresters_house2", {map:get_field(19, 10)})
+place_building_in_region(p1, "empire_foresters_house2", {map:get_field(19, 18)})
 
 -- Mines
-place_building_in_region(p1, "empire_ironmine", {map:get_field(33, 194)})
-place_building_in_region(p1, "empire_coalmine", {map:get_field(24, 17)})
-place_building_in_region(p1, "empire_coalmine", {map:get_field(31, 20)})
+place_building_in_region(p1, "empire_ironmine", {map:get_field(33, 14)})
+place_building_in_region(p1, "empire_coalmine", {map:get_field(24, 45)})
+place_building_in_region(p1, "empire_coalmine", {map:get_field(31, 48)})
 place_building_in_region(p1, "empire_goldmine", sf:region(25))
 
 -- Place quarry
@@ -98,13 +94,15 @@ place_building_in_region(p1, "empire_barracks", sf:region(20), {inputs = {empire
 
 
 -- Helper function for placing a road
-function try_place_road_with_carrier(x, y)
+function try_place_road_with_carrier(x, y, a, b)
    local field = map:get_field(x,y)
    if field.immovable and field.immovable.descr.type_name == "flag" then
-      local n1 = field.bln
-      local n2 = n1.bln
+      local a1 = a.."n"
+	  local b1 = b.."n"
+      local n1 = field[a1]
+      local n2 = n1[b1]
       if n1.immovable == nil and n1:has_caps("walkable") and (n2:has_caps("flag") or (n2.immovable and n2.immovable.descr.type_name == "flag")) then
-         local road = p1:place_road(field.immovable, "bl", "bl", true)
+         local road = p1:place_road(field.immovable, a, b, true)
          road:set_workers('empire_carrier',1)
       end
    end
@@ -112,101 +110,62 @@ end
 
 -- Roads
 for x=7, 35 do
-   for y=180, 207 do
-      try_place_road_with_carrier(x, y)
-   end
-   for y=0, 25 do
-      try_place_road_with_carrier(x, y)
+   for y=0, 53 do
+      try_place_road_with_carrier(x, y, "bl", "bl")
    end
 end
 
-for x=5, 35, 3 do
-   for y=180, 207 do
-      try_place_road_with_carrier(x, y)
-   end
-   for y=0, 25 do
-      try_place_road_with_carrier(x, y)
+for x=5, 35 do
+   for y=0, 53 do
+      try_place_road_with_carrier(x, y, "bl", "bl")
    end
 end
 
-for x=6, 35, 3 do
-   for y=180, 207 do
-      try_place_road_with_carrier(x, y)
+for x=5, 35 do
+   for y=0, 53 do
+      try_place_road_with_carrier(x, y, "bl", "bl")
    end
-   for y=0, 25 do
-      try_place_road_with_carrier(x, y)
+end
+
+for x=6, 35 do
+   for y=0, 53 do
+      try_place_road_with_carrier(x, y, "l", "l")
    end
 end
 
 for x=7, 35 do
-   for y=180, 207 do
-      try_place_road_with_carrier(x, y)
-   end
-   for y=0, 25 do
-      try_place_road_with_carrier(x, y)
+   for y=0, 53 do
+      try_place_road_with_carrier(x, y, "tl", "tl")
    end
 end
 
 for x=7, 35 do
-   for y=180, 207 do
-      try_place_road_with_carrier(x, y)
-   end
-   for y=0, 25 do
-      try_place_road_with_carrier(x, y)
+   for y=0, 53 do
+      try_place_road_with_carrier(x, y, "br", "br")
    end
 end
 
 for x=7, 35 do
-   for y=180, 207 do
-      try_place_road_with_carrier(x, y)
-   end
-   for y=0, 25 do
-      try_place_road_with_carrier(x, y)
+   for y=0, 53 do
+      try_place_road_with_carrier(x, y, "r", "r")
    end
 end
 
 for x=7, 35 do
-   for y=180, 207 do
-      try_place_road_with_carrier(x, y)
-   end
-   for y=0, 25 do
-      try_place_road_with_carrier(x, y)
+   for y=0, 53 do
+      try_place_road_with_carrier(x, y, "r", "tr")
    end
 end
 
 for x=7, 35 do
-   for y=180, 207 do
-      try_place_road_with_carrier(x, y)
-   end
-   for y=0, 25 do
-      try_place_road_with_carrier(x, y)
+   for y=0, 53 do
+      try_place_road_with_carrier(x, y, "tr", "tl")
    end
 end
 
-for x=7, 35 do
-   for y=180, 207 do
-      try_place_road_with_carrier(x, y)
-   end
-   for y=0, 25 do
-      try_place_road_with_carrier(x, y)
-   end
-end
-
-for x=7, 35 do
-   for y=180, 207 do
-      try_place_road_with_carrier(x, y)
-   end
-   for y=0, 25 do
-      try_place_road_with_carrier(x, y)
-   end
-end
-
-for x=7, 35 do
-   for y=180, 207 do
-      try_place_road_with_carrier(x, y)
-   end
-   for y=0, 25 do
-      try_place_road_with_carrier(x, y)
+for x=5, 35 do
+   for y=0, 53 do
+      try_place_road_with_carrier(x, y, "bl", "bl")
    end
 end
 
@@ -264,7 +223,7 @@ p2:allow_buildings{
 }
 
 prefilled_buildings(p2,
-   {"barbarians_headquarters", 85, 104,
+   {"barbarians_headquarters", 85, 132,
    wares = {
       ax = 6,
       blackwood = 32,
@@ -308,8 +267,8 @@ prefilled_buildings(p2,
       barbarians_stonemason = 2,
    },
 
-    soldiers = {
-       [{0,0,0,0}] = 45,
-    }
-  }
+   soldiers = {
+      [{0,0,0,0}] = 45,
+   }
+   }
 )

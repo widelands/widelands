@@ -30,7 +30,7 @@ end
 
 -- we need to find the plans how to build a farm
 function farm_plans()
-   local f = map:get_field(47, 190)
+   local f = map:get_field(47, 10)
    local farmclick = false
    local count = 0
    while not farmclick do
@@ -73,20 +73,10 @@ function clear_roads()
    while cleared == false do
       cleared = true
       sleep (5000)
-      for x=7, 40 do
-         for y=180, 207 do
+      for x=5, 40 do
+         for y=0, 56 do
             local field = map:get_field(x,y)
             if (field.immovable and field.immovable.descr.type_name == "flag" and field.immovable.building == nil) then
-               local numroads = 0
-               for _ in pairs(field.immovable.roads) do numroads = numroads + 1 end
-               if numroads < 2 then
-                  cleared = false
-               end
-            end
-         end
-         for y=0, 28 do
-            local field = map:get_field(x,y)
-            if (field.immovable and field.immovable.descr.type_name == "flag" and    field.immovable.building == nil) then
                local numroads = 0
                for _ in pairs(field.immovable.roads) do numroads = numroads + 1 end
                if numroads < 2 then
@@ -107,7 +97,7 @@ function no_trees()
       trees = 0
       sleep (5000)
       for x=13, 25 do
-         for y=182, 205 do
+         for y= 2, 25 do
             local field = map:get_field(x,y)
             if (field.immovable and field.immovable.descr.terrain_affinity) then
                trees = trees + 1
@@ -115,7 +105,7 @@ function no_trees()
          end
       end
    end
-   if #p1:get_buildings("empire_foresters_house1") > 0 then
+   if #p1:get_buildings("empire_foresters_house2") > 0 then
       local o = add_campaign_objective(obj_replace_foresters)
       campaign_message_box(amalea_7)
       while #p1:get_buildings("empire_foresters_house") < 2 do sleep(3249) end
@@ -195,20 +185,20 @@ function steel()
    number_soldiers = number_soldiers + 9
    local enough_soldiers = false
    while not enough_soldiers do
-   bld = array_combine(
-      p1:get_buildings("empire_headquarters"),
-      p1:get_buildings("empire_warehouse"),
-      p1:get_buildings("empire_trainingcamp1"),
-      p1:get_buildings("empire_arena"),
-      p1:get_buildings("empire_sentry"),
-      p1:get_buildings("empire_tower"),
-      p1:get_buildings("empire_fortress"),
-      p1:get_buildings("empire_outpost"),
-      p1:get_buildings("empire_barrier"),
-      p1:get_buildings("empire_blockhouse"),
-      p1:get_buildings("empire_castle")
-   )
-   local amount = 0
+      bld = array_combine(
+         p1:get_buildings("empire_headquarters"),
+         p1:get_buildings("empire_warehouse"),
+         p1:get_buildings("empire_trainingcamp1"),
+         p1:get_buildings("empire_arena"),
+         p1:get_buildings("empire_sentry"),
+         p1:get_buildings("empire_tower"),
+         p1:get_buildings("empire_fortress"),
+         p1:get_buildings("empire_outpost"),
+         p1:get_buildings("empire_barrier"),
+         p1:get_buildings("empire_blockhouse"),
+         p1:get_buildings("empire_castle")
+      )
+      local amount = 0
       for idx,site in ipairs(bld) do
          for descr,count in pairs(site:get_soldiers("all")) do
             amount = amount + count
@@ -304,27 +294,27 @@ function training()
    local heroes = false
 
    while not heroes do
-   bld = array_combine(
-      p1:get_buildings("empire_headquarters"),
-      p1:get_buildings("empire_warehouse"),
-      p1:get_buildings("empire_trainingcamp1"),
-      p1:get_buildings("empire_trainingcamp"),
-      p1:get_buildings("empire_arena"),
-      p1:get_buildings("empire_colosseum"),
-      p1:get_buildings("empire_sentry"),
-     p1:get_buildings("empire_tower"),
-      p1:get_buildings("empire_fortress"),
-      p1:get_buildings("empire_outpost"),
-     p1:get_buildings("empire_barrier"),
-      p1:get_buildings("empire_blockhouse"),
-      p1:get_buildings("empire_castle")
+      bld = array_combine(
+         p1:get_buildings("empire_headquarters"),
+         p1:get_buildings("empire_warehouse"),
+         p1:get_buildings("empire_trainingcamp1"),
+         p1:get_buildings("empire_trainingcamp"),
+         p1:get_buildings("empire_arena"),
+         p1:get_buildings("empire_colosseum"),
+         p1:get_buildings("empire_sentry"),
+         p1:get_buildings("empire_tower"),
+         p1:get_buildings("empire_fortress"),
+         p1:get_buildings("empire_outpost"),
+         p1:get_buildings("empire_barrier"),
+         p1:get_buildings("empire_blockhouse"),
+         p1:get_buildings("empire_castle")
       )
-     local amount = 0
+      local amount = 0
       for idx,site in ipairs(bld) do
-            amount = amount + (site:get_soldiers{4,4,0,2})
+         amount = amount + (site:get_soldiers{4,4,0,2})
       end
-     if amount > 2 then
-        heroes = true
+      if amount > 2 then
+         heroes = true
       end
       sleep(4273)
    end
@@ -335,33 +325,28 @@ function training()
       campaign_message_box(saledus_9)
       run(conquer)
    end
-
 end
-
 
 -- check if the enemy has been seen and where
 function check_enemy()
    local en_see = {}
-     while not enemy do
-        en_see = enemy_seen()
-
-        if en_see then
-           local prior_center = scroll_to_field(en_see)
+   while not enemy do
+      en_see = enemy_seen()
+      if en_see then
+         local prior_center = scroll_to_field(en_see)
          sleep(2000)
-           campaign_message_box(saledus_11)
-          enemy = true
-          run(conquer)
-           scroll_to_map_pixel(prior_center)
-        end
-       sleep(8000)
-     end
+         campaign_message_box(saledus_11)
+         enemy = true
+         run(conquer)
+         scroll_to_map_pixel(prior_center)
+      end
+      sleep(8000)
+   end
 end
-
 
 -- lets finish the babarians off
 function conquer()
    local o = add_campaign_objective(obj_conquer_all)
-
    while not p2.defeated do sleep(2342) end
    o.done = true
 
@@ -381,20 +366,22 @@ function wheat_chain()
    while not (p1:get_produced_wares_count('beer') > 4  and p1:get_produced_wares_count('flour') > 4) do sleep(2434) end
    local o = add_campaign_objective(obj_find_monastery)
    campaign_message_box(amalea_9)
-   while not (p1:sees_field(map:get_field(16,156)) or p1:sees_field(map:get_field(16,157)) or p1:sees_field(map:get_field(17,158)) or p1:sees_field(map:get_field(17,159)) or p1:sees_field(map:get_field(18,160)) or p1:sees_field(map:get_field(18,161)) or p1:sees_field(map:get_field(19,162)) or p1:sees_field(map:get_field(20,162)) or p1:sees_field(map:get_field(21,162)) or p1:sees_field(map:get_field(22,162)) or p1:sees_field(map:get_field(23,162)) or p1:sees_field(map:get_field(24,162))) do sleep(2500) end
-   local well = map:get_field(17, 154)
-   place_building_in_region(p3, "empire_well", {map:get_field(17, 154)})
-   local brew = map:get_field(19, 155)
-   place_building_in_region(p3, "empire_brewery", {map:get_field(19, 155)})
-   local mill = map:get_field(18, 156)
-   place_building_in_region(p3, "empire_mill", {map:get_field(18, 156)})
-   local ware = map:get_field(21, 158)
-   place_building_in_region(p3, "empire_warehouse", {map:get_field(21, 158)}, {workers = {empire_carrier = 0, empire_recruit = 0,}})
-   local sent = map:get_field(19, 157)
-   place_building_in_region(p3, "empire_sentry", {map:get_field(19, 157)}, {soldiers = {[{0,0,0,0}] = 1,}})
+   while not (p1:sees_field(map:get_field(16,184)) or p1:sees_field(map:get_field(16,185)) or p1:sees_field(map:get_field(17,186)) or p1:sees_field(map:get_field(17,187)) or p1:sees_field(map:get_field(18,188)) or p1:sees_field(map:get_field(18,189)) or p1:sees_field(map:get_field(19,190)) or p1:sees_field(map:get_field(20,190)) or p1:sees_field(map:get_field(21,190)) or p1:sees_field(map:get_field(22,190)) or p1:sees_field(map:get_field(23,190)) or p1:sees_field(map:get_field(24,190))) do sleep(2500) end
+   local well = map:get_field(17, 182)
+   place_building_in_region(p3, "empire_well", {map:get_field(17, 182)})
+   local brew = map:get_field(19, 183)
+   place_building_in_region(p3, "empire_brewery", {map:get_field(19, 183)})
+   local mill = map:get_field(18, 184)
+   place_building_in_region(p3, "empire_mill", {map:get_field(18, 184)})
+   local ware = map:get_field(21, 186)
+   place_building_in_region(p3, "empire_warehouse", {map:get_field(21, 186)}, {workers = {empire_carrier = 0, empire_recruit = 0,}})
+   local sent = map:get_field(19, 185)
+   place_building_in_region(p3, "empire_sentry", {map:get_field(19, 185)}, {soldiers = {[{0,0,0,0}] = 1,}})
    o.done = true
    sleep(4000)
-   local julia = map:get_field(19, 157)
+   
+   -- Julia the priestess of Vesta appears
+   local julia = map:get_field(19, 185)
    local prior_center = scroll_to_field(julia)
    concentric_reveal(p1, julia, 7, 100)
    campaign_message_box(julia_0)
@@ -408,33 +395,34 @@ function wheat_chain()
    while not ((hq[1]:get_wares("wheat") > 34 and hq[1]:get_wares("wine") > 14) or p3.defeated) do sleep(4000) end
    if p3.defeated then
       o1.done = true
-     julia_conquered = true
-     p1:allow_buildings{"empire_mill", "empire_brewery"}
+      julia_conquered = true
+      p1:allow_buildings{"empire_mill", "empire_brewery"}
       campaign_message_box(saledus_2)
-     campaign_message_box(julia_2)
-     campaign_message_box(amalea_11)
-     campaign_message_box(saledus_4)
+      campaign_message_box(julia_2)
+      campaign_message_box(amalea_11)
+      campaign_message_box(saledus_4)
    else
       o1.done = true
-     wh[1]:set_workers("empire_carrier", 0)
-     wh[1]:set_workers("empire_recruit", 0)
-     local wheat = hq[1]:get_wares("wheat") - 35
-     local wine = hq[1]:get_wares("wine") - 15
-     hq[1]:set_wares("wheat", wheat)
-     hq[1]:set_wares("wine", wine)
-     p1:allow_buildings{"empire_mill", "empire_brewery"}
+      wh[1]:set_workers("empire_carrier", 0)
+      wh[1]:set_workers("empire_recruit", 0)
+      local wheat = hq[1]:get_wares("wheat") - 35
+      local wine = hq[1]:get_wares("wine") - 15
+      hq[1]:set_wares("wheat", wheat)
+      hq[1]:set_wares("wine", wine)
+      p1:allow_buildings{"empire_mill", "empire_brewery"}
       campaign_message_box(julia_1)
 
+	  -- replace Julias buildings with similar ones of the player
       well.immovable:remove()
       brew.immovable:remove()
       mill.immovable:remove()
       ware.immovable:remove()
       sent.immovable:remove()
-      place_building_in_region(p1, "empire_well", {map:get_field(17, 154)})
-      place_building_in_region(p1, "empire_brewery", {map:get_field(19, 155)})
-      place_building_in_region(p1, "empire_mill", {map:get_field(18, 156)})
-      place_building_in_region(p1, "empire_warehouse", {map:get_field(21, 158)}, {wares = {water = 30, flour = 30, beer = 40,}})
-      place_building_in_region(p1, "empire_sentry", {map:get_field(19, 157)})
+      place_building_in_region(p1, "empire_well", {map:get_field(17, 182)})
+      place_building_in_region(p1, "empire_brewery", {map:get_field(19, 183)})
+      place_building_in_region(p1, "empire_mill", {map:get_field(18, 184)})
+      place_building_in_region(p1, "empire_warehouse", {map:get_field(21, 186)}, {wares = {water = 30, flour = 30, beer = 40,}})
+      place_building_in_region(p1, "empire_sentry", {map:get_field(19, 185)})
       campaign_message_box(amalea_12)
       campaign_message_box(saledus_3)
    end
@@ -446,49 +434,49 @@ end
 function karma()
    if julia_conquered then
       for count = 0, 10 do
-        sleep(1200000)
-        bld = {
-       "empire_stonemasons_house",
-         "empire_sawmill",
-         "empire_mill",
-         "empire_bakery",
-         "empire_brewery",
-         "empire_vineyard",
-         "empire_winery",
-        "empire_tavern",
-         "empire_inn",
-         "empire_charcoal_kiln",
-        "empire_smelting_works",
-         "empire_toolsmithy",
-         "empire_armorsmithy",
-       "empire_barracks"
+         sleep(1200000)
+         bld = {
+            "empire_stonemasons_house",
+            "empire_sawmill",
+            "empire_mill",
+            "empire_bakery",
+            "empire_brewery",
+            "empire_vineyard",
+            "empire_winery",
+            "empire_tavern",
+            "empire_inn",
+            "empire_charcoal_kiln",
+            "empire_smelting_works",
+            "empire_toolsmithy",
+            "empire_armorsmithy",
+            "empire_barracks"
          }
-        local most = 1
-       local selc = 0
+         local most = 1
+         local selc = 0
          for idx,site in ipairs(bld) do
             if #p1:get_buildings(site) > most then
-            most = #p1:get_buildings(site)
-            local build = p1:get_buildings(site)
-            selc = build[1]
+               most = #p1:get_buildings(site)
+               local build = p1:get_buildings(site)
+               selc = build[1]
+            end
          end
+         if selc ~= 0 then
+            local fields = selc.fields
+            local prior_center = scroll_to_field(fields[1])
+            selc:destroy()
+            campaign_message_box(amalea_16)
+            scroll_to_map_pixel(prior_center)
          end
-       if selc ~= 0 then
-          local fields = selc.fields
-          local prior_center = scroll_to_field(fields[1])
-          selc:destroy()
-          campaign_message_box(amalea_16)
-          scroll_to_map_pixel(prior_center)
-        end
-     end
+      end
    else
       for count = 0, 10 do
-        sleep(1500000)
-       local hq = p1:get_buildings("empire_headquarters")
-       local beer = hq[1]:get_wares("beer") + 20
-        local wine = hq[1]:get_wares("wine") + 10
-        hq[1]:set_wares("beer", beer)
-        hq[1]:set_wares("wine", wine)
-       campaign_message_box(amalea_17)
+         sleep(1500000)
+         local hq = p1:get_buildings("empire_headquarters")
+         local beer = hq[1]:get_wares("beer") + 20
+         local wine = hq[1]:get_wares("wine") + 10
+         hq[1]:set_wares("beer", beer)
+         hq[1]:set_wares("wine", wine)
+         campaign_message_box(amalea_17)
       end
    end
 end
@@ -498,7 +486,6 @@ function mission_thread()
    scroll_to_field(sf)  --scroll to our headquarters
    include "map:scripting/starting_conditions.lua"
    sleep(1000)
-
 
    --Initial messages
    campaign_message_box(diary_page_1)
@@ -524,7 +511,6 @@ function mission_thread()
    campaign_message_box(amalea_1)
    run(dismantle)
    run(farm_plans)
-
 end
 
 run(mission_thread)
