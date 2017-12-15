@@ -329,7 +329,7 @@ amalea_3 = {
       _([[First of all, we need more construction materials. So, we should build at least three lumberjacks’ houses and two quarries.]])
       .. paragraphdivider() ..
       -- TRANSLATORS: Amalea
-      _([[Oh, before I forget, there is another task to accomplish. While our builders are doing their job, somebody should clear up our road network in the meantime. They are leaving us no space to place the buildings that we need.]]))
+      _([[Oh, before I forget, there is another task to accomplish. While our builders are doing their job, somebody should clear up our road network. They are leaving us no space to place the buildings that we need.]]))
       .. new_objectives(obj_build_quarries_and_lumberjacks, obj_clear_roads),
    posy=1,
    h=500,
@@ -465,7 +465,7 @@ amalea_13 = {
    title=_"Amalea is Satisfied",
    body= amalea3(_"Amalea is satisfied with the progress…",
       -- TRANSLATORS: Amalea
-      _([[Alright Lutius, another problem solved. Still more to come. As we are able to produce food now, we should start mining some coal and iron ore immediately. After all, we need more tools to back up our economy and build more and different production sites.]])
+      _([[Alright Lutius, another problem solved. Still more to come. As we are able to produce food now, we should start mining some coal and iron ore immediately. After all, we need more tools to get our economy back up and build more and different production sites.]])
       .. paragraphdivider() ..
       -- TRANSLATORS: Amalea
       _([[But according to our recent experiences, I assume that something will be wrong with our mines as well. It’s probably a good idea to send a geologist to check whether there are enough resources in the vicinity of our mines.]])
