@@ -275,7 +275,25 @@ void InputQueueDisplay::radiogroup_changed(int32_t state) {
 	default:
 		return;
 	}
-	igb_.game().send_player_set_ware_priority(building_, type_, index_, priority);
+	if (SDL_GetModState() & KMOD_CTRL) {
+		Panel *sibling = get_parent()->get_first_child();
+		assert(sibling != nullptr);
+		while (sibling != nullptr) {
+			InputQueueDisplay *display = dynamic_cast<InputQueueDisplay*>(sibling);
+			sibling = sibling->get_next_sibling();
+			if (display == nullptr) {
+				continue;
+			}
+			igb_.game().send_player_set_ware_priority(
+											display->building_, display->type_, display->index_, priority);
+			if (display != this) {
+				// TODO(Notabilis): Remove this call when send_player_set_ware_priority() calls it
+				display->priority_radiogroup_->set_state(state);
+			}
+		}
+	} else {
+		igb_.game().send_player_set_ware_priority(building_, type_, index_, priority);
+	}
 }
 
 /**
