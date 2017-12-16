@@ -2589,7 +2589,7 @@ void Worker::start_task_scout(Game& game, uint16_t const radius, uint32_t const 
 					scout_pois.clear();
 				}
 			}
-			// TODO(kxq) Clear huts if visible. Should I clear also if not a MS?
+			// TODO(kxq): Clear huts if visible. Should I clear also if not a MS?
 			if (scout_pois.empty()) {
 				// Store the position of homebase
 				struct scout_poiv_t home(false, hutpos);

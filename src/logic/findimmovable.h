@@ -144,7 +144,7 @@ struct FindForeignMsite {
 	bool accept(const BaseImmovable&) const;
 	const Player& player;
 };
- 
+
 struct FindImmovableByDescr {
 	explicit FindImmovableByDescr(const ImmovableDescr& init_descr) : descr(init_descr) {
 	}
