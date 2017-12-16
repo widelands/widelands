@@ -82,6 +82,9 @@ function clear_roads()
                if numroads < 2 then
                   cleared = false
                end
+               if numroads == 6 then
+                  cleared = false
+               end
             end
          end
       end
@@ -412,7 +415,7 @@ function wheat_chain()
       p1:allow_buildings{"empire_mill", "empire_brewery"}
       campaign_message_box(julia_1)
 
-	  -- replace Julias buildings with similar ones of the player
+      -- replace Julias buildings with similar ones of the player
       well.immovable:remove()
       brew.immovable:remove()
       mill.immovable:remove()

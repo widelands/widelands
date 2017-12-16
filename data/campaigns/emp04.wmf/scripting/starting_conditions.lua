@@ -27,7 +27,7 @@ for x=7, 42 do
    for y=10, 50 do
       local field = map:get_field(x,y)
       if field.resource == "fish" or field.resource == "water" then
-	     field.resource_amount = 0
+         field.resource_amount = 0
       end
    end
 end
@@ -98,7 +98,7 @@ function try_place_road_with_carrier(x, y, a, b)
    local field = map:get_field(x,y)
    if field.immovable and field.immovable.descr.type_name == "flag" then
       local a1 = a.."n"
-	  local b1 = b.."n"
+      local b1 = b.."n"
       local n1 = field[a1]
       local n2 = n1[b1]
       if n1.immovable == nil and n1:has_caps("walkable") and (n2:has_caps("flag") or (n2.immovable and n2.immovable.descr.type_name == "flag")) then

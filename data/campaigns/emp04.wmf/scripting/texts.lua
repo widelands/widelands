@@ -34,23 +34,20 @@ function marcus(title, text)
 end
 
 
-
-
 -- =======================================================================
 --                           Texts - No logic here
 -- =======================================================================
-
 
 -- ===========
 -- objectives
 -- ===========
 obj_dismantle_buildings = {
-    name = "dismantle_unproductive_buildings",
-    title=_"Dismantle the unproductive buildings",
-    number = 1,
-    body = objective_text(_"Dismantle Buildings",
-       listitem_bullet(_[[Dismantle all unproductive small buildings to get some resources for new buildings. Remember to check the messages and the building statistics for unproductive buildings.]])
-    ),
+   name = "dismantle_unproductive_buildings",
+   title=_"Dismantle the unproductive buildings",
+   number = 1,
+   body = objective_text(_"Dismantle Buildings",
+      listitem_bullet(_[[Dismantle all unproductive small buildings to get some resources for new buildings. Remember to check the messages and the building statistics for unproductive buildings.]])
+   ),
 }
 
 obj_clear_roads = {
