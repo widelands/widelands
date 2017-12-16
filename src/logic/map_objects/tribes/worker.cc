@@ -2589,22 +2589,37 @@ void Worker::start_task_scout(Game& game, uint16_t const radius, uint32_t const 
 					scout_pois.clear();
 				}
 			}
-			// TODO(kxq): Clear huts if visible. Should I clear also if not a MS?
+
 			if (scout_pois.empty()) {
 				// Store the position of homebase
 				struct PlaceToScout home(false, hutpos);
 				scout_pois.push_back(home);
 			}
 			if (1 < scout_pois.size()) {
-				// There is an old place to visit in queue. Remove it.
+				// If there was an old place to visit in queue, remove it.
 				scout_pois.pop_back();
 			}
-			if (2 >= scout_pois.size()) {
+
+			// After the pop above, the latest entry of scout_pois is the next MS to visit (if known)
+			// Check whether it is still interesting (=whether it is still invisible)
+			const Player * pptr = get_owner();
+			while (1 < scout_pois.size()) {
+				MapIndex mt = map.get_index(scout_pois.back().poi, map.get_width());
+				if (1 < pptr->vision(mt))
+					// The mil site is now visible. Either player
+					// has acquired possession of more military sites
+					// of own, or own folks are nearby.
+					scout_pois.pop_back();
+				else
+					break;
+			}
+
+
+			if (2 > scout_pois.size()) {
 				// Time to find new places worth visiting.
 				Area<FCoords> revealations (map.get_fcoords(get_position()), state.ivar1);
 				std::vector<ImmovableFound> visit_us;
 				CheckStepWalkOn csteb(MOVECAPS_WALK, true);
-				const Player * pptr = get_owner();
 				map.find_reachable_immovables(revealations, &visit_us,
 						csteb,
 						FindFlagOf(FindForeignMsite(*pptr)));
@@ -2621,8 +2636,8 @@ void Worker::start_task_scout(Game& game, uint16_t const radius, uint32_t const 
 						// are always visible.
 						if (&ms->owner() != pptr) {
 							// Check the visibility
-							MapIndex mi = map.get_index(vu.coords, map.get_width());
-							if (2 > pptr->vision(mi)) {
+							MapIndex mx = map.get_index(vu.coords, map.get_width());
+							if (2 > pptr->vision(mx)) {
 								// The find_reachable_immovable sometimes returns multiple instances.
 								// Let's not add duplicates to work list.
 								bool unique = true;
@@ -2634,7 +2649,7 @@ void Worker::start_task_scout(Game& game, uint16_t const radius, uint32_t const 
 									t += 1;
 								}
 								if (unique) {
-									haveabreak -- ;
+									haveabreak -= 1 ;
 									if (!haveabreak) {
 										// If there are many MSs to visit,
 										// do a random walk in-between also.
@@ -3016,9 +3031,8 @@ void Worker::do_save(EditorGameBase& egbase, MapObjectSaver& mos, FileWrite& fw)
 	    else
 	      {
 		fw.unsigned_8(0);
-		// TODO(kxq): Is there a better way to save Coords?
-		// This makes unnecessary assumptions of the internals
-		// of Coords
+		// Is there a better way to save Coords? This makes
+		// unnecessary assumptions of the internals of Coords
 		fw.signed_16(p.poi.x);
 		fw.signed_16(p.poi.y);
 	      }
