@@ -268,13 +268,13 @@ private:
 
 	// List of places to visit (only if scout), plus a reminder to
 	// occasionally go just somewhere.
-	struct scout_poiv_t {
-	scout_poiv_t(bool we, Coords pt) : whereever(we), poi(pt) {}
-	scout_poiv_t(bool we) : whereever(we) {}
+	struct PlaceToScout {
+	PlaceToScout(bool we, Coords pt) : whereever(we), poi(pt) {}
+	PlaceToScout(bool we) : whereever(we) {}
 		const bool whereever;
 		const Coords poi;
 	};
-	std::vector <scout_poiv_t> scout_pois;
+	std::vector <PlaceToScout> scout_pois;
 
 	// saving and loading
 protected:

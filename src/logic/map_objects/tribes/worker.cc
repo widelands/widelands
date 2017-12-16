@@ -2592,7 +2592,7 @@ void Worker::start_task_scout(Game& game, uint16_t const radius, uint32_t const 
 			// TODO(kxq): Clear huts if visible. Should I clear also if not a MS?
 			if (scout_pois.empty()) {
 				// Store the position of homebase
-				struct scout_poiv_t home(false, hutpos);
+				struct PlaceToScout home(false, hutpos);
 				scout_pois.push_back(home);
 			}
 			if (1 < scout_pois.size()) {
@@ -2639,14 +2639,14 @@ void Worker::start_task_scout(Game& game, uint16_t const radius, uint32_t const 
 										// If there are many MSs to visit,
 										// do a random walk in-between also.
 										haveabreak = 3 ;
-										scout_poiv_t gosomewhere(true);
+										PlaceToScout gosomewhere(true);
 										scout_pois.push_back(gosomewhere);
 									}
 									// if vision is zero, blacked out.
 									// if vision is one, old info exists; unattackable.
 									// When entering here, the place is worth
 									// scouting.
-									scout_poiv_t go_there(false, vu.coords);
+									PlaceToScout go_there(false, vu.coords);
 									scout_pois.push_back(go_there);
 								}
 							}
@@ -2665,7 +2665,7 @@ void Worker::start_task_scout(Game& game, uint16_t const radius, uint32_t const 
 				while (254 < scout_pois.size())
 					scout_pois.pop_back();
 				// Push a "go-anywhere" -directive into work list
-				scout_poiv_t gosomewhere(true);
+				PlaceToScout gosomewhere(true);
 				scout_pois.push_back(gosomewhere);
 			}
 		}
@@ -2689,7 +2689,7 @@ void Worker::scout_update(Game& game, State& state) {
 
 	const Map& map = game.map();
 
-	struct scout_poiv_t scoutat = scout_pois.back(); // do not pop; this function is called many times per run.
+	struct PlaceToScout scoutat = scout_pois.back(); // do not pop; this function is called many times per run.
 
 	bool do_run = static_cast<int32_t>(state.ivar2 - game.get_gametime()) > 0;
 	// If not yet time to go home
@@ -2848,7 +2848,7 @@ void Worker::Loader::load(FileRead& fr) {
 			  {
 			    if (fr.unsigned_8())
 			      {
-				scout_poiv_t gsw(true);
+				PlaceToScout gsw(true);
 				worker.scout_pois.push_back(gsw);
 			      }
 			    else
@@ -2856,7 +2856,7 @@ void Worker::Loader::load(FileRead& fr) {
 				int16_t x = fr.signed_16();
 				int16_t y = fr.signed_16();
 				Coords peekpos = Coords(x, y);
-				scout_poiv_t gtt(false, peekpos);
+				PlaceToScout gtt(false, peekpos);
 				worker.scout_pois.push_back(gtt);
 			      }
 			  }

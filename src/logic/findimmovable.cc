@@ -17,13 +17,13 @@
  *
  */
 
+#include "logic/findimmovable.h"
 
 #include "base/macros.h"
 #include "economy/flag.h"
-#include "logic/findimmovable.h"
+#include "logic/map.h"
 #include "logic/map_objects/immovable.h"
 #include "logic/map_objects/tribes/militarysite.h"
-#include "logic/map.h"
 
 namespace Widelands {
 
