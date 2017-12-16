@@ -445,16 +445,14 @@ int LuaPlayer::message_box(lua_State* L) {
 		lua_getfield(L, 4, "field");
 		if (!lua_isnil(L, -1)) {
 			coords = (*get_user_class<LuaField>(L, -1))->coords();
-			game.get_ipl()->map_view()->scroll_to_field(coords, MapView::Transition::Jump);
 		}
 		lua_pop(L, 1);
 	}
 #undef CHECK_UINT
-	StoryMessageBox* mb = new StoryMessageBox(&game, coords, luaL_checkstring(L, 2),
-	                                          luaL_checkstring(L, 3), posx, posy, w, h);
+	std::unique_ptr<StoryMessageBox> mb(new StoryMessageBox(&game, coords, luaL_checkstring(L, 2),
+	                                          luaL_checkstring(L, 3), posx, posy, w, h));
 
 	mb->run<UI::Panel::Returncodes>();
-	delete mb;
 
 	return 1;
 }
