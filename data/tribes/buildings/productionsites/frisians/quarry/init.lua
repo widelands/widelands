@@ -1,10 +1,10 @@
-dirname = path.dirname(__file__)
+dirname = path.dirname (__file__)
 
 tribes:new_productionsite_type {
    msgctxt = "frisians_building",
    name = "frisians_quarry",
    -- TRANSLATORS: This is a building name used in lists of buildings
-   descname = pgettext("frisians_building", "Quarry"),
+   descname = pgettext ("frisians_building", "Quarry"),
    helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "small",
@@ -21,8 +21,13 @@ tribes:new_productionsite_type {
 
    animations = {
       idle = {
-         pictures = path.list_files(dirname .. "idle_??.png"),
-         hotspot = { 49, 52 },
+         pictures = path.list_files (dirname .. "idle_??.png"),
+         hotspot = { 62, 94 },
+         fps = 10,
+      },
+      unoccupied = {
+         pictures = path.list_files (dirname .. "unoccupied_?.png"),
+         hotspot = { 62, 94 },
       }
    },
 
@@ -66,6 +71,6 @@ tribes:new_productionsite_type {
       -- Translators: Short for "Out of ..." for a resource
       title = _"No Rocks",
       heading = _"Out of Rocks",
-      message = pgettext("frisians_building", "The stonemason working at this quarry can’t find any rocks in his work area."),
+      message = pgettext ("frisians_building", "The stonemason working at this quarry can’t find any rocks in his work area."),
    },
 }

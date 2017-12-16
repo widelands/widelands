@@ -1,10 +1,10 @@
-dirname = path.dirname(__file__)
+dirname = path.dirname (__file__)
 
 tribes:new_productionsite_type {
    msgctxt = "frisians_building",
    name = "frisians_well",
    -- TRANSLATORS: This is a building name used in lists of buildings
-   descname = pgettext("frisians_building", "Well"),
+   descname = pgettext ("frisians_building", "Well"),
    helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "small",
@@ -21,12 +21,13 @@ tribes:new_productionsite_type {
 
    animations = {
       idle = {
-         pictures = path.list_files(dirname .. "idle_??.png"),
-         hotspot = { 20, 47 },
+         pictures = path.list_files (dirname .. "idle_??.png"),
+         hotspot = { 14, 29 },
       },
       working = {
-         pictures = path.list_files(dirname .. "idle_??.png"), --TODO no animation yet
-         hotspot = { 20, 47 },
+         pictures = path.list_files (dirname .. "working_??.png"),
+         hotspot = { 62, 94 },
+         fps = 20,
       },
    },
 
@@ -61,7 +62,7 @@ tribes:new_productionsite_type {
       -- Translators: Short for "Out of ..." for a resource
       title = _"No Water",
       heading = _"Out of Water",
-      message = pgettext("frisians_building", "The carrier working at this well can’t find any water in his well."),
+      message = pgettext ("frisians_building", "The carrier working at this well can’t find any water in his well."),
       productivity_threshold = 33
    },
 }

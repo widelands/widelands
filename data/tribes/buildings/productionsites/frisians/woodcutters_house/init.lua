@@ -1,10 +1,10 @@
-dirname = path.dirname(__file__)
+dirname = path.dirname (__file__)
 
 tribes:new_productionsite_type {
    msgctxt = "frisians_building",
    name = "frisians_woodcutters_house",
    -- TRANSLATORS: This is a building name used in lists of buildings
-   descname = pgettext("frisians_building", "Woodcutter´s House"),
+   descname = pgettext ("frisians_building", "Woodcutter´s House"),
    helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "small",
@@ -21,8 +21,13 @@ tribes:new_productionsite_type {
 
    animations = {
       idle = {
-         pictures = path.list_files(dirname .. "idle_??.png"),
-         hotspot = { 49, 52 },
+         pictures = path.list_files (dirname .. "idle_??.png"),
+         hotspot = { 62, 94 },
+         fps = 10,
+      },
+      unoccupied = {
+         pictures = path.list_files (dirname .. "unoccupied_?.png"),
+         hotspot = { 62, 94 },
       },
    },
 
@@ -54,7 +59,7 @@ tribes:new_productionsite_type {
       -- Translators: Short for "Out of ..." for a resource
       title = _"No Trees",
       heading = _"Out of Trees",
-      message = pgettext("frisians_building", "The woodcutter working at this woodcutter´s house can’t find any trees in his work area. You should consider dismantling or destroying the building or building a forester´s house."),
+      message = pgettext ("frisians_building", "The woodcutter working at this woodcutter´s house can’t find any trees in his work area. You should consider dismantling or destroying the building or building a forester´s house."),
       productivity_threshold = 66
    },
 }

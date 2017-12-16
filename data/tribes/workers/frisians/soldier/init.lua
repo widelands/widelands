@@ -1,69 +1,79 @@
-dirname = path.dirname(__file__)
+dirname = path.dirname (__file__)
 
 animations = {
    idle = {
-      pictures = path.list_files(dirname .. "idle_??.png"),
-      hotspot = {32, 38},
---      fps = 10
+      pictures = path.list_files (dirname .. "idle_??.png"),
+      hotspot = { 21, 25 },
+      fps = 10
    },
    atk_ok_e = {
-      pictures = path.list_files(dirname .. "atk_ok_e_??.png"),
-      hotspot = {32, 38},
+      pictures = path.list_files (dirname .. "atk_ok_w_??.png"),
+      hotspot = { 23, 27 },
       fps = 10
    },
    atk_fail_e = {
-      pictures = path.list_files(dirname .. "atk_fail_e_??.png"),
-      hotspot = {32, 38},
-      fps = 10
-   },
-   eva_ok_e = {
-      pictures = path.list_files(dirname .. "eva_ok_e_??.png"),
-      hotspot = {32, 38},
-      fps = 10
-   },
-   eva_fail_e = {
-      pictures = path.list_files(dirname .. "eva_fail_e_??.png"),
-      hotspot = {32, 38},
+      pictures = path.list_files (dirname .. "atk_fail_w_??.png"),
+      hotspot = { 23, 27 },
       fps = 10
    },
    atk_ok_w = {
-      pictures = path.list_files(dirname .. "atk_ok_w_??.png"),
-      hotspot = {32, 38},
+      pictures = path.list_files (dirname .. "atk_ok_e_??.png"),
+      hotspot = { 23, 27 },
       fps = 10
    },
    atk_fail_w = {
-      pictures = path.list_files(dirname .. "atk_fail_w_??.png"),
-      hotspot = {32, 38},
+      pictures = path.list_files (dirname .. "atk_fail_e_??.png"),
+      hotspot = { 23, 27 },
+      fps = 10
+   },
+   eva_ok_e = {
+      pictures = path.list_files (dirname .. "eva_ok_w_??.png"),
+      hotspot = { 23, 27 },
+      fps = 10
+   },
+   eva_fail_e = {
+      pictures = path.list_files (dirname .. "eva_fail_w_??.png"),
+      hotspot = { 23, 27 },
       fps = 10
    },
    eva_ok_w = {
-      pictures = path.list_files(dirname .. "eva_ok_w_??.png"),
-      hotspot = {32, 38},
+      pictures = path.list_files (dirname .. "eva_ok_e_??.png"),
+      hotspot = { 23, 27 },
       fps = 10
    },
    eva_fail_w = {
-      pictures = path.list_files(dirname .. "eva_fail_w_??.png"),
-      hotspot = {32, 38},
+      pictures = path.list_files (dirname .. "eva_fail_e_??.png"),
+      hotspot = { 23, 27 },
+      fps = 10
+   },
+   die_w_alt = {
+      pictures = path.list_files (dirname .. "die_f_e_??.png"),
+      hotspot = { 23, 27 },
+      fps = 10
+   },
+   die_e_alt = {
+      pictures = path.list_files (dirname .. "die_f_w_??.png"),
+      hotspot = { 23, 27 },
       fps = 10
    },
    die_w = {
-      pictures = path.list_files(dirname .. "die_w_??.png"),
-      hotspot = {32, 38},
+      pictures = path.list_files (dirname .. "die_b_e_??.png"),
+      hotspot = { 23, 27 },
       fps = 10
    },
    die_e = {
-      pictures = path.list_files(dirname .. "die_e_??.png"),
-      hotspot = {32, 38},
+      pictures = path.list_files (dirname .. "die_b_w_??.png"),
+      hotspot = { 23, 27 },
       fps = 10
    },
 }
-add_walking_animations(animations, "walk", dirname, "walk", {32, 38}, 10)
+add_walking_animations (animations, "walk", dirname, "walk", { 21, 25 }, 15)
 
 tribes:new_soldier_type {
    msgctxt = "frisians_worker",
    name = "frisians_soldier",
    -- TRANSLATORS: This is a worker name used in lists of workers
-   descname = pgettext("frisians_worker", "Soldier"),
+   descname = pgettext ("frisians_worker", "Soldier"),
    helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    vision_range = 2,
@@ -77,26 +87,26 @@ tribes:new_soldier_type {
       max_level = 2,
       base = 12250,
       increase_per_level = 3250,
-      pictures = path.list_files(dirname .. "health_level?.png"),
+      pictures = path.list_files (dirname .. "health_level?.png"),
    },
    attack = {
       max_level = 6,
       base = 1350,
       maximum = 1550,
       increase_per_level = 975,
-      pictures = path.list_files(dirname .. "attack_level?.png"),
+      pictures = path.list_files (dirname .. "attack_level?.png"),
    },
    defense = {
       max_level = 2,
       base = 4,
       increase_per_level = 15,
-      pictures = path.list_files(dirname .. "defense_level?.png"),
+      pictures = path.list_files (dirname .. "defense_level?.png"),
    },
    evade = {
       max_level = 0,
       base = 35,
       increase_per_level = 0,
-      pictures = path.list_files(dirname .. "evade_level?.png"),
+      pictures = path.list_files (dirname .. "evade_level?.png"),
    },
 
    -- Random animations for battle
@@ -126,8 +136,10 @@ tribes:new_soldier_type {
    },
    die_w = {
       "die_w",
+      "die_w_alt",
    },
    die_e = {
       "die_e",
+      "die_e_alt",
    },
 }

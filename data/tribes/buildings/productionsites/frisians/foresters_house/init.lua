@@ -21,15 +21,21 @@ tribes:new_productionsite_type {
 
    animations = {
       idle = {
-         pictures = path.list_files(dirname .. "idle_??.png"),
-         hotspot = { 49, 52 },
+         pictures = path.list_files (dirname .. "idle_??.png"),
+         hotspot = { 62, 94 },
+         fps = 10,
+      },
+      unoccupied = {
+         pictures = path.list_files (dirname .. "unoccupied_?.png"),
+         hotspot = { 62, 94 },
       },
    },
 
    aihints = {
       supports_production_of = { "log" },
       space_consumer = true,
-      prohibited_till = 200
+      prohibited_till = 200,
+      forced_after = 400,
    },
 
    working_positions = {
