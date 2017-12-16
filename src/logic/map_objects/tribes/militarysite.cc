@@ -271,7 +271,6 @@ AttackTarget::AttackResult MilitarySite::AttackTarget::attack(Soldier* enemy) co
 	// Now we destroy the old building before we place the new one.
 	// Waiting for the destroy playercommand causes crashes with the building window, so we need to
 	// close it right away.
-	Notifications::publish(NoteBuilding(military_site_->serial(), NoteBuilding::Action::kDeleted));
 	military_site_->set_defeating_player(enemyplayer->player_number());
 	military_site_->schedule_destroy(game);
 

@@ -79,6 +79,7 @@ wl_library(ui_fsmenu
     map_io_map_loader
     network
     profile
+    random
     scripting_coroutine
     scripting_lua_interface
     scripting_lua_table

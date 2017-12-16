@@ -43,7 +43,7 @@ struct CritterAction {
 struct CritterProgram : public BobProgramBase {
 	explicit CritterProgram(const std::string& name) : name_(name) {
 	}
-	virtual ~CritterProgram() {
+	~CritterProgram() override {
 	}
 
 	std::string get_name() const override {

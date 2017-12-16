@@ -72,7 +72,7 @@ protected:
 	             const DropdownType type,
 	             const Image* background,
 	             const Image* button_background);
-	~BaseDropdown();
+	~BaseDropdown() override;
 
 public:
 	/// An entry was selected

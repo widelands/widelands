@@ -30,7 +30,12 @@ cmake .. -DCMAKE_BUILD_TYPE:STRING="$BUILD_TYPE" -DOPTION_ASAN="OFF"
 if [ "$BUILD_TYPE" == "Debug" ]; then
 
    # Build the documentation. Any warning is an error.
-   sudo pip install sphinx
+   if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
+     sudo pip install sphinx
+   fi
+   if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
+     pip2 install sphinx
+   fi
    pushd ../doc/sphinx
    mkdir source/_static
    ./extract_rst.py
