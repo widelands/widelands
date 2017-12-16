@@ -138,6 +138,13 @@ struct FindImmovableAttackTarget {
 
 	bool accept(const BaseImmovable&) const;
 };
+struct FindForeignMsite {
+	explicit FindForeignMsite(const Player& init_player) : player(init_player) {
+	}
+	bool accept(const BaseImmovable&) const;
+	const Player& player;
+};
+ 
 struct FindImmovableByDescr {
 	explicit FindImmovableByDescr(const ImmovableDescr& init_descr) : descr(init_descr) {
 	}

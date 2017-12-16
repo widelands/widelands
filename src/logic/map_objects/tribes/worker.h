@@ -27,6 +27,7 @@
 #include "logic/map_objects/tribes/productionsite.h"
 #include "logic/map_objects/tribes/worker_descr.h"
 #include "map_io/tribes_legacy_lookup_table.h"
+#include "logic/widelands_geometry.h"
 
 namespace Widelands {
 class Building;
@@ -264,6 +265,16 @@ private:
 	IdleWorkerSupply* supply_;         ///< supply while gowarehouse and not transfer
 	Transfer* transfer_;               ///< where we are currently being sent
 	int32_t current_exp_;              ///< current experience
+
+	// List of places to visit (only if scout), plus a reminder to
+	// occasionally go just somewhere.
+	struct scout_poiv_t {
+	scout_poiv_t(bool we, Coords pt) : whereever(we), poi(pt) {}
+	scout_poiv_t(bool we) : whereever(we) {}
+		const bool whereever;
+		const Coords poi;
+	};
+	std::vector <scout_poiv_t> scout_pois;
 
 	// saving and loading
 protected:

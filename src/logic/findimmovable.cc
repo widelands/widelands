@@ -23,6 +23,7 @@
 #include "economy/flag.h"
 #include "logic/map_objects/immovable.h"
 #include "logic/map_objects/tribes/militarysite.h"
+#include "logic/map.h"
 
 namespace Widelands {
 
@@ -64,6 +65,14 @@ bool FindImmovableAttackTarget::accept(const BaseImmovable& imm) const {
 	if (upcast(Building const, b, &imm)) {
 		return b->attack_target() != nullptr;
 	}
+	return false;
+}
+// Enemy military sites that cannot be attacked (for scout)
+bool FindForeignMsite::accept(const BaseImmovable& imm) const {
+	if (upcast(MilitarySite const, ms, &imm))
+		{
+			return &ms->owner() != &player;
+		}
 	return false;
 }
 

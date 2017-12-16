@@ -2551,6 +2551,126 @@ void Worker::start_task_scout(Game& game, uint16_t const radius, uint32_t const 
 	state.ivar1 = radius;
 	state.ivar2 = game.get_gametime() + time;
 
+	// Enemy military sites cannot be attacked, if those are not visible.
+	// However, Widelands workers are still somewhat aware of their presence. For example,
+	// Player does not acquire ownership of land, even if a militarysite blocking it is
+	// invisible. Therefore, it is IMO okay for the scout to be aware of those as well.
+	// Scout occasionally pays special attention to enemy military sites, to give the player
+	// an opportunity to attack. This is important, if the player can only build small huts
+	// and the enemy has one of the bigggest ones: without scout, the player has no way of attacking.
+	// The following block switches between two modes of operation:
+	// - Random walk
+	// - Lurking near an enemy military site.
+	// The code keeps track if interesting military sites, so that they all are visited.
+	// When the list of unvisited potential attack targets is exhausted, the list is rebuilt.
+	// The first element in the vector is special: It is used to store the location of the scout's hut
+	// at the moment of creation. If used dismantles the site and builds a new, the old points of interest
+	// are no longer valid and the list is cleared.
+	// Random remarks: Some unattackable military sites are also visited (like one under construction).
+	// Also, dismantled buildings may end up here. I do not consider these bugs, but if somebody reports,
+	// the behavior can always be altered.
+
+	// I assume that this check always matches.
+	if (get_position().field) {
+		// I assume that the following also always matches.
+		// Should I replace these with an assert?
+		if (get_position().field->get_immovable()) {
+			// Yeah -- this gives the location of the flag of the hut, when the scout is inside it.
+			Coords hutpos = get_position().field->get_immovable()->get_positions(game)[0];
+
+			// the first element of poi-vector stores the location
+			// of my hut, at the time of creation.
+			// If the building location changes, then pop the now-obsolete
+			// list of points of interest
+			const Map& map = game.map();
+			if (scout_pois.size()) {
+				if (map.calc_distance(scout_pois[0].poi, hutpos)) {
+					// Hut has been relocated -- clear the POIs.
+					scout_pois.clear();
+				}
+			}
+			// TODO(kxq) Clear huts if visible. Should I clear also if not a MS?
+			if (scout_pois.empty()) {
+				// Store the position of homebase
+				struct scout_poiv_t home(false, hutpos);
+				scout_pois.push_back(home);
+			}
+			if (1 < scout_pois.size()) {
+				// There is an old place to visit in queue. Remove it.
+				scout_pois.pop_back();
+			}
+			if (2 >= scout_pois.size()) {
+				// Time to find new places worth visiting.
+				Area<FCoords> revealations (map.get_fcoords(get_position()), state.ivar1);
+				std::vector<ImmovableFound> visit_us;
+				CheckStepWalkOn csteb(MOVECAPS_WALK, true);
+				const Player * pptr = get_owner();
+				map.find_reachable_immovables(revealations, &visit_us,
+						csteb,
+						FindFlagOf(FindForeignMsite(*pptr)));
+				// Now, I have a list of military sites.
+				// Regarding haveabreak: If there are many enemy sites, push a random walk request into queue now and then.
+				uint32_t haveabreak = 3;
+				for (const auto& vu : visit_us) {
+					upcast(Flag, aflag, vu.object);
+					Building * abu = aflag->get_building();
+					// Assuming that this always succeeds.
+					if (upcast(MilitarySite const, ms, abu)) {
+						// This should succeed always, too.
+						// Even if not, redundant: Own military sites
+						// are always visible.
+						if (&ms->owner() != pptr) {
+							// Check the visibility
+							MapIndex mi = map.get_index(vu.coords, map.get_width());
+							if (2 > pptr->vision(mi)) {
+								// The find_reachable_immovable sometimes returns multiple instances.
+								// Let's not add duplicates to work list.
+								bool unique = true;
+								unsigned t = 1;
+								unsigned sps = scout_pois.size();
+								while (t < sps) {
+									if (vu.coords.x == scout_pois[t].poi.x && vu.coords.y == scout_pois[t].poi.y)
+										unique = false;
+									t += 1;
+								}
+								if (unique) {
+									haveabreak -- ;
+									if (!haveabreak) {
+										// If there are many MSs to visit,
+										// do a random walk in-between also.
+										haveabreak = 3 ;
+										scout_poiv_t gosomewhere(true);
+										scout_pois.push_back(gosomewhere);
+									}
+									// if vision is zero, blacked out.
+									// if vision is one, old info exists; unattackable.
+									// When entering here, the place is worth
+									// scouting.
+									scout_poiv_t go_there(false, vu.coords);
+									scout_pois.push_back(go_there);
+								}
+							}
+						}
+					}
+				}
+				// debugging, remove this block
+				for (auto car : scout_pois) {
+					if (car.whereever)
+						std::cout << "TDS: New worklist: mandawander" << std::endl;
+					else
+						std::cout << "TDS: New worklist:            "<<car.poi.x<<" , "<<car.poi.y <<std::endl;
+				}
+				// I suppose that this never triggers.
+				// Anyway. In savegame, I assume that the vector length fits to eight bits. Therefore,
+				while (254 < scout_pois.size())
+					scout_pois.pop_back();
+				// Push a "go-anywhere" -directive into work list
+				scout_poiv_t gosomewhere(true);
+				scout_pois.push_back(gosomewhere);
+			}
+		}
+	}
+
 	// first get out
 	push_task(game, taskLeavebuilding);
 	State& stateLeave = top_state();
@@ -2569,8 +2689,11 @@ void Worker::scout_update(Game& game, State& state) {
 
 	const Map& map = game.map();
 
+	struct scout_poiv_t scoutat = scout_pois.back(); // do not pop; this function is called many times per run.
+
+	bool do_run = static_cast<int32_t>(state.ivar2 - game.get_gametime()) > 0;
 	// If not yet time to go home
-	if (static_cast<int32_t>(state.ivar2 - game.get_gametime()) > 0) {
+	if (scoutat.whereever && do_run) {
 		std::vector<Coords> list;  //< List of interesting points
 		CheckStepDefault cstep(descr().movecaps());
 		FindNodeAnd ffa;
@@ -2619,7 +2742,6 @@ void Worker::scout_update(Game& game, State& state) {
 			if (oldest_coords != get_position()) {
 				molog("[scout]: All fields discovered. Go to (%i, %i)\n", oldest_coords.x,
 				      oldest_coords.y);
-
 				if (!start_task_movepath(
 				       game, oldest_coords, 0, descr().get_right_walk_anims(does_carry_ware())))
 					molog("[scout]: Failed to reach destination\n");
@@ -2630,7 +2752,38 @@ void Worker::scout_update(Game& game, State& state) {
 		}
 		// No reachable fields found.
 		molog("[scout]: nowhere to go!\n");
+	} else if (do_run) {
+		// The scout shall hang around an enemy military site.
+		std::vector<Coords> list;  // locations near the MS under inspection
+		CheckStepDefault cstep(descr().movecaps());
+		FindNodeAnd ffa;
+		ffa.add(FindNodeImmovableSize(FindNodeImmovableSize::sizeNone), false);
+		Coords current_coords = get_position();
+		// poi points to the enemy military site; walk in random at vicinity.
+		// First try some near-close fields. If no success then try some further off ones.
+		// This code is partially copied from above; I did not check why start_task_movepath
+		// would fail. Therefore, the looping can be a bit silly to more knowledgeable readers.
+		for (unsigned vicinity = 1 ; vicinity < 4 ; vicinity++) {
+			Area<FCoords> exploring_area(map.get_fcoords(scoutat.poi), vicinity);
+			if (map.find_reachable_fields(exploring_area, &list, cstep, ffa) > 0) {
+				unsigned formax = list.size();
+				if (3 + vicinity < formax)
+					formax = 3 + vicinity;
+				for (uint8_t i = 0; i < formax; ++i) {
+					const std::vector<Coords>::size_type lidx = game.logic_rand() % list.size();
+					Coords const coord = list[lidx];
+					list.erase(list.begin() + lidx);
+					std::cout <<"TDS ("<<current_coords.x<<","<<current_coords.y <<") => (" <<coord.x<<","<<coord.y<<")"<<std::endl;
+					if (!start_task_movepath(
+						game, coord, 0, descr().get_right_walk_anims(does_carry_ware())))
+						molog("[scout]: failed to reach destination (x)\n");
+					else
+						return;  // start_task_movepath was successfull.
+				}
+			}
+		}
 	}
+
 	// time to go home or found nothing to go to
 	pop_task(game);
 	schedule_act(game, 10);
@@ -2670,7 +2823,7 @@ Load/save support
 ==============================
 */
 
-constexpr uint8_t kCurrentPacketVersion = 2;
+constexpr uint8_t kCurrentPacketVersion = 3;
 
 Worker::Loader::Loader() : location_(0), carried_ware_(0) {
 }
@@ -2690,6 +2843,24 @@ void Worker::Loader::load(FileRead& fr) {
 				worker.transfer_ = new Transfer(dynamic_cast<Game&>(egbase()), worker);
 				worker.transfer_->read(fr, transfer_);
 			}
+			unsigned veclen = fr.unsigned_8();
+			for (unsigned q = 0 ; q < veclen ; q++)
+			  {
+			    if (fr.unsigned_8())
+			      {
+				scout_poiv_t gsw(true);
+				worker.scout_pois.push_back(gsw);
+			      }
+			    else
+			      {
+				int16_t x = fr.signed_16();
+				int16_t y = fr.signed_16();
+				Coords peekpos = Coords(x, y);
+				scout_poiv_t gtt(false, peekpos);
+				worker.scout_pois.push_back(gtt);
+			      }
+			  }
+
 		} else {
 			throw UnhandledVersionError("Worker", packet_version, kCurrentPacketVersion);
 		}
@@ -2836,5 +3007,22 @@ void Worker::do_save(EditorGameBase& egbase, MapObjectSaver& mos, FileWrite& fw)
 	} else {
 		fw.unsigned_8(0);
 	}
+
+	fw.unsigned_8(scout_pois.size());
+	for (auto p: scout_pois)
+	  {
+	    if (p.whereever)
+	      fw.unsigned_8(1);
+	    else
+	      {
+		fw.unsigned_8(0);
+		// TODO(kxq): Is there a better way to save Coords?
+		// This makes unnecessary assumptions of the internals
+		// of Coords
+		fw.signed_16(p.poi.x);
+		fw.signed_16(p.poi.y);
+	      }
+	  }
+
 }
 }
