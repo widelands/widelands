@@ -3,17 +3,11 @@ dirname = "tribes/buildings/productionsites/empire/mill/"
 tribes:new_productionsite_type {
    msgctxt = "empire_building",
    name = "empire_mill1",
-   -- TRANSLATORS: This is a building name used in lists of buildings
-   descname = pgettext("empire_building", "Mill"),
+   descname = "Mill",
    helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "medium",
 
-   -- buildcost = {
-      -- log = 3,
-      -- granite = 3,
-      -- marble = 1
-   -- },
    return_on_dismantle = {
       log = 1,
       granite = 2,
@@ -49,8 +43,7 @@ tribes:new_productionsite_type {
 
    programs = {
       work = {
-         -- TRANSLATORS: Completed/Skipped/Did not start grinding wheat because ...
-         descname = _"grinding wheat",
+         descname = "grinding wheat",
          actions = {
             "sleep=5000",
             "return=skipped unless economy needs flour",

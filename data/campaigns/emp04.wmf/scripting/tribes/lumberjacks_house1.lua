@@ -2,21 +2,20 @@ dirname = "tribes/buildings/productionsites/empire/lumberjacks_house/"
 
 tribes:new_productionsite_type {
    msgctxt = "empire_building",
-   name = "empire_lumberjacks_house2",
-   -- TRANSLATORS: This is a building name used in lists of buildings
-   descname = pgettext("empire_building", "Lumberjack’s House"),
+   name = "empire_lumberjacks_house1",
+   descname = "Lumberjack’s House",
    helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "small",
+   enhancement = "empire_lumberjacks_house2",
 
-   enhancement_cost = {
+   buildcost = {
       log = 2,
       planks = 1
    },
 
-   return_on_dismantle_on_enhanced = {
-      planks = 1,
-     --felling_ax = 1
+   return_on_dismantle = {
+      log = 1,
    },
 
    animations = {
@@ -40,8 +39,7 @@ tribes:new_productionsite_type {
 
    programs = {
       work = {
-         -- TRANSLATORS: Completed/Skipped/Did not start felling trees because ...
-         descname = _"felling trees",
+         descname = "felling trees",
          actions = {
             "sleep=400000", -- Barbarian lumberjack sleeps 25000
             "worker=chop"
@@ -49,10 +47,9 @@ tribes:new_productionsite_type {
       },
    },
    out_of_resource_notification = {
-      -- Translators: Short for "Out of ..." for a resource
-      title = _"No Trees",
-      heading = _"Out of Trees",
-      message = pgettext("empire_building", "The lumberjack working at this lumberjack’s house can’t find any trees in his work area. You should consider dismantling or destroying the building or building a forester’s house."),
+      title = "No Trees",
+      heading = "Out of Trees",
+      message = "The lumberjack working at this lumberjack’s house can’t find any trees in his work area. You should consider dismantling or destroying the building or building a forester’s house.",
       productivity_threshold = 60
    },
 }

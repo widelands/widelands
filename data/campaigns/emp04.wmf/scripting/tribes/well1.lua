@@ -2,20 +2,20 @@ dirname = "tribes/buildings/productionsites/empire/well/"
 
 tribes:new_productionsite_type {
    msgctxt = "empire_building",
-   name = "empire_well2",
-   -- TRANSLATORS: This is a building name used in lists of buildings
-   descname = pgettext("empire_building", "Well"),
+   name = "empire_well1",
+   descname = "Well",
    helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "small",
+   enhancement = "empire_well2",
 
-   enhancement_cost = {
+   buildcost = {
       log = 2,
       granite = 1,
       marble = 1
    },
-   return_on_dismantle_on_enhanced = {
-      log = 1
+   return_on_dismantle = {
+      marble = 1
    },
 
    animations = {
@@ -43,8 +43,7 @@ tribes:new_productionsite_type {
 
    programs = {
       work = {
-         -- TRANSLATORS: Completed/Skipped/Did not start working because ...
-         descname = _"working",
+         descname = "working",
          actions = {
             "sleep=30000",
             "animate=working 30000",
@@ -54,10 +53,9 @@ tribes:new_productionsite_type {
       },
    },
    out_of_resource_notification = {
-      -- Translators: Short for "Out of ..." for a resource
-      title = _"No Water",
-      heading = _"Out of Water",
-      message = pgettext("empire_building", "The carrier working at this well can’t find any water in his well."),
+      title = "No Water",
+      heading = "Out of Water",
+      message = "The carrier working at this well can’t find any water in his well.",
       productivity_threshold = 15
    },
 }
