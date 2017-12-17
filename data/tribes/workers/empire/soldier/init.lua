@@ -126,9 +126,9 @@ tribes:new_soldier_type {
       "eva_fail_e",
    },
    die_w = {
-      "atk_ok_w",
+      "die_w",
    },
    die_e = {
-      "eva_fail_e",
+      "die_e",
    },
 }
