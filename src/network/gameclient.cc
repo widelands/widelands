@@ -41,6 +41,8 @@
 #include "logic/playersmanager.h"
 #include "map_io/widelands_map_loader.h"
 #include "network/internet_gaming.h"
+#include "network/netclient.h"
+#include "network/netclientproxy.h"
 #include "network/network_gaming_messages.h"
 #include "network/network_protocol.h"
 #include "scripting/lua_interface.h"
@@ -58,7 +60,7 @@ struct GameClientImpl {
 
 	std::string localplayername;
 
-	std::unique_ptr<NetClient> net;
+	std::unique_ptr<NetClientInterface> net;
 
 	/// Currently active modal panel. Receives an end_modal on disconnect
 	UI::Panel* modal;
@@ -91,13 +93,23 @@ struct GameClientImpl {
 
 GameClient::GameClient(const std::pair<NetAddress, NetAddress>& host,
                        const std::string& playername,
-                       bool internet)
+                       bool internet,
+                       const std::string& gamename)
    : d(new GameClientImpl), internet_(internet) {
 
-	d->net = NetClient::connect(host.first);
+	if (internet) {
+		assert(!gamename.empty());
+		d->net = NetClientProxy::connect(host.first, gamename);
+	} else {
+		d->net = NetClient::connect(host.first);
+	}
 	if ((!d->net || !d->net->is_connected()) && host.second.is_valid()) {
 		// First IP did not work? Try the second IP
-		d->net = NetClient::connect(host.second);
+		if (internet) {
+			d->net = NetClientProxy::connect(host.first, gamename);
+		} else {
+			d->net = NetClient::connect(host.second);
+		}
 	}
 	if (!d->net || !d->net->is_connected()) {
 		throw WLWarning(_("Could not establish connection to host"),
@@ -877,9 +889,10 @@ void GameClient::handle_network() {
 			return;
 		}
 		// Process all available packets
-		RecvPacket packet;
-		while (d->net->try_receive(&packet)) {
-			handle_packet(packet);
+		std::unique_ptr<RecvPacket> packet = d->net->try_receive();
+		while (packet) {
+			handle_packet(*packet);
+			packet = d->net->try_receive();
 		}
 	} catch (const DisconnectException& e) {
 		disconnect(e.what());
