@@ -2668,13 +2668,6 @@ void Worker::start_task_scout(Game& game, uint16_t const radius, uint32_t const 
 						}
 					}
 				}
-				// debugging, remove this block
-				for (auto car : scout_pois) {
-					if (car.whereever)
-						std::cout << "TDS: New worklist: mandawander" << std::endl;
-					else
-						std::cout << "TDS: New worklist:            "<<car.poi.x<<" , "<<car.poi.y <<std::endl;
-				}
 				// I suppose that this never triggers.
 				// Anyway. In savegame, I assume that the vector length fits to eight bits. Therefore,
 				while (254 < scout_pois.size())
@@ -2703,6 +2696,19 @@ void Worker::scout_update(Game& game, State& state) {
 	}
 
 	const Map& map = game.map();
+
+	if (scout_pois.empty()) {
+		// This routine assumes that scout_pois is not empty. There is one exception:
+		// First call to this routine after loading an old savegame. The least-invasive
+		// way to acquire old savegame compatibility was to simply ask the scout to go home early,
+		// under this special situation. Anybody reading this,
+		// TODO(kxq): Please remove this code block (and compatibility_2017 code from load routine)
+		// once Build 20 is out. Thanks.
+		std::cout << "WARNING: SENDING SCOUT HOME. ASSUMING THE GAME WAS JUST STARTED, FROM SAVEGAME, IN COMPATIBILITY MODE" << std::endl;
+		pop_task(game);
+		schedule_act(game, 10);
+		return;
+	}
 
 	struct PlaceToScout scoutat = scout_pois.back(); // do not pop; this function is called many times per run.
 
@@ -2771,9 +2777,11 @@ void Worker::scout_update(Game& game, State& state) {
 		// The scout shall hang around an enemy military site.
 		std::vector<Coords> list;  // locations near the MS under inspection
 		CheckStepDefault cstep(descr().movecaps());
+		// TODO(kxq): Do I want to check that the place to go is differnt from current position?
+		// This happens occasionally and looks a bit silly, but does not real harm. If I do want to do that,
+		// then the current poisition can be acquired like this: // Coords current_coords = get_position();
 		FindNodeAnd ffa;
 		ffa.add(FindNodeImmovableSize(FindNodeImmovableSize::sizeNone), false);
-		Coords current_coords = get_position();
 		// poi points to the enemy military site; walk in random at vicinity.
 		// First try some near-close fields. If no success then try some further off ones.
 		// This code is partially copied from above; I did not check why start_task_movepath
@@ -2788,7 +2796,6 @@ void Worker::scout_update(Game& game, State& state) {
 					const std::vector<Coords>::size_type lidx = game.logic_rand() % list.size();
 					Coords const coord = list[lidx];
 					list.erase(list.begin() + lidx);
-					std::cout <<"TDS ("<<current_coords.x<<","<<current_coords.y <<") => (" <<coord.x<<","<<coord.y<<")"<<std::endl;
 					if (!start_task_movepath(
 						game, coord, 0, descr().get_right_walk_anims(does_carry_ware())))
 						molog("[scout]: failed to reach destination (x)\n");
@@ -2847,7 +2854,9 @@ void Worker::Loader::load(FileRead& fr) {
 	Bob::Loader::load(fr);
 	try {
 		uint8_t packet_version = fr.unsigned_8();
-		if (packet_version == kCurrentPacketVersion) {
+		// TODO(kxq): Remove the compatibility_2017 code (and similars, dozen lines below) once B20 is out.
+		bool compatibility_2017 = packet_version == 2 && kCurrentPacketVersion == 3;
+		if (packet_version == kCurrentPacketVersion || compatibility_2017) {
 
 			Worker& worker = get<Worker>();
 			location_ = fr.unsigned_32();
@@ -2858,7 +2867,12 @@ void Worker::Loader::load(FileRead& fr) {
 				worker.transfer_ = new Transfer(dynamic_cast<Game&>(egbase()), worker);
 				worker.transfer_->read(fr, transfer_);
 			}
-			unsigned veclen = fr.unsigned_8();
+			unsigned veclen;
+			// TODO(kxq): Remove compativility_2017 associated code from here and above.
+			if (compatibility_2017)
+				veclen = 0;
+			else
+				veclen = fr.unsigned_8();
 			for (unsigned q = 0 ; q < veclen ; q++)
 			  {
 			    if (fr.unsigned_8())
