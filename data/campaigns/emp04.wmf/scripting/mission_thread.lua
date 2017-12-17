@@ -70,7 +70,7 @@ function clear_roads()
    local o = add_campaign_objective(obj_clear_roads)
    local cleared = false
 
-   while cleared == false do
+   while not cleared do
       cleared = true
       sleep (5000)
       for x=5, 40 do
@@ -79,10 +79,7 @@ function clear_roads()
             if (field.immovable and field.immovable.descr.type_name == "flag" and field.immovable.building == nil) then
                local numroads = 0
                for _ in pairs(field.immovable.roads) do numroads = numroads + 1 end
-               if numroads < 2 then
-                  cleared = false
-               end
-               if numroads == 6 then
+               if numroads < 2 or numroads == 6 then
                   cleared = false
                end
             end
@@ -141,7 +138,7 @@ function steel()
    campaign_message_box(amalea_13)
    local o = add_campaign_objective(obj_produce_tools)
 
-   while not ((
+   while ((
          p1:get_produced_wares_count("basket") +
          p1:get_produced_wares_count("bread_paddle") +
          p1:get_produced_wares_count("felling_ax") +
@@ -154,7 +151,7 @@ function steel()
          p1:get_produced_wares_count("saw") +
          p1:get_produced_wares_count("scythe") +
          p1:get_produced_wares_count("shovel")
-      ) > 9) do
+      ) < 10) do
    sleep(2500)
    end
    campaign_message_box(diary_page_2)
@@ -185,7 +182,6 @@ function steel()
       end
    end
 
-   number_soldiers = number_soldiers + 9
    local enough_soldiers = false
    while not enough_soldiers do
       bld = array_combine(
@@ -207,7 +203,7 @@ function steel()
             amount = amount + count
          end
       end
-      if amount > number_soldiers then
+      if amount > number_soldiers + 9 then
          enough_soldiers = true
       end
       sleep(4273)
@@ -252,7 +248,6 @@ function training()
       end
    end
 
-   strength = strength + 10
    local enough_strength = false
    while not enough_strength do
       bld = array_combine(
@@ -274,7 +269,7 @@ function training()
             amount = amount + descr[1]*count + descr[2]*count
          end
       end
-      if amount > strength then
+      if amount > strength + 10 then
          enough_strength = true
       end
       sleep(4273)
@@ -364,25 +359,45 @@ function conquer()
    p1:reveal_scenario("empiretut04")
 end
 
--- another production chain that is uneffective and need to be corrected
+-- another production chain that is ineffective and needs to be corrected
 function wheat_chain()
    while not (p1:get_produced_wares_count('beer') > 4  and p1:get_produced_wares_count('flour') > 4) do sleep(2434) end
    local o = add_campaign_objective(obj_find_monastery)
    campaign_message_box(amalea_9)
-   while not (p1:sees_field(map:get_field(16,184)) or p1:sees_field(map:get_field(16,185)) or p1:sees_field(map:get_field(17,186)) or p1:sees_field(map:get_field(17,187)) or p1:sees_field(map:get_field(18,188)) or p1:sees_field(map:get_field(18,189)) or p1:sees_field(map:get_field(19,190)) or p1:sees_field(map:get_field(20,190)) or p1:sees_field(map:get_field(21,190)) or p1:sees_field(map:get_field(22,190)) or p1:sees_field(map:get_field(23,190)) or p1:sees_field(map:get_field(24,190))) do sleep(2500) end
-   local well = map:get_field(17, 182)
-   place_building_in_region(p3, "empire_well", {map:get_field(17, 182)})
-   local brew = map:get_field(19, 183)
-   place_building_in_region(p3, "empire_brewery", {map:get_field(19, 183)})
-   local mill = map:get_field(18, 184)
-   place_building_in_region(p3, "empire_mill", {map:get_field(18, 184)})
-   local ware = map:get_field(21, 186)
-   place_building_in_region(p3, "empire_warehouse", {map:get_field(21, 186)}, {workers = {empire_carrier = 0, empire_recruit = 0,}})
-   local sent = map:get_field(19, 185)
-   place_building_in_region(p3, "empire_sentry", {map:get_field(19, 185)}, {soldiers = {[{0,0,0,0}] = 1,}})
+   while not (
+      p1:sees_field(map:get_field(16,184)) or
+      p1:sees_field(map:get_field(16,185)) or
+      p1:sees_field(map:get_field(17,186)) or
+      p1:sees_field(map:get_field(17,187)) or
+      p1:sees_field(map:get_field(18,188)) or
+      p1:sees_field(map:get_field(18,189)) or
+      p1:sees_field(map:get_field(19,190)) or
+      p1:sees_field(map:get_field(20,190)) or
+      p1:sees_field(map:get_field(21,190)) or
+      p1:sees_field(map:get_field(22,190)) or
+      p1:sees_field(map:get_field(23,190)) or
+      p1:sees_field(map:get_field(24,190))) do
+      sleep(2500)
+   end
+
+   local field_well = map:get_field(17, 182)
+   place_building_in_region(p3, "empire_well", {field_well})
+
+   local field_brewery = map:get_field(19, 183)
+   place_building_in_region(p3, "empire_brewery", {field_brewery})
+
+   local fiel_mill = map:get_field(18, 184)
+   place_building_in_region(p3, "empire_mill", {fiel_mill})
+
+   local field_warehouse = map:get_field(21, 186)
+   place_building_in_region(p3, "empire_warehouse", {field_warehouse}, {workers = {empire_carrier = 0, empire_recruit = 0}})
+
+   local field_sentry = map:get_field(19, 185)
+   place_building_in_region(p3, "empire_sentry", {field_sentry}, {soldiers = {[{0,0,0,0}] = 1}})
+
    o.done = true
    sleep(4000)
-   
+
    -- Julia the priestess of Vesta appears
    local julia = map:get_field(19, 185)
    local prior_center = scroll_to_field(julia)
@@ -416,16 +431,17 @@ function wheat_chain()
       campaign_message_box(julia_1)
 
       -- replace Julias buildings with similar ones of the player
-      well.immovable:remove()
-      brew.immovable:remove()
-      mill.immovable:remove()
-      ware.immovable:remove()
-      sent.immovable:remove()
-      place_building_in_region(p1, "empire_well", {map:get_field(17, 182)})
-      place_building_in_region(p1, "empire_brewery", {map:get_field(19, 183)})
-      place_building_in_region(p1, "empire_mill", {map:get_field(18, 184)})
-      place_building_in_region(p1, "empire_warehouse", {map:get_field(21, 186)}, {wares = {water = 30, flour = 30, beer = 40,}})
-      place_building_in_region(p1, "empire_sentry", {map:get_field(19, 185)})
+      field_well.immovable:remove()
+      field_brewery.immovable:remove()
+      fiel_mill.immovable:remove()
+      field_warehouse.immovable:remove()
+      field_sentry.immovable:remove()
+      place_building_in_region(p1, "empire_well", {field_well})
+      place_building_in_region(p1, "empire_brewery", {field_brewery})
+      place_building_in_region(p1, "empire_mill", {fiel_mill})
+      place_building_in_region(p1, "empire_warehouse", {field_warehouse}, {wares = {water = 30, flour = 30, beer = 40,}})
+      place_building_in_region(p1, "empire_sentry", {field_sentry})
+
       campaign_message_box(amalea_12)
       campaign_message_box(saledus_3)
    end
