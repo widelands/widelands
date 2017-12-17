@@ -208,6 +208,8 @@ void InputQueueDisplay::update_priority_buttons() {
 
 	priority_radiogroup_->changedto.connect(
 	   boost::bind(&InputQueueDisplay::radiogroup_changed, this, _1));
+	priority_radiogroup_->clicked.connect(
+	   boost::bind(&InputQueueDisplay::radiogroup_clicked, this));
 
 	bool const can_act = igb_.can_act(building_.owner().player_number());
 	if (!can_act)
@@ -276,24 +278,47 @@ void InputQueueDisplay::radiogroup_changed(int32_t state) {
 		return;
 	}
 	if (SDL_GetModState() & KMOD_CTRL) {
-		Panel *sibling = get_parent()->get_first_child();
-		assert(sibling != nullptr);
-		while (sibling != nullptr) {
-			InputQueueDisplay *display = dynamic_cast<InputQueueDisplay*>(sibling);
-			sibling = sibling->get_next_sibling();
-			if (display == nullptr) {
-				continue;
-			}
-			igb_.game().send_player_set_ware_priority(
-											display->building_, display->type_, display->index_, priority);
-			if (display != this) {
-				// TODO(Notabilis): Remove this call when send_player_set_ware_priority() calls it
-				display->priority_radiogroup_->set_state(state);
-			}
-		}
-	} else {
-		igb_.game().send_player_set_ware_priority(building_, type_, index_, priority);
+		update_siblings(state);
 	}
+	igb_.game().send_player_set_ware_priority(building_, type_, index_, priority);
+}
+
+void InputQueueDisplay::radiogroup_clicked() {
+	// Already set option has been clicked again
+	// Unimportant for this queue, but update other queues
+	if (SDL_GetModState() & KMOD_CTRL) {
+		update_siblings(priority_radiogroup_->get_state());
+	}
+}
+
+void InputQueueDisplay::update_siblings(int32_t state) {
+	// "Release" the CTRL key to avoid recursion
+	const SDL_Keymod old_modifiers = SDL_GetModState();
+	SDL_SetModState(KMOD_NONE);
+
+	Panel *sibling = get_parent()->get_first_child();
+	// Well, at least we should be a child of our parent
+	assert(sibling != nullptr);
+	do {
+		if (sibling == this) {
+			// We already have been set
+			continue;
+		}
+		InputQueueDisplay *display = dynamic_cast<InputQueueDisplay*>(sibling);
+		if (display == nullptr) {
+			// Cast failed. Sibling is no InputQueueDisplay
+			continue;
+		}
+		if (display->priority_radiogroup_->get_state() == state) {
+			// Nothing to do for this queue
+			continue;
+		}
+		// Calling set_state() leads to radiogroup_changed()) getting called, which does the real change
+		// TODO(Notabilis): When bug 1738485 is fixed probably replace with send_player_set_ware_priority()
+		display->priority_radiogroup_->set_state(state);
+	} while ((sibling = sibling->get_next_sibling()));
+
+	SDL_SetModState(old_modifiers);
 }
 
 /**
