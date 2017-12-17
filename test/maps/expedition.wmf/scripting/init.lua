@@ -2,6 +2,7 @@ include "scripting/lunit.lua"
 include "scripting/coroutine.lua"
 include "scripting/infrastructure.lua"
 include "scripting/ui.lua"
+include "test/scripting/stable_save.lua"
 
 -- This is a test case for bug 1234058: there is constant demand for logs,
 -- so the expedition initially never got any.
@@ -52,18 +53,6 @@ connected_road(p1, map:get_field(8,19).immovable, "r,r|r,r|r,r|r,tr,tr|", true)
 connected_road(p1, map:get_field(7,21).immovable, "tr,tr|", true)
 first_ship = nil
 second_ship = nil
-
--- Save the game so that reloading does not skip
-function stable_save(safename)
-   local old_speed = game.desired_speed
-   game.desired_speed = 1000
-   sleep(100)
-   game:save(safename)
-   game.desired_speed = 1000
-   sleep(2000)  -- Give the loaded game a chance to catch up
-   game.desired_speed = old_speed
-   sleep(1000)
-end
 
 function click_on_ship(which_ship)
    local mv = wl.ui.MapView()
@@ -211,7 +200,7 @@ function test_cancel_started_expedition_on_ship(needs_second_ship)
    game.desired_speed = 10 * 1000
    sleep(10000)
 
-   stable_save("ready_to_sail")
+   stable_save(game, "ready_to_sail")
 
    sleep(10000)
    assert_equal(1, p1:get_workers("barbarians_builder"))
@@ -255,7 +244,7 @@ function test_cancel_started_expedition_underway()
    assert_equal("ccw",expedition_ship.island_explore_direction)
    sleep(6000)
 
-   stable_save("sailing")
+   stable_save(game, "sailing")
    assert_equal(1, p1:get_workers("barbarians_builder"))
 
    cancel_expedition_in_shipwindow(expedition_ship)
@@ -289,7 +278,7 @@ function test_cancel_when_port_space_was_reached()
    sleep(500)
    assert_equal(1, p1:get_workers("barbarians_builder"))
 
-   stable_save("reached_port_space")
+   stable_save(game, "reached_port_space")
    sleep(5000)
    ships = p1:get_ships()
    --ships table should contain 1-2 items (1-2 ships)
@@ -342,7 +331,7 @@ function test_transporting_works()
    sleep(500)
    assert_equal(1, p1:get_workers("barbarians_builder"))
 
-   stable_save("port_done")
+   stable_save(game, "port_done")
    game.desired_speed = 25 * 1000
 
    -- build a lumberjack and see if the ship starts transporting stuff
