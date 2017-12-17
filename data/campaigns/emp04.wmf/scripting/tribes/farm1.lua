@@ -3,8 +3,7 @@ dirname = "tribes/buildings/productionsites/empire/farm/"
 tribes:new_productionsite_type {
    msgctxt = "empire_building",
    name = "empire_farm1",
-   -- TRANSLATORS: This is a building name used in lists of buildings
-   descname = pgettext("empire_building", "Farm"),
+   descname = "Farm",
    helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "big",
@@ -38,8 +37,7 @@ tribes:new_productionsite_type {
 
    programs = {
       work = {
-         -- TRANSLATORS: Completed/Skipped/Did not start working because ...
-         descname = _"working",
+         descname = "working",
          actions = {
             "call=plant_wheat",
             "call=harvest_wheat",
@@ -47,16 +45,14 @@ tribes:new_productionsite_type {
          }
       },
       plant_wheat = {
-         -- TRANSLATORS: Completed/Skipped/Did not start planting wheat because ...
-         descname = _"planting wheat",
+         descname = "planting wheat",
          actions = {
             "sleep=14000",
             "worker=harvest"
          }
       },
       harvest_wheat = {
-         -- TRANSLATORS: Completed/Skipped/Did not start harvesting wheat because ...
-         descname = _"harvesting wheat",
+         descname = "harvesting wheat",
          actions = {
             "sleep=4000",
             "worker=harvest"
@@ -64,10 +60,9 @@ tribes:new_productionsite_type {
       },
    },
    out_of_resource_notification = {
-      -- Translators: Short for "Out of ..." for a resource
-      title = _"No Fields",
-      heading = _"Out of Fields",
-      message = pgettext("empire_building", "The farmer working at this farm has no cleared soil to plant his seeds."),
+      title = "No Fields",
+      heading = "Out of Fields",
+      message = "The farmer working at this farm has no cleared soil to plant his seeds.",
       productivity_threshold = 30
    },
 }

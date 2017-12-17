@@ -3,8 +3,7 @@ dirname = "tribes/buildings/productionsites/empire/brewery/"
 tribes:new_productionsite_type {
    msgctxt = "empire_building",
    name = "empire_brewery1",
-   -- TRANSLATORS: This is a building name used in lists of buildings
-   descname = pgettext("empire_building", "Brewery"),
+   descname = "Brewery",
    helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "medium",
@@ -43,8 +42,7 @@ tribes:new_productionsite_type {
 
    programs = {
       work = {
-         -- TRANSLATORS: Completed/Skipped/Did not start brewing beer because ...
-         descname = _"brewing beer",
+         descname = "brewing beer",
          actions = {
             "sleep=30000",
             "return=skipped unless economy needs beer",
