@@ -94,81 +94,38 @@ place_building_in_region(p1, "empire_barracks", sf:region(20), {inputs = {empire
 
 
 -- Helper function for placing a road
-function try_place_road_with_carrier(x, y, a, b)
+function try_place_road_with_carrier(x, y, from, to)
    local field = map:get_field(x,y)
    if field.immovable and field.immovable.descr.type_name == "flag" then
-      local a1 = a.."n"
-      local b1 = b.."n"
-      local n1 = field[a1]
-      local n2 = n1[b1]
-      if n1.immovable == nil and n1:has_caps("walkable") and (n2:has_caps("flag") or (n2.immovable and n2.immovable.descr.type_name == "flag")) then
-         local road = p1:place_road(field.immovable, a, b, true)
-         road:set_workers('empire_carrier',1)
+      local from_field = field[from .. "n"]
+      local to_field = from_field[to .. "n"]
+      if from_field.immovable == nil and
+         from_field:has_caps("walkable") and (
+            to_field:has_caps("flag") or
+            (to_field.immovable and to_field.immovable.descr.type_name == "flag")
+         ) then
+         local road = p1:place_road(field.immovable, from, to, true)
+         road:set_workers('empire_carrier', 1)
       end
    end
 end
 
 -- Roads
-for x=7, 35 do
-   for y=0, 53 do
+for y=0, 53 do
+   for x=5, 35 do
       try_place_road_with_carrier(x, y, "bl", "bl")
    end
-end
-
-for x=5, 35 do
-   for y=0, 53 do
-      try_place_road_with_carrier(x, y, "bl", "bl")
-   end
-end
-
-for x=5, 35 do
-   for y=0, 53 do
-      try_place_road_with_carrier(x, y, "bl", "bl")
-   end
-end
-
-for x=6, 35 do
-   for y=0, 53 do
+   for x=6, 35 do
       try_place_road_with_carrier(x, y, "l", "l")
    end
-end
-
-for x=7, 35 do
-   for y=0, 53 do
+   for x=7, 35 do
       try_place_road_with_carrier(x, y, "tl", "tl")
-   end
-end
-
-for x=7, 35 do
-   for y=0, 53 do
       try_place_road_with_carrier(x, y, "br", "br")
-   end
-end
-
-for x=7, 35 do
-   for y=0, 53 do
       try_place_road_with_carrier(x, y, "r", "r")
-   end
-end
-
-for x=7, 35 do
-   for y=0, 53 do
       try_place_road_with_carrier(x, y, "r", "tr")
-   end
-end
-
-for x=7, 35 do
-   for y=0, 53 do
       try_place_road_with_carrier(x, y, "tr", "tl")
    end
 end
-
-for x=5, 35 do
-   for y=0, 53 do
-      try_place_road_with_carrier(x, y, "bl", "bl")
-   end
-end
-
 
 -- =======================================================================
 --                                 Player 2
