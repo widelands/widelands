@@ -25,7 +25,7 @@ tips = {
       seconds = 6
    },
    {
-      text = _"Use the priority buttons in building windows to adjust delivery of a specific ware. Pressing Ctrl while clicking adjusts all wares at once.",
+      text = _"Use the priority buttons in building windows to adjust delivery of a specific ware. Pressing Ctrl while clicking will adjust all wares at once.",
       seconds = 7
    },
    {
