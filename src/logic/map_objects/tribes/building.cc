@@ -197,6 +197,11 @@ void BuildingDescr::set_hints_trainingsites_max_percent(int percent) {
 	hints_.set_trainingsites_max_percent(percent);
 }
 
+uint32_t BuildingDescr::get_unoccupied_animation() const {
+	return get_animation(is_animation_known("unoccupied") ? "unoccupied" : "idle");
+}
+
+
 /**
  * Normal buildings don't conquer anything, so this returns 0 by default.
  *
@@ -357,10 +362,7 @@ bool Building::init(EditorGameBase& egbase) {
 	}
 
 	// Start the animation
-	if (descr().is_animation_known("unoccupied"))
-		start_animation(egbase, descr().get_animation("unoccupied"));
-	else
-		start_animation(egbase, descr().get_animation("idle"));
+	start_animation(egbase, descr().get_unoccupied_animation());
 
 	leave_time_ = egbase.get_gametime();
 	return true;

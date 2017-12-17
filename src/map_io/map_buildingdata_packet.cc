@@ -36,6 +36,7 @@
 #include "io/filewrite.h"
 #include "logic/editor_game_base.h"
 #include "logic/game.h"
+#include "logic/game_data_error.h"
 #include "logic/map.h"
 #include "logic/map_objects/tribes/constructionsite.h"
 #include "logic/map_objects/tribes/dismantlesite.h"
@@ -93,12 +94,11 @@ void MapBuildingdataPacket::read(FileSystem& fs,
 						char const* const animation_name = fr.c_string();
 						try {
 							building.anim_ = building.descr().get_animation(animation_name);
-						} catch (const MapObjectDescr::AnimationNonexistent&) {
-							log("WARNING: %s %s does not have animation \"%s\"; "
-							    "using animation \"idle\" instead\n",
-							    building.owner().tribe().name().c_str(),
-							    building.descr().descname().c_str(), animation_name);
+						} catch (const GameDataError& e) {
 							building.anim_ = building.descr().get_animation("idle");
+							log("Warning: Tribe %s building: %s, using animation %s instead.\n",
+								 building.owner().tribe().name().c_str(),
+							    e.what(), building.descr().get_animation_name(building.anim_).c_str());
 						}
 					} else {
 						building.anim_ = 0;
