@@ -62,6 +62,6 @@ protected:
 	UnhandledVersionError() {
 	}
 };
-} // namespace Widelands
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_LOGIC_GAME_DATA_ERROR_H

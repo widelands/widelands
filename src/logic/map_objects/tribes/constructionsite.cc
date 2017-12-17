@@ -40,13 +40,13 @@
 namespace Widelands {
 
 void ConstructionsiteInformation::draw(const Vector2f& point_on_dst,
-													float scale,
-													const RGBColor& player_color,
-													RenderTarget* dst) const {
+                                       float scale,
+                                       const RGBColor& player_color,
+                                       RenderTarget* dst) const {
 	// Draw the construction site marker
 	const uint32_t anim_idx = becomes->is_animation_known("build") ?
-				becomes->get_animation("build") :
-				becomes->get_unoccupied_animation();
+	                             becomes->get_animation("build") :
+	                             becomes->get_unoccupied_animation();
 
 	const Animation& anim = g_gr->animations().get_animation(anim_idx);
 	const size_t nr_frames = anim.nr_frames();
@@ -59,8 +59,8 @@ void ConstructionsiteInformation::draw(const Vector2f& point_on_dst,
 	} else if (was) {
 		//  Is the first picture but there was another building here before,
 		//  get its most fitting picture and draw it instead.
-		dst->blit_animation(
-		   point_on_dst, scale, was->get_unoccupied_animation(), anim_time - FRAME_LENGTH, player_color);
+		dst->blit_animation(point_on_dst, scale, was->get_unoccupied_animation(),
+		                    anim_time - FRAME_LENGTH, player_color);
 	}
 	// Now blit a segment of the current construction phase from the bottom.
 	int percent = 100 * completedtime * nr_frames;

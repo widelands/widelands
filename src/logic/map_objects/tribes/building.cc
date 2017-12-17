@@ -201,7 +201,6 @@ uint32_t BuildingDescr::get_unoccupied_animation() const {
 	return get_animation(is_animation_known("unoccupied") ? "unoccupied" : "idle");
 }
 
-
 /**
  * Normal buildings don't conquer anything, so this returns 0 by default.
  *

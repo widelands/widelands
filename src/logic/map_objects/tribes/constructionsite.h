@@ -39,9 +39,9 @@ struct ConstructionsiteInformation {
 
 	/// Draw the partly finished constructionsite
 	void draw(const Vector2f& point_on_dst,
-				 float scale,
-				 const RGBColor& player_color,
-				 RenderTarget* dst) const;
+	          float scale,
+	          const RGBColor& player_color,
+	          RenderTarget* dst) const;
 
 	const BuildingDescr*
 	   becomes;  // Also works as a marker telling whether there is a construction site.

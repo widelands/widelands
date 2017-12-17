@@ -577,8 +577,8 @@ void Immovable::Loader::load(FileRead& fr, uint8_t const packet_version) {
 		imm.anim_ = imm.descr().get_animation(animname);
 	} catch (const GameDataError& e) {
 		imm.anim_ = imm.descr().main_animation();
-		log("Warning: Immovable: %s, using animation %s instead.\n",
-		    e.what(), imm.descr().get_animation_name(imm.anim_).c_str());
+		log("Warning: Immovable: %s, using animation %s instead.\n", e.what(),
+		    imm.descr().get_animation_name(imm.anim_).c_str());
 	}
 	imm.animstart_ = fr.signed_32();
 	if (packet_version >= 4) {
