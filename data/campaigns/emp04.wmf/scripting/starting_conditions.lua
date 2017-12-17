@@ -93,19 +93,29 @@ place_building_in_region(p1, "empire_trainingcamp1", sf:region(20))
 place_building_in_region(p1, "empire_barracks", sf:region(20), {inputs = {empire_recruit = 8}})
 
 
--- Helper function for placing a road
-function try_place_road_with_carrier(x, y, from, to)
+-- Helper function for placing roads
+function try_place_roads_with_carriers(x, y)
+   local directions = {
+      { "bl", "bl" },
+      { "l", "l" },
+      { "tl", "tl" },
+      { "r", "r" },
+      { "r", "tr" },
+      { "tr", "tl" }
+   }
    local field = map:get_field(x,y)
    if field.immovable and field.immovable.descr.type_name == "flag" then
-      local from_field = field[from .. "n"]
-      local to_field = from_field[to .. "n"]
-      if from_field.immovable == nil and
-         from_field:has_caps("walkable") and (
-            to_field:has_caps("flag") or
-            (to_field.immovable and to_field.immovable.descr.type_name == "flag")
-         ) then
-         local road = p1:place_road(field.immovable, from, to, true)
-         road:set_workers('empire_carrier', 1)
+      for idx, direction in ipairs(directions) do
+         local from_field = field[direction[1] .. "n"]
+         local to_field = from_field[direction[2] .. "n"]
+         if from_field.immovable == nil and
+            from_field:has_caps("walkable") and (
+               to_field:has_caps("flag") or
+               (to_field.immovable and to_field.immovable.descr.type_name == "flag")
+            ) then
+            local road = p1:place_road(field.immovable, direction[1], direction[2], true)
+            road:set_workers('empire_carrier', 1)
+         end
       end
    end
 end
@@ -113,17 +123,7 @@ end
 -- Roads
 for y=0, 53 do
    for x=5, 35 do
-      try_place_road_with_carrier(x, y, "bl", "bl")
-   end
-   for x=6, 35 do
-      try_place_road_with_carrier(x, y, "l", "l")
-   end
-   for x=7, 35 do
-      try_place_road_with_carrier(x, y, "tl", "tl")
-      try_place_road_with_carrier(x, y, "br", "br")
-      try_place_road_with_carrier(x, y, "r", "r")
-      try_place_road_with_carrier(x, y, "r", "tr")
-      try_place_road_with_carrier(x, y, "tr", "tl")
+      try_place_roads_with_carriers(x, y)
    end
 end
 
