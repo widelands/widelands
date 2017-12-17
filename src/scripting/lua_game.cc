@@ -429,7 +429,7 @@ int LuaPlayer::message_box(lua_State* L) {
 	int32_t posy = -1;
 	Coords coords = Coords::null();
 
-#define CHECK_UINT(var)                                                                       \
+#define CHECK_UINT(var)                                                                            \
 	lua_getfield(L, -1, #var);                                                                      \
 	if (!lua_isnil(L, -1))                                                                          \
 		var = luaL_checkuint32(L, -1);                                                               \
@@ -441,20 +441,18 @@ int LuaPlayer::message_box(lua_State* L) {
 		CHECK_UINT(w);
 		CHECK_UINT(h);
 
-		// If a field has been defined, read the coordinated to jump to.
+		// If a field has been defined, read the coordinates to jump to.
 		lua_getfield(L, 4, "field");
 		if (!lua_isnil(L, -1)) {
 			coords = (*get_user_class<LuaField>(L, -1))->coords();
-			game.get_ipl()->map_view()->scroll_to_field(coords, MapView::Transition::Jump);
 		}
 		lua_pop(L, 1);
 	}
 #undef CHECK_UINT
-	StoryMessageBox* mb = new StoryMessageBox(&game, coords, luaL_checkstring(L, 2),
-	                                          luaL_checkstring(L, 3), posx, posy, w, h);
+	std::unique_ptr<StoryMessageBox> mb(new StoryMessageBox(
+	   &game, coords, luaL_checkstring(L, 2), luaL_checkstring(L, 3), posx, posy, w, h));
 
 	mb->run<UI::Panel::Returncodes>();
-	delete mb;
 
 	return 1;
 }
