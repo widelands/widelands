@@ -100,8 +100,9 @@ function try_place_roads_with_carriers(x, y)
       { "l", "l" },
       { "tl", "tl" },
       { "r", "r" },
-      { "r", "tr" },
-      { "tr", "tl" }
+      { "bl", "l" },
+      { "tr", "tl" },
+      { "br", "r" }
    }
    local field = map:get_field(x,y)
    if field.immovable and field.immovable.descr.type_name == "flag" then

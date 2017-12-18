@@ -69,8 +69,10 @@ end
 function clear_roads()
    local o = add_campaign_objective(obj_clear_roads)
    local cleared = false
+   local count = 0
 
    while not cleared do
+      count = 0
       cleared = true
       sleep (5000)
       for x=5, 40 do
@@ -79,11 +81,14 @@ function clear_roads()
             if (field.immovable and field.immovable.descr.type_name == "flag" and field.immovable.building == nil) then
                local numroads = 0
                for _ in pairs(field.immovable.roads) do numroads = numroads + 1 end
-               if numroads < 2 or numroads == 6 then
-                  cleared = false
+               if numroads < 2 or numroads > 4 then
+                  count = count + 1
                end
             end
          end
+      end
+      if count > 2 then
+         cleared = false
       end
    end
    o.done = true

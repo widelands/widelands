@@ -108,7 +108,7 @@ obj_deal_with_julia = {
    title=_"Deal with Julia to get the technology",
    number = 1,
    body = objective_text(_"Diplomacy: Trade or War",
-      listitem_bullet(_[[Decide: Either collect 35 wheat and 15 wine for the goddess in one of your warehouses or conquer the monastery.]])),
+      listitem_bullet(_[[Decide: Either collect 35 wheat and 15 wine for the goddess in your headquarters or conquer the monastery.]])),
 }
 
 obj_heroes = {
