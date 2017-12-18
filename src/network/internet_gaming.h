@@ -101,10 +101,17 @@ struct InternetGaming : public ChatProvider {
 	 * Contains two addresses when the host supports IPv4 and IPv6, one address when the host
 	 * only supports one of the protocols, no addresses when no join-request was sent to
 	 * the metaserver. "No address" means a default constructed address.
+	 * Also returns the IPs of the relay server when trying to host a game.
 	 * Use NetAddress::is_valid() to check whether a NetAddress has been default constructed.
 	 * @return The addresses.
 	 */
 	const std::pair<NetAddress, NetAddress>& ips();
+
+	/**
+	 * Returns the password required to connect to the relay server as host.
+	 */
+	const std::string relay_password();
+
 	void join_game(const std::string& gamename);
 	void open_game();
 	void set_game_playing();

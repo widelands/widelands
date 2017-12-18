@@ -15,9 +15,15 @@ wl_library(network
     netclient_interface.h
     netclient.cc
     netclient.h
+    netclientproxy.cc
+    netclientproxy.h
     nethost_interface.h
     nethost.cc
     nethost.h
+    nethostproxy.cc
+    nethostproxy.h
+    netrelayconnection.cc
+    netrelayconnection.h
     network.cc
     network.h
     network_gaming_messages.cc
@@ -27,6 +33,7 @@ wl_library(network
     network_player_settings_backend.cc
     network_player_settings_backend.h
     network_protocol.h
+    relay_protocol.h
   DEPENDS
     ai
     base_exceptions

@@ -34,13 +34,11 @@
  * 0: Build 19 and before [stable, supported]
  * 1: Between build 19 and build 20 - IPv6 support added
  * 2: Between build 19 and build 20 - Added UUID to allow reconnect with same username after
- * crashes.
- *                                    When logging twice with a registered account, the second
- * connection
- *                                    gets a free username assigned. Dropping RELOGIN command.
- * [supported]
+ *    crashes. When logging twice with a registered account, the second connection gets a free
+ *     username assigned. Dropping RELOGIN command.
+ * 3: Between build 19 and build 20 - Added network relay for internet games [supported]
  */
-#define INTERNET_GAMING_PROTOCOL_VERSION 2
+constexpr unsigned int kInternetGamingProtocolVersion = 3;
 
 /**
  * The default timeout time after which the client tries to resend a package or even finally closes
@@ -51,29 +49,19 @@
  * value is in milliseconds
  */
 // TODO(unknown): Should this be resettable by the user?
-#define INTERNET_GAMING_TIMEOUT 10  // 10 seconds
-
-/**
- * The default timeout time after which the client tries to resend a package or even finally closes
- * the
- * connection to the metaserver, if no answer to a previous package (which requires an answer) was
- * received. In case of a login or reconnect, this is the time to wait for the metaservers answer.
- *
- * value is in milliseconds
- */
-// TODO(unknown): Should this be resettable by the user?
-#define INTERNET_GAMING_CLIENT_TIMEOUT 60  // 60 seconds - some time to reconnect
-
-/**
- * The default number of retries after a timeout after which the client finally closes the
- * connection to the metaserver.
- */
-// TODO(unknown): Should this be resettable by the user?
-#define INTERNET_GAMING_RETRIES 3
+constexpr time_t kInternetGamingTimeout = 10;  // 10 seconds
 
 /// Metaserver connection details
 static const std::string INTERNET_GAMING_METASERVER = "widelands.org";
-#define INTERNET_GAMING_PORT 7395
+// Default port for connecting to the metaserver
+constexpr uint16_t kInternetGamingPort = 7395;
+// Default port for connecting to the relay
+constexpr uint16_t kInternetRelayPort = 7397;
+// The following ones are only used between metaserver and relay
+// Port used by the metaserver to contact the relay
+// INTERNET_RELAY_RPC_PORT 7398
+// Port used by the relay to contact the metaserver
+// INTERNET_GAMING_RPC_PORT 7399
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  * CLIENT RIGHTS                                                           *
@@ -183,7 +171,7 @@ static const std::string IGPCMD_DISCONNECT = "DISCONNECT";
  *                used.)
  * \li string:    clients rights  (see client rights section above)
  *
- * If no answer is received in \ref INTERNET_GAMING_TIMEOUT s the client will again try to login
+ * If no answer is received in \ref kInternetGamingTimeout s the client will again try to login
  * \ref INTERNET_GAMING_RETRIES times until it finally bails out something like "server does not
  * answer"
  *
@@ -337,12 +325,13 @@ static const std::string IGPCMD_CLIENTS = "CLIENTS";
  * \li string:    number of maximal clients
  * \note build_id is not necessary, as this is in every way the build_id of the hosting client.
  *
- * Sent by the metaserver to acknowledge the startup of a new game without payload. The metaserver
- * will
- * list the new game, but set it as not connectable and recheck the connectability for
- * INTERNET_GAMING_TIMEOUT ms.
- * If the game gets connectable in time, the metaserver lists the game as connectable, else it
- * removes the game from the list of games.
+ * Sent by the metaserver to acknowledge the startup of a new game with the following payload:
+ * \li string:    primary ip of relay server for the game.
+ * \li string:    whether a secondary ip for the relay follows ("true" or "false" as string)
+ * \li string:    secondary ip of the relay - only valid if previous was true
+ * The metaserver will list the new game, but set it as not connectable.
+ * When the client connects to the relay within kInternetGamingTimeout milliseconds,
+ * the metaserver lists the game as connectable, else it removes the game from the list of games.
  */
 static const std::string IGPCMD_GAME_OPEN = "GAME_OPEN";
 

@@ -268,8 +268,8 @@ public:
 	void set_scenario_player_ai(PlayerNumber, const std::string&);
 	void set_scenario_player_closeable(PlayerNumber, bool);
 
-	/// \returns the maximum theoretical possible nodecaps (no blocking bobs, etc.)
-	NodeCaps get_max_nodecaps(const World& world, const FCoords&);
+	/// \returns the maximum theoretical possible nodecaps (no blocking bobs, immovables etc.)
+	NodeCaps get_max_nodecaps(const World& world, const FCoords&) const;
 
 	BaseImmovable* get_immovable(const Coords&) const;
 	uint32_t find_bobs(const Area<FCoords>,
@@ -436,14 +436,28 @@ public:
 	/// Translate the whole map so that the given point becomes the new origin.
 	void set_origin(const Coords&);
 
-	/// Port space specific functions
+	// Port space specific functions
+
+	/// Checks whether the maximum theoretical possible NodeCap of the field is big,
+	/// and there is room for a port space
+	bool is_port_space_allowed(const World& world, const FCoords& fc) const;
 	bool is_port_space(const Coords& c) const;
-	void set_port_space(Coords c, bool allowed);
+
+	/// If 'set', set the space at 'c' as port space, otherwise unset.
+	/// 'force' sets the port space even if it isn't viable, and is to be used for map loading only.
+	/// Returns whether the port space was set/unset successfully.
+	bool
+	set_port_space(const World& world, const Widelands::Coords& c, bool set, bool force = false);
 	const PortSpacesSet& get_port_spaces() const {
 		return port_spaces_;
 	}
 	std::vector<Coords> find_portdock(const Widelands::Coords& c) const;
-	bool allows_seafaring();
+
+	/// Check whether there are at least 2 port spaces that can be reached from each other by water
+	bool allows_seafaring() const;
+	/// Remove all port spaces that are not valid (Buildcap < big or not enough space for a
+	/// portdock).
+	void cleanup_port_spaces(const World& world);
 
 	/// Checks whether there are any artifacts on the map
 	bool has_artifacts();
@@ -456,19 +470,20 @@ private:
 	void recalc_brightness(const FCoords&);
 	void recalc_nodecaps_pass1(const World& world, const FCoords&);
 	void recalc_nodecaps_pass2(const World& world, const FCoords& f);
-	NodeCaps calc_nodecaps_pass1(const World& world, const FCoords&, bool consider_mobs = true);
+	NodeCaps
+	calc_nodecaps_pass1(const World& world, const FCoords&, bool consider_mobs = true) const;
 	NodeCaps calc_nodecaps_pass2(const World& world,
 	                             const FCoords&,
 	                             bool consider_mobs = true,
-	                             NodeCaps initcaps = CAPS_NONE);
+	                             NodeCaps initcaps = CAPS_NONE) const;
 	void check_neighbour_heights(FCoords, uint32_t& radius);
 	int calc_buildsize(const World& world,
 	                   const FCoords& f,
 	                   bool avoidnature,
 	                   bool* ismine = nullptr,
 	                   bool consider_mobs = true,
-	                   NodeCaps initcaps = CAPS_NONE);
-	bool is_cycle_connected(const FCoords& start, uint32_t length, const WalkingDir* dirs);
+	                   NodeCaps initcaps = CAPS_NONE) const;
+	bool is_cycle_connected(const FCoords& start, uint32_t length, const WalkingDir* dirs) const;
 	template <typename functorT>
 	void find_reachable(const Area<FCoords>&, const CheckStep&, functorT&) const;
 	template <typename functorT> void find(const Area<FCoords>&, functorT&) const;
