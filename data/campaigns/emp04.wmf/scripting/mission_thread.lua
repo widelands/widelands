@@ -69,10 +69,13 @@ end
 function clear_roads()
    local o = add_campaign_objective(obj_clear_roads)
    local cleared = false
-   local count = 0
+   local count_deadend = 0
+   local count_star = 0
+   local timer = 0
 
    while not cleared do
-      count = 0
+      count_deadend = 0
+      count_star = 0
       cleared = true
       sleep (5000)
       for x=5, 40 do
@@ -81,14 +84,20 @@ function clear_roads()
             if (field.immovable and field.immovable.descr.type_name == "flag" and field.immovable.building == nil) then
                local numroads = 0
                for _ in pairs(field.immovable.roads) do numroads = numroads + 1 end
-               if numroads < 2 or numroads > 4 then
-                  count = count + 1
+               if numroads < 2 then
+                  count_deadend = count_deadend + 1
+               elseif numroads > 4 then
+                  count_star = count_star + 1
                end
             end
          end
       end
-      if count > 2 then
+      if count_deadend > 3 or count_star > 1 then
          cleared = false
+      end
+      timer = timer + 1
+      if timer == 100 then
+         campaign_message_box(amalea_20)
       end
    end
    o.done = true

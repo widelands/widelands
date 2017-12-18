@@ -533,6 +533,17 @@ amalea_19 = {
    posy=1,
 }
 
+amalea_20 = {
+   title=_"Amalea Reminds to Clear Road Network",
+   body= amalea3(_"Amalea reminds Lutius of the scrambled road network…",
+      -- TRANSLATORS: Amalea
+      _([[Look Brother, I have just realized we haven’t cleared the road network yet. I think we should do so very quickly to free enough space for new buildings.]])
+      .. paragraphdivider() ..
+      -- TRANSLATORS: Amalea
+      _([[To achieve this, we should make sure that there aren’t more than three deadends (flags with only one road) and not more than one flag with more than four roads attached.]])),
+   posy=1,
+}
+
 
 -- Saledus
 
