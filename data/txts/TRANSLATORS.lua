@@ -11,7 +11,7 @@ function list_authors()
       result = result .. h2_authors(category["heading"])
       for j, entry in ipairs(category["entries"])  do
          for k, member in ipairs(entry["members"])  do
-            result = result .. li(member)
+            result = result .. p("• " .. member)
          end
       end
       result = result .. p(vspace(6))

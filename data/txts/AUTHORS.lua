@@ -14,7 +14,7 @@ function list_authors()
             result = result .. h2_authors(entry["subheading"])
          end
          for k, member in ipairs(entry["members"])  do
-            result = result .. li_image(category["image"], member, 0)
+            result = result .. p(img(category["image"]) .. " " .. member)
          end
       end
       result = result .. p(vspace(6))
