@@ -14,4 +14,4 @@ dummy_msg = {
    height=450,
    posy=1,
 }
-campaign_message_box(dummy_msg.title, dummy_msg.body, dummy_msg)
+campaign_message_box(dummy_msg)

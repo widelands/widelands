@@ -47,7 +47,7 @@
 #include "logic/map_objects/tribes/soldier.h"
 #include "logic/map_objects/tribes/soldiercontrol.h"
 #include "logic/map_objects/tribes/trainingsite.h"
-#include "logic/map_objects/tribes/tribe_descr.h"
+#include "logic/map_objects/tribes/tribe_basic_info.h"
 #include "logic/map_objects/tribes/warehouse.h"
 #include "logic/playercommand.h"
 #include "scripting/lua_table.h"
@@ -190,7 +190,7 @@ Player::~Player() {
 void Player::create_default_infrastructure() {
 	const Map& map = egbase().map();
 	if (map.get_starting_pos(player_number_)) {
-		const TribeBasicInfo::Initialization& initialization =
+		const Widelands::TribeBasicInfo::Initialization& initialization =
 		   tribe().initialization(initialization_index_);
 
 		Game& game = dynamic_cast<Game&>(egbase());
