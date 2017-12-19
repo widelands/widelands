@@ -81,7 +81,7 @@ public:
 	UniqueWindowHandler& unique_windows();
 
 	InteractiveBase(Widelands::EditorGameBase&, Section& global_s);
-	virtual ~InteractiveBase();
+	~InteractiveBase() override;
 
 	Widelands::EditorGameBase& egbase() const {
 		return egbase_;

@@ -27,7 +27,7 @@
 class SinglePlayerGameController : public GameController {
 public:
 	SinglePlayerGameController(Widelands::Game&, bool useai, Widelands::PlayerNumber local);
-	~SinglePlayerGameController();
+	~SinglePlayerGameController() override;
 
 	void think() override;
 	void send_player_command(Widelands::PlayerCommand&) override;

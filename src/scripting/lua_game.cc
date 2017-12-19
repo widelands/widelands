@@ -413,9 +413,6 @@ int LuaPlayer::send_message(lua_State* L) {
       :arg posy: y position of window in pixels. Default: centered
       :type posy: :class:`integer`
 
-      :arg button_text: Text on the button. Default: OK.
-      :type button_text: :class:`string`
-
       :returns: :const:`nil`
 */
 // UNTESTED
@@ -430,49 +427,32 @@ int LuaPlayer::message_box(lua_State* L) {
 	uint32_t h = 300;
 	int32_t posx = -1;
 	int32_t posy = -1;
-	std::string button_text = _("OK");
+	Coords coords = Coords::null();
 
-#define CHECK_ARG(var, type)                                                                       \
+#define CHECK_UINT(var)                                                                            \
 	lua_getfield(L, -1, #var);                                                                      \
 	if (!lua_isnil(L, -1))                                                                          \
-		var = luaL_check##type(L, -1);                                                               \
+		var = luaL_checkuint32(L, -1);                                                               \
 	lua_pop(L, 1);
 
 	if (lua_gettop(L) == 4) {
-		CHECK_ARG(posx, uint32);
-		CHECK_ARG(posy, uint32);
-		CHECK_ARG(w, uint32);
-		CHECK_ARG(h, uint32);
-		CHECK_ARG(button_text, string);
+		CHECK_UINT(posx);
+		CHECK_UINT(posy);
+		CHECK_UINT(w);
+		CHECK_UINT(h);
 
-		// This must be done manually
+		// If a field has been defined, read the coordinates to jump to.
 		lua_getfield(L, 4, "field");
 		if (!lua_isnil(L, -1)) {
-			Coords c = (*get_user_class<LuaField>(L, -1))->coords();
-			game.get_ipl()->map_view()->scroll_to_field(c, MapView::Transition::Jump);
+			coords = (*get_user_class<LuaField>(L, -1))->coords();
 		}
 		lua_pop(L, 1);
 	}
-#undef CHECK_ARG
-
-	uint32_t cspeed = game.game_controller()->desired_speed();
-	game.game_controller()->set_desired_speed(0);
-
-	game.save_handler().set_allow_saving(false);
-
-	StoryMessageBox* mb = new StoryMessageBox(game.get_ipl(), luaL_checkstring(L, 2),
-	                                          luaL_checkstring(L, 3), button_text, posx, posy, w, h);
+#undef CHECK_UINT
+	std::unique_ptr<StoryMessageBox> mb(new StoryMessageBox(
+	   &game, coords, luaL_checkstring(L, 2), luaL_checkstring(L, 3), posx, posy, w, h));
 
 	mb->run<UI::Panel::Returncodes>();
-	delete mb;
-
-	// Manually force the game to reevaluate it's current state,
-	// especially time information.
-	game.game_controller()->think();
-
-	game.game_controller()->set_desired_speed(cspeed);
-
-	game.save_handler().set_allow_saving(true);
 
 	return 1;
 }

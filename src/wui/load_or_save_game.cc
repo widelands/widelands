@@ -34,7 +34,6 @@
 #include "helper.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "logic/filesystem_constants.h"
-#include "logic/game.h"
 #include "logic/game_controller.h"
 #include "logic/game_settings.h"
 #include "logic/replay.h"
@@ -285,7 +284,7 @@ void LoadOrSaveGame::clicked_delete() {
 		fill_table();
 
 		// Select something meaningful if possible, then scroll to it.
-		const uint32_t selectme = std::max(0U, *selections.begin());
+		const uint32_t selectme = *selections.begin();
 		if (selectme < table_.size() - 1) {
 			table_.select(selectme);
 		} else if (!table_.empty()) {

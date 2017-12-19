@@ -171,6 +171,8 @@ void SendPacket::data(const void* const packet_data, const size_t size) {
 	if (buffer.empty()) {
 		buffer.push_back(0);  //  this will finally be the length of the packet
 		buffer.push_back(0);
+		// Attention! These bytes are also used by the network relay protocol.
+		// So if they are removed the protocol has to be updated
 	}
 
 	for (size_t idx = 0; idx < size; ++idx)
@@ -199,7 +201,6 @@ uint8_t* SendPacket::get_data() const {
 }
 
 /*** class RecvPacket ***/
-
 size_t RecvPacket::data(void* const packet_data, size_t const bufsize) {
 	if (index_ + bufsize > buffer.size())
 		throw wexception("Packet too short");

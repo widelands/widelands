@@ -55,7 +55,9 @@ namespace Widelands {
   * The contents of 'table' are documented in
   * /data/tribes/atlanteans.lua
   */
-TribeDescr::TribeDescr(const LuaTable& table, const TribeBasicInfo& info, const Tribes& init_tribes)
+TribeDescr::TribeDescr(const LuaTable& table,
+                       const Widelands::TribeBasicInfo& info,
+                       const Tribes& init_tribes)
    : name_(table.get_string("name")), descname_(info.descname), tribes_(init_tribes) {
 
 	try {
@@ -66,7 +68,7 @@ TribeDescr::TribeDescr(const LuaTable& table, const TribeBasicInfo& info, const 
 		flag_animation_id_ = g_gr->animations().load(*items_table->get_table("flag"));
 
 		items_table = table.get_table("roads");
-		const auto load_roads = [&items_table, this](
+		const auto load_roads = [&items_table](
 		   const std::string& road_type, std::vector<std::string>* images) {
 			std::vector<std::string> roads =
 			   items_table->get_table(road_type)->array_entries<std::string>();

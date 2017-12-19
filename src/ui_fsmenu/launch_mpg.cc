@@ -34,6 +34,7 @@
 #include "logic/game_settings.h"
 #include "logic/map.h"
 #include "logic/map_objects/map_object.h"
+#include "logic/map_objects/tribes/tribe_basic_info.h"
 #include "logic/player.h"
 #include "map_io/map_loader.h"
 #include "profile/profile.h"
@@ -515,7 +516,7 @@ void FullscreenMenuLaunchMPG::load_previous_playerdata() {
 		settings_->set_player_tribe(i - 1, player_save_tribe[i - 1]);
 
 		// get translated tribename
-		for (const TribeBasicInfo& tribeinfo : settings_->settings().tribes) {
+		for (const Widelands::TribeBasicInfo& tribeinfo : settings_->settings().tribes) {
 			if (tribeinfo.name == player_save_tribe[i - 1]) {
 				i18n::Textdomain td("tribes");  // for translated initialisation
 				player_save_tribe[i - 1] = _(tribeinfo.descname);

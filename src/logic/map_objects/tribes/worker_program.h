@@ -43,7 +43,7 @@ struct WorkerProgram : public BobProgramBase {
 	WorkerProgram(const std::string& name, const WorkerDescr& worker, const Tribes& tribes)
 	   : name_(name), worker_(worker), tribes_(tribes) {
 	}
-	virtual ~WorkerProgram() {
+	~WorkerProgram() override {
 	}
 
 	std::string get_name() const override {

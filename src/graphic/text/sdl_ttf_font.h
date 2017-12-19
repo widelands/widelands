@@ -62,7 +62,7 @@ public:
 class SdlTtfFont : public IFont {
 public:
 	SdlTtfFont(TTF_Font* ttf, const std::string& face, int ptsize, std::string* ttf_memory_block);
-	virtual ~SdlTtfFont();
+	~SdlTtfFont() override;
 
 	void dimensions(const std::string&, int, uint16_t* w, uint16_t* h) override;
 	std::shared_ptr<const Image>
