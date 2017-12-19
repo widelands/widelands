@@ -3,14 +3,14 @@
 # 
 # Translators:
 # Balázs Meskó <meskobalazs@gmail.com>, 2017
-# litoll <litoll@freemail.hu>, 2016
+# litoll <litoll@freemail.hu>, 2016-2017
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-09-15 18:56+0000\n"
-"PO-Revision-Date: 2017-09-22 21:44+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2017-12-16 11:37+0000\n"
+"PO-Revision-Date: 2017-12-17 20:57+0000\n"
+"Last-Translator: litoll <litoll@freemail.hu>\n"
 "Language-Team: Hungarian (http://www.transifex.com/widelands/widelands/language/hu/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -47,13 +47,13 @@ msgstr "Eszközök menü megjelenítése/elrejtése"
 #. the key.
 #: ../../data/scripting/editor/editor_controls.lua:25
 msgid "Toggle building spaces"
-msgstr ""
+msgstr "Épülethelyek megjelenítése/elrejtése"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
 #: ../../data/scripting/editor/editor_controls.lua:27
 msgid "Toggle immovables display"
-msgstr ""
+msgstr "Mozdíthatatlanok megjelenítése/elrejtése"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
@@ -64,7 +64,7 @@ msgstr ""
 #. TRANSLATORS: This is an access key combination. The hotkey is 'p'
 #: ../../data/scripting/editor/editor_controls.lua:31
 msgid "Toggle resources display"
-msgstr ""
+msgstr "Nyersanyagok megjelenítése/elrejtése"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
