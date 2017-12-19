@@ -39,7 +39,7 @@
 #include "logic/findnode.h"
 #include "logic/map_objects/checkstep.h"
 #include "logic/map_objects/tribes/soldier.h"
-#include "logic/map_objects/tribes/tribe_descr.h"
+#include "logic/map_objects/tribes/tribe_basic_info.h"
 #include "logic/map_objects/world/terrain_description.h"
 #include "logic/map_objects/world/world.h"
 #include "logic/mapfringeregion.h"
