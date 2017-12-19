@@ -564,25 +564,24 @@ int LuaPlayer::add_objective(lua_State* L) {
 /* RST
    .. method:: reveal_fields(fields)
 
-      Make these fields visible for the current player. The fields will remain
-      visible until they are hidden again.
+      Make these fields visible for the current player. If the fields were previously hidden via
+      `hide_fields`, restores the exact vision that they had before that was done.
 
-      :arg fields: The fields to show
+      :arg fields: The fields to reveal
       :type fields: :class:`array` of :class:`wl.map.Fields`
 
       :returns: :const:`nil`
 */
 int LuaPlayer::reveal_fields(lua_State* L) {
-	EditorGameBase& egbase = get_egbase(L);
-	Player& p = get(L, egbase);
-	const Map& map = egbase.map();
+	Game& game = get_game(L);
+	Player& p = get(L, game);
 
 	luaL_checktype(L, 2, LUA_TTABLE);
 
 	lua_pushnil(L); /* first key */
 	while (lua_next(L, 2) != 0) {
-		p.see_node(
-		   map, map[0], (*get_user_class<LuaField>(L, -1))->fcoords(L), egbase.get_gametime());
+		p.hide_or_reveal_field(
+		   game.get_gametime(), (*get_user_class<LuaField>(L, -1))->coords(), SeeUnseeNode::kReveal);
 		lua_pop(L, 1);
 	}
 
@@ -592,29 +591,29 @@ int LuaPlayer::reveal_fields(lua_State* L) {
 /* RST
    .. method:: hide_fields(fields)
 
-      Make these fields hidden for the current player if they are not
-      seen by a military building.
+      Make these fields hidden for the current player.
 
       :arg fields: The fields to hide
       :type fields: :class:`array` of :class:`wl.map.Fields`
 
-      :arg hide_completely: *Optional*. The fields will be marked as unexplored.
-      :type hide_completely: :class:`boolean`
+      :arg unexplore: *Optional*. If  `true`, the fields will be marked as completely unexplored.
+      :type unexplore: :class:`boolean`
 
       :returns: :const:`nil`
 */
 int LuaPlayer::hide_fields(lua_State* L) {
-	EditorGameBase& egbase = get_egbase(L);
-	Player& p = get(L, egbase);
+	Game& game = get_game(L);
+	Player& p = get(L, game);
 
 	luaL_checktype(L, 2, LUA_TTABLE);
-	const bool mode = !lua_isnone(L, 3) && luaL_checkboolean(L, 3);
+	const SeeUnseeNode mode = (!lua_isnone(L, 3) && luaL_checkboolean(L, 3)) ?
+	                             SeeUnseeNode::kUnexplore :
+	                             SeeUnseeNode::kUnsee;
 
 	lua_pushnil(L); /* first key */
 	while (lua_next(L, 2) != 0) {
-		p.unsee_node((*get_user_class<LuaField>(L, -1))->fcoords(L).field - &egbase.map()[0],
-		             egbase.get_gametime(),
-		             mode ? Player::UnseeNodeMode::kUnexplore : Player::UnseeNodeMode::kUnsee);
+		p.hide_or_reveal_field(
+		   game.get_gametime(), (*get_user_class<LuaField>(L, -1))->coords(), mode);
 		lua_pop(L, 1);
 	}
 
