@@ -221,7 +221,7 @@ void MainMenuSaveMap::set_current_directory(const std::string& filename) {
 	curdir_ = filename;
 	directory_info_.set_text(
 	   /** TRANSLATORS: The folder that a file will be saved to. */
-	   (boost::format(_("Current Directory: %s")) % (_("My Maps") + curdir_.substr(basedir_.size())))
+	   (boost::format(_("Current directory: %s")) % (_("My Maps") + curdir_.substr(basedir_.size())))
 	      .str());
 }
 
