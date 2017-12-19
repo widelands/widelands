@@ -83,7 +83,7 @@ private:
 			/// A normally connected client
 			kConnected,
 			/// The relay told us that the client disconnected but there are still packages in the
-		   /// buffer
+			/// buffer
 			kDisconnected
 		};
 

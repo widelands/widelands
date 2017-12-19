@@ -44,7 +44,7 @@
 #include "io/filesystem/layered_filesystem.h"
 #include "logic/filesystem_constants.h"
 #include "logic/game.h"
-#include "logic/map_objects/tribes/tribes.h"
+#include "logic/map_objects/tribes/tribe_basic_info.h"
 #include "logic/player.h"
 #include "logic/playercommand.h"
 #include "logic/playersmanager.h"
@@ -1188,7 +1188,7 @@ void GameHost::set_player_tribe(uint8_t const number,
 		actual_tribe = d->settings.tribes.at(random).name;
 	}
 
-	for (const TribeBasicInfo& temp_tribeinfo : d->settings.tribes) {
+	for (const Widelands::TribeBasicInfo& temp_tribeinfo : d->settings.tribes) {
 		if (temp_tribeinfo.name == player.tribe) {
 			player.tribe = actual_tribe;
 			if (temp_tribeinfo.initializations.size() <= player.initialization_index)
@@ -1215,7 +1215,7 @@ void GameHost::set_player_init(uint8_t const number, uint8_t const index) {
 	if (player.initialization_index == index)
 		return;
 
-	for (const TribeBasicInfo& temp_tribeinfo : d->settings.tribes) {
+	for (const Widelands::TribeBasicInfo& temp_tribeinfo : d->settings.tribes) {
 		if (temp_tribeinfo.name == player.tribe) {
 			if (index < temp_tribeinfo.initializations.size()) {
 				player.initialization_index = index;
@@ -1622,11 +1622,11 @@ void GameHost::welcome_client(uint32_t const number, std::string& playername) {
 	packet.reset();
 	packet.unsigned_8(NETCMD_SETTING_TRIBES);
 	packet.unsigned_8(d->settings.tribes.size());
-	for (const TribeBasicInfo& tribe : d->settings.tribes) {
+	for (const Widelands::TribeBasicInfo& tribe : d->settings.tribes) {
 		packet.string(tribe.name);
 		size_t const nr_initializations = tribe.initializations.size();
 		packet.unsigned_8(nr_initializations);
-		for (const TribeBasicInfo::Initialization& init : tribe.initializations)
+		for (const Widelands::TribeBasicInfo::Initialization& init : tribe.initializations)
 			packet.string(init.script);
 	}
 	d->net->send(client.sock_id, packet);
