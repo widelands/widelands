@@ -7,12 +7,11 @@ set_textdomain("texts")
 function list_authors()
    local authors = translators()
    local result = ""
-   local translators_image = "images/wui/editor/fsel_editor_set_height.png"
    for i, category in ipairs(authors) do
       result = result .. h2_authors(category["heading"])
       for j, entry in ipairs(category["entries"])  do
          for k, member in ipairs(entry["members"])  do
-            result = result .. li_image(translators_image, member, 0)
+            result = result .. li(member)
          end
       end
       result = result .. p(vspace(6))
