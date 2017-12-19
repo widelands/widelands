@@ -36,6 +36,7 @@
 #include "logic/map_revision.h"
 #include "logic/objective.h"
 #include "logic/widelands_geometry.h"
+#include "logic/widelands.h"
 #include "notifications/note_ids.h"
 #include "notifications/notifications.h"
 #include "random/random.h"
@@ -132,9 +133,6 @@ public:
 
 	using PortSpacesSet = std::set<Coords>;
 	using Objectives = std::map<std::string, std::unique_ptr<Objective>>;
-	using SuggestedTeam = std::vector<PlayerNumber>;  // Players in a team
-	using SuggestedTeamLineup =
-	   std::vector<SuggestedTeam>;  // Recommended teams to play against each other
 
 	enum {  // flags for findpath()
 
