@@ -316,7 +316,7 @@ void FullscreenMenuLaunchMPG::select_saved_game() {
 		if (g_fs->is_directory(filename)) {
 			// Send a warning
 			UI::WLMessageBox warning(
-			   this, _("Saved game is directory"),
+			   this, _("Saved Game is Directory"),
 			   _("WARNING:\n"
 			     "The saved game you selected is a directory."
 			     " This happens if you set the option ‘nozip’ to "
