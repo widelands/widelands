@@ -327,21 +327,23 @@ function li_arrow(text)
 end
 
 -- RST
--- .. function li_image(imagepath, text)
+-- .. function li_image(imagepath, text[, vsp])
 --
 --    Places a paragraph of text to the right of an image
 
 --    :arg imagepath: the full path to the image file
 --    :arg text_width_percent: the percentatge of space that the text will occupy
 --    :arg text: the text to be placed next to the image
+--    :arg vsp: Vertical spacing. Default is 6.
 --
 --    :returns: the text wrapped in a paragraph and placed next to the image, the outer tag is a div.
-function li_image(imagepath, text)
+function li_image(imagepath, text, vsp)
+   if vsp == nil then vsp = 6 end
    return
       div("width=100%",
-         div(p(vspace(6) .. img(imagepath) .. space(6))) ..
+         div(p(vspace(vsp) .. img(imagepath) .. space(6))) ..
          div(p(space(6))) ..
-         div("width=*", p(vspace(6) .. text .. vspace(12)))
+         div("width=*", p(vspace(vsp) .. text .. vspace(2 * vsp)))
       )
 end
 
