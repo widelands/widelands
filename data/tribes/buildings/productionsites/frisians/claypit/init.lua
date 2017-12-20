@@ -1,10 +1,10 @@
-dirname = path.dirname(__file__)
+dirname = path.dirname (__file__)
 
 tribes:new_productionsite_type {
    msgctxt = "frisians_building",
    name = "frisians_claypit",
    -- TRANSLATORS: This is a building name used in lists of buildings
-   descname = pgettext("frisians_building", "Clay Pit"),
+   descname = pgettext ("frisians_building", "Clay Pit"),
    helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "small",
@@ -22,12 +22,18 @@ tribes:new_productionsite_type {
 
    animations = {
       idle = {
-         pictures = path.list_files(dirname .. "idle_??.png"),
-         hotspot = { 48, 54 },
+         pictures = path.list_files (dirname .. "idle_??.png"),
+         hotspot = { 62, 94 },
+         fps = 10,
       },
       working = {
-         pictures = path.list_files(dirname .. "idle_??.png"), --TODO no working animation yet
-         hotspot = { 48, 54 },
+         pictures = path.list_files (dirname .. "working_??.png"),
+         hotspot = { 62, 94 },
+         fps = 10,
+      },
+      unoccupied = {
+         pictures = path.list_files (dirname .. "unoccupied_?.png"),
+         hotspot = { 62, 94 },
       },
    },
 
@@ -59,7 +65,9 @@ tribes:new_productionsite_type {
             "return=failed unless site has water",
             "worker=dig",
             "consume=water",
-            "animate=working 20000",
+            "sleep=2000",
+            "animate=working 17000",
+            "sleep=1000",
             "produce=clay"
          },
       },
@@ -68,7 +76,7 @@ tribes:new_productionsite_type {
       -- Translators: Short for "Out of Earth" for clay pits
       title = _"No flat earth",
       heading = _"Out of Earth",
-      message = pgettext("frisians_building", "The clay burner working at this clay pit can’t find any flat earth in his work area. Consider dismantling this clay pit and rebuilding it somewhere else."),
+      message = pgettext ("frisians_building", "The clay burner working at this clay pit can’t find any flat earth in his work area. Consider dismantling this clay pit and rebuilding it somewhere else."),
       productivity_threshold = 33
    },
 }
