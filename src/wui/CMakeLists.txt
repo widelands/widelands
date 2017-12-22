@@ -49,7 +49,44 @@ wl_library(wui_mapview_pixelfunctions
     logic_widelands_geometry
 )
 
-wl_library(wui_common
+wl_library(wui_common_suggested_teams
+  SRCS
+    suggested_teams_box.cc
+    suggested_teams_box.h
+  DEPENDS
+    base_i18n
+    graphic
+    graphic_playercolor
+    logic_constants
+    ui_basic
+)
+
+wl_library(wui_common_gamedetails
+  SRCS
+    gamedetails.cc
+    gamedetails.h
+    load_or_save_game.cc
+    load_or_save_game.h
+  DEPENDS
+    base_i18n
+    base_log
+    base_time_string
+    helper
+    game_io
+    graphic
+    graphic_fonthandler
+    graphic_image_io
+    graphic_surface
+    graphic_text_constants
+    io_filesystem
+    logic
+    logic_filesystem_constants
+    logic_game_controller
+    logic_game_settings
+    ui_basic
+)
+
+wl_library(wui_common_mapdetails
   SRCS
     mapdetails.cc
     mapdetails.h
@@ -59,22 +96,21 @@ wl_library(wui_common
     maptable.h
     map_tags.cc
     map_tags.h
-    suggested_teams_box.cc
-    suggested_teams_box.h
   DEPENDS
     base_exceptions
     base_i18n
     base_log
     graphic
     graphic_fonthandler
-    graphic_playercolor
     graphic_text_constants
     io_filesystem
     logic
+    logic_constants
     logic_game_controller
     logic_game_settings
     map_io_map_loader
     ui_basic
+    wui_common_suggested_teams
 )
 
 wl_library(wui_quicknavigation
@@ -240,8 +276,10 @@ wl_library(wui
     io_filesystem
     logic
     logic_constants
+    logic_filesystem_constants
     logic_game_controller
     logic_game_settings
+    logic_tribe_basic_info
     logic_widelands_geometry
     network
     note_sound
@@ -253,6 +291,7 @@ wl_library(wui
     sound
     ui_basic
     wui_chat_ui
+    wui_common_gamedetails
     wui_economy_options
     wui_mapview
     wui_mapview_pixelfunctions

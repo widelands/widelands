@@ -163,7 +163,7 @@ class ProductionSite : public Building {
 
 public:
 	explicit ProductionSite(const ProductionSiteDescr& descr);
-	virtual ~ProductionSite();
+	~ProductionSite() override;
 
 	void log_general_info(const EditorGameBase&) override;
 

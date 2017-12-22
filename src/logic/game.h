@@ -41,6 +41,9 @@ class GameController;
 
 namespace Widelands {
 
+/// How often are statistics to be sampled.
+constexpr uint32_t kStatisticsSampleTime = 30000;
+
 struct Flag;
 struct Path;
 struct PlayerImmovable;
@@ -51,9 +54,6 @@ struct Ship;
 struct PlayerEndStatus;
 class TrainingSite;
 class MilitarySite;
-
-#define WLGF_SUFFIX ".wgf"
-#define WLGF_MAGIC "WLgf"
 
 /** class Game
  *
@@ -99,7 +99,7 @@ public:
 	friend struct GameLoader;
 
 	Game();
-	~Game();
+	~Game() override;
 
 	// life cycle
 	void set_game_controller(GameController*);
@@ -265,7 +265,7 @@ private:
 		     syncstreamsave_(false) {
 		}
 
-		~SyncWrapper();
+		~SyncWrapper() override;
 
 		/// Start dumping the entire syncstream into a file.
 		///

@@ -37,6 +37,7 @@
 #include "io/filesystem/filesystem.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "io/filesystem/zip_filesystem.h"
+#include "logic/filesystem_constants.h"
 #include "map_io/map_saver.h"
 #include "map_io/widelands_map_loader.h"
 #include "ui_basic/messagebox.h"
@@ -132,7 +133,7 @@ void MainMenuSaveMap::clicked_ok() {
 		Widelands::Map* map = eia().egbase().mutable_map();
 		if (map->get_name() == _("No Name")) {
 			std::string::size_type const filename_size = filename.size();
-			map->set_name(4 <= filename_size && boost::iends_with(filename, WLMF_SUFFIX) ?
+			map->set_name(4 <= filename_size && boost::iends_with(filename, kWidelandsMapExtension) ?
 			                 filename.substr(0, filename_size - 4) :
 			                 filename);
 		}
@@ -218,9 +219,9 @@ void MainMenuSaveMap::edit_box_changed() {
 
 void MainMenuSaveMap::set_current_directory(const std::string& filename) {
 	curdir_ = filename;
-	/** TRANSLATORS: The folder that a file will be saved to. */
 	directory_info_.set_text(
-	   (boost::format(_("Current Directory: %s")) % (_("My Maps") + curdir_.substr(basedir_.size())))
+	   /** TRANSLATORS: The folder that a file will be saved to. */
+	   (boost::format(_("Current directory: %s")) % (_("My Maps") + curdir_.substr(basedir_.size())))
 	      .str());
 }
 
@@ -239,8 +240,8 @@ bool MainMenuSaveMap::save_map(std::string filename, bool binary) {
 	boost::trim(filename);
 
 	//  OK, first check if the extension matches (ignoring case).
-	if (!boost::iends_with(filename, WLMF_SUFFIX))
-		filename += WLMF_SUFFIX;
+	if (!boost::iends_with(filename, kWidelandsMapExtension))
+		filename += kWidelandsMapExtension;
 
 	//  Append directory name.
 	const std::string complete_filename = curdir_ + g_fs->file_separator() + filename;
@@ -279,6 +280,7 @@ bool MainMenuSaveMap::save_map(std::string filename, bool binary) {
 		   g_fs->create_sub_file_system(tmp_name, binary ? FileSystem::ZIP : FileSystem::DIR));
 
 		// Recompute seafaring tag
+		map->cleanup_port_spaces(egbase.world());
 		if (map->allows_seafaring()) {
 			map->add_tag("seafaring");
 		} else {

@@ -27,8 +27,7 @@
 #include "editor/tools/set_starting_pos_tool.h"
 #include "graphic/graphic.h"
 #include "logic/map.h"
-#include "logic/map_objects/tribes/tribes.h"
-#include "logic/map_objects/tribes/warehouse.h"
+#include "logic/map_objects/tribes/tribe_basic_info.h"
 #include "logic/player.h"
 #include "ui_basic/editbox.h"
 #include "ui_basic/messagebox.h"
@@ -200,8 +199,8 @@ void EditorPlayerMenu::clicked_add_player() {
 	map->set_nrplayers(nr_players);
 	{                             //  register new default name for this players
 		assert(nr_players <= 99);  //  2 decimal digits
-		/** TRANSLATORS: Default player name, e.g. Player 1 */
 		const std::string name =
+		   /** TRANSLATORS: Default player name, e.g. Player 1 */
 		   (boost::format(_("Player %u")) % static_cast<unsigned int>(nr_players)).str();
 		map->set_scenario_player_name(nr_players, name);
 	}

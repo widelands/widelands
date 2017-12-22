@@ -46,9 +46,11 @@ namespace Widelands {
 constexpr uint16_t kCurrentPacketVersion = 6;
 constexpr const char* kMinimapFilename = "minimap.png";
 
+// Win condition localization can come from the 'widelands' or 'win_conditions' textdomain.
 std::string GamePreloadPacket::get_localized_win_condition() const {
+	const std::string result = _(win_condition_);
 	i18n::Textdomain td("win_conditions");
-	return _(win_condition_);
+	return _(result);
 }
 
 void GamePreloadPacket::read(FileSystem& fs, Game&, MapObjectLoader* const) {
@@ -120,7 +122,7 @@ void GamePreloadPacket::write(FileSystem& fs, Game& game, MapObjectSaver* const)
 	}
 
 	std::unique_ptr<::StreamWrite> sw(fs.open_stream_write(kMinimapFilename));
-	if (sw.get() != nullptr) {
+	if (sw != nullptr) {
 		const MiniMapLayer layers =
 		   MiniMapLayer::Owner | MiniMapLayer::Building | MiniMapLayer::Terrain;
 		std::unique_ptr<Texture> texture;

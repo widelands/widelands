@@ -760,7 +760,7 @@ void luaV_finishOp (lua_State *L) {
 
 
 
-void luaV_execute (lua_State *L) {
+void luaV_execute (lua_State *L) { // NOLINT
   CallInfo *ci = L->ci;
   LClosure *cl;
   TValue *k;

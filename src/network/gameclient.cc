@@ -33,13 +33,16 @@
 #include "helper.h"
 #include "io/fileread.h"
 #include "io/filewrite.h"
+#include "logic/filesystem_constants.h"
 #include "logic/game.h"
-#include "logic/map_objects/tribes/tribes.h"
+#include "logic/map_objects/tribes/tribe_basic_info.h"
 #include "logic/player.h"
 #include "logic/playercommand.h"
 #include "logic/playersmanager.h"
 #include "map_io/widelands_map_loader.h"
 #include "network/internet_gaming.h"
+#include "network/netclient.h"
+#include "network/netclientproxy.h"
 #include "network/network_gaming_messages.h"
 #include "network/network_protocol.h"
 #include "scripting/lua_interface.h"
@@ -57,7 +60,7 @@ struct GameClientImpl {
 
 	std::string localplayername;
 
-	std::unique_ptr<NetClient> net;
+	std::unique_ptr<NetClientInterface> net;
 
 	/// Currently active modal panel. Receives an end_modal on disconnect
 	UI::Panel* modal;
@@ -90,13 +93,23 @@ struct GameClientImpl {
 
 GameClient::GameClient(const std::pair<NetAddress, NetAddress>& host,
                        const std::string& playername,
-                       bool internet)
+                       bool internet,
+                       const std::string& gamename)
    : d(new GameClientImpl), internet_(internet) {
 
-	d->net = NetClient::connect(host.first);
+	if (internet) {
+		assert(!gamename.empty());
+		d->net = NetClientProxy::connect(host.first, gamename);
+	} else {
+		d->net = NetClient::connect(host.first);
+	}
 	if ((!d->net || !d->net->is_connected()) && host.second.is_valid()) {
 		// First IP did not work? Try the second IP
-		d->net = NetClient::connect(host.second);
+		if (internet) {
+			d->net = NetClientProxy::connect(host.first, gamename);
+		} else {
+			d->net = NetClient::connect(host.second);
+		}
 	}
 	if (!d->net || !d->net->is_connected()) {
 		throw WLWarning(_("Could not establish connection to host"),
@@ -174,7 +187,7 @@ void GameClient::run() {
 		game.set_game_controller(this);
 		uint8_t const pn = d->settings.playernum + 1;
 		game.save_handler().set_autosave_filename(
-		   (boost::format("wl_autosave_netclient%u") % static_cast<unsigned int>(pn)).str());
+		   (boost::format("%s_netclient%u") % kAutosavePrefix % static_cast<unsigned int>(pn)).str());
 		InteractiveGameBase* igb;
 		if (pn > 0)
 			igb = new InteractivePlayer(game, g_options.pull_section("global"), pn, true);
@@ -731,7 +744,7 @@ void GameClient::handle_packet(RecvPacket& packet) {
 	case NETCMD_SETTING_TRIBES: {
 		d->settings.tribes.clear();
 		for (uint8_t i = packet.unsigned_8(); i; --i) {
-			TribeBasicInfo info = Widelands::get_tribeinfo(packet.string());
+			Widelands::TribeBasicInfo info = Widelands::get_tribeinfo(packet.string());
 
 			// Get initializations (we have to do this locally, for translations)
 			LuaInterface lua;
@@ -740,7 +753,7 @@ void GameClient::handle_packet(RecvPacket& packet) {
 				std::string const initialization_script = packet.string();
 				std::unique_ptr<LuaTable> t = lua.run_script(initialization_script);
 				t->do_not_warn_about_unaccessed_keys();
-				info.initializations.push_back(TribeBasicInfo::Initialization(
+				info.initializations.push_back(Widelands::TribeBasicInfo::Initialization(
 				   initialization_script, t->get_string("descname"), t->get_string("tooltip")));
 			}
 			d->settings.tribes.push_back(info);
@@ -876,9 +889,10 @@ void GameClient::handle_network() {
 			return;
 		}
 		// Process all available packets
-		RecvPacket packet;
-		while (d->net->try_receive(&packet)) {
-			handle_packet(packet);
+		std::unique_ptr<RecvPacket> packet = d->net->try_receive();
+		while (packet) {
+			handle_packet(*packet);
+			packet = d->net->try_receive();
 		}
 	} catch (const DisconnectException& e) {
 		disconnect(e.what());

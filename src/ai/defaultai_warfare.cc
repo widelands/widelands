@@ -575,12 +575,12 @@ bool DefaultAI::check_trainingsites(uint32_t gametime) {
 	TrainingSite* ts = trainingsites.front().site;
 	TrainingSiteObserver& tso = trainingsites.front();
 
-	// Make sure we are not above ai type limit
+	// Inform if we are above ai type limit.
 	if (tso.bo->total_count() > tso.bo->cnt_limit_by_aimode) {
-		log("AI player %d: count of %s exceeds an AI limit %d: actual count: %d\n", player_number(),
-		    tso.bo->name, tso.bo->cnt_limit_by_aimode, tso.bo->total_count());
+		log("AI check_trainingsites: AI player %d: count of %s exceeds an AI limit %d: actual count: "
+		    "%d\n",
+		    player_number(), tso.bo->name, tso.bo->cnt_limit_by_aimode, tso.bo->total_count());
 	}
-	assert(tso.bo->total_count() <= tso.bo->cnt_limit_by_aimode);
 
 	const DescriptionIndex enhancement = ts->descr().enhancement();
 
@@ -799,7 +799,6 @@ bool DefaultAI::check_militarysites(uint32_t gametime) {
 	// Check next militarysite
 	bool changed = false;
 	MilitarySite* ms = militarysites.front().site;
-	MilitarySiteObserver& mso = militarysites.front();
 
 	// Don't do anything if last change took place lately
 	if (militarysites.front().last_change + 2 * 60 * 1000 > gametime) {
@@ -811,8 +810,11 @@ bool DefaultAI::check_militarysites(uint32_t gametime) {
 	// Make sure we have statistics about our enemies up-to-date
 	update_player_stat(gametime);
 
-	// Make sure we are not above ai type limit
-	assert(mso.bo->total_count() <= mso.bo->cnt_limit_by_aimode);
+	// Inform if we are above ai type limit.
+	if (militarysites.front().bo->total_count() > militarysites.front().bo->cnt_limit_by_aimode) {
+		log("AI check_militarysites: Too many %s: %d, ai limit: %d\n", militarysites.front().bo->name,
+		    militarysites.front().bo->total_count(), militarysites.front().bo->cnt_limit_by_aimode);
+	}
 
 	FCoords f = game().map().get_fcoords(ms->get_position());
 
