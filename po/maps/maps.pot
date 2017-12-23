@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-12-16 11:37+0000\n"
+"POT-Creation-Date: 2017-12-19 18:11+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -139,15 +139,15 @@ msgstr ""
 
 #: ../../data/campaigns/campaigns.conf:93
 #: ../../data/campaigns/campaigns.conf:105
-#: ../../data/campaigns/dummy.wmf/elemental:7
+#: ../../data/campaigns/dummy.wmf/elemental:8
 msgid "Not yet implemented"
 msgstr ""
 
-#: ../../data/campaigns/dummy.wmf/elemental:9
+#: ../../data/campaigns/dummy.wmf/elemental:10
 msgid "Nobody"
 msgstr ""
 
-#: ../../data/campaigns/dummy.wmf/elemental:10
+#: ../../data/campaigns/dummy.wmf/elemental:11
 msgid "Sorry, this map is not yet implemented."
 msgstr ""
 

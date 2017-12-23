@@ -3,6 +3,8 @@
 -- ===============
 
 function introduction()
+   fields = get_sees_fields(plr)
+   reveal_randomly(plr, fields, 2000)
    additional_port_space.terr = "summer_water" -- disable the port space
    sleep(1000)
    message_box_objective(plr, intro_south)
