@@ -1,5 +1,6 @@
 include "scripting/messages.lua"
 include "map:scripting/helper_functions.lua"
+include "scripting/field_animations.lua"
 
 -- Some objectives need to be waited for in separate threads
 local obj_find_monastery_done = false
@@ -415,7 +416,8 @@ function wheat_chain()
    -- Julia the priestess of Vesta appears
    local julia = map:get_field(19, 185)
    local prior_center = scroll_to_field(julia)
-   concentric_reveal(p1, julia, 7, 100)
+   sleep(200)
+   reveal_concentric(p1, julia, 7, false, 150)
    campaign_message_box(julia_0)
    campaign_message_box(amalea_10)
    campaign_message_box(saledus_1)

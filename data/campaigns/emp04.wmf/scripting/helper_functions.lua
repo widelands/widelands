@@ -35,12 +35,3 @@ function enemy_seen()
    end
 end
 
-function concentric_reveal(plr, center, max_radius, delay)
-   if not delay then delay = 100 end
-   local steps = 0
-   while steps < max_radius do
-      plr:reveal_fields(center:region(steps))
-      steps = steps + 1
-      sleep(delay)
-   end
-end
