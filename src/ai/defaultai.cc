@@ -1051,7 +1051,7 @@ void DefaultAI::late_initialization() {
  * Checks PART of available buildable fields.
  *
  * this checks about 40-50 buildable fields. In big games the player can have thousends
- * of them, so we rotate the buildable_fields container and check 40 fields, and in addition
+ * of them, so we rotate the buildable_fields container and check 35 fields, and in addition
  * we look for medium&big fields and near border fields if needed.
  */
 void DefaultAI::update_all_buildable_fields(const uint32_t gametime) {
@@ -1111,7 +1111,7 @@ void DefaultAI::update_all_buildable_fields(const uint32_t gametime) {
 	}
 
 	// If needed we iterate once more and look for 'special' fields
-	// starting in the middle of buildable_fields to skip fileds tested lately
+	// starting in the middle of buildable_fields to skip fields tested lately
 	// But not doing this if the count of buildable fields is too low
 	// (no need to bother) or this is a new game (< 20 seconds)
 	if (buildable_fields.size() < minimal_fields_check * 3 || gametime < 20000) {
