@@ -1064,10 +1064,12 @@ void DefaultAI::update_all_buildable_fields(const uint32_t gametime) {
 	// number of "special" fields. So if given number of fields are not found within
 	// "regular" check, we must go on and look also on other fields...
 	uint8_t non_small_needed = 4;
-	uint8_t near_border_needed = 7;
+	uint8_t near_border_needed = 10;
+
+	const uint16_t minimal_fields_check = 35;
 
 	// we test 40 fields that were update more than 1 seconds ago
-	while (!buildable_fields.empty() && i < std::min<uint16_t>(40, buildable_fields.size())) {
+	while (!buildable_fields.empty() && i < std::min<uint16_t>(minimal_fields_check, buildable_fields.size())) {
 		BuildableField& bf = *buildable_fields.front();
 
 		if ((buildable_fields.front()->field_info_expiration - kFieldInfoExpiration + 1000) <=
@@ -1108,8 +1110,15 @@ void DefaultAI::update_all_buildable_fields(const uint32_t gametime) {
 		i += 1;
 	}
 
-	// if needed we iterate once more and look for special fields
-	for (uint32_t j = 0; j < buildable_fields.size(); j++) {
+	// If needed we iterate once more and look for 'special' fields
+	// starting in the middle of buildable_fields to skip fileds tested lately
+	// But not doing this if the count of buildable fields is too low
+	// (no need to bother) or this is a new game (< 20 seconds)
+	if (buildable_fields.size() < minimal_fields_check * 3 || gametime < 20000) {
+		return;
+	}
+
+	for (uint32_t j = buildable_fields.size() / 2; j < buildable_fields.size(); j++) {
 		// If we dont need to iterate (anymore) ...
 		if (non_small_needed + near_border_needed == 0) {
 			break;
@@ -1119,12 +1128,18 @@ void DefaultAI::update_all_buildable_fields(const uint32_t gametime) {
 		if (buildable_fields[j]->coords.field->get_owned_by() != player_number()) {
 			continue;
 		}
-		if (buildable_fields[j]->field_info_expiration > gametime) {
+		// We are not interested in fields where info has expired less than 20s ago
+		if (buildable_fields[j]->field_info_expiration > gametime - 20000) {
 			continue;
 		}
 
-		// Some constants to keep the code cleaner
-		int32_t const field_maxsize =
+		// Continue if field is blocked at the moment
+		if (blocked_fields.is_blocked(buildable_fields[j]->coords)) {
+			continue;
+		}
+
+		// Few constants to keep the code cleaner
+		const int32_t field_maxsize =
 		   player_->get_buildcaps(buildable_fields[j]->coords) & BUILDCAPS_SIZEMASK;
 		const bool field_near_border = buildable_fields[j]->near_border;
 
@@ -1135,12 +1150,6 @@ void DefaultAI::update_all_buildable_fields(const uint32_t gametime) {
 		if (!(update_due_size || update_due_border)) {
 			continue;
 		}
-
-		printf("DEBUG: %d: Field %3d/%4lu info age: %5d, size: %d (needed: %d), on border: %s "
-		       "(needed: %d)\n",
-		       player_number(), j, buildable_fields.size(),
-		       (gametime - buildable_fields[j]->field_info_expiration) / 1000, field_maxsize,
-		       non_small_needed, field_near_border ? "Y" : "N", near_border_needed);
 
 		// decreasing the counters
 		if (update_due_size) {
@@ -1155,10 +1164,6 @@ void DefaultAI::update_all_buildable_fields(const uint32_t gametime) {
 		// and finnaly update the buildable field
 		update_buildable_field(*buildable_fields[j]);
 		buildable_fields[j]->field_info_expiration = gametime + kFieldInfoExpiration;
-	}
-	if (non_small_needed + near_border_needed > 4) {
-		printf("DEBUG: %d:  %d non small fields needed, %d border fields needed\n", player_number(),
-		       non_small_needed, near_border_needed);
 	}
 }
 
