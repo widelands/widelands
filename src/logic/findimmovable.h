@@ -138,8 +138,8 @@ struct FindImmovableAttackTarget {
 
 	bool accept(const BaseImmovable&) const;
 };
-struct FindForeignMsite {
-	explicit FindForeignMsite(const Player& init_player) : player(init_player) {
+struct FindForeignMilitarysite {
+	explicit FindForeignMilitarysite(const Player& init_player) : player(init_player) {
 	}
 	bool accept(const BaseImmovable&) const;
 	const Player& player;
