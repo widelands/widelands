@@ -2645,8 +2645,10 @@ void Worker::start_task_scout(Game& game, uint16_t const radius, uint32_t const 
 						bool unique = true;
 						unsigned swl_sz = scouts_worklist.size();
 						for (unsigned t = 1; t < swl_sz ; t++) {
-							if (vu.coords.x == scouts_worklist[t].scoutme.x && vu.coords.y == scouts_worklist[t].scoutme.y)
+							if (vu.coords.x == scouts_worklist[t].scoutme.x && vu.coords.y == scouts_worklist[t].scoutme.y) {
 								unique = false;
+								break;
+							}
 						}
 						if (unique) {
 							haveabreak -= 1 ;
