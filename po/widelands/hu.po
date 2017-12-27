@@ -13,9 +13,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-12-02 08:24+0000\n"
-"PO-Revision-Date: 2017-12-02 08:29+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2017-12-16 11:37+0000\n"
+"PO-Revision-Date: 2017-12-17 20:07+0000\n"
+"Last-Translator: litoll <litoll@freemail.hu>\n"
 "Language-Team: Hungarian (http://www.transifex.com/widelands/widelands/language/hu/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -309,13 +309,13 @@ msgstr "Nem mentett térkép"
 msgid "The map has not been saved, do you really want to quit?"
 msgstr "A térkép nincs elmentve, biztosan ki akarsz lépni?"
 
-#: ../../src/editor/editorinteractive.cc:621
+#: ../../src/editor/editorinteractive.cc:620
 #: ../../src/editor/ui_menus/main_menu_new_map.cc:144
 msgid "Creating empty map…"
 msgstr "Üres térkép létrehozása…"
 
 #. * TRANSLATORS: Default name for new map
-#: ../../src/editor/editorinteractive.cc:625
+#: ../../src/editor/editorinteractive.cc:624
 #: ../../src/editor/ui_menus/main_menu_new_map.cc:151
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:532
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:134
@@ -324,7 +324,7 @@ msgid "No Name"
 msgstr "Nincs név"
 
 #. * TRANSLATORS: Map author name when it hasn't been set yet
-#: ../../src/editor/editorinteractive.cc:628
+#: ../../src/editor/editorinteractive.cc:627
 #: ../../src/editor/ui_menus/main_menu_new_map.cc:152
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:533
 #: ../../src/logic/map.h:164
@@ -332,7 +332,7 @@ msgctxt "author_name"
 msgid "Unknown"
 msgstr "Ismeretlen"
 
-#: ../../src/editor/editorinteractive.cc:635
+#: ../../src/editor/editorinteractive.cc:634
 #, c-format
 msgid "Loading map “%s”…"
 msgstr "A(z) „%s” térkép betöltése…"
@@ -821,7 +821,7 @@ msgstr "Egy fájl már létezik ezzel a névvel: „%s” Felülírod?"
 
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:256
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:270
-#: ../../src/editor/ui_menus/main_menu_save_map.cc:315
+#: ../../src/editor/ui_menus/main_menu_save_map.cc:316
 msgid "Error Saving Map!"
 msgstr "Térkép mentés hiba!"
 
@@ -832,7 +832,7 @@ msgid ""
 "manually."
 msgstr "Egy fájl már létezik ezzel a névvel: „%s.tmp”. Manuálisan kell eltávolítanod."
 
-#: ../../src/editor/ui_menus/main_menu_save_map.cc:312
+#: ../../src/editor/ui_menus/main_menu_save_map.cc:313
 msgid ""
 "Error Saving Map!\n"
 "Saved map file may be corrupt!\n"
@@ -1449,8 +1449,8 @@ msgid "Your %s can't find a way home and will likely die."
 msgstr "A(z) %s nem talál hazautat és valószínűleg meghal."
 
 #: ../../src/logic/map_objects/tribes/worker.cc:1780
-#: ../../src/wui/productionsitewindow.cc:97
-#: ../../src/wui/productionsitewindow.cc:122
+#: ../../src/wui/productionsitewindow.cc:100
+#: ../../src/wui/productionsitewindow.cc:125
 msgid "Worker"
 msgid_plural "Workers"
 msgstr[0] "Munkás"
@@ -2732,7 +2732,7 @@ msgstr "Ablakok igazítása a sarkokhoz"
 
 #: ../../src/ui_fsmenu/options.cc:140
 msgid "Animate automatic map movements"
-msgstr ""
+msgstr "Automatikus térkép mozgások animálása."
 
 #: ../../src/ui_fsmenu/options.cc:150
 msgid "Distance for windows to snap to other panels:"
@@ -3009,7 +3009,7 @@ msgstr "Következő épület megjelenítése"
 #: ../../src/wui/building_statistics_menu.cc:657
 #: ../../src/wui/building_statistics_menu.cc:681
 #: ../../src/wui/building_statistics_menu.cc:683
-#: ../../src/wui/productionsitewindow.cc:174
+#: ../../src/wui/productionsitewindow.cc:177
 msgid "%1%/%2%"
 msgstr "%1%/%2%"
 
@@ -3085,7 +3085,7 @@ msgstr "Gazdaság beállításai"
 
 #: ../../src/wui/economy_options_window.cc:45
 #: ../../src/wui/general_statistics_menu.cc:154
-#: ../../src/wui/productionsitewindow.cc:85
+#: ../../src/wui/productionsitewindow.cc:88
 #: ../../src/wui/warehousewindow.cc:190
 msgid "Wares"
 msgstr "Termékek"
@@ -3096,15 +3096,15 @@ msgstr "Termékek"
 msgid "Workers"
 msgstr "Munkások"
 
-#: ../../src/wui/economy_options_window.cc:136
+#: ../../src/wui/economy_options_window.cc:139
 msgid "Decrease target"
 msgstr "Cél csökkentése"
 
-#: ../../src/wui/economy_options_window.cc:144
+#: ../../src/wui/economy_options_window.cc:146
 msgid "Increase target"
 msgstr "Cél növelése"
 
-#: ../../src/wui/economy_options_window.cc:152
+#: ../../src/wui/economy_options_window.cc:153
 msgid "Reset to default"
 msgstr "Visszaállítás az alapértelmezésre"
 
@@ -3176,19 +3176,19 @@ msgstr "Támadás indítása"
 msgid "Attack"
 msgstr "Támadás"
 
-#: ../../src/wui/fieldaction.cc:471
+#: ../../src/wui/fieldaction.cc:473
 msgid "Build mines"
 msgstr "Bánya építése"
 
-#: ../../src/wui/fieldaction.cc:484
+#: ../../src/wui/fieldaction.cc:486
 msgid "Build flag"
 msgstr "Szászló létrehozása"
 
-#: ../../src/wui/fieldaction.cc:487
+#: ../../src/wui/fieldaction.cc:489
 msgid "Cancel road"
 msgstr "Mégsem kell ide út"
 
-#: ../../src/wui/fieldaction.cc:490
+#: ../../src/wui/fieldaction.cc:492
 msgid "Build roads"
 msgstr "Út építése"
 
@@ -3533,7 +3533,7 @@ msgstr "Játék célja:"
 
 #: ../../src/wui/gamedetails.cc:205
 msgid "Error:"
-msgstr ""
+msgstr "Hiba:"
 
 #: ../../src/wui/general_statistics_menu.cc:140
 msgid "Land"
@@ -4165,23 +4165,23 @@ msgstr "perc"
 msgid "game"
 msgstr "játék"
 
-#: ../../src/wui/productionsitewindow.cc:98
+#: ../../src/wui/productionsitewindow.cc:101
 msgid "Exp"
 msgstr "TP"
 
-#: ../../src/wui/productionsitewindow.cc:99
+#: ../../src/wui/productionsitewindow.cc:102
 msgid "Next Level"
 msgstr "Következő szint"
 
-#: ../../src/wui/productionsitewindow.cc:111
+#: ../../src/wui/productionsitewindow.cc:114
 msgid "Terminate the employment of the selected worker"
 msgstr "A kiválasztott munkás elbocsátása"
 
-#: ../../src/wui/productionsitewindow.cc:187
+#: ../../src/wui/productionsitewindow.cc:190
 msgid "(coming)"
 msgstr "(útban ide)"
 
-#: ../../src/wui/productionsitewindow.cc:187
+#: ../../src/wui/productionsitewindow.cc:190
 msgid "(vacant)"
 msgstr "(nincs munkás)"
 

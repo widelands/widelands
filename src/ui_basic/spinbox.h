@@ -48,6 +48,9 @@ public:
 
 	enum class Units { kNone, kPixels, kMinutes, kPercent };
 
+	/**
+	 * Text conventions: Sentence case for the 'label_text' and for all values
+	 */
 	SpinBox(Panel*,
 	        int32_t x,
 	        int32_t y,

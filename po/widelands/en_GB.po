@@ -3,15 +3,16 @@
 # 
 # Translators:
 # Adam Piggott, 2016-2017
+# Andi Chandler <andi@gowling.com>, 2017
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
 # Nora Ghaoui, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-12-02 08:24+0000\n"
-"PO-Revision-Date: 2017-12-02 08:29+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2017-12-16 11:37+0000\n"
+"PO-Revision-Date: 2017-12-17 01:41+0000\n"
+"Last-Translator: Andi Chandler <andi@gowling.com>\n"
 "Language-Team: English (United Kingdom) (http://www.transifex.com/widelands/widelands/language/en_GB/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -246,15 +247,15 @@ msgstr "Show Building Spaces (on/off)"
 
 #: ../../src/editor/editorinteractive.cc:102
 msgid "Show Immovables (on/off)"
-msgstr ""
+msgstr "Show Immovables (on/off)"
 
 #: ../../src/editor/editorinteractive.cc:106
 msgid "Show Animals (on/off)"
-msgstr ""
+msgstr "Show Animals (on/off)"
 
 #: ../../src/editor/editorinteractive.cc:110
 msgid "Show Resources (on/off)"
-msgstr ""
+msgstr "Show Resources (on/off)"
 
 #: ../../src/editor/editorinteractive.cc:117
 #: ../../src/wui/interactive_player.cc:220
@@ -305,13 +306,13 @@ msgstr "Unsaved Map"
 msgid "The map has not been saved, do you really want to quit?"
 msgstr "The map has not been saved, do you really want to quit?"
 
-#: ../../src/editor/editorinteractive.cc:621
+#: ../../src/editor/editorinteractive.cc:620
 #: ../../src/editor/ui_menus/main_menu_new_map.cc:144
 msgid "Creating empty map…"
 msgstr "Creating empty map…"
 
 #. * TRANSLATORS: Default name for new map
-#: ../../src/editor/editorinteractive.cc:625
+#: ../../src/editor/editorinteractive.cc:624
 #: ../../src/editor/ui_menus/main_menu_new_map.cc:151
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:532
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:134
@@ -320,7 +321,7 @@ msgid "No Name"
 msgstr "No Name"
 
 #. * TRANSLATORS: Map author name when it hasn't been set yet
-#: ../../src/editor/editorinteractive.cc:628
+#: ../../src/editor/editorinteractive.cc:627
 #: ../../src/editor/ui_menus/main_menu_new_map.cc:152
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:533
 #: ../../src/logic/map.h:164
@@ -328,7 +329,7 @@ msgctxt "author_name"
 msgid "Unknown"
 msgstr "Unknown"
 
-#: ../../src/editor/editorinteractive.cc:635
+#: ../../src/editor/editorinteractive.cc:634
 #, c-format
 msgid "Loading map “%s”…"
 msgstr "Loading map “%s”…"
@@ -817,7 +818,7 @@ msgstr "A file with the name ‘%s’ already exists. Overwrite?"
 
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:256
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:270
-#: ../../src/editor/ui_menus/main_menu_save_map.cc:315
+#: ../../src/editor/ui_menus/main_menu_save_map.cc:316
 msgid "Error Saving Map!"
 msgstr "Error Saving Map!"
 
@@ -828,7 +829,7 @@ msgid ""
 "manually."
 msgstr "A file with the name ‘%s.tmp’ already exists. You have to remove it manually."
 
-#: ../../src/editor/ui_menus/main_menu_save_map.cc:312
+#: ../../src/editor/ui_menus/main_menu_save_map.cc:313
 msgid ""
 "Error Saving Map!\n"
 "Saved map file may be corrupt!\n"
@@ -1032,11 +1033,11 @@ msgstr "Widelands could not start the game, because player %u has no starting po
 
 #: ../../src/logic/game.cc:785
 msgid "Trade Offer"
-msgstr ""
+msgstr "Trade Offer"
 
 #: ../../src/logic/game.cc:787
 msgid "This market has received a new trade offer."
-msgstr ""
+msgstr "This market has received a new trade offer."
 
 #: ../../src/logic/game_data_error.cc:48
 msgid ""
@@ -1445,8 +1446,8 @@ msgid "Your %s can't find a way home and will likely die."
 msgstr "Your %s can't find a way home and will likely die."
 
 #: ../../src/logic/map_objects/tribes/worker.cc:1780
-#: ../../src/wui/productionsitewindow.cc:97
-#: ../../src/wui/productionsitewindow.cc:122
+#: ../../src/wui/productionsitewindow.cc:100
+#: ../../src/wui/productionsitewindow.cc:125
 msgid "Worker"
 msgid_plural "Workers"
 msgstr[0] "Worker"
@@ -1521,7 +1522,7 @@ msgid ""
 "Widelands could not establish a connection to the given address. Either no "
 "Widelands server was running at the supposed port or the server shut down as"
 " you tried to connect."
-msgstr ""
+msgstr "Widelands could not establish a connection to the given address. Either no Widelands server was running at the supposed port or the server shut down as you tried to connect."
 
 #: ../../src/network/gameclient.cc:172 ../../src/network/gamehost.cc:612
 #: ../../src/wlapplication.cc:1270
@@ -1644,13 +1645,13 @@ msgstr "Invalid command! Type /help for a list of commands."
 
 #: ../../src/network/gamehost.cc:493
 msgid "Failed to start the server!"
-msgstr ""
+msgstr "Failed to start the server!"
 
 #: ../../src/network/gamehost.cc:494
 msgid ""
 "Widelands could not start a server.\n"
 "Probably some other process is already running a server on our port."
-msgstr ""
+msgstr "Widelands could not start a server.\nProbably some other process is already running a server on our port."
 
 #: ../../src/network/gamehost.cc:1511
 #, c-format
@@ -1694,7 +1695,7 @@ msgstr "Something went wrong: %s"
 msgid ""
 "You have been logged in as '%s' since your requested name is already in use "
 "or reserved."
-msgstr ""
+msgstr "You have been logged in as '%s' since your requested name is already in use or reserved."
 
 #: ../../src/network/internet_gaming.cc:416
 msgid "Mixed up"
@@ -2013,7 +2014,7 @@ msgstr "Client %1$s did not answer for more than %2$s."
 
 #: ../../src/network/network_lan_promotion.cc:357
 msgid "Failed to use the local network!"
-msgstr ""
+msgstr "Failed to use the local network!"
 
 #. * TRANSLATORS: %s is a list of alternative ports with "or"
 #: ../../src/network/network_lan_promotion.cc:359
@@ -2021,7 +2022,7 @@ msgstr ""
 msgid ""
 "Widelands was unable to use the local network. Maybe some other process is "
 "already running a server on port %sor your network setup is broken."
-msgstr ""
+msgstr "Widelands was unable to use the local network. Maybe some other process is already running a server on port %sor your network setup is broken."
 
 #. * TRANSLATORS: A variant of the commandline parameter "true" value
 #. * TRANSLATORS: Needs to be consistent with the translations in widelands-
@@ -2492,7 +2493,7 @@ msgstr "You are a spectator."
 #: ../../src/ui_fsmenu/launch_mpg.cc:420
 #, c-format
 msgid "Unable to load the win condition script file '%s'."
-msgstr ""
+msgstr "Unable to load the win condition script file '%s'."
 
 #: ../../src/ui_fsmenu/launch_mpg.cc:473
 msgid "Saved players are:"
@@ -2728,7 +2729,7 @@ msgstr "Dock windows to edges"
 
 #: ../../src/ui_fsmenu/options.cc:140
 msgid "Animate automatic map movements"
-msgstr ""
+msgstr "Animate automatic map movements"
 
 #: ../../src/ui_fsmenu/options.cc:150
 msgid "Distance for windows to snap to other panels:"
@@ -2821,17 +2822,17 @@ msgstr "Try system language"
 #: ../../src/ui_fsmenu/options.cc:520
 #, c-format
 msgid "The translation into %s is complete."
-msgstr ""
+msgstr "The translation into %s is complete."
 
 #. * TRANSLATORS: %1% = language name, %2% = percentage
 #: ../../src/ui_fsmenu/options.cc:523
 msgid "The translation into %1% is %2%%% complete."
-msgstr ""
+msgstr "The translation into %1% is %2%%% complete."
 
 #: ../../src/ui_fsmenu/options.cc:537
 #, c-format
 msgid "If you wish to help us translate, please visit %s"
-msgstr ""
+msgstr "If you wish to help us translate, please visit %s"
 
 #: ../../src/ui_fsmenu/singleplayer.cc:40
 msgid "New Game"
@@ -2866,11 +2867,11 @@ msgstr "Please add this information to your report.\n\nWidelands attempts to cre
 
 #: ../../src/wlapplication.cc:1207
 msgid "Invalid address"
-msgstr ""
+msgstr "Invalid address"
 
 #: ../../src/wlapplication.cc:1208
 msgid "The entered hostname or address is invalid and can’t be connected to."
-msgstr ""
+msgstr "The entered hostname or address is invalid and can’t be connected to."
 
 #: ../../src/wui/actionconfirm.cc:176
 msgid "Destroy building?"
@@ -3005,7 +3006,7 @@ msgstr "Show next building"
 #: ../../src/wui/building_statistics_menu.cc:657
 #: ../../src/wui/building_statistics_menu.cc:681
 #: ../../src/wui/building_statistics_menu.cc:683
-#: ../../src/wui/productionsitewindow.cc:174
+#: ../../src/wui/productionsitewindow.cc:177
 msgid "%1%/%2%"
 msgstr "%1%/%2%"
 
@@ -3081,7 +3082,7 @@ msgstr "Economy options"
 
 #: ../../src/wui/economy_options_window.cc:45
 #: ../../src/wui/general_statistics_menu.cc:154
-#: ../../src/wui/productionsitewindow.cc:85
+#: ../../src/wui/productionsitewindow.cc:88
 #: ../../src/wui/warehousewindow.cc:190
 msgid "Wares"
 msgstr "Wares"
@@ -3092,15 +3093,15 @@ msgstr "Wares"
 msgid "Workers"
 msgstr "Workers"
 
-#: ../../src/wui/economy_options_window.cc:136
+#: ../../src/wui/economy_options_window.cc:139
 msgid "Decrease target"
 msgstr "Decrease target"
 
-#: ../../src/wui/economy_options_window.cc:144
+#: ../../src/wui/economy_options_window.cc:146
 msgid "Increase target"
 msgstr "Increase target"
 
-#: ../../src/wui/economy_options_window.cc:152
+#: ../../src/wui/economy_options_window.cc:153
 msgid "Reset to default"
 msgstr "Reset to default"
 
@@ -3172,19 +3173,19 @@ msgstr "Start attack"
 msgid "Attack"
 msgstr "Attack"
 
-#: ../../src/wui/fieldaction.cc:471
+#: ../../src/wui/fieldaction.cc:473
 msgid "Build mines"
 msgstr "Build mines"
 
-#: ../../src/wui/fieldaction.cc:484
+#: ../../src/wui/fieldaction.cc:486
 msgid "Build flag"
 msgstr "Plant flag"
 
-#: ../../src/wui/fieldaction.cc:487
+#: ../../src/wui/fieldaction.cc:489
 msgid "Cancel road"
 msgstr "Cancel road"
 
-#: ../../src/wui/fieldaction.cc:490
+#: ../../src/wui/fieldaction.cc:492
 msgid "Build roads"
 msgstr "Build roads"
 
@@ -3511,7 +3512,7 @@ msgstr "Team Score"
 #. * TRANSLATORS: The time a replay starts. Shown in the replay loading screen
 #: ../../src/wui/gamedetails.cc:156
 msgid "Start of Replay:"
-msgstr ""
+msgstr "Start of Replay:"
 
 #. * TRANSLATORS: The current time of a savegame. Shown in the game saving and
 #. loading screens.
@@ -3529,7 +3530,7 @@ msgstr "Win Condition:"
 
 #: ../../src/wui/gamedetails.cc:205
 msgid "Error:"
-msgstr ""
+msgstr "Error:"
 
 #: ../../src/wui/general_statistics_menu.cc:140
 msgid "Land"
@@ -3636,7 +3637,7 @@ msgstr "Autosave %1%: %2%"
 #: ../../src/wui/load_or_save_game.cc:63
 msgctxt "filename_mapname"
 msgid "%1%: %2%"
-msgstr ""
+msgstr "%1%: %2%"
 
 #: ../../src/wui/load_or_save_game.cc:98
 msgid "Delete"
@@ -3696,7 +3697,7 @@ msgstr "Description"
 
 #: ../../src/wui/load_or_save_game.cc:131
 msgid "Map name (start of replay)"
-msgstr ""
+msgstr "Map name (start of replay)"
 
 #: ../../src/wui/load_or_save_game.cc:132
 msgid ""
@@ -3718,13 +3719,13 @@ msgstr "Delete this game"
 #. multiple files
 #: ../../src/wui/load_or_save_game.cc:187
 msgid "Delete these replays"
-msgstr ""
+msgstr "Delete these replays"
 
 #. * TRANSLATORS: Tooltip for the delete button. The user has selected
 #. multiple files
 #: ../../src/wui/load_or_save_game.cc:189
 msgid "Delete these games"
-msgstr ""
+msgstr "Delete these games"
 
 #: ../../src/wui/load_or_save_game.cc:191
 #, c-format
@@ -3775,7 +3776,7 @@ msgstr "Today, %1%:%2%"
 #. hour:minute. This is part of a list.
 #: ../../src/wui/load_or_save_game.cc:392
 msgid "saved today at %1%:%2%"
-msgstr ""
+msgstr "saved today at %1%:%2%"
 
 #. * TRANSLATORS: Display date for choosing a savegame/replay. Placeholders
 #. are:
@@ -3789,21 +3790,21 @@ msgstr "Yesterday, %1%:%2%"
 #. hour:minute. This is part of a list.
 #: ../../src/wui/load_or_save_game.cc:409
 msgid "saved yesterday at %1%:%2%"
-msgstr ""
+msgstr "saved yesterday at %1%:%2%"
 
 #. * TRANSLATORS: Display date for choosing a savegame/replay. Placeholders
 #. are:
 #. month day, year
 #: ../../src/wui/load_or_save_game.cc:415
 msgid "%1% %2%, %3%"
-msgstr ""
+msgstr "%1% %2%, %3%"
 
 #. * TRANSLATORS: Display date for choosing a savegame/replay. Placeholders
 #. are:
 #. month day, year. This is part of a list.
 #: ../../src/wui/load_or_save_game.cc:421
 msgid "saved on %1% %2%, %3%"
-msgstr ""
+msgstr "saved on %1% %2%, %3%"
 
 #. * TRANSLATORS: "Single Player" entry in the Game Mode table column.
 #. * TRANSLATORS: "Keep this to 6 letters maximum.
@@ -3837,7 +3838,7 @@ msgstr "MP (%1%)"
 #: ../../src/wui/load_or_save_game.cc:468
 msgctxt "mapname_gametime"
 msgid "%1% (%2%)"
-msgstr ""
+msgstr "%1% (%2%)"
 
 #. * TRANSLATORS: Error message introduction for when an old savegame can't be
 #. loaded
@@ -4095,12 +4096,12 @@ msgstr "The tribe will be selected at random"
 
 #: ../../src/wui/multiplayersetupgroup.cc:517
 msgid "No Team"
-msgstr ""
+msgstr "No Team"
 
 #: ../../src/wui/multiplayersetupgroup.cc:523
 #, c-format
 msgid "Team %d"
-msgstr ""
+msgstr "Team %d"
 
 #: ../../src/wui/playerdescrgroup.cc:86
 msgid "Initialization"
@@ -4161,23 +4162,23 @@ msgstr "minutes"
 msgid "game"
 msgstr "game"
 
-#: ../../src/wui/productionsitewindow.cc:98
+#: ../../src/wui/productionsitewindow.cc:101
 msgid "Exp"
 msgstr "Exp"
 
-#: ../../src/wui/productionsitewindow.cc:99
+#: ../../src/wui/productionsitewindow.cc:102
 msgid "Next Level"
 msgstr "Next Level"
 
-#: ../../src/wui/productionsitewindow.cc:111
+#: ../../src/wui/productionsitewindow.cc:114
 msgid "Terminate the employment of the selected worker"
 msgstr "Terminate the employment of the selected worker"
 
-#: ../../src/wui/productionsitewindow.cc:187
+#: ../../src/wui/productionsitewindow.cc:190
 msgid "(coming)"
 msgstr "(coming)"
 
-#: ../../src/wui/productionsitewindow.cc:187
+#: ../../src/wui/productionsitewindow.cc:190
 msgid "(vacant)"
 msgstr "(vacant)"
 

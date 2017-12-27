@@ -54,12 +54,10 @@ public:
 
 	/**
 	 * Tries to receive a packet.
-	 * \param packet A packet that should be overwritten with the received data.
-	 * \return \c true if a packet is available, \c false otherwise.
-	 *   The given packet is only modified when \c true is returned.
-	 *   Calling this on a closed connection will return false.
+	 * \return A pointer to a packet if one packet is available, an invalid pointer otherwise.
+	 *   Calling this on a closed connection will return an invalid pointer.
 	 */
-	virtual bool try_receive(RecvPacket* packet) = 0;
+	virtual std::unique_ptr<RecvPacket> try_receive() = 0;
 
 	/**
 	 * Sends a packet.

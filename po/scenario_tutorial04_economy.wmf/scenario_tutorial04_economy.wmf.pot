@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-12-16 11:37+0000\n"
+"POT-Creation-Date: 2017-12-19 18:11+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -193,7 +193,7 @@ msgstr ""
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:92
 msgid ""
 "This is enough explanation for now. Now try it out yourself. We want to know "
-"whether we still have taverns, so you have to choose the ‘Medium Buildings’ "
+"whether we still have taverns, so you have to choose the ‘Medium buildings’ "
 "tab. Close the building statistics menu afterwards."
 msgstr ""
 
@@ -203,7 +203,7 @@ msgid "Look up how many taverns you have."
 msgstr ""
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:97
-msgid "Choose the ‘Medium Buildings’ tab in the building statistics window."
+msgid "Choose the ‘Medium buildings’ tab in the building statistics window."
 msgstr ""
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:99
@@ -504,7 +504,7 @@ msgid "I’ll continue as soon as you click on the"
 msgstr ""
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:275
-msgid "third tab (‘Economy Health’)."
+msgid "third tab (‘Economy health’)."
 msgstr ""
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:280
