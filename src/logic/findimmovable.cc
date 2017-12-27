@@ -72,10 +72,9 @@ bool FindImmovableAttackTarget::accept(const BaseImmovable& imm) const {
 // for scout, since those are stripped away later: Allied foreign
 // msites are visible.
 bool FindForeignMilitarysite::accept(const BaseImmovable& imm) const {
-	if (upcast(MilitarySite const, ms, &imm))
-		{
-			return &ms->owner() != &player;
-		}
+	if (upcast(MilitarySite const, ms, &imm)) {
+		return &ms->owner() != &player;
+	}
 	return false;
 }
 

@@ -2565,8 +2565,8 @@ void Worker::start_task_scout(Game& game, uint16_t const radius, uint32_t const 
 	// The code keeps track of interesting military sites, so that they all are visited.
 	// When the list of unvisited potential attack targets is exhausted, the list is rebuilt.
 	// The first element in the vector is special: It is used to store the location of the scout's hut
-	// at the moment of creation. If player dismantles the site and builds a new, the old points of interest
-	// are no longer valid and the list is cleared.
+	// at the moment of creation. If player dismantles the site and builds a new, the old points of
+	// interest are no longer valid and the list is cleared.
 	// Random remarks: Some unattackable military sites are also visited (like one under construction).
 	// Also, dismantled buildings may end up here. I do not consider these bugs, but if somebody reports,
 	// the behavior can always be altered.
@@ -2579,7 +2579,7 @@ void Worker::start_task_scout(Game& game, uint16_t const radius, uint32_t const 
 	assert (nullptr != homebase);
 	const Coords hutpos = homebase->get_positions(game)[0];
 
-	// the first element of poi-vector stores the location
+	// the first element of scouts_worklist vector stores the location
 	// of my hut, at the time of creation.
 	// If the building location changes, then pop the now-obsolete
 	// list of points of interest
@@ -2670,8 +2670,8 @@ void Worker::start_task_scout(Game& game, uint16_t const radius, uint32_t const 
 				}
 			}
 		}
-		// I suppose that this never triggers.
-		// Anyway. In savegame, I assume that the vector length fits to eight bits. Therefore,
+		// I suppose that this never triggers. Anyway. In savegame,
+		// I assume that the vector length fits to eight bits. Therefore,
 		while (254 < scouts_worklist.size()) {
 			scouts_worklist.pop_back();
 		}
@@ -2881,22 +2881,18 @@ void Worker::Loader::load(FileRead& fr) {
 			} else {
 				veclen = fr.unsigned_8();
 			}
-			for (unsigned q = 0 ; q < veclen ; q++)
-			  {
-			    if (fr.unsigned_8())
-			      {
-				PlaceToScout gsw(true);
-				worker.scouts_worklist.push_back(gsw);
-			      }
-			    else
-			      {
-				int16_t x = fr.signed_16();
-				int16_t y = fr.signed_16();
-				Coords peekpos = Coords(x, y);
-				PlaceToScout gtt(false, peekpos);
-				worker.scouts_worklist.push_back(gtt);
-			      }
-			  }
+			for (unsigned q = 0 ; q < veclen ; q++) {
+				if (fr.unsigned_8()) {
+					PlaceToScout gsw(true);
+					worker.scouts_worklist.push_back(gsw);
+				} else {
+					int16_t x = fr.signed_16();
+					int16_t y = fr.signed_16();
+					Coords peekpos = Coords(x, y);
+					PlaceToScout gtt(false, peekpos);
+					worker.scouts_worklist.push_back(gtt);
+				}
+			}
 
 		} else {
 			throw UnhandledVersionError("Worker", packet_version, kCurrentPacketVersion);
@@ -3046,19 +3042,17 @@ void Worker::do_save(EditorGameBase& egbase, MapObjectSaver& mos, FileWrite& fw)
 	}
 
 	fw.unsigned_8(scouts_worklist.size());
-	for (auto p: scouts_worklist)
-	  {
-	    if (p.randomwalk)
-	      fw.unsigned_8(1);
-	    else
-	      {
-		fw.unsigned_8(0);
-		// Is there a better way to save Coords? This makes
-		// unnecessary assumptions of the internals of Coords
-		fw.signed_16(p.scoutme.x);
-		fw.signed_16(p.scoutme.y);
-	      }
-	  }
+	for (auto p: scouts_worklist) {
+		if (p.randomwalk) {
+			fw.unsigned_8(1);
+		} else {
+			fw.unsigned_8(0);
+			// Is there a better way to save Coords? This makes
+			// unnecessary assumptions of the internals of Coords
+			fw.signed_16(p.scoutme.x);
+			fw.signed_16(p.scoutme.y);
+		}
+	}
 
 }
 }
