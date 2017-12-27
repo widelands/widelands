@@ -564,8 +564,9 @@ int LuaPlayer::add_objective(lua_State* L) {
 /* RST
    .. method:: reveal_fields(fields)
 
-      Make these fields visible for the current player. If the fields were previously hidden via
-      `hide_fields`, restores the exact vision that they had before that was done.
+      Make these fields visible for the current player. The fields will remain
+      visible until they are hidden again. See also :ref:`field_animations` for
+      animated revealing.
 
       :arg fields: The fields to reveal
       :type fields: :class:`array` of :class:`wl.map.Fields`
@@ -591,7 +592,9 @@ int LuaPlayer::reveal_fields(lua_State* L) {
 /* RST
    .. method:: hide_fields(fields)
 
-      Make these fields hidden for the current player.
+      Make these fields hidden for the current player if they are not
+      seen by a military building. See also :ref:`field_animations` for
+      animated hiding.
 
       :arg fields: The fields to hide
       :type fields: :class:`array` of :class:`wl.map.Fields`

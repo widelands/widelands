@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-12-02 08:24+0000\n"
-"PO-Revision-Date: 2017-12-02 08:29+0000\n"
+"POT-Creation-Date: 2017-12-16 11:37+0000\n"
+"PO-Revision-Date: 2017-12-16 11:56+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Gaelic, Scottish (http://www.transifex.com/widelands/widelands/language/gd/)\n"
 "MIME-Version: 1.0\n"
@@ -309,13 +309,13 @@ msgstr "Mapa gun sàbhaladh"
 msgid "The map has not been saved, do you really want to quit?"
 msgstr "Cha deach am mapa a shàbhaladh, a bheil thu cinnteach gu bheil thu airson fàgail?"
 
-#: ../../src/editor/editorinteractive.cc:621
+#: ../../src/editor/editorinteractive.cc:620
 #: ../../src/editor/ui_menus/main_menu_new_map.cc:144
 msgid "Creating empty map…"
 msgstr "A’ cruthachadh mapa falamh…"
 
 #. * TRANSLATORS: Default name for new map
-#: ../../src/editor/editorinteractive.cc:625
+#: ../../src/editor/editorinteractive.cc:624
 #: ../../src/editor/ui_menus/main_menu_new_map.cc:151
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:532
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:134
@@ -324,7 +324,7 @@ msgid "No Name"
 msgstr "Gun ainm"
 
 #. * TRANSLATORS: Map author name when it hasn't been set yet
-#: ../../src/editor/editorinteractive.cc:628
+#: ../../src/editor/editorinteractive.cc:627
 #: ../../src/editor/ui_menus/main_menu_new_map.cc:152
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:533
 #: ../../src/logic/map.h:164
@@ -332,7 +332,7 @@ msgctxt "author_name"
 msgid "Unknown"
 msgstr "Gun urra"
 
-#: ../../src/editor/editorinteractive.cc:635
+#: ../../src/editor/editorinteractive.cc:634
 #, c-format
 msgid "Loading map “%s”…"
 msgstr "A’ luchdadh mapa “%s”…"
@@ -823,7 +823,7 @@ msgstr "Tha faidhle air a bheil “%s” ann mar-thà. A bheil thu airson sgrìo
 
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:256
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:270
-#: ../../src/editor/ui_menus/main_menu_save_map.cc:315
+#: ../../src/editor/ui_menus/main_menu_save_map.cc:316
 msgid "Error Saving Map!"
 msgstr "Mearachd le sàbhaladh a’ mhapa!"
 
@@ -834,7 +834,7 @@ msgid ""
 "manually."
 msgstr "Tha faidhle air a bheil “%s.tmp” ann mar-thà. Feumaidh tu a thoirt air falbh a làmh."
 
-#: ../../src/editor/ui_menus/main_menu_save_map.cc:312
+#: ../../src/editor/ui_menus/main_menu_save_map.cc:313
 msgid ""
 "Error Saving Map!\n"
 "Saved map file may be corrupt!\n"
@@ -1467,8 +1467,8 @@ msgid "Your %s can't find a way home and will likely die."
 msgstr "Chan urrainn dhan %s agad slighe dhachaigh a lorg is feumaidh gum faigh e bàs."
 
 #: ../../src/logic/map_objects/tribes/worker.cc:1780
-#: ../../src/wui/productionsitewindow.cc:97
-#: ../../src/wui/productionsitewindow.cc:122
+#: ../../src/wui/productionsitewindow.cc:100
+#: ../../src/wui/productionsitewindow.cc:125
 msgid "Worker"
 msgid_plural "Workers"
 msgstr[0] "Neach-obrach"
@@ -1720,7 +1720,7 @@ msgstr "Chaidh rudeigin cearr: %s"
 msgid ""
 "You have been logged in as '%s' since your requested name is already in use "
 "or reserved."
-msgstr ""
+msgstr "Chaidh do chlàradh a-steach mar “%s” on a tha an t-ainm a dh’iarr thu ’ga chleachdadh mar-thà no aig cuideigin eile."
 
 #: ../../src/network/internet_gaming.cc:416
 msgid "Mixed up"
@@ -3043,7 +3043,7 @@ msgstr "Seall an t-ath thogalach"
 #: ../../src/wui/building_statistics_menu.cc:657
 #: ../../src/wui/building_statistics_menu.cc:681
 #: ../../src/wui/building_statistics_menu.cc:683
-#: ../../src/wui/productionsitewindow.cc:174
+#: ../../src/wui/productionsitewindow.cc:177
 msgid "%1%/%2%"
 msgstr "%1%/%2%"
 
@@ -3119,7 +3119,7 @@ msgstr "Roghainnean an eaconamaidh"
 
 #: ../../src/wui/economy_options_window.cc:45
 #: ../../src/wui/general_statistics_menu.cc:154
-#: ../../src/wui/productionsitewindow.cc:85
+#: ../../src/wui/productionsitewindow.cc:88
 #: ../../src/wui/warehousewindow.cc:190
 msgid "Wares"
 msgstr "Bathar"
@@ -3130,15 +3130,15 @@ msgstr "Bathar"
 msgid "Workers"
 msgstr "Luchd-obrach"
 
-#: ../../src/wui/economy_options_window.cc:136
+#: ../../src/wui/economy_options_window.cc:139
 msgid "Decrease target"
 msgstr "Lùghdaich an t-amas"
 
-#: ../../src/wui/economy_options_window.cc:144
+#: ../../src/wui/economy_options_window.cc:146
 msgid "Increase target"
 msgstr "Meudaich an t-amas"
 
-#: ../../src/wui/economy_options_window.cc:152
+#: ../../src/wui/economy_options_window.cc:153
 msgid "Reset to default"
 msgstr "Ath-shuidhich air a’ bhun-roghainn"
 
@@ -3210,19 +3210,19 @@ msgstr "Thoir ionnsaigh"
 msgid "Attack"
 msgstr "Ionnsaigh"
 
-#: ../../src/wui/fieldaction.cc:471
+#: ../../src/wui/fieldaction.cc:473
 msgid "Build mines"
 msgstr "Tog mèinn"
 
-#: ../../src/wui/fieldaction.cc:484
+#: ../../src/wui/fieldaction.cc:486
 msgid "Build flag"
 msgstr "Tog bratach"
 
-#: ../../src/wui/fieldaction.cc:487
+#: ../../src/wui/fieldaction.cc:489
 msgid "Cancel road"
 msgstr "Sguir dhen rathad"
 
-#: ../../src/wui/fieldaction.cc:490
+#: ../../src/wui/fieldaction.cc:492
 msgid "Build roads"
 msgstr "Tog rathaidean"
 
@@ -4219,23 +4219,23 @@ msgstr "mionaidean"
 msgid "game"
 msgstr "geama"
 
-#: ../../src/wui/productionsitewindow.cc:98
+#: ../../src/wui/productionsitewindow.cc:101
 msgid "Exp"
 msgstr "Eòlas"
 
-#: ../../src/wui/productionsitewindow.cc:99
+#: ../../src/wui/productionsitewindow.cc:102
 msgid "Next Level"
 msgstr "An ath leibheil"
 
-#: ../../src/wui/productionsitewindow.cc:111
+#: ../../src/wui/productionsitewindow.cc:114
 msgid "Terminate the employment of the selected worker"
 msgstr "Cuir an neach-obrach a thagh thu a-mach à dreuchd"
 
-#: ../../src/wui/productionsitewindow.cc:187
+#: ../../src/wui/productionsitewindow.cc:190
 msgid "(coming)"
 msgstr "(a’ tighinn)"
 
-#: ../../src/wui/productionsitewindow.cc:187
+#: ../../src/wui/productionsitewindow.cc:190
 msgid "(vacant)"
 msgstr "(falamh)"
 
