@@ -1050,26 +1050,28 @@ void DefaultAI::late_initialization() {
 /**
  * Checks PART of available buildable fields.
  *
- * this checks about 40-50 buildable fields. In big games the player can have thousends
+ * this checks about 40-50 buildable fields. In big games, the player can have thousands
  * of them, so we rotate the buildable_fields container and check 35 fields, and in addition
- * we look for medium&big fields and near border fields if needed.
+ * we look for medium & big fields and near border fields if needed.
  */
 void DefaultAI::update_all_buildable_fields(const uint32_t gametime) {
+
+	// Every call we try to check first 35 buildable fields
+	constexpr uint16_t kMinimalFieldsCheck = 35;
+
 	uint16_t i = 0;
 
 	// To be sure we have some info about enemies we might see
 	update_player_stat(gametime);
 
-	// Generall we check fields as they are in the container, but we need also given
+	// Generally we check fields as they are in the container, but we need also given
 	// number of "special" fields. So if given number of fields are not found within
 	// "regular" check, we must go on and look also on other fields...
 	uint8_t non_small_needed = 4;
 	uint8_t near_border_needed = 10;
 
-	const uint16_t minimal_fields_check = 35;
-
-	// we test 40 fields that were update more than 1 seconds ago
-	while (!buildable_fields.empty() && i < std::min<uint16_t>(minimal_fields_check, buildable_fields.size())) {
+	// we test 35 fields that were update more than 1 seconds ago
+	while (!buildable_fields.empty() && i < std::min<uint16_t>(kMinimalFieldsCheck, buildable_fields.size())) {
 		BuildableField& bf = *buildable_fields.front();
 
 		if ((buildable_fields.front()->field_info_expiration - kFieldInfoExpiration + 1000) <=
@@ -1113,8 +1115,8 @@ void DefaultAI::update_all_buildable_fields(const uint32_t gametime) {
 	// If needed we iterate once more and look for 'special' fields
 	// starting in the middle of buildable_fields to skip fields tested lately
 	// But not doing this if the count of buildable fields is too low
-	// (no need to bother) or this is a new game (< 20 seconds)
-	if (buildable_fields.size() < minimal_fields_check * 3 || gametime < 20000) {
+	// (no need to bother)
+	if (buildable_fields.size() < kMinimalFieldsCheck * 3) {
 		return;
 	}
 
@@ -1124,12 +1126,12 @@ void DefaultAI::update_all_buildable_fields(const uint32_t gametime) {
 			break;
 		}
 
-		// Skip if the field is not ours or were updated lately
+		// Skip if the field is not ours or was updated lately
 		if (buildable_fields[j]->coords.field->get_owned_by() != player_number()) {
 			continue;
 		}
 		// We are not interested in fields where info has expired less than 20s ago
-		if (buildable_fields[j]->field_info_expiration > gametime - 20000) {
+		if (buildable_fields[j]->field_info_expiration + 20000 > gametime) {
 			continue;
 		}
 
