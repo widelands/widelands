@@ -46,8 +46,9 @@ EditorSetOriginTool::handle_undo_impl(const Widelands::World&,
 	// Because of the triangle design of map, y is changed by an odd number.
 	// The x must be syncronized with the y when coordinate pair is applied
 	// and also when undoing an action like here.
-	if ((nc.y % 2) != 0)
+	if ((nc.y % 2) != 0) {
 		nc.x = nc.x - 1;
+	}
 	map->normalize_coords(nc);
 	map->set_origin(nc);
 	eia.map_changed(EditorInteractive::MapWas::kGloballyMutated);
