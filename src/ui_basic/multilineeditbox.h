@@ -32,6 +32,8 @@ namespace UI {
 /**
  * A panel that allows entering multi-line string, i.e. like a hybrid between
  * @ref Editbox and @ref MultilineTextarea
+ *
+ * Text conventions: Sentence case for labels associated with thie editbox
  */
 struct MultilineEditbox : public Panel {
 	MultilineEditbox(
