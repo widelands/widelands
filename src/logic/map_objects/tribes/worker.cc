@@ -2564,19 +2564,21 @@ void Worker::start_task_scout(Game& game, uint16_t const radius, uint32_t const 
 	// - Lurking near an enemy military site.
 	// The code keeps track of interesting military sites, so that they all are visited.
 	// When the list of unvisited potential attack targets is exhausted, the list is rebuilt.
-	// The first element in the vector is special: It is used to store the location of the scout's hut
-	// at the moment of creation. If player dismantles the site and builds a new, the old points of
-	// interest are no longer valid and the list is cleared.
-	// Random remarks: Some unattackable military sites are also visited (like one under construction).
-	// Also, dismantled buildings may end up here. I do not consider these bugs, but if somebody reports,
-	// the behavior can always be altered.
+	// The first element in the vector is special: It is used to store the location of the scout's
+	// hut at the moment of creation. If player dismantles the site and builds a new, the old
+	// points of interest are no longer valid and the list is cleared.
+	// Random remarks:
+	// Some unattackable military sites are also visited (like one under construction).
+	// Also, dismantled buildings may end up here. I do not consider these bugs, but if somebody
+	// reports, the behavior can always be altered.
 
-	const FCoords & bobpos = get_position();
-	assert (nullptr != bobpos.field);
+	const FCoords& bobpos = get_position();
+	assert(nullptr != bobpos.field);
 	// Some assumptions: When scout starts working, he is located in his hut.
-	// I cannot imagine any situations where this is not the case. However, such situation could trigger bugs.
+	// I cannot imagine any situations where this is not the case. However, such situation could
+	// trigger bugs.
 	const BaseImmovable* homebase = bobpos.field->get_immovable();
-	assert (nullptr != homebase);
+	assert(nullptr != homebase);
 	const Coords hutpos = homebase->get_positions(game)[0];
 
 	// the first element of scouts_worklist vector stores the location
@@ -2603,7 +2605,7 @@ void Worker::start_task_scout(Game& game, uint16_t const radius, uint32_t const 
 
 	// After the pop above, the latest entry of scouts_worklist is the next MS to visit (if known)
 	// Check whether it is still interesting (=whether it is still invisible)
-	const Player & player = owner();
+	const Player& player = owner();
 	while (1 < scouts_worklist.size()) {
 		MapIndex mt = map.get_index(scouts_worklist.back().scoutme, map.get_width());
 		if (1 < player.vision(mt)) {
@@ -2611,26 +2613,24 @@ void Worker::start_task_scout(Game& game, uint16_t const radius, uint32_t const 
 			// has acquired possession of more military sites
 			// of own, or own folks are nearby.
 			scouts_worklist.pop_back();
-		}
-		else
+		} else
 			break;
 	}
 
-
 	if (2 > scouts_worklist.size()) {
 		// Time to find new places worth visiting.
-		Area<FCoords> revealations (map.get_fcoords(get_position()), state.ivar1);
+		Area<FCoords> revealations(map.get_fcoords(get_position()), state.ivar1);
 		std::vector<ImmovableFound> visit_us;
 		CheckStepWalkOn csteb(MOVECAPS_WALK, true);
-		map.find_reachable_immovables(revealations, &visit_us,
-				csteb,
-				FindFlagOf(FindForeignMilitarysite(player)));
+		map.find_reachable_immovables(
+		   revealations, &visit_us, csteb, FindFlagOf(FindForeignMilitarysite(player)));
 		// Now, I have a list of military sites.
-		// Regarding haveabreak: If there are many enemy sites, push a random walk request into queue now and then.
+		// Regarding haveabreak:
+		// If there are many enemy sites, push a random walk request into queue now and then.
 		uint32_t haveabreak = 3;
 		for (const auto& vu : visit_us) {
 			upcast(Flag, aflag, vu.object);
-			Building * abu = aflag->get_building();
+			Building* abu = aflag->get_building();
 			// Assuming that this always succeeds.
 			if (upcast(MilitarySite const, ms, abu)) {
 				// This should succeed always, too.
@@ -2644,18 +2644,19 @@ void Worker::start_task_scout(Game& game, uint16_t const radius, uint32_t const 
 						// Let's not add duplicates to work list.
 						bool unique = true;
 						unsigned swl_sz = scouts_worklist.size();
-						for (unsigned t = 1; t < swl_sz ; t++) {
-							if (vu.coords.x == scouts_worklist[t].scoutme.x && vu.coords.y == scouts_worklist[t].scoutme.y) {
+						for (unsigned t = 1; t < swl_sz; t++) {
+							if (vu.coords.x == scouts_worklist[t].scoutme.x &&
+							    vu.coords.y == scouts_worklist[t].scoutme.y) {
 								unique = false;
 								break;
 							}
 						}
 						if (unique) {
-							haveabreak -= 1 ;
+							haveabreak -= 1;
 							if (1 > haveabreak) {
 								// If there are many MSs to visit,
 								// do a random walk in-between also.
-								haveabreak = 3 ;
+								haveabreak = 3;
 								PlaceToScout gosomewhere(true);
 								scouts_worklist.push_back(gosomewhere);
 							}
@@ -2705,13 +2706,15 @@ void Worker::scout_update(Game& game, State& state) {
 		// under this special situation. Anybody reading this,
 		// TODO(kxq): Please remove this code block (and compatibility_2017 code from load routine)
 		// once Build 20 is out. Thanks.
-	        log ("Warning: sending scout home. Assuming the game was just started, from savegame, in compatibility mode.\n");
+		log("Warning: sending scout home. Assuming the game was just started, from savegame, in "
+		    "compatibility mode.\n");
 		pop_task(game);
 		schedule_act(game, 10);
 		return;
 	}
 
-	struct PlaceToScout scoutat = scouts_worklist.back(); // do not pop; this function is called many times per run.
+	struct PlaceToScout scoutat =
+	   scouts_worklist.back();  // do not pop; this function is called many times per run.
 
 	bool do_run = static_cast<int32_t>(state.ivar2 - game.get_gametime()) > 0;
 	Coords oldest_coords = get_position();
@@ -2779,16 +2782,13 @@ void Worker::scout_update(Game& game, State& state) {
 		// The scout shall hang around an enemy military site.
 		std::vector<Coords> list;  // locations near the MS under inspection
 		CheckStepDefault cstep(descr().movecaps());
-		// TODO(kxq): Do I want to check that the place to go is differnt from current position?
-		// This happens occasionally and looks a bit silly, but does not real harm. If I do want to do that,
-		// then the current poisition can be acquired like this: // Coords current_coords = get_position();
 		FindNodeAnd fna;
 		fna.add(FindNodeImmovableSize(FindNodeImmovableSize::sizeNone), false);
-		// poi points to the enemy military site; walk in random at vicinity.
+		// scoutat points to the enemy military site; walk in random at vicinity.
 		// First try some near-close fields. If no success then try some further off ones.
 		// This code is partially copied from above; I did not check why start_task_movepath
 		// would fail. Therefore, the looping can be a bit silly to more knowledgeable readers.
-		for (unsigned vicinity = 1 ; vicinity < 4 ; vicinity++) {
+		for (unsigned vicinity = 1; vicinity < 4; vicinity++) {
 			Area<FCoords> exploring_area(map.get_fcoords(scoutat.scoutme), vicinity);
 			if (map.find_reachable_fields(exploring_area, &list, cstep, fna) > 0) {
 				unsigned formax = list.size();
@@ -2802,7 +2802,7 @@ void Worker::scout_update(Game& game, State& state) {
 					// Here, it simply is the current position of the scout.
 					if (coord.x != oldest_coords.x || coord.y != oldest_coords.y) {
 						if (!start_task_movepath(
-							game, coord, 0, descr().get_right_walk_anims(does_carry_ware())))
+						       game, coord, 0, descr().get_right_walk_anims(does_carry_ware())))
 							molog("[scout]: failed to reach destination (x)\n");
 						else
 							return;  // start_task_movepath was successfull.
@@ -2860,8 +2860,10 @@ void Worker::Loader::load(FileRead& fr) {
 	Bob::Loader::load(fr);
 	try {
 		uint8_t packet_version = fr.unsigned_8();
-		// TODO(kxq): Remove the compatibility_2017 code (and similars, dozen lines below) once B20 is out.
-		// TODO(kxq): Also remove the code fragment from Worker::scout_update with compatibility_2017 in comment.
+		// TODO(kxq): Remove the compatibility_2017 code (and similars, dozen lines below) once B20 is
+		// out.
+		// TODO(kxq): Also remove the code fragment from Worker::scout_update with compatibility_2017
+		// in comment.
 		bool compatibility_2017 = 2 == packet_version;
 		if (packet_version == kCurrentPacketVersion || compatibility_2017) {
 
@@ -2881,7 +2883,7 @@ void Worker::Loader::load(FileRead& fr) {
 			} else {
 				veclen = fr.unsigned_8();
 			}
-			for (unsigned q = 0 ; q < veclen ; q++) {
+			for (unsigned q = 0; q < veclen; q++) {
 				if (fr.unsigned_8()) {
 					PlaceToScout gsw(true);
 					worker.scouts_worklist.push_back(gsw);
@@ -3042,7 +3044,7 @@ void Worker::do_save(EditorGameBase& egbase, MapObjectSaver& mos, FileWrite& fw)
 	}
 
 	fw.unsigned_8(scouts_worklist.size());
-	for (auto p: scouts_worklist) {
+	for (auto p : scouts_worklist) {
 		if (p.randomwalk) {
 			fw.unsigned_8(1);
 		} else {
@@ -3053,6 +3055,5 @@ void Worker::do_save(EditorGameBase& egbase, MapObjectSaver& mos, FileWrite& fw)
 			fw.signed_16(p.scoutme.y);
 		}
 	}
-
 }
 }

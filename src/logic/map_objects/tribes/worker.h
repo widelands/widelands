@@ -26,8 +26,8 @@
 #include "economy/ware_instance.h"
 #include "logic/map_objects/tribes/productionsite.h"
 #include "logic/map_objects/tribes/worker_descr.h"
-#include "map_io/tribes_legacy_lookup_table.h"
 #include "logic/widelands_geometry.h"
+#include "map_io/tribes_legacy_lookup_table.h"
 
 namespace Widelands {
 class Building;
@@ -269,12 +269,14 @@ private:
 	// List of places to visit (only if scout), plus a reminder to
 	// occasionally go just somewhere.
 	struct PlaceToScout {
-	PlaceToScout(bool we, Coords pt) : randomwalk(we), scoutme(pt) {}
-	PlaceToScout(bool we) : randomwalk(we) {}
+		PlaceToScout(bool we, Coords pt) : randomwalk(we), scoutme(pt) {
+		}
+		PlaceToScout(bool we) : randomwalk(we) {
+		}
 		const bool randomwalk;
 		const Coords scoutme;
 	};
-	std::vector <PlaceToScout> scouts_worklist;
+	std::vector<PlaceToScout> scouts_worklist;
 
 	// saving and loading
 protected:
