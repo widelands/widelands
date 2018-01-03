@@ -104,8 +104,8 @@ uint8_t DefaultAI::spot_scoring(Widelands::Coords candidate_spot) {
 // - build a ship
 // - start preparation for expedition
 bool DefaultAI::marine_main_decisions() {
-	if (!map_allows_seafaring_ && count_buildings_with_attribute(BuildingAttribute::kShipyard) &&
-	    allships.empty()) {
+	if (!map_allows_seafaring_ &&
+	    count_buildings_with_attribute(BuildingAttribute::kShipyard) == 0 && allships.empty()) {
 		return false;
 	}
 
@@ -241,8 +241,8 @@ bool DefaultAI::marine_main_decisions() {
 // This identifies ships that are waiting for command
 bool DefaultAI::check_ships(uint32_t const gametime) {
 	// There is possibility that the map is not seafaring but we still have ships and/or shipyards
-	if (!map_allows_seafaring_ && count_buildings_with_attribute(BuildingAttribute::kShipyard) &&
-	    allships.empty()) {
+	if (!map_allows_seafaring_ &&
+	    count_buildings_with_attribute(BuildingAttribute::kShipyard) == 0 && allships.empty()) {
 		// False indicates that we can postpone next call of this function
 		return false;
 	}
