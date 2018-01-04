@@ -28,6 +28,8 @@
 
 #include "scripting/lua_table.h"
 
+namespace Widelands {
+
 /// Basic information about the tribe that is determined only from the conf
 /// file and needed before the actual game.
 struct TribeBasicInfo {
@@ -59,5 +61,19 @@ struct TribeBasicInfo {
 
 	std::vector<Initialization> initializations;
 };
+
+/// Returns a string vector with the names of all tribes.
+std::vector<std::string> get_all_tribenames();
+
+/// Returns a vector with the basic info for all tribes.
+std::vector<TribeBasicInfo> get_all_tribeinfos();
+
+/// Returns the basic preload info for a tribe.
+TribeBasicInfo get_tribeinfo(const std::string& tribename);
+
+/// Returns whether this tribe is listed in tribes/preload.lua.
+bool tribe_exists(const std::string& tribename);
+
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_LOGIC_MAP_OBJECTS_TRIBES_TRIBE_BASIC_INFO_H

@@ -39,7 +39,7 @@
 #include "logic/findnode.h"
 #include "logic/map_objects/checkstep.h"
 #include "logic/map_objects/tribes/soldier.h"
-#include "logic/map_objects/tribes/tribe_descr.h"
+#include "logic/map_objects/tribes/tribe_basic_info.h"
 #include "logic/map_objects/world/terrain_description.h"
 #include "logic/map_objects/world/world.h"
 #include "logic/mapfringeregion.h"
@@ -359,7 +359,9 @@ void Map::set_origin(const Coords& new_origin) {
 		}
 	}
 	// Now that we restructured the fields, we just overwrite the old order
-	fields_.reset(new_field_order.release());
+	for (decltype(width_) ind = 0; ind < width_ * height_; ind++) {
+		fields_[ind] = new_field_order[ind];
+	}
 
 	//  Inform immovables and bobs about their new coordinates.
 	for (FCoords c(Coords(0, 0), fields_.get()); c.y < height_; ++c.y)

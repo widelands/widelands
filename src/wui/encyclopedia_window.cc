@@ -177,13 +177,15 @@ void EncyclopediaWindow::entry_selected(const std::string& tab_name) {
 		// TODO(GunChleoc): Remove this when all in-game help has been converted.
 		try {
 			contents_.at(tab_name)->force_new_renderer();
-			contents_.at(tab_name)->set_text(as_message(table->get_string("title"), table->get_string("text")));
+			contents_.at(tab_name)
+			   ->set_text(as_message(table->get_string("title"), table->get_string("text")));
 		} catch (const std::exception& e) {
 			log("Encyclopedia: falling back to OLD font renderer: %s\n", e.what());
 			contents_.at(tab_name)->force_new_renderer(false);
-			contents_.at(tab_name)->set_text(
-			   (boost::format("%s%s") % heading(table->get_string("title")) % table->get_string("text"))
-			      .str());
+			contents_.at(tab_name)
+			   ->set_text((boost::format("%s%s") % heading(table->get_string("title")) %
+			               table->get_string("text"))
+			                 .str());
 		}
 
 	} catch (LuaError& err) {

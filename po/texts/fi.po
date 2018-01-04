@@ -4,7 +4,7 @@
 # Translators:
 # GunChleoc, 2016
 # GunChleoc, 2014
-# Jukka Pakarinen, 2016-2017
+# Jukka Pakarinen, 2016-2018
 # Pekka Järvinen <pekka.jarvinen@gmail.com>, 2015
 # Sampo Harjula <sahtor@sahtor.net>, 2015
 # Teppo Mäenpää <teppo@runbox.com>, 2016
@@ -12,8 +12,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-09-15 18:56+0000\n"
-"PO-Revision-Date: 2017-09-21 23:35+0000\n"
+"POT-Creation-Date: 2017-12-27 17:09+0000\n"
+"PO-Revision-Date: 2018-01-03 17:22+0000\n"
 "Last-Translator: Jukka Pakarinen\n"
 "Language-Team: Finnish (http://www.transifex.com/widelands/widelands/language/fi/)\n"
 "MIME-Version: 1.0\n"
@@ -637,8 +637,8 @@ msgstr "Lisäkysymyksiä voit esittää veppisivumme keskustelupalstoilla osoitt
 #: ../../data/txts/tips/general_game.lua:28
 msgid ""
 "Use the priority buttons in building windows to adjust delivery of a "
-"specific ware."
-msgstr "Tarvikkeiden jakoon eri rakennusten välillä voi vaikuttaa prioriteettipainikkeilla."
+"specific ware. Pressing Ctrl while clicking will adjust all wares at once."
+msgstr "Käytä rakennusruudun prioriteettipainikkeita säätääksesi tavaran toimituksia. Kaikkia tavaroita voi säätää kerralla, jos Ctrl on pohjassa."
 
 #: ../../data/txts/tips/general_game.lua:32
 msgid ""

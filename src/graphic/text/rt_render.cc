@@ -53,6 +53,7 @@
 #include "io/filesystem/layered_filesystem.h"
 
 // TODO(GunChleoc): text line can start with space text node when it's within a div.
+// https://bugs.launchpad.net/widelands/+bug/1738759
 namespace RT {
 
 static const uint16_t INFINITE_WIDTH = 65535;  // 2^16-1
@@ -679,8 +680,10 @@ public:
 	}
 	std::shared_ptr<UI::RenderedText> render(TextureCache* /* texture_cache */) override {
 		// TODO(GunChleoc): When using div width=*, some newline nodes are not being consumed.
-		// Since it is working as expected otherwise and I can't find the problem, let's fix this some other time.
+		// Since it is working as expected otherwise and I can't find the problem, let's fix this some
+		// other time.
 		// Testing can be done with the editor terrains/trees help
+		// https://bugs.launchpad.net/widelands/+bug/1738760
 		// NEVER_HERE();
 		return std::shared_ptr<UI::RenderedText>(new UI::RenderedText());
 	}
@@ -823,7 +826,9 @@ public:
 		}
 
 		for (std::shared_ptr<RenderNode> n : nodes_to_render_) {
-			// TODO(GunChleoc): With div width=*, we are getting newline nodes here, which should have been consumed
+			// TODO(GunChleoc): With div width=*, we are getting newline nodes here, which should have
+			// been consumed
+			// https://bugs.launchpad.net/widelands/+bug/1738760
 			const auto& renderme = n->render(texture_cache);
 			for (auto& rendered_rect : renderme->rects) {
 				if (rendered_rect->was_visited()) {

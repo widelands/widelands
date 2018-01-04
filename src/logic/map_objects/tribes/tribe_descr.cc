@@ -55,7 +55,9 @@ namespace Widelands {
   * The contents of 'table' are documented in
   * /data/tribes/atlanteans.lua
   */
-TribeDescr::TribeDescr(const LuaTable& table, const TribeBasicInfo& info, const Tribes& init_tribes)
+TribeDescr::TribeDescr(const LuaTable& table,
+                       const Widelands::TribeBasicInfo& info,
+                       const Tribes& init_tribes)
    : name_(table.get_string("name")), descname_(info.descname), tribes_(init_tribes) {
 
 	try {

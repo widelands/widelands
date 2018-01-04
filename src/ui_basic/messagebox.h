@@ -50,6 +50,8 @@ namespace UI {
  * \note this function is named "WLMessageBox" instead of simply "MessageBox"
  *       because else linking on Windows (even with #undef MessageBox) will
  *       not work.
+ *
+ * Text conventions: Title Case for the 'caption', Sentence case for the 'text'
 */
 struct WLMessageBox : public Window {
 	enum class MBoxType { kOk, kOkCancel };

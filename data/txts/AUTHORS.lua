@@ -8,16 +8,16 @@ function list_authors()
    local authors = developers()
    local result = ""
    for i, category in ipairs(authors) do
-      result = result .. "<rt>" .. h1_authors(category["heading"]) .. "</rt>"
+      result = result .. h1_authors(category["heading"])
       for j, entry in ipairs(category["entries"])  do
          if (entry["subheading"] ~= nil) then
             result = result .. h2_authors(entry["subheading"])
          end
          for k, member in ipairs(entry["members"])  do
-            result = result .. p_authors(member, category["image"] )
+            result = result .. p(img(category["image"]) .. " " .. member)
          end
       end
-      result = result .. rt("<p font-size=10> <br></p>")
+      result = result .. p(vspace(6))
    end
    return result
 end
@@ -26,7 +26,7 @@ end
 return {
    title = _"Developers",
    text = rt(
-      title(_"Widelands Development Team") ..
+      p_font("align=center", "size=28 color=2F9131", _"Widelands Development Team") ..
       list_authors()
    )
 }
