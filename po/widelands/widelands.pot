@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-12-19 18:11+0000\n"
+"POT-Creation-Date: 2017-12-27 17:14+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -62,18 +62,18 @@ msgid "%1$s and %2$s"
 msgstr ""
 
 #. TRANSLATORS: Short for "Not enough space"
-#: ../../data/scripting/infrastructure.lua:157
+#: ../../data/scripting/infrastructure.lua:160
 msgid "No Space"
 msgstr ""
 
-#: ../../data/scripting/infrastructure.lua:158
+#: ../../data/scripting/infrastructure.lua:161
 msgid ""
 "Some of your starting buildings didn’t have enough room and weren’t built. "
 "You are at a disadvantage with this; consider restarting this map with a "
 "fair starting condition."
 msgstr ""
 
-#: ../../data/scripting/infrastructure.lua:159
+#: ../../data/scripting/infrastructure.lua:162
 msgid "Not enough space"
 msgstr ""
 
@@ -2036,7 +2036,7 @@ msgstr ""
 
 #. * TRANSLATORS: File name for saving objective achieved
 #. * TRANSLATORS: %1% = map name. %2% = achievement name
-#: ../../src/scripting/lua_game.cc:1064
+#: ../../src/scripting/lua_game.cc:1067
 msgid "%1% (%2%)"
 msgstr ""
 
