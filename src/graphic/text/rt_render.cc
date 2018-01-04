@@ -53,6 +53,7 @@
 #include "io/filesystem/layered_filesystem.h"
 
 // TODO(GunChleoc): text line can start with space text node when it's within a div.
+// https://bugs.launchpad.net/widelands/+bug/1738759
 namespace RT {
 
 static const uint16_t INFINITE_WIDTH = 65535;  // 2^16-1
@@ -197,23 +198,6 @@ struct Reference {
 	std::string ref;
 };
 
-class RefMap : public IRefMap {
-public:
-	explicit RefMap(const std::vector<Reference>& refs) : refs_(refs) {
-	}
-	std::string query(int16_t x, int16_t y) override {
-		// Should this linear algorithm proof to be too slow (doubtful), the
-		// RefMap could also be efficiently implemented using an R-Tree
-		for (const Reference& c : refs_)
-			if (c.dim.contains(Vector2i(x, y)))
-				return c.ref;
-		return "";
-	}
-
-private:
-	std::vector<Reference> refs_;
-};
-
 class RenderNode {
 public:
 	enum Floating {
@@ -312,7 +296,8 @@ private:
 
 class Layout {
 public:
-	explicit Layout(std::vector<RenderNode*>& all) : h_(0), idx_(0), all_nodes_(all) {
+	explicit Layout(std::vector<std::shared_ptr<RenderNode>>& all)
+	   : h_(0), idx_(0), all_nodes_(all) {
 	}
 	virtual ~Layout() {
 	}
@@ -320,7 +305,10 @@ public:
 	uint16_t height() {
 		return h_;
 	}
-	uint16_t fit_nodes(std::vector<RenderNode*>& rv, uint16_t w, Borders p, bool shrink_to_fit);
+	uint16_t fit_nodes(std::vector<std::shared_ptr<RenderNode>>* rv,
+	                   uint16_t w,
+	                   Borders p,
+	                   bool shrink_to_fit);
 
 private:
 	// Represents a change in the rendering constraints. For example when an
@@ -336,21 +324,26 @@ private:
 		}
 	};
 
-	uint16_t fit_line(uint16_t w, const Borders&, std::vector<RenderNode*>* rv, bool shrink_to_fit);
+	uint16_t fit_line(uint16_t w,
+	                  const Borders&,
+	                  std::vector<std::shared_ptr<RenderNode>>* rv,
+	                  bool shrink_to_fit);
 
 	uint16_t h_;
 	size_t idx_;
-	std::vector<RenderNode*>& all_nodes_;
+	std::vector<std::shared_ptr<RenderNode>>& all_nodes_;
 	std::priority_queue<ConstraintChange> constraint_changes_;
 };
 
-uint16_t
-Layout::fit_line(uint16_t w, const Borders& p, std::vector<RenderNode*>* rv, bool shrink_to_fit) {
+uint16_t Layout::fit_line(uint16_t w,
+                          const Borders& p,
+                          std::vector<std::shared_ptr<RenderNode>>* rv,
+                          bool shrink_to_fit) {
 	assert(rv->empty());
 
 	// Remove leading spaces
 	while (idx_ < all_nodes_.size() && all_nodes_[idx_]->is_non_mandatory_space() && shrink_to_fit) {
-		delete all_nodes_[idx_++];
+		all_nodes_[idx_++].reset();
 	}
 
 	uint16_t x = p.left;
@@ -358,7 +351,7 @@ Layout::fit_line(uint16_t w, const Borders& p, std::vector<RenderNode*>* rv, boo
 
 	// Calc fitting nodes
 	while (idx_ < all_nodes_.size()) {
-		RenderNode* n = all_nodes_[idx_];
+		std::shared_ptr<RenderNode> n = all_nodes_[idx_];
 		uint16_t nw = n->width();
 		if (x + nw + p.right > w || n->get_floating() != RenderNode::NO_FLOAT) {
 			if (idx_ == first_idx) {
@@ -375,7 +368,6 @@ Layout::fit_line(uint16_t w, const Borders& p, std::vector<RenderNode*>* rv, boo
 	// Remove trailing spaces
 	while (!rv->empty() && rv->back()->is_non_mandatory_space() && shrink_to_fit) {
 		x -= rv->back()->width();
-		delete rv->back();
 		rv->pop_back();
 	}
 
@@ -387,24 +379,27 @@ Layout::fit_line(uint16_t w, const Borders& p, std::vector<RenderNode*>* rv, boo
 
 	// Find expanding nodes
 	std::vector<size_t> expanding_nodes;
-	for (size_t idx = 0; idx < rv->size(); ++idx)
-		if (rv->at(idx)->is_expanding())
+	for (size_t idx = 0; idx < rv->size(); ++idx) {
+		if (rv->at(idx)->is_expanding()) {
 			expanding_nodes.push_back(idx);
+		}
+	}
 
 	if (!expanding_nodes.empty()) {  // If there are expanding nodes, we fill the space
 		const uint16_t individual_w = remaining_space / expanding_nodes.size();
 		for (const size_t idx : expanding_nodes) {
 			rv->at(idx)->set_w(individual_w);
-			for (size_t nidx = idx + 1; nidx < rv->size(); ++nidx)
+			for (size_t nidx = idx + 1; nidx < rv->size(); ++nidx) {
 				rv->at(nidx)->set_x(rv->at(nidx)->x() + individual_w);
+			}
 		}
 	} else {
 		// Take last elements style in this line and check horizontal alignment
-		if (!rv->empty() && (*rv->rbegin())->halign() != UI::Align::kLeft) {
-			if ((*rv->rbegin())->halign() == UI::Align::kCenter) {
+		if (!rv->empty() && rv->back()->halign() != UI::Align::kLeft) {
+			if (rv->back()->halign() == UI::Align::kCenter) {
 				remaining_space /= 2;  // Otherwise, we align right
 			}
-			for (RenderNode* node : *rv) {
+			for (std::shared_ptr<RenderNode> node : *rv) {
 				node->set_x(node->x() + remaining_space);
 			}
 		}
@@ -412,7 +407,7 @@ Layout::fit_line(uint16_t w, const Borders& p, std::vector<RenderNode*>* rv, boo
 
 	// Find the biggest hotspot of the truly remaining items.
 	uint16_t cur_line_hotspot = 0;
-	for (RenderNode* node : *rv) {
+	for (std::shared_ptr<RenderNode> node : *rv) {
 		cur_line_hotspot = std::max(cur_line_hotspot, node->hotspot_y());
 	}
 	return cur_line_hotspot;
@@ -422,21 +417,23 @@ Layout::fit_line(uint16_t w, const Borders& p, std::vector<RenderNode*>* rv, boo
  * Take ownership of all nodes, delete those that we do not render anyways (for
  * example unneeded spaces), append the rest to the vector we got.
  */
-uint16_t
-Layout::fit_nodes(std::vector<RenderNode*>& rv, uint16_t w, Borders p, bool shrink_to_fit) {
-	assert(rv.empty());
+uint16_t Layout::fit_nodes(std::vector<std::shared_ptr<RenderNode>>* rv,
+                           uint16_t w,
+                           Borders p,
+                           bool shrink_to_fit) {
+	assert(rv->empty());
 	h_ = p.top;
 
 	uint16_t max_line_width = 0;
 	while (idx_ < all_nodes_.size()) {
-		std::vector<RenderNode*> nodes_in_line;
+		std::vector<std::shared_ptr<RenderNode>> nodes_in_line;
 		size_t idx_before_iteration_ = idx_;
 		uint16_t biggest_hotspot = fit_line(w, p, &nodes_in_line, shrink_to_fit);
 
 		int line_height = 0;
 		int line_start = INFINITE_WIDTH;
 		// Compute real line height and width, taking into account alignement
-		for (RenderNode* n : nodes_in_line) {
+		for (std::shared_ptr<RenderNode> n : nodes_in_line) {
 			line_height = std::max(line_height, biggest_hotspot - n->hotspot_y() + n->height());
 			n->set_y(h_ + biggest_hotspot - n->hotspot_y());
 			if (line_start >= INFINITE_WIDTH || n->x() < line_start) {
@@ -446,7 +443,7 @@ Layout::fit_nodes(std::vector<RenderNode*>& rv, uint16_t w, Borders p, bool shri
 		}
 
 		// Go over again and adjust position for VALIGN
-		for (RenderNode* n : nodes_in_line) {
+		for (std::shared_ptr<RenderNode> n : nodes_in_line) {
 			uint16_t space = line_height - n->height();
 			if (!space || n->valign() == UI::Align::kBottom) {
 				continue;
@@ -459,7 +456,7 @@ Layout::fit_nodes(std::vector<RenderNode*>& rv, uint16_t w, Borders p, bool shri
 			// So, we fix the sign.
 			n->set_y(std::abs(n->y() - space));
 		}
-		rv.insert(rv.end(), nodes_in_line.begin(), nodes_in_line.end());
+		rv->insert(rv->end(), nodes_in_line.begin(), nodes_in_line.end());
 
 		h_ += line_height;
 		while (!constraint_changes_.empty() && constraint_changes_.top().at_y <= h_) {
@@ -470,7 +467,7 @@ Layout::fit_nodes(std::vector<RenderNode*>& rv, uint16_t w, Borders p, bool shri
 		}
 
 		if ((idx_ < all_nodes_.size()) && all_nodes_[idx_]->get_floating()) {
-			RenderNode* n = all_nodes_[idx_];
+			std::shared_ptr<RenderNode> n = all_nodes_[idx_];
 			n->set_y(h_);
 			ConstraintChange cc = {h_ + n->height(), 0, 0};
 			if (n->get_floating() == RenderNode::FLOAT_LEFT) {
@@ -485,7 +482,7 @@ Layout::fit_nodes(std::vector<RenderNode*>& rv, uint16_t w, Borders p, bool shri
 				max_line_width = std::max(max_line_width, w);
 			}
 			constraint_changes_.push(cc);
-			rv.push_back(n);
+			rv->push_back(n);
 			++idx_;
 		}
 		if (idx_ == idx_before_iteration_) {
@@ -683,8 +680,10 @@ public:
 	}
 	std::shared_ptr<UI::RenderedText> render(TextureCache* /* texture_cache */) override {
 		// TODO(GunChleoc): When using div width=*, some newline nodes are not being consumed.
-		// Since it is working as expected otherwise and I can't find the problem, let's fix this some other time.
+		// Since it is working as expected otherwise and I can't find the problem, let's fix this some
+		// other time.
 		// Testing can be done with the editor terrains/trees help
+		// https://bugs.launchpad.net/widelands/+bug/1738760
 		// NEVER_HERE();
 		return std::shared_ptr<UI::RenderedText>(new UI::RenderedText());
 	}
@@ -782,9 +781,6 @@ public:
 	     background_image_(nullptr) {
 	}
 	~DivTagRenderNode() override {
-		for (RenderNode* n : nodes_to_render_) {
-			delete n;
-		}
 		nodes_to_render_.clear();
 	}
 
@@ -829,8 +825,9 @@ public:
 			rendered_text->rects.push_back(std::unique_ptr<UI::RenderedRect>(std::move(bg_rect)));
 		}
 
-		for (RenderNode* n : nodes_to_render_) {
-			// TODO(GunChleoc): With div width=*, we are getting newline nodes here, which should have been consumed
+		for (std::shared_ptr<RenderNode> n : nodes_to_render_) {
+			// TODO(GunChleoc): With div width=*, we are getting newline nodes here, which should have
+			// been consumed
 			const auto& renderme = n->render(texture_cache);
 			for (auto& rendered_rect : renderme->rects) {
 				if (rendered_rect->was_visited()) {
@@ -844,7 +841,6 @@ public:
 				}
 				rendered_text->rects.push_back(std::move(rendered_rect));
 			}
-			delete n;
 		}
 		nodes_to_render_.clear();
 
@@ -868,7 +864,7 @@ public:
 	void set_background(const Image* img) {
 		background_image_ = img;
 	}
-	void set_nodes_to_render(std::vector<RenderNode*>& n) {
+	void set_nodes_to_render(std::vector<std::shared_ptr<RenderNode>>& n) {
 		nodes_to_render_ = n;
 	}
 	void add_reference(int16_t gx, int16_t gy, uint16_t w, uint16_t h, const std::string& s) {
@@ -879,7 +875,7 @@ public:
 private:
 	DesiredWidth desired_width_;
 	uint16_t w_, h_;
-	std::vector<RenderNode*> nodes_to_render_;
+	std::vector<std::shared_ptr<RenderNode>> nodes_to_render_;
 	Borders margin_;
 	RGBColor background_color_;
 	bool is_background_color_set_;
@@ -984,10 +980,12 @@ public:
 
 	virtual void enter() {
 	}
-	virtual void emit_nodes(std::vector<RenderNode*>&);
+	virtual void emit_nodes(std::vector<std::shared_ptr<RenderNode>>&);
 
 private:
-	void make_text_nodes(const std::string& txt, std::vector<RenderNode*>& nodes, NodeStyle& ns);
+	void make_text_nodes(const std::string& txt,
+	                     std::vector<std::shared_ptr<RenderNode>>& nodes,
+	                     NodeStyle& ns);
 
 protected:
 	Tag& tag_;
@@ -999,17 +997,17 @@ protected:
 };
 
 void TagHandler::make_text_nodes(const std::string& txt,
-                                 std::vector<RenderNode*>& nodes,
+                                 std::vector<std::shared_ptr<RenderNode>>& nodes,
                                  NodeStyle& ns) {
 	TextStream ts(txt);
 	std::string word;
-	std::vector<RenderNode*> text_nodes;
+	std::vector<std::shared_ptr<RenderNode>> text_nodes;
 
 	// Bidirectional text (Arabic etc.)
 	if (i18n::has_rtl_character(txt.c_str())) {
 		std::string previous_word;
-		std::vector<RenderNode*>::iterator it = text_nodes.begin();
-		std::vector<WordSpacerNode*> spacer_nodes;
+		std::vector<std::shared_ptr<RenderNode>>::iterator it = text_nodes.begin();
+		std::vector<std::shared_ptr<RenderNode>> spacer_nodes;
 
 		// Collect the word nodes
 		while (ts.pos() < txt.size()) {
@@ -1020,7 +1018,8 @@ void TagHandler::make_text_nodes(const std::string& txt,
 			// We only know if the spacer goes to the left or right after having a look at the current
 			// word.
 			for (uint16_t ws_indx = 0; ws_indx < ts.pos() - cpos; ws_indx++) {
-				spacer_nodes.push_back(new WordSpacerNode(font_cache_, ns));
+				spacer_nodes.push_back(
+				   std::shared_ptr<RenderNode>(new WordSpacerNode(font_cache_, ns)));
 			}
 
 			word = ts.till_any_or_end(" \t\n\r");
@@ -1030,31 +1029,32 @@ void TagHandler::make_text_nodes(const std::string& txt,
 				bool word_is_bidi = i18n::has_rtl_character(word.c_str());
 				word = i18n::make_ligatures(word.c_str());
 				if (word_is_bidi || i18n::has_rtl_character(previous_word.c_str())) {
-					for (WordSpacerNode* spacer : spacer_nodes) {
+					for (std::shared_ptr<RenderNode> spacer : spacer_nodes) {
 						it = text_nodes.insert(text_nodes.begin(), spacer);
 					}
 					if (word_is_bidi) {
 						word = i18n::line2bidi(word.c_str());
 					}
-					it = text_nodes.insert(
-					   text_nodes.begin(), new TextNode(font_cache_, ns, word.c_str()));
+					it = text_nodes.insert(text_nodes.begin(), std::shared_ptr<RenderNode>(new TextNode(
+					                                              font_cache_, ns, word.c_str())));
 				} else {  // Sequences of Latin words go to the right from current position
 					if (it < text_nodes.end()) {
 						++it;
 					}
-					for (WordSpacerNode* spacer : spacer_nodes) {
+					for (std::shared_ptr<RenderNode> spacer : spacer_nodes) {
 						it = text_nodes.insert(it, spacer);
 						if (it < text_nodes.end()) {
 							++it;
 						}
 					}
-					it = text_nodes.insert(it, new TextNode(font_cache_, ns, word));
+					it = text_nodes.insert(
+					   it, std::shared_ptr<RenderNode>(new TextNode(font_cache_, ns, word)));
 				}
 			}
 			previous_word = word;
 		}
 		// Add the nodes to the end of the previously existing nodes.
-		for (RenderNode* node : text_nodes) {
+		for (std::shared_ptr<RenderNode> node : text_nodes) {
 			nodes.push_back(node);
 		}
 
@@ -1063,7 +1063,7 @@ void TagHandler::make_text_nodes(const std::string& txt,
 			std::size_t cpos = ts.pos();
 			ts.skip_ws();
 			for (uint16_t ws_indx = 0; ws_indx < ts.pos() - cpos; ws_indx++) {
-				nodes.push_back(new WordSpacerNode(font_cache_, ns));
+				nodes.push_back(std::shared_ptr<RenderNode>(new WordSpacerNode(font_cache_, ns)));
 			}
 			word = ts.till_any_or_end(" \t\n\r");
 			ns.fontset = i18n::find_fontset(word.c_str(), fontsets_);
@@ -1073,17 +1073,17 @@ void TagHandler::make_text_nodes(const std::string& txt,
 				if (i18n::has_script_character(word.c_str(), UI::FontSets::Selector::kCJK)) {
 					std::vector<std::string> units = i18n::split_cjk_word(word.c_str());
 					for (const std::string& unit : units) {
-						nodes.push_back(new TextNode(font_cache_, ns, unit));
+						nodes.push_back(std::shared_ptr<RenderNode>(new TextNode(font_cache_, ns, unit)));
 					}
 				} else {
-					nodes.push_back(new TextNode(font_cache_, ns, word));
+					nodes.push_back(std::shared_ptr<RenderNode>(new TextNode(font_cache_, ns, word)));
 				}
 			}
 		}
 	}
 }
 
-void TagHandler::emit_nodes(std::vector<RenderNode*>& nodes) {
+void TagHandler::emit_nodes(std::vector<std::shared_ptr<RenderNode>>& nodes) {
 	for (Child* c : tag_.children()) {
 		if (c->tag) {
 			std::unique_ptr<TagHandler> th(create_taghandler(
@@ -1166,13 +1166,13 @@ public:
 		if (a.has("spacing"))
 			nodestyle_.spacing = a["spacing"].get_int();
 	}
-	void emit_nodes(std::vector<RenderNode*>& nodes) override {
+	void emit_nodes(std::vector<std::shared_ptr<RenderNode>>& nodes) override {
 		// Put a newline if this is not the first paragraph
 		if (!nodes.empty()) {
-			nodes.push_back(new NewlineNode(nodestyle_));
+			nodes.push_back(std::shared_ptr<RenderNode>(new NewlineNode(nodestyle_)));
 		}
 		if (indent_) {
-			nodes.push_back(new SpaceNode(nodestyle_, indent_));
+			nodes.push_back(std::shared_ptr<RenderNode>(new SpaceNode(nodestyle_, indent_)));
 		}
 		TagHandler::emit_nodes(nodes);
 	}
@@ -1216,14 +1216,15 @@ public:
 				scale = static_cast<double>(width) / image_width;
 			}
 		}
-		render_node_ = new ImgRenderNode(nodestyle_, image_filename, scale, color, use_playercolor);
+		render_node_.reset(
+		   new ImgRenderNode(nodestyle_, image_filename, scale, color, use_playercolor));
 	}
-	void emit_nodes(std::vector<RenderNode*>& nodes) override {
+	void emit_nodes(std::vector<std::shared_ptr<RenderNode>>& nodes) override {
 		nodes.push_back(render_node_);
 	}
 
 private:
-	ImgRenderNode* render_node_;
+	std::shared_ptr<ImgRenderNode> render_node_;
 };
 
 class VspaceTagHandler : public TagHandler {
@@ -1242,9 +1243,9 @@ public:
 
 		space_ = a["gap"].get_int();
 	}
-	void emit_nodes(std::vector<RenderNode*>& nodes) override {
-		nodes.push_back(new SpaceNode(nodestyle_, 0, space_));
-		nodes.push_back(new NewlineNode(nodestyle_));
+	void emit_nodes(std::vector<std::shared_ptr<RenderNode>>& nodes) override {
+		nodes.push_back(std::shared_ptr<RenderNode>(new SpaceNode(nodestyle_, 0, space_)));
+		nodes.push_back(std::shared_ptr<RenderNode>(new NewlineNode(nodestyle_)));
 	}
 
 private:
@@ -1283,25 +1284,27 @@ public:
 		}
 	}
 
-	void emit_nodes(std::vector<RenderNode*>& nodes) override {
-		RenderNode* rn = nullptr;
+	void emit_nodes(std::vector<std::shared_ptr<RenderNode>>& nodes) override {
 		if (!fill_text_.empty()) {
-			if (space_ < INFINITE_WIDTH)
-				rn = new FillingTextNode(font_cache_, nodestyle_, space_, fill_text_);
-			else
-				rn = new FillingTextNode(font_cache_, nodestyle_, 0, fill_text_, true);
+			std::shared_ptr<FillingTextNode> node;
+			if (space_ < INFINITE_WIDTH) {
+				node.reset(new FillingTextNode(font_cache_, nodestyle_, space_, fill_text_));
+			} else {
+				node.reset(new FillingTextNode(font_cache_, nodestyle_, 0, fill_text_, true));
+			}
+			nodes.push_back(node);
 		} else {
-			SpaceNode* sn;
-			if (space_ < INFINITE_WIDTH)
-				sn = new SpaceNode(nodestyle_, space_, 0);
-			else
-				sn = new SpaceNode(nodestyle_, 0, 0, true);
-
-			if (background_image_)
-				sn->set_background(background_image_, image_filename_);
-			rn = sn;
+			std::shared_ptr<SpaceNode> node;
+			if (space_ < INFINITE_WIDTH) {
+				node.reset(new SpaceNode(nodestyle_, space_, 0));
+			} else {
+				node.reset(new SpaceNode(nodestyle_, 0, 0, true));
+			}
+			if (background_image_) {
+				node->set_background(background_image_, image_filename_);
+			}
+			nodes.push_back(node);
 		}
-		nodes.push_back(rn);
 	}
 
 private:
@@ -1322,8 +1325,8 @@ public:
 	   : TagHandler(tag, fc, ns, image_cache, init_renderer_style, fontsets) {
 	}
 
-	void emit_nodes(std::vector<RenderNode*>& nodes) override {
-		nodes.push_back(new NewlineNode(nodestyle_));
+	void emit_nodes(std::vector<std::shared_ptr<RenderNode>>& nodes) override {
+		nodes.push_back(std::shared_ptr<RenderNode>(new NewlineNode(nodestyle_)));
 	}
 };
 
@@ -1374,11 +1377,11 @@ public:
 			margin.left = margin.top = margin.right = margin.bottom = p;
 		}
 
-		std::vector<RenderNode*> subnodes;
+		std::vector<std::shared_ptr<RenderNode>> subnodes;
 		TagHandler::emit_nodes(subnodes);
 
 		if (!w_) {  // Determine the width by the width of the widest subnode
-			for (RenderNode* n : subnodes) {
+			for (std::shared_ptr<RenderNode> n : subnodes) {
 				if (n->width() >= INFINITE_WIDTH)
 					continue;
 				w_ = std::max<int>(w_, n->width() + padding.left + padding.right);
@@ -1399,8 +1402,9 @@ public:
 
 		// Layout takes ownership of subnodes
 		Layout layout(subnodes);
-		std::vector<RenderNode*> nodes_to_render;
-		uint16_t max_line_width = layout.fit_nodes(nodes_to_render, w_, padding, shrink_to_fit_);
+		std::vector<std::shared_ptr<RenderNode>> nodes_to_render;
+
+		uint16_t max_line_width = layout.fit_nodes(&nodes_to_render, w_, padding, shrink_to_fit_);
 		uint16_t extra_width = 0;
 		if (w_ < INFINITE_WIDTH && w_ > max_line_width) {
 			extra_width = w_ - max_line_width;
@@ -1410,7 +1414,7 @@ public:
 		}
 
 		// Collect all tags from children
-		for (RenderNode* rn : nodes_to_render) {
+		for (std::shared_ptr<RenderNode> rn : nodes_to_render) {
 			for (const Reference& r : rn->get_references()) {
 				render_node_->add_reference(
 				   rn->x() + r.dim.x, rn->y() + r.dim.y, r.dim.w, r.dim.h, r.ref);
@@ -1439,7 +1443,7 @@ public:
 		render_node_->set_dimensions(w_, layout.height(), margin);
 		render_node_->set_nodes_to_render(nodes_to_render);
 	}
-	void emit_nodes(std::vector<RenderNode*>& nodes) override {
+	void emit_nodes(std::vector<std::shared_ptr<RenderNode>>& nodes) override {
 		nodes.push_back(render_node_);
 	}
 
@@ -1494,7 +1498,7 @@ protected:
 
 private:
 	uint16_t w_;
-	DivTagRenderNode* render_node_;
+	std::shared_ptr<DivTagRenderNode> render_node_;
 };
 
 class RTTagHandler : public DivTagHandler {
@@ -1575,7 +1579,8 @@ Renderer::Renderer(ImageCache* image_cache,
 Renderer::~Renderer() {
 }
 
-RenderNode* Renderer::layout_(const std::string& text, uint16_t width, const TagSet& allowed_tags) {
+std::shared_ptr<RenderNode>
+Renderer::layout(const std::string& text, uint16_t width, const TagSet& allowed_tags) {
 	std::unique_ptr<Tag> rt(parser_->parse(text, allowed_tags));
 
 	if (!width) {
@@ -1599,7 +1604,7 @@ RenderNode* Renderer::layout_(const std::string& text, uint16_t width, const Tag
 
 	RTTagHandler rtrn(
 	   *rt, *font_cache_, default_style, image_cache_, renderer_style_, fontsets_, width);
-	std::vector<RenderNode*> nodes;
+	std::vector<std::shared_ptr<RenderNode>> nodes;
 	rtrn.enter();
 	rtrn.emit_nodes(nodes);
 
@@ -1610,13 +1615,7 @@ RenderNode* Renderer::layout_(const std::string& text, uint16_t width, const Tag
 
 std::shared_ptr<const UI::RenderedText>
 Renderer::render(const std::string& text, uint16_t width, const TagSet& allowed_tags) {
-	std::unique_ptr<RenderNode> node(layout_(text, width, allowed_tags));
+	std::shared_ptr<RenderNode> node(layout(text, width, allowed_tags));
 	return std::shared_ptr<const UI::RenderedText>(node->render(texture_cache_));
-}
-
-IRefMap*
-Renderer::make_reference_map(const std::string& text, uint16_t width, const TagSet& allowed_tags) {
-	std::unique_ptr<RenderNode> node(layout_(text, width, allowed_tags));
-	return new RefMap(node->get_references());
 }
 }

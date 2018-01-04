@@ -304,7 +304,7 @@ end
 --    :arg symbol: the item symbol for the list, e.g. "•" or "→"
 --    :arg text: the text of the list item
 --
---    :returns: a p tag containint the formatted text
+--    :returns: a p tag containing the formatted text
 function li(text_or_symbol, text)
    if text then
       return div(p(text_or_symbol)) .. div(p(space(6))) .. div("width=*", p(text .. vspace(6)))
@@ -335,7 +335,7 @@ end
 --    :arg text_width_percent: the percentatge of space that the text will occupy
 --    :arg text: the text to be placed next to the image
 --
---    :returns: the text wrapped in a paragraph and placed next to the image, The outer tag is a div.
+--    :returns: the text wrapped in a paragraph and placed next to the image, the outer tag is a div.
 function li_image(imagepath, text)
    return
       div("width=100%",

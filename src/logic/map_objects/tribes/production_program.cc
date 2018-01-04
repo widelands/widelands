@@ -742,9 +742,9 @@ ProductionProgram::ActCheckMap::ActCheckMap(char* parameters) {
 void ProductionProgram::ActCheckMap::execute(Game& game, ProductionSite& ps) const {
 	switch (feature_) {
 	case SEAFARING: {
-		if (game.map().get_port_spaces().size() > 1)
+		if (game.map().allows_seafaring()) {
 			return ps.program_step(game, 0);
-		else {
+		} else {
 			ps.set_production_result(_("No use for ships on this map!"));
 			return ps.program_end(game, Failed);
 		}

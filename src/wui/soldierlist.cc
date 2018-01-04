@@ -398,10 +398,10 @@ SoldierList::SoldierList(UI::Panel& parent, InteractiveGameBase& igb, Widelands:
 	if (upcast(Widelands::MilitarySite, ms, &building)) {
 		soldier_preference_.add_button(buttons, Vector2i::zero(),
 		                               g_gr->images().get("images/wui/buildings/prefer_rookies.png"),
-		                               _("Prefer Rookies"));
+		                               _("Prefer rookies"));
 		soldier_preference_.add_button(buttons, Vector2i(32, 0),
 		                               g_gr->images().get("images/wui/buildings/prefer_heroes.png"),
-		                               _("Prefer Heroes"));
+		                               _("Prefer heroes"));
 		UI::Radiobutton* button = soldier_preference_.get_first_button();
 		while (button) {
 			buttons->add(button);

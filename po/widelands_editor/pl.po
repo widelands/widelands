@@ -4,13 +4,14 @@
 # Translators:
 # Wesmania <ikk_pl@yahoo.co.uk>, 2016-2017
 # Patryk, 2016
+# Tomasz Pudło <wptom@wp.pl>, 2018
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-09-15 18:56+0000\n"
-"PO-Revision-Date: 2017-09-23 22:21+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2017-12-27 17:09+0000\n"
+"PO-Revision-Date: 2018-01-04 08:58+0000\n"
+"Last-Translator: Tomasz Pudło <wptom@wp.pl>\n"
 "Language-Team: Polish (http://www.transifex.com/widelands/widelands/language/pl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -47,24 +48,24 @@ msgstr "Przełącz menu narzędzi"
 #. the key.
 #: ../../data/scripting/editor/editor_controls.lua:25
 msgid "Toggle building spaces"
-msgstr ""
+msgstr "Przełącza pokazywanie miejsc na budowę"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
 #: ../../data/scripting/editor/editor_controls.lua:27
 msgid "Toggle immovables display"
-msgstr ""
+msgstr "Przełącza pokazywanie nieruchomości"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
 #: ../../data/scripting/editor/editor_controls.lua:29
 msgid "Toggle animals display"
-msgstr ""
+msgstr "Przełącza pokazywanie zwierząt"
 
 #. TRANSLATORS: This is an access key combination. The hotkey is 'p'
 #: ../../data/scripting/editor/editor_controls.lua:31
 msgid "Toggle resources display"
-msgstr ""
+msgstr "Przełącza pokazywanie zasobów"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
