@@ -8,7 +8,6 @@ include "scripting/richtext.lua"
 -- functions are simple wrapper functions that make working with widelands rich
 -- text formatting system more bearable.
 
-
 -- RST
 -- .. function:: speech(img, clr, title, text)
 --
@@ -25,7 +24,7 @@ include "scripting/richtext.lua"
 --    :arg title: Title of this text. Use empty string if you don't want any.
 --    :arg text: The text itself.
 --    :returns: the formatted text.
---
+
 function speech(img, clr, title, text)
    if title ~= "" then
       title = h1(clr, title)
@@ -44,6 +43,7 @@ end
 --    and need to divide the speech into multiple paragraphs.
 --
 --    :returns: close_p() .. open_p()
+
 function paragraphdivider()
    return close_p() .. open_p()
 end
@@ -57,7 +57,7 @@ end
 --
 --    :returns: a rich text object that contains the formatted
 --       objective text.
---
+
 function objective_text(heading, body)
    return h2(heading) .. p(body)
 end
@@ -74,7 +74,7 @@ end
 --
 --    :returns: a rich text object that contains the formatted
 --       objective text & title.
---
+
 function new_objectives(...)
    local sum = 0
    local text = ""
