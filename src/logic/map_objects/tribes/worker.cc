@@ -2595,7 +2595,7 @@ void Worker::start_task_scout(Game& game, uint16_t const radius, uint32_t const 
 
 	if (scouts_worklist.empty()) {
 		// Store the position of homebase
-		struct PlaceToScout home(false, hutpos);
+		const struct PlaceToScout home(hutpos);
 		scouts_worklist.push_back(home);
 	}
 	if (1 < scouts_worklist.size()) {
@@ -2658,14 +2658,15 @@ void Worker::start_task_scout(Game& game, uint16_t const radius, uint32_t const 
 								// If there are many MSs to visit,
 								// do a random walk in-between also.
 								haveabreak = 3;
-								PlaceToScout gosomewhere(true);
+								const struct PlaceToScout gosomewhere;
 								scouts_worklist.push_back(gosomewhere);
+
 							}
 							// if vision is zero, blacked out.
 							// if vision is one, old info exists; unattackable.
 							// When entering here, the place is worth
 							// scouting.
-							PlaceToScout go_there(false, vu.coords);
+							const struct PlaceToScout go_there(vu.coords);
 							scouts_worklist.push_back(go_there);
 						}
 					}
@@ -2678,7 +2679,7 @@ void Worker::start_task_scout(Game& game, uint16_t const radius, uint32_t const 
 			scouts_worklist.pop_back();
 		}
 		// Push a "go-anywhere" -directive into work list
-		PlaceToScout gosomewhere(true);
+		const struct PlaceToScout gosomewhere;
 		scouts_worklist.push_back(gosomewhere);
 	}
 
@@ -2884,15 +2885,15 @@ void Worker::Loader::load(FileRead& fr) {
 			} else {
 				veclen = fr.unsigned_8();
 			}
-			for (const unsigned q = 0; q < veclen; q++) {
+			for (unsigned q = 0; q < veclen; q++) {
 				if (fr.unsigned_8()) {
-					PlaceToScout gsw(true);
+					const PlaceToScout gsw;
 					worker.scouts_worklist.push_back(gsw);
 				} else {
-					int16_t x = fr.signed_16();
-					int16_t y = fr.signed_16();
+					const int16_t x = fr.signed_16();
+					const int16_t y = fr.signed_16();
 					Coords peekpos = Coords(x, y);
-					PlaceToScout gtt(false, peekpos);
+					const PlaceToScout gtt(peekpos);
 					worker.scouts_worklist.push_back(gtt);
 				}
 			}

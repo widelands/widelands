@@ -269,14 +269,17 @@ private:
 	// List of places to visit (only if scout), plus a reminder to
 	// occasionally go just somewhere.
 	struct PlaceToScout {
-		PlaceToScout(bool we, Coords pt) : randomwalk(we), scoutme(pt) {
+		PlaceToScout(Coords pt) : randomwalk(false), scoutme(pt) {
 		}
-		PlaceToScout(bool we) : randomwalk(we) {
+		// The variable scoutme should not be accessed in these cases.
+		// Assigning an obviously-wrong value, to make the error show sooner.
+		PlaceToScout() : randomwalk(true), scoutme(-32100, -32100) {
 		}
 		const bool randomwalk;
 		const Coords scoutme;
 	};
 	std::vector<PlaceToScout> scouts_worklist;
+
 
 	// saving and loading
 protected:
