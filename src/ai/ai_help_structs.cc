@@ -236,6 +236,7 @@ BuildableField::BuildableField(const Widelands::FCoords& fc)
      unowned_land_nearby(0),
      enemy_owned_land_nearby(0U),
      unowned_buildable_spots_nearby(0U),
+     unowned_portspace_vicinity_nearby(0U),
      nearest_buildable_spot_nearby(0U),
      near_border(false),
      unowned_mines_spots_nearby(0),

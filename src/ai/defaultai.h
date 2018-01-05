@@ -39,7 +39,7 @@
 namespace Widelands {
 struct Road;
 struct Flag;
-}
+}  // namespace Widelands
 
 /**
  * Default Widelands Computer Player (defaultAI)
@@ -305,10 +305,10 @@ private:
 	std::deque<Widelands::FCoords> unusable_fields;
 	std::deque<Widelands::BuildableField*> buildable_fields;
 	Widelands::BlockedFields blocked_fields;
+	std::unordered_set<uint32_t> ports_vicinity;
 	Widelands::PlayersStrengths player_statistics;
 	Widelands::ManagementData management_data;
 	Widelands::ExpansionType expansion_type;
-	std::unordered_set<uint32_t> port_reserved_coords;
 	std::deque<Widelands::MineableField*> mineable_fields;
 	std::deque<Widelands::Flag const*> new_flags;
 	std::deque<Widelands::Road const*> roads;
