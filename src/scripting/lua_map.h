@@ -86,6 +86,8 @@ public:
 	/*
 	 * Properties
 	 */
+	int get_allows_seafaring(lua_State*);
+	int get_number_of_port_spaces(lua_State*);
 	int get_width(lua_State*);
 	int get_height(lua_State*);
 	int get_player_slots(lua_State*);
@@ -96,6 +98,7 @@ public:
 	int place_immovable(lua_State*);
 	int get_field(lua_State*);
 	int recalculate(lua_State*);
+	int set_port_space(lua_State*);
 
 	/*
 	 * C methods

@@ -499,9 +499,12 @@ void Panel::handle_mousein(bool) {
  * If the panel doesn't process the mouse-click, it is handed to the panel's
  * parent.
  *
- * \return true if the mouseclick was processed, flase otherwise
+ * \return true if the mouseclick was processed, false otherwise
  */
-bool Panel::handle_mousepress(const uint8_t, int32_t, int32_t) {
+bool Panel::handle_mousepress(const uint8_t btn, int32_t, int32_t) {
+	if (btn == SDL_BUTTON_LEFT) {
+		focus();
+	}
 	return false;
 }
 
