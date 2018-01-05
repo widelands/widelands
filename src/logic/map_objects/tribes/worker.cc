@@ -2613,8 +2613,9 @@ void Worker::start_task_scout(Game& game, uint16_t const radius, uint32_t const 
 			// has acquired possession of more military sites
 			// of own, or own folks are nearby.
 			scouts_worklist.pop_back();
-		} else
+		} else {
 			break;
+		}
 	}
 
 	if (2 > scouts_worklist.size()) {
@@ -2883,7 +2884,7 @@ void Worker::Loader::load(FileRead& fr) {
 			} else {
 				veclen = fr.unsigned_8();
 			}
-			for (unsigned q = 0; q < veclen; q++) {
+			for (const unsigned q = 0; q < veclen; q++) {
 				if (fr.unsigned_8()) {
 					PlaceToScout gsw(true);
 					worker.scouts_worklist.push_back(gsw);
