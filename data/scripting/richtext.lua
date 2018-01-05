@@ -335,12 +335,8 @@ end
 --    :arg text_width_percent: the percentatge of space that the text will occupy
 --    :arg text: the text to be placed next to the image
 --
-<<<<<<< TREE
---    :returns: the text wrapped in a paragraph and placed next to the image, The outer tag is a div.
-
-=======
 --    :returns: the text wrapped in a paragraph and placed next to the image, the outer tag is a div.
->>>>>>> MERGE-SOURCE
+
 function li_image(imagepath, text)
    return
       div("width=100%",
@@ -438,11 +434,7 @@ end
 --    :arg t1: text in h3 format.
 --    :arg t2: text in p format.
 --    :returns: header text followed by normal text.
-<<<<<<< TREE
 
-=======
---
->>>>>>> MERGE-SOURCE
 function inline_header(header, text)
    return
       div("width=100%",  font("size=13 color=D1D1D1", header .. " ") ..
