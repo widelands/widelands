@@ -436,6 +436,7 @@ end
 --
 function inline_header(header, text)
    return
-      div("width=100%",  font("size=13 color=D1D1D1", header .. " ") ..
+      div("width=100%", vspace(8)) ..
+      div("width=100%", font("size=13 color=D1D1D1", header .. " ") ..
       font("size=12", text))
 end
