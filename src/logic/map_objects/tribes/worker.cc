@@ -2595,7 +2595,7 @@ void Worker::start_task_scout(Game& game, uint16_t const radius, uint32_t const 
 
 	if (scouts_worklist.empty()) {
 		// Store the position of homebase
-		const struct PlaceToScout home(hutpos);
+		const PlaceToScout home(hutpos);
 		scouts_worklist.push_back(home);
 	}
 	if (1 < scouts_worklist.size()) {
@@ -2634,41 +2634,41 @@ void Worker::start_task_scout(Game& game, uint16_t const radius, uint32_t const 
 			Building* abu = aflag->get_building();
 			// Assuming that this always succeeds.
 			if (upcast(MilitarySite const, ms, abu)) {
-				// This should succeed always, too.
-				// Even if not, redundant: Own military sites
-				// are always visible.
-				if (&ms->owner() != &player) {
-					// Check the visibility
-					MapIndex mx = map.get_index(vu.coords, map.get_width());
-					if (2 > player.vision(mx)) {
-						// The find_reachable_immovable sometimes returns multiple instances.
-						// Let's not add duplicates to work list.
-						bool unique = true;
-						unsigned swl_sz = scouts_worklist.size();
-						for (unsigned t = 1; t < swl_sz; t++) {
-							if (vu.coords.x == scouts_worklist[t].scoutme.x &&
-							    vu.coords.y == scouts_worklist[t].scoutme.y) {
-								unique = false;
-								break;
-							}
+				// This would be safe even if this assert failed: Own militarysites are always visible.
+				// However: There would be something wrong with FindForeignMilitarySite or associated
+				// code. Hence, let's keep the assert.
+				assert (&ms->owner() != &player);
+				// vu.coords is the flag position; buildingpos always exists as well, according to immovable.h
+				const Coords buildingpos = abu->get_positions(game)[0];
+				// Check the visibility
+				MapIndex mx = map.get_index(buildingpos, map.get_width());
+				if (2 > player.vision(mx)) {
+					// The find_reachable_immovable sometimes returns multiple instances.
+					// Let's not add duplicates to work list.
+					bool unique = true;
+					unsigned swl_sz = scouts_worklist.size();
+					for (unsigned t = 1; t < swl_sz; t++) {
+						if (buildingpos.x == scouts_worklist[t].scoutme.x &&
+						    buildingpos.y == scouts_worklist[t].scoutme.y) {
+							unique = false;
+							break;
 						}
-						if (unique) {
-							haveabreak -= 1;
-							if (1 > haveabreak) {
-								// If there are many MSs to visit,
-								// do a random walk in-between also.
-								haveabreak = 3;
-								const struct PlaceToScout gosomewhere;
-								scouts_worklist.push_back(gosomewhere);
-
+					}
+					if (unique) {
+						haveabreak -= 1;
+						if (1 > haveabreak) {
+							// If there are many MSs to visit,
+							// do a random walk in-between also.
+							haveabreak = 3;
+							const PlaceToScout gosomewhere;
+							scouts_worklist.push_back(gosomewhere);
 							}
-							// if vision is zero, blacked out.
-							// if vision is one, old info exists; unattackable.
-							// When entering here, the place is worth
-							// scouting.
-							const struct PlaceToScout go_there(vu.coords);
-							scouts_worklist.push_back(go_there);
-						}
+						// if vision is zero, blacked out.
+						// if vision is one, old info exists; unattackable.
+						// When entering here, the place is worth
+						// scouting.
+						const PlaceToScout go_there(buildingpos);
+						scouts_worklist.push_back(go_there);
 					}
 				}
 			}
@@ -2679,7 +2679,7 @@ void Worker::start_task_scout(Game& game, uint16_t const radius, uint32_t const 
 			scouts_worklist.pop_back();
 		}
 		// Push a "go-anywhere" -directive into work list
-		const struct PlaceToScout gosomewhere;
+		const PlaceToScout gosomewhere;
 		scouts_worklist.push_back(gosomewhere);
 	}
 
