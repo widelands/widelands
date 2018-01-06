@@ -2607,14 +2607,19 @@ void Worker::start_task_scout(Game& game, uint16_t const radius, uint32_t const 
 	// Check whether it is still interesting (=whether it is still invisible)
 	const Player& player = owner();
 	while (1 < scouts_worklist.size()) {
-		MapIndex mt = map.get_index(scouts_worklist.back().scoutme, map.get_width());
-		if (1 < player.vision(mt)) {
-			// The mil site is now visible. Either player
-			// has acquired possession of more military sites
-			// of own, or own folks are nearby.
-			scouts_worklist.pop_back();
-		} else {
+		if (scouts_worklist.back().randomwalk) {
+			// Random walk never goes out of fashion.
 			break;
+		} else {
+			MapIndex mt = map.get_index(scouts_worklist.back().scoutme, map.get_width());
+			if (1 < player.vision(mt)) {
+				// The mil site is now visible. Either player
+				// has acquired possession of more military sites
+				// of own, or own folks are nearby.
+				scouts_worklist.pop_back();
+			} else {
+				break;
+			}
 		}
 	}
 
@@ -2631,23 +2636,23 @@ void Worker::start_task_scout(Game& game, uint16_t const radius, uint32_t const 
 		uint32_t haveabreak = 3;
 		for (const auto& vu : visit_us) {
 			upcast(Flag, aflag, vu.object);
-			Building* abu = aflag->get_building();
+			Building* a_building = aflag->get_building();
 			// Assuming that this always succeeds.
-			if (upcast(MilitarySite const, ms, abu)) {
+			if (upcast(MilitarySite const, ms, a_building)) {
 				// This would be safe even if this assert failed: Own militarysites are always visible.
 				// However: There would be something wrong with FindForeignMilitarySite or associated
 				// code. Hence, let's keep the assert.
 				assert (&ms->owner() != &player);
-				// vu.coords is the flag position; buildingpos always exists as well, according to immovable.h
-				const Coords buildingpos = abu->get_positions(game)[0];
-				// Check the visibility
+				const Coords buildingpos = a_building->get_positions(game)[0];
+				// Check the visibility: only invisible ones interest the scout.
 				MapIndex mx = map.get_index(buildingpos, map.get_width());
 				if (2 > player.vision(mx)) {
 					// The find_reachable_immovable sometimes returns multiple instances.
+					// TODO(somebody): Is that okay? This could be a performance issue elsewhere.
 					// Let's not add duplicates to work list.
 					bool unique = true;
-					unsigned swl_sz = scouts_worklist.size();
-					for (unsigned t = 1; t < swl_sz; t++) {
+					unsigned worklist_size = scouts_worklist.size();
+					for (unsigned t = 1; t < worklist_size; t++) {
 						if (buildingpos.x == scouts_worklist[t].scoutme.x &&
 						    buildingpos.y == scouts_worklist[t].scoutme.y) {
 							unique = false;
