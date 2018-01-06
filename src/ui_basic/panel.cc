@@ -190,7 +190,7 @@ int Panel::do_run() {
 			forefather->do_draw(rt);
 			rt.blit(
 			   (app->get_mouse_position() - Vector2i(3, 7)),
-			   WLApplication::get()->is_mouse_pressed() ? default_cursor_click_ : default_cursor_);
+			   app->is_mouse_pressed() ? default_cursor_click_ : default_cursor_);
 			forefather->do_tooltip();
 			g_gr->refresh();
 			next_draw_time = start_time + draw_delay;
