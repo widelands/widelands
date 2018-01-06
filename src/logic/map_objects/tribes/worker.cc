@@ -2623,6 +2623,7 @@ void Worker::start_task_scout(Game& game, uint16_t const radius, uint32_t const 
 		}
 	}
 
+	// Check whether there is still undone work in the queue, keeping in mind that 1st element of the vector is special
 	if (2 > scouts_worklist.size()) {
 		// Time to find new places worth visiting.
 		Area<FCoords> revealations(map.get_fcoords(get_position()), state.ivar1);

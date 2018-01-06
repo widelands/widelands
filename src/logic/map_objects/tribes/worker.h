@@ -269,7 +269,7 @@ private:
 	// List of places to visit (only if scout), plus a reminder to
 	// occasionally go just somewhere.
 	struct PlaceToScout {
-		PlaceToScout(Coords pt) : randomwalk(false), scoutme(pt) {
+		PlaceToScout(const Coords pt) : randomwalk(false), scoutme(pt) {
 		}
 		// The variable scoutme should not be accessed in these cases.
 		// Assigning an obviously-wrong value, to make the error show sooner.
