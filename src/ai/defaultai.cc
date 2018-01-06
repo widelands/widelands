@@ -972,7 +972,7 @@ void DefaultAI::late_initialization() {
 		if (ps_obs.bo->is(BuildingAttribute::kSpaceConsumer) &&
 		    !ps_obs.bo->is(BuildingAttribute::kRanger)) {
 			MapRegion<Area<FCoords>> mr(
-			   map, Area<FCoords>(map.get_fcoords(ps_obs.site->get_position()), 2));
+			   map, Area<FCoords>(map.get_fcoords(ps_obs.site->get_position()), 4));
 			do {
 				blocked_fields.add(mr.location(), game().get_gametime() + 20 * 60 * 1000);
 			} while (mr.advance(map));
