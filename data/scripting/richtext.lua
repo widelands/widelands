@@ -307,6 +307,7 @@ end
 --    :returns: a p tag containing the formatted text
 
 function li(text_or_symbol, text)
+   if text then
       return div(p(text_or_symbol)) .. div(p(space(6))) .. div("width=*", p(text .. vspace(6)))
    else
       return div(p("•")) .. div(p(space(6))) .. div("width=*", p(text_or_symbol .. vspace(6)))
