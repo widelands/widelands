@@ -828,6 +828,7 @@ public:
 		for (std::shared_ptr<RenderNode> n : nodes_to_render_) {
 			// TODO(GunChleoc): With div width=*, we are getting newline nodes here, which should have
 			// been consumed
+			// https://bugs.launchpad.net/widelands/+bug/1738760
 			const auto& renderme = n->render(texture_cache);
 			for (auto& rendered_rect : renderme->rects) {
 				if (rendered_rect->was_visited()) {

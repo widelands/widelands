@@ -188,9 +188,8 @@ int Panel::do_run() {
 		if (start_time >= next_draw_time) {
 			RenderTarget& rt = *g_gr->get_render_target();
 			forefather->do_draw(rt);
-			rt.blit(
-			   (app->get_mouse_position() - Vector2i(3, 7)),
-			   app->is_mouse_pressed() ? default_cursor_click_ : default_cursor_);
+			rt.blit((app->get_mouse_position() - Vector2i(3, 7)),
+			        app->is_mouse_pressed() ? default_cursor_click_ : default_cursor_);
 			forefather->do_tooltip();
 			g_gr->refresh();
 			next_draw_time = start_time + draw_delay;

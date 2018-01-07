@@ -1,11 +1,12 @@
+include "scripting/richtext.lua"
+
 -- RST
--- format_scenario.lua
--- -------------------
+-- richtext_scenarios.lua
+-- ----------------------
 --
 -- Function to simplify and unique text formatting in scenarios.  Most of these
 -- functions are simple wrapper functions that make working with widelands rich
 -- text formatting system more bearable.
-
 
 -- RST
 -- .. function:: speech(img, clr, title, text)
@@ -20,31 +21,33 @@
 --
 --    :arg img: name of the image to use for this speaker
 --    :arg clr: a valid 6 char hex color to use for the name of this speaker
---    :arg title: Title of this text.
---    :arg text: The text itself. If this is nil, :const:`title` is used as text
---       instead and there will not be any title.
+--    :arg title: Title of this text. Use empty string if you don't want any.
+--    :arg text: The text itself.
 --    :returns: the formatted text.
 
-function speech(img, clr, g_title, g_text)
-   local title, text = g_title, g_text
-   if not text then
-      title = nil
-      text = g_title
+function speech(img, clr, title, text)
+   if title ~= "" then
+      title = h1(clr, title)
    end
 
    -- Surround the text with translatable ","
    text = (_'“%s”'):format(text)
 
-   local s = ""
-   if title then
-      s = rt("<p font-size=20 font-weight=bold font-face=serif " ..
-         ("font-color=%s>"):format(clr) .. title ..
-         "</p><p font-size=8> <br></p>"
-      )
-   end
-
-   return s .. rt(("image=%s"):format(img), p(text))
+   return title .. li_image(img, p(text))
 end
+
+-- RST
+-- .. function:: paragraphdivider()
+--
+--    Closes a paragraph and opens a new paragraph. Use this when you format a string with the speech function
+--    and need to divide the speech into multiple paragraphs.
+--
+--    :returns: close_p() .. open_p()
+
+function paragraphdivider()
+   return close_p() .. open_p()
+end
+
 
 
 -- RST
@@ -54,9 +57,9 @@ end
 --
 --    :returns: a rich text object that contains the formatted
 --       objective text.
---
+
 function objective_text(heading, body)
-   return rt(h2(heading) .. p(body))
+   return h2(heading) .. p(body)
 end
 
 
@@ -71,15 +74,13 @@ end
 --
 --    :returns: a rich text object that contains the formatted
 --       objective text & title.
---
+
 function new_objectives(...)
    local sum = 0
-   local s = ""
+   local text = ""
    for idx,obj in ipairs{...} do
-      s = s .. obj.body
+      text = text .. obj.body
       sum = sum + obj.number
    end
-   return rt("<p font-size=10> <br></p>" ..
-      "<p font=serif font-size=18 font-weight=bold font-color=D1D1D1>"
-      .. ngettext("New Objective", "New Objectives", sum) .. "</p>") .. s
+   return h1(ngettext("New Objective", "New Objectives", sum)) .. text
 end
