@@ -2650,8 +2650,8 @@ void Worker::start_task_scout(Game& game, uint16_t const radius, uint32_t const 
 				MapIndex mx = map.get_index(buildingpos, map.get_width());
 				if (2 > player.vision(mx)) {
 					// The find_reachable_immovable sometimes returns multiple instances.
-					// TODO(somebody): Is that okay? This could be a performance issue elsewhere.
-					// Let's not add duplicates to work list.
+					// TODO(kxq): Is that okay? This could be a performance issue elsewhere.
+					// Let's not add duplicates to my work list.
 					bool unique = true;
 					unsigned worklist_size = scouts_worklist.size();
 					for (unsigned t = 1; t < worklist_size; t++) {
