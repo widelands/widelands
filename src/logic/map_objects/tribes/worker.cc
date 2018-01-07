@@ -2623,7 +2623,8 @@ void Worker::start_task_scout(Game& game, uint16_t const radius, uint32_t const 
 		}
 	}
 
-	// Check whether there is still undone work in the queue, keeping in mind that 1st element of the vector is special
+	// Check whether there is still undone work in the queue,
+	// keeping in mind that 1st element of the vector is special
 	if (2 > scouts_worklist.size()) {
 		// Time to find new places worth visiting.
 		Area<FCoords> revealations(map.get_fcoords(get_position()), state.ivar1);
@@ -2643,7 +2644,7 @@ void Worker::start_task_scout(Game& game, uint16_t const radius, uint32_t const 
 				// This would be safe even if this assert failed: Own militarysites are always visible.
 				// However: There would be something wrong with FindForeignMilitarySite or associated
 				// code. Hence, let's keep the assert.
-				assert (&ms->owner() != &player);
+				assert(&ms->owner() != &player);
 				const Coords buildingpos = a_building->get_positions(game)[0];
 				// Check the visibility: only invisible ones interest the scout.
 				MapIndex mx = map.get_index(buildingpos, map.get_width());
@@ -2668,7 +2669,7 @@ void Worker::start_task_scout(Game& game, uint16_t const radius, uint32_t const 
 							haveabreak = 3;
 							const PlaceToScout gosomewhere;
 							scouts_worklist.push_back(gosomewhere);
-							}
+						}
 						// if vision is zero, blacked out.
 						// if vision is one, old info exists; unattackable.
 						// When entering here, the place is worth
