@@ -21,6 +21,6 @@ tribes:new_carrier_type {
 
    buildcost = {}, -- This will give the worker the property "buildable"
 
-   ware_hotspot = {-3, 20},
+   ware_hotspot = {0, 20},
    animations = animations,
 }
