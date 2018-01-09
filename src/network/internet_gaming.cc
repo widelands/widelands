@@ -537,21 +537,29 @@ void InternetGaming::handle_packet(RecvPacket& packet) {
 			// Client received the new list of clients
 			uint8_t number = boost::lexical_cast<int>(packet.string()) & 0xff;
 			std::vector<InternetClient> old = clientlist_;
+			// Push IRC users to a second list and add them to the back
+			std::vector<InternetClient> irc;
 			clientlist_.clear();
 			log("InternetGaming: Received a client list update with %u items.\n", number);
+			InternetClient inc;
 			for (uint8_t i = 0; i < number; ++i) {
-				InternetClient* inc = new InternetClient();
-				inc->name = packet.string();
-				inc->build_id = packet.string();
-				inc->game = packet.string();
-				inc->type = packet.string();
-				inc->points = packet.string();
-				clientlist_.push_back(*inc);
+				inc.name = packet.string();
+				inc.build_id = packet.string();
+				inc.game = packet.string();
+				inc.type = packet.string();
+				inc.points = packet.string();
+				if (inc.build_id == "IRC") {
+					irc.push_back(inc);
+					// No "join" or "left" messages for IRC users
+					continue;
+				}
+				// No IRC client
+				clientlist_.push_back(inc);
 
 				bool found =
 				   old.empty();  // do not show all clients, if this instance is the actual change
 				for (InternetClient& client : old) {
-					if (client.name == inc->name) {
+					if (client.name == inc.name) {
 						found = true;
 						client.name = "";
 						break;
@@ -559,14 +567,12 @@ void InternetGaming::handle_packet(RecvPacket& packet) {
 				}
 				if (!found)
 					format_and_add_chat(
-					   "", "", true, (boost::format(_("%s joined the lobby")) % inc->name).str());
-
-				delete inc;
-				inc = nullptr;
+					   "", "", true, (boost::format(_("%s joined the lobby")) % inc.name).str());
 			}
+			clientlist_.insert(clientlist_.end(), irc.begin(), irc.end());
 
 			for (InternetClient& client : old) {
-				if (client.name.size()) {
+				if (client.name.size() && client.build_id != "IRC") {
 					format_and_add_chat(
 					   "", "", true, (boost::format(_("%s left the lobby")) % client.name).str());
 				}
