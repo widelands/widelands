@@ -5,7 +5,7 @@
 -- This script returns a formatted entry for the tree help in the editor.
 -- Pass the internal tree name to the coroutine to select the tree type.
 
-include "scripting/formatting.lua"
+include "scripting/richtext.lua"
 include "scripting/help.lua"
 
 return {
@@ -13,10 +13,10 @@ return {
       set_textdomain("widelands_editor")
       local world = wl.World();
       local tree = wl.Editor():get_immovable_description(tree_name)
-      local result = picture_li(tree.representative_image, "")
+      local result = li_image(tree.representative_image, "")
 
       -- TRANSLATORS: A header in the editor help. Terrains preferred by a type of tree.
-      result = result .. spacer() .. rt(h2(_"Preferred terrains")) .. spacer()
+      result = result .. vspace(3) .. h2(vspace(12) .. _"Preferred terrains") .. vspace(3)
       result = result .. terrain_affinity_help(tree)
 
       return {

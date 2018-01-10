@@ -125,10 +125,10 @@ FullscreenMenuOptions::FullscreenMenuOptions(OptionsCtrl::OptionsStruct opt)
                           100,  // 100 is arbitrary, will be resized in layout().
                           100,  // 100 is arbitrary, will be resized in layout().
                           24,
-                          _("In-game resolution")),
+                          _("Window Size")),
 
      fullscreen_(&box_interface_left_, Vector2i::zero(), _("Fullscreen"), "", 0),
-     inputgrab_(&box_interface_left_, Vector2i::zero(), _("Grab Input"), "", 0),
+     inputgrab_(&box_interface_left_, Vector2i::zero(), _("Grab input"), "", 0),
      sb_maxfps_(&box_interface_left_, 0, 0, 0, 0, opt.maxfps, 0, 99, _("Maximum FPS:")),
      translation_info_(&box_interface_, 0, 0, 100, 100),
 
@@ -162,8 +162,8 @@ FullscreenMenuOptions::FullscreenMenuOptions(OptionsCtrl::OptionsStruct opt)
                     UI::SpinBox::Units::kPixels),
 
      // Sound options
-     music_(&box_sound_, Vector2i::zero(), _("Enable Music"), "", 0),
-     fx_(&box_sound_, Vector2i::zero(), _("Enable Sound Effects"), "", 0),
+     music_(&box_sound_, Vector2i::zero(), _("Enable music"), "", 0),
+     fx_(&box_sound_, Vector2i::zero(), _("Enable sound effects"), "", 0),
      message_sound_(&box_sound_, Vector2i::zero(), _("Play a sound at message arrival"), "", 0),
 
      // Saving options

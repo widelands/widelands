@@ -36,6 +36,7 @@
 #include "logic/map_objects/tribes/market.h"
 #include "logic/map_objects/tribes/ship.h"
 #include "logic/map_objects/tribes/soldier.h"
+#include "logic/map_objects/tribes/tribe_basic_info.h"
 #include "logic/map_objects/tribes/tribes.h"
 #include "logic/map_objects/tribes/warelist.h"
 #include "logic/map_objects/world/editor_category.h"
@@ -1138,17 +1139,17 @@ Map
 
 .. class:: Map
 
-   Access to the map and it's objects. You cannot instantiate this directly,
+   Access to the map and its objects. You cannot instantiate this directly,
    instead access it via :attr:`wl.Game.map`.
 */
 const char LuaMap::className[] = "Map";
 const MethodType<LuaMap> LuaMap::Methods[] = {
-   METHOD(LuaMap, place_immovable),
-   METHOD(LuaMap, get_field),
-   METHOD(LuaMap, recalculate),
-   {nullptr, nullptr},
+   METHOD(LuaMap, place_immovable), METHOD(LuaMap, get_field), METHOD(LuaMap, recalculate),
+   METHOD(LuaMap, set_port_space),  {nullptr, nullptr},
 };
 const PropertyType<LuaMap> LuaMap::Properties[] = {
+   PROP_RO(LuaMap, allows_seafaring),
+   PROP_RO(LuaMap, number_of_port_spaces),
    PROP_RO(LuaMap, width),
    PROP_RO(LuaMap, height),
    PROP_RO(LuaMap, player_slots),
@@ -1166,6 +1167,31 @@ void LuaMap::__unpersist(lua_State* /* L */) {
  PROPERTIES
  ==========================================================
  */
+/* RST
+   .. attribute:: allows_seafaring
+
+      (RO) Whether the map currently allows seafaring. This will calculate a path between port spaces,
+		so it's more accurate but less efficient than :any:`number_of_port_spaces`.
+
+		:returns: True if there are at least two port spaces that can be reached from each other.
+*/
+int LuaMap::get_allows_seafaring(lua_State* L) {
+	lua_pushboolean(L, get_egbase(L).map().allows_seafaring());
+	return 1;
+}
+/* RST
+   .. attribute:: number_of_port_spaces
+
+      (RO) The amount of port spaces on the map. If this is >= 2, one can assume that the map
+      allows seafaring. This is checked very quickly and is more efficient than :any:`allows_seafaring`,
+      but it won't detect whether the port spaces can be reached from each other, so it's less accurate.
+
+      :returns: An integer with the number of port spaces.
+*/
+int LuaMap::get_number_of_port_spaces(lua_State* L) {
+	lua_pushuint32(L, get_egbase(L).map().get_port_spaces().size());
+	return 1;
+}
 /* RST
    .. attribute:: width
 
@@ -1295,6 +1321,32 @@ int LuaMap::recalculate(lua_State* L) {
 	EditorGameBase& egbase = get_egbase(L);
 	egbase.mutable_map()->recalc_whole_map(egbase.world());
 	return 0;
+}
+
+/* RST
+   .. method:: set_port_space(x, y, allowed)
+
+      Sets whether a port space is allowed at the coordinates (x, y).
+      Returns false if the port space couldn't be set.
+
+      :arg x: The x coordinate of the port space to set/unset.
+      :type x: :class:`int`
+      :arg y: The y coordinate of the port space to set/unset.
+      :type y: :class:`int`
+      :arg allowed: Whether building a port will be allowed here.
+      :type allowed: :class:`bool`
+
+      :returns: :const:`true` on success, or :const:`false` otherwise
+      :rtype: :class:`bool`
+*/
+int LuaMap::set_port_space(lua_State* L) {
+	const int x = luaL_checkint32(L, 2);
+	const int y = luaL_checkint32(L, 3);
+	const bool allowed = luaL_checkboolean(L, 4);
+	const bool success = get_egbase(L).mutable_map()->set_port_space(
+	   get_egbase(L).world(), Widelands::Coords(x, y), allowed);
+	lua_pushboolean(L, success);
+	return 1;
 }
 
 /*

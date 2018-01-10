@@ -46,9 +46,8 @@ function terrain_affinity_help(immovable_description)
                (_"%1% (%2%)"):bformat(v.terrain.descname, v.terrain.editor_category.descname) .. "<br>" ..
                -- TRANSLATORS: Help text - Probability to grow for an immovable
                (_("%2.1f%%")):bformat(100 * v.probability)
-            ) .. spacer()
+            ) .. vspace(6)
       end
    end
    return result
 end
-
