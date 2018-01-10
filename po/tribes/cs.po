@@ -1,16 +1,16 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2017 Widelands Development Team
+# Copyright (C) 2005-2018 Widelands Development Team
 # 
 # Translators:
 # GunChleoc, 2014
 # Markus7cz <markus7cz@gmail.com>, 2008
-# Milan Fašina <matrix17@seznam.cz>, 2016-2017
+# Milan Fašina <matrix17@seznam.cz>, 2016-2018
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-12-27 17:09+0000\n"
-"PO-Revision-Date: 2017-12-29 16:13+0000\n"
+"POT-Creation-Date: 2018-01-04 13:28+0000\n"
+"PO-Revision-Date: 2018-01-09 21:47+0000\n"
 "Last-Translator: Milan Fašina <matrix17@seznam.cz>\n"
 "Language-Team: Czech (http://www.transifex.com/widelands/widelands/language/cs/)\n"
 "MIME-Version: 1.0\n"
@@ -666,7 +666,7 @@ msgstr "Domek porybného"
 #. TRANSLATORS: Completed/Skipped/Did not start breeding fish because ...
 #: ../../data/tribes/buildings/productionsites/atlanteans/fishbreeders_house/init.lua:42
 msgid "breeding fish"
-msgstr "chovám ryby"
+msgstr "chování ryb"
 
 #: ../../data/tribes/buildings/productionsites/atlanteans/fishbreeders_house/init.lua:52
 #: ../../data/tribes/buildings/productionsites/atlanteans/fishers_house/init.lua:56
@@ -876,12 +876,12 @@ msgstr "Mlýn"
 #. TRANSLATORS: Completed/Skipped/Did not start grinding corn because ...
 #: ../../data/tribes/buildings/productionsites/atlanteans/mill/init.lua:65
 msgid "grinding corn"
-msgstr "melu kukuřici"
+msgstr "mletí kukuřice"
 
 #. TRANSLATORS: Completed/Skipped/Did not start grinding blackrootbecause ...
 #: ../../data/tribes/buildings/productionsites/atlanteans/mill/init.lua:78
 msgid "grinding blackroot"
-msgstr "melu rozrazil"
+msgstr "mletí rozrazilu"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/atlanteans/quarry/init.lua:7
@@ -965,14 +965,14 @@ msgstr "Slévárna"
 #: ../../data/tribes/buildings/productionsites/barbarians/smelting_works/init.lua:70
 #: ../../data/tribes/buildings/productionsites/empire/smelting_works/init.lua:71
 msgid "smelting iron"
-msgstr "tavím železo"
+msgstr "tavení železa"
 
 #. TRANSLATORS: Completed/Skipped/Did not start smelting gold because ...
 #: ../../data/tribes/buildings/productionsites/atlanteans/smelting_works/init.lua:80
 #: ../../data/tribes/buildings/productionsites/barbarians/smelting_works/init.lua:84
 #: ../../data/tribes/buildings/productionsites/empire/smelting_works/init.lua:85
 msgid "smelting gold"
-msgstr "tavím zlato"
+msgstr "tavení zlata"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/atlanteans/smokery/init.lua:7
@@ -1008,77 +1008,77 @@ msgstr "Dílna"
 #: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:94
 #: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:107
 msgid "making a bread paddle"
-msgstr "vyrábím lopatu na chléb"
+msgstr "vyrábění lopaty na chléb"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a pair of buckets
 #. because ...
 #: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:97
 msgid "making a pair of buckets"
-msgstr "vyrábím kýble"
+msgstr "vyrábění kýble"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making fire tongs because ...
 #: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:110
 #: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:118
 #: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:119
 msgid "making fire tongs"
-msgstr "vyrábím kovářské kleště"
+msgstr "vyrábění kovářských kleští"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a fishing net because
 #. ...
 #: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:123
 msgid "making a fishing net"
-msgstr "vyrábím rybářskou síť"
+msgstr "vyrábění rybářské sítě"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a hammer because ...
 #: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:136
 #: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:142
 #: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:143
 msgid "making a hammer"
-msgstr "vyrábím kladivo"
+msgstr "vyrábění kladiva"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a hook pole because ...
 #: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:149
 msgid "making a hook pole"
-msgstr "vyrábím hák na tyči"
+msgstr "vyrábění háku na tyči"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a hunting bow because
 #. ...
 #: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:162
 msgid "making a hunting bow"
-msgstr "vyrábím lovecký luk"
+msgstr "vyrábění loveckého luku"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making milking tongs because
 #. ...
 #: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:175
 msgid "making milking tongs"
-msgstr "vyrábím pavoučí kleště"
+msgstr "vyrábění pavoučích kleští"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a pick because ...
 #: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:188
 #: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:178
 #: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:179
 msgid "making a pick"
-msgstr "vyrábím krumpáč"
+msgstr "vyrábění krumpáče"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a saw because ...
 #: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:201
 #: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:191
 msgid "making a saw"
-msgstr "vyrábím pilu"
+msgstr "vyrábění pily"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a scythe because ...
 #: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:214
 #: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:190
 #: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:203
 msgid "making a scythe"
-msgstr "vyrábím kosu"
+msgstr "vyrábění kosy"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a shovel because ...
 #: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:227
 #: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:202
 #: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:215
 msgid "making a shovel"
-msgstr "vyrábím lopatu"
+msgstr "vyrábění lopaty"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/atlanteans/weaponsmithy/init.lua:7
@@ -1546,28 +1546,28 @@ msgstr "Dílna na železo"
 #: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:106
 #: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:83
 msgid "making a felling ax"
-msgstr "vyrábím těžební sekeru"
+msgstr "vyrábění těžební sekery"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a fishing rod because
 #. ...
 #: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:130
 #: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:131
 msgid "making a fishing rod"
-msgstr "vyrábím rybářský prut"
+msgstr "vyrábění rybářského prutu"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a hunting spear because
 #. ...
 #: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:154
 #: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:155
 msgid "making a hunting spear"
-msgstr "vyrábím lovecký oštěp"
+msgstr "vyrábění loveckého oštěpu"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making kitchen tools because
 #. ...
 #: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:166
 #: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:167
 msgid "making kitchen tools"
-msgstr "vyrábím kuchyňské náčiní"
+msgstr "vyrábění kuchyňského náčiní"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/barbarians/micro_brewery/init.lua:7
@@ -1975,7 +1975,7 @@ msgstr "Mlýn"
 #. TRANSLATORS: Completed/Skipped/Did not start grinding wheat because ...
 #: ../../data/tribes/buildings/productionsites/empire/mill/init.lua:53
 msgid "grinding wheat"
-msgstr "melu pšenici"
+msgstr "mletí pšenice"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/empire/piggery/init.lua:7
@@ -2026,7 +2026,7 @@ msgstr "Ovčín"
 #. TRANSLATORS: Completed/Skipped/Did not start breeding sheep because ...
 #: ../../data/tribes/buildings/productionsites/empire/sheepfarm/init.lua:54
 msgid "breeding sheep"
-msgstr "chovám ovce"
+msgstr "chování ovcí"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/empire/shipyard/init.lua:7
@@ -2067,7 +2067,7 @@ msgstr "Dílna"
 #. TRANSLATORS: Completed/Skipped/Did not start making a basket because ...
 #: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:95
 msgid "making a basket"
-msgstr "vyrábím koš"
+msgstr "vyrábění koše"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/empire/vineyard/init.lua:7
@@ -2155,7 +2155,7 @@ msgstr "Vinný sklep"
 #. TRANSLATORS: Completed/Skipped/Did not start making wine because ...
 #: ../../data/tribes/buildings/productionsites/empire/winery/init.lua:56
 msgid "making wine"
-msgstr "vyrábím víno"
+msgstr "vyrábění vína"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/trainingsites/atlanteans/dungeon/init.lua:84

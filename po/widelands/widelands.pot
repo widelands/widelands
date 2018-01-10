@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2018-01-04 13:28+0000\n"
+"POT-Creation-Date: 2018-01-10 16:38+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -15,11 +15,13 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 #: ../../data/scripting/format_scenario.lua:36
+#: ../../data/scripting/richtext_scenarios.lua:34
 #, lua-format
 msgid "“%s”"
 msgstr ""
 
 #: ../../data/scripting/format_scenario.lua:84
+#: ../../data/scripting/richtext_scenarios.lua:85
 msgid "New Objective"
 msgid_plural "New Objectives"
 msgstr[0] ""
@@ -498,7 +500,7 @@ msgid "Current: %s"
 msgstr ""
 
 #: ../../src/editor/ui_menus/help.cc:42 ../../src/ui_fsmenu/multiplayer.cc:137
-#: ../../src/wui/encyclopedia_window.cc:145
+#: ../../src/wui/encyclopedia_window.cc:138
 #: ../../src/wui/tribal_encyclopedia.cc:56
 msgid "Error!"
 msgstr ""
