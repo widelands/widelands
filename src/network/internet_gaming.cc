@@ -170,8 +170,7 @@ bool InternetGaming::do_login(bool should_relogin) {
 			if (state_ == LOBBY) {
 				if (!should_relogin) {
 					format_and_add_chat(
-					   "", "", true, _("For hosting a game, please take a look at the notes at:"));
-					format_and_add_chat("", "", true, "http://wl.widelands.org/wiki/InternetGaming");
+					   "", "", true, _("Users marked with IRC will possibly not react to messages."));
 				}
 
 				// Try to establish a second connection to tell the metaserver about our IPv4 address
@@ -806,8 +805,18 @@ void InternetGaming::send(const std::string& msg) {
 			   _("Message could not be sent: Was this supposed to be a private message?"));
 			return;
 		}
+		std::string recipient = msg.substr(1, space - 1);
+		for (const InternetClient& client : clientlist_) {
+			if (recipient == client.name && client.build_id == "IRC") {
+				format_and_add_chat(
+				   "", "", true,
+				   _("Private message to IRC users are not supported."));
+				return;
+			}
+		}
+
 		s.string(trimmed);                   // message
-		s.string(msg.substr(1, space - 1));  // recipient
+		s.string(recipient);  // recipient
 
 		format_and_add_chat(clientname_, msg.substr(1, space - 1), false, msg.substr(space + 1));
 
