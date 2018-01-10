@@ -48,7 +48,7 @@ obj_build_quarry = {
    title=_"Build a quarry",
    number = 1,
    body = objective_text(_"Quarry",
-      listitem_bullet(_[[Build a quarry close to the abundant rocks, so we can free some building plots and get some valuable resources.]])
+      listitem_bullet(_[[Build a quarry close to the abundant rocks to free some building plots and get some valuable resources.]])
    ),
 }
 
@@ -66,7 +66,7 @@ obj_lower_marble_column_demand = {
    title=_"Lower the demand for marble columns",
    number = 1,
    body = objective_text(_"Lower Demand for Marble Columns",
-      listitem_bullet(_[[We should save some marble for buildings. So, please lower the demand for marble columns in the economy settings to four.]]) ..
+      listitem_bullet(_[[Lower the demand for marble columns in the economy settings to four. This will help to save some marble for buildings.]]) ..
       listitem_arrow(_[[Remember that you can access the economy settings by clicking on any flag.]])
    ),
 }
@@ -76,7 +76,7 @@ obj_find_port_space = {
    title=_"Find a port space on the small island",
    number = 1,
    body = objective_text(_"Port Space",
-      listitem_bullet(_[[In order to regain access to the sea, we first must discover a port space.]])
+      listitem_bullet(_[[Search for a port space in order to regain access to the sea.]])
    ),
 }
 
@@ -86,7 +86,7 @@ obj_build_port_and_shipyard = {
    number = 2,
    body = objective_text(_"Ship Industry",
       listitem_bullet(_[[Build a port to set sail from this island.]])..
-     listitem_bullet(_[[Build a shipyard to produce the ships to sail on.]])),
+      listitem_bullet(_[[Build a shipyard to produce the ships to sail on.]])),
 }
 
 obj_produce_wheat = {
@@ -94,7 +94,7 @@ obj_produce_wheat = {
    title=_"Produce at least 50 sheaves of wheat",
    number = 1,
    body = objective_text(_"Wheat Production",
-      listitem_bullet(_[[To get our wool production started, we need at least 50 sheaves of wheat.]])
+      listitem_bullet(_[[Produce at least 50 sheaves of wheat to get your wool production started.]])
    ),
 }
 
@@ -103,7 +103,7 @@ obj_produce_cloth = {
    title=_"Produce cloth for building our first ship",
    number = 1,
    body = objective_text(_"Cloth Production",
-      listitem_bullet(_[[Now let’s turn all the wheat into wool (at least 50 bales) and then use the wool to weave cloth in order to build a ship.]])
+      listitem_bullet(_[[Now turn all the wheat into wool (at least 50 bales) and then use the wool to weave cloth in order to build a ship.]])
    ),
 }
 
@@ -113,8 +113,8 @@ obj_build_expedition_ports = {
    number = 1,
    -- TRANSLATORS: Objective - create 2 expeditions and found new colonies with them
    body = objective_text(_"Build 2 Expedition Ports",
-      listitem_bullet(_[[We should explore the island in the south. Use an expedition to build a port there. Afterwards, let’s try to find some mining resources.]]) ..
-     listitem_bullet(_[[We should send a ship northwards to gather some intelligence about the Barbarians. Try to build a port on the island and found an outpost.]])
+      listitem_bullet(_[[Explore the island in the south. Use an expedition to build a port there. Afterwards, try to find some mining resources.]]) ..
+     listitem_bullet(_[[Send a ship northwards to gather some intelligence about the Barbarians. Try to build a port on the island and found an outpost.]])
    ),
 }
 
@@ -123,7 +123,7 @@ obj_produce_gold = {
    title=_"Produce gold to send out expeditions",
    number = 1,
    body = objective_text(_"Gold Production",
-      listitem_bullet(_[[We need to produce at least 6 gold to be able to colonize our vicinity.]])
+      listitem_bullet(_[[Produce at least 6 gold to be able to colonize your vicinity.]])
    ),
 }
 
@@ -132,7 +132,7 @@ obj_conquer_all = {
    title=_"Defeat the Barbarians",
    number = 1,
    body = objective_text(_"Defeat the Enemy",
-      listitem_bullet(_[[We should end the Barbarians’ existence in this part of the world.]])
+      listitem_bullet(_[[End the Barbarians’ existence in this part of the world.]])
    ),
 }
 
@@ -141,7 +141,7 @@ obj_find_all_ports = {
    title=_"Explore further and build ports",
    number = 1,
    body = objective_text(_"Explore Additional Islands and Search for Port Spaces",
-      listitem_bullet(_[[We should discover more land and build as many ports as we can.]])
+      listitem_bullet(_[[Discover more land in your vicinity and build as many ports as you can.]])
    ),
 }
 
@@ -151,7 +151,7 @@ obj_find_artifacts = {
    title=_"Recover the shrine",
    number = 1,
    body = text_line("</p>".. h2(_"Find the Holy Shrine"),
-       listitem_bullet(_[[We need to find and secure all six pieces of the holy shrine of Neptune.]]), "map:artifacts_models.png")
+       listitem_bullet(_[[Find and secure all six pieces of the holy shrine of Neptune.]]), "map:artifacts_models.png")
 }
 
 obj_training = {
@@ -159,7 +159,7 @@ obj_training = {
    title=_"Build a training infrastructure",
    number = 3,
    body = objective_text(_"Training Infrastructure",
-      listitem_bullet(_[[Build a training camp, some barracks and an arena or colosseum to train our soldiers.]])
+      listitem_bullet(_[[Build a training camp, some barracks and an arena or colosseum to train your soldiers.]])
    ),
 }
 
