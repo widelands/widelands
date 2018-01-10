@@ -162,7 +162,7 @@ InteractivePlayer::InteractivePlayer(Widelands::Game& g,
      auto_roadbuild_mode_(global_s.get_bool("auto_roadbuild_mode", true)),
      flag_to_connect_(Widelands::Coords::null()) {
 	add_toolbar_button(
-	   "wui/menus/menu_options_menu", "options_menu", _("Main Menu"), &options_, true);
+	   "wui/menus/menu_options_menu", "options_menu", _("Main menu"), &options_, true);
 	options_.open_window = [this] { new GameOptionsMenu(*this, options_, main_windows_); };
 
 	add_toolbar_button(
@@ -178,7 +178,7 @@ InteractivePlayer::InteractivePlayer(Widelands::Game& g,
 	minimap_registry().open_window = [this] { toggle_minimap(); };
 
 	toggle_buildhelp_ = add_toolbar_button(
-	   "wui/menus/menu_toggle_buildhelp", "buildhelp", _("Show Building Spaces (on/off)"));
+	   "wui/menus/menu_toggle_buildhelp", "buildhelp", _("Show building spaces (on/off)"));
 	toggle_buildhelp_->sigclicked.connect(boost::bind(&InteractiveBase::toggle_buildhelp, this));
 	reset_zoom_ = add_toolbar_button("wui/menus/menu_reset_zoom", "reset_zoom", _("Reset zoom"));
 	reset_zoom_->sigclicked.connect([this] {
@@ -204,7 +204,7 @@ InteractivePlayer::InteractivePlayer(Widelands::Game& g,
 	   "wui/menus/menu_toggle_oldmessage_menu", "messages", _("Messages"), &message_menu_, true);
 	message_menu_.open_window = [this] { new GameMessageMenu(*this, message_menu_); };
 
-	add_toolbar_button("ui_basic/menu_help", "help", _("Tribal Encyclopedia"), &encyclopedia_, true);
+	add_toolbar_button("ui_basic/menu_help", "help", _("Help"), &encyclopedia_, true);
 	encyclopedia_.open_window = [this] {
 		new TribalEncyclopedia(*this, encyclopedia_, &game().lua());
 	};

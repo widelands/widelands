@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-09-15 18:56+0000\n"
-"PO-Revision-Date: 2017-09-23 20:46+0000\n"
+"POT-Creation-Date: 2017-12-27 17:09+0000\n"
+"PO-Revision-Date: 2017-12-29 15:32+0000\n"
 "Last-Translator: Milan Fašina <matrix17@seznam.cz>\n"
 "Language-Team: Czech (http://www.transifex.com/widelands/widelands/language/cs/)\n"
 "MIME-Version: 1.0\n"
@@ -636,8 +636,8 @@ msgstr "Máš další otázky? Naše FAQ, wiki a samozřejmě komunitní forum n
 #: ../../data/txts/tips/general_game.lua:28
 msgid ""
 "Use the priority buttons in building windows to adjust delivery of a "
-"specific ware."
-msgstr "Pro nastavení přepravy specifické suroviny, lze použít tlačítka priority v okně výstavby."
+"specific ware. Pressing Ctrl while clicking will adjust all wares at once."
+msgstr "Upravit prioritu přepravy určité suroviny, je možné v okně výstavby. Stiskem Ctrl a klikáním zvýšíte prioritu pro všechny suroviny najednou."
 
 #: ../../data/txts/tips/general_game.lua:32
 msgid ""

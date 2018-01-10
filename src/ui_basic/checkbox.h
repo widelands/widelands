@@ -104,6 +104,8 @@ struct Checkbox : public Statebox {
 
 	/**
 	 * Pictorial Checkbox
+	 *
+	 * Text conventions: Sentence case for the 'tooltip_text'
 	 */
 	Checkbox(Panel* const parent,
 	         Vector2i const p,
@@ -116,6 +118,9 @@ struct Checkbox : public Statebox {
 	 * Textual Checkbox
 	 * If width is set to 0, the checkbox will set its width automatically.
 	 * Otherwise, it will take up multiple lines if necessary (automatic height).
+	 *
+	 *
+	 * Text conventions: Sentence case both for the 'label_text' and the 'tooltip_text'
 	 */
 	Checkbox(Panel* const parent,
 	         Vector2i const p,

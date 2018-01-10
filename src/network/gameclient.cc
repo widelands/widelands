@@ -35,7 +35,7 @@
 #include "io/filewrite.h"
 #include "logic/filesystem_constants.h"
 #include "logic/game.h"
-#include "logic/map_objects/tribes/tribes.h"
+#include "logic/map_objects/tribes/tribe_basic_info.h"
 #include "logic/player.h"
 #include "logic/playercommand.h"
 #include "logic/playersmanager.h"
@@ -744,7 +744,7 @@ void GameClient::handle_packet(RecvPacket& packet) {
 	case NETCMD_SETTING_TRIBES: {
 		d->settings.tribes.clear();
 		for (uint8_t i = packet.unsigned_8(); i; --i) {
-			TribeBasicInfo info = Widelands::get_tribeinfo(packet.string());
+			Widelands::TribeBasicInfo info = Widelands::get_tribeinfo(packet.string());
 
 			// Get initializations (we have to do this locally, for translations)
 			LuaInterface lua;
@@ -753,7 +753,7 @@ void GameClient::handle_packet(RecvPacket& packet) {
 				std::string const initialization_script = packet.string();
 				std::unique_ptr<LuaTable> t = lua.run_script(initialization_script);
 				t->do_not_warn_about_unaccessed_keys();
-				info.initializations.push_back(TribeBasicInfo::Initialization(
+				info.initializations.push_back(Widelands::TribeBasicInfo::Initialization(
 				   initialization_script, t->get_string("descname"), t->get_string("tooltip")));
 			}
 			d->settings.tribes.push_back(info);
