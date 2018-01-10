@@ -33,8 +33,8 @@ function ware_help_general_string(tribe, ware_description)
    purpose_text = pgettext("sentence_separator", "%s %s"):bformat(ware_helptext(), ware_helptext(tribe.name))
 
    -- TODO(GunChleoc): Split into purpose and note
-   local result = rt(h2(_"Purpose")) ..
-      rt("image=" .. ware_description.icon_name, p(purpose_text))
+   local result = h2(_"Purpose") ..
+      li_image(ware_description.icon_name, purpose_text)
    return result
 end
 
@@ -53,7 +53,7 @@ function ware_help_producers_string(tribe, ware_description)
    for i, building in ipairs(ware_description.producers) do
       if (tribe:has_building(building.name)) then
          -- TRANSLATORS: Ware Encyclopedia: A building producing a ware
-         result = result .. rt(h2(_"Producer"))
+         result = result .. h2(_"Producer")
          result = result .. dependencies({building, ware_description}, building.descname)
 
          -- Find out which programs in the building produce this ware
@@ -94,7 +94,7 @@ function ware_help_producers_string(tribe, ware_description)
             if (produced_wares_counters[program_name] > 0) then
                result = result
                   -- TRANSLATORS: Ware Encyclopedia: Wares produced by a productionsite
-                  .. rt(h3(ngettext("Ware produced:", "Wares produced:", produced_wares_counters[program_name])))
+                  .. h3(ngettext("Ware produced:", "Wares produced:", produced_wares_counters[program_name]))
                   .. produced_wares_strings[program_name]
             end
          end
@@ -155,7 +155,7 @@ function ware_help_consumers_string(tribe, ware_description)
    -- Now show consumers (buildings + workers)
    if (consumers_amount > 0) then
       -- TRANSLATORS: Ware Encyclopedia: A list of buildings and / or workers that consume a ware
-      result = result .. rt(h2(ngettext("Consumer", "Consumers", consumers_amount)))
+      result = result .. h2(ngettext("Consumer", "Consumers", consumers_amount))
       if (consumers ~= "") then
          result = result .. consumers_string
       end
