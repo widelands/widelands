@@ -116,7 +116,7 @@ obj_heroes = {
    title=_"Train at least 3 heroes",
    number = 1,
    body = objective_text(_"Hero Training",
-      listitem_bullet(_[[Use your resources wisely to train at least three heroes.]])),
+      listitem_bullet(_[[Use your resources wisely to train at least three fully promoted heroes.]])),
 }
 
 obj_produce_tools = {
@@ -165,10 +165,10 @@ obj_training = {
 
 obj_upgrade = {
    name = "upgrade",
-   title=_"Build a training camp and upgrade the colosseum",
+   title=_"Build a training camp and enhance the arena",
    number = 1,
    body = objective_text(_"More Efficient Training Buildings",
-      listitem_bullet(_[[Build a training camp and enhance your colosseum to an arena.]])
+      listitem_bullet(_[[Build a training camp and enhance your arena to a colosseum.]])
    ),
 }
 
@@ -277,7 +277,7 @@ amalea = {
    title=_"Amalea Looks Puzzled",
    body= amalea1(_"Amalea is doubtful…",
       -- TRANSLATORS: Amalea
-      _([[Ave Saledus. On the one hand you are right, it really is a delight to see our homeland again. But on the other hand. I have the impression that something went deeply wrong here.]])
+      _([[Ave, Saledus! On the one hand you are right, it really is a delight to see our homeland again. But on the other hand, I have the impression that something went deeply wrong here.]])
       .. paragraphdivider() ..
       -- TRANSLATORS: Amalea
       _([[Have a look at the economy. There is hardly any productivity at all. Whoever managed our country while we were absent created utter chaos. I’m not quite sure how we can fix this, if at all possible.]])),
@@ -637,9 +637,9 @@ saledus_8 = {
    title=_"We Just Need Another Hero",
    body= saledus4(_"Saledus is in a good mood…",
       -- TRANSLATORS: Saledus
-      _([[General, now that we have more and better beer in addition to enhanced training facilities, we should train as many heroes as we can.]])
+      _([[General, now that we have more and better beer in addition to enhanced training facilities, we should train as many fully promoted soldiers as we can. I really would consider them heroes after that.]])
       .. paragraphdivider() ..
-      _([[It will give us great advantage in battle if our soldiers are much more powerful than the Barbarians’. So, we need to spend our resources wisely to get heroes as soon as we can.]])
+      _([[It will give us great advantage in battle if our soldiers are much more powerful than the Barbarians’. So, we need to spend our resources wisely to get some heroes as soon as we can.]])
       .. paragraphdivider() ..
       _([[I would say that three fully trained heroes should be sufficient to begin with. But don’t forget to send them to the front line, because they are not that useful back home.]]))
       .. new_objectives(obj_heroes),
