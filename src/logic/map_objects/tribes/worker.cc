@@ -2680,6 +2680,7 @@ void Worker::start_task_scout(Game& game, uint16_t const radius, uint32_t const 
 				}
 			}
 		}
+
 		// I suppose that this never triggers. Anyway. In savegame,
 		// I assume that the vector length fits to eight bits. Therefore,
 		while (254 < scouts_worklist.size()) {
