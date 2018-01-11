@@ -108,7 +108,7 @@ obj_deal_with_julia = {
    title=_"Deal with Julia to get the technology",
    number = 1,
    body = objective_text(_"Diplomacy: Trade or War",
-      listitem_bullet(_[[Decide: Either collect 35 wheat and 15 wine for the goddess in your headquarters or conquer the monastery.]])),
+      listitem_bullet(_[[Decide: Either collect 35 sheaves of wheat and 15 bottles of wine for the goddess in your headquarters or conquer the monastery.]])),
 }
 
 obj_heroes = {
@@ -252,7 +252,7 @@ marcus_1 = {
    title=_"Welcome Back",
    body= marcus(_"A high Fremil official is welcoming you…",
       -- TRANSLATORS: Marcus - Mayor of Fremil welcoming Lutius and explaining the chaos
-      _([[Ave Sire! The people and me are so glad to see you returning back home. We really need some good leadership around here.]])
+      _([[Ave, Sire! The people and me are so glad to see you returning back home. We really need some good leadership around here.]])
       .. paragraphdivider() ..
       _([[As you have already noticed, things have gone terribly wrong around here since you left.]])),
    posy=1,
@@ -291,7 +291,7 @@ amalea_1 = {
       _([[Lutius, in my opinion this will again be a very difficult challenge. But I’m afraid that we’re doomed to manage this situation. To make things even worse, I was met with a nasty surprise at our warehouses: they’re all empty. You can hardly find a grain of dust left in there: no wares, no tools, no workers and no soldiers either.]])
       .. paragraphdivider() ..
       -- TRANSLATORS: Amalea
-      _([[So, first of all we need some building materials to start correcting the mistakes made by the infamous secretary. I think we should try dismantling unproductive small buildings to recover some building materials from them and collect them in our headquarters. As far as I can see now, the fishermen’s houses and the quarries don’t have any resources near them. The lumberjacks’ houses and the well seem also to be inefficient or worn out.]])
+      _([[So, first of all we need some building materials to start correcting the mistakes made by the infamous secretary. I think we should try dismantling unproductive small buildings to recover some building materials from them and collect them in our headquarters. As far as I can see now, the fishermen’s houses and the quarries don’t have any resources near them. The lumberjacks’ houses and the wells seem also to be inefficient or worn out.]])
       .. paragraphdivider() ..
       -- TRANSLATORS: Amalea
       _([[Additionally, we should restrict the input of all buildings which consume any of our building materials to zero. Or maybe we could even pause the production in all bigger buildings and get the workers some rest until we have produced some of their input wares.]]))
@@ -394,7 +394,7 @@ amalea_7 = {
       _([[And guess what? They are very old. Their houses and tools are worn and their seed is degenerated. For this reason, they need much more time than usual for planting trees.]])
       .. paragraphdivider() ..
       -- TRANSLATORS: Amalea
-      _([[The only solution is to build 2 new forester’s houses near our lumberjacks. Be sure to first build a new forester’s house and then eventually destroy the old one or at least expel the forester to change houses. Dismantling them is also possible but will not return any wares because they are so torn.]]))
+      _([[The only solution is to build two new forester’s houses near our lumberjacks. Be sure to first build a new forester’s house and then eventually destroy the old one or at least expel the forester to change houses. Dismantling them is also possible but will not return any wares because they are so torn.]]))
       .. new_objectives(obj_replace_foresters),
    posy=1,
    h=500,
@@ -665,7 +665,7 @@ saledus_10 = {
       -- TRANSLATORS: Saledus
       _([[Sire, finally we have defeated the Barbarians. We have expelled even the last of them. May they never come back!]])
       .. paragraphdivider() ..
-      _([[Now it is time to find out why this big mess around us could have happened. But first of all we should have a beer or two to celebrate our victory and our reclaimed freedom.]])),
+      _([[Now it is time to find out why this big mess around us could have happened. But first of all we should have some wine to celebrate our victory and our reclaimed freedom.]])),
    posy=1,
 }
 
@@ -689,7 +689,7 @@ julia_0 = {
    title=_"Worship to be Gifted",
    body= julia(_"Julia is demanding a sacrifice for Vesta…",
       -- TRANSLATORS: Julia - priestess of the goddess Vesta
-      _([[Ave Lutius, if you want us to help you, you first have to worship our goddess Vesta. Therefore deliver 35 wheat and 15 wine to prepare a worthy sacrifice for her.]])),
+      _([[Ave, Lutius! If you want us to help you, you first have to worship our goddess Vesta. Therefore deliver 35 sheaves of wheat and 15 bottles of wine to prepare a worthy sacrifice for her.]])),
    posy=1,
 }
 
