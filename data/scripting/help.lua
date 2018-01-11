@@ -41,7 +41,7 @@ function terrain_affinity_help(immovable_description)
 
    for k,v in ipairs(terrain_list) do
       if (k <= 10 or v.probability > 0.25) then
-         result = result .. picture_li(v.terrain.representative_image,
+         result = result .. li_image(v.terrain.representative_image,
                -- TRANSLATORS: Terrain name (Climate)
                (_"%1% (%2%)"):bformat(v.terrain.descname, v.terrain.editor_category.descname) .. "<br>" ..
                -- TRANSLATORS: Help text - Probability to grow for an immovable
