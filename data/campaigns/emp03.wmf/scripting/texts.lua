@@ -63,7 +63,7 @@ obj_build_sawmill_stonemason_and_lumberjacks = {
 
 obj_lower_marble_column_demand = {
    name = "lower_marble_column_demand",
-   title=_"Lower the demand for marble columns",
+   title=_"Lower the demand for marble columns to 4",
    number = 1,
    body = objective_text(_"Lower Demand for Marble Columns",
       listitem_bullet(_[[Lower the demand for marble columns in the economy settings to four. This will help to save some marble for buildings.]]) ..
@@ -91,7 +91,7 @@ obj_build_port_and_shipyard = {
 
 obj_produce_wheat = {
    name = "produce_50_wheat",
-   title=_"Produce at least 50 sheaves of wheat",
+   title=_"Produce wheat",
    number = 1,
    body = objective_text(_"Wheat Production",
       listitem_bullet(_[[Produce at least 50 sheaves of wheat to get your wool production started.]])
@@ -103,7 +103,7 @@ obj_produce_cloth = {
    title=_"Produce cloth for building our first ship",
    number = 1,
    body = objective_text(_"Cloth Production",
-      listitem_bullet(_[[Now turn all the wheat into wool (at least 50 bales) and then use the wool to weave cloth in order to build a ship.]])
+      listitem_bullet(_[[Now turn all the wheat into at least 50 bales of wool and then use the wool to weave cloth in order to build a ship.]])
    ),
 }
 
@@ -112,7 +112,7 @@ obj_build_expedition_ports = {
    title=_"Build 2 ports on distant islands",
    number = 1,
    -- TRANSLATORS: Objective - create 2 expeditions and found new colonies with them
-   body = objective_text(_"Build 2 Expedition Ports",
+   body = objective_text(_"Build two Expedition Ports",
       listitem_bullet(_[[Explore the island in the south. Use an expedition to build a port there. Afterwards, try to find some mining resources.]]) ..
      listitem_bullet(_[[Send a ship northwards to gather some intelligence about the Barbarians. Try to build a port on the island and found an outpost.]])
    ),
@@ -123,7 +123,7 @@ obj_produce_gold = {
    title=_"Produce gold to send out expeditions",
    number = 1,
    body = objective_text(_"Gold Production",
-      listitem_bullet(_[[Produce at least 6 gold to be able to colonize your vicinity.]])
+      listitem_bullet(_[[Produce at least six bars of gold to be able to colonize your vicinity.]])
    ),
 }
 
@@ -302,7 +302,7 @@ amalea_3 = {
       _([[I noticed that our stonemason has started his work, finally. He will cut the number of marble columns that we request in our basic economy settings.]])
       .. paragraphdivider() ..
       -- TRANSLATORS: Amalea
-      _([[But here’s the rub, if we use up all of our marble for columns, we might run out. So, we should lower the settings for marble columns in the economy settings to a smaller amount. I think a reserve of 4 columns might be sufficient for the moment being.]]))
+      _([[But here’s the rub, if we use up all of our marble for columns, we might run out. So, we should lower the settings for marble columns in the economy settings to a smaller amount. I think a reserve of four columns might be sufficient for the moment being.]]))
       .. new_objectives(obj_lower_marble_column_demand),
    posy=1,
    w=500,
@@ -359,7 +359,7 @@ amalea_4 = {
       _([[I understand the euphoria of Saledus, but we have some serious problems to solve first.]])
       .. paragraphdivider() ..
       -- TRANSLATORS: Amalea
-      _([[To send out an expeditionary ship, we first need a ship. Unfortunately, we have only 5 bales of cloth left, which we will need to build the port and the shipyard.]])
+      _([[To send out an expeditionary ship, we first need a ship. Unfortunately, we have only five bales of cloth left, which we will need to build the port and the shipyard.]])
       .. paragraphdivider() ..
       -- TRANSLATORS: Amalea
       _([[So, we need more cloth to finally be able to build ships. But there is no space on the island for building a whole economy to produce cloth. Therefore, we need to build the necessary wares step by step.]])
@@ -371,7 +371,7 @@ amalea_4 = {
       _([[After the production of enough wheat, we can dismantle the farm and build a sheep farm to produce wool. Later on, we could build a weaving mill in the same spot to use our wool for weaving cloth. But for the moment being, let’s start by producing a reasonable amount of wheat.]])
      .. paragraphdivider() ..
      -- TRANSLATORS: Amalea
-      _([[I think a stock of 50 wheat would be enough for starters. Perhaps we will have to adjust the target quantity for wheat to achieve this.]]))
+      _([[I think a stock of 50 sheaves of wheat would be enough for starters. Perhaps we will have to adjust the target quantity for wheat to achieve this.]]))
       .. new_objectives(obj_produce_wheat),
    posy=1,
    w=500,
@@ -533,7 +533,7 @@ amalea_13 = {
      .. paragraphdivider() ..
      _([[We need some cloth as well for producing armor in our armor smithy. We need it to build some of the training buildings for our soldiers. And most important and most imminent of all, we need it to send out expeditions.]])
      .. paragraphdivider() ..
-     _([[Therefore, I really recommend that we check our stock of cloth quite regularly to ensure that we keep enough cloth in reserve to send out some expeditions at least. As one expedition needs 3 bales of cloth, I think a reserve of 6 to 9 bales giving us 2 to 3 expeditions would be sufficient.]])),
+     _([[Therefore, I really recommend that we check our stock of cloth quite regularly to ensure that we keep enough cloth in reserve to send out some expeditions at least. As one expedition needs three bales of cloth, I think a reserve of six to nine bales giving us two to three expeditions would be sufficient.]])),
    posy=1,
    w=500,
 }
