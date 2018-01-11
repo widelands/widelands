@@ -454,7 +454,7 @@ amalea_12 = {
    title=_"Amalea is Very Content",
    body= amalea2(_"Amalea claps her hands…",
       -- TRANSLATORS: Amalea
-      _([[Well done. Now we are able to build more effective buildings to refine our wheat. And, best of all, we have a new ally who just provided us with lots of water, flour and beer. Now I really think that nothing can prevent us from getting stronger and conquering back our homeland.]])),
+      _([[Well done. Now we are able to build more efficient buildings to refine our wheat. And, best of all, we have a new ally who just provided us with lots of water, flour and beer. Now I really think that nothing can prevent us from getting stronger and conquering back our homeland.]])),
    posy=1,
 }
 
@@ -540,7 +540,7 @@ amalea_20 = {
       _([[Look Brother, I have just realized we haven’t cleared the road network yet. I think we should do so very quickly to free enough space for new buildings.]])
       .. paragraphdivider() ..
       -- TRANSLATORS: Amalea
-      _([[To achieve this, we should make sure that there aren’t more than three deadends (flags with only one road) and not more than one flag with more than four roads attached.]])),
+      _([[To achieve this, we should make sure that there aren’t more than three dead ends (flags with only one road) and not more than one flag with more than four roads attached.]])),
    posy=1,
 }
 
@@ -675,7 +675,7 @@ saledus_11 = {
       -- TRANSLATORS: Saledus
       _([[Sire, although we don’t have enough fully trained soldiers yet, we just have made contact with the enemy.]])
       .. paragraphdivider() ..
-      _([[We have to finish them off and regain control over our lands. They shall regret deeply that they ever came.]]))
+      _([[We have to finish them off and regain control over our lands. They shall regret deeply that they ever came!]]))
       .. new_objectives(obj_conquer_all),
    posy=1,
    h=500,
