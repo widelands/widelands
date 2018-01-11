@@ -5,7 +5,7 @@
 -- This script contains functions that are used both in the Tribal Encyclopedia
 -- and the Editor help.
 
-include "scripting/formatting.lua"
+include "scripting/richtext.lua"
 
 
 -- RST
