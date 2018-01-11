@@ -1,5 +1,5 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2017 Widelands Development Team
+# Copyright (C) 2005-2018 Widelands Development Team
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-12-27 17:14+0000\n"
+"POT-Creation-Date: 2018-01-04 13:28+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Milan Fašina <matrix17@seznam.cz>, 2017\n"
 "Language-Team: Czech (https://www.transifex.com/widelands/teams/35159/cs/)\n"
@@ -370,6 +370,8 @@ msgid ""
 "I am really afraid, because we are completely unprepared should the "
 "Barbarians decide to attack us."
 msgstr ""
+"Opravdu se bojím, protože jsme naprosto nepřipraveni, kdyby se barbaři "
+"rozhodli nás napadnout."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:252
 msgid "Welcome Back"
@@ -391,7 +393,7 @@ msgstr ""
 msgid ""
 "As you have already noticed, things have gone terribly wrong around here "
 "since you left."
-msgstr ""
+msgstr "Jak sis již jistě všiml, po tvém se zdejší situace rapidně zhoršila."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:262
 msgid "A Long Story"
@@ -448,10 +450,13 @@ msgid ""
 " managed our country while we were absent created utter chaos. I’m not quite"
 " sure how we can fix this, if at all possible."
 msgstr ""
+"Jen se podívej na hospodářství. Jen stěží se dá říci, že se vůbec něco "
+"vyrábí. Ať naši zemi spravoval kdokoliv, zatímco jsme byli pryč, vytvořil "
+"naprostý chaos. Vůbec nevím, jak to dáme dopořádku, pokud je to vůbec možné."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:288
 msgid "Amalea Investigates"
-msgstr ""
+msgstr "Amalea pátrá"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:289
 msgid "Amalea is nodding thoughtfully…"
@@ -502,6 +507,9 @@ msgid ""
 "can see, our farms aren’t producing anything and we can’t dismantle them. "
 "The only option is to destroy them."
 msgstr ""
+"Bratře, velmi se obávám, že opět nesu špatné zprávy. Jak je vidět, naše "
+"obilná pole neprodukují vůbec nic a nemůžeme je rozbrat. Jediná možnost je, "
+"je zničit."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:310
@@ -711,7 +719,7 @@ msgstr ""
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:416
 msgid "Amalea is getting used to bad news…"
-msgstr ""
+msgstr "Amalea si začíná zvykat na špatné zprávy..."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:418

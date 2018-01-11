@@ -37,6 +37,7 @@
 #include "io/filewrite.h"
 #include "logic/cmd_queue.h"
 #include "logic/game.h"
+#include "logic/game_data_error.h"
 #include "logic/player.h"
 #include "logic/queue_cmd_ids.h"
 #include "map_io/map_object_loader.h"
@@ -279,14 +280,29 @@ void MapObjectDescr::add_directional_animation(DirAnimations* anims, const std::
 		const std::string anim_name = prefix + std::string("_") + dirstrings[dir - 1];
 		try {
 			anims->set_animation(dir, get_animation(anim_name));
-		} catch (const MapObjectDescr::AnimationNonexistent&) {
-			throw GameDataError("MO: no directional animation '%s'", anim_name.c_str());
+		} catch (const GameDataError& e) {
+			throw GameDataError("MO: Missing directional animation: %s", e.what());
 		}
 	}
 }
 
-std::string MapObjectDescr::get_animation_name(uint32_t const anim) const {
+uint32_t MapObjectDescr::get_animation(char const* const anim) const {
+	std::map<std::string, uint32_t>::const_iterator it = anims_.find(anim);
+	if (it == anims_.end()) {
+		throw GameDataError("Unknown animation: %s for %s", anim, name().c_str());
+	}
+	return it->second;
+}
 
+uint32_t MapObjectDescr::get_animation(const std::string& animname) const {
+	return get_animation(animname.c_str());
+}
+
+uint32_t MapObjectDescr::main_animation() const {
+	return !anims_.empty() ? anims_.begin()->second : 0;
+}
+
+std::string MapObjectDescr::get_animation_name(uint32_t const anim) const {
 	for (const auto& temp_anim : anims_) {
 		if (temp_anim.second == anim) {
 			return temp_anim.first;

@@ -124,24 +124,10 @@ struct MapObjectDescr {
 		return type_;
 	}
 
-	struct AnimationNonexistent {};
-	uint32_t get_animation(char const* const anim) const {
-		std::map<std::string, uint32_t>::const_iterator it = anims_.find(anim);
-		if (it == anims_.end())
-			throw AnimationNonexistent();
-		return it->second;
-	}
-	uint32_t get_animation(const std::string& animname) const {
-		return get_animation(animname.c_str());
-	}
-
-	uint32_t main_animation() const {
-		return !anims_.empty() ? anims_.begin()->second : 0;
-	}
-
+	uint32_t get_animation(char const* const anim) const;
+	uint32_t get_animation(const std::string& animname) const;
+	uint32_t main_animation() const;
 	std::string get_animation_name(uint32_t) const;  ///< needed for save, debug
-	bool has_attribute(uint32_t) const;
-	static uint32_t get_attribute_id(const std::string& name, bool add_if_not_exists = false);
 
 	bool is_animation_known(const std::string& name) const;
 	void add_animation(const std::string& name, uint32_t anim);
@@ -161,6 +147,9 @@ struct MapObjectDescr {
 	const Image* icon() const;
 	/// Returns the image fileneme for the menu image if the MapObject has one, is empty otherwise
 	const std::string& icon_filename() const;
+
+	bool has_attribute(uint32_t) const;
+	static uint32_t get_attribute_id(const std::string& name, bool add_if_not_exists = false);
 
 protected:
 	// Add all the special attributes to the attribute list. Only the 'allowed_special'
