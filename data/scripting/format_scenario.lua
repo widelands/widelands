@@ -24,7 +24,7 @@
 --    :arg text: The text itself. If this is nil, :const:`title` is used as text
 --       instead and there will not be any title.
 --    :returns: the formatted text.
---
+
 function speech(img, clr, g_title, g_text)
    local title, text = g_title, g_text
    if not text then
