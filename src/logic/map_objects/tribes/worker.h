@@ -65,6 +65,7 @@ class Worker : public Bob {
 		int32_t iparam3;
 		int32_t iparam4;
 		int32_t iparam5;
+		int32_t iparam6;
 		std::string sparam1;
 
 		std::vector<std::string> sparamv;
@@ -258,12 +259,19 @@ private:
 	bool run_play_sound(Game&, State&, const Action&);
 	bool run_construct(Game&, State&, const Action&);
 
+	// helper function
+	int16_t findspace_helper_for_forester(const Coords& pos, const Map& map, Game& game);
+  
 	OPtr<PlayerImmovable> location_;   ///< meta location of the worker
 	Economy* economy_;                 ///< economy this worker is registered in
 	OPtr<WareInstance> carried_ware_;  ///< ware we are carrying
 	IdleWorkerSupply* supply_;         ///< supply while gowarehouse and not transfer
 	Transfer* transfer_;               ///< where we are currently being sent
 	int32_t current_exp_;              ///< current experience
+
+	// Only forester fills this in. There seems to be only one forester instance.
+	// If I concluded that wrong, then this will hog too much memory.
+	std::vector<int16_t> forester_cache_;
 
 	// saving and loading
 protected:

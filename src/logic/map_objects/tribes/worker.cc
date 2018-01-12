@@ -419,6 +419,82 @@ bool Worker::run_findobject(Game& game, State& state, const Action& action) {
 }
 
 /**
+ * findspace_helper_for_forester
+ *
+ * Making the run_findspace routine shorter, by putting one special case into its own function.
+ * This gets called many times each time the forester searches for a place for a sapling.
+ * Since this already contains three nested for-loops, I dedided to cache the values for a
+ * cpu/memory tradeoff (hint: Widelands is pretty heavy on my oldish PC).
+ * Since the implementation details of double could vary between platforms, I decided to
+ * quantize the terrain goodness into int16_t. This lowers the footprint of the caching,
+ * and also makes desyncs caused by different floats horribly unlikely.
+ *
+ * At the moment of writing, map changing is really infrequent (only in two scenarios)
+ * and even those do not affect this. However, since map changes are possible, this
+ * checks the reliability of the cached value with a small probability (~1%), If a
+ * disparency is found, the entire cache is nuked.
+ *
+ * If somebody in the future makes a scenario, where the land first is barren, and then
+ * spots of eden show up, the foresters will not immediately notice (because of the cache).
+ * They will eventually notice, and since the instance is shared between tribes,
+ * all foresters notice this at the same moment. I hope this is okay.
+ *
+ */
+
+int16_t Worker::findspace_helper_for_forester(const Coords& pos, const Map& map, Game& game) {
+
+	const MapIndex mi = map.get_index(pos, map.get_width());
+	const FCoords fpos = map.get_fcoords(pos);
+	const unsigned vecsize = 1 + unsigned(map.max_index());
+	// This if-statement should be true only once per game.
+	if (vecsize != forester_cache_.size()) {
+		forester_cache_.resize (vecsize, -1);
+	}
+	bool x_check = false;
+	if (-1 < forester_cache_[mi]) {
+		if (0 == ((game.logic_rand()) & 0xfe)) {
+			// Cached value found, but exceptionally not trusted.
+			x_check = true;
+		} else {
+			// Found the terrain forestability, no more work to do
+			return forester_cache_[mi];
+		}
+	}
+
+	// Okay, I do not know whether this terrain suits. Let's obtain the value (and then cache it)
+
+	const DescriptionMaintainer<ImmovableDescr>& immovables = game.world().immovables();
+
+	// TODO(kxq): could the tree_sapling come from config? Currently, there is only one sparam..
+	const uint32_t attribute_id = ImmovableDescr::get_attribute_id("tree_sapling");
+
+	double best = 0;
+	for (DescriptionIndex i = 0; i < immovables.size(); ++i) {
+		const ImmovableDescr& immovable_descr = immovables.get(i);
+		if (!immovable_descr.has_attribute(attribute_id)) {
+			continue;
+		}
+		if (immovable_descr.has_terrain_affinity()) {
+			double probability = probability_to_grow(
+			immovable_descr.terrain_affinity(), fpos, map, game.world().terrains());
+			if (probability > best) {
+				best = probability;
+			}
+		}
+	}
+	// quantize the obtained value
+        const int16_t correct_val = (std::numeric_limits<int16_t>::max() -1) * best;
+
+	if (x_check && (correct_val != forester_cache_[mi])) {
+		forester_cache_.clear();
+		forester_cache_.resize (vecsize, -1);
+	}
+	forester_cache_[mi] = correct_val;
+	return forester_cache_[mi];
+}
+
+
+/**
  * findspace key:value key:value ...
  *
  * Find a node based on a number of predicates.
@@ -556,6 +632,22 @@ bool Worker::run_findspace(Game& game, State& state, const Action& action) {
 
 	// Pick a location at random
 	state.coords = list[game.logic_rand() % list.size()];
+
+	// Special case: forester checks multiple locations instead of one.
+	if (1 < action.iparam6) {
+		// In the bug comments, somebody asked for unequal quality for the foresters of various tribes to find the best spot.
+		// Here stubborness is the number of slots to consider.
+		int stubborness = action.iparam6;
+		int16_t best = findspace_helper_for_forester(state.coords, map, game);
+		while (1 < stubborness--) {
+			const Coords altpos = list[game.logic_rand() % list.size()];
+			const int16_t alt_pos_goodness = findspace_helper_for_forester(altpos, map, game);
+			if (alt_pos_goodness > best) {
+				best = alt_pos_goodness;
+				state.coords = altpos;
+			}
+		}
+	}
 
 	++state.ivar1;
 	schedule_act(game, 10);
@@ -727,6 +819,7 @@ bool Worker::run_plant(Game& game, State& state, const Action& action) {
 	// picked to be a stable sorting one, so that no deyncs happen in
 	// multiplayer.
 	std::set<std::tuple<double, DescriptionIndex>> best_suited_immovables_index;
+
 
 	// Checks if the 'immovable_description' has a terrain_affinity, if so use it. Otherwise assume
 	// it

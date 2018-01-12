@@ -423,6 +423,7 @@ findspace
  * iparam3 = whether the "space" flag is set
  * iparam4 = whether the "breed" flag is set
  * iparam5 = Immovable attribute id
+ * iparam6 = Forester retries
  * sparam1 = Resource
  */
 void WorkerProgram::parse_findspace(Worker::Action* act, const std::vector<std::string>& cmd) {
@@ -434,6 +435,7 @@ void WorkerProgram::parse_findspace(Worker::Action* act, const std::vector<std::
 	act->iparam3 = 0;
 	act->iparam4 = 0;
 	act->iparam5 = -1;
+	act->iparam6 =  1;
 	act->sparam1 = "";
 
 	// Parse predicates
@@ -476,6 +478,13 @@ void WorkerProgram::parse_findspace(Worker::Action* act, const std::vector<std::
 			act->iparam3 = 1;
 		} else if (key == "avoid") {
 			act->iparam5 = MapObjectDescr::get_attribute_id(value);
+		} else if (key == "saplingsearches") {
+			int ival = strtol(value.c_str(), nullptr, 10);
+			if (1 != act->iparam6 || 1 > ival) {
+				throw wexception("Findspace: Failed to reuse iparam5 %d %d %s", act->iparam5, ival, value.c_str());
+			} else {
+				act->iparam6 = ival;
+		 	}
 		} else
 			throw wexception("Bad findspace predicate %s:%s", key.c_str(), value.c_str());
 	}
