@@ -37,7 +37,7 @@
  */
 struct StoryMessageBox : public UI::Window {
 	StoryMessageBox(Widelands::Game* game,
-						 const Widelands::Coords coords,
+	                const Widelands::Coords coords,
 	                const std::string& title,
 	                const std::string& body,
 	                int32_t x,
@@ -62,8 +62,8 @@ private:
 	UI::MultilineTextarea textarea_;
 	UI::Button ok_;
 
-	const uint32_t desired_speed_; // Remember the previous game speed
-	Widelands::Game* game_; // For controlling the game speed
+	const uint32_t desired_speed_;  // Remember the previous game speed
+	Widelands::Game* game_;         // For controlling the game speed
 };
 
 #endif  // end of include guard: WL_WUI_STORY_MESSAGE_BOX_H

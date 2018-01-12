@@ -157,7 +157,7 @@ struct GameSettings {
 	bool savegame;
 
 	/// List of tribes that players are allowed to choose
-	std::vector<TribeBasicInfo> tribes;
+	std::vector<Widelands::TribeBasicInfo> tribes;
 
 	/// Player configuration, with 0-based indices for players
 	std::vector<PlayerSettings> players;

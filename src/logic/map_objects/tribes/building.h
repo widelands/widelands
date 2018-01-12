@@ -167,6 +167,8 @@ public:
 	const BuildingHints& hints() const;
 	void set_hints_trainingsites_max_percent(int percent);
 
+	uint32_t get_unoccupied_animation() const;
+
 protected:
 	virtual Building& create_object() const = 0;
 	Building& create_constructionsite() const;
