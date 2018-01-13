@@ -269,10 +269,6 @@ private:
 	Transfer* transfer_;               ///< where we are currently being sent
 	int32_t current_exp_;              ///< current experience
 
-	// Only forester fills this in. There seems to be only one forester instance.
-	// If I concluded that wrong, then this will hog too much memory.
-	std::vector<int16_t> forester_cache_;
-
 	// saving and loading
 protected:
 	struct Loader : public Bob::Loader {

@@ -251,6 +251,10 @@ public:
 	void accept_trade(int trade_id);
 	void cancel_trade(int trade_id);
 
+	// TODO(kxq): The lifetime of game-instance is okay for this, but is this the right spot?
+	// TODO(kxq): I should find the place where LUA changes map, and clear this whenever that happens.
+	std::vector<int16_t> forester_cache_;
+
 private:
 	void sync_reset();
 

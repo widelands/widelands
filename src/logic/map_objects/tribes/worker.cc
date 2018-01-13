@@ -447,17 +447,17 @@ int16_t Worker::findspace_helper_for_forester(const Coords& pos, const Map& map,
 	const FCoords fpos = map.get_fcoords(pos);
 	const unsigned vecsize = 1 + unsigned(map.max_index());
 	// This if-statement should be true only once per game.
-	if (vecsize != forester_cache_.size()) {
-		forester_cache_.resize (vecsize, -1);
+	if (vecsize != game.forester_cache_.size()) {
+		game.forester_cache_.resize (vecsize, -1);
 	}
 	bool x_check = false;
-	if (-1 < forester_cache_[mi]) {
-		if (0 == ((game.logic_rand()) & 0xfe)) {
+	if (-1 < game.forester_cache_[mi]) {
+		if (0 == ((game.logic_rand()) & 0xfc)) {
 			// Cached value found, but exceptionally not trusted.
 			x_check = true;
 		} else {
 			// Found the terrain forestability, no more work to do
-			return forester_cache_[mi];
+			return game.forester_cache_[mi];
 		}
 	}
 
@@ -485,12 +485,12 @@ int16_t Worker::findspace_helper_for_forester(const Coords& pos, const Map& map,
 	// quantize the obtained value
         const int16_t correct_val = (std::numeric_limits<int16_t>::max() -1) * best;
 
-	if (x_check && (correct_val != forester_cache_[mi])) {
-		forester_cache_.clear();
-		forester_cache_.resize (vecsize, -1);
+	if (x_check && (correct_val != game.forester_cache_[mi])) {
+		game.forester_cache_.clear();
+		game.forester_cache_.resize (vecsize, -1);
 	}
-	forester_cache_[mi] = correct_val;
-	return forester_cache_[mi];
+	game.forester_cache_[mi] = correct_val;
+	return game.forester_cache_[mi];
 }
 
 
