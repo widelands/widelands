@@ -481,7 +481,7 @@ void WorkerProgram::parse_findspace(Worker::Action* act, const std::vector<std::
 		} else if (key == "saplingsearches") {
 			int ival = strtol(value.c_str(), nullptr, 10);
 			if (1 != act->iparam6 || 1 > ival) {
-				throw wexception("Findspace: Failed to reuse iparam5 %d %d %s", act->iparam5, ival, value.c_str());
+				throw wexception("Findspace: Forester should consider at least one spot.%d %d %s", act->iparam6, ival, value.c_str());
 			} else {
 				act->iparam6 = ival;
 		 	}

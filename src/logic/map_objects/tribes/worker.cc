@@ -820,7 +820,6 @@ bool Worker::run_plant(Game& game, State& state, const Action& action) {
 	// multiplayer.
 	std::set<std::tuple<double, DescriptionIndex>> best_suited_immovables_index;
 
-
 	// Checks if the 'immovable_description' has a terrain_affinity, if so use it. Otherwise assume
 	// it
 	// to be 1. (perfect fit). Adds it to the best_suited_immovables_index.
