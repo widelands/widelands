@@ -1,5 +1,5 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2017 Widelands Development Team
+# Copyright (C) 2005-2018 Widelands Development Team
 # 
 # Translators:
 # GunChleoc, 2016
@@ -14,8 +14,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-12-27 17:09+0000\n"
-"PO-Revision-Date: 2018-01-03 18:38+0000\n"
+"POT-Creation-Date: 2018-01-04 13:28+0000\n"
+"PO-Revision-Date: 2018-01-07 16:03+0000\n"
 "Last-Translator: Jukka Pakarinen\n"
 "Language-Team: Finnish (http://www.transifex.com/widelands/widelands/language/fi/)\n"
 "MIME-Version: 1.0\n"
@@ -2376,11 +2376,11 @@ msgid ""
 "Widelands was unable to get the IP address of the server in time. There "
 "seems to be a network problem, either on your side or on the side of the "
 "server.\n"
-msgstr ""
+msgstr "Widelands ei kyennyt selvittämään palvelimen IP-osoitetta ajoissa. Tämä näyttää verkko-ongelmalta, joko sinun tai palvelimen päässä.\n"
 
 #: ../../src/ui_fsmenu/internet_lobby.cc:367
 msgid "Connection Timed Out"
-msgstr ""
+msgstr "Yhteys Aikakatkaistu"
 
 #. * TRANSLATORS: This is shown for multiplayer games when no host
 #. * TRANSLATORS: server to connect to has been specified yet.
@@ -2478,7 +2478,7 @@ msgstr "Isäntä ei ole vielä valinnut karttaa tai pelitallennetta."
 
 #: ../../src/ui_fsmenu/launch_mpg.cc:319
 msgid "Saved Game is Directory"
-msgstr ""
+msgstr "Tallennettu Peli on Kansio"
 
 #: ../../src/ui_fsmenu/launch_mpg.cc:320
 msgid ""
@@ -2729,7 +2729,7 @@ msgstr "Kieli"
 
 #: ../../src/ui_fsmenu/options.cc:128
 msgid "Window Size"
-msgstr ""
+msgstr "Ikkunan Koko"
 
 #: ../../src/ui_fsmenu/options.cc:130
 msgid "Fullscreen"
@@ -2737,7 +2737,7 @@ msgstr "Koko ruutu"
 
 #: ../../src/ui_fsmenu/options.cc:131
 msgid "Grab input"
-msgstr ""
+msgstr "Kaappaa Syöte"
 
 #: ../../src/ui_fsmenu/options.cc:132
 msgid "Maximum FPS:"
@@ -2766,12 +2766,12 @@ msgstr "Etäisyys, jolla ikkunat kiinnittyvät ruudun laitoihin:"
 #: ../../src/ui_fsmenu/options.cc:165
 #: ../../src/wui/game_options_sound_menu.cc:28
 msgid "Enable music"
-msgstr ""
+msgstr "Soita taustamusiikkia"
 
 #: ../../src/ui_fsmenu/options.cc:166
 #: ../../src/wui/game_options_sound_menu.cc:31
 msgid "Enable sound effects"
-msgstr ""
+msgstr "Laita päälle ääniefektit"
 
 #: ../../src/ui_fsmenu/options.cc:167
 msgid "Play a sound at message arrival"
@@ -2891,7 +2891,7 @@ msgstr "Ole hyvä ja liitä tämä tieto raporttiisi.\n\nWidelands pyrkii tallen
 
 #: ../../src/wlapplication.cc:1207
 msgid "Invalid Address"
-msgstr ""
+msgstr "Virheellinen Osoite"
 
 #: ../../src/wlapplication.cc:1208
 msgid "The entered hostname or address is invalid and can’t be connected to."
@@ -2993,15 +2993,15 @@ msgstr "%:"
 
 #: ../../src/wui/building_statistics_menu.cc:130
 msgid "Small buildings"
-msgstr ""
+msgstr "Pienet rakennukset"
 
 #: ../../src/wui/building_statistics_menu.cc:133
 msgid "Medium buildings"
-msgstr ""
+msgstr "Keskikokoiset rakennukset"
 
 #: ../../src/wui/building_statistics_menu.cc:136
 msgid "Big buildings"
-msgstr ""
+msgstr "Isot rakennukset"
 
 #: ../../src/wui/building_statistics_menu.cc:139
 msgid "Mines"
@@ -3436,11 +3436,11 @@ msgstr "Poistu pelistä"
 
 #: ../../src/wui/game_options_sound_menu.cc:35
 msgid "Music volume"
-msgstr ""
+msgstr "Musiikin voimakkuus"
 
 #: ../../src/wui/game_options_sound_menu.cc:50
 msgid "Sound effects volume"
-msgstr ""
+msgstr "Ääniefektien voimakkuus"
 
 #: ../../src/wui/game_statistics_menu.cc:36
 msgid "Statistics Menu"
@@ -3448,15 +3448,15 @@ msgstr "Tilastot-valikko"
 
 #: ../../src/wui/game_statistics_menu.cc:40
 msgid "General statistics"
-msgstr ""
+msgstr "Yleistilastot"
 
 #: ../../src/wui/game_statistics_menu.cc:43
 msgid "Ware statistics"
-msgstr ""
+msgstr "Tuotetilastot"
 
 #: ../../src/wui/game_statistics_menu.cc:44
 msgid "Building statistics"
-msgstr ""
+msgstr "Rakennustilastot"
 
 #: ../../src/wui/game_statistics_menu.cc:46 ../../src/wui/stock_menu.cc:36
 #: ../../src/wui/ware_statistics_menu.cc:147 ../../src/wui/waresdisplay.cc:68
@@ -3653,7 +3653,7 @@ msgstr "Poistu toistosta"
 
 #: ../../src/wui/interactive_spectator.cc:57
 msgid "Save game"
-msgstr ""
+msgstr "Tallenna peli"
 
 #. * TRANSLATORS: %1% is a map's name.
 #: ../../src/wui/load_or_save_game.cc:55
@@ -3793,8 +3793,8 @@ msgstr[1] "Haluatko varmasti poistaa nämä %d peliä?"
 #: ../../src/wui/load_or_save_game.cc:272
 msgid "Confirm Deleting File"
 msgid_plural "Confirm Deleting Files"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Varmista Tiedoston Poistaminen"
+msgstr[1] "Varmista Tiedostojen Poistaminen"
 
 #. * TRANSLATORS: Display date for choosing a savegame/replay. Placeholders
 #. are:
@@ -4269,7 +4269,7 @@ msgstr "Näkymä laivalle"
 #. * TRANSLATORS: Window label when an expedition can't be canceled
 #: ../../src/wui/shipwindow.cc:172
 msgid "Cancel Expedition"
-msgstr ""
+msgstr "Keskeytä Tutkimusmatka"
 
 #: ../../src/wui/shipwindow.cc:172
 msgid ""
@@ -4302,11 +4302,11 @@ msgstr "HP: %1$u/%2$u AT: %3$u/%4$u DE: %5$u/%6$u EV: %7$u/%8$u"
 
 #: ../../src/wui/soldierlist.cc:401
 msgid "Prefer rookies"
-msgstr ""
+msgstr "Suosi alokkaita"
 
 #: ../../src/wui/soldierlist.cc:404
 msgid "Prefer heroes"
-msgstr ""
+msgstr "Suosi ammattisotilaita"
 
 #: ../../src/wui/stock_menu.cc:41
 msgid "Wares (total)"
@@ -4342,7 +4342,7 @@ msgstr "Kulutus"
 
 #: ../../src/wui/ware_statistics_menu.cc:141
 msgid "Economy health"
-msgstr ""
+msgstr "Talouden kunto"
 
 #: ../../src/wui/warehousewindow.cc:146
 msgid "Normal policy"
