@@ -261,7 +261,7 @@ private:
 
 	// helper function
 	int16_t findspace_helper_for_forester(const Coords& pos, const Map& map, Game& game);
-  
+
 	OPtr<PlayerImmovable> location_;   ///< meta location of the worker
 	Economy* economy_;                 ///< economy this worker is registered in
 	OPtr<WareInstance> carried_ware_;  ///< ware we are carrying

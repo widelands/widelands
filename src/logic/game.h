@@ -251,6 +251,9 @@ public:
 	void accept_trade(int trade_id);
 	void cancel_trade(int trade_id);
 
+	// Qualitity of terrain for tree planting normalized to int16, indexed by MapIndex
+	// -1 meaning invalid, shared between all tribes (on the same server)
+	// will be cleared when diffrences are detected (which happes only some times).
 	// TODO(kxq): The lifetime of game-instance is okay for this, but is this the right spot?
 	// TODO(kxq): I should find the place where LUA changes map, and clear this whenever that happens.
 	std::vector<int16_t> forester_cache_;
