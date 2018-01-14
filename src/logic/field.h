@@ -107,7 +107,7 @@ struct Field {
 	DescriptionIndex terrain_r() const {
 		return terrains.r;
 	}
-	void set_terrains(const  cs & i) {
+	void set_terrains(const Terrains& i) {
 		terrains = i;
 	}
 	void set_terrain(const TriangleIndex& t, DescriptionIndex const i)
