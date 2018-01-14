@@ -43,6 +43,8 @@ namespace Widelands {
 
 /// How often are statistics to be sampled.
 constexpr uint32_t kStatisticsSampleTime = 30000;
+// See forester_cache_
+constexpr int16_t  kInvalidForesterEntry = -1;
 
 struct Flag;
 struct Path;
@@ -55,12 +57,6 @@ struct PlayerEndStatus;
 class TrainingSite;
 class MilitarySite;
 
-/** class Game
- *
- * This class manages the entire lifetime of a game session, from creating the
- * game and setting options, selecting maps to the actual playing phase and the
- * final statistics screen(s).
- */
 enum {
 	gs_notrunning = 0,  // game is being prepared
 	gs_running,         // game was fully prepared at some point and is now in-game
@@ -72,6 +68,13 @@ class MapLoader;
 class PlayerCommand;
 class ReplayReader;
 class ReplayWriter;
+
+/** class Game
+ *
+ * This class manages the entire lifetime of a game session, from creating the
+ * game and setting options, selecting maps to the actual playing phase and the
+ * final statistics screen(s).
+ */
 
 class Game : public EditorGameBase {
 public:
@@ -98,7 +101,18 @@ public:
 	friend struct GamePlayerInfoPacket;
 	friend struct GameLoader;
 
-	Game();
+    // TODO(kxq): The lifetime of game-instance is okay for this, but is this the right spot?
+    // TODO(kxq): I should find the place where LUA changes map, and clear this whenever that happens.
+    // TODO(k.halfmann): this shoud perhpas better be a map, it will be quite sparse?
+
+    /** Qualitity of terrain for tree planting normalized to int16.
+     *
+     *  Indexed by MapIndex. -1  is an  ivalid entry. Shared between all tribes (on the same server)
+     *  will be cleared when diffrences are detected (which happes only some times).
+     */
+    std::vector<int16_t> forester_cache_;
+
+    Game();
 	~Game() override;
 
 	// life cycle
@@ -250,14 +264,6 @@ public:
 	int propose_trade(const Trade& trade);
 	void accept_trade(int trade_id);
 	void cancel_trade(int trade_id);
-
-	// Qualitity of terrain for tree planting normalized to int16, indexed by MapIndex
-	// -1 meaning invalid, shared between all tribes (on the same server)
-	// will be cleared when diffrences are detected (which happes only some times).
-	// TODO(kxq): The lifetime of game-instance is okay for this, but is this the right spot?
-	// TODO(kxq): I should find the place where LUA changes map, and clear this whenever that happens.
-	std::vector<int16_t> forester_cache_;
-
 private:
 	void sync_reset();
 

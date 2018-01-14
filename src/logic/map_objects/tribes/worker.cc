@@ -419,7 +419,7 @@ bool Worker::run_findobject(Game& game, State& state, const Action& action) {
 }
 
 /**
- * findspace_helper_for_forester
+ * Care about the game.forester_cache_.
  *
  * Making the run_findspace routine shorter, by putting one special case into its own function.
  * This gets called many times each time the forester searches for a place for a sapling.
@@ -440,24 +440,25 @@ bool Worker::run_findobject(Game& game, State& state, const Action& action) {
  * all foresters notice this at the same moment. I hope this is okay.
  *
  */
-
 int16_t Worker::findspace_helper_for_forester(const Coords& pos, const Map& map, Game& game) {
 
-	const MapIndex mi = map.get_index(pos, map.get_width());
-	const FCoords fpos = map.get_fcoords(pos);
+    std::vector<int16_t>& forester_cache = game.forester_cache_;
 	const unsigned vecsize = 1 + unsigned(map.max_index());
+    const MapIndex mi = map.get_index(pos, map.get_width());
+    const FCoords fpos = map.get_fcoords(pos);
 	// This if-statement should be true only once per game.
-	if (vecsize != game.forester_cache_.size()) {
-		game.forester_cache_.resize (vecsize, -1);
+	if (vecsize != forester_cache.size()) {
+        forester_cache.resize (vecsize, kInvalidForesterEntry);
 	}
+    int16_t cache_entry = forester_cache[mi];
 	bool x_check = false;
-	if (-1 < game.forester_cache_[mi]) {
+	if (cache_entry > kInvalidForesterEntry) {
 		if (0 == ((game.logic_rand()) & 0xfc)) {
 			// Cached value found, but exceptionally not trusted.
 			x_check = true;
 		} else {
 			// Found the terrain forestability, no more work to do
-			return game.forester_cache_[mi];
+			return cache_entry;
 		}
 	}
 
@@ -466,31 +467,30 @@ int16_t Worker::findspace_helper_for_forester(const Coords& pos, const Map& map,
 	const DescriptionMaintainer<ImmovableDescr>& immovables = game.world().immovables();
 
 	// TODO(kxq): could the tree_sapling come from config? Currently, there is only one sparam..
+    // TODO(k.halfmann): avoid fetching this vlaues every time, as it is const during runtime?.
 	const uint32_t attribute_id = ImmovableDescr::get_attribute_id("tree_sapling");
 
-	double best = 0;
+    const DescriptionMaintainer<TerrainDescription>& terrains = game.world().terrains();
+    double best = 0.0;
 	for (DescriptionIndex i = 0; i < immovables.size(); ++i) {
 		const ImmovableDescr& immovable_descr = immovables.get(i);
-		if (!immovable_descr.has_attribute(attribute_id)) {
-			continue;
-		}
-		if (immovable_descr.has_terrain_affinity()) {
+		if (immovable_descr.has_attribute(attribute_id)
+         && immovable_descr.has_terrain_affinity()) {
 			double probability = probability_to_grow(
-			immovable_descr.terrain_affinity(), fpos, map, game.world().terrains());
+			   immovable_descr.terrain_affinity(), fpos, map, terrains);
 			if (probability > best) {
 				best = probability;
 			}
 		}
 	}
-	// quantize the obtained value
-        const int16_t correct_val = (std::numeric_limits<int16_t>::max() -1) * best;
+	// normalize value to int16 range
+    const int16_t correct_val = (std::numeric_limits<int16_t>::max() -1) * best;
 
-	if (x_check && (correct_val != game.forester_cache_[mi])) {
-		game.forester_cache_.clear();
-		game.forester_cache_.resize (vecsize, -1);
+	if (x_check && (correct_val != cache_entry)) {
+		forester_cache.clear();
+		forester_cache.resize (vecsize, kInvalidForesterEntry);
 	}
-	game.forester_cache_[mi] = correct_val;
-	return game.forester_cache_[mi];
+	return forester_cache[mi] = correct_val;
 }
 
 
