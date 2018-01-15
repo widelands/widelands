@@ -1,11 +1,11 @@
-function building_helptext_lore()
-   -- TRANSLATORS#: Lore helptext for a building
-   return pgettext("frisians_building", "")
+function building_helptext_lore ()
+   -- TRANSLATORS: Lore helptext for a building
+   return pgettext ("frisians_building", "I'll make thee eat iron like an ostridge, and swallow my sword like a great pin, ere thou and I part.")
 end
 
-function building_helptext_lore_author()
-   -- TRANSLATORS#: Lore author helptext for a building
-   return ""
+function building_helptext_lore_author ()
+   -- TRANSLATORS: Lore author helptext for a building
+   return pgettext ("frisians_building", "Cade in Henry VI/2")
 end
 
 function building_helptext_purpose()

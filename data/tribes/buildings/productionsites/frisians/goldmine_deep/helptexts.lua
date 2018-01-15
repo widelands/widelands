@@ -1,11 +1,11 @@
-function building_helptext_lore()
+function building_helptext_lore ()
    -- TRANSLATORS: Lore helptext for a building
-   return pgettext("frisians_building", "")
+   return pgettext ("frisians_building", "„All that glisters is not gold,/Often have you heard that told;/Many a man his life hath sold/But my outside to behold.“")
 end
 
-function building_helptext_lore_author()
+function building_helptext_lore_author ()
    -- TRANSLATORS: Lore author helptext for a building
-   return pgettext("frisians_building", "")
+   return pgettext ("frisians_building", "Prince of Morocco in The Merchant of Venice")
 end
 
 function building_helptext_purpose()

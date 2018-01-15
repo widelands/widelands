@@ -1,12 +1,11 @@
-function building_helptext_lore()
-   --"Wer zwei Halme dort wachsen lässt, wo sonst nur einer wächst, der ist größer als der größte Feldherr!" – Friedrich der Große
+function building_helptext_lore ()
    -- TRANSLATORS: Lore helptext for a building
-   return pgettext("frisians_building", "")
+   return pgettext ("frisians_building", "The strawberry grows underneath the nettle,/And wholesome berries thrive and ripen best/Neighbor'd by fruit of baser quality;")
 end
 
-function building_helptext_lore_author()
+function building_helptext_lore_author ()
    -- TRANSLATORS: Lore author helptext for a building
-   return pgettext("frisians_building", "")
+   return pgettext ("frisians_building", "Ely in Henry V")
 end
 
 function building_helptext_purpose()

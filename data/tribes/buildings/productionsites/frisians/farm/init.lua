@@ -1,10 +1,10 @@
-dirname = path.dirname(__file__)
+dirname = path.dirname (__file__)
 
 tribes:new_productionsite_type {
    msgctxt = "frisians_building",
    name = "frisians_farm",
    -- TRANSLATORS: This is a building name used in lists of buildings
-   descname = pgettext("frisians_building", "Farm"),
+   descname = pgettext ("frisians_building", "Farm"),
    helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "big",
@@ -24,13 +24,19 @@ tribes:new_productionsite_type {
 
    animations = {
       idle = {
-         pictures = path.list_files(dirname .. "idle_??.png"),
-         hotspot = { 94, 77 },
+         pictures = path.list_files (dirname .. "idle_??.png"),
+         hotspot = { 113, 104 },
+         fps = 10,
       },
       working = {
-         pictures = path.list_files(dirname .. "idle_??.png"), --TODO no animation yet
-         hotspot = { 94, 77 },
-      }
+         pictures = path.list_files (dirname .. "working_???.png"),
+         hotspot = { 113, 104 },
+         fps = 10,
+      },
+      unoccupied = {
+         pictures = path.list_files (dirname .. "unoccupied_?.png"),
+         hotspot = { 113, 104 },
+      },
    },
 
    aihints = {
@@ -79,7 +85,7 @@ tribes:new_productionsite_type {
       -- Translators: Short for "Out of ..." for a resource
       title = _"No Fields",
       heading = _"Out of Fields",
-      message = pgettext("frisians_building", "The farmer working at this farm has no cleared soil to plant his seeds."),
+      message = pgettext ("frisians_building", "The farmer working at this farm has no cleared soil to plant his seeds."),
       productivity_threshold = 30
    },
 }

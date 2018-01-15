@@ -1,10 +1,10 @@
-dirname = path.dirname(__file__)
+dirname = path.dirname (__file__)
 
 tribes:new_productionsite_type {
    msgctxt = "frisians_building",
    name = "frisians_reindeer_farm",
    -- TRANSLATORS: This is a building name used in lists of buildings
-   descname = pgettext("frisians_building", "Reindeer Farm"),
+   descname = pgettext ("frisians_building", "Reindeer Farm"),
    helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "big",
@@ -24,12 +24,18 @@ tribes:new_productionsite_type {
 
    animations = {
       idle = {
-         pictures = path.list_files(dirname .. "idle_??.png"),
-         hotspot = { 81, 66 },
+         pictures = path.list_files (dirname .. "idle_??.png"),
+         hotspot = { 113, 104 },
+         fps = 10,
       },
       working = {
-         pictures = path.list_files(dirname .. "idle_??.png"), --TODO no animation yet
-         hotspot = { 81, 66 },
+         pictures = path.list_files (dirname .. "working_??.png"),
+         hotspot = { 113, 104 },
+         fps = 10,
+      },
+      unoccupied = {
+         pictures = path.list_files (dirname .. "unoccupied_?.png"),
+         hotspot = { 113, 104 },
       },
    },
 

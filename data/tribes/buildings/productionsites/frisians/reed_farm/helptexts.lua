@@ -1,11 +1,11 @@
-function building_helptext_lore()
+function building_helptext_lore ()
    -- TRANSLATORS: Lore helptext for a building
-   return pgettext("frisians_building", "")
+   return pgettext ("frisians_building", "I had as live have a reed […] as a partisan.")
 end
 
-function building_helptext_lore_author()
+function building_helptext_lore_author ()
    -- TRANSLATORS: Lore author helptext for a building
-   return pgettext("frisians_building", "")
+   return pgettext ("frisians_building", "2. Servant in Antony and Cleopatra")
 end
 
 function building_helptext_purpose()

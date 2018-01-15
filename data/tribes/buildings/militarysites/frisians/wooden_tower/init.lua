@@ -1,10 +1,10 @@
-dirname = path.dirname(__file__)
+dirname = path.dirname (__file__)
 
 tribes:new_militarysite_type {
    msgctxt = "frisians_building",
    name = "frisians_wooden_tower",
    -- TRANSLATORS: This is a building name used in lists of buildings
-   descname = pgettext("frisians_building", "Wooden Tower"),
+   descname = pgettext ("frisians_building", "Wooden Tower"),
    helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "small",
@@ -21,15 +21,18 @@ tribes:new_militarysite_type {
 
    animations = {
       idle = {
-         pictures = path.list_files(dirname .. "idle_??.png"),
-         hotspot = { 41, 89 },
-      }
+         pictures = path.list_files (dirname .. "idle_??.png"),
+         hotspot = { 62, 94 },
+         fps = 10,
+      },
+      unoccupied = {
+         pictures = path.list_files (dirname .. "unoccupied_?.png"),
+         hotspot = { 62, 94 },
+      },
    },
 
    aihints = {
       expansion = true,
-      fighting = false,
-      mountain_conqueror = true,
       prohibited_till = 1200
    },
 
