@@ -301,7 +301,8 @@ talk_about_roadbuilding_02 = {
       li_image("images/wui/overlays/roadb_green.png", _[[The terrain is flat here. Your carriers will be very swift on this terrain.]]) ..
       li_image("images/wui/overlays/roadb_yellow.png", _[[There is a small slope to climb to reach this field. This means that your workers will be faster walking downhill than they will be walking uphill.]]) ..
       li_image("images/wui/overlays/roadb_red.png", _[[The connection between the fields is extremely steep. The speed increase in one direction is huge while the slowdown in the other is also substantial.]]) ..
-      p(_[[Keep the slopes in mind while placing roads and use them to your advantage. Also, try to keep roads as short as possible and always remember to place as many flags as you can on road segments to share the load better. If you hold Ctrl or Shift+Ctrl while you finish the road, flags are placed automatically.]]) ..
+      p(_[[Keep the slopes in mind while placing roads and use them to your advantage. Also, try to keep roads as short as possible and always remember to place as many flags as you can on road segments to share the load better.]]) ..
+      li_arrow(_[[If you hold Ctrl or Shift+Ctrl while you finish the road, flags are placed automatically.]]) ..
       li(_[[Now please rebuild the road between your quarry and your headquarters.]])
    ),
    h = 450,
@@ -310,7 +311,8 @@ talk_about_roadbuilding_02 = {
    obj_body = (
       h1(_"Connect Your Construction Site") ..
       p(_[[Connect your quarry construction site to your headquarters with a road. You would have been put directly into road building mode after ordering a new site. But now, you aren’t.]]) ..
-      li_arrow(_[[To build a completely new road, just click on the flag in front of your construction site, click on the build road icon and then click on the flag in front of your headquarters. Wait for the completion of the quarry.]])
+      li_arrow(_[[To build a completely new road, just click on the flag in front of your construction site, click on the build road icon and then click on the flag in front of your headquarters. Wait for the completion of the quarry.]]) ..
+      li_arrow(_[[If you hold Ctrl or Shift+Ctrl while you finish the road, flags are placed automatically.]]) ..
    )
 }
 
