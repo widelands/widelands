@@ -312,7 +312,7 @@ talk_about_roadbuilding_02 = {
       h1(_"Connect Your Construction Site") ..
       p(_[[Connect your quarry construction site to your headquarters with a road. You would have been put directly into road building mode after ordering a new site. But now, you aren’t.]]) ..
       li_arrow(_[[To build a completely new road, just click on the flag in front of your construction site, click on the build road icon and then click on the flag in front of your headquarters. Wait for the completion of the quarry.]]) ..
-      li_arrow(_[[If you hold Ctrl or Shift+Ctrl while you finish the road, flags are placed automatically.]]) ..
+      li_arrow(_[[If you hold Ctrl or Shift+Ctrl while you finish the road, flags are placed automatically.]])
    )
 }
 
