@@ -417,5 +417,5 @@ conclusion = {
       p(_[[I hope I could teach you how you can control the economy in Widelands. There are many options and they can be confusing at first. Even if you’ve only understood a few concepts, you mustn’t give up. Try them out in some games, become familiar with them and experience the possibilities. Then, return to this tutorial and learn the rest!]]) ..
       p([[]]) ..
       p(_[[This was the last tutorial I had prepared for you. I’ve now taught you everything I know. There are still secrets hidden in this world even I don’t know about. I will now search for a quiet place to spend my sunset years. If you have still questions, the Widelands community will surely help you. You can find it at:]]) ..
-      h1(p("align=center", u("http://www.widelands.org")))
+      h1(p("align=center", u("widelands.org")))
 }
