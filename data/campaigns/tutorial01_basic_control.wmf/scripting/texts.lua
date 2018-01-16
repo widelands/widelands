@@ -434,8 +434,8 @@ destroy_quarries_message = {
    obj_body = (
       p(_[[Since our quarries are useless now, you can destroy them and reuse the space later on.]]) ..
       li_arrow(_[[There are two different ways of destroying a building: burning down and dismantling. Try them both out on your quarries.]]) ..
-      li_arrow(_[[Burning down the quarry: This is the fastest way of clearing the space. While the worker abandons the building, the wares are lost.]]) ..
-      li_arrow(_[[Dismantling the quarry: A builder will walk from the headquarters to dismantle the quarry piece by piece. Thereby, you regain some of the resources you used for the construction.]])
+      li_image("images/wui/buildings/menu_bld_bulldoze.png", _[[Burning down the quarry: This is the fastest way of clearing the space. While the worker abandons the building, the wares are lost.]]) ..
+      li_image("images/wui/buildings/menu_bld_dismantle.png", _[[Dismantling the quarry: A builder will walk from the headquarters to dismantle the quarry piece by piece. Thereby, you regain some of the resources you used for the construction.]])
    )
 }
 
