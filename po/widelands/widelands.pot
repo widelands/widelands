@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2018-01-10 16:38+0000\n"
+"POT-Creation-Date: 2018-01-16 17:26+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -14,13 +14,13 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../../data/scripting/format_scenario.lua:36
+#: ../../data/scripting/format_scenario.lua:12
 #: ../../data/scripting/richtext_scenarios.lua:34
 #, lua-format
 msgid "“%s”"
 msgstr ""
 
-#: ../../data/scripting/format_scenario.lua:84
+#: ../../data/scripting/format_scenario.lua:40
 #: ../../data/scripting/richtext_scenarios.lua:85
 msgid "New Objective"
 msgid_plural "New Objectives"
@@ -29,7 +29,7 @@ msgstr[1] ""
 
 #. * TRANSLATORS: Concatenate the last 2 items on a list.
 #. * TRANSLATORS: RTL languages might want to change the word order here.
-#: ../../data/scripting/formatting.lua:37 ../../data/scripting/richtext.lua:38
+#: ../../data/scripting/formatting.lua:12 ../../data/scripting/richtext.lua:38
 #: ../../src/base/i18n.cc:333
 #, c-format
 msgid "%1$s & %2$s"
@@ -37,7 +37,7 @@ msgstr ""
 
 #. * TRANSLATORS: Join the last 2 items on a list with "or".
 #. * TRANSLATORS: RTL languages might want to change the word order here.
-#: ../../data/scripting/formatting.lua:39 ../../data/scripting/richtext.lua:40
+#: ../../data/scripting/formatting.lua:14 ../../data/scripting/richtext.lua:40
 #: ../../src/base/i18n.cc:337
 #, c-format
 msgid "%1$s or %2$s"
@@ -47,8 +47,8 @@ msgstr ""
 #. * TRANSLATORS: RTL languages might want to change the word order here.
 #. * TRANSLATORS: Concatenate 2 items at in the middle of a list.
 #. * TRANSLATORS: RTL languages might want to change the word order here.
-#: ../../data/scripting/formatting.lua:41
-#: ../../data/scripting/formatting.lua:46 ../../data/scripting/richtext.lua:42
+#: ../../data/scripting/formatting.lua:16
+#: ../../data/scripting/formatting.lua:21 ../../data/scripting/richtext.lua:42
 #: ../../data/scripting/richtext.lua:47 ../../src/base/i18n.cc:341
 #: ../../src/base/i18n.cc:350
 #, c-format
@@ -57,7 +57,7 @@ msgstr ""
 
 #. * TRANSLATORS: Concatenate the last 2 items on a list.
 #. * TRANSLATORS: RTL languages might want to change the word order here.
-#: ../../data/scripting/formatting.lua:43 ../../data/scripting/richtext.lua:44
+#: ../../data/scripting/formatting.lua:18 ../../data/scripting/richtext.lua:44
 #: ../../src/base/i18n.cc:345
 #, c-format
 msgid "%1$s and %2$s"
@@ -201,7 +201,7 @@ msgid "Loading tribes"
 msgstr ""
 
 #: ../../src/editor/editorinteractive.cc:78
-#: ../../src/wui/interactive_player.cc:208
+#: ../../src/wui/interactive_player.cc:165
 #: ../../src/wui/interactive_spectator.cc:48
 msgid "Main menu"
 msgstr ""
@@ -221,7 +221,7 @@ msgid "Players"
 msgstr ""
 
 #: ../../src/editor/editorinteractive.cc:99
-#: ../../src/wui/interactive_player.cc:224
+#: ../../src/wui/interactive_player.cc:181
 #: ../../src/wui/interactive_spectator.cc:75
 msgid "Show building spaces (on/off)"
 msgstr ""
@@ -239,13 +239,13 @@ msgid "Show resources (on/off)"
 msgstr ""
 
 #: ../../src/editor/editorinteractive.cc:117
-#: ../../src/wui/interactive_player.cc:220
+#: ../../src/wui/interactive_player.cc:177
 #: ../../src/wui/interactive_spectator.cc:71
 msgid "Minimap"
 msgstr ""
 
 #: ../../src/editor/editorinteractive.cc:120
-#: ../../src/wui/interactive_player.cc:226
+#: ../../src/wui/interactive_player.cc:183
 #: ../../src/wui/interactive_spectator.cc:78
 msgid "Reset zoom"
 msgstr ""
@@ -259,7 +259,7 @@ msgid "Redo"
 msgstr ""
 
 #: ../../src/editor/editorinteractive.cc:138
-#: ../../src/wui/buildingwindow.cc:334 ../../src/wui/interactive_player.cc:250
+#: ../../src/wui/buildingwindow.cc:334 ../../src/wui/interactive_player.cc:207
 msgid "Help"
 msgstr ""
 
@@ -1035,7 +1035,7 @@ msgid "No description defined"
 msgstr ""
 
 #: ../../src/logic/map_objects/immovable.cc:515
-#: ../../src/logic/map_objects/tribes/constructionsite.cc:72
+#: ../../src/logic/map_objects/tribes/constructionsite.cc:104
 #, c-format
 msgid "%i%% built"
 msgstr ""
@@ -3159,7 +3159,7 @@ msgstr ""
 msgid "Build roads"
 msgstr ""
 
-#: ../../src/wui/game_chat_menu.cc:52 ../../src/wui/interactive_player.cc:233
+#: ../../src/wui/game_chat_menu.cc:52 ../../src/wui/interactive_player.cc:190
 #: ../../src/wui/interactive_spectator.cc:87
 msgid "Chat"
 msgstr ""
@@ -3347,7 +3347,7 @@ msgid "Del: %s"
 msgstr ""
 
 #: ../../src/wui/game_objectives_menu.cc:42
-#: ../../src/wui/interactive_player.cc:243
+#: ../../src/wui/interactive_player.cc:200
 msgid "Objectives"
 msgstr ""
 
@@ -3568,17 +3568,17 @@ msgstr ""
 msgid "%1$s (%2$s)"
 msgstr ""
 
-#: ../../src/wui/interactive_player.cc:212
+#: ../../src/wui/interactive_player.cc:169
 #: ../../src/wui/interactive_spectator.cc:62
 msgid "Statistics"
 msgstr ""
 
-#: ../../src/wui/interactive_player.cc:247
-#: ../../src/wui/interactive_player.cc:299
+#: ../../src/wui/interactive_player.cc:204
+#: ../../src/wui/interactive_player.cc:256
 msgid "Messages"
 msgstr ""
 
-#: ../../src/wui/interactive_player.cc:304
+#: ../../src/wui/interactive_player.cc:261
 #, c-format
 msgid "%u new message"
 msgid_plural "%u new messages"
