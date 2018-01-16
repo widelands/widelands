@@ -810,7 +810,7 @@ void InternetGaming::send(const std::string& msg) {
 			if (recipient == client.name && client.build_id == "IRC") {
 				format_and_add_chat(
 				   "", "", true,
-				   _("Private message to IRC users are not supported."));
+				   _("Private messages to IRC users are not supported."));
 				return;
 			}
 		}
