@@ -106,7 +106,7 @@ MainMenuMapOptions::MainMenuMapOptions(EditorInteractive& parent, bool modal)
 	                                  g_gr->images().get("images/ui_basic/but1.png"),
 	                                  g_gr->images().get("images/ui_basic/but1.png"));
 
-	main_box_.add(new UI::Textarea(&main_box_, 0, 0, max_w_, labelh_, _("Map Name:")));
+	main_box_.add(new UI::Textarea(&main_box_, 0, 0, max_w_, labelh_, _("Map name:")));
 	main_box_.add(&name_);
 	main_box_.add_space(indent_);
 

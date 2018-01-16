@@ -45,16 +45,16 @@ InteractiveSpectator::InteractiveSpectator(Widelands::Game& g,
    : InteractiveGameBase(g, global_s, OBSERVER, multiplayer) {
 	if (is_multiplayer()) {
 		add_toolbar_button(
-		   "wui/menus/menu_options_menu", "options_menu", _("Main Menu"), &options_, true);
+		   "wui/menus/menu_options_menu", "options_menu", _("Main menu"), &options_, true);
 		options_.open_window = [this] { new GameOptionsMenu(*this, options_, main_windows_); };
 
 	} else {
 		UI::Button* button =
-		   add_toolbar_button("wui/menus/menu_exit_game", "exit_replay", _("Exit Replay"));
+		   add_toolbar_button("wui/menus/menu_exit_game", "exit_replay", _("Exit replay"));
 		button->sigclicked.connect(boost::bind(&InteractiveSpectator::exit_btn, this));
 
 		add_toolbar_button(
-		   "wui/menus/menu_save_game", "save_game", _("Save Game"), &main_windows_.savegame, true);
+		   "wui/menus/menu_save_game", "save_game", _("Save game"), &main_windows_.savegame, true);
 		main_windows_.savegame.open_window = [this] {
 			new GameMainMenuSaveGame(*this, main_windows_.savegame);
 		};
@@ -72,7 +72,7 @@ InteractiveSpectator::InteractiveSpectator(Widelands::Game& g,
 	minimap_registry().open_window = [this] { toggle_minimap(); };
 
 	toggle_buildhelp_ = add_toolbar_button(
-	   "wui/menus/menu_toggle_buildhelp", "buildhelp", _("Show Building Spaces (on/off)"));
+	   "wui/menus/menu_toggle_buildhelp", "buildhelp", _("Show building spaces (on/off)"));
 	toggle_buildhelp_->sigclicked.connect(boost::bind(&InteractiveBase::toggle_buildhelp, this));
 
 	reset_zoom_ = add_toolbar_button("wui/menus/menu_reset_zoom", "reset_zoom", _("Reset zoom"));

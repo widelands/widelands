@@ -35,8 +35,7 @@
 #include "graphic/text_constants.h"
 #include "logic/game.h"
 #include "logic/game_settings.h"
-#include "logic/map_objects/tribes/tribe_descr.h"
-#include "logic/map_objects/tribes/tribes.h"
+#include "logic/map_objects/tribes/tribe_basic_info.h"
 #include "logic/player.h"
 #include "logic/widelands.h"
 #include "ui_basic/button.h"
@@ -422,7 +421,7 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 		} else {
 			{
 				i18n::Textdomain td("tribes");
-				for (const TribeBasicInfo& tribeinfo : Widelands::get_all_tribeinfos()) {
+				for (const Widelands::TribeBasicInfo& tribeinfo : Widelands::get_all_tribeinfos()) {
 					tribes_dropdown_.add(_(tribeinfo.descname), tribeinfo.name,
 					                     g_gr->images().get(tribeinfo.icon), false, tribeinfo.tooltip);
 				}
@@ -479,9 +478,9 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 		} else {
 			init_dropdown_.set_label("");
 			i18n::Textdomain td("tribes");  // for translated initialisation
-			const TribeBasicInfo tribeinfo = Widelands::get_tribeinfo(player_setting.tribe);
+			const Widelands::TribeBasicInfo tribeinfo = Widelands::get_tribeinfo(player_setting.tribe);
 			for (size_t i = 0; i < tribeinfo.initializations.size(); ++i) {
-				const TribeBasicInfo::Initialization& addme = tribeinfo.initializations[i];
+				const Widelands::TribeBasicInfo::Initialization& addme = tribeinfo.initializations[i];
 				init_dropdown_.add(_(addme.descname), i, nullptr,
 				                   i == player_setting.initialization_index, _(addme.tooltip));
 			}

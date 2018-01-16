@@ -5,13 +5,13 @@
 # GunChleoc, 2016
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
 # GunChleoc, 2014
-# Jukka Pakarinen, 2016-2017
+# Jukka Pakarinen, 2016-2018
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-09-15 18:56+0000\n"
-"PO-Revision-Date: 2017-09-21 23:35+0000\n"
+"POT-Creation-Date: 2017-12-27 17:09+0000\n"
+"PO-Revision-Date: 2018-01-03 17:41+0000\n"
 "Last-Translator: Jukka Pakarinen\n"
 "Language-Team: Finnish (http://www.transifex.com/widelands/widelands/language/fi/)\n"
 "MIME-Version: 1.0\n"
@@ -82,8 +82,8 @@ msgstr "Tavallisesti peli aloitetaan yhdellä päämajalla. Se on iso rakennus, 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:44
 msgid ""
 "We need to find a nice place for the lumberjack’s hut. To make this easier, "
-"we can activate ‘Show Building Spaces’. There are two ways you can do this, "
-"either by clicking on the ‘Show Building Spaces’ button at the bottom of the"
+"we can activate ‘Show building spaces’. There are two ways you can do this, "
+"either by clicking on the ‘Show building spaces’ button at the bottom of the"
 " screen, which is the fourth one from the left. Or you can use the Space key"
 " to toggle it."
 msgstr "Puunhakkaajalle täytyy etsiä sopiva paikka hänen mökkiä varten. Helpoiten se löytyy aktivoimalla 'Näytä Rakennusalueet'. Sen voi tehdä kahdella tavalla, joko painamalla 'Näytä Rakennusalueet' painiketta ikkunan alareunassa, joka on neljäs painike vasemmalta tai käyttämällä välilyöntinäppäintä."

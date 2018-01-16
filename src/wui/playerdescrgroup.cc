@@ -29,7 +29,7 @@
 #include "graphic/graphic.h"
 #include "graphic/text_constants.h"
 #include "logic/game_settings.h"
-#include "logic/map_objects/tribes/tribe_descr.h"
+#include "logic/map_objects/tribes/tribe_basic_info.h"
 #include "logic/player.h"
 #include "ui_basic/button.h"
 #include "ui_basic/checkbox.h"
@@ -161,7 +161,7 @@ void PlayerDescriptionGroup::refresh() {
 			}
 			d->btnPlayerType->set_title(title);
 
-			TribeBasicInfo info = Widelands::get_tribeinfo(player.tribe);
+			Widelands::TribeBasicInfo info = Widelands::get_tribeinfo(player.tribe);
 			if (!tribenames_[player.tribe].size()) {
 				// Tribe's localized name
 				tribenames_[player.tribe] = info.descname;
@@ -177,7 +177,7 @@ void PlayerDescriptionGroup::refresh() {
 
 			{
 				i18n::Textdomain td("tribes");  // for translated initialisation
-				for (const TribeBasicInfo& tribeinfo : settings.tribes) {
+				for (const Widelands::TribeBasicInfo& tribeinfo : settings.tribes) {
 					if (tribeinfo.name == player.tribe) {
 						d->btnPlayerInit->set_title(
 						   _(tribeinfo.initializations.at(player.initialization_index).descname));
@@ -293,7 +293,7 @@ void PlayerDescriptionGroup::toggle_playerinit() {
 
 	const PlayerSettings& player = settings.players[d->plnum];
 
-	for (const TribeBasicInfo& tribeinfo : settings.tribes) {
+	for (const Widelands::TribeBasicInfo& tribeinfo : settings.tribes) {
 		if (tribeinfo.name == player.tribe) {
 			return d->settings->set_player_init(
 			   d->plnum, (player.initialization_index + 1) % tribeinfo.initializations.size());

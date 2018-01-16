@@ -4,7 +4,7 @@
 # Translators:
 # GunChleoc, 2016
 # GunChleoc, 2014
-# Jukka Pakarinen, 2016-2017
+# Jukka Pakarinen, 2016-2018
 # Markus Hällfors <markus@hallfors.com>, 2015
 # Max, 2015
 # Pekka Järvinen <pekka.jarvinen@gmail.com>, 2007
@@ -14,9 +14,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-11-25 03:55+0000\n"
-"PO-Revision-Date: 2017-11-25 03:58+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2017-12-27 17:09+0000\n"
+"PO-Revision-Date: 2018-01-03 17:32+0000\n"
+"Last-Translator: Jukka Pakarinen\n"
 "Language-Team: Finnish (http://www.transifex.com/widelands/widelands/language/fi/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -2786,14 +2786,14 @@ msgstr "Jos pelaajalta loppuvat tärkät tarvikkeet, ne korvautuvat itsestään"
 #: ../../data/tribes/scripting/starting_conditions/barbarians/village.lua:11
 #: ../../data/tribes/scripting/starting_conditions/empire/village.lua:11
 msgid "Village"
-msgstr ""
+msgstr "Kylä"
 
 #. TRANSLATORS: This is the tooltip for the "Village" starting condition
 #: ../../data/tribes/scripting/starting_conditions/atlanteans/village.lua:13
 #: ../../data/tribes/scripting/starting_conditions/barbarians/village.lua:13
 #: ../../data/tribes/scripting/starting_conditions/empire/village.lua:13
 msgid "Start the game with a peaceful village"
-msgstr ""
+msgstr "Aloita peli rauhallisella kylällä"
 
 #. TRANSLATORS: This is the ship's name used in lists of units
 #: ../../data/tribes/ships/atlanteans/init.lua:55
