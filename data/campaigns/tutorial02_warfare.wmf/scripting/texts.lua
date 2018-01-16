@@ -78,7 +78,7 @@ battlearena1 = {
    obj_title = _"Build a battle arena",
    obj_body = (
       li(_[[Build a battle arena. It is a big building.]]) ..
-      li(_[[Since the construction will take some time, you can change the game speed using Page Up and Page Down.]])
+      li_arrow(_[[Since the construction will take some time, you can change the game speed using Page Up and Page Down.]])
    )
 }
 
