@@ -37,6 +37,9 @@ class Slider : public Panel {
 	friend struct DiscreteSlider;
 
 protected:
+	/**
+	 * Text conventions: Sentence case for the 'tooltip_text'
+	 */
 	Slider(Panel* parent,
 	       int32_t x,
 	       int32_t y,

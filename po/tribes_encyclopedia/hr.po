@@ -1,5 +1,5 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2017 Widelands Development Team
+# Copyright (C) 2005-2018 Widelands Development Team
 # 
 # Translators:
 # GunChleoc, 2016
@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-09-15 18:56+0000\n"
-"PO-Revision-Date: 2017-09-21 23:35+0000\n"
+"POT-Creation-Date: 2018-01-10 16:38+0000\n"
+"PO-Revision-Date: 2018-01-10 16:41+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Croatian (http://www.transifex.com/widelands/widelands/language/hr/)\n"
 "MIME-Version: 1.0\n"
@@ -135,9 +135,9 @@ msgstr ""
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/atlanteans/coalmine/helptexts.lua:16
-#: ../../data/tribes/buildings/productionsites/barbarians/coalmine/helptexts.lua:14
-#: ../../data/tribes/buildings/productionsites/barbarians/coalmine_deep/helptexts.lua:14
-#: ../../data/tribes/buildings/productionsites/barbarians/coalmine_deeper/helptexts.lua:14
+#: ../../data/tribes/buildings/productionsites/barbarians/coalmine/helptexts.lua:17
+#: ../../data/tribes/buildings/productionsites/barbarians/coalmine_deep/helptexts.lua:17
+#: ../../data/tribes/buildings/productionsites/barbarians/coalmine_deeper/helptexts.lua:17
 #: ../../data/tribes/buildings/productionsites/empire/coalmine/helptexts.lua:16
 #: ../../data/tribes/buildings/productionsites/empire/coalmine_deep/helptexts.lua:16
 msgctxt "building"
@@ -409,7 +409,7 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/barbarians/cattlefarm/helptexts.lua:26
 #: ../../data/tribes/buildings/productionsites/barbarians/fishers_hut/helptexts.lua:23
 #: ../../data/tribes/buildings/productionsites/barbarians/goldmine/helptexts.lua:23
-#: ../../data/tribes/buildings/productionsites/barbarians/granitemine/helptexts.lua:26
+#: ../../data/tribes/buildings/productionsites/barbarians/granitemine/helptexts.lua:31
 #: ../../data/tribes/buildings/productionsites/barbarians/hunters_hut/helptexts.lua:23
 #: ../../data/tribes/buildings/productionsites/barbarians/ironmine/helptexts.lua:23
 #: ../../data/tribes/buildings/productionsites/barbarians/lime_kiln/helptexts.lua:23
@@ -502,18 +502,29 @@ msgid ""
 "in %s on average."
 msgstr ""
 
-#: ../../data/tribes/buildings/productionsites/barbarians/coalmine/helptexts.lua:3
-#: ../../data/tribes/buildings/productionsites/barbarians/coalmine_deep/helptexts.lua:3
-#: ../../data/tribes/buildings/productionsites/barbarians/coalmine_deeper/helptexts.lua:3
+#. TRANSLATORS: Lore helptext for a coal mine building, part 1
+#: ../../data/tribes/buildings/productionsites/barbarians/coalmine/helptexts.lua:4
+#: ../../data/tribes/buildings/productionsites/barbarians/coalmine_deep/helptexts.lua:4
+#: ../../data/tribes/buildings/productionsites/barbarians/coalmine_deeper/helptexts.lua:4
 msgctxt "barbarians_building"
 msgid ""
-"Ages ago, the Barbarians learned to delve into mountainsides for that black material that feeds their furnaces. <br>\n"
-"Wood may serve for a household fire and to keep you warm, but when it comes to working with iron or gold, there is no way around coal."
+"Ages ago, the Barbarians learned to delve into mountainsides for that black "
+"material that feeds their furnaces."
+msgstr ""
+
+#. TRANSLATORS: Lore helptext for a coal mine building, part 2
+#: ../../data/tribes/buildings/productionsites/barbarians/coalmine/helptexts.lua:6
+#: ../../data/tribes/buildings/productionsites/barbarians/coalmine_deep/helptexts.lua:6
+#: ../../data/tribes/buildings/productionsites/barbarians/coalmine_deeper/helptexts.lua:6
+msgctxt "barbarians_building"
+msgid ""
+"Wood may serve for a household fire and to keep you warm, but when it comes "
+"to working with iron or gold, there is no way around coal."
 msgstr ""
 
 #. TRANSLATORS: Note helptext for a building
-#: ../../data/tribes/buildings/productionsites/barbarians/coalmine/helptexts.lua:19
-#: ../../data/tribes/buildings/productionsites/barbarians/coalmine_deep/helptexts.lua:19
+#: ../../data/tribes/buildings/productionsites/barbarians/coalmine/helptexts.lua:22
+#: ../../data/tribes/buildings/productionsites/barbarians/coalmine_deep/helptexts.lua:22
 #, lua-format
 msgctxt "barbarians_building"
 msgid ""
@@ -522,7 +533,7 @@ msgid ""
 msgstr ""
 
 #. TRANSLATORS: Performance helptext for a building
-#: ../../data/tribes/buildings/productionsites/barbarians/coalmine/helptexts.lua:24
+#: ../../data/tribes/buildings/productionsites/barbarians/coalmine/helptexts.lua:27
 msgctxt "barbarians_building"
 msgid ""
 "If the food supply is steady, this mine can produce coal in 32.5 seconds on "
@@ -530,7 +541,7 @@ msgid ""
 msgstr ""
 
 #. TRANSLATORS: Performance helptext for a building
-#: ../../data/tribes/buildings/productionsites/barbarians/coalmine_deep/helptexts.lua:24
+#: ../../data/tribes/buildings/productionsites/barbarians/coalmine_deep/helptexts.lua:27
 msgctxt "barbarians_building"
 msgid ""
 "If the food supply is steady, this mine can produce coal in 19.5 seconds on "
@@ -538,7 +549,7 @@ msgid ""
 msgstr ""
 
 #. TRANSLATORS: Note helptext for a building
-#: ../../data/tribes/buildings/productionsites/barbarians/coalmine_deeper/helptexts.lua:19
+#: ../../data/tribes/buildings/productionsites/barbarians/coalmine_deeper/helptexts.lua:22
 #, lua-format
 msgctxt "barbarians_building"
 msgid ""
@@ -548,7 +559,7 @@ msgid ""
 msgstr ""
 
 #. TRANSLATORS: Performance helptext for a building
-#: ../../data/tribes/buildings/productionsites/barbarians/coalmine_deeper/helptexts.lua:24
+#: ../../data/tribes/buildings/productionsites/barbarians/coalmine_deeper/helptexts.lua:27
 msgctxt "barbarians_building"
 msgid ""
 "If the food supply is steady, this mine can produce coal in 14.4 seconds on "
@@ -689,25 +700,31 @@ msgctxt "barbarians_building"
 msgid "‘I can handle tons of granite, man, but no more of your vain prattle.’"
 msgstr ""
 
-#. TRANSLATORS: Lore author helptext for a building
-#: ../../data/tribes/buildings/productionsites/barbarians/granitemine/helptexts.lua:8
+#. TRANSLATORS: Lore author helptext for a granite mine building, part 1
+#: ../../data/tribes/buildings/productionsites/barbarians/granitemine/helptexts.lua:10
 msgctxt "barbarians_building"
 msgid ""
 "This phrase was the reply Rimbert the miner – later known as Rimbert the "
 "loner – gave, when he was asked to remain seated on an emergency meeting at "
-"Stonford in the year of the great flood. <br> The same man had all the 244 "
-"granite blocks ready only a week later, and they still fortify the city’s "
-"levee."
+"Stonford in the year of the great flood."
+msgstr ""
+
+#. TRANSLATORS: Lore author helptext for a granite mine building, part 2
+#: ../../data/tribes/buildings/productionsites/barbarians/granitemine/helptexts.lua:12
+msgctxt "barbarians_building"
+msgid ""
+"The same man had all the 244 granite blocks ready only a week later, and "
+"they still fortify the city’s levee."
 msgstr ""
 
 #. TRANSLATORS: Purpose helptext for a building
-#: ../../data/tribes/buildings/productionsites/barbarians/granitemine/helptexts.lua:13
+#: ../../data/tribes/buildings/productionsites/barbarians/granitemine/helptexts.lua:18
 msgctxt "barbarians_building"
 msgid "Carves granite out of the rock in mountain terrain."
 msgstr ""
 
 #. TRANSLATORS: Note helptext for a building
-#: ../../data/tribes/buildings/productionsites/barbarians/granitemine/helptexts.lua:19
+#: ../../data/tribes/buildings/productionsites/barbarians/granitemine/helptexts.lua:24
 #, lua-format
 msgctxt "barbarians_building"
 msgid ""
@@ -717,13 +734,13 @@ msgid ""
 msgstr ""
 
 #. TRANSLATORS: 'It' is a mine
-#: ../../data/tribes/buildings/productionsites/barbarians/granitemine/helptexts.lua:21
+#: ../../data/tribes/buildings/productionsites/barbarians/granitemine/helptexts.lua:26
 msgctxt "barbarians_building"
 msgid "It cannot be enhanced."
 msgstr ""
 
 #. TRANSLATORS: Performance helptext for a building
-#: ../../data/tribes/buildings/productionsites/barbarians/granitemine/helptexts.lua:26
+#: ../../data/tribes/buildings/productionsites/barbarians/granitemine/helptexts.lua:31
 #, lua-format
 msgctxt "barbarians_building"
 msgid ""
@@ -1097,7 +1114,7 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/barbarians/well/helptexts.lua:8
 msgctxt "barbarians_building"
 msgid ""
-"Song written by Sigurd the Bard<br>when the first rain fell after the Great "
+"Song written by Sigurd the Bard when the first rain fell after the Great "
 "Drought in the 21st year of Chat’Karuth’s reign."
 msgstr ""
 
@@ -1535,51 +1552,51 @@ msgid ""
 "soldiers, wares and tools."
 msgstr ""
 
-#: ../../data/tribes/scripting/help/building_help.lua:87
-#: ../../data/tribes/scripting/help/format_help.lua:153
+#: ../../data/tribes/scripting/help/building_help.lua:104
+#: ../../data/tribes/scripting/help/format_help.lua:188
 #, lua-format
 msgid "%s and"
 msgstr "%s i"
 
-#: ../../data/tribes/scripting/help/building_help.lua:96
+#: ../../data/tribes/scripting/help/building_help.lua:118
 msgid "Food:"
 msgstr ""
 
-#: ../../data/tribes/scripting/help/building_help.lua:144
+#: ../../data/tribes/scripting/help/building_help.lua:168
 msgid "Equipment:"
 msgstr ""
 
 #. TRANSLATORS: Heading for a flavour text in the building help.
-#: ../../data/tribes/scripting/help/building_help.lua:167
+#: ../../data/tribes/scripting/help/building_help.lua:191
 msgid "Lore"
 msgstr "Znanje"
 
-#: ../../data/tribes/scripting/help/building_help.lua:175
+#: ../../data/tribes/scripting/help/building_help.lua:212
 #: ../../data/tribes/scripting/help/init.lua:53
-#: ../../data/tribes/scripting/help/tips.lua:45
+#: ../../data/tribes/scripting/help/tips.lua:44
 msgid "General"
 msgstr "General"
 
-#: ../../data/tribes/scripting/help/building_help.lua:176
+#: ../../data/tribes/scripting/help/building_help.lua:213
 msgid "Purpose:"
 msgstr "Svrha:"
 
-#: ../../data/tribes/scripting/help/building_help.lua:204
-#: ../../data/tribes/scripting/help/building_help.lua:445
+#: ../../data/tribes/scripting/help/building_help.lua:241
+#: ../../data/tribes/scripting/help/building_help.lua:482
 msgid "Note:"
 msgstr "Napomena:"
 
-#: ../../data/tribes/scripting/help/building_help.lua:209
+#: ../../data/tribes/scripting/help/building_help.lua:246
 msgid "Work area radius:"
 msgstr ""
 
-#: ../../data/tribes/scripting/help/building_help.lua:213
-#: ../../data/tribes/scripting/help/building_help.lua:218
+#: ../../data/tribes/scripting/help/building_help.lua:250
+#: ../../data/tribes/scripting/help/building_help.lua:255
 msgid "Healing:"
 msgstr "Liječenje:"
 
-#: ../../data/tribes/scripting/help/building_help.lua:214
-#: ../../data/tribes/scripting/help/building_help.lua:219
+#: ../../data/tribes/scripting/help/building_help.lua:251
+#: ../../data/tribes/scripting/help/building_help.lua:256
 #, lua-format
 msgid "Garrisoned soldiers heal %d health point per second."
 msgid_plural "Garrisoned soldiers heal %d health points per second."
@@ -1587,223 +1604,210 @@ msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
 
-#: ../../data/tribes/scripting/help/building_help.lua:215
-#: ../../data/tribes/scripting/help/building_help.lua:221
+#: ../../data/tribes/scripting/help/building_help.lua:252
+#: ../../data/tribes/scripting/help/building_help.lua:258
 msgid "Conquer range:"
 msgstr ""
 
-#: ../../data/tribes/scripting/help/building_help.lua:220
-#: ../../data/tribes/scripting/help/building_help.lua:224
+#: ../../data/tribes/scripting/help/building_help.lua:257
+#: ../../data/tribes/scripting/help/building_help.lua:261
 msgid "Capacity:"
 msgstr "Kapacitet:"
 
-#: ../../data/tribes/scripting/help/building_help.lua:226
+#: ../../data/tribes/scripting/help/building_help.lua:263
 msgid "Vision range:"
 msgstr "Vidokrug:"
 
-#: ../../data/tribes/scripting/help/building_help.lua:251
+#: ../../data/tribes/scripting/help/building_help.lua:288
 msgid "%1$s from: %2$s"
 msgstr "%1$s iz: %2$s"
 
 #. TRANSLATORS: Heading in the building help for wares that a building accepts
 #. (e.g. wheat for a mill).
-#: ../../data/tribes/scripting/help/building_help.lua:258
+#: ../../data/tribes/scripting/help/building_help.lua:295
 msgid "Incoming:"
 msgstr "U dolasku:"
 
-#: ../../data/tribes/scripting/help/building_help.lua:262
+#: ../../data/tribes/scripting/help/building_help.lua:299
 msgid "Collects:"
 msgstr ""
 
 #. TRANSLATORS: This is a verb (The miner mines)
-#: ../../data/tribes/scripting/help/building_help.lua:274
+#: ../../data/tribes/scripting/help/building_help.lua:311
 msgid "Mines:"
 msgstr ""
 
-#: ../../data/tribes/scripting/help/building_help.lua:294
+#: ../../data/tribes/scripting/help/building_help.lua:331
 msgid "Produces:"
 msgstr ""
 
-#: ../../data/tribes/scripting/help/building_help.lua:336
+#: ../../data/tribes/scripting/help/building_help.lua:373
 msgid "Outgoing:"
 msgstr ""
 
-#: ../../data/tribes/scripting/help/building_help.lua:338
+#: ../../data/tribes/scripting/help/building_help.lua:375
 msgid "None"
 msgstr ""
 
-#: ../../data/tribes/scripting/help/building_help.lua:339
+#: ../../data/tribes/scripting/help/building_help.lua:376
 msgid "Dependencies"
 msgstr ""
 
-#: ../../data/tribes/scripting/help/building_help.lua:355
+#: ../../data/tribes/scripting/help/building_help.lua:392
 msgid "Health Training"
 msgstr ""
 
-#: ../../data/tribes/scripting/help/building_help.lua:356
+#: ../../data/tribes/scripting/help/building_help.lua:393
 msgid "Trains ‘Health’ from %1% up to %2%"
 msgstr ""
 
-#: ../../data/tribes/scripting/help/building_help.lua:358
-#: ../../data/tribes/scripting/help/building_help.lua:372
-#: ../../data/tribes/scripting/help/building_help.lua:384
-#: ../../data/tribes/scripting/help/building_help.lua:397
+#: ../../data/tribes/scripting/help/building_help.lua:395
+#: ../../data/tribes/scripting/help/building_help.lua:409
+#: ../../data/tribes/scripting/help/building_help.lua:421
+#: ../../data/tribes/scripting/help/building_help.lua:434
 msgid "Soldiers:"
 msgstr "Vojnici:"
 
-#: ../../data/tribes/scripting/help/building_help.lua:368
+#: ../../data/tribes/scripting/help/building_help.lua:405
 msgid "Attack Training"
 msgstr ""
 
 #. TRANSLATORS: %1$s = Health, Evade, Attack or Defense. %2$s and %3$s are
 #. numbers.
-#: ../../data/tribes/scripting/help/building_help.lua:370
+#: ../../data/tribes/scripting/help/building_help.lua:407
 msgid "Trains ‘Attack’ from %1% up to %2%"
 msgstr ""
 
-#: ../../data/tribes/scripting/help/building_help.lua:381
+#: ../../data/tribes/scripting/help/building_help.lua:418
 msgid "Defense Training"
 msgstr ""
 
-#: ../../data/tribes/scripting/help/building_help.lua:382
+#: ../../data/tribes/scripting/help/building_help.lua:419
 msgid "Trains ‘Defense’ from %1% up to %2%"
 msgstr ""
 
-#: ../../data/tribes/scripting/help/building_help.lua:394
+#: ../../data/tribes/scripting/help/building_help.lua:431
 msgid "Evade Training"
 msgstr ""
 
-#: ../../data/tribes/scripting/help/building_help.lua:395
+#: ../../data/tribes/scripting/help/building_help.lua:432
 msgid "Trains ‘Evade’ from %1% up to %2%"
 msgstr ""
 
 #. TRANSLATORS: This is the header for the "Building" section in the building
 #. help, containing size info, buildcost etc.
-#: ../../data/tribes/scripting/help/building_help.lua:422
+#: ../../data/tribes/scripting/help/building_help.lua:459
 msgid "Building"
 msgstr "Građevina"
 
-#: ../../data/tribes/scripting/help/building_help.lua:426
+#: ../../data/tribes/scripting/help/building_help.lua:463
 msgid "Mine plot"
 msgstr ""
 
-#: ../../data/tribes/scripting/help/building_help.lua:426
-#: ../../data/tribes/scripting/help/building_help.lua:428
-#: ../../data/tribes/scripting/help/building_help.lua:431
-#: ../../data/tribes/scripting/help/building_help.lua:433
-#: ../../data/tribes/scripting/help/building_help.lua:435
-#: ../../data/tribes/scripting/help/building_help.lua:437
+#: ../../data/tribes/scripting/help/building_help.lua:463
+#: ../../data/tribes/scripting/help/building_help.lua:465
+#: ../../data/tribes/scripting/help/building_help.lua:468
+#: ../../data/tribes/scripting/help/building_help.lua:470
+#: ../../data/tribes/scripting/help/building_help.lua:472
+#: ../../data/tribes/scripting/help/building_help.lua:474
 msgid "Space required:"
 msgstr ""
 
-#: ../../data/tribes/scripting/help/building_help.lua:428
+#: ../../data/tribes/scripting/help/building_help.lua:465
 msgid "Port plot"
 msgstr ""
 
-#: ../../data/tribes/scripting/help/building_help.lua:431
+#: ../../data/tribes/scripting/help/building_help.lua:468
 msgid "Small plot"
 msgstr ""
 
-#: ../../data/tribes/scripting/help/building_help.lua:433
+#: ../../data/tribes/scripting/help/building_help.lua:470
 msgid "Medium plot"
 msgstr ""
 
-#: ../../data/tribes/scripting/help/building_help.lua:435
+#: ../../data/tribes/scripting/help/building_help.lua:472
 msgid "Big plot"
 msgstr ""
 
-#: ../../data/tribes/scripting/help/building_help.lua:437
-#: ../../data/tribes/scripting/help/building_help.lua:521
-#: ../../data/tribes/scripting/help/building_help.lua:570
+#: ../../data/tribes/scripting/help/building_help.lua:474
+#: ../../data/tribes/scripting/help/building_help.lua:558
+#: ../../data/tribes/scripting/help/building_help.lua:607
 msgid "Unknown"
 msgstr "Nepoznato"
 
-#: ../../data/tribes/scripting/help/building_help.lua:446
+#: ../../data/tribes/scripting/help/building_help.lua:483
 msgid ""
 "This building can either be built directly or obtained by enhancing another "
 "building."
 msgstr ""
 
-#: ../../data/tribes/scripting/help/building_help.lua:452
+#: ../../data/tribes/scripting/help/building_help.lua:489
 msgid "Direct build cost:"
 msgstr ""
 
-#: ../../data/tribes/scripting/help/building_help.lua:454
+#: ../../data/tribes/scripting/help/building_help.lua:491
 msgid "Build cost:"
 msgstr "Cijena izgradnje:"
 
-#: ../../data/tribes/scripting/help/building_help.lua:465
+#: ../../data/tribes/scripting/help/building_help.lua:502
 msgid "Or enhanced from:"
 msgstr ""
 
-#: ../../data/tribes/scripting/help/building_help.lua:467
+#: ../../data/tribes/scripting/help/building_help.lua:504
 msgid "Enhanced from:"
 msgstr ""
 
-#: ../../data/tribes/scripting/help/building_help.lua:476
+#: ../../data/tribes/scripting/help/building_help.lua:513
 msgid "Cumulative cost:"
 msgstr ""
 
-#: ../../data/tribes/scripting/help/building_help.lua:526
+#: ../../data/tribes/scripting/help/building_help.lua:563
 msgid "If built directly, dismantle yields:"
 msgstr ""
 
-#: ../../data/tribes/scripting/help/building_help.lua:531
+#: ../../data/tribes/scripting/help/building_help.lua:568
 msgid "If enhanced, dismantle yields:"
 msgstr ""
 
 #. TRANSLATORS: This is a heading for the resources that you will get back
 #. when you dismantle a building of this type. What dismantling will give you.
-#: ../../data/tribes/scripting/help/building_help.lua:534
-#: ../../data/tribes/scripting/help/building_help.lua:575
+#: ../../data/tribes/scripting/help/building_help.lua:571
+#: ../../data/tribes/scripting/help/building_help.lua:612
 msgid "Dismantle yields:"
 msgstr ""
 
-#: ../../data/tribes/scripting/help/building_help.lua:584
+#: ../../data/tribes/scripting/help/building_help.lua:621
 msgid "Can be enhanced to:"
 msgstr ""
 
-#: ../../data/tribes/scripting/help/building_help.lua:614
+#: ../../data/tribes/scripting/help/building_help.lua:651
 msgid "Crew required:"
 msgstr ""
 
-#: ../../data/tribes/scripting/help/building_help.lua:614
+#: ../../data/tribes/scripting/help/building_help.lua:651
 #: ../../data/tribes/scripting/help/init.lua:86
 msgid "Workers"
 msgstr "Radnici"
 
 #. TRANSLATORS: %s is a worker name, e.g. "Chief Miner" or "Brewer".
-#: ../../data/tribes/scripting/help/building_help.lua:636
+#: ../../data/tribes/scripting/help/building_help.lua:673
 #, lua-format
 msgid "%s or better"
 msgstr "%s ili bolje"
 
 #. TRANSLATORS: Tribal Encyclopedia: Heading for which tool workers use
-#: ../../data/tribes/scripting/help/building_help.lua:647
+#: ../../data/tribes/scripting/help/building_help.lua:684
 msgid "Worker uses:"
 msgid_plural "Workers use:"
 msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
 
-#: ../../data/tribes/scripting/help/building_help.lua:653
-msgid "Experience levels:"
-msgstr ""
-
-#. TRANSLATORS: EP = Experience Points
-#: ../../data/tribes/scripting/help/building_help.lua:655
-#: ../../data/tribes/scripting/help/building_help.lua:664
-#: ../../data/tribes/scripting/help/worker_help.lua:157
-#: ../../data/tribes/scripting/help/worker_help.lua:166
-#, lua-format
-msgid "%s to %s (%s EP)"
-msgstr ""
-
-#: ../../data/tribes/scripting/help/building_help.lua:687
+#: ../../data/tribes/scripting/help/building_help.lua:706
 msgid "Production"
 msgstr "Proizvodnja"
 
-#: ../../data/tribes/scripting/help/building_help.lua:688
+#: ../../data/tribes/scripting/help/building_help.lua:707
 msgid "Performance:"
 msgstr ""
 
@@ -1812,236 +1816,236 @@ msgstr ""
 msgid "Controls"
 msgstr ""
 
-#: ../../data/tribes/scripting/help/controls.lua:16
+#: ../../data/tribes/scripting/help/controls.lua:15
 msgid "Window Control"
 msgstr ""
 
-#: ../../data/tribes/scripting/help/controls.lua:19
+#: ../../data/tribes/scripting/help/controls.lua:18
 msgid "Close window"
 msgstr ""
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
-#: ../../data/tribes/scripting/help/controls.lua:19
+#: ../../data/tribes/scripting/help/controls.lua:18
 msgctxt "hotkey"
 msgid "Right-click"
 msgstr ""
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
-#: ../../data/tribes/scripting/help/controls.lua:21
+#: ../../data/tribes/scripting/help/controls.lua:20
 msgctxt "hotkey"
 msgid "Middle-click or Ctrl + Left-click"
 msgstr ""
 
-#: ../../data/tribes/scripting/help/controls.lua:21
+#: ../../data/tribes/scripting/help/controls.lua:20
 msgid "Minimize/Maximize window"
 msgstr ""
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
-#: ../../data/tribes/scripting/help/controls.lua:23
+#: ../../data/tribes/scripting/help/controls.lua:22
 msgctxt "hotkey"
 msgid "Ctrl + Left-click on Button"
 msgstr ""
 
-#: ../../data/tribes/scripting/help/controls.lua:23
+#: ../../data/tribes/scripting/help/controls.lua:22
 msgid "Skip confirmation dialog"
 msgstr ""
 
-#: ../../data/tribes/scripting/help/controls.lua:25
+#: ../../data/tribes/scripting/help/controls.lua:24
 msgid "Road Control"
 msgstr ""
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
-#: ../../data/tribes/scripting/help/controls.lua:28
-#: ../../data/tribes/scripting/help/controls.lua:30
+#: ../../data/tribes/scripting/help/controls.lua:27
+#: ../../data/tribes/scripting/help/controls.lua:29
 msgctxt "hotkey"
 msgid "Ctrl + Left-click"
 msgstr ""
 
-#: ../../data/tribes/scripting/help/controls.lua:28
+#: ../../data/tribes/scripting/help/controls.lua:27
 msgid "While connecting two flags: Place flags automatically"
 msgstr ""
 
-#: ../../data/tribes/scripting/help/controls.lua:30
+#: ../../data/tribes/scripting/help/controls.lua:29
 msgid "While removing a flag: Remove all flags up to the first junction"
 msgstr ""
 
-#: ../../data/tribes/scripting/help/controls.lua:32
+#: ../../data/tribes/scripting/help/controls.lua:31
 msgid "Keyboard Shortcuts"
 msgstr ""
 
-#: ../../data/tribes/scripting/help/controls.lua:35
+#: ../../data/tribes/scripting/help/controls.lua:34
 msgid "Increase game speed"
 msgstr ""
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
-#: ../../data/tribes/scripting/help/controls.lua:35
+#: ../../data/tribes/scripting/help/controls.lua:34
 msgctxt "hotkey"
 msgid "Page Up"
 msgstr ""
 
-#: ../../data/tribes/scripting/help/controls.lua:37
+#: ../../data/tribes/scripting/help/controls.lua:36
 msgid "Decrease game speed"
 msgstr ""
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
-#: ../../data/tribes/scripting/help/controls.lua:37
+#: ../../data/tribes/scripting/help/controls.lua:36
 msgctxt "hotkey"
 msgid "Page Down"
 msgstr ""
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
-#: ../../data/tribes/scripting/help/controls.lua:39
+#: ../../data/tribes/scripting/help/controls.lua:38
 msgctxt "hotkey"
 msgid "Pause"
 msgstr ""
 
-#: ../../data/tribes/scripting/help/controls.lua:39
+#: ../../data/tribes/scripting/help/controls.lua:38
 msgid "Pause the game"
 msgstr ""
 
 #. TRANSLATORS: This is an access key combination. The hotkey is 'c'
-#: ../../data/tribes/scripting/help/controls.lua:41
+#: ../../data/tribes/scripting/help/controls.lua:40
 msgid "Toggle census"
 msgstr ""
 
 #. TRANSLATORS: This is an access key combination. The hotkey is 's'
-#: ../../data/tribes/scripting/help/controls.lua:43
+#: ../../data/tribes/scripting/help/controls.lua:42
 msgid "Toggle statistics"
 msgstr ""
 
 #. TRANSLATORS: This is an access key combination. The hotkey is 'o'
-#: ../../data/tribes/scripting/help/controls.lua:47
+#: ../../data/tribes/scripting/help/controls.lua:46
 msgid "Toggle objectives"
 msgstr ""
 
 #. TRANSLATORS: This is an access key combination. The hotkey is 'n'
-#: ../../data/tribes/scripting/help/controls.lua:49
+#: ../../data/tribes/scripting/help/controls.lua:48
 msgid "Toggle messages (‘news’)"
 msgstr ""
 
 #. TRANSLATORS: This is an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:51
+#: ../../data/tribes/scripting/help/controls.lua:50
 #: ../../data/tribes/scripting/help/init.lua:48
 msgid "Tribal Encyclopedia"
 msgstr ""
 
 #. TRANSLATORS: This is an access key combination. The hotkey is 'i'
-#: ../../data/tribes/scripting/help/controls.lua:53
+#: ../../data/tribes/scripting/help/controls.lua:52
 msgid "Toggle stock inventory"
 msgstr ""
 
 #. TRANSLATORS: This is an access key combination. The hotkey is 'b'
-#: ../../data/tribes/scripting/help/controls.lua:55
+#: ../../data/tribes/scripting/help/controls.lua:54
 msgid "Toggle building statistics"
 msgstr ""
 
-#: ../../data/tribes/scripting/help/controls.lua:57
+#: ../../data/tribes/scripting/help/controls.lua:56
 msgid "Center main mapview on starting location"
 msgstr ""
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
-#: ../../data/tribes/scripting/help/controls.lua:57
+#: ../../data/tribes/scripting/help/controls.lua:56
 msgctxt "hotkey"
 msgid "Home"
 msgstr ""
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
-#: ../../data/tribes/scripting/help/controls.lua:59
+#: ../../data/tribes/scripting/help/controls.lua:58
 msgctxt "hotkey"
 msgid "Ctrl + 1-9"
 msgstr ""
 
-#: ../../data/tribes/scripting/help/controls.lua:59
+#: ../../data/tribes/scripting/help/controls.lua:58
 msgid "Remember current location"
 msgstr ""
 
-#: ../../data/tribes/scripting/help/controls.lua:60
+#: ../../data/tribes/scripting/help/controls.lua:59
 msgctxt "hotkey"
 msgid "1-9"
 msgstr ""
 
-#: ../../data/tribes/scripting/help/controls.lua:60
+#: ../../data/tribes/scripting/help/controls.lua:59
 msgid "Go to previously remembered location"
 msgstr ""
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
-#: ../../data/tribes/scripting/help/controls.lua:62
+#: ../../data/tribes/scripting/help/controls.lua:61
 msgctxt "hotkey"
 msgid "Ctrl + +"
 msgstr ""
 
-#: ../../data/tribes/scripting/help/controls.lua:62
+#: ../../data/tribes/scripting/help/controls.lua:61
 msgid "Increase zoom"
 msgstr ""
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
-#: ../../data/tribes/scripting/help/controls.lua:64
+#: ../../data/tribes/scripting/help/controls.lua:63
 msgctxt "hotkey"
 msgid "Ctrl + -"
 msgstr ""
 
-#: ../../data/tribes/scripting/help/controls.lua:64
+#: ../../data/tribes/scripting/help/controls.lua:63
 msgid "Decrease zoom"
 msgstr ""
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
-#: ../../data/tribes/scripting/help/controls.lua:66
+#: ../../data/tribes/scripting/help/controls.lua:65
 msgctxt "hotkey"
 msgid "Ctrl + 0"
 msgstr ""
 
-#: ../../data/tribes/scripting/help/controls.lua:66
+#: ../../data/tribes/scripting/help/controls.lua:65
 msgid "Reset zoom"
 msgstr ""
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
-#: ../../data/tribes/scripting/help/controls.lua:68
+#: ../../data/tribes/scripting/help/controls.lua:67
 msgctxt "hotkey"
 msgid "Ctrl + F11"
 msgstr ""
 
-#: ../../data/tribes/scripting/help/controls.lua:68
+#: ../../data/tribes/scripting/help/controls.lua:67
 msgid "Take a screenshot"
 msgstr ""
 
 #. TRANSLATORS: This is an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:71
+#: ../../data/tribes/scripting/help/controls.lua:70
 msgctxt "hotkey"
 msgid "Ctrl + F10"
 msgstr ""
 
-#: ../../data/tribes/scripting/help/controls.lua:71
+#: ../../data/tribes/scripting/help/controls.lua:70
 msgid "Quit the game immediately"
 msgstr ""
 
 #. TRANSLATORS: This is an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:73
+#: ../../data/tribes/scripting/help/controls.lua:72
 msgctxt "hotkey"
 msgid "F6"
 msgstr ""
 
-#: ../../data/tribes/scripting/help/controls.lua:73
+#: ../../data/tribes/scripting/help/controls.lua:72
 msgid "Show the debug console (only in debug-builds)"
 msgstr ""
 
-#: ../../data/tribes/scripting/help/controls.lua:76
+#: ../../data/tribes/scripting/help/controls.lua:75
 msgid "Table Control"
 msgstr ""
 
-#: ../../data/tribes/scripting/help/controls.lua:77
+#: ../../data/tribes/scripting/help/controls.lua:76
 msgid ""
 "In tables that allow the selection of multiple entries, the following key "
 "combinations are available:"
@@ -2049,146 +2053,157 @@ msgstr ""
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
-#: ../../data/tribes/scripting/help/controls.lua:80
+#: ../../data/tribes/scripting/help/controls.lua:79
 msgctxt "hotkey"
 msgid "Ctrl + Click"
 msgstr ""
 
-#: ../../data/tribes/scripting/help/controls.lua:80
+#: ../../data/tribes/scripting/help/controls.lua:79
 msgctxt "table_control"
 msgid "Select multiple entries"
 msgstr ""
 
-#: ../../data/tribes/scripting/help/controls.lua:82
+#: ../../data/tribes/scripting/help/controls.lua:81
 msgctxt "table_control"
 msgid "Select a range of entries"
 msgstr ""
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
-#: ../../data/tribes/scripting/help/controls.lua:82
+#: ../../data/tribes/scripting/help/controls.lua:81
 msgctxt "hotkey"
 msgid "Shift + Click"
 msgstr ""
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
-#: ../../data/tribes/scripting/help/controls.lua:84
+#: ../../data/tribes/scripting/help/controls.lua:83
 msgctxt "hotkey"
 msgid "Ctrl + A"
 msgstr ""
 
-#: ../../data/tribes/scripting/help/controls.lua:84
+#: ../../data/tribes/scripting/help/controls.lua:83
 msgctxt "table_control"
 msgid "Select all entries"
 msgstr ""
 
-#: ../../data/tribes/scripting/help/controls.lua:86
+#: ../../data/tribes/scripting/help/controls.lua:85
 msgid "Message Window"
 msgstr ""
 
-#: ../../data/tribes/scripting/help/controls.lua:87
+#: ../../data/tribes/scripting/help/controls.lua:86
 msgid ""
 "In the message window, the following additional shortcuts are available:"
 msgstr ""
 
 #. TRANSLATORS: This is the helptext for an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:90
+#: ../../data/tribes/scripting/help/controls.lua:89
 msgctxt "hotkey"
 msgid "Alt + 0"
 msgstr ""
 
-#: ../../data/tribes/scripting/help/controls.lua:90
+#: ../../data/tribes/scripting/help/controls.lua:89
 msgid "Show all messages"
 msgstr ""
 
 #. TRANSLATORS: This is the helptext for an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:92
+#: ../../data/tribes/scripting/help/controls.lua:91
 msgctxt "hotkey"
 msgid "Alt + 1"
 msgstr ""
 
-#: ../../data/tribes/scripting/help/controls.lua:92
+#: ../../data/tribes/scripting/help/controls.lua:91
 msgid "Show geologists’ messages only"
 msgstr ""
 
 #. TRANSLATORS: This is the helptext for an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:94
+#: ../../data/tribes/scripting/help/controls.lua:93
 msgctxt "hotkey"
 msgid "Alt + 2"
 msgstr ""
 
-#: ../../data/tribes/scripting/help/controls.lua:94
+#: ../../data/tribes/scripting/help/controls.lua:93
 msgid "Show economy messages only"
 msgstr ""
 
 #. TRANSLATORS: This is the helptext for an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:96
+#: ../../data/tribes/scripting/help/controls.lua:95
 msgctxt "hotkey"
 msgid "Alt + 3"
 msgstr ""
 
-#: ../../data/tribes/scripting/help/controls.lua:96
+#: ../../data/tribes/scripting/help/controls.lua:95
 msgid "Show seafaring messages only"
 msgstr ""
 
 #. TRANSLATORS: This is the helptext for an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:98
+#: ../../data/tribes/scripting/help/controls.lua:97
 msgctxt "hotkey"
 msgid "Alt + 4"
 msgstr ""
 
-#: ../../data/tribes/scripting/help/controls.lua:98
+#: ../../data/tribes/scripting/help/controls.lua:97
 msgid "Show warfare messages only"
 msgstr ""
 
 #. TRANSLATORS: This is the helptext for an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:100
+#: ../../data/tribes/scripting/help/controls.lua:99
 msgctxt "hotkey"
 msgid "Alt + 5"
 msgstr ""
 
-#: ../../data/tribes/scripting/help/controls.lua:100
+#: ../../data/tribes/scripting/help/controls.lua:99
 msgid "Show scenario messages only"
 msgstr ""
 
 #. TRANSLATORS: This is the helptext for an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:102
+#: ../../data/tribes/scripting/help/controls.lua:101
 msgid "Jump to the location corresponding to the current message"
 msgstr ""
 
-#: ../../data/tribes/scripting/help/controls.lua:104
+#: ../../data/tribes/scripting/help/controls.lua:103
 msgid "Archive/Restore the current message"
 msgstr ""
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
-#: ../../data/tribes/scripting/help/controls.lua:104
+#: ../../data/tribes/scripting/help/controls.lua:103
 msgctxt "hotkey"
 msgid "Delete"
 msgstr ""
 
 #. TRANSLATORS: %1$d is a number, %2$s the name of a ware, e.g. 12x Stone
-#: ../../data/tribes/scripting/help/format_help.lua:86
-#: ../../data/tribes/scripting/help/format_help.lua:145
+#: ../../data/tribes/scripting/help/format_help.lua:89
+#: ../../data/tribes/scripting/help/format_help.lua:180
 msgid "%1$dx %2$s"
+msgstr ""
+
+#: ../../data/tribes/scripting/help/format_help.lua:103
+msgid "Experience levels"
+msgstr ""
+
+#. TRANSLATORS: EP = Experience Points
+#: ../../data/tribes/scripting/help/format_help.lua:105
+#: ../../data/tribes/scripting/help/format_help.lua:115
+#, lua-format
+msgid "%s to %s (%s EP)"
 msgstr ""
 
 #. TRANSLATORS: Tribal Encyclopedia: Heading for wares and workers consumed by
 #. a productionsite
-#: ../../data/tribes/scripting/help/format_help.lua:175
+#: ../../data/tribes/scripting/help/format_help.lua:215
 msgid "Wares and workers consumed:"
 msgstr ""
 
 #. TRANSLATORS: Tribal Encyclopedia: Heading for workers consumed by a
 #. productionsite
-#: ../../data/tribes/scripting/help/format_help.lua:178
+#: ../../data/tribes/scripting/help/format_help.lua:218
 msgid "Workers consumed:"
 msgstr ""
 
 #. TRANSLATORS: Tribal Encyclopedia: Heading for wares consumed by a
 #. productionsite
-#: ../../data/tribes/scripting/help/format_help.lua:182
+#: ../../data/tribes/scripting/help/format_help.lua:222
 msgid "Wares consumed:"
 msgstr ""
 
@@ -2220,7 +2235,7 @@ msgid "Introduction"
 msgstr ""
 
 #: ../../data/tribes/scripting/help/init.lua:70
-#: ../../data/tribes/scripting/help/tips.lua:71
+#: ../../data/tribes/scripting/help/tips.lua:70
 msgid "Tips"
 msgstr ""
 
@@ -2236,23 +2251,23 @@ msgstr ""
 msgid "About Widelands"
 msgstr ""
 
-#: ../../data/tribes/scripting/help/tips.lua:50
+#: ../../data/tribes/scripting/help/tips.lua:49
 msgid "Atlanteans"
 msgstr ""
 
-#: ../../data/tribes/scripting/help/tips.lua:53
+#: ../../data/tribes/scripting/help/tips.lua:52
 msgid "Barbarians"
 msgstr ""
 
-#: ../../data/tribes/scripting/help/tips.lua:56
+#: ../../data/tribes/scripting/help/tips.lua:55
 msgid "Empire"
 msgstr ""
 
-#: ../../data/tribes/scripting/help/tips.lua:62
+#: ../../data/tribes/scripting/help/tips.lua:61
 msgid "Single Player"
 msgstr ""
 
-#: ../../data/tribes/scripting/help/tips.lua:65
+#: ../../data/tribes/scripting/help/tips.lua:64
 msgid "Multiplayer"
 msgstr ""
 
@@ -2316,27 +2331,23 @@ msgstr[2] ""
 msgid "Worker uses"
 msgstr ""
 
-#: ../../data/tribes/scripting/help/worker_help.lua:156
-msgid "Experience levels"
-msgstr ""
-
 #. TRANSLATORS: Soldier levels
-#: ../../data/tribes/scripting/help/worker_help.lua:177
+#: ../../data/tribes/scripting/help/worker_help.lua:161
 msgid "Levels"
 msgstr ""
 
-#: ../../data/tribes/scripting/help/worker_help.lua:179
+#: ../../data/tribes/scripting/help/worker_help.lua:163
 msgid "Health"
 msgstr ""
 
 #. TRANSLATORS: Soldier health / defense / evade points. A 5 digit number.
-#: ../../data/tribes/scripting/help/worker_help.lua:183
+#: ../../data/tribes/scripting/help/worker_help.lua:167
 msgid "Starts at %1% points."
 msgstr ""
 
 #. TRANSLATORS: Soldier health / attack defense / evade points
-#: ../../data/tribes/scripting/help/worker_help.lua:186
-#: ../../data/tribes/scripting/help/worker_help.lua:197
+#: ../../data/tribes/scripting/help/worker_help.lua:170
+#: ../../data/tribes/scripting/help/worker_help.lua:181
 msgid "Increased by %1% point for each level."
 msgid_plural "Increased by %1% points for each level."
 msgstr[0] ""
@@ -2344,47 +2355,47 @@ msgstr[1] ""
 msgstr[2] ""
 
 #. TRANSLATORS: Soldier health / attack defense / evade level
-#: ../../data/tribes/scripting/help/worker_help.lua:189
-#: ../../data/tribes/scripting/help/worker_help.lua:199
-#: ../../data/tribes/scripting/help/worker_help.lua:209
-#: ../../data/tribes/scripting/help/worker_help.lua:224
+#: ../../data/tribes/scripting/help/worker_help.lua:173
+#: ../../data/tribes/scripting/help/worker_help.lua:183
+#: ../../data/tribes/scripting/help/worker_help.lua:193
+#: ../../data/tribes/scripting/help/worker_help.lua:208
 msgid "The maximum level is %1%."
 msgid_plural "The maximum level is %1%."
 msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
 
-#: ../../data/tribes/scripting/help/worker_help.lua:191
+#: ../../data/tribes/scripting/help/worker_help.lua:175
 msgid "Attack"
 msgstr ""
 
 #. TRANSLATORS: Points are 4 digit numbers.
-#: ../../data/tribes/scripting/help/worker_help.lua:194
+#: ../../data/tribes/scripting/help/worker_help.lua:178
 msgid "A random value between %1% and %2% points is added to each attack."
 msgstr ""
 
-#: ../../data/tribes/scripting/help/worker_help.lua:201
+#: ../../data/tribes/scripting/help/worker_help.lua:185
 msgid "Defense"
 msgstr ""
 
-#: ../../data/tribes/scripting/help/worker_help.lua:205
-#: ../../data/tribes/scripting/help/worker_help.lua:213
-#: ../../data/tribes/scripting/help/worker_help.lua:220
+#: ../../data/tribes/scripting/help/worker_help.lua:189
+#: ../../data/tribes/scripting/help/worker_help.lua:197
+#: ../../data/tribes/scripting/help/worker_help.lua:204
 #, lua-format
 msgid "Starts at %d%%."
 msgstr ""
 
-#: ../../data/tribes/scripting/help/worker_help.lua:207
-#: ../../data/tribes/scripting/help/worker_help.lua:222
+#: ../../data/tribes/scripting/help/worker_help.lua:191
+#: ../../data/tribes/scripting/help/worker_help.lua:206
 #, lua-format
 msgid "Increased by %d%% for each level."
 msgstr ""
 
-#: ../../data/tribes/scripting/help/worker_help.lua:214
+#: ../../data/tribes/scripting/help/worker_help.lua:198
 msgid "This soldier cannot be trained in defense."
 msgstr ""
 
-#: ../../data/tribes/scripting/help/worker_help.lua:217
+#: ../../data/tribes/scripting/help/worker_help.lua:201
 msgid "Evade"
 msgstr ""
 

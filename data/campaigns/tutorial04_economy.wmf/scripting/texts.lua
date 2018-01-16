@@ -80,12 +80,12 @@ explain_building_stat = {
       li(_[[If you click on a building, you can scroll through the buildings of the selected type.]]) ..
       li(_[[If you don’t have any building of a particular building type, it will be shown greyed out.]]) ..
       h2(_[[Now it’s your turn]]) ..
-      p(_[[This is enough explanation for now. Now try it out yourself. We want to know whether we still have taverns, so you have to choose the ‘Medium Buildings’ tab. Close the building statistics menu afterwards.]])
+      p(_[[This is enough explanation for now. Now try it out yourself. We want to know whether we still have taverns, so you have to choose the ‘Medium buildings’ tab. Close the building statistics menu afterwards.]])
    ),
    obj_name = "check_taverns",
    obj_title = _"Look up how many taverns you have.",
    obj_body = (
-      li(_[[Choose the ‘Medium Buildings’ tab in the building statistics window.]]) ..
+      li(_[[Choose the ‘Medium buildings’ tab in the building statistics window.]]) ..
       li(_[[Look up how many taverns you have.]]) ..
       li_arrow(_[[Below every building, there are two lines. The first one shows the number of buildings you own and how many are under construction. The second line shows the average productivity if it is a production site or training site, or the stationed and desired soldiers in military buildings.]]) ..
       li(_[[Close the building statistics window when you are done.]])
@@ -251,7 +251,7 @@ ware_stats2 = {
    body = (
       p(_[[In this menu window, you can select wares to see how their production or consumption has changed over time. Try it out with some wares.]]) ..
       li(_[[I’ll continue as soon as you click on the]]) ..
-      li_image("images/wui/stats/menu_tab_wares_econ_health.png", _[[third tab (‘Economy Health’).]])
+      li_image("images/wui/stats/menu_tab_wares_econ_health.png", _[[third tab (‘Economy health’).]])
    ),
    h = 250,
    show_instantly = true,
