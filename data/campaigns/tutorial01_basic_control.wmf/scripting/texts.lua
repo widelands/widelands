@@ -52,7 +52,7 @@ initial_message_02 = {
       p(_[[It is easier to understand what type of buildings can be built on which field when the symbols for the building spaces are enabled.]]) ..
       li_arrow(_[[Press the Space bar to toggle them, or]]) ..
       -- TRANSLATORS: List item. Has an image of the button next to it.
-      li_image("images/wui/menus/menu_toggle_buildhelp.png", _[[click the ‘Show Building Spaces’ button on the bottom of the screen.]]) ..
+      li_image("images/wui/menus/menu_toggle_buildhelp.png", _[[click the ‘Show building spaces’ button on the bottom of the screen.]]) ..
       li(_[[Right-click on this window now and then give it a try.]])
    )
 }
@@ -425,8 +425,8 @@ destroy_quarries_message = {
    title = _"Messages Arrived!",
    body = (
       p(_[[You received some messages. See how the button at the bottom of the screen has changed appearance? You can destroy the quarries now as they are no longer of any use and just blocking space. To do so, there are two possibilities:]]) ..
-      li(_[[Burning down the quarry: this is the fastest way of clearing the space. While the worker abandons the building, the wares are lost.]]) ..
-      li(_[[Dismantling the quarry: a builder will walk from the headquarters to dismantle the quarry piece by piece. Thereby, you regain some of the resources you used for the construction.]])
+      li_image("images/wui/buildings/menu_bld_bulldoze.png", _[[Burning down the quarry: this is the fastest way of clearing the space. While the worker abandons the building, the wares are lost.]]) ..
+      li_image("images/wui/buildings/menu_bld_dismantle.png", _[[Dismantling the quarry: a builder will walk from the headquarters to dismantle the quarry piece by piece. Thereby, you regain some of the resources you used for the construction.]])
    ),
    h = 300,
    obj_name = "destroy_quarries",
@@ -480,7 +480,7 @@ conclude_tutorial = {
       li_image("images/wui/menus/menu_options_menu.png", _[[‘Main Menu’ button on the very left at the bottom of the screen. Then click the]]) ..
       li_image("images/wui/menus/menu_exit_game.png", _[[‘Exit Game’ button.]]) ..
       p(_[[Thanks for playing this tutorial. Enjoy Widelands and remember to visit us at]]) ..
-      h1(p("align=center", u("http://www.widelands.org")))
+      h1(p("align=center", u("widelands.org")))
    ),
    h = 450
 }
