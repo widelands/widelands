@@ -101,16 +101,18 @@ public:
 	friend struct GamePlayerInfoPacket;
 	friend struct GameLoader;
 
-    // TODO(kxq): The lifetime of game-instance is okay for this, but is this the right spot?
-    // TODO(kxq): I should find the place where LUA changes map, and clear this whenever that happens.
-    // TODO(k.halfmann): this shoud perhpas better be a map, it will be quite sparse?
+	// TODO(kxq): The lifetime of game-instance is okay for this, but is this the right spot?
+	// TODO(kxq): I should find the place where LUA changes map, and clear this whenever that happens.
+	// TODO(kxq): When done, the x_check in worker.cc could be removed (or made more rare, and put
+	// under an assert as then mismatch would indicate the presence of a bug).
+	// TODO(k.halfmann): this shoud perhpas better be a map, it will be quite sparse?
 
-    /** Qualitity of terrain for tree planting normalized to int16.
-     *
-     *  Indexed by MapIndex. -1  is an  ivalid entry. Shared between all tribes (on the same server)
-     *  will be cleared when diffrences are detected (which happes only some times).
-     */
-    std::vector<int16_t> forester_cache_;
+	/** Qualitity of terrain for tree planting normalized to int16.
+	 *
+	 *  Indexed by MapIndex. -1  is an ivalid entry. Shared between all tribes (on the same server)
+	 *  will be cleared when diffrences are detected (which happes only some times).
+	 */
+	std::vector<int16_t> forester_cache_;
 
     Game();
 	~Game() override;

@@ -442,15 +442,15 @@ bool Worker::run_findobject(Game& game, State& state, const Action& action) {
  */
 int16_t Worker::findspace_helper_for_forester(const Coords& pos, const Map& map, Game& game) {
 
-    std::vector<int16_t>& forester_cache = game.forester_cache_;
+	std::vector<int16_t>& forester_cache = game.forester_cache_;
 	const unsigned vecsize = 1 + unsigned(map.max_index());
-    const MapIndex mi = map.get_index(pos, map.get_width());
-    const FCoords fpos = map.get_fcoords(pos);
+	const MapIndex mi = map.get_index(pos, map.get_width());
+	const FCoords fpos = map.get_fcoords(pos);
 	// This if-statement should be true only once per game.
 	if (vecsize != forester_cache.size()) {
-        forester_cache.resize (vecsize, kInvalidForesterEntry);
+		forester_cache.resize (vecsize, kInvalidForesterEntry);
 	}
-    int16_t cache_entry = forester_cache[mi];
+	int16_t cache_entry = forester_cache[mi];
 	bool x_check = false;
 	if (cache_entry > kInvalidForesterEntry) {
 		if (0 == ((game.logic_rand()) & 0xfc)) {
@@ -470,21 +470,21 @@ int16_t Worker::findspace_helper_for_forester(const Coords& pos, const Map& map,
     // TODO(k.halfmann): avoid fetching this vlaues every time, as it is const during runtime?.
 	const uint32_t attribute_id = ImmovableDescr::get_attribute_id("tree_sapling");
 
-    const DescriptionMaintainer<TerrainDescription>& terrains = game.world().terrains();
-    double best = 0.0;
+	const DescriptionMaintainer<TerrainDescription>& terrains = game.world().terrains();
+	double best = 0.0;
 	for (DescriptionIndex i = 0; i < immovables.size(); ++i) {
 		const ImmovableDescr& immovable_descr = immovables.get(i);
 		if (immovable_descr.has_attribute(attribute_id)
          && immovable_descr.has_terrain_affinity()) {
 			double probability = probability_to_grow(
-			   immovable_descr.terrain_affinity(), fpos, map, terrains);
+				immovable_descr.terrain_affinity(), fpos, map, terrains);
 			if (probability > best) {
 				best = probability;
 			}
 		}
 	}
 	// normalize value to int16 range
-    const int16_t correct_val = (std::numeric_limits<int16_t>::max() -1) * best;
+	const int16_t correct_val = (std::numeric_limits<int16_t>::max() -1) * best;
 
 	if (x_check && (correct_val != cache_entry)) {
 		forester_cache.clear();
