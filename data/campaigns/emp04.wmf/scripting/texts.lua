@@ -2,8 +2,7 @@
 -- Some formating functions
 -- =========================
 
-include "scripting/formatting.lua"
-include "scripting/format_scenario.lua"
+include "scripting/richtext_scenarios.lua"
 
 function lutius(title, text)
    return speech("map:Lutius.png", "2F9131", title, text)
@@ -46,7 +45,8 @@ obj_dismantle_buildings = {
    title=_"Dismantle the unproductive buildings",
    number = 1,
    body = objective_text(_"Dismantle Buildings",
-      listitem_bullet(_[[Dismantle all unproductive small buildings to get some resources for new buildings. Remember to check the messages and the building statistics for unproductive buildings.]])
+      li(_[[Dismantle all unproductive small buildings to get some resources for new buildings.]]) ..
+      li_arrow(_[[Remember to check the messages and the building statistics for unproductive buildings.]])
    ),
 }
 
@@ -55,7 +55,7 @@ obj_clear_roads = {
    title=_"Clear all unnecessary roads",
    number = 1,
    body = objective_text(_"Clear Road Network",
-      listitem_bullet(_[[Resolve the chaotic road network by clearing all unnecessary roads.]])
+      li(_[[Resolve the chaotic road network by clearing all unnecessary roads.]])
    ),
 }
 
@@ -64,7 +64,7 @@ obj_find_farm_plans = {
    title=_"Find the construction plans for the farms",
    number = 1,
    body = objective_text(_"Find Farm Construction Plans",
-      listitem_bullet(_[[Recover the construction plans for the farms. Search for them in the hills east of your border.]])
+      li(_[[Recover the construction plans for the farms. Search for them in the hills east of your border.]])
    ),
 }
 
@@ -73,7 +73,7 @@ obj_build_quarries_and_lumberjacks = {
    title=_"Build at least 3 lumberjack’s houses and 2 quarries",
    number = 1,
    body = objective_text(_"Quarries and Lumberjacks",
-      listitem_bullet(_[[Build at least three lumberjack’s houses and two quarries to renew your building material supply chain.]])
+      li(_[[Build at least three lumberjack’s houses and two quarries to renew your building material supply chain.]])
    ),
 }
 
@@ -82,7 +82,7 @@ obj_produce_fish = {
    title=_"Produce fish and rations",
    number = 1,
    body = objective_text(_"Food Production",
-      listitem_bullet(_[[Find and catch some fish. Afterwards, produce rations for your miners.]])
+      li(_[[Find and catch some fish. Afterwards, produce rations for your miners.]])
    ),
 }
 
@@ -91,7 +91,7 @@ obj_replace_foresters = {
    title=_"Replace the old and ineffective forester’s houses",
    number = 1,
    body = objective_text(_"Build Two New Forester’s Houses",
-      listitem_bullet(_[[Replace the two forester’s houses by new ones to increase productivity.]])
+      li(_[[Replace the two forester’s houses by new ones to increase productivity.]])
    ),
 }
 
@@ -100,7 +100,8 @@ obj_find_monastery = {
    title=_"Find the monastery in the north",
    number = 1,
    body = objective_text(_"Find the Monastery",
-      listitem_bullet(_[[Find the monastery in the north to obtain the improved technology for your wheat production chain.]])),
+      li(_[[Find the monastery in the north to obtain the improved technology for your wheat production chain.]])
+   ),
 }
 
 obj_deal_with_julia = {
@@ -108,7 +109,8 @@ obj_deal_with_julia = {
    title=_"Deal with Julia to get the technology",
    number = 1,
    body = objective_text(_"Diplomacy: Trade or War",
-      listitem_bullet(_[[Decide: Either collect 35 sheaves of wheat and 15 bottles of wine for the goddess in your headquarters or conquer the monastery.]])),
+      li(_[[Decide: Either collect 35 sheaves of wheat and 15 bottles of wine for the goddess in your headquarters or conquer the monastery.]])
+   ),
 }
 
 obj_heroes = {
@@ -116,7 +118,8 @@ obj_heroes = {
    title=_"Train at least 3 heroes",
    number = 1,
    body = objective_text(_"Hero Training",
-      listitem_bullet(_[[Use your resources wisely to train at least three fully promoted heroes.]])),
+      li(_[[Use your resources wisely to train at least three fully promoted heroes.]])
+   ),
 }
 
 obj_produce_tools = {
@@ -124,7 +127,9 @@ obj_produce_tools = {
    title=_"Produce at least 10 tools",
    number = 1,
    body = objective_text(_"Tool Production",
-      listitem_bullet(_[[Produce at least ten tools to improve your economy. Remember that you can control the production amount in the economy settings.]])),
+      li(_[[Produce at least ten tools to improve your economy.]]) ..
+      li_arrow(_[[Remember that you can control the production amount in the economy settings.]])
+   ),
 }
 
 obj_recruit_soldiers = {
@@ -132,7 +137,8 @@ obj_recruit_soldiers = {
    title=_"Recruit new soldiers",
    number = 1,
    body = objective_text(_"New Soldier Recruiting",
-      listitem_bullet(_[[Recruit at least ten new soldiers in your barracks. Don’t forget to forge weapons and armor for them.]])
+      li(_[[Recruit at least ten new soldiers in your barracks.]]) ..
+      li_arrow(_[[Don’t forget to forge weapons and armor for them.]])
    ),
 }
 
@@ -141,7 +147,7 @@ obj_conquer_all = {
    title=_"Defeat the Barbarians",
    number = 1,
    body = objective_text(_"Defeat the Enemy",
-      listitem_bullet(_[[End the Barbarian intrusion into your very own part of the world.]])
+      li(_[[End the Barbarian intrusion into your very own part of the world.]])
    ),
 }
 
@@ -150,7 +156,8 @@ obj_charcoal = {
    title=_"Build 2 charcoal kiln",
    number = 1,
    body = objective_text(_"Build Two Charcoal Kilns",
-      listitem_bullet(_[[Build two charcoal kilns to support the iron industry. Remember to ensure a constant log supply for them.]])
+      li(_[[Build two charcoal kilns to support the iron industry.]]) ..
+      li_arrow(_[[Remember to ensure a constant log supply for them.]])
    ),
 }
 
@@ -159,7 +166,8 @@ obj_training = {
    title=_"Increase your military strength by training your soldiers",
    number = 1,
    body = objective_text(_"Training is Important",
-      listitem_bullet(_[[Train your soldiers hard and train them fast. You need to increase your military strength.]])
+      li(_[[Train your soldiers hard and train them fast.]]) ..
+      li_arrow(_[[You need to increase your military strength.]])
    ),
 }
 
@@ -168,7 +176,7 @@ obj_upgrade = {
    title=_"Build a training camp and enhance the arena",
    number = 1,
    body = objective_text(_"More Efficient Training Buildings",
-      listitem_bullet(_[[Build a training camp and enhance your arena to a colosseum.]])
+      li(_[[Build a training camp and enhance your arena to a colosseum.]])
    ),
 }
 
