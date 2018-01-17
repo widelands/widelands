@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2018-01-04 13:28+0000\n"
-"PO-Revision-Date: 2018-01-09 21:47+0000\n"
+"POT-Creation-Date: 2018-01-10 16:38+0000\n"
+"PO-Revision-Date: 2018-01-10 22:17+0000\n"
 "Last-Translator: Milan Fašina <matrix17@seznam.cz>\n"
 "Language-Team: Czech (http://www.transifex.com/widelands/widelands/language/cs/)\n"
 "MIME-Version: 1.0\n"
@@ -554,7 +554,7 @@ msgstr "Milíř na dřevěné uhlí"
 #: ../../data/tribes/buildings/productionsites/barbarians/charcoal_kiln/init.lua:55
 #: ../../data/tribes/buildings/productionsites/empire/charcoal_kiln/init.lua:52
 msgid "producing coal"
-msgstr "těžím uhlí"
+msgstr "prokukce uhlí"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/atlanteans/coalmine/init.lua:7
@@ -570,7 +570,7 @@ msgstr "Důl na uhlí"
 #: ../../data/tribes/buildings/productionsites/empire/coalmine/init.lua:59
 #: ../../data/tribes/buildings/productionsites/empire/coalmine_deep/init.lua:57
 msgid "mining coal"
-msgstr "těžení uhlí"
+msgstr "dolování uhlí"
 
 #: ../../data/tribes/buildings/productionsites/atlanteans/coalmine/init.lua:77
 #: ../../data/tribes/buildings/productionsites/barbarians/coalmine/init.lua:74
@@ -613,7 +613,7 @@ msgstr "těžím žulu"
 #. TRANSLATORS: Completed/Skipped/Did not start mining quartz because ...
 #: ../../data/tribes/buildings/productionsites/atlanteans/crystalmine/init.lua:92
 msgid "mining quartz"
-msgstr "doluji křemen"
+msgstr "dolování křemene"
 
 #. TRANSLATORS: Completed/Skipped/Did not start mining diamonds because ...
 #: ../../data/tribes/buildings/productionsites/atlanteans/crystalmine/init.lua:110
@@ -753,7 +753,7 @@ msgstr "Důl na zlato"
 #: ../../data/tribes/buildings/productionsites/empire/goldmine/init.lua:59
 #: ../../data/tribes/buildings/productionsites/empire/goldmine_deep/init.lua:57
 msgid "mining gold"
-msgstr "doluji zlato"
+msgstr "dolování zlata"
 
 #: ../../data/tribes/buildings/productionsites/atlanteans/goldmine/init.lua:77
 #: ../../data/tribes/buildings/productionsites/barbarians/goldmine/init.lua:74
@@ -840,7 +840,7 @@ msgstr "Důl na železo"
 #: ../../data/tribes/buildings/productionsites/empire/ironmine/init.lua:59
 #: ../../data/tribes/buildings/productionsites/empire/ironmine_deep/init.lua:57
 msgid "mining iron"
-msgstr "těžba železa"
+msgstr "dolování železa"
 
 #: ../../data/tribes/buildings/productionsites/atlanteans/ironmine/init.lua:77
 #: ../../data/tribes/buildings/productionsites/barbarians/ironmine/init.lua:74
@@ -925,7 +925,7 @@ msgstr "Pila"
 #: ../../data/tribes/buildings/productionsites/atlanteans/sawmill/init.lua:53
 #: ../../data/tribes/buildings/productionsites/empire/sawmill/init.lua:53
 msgid "sawing logs"
-msgstr "řežu kmeny"
+msgstr "řezání kmenů"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/atlanteans/scouts_house/init.lua:7
@@ -1090,31 +1090,31 @@ msgstr "Zbrojířství"
 #. because ...
 #: ../../data/tribes/buildings/productionsites/atlanteans/weaponsmithy/init.lua:73
 msgid "forging a light trident"
-msgstr "kovu lehký trojzubec"
+msgstr "kování lehkého trojzubce"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a long trident because
 #. ...
 #: ../../data/tribes/buildings/productionsites/atlanteans/weaponsmithy/init.lua:88
 msgid "forging a long trident"
-msgstr "kovu dlouhý trojzubec"
+msgstr "kování dlouhého trojzubce"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a steel trident
 #. because ...
 #: ../../data/tribes/buildings/productionsites/atlanteans/weaponsmithy/init.lua:103
 msgid "forging a steel trident"
-msgstr "kovu ocelový trojzubec"
+msgstr "kování ocelového trojzubce"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a double trident
 #. because ...
 #: ../../data/tribes/buildings/productionsites/atlanteans/weaponsmithy/init.lua:118
 msgid "forging a double trident"
-msgstr "kovu dvojitý trojzubec"
+msgstr "kování dvojitého trojzubce"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a heavy double trident
 #. because ...
 #: ../../data/tribes/buildings/productionsites/atlanteans/weaponsmithy/init.lua:133
 msgid "forging a heavy double trident"
-msgstr "kovu těžký dvojitý trojzubec"
+msgstr "kování těžkého dvojitého trojzubce"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/atlanteans/weaving_mill/init.lua:7
@@ -1205,19 +1205,19 @@ msgstr "Dílna na sekery"
 #: ../../data/tribes/buildings/productionsites/barbarians/ax_workshop/init.lua:77
 #: ../../data/tribes/buildings/productionsites/barbarians/warmill/init.lua:84
 msgid "forging an ax"
-msgstr "kovu sekeru"
+msgstr "kování sekery"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a sharp ax because ...
 #: ../../data/tribes/buildings/productionsites/barbarians/ax_workshop/init.lua:92
 #: ../../data/tribes/buildings/productionsites/barbarians/warmill/init.lua:99
 msgid "forging a sharp ax"
-msgstr "kovu ostrou sekeru"
+msgstr "kování ostré sekery"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a broad ax because ...
 #: ../../data/tribes/buildings/productionsites/barbarians/ax_workshop/init.lua:107
 #: ../../data/tribes/buildings/productionsites/barbarians/warmill/init.lua:114
 msgid "forging a broad ax"
-msgstr "kovu širokou sekeru"
+msgstr "kování široké sekery"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/barbarians/bakery/init.lua:7
@@ -1443,17 +1443,17 @@ msgstr "Kovárna přileb"
 #: ../../data/tribes/buildings/productionsites/barbarians/helmsmithy/init.lua:78
 #: ../../data/tribes/buildings/productionsites/empire/armorsmithy/init.lua:79
 msgid "forging a helmet"
-msgstr "kovu přilbu"
+msgstr "kování přilby"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a mask because ...
 #: ../../data/tribes/buildings/productionsites/barbarians/helmsmithy/init.lua:90
 msgid "forging a mask"
-msgstr "kovu masku"
+msgstr "kování masky"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a warhelm because ...
 #: ../../data/tribes/buildings/productionsites/barbarians/helmsmithy/init.lua:102
 msgid "forging a warhelm"
-msgstr "kovu válečnou přilbu"
+msgstr "kování válečné přilby"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/barbarians/hunters_hut/init.lua:7
@@ -1656,19 +1656,19 @@ msgstr "Válečná akademie"
 #. ...
 #: ../../data/tribes/buildings/productionsites/barbarians/warmill/init.lua:129
 msgid "forging a bronze ax"
-msgstr "kovu bronzovou sekeru"
+msgstr "kování bronzové sekery"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a battle ax because
 #. ...
 #: ../../data/tribes/buildings/productionsites/barbarians/warmill/init.lua:144
 msgid "forging a battle ax"
-msgstr "kovu bojovou sekeru"
+msgstr "kování bojové sekery"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a warrior’s ax because
 #. ...
 #: ../../data/tribes/buildings/productionsites/barbarians/warmill/init.lua:159
 msgid "forging a warrior’s ax"
-msgstr "kovu válečnou sekeru"
+msgstr "kování válečné sekery"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/barbarians/weaving_mill/init.lua:7
@@ -1714,19 +1714,19 @@ msgstr "Platnéřství"
 #. because ...
 #: ../../data/tribes/buildings/productionsites/empire/armorsmithy/init.lua:91
 msgid "forging a suit of armor"
-msgstr "kovu zbroj"
+msgstr "kování zbroje"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a suit of chain armor
 #. because ...
 #: ../../data/tribes/buildings/productionsites/empire/armorsmithy/init.lua:103
 msgid "forging a suit of chain armor"
-msgstr "kovu kroužkovou zbroj"
+msgstr "kování kroužkové zbroje"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a suit of gilded armor
 #. because ...
 #: ../../data/tribes/buildings/productionsites/empire/armorsmithy/init.lua:115
 msgid "forging a suit of gilded armor"
-msgstr "kovu zlacenou zbroj"
+msgstr "kování zlacené zbroje"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/empire/bakery/init.lua:7
@@ -2104,30 +2104,30 @@ msgstr "Zbrojířství"
 #. ...
 #: ../../data/tribes/buildings/productionsites/empire/weaponsmithy/init.lua:78
 msgid "forging a wooden spear"
-msgstr "kovu dřevěný oštěp"
+msgstr "výroba dřevěného oštěpu"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a spear because ...
 #: ../../data/tribes/buildings/productionsites/empire/weaponsmithy/init.lua:93
 msgid "forging a spear"
-msgstr "kovu oštěp"
+msgstr "kování oštěpu"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging an advanced spear
 #. because ...
 #: ../../data/tribes/buildings/productionsites/empire/weaponsmithy/init.lua:108
 msgid "forging an advanced spear"
-msgstr "kovu vylepšený oštěp"
+msgstr "kování vylepšeného oštěpu"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a heavy spear because
 #. ...
 #: ../../data/tribes/buildings/productionsites/empire/weaponsmithy/init.lua:123
 msgid "forging a heavy spear"
-msgstr "kovu těžký oštěp"
+msgstr "kování těžkého oštěpu"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a war spear because
 #. ...
 #: ../../data/tribes/buildings/productionsites/empire/weaponsmithy/init.lua:138
 msgid "forging a war spear"
-msgstr "kovu válečný oštěp"
+msgstr "kování válečného oštěpu"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/empire/weaving_mill/init.lua:7
