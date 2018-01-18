@@ -241,7 +241,6 @@ ware_stats1 = {
    obj_name = "open_ware_stat",
    obj_title = _"Open the ware statistics window.",
    obj_body = (
-      paragraphdivider() ..
       li(_[[Open the ‘Ware statistics’ window, accessed via the statistics menu.]])
    )
 }
