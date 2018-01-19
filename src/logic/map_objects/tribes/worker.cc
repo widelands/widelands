@@ -2581,7 +2581,7 @@ void Worker::start_task_scout(Game& game, uint16_t const radius, uint32_t const 
 	assert(nullptr != homebase);
 	const Coords hutpos = homebase->get_positions(game)[0];
 
-	// the first element of scouts_worklist vector stores the location
+	// The first element of scouts_worklist vector stores the location
 	// of my hut, at the time of creation.
 	// If the building location changes, then pop the now-obsolete
 	// list of points of interest
