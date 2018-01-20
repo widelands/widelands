@@ -452,8 +452,9 @@ int16_t Worker::findspace_helper_for_forester(const Coords& pos, const Map& map,
 	}
 	int16_t cache_entry = forester_cache[mi];
 	bool x_check = false;
-	if (cache_entry > kInvalidForesterEntry) {
-		if (0 == ((game.logic_rand()) & 0xfc)) {
+	assert (cache_entry >= kInvalidForesterEntry);
+	if (cache_entry != kInvalidForesterEntry) {
+		if (0 == ((game.logic_rand()) & 0xfe)) {
 			// Cached value found, but exceptionally not trusted.
 			x_check = true;
 		} else {
@@ -475,7 +476,7 @@ int16_t Worker::findspace_helper_for_forester(const Coords& pos, const Map& map,
 	for (DescriptionIndex i = 0; i < immovables.size(); ++i) {
 		const ImmovableDescr& immovable_descr = immovables.get(i);
 		if (immovable_descr.has_attribute(attribute_id)
-         && immovable_descr.has_terrain_affinity()) {
+				&& immovable_descr.has_terrain_affinity()) {
 			double probability = probability_to_grow(
 				immovable_descr.terrain_affinity(), fpos, map, terrains);
 			if (probability > best) {
@@ -490,7 +491,8 @@ int16_t Worker::findspace_helper_for_forester(const Coords& pos, const Map& map,
 		forester_cache.clear();
 		forester_cache.resize (vecsize, kInvalidForesterEntry);
 	}
-	return forester_cache[mi] = correct_val;
+	forester_cache[mi] = correct_val;
+	return correct_val;
 }
 
 
