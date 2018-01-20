@@ -271,8 +271,8 @@ private:
 	struct PlaceToScout {
 		PlaceToScout(const Coords pt) : randomwalk(false), scoutme(pt) {
 		}
-		// The variable scoutme should not be accessed in these cases.
-		// Assigning an obviously-wrong value, to make the error show sooner.
+		// The variable scoutme should not be accessed when randomwalk is true.
+		// Initializing the scoutme variable with an obviously-wrong value.
 		PlaceToScout() : randomwalk(true), scoutme(-32100, -32100) {
 		}
 		const bool randomwalk;
