@@ -21,6 +21,7 @@
 #define WL_WUI_PLOT_AREA_H
 
 #include <vector>
+#include <memory>
 
 #include <boost/bind.hpp>
 
@@ -115,8 +116,8 @@ protected:
 	int32_t initialize_update();
 
 	struct PlotData {
-		const std::vector<uint32_t>* absolute_data;  // The absolute dataset
-		std::vector<uint32_t>* relative_data;        // The relative dataset
+		const std::vector<uint32_t>* absolute_data;            // The absolute dataset
+		std::unique_ptr<std::vector<uint32_t>> relative_data;  // The relative dataset
 		bool showplot;
 		RGBColor plotcolor;
 	};
