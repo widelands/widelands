@@ -442,3 +442,19 @@ function inline_header(header, text)
       div("width=100%", font("size=13 color=D1D1D1", header .. " ") ..
       font("size=12", text))
 end
+
+-- RST
+-- .. function:: join_sentences(sentence1, sentence2)
+--
+--    Joins 2 sentences together. Use this rather than manually concatenating
+--    a blank space, because some languages don't use blank spaces.
+--
+--    :arg sentence1: text of the first sentence
+--    :arg sentence2: text of the second sentence
+--    :returns: two concatenated sentences with a localized sentence joiner.
+--
+function join_sentences(sentence1, sentence2)
+   -- TRANSLATORS: Put 2 sentences one after the other.
+   -- TRANSLATORS: Languages using Chinese script probably want to lose the blank space here.
+   return pgettext("sentence_separator", "%s %s"):bformat(sentence1, sentence2)
+end
