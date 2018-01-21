@@ -173,7 +173,8 @@ public:
 	void start_task_carry_trade_item(Game& game, int trade_id, ObjectPointer other_market);
 	void update_task_carry_trade_item(Game&);
 
-	void start_task_geologist(Game&, uint8_t attempts, uint8_t radius, const std::string& subcommand);
+	void
+	start_task_geologist(Game&, uint8_t attempts, uint8_t radius, const std::string& subcommand);
 
 	void start_task_scout(Game&, uint16_t, uint32_t);
 
@@ -258,26 +259,29 @@ private:
 	bool run_play_sound(Game&, State&, const Action&);
 	bool run_construct(Game&, State&, const Action&);
 
-    // List of places to visit (only if scout), plus a reminder to
-    // occasionally go just somewhere.
-    struct PlaceToScout {
-        PlaceToScout(const Coords pt) : randomwalk(false), scoutme(pt) {
-        }
-        // The variable scoutme should not be accessed when randomwalk is true.
-        // Initializing the scoutme variable with an obviously-wrong value.
-        PlaceToScout() : randomwalk(true), scoutme(-32100, -32100) {
-        }
-        const bool randomwalk;
-        const Coords scoutme;
-    };
-    std::vector<PlaceToScout> scouts_worklist;
+	// List of places to visit (only if scout), plus a reminder to
+	// occasionally go just somewhere.
+	struct PlaceToScout {
+		PlaceToScout(const Coords pt) : randomwalk(false), scoutme(pt) {
+		}
+		// The variable scoutme should not be accessed when randomwalk is true.
+		// Initializing the scoutme variable with an obviously-wrong value.
+		PlaceToScout() : randomwalk(true), scoutme(-32100, -32100) {
+		}
+		const bool randomwalk;
+		const Coords scoutme;
+	};
+	std::vector<PlaceToScout> scouts_worklist;
 
-    // scout
-    void prepare_scouts_worklist(const Map& map, const Coords& hutpos);
-    void check_visible_sites(const Map& map, const Player& player);
-    void add_sites(Game& game, const Map& map, const Player& player, std::vector<ImmovableFound>& found_sites);
-    bool scout_random_walk(Game& game, const Map& map, State& state);
-    bool scout_lurk_around(Game& game, const Map& map, struct Worker::PlaceToScout& scoutat);
+	// scout
+	void prepare_scouts_worklist(const Map& map, const Coords& hutpos);
+	void check_visible_sites(const Map& map, const Player& player);
+	void add_sites(Game& game,
+	               const Map& map,
+	               const Player& player,
+	               std::vector<ImmovableFound>& found_sites);
+	bool scout_random_walk(Game& game, const Map& map, State& state);
+	bool scout_lurk_around(Game& game, const Map& map, struct Worker::PlaceToScout& scoutat);
 
 	OPtr<PlayerImmovable> location_;   ///< meta location of the worker
 	Economy* economy_;                 ///< economy this worker is registered in
