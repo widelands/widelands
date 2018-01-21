@@ -375,7 +375,8 @@ function mission_complete()
    scroll_to_field(map:get_field(4,5))
 
    campaign_message_box(story_msg_7)
-
+   
+   p1:reveal_scenario("barbariantut02")
    p1:reveal_campaign("campsect1")
 end
 
