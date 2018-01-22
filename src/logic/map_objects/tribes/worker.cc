@@ -2731,7 +2731,7 @@ void Worker::start_task_scout(Game& game, uint16_t const radius, uint32_t const 
 		const PlaceToScout gosomewhere;
 		scouts_worklist.push_back(gosomewhere);
 	} else {
-		assert (1 == scouts_worklist.size()) ;
+		assert(1 == scouts_worklist.size());
 	}
 
 	// first get out
@@ -2925,12 +2925,12 @@ void Worker::draw(const EditorGameBase& egbase,
 }
 
 /*
- ==============================
+==============================
 
- Load/save support
+Load/save support
 
- ==============================
- */
+==============================
+*/
 
 constexpr uint8_t kCurrentPacketVersion = 3;
 

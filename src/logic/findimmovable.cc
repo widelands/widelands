@@ -67,10 +67,12 @@ bool FindImmovableAttackTarget::accept(const BaseImmovable& imm) const {
 	}
 	return false;
 }
+
 // Enemy military sites that cannot be attacked (for scout)
 // Note that this also select ally's military sites. This is okay
 // for scout, since those are stripped away later: Allied foreign
 // msites are visible.
+
 bool FindForeignMilitarysite::accept(const BaseImmovable& imm) const {
 	if (upcast(MilitarySite const, ms, &imm)) {
 		return &ms->owner() != &player;
