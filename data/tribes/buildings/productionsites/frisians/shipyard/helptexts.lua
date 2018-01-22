@@ -3,12 +3,12 @@ include "tribes/scripting/help/global_helptexts.lua"
 
 function building_helptext_lore ()
    -- TRANSLATORS: Lore helptext for a building
-   return pgettext ("frisians_building", "behold the threaden sails,/Born with th' invisible and creeping wind,/Draw the huge bottoms through the furrowed sea,/Breasting the lofty surge.")
+   return pgettext ("frisians_building", "")
 end
 
 function building_helptext_lore_author ()
    -- TRANSLATORS: Lore author helptext for a building
-   return pgettext ("frisians_building", "Chorus in Henry V")
+   return pgettext ("frisians_building", "")
 end
 
 function building_helptext_purpose()

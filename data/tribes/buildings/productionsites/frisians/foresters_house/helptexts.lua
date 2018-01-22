@@ -1,11 +1,11 @@
 function building_helptext_lore ()
    -- TRANSLATORS: Lore helptext for a building
-   return pgettext ("frisians_building", "")
+   return pgettext ("frisians_building", "What can ever be more beautiful tham the brilliant sun's beams shining through the glistering canopy of leaves?")
 end
 
 function building_helptext_lore_author ()
    -- TRANSLATORS: Lore author helptext for a building
-   return pgettext ("frisians_building", "")
+   return pgettext ("frisians_building", "A forester explaining his choice of profession")
 end
 
 function building_helptext_purpose()

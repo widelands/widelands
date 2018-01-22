@@ -1,11 +1,11 @@
 function building_helptext_lore ()
    -- TRANSLATORS: Lore helptext for a building
-   return pgettext ("frisians_building", "I saw good strawberries in your garden there./I do beseech you send for some of them.")
+   return pgettext ("frisians_building", "Meat doesn't grow on bushes. Fruit do.")
 end
 
 function building_helptext_lore_author ()
    -- TRANSLATORS: Lore author helptext for a building
-   return pgettext ("frisians_building", "Gloucester in Richard III")
+   return pgettext ("frisians_building", "A fruit collector advertising his harvest to a landlady")
 end
 
 function building_helptext_purpose()

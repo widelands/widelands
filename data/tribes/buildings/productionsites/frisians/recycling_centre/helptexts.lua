@@ -3,12 +3,12 @@ include "tribes/scripting/help/global_helptexts.lua"
 
 function building_helptext_lore ()
    -- TRANSLATORS: Lore helptext for a building
-   return pgettext ("frisians_building", "I am prepar'd; here is my keen-edged sword,/Deck'd with five flower-de-luces on each side,/The which at Touraine, in Saint Katherine's church-yard,/Out of a great deal of old iron I chose forth.")
+   return pgettext ("frisians_building", "")
 end
 
 function building_helptext_lore_author ()
    -- TRANSLATORS: Lore author helptext for a building
-   return pgettext ("frisians_building", "Joan of Arc in Henry VI/1")
+   return pgettext ("frisians_building", "")
 end
 
 function building_helptext_purpose()

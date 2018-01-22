@@ -1,11 +1,11 @@
 function building_helptext_lore ()
    -- TRANSLATORS: Lore helptext for a building
-   return pgettext ("frisians_building", "These fishers tell the infirmities of men,/And from their wat'ry empire recollect/All that may men approve or men detect!")
+   return pgettext ("frisians_building", "Hunters can't sell anything on fridays, but fishers don't have such problems.")
 end
 
 function building_helptext_lore_author ()
    -- TRANSLATORS: Lore author helptext for a building
-   return pgettext ("frisians_building", "Pericles Prince of Tyre")
+   return pgettext ("frisians_building", "A hunter admiring a fisher")
 end
 
 function building_helptext_purpose()

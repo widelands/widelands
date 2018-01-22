@@ -1,10 +1,10 @@
-dirname = path.dirname(__file__)
+dirname = path.dirname (__file__)
 
 tribes:new_warehouse_type {
    msgctxt = "frisians_building",
    name = "frisians_warehouse",
    -- TRANSLATORS: This is a building name used in lists of buildings
-   descname = pgettext("frisians_building", "Warehouse"),
+   descname = pgettext ("frisians_building", "Warehouse"),
    helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "medium",
@@ -24,8 +24,13 @@ tribes:new_warehouse_type {
 
    animations = {
       idle = {
-         pictures = path.list_files(dirname .. "idle_??.png"),
-         hotspot = { 51, 83 },
+         pictures = path.list_files (dirname .. "idle_??.png"),
+         hotspot = { 64, 103 },
+         fps = 10,
+      },
+      build = {
+         pictures = path.list_files (dirname .. "build_?.png"),
+         hotspot = { 64, 103 },
       },
    },
 

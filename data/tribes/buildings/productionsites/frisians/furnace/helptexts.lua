@@ -3,12 +3,12 @@ include "tribes/scripting/help/global_helptexts.lua"
 
 function building_helptext_lore ()
    -- TRANSLATORS: Lore helptext for a building
-   return pgettext ("frisians_building", "Be advised;/Heat not a furnace for your foe so hot/That it do singe yourself.")
+   return pgettext ("frisians_building", "Miners get ores from the depths of the hills; but without our work, their labour is vain.")
 end
 
 function building_helptext_lore_author ()
    -- TRANSLATORS: Lore author helptext for a building
-   return pgettext ("frisians_building", "Norfolk in Henry VIII")
+   return pgettext ("frisians_building", "Slogan of the Smelters' Guild")
 end
 
 function building_helptext_purpose()

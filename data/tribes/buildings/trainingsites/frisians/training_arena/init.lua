@@ -1,10 +1,10 @@
-dirname = path.dirname(__file__)
+dirname = path.dirname (__file__)
 
 tribes:new_trainingsite_type {
    msgctxt = "frisians_building",
    name = "frisians_training_arena",
    -- TRANSLATORS: This is a building name used in lists of buildings
-   descname = pgettext("frisians_building", "Large Training Arena"),
+   descname = pgettext ("frisians_building", "Large Training Arena"),
    helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "big",
@@ -26,9 +26,19 @@ tribes:new_trainingsite_type {
 
    animations = {
       idle = {
-         pictures = path.list_files(dirname .. "idle_??.png"),
-         hotspot = { 87, 76 }
-      }
+         pictures = path.list_files (dirname .. "idle_??.png"),
+         hotspot = { 113, 75 },
+         fps = 10,
+      },
+      working = {
+         pictures = path.list_files (dirname .. "working_??.png"),
+         hotspot = { 113, 75 },
+         fps = 10,
+      },
+      unoccupied = {
+         pictures = path.list_files (dirname .. "unoccupied_?.png"),
+         hotspot = { 113, 75 },
+      },
    },
 
    aihints = {
@@ -107,10 +117,10 @@ tribes:new_trainingsite_type {
       },
       upgrade_soldier_attack_3 = {
          -- TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-         descname = pgettext("frisians_building", "upgrading soldier attack from level 3 to level 4"),
+         descname = pgettext ("frisians_building", "upgrading soldier attack from level 3 to level 4"),
          actions = {
             "check_soldier=soldier attack 3",
-            "sleep=30000",
+            "animate=working 30000",
             "check_soldier=soldier attack 3", -- Because the soldier can be expelled by the player
             "consume=sword_long:2 honey_bread mead:2 smoked_fish,smoked_meat",
             "train=soldier attack 3 4",
@@ -119,10 +129,10 @@ tribes:new_trainingsite_type {
       },
       upgrade_soldier_attack_4 = {
          -- TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-         descname = pgettext("frisians_building", "upgrading soldier attack from level 4 to level 5"),
+         descname = pgettext ("frisians_building", "upgrading soldier attack from level 4 to level 5"),
          actions = {
             "check_soldier=soldier attack 4",
-            "sleep=30000",
+            "animate=working 30000",
             "check_soldier=soldier attack 4", -- Because the soldier can be expelled by the player
             "consume=sword_curved:2 honey_bread mead:2 smoked_fish,smoked_meat",
             "train=soldier attack 4 5",
@@ -131,10 +141,10 @@ tribes:new_trainingsite_type {
       },
       upgrade_soldier_attack_5 = {
          -- TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-         descname = pgettext("frisians_building", "upgrading soldier attack from level 5 to level 6"),
+         descname = pgettext ("frisians_building", "upgrading soldier attack from level 5 to level 6"),
          actions = {
             "check_soldier=soldier attack 5",
-            "sleep=30000",
+            "animate=working 30000",
             "check_soldier=soldier attack 5", -- Because the soldier can be expelled by the player
             "consume=sword_double:2 honey_bread mead:2 smoked_fish,smoked_meat",
             "train=soldier attack 5 6",
@@ -143,10 +153,10 @@ tribes:new_trainingsite_type {
       },
       upgrade_soldier_defense_1 = {
          -- TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-         descname = pgettext("frisians_building", "upgrading soldier defense from level 1 to level 2"),
+         descname = pgettext ("frisians_building", "upgrading soldier defense from level 1 to level 2"),
          actions = {
             "check_soldier=soldier defense 1",
-            "sleep=30000",
+            "animate=working 30000",
             "check_soldier=soldier defense 1", -- Because the soldier can be expelled by the player
             "consume=fur_clothes_golden honey_bread,mead smoked_fish,smoked_meat",
             "train=soldier defense 1 2",
@@ -155,10 +165,10 @@ tribes:new_trainingsite_type {
       },
       upgrade_soldier_health_1 = {
          -- TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-         descname = pgettext("frisians_building", "upgrading soldier health from level 1 to level 2"),
+         descname = pgettext ("frisians_building", "upgrading soldier health from level 1 to level 2"),
          actions = {
             "check_soldier=soldier health 1",
-            "sleep=30000",
+            "animate=working 30000",
             "check_soldier=soldier health 1", -- Because the soldier can be expelled by the player
             "consume=helmet_golden honey_bread,mead smoked_fish,smoked_meat",
             "train=soldier health 1 2",

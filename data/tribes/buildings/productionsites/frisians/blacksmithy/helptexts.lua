@@ -1,11 +1,11 @@
 function building_helptext_lore ()
    -- TRANSLATORS: Lore helptext for a building
-   return pgettext ("frisians_building", "I saw a smith stand with his hammer, thus,/The whilst his iron on the anvil cool")
+   return pgettext ("frisians_building", "If you don't have iron, change your name from blacksmith to lacksmith!")
 end
 
 function building_helptext_lore_author ()
    -- TRANSLATORS: Lore author helptext for a building
-   return pgettext ("frisians_building", "Hubert in King John")
+   return pgettext ("frisians_building", "Irritated chieftain during a metal shortage")
 end
 
 function building_helptext_purpose()

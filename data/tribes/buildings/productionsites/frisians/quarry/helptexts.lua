@@ -1,14 +1,11 @@
--- This include can be removed when all help texts have been defined.
-include "tribes/scripting/help/global_helptexts.lua"
-
 function building_helptext_lore ()
    -- TRANSLATORS: Lore helptext for a building
-   return pgettext ("frisians_building", "Wherein of antres vast and deserts idle,/Rough quarries, rocks, and hills whose heads touch heaven")
+   return pgettext ("frisians_building", "When I swing my pick, whole mountains fall before me!")
 end
 
 function building_helptext_lore_author ()
    -- TRANSLATORS: Lore author helptext for a building
-   return pgettext ("frisians_building", "Othello")
+   return pgettext ("frisians_building", "A stonemason")
 end
 
 function building_helptext_purpose()

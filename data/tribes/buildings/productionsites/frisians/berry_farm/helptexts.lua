@@ -1,11 +1,11 @@
 function building_helptext_lore ()
    -- TRANSLATORS: Lore helptext for a building
-   return pgettext ("frisians_building", "The strawberry grows underneath the nettle,/And wholesome berries thrive and ripen best/Neighbor'd by fruit of baser quality;")
+   return pgettext ("frisians_building", "My bushes may not be as tall as your trees, but I know nobody who likes to eat bark!")
 end
 
 function building_helptext_lore_author ()
    -- TRANSLATORS: Lore author helptext for a building
-   return pgettext ("frisians_building", "Ely in Henry V")
+   return pgettext ("frisians_building", "A berry farmer to a forester")
 end
 
 function building_helptext_purpose()
